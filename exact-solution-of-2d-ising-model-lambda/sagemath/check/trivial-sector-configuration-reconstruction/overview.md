@@ -43,6 +43,39 @@
 | `check_base_horizontal_winding_definition.sage` | 基準行の横辺：巻き付き偶奇の定義 | PASS | 265 部分グラフ |
 | `check_base_horizontal_trivial_sector.sage` | 基準行の横辺：自明セクターの巻き付き偶奇は零 | PASS | 265 部分グラフ |
 | `check_base_horizontal_zero_projection.sage` | 基準行の横辺：零の射影は零 | PASS | 265 部分グラフ |
+| `check_invariance_local_row_abbreviation.sage` | 横辺の一項：局所記号へ移す | PASS | 9,348 頂点 |
+| `check_invariance_local_row_add_zero.sage` | 横辺の一項：零を加える | PASS | 9,348 頂点 |
+| `check_invariance_local_row_double_zero.sage` | 横辺の一項：零を同じ剰余類二項の和へ戻す | PASS | 9,348 頂点 |
+| `check_invariance_local_row_associate_outer.sage` | 横辺の一項：外側の和を結合し直す | PASS | 9,348 頂点 |
+| `check_invariance_local_row_commute.sage` | 横辺の一項：格子面の順序へ二項を交換する | PASS | 9,348 頂点 |
+| `check_invariance_local_row_substitute_face.sage` | 横辺の一項：格子面の等式を代入する | PASS | 9,348 頂点 |
+| `check_invariance_local_row_remove_zero.sage` | 横辺の一項：零を除く | PASS | 9,348 頂点 |
+| `check_invariance_local_row_expand_abbreviations.sage` | 横辺の一項：局所記号を辺の指示関数へ戻す | PASS | 9,348 頂点 |
+| `check_invariance_local_column_abbreviation.sage` | 縦辺の一項：局所記号へ移す | PASS | 9,348 頂点 |
+| `check_invariance_local_column_add_zero.sage` | 縦辺の一項：零を加える | PASS | 9,348 頂点 |
+| `check_invariance_local_column_double_zero.sage` | 縦辺の一項：零を同じ剰余類二項の和へ戻す | PASS | 9,348 頂点 |
+| `check_invariance_local_column_associate_outer.sage` | 縦辺の一項：外側の和を結合し直す | PASS | 9,348 頂点 |
+| `check_invariance_local_column_associate_inner.sage` | 縦辺の一項：内側の和を結合し直す | PASS | 9,348 頂点 |
+| `check_invariance_local_column_commute.sage` | 縦辺の一項：格子面の順序へ二項を交換する | PASS | 9,348 頂点 |
+| `check_invariance_local_column_substitute_face.sage` | 縦辺の一項：格子面の等式を代入する | PASS | 9,348 頂点 |
+| `check_invariance_local_column_remove_zero.sage` | 縦辺の一項：零を除く | PASS | 9,348 頂点 |
+| `check_invariance_local_column_expand_abbreviations.sage` | 縦辺の一項：局所記号を辺の指示関数へ戻す | PASS | 9,348 頂点 |
+| `check_invariance_row_sum_substitute_local.sage` | 横辺の行和：隣の一項の等式を有限和へ代入する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_split_outer_sum.sage` | 横辺の行和：外側の有限和を分配する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_split_inner_sum.sage` | 横辺の行和：内側の有限和を分配する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_reindex.sage` | 横辺の行和：巡回移動で有限和を再添字付けする | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_associate_right.sage` | 横辺の行和：和を右に結合する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_commute_inner.sage` | 横辺の行和：内側の二項を交換する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_associate_left.sage` | 横辺の行和：同じ和を左に結合する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_cancel_double.sage` | 横辺の行和：標数二で同じ和の二項を消去する | PASS | 3,140 行・列 |
+| `check_invariance_row_sum_remove_zero.sage` | 横辺の行和：零を除く | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_substitute_local.sage` | 縦辺の列和：隣の一項の等式を有限和へ代入する | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_split_outer_sum.sage` | 縦辺の列和：外側の有限和を分配する | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_split_inner_sum.sage` | 縦辺の列和：内側の有限和を分配する | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_reindex.sage` | 縦辺の列和：巡回移動で有限和を再添字付けする | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_regroup.sage` | 縦辺の列和：同じ有限和の二項をまとめる | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_cancel_double.sage` | 縦辺の列和：標数二で同じ和の二項を消去する | PASS | 3,140 行・列 |
+| `check_invariance_column_sum_remove_zero.sage` | 縦辺の列和：零を除く | PASS | 3,140 行・列 |
 | `check_horizontal_indicator_projection.sage` | 横辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_vertical_indicator_projection.sage` | 縦辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_parity_representative.sage` | 自然数代表 s₂ の帰属と π₂(s₂(a))=a | PASS | 二元の全件 |
@@ -63,7 +96,7 @@
 | `check_dual_image_substitution.sage` | δ_L(破れた辺集合)=δ_L(B) | PASS | 265 部分グラフ |
 | `check_dual_image_inverse.sage` | δ_L(B)=A | PASS | 265 部分グラフ |
 
-行別検算は辺部分集合を全列挙し、偶部分グラフ性と二つの巻き付き偶奇で自明セクターを選ぶ。
+行和・列和の不変性を除く行別検算は辺部分集合を全列挙し、偶部分グラフ性と二つの巻き付き偶奇で自明セクターを選ぶ。
 各 $A$ から双対辺写像の逆像 $B$ と基点付き道和 $t$ を直接構成し、配位の全列挙を使わず
 自然数代表 $s_2$ による整数の冪で配位を復元する。計算は $\mathbb Z/2\mathbb Z$、
 $\mathbb N$、$\mathbb Z$ 内で厳密に行う。
@@ -79,6 +112,12 @@ $\mathbb N$、$\mathbb Z$ 内で厳密に行う。
 micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "__file__ = 'sagemath/check/trivial-sector-configuration-reconstruction/check.sage'; load(__file__)"
 ```
 
+統合検算と行別検算をまとめて再実行する場合は、読み込み対象を `__file__` へ明示する。
+
+```sh
+micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "import glob; fs=sorted(glob.glob('sagemath/check/trivial-sector-configuration-reconstruction/check*.sage')); exec('for f in fs:\n    __file__ = f\n    load(f)')"
+```
+
 **2026-08-12 実行: すべて通過。**
 
 2026-10-04 実行: 原像二点の検算を再実行し、追加した行別19本もすべて通過した。
@@ -91,4 +130,10 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "__fil
 格子面は全2,337頂点、基準周期和は全265部分グラフで、本文の各等号を個別に検査した。
 通常のファイル指定による起動は Sage 10.9 の `__file__` が読み込み先を指さず失敗したため、
 上記の明示的な `load` で再実行した。数学的な検査はすべて通過した。
-行和・列和の不変性以降の本文レビュー、および存在構成全体の Lean 必要十分版は今回の検算範囲に含めない。
+
+2026-10-04 行和・列和の不変性の追加検算: 本文の局所二式を17等号、行和・列和を
+16等号へ分け、行別33本を追加した。自明セクターという条件はこの不変性に不要なので、
+$L=1,2,3$ の偶部分グラフをそれぞれ4、32、1,024個すべて検査した。
+各局所等号は全9,348頂点、各行和・列和の等号は全3,140行・列で検査し、
+追加分の全209,156等式が一致した。既存検算も含む84本（統合1本・行別83本）すべて通過した。
+全行・全列の周期和が零であること以降の本文レビュー、および存在構成全体の Lean 必要十分版は残っている。

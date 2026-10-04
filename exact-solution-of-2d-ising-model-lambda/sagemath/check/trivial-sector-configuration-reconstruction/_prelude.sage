@@ -201,3 +201,74 @@ def _rc_check_opening(section, left, right, label):
             assert row[left] == row[right], (label, case['L'], case['A'], row)
             checked += 1
     print('RESULT: PASS (%s: %d 件)' % (label, checked))
+
+
+def _rc_even_subsets(L):
+    numbers = tuple(range(1, 2 * L * L + 1))
+    incidence_masks = {vertex: int(0) for vertex in vertices(L)}
+    for bit, edge in enumerate(numbers):
+        for vertex in endpoints(L, edge):
+            incidence_masks[vertex] = incidence_masks[vertex].__xor__(int(1) << int(bit))
+    for mask in range(int(1) << int(len(numbers))):
+        if all((int(mask) & int(constraint)).bit_count() % 2 == 0
+               for constraint in incidence_masks.values()):
+            yield frozenset(edge for edge in numbers if mask & (int(1) << int(edge - 1)))
+
+
+def _rc_invariance_rows(L, A):
+    B = frozenset(edge for edge in range(1, 2 * L * L + 1) if _rc_dual(L, edge) in A)
+    bh = lambda i, j: _rc_ring(NN(edge_number_horizontal(L, i, j) in B))
+    bv = lambda i, j: _rc_ring(NN(edge_number_vertical(L, i, j) in B))
+    zero = _rc_ring(0)
+    local_row, local_column = [], []
+    for i, j in vertices(L):
+        v, h, vs, hs = bv(i, j), bh(i, j), bv(i, j + 1), bh(i + 1, j)
+        alpha, beta, gamma, delta = v, h, vs, hs
+        row_rest = (alpha + beta) + gamma
+        column_rest = (alpha + beta) + delta
+        local_row.append((hs, delta, delta + zero, delta + (row_rest + row_rest),
+                          (delta + row_rest) + row_rest,
+                          (((alpha + beta) + gamma) + delta) + row_rest,
+                          zero + row_rest, row_rest, (v + h) + vs))
+        local_column.append((vs, gamma, gamma + zero, gamma + (column_rest + column_rest),
+                             (gamma + column_rest) + column_rest,
+                             ((gamma + (alpha + beta)) + delta) + column_rest,
+                             (((alpha + beta) + gamma) + delta) + column_rest,
+                             zero + column_rest, column_rest, (v + h) + hs))
+    row_sum, column_sum = [], []
+    for i in range(L):
+        sv = sum((bv(i, j) for j in range(L)), zero)
+        sh = sum((bh(i, j) for j in range(L)), zero)
+        shifted = sum((bv(i, j + 1) for j in range(L)), zero)
+        row_sum.append((
+            sum((bh(i + 1, j) for j in range(L)), zero),
+            sum(((bv(i, j) + bh(i, j)) + bv(i, j + 1) for j in range(L)), zero),
+            sum((bv(i, j) + bh(i, j) for j in range(L)), zero) + shifted,
+            (sv + sh) + shifted, (sv + sh) + sv, sv + (sh + sv),
+            sv + (sv + sh), (sv + sv) + sh, zero + sh, sh))
+    for j in range(L):
+        sv = sum((bv(i, j) for i in range(L)), zero)
+        sh = sum((bh(i, j) for i in range(L)), zero)
+        shifted = sum((bh(i + 1, j) for i in range(L)), zero)
+        column_sum.append((
+            sum((bv(i, j + 1) for i in range(L)), zero),
+            sum(((bv(i, j) + bh(i, j)) + bh(i + 1, j) for i in range(L)), zero),
+            sum((bv(i, j) + bh(i, j) for i in range(L)), zero) + shifted,
+            (sv + sh) + shifted, (sv + sh) + sh, sv + (sh + sh), sv + zero, sv))
+    return {'L': L, 'A': A, 'local_row': local_row, 'local_column': local_column,
+            'row_sum': row_sum, 'column_sum': column_sum}
+
+
+def _rc_check_invariance(section, left, right, label):
+    global _rc_invariance
+    if '_rc_invariance' not in globals():
+        _rc_invariance = [_rc_invariance_rows(L, A)
+                          for L in (1, 2, 3) for A in _rc_even_subsets(L)]
+        assert [sum(case['L'] == L for case in _rc_invariance) for L in (1, 2, 3)] == [4, 32, 1024]
+    checked = 0
+    for case in _rc_invariance:
+        for row in case[section]:
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked += 1
+    assert checked > 0
+    print('RESULT: PASS (%s: %d 等式、1060 偶部分グラフ)' % (label, checked))

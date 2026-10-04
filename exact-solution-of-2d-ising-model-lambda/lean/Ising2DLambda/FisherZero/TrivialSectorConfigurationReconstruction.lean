@@ -226,36 +226,92 @@ theorem reconstructedEdgeSet_row_column_sum_invariant (L : ℕ) [NeZero L]
       ∑ i : ZMod L,
         (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0)) := by
   classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  have hdouble (z : ZMod 2) : z + z = 0 := by
+    fin_cases z <;> rfl
+  have hface (i j : ZMod L) : bv i j + bh i j + bv i (j + 1) + bh (i + 1) j = 0 :=
+    reconstructedEdgeSet_face_equation L A hEven i j
+  -- 本文の二つの局所計算鎖。α, β, γ, δ はこの面の四辺の指示関数である。
+  have hrowFace (i j : ZMod L) : bh (i + 1) j = (bv i j + bh i j) + bv i (j + 1) := by
+    let α := bv i j
+    let β := bh i j
+    let γ := bv i (j + 1)
+    let δ := bh (i + 1) j
+    calc
+      bh (i + 1) j = δ := rfl
+      _ = δ + 0 := (add_zero _).symm
+      _ = δ + (((α + β) + γ) + ((α + β) + γ)) := by rw [hdouble]
+      _ = (δ + ((α + β) + γ)) + ((α + β) + γ) := (add_assoc _ _ _).symm
+      _ = (((α + β) + γ) + δ) + ((α + β) + γ) := by
+        rw [add_comm δ ((α + β) + γ)]
+      _ = 0 + ((α + β) + γ) := by
+        rw [show ((α + β) + γ) + δ = 0 from hface i j]
+      _ = (α + β) + γ := zero_add _
+      _ = (bv i j + bh i j) + bv i (j + 1) := rfl
+  have hcolumnFace (i j : ZMod L) : bv i (j + 1) = (bv i j + bh i j) + bh (i + 1) j := by
+    let α := bv i j
+    let β := bh i j
+    let γ := bv i (j + 1)
+    let δ := bh (i + 1) j
+    calc
+      bv i (j + 1) = γ := rfl
+      _ = γ + 0 := (add_zero _).symm
+      _ = γ + (((α + β) + δ) + ((α + β) + δ)) := by rw [hdouble]
+      _ = (γ + ((α + β) + δ)) + ((α + β) + δ) := (add_assoc _ _ _).symm
+      _ = ((γ + (α + β)) + δ) + ((α + β) + δ) := by
+        rw [← add_assoc γ (α + β) δ]
+      _ = (((α + β) + γ) + δ) + ((α + β) + δ) := by
+        rw [add_comm γ (α + β)]
+      _ = 0 + ((α + β) + δ) := by
+        rw [show ((α + β) + γ) + δ = 0 from hface i j]
+      _ = (α + β) + δ := zero_add _
+      _ = (bv i j + bh i j) + bh (i + 1) j := rfl
   have hshift (f : ZMod L → ZMod 2) : (∑ x : ZMod L, f (x + 1)) = ∑ x : ZMod L, f x := by
     exact Fintype.sum_bijective (Equiv.addRight 1) (Equiv.addRight 1).bijective
       (fun x : ZMod L => f (x + 1)) f (fun _ => rfl)
   constructor
   · intro i
-    have hsum := Finset.sum_congr rfl
-      (fun j (_ : j ∈ (Finset.univ : Finset (ZMod L))) =>
-        reconstructedEdgeSet_face_equation L A hEven i j)
-    simp only [Finset.sum_add_distrib, Finset.sum_const_zero] at hsum
-    rw [hshift (fun j : ZMod L =>
-      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0))] at hsum
-    have htwo : (2 : ZMod 2) = 0 := rfl
-    linear_combination hsum -
-      (∑ j : ZMod L,
-        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo -
-      (∑ j : ZMod L,
-        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo
+    change (∑ j : ZMod L, bh (i + 1) j) = ∑ j : ZMod L, bh i j
+    -- 本文の行和の九等号。二回の有限和の分配と巡回再添字付けを区別する。
+    calc
+      (∑ j : ZMod L, bh (i + 1) j) =
+          ∑ j : ZMod L, ((bv i j + bh i j) + bv i (j + 1)) :=
+        Finset.sum_congr rfl (fun j _ => hrowFace i j)
+      _ = (∑ j : ZMod L, (bv i j + bh i j)) + ∑ j : ZMod L, bv i (j + 1) :=
+        Finset.sum_add_distrib
+      _ = ((∑ j : ZMod L, bv i j) + ∑ j : ZMod L, bh i j) +
+          ∑ j : ZMod L, bv i (j + 1) := by rw [Finset.sum_add_distrib]
+      _ = ((∑ j : ZMod L, bv i j) + ∑ j : ZMod L, bh i j) +
+          ∑ j : ZMod L, bv i j := by rw [hshift]
+      _ = (∑ j : ZMod L, bv i j) +
+          ((∑ j : ZMod L, bh i j) + ∑ j : ZMod L, bv i j) := add_assoc _ _ _
+      _ = (∑ j : ZMod L, bv i j) +
+          ((∑ j : ZMod L, bv i j) + ∑ j : ZMod L, bh i j) := by
+        rw [add_comm (∑ j : ZMod L, bh i j) (∑ j : ZMod L, bv i j)]
+      _ = ((∑ j : ZMod L, bv i j) + ∑ j : ZMod L, bv i j) +
+          ∑ j : ZMod L, bh i j := (add_assoc _ _ _).symm
+      _ = 0 + ∑ j : ZMod L, bh i j := by rw [hdouble]
+      _ = ∑ j : ZMod L, bh i j := zero_add _
   · intro j
-    have hsum := Finset.sum_congr rfl
-      (fun i (_ : i ∈ (Finset.univ : Finset (ZMod L))) =>
-        reconstructedEdgeSet_face_equation L A hEven i j)
-    simp only [Finset.sum_add_distrib, Finset.sum_const_zero] at hsum
-    rw [hshift (fun i : ZMod L =>
-      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0))] at hsum
-    have htwo : (2 : ZMod 2) = 0 := rfl
-    linear_combination hsum -
-      (∑ i : ZMod L,
-        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo -
-      (∑ i : ZMod L,
-        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) * htwo
+    change (∑ i : ZMod L, bv i (j + 1)) = ∑ i : ZMod L, bv i j
+    -- 本文の列和の七等号。横辺の巡回和を戻して二つの同じ和を消す。
+    calc
+      (∑ i : ZMod L, bv i (j + 1)) =
+          ∑ i : ZMod L, ((bv i j + bh i j) + bh (i + 1) j) :=
+        Finset.sum_congr rfl (fun i _ => hcolumnFace i j)
+      _ = (∑ i : ZMod L, (bv i j + bh i j)) + ∑ i : ZMod L, bh (i + 1) j :=
+        Finset.sum_add_distrib
+      _ = ((∑ i : ZMod L, bv i j) + ∑ i : ZMod L, bh i j) +
+          ∑ i : ZMod L, bh (i + 1) j := by rw [Finset.sum_add_distrib]
+      _ = ((∑ i : ZMod L, bv i j) + ∑ i : ZMod L, bh i j) +
+          ∑ i : ZMod L, bh i j := by rw [hshift (fun i => bh i j)]
+      _ = (∑ i : ZMod L, bv i j) +
+          ((∑ i : ZMod L, bh i j) + ∑ i : ZMod L, bh i j) := by rw [add_assoc]
+      _ = (∑ i : ZMod L, bv i j) + 0 := by rw [hdouble]
+      _ = ∑ i : ZMod L, bv i j := add_zero _
 
 /-- 人手証明の「したがって任意の行と列について和が零」。二周期の等式を出発点、
 行和・列和の不変性を一歩とする帰納法で、横辺の行和と縦辺の列和がすべて零になる。 -/

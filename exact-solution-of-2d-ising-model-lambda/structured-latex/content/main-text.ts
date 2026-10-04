@@ -29767,6 +29767,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant",
                         "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
@@ -29905,16 +29906,89 @@ b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j)+b_{\mathrm v}(i,j+\bar1)+b_{\mathrm h}(i+\
 &=0
 &&\bigl(\because\ \pi_2\text{ は零を保つ}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "を得る。格子面の等式を一つの行に沿って足すと縦向き辺の項は二度ずつ現れて消えるので",
-                        ]),
-                        displayMath(String.raw`\sum_j b_{\mathrm h}(i+\bar1,j)
-=\sum_j b_{\mathrm h}(i,j)
-\quad(\because\ \text{格子面の等式を }j\text{ にわたって有限和する})`),
-                        paragraph(["である。同じく一つの列に沿って足すと"]),
-                        displayMath(String.raw`\sum_i b_{\mathrm v}(i,j+\bar1)
-=\sum_i b_{\mathrm v}(i,j)
-\quad(\because\ \text{格子面の等式を }i\text{ にわたって有限和する})`),
+                        paragraph(["行和と列和の不変性を示す準備として、任意の ", math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " を固定する。次の二つの計算鎖だけで使う記号を、"]),
+                        displayMath(String.raw`\alpha:=b_{\mathrm v}(i,j),\quad\beta:=b_{\mathrm h}(i,j),\quad\gamma:=b_{\mathrm v}(i,j+\bar1),\quad\delta:=b_{\mathrm h}(i+\bar1,j)\qquad(\alpha,\beta,\gamma,\delta\in\mathbb Z/2\mathbb Z)`),
+                        paragraph(["と置く。上で示した格子面の等式は ", math(String.raw`((\alpha+\beta)+\gamma)+\delta=0`), " である。また、任意の ", math(String.raw`z\in\mathbb Z/2\mathbb Z`), " に対して ", math(String.raw`z+z=0`), " である。"]),
+                        displayMath(String.raw`\begin{aligned}
+b_{\mathrm h}(i+\bar1,j)
+&=\delta
+&&\bigl(\because\ \text{局所記号の定義}\bigr)\\
+&=\delta+0
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=\delta+(((\alpha+\beta)+\gamma)+((\alpha+\beta)+\gamma))
+&&\bigl(\because\ z+z=0\bigr)\\
+&=(\delta+((\alpha+\beta)+\gamma))+((\alpha+\beta)+\gamma)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=(((\alpha+\beta)+\gamma)+\delta)+((\alpha+\beta)+\gamma)
+&&\bigl(\because\ \text{加法の交換律}\bigr)\\
+&=0+((\alpha+\beta)+\gamma)
+&&\bigl(\because\ \text{格子面の等式}\bigr)\\
+&=((\alpha+\beta)+\gamma)
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=(b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+b_{\mathrm v}(i,j+\bar1)
+&&\bigl(\because\ \text{局所記号の定義}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+b_{\mathrm v}(i,j+\bar1)
+&=\gamma
+&&\bigl(\because\ \text{局所記号の定義}\bigr)\\
+&=\gamma+0
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=\gamma+(((\alpha+\beta)+\delta)+((\alpha+\beta)+\delta))
+&&\bigl(\because\ z+z=0\bigr)\\
+&=(\gamma+((\alpha+\beta)+\delta))+((\alpha+\beta)+\delta)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=((\gamma+(\alpha+\beta))+\delta)+((\alpha+\beta)+\delta)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=(((\alpha+\beta)+\gamma)+\delta)+((\alpha+\beta)+\delta)
+&&\bigl(\because\ \text{加法の交換律}\bigr)\\
+&=0+((\alpha+\beta)+\delta)
+&&\bigl(\because\ \text{格子面の等式}\bigr)\\
+&=((\alpha+\beta)+\delta)
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=(b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+b_{\mathrm h}(i+\bar1,j)
+&&\bigl(\because\ \text{局所記号の定義}\bigr).
+\end{aligned}`),
+                        paragraph(["横向き辺の行和は、任意の ", math(String.raw`i\in\mathbb Z/L\mathbb Z`), " について、"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_j b_{\mathrm h}(i+\bar1,j)
+&=\sum_j \bigl((b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+b_{\mathrm v}(i,j+\bar1)\bigr)
+&&\bigl(\because\ \text{直前の横向き辺の等式を各項へ代入}\bigr)\\
+&=\sum_j (b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+\sum_j b_{\mathrm v}(i,j+\bar1)
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\left(\sum_j b_{\mathrm v}(i,j)+\sum_j b_{\mathrm h}(i,j)\right)+\sum_j b_{\mathrm v}(i,j+\bar1)
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\left(\sum_j b_{\mathrm v}(i,j)+\sum_j b_{\mathrm h}(i,j)\right)+\sum_j b_{\mathrm v}(i,j)
+&&\bigl(\because\ j\mapsto j+\bar1\text{ は全単射}\bigr)\\
+&=\sum_j b_{\mathrm v}(i,j)+\left(\sum_j b_{\mathrm h}(i,j)+\sum_j b_{\mathrm v}(i,j)\right)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=\sum_j b_{\mathrm v}(i,j)+\left(\sum_j b_{\mathrm v}(i,j)+\sum_j b_{\mathrm h}(i,j)\right)
+&&\bigl(\because\ \text{加法の交換律}\bigr)\\
+&=\left(\sum_j b_{\mathrm v}(i,j)+\sum_j b_{\mathrm v}(i,j)\right)+\sum_j b_{\mathrm h}(i,j)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=0+\sum_j b_{\mathrm h}(i,j)
+&&\bigl(\because\ z+z=0\bigr)\\
+&=\sum_j b_{\mathrm h}(i,j)
+&&\bigl(\because\ \text{零の加法}\bigr).
+\end{aligned}`),
+                        paragraph(["縦向き辺の列和は、任意の ", math(String.raw`j\in\mathbb Z/L\mathbb Z`), " について、"]),
+                        displayMath(String.raw`\begin{aligned}
+\sum_i b_{\mathrm v}(i,j+\bar1)
+&=\sum_i \bigl((b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+b_{\mathrm h}(i+\bar1,j)\bigr)
+&&\bigl(\because\ \text{直前の縦向き辺の等式を各項へ代入}\bigr)\\
+&=\sum_i (b_{\mathrm v}(i,j)+b_{\mathrm h}(i,j))+\sum_i b_{\mathrm h}(i+\bar1,j)
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\left(\sum_i b_{\mathrm v}(i,j)+\sum_i b_{\mathrm h}(i,j)\right)+\sum_i b_{\mathrm h}(i+\bar1,j)
+&&\bigl(\because\ \text{有限和の分配}\bigr)\\
+&=\left(\sum_i b_{\mathrm v}(i,j)+\sum_i b_{\mathrm h}(i,j)\right)+\sum_i b_{\mathrm h}(i,j)
+&&\bigl(\because\ i\mapsto i+\bar1\text{ は全単射}\bigr)\\
+&=\sum_i b_{\mathrm v}(i,j)+\left(\sum_i b_{\mathrm h}(i,j)+\sum_i b_{\mathrm h}(i,j)\right)
+&&\bigl(\because\ \text{加法の結合律}\bigr)\\
+&=\sum_i b_{\mathrm v}(i,j)+0
+&&\bigl(\because\ z+z=0\bigr)\\
+&=\sum_i b_{\mathrm v}(i,j)
+&&\bigl(\because\ \text{零の加法}\bigr).
+\end{aligned}`),
                         paragraph(["である。したがって任意の行と列について"]),
                         displayMath(String.raw`\begin{aligned}
 \sum_j b_{\mathrm h}(i,j)
