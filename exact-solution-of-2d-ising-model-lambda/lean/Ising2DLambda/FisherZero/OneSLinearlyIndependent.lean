@@ -18,11 +18,17 @@ theorem oneSLinearlyIndependent
   have hb : b = 0 := by
     by_contra hbne
     let r : ℚ := b⁻¹ * (-a)
+    have hInverse : algebraMap ℚ Qbar (b⁻¹) * algebraMap ℚ Qbar b = 1 := by
+      calc
+        algebraMap ℚ Qbar (b⁻¹) * algebraMap ℚ Qbar b =
+            algebraMap ℚ Qbar (b⁻¹ * b) := by rw [map_mul]
+        _ = algebraMap ℚ Qbar 1 := by rw [inv_mul_cancel₀ hbne]
+        _ = 1 := map_one (algebraMap ℚ Qbar)
     have hbs : algebraMap ℚ Qbar b * s = -(algebraMap ℚ Qbar a) := by
       calc
         algebraMap ℚ Qbar b * s = 0 + algebraMap ℚ Qbar b * s := by rw [zero_add]
         _ = (-(algebraMap ℚ Qbar a) + algebraMap ℚ Qbar a) +
-              algebraMap ℚ Qbar b * s := by rw [neg_add_cancel, zero_add]
+              algebraMap ℚ Qbar b * s := by rw [neg_add_cancel]
         _ = -(algebraMap ℚ Qbar a) +
               (algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) := by
                 rw [add_assoc]
@@ -32,11 +38,12 @@ theorem oneSLinearlyIndependent
       calc
         s = 1 * s := by rw [one_mul]
         _ = (algebraMap ℚ Qbar (b⁻¹) * algebraMap ℚ Qbar b) * s := by
-              rw [← map_mul, inv_mul_cancel₀ hbne, map_one]
+              rw [hInverse]
         _ = algebraMap ℚ Qbar (b⁻¹) * (algebraMap ℚ Qbar b * s) := by
               rw [mul_assoc]
         _ = algebraMap ℚ Qbar (b⁻¹) * (-(algebraMap ℚ Qbar a)) := by rw [hbs]
-        _ = algebraMap ℚ Qbar (b⁻¹ * (-a)) := by rw [map_mul, map_neg]
+        _ = algebraMap ℚ Qbar (b⁻¹) * algebraMap ℚ Qbar (-a) := by rw [map_neg]
+        _ = algebraMap ℚ Qbar (b⁻¹ * (-a)) := by rw [map_mul]
         _ = algebraMap ℚ Qbar r := rfl
     have hrSquare : r * r = 2 := by
       apply (algebraMap ℚ Qbar).injective
@@ -51,7 +58,8 @@ theorem oneSLinearlyIndependent
     calc
       algebraMap ℚ Qbar a = algebraMap ℚ Qbar a + 0 := by rw [add_zero]
       _ = algebraMap ℚ Qbar a + 0 * s := by rw [zero_mul]
-      _ = algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s := by rw [hb, map_zero]
+      _ = algebraMap ℚ Qbar a + algebraMap ℚ Qbar 0 * s := by rw [map_zero]
+      _ = algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s := by rw [hb]
       _ = 0 := hab
       _ = algebraMap ℚ Qbar 0 := by rw [map_zero]
   · exact hb

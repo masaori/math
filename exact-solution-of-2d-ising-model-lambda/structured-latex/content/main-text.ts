@@ -31706,29 +31706,29 @@ m+m
                       ],
                       proof: [
                         paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
+                          "部分体の包含写像を ",
+                          math(String.raw`\iota:\mathbb{Q}\hookrightarrow\overline{\mathbb{Q}}`),
+                          " と書く（",
                           ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元とその四則の結果は ",
+                          "）。この写像は四則と零元・単位元を保ち、単射である。以下の計算鎖は ",
                           math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元および四則の結果と同じものであり、",
+                          " の中で行い、有理数の四則は ",
+                          math(String.raw`\iota`),
+                          " の内側に書き分ける。仮定をこの記法で書くと ",
+                          math(String.raw`\iota(a)+\iota(b)\cdot s=0`),
+                          " および ",
+                          math(String.raw`s\cdot s=\iota(2)`),
+                          " である（包含写像が ",
+                          math(String.raw`2=1+1\in\mathbb{Q}`),
+                          " を保つことを使った）。結論の係数の等号は ",
                           math(String.raw`\mathbb{Q}`),
-                          " の 2 元が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中で等しいことと ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の中で等しいことは同値である（同じ元だからである）。",
+                          " の中で示す。",
                         ]),
                         paragraph([
                           "まず ",
                           math(String.raw`b=0`),
                           " を背理法で示す。",
-                          math(String.raw`a+b\cdot s=0`),
+                          math(String.raw`\iota(a)+\iota(b)\cdot s=0`),
                           " のもとで ",
                           math(String.raw`b\ne0`),
                           " と仮定する。体 ",
@@ -31737,9 +31737,7 @@ m+m
                           math(String.raw`b^{-1}\cdot b=1`),
                           " を満たす積の逆元 ",
                           math(String.raw`b^{-1}\in\mathbb{Q}`),
-                          " が取れ、準備よりこの等式は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中でも成り立つ。有理数 ",
+                          " が取れる。有理数 ",
                           math(String.raw`r:=b^{-1}\cdot(-a)\in\mathbb{Q}`),
                           " と置く（",
                           math(String.raw`-a`),
@@ -31747,19 +31745,29 @@ m+m
                           math(String.raw`\mathbb{Q}`),
                           " の加法の逆元、積は ",
                           math(String.raw`\mathbb{Q}`),
-                          " の積）。仮定から次の鎖を得る。",
+                          " の積）。まず逆元の等式を包含写像で移す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-b\cdot s
-&=0+b\cdot s
+\iota(b^{-1})\cdot\iota(b)
+&=\iota(b^{-1}\cdot b)
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は積を保つ}\bigr)\\
+&=\iota(1)
+&&\bigl(\because\ b\ne0\ \text{での積の逆元}\ b^{-1}\cdot b=1\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は単位元を保つ}\bigr)
+\end{aligned}`),
+                        paragraph(["次に、零になるという仮定から係数を移項する。"]),
+                        displayMath(String.raw`\begin{aligned}
+\iota(b)\cdot s
+&=0+\iota(b)\cdot s
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
-&=\bigl((-a)+a\bigr)+b\cdot s
-&&\bigl(\because\ \text{加法の逆元}\ (-a)+a=0\bigr)\\
-&=(-a)+\bigl(a+b\cdot s\bigr)
+&=\bigl((-\iota(a))+\iota(a)\bigr)+\iota(b)\cdot s
+&&\bigl(\because\ \text{加法の逆元}\ (-\iota(a))+\iota(a)=0\bigr)\\
+&=(-\iota(a))+\bigl(\iota(a)+\iota(b)\cdot s\bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=(-a)+0
-&&\bigl(\because\ \text{仮定}\ a+b\cdot s=0\bigr)\\
-&=-a
+&=(-\iota(a))+0
+&&\bigl(\because\ \text{仮定}\ \iota(a)+\iota(b)\cdot s=0\bigr)\\
+&=-\iota(a)
 &&\bigl(\because\ \text{加法の単位元}\bigr)
 \end{aligned}`),
                         paragraph(["これを使って ", math(String.raw`s`), " を計算する。"]),
@@ -31767,30 +31775,33 @@ b\cdot s
 s
 &=1\cdot s
 &&\bigl(\because\ \text{単位元との積}\bigr)\\
-&=\bigl(b^{-1}\cdot b\bigr)\cdot s
-&&\bigl(\because\ b^{-1}\cdot b=1\bigr)\\
-&=b^{-1}\cdot\bigl(b\cdot s\bigr)
+&=\bigl(\iota(b^{-1})\cdot\iota(b)\bigr)\cdot s
+&&\bigl(\because\ \text{先に移した逆元の等式}\ \iota(b^{-1})\cdot\iota(b)=1\bigr)\\
+&=\iota(b^{-1})\cdot\bigl(\iota(b)\cdot s\bigr)
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
-&=b^{-1}\cdot(-a)
-&&\bigl(\because\ b\cdot s=-a\bigr)\\
-&=r
+&=\iota(b^{-1})\cdot(-\iota(a))
+&&\bigl(\because\ \text{先の移項}\ \iota(b)\cdot s=-\iota(a)\bigr)\\
+&=\iota(b^{-1})\cdot\iota(-a)
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は加法の逆元を保つ}\bigr)\\
+&=\iota(b^{-1}\cdot(-a))
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は積を保つ}\bigr)\\
+&=\iota(r)
 &&\bigl(\because\ r\ \text{の定義}\bigr)
 \end{aligned}`),
                         paragraph(["この等式で ", math(String.raw`s\cdot s`), " を書き換える。"]),
                         displayMath(String.raw`\begin{aligned}
-r\cdot r
+\iota(r\cdot r)
+&=\iota(r)\cdot\iota(r)
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は積を保つ}\bigr)\\
 &=s\cdot s
-&&\bigl(\because\ s=r\bigr)\\
-&=2
-&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)
+&&\bigl(\because\ \text{直前の等式}\ s=\iota(r)\bigr)\\
+&=\iota(2)
+&&\bigl(\because\ \text{仮定}\ s\cdot s=\iota(2)\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`r`),
-                          " と ",
-                          math(String.raw`2`),
-                          " はどちらも ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元であるから、準備より等式 ",
+                          "包含写像の単射性（",
+                          ref("def_algebraic_numbers"),
+                          "）より等式 ",
                           math(String.raw`r\cdot r=2`),
                           " は ",
                           math(String.raw`\mathbb{Q}`),
@@ -31812,18 +31823,24 @@ r\cdot r
                           " を示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-a
-&=a+0
+\iota(a)
+&=\iota(a)+0
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
-&=a+0\cdot s
+&=\iota(a)+0\cdot s
 &&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
-&=a+b\cdot s
+&=\iota(a)+\iota(0)\cdot s
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は零元を保つ}\bigr)\\
+&=\iota(a)+\iota(b)\cdot s
 &&\bigl(\because\ b=0\bigr)\\
 &=0
-&&\bigl(\because\ \text{仮定}\ a+b\cdot s=0\bigr)
+&&\bigl(\because\ \text{仮定}\ \iota(a)+\iota(b)\cdot s=0\bigr)\\
+&=\iota(0)
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は零元を保つ}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "したがって ",
+                          "包含写像の単射性（",
+                          ref("def_algebraic_numbers"),
+                          "）より ",
                           math(String.raw`a=0`),
                           " かつ ",
                           math(String.raw`b=0`),

@@ -3,7 +3,7 @@
 
 # 主張（claim_one_s_linearly_independent）: s·s=2 を満たす s ∈ QQbar と
 # 任意の a,b ∈ QQ について、a + b·s = 0 ならば (a,b)=(0,0)。
-# 証明の組み立てを一行ずつ突き合わせる:
+# 主張全体の有限標本検査。本文の各等号は末尾で読み込む行別ファイルで検査する。
 #   prep:   b≠0 なら b^{-1}·b = 1、r := b^{-1}·(-a) ∈ QQ。
 #   chain1: b·s = -a（仮定 a+b·s=0 のもとで。標本では仮定が偽なので対偶で見る）
 #   chain2: s = b^{-1}·(b·s)（結合則の段。仮定に依存しない部分）
@@ -55,9 +55,8 @@ for s in roots:
                 assert chain1_0 == chain1_1, "chain1 の加法の単位元の段が壊れている"
                 assert chain1_1 == chain1_2, "chain1 の加法の逆元の段が壊れている"
                 assert chain1_2 == chain1_3, "chain1 の加法の結合則の段が壊れている"
-                if QQbar(a) + QQbar(b) * s == 0:
-                    assert chain1_3 == QQbar(-a) + 0, "chain1 の仮定の代入段が壊れている"
-                    assert QQbar(-a) + 0 == QQbar(-a), "chain1 の終段が壊れている"
+                # b≠0 と a+b·s=0 は同時に実現しないので、仮定代入は数値通過に数えない。
+                assert QQbar(-a) + 0 == QQbar(-a), "移項後の加法の単位元が壊れている"
                 checked_rearrangement += 1
                 # chain2 の結合則の段（仮定に依存しない）: b^{-1}·(b·s) = (b^{-1}·b)·s = s。
                 assert QQbar(binv) * (QQbar(b) * s) == s, "積の結合則の段が壊れている"
@@ -74,3 +73,42 @@ for s in roots:
 print(f"OK: 2 根 × 標本で a+b·s ≠ 0 を {checked_nonzero} 組、"
       f"移項の恒等変形を {checked_rearrangement} 組、b≠0 の鎖を {checked_chain} 組、"
       f"b=0 の段を {checked_b_zero} 組検査した")
+
+# 本文の五計算鎖・24 等号を記載順に確認する。
+import os
+_osi_dir = os.path.dirname(os.path.abspath(__file__))
+load(os.path.join(_osi_dir, "_prelude.sage"))
+_osi_row_counts.clear()
+_osi_assumed_rows.clear()
+_osi_files = [
+    "check_inverse_product_embedding.sage",
+    "check_inverse_cancellation.sage",
+    "check_embedding_one.sage",
+    "check_rearrange_insert_zero.sage",
+    "check_rearrange_insert_additive_inverse.sage",
+    "check_rearrange_associativity.sage",
+    "check_rearrange_zero_assumption.sage",
+    "check_rearrange_remove_zero.sage",
+    "check_root_insert_one.sage",
+    "check_root_insert_inverse_product.sage",
+    "check_root_product_associativity.sage",
+    "check_root_rearranged_assumption.sage",
+    "check_root_negative_embedding.sage",
+    "check_root_product_embedding.sage",
+    "check_root_rational_definition.sage",
+    "check_square_product_embedding.sage",
+    "check_square_root_assumption.sage",
+    "check_square_root_equation.sage",
+    "check_coefficient_insert_zero.sage",
+    "check_coefficient_zero_product.sage",
+    "check_coefficient_embedding_zero.sage",
+    "check_coefficient_b_zero.sage",
+    "check_coefficient_zero_assumption.sage",
+    "check_zero_embedding.sage",
+]
+for _osi_file in _osi_files:
+    load(os.path.join(_osi_dir, _osi_file))
+assert len(_osi_row_counts) == 21
+assert len(_osi_assumed_rows) == 3
+print("行別集計: %s 行・%s 等式を厳密検算、数値例なし %s 行（件数対象外）" %
+      (len(_osi_row_counts), sum(_osi_row_counts.values()), len(_osi_assumed_rows)))

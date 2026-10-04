@@ -17,20 +17,26 @@ theorem one_s_linearly_independent_necSuf
   have hb : b = 0 := by
     by_contra hbne
     let r : A := b⁻¹ * (-a)
+    have hInverse : embed (b⁻¹) * embed b = 1 := by
+      calc
+        embed (b⁻¹) * embed b = embed (b⁻¹ * b) := by rw [map_mul]
+        _ = embed 1 := by rw [inv_mul_cancel₀ hbne]
+        _ = 1 := map_one embed
     have hbs : embed b * s = -(embed a) := by
       calc
         embed b * s = 0 + embed b * s := by rw [zero_add]
-        _ = (-embed a + embed a) + embed b * s := by rw [neg_add_cancel, zero_add]
+        _ = (-embed a + embed a) + embed b * s := by rw [neg_add_cancel]
         _ = -embed a + (embed a + embed b * s) := by rw [add_assoc]
         _ = -embed a + 0 := by rw [hab]
         _ = -embed a := by rw [add_zero]
     have hsr : s = embed r := by
       calc
         s = 1 * s := by rw [one_mul]
-        _ = (embed (b⁻¹) * embed b) * s := by rw [← map_mul, inv_mul_cancel₀ hbne, map_one]
+        _ = (embed (b⁻¹) * embed b) * s := by rw [hInverse]
         _ = embed (b⁻¹) * (embed b * s) := by rw [mul_assoc]
         _ = embed (b⁻¹) * (-embed a) := by rw [hbs]
-        _ = embed (b⁻¹ * (-a)) := by rw [map_mul, map_neg]
+        _ = embed (b⁻¹) * embed (-a) := by rw [map_neg]
+        _ = embed (b⁻¹ * (-a)) := by rw [map_mul]
         _ = embed r := rfl
     apply hNoSquareTwo r
     apply RingHom.injective embed
@@ -43,7 +49,8 @@ theorem one_s_linearly_independent_necSuf
     calc
       embed a = embed a + 0 := by rw [add_zero]
       _ = embed a + 0 * s := by rw [zero_mul]
-      _ = embed a + embed b * s := by rw [hb, map_zero]
+      _ = embed a + embed 0 * s := by rw [map_zero]
+      _ = embed a + embed b * s := by rw [hb]
       _ = 0 := hab
       _ = embed 0 := by rw [map_zero]
   · exact hb
