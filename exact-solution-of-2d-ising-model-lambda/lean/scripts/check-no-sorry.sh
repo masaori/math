@@ -70,6 +70,23 @@ targets=(
   Ising2DLambda.KacWard.reversalMatrix_mul_self
   Ising2DLambda.NecSuf.KacWard.involutionMatrix_mul_self_necSuf
   Ising2DLambda.KacWard.reversalMatrix_mul_self_from_necSuf
+  Ising2DLambda.KacWard.nonbacktrackingSuccessors
+  Ising2DLambda.KacWard.horizontalSeamParity
+  Ising2DLambda.KacWard.verticalSeamParity
+  Ising2DLambda.KacWard.twistSign
+  Ising2DLambda.KacWard.rotationPhase
+  Ising2DLambda.KacWard.kacWardTransitionMatrix
+  Ising2DLambda.KacWard.spinKacWardPolynomialMatrix
+  Ising2DLambda.KacWard.polynomialReversalMatrix
+  Ising2DLambda.KacWard.terminalMatrix
+  Ising2DLambda.KacWard.orientedTarget_reversal
+  Ising2DLambda.KacWard.mem_nonbacktrackingSuccessors_reversal
+  Ising2DLambda.KacWard.terminalMatrix_entry
+  Ising2DLambda.NecSuf.KacWard.successorKernel
+  Ising2DLambda.NecSuf.KacWard.terminalMatrix
+  Ising2DLambda.NecSuf.KacWard.terminal_successor_condition_necSuf
+  Ising2DLambda.NecSuf.KacWard.terminalMatrix_entry_necSuf
+  Ising2DLambda.KacWard.terminalMatrix_entry_from_necSuf
   Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_normalize
   Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_eq_fixed
   Ising2DLambda.NecSuf.KacWard.fourJunctionPairs_repetition_necSuf

@@ -12,9 +12,13 @@
 
 ### 節の列（台帳のセクション表と同じ順。各節は一つの論法で閉じる大きさに割ってから着手する）
 
-1. **反転置換行列と端末行列。** $J\in\mathrm{Mat}_{\vec E_L}(\mathbb Z)$ を $J_{\vec e,\vec f}:=1$（$\vec f=\iota(\vec e)$）、$0$（それ以外）で定める。$J^2=I$。$\det J=1$（$\iota$ は $2L^2$ 個の互換の積で、$(-1)^{2L^2}=1$。`claim_reversal_fixed_point_free`、符号の乗法性）。$K^{a,b}_{\mathrm t}(x):=J\,K^{a,b}(x)$ と定めると、$\det K^{a,b}_{\mathrm t}(x)=D^{a,b}_L(x)$ であり、成分は
-   $$(K^{a,b}_{\mathrm t})_{\vec e,\vec f}=\begin{cases}1,&\vec f=\iota(\vec e),\\ -x\,\varepsilon_{a,b}(\vec f)\,\rho(\iota(\vec e),\vec f),&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\ 0,&\text{それ以外}\end{cases}$$
+1. **反転置換行列と端末行列。** $J\in\mathrm{Mat}_{\vec E_L}(\mathbb Z)$ を $J_{\vec e,\vec f}:=1$（$\vec f=\iota(\vec e)$）、$0$（それ以外）で定める。$J^2=I$。$\det J=1$（$\iota$ は $2L^2$ 個の互換の積で、$(-1)^{2L^2}=1$。`claim_reversal_has_no_fixed_point`、符号の乗法性）。$J$ の整数成分を包含準同型 $\mathbb Z\hookrightarrow\overline{\mathbb Q}$ と定数多項式への写像で送った行列を $\widehat J$ とし、$K^{a,b}_{\mathrm t}(x):=\widehat J\,K^{a,b}(x)$ と定めると、$\det K^{a,b}_{\mathrm t}(x)=D^{a,b}_L(x)$ であり、成分は
+   $$(K^{a,b}_{\mathrm t})_{\vec e,\vec f}
+   =\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+   -x\begin{cases}\widehat{\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)},&
+   \operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\0,&\text{それ以外}\end{cases}$$
    である（$J$ を左から掛けると行 $\vec e$ が行 $\iota(\vec e)$ になることと、`def_kac_ward_transition_matrices`、`def_nonbacktracking_successors` による）。
+   一辺一では二つの非零条件が重なるので、独立した二つの寄与の差として扱う。無ねじれの反転辺成分は $1-x$ である。後続の完全マッチングの節でも、一辺一では長い対と短い対が同じ二元集合となるため、対の種類を二元集合だけで区別する議論と、項が単一の $x$ の冪を持つという記述には追加の扱いが必要である。ここでは成分式までを示し、後続の扱いの選択は研究管理へ残す。
 2. **対角相似による反対称化。** 各 $\vec e$ のねじれ偶奇 $\kappa_{a,b}(\vec e)\in\{0,1\}$ を $\varepsilon_{a,b}(\vec e)=(-1)^{\kappa_{a,b}(\vec e)}$ で定め（切断線を横切る偶奇から直接定義する。向きに依らない）、
    $$U:=\operatorname{diag}\bigl(u_{\vec e}\bigr),\qquad u_{\vec e}:=\zeta_8^{\,-r_4(\operatorname{dir}(\vec e))}\,\zeta_8^{\,-2\kappa_{a,b}(\vec e)},\qquad \widehat K^{a,b}(x):=\zeta_8^{\,2}\,U^{-1}K^{a,b}_{\mathrm t}(x)\,U$$
    と置く。主張: (i) $\widehat K^{a,b}(x)$ は反対称で対角成分は零（長い対の成分は $\pm1$、短い対の成分は $\pm x\cdot(\text{8 乗根})$、場合分けは直進・左折・右折の三通りと長い対の二通り）。(ii) $\det\widehat K^{a,b}(x)=(\zeta_8^{\,2})^{4L^2}\det K^{a,b}_{\mathrm t}(x)=D^{a,b}_L(x)$。研究管理が一辺二・三の全スピン構造で浮動小数点により (i)(ii) を確認した（証明ではない）。SageMath は円分体 $\mathbb Q(\zeta_8)$ 上で厳密に行う。

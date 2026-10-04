@@ -48941,6 +48941,7 @@ const chapter_kac_ward = defineSection({
                       kind: "definition",
                       title: { text: "向き付き辺の始点写像と終点写像" },
                       labels: ["def_oriented_edge_endpoints"],
+                      lean: ["Ising2DLambda.KacWard.orientedSource", "Ising2DLambda.KacWard.orientedTarget"],
                       habitat: "N",
                       statement: [
                         paragraph([
@@ -49354,6 +49355,7 @@ T(f,d)
                     kind: "definition",
                     title: { text: "向き付き辺の方向番号" },
                     labels: ["def_oriented_edge_direction"],
+                    lean: ["Ising2DLambda.KacWard.directionNumber"],
                     habitat: "Z",
                     statement: [
                       paragraph([
@@ -49385,6 +49387,7 @@ T(f,d)
                     kind: "definition",
                     title: { text: "直ちに引き返さない接続" },
                     labels: ["def_nonbacktracking_successors"],
+                    lean: ["Ising2DLambda.KacWard.nonbacktrackingSuccessors"],
                     habitat: "N",
                     statement: [
                       paragraph([
@@ -49408,6 +49411,7 @@ T(f,d)
                     kind: "definition",
                     title: { text: "回転位相" },
                     labels: ["def_rotation_phase"],
+                    lean: ["Ising2DLambda.KacWard.rotationPhase"],
                     habitat: "Qbar",
                     statement: [
                       paragraph([
@@ -49439,6 +49443,7 @@ T(f,d)
                     kind: "definition",
                     title: { text: "二つの切断線を横切る偶奇" },
                     labels: ["def_seam_parities"],
+                    lean: ["Ising2DLambda.KacWard.horizontalSeamParity", "Ising2DLambda.KacWard.verticalSeamParity"],
                     habitat: "N",
                     statement: [
                       paragraph([
@@ -49466,7 +49471,7 @@ c_{\mathrm v}(e,d):=
                 labels: ["def_spin_structures"],
                 habitat: "Z",
                 verification: ["sagemath/check/torus-kac-ward-data"],
-                lean: ["Ising2DLambda.KacWard.spinStructures_card"],
+                lean: ["Ising2DLambda.KacWard.spinStructures_card", "Ising2DLambda.KacWard.SpinStructure", "Ising2DLambda.KacWard.twistSign"],
                 statement: [
                   paragraph([
                     "トーラス上のスピン構造の添字集合を",
@@ -49605,6 +49610,7 @@ c_{\mathrm v}(e,d):=
                     kind: "definition",
                     title: { text: "四つの Kac--Ward 遷移行列" },
                     labels: ["def_kac_ward_transition_matrices"],
+                    lean: ["Ising2DLambda.KacWard.kacWardTransitionMatrix"],
                     habitat: "Qbar",
                     statement: [
                       paragraph([
@@ -49765,6 +49771,7 @@ c_{\mathrm v}(e,d):=
                 kind: "definition",
                 title: { text: "代数的数係数多項式を成分とする有限行列" },
                 labels: ["def_qbar_polynomial_matrix"],
+                lean: ["Ising2DLambda.KacWard.QbarPolynomialMatrix"],
                 habitat: "Qbar",
                 statement: [
                   paragraph([
@@ -49833,6 +49840,7 @@ c_{\mathrm v}(e,d):=
                 kind: "definition",
                 title: { text: "四つの Kac--Ward 多項式行列" },
                 labels: ["def_kac_ward_polynomial_matrices"],
+                lean: ["Ising2DLambda.KacWard.spinKacWardPolynomialMatrix"],
                 habitat: "Qbar",
                 statement: [
                   paragraph([
@@ -49997,6 +50005,211 @@ c_{\mathrm v}(e,d):=
             },
           },
         ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_heading_terminal_matrix",
+        labels: [],
+        title: { text: "反転で行を選び直した端末行列" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_terminal_matrix_entries",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_terminal_matrix",
+                kind: "definition",
+                title: { text: "四つの端末行列" },
+                labels: ["def_terminal_matrix"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.polynomialReversalMatrix",
+                  "Ising2DLambda.KacWard.terminalMatrix",
+                ],
+                statement: [
+                  paragraph(["自然数 ", math(String.raw`L\ge1`), " と ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を取る。", ref("def_reversal_matrix"),
+                    " の整数成分には、包含準同型 ", math(String.raw`j:\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
+                    " を適用し、その像を ", ref("def_qbar_constant_embedding"),
+                    " で定数多項式へ送る。この行列を ", math(String.raw`\widehat J_L`), " と書き、" ]),
+                  displayMath(String.raw`(\widehat J_L)_{\vec e,\vec g}
+:=\widehat{j((J_L)_{\vec e,\vec g})}
+\qquad(\vec e,\vec g\in\vec E_L)`),
+                  paragraph(["と定める。端末行列を"]),
+                  displayMath(String.raw`K^{a,b}_{\mathrm t}(x):=\widehat J_LK^{a,b}(x)
+\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`),
+                  paragraph(["で定める。ここでの積は、成分ごとの有限和"]),
+                  displayMath(String.raw`(K^{a,b}_{\mathrm t}(x))_{\vec e,\vec f}
+:=\sum_{\vec g\in\vec E_L}\widehat{j((J_L)_{\vec e,\vec g})}\,
+K^{a,b}_{\vec g,\vec f}(x)
+\qquad(\vec e,\vec f\in\vec E_L)`),
+                  paragraph(["を表す。", math(String.raw`K^{a,b}(x)`), " は ",
+                    ref("def_kac_ward_polynomial_matrices"), "、多項式行列の住処は ",
+                    ref("def_qbar_polynomial_matrix"), " で定めた。和と積はすべて ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の中で取る。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_terminal_matrix_entries",
+              kind: "claim",
+              title: { text: "端末行列の成分は反転の項と同じ始点を持つ辺の項の差である" },
+              labels: ["claim_terminal_matrix_entries"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/terminal-matrix-entries"],
+              lean: [
+                "Ising2DLambda.KacWard.orientedTarget_reversal",
+                "Ising2DLambda.KacWard.mem_nonbacktrackingSuccessors_reversal",
+                "Ising2DLambda.KacWard.terminalMatrix_entry",
+                "Ising2DLambda.NecSuf.KacWard.terminalMatrix_entry_necSuf",
+                "Ising2DLambda.KacWard.terminalMatrix_entry_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の自然数 ", math(String.raw`L\ge1`), "、",
+                  math(String.raw`(a,b)\in\mathcal S`), "、",
+                  math(String.raw`\vec e,\vec f\in\vec E_L`), " について"]),
+                displayMath(String.raw`(K^{a,b}_{\mathrm t}(x))_{\vec e,\vec f}
+=\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+-x\begin{cases}
+\widehat{\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)},
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+0,&\text{それ以外}
+\end{cases}`),
+                paragraph(["が成り立つ。右辺の二つの場合分けは、それぞれ一つの多項式を定める。",
+                  math(String.raw`L=1`), " では反転辺も同じ始点を持つため、二つの非零条件が重なる。",
+                  "そのときも両方の寄与を上の差に入れる。"]),
+              ],
+              proof: [
+                paragraph(["始点・終点と反転の定義を照合する。任意の ", math(String.raw`u\in E_L`),
+                  " に対し、向きが零の場合は"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(\iota(u,0))
+&=\operatorname{tgt}(u,1)
+&&(\because\ \blkref{def_edge_reversal})\\
+&=\partial_0(u)
+&&(\because\ \blkref{def_oriented_edge_endpoints})\\
+&=\operatorname{src}(u,0)
+&&(\because\ \blkref{def_oriented_edge_endpoints})
+\end{aligned}`),
+                paragraph(["であり、向きが一の場合は"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(\iota(u,1))
+&=\operatorname{tgt}(u,0)
+&&(\because\ \blkref{def_edge_reversal})\\
+&=\partial_1(u)
+&&(\because\ \blkref{def_oriented_edge_endpoints})\\
+&=\operatorname{src}(u,1)
+&&(\because\ \blkref{def_oriented_edge_endpoints})
+\end{aligned}`),
+                paragraph(["である。", ref("def_oriented_edges"), " の二つの向きを尽くしたので ",
+                  math(String.raw`\operatorname{tgt}(\iota(\vec e))=\operatorname{src}(\vec e)`),
+                  " がすべての向き付き辺で成り立つ。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+\vec f\in\operatorname{Next}(\iota(\vec e))
+&\ \Longleftrightarrow\
+\operatorname{tgt}(\iota(\vec e))=\operatorname{src}(\vec f),\
+\vec f\ne\iota(\iota(\vec e))
+&&(\because\ \blkref{def_nonbacktracking_successors})\\
+&\ \Longleftrightarrow\
+\operatorname{src}(\vec e)=\operatorname{src}(\vec f),\
+\vec f\ne\iota(\iota(\vec e))
+&&(\because\ \text{上で求めた終点})\\
+&\ \Longleftrightarrow\
+\operatorname{src}(\vec e)=\operatorname{src}(\vec f),\ \vec f\ne\vec e
+&&(\because\ \blkref{claim_reversal_is_involution})\\
+&\ \Longleftrightarrow\
+\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e
+&&(\because\ \text{等号の対称性})
+\end{aligned}`),
+                paragraph(["となる。この条件の下では ", math(String.raw`\rho(\iota(\vec e),\vec f)`),
+                  " は ", ref("def_rotation_phase"), " の定義域に入る。次に ",
+                  math(String.raw`\vec g\in\vec E_L,\ \vec g\ne\iota(\vec e)`), " の項を計算すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{j((J_L)_{\vec e,\vec g})}\,K^{a,b}_{\vec g,\vec f}(x)
+&=\widehat{j(0)}\,K^{a,b}_{\vec g,\vec f}(x)
+&&(\because\ \blkref{def_reversal_matrix})\\
+&=\widehat0\,K^{a,b}_{\vec g,\vec f}(x)
+&&(\because\ \text{包含準同型 }j\text{ は零を保つ})\\
+&=0\,K^{a,b}_{\vec g,\vec f}(x)
+&&(\because\ \blkref{def_qbar_constant_embedding})\\
+&=0
+&&(\because\ \overline{\mathbb Q}[x]\text{ の零元との積})
+\end{aligned}`),
+                paragraph(["である。主鎖に代入する二つの成分を先に求める。単位行列の成分は"]),
+                displayMath(String.raw`\begin{aligned}
+(I_{\vec E_L})_{\iota(\vec e),\vec f}
+&=\begin{cases}1,&\iota(\vec e)=\vec f,\\0,&\text{それ以外}\end{cases}
+&&(\because\ \blkref{def_kac_ward_polynomial_matrices})\\
+&=\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+&&(\because\ \text{等号の対称性})
+\end{aligned}`),
+                paragraph(["である。次に遷移成分を定数多項式へ送ると、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{M^{a,b}_{\iota(\vec e),\vec f}}
+&=\widehat{\begin{cases}
+\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f),&\vec f\in\operatorname{Next}(\iota(\vec e)),\\
+0,&\text{それ以外}
+\end{cases}}
+&&(\because\ \blkref{def_kac_ward_transition_matrices})\\
+&=\widehat{\begin{cases}
+\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f),
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+0,&\text{それ以外}
+\end{cases}}
+&&(\because\ \text{上で示した後続辺の条件})\\
+&=\begin{cases}
+\widehat{\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)},
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+\widehat0,&\text{それ以外}
+\end{cases}
+&&(\because\ \text{写像を場合ごとの値に適用})\\
+&=\begin{cases}
+\widehat{\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)},
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+0,&\text{それ以外}
+\end{cases}
+&&(\because\ \blkref{def_qbar_constant_embedding})
+\end{aligned}`),
+                paragraph(["準備した式を用い、有限和の零項を除いてから二つの成分を代入すると、"]),
+                displayMath(String.raw`\begin{aligned}
+(K^{a,b}_{\mathrm t}(x))_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}\widehat{j((J_L)_{\vec e,\vec g})}K^{a,b}_{\vec g,\vec f}(x)
+&&(\because\ \blkref{def_terminal_matrix})\\
+&=\widehat{j((J_L)_{\vec e,\iota(\vec e)})}K^{a,b}_{\iota(\vec e),\vec f}(x)
+&&(\because\ \text{上で示した零項を有限和から除く})\\
+&=\widehat{j(1)}\,K^{a,b}_{\iota(\vec e),\vec f}(x)
+&&(\because\ \blkref{def_reversal_matrix})\\
+&=\widehat1\,K^{a,b}_{\iota(\vec e),\vec f}(x)
+&&(\because\ \text{包含準同型 }j\text{ は一を保つ})\\
+&=1\,K^{a,b}_{\iota(\vec e),\vec f}(x)
+&&(\because\ \blkref{def_qbar_constant_embedding})\\
+&=K^{a,b}_{\iota(\vec e),\vec f}(x)
+&&(\because\ \overline{\mathbb Q}[x]\text{ の単位元との積})\\
+&=(I_{\vec E_L})_{\iota(\vec e),\vec f}
+-x\,\widehat{M^{a,b}_{\iota(\vec e),\vec f}}
+&&(\because\ \blkref{def_kac_ward_polynomial_matrices})\\
+&=\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+-x\,\widehat{M^{a,b}_{\iota(\vec e),\vec f}}
+&&(\because\ \text{上で求めた単位行列の成分を代入})\\
+&=\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+-x\begin{cases}
+\widehat{\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)},
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+0,&\text{それ以外}
+\end{cases}
+&&(\because\ \text{上で求めた遷移成分を代入})
+\end{aligned}`),
+                paragraph(["これが求める成分である。二つの非零条件が互いに素であるとは仮定していない。",
+                  "全過程は有限な辺集合と代数的数係数多項式の計算で閉じ、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
       },
     },
     {
