@@ -29049,7 +29049,7 @@ S_L(A)
                   habitat: "Z",
                   lean: [
                     "Ising2DLambda.FisherZero.highTemperaturePolynomial_identity",
-                    "Ising2DLambda.NecSuf.FisherZero.common_sum_two_evaluations_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.highTemperaturePolynomial_identity_necSuf",
                     "Ising2DLambda.FisherZero.highTemperaturePolynomial_identity_from_necSuf",
                   ],
                   verification: ["sagemath/check/high-temperature-polynomial-identity"],
@@ -29070,12 +29070,52 @@ S_L(A)
   2x,&\sigma(\partial_0(e))\ne\sigma(\partial_1(e))
 \end{cases}
 \quad(\because\ \text{二つの場合で両端のスピンの積を代入する})`),
-                    paragraph(["したがって全辺にわたる積を取り、全配位について足すと"]),
+                    paragraph([
+                      ref("def_broken_edge_set"), " の破れた辺の集合 ",
+                      math(String.raw`\mathcal B_L(\sigma)\subseteq E_L`), " を使うと、全辺の積は",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+&\prod_{e\in E_L}
+\bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
+&=\prod_{e\in E_L}
+\begin{cases}
+  2,&\sigma(\partial_0(e))=\sigma(\partial_1(e)),\\
+  2x,&\sigma(\partial_0(e))\ne\sigma(\partial_1(e))
+\end{cases}
+&&(\because\ \text{一辺の二値評価})\\
+&=\prod_{e\in E_L}
+\begin{cases}
+  2,&e\notin\mathcal B_L(\sigma),\\
+  2x,&e\in\mathcal B_L(\sigma)
+\end{cases}
+&&(\because\ \blkref{def_broken_edge_set})\\
+&=\left(\prod_{e\in E_L\setminus\mathcal B_L(\sigma)}2\right)
+  \left(\prod_{e\in\mathcal B_L(\sigma)}2x\right)
+&&(\because\ \text{条件の真偽による有限積の分割})\\
+&=2^{|E_L\setminus\mathcal B_L(\sigma)|}(2x)^{|\mathcal B_L(\sigma)|}
+&&(\because\ \text{一定値の有限積})\\
+&=2^{|E_L\setminus\mathcal B_L(\sigma)|}
+  \bigl(2^{|\mathcal B_L(\sigma)|}x^{|\mathcal B_L(\sigma)|}\bigr)
+&&(\because\ \text{積の自然数冪})\\
+&=\bigl(2^{|E_L\setminus\mathcal B_L(\sigma)|}2^{|\mathcal B_L(\sigma)|}\bigr)
+  x^{|\mathcal B_L(\sigma)|}
+&&(\because\ \mathbb Z[x]\text{ の乗法の結合則})\\
+&=2^{|E_L\setminus\mathcal B_L(\sigma)|+|\mathcal B_L(\sigma)|}
+  x^{|\mathcal B_L(\sigma)|}
+&&(\because\ \text{自然数指数の加法法則})\\
+&=2^{|E_L|}x^{|\mathcal B_L(\sigma)|}
+&&(\because\ \text{補集合と部分集合の個数の和})\\
+&=2^{2L^2}x^{|\mathcal B_L(\sigma)|}
+&&(\because\ \blkref{def_lattice})\\
+&=2^{2L^2}x^{b(\sigma)}
+&&(\because\ \blkref{def_broken_edge_set})
+\end{aligned}`),
+                    paragraph(["となる。全配位について足すと"]),
                     displayMath(String.raw`\begin{aligned}
 \sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
 \bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)
 &=\sum_{\sigma\in\Sigma_L}2^{2L^2}x^{b(\sigma)}
-&&(\because\ \text{一辺の二つの場合を全辺へ掛ける})\\
+&&(\because\ \text{直前に求めた全辺の積})\\
 &=2^{2L^2}\sum_{\sigma\in\Sigma_L}x^{b(\sigma)}
 &&(\because\ \text{配位に依らない因子を有限和の外へ出す})\\
 &=2^{2L^2}Z_L
@@ -29086,9 +29126,30 @@ S_L(A)
 &\sum_{\sigma\in\Sigma_L}\prod_{e\in E_L}
 \bigl((1+x)+(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\bigr)\\
 &=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+\left(\prod_{e\in E_L\setminus A}(1+x)\right)
+\left(\prod_{e\in A}(1-x)\sigma(\partial_0(e))\sigma(\partial_1(e))\right)
+&&(\because\ \text{全辺の二項展開})\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+\left(\prod_{e\in E_L\setminus A}(1+x)\right)
+\left(\left(\prod_{e\in A}(1-x)\right)
+\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))\right)
+&&(\because\ \text{有限積における因子の分離})\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+(1+x)^{|E_L\setminus A|}
+\left((1-x)^{|A|}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))\right)
+&&(\because\ \text{一定値の有限積})\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+(1+x)^{|E_L|-|A|}
+\left((1-x)^{|A|}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))\right)
+&&(\because\ \text{有限集合の補集合の個数})\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
+(1+x)^{2L^2-|A|}
+\left((1-x)^{|A|}\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))\right)
+&&(\because\ \blkref{def_lattice})\\
+&=\sum_{\sigma\in\Sigma_L}\sum_{A\subseteq E_L}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
 \prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
-&&(\because\ \text{全辺の二項展開})\\
+&&(\because\ \mathbb Z[x]\text{ の乗法の結合則})\\
 &=\sum_{A\subseteq E_L}\sum_{\sigma\in\Sigma_L}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
 \prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))

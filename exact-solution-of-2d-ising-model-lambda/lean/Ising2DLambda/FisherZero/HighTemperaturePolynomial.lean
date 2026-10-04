@@ -53,9 +53,11 @@ lemma highTemperatureEdgeWeight_prod (L : ℕ) [NeZero L] (σ : Config L) :
     ∏ e : Edge L, highTemperatureEdgeWeight L σ e =
       2 ^ (2 * L ^ 2) * Polynomial.X ^ brokenBondCount L σ := by
   classical
+  -- 本文の全辺積: 一辺の二値評価、条件での分割、一定値の積。
   simp_rw [highTemperatureEdgeWeight_eq]
   rw [Finset.prod_ite]
   simp only [Finset.prod_const]
+  -- 積の冪、結合則、指数の加法、補集合と部分集合の個数、格子の辺数。
   rw [mul_pow, ← mul_assoc, ← pow_add]
   have hcard := Finset.card_filter_add_card_filter_not
     (s := (univ : Finset (Edge L)))
@@ -74,9 +76,11 @@ lemma highTemperatureEdgeWeight_expand (L : ℕ) [NeZero L] (σ : Config L) :
   classical
   simp only [highTemperatureEdgeWeight]
   simp_rw [add_comm ((1 : Polynomial ℤ) + Polynomial.X)]
+  -- 本文の部分集合展開。以降は各部分集合の項の中で同じ操作をする。
   rw [Fintype.prod_add]
   apply Finset.sum_congr rfl
   intro A _
+  -- 選んだ辺の積を定数因子とスピン積へ分け、一定値の積と補集合の個数を評価する。
   rw [Finset.prod_mul_distrib]
   simp only [Finset.prod_const, Finset.card_compl, card_edge]
   ring

@@ -920,6 +920,7 @@ targets=(
   Ising2DLambda.FisherZero.evenSubgraph_spinSum_from_necSuf
   Ising2DLambda.FisherZero.highTemperaturePolynomial_identity
   Ising2DLambda.NecSuf.FisherZero.common_sum_two_evaluations_necSuf
+  Ising2DLambda.NecSuf.FisherZero.highTemperaturePolynomial_identity_necSuf
   Ising2DLambda.FisherZero.highTemperaturePolynomial_identity_from_necSuf
   Ising2DLambda.FisherZero.torusHomologySector_unique
   Ising2DLambda.NecSuf.FisherZero.admissible_fiber_label_unique_necSuf
