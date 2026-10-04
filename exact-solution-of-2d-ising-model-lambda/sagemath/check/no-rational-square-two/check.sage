@@ -2,9 +2,9 @@
 # 帰属: QQ / ZZ の厳密計算。浮動小数点を使わない。
 
 # 主張（claim_no_rational_square_two）: 任意の q ∈ QQ について q*q ≠ 2。
-# 証明の組み立てを一行ずつ突き合わせる:
+# 統合検算。仮定を代入する行は数値検査せず、末尾の行別ファイルで明示する:
 #   prep:   q=0 は q*q=0≠2。q<0 は r:=-q>0 で r*r=q*q。
-#   chain:  1 = 1-0 = v_2(2)-v_2(1) = w_2(2) = w_2(r*r) = (log(r·r))(2)
+#   chain:  1 = 1-0 = v_2(2)-0 = v_2(2)-v_2(1) = w_2(2) = w_2(r*r) = (log(r·r))(2)
 #             = (log r + log r)(2) = w_2(r)+w_2(r) = m+m
 #   contra: 整数 m について m+m=1 は m≥1 でも m≤0 でも不可能。
 
@@ -23,7 +23,7 @@ assert ZZ(1).valuation(2) == 0, "v_2(1) = 0（空積）が壊れている"
 assert ZZ(2).valuation(2) - ZZ(1).valuation(2) == 1, "v_2(2) - v_2(1) = 1 が壊れている"
 assert w2(QQ(2)) == 1, "w_2(2) = 1 が壊れている"
 
-# 有理数の網羅的な標本（分子・分母 1..40、正負の両方）で検査する。
+# 分子・分母 1..40 と正負の入力組を検査する。同じ有理数の重複を含む。
 BOUND = 40
 checked_ne = 0
 checked_chain = 0
@@ -51,7 +51,7 @@ for a in range(1, BOUND + 1):
             if m >= 1:
                 assert m + m >= 2, "m≥1 ⇒ m+m≥2 が壊れている"
             else:
-                assert m <= 0, "ZZ の三分律が壊れている"
+                assert m <= 0, "ZZ の離散順序が壊れている"
                 assert m + m <= 0, "m≤0 ⇒ m+m≤0 が壊れている"
             checked_ne += 1
 
@@ -59,5 +59,42 @@ for a in range(1, BOUND + 1):
 for m in range(-2 * BOUND, 2 * BOUND + 1):
     assert ZZ(m) + ZZ(m) != 1, f"m+m = 1 となる整数が出た: m = {m}"
 
-print(f"OK: q*q ≠ 2 を {checked_ne} 個の有理数で検査し、"
-      f"鎖 w_2(r·r) = w_2(r)+w_2(r) を {checked_chain} 個で検査した")
+print(f"OK: q*q ≠ 2 を {checked_ne} 入力組で検査し、"
+      f"鎖 w_2(r·r) = w_2(r)+w_2(r) を {checked_chain} 入力組で検査した")
+
+import os
+_nrs_check_dir = os.path.dirname(os.path.abspath(__file__))
+load(os.path.join(_nrs_check_dir, "_prelude.sage"))
+check_files = (
+    "check_zero_substitution.sage",
+    "check_zero_product.sage",
+    "check_positive_definition.sage",
+    "check_positive_assumption.sage",
+    "check_negative_definition.sage",
+    "check_negative_left_product.sage",
+    "check_negative_right_product.sage",
+    "check_negative_double_negation.sage",
+    "check_negative_assumption.sage",
+    "check_one_subtract_zero.sage",
+    "check_prime_two_exponent.sage",
+    "check_prime_one_exponent.sage",
+    "check_two_rational_exponent.sage",
+    "check_square_assumption.sage",
+    "check_log_product_definition.sage",
+    "check_log_additivity.sage",
+    "check_log_component_addition.sage",
+    "check_rational_exponent_definition.sage",
+    "check_integer_exponent_definition.sage",
+    "check_high_left_addition.sage",
+    "check_high_right_addition.sage",
+    "check_high_two_definition.sage",
+    "check_high_strict_comparison.sage",
+    "check_low_left_addition.sage",
+    "check_low_right_addition.sage",
+    "check_low_zero_addition.sage",
+    "check_low_strict_comparison.sage",
+ )
+for check_file in check_files:
+    load(os.path.join(_nrs_check_dir, check_file))
+print("RESULT: PASS (%s 数値行、%s 等式・不等式); 数値検算対象なし %s 仮定使用行" %
+      (len(check_files) - _nrs_assumed, _nrs_checked, _nrs_assumed))

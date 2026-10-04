@@ -31414,7 +31414,7 @@ s\cdot s
                         ]),
                         paragraph([
                           "準備として、",
-                          math(String.raw`q\cdot q=2`),
+                          math(String.raw`r\cdot r=2`),
                           " を満たす正の有理数 ",
                           math(String.raw`r\in\mathbb{Q}_{>0}`),
                           " を作る。有理数体 ",
@@ -31450,22 +31450,35 @@ q\cdot q
                           math(String.raw`q>0`),
                           " の場合は ",
                           math(String.raw`r:=q`),
-                          " と置く。",
+                          " と置けば ", math(String.raw`r>0`), " であり、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+r\cdot r
+&=q\cdot q
+&&\bigl(\because\ r=q\bigr)\\
+&=2
+&&\bigl(\because\ q\cdot q=2\bigr).
+\end{aligned}`),
+                        paragraph([
                           math(String.raw`q<0`),
                           " の場合は ",
                           math(String.raw`r:=-q`),
                           " と置く。このとき ",
                           math(String.raw`r>0`),
-                          " であり、次の鎖を得る。",
+                          " である。以下の左右の負号の積の法則は、分配則と加法の逆元の性質から従う。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 r\cdot r
 &=(-q)\cdot(-q)
 &&\bigl(\because\ r=-q\bigr)\\
+&=-\bigl(q\cdot(-q)\bigr)
+&&\bigl(\because\ (-a)b=-(ab)\text{ in }\mathbb Q\bigr)\\
+&=-\bigl(-(q\cdot q)\bigr)
+&&\bigl(\because\ a(-b)=-(ab)\text{ in }\mathbb Q\bigr)\\
 &=q\cdot q
-&&\bigl(\because\ \text{分配則と加法の逆元の性質}\bigr)\\
+&&\bigl(\because\ -(-a)=a\text{ in }\mathbb Q\bigr)\\
 &=2
-&&\bigl(\because\ \text{背理法の仮定}\bigr)
+&&\bigl(\because\ q\cdot q=2\bigr)
 \end{aligned}`),
                         paragraph(["したがって、どちらの場合も"]),
                         displayMath(String.raw`r\in\mathbb{Q}_{>0},\qquad r\cdot r=2`),
@@ -31486,8 +31499,10 @@ r\cdot r
 1
 &=1-0
 &&\bigl(\because\ \mathbb{Z}\ \text{の減法}\bigr)\\
+&=v_2(2)-0
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ を }2=2^1\text{ へ適用}\bigr)\\
 &=v_2(2)-v_2(1)
-&&\bigl(\because\ \blkref{def_prime_exponent}\ \text{を}\ 2=2^{1}\ \text{と}\ 1\ \text{（空積）へ適用}\bigr)\\
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ を }1\text{（空積）へ適用}\bigr)\\
 &=w_2(2)
 &&\bigl(\because\ \blkref{def_rational_log}\ \text{の}\ w_2\ \text{の定義を表示}\ 2=2/1\ \text{へ適用}\bigr)\\
 &=w_2(r\cdot r)
@@ -31508,7 +31523,7 @@ r\cdot r
                           math(String.raw`m`),
                           " について、",
                           math(String.raw`\mathbb{Z}`),
-                          " の順序の三分律により ",
+                          " の離散順序により ",
                           math(String.raw`m\ge1`),
                           " または ",
                           math(String.raw`m\le0`),
@@ -31518,8 +31533,10 @@ r\cdot r
                         ]),
                         displayMath(String.raw`\begin{aligned}
 m+m
+&\ge1+m
+&&\bigl(\because\ m\ge1\text{ の両辺に右から }m\text{ を加える}\bigr)\\
 &\ge1+1
-&&\bigl(\because\ m\ge1\ \text{と順序・加法の両立}\bigr)\\
+&&\bigl(\because\ m\ge1\text{ の両辺に左から }1\text{ を加える}\bigr)\\
 &=2
 &&\bigl(\because\ 2:=1+1\bigr)\\
 &>1
@@ -31534,8 +31551,10 @@ m+m
                         ]),
                         displayMath(String.raw`\begin{aligned}
 m+m
+&\le0+m
+&&\bigl(\because\ m\le0\text{ の両辺に右から }m\text{ を加える}\bigr)\\
 &\le0+0
-&&\bigl(\because\ m\le0\ \text{と順序・加法の両立}\bigr)\\
+&&\bigl(\because\ m\le0\text{ の両辺に左から }0\text{ を加える}\bigr)\\
 &=0
 &&\bigl(\because\ \mathbb{Z}\ \text{の加法}\bigr)\\
 &<1
