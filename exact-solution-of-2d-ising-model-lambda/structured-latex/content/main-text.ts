@@ -30649,7 +30649,7 @@ H_L
                           math(String.raw`(1+\xi)^{-1}\in\overline{\mathbb{Q}}`),
                           " が取れる（",
                           ref("def_algebraic_numbers"),
-                          "）。まず、仮定によらず成り立つ等式 ",
+                          "）。まず、自己双対性の仮定によらず成り立つ等式 ",
                           math(String.raw`\mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi`),
                           "（",
                           math(String.raw`1-\xi`),
@@ -30670,9 +30670,17 @@ H_L
 &=1-\xi
 &&\bigl(\because\ \text{単位元との積}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "同値の二方向は別々の含意なので、一続きにはつながず、それぞれの中の計算を一続きの鎖で書く。",
-                        ]),
+                        paragraph(["また、二倍の項をまとめるために"]),
+                        displayMath(String.raw`\begin{aligned}
+\xi+\xi
+&=1\cdot\xi+1\cdot\xi
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=(1+1)\cdot\xi
+&&\bigl(\because\ \overline{\mathbb Q}\ \text{の分配則}\bigr)\\
+&=2\xi
+&&\bigl(\because\ 2:=1+1\bigr)
+\end{aligned}`),
+                        paragraph(["を用意する。同値の二方向をそれぞれ示す。"]),
                         paragraph([
                           "第一の方向。",
                           math(String.raw`\mathrm{KW}(\xi)=\xi`),
@@ -30690,14 +30698,24 @@ H_L
                         paragraph(["を得る。これを使って"]),
                         displayMath(String.raw`\begin{aligned}
 \xi^2+2\xi-1
+&=\bigl((\xi^2+\xi)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \text{和から同じ加数を引く}\bigr)\\
 &=\bigl((\xi+\xi^2)-\xi\bigr)+2\xi-1
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\ \text{の加法の可換則}\bigr)\\
+&=\bigl((\xi+\xi\cdot\xi)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \xi^2:=\xi\cdot\xi\bigr)\\
+&=\bigl((\xi\cdot1+\xi\cdot\xi)-\xi\bigr)+2\xi-1
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
 &=\bigl(\xi\cdot(1+\xi)-\xi\bigr)+2\xi-1
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\ \text{の分配則}\bigr)\\
 &=\bigl((1-\xi)-\xi\bigr)+2\xi-1
 &&\bigl(\because\ \xi\cdot(1+\xi)=1-\xi\bigr)\\
+&=\bigl(1-(\xi+\xi)\bigr)+2\xi-1
+&&\bigl(\because\ \text{連続する二つの減法}\bigr)\\
 &=(1-2\xi)+2\xi-1
-&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
+&&\bigl(\because\ \text{準備で示した }\xi+\xi=2\xi\bigr)\\
+&=1-1
+&&\bigl(\because\ \text{差に引いた項を足す}\bigr)\\
 &=0
 &&\bigl(\because\ \text{加法の逆元}\bigr)
 \end{aligned}`),
@@ -30713,25 +30731,47 @@ H_L
                         displayMath(String.raw`\begin{aligned}
 (1+\xi)\cdot\bigl(\mathrm{KW}(\xi)-\xi\bigr)
 &=(1+\xi)\cdot\mathrm{KW}(\xi)-(1+\xi)\cdot\xi
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\ \text{の分配則}\bigr)\\
 &=\mathrm{KW}(\xi)\cdot(1+\xi)-\xi\cdot(1+\xi)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を 2 つの積へ適用}\bigr)\\
+&&\bigl(\because\ \text{積の可換則を二つの積へ適用}\bigr)\\
 &=(1-\xi)-\xi\cdot(1+\xi)
 &&\bigl(\because\ \mathrm{KW}(\xi)\cdot(1+\xi)=1-\xi\bigr)\\
+&=(1-\xi)-(\xi\cdot1+\xi\cdot\xi)
+&&\bigl(\because\ \overline{\mathbb Q}\ \text{の分配則}\bigr)\\
+&=(1-\xi)-(\xi+\xi\cdot\xi)
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
 &=(1-\xi)-(\xi+\xi^2)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&&\bigl(\because\ \xi^2:=\xi\cdot\xi\bigr)\\
 &=1-\xi-\xi-\xi^2
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
+&&\bigl(\because\ \text{和を引く操作を二つの減法へ分ける}\bigr)\\
+&=\bigl(1-(\xi+\xi)\bigr)-\xi^2
+&&\bigl(\because\ \text{連続する二つの減法}\bigr)\\
 &=1-2\xi-\xi^2
-&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
+&&\bigl(\because\ \text{準備で示した }\xi+\xi=2\xi\bigr)\\
+&=(1-2\xi)+(-\xi^2)
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
 &=-\xi^2+(1-2\xi)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=(-\xi^2+1)-2\xi
+&&\bigl(\because\ \text{加法と減法の結合則}\bigr)\\
+&=(1+(-\xi^2))-2\xi
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=1+(-\xi^2-2\xi)
+&&\bigl(\because\ \text{加法と減法の結合則}\bigr)\\
 &=-\xi^2-2\xi+1
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=\bigl(-\xi^2+(-(2\xi))\bigr)+1
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=-(\xi^2+2\xi)+1
+&&\bigl(\because\ \text{加法の逆元の分配}\bigr)\\
+&=-(\xi^2+2\xi)+(-(-1))
+&&\bigl(\because\ \text{加法の逆元を二回取る}\bigr)\\
+&=-\bigl((\xi^2+2\xi)+(-1)\bigr)
+&&\bigl(\because\ \text{加法の逆元の分配}\bigr)\\
 &=-\bigl(\xi^2+2\xi-1\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元の分配}\bigr)\\
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
 &=-0
-&&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)\\
+&&\bigl(\because\ \text{仮定 }\xi^2+2\xi-1=0\bigr)\\
 &=0
 &&\bigl(\because\ \text{零元の加法の逆元は零元}\bigr)
 \end{aligned}`),
@@ -30746,11 +30786,19 @@ H_L
                           math(String.raw`b=\mathrm{KW}(\xi)-\xi`),
                           " へ適用して ",
                           math(String.raw`\mathrm{KW}(\xi)-\xi=0`),
-                          " を得る。両辺に ",
-                          math(String.raw`\xi`),
-                          " を加えて ",
-                          math(String.raw`\mathrm{KW}(\xi)=\xi`),
-                          " である。二方向が示されたので、二つの条件は同値である。全過程は体 ",
+                          " を得る。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{KW}(\xi)
+&=\bigl(\mathrm{KW}(\xi)-\xi\bigr)+\xi
+&&\bigl(\because\ \text{差に引いた項を足す}\bigr)\\
+&=0+\xi
+&&\bigl(\because\ \mathrm{KW}(\xi)-\xi=0\bigr)\\
+&=\xi
+&&\bigl(\because\ \text{零元との和}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。二方向が示されたので、二つの条件は同値である。全過程は体 ",
                           math(String.raw`\overline{\mathbb{Q}}`),
                           " の加法・積・逆元の中で閉じ、実数体も複素数体も現れない。",
                         ]),

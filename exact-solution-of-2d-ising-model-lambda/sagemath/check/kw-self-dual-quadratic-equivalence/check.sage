@@ -1,3 +1,53 @@
+# 本文の各等号を独立に確かめた後、既存の同値と中間段の統合検査を行う。
+for _name in (
+    "check_product_definition.sage",
+    "check_product_association.sage",
+    "check_product_commutation.sage",
+    "check_product_inverse.sage",
+    "check_product_unit.sage",
+    "check_double_units.sage",
+    "check_double_distribution.sage",
+    "check_double_definition.sage",
+    "check_forward_self_duality.sage",
+    "check_forward_product_identity.sage",
+    "check_forward_insert_cancellation.sage",
+    "check_forward_sum_commutation.sage",
+    "check_forward_square_definition.sage",
+    "check_forward_unit_insertion.sage",
+    "check_forward_distribution.sage",
+    "check_forward_product_substitution.sage",
+    "check_forward_subtraction_association.sage",
+    "check_forward_double_substitution.sage",
+    "check_forward_cancel_double.sage",
+    "check_forward_cancel_one.sage",
+    "check_difference_distribution.sage",
+    "check_difference_product_commutation.sage",
+    "check_difference_product_substitution.sage",
+    "check_difference_expansion.sage",
+    "check_difference_unit.sage",
+    "check_difference_square.sage",
+    "check_difference_subtract_sum.sage",
+    "check_difference_collect_subtractions.sage",
+    "check_difference_double_substitution.sage",
+    "check_difference_subtraction_definition.sage",
+    "check_difference_outer_commutation.sage",
+    "check_difference_left_association.sage",
+    "check_difference_inner_commutation.sage",
+    "check_difference_right_association.sage",
+    "check_difference_constant_commutation.sage",
+    "check_difference_negative_sum_expansion.sage",
+    "check_difference_negative_sum.sage",
+    "check_difference_double_negation.sage",
+    "check_difference_negation_distribution.sage",
+    "check_difference_quadratic_notation.sage",
+    "check_difference_quadratic_substitution.sage",
+    "check_difference_negative_zero.sage",
+    "check_conclusion_insert_difference.sage",
+    "check_conclusion_difference_substitution.sage",
+    "check_conclusion_zero.sage",
+):
+    load('sagemath/check/kw-self-dual-quadratic-equivalence/' + _name)
+
 # 対象ラベル: claim_kw_self_dual_quadratic_equivalence
 # 帰属: QQbar（代数的数）の厳密計算。浮動小数点を使わない。
 
@@ -5,10 +55,10 @@
 # 主張（claim_kw_self_dual_quadratic_equivalence）:
 #   1 + xi != 0 ならば、KW(xi) = xi と xi^2 + 2 xi - 1 = 0 は同値。
 # 証明の鎖の中間段も突き合わせる:
-#   prep:    KW(xi) * (1 + xi) = 1 - xi（仮定によらない準備の等式）
+#   prep:    KW(xi) * (1 + xi) = 1 - xi（自己双対性の仮定によらない準備の等式）
 #   forward: KW(xi) = xi が成り立つ点では xi * (1 + xi) = 1 - xi、
 #            および xi^2 + 2 xi - 1 = ((1 - xi) - xi) + 2 xi - 1 = 0
-#   backward: (1 + xi) * (KW(xi) - xi) = -(xi^2 + 2 xi - 1)（仮定によらない恒等式）
+#   backward: (1 + xi) * (KW(xi) - xi) = -(xi^2 + 2 xi - 1)（二次方程式の仮定によらない恒等式）
 
 
 def kw(xi):
