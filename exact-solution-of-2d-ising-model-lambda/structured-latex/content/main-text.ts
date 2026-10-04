@@ -31045,39 +31045,71 @@ s\cdot s
                           " を計算する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&=\bigl((\xi+1)-s\bigr)\cdot(\xi+1)+\bigl((\xi+1)-s\bigr)\cdot s
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=\bigl((\xi+1)\cdot(\xi+1)-s\cdot(\xi+1)\bigr)+\bigl((\xi+1)\cdot s-s\cdot s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則を 2 つの積へ適用}\bigr)\\
-&=\bigl((\xi+1)\cdot(\xi+1)-s\cdot(\xi+1)\bigr)+\bigl(s\cdot(\xi+1)-s\cdot s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
-&=(\xi+1)\cdot(\xi+1)+\Bigl(\bigl(-\bigl(s\cdot(\xi+1)\bigr)+s\cdot(\xi+1)\bigr)-s\cdot s\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=(\xi+1)\cdot(\xi+1)+\bigl(0-s\cdot s\bigr)
-&&\bigl(\because\ \text{加法の逆元}\bigr)\\
-&=(\xi+1)\cdot(\xi+1)-s\cdot s
+((\xi + 1) - s) \cdot  ((\xi + 1) + s)
+&=((\xi + 1) - s) \cdot  (\xi + 1) + ((\xi + 1) - s) \cdot  s
+&&\bigl(\because\ \text{右側の和への分配則}\bigr)\\
+&=((\xi + 1) \cdot  (\xi + 1) - s \cdot  (\xi + 1)) + ((\xi + 1) - s) \cdot  s
+&&\bigl(\because\ \text{第一の積への分配則}\bigr)\\
+&=((\xi + 1) \cdot  (\xi + 1) - s \cdot  (\xi + 1)) + ((\xi + 1) \cdot  s - s \cdot  s)
+&&\bigl(\because\ \text{第二の積への分配則}\bigr)\\
+&=((\xi + 1) \cdot  (\xi + 1) - s \cdot  (\xi + 1)) + (s \cdot  (\xi + 1) - s \cdot  s)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=((\xi + 1) \cdot  (\xi + 1) + (-(s \cdot  (\xi + 1)))) + (s \cdot  (\xi + 1) - s \cdot  s)
+&&\bigl(\because\ \text{第一の差の減法の定義}\bigr)\\
+&=((\xi + 1) \cdot  (\xi + 1) + (-(s \cdot  (\xi + 1)))) + (s \cdot  (\xi + 1) + (-(s \cdot  s)))
+&&\bigl(\because\ \text{第二の差の減法の定義}\bigr)\\
+&=(\xi + 1) \cdot  (\xi + 1) + ((-(s \cdot  (\xi + 1))) + (s \cdot  (\xi + 1) + (-(s \cdot  s))))
+&&\bigl(\because\ \text{外側の加法の結合則}\bigr)\\
+&=(\xi + 1) \cdot  (\xi + 1) + (((-(s \cdot  (\xi + 1))) + s \cdot  (\xi + 1)) + (-(s \cdot  s)))
+&&\bigl(\because\ \text{内側の加法の結合則}\bigr)\\
+&=(\xi + 1) \cdot  (\xi + 1) + (0 + (-(s \cdot  s)))
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(\xi + 1) \cdot  (\xi + 1) + (-(s \cdot  s))
 &&\bigl(\because\ \text{零元との和}\bigr)\\
-&=(\xi+1)\cdot(\xi+1)-2
-&&\bigl(\because\ \text{仮定}\ s\cdot s=2\bigr)\\
-&=\bigl((\xi+1)\cdot\xi+(\xi+1)\cdot1\bigr)-2
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=\bigl((\xi\cdot\xi+1\cdot\xi)+(\xi+1)\cdot1\bigr)-2
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=\bigl((\xi\cdot\xi+1\cdot\xi)+(\xi+1)\bigr)-2
-&&\bigl(\because\ \text{単位元との積}\bigr)\\
-&=\bigl((\xi^2+1\cdot\xi)+(\xi+1)\bigr)-2
-&&\bigl(\because\ \xi^2\ \text{の定義}\bigr)\\
-&=\bigl((\xi^2+\xi)+(\xi+1)\bigr)-2
-&&\bigl(\because\ \text{単位元との積}\bigr)\\
-&=\bigl((\xi^2+(\xi+\xi))+1\bigr)-2
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=\bigl((\xi^2+2\xi)+1\bigr)-2
-&&\bigl(\because\ \xi+\xi=2\xi\bigr)\\
-&=(\xi^2+2\xi)+(1-2)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=\xi^2+2\xi-1
-&&\bigl(\because\ \mathbb{Q}\ \text{の中の計算}\ 1-2=-1\bigr)
+&=(\xi + 1) \cdot  (\xi + 1) - s \cdot  s
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=(\xi + 1) \cdot  (\xi + 1) - 2
+&&\bigl(\because\ \text{仮定 }s\cdot s=2\bigr)\\
+&=((\xi + 1) \cdot  \xi + (\xi + 1) \cdot  1) - 2
+&&\bigl(\because\ \text{右側の和への分配則}\bigr)\\
+&=((\xi \cdot  \xi + 1 \cdot  \xi) + (\xi + 1) \cdot  1) - 2
+&&\bigl(\because\ \text{第一の積への分配則}\bigr)\\
+&=((\xi \cdot  \xi + 1 \cdot  \xi) + (\xi + 1)) - 2
+&&\bigl(\because\ \text{右側の単位元との積}\bigr)\\
+&=((\xi^{2} + 1 \cdot  \xi) + (\xi + 1)) - 2
+&&\bigl(\because\ \xi^2\text{ の定義}\bigr)\\
+&=((\xi^{2} + \xi) + (\xi + 1)) - 2
+&&\bigl(\because\ \text{左側の単位元との積}\bigr)\\
+&=(\xi^{2} + (\xi + (\xi + 1))) - 2
+&&\bigl(\because\ \text{外側の加法の結合則}\bigr)\\
+&=(\xi^{2} + ((\xi + \xi) + 1)) - 2
+&&\bigl(\because\ \text{内側の加法の結合則}\bigr)\\
+&=((\xi^{2} + (\xi + \xi)) + 1) - 2
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=((\xi^{2} + (1 \cdot  \xi + \xi)) + 1) - 2
+&&\bigl(\because\ \text{第一の項に単位元との積を挿入}\bigr)\\
+&=((\xi^{2} + (1 \cdot  \xi + 1 \cdot  \xi)) + 1) - 2
+&&\bigl(\because\ \text{第二の項に単位元との積を挿入}\bigr)\\
+&=((\xi^{2} + (1 + 1) \cdot  \xi) + 1) - 2
+&&\bigl(\because\ \text{分配則を逆向きに適用}\bigr)\\
+&=((\xi^{2} + 2 \cdot  \xi) + 1) - 2
+&&\bigl(\because\ 2:=1+1\text{ の定義}\bigr)\\
+&=((\xi^{2} + 2 \cdot  \xi) + 1) + (-2)
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + (1 + (-2))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + (1 + (-(1 + 1)))
+&&\bigl(\because\ 2:=1+1\text{ の定義}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + (1 + ((-1) + (-1)))
+&&\bigl(\because\ \text{和の加法の逆元}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + ((1 + (-1)) + (-1))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + (0 + (-1))
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(\xi^{2} + 2 \cdot  \xi) + (-1)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\xi^{2} + 2 \cdot  \xi - 1
+&&\bigl(\because\ \text{減法の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "同値の二方向は別々の含意なので、一続きにはつながず、それぞれの中の計算を一続きの鎖で書く。",
@@ -31094,21 +31126,21 @@ s\cdot s
                           " の場合は",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\xi^2+2\xi-1
-&=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
-&=\Bigl(\bigl(((-1)+s)+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \text{仮定}\ \xi=-1+s\bigr)\\
-&=\Bigl(\bigl((s+(-1))+1\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
-&=\Bigl(\bigl(s+((-1)+1)\bigr)-s\Bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=\bigl((s+0)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
-&=(s-s)\cdot\bigl((\xi+1)+s\bigr)
+\xi^{2} + 2 \cdot  \xi - 1
+&=((\xi + 1) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{準備の因数分解の等式}\bigr)\\
+&=(((-1 + s) + 1) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{仮定 }\xi=-1+s\bigr)\\
+&=(((s + (-1)) + 1) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=((s + ((-1) + 1)) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=((s + 0) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(s - s) \cdot  ((\xi + 1) + s)
 &&\bigl(\because\ \text{零元との和}\bigr)\\
-&=0\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=0 \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{元と同じ元との差は零}\bigr)\\
 &=0
 &&\bigl(\because\ \text{零元との積}\bigr)
 \end{aligned}`),
@@ -31117,21 +31149,23 @@ s\cdot s
                           " の場合は",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\xi^2+2\xi-1
-&=\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-1)+(-s))+1\bigr)+s\Bigr)
-&&\bigl(\because\ \text{仮定}\ \xi=-1-s\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl(((-s)+(-1))+1\bigr)+s\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot\Bigl(\bigl((-s)+((-1)+1)\bigr)+s\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot\bigl(((-s)+0)+s\bigr)
-&&\bigl(\because\ \text{加法の逆元}\ (-1)+1=0\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot\bigl((-s)+s\bigr)
+\xi^{2} + 2 \cdot  \xi - 1
+&=((\xi + 1) - s) \cdot  ((\xi + 1) + s)
+&&\bigl(\because\ \text{準備の因数分解の等式}\bigr)\\
+&=((\xi + 1) - s) \cdot  (((-1 - s) + 1) + s)
+&&\bigl(\because\ \text{仮定 }\xi=-1-s\bigr)\\
+&=((\xi + 1) - s) \cdot  ((((-1) + (-s)) + 1) + s)
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=((\xi + 1) - s) \cdot  ((((-s) + (-1)) + 1) + s)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=((\xi + 1) - s) \cdot  (((-s) + ((-1) + 1)) + s)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=((\xi + 1) - s) \cdot  (((-s) + 0) + s)
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=((\xi + 1) - s) \cdot  ((-s) + s)
 &&\bigl(\because\ \text{零元との和}\bigr)\\
-&=\bigl((\xi+1)-s\bigr)\cdot0
-&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=((\xi + 1) - s) \cdot  0
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
 &=0
 &&\bigl(\because\ \text{零元との積}\bigr)
 \end{aligned}`),
@@ -31150,11 +31184,11 @@ s\cdot s
                           " を示す。準備の等式と仮定から",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl((\xi+1)-s\bigr)\cdot\bigl((\xi+1)+s\bigr)
-&=\xi^2+2\xi-1
-&&\bigl(\because\ \bigl((\xi+1)-s\bigr)\bigl((\xi+1)+s\bigr)=\xi^2+2\xi-1\bigr)\\
+((\xi + 1) - s) \cdot  ((\xi + 1) + s)
+&=\xi^{2} + 2 \cdot  \xi - 1
+&&\bigl(\because\ \text{準備の因数分解の等式}\bigr)\\
 &=0
-&&\bigl(\because\ \text{仮定}\ \xi^2+2\xi-1=0\bigr)
+&&\bigl(\because\ \text{仮定 }\xi^2+2\xi-1=0\bigr)
 \end{aligned}`),
                         paragraph([
                           "を得る。第一因子 ",
@@ -31165,10 +31199,26 @@ s\cdot s
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \xi
-&=s-1
-&&\bigl(\because\ (\xi+1)-s=0\ \text{の移項}\bigr)\\
-&=-1+s
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)
+&=\xi + 0
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\xi + (1 + (-1))
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(\xi + 1) + (-1)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=((\xi + 1) + 0) + (-1)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=((\xi + 1) + ((-s) + s)) + (-1)
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(((\xi + 1) + (-s)) + s) + (-1)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(((\xi + 1) - s) + s) + (-1)
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=(0 + s) + (-1)
+&&\bigl(\because\ \text{この場合の仮定 }(\xi+1)-s=0\bigr)\\
+&=s + (-1)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=(-1) + s
+&&\bigl(\because\ \text{加法の可換則}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。",
@@ -31185,10 +31235,26 @@ s\cdot s
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \xi
-&=(-s)-1
-&&\bigl(\because\ (\xi+1)+s=0\ \text{の移項}\bigr)\\
-&=-1-s
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の可換則}\bigr)
+&=\xi + 0
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=\xi + (1 + (-1))
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(\xi + 1) + (-1)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=((\xi + 1) + 0) + (-1)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=((\xi + 1) + (s + (-s))) + (-1)
+&&\bigl(\because\ \text{加法の逆元との和}\bigr)\\
+&=(((\xi + 1) + s) + (-s)) + (-1)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(0 + (-s)) + (-1)
+&&\bigl(\because\ \text{上で得た }(\xi+1)+s=0\bigr)\\
+&=(-s) + (-1)
+&&\bigl(\because\ \text{零元との和}\bigr)\\
+&=(-1) + (-s)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=-1 - s
+&&\bigl(\because\ \text{減法の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。いずれの場合も ",
