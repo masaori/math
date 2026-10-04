@@ -6,7 +6,6 @@
 -/
 import Ising2DLambda.FisherZero.DualBrokenEdgesWinding
 import Ising2DLambda.FisherZero.LowTemperaturePolynomial
-import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 
 namespace Ising2DLambda.FisherZero
 
@@ -590,13 +589,30 @@ theorem trivialSectorConfiguration_fiber_card_two_of_exists
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
     (hexists : ∃ σ : Config L, dualBrokenEdgeSet L σ = A) :
     (univ.filter fun σ : Config L => dualBrokenEdgeSet L σ = A).card = 2 := by
+  classical
   obtain ⟨σ, hσ⟩ := hexists
-  have h := Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf
-    (dualBrokenEdgeSet L) (globalSpinReversal L) σ
-    (globalSpinReversal_ne_self L σ)
-    (globalSpinReversal_dualBrokenEdgeSet L σ)
-    (sameDualBrokenEdges_eq_or_globalSpinReversal L σ)
-  simpa [hσ] using h
+  -- 本文の「全スピン反転も原像に属し、もとの配位とは異なる」。
+  have hReversal : dualBrokenEdgeSet L (globalSpinReversal L σ) = A :=
+    (globalSpinReversal_dualBrokenEdgeSet L σ).trans hσ
+  have hDistinct : σ ≠ globalSpinReversal L σ :=
+    (globalSpinReversal_ne_self L σ).symm
+  -- 本文の「任意の別の原像はもとの配位またはその全反転」。
+  have hFiber :
+      univ.filter (fun τ : Config L => dualBrokenEdgeSet L τ = A) =
+        {σ, globalSpinReversal L σ} := by
+    ext τ
+    simp only [mem_filter, mem_univ, true_and, mem_insert, mem_singleton]
+    constructor
+    · intro hτ
+      exact sameDualBrokenEdges_eq_or_globalSpinReversal L σ τ (hτ.trans hσ.symm)
+    · intro hτ
+      rcases hτ with rfl | rfl
+      · exact hσ
+      · exact hReversal
+  -- 本文の原像の個数計算。異なる二配位なので二点集合の個数は二である。
+  rw [hFiber, card_insert_of_notMem]
+  · rw [card_singleton]
+  · simpa only [mem_singleton] using hDistinct
 
 /-- 自明セクターの偶部分グラフを双対破れ像として持つ配位はちょうど二つである。 -/
 theorem trivialSectorConfiguration_fiber_card_two

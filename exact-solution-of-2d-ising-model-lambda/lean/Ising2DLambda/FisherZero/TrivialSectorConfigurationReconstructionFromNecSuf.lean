@@ -3,6 +3,7 @@
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
+import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 
 namespace Ising2DLambda.FisherZero
 

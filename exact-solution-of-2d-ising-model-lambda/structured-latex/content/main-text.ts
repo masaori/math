@@ -29761,7 +29761,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                       kind: "claim",
                       title: { text: "自明セクターの偶部分グラフから配位を復元できる" },
                       labels: ["claim_trivial_sector_configuration_reconstruction"],
-                      habitat: "N",
+                      habitat: "Z",
                       verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
                       lean: [
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
