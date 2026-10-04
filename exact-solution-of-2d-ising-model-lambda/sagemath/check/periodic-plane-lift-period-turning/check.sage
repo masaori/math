@@ -1,0 +1,37 @@
+# 対象ラベル: claim_periodic_plane_lift_period_turning
+load('sagemath/check/periodic-plane-lift-period-turning/_prelude.sage')
+for filename in (
+    'check_base_representative.sage',
+    'check_interior_successor.sage',
+    'check_boundary_index.sage',
+    'check_boundary_definition.sage',
+    'check_endpoint_winding.sage',
+    'check_boundary_last_index.sage',
+    'check_step_index.sage',
+    'check_step_reorder.sage',
+    'check_step_translate.sage',
+    'check_step_cancel.sage',
+    'check_step_successor.sage',
+    'check_step_base.sage',
+    'check_step_recurrence.sage',
+    'check_step_displacement.sage',
+    'check_step_original_direction.sage',
+    'check_word_definition.sage',
+    'check_word_remainder.sage',
+    'check_word_rotation.sage',
+    'check_local_turn.sage',
+    'check_sum_definition.sage',
+    'check_sum_cyclic_index.sage',
+    'check_sum_first_substitution.sage',
+    'check_sum_second_substitution.sage',
+    'check_sum_table.sage',
+    'check_sum_rotation.sage',
+    'check_sum_table_back.sage',
+    'check_sum_turn.sage',
+    'check_sum_split.sage',
+    'check_sum_internal_turn.sage',
+    'check_sum_total_turn.sage',
+    'check_whole_period.sage',
+):
+    load(str(_period_turning_dir / filename))
+print('RESULT: PASS')

@@ -241,6 +241,7 @@ export const ALL_LABELS = [
   "claim_periodic_open_boundary_comparison_log_le_one",
   "claim_periodic_open_boundary_comparison_rational",
   "claim_periodic_plane_lift_parallel_period_increase",
+  "claim_periodic_plane_lift_period_turning",
   "claim_periodic_plane_lift_points_distinct",
   "claim_periodic_plane_lift_transverse_bounded",
   "claim_permutation_power_return",

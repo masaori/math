@@ -1149,3 +1149,6 @@ import Ising2DLambda.KacWard.PlaneProjectionCyclicTurningFromNecSuf
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSum
 import Ising2DLambda.NecSuf.KacWard.OneSidedClosureCyclicSum
 import Ising2DLambda.KacWard.OneSidedClosureCyclicSumFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftPeriodTurning
+import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurning
+import Ising2DLambda.KacWard.PeriodicPlaneLiftPeriodTurningFromNecSuf

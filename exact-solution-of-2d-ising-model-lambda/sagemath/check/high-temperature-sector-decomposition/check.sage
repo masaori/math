@@ -3,8 +3,9 @@
 
 import os
 from itertools import combinations
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = str(Path('sagemath/check/high-temperature-sector-decomposition').resolve())
 load(os.path.join(_dir, '../../_shared/defs.sage'))
 
 R = PolynomialRing(ZZ, 'x')
@@ -64,5 +65,15 @@ for L in (1, 2, 3):
     assert sum(sector_counts.values()) == even_count
     print("L=%d: H_L = Σ H^{a,b}_L を ZZ[x] で確認（偶部分グラフ %d 個、セクター内訳 %s）" %
           (L, even_count, sorted(sector_counts.items())))
+
+for row_file in (
+        'check_sector_even.sage',
+        'check_unique_sector.sage',
+        'check_high_temperature_definition.sage',
+        'check_partition_sum.sage',
+        'check_sector_substitution.sage',
+        'check_sector_polynomial_definition.sage',
+        'check_four_sector_sum.sage'):
+    load(os.path.join(_dir, row_file))
 
 print("RESULT: PASS")

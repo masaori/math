@@ -1853,6 +1853,15 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.fourPartSequence_congr_range
   Ising2DLambda.NecSuf.KacWard.oneSidedClosure_cyclicAdjacentSum_necSuf
   Ising2DLambda.KacWard.oneSidedClosure_cyclicTurning_identification_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.cyclicAdjacentSum_zmod
+  Ising2DLambda.NecSuf.KacWard.integerPeriodicLift_period_step_necSuf
+  Ising2DLambda.NecSuf.KacWard.integerPeriodicLift_periodAdjacentSum_necSuf
+  Ising2DLambda.KacWard.orientedEdgeLatticeStep_unit
+  Ising2DLambda.KacWard.orientedEdgeLatticeStep_direction
+  Ising2DLambda.KacWard.orientedEdgeLatticeStep_turning
+  Ising2DLambda.KacWard.periodicPlaneLift_step_edgeDisplacement
+  Ising2DLambda.KacWard.periodicPlaneLift_periodTurning
+  Ising2DLambda.KacWard.periodicPlaneLift_periodTurning_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

@@ -30005,27 +30005,34 @@ Z_L
                   ],
                   proof: [
                     paragraph([
-                      "準備として、和の添字の集合を確かめる。",
-                      ref("def_torus_homology_sector"), " より、任意の ",
-                      math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`), " と任意の ",
-                      math(String.raw`A\in\mathcal{E}^{a,b}_L`), " について ",
-                      math(String.raw`\operatorname{Even}_L(A)`), " が成り立つ。逆に ",
-                      ref("claim_torus_homology_sector_partition"), " より、",
-                      math(String.raw`\operatorname{Even}_L(A)`), " を満たす任意の ",
-                      math(String.raw`A\subseteq E_L`), " に対し、", math(String.raw`A\in\mathcal{E}^{a,b}_L`),
-                      " を満たす組 ", math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`),
-                      " がただ一つ存在する。したがって偶部分グラフの全体は、四つの有限集合 ",
+                      math(String.raw`L\in\mathbb N,\ L\ge1`), " を固定し、和の添字の集合を確かめる。",
+                      "任意の組 ", math(String.raw`(a,b)\in\{0,1\}\times\{0,1\}`),
+                      " と辺の部分集合 ", math(String.raw`A\subseteq E_L`), " に対して、",
+                    ]),
+                    displayMath(String.raw`A\in\mathcal E_L^{a,b}\ \Longrightarrow\ \operatorname{Even}_L(A)
+\qquad\bigl(\because\ \blkref{def_torus_homology_sector}\bigr).`),
+                    paragraph([
+                      "逆に、", math(String.raw`\operatorname{Even}_L(A)`), " を満たす任意の ",
+                      math(String.raw`A\subseteq E_L`), " に対して、",
+                    ]),
+                    displayMath(String.raw`\exists!\,(a,b)\in\{0,1\}\times\{0,1\},\quad A\in\mathcal E_L^{a,b}
+\qquad\bigl(\because\ \blkref{claim_torus_homology_sector_partition}\bigr).`),
+                    paragraph([
+                      "したがって偶部分グラフの全体は、四つの有限集合 ",
                       math(String.raw`\mathcal{E}^{0,0}_L,\mathcal{E}^{0,1}_L,\mathcal{E}^{1,0}_L,\mathcal{E}^{1,1}_L`),
-                      " の重なりのない合併である。",
+                      " の重なりのない合併である。巻き付き偶奇の値で和を分けてから、各添字集合をセクターの定義へ置き換える。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 H_L
 &=\sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)}}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
 &&\bigl(\because\ \blkref{def_high_temperature_polynomial}\bigr)\\
+&=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}\ \sum_{\substack{A\subseteq E_L\\ \operatorname{Even}_L(A)\\ \varepsilon_{L,\mathrm h}(A)=a,\ \varepsilon_{L,\mathrm v}(A)=b}}
+(1+x)^{2L^2-|A|}(1-x)^{|A|}
+&&\bigl(\because\ \blkref{claim_torus_homology_sector_partition}\text{ による有限和の分割}\bigr)\\
 &=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}\ \sum_{A\in\mathcal{E}^{a,b}_L}
 (1+x)^{2L^2-|A|}(1-x)^{|A|}
-&&\bigl(\because\ \blkref{def_torus_homology_sector},\ \blkref{claim_torus_homology_sector_partition}\bigr)\\
+&&\bigl(\because\ \blkref{def_torus_homology_sector}\bigr)\\
 &=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}H^{a,b}_L
 &&\bigl(\because\ \blkref{def_high_temperature_sector_polynomial}\bigr)\\
 &=H^{0,0}_L+H^{0,1}_L+H^{1,0}_L+H^{1,1}_L
@@ -68091,6 +68098,115 @@ C_{N_c}\bigl(w^{(c)}\bigr)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_periodic_plane_lift_period_turning",
+        labels: [],
+        title: { text: "周期持ち上げの一周期と元の閉歩道の回転数" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_periodic_plane_lift_period_turning",
+            focus: {
+              id: "kac_ward_claim_periodic_plane_lift_period_turning",
+              kind: "claim",
+              title: { text: "周期持ち上げ一周期の循環隣接和は元の閉歩道の回転数である" },
+              labels: ["claim_periodic_plane_lift_period_turning"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.periodicPlaneLift_periodTurning",
+                "Ising2DLambda.NecSuf.KacWard.integerPeriodicLift_periodAdjacentSum_necSuf",
+                "Ising2DLambda.KacWard.periodicPlaneLift_periodTurning_from_necSuf",
+              ],
+              verification: ["sagemath/check/periodic-plane-lift-period-turning"],
+              statement: [
+                paragraph(["閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), "（", ref("def_closed_nonbacktracking_walk"), "）を取り、", math(String.raw`L,m\in\mathbb N_{>0}`), " とする。添字集合 ", math(String.raw`I_m=\{0,\ldots,m-1\}`), "、整数の余り ", math(String.raw`[h]_m`), " と巡回移動 ", math(String.raw`\rho_k(j)=[j+k]_m`), " は ", ref("claim_cyclic_shift_adjacent_integer_sum"), " の記法を使う。任意の基点添字 ", math(String.raw`k_0\in\mathbb Z`), " に対して、歩ベクトルの写像 ", math(String.raw`u^{(k_0)}:\mathbb N\to\mathbb Z^2`), " を"]),
+                displayMath(String.raw`u^{(k_0)}_j:=\widetilde P_{k_0+j+1}(\gamma)-\widetilde P_{k_0+j}(\gamma)\qquad(j\in\mathbb N)`),
+                paragraph(["と定める。周期持ち上げは ", ref("def_periodic_plane_lift"), "、整数の重み ", math(String.raw`\vartheta`), " と循環隣接和 ", math(String.raw`C_m`), " は ", ref("claim_four_part_adjacent_sum"), "、循環総回転数は ", ref("def_cyclic_total_turning"), " の定義を使う。このとき"]),
+                displayMath(String.raw`C_m\bigl(u^{(k_0)}\bigr)=t_{\circ}(\gamma)\quad\text{in }\mathbb Z`),
+                paragraph(["が成り立つ。頂点の相異性や巻き付きが非零であることは仮定しない。"]),
+              ],
+              proof: [
+                paragraph(["この証明では ", math(String.raw`P_j:=P_j(\gamma)`), "、", math(String.raw`\widetilde P_h:=\widetilde P_h(\gamma)`), "、", math(String.raw`B:=(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma))\in\mathbb Z^2`), " と略記する。また、", math(String.raw`i\in I_m`), " に対し"]),
+                displayMath(String.raw`D_i:=\bigl(\delta_{\mathrm{row}}(\vec e_{i+1}),\delta_{\mathrm{col}}(\vec e_{i+1})\bigr)\in\mathbb Z^2`),
+                paragraph(["と置く（", ref("def_plane_displacement"), "）。まず一周期内の点を読み直す。", math(String.raw`r\in I_m`), " について"]),
+                displayMath(String.raw`\widetilde P_r=P_r\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r\bigr).`),
+                paragraph([math(String.raw`r+1<m`), " ならば、同じ定義で"]),
+                displayMath(String.raw`\widetilde P_{r+1}=P_{r+1}\qquad\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }0\text{ と余り }r+1\bigr).`),
+                paragraph([math(String.raw`r=m-1`), " ならば、周期の継ぎ目で次のようになる。"]),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{r+1}
+&=\widetilde P_m&&\bigl(\because\ r+1=m\bigr)\\
+&=P_0+B&&\bigl(\because\ \blkref{def_periodic_plane_lift}\text{、商 }1\text{ と余り }0\bigr)\\
+&=P_m&&\bigl(\because\ \blkref{claim_plane_lift_endpoint_winding}\bigr)\\
+&=P_{r+1}&&\bigl(\because\ m=r+1\bigr).
+\end{aligned}`),
+                paragraph(["従って ", math(String.raw`\widetilde P_{r+1}=P_{r+1}`), " は ", math(String.raw`r\in I_m`), " の全てで成り立つ。次に任意の ", math(String.raw`h\in\mathbb Z`), " を整数除法で ", math(String.raw`h=qm+r`), "、", math(String.raw`q\in\mathbb Z`), "、", math(String.raw`r=[h]_m\in I_m`), " と書く。", ref("claim_one_sided_periodic_lift_repetition"), " の証明中の並進等式 ", math(String.raw`\widetilde P_{j+am}=\widetilde P_j+aB`), " は、周期持ち上げの定義と整数除法だけから任意の整数 ", math(String.raw`j,a`), " について得たものである。それを使うと、"]),
+                displayMath(String.raw`\begin{aligned}
+\widetilde P_{h+1}-\widetilde P_h
+&=\widetilde P_{qm+r+1}-\widetilde P_{qm+r}
+&&\bigl(\because\ h=qm+r\bigr)\\
+&=\widetilde P_{(r+1)+qm}-\widetilde P_{r+qm}
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr)\\
+&=(\widetilde P_{r+1}+qB)-(\widetilde P_r+qB)
+&&\bigl(\because\ \blkref{claim_one_sided_periodic_lift_repetition}\text{ の並進等式}\bigr)\\
+&=\widetilde P_{r+1}-\widetilde P_r
+&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数の消去}\bigr)\\
+&=P_{r+1}-\widetilde P_r
+&&\bigl(\because\ \text{上で示した }\widetilde P_{r+1}=P_{r+1}\bigr)\\
+&=P_{r+1}-P_r
+&&\bigl(\because\ \widetilde P_r=P_r\bigr)\\
+&=\bigl(P_r+(\delta_{\mathrm{row}}(\vec e_{r+1}),\delta_{\mathrm{col}}(\vec e_{r+1}))\bigr)-P_r
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式}\bigr)\\
+&=(\delta_{\mathrm{row}}(\vec e_{r+1}),\delta_{\mathrm{col}}(\vec e_{r+1}))
+&&\bigl(\because\ \mathbb Z^2\text{ の加法の消去則}\bigr)\\
+&=D_r&&\bigl(\because\ D_r\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["よって任意の ", math(String.raw`j\in I_m`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+u^{(k_0)}_j
+&=\widetilde P_{k_0+j+1}-\widetilde P_{k_0+j}
+&&\bigl(\because\ u^{(k_0)}\text{ の定義}\bigr)\\
+&=D_{[k_0+j]_m}&&\bigl(\because\ \text{直前の等式に }h=k_0+j\text{ を代入}\bigr)\\
+&=D_{\rho_{k_0}(j)}&&\bigl(\because\ \rho_{k_0}\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["変位の四つの値と辺の方向の対応は ", ref("claim_displacement_is_direction_unit"), " で確かめた。", math(String.raw`\gamma`), " の循環する隣接辺対は全て非後退なので、", ref("claim_plane_projection_cyclic_turning"), " の証明中の十二方向対の表を読むと、任意の ", math(String.raw`i\in I_m`), " について"]),
+                displayMath(String.raw`\vartheta(D_i,D_{\rho_1(i)})=\tau(\vec e_{i+1},\vec e_{\rho_1(i)+1})\qquad\bigl(\because\ \blkref{claim_plane_projection_cyclic_turning}\text{ の十二方向対の表}\bigr).`),
+                paragraph(["整数の表 ", math(String.raw`a:I_m\times I_m\to\mathbb Z`), " を ", math(String.raw`a(i,j):=\vartheta(D_i,D_j)`), " と定める。", math(String.raw`\rho_1(j)=j+1`), "（", math(String.raw`j<m-1`), "）と ", math(String.raw`\rho_1(m-1)=0`), " を使い、循環和を次のように変形する。", math(String.raw`m=1`), " のとき内部の和は空和 ", math(String.raw`0`), " と読む。"]),
+                displayMath(String.raw`\begin{aligned}
+C_m\bigl(u^{(k_0)}\bigr)
+&=\sum_{j=0}^{m-2}\vartheta(u^{(k_0)}_j,u^{(k_0)}_{j+1})+\vartheta(u^{(k_0)}_{m-1},u^{(k_0)}_0)
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C_m\text{ の定義}\bigr)\\
+&=\sum_{j\in I_m}\vartheta(u^{(k_0)}_j,u^{(k_0)}_{\rho_1(j)})
+&&\bigl(\because\ \rho_1\text{ の内部と末尾の値、有限和の分割}\bigr)\\
+&=\sum_{j\in I_m}\vartheta(D_{\rho_{k_0}(j)},u^{(k_0)}_{\rho_1(j)})
+&&\bigl(\because\ u^{(k_0)}_j=D_{\rho_{k_0}(j)}\text{ を第一引数へ代入}\bigr)\\
+&=\sum_{j\in I_m}\vartheta(D_{\rho_{k_0}(j)},D_{\rho_{k_0}(\rho_1(j))})
+&&\bigl(\because\ u^{(k_0)}_{\rho_1(j)}=D_{\rho_{k_0}(\rho_1(j))}\text{ を第二引数へ代入}\bigr)\\
+&=\sum_{j\in I_m}a(\rho_{k_0}(j),\rho_{k_0}(\rho_1(j)))
+&&\bigl(\because\ a\text{ の定義}\bigr)\\
+&=\sum_{j\in I_m}a(j,\rho_1(j))
+&&\bigl(\because\ \blkref{claim_cyclic_shift_adjacent_integer_sum}\bigr)\\
+&=\sum_{j\in I_m}\vartheta(D_j,D_{\rho_1(j)})
+&&\bigl(\because\ a\text{ の定義}\bigr)\\
+&=\sum_{j\in I_m}\tau(\vec e_{j+1},\vec e_{\rho_1(j)+1})
+&&\bigl(\because\ \text{上で示した各隣接対の回転表の一致}\bigr)\\
+&=\sum_{j=0}^{m-2}\tau(\vec e_{j+1},\vec e_{j+2})+\tau(\vec e_m,\vec e_1)
+&&\bigl(\because\ \rho_1\text{ の内部と末尾の値、有限和の分割}\bigr)\\
+&=t(\gamma)+\tau(\vec e_m,\vec e_1)
+&&\bigl(\because\ \blkref{def_total_turning}\text{、零始まりの添字}\bigr)\\
+&=t_{\circ}(\gamma)&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr).
+\end{aligned}`),
+                paragraph(["比較したのは各歩の変位と回転表であり、平行移動した辺の位置を同一視していない。全過程は有限列と整数の演算だけで閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -68128,6 +68244,8 @@ C_{N_c}\bigl(w^{(c)}\bigr)
               ],
               proof: [
                 paragraph([
+                  "一周期の歩の循環隣接和を元の閉歩道へ戻す同定は ",
+                  ref("claim_periodic_plane_lift_period_turning"), " で与えた。",
                   "周期延長した持ち上げの一周期分の射影辺列を ",
                   math(String.raw`U=(\vec u_1,\ldots,\vec u_m)`), " と書く。周期延長の定義（",
                   ref("def_periodic_plane_lift"), "）と歩ベクトル列の反復（",
