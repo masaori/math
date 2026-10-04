@@ -30196,8 +30196,22 @@ H_L
 &&\bigl(\because\ 1=(1+\xi)(1+\xi)^{-1}\bigr)\\
 &=\bigl((1+\xi)+(1-\xi)\bigr)\cdot(1+\xi)^{-1}
 &&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
+&=\bigl((1+\xi)+(1+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \text{減法の定義}\bigr)\\
+&=\bigl(1+(\xi+(1+(-\xi)))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\bigl(1+((\xi+1)+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\bigl(1+((1+\xi)+(-\xi))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の交換則}\bigr)\\
+&=\bigl(1+(1+(\xi+(-\xi)))\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則}\bigr)\\
+&=\bigl(1+(1+0)\bigr)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ \xi+(-\xi)=0\bigr)\\
+&=(1+1)\cdot(1+\xi)^{-1}
+&&\bigl(\because\ 1+0=1\bigr)\\
 &=2\cdot(1+\xi)^{-1}
-&&\bigl(\because\ \xi+(-\xi)=0\ \text{と}\ 1+1=2\bigr)
+&&\bigl(\because\ 2:=1+1\bigr)
 \end{aligned}`),
                         paragraph([
                           "次に ",

@@ -1,6 +1,6 @@
 /-
 「双対変換の定義と、値が定義域に留まること」の具体版。
-人手証明と同じく、双対変換を定義し、分配則の三段の鎖で
+人手証明と同じく、双対変換を定義し、分配則・加法の各法則を一行ずつ用いて
 `1 + KW ξ = 2 * (1 + ξ)⁻¹` を得たあと、零因子の消去と逆元の等式で非零性を示す。
 住処は Qbar であり、R / C は現れない。
 -/
@@ -29,7 +29,20 @@ theorem kwDualTransform_domain {xi : Qbar} (hDomain : 1 + xi ≠ 0) :
         rw [hInverse]
       _ = ((1 + xi) + (1 - xi)) * (1 + xi)⁻¹ := by
         rw [← add_mul]
-      _ = 2 * (1 + xi)⁻¹ := by ring
+      _ = ((1 + xi) + (1 + (-xi))) * (1 + xi)⁻¹ := by
+        rw [sub_eq_add_neg]
+      _ = (1 + (xi + (1 + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (1 + (-xi))]
+      _ = (1 + ((xi + 1) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [← add_assoc xi 1 (-xi)]
+      _ = (1 + ((1 + xi) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [add_comm xi 1]
+      _ = (1 + (1 + (xi + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (-xi)]
+      _ = (1 + (1 + 0)) * (1 + xi)⁻¹ := by
+        rw [add_neg_cancel]
+      _ = (1 + 1) * (1 + xi)⁻¹ := by rw [add_zero]
+      _ = 2 * (1 + xi)⁻¹ := by rw [one_add_one_eq_two]
   have hFinal : 2 * (1 + xi)⁻¹ ≠ 0 := by
     intro hZero
     have hInverseZero : (1 + xi)⁻¹ = 0 :=

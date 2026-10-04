@@ -1,6 +1,6 @@
 /-
 具体版が必要十分版の特殊化であることの導出。
-人手証明の計算三段、零因子の消去、逆元による矛盾をそのまま必要十分版へ渡す。
+人手証明の各行の計算、零因子の消去、逆元による矛盾をそのまま必要十分版へ渡す。
 -/
 import Ising2DLambda.FisherZero.KwDualTransformDomain
 import Ising2DLambda.NecSuf.FisherZero.KwDualTransformDomain
@@ -25,7 +25,20 @@ theorem kwDualTransform_domain_from_necSuf {xi : Qbar} (hDomain : 1 + xi ≠ 0) 
   · calc
       (1 + xi) * (1 + xi)⁻¹ + (1 - xi) * (1 + xi)⁻¹
           = ((1 + xi) + (1 - xi)) * (1 + xi)⁻¹ := by rw [← add_mul]
-      _ = 2 * (1 + xi)⁻¹ := by ring
+      _ = ((1 + xi) + (1 + (-xi))) * (1 + xi)⁻¹ := by
+        rw [sub_eq_add_neg]
+      _ = (1 + (xi + (1 + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (1 + (-xi))]
+      _ = (1 + ((xi + 1) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [← add_assoc xi 1 (-xi)]
+      _ = (1 + ((1 + xi) + (-xi))) * (1 + xi)⁻¹ := by
+        rw [add_comm xi 1]
+      _ = (1 + (1 + (xi + (-xi)))) * (1 + xi)⁻¹ := by
+        rw [add_assoc 1 xi (-xi)]
+      _ = (1 + (1 + 0)) * (1 + xi)⁻¹ := by
+        rw [add_neg_cancel]
+      _ = (1 + 1) * (1 + xi)⁻¹ := by rw [add_zero]
+      _ = 2 * (1 + xi)⁻¹ := by rw [one_add_one_eq_two]
   · intro hZero
     exact AlgebraicEigenvalue.qbarNoZeroDivisors hTwo hZero
   · intro hInverseZero
