@@ -24,3 +24,5 @@ sage sagemath/check/torus-homology-sector-partition/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-04 再実行: 一辺一・二・三の偶部分グラフ4・32・1,024個で通過。一意性の式変形を一行ずつ分けた本文と照合した。

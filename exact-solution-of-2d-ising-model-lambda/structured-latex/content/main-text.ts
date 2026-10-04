@@ -29248,10 +29248,14 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
                           " を満たす別の組 ", math(String.raw`(a',b')\in\{0,1\}\times\{0,1\}`), " を取る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-a'&=\varepsilon_{L,\mathrm{h}}(A)=a
-&&\bigl(\because\ A\in\mathcal{E}^{a',b'}_L,\ A\in\mathcal{E}^{a,b}_L\bigr),\\
-b'&=\varepsilon_{L,\mathrm{v}}(A)=b
-&&\bigl(\because\ A\in\mathcal{E}^{a',b'}_L,\ A\in\mathcal{E}^{a,b}_L\bigr).
+a'&=\varepsilon_{L,\mathrm{h}}(A)
+&&\bigl(\because\ \blkref{def_torus_homology_sector},\ A\in\mathcal{E}^{a',b'}_L\bigr)\\
+&=a
+&&\bigl(\because\ \blkref{def_torus_homology_sector},\ A\in\mathcal{E}^{a,b}_L\bigr),\\
+b'&=\varepsilon_{L,\mathrm{v}}(A)
+&&\bigl(\because\ \blkref{def_torus_homology_sector},\ A\in\mathcal{E}^{a',b'}_L\bigr)\\
+&=b
+&&\bigl(\because\ \blkref{def_torus_homology_sector},\ A\in\mathcal{E}^{a,b}_L\bigr).
 \end{aligned}`),
                         displayMath(String.raw`(a',b')=(a,b)\quad(\because\ \text{順序対の二成分がそれぞれ等しい})`),
                         paragraph(["したがって四つのセクターは偶部分グラフ全体を重なりなく覆う。全過程は有限集合と自然数の偶奇だけで閉じる。"]),
@@ -67174,11 +67178,11 @@ t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
                 ]),
                 displayMath(String.raw`P^{\mathrm{ret},c}_i
 :=A+\bigl(c-\lfloor i/n\rfloor\bigr)B_{\gamma}-G^{\gamma}_{i\bmod n}\in\mathbb Z^2
-\qquad(0\le i\le cn)`),
+\qquad(i\in\{0,\ldots,cn\})`),
                 paragraph([
                   "と書く。係数の減法は ", math(String.raw`\mathbb Z`), " で取る。符号反転階段の歩を ",
                   math(String.raw`v_s:=-(G^{\gamma}_{s+1}-G^{\gamma}_s)\in\mathbb Z^2`),
-                  "（", math(String.raw`0\le s<n`), "）とすると、任意の ",
+                  "（", math(String.raw`s\in\{0,\ldots,n-1\}`), "）とすると、任意の ",
                   math(String.raw`i\in\{0,\ldots,cn-1\}`), " について",
                 ]),
                 displayMath(String.raw`P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i=v_{i\bmod n}`),
