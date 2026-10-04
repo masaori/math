@@ -1,31 +1,23 @@
 # 対象ラベル: claim_dual_broken_edges_even
-# 帰属: 有限集合、NN、ZZ。浮動小数点を使わない。
-
+# 行別検算に続けて、双対像の偶性を全配位から直接確認する。
 import os
-
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
-
-
-def broken_edge_set(L, sigma):
-    return frozenset(e for e in range(1, 2 * L * L + 1)
-                     if sigma[endpoints(L, e)[0]] != sigma[endpoints(L, e)[1]])
-
-
-def dual_edge(L, edge):
-    if edge <= L * L:
-        index = edge - 1
-        i, j = index // L, index % L
-        return edge_number_vertical(L, i, j + 1)
-    index = edge - L * L - 1
-    i, j = index // L, index % L
-    return edge_number_horizontal(L, i + 1, j)
-
-
-def incidence_count(L, subset, vertex):
-    return sum(ZZ(1) for edge in subset for endpoint in endpoints(L, edge)
-               if endpoint == vertex)
-
+_dual_even_dir = 'sagemath/check/dual-broken-edges-even'
+for _check_name in (
+    "check_edge_sign.sage",
+    "check_incidence_definition.sage",
+    "check_endpoint_incidence.sage",
+    "check_dual_preimages.sage",
+    "check_boundary_order.sage",
+    "check_degree_substitution.sage",
+    "check_power_addition.sage",
+    "check_edge_products.sage",
+    "check_endpoint_products.sage",
+    "check_square_regrouping.sage",
+    "check_spin_squares.sage",
+    "check_unit_product.sage",
+    "check_even_count.sage",
+):
+    load(os.path.join(_dual_even_dir, _check_name))
 
 for L in (1, 2, 3):
     checked = 0

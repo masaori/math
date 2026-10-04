@@ -2,9 +2,9 @@
 「破れた辺の双対像は偶部分グラフである」の具体版。
 人手証明と同じく、一つの格子面の四辺に沿うスピン積で局所破れ数の偶数性を示す。
 -/
+import Mathlib
 import Ising2DLambda.FisherZero.DualEdgeMap
 import Ising2DLambda.FisherZero.EvenSubgraphSpinSum
-import Ising2DLambda.NecSuf.FisherZero.DualBrokenEdgesEven
 
 namespace Ising2DLambda.FisherZero
 
@@ -141,41 +141,56 @@ lemma brokenEdge_sign (L : ℕ) [NeZero L] (sigma : Config L) (e : Edge L) :
   · rw [if_pos h]
     exact (spinValue_mul_of_ne _ _ h).symm
 
-/-- `claim_dual_broken_edges_even` の具体版。 -/
-theorem dualBrokenEdgeSet_isEven (L : ℕ) [NeZero L] (sigma : Config L) :
-    IsEvenEdgeSubset L (dualBrokenEdgeSet L sigma) := by
-  intro v
-  rcases v with ⟨i, j⟩
+/-- 本文の準備式：破れ指示子を指数とする符号は辺の両端のスピン積。 -/
+lemma brokenEdge_pow_sign (L : ℕ) [NeZero L] (sigma : Config L) (e : Edge L) :
+    (-1 : ℤ) ^ (if e ∈ brokenEdgeSet L sigma then 1 else 0 : ℕ) =
+      (sigma (boundary0 L e)).1 * (sigma (boundary1 L e)).1 := by
+  classical
+  calc
+    _ = (if e ∈ brokenEdgeSet L sigma then (-1 : ℤ) else 1) := by
+      split_ifs <;> norm_num
+    _ = _ := brokenEdge_sign L sigma e
+
+/-- 本文の指数代入から四つの平方の積までを、整数上で順に計算する。 -/
+lemma dualBrokenEdgeSet_incidence_pow (L : ℕ) [NeZero L] (sigma : Config L)
+    (i j : ZMod L) :
+    (-1 : ℤ) ^ edgeSubsetIncidenceCount L (dualBrokenEdgeSet L sigma) (i, j) = 1 := by
+  classical
   let e₁ := edgeOfRow L true (i - 1) j
   let e₂ := edgeOfRow L false i (j - 1)
   let e₃ := edgeOfRow L true (i - 1) (j - 1)
   let e₄ := edgeOfRow L false (i - 1) (j - 1)
-  let q₁ : Bool := decide (e₁ ∈ brokenEdgeSet L sigma)
-  let q₂ : Bool := decide (e₂ ∈ brokenEdgeSet L sigma)
-  let q₃ : Bool := decide (e₃ ∈ brokenEdgeSet L sigma)
-  let q₄ : Bool := decide (e₄ ∈ brokenEdgeSet L sigma)
-  rw [dualBrokenEdgeSet_incidenceCount]
-  have hproduct :
-      (if q₁ then (-1 : ℤ) else 1) * (if q₂ then (-1 : ℤ) else 1) *
-        (if q₃ then (-1 : ℤ) else 1) * (if q₄ then (-1 : ℤ) else 1) = 1 := by
-    simp only [q₁, q₂, q₃, q₄, e₁, e₂, e₃, e₄]
-    simp only [decide_eq_true_eq]
-    rw [brokenEdge_sign, brokenEdge_sign, brokenEdge_sign, brokenEdge_sign]
-    simp only [edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal,
-      edgeOfRow_boundary1_vertical]
-    simp only [sub_add_cancel]
-    have h₀ := spinValue_square (sigma (i - 1, j - 1))
-    have h₁ := spinValue_square (sigma (i - 1, j))
-    have h₂ := spinValue_square (sigma (i, j))
-    have h₃ := spinValue_square (sigma (i, j - 1))
-    calc
-      _ = ((sigma (i - 1, j - 1)).1 * (sigma (i - 1, j - 1)).1) *
-          ((sigma (i - 1, j)).1 * (sigma (i - 1, j)).1) *
-          ((sigma (i, j)).1 * (sigma (i, j)).1) *
-          ((sigma (i, j - 1)).1 * (sigma (i, j - 1)).1) := by ring
-      _ = 1 := by rw [h₀, h₁, h₂, h₃]; norm_num
-  have heven := Ising2DLambda.NecSuf.FisherZero.four_signs_even_necSuf
-    q₁ q₂ q₃ q₄ hproduct
-  simpa [q₁, q₂, q₃, q₄, e₁, e₂, e₃, e₄] using heven
+  let q (e : Edge L) : ℕ := if e ∈ brokenEdgeSet L sigma then 1 else 0
+  let s₀ := (sigma (i - 1, j - 1)).1
+  let s₁ := (sigma (i - 1, j)).1
+  let s₂ := (sigma (i, j)).1
+  let s₃ := (sigma (i, j - 1)).1
+  calc
+    _ = (-1 : ℤ) ^ (q e₁ + q e₂ + q e₃ + q e₄) := by
+      rw [dualBrokenEdgeSet_incidenceCount]
+    _ = (-1 : ℤ) ^ q e₁ * (-1 : ℤ) ^ q e₂ *
+        (-1 : ℤ) ^ q e₃ * (-1 : ℤ) ^ q e₄ := by
+      rw [pow_add, pow_add, pow_add]
+    _ = ((sigma (boundary0 L e₁)).1 * (sigma (boundary1 L e₁)).1) *
+        ((sigma (boundary0 L e₂)).1 * (sigma (boundary1 L e₂)).1) *
+        ((sigma (boundary0 L e₃)).1 * (sigma (boundary1 L e₃)).1) *
+        ((sigma (boundary0 L e₄)).1 * (sigma (boundary1 L e₄)).1) := by
+      rw [brokenEdge_pow_sign, brokenEdge_pow_sign, brokenEdge_pow_sign,
+        brokenEdge_pow_sign]
+    _ = (s₁ * s₂) * (s₃ * s₂) * (s₀ * s₃) * (s₀ * s₁) := by
+      simp only [e₁, e₂, e₃, e₄, s₀, s₁, s₂, s₃, edgeOfRow_boundary0,
+        edgeOfRow_boundary1_horizontal, edgeOfRow_boundary1_vertical, sub_add_cancel]
+    _ = (s₀ * s₀) * (s₁ * s₁) * (s₂ * s₂) * (s₃ * s₃) := by ac_rfl
+    _ = 1 * 1 * 1 * 1 := by
+      rw [spinValue_square, spinValue_square, spinValue_square, spinValue_square]
+    _ = 1 := by norm_num
+
+/-- `claim_dual_broken_edges_even` の具体版。必要十分版を呼ばず本文を検証する。 -/
+theorem dualBrokenEdgeSet_isEven (L : ℕ) [NeZero L] (sigma : Config L) :
+    IsEvenEdgeSubset L (dualBrokenEdgeSet L sigma) := by
+  rintro ⟨i, j⟩
+  -- 本文末尾の自然数の偶奇：(-1)^d = 1 と d の偶数性は同値。
+  exact (neg_one_pow_eq_one_iff_even (by norm_num : (-1 : ℤ) ≠ 1)).mp
+    (dualBrokenEdgeSet_incidence_pow L sigma i j)
 
 end Ising2DLambda.FisherZero

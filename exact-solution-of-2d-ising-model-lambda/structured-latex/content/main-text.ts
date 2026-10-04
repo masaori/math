@@ -29510,7 +29510,7 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)
                       kind: "claim",
                       title: { text: "破れた辺の双対像は偶部分グラフである" },
                       labels: ["claim_dual_broken_edges_even"],
-                      habitat: "N",
+                      habitat: "Z",
                       verification: ["sagemath/check/dual-broken-edges-even"],
                       lean: [
                         "Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven",
@@ -29545,24 +29545,43 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)
 d_{A_\sigma}(i,j)
 &=\sum_{\substack{e\in A_\sigma,\ a\in\{0,1\}\\ \partial_a(e)=(i,j)}}1
 &&(\because\ \blkref{def_edge_subset_incidence_count})\\
-&=a_\sigma\bigl(n_{\mathrm h}(i,j)\bigr)
- +a_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
- +a_\sigma\bigl(n_{\mathrm v}(i,j)\bigr)
+&=\begin{aligned}[t]
+&a_\sigma\bigl(n_{\mathrm h}(i,j)\bigr)
+ +a_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)\\
+&\quad+a_\sigma\bigl(n_{\mathrm v}(i,j)\bigr)
  +a_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
-&&(\because\ \text{端点写像})\\
-&=q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
- +q_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
- +q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)
+\end{aligned}
+&&(\because\ \blkref{def_boundary_maps})\\
+&=\begin{aligned}[t]
+&q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
+ +q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)\\
+&\quad+q_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)
  +q_\sigma\bigl(n_{\mathrm h}(i-\bar1,j-\bar1)\bigr)
-&&(\because\ A_\sigma=\delta_L(\mathcal{B}_L(\sigma)),\
-  \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective})
+\end{aligned}
+&&\left(\because\ \begin{gathered}
+A_\sigma=\delta_L(\mathcal{B}_L(\sigma)),\\
+\blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective}
+\end{gathered}\right)\\
+&=\begin{aligned}[t]
+&q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j)\bigr)
+ +q_\sigma\bigl(n_{\mathrm h}(i,j-\bar1)\bigr)\\
+&\quad+q_\sigma\bigl(n_{\mathrm v}(i-\bar1,j-\bar1)\bigr)
+ +q_\sigma\bigl(n_{\mathrm h}(i-\bar1,j-\bar1)\bigr)
+\end{aligned}
+&&(\because\ \mathbb N\ \text{の加法の交換則})
 \end{aligned}`),
                         paragraph([
                           "最後の右辺に現れる四辺を、書かれた順に ", math(String.raw`e_1,e_2,e_3,e_4`),
-                          " と書く（辺が一致する場合も四つの位置は保つ）。これらは、頂点 ", math(String.raw`(i-\bar1,j-\bar1)`), "、",
+                          " と書く（辺が一致する場合も四つの位置は保つ）。この四辺を ", math(String.raw`e_4,e_1,e_2,e_3`), " の順に取り、後ろの二辺は逆向きにたどると、頂点 ", math(String.raw`(i-\bar1,j-\bar1)`), "、",
                           math(String.raw`(i-\bar1,j)`), "、", math(String.raw`(i,j)`), "、",
-                          math(String.raw`(i,j-\bar1)`), " をこの順に結ぶ一つの格子面の境界である。したがって",
+                          math(String.raw`(i,j-\bar1)`), " をこの順にたどって始点へ戻る一つの格子面の境界になる。四つのスピン値を",
                         ]),
+                        displayMath(String.raw`\begin{gathered}
+s_0:=\sigma(i-\bar1,j-\bar1),\qquad s_1:=\sigma(i-\bar1,j),\\
+s_2:=\sigma(i,j),\qquad s_3:=\sigma(i,j-\bar1),\qquad
+s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
+\end{gathered}`),
+                        paragraph(["と置く。すると"]),
                         displayMath(String.raw`\begin{aligned}
 (-1)^{d_{A_\sigma}(i,j)}
 &=(-1)^{q_\sigma(e_1)+q_\sigma(e_2)+q_\sigma(e_3)+q_\sigma(e_4)}
@@ -29572,11 +29591,14 @@ d_{A_\sigma}(i,j)
 &=\prod_{r=1}^{4}
   \sigma\bigl(\partial_0(e_r)\bigr)\sigma\bigl(\partial_1(e_r)\bigr)
 &&(\because\ (-1)^{q_\sigma(e)}\ \text{についての等式})\\
-&=\sigma(i-\bar1,j-\bar1)^2\sigma(i-\bar1,j)^2
-  \sigma(i,j)^2\sigma(i,j-\bar1)^2
-&&(\because\ \text{各頂点は境界の二つの端点として現れる})\\
+&=(s_1s_2)(s_3s_2)(s_0s_3)(s_0s_1)
+&&(\because\ \blkref{def_boundary_maps},\ s_0,s_1,s_2,s_3\ \text{の定め方})\\
+&=s_0^2s_1^2s_2^2s_3^2
+&&(\because\ \mathbb Z\ \text{の乗法の結合則と交換則})\\
+&=1\cdot1\cdot1\cdot1
+&&(\because\ s_0,s_1,s_2,s_3\in\{+1,-1\})\\
 &=1
-&&(\because\ \sigma(v)\in\{+1,-1\})
+&&(\because\ \mathbb Z\ \text{の一の乗法})
 \end{aligned}`),
                         paragraph([
                           "自然数 ", math(String.raw`n`), " について ", math(String.raw`(-1)^n=1`),
@@ -74959,7 +74981,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       " を作ると、これは零対角の反対称行列で、行列式は変わらない。反対称行列の行列式は Pfaffian の平方であり、",
                       "Pfaffian の完全マッチング展開では各辺が高々一度しか使われないので、基準マッチングとの対称差は台の辺が相異なる閉歩道の族になり、",
                       "その符号は本文にある回転位相・横断消去・接触点分割・頂点単純閉路の回転数の補題で決まる。各偶部分グラフの上で局所対合の符号付き和は 1 である。",
-                      "現在地: 未着手。置換展開と偶部分グラフ対を鍵ごとに直接比較する旧経路は、一辺二・三の有限データへの当てはめで止まり、2026-10-03 に打ち切った（経過は docs/tasks/auto-loop-archive.md）。",
+                      "現在地: 未完了。置換展開と偶部分グラフ対を鍵ごとに直接比較する旧経路は、一辺二・三の有限データへの当てはめで止まり、2026-10-03 に打ち切った（経過は docs/tasks/auto-loop-archive.md）。",
                       "完了条件: 任意の ", math(String.raw`L\ge1`), " と四つのスピン構造について ",
                       math(String.raw`D^{a,b}_L(x)=(Q^{a,b}_L(x))^2`), " を ", math(String.raw`\overline{\mathbb Q}[x]`),
                       " の等式として証明すること。扱う量は有限集合の数え上げと ",
