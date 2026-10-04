@@ -30908,6 +30908,8 @@ H_L
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{ac}_2(g)
+&=\mathrm{ac}_2\bigl(t^{2}+\widehat{-2}\bigr)
+&&\bigl(\because\ g\ \text{の定義}\bigr)\\
 &=\mathrm{ac}_2\bigl(t^{2}\bigr)+\mathrm{ac}_2\bigl(\widehat{-2}\bigr)
 &&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の和の係数}\bigr)\\
 &=1+\mathrm{ac}_2\bigl(\widehat{-2}\bigr)
@@ -30944,8 +30946,10 @@ s\cdot s
 &&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{の}\ \mathrm{aev}_{s}(t)=s\bigr)\\
 &=\mathrm{aev}_{s}(t\cdot t)
 &&\bigl(\because\ \blkref{def_qbar_poly_evaluation}\ \text{は積を保つ}\bigr)\\
+&=\mathrm{aev}_{s}\bigl(t^{1}\cdot t\bigr)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の一乗}\ t^{1}=t\bigr)\\
 &=\mathrm{aev}_{s}\bigl(t^{2}\bigr)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の約束}\ t^{2}=t^{1}\cdot t=t\cdot t\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\ \text{の冪の漸化式}\ t^{2}=t^{1}\cdot t\bigr)\\
 &=\mathrm{aev}_{s}\bigl(t^{2}\bigr)+0
 &&\bigl(\because\ \text{零元との和}\bigr)\\
 &=\mathrm{aev}_{s}\bigl(t^{2}\bigr)+\bigl((-2)+2\bigr)

@@ -1,29 +1,31 @@
-# SageMath Check: 二の平方根の存在
-
-## 対象
+# 二の平方根の存在
 
 **対象ラベル**: `claim_sqrt_two_exists`
 
-- 実行日: 2026-08-13
-- 結果: 通過（$t^2-2$ の 2 根の両方で証明の鎖の全段を厳密検査した）
-- 帰属: `QQbar`（代数的数）の厳密計算。浮動小数点は使わない。
+2026-10-04、SageMath 10.9 で行別17本・計29等式と既存の二根の検査がすべて PASS。
 
-## 何を確かめるか
+`QQbar[t]` の多項式 $g=t^2+(-2)$ に対する係数の五行と、二根それぞれに対する評価の十二行を厳密に検算する。浮動小数点と根の大小は使わない。
+多項式の根の存在と相異なる二根の検査は既存の `check.sage` に残す。検算と本文・Lean による証明は区別する。
 
-主張は「ある $s\in\overline{\mathbb{Q}}$ が存在して $s\cdot s=2$」。証明の組み立てを一行ずつ突き合わせる。
+| ファイル | 本文の操作 | 状態 | 対象数 |
+|---|---|---|---|
+| `check_coefficient_definition.sage` | 多項式の定義を展開 | PASS | 1多項式 |
+| `check_coefficient_addition.sage` | 和の係数を分ける | PASS | 1多項式 |
+| `check_coefficient_power.sage` | 不定元の冪の係数を代入 | PASS | 1多項式 |
+| `check_coefficient_constant.sage` | 定数多項式の二次係数を代入 | PASS | 1多項式 |
+| `check_coefficient_zero.sage` | 零元との和 | PASS | 1多項式 |
+| `check_evaluation_factors.sage` | 不定元の評価を二因子へ代入 | PASS | 2根 |
+| `check_evaluation_product.sage` | 評価が積を保つことを適用 | PASS | 2根 |
+| `check_evaluation_power_one.sage` | 不定元を一乗へ書き戻す | PASS | 2根 |
+| `check_evaluation_power_successor.sage` | 冪の漸化式を適用 | PASS | 2根 |
+| `check_evaluation_add_zero.sage` | 零を加える | PASS | 2根 |
+| `check_evaluation_inverse.sage` | 加法逆元の取消を逆向きに適用 | PASS | 2根 |
+| `check_evaluation_constant.sage` | 定数の値を評価へ書き戻す | PASS | 2根 |
+| `check_evaluation_association.sage` | 加法の結合則を適用 | PASS | 2根 |
+| `check_evaluation_addition.sage` | 評価が和を保つことを適用 | PASS | 2根 |
+| `check_evaluation_definition.sage` | 多項式の定義へ書き戻す | PASS | 2根 |
+| `check_evaluation_root.sage` | 根の評価が零であることを代入 | PASS | 2根 |
+| `check_evaluation_final_zero.sage` | 零元との和 | PASS | 2根 |
+| `check.sage` | 非零な二次係数と根の存在、二根での評価 | PASS | 1多項式・2根 |
 
-- 準備: $g:=t^2+\widehat{-2}\in\overline{\mathbb{Q}}[t]$ の係数 $\mathrm{ac}_2(g)=1+0=1\ne0$（次数 1 以上であること）
-- 根の存在: $\mathrm{aev}_s(g)=0$ を満たす $s$ が存在する（`QQbar` では根を厳密に列挙できる。根はちょうど 2 個）
-- 鎖: $s\cdot s=\mathrm{aev}_s(t)\cdot\mathrm{aev}_s(t)=\mathrm{aev}_s(t\cdot t)=\mathrm{aev}_s(t^2)
-  =\mathrm{aev}_s(t^2)+((-2)+2)=(\mathrm{aev}_s(t^2)+\mathrm{aev}_s(\widehat{-2}))+2
-  =\mathrm{aev}_s(g)+2=0+2=2$ の各段を、2 根それぞれで検査する
-
-おまけとして、2 根が互いに加法の逆元であり相異なることも観察する（後続セクション「自己双対方程式の因数分解と根の全体」の準備。主張そのものは存在だけを述べる）。
-
-`QQbar` の等号判定は厳密（根分離）であり、数値近似を経由しない。
-
-## 実行方法
-
-```sh
-sage check.sage
-```
+プロジェクト直下で `sage sagemath/check/sqrt-two-exists/check_lines.sage` を実行する。行別ファイルも同じディレクトリから単独で実行できる。

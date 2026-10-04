@@ -1,7 +1,7 @@
 /-
 「二の平方根の存在」の具体版。
 人手証明と同じく、二次係数が非零な多項式 `g = t^2 - 2` に代数閉性を適用し、
-取った根の等式を評価写像の十一段の鎖で `s * s = 2` へ移す。
+取った根の等式を評価写像の十二段の鎖で `s * s = 2` へ移す。
 住処は Qbar であり、R / C は現れない。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolyEvalIndeterminatePow
@@ -16,9 +16,9 @@ theorem sqrtTwo_exists : ∃ s : Qbar, s * s = 2 := by
   let g : QbarPoly := Polynomial.X ^ 2 + qbarConst (-2)
   have hCoeff : g.coeff 2 = 1 := by
     calc
-      g.coeff 2
-          = (Polynomial.X ^ 2).coeff 2 + (qbarConst (-2)).coeff 2 := by
-              simp only [g, Polynomial.coeff_add]
+      g.coeff 2 = (Polynomial.X ^ 2 + qbarConst (-2)).coeff 2 := rfl
+      _ = (Polynomial.X ^ 2).coeff 2 + (qbarConst (-2)).coeff 2 := by
+            rw [Polynomial.coeff_add]
       _ = 1 + (qbarConst (-2)).coeff 2 := by
             rw [qbarPolyIndeterminatePowerCoefficient]
             simp
@@ -42,7 +42,9 @@ theorem sqrtTwo_exists : ∃ s : Qbar, s * s = 2 := by
             simp [qbarPolyEval_eq_eval]
     _ = qbarPolyEval s (Polynomial.X * Polynomial.X) := by
           simp only [qbarPolyEval_eq_eval, Polynomial.eval_mul]
-    _ = qbarPolyEval s (Polynomial.X ^ 2) := by rw [pow_two]
+    _ = qbarPolyEval s (Polynomial.X ^ 1 * Polynomial.X) := by rw [pow_one]
+    _ = qbarPolyEval s (Polynomial.X ^ 2) := by
+          rw [pow_succ (Polynomial.X : QbarPoly) 1]
     _ = qbarPolyEval s (Polynomial.X ^ 2) + 0 := by rw [add_zero]
     _ = qbarPolyEval s (Polynomial.X ^ 2) + ((-2 : Qbar) + 2) := by norm_num
     _ = qbarPolyEval s (Polynomial.X ^ 2) +

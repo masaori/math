@@ -1,6 +1,6 @@
 /-
 具体版が必要十分版の特殊化であることの導出。
-人手証明の二次係数・代数閉性・評価写像の十一段をそのまま渡す。
+人手証明の二次係数・代数閉性・評価写像の十二段をそのまま渡す。
 -/
 import Ising2DLambda.FisherZero.SqrtTwoExists
 import Ising2DLambda.NecSuf.FisherZero.SqrtTwoExists
@@ -36,7 +36,10 @@ theorem sqrtTwo_exists_from_necSuf : ∃ s : Qbar, s * s = 2 := by
       (afterDefinition := fun s => qbarPolyEval s g + 2)
       (afterRoot := fun _ => (0 : Qbar) + 2)
       (target := (2 : Qbar))
-  · simp only [g, Polynomial.coeff_add]
+  · calc
+      g.coeff 2 = (Polynomial.X ^ 2 + qbarConst (-2)).coeff 2 := rfl
+      _ = (Polynomial.X ^ 2).coeff 2 + (qbarConst (-2)).coeff 2 := by
+        rw [Polynomial.coeff_add]
   · rw [qbarPolyIndeterminatePowerCoefficient]
     simp
   · simp [qbarConst]
@@ -58,7 +61,11 @@ theorem sqrtTwo_exists_from_necSuf : ∃ s : Qbar, s * s = 2 := by
   · intro s
     simp only [qbarPolyEval_eq_eval, Polynomial.eval_mul]
   · intro s
-    rw [pow_two]
+    calc
+      qbarPolyEval s (Polynomial.X * Polynomial.X) =
+          qbarPolyEval s (Polynomial.X ^ 1 * Polynomial.X) := by rw [pow_one]
+      _ = qbarPolyEval s (Polynomial.X ^ 2) := by
+        rw [pow_succ (Polynomial.X : QbarPoly) 1]
   · intro s
     rw [add_zero]
   · intro s
