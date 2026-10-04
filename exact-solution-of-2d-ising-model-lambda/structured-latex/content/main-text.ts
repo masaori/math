@@ -29887,18 +29887,22 @@ e\in\mathcal B_L(\sigma_A)
                   ],
                   proof: [
                     paragraph([
-                      "準備として、", ref("def_attainable_broken_edge_sets"), " の各 ",
+                      math(String.raw`L\in\mathbb N,\ L\ge1`), " を固定する。", ref("def_attainable_broken_edge_sets"), " の各 ",
                       math(String.raw`B\in\mathfrak{B}_L`), " をその ", ref("def_dual_edge_map"),
-                      " による像 ", math(String.raw`\delta_L(B)`), " へ送る写像を ",
-                      math(String.raw`\Delta_L:\mathfrak{B}_L\to\mathcal{E}^{0,0}_L,\ \Delta_L(B):=\delta_L(B)`),
-                      " と書く。この写像の終域が正しいこと、すなわち任意の ",
-                      math(String.raw`B\in\mathfrak{B}_L`), " について ",
-                      math(String.raw`\delta_L(B)\in\mathcal{E}^{0,0}_L`), " であることと、",
-                      math(String.raw`\Delta_L`), " の像が ", math(String.raw`\mathcal{E}^{0,0}_L`),
-                      " の全体であること（全射性）は、",
-                      ref("claim_attainable_dual_image_trivial_sector"),
-                      " の集合の等号がそのまま与える。次に ", math(String.raw`\Delta_L`),
-                      " の単射性を示す。", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
+                      " による像へ送る対応を ", math(String.raw`\Delta_L(B):=\delta_L(B)\subseteq E_L`),
+                      " と書く。部分集合に対する ", math(String.raw`\delta_L^{-1}`),
+                      " は、", ref("claim_dual_edge_map_bijective"), " の逆写像による像を表す。終域と全射性は",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\{\Delta_L(B)\mid B\in\mathfrak B_L\}
+&=\{\delta_L(B)\mid B\in\mathfrak B_L\}
+&&\bigl(\because\ \Delta_L\ \text{の定め方}\bigr)\\
+&=\mathcal E_L^{0,0}
+&&\bigl(\because\ \blkref{claim_attainable_dual_image_trivial_sector}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "から従う。したがって ", math(String.raw`\Delta_L:\mathfrak B_L\to\mathcal E_L^{0,0}`),
+                      " は全射である。単射性について、", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
                       math(String.raw`\delta_L(B)=\delta_L(B')`), " を満たすとする。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
@@ -29911,8 +29915,8 @@ B
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr).
 \end{aligned}`),
                     paragraph([
-                      "したがって ", math(String.raw`\Delta_L`), " は全単射である。また任意の ",
-                      math(String.raw`B\in\mathfrak{B}_L`), " について",
+                      "ゆえに ", math(String.raw`\Delta_L`), " は全単射である。任意の ",
+                      math(String.raw`B\in\mathfrak{B}_L`), " に対し、有限集合の元の個数は自然数であり、",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 |\Delta_L(B)|
@@ -29921,7 +29925,7 @@ B
 &=|B|
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{と、単射写像は有限集合の元の個数を保つこと}\bigr).
 \end{aligned}`),
-                    paragraph(["である。以上を組み合わせると"]),
+                    paragraph(["となる。分配多項式から始めて、この全単射によって有限和の添字を取り替えると、"]),
                     displayMath(String.raw`\begin{aligned}
 Z_L
 &=2D_L
@@ -67952,6 +67956,141 @@ t_{\circ}(\Pi(W))
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_closure_cyclic_sum",
+        labels: [],
+        title: { text: "一側閉包の循環隣接和の四部分反復表示" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_closure_cyclic_sum",
+            focus: {
+              id: "kac_ward_claim_one_sided_closure_cyclic_sum",
+              kind: "claim",
+              title: { text: "一側閉包の歩ベクトルの循環隣接和は固定四部分反復列の和である" },
+              labels: ["claim_one_sided_closure_cyclic_sum"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedClosure_cyclicTurning_identification",
+                "Ising2DLambda.NecSuf.KacWard.oneSidedClosure_cyclicAdjacentSum_necSuf",
+                "Ising2DLambda.KacWard.oneSidedClosure_cyclicTurning_identification_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-closure-cyclic-sum"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）の入力 ",
+                  math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m),k_0,t`),
+                  " と周期数 ", math(String.raw`c\in\mathbb N_{>0}`), " を取る。",
+                  math(String.raw`n:=n_{\parallel},\ b:=t n_{\perp}`), " と置くと ",
+                  math(String.raw`m,n,b\in\mathbb N_{>0}`), " である。固定した四つの歩ベクトル列 ",
+                  math(String.raw`u,v,r,x`), " は ", ref("claim_one_sided_closure_junction_pairs"),
+                  " の定義を使い、長さは順に ", math(String.raw`m,b,n,b`),
+                  "、値は ", math(String.raw`\mathbb Z^2`), "、範囲外の値は零ベクトルとする。",
+                  "連結と循環隣接和（", ref("claim_four_part_adjacent_sum"), "）を使って、",
+                ]),
+                displayMath(String.raw`\begin{gathered}
+U_j:=u(j\bmod m),\qquad R_j:=r(j\bmod n)\quad(j\in\mathbb N),\\
+z^{(c)}:=\bigl((U*_{cm}v)*_{cm+b}R\bigr)*_{cm+b+cn}x,\qquad
+N_c:=cm+b+cn+b,\\
+w^{(c)}_j:=F^{\gamma,k_0,t,c}_{j+1}-F^{\gamma,k_0,t,c}_j
+\quad(0\le j<N_c)
+\end{gathered}`),
+                paragraph([
+                  "と定める。", math(String.raw`w^{(c)}`), " も範囲外を零ベクトルで補う。このとき、",
+                ]),
+                displayMath(String.raw`C_{N_c}\bigl(w^{(c)}\bigr)=C_{N_c}\bigl(z^{(c)}\bigr)\quad\text{in }\mathbb Z`),
+                paragraph([
+                  "が成り立つ。", math(String.raw`z^{(c)}`), " は ",
+                  ref("claim_four_part_repeated_difference"),
+                  " で二つの反復列を延ばすときに使う列であり、固定列そのものには周期数が現れない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "一側閉包の四部分の歩ベクトル列を ", math(String.raw`A_c,V_c,R_c,X_c`),
+                  " と書く（", ref("claim_one_sided_closure_junction_pairs"), "）。",
+                  "各列の長さは順に ", math(String.raw`cm,b,cn,b`),
+                  " であり、範囲外は零ベクトルとする。三接合の点の一致は ",
+                  ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"),
+                  " で示した。各部分の歩を、任意の自然数添字 ",
+                  math(String.raw`j<cm`), "、", math(String.raw`i<b`), "、", math(String.raw`s<cn`),
+                  " に対して固定列へ戻すと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+A_c(j)&=u(j\bmod m)
+&&\bigl(\because\ \blkref{claim_one_sided_periodic_lift_repetition}\bigr),\\
+V_c(i)&=v(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr),\\
+R_c(s)&=r(s\bmod n)
+&&\bigl(\because\ \blkref{claim_one_sided_parallel_return_repetition}\bigr),\\
+X_c(i)&=x(i)
+&&\bigl(\because\ \blkref{claim_one_sided_transverse_steps_base_independent}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "となる。連結の写像 ", math(String.raw`\mathcal J_c`), " を、",
+                  math(String.raw`\mathbb N\to\mathbb Z^2`), " という写像の四つ組に対して",
+                ]),
+                displayMath(String.raw`\mathcal J_c(f,g,h,k):=\bigl((f*_{cm}g)*_{cm+b}h\bigr)*_{cm+b+cn}k`),
+                paragraph([
+                  "と定める。", math(String.raw`0\le j<N_c`),
+                  " のとき、四部分のどの添字を読むかとその範囲は、",
+                ]),
+                displayMath(String.raw`\begin{array}{c|c}
+\text{全体の添字の範囲}&\text{選ばれる部分の添字と範囲}\\\hline
+0\le j<cm&0\le j<cm\\
+cm\le j<cm+b&0\le j-cm<b\\
+cm+b\le j<cm+b+cn&0\le j-cm-b<cn\\
+cm+b+cn\le j<N_c&0\le j-cm-b-cn<b
+\end{array}`),
+                paragraph([
+                  "である（連結の定義は ", ref("claim_four_part_adjacent_sum"),
+                  "）。従って、先ほどの四つの等式は、各段で実際に選ばれる添字へ適用できる。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+w^{(c)}_j
+&=\mathcal J_c(A_c,V_c,R_c,X_c)_j
+&&\bigl(\because\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&=\mathcal J_c(U,V_c,R_c,X_c)_j
+&&\bigl(\because\ A_c(j)=U_j\ (j<cm)\bigr)\\
+&=\mathcal J_c(U,v,R_c,X_c)_j
+&&\bigl(\because\ V_c(i)=v(i)\ (i<b)\bigr)\\
+&=\mathcal J_c(U,v,R,X_c)_j
+&&\bigl(\because\ R_c(s)=R_s\ (s<cn)\bigr)\\
+&=\mathcal J_c(U,v,R,x)_j
+&&\bigl(\because\ X_c(i)=x(i)\ (i<b)\bigr)\\
+&=z^{(c)}_j
+&&\bigl(\because\ z^{(c)}\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`N_c>0`), " なので末歩と始歩が存在する。整数の重み ",
+                  math(String.raw`\vartheta:\mathbb Z^2\times\mathbb Z^2\to\mathbb Z`),
+                  " は ", ref("claim_four_part_adjacent_sum"), " の定義である。求める和は、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C_{N_c}\bigl(w^{(c)}\bigr)
+&=\sum_{j=0}^{N_c-2}\vartheta\bigl(w^{(c)}_j,w^{(c)}_{j+1}\bigr)
++\vartheta\bigl(w^{(c)}_{N_c-1},w^{(c)}_0\bigr)
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr)\\
+&=\sum_{j=0}^{N_c-2}\vartheta\bigl(z^{(c)}_j,z^{(c)}_{j+1}\bigr)
++\vartheta\bigl(w^{(c)}_{N_c-1},w^{(c)}_0\bigr)
+&&\bigl(\because\ w^{(c)}_j=z^{(c)}_j\text{ を内部の各隣接対へ代入}\bigr)\\
+&=\sum_{j=0}^{N_c-2}\vartheta\bigl(z^{(c)}_j,z^{(c)}_{j+1}\bigr)
++\vartheta\bigl(z^{(c)}_{N_c-1},z^{(c)}_0\bigr)
+&&\bigl(\because\ w^{(c)}_j=z^{(c)}_j\text{ を閉じ目へ代入}\bigr)\\
+&=C_{N_c}\bigl(z^{(c)}\bigr)
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\text{ の }C\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["比較したのは整数格子点の差であり、異なる位置の射影辺を同一視していない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -68028,6 +68167,8 @@ t_{\circ}(\Pi(W))
                   ref("claim_one_sided_closure_junction_pairs"), " による。",
                   "射影の循環総回転数と歩ベクトルの循環隣接和の同定は ",
                   ref("claim_plane_projection_cyclic_turning"), " による。",
+                  "実際の閉包の全歩列を固定四部分反復列へ移す同定は ",
+                  ref("claim_one_sided_closure_cyclic_sum"), " による。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
                   ref("claim_repeated_adjacent_sum_difference"), " を適用する。この有限和の合成を ",

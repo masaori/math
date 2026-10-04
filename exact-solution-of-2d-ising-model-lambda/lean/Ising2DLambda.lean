@@ -1146,3 +1146,6 @@ import Ising2DLambda.KacWard.FourPartRepeatedDifferenceFromNecSuf
 import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
 import Ising2DLambda.NecSuf.KacWard.PlaneProjectionCyclicTurning
 import Ising2DLambda.KacWard.PlaneProjectionCyclicTurningFromNecSuf
+import Ising2DLambda.KacWard.OneSidedClosureCyclicSum
+import Ising2DLambda.NecSuf.KacWard.OneSidedClosureCyclicSum
+import Ising2DLambda.KacWard.OneSidedClosureCyclicSumFromNecSuf
