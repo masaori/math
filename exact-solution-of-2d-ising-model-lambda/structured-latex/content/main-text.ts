@@ -67143,6 +67143,124 @@ t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_parallel_return_repetition",
+        labels: [],
+        title: { text: "一側閉包の平行帰路の反復" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_parallel_return_repetition",
+            focus: {
+              id: "kac_ward_claim_one_sided_parallel_return_repetition",
+              kind: "claim",
+              title: { text: "一側閉包の平行帰路の歩ベクトル列は符号反転階段の反復である" },
+              labels: ["claim_one_sided_parallel_return_repetition"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedParallelReturn_step",
+                "Ising2DLambda.NecSuf.KacWard.translatedNegativeRepeat_step_necSuf",
+                "Ising2DLambda.KacWard.oneSidedParallelReturn_step_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-parallel-return-repetition"],
+              statement: [
+                paragraph([
+                  "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）の記号を使い、",
+                  math(String.raw`n:=n_{\parallel}=L(|w_{\mathrm h}|+|w_{\mathrm v}|)\in\mathbb N`),
+                  "、", math(String.raw`n\ge1`), "、",
+                  math(String.raw`A:=S+t d_{\perp}\in\mathbb Z^2`), " と置く。周期数 ",
+                  math(String.raw`c\in\mathbb N`), "、", math(String.raw`c\ge1`),
+                  " に対し、第三部分の点列を局所添字で",
+                ]),
+                displayMath(String.raw`P^{\mathrm{ret},c}_i
+:=A+\bigl(c-\lfloor i/n\rfloor\bigr)B_{\gamma}-G^{\gamma}_{i\bmod n}\in\mathbb Z^2
+\qquad(0\le i\le cn)`),
+                paragraph([
+                  "と書く。係数の減法は ", math(String.raw`\mathbb Z`), " で取る。符号反転階段の歩を ",
+                  math(String.raw`v_s:=-(G^{\gamma}_{s+1}-G^{\gamma}_s)\in\mathbb Z^2`),
+                  "（", math(String.raw`0\le s<n`), "）とすると、任意の ",
+                  math(String.raw`i\in\{0,\ldots,cn-1\}`), " について",
+                ]),
+                displayMath(String.raw`P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i=v_{i\bmod n}`),
+                paragraph([
+                  "が成り立つ。従って歩ベクトル列は ",
+                  math(String.raw`(v_0,\ldots,v_{n-1})`), " を同じ順序で ",
+                  math(String.raw`c`), " 回連結した列である。比較しているのは整数ベクトルであり、平行移動した辺そのものではない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "整数除法により ", math(String.raw`a:=\lfloor i/n\rfloor\in\mathbb N`),
+                  "、", math(String.raw`b:=i\bmod n\in\{0,\ldots,n-1\}`),
+                  " と置くと ", math(String.raw`i=an+b`), " である。まず ",
+                  math(String.raw`b+1<n`), " の場合、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+i+1&=(an+b)+1&&\bigl(\because\ i=an+b\bigr)\\
+&=an+(b+1)&&\bigl(\because\ \mathbb Z\text{ の加法の結合則}\bigr),\\
+\lfloor(i+1)/n\rfloor&=a&&\bigl(\because\ 0\le b+1<n\text{ と整数除法の一意性}\bigr),\\
+(i+1)\bmod n&=b+1&&\bigl(\because\ 0\le b+1<n\text{ と整数除法の一意性}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
+&=\bigl[A+(c-a)B_{\gamma}-G^{\gamma}_{b+1}\bigr]
+ -\bigl[A+(c-a)B_{\gamma}-G^{\gamma}_b\bigr]
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と直前の商・余り}\bigr)\\
+&=-G^{\gamma}_{b+1}+G^{\gamma}_b
+&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr)\\
+&=-(G^{\gamma}_{b+1}-G^{\gamma}_b)
+&&\bigl(\because\ \mathbb Z^2\text{ の減法と加法逆元}\bigr)\\
+&=v_b&&\bigl(\because\ v_b\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "残る場合は ", math(String.raw`b+1=n`), " であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+i+1&=(an+b)+1&&\bigl(\because\ i=an+b\bigr)\\
+&=an+(b+1)&&\bigl(\because\ \mathbb Z\text{ の加法の結合則}\bigr)\\
+&=an+n&&\bigl(\because\ b+1=n\bigr)\\
+&=(a+1)n&&\bigl(\because\ \mathbb Z\text{ の分配則}\bigr),\\
+\lfloor(i+1)/n\rfloor&=a+1&&\bigl(\because\ n\ge1\text{ と整数除法の一意性}\bigr),\\
+(i+1)\bmod n&=0&&\bigl(\because\ n\ge1\text{ と整数除法の一意性}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+P^{\mathrm{ret},c}_{i+1}-P^{\mathrm{ret},c}_i
+&=\bigl[A+(c-(a+1))B_{\gamma}-G^{\gamma}_0\bigr]
+ -\bigl[A+(c-a)B_{\gamma}-G^{\gamma}_b\bigr]
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ と直前の商・余り}\bigr)\\
+&=\bigl[A+(c-(a+1))B_{\gamma}\bigr]
+ -\bigl[A+(c-a)B_{\gamma}-G^{\gamma}_b\bigr]
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ の始点 }G^{\gamma}_0=0\bigr)\\
+&=\bigl((c-(a+1))-(c-a)\bigr)B_{\gamma}+G^{\gamma}_b
+&&\bigl(\because\ \mathbb Z^2\text{ の加法と整数倍の分配則}\bigr)\\
+&=-B_{\gamma}+G^{\gamma}_b
+&&\bigl(\because\ \mathbb Z\text{ の係数の差は }-1\bigr)\\
+&=-(B_{\gamma}-G^{\gamma}_b)
+&&\bigl(\because\ \mathbb Z^2\text{ の減法と加法逆元}\bigr)\\
+&=-(G^{\gamma}_n-G^{\gamma}_b)
+&&\bigl(\because\ \blkref{def_winding_parallel_staircase}\text{ の終点 }G^{\gamma}_n=B_{\gamma}\bigr)\\
+&=-(G^{\gamma}_{b+1}-G^{\gamma}_b)
+&&\bigl(\because\ n=b+1\bigr)\\
+&=v_b&&\bigl(\because\ v_b\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これで全ての歩を同定した。", math(String.raw`i=an+b`), " を ",
+                  math(String.raw`0\le a<c`), "、", math(String.raw`0\le b<n`),
+                  " の順に並べると ", math(String.raw`0\le i<cn`),
+                  " を一度ずつ尽くす（整数除法の一意性）。従ってこの歩の等式がちょうど ",
+                  math(String.raw`c`), " 回の反復を与える。", math(String.raw`n=1`),
+                  " では全ての歩が後者の場合に属し、最後の歩も同じ計算で含まれる。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67204,6 +67322,8 @@ t_{\circ}(R_-)&=\vartheta(-a,-b)+\vartheta(v_{n-1},v_0)
                 displayMath(String.raw`\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)=0
 \qquad\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
                 paragraph([
+                  "平行帰路の歩ベクトル列が符号反転階段の反復になることは ",
+                  ref("claim_one_sided_parallel_return_repetition"), " による。",
                   "最後に ", math(String.raw`\Gamma_c`), " と ", math(String.raw`\Gamma_{c+1}`),
                   " の方向列を比較する。歩ベクトル列が四部分の連結に一致することは ",
                   ref("claim_one_sided_closure_step_sequence"), " による。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),

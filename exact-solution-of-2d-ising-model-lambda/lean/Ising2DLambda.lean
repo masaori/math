@@ -1126,3 +1126,7 @@ import Ising2DLambda.KacWard.RepeatedAdjacentSumFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.OneSidedClosureStepSequence
 import Ising2DLambda.KacWard.OneSidedClosureStepSequence
 import Ising2DLambda.KacWard.OneSidedClosureStepSequenceFromNecSuf
+
+import Ising2DLambda.KacWard.OneSidedParallelReturn
+import Ising2DLambda.NecSuf.KacWard.OneSidedParallelReturn
+import Ising2DLambda.KacWard.OneSidedParallelReturnFromNecSuf

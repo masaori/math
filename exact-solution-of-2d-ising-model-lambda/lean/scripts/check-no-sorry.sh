@@ -63,6 +63,11 @@ targets=(
   Ising2DLambda.KacWard.negatedParallelStaircase_latticeTurning_zero
   Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero
   Ising2DLambda.KacWard.negatedParallelStaircase_turning_zero_from_necSuf
+  Ising2DLambda.KacWard.windingParallelStaircase_zero
+  Ising2DLambda.KacWard.windingParallelStaircase_end
+  Ising2DLambda.KacWard.oneSidedParallelReturn_step
+  Ising2DLambda.NecSuf.KacWard.translatedNegativeRepeat_step_necSuf
+  Ising2DLambda.KacWard.oneSidedParallelReturn_step_from_necSuf
   Ising2DLambda.NecSuf.KacWard.oneSidedClosure_stepSequence_necSuf
   Ising2DLambda.KacWard.oneSidedClosure_stepSequence
   Ising2DLambda.KacWard.oneSidedClosure_stepSequence_from_necSuf
