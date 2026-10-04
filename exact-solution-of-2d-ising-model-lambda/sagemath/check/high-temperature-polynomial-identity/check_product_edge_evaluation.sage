@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['raw'] == row['by_spin']
 print('RESULT: PASS (product_edge_evaluation)')
-

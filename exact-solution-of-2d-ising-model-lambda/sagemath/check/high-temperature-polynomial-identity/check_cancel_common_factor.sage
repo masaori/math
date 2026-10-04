@@ -9,4 +9,3 @@ for case in _high_temperature_cases:
     assert R(2)**(case['L']*case['L']) != 0
     assert R.is_integral_domain()
 print('RESULT: PASS (cancel_common_factor)')
-

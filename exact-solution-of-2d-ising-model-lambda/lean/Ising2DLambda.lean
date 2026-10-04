@@ -1140,3 +1140,6 @@ import Ising2DLambda.KacWard.OneSidedTransverseStepsFromNecSuf
 import Ising2DLambda.KacWard.OneSidedClosureJunctions
 import Ising2DLambda.NecSuf.KacWard.OneSidedClosureJunctions
 import Ising2DLambda.KacWard.OneSidedClosureJunctionsFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.FourPartRepeatedDifference
+import Ising2DLambda.KacWard.FourPartRepeatedDifference
+import Ising2DLambda.KacWard.FourPartRepeatedDifferenceFromNecSuf

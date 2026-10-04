@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['power_sum'] == row['edge_card']
 print('RESULT: PASS (product_complement_card)')
-

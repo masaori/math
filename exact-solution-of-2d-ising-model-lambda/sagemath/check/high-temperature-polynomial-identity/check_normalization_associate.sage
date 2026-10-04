@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['nested_factor'] == case['sums']['associated_factor']
 print('RESULT: PASS (normalization_associate)')
-

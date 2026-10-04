@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['terms'].values():
         assert row['constants'] == row['complement_card']
 print('RESULT: PASS (subset_complement_card)')
-

@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['even_only'] == case['sums']['commuted']
 print('RESULT: PASS (sum_commute_factor)')
-

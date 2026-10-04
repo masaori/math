@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['terms'].values():
         assert row['edge_card'] == row['associated']
 print('RESULT: PASS (subset_associate)')
-

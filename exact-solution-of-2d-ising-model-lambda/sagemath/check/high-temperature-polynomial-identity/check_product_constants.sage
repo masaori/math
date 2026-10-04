@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['split'] == row['constants']
 print('RESULT: PASS (product_constants)')
-

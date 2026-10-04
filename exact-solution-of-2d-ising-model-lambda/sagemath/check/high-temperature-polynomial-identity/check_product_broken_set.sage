@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['by_spin'] == row['by_broken']
 print('RESULT: PASS (product_broken_set)')
-

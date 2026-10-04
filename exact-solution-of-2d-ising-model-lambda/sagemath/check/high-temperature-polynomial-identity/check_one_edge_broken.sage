@@ -9,4 +9,3 @@ for case in _high_temperature_cases:
         if not row['same']:
             assert row['weight'] == 2*x
 print('RESULT: PASS (one_edge_broken)')
-

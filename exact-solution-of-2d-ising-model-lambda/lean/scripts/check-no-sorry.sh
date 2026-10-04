@@ -1837,6 +1837,9 @@ targets=(
   Ising2DLambda.KacWard.latticeInternalTurning_repeat_succ
   Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference
   Ising2DLambda.KacWard.latticeInternalTurning_repeat_difference_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.fourPartRepeated_cyclicAdjacentSum_difference_necSuf
+  Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference
+  Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

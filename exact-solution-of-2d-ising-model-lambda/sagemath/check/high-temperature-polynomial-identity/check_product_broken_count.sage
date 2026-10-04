@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['lattice_card'] == row['broken_count']
 print('RESULT: PASS (product_broken_count)')
-

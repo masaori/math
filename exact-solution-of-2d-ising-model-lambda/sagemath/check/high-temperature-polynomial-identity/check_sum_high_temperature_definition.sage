@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['even_factor_out'] == case['sums']['high_temperature']
 print('RESULT: PASS (sum_high_temperature_definition)')
-

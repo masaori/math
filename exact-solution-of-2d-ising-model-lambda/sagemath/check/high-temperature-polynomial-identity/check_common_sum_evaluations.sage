@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['partition'] == case['sums']['high_temperature']
 print('RESULT: PASS (common_sum_evaluations)')
-

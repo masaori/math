@@ -67675,6 +67675,137 @@ J_c
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_four_part_repeated_difference",
+        labels: [],
+        title: { text: "四部分列の反復二列を延ばしたときの差" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_four_part_repeated_difference",
+            focus: {
+              id: "kac_ward_claim_four_part_repeated_difference",
+              kind: "claim",
+              title: { text: "四部分列の反復二列を一回延ばした循環隣接和の差" },
+              labels: ["claim_four_part_repeated_difference"],
+              habitat: "Z",
+              verification: ["sagemath/check/four-part-repeated-difference"],
+              lean: [
+                "Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference",
+                "Ising2DLambda.NecSuf.KacWard.fourPartRepeated_cyclicAdjacentSum_difference_necSuf",
+                "Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`m,b,n,d,c\in\mathbb N`), " はすべて正とする。長さがそれぞれ ",
+                  math(String.raw`m,b,n,d`), " の整数ベクトルの有限列 ",
+                  math(String.raw`u,v,r,x`), " を取り、添字を零から始め、範囲外を零ベクトルで補う。",
+                  "連結 ", math(String.raw`*`), "、整数の重み ", math(String.raw`\vartheta`),
+                  "、内部和 ", math(String.raw`I`), "、循環隣接和 ", math(String.raw`C`),
+                  " は ", ref("claim_four_part_adjacent_sum"), " の記号を用いる。反復列と四部分の連結を",
+                ]),
+                displayMath(String.raw`\begin{gathered}
+U_j:=u_{j\bmod m},\qquad R_j:=r_{j\bmod n}\quad(j\in\mathbb N),\\
+z^{(c)}:=\bigl((U*_{cm}v)*_{cm+b}R\bigr)*_{cm+b+cn}x,\qquad
+N_c:=cm+b+cn+d
+\end{gathered}`),
+                paragraph([
+                  "と置く。使用するのは ", math(String.raw`z^{(c)}`), " の先頭 ",
+                  math(String.raw`N_c`), " 項だけである。このとき",
+                ]),
+                displayMath(String.raw`C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)
+-C_{N_c}\bigl(z^{(c)}\bigr)=C_m(u)+C_n(r)\quad\text{in }\mathbb Z`),
+                paragraph([
+                  "である。固定した二列 ", math(String.raw`v,x`),
+                  " の内部と四接合の寄与は、差を取るとすべて消える。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "任意の ", math(String.raw`c\ge1`), " について、反復列の端点は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+U_0&=u_0&&\bigl(\because\ 0\bmod m=0\bigr),\\
+U_{cm-1}&=u_{m-1}
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ の反復列の末項計算}\bigr),\\
+R_0&=r_0&&\bigl(\because\ 0\bmod n=0\bigr),\\
+R_{cn-1}&=r_{n-1}
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ の反復列の末項計算}\bigr).
+\end{aligned}`),
+                paragraph(["となる。四接合の整数の和と、その固定値を"]),
+                displayMath(String.raw`\begin{aligned}
+J_c:={}&\vartheta(U_{cm-1},v_0)+\vartheta(v_{b-1},R_0)
++\vartheta(R_{cn-1},x_0)+\vartheta(x_{d-1},U_0),\\
+J:={}&\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},r_0)
++\vartheta(r_{n-1},x_0)+\vartheta(x_{d-1},u_0)
+\end{aligned}`),
+                paragraph(["と定め、端点を一つずつ代入する。"]),
+                displayMath(String.raw`\begin{aligned}
+J_c
+&=\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},R_0)
++\vartheta(R_{cn-1},x_0)+\vartheta(x_{d-1},U_0)
+&&\bigl(\because\ U_{cm-1}=u_{m-1}\bigr)\\
+&=\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},r_0)
++\vartheta(R_{cn-1},x_0)+\vartheta(x_{d-1},U_0)
+&&\bigl(\because\ R_0=r_0\bigr)\\
+&=\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},r_0)
++\vartheta(r_{n-1},x_0)+\vartheta(x_{d-1},U_0)
+&&\bigl(\because\ R_{cn-1}=r_{n-1}\bigr)\\
+&=\vartheta(u_{m-1},v_0)+\vartheta(v_{b-1},r_0)
++\vartheta(r_{n-1},x_0)+\vartheta(x_{d-1},u_0)
+&&\bigl(\because\ U_0=u_0\bigr)\\
+&=J&&\bigl(\because\ J\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "四つの長さ ", math(String.raw`cm,b,cn,d`),
+                  " が正なので、既証明の四部分の分割が適用できる。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C_{N_c}\bigl(z^{(c)}\bigr)
+&=I_{cm}(U)+\vartheta(U_{cm-1},v_0)+I_b(v)+\vartheta(v_{b-1},R_0)\\
+&\quad+I_{cn}(R)+\vartheta(R_{cn-1},x_0)+I_d(x)+\vartheta(x_{d-1},U_0)
+&&\bigl(\because\ \blkref{claim_four_part_adjacent_sum}\bigr)\\
+&=I_{cm}(U)+I_b(v)+I_{cn}(R)+I_d(x)\\
+&\quad+\bigl(\vartheta(U_{cm-1},v_0)+\vartheta(v_{b-1},R_0)
++\vartheta(R_{cn-1},x_0)+\vartheta(x_{d-1},U_0)\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則}\bigr)\\
+&=I_{cm}(U)+I_b(v)+I_{cn}(R)+I_d(x)+J_c
+&&\bigl(\because\ J_c\text{ の定義}\bigr)\\
+&=I_{cm}(U)+I_b(v)+I_{cn}(R)+I_d(x)+J
+&&\bigl(\because\ J_c=J\bigr).
+\end{aligned}`),
+                paragraph([
+                  "整数 ", math(String.raw`A_c:=I_{cm}(U)`), "、",
+                  math(String.raw`B_c:=I_{cn}(R)`), "、",
+                  math(String.raw`K:=I_b(v)+I_d(x)+J`),
+                  " を置く。直前の表示は加法の結合則と交換則により ",
+                  math(String.raw`C_{N_c}(z^{(c)})=A_c+B_c+K`),
+                  " となる。同じ表示を ", math(String.raw`c+1`), " にも用いて、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
+&=(A_{c+1}+B_{c+1}+K)-C_{N_c}\bigl(z^{(c)}\bigr)
+&&\bigl(\because\ c+1\text{ に対する直前の表示}\bigr)\\
+&=(A_{c+1}+B_{c+1}+K)-(A_c+B_c+K)
+&&\bigl(\because\ c\text{ に対する直前の表示}\bigr)\\
+&=(A_{c+1}-A_c)+(B_{c+1}-B_c)
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則と逆元の法則}\bigr)\\
+&=C_m(u)+(B_{c+1}-B_c)
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ を }u\text{ へ適用}\bigr)\\
+&=C_m(u)+C_n(r)
+&&\bigl(\because\ \blkref{claim_repeated_adjacent_sum_difference}\text{ を }r\text{ へ適用}\bigr).
+\end{aligned}`),
+                paragraph(["全計算は有限個の整数ベクトルと整数の有限和で閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67751,13 +67882,14 @@ J_c
                   ref("claim_one_sided_closure_junction_pairs"), " による。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
-                  ref("claim_repeated_adjacent_sum_difference"), " を適用し、共通の接合項を消すと、",
+                  ref("claim_repeated_adjacent_sum_difference"), " を適用する。この有限和の合成を ",
+                  ref("claim_four_part_repeated_difference"), " により行うと、",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
 &=\left(\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)\right)
 +\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_adjacent_sum},\ \blkref{claim_repeated_adjacent_sum_difference}\bigr)\\
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_repeated_difference}\bigr)\\
 &=t_{\circ}(\gamma)+0
 &&\bigl(\because\ \text{上で示した }U\text{ と }R_-\text{ の二等式}\bigr)\\
 &=t_{\circ}(\gamma)

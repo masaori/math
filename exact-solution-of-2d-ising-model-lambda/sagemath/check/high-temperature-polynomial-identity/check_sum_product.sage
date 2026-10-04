@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['common'] == case['sums']['product_evaluated']
 print('RESULT: PASS (sum_product)')
-

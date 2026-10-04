@@ -9,4 +9,3 @@ for case in _high_temperature_cases:
     for A in case['subsets']:
         assert case['spins'][A] == (ZZ(2)**(case['L']*case['L']) if case['even'][A] else ZZ(0))
 print('RESULT: PASS (sum_spin_evaluation)')
-

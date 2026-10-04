@@ -9,4 +9,3 @@ for case in _high_temperature_cases:
         assert row['raw'] == sum((case['terms'][i,A]['raw'] for A in case['subsets']), R.zero())
     assert case['sums']['common'] == case['sums']['expanded']
 print('RESULT: PASS (subset_expansion)')
-

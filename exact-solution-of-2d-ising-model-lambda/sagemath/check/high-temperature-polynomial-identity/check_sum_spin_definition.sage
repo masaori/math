@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['spin_factor'] == case['sums']['spin_definition']
 print('RESULT: PASS (sum_spin_definition)')
-

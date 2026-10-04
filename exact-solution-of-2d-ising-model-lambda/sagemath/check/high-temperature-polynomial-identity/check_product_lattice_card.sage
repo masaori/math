@@ -8,4 +8,3 @@ for case in _high_temperature_cases:
     for row in case['products']:
         assert row['edge_card'] == row['lattice_card']
 print('RESULT: PASS (product_lattice_card)')
-

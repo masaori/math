@@ -120,4 +120,3 @@ def _high_temperature_case(L):
 
 if '_high_temperature_cases' not in globals():
     _high_temperature_cases = [_high_temperature_case(L) for L in (1, 2)]
-

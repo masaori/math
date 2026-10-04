@@ -9,4 +9,3 @@ for case in _high_temperature_cases:
         if row['same']:
             assert row['weight'] == R(2)
 print('RESULT: PASS (one_edge_intact)')
-

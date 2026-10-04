@@ -7,4 +7,3 @@ if '_high_temperature_cases' not in globals():
 for case in _high_temperature_cases:
     assert case['sums']['power_added'] == case['sums']['partition']
 print('RESULT: PASS (normalization_exponent)')
-
