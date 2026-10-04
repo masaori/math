@@ -251,6 +251,7 @@ export const ALL_LABELS = [
   "claim_phase_reversing_standard_smoothing_involution",
   "claim_plane_lift_coordinates",
   "claim_plane_lift_endpoint_winding",
+  "claim_plane_projection_cyclic_turning",
   "claim_plane_simple_cycle_projection_closed_nonbacktracking",
   "claim_plane_simple_polygon_cyclic_turning",
   "claim_positive_rational_in_positive_cone",

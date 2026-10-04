@@ -1841,6 +1841,13 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.fourPartRepeated_cyclicAdjacentSum_difference_necSuf
   Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference
   Ising2DLambda.KacWard.fourPartRepeated_cyclicTurning_difference_from_necSuf
+  Ising2DLambda.KacWard.directionPairTurning_eq_turnValue
+  Ising2DLambda.KacWard.projectedUnitStep_direction
+  Ising2DLambda.KacWard.unitStepDirection_turning
+  Ising2DLambda.KacWard.projectedUnitStep_turning
+  Ising2DLambda.KacWard.planeProjection_cyclicTurning
+  Ising2DLambda.NecSuf.KacWard.cyclicAdjacentSum_transport_necSuf
+  Ising2DLambda.KacWard.planeProjection_cyclicTurning_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

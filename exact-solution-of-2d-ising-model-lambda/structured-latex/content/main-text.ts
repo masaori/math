@@ -67827,6 +67827,120 @@ C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_plane_projection_cyclic_turning",
+        labels: [],
+        title: { text: "射影の循環総回転数と歩ベクトルの隣接和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_plane_projection_cyclic_turning",
+            focus: {
+              id: "kac_ward_claim_plane_projection_cyclic_turning",
+              kind: "claim",
+              title: { text: "平面単位路の射影回転数と歩ベクトルの循環隣接和は一致する" },
+              labels: ["claim_plane_projection_cyclic_turning"],
+              habitat: "Z",
+              verification: ["sagemath/check/plane-projection-cyclic-turning"],
+              lean: [
+                "Ising2DLambda.KacWard.planeProjection_cyclicTurning",
+                "Ising2DLambda.NecSuf.KacWard.cyclicAdjacentSum_transport_necSuf",
+                "Ising2DLambda.KacWard.planeProjection_cyclicTurning_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`n\in\mathbb N`), "、", math(String.raw`n\ge1`),
+                  " と、平面単位路 ", math(String.raw`W=(W_0,\ldots,W_n)`),
+                  "（", ref("def_plane_unit_path_torus_projection"), "）を取る。その射影 ",
+                  math(String.raw`\Pi(W)=(p_0(W),\ldots,p_{n-1}(W))`),
+                  " が閉じた非後退辺列（", ref("def_closed_nonbacktracking_walk"),
+                  "）であると仮定する。", math(String.raw`W_n=W_0`),
+                  " は仮定せず、整数格子上で端点が異なる周期路も含む。歩ベクトルを ",
+                  math(String.raw`u_j:=W_{j+1}-W_j\in\mathbb Z\times\mathbb Z\quad(0\le j<n)`),
+                  " とする。整数の重み ", math(String.raw`\vartheta`),
+                  " と循環隣接和 ", math(String.raw`C_n`), " を ",
+                  ref("claim_four_part_repeated_difference"), " のとおり用いると、",
+                ]),
+                displayMath(String.raw`t_{\circ}(\Pi(W))
+=C_n(u)
+=\sum_{j=0}^{n-2}\vartheta(u_j,u_{j+1})+\vartheta(u_{n-1},u_0)`),
+                paragraph([
+                  "が成り立つ。", math(String.raw`n=1`),
+                  " の内部和は空和の零とする。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "単位歩の集合を ",
+                  math(String.raw`D:=\{(0,1),(1,0),(0,-1),(-1,0)\}\subset\mathbb Z\times\mathbb Z`),
+                  " と置き、", math(String.raw`d:D\to\mathbb Z/4\mathbb Z`),
+                  " をこの順に ", math(String.raw`\bar0,\bar1,\bar2,\bar3`),
+                  " を返す写像とする。任意の ", math(String.raw`j\in\{0,\ldots,n-1\}`),
+                  " で、射影辺の方向を四場合の表で読むと、",
+                ]),
+                displayMath(String.raw`\begin{array}{c|c|c}
+u_j &p_j(W)&\operatorname{dir}(p_j(W))\\ \hline
+(0,1)&(n_{\mathrm h}(\operatorname{vt}(W_j)),0)&\bar0\\
+(1,0)&(n_{\mathrm v}(\operatorname{vt}(W_j)),0)&\bar1\\
+(0,-1)&(n_{\mathrm h}(\operatorname{vt}(W_{j+1})),1)&\bar2\\
+(-1,0)&(n_{\mathrm v}(\operatorname{vt}(W_{j+1})),1)&\bar3
+\end{array}`),
+                paragraph([
+                  "となる。辺の列は ", ref("def_plane_unit_path_torus_projection"),
+                  "、方向の列は ", ref("def_oriented_edge_direction"), " の各場合である。従って",
+                ]),
+                displayMath(String.raw`\operatorname{dir}(p_j(W))=d(u_j)
+\qquad\bigl(\because\ \text{直前の方向の四場合と }d\text{ の定義}\bigr).`),
+                paragraph([
+                  "特に辺長 ", math(String.raw`L=1,2`),
+                  " でも、端点の差から方向を推測せず、辺の種類と向きから方向を読む。",
+                  "循環して隣接する添字対 ", math(String.raw`(j,k)`),
+                  " は ", math(String.raw`(j,j+1)\ (0\le j<n-1)`), " または ",
+                  math(String.raw`(n-1,0)`), " である。各対は ",
+                  ref("def_closed_nonbacktracking_walk"), " により連続する非後退辺対である。",
+                  "一歩の回転数の表（", ref("def_step_turning"),
+                  "）へ直前の方向を代入し、整数の重み ",
+                  math(String.raw`\vartheta(u,v)=u_2v_1-u_1v_2`), " を評価すると、",
+                ]),
+                displayMath(String.raw`\begin{array}{c|rrrr}
+u_j\mathbin{\backslash}u_k
+ &(0,1)&(1,0)&(0,-1)&(-1,0)\\ \hline
+u_j=(0,1)&0&1&\text{除外}&-1\\
+u_j=(1,0)&-1&0&1&\text{除外}\\
+u_j=(0,-1)&\text{除外}&-1&0&1\\
+u_j=(-1,0)&1&\text{除外}&-1&0
+\end{array}`),
+                paragraph([
+                  "を得る。「除外」は方向差が ", math(String.raw`\bar2`),
+                  " となる場合で、", ref("def_step_turning"),
+                  " の非後退の仮定により生じない。表の残りの十二場合で ",
+                  math(String.raw`\tau(p_j(W),p_k(W))=\vartheta(u_j,u_k)`),
+                  " が得られたので、内部和と閉じ目へ順に代入する。",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+t_{\circ}(\Pi(W))
+&=t(\Pi(W))+\tau(p_{n-1}(W),p_0(W))
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)\\
+&=\sum_{j=0}^{n-2}\tau(p_j(W),p_{j+1}(W))+\tau(p_{n-1}(W),p_0(W))
+&&\bigl(\because\ \blkref{def_total_turning}\text{、零始まりの添字}\bigr)\\
+&=\sum_{j=0}^{n-2}\vartheta(u_j,u_{j+1})+\tau(p_{n-1}(W),p_0(W))
+&&\bigl(\because\ \text{直前の十二場合の等式を内部の各項へ代入}\bigr)\\
+&=\sum_{j=0}^{n-2}\vartheta(u_j,u_{j+1})+\vartheta(u_{n-1},u_0)
+&&\bigl(\because\ \text{直前の十二場合の等式を閉じ目へ代入}\bigr)\\
+&=C_n(u)
+&&\bigl(\because\ \blkref{claim_four_part_repeated_difference}\text{ の }C_n\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["使うのは有限集合、整数の四則と有限和だけである。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67901,6 +68015,8 @@ C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
                   ref("claim_one_sided_transverse_steps_base_independent"), " による。",
                   "四部分の接合部の先頭・末尾方向が変わらないことは ",
                   ref("claim_one_sided_closure_junction_pairs"), " による。",
+                  "射影の循環総回転数と歩ベクトルの循環隣接和の同定は ",
+                  ref("claim_plane_projection_cyclic_turning"), " による。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
                   ref("claim_repeated_adjacent_sum_difference"), " を適用する。この有限和の合成を ",

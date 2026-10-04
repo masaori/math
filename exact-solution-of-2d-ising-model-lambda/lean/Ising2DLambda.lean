@@ -1143,3 +1143,6 @@ import Ising2DLambda.KacWard.OneSidedClosureJunctionsFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.FourPartRepeatedDifference
 import Ising2DLambda.KacWard.FourPartRepeatedDifference
 import Ising2DLambda.KacWard.FourPartRepeatedDifferenceFromNecSuf
+import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
+import Ising2DLambda.NecSuf.KacWard.PlaneProjectionCyclicTurning
+import Ising2DLambda.KacWard.PlaneProjectionCyclicTurningFromNecSuf
