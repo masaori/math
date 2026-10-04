@@ -1862,6 +1862,20 @@ targets=(
   Ising2DLambda.KacWard.periodicPlaneLift_step_edgeDisplacement
   Ising2DLambda.KacWard.periodicPlaneLift_periodTurning
   Ising2DLambda.KacWard.periodicPlaneLift_periodTurning_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.cyclicAdjacentSum_congr_range
+  Ising2DLambda.NecSuf.KacWard.oneSidedClosure_periodDifferenceTurning_necSuf
+  Ising2DLambda.KacWard.oneSidedClosurePoint_unit_steps
+  Ising2DLambda.KacWard.oneSidedClosureProjectedTurning_eq_lattice
+  Ising2DLambda.KacWard.cyclicTurning_extend_finite_word
+  Ising2DLambda.KacWard.negatedParallelStaircase_projectedTurning_zero
+  Ising2DLambda.KacWard.negatedParallelStaircase_turning_via_projection
+  Ising2DLambda.KacWard.oneSidedClosure_periodDifferenceTurning
+  Ising2DLambda.KacWard.oneSidedClosure_periodDifferenceTurning_from_necSuf
+  Ising2DLambda.KacWard.negatedParallelStaircaseStep_transverse_end_signs
+  Ising2DLambda.KacWard.oneSidedClosure_fixedWord_nonbacktracking
+  Ising2DLambda.KacWard.oneSidedClosure_period_boundary_signs
+  Ising2DLambda.KacWard.oneSidedClosure_fixedWord_nonbacktracking_of_maximum
+  Ising2DLambda.KacWard.oneSidedClosurePoint_nonbacktracking
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

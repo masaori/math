@@ -68221,7 +68221,10 @@ C_m\bigl(u^{(k_0)}\bigr)
               title: { text: "一側閉包の周期数を一つ増やすと元の閉歩道の循環総回転数だけ増える" },
               labels: ["claim_one_sided_closure_period_difference_turning"],
               habitat: "Z",
-              verification: ["sagemath/check/one-sided-periodic-lift-closure"],
+              verification: [
+                "sagemath/check/one-sided-periodic-lift-closure",
+                "sagemath/check/one-sided-closure-period-difference-turning",
+              ],
               statement: [
                 paragraph([
                   "一側閉包（", ref("def_one_sided_periodic_lift_closure"), "）で閉歩道 ",
@@ -68229,7 +68232,9 @@ C_m\bigl(u^{(k_0)}\bigr)
                   math(String.raw`k_0\in\mathbb Z`), "、反復回数 ",
                   math(String.raw`t\in\mathbb N`), "、", math(String.raw`t\ge1`),
                   " を固定する。周期数 ", math(String.raw`c\in\mathbb N`), "、",
-                  math(String.raw`c\ge1`), " の一側閉包を ",
+                  math(String.raw`c\ge1`), " に対し全歩数を ",
+                  math(String.raw`N_c:=cm+2t n_{\perp}+c n_{\parallel}\in\mathbb N_{>0}`),
+                  " とし、一側閉包を ",
                   math(String.raw`W_c:=\bigl(F^{\gamma,k_0,t,c}_0,\ldots,F^{\gamma,k_0,t,c}_{N_c}\bigr)`),
                   "、そのトーラス射影（", ref("def_plane_unit_path_torus_projection"), "）を ",
                   math(String.raw`\Gamma_c:=\Pi(W_c)`), " と書く。このとき循環総回転数（",
@@ -68244,66 +68249,166 @@ C_m\bigl(u^{(k_0)}\bigr)
               ],
               proof: [
                 paragraph([
-                  "一周期の歩の循環隣接和を元の閉歩道へ戻す同定は ",
-                  ref("claim_periodic_plane_lift_period_turning"), " で与えた。",
-                  "周期延長した持ち上げの一周期分の射影辺列を ",
-                  math(String.raw`U=(\vec u_1,\ldots,\vec u_m)`), " と書く。周期延長の定義（",
-                  ref("def_periodic_plane_lift"), "）と歩ベクトル列の反復（",
-                  ref("claim_one_sided_periodic_lift_repetition"), "）により、周期持ち上げ部分の歩ベクトル列は ",
-                  math(String.raw`U`), " の歩ベクトル列を ", math(String.raw`c`), " 回連結した列である。",
-                  math(String.raw`U`), " は ", math(String.raw`\gamma`),
-                  " の始点を ", math(String.raw`k_0`), " だけ巡回移動した列である。",
-                  "添字を零から取り、", math(String.raw`I_m=\{0,\ldots,m-1\}`), " 上の整数の表 ",
-                  math(String.raw`a(i,j)`), " を、辺対 ", math(String.raw`(\vec e_{i+1},\vec e_{j+1})`),
-                  " が連続し非後退なら ", math(String.raw`\tau(\vec e_{i+1},\vec e_{j+1})`),
-                  "、それ以外なら零と定める。閉じた非後退辺列の循環する隣接辺対では前者が適用されるので、",
-                  ref("claim_cyclic_shift_adjacent_integer_sum"), " をこの表へ適用すると",
+                  "固定した四列 ", math(String.raw`u,v,r,x:\mathbb N\to\mathbb Z^2`),
+                  "、正の長さ ", math(String.raw`m,b,n,b`), "、閉包の歩の列 ",
+                  math(String.raw`w^{(q)}`), " と四部分反復列 ", math(String.raw`z^{(q)}`),
+                  " は ", ref("claim_one_sided_closure_cyclic_sum"), " のものを使う。ここで ",
+                  math(String.raw`n:=n_{\parallel}`), "、", math(String.raw`b:=tn_{\perp}`),
+                  "、", math(String.raw`q\in\mathbb N_{>0}`), "、",
+                  math(String.raw`N_q:=qm+b+qn+b\in\mathbb N_{>0}`), " である。",
+                  "循環隣接和 ", math(String.raw`C_\ell(f)\in\mathbb Z`), "（",
+                  math(String.raw`\ell\in\mathbb N_{>0},\ f:\mathbb N\to\mathbb Z^2`), "）は ",
+                  ref("claim_four_part_adjacent_sum"), " の定義を使う。",
+                  "この和は添字零から ", math(String.raw`\ell-1`),
+                  " の値だけを読むので、有限列の零による拡張は和を変えない。",
+                  "一周期の歩の和は、",
                 ]),
-                displayMath(String.raw`\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)
-=t_{\circ}(\gamma)
-\qquad\bigl(\because\ \blkref{claim_cyclic_shift_adjacent_integer_sum}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
+                displayMath(String.raw`C_m(u)=t_{\circ}(\gamma)
+\qquad\bigl(\because\ \blkref{claim_periodic_plane_lift_period_turning}\bigr).`),
                 paragraph([
-                  "次に正の平行階段（", ref("def_winding_parallel_staircase"), "）を同じ添字順で符号反転した射影辺列を ",
-                  math(String.raw`R_-:=\Pi(-G^{\gamma}_0,\ldots,-G^{\gamma}_{n_{\parallel}})
-=(\vec r_1,\ldots,\vec r_{n_{\parallel}})`), " と書く。",
-                  ref("claim_negated_parallel_staircase_turning_zero"), " により、",
+                  "符号反転した平行階段の射影辺列を ",
+                  math(String.raw`R_-:=\Pi(-G^\gamma_0,\ldots,-G^\gamma_n)`),
+                  " と置く（", ref("claim_negated_parallel_staircase_turning_zero"), "）。",
+                  "その各歩は固定列 ", math(String.raw`r`), " の値であるから、",
                 ]),
-                displayMath(String.raw`\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)=0
-\qquad\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\text{ と }\blkref{def_cyclic_total_turning}\bigr)`),
+                displayMath(String.raw`\begin{aligned}
+C_n(r)&=t_{\circ}(R_-)
+&&\bigl(\because\ \blkref{claim_plane_projection_cyclic_turning}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_negated_parallel_staircase_turning_zero}\bigr).
+\end{aligned}`),
                 paragraph([
-                  "平行帰路の歩ベクトル列が符号反転階段の反復になることは ",
-                  ref("claim_one_sided_parallel_return_repetition"), " による。",
-                  "最後に ", math(String.raw`\Gamma_c`), " と ", math(String.raw`\Gamma_{c+1}`),
-                  " の方向列を比較する。歩ベクトル列が四部分の連結に一致することは ",
-                  ref("claim_one_sided_closure_step_sequence"), " による。一側閉包の定義（", ref("def_one_sided_periodic_lift_closure"),
-                  "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
-                  " と同じ方向列が一組、符号反転した平行帰路へ ", math(String.raw`R_-`),
-                  " と同じ方向列が一組増える。平行移動で変わる頂点の位置は、この方向列の比較に含めない。",
-                  "二つの反復横断階段の歩ベクトル列が変わらないことは ",
-                  ref("claim_one_sided_transverse_steps_base_independent"), " による。",
-                  "四部分の接合部の先頭・末尾方向が変わらないことは ",
-                  ref("claim_one_sided_closure_junction_pairs"), " による。",
-                  "射影の循環総回転数と歩ベクトルの循環隣接和の同定は ",
-                  ref("claim_plane_projection_cyclic_turning"), " による。",
-                  "実際の閉包の全歩列を固定四部分反復列へ移す同定は ",
-                  ref("claim_one_sided_closure_cyclic_sum"), " による。",
-                  "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
-                  ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
-                  ref("claim_repeated_adjacent_sum_difference"), " を適用する。この有限和の合成を ",
-                  ref("claim_four_part_repeated_difference"), " により行うと、",
+                  "射影が閉じた非後退辺列になることを確かめる。",
+                  math(String.raw`w_{\mathrm h}:=w_{\mathrm h}(\gamma),\ w_{\mathrm v}:=w_{\mathrm v}(\gamma)\in\mathbb Z`),
+                  " と書く。横断座標を ",
+                  math(String.raw`\kappa:=\kappa_\gamma:\mathbb Z^2\to\mathbb Z`),
+                  "、最大水準を ", math(String.raw`M:=K_{\max}(\gamma)\in\mathbb Z`),
+                  "、", math(String.raw`P_j:=\widetilde P_{k_0+j}(\gamma)\in\mathbb Z^2\ (j\in\mathbb Z)`),
+                  "、", math(String.raw`G_s:=G^\gamma_s\ (0\le s\le n)`), " と略記する。",
+                  "周期持ち上げの横断座標（", ref("claim_periodic_plane_lift_transverse_bounded"),
+                  "）から全ての ", math(String.raw`j\in\mathbb Z`), " で ",
+                  math(String.raw`\kappa(P_j)\le M`), " であり、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa(P_m)&=\kappa(P_0)
+&&\bigl(\because\ \blkref{claim_periodic_plane_lift_transverse_bounded}\text{ と同じ余り}\bigr)\\
+&=M
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure}\text{ の基点条件}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "固定列の定義（", ref("claim_one_sided_closure_junction_pairs"),
+                  "）で始歩と末歩を読むと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa(u(m-1))&=\kappa(P_m-P_{m-1})
+&&\bigl(\because\ u\text{ の定義}\bigr)\\
+&=\kappa(P_m)-\kappa(P_{m-1})
+&&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
+&=M-\kappa(P_{m-1})
+&&\bigl(\because\ \kappa(P_m)=M\bigr)\\
+&\ge0
+&&\bigl(\because\ \kappa(P_{m-1})\le M\bigr),\\
+\kappa(u(0))&=\kappa(P_1-P_0)
+&&\bigl(\because\ u\text{ の定義}\bigr)\\
+&=\kappa(P_1)-\kappa(P_0)
+&&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
+&=\kappa(P_1)-M
+&&\bigl(\because\ \kappa(P_0)=M\bigr)\\
+&\le0
+&&\bigl(\because\ \kappa(P_1)\le M\bigr).
+\end{aligned}`),
+                paragraph([
+                  "任意の ", math(String.raw`i\in\{0,\ldots,b-1\}\subset\mathbb N`), " を取る。",
+                  "反復横断階段の増加（", ref("claim_iterated_transverse_staircase_lower_bound"),
+                  "）より ", math(String.raw`\kappa(v(i))>0\ (0\le i<b)`), " である。また ",
+                  math(String.raw`x(i)=-v(b-i-1)`), " なので、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa(x(i))&=\kappa(-v(b-i-1))
+&&\bigl(\because\ x,v\text{ の定義}\bigr)\\
+&=-\kappa(v(b-i-1))
+&&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
+&<0
+&&\bigl(\because\ 0\le b-i-1<b\text{ と }\kappa(v(b-i-1))>0\bigr).
+\end{aligned}`),
+                paragraph([
+                  "平行階段の横断座標は ", math(String.raw`\kappa(G_s)\le0`),
+                  "（", ref("claim_parallel_staircase_transverse_width_bound"), "）を満たす。両端では ",
+                  math(String.raw`\kappa(G_0)=\kappa(G_n)=0`), " である。実際、",
+                  math(String.raw`G_0=(0,0),\ G_n=B_\gamma`), "（",
+                  ref("def_winding_parallel_staircase"), "）であり、横断座標の定義（",
+                  ref("def_winding_transverse_coordinate"), "）から ",
+                  math(String.raw`\kappa(B_\gamma)=w_{\mathrm h}Lw_{\mathrm v}-w_{\mathrm v}Lw_{\mathrm h}=0`),
+                  " である。従って、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa(r(0))&=\kappa(-(G_1-G_0))
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=-\kappa(G_1)+\kappa(G_0)
+&&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
+&=-\kappa(G_1)
+&&\bigl(\because\ \kappa(G_0)=0\bigr)\\
+&\ge0
+&&\bigl(\because\ \kappa(G_1)\le0\bigr),\\
+\kappa(r(n-1))&=\kappa(-(G_n-G_{n-1}))
+&&\bigl(\because\ r\text{ の定義}\bigr)\\
+&=-\kappa(G_n)+\kappa(G_{n-1})
+&&\bigl(\because\ \kappa\text{ の加法性}\bigr)\\
+&=\kappa(G_{n-1})
+&&\bigl(\because\ \kappa(G_n)=0\bigr)\\
+&\le0
+&&\bigl(\because\ \kappa(G_{n-1})\le0\bigr).
+\end{aligned}`),
+                paragraph([
+                  "四接合（", ref("claim_one_sided_closure_junction_pairs"),
+                  "）では、今の符号から順に、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\kappa(v(0))&>0\ge-\kappa(u(m-1))
+&&\bigl(\because\ \kappa(v(0))>0,\ \kappa(u(m-1))\ge0\bigr),\\
+\kappa(v(b-1))&>0\ge-\kappa(r(0))
+&&\bigl(\because\ \kappa(v(b-1))>0,\ \kappa(r(0))\ge0\bigr),\\
+\kappa(x(0))&<0\le-\kappa(r(n-1))
+&&\bigl(\because\ \kappa(x(0))<0,\ \kappa(r(n-1))\le0\bigr),\\
+\kappa(x(b-1))&<0\le-\kappa(u(0))
+&&\bigl(\because\ \kappa(x(b-1))<0,\ \kappa(u(0))\le0\bigr).
+\end{aligned}`),
+                paragraph([
+                  "となる。逆ベクトルなら横断座標も互いの符号反転となるので、各接合で逆向きの歩は隣り合わない。",
+                  "周期持ち上げ部分の内部と反復境界は元の閉じた非後退辺列の方向を読む（",
+                  ref("claim_periodic_plane_lift_period_turning"), " の一歩の同定）。",
+                  "横断二列の内部は横断座標の同じ厳密な符号により非後退であり、平行帰路の内部と反復境界は ",
+                  ref("claim_negated_parallel_staircase_turning_zero"), " の非後退性による。",
+                  "これで閉じ目を含む全隣接対を尽くした。閉性と単位歩は ",
+                  ref("claim_one_sided_periodic_lift_closure_closed_unit_steps"), " による。射影の四方向表（",
+                  ref("claim_plane_projection_cyclic_turning"), "）と反転方向（",
+                  ref("claim_reversal_direction_shift"), "）を使うと、射影辺にも反転対は無い。",
+                  "従って閉じた非後退辺列 ", math(String.raw`\Gamma_c,\Gamma_{c+1}`),
+                  " に射影回転数の同定を適用できる。左右の項を別々に置換すると、",
                 ]),
                 displayMath(String.raw`\begin{aligned}
 t_{\circ}(\Gamma_{c+1})-t_{\circ}(\Gamma_c)
-&=\left(\sum_{j=1}^{m-1}\tau(\vec u_j,\vec u_{j+1})+\tau(\vec u_m,\vec u_1)\right)
-+\left(\sum_{s=1}^{n_{\parallel}-1}\tau(\vec r_s,\vec r_{s+1})+\tau(\vec r_{n_{\parallel}},\vec r_1)\right)
-&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{def_cyclic_total_turning},\ \blkref{claim_four_part_repeated_difference}\bigr)\\
+&=C_{N_{c+1}}(w^{(c+1)})-t_{\circ}(\Gamma_c)
+&&\bigl(\because\ \blkref{claim_plane_projection_cyclic_turning}\bigr)\\
+&=C_{N_{c+1}}(w^{(c+1)})-C_{N_c}(w^{(c)})
+&&\bigl(\because\ \blkref{claim_plane_projection_cyclic_turning}\bigr)\\
+&=C_{N_{c+1}}(z^{(c+1)})-C_{N_c}(w^{(c)})
+&&\bigl(\because\ \blkref{claim_one_sided_closure_cyclic_sum}\bigr)\\
+&=C_{N_{c+1}}(z^{(c+1)})-C_{N_c}(z^{(c)})
+&&\bigl(\because\ \blkref{claim_one_sided_closure_cyclic_sum}\bigr)\\
+&=C_m(u)+C_n(r)
+&&\bigl(\because\ \blkref{claim_four_part_repeated_difference}\bigr)\\
+&=t_{\circ}(\gamma)+C_n(r)
+&&\bigl(\because\ \text{上で示した }C_m(u)=t_{\circ}(\gamma)\bigr)\\
 &=t_{\circ}(\gamma)+0
-&&\bigl(\because\ \text{上で示した }U\text{ と }R_-\text{ の二等式}\bigr)\\
+&&\bigl(\because\ \text{上で示した }C_n(r)=0\bigr)\\
 &=t_{\circ}(\gamma)
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+&&\bigl(\because\ \mathbb Z\text{ の加法の零元の法則}\bigr).
 \end{aligned}`),
                 paragraph([
-                  "これで差の等式を得る。全過程は有限列・有限和・整数の四則だけで閉じ、実数体も複素数体も現れない。",
+                  "任意の正の周期数で隣り合う項の差が同じ整数となるので、等差数列の主張も従う。",
+                  "用いた同定は歩ベクトルの循環和についてのものであり、平行移動で位置が変わる辺は同一視していない。",
+                  "全ての和と差は整数に属する。",
                 ]),
               ],
             },
@@ -74621,7 +74726,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       "現在地: 一辺二・三では行列式が符号付き偶部分グラフ多項式の平方に等しいことを厳密計算で観測し、",
                       "離散 Whitney 系の補題列は記述と SageMath を終えている。Lean は、点列を仮定で受ける形の補題群が済み、",
                       "実際の閉歩道から平面持ち上げを構成する定義群と、それに基づく主張（巻き付きと変位、持ち上げ点の相異性、",
-                      "周期数差の合成、周期単純路と頂点単純閉路の回転数）が未着手である。",
+                      "周期数差の実際の閉歩道への適用、周期単純路と頂点単純閉路の回転数）の Lean 対応が未完了である。",
                       "完了条件: 前段の平方恒等式と Arf 符号付き四項和を使って、",
                       "四つの行列式の符号付き和が ", math(String.raw`Z_L(x)`), " に一致することを示すこと。",
                     ],
