@@ -29394,7 +29394,8 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)
                           " について、", math(String.raw`e\in A_\sigma`), " ならば ", math(String.raw`a_\sigma(e):=1`),
                           "、そうでなければ ", math(String.raw`a_\sigma(e):=0`), " と定める。また、",
                           math(String.raw`e\in\mathcal{B}_L(\sigma)`), " ならば ", math(String.raw`q_\sigma(e):=1`),
-                          "、そうでなければ ", math(String.raw`q_\sigma(e):=0`), " と定める。すると",
+                          "、そうでなければ ", math(String.raw`q_\sigma(e):=0`), " と定める。いずれも ",
+                          math(String.raw`a_\sigma,q_\sigma:E_L\to\{0,1\}`), " である。すると",
                         ]),
                         displayMath(String.raw`(-1)^{q_\sigma(e)}
 =\sigma\bigl(\partial_0(e)\bigr)\sigma\bigl(\partial_1(e)\bigr)
@@ -29427,8 +29428,10 @@ d_{A_\sigma}(i,j)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (-1)^{d_{A_\sigma}(i,j)}
-&=\prod_{r=1}^{4}(-1)^{q_\sigma(e_r)}
+&=(-1)^{q_\sigma(e_1)+q_\sigma(e_2)+q_\sigma(e_3)+q_\sigma(e_4)}
 &&(\because\ d_{A_\sigma}(i,j)\ \text{についての直前の等式})\\
+&=\prod_{r=1}^{4}(-1)^{q_\sigma(e_r)}
+&&(\because\ \text{整数の冪の加法則})\\
 &=\prod_{r=1}^{4}
   \sigma\bigl(\partial_0(e_r)\bigr)\sigma\bigl(\partial_1(e_r)\bigr)
 &&(\because\ (-1)^{q_\sigma(e)}\ \text{についての等式})\\
