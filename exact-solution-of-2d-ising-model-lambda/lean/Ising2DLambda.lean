@@ -1177,3 +1177,7 @@ import Ising2DLambda.KacWard.DiagonalGaugeInverseFromNecSuf
 import Ising2DLambda.KacWard.PolynomialDiagonalGaugeInverse
 import Ising2DLambda.NecSuf.KacWard.PolynomialDiagonalGaugeInverse
 import Ising2DLambda.KacWard.PolynomialDiagonalGaugeInverseFromNecSuf
+
+import Ising2DLambda.KacWard.GaugedTerminalMatrix
+import Ising2DLambda.NecSuf.KacWard.GaugedTerminalMatrix
+import Ising2DLambda.KacWard.GaugedTerminalMatrixFromNecSuf

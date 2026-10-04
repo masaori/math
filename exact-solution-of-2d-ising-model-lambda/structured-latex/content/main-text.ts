@@ -51006,6 +51006,145 @@ C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_gauged_terminal_matrix",
+        labels: [],
+        title: { text: "対角相似とスカラー倍による成分の変換" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_gauged_terminal_matrix_entries",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                id: "kac_ward_definition_gauged_terminal_matrix",
+                kind: "definition",
+                title: { text: "対角相似とスカラー倍を施した端末行列" },
+                labels: ["def_gauged_terminal_matrix"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.gaugePairWeight",
+                  "Ising2DLambda.KacWard.gaugedTerminalMatrix",
+                ],
+                statement: [
+                  paragraph(["自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`), " を固定し、", ref("def_qbar_constant_embedding"), " の定数埋込みを ", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " と書く。", ref("def_diagonal_gauge"), " の重みから、各 ", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対して"]),
+                  displayMath(String.raw`w_{\vec e,\vec f}:=\zeta_8^{\,2}(v_{\vec e}u_{\vec f})\in\overline{\mathbb Q}`),
+                  paragraph(["と定める。", ref("def_terminal_matrix"), " の端末行列と ", ref("def_polynomial_diagonal_gauge"), " の対角行列を用い、変換後の行列 ", math(String.raw`\widehat K\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), " を成分ごとに"]),
+                  displayMath(String.raw`\widehat K_{\vec e,\vec f}:=C(\zeta_8^{\,2})\bigl((\widehat V K^{a,b}_{\mathrm t}(x))\widehat U\bigr)_{\vec e,\vec f}`),
+                  paragraph(["で定める。括弧内は多項式行列の積であり、その外の積は多項式の積である。", ref("claim_polynomial_diagonal_gauge_inverse"), " より ", math(String.raw`\widehat V`), " は ", math(String.raw`\widehat U`), " の両側逆なので、この変換は対角相似と ", math(String.raw`C(\zeta_8^{\,2})`), " によるスカラー倍である。"]),
+                ],
+              },
+            }],
+            focus: {
+              id: "kac_ward_claim_gauged_terminal_matrix_entries",
+              kind: "claim",
+              title: { text: "変換後の端末行列の成分" },
+              labels: ["claim_gauged_terminal_matrix_entries"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/gauged-terminal-matrix-entries"],
+              lean: [
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_entry",
+                "Ising2DLambda.NecSuf.KacWard.gaugedMatrix_entry_necSuf",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_entry_from_necSuf",
+              ],
+              statement: [
+                  paragraph(["任意の自然数 ", math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`), "、", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対し、", ref("def_gauged_terminal_matrix"), " の成分は"]),
+                  displayMath(String.raw`\widehat K_{\vec e,\vec f}=C(w_{\vec e,\vec f})\left[
+\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
+-x\begin{cases}
+C(\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)),
+&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\
+0,&\text{それ以外}
+\end{cases}\right]`),
+                  paragraph(["を満たす。右辺の二つの条件は独立であり、", math(String.raw`L=1`), " で両方が成り立つ場合にも両方の寄与を差へ入れる。符号と回転位相の積は ", ref("claim_terminal_matrix_entries"), " と同じ代数的数として読む。"]),
+                ],
+              proof: [
+                  paragraph([math(String.raw`C`), " は上の定数埋込みとし、", math(String.raw`c:=\zeta_8^{\,2}\in\overline{\mathbb Q}`), "、", math(String.raw`A:=K^{a,b}_{\mathrm t}(x)`), "、", math(String.raw`B:=\widehat V A`), " と略記する。", math(String.raw`A,B\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), " である。また ", math(String.raw`\tau_{\vec e,\vec f}\in\overline{\mathbb Q}[x]`), " は主張の角括弧の中の多項式を表す。任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を固定する。"]),
+                  paragraph(["まず ", math(String.raw`\vec g\in\vec E_L,\ \vec g\ne\vec e`), " に対して、"]),
+                  displayMath(String.raw`\begin{aligned}
+\widehat V_{\vec e,\vec g}A_{\vec g,\vec f}
+&=C(V_{\vec e,\vec g})A_{\vec g,\vec f}
+&&(\because\ \blkref{def_polynomial_diagonal_gauge})\\
+&=C(0)A_{\vec g,\vec f}
+&&(\because\ \blkref{def_diagonal_gauge},\ \vec g\ne\vec e)\\
+&=0A_{\vec g,\vec f}
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の零の保存})\\
+&=0
+&&(\because\ \text{零の左乗法}).
+\end{aligned}`),
+                  paragraph(["となる。したがって左側の対角行列との積は"]),
+                  displayMath(String.raw`\begin{aligned}
+B_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}\widehat V_{\vec e,\vec g}A_{\vec g,\vec f}
+&&(\because\ B\text{ の定義と }\blkref{def_polynomial_diagonal_gauge}\text{ の積})\\
+&=\widehat V_{\vec e,\vec e}A_{\vec e,\vec f}
+&&(\because\ \text{上で求めた零項を有限和から除く})\\
+&=C(V_{\vec e,\vec e})A_{\vec e,\vec f}
+&&(\because\ \blkref{def_polynomial_diagonal_gauge})\\
+&=C(v_{\vec e})A_{\vec e,\vec f}
+&&(\because\ \blkref{def_diagonal_gauge}).
+\end{aligned}`),
+                  paragraph(["である。次に ", math(String.raw`\vec g\in\vec E_L,\ \vec g\ne\vec f`), " に対して、"]),
+                  displayMath(String.raw`\begin{aligned}
+B_{\vec e,\vec g}\widehat U_{\vec g,\vec f}
+&=B_{\vec e,\vec g}C(U_{\vec g,\vec f})
+&&(\because\ \blkref{def_polynomial_diagonal_gauge})\\
+&=B_{\vec e,\vec g}C(0)
+&&(\because\ \blkref{def_diagonal_gauge},\ \vec f\ne\vec g)\\
+&=B_{\vec e,\vec g}0
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の零の保存})\\
+&=0
+&&(\because\ \text{零の右乗法}).
+\end{aligned}`),
+                  paragraph(["となる。したがって右側の対角行列との積は"]),
+                  displayMath(String.raw`\begin{aligned}
+(B\widehat U)_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}B_{\vec e,\vec g}\widehat U_{\vec g,\vec f}
+&&(\because\ \blkref{def_polynomial_diagonal_gauge}\text{ の積})\\
+&=B_{\vec e,\vec f}\widehat U_{\vec f,\vec f}
+&&(\because\ \text{上で求めた零項を有限和から除く})\\
+&=B_{\vec e,\vec f}C(U_{\vec f,\vec f})
+&&(\because\ \blkref{def_polynomial_diagonal_gauge})\\
+&=B_{\vec e,\vec f}C(u_{\vec f})
+&&(\because\ \blkref{def_diagonal_gauge}).
+\end{aligned}`),
+                  paragraph(["である。これらを変換後の成分へ代入すると、"]),
+                  displayMath(String.raw`\begin{aligned}
+\widehat K_{\vec e,\vec f}
+&=C(c)(B\widehat U)_{\vec e,\vec f}
+&&(\because\ \blkref{def_gauged_terminal_matrix})\\
+&=C(c)\bigl(B_{\vec e,\vec f}C(u_{\vec f})\bigr)
+&&(\because\ \text{上で求めた右側の積の成分})\\
+&=C(c)\bigl((C(v_{\vec e})A_{\vec e,\vec f})C(u_{\vec f})\bigr)
+&&(\because\ \text{上で求めた左側の積の成分})\\
+&=C(c)\bigl(C(v_{\vec e})(A_{\vec e,\vec f}C(u_{\vec f}))\bigr)
+&&(\because\ \text{多項式の乗法の結合則})\\
+&=C(c)\bigl(C(v_{\vec e})(C(u_{\vec f})A_{\vec e,\vec f})\bigr)
+&&(\because\ \text{多項式の乗法の可換則})\\
+&=C(c)\bigl((C(v_{\vec e})C(u_{\vec f}))A_{\vec e,\vec f}\bigr)
+&&(\because\ \text{多項式の乗法の結合則})\\
+&=\bigl(C(c)(C(v_{\vec e})C(u_{\vec f}))\bigr)A_{\vec e,\vec f}
+&&(\because\ \text{多項式の乗法の結合則})\\
+&=\bigl(C(c)C(v_{\vec e}u_{\vec f})\bigr)A_{\vec e,\vec f}
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存})\\
+&=C\bigl(c(v_{\vec e}u_{\vec f})\bigr)A_{\vec e,\vec f}
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存})\\
+&=C(w_{\vec e,\vec f})A_{\vec e,\vec f}
+&&(\because\ \blkref{def_gauged_terminal_matrix}\text{ の }w_{\vec e,\vec f})\\
+&=C(w_{\vec e,\vec f})\tau_{\vec e,\vec f}
+&&(\because\ \blkref{claim_terminal_matrix_entries}).
+\end{aligned}`),
+                  paragraph(["となり、主張の式を得る。各有限和と積は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で閉じる。"]),
+                ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_determinant_nonzero_terms",
         labels: [],
         title: { text: "行列式の非零な置換項" },
