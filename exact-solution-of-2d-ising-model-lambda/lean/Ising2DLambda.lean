@@ -1167,3 +1167,6 @@ import Ising2DLambda.KacWard.ReversalMatrixDeterminantFromNecSuf
 import Ising2DLambda.KacWard.TerminalMatrix
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.TerminalMatrixFromNecSuf
+import Ising2DLambda.KacWard.TerminalMatrixDeterminant
+import Ising2DLambda.NecSuf.KacWard.TerminalMatrixDeterminant
+import Ising2DLambda.KacWard.TerminalMatrixDeterminantFromNecSuf

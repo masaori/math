@@ -491,6 +491,7 @@ export const ALL_LABELS = [
   "claim_standard_contact_smoothing_involution",
   "claim_step_advances_direction",
   "claim_switchable_contact_smoothing_preserves_fiber",
+  "claim_terminal_matrix_determinant",
   "claim_terminal_matrix_entries",
   "claim_three_term_pm_four_difference_zero",
   "claim_torus_homology_sector_partition",

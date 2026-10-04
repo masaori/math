@@ -87,6 +87,15 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.terminal_successor_condition_necSuf
   Ising2DLambda.NecSuf.KacWard.terminalMatrix_entry_necSuf
   Ising2DLambda.KacWard.terminalMatrix_entry_from_necSuf
+  Ising2DLambda.KacWard.integerConstantPolynomialHom
+  Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum
+  Ising2DLambda.KacWard.polynomialReversalMatrix_determinant
+  Ising2DLambda.KacWard.terminalMatrix_determinant
+  Ising2DLambda.NecSuf.KacWard.det_eq_rowSignedPermutationSum
+  Ising2DLambda.NecSuf.KacWard.mappedMatrix_determinant_one_necSuf
+  Ising2DLambda.NecSuf.KacWard.mappedMatrix_mul_determinant_necSuf
+  Ising2DLambda.KacWard.polynomialReversalMatrix_determinant_from_necSuf
+  Ising2DLambda.KacWard.terminalMatrix_determinant_from_necSuf
   Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_normalize
   Ising2DLambda.KacWard.oneSidedClosureJunctionPairs_eq_fixed
   Ising2DLambda.NecSuf.KacWard.fourJunctionPairs_repetition_necSuf

@@ -49807,6 +49807,7 @@ c_{\mathrm v}(e,d):=
                 kind: "definition",
                 title: { text: "代数的数係数多項式行列の行列式" },
                 labels: ["def_qbar_polynomial_determinant"],
+                lean: ["Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum"],
                 habitat: "Qbar",
                 statement: [
                   paragraph([
@@ -49886,6 +49887,7 @@ c_{\mathrm v}(e,d):=
                     kind: "definition",
                     title: { text: "四つの Kac--Ward 行列式" },
                     labels: ["def_kac_ward_determinants"],
+                    lean: ["Ising2DLambda.KacWard.kacWardDeterminant"],
                     habitat: "Qbar",
                     statement: [
                       paragraph([
@@ -50210,6 +50212,86 @@ K^{a,b}_{\vec g,\vec f}(x)
 \end{aligned}`),
                 paragraph(["これが求める成分である。二つの非零条件が互いに素であるとは仮定していない。",
                   "全過程は有限な辺集合と代数的数係数多項式の計算で閉じ、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }, {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_terminal_matrix_determinant",
+            focus: {
+              id: "kac_ward_claim_terminal_matrix_determinant",
+              kind: "claim",
+              title: { text: "端末行列と Kac--Ward 行列の行列式は一致する" },
+              labels: ["claim_terminal_matrix_determinant"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/terminal-matrix-determinant"],
+              lean: [
+                "Ising2DLambda.KacWard.terminalMatrix_determinant",
+                "Ising2DLambda.NecSuf.KacWard.mappedMatrix_mul_determinant_necSuf",
+                "Ising2DLambda.KacWard.terminalMatrix_determinant_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`),
+                  " とスピン構造 ", math(String.raw`(a,b)\in\mathcal S`), " に対して、",
+                  ref("def_terminal_matrix"), " の端末行列は ",
+                  ref("def_kac_ward_determinants"), " の行列式と同じ値を持つ。すなわち、"]),
+                displayMath(String.raw`\det_x\bigl(K_{\mathrm t}^{a,b}(x)\bigr)=D_L^{a,b}(x)
+\quad\text{in }\overline{\mathbb Q}[x].`),
+              ],
+              proof: [
+                paragraph(["整数から代数的数への包含準同型を ",
+                  math(String.raw`j:\mathbb Z\to\overline{\mathbb Q}`), " と書き、",
+                  math(String.raw`c:\mathbb Z\to\overline{\mathbb Q}[x]`), " を ",
+                  math(String.raw`c(n):=\widehat{j(n)}`), " で定める。",
+                  ref("def_qbar_constant_embedding"), " より、これは和・積・零・一を保つ。",
+                  "有限和・有限積を保つことは、和・積の項数についての帰納法で従う。",
+                  "整数行列式と多項式行列式には同じ向き付き辺の線型順序を用いる。",
+                  "以下では ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                  " について和を取り、", math(String.raw`\vec e\in\vec E_L`), " について積を取る。",
+                  "まず、整数の反転行列 ", math(String.raw`J_L`), "（", ref("def_reversal_matrix"),
+                  "）を定数多項式へ送った ", math(String.raw`\widehat J_L`), " の行列式を計算する。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(\widehat J_L)
+&=\sum_\varphi c(\operatorname{sgn}\varphi)
+  \prod_{\vec e}(\widehat J_L)_{\vec e,\varphi(\vec e)}
+&&(\because\ \blkref{def_qbar_polynomial_determinant})\\
+&=\sum_\varphi c(\operatorname{sgn}\varphi)
+  \prod_{\vec e}c\bigl((J_L)_{\vec e,\varphi(\vec e)}\bigr)
+&&(\because\ \blkref{def_terminal_matrix})\\
+&=\sum_\varphi c(\operatorname{sgn}\varphi)
+  c\Bigl(\prod_{\vec e}(J_L)_{\vec e,\varphi(\vec e)}\Bigr)
+&&(\because\ c\text{ は有限積を保つ})\\
+&=\sum_\varphi c\Bigl(\operatorname{sgn}\varphi\,
+  \prod_{\vec e}(J_L)_{\vec e,\varphi(\vec e)}\Bigr)
+&&(\because\ c\text{ は積を保つ})\\
+&=c\Bigl(\sum_\varphi\operatorname{sgn}\varphi\,
+  \prod_{\vec e}(J_L)_{\vec e,\varphi(\vec e)}\Bigr)
+&&(\because\ c\text{ は有限和を保つ})\\
+&=c\bigl(\det_{\mathbb Z}(J_L)\bigr)
+&&(\because\ \blkref{def_integer_matrix_determinant})\\
+&=c(1)
+&&(\because\ \blkref{claim_reversal_matrix_determinant_one})\\
+&=1
+&&(\because\ c\text{ は一を保つ})
+\end{aligned}`),
+                paragraph(["端末行列の定義と、可換環上の行列式の乗法性を用いると、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x\bigl(K_{\mathrm t}^{a,b}(x)\bigr)
+&=\det_x\bigl(\widehat J_L K^{a,b}(x)\bigr)
+&&(\because\ \blkref{def_terminal_matrix})\\
+&=\det_x(\widehat J_L)\,\det_x\bigl(K^{a,b}(x)\bigr)
+&&(\because\ \text{行列式の乗法性})\\
+&=1\,\det_x\bigl(K^{a,b}(x)\bigr)
+&&(\because\ \text{上で求めた }\det_x(\widehat J_L)=1)\\
+&=\det_x\bigl(K^{a,b}(x)\bigr)
+&&(\because\ \overline{\mathbb Q}[x]\text{ の単位元との積})\\
+&=D_L^{a,b}(x)
+&&(\because\ \blkref{def_kac_ward_determinants})
+\end{aligned}`),
+                paragraph(["となる。全過程は整数の有限和・有限積と代数的数係数多項式の計算で閉じ、",
+                  "実数体も複素数体も現れない。"]),
               ],
             },
           },
