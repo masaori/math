@@ -16,7 +16,7 @@
 ## 実行方法
 
 ```sh
-sage -c "__file__ = 'sagemath/check/dual-broken-edges-winding-zero/check.sage'; load(__file__)"
+sage sagemath/check/dual-broken-edges-winding-zero/check.sage
 ```
 
 **2026-08-12 実行: すべて通過。**
@@ -36,3 +36,20 @@ sage -c "__file__ = 'sagemath/check/dual-broken-edges-winding-zero/check.sage'; 
 | `check_multiple_residue.sage` | 二の倍数の余り | PASS（126列） |
 
 2026-10-04 再実行: 一辺一から四の全66,066配位と、行別7本（符号の4組・各126列）が全て通過した。この環境では上記コマンドを micromamba の SageMath 環境で実行した。
+
+## 双対辺から自然数の巡回和への各等号
+
+本文の二方向を、辺長一から三の全530配位で検算する。双対写像から作った逆写像と座標を戻す式を独立に比較し、原像の指示子と端点の代入は各辺でも確かめる。和の偶奇がたまたま一致するだけの検査にしない。
+
+| ファイル | 対応する操作 | 状態 |
+|---|---|---|
+| `check_winding_definition.sage` | 巻き付き偶奇の定義を境界辺の指示子の和へ開く | PASS（1,060方向） |
+| `check_dual_preimage_indicator.sage` | 双対像への所属を唯一の原像への所属へ移す | PASS（3,140辺・1,060和） |
+| `check_dual_inverse_coordinates.sage` | 逆写像に境界辺の座標を代入する | PASS（3,140辺・1,060和） |
+| `check_primal_cyclic_reindex.sage` | 一つ戻す巡回置換で破れ辺の和を再添字付けする | PASS（1,060方向） |
+| `check_edge_encoding_substitution.sage` | 原格子の破れ指示子に二値符号化を代入する | PASS（3,140辺・1,060和） |
+| `check_endpoint_substitution.sage` | 辺の端点を行・列の座標に代入する | PASS（3,140辺・1,060和） |
+
+2026-10-04 実行: 追加六本、既存の自然数の行別七本、辺長一から四の全66,066配位の統合検査が全て通過した。追加六本は `check_lines.sage` からも単独でも実行できる。検算は全て厳密な整数計算である。
+
+同日の単独起動の初回は、Sage CLI の `__file__` が対象ファイルでなく `sage/all.py` を指したため、補助ファイルの読込で ERROR になった。直接起動時は `sys.argv[0]`、`load` 起動時は明示した `__file__` から対象ディレクトリを得るよう直し、`sage check_lines.sage` で行別13本の PASS、`sage check.sage` で全66,066配位と行別13本の PASS を確認した。

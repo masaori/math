@@ -29678,7 +29678,9 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         paragraph([
                           "二元集合の符号化 ", math(String.raw`c:\{+1,-1\}\to\{0,1\}\subset\mathbb N`),
                           " を ", math(String.raw`c(+1):=0`), "、", math(String.raw`c(-1):=1`), " で定める。",
-                          "以下の和と余りはすべて自然数で取る。", ref("def_broken_edge_set"), " の指示関数 ",
+                          "以下の和と余りはすべて自然数で取る。辺集合 ", math(String.raw`A_\sigma`),
+                          " の指示関数を ", math(String.raw`\boldsymbol 1_{A_\sigma}:E_L\to\{0,1\}\subset\mathbb N`),
+                          " と書く。", ref("def_broken_edge_set"), " の指示関数 ",
                           math(String.raw`q_\sigma:E_L\to\{0,1\}\subset\mathbb N`), " について、任意の辺 ",
                           math(String.raw`e\in E_L`), " の両端点を ",
                           math(String.raw`v,w\in V_L`), " とすると、四つの符号の組ごとに",
@@ -29690,14 +29692,22 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                           "である。双対辺写像の定義を開くと、横向き境界を横切る双対辺の唯一の原像は、",
                           "列 ", math(String.raw`\pi(-1)`), " に並ぶ縦向き辺である。",
                           "以下の ", math(String.raw`i,j`), " は ", math(String.raw`\mathbb Z/L\mathbb Z`),
-                          " 全体を走り、頂点座標の加法はこの剰余類の加法を表す。端点写像を代入すると、",
+                          " 全体を走り、頂点座標の加減法はこの剰余類の加減法を表す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \varepsilon_{L,\mathrm h}(A_\sigma)
+&=\left(\sum_i \boldsymbol 1_{A_\sigma}(n_{\mathrm h}(i,\pi(-1)))\right)\bmod2
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)\\
+&=\left(\sum_i q_\sigma\bigl(\delta_L^{-1}(n_{\mathrm h}(i,\pi(-1)))\bigr)\right)\bmod2
+&&\bigl(\because\ A_\sigma=\delta_L(\mathcal B_L(\sigma)),\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&=\left(\sum_i q_\sigma(n_{\mathrm v}(i-\bar1,\pi(-1)))\right)\bmod2
+&&\bigl(\because\ \blkref{def_dual_edge_map}\bigr)\\
 &=\left(\sum_i q_\sigma(n_{\mathrm v}(i,\pi(-1)))\right)\bmod2
-&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&&\bigl(\because\ i\mapsto i-\bar1\ \text{は全単射}\bigr)\\
+&=\left(\sum_i\left[\bigl(c(\sigma(\partial_0(n_{\mathrm v}(i,\pi(-1)))))+c(\sigma(\partial_1(n_{\mathrm v}(i,\pi(-1)))))\bigr)\bmod2\right]\right)\bmod2
+&&\bigl(\because\ \text{上で示した指示関数の等式}\bigr)\\
 &=\left(\sum_i\left[\bigl(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\bigr)\bmod2\right]\right)\bmod2
-&&\bigl(\because\ \text{上で示した指示関数の等式と端点写像}\bigr)\\
+&&\bigl(\because\ \blkref{def_boundary_maps}\bigr)\\
 &=\left(\sum_i\bigl(c(\sigma(i,\pi(-1)))+c(\sigma(i+\bar1,\pi(-1)))\bigr)\right)\bmod2
 &&\bigl(\because\ \text{有限和の余りは各項の余りの和の余りに等しい}\bigr)\\
 &=\left(\sum_i c(\sigma(i,\pi(-1)))+\sum_i c(\sigma(i+\bar1,\pi(-1)))\right)\bmod2
@@ -29714,10 +29724,18 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \varepsilon_{L,\mathrm v}(A_\sigma)
+&=\left(\sum_j \boldsymbol 1_{A_\sigma}(n_{\mathrm v}(\pi(-1),j))\right)\bmod2
+&&\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)\\
+&=\left(\sum_j q_\sigma\bigl(\delta_L^{-1}(n_{\mathrm v}(\pi(-1),j))\bigr)\right)\bmod2
+&&\bigl(\because\ A_\sigma=\delta_L(\mathcal B_L(\sigma)),\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&=\left(\sum_j q_\sigma(n_{\mathrm h}(\pi(-1),j-\bar1))\right)\bmod2
+&&\bigl(\because\ \blkref{def_dual_edge_map}\bigr)\\
 &=\left(\sum_j q_\sigma(n_{\mathrm h}(\pi(-1),j))\right)\bmod2
-&&\bigl(\because\ \blkref{def_torus_winding_parities},\ \blkref{def_dual_edge_map},\ \blkref{claim_dual_edge_map_bijective}\bigr)\\
+&&\bigl(\because\ j\mapsto j-\bar1\ \text{は全単射}\bigr)\\
+&=\left(\sum_j\left[\bigl(c(\sigma(\partial_0(n_{\mathrm h}(\pi(-1),j))))+c(\sigma(\partial_1(n_{\mathrm h}(\pi(-1),j))))\bigr)\bmod2\right]\right)\bmod2
+&&\bigl(\because\ \text{上で示した指示関数の等式}\bigr)\\
 &=\left(\sum_j\left[\bigl(c(\sigma(\pi(-1),j))+c(\sigma(\pi(-1),j+\bar1))\bigr)\bmod2\right]\right)\bmod2
-&&\bigl(\because\ \text{上で示した指示関数の等式と端点写像}\bigr)\\
+&&\bigl(\because\ \blkref{def_boundary_maps}\bigr)\\
 &=\left(\sum_j\bigl(c(\sigma(\pi(-1),j))+c(\sigma(\pi(-1),j+\bar1))\bigr)\right)\bmod2
 &&\bigl(\because\ \text{有限和の余りは各項の余りの和の余りに等しい}\bigr)\\
 &=\left(\sum_j c(\sigma(\pi(-1),j))+\sum_j c(\sigma(\pi(-1),j+\bar1))\right)\bmod2

@@ -950,6 +950,13 @@ targets=(
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_isEven_from_necSuf
   Ising2DLambda.NecSuf.FisherZero.cyclic_change_parity_zero_necSuf
+  Ising2DLambda.FisherZero.spinBinaryCode
+  Ising2DLambda.FisherZero.spinBinaryCode_injective
+  Ising2DLambda.FisherZero.brokenEdge_binary_encoding
+  Ising2DLambda.FisherZero.horizontalWindingParity_dualBrokenEdgeSet_val
+  Ising2DLambda.FisherZero.verticalWindingParity_dualBrokenEdgeSet_val
+  Ising2DLambda.FisherZero.horizontalWindingParity_dualBrokenEdgeSet_zero
+  Ising2DLambda.FisherZero.verticalWindingParity_dualBrokenEdgeSet_zero
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero
   Ising2DLambda.FisherZero.dualBrokenEdgeSet_winding_zero_from_necSuf
   Ising2DLambda.FisherZero.globalSpinReversal_dualBrokenEdgeSet

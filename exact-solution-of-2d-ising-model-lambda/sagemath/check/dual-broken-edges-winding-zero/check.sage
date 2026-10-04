@@ -2,8 +2,10 @@
 # 帰属: 有限集合、NN、ZZ。浮動小数点を使わない。
 
 import os
+import sys
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+winding_entry = sys.argv[0] if sys.argv[0].endswith('.sage') else __file__
+_dir = os.path.dirname(os.path.abspath(winding_entry))
 load(os.path.join(_dir, '../../_shared/defs.sage'))
 
 
