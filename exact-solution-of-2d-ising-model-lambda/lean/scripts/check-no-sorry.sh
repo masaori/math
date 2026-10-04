@@ -52,6 +52,29 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.KacWard.directionStandardRepresentative
+  Ising2DLambda.KacWard.directionStandardRepresentative_nonneg
+  Ising2DLambda.KacWard.directionStandardRepresentative_lt_four
+  Ising2DLambda.KacWard.directionStandardRepresentative_eq_zero_or_one_or_two_or_three
+  Ising2DLambda.KacWard.twistParity
+  Ising2DLambda.KacWard.twistParity_lt_two
+  Ising2DLambda.KacWard.twistParity_eq_zero_or_one
+  Ising2DLambda.KacWard.directionGaugeExponent
+  Ising2DLambda.KacWard.twistGaugeExponent
+  Ising2DLambda.KacWard.diagonalGaugeWeight
+  Ising2DLambda.KacWard.diagonalGaugeInverseWeight
+  Ising2DLambda.KacWard.diagonalGauge
+  Ising2DLambda.KacWard.diagonalGaugeInverse
+  Ising2DLambda.KacWard.diagonalGauge_root_ne_zero
+  Ising2DLambda.KacWard.diagonalGauge_powerPair_cancel
+  Ising2DLambda.KacWard.diagonalGaugeWeight_mul_inverse
+  Ising2DLambda.KacWard.diagonalGaugeInverseWeight_mul_weight
+  Ising2DLambda.KacWard.diagonalGauge_mul_inverse
+  Ising2DLambda.NecSuf.KacWard.powerPairDiagonal
+  Ising2DLambda.NecSuf.KacWard.powerPairDiagonalInverse
+  Ising2DLambda.NecSuf.KacWard.powerPair_cancel_necSuf
+  Ising2DLambda.NecSuf.KacWard.powerPairDiagonal_mul_inverse_necSuf
+  Ising2DLambda.KacWard.diagonalGauge_mul_inverse_from_necSuf
   Ising2DLambda.FisherZero.edgeSubsetIncidenceCount_four_incident_edges
   Ising2DLambda.IntegerMatrix.inversionSign_eq_mathlibSign
   Ising2DLambda.IntegerMatrix.determinant_eq_signedPermutationSum
@@ -492,7 +515,6 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.existsUnique_min
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.ne_of_mem_of_mem_of_disjoint
   Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_compare
-  Ising2DLambda.AlgebraicEigenvalue.rowConfigLess_asymm
   Ising2DLambda.AlgebraicEigenvalue.isRowConfigMin_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.existsUnique_rowConfigMin_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.rowConfigMin_orbit_ne_from_necSuf

@@ -50466,6 +50466,215 @@ K^{a,b}_{\vec g,\vec f}(x)
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_diagonal_gauge_inverse",
+        labels: [],
+        title: { text: "対角変換の逆行列" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_diagonal_gauge_inverse",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_twist_parity",
+                  kind: "definition",
+                  title: { text: "切断線から定めるねじれ偶奇" },
+                  labels: ["def_twist_parity"],
+                  habitat: "N",
+                  lean: ["Ising2DLambda.KacWard.twistParity"],
+                  statement: [
+                    paragraph(["自然数 ", math(String.raw`L\ge1`), "、",
+                      math(String.raw`(a,b)\in\mathcal S`), "、向き付き辺 ",
+                      math(String.raw`\vec e\in\vec E_L`), " を取る。",
+                      ref("def_seam_parities"), " の二つの切断線の指示関数から"]),
+                    displayMath(String.raw`\kappa_{a,b}(\vec e)
+:=\bigl(a\,c_{\mathrm h}(\vec e)+b\,c_{\mathrm v}(\vec e)\bigr)\bmod2
+\in\{0,1\}\subset\mathbb N`),
+                    paragraph(["と定める。二で割った余りは零または一なので、値の所属は定まる。ねじれの集合は ",
+                      ref("def_spin_structures"), "、向き付き辺の集合は ", ref("def_oriented_edges"), " による。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "kac_ward_definition_diagonal_gauge",
+                  kind: "definition",
+                  title: { text: "対角変換と逆行列の候補" },
+                  labels: ["def_diagonal_gauge"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.KacWard.diagonalGauge",
+                    "Ising2DLambda.KacWard.diagonalGaugeInverse",
+                  ],
+                  statement: [
+                    paragraph([math(String.raw`L\ge1,\ (a,b)\in\mathcal S`), " を固定する。",
+                      ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8\in\overline{\mathbb Q}`),
+                      " は非零である。実際、零の四乗は零であり、",
+                      math(String.raw`\zeta_8^4=-1\ne0`), " と両立しない。各 ",
+                      math(String.raw`\vec e\in\vec E_L`), " に対し、整数指数を"]),
+                    displayMath(String.raw`p_{\vec e}:=-r_4(\operatorname{dir}(\vec e)),\qquad
+q_{\vec e}:=-2\kappa_{a,b}(\vec e)\qquad(p_{\vec e},q_{\vec e}\in\mathbb Z)`),
+                    paragraph(["と置く。方向番号は ", ref("def_oriented_edge_direction"), " による。",
+                      math(String.raw`r_4(d)`), " は ", math(String.raw`d\in\mathbb Z/4\mathbb Z`),
+                      " を表す ", math(String.raw`0,1,2,3`), " の一つ（",
+                      ref("def_direction_standard_representative"), "）であり、",
+                      ref("def_twist_parity"), " の自然数値は標準的な包含 ",
+                      math(String.raw`\mathbb N\hookrightarrow\mathbb Z`), " により整数として読む。次に"]),
+                    displayMath(String.raw`u_{\vec e}:=\zeta_8^{p_{\vec e}}\zeta_8^{q_{\vec e}},\qquad
+v_{\vec e}:=\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}}
+\qquad(u_{\vec e},v_{\vec e}\in\overline{\mathbb Q})`),
+                    paragraph(["および二つの行列 ",
+                      math(String.raw`U,V\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`), " を"]),
+                    displayMath(String.raw`U_{\vec e,\vec f}:=
+\begin{cases}u_{\vec e},&\vec f=\vec e,\\0,&\vec f\ne\vec e,\end{cases}
+\qquad
+V_{\vec e,\vec f}:=
+\begin{cases}v_{\vec e},&\vec f=\vec e,\\0,&\vec f\ne\vec e\end{cases}
+\quad(\vec e,\vec f\in\vec E_L)`),
+                    paragraph(["で定める。これが対角行列 ",
+                      math(String.raw`U=\operatorname{diag}(u_{\vec e}),\ V=\operatorname{diag}(v_{\vec e})`),
+                      " という記法の意味である。非零の代数的数の整数冪なので各成分は ",
+                      math(String.raw`\overline{\mathbb Q}`), " に属する。行列の住処は ",
+                      ref("def_qbar_matrix"), " による。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "kac_ward_claim_diagonal_gauge_inverse",
+              kind: "claim",
+              title: { text: "対角変換には両側逆行列がある" },
+              labels: ["claim_diagonal_gauge_inverse"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/diagonal-gauge-inverse"],
+              lean: [
+                "Ising2DLambda.KacWard.diagonalGauge_mul_inverse",
+                "Ising2DLambda.NecSuf.KacWard.powerPairDiagonal_mul_inverse_necSuf",
+                "Ising2DLambda.KacWard.diagonalGauge_mul_inverse_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の ", math(String.raw`L\ge1,\ (a,b)\in\mathcal S`), " に対し、",
+                  ref("def_diagonal_gauge"), " の二つの行列は、",
+                  ref("def_qbar_identity_matrix"), " の単位行列 ",
+                  math(String.raw`I\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`), " について"]),
+                displayMath(String.raw`UV=I,\qquad VU=I`),
+                paragraph(["を満たす。両側から掛けて単位行列になるという、この二つの等式の意味で ",
+                  math(String.raw`V`), " を ", math(String.raw`U`), " の両側逆行列と呼ぶ。"]),
+              ],
+              proof: [
+                paragraph(["まず ", math(String.raw`p,q\in\mathbb Z`), " に対する計算を準備する。",
+                  ref("def_diagonal_gauge"), " で確かめた ", math(String.raw`\zeta_8\ne0`),
+                  " により、負の指数を含む整数冪の加法則を使える。"]),
+                displayMath(String.raw`\begin{aligned}
+(\zeta_8^p\zeta_8^q)(\zeta_8^{-q}\zeta_8^{-p})
+&=\zeta_8^p\bigl(\zeta_8^q(\zeta_8^{-q}\zeta_8^{-p})\bigr)
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=\zeta_8^p\bigl((\zeta_8^q\zeta_8^{-q})\zeta_8^{-p}\bigr)
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=\zeta_8^p\bigl(\zeta_8^{q+(-q)}\zeta_8^{-p}\bigr)
+&&\bigl(\because\ \text{非零元の整数冪の加法則}\bigr)\\
+&=\zeta_8^p\bigl(\zeta_8^0\zeta_8^{-p}\bigr)
+&&\bigl(\because\ q+(-q)=0\text{ in }\mathbb Z\bigr)\\
+&=\zeta_8^p\bigl(1\cdot\zeta_8^{-p}\bigr)
+&&\bigl(\because\ \text{零乗の定義}\bigr)\\
+&=\zeta_8^p\zeta_8^{-p}
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
+&=\zeta_8^{p+(-p)}
+&&\bigl(\because\ \text{非零元の整数冪の加法則}\bigr)\\
+&=\zeta_8^0
+&&\bigl(\because\ p+(-p)=0\text{ in }\mathbb Z\bigr)\\
+&=1
+&&\bigl(\because\ \text{零乗の定義}\bigr).
+\end{aligned}`),
+                paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について、まず"]),
+                displayMath(String.raw`\begin{aligned}
+u_{\vec e}v_{\vec e}
+&=(\zeta_8^{p_{\vec e}}\zeta_8^{q_{\vec e}})v_{\vec e}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ の }u_{\vec e}\bigr)\\
+&=(\zeta_8^{p_{\vec e}}\zeta_8^{q_{\vec e}})
+  (\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}})
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ の }v_{\vec e}\bigr)\\
+&=1
+&&\bigl(\because\ \text{準備の等式を }(p,q)=(p_{\vec e},q_{\vec e})\text{ へ適用}\bigr).
+\end{aligned}`),
+                paragraph(["逆の順では"]),
+                displayMath(String.raw`\begin{aligned}
+v_{\vec e}u_{\vec e}
+&=(\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}})u_{\vec e}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ の }v_{\vec e}\bigr)\\
+&=(\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}})
+  (\zeta_8^{p_{\vec e}}\zeta_8^{q_{\vec e}})
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ の }u_{\vec e}\bigr)\\
+&=(\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}})
+  (\zeta_8^{-(-p_{\vec e})}\zeta_8^{q_{\vec e}})
+&&\bigl(\because\ -(-p_{\vec e})=p_{\vec e}\text{ in }\mathbb Z\bigr)\\
+&=(\zeta_8^{-q_{\vec e}}\zeta_8^{-p_{\vec e}})
+  (\zeta_8^{-(-p_{\vec e})}\zeta_8^{-(-q_{\vec e})})
+&&\bigl(\because\ -(-q_{\vec e})=q_{\vec e}\text{ in }\mathbb Z\bigr)\\
+&=1
+&&\bigl(\because\ \text{準備の等式を }(p,q)=(-q_{\vec e},-p_{\vec e})\text{ へ適用}\bigr).
+\end{aligned}`),
+                paragraph(["次に、順序付きの組 ", math(String.raw`(M,N)`), " を ",
+                  math(String.raw`(U,V)`), " または ", math(String.raw`(V,U)`), " とし、その対角成分を ",
+                  math(String.raw`m_{\vec e}:=M_{\vec e,\vec e},\ n_{\vec e}:=N_{\vec e,\vec e}`),
+                  " と書く。直前の二つの計算により、どちらの組でも ",
+                  math(String.raw`m_{\vec e}n_{\vec e}=1`), " である。任意の ",
+                  math(String.raw`\vec e,\vec f\in\vec E_L`), " を固定する。",
+                  math(String.raw`\vec g\ne\vec e`), " の項は"]),
+                displayMath(String.raw`\begin{aligned}
+M_{\vec e,\vec g}N_{\vec g,\vec f}
+&=0\cdot N_{\vec g,\vec f}
+&&\bigl(\because\ \blkref{def_diagonal_gauge},\ \vec g\ne\vec e\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)
+\end{aligned}`),
+                paragraph(["なので、両方の組について共通に"]),
+                displayMath(String.raw`\begin{aligned}
+(MN)_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}M_{\vec e,\vec g}N_{\vec g,\vec f}
+&&\bigl(\because\ \blkref{def_qbar_matrix_product}\bigr)\\
+&=M_{\vec e,\vec e}N_{\vec e,\vec f}
+&&\bigl(\because\ \text{上で示した零項を有限和から除く}\bigr)\\
+&=m_{\vec e}N_{\vec e,\vec f}
+&&\bigl(\because\ m_{\vec e}\text{ の定義}\bigr)
+\end{aligned}`),
+                paragraph(["となる。", math(String.raw`\vec f=\vec e`), " なら、この式の残りは"]),
+                displayMath(String.raw`\begin{aligned}
+m_{\vec e}N_{\vec e,\vec e}
+&=m_{\vec e}n_{\vec e}
+&&\bigl(\because\ n_{\vec e}\text{ の定義}\bigr)\\
+&=1
+&&\bigl(\because\ \text{上で示した対角成分の積}\bigr)\\
+&=I_{\vec e,\vec e}
+&&\bigl(\because\ \blkref{def_qbar_identity_matrix}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`\vec f\ne\vec e`), " なら"]),
+                displayMath(String.raw`\begin{aligned}
+m_{\vec e}N_{\vec e,\vec f}
+&=m_{\vec e}\cdot0
+&&\bigl(\because\ \blkref{def_diagonal_gauge},\ \vec f\ne\vec e\bigr)\\
+&=0
+&&\bigl(\because\ \text{零元との積}\bigr)\\
+&=I_{\vec e,\vec f}
+&&\bigl(\because\ \blkref{def_qbar_identity_matrix},\ \vec f\ne\vec e\bigr).
+\end{aligned}`),
+                paragraph(["したがってすべての成分で ", math(String.raw`MN=I`), " が成り立つ。",
+                  ref("def_qbar_matrix"), " により行列はその成分で定まるので、組 ",
+                  math(String.raw`(U,V)`), " と ", math(String.raw`(V,U)`), " の双方に適用して結論を得る。",
+                  "行列の計算は代数的数の有限和・積の中で閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_determinant_nonzero_terms",
         labels: [],
         title: { text: "行列式の非零な置換項" },
@@ -64721,6 +64930,7 @@ I_{a,b}\ne\{C_1,C_3\}`),
                   kind: "definition",
                   title: { text: "方向番号の標準整数代表" },
                   labels: ["def_direction_standard_representative"],
+                  lean: ["Ising2DLambda.KacWard.directionStandardRepresentative"],
                   habitat: "Z",
                   statement: [
                     paragraph([
