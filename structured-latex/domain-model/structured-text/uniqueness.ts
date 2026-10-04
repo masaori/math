@@ -49,13 +49,19 @@ export type NoteIdsOf<T extends readonly IdentifiedNote[]> = {
   -readonly [K in keyof T]: T[K]['id']
 }
 
-/** ブロック列が宣言するラベルを平坦化したタプル（末尾再帰）。 */
+/** ブロック列が宣言するラベルを平坦化する。一度に二要素を消費して再帰上限を避ける。 */
 export type LabelsOf<
   T extends readonly Identified[],
   Acc extends readonly string[] = [],
-> = T extends readonly [infer H extends Identified, ...infer R extends readonly Identified[]]
-  ? LabelsOf<R, [...Acc, ...H['labels']]>
-  : Acc
+> = T extends readonly [
+  infer First extends Identified,
+  infer Second extends Identified,
+  ...infer R extends readonly Identified[],
+]
+  ? LabelsOf<R, [...Acc, ...First['labels'], ...Second['labels']]>
+  : T extends readonly [infer Last extends Identified, ...infer R extends readonly Identified[]]
+    ? LabelsOf<R, [...Acc, ...Last['labels']]>
+    : Acc
 
 /** 重複があればエラーになる制約（`never` を要求する）。 */
 export type AssertNoDuplicate<D extends never> = D

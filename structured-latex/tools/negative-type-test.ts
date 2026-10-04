@@ -111,6 +111,29 @@ export type _NoIdCollision = AssertNoDuplicate<FindDuplicate<[...AllBlockIds, ..
 
 const cases: Case[] = [
   ...[1003, 1004].map((length): Case => ({
+    name: `${length} ブロックのラベル列を保ち末尾の重複を検出する`,
+    expect: 'does not satisfy the constraint',
+    files: (broken) => ({
+      'fixture.ts': `import type { Assert, AssertNoDuplicate, FindDuplicate, LabelsOf } from '../../../domain-model/index.ts'
+type Equal<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false
+type Blocks = [${Array.from({ length: length - 1 }, (_, index) =>
+  `{ id: 'block_${index}'; labels: readonly ['label_${index}'] }`).join(', ')}]
+type Labels = LabelsOf<[...Blocks, { id: 'tail'; labels: ['${broken ? 'label_0' : 'tail_label'}'] }]>
+export type _Unique = AssertNoDuplicate<FindDuplicate<Labels>>
+export type _Length = Assert<Equal<Labels['length'], ${length}>>
+export type _Order = Assert<Equal<LabelsOf<[
+  { id: 'empty'; labels: [] },
+  { id: 'pair'; labels: ['a', 'b'] },
+  { id: 'single'; labels: ['c'] }
+], ['prefix']>, ['prefix', 'a', 'b', 'c']>>
+export type _Empty = Assert<Equal<LabelsOf<[]>, []>>
+type Variadic = LabelsOf<[{ id: 'head'; labels: ['a', 'a'] }, ...{ id: string; labels: string[] }[]]>
+export type _VariadicLabels = Assert<Equal<Variadic, ['a', 'a']>>
+export type _VariadicDuplicate = Assert<Equal<FindDuplicate<Variadic>, 'a'>>
+`,
+    }),
+  })),
+  ...[1003, 1004].map((length): Case => ({
     name: `${length} 件の識別子の末尾の重複を検出する`,
     expect: 'does not satisfy the constraint',
     files: (broken) => ({
