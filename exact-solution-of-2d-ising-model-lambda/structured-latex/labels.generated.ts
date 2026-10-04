@@ -156,6 +156,7 @@ export const ALL_LABELS = [
   "claim_one_sided_periodic_lift_closure_closed_unit_steps",
   "claim_one_sided_periodic_lift_closure_simple",
   "claim_one_sided_periodic_lift_repetition",
+  "claim_one_sided_transverse_steps_base_independent",
   "claim_open_rectangle_constant_plus_breaks_no_bond",
   "claim_open_rectangle_gluing_inequality_log",
   "claim_open_rectangle_gluing_inequality_rational",

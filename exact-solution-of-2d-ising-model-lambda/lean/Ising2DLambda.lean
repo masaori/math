@@ -1133,3 +1133,6 @@ import Ising2DLambda.KacWard.OneSidedParallelReturnFromNecSuf
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.NecSuf.KacWard.PeriodicLiftStepRepetition
 import Ising2DLambda.KacWard.PeriodicLiftStepRepetitionFromNecSuf
+import Ising2DLambda.KacWard.OneSidedTransverseSteps
+import Ising2DLambda.NecSuf.KacWard.OneSidedTransverseSteps
+import Ising2DLambda.KacWard.OneSidedTransverseStepsFromNecSuf

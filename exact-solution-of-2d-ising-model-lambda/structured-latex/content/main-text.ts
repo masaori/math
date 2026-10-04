@@ -67367,6 +67367,114 @@ k_0+i&=k_0+(am+b)&&\bigl(\because\ i=am+b\bigr)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_one_sided_transverse_steps_base_independent",
+        labels: [],
+        title: { text: "一側閉包の横断二列の基点不変性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_one_sided_transverse_steps_base_independent",
+            focus: {
+              id: "kac_ward_claim_one_sided_transverse_steps_base_independent",
+              kind: "claim",
+              title: { text: "一側閉包の横断二列の歩ベクトルは基点に依らない" },
+              labels: ["claim_one_sided_transverse_steps_base_independent"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.KacWard.oneSidedTransverseSteps_base_independent",
+                "Ising2DLambda.NecSuf.KacWard.iteratedStaircase_reindexed_steps_base_independent_necSuf",
+                "Ising2DLambda.KacWard.oneSidedTransverseSteps_base_independent_from_necSuf",
+                "Ising2DLambda.KacWard.oneSidedTransverseSteps_closure_columns",
+                "Ising2DLambda.KacWard.oneSidedTransverseSteps_closure_columns_from_necSuf",
+              ],
+              verification: ["sagemath/check/one-sided-transverse-steps"],
+              statement: [
+                paragraph([
+                  "反復横断階段（", ref("def_iterated_transverse_staircase"), "）の記号を使い、",
+                  math(String.raw`\gamma`), " と反復回数 ", math(String.raw`t\in\mathbb N`), "、",
+                  math(String.raw`t\ge1`), " を固定する。",
+                  math(String.raw`b:=t n_{\perp}\in\mathbb N`), "、", math(String.raw`b\ge1`),
+                  " と置き、二つの添字写像 ",
+                  math(String.raw`j_0,j_1:\{0,\ldots,b\}\longrightarrow\{0,\ldots,b\}`),
+                  " を ", math(String.raw`j_0(s):=s`), "、", math(String.raw`j_1(s):=b-s`),
+                  " と定める。任意の基点 ", math(String.raw`Q\in\mathbb Z^2`),
+                  "、向き ", math(String.raw`\varepsilon\in\{0,1\}`),
+                  "、添字 ", math(String.raw`i\in\{0,\ldots,b-1\}`), " について、",
+                ]),
+                displayMath(String.raw`D^{\gamma,Q,t}_{j_\varepsilon(i+1)}-D^{\gamma,Q,t}_{j_\varepsilon(i)}
+=D^{\gamma,(0,0),t}_{j_\varepsilon(i+1)}-D^{\gamma,(0,0),t}_{j_\varepsilon(i)}`),
+                paragraph([
+                  "が成り立つ。従って、一側閉包（", ref("def_one_sided_periodic_lift_closure"),
+                  "）の第二部分をなす順向きの反復横断階段と、第四部分をなす逆向きの反復横断階段の歩ベクトル列は、",
+                  "それぞれ原点を基点とした同じ向きの列に等しく、周期数 ",
+                  math(String.raw`c\in\mathbb N`), "、", math(String.raw`c\ge1`), " に依らない。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "この証明中だけ ", math(String.raw`D^Q_s:=D^{\gamma,Q,t}_s`), "、",
+                  math(String.raw`D^0_s:=D^{\gamma,(0,0),t}_s`), "、",
+                  math(String.raw`d:=(w_{\mathrm h}(\gamma),-w_{\mathrm v}(\gamma))\in\mathbb Z^2`),
+                  " と略記する。任意の ", math(String.raw`s\in\{0,\ldots,b\}`),
+                  " に対し、整数除法の商 ", math(String.raw`q_s:=\lfloor s/n_{\perp}\rfloor\in\mathbb N`),
+                  " と余り ", math(String.raw`r_s:=s\bmod n_{\perp}\in\{0,\ldots,n_{\perp}-1\}`),
+                  " を使うと、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+D^Q_s&=(Q+q_s d)+C^\gamma_{r_s}
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=Q+(q_s d+C^\gamma_{r_s})
+&&\bigl(\because\ \mathbb Z^2\text{ の加法の結合則}\bigr)\\
+&=Q+\bigl(((0,0)+q_s d)+C^\gamma_{r_s}\bigr)
+&&\bigl(\because\ \mathbb Z^2\text{ の零元の法則}\bigr)\\
+&=Q+D^0_s
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`0\le i<i+1\le b`), " より ",
+                  math(String.raw`j_\varepsilon(i),j_\varepsilon(i+1)\in\{0,\ldots,b\}`),
+                  " であり、今の等式を両端へ適用できる。従って、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+D^Q_{j_\varepsilon(i+1)}-D^Q_{j_\varepsilon(i)}
+&=(Q+D^0_{j_\varepsilon(i+1)})-(Q+D^0_{j_\varepsilon(i)})
+&&\bigl(\because\ \text{直前の }D^Q_s=Q+D^0_s\bigr)\\
+&=D^0_{j_\varepsilon(i+1)}-D^0_{j_\varepsilon(i)}
+&&\bigl(\because\ \mathbb Z^2\text{ の共通の加数を消去}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "一側閉包の基点を ", math(String.raw`S\in\mathbb Z^2`), "、周期ベクトルを ",
+                  math(String.raw`B:=B_\gamma\in\mathbb Z^2`), " と書く。第二部分と第四部分の歩をそれぞれ ",
+                  math(String.raw`v^{(c)}_i,x^{(c)}_i\in\mathbb Z^2`), " とすると、四部分の歩ベクトル表示（",
+                  ref("claim_one_sided_closure_step_sequence"), "）から、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+v^{(c)}_i&=D^{S+cB}_{i+1}-D^{S+cB}_i
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&=D^0_{i+1}-D^0_i
+&&\bigl(\because\ \text{上の等式へ }Q=S+cB,\ \varepsilon=0\text{ を代入}\bigr),\\
+x^{(c)}_i&=D^S_{b-(i+1)}-D^S_{b-i}
+&&\bigl(\because\ \blkref{def_one_sided_periodic_lift_closure},\ \blkref{claim_one_sided_closure_step_sequence}\bigr)\\
+&=D^0_{b-(i+1)}-D^0_{b-i}
+&&\bigl(\because\ \text{上の等式へ }Q=S,\ \varepsilon=1\text{ を代入}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "右辺はいずれも ", math(String.raw`\gamma,t,i`), " だけで定まり、",
+                  math(String.raw`c`), " を含まない。全ての添字 ", math(String.raw`i\in\{0,\ldots,b-1\}`),
+                  " で等しいので、二つの有限列それぞれの基点不変性が従う。比較したのは整数ベクトルの列であり、",
+                  "平行移動した辺そのものは同一視していない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_one_sided_closure_period_difference_turning",
         labels: [],
         title: { text: "一側閉包の周期数差と循環総回転数" },
@@ -67437,7 +67545,9 @@ k_0+i&=k_0+(am+b)&&\bigl(\because\ i=am+b\bigr)\\
                   "）から、周期数を一つ増やすと、周期持ち上げ部分へ ", math(String.raw`U`),
                   " と同じ方向列が一組、符号反転した平行帰路へ ", math(String.raw`R_-`),
                   " と同じ方向列が一組増える。平行移動で変わる頂点の位置は、この方向列の比較に含めない。",
-                  "二つの反復横断階段と、四部分の接合部の先頭・末尾方向は変わらない。",
+                  "二つの反復横断階段の歩ベクトル列が変わらないことは ",
+                  ref("claim_one_sided_transverse_steps_base_independent"), " による。",
+                  "四部分の接合部の先頭・末尾方向も変わらない。",
                   "循環総回転数の有限和を四部分と接合部へ分ける分割は ",
                   ref("claim_four_part_adjacent_sum"), " で与えた。各反復部分の内部和の増分へ ",
                   ref("claim_repeated_adjacent_sum_difference"), " を適用し、共通の接合項を消すと、",
