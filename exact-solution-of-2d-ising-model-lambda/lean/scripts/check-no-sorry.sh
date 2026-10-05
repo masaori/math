@@ -52,6 +52,45 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.KacWard.gaugeDirectionPhase
+  Ising2DLambda.KacWard.gaugeDirectionSign
+  Ising2DLambda.KacWard.gaugeDirectionSign_skew
+  Ising2DLambda.KacWard.rotationPhase_reversal_eq_directionPhase
+  Ising2DLambda.KacWard.gaugeDirectionPhase_table
+  Ising2DLambda.KacWard.gaugeDirectionPhase_weighted
+  Ising2DLambda.KacWard.twistParity_reversal
+  Ising2DLambda.KacWard.gaugePairWeight_zpow
+  Ising2DLambda.KacWard.twistSign_cast_eq_zpow
+  Ising2DLambda.KacWard.gaugePairWeight_reversal
+  Ising2DLambda.KacWard.gaugeLongCoefficient_skew
+  Ising2DLambda.KacWard.gaugeShortCoefficient_value
+  Ising2DLambda.KacWard.gaugeShortScalarCoefficient_skew
+  Ising2DLambda.KacWard.gaugeShortCoefficient_skew
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_entry_separated
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_skew
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_diagonal_zero
+  Ising2DLambda.NecSuf.KacWard.gaugePhase
+  Ising2DLambda.NecSuf.KacWard.gaugeWeight
+  Ising2DLambda.NecSuf.KacWard.gaugeDirectionSign
+  Ising2DLambda.NecSuf.KacWard.gaugeDirectionSign_skew_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugePhase_table_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeExponent_zero_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugePhase_weighted_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeWeight_exponent_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeWeight_reverse_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeWeight_phase_value_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeShortScalarCoefficient_skew_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeLongCoefficient_skew_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugeShortCoefficient_skew_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugedKernel
+  Ising2DLambda.NecSuf.KacWard.gaugedKernel_entry_separated_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugedKernel_skew_necSuf
+  Ising2DLambda.NecSuf.KacWard.gaugedKernel_diagonal_zero_necSuf
+  Ising2DLambda.KacWard.gaugePhase_specialization
+  Ising2DLambda.KacWard.gaugeWeight_specialization
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_eq_kernel
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_skew_from_necSuf
+  Ising2DLambda.KacWard.gaugedTerminalMatrix_diagonal_zero_from_necSuf
   Ising2DLambda.KacWard.twistSign_eq_neg_one_pow_twistParity
   Ising2DLambda.NecSuf.KacWard.pow_eq_pow_mod_two_necSuf
   Ising2DLambda.KacWard.twistSign_eq_neg_one_pow_twistParity_from_necSuf

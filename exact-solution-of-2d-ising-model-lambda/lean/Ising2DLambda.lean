@@ -1184,3 +1184,7 @@ import Ising2DLambda.KacWard.GaugedTerminalMatrixFromNecSuf
 import Ising2DLambda.KacWard.TwistSignParity
 import Ising2DLambda.NecSuf.KacWard.TwistSignParity
 import Ising2DLambda.KacWard.TwistSignParityFromNecSuf
+
+import Ising2DLambda.KacWard.GaugedTerminalSkew
+import Ising2DLambda.NecSuf.KacWard.GaugedTerminalSkew
+import Ising2DLambda.KacWard.GaugedTerminalSkewFromNecSuf

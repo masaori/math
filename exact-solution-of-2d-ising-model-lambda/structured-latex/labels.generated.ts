@@ -99,6 +99,7 @@ export const ALL_LABELS = [
   "claim_free_entropy_dual_relation",
   "claim_fully_unswitchable_contacts_witness_doubled_edges",
   "claim_gauged_terminal_matrix_entries",
+  "claim_gauged_terminal_matrix_skew",
   "claim_global_spin_reversal_preserves_broken_edge",
   "claim_gluing_restriction_family",
   "claim_high_temperature_polynomial_identity",

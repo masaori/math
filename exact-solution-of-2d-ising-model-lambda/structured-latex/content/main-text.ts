@@ -51279,6 +51279,276 @@ B_{\vec e,\vec g}\widehat U_{\vec g,\vec f}
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_gauged_terminal_matrix_skew",
+        labels: [],
+        title: { text: "変換後の端末行列の反対称性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_gauged_terminal_matrix_skew",
+            focus: {
+              id: "kac_ward_claim_gauged_terminal_matrix_skew",
+              kind: "claim",
+              title: { text: "変換後の端末行列は零対角の反対称行列である" },
+              labels: ["claim_gauged_terminal_matrix_skew"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/gauged-terminal-matrix-skew"],
+              lean: [
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_skew",
+                "Ising2DLambda.NecSuf.KacWard.gaugedKernel_skew_necSuf",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_skew_from_necSuf",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_diagonal_zero",
+                "Ising2DLambda.NecSuf.KacWard.gaugedKernel_diagonal_zero_necSuf",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_diagonal_zero_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`),
+                  " に対し、", ref("def_gauged_terminal_matrix"), " の行列は、すべての ",
+                  math(String.raw`\vec e,\vec f\in\vec E_L`), " について"]),
+                displayMath(String.raw`\widehat K_{\vec e,\vec f}=-\widehat K_{\vec f,\vec e},
+\qquad \widehat K_{\vec e,\vec e}=0\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["を満たす。", math(String.raw`L=1`), " も含む。"]),
+              ],
+              proof: [
+                paragraph(["辺長とねじれを固定する。", ref("def_rotation_phase"), " の根を ",
+                  math(String.raw`z:=\zeta_8\in\overline{\mathbb Q}`), " と略記する。",
+                  math(String.raw`z^4=-1`), " なので ", math(String.raw`z\ne0`),
+                  " であり、整数冪の加法則を使える。", ref("def_direction_standard_representative"),
+                  " と ", ref("def_twist_parity"), " を用い、各辺について"]),
+                displayMath(String.raw`r_{\vec e}:=r_4(\operatorname{dir}(\vec e))\in\{0,1,2,3\}\subset\mathbb Z,
+\qquad k_{\vec e}:=\kappa_{a,b}(\vec e)\in\{0,1\}\subset\mathbb N\subset\mathbb Z`),
+                paragraph(["と置く。自然数指数を整数指数として書くときは、この包含と両方の冪の一致を用いる。",
+                  "包含準同型 ", math(String.raw`j:\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
+                  " による符号の像を ", math(String.raw`\epsilon_{\vec e}:=j(\varepsilon_{a,b}(\vec e))\in\overline{\mathbb Q}`),
+                  " と書く。まず任意の二辺を固定し、", math(String.raw`r:=r_{\vec e},\ t:=r_{\vec f},\ k:=k_{\vec e},\ l:=k_{\vec f}`), " と略記する。"]),
+                displayMath(String.raw`\begin{aligned}
+w_{\vec e,\vec f}
+&=z^2\bigl((z^{2k}z^r)(z^{-t}z^{-2l})\bigr)
+&&(\because\ \blkref{def_gauged_terminal_matrix},\ \blkref{def_diagonal_gauge})\\
+&=z^2\bigl(z^{2k+r}(z^{-t}z^{-2l})\bigr)
+&&(\because\ \text{整数冪の加法則})\\
+&=z^2\bigl(z^{2k+r}z^{-t-2l}\bigr)
+&&(\because\ \text{整数冪の加法則})\\
+&=z^2z^{(2k+r)+(-t-2l)}
+&&(\because\ \text{整数冪の加法則})\\
+&=z^{2+((2k+r)+(-t-2l))}
+&&(\because\ \text{整数冪の加法則})\\
+&=z^{2+r-t+2k-2l}
+&&(\because\ \mathbb Z\text{ の加法の整理}).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\epsilon_{\vec f}
+&=j\bigl((-1)^l\bigr)
+&&(\because\ \blkref{claim_twist_sign_from_parity})\\
+&=(-1)^l
+&&(\because\ j\text{ は一・加法逆元・自然数冪を保つ})\\
+&=(z^4)^l
+&&(\because\ \blkref{def_rotation_phase}\text{ の }z^4=-1)\\
+&=z^{4l}
+&&(\because\ \text{冪の乗法則}).
+\end{aligned}`),
+                paragraph(["切断線の指示関数は辺の向きに依らない（", ref("def_seam_parities"),
+                  "）ので ", math(String.raw`k_{\iota(\vec e)}=k_{\vec e}`), " である。反転方向は二だけ進む（",
+                  ref("claim_reversal_direction_shift"), "）。四つの代表を代入すると、"]),
+                displayMath(String.raw`\begin{array}{c|rrrr}
+r_{\vec e}&0&1&2&3\\\hline
+r_{\iota(\vec e)}&2&3&0&1\\
+2+r_{\vec e}-r_{\iota(\vec e)}&0&0&4&4
+\end{array}`),
+                paragraph(["したがって反転辺との重みは、"]),
+                displayMath(String.raw`\begin{aligned}
+w_{\vec e,\iota(\vec e)}
+&=z^{2+r_{\vec e}-r_{\iota(\vec e)}+2k_{\vec e}-2k_{\iota(\vec e)}}
+&&(\because\ \text{上で求めた重みの整数冪表示})\\
+&=z^{2+r_{\vec e}-r_{\iota(\vec e)}+2k_{\vec e}-2k_{\vec e}}
+&&(\because\ k_{\iota(\vec e)}=k_{\vec e})\\
+&=z^{2+r_{\vec e}-r_{\iota(\vec e)}}
+&&(\because\ \mathbb Z\text{ の加法逆元の取消})\\
+&=\begin{cases}z^0,&r_{\vec e}<2,\\z^4,&r_{\vec e}\ge2\end{cases}
+&&(\because\ \text{上の四方向の表})\\
+&=\begin{cases}1,&r_{\vec e}<2,\\-1,&r_{\vec e}\ge2\end{cases}
+&&(\because\ z^0=1,\ z^4=-1).
+\end{aligned}`),
+                paragraph(["次に、反転辺から出る回転位相を方向だけで書く。",
+                  math(String.raw`R:\{0,1,2,3\}^2\to\overline{\mathbb Q}`),
+                  " を次の表で定める。異なる方向の項は ", ref("def_rotation_phase"), " と ",
+                  ref("claim_reversal_direction_shift"), " の直進・左折・右折の値で、同方向の項は零で補ったものである。"]),
+                displayMath(String.raw`\begin{array}{c|cccc}
+R(r,t)&t=0&t=1&t=2&t=3\\\hline
+r=0&0&z^{-1}&1&z\\
+r=1&z&0&z^{-1}&1\\
+r=2&1&z&0&z^{-1}\\
+r=3&z^{-1}&1&z&0
+\end{array}`),
+                paragraph([math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e`),
+                  " のとき、", ref("claim_terminal_matrix_entries"), " の位相は ",
+                  math(String.raw`\rho(\iota(\vec e),\vec f)=R(r_{\vec e},r_{\vec f})`),
+                  " となる。この条件を課さない補助計算では、右辺の全域で定義した値を用いる。表の各項を指数で書けば、"]),
+                displayMath(String.raw`R(r,t)=\begin{cases}
+0,&r=t,\\z^{-2-r+t},&r<t,\\z^{2-r+t},&r>t.
+\end{cases}`),
+                paragraph(["を得る。", math(String.raw`r=t`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+z^{2+r-t}R(r,t)
+&=z^{2+r-t}\cdot0&&(\because\ R\text{ の同方向の値})\\
+&=0&&(\because\ \text{零との積}).
+\end{aligned}`),
+                paragraph([math(String.raw`r<t`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+z^{2+r-t}R(r,t)
+&=z^{2+r-t}z^{-2-r+t}&&(\because\ R\text{ の上三角の値})\\
+&=z^{(2+r-t)+(-2-r+t)}&&(\because\ \text{整数冪の加法則})\\
+&=z^0&&(\because\ \mathbb Z\text{ の加法逆元の取消})\\
+&=1&&(\because\ \text{零乗}).
+\end{aligned}`),
+                paragraph([math(String.raw`r>t`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+z^{2+r-t}R(r,t)
+&=z^{2+r-t}z^{2-r+t}&&(\because\ R\text{ の下三角の値})\\
+&=z^{(2+r-t)+(2-r+t)}&&(\because\ \text{整数冪の加法則})\\
+&=z^4&&(\because\ \mathbb Z\text{ の加法の整理})\\
+&=-1&&(\because\ \blkref{def_rotation_phase}\text{ の四乗}).
+\end{aligned}`),
+                paragraph(["補助係数 ", math(String.raw`d_{\vec e,\vec f}:=w_{\vec e,\vec f}\bigl(\epsilon_{\vec f}R(r_{\vec e},r_{\vec f})\bigr)\in\overline{\mathbb Q}`),
+                  " と ", math(String.raw`\sigma(r,t):=\begin{cases}1,&r<t,\\-1,&r>t,\\0,&r=t\end{cases}\in\overline{\mathbb Q}`),
+                  " を置く。", math(String.raw`A:=2+r-t+2k-2l\in\mathbb Z`), " と略記すると、"]),
+                displayMath(String.raw`\begin{aligned}
+d_{\vec e,\vec f}
+&=z^A\bigl(\epsilon_{\vec f}R(r,t)\bigr)
+&&(\because\ \text{重みの整数冪表示})\\
+&=z^A\bigl(z^{4l}R(r,t)\bigr)
+&&(\because\ \text{上で求めた符号の整数冪表示})\\
+&=(z^Az^{4l})R(r,t)
+&&(\because\ \text{乗法の結合則})\\
+&=z^{A+4l}R(r,t)
+&&(\because\ \text{整数冪の加法則})\\
+&=z^{(2+r-t)+2(k+l)}R(r,t)
+&&(\because\ A\text{ の定義と整数の加法の整理})\\
+&=\bigl(z^{2+r-t}z^{2(k+l)}\bigr)R(r,t)
+&&(\because\ \text{整数冪の加法則})\\
+&=z^{2+r-t}\bigl(z^{2(k+l)}R(r,t)\bigr)
+&&(\because\ \text{乗法の結合則})\\
+&=z^{2+r-t}\bigl(R(r,t)z^{2(k+l)}\bigr)
+&&(\because\ \text{乗法の可換則})\\
+&=\bigl(z^{2+r-t}R(r,t)\bigr)z^{2(k+l)}
+&&(\because\ \text{乗法の結合則})\\
+&=\sigma(r,t)z^{2(k+l)}
+&&(\because\ \text{直前の三場合の計算}).
+\end{aligned}`),
+                paragraph(["方向の順序の三場合から ", math(String.raw`\sigma(r,t)=-\sigma(t,r)`),
+                  " である。実際、", math(String.raw`r<t`), " なら ", math(String.raw`1=-(-1)`),
+                  "、", math(String.raw`r>t`), " なら ", math(String.raw`-1=-(1)`),
+                  "、", math(String.raw`r=t`), " なら ", math(String.raw`0=-0`), " である。よって、"]),
+                displayMath(String.raw`\begin{aligned}
+d_{\vec e,\vec f}
+&=\sigma(r,t)z^{2(k+l)}&&(\because\ \text{上の係数の計算})\\
+&=\bigl(-\sigma(t,r)\bigr)z^{2(k+l)}&&(\because\ \text{方向の順序の三場合})\\
+&=-\bigl(\sigma(t,r)z^{2(k+l)}\bigr)&&(\because\ \text{負号と積})\\
+&=-\bigl(\sigma(t,r)z^{2(l+k)}\bigr)&&(\because\ \mathbb Z\text{ の加法の可換則})\\
+&=-d_{\vec f,\vec e}&&(\because\ \text{二辺を入れ替えた係数の計算}).
+\end{aligned}`),
+                paragraph(["成分に現れる二つの条件を、それぞれ独立に扱う。係数を"]),
+                displayMath(String.raw`\ell_{\vec e,\vec f}:=\begin{cases}w_{\vec e,\vec f},&\vec f=\iota(\vec e),\\0,&\text{それ以外},\end{cases}
+\qquad q_{\vec e,\vec f}:=\begin{cases}d_{\vec e,\vec f},&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\0,&\text{それ以外}\end{cases}`),
+                paragraph(["と置く。いずれも ", math(String.raw`\overline{\mathbb Q}`), " の元である。",
+                  ref("claim_reversal_is_involution"), " より ", math(String.raw`\vec f=\iota(\vec e)\iff\vec e=\iota(\vec f)`),
+                  " である。この条件が偽なら ", math(String.raw`\ell_{\vec e,\vec f}=0=-\ell_{\vec f,\vec e}`),
+                  "、真なら反転方向の表と反転辺の重みの計算から ",
+                  math(String.raw`\ell_{\vec e,\vec f}=1,\ \ell_{\vec f,\vec e}=-1`),
+                  " または ", math(String.raw`\ell_{\vec e,\vec f}=-1,\ \ell_{\vec f,\vec e}=1`),
+                  " である。どちらでも ", math(String.raw`\ell_{\vec e,\vec f}=-\ell_{\vec f,\vec e}`),
+                  " が従う。始点の一致と相異なる辺という条件も二辺の交換で不変なので、上の ",
+                  math(String.raw`d`), " の計算と偽の場合の ", math(String.raw`0=-0`),
+                  " から ", math(String.raw`q_{\vec e,\vec f}=-q_{\vec f,\vec e}`), " を得る。"]),
+                paragraph(["あとは定数埋込み ", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`),
+                  "（", ref("def_qbar_constant_embedding"), "）を通して二つの寄与を合成する。",
+                  math(String.raw`w:=w_{\vec e,\vec f},\ h:=\epsilon_{\vec f}R(r,t)\in\overline{\mathbb Q}`),
+                  "、", math(String.raw`\delta:=\begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}\in\overline{\mathbb Q}[x]`),
+                  "、", math(String.raw`\beta:=\begin{cases}C(h),&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\0,&\text{それ以外}\end{cases}\in\overline{\mathbb Q}[x]`),
+                  " と略記する。反転辺である場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+C(w)\delta&=C(w)\cdot1&&(\because\ \delta\text{ の真の場合})\\
+&=C(w)&&(\because\ \text{単位元との積})\\
+&=C(\ell_{\vec e,\vec f})&&(\because\ \ell\text{ の真の場合}).
+\end{aligned}`),
+                paragraph(["反転辺でない場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+C(w)\delta&=C(w)\cdot0&&(\because\ \delta\text{ の偽の場合})\\
+&=0&&(\because\ \text{零との積})\\
+&=C(0)&&(\because\ C\text{ の零の保存})\\
+&=C(\ell_{\vec e,\vec f})&&(\because\ \ell\text{ の偽の場合}).
+\end{aligned}`),
+                paragraph(["始点が一致し、二辺が相異なる場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+C(w)\beta&=C(w)C(h)&&(\because\ \beta\text{ の真の場合})\\
+&=C(wh)&&(\because\ C\text{ の積の保存})\\
+&=C(q_{\vec e,\vec f})&&(\because\ q\text{ の真の場合}).
+\end{aligned}`),
+                paragraph(["この条件が偽の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
+&=0&&(\because\ \text{零との積})\\
+&=C(0)&&(\because\ C\text{ の零の保存})\\
+&=C(q_{\vec e,\vec f})&&(\because\ q\text{ の偽の場合}).
+\end{aligned}`),
+                paragraph(["したがって、各辺対について、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat K_{\vec e,\vec f}
+&=C(w)(\delta-x\beta)&&(\because\ \blkref{claim_gauged_terminal_matrix_entries})\\
+&=C(w)\delta-C(w)(x\beta)&&(\because\ \text{分配則})\\
+&=C(w)\delta-(C(w)x)\beta&&(\because\ \text{乗法の結合則})\\
+&=C(w)\delta-(xC(w))\beta&&(\because\ \text{乗法の可換則})\\
+&=C(w)\delta-x(C(w)\beta)&&(\because\ \text{乗法の結合則})\\
+&=C(\ell_{\vec e,\vec f})-x(C(w)\beta)&&(\because\ \text{上の反転辺の二場合})\\
+&=C(\ell_{\vec e,\vec f})-xC(q_{\vec e,\vec f})&&(\because\ \text{上の始点の条件の二場合}).
+\end{aligned}`),
+                paragraph(["ここまでで得た係数の反対称性を代入すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat K_{\vec e,\vec f}
+&=C(\ell_{\vec e,\vec f})-xC(q_{\vec e,\vec f})&&(\because\ \text{直前の成分の式})\\
+&=C(-\ell_{\vec f,\vec e})-xC(q_{\vec e,\vec f})&&(\because\ \ell\text{ の反対称性})\\
+&=C(-\ell_{\vec f,\vec e})-xC(-q_{\vec f,\vec e})&&(\because\ q\text{ の反対称性})\\
+&=-C(\ell_{\vec f,\vec e})-xC(-q_{\vec f,\vec e})&&(\because\ C\text{ の加法逆元の保存})\\
+&=-C(\ell_{\vec f,\vec e})-x\bigl(-C(q_{\vec f,\vec e})\bigr)&&(\because\ C\text{ の加法逆元の保存})\\
+&=-C(\ell_{\vec f,\vec e})-\bigl(-xC(q_{\vec f,\vec e})\bigr)&&(\because\ \text{積と負号})\\
+&=-C(\ell_{\vec f,\vec e})+\bigl(-(-xC(q_{\vec f,\vec e}))\bigr)&&(\because\ \text{減法の定義})\\
+&=-\bigl(C(\ell_{\vec f,\vec e})+(-xC(q_{\vec f,\vec e}))\bigr)&&(\because\ \text{和の加法逆元})\\
+&=-\bigl(C(\ell_{\vec f,\vec e})-xC(q_{\vec f,\vec e})\bigr)&&(\because\ \text{減法の定義})\\
+&=-\widehat K_{\vec f,\vec e}&&(\because\ \text{二辺を入れ替えた成分の式}).
+\end{aligned}`),
+                paragraph(["対角成分は成分式から直接求める。",
+                  ref("claim_reversal_has_no_fixed_point"), " より ", math(String.raw`\vec e\ne\iota(\vec e)`),
+                  " であり、相異なる辺という条件も対角では偽である。",
+                  math(String.raw`\beta_{\vec e,\vec e}`), " を上で定めた ", math(String.raw`\beta`),
+                  " の対角での値と書くと、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat K_{\vec e,\vec e}
+&=C(w_{\vec e,\vec e})\left[\begin{cases}1,&\vec e=\iota(\vec e),\\0,&\text{それ以外}\end{cases}-x\beta_{\vec e,\vec e}\right]
+&&(\because\ \blkref{claim_gauged_terminal_matrix_entries})\\
+&=C(w_{\vec e,\vec e})(0-x\beta_{\vec e,\vec e})
+&&(\because\ \blkref{claim_reversal_has_no_fixed_point})\\
+&=C(w_{\vec e,\vec e})(0-x\cdot0)
+&&(\because\ \vec e\ne\vec e\text{ は偽})\\
+&=C(w_{\vec e,\vec e})(0-0)
+&&(\because\ \text{零との積})\\
+&=C(w_{\vec e,\vec e})\cdot0
+&&(\because\ \text{零の減法})\\
+&=0
+&&(\because\ \text{零との積}).
+\end{aligned}`),
+                paragraph(["二つの条件をそれぞれ場合分けしたので、", math(String.raw`L=1`),
+                  " で同時に成り立っても両方の寄与が残る。すべての計算は代数的数とその一変数多項式の中で閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_determinant_nonzero_terms",
         labels: [],
         title: { text: "行列式の非零な置換項" },
