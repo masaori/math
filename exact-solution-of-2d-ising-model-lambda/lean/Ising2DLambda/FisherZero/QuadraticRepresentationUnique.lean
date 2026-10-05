@@ -1,6 +1,6 @@
 /-
 「二次体の表示の一意性」の具体版。
-人手証明と同じく係数の差 α, β を置き、十四段の等式列で α + βs = 0 を得て
+人手証明と同じく係数の差 α, β を置き、十六段の等式列で ι(α) + ι(β)s = 0 を得て
 一と s の一次独立性を適用し、二本の六段の等式列で元の係数の等号へ戻す。
 -/
 import Ising2DLambda.FisherZero.OneSLinearlyIndependent
@@ -21,10 +21,15 @@ theorem quadraticRepresentationUnique
   have hzero : algebraMap ℚ Qbar α + algebraMap ℚ Qbar β * s = 0 := by
     calc
       algebraMap ℚ Qbar α + algebraMap ℚ Qbar β * s =
+          algebraMap ℚ Qbar (a + (-a')) +
+            algebraMap ℚ Qbar (b + (-b')) * s := by rfl
+      _ = (algebraMap ℚ Qbar a + algebraMap ℚ Qbar (-a')) +
+            (algebraMap ℚ Qbar b + algebraMap ℚ Qbar (-b')) * s := by
+              rw [map_add, map_add]
+      _ =
           (algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar a'))) +
             (algebraMap ℚ Qbar b + (-(algebraMap ℚ Qbar b'))) * s := by
-              rw [show α = a + (-a') by rfl, show β = b + (-b') by rfl,
-                map_add, map_neg, map_add, map_neg]
+              rw [map_neg, map_neg]
       _ = (algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar a'))) +
             (algebraMap ℚ Qbar b * s + (-(algebraMap ℚ Qbar b')) * s) := by
               rw [add_mul]

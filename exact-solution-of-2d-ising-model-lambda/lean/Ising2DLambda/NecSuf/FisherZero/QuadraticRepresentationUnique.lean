@@ -22,9 +22,12 @@ theorem quadratic_representation_unique_necSuf
   have hzero : embed α + smul (embed β) s = 0 := by
     calc
       embed α + smul (embed β) s =
+          embed (a + (-a')) + smul (embed (b + (-b'))) s := by rfl
+      _ = (embed a + embed (-a')) + smul (embed b + embed (-b')) s := by
+            rw [map_add, map_add]
+      _ =
           (embed a + (-embed a')) + smul (embed b + (-embed b')) s := by
-            rw [show α = a + (-a') by rfl, show β = b + (-b') by rfl,
-              map_add, map_neg, map_add, map_neg]
+            rw [map_neg, map_neg]
       _ = (embed a + (-embed a')) + (smul (embed b) s + smul (-embed b') s) := by
             rw [hSmulAdd]
       _ = embed a + ((-embed a') + (smul (embed b) s + smul (-embed b') s)) := by

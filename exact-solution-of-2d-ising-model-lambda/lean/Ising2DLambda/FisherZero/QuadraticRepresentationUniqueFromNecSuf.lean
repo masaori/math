@@ -5,7 +5,8 @@ namespace Ising2DLambda.FisherZero
 
 open Ising2DLambda.AlgebraicEigenvalue
 
-/-- `claim_quadratic_representation_unique` の具体版を必要十分版から導く。 -/
+/-- `claim_quadratic_representation_unique` の具体的な包含写像・右乗法・一次独立性を
+必要十分版へ供給する。係数差の移送と復元は、本文の十六行・六行・六行に対応する。 -/
 theorem quadraticRepresentationUnique_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (a b a' b' : ℚ)

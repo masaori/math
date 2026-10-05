@@ -31998,59 +31998,51 @@ s
                   ],
                   proof: [
                     paragraph([
-                      "準備。",
+                      "準備。包含写像を ",
+                      math(String.raw`\iota:\mathbb{Q}\hookrightarrow\overline{\mathbb{Q}}`),
+                      "（", ref("def_algebraic_numbers"), "）と書き、",
                       math(String.raw`\alpha:=a+(-a')\in\mathbb{Q}`),
                       "、",
                       math(String.raw`\beta:=b+(-b')\in\mathbb{Q}`),
-                      " と置く（",
-                      math(String.raw`-a'`),
-                      "、",
-                      math(String.raw`-b'`),
-                      " は ",
+                      " と置く。ここで加法と加法の逆元は ",
                       math(String.raw`\mathbb{Q}`),
-                      " の加法の逆元、加法は ",
-                      math(String.raw`\mathbb{Q}`),
-                      " のもの。",
-                      math(String.raw`\mathbb{Q}`),
-                      " は ",
+                      " のものである。主張の仮定は包含写像を明記すると ",
+                      math(String.raw`\iota(a)+\iota(b)\cdot s=\iota(a')+\iota(b')\cdot s`),
+                      " である。以下の主鎖は ",
                       math(String.raw`\overline{\mathbb{Q}}`),
-                      " の部分体である（",
-                      ref("def_algebraic_numbers"),
-                      "）から、以下の計算は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の中の計算であり、",
-                      math(String.raw`\mathbb{Q}`),
-                      " の 2 元の等号は両方の体で同値である）。仮定 ",
-                      math(String.raw`a+b\cdot s=a'+b'\cdot s`),
-                      " のもとで次の鎖を得る。",
+                      " の中の計算である。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-\alpha+\beta\cdot s
-&=\bigl(a+(-a')\bigr)+\bigl(b+(-b')\bigr)\cdot s
+\iota(\alpha)+\iota(\beta)\cdot s
+&=\iota\bigl(a+(-a')\bigr)+\iota\bigl(b+(-b')\bigr)\cdot s
 &&\bigl(\because\ \alpha,\beta\ \text{の定義}\bigr)\\
-&=\bigl(a+(-a')\bigr)+\bigl(b\cdot s+(-b')\cdot s\bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=a+\Bigl((-a')+\bigl(b\cdot s+(-b')\cdot s\bigr)\Bigr)
+&=\bigl(\iota(a)+\iota(-a')\bigr)+\bigl(\iota(b)+\iota(-b')\bigr)\cdot s
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は加法を保つ}\bigr)\\
+&=\bigl(\iota(a)+(-\iota(a'))\bigr)+\bigl(\iota(b)+(-\iota(b'))\bigr)\cdot s
+&&\bigl(\because\ \blkref{def_algebraic_numbers}\ \text{の包含写像は逆元を保つ}\bigr)\\
+&=\bigl(\iota(a)+(-\iota(a'))\bigr)+\bigl(\iota(b)\cdot s+(-\iota(b'))\cdot s\bigr)
+&&\bigl(\because\ \text{分配則}\bigr)\\
+&=\iota(a)+\Bigl((-\iota(a'))+\bigl(\iota(b)\cdot s+(-\iota(b'))\cdot s\bigr)\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a+\Bigl(\bigl(b\cdot s+(-b')\cdot s\bigr)+(-a')\Bigr)
+&=\iota(a)+\Bigl(\bigl(\iota(b)\cdot s+(-\iota(b'))\cdot s\bigr)+(-\iota(a'))\Bigr)
 &&\bigl(\because\ \text{加法の交換則}\bigr)\\
-&=a+\Bigl(b\cdot s+\bigl((-b')\cdot s+(-a')\bigr)\Bigr)
+&=\iota(a)+\Bigl(\iota(b)\cdot s+\bigl((-\iota(b'))\cdot s+(-\iota(a'))\bigr)\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=\bigl(a+b\cdot s\bigr)+\bigl((-b')\cdot s+(-a')\bigr)
+&=\bigl(\iota(a)+\iota(b)\cdot s\bigr)+\bigl((-\iota(b'))\cdot s+(-\iota(a'))\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=\bigl(a'+b'\cdot s\bigr)+\bigl((-b')\cdot s+(-a')\bigr)
-&&\bigl(\because\ \text{仮定}\ a+b\cdot s=a'+b'\cdot s\bigr)\\
-&=a'+\Bigl(b'\cdot s+\bigl((-b')\cdot s+(-a')\bigr)\Bigr)
+&=\bigl(\iota(a')+\iota(b')\cdot s\bigr)+\bigl((-\iota(b'))\cdot s+(-\iota(a'))\bigr)
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&=\iota(a')+\Bigl(\iota(b')\cdot s+\bigl((-\iota(b'))\cdot s+(-\iota(a'))\bigr)\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a'+\Bigl(\bigl(b'\cdot s+(-b')\cdot s\bigr)+(-a')\Bigr)
+&=\iota(a')+\Bigl(\bigl(\iota(b')\cdot s+(-\iota(b'))\cdot s\bigr)+(-\iota(a'))\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a'+\Bigl(\bigl(b'+(-b')\bigr)\cdot s+(-a')\Bigr)
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
-&=a'+\bigl(0\cdot s+(-a')\bigr)
-&&\bigl(\because\ \text{加法の逆元}\ b'+(-b')=0\bigr)\\
-&=a'+\bigl(0+(-a')\bigr)
-&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
-&=a'+(-a')
+&=\iota(a')+\Bigl(\bigl(\iota(b')+(-\iota(b'))\bigr)\cdot s+(-\iota(a'))\Bigr)
+&&\bigl(\because\ \text{分配則}\bigr)\\
+&=\iota(a')+\bigl(0\cdot s+(-\iota(a'))\bigr)
+&&\bigl(\because\ \text{加法の逆元}\bigr)\\
+&=\iota(a')+\bigl(0+(-\iota(a'))\bigr)
+&&\bigl(\because\ \text{零元との積}\bigr)\\
+&=\iota(a')+(-\iota(a'))
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
 &=0
 &&\bigl(\because\ \text{加法の逆元}\bigr)
@@ -32060,7 +32052,7 @@ s
                       "、",
                       math(String.raw`\beta\in\mathbb{Q}`),
                       "、",
-                      math(String.raw`\alpha+\beta\cdot s=0`),
+                      math(String.raw`\iota(\alpha)+\iota(\beta)\cdot s=0`),
                       " なので、",
                       ref("claim_one_s_linearly_independent"),
                       " を ",

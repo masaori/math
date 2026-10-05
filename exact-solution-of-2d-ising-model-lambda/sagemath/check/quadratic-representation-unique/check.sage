@@ -85,3 +85,42 @@ for s in roots:
 
 print(f"OK: 2 根 × 標本で表示の一意性（対偶）を {checked_unique} 組、"
       f"鎖の恒等変形を {checked_chain} 組、同一表示の場合を {checked_equal_case} 組検査した")
+
+# 本文の28等号を、1ファイルにつき1等号で検査する。
+import os
+_qru_dir = os.path.dirname(os.path.abspath(__file__))
+_qru_files = [
+    "check_difference_definitions.sage",
+    "check_embedding_addition.sage",
+    "check_embedding_negation.sage",
+    "check_distribute_difference.sage",
+    "check_associate_first_sum.sage",
+    "check_commute_negative_coefficient.sage",
+    "check_associate_inner_sum.sage",
+    "check_group_first_representation.sage",
+    "check_substitute_equal_representation.sage",
+    "check_associate_equal_representation.sage",
+    "check_group_root_terms.sage",
+    "check_factor_root_terms.sage",
+    "check_cancel_root_coefficient.sage",
+    "check_zero_root_product.sage",
+    "check_remove_inner_zero.sage",
+    "check_cancel_constant_coefficient.sage",
+    "check_restore_a_insert_zero.sage",
+    "check_restore_a_insert_additive_inverse.sage",
+    "check_restore_a_associate_sum.sage",
+    "check_restore_a_difference_definition.sage",
+    "check_restore_a_zero_difference.sage",
+    "check_restore_a_remove_zero.sage",
+    "check_restore_b_insert_zero.sage",
+    "check_restore_b_insert_additive_inverse.sage",
+    "check_restore_b_associate_sum.sage",
+    "check_restore_b_difference_definition.sage",
+    "check_restore_b_zero_difference.sage",
+    "check_restore_b_remove_zero.sage",
+]
+for _qru_file in _qru_files:
+    load(os.path.join(_qru_dir, _qru_file))
+assert len(_qru_counts) == 28
+assert sum(_qru_counts.values()) == 120344
+print("行別集計: %s 行・%s 等式を厳密検算" % (len(_qru_counts), sum(_qru_counts.values())))
