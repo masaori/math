@@ -29771,7 +29771,12 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero",
                         "Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity",
+                        "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one",
+                        "Ising2DLambda.NecSuf.FisherZero.two_exponent_values_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
+                        "Ising2DLambda.FisherZero.reconstructedConfiguration",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
                       ],
@@ -30087,21 +30092,47 @@ b_{\mathrm v}(i,j+\bar1)
 \end{aligned}`),
                         paragraph(["以上で任意の行・列の周期和が零であることが示された。"]),
                         paragraph([
-                          ref("def_residue_maps"), " の代表を用いる。空和を零元とし、頂点 ",
-                          math(String.raw`(i,j)\in V_L`), " に対して基点から縦向き、次に横向きへ進む道の偶奇を",
+                          ref("def_residue_maps"), " の代表を用いる。和の添字 ",
+                          math(String.raw`r,c\in\mathbb Z`), " は表示された範囲の整数を動き、空和を ",
+                          math(String.raw`\mathbb Z/2\mathbb Z`), " の零元とする。写像 ",
+                          math(String.raw`t:V_L\to\mathbb Z/2\mathbb Z`), " を、任意の頂点 ",
+                          math(String.raw`(i,j)\in V_L`), " に対して基点から縦向き、次に横向きへ進む道の偶奇",
                         ]),
                         displayMath(String.raw`t(i,j):=
 \sum_{r=0}^{s(i)-1}b_{\mathrm v}(\pi(r),0)
 +\sum_{c=0}^{s(j)-1}b_{\mathrm h}(i,\pi(c))
 \quad\text{in }\mathbb Z/2\mathbb Z`),
                         paragraph([
-                          "で定める。剰余類の自然数代表を ",
+                          "で定める。各和は有限個の剰余類の和なので値は指定した集合に属する。剰余類の自然数代表を ",
                           math(String.raw`s_2:\mathbb Z/2\mathbb Z\to\{0,1\}\subset\mathbb N`),
-                          "、", math(String.raw`\pi_2(s_2(a))=a\ (a\in\mathbb Z/2\mathbb Z)`), " で定め、配位を",
+                          "、", math(String.raw`\pi_2(s_2(u))=u\ (u\in\mathbb Z/2\mathbb Z)`),
+                          " で定める。除法の原理によりこの代表はただ一つである。任意の ",
+                          math(String.raw`u\in\mathbb Z/2\mathbb Z`), " について、",
+                          math(String.raw`s_2(u)=0`), " の場合は",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(-1)^{s_2(u)}
+&=(-1)^0
+&&\bigl(\because\ s_2(u)=0\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の零乗}\bigr),
+\end{aligned}`),
+                        paragraph([math(String.raw`s_2(u)=1`), " の場合は"]),
+                        displayMath(String.raw`\begin{aligned}
+(-1)^{s_2(u)}
+&=(-1)^1
+&&\bigl(\because\ s_2(u)=1\bigr)\\
+&=-1
+&&\bigl(\because\ \mathbb Z\text{ の一乗}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "この二場合で全てなので、任意の頂点について配位の値を",
                         ]),
                         displayMath(String.raw`\sigma_A(i,j):=(-1)^{s_2(t(i,j))}\in\{+1,-1\}\subset\mathbb Z`),
                         paragraph([
-                          "で定める。横向き辺について、", math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
+                          "で定めると、", ref("def_configuration"), " により ",
+                          math(String.raw`\sigma_A\in\Sigma_L`), " である。横向き辺について、",
+                          math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
                         ]),
                         displayMath(String.raw`t(i,j+\bar1)+t(i,j)=b_{\mathrm h}(i,j)
 \quad(\because\ t\ \text{の定義})`),

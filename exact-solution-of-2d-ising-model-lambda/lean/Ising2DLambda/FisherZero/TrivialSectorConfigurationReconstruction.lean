@@ -605,14 +605,29 @@ theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
         (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
           then 1 else 0 : ZMod 2) * htwo
 
-/-- 道和の偶奇をスピン値へ戻す写像。零なら `+1`、非零なら `-1` とする。 -/
+/-- 本文の二場合。自然数代表は零か一なので、整数冪の値はスピン値に属する。 -/
+lemma reconstructionParityPower_eq_one_or_neg_one (q : ZMod 2) :
+    (-1 : ℤ) ^ q.val = 1 ∨ (-1 : ℤ) ^ q.val = -1 := by
+  have hcases : q.val = 0 ∨ q.val = 1 := by
+    have hlt := q.val_lt
+    omega
+  rcases hcases with hzero | hone
+  · left
+    calc
+      (-1 : ℤ) ^ q.val = (-1 : ℤ) ^ 0 := congrArg ((-1 : ℤ) ^ ·) hzero
+      _ = 1 := pow_zero _
+  · right
+    calc
+      (-1 : ℤ) ^ q.val = (-1 : ℤ) ^ 1 := congrArg ((-1 : ℤ) ^ ·) hone
+      _ = -1 := pow_one _
+
+/-- 道和の偶奇を、自然数代表を指数とする整数冪でスピン値へ戻す。 -/
 def reconstructionSpin (q : ZMod 2) : SpinValue :=
-  if q = 0 then ⟨1, Or.inl rfl⟩ else ⟨-1, Or.inr rfl⟩
+  ⟨(-1 : ℤ) ^ q.val, reconstructionParityPower_eq_one_or_neg_one q⟩
 
 /-- 人手証明の自然数代表 `s₂(q)` は `q.val` であり、整数の冪を定める。 -/
 lemma reconstructionSpin_val_eq_neg_one_pow_val (q : ZMod 2) :
-    (reconstructionSpin q).val = (-1 : ℤ) ^ q.val := by
-  fin_cases q <;> decide
+    (reconstructionSpin q).val = (-1 : ℤ) ^ q.val := rfl
 
 lemma reconstructionSpin_ne_iff_add_eq_one (a b : ZMod 2) :
     reconstructionSpin a ≠ reconstructionSpin b ↔ a + b = 1 := by

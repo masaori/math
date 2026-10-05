@@ -1,5 +1,5 @@
 /-
-配位復元の全周期和零と個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -8,6 +8,16 @@ import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
+
+/-- 道和からスピン値を定める二場合へ、実際の代表と整数冪を供給する。 -/
+theorem reconstructionParityPower_eq_one_or_neg_one_from_necSuf (q : ZMod 2) :
+    (-1 : ℤ) ^ q.val = 1 ∨ (-1 : ℤ) ^ q.val = -1 := by
+  have hcases : q.val = 0 ∨ q.val = 1 := by
+    have hlt := q.val_lt
+    omega
+  exact Ising2DLambda.NecSuf.FisherZero.two_exponent_values_necSuf
+    (fun n : ℕ => (-1 : ℤ) ^ n) 1 (-1) q.val
+    hcases (pow_zero _) (pow_one _)
 
 theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))

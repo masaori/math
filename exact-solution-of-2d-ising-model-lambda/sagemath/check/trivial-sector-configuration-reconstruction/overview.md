@@ -107,6 +107,11 @@
 | `check_horizontal_indicator_projection.sage` | 横辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_vertical_indicator_projection.sage` | 縦辺の自然数指示関数を π₂ で写す | PASS | 2,337 頂点 |
 | `check_parity_representative.sage` | 自然数代表 s₂ の帰属と π₂(s₂(a))=a | PASS | 二元の全件 |
+| `check_path_parity_definition.sage` | 基点からの辺列の端点と所属数による道和の独立計算 | PASS | 2,337 頂点、うち空の道 265 個 |
+| `check_spin_zero_substitution.sage` | 零代表を整数冪の指数へ代入 | PASS | 1 等式 |
+| `check_spin_zero_power.sage` | 整数の零乗を評価 | PASS | 1 等式 |
+| `check_spin_one_substitution.sage` | 一代表を整数冪の指数へ代入 | PASS | 1 等式 |
+| `check_spin_one_power.sage` | 整数の一乗を評価 | PASS | 1 等式 |
 | `check_configuration_definition.sage` | σ_A=(-1)^{s₂(t)} と二値スピンの対応 | PASS | 二元と全 2,337 頂点 |
 | `check_spin_disagreement_four_cases.sage` | 二元の四通りによる符号不一致と和が一の同値 | PASS | 四通りすべて |
 | `check_horizontal_difference.sage` | 横辺の道和差（空和と周期境界を含む） | PASS | 2,337 頂点 |
@@ -147,6 +152,13 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-05 道和と配位の定義のレビュー: 辺番号の列と端点から道を独立に作り、
+辺長一から三の全265自明セクター部分グラフについて、2,337頂点の所属数の偶奇が道和に一致した。
+基点の空の道265個を含む。自然数代表が零・一である二場合の四等号を行別四本へ分け、
+既存を含む全117ファイルの検算が通過した。Lean 具体版は整数冪の値域を二場合で独立に示して
+配位を定義し、必要十分版は代表の二場合と評価写像の二点での値だけを残す。
+横辺差・縦辺差・周期境界のレビューと、道和による存在構成全体の必要十分版は未了である。
 
 2026-10-04 実行: 原像二点の検算を再実行し、追加した行別19本もすべて通過した。
 自明セクターは $L=1,2,3$ でそれぞれ1、8、256個。縦辺差は内部の1,552頂点と
