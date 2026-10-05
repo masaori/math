@@ -29772,6 +29772,10 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity",
+                        "Ising2DLambda.FisherZero.reconstruction_horizontal_successor_val",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference",
+                        "Ising2DLambda.NecSuf.FisherZero.path_prefix_difference_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one",
                         "Ising2DLambda.NecSuf.FisherZero.two_exponent_values_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one_from_necSuf",
@@ -30131,11 +30135,61 @@ b_{\mathrm v}(i,j+\bar1)
                         displayMath(String.raw`\sigma_A(i,j):=(-1)^{s_2(t(i,j))}\in\{+1,-1\}\subset\mathbb Z`),
                         paragraph([
                           "で定めると、", ref("def_configuration"), " により ",
-                          math(String.raw`\sigma_A\in\Sigma_L`), " である。横向き辺について、",
-                          math(String.raw`s(j)<L-1`), " なら二つの有限和の差は末尾の一項なので",
+                          math(String.raw`\sigma_A\in\Sigma_L`), " である。横向き辺について、任意の ",
+                          math(String.raw`i,j\in\mathbb Z/L\mathbb Z`), " を固定し、有限和を",
                         ]),
-                        displayMath(String.raw`t(i,j+\bar1)+t(i,j)=b_{\mathrm h}(i,j)
-\quad(\because\ t\ \text{の定義})`),
+                        displayMath(String.raw`P_i:=\sum_{r=0}^{s(i)-1}b_{\mathrm v}(\pi(r),0)
+\in\mathbb Z/2\mathbb Z,\qquad
+H_i:\mathbb N\to\mathbb Z/2\mathbb Z,\quad
+H_i(m):=\sum_{c=0}^{m-1}b_{\mathrm h}(i,\pi(c))`),
+                        paragraph([
+                          "と書く。和の添字は上と同じく整数で、空和は零とする。各代表は ",
+                          math(String.raw`\{0,\ldots,L-1\}\subseteq\mathbb N\subseteq\mathbb Z`),
+                          " に属するので、", math(String.raw`H_i(s(j))`), " と ",
+                          math(String.raw`H_i(s(j+\bar1))`), " は定義域内の値である。非境界の場合 ",
+                          math(String.raw`s(j)<L-1`), " には ", math(String.raw`0\le s(j)+1<L`),
+                          " であり、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\pi(s(j)+1)
+&=\pi(s(j))+\pi(1)
+&&\bigl(\because\ \pi\text{ は加法を保つ},\ \blkref{def_residue_maps}\bigr)\\
+&=j+\pi(1)
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr)\\
+&=j+\bar1
+&&\bigl(\because\ \pi(1)=\bar1,\ \blkref{def_residue_maps}\bigr),
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+s(j+\bar1)
+&=s(\pi(s(j)+1))
+&&\bigl(\because\ \text{直前の射影の等式}\bigr)\\
+&=s(j)+1
+&&\bigl(\because\ 0\le s(j)+1<L,\ \blkref{def_residue_maps}\bigr).
+\end{aligned}`),
+                        paragraph(["このとき横辺の道和差は"]),
+                        displayMath(String.raw`\begin{aligned}
+t(i,j+\bar1)+t(i,j)
+&=(P_i+H_i(s(j+\bar1)))+(P_i+H_i(s(j)))
+&&\bigl(\because\ t,P_i,H_i\text{ の定義}\bigr)\\
+&=(P_i+H_i(s(j)+1))+(P_i+H_i(s(j)))
+&&\bigl(\because\ s(j+\bar1)=s(j)+1\bigr)\\
+&=\bigl(P_i+(H_i(s(j))+b_{\mathrm h}(i,\pi(s(j))))\bigr)+(P_i+H_i(s(j)))
+&&\bigl(\because\ \text{有限和の末尾の一項を分離}\bigr)\\
+&=\bigl((P_i+H_i(s(j)))+b_{\mathrm h}(i,\pi(s(j)))\bigr)+(P_i+H_i(s(j)))
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=(P_i+H_i(s(j)))+\bigl(b_{\mathrm h}(i,\pi(s(j)))+(P_i+H_i(s(j)))\bigr)
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=(P_i+H_i(s(j)))+\bigl((P_i+H_i(s(j)))+b_{\mathrm h}(i,\pi(s(j)))\bigr)
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の加法の可換則}\bigr)\\
+&=\bigl((P_i+H_i(s(j)))+(P_i+H_i(s(j)))\bigr)+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の加法の結合則}\bigr)\\
+&=0+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ では同じ項の和は零}\bigr)\\
+&=b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の零元の性質}\bigr)\\
+&=b_{\mathrm h}(i,j)
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr).
+\end{aligned}`),
                         paragraph([
                           math(String.raw`s(j)=L-1`), " なら同じ等式は行全体の和が零であることから従う。縦向き辺について、",
                           math(String.raw`s(i)<L-1`), " なら格子面の等式を ", math(String.raw`c=0,\ldots,s(j)-1`),

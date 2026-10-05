@@ -395,6 +395,56 @@ noncomputable def reconstructionPathParity (L : ℕ) [NeZero L]
   ∑ c ∈ Finset.range j.val,
     (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0)
 
+/-- 非境界の横辺では、次の座標の代表は現在の代表に一を足した値である。 -/
+theorem reconstruction_horizontal_successor_val (L : ℕ) [NeZero L]
+    (j : ZMod L) (hjlt : j.val + 1 < L) : (j + 1).val = j.val + 1 := by
+  have hcast : ((j.val + 1 : ℕ) : ZMod L) = j + 1 := by
+    calc
+      ((j.val + 1 : ℕ) : ZMod L) = (j.val : ZMod L) + ((1 : ℕ) : ZMod L) :=
+        Nat.cast_add j.val 1
+      _ = j + ((1 : ℕ) : ZMod L) :=
+        congrArg (· + ((1 : ℕ) : ZMod L)) (ZMod.natCast_zmod_val j)
+      _ = j + 1 := congrArg (j + ·) Nat.cast_one
+  calc
+    (j + 1).val = (((j.val + 1 : ℕ) : ZMod L)).val := congrArg ZMod.val hcast.symm
+    _ = j.val + 1 := by rw [ZMod.val_natCast, Nat.mod_eq_of_lt hjlt]
+
+/-- 本文の非境界の横辺差。道和の展開、代表の代入、末尾分離、結合・交換、
+標数二の取消、代表の射影の順に各等号を対応させる。偶部分グラフ性は使わない。 -/
+theorem reconstructionPathParity_horizontal_interior_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (i j : ZMod L) (hjlt : j.val + 1 < L) :
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let P : ZMod 2 := ∑ r ∈ Finset.range i.val,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let f : ℕ → ZMod 2 := fun c =>
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  let H : ℕ → ZMod 2 := fun m => ∑ c ∈ Finset.range m, f c
+  have hdouble : (P + H j.val) + (P + H j.val) = 0 := by
+    have htwo : (2 : ZMod 2) = 0 := rfl
+    linear_combination (P + H j.val) * htwo
+  calc
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+        (P + H (j + 1).val) + (P + H j.val) := rfl
+    _ = (P + H (j.val + 1)) + (P + H j.val) := by
+      rw [reconstruction_horizontal_successor_val L j hjlt]
+    _ = (P + (H j.val + f j.val)) + (P + H j.val) := by
+      rw [show H (j.val + 1) = H j.val + f j.val from Finset.sum_range_succ f j.val]
+    _ = ((P + H j.val) + f j.val) + (P + H j.val) := by
+      rw [← add_assoc P (H j.val) (f j.val)]
+    _ = (P + H j.val) + (f j.val + (P + H j.val)) :=
+      add_assoc _ _ _
+    _ = (P + H j.val) + ((P + H j.val) + f j.val) :=
+      congrArg ((P + H j.val) + ·) (add_comm (f j.val) (P + H j.val))
+    _ = ((P + H j.val) + (P + H j.val)) + f j.val :=
+      (add_assoc _ _ _).symm
+    _ = 0 + f j.val := congrArg (· + f j.val) hdouble
+    _ = f j.val := zero_add _
+    _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      dsimp [f]
+      rw [ZMod.natCast_zmod_val]
+
 /-- 人手証明の横向き辺についての道和の差。代表が `L - 1` 未満なら
 有限和の末尾の一項を取り出し、`L - 1` なら行全体の和が零であることを使う。 -/
 theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
@@ -451,20 +501,7 @@ theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
           apply hj
           apply ZMod.val_injective (n + 1)
           rw [hval, ZMod.val_neg_one]
-        have hjval : (j + 1).val = j.val + 1 := by
-          rw [show j + 1 = ((j.val + 1 : ℕ) : ZMod (n + 1)) by
-            rw [Nat.cast_add, ZMod.natCast_zmod_val, Nat.cast_one]]
-          rw [ZMod.val_natCast, Nat.mod_eq_of_lt hjlt]
-        rw [reconstructionPathParity, reconstructionPathParity, hjval,
-          Finset.sum_range_succ]
-        rw [ZMod.natCast_zmod_val j]
-        linear_combination
-          (∑ r ∈ Finset.range i.val,
-            (if edgeOfRow (n + 1) true (r : ZMod (n + 1)) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo +
-          (∑ c ∈ Finset.range j.val,
-            (if edgeOfRow (n + 1) false i (c : ZMod (n + 1)) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo
+        exact reconstructionPathParity_horizontal_interior_difference (n + 1) A i j hjlt
 
 /-- 人手証明の「格子面の等式の望遠鏡和」の核。隣り合う二項の和を範囲にわたって足すと、
 `ℤ/2ℤ` では中間の項が二度ずつ現れて消え、両端の二項だけが残る。 -/

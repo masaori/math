@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・非境界の横辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -8,6 +8,29 @@ import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
+
+/-- 非境界の横辺差へ、実際の道和、座標の代表、辺指示関数、標数二を供給する。 -/
+theorem reconstructionPathParity_horizontal_interior_difference_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L)) (i j : ZMod L)
+    (hjlt : j.val + 1 < L) :
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let P : ZMod 2 := ∑ r ∈ Finset.range i.val,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let f : ℕ → ZMod 2 := fun c =>
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  have hdouble : (P + ∑ c ∈ range j.val, f c) + (P + ∑ c ∈ range j.val, f c) = 0 := by
+    have htwo : (2 : ZMod 2) = 0 := rfl
+    linear_combination (P + ∑ c ∈ range j.val, f c) * htwo
+  calc
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j = f j.val :=
+      Ising2DLambda.NecSuf.FisherZero.path_prefix_difference_necSuf
+        (reconstructionPathParity L A i) ZMod.val f P j (j + 1)
+        rfl rfl (reconstruction_horizontal_successor_val L j hjlt) hdouble
+    _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      dsimp [f]
+      rw [ZMod.natCast_zmod_val]
 
 /-- 道和からスピン値を定める二場合へ、実際の代表と整数冪を供給する。 -/
 theorem reconstructionParityPower_eq_one_or_neg_one_from_necSuf (q : ZMod 2) :

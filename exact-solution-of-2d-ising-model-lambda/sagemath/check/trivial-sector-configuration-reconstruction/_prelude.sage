@@ -1,4 +1,55 @@
 # 対象ラベル: claim_trivial_sector_configuration_reconstruction
+
+def _rc_horizontal_interior_rows(case):
+    L = case['L']
+    coordinates = Integers(L)
+    zero = _rc_ring.zero()
+    for i, j in vertices(L):
+        m = representative(L, j)
+        if m + 1 >= L:
+            continue
+        P = sum((case['bv'][(projection(L, r), 0)] for r in range(representative(L, i))), zero)
+        H = lambda n: sum((case['bh'][(i, projection(L, c))] for c in range(n)), zero)
+        f = lambda c: case['bh'][(i, projection(L, c))]
+        following = representative(L, coordinates(j) + coordinates(1))
+        yield {
+            'projection': (
+                coordinates(m + 1),
+                coordinates(m) + coordinates(1),
+                coordinates(j) + coordinates(1),
+                coordinates(j) + coordinates.one(),
+            ),
+            'representative': (
+                following,
+                representative(L, coordinates(m + 1)),
+                m + 1,
+            ),
+            'difference': (
+                case['t'][(i, projection(L, j + 1))] + case['t'][(i, j)],
+                (P + H(following)) + (P + H(m)),
+                (P + H(m + 1)) + (P + H(m)),
+                (P + (H(m) + f(m))) + (P + H(m)),
+                ((P + H(m)) + f(m)) + (P + H(m)),
+                (P + H(m)) + (f(m) + (P + H(m))),
+                (P + H(m)) + ((P + H(m)) + f(m)),
+                ((P + H(m)) + (P + H(m))) + f(m),
+                zero + f(m),
+                f(m),
+                case['bh'][(i, j)],
+            ),
+        }
+
+
+def _rc_check_horizontal_interior(section, left, right, label):
+    checked = {1: 0, 2: 0, 3: 0}
+    for case in _rc_cases:
+        for rows in _rc_horizontal_interior_rows(case):
+            row = rows[section]
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked[case['L']] += 1
+    assert checked == {1: 0, 2: 16, 3: 1536}, checked
+    print('RESULT: PASS (%s: %d 等式、周期境界を除く)' % (label, sum(checked.values())))
+
 # 帰属: Z/2Z、NN、ZZ。配位から作らず、全辺部分集合から A を選び B と t を構成する。
 import os
 

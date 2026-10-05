@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・非境界の横辺差・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -7,10 +7,41 @@
 （写像が対合であることは使わないので仮定しない）。
 -/
 import Mathlib.Data.Finset.Card
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 namespace Ising2DLambda.NecSuf.FisherZero
 
 open Finset
+
+/-- 非境界の道和差は、添字が一つ増すことと、加法の結合・交換・零元、
+重複する道和の自己和が零であることだけを使う。格子、環、乗法、逆元は不要である。
+自己和の仮定を外すと、例えば自然数の加法で重複する道和が残る。 -/
+theorem path_prefix_difference_necSuf {X M : Type*} [AddCommMonoid M]
+    (path : X → M) (index : X → ℕ) (f : ℕ → M) (base : M) (x y : X)
+    (hpathX : path x = base + ∑ c ∈ range (index x), f c)
+    (hpathY : path y = base + ∑ c ∈ range (index y), f c)
+    (hindex : index y = index x + 1)
+    (hdouble : (base + ∑ c ∈ range (index x), f c) +
+      (base + ∑ c ∈ range (index x), f c) = 0) :
+    path y + path x = f (index x) := by
+  let H : ℕ → M := fun m => ∑ c ∈ range m, f c
+  calc
+    path y + path x = (base + H (index y)) + (base + H (index x)) :=
+      congrArg₂ (· + ·) hpathY hpathX
+    _ = (base + H (index x + 1)) + (base + H (index x)) := by rw [hindex]
+    _ = (base + (H (index x) + f (index x))) + (base + H (index x)) := by
+      rw [show H (index x + 1) = H (index x) + f (index x) from
+        Finset.sum_range_succ f (index x)]
+    _ = ((base + H (index x)) + f (index x)) + (base + H (index x)) := by
+      rw [← add_assoc base (H (index x)) (f (index x))]
+    _ = (base + H (index x)) + (f (index x) + (base + H (index x))) :=
+      add_assoc _ _ _
+    _ = (base + H (index x)) + ((base + H (index x)) + f (index x)) :=
+      congrArg ((base + H (index x)) + ·) (add_comm (f (index x)) (base + H (index x)))
+    _ = ((base + H (index x)) + (base + H (index x))) + f (index x) :=
+      (add_assoc _ _ _).symm
+    _ = 0 + f (index x) := congrArg (· + f (index x)) hdouble
+    _ = f (index x) := zero_add _
 
 /-- 指数の二場合を、それぞれの値へ代入する本文と同じ計算。
 必要なのは代表が零か一であることと、評価写像のその二点での値だけである。

@@ -1040,6 +1040,10 @@ targets=(
   Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero
   Ising2DLambda.FisherZero.reconstructionPathParity
   Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_difference
+  Ising2DLambda.FisherZero.reconstruction_horizontal_successor_val
+  Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference
+  Ising2DLambda.NecSuf.FisherZero.path_prefix_difference_necSuf
+  Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference_from_necSuf
   Ising2DLambda.FisherZero.sum_range_adjacent_pairs_char_two
   Ising2DLambda.FisherZero.reconstructionPathParity_vertical_difference
   Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val
