@@ -50714,6 +50714,60 @@ K^{a,b}_{\vec g,\vec f}(x)
                 },
               },
               {
+                role: "supportingClaim",
+                element: {
+                  id: "kac_ward_claim_twist_sign_from_parity",
+                  kind: "claim",
+                  title: { text: "ねじれ符号はねじれ偶奇で決まる" },
+                  labels: ["claim_twist_sign_from_parity"],
+                  habitat: "Z",
+                  verification: ["sagemath/check/twist-sign-parity"],
+                  lean: [
+                    "Ising2DLambda.KacWard.twistSign_eq_neg_one_pow_twistParity",
+                    "Ising2DLambda.NecSuf.KacWard.pow_eq_pow_mod_two_necSuf",
+                    "Ising2DLambda.KacWard.twistSign_eq_neg_one_pow_twistParity_from_necSuf",
+                  ],
+                  statement: [
+                    paragraph(["任意の ", math(String.raw`L\in\mathbb N_{\ge1}`), "、",
+                      math(String.raw`(a,b)\in\mathcal S`), "、",
+                      math(String.raw`\vec e\in\vec E_L`), " に対して、",
+                      ref("def_spin_structures"), " のねじれ符号と ",
+                      ref("def_twist_parity"), " のねじれ偶奇は"]),
+                    displayMath(String.raw`\varepsilon_{a,b}(\vec e)
+=(-1)^{\kappa_{a,b}(\vec e)}\quad\text{in }\mathbb Z`),
+                    paragraph(["を満たす。向き付き辺の集合は ", ref("def_oriented_edges"), " による。"]),
+                  ],
+                  proof: [
+                    paragraph([ref("def_seam_parities"), " の指示関数を用いて自然数 ",
+                      math(String.raw`n:=a\,c_{\mathrm h}(\vec e)+b\,c_{\mathrm v}(\vec e)\in\mathbb N`),
+                      " を置く。二で割った商と余りを ",
+                      math(String.raw`q:=n\operatorname{div}2\in\mathbb N`), "、",
+                      math(String.raw`r:=n\bmod2\in\{0,1\}\subset\mathbb N`),
+                      " と書く。自然数の除法により ", math(String.raw`n=2q+r`),
+                      " である。以下の冪の底と計算結果はすべて整数であり、指数は自然数である。"]),
+                    displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec e)
+&=(-1)^n
+&&(\because\ \blkref{def_spin_structures}\text{ と }n\text{ の定義})\\
+&=(-1)^{2q+r}
+&&(\because\ \text{自然数の除法 }n=2q+r)\\
+&=(-1)^{2q}(-1)^r
+&&(\because\ \text{冪の加法則})\\
+&=\bigl((-1)^2\bigr)^q(-1)^r
+&&(\because\ \text{冪の乗法則})\\
+&=1^q(-1)^r
+&&(\because\ (-1)^2=1\text{ in }\mathbb Z)\\
+&=1\cdot(-1)^r
+&&(\because\ \text{一の自然数冪は一})\\
+&=(-1)^r
+&&(\because\ \text{単位元との積})\\
+&=(-1)^{\kappa_{a,b}(\vec e)}
+&&(\because\ \blkref{def_twist_parity}\text{ と }r\text{ の定義}).
+\end{aligned}`),
+                  ],
+                },
+              },
+              {
                 role: "prerequisiteDefinition",
                 element: {
                   id: "kac_ward_definition_diagonal_gauge",
