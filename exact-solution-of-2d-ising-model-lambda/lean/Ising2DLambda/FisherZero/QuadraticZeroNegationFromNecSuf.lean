@@ -7,10 +7,19 @@ open Ising2DLambda.AlgebraicEigenvalue
 
 theorem quadraticZero_mem_from_necSuf (s : Qbar) :
     (0 : Qbar) ∈ quadraticFieldSet s := by
-  apply Ising2DLambda.NecSuf.FisherZero.zero_mem_necSuf
+  have hzero : (0 : Qbar) = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by
+    calc
+      (0 : Qbar) = 0 + 0 := (add_zero (0 : Qbar)).symm
+      _ = 0 + 0 * s := congrArg ((0 : Qbar) + ·) (zero_mul s).symm
+      _ = algebraMap ℚ Qbar 0 + 0 * s :=
+        congrArg (· + (0 : Qbar) * s) (map_zero (algebraMap ℚ Qbar)).symm
+      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s :=
+        congrArg (fun z : Qbar => algebraMap ℚ Qbar 0 + z * s)
+          (map_zero (algebraMap ℚ Qbar)).symm
+  exact Ising2DLambda.NecSuf.FisherZero.zero_mem_necSuf
       (0 : ℚ) (0 : Qbar)
       (fun a b => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s)
-  simp
+      hzero
 
 theorem quadraticRepresentation_eq_zero_iff_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)

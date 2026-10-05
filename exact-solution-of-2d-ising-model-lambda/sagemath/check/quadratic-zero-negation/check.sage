@@ -65,3 +65,15 @@ for s in roots:
 
 print(f"OK: neg-compat {checked_neg_compat} 組, zero-iff {checked_zero_iff} 組, "
       f"neg-chain {checked_neg_chain} 組")
+
+from pathlib import Path
+_qz_check_dir = Path(__file__).resolve().parent
+for _qz_check_name in (
+        'check_zero_add.sage',
+        'check_zero_mul.sage',
+        'check_zero_left_embedding.sage',
+        'check_zero_right_embedding.sage',
+        'check_zero_membership_witness.sage'):
+    __file__ = str(_qz_check_dir / _qz_check_name)
+    load(__file__)
+print("RESULT: PASS (零元の所属: 四等号各二根の8等式、所属の証人2例)")

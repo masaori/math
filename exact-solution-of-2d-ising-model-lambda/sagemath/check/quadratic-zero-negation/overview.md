@@ -10,6 +10,24 @@
   加法逆元の表示の鎖 722 組を厳密検査した）
 - 帰属: `QQ` / `QQbar` の厳密計算。浮動小数点は使わない。
 
+## 零元の所属の行別検算
+
+対象は `claim_quadratic_zero_mem` の四等号と、最後の所属の証人である。
+包含 $\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}$ を明示し、有理数の零を左右一回ずつ移す。
+各ファイルは $s^2=2$ の二根をそれぞれ検算し、既存の四主張の検算も保つ。
+
+| ファイル | 対象 | ステータス | 結果 |
+|---|---|---|---|
+| `check_zero_add.sage` | $0=0+0$ | PASS | 二根、2等式 |
+| `check_zero_mul.sage` | $0+0=0+0s$ | PASS | 二根、2等式 |
+| `check_zero_left_embedding.sage` | 左の加数を $\iota(0_{\mathbb Q})$ へ移す | PASS | 二根、2等式 |
+| `check_zero_right_embedding.sage` | 右の係数を $\iota(0_{\mathbb Q})$ へ移す | PASS | 二根、2等式 |
+| `check_zero_membership_witness.sage` | $(0_{\mathbb Q},0_{\mathbb Q})$ が零の表示を与える | PASS | 二根、2例 |
+
+2026-10-05 実行: 四等号の計8等式と所属の証人2例が通過した。
+既存の加法逆元の両立19組、零元の特徴づけ722組、加法逆元の表示の鎖722組も通過した。
+この有限検算は一般の $s$ の証明ではなく、本文と Lean の各行に対する厳密な裏取りである。
+
 ## 何を確かめるか
 
 四主張は「$0\in Q_s$」「$\xi=0\iff\mathrm{rep}_s(\xi)=(0,0)$」
@@ -29,5 +47,7 @@
 ## 実行方法
 
 ```sh
-sage check.sage
+sage -c "__file__ = 'sagemath/check/quadratic-zero-negation/check.sage'; load(__file__)"
 ```
+
+プロジェクト直下から実行する。

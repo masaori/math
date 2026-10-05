@@ -12,8 +12,13 @@ open Ising2DLambda.AlgebraicEigenvalue
 theorem quadraticZero_mem (s : Qbar) : (0 : Qbar) ∈ quadraticFieldSet s := by
   refine ⟨0, 0, ?_⟩
   calc
-    (0 : Qbar) = 0 + 0 := by rw [add_zero]
-    _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by simp
+    (0 : Qbar) = 0 + 0 := (add_zero (0 : Qbar)).symm
+    _ = 0 + 0 * s := congrArg ((0 : Qbar) + ·) (zero_mul s).symm
+    _ = algebraMap ℚ Qbar 0 + 0 * s :=
+      congrArg (· + (0 : Qbar) * s) (map_zero (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s :=
+      congrArg (fun z : Qbar => algebraMap ℚ Qbar 0 + z * s)
+        (map_zero (algebraMap ℚ Qbar)).symm
 
 /-- 零元を `Q_s` の元として持ち上げる。 -/
 noncomputable def quadraticZeroElement (s : Qbar) : QuadraticFieldElement s :=

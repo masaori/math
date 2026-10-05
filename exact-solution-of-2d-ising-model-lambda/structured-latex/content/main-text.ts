@@ -32463,18 +32463,17 @@ b
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`0`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の加法の単位元である。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
+                          "包含写像を ",
+                          math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " と書く（",
                           ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`0`),
-                          " は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元でもある。次の鎖を得る。",
+                          "）。以下の ",
+                          math(String.raw`0\in\overline{\mathbb Q}`),
+                          " と ",
+                          math(String.raw`0_{\mathbb Q}\in\mathbb Q`),
+                          " はそれぞれの体の加法の単位元であり、計算は ",
+                          math(String.raw`\overline{\mathbb Q}`),
+                          " の中で行う。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 0
@@ -32482,8 +32481,12 @@ b
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
 &=0+0\cdot s
 &&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
+&=\iota(0_{\mathbb Q})+0\cdot s
+&&\bigl(\because\ \iota(0_{\mathbb Q})=0\text{ を左の加数へ適用}\bigr)\\
+&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s
+&&\bigl(\because\ \iota(0_{\mathbb Q})=0\text{ を右の係数へ適用}\bigr)\\
 &\in Q_s
-&&\bigl(\because\ (0,0)\in\mathbb{Q}\times\mathbb{Q},\ \blkref{def_quadratic_field_set}\bigr)
+&&\bigl(\because\ (0_{\mathbb Q},0_{\mathbb Q})\in\mathbb Q\times\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                       ],
                     },
