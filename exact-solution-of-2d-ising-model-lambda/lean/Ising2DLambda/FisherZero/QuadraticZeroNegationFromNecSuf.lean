@@ -33,7 +33,15 @@ theorem quadraticRepresentation_eq_zero_iff_from_necSuf
   · exact quadraticRepresentation_spec s
   · intro x a b hx
     exact quadraticRepresentation_eq s hs x a b hx
-  · simp [quadraticZeroElement]
+  · change (0 : Qbar) = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s
+    calc
+      (0 : Qbar) = 0 + 0 := (add_zero (0 : Qbar)).symm
+      _ = 0 + 0 * s := congrArg ((0 : Qbar) + ·) (zero_mul s).symm
+      _ = algebraMap ℚ Qbar 0 + 0 * s :=
+        congrArg (· + (0 : Qbar) * s) (map_zero (algebraMap ℚ Qbar)).symm
+      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s :=
+        congrArg (fun z : Qbar => algebraMap ℚ Qbar 0 + z * s)
+          (map_zero (algebraMap ℚ Qbar)).symm
 
 theorem quadraticNeg_mem_from_necSuf (s : Qbar) (xi : QuadraticFieldElement s) :
     -(xi : Qbar) ∈ quadraticFieldSet s := by

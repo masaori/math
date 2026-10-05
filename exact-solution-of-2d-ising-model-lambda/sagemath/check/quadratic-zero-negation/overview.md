@@ -51,3 +51,35 @@ sage -c "__file__ = 'sagemath/check/quadratic-zero-negation/check.sage'; load(__
 ```
 
 プロジェクト直下から実行する。
+
+## 零元の表示の特徴づけの行別検算
+
+対象は `claim_quadratic_zero_representation` の十四等号である。
+第一方向の六等号、係数の組の二等号、逆方向の六等号をそれぞれ一ファイルで検算する。
+二次体の二係数を取り出して二つの埋込みにより `QQbar` の値を求める。
+この係数の組と本文の表示写像との一致は、本文で既に証明した表示の一意性による。
+分子が $-4$ から $4$、分母が $1$ から $3$ の十九有理数から作る組を用いる。
+両方向の表示の仕様と組の定義は各二根・722表示で調べる。
+仮定を使う残りの各行は、零となる二根・2表示に限定する。
+
+| ファイル | 対象 | ステータス | 結果 |
+|---|---|---|---|
+| `check_zero_representation_forward_specification.sage` | 表示写像の仕様 | PASS | 722等式 |
+| `check_zero_representation_forward_zero_hypothesis.sage` | 元が零という仮定 | PASS | 2等式 |
+| `check_zero_representation_forward_add_zero.sage` | 加法の単位元 | PASS | 2等式 |
+| `check_zero_representation_forward_zero_product.sage` | 零との積 | PASS | 2等式 |
+| `check_zero_representation_forward_left_embedding.sage` | 左の加数の包含 | PASS | 2等式 |
+| `check_zero_representation_forward_right_embedding.sage` | 右の係数の包含 | PASS | 2等式 |
+| `check_zero_representation_pair_definition.sage` | 二係数の定義 | PASS | 722等式 |
+| `check_zero_representation_pair_uniqueness.sage` | 表示の一意性 | PASS | 2等式 |
+| `check_zero_representation_reverse_specification.sage` | 表示写像の仕様 | PASS | 722等式 |
+| `check_zero_representation_reverse_pair_hypothesis.sage` | 組が零という仮定 | PASS | 2等式 |
+| `check_zero_representation_reverse_left_embedding.sage` | 左の加数の包含 | PASS | 2等式 |
+| `check_zero_representation_reverse_right_embedding.sage` | 右の係数の包含 | PASS | 2等式 |
+| `check_zero_representation_reverse_zero_product.sage` | 零との積 | PASS | 2等式 |
+| `check_zero_representation_reverse_add_zero.sage` | 加法の単位元 | PASS | 2等式 |
+
+2026-10-05 実行: 十四行の計2188等式が通過した。
+既存の零元の所属の8等式と2例、加法逆元の両立19組、
+零元の特徴づけ722組、加法逆元の表示の鎖722組も通過した。
+有限標本の検算は一般の一意性の証明を代替しない。

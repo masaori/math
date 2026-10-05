@@ -77,3 +77,9 @@ for _qz_check_name in (
     __file__ = str(_qz_check_dir / _qz_check_name)
     load(__file__)
 print("RESULT: PASS (零元の所属: 四等号各二根の8等式、所属の証人2例)")
+
+for _qzr_file in sorted(_qz_check_dir.glob('check_zero_representation_*.sage')):
+    __file__ = str(_qzr_file)
+    load(__file__)
+assert len(_qzr_counts) == 14 and sum(_qzr_counts.values()) == 2188
+print("RESULT: PASS (零元の表示の特徴づけ: 14行、2188等式)")

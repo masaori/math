@@ -32586,75 +32586,61 @@ b
                       ],
                       proof: [
                         paragraph([
-                          "準備。次の鎖を得る（",
-                          math(String.raw`0`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の加法の単位元。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`0`),
-                          " は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の元でもある）。",
+                          "包含 ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          "（", ref("def_algebraic_numbers"), "）を明示する。有理数の零を ",
+                          math(String.raw`0_{\mathbb Q}\in\mathbb Q`), "、代数的数の零を ",
+                          math(String.raw`0\in\overline{\mathbb Q}`), " と書く。",
+                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
+                          " と置く（", ref("def_quadratic_representation_map"), "）。係数の組以外の以下の計算は ",
+                          math(String.raw`\overline{\mathbb Q}`), " の中で行う。",
+                        ]),
+                        paragraph([
+                          "まず ", math(String.raw`\xi=0`), " と仮定する。表示の仕様から、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-0
+\iota(a)+\iota(b)\cdot s
+&=\xi
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=0
+&&\bigl(\because\ \text{仮定 }\xi=0\bigr)\\
 &=0+0
 &&\bigl(\because\ \text{加法の単位元}\bigr)\\
 &=0+0\cdot s
-&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)
+&&\bigl(\because\ \text{零元との積}\bigr)\\
+&=\iota(0_{\mathbb Q})+0\cdot s
+&&\bigl(\because\ \iota\text{ は零を保つ：左の加数}\bigr)\\
+&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s
+&&\bigl(\because\ \iota\text{ は零を保つ：右の係数}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "第一の方向（",
-                          math(String.raw`\xi=0`),
-                          " ならば ",
-                          math(String.raw`\mathrm{rep}_s(\xi)=(0,0)`),
-                          "）。",
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
-                          " と置くと、次の鎖を得る。",
-                        ]),
+                        paragraph(["を得る。したがって、有理係数の組について、"]),
                         displayMath(String.raw`\begin{aligned}
-a+b\cdot s
-&=\xi
-&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\bigr)\\
-&=0
-&&\bigl(\because\ \text{仮定}\ \xi=0\bigr)\\
-&=0+0\cdot s
-&&\bigl(\because\ 0=0+0\cdot s\bigr)
+\mathrm{rep}_s(\xi)
+&=(a,b)
+&&\bigl(\because\ a,b\text{ の定義}\bigr)\\
+&=(0_{\mathbb Q},0_{\mathbb Q})
+&&\bigl(\because\ \text{直前の表示の等式と }\blkref{claim_quadratic_representation_unique}\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`a+b\cdot s=0+0\cdot s`),
-                          " に ",
-                          ref("claim_quadratic_representation_unique"),
-                          " を適用して ",
-                          math(String.raw`(a,b)=(0,0)`),
-                          "、すなわち ",
-                          math(String.raw`\mathrm{rep}_s(\xi)=(0,0)`),
-                          " を得る。",
-                        ]),
-                        paragraph([
-                          "第二の方向（",
-                          math(String.raw`\mathrm{rep}_s(\xi)=(0,0)`),
-                          " ならば ",
-                          math(String.raw`\xi=0`),
-                          "）。次の鎖を得る。",
+                          "となる。逆に ", math(String.raw`\mathrm{rep}_s(\xi)=(0_{\mathbb Q},0_{\mathbb Q})`),
+                          " と仮定すると、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \xi
+&=\iota(a)+\iota(b)\cdot s
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s
+&&\bigl(\because\ \text{仮定の組の等式を二つの係数へ適用}\bigr)\\
+&=0+\iota(0_{\mathbb Q})\cdot s
+&&\bigl(\because\ \iota\text{ は零を保つ：左の加数}\bigr)\\
 &=0+0\cdot s
-&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\ \text{と仮定}\ \mathrm{rep}_s(\xi)=(0,0)\bigr)\\
+&&\bigl(\because\ \iota\text{ は零を保つ：右の係数}\bigr)\\
 &=0+0
-&&\bigl(\because\ \text{零元との積}\ 0\cdot s=0\bigr)\\
+&&\bigl(\because\ \text{零元との積}\bigr)\\
 &=0
 &&\bigl(\because\ \text{加法の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "全過程は体 ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の四則の中で閉じ、実数体も複素数体も現れない。",
+                          "を得る。全過程は代数的数の四則と有理係数の組の等号で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },

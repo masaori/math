@@ -24,24 +24,45 @@ theorem quadraticZero_mem (s : Qbar) : (0 : Qbar) ∈ quadraticFieldSet s := by
 noncomputable def quadraticZeroElement (s : Qbar) : QuadraticFieldElement s :=
   ⟨0, quadraticZero_mem s⟩
 
-/-- `claim_quadratic_zero_representation` の具体版。 -/
+/-- `claim_quadratic_zero_representation` の十四等号。表示の仕様と一意性を別々に使う。 -/
 theorem quadraticRepresentation_eq_zero_iff
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (xi : QuadraticFieldElement s) :
     (xi : Qbar) = 0 ↔ quadraticRepresentation s xi = (0, 0) := by
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
   constructor
   · intro hxi
-    apply quadraticRepresentation_eq s hs xi 0 0
+    have hvalue : algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s =
+        algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by
+      calc
+        algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s = (xi : Qbar) :=
+          (quadraticRepresentation_spec s xi).symm
+        _ = 0 := hxi
+        _ = 0 + 0 := (add_zero (0 : Qbar)).symm
+        _ = 0 + 0 * s := congrArg ((0 : Qbar) + ·) (zero_mul s).symm
+        _ = algebraMap ℚ Qbar 0 + 0 * s :=
+          congrArg (· + (0 : Qbar) * s) (map_zero (algebraMap ℚ Qbar)).symm
+        _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s :=
+          congrArg (fun z : Qbar => algebraMap ℚ Qbar 0 + z * s)
+            (map_zero (algebraMap ℚ Qbar)).symm
+    have hcoeff := quadraticRepresentationUnique s hs a b 0 0 hvalue
     calc
-      (xi : Qbar) = 0 := hxi
-      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by simp
+      quadraticRepresentation s xi = (a, b) := rfl
+      _ = (0, 0) := Prod.ext hcoeff.1 hcoeff.2
   · intro hrep
     calc
-      (xi : Qbar) = algebraMap ℚ Qbar (quadraticRepresentation s xi).1 +
-          algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s :=
+      (xi : Qbar) = algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s :=
         quadraticRepresentation_spec s xi
-      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by rw [hrep]
-      _ = 0 := by simp
+      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s := by
+        dsimp only [a, b]
+        rw [hrep]
+      _ = 0 + algebraMap ℚ Qbar 0 * s :=
+        congrArg (· + algebraMap ℚ Qbar 0 * s) (map_zero (algebraMap ℚ Qbar))
+      _ = 0 + 0 * s :=
+        congrArg (fun z : Qbar => 0 + z * s) (map_zero (algebraMap ℚ Qbar))
+      _ = 0 + 0 := congrArg ((0 : Qbar) + ·) (zero_mul s)
+      _ = 0 := add_zero (0 : Qbar)
 
 /-- `-xi` を `Q_s` の元として持ち上げる。 -/
 noncomputable def quadraticNegElement (s : Qbar) (xi : QuadraticFieldElement s) :
