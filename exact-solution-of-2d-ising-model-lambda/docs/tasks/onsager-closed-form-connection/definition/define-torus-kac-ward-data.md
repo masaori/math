@@ -6,7 +6,7 @@
 
 ## 背景・前提
 
-- 既存ラベル `def_periodic_lattice`, `def_high_temperature_even_subgraph`, `def_winding_parities` を確認して再利用する。
+- 既存ラベル `def_lattice`（格子）、`def_even_edge_subset`（偶部分グラフの述語）、`def_torus_winding_parities`（二つの巻き付き偶奇）を確認して再利用する。
 - Cimasoni, *A generalized Kac--Ward formula*, arXiv:1004.3158 のトーラスの場合を正本とする。
 - 着手前に対象プロジェクトの README、MEMORY、CLAUDE.md、`docs/context/` を読むこと。
 

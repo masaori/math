@@ -4,6 +4,15 @@
 
 有限モード和から得た積分を現在の変数 `x` と正規化で Onsager 閉形式として明記し、既存の周期境界自由エントロピー密度と同定する。さらに分散の隙間が閉じる点が、既に代数的に定義した唯一の正の Kramers--Wannier 不動点であることを証明する。
 
+## 到達すべき式（2026-10-09 の研究管理の決定）
+
+前段の積分を本文の規約で正規化すると、$q\in\mathbb Q_{(0,1)}$ について
+$$\rho_{\mathbb R}\bigl(\phi(q)\bigr)=\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\Bigl[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\Bigr]d\theta_1\,d\theta_2$$
+（$\phi(q)$ は `def_periodic_free_energy_density_le_one` の密度）。Onsager の形との対応は、代数的略記 $\cosh2K:=(1+q^2)/(2q)$、$\sinh2K:=(1-q^2)/(2q)$（[分散因子の指示書](compute-square-lattice-dispersion-factor.md)）で被対数を $4q^2\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]$ と書き直して
+$$\rho_{\mathbb R}\bigl(\phi(q)\bigr)=\log2+\log q+\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]d\theta_1\,d\theta_2 .$$
+本文の $Z_L(x)=\sum_\sigma x^{m(\sigma)}$ は、物理の分配関数 $\sum_\sigma e^{K\sum_e\sigma\sigma'}$ と $\sum_e\sigma\sigma'=2L^2-2m(\sigma)$ により $x=e^{-2K}$ で $x^{-L^2}Z_L(x)$ の関係にあるので、右辺から $\log q$ を除いたものが Onsager の $-\beta f=\log2+\frac{1}{8\pi^2}\iint\log[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)]$ である。前因子の対応はこの一行で尽きる（$2^{L^2}$ も $(1+x)^{2L^2}$ も現れない。有限トーラス公式を低温変数のまま書いたため）。
+臨界点: 被対数の最小値は $\theta_1=\theta_2=0$ での $(1-2q-q^2)^2$ で、これが零になる条件が自己双対方程式 $\xi^2+2\xi-1=0$、正錐での唯一の根が $x_c=-1+s$（`claim_self_dual_positive_root_unique`）。非解析性は実数側で、積分の $q$ についての微分可能性の破れとして別ブロックで述べる。
+
 ## 背景・前提
 
 - モード和から積分へのタスクに依存する。

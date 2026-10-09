@@ -172,6 +172,22 @@ Lean だけが未了なら `done` にせず `記述と SageMath まで` と書�
   研究管理が辺長 1〜3・四つのスピン構造で厳密計算により確かめてある（証明ではない）。**本文で $u$ は方向単位ベクトルの名前なので、
   モード変数に $u,w$ を使わない。** 添字集合の取り替えは全単射を明示して行う（同一視しない）。
 
+- **有限トーラス公式と熱力学極限の段取り（2026-10-09 の研究管理の決定）**: 分配多項式と四つの Kac--Ward 行列式の関係は、**低温変数 $x$ のまま**
+  $Z_L=\frac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L$ と書く。根拠は本文の `claim_low_temperature_trivial_sector_expression`（$Z_L=2G^{0,0}_L$）と
+  `claim_signed_even_subgraph_sector_sum` だけで、Arf 符号付き四項和（`claim_arf_fourier_sign_projection`）、双対変数 $\mathrm{KW}(x)$ への置換、
+  高温展開の前因子 $2^{L^2}$ は使わない（それらは $H_L$ を書くときのもの）。平方恒等式と Fourier 分解の後は $Q^{a,b}_L=\sqrt{D^{a,b}_L}$（定数項 1 の形式的平方根）で、
+  四項の符号はすべて正である。各 $Q^{a,b}_L$ はモードの軌道ごとの明示積 $\prod_{|O|=1}\sqrt{\Delta_O}\prod_{|O|=2}\Delta_O\prod_{|O|=4}\Delta_O^2$ に等しく、
+  $(0,1)$ で符号が変わる因子は $1-2x-x^2$（モード $(1,1)$。$Q^{0,0}_L$ にだけ現れる）だけである。
+  極限の段は「ねじれ間の密度差の評価」ではなく、有理点 $q$ での両側評価 $\frac14\max_{(a,b)}|Q^{a,b}_L(q)|\le Z_L(q)\le2\max_{(a,b)}|Q^{a,b}_L(q)|$ を
+  可算側（実閉部分体 $R$ の順序、$\mathbb Q$、$\Lambda$）で閉じてから、実対数・1 の冪根の角への読み替え・Riemann 和の極限の三種類の脱出だけで積分へ移る。
+  分散因子の正値性は $R$ の順序で示す（1 の冪根の逆元が共役であること、$2-\varpi-\varpi^{-1}$ が $R$ の二つの平方の和であること）。**$|\varpi|=1$ や $\cos$ を可算側で使わない。**
+  臨界点より高温側 $q^2+2q-1>0$ は、双対な点 $t=\mathrm{KW}(q)$（$t^2+2t-1=-2(q^2+2q-1)(1+q)^{-2}<0$）へ移してから評価する。
+  段の形は指示書 [assemble-finite-volume-closed-product.md](onsager-closed-form-connection/proof/assemble-finite-volume-closed-product.md)・
+  [prove-twists-share-thermodynamic-limit.md](onsager-closed-form-connection/proof/prove-twists-share-thermodynamic-limit.md)・
+  [pass-from-mode-sums-to-integral.md](onsager-closed-form-connection/proof/pass-from-mode-sums-to-integral.md)・
+  [identify-onsager-closed-form-and-critical-point.md](onsager-closed-form-connection/proof/identify-onsager-closed-form-and-critical-point.md) にあり、
+  研究管理が辺長 1〜3・有理点 6 箇所で厳密計算により確かめてある（証明ではない）。
+
 ## 有限合同系の候補クラスを判定する条件
 
 左核障害と非直交な特徴を一つ加える反復は、候補クラス全体の成否を判定する前処理に限る。
