@@ -445,63 +445,102 @@ theorem reconstructionPathParity_horizontal_interior_difference (L : ℕ) [NeZer
       dsimp [f]
       rw [ZMod.natCast_zmod_val]
 
-/-- 人手証明の横向き辺についての道和の差。代表が `L - 1` 未満なら
-有限和の末尾の一項を取り出し、`L - 1` なら行全体の和が零であることを使う。 -/
+/-- 本文の境界の代表の七等号。末尾の次の座標は零で、その代表も零である。 -/
+theorem reconstruction_horizontal_boundary_successor_val (L : ℕ) [NeZero L]
+    (j : ZMod L) (hj : j.val + 1 = L) : (j + 1).val = 0 := by
+  have hcast : j + 1 = (0 : ZMod L) := by
+    calc
+      j + 1 = (j.val : ZMod L) + 1 :=
+        congrArg (· + 1) (ZMod.natCast_zmod_val j).symm
+      _ = (j.val : ZMod L) + ((1 : ℕ) : ZMod L) := by rw [Nat.cast_one]
+      _ = ((j.val + 1 : ℕ) : ZMod L) := (Nat.cast_add j.val 1).symm
+      _ = (L : ZMod L) := congrArg (fun n : ℕ => (n : ZMod L)) hj
+      _ = 0 := ZMod.natCast_self L
+  calc
+    (j + 1).val = (0 : ZMod L).val := congrArg ZMod.val hcast
+    _ = 0 := ZMod.val_zero
+
+/-- 本文の H_i(L)。代表の全単射で行全体の和へ再添字付けし、周期和零を使う。 -/
+theorem reconstructedEdgeSet_horizontal_prefix_sum_zero (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i : ZMod L) :
+    (∑ c ∈ Finset.range L,
+      (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A
+        then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let H : ℕ → ZMod 2 := fun m => ∑ c ∈ Finset.range m,
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  let residueEquiv : Fin L ≃ ZMod L :=
+    { toFun := fun c => (c.val : ZMod L)
+      invFun := fun z => ⟨z.val, z.val_lt⟩
+      left_inv := fun c => Fin.ext (by
+        simp only [ZMod.val_natCast, Nat.mod_eq_of_lt c.isLt])
+      right_inv := fun z => ZMod.natCast_zmod_val z }
+  calc
+    H L = ∑ c ∈ Finset.range L,
+        (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A
+          then 1 else 0) := rfl
+    _ = ∑ k : ZMod L,
+        (if edgeOfRow L false i k ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      rw [← Fin.sum_univ_eq_sum_range]
+      exact Fintype.sum_equiv residueEquiv _ _ (fun _ => rfl)
+    _ = 0 := (reconstructedEdgeSet_all_row_column_sums_zero L A hSector).1 i
+
+/-- 本文の境界の横辺差。末尾の和を七等号で一項へ戻し、道和差を九等号で計算する。
+辺長一でも空和の同じ式が成り立つ。 -/
+theorem reconstructionPathParity_horizontal_boundary_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) (hj : j.val + 1 = L) :
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let P : ZMod 2 := ∑ r ∈ Finset.range i.val,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let f : ℕ → ZMod 2 := fun c =>
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  let H : ℕ → ZMod 2 := fun m => ∑ c ∈ Finset.range m, f c
+  have hperiod : H L = 0 := reconstructedEdgeSet_horizontal_prefix_sum_zero L A hSector i
+  have htwo : (2 : ZMod 2) = 0 := rfl
+  have hbase : P + P = 0 := by linear_combination P * htwo
+  have hterm : f j.val + f j.val = 0 := by linear_combination f j.val * htwo
+  have hprefix : H j.val = f j.val := by
+    calc
+      H j.val = H j.val + 0 := (add_zero _).symm
+      _ = H j.val + (f j.val + f j.val) := congrArg (H j.val + ·) hterm.symm
+      _ = (H j.val + f j.val) + f j.val := (add_assoc _ _ _).symm
+      _ = H (j.val + 1) + f j.val :=
+        congrArg (· + f j.val) (Finset.sum_range_succ f j.val).symm
+      _ = H L + f j.val := by rw [hj]
+      _ = 0 + f j.val := congrArg (· + f j.val) hperiod
+      _ = f j.val := zero_add _
+  calc
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+        (P + H (j + 1).val) + (P + H j.val) := rfl
+    _ = (P + H 0) + (P + H j.val) := by
+      rw [reconstruction_horizontal_boundary_successor_val L j hj]
+    _ = (P + 0) + (P + H j.val) := by
+      rw [show H 0 = 0 from Finset.sum_range_zero f]
+    _ = P + (P + H j.val) := by rw [add_zero]
+    _ = (P + P) + H j.val := (add_assoc _ _ _).symm
+    _ = 0 + H j.val := congrArg (· + H j.val) hbase
+    _ = H j.val := zero_add _
+    _ = f j.val := hprefix
+    _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      dsimp [f]
+      rw [ZMod.natCast_zmod_val]
+
+/-- 人手証明の横向き辺についての道和の差。非境界と周期境界の二場合を合わせる。 -/
 theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
     (i j : ZMod L) :
     reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
       (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
-  classical
-  cases L with
-  | zero => exact (NeZero.ne 0 rfl).elim
-  | succ n =>
-      have hrow := (reconstructedEdgeSet_all_row_column_sums_zero (n + 1) A hSector).1 i
-      let residueEquiv : Fin (n + 1) ≃ ZMod (n + 1) :=
-        { toFun := fun c => (c.val : ZMod (n + 1))
-          invFun := fun z => ⟨z.val, z.val_lt⟩
-          left_inv := fun c => Fin.ext (by
-            simp only [ZMod.val_natCast, Nat.mod_eq_of_lt c.isLt])
-          right_inv := fun z => ZMod.natCast_zmod_val z }
-      have hrowFin : (∑ c : Fin (n + 1),
-          (if edgeOfRow (n + 1) false i (c.val : ZMod (n + 1)) ∈
-            reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
-        calc
-          _ = ∑ c : ZMod (n + 1),
-              (if edgeOfRow (n + 1) false i c ∈ reconstructedEdgeSet (n + 1) A
-                then 1 else 0) := Fintype.sum_equiv residueEquiv _ _
-                  (fun _ => rfl)
-          _ = 0 := hrow
-      have hrowRange : (∑ c ∈ Finset.range (n + 1),
-          (if edgeOfRow (n + 1) false i (c : ZMod (n + 1)) ∈
-          reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
-        rw [← Fin.sum_univ_eq_sum_range]
-        exact hrowFin
-      have htwo : (2 : ZMod 2) = 0 := rfl
-      by_cases hj : j = -1
-      · subst j
-        have hcast : ((n : ℕ) : ZMod (n + 1)) = -1 := by
-          apply ZMod.val_injective (n + 1)
-          rw [ZMod.val_natCast, Nat.mod_eq_of_lt (Nat.lt_succ_self n), ZMod.val_neg_one]
-        rw [reconstructionPathParity, reconstructionPathParity]
-        simp only [neg_add_cancel, ZMod.val_zero, Finset.range_zero, Finset.sum_empty,
-          add_zero, ZMod.val_neg_one]
-        rw [Finset.sum_range_succ] at hrowRange
-        rw [← hcast]
-        linear_combination hrowRange +
-          (∑ r ∈ Finset.range i.val,
-            (if edgeOfRow (n + 1) true (r : ZMod (n + 1)) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo -
-          (if edgeOfRow (n + 1) false i (n : ZMod (n + 1)) ∈
-            reconstructedEdgeSet (n + 1) A then 1 else 0) * htwo
-      · have hjlt : j.val + 1 < n + 1 := by
-          have hjbound := ZMod.val_lt j
-          by_contra hnot
-          have hval : j.val = n := by omega
-          apply hj
-          apply ZMod.val_injective (n + 1)
-          rw [hval, ZMod.val_neg_one]
-        exact reconstructionPathParity_horizontal_interior_difference (n + 1) A i j hjlt
+  by_cases hjlt : j.val + 1 < L
+  · exact reconstructionPathParity_horizontal_interior_difference L A i j hjlt
+  · have hj : j.val + 1 = L := by
+      have hjbound := j.val_lt
+      omega
+    exact reconstructionPathParity_horizontal_boundary_difference L A hSector i j hj
 
 /-- 人手証明の「格子面の等式の望遠鏡和」の核。隣り合う二項の和を範囲にわたって足すと、
 `ℤ/2ℤ` では中間の項が二度ずつ現れて消え、両端の二項だけが残る。 -/

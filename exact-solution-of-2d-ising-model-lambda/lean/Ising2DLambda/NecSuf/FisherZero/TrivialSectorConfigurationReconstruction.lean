@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・非境界の横辺差・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -12,6 +12,44 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 namespace Ising2DLambda.NecSuf.FisherZero
 
 open Finset
+
+/-- 周期境界では末尾の和へ一項を足すと周期和となる。使うのは加法モノイドの法則と、
+二点の道和表示、次の代表が零であること、末尾分離、周期和零、基点と末尾項の自己和零だけ。
+自己和零はそれぞれ二重の基点と末尾項を消すため、周期和零は末尾の和を一項へ戻すために要る。
+交換則、逆元、環、格子は使わない。 -/
+theorem periodic_path_prefix_difference_necSuf {X M : Type*} [AddMonoid M]
+    (path : X → M) (index : X → ℕ) (partialSum f : ℕ → M) (base : M)
+    (x y : X) (length : ℕ)
+    (hpathX : path x = base + partialSum (index x))
+    (hpathY : path y = base + partialSum (index y))
+    (hindex : index y = 0) (hlast : index x + 1 = length)
+    (hzero : partialSum 0 = 0)
+    (hsucc : partialSum (index x + 1) = partialSum (index x) + f (index x))
+    (hperiod : partialSum length = 0)
+    (hbase : base + base = 0) (hterm : f (index x) + f (index x) = 0) :
+    path y + path x = f (index x) := by
+  have hprefix : partialSum (index x) = f (index x) := by
+    calc
+      partialSum (index x) = partialSum (index x) + 0 := (add_zero _).symm
+      _ = partialSum (index x) + (f (index x) + f (index x)) :=
+        congrArg (partialSum (index x) + ·) hterm.symm
+      _ = (partialSum (index x) + f (index x)) + f (index x) :=
+        (add_assoc _ _ _).symm
+      _ = partialSum (index x + 1) + f (index x) :=
+        congrArg (· + f (index x)) hsucc.symm
+      _ = partialSum length + f (index x) := by rw [hlast]
+      _ = 0 + f (index x) := congrArg (· + f (index x)) hperiod
+      _ = f (index x) := zero_add _
+  calc
+    path y + path x = (base + partialSum (index y)) + (base + partialSum (index x)) :=
+      congrArg₂ (· + ·) hpathY hpathX
+    _ = (base + partialSum 0) + (base + partialSum (index x)) := by rw [hindex]
+    _ = (base + 0) + (base + partialSum (index x)) := by rw [hzero]
+    _ = base + (base + partialSum (index x)) := by rw [add_zero]
+    _ = (base + base) + partialSum (index x) := (add_assoc _ _ _).symm
+    _ = 0 + partialSum (index x) := congrArg (· + partialSum (index x)) hbase
+    _ = partialSum (index x) := zero_add _
+    _ = f (index x) := hprefix
 
 /-- 非境界の道和差は、添字が一つ増すことと、加法の結合・交換・零元、
 重複する道和の自己和が零であることだけを使う。格子、環、乗法、逆元は不要である。

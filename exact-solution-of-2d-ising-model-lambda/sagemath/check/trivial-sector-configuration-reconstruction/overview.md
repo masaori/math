@@ -11,6 +11,32 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---|---|---|---|
+| `check_horizontal_boundary_coordinate_representative.sage` | 横辺の周期境界：座標を代表の射影へ | PASS | 785 等式 |
+| `check_horizontal_boundary_coordinate_one.sage` | 横辺の周期境界：剰余類の一を一の射影へ | PASS | 785 等式 |
+| `check_horizontal_boundary_coordinate_addition.sage` | 横辺の周期境界：射影の加法保存 | PASS | 785 等式 |
+| `check_horizontal_boundary_coordinate_endpoint.sage` | 横辺の周期境界：末尾の代表の次は辺長 | PASS | 785 等式 |
+| `check_horizontal_boundary_coordinate_zero.sage` | 横辺の周期境界：辺長の射影は零 | PASS | 785 等式 |
+| `check_horizontal_boundary_representative_substitution.sage` | 横辺の周期境界：次の座標を零へ | PASS | 785 等式 |
+| `check_horizontal_boundary_representative_zero.sage` | 横辺の周期境界：零の代表は零 | PASS | 785 等式 |
+| `check_horizontal_boundary_period_definition.sage` | 横辺の周期境界：有限和の定義を展開 | PASS | 785 等式 |
+| `check_horizontal_boundary_period_reindex.sage` | 横辺の周期境界：代表の全単射で再添字付け | PASS | 785 等式 |
+| `check_horizontal_boundary_period_zero.sage` | 横辺の周期境界：全行の周期和零を適用 | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_add_zero.sage` | 横辺の周期境界：末尾までの和に零を加える | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_insert_double.sage` | 横辺の周期境界：標数二で末尾項を二つ挿入 | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_associate.sage` | 横辺の周期境界：加法の結合則 | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_last_term.sage` | 横辺の周期境界：有限和の末尾の一項を戻す | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_endpoint.sage` | 横辺の周期境界：末尾の次を辺長へ | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_period_zero.sage` | 横辺の周期境界：周期和零を代入 | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_remove_zero.sage` | 横辺の周期境界：零との加法 | PASS | 785 等式 |
+| `check_horizontal_boundary_path_expansion.sage` | 横辺の周期境界：二つの道和の定義を展開 | PASS | 785 等式 |
+| `check_horizontal_boundary_successor_representative.sage` | 横辺の周期境界：次の座標の代表を零へ | PASS | 785 等式 |
+| `check_horizontal_boundary_empty_prefix.sage` | 横辺の周期境界：空和は零 | PASS | 785 等式 |
+| `check_horizontal_boundary_remove_inner_zero.sage` | 横辺の周期境界：基点に加えた零を除く | PASS | 785 等式 |
+| `check_horizontal_boundary_regroup_base.sage` | 横辺の周期境界：二つの基点の和を括る | PASS | 785 等式 |
+| `check_horizontal_boundary_double_base_zero.sage` | 横辺の周期境界：標数二で基点の自己和を取消 | PASS | 785 等式 |
+| `check_horizontal_boundary_remove_outer_zero.sage` | 横辺の周期境界：末尾までの和に加えた零を除く | PASS | 785 等式 |
+| `check_horizontal_boundary_prefix_value.sage` | 横辺の周期境界：末尾までの和を一項へ | PASS | 785 等式 |
+| `check_horizontal_boundary_terminal_projection.sage` | 横辺の周期境界：代表を射影して元の座標へ | PASS | 785 等式 |
 | `check_horizontal_interior_projection_addition.sage` | 非境界の横辺差：射影の加法保存 | PASS | 1,552 等式 |
 | `check_horizontal_interior_projection_representative.sage` | 非境界の横辺差：代表を射影して元の座標へ | PASS | 1,552 等式 |
 | `check_horizontal_interior_projection_one.sage` | 非境界の横辺差：一の射影を剰余類の一へ | PASS | 1,552 等式 |
@@ -167,6 +193,15 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-10 横辺の周期境界のレビュー: 次の座標と代表の七等号、周期和零の三等号、
+末尾の和の七等号、道和差の九等号を行別26本へ分け、全20,410等式が通過した。
+辺長一から三の自明セクター部分グラフ全265個を列挙し、境界の始点785個
+（辺長一は1個、二は16個、三は768個）を各行で検算した。辺長一の空和も含む。
+追加26本の単独実行と既存を含む全158ファイルの実行が通過した。
+必要十分版は加法モノイドと二点の道和表示、代表の境界条件、空和、末尾分離、
+周期和零、基点と末尾項の自己和零を使い、交換則・逆元・環・格子を仮定しない。
+縦辺差以降のレビューと、存在構成全体の必要十分版・導出版は未了である。
 
 2026-10-05 非境界の横辺差のレビュー: 代表の繰り上がりの五等号と道和差の十等号を
 行別15本へ分け、全23,280等式が通過した。辺長一から三の自明セクター部分グラフ全265個を

@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・非境界の横辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・横辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -8,6 +8,33 @@ import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
+
+/-- 周期境界の横辺差へ、実際の道和・代表・有限和・周期和零を供給する。 -/
+theorem reconstructionPathParity_horizontal_boundary_difference_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) (hj : j.val + 1 = L) :
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j =
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let P : ZMod 2 := ∑ r ∈ Finset.range i.val,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let f : ℕ → ZMod 2 := fun c =>
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  let H : ℕ → ZMod 2 := fun m => ∑ c ∈ Finset.range m, f c
+  have htwo : (2 : ZMod 2) = 0 := rfl
+  have hbase : P + P = 0 := by linear_combination P * htwo
+  have hterm : f j.val + f j.val = 0 := by linear_combination f j.val * htwo
+  calc
+    reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j = f j.val :=
+      Ising2DLambda.NecSuf.FisherZero.periodic_path_prefix_difference_necSuf
+        (reconstructionPathParity L A i) ZMod.val H f P j (j + 1) L
+        rfl rfl (reconstruction_horizontal_boundary_successor_val L j hj) hj
+        (Finset.sum_range_zero f) (Finset.sum_range_succ f j.val)
+        (reconstructedEdgeSet_horizontal_prefix_sum_zero L A hSector i) hbase hterm
+    _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      dsimp [f]
+      rw [ZMod.natCast_zmod_val]
 
 /-- 非境界の横辺差へ、実際の道和、座標の代表、辺指示関数、標数二を供給する。 -/
 theorem reconstructionPathParity_horizontal_interior_difference_from_necSuf

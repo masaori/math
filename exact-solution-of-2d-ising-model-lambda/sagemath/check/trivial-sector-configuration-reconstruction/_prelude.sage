@@ -1,5 +1,72 @@
 # 対象ラベル: claim_trivial_sector_configuration_reconstruction
 
+def _rc_horizontal_boundary_rows(case):
+    L = case['L']
+    coordinates = Integers(L)
+    zero = _rc_ring.zero()
+    for i in range(L):
+        j = L - 1
+        m = representative(L, j)
+        P = sum((case['bv'][(projection(L, r), 0)] for r in range(representative(L, i))), zero)
+        H = lambda n: sum((case['bh'][(i, projection(L, c))] for c in range(n)), zero)
+        a = case['bh'][(i, projection(L, m))]
+        following = representative(L, coordinates(j) + coordinates(1))
+        yield {
+            'coordinate': (
+                coordinates(j) + coordinates.one(),
+                coordinates(m) + coordinates.one(),
+                coordinates(m) + coordinates(1),
+                coordinates(m + 1),
+                coordinates(L),
+                coordinates.zero(),
+            ),
+            'representative': (
+                following,
+                representative(L, coordinates.zero()),
+                NN(0),
+            ),
+            'period': (
+                H(L),
+                sum((case['bh'][(i, projection(L, c))] for c in range(L)), zero),
+                sum((case['bh'][(i, ZZ(k))] for k in coordinates), zero),
+                zero,
+            ),
+            'prefix': (
+                H(m),
+                H(m) + zero,
+                H(m) + (a + a),
+                (H(m) + a) + a,
+                H(m + 1) + a,
+                H(L) + a,
+                zero + a,
+                a,
+            ),
+            'difference': (
+                case['t'][(i, projection(L, j + 1))] + case['t'][(i, j)],
+                (P + H(following)) + (P + H(m)),
+                (P + H(0)) + (P + H(m)),
+                (P + zero) + (P + H(m)),
+                P + (P + H(m)),
+                (P + P) + H(m),
+                zero + H(m),
+                H(m),
+                a,
+                case['bh'][(i, j)],
+            ),
+        }
+
+
+def _rc_check_horizontal_boundary(section, left, right, label):
+    checked = {1: 0, 2: 0, 3: 0}
+    for case in _rc_cases:
+        for rows in _rc_horizontal_boundary_rows(case):
+            row = rows[section]
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked[case['L']] += 1
+    assert checked == {1: 1, 2: 16, 3: 768}, checked
+    print('RESULT: PASS (%s: %d 等式、横辺の周期境界)' % (label, sum(checked.values())))
+
+
 def _rc_horizontal_interior_rows(case):
     L = case['L']
     coordinates = Integers(L)

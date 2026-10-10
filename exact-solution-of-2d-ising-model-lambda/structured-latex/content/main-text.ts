@@ -29773,6 +29773,11 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity",
                         "Ising2DLambda.FisherZero.reconstruction_horizontal_successor_val",
+                        "Ising2DLambda.FisherZero.reconstruction_horizontal_boundary_successor_val",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_horizontal_prefix_sum_zero",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_boundary_difference",
+                        "Ising2DLambda.NecSuf.FisherZero.periodic_path_prefix_difference_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_boundary_difference_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference",
                         "Ising2DLambda.NecSuf.FisherZero.path_prefix_difference_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference_from_necSuf",
@@ -30191,7 +30196,85 @@ t(i,j+\bar1)+t(i,j)
 &&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr).
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`s(j)=L-1`), " なら同じ等式は行全体の和が零であることから従う。縦向き辺について、",
+                          "周期境界の場合 ", math(String.raw`s(j)=L-1`), " は ",
+                          math(String.raw`s(j)+1=L`), " であり、次の座標とその代表は",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+j+\bar1
+&=\pi(s(j))+\bar1
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr)\\
+&=\pi(s(j))+\pi(1)
+&&\bigl(\because\ \pi(1)=\bar1,\ \blkref{def_residue_maps}\bigr)\\
+&=\pi(s(j)+1)
+&&\bigl(\because\ \pi\text{ は加法を保つ},\ \blkref{def_residue_maps}\bigr)\\
+&=\pi(L)
+&&\bigl(\because\ s(j)+1=L\bigr)\\
+&=0
+&&\bigl(\because\ L\text{ の }L\text{ で割った剰余類は零},\ \blkref{def_residue_maps}\bigr),
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+s(j+\bar1)
+&=s(0)
+&&\bigl(\because\ \text{直前の座標の等式}\bigr)\\
+&=0
+&&\bigl(\because\ 0\le0<L,\ \blkref{def_residue_maps}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "また、", ref("def_residue_maps"), " の射影 ", math(String.raw`\pi`),
+                          " を ", math(String.raw`\{0,\ldots,L-1\}`), " へ制限した写像は、",
+                          math(String.raw`s`), " を逆写像とする全単射である。したがって行全体の和は",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+H_i(L)
+&=\sum_{c=0}^{L-1}b_{\mathrm h}(i,\pi(c))
+&&\bigl(\because\ H_i\text{ の定義}\bigr)\\
+&=\sum_{k\in\mathbb Z/L\mathbb Z}b_{\mathrm h}(i,k)
+&&\bigl(\because\ \pi\text{ の制限による再添字付け},\ \blkref{def_residue_maps}\bigr)\\
+&=0
+&&\bigl(\because\ \text{先に示した全行の周期和零}\bigr).
+\end{aligned}`),
+                        paragraph(["末尾の一項を取り出すと、"]),
+                        displayMath(String.raw`\begin{aligned}
+H_i(s(j))
+&=H_i(s(j))+0
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=H_i(s(j))+\bigl(b_{\mathrm h}(i,\pi(s(j)))+b_{\mathrm h}(i,\pi(s(j)))\bigr)
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ では自己和は零}\bigr)\\
+&=\bigl(H_i(s(j))+b_{\mathrm h}(i,\pi(s(j)))\bigr)+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=H_i(s(j)+1)+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \text{有限和の末尾の一項を分離}\bigr)\\
+&=H_i(L)+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ s(j)+1=L\bigr)\\
+&=0+b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ H_i(L)=0\bigr)\\
+&=b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \text{零の加法}\bigr).
+\end{aligned}`),
+                        paragraph(["周期境界での道和差は、"]),
+                        displayMath(String.raw`\begin{aligned}
+t(i,j+\bar1)+t(i,j)
+&=(P_i+H_i(s(j+\bar1)))+(P_i+H_i(s(j)))
+&&\bigl(\because\ t,P_i,H_i\text{ の定義}\bigr)\\
+&=(P_i+H_i(0))+(P_i+H_i(s(j)))
+&&\bigl(\because\ s(j+\bar1)=0\bigr)\\
+&=(P_i+0)+(P_i+H_i(s(j)))
+&&\bigl(\because\ H_i(0)\text{ は空和}\bigr)\\
+&=P_i+(P_i+H_i(s(j)))
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=(P_i+P_i)+H_i(s(j))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=0+H_i(s(j))
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ では自己和は零}\bigr)\\
+&=H_i(s(j))
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=b_{\mathrm h}(i,\pi(s(j)))
+&&\bigl(\because\ \text{直前の末尾の和の計算}\bigr)\\
+&=b_{\mathrm h}(i,j)
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "縦向き辺について、",
                           math(String.raw`s(i)<L-1`), " なら格子面の等式を ", math(String.raw`c=0,\ldots,s(j)-1`),
                           " にわたって足すと中間の縦向き辺が二度ずつ現れて消えるので",
                         ]),
