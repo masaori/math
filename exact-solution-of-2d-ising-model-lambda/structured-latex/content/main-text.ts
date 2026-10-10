@@ -5907,6 +5907,108 @@ W_{S^+}(\operatorname{ins}(b,f))
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_polynomial_determinant_function_expansion",
+        labels: [],
+        title: { text: "行列積の行列式を添字写像へ展開する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_polynomial_determinant_function_expansion",
+            focus: {
+              id: "tools_claim_polynomial_determinant_function_expansion",
+              kind: "claim",
+              title: { text: "多項式行列積の行列式の添字写像展開" },
+              labels: ["claim_polynomial_determinant_function_expansion"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/polynomial-determinant-function-expansion"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_function_expansion",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matrixProduct_functionExpansion_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_function_expansion_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "空でない有限集合 ", math(String.raw`\mathcal J`), " に線型順序を固定し、",
+                  ref("def_qbar_polynomial_matrix"), " の多項式行列 ",
+                  math(String.raw`A,B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`),
+                  " を任意に取る。積の行列 ", math(String.raw`AB`), " は成分で",
+                ]),
+                displayMath(String.raw`(AB)_{i,k}:=\sum_{j\in\mathcal J}A_{i,j}B_{j,k}
+\qquad(i,k\in\mathcal J)`),
+                paragraph([
+                  "と定める。各成分は有限和なので ", ref("def_qbar_polynomial_ring"),
+                  " の多項式である。整数の包含を ",
+                  math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
+                  " と書き、各全単射 ", math(String.raw`\varphi\in\operatorname{Perm}(\mathcal J)`),
+                  " の符号（", ref("def_permutation_sign"), "）から定数多項式",
+                ]),
+                displayMath(String.raw`c_\varphi:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\varphi))}
+\in\overline{\mathbb Q}[x]`),
+                paragraph([
+                  "を定める（", ref("def_qbar_constant_embedding"), "）。このとき、行指定の行列式（",
+                  ref("def_qbar_polynomial_determinant"), "）は",
+                ]),
+                displayMath(String.raw`\det_x(AB)
+=\sum_{f:\mathcal J\to\mathcal J}
+\left(\prod_{i\in\mathcal J}A_{i,f(i)}\right)
+\left(\sum_{\varphi\in\operatorname{Perm}(\mathcal J)}
+c_\varphi\prod_{i\in\mathcal J}B_{f(i),\varphi(i)}\right)`),
+                paragraph([
+                  "と展開できる。外側の和は ", math(String.raw`\mathcal J`),
+                  " から自身へのすべての写像にわたる有限和であり、単射でない写像も含む。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "以下では和と積の範囲を ", math(String.raw`\varphi\in\operatorname{Perm}(\mathcal J)`),
+                  "、", math(String.raw`f:\mathcal J\to\mathcal J`), "、",
+                  math(String.raw`i,j\in\mathcal J`), " とする。各 ", math(String.raw`\varphi`),
+                  " を固定した写像 ", math(String.raw`(i,j)\mapsto A_{i,j}B_{j,\varphi(i)}`),
+                  " は ", math(String.raw`\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`),
+                  " なので、", ref("claim_polynomial_product_of_sums"),
+                  " を適用できる。多項式の中で順に",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(AB)
+&=\sum_\varphi c_\varphi\prod_i(AB)_{i,\varphi(i)}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
+&=\sum_\varphi c_\varphi\prod_i\left(\sum_j A_{i,j}B_{j,\varphi(i)}\right)
+&&\bigl(\because\ AB\text{ の成分の定義}\bigr)\\
+&=\sum_\varphi c_\varphi\sum_f\prod_i\left(A_{i,f(i)}B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \blkref{claim_polynomial_product_of_sums}\bigr)\\
+&=\sum_\varphi\sum_f c_\varphi\prod_i\left(A_{i,f(i)}B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_f\sum_\varphi c_\varphi\prod_i\left(A_{i,f(i)}B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{有限和の順序交換}\bigr)\\
+&=\sum_f\sum_\varphi c_\varphi\left(\left(\prod_i A_{i,f(i)}\right)\left(\prod_i B_{f(i),\varphi(i)}\right)\right)
+&&\bigl(\because\ \text{有限積の分離、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_f\sum_\varphi\left(c_\varphi\left(\prod_i A_{i,f(i)}\right)\right)\left(\prod_i B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_f\sum_\varphi\left(\left(\prod_i A_{i,f(i)}\right)c_\varphi\right)\left(\prod_i B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_f\sum_\varphi\left(\prod_i A_{i,f(i)}\right)\left(c_\varphi\prod_i B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_f\left(\prod_i A_{i,f(i)}\right)\left(\sum_\varphi c_\varphi\prod_i B_{f(i),\varphi(i)}\right)
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "と変形すればよい。有限積の分離では、乗法の結合則と交換則で各 ",
+                  math(String.raw`A_{i,f(i)}`), " を左側へ集めた。最後はその積が ",
+                  math(String.raw`\varphi`), " に依存しないことを使う。",
+                  "全ての和と積が有限であり、実数体・複素数体への脱出はない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
