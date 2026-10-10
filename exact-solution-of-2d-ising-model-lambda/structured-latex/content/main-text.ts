@@ -34442,10 +34442,14 @@ a\cdot a
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s(-\xi)
+&=(-a,-b)
+&&\bigl(\because\ \blkref{claim_quadratic_negation_representation}\bigr)\\
 &=(-0,-0)
-&&\bigl(\because\ \blkref{claim_quadratic_zero_representation}\ \text{と}\ \blkref{claim_quadratic_negation_representation}\bigr)\\
+&&\bigl(\because\ (a,b)=(0,0),\ \blkref{claim_quadratic_zero_representation}\bigr)\\
+&=(0,-0)
+&&\bigl(\because\ \mathbb Q\text{ の第一成分の }-0=0\bigr)\\
 &=(0,0)
-&&\bigl(\because\ \mathbb{Q}\ \text{の零元の加法逆元}\ -0=0\bigr)
+&&\bigl(\because\ \mathbb Q\text{ の第二成分の }-0=0\bigr).
 \end{aligned}`),
                         paragraph([
                           "である。準備により組 ",
@@ -34457,184 +34461,113 @@ a\cdot a
                           " である。",
                         ]),
                         paragraph([
-                          "第一と第三の排他（",
-                          math(String.raw`\xi\in P_s`),
-                          " と ",
-                          math(String.raw`-\xi\in P_s`),
-                          " は両立しない）。両方が成り立つと仮定して矛盾を導く。",
-                          ref("def_quadratic_positive_cone"),
-                          " により、組 ",
-                          math(String.raw`(a,b)`),
-                          " は三条件の少なくとも一つを満たし、組 ",
-                          math(String.raw`(-a,-b)`),
-                          " も三条件の少なくとも一つを満たす。後者の三条件を組 ",
-                          math(String.raw`(a,b)`),
-                          " の言葉へ書き直しておく。第一条件 ",
-                          math(String.raw`0\le-a`),
-                          "、",
-                          math(String.raw`0\le-b`),
-                          "、",
-                          math(String.raw`(-a,-b)\ne(0,0)`),
-                          " は、",
-                          math(String.raw`a\le0`),
-                          "、",
-                          math(String.raw`b\le0`),
-                          "、",
-                          math(String.raw`(a,b)\ne(0,0)`),
-                          " と同値である（",
-                          math(String.raw`\because`),
-                          " 順序と加法逆元、および加法逆元の対合性）。第二条件 ",
-                          math(String.raw`0<-a`),
-                          "、",
-                          math(String.raw`-b<0`),
-                          "、",
-                          math(String.raw`2\cdot(-b)\cdot(-b)<(-a)\cdot(-a)`),
-                          " は、",
-                          math(String.raw`a<0`),
-                          "、",
-                          math(String.raw`0<b`),
-                          "、",
-                          math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                          " と同値である（",
-                          math(String.raw`\because`),
-                          " 順序と加法逆元、負号どうしの積 ",
-                          math(String.raw`(-u)\cdot(-v)=u\cdot v`),
-                          "、積の結合則）。第三条件 ",
-                          math(String.raw`-a<0`),
-                          "、",
-                          math(String.raw`0<-b`),
-                          "、",
-                          math(String.raw`(-a)\cdot(-a)<2\cdot(-b)\cdot(-b)`),
-                          " は、",
-                          math(String.raw`0<a`),
-                          "、",
-                          math(String.raw`b<0`),
-                          "、",
-                          math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
-                          " と同値である（",
-                          math(String.raw`\because`),
-                          " 同じ三つの根拠）。どの条件どうしの組でも矛盾することを、九つの組み合わせ",
-                          "すべてについて確かめる。",
+                          "第一と第三の排他（", math(String.raw`\xi\in P_s`), " と ",
+                          math(String.raw`-\xi\in P_s`), " は両立しない）。両方が成り立つと仮定して矛盾を導く。",
+                          ref("def_quadratic_positive_cone"), " により、組 ", math(String.raw`(a,b)`),
+                          " と ", math(String.raw`(-a,-b)`), " はそれぞれ三条件の少なくとも一つを満たす。",
+                          "逆元側の三条件を書き直すため、まず符号の六つの同値を示す。以下の比較はすべて ",
+                          math(String.raw`\mathbb Q`), " の順序による。",
                         ]),
-                        list([
-                          [
-                            "両方が第一条件のとき: ",
-                            math(String.raw`0\le a`),
-                            " と ",
-                            math(String.raw`a\le0`),
-                            " から ",
-                            math(String.raw`a=0`),
-                            "（",
-                            math(String.raw`\because`),
-                            " 順序の反対称性）、同様に ",
-                            math(String.raw`b=0`),
-                            "。これは ",
-                            math(String.raw`(a,b)\ne(0,0)`),
-                            " に矛盾する。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第一条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第二条件のとき: ",
-                            math(String.raw`0\le a`),
-                            " と ",
-                            math(String.raw`a<0`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第一条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第三条件のとき: ",
-                            math(String.raw`0\le b`),
-                            " と ",
-                            math(String.raw`b<0`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第二条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第一条件のとき: ",
-                            math(String.raw`0<a`),
-                            " と ",
-                            math(String.raw`a\le0`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
-                          [
-                            "両方が第二条件のとき: ",
-                            math(String.raw`0<a`),
-                            " と ",
-                            math(String.raw`a<0`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第二条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第三条件のとき: ",
-                            math(String.raw`2\cdot b\cdot b<a\cdot a`),
-                            " すなわち ",
-                            math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                            "（",
-                            math(String.raw`\because`),
-                            " 積の結合則）と ",
-                            math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
-                            " から ",
-                            math(String.raw`2\cdot(b\cdot b)<2\cdot(b\cdot b)`),
-                            "（",
-                            math(String.raw`\because`),
-                            " 順序の推移律）。これは順序の非反射性に矛盾する。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第三条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第一条件のとき: ",
-                            math(String.raw`0<b`),
-                            " と ",
-                            math(String.raw`b\le0`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`),
-                            " が第三条件、",
-                            math(String.raw`(-a,-b)`),
-                            " が第二条件のとき: ",
-                            math(String.raw`a\cdot a<2\cdot b\cdot b`),
-                            " すなわち ",
-                            math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
-                            "（",
-                            math(String.raw`\because`),
-                            " 積の結合則）と ",
-                            math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                            " から ",
-                            math(String.raw`a\cdot a<a\cdot a`),
-                            "（",
-                            math(String.raw`\because`),
-                            " 順序の推移律）。これは順序の非反射性に矛盾する。",
-                          ],
-                          [
-                            "両方が第三条件のとき: ",
-                            math(String.raw`a<0`),
-                            " と ",
-                            math(String.raw`0<a`),
-                            " が両立しない（",
-                            math(String.raw`\because`),
-                            " 順序の三分律）。",
-                          ],
+                        displayMath(String.raw`\begin{aligned}
+0\le-a&\Longleftrightarrow a\le0
+&&\bigl(\because\ \text{順序と加法逆元}\bigr)\\
+0\le-b&\Longleftrightarrow b\le0
+&&\bigl(\because\ \text{順序と加法逆元}\bigr)\\
+0<-a&\Longleftrightarrow a<0
+&&\bigl(\because\ \text{順序と加法逆元}\bigr)\\
+-b<0&\Longleftrightarrow 0<b
+&&\bigl(\because\ \text{順序と加法逆元}\bigr)\\
+-a<0&\Longleftrightarrow 0<a
+&&\bigl(\because\ \text{順序と加法逆元}\bigr)\\
+0<-b&\Longleftrightarrow b<0
+&&\bigl(\because\ \text{順序と加法逆元}\bigr).
+\end{aligned}`),
+                        paragraph(["第一条件に含まれる組の非零は、成分を一つずつ戻して、"]),
+                        displayMath(String.raw`\begin{aligned}
+(-a,-b)\ne(0,0)
+&\Longleftrightarrow\neg(-a=0\ \land\ -b=0)
+&&\bigl(\because\ \text{組の相等は両成分の相等}\bigr)\\
+&\Longleftrightarrow\neg(a=0\ \land\ -b=0)
+&&\bigl(\because\ \text{加法逆元の対合性より }-a=0\Longleftrightarrow a=0\bigr)\\
+&\Longleftrightarrow\neg(a=0\ \land\ b=0)
+&&\bigl(\because\ \text{加法逆元の対合性より }-b=0\Longleftrightarrow b=0\bigr)\\
+&\Longleftrightarrow(a,b)\ne(0,0)
+&&\bigl(\because\ \text{組の相等は両成分の相等}\bigr).
+\end{aligned}`),
+                        paragraph(["第二条件に含まれる平方比較は、"]),
+                        displayMath(String.raw`\begin{aligned}
+(2\cdot(-b))\cdot(-b)<(-a)\cdot(-a)
+&\Longleftrightarrow2\cdot((-b)\cdot(-b))<(-a)\cdot(-a)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\Longleftrightarrow2\cdot(b\cdot b)<(-a)\cdot(-a)
+&&\bigl(\because\ (-b)\cdot(-b)=b\cdot b\bigr)\\
+&\Longleftrightarrow2\cdot(b\cdot b)<a\cdot a
+&&\bigl(\because\ (-a)\cdot(-a)=a\cdot a\bigr).
+\end{aligned}`),
+                        paragraph(["第三条件に含まれる平方比較は、"]),
+                        displayMath(String.raw`\begin{aligned}
+(-a)\cdot(-a)<(2\cdot(-b))\cdot(-b)
+&\Longleftrightarrow a\cdot a<(2\cdot(-b))\cdot(-b)
+&&\bigl(\because\ (-a)\cdot(-a)=a\cdot a\bigr)\\
+&\Longleftrightarrow a\cdot a<2\cdot((-b)\cdot(-b))
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\Longleftrightarrow a\cdot a<2\cdot(b\cdot b)
+&&\bigl(\because\ (-b)\cdot(-b)=b\cdot b\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "したがって逆元側の第一条件は ", math(String.raw`a\le0,\ b\le0,\ (a,b)\ne(0,0)`),
+                          "、第二条件は ", math(String.raw`a<0,\ 0<b,\ 2\cdot(b\cdot b)<a\cdot a`),
+                          "、第三条件は ", math(String.raw`0<a,\ b<0,\ a\cdot a<2\cdot(b\cdot b)`),
+                          " とそれぞれ同値である。元の組の条件と逆元側の条件の九つの組み合わせを調べる。",
                         ]),
+                        paragraph(["両方が第一条件のとき。両側の非負性と非正性から、"]),
+                        displayMath(String.raw`\begin{aligned}
+a&=0&&\bigl(\because\ 0\le a,\ a\le0,\ \text{順序の反対称性}\bigr)\\
+b&=0&&\bigl(\because\ 0\le b,\ b\le0,\ \text{順序の反対称性}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+(a,b)&=(0,b)&&\bigl(\because\ a=0\text{ の代入}\bigr)\\
+&=(0,0)&&\bigl(\because\ b=0\text{ の代入}\bigr).
+\end{aligned}`),
+                        paragraph(["これは元の組の第一条件 ", math(String.raw`(a,b)\ne(0,0)`), " に矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第一条件、", math(String.raw`(-a,-b)`), " が第二条件のとき。"]),
+                        displayMath(String.raw`\neg(a<0)\qquad\bigl(\because\ 0\le a,\ \text{順序の三分律}\bigr).`),
+                        paragraph(["逆元側の第二条件から ", math(String.raw`a<0`), " でもあり、矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第一条件、", math(String.raw`(-a,-b)`), " が第三条件のとき。"]),
+                        displayMath(String.raw`\neg(b<0)\qquad\bigl(\because\ 0\le b,\ \text{順序の三分律}\bigr).`),
+                        paragraph(["逆元側の第三条件から ", math(String.raw`b<0`), " でもあり、矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第二条件、", math(String.raw`(-a,-b)`), " が第一条件のとき。"]),
+                        displayMath(String.raw`\neg(0<a)\qquad\bigl(\because\ a\le0,\ \text{順序の三分律}\bigr).`),
+                        paragraph(["元の組の第二条件から ", math(String.raw`0<a`), " でもあり、矛盾する。"]),
+                        paragraph(["両方が第二条件のとき。"]),
+                        displayMath(String.raw`\neg(a<0)\qquad\bigl(\because\ 0<a,\ \text{順序の三分律からの非対称性}\bigr).`),
+                        paragraph(["逆元側の第二条件から ", math(String.raw`a<0`), " でもあり、矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第二条件、", math(String.raw`(-a,-b)`), " が第三条件のとき。"]),
+                        displayMath(String.raw`\begin{aligned}
+2\cdot(b\cdot b)
+&=(2\cdot b)\cdot b&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<a\cdot a&&\bigl(\because\ \text{元の組の第二条件}\bigr)\\
+&<2\cdot(b\cdot b)&&\bigl(\because\ \text{逆元側の第三条件の書き直し}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`2\cdot(b\cdot b)<2\cdot(b\cdot b)
+\qquad\bigl(\because\ \text{直前の二つの狭義不等式と推移律}\bigr).`),
+                        paragraph(["これは順序の非反射性に矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第三条件、", math(String.raw`(-a,-b)`), " が第一条件のとき。"]),
+                        displayMath(String.raw`\neg(0<b)\qquad\bigl(\because\ b\le0,\ \text{順序の三分律}\bigr).`),
+                        paragraph(["元の組の第三条件から ", math(String.raw`0<b`), " でもあり、矛盾する。"]),
+                        paragraph([math(String.raw`(a,b)`), " が第三条件、", math(String.raw`(-a,-b)`), " が第二条件のとき。"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot a
+&<(2\cdot b)\cdot b&&\bigl(\because\ \text{元の組の第三条件}\bigr)\\
+&=2\cdot(b\cdot b)&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<a\cdot a&&\bigl(\because\ \text{逆元側の第二条件の書き直し}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`a\cdot a<a\cdot a
+\qquad\bigl(\because\ \text{直前の二つの狭義不等式と推移律}\bigr).`),
+                        paragraph(["これは順序の非反射性に矛盾する。"]),
+                        paragraph(["両方が第三条件のとき。"]),
+                        displayMath(String.raw`\neg(0<a)\qquad\bigl(\because\ a<0,\ \text{順序の三分律からの非対称性}\bigr).`),
+                        paragraph(["逆元側の第三条件から ", math(String.raw`0<a`), " でもあり、矛盾する。"]),
                         paragraph([
                           "九つの組み合わせのすべてが矛盾するから、",
                           math(String.raw`\xi\in P_s`),
