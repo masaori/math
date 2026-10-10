@@ -1,0 +1,17 @@
+# 対象ラベル: claim_polynomial_product_of_sums
+# 式ペア: 1 = sum_{f in F(empty)} 1
+# 帰属: Q(zeta_8)[x]、有限集合と写像。厳密計算。
+import os
+import sys
+
+if "_fps_cases" not in globals():
+    _fps_check_dir = os.path.dirname(os.path.abspath(__file__))
+    if not os.path.isfile(os.path.join(_fps_check_dir, "_prelude.sage")):
+        _fps_check_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    load(os.path.join(_fps_check_dir, "_prelude.sage"))
+
+def _fps_rows():
+    for A, B, g in _fps_cases:
+        yield _fps_ring.one(), _fps_sum(_fps_ring.one() for f in _fps_functions((), B))
+
+_fps_verify(_fps_rows(), "empty_function_unique")

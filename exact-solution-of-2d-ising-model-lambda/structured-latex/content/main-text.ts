@@ -5733,6 +5733,180 @@ U_c(a)-D_c(a)
         ],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_polynomial_product_of_sums",
+        labels: [],
+        title: { text: "多項式の有限和と有限積" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_polynomial_product_of_sums",
+            focus: {
+              id: "tools_claim_polynomial_product_of_sums",
+              kind: "claim",
+              title: { text: "多項式の有限和の積の添字写像展開" },
+              labels: ["claim_polynomial_product_of_sums"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/polynomial-product-of-sums"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_prod_sum_eq_sum_prod_family",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_prod_sum_eq_sum_prod_pi",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_family",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.prod_sum_eq_sum_prod_pi",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_prod_sum_eq_sum_prod_family_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_prod_sum_eq_sum_prod_pi_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "有限集合 ", math(String.raw`\mathcal A,\mathcal B`), " と写像 ",
+                  math(String.raw`g:\mathcal A\times\mathcal B\to\overline{\mathbb Q}[x]`),
+                  " を任意に取る。多項式の和と積は ", ref("def_qbar_polynomial_ring"),
+                  " のものとし、空和は零多項式、空積は単位多項式とする。このとき",
+                ]),
+                displayMath(String.raw`\prod_{i\in\mathcal A}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+=\sum_{f:\mathcal A\to\mathcal B}\prod_{i\in\mathcal A}g(i,f(i))`),
+                paragraph([
+                  "が成り立つ。右辺は ", math(String.raw`\mathcal A`), " から ",
+                  math(String.raw`\mathcal B`), " へのすべての写像にわたる有限和である。",
+                  "どちらの集合にも空集合を許す。",
+                ]),
+              ],
+              proof: [
+                paragraph([
+                  "各部分集合 ", math(String.raw`S\subseteq\mathcal A`), " について、有限集合 ",
+                  math(String.raw`\mathfrak F(S):=\{f\mid f:S\to\mathcal B\}`), " と写像 ",
+                  math(String.raw`W_S:\mathfrak F(S)\to\overline{\mathbb Q}[x]`), " を",
+                ]),
+                displayMath(String.raw`W_S(f):=\prod_{i\in S}g(i,f(i))\qquad(f\in\mathfrak F(S))`),
+                paragraph([
+                  "で定める。", math(String.raw`\mathfrak F(S)`), " は有限個の点への値の割当て全体なので有限である。",
+                  "以下の等式を ", math(String.raw`|S|\in\mathbb N`), " に関する帰納法で示す。",
+                ]),
+                displayMath(String.raw`\prod_{i\in S}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+=\sum_{f\in\mathfrak F(S)}W_S(f)`),
+                paragraph([
+                  "空集合からの写像は空写像ただ一つであり、その重みは空積である。したがって基底は",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\emptyset}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+&=1 &&\bigl(\because\ \text{空積の定義}\bigr)\\
+&=\sum_{f\in\mathfrak F(\emptyset)}1
+&&\bigl(\because\ \text{空写像の一意性}\bigr)\\
+&=\sum_{f\in\mathfrak F(\emptyset)}W_{\emptyset}(f)
+&&\bigl(\because\ W_{\emptyset}(f)\text{ は空積}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "次に ", math(String.raw`S\subseteq\mathcal A`), " と ",
+                  math(String.raw`i_0\in\mathcal A\setminus S`), " を取り、",
+                  math(String.raw`S^+:=S\cup\{i_0\}`), " と置く。追加した点の値を分ける写像",
+                ]),
+                displayMath(String.raw`\operatorname{ins}:\mathcal B\times\mathfrak F(S)\to\mathfrak F(S^+),
+\qquad \operatorname{spl}:\mathfrak F(S^+)\to\mathcal B\times\mathfrak F(S)`),
+                paragraph([
+                  "を、", math(String.raw`b\in\mathcal B`), "、", math(String.raw`f\in\mathfrak F(S)`),
+                  "、", math(String.raw`h\in\mathfrak F(S^+)`), "、", math(String.raw`i\in S^+`), " に対して",
+                ]),
+                displayMath(String.raw`\operatorname{ins}(b,f)(i):=
+\begin{cases}
+  b,&i=i_0,\\
+  f(i),&i\in S,
+\end{cases}
+\qquad \operatorname{spl}(h):=(h(i_0),h|_S)`),
+                paragraph([
+                  "で定める。", math(String.raw`h|_S:S\to\mathcal B`), " は制限写像である。",
+                  math(String.raw`i_0\notin S`), " なので二場合は排反で、",
+                  math(String.raw`S^+`), " の全点を尽くす。両写像が逆であることを確認する。まず",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{spl}(\operatorname{ins}(b,f))
+&=(\operatorname{ins}(b,f)(i_0),\operatorname{ins}(b,f)|_S)
+&&\bigl(\because\ \operatorname{spl}\text{ の定義}\bigr)\\
+&=(b,\operatorname{ins}(b,f)|_S)
+&&\bigl(\because\ \operatorname{ins}\text{ の }i_0\text{ での値}\bigr)\\
+&=(b,f)
+&&\bigl(\because\ \operatorname{ins}\text{ の }S\text{ 上の値}\bigr).
+\end{aligned}`),
+                paragraph(["逆向きは、追加した点で"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{ins}(\operatorname{spl}(h))(i_0)
+&=\operatorname{ins}(h(i_0),h|_S)(i_0)
+&&\bigl(\because\ \operatorname{spl}\text{ の定義}\bigr)\\
+&=h(i_0)
+&&\bigl(\because\ \operatorname{ins}\text{ の }i_0\text{ での値}\bigr),
+\end{aligned}`),
+                paragraph(["また各 ", math(String.raw`i\in S`), " で"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{ins}(\operatorname{spl}(h))(i)
+&=\operatorname{ins}(h(i_0),h|_S)(i)
+&&\bigl(\because\ \operatorname{spl}\text{ の定義}\bigr)\\
+&=(h|_S)(i)
+&&\bigl(\because\ \operatorname{ins}\text{ の }S\text{ 上の値}\bigr)\\
+&=h(i)
+&&\bigl(\because\ \text{制限写像の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "全点で値が等しいので逆写像になり、", math(String.raw`\operatorname{ins}`),
+                  " は全単射である。この写像の下で重みは",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+W_{S^+}(\operatorname{ins}(b,f))
+&=\prod_{i\in S^+}g(i,\operatorname{ins}(b,f)(i))
+&&\bigl(\because\ W_{S^+}\text{ の定義}\bigr)\\
+&=g(i_0,\operatorname{ins}(b,f)(i_0))\prod_{i\in S}g(i,\operatorname{ins}(b,f)(i))
+&&\bigl(\because\ i_0\notin S\text{、有限積の一因子を分離}\bigr)\\
+&=g(i_0,b)\prod_{i\in S}g(i,f(i))
+&&\bigl(\because\ \operatorname{ins}\text{ の定義}\bigr)\\
+&=g(i_0,b)W_S(f)
+&&\bigl(\because\ W_S\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "と分かれる。帰納法の仮定を ", math(String.raw`S`),
+                  " に適用すると、", math(String.raw`\overline{\mathbb Q}[x]`), " の中で",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in S^+}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+&=\left(\sum_{b\in\mathcal B}g(i_0,b)\right)\prod_{i\in S}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+&&\bigl(\because\ i_0\notin S\text{、有限積の一因子を分離}\bigr)\\
+&=\left(\sum_{b\in\mathcal B}g(i_0,b)\right)\sum_{f\in\mathfrak F(S)}W_S(f)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\sum_{b\in\mathcal B}\left(g(i_0,b)\sum_{f\in\mathfrak F(S)}W_S(f)\right)
+&&\bigl(\because\ \text{有限和と元の積の分配、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_{b\in\mathcal B}\sum_{f\in\mathfrak F(S)}g(i_0,b)W_S(f)
+&&\bigl(\because\ \text{元と有限和の積の分配、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_{(b,f)\in\mathcal B\times\mathfrak F(S)}g(i_0,b)W_S(f)
+&&\bigl(\because\ \text{直積集合上の和}\bigr)\\
+&=\sum_{(b,f)\in\mathcal B\times\mathfrak F(S)}W_{S^+}(\operatorname{ins}(b,f))
+&&\bigl(\because\ \text{直前の重みの等式}\bigr)\\
+&=\sum_{h\in\mathfrak F(S^+)}W_{S^+}(h)
+&&\bigl(\because\ \text{全単射 }\operatorname{ins}\text{ による再添字付け}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これで帰納段が閉じる。任意の非空の有限部分集合から一点を取り除けば小さい部分集合になるので、",
+                  "帰納法によりすべての ", math(String.raw`S\subseteq\mathcal A`), " で等式が成り立つ。特に",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\mathcal A}\left(\sum_{j\in\mathcal B}g(i,j)\right)
+&=\sum_{f\in\mathfrak F(\mathcal A)}W_{\mathcal A}(f)
+&&\bigl(\because\ \text{帰納法の結果を }S=\mathcal A\text{ に適用}\bigr)\\
+&=\sum_{f\in\mathfrak F(\mathcal A)}\prod_{i\in\mathcal A}g(i,f(i))
+&&\bigl(\because\ W_{\mathcal A}\text{ の定義}\bigr)\\
+&=\sum_{f:\mathcal A\to\mathcal B}\prod_{i\in\mathcal A}g(i,f(i))
+&&\bigl(\because\ \mathfrak F(\mathcal A)\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "使ったのは有限集合の写像と ", ref("def_qbar_polynomial_ring"),
+                  " の多項式の和・積だけであり、実数体も複素数体も現れない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
