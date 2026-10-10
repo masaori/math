@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・横辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・横辺差・非境界の縦辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -58,6 +58,44 @@ theorem reconstructionPathParity_horizontal_interior_difference_from_necSuf
     _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
       dsimp [f]
       rw [ZMod.natCast_zmod_val]
+
+/-- 非境界の縦辺差へ、具体的な道和・面等式・代表を供給する。
+横辺二項の変形も必要十分版を経由し、具体版の縦辺差は呼ばない。 -/
+theorem reconstructionPathParity_vertical_interior_difference_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A)
+    (i j : ZMod L) (hilt : i.val + 1 < L) :
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let v : ℕ → ZMod 2 := fun r => bv (r : ZMod L) 0
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ range n, v r
+  let nextRow : ℕ → ZMod 2 := fun c => bh (i + 1) (c : ZMod L)
+  let currentRow : ℕ → ZMod 2 := fun c => bh i (c : ZMod L)
+  let f : ℕ → ZMod 2 := fun c => bv i (c : ZMod L)
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hpair (c : ℕ) : nextRow c + currentRow c = f (c + 1) + f c := by
+    calc
+      nextRow c + currentRow c = bv i ((c : ZMod L) + 1) + bv i (c : ZMod L) :=
+        Ising2DLambda.NecSuf.FisherZero.face_pair_necSuf
+          (bv i (c : ZMod L)) (bh i (c : ZMod L))
+          (bv i ((c : ZMod L) + 1)) (bh (i + 1) (c : ZMod L))
+          (reconstruction_horizontal_face_solve L A hEven i (c : ZMod L)) (hdouble _)
+      _ = bv i ((c + 1 : ℕ) : ZMod L) + bv i (c : ZMod L) := by
+        rw [Nat.cast_add, Nat.cast_one]
+      _ = f (c + 1) + f c := rfl
+  exact Ising2DLambda.NecSuf.FisherZero.vertical_path_difference_necSuf
+    (reconstructionPathParity L A (i + 1) j) (reconstructionPathParity L A i j)
+    V v nextRow currentRow f i.val (i + 1).val j.val (bv i 0) (bv i j)
+    rfl rfl (reconstruction_horizontal_successor_val L i hilt)
+    (Finset.sum_range_succ v i.val)
+    (by dsimp [v]; rw [ZMod.natCast_zmod_val]) (hdouble _)
+    hpair (fun c => hdouble (f c))
+    (by dsimp [f]; rw [ZMod.natCast_zmod_val])
+    (by dsimp [f]; rw [Nat.cast_zero])
 
 /-- 道和からスピン値を定める二場合へ、実際の代表と整数冪を供給する。 -/
 theorem reconstructionParityPower_eq_one_or_neg_one_from_necSuf (q : ZMod 2) :

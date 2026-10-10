@@ -1093,6 +1093,13 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.path_prefix_difference_necSuf
   Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_interior_difference_from_necSuf
   Ising2DLambda.FisherZero.sum_range_adjacent_pairs_char_two
+  Ising2DLambda.FisherZero.reconstruction_horizontal_face_solve
+  Ising2DLambda.FisherZero.reconstruction_vertical_face_pair
+  Ising2DLambda.FisherZero.reconstructionPathParity_vertical_interior_difference
+  Ising2DLambda.NecSuf.FisherZero.face_pair_necSuf
+  Ising2DLambda.NecSuf.FisherZero.adjacent_pairs_sum_necSuf
+  Ising2DLambda.NecSuf.FisherZero.vertical_path_difference_necSuf
+  Ising2DLambda.FisherZero.reconstructionPathParity_vertical_interior_difference_from_necSuf
   Ising2DLambda.FisherZero.reconstructionPathParity_vertical_difference
   Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val
   Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one

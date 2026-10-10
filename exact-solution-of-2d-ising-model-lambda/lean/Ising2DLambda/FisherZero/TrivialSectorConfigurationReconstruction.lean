@@ -546,14 +546,128 @@ theorem reconstructionPathParity_horizontal_difference (L : ℕ) [NeZero L]
 `ℤ/2ℤ` では中間の項が二度ずつ現れて消え、両端の二項だけが残る。 -/
 lemma sum_range_adjacent_pairs_char_two (f : ℕ → ZMod 2) (m : ℕ) :
     (∑ c ∈ Finset.range m, (f (c + 1) + f c)) = f m + f 0 := by
-  have htwo : (2 : ZMod 2) = 0 := rfl
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
   induction m with
   | zero =>
-      simp only [Finset.range_zero, Finset.sum_empty]
-      linear_combination (- f 0) * htwo
+      calc
+        (∑ c ∈ range 0, (f (c + 1) + f c)) = 0 := Finset.sum_range_zero _
+        _ = f 0 + f 0 := (hdouble (f 0)).symm
   | succ k ih =>
-      rw [Finset.sum_range_succ, ih]
-      linear_combination (f k) * htwo
+      calc
+        (∑ c ∈ range (k + 1), (f (c + 1) + f c)) =
+            (∑ c ∈ range k, (f (c + 1) + f c)) + (f (k + 1) + f k) :=
+          Finset.sum_range_succ _ k
+        _ = (f k + f 0) + (f (k + 1) + f k) := by rw [ih]
+        _ = f k + (f 0 + (f (k + 1) + f k)) := add_assoc _ _ _
+        _ = f k + ((f 0 + f (k + 1)) + f k) := by rw [← add_assoc (f 0)]
+        _ = f k + (f k + (f 0 + f (k + 1))) := by
+          rw [add_comm (f 0 + f (k + 1)) (f k)]
+        _ = (f k + f k) + (f 0 + f (k + 1)) := (add_assoc _ _ _).symm
+        _ = 0 + (f 0 + f (k + 1)) := by rw [hdouble]
+        _ = f 0 + f (k + 1) := zero_add _
+        _ = f (k + 1) + f 0 := add_comm _ _
+
+/-- 本文で先に示した格子面の横辺一項の表示。縦辺差の準備へ同じ式を供給する。 -/
+lemma reconstruction_horizontal_face_solve (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) (i j : ZMod L) :
+    (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0 : ZMod 2) =
+      ((if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0)) +
+        (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let α : ZMod 2 := if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let β : ZMod 2 := if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let γ : ZMod 2 := if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0
+  let δ : ZMod 2 := if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hface : ((α + β) + γ) + δ = 0 := reconstructedEdgeSet_face_equation L A hEven i j
+  calc
+    δ = δ + 0 := (add_zero _).symm
+    _ = δ + (((α + β) + γ) + ((α + β) + γ)) := by rw [hdouble]
+    _ = (δ + ((α + β) + γ)) + ((α + β) + γ) := (add_assoc _ _ _).symm
+    _ = (((α + β) + γ) + δ) + ((α + β) + γ) := by rw [add_comm δ]
+    _ = 0 + ((α + β) + γ) := by rw [hface]
+    _ = (α + β) + γ := zero_add _
+
+/-- 本文の縦辺差の準備。横辺二項を縦辺二項へ移す十等号。 -/
+theorem reconstruction_vertical_face_pair (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) (i : ZMod L) (c : ℕ) :
+    ((if edgeOfRow L false (i + 1) (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+      (if edgeOfRow L true i ((c + 1 : ℕ) : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L true i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let f : ℕ → ZMod 2 := fun c => bv i (c : ZMod L)
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hcast : ((c + 1 : ℕ) : ZMod L) = (c : ZMod L) + 1 := by simp only [Nat.cast_add, Nat.cast_one]
+  calc
+    bh (i + 1) (c : ZMod L) + bh i (c : ZMod L) =
+        ((bv i (c : ZMod L) + bh i (c : ZMod L)) + bv i ((c : ZMod L) + 1)) + bh i (c : ZMod L) :=
+      congrArg (· + bh i (c : ZMod L)) (reconstruction_horizontal_face_solve L A hEven i _)
+    _ = (bv i (c : ZMod L) + bh i (c : ZMod L)) +
+        (bv i ((c : ZMod L) + 1) + bh i (c : ZMod L)) := add_assoc _ _ _
+    _ = (bv i (c : ZMod L) + bh i (c : ZMod L)) +
+        (bh i (c : ZMod L) + bv i ((c : ZMod L) + 1)) := by rw [add_comm (bv i ((c : ZMod L) + 1))]
+    _ = ((bv i (c : ZMod L) + bh i (c : ZMod L)) + bh i (c : ZMod L)) +
+        bv i ((c : ZMod L) + 1) := (add_assoc _ _ _).symm
+    _ = (bv i (c : ZMod L) + (bh i (c : ZMod L) + bh i (c : ZMod L))) +
+        bv i ((c : ZMod L) + 1) := by rw [add_assoc (bv i (c : ZMod L))]
+    _ = (bv i (c : ZMod L) + 0) + bv i ((c : ZMod L) + 1) := by rw [hdouble]
+    _ = bv i (c : ZMod L) + bv i ((c : ZMod L) + 1) := by rw [add_zero]
+    _ = bv i ((c : ZMod L) + 1) + bv i (c : ZMod L) := add_comm _ _
+    _ = bv i ((c + 1 : ℕ) : ZMod L) + bv i (c : ZMod L) := by rw [hcast]
+    _ = f (c + 1) + f c := rfl
+
+/-- 本文の非境界の縦辺差。代表の増分、末尾分離、加法、面等式、望遠鏡和を各行へ対応させる。
+巻き付き偶奇と周期和零はこの場合には使わず、偶部分グラフ性だけを仮定する。 -/
+theorem reconstructionPathParity_vertical_interior_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A)
+    (i j : ZMod L) (hilt : i.val + 1 < L) :
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ range n, bv (r : ZMod L) 0
+  let H (i : ZMod L) (m : ℕ) : ZMod 2 := ∑ c ∈ range m, bh i (c : ZMod L)
+  let f : ℕ → ZMod 2 := fun c => bv i (c : ZMod L)
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hrep : (i + 1).val = i.val + 1 := reconstruction_horizontal_successor_val L i hilt
+  calc
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+        (V (i + 1).val + H (i + 1) j.val) + (V i.val + H i j.val) := rfl
+    _ = (V (i.val + 1) + H (i + 1) j.val) + (V i.val + H i j.val) := by rw [hrep]
+    _ = ((V i.val + bv (i.val : ZMod L) 0) + H (i + 1) j.val) + (V i.val + H i j.val) := by
+      rw [show V (i.val + 1) = V i.val + bv (i.val : ZMod L) 0 from Finset.sum_range_succ _ _]
+    _ = ((V i.val + bv i 0) + H (i + 1) j.val) + (V i.val + H i j.val) := by rw [ZMod.natCast_zmod_val]
+    _ = (V i.val + (bv i 0 + H (i + 1) j.val)) + (V i.val + H i j.val) := by rw [add_assoc (V i.val) (bv i 0)]
+    _ = V i.val + ((bv i 0 + H (i + 1) j.val) + (V i.val + H i j.val)) := add_assoc _ _ _
+    _ = V i.val + (((bv i 0 + H (i + 1) j.val) + V i.val) + H i j.val) := by rw [← add_assoc (bv i 0 + H (i + 1) j.val)]
+    _ = V i.val + ((V i.val + (bv i 0 + H (i + 1) j.val)) + H i j.val) := by rw [add_comm (bv i 0 + H (i + 1) j.val) (V i.val)]
+    _ = V i.val + (V i.val + ((bv i 0 + H (i + 1) j.val) + H i j.val)) := by rw [add_assoc (V i.val) (bv i 0 + H (i + 1) j.val)]
+    _ = (V i.val + V i.val) + ((bv i 0 + H (i + 1) j.val) + H i j.val) := (add_assoc _ _ _).symm
+    _ = 0 + ((bv i 0 + H (i + 1) j.val) + H i j.val) := by rw [hdouble]
+    _ = (bv i 0 + H (i + 1) j.val) + H i j.val := zero_add _
+    _ = bv i 0 + (H (i + 1) j.val + H i j.val) := add_assoc _ _ _
+    _ = bv i 0 + ∑ c ∈ range j.val, (bh (i + 1) (c : ZMod L) + bh i (c : ZMod L)) := by
+      dsimp only [H]
+      rw [← Finset.sum_add_distrib]
+    _ = bv i 0 + ∑ c ∈ range j.val, (f (c + 1) + f c) := by
+      congr 1
+      exact Finset.sum_congr rfl (fun c _ => reconstruction_vertical_face_pair L A hEven i c)
+    _ = bv i 0 + (f j.val + f 0) := congrArg (bv i 0 + ·) (sum_range_adjacent_pairs_char_two f j.val)
+    _ = bv i 0 + (bv i j + f 0) := by dsimp [f]; rw [ZMod.natCast_zmod_val]
+    _ = bv i 0 + (bv i j + bv i 0) := by dsimp [f]; rw [Nat.cast_zero]
+    _ = bv i 0 + (bv i 0 + bv i j) := congrArg (bv i 0 + ·) (add_comm _ _)
+    _ = (bv i 0 + bv i 0) + bv i j := (add_assoc _ _ _).symm
+    _ = 0 + bv i j := by rw [hdouble]
+    _ = bv i j := zero_add _
 
 /-- 人手証明の縦向き辺についての道和の差。横向きの有限和の差は格子面の等式の望遠鏡和で
 縦向きの両端二項へ落ち、縦向きの有限和の差は、代表が `L - 1` 未満なら有限和の末尾の一項、
@@ -564,6 +678,8 @@ theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
     reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
       (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
   classical
+  by_cases hilt : i.val + 1 < L
+  · exact reconstructionPathParity_vertical_interior_difference L A hSector.1 i j hilt
   cases L with
   | zero => exact (NeZero.ne 0 rfl).elim
   | succ n =>

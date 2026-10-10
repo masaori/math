@@ -435,3 +435,80 @@ def _rc_check_period(direction, phase, left, right, label):
             checked += 1
     assert checked == (265 if phase == 'base' else 785)
     print('RESULT: PASS (%s: %d 等式、265 自明セクター部分グラフ)' % (label, checked))
+
+
+def _rc_vertical_interior_detail_rows(case):
+    L = case['L']
+    coordinates = Integers(L)
+    zero = _rc_ring.zero()
+    bh = lambda i, j: case['bh'][projection(L, i), projection(L, j)]
+    bv = lambda i, j: case['bv'][projection(L, i), projection(L, j)]
+    V = lambda n: sum((bv(r, 0) for r in range(n)), zero)
+    H = lambda i, m: sum((bh(i, c) for c in range(m)), zero)
+    rows = {'representative': [], 'face': [], 'base': [], 'step': [], 'difference': []}
+    for i in range(L):
+        f = lambda c: bv(i, projection(L, c))
+        rows['base'].append((sum((f(c + 1) + f(c) for c in range(0)), zero),
+                             zero, f(0) + f(0)))
+        for c in range(L):
+            a, b = bv(i, projection(L, c)), bh(i, projection(L, c))
+            next_coord = coordinates(projection(L, c)) + coordinates.one()
+            z, d = bv(i, next_coord), bh(i + 1, projection(L, c))
+            rows['face'].append((
+                d + b, ((a + b) + z) + b, (a + b) + (z + b),
+                (a + b) + (b + z), ((a + b) + b) + z, (a + (b + b)) + z,
+                (a + zero) + z, a + z, z + a,
+                bv(i, projection(L, c + 1)) + a, f(c + 1) + f(c)))
+        for k in range(L):
+            rows['step'].append((
+                sum((f(c + 1) + f(c) for c in range(k + 1)), zero),
+                sum((f(c + 1) + f(c) for c in range(k)), zero) + (f(k + 1) + f(k)),
+                (f(k) + f(0)) + (f(k + 1) + f(k)),
+                f(k) + (f(0) + (f(k + 1) + f(k))),
+                f(k) + ((f(0) + f(k + 1)) + f(k)),
+                f(k) + (f(k) + (f(0) + f(k + 1))),
+                (f(k) + f(k)) + (f(0) + f(k + 1)),
+                zero + (f(0) + f(k + 1)), f(0) + f(k + 1), f(k + 1) + f(0)))
+        n = representative(L, i)
+        if n + 1 >= L:
+            continue
+        following = representative(L, coordinates(i) + coordinates.one())
+        for j in range(L):
+            m = representative(L, j)
+            N, g, hn, hc = V(n), bv(i, 0), H(i + 1, m), H(i, m)
+            rows['representative'].append((following, n + 1))
+            rows['difference'].append((
+                case['t'][projection(L, i + 1), j] + case['t'][i, j],
+                (V(following) + hn) + (N + hc), (V(n + 1) + hn) + (N + hc),
+                ((N + bv(projection(L, n), 0)) + hn) + (N + hc),
+                ((N + g) + hn) + (N + hc), (N + (g + hn)) + (N + hc),
+                N + ((g + hn) + (N + hc)), N + (((g + hn) + N) + hc),
+                N + ((N + (g + hn)) + hc), N + (N + ((g + hn) + hc)),
+                (N + N) + ((g + hn) + hc), zero + ((g + hn) + hc),
+                (g + hn) + hc, g + (hn + hc),
+                g + sum((bh(i + 1, projection(L, c)) + bh(i, projection(L, c))
+                         for c in range(m)), zero),
+                g + sum((f(c + 1) + f(c) for c in range(m)), zero),
+                g + (f(m) + f(0)), g + (bv(i, j) + f(0)),
+                g + (bv(i, j) + g), g + (g + bv(i, j)),
+                (g + g) + bv(i, j), zero + bv(i, j), bv(i, j)))
+    return rows
+
+
+def _rc_check_vertical_interior_detail(section, left, right, label):
+    global _rc_vertical_detail
+    if '_rc_vertical_detail' not in globals():
+        _rc_vertical_detail = [
+            (L, A, _rc_vertical_interior_detail_rows(_rc_build_case(L, A)))
+            for L in (1, 2, 3) for A in _rc_even_subsets(L)]
+        assert [sum(L == size for L, A, rows in _rc_vertical_detail)
+                for size in (1, 2, 3)] == [4, 32, 1024]
+    checked = 0
+    for L, A, rows in _rc_vertical_detail:
+        for row in rows[section]:
+            assert row[left] == row[right], (label, L, A, row)
+            checked += 1
+    expected = {'representative': 6208, 'face': 9348, 'base': 3140,
+                'step': 9348, 'difference': 6208}
+    assert checked == expected[section], checked
+    print('RESULT: PASS (%s: %d 等式、1060 偶部分グラフ)' % (label, checked))

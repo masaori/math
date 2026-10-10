@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・非境界の縦辺差・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -80,6 +80,89 @@ theorem path_prefix_difference_necSuf {X M : Type*} [AddCommMonoid M]
       (add_assoc _ _ _).symm
     _ = 0 + f (index x) := congrArg (· + f (index x)) hdouble
     _ = f (index x) := zero_add _
+
+/-- 横辺を解いた面等式へ同じ横辺を足して消す。必要なのは加法の法則とその横辺の自己和零だけ。 -/
+theorem face_pair_necSuf {M : Type*} [AddCommMonoid M]
+    (a b c d : M) (hface : d = (a + b) + c) (hdouble : b + b = 0) :
+    d + b = c + a := by
+  calc
+    d + b = ((a + b) + c) + b := congrArg (· + b) hface
+    _ = (a + b) + (c + b) := add_assoc _ _ _
+    _ = (a + b) + (b + c) := by rw [add_comm c b]
+    _ = ((a + b) + b) + c := (add_assoc _ _ _).symm
+    _ = (a + (b + b)) + c := by rw [add_assoc a b b]
+    _ = (a + 0) + c := by rw [hdouble]
+    _ = a + c := by rw [add_zero]
+    _ = c + a := add_comm _ _
+
+/-- 隣接二項の望遠鏡和を自然数の帰納法で示す。自己和零は各項にだけ要求し、
+環、乗法、逆元、格子を仮定しない。自己和零を外すと中間項が残る。 -/
+theorem adjacent_pairs_sum_necSuf {M : Type*} [AddCommMonoid M]
+    (f : ℕ → M) (hdouble : ∀ k : ℕ, f k + f k = 0) (m : ℕ) :
+    (∑ c ∈ range m, (f (c + 1) + f c)) = f m + f 0 := by
+  induction m with
+  | zero =>
+      calc
+        (∑ c ∈ range 0, (f (c + 1) + f c)) = 0 := Finset.sum_range_zero _
+        _ = f 0 + f 0 := (hdouble 0).symm
+  | succ k ih =>
+      calc
+        (∑ c ∈ range (k + 1), (f (c + 1) + f c)) =
+            (∑ c ∈ range k, (f (c + 1) + f c)) + (f (k + 1) + f k) :=
+          Finset.sum_range_succ _ k
+        _ = (f k + f 0) + (f (k + 1) + f k) := by rw [ih]
+        _ = f k + (f 0 + (f (k + 1) + f k)) := add_assoc _ _ _
+        _ = f k + ((f 0 + f (k + 1)) + f k) := by rw [← add_assoc (f 0)]
+        _ = f k + (f k + (f 0 + f (k + 1))) := by rw [add_comm (f 0 + f (k + 1)) (f k)]
+        _ = (f k + f k) + (f 0 + f (k + 1)) := (add_assoc _ _ _).symm
+        _ = 0 + (f 0 + f (k + 1)) := by rw [hdouble k]
+        _ = f 0 + f (k + 1) := zero_add _
+        _ = f (k + 1) + f 0 := add_comm _ _
+
+/-- 非境界の縦辺差の二十二等号。道和表示、代表の増分、末尾分離、
+隣接する横辺二項の表示、端点の評価、重複項の自己和零だけを残す。
+周期和零と巻き付き偶奇は使わない。 -/
+theorem vertical_path_difference_necSuf {M : Type*} [AddCommMonoid M]
+    (pathNext pathCurrent : M) (V v nextRow currentRow f : ℕ → M)
+    (n nextN m : ℕ) (initial terminal : M)
+    (hpathNext : pathNext = V nextN + ∑ c ∈ range m, nextRow c)
+    (hpathCurrent : pathCurrent = V n + ∑ c ∈ range m, currentRow c)
+    (hindex : nextN = n + 1) (hsucc : V (n + 1) = V n + v n)
+    (hterm : v n = initial) (hdoubleV : V n + V n = 0)
+    (hpair : ∀ c : ℕ, nextRow c + currentRow c = f (c + 1) + f c)
+    (hdoubleF : ∀ c : ℕ, f c + f c = 0)
+    (hterminal : f m = terminal) (hinitial : f 0 = initial) :
+    pathNext + pathCurrent = terminal := by
+  let Hnext := ∑ c ∈ range m, nextRow c
+  let Hcurrent := ∑ c ∈ range m, currentRow c
+  have hdoubleInitial : initial + initial = 0 := by rw [← hinitial]; exact hdoubleF 0
+  calc
+    pathNext + pathCurrent = (V nextN + Hnext) + (V n + Hcurrent) :=
+      congrArg₂ (· + ·) hpathNext hpathCurrent
+    _ = (V (n + 1) + Hnext) + (V n + Hcurrent) := by rw [hindex]
+    _ = ((V n + v n) + Hnext) + (V n + Hcurrent) := by rw [hsucc]
+    _ = ((V n + initial) + Hnext) + (V n + Hcurrent) := by rw [hterm]
+    _ = (V n + (initial + Hnext)) + (V n + Hcurrent) := by rw [add_assoc (V n) initial]
+    _ = V n + ((initial + Hnext) + (V n + Hcurrent)) := add_assoc _ _ _
+    _ = V n + (((initial + Hnext) + V n) + Hcurrent) := by rw [← add_assoc (initial + Hnext)]
+    _ = V n + ((V n + (initial + Hnext)) + Hcurrent) := by rw [add_comm (initial + Hnext) (V n)]
+    _ = V n + (V n + ((initial + Hnext) + Hcurrent)) := by rw [add_assoc (V n) (initial + Hnext)]
+    _ = (V n + V n) + ((initial + Hnext) + Hcurrent) := (add_assoc _ _ _).symm
+    _ = 0 + ((initial + Hnext) + Hcurrent) := by rw [hdoubleV]
+    _ = (initial + Hnext) + Hcurrent := zero_add _
+    _ = initial + (Hnext + Hcurrent) := add_assoc _ _ _
+    _ = initial + ∑ c ∈ range m, (nextRow c + currentRow c) := by
+      dsimp only [Hnext, Hcurrent]
+      rw [← Finset.sum_add_distrib]
+    _ = initial + ∑ c ∈ range m, (f (c + 1) + f c) :=
+      congrArg (initial + ·) (Finset.sum_congr rfl (fun c _ => hpair c))
+    _ = initial + (f m + f 0) := congrArg (initial + ·) (adjacent_pairs_sum_necSuf f hdoubleF m)
+    _ = initial + (terminal + f 0) := by rw [hterminal]
+    _ = initial + (terminal + initial) := by rw [hinitial]
+    _ = initial + (initial + terminal) := congrArg (initial + ·) (add_comm _ _)
+    _ = (initial + initial) + terminal := (add_assoc _ _ _).symm
+    _ = 0 + terminal := by rw [hdoubleInitial]
+    _ = terminal := zero_add _
 
 /-- 指数の二場合を、それぞれの値へ代入する本文と同じ計算。
 必要なのは代表が零か一であることと、評価写像のその二点での値だけである。

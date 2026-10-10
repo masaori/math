@@ -11,6 +11,50 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---|---|---|---|
+| `check_vertical_interior_representative_successor.sage` | 縦座標の非境界の代表増分 | PASS | 6,208 等式 |
+| `check_vertical_interior_face_solved_substitution.sage` | 格子面で解いた横辺一項を代入 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_associate_pair.sage` | 局所四項の後半を結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_commute_middle.sage` | 局所四項の後半を交換 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_associate_duplicate.sage` | 横辺二項を隣接させる結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_group_duplicate.sage` | 同じ横辺二項をまとめる結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_cancel_duplicate.sage` | 横辺の自己和零 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_remove_zero.sage` | 横辺の零の加法 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_commute_endpoints.sage` | 残る縦辺二項の交換 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_successor_projection.sage` | 縦辺の次座標の射影 | PASS | 9,348 等式 |
+| `check_vertical_interior_face_sequence_definition.sage` | 縦辺列の定義 | PASS | 9,348 等式 |
+| `check_vertical_interior_base_empty_sum.sage` | 望遠鏡和の基底の空和 | PASS | 3,140 等式 |
+| `check_vertical_interior_base_self_sum.sage` | 望遠鏡和の基底の自己和零 | PASS | 3,140 等式 |
+| `check_vertical_interior_step_split_last.sage` | 望遠鏡和の帰納段階で末尾分離 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_induction_hypothesis.sage` | 望遠鏡和の帰納法の仮定 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_associate_outer.sage` | 望遠鏡和の外側の結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_associate_inner.sage` | 望遠鏡和の内側の結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_commute_inner.sage` | 望遠鏡和の重複項を寄せる交換 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_group_duplicate.sage` | 望遠鏡和の重複項の結合 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_cancel_duplicate.sage` | 望遠鏡和の重複項の自己和零 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_remove_zero.sage` | 望遠鏡和の零の加法 | PASS | 9,348 等式 |
+| `check_vertical_interior_step_commute_endpoints.sage` | 望遠鏡和の両端の交換 | PASS | 9,348 等式 |
+| `check_vertical_interior_difference_expand_path.sage` | 縦辺差の二つの道和の展開 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_successor_index.sage` | 縦辺差へ代表の増分を代入 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_split_column_last.sage` | 列零の道和の末尾分離 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_column_projection.sage` | 列零の末尾の代表を射影 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_associate_next_path.sage` | 次の道和の結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_associate_outer.sage` | 二つの道和の外側の結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_associate_inner.sage` | 列零の重複和を寄せる結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_commute_prefix.sage` | 列零の重複和を寄せる交換 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_associate_prefix.sage` | 列零の重複和を隣接させる結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_group_prefix.sage` | 列零の重複和をまとめる結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_cancel_prefix.sage` | 列零の道和の自己和零 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_remove_prefix_zero.sage` | 列零の道和を消した後の零の加法 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_associate_rows.sage` | 二行の和をまとめる結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_combine_rows.sage` | 二行の有限和の加法 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_substitute_face_pair.sage` | 各項への横辺二項の式の代入 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_telescope.sage` | 帰納法で示した望遠鏡和の適用 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_terminal_projection.sage` | 縦辺列の末尾の代表を射影 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_initial_projection.sage` | 縦辺列の零の射影 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_commute_initial.sage` | 初項の重複を寄せる交換 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_group_initial.sage` | 初項の重複をまとめる結合 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_cancel_initial.sage` | 初項の自己和零 | PASS | 6,208 等式 |
+| `check_vertical_interior_difference_remove_initial_zero.sage` | 縦辺差の最後の零の加法 | PASS | 6,208 等式 |
 | `check_horizontal_boundary_coordinate_representative.sage` | 横辺の周期境界：座標を代表の射影へ | PASS | 785 等式 |
 | `check_horizontal_boundary_coordinate_one.sage` | 横辺の周期境界：剰余類の一を一の射影へ | PASS | 785 等式 |
 | `check_horizontal_boundary_coordinate_addition.sage` | 横辺の周期境界：射影の加法保存 | PASS | 785 等式 |
@@ -156,7 +200,7 @@
 | `check_configuration_definition.sage` | σ_A=(-1)^{s₂(t)} と二値スピンの対応 | PASS | 二元と全 2,337 頂点 |
 | `check_spin_disagreement_four_cases.sage` | 二元の四通りによる符号不一致と和が一の同値 | PASS | 四通りすべて |
 | `check_horizontal_difference.sage` | 横辺の道和差（空和と周期境界を含む） | PASS | 2,337 頂点 |
-| `check_vertical_path_expansion.sage` | t(i+1,j)+t(i,j) から定義を展開 | PASS | 1,552 頂点 |
+| `check_vertical_path_expansion.sage` | 非境界の道和差を列零の末尾項と二行和へ（集約検算） | PASS | 1,552 頂点 |
 | `check_vertical_face_substitution.sage` | 横辺二項の有限和へ面の等式を各項代入 | PASS | 1,552 頂点 |
 | `check_vertical_telescoping.sage` | 隣接二項の有限和を π(s(j)) と π(0) の端点和へ | PASS | 1,552 頂点 |
 | `check_vertical_terminal_representative.sage` | 端点 π(s(j)) を j へ戻す | PASS | 1,552 頂点 |
@@ -175,7 +219,8 @@
 自然数代表 $s_2$ による整数の冪で配位を復元する。計算は $\mathbb Z/2\mathbb Z$、
 $\mathbb N$、$\mathbb Z$ 内で厳密に行う。
 
-縦辺差の六等号は本文の条件 $s(i)<L-1$ で一行ずつ検査する。
+非境界の縦辺差は、代表増分・局所二項・望遠鏡和・道和差の44等号を一行ずつ検査する。
+自明セクターで道和差から終点の一項までを検査する六つの集約検算も併用する。
 末尾の行は別ファイルで列和の零性と縦辺差を検査し、$L=1$ の自己ループも含める。
 横辺差は周期境界を含む全頂点で検査し、縦辺差の望遠鏡和には $s(j)=0$ の空和を含める。
 有限個の格子サイズの検算を、一般の $L$ に対する証明とは扱わない。
@@ -193,6 +238,17 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-10 非境界の縦辺差のレビュー: 代表増分の一等号、格子面の横辺二項の十等号、
+望遠鏡和の基底二等号・帰納段階九等号、道和差の二十二等号を行別44本へ分けた。
+自明セクターの条件を使わないため、辺長一から三の全1,060偶部分グラフを列挙し、
+全326,676等式が通過した。既存を含む全202ファイルの再実行も通過した。
+各行の内訳は非境界の代表と道和差が6,208頂点、
+局所式と帰納段階が9,348件、帰納法の基底が3,140件である。
+帰納変数の有限検算は零から辺長未満に限り、任意の自然数への帰納法は Lean で証明する。
+必要十分版は加法可換モノイドと道和表示・代表増分・末尾分離・局所二項の表示・
+端点の評価・重複項の自己和零を残す。周期和零、巻き付き偶奇、環、乗法は仮定しない。
+縦辺の周期境界以降のレビューと、存在構成全体の必要十分版・導出版は未了である。
 
 2026-10-10 横辺の周期境界のレビュー: 次の座標と代表の七等号、周期和零の三等号、
 末尾の和の七等号、道和差の九等号を行別26本へ分け、全20,410等式が通過した。
