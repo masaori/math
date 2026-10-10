@@ -570,3 +570,54 @@ def _rc_check_vertical_boundary_detail(section, left, right, label):
     assert checked == {1: 1, 2: 16, 3: 768}, checked
     print('RESULT: PASS (%s: %d 等式、縦辺の周期境界、L=1 を含む)' %
           (label, sum(checked.values())))
+
+
+def _rc_fiber_rows(case):
+    L, A = case['L'], case['A']
+    vertex_list = tuple(vertices(L))
+    edges = tuple(range(1, 2 * L * L + 1))
+    broken = lambda sigma: frozenset(
+        edge for edge in edges
+        if sigma[endpoints(L, edge)[0]] != sigma[endpoints(L, edge)[1]])
+    dual = lambda B: frozenset(_rc_dual(L, edge) for edge in B)
+    inverse = lambda B: frozenset(_rc_inverse_dual(L, edge) for edge in B)
+    key = lambda sigma: tuple(sigma[v] for v in vertex_list)
+    sigma = case['sigma']
+    reversal = {v: -sigma[v] for v in vertex_list}
+    sigma_key, reversal_key = key(sigma), key(reversal)
+    pair = frozenset((sigma_key, reversal_key))
+    singleton = frozenset((reversal_key,))
+    # 原像は復元式や二点集合を使わず、全配位の破れ集合から抽出する。
+    candidates = tuple(tau for tau in configurations(L) if dual(broken(tau)) == A)
+    fiber = frozenset(key(tau) for tau in candidates)
+    yield 'reversal', (dual(broken(reversal)), dual(broken(sigma)), A)
+    yield 'base', (reversal[(0, 0)], -sigma[(0, 0)], sigma[(0, 0)])
+    for tau in candidates:
+        yield 'inverse', (
+            broken(tau), inverse(dual(broken(tau))), inverse(A),
+            inverse(dual(broken(sigma))), broken(sigma))
+        yield 'forward', (key(tau) == sigma_key or key(tau) == reversal_key, True)
+    for tau_key in pair:
+        yield 'backward', (tau_key in fiber, True)
+    yield 'set', (fiber, pair)
+    yield 'card', (
+        NN(len(fiber)), NN(len(pair)), NN(len(singleton)) + NN(1), NN(1) + NN(1), NN(2))
+
+
+def _rc_check_fiber(section, left, right, label, relation='eq'):
+    global _rc_fiber_detail
+    if '_rc_fiber_detail' not in globals():
+        _rc_fiber_detail = [(case, tuple(_rc_fiber_rows(case))) for case in _rc_cases]
+    checked = {1: 0, 2: 0, 3: 0}
+    for case, rows in _rc_fiber_detail:
+        for name, row in rows:
+            if name != section:
+                continue
+            result = row[left] != row[right] if relation == 'ne' else row[left] == row[right]
+            assert result, (label, case['L'], case['A'], row)
+            checked[case['L']] += 1
+    expected = {1: 2, 2: 16, 3: 512} if section in ('inverse', 'forward', 'backward') else {
+        1: 1, 2: 8, 3: 256}
+    assert checked == expected, checked
+    print('RESULT: PASS (%s: %d 行、L=1,2,3 の全自明セクター)' %
+          (label, sum(checked.values())))

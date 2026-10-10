@@ -242,6 +242,20 @@ theorem reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf
     (reconstructedConfiguration_brokenEdgeSet_from_necSuf L A hSector)
     (image_reconstructedEdgeSet L A)
 
+/-- 共通の双対像から戻る四等号へ、有限集合の双対像と逆写像による像を供給する。 -/
+theorem sameDualBrokenEdges_brokenEdgeSet_eq_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L)) (σ τ : Config L)
+    (hτ : dualBrokenEdgeSet L τ = A) (hσ : dualBrokenEdgeSet L σ = A) :
+    brokenEdgeSet L τ = brokenEdgeSet L σ := by
+  classical
+  exact Ising2DLambda.NecSuf.FisherZero.recover_eq_of_common_image_necSuf
+    (fun B : Finset (Edge L) => B.image (dualEdgeEquiv L))
+    (fun B : Finset (Edge L) => B.image (dualEdgeEquiv L).symm)
+    (brokenEdgeSet L τ) (brokenEdgeSet L σ) A
+    (by simp only [image_image, Function.comp_def, Equiv.symm_apply_apply, image_id'])
+    (by simp only [image_image, Function.comp_def, Equiv.symm_apply_apply, image_id'])
+    hτ hσ
+
 theorem trivialSectorConfiguration_fiber_card_two_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
     (hexists : ∃ σ : Config L, dualBrokenEdgeSet L σ = A) :
@@ -251,7 +265,14 @@ theorem trivialSectorConfiguration_fiber_card_two_from_necSuf
     (dualBrokenEdgeSet L) (globalSpinReversal L) σ
     (globalSpinReversal_ne_self L σ)
     (globalSpinReversal_dualBrokenEdgeSet L σ)
-    (sameDualBrokenEdges_eq_or_globalSpinReversal L σ)
+    (by
+      intro τ hτ
+      have hBroken := sameDualBrokenEdges_brokenEdgeSet_eq_from_necSuf
+        L (dualBrokenEdgeSet L σ) σ τ hτ rfl
+      apply sameBrokenEdges_eq_or_globalSpinReversal L σ τ
+      intro e
+      simpa only [brokenEdgeSet, mem_filter, mem_univ, true_and] using
+        (Finset.ext_iff.mp hBroken e).symm)
   simpa [hσ] using h
 
 end Ising2DLambda.FisherZero

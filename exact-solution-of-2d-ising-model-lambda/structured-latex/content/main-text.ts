@@ -30448,6 +30448,12 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf",
+                        "Ising2DLambda.FisherZero.globalSpinReversal_dualBrokenEdgeSet",
+                        "Ising2DLambda.FisherZero.sameDualBrokenEdges_brokenEdgeSet_eq",
+                        "Ising2DLambda.FisherZero.sameDualBrokenEdges_eq_or_globalSpinReversal",
+                        "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_of_exists",
+                        "Ising2DLambda.NecSuf.FisherZero.recover_eq_of_common_image_necSuf",
+                        "Ising2DLambda.FisherZero.sameDualBrokenEdges_brokenEdgeSet_eq_from_necSuf",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
                       ],
@@ -31164,15 +31170,67 @@ e\in\mathcal B_L(\sigma_A)
 &&\bigl(\because\ B=\delta_L^{-1}(A),\ \blkref{claim_dual_edge_map_bijective}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "したがって原像は空でない。", ref("claim_global_spin_reversal_preserves_broken_edge"), " より ",
-                          math(String.raw`\nu_L(\sigma_A)`), " も原像に属し、基点で値が反対なので ",
-                          math(String.raw`\nu_L(\sigma_A)\ne\sigma_A`), " である。任意の別の原像 ",
-                          math(String.raw`\tau`), " について、", math(String.raw`\delta_L`), " の単射性から ",
-                          math(String.raw`\mathcal B_L(\tau)=\mathcal B_L(\sigma_A)`), " である。",
-                          ref("claim_same_broken_edges_equal_or_global_reversal"), " を適用すると",
+                          "原像の有限集合を ",
+                          math(String.raw`\mathcal F_A:=\{\tau\in\Sigma_L\mid\delta_L(\mathcal B_L(\tau))=A\}`),
+                          " と置く。直前の等式から ", math(String.raw`\sigma_A\in\mathcal F_A`),
+                          " である。全スピン反転の双対像は、",
                         ]),
-                        displayMath(String.raw`\tau=\sigma_A\quad\text{または}\quad\tau=\nu_L(\sigma_A)`),
-                        paragraph(["となるので原像の元の個数は 2 である。全過程は有限集合と二値の有限和だけで閉じる。"]),
+                        displayMath(String.raw`\begin{aligned}
+\delta_L\bigl(\mathcal B_L(\nu_L(\sigma_A))\bigr)
+&=\delta_L\bigl(\mathcal B_L(\sigma_A)\bigr)
+&&\bigl(\because\ \blkref{claim_global_spin_reversal_preserves_broken_edge}\bigr)\\
+&=A
+&&\bigl(\because\ \text{直前に示した復元配位の双対像}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "したがって ", math(String.raw`\nu_L(\sigma_A)\in\mathcal F_A`),
+                          " でもある。基点 ", math(String.raw`v_*:=(0,0)\in V_L`), " では、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(\nu_L(\sigma_A)\bigr)(v_*)
+&=-\sigma_A(v_*)
+&&\bigl(\because\ \blkref{def_global_spin_reversal}\bigr)\\
+&\ne\sigma_A(v_*)
+&&\bigl(\because\ \sigma_A(v_*)\in\{+1,-1\}\subset\mathbb Z\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "一つの頂点で値が異なるので ", math(String.raw`\nu_L(\sigma_A)\ne\sigma_A`),
+                          " である。次に任意の ", math(String.raw`\tau\in\mathcal F_A`),
+                          " を取る。部分集合に対する ", math(String.raw`\delta_L^{-1}`),
+                          " は逆写像による像であり、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathcal B_L(\tau)
+&=\delta_L^{-1}\bigl(\delta_L(\mathcal B_L(\tau))\bigr)
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\text{ の往復}\bigr)\\
+&=\delta_L^{-1}(A)
+&&\bigl(\because\ \tau\in\mathcal F_A\text{ と }\mathcal F_A\text{ の定義}\bigr)\\
+&=\delta_L^{-1}\bigl(\delta_L(\mathcal B_L(\sigma_A))\bigr)
+&&\bigl(\because\ \text{復元配位の双対像が }A\bigr)\\
+&=\mathcal B_L(\sigma_A)
+&&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\text{ の往復}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\tau=\sigma_A\quad\text{または}\quad\tau=\nu_L(\sigma_A)
+\qquad\bigl(\because\ \blkref{claim_same_broken_edges_equal_or_global_reversal}\bigr).`),
+                        paragraph([
+                          "従って ", math(String.raw`\mathcal F_A\subseteq\{\sigma_A,\nu_L(\sigma_A)\}`),
+                          " である。逆の包含は、先に示した両配位の所属から従う。よって、",
+                        ]),
+                        displayMath(String.raw`\mathcal F_A=\{\sigma_A,\nu_L(\sigma_A)\}
+\qquad\bigl(\because\ \text{両包含}\bigr).`),
+                        paragraph(["この集合等号を用いて元の個数を計算すると、"]),
+                        displayMath(String.raw`\begin{aligned}
+|\mathcal F_A|
+&=|\{\sigma_A,\nu_L(\sigma_A)\}|
+&&\bigl(\because\ \text{直前の集合等号}\bigr)\\
+&=|\{\nu_L(\sigma_A)\}|+1
+&&\bigl(\because\ \sigma_A\notin\{\nu_L(\sigma_A)\}\bigr)\\
+&=1+1
+&&\bigl(\because\ \text{一元集合の元の個数}\bigr)\\
+&=2
+&&\bigl(\because\ \text{自然数の加法}\bigr).
+\end{aligned}`),
+                        paragraph(["全過程は有限集合と二値の有限和だけで閉じる。"]),
                       ],
                     },
                 },

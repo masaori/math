@@ -128,6 +128,21 @@ check_files = (
     'check_broken_membership.sage',
     'check_dual_image_substitution.sage',
     'check_dual_image_inverse.sage',
+    'check_reversal_dual_preservation.sage',
+    'check_reversal_dual_reconstruction.sage',
+    'check_reversal_base_definition.sage',
+    'check_reversal_base_distinct.sage',
+    'check_fiber_inverse_left_roundtrip.sage',
+    'check_fiber_inverse_common_image.sage',
+    'check_fiber_inverse_reconstructed_image.sage',
+    'check_fiber_inverse_right_roundtrip.sage',
+    'check_fiber_forward_inclusion.sage',
+    'check_fiber_reverse_inclusion.sage',
+    'check_fiber_set_equality.sage',
+    'check_fiber_card_set_substitution.sage',
+    'check_fiber_card_insert.sage',
+    'check_fiber_card_singleton.sage',
+    'check_fiber_card_addition.sage',
 )
 for check_file in check_files:
     load(os.path.join(_dir, check_file))

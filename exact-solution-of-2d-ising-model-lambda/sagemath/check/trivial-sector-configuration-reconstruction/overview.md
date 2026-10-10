@@ -11,6 +11,21 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---|---|---|---|
+| `check_reversal_dual_preservation.sage` | 全反転による双対破れ像の保存 | PASS | 265 行 |
+| `check_reversal_dual_reconstruction.sage` | 復元配位の双対像を代入 | PASS | 265 行 |
+| `check_reversal_base_definition.sage` | 基点で全反転の定義を代入 | PASS | 265 行 |
+| `check_reversal_base_distinct.sage` | 基点の二値とその負値の相異 | PASS | 265 不等式 |
+| `check_fiber_inverse_left_roundtrip.sage` | 別の原像の破れ集合を逆写像との往復へ置換 | PASS | 530 行 |
+| `check_fiber_inverse_common_image.sage` | 別の原像の共通双対像を代入 | PASS | 530 行 |
+| `check_fiber_inverse_reconstructed_image.sage` | 復元配位の双対像を逆向きに代入 | PASS | 530 行 |
+| `check_fiber_inverse_right_roundtrip.sage` | 復元配位の破れ集合へ逆写像の往復で戻す | PASS | 530 行 |
+| `check_fiber_forward_inclusion.sage` | 全原像は復元配位または全反転である | PASS | 530 行 |
+| `check_fiber_reverse_inclusion.sage` | 復元配位と全反転は原像に属する | PASS | 530 行 |
+| `check_fiber_set_equality.sage` | 両包含による原像と二点集合の等号 | PASS | 265 行 |
+| `check_fiber_card_set_substitution.sage` | 個数へ原像の集合等号を代入 | PASS | 265 行 |
+| `check_fiber_card_insert.sage` | 異なる配位を一元集合へ挿入した個数 | PASS | 265 行 |
+| `check_fiber_card_singleton.sage` | 一元集合の個数を代入 | PASS | 265 行 |
+| `check_fiber_card_addition.sage` | 自然数の一と一の和 | PASS | 265 行 |
 | `check_endpoint_sum_commute.sage` | 所属判定に合わせた端点道和の順序交換 | PASS | 4,674 辺 |
 | `check_endpoint_sum_indicator.sage` | 横辺差・縦辺差を指示関数へ代入 | PASS | 4,674 辺 |
 | `check_broken_indicator_substitution.sage` | 所属判定へ端点道和の等式を代入 | PASS | 4,674 辺 |
@@ -257,6 +272,9 @@ $\mathbb N$、$\mathbb Z$ 内で厳密に行う。
 縦辺の周期境界は代表の復帰・列零の周期和・末尾の和・道和差の29等号を行別に検査する。
 既存の集約検算も残し、$L=1$ の自己ループを含める。
 横辺差は周期境界を含む全頂点で検査し、縦辺差の望遠鏡和には $s(j)=0$ の空和を含める。
+原像の検算では全配位を列挙し、双対破れ像が $A$ となる配位だけを抽出する。
+この抽出には道和による復元式や二点集合を使わない。復元配位と全反転の双対像・基点での相異、
+逆写像の四等号、両包含、集合等号、個数の四等号を別々のファイルで検査する。
 有限個の格子サイズの検算を、一般の $L$ に対する証明とは扱わない。
 
 ## 実行方法
@@ -272,6 +290,16 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-10 原像二配位と個数のレビュー: 全反転の双対像二等号、基点での定義と相異、
+逆写像による破れ集合の四等号、両包含、集合等号、個数の四等号を行別15本で検査した。
+辺長一から三の自明セクター全265個について、原像は全配位から独立に抽出した。
+逆写像と両包含は各530配位、残る行は各265部分グラフを検査し、全5,565行が通過した。
+既存を含む全250ファイルの再実行も通過した。
+本文の逆写像と個数の計算順を Lean 具体版・必要十分版・導出版へ揃え、対象三モジュールのビルドが通過した。
+必要十分版は、逆写像の対象二点での往復と共通の像、二配位の相異・像の保存・原像の二択を使う。
+逆写像の大域的な性質や反転写像全体の対合性は仮定しない。
+存在構成全体の必要十分版・導出版は未了である。
 
 2026-10-10 所属と双対像のレビュー: 端点道和の順序交換と指示関数への代入を二等号で明示し、
 所属の最後の同値を「指示関数が一」と「辺集合への所属」に分けた。

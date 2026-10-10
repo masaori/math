@@ -863,17 +863,35 @@ theorem reconstructedConfiguration_dualBrokenEdgeSet (L : ℕ) [NeZero L]
 
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by
-  simp only [dualBrokenEdgeSet]
-  rw [globalSpinReversal_brokenEdgeSet]
+  exact congrArg (fun B => B.image (dualEdgeEquiv L))
+    (globalSpinReversal_brokenEdgeSet L σ)
+
+/-- 本文の逆写像による四等号。共通の双対像を代入し、両端で逆写像との往復を使う。 -/
+theorem sameDualBrokenEdges_brokenEdgeSet_eq (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (σ τ : Config L)
+    (hτ : dualBrokenEdgeSet L τ = A) (hσ : dualBrokenEdgeSet L σ = A) :
+    brokenEdgeSet L τ = brokenEdgeSet L σ := by
+  classical
+  calc
+    brokenEdgeSet L τ = (dualBrokenEdgeSet L τ).image (dualEdgeEquiv L).symm := by
+      simp only [dualBrokenEdgeSet, image_image, Function.comp_def,
+        Equiv.symm_apply_apply, image_id']
+    _ = A.image (dualEdgeEquiv L).symm :=
+      congrArg (fun B : Finset (Edge L) => B.image (dualEdgeEquiv L).symm) hτ
+    _ = (dualBrokenEdgeSet L σ).image (dualEdgeEquiv L).symm :=
+      congrArg (fun B : Finset (Edge L) => B.image (dualEdgeEquiv L).symm) hσ.symm
+    _ = brokenEdgeSet L σ := by
+      simp only [dualBrokenEdgeSet, image_image, Function.comp_def,
+        Equiv.symm_apply_apply, image_id']
 
 theorem sameDualBrokenEdges_eq_or_globalSpinReversal (L : ℕ) [NeZero L]
     (σ τ : Config L) (hdual : dualBrokenEdgeSet L τ = dualBrokenEdgeSet L σ) :
     τ = σ ∨ τ = globalSpinReversal L σ := by
   apply sameBrokenEdges_eq_or_globalSpinReversal L σ τ
   intro e
-  have himage := Finset.ext_iff.mp hdual (dualEdgeEquiv L e)
-  simpa only [mem_dualBrokenEdgeSet_iff, (dualEdgeEquiv L).symm_apply_apply,
-    brokenEdgeSet, mem_filter, mem_univ, true_and] using himage.symm
+  have hsets := sameDualBrokenEdges_brokenEdgeSet_eq L (dualBrokenEdgeSet L σ) σ τ hdual rfl
+  simpa only [brokenEdgeSet, mem_filter, mem_univ, true_and] using
+    (Finset.ext_iff.mp hsets e).symm
 
 /-- 復元した配位が一つ存在すれば、双対破れ像の原像はその配位と全反転の二つだけである。 -/
 theorem trivialSectorConfiguration_fiber_card_two_of_exists
@@ -883,8 +901,11 @@ theorem trivialSectorConfiguration_fiber_card_two_of_exists
   classical
   obtain ⟨σ, hσ⟩ := hexists
   -- 本文の「全スピン反転も原像に属し、もとの配位とは異なる」。
-  have hReversal : dualBrokenEdgeSet L (globalSpinReversal L σ) = A :=
-    (globalSpinReversal_dualBrokenEdgeSet L σ).trans hσ
+  have hReversal : dualBrokenEdgeSet L (globalSpinReversal L σ) = A := by
+    calc
+      dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ :=
+        globalSpinReversal_dualBrokenEdgeSet L σ
+      _ = A := hσ
   have hDistinct : σ ≠ globalSpinReversal L σ :=
     (globalSpinReversal_ne_self L σ).symm
   -- 本文の「任意の別の原像はもとの配位またはその全反転」。
@@ -895,15 +916,23 @@ theorem trivialSectorConfiguration_fiber_card_two_of_exists
     simp only [mem_filter, mem_univ, true_and, mem_insert, mem_singleton]
     constructor
     · intro hτ
-      exact sameDualBrokenEdges_eq_or_globalSpinReversal L σ τ (hτ.trans hσ.symm)
+      have hBroken := sameDualBrokenEdges_brokenEdgeSet_eq L A σ τ hτ hσ
+      apply sameBrokenEdges_eq_or_globalSpinReversal L σ τ
+      intro e
+      simpa only [brokenEdgeSet, mem_filter, mem_univ, true_and] using
+        (Finset.ext_iff.mp hBroken e).symm
     · intro hτ
       rcases hτ with rfl | rfl
       · exact hσ
       · exact hReversal
   -- 本文の原像の個数計算。異なる二配位なので二点集合の個数は二である。
-  rw [hFiber, card_insert_of_notMem]
-  · rw [card_singleton]
-  · simpa only [mem_singleton] using hDistinct
+  calc
+    (univ.filter fun τ : Config L => dualBrokenEdgeSet L τ = A).card =
+        ({σ, globalSpinReversal L σ} : Finset (Config L)).card := congrArg card hFiber
+    _ = ({globalSpinReversal L σ} : Finset (Config L)).card + 1 :=
+      card_insert_of_notMem (by simpa only [mem_singleton] using hDistinct)
+    _ = 1 + 1 := congrArg (fun n : ℕ => n + 1) (card_singleton _)
+    _ = 2 := rfl
 
 /-- 自明セクターの偶部分グラフを双対破れ像として持つ配位はちょうど二つである。 -/
 theorem trivialSectorConfiguration_fiber_card_two

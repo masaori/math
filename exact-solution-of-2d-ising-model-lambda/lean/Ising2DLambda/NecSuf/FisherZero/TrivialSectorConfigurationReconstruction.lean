@@ -324,6 +324,20 @@ theorem reconstructed_image_necSuf {E F : Type*} [DecidableEq F]
       congrArg (fun B => B.image forward) hmembership
     _ = image := hroundtrip
 
+/-- 共通の像から二点を復元する四等号。逆写像の大域的な性質は不要で、
+対象二点での往復と、その二点の像が共通であることだけを使う。 -/
+theorem recover_eq_of_common_image_necSuf {X Y : Type*}
+    (forward : X → Y) (backward : Y → X) (a b : X) (z : Y)
+    (ha : backward (forward a) = a) (hb : backward (forward b) = b)
+    (hfa : forward a = z) (hfb : forward b = z) : a = b := by
+  calc
+    a = backward (forward a) := ha.symm
+    _ = backward z := congrArg backward hfa
+    _ = backward (forward b) := congrArg backward hfb.symm
+    _ = b := hb
+
+/-- 原像を二点集合と等置して個数を計算する。必要なのは二点の相異、像の保存、
+原像の二択だけであり、反転写像全体の対合性は使わない。 -/
 theorem paired_fiber_card_two_necSuf {α β : Type*}
     [Fintype α] [DecidableEq α] [DecidableEq β]
     (g : α → β) (ν : α → α) (x : α)
@@ -341,8 +355,12 @@ theorem paired_fiber_card_two_necSuf {α β : Type*}
       rcases hy with rfl | rfl
       · rfl
       · exact hpreserve
-  rw [hfiber, card_insert_of_notMem]
-  · rw [card_singleton]
-  · simpa using hne.symm
+  calc
+    (univ.filter fun y : α => g y = g x).card = ({x, ν x} : Finset α).card :=
+      congrArg card hfiber
+    _ = ({ν x} : Finset α).card + 1 :=
+      card_insert_of_notMem (by simpa only [mem_singleton] using hne.symm)
+    _ = 1 + 1 := congrArg (fun n : ℕ => n + 1) (card_singleton _)
+    _ = 2 := rfl
 
 end Ising2DLambda.NecSuf.FisherZero
