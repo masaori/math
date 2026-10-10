@@ -33596,16 +33596,38 @@ b
 r\cdot r
 &=(a\cdot b^{-1})\cdot(a\cdot b^{-1})
 &&\bigl(\because\ r\ \text{の定義}\bigr)\\
+&=a\cdot\bigl(b^{-1}\cdot(a\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot\bigl((b^{-1}\cdot a)\cdot b^{-1}\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot\bigl((a\cdot b^{-1})\cdot b^{-1}\bigr)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot\bigl(a\cdot(b^{-1}\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=(a\cdot a)\cdot(b^{-1}\cdot b^{-1})
-&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=\bigl(2\cdot(b\cdot b)\bigr)\cdot(b^{-1}\cdot b^{-1})
 &&\bigl(\because\ \text{背理法の仮定}\bigr)\\
+&=2\cdot\bigl((b\cdot b)\cdot(b^{-1}\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot\bigl(b\cdot(b\cdot(b^{-1}\cdot b^{-1}))\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot\bigl(b\cdot((b\cdot b^{-1})\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot\bigl(b\cdot((b^{-1}\cdot b)\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot\bigl(b\cdot(b^{-1}\cdot(b\cdot b^{-1}))\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=2\cdot\bigl((b\cdot b^{-1})\cdot(b\cdot b^{-1})\bigr)
-&&\bigl(\because\ \text{積の可換則と結合則}\bigr)\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot\bigl(1\cdot(b\cdot b^{-1})\bigr)
+&&\bigl(\because\ \text{乗法逆元}\ b\cdot b^{-1}=1\bigr)\\
 &=2\cdot(1\cdot1)
 &&\bigl(\because\ \text{乗法逆元}\ b\cdot b^{-1}=1\bigr)\\
+&=2\cdot1
+&&\bigl(\because\ \text{乗法単位元}\ 1\cdot1=1\bigr)\\
 &=2
-&&\bigl(\because\ \text{乗法単位元}\ 1\cdot1=1,\ 2\cdot1=2\bigr)
+&&\bigl(\because\ \text{乗法単位元}\ 2\cdot1=2\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 r\cdot r

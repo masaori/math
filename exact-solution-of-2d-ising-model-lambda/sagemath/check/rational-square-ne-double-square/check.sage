@@ -3,11 +3,12 @@
 
 # 主張（claim_rational_square_ne_double_square）:
 #   任意の a, b ∈ QQ について、b ≠ 0 ならば a*a ≠ 2*(b*b)。
-# 証明の組み立てを一行ずつ突き合わせる:
+# 回帰検算として主張・恒等変形・両辺が偽の同値を調べる。行別対応は check_*.sage。
 #   prep:  b ≠ 0 から乗法逆元 b^{-1}（b*b^{-1} = 1）を取り、r := a*b^{-1} と置く。
 #   chain: r*r = (a*b^{-1})*(a*b^{-1}) = (a*a)*(b^{-1}*b^{-1})
 #             = (2*(b*b))*(b^{-1}*b^{-1})   ← 背理法の仮定の段。標本では仮定が成り立たないので
-#                                             代わりに「a*a=2*(b*b) と r*r=2 の同値」を検査する
+#                                             「a*a=2*(b*b) と r*r=2 の同値」を別の回帰検算として調べる
+#                                             （背理仮定の代入行の検証ではない）
 #             = 2*((b*b^{-1})*(b*b^{-1})) = 2*(1*1) = 2
 #   contra: r*r = 2 は claim_no_rational_square_two（検証 no-rational-square-two）と矛盾。
 
@@ -21,7 +22,7 @@ for num in range(1, BOUND + 1):
         samples.append(QQ(-num) / QQ(den))
 
 checked_ne = 0
-checked_chain = 0
+checked_regression = 0
 for a in samples:
     for b in samples:
         if b == 0:
@@ -43,9 +44,9 @@ for a in samples:
         assert (b * binv) * (b * binv) == 1 * 1, "乗法逆元の段が壊れている"
         assert QQ(2) * (QQ(1) * QQ(1)) == 2, "乗法単位元の段が壊れている"
 
-        # 背理法の仮定の段の代替: a*a = 2*(b*b) と r*r = 2 は同値
+        # 別の回帰検算: a*a = 2*(b*b) と r*r = 2 は同値（仮定代入行の検証ではない）
         # （鎖はこの同値の「⇒」の向きをつないでいる）。標本では両辺とも偽である。
-        assert (a * a == 2 * (b * b)) == (r * r == 2), "仮定の段の同値が壊れている"
-        checked_chain += 1
+        assert (a * a == 2 * (b * b)) == (r * r == 2), "回帰検算の同値が壊れている"
+        checked_regression += 1
 
-print(f"OK: a*a ≠ 2*(b*b) を {checked_ne} 組で、鎖の各段を {checked_chain} 組で厳密検査した")
+print(f"RESULT: PASS (既存回帰: 主張 {checked_ne} 組、恒等変形と偽同士の同値 {checked_regression} 組。仮定代入行の検証は含まない)")
