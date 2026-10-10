@@ -6372,6 +6372,69 @@ I(\alpha(\tau))
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_polynomial_determinant_scalar",
+        labels: [],
+        title: { text: "多項式行列式のスカラー倍" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_polynomial_determinant_scalar",
+            focus: {
+              id: "tools_claim_polynomial_determinant_scalar",
+              kind: "claim",
+              title: { text: "多項式行列式のスカラー倍" },
+              labels: ["claim_polynomial_determinant_scalar"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/polynomial-determinant-scalar"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_smul",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedProduct_scale_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_smul_from_necSuf",
+              ],
+              statement: [
+                paragraph(["空でない有限集合 ", math(String.raw`\mathcal J`), " に線型順序を固定する。", ref("def_qbar_polynomial_ring"), " の ", math(String.raw`c\in\overline{\mathbb Q}[x]`), " と、", ref("def_qbar_polynomial_matrix"), " の ", math(String.raw`A\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), " を取る。スカラー倍の行列を成分ごとに"]),
+                displayMath(String.raw`(cA)_{i,j}:=cA_{i,j}\in\overline{\mathbb Q}[x]\qquad(i,j\in\mathcal J)`),
+                paragraph(["と定めると、", ref("def_qbar_polynomial_determinant"), " の行列式は"]),
+                displayMath(String.raw`\det_x(cA)=c^{|\mathcal J|}\det_x(A)\in\overline{\mathbb Q}[x]`),
+                paragraph(["を満たす。スカラーが零の場合も含む。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`n:=|\mathcal J|\in\mathbb N_{\ge1}`), " と置く。以下の和は ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), "、積は ", math(String.raw`i\in\mathcal J`), " にわたる。整数の包含 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " と ", ref("def_qbar_constant_embedding"), " により、", ref("def_permutation_sign"), " の符号を定数多項式へ移して"]),
+                displayMath(String.raw`w_\sigma:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\in\overline{\mathbb Q}[x]\qquad(\sigma\in\operatorname{Perm}(\mathcal J))`),
+                paragraph(["と書く。各項は同じ ", math(String.raw`n`), " 個の成分の積なので、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(cA)
+&=\sum_\sigma w_\sigma\prod_i(cA)_{i,\sigma(i)}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
+&=\sum_\sigma w_\sigma\prod_i(cA_{i,\sigma(i)})
+&&\bigl(\because\ cA\text{ の成分の定義}\bigr)\\
+&=\sum_\sigma w_\sigma\left(\left(\prod_i c\right)\left(\prod_i A_{i,\sigma(i)}\right)\right)
+&&\bigl(\because\ \text{有限積の積の分離、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_\sigma w_\sigma\left(c^n\prod_i A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \text{同じ元の }n\text{ 個の積は }n\text{ 乗}\bigr)\\
+&=\sum_\sigma(w_\sigma c^n)\prod_i A_{i,\sigma(i)}
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_\sigma(c^n w_\sigma)\prod_i A_{i,\sigma(i)}
+&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_\sigma c^n\left(w_\sigma\prod_i A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=c^n\left(\sum_\sigma w_\sigma\prod_i A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=c^n\det_x(A)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+\end{aligned}`),
+                paragraph(["すべての和・積は有限で、計算は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で閉じる。逆元は使わず、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

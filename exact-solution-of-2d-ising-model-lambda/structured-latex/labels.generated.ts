@@ -262,6 +262,7 @@ export const ALL_LABELS = [
   "claim_polynomial_determinant_function_expansion",
   "claim_polynomial_determinant_mul",
   "claim_polynomial_determinant_noninjective_cancellation",
+  "claim_polynomial_determinant_scalar",
   "claim_polynomial_diagonal_gauge_inverse",
   "claim_polynomial_product_of_sums",
   "claim_positive_rational_in_positive_cone",
