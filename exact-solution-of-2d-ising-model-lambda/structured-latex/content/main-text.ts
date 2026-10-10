@@ -34000,20 +34000,22 @@ a
 &=-(-a)
 &&\bigl(\because\ \text{加法の逆元の対合性}\bigr)\\
 &=-0
-&&\bigl(\because\ (-a,-b)=(0,0)\bigr)\\
+&&\bigl(\because\ \text{背理法の仮定}\ (-a,-b)=(0,0)\text{ の第一成分の代入}\bigr)\\
 &=0
 &&\bigl(\because\ \text{零元の加法の逆元}\bigr),\\
 b
 &=-(-b)
 &&\bigl(\because\ \text{加法の逆元の対合性}\bigr)\\
 &=-0
-&&\bigl(\because\ (-a,-b)=(0,0)\bigr)\\
+&&\bigl(\because\ \text{背理法の仮定}\ (-a,-b)=(0,0)\text{ の第二成分の代入}\bigr)\\
 &=0
 &&\bigl(\because\ \text{零元の加法の逆元}\bigr).
 \end{aligned}`),
                         paragraph([
                           "ゆえに ",
                           math(String.raw`(a,b)=(0,0)`),
+                          " を得て、この場合の仮定 ",
+                          math(String.raw`(a,b)\ne(0,0)`),
                           " に矛盾するから ",
                           math(String.raw`(-a,-b)\ne(0,0)`),
                           " である。よって組 ",
@@ -34043,13 +34045,20 @@ b
                           math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
                           " のどちらかが成り立つ（等しい場合は排除済み）。",
                           math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                          " のとき、",
+                          " のとき、次の鎖を得る。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+2\cdot b\cdot b
+&=2\cdot(b\cdot b)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<a\cdot a
+&&\bigl(\because\ \text{この場合の仮定}\bigr).
+\end{aligned}`),
+                        paragraph([
                           math(String.raw`0<a`),
                           "、",
                           math(String.raw`b<0`),
-                          "、",
-                          math(String.raw`2\cdot b\cdot b<a\cdot a`),
-                          " は正錐の第二条件そのものであるから、",
+                          " と上の鎖は正錐の第二条件そのものであるから、",
                           ref("def_quadratic_positive_cone"),
                           " により ",
                           math(String.raw`\xi\in P_s`),
@@ -34062,11 +34071,11 @@ b
                         displayMath(String.raw`\begin{aligned}
 (-a)\cdot(-a)
 &=a\cdot a
-&&\bigl(\because\ \text{負号どうしの積}\ (-u)\cdot(-v)=u\cdot v\bigr)\\
+&&\bigl(\because\ \text{負号どうしの積}\bigr)\\
 &<2\cdot(b\cdot b)
 &&\bigl(\because\ \text{この場合の仮定}\bigr)\\
 &=2\cdot\bigl((-b)\cdot(-b)\bigr)
-&&\bigl(\because\ \text{負号どうしの積}\ (-u)\cdot(-v)=u\cdot v\bigr)\\
+&&\bigl(\because\ \text{負号どうしの積}\bigr)\\
 &=2\cdot(-b)\cdot(-b)
 &&\bigl(\because\ \text{積の結合則}\bigr)
 \end{aligned}`),
@@ -34145,11 +34154,11 @@ a\cdot a
 &=2\cdot\bigl((-b)\cdot(-b)\bigr)
 &&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=2\cdot(b\cdot b)
-&&\bigl(\because\ \text{負号どうしの積}\ (-u)\cdot(-v)=u\cdot v\bigr)\\
+&&\bigl(\because\ \text{負号どうしの積}\bigr)\\
 &<a\cdot a
 &&\bigl(\because\ \text{この場合の仮定}\bigr)\\
 &=(-a)\cdot(-a)
-&&\bigl(\because\ \text{負号どうしの積}\ (-u)\cdot(-v)=u\cdot v\bigr)
+&&\bigl(\because\ \text{負号どうしの積}\bigr)
 \end{aligned}`),
                         paragraph([
                           "また ",

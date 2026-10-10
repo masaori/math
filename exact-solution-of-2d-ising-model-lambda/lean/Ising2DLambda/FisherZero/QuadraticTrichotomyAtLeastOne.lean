@@ -41,14 +41,18 @@ theorem quadraticTrichotomyAtLeastOne
         right
         refine ⟨neg_lt_zero.mpr ha, neg_pos.mpr hbNeg, ?_⟩
         · calc
-            (-a) * (-a) = a * a := by ring
+            (-a) * (-a) = a * a := neg_mul_neg a a
             _ < 2 * (b * b) := hlt
-            _ = 2 * (-b) * (-b) := by ring
+            _ = 2 * ((-b) * (-b)) := congrArg (2 * ·) (neg_mul_neg b b).symm
+            _ = 2 * (-b) * (-b) := (mul_assoc 2 (-b) (-b)).symm
       · left
         change quadraticCoefficientPositive (quadraticRepresentation s xi)
         right
         left
-        exact ⟨ha, hbNeg, by simpa [mul_assoc] using hgt⟩
+        refine ⟨ha, hbNeg, ?_⟩
+        calc
+          2 * b * b = 2 * (b * b) := mul_assoc 2 b b
+          _ < a * a := hgt
   · have haNonpos : a ≤ 0 := le_of_not_gt ha
     by_cases hb : b ≤ 0
     · by_cases hab : (a, b) = (0, 0)
@@ -66,8 +70,14 @@ theorem quadraticTrichotomyAtLeastOne
           intro hzero
           apply hab
           apply Prod.ext
-          · simpa using congrArg Neg.neg (congrArg Prod.fst hzero)
-          · simpa using congrArg Neg.neg (congrArg Prod.snd hzero)⟩
+          · calc
+              a = -(-a) := (neg_neg a).symm
+              _ = -(0 : ℚ) := congrArg Neg.neg (congrArg Prod.fst hzero)
+              _ = 0 := neg_zero
+          · calc
+              b = -(-b) := (neg_neg b).symm
+              _ = -(0 : ℚ) := congrArg Neg.neg (congrArg Prod.snd hzero)
+              _ = 0 := neg_zero⟩
     · have hbPos : 0 < b := lt_of_not_ge hb
       by_cases ha0 : a = 0
       · left
@@ -86,7 +96,10 @@ theorem quadraticTrichotomyAtLeastOne
         change quadraticCoefficientPositive (quadraticRepresentation s xi)
         right
         right
-        exact ⟨haNeg, hbPos, by simpa [mul_assoc] using hlt⟩
+        refine ⟨haNeg, hbPos, ?_⟩
+        calc
+          a * a < 2 * (b * b) := hlt
+          _ = 2 * b * b := (mul_assoc 2 b b).symm
       · right
         right
         change quadraticCoefficientPositive
@@ -96,8 +109,9 @@ theorem quadraticTrichotomyAtLeastOne
         left
         refine ⟨neg_pos.mpr haNeg, neg_lt_zero.mpr hbPos, ?_⟩
         calc
-          2 * (-b) * (-b) = 2 * (b * b) := by ring
+          2 * (-b) * (-b) = 2 * ((-b) * (-b)) := mul_assoc 2 (-b) (-b)
+          _ = 2 * (b * b) := congrArg (2 * ·) (neg_mul_neg b b)
           _ < a * a := hgt
-          _ = (-a) * (-a) := by ring
+          _ = (-a) * (-a) := (neg_mul_neg a a).symm
 
 end Ising2DLambda.FisherZero
