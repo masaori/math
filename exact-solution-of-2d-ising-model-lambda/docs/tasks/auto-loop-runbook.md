@@ -188,6 +188,13 @@ Lean だけが未了なら `done` にせず `記述と SageMath まで` と書�
   [identify-onsager-closed-form-and-critical-point.md](onsager-closed-form-connection/proof/identify-onsager-closed-form-and-critical-point.md) にあり、
   研究管理が辺長 1〜3・有理点 6 箇所で厳密計算により確かめてある（証明ではない）。
 
+- **密度との同定の橋（2026-10-10 の研究管理の決定）**: 本文の密度 `def_periodic_free_energy_density_le_one` は下組 $A^{\mathrm{per}}(q)$ の実現像の上限であり、
+  Riemann 和の段が与えるのは列 $\rho_{\mathbb R}(\Psi_L(q))$ の実数極限である。両者は、一般の列 $(\lambda_L)\subset\Lambda_{\mathbb Q}$ について
+  「$\rho_{\mathbb R}(\lambda_L)\to I$ なら $\sup\rho_{\mathbb R}(A((\lambda_L)))=I$」という一節（実数体への脱出: 連続極限。「実数体への脱出と熱力学極限」の章に置く）で結ぶ。
+  下からの評価の証人は $\iota(\ell_2)$ の有理数倍 $(k/n)\iota(\ell_2)$・$(1/n)\iota(\ell_2)$ に取る（$\mathbb R$ の Archimedes 性）。
+  **実現写像の加法性は本文に無く、この取り方なら要らないので足さない。** 節の形は指示書
+  [identify-onsager-closed-form-and-critical-point.md](onsager-closed-form-connection/proof/identify-onsager-closed-form-and-critical-point.md) の「密度との同定の橋」にある。
+
 ## 有限合同系の候補クラスを判定する条件
 
 左核障害と非直交な特徴を一つ加える反復は、候補クラス全体の成否を判定する前処理に限る。
