@@ -206,6 +206,35 @@
 | `check_vertical_terminal_representative.sage` | 端点 π(s(j)) を j へ戻す | PASS | 1,552 頂点 |
 | `check_vertical_zero_projection.sage` | 端点 π(0) を零へ戻す | PASS | 1,552 頂点 |
 | `check_vertical_characteristic_two.sage` | 標数二で二つの b_v(i,0) を消去 | PASS | 1,552 頂点 |
+| `check_vertical_boundary_representative_reuse_boundary.sage` | 代表の零への復帰 | PASS | 785 等式 |
+| `check_vertical_boundary_period_definition.sage` | 列零の周期和の定義 | PASS | 785 等式 |
+| `check_vertical_boundary_period_reindex.sage` | 代表の全単射で列全体へ再添字付け | PASS | 785 等式 |
+| `check_vertical_boundary_period_zero.sage` | 全列の周期和零を適用 | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_add_zero.sage` | 末尾の和へ零を加える | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_insert_double.sage` | 末尾項の自己和零を代入 | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_associate.sage` | 末尾項を結合し直す | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_split_last.sage` | 末尾項を部分和へ戻す | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_length.sage` | 境界の代表と辺長の等式を代入 | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_period_zero.sage` | 列零の周期和を零に置換 | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_remove_zero.sage` | 末尾項から零を除く | PASS | 785 等式 |
+| `check_vertical_boundary_prefix_projection.sage` | 末尾項の代表を射影 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_expand_path.sage` | 境界の二つの道和を展開 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_representative.sage` | 次の代表を零に置換 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_empty_sum.sage` | 列零の空和を評価 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_remove_zero.sage` | 道和の最初の零を除く | PASS | 785 等式 |
+| `check_vertical_boundary_difference_prefix.sage` | 末尾の部分和を一項に置換 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_associate_left.sage` | 初項を左側へ結合 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_commute.sage` | 初項と次の行の和を交換 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_associate_right.sage` | 横辺の二つの和を結合 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_sum_add.sage` | 二つの有限和を一つにまとめる | PASS | 785 等式 |
+| `check_vertical_boundary_difference_face_pair.sage` | 格子面の横辺二項の式を代入 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_telescoping.sage` | 望遠鏡和を端点二項に置換 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_terminal_projection.sage` | 終点の代表を射影 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_initial_projection.sage` | 基点の零を射影 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_commute_endpoints.sage` | 端点二項を交換 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_associate_initial.sage` | 重複する初項を結合 | PASS | 785 等式 |
+| `check_vertical_boundary_difference_cancel_double.sage` | 重複する初項を消す | PASS | 785 等式 |
+| `check_vertical_boundary_difference_remove_final_zero.sage` | 最後の零を除く | PASS | 785 等式 |
 | `check_vertical_periodic_boundary.sage` | 末尾の行で列和零から同じ縦辺差を確認 | PASS | 785 頂点 |
 | `check_broken_definition.sage` | 破れた辺への所属と端点スピンの不一致 | PASS | 4,674 辺 |
 | `check_broken_exponent_substitution.sage` | 端点スピンへ自然数指数による配位の定義を代入 | PASS | 4,674 辺 |
@@ -221,7 +250,8 @@ $\mathbb N$、$\mathbb Z$ 内で厳密に行う。
 
 非境界の縦辺差は、代表増分・局所二項・望遠鏡和・道和差の44等号を一行ずつ検査する。
 自明セクターで道和差から終点の一項までを検査する六つの集約検算も併用する。
-末尾の行は別ファイルで列和の零性と縦辺差を検査し、$L=1$ の自己ループも含める。
+縦辺の周期境界は代表の復帰・列零の周期和・末尾の和・道和差の29等号を行別に検査する。
+既存の集約検算も残し、$L=1$ の自己ループを含める。
 横辺差は周期境界を含む全頂点で検査し、縦辺差の望遠鏡和には $s(j)=0$ の空和を含める。
 有限個の格子サイズの検算を、一般の $L$ に対する証明とは扱わない。
 
@@ -238,6 +268,16 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-10 縦辺の周期境界のレビュー: 代表の零への復帰一等号、列零の周期和三等号、
+末尾の和八等号、道和差十七等号を行別29本へ分け、全22,765等式が通過した。
+辺長一から三の自明セクター部分グラフ全265個を列挙し、各行は境界の始点785個
+（辺長一は1個、二は16個、三は768個）を検査した。辺長一の空和も含む。
+新旧の行別230本と統合検算1本の全231ファイルも再実行し、すべて通過した。
+必要十分版は加法可換モノイド、二点の道和表示、代表の境界条件、空和、末尾分離、
+周期和零、格子面の二項の表示、端点評価、望遠鏡和の各項の自己和零を使う。
+逆元・環・乗法・格子は仮定しない。所属の四同値と双対像の復元のレビュー、
+および存在構成全体の必要十分版・導出版は未了である。
 
 2026-10-10 非境界の縦辺差のレビュー: 代表増分の一等号、格子面の横辺二項の十等号、
 望遠鏡和の基底二等号・帰納段階九等号、道和差の二十二等号を行別44本へ分けた。

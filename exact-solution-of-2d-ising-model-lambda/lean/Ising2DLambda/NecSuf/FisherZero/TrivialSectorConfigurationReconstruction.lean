@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・非境界の縦辺差・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・縦辺差・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -157,6 +157,60 @@ theorem vertical_path_difference_necSuf {M : Type*} [AddCommMonoid M]
     _ = initial + ∑ c ∈ range m, (f (c + 1) + f c) :=
       congrArg (initial + ·) (Finset.sum_congr rfl (fun c _ => hpair c))
     _ = initial + (f m + f 0) := congrArg (initial + ·) (adjacent_pairs_sum_necSuf f hdoubleF m)
+    _ = initial + (terminal + f 0) := by rw [hterminal]
+    _ = initial + (terminal + initial) := by rw [hinitial]
+    _ = initial + (initial + terminal) := congrArg (initial + ·) (add_comm _ _)
+    _ = (initial + initial) + terminal := (add_assoc _ _ _).symm
+    _ = 0 + terminal := by rw [hdoubleInitial]
+    _ = terminal := zero_add _
+
+/-- 縦辺の周期境界では、末尾の和を周期和零で一項へ戻した後、横辺二項の望遠鏡和を使う。
+必要なのは加法可換モノイド、二点の道和表示、次の代表が零であること、空和・末尾分離・
+周期和零・端点の評価・各項の自己和零である。周期和零を外すと末尾の和に周期の寄与が残り、
+自己和零を外すと望遠鏡和の中間項が残る。環・乗法・逆元・格子は使わない。 -/
+theorem vertical_periodic_path_difference_necSuf {M : Type*} [AddCommMonoid M]
+    (pathNext pathCurrent : M) (V v nextRow currentRow f : ℕ → M)
+    (n nextN m length : ℕ) (initial terminal : M)
+    (hpathNext : pathNext = V nextN + ∑ c ∈ range m, nextRow c)
+    (hpathCurrent : pathCurrent = V n + ∑ c ∈ range m, currentRow c)
+    (hindex : nextN = 0) (hlast : n + 1 = length) (hzero : V 0 = 0)
+    (hsucc : V (n + 1) = V n + v n) (hperiod : V length = 0)
+    (hterm : v n = initial)
+    (hpair : ∀ c : ℕ, nextRow c + currentRow c = f (c + 1) + f c)
+    (hdoubleF : ∀ c : ℕ, f c + f c = 0)
+    (hterminal : f m = terminal) (hinitial : f 0 = initial) :
+    pathNext + pathCurrent = terminal := by
+  let Hnext := ∑ c ∈ range m, nextRow c
+  let Hcurrent := ∑ c ∈ range m, currentRow c
+  have hdoubleInitial : initial + initial = 0 := by rw [← hinitial]; exact hdoubleF 0
+  have hdoubleTerm : v n + v n = 0 := by rw [hterm]; exact hdoubleInitial
+  have hprefix : V n = initial := by
+    calc
+      V n = V n + 0 := (add_zero _).symm
+      _ = V n + (v n + v n) := congrArg (V n + ·) hdoubleTerm.symm
+      _ = (V n + v n) + v n := (add_assoc _ _ _).symm
+      _ = V (n + 1) + v n := congrArg (· + v n) hsucc.symm
+      _ = V length + v n := by rw [hlast]
+      _ = 0 + v n := congrArg (· + v n) hperiod
+      _ = v n := zero_add _
+      _ = initial := hterm
+  calc
+    pathNext + pathCurrent = (V nextN + Hnext) + (V n + Hcurrent) :=
+      congrArg₂ (· + ·) hpathNext hpathCurrent
+    _ = (V 0 + Hnext) + (V n + Hcurrent) := by rw [hindex]
+    _ = (0 + Hnext) + (V n + Hcurrent) := by rw [hzero]
+    _ = Hnext + (V n + Hcurrent) := by rw [zero_add]
+    _ = Hnext + (initial + Hcurrent) := by rw [hprefix]
+    _ = (Hnext + initial) + Hcurrent := (add_assoc _ _ _).symm
+    _ = (initial + Hnext) + Hcurrent := by rw [add_comm Hnext initial]
+    _ = initial + (Hnext + Hcurrent) := add_assoc _ _ _
+    _ = initial + ∑ c ∈ range m, (nextRow c + currentRow c) := by
+      dsimp only [Hnext, Hcurrent]
+      rw [← Finset.sum_add_distrib]
+    _ = initial + ∑ c ∈ range m, (f (c + 1) + f c) :=
+      congrArg (initial + ·) (Finset.sum_congr rfl (fun c _ => hpair c))
+    _ = initial + (f m + f 0) :=
+      congrArg (initial + ·) (adjacent_pairs_sum_necSuf f hdoubleF m)
     _ = initial + (terminal + f 0) := by rw [hterminal]
     _ = initial + (terminal + initial) := by rw [hinitial]
     _ = initial + (initial + terminal) := congrArg (initial + ·) (add_comm _ _)

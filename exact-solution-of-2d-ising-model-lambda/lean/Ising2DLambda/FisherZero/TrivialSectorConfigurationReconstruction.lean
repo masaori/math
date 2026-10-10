@@ -669,133 +669,98 @@ theorem reconstructionPathParity_vertical_interior_difference (L : ℕ) [NeZero 
     _ = 0 + bv i j := by rw [hdouble]
     _ = bv i j := zero_add _
 
-/-- 人手証明の縦向き辺についての道和の差。横向きの有限和の差は格子面の等式の望遠鏡和で
-縦向きの両端二項へ落ち、縦向きの有限和の差は、代表が `L - 1` 未満なら有限和の末尾の一項、
-`L - 1` なら列全体の和が零であることから、どちらも列 `0` の縦辺の項になる。 -/
+/-- 本文の V(L)。代表の全単射で列零の全体和へ再添字付けし、周期和零を使う三等号。 -/
+theorem reconstructedEdgeSet_vertical_prefix_sum_zero (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∑ r ∈ Finset.range L,
+      (if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A
+        then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ Finset.range n,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let residueEquiv : Fin L ≃ ZMod L :=
+    { toFun := fun r => (r.val : ZMod L)
+      invFun := fun z => ⟨z.val, z.val_lt⟩
+      left_inv := fun r => Fin.ext (by
+        simp only [ZMod.val_natCast, Nat.mod_eq_of_lt r.isLt])
+      right_inv := fun z => ZMod.natCast_zmod_val z }
+  calc
+    V L = ∑ r ∈ Finset.range L,
+        (if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A
+          then 1 else 0) := rfl
+    _ = ∑ k : ZMod L,
+        (if edgeOfRow L true k 0 ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      rw [← Fin.sum_univ_eq_sum_range]
+      exact Fintype.sum_equiv residueEquiv _ _ (fun _ => rfl)
+    _ = 0 := (reconstructedEdgeSet_all_row_column_sums_zero L A hSector).2 0
+
+/-- 本文の縦辺の周期境界。代表の復帰一等号、末尾の和八等号、道和差十七等号。
+格子面と望遠鏡和は非境界の仮定を使わない。辺長一も同じ空和で扱う。 -/
+theorem reconstructionPathParity_vertical_boundary_difference (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) (hi : i.val + 1 = L) :
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ range n, bv (r : ZMod L) 0
+  let H (i : ZMod L) (m : ℕ) : ZMod 2 := ∑ c ∈ range m, bh i (c : ZMod L)
+  let f : ℕ → ZMod 2 := fun c => bv i (c : ZMod L)
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hrep : (i + 1).val = 0 := reconstruction_horizontal_boundary_successor_val L i hi
+  have hperiod : V L = 0 := reconstructedEdgeSet_vertical_prefix_sum_zero L A hSector
+  have hprefix : V i.val = bv i 0 := by
+    calc
+      V i.val = V i.val + 0 := (add_zero _).symm
+      _ = V i.val + (bv (i.val : ZMod L) 0 + bv (i.val : ZMod L) 0) := by rw [hdouble]
+      _ = (V i.val + bv (i.val : ZMod L) 0) + bv (i.val : ZMod L) 0 :=
+        (add_assoc _ _ _).symm
+      _ = V (i.val + 1) + bv (i.val : ZMod L) 0 :=
+        congrArg (· + bv (i.val : ZMod L) 0) (Finset.sum_range_succ _ i.val).symm
+      _ = V L + bv (i.val : ZMod L) 0 := by rw [hi]
+      _ = 0 + bv (i.val : ZMod L) 0 := congrArg (· + bv (i.val : ZMod L) 0) hperiod
+      _ = bv (i.val : ZMod L) 0 := zero_add _
+      _ = bv i 0 := by rw [ZMod.natCast_zmod_val]
+  calc
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+        (V (i + 1).val + H (i + 1) j.val) + (V i.val + H i j.val) := rfl
+    _ = (V 0 + H (i + 1) j.val) + (V i.val + H i j.val) := by rw [hrep]
+    _ = (0 + H (i + 1) j.val) + (V i.val + H i j.val) := by
+      rw [show V 0 = 0 from Finset.sum_range_zero _]
+    _ = H (i + 1) j.val + (V i.val + H i j.val) := by rw [zero_add]
+    _ = H (i + 1) j.val + (bv i 0 + H i j.val) := by rw [hprefix]
+    _ = (H (i + 1) j.val + bv i 0) + H i j.val := (add_assoc _ _ _).symm
+    _ = (bv i 0 + H (i + 1) j.val) + H i j.val := by rw [add_comm (H (i + 1) j.val) (bv i 0)]
+    _ = bv i 0 + (H (i + 1) j.val + H i j.val) := add_assoc _ _ _
+    _ = bv i 0 + ∑ c ∈ range j.val, (bh (i + 1) (c : ZMod L) + bh i (c : ZMod L)) := by
+      dsimp only [H]
+      rw [← Finset.sum_add_distrib]
+    _ = bv i 0 + ∑ c ∈ range j.val, (f (c + 1) + f c) := by
+      congr 1
+      exact Finset.sum_congr rfl (fun c _ => reconstruction_vertical_face_pair L A hSector.1 i c)
+    _ = bv i 0 + (f j.val + f 0) := congrArg (bv i 0 + ·) (sum_range_adjacent_pairs_char_two f j.val)
+    _ = bv i 0 + (bv i j + f 0) := by dsimp [f]; rw [ZMod.natCast_zmod_val]
+    _ = bv i 0 + (bv i j + bv i 0) := by dsimp [f]; rw [Nat.cast_zero]
+    _ = bv i 0 + (bv i 0 + bv i j) := congrArg (bv i 0 + ·) (add_comm _ _)
+    _ = (bv i 0 + bv i 0) + bv i j := (add_assoc _ _ _).symm
+    _ = 0 + bv i j := by rw [hdouble]
+    _ = bv i j := zero_add _
+
+/-- 人手証明の縦辺差を、非境界と周期境界の二場合から得る。 -/
 theorem reconstructionPathParity_vertical_difference (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
     (i j : ZMod L) :
     reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
       (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
-  classical
   by_cases hilt : i.val + 1 < L
   · exact reconstructionPathParity_vertical_interior_difference L A hSector.1 i j hilt
-  cases L with
-  | zero => exact (NeZero.ne 0 rfl).elim
-  | succ n =>
-      have htwo : (2 : ZMod 2) = 0 := rfl
-      -- 格子面の等式を、行 i と行 i + 1 の横辺二項＝列 c と列 c + 1 の縦辺二項の形へ移す
-      have hface : ∀ c : ℕ,
-          ((if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) +
-            (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
-          (if edgeOfRow (n + 1) true i (((c + 1 : ℕ) : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) +
-            (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) := by
-        intro c
-        have hf := reconstructedEdgeSet_face_equation (n + 1) A hSector.1 i
-          ((c : ZMod (n + 1)))
-        push_cast
-        linear_combination hf -
-          ((if edgeOfRow (n + 1) true i ((c : ZMod (n + 1)) + 1) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0 : ZMod 2) +
-            (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) * htwo
-      -- 横向きの有限和の差。格子面の等式の望遠鏡和で両端の縦辺二項だけが残る
-      have hHsum : ((∑ c ∈ Finset.range j.val,
-            (if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) +
-          ∑ c ∈ Finset.range j.val,
-            (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
-          (if edgeOfRow (n + 1) true i j ∈ reconstructedEdgeSet (n + 1) A then 1 else 0) +
-            (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
-              then 1 else 0) := by
-        rw [← Finset.sum_add_distrib]
-        calc
-          (∑ c ∈ Finset.range j.val,
-              ((if edgeOfRow (n + 1) false (i + 1) ((c : ZMod (n + 1))) ∈
-                  reconstructedEdgeSet (n + 1) A then 1 else 0) +
-                (if edgeOfRow (n + 1) false i ((c : ZMod (n + 1))) ∈
-                  reconstructedEdgeSet (n + 1) A then 1 else 0)) : ZMod 2) =
-            ∑ c ∈ Finset.range j.val,
-              ((if edgeOfRow (n + 1) true i (((c + 1 : ℕ) : ZMod (n + 1))) ∈
-                  reconstructedEdgeSet (n + 1) A then 1 else 0) +
-                (if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
-                  reconstructedEdgeSet (n + 1) A then 1 else 0)) :=
-              Finset.sum_congr rfl (fun c _ => hface c)
-          _ = (if edgeOfRow (n + 1) true i (((j.val : ℕ) : ZMod (n + 1))) ∈
-                reconstructedEdgeSet (n + 1) A then 1 else 0) +
-              (if edgeOfRow (n + 1) true i (((0 : ℕ) : ZMod (n + 1))) ∈
-                reconstructedEdgeSet (n + 1) A then 1 else 0) :=
-              sum_range_adjacent_pairs_char_two (fun c =>
-                if edgeOfRow (n + 1) true i ((c : ZMod (n + 1))) ∈
-                  reconstructedEdgeSet (n + 1) A then 1 else 0) j.val
-          _ = _ := by rw [ZMod.natCast_zmod_val j, Nat.cast_zero]
-      -- 縦向きの有限和の差。代表が末尾未満なら末尾の一項、末尾なら列全体の和の零性を使う
-      have hvert : ((∑ r ∈ Finset.range (i + 1).val,
-            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0)) +
-          ∑ r ∈ Finset.range i.val,
-            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) =
-          (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
-            then 1 else 0) := by
-        by_cases hi : i = -1
-        · subst hi
-          have hcol :=
-            (reconstructedEdgeSet_all_row_column_sums_zero (n + 1) A hSector).2 0
-          let residueEquiv : Fin (n + 1) ≃ ZMod (n + 1) :=
-            { toFun := fun r => (r.val : ZMod (n + 1))
-              invFun := fun z => ⟨z.val, z.val_lt⟩
-              left_inv := fun r => Fin.ext (by
-                simp only [ZMod.val_natCast, Nat.mod_eq_of_lt r.isLt])
-              right_inv := fun z => ZMod.natCast_zmod_val z }
-          have hcolFin : (∑ r : Fin (n + 1),
-              (if edgeOfRow (n + 1) true ((r.val : ZMod (n + 1))) 0 ∈
-                reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
-            calc
-              _ = ∑ r : ZMod (n + 1),
-                  (if edgeOfRow (n + 1) true r 0 ∈ reconstructedEdgeSet (n + 1) A
-                    then 1 else 0) := Fintype.sum_equiv residueEquiv _ _
-                      (fun _ => rfl)
-              _ = 0 := hcol
-          have hcolRange : (∑ r ∈ Finset.range (n + 1),
-              (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
-                reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) = 0 := by
-            rw [← Fin.sum_univ_eq_sum_range]
-            exact hcolFin
-          rw [Finset.sum_range_succ] at hcolRange
-          have hcast : ((n : ℕ) : ZMod (n + 1)) = -1 := by
-            apply ZMod.val_injective (n + 1)
-            rw [ZMod.val_natCast, Nat.mod_eq_of_lt (Nat.lt_succ_self n), ZMod.val_neg_one]
-          simp only [neg_add_cancel, ZMod.val_zero, Finset.range_zero, Finset.sum_empty,
-            zero_add, ZMod.val_neg_one]
-          rw [← hcast]
-          linear_combination hcolRange -
-            (if edgeOfRow (n + 1) true ((n : ZMod (n + 1))) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0 : ZMod 2) * htwo
-        · have hilt : i.val + 1 < n + 1 := by
-            have hibound := ZMod.val_lt i
-            by_contra hnot
-            have hval : i.val = n := by omega
-            apply hi
-            apply ZMod.val_injective (n + 1)
-            rw [hval, ZMod.val_neg_one]
-          have hival : (i + 1).val = i.val + 1 := by
-            rw [show i + 1 = ((i.val + 1 : ℕ) : ZMod (n + 1)) by
-              rw [Nat.cast_add, ZMod.natCast_zmod_val, Nat.cast_one]]
-            rw [ZMod.val_natCast, Nat.mod_eq_of_lt hilt]
-          rw [hival, Finset.sum_range_succ, ZMod.natCast_zmod_val i]
-          linear_combination (∑ r ∈ Finset.range i.val,
-            (if edgeOfRow (n + 1) true ((r : ZMod (n + 1))) 0 ∈
-              reconstructedEdgeSet (n + 1) A then 1 else 0) : ZMod 2) * htwo
-      rw [reconstructionPathParity, reconstructionPathParity]
-      linear_combination hvert + hHsum +
-        (if edgeOfRow (n + 1) true i 0 ∈ reconstructedEdgeSet (n + 1) A
-          then 1 else 0 : ZMod 2) * htwo
+  · have hi : i.val + 1 = L := by
+      have hibound := i.val_lt
+      omega
+    exact reconstructionPathParity_vertical_boundary_difference L A hSector i j hi
 
 /-- 本文の二場合。自然数代表は零か一なので、整数冪の値はスピン値に属する。 -/
 lemma reconstructionParityPower_eq_one_or_neg_one (q : ZMod 2) :

@@ -30065,6 +30065,10 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.NecSuf.FisherZero.adjacent_pairs_sum_necSuf",
                         "Ising2DLambda.NecSuf.FisherZero.vertical_path_difference_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_interior_difference_from_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_vertical_prefix_sum_zero",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_boundary_difference",
+                        "Ising2DLambda.NecSuf.FisherZero.vertical_periodic_path_difference_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_boundary_difference_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one",
                         "Ising2DLambda.NecSuf.FisherZero.two_exponent_values_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one_from_necSuf",
@@ -30668,7 +30672,92 @@ t(i+\bar1,j)+t(i,j)
 &&\bigl(\because\ \text{零の加法}\bigr).
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`s(i)=L-1`), " の場合も、列全体の和が零であることを使うと同じ等式になる。ゆえにすべての辺 ",
+                          "縦辺の周期境界の場合 ", math(String.raw`s(i)=L-1`), " には ",
+                          math(String.raw`s(i)+1=L`), " である。横辺で示した周期境界の代表の計算を座標 ",
+                          math(String.raw`i`), " に適用すると、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+s(i+\bar1)
+&=0
+&&\bigl(\because\ \text{先に示した周期境界の代表の計算}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "上で定めた ", math(String.raw`V,H_i,f`), " を同じく用いる。射影 ",
+                          math(String.raw`\pi`), " の ", math(String.raw`\{0,\ldots,L-1\}`),
+                          " への制限による再添字付けで、列零の周期和は",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+V(L)
+&=\sum_{r=0}^{L-1}b_{\mathrm v}(\pi(r),0)
+&&\bigl(\because\ V\text{ の定義}\bigr)\\
+&=\sum_{k\in\mathbb Z/L\mathbb Z}b_{\mathrm v}(k,0)
+&&\bigl(\because\ \pi\text{ の制限による再添字付け},\ \blkref{def_residue_maps}\bigr)\\
+&=0
+&&\bigl(\because\ \text{先に示した全列の周期和零}\bigr).
+\end{aligned}`),
+                        paragraph(["となる。末尾の一項を取り出すと、"]),
+                        displayMath(String.raw`\begin{aligned}
+V(s(i))
+&=V(s(i))+0
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=V(s(i))+\bigl(b_{\mathrm v}(\pi(s(i)),0)+b_{\mathrm v}(\pi(s(i)),0)\bigr)
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ では自己和は零}\bigr)\\
+&=\bigl(V(s(i))+b_{\mathrm v}(\pi(s(i)),0)\bigr)+b_{\mathrm v}(\pi(s(i)),0)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=V(s(i)+1)+b_{\mathrm v}(\pi(s(i)),0)
+&&\bigl(\because\ \text{有限和の末尾の一項の分離}\bigr)\\
+&=V(L)+b_{\mathrm v}(\pi(s(i)),0)
+&&\bigl(\because\ s(i)+1=L\bigr)\\
+&=0+b_{\mathrm v}(\pi(s(i)),0)
+&&\bigl(\because\ V(L)=0\bigr)\\
+&=b_{\mathrm v}(\pi(s(i)),0)
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=b_{\mathrm v}(i,0)
+&&\bigl(\because\ \pi(s(i))=i,\ \blkref{def_residue_maps}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "格子面の横辺二項の式と望遠鏡和の帰納法は ", math(String.raw`s(i)<L-1`),
+                          " を使わないので、境界でもそのまま成り立つ。したがって、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+t(i+\bar1,j)+t(i,j)
+&=(V(s(i+\bar1))+H_{i+\bar1}(s(j)))+(V(s(i))+H_i(s(j)))
+&&\bigl(\because\ t,V,H_i\text{ の定義}\bigr)\\
+&=(V(0)+H_{i+\bar1}(s(j)))+(V(s(i))+H_i(s(j)))
+&&\bigl(\because\ s(i+\bar1)=0\bigr)\\
+&=(0+H_{i+\bar1}(s(j)))+(V(s(i))+H_i(s(j)))
+&&\bigl(\because\ V(0)\text{ は空和}\bigr)\\
+&=H_{i+\bar1}(s(j))+(V(s(i))+H_i(s(j)))
+&&\bigl(\because\ \text{零の加法}\bigr)\\
+&=H_{i+\bar1}(s(j))+(b_{\mathrm v}(i,0)+H_i(s(j)))
+&&\bigl(\because\ \text{直前の末尾の和の計算}\bigr)\\
+&=(H_{i+\bar1}(s(j))+b_{\mathrm v}(i,0))+H_i(s(j))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(b_{\mathrm v}(i,0)+H_{i+\bar1}(s(j)))+H_i(s(j))
+&&\bigl(\because\ \text{加法の交換則}\bigr)\\
+&=b_{\mathrm v}(i,0)+(H_{i+\bar1}(s(j))+H_i(s(j)))
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=b_{\mathrm v}(i,0)+\sum_{c=0}^{s(j)-1}\bigl(b_{\mathrm h}(i+\bar1,\pi(c))+b_{\mathrm h}(i,\pi(c))\bigr)
+&&\bigl(\because\ \text{有限和の加法}\bigr)\\
+&=b_{\mathrm v}(i,0)+\sum_{c=0}^{s(j)-1}(f(c+1)+f(c))
+&&\bigl(\because\ \text{先に示した横辺二項の式を各項へ代入}\bigr)\\
+&=b_{\mathrm v}(i,0)+(f(s(j))+f(0))
+&&\bigl(\because\ \text{先に示した帰納法による望遠鏡和}\bigr)\\
+&=b_{\mathrm v}(i,0)+(b_{\mathrm v}(i,j)+f(0))
+&&\bigl(\because\ \pi(s(j))=j,\ \blkref{def_residue_maps}\bigr)\\
+&=b_{\mathrm v}(i,0)+(b_{\mathrm v}(i,j)+b_{\mathrm v}(i,0))
+&&\bigl(\because\ \pi(0)=0,\ \blkref{def_residue_maps}\bigr)\\
+&=b_{\mathrm v}(i,0)+(b_{\mathrm v}(i,0)+b_{\mathrm v}(i,j))
+&&\bigl(\because\ \text{加法の交換則}\bigr)\\
+&=(b_{\mathrm v}(i,0)+b_{\mathrm v}(i,0))+b_{\mathrm v}(i,j)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=0+b_{\mathrm v}(i,j)
+&&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ では自己和は零}\bigr)\\
+&=b_{\mathrm v}(i,j)
+&&\bigl(\because\ \text{零の加法}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "この計算は ", math(String.raw`L=1`), " でも空和のまま成立する。ゆえにすべての辺 ",
                           math(String.raw`e\in E_L`), " について",
                         ]),
                         displayMath(String.raw`\begin{aligned}

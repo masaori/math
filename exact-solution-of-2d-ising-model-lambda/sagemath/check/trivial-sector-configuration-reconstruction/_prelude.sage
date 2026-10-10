@@ -512,3 +512,57 @@ def _rc_check_vertical_interior_detail(section, left, right, label):
                 'step': 9348, 'difference': 6208}
     assert checked == expected[section], checked
     print('RESULT: PASS (%s: %d 等式、1060 偶部分グラフ)' % (label, checked))
+
+
+def _rc_vertical_boundary_detail_rows(case):
+    L = case['L']
+    coordinates = Integers(L)
+    zero = _rc_ring.zero()
+    bh = lambda i, j: case['bh'][projection(L, i), projection(L, j)]
+    bv = lambda i, j: case['bv'][projection(L, i), projection(L, j)]
+    V = lambda n: sum((bv(projection(L, r), 0) for r in range(n)), zero)
+    H = lambda i, m: sum((bh(i, projection(L, c)) for c in range(m)), zero)
+    i = L - 1
+    n = representative(L, i)
+    following = representative(L, coordinates(i) + coordinates.one())
+    a, g = bv(projection(L, n), 0), bv(i, 0)
+    f = lambda c: bv(i, projection(L, c))
+    for j in range(L):
+        m = representative(L, j)
+        hn, hc = H(i + 1, m), H(i, m)
+        yield {
+            'representative': (following, NN(0)),
+            'period': (
+                V(L), sum((bv(projection(L, r), 0) for r in range(L)), zero),
+                sum((bv(ZZ(k), 0) for k in coordinates), zero), zero),
+            'prefix': (
+                V(n), V(n) + zero, V(n) + (a + a), (V(n) + a) + a,
+                V(n + 1) + a, V(L) + a, zero + a, a, g),
+            'difference': (
+                case['t'][projection(L, i + 1), j] + case['t'][i, j],
+                (V(following) + hn) + (V(n) + hc),
+                (V(0) + hn) + (V(n) + hc),
+                (zero + hn) + (V(n) + hc), hn + (V(n) + hc),
+                hn + (g + hc), (hn + g) + hc, (g + hn) + hc, g + (hn + hc),
+                g + sum((bh(i + 1, projection(L, c)) + bh(i, projection(L, c))
+                         for c in range(m)), zero),
+                g + sum((f(c + 1) + f(c) for c in range(m)), zero),
+                g + (f(m) + f(0)), g + (bv(i, j) + f(0)), g + (bv(i, j) + g),
+                g + (g + bv(i, j)), (g + g) + bv(i, j), zero + bv(i, j), bv(i, j)),
+        }
+
+
+def _rc_check_vertical_boundary_detail(section, left, right, label):
+    global _rc_vertical_boundary_detail
+    if '_rc_vertical_boundary_detail' not in globals():
+        _rc_vertical_boundary_detail = [
+            (case, tuple(_rc_vertical_boundary_detail_rows(case))) for case in _rc_cases]
+    checked = {1: 0, 2: 0, 3: 0}
+    for case, rows in _rc_vertical_boundary_detail:
+        for row_group in rows:
+            row = row_group[section]
+            assert row[left] == row[right], (label, case['L'], case['A'], row)
+            checked[case['L']] += 1
+    assert checked == {1: 1, 2: 16, 3: 768}, checked
+    print('RESULT: PASS (%s: %d 等式、縦辺の周期境界、L=1 を含む)' %
+          (label, sum(checked.values())))

@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・横辺差・非境界の縦辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・横辺差・縦辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -93,6 +93,46 @@ theorem reconstructionPathParity_vertical_interior_difference_from_necSuf
     rfl rfl (reconstruction_horizontal_successor_val L i hilt)
     (Finset.sum_range_succ v i.val)
     (by dsimp [v]; rw [ZMod.natCast_zmod_val]) (hdouble _)
+    hpair (fun c => hdouble (f c))
+    (by dsimp [f]; rw [ZMod.natCast_zmod_val])
+    (by dsimp [f]; rw [Nat.cast_zero])
+
+/-- 縦辺の周期境界へ、実際の道和・代表・列零の周期和・面等式を供給する。
+境界の道和差の具体版は呼ばず、必要十分版と同じ末尾の和・望遠鏡和から導く。 -/
+theorem reconstructionPathParity_vertical_boundary_difference_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0))
+    (i j : ZMod L) (hi : i.val + 1 = L) :
+    reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let v : ℕ → ZMod 2 := fun r => bv (r : ZMod L) 0
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ range n, v r
+  let nextRow : ℕ → ZMod 2 := fun c => bh (i + 1) (c : ZMod L)
+  let currentRow : ℕ → ZMod 2 := fun c => bh i (c : ZMod L)
+  let f : ℕ → ZMod 2 := fun c => bv i (c : ZMod L)
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  have hpair (c : ℕ) : nextRow c + currentRow c = f (c + 1) + f c := by
+    calc
+      nextRow c + currentRow c = bv i ((c : ZMod L) + 1) + bv i (c : ZMod L) :=
+        Ising2DLambda.NecSuf.FisherZero.face_pair_necSuf
+          (bv i (c : ZMod L)) (bh i (c : ZMod L))
+          (bv i ((c : ZMod L) + 1)) (bh (i + 1) (c : ZMod L))
+          (reconstruction_horizontal_face_solve L A hSector.1 i (c : ZMod L)) (hdouble _)
+      _ = bv i ((c + 1 : ℕ) : ZMod L) + bv i (c : ZMod L) := by
+        rw [Nat.cast_add, Nat.cast_one]
+      _ = f (c + 1) + f c := rfl
+  exact Ising2DLambda.NecSuf.FisherZero.vertical_periodic_path_difference_necSuf
+    (reconstructionPathParity L A (i + 1) j) (reconstructionPathParity L A i j)
+    V v nextRow currentRow f i.val (i + 1).val j.val L (bv i 0) (bv i j)
+    rfl rfl (reconstruction_horizontal_boundary_successor_val L i hi) hi
+    (Finset.sum_range_zero v) (Finset.sum_range_succ v i.val)
+    (reconstructedEdgeSet_vertical_prefix_sum_zero L A hSector)
+    (by dsimp [v]; rw [ZMod.natCast_zmod_val])
     hpair (fun c => hdouble (f c))
     (by dsimp [f]; rw [ZMod.natCast_zmod_val])
     (by dsimp [f]; rw [Nat.cast_zero])
