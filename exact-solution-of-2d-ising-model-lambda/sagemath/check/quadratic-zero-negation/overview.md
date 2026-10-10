@@ -83,3 +83,18 @@ sage -c "__file__ = 'sagemath/check/quadratic-zero-negation/check.sage'; load(__
 既存の零元の所属の8等式と2例、加法逆元の両立19組、
 零元の特徴づけ722組、加法逆元の表示の鎖722組も通過した。
 有限標本の検算は一般の一意性の証明を代替しない。
+
+## 加法逆元による閉性の行別検算
+
+対象は `claim_quadratic_negation_mem` の五等号と最後の所属である。有理数の包含を明示し、二係数の加法逆元を一つずつ移す。二次体から取り出した二係数と二つの埋込みによる722表示を、各行で全て調べる。表示の一意性は有限標本から主張せず、所属は有理係数の証人を直接検査する。
+
+| ファイル | 対象 | ステータス | 結果 |
+|---|---|---|---|
+| `check_negation_representation_specification.sage` | 表示写像の仕様 | PASS | 722等式 |
+| `check_negation_sum.sage` | 和の加法逆元 | PASS | 722等式 |
+| `check_negation_product.sage` | 積の加法逆元 | PASS | 722等式 |
+| `check_negation_left_embedding.sage` | 第一係数の加法逆元の包含 | PASS | 722等式 |
+| `check_negation_right_embedding.sage` | 第二係数の加法逆元の包含 | PASS | 722等式 |
+| `check_negation_membership_witness.sage` | 有理係数の証人による所属 | PASS | 722証人 |
+
+2026-10-10 実行: 五行の計3,610等式と所属の722証人が通過した。既存分を含む `check*.sage` 全26本も通過した。有限標本の検算は一般の閉性の証明を代替しない。

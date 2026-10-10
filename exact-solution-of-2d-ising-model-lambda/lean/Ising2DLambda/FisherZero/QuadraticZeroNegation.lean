@@ -79,8 +79,21 @@ noncomputable def quadraticNegElement (s : Qbar) (xi : QuadraticFieldElement s) 
 
 /-- `claim_quadratic_negation_mem` の具体版。 -/
 theorem quadraticNeg_mem (s : Qbar) (xi : QuadraticFieldElement s) :
-    -(xi : Qbar) ∈ quadraticFieldSet s :=
-  (quadraticNegElement s xi).property
+    -(xi : Qbar) ∈ quadraticFieldSet s := by
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
+  refine ⟨-a, -b, ?_⟩
+  calc
+    -(xi : Qbar) = -(algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) :=
+      congrArg Neg.neg (quadraticRepresentation_spec s xi)
+    _ = -algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar b * s)) := neg_add _ _
+    _ = -algebraMap ℚ Qbar a + (-algebraMap ℚ Qbar b) * s :=
+      congrArg (-algebraMap ℚ Qbar a + ·) (neg_mul (algebraMap ℚ Qbar b) s).symm
+    _ = algebraMap ℚ Qbar (-a) + (-algebraMap ℚ Qbar b) * s :=
+      congrArg (· + (-algebraMap ℚ Qbar b) * s) (map_neg (algebraMap ℚ Qbar) a).symm
+    _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s :=
+      congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
+        (map_neg (algebraMap ℚ Qbar) b).symm
 
 /-- `claim_quadratic_negation_representation` の具体版。 -/
 theorem quadraticRepresentation_neg

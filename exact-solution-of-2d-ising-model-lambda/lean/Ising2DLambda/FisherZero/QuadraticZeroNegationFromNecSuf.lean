@@ -45,20 +45,24 @@ theorem quadraticRepresentation_eq_zero_iff_from_necSuf
 
 theorem quadraticNeg_mem_from_necSuf (s : Qbar) (xi : QuadraticFieldElement s) :
     -(xi : Qbar) ∈ quadraticFieldSet s := by
-  apply Ising2DLambda.NecSuf.FisherZero.neg_mem_necSuf
-      Neg.neg Neg.neg
-      (fun c d : ℚ => algebraMap ℚ Qbar c + algebraMap ℚ Qbar d * s)
-      (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2 (xi : Qbar)
-  calc
-      -(xi : Qbar) =
-          -(algebraMap ℚ Qbar (quadraticRepresentation s xi).1 +
-            algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s) := by
-        exact congrArg Neg.neg (quadraticRepresentation_spec s xi)
-      _ = (-algebraMap ℚ Qbar (quadraticRepresentation s xi).1) +
-          (-(algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s)) := by rw [neg_add]
-      _ = algebraMap ℚ Qbar (-(quadraticRepresentation s xi).1) +
-          algebraMap ℚ Qbar (-(quadraticRepresentation s xi).2) * s := by
-        rw [map_neg, map_neg, neg_mul]
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
+  have hneg : -(xi : Qbar) = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s := by
+    calc
+      -(xi : Qbar) = -(algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) :=
+        congrArg Neg.neg (quadraticRepresentation_spec s xi)
+      _ = -algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar b * s)) := neg_add _ _
+      _ = -algebraMap ℚ Qbar a + (-algebraMap ℚ Qbar b) * s :=
+        congrArg (-algebraMap ℚ Qbar a + ·) (neg_mul (algebraMap ℚ Qbar b) s).symm
+      _ = algebraMap ℚ Qbar (-a) + (-algebraMap ℚ Qbar b) * s :=
+        congrArg (· + (-algebraMap ℚ Qbar b) * s) (map_neg (algebraMap ℚ Qbar) a).symm
+      _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s :=
+        congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
+          (map_neg (algebraMap ℚ Qbar) b).symm
+  exact Ising2DLambda.NecSuf.FisherZero.neg_mem_necSuf
+    Neg.neg Neg.neg
+    (fun c d : ℚ => algebraMap ℚ Qbar c + algebraMap ℚ Qbar d * s)
+    a b (xi : Qbar) hneg
 
 theorem quadraticRepresentation_neg_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)

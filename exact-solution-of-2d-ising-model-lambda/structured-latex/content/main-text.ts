@@ -32951,54 +32951,30 @@ b
                       ],
                       proof: [
                         paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`a\in\mathbb{Q}`),
-                          " の ",
-                          math(String.raw`\mathbb{Q}`),
-                          " での加法の逆元 ",
-                          math(String.raw`-a`),
-                          " は、",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " での加法の逆元と同じ元である（",
-                          math(String.raw`a+(-a)=0`),
-                          " が両方の体で同じ等式だから）。",
-                          math(String.raw`-b`),
-                          " も同様である。次の鎖を得る。",
+                          math(String.raw`\iota_{\mathbb Q}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " を有理数の包含とする（", ref("def_algebraic_numbers"), "）。",
+                          math(String.raw`(a,b)=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
+                          "（", ref("def_quadratic_representation_map"), "）なので、",
+                          math(String.raw`-a,-b\in\mathbb Q`),
+                          " である。包含を明示すると、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 -\xi
-&=-\bigl(a+b\cdot s\bigr)
-&&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\bigr)\\
-&=(-a)+\bigl(-(b\cdot s)\bigr)
-&&\bigl(\because\ \text{和の加法逆元}\ -(u+v)=(-u)+(-v)\bigr)\\
-&=(-a)+(-b)\cdot s
-&&\bigl(\because\ \text{積の加法逆元}\ -(b\cdot s)=(-b)\cdot s\bigr)
+&=-\bigl(\iota_{\mathbb Q}(a)+\iota_{\mathbb Q}(b)\cdot s\bigr)
+&&\bigl(\because\ \text{表示写像の仕様、}\blkref{def_quadratic_representation_map}\bigr)\\
+&=-\iota_{\mathbb Q}(a)+\bigl(-(\iota_{\mathbb Q}(b)\cdot s)\bigr)
+&&\bigl(\because\ \text{和の加法逆元}\bigr)\\
+&=-\iota_{\mathbb Q}(a)+\bigl(-\iota_{\mathbb Q}(b)\bigr)\cdot s
+&&\bigl(\because\ \text{積の加法逆元}\bigr)\\
+&=\iota_{\mathbb Q}(-a)+\bigl(-\iota_{\mathbb Q}(b)\bigr)\cdot s
+&&\bigl(\because\ \text{包含が }a\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+&=\iota_{\mathbb Q}(-a)+\iota_{\mathbb Q}(-b)\cdot s
+&&\bigl(\because\ \text{包含が }b\text{ の加法逆元を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
+&\in Q_s
+&&\bigl(\because\ -a,-b\in\mathbb Q,\ \blkref{def_quadratic_field_set}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "この等式と ",
-                          ref("def_quadratic_field_set"),
-                          " から、次の所属の鎖を得る。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(a,b)&\in\mathbb{Q}\times\mathbb{Q}
-&&\bigl(\because\ \text{表示の写像の値域 }\blkref{def_quadratic_representation_map}\bigr)\\
-&\Longrightarrow(-a,-b)\in\mathbb{Q}\times\mathbb{Q}
-&&\bigl(\because\ \mathbb{Q}\ \text{の加法逆元による閉性}\bigr)\\
-&\Longrightarrow(-a)+(-b)\cdot s\in Q_s
-&&\bigl(\because\ \blkref{def_quadratic_field_set}\bigr)\\
-&\Longrightarrow-\xi\in Q_s
-&&\bigl(\because\ -\xi=(-a)+(-b)\cdot s\bigr)
-\end{aligned}`),
-                        paragraph([
-                          "全過程は体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " と ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の四則の中で閉じ、実数体も複素数体も現れない。",
+                          "全過程は有理数と代数的数の四則で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
