@@ -95,27 +95,28 @@ theorem quadraticNeg_mem (s : Qbar) (xi : QuadraticFieldElement s) :
       congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
         (map_neg (algebraMap ℚ Qbar) b).symm
 
-/-- `claim_quadratic_negation_representation` の具体版。 -/
+/-- `claim_quadratic_negation_representation` の値表示の五等号と、表示の一意性による一等号。 -/
 theorem quadraticRepresentation_neg
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (xi : QuadraticFieldElement s) :
     quadraticRepresentation s (quadraticNegElement s xi) =
       (-(quadraticRepresentation s xi).1, -(quadraticRepresentation s xi).2) := by
-  apply quadraticRepresentation_eq s hs
-      (quadraticNegElement s xi)
-      (-(quadraticRepresentation s xi).1) (-(quadraticRepresentation s xi).2)
-  change -(xi : Qbar) =
-    algebraMap ℚ Qbar (-(quadraticRepresentation s xi).1) +
-      algebraMap ℚ Qbar (-(quadraticRepresentation s xi).2) * s
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
+  have hneg : -(xi : Qbar) = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s := by
+    calc
+      -(xi : Qbar) = -(algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) :=
+        congrArg Neg.neg (quadraticRepresentation_spec s xi)
+      _ = -algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar b * s)) := neg_add _ _
+      _ = -algebraMap ℚ Qbar a + (-algebraMap ℚ Qbar b) * s :=
+        congrArg (-algebraMap ℚ Qbar a + ·) (neg_mul (algebraMap ℚ Qbar b) s).symm
+      _ = algebraMap ℚ Qbar (-a) + (-algebraMap ℚ Qbar b) * s :=
+        congrArg (· + (-algebraMap ℚ Qbar b) * s) (map_neg (algebraMap ℚ Qbar) a).symm
+      _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s :=
+        congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
+          (map_neg (algebraMap ℚ Qbar) b).symm
   calc
-    -(xi : Qbar) =
-        -(algebraMap ℚ Qbar (quadraticRepresentation s xi).1 +
-          algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s) := by
-      rw [quadraticRepresentation_spec s xi]
-    _ = (-algebraMap ℚ Qbar (quadraticRepresentation s xi).1) +
-          (-(algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s)) := by rw [neg_add]
-    _ = algebraMap ℚ Qbar (-(quadraticRepresentation s xi).1) +
-          algebraMap ℚ Qbar (-(quadraticRepresentation s xi).2) * s := by
-      rw [map_neg, map_neg, neg_mul]
+    quadraticRepresentation s (quadraticNegElement s xi) = (-a, -b) :=
+      quadraticRepresentation_eq s hs (quadraticNegElement s xi) (-a) (-b) hneg
 
 end Ising2DLambda.FisherZero

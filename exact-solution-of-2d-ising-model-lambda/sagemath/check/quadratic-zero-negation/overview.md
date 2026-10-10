@@ -98,3 +98,18 @@ sage -c "__file__ = 'sagemath/check/quadratic-zero-negation/check.sage'; load(__
 | `check_negation_membership_witness.sage` | 有理係数の証人による所属 | PASS | 722証人 |
 
 2026-10-10 実行: 五行の計3,610等式と所属の722証人が通過した。既存分を含む `check*.sage` 全26本も通過した。有限標本の検算は一般の閉性の証明を代替しない。
+
+## 加法逆元の表示の行別検算
+
+対象は `claim_quadratic_negation_representation` の六等号である。有理数の包含を明示した値変形五等号と、表示写像の一意性による組の等号をそれぞれ一ファイルで検算する。二根と十九有理数の二係数からなる722表示を各行で調べる。最後の行では二次体で負元を作って係数を取り出し、元の二係数の逆元と比較する。本文の表示写像との一致は既証明の一意性によるものであり、この有限検算が一般の一意性を証明するわけではない。
+
+| ファイル | 対象 | ステータス | 結果 |
+|---|---|---|---|
+| `check_negation_coefficients_representation_specification.sage` | 表示写像の仕様 | PASS | 722等式 |
+| `check_negation_coefficients_sum.sage` | 和の加法逆元 | PASS | 722等式 |
+| `check_negation_coefficients_product.sage` | 積の加法逆元 | PASS | 722等式 |
+| `check_negation_coefficients_left_embedding.sage` | 第一係数の包含 | PASS | 722等式 |
+| `check_negation_coefficients_right_embedding.sage` | 第二係数の包含 | PASS | 722等式 |
+| `check_negation_coefficients_unique_pair.sage` | 一意表示の組 | PASS | 722等式 |
+
+2026-10-10 実行: 追加六行の計4,332等式が通過した。既存分を含む `check*.sage` 全32本も通過した。
