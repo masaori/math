@@ -52,6 +52,13 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_sign_comp
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_bijective_inner_sum
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutation_row_sum_reindex_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_bijective_inner_sum_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_from_necSuf
   Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one
   Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum
   Ising2DLambda.NecSuf.FisherZero.two_value_disagreement_necSuf

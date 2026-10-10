@@ -6197,6 +6197,181 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_polynomial_determinant_mul",
+        labels: [],
+        title: { text: "多項式行列式の乗法性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_polynomial_determinant_mul",
+            focus: {
+              id: "tools_claim_polynomial_determinant_mul",
+              kind: "claim",
+              title: { text: "多項式行列式の乗法性" },
+              labels: ["claim_polynomial_determinant_mul"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/polynomial-determinant-multiplicativity"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_sign_comp",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_bijective_inner_sum",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutation_row_sum_reindex_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_bijective_inner_sum_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_from_necSuf",
+              ],
+              statement: [
+                paragraph(["空でない有限集合 ", math(String.raw`\mathcal J`), " に線型順序を固定する。", ref("def_qbar_polynomial_matrix"), " の多項式行列 ", math(String.raw`A,B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), " の積を ", ref("claim_polynomial_determinant_function_expansion"), " の成分の有限和で定めると、"]),
+                displayMath(String.raw`\det_x(AB)=\det_x(A)\det_x(B)\in\overline{\mathbb Q}[x].`),
+                paragraph(["行列式は ", ref("def_qbar_polynomial_determinant"), " の行指定の置換展開である。"]),
+              ],
+              proof: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal F:=\{f\mid f:\mathcal J\to\mathcal J\}`), " と、その部分集合 ", math(String.raw`\mathcal U:=\{f\in\mathcal F\mid f\text{ は全単射}\}`), " を使う。以下、", math(String.raw`i,j\in\mathcal J`), "、", math(String.raw`\sigma,\pi,\tau\in\operatorname{Perm}(\mathcal J)`), " とする。整数の包含 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " と ", ref("def_qbar_constant_embedding"), " により、"]),
+                displayMath(String.raw`c_\sigma:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\in\overline{\mathbb Q}[x],\qquad P(f):=\prod_i A_{i,f(i)}\in\overline{\mathbb Q}[x],`),
+                displayMath(String.raw`I(f):=\sum_\sigma c_\sigma\prod_i B_{f(i),\sigma(i)}\in\overline{\mathbb Q}[x]\qquad(f\in\mathcal F)`),
+                paragraph(["と置く。符号は ", ref("def_permutation_sign"), " の整数値であり、和と積の省略した範囲は直前に宣言した有限集合とする。"]),
+                paragraph(["単射の ", math(String.raw`f\in\mathcal F`), " なら、異なる元の像が異なることから、"]),
+                displayMath(String.raw`\begin{aligned}
+|f(\mathcal J)|
+&=|\mathcal J|
+&&\bigl(\because\ \text{単射による有限集合の元の数の保存}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`f(\mathcal J)\subseteq\mathcal J`), " で元の数が等しいので、像に欠ける元はなく全射である。従って ", math(String.raw`f\notin\mathcal U`), " なら単射でなく、", ref("claim_polynomial_determinant_noninjective_cancellation"), " より、"]),
+                displayMath(String.raw`\begin{aligned}
+I(f)
+&=0
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_noninjective_cancellation}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+P(f)I(f)
+&=P(f)\,0
+&&\bigl(\because\ \text{直前の内側の和の消去}\bigr)\\
+&=0
+&&\bigl(\because\ \text{零との積、}\blkref{def_qbar_polynomial_ring}\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`\alpha:\operatorname{Perm}(\mathcal J)\to\mathcal U`), " を、置換の各点での値をそのまま写像へ渡す対応 ", math(String.raw`\alpha(\tau)(i):=\tau(i)`), " とする。逆向き ", math(String.raw`\beta:\mathcal U\to\operatorname{Perm}(\mathcal J)`), " は ", math(String.raw`\beta(f)(i):=f(i)`), " とし、逆置換の値は各点の唯一の逆像で定める。これは ", math(String.raw`f`), " の全単射性から存在して一意である。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+((\beta\circ\alpha)(\tau))(i)
+&=\beta(\alpha(\tau))(i)
+&&\bigl(\because\ \text{合成の定義}\bigr)\\
+&=\alpha(\tau)(i)
+&&\bigl(\because\ \beta\text{ の定義}\bigr)\\
+&=\tau(i)
+&&\bigl(\because\ \alpha\text{ の定義}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+((\alpha\circ\beta)(f))(i)
+&=\alpha(\beta(f))(i)
+&&\bigl(\because\ \text{合成の定義}\bigr)\\
+&=\beta(f)(i)
+&&\bigl(\because\ \alpha\text{ の定義}\bigr)\\
+&=f(i)
+&&\bigl(\because\ \beta\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["全点で一致するので両合成は恒等写像となり、", math(String.raw`\alpha`), " と ", math(String.raw`\beta`), " は互いに逆の全単射である。"]),
+                paragraph(["固定した ", math(String.raw`\tau`), " について、置換の集合から自身への写像 ", math(String.raw`T_\tau(\pi):=\pi\circ\tau`), " と ", math(String.raw`S_\tau(\sigma):=\sigma\circ\tau^{-1}`), " を定める。合成は右側から作用させる。各 ", math(String.raw`i`), " で、"]),
+                displayMath(String.raw`\begin{aligned}
+S_\tau(T_\tau(\pi))(i)
+&=T_\tau(\pi)(\tau^{-1}(i))
+&&\bigl(\because\ S_\tau\text{ の定義}\bigr)\\
+&=\pi(\tau(\tau^{-1}(i)))
+&&\bigl(\because\ T_\tau\text{ の定義}\bigr)\\
+&=\pi(i)
+&&\bigl(\because\ \tau\circ\tau^{-1}\text{ は恒等写像}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+T_\tau(S_\tau(\sigma))(i)
+&=S_\tau(\sigma)(\tau(i))
+&&\bigl(\because\ T_\tau\text{ の定義}\bigr)\\
+&=\sigma(\tau^{-1}(\tau(i)))
+&&\bigl(\because\ S_\tau\text{ の定義}\bigr)\\
+&=\sigma(i)
+&&\bigl(\because\ \tau^{-1}\circ\tau\text{ は恒等写像}\bigr).
+\end{aligned}`),
+                paragraph(["従って ", math(String.raw`T_\tau`), " と ", math(String.raw`S_\tau`), " も互いに逆の全単射である。係数は ", ref("claim_permutation_sign_mul"), " と定数多項式への埋め込みにより、"]),
+                displayMath(String.raw`\begin{aligned}
+c_{\pi\circ\tau}
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi\circ\tau))}
+&&\bigl(\because\ c\text{ の定義}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi)\operatorname{sgn}(\tau))}
+&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi))\,\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}
+&&\bigl(\because\ \iota_{\mathbb Z}\text{ は積を保つ}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi))}\,\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\bigr)\\
+&=c_\pi c_\tau
+&&\bigl(\because\ c\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["また ", math(String.raw`j=\tau(i)`), " は ", math(String.raw`\mathcal J`), " の全点を重複なく走るから、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_i B_{\tau(i),(\pi\circ\tau)(i)}
+&=\prod_i B_{\tau(i),\pi(\tau(i))}
+&&\bigl(\because\ \text{合成の定義}\bigr)\\
+&=\prod_j B_{j,\pi(j)}
+&&\bigl(\because\ \tau\text{ による有限積の再添字付け}\bigr).
+\end{aligned}`),
+                paragraph(["これらを内側の和へ順に代入する。", ref("def_qbar_polynomial_determinant"), " と ", ref("def_qbar_polynomial_ring"), " を使い、"]),
+                displayMath(String.raw`\begin{aligned}
+I(\alpha(\tau))
+&=\sum_\sigma c_\sigma\prod_i B_{\alpha(\tau)(i),\sigma(i)}
+&&\bigl(\because\ I\text{ の定義}\bigr)\\
+&=\sum_\sigma c_\sigma\prod_i B_{\tau(i),\sigma(i)}
+&&\bigl(\because\ \alpha\text{ の定義}\bigr)\\
+&=\sum_\pi c_{T_\tau(\pi)}\prod_i B_{\tau(i),T_\tau(\pi)(i)}
+&&\bigl(\because\ T_\tau\text{ による有限和の再添字付け}\bigr)\\
+&=\sum_\pi c_{\pi\circ\tau}\prod_i B_{\tau(i),(\pi\circ\tau)(i)}
+&&\bigl(\because\ T_\tau\text{ の定義}\bigr)\\
+&=\sum_\pi c_{\pi\circ\tau}\prod_i B_{\tau(i),\pi(\tau(i))}
+&&\bigl(\because\ \text{合成の定義}\bigr)\\
+&=\sum_\pi(c_\pi c_\tau)\prod_i B_{\tau(i),\pi(\tau(i))}
+&&\bigl(\because\ \text{直前の係数の積の等式}\bigr)\\
+&=\sum_\pi(c_\pi c_\tau)\prod_j B_{j,\pi(j)}
+&&\bigl(\because\ \text{直前の有限積の再添字付け}\bigr)\\
+&=\sum_\pi(c_\tau c_\pi)\prod_j B_{j,\pi(j)}
+&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_\pi c_\tau\left(c_\pi\prod_j B_{j,\pi(j)}\right)
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=c_\tau\sum_\pi c_\pi\prod_j B_{j,\pi(j)}
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=c_\tau\det_x(B)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+\end{aligned}`),
+                paragraph(["最後に ", ref("claim_polynomial_determinant_function_expansion"), " の外側の和から、上で零と示した項を除く。残る全単射の写像は ", math(String.raw`\alpha`), " で一度ずつ数えられるから、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(AB)
+&=\sum_{f\in\mathcal F}P(f)I(f)
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_function_expansion}\bigr)\\
+&=\sum_{f\in\mathcal U}P(f)I(f)
+&&\bigl(\because\ f\notin\mathcal U\text{ の項は零}\bigr)\\
+&=\sum_\tau P(\alpha(\tau))I(\alpha(\tau))
+&&\bigl(\because\ \alpha\text{ による有限和の再添字付け}\bigr)\\
+&=\sum_\tau P(\alpha(\tau))\bigl(c_\tau\det_x(B)\bigr)
+&&\bigl(\because\ \text{直前の内側の和の等式}\bigr)\\
+&=\sum_\tau\bigl(P(\alpha(\tau))c_\tau\bigr)\det_x(B)
+&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_\tau\bigl(c_\tau P(\alpha(\tau))\bigr)\det_x(B)
+&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\left(\sum_\tau c_\tau P(\alpha(\tau))\right)\det_x(B)
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\left(\sum_\tau c_\tau\prod_i A_{i,\alpha(\tau)(i)}\right)\det_x(B)
+&&\bigl(\because\ P\text{ の定義}\bigr)\\
+&=\left(\sum_\tau c_\tau\prod_i A_{i,\tau(i)}\right)\det_x(B)
+&&\bigl(\because\ \alpha\text{ の定義}\bigr)\\
+&=\det_x(A)\det_x(B)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr).
+\end{aligned}`),
+                paragraph(["すべての計算は有限集合と ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で閉じており、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
