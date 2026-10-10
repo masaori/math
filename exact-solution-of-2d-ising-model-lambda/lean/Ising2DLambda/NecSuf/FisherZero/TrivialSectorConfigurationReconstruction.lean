@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・縦辺差・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・縦辺差・所属・双対像・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -261,6 +261,68 @@ theorem constant_on_walk_necSuf {X Y : Type*}
   calc
     f x = f (walk (index x)) := congrArg f (hcover x).symm
     _ = value := haux (index x)
+
+/-- 二元の四場合を代入する所属判定。必要なのは入力の二場合、出力の二点での値、
+出力二値の相異性、二項演算の四値だけである。加法・環・整数冪は使わない。
+対角の場合に要る入力二値の相異性は、出力二値の相異性から導く。 -/
+theorem two_value_disagreement_necSuf {P S : Type*}
+    (zeroValue oneValue : P) (evaluate : P → S) (sZero sOne : S)
+    (combine : P → P → P)
+    (hcover : ∀ a : P, a = zeroValue ∨ a = oneValue)
+    (houtput : sZero ≠ sOne)
+    (hevalZero : evaluate zeroValue = sZero) (hevalOne : evaluate oneValue = sOne)
+    (hzz : combine zeroValue zeroValue = zeroValue)
+    (hzo : combine zeroValue oneValue = oneValue)
+    (hoz : combine oneValue zeroValue = oneValue)
+    (hoo : combine oneValue oneValue = zeroValue)
+    (a b : P) : evaluate a ≠ evaluate b ↔ combine a b = oneValue := by
+  have hinput : zeroValue ≠ oneValue := by
+    intro h
+    apply houtput
+    calc
+      sZero = evaluate zeroValue := hevalZero.symm
+      _ = evaluate oneValue := congrArg evaluate h
+      _ = sOne := hevalOne
+  rcases hcover a with rfl | rfl <;> rcases hcover b with rfl | rfl
+  · simp only [hevalZero, hzz, ne_self_iff_false, hinput]
+  · rw [hevalZero, hevalOne, hzo]
+    exact ⟨fun _ => rfl, fun _ => houtput⟩
+  · rw [hevalOne, hevalZero, hoz]
+    exact ⟨fun _ => rfl, fun _ => Ne.symm houtput⟩
+  · simp only [hevalOne, hoo, ne_self_iff_false, hinput]
+
+/-- 所属の同値列で二つの有限集合を等置する。端点スピンと評価値の一致は定義の代入、
+評価値の不一致の判定は四場合、端点値の演算結果は先に証明した道和差から供給する。
+格子・道・環は不要で、零と一に相当する二値の相異性だけが最後の所属判定に要る。 -/
+theorem reconstructed_membership_necSuf {E V P S : Type*} [DecidableEq E]
+    (broken original : Finset E) (source target : E → V)
+    (spin : V → S) (path : V → P) (evaluate : P → S)
+    (combine : P → P → P) (zeroValue oneValue : P)
+    (hvalues : zeroValue ≠ oneValue)
+    (hbroken : ∀ e : E, e ∈ broken ↔ spin (source e) ≠ spin (target e))
+    (hspin : ∀ v : V, spin v = evaluate (path v))
+    (hdisagree : ∀ a b : P, evaluate a ≠ evaluate b ↔ combine a b = oneValue)
+    (hpath : ∀ e : E, combine (path (source e)) (path (target e)) =
+      if e ∈ original then oneValue else zeroValue) : broken = original := by
+  ext e
+  calc
+    e ∈ broken ↔ spin (source e) ≠ spin (target e) := hbroken e
+    _ ↔ evaluate (path (source e)) ≠ evaluate (path (target e)) := by rw [hspin, hspin]
+    _ ↔ combine (path (source e)) (path (target e)) = oneValue := hdisagree _ _
+    _ ↔ (if e ∈ original then oneValue else zeroValue) = oneValue := by rw [hpath]
+    _ ↔ e ∈ original := by
+      by_cases he : e ∈ original <;> simp [he, hvalues]
+
+/-- 双対像の二等号。所属で得た等号を像へ運び、逆像との往復で元へ戻す。
+写像の全単射性全体は使わず、この部分集合での往復等号だけを仮定する。 -/
+theorem reconstructed_image_necSuf {E F : Type*} [DecidableEq F]
+    (forward : E → F) (broken original : Finset E) (image : Finset F)
+    (hmembership : broken = original) (hroundtrip : original.image forward = image) :
+    broken.image forward = image := by
+  calc
+    broken.image forward = original.image forward :=
+      congrArg (fun B => B.image forward) hmembership
+    _ = image := hroundtrip
 
 theorem paired_fiber_card_two_necSuf {α β : Type*}
     [Fintype α] [DecidableEq α] [DecidableEq β]

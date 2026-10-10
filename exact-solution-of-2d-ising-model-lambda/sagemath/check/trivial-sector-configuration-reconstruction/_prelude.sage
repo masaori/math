@@ -197,6 +197,10 @@ def _rc_build_case(L, A):
             'spins': sigma[v] != sigma[w],
             'powers': ZZ(-1) ** _rc_s2(t[v]) != ZZ(-1) ** _rc_s2(t[w]),
             'parity': t[v] + t[w] == _rc_ring(1),
+            'forward_sum': t[v] + t[w],
+            'backward_sum': t[w] + t[v],
+            'indicator': _rc_ring(NN(edge in B)),
+            'indicator_one': _rc_ring(NN(edge in B)) == _rc_ring(1),
             'original': edge in B,
         })
     return {'L': L, 'A': A, 'B': B, 'bh': bh, 'bv': bv, 't': t, 'sigma': sigma,

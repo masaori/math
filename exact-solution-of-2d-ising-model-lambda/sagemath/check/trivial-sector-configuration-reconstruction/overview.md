@@ -11,6 +11,10 @@
 
 | ファイル | 検証内容 | ステータス | 結果 |
 |---|---|---|---|
+| `check_endpoint_sum_commute.sage` | 所属判定に合わせた端点道和の順序交換 | PASS | 4,674 辺 |
+| `check_endpoint_sum_indicator.sage` | 横辺差・縦辺差を指示関数へ代入 | PASS | 4,674 辺 |
+| `check_broken_indicator_substitution.sage` | 所属判定へ端点道和の等式を代入 | PASS | 4,674 辺 |
+| `check_broken_indicator_membership.sage` | 指示関数の零・一から所属を判定 | PASS | 4,674 辺 |
 | `check_vertical_interior_representative_successor.sage` | 縦座標の非境界の代表増分 | PASS | 6,208 等式 |
 | `check_vertical_interior_face_solved_substitution.sage` | 格子面で解いた横辺一項を代入 | PASS | 9,348 等式 |
 | `check_vertical_interior_face_associate_pair.sage` | 局所四項の後半を結合 | PASS | 9,348 等式 |
@@ -268,6 +272,16 @@ micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage -c "impor
 ```
 
 **2026-08-12 実行: すべて通過。**
+
+2026-10-10 所属と双対像のレビュー: 端点道和の順序交換と指示関数への代入を二等号で明示し、
+所属の最後の同値を「指示関数が一」と「辺集合への所属」に分けた。
+追加した行別4本は、辺長一から三の自明セクター265個に含まれる全4,674辺を各行で検査し、
+全18,696等式・同値が通過した。既存を含む全235ファイルの再実行も通過した。
+二元の四場合、所属の五同値、双対像の二等号を Lean 具体版・必要十分版・導出版へ揃えた。
+具体版と必要十分版のモジュールビルド、および導出版の単独型検査が通過した。
+必要十分版は二値の評価と演算の四値、端点値の演算結果、部分集合の像の往復等号だけを使い、
+格子・道・環・写像全体の全単射性を仮定しない。次のレビューは原像が全反転の二配位だけであることと個数二の結論。
+存在構成全体の必要十分版・導出版は未了である。
 
 2026-10-10 縦辺の周期境界のレビュー: 代表の零への復帰一等号、列零の周期和三等号、
 末尾の和八等号、道和差十七等号を行別29本へ分け、全22,765等式が通過した。

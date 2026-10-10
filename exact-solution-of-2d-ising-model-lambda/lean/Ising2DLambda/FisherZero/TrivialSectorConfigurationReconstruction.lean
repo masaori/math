@@ -786,56 +786,80 @@ def reconstructionSpin (q : ZMod 2) : SpinValue :=
 lemma reconstructionSpin_val_eq_neg_one_pow_val (q : ZMod 2) :
     (reconstructionSpin q).val = (-1 : ℤ) ^ q.val := rfl
 
+/-- 所属判定の四場合。整数冪の不一致と剰余類の和が一であることを比較する。 -/
+lemma reconstructionParityPower_ne_iff_add_eq_one (a b : ZMod 2) :
+    (-1 : ℤ) ^ a.val ≠ (-1 : ℤ) ^ b.val ↔ a + b = 1 := by
+  fin_cases a <;> fin_cases b <;> decide
+
 lemma reconstructionSpin_ne_iff_add_eq_one (a b : ZMod 2) :
     reconstructionSpin a ≠ reconstructionSpin b ↔ a + b = 1 := by
-  fin_cases a <;> fin_cases b <;> decide
+  calc
+    reconstructionSpin a ≠ reconstructionSpin b ↔
+        (-1 : ℤ) ^ a.val ≠ (-1 : ℤ) ^ b.val := by
+      exact not_congr Subtype.ext_iff
+    _ ↔ a + b = 1 := reconstructionParityPower_ne_iff_add_eq_one a b
 
 /-- 人手証明の `σ_A(i,j)=(-1)^{s₂(t(i,j))}`。 -/
 noncomputable def reconstructedConfiguration (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) : Config L := fun v =>
   reconstructionSpin (reconstructionPathParity L A v.1 v.2)
 
-/-- 道和から復元した配位の破れた辺集合は、双対辺写像で戻した辺集合に等しい。 -/
+/-- 所属判定へ使う端点の順に、横辺差・縦辺差を並べる。 -/
+lemma reconstructionPathParity_endpoint_sum (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (e : Edge L) :
+    reconstructionPathParity L A (boundary0 L e).1 (boundary0 L e).2 +
+        reconstructionPathParity L A (boundary1 L e).1 (boundary1 L e).2 =
+      (if e ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  rw [show e = edgeEquiv L ((edgeEquiv L).symm e) by simp]
+  rcases (edgeEquiv L).symm e with ⟨i, j⟩ | ⟨i, j⟩
+  · simp only [edgeEquiv_inl_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal]
+    calc
+      reconstructionPathParity L A i j + reconstructionPathParity L A i (j + 1) =
+          reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j :=
+        add_comm _ _
+      _ = _ := reconstructionPathParity_horizontal_difference L A hSector i j
+  · simp only [edgeEquiv_inr_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_vertical]
+    calc
+      reconstructionPathParity L A i j + reconstructionPathParity L A (i + 1) j =
+          reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j :=
+        add_comm _ _
+      _ = _ := reconstructionPathParity_vertical_difference L A hSector i j
+
+/-- 本文の所属の同値列。最後の一行では零と一が異なることを使う。 -/
 theorem reconstructedConfiguration_brokenEdgeSet (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
     brokenEdgeSet L (reconstructedConfiguration L A) = reconstructedEdgeSet L A := by
   classical
   ext e
-  rw [brokenEdgeSet, Finset.mem_filter]
-  simp only [Finset.mem_univ, true_and]
-  rw [show e = edgeEquiv L ((edgeEquiv L).symm e) by simp]
-  rcases (edgeEquiv L).symm e with ⟨i, j⟩ | ⟨i, j⟩
-  · simp only [edgeEquiv_inl_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal,
-      reconstructedConfiguration, reconstructionSpin_ne_iff_add_eq_one]
-    have h := reconstructionPathParity_horizontal_difference L A hSector i j
-    rw [add_comm] at h
-    by_cases he : edgeOfRow L false i j ∈ reconstructedEdgeSet L A
-    · simpa [he] using h
-    · simp only [he, iff_false]
-      have hzero : reconstructionPathParity L A i j +
-          reconstructionPathParity L A i (j + 1) = 0 := by simpa [he] using h
-      intro hone
-      rw [hone] at hzero
-      norm_num at hzero
-  · simp only [edgeEquiv_inr_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_vertical,
-      reconstructedConfiguration, reconstructionSpin_ne_iff_add_eq_one]
-    have h := reconstructionPathParity_vertical_difference L A hSector i j
-    rw [add_comm] at h
-    by_cases he : edgeOfRow L true i j ∈ reconstructedEdgeSet L A
-    · simpa [he] using h
-    · simp only [he, iff_false]
-      have hzero : reconstructionPathParity L A i j +
-          reconstructionPathParity L A (i + 1) j = 0 := by simpa [he] using h
-      intro hone
-      rw [hone] at hzero
-      norm_num at hzero
+  let t := fun v : Vertex L => reconstructionPathParity L A v.1 v.2
+  calc
+    e ∈ brokenEdgeSet L (reconstructedConfiguration L A) ↔
+        reconstructedConfiguration L A (boundary0 L e) ≠
+          reconstructedConfiguration L A (boundary1 L e) := by
+      simp only [brokenEdgeSet, mem_filter, mem_univ, true_and]
+    _ ↔ (-1 : ℤ) ^ (t (boundary0 L e)).val ≠
+        (-1 : ℤ) ^ (t (boundary1 L e)).val := by
+      exact not_congr Subtype.ext_iff
+    _ ↔ t (boundary0 L e) + t (boundary1 L e) = 1 :=
+      reconstructionParityPower_ne_iff_add_eq_one _ _
+    _ ↔ (if e ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0) = 1 := by
+      rw [show t (boundary0 L e) + t (boundary1 L e) = _ from
+        reconstructionPathParity_endpoint_sum L A hSector e]
+    _ ↔ e ∈ reconstructedEdgeSet L A := by
+      by_cases he : e ∈ reconstructedEdgeSet L A <;> simp [he]
 
-/-- 道和から復元した配位の双対破れ像は、もとの自明セクターの偶部分グラフに等しい。 -/
+/-- 本文の双対像の二等号。所属の同値列から得た集合等号を像へ代入する。 -/
 theorem reconstructedConfiguration_dualBrokenEdgeSet (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
     dualBrokenEdgeSet L (reconstructedConfiguration L A) = A := by
-  rw [dualBrokenEdgeSet, reconstructedConfiguration_brokenEdgeSet L A hSector,
-    image_reconstructedEdgeSet]
+  calc
+    dualBrokenEdgeSet L (reconstructedConfiguration L A) =
+        (reconstructedEdgeSet L A).image (dualEdgeEquiv L) :=
+      congrArg (fun B => B.image (dualEdgeEquiv L))
+        (reconstructedConfiguration_brokenEdgeSet L A hSector)
+    _ = A := image_reconstructedEdgeSet L A
 
 theorem globalSpinReversal_dualBrokenEdgeSet (L : ℕ) [NeZero L] (σ : Config L) :
     dualBrokenEdgeSet L (globalSpinReversal L σ) = dualBrokenEdgeSet L σ := by

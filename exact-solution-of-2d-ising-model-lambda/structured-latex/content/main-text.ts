@@ -30262,6 +30262,17 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructionParityPower_eq_one_or_neg_one_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionSpin_val_eq_neg_one_pow_val",
                         "Ising2DLambda.FisherZero.reconstructedConfiguration",
+                        "Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one",
+                        "Ising2DLambda.FisherZero.reconstructionSpin_ne_iff_add_eq_one",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum",
+                        "Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet",
+                        "Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet",
+                        "Ising2DLambda.NecSuf.FisherZero.two_value_disagreement_necSuf",
+                        "Ising2DLambda.NecSuf.FisherZero.reconstructed_membership_necSuf",
+                        "Ising2DLambda.NecSuf.FisherZero.reconstructed_image_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one_from_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet_from_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf",
                         "Ising2DLambda.NecSuf.FisherZero.paired_fiber_card_two_necSuf",
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_from_necSuf",
                       ],
@@ -30945,9 +30956,17 @@ t(i+\bar1,j)+t(i,j)
 &&\bigl(\because\ \text{零の加法}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "この計算は ", math(String.raw`L=1`), " でも空和のまま成立する。ゆえにすべての辺 ",
-                          math(String.raw`e\in E_L`), " について",
+                          "この計算は ", math(String.raw`L=1`), " でも空和のまま成立する。任意の辺 ",
+                          math(String.raw`e\in E_L`), " について、端点の順に道和を並べると、",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+t(\partial_0(e))+t(\partial_1(e))
+&=t(\partial_1(e))+t(\partial_0(e))
+&&\bigl(\because\ \text{加法の交換則}\bigr)\\
+&=\pi_2\bigl(\boldsymbol1_B(e)\bigr)
+&&\bigl(\because\ \blkref{def_boundary_maps},\ \text{直前の横辺差・縦辺差}\bigr).
+\end{aligned}`),
+                        paragraph(["所属の同値を一行ずつ書くと、"]),
                         displayMath(String.raw`\begin{aligned}
 e\in\mathcal B_L(\sigma_A)
 &\Longleftrightarrow\sigma_A(\partial_0(e))\ne\sigma_A(\partial_1(e))
@@ -30956,9 +30975,12 @@ e\in\mathcal B_L(\sigma_A)
 &&\bigl(\because\ \sigma_A\text{ の定義}\bigr)\\
 &\Longleftrightarrow t(\partial_0(e))+t(\partial_1(e))=1
 &&\bigl(\because\ \mathbb Z/2\mathbb Z\text{ の二元の四通りを代入}\bigr)\\
+&\Longleftrightarrow\pi_2\bigl(\boldsymbol1_B(e)\bigr)=1
+&&\bigl(\because\ \text{直前の端点道和の等式}\bigr)\\
 &\Longleftrightarrow e\in B
-&&\bigl(\because\ \text{横向き辺と縦向き辺についての直前の等式}\bigr).
+&&\bigl(\because\ \boldsymbol1_B(e)\in\{0,1\},\ \pi_2(0)=0\ne1=\pi_2(1)\bigr).
 \end{aligned}`),
+                        paragraph(["すべての辺について所属が一致するので、", math(String.raw`\mathcal B_L(\sigma_A)=B`), " である。ゆえに、"]),
                         displayMath(String.raw`\begin{aligned}
 \delta_L\bigl(\mathcal B_L(\sigma_A)\bigr)
 &=\delta_L(B)

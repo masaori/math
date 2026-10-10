@@ -52,6 +52,14 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one
+  Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum
+  Ising2DLambda.NecSuf.FisherZero.two_value_disagreement_necSuf
+  Ising2DLambda.NecSuf.FisherZero.reconstructed_membership_necSuf
+  Ising2DLambda.NecSuf.FisherZero.reconstructed_image_necSuf
+  Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one_from_necSuf
+  Ising2DLambda.FisherZero.reconstructedConfiguration_brokenEdgeSet_from_necSuf
+  Ising2DLambda.FisherZero.reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_sign_right_transposition_neg
   Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_noninjective_inner_sum_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.paired_finset_sum_zero_necSuf

@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・横辺差・縦辺差・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -195,6 +195,52 @@ theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
       (fun j : ZMod L => ∑ i : ZMod L,
         if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0)
       0 hwv (fun x => hcol x)
+
+/-- 所属の四場合へ、実際の剰余類・整数冪・加法の四値を供給する。 -/
+theorem reconstructionParityPower_ne_iff_add_eq_one_from_necSuf (a b : ZMod 2) :
+    (-1 : ℤ) ^ a.val ≠ (-1 : ℤ) ^ b.val ↔ a + b = 1 := by
+  have hcover : ∀ q : ZMod 2, q = 0 ∨ q = 1 := by
+    intro q
+    have hcases : q.val = 0 ∨ q.val = 1 := by
+      have hlt := q.val_lt
+      omega
+    rcases hcases with hz | ho
+    · exact Or.inl ((ZMod.val_eq_zero q).mp hz)
+    · exact Or.inr ((ZMod.val_eq_one (by decide) q).mp ho)
+  exact Ising2DLambda.NecSuf.FisherZero.two_value_disagreement_necSuf
+    (0 : ZMod 2) 1 (fun q => (-1 : ℤ) ^ q.val) 1 (-1) (· + ·)
+    hcover (by decide) (by decide) (by decide)
+    (by decide) (by decide) (by decide) (by decide) a b
+
+/-- 所属の同値列へ、実際の端点・整数値の配位・道和・辺の指示関数を供給する。 -/
+theorem reconstructedConfiguration_brokenEdgeSet_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0)) :
+    brokenEdgeSet L (reconstructedConfiguration L A) = reconstructedEdgeSet L A := by
+  classical
+  exact Ising2DLambda.NecSuf.FisherZero.reconstructed_membership_necSuf
+    (brokenEdgeSet L (reconstructedConfiguration L A)) (reconstructedEdgeSet L A)
+    (boundary0 L) (boundary1 L) (fun v => (reconstructedConfiguration L A v).val)
+    (fun v => reconstructionPathParity L A v.1 v.2)
+    (fun q : ZMod 2 => (-1 : ℤ) ^ q.val) (· + ·) 0 1 (by decide)
+    (by
+      intro e
+      simp only [brokenEdgeSet, mem_filter, mem_univ, true_and]
+      exact not_congr Subtype.ext_iff)
+    (fun _ => rfl) reconstructionParityPower_ne_iff_add_eq_one_from_necSuf
+    (reconstructionPathParity_endpoint_sum L A hSector)
+
+/-- 双対像の二等号へ、実際の双対辺写像と逆像との往復を供給する。 -/
+theorem reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0)) :
+    dualBrokenEdgeSet L (reconstructedConfiguration L A) = A := by
+  classical
+  exact Ising2DLambda.NecSuf.FisherZero.reconstructed_image_necSuf
+    (dualEdgeEquiv L) (brokenEdgeSet L (reconstructedConfiguration L A))
+    (reconstructedEdgeSet L A) A
+    (reconstructedConfiguration_brokenEdgeSet_from_necSuf L A hSector)
+    (image_reconstructedEdgeSet L A)
 
 theorem trivialSectorConfiguration_fiber_card_two_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
