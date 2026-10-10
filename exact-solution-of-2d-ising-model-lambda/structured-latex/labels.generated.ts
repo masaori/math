@@ -260,6 +260,7 @@ export const ALL_LABELS = [
   "claim_plane_simple_cycle_projection_closed_nonbacktracking",
   "claim_plane_simple_polygon_cyclic_turning",
   "claim_polynomial_determinant_function_expansion",
+  "claim_polynomial_determinant_noninjective_cancellation",
   "claim_polynomial_diagonal_gauge_inverse",
   "claim_polynomial_product_of_sums",
   "claim_positive_rational_in_positive_cone",
