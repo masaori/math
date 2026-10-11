@@ -3,7 +3,7 @@
 **対象ラベル**: `claim_quadratic_addition_mem`、`claim_quadratic_addition_representation`
 
 - 実行日: 2026-10-11
-- 結果: 通過。既存の和の両立49組・和の鎖と表示4,802組に加え、閉性の本文十三行を九等号43,218件・四所属19,208件で検算した。
+- 結果: 通過。既存の和の両立49組・和の鎖と表示4,802組に加え、閉性の本文十三行を九等号43,218件・四所属19,208件、和の表示の本文十一行を十等号48,020件・一所属4,802件で検算した。
 - 帰属: `QQ` / `QQbar` の厳密計算。浮動小数点は使わない。
 
 有理数標本は分子 −2 から 2、分母 1 から 2 で得る相異なる七値、根は平方が 2 となる二つである。
@@ -41,3 +41,23 @@
 ```sh
 sage sagemath/check/quadratic-addition/check.sage
 ```
+
+## 和の表示の各行
+
+対象は `claim_quadratic_addition_representation`。九等号の係数整理、和の所属、一意表示の一等号を別々に照合する。十一行すべて通過した。
+
+| 本文の行 | ファイル | 通過した検査 |
+|---|---|---|
+| 表示の代入 | `check_sum_representation_representation_substitution.sage` | 4,802等式 |
+| 外側の結合則 | `check_sum_representation_outer_association.sage` | 4,802等式 |
+| 内側の結合則を逆向きに適用 | `check_sum_representation_inner_association_left.sage` | 4,802等式 |
+| 中央の二項の可換則 | `check_sum_representation_middle_commutation.sage` | 4,802等式 |
+| 内側の結合則 | `check_sum_representation_inner_association_right.sage` | 4,802等式 |
+| 左の二係数をまとめる結合則 | `check_sum_representation_first_coefficients_grouping.sage` | 4,802等式 |
+| 右の係数への分配則 | `check_sum_representation_right_distributivity.sage` | 4,802等式 |
+| 左の係数の加法保存 | `check_sum_representation_first_coefficient_map_add.sage` | 4,802等式 |
+| 右の係数の加法保存 | `check_sum_representation_second_coefficient_map_add.sage` | 4,802等式 |
+| 和の所属 | `check_sum_representation_membership.sage` | 4,802所属確認 |
+| 一意な表示の係数 | `check_sum_representation_unique.sage` | 4,802等式 |
+
+`check_sum_representation_lines.sage` はこの十一行を実行する。`check.sage` は既存の閉性の検算と併せて実行する。

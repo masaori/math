@@ -34731,24 +34731,34 @@ j(a+a')+j(b+b')\cdot s
                       ],
                       proof: [
                         paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`a+a',b+b'\in\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " でも同じ和である。以下の計算は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中で行う。",
+                          "有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " と書く（", ref("def_algebraic_numbers"), "）。係数 ",
+                          math(String.raw`a,b,a',b'\in\mathbb Q`),
+                          " の和は有理数体で取り、代数的数体へ移す箇所を ",
+                          math(String.raw`j`), " で明記する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \xi+\eta
-&=\bigl(a+b\cdot s\bigr)+\bigl(a'+b'\cdot s\bigr)
+&=\bigl(j(a)+j(b)\cdot s\bigr)+\bigl(j(a')+j(b')\cdot s\bigr)
 &&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
-&=(a+a')+(b+b')\cdot s
-&&\bigl(\because\ \blkref{claim_quadratic_addition_mem}\text{ の証明の鎖}\bigr)\\
+&=j(a)+\bigl(j(b)\cdot s+(j(a')+j(b')\cdot s)\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=j(a)+\bigl((j(b)\cdot s+j(a'))+j(b')\cdot s\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=j(a)+\bigl((j(a')+j(b)\cdot s)+j(b')\cdot s\bigr)
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=j(a)+\bigl(j(a')+(j(b)\cdot s+j(b')\cdot s)\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(j(a)+j(a'))+\bigl(j(b)\cdot s+j(b')\cdot s\bigr)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=(j(a)+j(a'))+(j(b)+j(b'))\cdot s
+&&\bigl(\because\ \text{分配則}\bigr)\\
+&=j(a+a')+(j(b)+j(b'))\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)\\
+&=j(a+a')+j(b+b')\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)
+\\
 \xi+\eta
 &\in Q_s
 &&\bigl(\because\ \blkref{claim_quadratic_addition_mem}\bigr)\\

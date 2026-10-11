@@ -75,3 +75,5 @@ print(f"add-chain / add-rep: {checked_add_chain} 組を検査した")
 print("すべて通過した")
 
 load('sagemath/check/quadratic-addition/check_lines.sage')
+
+load('sagemath/check/quadratic-addition/check_sum_representation_lines.sage')

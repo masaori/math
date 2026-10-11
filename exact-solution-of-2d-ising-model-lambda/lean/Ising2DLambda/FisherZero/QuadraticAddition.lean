@@ -62,14 +62,44 @@ theorem quadraticRepresentation_add
     quadraticRepresentation s (quadraticAddElement s xi eta) =
       ((quadraticRepresentation s xi).1 + (quadraticRepresentation s eta).1,
         (quadraticRepresentation s xi).2 + (quadraticRepresentation s eta).2) := by
+  let a := (quadraticRepresentation s xi).1
+  let b := (quadraticRepresentation s xi).2
+  let a' := (quadraticRepresentation s eta).1
+  let b' := (quadraticRepresentation s eta).2
   apply quadraticRepresentation_eq s hs
   change (xi : Qbar) + (eta : Qbar) =
-    algebraMap ℚ Qbar ((quadraticRepresentation s xi).1 +
-      (quadraticRepresentation s eta).1) +
-      algebraMap ℚ Qbar ((quadraticRepresentation s xi).2 +
-        (quadraticRepresentation s eta).2) * s
-  rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta]
-  rw [map_add, map_add]
-  ring
+    algebraMap ℚ Qbar (a + a') + algebraMap ℚ Qbar (b + b') * s
+  calc
+    (xi : Qbar) + (eta : Qbar) =
+        (algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) +
+          (algebraMap ℚ Qbar a' + algebraMap ℚ Qbar b' * s) := by
+      rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta]
+    _ = algebraMap ℚ Qbar a +
+          (algebraMap ℚ Qbar b * s +
+            (algebraMap ℚ Qbar a' + algebraMap ℚ Qbar b' * s)) := by
+      rw [add_assoc]
+    _ = algebraMap ℚ Qbar a +
+          ((algebraMap ℚ Qbar b * s + algebraMap ℚ Qbar a') +
+            algebraMap ℚ Qbar b' * s) := by
+      rw [add_assoc]
+    _ = algebraMap ℚ Qbar a +
+          ((algebraMap ℚ Qbar a' + algebraMap ℚ Qbar b * s) +
+            algebraMap ℚ Qbar b' * s) := by
+      rw [add_comm (algebraMap ℚ Qbar b * s)]
+    _ = algebraMap ℚ Qbar a +
+          (algebraMap ℚ Qbar a' +
+            (algebraMap ℚ Qbar b * s + algebraMap ℚ Qbar b' * s)) := by
+      rw [add_assoc]
+    _ = (algebraMap ℚ Qbar a + algebraMap ℚ Qbar a') +
+          (algebraMap ℚ Qbar b * s + algebraMap ℚ Qbar b' * s) := by
+      rw [add_assoc]
+    _ = (algebraMap ℚ Qbar a + algebraMap ℚ Qbar a') +
+          (algebraMap ℚ Qbar b + algebraMap ℚ Qbar b') * s := by
+      rw [add_mul]
+    _ = algebraMap ℚ Qbar (a + a') +
+          (algebraMap ℚ Qbar b + algebraMap ℚ Qbar b') * s := by
+      rw [map_add (algebraMap ℚ Qbar) a a']
+    _ = algebraMap ℚ Qbar (a + a') + algebraMap ℚ Qbar (b + b') * s := by
+      rw [map_add (algebraMap ℚ Qbar) b b']
 
 end Ising2DLambda.FisherZero

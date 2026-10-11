@@ -1,0 +1,13 @@
+# 対象ラベル: claim_quadratic_addition_representation
+load('sagemath/check/quadratic-addition/check_sum_representation_representation_substitution.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_outer_association.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_inner_association_left.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_middle_commutation.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_inner_association_right.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_first_coefficients_grouping.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_right_distributivity.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_first_coefficient_map_add.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_second_coefficient_map_add.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_membership.sage')
+load('sagemath/check/quadratic-addition/check_sum_representation_unique.sage')
+print('quadratic-addition representation: all 11 displayed lines passed')
