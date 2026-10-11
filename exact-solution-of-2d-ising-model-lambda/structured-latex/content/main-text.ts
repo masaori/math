@@ -35287,7 +35287,7 @@ a\cdot b'+b\cdot a'
                   verification: ["sagemath/check/quadratic-multiplication"],
                   lean: [
                     "Ising2DLambda.FisherZero.quadraticRepresentation_mul",
-                    "Ising2DLambda.NecSuf.FisherZero.mul_representation_necSuf",
+                    "Ising2DLambda.NecSuf.FisherZero.mul_representation_of_spec_necSuf",
                     "Ising2DLambda.FisherZero.quadraticRepresentation_mul_from_necSuf",
                   ],
                   statement: [
@@ -35316,38 +35316,38 @@ a\cdot b'+b\cdot a'
                   ],
                   proof: [
                     paragraph([
-                      math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                      " は部分体である（",
-                      ref("def_algebraic_numbers"),
-                      "）から、",
-                      math(String.raw`a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\in\mathbb{Q}`),
-                      " は ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " でも同じ和と積である。",
-                      ref("claim_quadratic_multiplication_mem"),
-                      " の証明の鎖により",
+                      "包含写像を ",
+                      math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                      "（", ref("def_algebraic_numbers"), "）と書く。",
+                      math(String.raw`a,b,a',b'\in\mathbb Q`),
+                      " なので、係数 ",
+                      math(String.raw`a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'`),
+                      " は有理数の和と積として ", math(String.raw`\mathbb Q`),
+                      " に属する。まず、表示写像を適用できることを確かめる。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \xi\cdot\eta
-&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
-&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ の証明の鎖の始点と終点}\bigr)
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr)
 \end{aligned}`),
                     paragraph([
-                      math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)`),
-                      " は ",
-                      math(String.raw`\xi\cdot\eta`),
-                      " を表す唯一の組である（",
-                      ref("def_quadratic_representation_map"),
-                      "）。上の表示 ",
-                      math(String.raw`\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
-                      " に ",
-                      ref("claim_quadratic_representation_unique"),
-                      " を適用する。",
+                      "そこで ",
+                      math(String.raw`(c,d):=\mathrm{rep}_s(\xi\cdot\eta)\in\mathbb Q\times\mathbb Q`),
+                      " と置く（", ref("def_quadratic_representation_map"),
+                      "）。最初の二等号は ", math(String.raw`\overline{\mathbb Q}`),
+                      " の中で表示を比べ、最後の等号は ",
+                      math(String.raw`\mathbb Q\times\mathbb Q`),
+                      " の中で係数の組を比べる。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
+j(c)+j(d)\cdot s
+&=\xi\cdot\eta
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=j\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+j\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ の証明の鎖の始点と終点}\bigr),\\
 \mathrm{rep}_s(\xi\cdot\eta)
 &=\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)
-&&\bigl(\because\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
+&&\bigl(\because\ \blkref{claim_quadratic_representation_unique}\text{ を上の表示の等式へ適用}\bigr)
 \end{aligned}`),
                     paragraph([
                       "全過程は体 ",

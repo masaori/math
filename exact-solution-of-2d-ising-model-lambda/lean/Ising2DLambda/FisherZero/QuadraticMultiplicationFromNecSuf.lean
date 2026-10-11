@@ -47,32 +47,15 @@ theorem quadraticRepresentation_mul_from_necSuf
           2 * ((quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).2),
         (quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).2 +
           (quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).1) := by
-  apply Ising2DLambda.NecSuf.FisherZero.mul_representation_necSuf
+  apply Ising2DLambda.NecSuf.FisherZero.mul_representation_of_spec_necSuf
       (mulK := fun x y : QuadraticFieldElement s => quadraticMulElement s hs x y)
       (value := fun x : QuadraticFieldElement s => (x : Qbar))
       (combine := fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s)
       (rep := quadraticRepresentation s)
-  · intro x a b hx
-    exact quadraticRepresentation_eq s hs x a b hx
+  · exact quadraticRepresentation_spec s
+  · intro a b c d hvalue
+    exact quadraticRepresentationUnique s hs a b c d hvalue
   · change (xi : Qbar) * (eta : Qbar) = _
-    rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta]
-    simp only [map_add, map_mul]
-    change
-      (algebraMap ℚ Qbar (quadraticRepresentation s xi).1 +
-          algebraMap ℚ Qbar (quadraticRepresentation s xi).2 * s) *
-        (algebraMap ℚ Qbar (quadraticRepresentation s eta).1 +
-          algebraMap ℚ Qbar (quadraticRepresentation s eta).2 * s) =
-        algebraMap ℚ Qbar (quadraticRepresentation s xi).1 *
-            algebraMap ℚ Qbar (quadraticRepresentation s eta).1 +
-          algebraMap ℚ Qbar 2 *
-            (algebraMap ℚ Qbar (quadraticRepresentation s xi).2 *
-              algebraMap ℚ Qbar (quadraticRepresentation s eta).2) +
-          (algebraMap ℚ Qbar (quadraticRepresentation s xi).1 *
-              algebraMap ℚ Qbar (quadraticRepresentation s eta).2 +
-            algebraMap ℚ Qbar (quadraticRepresentation s xi).2 *
-              algebraMap ℚ Qbar (quadraticRepresentation s eta).1) * s
-    ring_nf
-    rw [show s ^ 2 = algebraMap ℚ Qbar 2 by simpa [pow_two] using hs]
-    ring_nf
+    exact quadraticMul_value_from_necSuf s hs xi eta
 
 end Ising2DLambda.FisherZero

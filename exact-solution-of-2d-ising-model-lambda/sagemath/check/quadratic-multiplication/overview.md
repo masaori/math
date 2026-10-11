@@ -4,8 +4,8 @@
 
 **対象ラベル**: `claim_quadratic_multiplication_mem`, `claim_quadratic_multiplication_representation`
 
-- 本文: `structured-latex/content/main-text.ts` の「二次体の台集合の乗法による閉性」。
-- 範囲: 三補助式の十一等号、積の計算の十八等号、二係数と積の三所属を一行一ファイルで確認する。
+- 本文: `structured-latex/content/main-text.ts` の「二次体の台集合の乗法による閉性」と「二次体の積の表示」。
+- 範囲: 閉性の三補助式の十一等号、積の計算の十八等号、二係数と積の三所属、および積の表示の三等号と一所属を一行一ファイルで確認する。
 - 帰属: `QQ` / `QQbar` の厳密計算。平方根は多項式 `t^2 - 2` の両根を取り、包含写像は `j = QQbar` とする。
 - 標本: 分子 −2〜2、分母 1〜2 から作る七有理数の四つ組と両平方根、各行 4,802 件。有限標本の検算であり、一般の係数の主張は Lean で保証する。
 
@@ -45,9 +45,21 @@
 | `check_first_coefficient_membership.sage` | 定数係数の有理数への所属 | PASS | 4,802 所属 |
 | `check_second_coefficient_membership.sage` | 平方根係数の有理数への所属 | PASS | 4,802 所属 |
 | `check_product_membership.sage` | 有理係数を証人とする積の所属 | PASS | 4,802 所属 |
+| `check_product_representation_membership.sage` | 積が二次体に属すること | PASS | 4,802 所属 |
+| `check_product_representation_reconstruction.sage` | 表示写像から積の値を復元する等号 | PASS | 4,802 等式 |
+| `check_product_representation_value.sage` | 閉性の証明の鎖の始点と終点 | PASS | 4,802 等式 |
+| `check_product_representation_unique.sage` | 表示一意性による係数対の一致 | PASS | 4,802 等式 |
 | `check.sage` | 既存の閉性・積の表示の統合検算 | PASS | 両立49組、補助式・積・表示4,802組 |
 
+## 積の表示の係数抽出
+
+`_representation_prelude.sage` は数体 `K = QQ[r]/(r^2 - 2)` の中で二元を掛け、実際の積の `{1,r}` 基底座標を取り出す。各平方根 `s` に対して埋込み `r ↦ s` を明示し、入力と積を `QQbar` の元へ対応させる。期待する積公式は座標抽出に使わず、最後の係数対との比較にだけ使うため、両平方根の符号を区別して検算できる。
+
+本文の表示復元は Lean の `quadraticRepresentation_spec`、積の値は閉性で証明済みの `quadraticMul_value`、係数対の一意性は `quadraticRepresentationUnique` と `Prod.ext` に対応する。必要十分版 `mul_representation_of_spec_necSuf` も同じ二等号と一意性適用を並べ、導出版は表示の復元・一意性と `quadraticMul_value_from_necSuf` を供給する。
+
 ## 実行結果
+
+2026-10-11: 積の表示の行別4ファイルを個別に実行してすべて通過。三等号14,406件と一所属4,802件を検算した。
 
 2026-10-11: 行別32ファイルと既存統合検算を実行してすべて通過。行別検算は等式139,258件、所属14,406件。
 

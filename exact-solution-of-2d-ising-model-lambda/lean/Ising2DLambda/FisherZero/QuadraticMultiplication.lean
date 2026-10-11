@@ -100,12 +100,21 @@ theorem quadraticRepresentation_mul
           2 * ((quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).2),
         (quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).2 +
           (quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).1) := by
-  apply quadraticRepresentation_eq s hs
-  simp only [quadraticMulElement]
-  rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta]
-  push_cast
-  ring_nf
-  rw [show s ^ 2 = algebraMap ℚ Qbar 2 by simpa [pow_two] using hs]
-  ring
+  let z := quadraticMulElement s hs xi eta
+  let a := (quadraticRepresentation s xi).1
+  let b := (quadraticRepresentation s xi).2
+  let a' := (quadraticRepresentation s eta).1
+  let b' := (quadraticRepresentation s eta).2
+  let c := (quadraticRepresentation s z).1
+  let d := (quadraticRepresentation s z).2
+  have hvalue : algebraMap ℚ Qbar c + algebraMap ℚ Qbar d * s =
+      algebraMap ℚ Qbar (a * a' + 2 * (b * b')) +
+        algebraMap ℚ Qbar (a * b' + b * a') * s := calc
+    _ = (xi : Qbar) * (eta : Qbar) := (quadraticRepresentation_spec s z).symm
+    _ = algebraMap ℚ Qbar (a * a' + 2 * (b * b')) +
+        algebraMap ℚ Qbar (a * b' + b * a') * s := quadraticMul_value s hs xi eta
+  have hcoeff := quadraticRepresentationUnique s hs c d
+    (a * a' + 2 * (b * b')) (a * b' + b * a') hvalue
+  exact Prod.ext hcoeff.1 hcoeff.2
 
 end Ising2DLambda.FisherZero

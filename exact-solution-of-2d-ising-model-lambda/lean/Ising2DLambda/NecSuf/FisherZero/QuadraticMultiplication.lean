@@ -92,4 +92,19 @@ theorem mul_representation_necSuf
     rep (mulK x y) = (c, d) := by
   exact hUnique (mulK x y) c d hmul
 
+/-- 表示復元、既証明の積の値、係数の一意性を本文の三等号に対応させる。 -/
+theorem mul_representation_of_spec_necSuf
+    {A K V : Type} (mulK : K → K → K)
+    (value : K → V) (combine : A → A → V) (rep : K → A × A)
+    (hSpec : ∀ x : K, value x = combine (rep x).1 (rep x).2)
+    (hUnique : ∀ a b c d : A, combine a b = combine c d → a = c ∧ b = d)
+    (x y : K) (c d : A)
+    (hmul : value (mulK x y) = combine c d) :
+    rep (mulK x y) = (c, d) := by
+  have hvalue : combine (rep (mulK x y)).1 (rep (mulK x y)).2 = combine c d := calc
+    _ = value (mulK x y) := (hSpec (mulK x y)).symm
+    _ = combine c d := hmul
+  have hcoeff := hUnique (rep (mulK x y)).1 (rep (mulK x y)).2 c d hvalue
+  exact Prod.ext hcoeff.1 hcoeff.2
+
 end Ising2DLambda.NecSuf.FisherZero
