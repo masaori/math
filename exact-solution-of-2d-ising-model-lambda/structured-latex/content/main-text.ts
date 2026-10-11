@@ -6998,6 +6998,154 @@ c_\sigma P_\sigma
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_invariant_subset_reversal",
+        labels: [],
+        title: { text: "不変部分集合上の置換の反転" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_invariant_subset_reversal",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_invariant_subset_reversal",
+                title: { text: "不変部分集合の内側だけ向きを逆にする二写像" },
+                labels: ["def_invariant_subset_reversal"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward",
+                  "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateForward",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateBackward",
+                ],
+                verification: ["sagemath/check/invariant-subset-reversal"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と部分集合 ", math(String.raw`C\subseteq\mathcal J`), " を固定する。どちらも空集合を許す。全単射 ", math(String.raw`\mathcal J\to\mathcal J`), " の全体を ", math(String.raw`\operatorname{Perm}(\mathcal J)`), " と書き、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " が次の不変条件を満たすとする。"]),
+                  displayMath(String.raw`\sigma(i)\in C\ \Longleftrightarrow\ i\in C
+\qquad(i\in\mathcal J).`),
+                  paragraph(["逆置換を ", math(String.raw`\sigma^{-1}:\mathcal J\to\mathcal J`), " と書き、二つの写像 ", math(String.raw`f_{C,\sigma},g_{C,\sigma}:\mathcal J\to\mathcal J`), " を次で定める。"]),
+                  displayMath(String.raw`f_{C,\sigma}(i):=
+\begin{cases}\sigma^{-1}(i)&i\in C,\\\sigma(i)&i\notin C,\end{cases}
+\qquad
+g_{C,\sigma}(i):=
+\begin{cases}\sigma(i)&i\in C,\\\sigma^{-1}(i)&i\notin C.\end{cases}`),
+                  paragraph(["内側では元の置換を逆向きにたどり、外側ではそのままたどるのが ", math(String.raw`f_{C,\sigma}`), " である。二写像が互いに逆になることを次で示す。これらは有限集合の間の写像であり、実数体・複素数体を使わない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_invariant_subset_reversal",
+              title: { text: "不変部分集合内の反転は置換の対合を与える" },
+              labels: ["claim_invariant_subset_reversal"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.inverse_mem_invariantSubset_iff",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward_forward",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward_backward",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_mem_iff",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_twice",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.inverse_invariantPredicate_iff",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateBackward_forward",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateForward_backward",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_mem_iff",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_twice",
+                "Ising2DLambda.AlgebraicEigenvalue.inverse_mem_invariantSubset_iff_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward_forward_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward_backward_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_mem_iff_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_twice_from_necSuf",
+              ],
+              verification: ["sagemath/check/invariant-subset-reversal"],
+              statement: [
+                paragraph([ref("def_invariant_subset_reversal"), " の二写像は互いに逆である。従って ", math(String.raw`f_{C,\sigma}`), " は置換であり、その置換を ", math(String.raw`\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と書く。この置換も ", math(String.raw`C`), " を保ち、同じ部分集合について二度反転すると元へ戻る。"]),
+                displayMath(String.raw`\rho_C(\sigma)(i)\in C\ \Longleftrightarrow\ i\in C
+\quad(i\in\mathcal J),\qquad
+\rho_C(\rho_C(\sigma))=\sigma.`),
+                paragraph(["部分集合 ", math(String.raw`C`), " は固定しており、置換から部分集合を選ぶ操作はここでは行わない。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を取る。まず逆置換についても不変条件を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(i)\in C
+ &\Longleftrightarrow \sigma(\sigma^{-1}(i))\in C
+ &&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ の不変条件}\bigr)\\
+ &\Longleftrightarrow i\in C
+ &&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+\end{aligned}`),
+                paragraph(["以下、", math(String.raw`f:=f_{C,\sigma}`), "、", math(String.raw`g:=g_{C,\sigma}`), " と略す。まず ", math(String.raw`g\circ f=\mathrm{id}_{\mathcal J}`), " を示す。", math(String.raw`i\in C`), " なら、直前の同値によって ", math(String.raw`\sigma^{-1}(i)\in C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+g(f(i))
+ &=g(\sigma^{-1}(i))&&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &=\sigma(\sigma^{-1}(i))&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma^{-1}(i)\in C\bigr)\\
+ &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、不変条件によって ", math(String.raw`\sigma(i)\notin C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+g(f(i))
+ &=g(\sigma(i))&&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &=\sigma^{-1}(\sigma(i))&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma(i)\notin C\bigr)\\
+ &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`f\circ g=\mathrm{id}_{\mathcal J}`), " を示す。", math(String.raw`i\in C`), " なら、不変条件によって ", math(String.raw`\sigma(i)\in C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+f(g(i))
+ &=f(\sigma(i))&&\bigl(\because\ g\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &=\sigma^{-1}(\sigma(i))&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma(i)\in C\bigr)\\
+ &=i&&\bigl(\because\ \sigma^{-1}\circ\sigma=\mathrm{id}_{\mathcal J}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、最初の同値によって ", math(String.raw`\sigma^{-1}(i)\notin C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+f(g(i))
+ &=f(\sigma^{-1}(i))&&\bigl(\because\ g\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &=\sigma(\sigma^{-1}(i))&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }\sigma^{-1}(i)\notin C\bigr)\\
+ &=i&&\bigl(\because\ \sigma\circ\sigma^{-1}=\mathrm{id}_{\mathcal J}\bigr).
+\end{aligned}`),
+                paragraph(["以上で二写像は両側で逆になり、", math(String.raw`\rho_C(\sigma)`), " は写像 ", math(String.raw`f`), " を持ち、逆写像 ", math(String.raw`g`), " を持つ置換として定まる。その不変条件を示す。", math(String.raw`i\in C`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho_C(\sigma)(i)\in C
+ &\Longleftrightarrow\sigma^{-1}(i)\in C
+ &&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &\Longleftrightarrow i\in C
+ &&\bigl(\because\ \text{最初に示した逆置換の不変条件}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho_C(\sigma)(i)\in C
+ &\Longleftrightarrow\sigma(i)\in C
+ &&\bigl(\because\ f\text{ の定義、}\blkref{def_invariant_subset_reversal}\bigr)\\
+ &\Longleftrightarrow i\in C
+ &&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ の不変条件}\bigr).
+\end{aligned}`),
+                paragraph(["従って ", math(String.raw`\rho_C(\sigma)`), " にも同じ ", math(String.raw`C`), " で反転を行える。", math(String.raw`i\in C`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho_C(\rho_C(\sigma))(i)
+ &=(\rho_C(\sigma))^{-1}(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)\\
+ &=g(i)&&\bigl(\because\ \text{上で求めた逆写像}\bigr)\\
+ &=\sigma(i)&&\bigl(\because\ g\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\in C\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho_C(\rho_C(\sigma))(i)
+ &=\rho_C(\sigma)(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)\\
+ &=f(i)&&\bigl(\because\ \rho_C(\sigma)\text{ の与える写像}\bigr)\\
+ &=\sigma(i)&&\bigl(\because\ f\text{ の定義（}\blkref{def_invariant_subset_reversal}\text{）と }i\notin C\bigr).
+\end{aligned}`),
+                paragraph(["すべての点で値が一致するので二つの置換は等しい。", math(String.raw`\mathcal J=\varnothing`), " では点についての条件は空であり、唯一の空置換について同じ結論を得る。議論は有限集合と写像だけで閉じ、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

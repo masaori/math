@@ -52,6 +52,27 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward
+  Ising2DLambda.AlgebraicEigenvalue.inverse_mem_invariantSubset_iff
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward_forward
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward_backward
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_mem_iff
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_twice
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateForward
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateBackward
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.inverse_invariantPredicate_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateBackward_forward
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateForward_backward
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_mem_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_twice
+  Ising2DLambda.AlgebraicEigenvalue.inverse_mem_invariantSubset_iff_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetBackward_forward_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetForward_backward_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_mem_iff_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_twice_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.fixedPointFreePermutations
   Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed
   Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree
