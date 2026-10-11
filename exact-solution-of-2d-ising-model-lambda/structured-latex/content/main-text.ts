@@ -36532,71 +36532,60 @@ A\cdot A
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          ref("claim_quadratic_addition_representation"),
-                          " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
-                          " である。二つの第一係数は正であり、二つの第二係数は負なので、次を得る。",
-                        ]),
+                        displayMath(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')
+\qquad\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr).`),
                         displayMath(String.raw`\begin{aligned}
-0&<a+a' &&\bigl(\because\ 0<a,\ 0<a'\text{ と加法の単調性}\bigr)\\
-b+b'&<0 &&\bigl(\because\ b<0,\ b'<0\text{ と加法の単調性}\bigr)
+0&=0+0&&\bigl(\because\ \text{加法単位元}\bigr)\\
+&<a+a'&&\bigl(\because\ 0<a,\ 0<a';\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と加法の狭義単調性}\bigr),\\
+b+b'&<0+0&&\bigl(\because\ b<0,\ b'<0;\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と加法の狭義単調性}\bigr)\\
+&=0&&\bigl(\because\ \text{加法単位元}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "交差項の大小を得る。まず二つの負の第二係数の積は正である。",
-                        ]),
+                        paragraph(["交差項と、平方の比較で掛ける因子の符号を先に確かめる。"]),
                         displayMath(String.raw`\begin{aligned}
-0&<b\cdot b' &&\bigl(\because\ b<0\text{ かつ }b'<0\bigr)\\
-0&\le2\cdot(b\cdot b') &&\bigl(\because\ 0<b\cdot b'\text{ と }0<2\bigr)\\
-0&<a\cdot a' &&\bigl(\because\ 0<a\text{ かつ }0<a'\bigr)\\
-0&\le a\cdot a' &&\bigl(\because\ 0<a\cdot a'\bigr)
+0&<b\cdot b'&&\bigl(\because\ b<0,\ b'<0;\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と負数の積}\bigr)\\
+0&<2\cdot(b\cdot b')&&\bigl(\because\ 0<2,\ 0<b\cdot b';\ \text{正数の積}\bigr)\\
+0&\le2\cdot(b\cdot b')&&\bigl(\because\ 0<2\cdot(b\cdot b');\ \text{狭義不等式から広義不等式}\bigr)\\
+0&<a\cdot a'&&\bigl(\because\ 0<a,\ 0<a';\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と正数の積}\bigr)\\
+0&\le a\cdot a'&&\bigl(\because\ 0<a\cdot a';\ \text{狭義不等式から広義不等式}\bigr)\\
+0&<b'\cdot b'&&\bigl(\because\ b'<0;\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と負数の積}\bigr)\\
+0&<2\cdot(b'\cdot b')&&\bigl(\because\ 0<2,\ 0<b'\cdot b';\ \text{正数の積}\bigr)\\
+0&<a\cdot a&&\bigl(\because\ 0<a;\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と正数の積}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "この二つの非負有理数の平方を比較する。",
-                        ]),
                         displayMath(String.raw`\begin{aligned}
 \bigl(2\cdot(b\cdot b')\bigr)\cdot\bigl(2\cdot(b\cdot b')\bigr)
 &=\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ \text{結合則と可換則}\bigr)\\
-&< (a\cdot a)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ 2\cdot(b\cdot b)<a\cdot a\text{ と }0<2\cdot(b'\cdot b')\bigr)\\
-&< (a\cdot a)\cdot(a'\cdot a')
-  &&\bigl(\because\ 2\cdot(b'\cdot b')<a'\cdot a'\text{ と }0<a\cdot a\bigr)\\
+&&\bigl(\because\ \text{積の結合則・可換則}\bigr)\\
+&<(a\cdot a)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件、}\ 0<2\cdot(b'\cdot b');\ \text{右乗法の狭義単調性}\bigr)\\
+&<(a\cdot a)\cdot(a'\cdot a')
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件、}\ 0<a\cdot a;\ \text{左乗法の狭義単調性}\bigr)\\
 &=(a\cdot a')\cdot(a\cdot a')
-  &&\bigl(\because\ \text{結合則と可換則}\bigr)
+&&\bigl(\because\ \text{積の結合則・可換則}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          ref("claim_rational_square_lt_implies_lt"),
-                          " を二つの非負有理数 ",
-                          math(String.raw`2\cdot(b\cdot b')`),
-                          " と ",
-                          math(String.raw`a\cdot a'`),
-                          " へ適用すると、",
-                          math(String.raw`2\cdot(b\cdot b')<a\cdot a'`),
-                          " を得る。これを和の平方へ組み込む。",
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+2\cdot(b\cdot b')&<a\cdot a'
+&&\bigl(\because\ 0\le2\cdot(b\cdot b'),\ 0\le a\cdot a',\ \text{上の平方比較};\ \blkref{claim_rational_square_lt_implies_lt}\bigr),\\
+2\cdot\bigl(2\cdot(b\cdot b')\bigr)&<2\cdot(a\cdot a')
+&&\bigl(\because\ 2\cdot(b\cdot b')<a\cdot a',\ 0<2;\ \text{左乗法の狭義単調性}\bigr).
+\end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 2\cdot\bigl((b+b')\cdot(b+b')\bigr)
 &=2\cdot(b\cdot b)+2\cdot\bigl(2\cdot(b\cdot b')\bigr)+2\cdot(b'\cdot b')
-  &&\bigl(\because\ \text{分配則・結合則・可換則}\bigr)\\
+&&\bigl(\because\ \text{分配則・結合則・可換則}\bigr)\\
 &<(a\cdot a)+2\cdot\bigl(2\cdot(b\cdot b')\bigr)+2\cdot(b'\cdot b')
-  &&\bigl(\because\ 2\cdot(b\cdot b)<a\cdot a\text{ と加法の単調性}\bigr)\\
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と加法の狭義単調性}\bigr)\\
 &<(a\cdot a)+2\cdot(a\cdot a')+2\cdot(b'\cdot b')
-  &&\bigl(\because\ 2\cdot(b\cdot b')<a\cdot a'\text{ の両辺へ正の }2\text{ を掛けて加える}\bigr)\\
+&&\bigl(\because\ 2\cdot\bigl(2\cdot(b\cdot b')\bigr)<2\cdot(a\cdot a');\ \text{加法の狭義単調性}\bigr)\\
 &<(a\cdot a)+2\cdot(a\cdot a')+(a'\cdot a')
-  &&\bigl(\because\ 2\cdot(b'\cdot b')<a'\cdot a'\text{ と加法の単調性}\bigr)\\
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件と加法の狭義単調性}\bigr)\\
 &=(a+a')\cdot(a+a')
-  &&\bigl(\because\ \text{分配則・結合則・可換則}\bigr)
+&&\bigl(\because\ \text{分配則・結合則・可換則}\bigr).
 \end{aligned}`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \text{和の表示と上の三不等式、}\ \blkref{def_quadratic_positive_cone}\text{ の第二条件}\bigr).`),
                         paragraph([
-                          "したがって表示 ",
-                          math(String.raw`(a+a',b+b')`),
-                          " は正錐の第二条件を満たし、",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。全過程は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の加法・積・順序と ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "全過程は ", math(String.raw`\mathbb{Q}`),
+                          " の加法・積・順序と ", math(String.raw`\overline{\mathbb{Q}}`),
                           " の加法の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],

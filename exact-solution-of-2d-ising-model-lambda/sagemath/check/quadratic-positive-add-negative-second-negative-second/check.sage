@@ -36,5 +36,16 @@ for a in positive:
                 assert 2 * B * B < A * A
                 checked += 1
 
-assert checked > 0
-print(f"OK: 負の第二係数条件どうしの和を {checked} 組で厳密検査した")
+assert checked == 45369
+print(f"RESULT: PASS (負の第二係数条件どうしの和: {checked} cases)")
+
+from pathlib import Path
+qps_check_dir = Path("sagemath/check/quadratic-positive-add-negative-second-negative-second")
+if not qps_check_dir.is_dir():
+    qps_check_dir = Path(".")
+qps_check_paths = sorted(qps_check_dir.resolve().glob("check_*.sage"))
+assert len(qps_check_paths) == 25
+for qps_check_path in qps_check_paths:
+    __file__ = str(qps_check_path)
+    load(__file__)
+print("RESULT: PASS (負の第二係数条件どうしの和: 本文25行すべて通過)")
