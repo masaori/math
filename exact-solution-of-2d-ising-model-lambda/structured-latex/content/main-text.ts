@@ -7735,6 +7735,147 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_selected_odd_orbit_reversal",
+        labels: [],
+        title: { text: "選んだ奇数軌道の反転" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_selected_odd_orbit_reversal",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_odd_orbit_derangements",
+                title: { text: "奇数軌道を持つ不動点のない置換の集合" },
+                labels: ["def_odd_orbit_derangements"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.oddOrbitDerangements"],
+                verification: ["sagemath/check/selected-odd-orbit-reversal"],
+                statement: [
+                  paragraph([ref("def_odd_orbit_selection"), " の有限線型順序集合 ", math(String.raw`\mathcal J`), " に対し、"]),
+                  displayMath(String.raw`\operatorname{DerOdd}(\mathcal J):=
+\{\sigma\in\operatorname{Der}(\mathcal J)\mid\operatorname{OddPts}(\sigma)\ne\varnothing\}`),
+                  paragraph(["と定める。不動点のない置換の集合 ", math(String.raw`\operatorname{Der}(\mathcal J)`), " は ", ref("def_fixed_point_free_permutations"), "、奇数軌道に属する点の集合は ", ref("def_odd_orbit_selection"), " の意味である。対象集合 ", math(String.raw`\operatorname{DerOdd}(\mathcal J)`), " は空でもよい。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_selected_odd_orbit_reversal",
+                title: { text: "最小奇数点を含む軌道の反転" },
+                labels: ["def_selected_odd_orbit_reversal"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset",
+                  "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_invariant",
+                  "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_invariant_from_necSuf",
+                  "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal",
+                ],
+                verification: ["sagemath/check/selected-odd-orbit-reversal"],
+                statement: [
+                  paragraph([math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " を取る。", ref("def_odd_orbit_derangements"), " により奇数点の集合は空でないので、", ref("def_odd_orbit_selection"), " の ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " と ", math(String.raw`C:=\operatorname{OddOrb}(\sigma)\subseteq\mathcal J`), " が定まる。任意の ", math(String.raw`i\in\mathcal J`), " に対して、"]),
+                  displayMath(String.raw`\begin{aligned}
+\sigma(i)\in C
+ &\ \Longleftrightarrow\ \sigma(i)\in\operatorname{Orb}_{\sigma}(m)
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
+ &\ \Longleftrightarrow\ i\in\operatorname{Orb}_{\sigma}(m)
+ &&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)\\
+ &\ \Longleftrightarrow\ i\in C
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+\end{aligned}`),
+                  paragraph(["したがって ", ref("claim_invariant_subset_reversal"), " により ", ref("def_invariant_subset_reversal"), " の反転は置換を与え、写像 ", math(String.raw`R_{\mathrm{odd}}:\operatorname{DerOdd}(\mathcal J)\to\operatorname{Perm}(\mathcal J)`), " を、"]),
+                  displayMath(String.raw`R_{\mathrm{odd}}(\sigma):=\rho_{\operatorname{OddOrb}(\sigma)}(\sigma)`),
+                  paragraph(["と定められる。入力の所属から非空性を得てから最小元を選ぶので、対象集合が空でも、存在しない入力について最小元を選ぶ必要はない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_selected_odd_orbit_reversal_involution",
+              title: { text: "選んだ奇数軌道の反転は対象集合を保つ対合" },
+              labels: ["claim_selected_odd_orbit_reversal_involution"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_fixed_iff",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_twice",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_fixed_iff",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedPredicateReversal_mem",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedPredicateInvolution_twice",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_fixed_iff_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_mem_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_twice_from_necSuf",
+              ],
+              verification: ["sagemath/check/selected-odd-orbit-reversal"],
+              statement: [
+                paragraph([ref("def_selected_odd_orbit_reversal"), " の写像は、すべての ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " について、"]),
+                displayMath(String.raw`R_{\mathrm{odd}}(\sigma)\in\operatorname{DerOdd}(\mathcal J)`),
+                paragraph(["を満たす。したがって同じ値を持つ自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}:\operatorname{DerOdd}(\mathcal J)\to\operatorname{DerOdd}(\mathcal J)`), " が定まり、"]),
+                displayMath(String.raw`\mathcal R_{\mathrm{odd}}(\mathcal R_{\mathrm{odd}}(\sigma))=\sigma`),
+                paragraph(["が成り立つ。二度適用すると元に戻る自己写像を対合という。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`C:=\operatorname{OddOrb}(\sigma)`), "、", math(String.raw`\tau:=R_{\mathrm{odd}}(\sigma)=\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と置く（", ref("def_selected_odd_orbit_reversal"), "）。まず各点の不動性を比較する。", math(String.raw`i\in C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)=i
+ &\ \Longleftrightarrow\ \sigma^{-1}(i)=i
+ &&\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\in C\bigr)\\
+ &\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))=\sigma(i)
+ &&\bigl(\because\ \sigma\text{ は単射}\bigr)\\
+ &\ \Longleftrightarrow\ i=\sigma(i)
+ &&\bigl(\because\ \sigma^{-1}\text{ は逆写像}\bigr)\\
+ &\ \Longleftrightarrow\ \sigma(i)=i
+ &&\bigl(\because\ \text{等号の対称性}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、"]),
+                displayMath(String.raw`\tau(i)=i\quad\Longleftrightarrow\quad\sigma(i)=i
+\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\notin C\bigr).`),
+                paragraph(["どちらの場合も同じ同値を得た。したがって、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau\in\operatorname{Der}(\mathcal J)
+ &\ \Longleftrightarrow\ (\forall i\in\mathcal J,\ \tau(i)\ne i)
+ &&\bigl(\because\ \blkref{def_fixed_point_free_permutations}\bigr)\\
+ &\ \Longleftrightarrow\ (\forall i\in\mathcal J,\ \sigma(i)\ne i)
+ &&\bigl(\because\ \text{各点で示した同値}\bigr)\\
+ &\ \Longleftrightarrow\ \sigma\in\operatorname{Der}(\mathcal J)
+ &&\bigl(\because\ \blkref{def_fixed_point_free_permutations}\bigr).
+\end{aligned}`),
+                paragraph(["右辺は入力の所属から成り立つ（", ref("def_odd_orbit_derangements"), "）。さらに、"]),
+                displayMath(String.raw`\operatorname{OddPts}(\tau)=\operatorname{OddPts}(\sigma)
+\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr).`),
+                paragraph(["右辺は空でない（", ref("def_odd_orbit_derangements"), "）。集合等号によって左辺も空でない。これと不動点のないことから ", math(String.raw`\tau\in\operatorname{DerOdd}(\mathcal J)`), " となる（", ref("def_odd_orbit_derangements"), "）。よって値域を対象集合に制限した自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}`), " が定まる。"]),
+                paragraph(["次に、反転後も奇数点の集合が空でないので、"]),
+                displayMath(String.raw`\operatorname{OddOrb}(\tau)=\operatorname{OddOrb}(\sigma)
+\qquad\bigl(\because\ \blkref{claim_odd_orbit_selection_invariant}\bigr).`),
+                paragraph(["したがって、再び同じ台を反転することになり、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal R_{\mathrm{odd}}(\mathcal R_{\mathrm{odd}}(\sigma))
+ &=\rho_{\operatorname{OddOrb}(\tau)}(\tau)
+ &&\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr)\\
+ &=\rho_{\operatorname{OddOrb}(\sigma)}(\tau)
+ &&\bigl(\because\ \operatorname{OddOrb}(\tau)=\operatorname{OddOrb}(\sigma)\bigr)\\
+ &=\rho_C(\tau)
+ &&\bigl(\because\ C=\operatorname{OddOrb}(\sigma)\bigr)\\
+ &=\rho_C(\rho_C(\sigma))
+ &&\bigl(\because\ \tau=\rho_C(\sigma)\bigr)\\
+ &=\sigma
+ &&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr).
+\end{aligned}`),
+                paragraph(["これが求める二重反転である。対象集合が空の場合は空集合から自身への唯一の写像となり、入力についての全称命題はそのまま成り立つ。有限集合とその置換だけを扱い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

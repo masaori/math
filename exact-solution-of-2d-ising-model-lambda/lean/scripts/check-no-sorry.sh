@@ -52,6 +52,22 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.oddOrbitDerangements
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_invariant
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_fixed_iff
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_mem
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_twice
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_fixed_iff
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedPredicateReversal_mem
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedPredicateInvolution_twice
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_invariant_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_fixed_iff_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_mem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_twice_from_necSuf
+
   Ising2DLambda.AlgebraicEigenvalue.oddOrbitPoints
   Ising2DLambda.AlgebraicEigenvalue.leastOddOrbitPoint
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit
