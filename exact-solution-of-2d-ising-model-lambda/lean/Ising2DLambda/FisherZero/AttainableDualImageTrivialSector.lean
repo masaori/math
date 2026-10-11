@@ -4,7 +4,6 @@
 二つの包含へそれぞれ用いる。住処は有限集合と N であり、R / C は現れない。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
-import Ising2DLambda.NecSuf.FisherZero.AttainableDualImageTrivialSector
 
 namespace Ising2DLambda.FisherZero
 
@@ -27,13 +26,25 @@ theorem attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets
     attainableDualBrokenEdgeSets L = trivialSectorEdgeSets L := by
   classical
   rw [attainableDualBrokenEdgeSets, trivialSectorEdgeSets]
-  apply Ising2DLambda.NecSuf.FisherZero.image_eq_admissible_filter_necSuf
-  · intro B hB
+  ext A
+  simp only [mem_image, mem_filter, mem_univ, true_and]
+  constructor
+  · rintro ⟨B, hB, hBA⟩
+    -- 順方向: 実現配位を取り出し、本文の二等号でその双対像へ移す。
     rw [attainableBrokenEdgeSets, mem_image] at hB
-    obtain ⟨sigma, _, rfl⟩ := hB
-    change IsInTorusHomologySector L (dualBrokenEdgeSet L sigma) (0, 0)
-    exact ⟨dualBrokenEdgeSet_isEven L sigma, dualBrokenEdgeSet_winding_zero L sigma⟩
-  · intro A hSector
+    obtain ⟨sigma, _, hsigma⟩ := hB
+    have hEven := dualBrokenEdgeSet_isEven L sigma
+    have hWinding := dualBrokenEdgeSet_winding_zero L sigma
+    have hDual : B.image (dualEdgeEquiv L) = dualBrokenEdgeSet L sigma := by
+      calc
+        B.image (dualEdgeEquiv L)
+            = (brokenEdgeSet L sigma).image (dualEdgeEquiv L) := by rw [hsigma]
+        _ = dualBrokenEdgeSet L sigma := rfl
+    -- 偶性と二つの巻き付き偶奇をセクターの定義へ代入する。
+    rw [← hBA, hDual]
+    exact ⟨hEven, hWinding⟩
+  · intro hSector
+    -- 逆方向: 原像数二から非空性を出し、配位を一つ取り出す。
     have hcard := trivialSectorConfiguration_fiber_card_two L A hSector
     have hne : (univ.filter fun sigma : Config L => dualBrokenEdgeSet L sigma = A).Nonempty :=
       card_ne_zero.mp (by omega)
@@ -41,6 +52,9 @@ theorem attainableDualBrokenEdgeSets_eq_trivialSectorEdgeSets
     simp only [mem_filter, mem_univ, true_and] at hsigma
     refine ⟨brokenEdgeSet L sigma, ?_, ?_⟩
     · exact mem_image_of_mem (brokenEdgeSet L) (mem_univ sigma)
-    · simpa only [dualBrokenEdgeSet] using hsigma
+    · calc
+        (brokenEdgeSet L sigma).image (dualEdgeEquiv L)
+            = dualBrokenEdgeSet L sigma := rfl
+        _ = A := hsigma
 
 end Ising2DLambda.FisherZero
