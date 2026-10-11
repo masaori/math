@@ -7146,6 +7146,91 @@ f(g(i))
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_invariant_subset_reversal_iterate",
+        labels: [],
+        title: { text: "不変部分集合上の反転と反復" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_invariant_subset_reversal_iterate",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_finite_map_iteration",
+                title: { text: "有限集合上の写像の反復" },
+                labels: ["def_finite_map_iteration"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate"],
+                verification: ["sagemath/check/invariant-subset-reversal-iterate"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " を固定する。自然数 ", math(String.raw`n\in\mathbb N`), " に対し、写像 ", math(String.raw`\tau^{[n]}:\mathcal J\to\mathcal J`), " を次の再帰で定める。"]),
+                  displayMath(String.raw`\tau^{[0]}(i):=i,\qquad
+\tau^{[n+1]}(i):=\tau^{[n]}(\tau(i))
+\quad(i\in\mathcal J,\ n\in\mathbb N).`),
+                  paragraph(["角括弧付きの上付き文字は写像の合成の回数を表す。零回は何も動かさず、一回増やすには最初の一歩の後に残りの反復を行う。すべての値は有限集合 ", math(String.raw`\mathcal J`), " に属する。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_invariant_subset_reversal_iterate",
+              title: { text: "反転後の反復は内側で逆置換、外側で元の置換の反復に等しい" },
+              labels: ["claim_invariant_subset_reversal_iterate"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_iterate",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.piecewise_iterate_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_iterate_from_necSuf",
+              ],
+              verification: ["sagemath/check/invariant-subset-reversal-iterate"],
+              statement: [
+                paragraph([ref("def_invariant_subset_reversal"), " の有限集合 ", math(String.raw`\mathcal J`), "、部分集合 ", math(String.raw`C\subseteq\mathcal J`), "、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " と不変条件を取る。", ref("claim_invariant_subset_reversal"), " の反転を ", math(String.raw`\rho:=\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と略す。任意の ", math(String.raw`n\in\mathbb N`), " と ", math(String.raw`i\in\mathcal J`), " について、次が成り立つ。"]),
+                displayMath(String.raw`\begin{aligned}
+i\in C&\ \Longrightarrow\ \rho^{[n]}(i)=(\sigma^{-1})^{[n]}(i),\\
+i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
+\end{aligned}`),
+                paragraph(["各反復は ", ref("def_finite_map_iteration"), " の意味である。始点が内側か外側かを決めれば、何歩進めても同じ向きの反復に一致する。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`n\in\mathbb N`), " について、すべての始点 ", math(String.raw`i\in\mathcal J`), " に対する二つの含意を同時に帰納法で示す。零回について、", math(String.raw`i\in C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=(\sigma^{-1})^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=\sigma^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph(["ある ", math(String.raw`n\in\mathbb N`), " について、二つの含意がすべての始点で成り立つと仮定する。任意の ", math(String.raw`i\in\mathcal J`), " を取る。", math(String.raw`i\in C`), " なら、", ref("claim_invariant_subset_reversal"), " の証明で得た逆置換の所属同値により ", math(String.raw`\sigma^{-1}(i)\in C`), " である。従って、この点を始点とする帰納法の仮定を使える。"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{[n+1]}(i)
+&=\rho^{[n]}(\rho(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=\rho^{[n]}(\sigma^{-1}(i))&&\bigl(\because\ i\in C\text{ と }\blkref{def_invariant_subset_reversal}\bigr)\\
+&=(\sigma^{-1})^{[n]}(\sigma^{-1}(i))&&\bigl(\because\ \sigma^{-1}(i)\in C\text{ と帰納法の仮定}\bigr)\\
+&=(\sigma^{-1})^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、", ref("def_invariant_subset_reversal"), " の不変条件より ", math(String.raw`\sigma(i)\notin C`), " である。従って、この点を始点とする帰納法の仮定を使える。"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{[n+1]}(i)
+&=\rho^{[n]}(\rho(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=\rho^{[n]}(\sigma(i))&&\bigl(\because\ i\notin C\text{ と }\blkref{def_invariant_subset_reversal}\bigr)\\
+&=\sigma^{[n]}(\sigma(i))&&\bigl(\because\ \sigma(i)\notin C\text{ と帰納法の仮定}\bigr)\\
+&=\sigma^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph(["以上で帰納法が閉じる。", math(String.raw`\mathcal J=\varnothing`), " なら始点に関する条件は空であり、結論もそのまま成り立つ。有限集合の写像と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
