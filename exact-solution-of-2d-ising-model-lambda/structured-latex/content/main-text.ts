@@ -6771,6 +6771,104 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_qbar_polynomial_pfaffian",
+        labels: [],
+        title: { text: "Pfaffian と平方の二重和展開" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_qbar_polynomial_pfaffian",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_qbar_zero_diagonal_skew_matrix",
+                  kind: "definition",
+                  title: { text: "零対角反対称多項式行列" },
+                  labels: ["def_qbar_zero_diagonal_skew_matrix"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.IsZeroDiagonalSkewQbarPolynomialMatrix"],
+                  verification: ["sagemath/check/qbar-polynomial-pfaffian-square"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。", ref("def_qbar_polynomial_ring"), " の不定元をこの節では ", math(String.raw`x`), " と書く。その多項式を成分とする行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " が零対角反対称であるとは、"]),
+                    displayMath(String.raw`A_{i,i}=0,\qquad A_{j,i}=-A_{i,j}\qquad(i,j\in\mathcal J)`),
+                    paragraph(["を満たすことをいう。すべての成分とその等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で扱う。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_qbar_polynomial_pfaffian",
+                  kind: "definition",
+                  title: { text: "符号付き完全マッチング和としての Pfaffian" },
+                  labels: ["def_qbar_polynomial_pfaffian"],
+                  habitat: "Qbar",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingFintype",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingSignPolynomial",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingMatrixMonomial",
+                    "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian",
+                  ],
+                  verification: ["sagemath/check/qbar-polynomial-pfaffian-square"],
+                  statement: [
+                    paragraph([ref("def_qbar_zero_diagonal_skew_matrix"), " の行列 ", math(String.raw`A`), " を固定する。", ref("def_finite_perfect_matching"), " の完全マッチング全体を ", math(String.raw`\mathcal M:=\mathcal M(\mathcal J)`), " と略す。これは有限集合 ", math(String.raw`\mathcal P(\mathcal P(\mathcal J))`), " の部分集合なので有限である。各 ", math(String.raw`D\in\mathcal M`), " に対し、", ref("def_perfect_matching_enumeration"), " の昇順対全体を ", math(String.raw`E_D:=\{(i,j)\in\mathcal J\times\mathcal J\mid i\prec j,\ \{i,j\}\in D\}`), " と書く。", ref("def_perfect_matching_sign"), " の符号と ", ref("def_qbar_constant_embedding"), " の定数多項式、および包含写像 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " を用いて、"]),
+                    displayMath(String.raw`\begin{gathered}
+c_D:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(D))}\in\overline{\mathbb Q}[x],\qquad
+b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
+\operatorname{Pf}(A):=\sum_{D\in\mathcal M}c_Db_D\in\overline{\mathbb Q}[x]
+\end{gathered}`),
+                    paragraph(["と定め、最後の多項式を Pfaffian と呼ぶ。空積は ", math(String.raw`1`), "、空和は ", math(String.raw`0`), " とする。符号は ", ref("claim_perfect_matching_sign_enumeration_independent"), " によって対の列挙順序に依存せず、積と和も多項式の交換則によって列挙順序に依存しない。ここでは線型順序 ", math(String.raw`\prec`), " 自体は固定している。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "tools_claim_qbar_polynomial_pfaffian_square_expansion",
+              kind: "claim",
+              title: { text: "Pfaffian の平方は順序付きマッチング対の和である" },
+              labels: ["claim_qbar_polynomial_pfaffian_square_expansion"],
+              habitat: "Qbar",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian_sq_eq_sum_matching_pairs",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedSum_mul_self_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian_sq_eq_sum_matching_pairs_from_necSuf",
+              ],
+              verification: ["sagemath/check/qbar-polynomial-pfaffian-square"],
+              statement: [
+                paragraph([ref("def_qbar_polynomial_pfaffian"), " の記号のもとで、"]),
+                displayMath(String.raw`\operatorname{Pf}(A)^2
+=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。和の添字は順序付きの対であり、", math(String.raw`D=E`), " も含む。", math(String.raw`D\ne E`), " のとき ", math(String.raw`(D,E)`), " と ", math(String.raw`(E,D)`), " は別の添字で、それぞれ一度ずつ数える。"]),
+              ],
+              proof: [
+                paragraph(["以下の二重和の ", math(String.raw`D,E`), " は、それぞれ独立に有限集合 ", math(String.raw`\mathcal M`), " 全体を動く。定義を代入し、二回の分配と積の括弧の付け替えを行う。"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{Pf}(A)^2
+ &=\operatorname{Pf}(A)\operatorname{Pf}(A)&&\bigl(\because\ \text{平方の定義}\bigr)\\
+ &=\Bigl(\sum_Dc_Db_D\Bigr)\Bigl(\sum_Ec_Eb_E\Bigr)&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)\\
+ &=\sum_D(c_Db_D)\Bigl(\sum_Ec_Eb_E\Bigr)&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E(c_Db_D)(c_Eb_E)&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E\bigl((c_Db_D)c_E\bigr)b_E&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E\bigl(c_D(b_Dc_E)\bigr)b_E&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E\bigl(c_D(c_Eb_D)\bigr)b_E&&\bigl(\because\ \text{交換則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E\bigl((c_Dc_E)b_D\bigr)b_E&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_D\sum_E(c_Dc_E)(b_Db_E)&&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
+ &=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \text{順序付きの対への再添字付け}\bigr).
+\end{aligned}`),
+                paragraph(["最後の行では、外側で ", math(String.raw`D`), " を選んでから内側で ", math(String.raw`E`), " を選ぶことと、直積の元 ", math(String.raw`(D,E)`), " を選ぶことが一対一に対応する。逆は第一成分と第二成分を読む操作である。したがって項の重複も欠落もなく、係数を半分にする操作は入らない。すべて有限和・有限積であり、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
