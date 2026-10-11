@@ -37,5 +37,45 @@ for a in negative:
                 assert A * A < 2 * B * B
                 checked += 1
 
-assert checked > 0
-print(f"OK: 負の第一係数条件どうしの和を {checked} 組で厳密検査した")
+assert checked == 99856
+print(f"RESULT: PASS (負の第一係数条件どうしの和: {checked} cases)")
+
+from pathlib import Path
+import sys
+qpf_check_dir = Path(__file__).resolve().parent
+if not (qpf_check_dir / '_prelude.sage').is_file():
+    qpf_check_dir = Path(sys.argv[0]).resolve().parent
+qpf_check_names = (
+    "check_sum_representation.sage",
+    "check_first_sum_negative.sage",
+    "check_first_zero_add.sage",
+    "check_second_zero_add.sage",
+    "check_second_sum_positive.sage",
+    "check_first_product_positive.sage",
+    "check_first_product_nonnegative.sage",
+    "check_second_product_positive.sage",
+    "check_cross_positive.sage",
+    "check_cross_nonnegative.sage",
+    "check_first_prime_square_positive.sage",
+    "check_second_square_positive.sage",
+    "check_weighted_second_square_positive.sage",
+    "check_product_square_expand.sage",
+    "check_product_square_left.sage",
+    "check_product_square_right.sage",
+    "check_product_square_fold.sage",
+    "check_cross_comparison.sage",
+    "check_cross_twice.sage",
+    "check_sum_square_expand.sage",
+    "check_sum_square_first.sage",
+    "check_sum_square_cross.sage",
+    "check_sum_square_second.sage",
+    "check_sum_square_fold.sage",
+    "check_cone_membership.sage",
+)
+qpf_check_paths = tuple(qpf_check_dir / name for name in qpf_check_names)
+assert len(qpf_check_paths) == 25
+assert set(qpf_check_paths) == set(qpf_check_dir.glob("check_*.sage"))
+for qpf_check_path in qpf_check_paths:
+    __file__ = str(qpf_check_path)
+    load(__file__)
+print("RESULT: PASS (負の第一係数条件どうしの和: 本文25行すべて通過)")
