@@ -1,4 +1,4 @@
-import Ising2DLambda.FisherZero.OneSLinearlyIndependent
+import Ising2DLambda.FisherZero.OneSLinearlyIndependentFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.QuadraticRepresentationUnique
 
 namespace Ising2DLambda.FisherZero
@@ -13,16 +13,12 @@ theorem quadraticRepresentationUnique_from_necSuf
     (hab : algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s =
       algebraMap ℚ Qbar a' + algebraMap ℚ Qbar b' * s) :
     a = a' ∧ b = b' := by
-  apply Ising2DLambda.NecSuf.FisherZero.quadratic_representation_unique_necSuf
-      (embed := (algebraMap ℚ Qbar).toAddMonoidHom)
-      (smul := fun z t : Qbar => z * t)
-      (s := s)
-  · intro x y t
-    exact add_mul x y t
-  · intro t
-    exact zero_mul t
-  · intro α β hzero
-    exact oneSLinearlyIndependent s hs α β hzero
-  · exact hab
+  exact Ising2DLambda.NecSuf.FisherZero.quadratic_representation_unique_necSuf
+    add_zero neg_add_cancel add_assoc zero_add
+    add_assoc add_comm add_neg_cancel zero_add
+    (algebraMap ℚ Qbar) (map_add (algebraMap ℚ Qbar)) (map_neg (algebraMap ℚ Qbar))
+    (fun z : Qbar => z * s) (fun x y => add_mul x y s) (zero_mul s)
+    (fun α β hzero => oneSLinearlyIndependent_from_necSuf s hs α β hzero)
+    a b a' b' hab
 
 end Ising2DLambda.FisherZero

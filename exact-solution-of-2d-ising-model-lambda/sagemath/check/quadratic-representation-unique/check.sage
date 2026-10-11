@@ -1,11 +1,11 @@
 # 対象ラベル: claim_quadratic_representation_unique
 # 帰属: QQ / QQbar の厳密計算。浮動小数点を使わない。
 
-# 主張（claim_quadratic_representation_unique）: s·s=2 を満たす s ∈ QQbar と
-# 任意の a,b,a',b' ∈ QQ について、a + b·s = a' + b'·s ならば (a,b)=(a',b')。
-# 証明の組み立てを一行ずつ突き合わせる:
+# 主張: ι: QQ -> QQbar、s·s=ι(2) を満たす s ∈ QQbar と
+# 任意の a,b,a',b' ∈ QQ について、ι(a)+ι(b)·s=ι(a')+ι(b')·s ならば (a,b)=(a',b')。
+# 主張全体の有限標本検査。本文28等号の行別検算は末尾の28ファイルで行う。
 #   prep:  α := a+(-a') ∈ QQ、β := b+(-b') ∈ QQ。
-#   chain: α+β·s を十四段の恒等変形で (a+b·s) + ((-b')·s+(-a')) まで運び、
+#   chain: ι(α)+ι(β)·s を恒等変形で二つの表示の差へ運び、
 #          仮定の代入のあと 0 まで落とす。仮定に依存しない段は全標本で、
 #          仮定の代入段は仮定が成り立つ標本でだけ検査する。
 #   apply: α+β·s=0 と claim_one_s_linearly_independent から α=0 かつ β=0。
