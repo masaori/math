@@ -6869,6 +6869,135 @@ b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_qbar_determinant_fixed_points",
+        labels: [],
+        title: { text: "零対角行列の行列式で不動点を持つ項の消去" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_qbar_determinant_fixed_points",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_qbar_determinant_with_empty_index",
+                  kind: "definition",
+                  title: { text: "空の添字集合も許す多項式行列式" },
+                  labels: ["def_qbar_determinant_with_empty_index"],
+                  habitat: "Qbar",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion"],
+                  verification: ["sagemath/check/qbar-determinant-fixed-points"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。全単射 ", math(String.raw`\mathcal J\to\mathcal J`), " の全体を ", math(String.raw`\operatorname{Perm}(\mathcal J)`), " と書く。", ref("def_permutation_sign"), " と同じ式を空集合にも用い、各 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " の転倒数と整数符号を"]),
+                    displayMath(String.raw`\operatorname{inv}(\sigma):=
+\#\{(i,j)\in\mathcal J^2\mid i\prec j,\ \sigma(j)\prec\sigma(i)\}\in\mathbb N,
+\qquad
+\operatorname{sgn}(\sigma):=(-1)^{\operatorname{inv}(\sigma)}\in\mathbb Z`),
+                    paragraph(["と定める。空集合では唯一の空置換の転倒集合が空なので、転倒数は ", math(String.raw`0`), "、符号は ", math(String.raw`1`), " である。", ref("def_qbar_polynomial_ring"), " の不定元を ", math(String.raw`x`), " と書き、行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。包含写像 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " と ", ref("def_qbar_constant_embedding"), " の定数多項式を用いて、"]),
+                    displayMath(String.raw`\det_x(A):=
+\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+\in\overline{\mathbb Q}[x]`),
+                    paragraph(["と定める。空積は ", math(String.raw`1`), "、空和は ", math(String.raw`0`), " とする。空でない ", math(String.raw`\mathcal J`), " では ", ref("def_qbar_polynomial_determinant"), " と同じ定義である。和と積は有限で、値は多項式環の中で閉じる。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_fixed_point_free_permutations",
+                  kind: "definition",
+                  title: { text: "不動点を持たない置換の集合" },
+                  labels: ["def_fixed_point_free_permutations"],
+                  habitat: "N",
+                  lean: ["Ising2DLambda.AlgebraicEigenvalue.fixedPointFreePermutations"],
+                  verification: ["sagemath/check/qbar-determinant-fixed-points"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal J`), " の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " について、", math(String.raw`\sigma(j)=j`), " を満たす ", math(String.raw`j\in\mathcal J`), " を不動点と呼ぶ。不動点を持たない置換の集合を"]),
+                    displayMath(String.raw`\operatorname{Der}(\mathcal J):=
+\{\,\sigma\in\operatorname{Perm}(\mathcal J)\mid
+  \text{すべての }i\in\mathcal J\text{ で }\sigma(i)\ne i\,\}`),
+                    paragraph(["と定める。置換全体の部分集合なので有限である。", math(String.raw`\mathcal J=\varnothing`), " のときも同じ条件を使う。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "tools_claim_qbar_determinant_fixed_points",
+              kind: "claim",
+              title: { text: "零対角行列の行列式は不動点を持たない置換の和である" },
+              labels: ["claim_qbar_determinant_fixed_points"],
+              habitat: "Qbar",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedProduct_zero_of_factor_zero_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedProduct_filter_zero_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree_from_necSuf",
+              ],
+              verification: ["sagemath/check/qbar-determinant-fixed-points"],
+              statement: [
+                paragraph([ref("def_qbar_determinant_with_empty_index"), " の行列 ", math(String.raw`A`), " が ", math(String.raw`A_{i,i}=0`), "（すべての ", math(String.raw`i\in\mathcal J`), "）を満たすとする。各置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " について"]),
+                displayMath(String.raw`c_\sigma:=
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))},
+\qquad
+P_\sigma:=\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+\quad\in\overline{\mathbb Q}[x]`),
+                paragraph(["と略すと、", ref("def_fixed_point_free_permutations"), " の集合により"]),
+                displayMath(String.raw`\det_x(A)=
+\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。空の添字集合を含み、反対称性は仮定しない。"]),
+              ],
+              proof: [
+                paragraph(["補集合 ", math(String.raw`\mathcal F:=\operatorname{Perm}(\mathcal J)\setminus\operatorname{Der}(\mathcal J)`), " の各 ", math(String.raw`\sigma\in\mathcal F`), " は、", ref("def_fixed_point_free_permutations"), " によって不動点 ", math(String.raw`j\in\mathcal J`), " を持つ。一つ取って固定し、残る因子の積を ", math(String.raw`R_{\sigma,j}:=\prod_{i\in\mathcal J\setminus\{j\}}A_{i,\sigma(i)}\in\overline{\mathbb Q}[x]`), " と置く。"]),
+                displayMath(String.raw`\begin{aligned}
+P_\sigma
+ &=A_{j,\sigma(j)}R_{\sigma,j}
+ &&\bigl(\because\ \text{有限積から }j\text{ の因子を取り出す}\bigr)\\
+ &=A_{j,j}R_{\sigma,j}
+ &&\bigl(\because\ \sigma(j)=j\bigr)\\
+ &=0R_{\sigma,j}
+ &&\bigl(\because\ A_{j,j}=0\bigr)\\
+ &=0
+ &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+c_\sigma P_\sigma
+ &=c_\sigma0
+ &&\bigl(\because\ P_\sigma=0\bigr)\\
+ &=0
+ &&\bigl(\because\ \text{零の乗法、}\blkref{def_qbar_polynomial_ring}\bigr).
+\end{aligned}`),
+                paragraph(["置換全体は ", math(String.raw`\operatorname{Der}(\mathcal J)`), " と ", math(String.raw`\mathcal F`), " の重複のない合併である。従って有限和を分けると、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(A)
+ &=\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}c_\sigma P_\sigma
+ &&\bigl(\because\ \blkref{def_qbar_determinant_with_empty_index}\bigr)\\
+ &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
+   +\sum_{\sigma\in\mathcal F}c_\sigma P_\sigma
+ &&\bigl(\because\ \text{重複のない合併で有限和を分ける}\bigr)\\
+ &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
+   +\sum_{\sigma\in\mathcal F}0
+ &&\bigl(\because\ \mathcal F\text{ の各項について直前の等号}\bigr)\\
+ &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma+0
+ &&\bigl(\because\ \text{零の有限和}\bigr)\\
+ &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
+ &&\bigl(\because\ \text{加法の零元、}\blkref{def_qbar_polynomial_ring}\bigr).
+\end{aligned}`),
+                paragraph(["すべての積・和と等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で扱った。実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
