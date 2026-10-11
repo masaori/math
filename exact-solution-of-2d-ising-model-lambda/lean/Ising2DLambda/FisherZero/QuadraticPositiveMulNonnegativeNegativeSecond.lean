@@ -1,9 +1,5 @@
 /-
-「非負係数条件と負の第二係数条件の積」の具体版。
-本文と同じ手順で証明する: 混合符号の排除で a·a ≠ 2·(b·b) を確かめて二場合に分け、
-各場合で片係数の正値を平方比較の背理法で示し、残る係数の符号で
-線形比較を平方へ移して正錐の三条件へ振り分ける。
-本文の u := -b' は、ここでは -(quadraticRepresentation s eta).2 を直接書く。
+本文の係数表示、平方相等の除外、二場合と各符号分岐を同じ中間式で追う独立な具体版。
 -/
 import Ising2DLambda.FisherZero.QuadraticMultiplication
 import Ising2DLambda.FisherZero.RationalSquareNeDoubleSquare
@@ -23,161 +19,267 @@ theorem quadraticPositive_mul_of_nonnegative_negativeSecond
       2 * (quadraticRepresentation s eta).2 * (quadraticRepresentation s eta).2 <
         (quadraticRepresentation s eta).1 * (quadraticRepresentation s eta).1) :
     quadraticMulElement s hs xi eta ∈ quadraticPositiveCone s := by
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
+  let ap : ℚ := (quadraticRepresentation s eta).1
+  let bp : ℚ := (quadraticRepresentation s eta).2
+  let u : ℚ := -bp
+  have ha : 0 ≤ a := hxi.1
+  have hb : 0 ≤ b := hxi.2.1
+  have hap : 0 < ap := heta.1
+  have hbp : bp = -u := (neg_neg bp).symm
+  have hSq : 2 * (u * u) < ap * ap := by
+    calc
+      2 * (u * u) = 2 * ((-bp) * (-bp)) := rfl
+      _ = 2 * (bp * bp) := by rw [neg_mul_neg]
+      _ = 2 * bp * bp := (mul_assoc _ _ _).symm
+      _ < ap * ap := heta.2.2
+  have hA : a * ap + 2 * (b * bp) = a * ap - 2 * (b * u) := by
+    calc
+      a * ap + 2 * (b * bp) = a * ap + 2 * (b * (-u)) := by rw [hbp]
+      _ = a * ap + 2 * (-(b * u)) := by rw [mul_neg b u]
+      _ = a * ap + (-(2 * (b * u))) := by rw [mul_neg]
+      _ = a * ap - 2 * (b * u) := (sub_eq_add_neg _ _).symm
+  have hB : a * bp + b * ap = b * ap - a * u := by
+    calc
+      a * bp + b * ap = a * (-u) + b * ap := by rw [hbp]
+      _ = (-(a * u)) + b * ap := by rw [mul_neg]
+      _ = b * ap + (-(a * u)) := add_comm _ _
+      _ = b * ap - a * u := (sub_eq_add_neg _ _).symm
+  have hUnequal : a * a ≠ 2 * (b * b) := by
+    intro hEq
+    by_cases hb0 : b = 0
+    · have haa : a * a = 0 := by
+        calc
+          a * a = 2 * (b * b) := hEq
+          _ = 2 * (0 * 0) := by rw [hb0]
+          _ = 2 * 0 := by rw [zero_mul]
+          _ = 0 := mul_zero _
+      have ha0 : a = 0 := mul_self_eq_zero.mp haa
+      exact hxi.2.2 (Prod.ext ha0 hb0)
+    · exact rationalSquareNeDoubleSquare a b hb0 hEq
   change quadraticCoefficientPositive
     (quadraticRepresentation s (quadraticMulElement s hs xi eta))
   rw [quadraticRepresentation_mul s hs xi eta]
-  set a := (quadraticRepresentation s xi).1 with ha_def
-  set b := (quadraticRepresentation s xi).2 with hb_def
-  set ap := (quadraticRepresentation s eta).1 with hap_def
-  set bp := (quadraticRepresentation s eta).2 with hbp_def
-  obtain ⟨ha, hb, hNe⟩ := hxi
-  obtain ⟨hap0, hbp0, hSq⟩ := heta
-  -- 本文: 混合符号の排除（claim_rational_square_ne_double_square）により a·a ≠ 2·(b·b)
-  have hUnequal : a * a ≠ 2 * (b * b) := by
-    by_cases hb0 : b = 0
-    · intro hEq
-      have haa : a * a = 0 := by rw [hEq, hb0]; ring
-      exact hNe (Prod.ext (mul_self_eq_zero.mp haa) hb0)
-    · exact rationalSquareNeDoubleSquare a b hb0
-  -- 本文: Q の順序の三分律で二場合に分ける
-  rcases lt_or_gt_of_ne hUnequal with hCaseSecond | hCaseFirst
-  · -- 本文の第二の場合 a·a < 2·(b·b): まず 0 < B を背理法で示す
-    have hbPos : 0 < b := by nlinarith
-    have hBPos : 0 < a * bp + b * ap := by
+  change quadraticCoefficientPositive (a * ap + 2 * (b * bp), a * bp + b * ap)
+  rw [hA, hB]
+  simp only [quadraticCoefficientPositive, mul_assoc]
+  let A := a * ap - 2 * (b * u)
+  let B := b * ap - a * u
+  have hTwo : (0 : ℚ) < 2 := by norm_num
+  rcases lt_or_gt_of_ne hUnequal.symm with hFirst | hSecond
+  · have haNe : a ≠ 0 := by
+      intro ha0
+      have hZero : a * a = 0 := by
+        calc
+          a * a = 0 * 0 := by rw [ha0]
+          _ = 0 := zero_mul _
+      have hBad : 2 * (b * b) < 0 := hZero ▸ hFirst
+      exact (not_lt_of_ge (mul_nonneg hTwo.le (mul_self_nonneg b))) hBad
+    have haPos : 0 < a := lt_of_le_of_ne ha haNe.symm
+    have hAPos : 0 < A := by
       by_contra hNot
-      -- B ≤ 0 なので 0 < b·ap ≤ a·(-bp)
-      have hBLe : b * ap ≤ a * (-bp) := by
-        have := not_lt.mp hNot
-        linarith
-      have haPos : 0 < a := by
-        rcases eq_or_lt_of_le ha with ha0 | haPos
-        · exfalso
-          have hLeZero : b * ap ≤ 0 := by
-            have := hBLe
-            rw [← ha0, zero_mul] at this
-            exact this
-          exact absurd (mul_pos hbPos hap0) (not_lt.mpr hLeZero)
-        · exact haPos
-      -- 本文の鎖: 2·((b·b)·(ap·ap)) = 2·((b·ap)·(b·ap)) ≤ 2·((a·(-bp))·(a·(-bp)))
-      --           = (a·a)·(2·(bp·bp)) < (a·a)·(ap·ap)
-      have hChain : (2 * (b * b)) * (ap * ap) < (a * a) * (ap * ap) := by
-        calc (2 * (b * b)) * (ap * ap)
-            = 2 * ((b * ap) * (b * ap)) := by ring
-          _ ≤ 2 * ((a * (-bp)) * (a * (-bp))) := by
-              have hSqLe : (b * ap) * (b * ap) ≤ (a * (-bp)) * (a * (-bp)) :=
-                mul_self_le_mul_self (mul_nonneg hb (le_of_lt hap0)) hBLe
-              linarith
-          _ = (a * a) * (2 * (bp * bp)) := by ring
-          _ < (a * a) * (ap * ap) :=
-              mul_lt_mul_of_pos_left (by linarith [hSq]) (mul_pos haPos haPos)
-      -- 正因子 ap·ap を消去すると第二の場合に反する
-      have : 2 * (b * b) < a * a :=
-        lt_of_mul_lt_mul_right hChain (by positivity)
-      linarith
-    by_cases hA : 0 ≤ a * ap + 2 * (b * bp)
-    · -- 表示は正錐の非負係数条件を満たす
-      exact Or.inl ⟨hA, le_of_lt hBPos,
-        fun hPair => (ne_of_gt hBPos) (congrArg Prod.snd hPair)⟩
-    · -- A < 0: 本文の C := -A。線形比較 ap·C ≤ (2·(-bp))·B を作る
-      have hANeg : a * ap + 2 * (b * bp) < 0 := lt_of_not_ge hA
-      have hLinear : ap * (-(a * ap + 2 * (b * bp))) ≤
-          (2 * (-bp)) * (a * bp + b * ap) := by
-        have hStep : a * (2 * (bp * bp)) ≤ a * (ap * ap) :=
-          mul_le_mul_of_nonneg_left (by linarith [hSq]) ha
-        nlinarith [hStep]
-      have hLinearNonneg : 0 ≤ ap * (-(a * ap + 2 * (b * bp))) :=
-        mul_nonneg (le_of_lt hap0) (by linarith)
-      -- 本文の平方の鎖: (ap·ap)·(C·C) = (ap·C)² ≤ ((2·(-bp))·B)²
-      --                = (2·(bp·bp))·(2·(B·B)) < (ap·ap)·(2·(B·B))
-      have hSquare : (ap * ap) *
-            ((-(a * ap + 2 * (b * bp))) * (-(a * ap + 2 * (b * bp)))) <
-          (ap * ap) * (2 * ((a * bp + b * ap) * (a * bp + b * ap))) := by
-        calc (ap * ap) *
-              ((-(a * ap + 2 * (b * bp))) * (-(a * ap + 2 * (b * bp))))
-            = (ap * (-(a * ap + 2 * (b * bp)))) *
-                (ap * (-(a * ap + 2 * (b * bp)))) := by ring
-          _ ≤ ((2 * (-bp)) * (a * bp + b * ap)) *
-                ((2 * (-bp)) * (a * bp + b * ap)) :=
-              mul_self_le_mul_self hLinearNonneg hLinear
-          _ = (2 * (bp * bp)) * (2 * ((a * bp + b * ap) * (a * bp + b * ap))) := by
-              ring
-          _ < (ap * ap) * (2 * ((a * bp + b * ap) * (a * bp + b * ap))) := by
-              have hBB : 0 < (a * bp + b * ap) * (a * bp + b * ap) :=
-                mul_pos hBPos hBPos
-              exact mul_lt_mul_of_pos_right (by linarith [hSq]) (by linarith)
-      -- 正因子 ap·ap を消去して A·A < 2·(B·B)（正錐の負の第一係数条件）
-      have hFinal : (-(a * ap + 2 * (b * bp))) * (-(a * ap + 2 * (b * bp))) <
-          2 * ((a * bp + b * ap) * (a * bp + b * ap)) :=
-        lt_of_mul_lt_mul_left hSquare (by positivity)
-      exact Or.inr (Or.inr ⟨hANeg, hBPos, by nlinarith [hFinal]⟩)
-  · -- 本文の第一の場合 2·(b·b) < a·a: まず 0 < A を背理法で示す
-    have haPos : 0 < a := by nlinarith
-    have hAPos : 0 < a * ap + 2 * (b * bp) := by
-      by_contra hNot
-      -- A ≤ 0 なので 0 < a·ap ≤ 2·(b·(-bp))
-      have hALe : a * ap ≤ 2 * (b * (-bp)) := by
-        have := not_lt.mp hNot
-        linarith
-      have hbPos : 0 < b := by
-        rcases eq_or_lt_of_le hb with hb0 | hbPos
-        · exfalso
-          have hLeZero : a * ap ≤ 0 := by
-            have := hALe
-            rw [← hb0] at this
-            simpa using this
-          exact absurd (mul_pos haPos hap0) (not_lt.mpr hLeZero)
-        · exact hbPos
-      -- 本文の鎖: (a·a)·(ap·ap) = (a·ap)·(a·ap) ≤ (2·(b·(-bp)))·(2·(b·(-bp)))
-      --           = (2·(b·b))·(2·(bp·bp)) < (2·(b·b))·(ap·ap)
+      have hALe : a * ap ≤ 2 * (b * u) := sub_nonpos.mp (le_of_not_gt hNot)
+      have hbNe : b ≠ 0 := by
+        intro hb0
+        have hZero : 2 * (b * u) = 0 := by
+          calc
+            2 * (b * u) = 2 * (0 * u) := by rw [hb0]
+            _ = 2 * 0 := by rw [zero_mul]
+            _ = 0 := mul_zero _
+        have hBad : a * ap ≤ 0 := hZero ▸ hALe
+        exact (not_lt_of_ge hBad) (mul_pos haPos hap)
+      have hbPos : 0 < b := lt_of_le_of_ne hb hbNe.symm
       have hChain : (a * a) * (ap * ap) < (2 * (b * b)) * (ap * ap) := by
-        calc (a * a) * (ap * ap)
-            = (a * ap) * (a * ap) := by ring
-          _ ≤ (2 * (b * (-bp))) * (2 * (b * (-bp))) :=
-              mul_self_le_mul_self (mul_nonneg ha (le_of_lt hap0)) hALe
-          _ = (2 * (b * b)) * (2 * (bp * bp)) := by ring
-          _ < (2 * (b * b)) * (ap * ap) := by
-              have hbb : 0 < 2 * (b * b) := by positivity
-              exact mul_lt_mul_of_pos_left (by linarith [hSq]) hbb
-      -- 正因子 ap·ap を消去すると第一の場合に反する
-      have : a * a < 2 * (b * b) :=
-        lt_of_mul_lt_mul_right hChain (by positivity)
-      linarith
-    by_cases hB : 0 ≤ a * bp + b * ap
-    · -- 表示は正錐の非負係数条件を満たす
-      exact Or.inl ⟨le_of_lt hAPos, hB,
+        calc
+          (a * a) * (ap * ap) = a * (a * (ap * ap)) := by simp only [mul_assoc]
+          _ = a * ((a * ap) * ap) := by simp only [mul_assoc]
+          _ = a * ((ap * a) * ap) := by simp only [mul_comm a ap]
+          _ = a * (ap * (a * ap)) := by simp only [mul_assoc]
+          _ = (a * ap) * (a * ap) := by simp only [mul_assoc]
+          _ ≤ (2 * (b * u)) * (2 * (b * u)) := mul_self_le_mul_self (mul_nonneg ha hap.le) hALe
+          _ = 2 * ((b * u) * (2 * (b * u))) := by simp only [mul_assoc]
+          _ = 2 * (((b * u) * 2) * (b * u)) := by simp only [mul_assoc]
+          _ = 2 * ((2 * (b * u)) * (b * u)) := by simp only [mul_comm (b * u) 2]
+          _ = 2 * (2 * ((b * u) * (b * u))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (b * (u * (b * u)))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (b * ((u * b) * u))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (b * ((b * u) * u))) := by simp only [mul_comm u b]
+          _ = 2 * (2 * (b * (b * (u * u)))) := by simp only [mul_assoc]
+          _ = 2 * (2 * ((b * b) * (u * u))) := by simp only [mul_assoc]
+          _ = 2 * ((2 * (b * b)) * (u * u)) := by simp only [mul_assoc]
+          _ = 2 * (((b * b) * 2) * (u * u)) := by simp only [mul_comm 2 (b * b)]
+          _ = 2 * ((b * b) * (2 * (u * u))) := by simp only [mul_assoc]
+          _ = (2 * (b * b)) * (2 * (u * u)) := by simp only [mul_assoc]
+          _ < (2 * (b * b)) * (ap * ap) := mul_lt_mul_of_pos_left hSq (mul_pos hTwo (mul_pos hbPos hbPos))
+      have hOpposite : a * a < 2 * (b * b) :=
+        lt_of_mul_lt_mul_right hChain (mul_self_nonneg ap)
+      exact (not_lt_of_gt hFirst) hOpposite
+    by_cases hBNonneg : 0 ≤ B
+    · exact Or.inl ⟨hAPos.le, hBNonneg,
         fun hPair => (ne_of_gt hAPos) (congrArg Prod.fst hPair)⟩
-    · -- B < 0: 本文の V := -B。線形比較 ap·V ≤ (-bp)·A を作る
-      have hBNeg : a * bp + b * ap < 0 := lt_of_not_ge hB
-      have hLinear : ap * (-(a * bp + b * ap)) ≤
-          (-bp) * (a * ap + 2 * (b * bp)) := by
-        have hStep : b * (2 * (bp * bp)) ≤ b * (ap * ap) :=
-          mul_le_mul_of_nonneg_left (by linarith [hSq]) hb
-        nlinarith [hStep]
-      have hLinearNonneg : 0 ≤ ap * (-(a * bp + b * ap)) :=
-        mul_nonneg (le_of_lt hap0) (by linarith)
-      -- 本文の平方の鎖: (bp·bp)·(2·(V·V)) = (2·(bp·bp))·(V·V) < (ap·ap)·(V·V)
-      --                = (ap·V)² ≤ ((-bp)·A)² = (bp·bp)·(A·A)
-      have hSquare : (bp * bp) *
-            (2 * ((-(a * bp + b * ap)) * (-(a * bp + b * ap)))) <
-          (bp * bp) * ((a * ap + 2 * (b * bp)) * (a * ap + 2 * (b * bp))) := by
-        calc (bp * bp) * (2 * ((-(a * bp + b * ap)) * (-(a * bp + b * ap))))
-            = (2 * (bp * bp)) * ((-(a * bp + b * ap)) * (-(a * bp + b * ap))) := by
-              ring
-          _ < (ap * ap) * ((-(a * bp + b * ap)) * (-(a * bp + b * ap))) := by
-              have hVV : 0 < (-(a * bp + b * ap)) * (-(a * bp + b * ap)) :=
-                mul_pos (by linarith) (by linarith)
-              exact mul_lt_mul_of_pos_right (by linarith [hSq]) hVV
-          _ = (ap * (-(a * bp + b * ap))) * (ap * (-(a * bp + b * ap))) := by
-              ring
-          _ ≤ ((-bp) * (a * ap + 2 * (b * bp))) *
-                ((-bp) * (a * ap + 2 * (b * bp))) :=
-              mul_self_le_mul_self hLinearNonneg hLinear
-          _ = (bp * bp) * ((a * ap + 2 * (b * bp)) * (a * ap + 2 * (b * bp))) := by
-              ring
-      -- 正因子 bp·bp を消去して 2·(B·B) < A·A（正錐の負の第二係数条件）
-      have hFinal : 2 * ((-(a * bp + b * ap)) * (-(a * bp + b * ap))) <
-          (a * ap + 2 * (b * bp)) * (a * ap + 2 * (b * bp)) :=
-        lt_of_mul_lt_mul_left hSquare (mul_self_nonneg bp)
-      exact Or.inr (Or.inl ⟨hAPos, hBNeg, by nlinarith [hFinal]⟩)
+    · have hBNeg : B < 0 := lt_of_not_ge hBNonneg
+      let V := -B
+      have hVPos : 0 < V := neg_pos.mpr hBNeg
+      have hV : V = a * u - b * ap := by
+        calc
+          V = -B := rfl
+          _ = -(b * ap - a * u) := rfl
+          _ = a * u - b * ap := neg_sub _ _
+      have hStep : b * (2 * (u * u)) ≤ b * (ap * ap) :=
+        mul_le_mul_of_nonneg_left hSq.le hb
+      have hLinear : ap * V ≤ u * A := by
+        calc
+          ap * V = ap * (a * u - b * ap) := by rw [hV]
+          _ = ap * (a * u) - ap * (b * ap) := mul_sub _ _ _
+          _ = (ap * a) * u - (ap * b) * ap := by simp only [mul_assoc]
+          _ = (a * ap) * u - (b * ap) * ap := by simp only [mul_comm ap a, mul_comm ap b]
+          _ = a * (ap * u) - b * (ap * ap) := by simp only [mul_assoc]
+          _ = a * (u * ap) - b * (ap * ap) := by simp only [mul_comm ap u]
+          _ ≤ a * (u * ap) - b * (2 * (u * u)) := sub_le_sub_left hStep _
+          _ = (a * u) * ap - (b * 2) * (u * u) := by simp only [mul_assoc]
+          _ = (u * a) * ap - (2 * b) * (u * u) := by simp only [mul_comm a u, mul_comm b 2]
+          _ = u * (a * ap) - 2 * (b * (u * u)) := by simp only [mul_assoc]
+          _ = u * (a * ap) - 2 * ((b * u) * u) := by simp only [mul_assoc]
+          _ = u * (a * ap) - 2 * (u * (b * u)) := by simp only [mul_comm (b * u) u]
+          _ = u * (a * ap) - (2 * u) * (b * u) := by simp only [mul_assoc]
+          _ = u * (a * ap) - (u * 2) * (b * u) := by simp only [mul_comm 2 u]
+          _ = u * (a * ap) - u * (2 * (b * u)) := by simp only [mul_assoc]
+          _ = u * (a * ap - 2 * (b * u)) := (mul_sub _ _ _).symm
+          _ = u * A := rfl
+      have hSquare : (u * u) * (2 * (V * V)) < (u * u) * (A * A) := by
+        calc
+          (u * u) * (2 * (V * V)) = ((u * u) * 2) * (V * V) := by simp only [mul_assoc]
+          _ = (2 * (u * u)) * (V * V) := by simp only [mul_comm (u * u) 2]
+          _ < (ap * ap) * (V * V) := mul_lt_mul_of_pos_right hSq (mul_pos hVPos hVPos)
+          _ = ap * (ap * (V * V)) := by simp only [mul_assoc]
+          _ = ap * ((ap * V) * V) := by simp only [mul_assoc]
+          _ = ap * ((V * ap) * V) := by simp only [mul_comm ap V]
+          _ = ap * (V * (ap * V)) := by simp only [mul_assoc]
+          _ = (ap * V) * (ap * V) := by simp only [mul_assoc]
+          _ ≤ (u * A) * (u * A) := mul_self_le_mul_self (mul_nonneg hap.le hVPos.le) hLinear
+          _ = u * (A * (u * A)) := by simp only [mul_assoc]
+          _ = u * ((A * u) * A) := by simp only [mul_assoc]
+          _ = u * ((u * A) * A) := by simp only [mul_comm A u]
+          _ = u * (u * (A * A)) := by simp only [mul_assoc]
+          _ = (u * u) * (A * A) := by simp only [mul_assoc]
+      have hFinal : 2 * (V * V) < A * A :=
+        lt_of_mul_lt_mul_left hSquare (mul_self_nonneg u)
+      have hResult : 2 * (B * B) < A * A := by
+        calc
+          2 * (B * B) = 2 * ((-B) * (-B)) := by rw [neg_mul_neg]
+          _ = 2 * (V * V) := rfl
+          _ < A * A := hFinal
+      exact Or.inr (Or.inl ⟨hAPos, hBNeg, hResult⟩)
+  · have hbNe : b ≠ 0 := by
+      intro hb0
+      have hZero : 2 * (b * b) = 0 := by
+        calc
+          2 * (b * b) = 2 * (0 * 0) := by rw [hb0]
+          _ = 2 * 0 := by rw [zero_mul]
+          _ = 0 := mul_zero _
+      have hBad : a * a < 0 := hZero ▸ hSecond
+      exact (not_lt_of_ge (mul_self_nonneg a)) hBad
+    have hbPos : 0 < b := lt_of_le_of_ne hb hbNe.symm
+    have hBPos : 0 < B := by
+      by_contra hNot
+      have hBLe : b * ap ≤ a * u := sub_nonpos.mp (le_of_not_gt hNot)
+      have haNe : a ≠ 0 := by
+        intro ha0
+        have hZero : a * u = 0 := by
+          calc
+            a * u = 0 * u := by rw [ha0]
+            _ = 0 := zero_mul _
+        have hBad : b * ap ≤ 0 := hZero ▸ hBLe
+        exact (not_lt_of_ge hBad) (mul_pos hbPos hap)
+      have haPos : 0 < a := lt_of_le_of_ne ha haNe.symm
+      have hSquareLe : (b * ap) * (b * ap) ≤ (a * u) * (a * u) :=
+        mul_self_le_mul_self (mul_nonneg hb hap.le) hBLe
+      have hChain : (2 * (b * b)) * (ap * ap) < (a * a) * (ap * ap) := by
+        calc
+          (2 * (b * b)) * (ap * ap) = 2 * ((b * b) * (ap * ap)) := by simp only [mul_assoc]
+          _ = 2 * (b * (b * (ap * ap))) := by simp only [mul_assoc]
+          _ = 2 * (b * ((b * ap) * ap)) := by simp only [mul_assoc]
+          _ = 2 * (b * ((ap * b) * ap)) := by simp only [mul_comm b ap]
+          _ = 2 * (b * (ap * (b * ap))) := by simp only [mul_assoc]
+          _ = 2 * ((b * ap) * (b * ap)) := by simp only [mul_assoc]
+          _ ≤ 2 * ((a * u) * (a * u)) := mul_le_mul_of_nonneg_left hSquareLe hTwo.le
+          _ = 2 * (a * (u * (a * u))) := by simp only [mul_assoc]
+          _ = 2 * (a * ((u * a) * u)) := by simp only [mul_assoc]
+          _ = 2 * (a * ((a * u) * u)) := by simp only [mul_comm u a]
+          _ = 2 * (a * (a * (u * u))) := by simp only [mul_assoc]
+          _ = 2 * ((a * a) * (u * u)) := by simp only [mul_assoc]
+          _ = (2 * (a * a)) * (u * u) := by simp only [mul_assoc]
+          _ = ((a * a) * 2) * (u * u) := by simp only [mul_comm 2 (a * a)]
+          _ = (a * a) * (2 * (u * u)) := by simp only [mul_assoc]
+          _ < (a * a) * (ap * ap) := mul_lt_mul_of_pos_left hSq (mul_pos haPos haPos)
+      have hOpposite : 2 * (b * b) < a * a :=
+        lt_of_mul_lt_mul_right hChain (mul_self_nonneg ap)
+      exact (not_lt_of_gt hSecond) hOpposite
+    by_cases hANonneg : 0 ≤ A
+    · exact Or.inl ⟨hANonneg, hBPos.le,
+        fun hPair => (ne_of_gt hBPos) (congrArg Prod.snd hPair)⟩
+    · have hANeg : A < 0 := lt_of_not_ge hANonneg
+      let C := -A
+      have hCPos : 0 < C := neg_pos.mpr hANeg
+      have hC : C = 2 * (b * u) - a * ap := by
+        calc
+          C = -A := rfl
+          _ = -(a * ap - 2 * (b * u)) := rfl
+          _ = 2 * (b * u) - a * ap := neg_sub _ _
+      have hStep : a * (2 * (u * u)) ≤ a * (ap * ap) :=
+        mul_le_mul_of_nonneg_left hSq.le ha
+      have hLinear : ap * C ≤ (2 * u) * B := by
+        calc
+          ap * C = ap * (2 * (b * u) - a * ap) := by rw [hC]
+          _ = ap * (2 * (b * u)) - ap * (a * ap) := mul_sub _ _ _
+          _ = (ap * 2) * (b * u) - (ap * a) * ap := by simp only [mul_assoc]
+          _ = (2 * ap) * (b * u) - (a * ap) * ap := by simp only [mul_comm ap 2, mul_comm ap a]
+          _ = 2 * (ap * (b * u)) - a * (ap * ap) := by simp only [mul_assoc]
+          _ = 2 * ((ap * b) * u) - a * (ap * ap) := by simp only [mul_assoc]
+          _ = 2 * ((b * ap) * u) - a * (ap * ap) := by simp only [mul_comm ap b]
+          _ = 2 * (b * (ap * u)) - a * (ap * ap) := by simp only [mul_assoc]
+          _ = 2 * (b * (u * ap)) - a * (ap * ap) := by simp only [mul_comm ap u]
+          _ ≤ 2 * (b * (u * ap)) - a * (2 * (u * u)) := sub_le_sub_left hStep _
+          _ = 2 * ((b * u) * ap) - (a * 2) * (u * u) := by simp only [mul_assoc]
+          _ = 2 * ((u * b) * ap) - (2 * a) * (u * u) := by simp only [mul_comm b u, mul_comm a 2]
+          _ = (2 * (u * b)) * ap - 2 * (a * (u * u)) := by simp only [mul_assoc]
+          _ = ((2 * u) * b) * ap - 2 * ((a * u) * u) := by simp only [mul_assoc]
+          _ = (2 * u) * (b * ap) - 2 * ((a * u) * u) := by simp only [mul_assoc]
+          _ = (2 * u) * (b * ap) - 2 * (u * (a * u)) := by simp only [mul_comm (a * u) u]
+          _ = (2 * u) * (b * ap) - (2 * u) * (a * u) := by simp only [mul_assoc]
+          _ = (2 * u) * (b * ap - a * u) := (mul_sub _ _ _).symm
+          _ = (2 * u) * B := rfl
+      have hSquare : (ap * ap) * (C * C) < (ap * ap) * (2 * (B * B)) := by
+        calc
+          (ap * ap) * (C * C) = ap * (ap * (C * C)) := by simp only [mul_assoc]
+          _ = ap * ((ap * C) * C) := by simp only [mul_assoc]
+          _ = ap * ((C * ap) * C) := by simp only [mul_comm ap C]
+          _ = ap * (C * (ap * C)) := by simp only [mul_assoc]
+          _ = (ap * C) * (ap * C) := by simp only [mul_assoc]
+          _ ≤ ((2 * u) * B) * ((2 * u) * B) := mul_self_le_mul_self (mul_nonneg hap.le hCPos.le) hLinear
+          _ = (2 * (u * B)) * (2 * (u * B)) := by simp only [mul_assoc]
+          _ = 2 * ((u * B) * (2 * (u * B))) := by simp only [mul_assoc]
+          _ = 2 * (((u * B) * 2) * (u * B)) := by simp only [mul_assoc]
+          _ = 2 * ((2 * (u * B)) * (u * B)) := by simp only [mul_comm (u * B) 2]
+          _ = 2 * (2 * ((u * B) * (u * B))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (u * (B * (u * B)))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (u * ((B * u) * B))) := by simp only [mul_assoc]
+          _ = 2 * (2 * (u * ((u * B) * B))) := by simp only [mul_comm B u]
+          _ = 2 * (2 * (u * (u * (B * B)))) := by simp only [mul_assoc]
+          _ = 2 * (2 * ((u * u) * (B * B))) := by simp only [mul_assoc]
+          _ = 2 * ((2 * (u * u)) * (B * B)) := by simp only [mul_assoc]
+          _ = 2 * (((u * u) * 2) * (B * B)) := by simp only [mul_comm 2 (u * u)]
+          _ = 2 * ((u * u) * (2 * (B * B))) := by simp only [mul_assoc]
+          _ = (2 * (u * u)) * (2 * (B * B)) := by simp only [mul_assoc]
+          _ < (ap * ap) * (2 * (B * B)) := mul_lt_mul_of_pos_right hSq (mul_pos hTwo (mul_pos hBPos hBPos))
+      have hFinal : C * C < 2 * (B * B) :=
+        lt_of_mul_lt_mul_left hSquare (mul_self_nonneg ap)
+      have hResult : A * A < 2 * (B * B) := by
+        calc
+          A * A = (-A) * (-A) := (neg_mul_neg _ _).symm
+          _ = C * C := rfl
+          _ < 2 * (B * B) := hFinal
+      exact Or.inr (Or.inr ⟨hANeg, hBPos, hResult⟩)
 
 end Ising2DLambda.FisherZero
