@@ -35119,28 +35119,43 @@ b
                   lean: ["Ising2DLambda.FisherZero.quadraticFieldSet"],
                   statement: [
                     paragraph([
-                      math(String.raw`s\in\overline{\mathbb{Q}}`),
+                      "包含写像を ",
+                      math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
                       "（",
                       ref("def_algebraic_numbers"),
-                      "）を ",
-                      math(String.raw`s\cdot s=2`),
+                      "）と書く。",
+                      math(String.raw`s\in\overline{\mathbb{Q}}`),
+                      " を ",
+                      math(String.raw`s\cdot s=\iota(2)`),
                       " を満たす元とする（",
                       ref("claim_sqrt_two_exists"),
-                      "。",
-                      math(String.raw`2:=1+1`),
+                      "。ここで ",
+                      math(String.raw`2\in\mathbb Q`),
                       "）。集合",
                     ]),
                     displayMath(
-                      String.raw`Q_s:=\{\xi\in\overline{\mathbb{Q}}\mid \text{ある}\ a\in\mathbb{Q}\ \text{とある}\ b\in\mathbb{Q}\ \text{が存在して}\ \xi=a+b\cdot s\}`,
+                      String.raw`Q_s:=\left\{
+  \xi\in\overline{\mathbb Q}\ \middle|\,
+  \begin{gathered}
+    \text{ある }(a,b)\in\mathbb Q\times\mathbb Q\text{ が存在して}\\
+    \xi=\iota(a)+\iota(b)\cdot s
+  \end{gathered}
+\right\}`,
                     ),
                     paragraph([
-                      "を定める。ここで ",
+                      "を定める。係数 ",
                       math(String.raw`a`),
                       "、",
                       math(String.raw`b`),
-                      " は部分体 ",
-                      math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                      " の元として扱い、加法・積は ",
+                      " は ",
+                      math(String.raw`\mathbb Q`),
+                      " の元であり、その像 ",
+                      math(String.raw`\iota(a)`),
+                      "、",
+                      math(String.raw`\iota(b)`),
+                      " と ",
+                      math(String.raw`s`),
+                      " の加法・積は ",
                       math(String.raw`\overline{\mathbb{Q}}`),
                       " のものである（",
                       ref("def_algebraic_numbers"),
@@ -35183,9 +35198,14 @@ b
                       ],
                       statement: [
                         paragraph([
+                          "包含 ",
+                          math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          "（",
+                          ref("def_algebraic_numbers"),
+                          "）を用いる。",
                           math(String.raw`s\in\overline{\mathbb{Q}}`),
                           " を ",
-                          math(String.raw`s\cdot s=2`),
+                          math(String.raw`s\cdot s=\iota(2)`),
                           " を満たす元とする（",
                           ref("claim_sqrt_two_exists"),
                           "）。任意の ",
@@ -35193,13 +35213,13 @@ b
                           "（",
                           ref("def_quadratic_field_set"),
                           "）について、",
-                          math(String.raw`\xi=a+b\cdot s`),
+                          math(String.raw`\xi=\iota(a)+\iota(b)\cdot s`),
                           " を満たす ",
                           math(String.raw`a\in\mathbb{Q}`),
                           "、",
                           math(String.raw`b\in\mathbb{Q}`),
                           " の組 ",
-                          math(String.raw`(a,b)`),
+                          math(String.raw`(a,b)\in\mathbb Q\times\mathbb Q`),
                           " は、",
                           ref("def_quadratic_field_set"),
                           " の存在条件によって少なくとも一つあり、",
@@ -35207,7 +35227,11 @@ b
                           " によってちょうど一つである。そこで写像",
                         ]),
                         displayMath(
-                          String.raw`\mathrm{rep}_s:Q_s\to\mathbb{Q}\times\mathbb{Q},\qquad \mathrm{rep}_s(\xi):=(a,b)\ \text{（}\xi=a+b\cdot s\ \text{を満たす唯一の組）}`,
+                          String.raw`\begin{gathered}
+\mathrm{rep}_s:Q_s\to\mathbb Q\times\mathbb Q,\qquad
+\mathrm{rep}_s(\xi):=(a,b)\\
+\text{（}\xi=\iota(a)+\iota(b)\cdot s\text{ を満たす唯一の組）}
+\end{gathered}`,
                         ),
                         paragraph([
                           "を定める。一意性が先に立っているので、この写像は well-defined である（",
@@ -35236,9 +35260,14 @@ b
                   ],
                   statement: [
                     paragraph([
+                      "包含 ",
+                      math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                      "（",
+                      ref("def_algebraic_numbers"),
+                      "）を用いる。",
                       math(String.raw`s\in\overline{\mathbb{Q}}`),
                       " を ",
-                      math(String.raw`s\cdot s=2`),
+                      math(String.raw`s\cdot s=\iota(2)`),
                       " を満たす元とする（",
                       ref("claim_sqrt_two_exists"),
                       "）。",
@@ -35248,7 +35277,7 @@ b
                       "）が",
                       math(String.raw`\textbf{正}`),
                       "であるとは、",
-                      math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+                      math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
                       "（",
                       ref("def_quadratic_representation_map"),
                       "）が次の三つの条件のうち少なくとも一つを満たすことをいう",
@@ -35391,11 +35420,14 @@ b
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          "包含 ",
+                          math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
                           "（",
                           ref("def_algebraic_numbers"),
-                          "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          "）を用いる。",
+                          math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          " を ",
+                          math(String.raw`s\cdot s=\iota(2)`),
                           " を満たす元とする（",
                           ref("claim_sqrt_two_exists"),
                           "）。",

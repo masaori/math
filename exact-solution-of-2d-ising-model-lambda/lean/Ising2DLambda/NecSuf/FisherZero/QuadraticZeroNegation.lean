@@ -6,11 +6,24 @@ import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 
+/-- `claim_quadratic_zero_mem` の四等号と所属の証人。
+最初の行には零同士の和、次の行には固定した根への右乗法の零保存、
+残る二行には係数写像の零保存だけが必要である。
+加法の結合則・可換則、係数の演算、写像の単射性、根の平方条件は使わない。 -/
 theorem zero_mem_necSuf
-    {A K : Type} (zeroA : A) (zeroK : K) (combine : A → A → K)
-    (hzero : zeroK = combine zeroA zeroA) :
-    ∃ a b : A, zeroK = combine a b := by
-  exact ⟨zeroA, zeroA, hzero⟩
+    {A K : Type*} [Zero A] [Zero K] [Add K]
+    (hZeroAddZero : (0 : K) + 0 = 0)
+    (embed : A → K) (hEmbedZero : embed 0 = 0)
+    (rightMul : K → K) (hRightMulZero : rightMul 0 = 0) :
+    ∃ a b : A, (0 : K) = embed a + rightMul (embed b) := by
+  refine ⟨0, 0, ?_⟩
+  calc
+    (0 : K) = 0 + 0 := hZeroAddZero.symm
+    _ = 0 + rightMul 0 := congrArg ((0 : K) + ·) hRightMulZero.symm
+    _ = embed 0 + rightMul 0 :=
+      congrArg (· + rightMul 0) hEmbedZero.symm
+    _ = embed 0 + rightMul (embed 0) :=
+      congrArg (fun z : K => embed 0 + rightMul z) hEmbedZero.symm
 
 /-- 表示の仕様、零との等式、零の表示、一意性の順で具体版と同じ鎖をたどる。
 具体版の零の四則は `hzero` にまとめ、既存の一意性の入力形式へ戻す段を明示する。 -/

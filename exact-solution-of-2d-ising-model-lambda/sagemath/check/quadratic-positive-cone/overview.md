@@ -7,7 +7,7 @@
 （同じ検証で `def_quadratic_field_set`・`def_quadratic_representation_map`・
 `remark_positive_cone_sign_choice` の内容も見る。）
 
-- 実行日: 2026-08-13
+- 実行日: 2026-10-11
 - 結果: 通過（三条件と正値性の一致 361 組、根の取り替えの恒等式 722 組、
   表示の一意性の対偶 1200 組を厳密検査した）
 - 帰属: `QQ` / `QQbar` / `AA`（実代数的数）の厳密計算。浮動小数点は使わない。
