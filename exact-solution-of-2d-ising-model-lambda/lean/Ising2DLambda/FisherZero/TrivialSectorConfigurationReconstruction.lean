@@ -187,8 +187,44 @@ theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edg
     _ = 0 := by
       rw [Nat.cast_mul, show ((2 : ℕ) : ZMod 2) = 0 from rfl, zero_mul]
 
-/-- 人手証明の二周期の等式。自明セクターの二つの巻き付き偶奇を、復元した辺集合の
-縦向き周期閉路と横向き周期閉路へ双対辺写像の逆写像で戻す。 -/
+/-- 境界の辺番号が単射なら、自然数値の指示子の和は境界との共通部分の個数になる。
+本文の「境界集合と辺番号の単射性」の一行で使う有限和の再添字付けである。 -/
+lemma reconstruction_boundary_indicator_sum_count (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (boundary : ZMod L → Edge L)
+    (hinj : Function.Injective boundary) :
+    (∑ i : ZMod L, if boundary i ∈ A then (1 : ℕ) else 0) =
+      (A ∩ Finset.univ.image boundary).card := by
+  classical
+  calc
+    (∑ i : ZMod L, if boundary i ∈ A then (1 : ℕ) else 0) =
+        ∑ e ∈ Finset.univ.image boundary, if e ∈ A then (1 : ℕ) else 0 :=
+      (Finset.sum_image (s := Finset.univ)
+        (f := fun e : Edge L => if e ∈ A then (1 : ℕ) else 0) hinj.injOn).symm
+    _ = ((Finset.univ.image boundary).filter (· ∈ A)).card := by
+      rw [Finset.sum_boole, Nat.cast_id]
+    _ = (A ∩ Finset.univ.image boundary).card := by
+      congr 1
+      ext e
+      simp only [Finset.mem_filter, Finset.mem_inter, and_comm]
+
+/-- `Fin 2` で定義した巻き数を、自然数値の指示子の和を二で割った余りへ戻す。
+値写像を明示するので、自然数と剰余類を同じ記号で往復しない。 -/
+lemma reconstruction_boundary_parity_val (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (boundary : ZMod L → Edge L) :
+    (∑ i : ZMod L, if boundary i ∈ A then (1 : Fin 2) else 0).val =
+      (∑ i : ZMod L, if boundary i ∈ A then (1 : ℕ) else 0) % 2 := by
+  classical
+  have hcast :
+      (((∑ i : ZMod L, if boundary i ∈ A then (1 : ℕ) else 0) : ℕ) : ZMod 2) =
+        ∑ i : ZMod L, if boundary i ∈ A then 1 else 0 := by
+    simp only [Nat.cast_sum, Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+  calc
+    _ = ((((∑ i : ZMod L, if boundary i ∈ A then (1 : ℕ) else 0) : ℕ) : ZMod 2)).val :=
+      congrArg (fun z : ZMod 2 => z.val) hcast.symm
+    _ = _ := ZMod.val_natCast 2 _
+
+/-- 人手証明の二周期の等式。自然数値の指示子、境界との共通部分の個数、巻き数の値を
+明示し、二方向をそれぞれ本文の十等号で示す。必要十分版は呼ばない。 -/
 theorem reconstructedEdgeSet_winding_equations (L : ℕ) [NeZero L]
     (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
     (∑ i : ZMod L,
@@ -196,51 +232,75 @@ theorem reconstructedEdgeSet_winding_equations (L : ℕ) [NeZero L]
     (∑ j : ZMod L,
       (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 := by
   classical
+  let a (e : Edge L) : ℕ := if e ∈ A then 1 else 0
+  let q (e : Edge L) : ℕ := if e ∈ reconstructedEdgeSet L A then 1 else 0
+  let Ch : Finset (Edge L) := Finset.univ.image (fun i : ZMod L => edgeOfRow L false i (-1))
+  let Cv : Finset (Edge L) := Finset.univ.image (fun j : ZMod L => edgeOfRow L true (-1) j)
+  have hindicator (e : Edge L) : a e = q ((dualEdgeEquiv L).symm e) := by
+    simp only [a, q, mem_reconstructedEdgeSet_iff, Equiv.apply_symm_apply]
   have hHorizontal : horizontalWindingParity L A = 0 := congrArg Prod.fst hSector.2
   have hVertical : verticalWindingParity L A = 0 := congrArg Prod.snd hSector.2
-  rw [← image_reconstructedEdgeSet L A] at hHorizontal hVertical
-  -- 本文の自然数値の巻き付き偶奇を π₂ で写す計算。Fin 2 と ZMod 2 は定義上同じ型。
-  change (∑ i : ZMod L,
-    (if edgeOfRow L false i (-1) ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
-      then 1 else 0) : ZMod 2) = 0 at hHorizontal
-  change (∑ j : ZMod L,
-    (if edgeOfRow L true (-1) j ∈ (reconstructedEdgeSet L A).image (dualEdgeEquiv L)
-      then 1 else 0) : ZMod 2) = 0 at hVertical
-  -- 本文の境界指示子→逆像指示子→逆写像の座標式。
-  simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_horizontal] at hHorizontal
-  simp only [mem_image_dualEdgeEquiv_iff, dualEdgeEquiv_symm_vertical] at hVertical
-  -- 本文の二方向の基準周期和：巡回添字を一つ戻し、上で得た零性を代入する。
+  have hhinj : Function.Injective (fun i : ZMod L => edgeOfRow L false i (-1)) := by
+    intro i j h
+    have he := congrArg (fun e => (boundary0 L e).1) h
+    simpa only [edgeOfRow_boundary0] using he
+  have hvinj : Function.Injective (fun j : ZMod L => edgeOfRow L true (-1) j) := by
+    intro i j h
+    have he := congrArg (fun e => (boundary0 L e).2) h
+    simpa only [edgeOfRow_boundary0] using he
+  have hhcount : (∑ i : ZMod L, a (edgeOfRow L false i (-1))) = (A ∩ Ch).card :=
+    reconstruction_boundary_indicator_sum_count L A _ hhinj
+  have hvcount : (∑ j : ZMod L, a (edgeOfRow L true (-1) j)) = (A ∩ Cv).card :=
+    reconstruction_boundary_indicator_sum_count L A _ hvinj
+  have hhparity : (A ∩ Ch).card % 2 = (horizontalWindingParity L A).val := by
+    calc
+      (A ∩ Ch).card % 2 = (∑ i : ZMod L, a (edgeOfRow L false i (-1))) % 2 :=
+        congrArg (· % 2) hhcount.symm
+      _ = (horizontalWindingParity L A).val :=
+        (reconstruction_boundary_parity_val L A _).symm
+  have hvparity : (A ∩ Cv).card % 2 = (verticalWindingParity L A).val := by
+    calc
+      (A ∩ Cv).card % 2 = (∑ j : ZMod L, a (edgeOfRow L true (-1) j)) % 2 :=
+        congrArg (· % 2) hvcount.symm
+      _ = (verticalWindingParity L A).val :=
+        (reconstruction_boundary_parity_val L A _).symm
   constructor
   · calc
-      (∑ i : ZMod L,
-          (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
-        ∑ i : ZMod L,
-          (if edgeOfRow L true (i - 1) (-1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
-            symm
-            exact Fintype.sum_bijective (Equiv.addRight (-1)) (Equiv.addRight (-1)).bijective
-              (fun i : ZMod L =>
-                (if edgeOfRow L true (i - 1) (-1) ∈ reconstructedEdgeSet L A then 1 else 0 :
-                  ZMod 2))
-              (fun i : ZMod L =>
-                (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0 :
-                  ZMod 2))
-              (fun _ => by simp [sub_eq_add_neg])
-      _ = 0 := hHorizontal
+      _ = ∑ i : ZMod L, (q (edgeOfRow L true i (-1)) : ZMod 2) := by
+        simp only [q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+      _ = ((∑ i : ZMod L, q (edgeOfRow L true i (-1)) : ℕ) : ZMod 2) := by
+        rw [Nat.cast_sum]
+      _ = ((∑ i : ZMod L, q (edgeOfRow L true (i - 1) (-1)) : ℕ) : ZMod 2) :=
+        congrArg (fun n : ℕ => (n : ZMod 2))
+          (Equiv.sum_comp (Equiv.subRight (1 : ZMod L)) (fun i => q (edgeOfRow L true i (-1)))).symm
+      _ = ((∑ i : ZMod L, q ((dualEdgeEquiv L).symm (edgeOfRow L false i (-1))) : ℕ) : ZMod 2) := by
+        simp only [dualEdgeEquiv_symm_horizontal]
+      _ = ((∑ i : ZMod L, a (edgeOfRow L false i (-1)) : ℕ) : ZMod 2) := by
+        simp only [hindicator]
+      _ = ((A ∩ Ch).card : ZMod 2) := congrArg (fun n : ℕ => (n : ZMod 2)) hhcount
+      _ = (((A ∩ Ch).card % 2 : ℕ) : ZMod 2) := (ZMod.natCast_mod _ 2).symm
+      _ = ((horizontalWindingParity L A).val : ZMod 2) :=
+        congrArg (fun n : ℕ => (n : ZMod 2)) hhparity
+      _ = ((0 : ℕ) : ZMod 2) := by rw [hHorizontal]; rfl
+      _ = 0 := Nat.cast_zero
   · calc
-      (∑ j : ZMod L,
-          (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
-        ∑ j : ZMod L,
-          (if edgeOfRow L false (-1) (j - 1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
-            symm
-            exact Fintype.sum_bijective (Equiv.addRight (-1)) (Equiv.addRight (-1)).bijective
-              (fun j : ZMod L =>
-                (if edgeOfRow L false (-1) (j - 1) ∈ reconstructedEdgeSet L A then 1 else 0 :
-                  ZMod 2))
-              (fun j : ZMod L =>
-                (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0 :
-                  ZMod 2))
-              (fun _ => by simp [sub_eq_add_neg])
-      _ = 0 := hVertical
+      _ = ∑ j : ZMod L, (q (edgeOfRow L false (-1) j) : ZMod 2) := by
+        simp only [q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+      _ = ((∑ j : ZMod L, q (edgeOfRow L false (-1) j) : ℕ) : ZMod 2) := by
+        rw [Nat.cast_sum]
+      _ = ((∑ j : ZMod L, q (edgeOfRow L false (-1) (j - 1)) : ℕ) : ZMod 2) :=
+        congrArg (fun n : ℕ => (n : ZMod 2))
+          (Equiv.sum_comp (Equiv.subRight (1 : ZMod L)) (fun j => q (edgeOfRow L false (-1) j))).symm
+      _ = ((∑ j : ZMod L, q ((dualEdgeEquiv L).symm (edgeOfRow L true (-1) j)) : ℕ) : ZMod 2) := by
+        simp only [dualEdgeEquiv_symm_vertical]
+      _ = ((∑ j : ZMod L, a (edgeOfRow L true (-1) j) : ℕ) : ZMod 2) := by
+        simp only [hindicator]
+      _ = ((A ∩ Cv).card : ZMod 2) := congrArg (fun n : ℕ => (n : ZMod 2)) hvcount
+      _ = (((A ∩ Cv).card % 2 : ℕ) : ZMod 2) := (ZMod.natCast_mod _ 2).symm
+      _ = ((verticalWindingParity L A).val : ZMod 2) :=
+        congrArg (fun n : ℕ => (n : ZMod 2)) hvparity
+      _ = ((0 : ℕ) : ZMod 2) := by rw [hVertical]; rfl
+      _ = 0 := Nat.cast_zero
 
 /-- 人手証明の行和・列和の等式。格子面の等式を一周期にわたって足し、添字を一つ
 ずらした有限和を同じ有限和へ戻す。 -/

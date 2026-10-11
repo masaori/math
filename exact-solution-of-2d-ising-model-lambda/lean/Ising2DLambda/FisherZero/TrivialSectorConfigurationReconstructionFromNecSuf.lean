@@ -1,5 +1,5 @@
 /-
-配位復元の面等式・スピン値域・行和と列和の不変性・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元の面等式・基準の巻き数・スピン値域・行和と列和の不変性・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -32,6 +32,71 @@ theorem reconstructedEdgeSet_face_equation_from_necSuf (L : ℕ) [NeZero L]
       (q (edgeOfRow L true i (j + 1))) (q (edgeOfRow L false (i + 1) j))
       (edgeSubsetIncidenceCount L A (i + 1, j + 1)) k
       (reconstructedEdgeSet_face_incidence_count L A i j) hk (hdouble _)
+
+/-- 基準周期和の十等号へ、双対逆写像の座標式・自然数値の境界計数・巻き数零を渡す。
+具体版の巻き数等式は呼ばず、二方向の仮定を実際の辺集合で埋める。 -/
+theorem reconstructedEdgeSet_winding_equations_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∑ i : ZMod L,
+      (if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 ∧
+    (∑ j : ZMod L,
+      (if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let a (e : Edge L) : ℕ := if e ∈ A then 1 else 0
+  let q (e : Edge L) : ℕ := if e ∈ reconstructedEdgeSet L A then 1 else 0
+  let Ch : Finset (Edge L) := Finset.univ.image (fun i : ZMod L => edgeOfRow L false i (-1))
+  let Cv : Finset (Edge L) := Finset.univ.image (fun j : ZMod L => edgeOfRow L true (-1) j)
+  have hindicator (e : Edge L) : a e = q ((dualEdgeEquiv L).symm e) := by
+    simp only [a, q, mem_reconstructedEdgeSet_iff, Equiv.apply_symm_apply]
+  have hHorizontal : horizontalWindingParity L A = 0 := congrArg Prod.fst hSector.2
+  have hVertical : verticalWindingParity L A = 0 := congrArg Prod.snd hSector.2
+  have hhinj : Function.Injective (fun i : ZMod L => edgeOfRow L false i (-1)) := by
+    intro i j h
+    have he := congrArg (fun e => (boundary0 L e).1) h
+    simpa only [edgeOfRow_boundary0] using he
+  have hvinj : Function.Injective (fun j : ZMod L => edgeOfRow L true (-1) j) := by
+    intro i j h
+    have he := congrArg (fun e => (boundary0 L e).2) h
+    simpa only [edgeOfRow_boundary0] using he
+  have hhcount : (∑ i : ZMod L, a (edgeOfRow L false i (-1))) = (A ∩ Ch).card :=
+    reconstruction_boundary_indicator_sum_count L A _ hhinj
+  have hvcount : (∑ j : ZMod L, a (edgeOfRow L true (-1) j)) = (A ∩ Cv).card :=
+    reconstruction_boundary_indicator_sum_count L A _ hvinj
+  have hhparity : (A ∩ Ch).card % 2 = (horizontalWindingParity L A).val := by
+    calc
+      (A ∩ Ch).card % 2 = (∑ i : ZMod L, a (edgeOfRow L false i (-1))) % 2 :=
+        congrArg (· % 2) hhcount.symm
+      _ = (horizontalWindingParity L A).val :=
+        (reconstruction_boundary_parity_val L A _).symm
+  have hvparity : (A ∩ Cv).card % 2 = (verticalWindingParity L A).val := by
+    calc
+      (A ∩ Cv).card % 2 = (∑ j : ZMod L, a (edgeOfRow L true (-1) j)) % 2 :=
+        congrArg (· % 2) hvcount.symm
+      _ = (verticalWindingParity L A).val :=
+        (reconstruction_boundary_parity_val L A _).symm
+  constructor
+  · exact Ising2DLambda.NecSuf.FisherZero.winding_sum_zero_necSuf
+      (Nat.castAddMonoidHom (ZMod 2)) (Equiv.subRight (1 : ZMod L))
+      (fun i => edgeOfRow L true i (-1)) (fun i => edgeOfRow L false i (-1))
+      (dualEdgeEquiv L).symm q a
+      (fun i => if edgeOfRow L true i (-1) ∈ reconstructedEdgeSet L A then 1 else 0)
+      (A ∩ Ch).card (horizontalWindingParity L A).val (· % 2)
+      (fun i => by simp only [Nat.coe_castAddMonoidHom, q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero])
+      (fun i => dualEdgeEquiv_symm_horizontal L i (-1))
+      (fun i => hindicator (edgeOfRow L false i (-1))) hhcount
+      (ZMod.natCast_mod _ 2).symm hhparity
+      (by rw [hHorizontal]; rfl)
+  · exact Ising2DLambda.NecSuf.FisherZero.winding_sum_zero_necSuf
+      (Nat.castAddMonoidHom (ZMod 2)) (Equiv.subRight (1 : ZMod L))
+      (fun j => edgeOfRow L false (-1) j) (fun j => edgeOfRow L true (-1) j)
+      (dualEdgeEquiv L).symm q a
+      (fun j => if edgeOfRow L false (-1) j ∈ reconstructedEdgeSet L A then 1 else 0)
+      (A ∩ Cv).card (verticalWindingParity L A).val (· % 2)
+      (fun j => by simp only [Nat.coe_castAddMonoidHom, q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero])
+      (fun j => dualEdgeEquiv_symm_vertical L (-1) j)
+      (fun j => hindicator (edgeOfRow L true (-1) j)) hvcount
+      (ZMod.natCast_mod _ 2).symm hvparity
+      (by rw [hVertical]; rfl)
 
 /-- 必要十分版から得た面等式を、最後の横辺を解く同じ六等号へ接続する。 -/
 theorem reconstruction_horizontal_face_solve_from_necSuf (L : ℕ) [NeZero L]
@@ -82,7 +147,7 @@ theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
       (∑ i : ZMod L,
         (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) := by
   classical
-  obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
+  obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations_from_necSuf L A hSector
   obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant_from_necSuf L A hSector.1
   let walk : ℕ → ZMod L := fun n => -1 + (n : ZMod L)
   let step : ZMod L → ZMod L := fun x => x + 1

@@ -1187,6 +1187,10 @@ targets=(
   Ising2DLambda.FisherZero.dualImage_incidenceCount
   Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation
   Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations
+  Ising2DLambda.FisherZero.reconstruction_boundary_indicator_sum_count
+  Ising2DLambda.FisherZero.reconstruction_boundary_parity_val
+  Ising2DLambda.NecSuf.FisherZero.winding_sum_zero_necSuf
+  Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations_from_necSuf
   Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant
   Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero
   Ising2DLambda.FisherZero.reconstructionPathParity

@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・行和と列和の不変性・周期和・横辺差・縦辺差・所属・双対像・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」の基準の巻き数・スピン値域・行和と列和の不変性・周期和・横辺差・縦辺差・所属・双対像・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -12,6 +12,37 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 namespace Ising2DLambda.NecSuf.FisherZero
 
 open Finset
+
+/-- 基準周期和を境界の巻き数へ戻す本文の十等号。
+有限添字の全単射、境界上の逆写像の座標式と指示子の対応、境界和の表示だけを使う。
+値域には有限和のための加法可換モノイドを残し、射影には加法と零の保存を要求する。
+剰余を取る操作は指定した境界和の像を保つことだけを要求し、格子・環・標数は使わない。 -/
+theorem winding_sum_zero_necSuf {I E F N M : Type*} [Fintype I]
+    [AddCommMonoid N] [AddCommMonoid M]
+    (projection : N →+ M) (shift : I ≃ I)
+    (source : I → E) (boundary : I → F) (inverse : F → E)
+    (q : E → N) (a : F → N) (b : I → M) (count parity : N) (reduce : N → N)
+    (hterm : ∀ i, b i = projection (q (source i)))
+    (hcoordinate : ∀ i, inverse (boundary i) = source (shift i))
+    (hindicator : ∀ i, a (boundary i) = q (inverse (boundary i)))
+    (hcount : (∑ i, a (boundary i)) = count)
+    (hreduce : projection count = projection (reduce count))
+    (hparity : reduce count = parity) (hzero : parity = 0) :
+    (∑ i, b i) = 0 := by
+  calc
+    (∑ i, b i) = ∑ i, projection (q (source i)) :=
+      Finset.sum_congr rfl (fun i _ => hterm i)
+    _ = projection (∑ i, q (source i)) := (map_sum projection _ _).symm
+    _ = projection (∑ i, q (source (shift i))) :=
+      congrArg projection (Equiv.sum_comp shift (fun i => q (source i))).symm
+    _ = projection (∑ i, q (inverse (boundary i))) := by
+      simp only [hcoordinate]
+    _ = projection (∑ i, a (boundary i)) := by simp only [hindicator]
+    _ = projection count := congrArg projection hcount
+    _ = projection (reduce count) := hreduce
+    _ = projection parity := congrArg projection hparity
+    _ = projection 0 := congrArg projection hzero
+    _ = 0 := map_zero projection
 
 /-- 面の四項を加法を保つ写像で移し、端点数の表示と偶数性を代入する本文の論法。
 元の側と像の側には加法だけを残す。像の零は結論と自己和零に必要であり、
