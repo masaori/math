@@ -11,16 +11,21 @@ namespace Ising2DLambda.FisherZero
 theorem rationalSquareLtImpliesLt
     (p q : ℚ) (hp : 0 ≤ p) (hq : 0 ≤ q)
     (hSquare : p * p < q * q) : p < q := by
-  by_contra hNotLt
-  have hqp : q ≤ p := le_of_not_gt hNotLt
-  have hqq_le_pq : q * q ≤ p * q :=
-    mul_le_mul_of_nonneg_right hqp hq
-  have hpq_le_pp : p * q ≤ p * p :=
-    mul_le_mul_of_nonneg_left hqp hp
-  have hqq_le_pp : q * q ≤ p * p :=
-    le_trans hqq_le_pq hpq_le_pp
-  have hSelf : p * p < p * p :=
-    lt_of_lt_of_le hSquare hqq_le_pp
-  exact (lt_irrefl (p * p)) hSelf
+  have hNotGe : ¬ q ≤ p := by
+    intro hqp
+    -- 第一の鎖の右乗法の行。
+    have hqq_le_pq : q * q ≤ p * q :=
+      mul_le_mul_of_nonneg_right hqp hq
+    -- 第一の鎖の左乗法の行。
+    have hpq_le_pp : p * q ≤ p * p :=
+      mul_le_mul_of_nonneg_left hqp hp
+    -- 第二の鎖の広義不等式は第一の鎖の推移律で得る。
+    have hqq_le_pp : q * q ≤ p * p :=
+      le_trans hqq_le_pq hpq_le_pp
+    -- 第二の鎖から本文末尾の自己への狭義不等式を得る。
+    have hSelf : p * p < p * p :=
+      lt_of_lt_of_le hSquare hqq_le_pp
+    exact (lt_irrefl (p * p)) hSelf
+  exact lt_of_not_ge hNotGe
 
 end Ising2DLambda.FisherZero

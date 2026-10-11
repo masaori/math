@@ -10,10 +10,12 @@ theorem rationalSquareLtImpliesLt_from_necSuf
   apply Ising2DLambda.NecSuf.FisherZero.rational_square_lt_implies_lt_necSuf
       (zero := (0 : ℚ)) (mul := (· * ·)) (le := (· ≤ ·)) (lt := (· < ·))
       (p := p) (q := q) hp hq hSquare
+  -- 第一の鎖の右乗法と左乗法を ℚ の順序から供給する。
   · intro _ hqp
     exact mul_le_mul_of_nonneg_right hqp hq
   · intro _ hqp
     exact mul_le_mul_of_nonneg_left hqp hp
+  -- 二つの鎖の推移律と、本文末尾の非反射性・全順序性。
   · exact le_trans
   · exact lt_of_lt_of_le
   · exact lt_irrefl (p * p)

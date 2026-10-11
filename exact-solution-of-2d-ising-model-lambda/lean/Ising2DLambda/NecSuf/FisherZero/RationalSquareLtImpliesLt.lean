@@ -23,14 +23,17 @@ theorem rational_square_lt_implies_lt_necSuf
     (hLtIrrefl : ¬ lt (mul p p) (mul p p))
     (hLtOfNotGe : (¬ le q p) → lt p q) :
     lt p q := by
-  by_contra hNotLt
-  have hqp : le q p := by
-    by_contra hNotGe
-    exact hNotLt (hLtOfNotGe hNotGe)
-  have hqq_le_pq : le (mul q q) (mul p q) := hMulRight hq hqp
-  have hpq_le_pp : le (mul p q) (mul p p) := hMulLeft hp hqp
-  have hqq_le_pp : le (mul q q) (mul p p) := hLeTrans hqq_le_pq hpq_le_pp
-  have hSelf : lt (mul p p) (mul p p) := hLtLeTrans hSquare hqq_le_pp
-  exact hLtIrrefl hSelf
+  have hNotGe : ¬ le q p := by
+    intro hqp
+    -- 第一の鎖の右乗法の行。
+    have hqq_le_pq : le (mul q q) (mul p q) := hMulRight hq hqp
+    -- 第一の鎖の左乗法の行。
+    have hpq_le_pp : le (mul p q) (mul p p) := hMulLeft hp hqp
+    -- 第二の鎖の広義不等式は第一の鎖の推移律で得る。
+    have hqq_le_pp : le (mul q q) (mul p p) := hLeTrans hqq_le_pq hpq_le_pp
+    -- 第二の鎖から本文末尾の自己への狭義不等式を得る。
+    have hSelf : lt (mul p p) (mul p p) := hLtLeTrans hSquare hqq_le_pp
+    exact hLtIrrefl hSelf
+  exact hLtOfNotGe hNotGe
 
 end Ising2DLambda.NecSuf.FisherZero
