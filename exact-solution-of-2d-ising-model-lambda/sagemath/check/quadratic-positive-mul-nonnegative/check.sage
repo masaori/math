@@ -1,42 +1,12 @@
 # 対象ラベル: claim_quadratic_positive_mul_nonnegative
-# 帰属: QQ の厳密計算。浮動小数点を使わない。
-
-BOUND = 6
-samples = sorted(set(QQ(n) / QQ(d) for n in range(0, BOUND + 1) for d in range(1, BOUND + 1)))
-
-checked = 0
-case_counts = {(i, j): 0 for i in range(2) for j in range(2)}
-for a in samples:
-    for b in samples:
-        if (a, b) == (0, 0):
-            continue
-        for ap in samples:
-            for bp in samples:
-                if (ap, bp) == (0, 0):
-                    continue
-                A = a * ap + 2 * (b * bp)
-                B = a * bp + b * ap
-                assert A >= 0
-                assert B >= 0
-                assert (A, B) != (0, 0)
-
-                left_cases = ([a > 0] if a > 0 else []) + ([b > 0] if b > 0 else [])
-                right_cases = ([ap > 0] if ap > 0 else []) + ([bp > 0] if bp > 0 else [])
-                assert left_cases and right_cases
-                if a > 0 and ap > 0:
-                    assert 0 < a * ap <= A
-                    case_counts[(0, 0)] += 1
-                if a > 0 and bp > 0:
-                    assert 0 < a * bp <= B
-                    case_counts[(0, 1)] += 1
-                if b > 0 and ap > 0:
-                    assert 0 < b * ap <= B
-                    case_counts[(1, 0)] += 1
-                if b > 0 and bp > 0:
-                    assert 0 < 2 * (b * bp) <= A
-                    case_counts[(1, 1)] += 1
-                checked += 1
-
-assert checked > 0
-assert all(count > 0 for count in case_counts.values())
-print(f"OK: 正錐の非負係数条件どうしの積を {checked} 組で厳密検査した ({case_counts})")
+from pathlib import Path
+import sys
+qpm_directory = Path(__file__).resolve().parent
+if not (qpm_directory / '_prelude.sage').is_file():
+    qpm_directory = Path(sys.argv[0]).resolve().parent
+qpm_checks = ['check_representation_first.sage', 'check_representation_second.sage', 'check_nonnegative_aa.sage', 'check_nonnegative_bb.sage', 'check_nonnegative_weighted_bb.sage', 'check_nonnegative_ab.sage', 'check_nonnegative_ba.sage', 'check_nonnegative_first_sum.sage', 'check_nonnegative_first_result.sage', 'check_nonnegative_second_sum.sage', 'check_nonnegative_second_result.sage', 'check_left_positive_to_nonzero.sage', 'check_left_demorgan.sage', 'check_left_pair_nonzero.sage', 'check_left_truth.sage', 'check_right_positive_to_nonzero.sage', 'check_right_demorgan.sage', 'check_right_pair_nonzero.sage', 'check_right_truth.sage', 'check_positive_aa.sage', 'check_aa_add_zero.sage', 'check_aa_bound.sage', 'check_aa_result.sage', 'check_positive_ab.sage', 'check_ab_add_zero.sage', 'check_ab_bound.sage', 'check_ab_result.sage', 'check_positive_ba.sage', 'check_ba_zero_add.sage', 'check_ba_bound.sage', 'check_ba_result.sage', 'check_positive_bb.sage', 'check_positive_weighted_bb.sage', 'check_weighted_bb_zero_add.sage', 'check_weighted_bb_bound.sage', 'check_weighted_bb_result.sage', 'check_product_pair_coordinates.sage', 'check_product_pair_demorgan.sage', 'check_product_pair_positive.sage', 'check_product_pair_truth.sage', 'check_product_membership.sage']
+assert len(qpm_checks) == 41
+for qpm_filename in qpm_checks:
+    load(str(qpm_directory / qpm_filename))
+load(str(qpm_directory / 'check_global.sage'))
+print("RESULT: PASS (41 line checks and the integrated check)")

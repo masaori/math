@@ -37367,39 +37367,121 @@ A\cdot A&=C\cdot C
                       ],
                       proof: [
                         paragraph([
-                          ref("claim_quadratic_multiplication_representation"), " により、",
-                          math(String.raw`(A,B):=\mathrm{rep}_s(\xi\cdot\eta)`), " と置けば",
+                          math(String.raw`(a,b),(a',b')\in\mathbb Q^2`), " は主張の表示係数とする。",
+                          ref("claim_quadratic_multiplication_mem"), " により積は ",
+                          math(String.raw`Q_s`), " に属するので、",
+                          math(String.raw`(A,B):=\mathrm{rep}_s(\xi\cdot\eta)\in\mathbb Q^2`),
+                          " と置く。以下、", math(String.raw`\top`), " は常に真である命題を表す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 A&=a\cdot a'+2\cdot(b\cdot b')
-  &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr),\\
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)\\
 B&=a\cdot b'+b\cdot a'
-  &&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr).
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_representation}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          math(String.raw`a,b,a',b'\in\mathbb{Q}`), " はすべて非負なので、積と和の単調性から ",
-                          math(String.raw`0\le A`), " かつ ", math(String.raw`0\le B`), " である。",
-                          "また、非負係数条件の非零性により ",
-                          math(String.raw`0<a\ \text{または}\ 0<b`), " かつ ",
-                          math(String.raw`0<a'\ \text{または}\ 0<b'`), " である。四通りを調べる。",
-                        ]),
-                        list([
-                          [math(String.raw`0<a`), " かつ ", math(String.raw`0<a'`), " ならば ",
-                            math(String.raw`0<a\cdot a'\le A`), " なので ", math(String.raw`0<A`), " である。"],
-                          [math(String.raw`0<a`), " かつ ", math(String.raw`0<b'`), " ならば ",
-                            math(String.raw`0<a\cdot b'\le B`), " なので ", math(String.raw`0<B`), " である。"],
-                          [math(String.raw`0<b`), " かつ ", math(String.raw`0<a'`), " ならば ",
-                            math(String.raw`0<b\cdot a'\le B`), " なので ", math(String.raw`0<B`), " である。"],
-                          [math(String.raw`0<b`), " かつ ", math(String.raw`0<b'`), " ならば ",
-                            math(String.raw`0<2\cdot(b\cdot b')\le A`), " なので ", math(String.raw`0<A`), " である。"],
-                        ]),
-                        paragraph([
-                          "したがっていずれの場合も ", math(String.raw`(A,B)\ne(0,0)`),
-                          " であり、表示は正錐の非負係数条件を満たす（",
-                          ref("def_quadratic_positive_cone"), "）。ゆえに ",
-                          math(String.raw`\xi\cdot\eta\in P_s`), " である。全過程は有理数の積・和・順序と",
-                          "代数的数の積だけで閉じ、実数体も複素数体も現れない。",
-                        ]),
+                        paragraph(["各積と二つの係数の非負性を示す。"]),
+                        displayMath(String.raw`\begin{aligned}
+0&\le a\cdot a'
+&&\bigl(\because\ 0\le a,\ 0\le a';\ \text{非負数の積}\bigr)\\
+0&\le b\cdot b'
+&&\bigl(\because\ 0\le b,\ 0\le b';\ \text{非負数の積}\bigr)\\
+0&\le2\cdot(b\cdot b')
+&&\bigl(\because\ 0\le2,\ 0\le b\cdot b';\ \text{非負数の積}\bigr)\\
+0&\le a\cdot b'
+&&\bigl(\because\ 0\le a,\ 0\le b';\ \text{非負数の積}\bigr)\\
+0&\le b\cdot a'
+&&\bigl(\because\ 0\le b,\ 0\le a';\ \text{非負数の積}\bigr)\\
+0&\le a\cdot a'+2\cdot(b\cdot b')
+&&\bigl(\because\ 0\le a\cdot a',\ 0\le2\cdot(b\cdot b');\ \text{非負数の和}\bigr)\\
+&=A
+&&\bigl(\because\ \text{上の }A\text{ の表示}\bigr)\\
+0&\le a\cdot b'+b\cdot a'
+&&\bigl(\because\ 0\le a\cdot b',\ 0\le b\cdot a';\ \text{非負数の和}\bigr)\\
+&=B
+&&\bigl(\because\ \text{上の }B\text{ の表示}\bigr)
+\end{aligned}`),
+                        paragraph(["二つの入力はそれぞれ少なくとも一つ正の係数を持つ。"]),
+                        displayMath(String.raw`\begin{aligned}
+(0<a\ \lor\ 0<b)
+&\Longleftrightarrow(a\ne0\ \lor\ b\ne0)
+&&\bigl(\because\ 0\le a,\ 0\le b;\ \text{非負数の正値性と非零性}\bigr)\\
+&\Longleftrightarrow\neg(a=0\ \land\ b=0)
+&&\bigl(\because\ \text{ド・モルガンの法則}\bigr)\\
+&\Longleftrightarrow(a,b)\ne(0,0)
+&&\bigl(\because\ \text{組の等号}\bigr)\\
+&\Longleftrightarrow\top
+&&\bigl(\because\ \xi\text{ の仮定};\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr)\\[3pt]
+(0<a'\ \lor\ 0<b')
+&\Longleftrightarrow(a'\ne0\ \lor\ b'\ne0)
+&&\bigl(\because\ 0\le a',\ 0\le b';\ \text{非負数の正値性と非零性}\bigr)\\
+&\Longleftrightarrow\neg(a'=0\ \land\ b'=0)
+&&\bigl(\because\ \text{ド・モルガンの法則}\bigr)\\
+&\Longleftrightarrow(a',b')\ne(0,0)
+&&\bigl(\because\ \text{組の等号}\bigr)\\
+&\Longleftrightarrow\top
+&&\bigl(\because\ \eta\text{ の仮定};\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`0<a`), " かつ ", math(String.raw`0<a'`), " の場合は、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<a\cdot a'
+&&\bigl(\because\ 0<a,\ 0<a';\ \text{正数の積}\bigr)\\
+&=a\cdot a'+0
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a\cdot a'+2\cdot(b\cdot b')
+&&\bigl(\because\ 0\le2\cdot(b\cdot b');\ \text{加法の単調性}\bigr)\\
+&=A
+&&\bigl(\because\ \text{上の }A\text{ の表示}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`0<a`), " かつ ", math(String.raw`0<b'`), " の場合は、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<a\cdot b'
+&&\bigl(\because\ 0<a,\ 0<b';\ \text{正数の積}\bigr)\\
+&=a\cdot b'+0
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a\cdot b'+b\cdot a'
+&&\bigl(\because\ 0\le b\cdot a';\ \text{加法の単調性}\bigr)\\
+&=B
+&&\bigl(\because\ \text{上の }B\text{ の表示}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`0<b`), " かつ ", math(String.raw`0<a'`), " の場合は、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<b\cdot a'
+&&\bigl(\because\ 0<b,\ 0<a';\ \text{正数の積}\bigr)\\
+&=0+b\cdot a'
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a\cdot b'+b\cdot a'
+&&\bigl(\because\ 0\le a\cdot b';\ \text{加法の単調性}\bigr)\\
+&=B
+&&\bigl(\because\ \text{上の }B\text{ の表示}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`0<b`), " かつ ", math(String.raw`0<b'`), " の場合は、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<b\cdot b'
+&&\bigl(\because\ 0<b,\ 0<b';\ \text{正数の積}\bigr)\\
+0&<2\cdot(b\cdot b')
+&&\bigl(\because\ 0<2,\ 0<b\cdot b';\ \text{正数の積}\bigr)\\
+&=0+2\cdot(b\cdot b')
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a\cdot a'+2\cdot(b\cdot b')
+&&\bigl(\because\ 0\le a\cdot a';\ \text{加法の単調性}\bigr)\\
+&=A
+&&\bigl(\because\ \text{上の }A\text{ の表示}\bigr)
+\end{aligned}`),
+                        paragraph(["出力の非零性と正錐への所属は、"]),
+                        displayMath(String.raw`\begin{aligned}
+(A,B)\ne(0,0)
+&\Longleftrightarrow\neg(A=0\ \land\ B=0)
+&&\bigl(\because\ \text{組の等号}\bigr)\\
+&\Longleftrightarrow(A\ne0\ \lor\ B\ne0)
+&&\bigl(\because\ \text{ド・モルガンの法則}\bigr)\\
+&\Longleftrightarrow(0<A\ \lor\ 0<B)
+&&\bigl(\because\ 0\le A,\ 0\le B;\ \text{非負数の正値性と非零性}\bigr)\\
+&\Longleftrightarrow\top
+&&\bigl(\because\ \text{上の四場合はいずれも }0<A\text{ または }0<B\text{ を与える}\bigr)\\[3pt]
+\xi\cdot\eta&\in P_s
+&&\bigl(\because\ \mathrm{rep}_s(\xi\cdot\eta)=(A,B),\ 0\le A,\ 0\le B,\ (A,B)\ne(0,0);\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr)
+\end{aligned}`),
+                        paragraph(["全過程は有理数の積・和・順序と代数的数の積だけで閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },
                 },
