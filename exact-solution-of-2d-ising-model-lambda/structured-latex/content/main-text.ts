@@ -7876,6 +7876,144 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_selected_odd_orbit_reversal_nontrivial",
+        labels: [],
+        title: { text: "選んだ奇数軌道の反転の非自明性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_selected_odd_orbit_reversal_nontrivial",
+            focus: {
+            kind: "claim",
+            id: "tools_claim_selected_odd_orbit_reversal_nontrivial",
+            title: { text: "選んだ奇数軌道の反転は元の置換と異なる" },
+            labels: ["claim_selected_odd_orbit_reversal_nontrivial"],
+            habitat: "N",
+            lean: [
+              "Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_swappedPair",
+              "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitLength_ge_three_of_odd",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitLength_ge_three",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_ne_self",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_no_fixed",
+              "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_swappedPair",
+              "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitLength_ge_three_of_odd",
+              "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_ne_self_of_odd",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitLength_ge_three_from_necSuf",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_ne_self_from_necSuf",
+              "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_no_fixed_from_necSuf",
+            ],
+            verification: ["sagemath/check/selected-odd-orbit-reversal-nontrivial"],
+            statement: [
+              paragraph([ref("def_odd_orbit_derangements"), " の有限全順序集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " を取る。", ref("def_odd_orbit_selection"), " の最小の奇数点を ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " とすると、"]),
+              displayMath(String.raw`3\le\operatorname{len}_{\sigma}(m),\qquad
+R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
+              paragraph(["したがって、", ref("claim_selected_odd_orbit_reversal_involution"), " の自己写像は不動点のない対合である。ここでの不動点は、個々の点 ", math(String.raw`j\in\mathcal J`), " ではなく、対象集合の元である置換 ", math(String.raw`\sigma`), " を指す。"]),
+            ],
+            proof: [
+              paragraph(["有限集合 ", math(String.raw`C:=\operatorname{OddOrb}(\sigma)=\operatorname{Orb}_{\sigma}(m)\subseteq\mathcal J`), "、点 ", math(String.raw`b:=\sigma(m)\in\mathcal J`), "、自然数 ", math(String.raw`\ell:=\operatorname{len}_{\sigma}(m)`), " と置く。最小元は選んだ集合に属するので、"]),
+              displayMath(String.raw`m\in\operatorname{OddPts}(\sigma)
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ と非空有限集合の最小元の所属}\bigr).`),
+              paragraph(["よってある自然数 ", math(String.raw`k\in\mathbb N`), " が存在して、"]),
+              displayMath(String.raw`\ell=k+k+1
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\text{ の奇数点の条件}\bigr).`),
+              paragraph(["零回と一回の反復を計算する。"]),
+              displayMath(String.raw`\sigma^{[0]}(m)=m
+\qquad\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),`),
+              displayMath(String.raw`\begin{aligned}
+\sigma^{[1]}(m)
+ &=\sigma^{[0]}(\sigma(m))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma(m)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=b&&\bigl(\because\ b\text{ の定義}\bigr).
+\end{aligned}`),
+              paragraph([ref("def_finite_permutation_orbit"), " より、これらはそれぞれ ", math(String.raw`m\in C`), " と ", math(String.raw`b\in C`), " の到達の証拠である。また、"]),
+              displayMath(String.raw`b\ne m
+\qquad\bigl(\because\ \blkref{def_odd_orbit_derangements}\text{ の不動点を持たない条件}\bigr).`),
+              paragraph(["二点の所属を集合の包含で書けば、"]),
+              displayMath(String.raw`\{m,b\}\subseteq C
+\qquad\bigl(\because\ m\in C\text{ と }b\in C\bigr).`),
+              displayMath(String.raw`\begin{aligned}
+2&=|\{m,b\}|&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr)\\
+ &\le|C|&&\bigl(\because\ \text{有限集合の包含による個数の単調性}\bigr)\\
+ &=\ell&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+\end{aligned}`),
+              paragraph([math(String.raw`k=0`), " ならば ", math(String.raw`\ell=k+k+1=1`), " となり ", math(String.raw`2\le\ell`), " に反する。したがって ", math(String.raw`k\ne0`), " であり、"]),
+              displayMath(String.raw`1\le k\qquad\bigl(\because\ k\in\mathbb N\text{ と }k\ne0\bigr).`),
+              displayMath(String.raw`\begin{aligned}
+k+k&\ge1+k&&\bigl(\because\ 1\le k\text{ に右から }k\text{ を加える}\bigr)\\
+ &\ge1+1&&\bigl(\because\ 1\le k\text{ に左から }1\text{ を加える}\bigr)\\
+ &=2&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+\end{aligned}`),
+              displayMath(String.raw`\begin{aligned}
+\ell&=k+k+1&&\bigl(\because\ \text{上の奇数表示}\bigr)\\
+ &\ge2+1&&\bigl(\because\ 2\le k+k\text{ に右から }1\text{ を加える}\bigr)\\
+ &=3&&\bigl(\because\ \mathbb N\text{ の加法}\bigr).
+\end{aligned}`),
+              paragraph(["次に ", math(String.raw`\tau:=\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と置き、背理法のため ", math(String.raw`\tau=\sigma`), " と仮定する。", math(String.raw`m\in C`), " なので、"]),
+              displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(m)
+ &=\rho_C(\sigma)(m)&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\text{ と }m\in C\bigr)\\
+ &=\tau(m)&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
+ &=\sigma(m)&&\bigl(\because\ \tau=\sigma\text{ を }m\text{ で評価}\bigr)\\
+ &=b&&\bigl(\because\ b\text{ の定義}\bigr).
+\end{aligned}`),
+              displayMath(String.raw`\begin{aligned}
+\sigma(b)&=\sigma(\sigma^{-1}(m))&&\bigl(\because\ \sigma^{-1}(m)=b\bigr)\\
+ &=m&&\bigl(\because\ \text{置換とその逆写像の相殺}\bigr),\\
+\sigma^{-1}(b)&=\sigma^{-1}(\sigma(m))&&\bigl(\because\ b=\sigma(m)\bigr)\\
+ &=m&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr).
+\end{aligned}`),
+              paragraph(["これで ", math(String.raw`\sigma`), " も ", math(String.raw`\sigma^{-1}`), " も二点 ", math(String.raw`m,b`), " を交換する。反復の全回数を扱うため、写像 ", math(String.raw`f:\mathcal J\to\mathcal J`), " が ", math(String.raw`f(m)=b`), " と ", math(String.raw`f(b)=m`), " を満たす場合を考える。各 ", math(String.raw`n\in\mathbb N`), " について、両始点の反復が ", math(String.raw`\{m,b\}`), " に属することを同時に帰納する。零回では、"]),
+              displayMath(String.raw`\begin{aligned}
+f^{[0]}(m)&=m&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
+f^{[0]}(b)&=b&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+              paragraph(["どちらも二点の集合に属する。回数 ", math(String.raw`n`), " での二つの所属を帰納法の仮定とすると、"]),
+              displayMath(String.raw`\begin{aligned}
+f^{[n+1]}(m)&=f^{[n]}(f(m))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=f^{[n]}(b)&&\bigl(\because\ f(m)=b\bigr)\\
+ &\in\{m,b\}&&\bigl(\because\ b\text{ を始点とする帰納法の仮定}\bigr),\\
+f^{[n+1]}(b)&=f^{[n]}(f(b))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=f^{[n]}(m)&&\bigl(\because\ f(b)=m\bigr)\\
+ &\in\{m,b\}&&\bigl(\because\ m\text{ を始点とする帰納法の仮定}\bigr).
+\end{aligned}`),
+              paragraph(["よって自然数の帰納法により全回数で二つの所属が成り立つ。", math(String.raw`f=\sigma`), " と ", math(String.raw`f=\sigma^{-1}`), " へ別々に適用して、各 ", math(String.raw`n\in\mathbb N`), " について、"]),
+              displayMath(String.raw`\begin{aligned}
+\sigma^{[n]}(m)&\in\{m,b\}&&\bigl(\because\ f=\sigma\text{ への上の帰納法の適用}\bigr),\\
+(\sigma^{-1})^{[n]}(m)&\in\{m,b\}&&\bigl(\because\ f=\sigma^{-1}\text{ への上の帰納法の適用}\bigr).
+\end{aligned}`),
+              displayMath(String.raw`\begin{aligned}
+C&=\operatorname{Orb}_{\sigma}(m)&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
+ &\subseteq\{m,b\}&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ と順逆両方向の到達の所属}\bigr).
+\end{aligned}`),
+              displayMath(String.raw`\begin{aligned}
+\ell&=|C|&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)\\
+ &\le|\{m,b\}|&&\bigl(\because\ \text{有限集合の包含による個数の単調性}\bigr)\\
+ &=2&&\bigl(\because\ b\ne m\text{ なので相異なる二点}\bigr).
+\end{aligned}`),
+              paragraph(["これは ", math(String.raw`3\le\ell`), " と矛盾する。背理法の仮定が偽なので、"]),
+              displayMath(String.raw`\begin{aligned}
+R_{\mathrm{odd}}(\sigma)
+ &=\rho_{\operatorname{OddOrb}(\sigma)}(\sigma)&&\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr)\\
+ &=\rho_C(\sigma)&&\bigl(\because\ C\text{ の定義}\bigr)\\
+ &=\tau&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
+ &\ne\sigma&&\bigl(\because\ \text{上の背理法}\bigr).
+\end{aligned}`),
+              paragraph([ref("claim_selected_odd_orbit_reversal_involution"), " の自己写像 ", math(String.raw`\mathcal R_{\mathrm{odd}}`), " は、この ", math(String.raw`R_{\mathrm{odd}}`), " の値域を対象集合へ制限した写像なので、各入力での値は同じである。"]),
+              paragraph(["さらに、"]),
+              displayMath(String.raw`\mathcal R_{\mathrm{odd}}(\mathcal R_{\mathrm{odd}}(\sigma))=\sigma
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr).`),
+              paragraph(["これらが対象集合上の不動点のない対合という結論である。対象集合が空のときは入力が無く、いずれも全称命題として成り立つ。最小元を対象集合の外で選ぶ必要はない。有限集合・自然数・写像の反復だけを使い、実数体・複素数体への脱出はない。"]),
+            ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

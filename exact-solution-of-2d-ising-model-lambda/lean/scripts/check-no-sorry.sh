@@ -52,6 +52,18 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_swappedPair
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitLength_ge_three_of_odd
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitLength_ge_three
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_ne_self
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_no_fixed
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_swappedPair
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitLength_ge_three_of_odd
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_ne_self_of_odd
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitLength_ge_three_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_ne_self_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitInvolution_no_fixed_from_necSuf
+
   Ising2DLambda.AlgebraicEigenvalue.oddOrbitDerangements
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_invariant

@@ -463,6 +463,7 @@ export const ALL_LABELS = [
   "claim_sector_value_duality",
   "claim_sector_value_duality_at_algebraic_point",
   "claim_selected_odd_orbit_reversal_involution",
+  "claim_selected_odd_orbit_reversal_nontrivial",
   "claim_selected_support_coefficient_reconstruction",
   "claim_selection_complement_sign_preserving_involution",
   "claim_selection_even_subgraph_action_character",
