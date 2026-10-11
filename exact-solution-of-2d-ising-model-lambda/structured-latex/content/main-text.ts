@@ -36926,109 +36926,305 @@ a\cdot a'&<2\cdot(b\cdot b')
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          ref("claim_quadratic_addition_representation"), " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`), " である。",
-                          math(String.raw`c:=-a'`), "、", math(String.raw`u:=-b`), "、",
-                          math(String.raw`A:=a+a'=a-c`), "、", math(String.raw`B:=b+b'=b'-u`),
-                          " と置く。このとき ", math(String.raw`a,c,u,b'\in\mathbb{Q}_{>0}`), " である。",
-                        ]),
-                        paragraph(["まず交差積を比較する。"]),
+                        paragraph(["和の表示を先に固定する。"]),
                         displayMath(String.raw`\begin{aligned}
-(c\cdot u)\cdot(c\cdot u)
+\mathrm{rep}_s(\xi+\eta)&=(a+a',b+b')
+&&\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`c:=-a'`), "、", math(String.raw`u:=-b`), "、", math(String.raw`A:=a+a'`), "、", math(String.raw`B:=b+b'`), " と置く。これらはすべて ", math(String.raw`\mathbb Q`), " に属する。減法は加法の逆元を足す操作とする。"]),
+                        displayMath(String.raw`\begin{aligned}
+A&=a+a'
+&&\bigl(\because\ A\text{ の定義}\bigr)\\
+&=a-(-a')
+&&\bigl(\because\ \text{加法の逆元を引く操作}\bigr)\\
+&=a-c
+&&\bigl(\because\ c=-a'\bigr)\\
+B&=b+b'
+&&\bigl(\because\ B\text{ の定義}\bigr)\\
+&=b'+b
+&&\bigl(\because\ \text{加法の可換則}\bigr)\\
+&=b'-(-b)
+&&\bigl(\because\ \text{加法の逆元を引く操作}\bigr)\\
+&=b'-u
+&&\bigl(\because\ u=-b\bigr)
+\end{aligned}`),
+                        paragraph(["仮定の二つの条件から、係数の符号と平方の比較を準備する。"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<a
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件}\bigr)\\
+0&<c
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第三条件 }a'<0\text{ と加法の逆元の符号}\bigr)\\
+0&<u
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件 }b<0\text{ と加法の逆元の符号}\bigr)\\
+0&<b'
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第三条件}\bigr)\\
+u\cdot u&=(-b)\cdot(-b)
+&&\bigl(\because\ u=-b\bigr)\\
+&=b\cdot b
+&&\bigl(\because\ \text{二つの加法の逆元の積}\bigr)\\
+c\cdot c&=(-a')\cdot(-a')
+&&\bigl(\because\ c=-a'\bigr)\\
+&=a'\cdot a'
+&&\bigl(\because\ \text{二つの加法の逆元の積}\bigr)\\
+2\cdot(u\cdot u)&=2\cdot(b\cdot b)
+&&\bigl(\because\ u\cdot u=b\cdot b\bigr)\\
+&<a\cdot a
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件}\bigr)\\
+c\cdot c&=a'\cdot a'
+&&\bigl(\because\ \text{上で示した平方の等式}\bigr)\\
+&<2\cdot(b'\cdot b')
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第三条件}\bigr)
+\end{aligned}`),
+                        paragraph(["交差積の平方比較で掛ける因子と、平方比較補題へ渡す二つの積の符号を示す。"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<u\cdot u
+&&\bigl(\because\ 0<u;\ \text{正数の積}\bigr)\\
+0&<b'\cdot b'
+&&\bigl(\because\ 0<b';\ \text{正数の積}\bigr)\\
+0&<c\cdot u
+&&\bigl(\because\ 0<c,\ 0<u;\ \text{正数の積}\bigr)\\
+0&\le c\cdot u
+&&\bigl(\because\ 0<c\cdot u;\ \text{狭義不等式から広義不等式}\bigr)\\
+0&<a\cdot b'
+&&\bigl(\because\ 0<a,\ 0<b';\ \text{正数の積}\bigr)\\
+0&\le a\cdot b'
+&&\bigl(\because\ 0<a\cdot b';\ \text{狭義不等式から広義不等式}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+(c\cdot u)\cdot(c\cdot u)&=\bigl(c\cdot(u\cdot c)\bigr)\cdot u
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(c\cdot(c\cdot u)\bigr)\cdot u
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
 &=(c\cdot c)\cdot(u\cdot u)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(u\cdot u)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<u\cdot u\bigr)\\
+&&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b'),\ 0<u\cdot u;\ \text{右乗法の狭義単調性}\bigr)\\
+&=2\cdot\bigl((b'\cdot b')\cdot(u\cdot u)\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot\bigl((u\cdot u)\cdot(b'\cdot b')\bigr)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
 &=\bigl(2\cdot(u\cdot u)\bigr)\cdot(b'\cdot b')
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &<(a\cdot a)\cdot(b'\cdot b')
-  &&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a\text{ と }0<b'\cdot b'\bigr)\\
+&&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a,\ 0<b'\cdot b';\ \text{右乗法の狭義単調性}\bigr)\\
+&=\bigl(a\cdot(a\cdot b')\bigr)\cdot b'
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(a\cdot(b'\cdot a)\bigr)\cdot b'
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
 &=(a\cdot b')\cdot(a\cdot b')
-  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+c\cdot u&<a\cdot b'
+&&\bigl(\because\ 0\le c\cdot u,\ 0\le a\cdot b',\ \text{上の平方比較};\ \blkref{claim_rational_square_lt_implies_lt}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          ref("claim_rational_square_lt_implies_lt"), " を非負有理数 ",
-                          math(String.raw`c\cdot u`), " と ", math(String.raw`a\cdot b'`),
-                          " へ適用して ", math(String.raw`c\cdot u<a\cdot b'`), " を得る。",
-                        ]),
-                        paragraph([
-                          "まず ", math(String.raw`0\le A`), " かつ ", math(String.raw`0\le B`),
-                          " の場合を考える。もし ", math(String.raw`(A,B)=(0,0)`), " ならば ",
-                          math(String.raw`c=a`), " かつ ", math(String.raw`u=b'`),
-                          " となり、直前の狭義不等式の両辺が等しくなる。ゆえに表示 ",
-                          math(String.raw`(A,B)`), " は正錐の第一条件を満たす。",
-                        ]),
-                        paragraph([
-                          "次に ", math(String.raw`0\le A`), " かつ ", math(String.raw`B<0`),
-                          " の場合を考える。", math(String.raw`U:=u-b'=-B`),
-                          " と置くと ", math(String.raw`0<U`), " である。",
-                          math(String.raw`A=0`), " ならば ", math(String.raw`c=a`),
-                          " と ", math(String.raw`b'<u`), " から ",
-                          math(String.raw`a\cdot b'<c\cdot u`),
-                          " となって交差積の比較に反するので、", math(String.raw`0<A`), " である。さらに、",
-                        ]),
+                        paragraph(["和の二係数の符号で場合を分ける。まず ", math(String.raw`0\le A`), " かつ ", math(String.raw`0\le B`), " とする。同時に零となることを排除するため、", math(String.raw`(A,B)=(0,0)`), " を仮定すると、"]),
                         displayMath(String.raw`\begin{aligned}
-a\cdot U
-&=a\cdot u-a\cdot b' &&\bigl(\because\ U=u-b'\bigr)\\
-&<a\cdot u-c\cdot u &&\bigl(\because\ c\cdot u<a\cdot b'\bigr)\\
-&=u\cdot A &&\bigl(\because\ A=a-c\text{ と分配則・可換則}\bigr).
+A&=0
+&&\bigl(\because\ (A,B)=(0,0)\text{ の第一成分}\bigr)\\
+B&=0
+&&\bigl(\because\ (A,B)=(0,0)\text{ の第二成分}\bigr)\\
+c&=a
+&&\bigl(\because\ A=a-c=0;\ \text{差が零なら両項は等しい}\bigr)\\
+u&=b'
+&&\bigl(\because\ B=b'-u=0;\ \text{差が零なら両項は等しい}\bigr)\\
+c\cdot u&=a\cdot u
+&&\bigl(\because\ c=a\bigr)\\
+&=a\cdot b'
+&&\bigl(\because\ u=b'\bigr)
 \end{aligned}`),
-                        paragraph(["両辺は正なので平方の大小を保つ。これを負の第二係数条件へ組み込む。"]),
+                        paragraph(["となり、先に得た ", math(String.raw`c\cdot u<a\cdot b'`), " と矛盾する。よって、"]),
                         displayMath(String.raw`\begin{aligned}
-(u\cdot u)\cdot\bigl(2\cdot(U\cdot U)\bigr)
-&=\bigl(2\cdot(u\cdot u)\bigr)\cdot(U\cdot U)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<(a\cdot a)\cdot(U\cdot U)
-  &&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a\text{ と }0<U\cdot U\bigr)\\
-&=(a\cdot U)\cdot(a\cdot U)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+(A,B)&\ne(0,0)
+&&\bigl(\because\ \text{直前の矛盾による背理法}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+\xi+\eta&\in P_s
+&&\bigl(\because\ \mathrm{rep}_s(\xi+\eta)=(A,B),\ 0\le A,\ 0\le B,\ (A,B)\ne(0,0);\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr)
+\end{aligned}`),
+                        paragraph(["次に ", math(String.raw`0\le A`), " かつ ", math(String.raw`B<0`), " とする。このとき、"]),
+                        displayMath(String.raw`\begin{aligned}
+b'&<u
+&&\bigl(\because\ B=b'-u<0;\ \mathbb Q\text{ の減法と順序}\bigr)
+\end{aligned}`),
+                        paragraph(["である。もし ", math(String.raw`A=0`), " ならば、"]),
+                        displayMath(String.raw`\begin{aligned}
+c&=a
+&&\bigl(\because\ A=a-c=0;\ \text{差が零なら両項は等しい}\bigr)\\
+a\cdot b'&<a\cdot u
+&&\bigl(\because\ b'<u,\ 0<a;\ \text{左乗法の狭義単調性}\bigr)\\
+&=c\cdot u
+&&\bigl(\because\ c=a\bigr)
+\end{aligned}`),
+                        paragraph(["となり、", math(String.raw`c\cdot u<a\cdot b'`), " に反する。したがって、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<A
+&&\bigl(\because\ 0\le A,\ A\ne0;\ \mathbb Q\text{ の全順序}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`U:=u-b'\in\mathbb Q`), " と置き、その符号と ", math(String.raw`B`), " との関係を記す。"]),
+                        displayMath(String.raw`\begin{aligned}
+U&=u-b'
+&&\bigl(\because\ U\text{ の定義}\bigr)\\
+&=-(b'-u)
+&&\bigl(\because\ \text{差の加法の逆元}\bigr)\\
+&=-B
+&&\bigl(\because\ B=b'-u\bigr)\\
+0&<U
+&&\bigl(\because\ b'<u,\ U=u-b';\ \mathbb Q\text{ の減法と順序}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot U&=a\cdot(u-b')
+&&\bigl(\because\ U=u-b'\bigr)\\
+&=a\cdot u-a\cdot b'
+&&\bigl(\because\ \text{減法への分配則}\bigr)\\
+&<a\cdot u-c\cdot u
+&&\bigl(\because\ c\cdot u<a\cdot b';\ \text{同じ元から引く操作の反単調性}\bigr)\\
+&=(a-c)\cdot u
+&&\bigl(\because\ \text{減法への分配則}\bigr)\\
+&=u\cdot(a-c)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=u\cdot A
+&&\bigl(\because\ A=a-c\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+0&<a\cdot U
+&&\bigl(\because\ 0<a,\ 0<U;\ \text{正数の積}\bigr)\\
+0&<u\cdot A
+&&\bigl(\because\ 0<u,\ 0<A;\ \text{正数の積}\bigr)\\
+0&<U\cdot U
+&&\bigl(\because\ 0<U;\ \text{正数の積}\bigr)\\
+(a\cdot U)\cdot(a\cdot U)&<(u\cdot A)\cdot(a\cdot U)
+&&\bigl(\because\ a\cdot U<u\cdot A,\ 0<a\cdot U;\ \text{右乗法の狭義単調性}\bigr)\\
 &<(u\cdot A)\cdot(u\cdot A)
-  &&\bigl(\because\ 0<a\cdot U<u\cdot A\bigr)\\
+&&\bigl(\because\ a\cdot U<u\cdot A,\ 0<u\cdot A;\ \text{左乗法の狭義単調性}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+(u\cdot u)\cdot\bigl(2\cdot(U\cdot U)\bigr)&=\bigl((u\cdot u)\cdot2\bigr)\cdot(U\cdot U)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(2\cdot(u\cdot u)\bigr)\cdot(U\cdot U)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&<(a\cdot a)\cdot(U\cdot U)
+&&\bigl(\because\ 2\cdot(u\cdot u)<a\cdot a,\ 0<U\cdot U;\ \text{右乗法の狭義単調性}\bigr)\\
+&=\bigl(a\cdot(a\cdot U)\bigr)\cdot U
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(a\cdot(U\cdot a)\bigr)\cdot U
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=(a\cdot U)\cdot(a\cdot U)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(u\cdot A)\cdot(u\cdot A)
+&&\bigl(\because\ \text{直前の二段の狭義不等式の推移律}\bigr)\\
+&=\bigl(u\cdot(A\cdot u)\bigr)\cdot A
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(u\cdot(u\cdot A)\bigr)\cdot A
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
 &=(u\cdot u)\cdot(A\cdot A)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+2\cdot(U\cdot U)&<A\cdot A
+&&\bigl(\because\ \text{上の比較と }0<u\cdot u;\ \text{正因子の消去}\bigr)\\
+U\cdot U&=(-B)\cdot(-B)
+&&\bigl(\because\ U=-B\bigr)\\
+&=B\cdot B
+&&\bigl(\because\ \text{二つの加法の逆元の積}\bigr)\\
+2\cdot(B\cdot B)&=2\cdot(U\cdot U)
+&&\bigl(\because\ U\cdot U=B\cdot B\bigr)\\
+&<A\cdot A
+&&\bigl(\because\ \text{上で正因子を消去した不等式}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          math(String.raw`0<u\cdot u`), " なのでこの正因子を消去し、",
-                          math(String.raw`2\cdot(B\cdot B)<A\cdot A`),
-                          " を得る。したがって表示は正錐の第二条件を満たす。",
-                        ]),
-                        paragraph([
-                          "最後に ", math(String.raw`A<0`), " の場合を考える。",
-                          math(String.raw`B\le0`), " ならば ", math(String.raw`a<c`), " と ",
-                          math(String.raw`b'\le u`), " から ",
-                          math(String.raw`a\cdot b'<c\cdot b'\le c\cdot u`),
-                          " となって交差積の比較に反する。ゆえに ", math(String.raw`0<B`),
-                          " である。", math(String.raw`C:=c-a=-A`), " と置くと ",
-                          math(String.raw`0<C`), " であり、",
-                        ]),
                         displayMath(String.raw`\begin{aligned}
-b'\cdot C
-&=c\cdot b'-a\cdot b' &&\bigl(\because\ C=c-a\text{ と分配則・可換則}\bigr)\\
-&<c\cdot b'-c\cdot u &&\bigl(\because\ c\cdot u<a\cdot b'\bigr)\\
-&=c\cdot B &&\bigl(\because\ B=b'-u\text{ と分配則}\bigr).
+\xi+\eta&\in P_s
+&&\bigl(\because\ \mathrm{rep}_s(\xi+\eta)=(A,B),\ 0<A,\ B<0,\ 2\cdot(B\cdot B)<A\cdot A;\ \blkref{def_quadratic_positive_cone}\text{ の第二条件}\bigr)
 \end{aligned}`),
-                        paragraph(["両辺は正なので平方の大小を保つ。これを負の第一係数条件へ組み込む。"]),
+                        paragraph(["最後に ", math(String.raw`A<0`), " とする。"]),
                         displayMath(String.raw`\begin{aligned}
-(b'\cdot b')\cdot(C\cdot C)
-&=(b'\cdot C)\cdot(b'\cdot C)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
+a&<c
+&&\bigl(\because\ A=a-c<0;\ \mathbb Q\text{ の減法と順序}\bigr)
+\end{aligned}`),
+                        paragraph(["もし ", math(String.raw`B\le0`), " ならば、"]),
+                        displayMath(String.raw`\begin{aligned}
+b'&\le u
+&&\bigl(\because\ B=b'-u\le0;\ \mathbb Q\text{ の減法と順序}\bigr)\\
+a\cdot b'&<c\cdot b'
+&&\bigl(\because\ a<c,\ 0<b';\ \text{右乗法の狭義単調性}\bigr)\\
+&\le c\cdot u
+&&\bigl(\because\ b'\le u,\ 0<c;\ \text{左乗法の単調性}\bigr)
+\end{aligned}`),
+                        paragraph(["となり、", math(String.raw`c\cdot u<a\cdot b'`), " と矛盾する。ゆえに、"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<B
+&&\bigl(\because\ B\le0\text{ が不可能};\ \mathbb Q\text{ の全順序}\bigr)
+\end{aligned}`),
+                        paragraph([math(String.raw`C:=c-a\in\mathbb Q`), " と置く。"]),
+                        displayMath(String.raw`\begin{aligned}
+C&=c-a
+&&\bigl(\because\ C\text{ の定義}\bigr)\\
+&=-(a-c)
+&&\bigl(\because\ \text{差の加法の逆元}\bigr)\\
+&=-A
+&&\bigl(\because\ A=a-c\bigr)\\
+0&<C
+&&\bigl(\because\ a<c,\ C=c-a;\ \mathbb Q\text{ の減法と順序}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+b'\cdot C&=b'\cdot(c-a)
+&&\bigl(\because\ C=c-a\bigr)\\
+&=b'\cdot c-b'\cdot a
+&&\bigl(\because\ \text{減法への分配則}\bigr)\\
+&=c\cdot b'-a\cdot b'
+&&\bigl(\because\ \text{積の可換則を二つの積へ適用}\bigr)\\
+&<c\cdot b'-c\cdot u
+&&\bigl(\because\ c\cdot u<a\cdot b';\ \text{同じ元から引く操作の反単調性}\bigr)\\
+&=c\cdot(b'-u)
+&&\bigl(\because\ \text{減法への分配則}\bigr)\\
+&=c\cdot B
+&&\bigl(\because\ B=b'-u\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+0&<b'\cdot C
+&&\bigl(\because\ 0<b',\ 0<C;\ \text{正数の積}\bigr)\\
+0&<c\cdot B
+&&\bigl(\because\ 0<c,\ 0<B;\ \text{正数の積}\bigr)\\
+0&<B\cdot B
+&&\bigl(\because\ 0<B;\ \text{正数の積}\bigr)\\
+(b'\cdot C)\cdot(b'\cdot C)&<(c\cdot B)\cdot(b'\cdot C)
+&&\bigl(\because\ b'\cdot C<c\cdot B,\ 0<b'\cdot C;\ \text{右乗法の狭義単調性}\bigr)\\
 &<(c\cdot B)\cdot(c\cdot B)
-  &&\bigl(\because\ 0<b'\cdot C<c\cdot B\bigr)\\
-&=(c\cdot c)\cdot(B\cdot B)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(B\cdot B)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<B\cdot B\bigr)\\
-&=(b'\cdot b')\cdot\bigl(2\cdot(B\cdot B)\bigr)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr).
+&&\bigl(\because\ b'\cdot C<c\cdot B,\ 0<c\cdot B;\ \text{左乗法の狭義単調性}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          math(String.raw`0<b'\cdot b'`), " なのでこの正因子を消去し、",
-                          math(String.raw`A\cdot A<2\cdot(B\cdot B)`),
-                          " を得る。したがって表示は正錐の第三条件を満たす。三つの場合を合わせて ",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。全過程は有理数の四則と順序、および代数的数の加法だけで閉じる。",
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(b'\cdot b')\cdot(C\cdot C)&=\bigl(b'\cdot(b'\cdot C)\bigr)\cdot C
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(b'\cdot(C\cdot b')\bigr)\cdot C
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=(b'\cdot C)\cdot(b'\cdot C)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(c\cdot B)\cdot(c\cdot B)
+&&\bigl(\because\ \text{直前の二段の狭義不等式の推移律}\bigr)\\
+&=\bigl(c\cdot(B\cdot c)\bigr)\cdot B
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=\bigl(c\cdot(c\cdot B)\bigr)\cdot B
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=(c\cdot c)\cdot(B\cdot B)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(B\cdot B)
+&&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b'),\ 0<B\cdot B;\ \text{右乗法の狭義単調性}\bigr)\\
+&=\bigl((b'\cdot b')\cdot2\bigr)\cdot(B\cdot B)
+&&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=(b'\cdot b')\cdot\bigl(2\cdot(B\cdot B)\bigr)
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
+C\cdot C&<2\cdot(B\cdot B)
+&&\bigl(\because\ \text{上の比較と }0<b'\cdot b';\ \text{正因子の消去}\bigr)\\
+C\cdot C&=(-A)\cdot(-A)
+&&\bigl(\because\ C=-A\bigr)\\
+&=A\cdot A
+&&\bigl(\because\ \text{二つの加法の逆元の積}\bigr)\\
+A\cdot A&=C\cdot C
+&&\bigl(\because\ C\cdot C=A\cdot A\bigr)\\
+&<2\cdot(B\cdot B)
+&&\bigl(\because\ \text{上で正因子を消去した不等式}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+\xi+\eta&\in P_s
+&&\bigl(\because\ \mathrm{rep}_s(\xi+\eta)=(A,B),\ A<0,\ 0<B,\ A\cdot A<2\cdot(B\cdot B);\ \blkref{def_quadratic_positive_cone}\text{ の第三条件}\bigr)
+\end{aligned}`),
+                        paragraph(["三つの場合は ", math(String.raw`\mathbb Q`), " の全順序によりすべてを尽くすので、", math(String.raw`\xi+\eta\in P_s`), " が従う。全過程は ", math(String.raw`\mathbb Q`), " の加法・積・順序と ", math(String.raw`\overline{\mathbb Q}`), " の加法の中で閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },
                 },

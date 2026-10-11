@@ -1,9 +1,9 @@
 /-
-「二つの混合符号条件の和」の具体版で使う有理係数の核。
-有理数の二つの係数対について、交差積の平方比較と
-和の係数の符号による場合分けだけを行う。
+「二つの混合符号条件の和」の独立具体版。
+本文の有理係数の準備、交差積比較、三場合の計算を同じ順で行う。
 -/
 import Ising2DLambda.FisherZero.QuadraticAddition
+import Ising2DLambda.FisherZero.RationalSquareLtImpliesLt
 
 namespace Ising2DLambda.FisherZero
 
@@ -11,158 +11,204 @@ open Ising2DLambda.AlgebraicEigenvalue
 
 set_option maxHeartbeats 1600000 in
 theorem quadraticPositive_add_mixedSigns_coefficients
-    (a b a' b' : ℚ)
+    (a b ap bp : ℚ)
     (ha : 0 < a) (hb : b < 0) (hSq : 2 * b * b < a * a)
-    (ha' : a' < 0) (hb' : 0 < b') (hSq' : a' * a' < 2 * b' * b') :
-    (0 ≤ a + a' ∧ 0 ≤ b + b' ∧ (a + a', b + b') ≠ (0, 0)) ∨
-      (0 < a + a' ∧ b + b' < 0 ∧
-        2 * (b + b') * (b + b') < (a + a') * (a + a')) ∨
-      (a + a' < 0 ∧ 0 < b + b' ∧
-        (a + a') * (a + a') < 2 * (b + b') * (b + b')) := by
-  let c := -a'
+    (hap : ap < 0) (hbp : 0 < bp) (hSqp : ap * ap < 2 * bp * bp) :
+    (0 ≤ a + ap ∧ 0 ≤ b + bp ∧ (a + ap, b + bp) ≠ (0, 0)) ∨
+      (0 < a + ap ∧ b + bp < 0 ∧
+        2 * (b + bp) * (b + bp) < (a + ap) * (a + ap)) ∨
+      (a + ap < 0 ∧ 0 < b + bp ∧
+        (a + ap) * (a + ap) < 2 * (b + bp) * (b + bp)) := by
+  let c := -ap
   let u := -b
-  let A := a + a'
-  let B := b + b'
-  have hc : 0 < c := by simpa [c] using neg_pos.mpr ha'
-  have hu : 0 < u := by simpa [u] using neg_pos.mpr hb
-  have hSqLeft : 2 * u * u < a * a := by simpa [u] using hSq
-  have hSqRight : c * c < 2 * b' * b' := by simpa [c] using hSq'
-  have huSq : 0 < u * u := mul_pos hu hu
-  have hb'Sq : 0 < b' * b' := mul_pos hb' hb'
-  have hCrossSquare :
-      (c * u) * (c * u) < (a * b') * (a * b') := by
+  let A := a + ap
+  let B := b + bp
+  -- 本文「和の係数の書き換え」。
+  have hAeq : A = a - c := by
     calc
-      (c * u) * (c * u) = (c * c) * (u * u) := by ring
-      _ < (2 * b' * b') * (u * u) :=
+      A = a + ap := rfl
+      _ = a - (-ap) := (sub_neg_eq_add a ap).symm
+      _ = a - c := rfl
+  have hBeq : B = bp - u := by
+    calc
+      B = b + bp := rfl
+      _ = bp + b := add_comm _ _
+      _ = bp - (-b) := (sub_neg_eq_add bp b).symm
+      _ = bp - u := rfl
+  -- 本文「準備の符号と平方条件」。
+  have hc : 0 < c := neg_pos.mpr hap
+  have hu : 0 < u := neg_pos.mpr hb
+  have huSquare : u * u = b * b := by
+    calc
+      u * u = (-b) * (-b) := rfl
+      _ = b * b := neg_mul_neg _ _
+  have hcSquare : c * c = ap * ap := by
+    calc
+      c * c = (-ap) * (-ap) := rfl
+      _ = ap * ap := neg_mul_neg _ _
+  have hSqLeft : 2 * (u * u) < a * a := by
+    calc
+      2 * (u * u) = 2 * (b * b) := by rw [huSquare]
+      _ < a * a := by simpa only [mul_assoc] using hSq
+  have hSqRight : c * c < 2 * (bp * bp) := by
+    calc
+      c * c = ap * ap := hcSquare
+      _ < 2 * (bp * bp) := by simpa only [mul_assoc] using hSqp
+  have huSq : 0 < u * u := mul_pos hu hu
+  have hbpSq : 0 < bp * bp := mul_pos hbp hbp
+  have hcu : 0 < c * u := mul_pos hc hu
+  have hcuNonneg : 0 ≤ c * u := le_of_lt hcu
+  have habp : 0 < a * bp := mul_pos ha hbp
+  have habpNonneg : 0 ≤ a * bp := le_of_lt habp
+  -- 本文「交差積の平方比較」。結合則と可換則を別々の行で使う。
+  have hCrossSquare : (c * u) * (c * u) < (a * bp) * (a * bp) := by
+    calc
+      (c * u) * (c * u) = (c * (u * c)) * u := by simp only [mul_assoc]
+      _ = (c * (c * u)) * u := by rw [mul_comm u c]
+      _ = (c * c) * (u * u) := by simp only [mul_assoc]
+      _ < (2 * (bp * bp)) * (u * u) :=
         mul_lt_mul_of_pos_right hSqRight huSq
-      _ = (2 * u * u) * (b' * b') := by ring
-      _ < (a * a) * (b' * b') :=
-        mul_lt_mul_of_pos_right hSqLeft hb'Sq
-      _ = (a * b') * (a * b') := by ring
-  have hcuNonneg : 0 ≤ c * u := le_of_lt (mul_pos hc hu)
-  have hab'Nonneg : 0 ≤ a * b' := le_of_lt (mul_pos ha hb')
-  have hCross : c * u < a * b' := by
-    by_contra hNot
-    have hReverse : a * b' ≤ c * u := le_of_not_gt hNot
-    have hFirst : (a * b') * (a * b') ≤ (c * u) * (a * b') :=
-      mul_le_mul_of_nonneg_right hReverse hab'Nonneg
-    have hSecond : (c * u) * (a * b') ≤ (c * u) * (c * u) :=
-      mul_le_mul_of_nonneg_left hReverse hcuNonneg
-    exact (not_lt_of_ge (le_trans hFirst hSecond)) hCrossSquare
+      _ = 2 * ((bp * bp) * (u * u)) := by simp only [mul_assoc]
+      _ = 2 * ((u * u) * (bp * bp)) := by rw [mul_comm (bp * bp) (u * u)]
+      _ = (2 * (u * u)) * (bp * bp) := by simp only [mul_assoc]
+      _ < (a * a) * (bp * bp) := mul_lt_mul_of_pos_right hSqLeft hbpSq
+      _ = (a * (a * bp)) * bp := by simp only [mul_assoc]
+      _ = (a * (bp * a)) * bp := by rw [mul_comm a bp]
+      _ = (a * bp) * (a * bp) := by simp only [mul_assoc]
+  have hCross : c * u < a * bp := by
+    exact rationalSquareLtImpliesLt (c * u) (a * bp) hcuNonneg habpNonneg hCrossSquare
   by_cases hA : 0 ≤ A
   · by_cases hB : 0 ≤ B
-    · apply Or.inl
-      refine ⟨by simpa [A] using hA, by simpa [B] using hB, ?_⟩
-      intro hPair
-      have hA0 : A = 0 := by simpa [A] using congrArg Prod.fst hPair
-      have hB0 : B = 0 := by simpa [B] using congrArg Prod.snd hPair
-      have hca : c = a := by simp [A] at hA0; linarith
-      have hub' : u = b' := by simp [B] at hB0; linarith
-      exact (ne_of_lt hCross) (by rw [hca, hub'])
-    · apply Or.inr
-      apply Or.inl
+    · -- 本文「二係数とも非負」の場合。同時零を交差積の比較で排除する。
+      have hNonzero : (A, B) ≠ (0, 0) := by
+        intro hPair
+        have hA0 : A = 0 := congrArg Prod.fst hPair
+        have hB0 : B = 0 := congrArg Prod.snd hPair
+        have hca : c = a := (sub_eq_zero.mp (hAeq.symm.trans hA0)).symm
+        have hubp : u = bp := (sub_eq_zero.mp (hBeq.symm.trans hB0)).symm
+        have hCrossEq : c * u = a * bp := by
+          calc
+            c * u = a * u := by rw [hca]
+            _ = a * bp := by rw [hubp]
+        exact (ne_of_lt hCross) hCrossEq
+      exact Or.inl ⟨hA, hB, hNonzero⟩
+    · -- 本文「第二係数が負」の場合。
       have hBneg : B < 0 := lt_of_not_ge hB
-      have hbpU : b' < u := by simp [B] at hBneg; linarith
+      have hbpU : bp < u := sub_neg.mp (hBeq ▸ hBneg)
       have hApos : 0 < A := by
         rcases hA.eq_or_lt with hA0 | hApos
-        · have hca : c = a := by simp [A] at hA0; linarith
-          have hOpposite : a * b' < c * u := by
-            rw [hca]
-            exact mul_lt_mul_of_pos_left hbpU ha
+        · have hca : c = a := (sub_eq_zero.mp (hAeq.symm.trans hA0.symm)).symm
+          have hOpposite : a * bp < c * u := by
+            calc
+              a * bp < a * u := mul_lt_mul_of_pos_left hbpU ha
+              _ = c * u := by rw [hca]
           exact False.elim ((not_lt_of_ge (le_of_lt hCross)) hOpposite)
         · exact hApos
-      let U := u - b'
-      have hU : 0 < U := by simpa [U] using sub_pos.mpr hbpU
-      -- 本文の三段: a·U = a·u − a·b' < a·u − c·u = u·A
+      let U := u - bp
+      have hUNeg : U = -B := by
+        calc
+          U = u - bp := rfl
+          _ = -(bp - u) := (neg_sub _ _).symm
+          _ = -B := by rw [hBeq]
+      have hU : 0 < U := sub_pos.mpr hbpU
       have hRatio : a * U < u * A := by
         calc
-          a * U = a * u - a * b' := by dsimp [U]; ring
-          _ < a * u - c * u := sub_lt_sub_left hCross (a * u)
-          _ = u * A := by dsimp [A, c]; ring
+          a * U = a * (u - bp) := rfl
+          _ = a * u - a * bp := mul_sub _ _ _
+          _ < a * u - c * u := sub_lt_sub_left hCross _
+          _ = (a - c) * u := (sub_mul _ _ _).symm
+          _ = u * (a - c) := mul_comm _ _
+          _ = u * A := by rw [hAeq]
       have haU : 0 < a * U := mul_pos ha hU
       have huA : 0 < u * A := mul_pos hu hApos
-      have hRatioSquare :
-          (a * U) * (a * U) < (u * A) * (u * A) := by
+      have hUSq : 0 < U * U := mul_pos hU hU
+      have hRatioSquare : (a * U) * (a * U) < (u * A) * (u * A) := by
         calc
           (a * U) * (a * U) < (u * A) * (a * U) :=
             mul_lt_mul_of_pos_right hRatio haU
-          _ < (u * A) * (u * A) :=
-            mul_lt_mul_of_pos_left hRatio huA
-      have hScaledLeft :
-          (u * u) * (2 * U * U) < (u * u) * (A * A) := by
+          _ < (u * A) * (u * A) := mul_lt_mul_of_pos_left hRatio huA
+      have hScaled : (u * u) * (2 * (U * U)) < (u * u) * (A * A) := by
         calc
-          (u * u) * (2 * U * U) = (2 * u * u) * (U * U) := by ring
-          _ < (a * a) * (U * U) :=
-            mul_lt_mul_of_pos_right hSqLeft (mul_pos hU hU)
-          _ = (a * U) * (a * U) := by ring
+          (u * u) * (2 * (U * U)) = ((u * u) * 2) * (U * U) :=
+            (mul_assoc _ _ _).symm
+          _ = (2 * (u * u)) * (U * U) := by rw [mul_comm (u * u) 2]
+          _ < (a * a) * (U * U) := mul_lt_mul_of_pos_right hSqLeft hUSq
+          _ = (a * (a * U)) * U := by simp only [mul_assoc]
+          _ = (a * (U * a)) * U := by rw [mul_comm a U]
+          _ = (a * U) * (a * U) := by simp only [mul_assoc]
           _ < (u * A) * (u * A) := hRatioSquare
-          _ = (u * u) * (A * A) := by ring
-      have hFinal : 2 * U * U < A * A := by
-        by_contra hNot
-        have hReverse : A * A ≤ 2 * U * U := le_of_not_gt hNot
-        have hScaledReverse : (u * u) * (A * A) ≤ (u * u) * (2 * U * U) :=
-          mul_le_mul_of_nonneg_left hReverse (le_of_lt huSq)
-        exact (not_lt_of_ge hScaledReverse) hScaledLeft
-      refine ⟨by simpa [A] using hApos, by simpa [B] using hBneg, ?_⟩
-      calc
-        2 * (b + b') * (b + b') = 2 * U * U := by
-          dsimp [U, u]
-          ring
-        _ < A * A := hFinal
-        _ = (a + a') * (a + a') := by rfl
-  · apply Or.inr
-    apply Or.inr
+          _ = (u * (A * u)) * A := by simp only [mul_assoc]
+          _ = (u * (u * A)) * A := by rw [mul_comm A u]
+          _ = (u * u) * (A * A) := by simp only [mul_assoc]
+      have hFinal : 2 * (U * U) < A * A :=
+        lt_of_mul_lt_mul_left hScaled (le_of_lt huSq)
+      have hUSquare : U * U = B * B := by
+        calc
+          U * U = (-B) * (-B) := by rw [hUNeg]
+          _ = B * B := neg_mul_neg _ _
+      have hSumSquare : 2 * (B * B) < A * A := by
+        calc
+          2 * (B * B) = 2 * (U * U) := by rw [hUSquare]
+          _ < A * A := hFinal
+      exact Or.inr (Or.inl ⟨hApos, hBneg, by simpa only [mul_assoc] using hSumSquare⟩)
+  · -- 本文「第一係数が負」の場合。
     have hAneg : A < 0 := lt_of_not_ge hA
-    have haC : a < c := by simp [A] at hAneg; linarith
+    have haC : a < c := sub_neg.mp (hAeq ▸ hAneg)
     have hBpos : 0 < B := by
       by_contra hNot
       have hBnonpos : B ≤ 0 := le_of_not_gt hNot
-      have hb'U : b' ≤ u := by simp [B] at hBnonpos; linarith
-      have hOpposite : a * b' < c * u :=
+      have hbpU : bp ≤ u := sub_nonpos.mp (hBeq ▸ hBnonpos)
+      have hOpposite : a * bp < c * u := by
         calc
-          a * b' < c * b' := mul_lt_mul_of_pos_right haC hb'
-          _ ≤ c * u := mul_le_mul_of_nonneg_left hb'U (le_of_lt hc)
+          a * bp < c * bp := mul_lt_mul_of_pos_right haC hbp
+          _ ≤ c * u := mul_le_mul_of_nonneg_left hbpU (le_of_lt hc)
       exact (not_lt_of_ge (le_of_lt hCross)) hOpposite
     let C := c - a
-    have hC : 0 < C := by simpa [C] using sub_pos.mpr haC
-    have huB : 0 < B := hBpos
-    -- 本文の三段: b'·C = c·b' − a·b' < c·b' − c·u = c·B
-    have hRatio : b' * C < c * B := by
+    have hCNeg : C = -A := by
       calc
-        b' * C = c * b' - a * b' := by dsimp [C]; ring
-        _ < c * b' - c * u := sub_lt_sub_left hCross (c * b')
-        _ = c * B := by dsimp [B, u]; ring
-    have hb'C : 0 < b' * C := mul_pos hb' hC
-    have hcB : 0 < c * B := mul_pos hc huB
-    have hRatioSquare :
-        (b' * C) * (b' * C) < (c * B) * (c * B) := by
+        C = c - a := rfl
+        _ = -(a - c) := (neg_sub _ _).symm
+        _ = -A := by rw [hAeq]
+    have hC : 0 < C := sub_pos.mpr haC
+    have hRatio : bp * C < c * B := by
       calc
-        (b' * C) * (b' * C) < (c * B) * (b' * C) :=
-          mul_lt_mul_of_pos_right hRatio hb'C
-        _ < (c * B) * (c * B) :=
-          mul_lt_mul_of_pos_left hRatio hcB
-    have hScaledRight :
-        (b' * b') * (C * C) < (b' * b') * (2 * B * B) := by
+        bp * C = bp * (c - a) := rfl
+        _ = bp * c - bp * a := mul_sub _ _ _
+        _ = c * bp - a * bp := by rw [mul_comm bp c, mul_comm bp a]
+        _ < c * bp - c * u := sub_lt_sub_left hCross _
+        _ = c * (bp - u) := (mul_sub _ _ _).symm
+        _ = c * B := by rw [hBeq]
+    have hbpC : 0 < bp * C := mul_pos hbp hC
+    have hcB : 0 < c * B := mul_pos hc hBpos
+    have hBSq : 0 < B * B := mul_pos hBpos hBpos
+    have hRatioSquare : (bp * C) * (bp * C) < (c * B) * (c * B) := by
       calc
-        (b' * b') * (C * C) = (b' * C) * (b' * C) := by ring
+        (bp * C) * (bp * C) < (c * B) * (bp * C) :=
+          mul_lt_mul_of_pos_right hRatio hbpC
+        _ < (c * B) * (c * B) := mul_lt_mul_of_pos_left hRatio hcB
+    have hScaled : (bp * bp) * (C * C) < (bp * bp) * (2 * (B * B)) := by
+      calc
+        (bp * bp) * (C * C) = (bp * (bp * C)) * C := by simp only [mul_assoc]
+        _ = (bp * (C * bp)) * C := by rw [mul_comm bp C]
+        _ = (bp * C) * (bp * C) := by simp only [mul_assoc]
         _ < (c * B) * (c * B) := hRatioSquare
-        _ = (c * c) * (B * B) := by ring
-        _ < (2 * b' * b') * (B * B) :=
-          mul_lt_mul_of_pos_right hSqRight (mul_pos hBpos hBpos)
-        _ = (b' * b') * (2 * B * B) := by ring
-    have hFinal : C * C < 2 * B * B := by
-      by_contra hNot
-      have hReverse : 2 * B * B ≤ C * C := le_of_not_gt hNot
-      have hScaledReverse : (b' * b') * (2 * B * B) ≤ (b' * b') * (C * C) :=
-        mul_le_mul_of_nonneg_left hReverse (le_of_lt hb'Sq)
-      exact (not_lt_of_ge hScaledReverse) hScaledRight
-    refine ⟨by simpa [A] using hAneg, by simpa [B] using hBpos, ?_⟩
-    calc
-      (a + a') * (a + a') = C * C := by
-        dsimp [C, c]
-        ring
-      _ < 2 * B * B := hFinal
-      _ = 2 * (b + b') * (b + b') := by rfl
+        _ = (c * (B * c)) * B := by simp only [mul_assoc]
+        _ = (c * (c * B)) * B := by rw [mul_comm B c]
+        _ = (c * c) * (B * B) := by simp only [mul_assoc]
+        _ < (2 * (bp * bp)) * (B * B) := mul_lt_mul_of_pos_right hSqRight hBSq
+        _ = ((bp * bp) * 2) * (B * B) := by rw [mul_comm 2 (bp * bp)]
+        _ = (bp * bp) * (2 * (B * B)) := mul_assoc _ _ _
+    have hFinal : C * C < 2 * (B * B) :=
+      lt_of_mul_lt_mul_left hScaled (le_of_lt hbpSq)
+    have hCSquare : C * C = A * A := by
+      calc
+        C * C = (-A) * (-A) := by rw [hCNeg]
+        _ = A * A := neg_mul_neg _ _
+    have hSumSquare : A * A < 2 * (B * B) := by
+      calc
+        A * A = C * C := hCSquare.symm
+        _ < 2 * (B * B) := hFinal
+    exact Or.inr (Or.inr ⟨hAneg, hBpos, by simpa only [mul_assoc] using hSumSquare⟩)
 
 theorem quadraticPositive_add_of_mixedSigns
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
@@ -176,8 +222,10 @@ theorem quadraticPositive_add_of_mixedSigns
       (quadraticRepresentation s eta).1 * (quadraticRepresentation s eta).1 <
         2 * (quadraticRepresentation s eta).2 * (quadraticRepresentation s eta).2) :
     quadraticAddElement s xi eta ∈ quadraticPositiveCone s := by
+  -- 本文「和の表示」を係数の計算へ渡し、得られた三条件から所属を結論する。
+  have hRep := quadraticRepresentation_add s hs xi eta
   change quadraticCoefficientPositive (quadraticRepresentation s (quadraticAddElement s xi eta))
-  rw [quadraticRepresentation_add s hs xi eta]
+  rw [hRep]
   exact quadraticPositive_add_mixedSigns_coefficients
     (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2
     (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2

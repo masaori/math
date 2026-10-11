@@ -1,4 +1,4 @@
-import Ising2DLambda.FisherZero.QuadraticPositiveAddMixedSigns
+import Ising2DLambda.FisherZero.QuadraticAdditionFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.QuadraticPositiveAddMixedSigns
 
 namespace Ising2DLambda.FisherZero
@@ -17,8 +17,9 @@ theorem quadraticPositive_add_of_mixedSigns_from_necSuf
       (quadraticRepresentation s eta).1 * (quadraticRepresentation s eta).1 <
         2 * (quadraticRepresentation s eta).2 * (quadraticRepresentation s eta).2) :
     quadraticAddElement s xi eta ∈ quadraticPositiveCone s := by
+  have hRep := quadraticRepresentation_add_from_necSuf s hs xi eta
   change quadraticCoefficientPositive (quadraticRepresentation s (quadraticAddElement s xi eta))
-  rw [quadraticRepresentation_add s hs xi eta]
+  rw [hRep]
   exact Ising2DLambda.NecSuf.FisherZero.positive_add_mixedSigns_necSuf
     (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2
     (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2
