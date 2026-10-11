@@ -1,6 +1,6 @@
 # SageMath Check: 二次体の加法による閉性と和の表示
 
-対象ラベル: `claim_quadratic_addition_mem`、`claim_quadratic_addition_representation`
+**対象ラベル**: `claim_quadratic_addition_mem`、`claim_quadratic_addition_representation`
 
 - 実行日: 2026-10-11
 - 結果: 通過。既存の和の両立49組・和の鎖と表示4,802組に加え、閉性の本文十三行を九等号43,218件・四所属19,208件で検算した。

@@ -30467,6 +30467,8 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                       verification: ["sagemath/check/trivial-sector-configuration-reconstruction"],
                       lean: [
                         "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two",
+                        "Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum_from_necSuf",
+                        "Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_constructed_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant",

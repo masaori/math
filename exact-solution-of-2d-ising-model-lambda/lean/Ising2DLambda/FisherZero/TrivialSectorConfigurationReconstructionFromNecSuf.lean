@@ -212,6 +212,37 @@ theorem reconstructionParityPower_ne_iff_add_eq_one_from_necSuf (a b : ZMod 2) :
     hcover (by decide) (by decide) (by decide)
     (by decide) (by decide) (by decide) (by decide) a b
 
+/-- 所属判定へ使う端点の順に、横辺差・縦辺差を並べる。 -/
+theorem reconstructionPathParity_endpoint_sum_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (e : Edge L) :
+    reconstructionPathParity L A (boundary0 L e).1 (boundary0 L e).2 +
+        reconstructionPathParity L A (boundary1 L e).1 (boundary1 L e).2 =
+      (if e ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  rw [show e = edgeEquiv L ((edgeEquiv L).symm e) by simp]
+  rcases (edgeEquiv L).symm e with ⟨i, j⟩ | ⟨i, j⟩
+  · simp only [edgeEquiv_inl_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_horizontal]
+    calc
+      reconstructionPathParity L A i j + reconstructionPathParity L A i (j + 1) =
+          reconstructionPathParity L A i (j + 1) + reconstructionPathParity L A i j :=
+        add_comm _ _
+      _ = _ := by
+        by_cases hj : j.val + 1 = L
+        · exact reconstructionPathParity_horizontal_boundary_difference_from_necSuf L A hSector i j hj
+        · have hjlt : j.val + 1 < L := by have := j.val_lt; omega
+          exact reconstructionPathParity_horizontal_interior_difference_from_necSuf L A i j hjlt
+  · simp only [edgeEquiv_inr_pair, edgeOfRow_boundary0, edgeOfRow_boundary1_vertical]
+    calc
+      reconstructionPathParity L A i j + reconstructionPathParity L A (i + 1) j =
+          reconstructionPathParity L A (i + 1) j + reconstructionPathParity L A i j :=
+        add_comm _ _
+      _ = _ := by
+        by_cases hi : i.val + 1 = L
+        · exact reconstructionPathParity_vertical_boundary_difference_from_necSuf L A hSector i j hi
+        · have hilt : i.val + 1 < L := by have := i.val_lt; omega
+          exact reconstructionPathParity_vertical_interior_difference_from_necSuf L A hSector.1 i j hilt
+
 /-- 所属の同値列へ、実際の端点・整数値の配位・道和・辺の指示関数を供給する。 -/
 theorem reconstructedConfiguration_brokenEdgeSet_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
@@ -228,7 +259,7 @@ theorem reconstructedConfiguration_brokenEdgeSet_from_necSuf
       simp only [brokenEdgeSet, mem_filter, mem_univ, true_and]
       exact not_congr Subtype.ext_iff)
     (fun _ => rfl) reconstructionParityPower_ne_iff_add_eq_one_from_necSuf
-    (reconstructionPathParity_endpoint_sum L A hSector)
+    (reconstructionPathParity_endpoint_sum_from_necSuf L A hSector)
 
 /-- 双対像の二等号へ、実際の双対辺写像と逆像との往復を供給する。 -/
 theorem reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf
@@ -274,5 +305,14 @@ theorem trivialSectorConfiguration_fiber_card_two_from_necSuf
       simpa only [brokenEdgeSet, mem_filter, mem_univ, true_and] using
         (Finset.ext_iff.mp hBroken e).symm)
   simpa [hσ] using h
+
+/-- 自明セクターから実際の復元配位を証人として供給し、原像の個数を導く。 -/
+theorem trivialSectorConfiguration_fiber_card_two_constructed_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (univ.filter fun σ : Config L => dualBrokenEdgeSet L σ = A).card = 2 := by
+  apply trivialSectorConfiguration_fiber_card_two_from_necSuf L A
+  exact ⟨reconstructedConfiguration L A,
+    reconstructedConfiguration_dualBrokenEdgeSet_from_necSuf L A hSector⟩
 
 end Ising2DLambda.FisherZero

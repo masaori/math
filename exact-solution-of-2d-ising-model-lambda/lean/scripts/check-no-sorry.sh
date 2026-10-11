@@ -68,6 +68,8 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_from_necSuf
   Ising2DLambda.FisherZero.reconstructionParityPower_ne_iff_add_eq_one
   Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum
+  Ising2DLambda.FisherZero.reconstructionPathParity_endpoint_sum_from_necSuf
+  Ising2DLambda.FisherZero.trivialSectorConfiguration_fiber_card_two_constructed_from_necSuf
   Ising2DLambda.NecSuf.FisherZero.two_value_disagreement_necSuf
   Ising2DLambda.NecSuf.FisherZero.reconstructed_membership_necSuf
   Ising2DLambda.NecSuf.FisherZero.reconstructed_image_necSuf
