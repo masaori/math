@@ -6587,6 +6587,190 @@ p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_i
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_perfect_matching_sign",
+        labels: [],
+        title: { text: "完全マッチングの符号と対の列挙順序" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_perfect_matching_sign",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_perfect_matching_enumeration",
+                  kind: "definition",
+                  title: { text: "昇順対の列挙と端点の連結列" },
+                  labels: ["def_perfect_matching_enumeration"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.IsCompleteWord",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingOrientedPairs",
+                    "Ising2DLambda.AlgebraicEigenvalue.IsMatchingEnumeration",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingPairWord",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-sign"],
+                  statement: [
+                    paragraph([ref("def_finite_perfect_matching"), " の有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。有限列とは、有限個の元を順序を付けて並べたものをいい、列の連結を ", math(String.raw`U\mathbin{+\!+}V`), "、空列を ", math(String.raw`[]`), " と書く。", math(String.raw`\mathcal J`), " の各元をちょうど一度含む列を完全列挙と呼ぶ。"]),
+                    paragraph([math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " の各組を昇順に向けた対の有限集合を"]),
+                    displayMath(String.raw`E_{\mathcal D}:=\{(a,b)\in\mathcal J\times\mathcal J\mid a\prec b,\ \{a,b\}\in\mathcal D\}`),
+                    paragraph(["と定める。", math(String.raw`E_{\mathcal D}`), " の各対をちょうど一度含む列 ", math(String.raw`\mathcal L=[(a_1,b_1),\ldots,(a_m,b_m)]`), " を昇順対の列挙と呼ぶ。ここで ", math(String.raw`m\in\mathbb N`), "、", math(String.raw`a_r,b_r\in\mathcal J`), " である。端点の連結列は"]),
+                    displayMath(String.raw`W(\mathcal L):=[a_1,b_1,\ldots,a_m,b_m],\qquad W([]):=[]`),
+                    paragraph(["である。対の内部の向きは固定するが、対を並べる順序は固定しない。"]),
+                  ],
+                },
+              },
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "tools_claim_perfect_matching_enumeration_complete",
+                  kind: "claim",
+                  title: { text: "昇順対の列挙の存在と端点の完全列挙" },
+                  labels: ["claim_perfect_matching_enumeration_complete"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingEnumeration_exists",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingOrientedPairs_disjoint",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingEnumeration_complete",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingEnumerations_perm",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-sign"],
+                  statement: [
+                    paragraph([ref("def_perfect_matching_enumeration"), " の昇順対の列挙 ", math(String.raw`\mathcal L`), " は必ず存在し、", math(String.raw`W(\mathcal L)`), " は ", math(String.raw`\mathcal J`), " の完全列挙になる。同じマッチングの二つの昇順対の列挙は、隣り合う対の交換を有限回繰り返して移り合う。"]),
+                  ],
+                  proof: [
+                    paragraph([ref("def_finite_perfect_matching"), " により、各組は相異なる ", math(String.raw`a,b\in\mathcal J`), " による ", math(String.raw`\{a,b\}`), " である。線型順序の三分律で ", math(String.raw`a\prec b`), " または ", math(String.raw`b\prec a`), " の一方だけが成り立つから、昇順の向きはただ一つである。", math(String.raw`E_{\mathcal D}\subseteq\mathcal J\times\mathcal J`), " は有限なので、その元を一つずつ取り除いて並べれば昇順対の列挙が得られる。"]),
+                    paragraph([math(String.raw`i\in\mathcal J`), " を取る。", ref("def_finite_perfect_matching"), " による ", math(String.raw`i`), " を含む組を昇順に向ければ、その対は列挙に現れるので ", math(String.raw`i`), " は ", math(String.raw`W(\mathcal L)`), " に現れる。重複がないことを示すため、昇順対 ", math(String.raw`(a,b),(c,d)\in E_{\mathcal D}`), " が同じ点 ", math(String.raw`i`), " を含むとする。"]),
+                    displayMath(String.raw`\{a,b\}=\{c,d\}\qquad\bigl(\because\ \blkref{def_finite_perfect_matching}\text{ の組の一意性}\bigr)`),
+                    paragraph(["二元集合の等号から、端点は同順に一致するか逆順に一致する。逆順なら ", math(String.raw`a=d`), "、", math(String.raw`b=c`), " を ", math(String.raw`c\prec d`), " に代入して ", math(String.raw`b\prec a`), " となり、", math(String.raw`a\prec b`), " と矛盾する。したがって"]),
+                    displayMath(String.raw`(a,b)=(c,d)\qquad\bigl(\because\ \text{二元集合の等号と両対の昇順性}\bigr)`),
+                    paragraph(["である。一つの対の二点も相異なり、対の列挙にも重複がないので、連結列に重複はない。これで完全列挙を得た。"]),
+                    paragraph(["最後の主張を、重複なしに同じ元を並べた二列について示す。空列なら両方とも空である。一方が空でなければ、その先頭の元を他方の中で探し、直前の元との交換を繰り返して先頭へ移す。先頭が一致したら両方からそれを除く。重複がないため、残った二列にも同じ元がちょうど一度ずつ現れる。長さが一つ減るので帰納法を適用できる。これは昇順対を元とする二列にも適用でき、必要な有限回の隣接交換を与える。各交換は元の出現回数を変えないから、端点の完全列挙も保たれる。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_matching_word_sign",
+                  kind: "definition",
+                  title: { text: "完全列挙の置換とその符号" },
+                  labels: ["def_matching_word_sign", "def_perfect_matching_sign"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingBaseWord",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation_apply_get",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWordSign",
+                    "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-sign"],
+                  statement: [
+                    paragraph([math(String.raw`n:=|\mathcal J|\in\mathbb N`), " とし、昇順の完全列挙を ", math(String.raw`[j_1,\ldots,j_n]`), " と書く。これは最小元を取り除く操作を繰り返して得られる。有限な非空の線型順序集合に最小元があることは、元を一つ追加するたびに既に選んだ最小元と比較する帰納法で分かる。任意の完全列挙 ", math(String.raw`w=[w_1,\ldots,w_n]`), " に対し、"]),
+                    displayMath(String.raw`\pi_w(j_k):=w_k\qquad(1\le k\le n)`),
+                    paragraph(["と定める。両列とも各元をちょうど一度含むので、逆写像は ", math(String.raw`w_k\mapsto j_k`), " で与えられる。したがって ", math(String.raw`\pi_w\in\operatorname{Perm}(\mathcal J)`), " である。", ref("def_permutation_sign"), " の転倒数による符号を用いて"]),
+                    displayMath(String.raw`\varepsilon(w):=\operatorname{sgn}(\pi_w)\in\{-1,1\}\subset\mathbb Z`),
+                    paragraph(["と定める。", ref("claim_perfect_matching_enumeration_complete"), " によって昇順対の列挙 ", math(String.raw`\mathcal L_0`), " を一つ取り、完全マッチングの符号を"]),
+                    displayMath(String.raw`\operatorname{sgn}(\mathcal D):=\varepsilon(W(\mathcal L_0))\in\{-1,1\}\subset\mathbb Z`),
+                    paragraph(["と置く。後の主張で、この値が ", math(String.raw`\mathcal L_0`), " の選び方に依存しないことを示す。"]),
+                  ],
+                },
+              },
+              {
+                role: "supportingClaim",
+                element: {
+                  id: "tools_claim_matching_word_sign_swap",
+                  kind: "claim",
+                  title: { text: "完全列挙の隣接交換は符号を反転する" },
+                  labels: ["claim_matching_word_sign_swap"],
+                  habitat: "Z",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.completeWord_swap",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation_map",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWord_swap_eq_map",
+                    "Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_swap",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-sign"],
+                  statement: [
+                    paragraph([math(String.raw`U,V`), " を ", math(String.raw`\mathcal J`), " の元の有限列、", math(String.raw`a,b\in\mathcal J`), " とし、", math(String.raw`w:=U\mathbin{+\!+}[a,b]\mathbin{+\!+}V`), " が完全列挙であるとする。", math(String.raw`w':=U\mathbin{+\!+}[b,a]\mathbin{+\!+}V`), " も完全列挙であり、"]),
+                    displayMath(String.raw`\varepsilon(w')=-\varepsilon(w)\in\mathbb Z`),
+                    paragraph(["である。"]),
+                  ],
+                  proof: [
+                    paragraph(["交換は各元の出現回数を変えないため、", math(String.raw`w'`), " も完全列挙である。重複がないため ", math(String.raw`a\ne b`), " で、", math(String.raw`U,V`), " に ", math(String.raw`a,b`), " は現れない。", ref("claim_transposition_sign_on_finite_ordered_set"), " の ", math(String.raw`a,b`), " を交換する置換を ", math(String.raw`t_{a,b}\in\operatorname{Perm}(\mathcal J)`), " と書く。この置換は ", math(String.raw`U,V`), " の元を固定し、", math(String.raw`a,b`), " を交換するので、各位置 ", math(String.raw`k`), " で ", math(String.raw`w'_k=t_{a,b}(w_k)`), " である。", ref("def_matching_word_sign"), " の基準列の各 ", math(String.raw`j_k`), " において、"]),
+                    displayMath(String.raw`\begin{aligned}
+\pi_{w'}(j_k)&=w'_k&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
+ &=t_{a,b}(w_k)&&\bigl(\because\ \text{各位置での値の交換}\bigr)\\
+ &=t_{a,b}(\pi_w(j_k))&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+\end{aligned}`),
+                    paragraph(["基準列が全元を含むから、これは置換そのものの等号 ", math(String.raw`\pi_{w'}=t_{a,b}\circ\pi_w`), " である。したがって、"]),
+                    displayMath(String.raw`\begin{aligned}
+\varepsilon(w')&=\operatorname{sgn}(\pi_{w'})&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
+ &=\operatorname{sgn}(t_{a,b}\circ\pi_w)&&\bigl(\because\ \text{上で得た置換の等号}\bigr)\\
+ &=\operatorname{sgn}(t_{a,b})\operatorname{sgn}(\pi_w)&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+ &=(-1)\operatorname{sgn}(\pi_w)&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set},\ a\ne b\bigr)\\
+ &=-\operatorname{sgn}(\pi_w)&&\bigl(\because\ \text{整数の }-1\text{ 倍}\bigr)\\
+ &=-\varepsilon(w)&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+\end{aligned}`),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "tools_claim_perfect_matching_sign_enumeration_independent",
+              kind: "claim",
+              title: { text: "完全マッチングの符号は対の列挙順序に依存しない" },
+              labels: ["claim_perfect_matching_sign_enumeration_independent"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_swap_pairs",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_pair_perm",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_enumeration_independent",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_eq_one_or_neg_one",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_empty",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingWord_value_pair_perm",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_enumeration_independent_from_necSuf",
+              ],
+              verification: ["sagemath/check/perfect-matching-sign"],
+              statement: [
+                paragraph([ref("def_perfect_matching_enumeration"), " の任意の昇順対の列挙 ", math(String.raw`\mathcal L`), " について、", ref("def_perfect_matching_sign"), " の符号は"]),
+                displayMath(String.raw`\varepsilon(W(\mathcal L))=\operatorname{sgn}(\mathcal D)\in\{-1,1\}\subset\mathbb Z`),
+                paragraph(["を満たす。特に空集合の唯一の完全マッチングの符号は ", math(String.raw`1\in\mathbb Z`), " である。"]),
+              ],
+              proof: [
+                paragraph(["まず隣り合う二対 ", math(String.raw`(a,b),(c,d)`), " の交換を考える。", ref("claim_perfect_matching_enumeration_complete"), " により ", math(String.raw`U\mathbin{+\!+}[a,b,c,d]\mathbin{+\!+}V`), " は完全列挙で、四点は相異なる。ここで ", math(String.raw`U,V`), " は交換部分の前後にある端点の列である。四回の隣接交換を次のように行う。"]),
+                displayMath(String.raw`\begin{gathered}
+[a,b,c,d]\longmapsto[a,c,b,d]\longmapsto[c,a,b,d]\\
+\longmapsto[c,a,d,b]\longmapsto[c,d,a,b].
+\end{gathered}`),
+                paragraph(["各交換は完全列挙を保つので、途中の列にも ", ref("claim_matching_word_sign_swap"), " を適用できる。以下では同じ ", math(String.raw`U,V`), " を前後へ付ける記号を省いて ", math(String.raw`\varepsilon[a,b,c,d]:=\varepsilon(U\mathbin{+\!+}[a,b,c,d]\mathbin{+\!+}V)`), " とだけ略記する。"]),
+                displayMath(String.raw`\begin{aligned}
+\varepsilon[c,d,a,b]&=-\varepsilon[c,a,d,b]&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }a,d\text{ へ適用}\bigr)\\
+ &=-(-\varepsilon[c,a,b,d])&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }b,d\text{ へ適用}\bigr)\\
+ &=\varepsilon[c,a,b,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr)\\
+ &=-\varepsilon[a,c,b,d]&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }a,c\text{ へ適用}\bigr)\\
+ &=-(-\varepsilon[a,b,c,d])&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\text{ を }b,c\text{ へ適用}\bigr)\\
+ &=\varepsilon[a,b,c,d]&&\bigl(\because\ \text{整数の二重符号反転}\bigr).
+\end{aligned}`),
+                paragraph(["これで隣り合う二対の交換は符号を保つ。一般の二つの列挙は ", ref("claim_perfect_matching_enumeration_complete"), " の先頭を合わせる帰納法で移り合う。帰納法では、既に一致させた対の端点を前置列 ", math(String.raw`U`), " として残し、", math(String.raw`U\mathbin{+\!+}W(\mathcal L)`), " 全体を完全列挙とする。尾の ", math(String.raw`W(\mathcal L)`), " だけを完全列挙とはしない。交換を一回追加するたび上の等号を適用し、交換列をつなぐときは等号の推移律を使う。交換零回の等号からの帰納法により、すべての列挙で符号は一致する。", ref("def_perfect_matching_sign"), " で選んだ ", math(String.raw`\mathcal L_0`), " と比較すれば主張の等号を得る。"]),
+                paragraph(["空集合では対の列挙も端点の列も空である。", ref("def_matching_word_sign"), " の置換は空集合上の恒等置換で、転倒対は存在しない。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\varnothing)&=\operatorname{sgn}(\operatorname{id}_{\varnothing})&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
+ &=(-1)^0&&\bigl(\because\ \blkref{def_permutation_sign},\ \text{転倒対は空}\bigr)\\
+ &=1&&\bigl(\because\ \text{整数の零乗}\bigr).
+\end{aligned}`),
+                paragraph(["すべての集合と列は有限で、符号の計算は整数の中で閉じる。実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

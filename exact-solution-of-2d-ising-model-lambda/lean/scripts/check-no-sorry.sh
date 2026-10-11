@@ -52,6 +52,35 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation_swap
+  Ising2DLambda.AlgebraicEigenvalue.IsCompleteWord.perm
+  Ising2DLambda.AlgebraicEigenvalue.completeWord_swap
+  Ising2DLambda.AlgebraicEigenvalue.matchingList_move_front
+  Ising2DLambda.AlgebraicEigenvalue.matchingList_perm_of_same_mem
+  Ising2DLambda.AlgebraicEigenvalue.matchingBaseWord_complete
+  Ising2DLambda.AlgebraicEigenvalue.completeWord_length
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation_apply_get
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_eq
+  Ising2DLambda.AlgebraicEigenvalue.completeWord_map
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordPermutation_map
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_map
+  Ising2DLambda.AlgebraicEigenvalue.matchingWord_swap_eq_map
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_swap
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_swap_pairs
+  Ising2DLambda.AlgebraicEigenvalue.matchingWordSign_pair_perm
+  Ising2DLambda.AlgebraicEigenvalue.matchingCanonicalEnumeration_spec
+  Ising2DLambda.AlgebraicEigenvalue.matchingEnumeration_exists
+  Ising2DLambda.AlgebraicEigenvalue.matchingOrientedPairs_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.matchingEnumeration_complete
+  Ising2DLambda.AlgebraicEigenvalue.matchingEnumerations_perm
+  Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_eq_one_or_neg_one
+  Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_enumeration_independent
+  Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_empty
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.IsCompleteWord.perm
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.completeWord_swap
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingWord_value_swap_pairs
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingWord_value_pair_perm
+  Ising2DLambda.AlgebraicEigenvalue.perfectMatchingSign_enumeration_independent_from_necSuf
   Ising2DLambda.FisherZero.reconstructedEdgeSet_face_incidence_count
   Ising2DLambda.NecSuf.FisherZero.face_equation_necSuf
   Ising2DLambda.NecSuf.FisherZero.face_solve_last_necSuf
