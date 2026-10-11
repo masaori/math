@@ -118,6 +118,7 @@ export const ALL_LABELS = [
   "claim_invariant_subset_reversal_iterate",
   "claim_invariant_subset_reversal_orbit",
   "claim_invariant_subset_reversal_orbit_length",
+  "claim_invariant_subset_reversal_sign",
   "claim_inversion_count_orbit_decomposition",
   "claim_isolated_smoothing_crossing_number_update",
   "claim_iterated_staircase_parallel_width_bound",

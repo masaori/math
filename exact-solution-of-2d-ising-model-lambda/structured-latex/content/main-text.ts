@@ -8014,6 +8014,125 @@ R_{\mathrm{odd}}(\sigma)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_invariant_subset_reversal_sign",
+        labels: [],
+        title: { text: "不変部分集合の反転と置換の符号" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_invariant_subset_reversal_sign",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_invariant_subset_reversal_sign",
+              title: { text: "不変部分集合上の反転は置換の符号を保つ" },
+              labels: ["claim_invariant_subset_reversal_sign"],
+              habitat: "Z",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_sign",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_sign",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_sign_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitReversal_sign_from_necSuf",
+              ],
+              verification: ["sagemath/check/invariant-subset-reversal-sign"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と線型順序 ", math(String.raw`\prec`), "、部分集合 ", math(String.raw`C\subseteq\mathcal J`), "、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取り、すべての ", math(String.raw`i\in\mathcal J`), " について ", math(String.raw`\sigma(i)\in C\Longleftrightarrow i\in C`), " とする。反転は ", ref("def_invariant_subset_reversal"), " と ", ref("claim_invariant_subset_reversal"), "、整数値の符号は ", ref("def_permutation_sign"), " の意味である。このとき、"]),
+                displayMath(String.raw`\mathrm{sgn}(\rho_C(\sigma))=\mathrm{sgn}(\sigma).`),
+                paragraph(["特に ", ref("def_odd_orbit_derangements"), " の任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " に対して、", ref("def_selected_odd_orbit_reversal"), " の反転は、"]),
+                displayMath(String.raw`\mathrm{sgn}(R_{\mathrm{odd}}(\sigma))=\mathrm{sgn}(\sigma)`),
+                paragraph(["を満たす。有限集合と部分集合はいずれも空を許す。特に奇数軌道を持つ対象集合が空のとき、後半は全称命題として成り立つ。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`\tau:=\rho_C(\sigma)\in\operatorname{Perm}(\mathcal J)`), " と置く。まず、各 ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(i)\in C
+ &\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))\in C
+ &&\bigl(\because\ C\text{ の不変条件を }\sigma^{-1}(i)\text{ へ適用}\bigr)\\
+ &\ \Longleftrightarrow\ i\in C
+ &&\bigl(\because\ \text{置換と逆写像の相殺}\bigr).
+\end{aligned}`),
+                paragraph(["二つの写像 ", math(String.raw`p,q:\mathcal J\to\mathcal J`), " を次で定める。内側では元の置換または逆置換、外側では恒等写像とする。"]),
+                displayMath(String.raw`p(i):=
+\begin{cases}
+  \sigma(i)&i\in C,\\
+  i&i\notin C,
+\end{cases}
+\qquad q(i):=
+\begin{cases}
+  \sigma^{-1}(i)&i\in C,\\
+  i&i\notin C.
+\end{cases}`),
+                paragraph(["まず ", math(String.raw`p`), " と ", math(String.raw`q`), " が互いに逆であることを計算する。", math(String.raw`i\in C`), " なら上の同値から ", math(String.raw`\sigma^{-1}(i)\in C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+p(q(i))&=p(\sigma^{-1}(i))&&\bigl(\because\ q\text{ の定義},\ i\in C\bigr)\\
+ &=\sigma(\sigma^{-1}(i))&&\bigl(\because\ p\text{ の定義},\ \sigma^{-1}(i)\in C\bigr)\\
+ &=i&&\bigl(\because\ \text{置換と逆写像の相殺}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+p(q(i))&=p(i)&&\bigl(\because\ q\text{ の定義},\ i\notin C\bigr)\\
+ &=i&&\bigl(\because\ p\text{ の定義},\ i\notin C\bigr).
+\end{aligned}`),
+                paragraph(["逆の合成も調べる。", math(String.raw`i\in C`), " なら不変条件から ", math(String.raw`\sigma(i)\in C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+q(p(i))&=q(\sigma(i))&&\bigl(\because\ p\text{ の定義},\ i\in C\bigr)\\
+ &=\sigma^{-1}(\sigma(i))&&\bigl(\because\ q\text{ の定義},\ \sigma(i)\in C\bigr)\\
+ &=i&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+q(p(i))&=q(i)&&\bigl(\because\ p\text{ の定義},\ i\notin C\bigr)\\
+ &=i&&\bigl(\because\ q\text{ の定義},\ i\notin C\bigr).
+\end{aligned}`),
+                paragraph(["従って ", math(String.raw`p,q\in\operatorname{Perm}(\mathcal J)`), " であり、", math(String.raw`p=q^{-1}`), " である。次に ", math(String.raw`q\circ(q\circ\sigma)`), " の値を求める。", math(String.raw`i\in C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+(q\circ(q\circ\sigma))(i)
+ &=q(q(\sigma(i)))&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+ &=q(\sigma^{-1}(\sigma(i)))&&\bigl(\because\ q\text{ の定義},\ \sigma(i)\in C\bigr)\\
+ &=q(i)&&\bigl(\because\ \text{逆写像と置換の相殺}\bigr)\\
+ &=\sigma^{-1}(i)&&\bigl(\because\ q\text{ の定義},\ i\in C\bigr)\\
+ &=\tau(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\in C\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら不変条件から ", math(String.raw`\sigma(i)\notin C`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+(q\circ(q\circ\sigma))(i)
+ &=q(q(\sigma(i)))&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+ &=q(\sigma(i))&&\bigl(\because\ q\text{ の定義},\ \sigma(i)\notin C\bigr)\\
+ &=\sigma(i)&&\bigl(\because\ q\text{ の定義},\ \sigma(i)\notin C\bigr)\\
+ &=\tau(i)&&\bigl(\because\ \blkref{def_invariant_subset_reversal},\ i\notin C\bigr).
+\end{aligned}`),
+                paragraph(["各点で値が等しいので ", math(String.raw`q\circ(q\circ\sigma)=\tau`), " である。符号の計算は整数の中で行う。"]),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(q)&\in\{-1,1\}&&\bigl(\because\ \blkref{def_permutation_sign}\text{ の }(-1)\text{ の自然数冪}\bigr),\\
+\mathrm{sgn}(q)\cdot\mathrm{sgn}(q)&=1&&\bigl(\because\ -1,1\text{ の二つの場合の整数の積}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(\tau)
+ &=\mathrm{sgn}(q\circ(q\circ\sigma))&&\bigl(\because\ \text{上で示した置換の等号}\bigr)\\
+ &=\mathrm{sgn}(q)\cdot\mathrm{sgn}(q\circ\sigma)&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+ &=\mathrm{sgn}(q)\cdot(\mathrm{sgn}(q)\cdot\mathrm{sgn}(\sigma))&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+ &=(\mathrm{sgn}(q)\cdot\mathrm{sgn}(q))\cdot\mathrm{sgn}(\sigma)&&\bigl(\because\ \text{整数の積の結合則}\bigr)\\
+ &=1\cdot\mathrm{sgn}(\sigma)&&\bigl(\because\ \text{上で示した符号の平方}\bigr)\\
+ &=\mathrm{sgn}(\sigma)&&\bigl(\because\ \text{整数の積の単位元}\bigr).
+\end{aligned}`),
+                paragraph(["最後に ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " を取る。", ref("def_selected_odd_orbit_reversal"), " により ", math(String.raw`\operatorname{OddOrb}(\sigma)`), " は不変なので、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{sgn}(R_{\mathrm{odd}}(\sigma))
+ &=\mathrm{sgn}(\rho_{\operatorname{OddOrb}(\sigma)}(\sigma))&&\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr)\\
+ &=\mathrm{sgn}(\sigma)&&\bigl(\because\ \text{上の符号保存をこの不変部分集合へ適用}\bigr).
+\end{aligned}`),
+                paragraph(["空の添字集合でも写像と合成の計算は全称命題として成り立ち、転倒数は零なので符号は一である。奇数軌道の選択は対象集合に属する入力だけに行った。有限集合の写像と整数の演算だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
