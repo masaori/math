@@ -26,6 +26,8 @@ for a in nonnegative:
                     assert ap * A <= ap * ap
                     assert A * A <= ap * ap
                     assert bp <= B
+                    assert bp * bp <= B * bp
+                    assert B * bp <= B * B
                     assert bp * bp <= B * B
                     assert A * A <= ap * ap < 2 * bp * bp <= 2 * B * B
                 checked += 1
