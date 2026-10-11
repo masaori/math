@@ -161,6 +161,7 @@ export const ALL_LABELS = [
   "claim_nonbacktracking_permutation_stratified_count",
   "claim_nonzero_winding_simple_cycle_turning_zero",
   "claim_odd_orbit_selection_invariant",
+  "claim_odd_orbit_signed_sum_zero",
   "claim_odd_ray_interior_cells_bounded",
   "claim_one_s_linearly_independent",
   "claim_one_sided_closure_cyclic_sum",

@@ -8269,6 +8269,122 @@ c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_odd_orbit_signed_sum_zero",
+        labels: [],
+        title: { text: "奇数軌道を持つ置換の寄与の相殺" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_odd_orbit_signed_sum_zero",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_odd_orbit_signed_sum_zero",
+              title: { text: "奇数軌道を持つ置換の符号付き和は零である" },
+              labels: ["claim_odd_orbit_signed_sum_zero"],
+              habitat: "Qbar",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.involution_neg_sum_zero",
+                "Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero_from_necSuf",
+              ],
+              verification: ["sagemath/check/odd-orbit-signed-sum-zero"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " が任意の ", math(String.raw`i,j\in\mathcal J`), " に対して ", math(String.raw`A_{j,i}=-A_{i,j}`), " を満たすとする。", ref("claim_selected_odd_orbit_skew_product_neg"), " の係数 ", math(String.raw`c_\pi\in\overline{\mathbb Q}[x]`), " を使い、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " の符号付き項を"]),
+                displayMath(String.raw`w_A(\pi):=c_\pi\prod_{i\in\mathcal J}A_{i,\pi(i)}
+\quad\in\overline{\mathbb Q}[x]`),
+                paragraph(["と書く。", ref("def_odd_orbit_derangements"), " の集合にわたる和は"]),
+                displayMath(String.raw`\sum_{\sigma\in\operatorname{DerOdd}(\mathcal J)}w_A(\sigma)=0`),
+                paragraph(["となる。これは行列式の置換展開のうち、不動点がなく、奇数長の軌道を持つ項の寄与である。和と零元は ", math(String.raw`\overline{\mathbb Q}[x]`), " のものとし、空和は零元とする。"]),
+              ],
+              proof: [
+                paragraph(["有限集合 ", math(String.raw`D:=\operatorname{DerOdd}(\mathcal J)`), " を置く。", ref("claim_selected_odd_orbit_reversal_involution"), " により、", ref("def_selected_odd_orbit_reversal"), " の反転を ", math(String.raw`D`), " に制限した写像 ", math(String.raw`F:D\to D,\ F(\rho):=R_{\mathrm{odd}}(\rho)`), " が定まる。任意の ", math(String.raw`\rho\in D`), " について、"]),
+                displayMath(String.raw`F(F(\rho))=\rho
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr),`),
+                displayMath(String.raw`F(\rho)\ne\rho
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_nontrivial}\bigr),`),
+                displayMath(String.raw`w_A(F(\rho))=-w_A(\rho)
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_skew_product_neg}\bigr).`),
+                paragraph(["ここから、", math(String.raw`F`), " で閉じた任意の部分集合 ", math(String.raw`S\subseteq D`), "、すなわち ", math(String.raw`\rho\in S\Rightarrow F(\rho)\in S`), " を満たす集合について ", math(String.raw`\sum_{\rho\in S}w_A(\rho)=0`), " を、その個数 ", math(String.raw`|S|\in\mathbb Z_{\ge0}`), " に関する強い帰納法で示す。", math(String.raw`S=\varnothing`), " の場合は、"]),
+                displayMath(String.raw`\sum_{\rho\in\varnothing}w_A(\rho)=0
+\qquad\bigl(\because\ \text{空和の定義}\bigr).`),
+                paragraph(["以下 ", math(String.raw`S\ne\varnothing`), " とし、", math(String.raw`\sigma\in S`), " を一つ選び、", math(String.raw`\tau:=F(\sigma)\in D`), " と置く。すると、"]),
+                displayMath(String.raw`\tau\in S
+\qquad\bigl(\because\ S\text{ の }F\text{ による閉性}\bigr),`),
+                displayMath(String.raw`\tau\ne\sigma
+\qquad\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_nontrivial}\bigr).`),
+                paragraph(["二点を除いた集合を ", math(String.raw`R:=(S\setminus\{\sigma\})\setminus\{\tau\}\subseteq D`), " と置く。"]),
+                displayMath(String.raw`\begin{aligned}
+R&\subseteq S\setminus\{\sigma\}
+&&\bigl(\because\ \text{一点を除くと部分集合になる}\bigr)\\
+S\setminus\{\sigma\}&\subsetneq S
+&&\bigl(\because\ \sigma\in S\bigr).
+\end{aligned}`),
+                paragraph(["したがって ", math(String.raw`R\subsetneq S`), " であり、有限集合の個数を比べると、"]),
+                displayMath(String.raw`|R|<|S|
+\qquad\bigl(\because\ \text{有限集合の真部分集合は個数が小さい}\bigr).`),
+                paragraph(["さらに ", math(String.raw`R`), " も ", math(String.raw`F`), " で閉じている。実際、任意の ", math(String.raw`\rho\in R`), " を取ると ", math(String.raw`\rho\in S`), "、", math(String.raw`\rho\ne\sigma`), "、", math(String.raw`\rho\ne\tau`), " であり、"]),
+                displayMath(String.raw`F(\rho)\in S
+\qquad\bigl(\because\ S\text{ の }F\text{ による閉性}\bigr).`),
+                paragraph(["もし ", math(String.raw`F(\rho)=\sigma`), " ならば、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho&=F(F(\rho))
+&&\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr)\\
+&=F(\sigma)&&\bigl(\because\ F(\rho)=\sigma\text{ を代入}\bigr)\\
+&=\tau&&\bigl(\because\ \tau\text{ の定義}\bigr),
+\end{aligned}`),
+                paragraph(["となり ", math(String.raw`\rho\ne\tau`), " に反する。また、もし ", math(String.raw`F(\rho)=\tau`), " ならば、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho&=F(F(\rho))
+&&\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr)\\
+&=F(\tau)&&\bigl(\because\ F(\rho)=\tau\text{ を代入}\bigr)\\
+&=F(F(\sigma))&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
+&=\sigma
+&&\bigl(\because\ \blkref{claim_selected_odd_orbit_reversal_involution}\bigr),
+\end{aligned}`),
+                paragraph(["となり ", math(String.raw`\rho\ne\sigma`), " に反する。以上より、"]),
+                displayMath(String.raw`F(\rho)\in R
+\qquad\bigl(\because\ F(\rho)\in S,\ F(\rho)\ne\sigma,\ F(\rho)\ne\tau\text{ と }R\text{ の定義}\bigr).`),
+                paragraph(["この閉性と ", math(String.raw`|R|<|S|`), " によって帰納法の仮定が使え、"]),
+                displayMath(String.raw`\sum_{\rho\in R}w_A(\rho)=0
+\qquad\bigl(\because\ \text{帰納法の仮定}\bigr).`),
+                paragraph(["取り除いた二項も、"]),
+                displayMath(String.raw`\begin{aligned}
+w_A(\sigma)+w_A(\tau)
+&=w_A(\sigma)+w_A(F(\sigma))
+&&\bigl(\because\ \tau\text{ の定義}\bigr)\\
+&=w_A(\sigma)+(-w_A(\sigma))
+&&\bigl(\because\ \blkref{claim_selected_odd_orbit_skew_product_neg}\bigr)\\
+&=0&&\bigl(\because\ \text{加法の逆元}\bigr).
+\end{aligned}`),
+                paragraph(["最後に有限和からこの二項を順に取り出す。", math(String.raw`\tau\in S\setminus\{\sigma\}`), " は上で示した ", math(String.raw`\tau\in S`), " と ", math(String.raw`\tau\ne\sigma`), " による。"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\rho\in S}w_A(\rho)
+&=w_A(\sigma)+\sum_{\rho\in S\setminus\{\sigma\}}w_A(\rho)
+&&\bigl(\because\ \sigma\in S\text{ の項を取り出す}\bigr)\\
+&=w_A(\sigma)+\left(w_A(\tau)+\sum_{\rho\in R}w_A(\rho)\right)
+&&\bigl(\because\ \tau\in S\setminus\{\sigma\}\text{ の項を取り出す}\bigr)\\
+&=\left(w_A(\sigma)+w_A(\tau)\right)+\sum_{\rho\in R}w_A(\rho)
+&&\bigl(\because\ \text{加法の結合則}\bigr)\\
+&=0+\sum_{\rho\in R}w_A(\rho)
+&&\bigl(\because\ \text{上で示した二項の相殺}\bigr)\\
+&=0+0&&\bigl(\because\ \text{上で示した }R\text{ 上の和の等号}\bigr)\\
+&=0&&\bigl(\because\ \text{加法の単位元}\bigr).
+\end{aligned}`),
+                paragraph(["これで帰納法が閉じた。", math(String.raw`F:D\to D`), " であるから ", math(String.raw`S=D`), " は閉性を満たし、"]),
+                displayMath(String.raw`\sum_{\sigma\in D}w_A(\sigma)=0
+\qquad\bigl(\because\ \text{直前の帰納法を }S=D\text{ に適用}\bigr).`),
+                paragraph(["特に ", math(String.raw`D=\varnothing`), " の場合にも、最初の空和の計算がそのまま適用される。最小元の選択は ", math(String.raw`D`), " に属する置換の反転を作る段階だけで用い、この帰納法では新たな順序を選ばない。計算は有限集合と代数的数係数多項式の中で閉じ、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
