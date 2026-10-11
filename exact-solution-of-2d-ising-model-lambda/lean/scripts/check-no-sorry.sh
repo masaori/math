@@ -52,6 +52,22 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitLength
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_inverse
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbit
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbitLength
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbitLength
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_inverse
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_inverse
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_orbit_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_orbit_ncard_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_inverse_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbit_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbitLength_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate
   Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_iterate
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.piecewise_iterate_necSuf

@@ -7231,6 +7231,188 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_invariant_subset_reversal_orbit",
+        labels: [],
+        title: { text: "不変部分集合上の反転と軌道" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_invariant_subset_reversal_orbit",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_finite_permutation_orbit",
+                title: { text: "有限置換の軌道の台" },
+                labels: ["def_finite_permutation_orbit"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit"],
+                verification: ["sagemath/check/invariant-subset-reversal-orbit"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を固定する。始点 ", math(String.raw`i\in\mathcal J`), " の軌道の台を次の部分集合として定める。反復は ", ref("def_finite_map_iteration"), " の意味である。"]),
+                  displayMath(String.raw`\operatorname{Orb}_{\sigma}(i):=
+\left\{j\in\mathcal J\ \middle|\,
+\exists n\in\mathbb N,\,
+\sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
+\right\}.`),
+                  paragraph(["これは、始点から置換を順向き、または逆向きに有限回たどって到達する点の集合である。零回も許す。台は有限集合 ", math(String.raw`\mathcal J`), " の部分集合なので有限である。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_finite_permutation_orbit_length",
+                title: { text: "有限置換の軌道の長さ" },
+                labels: ["def_finite_permutation_orbit_length"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitLength"],
+                verification: ["sagemath/check/invariant-subset-reversal-orbit"],
+                statement: [
+                  paragraph([ref("def_finite_permutation_orbit"), " の有限集合 ", math(String.raw`\mathcal J`), "、置換 ", math(String.raw`\sigma`), "、始点 ", math(String.raw`i\in\mathcal J`), " について、軌道の長さを台の元の個数として定める。"]),
+                  displayMath(String.raw`\operatorname{len}_{\sigma}(i):=
+\left|\operatorname{Orb}_{\sigma}(i)\right|\in\mathbb N.`),
+                  paragraph(["ここでの長さは異なる点の個数である。最初に始点へ戻るまでの反復回数との一致は、この定義だけでは主張しない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_invariant_subset_reversal_orbit",
+              title: { text: "不変部分集合上の反転は軌道の台を保つ" },
+              labels: ["claim_invariant_subset_reversal_orbit"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_inverse",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbit",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_orbit_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbit_from_necSuf",
+              ],
+              verification: ["sagemath/check/invariant-subset-reversal-orbit"],
+              statement: [
+                paragraph([ref("def_invariant_subset_reversal"), " の有限集合 ", math(String.raw`\mathcal J`), "、部分集合 ", math(String.raw`C\subseteq\mathcal J`), "、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " と不変条件を取る。", ref("claim_invariant_subset_reversal"), " の反転を ", math(String.raw`\rho:=\rho_C(\sigma)`), " と略す。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\operatorname{Orb}_{\rho}(i)=\operatorname{Orb}_{\sigma}(i)`),
+                paragraph(["が成り立つ。軌道の台は ", ref("def_finite_permutation_orbit"), " の意味である。"]),
+              ],
+              proof: [
+                paragraph(["まず、逆置換に替えても台が変わらないことを示す。任意の ", math(String.raw`i,j\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+j\in\operatorname{Orb}_{\sigma^{-1}}(i)
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\,
+(\sigma^{-1})^{[n]}(i)=j\ \lor\ ((\sigma^{-1})^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\,
+(\sigma^{-1})^{[n]}(i)=j\ \lor\ \sigma^{[n]}(i)=j
+&&\bigl(\because\ (\sigma^{-1})^{-1}=\sigma\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\,
+\sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \text{選言の順序の交換}\bigr)\\
+&\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr).
+\end{aligned}`),
+                paragraph(["従って両集合は等しい。次に、逆置換と反転の順序を交換する。", ref("claim_invariant_subset_reversal"), " の逆置換の所属同値より ", math(String.raw`\sigma^{-1}`), " も ", math(String.raw`C`), " を保つので、", math(String.raw`\rho_C(\sigma^{-1})`), " は定義できる。任意の ", math(String.raw`j\in\mathcal J`), " を取り、", math(String.raw`g_{C,\sigma}`), " を ", ref("def_invariant_subset_reversal"), " の逆写像とする。", math(String.raw`j\in C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{-1}(j)&=g_{C,\sigma}(j)&&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr)\\
+&=\sigma(j)&&\bigl(\because\ j\in C,\ \blkref{def_invariant_subset_reversal}\bigr)\\
+&=(\sigma^{-1})^{-1}(j)&&\bigl(\because\ (\sigma^{-1})^{-1}=\sigma\bigr)\\
+&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\in C,\ \blkref{def_invariant_subset_reversal}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`j\notin C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\rho^{-1}(j)&=g_{C,\sigma}(j)&&\bigl(\because\ \blkref{claim_invariant_subset_reversal}\bigr)\\
+&=\sigma^{-1}(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr)\\
+&=\rho_C(\sigma^{-1})(j)&&\bigl(\because\ j\notin C,\ \blkref{def_invariant_subset_reversal}\bigr).
+\end{aligned}`),
+                paragraph(["どの点でも値が等しいので ", math(String.raw`\rho^{-1}=\rho_C(\sigma^{-1})`), " である。この等号を使って台を比較する。始点 ", math(String.raw`i\in\mathcal J`), " と判定する点 ", math(String.raw`j\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+j\in\operatorname{Orb}_{\rho}(i)
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \rho^{[n]}(i)=j\ \lor\ (\rho^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \rho^{[n]}(i)=j\ \lor\ (\rho_C(\sigma^{-1}))^{[n]}(i)=j
+&&\bigl(\because\ \text{上で示した逆置換の等号}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ (\sigma^{-1})^{[n]}(i)=j\ \lor\ (\rho_C(\sigma^{-1}))^{[n]}(i)=j
+&&\bigl(\because\ i\in C,\ \blkref{claim_invariant_subset_reversal_iterate}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ (\sigma^{-1})^{[n]}(i)=j\ \lor\ ((\sigma^{-1})^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \sigma^{-1}\text{ への }\blkref{claim_invariant_subset_reversal_iterate}\bigr)\\
+&\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma^{-1}}(i)
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)\\
+&\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
+&&\bigl(\because\ \text{冒頭で示した台の等号}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+j\in\operatorname{Orb}_{\rho}(i)
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \rho^{[n]}(i)=j\ \lor\ (\rho^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \rho^{[n]}(i)=j\ \lor\ (\rho_C(\sigma^{-1}))^{[n]}(i)=j
+&&\bigl(\because\ \text{上で示した逆置換の等号}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \sigma^{[n]}(i)=j\ \lor\ (\rho_C(\sigma^{-1}))^{[n]}(i)=j
+&&\bigl(\because\ i\notin C,\ \blkref{claim_invariant_subset_reversal_iterate}\bigr)\\
+&\ \Longleftrightarrow\
+\exists n\in\mathbb N,\ \sigma^{[n]}(i)=j\ \lor\ (\sigma^{-1})^{[n]}(i)=j
+&&\bigl(\because\ \sigma^{-1}\text{ への }\blkref{claim_invariant_subset_reversal_iterate}\bigr)\\
+&\ \Longleftrightarrow\ j\in\operatorname{Orb}_{\sigma}(i)
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\bigr).
+\end{aligned}`),
+                paragraph(["どちらの場合も任意の点の所属が同値なので、軌道の台は等しい。", math(String.raw`\mathcal J=\varnothing`), " の場合は始点がなく、全称命題はそのまま成り立つ。有限集合と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }, {
+          role: "supporting",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_invariant_subset_reversal_orbit_length",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_invariant_subset_reversal_orbit_length",
+              title: { text: "不変部分集合上の反転は軌道の長さを保つ" },
+              labels: ["claim_invariant_subset_reversal_orbit_length"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbitLength",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariantPredicateReversal_orbit_ncard_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_orbitLength_from_necSuf",
+              ],
+              verification: ["sagemath/check/invariant-subset-reversal-orbit"],
+              statement: [
+                paragraph([ref("claim_invariant_subset_reversal_orbit"), " と同じ有限集合 ", math(String.raw`\mathcal J`), "、部分集合 ", math(String.raw`C`), "、置換 ", math(String.raw`\sigma`), "、反転 ", math(String.raw`\rho:=\rho_C(\sigma)`), " と始点 ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\operatorname{len}_{\rho}(i)=\operatorname{len}_{\sigma}(i)`),
+                paragraph(["が成り立つ。長さは ", ref("def_finite_permutation_orbit_length"), " の意味である。"]),
+              ],
+              proof: [
+                displayMath(String.raw`\begin{aligned}
+\operatorname{len}_{\rho}(i)
+&=\left|\operatorname{Orb}_{\rho}(i)\right|
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr)\\
+&=\left|\operatorname{Orb}_{\sigma}(i)\right|
+&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\bigr)\\
+&=\operatorname{len}_{\sigma}(i)
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+\end{aligned}`),
+                paragraph(["自然数である台の個数の等号で閉じる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
