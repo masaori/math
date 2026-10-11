@@ -17,9 +17,9 @@
 | 整数行列式一の代入 | `check_lift_unit_determinant.sage` | PASS |
 | 一の保存 | `check_lift_map_one.sage` | PASS |
 | 端末行列の定義 | `check_terminal_definition.sage` | PASS |
-| 行列式の乗法性 | `check_determinant_multiplication.sage` | PASS |
+| 多項式行列式の乗法性（本文の `claim_polynomial_determinant_mul`） | `check_determinant_multiplication.sage` | PASS |
 | 持ち上げた行列式一の代入 | `check_lift_unit_substitution.sage` | PASS |
 | 単位元との積 | `check_one_multiplication.sage` | PASS |
 | Kac--Ward 行列式の定義 | `check_kac_ward_definition.sage` | PASS |
 
-2026-10-04 実行: 行別13本、計100等式が通過した。主鎖の十二行列は成分式による独立構成とも一致し、行列式の定数項はいずれも一だった。
+2026-10-10 実行: 行別13本、計100等式が通過した。主鎖の十二行列は成分式による独立構成とも一致し、行列式の定数項はいずれも一だった。

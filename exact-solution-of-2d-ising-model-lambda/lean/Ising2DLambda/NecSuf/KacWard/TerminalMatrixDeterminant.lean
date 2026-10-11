@@ -6,6 +6,7 @@
 置換展開の符号は整数の像で扱い、格子、係数体、添字の順序を要求しない。
 -/
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.DeterminantMultiplicativity
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -47,13 +48,44 @@ theorem mappedMatrix_determinant_one_necSuf (φ : R →+* S) (A : Matrix ι ι R
     _ = φ 1 := by rw [hA]
     _ = 1 := map_one _
 
+/-- 自前の写像展開・非単射項の相殺・全単射の再添字付けへ整数符号を供給する。
+ライブラリの行列式は行指定の置換展開との定義橋だけで用いる。 -/
+theorem determinant_mul_from_permutationSum_necSuf (A B : Matrix ι ι S) :
+    Matrix.det (A * B) = Matrix.det A * Matrix.det B := by
+  classical
+  let c : Equiv.Perm ι → S := fun σ => ((Equiv.Perm.sign σ : ℤ) : S)
+  have hc (π τ : Equiv.Perm ι) : c (π * τ) = c π * c τ := by
+    simp only [c, map_mul, Units.val_mul, Int.cast_mul]
+  have hswap (a b : ι) (hab : a ≠ b) (σ : Equiv.Perm ι) :
+      c (σ * transpositionPerm a b) = -c σ := by
+    have ht : transpositionPerm a b = Equiv.swap a b := by
+      ext i
+      simp only [transpositionPerm, Equiv.coe_fn_mk,
+        Ising2DLambda.NecSuf.AlgebraicEigenvalue.transpositionOn, Equiv.swap_apply_def]
+    calc
+      c (σ * transpositionPerm a b) = c σ * c (transpositionPerm a b) := hc _ _
+      _ = c σ * (-1) := by simp [c, ht, hab]
+      _ = -c σ := mul_neg_one _
+  calc
+    Matrix.det (A * B) = ∑ σ : Equiv.Perm ι, c σ * ∏ i, (A * B) i (σ i) :=
+      det_eq_rowSignedPermutationSum _
+    _ = (∑ τ : Equiv.Perm ι, c τ * ∏ i, A i (τ i)) *
+        (∑ π : Equiv.Perm ι, c π * ∏ i, B i (π i)) :=
+      Ising2DLambda.NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf
+        A B c hc hswap
+    _ = Matrix.det A * (∑ π : Equiv.Perm ι, c π * ∏ i, B i (π i)) :=
+      congrArg (· * (∑ π : Equiv.Perm ι, c π * ∏ i, B i (π i)))
+        (det_eq_rowSignedPermutationSum A).symm
+    _ = Matrix.det A * Matrix.det B :=
+      congrArg (Matrix.det A * ·) (det_eq_rowSignedPermutationSum B).symm
+
 /-- 行列式一の行列の像を左から掛けても行列式は変わらない。 -/
 theorem mappedMatrix_mul_determinant_necSuf (φ : R →+* S) (A : Matrix ι ι R)
     (K : Matrix ι ι S) (hA : Matrix.det A = 1) :
     Matrix.det (A.map φ * K) = Matrix.det K := by
   calc
     Matrix.det (A.map φ * K) = Matrix.det (A.map φ) * Matrix.det K :=
-      Matrix.det_mul _ _
+      determinant_mul_from_permutationSum_necSuf _ _
     _ = 1 * Matrix.det K := by rw [mappedMatrix_determinant_one_necSuf φ A hA]
     _ = Matrix.det K := one_mul _
 

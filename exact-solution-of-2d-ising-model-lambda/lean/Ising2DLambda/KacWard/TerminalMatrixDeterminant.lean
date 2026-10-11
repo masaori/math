@@ -5,6 +5,7 @@
 -/
 import Ising2DLambda.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.ReversalMatrixDeterminant
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantMultiplicativity
 
 namespace Ising2DLambda.KacWard
 
@@ -72,7 +73,12 @@ theorem terminalMatrix_determinant (L : ℕ) (z : Qbar) (s : SpinStructure) :
     Matrix.det (terminalMatrix L z s) =
         Matrix.det (polynomialReversalMatrix L * spinKacWardPolynomialMatrix L z s) := rfl
     _ = Matrix.det (polynomialReversalMatrix L) *
-        Matrix.det (spinKacWardPolynomialMatrix L z s) := Matrix.det_mul _ _
+        Matrix.det (spinKacWardPolynomialMatrix L z s) := by
+      classical
+      -- 本文の L ≥ 1 では非空側。公開定理が含む空添字も定義で処理する。
+      cases isEmpty_or_nonempty (OrientedEdge L) with
+      | inl h => simp only [Matrix.det_isEmpty, one_mul]
+      | inr h => exact qbarPolynomial_det_mul _ _
     _ = 1 * Matrix.det (spinKacWardPolynomialMatrix L z s) := by
       rw [polynomialReversalMatrix_determinant]
     _ = Matrix.det (spinKacWardPolynomialMatrix L z s) := one_mul _

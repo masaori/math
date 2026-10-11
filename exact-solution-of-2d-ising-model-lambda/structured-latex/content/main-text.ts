@@ -51691,13 +51691,14 @@ K^{a,b}_{\vec g,\vec f}(x)
 &=1
 &&(\because\ c\text{ は一を保つ})
 \end{aligned}`),
-                paragraph(["端末行列の定義と、可換環上の行列式の乗法性を用いると、"]),
+                paragraph(["端末行列の定義と、", ref("claim_polynomial_determinant_mul"),
+                  " の多項式行列式の乗法性を用いると、"]),
                 displayMath(String.raw`\begin{aligned}
 \det_x\bigl(K_{\mathrm t}^{a,b}(x)\bigr)
 &=\det_x\bigl(\widehat J_L K^{a,b}(x)\bigr)
 &&(\because\ \blkref{def_terminal_matrix})\\
 &=\det_x(\widehat J_L)\,\det_x\bigl(K^{a,b}(x)\bigr)
-&&(\because\ \text{行列式の乗法性})\\
+&&(\because\ \blkref{claim_polynomial_determinant_mul})\\
 &=1\,\det_x\bigl(K^{a,b}(x)\bigr)
 &&(\because\ \text{上で求めた }\det_x(\widehat J_L)=1)\\
 &=\det_x\bigl(K^{a,b}(x)\bigr)
