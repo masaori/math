@@ -7413,6 +7413,103 @@ j\in\operatorname{Orb}_{\rho}(i)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_finite_permutation_orbit_invariant",
+        labels: [],
+        title: { text: "軌道の台の不変性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_orbit_invariant",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_permutation_orbit_invariant",
+              title: { text: "置換で一歩進めても軌道の台への所属は変わらない" },
+              labels: ["claim_finite_permutation_orbit_invariant"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_commute",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_apply_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_invariant",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_commute_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_apply_mem_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.permutationOrbit_invariant_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_commute_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_apply_mem_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_invariant_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-permutation-orbit-invariant"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、置換 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), "、点 ", math(String.raw`i,j\in\mathcal J`), " を取る。", ref("def_finite_permutation_orbit"), " の軌道の台について、"]),
+                displayMath(String.raw`\sigma(j)\in\operatorname{Orb}_{\sigma}(i)
+\quad\Longleftrightarrow\quad j\in\operatorname{Orb}_{\sigma}(i)`),
+                paragraph(["が成り立つ。したがって、この台は ", ref("def_invariant_subset_reversal"), " で反転する部分集合の不変性の条件を満たす。"]),
+              ],
+              proof: [
+                paragraph(["準備として、任意の写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " と自然数 ", math(String.raw`n\in\mathbb N`), " について、すべての点 ", math(String.raw`y\in\mathcal J`), " で ", math(String.raw`\tau(\tau^{[n]}(y))=\tau^{[n]}(\tau(y))`), " が成り立つことを示す。反復は ", ref("def_finite_map_iteration"), " の意味である。", math(String.raw`n=0`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(\tau^{[0]}(y))
+ &=\tau(y)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\tau^{[0]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`n`), " についてすべての始点で成り立つと仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(\tau^{[n+1]}(y))
+ &=\tau(\tau^{[n]}(\tau(y)))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\tau^{[n]}(\tau(\tau(y)))&&\bigl(\because\ \text{始点 }\tau(y)\text{ での帰納法の仮定}\bigr)\\
+ &=\tau^{[n+1]}(\tau(y))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph(["数学的帰納法により、準備の等式がすべての ", math(String.raw`n,y`), " で成立する。"]),
+                paragraph(["まず ", math(String.raw`j\in\operatorname{Orb}_{\sigma}(i)`), " と仮定する。", ref("def_finite_permutation_orbit"), " により、ある ", math(String.raw`n\in\mathbb N`), " について、順向きまたは逆向きに ", math(String.raw`i`), " から ", math(String.raw`j`), " へ到達する。順向き、すなわち ", math(String.raw`\sigma^{[n]}(i)=j`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[n+1]}(i)
+ &=\sigma^{[n]}(\sigma(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma(\sigma^{[n]}(i))&&\bigl(\because\ \text{準備の等式を }\tau=\sigma\text{ に適用}\bigr)\\
+ &=\sigma(j)&&\bigl(\because\ \sigma^{[n]}(i)=j\bigr).
+\end{aligned}`),
+                paragraph(["したがって、回数 ", math(String.raw`n+1\in\mathbb N`), " の順向きの反復が、", math(String.raw`\sigma(j)\in\operatorname{Orb}_{\sigma}(i)`), " の証人となる（", ref("def_finite_permutation_orbit"), "）。"]),
+                paragraph(["逆向き、すなわち ", math(String.raw`(\sigma^{-1})^{[n]}(i)=j`), " の場合は、まず ", math(String.raw`n=0`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[1]}(i)
+ &=\sigma^{[0]}(\sigma(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma((\sigma^{-1})^{[0]}(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[0]}(i)=j\bigr).
+\end{aligned}`),
+                paragraph(["回数 ", math(String.raw`1\in\mathbb N`), " の順向きの反復が証人となる（", ref("def_finite_permutation_orbit"), "）。残る ", math(String.raw`n=k+1`), "（", math(String.raw`k\in\mathbb N`), "）の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+(\sigma^{-1})^{[k]}(i)
+ &=\sigma\bigl(\sigma^{-1}((\sigma^{-1})^{[k]}(i))\bigr)&&\bigl(\because\ \sigma^{-1}\text{ は }\sigma\text{ の逆写像}\bigr)\\
+ &=\sigma\bigl((\sigma^{-1})^{[k]}(\sigma^{-1}(i))\bigr)&&\bigl(\because\ \text{準備の等式を }\tau=\sigma^{-1}\text{ に適用}\bigr)\\
+ &=\sigma\bigl((\sigma^{-1})^{[k+1]}(i)\bigr)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+ &=\sigma(j)&&\bigl(\because\ (\sigma^{-1})^{[k+1]}(i)=j\bigr).
+\end{aligned}`),
+                paragraph(["回数 ", math(String.raw`k\in\mathbb N`), " の逆向きの反復が証人となる（", ref("def_finite_permutation_orbit"), "）。以上より、任意の置換について、台に属する点を一歩進めても同じ台に属する。"]),
+                paragraph(["逆に ", math(String.raw`\sigma(j)\in\operatorname{Orb}_{\sigma}(i)`), " と仮定する。逆置換と元の置換の台が一致することは ", ref("claim_invariant_subset_reversal_orbit"), " の証明の冒頭で示した。したがって、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(j)\in\operatorname{Orb}_{\sigma^{-1}}(i)
+ &\ \Longleftrightarrow\ \sigma(j)\in\operatorname{Orb}_{\sigma}(i)
+ &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr).
+\end{aligned}`),
+                paragraph(["右辺は仮定で成り立つ。直前に示した一歩の所属保存を、置換 ", math(String.raw`\sigma^{-1}`), " と点 ", math(String.raw`\sigma(j)`), " へ適用すると、", math(String.raw`\sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma^{-1}}(i)`), " を得る。よって、"]),
+                displayMath(String.raw`\begin{aligned}
+j\in\operatorname{Orb}_{\sigma}(i)
+ &\ \Longleftrightarrow\ \sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma}(i)
+ &&\bigl(\because\ \sigma^{-1}\text{ は }\sigma\text{ の逆写像}\bigr)\\
+ &\ \Longleftrightarrow\ \sigma^{-1}(\sigma(j))\in\operatorname{Orb}_{\sigma^{-1}}(i)
+ &&\bigl(\because\ \text{逆置換の台一致（}\blkref{claim_invariant_subset_reversal_orbit}\text{）}\bigr).
+\end{aligned}`),
+                paragraph(["最後の条件が成り立つので、求める逆方向も得た。", math(String.raw`\mathcal J=\varnothing`), " の場合は点がなく、全称命題はそのまま成り立つ。有限集合と自然数回の反復だけで閉じ、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
