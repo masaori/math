@@ -1,34 +1,75 @@
-# SageMath Check: 二次体の積の表示
+# SageMath Check: 二次体の乗法による閉性と積の表示
 
 ## 対象
 
-**対象ラベル**: `claim_quadratic_multiplication_mem`、`claim_quadratic_multiplication_representation`
+**対象ラベル**: `claim_quadratic_multiplication_mem`, `claim_quadratic_multiplication_representation`
 
-- 実行日: 2026-08-13
-- 結果: 通過（積・和の両立 49 組、補助等式と鎖と表示 4802 組を厳密検査した）
-- 帰属: `QQ` / `QQbar` の厳密計算。浮動小数点は使わない。
+- 本文: `structured-latex/content/main-text.ts` の「二次体の台集合の乗法による閉性」。
+- 範囲: 三補助式の十一等号、積の計算の十八等号、二係数と積の三所属を一行一ファイルで確認する。
+- 帰属: `QQ` / `QQbar` の厳密計算。平方根は多項式 `t^2 - 2` の両根を取り、包含写像は `j = QQbar` とする。
+- 標本: 分子 −2〜2、分母 1〜2 から作る七有理数の四つ組と両平方根、各行 4,802 件。有限標本の検算であり、一般の係数の主張は Lean で保証する。
 
-## 何を確かめるか
+## チェック一覧
 
-二主張は「$\xi\cdot\eta\in Q_s$」「$\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$」である。
+| ファイル | 本文の行 | ステータス | 結果 |
+| --- | --- | --- | --- |
+| `check_aux_first_associate.sage` | 補助式: 第一混合項の結合則 | PASS | 4,802 等式 |
+| `check_aux_second_associate_left.sage` | 補助式: 第二混合項の左結合解除 | PASS | 4,802 等式 |
+| `check_aux_second_commute.sage` | 補助式: 第二混合項の中央交換 | PASS | 4,802 等式 |
+| `check_aux_second_associate_right.sage` | 補助式: 第二混合項の再結合 | PASS | 4,802 等式 |
+| `check_aux_square_associate_outer.sage` | 補助式: 二平方根項の外側結合 | PASS | 4,802 等式 |
+| `check_aux_square_associate_inner.sage` | 補助式: 二平方根項の内側結合 | PASS | 4,802 等式 |
+| `check_aux_square_commute_inner.sage` | 補助式: 二平方根項の中央交換 | PASS | 4,802 等式 |
+| `check_aux_square_associate_middle.sage` | 補助式: 有理係数像どうしの結合 | PASS | 4,802 等式 |
+| `check_aux_square_associate_factors.sage` | 補助式: 二平方根の結合 | PASS | 4,802 等式 |
+| `check_aux_square_substitute.sage` | 補助式: 平方根の仮定の代入 | PASS | 4,802 等式 |
+| `check_aux_square_commute_coefficient.sage` | 補助式: 二の像の移動 | PASS | 4,802 等式 |
+| `check_representation.sage` | 表示の同時代入 | PASS | 4,802 等式 |
+| `check_distribute_left.sage` | 左因子の分配 | PASS | 4,802 等式 |
+| `check_distribute_first.sage` | 第一項の分配 | PASS | 4,802 等式 |
+| `check_distribute_second.sage` | 第二項の分配 | PASS | 4,802 等式 |
+| `check_replace_first.sage` | 第一補助式の代入 | PASS | 4,802 等式 |
+| `check_replace_second.sage` | 第二補助式の代入 | PASS | 4,802 等式 |
+| `check_replace_square.sage` | 平方根積の補助式の代入 | PASS | 4,802 等式 |
+| `check_commute_right.sage` | 右の二項の交換 | PASS | 4,802 等式 |
+| `check_associate_outer.sage` | 外側の和の結合解除 | PASS | 4,802 等式 |
+| `check_associate_middle.sage` | 中央の和の結合 | PASS | 4,802 等式 |
+| `check_commute_middle.sage` | 中央の二項の交換 | PASS | 4,802 等式 |
+| `check_associate_inner.sage` | 内側の和の結合解除 | PASS | 4,802 等式 |
+| `check_group_coefficients.sage` | 定数項の結合 | PASS | 4,802 等式 |
+| `check_factor_radical.sage` | 平方根因子の分配則 | PASS | 4,802 等式 |
+| `check_map_products.sage` | 四つの係数積の包含保存 | PASS | 4,802 等式 |
+| `check_map_double_product.sage` | 二倍の包含保存 | PASS | 4,802 等式 |
+| `check_map_first_sum.sage` | 定数係数の和の包含保存 | PASS | 4,802 等式 |
+| `check_map_second_sum.sage` | 平方根係数の和の包含保存 | PASS | 4,802 等式 |
+| `check_first_coefficient_membership.sage` | 定数係数の有理数への所属 | PASS | 4,802 所属 |
+| `check_second_coefficient_membership.sage` | 平方根係数の有理数への所属 | PASS | 4,802 所属 |
+| `check_product_membership.sage` | 有理係数を証人とする積の所属 | PASS | 4,802 所属 |
+| `check.sage` | 既存の閉性・積の表示の統合検算 | PASS | 両立49組、補助式・積・表示4,802組 |
 
-- **mul-compat**: $\mathbb{Q}$ の和・積と $\overline{\mathbb{Q}}$ の和・積の一致（準備の段の裏取り）。
-- **mul-aux**: 標本の全 $((a,b),(a',b'))$（分子 $-2..2$、分母 $1..2$ の 7 値の四つ組、
-  $s$ の 2 根）で、本文の三つの補助等式
-  $a\cdot(b'\cdot s)=(a\cdot b')\cdot s$（1 段）、
-  $(b\cdot s)\cdot a'=(b\cdot a')\cdot s$（3 段）、
-  $(b\cdot s)\cdot(b'\cdot s)=2\cdot(b\cdot b')$（7 段。$s\cdot s=2$ を使う）を一段ずつ
-  `QQbar` の厳密等号で確かめる。
-- **mul-chain**: 同じ標本で、本文の鎖
-  $(a+b\cdot s)\cdot(a'+b'\cdot s)=\dots=(a\cdot a'+2\cdot(b\cdot b'))+(a\cdot b'+b\cdot a')\cdot s$
-  の十四段を一段ずつ `QQbar` の厳密等号で確かめる。
-- **mul-rep**: 終点の表示 $(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')$ が
-  $\xi\cdot\eta$ の表示であること。表示の一意性
-  （`claim_quadratic_representation_unique`。別の検証で裏取り済み）のもとで、
-  そのまま $\mathrm{rep}_s(\xi\cdot\eta)$ を与える。
+## 実行結果
+
+2026-10-11: 行別32ファイルと既存統合検算を実行してすべて通過。行別検算は等式139,258件、所属14,406件。
+
+初回の行別実行は SageMath が共通ファイルを異なるディレクトリから探して停止した。プロジェクトルートからの相対読込へ修正し、32ファイルを個別に再実行して通過した。
+
+## 既存検算の記録
+
+2026-08-13: `check.sage` が積・和の両立 49 組、三補助式・積の鎖・積の表示 4,802 組を通過した。積の表示の一意性は `claim_quadratic_representation_unique` に依存する。
 
 ## 実行方法
 
+プロジェクトルートで各ファイルを個別に実行する。
+
 ```sh
-sage check.sage
+sage sagemath/check/quadratic-multiplication/check_representation.sage
+```
+
+全行を実行する場合:
+
+```sh
+for f in sagemath/check/quadratic-multiplication/check_*.sage; do
+  sage "$f" || exit
+done
+sage sagemath/check/quadratic-multiplication/check.sage
 ```

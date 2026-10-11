@@ -30479,6 +30479,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstruction_horizontal_successor_val",
                         "Ising2DLambda.FisherZero.reconstruction_horizontal_boundary_successor_val",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_horizontal_prefix_sum_zero",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_horizontal_prefix_sum_zero_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_boundary_difference",
                         "Ising2DLambda.NecSuf.FisherZero.periodic_path_prefix_difference_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_horizontal_boundary_difference_from_necSuf",
@@ -30494,6 +30495,7 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.NecSuf.FisherZero.vertical_path_difference_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_interior_difference_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_vertical_prefix_sum_zero",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_vertical_prefix_sum_zero_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_boundary_difference",
                         "Ising2DLambda.NecSuf.FisherZero.vertical_periodic_path_difference_necSuf",
                         "Ising2DLambda.FisherZero.reconstructionPathParity_vertical_boundary_difference_from_necSuf",
@@ -34787,8 +34789,11 @@ j(a+a')+j(b+b')\cdot s
                       habitat: "Qbar",
                       verification: ["sagemath/check/quadratic-multiplication"],
                       lean: [
+                        "Ising2DLambda.FisherZero.quadraticMul_value",
                         "Ising2DLambda.FisherZero.quadraticMul_mem",
+                        "Ising2DLambda.NecSuf.FisherZero.quadratic_mul_value_necSuf",
                         "Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf",
+                        "Ising2DLambda.FisherZero.quadraticMul_value_from_necSuf",
                         "Ising2DLambda.FisherZero.quadraticMul_mem_from_necSuf",
                       ],
                       statement: [
@@ -34829,92 +34834,100 @@ j(a+a')+j(b+b')\cdot s
                       ],
                       proof: [
                         paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`a\cdot a'+2\cdot(b\cdot b')`),
-                          "、",
-                          math(String.raw`a\cdot b'+b\cdot a'`),
-                          " の ",
-                          math(String.raw`\mathbb{Q}`),
-                          " での和と積は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " での和と積と同じ元である。あとで使う三つの補助等式を得る。",
+                          "有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " と書く（", ref("def_algebraic_numbers"), "）。係数 ",
+                          math(String.raw`a,b,a',b'\in\mathbb Q`),
+                          " の像を ",
+                          math(String.raw`A:=j(a),\ B:=j(b),\ A':=j(a'),\ B':=j(b')\in\overline{\mathbb Q}`),
+                          " と置く。仮定の平方等式は ",
+                          math(String.raw`s\cdot s=j(2)`),
+                          " と書ける。三つの補助等式を先に示す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-a\cdot(b'\cdot s)
-&=(a\cdot b')\cdot s
+A\cdot(B'\cdot s)
+&=(A\cdot B')\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-(b\cdot s)\cdot a'
-&=b\cdot(s\cdot a')
+(B\cdot s)\cdot A'
+&=B\cdot(s\cdot A')
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-&=b\cdot(a'\cdot s)
+&=B\cdot(A'\cdot s)
 &&\bigl(\because\ \text{乗法の可換則}\bigr)\\
-&=(b\cdot a')\cdot s
+&=(B\cdot A')\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-(b\cdot s)\cdot(b'\cdot s)
-&=\bigl((b\cdot s)\cdot b'\bigr)\cdot s
+(B\cdot s)\cdot(B'\cdot s)
+&=\bigl((B\cdot s)\cdot B'\bigr)\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-&=\bigl(b\cdot(s\cdot b')\bigr)\cdot s
+&=\bigl(B\cdot(s\cdot B')\bigr)\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-&=\bigl(b\cdot(b'\cdot s)\bigr)\cdot s
+&=\bigl(B\cdot(B'\cdot s)\bigr)\cdot s
 &&\bigl(\because\ \text{乗法の可換則}\bigr)\\
-&=\bigl((b\cdot b')\cdot s\bigr)\cdot s
+&=\bigl((B\cdot B')\cdot s\bigr)\cdot s
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-&=(b\cdot b')\cdot(s\cdot s)
+&=(B\cdot B')\cdot(s\cdot s)
 &&\bigl(\because\ \text{乗法の結合則}\bigr)\\
-&=(b\cdot b')\cdot 2
-&&\bigl(\because\ s\cdot s=2\text{（仮定}\ \blkref{claim_sqrt_two_exists}\text{）}\bigr)\\
-&=2\cdot(b\cdot b')
+&=(B\cdot B')\cdot j(2)
+&&\bigl(\because\ s\cdot s=j(2)\text{（仮定}\ \blkref{claim_sqrt_two_exists}\text{）}\bigr)\\
+&=j(2)\cdot(B\cdot B')
 &&\bigl(\because\ \text{乗法の可換則}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \xi\cdot\eta
-&=\bigl(a+b\cdot s\bigr)\cdot\bigl(a'+b'\cdot s\bigr)
+&=\bigl(A+B\cdot s\bigr)\cdot\bigl(A'+B'\cdot s\bigr)
 &&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
-&=a\cdot\bigl(a'+b'\cdot s\bigr)+(b\cdot s)\cdot\bigl(a'+b'\cdot s\bigr)
+&=A\cdot\bigl(A'+B'\cdot s\bigr)+(B\cdot s)\cdot\bigl(A'+B'\cdot s\bigr)
 &&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)\\
-&=\bigl(a\cdot a'+a\cdot(b'\cdot s)\bigr)+(b\cdot s)\cdot\bigl(a'+b'\cdot s\bigr)
+&=\bigl(A\cdot A'+A\cdot(B'\cdot s)\bigr)+(B\cdot s)\cdot\bigl(A'+B'\cdot s\bigr)
 &&\bigl(\because\ \text{分配則}\ u\cdot(v+w)=u\cdot v+u\cdot w\bigr)\\
-&=\bigl(a\cdot a'+a\cdot(b'\cdot s)\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
+&=\bigl(A\cdot A'+A\cdot(B'\cdot s)\bigr)+\bigl((B\cdot s)\cdot A'+(B\cdot s)\cdot(B'\cdot s)\bigr)
 &&\bigl(\because\ \text{分配則}\ u\cdot(v+w)=u\cdot v+u\cdot w\bigr)\\
-&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot s)\cdot a'+(b\cdot s)\cdot(b'\cdot s)\bigr)
-&&\bigl(\because\ a\cdot(b'\cdot s)=(a\cdot b')\cdot s\bigr)\\
-&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+(b\cdot s)\cdot(b'\cdot s)\bigr)
-&&\bigl(\because\ (b\cdot s)\cdot a'=(b\cdot a')\cdot s\bigr)\\
-&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl((b\cdot a')\cdot s+2\cdot(b\cdot b')\bigr)
-&&\bigl(\because\ (b\cdot s)\cdot(b'\cdot s)=2\cdot(b\cdot b')\bigr)\\
-&=\bigl(a\cdot a'+(a\cdot b')\cdot s\bigr)+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)
+&=\bigl(A\cdot A'+(A\cdot B')\cdot s\bigr)+\bigl((B\cdot s)\cdot A'+(B\cdot s)\cdot(B'\cdot s)\bigr)
+&&\bigl(\because\ A\cdot(B'\cdot s)=(A\cdot B')\cdot s\bigr)\\
+&=\bigl(A\cdot A'+(A\cdot B')\cdot s\bigr)+\bigl((B\cdot A')\cdot s+(B\cdot s)\cdot(B'\cdot s)\bigr)
+&&\bigl(\because\ (B\cdot s)\cdot A'=(B\cdot A')\cdot s\bigr)\\
+&=\bigl(A\cdot A'+(A\cdot B')\cdot s\bigr)+\bigl((B\cdot A')\cdot s+j(2)\cdot(B\cdot B')\bigr)
+&&\bigl(\because\ (B\cdot s)\cdot(B'\cdot s)=j(2)\cdot(B\cdot B')\bigr)\\
+&=\bigl(A\cdot A'+(A\cdot B')\cdot s\bigr)+\bigl(j(2)\cdot(B\cdot B')+(B\cdot A')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の可換則}\bigr)\\
-&=a\cdot a'+\Bigl((a\cdot b')\cdot s+\bigl(2\cdot(b\cdot b')+(b\cdot a')\cdot s\bigr)\Bigr)
+&=A\cdot A'+\Bigl((A\cdot B')\cdot s+\bigl(j(2)\cdot(B\cdot B')+(B\cdot A')\cdot s\bigr)\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a\cdot a'+\Bigl(\bigl((a\cdot b')\cdot s+2\cdot(b\cdot b')\bigr)+(b\cdot a')\cdot s\Bigr)
+&=A\cdot A'+\Bigl(\bigl((A\cdot B')\cdot s+j(2)\cdot(B\cdot B')\bigr)+(B\cdot A')\cdot s\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a\cdot a'+\Bigl(\bigl(2\cdot(b\cdot b')+(a\cdot b')\cdot s\bigr)+(b\cdot a')\cdot s\Bigr)
+&=A\cdot A'+\Bigl(\bigl(j(2)\cdot(B\cdot B')+(A\cdot B')\cdot s\bigr)+(B\cdot A')\cdot s\Bigr)
 &&\bigl(\because\ \text{加法の可換則}\bigr)\\
-&=a\cdot a'+\Bigl(2\cdot(b\cdot b')+\bigl((a\cdot b')\cdot s+(b\cdot a')\cdot s\bigr)\Bigr)
+&=A\cdot A'+\Bigl(j(2)\cdot(B\cdot B')+\bigl((A\cdot B')\cdot s+(B\cdot A')\cdot s\bigr)\Bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl((a\cdot b')\cdot s+(b\cdot a')\cdot s\bigr)
+&=\bigl(A\cdot A'+j(2)\cdot(B\cdot B')\bigr)+\bigl((A\cdot B')\cdot s+(B\cdot A')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)+\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
-&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)
+&=\bigl(A\cdot A'+j(2)\cdot(B\cdot B')\bigr)+\bigl(A\cdot B'+B\cdot A'\bigr)\cdot s
+&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)\\
+&=\bigl(j(a\cdot a')+j(2)\cdot j(b\cdot b')\bigr)
+  +\bigl(j(a\cdot b')+j(b\cdot a')\bigr)\cdot s
+&&\bigl(\because\ j\text{ の乗法保存 }\blkref{def_algebraic_numbers}\bigr)\\
+&=\bigl(j(a\cdot a')+j(2\cdot(b\cdot b'))\bigr)
+  +\bigl(j(a\cdot b')+j(b\cdot a')\bigr)\cdot s
+&&\bigl(\because\ j\text{ の乗法保存 }\blkref{def_algebraic_numbers}\bigr)\\
+&=j\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)
+  +\bigl(j(a\cdot b')+j(b\cdot a')\bigr)\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)\\
+&=j\bigl(a\cdot a'+2\cdot(b\cdot b')\bigr)
+  +j\bigl(a\cdot b'+b\cdot a'\bigr)\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot a'+2\cdot(b\cdot b')
+&\in\mathbb Q
+&&\bigl(\because\ \mathbb Q\text{ の和と積}\bigr),\\
+a\cdot b'+b\cdot a'
+&\in\mathbb Q
+&&\bigl(\because\ \mathbb Q\text{ の和と積}\bigr),\\
+\xi\cdot\eta
+&\in Q_s
+&&\bigl(\because\ \text{上の二係数を証人とする }\blkref{def_quadratic_field_set}\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`a\cdot a'+2\cdot(b\cdot b')\in\mathbb{Q}`),
-                          "、",
-                          math(String.raw`a\cdot b'+b\cdot a'\in\mathbb{Q}`),
-                          " なので、組 ",
-                          math(String.raw`\bigl(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a'\bigr)`),
-                          " が ",
-                          ref("def_quadratic_field_set"),
-                          " の存在条件の証人になり、",
-                          math(String.raw`\xi\cdot\eta\in Q_s`),
-                          " である。全過程は体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " と ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "全過程は体 ", math(String.raw`\mathbb Q`), " と ",
+                          math(String.raw`\overline{\mathbb Q}`),
                           " の四則の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],

@@ -9,6 +9,106 @@ namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
 
+theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L))
+    (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∀ i : ZMod L,
+      (∑ j : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) ∧
+    (∀ j : ZMod L,
+      (∑ i : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) := by
+  classical
+  obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
+  obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant L A hSector.1
+  let walk : ℕ → ZMod L := fun n => -1 + (n : ZMod L)
+  let step : ZMod L → ZMod L := fun x => x + 1
+  let index : ZMod L → ℕ := fun x => (x + 1).val
+  have hstart : walk 0 = (-1 : ZMod L) := by
+    calc
+      walk 0 = -1 + (0 : ZMod L) := congrArg (-1 + ·) (Nat.cast_zero)
+      _ = -1 := add_zero _
+  have hstep : ∀ n : ℕ, walk (n + 1) = step (walk n) := by
+    intro n
+    calc
+      walk (n + 1) = -1 + ((n : ZMod L) + ((1 : ℕ) : ZMod L)) :=
+        congrArg (-1 + ·) (Nat.cast_add n 1)
+      _ = -1 + ((n : ZMod L) + 1) := by rw [Nat.cast_one]
+      _ = step (walk n) := (add_assoc (-1 : ZMod L) (n : ZMod L) 1).symm
+  have hcover : ∀ x : ZMod L, walk (index x) = x := by
+    intro x
+    calc
+      walk (index x) = -1 + (x + 1) :=
+        congrArg (-1 + ·) (ZMod.natCast_rightInverse (x + 1))
+      _ = -1 + (1 + x) := congrArg (-1 + ·) (add_comm x 1)
+      _ = (-1 + 1) + x := (add_assoc (-1 : ZMod L) 1 x).symm
+      _ = 0 + x := congrArg (· + x) (neg_add_cancel (1 : ZMod L))
+      _ = x := zero_add x
+  constructor
+  · exact Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf
+      (X := ZMod L) (Y := ZMod 2)
+      walk step (-1) index hstart hstep hcover
+      (fun i : ZMod L => ∑ j : ZMod L,
+        if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0)
+      0 hwh (fun x => hrow x)
+  · exact Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf
+      (X := ZMod L) (Y := ZMod 2)
+      walk step (-1) index hstart hstep hcover
+      (fun j : ZMod L => ∑ i : ZMod L,
+        if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0)
+      0 hwv (fun x => hcol x)
+
+/-- 行の全周期和零を必要十分版から受け取り、整数代表の有限和へ移す。 -/
+theorem reconstructedEdgeSet_horizontal_prefix_sum_zero_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0))
+    (i : ZMod L) :
+    (∑ c ∈ Finset.range L,
+      (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A
+        then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let H : ℕ → ZMod 2 := fun m => ∑ c ∈ Finset.range m,
+    if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A then 1 else 0
+  let residueEquiv : Fin L ≃ ZMod L :=
+    { toFun := fun c => (c.val : ZMod L)
+      invFun := fun z => ⟨z.val, z.val_lt⟩
+      left_inv := fun c => Fin.ext (by
+        simp only [ZMod.val_natCast, Nat.mod_eq_of_lt c.isLt])
+      right_inv := fun z => ZMod.natCast_zmod_val z }
+  calc
+    H L = ∑ c ∈ Finset.range L,
+        (if edgeOfRow L false i (c : ZMod L) ∈ reconstructedEdgeSet L A
+          then 1 else 0) := rfl
+    _ = ∑ k : ZMod L,
+        (if edgeOfRow L false i k ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      rw [← Fin.sum_univ_eq_sum_range]
+      exact Fintype.sum_equiv residueEquiv _ _ (fun _ => rfl)
+    _ = 0 := (reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf L A hSector).1 i
+
+/-- 列零の全周期和零を必要十分版から受け取り、整数代表の有限和へ移す。 -/
+theorem reconstructedEdgeSet_vertical_prefix_sum_zero_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hSector : IsInTorusHomologySector L A (0, 0)) :
+    (∑ r ∈ Finset.range L,
+      (if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A
+        then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let V : ℕ → ZMod 2 := fun n => ∑ r ∈ Finset.range n,
+    if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A then 1 else 0
+  let residueEquiv : Fin L ≃ ZMod L :=
+    { toFun := fun r => (r.val : ZMod L)
+      invFun := fun z => ⟨z.val, z.val_lt⟩
+      left_inv := fun r => Fin.ext (by
+        simp only [ZMod.val_natCast, Nat.mod_eq_of_lt r.isLt])
+      right_inv := fun z => ZMod.natCast_zmod_val z }
+  calc
+    V L = ∑ r ∈ Finset.range L,
+        (if edgeOfRow L true (r : ZMod L) 0 ∈ reconstructedEdgeSet L A
+          then 1 else 0) := rfl
+    _ = ∑ k : ZMod L,
+        (if edgeOfRow L true k 0 ∈ reconstructedEdgeSet L A then 1 else 0) := by
+      rw [← Fin.sum_univ_eq_sum_range]
+      exact Fintype.sum_equiv residueEquiv _ _ (fun _ => rfl)
+    _ = 0 := (reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf L A hSector).2 0
+
 /-- 周期境界の横辺差へ、実際の道和・代表・有限和・周期和零を供給する。 -/
 theorem reconstructionPathParity_horizontal_boundary_difference_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
@@ -31,7 +131,7 @@ theorem reconstructionPathParity_horizontal_boundary_difference_from_necSuf
         (reconstructionPathParity L A i) ZMod.val H f P j (j + 1) L
         rfl rfl (reconstruction_horizontal_boundary_successor_val L j hj) hj
         (Finset.sum_range_zero f) (Finset.sum_range_succ f j.val)
-        (reconstructedEdgeSet_horizontal_prefix_sum_zero L A hSector i) hbase hterm
+        (reconstructedEdgeSet_horizontal_prefix_sum_zero_from_necSuf L A hSector i) hbase hterm
     _ = (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) := by
       dsimp [f]
       rw [ZMod.natCast_zmod_val]
@@ -131,7 +231,7 @@ theorem reconstructionPathParity_vertical_boundary_difference_from_necSuf
     V v nextRow currentRow f i.val (i + 1).val j.val L (bv i 0) (bv i j)
     rfl rfl (reconstruction_horizontal_boundary_successor_val L i hi) hi
     (Finset.sum_range_zero v) (Finset.sum_range_succ v i.val)
-    (reconstructedEdgeSet_vertical_prefix_sum_zero L A hSector)
+    (reconstructedEdgeSet_vertical_prefix_sum_zero_from_necSuf L A hSector)
     (by dsimp [v]; rw [ZMod.natCast_zmod_val])
     hpair (fun c => hdouble (f c))
     (by dsimp [f]; rw [ZMod.natCast_zmod_val])
@@ -146,55 +246,6 @@ theorem reconstructionParityPower_eq_one_or_neg_one_from_necSuf (q : ZMod 2) :
   exact Ising2DLambda.NecSuf.FisherZero.two_exponent_values_necSuf
     (fun n : ℕ => (-1 : ℤ) ^ n) 1 (-1) q.val
     hcases (pow_zero _) (pow_one _)
-
-theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
-    (L : ℕ) [NeZero L] (A : Finset (Edge L))
-    (hSector : IsInTorusHomologySector L A (0, 0)) :
-    (∀ i : ZMod L,
-      (∑ j : ZMod L,
-        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) ∧
-    (∀ j : ZMod L,
-      (∑ i : ZMod L,
-        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) := by
-  classical
-  obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
-  obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant L A hSector.1
-  let walk : ℕ → ZMod L := fun n => -1 + (n : ZMod L)
-  let step : ZMod L → ZMod L := fun x => x + 1
-  let index : ZMod L → ℕ := fun x => (x + 1).val
-  have hstart : walk 0 = (-1 : ZMod L) := by
-    calc
-      walk 0 = -1 + (0 : ZMod L) := congrArg (-1 + ·) (Nat.cast_zero)
-      _ = -1 := add_zero _
-  have hstep : ∀ n : ℕ, walk (n + 1) = step (walk n) := by
-    intro n
-    calc
-      walk (n + 1) = -1 + ((n : ZMod L) + ((1 : ℕ) : ZMod L)) :=
-        congrArg (-1 + ·) (Nat.cast_add n 1)
-      _ = -1 + ((n : ZMod L) + 1) := by rw [Nat.cast_one]
-      _ = step (walk n) := (add_assoc (-1 : ZMod L) (n : ZMod L) 1).symm
-  have hcover : ∀ x : ZMod L, walk (index x) = x := by
-    intro x
-    calc
-      walk (index x) = -1 + (x + 1) :=
-        congrArg (-1 + ·) (ZMod.natCast_rightInverse (x + 1))
-      _ = -1 + (1 + x) := congrArg (-1 + ·) (add_comm x 1)
-      _ = (-1 + 1) + x := (add_assoc (-1 : ZMod L) 1 x).symm
-      _ = 0 + x := congrArg (· + x) (neg_add_cancel (1 : ZMod L))
-      _ = x := zero_add x
-  constructor
-  · exact Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf
-      (X := ZMod L) (Y := ZMod 2)
-      walk step (-1) index hstart hstep hcover
-      (fun i : ZMod L => ∑ j : ZMod L,
-        if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0)
-      0 hwh (fun x => hrow x)
-  · exact Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf
-      (X := ZMod L) (Y := ZMod 2)
-      walk step (-1) index hstart hstep hcover
-      (fun j : ZMod L => ∑ i : ZMod L,
-        if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then (1 : ZMod 2) else 0)
-      0 hwv (fun x => hcol x)
 
 /-- 所属の四場合へ、実際の剰余類・整数冪・加法の四値を供給する。 -/
 theorem reconstructionParityPower_ne_iff_add_eq_one_from_necSuf (a b : ZMod 2) :

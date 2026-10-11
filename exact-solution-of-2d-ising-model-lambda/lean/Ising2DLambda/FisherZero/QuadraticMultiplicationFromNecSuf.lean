@@ -5,11 +5,29 @@ namespace Ising2DLambda.FisherZero
 
 open Ising2DLambda.AlgebraicEigenvalue
 
+/-- 閉性の計算の必要十分版へ、ℚ と Qbar の演算則と包含準同型を供給する。 -/
+theorem quadraticMul_value_from_necSuf
+    (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
+    (xi eta : QuadraticFieldElement s) :
+    (xi : Qbar) * (eta : Qbar) =
+      algebraMap ℚ Qbar ((quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).1 +
+        2 * ((quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).2)) +
+      algebraMap ℚ Qbar ((quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).2 +
+        (quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).1) * s := by
+  exact Ising2DLambda.NecSuf.FisherZero.quadratic_mul_value_necSuf
+    (algebraMap ℚ Qbar) (map_add (algebraMap ℚ Qbar)) (map_mul (algebraMap ℚ Qbar))
+    add_assoc add_comm mul_assoc mul_comm add_mul mul_add
+    2 (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2
+    (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2
+    s (xi : Qbar) (eta : Qbar) hs
+    (quadraticRepresentation_spec s xi) (quadraticRepresentation_spec s eta)
+
 theorem quadraticMul_mem_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (xi eta : QuadraticFieldElement s) :
     (xi : Qbar) * (eta : Qbar) ∈ quadraticFieldSet s := by
-  rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta]
+  have hvalue := quadraticMul_value_from_necSuf s hs xi eta
+  rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta] at hvalue ⊢
   apply Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf
       (mulK := fun x y : Qbar => x * y)
       (combine := fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s)
@@ -19,10 +37,7 @@ theorem quadraticMul_mem_from_necSuf
         2 * ((quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).2))
       ((quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).2 +
         (quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).1)
-  simp only [map_add, map_mul]
-  ring_nf
-  rw [show s ^ 2 = algebraMap ℚ Qbar 2 by simpa [pow_two] using hs]
-  ring_nf
+  exact hvalue
 
 theorem quadraticRepresentation_mul_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
