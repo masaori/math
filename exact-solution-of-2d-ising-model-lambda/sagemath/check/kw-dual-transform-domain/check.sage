@@ -31,3 +31,6 @@ for xi in test_points:
 
 assert checked == 16
 print(f"kw-dual-transform-domain: {checked} 点すべて通過（QQbar の厳密計算）; RESULT: PASS")
+
+for check_path in sorted(_check_dir.glob("check_*.sage")):
+    load(str(check_path))
