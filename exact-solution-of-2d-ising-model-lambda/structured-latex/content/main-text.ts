@@ -35740,50 +35740,87 @@ p\cdot p
                       ],
                       proof: [
                         paragraph([
-                          ref("claim_quadratic_addition_representation"),
-                          " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
-                          " である。非負性は次の鎖で得る。",
+                          math(String.raw`(a,b),(a',b')\in\mathbb Q^2`),
+                          " は主張の表示係数とする。和の表示は、",
                         ]),
+                        displayMath(String.raw`\mathrm{rep}_s(\xi+\eta)
+=(a+a',b+b')
+\qquad\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr).`),
+                        paragraph(["二つの係数の非負性は、それぞれ"]),
                         displayMath(String.raw`\begin{aligned}
-0&\le a+a' &&\bigl(\because\ 0\le a,\ 0\le a'\text{ と加法の単調性}\bigr)\\
-0&\le b+b' &&\bigl(\because\ 0\le b,\ 0\le b'\text{ と加法の単調性}\bigr)
+0&\le a+a'
+&&\bigl(\because\ 0\le a,\ 0\le a'\text{ と加法の単調性}\bigr),\\
+0&\le b+b'
+&&\bigl(\because\ 0\le b,\ 0\le b'\text{ と加法の単調性}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "残る条件 ",
-                          math(String.raw`(a+a',b+b')\ne(0,0)`),
-                          " を背理法で示す。",
+                          "残る非零性を背理法で示す。",
                           math(String.raw`(a+a',b+b')=(0,0)`),
-                          " と仮定すると、組の等しさから ",
-                          math(String.raw`a+a'=0`),
-                          " と ",
-                          math(String.raw`b+b'=0`),
-                          " を得る。",
+                          " と仮定する。組の各成分を取ると、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-a&\le0 &&\bigl(\because\ 0\le a'\text{ と }a+a'=0\text{。両辺に }-a'\text{ を足す}\bigr)\\
-a&=0 &&\bigl(\because\ 0\le a\text{ と }a\le0\text{ に順序の反対称性を適用する}\bigr)\\
-a'&\le0 &&\bigl(\because\ 0\le a\text{ と }a+a'=0\text{。両辺に }-a\text{ を足す}\bigr)\\
-a'&=0 &&\bigl(\because\ 0\le a'\text{ と }a'\le0\text{ に順序の反対称性を適用する}\bigr)\\
-b&\le0 &&\bigl(\because\ 0\le b'\text{ と }b+b'=0\text{。両辺に }-b'\text{ を足す}\bigr)\\
-b&=0 &&\bigl(\because\ 0\le b\text{ と }b\le0\text{ に順序の反対称性を適用する}\bigr)\\
-b'&\le0 &&\bigl(\because\ 0\le b\text{ と }b+b'=0\text{。両辺に }-b\text{ を足す}\bigr)\\
-b'&=0 &&\bigl(\because\ 0\le b'\text{ と }b'\le0\text{ に順序の反対称性を適用する}\bigr)
+a+a'&=0
+&&\bigl(\because\ \text{背理仮定の第一成分}\bigr),\\
+b+b'&=0
+&&\bigl(\because\ \text{背理仮定の第二成分}\bigr).
 \end{aligned}`),
+                        paragraph(["第一係数の二つの加数について、"]),
+                        displayMath(String.raw`\begin{aligned}
+a
+&=a+0
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a+a'
+&&\bigl(\because\ 0\le a'\text{ と加法の単調性}\bigr)\\
+&=0
+&&\bigl(\because\ a+a'=0\bigr),\\
+a
+&=0
+&&\bigl(\because\ a\le0,\ 0\le a\text{ と反対称性}\bigr),\\[3pt]
+a'
+&=0+a'
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a+a'
+&&\bigl(\because\ 0\le a\text{ と加法の単調性}\bigr)\\
+&=0
+&&\bigl(\because\ a+a'=0\bigr),\\
+a'
+&=0
+&&\bigl(\because\ a'\le0,\ 0\le a'\text{ と反対称性}\bigr).
+\end{aligned}`),
+                        paragraph(["第二係数の二つの加数について、"]),
+                        displayMath(String.raw`\begin{aligned}
+b
+&=b+0
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le b+b'
+&&\bigl(\because\ 0\le b'\text{ と加法の単調性}\bigr)\\
+&=0
+&&\bigl(\because\ b+b'=0\bigr),\\
+b
+&=0
+&&\bigl(\because\ b\le0,\ 0\le b\text{ と反対称性}\bigr),\\[3pt]
+b'
+&=0+b'
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le b+b'
+&&\bigl(\because\ 0\le b\text{ と加法の単調性}\bigr)\\
+&=0
+&&\bigl(\because\ b+b'=0\bigr),\\
+b'
+&=0
+&&\bigl(\because\ b'\le0,\ 0\le b'\text{ と反対称性}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`(a,b)=(0,0)
+\qquad\bigl(\because\ a=0,\ b=0\text{ と組の等号}\bigr).`),
                         paragraph([
-                          "したがって ",
-                          math(String.raw`(a,b)=(0,0)`),
-                          " となり、",
-                          math(String.raw`(a,b)\ne(0,0)`),
-                          " に矛盾する。ゆえに表示 ",
-                          math(String.raw`(a+a',b+b')`),
-                          " は正錐の第一条件を満たし、",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。全過程は ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の加法と順序、および ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の加法の中で閉じ、実数体も複素数体も現れない。",
+                          "これは仮定 ", math(String.raw`(a,b)\ne(0,0)`), " に矛盾する。従って、",
+                        ]),
+                        displayMath(String.raw`(a+a',b+b')\ne(0,0)
+\qquad\bigl(\because\ \text{背理法}\bigr).`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr).`),
+                        paragraph([
+                          "全過程は有理数の加法・順序と代数的数の加法で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
