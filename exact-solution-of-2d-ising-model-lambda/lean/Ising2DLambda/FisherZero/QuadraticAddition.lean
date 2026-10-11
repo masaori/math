@@ -1,6 +1,6 @@
 /-
 「二次体の和の表示」の具体版。
-本文と同じ七段の等式列で和の表示を作り、台集合への所属と表示写像の値を別々に示す。
+本文と同じ九等号の等式列で和の表示を作り、台集合への所属と表示写像の値を別々に示す。
 -/
 import Ising2DLambda.FisherZero.QuadraticPositiveCone
 
@@ -40,8 +40,14 @@ noncomputable def quadraticAddElement
     _ = (algebraMap ℚ Qbar a + algebraMap ℚ Qbar a') +
           (algebraMap ℚ Qbar b * s + algebraMap ℚ Qbar b' * s) := by
       rw [add_assoc]
+    _ = (algebraMap ℚ Qbar a + algebraMap ℚ Qbar a') +
+          (algebraMap ℚ Qbar b + algebraMap ℚ Qbar b') * s := by
+      rw [add_mul]
+    _ = algebraMap ℚ Qbar (a + a') +
+          (algebraMap ℚ Qbar b + algebraMap ℚ Qbar b') * s := by
+      rw [map_add (algebraMap ℚ Qbar) a a']
     _ = algebraMap ℚ Qbar (a + a') + algebraMap ℚ Qbar (b + b') * s := by
-      rw [map_add, map_add, add_mul]
+      rw [map_add (algebraMap ℚ Qbar) b b']
 
 /-- `claim_quadratic_addition_mem` の具体版。 -/
 theorem quadraticAdd_mem

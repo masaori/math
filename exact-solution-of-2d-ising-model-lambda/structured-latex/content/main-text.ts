@@ -34634,52 +34634,47 @@ a\cdot a
                       ],
                       proof: [
                         paragraph([
-                          "準備。",
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`a,a'\in\mathbb{Q}`),
-                          " の ",
-                          math(String.raw`\mathbb{Q}`),
-                          " での和 ",
-                          math(String.raw`a+a'`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " での和と同じ元である。",
-                          math(String.raw`b+b'`),
-                          " も同様である。次の鎖を得る。",
+                          "有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " と書く（", ref("def_algebraic_numbers"), "）。係数 ",
+                          math(String.raw`a,b,a',b'\in\mathbb Q`),
+                          " の和は有理数体で取り、代数的数体へ移す箇所を ",
+                          math(String.raw`j`), " で明記する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \xi+\eta
-&=\bigl(a+b\cdot s\bigr)+\bigl(a'+b'\cdot s\bigr)
+&=\bigl(j(a)+j(b)\cdot s\bigr)+\bigl(j(a')+j(b')\cdot s\bigr)
 &&\bigl(\because\ \text{表示の写像の仕様 }\blkref{def_quadratic_representation_map}\text{ を両方の項へ同時適用}\bigr)\\
-&=a+\bigl(b\cdot s+(a'+b'\cdot s)\bigr)
+&=j(a)+\bigl(j(b)\cdot s+(j(a')+j(b')\cdot s)\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a+\bigl((b\cdot s+a')+b'\cdot s\bigr)
+&=j(a)+\bigl((j(b)\cdot s+j(a'))+j(b')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=a+\bigl((a'+b\cdot s)+b'\cdot s\bigr)
+&=j(a)+\bigl((j(a')+j(b)\cdot s)+j(b')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の可換則}\bigr)\\
-&=a+\bigl(a'+(b\cdot s+b'\cdot s)\bigr)
+&=j(a)+\bigl(j(a')+(j(b)\cdot s+j(b')\cdot s)\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=(a+a')+\bigl(b\cdot s+b'\cdot s\bigr)
+&=(j(a)+j(a'))+\bigl(j(b)\cdot s+j(b')\cdot s\bigr)
 &&\bigl(\because\ \text{加法の結合則}\bigr)\\
-&=(a+a')+(b+b')\cdot s
-&&\bigl(\because\ \text{分配則}\ (u+v)\cdot w=u\cdot w+v\cdot w\bigr)
+&=(j(a)+j(a'))+(j(b)+j(b'))\cdot s
+&&\bigl(\because\ \text{分配則}\bigr)\\
+&=j(a+a')+(j(b)+j(b'))\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)\\
+&=j(a+a')+j(b+b')\cdot s
+&&\bigl(\because\ j\text{ の加法保存 }\blkref{def_algebraic_numbers}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 a+a'
-&\in\mathbb{Q}
-&&\bigl(\because\ a,a'\in\mathbb{Q}\ \text{と}\ \mathbb{Q}\ \text{の加法による閉性}\bigr)\\
+&\in\mathbb Q
+&&\bigl(\because\ a,a'\in\mathbb Q\ \text{と}\ \mathbb Q\ \text{の加法による閉性}\bigr)\\
 b+b'
-&\in\mathbb{Q}
-&&\bigl(\because\ b,b'\in\mathbb{Q}\ \text{と}\ \mathbb{Q}\ \text{の加法による閉性}\bigr)\\
-(a+a')+(b+b')\cdot s
+&\in\mathbb Q
+&&\bigl(\because\ b,b'\in\mathbb Q\ \text{と}\ \mathbb Q\ \text{の加法による閉性}\bigr)\\
+j(a+a')+j(b+b')\cdot s
 &\in Q_s
 &&\bigl(\because\ \blkref{def_quadratic_field_set}\ \text{を}\ (a+a',b+b')\ \text{へ適用}\bigr)\\
 \xi+\eta
 &\in Q_s
-&&\bigl(\because\ \xi+\eta=(a+a')+(b+b')\cdot s\bigr)
+&&\bigl(\because\ \xi+\eta=j(a+a')+j(b+b')\cdot s\bigr)
 \end{aligned}`),
                         paragraph([
                           "全過程は体 ",

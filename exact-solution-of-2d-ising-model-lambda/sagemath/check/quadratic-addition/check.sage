@@ -73,3 +73,5 @@ for s in roots:
 print(f"add-compat: {checked_add_compat} 組を検査した")
 print(f"add-chain / add-rep: {checked_add_chain} 組を検査した")
 print("すべて通過した")
+
+load('sagemath/check/quadratic-addition/check_lines.sage')
