@@ -52,6 +52,25 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.oddOrbitPoints
+  Ising2DLambda.AlgebraicEigenvalue.leastOddOrbitPoint
+  Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_nonempty
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_leastOddOrbitPoint
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_selectedOddOrbit
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.featurePoints
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.leastFeaturePoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedFeatureValue
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.featurePoints_eq_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.featurePoints_nonempty_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.leastFeaturePoint_eq_necSuf
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedFeatureValue_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_nonempty_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_leastOddOrbitPoint_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_selectedOddOrbit_from_necSuf
+
   Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_iterate_mem_iff
   Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_inverse_iterate_mem_iff
   Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_self_mem

@@ -7625,6 +7625,116 @@ i\in\operatorname{Orb}_{\sigma}(j)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_odd_orbit_selection",
+        labels: [],
+        title: { text: "奇数軌道の最小元による選択" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_odd_orbit_selection",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_odd_orbit_selection",
+                title: { text: "奇数軌道に属する最小元と選ぶ軌道の台" },
+                labels: ["def_odd_orbit_selection"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.AlgebraicEigenvalue.oddOrbitPoints",
+                  "Ising2DLambda.AlgebraicEigenvalue.leastOddOrbitPoint",
+                  "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit",
+                ],
+                verification: ["sagemath/check/odd-orbit-selection"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。", math(String.raw`a\preceq b`), " は ", math(String.raw`a=b`), " または ", math(String.raw`a\prec b`), " を意味する。自然数 ", math(String.raw`n\in\mathbb N`), " が奇数であるとは、ある ", math(String.raw`k\in\mathbb N`), " について ", math(String.raw`n=k+k+1`), " となることをいう。置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " に対して、奇数長の軌道に属する点の集合を、", ref("def_finite_permutation_orbit_length"), " の長さを使って、"]),
+                  displayMath(String.raw`\operatorname{OddPts}(\sigma):=
+\{j\in\mathcal J\mid \operatorname{len}_{\sigma}(j)\text{ は奇数}\}`),
+                  paragraph(["と定める。この集合が空でない場合に限って、その最小元と、それを含む軌道の台を、"]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{oddmin}(\sigma)&:=\min_{\preceq}\operatorname{OddPts}(\sigma)\in\mathcal J,\\
+\operatorname{OddOrb}(\sigma)&:=\operatorname{Orb}_{\sigma}(\operatorname{oddmin}(\sigma))\subseteq\mathcal J
+\end{aligned}`),
+                  paragraph(["と定める。軌道の台は ", ref("def_finite_permutation_orbit"), " の意味である。有限非空の線型順序集合の最小元は、元を一つ追加するたびに既存の最小元と比較して小さい方を残す帰納法で得られる（", ref("def_matching_word_sign"), " の定義でも使った構成）。最小元は集合に属し、集合のどの元以下でもある。二つの元がこの性質を持てば互いに以下なので、順序の反対称律により一致する。", math(String.raw`\operatorname{OddPts}(\sigma)=\varnothing`), " のときは、最小元も選ぶ台も定めない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_odd_orbit_selection_invariant",
+              title: { text: "奇数軌道の最小元による選択は反転で変わらない" },
+              labels: ["claim_odd_orbit_selection_invariant"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_nonempty",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_leastOddOrbitPoint",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_selectedOddOrbit",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.featurePoints_eq_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.featurePoints_nonempty_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.leastFeaturePoint_eq_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.selectedFeatureValue_eq_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_oddOrbitPoints_nonempty_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_leastOddOrbitPoint_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.invariantSubsetReversal_selectedOddOrbit_from_necSuf",
+              ],
+              verification: ["sagemath/check/odd-orbit-selection"],
+              statement: [
+                paragraph([ref("def_odd_orbit_selection"), " の有限線型順序集合 ", math(String.raw`\mathcal J`), " と置換 ", math(String.raw`\sigma`), "、および ", ref("def_invariant_subset_reversal"), " の不変部分集合 ", math(String.raw`C\subseteq\mathcal J`), " を取る。すなわち、すべての ", math(String.raw`j\in\mathcal J`), " について ", math(String.raw`\sigma(j)\in C\Longleftrightarrow j\in C`), " とする。反転した置換を ", math(String.raw`\tau:=\rho_C(\sigma)`), " と置くと、"]),
+                displayMath(String.raw`\operatorname{OddPts}(\tau)=\operatorname{OddPts}(\sigma)`),
+                paragraph(["である。この集合が空でなければ、さらに、"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{oddmin}(\tau)&=\operatorname{oddmin}(\sigma),\\
+\operatorname{OddOrb}(\tau)&=\operatorname{OddOrb}(\sigma)
+\end{aligned}`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`O:=\operatorname{OddPts}(\sigma)`), "、", math(String.raw`O':=\operatorname{OddPts}(\tau)`), " と略す。任意の ", math(String.raw`j\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+j\in O'
+ &\ \Longleftrightarrow\ \operatorname{len}_{\tau}(j)\text{ は奇数}
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
+ &\ \Longleftrightarrow\ \operatorname{len}_{\sigma}(j)\text{ は奇数}
+ &&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit_length}\bigr)\\
+ &\ \Longleftrightarrow\ j\in O
+ &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+\end{aligned}`),
+                paragraph(["よって集合の外延性から ", math(String.raw`O'=O`), " である。", math(String.raw`O=\varnothing`), " なら、両方で選択を定めない。以下は ", math(String.raw`O\ne\varnothing`), " とする。集合等号により ", math(String.raw`O'\ne\varnothing`), " でもあるから、", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in O`), " と ", math(String.raw`m':=\operatorname{oddmin}(\tau)\in O'`), " がともに定まる（", ref("def_odd_orbit_selection"), "）。"]),
+                displayMath(String.raw`\begin{aligned}
+m'\in O&\ \Longleftrightarrow\ m'\in O'
+ &&\bigl(\because\ O'=O\bigr),\\
+m\in O'&\ \Longleftrightarrow\ m\in O
+ &&\bigl(\because\ O'=O\bigr).
+\end{aligned}`),
+                paragraph(["各右辺は最小元自身の所属により成り立つ。したがって、各集合での最小性により、"]),
+                displayMath(String.raw`\begin{aligned}
+m&\preceq m'&&\bigl(\because\ m'\in O\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr),\\
+m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection}\text{ の最小性}\bigr).
+\end{aligned}`),
+                paragraph(["この二つの比較から、"]),
+                displayMath(String.raw`m'=m\qquad\bigl(\because\ \text{順序の反対称律}\bigr).`),
+                paragraph(["最後に、選ぶ台を比較する。"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{OddOrb}(\tau)
+ &=\operatorname{Orb}_{\tau}(m')&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
+ &=\operatorname{Orb}_{\sigma}(m')&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\bigr)\\
+ &=\operatorname{Orb}_{\sigma}(m)&&\bigl(\because\ m'=m\bigr)\\
+ &=\operatorname{OddOrb}(\sigma)&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
+\end{aligned}`),
+                paragraph(["以上で三つの一致が得られた。", math(String.raw`\mathcal J=\varnothing`), " の場合も奇数点の集合は空であり、集合等号が成り立つ。有限集合・自然数・その集合に固定した順序だけを使い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
