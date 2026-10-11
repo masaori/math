@@ -6,6 +6,8 @@
 二つの有限和の順序を交換してから、各ラベルのファイバーへ絞る。要るのは有限な
 ラベル型と、値の側が可換加法モノイドであることだけである。ラベルが巻き付き偶奇で
 あることも、重みが多項式であることも使わない。
+有限なラベル型は外側の和に、加法の可換性は和の順序交換に、零は他のラベルの項に要る。
+元の型 A の相等判定は用いず、ラベルどうしの相等だけを判定する。
 -/
 import Mathlib
 
@@ -15,7 +17,7 @@ open Finset
 
 /-- 有限和は、有限なラベル型の各ファイバーにわたる有限和の和へ分割できる。 -/
 theorem sum_eq_sum_label_fibers_necSuf
-    {A I M : Type*} [DecidableEq A] [Fintype I] [DecidableEq I] [AddCommMonoid M]
+    {A I M : Type*} [Fintype I] [DecidableEq I] [AddCommMonoid M]
     (source : Finset A) (label : A → I) (weight : A → M) :
     ∑ a ∈ source, weight a =
       ∑ i : I, ∑ a ∈ source.filter (fun a => label a = i), weight a := by
@@ -25,8 +27,7 @@ theorem sum_eq_sum_label_fibers_necSuf
         ∑ a ∈ source, ∑ i : I, if label a = i then weight a else 0 := by
       apply Finset.sum_congr rfl
       intro a _
-      simpa [eq_comm] using
-        (Fintype.sum_ite_eq (label a) (fun _ : I => weight a))
+      exact (Fintype.sum_ite_eq (label a) (fun _ : I => weight a)).symm
     _ = ∑ i : I, ∑ a ∈ source, if label a = i then weight a else 0 := by
       exact Finset.sum_comm
     _ = ∑ i : I, ∑ a ∈ source.filter (fun a => label a = i), weight a := by
