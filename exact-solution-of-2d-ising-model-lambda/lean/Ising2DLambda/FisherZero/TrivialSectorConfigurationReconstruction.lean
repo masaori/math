@@ -121,6 +121,42 @@ lemma dualImage_incidenceCount (L : ℕ) [NeZero L] (S : Finset (Edge L))
   simp only [dualEdgeEquiv_symm_horizontal, dualEdgeEquiv_symm_vertical]
   omega
 
+/-- 面の右下の双対頂点の端点数を復元辺集合の四つの自然数値の指示子へ移す。
+辺そのものが一致しても端点を別々に数えるので、辺長一でも同じ式が成立する。 -/
+lemma reconstructedEdgeSet_face_incidence_count (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (i j : ZMod L) :
+    edgeSubsetIncidenceCount L A (i + 1, j + 1) =
+      (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  let a (e : Edge L) : ℕ := if e ∈ A then 1 else 0
+  let q (e : Edge L) : ℕ := if e ∈ reconstructedEdgeSet L A then 1 else 0
+  have hindicator (e : Edge L) : a e = q ((dualEdgeEquiv L).symm e) := by
+    simp only [a, q, mem_reconstructedEdgeSet_iff, Equiv.apply_symm_apply]
+  calc
+    edgeSubsetIncidenceCount L A (i + 1, j + 1) =
+        ∑ e ∈ A, ((if boundary0 L e = (i + 1, j + 1) then 1 else 0) +
+          (if boundary1 L e = (i + 1, j + 1) then 1 else 0)) := rfl
+    _ = a (edgeOfRow L false (i + 1) (j + 1)) + a (edgeOfRow L false (i + 1) j) +
+        a (edgeOfRow L true (i + 1) (j + 1)) + a (edgeOfRow L true i (j + 1)) := by
+      change edgeSubsetIncidenceCount L A (i + 1, j + 1) = _
+      simpa only [a, add_sub_cancel_right] using
+        edgeSubsetIncidenceCount_four_incident_edges L A (i + 1) (j + 1)
+    _ = q ((dualEdgeEquiv L).symm (edgeOfRow L false (i + 1) (j + 1))) +
+        q ((dualEdgeEquiv L).symm (edgeOfRow L false (i + 1) j)) +
+        q ((dualEdgeEquiv L).symm (edgeOfRow L true (i + 1) (j + 1))) +
+        q ((dualEdgeEquiv L).symm (edgeOfRow L true i (j + 1))) := by
+      simp only [hindicator]
+    _ = q (edgeOfRow L true i (j + 1)) + q (edgeOfRow L true i j) +
+        q (edgeOfRow L false (i + 1) j) + q (edgeOfRow L false i j) := by
+      simp only [dualEdgeEquiv_symm_horizontal, dualEdgeEquiv_symm_vertical,
+        add_sub_cancel_right]
+    _ = (q (edgeOfRow L true i j) + q (edgeOfRow L false i j)) +
+        q (edgeOfRow L true i (j + 1)) + q (edgeOfRow L false (i + 1) j) := by
+      ac_rfl
+
 /-- 人手証明の格子面の等式。自明セクター以前に、偶部分グラフであることだけから従う。
 `b_v(i,j) + b_h(i,j) + b_v(i,j+1) + b_h(i+1,j) = 0` in `ℤ/2ℤ`。 -/
 theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edge L))
@@ -131,30 +167,25 @@ theorem reconstructedEdgeSet_face_equation (L : ℕ) [NeZero L] (A : Finset (Edg
       (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) :
       ZMod 2) = 0 := by
   classical
-  -- 本文の準備：右下の双対頂点の端点数を四辺の指示関数へ展開する。
-  have hcount := hEven (i + 1, j + 1)
-  rw [show A = (reconstructedEdgeSet L A).image (dualEdgeEquiv L) from
-    (image_reconstructedEdgeSet L A).symm, dualImage_incidenceCount] at hcount
-  simp only [add_sub_cancel_right] at hcount
-  obtain ⟨k, hk⟩ := hcount
-  -- 本文の面等式：各項の射影、和の射影、端点数の代入に対応する。
-  have hcast :
-      ((if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) :
-        ZMod 2) =
-      (((if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
-        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) : ℕ) :
-        ZMod 2) := by
-    push_cast
-    ring
-  -- 端点数は二の倍数であり、その二を法とする射影は零。
-  rw [hcast, hk]
-  push_cast
-  rw [← two_mul, show (2 : ZMod 2) = 0 from rfl, zero_mul]
+  let q (e : Edge L) : ℕ := if e ∈ reconstructedEdgeSet L A then 1 else 0
+  obtain ⟨k, hk⟩ := hEven (i + 1, j + 1)
+  have heven : edgeSubsetIncidenceCount L A (i + 1, j + 1) = 2 * k := by
+    calc
+      edgeSubsetIncidenceCount L A (i + 1, j + 1) = k + k := hk
+      _ = 2 * k := (two_mul k).symm
+  -- 本文の面等式の五等号。自然数値の指示子と剰余類値の指示子を明示して分ける。
+  calc
+    _ = (((q (edgeOfRow L true i j) : ZMod 2) + q (edgeOfRow L false i j)) +
+        q (edgeOfRow L true i (j + 1))) + q (edgeOfRow L false (i + 1) j) := by
+      simp only [q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+    _ = (((q (edgeOfRow L true i j) + q (edgeOfRow L false i j)) +
+        q (edgeOfRow L true i (j + 1)) + q (edgeOfRow L false (i + 1) j) : ℕ) : ZMod 2) := by
+      simp only [Nat.cast_add]
+    _ = (edgeSubsetIncidenceCount L A (i + 1, j + 1) : ZMod 2) :=
+      congrArg (fun n : ℕ => (n : ZMod 2)) (reconstructedEdgeSet_face_incidence_count L A i j).symm
+    _ = ((2 * k : ℕ) : ZMod 2) := congrArg (fun n : ℕ => (n : ZMod 2)) heven
+    _ = 0 := by
+      rw [Nat.cast_mul, show ((2 : ℕ) : ZMod 2) = 0 from rfl, zero_mul]
 
 /-- 人手証明の二周期の等式。自明セクターの二つの巻き付き偶奇を、復元した辺集合の
 縦向き周期閉路と横向き周期閉路へ双対辺写像の逆写像で戻す。 -/

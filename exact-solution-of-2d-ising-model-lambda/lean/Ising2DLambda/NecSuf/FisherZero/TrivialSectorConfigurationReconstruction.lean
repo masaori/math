@@ -13,6 +13,36 @@ namespace Ising2DLambda.NecSuf.FisherZero
 
 open Finset
 
+/-- 面の四項を加法を保つ写像で移し、端点数の表示と偶数性を代入する本文の論法。
+元の側と像の側には加法だけを残す。像の零は結論と自己和零に必要であり、
+結合則・交換則・乗法・格子は使わない。自己和零は偶数性の証人の像にだけ要求する。 -/
+theorem face_equation_necSuf {N M : Type*} [Add N] [Add M] [Zero M]
+    (projection : N → M) (hadd : ∀ x y, projection (x + y) = projection x + projection y)
+    (a b c d incidence half : N)
+    (hcount : incidence = ((a + b) + c) + d)
+    (heven : incidence = half + half)
+    (hdouble : projection half + projection half = 0) :
+    ((projection a + projection b) + projection c) + projection d = 0 := by
+  calc
+    ((projection a + projection b) + projection c) + projection d =
+        projection (((a + b) + c) + d) := by rw [hadd, hadd, hadd]
+    _ = projection incidence := congrArg projection hcount.symm
+    _ = projection (half + half) := congrArg projection heven
+    _ = 0 := by rw [hadd, hdouble]
+
+/-- 面の零等式を最後の一項について解く六等号。加法の法則と、残る三項の自己和零だけを
+使う。自己和零を外すと足し戻した三項が残るので、この仮定は省けない。 -/
+theorem face_solve_last_necSuf {M : Type*} [AddCommMonoid M]
+    (a b c d : M) (hface : ((a + b) + c) + d = 0)
+    (hdouble : ((a + b) + c) + ((a + b) + c) = 0) : d = (a + b) + c := by
+  calc
+    d = d + 0 := (add_zero _).symm
+    _ = d + (((a + b) + c) + ((a + b) + c)) := congrArg (d + ·) hdouble.symm
+    _ = (d + ((a + b) + c)) + ((a + b) + c) := (add_assoc _ _ _).symm
+    _ = (((a + b) + c) + d) + ((a + b) + c) := by rw [add_comm d]
+    _ = 0 + ((a + b) + c) := congrArg (· + ((a + b) + c)) hface
+    _ = (a + b) + c := zero_add _
+
 /-- 面の四項和から行和・列和の不変性を導く、本文の局所十七等号と有限和十六等号。
 格子・巻き数・環は使わず、加法可換モノイド、有限添字とその全単射だけを残す。
 自己和零は、局所で補う三項和と、再添字付け後に消す周期和だけに要求する。

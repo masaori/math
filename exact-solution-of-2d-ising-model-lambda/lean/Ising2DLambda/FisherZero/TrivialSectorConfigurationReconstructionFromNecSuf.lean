@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・行和と列和の不変性・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元の面等式・スピン値域・行和と列和の不変性・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -8,6 +8,42 @@ import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
+
+/-- 面の端点数を実際の双対逆写像から計算し、自然数から剰余類への射影を必要十分版へ渡す。
+面等式の具体版は呼ばず、偶部分グラフ性が与える自然数の証人をそのまま使う。 -/
+theorem reconstructedEdgeSet_face_equation_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) (i j : ZMod L) :
+    ((if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) +
+      (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0 := by
+  classical
+  let q (e : Edge L) : ℕ := if e ∈ reconstructedEdgeSet L A then 1 else 0
+  obtain ⟨k, hk⟩ := hEven (i + 1, j + 1)
+  have hdouble (z : ZMod 2) : z + z = 0 := by
+    fin_cases z <;> rfl
+  calc
+    _ = (((q (edgeOfRow L true i j) : ZMod 2) + q (edgeOfRow L false i j)) +
+        q (edgeOfRow L true i (j + 1))) + q (edgeOfRow L false (i + 1) j) := by
+      simp only [q, Nat.cast_ite, Nat.cast_one, Nat.cast_zero]
+    _ = 0 := Ising2DLambda.NecSuf.FisherZero.face_equation_necSuf
+      (fun n : ℕ => (n : ZMod 2)) (fun x y => Nat.cast_add x y)
+      (q (edgeOfRow L true i j)) (q (edgeOfRow L false i j))
+      (q (edgeOfRow L true i (j + 1))) (q (edgeOfRow L false (i + 1) j))
+      (edgeSubsetIncidenceCount L A (i + 1, j + 1)) k
+      (reconstructedEdgeSet_face_incidence_count L A i j) hk (hdouble _)
+
+/-- 必要十分版から得た面等式を、最後の横辺を解く同じ六等号へ接続する。 -/
+theorem reconstruction_horizontal_face_solve_from_necSuf (L : ℕ) [NeZero L]
+    (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) (i j : ZMod L) :
+    (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0 : ZMod 2) =
+      ((if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) +
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0)) +
+        (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) := by
+  classical
+  have hdouble (z : ZMod 2) : z + z = 0 := by fin_cases z <;> rfl
+  exact Ising2DLambda.NecSuf.FisherZero.face_solve_last_necSuf
+    _ _ _ _ (reconstructedEdgeSet_face_equation_from_necSuf L A hEven i j) (hdouble _)
 
 /-- 実際の復元辺集合の面等式を、行和・列和の不変性の必要十分版へ渡す。
 二つの添字全単射は剰余類の一歩の加法であり、必要な自己和零は `ZMod 2` で確認する。 -/
@@ -32,7 +68,7 @@ theorem reconstructedEdgeSet_row_column_sum_invariant_from_necSuf
     fin_cases z <;> rfl
   exact Ising2DLambda.NecSuf.FisherZero.row_column_sum_invariant_necSuf
     (Equiv.addRight (1 : ZMod L)) (Equiv.addRight (1 : ZMod L)) bh bv
-    (fun i j => reconstructedEdgeSet_face_equation L A hEven i j)
+    (fun i j => reconstructedEdgeSet_face_equation_from_necSuf L A hEven i j)
     (fun _ _ => hdouble _) (fun _ _ => hdouble _)
     (fun _ => hdouble _) (fun _ => hdouble _)
 
@@ -210,7 +246,7 @@ theorem reconstructionPathParity_vertical_interior_difference_from_necSuf
         Ising2DLambda.NecSuf.FisherZero.face_pair_necSuf
           (bv i (c : ZMod L)) (bh i (c : ZMod L))
           (bv i ((c : ZMod L) + 1)) (bh (i + 1) (c : ZMod L))
-          (reconstruction_horizontal_face_solve L A hEven i (c : ZMod L)) (hdouble _)
+          (reconstruction_horizontal_face_solve_from_necSuf L A hEven i (c : ZMod L)) (hdouble _)
       _ = bv i ((c + 1 : ℕ) : ZMod L) + bv i (c : ZMod L) := by
         rw [Nat.cast_add, Nat.cast_one]
       _ = f (c + 1) + f c := rfl
@@ -249,7 +285,7 @@ theorem reconstructionPathParity_vertical_boundary_difference_from_necSuf
         Ising2DLambda.NecSuf.FisherZero.face_pair_necSuf
           (bv i (c : ZMod L)) (bh i (c : ZMod L))
           (bv i ((c : ZMod L) + 1)) (bh (i + 1) (c : ZMod L))
-          (reconstruction_horizontal_face_solve L A hSector.1 i (c : ZMod L)) (hdouble _)
+          (reconstruction_horizontal_face_solve_from_necSuf L A hSector.1 i (c : ZMod L)) (hdouble _)
       _ = bv i ((c + 1 : ℕ) : ZMod L) + bv i (c : ZMod L) := by
         rw [Nat.cast_add, Nat.cast_one]
       _ = f (c + 1) + f c := rfl
