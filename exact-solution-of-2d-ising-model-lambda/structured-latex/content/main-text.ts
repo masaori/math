@@ -36008,60 +36008,88 @@ b'
                       ],
                       proof: [
                         paragraph([
-                          ref("claim_quadratic_addition_representation"),
-                          " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',b+b')`),
-                          " である。",
-                          math(String.raw`B:=b+b'`),
-                          " と置き、",
-                          math(String.raw`0\le B`),
-                          " か否かで分ける。",
+                          math(String.raw`B:=b+b'\in\mathbb{Q}`),
+                          " と置く。仮定の正錐条件（",
+                          ref("def_quadratic_positive_cone"),
+                          "）から ",
+                          math(String.raw`0\le a,\ 0\le b,\ 0<a',\ b'<0,\ 2\cdot(b'\cdot b')<a'\cdot a'`),
+                          " を用いる。和の表示は、",
                         ]),
+                        displayMath(String.raw`\mathrm{rep}_s(\xi+\eta)=(a+a',B)
+\qquad\bigl(\because\ \blkref{claim_quadratic_addition_representation},\ B:=b+b'\bigr).`),
                         paragraph([
                           math(String.raw`0\le B`),
-                          " の場合。次の二つを得る。",
+                          " の場合。第一係数の正値性と表示の非零性を得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-0&<a+a' &&\bigl(\because\ 0\le a,\ 0<a'\text{ と加法の単調性}\bigr)\\
-(a+a',B)&\ne(0,0) &&\bigl(\because\ 0<a+a'\bigr)
+0&<a+a'
+&&\bigl(\because\ 0\le a,\ 0<a';\ \text{加法の単調性}\bigr),\\
+0&\le a+a'
+&&\bigl(\because\ 0<a+a'\bigr),\\
+(a+a',B)&\ne(0,0)
+&&\bigl(\because\ 0<a+a'\text{ と組の第一成分}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第一条件}\bigr).`),
+                        paragraph([
+                          math(String.raw`0\le B`),
+                          " でない場合。まず第二係数の順序を得る。",
+                        ]),
+                        displayMath(String.raw`B<0
+\qquad\bigl(\because\ \neg(0\le B)\text{ と有理数の全順序}\bigr).`),
+                        displayMath(String.raw`\begin{aligned}
+b'
+&=0+b'
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le b+b'
+&&\bigl(\because\ 0\le b;\ \text{加法の単調性}\bigr)\\
+&=B
+&&\bigl(\because\ B:=b+b'\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+B\cdot B
+&\le b'\cdot B
+&&\bigl(\because\ b'\le B,\ B<0;\ \text{負数の右乗法}\bigr)\\
+&\le b'\cdot b'
+&&\bigl(\because\ b'\le B,\ b'<0;\ \text{負数の左乗法}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "したがって表示は正錐の第一条件を満たす。",
-                        ]),
-                        paragraph([
-                          math(String.raw`0\le B`),
-                          " でない場合。",
-                          math(String.raw`B<0`),
-                          " である。まず負の第二係数の絶対値が増えないことを、積の順序として示す。",
+                          "第一係数について、正値性と平方の比較を得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-b'&\le B &&\bigl(\because\ 0\le b\text{ と }B=b+b'\bigr)\\
-B\cdot B&\le b'\cdot B &&\bigl(\because\ b'\le B\text{ の両辺へ負の }B\text{ を右から掛ける}\bigr)\\
-&\le b'\cdot b' &&\bigl(\because\ b'\le B\text{ の両辺へ負の }b'\text{ を左から掛ける}\bigr)
+0
+&<a'
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件、}\eta\text{ の仮定}\bigr)\\
+&=0+a'
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
+&\le a+a'
+&&\bigl(\because\ 0\le a;\ \text{加法の単調性}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "第一係数については次の鎖を得る。",
-                        ]),
+                        displayMath(String.raw`0<a+a'
+\qquad\bigl(\because\ 0<a',\ a'\le a+a';\ \text{推移律}\bigr).`),
                         displayMath(String.raw`\begin{aligned}
-0&<a' &&\bigl(\because\ \eta\text{ が負の第二係数条件を満たす}\bigr)\\
-&\le a+a' &&\bigl(\because\ 0\le a\text{ と加法の単調性}\bigr)\\
-a'\cdot a'&\le(a+a')\cdot(a+a') &&\bigl(\because\ 0\le a'\le a+a'\text{ と乗法の単調性}\bigr)
+a'\cdot a'
+&\le(a+a')\cdot a'
+&&\bigl(\because\ a'\le a+a',\ 0<a';\ \text{右乗法の単調性}\bigr)\\
+&\le(a+a')\cdot(a+a')
+&&\bigl(\because\ a'\le a+a',\ 0<a+a';\ \text{左乗法の単調性}\bigr).
 \end{aligned}`),
                         paragraph([
                           "以上と負の第二係数条件をつなぐ。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 2\cdot(B\cdot B)
-&\le2\cdot(b'\cdot b') &&\bigl(\because\ B\cdot B\le b'\cdot b'\text{ の両辺へ正の }2\text{ を掛ける}\bigr)\\
-&<a'\cdot a' &&\bigl(\because\ \eta\text{ が負の第二係数条件を満たす}\bigr)\\
-&\le(a+a')\cdot(a+a') &&\bigl(\because\ 0\le a'\le a+a'\text{ と乗法の単調性}\bigr)
+&\le2\cdot(b'\cdot b')
+&&\bigl(\because\ B\cdot B\le b'\cdot b',\ 0<2;\ \text{左乗法の単調性}\bigr)\\
+&<a'\cdot a'
+&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件、}\eta\text{ の仮定}\bigr)\\
+&\le(a+a')\cdot(a+a')
+&&\bigl(\because\ \text{上の第一係数の平方比較}\bigr).
 \end{aligned}`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の第二条件}\bigr).`),
                         paragraph([
-                          "ゆえに表示 ",
-                          math(String.raw`(a+a',B)`),
-                          " は正錐の第二条件を満たす。二つの場合を合わせて ",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。全過程は ",
+                          "二つの場合で結論が得られた。全過程は ",
                           math(String.raw`\mathbb{Q}`),
                           " の加法・積・順序と ",
                           math(String.raw`\overline{\mathbb{Q}}`),
