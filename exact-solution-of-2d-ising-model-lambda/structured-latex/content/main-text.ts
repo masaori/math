@@ -8133,6 +8133,142 @@ q(p(i))&=q(i)&&\bigl(\because\ p\text{ の定義},\ i\notin C\bigr)\\
         }],
       },
     },
+
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_selected_odd_orbit_skew_product_neg",
+        labels: [],
+        title: { text: "奇数軌道の反転と反対称成分の積" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_selected_odd_orbit_skew_product_neg",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_selected_odd_orbit_skew_product_neg",
+              title: { text: "奇数軌道の反転で反対称成分の積は符号を変える" },
+              labels: ["claim_selected_odd_orbit_skew_product_neg"],
+              habitat: "Qbar",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_product_neg",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_signed_term_neg",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariant_subset_reversal_skew_product_neg",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.invariant_subset_reversal_skew_signed_term_neg",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_product_neg_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_signed_term_neg_from_necSuf",
+              ],
+              verification: ["sagemath/check/selected-odd-orbit-skew-product-neg"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。多項式を成分とする行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " が、任意の ", math(String.raw`i,j\in\mathcal J`), " に対して反対称性"]),
+                displayMath(String.raw`A_{j,i}=-A_{i,j}\qquad(i,j\in\mathcal J)`),
+                paragraph(["を満たすとする。符号と定数多項式は ", ref("def_qbar_determinant_with_empty_index"), " の記法を用い、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " に対して"]),
+                displayMath(String.raw`c_\pi:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi))}
+\in\overline{\mathbb Q}[x]`),
+                paragraph(["と置く。", ref("def_odd_orbit_derangements"), " の任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " について、", ref("def_selected_odd_orbit_reversal"), " の ", math(String.raw`\tau:=R_{\mathrm{odd}}(\sigma)\in\operatorname{Perm}(\mathcal J)`), " は"]),
+                displayMath(String.raw`\begin{gathered}
+\prod_{i\in\mathcal J}A_{i,\tau(i)}
+=-\prod_{i\in\mathcal J}A_{i,\sigma(i)},\\
+c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
+=-\left(c_\sigma\prod_{i\in\mathcal J}A_{i,\sigma(i)}\right)
+\end{gathered}`),
+                paragraph(["を満たす。すべての積と等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で扱い、空積は ", math(String.raw`1`), " とする。"]),
+              ],
+              proof: [
+                paragraph([ref("def_odd_orbit_selection"), " の ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " と ", math(String.raw`C:=\operatorname{OddOrb}(\sigma)\subseteq\mathcal J`), " を取る。最小元は選んだ集合に属するので、"]),
+                displayMath(String.raw`m\in\operatorname{OddPts}(\sigma)
+\qquad\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).`),
+                displayMath(String.raw`\operatorname{len}_{\sigma}(m)\text{ は奇数}
+\qquad\bigl(\because\ \operatorname{OddPts}\text{ の定義、}\blkref{def_odd_orbit_selection}\bigr).`),
+                displayMath(String.raw`\begin{aligned}
+|C|&=|\operatorname{Orb}_{\sigma}(m)|
+&&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr)\\
+&=\operatorname{len}_{\sigma}(m)
+&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`|C|\text{ は奇数}
+\qquad\bigl(\because\ \text{上の個数の等号へ奇数性を代入}\bigr).`),
+                paragraph(["次に ", math(String.raw`C`), " の中で積の添字を取り直す。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\sigma(i)\in C\ \Longleftrightarrow\ i\in C
+\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).`),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(i)\in C
+&\ \Longleftrightarrow\ \sigma(\sigma^{-1}(i))\in C
+&&\bigl(\because\ \text{直前の不変条件を逆像へ適用}\bigr)\\
+&\ \Longleftrightarrow\ i\in C
+&&\bigl(\because\ \text{置換と逆写像の相殺}\bigr).
+\end{aligned}`),
+                paragraph(["したがって ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " はどちらも ", math(String.raw`C`), " から ", math(String.raw`C`), " への写像に制限できる。各 ", math(String.raw`i\in C`), " で"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(\sigma(i))&=i&&\bigl(\because\ \text{逆写像の左逆性}\bigr),\\
+\sigma(\sigma^{-1}(i))&=i&&\bigl(\because\ \text{逆写像の右逆性}\bigr)
+\end{aligned}`),
+                paragraph(["なので、この二つの制限は互いに逆の全単射である。選んだ反転と不変部分集合上の反転の接続は、"]),
+                displayMath(String.raw`\tau=\rho_C(\sigma)
+\qquad\bigl(\because\ \blkref{def_selected_odd_orbit_reversal}\bigr).`),
+                paragraph(["内側の積では、上で示した全単射によって ", math(String.raw`i=\sigma(j)`), " と再添字付けする。"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in C}A_{i,\tau(i)}
+&=\prod_{i\in C}A_{i,\sigma^{-1}(i)}
+&&\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr)\\
+&=\prod_{j\in C}A_{\sigma(j),\sigma^{-1}(\sigma(j))}
+&&\bigl(\because\ \text{上で示した全単射による再添字付け}\bigr)\\
+&=\prod_{j\in C}A_{\sigma(j),j}
+&&\bigl(\because\ \text{逆写像の左逆性}\bigr)\\
+&=\prod_{j\in C}(-A_{j,\sigma(j)})
+&&\bigl(\because\ A\text{ の反対称性}\bigr)\\
+&=(-1)^{|C|}\prod_{j\in C}A_{j,\sigma(j)}
+&&\bigl(\because\ \text{有限積から各因子の負号を分離}\bigr)\\
+&=(-1)\prod_{j\in C}A_{j,\sigma(j)}
+&&\bigl(\because\ |C|\text{ は奇数}\bigr)\\
+&=-\prod_{j\in C}A_{j,\sigma(j)}
+&&\bigl(\because\ -1\text{ との積}\bigr).
+\end{aligned}`),
+                paragraph(["一方、軌道の外では置換の値が変わらないので、"]),
+                displayMath(String.raw`\prod_{i\in\mathcal J\setminus C}A_{i,\tau(i)}
+=\prod_{i\in\mathcal J\setminus C}A_{i,\sigma(i)}
+\qquad\bigl(\because\ \blkref{def_invariant_subset_reversal}\bigr).`),
+                paragraph(["内側と外側の積を、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " について"]),
+                displayMath(String.raw`P_\pi:=\prod_{i\in C}A_{i,\pi(i)},\qquad
+Q_\pi:=\prod_{i\in\mathcal J\setminus C}A_{i,\pi(i)}
+\quad\in\overline{\mathbb Q}[x]`),
+                paragraph(["と略す。上で示した等式は ", math(String.raw`P_\tau=-P_\sigma`), " と ", math(String.raw`Q_\tau=Q_\sigma`), " である。互いに交わらない内側と外側へ積を分けると、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\mathcal J}A_{i,\tau(i)}
+&=P_\tau Q_\tau&&\bigl(\because\ \text{有限積を }C\text{ と }\mathcal J\setminus C\text{ へ分離}\bigr)\\
+&=(-P_\sigma)Q_\tau&&\bigl(\because\ \text{上で示した内側の積の反転}\bigr)\\
+&=(-P_\sigma)Q_\sigma&&\bigl(\because\ \text{上で示した外側の積の不変性}\bigr)\\
+&=-(P_\sigma Q_\sigma)&&\bigl(\because\ \text{積の第一因子の負号}\bigr)\\
+&=-\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+&&\bigl(\because\ \text{分離した有限積をまとめる}\bigr).
+\end{aligned}`),
+                paragraph(["これが第一の等号である。置換の符号自体は変わらず、"]),
+                displayMath(String.raw`\begin{aligned}
+c_\tau&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}
+&&\bigl(\because\ c_\pi\text{ の定義}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_sign}\bigr)\\
+&=c_\sigma&&\bigl(\because\ c_\pi\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["したがって符号付き項についても、"]),
+                displayMath(String.raw`\begin{aligned}
+c_\tau\prod_{i\in\mathcal J}A_{i,\tau(i)}
+&=c_\sigma\prod_{i\in\mathcal J}A_{i,\tau(i)}
+&&\bigl(\because\ \text{直前の係数の等号}\bigr)\\
+&=c_\sigma\left(-\prod_{i\in\mathcal J}A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \text{上で示した全体の積の反転}\bigr)\\
+&=-\left(c_\sigma\prod_{i\in\mathcal J}A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \text{積の第二因子の負号}\bigr).
+\end{aligned}`),
+                paragraph(["対象集合が空のときは入力がなく、主張は全称命題として成り立つ。最小元の選択は対象集合に属する入力にだけ行った。計算は有限集合と代数的数係数多項式の中で閉じ、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
