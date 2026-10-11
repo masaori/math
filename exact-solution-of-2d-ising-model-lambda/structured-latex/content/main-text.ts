@@ -6435,6 +6435,158 @@ I(\alpha(\tau))
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_perfect_matching_involution",
+        labels: [],
+        title: { text: "完全マッチングと不動点のない対合" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_perfect_matching_involution",
+            beforeFocus: [
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_finite_perfect_matching",
+                  kind: "definition",
+                  title: { text: "有限集合の完全マッチング" },
+                  labels: ["def_finite_perfect_matching"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.IsPerfectMatching",
+                    "Ising2DLambda.AlgebraicEigenvalue.PerfectMatching",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-involution"],
+                  statement: [
+                    paragraph(["有限集合 ", math(String.raw`\mathcal J`), " を固定する。空集合も許す。集合 ", math(String.raw`X`), " の部分集合全体を ", math(String.raw`\mathcal P(X)`), " と書く。族 ", math(String.raw`\mathcal D\in\mathcal P(\mathcal P(\mathcal J))`), " が完全マッチングであるとは、次の二条件を満たすことをいう。"]),
+                    displayMath(String.raw`\begin{gathered}
+\forall p\in\mathcal D\quad\exists a,b\in\mathcal J\quad a\ne b\ \land\ p=\{a,b\},\\
+\forall i\in\mathcal J\quad\exists!p\in\mathcal D\quad i\in p.
+\end{gathered}`),
+                    paragraph(["すなわち、相異なる二点の組に分け、どの点もただ一つの組に入る。", math(String.raw`\exists!`), " は存在と一意性を同時に表す。完全マッチング全体を ", math(String.raw`\mathcal M(\mathcal J)\subseteq\mathcal P(\mathcal P(\mathcal J))`), " と書く。族は集合なので、同じ組を重複して数えない。"]),
+                  ],
+                },
+              },
+              {
+                role: "prerequisiteDefinition",
+                element: {
+                  id: "tools_definition_fixed_point_free_involution",
+                  kind: "definition",
+                  title: { text: "不動点のない対合とその二元軌道の族" },
+                  labels: ["def_fixed_point_free_involution"],
+                  habitat: "N",
+                  lean: [
+                    "Ising2DLambda.AlgebraicEigenvalue.FixedPointFreeInvolution",
+                    "Ising2DLambda.AlgebraicEigenvalue.involutionPairs",
+                  ],
+                  verification: ["sagemath/check/perfect-matching-involution"],
+                  statement: [
+                    paragraph([ref("def_finite_perfect_matching"), " の有限集合 ", math(String.raw`\mathcal J`), " について、写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " が不動点のない対合であるとは、"]),
+                    displayMath(String.raw`\tau(i)\ne i,\qquad\tau(\tau(i))=i\qquad(i\in\mathcal J)`),
+                    paragraph(["を満たすことをいう。その全体を ", math(String.raw`\mathcal I(\mathcal J)`), " と書く。", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " に対して二元軌道の族を"]),
+                    displayMath(String.raw`\mathcal D_\tau:=\bigl\{\{i,\tau(i)\}\mid i\in\mathcal J\bigr\}\in\mathcal P(\mathcal P(\mathcal J))`),
+                    paragraph(["と定める。各組は順序を持たない二元集合であり、族の中の重複は除かれる。"]),
+                  ],
+                },
+              },
+            ],
+            focus: {
+              id: "tools_claim_perfect_matching_involution",
+              kind: "claim",
+              title: { text: "完全マッチングと不動点のない対合の一対一対応" },
+              labels: ["claim_perfect_matching_involution"],
+              habitat: "N",
+              verification: ["sagemath/check/perfect-matching-involution"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatching_partner_existsUnique",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingMate_involutive",
+                "Ising2DLambda.AlgebraicEigenvalue.involutionPairs_isPerfectMatching",
+                "Ising2DLambda.AlgebraicEigenvalue.matching_involution_left_inverse",
+                "Ising2DLambda.AlgebraicEigenvalue.matching_involution_right_inverse",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingToInvolution_bijective",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingToInvolution_bijective",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingToInvolution_bijective_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_finite_perfect_matching"), " の ", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " と ", math(String.raw`i\in\mathcal J`), " に対し、"]),
+                displayMath(String.raw`j\ne i,\qquad\{i,j\}\in\mathcal D`),
+                paragraph(["を満たす ", math(String.raw`j\in\mathcal J`), " はただ一つ存在する。これを ", math(String.raw`m_{\mathcal D}(i)`), " と書くと、相手写像 ", math(String.raw`m_{\mathcal D}:\mathcal J\to\mathcal J`), " は ", ref("def_fixed_point_free_involution"), " の不動点のない対合である。写像"]),
+                displayMath(String.raw`\begin{aligned}
+\Phi:\mathcal M(\mathcal J)&\longrightarrow\mathcal I(\mathcal J),&\mathcal D&\longmapsto m_{\mathcal D},\\
+\Psi:\mathcal I(\mathcal J)&\longrightarrow\mathcal M(\mathcal J),&\tau&\longmapsto\mathcal D_\tau
+\end{aligned}`),
+                paragraph(["は互いに逆である。"]),
+              ],
+              proof: [
+                paragraph(["まず相手の存在を示す。", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " と ", math(String.raw`i\in\mathcal J`), " を取る。", ref("def_finite_perfect_matching"), " の第二条件で ", math(String.raw`i`), " を含む組 ", math(String.raw`p\in\mathcal D`), " を取り、第一条件で ", math(String.raw`p=\{a,b\}`), "、", math(String.raw`a,b\in\mathcal J`), "、", math(String.raw`a\ne b`), " と書く。二元集合への所属から ", math(String.raw`i=a`), " または ", math(String.raw`i=b`), " である。前者では ", math(String.raw`b\ne i`), " で、後者では ", math(String.raw`a\ne i`), " であり、それぞれ"]),
+                displayMath(String.raw`\begin{aligned}
+p&=\{a,b\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
+ &=\{i,b\}&&\bigl(\because\ i=a\text{ の代入}\bigr),\\
+p&=\{a,b\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
+ &=\{a,i\}&&\bigl(\because\ i=b\text{ の代入}\bigr)\\
+ &=\{i,a\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr).
+\end{aligned}`),
+                paragraph(["したがって相手が存在する。一意性のため、", math(String.raw`j,k\in\mathcal J`), " がともに相手の条件を満たすとする。両方の組が ", math(String.raw`i`), " を含むため、"]),
+                displayMath(String.raw`\begin{aligned}
+\{i,j\}&=\{i,k\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\text{ の組の一意性}\bigr),\\
+j&\in\{i,k\}&&\bigl(\because\ j\in\{i,j\}\text{ に上の等式を代入}\bigr),\\
+j&=k&&\bigl(\because\ \text{二元集合への所属と }j\ne i\bigr).
+\end{aligned}`),
+                paragraph(["これで相手写像が定まる。その仕様から、すべての ", math(String.raw`i\in\mathcal J`), " について ", math(String.raw`m_{\mathcal D}(i)\ne i`), " および ", math(String.raw`\{i,m_{\mathcal D}(i)\}\in\mathcal D`), " である。", math(String.raw`j:=m_{\mathcal D}(i)\in\mathcal J`), " と置くと、"]),
+                displayMath(String.raw`\begin{aligned}
+\{j,i\}&=\{i,j\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr),\\
+\{j,i\}&\in\mathcal D&&\bigl(\because\ \text{相手写像の仕様と上の等式}\bigr),\\
+m_{\mathcal D}(j)&=i&&\bigl(\because\ i\ne j\text{ と相手の一意性}\bigr).
+\end{aligned}`),
+                paragraph(["すなわち ", math(String.raw`m_{\mathcal D}(m_{\mathcal D}(i))=i`), " なので、", ref("def_fixed_point_free_involution"), " により ", math(String.raw`\Phi`), " は指定した値域へ写る。"]),
+                paragraph(["次に ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " を取り、", math(String.raw`\mathcal D_\tau`), " が完全マッチングであることを示す。各組 ", math(String.raw`\{k,\tau(k)\}`), " は ", math(String.raw`k,\tau(k)\in\mathcal J`), "、", math(String.raw`\tau(k)\ne k`), " により相異なる二点からなる。各 ", math(String.raw`i\in\mathcal J`), " は ", math(String.raw`\{i,\tau(i)\}\in\mathcal D_\tau`), " に含まれる。組の一意性のため、", math(String.raw`p\in\mathcal D_\tau`), " が ", math(String.raw`i`), " を含むとする。族の定義から ", math(String.raw`p=\{k,\tau(k)\}`), " となる ", math(String.raw`k\in\mathcal J`), " を取る。", math(String.raw`i=k`), " の場合には"]),
+                displayMath(String.raw`\begin{aligned}
+p&=\{k,\tau(k)\}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)\\
+ &=\{i,\tau(i)\}&&\bigl(\because\ i=k\text{ の代入}\bigr).
+\end{aligned}`),
+                paragraph(["もう一方の ", math(String.raw`i=\tau(k)`), " の場合には、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)&=\tau(\tau(k))&&\bigl(\because\ i=\tau(k)\text{ の代入}\bigr)\\
+ &=k&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr),\\
+p&=\{k,\tau(k)\}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr)\\
+ &=\{k,i\}&&\bigl(\because\ i=\tau(k)\text{ の代入}\bigr)\\
+ &=\{\tau(i),i\}&&\bigl(\because\ \tau(i)=k\text{ の代入}\bigr)\\
+ &=\{i,\tau(i)\}&&\bigl(\because\ \text{二元集合の順序交換}\bigr).
+\end{aligned}`),
+                paragraph(["二元集合への所属はこの二場合だけなので、組は一意である。これで ", ref("def_finite_perfect_matching"), " の両条件を満たし、", math(String.raw`\Psi`), " も指定した値域へ写る。"]),
+                paragraph(["両逆を確かめる。", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " について、相手写像の仕様から ", math(String.raw`\mathcal D_{m_{\mathcal D}}\subseteq\mathcal D`), " である。逆に ", math(String.raw`p\in\mathcal D`), " を ", math(String.raw`p=\{i,j\}`), "、", math(String.raw`i,j\in\mathcal J`), "、", math(String.raw`i\ne j`), " と書く。相手の一意性で ", math(String.raw`m_{\mathcal D}(i)=j`), " だから、"]),
+                displayMath(String.raw`\begin{aligned}
+p&=\{i,j\}&&\bigl(\because\ \blkref{def_finite_perfect_matching}\bigr)\\
+ &=\{i,m_{\mathcal D}(i)\}&&\bigl(\because\ \text{相手の一意性}\bigr),\\
+p&\in\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の族の定義}\bigr).
+\end{aligned}`),
+                paragraph(["これが逆の包含を与えるので、"]),
+                displayMath(String.raw`\begin{aligned}
+\Psi(\Phi(\mathcal D))&=\mathcal D_{m_{\mathcal D}}&&\bigl(\because\ \Phi,\Psi\text{ の定義}\bigr)\\
+ &=\mathcal D&&\bigl(\because\ \text{上の両包含}\bigr).
+\end{aligned}`),
+                paragraph(["最後に ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " と ", math(String.raw`i\in\mathcal J`), " に対し、", math(String.raw`\tau(i)\ne i`), " かつ ", math(String.raw`\{i,\tau(i)\}\in\mathcal D_\tau`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+\Phi(\Psi(\tau))(i)&=m_{\mathcal D_\tau}(i)&&\bigl(\because\ \Phi,\Psi\text{ の定義}\bigr)\\
+ &=\tau(i)&&\bigl(\because\ \text{相手の一意性}\bigr).
+\end{aligned}`),
+                paragraph(["すべての入力で値が等しいため ", math(String.raw`\Phi(\Psi(\tau))=\tau`), " である。これが両逆である。単射性を明示すると、", math(String.raw`\mathcal D,\mathcal E\in\mathcal M(\mathcal J)`), " が ", math(String.raw`\Phi(\mathcal D)=\Phi(\mathcal E)`), " を満たす場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal D&=\Psi(\Phi(\mathcal D))&&\bigl(\because\ \text{左逆の等式}\bigr)\\
+ &=\Psi(\Phi(\mathcal E))&&\bigl(\because\ \Phi(\mathcal D)=\Phi(\mathcal E)\text{ の代入}\bigr)\\
+ &=\mathcal E&&\bigl(\because\ \text{左逆の等式}\bigr).
+\end{aligned}`),
+                paragraph(["全射性は、任意の ", math(String.raw`\tau\in\mathcal I(\mathcal J)`), " に対し ", math(String.raw`\Psi(\tau)\in\mathcal M(\mathcal J)`), " を原像に取れば、右逆の等式が ", math(String.raw`\Phi(\Psi(\tau))=\tau`), " を与えることから従う。空集合の場合も各条件はそのまま成り立ち、空の族と空集合上の唯一の写像が対応する。用いた集合・写像はすべて有限であり、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 
