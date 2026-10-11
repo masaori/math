@@ -52525,6 +52525,147 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "kac_ward_heading_gauged_terminal_determinant",
+        labels: [],
+        title: { text: "対角相似とスカラー倍による行列式の保存" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_kac_ward_claim_gauged_terminal_matrix_determinant",
+            focus: {
+              id: "kac_ward_claim_gauged_terminal_matrix_determinant",
+              kind: "claim",
+              title: { text: "対角相似とスカラー倍は端末行列の行列式を保つ" },
+              labels: ["claim_gauged_terminal_matrix_determinant"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/gauged-terminal-matrix-determinant"],
+              lean: [
+                "Ising2DLambda.KacWard.polynomialOrientedIdentity_determinant",
+                "Ising2DLambda.KacWard.gaugeScalar_pow_card",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_determinant",
+                "Ising2DLambda.NecSuf.KacWard.mapped_eighthRoot_square_power_necSuf",
+                "Ising2DLambda.NecSuf.KacWard.scaledConjugate_determinant_necSuf",
+                "Ising2DLambda.KacWard.gaugeScalar_pow_card_from_necSuf",
+                "Ising2DLambda.KacWard.gaugedTerminalMatrix_determinant_from_necSuf",
+              ],
+              statement: [
+                paragraph(["任意の自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`),
+                  " に対して、", ref("def_gauged_terminal_matrix"), " の行列と ",
+                  ref("def_kac_ward_determinants"), " の多項式は、"]),
+                displayMath(String.raw`\det_x(\widehat K)=D_L^{a,b}(x)
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["を満たす。行列式は ", ref("def_qbar_polynomial_determinant"), " の置換展開である。"]),
+              ],
+              proof: [
+                paragraph([ref("def_polynomial_diagonal_gauge"), " の ",
+                  math(String.raw`\widehat U,\widehat V,I_x\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`),
+                  "、", ref("def_terminal_matrix"), " の ", math(String.raw`K_{\mathrm t}^{a,b}(x)`),
+                  " を用いる。", ref("def_qbar_constant_embedding"), " の写像を ",
+                  math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " とし、",
+                  math(String.raw`c:=C(\zeta_8^{\,2})\in\overline{\mathbb Q}[x]`), "、",
+                  math(String.raw`n:=|\vec E_L|=4L^2\in\mathbb N`), " と置く。個数の等式は ",
+                  ref("def_oriented_edges"), " による。以下の有限和は ",
+                  math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), "、有限積は ",
+                  math(String.raw`\vec e\in\vec E_L`), " にわたる。"]),
+                paragraph(["まず単位行列の行列式を定義から計算する。恒等置換以外の ",
+                  math(String.raw`\varphi`), " には ", math(String.raw`\varphi(\vec e_0)\ne\vec e_0`),
+                  " となる ", math(String.raw`\vec e_0\in\vec E_L`), " が存在する。このとき、"]),
+                displayMath(String.raw`(I_x)_{\vec e_0,\varphi(\vec e_0)}=0
+\qquad\bigl(\because\ \blkref{def_polynomial_diagonal_gauge}\bigr),`),
+                displayMath(String.raw`\prod_{\vec e}(I_x)_{\vec e,\varphi(\vec e)}=0
+\qquad\bigl(\because\ \text{零の因子を含む有限積}\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\widehat{\operatorname{sgn}(\varphi)}\prod_{\vec e}(I_x)_{\vec e,\varphi(\vec e)}
+&=\widehat{\operatorname{sgn}(\varphi)}\,0
+&&\bigl(\because\ \text{直前の積の値}\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の零との積}\bigr).
+\end{aligned}`),
+                paragraph(["恒等置換には転倒がないので、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{\operatorname{sgn}(\mathrm{id})}
+&=C(1)&&\bigl(\because\ \blkref{def_permutation_sign}\bigr)\\
+&=1&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
+\end{aligned}`),
+                paragraph(["従って、"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x I_x
+&=\sum_{\varphi}\widehat{\operatorname{sgn}(\varphi)}
+  \prod_{\vec e}(I_x)_{\vec e,\varphi(\vec e)}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
+&=\widehat{\operatorname{sgn}(\mathrm{id})}
+  \prod_{\vec e}(I_x)_{\vec e,\mathrm{id}(\vec e)}
+&&\bigl(\because\ \text{恒等置換以外の項は零}\bigr)\\
+&=\widehat{\operatorname{sgn}(\mathrm{id})}\prod_{\vec e}1
+&&\bigl(\because\ \blkref{def_polynomial_diagonal_gauge}\text{ の対角成分}\bigr)\\
+&=1\prod_{\vec e}1&&\bigl(\because\ \text{直前の符号の定数多項式}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \text{一だけの有限積}\bigr)\\
+&=1&&\bigl(\because\ \text{乗法の単位元}\bigr).
+\end{aligned}`),
+                paragraph(["次にスカラーの冪を計算する。", ref("def_rotation_phase"), " より ",
+                  math(String.raw`\zeta_8^4=-1`), " なので、"]),
+                displayMath(String.raw`\begin{aligned}
+\zeta_8^8&=(\zeta_8^4)^2&&\bigl(\because\ \text{自然数指数の指数法則}\bigr)\\
+&=(-1)^2&&\bigl(\because\ \blkref{def_rotation_phase}\bigr)\\
+&=1&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+c^n&=C(\zeta_8^{\,2})^{4L^2}&&\bigl(\because\ c,n\text{ の定義}\bigr)\\
+&=C\bigl((\zeta_8^{\,2})^{4L^2}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存}\bigr)\\
+&=C\bigl(\zeta_8^{\,2(4L^2)}\bigr)&&\bigl(\because\ \text{自然数指数の指数法則}\bigr)\\
+&=C\bigl(\zeta_8^{\,8L^2}\bigr)&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr)\\
+&=C\bigl((\zeta_8^8)^{L^2}\bigr)&&\bigl(\because\ \text{自然数指数の指数法則}\bigr)\\
+&=C\bigl(1^{L^2}\bigr)&&\bigl(\because\ \text{直前の八乗の値}\bigr)\\
+&=C(1)&&\bigl(\because\ \text{一の自然数乗}\bigr)\\
+&=1&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
+\end{aligned}`),
+                paragraph(["対角行列とその逆行列については、"]),
+                displayMath(String.raw`\begin{aligned}
+(\det_x\widehat V)(\det_x\widehat U)
+&=\det_x(\widehat V\widehat U)&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
+&=\det_x I_x&&\bigl(\because\ \blkref{claim_polynomial_diagonal_gauge_inverse}\bigr)\\
+&=1&&\bigl(\because\ \text{上の単位行列の計算}\bigr).
+\end{aligned}`),
+                paragraph(["以上を変換後の行列の定義へ代入し、", ref("def_qbar_polynomial_ring"),
+                  " の可換環の中で順に計算する。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x\widehat K
+&=\det_x\bigl(c((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U)\bigr)
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
+&=c^n\det_x\bigl((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U\bigr)
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_scalar}\bigr)\\
+&=1\det_x\bigl((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U\bigr)
+&&\bigl(\because\ c^n=1\bigr)\\
+&=\det_x\bigl((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U\bigr)
+&&\bigl(\because\ \text{乗法の単位元}\bigr)\\
+&=\det_x(\widehat V K_{\mathrm t}^{a,b}(x))\det_x\widehat U
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
+&=\bigl((\det_x\widehat V)\det_x K_{\mathrm t}^{a,b}(x)\bigr)\det_x\widehat U
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
+&=(\det_x\widehat V)\bigl(\det_x K_{\mathrm t}^{a,b}(x)\det_x\widehat U\bigr)
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=(\det_x\widehat V)\bigl((\det_x\widehat U)\det_x K_{\mathrm t}^{a,b}(x)\bigr)
+&&\bigl(\because\ \text{乗法の可換則}\bigr)\\
+&=\bigl((\det_x\widehat V)(\det_x\widehat U)\bigr)\det_x K_{\mathrm t}^{a,b}(x)
+&&\bigl(\because\ \text{乗法の結合則}\bigr)\\
+&=1\det_x K_{\mathrm t}^{a,b}(x)
+&&\bigl(\because\ (\det_x\widehat V)(\det_x\widehat U)=1\bigr)\\
+&=\det_x K_{\mathrm t}^{a,b}(x)&&\bigl(\because\ \text{乗法の単位元}\bigr)\\
+&=D_L^{a,b}(x)&&\bigl(\because\ \blkref{claim_terminal_matrix_determinant}\bigr).
+\end{aligned}`),
+                paragraph(["辺長一も同じ個数と計算に含まれる。全過程は有限集合・自然数と ",
+                  math(String.raw`\overline{\mathbb Q}[x]`), " の等式で閉じ、実数体も複素数体も現れない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "kac_ward_heading_determinant_nonzero_terms",
         labels: [],
         title: { text: "行列式の非零な置換項" },
@@ -77718,10 +77859,9 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       "各スピン構造 ", math(String.raw`(a,b)\in\mathcal S`), " について、Kac--Ward 行列式 ",
                       math(String.raw`D^{a,b}_L(x)`), " が符号付き偶部分グラフ多項式の平方 ",
                       math(String.raw`(Q^{a,b}_L(x))^2`), " に等しいことを示す段である。",
-                      "経路: 反転写像の置換行列 ", math(String.raw`J`), " と対角行列 ", math(String.raw`U`),
-                      "（成分は方向番号の 8 乗根冪とねじれ偶奇の 4 乗根冪）で ",
-                      math(String.raw`\widehat K:=\widehat{\zeta_8^{\,2}}\,\widehat V\widehat J K^{a,b}(x)\widehat U`),
-                      " を作ると、これは零対角の反対称行列で、行列式は変わらない。反対称行列の行列式は Pfaffian の平方であり、",
+                      "経路: ", ref("claim_gauged_terminal_matrix_skew"), " と ",
+                      ref("claim_gauged_terminal_matrix_determinant"), " の行列 ", math(String.raw`\widehat K`),
+                      " に Pfaffian を導入する。反対称行列の行列式が Pfaffian の平方であることを証明し、",
                       "Pfaffian の完全マッチング展開では各辺が高々一度しか使われないので、基準マッチングとの対称差は台の辺が相異なる閉歩道の族になり、",
                       "その符号は本文にある回転位相・横断消去・接触点分割・頂点単純閉路の回転数の補題で決まる。各偶部分グラフの上で局所対合の符号付き和は 1 である。",
                       "現在地: 未完了。置換展開と偶部分グラフ対を鍵ごとに直接比較する旧経路は、一辺二・三の有限データへの当てはめで止まり、2026-10-03 に打ち切った（経過は docs/tasks/auto-loop-archive.md）。",
