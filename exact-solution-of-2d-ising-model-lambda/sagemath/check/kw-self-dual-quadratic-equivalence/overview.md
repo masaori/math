@@ -66,4 +66,4 @@
 micromamba run -p /home/masaori/.local/share/math-mamba/envs/sage sage sagemath/check/kw-self-dual-quadratic-equivalence/check.sage
 ```
 
-2026-10-04 実行: 行別45本・計705等式と、既存17点の同値・中間段の統合検査がすべて通過した。
+2026-10-11 実行: 行別45本・計705等式と、既存17点の同値・中間段の統合検査がすべて通過した。
