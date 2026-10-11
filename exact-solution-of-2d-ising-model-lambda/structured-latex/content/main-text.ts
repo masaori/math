@@ -38250,156 +38250,362 @@ A\cdot A
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          ref("claim_quadratic_multiplication_representation"), " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')`),
-                          " である。", math(String.raw`c:=-a'`), "、",
-                          math(String.raw`A:=a\cdot a'+2\cdot(b\cdot b')`), "、",
-                          math(String.raw`B:=a\cdot b'+b\cdot a'`),
-                          " と置く。負の第一係数条件により ",
-                          math(String.raw`0<c`), "、", math(String.raw`0<b'`), "、",
-                          math(String.raw`c\cdot c<2\cdot(b'\cdot b')`),
-                          " であり、非負係数条件により ",
-                          math(String.raw`0\le a`), "、", math(String.raw`0\le b`), "、",
-                          math(String.raw`(a,b)\ne(0,0)`), " である。",
-                          math(String.raw`a'=-c`), " を代入して",
-                        ]),
+                        paragraph([ref("claim_quadratic_multiplication_representation"), " により ", math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')`), " である。", math(String.raw`c:=-a'\in\mathbb{Q}`), "、", math(String.raw`A:=a\cdot a'+2\cdot(b\cdot b')\in\mathbb{Q}`), "、", math(String.raw`B:=a\cdot b'+b\cdot a'\in\mathbb{Q}`), " と置く。", ref("def_quadratic_positive_cone"), " の負の第一係数条件より ", math(String.raw`a'<0`), "、", math(String.raw`0<b'`), " なので ", math(String.raw`0<c`), " であり、平方の条件は次のように書ける。"]),
                         displayMath(String.raw`\begin{aligned}
-A&=2\cdot(b\cdot b')-a\cdot c
-  &&\bigl(\because\ a'=-c\text{ と分配則・可換則}\bigr),\\
-B&=a\cdot b'-b\cdot c
-  &&\bigl(\because\ a'=-c\text{ と分配則}\bigr)
+c\cdot c&=(-a')\cdot (-a')
+  &&\bigl(\because\ \text{c の定義}\bigr)\\
+&=a'\cdot a'
+  &&\bigl(\because\ \text{二つの負号の積}\bigr)\\
+&<2\cdot b'\cdot b'
+  &&\bigl(\because\ \text{負の第一係数条件}\bigr)\\
+&=2\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "である。まず ", math(String.raw`a\cdot a`), " と ",
-                          math(String.raw`2\cdot(b\cdot b)`), " を比較する。",
-                          math(String.raw`a\cdot a=2\cdot(b\cdot b)`), " と仮定すると、",
-                          math(String.raw`b\ne0`), " ならば ",
-                          ref("claim_rational_square_ne_double_square"), " に反し、",
-                          math(String.raw`b=0`), " ならば ", math(String.raw`a\cdot a=0`),
-                          " から ", math(String.raw`a=0`), " となって ",
-                          math(String.raw`(a,b)\ne(0,0)`), " に反する。ゆえに ",
-                          math(String.raw`\mathbb{Q}`), " の順序の三分律により ",
-                          math(String.raw`2\cdot(b\cdot b)<a\cdot a`), " または ",
-                          math(String.raw`a\cdot a<2\cdot(b\cdot b)`), " である。",
-                        ]),
-                        paragraph([
-                          "第一の場合 ", math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                          " を考える。", math(String.raw`0\le a\cdot a`), " と ",
-                          math(String.raw`0\le2\cdot(b\cdot b)`), " から ",
-                          math(String.raw`0<a\cdot a`), " なので ", math(String.raw`0<a`),
-                          " である。ここで ", math(String.raw`B\le0`), " と仮定すると ",
-                          math(String.raw`0<a\cdot b'\le b\cdot c`),
-                          " であり、とくに ", math(String.raw`0<b`), " である。非負の両辺の積は平方の大小を保つので",
-                        ]),
+                        paragraph([ref("def_quadratic_positive_cone"), " の非負係数条件より ", math(String.raw`0\le a`), "、", math(String.raw`0\le b`), "、", math(String.raw`(a,b)\ne(0,0)`), " である。二重の負号を外すと ", math(String.raw`-c=a'`), " なので、係数は次のようになる。"]),
                         displayMath(String.raw`\begin{aligned}
-(a\cdot a)\cdot(b'\cdot b')
-&=(a\cdot b')\cdot(a\cdot b')
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&\le(b\cdot c)\cdot(b\cdot c)
-  &&\bigl(\because\ 0<a\cdot b'\le b\cdot c\bigr)\\
-&=(b\cdot b)\cdot(c\cdot c)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<(b\cdot b)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<b\cdot b\bigr)
+a\cdot a' + 2\cdot (b\cdot b')&=a\cdot (-c) + 2\cdot (b\cdot b')
+  &&\bigl(\because\ \text{a′=-c の代入}\bigr)\\
+&=-(a\cdot c) + 2\cdot (b\cdot b')
+  &&\bigl(\because\ \text{積の負号}\bigr)\\
+&=2\cdot (b\cdot b') + -(a\cdot c)
+  &&\bigl(\because\ \text{和の可換則}\bigr)\\
+&=2\cdot (b\cdot b') - a\cdot c
+  &&\bigl(\because\ \text{差の定義}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "となり、正因子 ", math(String.raw`b'\cdot b'`), " を消去して ",
-                          math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
-                          " を得るが、これは第一の場合に反する。ゆえに ",
-                          math(String.raw`0<B`), " である。",
-                          math(String.raw`0\le A`), " ならば表示 ", math(String.raw`(A,B)`),
-                          " は正錐の非負係数条件を満たす（", ref("def_quadratic_positive_cone"),
-                          "）。", math(String.raw`A<0`), " ならば ",
-                          math(String.raw`C:=-A=a\cdot c-2\cdot(b\cdot b')`), " と置くと ",
-                          math(String.raw`0<C`), " であり、",
-                        ]),
                         displayMath(String.raw`\begin{aligned}
-b'\cdot C
-&=a\cdot(c\cdot b')-2\cdot\bigl(b\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ C=a\cdot c-2\cdot(b\cdot b')\text{ と分配則・結合則・可換則}\bigr)\\
-&\le a\cdot(c\cdot b')-b\cdot(c\cdot c)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0\le b\bigr)\\
+a\cdot b' + b\cdot a'&=a\cdot b' + b\cdot (-c)
+  &&\bigl(\because\ \text{a′=-c の代入}\bigr)\\
+&=a\cdot b' + -(b\cdot c)
+  &&\bigl(\because\ \text{積の負号}\bigr)\\
+&=a\cdot b' - b\cdot c
+  &&\bigl(\because\ \text{差の定義}\bigr)
+\end{aligned}`),
+                        paragraph(["まず ", math(String.raw`a\cdot a=2\cdot(b\cdot b)`), " は成り立たない。仮に等しいとすると、", math(String.raw`b\ne0`), " の場合は ", ref("claim_rational_square_ne_double_square"), " に反する。", math(String.raw`b=0`), " の場合は次を得る。"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot a&=2\cdot (b\cdot b)
+  &&\bigl(\because\ \text{仮定した平方の等号}\bigr)\\
+&=2\cdot (0\cdot 0)
+  &&\bigl(\because\ \text{b=0 の代入}\bigr)\\
+&=2\cdot 0
+  &&\bigl(\because\ \text{零との積}\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零との積}\bigr)
+\end{aligned}`),
+                        paragraph(["積が零ならば因子のいずれかが零なので ", math(String.raw`a=0`), " である。これは ", math(String.raw`(a,b)\ne(0,0)`), " に反する。よって有理数の順序の三分律から ", math(String.raw`2\cdot(b\cdot b)<a\cdot a`), " または ", math(String.raw`a\cdot a<2\cdot(b\cdot b)`), " である。"]),
+                        paragraph(["第一の場合 ", math(String.raw`2\cdot(b\cdot b)<a\cdot a`), " を考える。", math(String.raw`a=0`), " と仮定すると、"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot a&=0\cdot 0
+  &&\bigl(\because\ \text{a=0 の代入}\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零との積}\bigr)
+\end{aligned}`),
+                        paragraph(["となり、仮定から ", math(String.raw`2\cdot(b\cdot b)<0`), " となるが、平方と正数の積の非負性に反する。", math(String.raw`0\le a`), " とあわせて ", math(String.raw`0<a`), " である。次に ", math(String.raw`B\le0`), " と仮定すると、差の非正性より ", math(String.raw`a\cdot b'\le b\cdot c`), " である。正数の積より ", math(String.raw`0<a\cdot b'`), " である。", math(String.raw`b=0`), " ならば、"]),
+                        displayMath(String.raw`\begin{aligned}
+b\cdot c&=0\cdot c
+  &&\bigl(\because\ \text{b=0 の代入}\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零との積}\bigr)
+\end{aligned}`),
+                        paragraph(["となり ", math(String.raw`a\cdot b'\le0`), " となり、直前の ", math(String.raw`0<a\cdot b'`), " に反する。", math(String.raw`0\le b`), " とあわせて ", math(String.raw`0<b`), " なので、次の平方比較が成り立つ。"]),
+                        displayMath(String.raw`\begin{aligned}
+(a\cdot a)\cdot (b'\cdot b')&=a\cdot (a\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot ((a\cdot b')\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot ((b'\cdot a)\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot (b'\cdot (a\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(a\cdot b')\cdot (a\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le (b\cdot c)\cdot (b\cdot c)
+  &&\bigl(\because\ \text{非負の二数の平方の大小}\bigr)\\
+&=b\cdot (c\cdot (b\cdot c))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=b\cdot ((c\cdot b)\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=b\cdot ((b\cdot c)\cdot c)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=b\cdot (b\cdot (c\cdot c))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(b\cdot b)\cdot (c\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(b\cdot b)\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{正数を掛けると狭義不等号を保つ}\bigr)\\
+&=((b\cdot b)\cdot 2)\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(2\cdot (b\cdot b))\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)
+\end{aligned}`),
+                        paragraph(["正数の積より ", math(String.raw`0<b'\cdot b'`), " なので、"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot a&<2\cdot (b\cdot b)
+  &&\bigl(\because\ \text{正因子 b′b′ の消去}\bigr)
+\end{aligned}`),
+                        paragraph(["となり、第一の場合の仮定に反する。ゆえに ", math(String.raw`0<B`), " である。", math(String.raw`0\le A`), " ならば ", math(String.raw`(A,B)\ne(0,0)`), " であり、", ref("def_quadratic_positive_cone"), " の非負係数条件を満たすので ", math(String.raw`\xi\cdot\eta\in P_s`), " である。残る ", math(String.raw`A<0`), " の場合に ", math(String.raw`C:=-A\in\mathbb{Q}`), " と置く。負数の反数の正値より ", math(String.raw`0<C`), " であり、"]),
+                        displayMath(String.raw`\begin{aligned}
+C&=-A
+  &&\bigl(\because\ \text{C の定義}\bigr)\\
+&=-(2\cdot (b\cdot b') - a\cdot c)
+  &&\bigl(\because\ \text{A の表示式の代入}\bigr)\\
+&=a\cdot c - 2\cdot (b\cdot b')
+  &&\bigl(\because\ \text{差の負号}\bigr)
+\end{aligned}`),
+                        paragraph(["となる。平方の狭義不等号を弱め、非負の ", math(String.raw`b`), " を掛けると、"]),
+                        displayMath(String.raw`\begin{aligned}
+b\cdot (c\cdot c)&\le b\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{非負数を掛けると不等号を保つ}\bigr)
+\end{aligned}`),
+                        paragraph(["したがって次の線形比較を得る。"]),
+                        displayMath(String.raw`\begin{aligned}
+b'\cdot C&=b'\cdot (a\cdot c - 2\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{C の表示式の代入}\bigr)\\
+&=b'\cdot (a\cdot c) - b'\cdot (2\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{差に対する分配則}\bigr)\\
+&=(b'\cdot a)\cdot c - (b'\cdot 2)\cdot (b\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(a\cdot b')\cdot c - (2\cdot b')\cdot (b\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot (b'\cdot c) - 2\cdot (b'\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot (b'\cdot c) - 2\cdot ((b'\cdot b)\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot (c\cdot b') - 2\cdot ((b\cdot b')\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot (c\cdot b') - 2\cdot (b\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot (c\cdot b') - (2\cdot b)\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot (c\cdot b') - (b\cdot 2)\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot (c\cdot b') - b\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le a\cdot (c\cdot b') - b\cdot (c\cdot c)
+  &&\bigl(\because\ \text{同じ数から引くと不等号が逆向きになる}\bigr)\\
+&=(a\cdot c)\cdot b' - (b\cdot c)\cdot c
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(c\cdot a)\cdot b' - (c\cdot b)\cdot c
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=c\cdot (a\cdot b') - c\cdot (b\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot (a\cdot b' - b\cdot c)
+  &&\bigl(\because\ \text{差に対する分配則}\bigr)\\
 &=c\cdot B
-  &&\bigl(\because\ B=a\cdot b'-b\cdot c\text{ と分配則・結合則・可換則}\bigr)
+  &&\bigl(\because\ \text{B の表示式の代入}\bigr)
 \end{aligned}`),
-                        paragraph(["である。両端は非負なので平方の大小を保ち、"]),
+                        paragraph(["正数の積より ", math(String.raw`0<b'\cdot C`), " である。線形比較により ", math(String.raw`c\cdot B`), " も非負なので、次の平方比較が成り立つ。"]),
                         displayMath(String.raw`\begin{aligned}
-(b'\cdot b')\cdot(C\cdot C)
-&=(b'\cdot C)\cdot(b'\cdot C)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&\le(c\cdot B)\cdot(c\cdot B)
-  &&\bigl(\because\ 0\le b'\cdot C\le c\cdot B\bigr)\\
-&=(c\cdot c)\cdot(B\cdot B)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(B\cdot B)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<B\cdot B\bigr)
+(b'\cdot b')\cdot (C\cdot C)&=b'\cdot (b'\cdot (C\cdot C))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=b'\cdot ((b'\cdot C)\cdot C)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=b'\cdot ((C\cdot b')\cdot C)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=b'\cdot (C\cdot (b'\cdot C))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(b'\cdot C)\cdot (b'\cdot C)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le (c\cdot B)\cdot (c\cdot B)
+  &&\bigl(\because\ \text{非負の二数の平方の大小}\bigr)\\
+&=c\cdot (B\cdot (c\cdot B))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot ((B\cdot c)\cdot B)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot ((c\cdot B)\cdot B)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=c\cdot (c\cdot (B\cdot B))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(c\cdot c)\cdot (B\cdot B)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(2\cdot (b'\cdot b'))\cdot (B\cdot B)
+  &&\bigl(\because\ \text{正数を掛けると狭義不等号を保つ}\bigr)\\
+&=((b'\cdot b')\cdot 2)\cdot (B\cdot B)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=(b'\cdot b')\cdot (2\cdot (B\cdot B))
+  &&\bigl(\because\ \text{積の結合則}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "から正因子 ", math(String.raw`b'\cdot b'`), " を消去して ",
-                          math(String.raw`A\cdot A=C\cdot C<2\cdot(B\cdot B)`),
-                          " を得る。したがって表示は正錐の負の第一係数条件を満たす。",
-                        ]),
-                        paragraph([
-                          "第二の場合 ", math(String.raw`a\cdot a<2\cdot(b\cdot b)`),
-                          " を考える。", math(String.raw`0\le a\cdot a`), " から ",
-                          math(String.raw`0<2\cdot(b\cdot b)`), " なので ", math(String.raw`0<b`),
-                          " である。ここで ", math(String.raw`A\le0`), " と仮定すると ",
-                          math(String.raw`0<2\cdot(b\cdot b')\le a\cdot c`),
-                          " であり、とくに ", math(String.raw`0<a`), " である。非負の両辺の積は平方の大小を保つので",
-                        ]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(2\cdot(b\cdot b)\bigr)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-&=\bigl(2\cdot(b\cdot b')\bigr)\cdot\bigl(2\cdot(b\cdot b')\bigr)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&\le(a\cdot c)\cdot(a\cdot c)
-  &&\bigl(\because\ 0<2\cdot(b\cdot b')\le a\cdot c\bigr)\\
-&=(a\cdot a)\cdot(c\cdot c)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<(a\cdot a)\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<a\cdot a\bigr)
+A\cdot A&=(-A)\cdot (-A)
+  &&\bigl(\because\ \text{二つの負号の積}\bigr)\\
+&=C\cdot C
+  &&\bigl(\because\ \text{C の定義}\bigr)\\
+&<2\cdot (B\cdot B)
+  &&\bigl(\because\ \text{正因子 b′b′ の消去}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "となり、正因子 ", math(String.raw`2\cdot(b'\cdot b')`), " を消去して ",
-                          math(String.raw`2\cdot(b\cdot b)<a\cdot a`),
-                          " を得るが、これは第二の場合に反する。ゆえに ",
-                          math(String.raw`0<A`), " である。",
-                          math(String.raw`0\le B`), " ならば表示 ", math(String.raw`(A,B)`),
-                          " は正錐の非負係数条件を満たす（", ref("def_quadratic_positive_cone"),
-                          "）。", math(String.raw`B<0`), " ならば ",
-                          math(String.raw`V:=-B=b\cdot c-a\cdot b'`), " と置くと ",
-                          math(String.raw`0<V`), " であり、",
-                        ]),
+                        paragraph(["したがって ", math(String.raw`A<0`), "、", math(String.raw`0<B`), " とあわせて ", ref("def_quadratic_positive_cone"), " の負の第一係数条件を満たし、", math(String.raw`\xi\cdot\eta\in P_s`), " である。"]),
+                        paragraph(["第二の場合 ", math(String.raw`a\cdot a<2\cdot(b\cdot b)`), " を考える。", math(String.raw`b=0`), " と仮定すると、"]),
                         displayMath(String.raw`\begin{aligned}
-(2\cdot b')\cdot V
-&=2\cdot\bigl(b\cdot(c\cdot b')\bigr)-a\cdot\bigl(2\cdot(b'\cdot b')\bigr)
-  &&\bigl(\because\ V=b\cdot c-a\cdot b'\text{ と分配則・結合則・可換則}\bigr)\\
-&\le2\cdot\bigl(b\cdot(c\cdot b')\bigr)-a\cdot(c\cdot c)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0\le a\bigr)\\
+2\cdot (b\cdot b)&=2\cdot (0\cdot 0)
+  &&\bigl(\because\ \text{b=0 の代入}\bigr)\\
+&=2\cdot 0
+  &&\bigl(\because\ \text{零との積}\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零との積}\bigr)
+\end{aligned}`),
+                        paragraph(["となり、仮定から ", math(String.raw`a\cdot a<0`), " となるが平方の非負性に反する。", math(String.raw`0\le b`), " とあわせて ", math(String.raw`0<b`), " である。次に ", math(String.raw`A\le0`), " と仮定すると、差の非正性より ", math(String.raw`2\cdot(b\cdot b')\le a\cdot c`), " である。正数の積より ", math(String.raw`0<2\cdot(b\cdot b')`), " である。", math(String.raw`a=0`), " ならば、"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot c&=0\cdot c
+  &&\bigl(\because\ \text{a=0 の代入}\bigr)\\
+&=0
+  &&\bigl(\because\ \text{零との積}\bigr)
+\end{aligned}`),
+                        paragraph(["となり ", math(String.raw`2\cdot(b\cdot b')\le0`), " となり、直前の ", math(String.raw`0<2\cdot(b\cdot b')`), " に反する。", math(String.raw`0\le a`), " とあわせて ", math(String.raw`0<a`), " なので、次の平方比較が成り立つ。"]),
+                        displayMath(String.raw`\begin{aligned}
+(2\cdot (b\cdot b))\cdot (2\cdot (b'\cdot b'))&=2\cdot ((b\cdot b)\cdot (2\cdot (b'\cdot b')))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (((b\cdot b)\cdot 2)\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((2\cdot (b\cdot b))\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (2\cdot ((b\cdot b)\cdot (b'\cdot b')))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b\cdot (b\cdot (b'\cdot b'))))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b\cdot ((b\cdot b')\cdot b')))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b\cdot ((b'\cdot b)\cdot b')))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (2\cdot (b\cdot (b'\cdot (b\cdot b'))))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot ((b\cdot b')\cdot (b\cdot b')))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((2\cdot (b\cdot b'))\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (((b\cdot b')\cdot 2)\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot ((b\cdot b')\cdot (2\cdot (b\cdot b')))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(2\cdot (b\cdot b'))\cdot (2\cdot (b\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le (a\cdot c)\cdot (a\cdot c)
+  &&\bigl(\because\ \text{非負の二数の平方の大小}\bigr)\\
+&=a\cdot (c\cdot (a\cdot c))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot ((c\cdot a)\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=a\cdot ((a\cdot c)\cdot c)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=a\cdot (a\cdot (c\cdot c))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(a\cdot a)\cdot (c\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(a\cdot a)\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{正数を掛けると狭義不等号を保つ}\bigr)
+\end{aligned}`),
+                        paragraph(["正数の積より ", math(String.raw`0<2\cdot(b'\cdot b')`), " なので、"]),
+                        displayMath(String.raw`\begin{aligned}
+2\cdot (b\cdot b)&<a\cdot a
+  &&\bigl(\because\ \text{正因子 2(b′b′) の消去}\bigr)
+\end{aligned}`),
+                        paragraph(["となり、第二の場合の仮定に反する。ゆえに ", math(String.raw`0<A`), " である。", math(String.raw`0\le B`), " ならば ", math(String.raw`(A,B)\ne(0,0)`), " であり、", ref("def_quadratic_positive_cone"), " の非負係数条件を満たすので ", math(String.raw`\xi\cdot\eta\in P_s`), " である。残る ", math(String.raw`B<0`), " の場合に ", math(String.raw`V:=-B\in\mathbb{Q}`), " と置く。負数の反数の正値より ", math(String.raw`0<V`), " であり、"]),
+                        displayMath(String.raw`\begin{aligned}
+V&=-B
+  &&\bigl(\because\ \text{V の定義}\bigr)\\
+&=-(a\cdot b' - b\cdot c)
+  &&\bigl(\because\ \text{B の表示式の代入}\bigr)\\
+&=b\cdot c - a\cdot b'
+  &&\bigl(\because\ \text{差の負号}\bigr)
+\end{aligned}`),
+                        paragraph(["となる。平方の狭義不等号を弱め、非負の ", math(String.raw`a`), " を掛けると、"]),
+                        displayMath(String.raw`\begin{aligned}
+a\cdot (c\cdot c)&\le a\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{非負数を掛けると不等号を保つ}\bigr)
+\end{aligned}`),
+                        paragraph(["したがって次の線形比較を得る。"]),
+                        displayMath(String.raw`\begin{aligned}
+(2\cdot b')\cdot V&=(2\cdot b')\cdot (b\cdot c - a\cdot b')
+  &&\bigl(\because\ \text{V の表示式の代入}\bigr)\\
+&=(2\cdot b')\cdot (b\cdot c) - (2\cdot b')\cdot (a\cdot b')
+  &&\bigl(\because\ \text{差に対する分配則}\bigr)\\
+&=2\cdot (b'\cdot (b\cdot c)) - 2\cdot (b'\cdot (a\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((b'\cdot b)\cdot c) - 2\cdot ((b'\cdot a)\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((b\cdot b')\cdot c) - 2\cdot ((a\cdot b')\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (b\cdot (b'\cdot c)) - 2\cdot (a\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (b\cdot (c\cdot b')) - 2\cdot (a\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (b\cdot (c\cdot b')) - (2\cdot a)\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (b\cdot (c\cdot b')) - (a\cdot 2)\cdot (b'\cdot b')
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (b\cdot (c\cdot b')) - a\cdot (2\cdot (b'\cdot b'))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le 2\cdot (b\cdot (c\cdot b')) - a\cdot (c\cdot c)
+  &&\bigl(\because\ \text{同じ数から引くと不等号が逆向きになる}\bigr)\\
+&=2\cdot ((b\cdot c)\cdot b') - (a\cdot c)\cdot c
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((c\cdot b)\cdot b') - (c\cdot a)\cdot c
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (c\cdot (b\cdot b')) - c\cdot (a\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(2\cdot c)\cdot (b\cdot b') - c\cdot (a\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(c\cdot 2)\cdot (b\cdot b') - c\cdot (a\cdot c)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=c\cdot (2\cdot (b\cdot b')) - c\cdot (a\cdot c)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot (2\cdot (b\cdot b') - a\cdot c)
+  &&\bigl(\because\ \text{差に対する分配則}\bigr)\\
 &=c\cdot A
-  &&\bigl(\because\ A=2\cdot(b\cdot b')-a\cdot c\text{ と分配則・結合則・可換則}\bigr)
+  &&\bigl(\because\ \text{A の表示式の代入}\bigr)
 \end{aligned}`),
-                        paragraph(["である。両端は非負なので平方の大小を保ち、"]),
+                        paragraph(["正数の積より ", math(String.raw`0<(2\cdot b')\cdot V`), " である。線形比較により ", math(String.raw`c\cdot A`), " も非負なので、次の平方比較が成り立つ。"]),
                         displayMath(String.raw`\begin{aligned}
-\bigl(2\cdot(b'\cdot b')\bigr)\cdot\bigl(2\cdot(V\cdot V)\bigr)
-&=\bigl((2\cdot b')\cdot V\bigr)\cdot\bigl((2\cdot b')\cdot V\bigr)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&\le(c\cdot A)\cdot(c\cdot A)
-  &&\bigl(\because\ 0\le(2\cdot b')\cdot V\le c\cdot A\bigr)\\
-&=(c\cdot c)\cdot(A\cdot A)
-  &&\bigl(\because\ \text{結合則・可換則}\bigr)\\
-&<\bigl(2\cdot(b'\cdot b')\bigr)\cdot(A\cdot A)
-  &&\bigl(\because\ c\cdot c<2\cdot(b'\cdot b')\text{ と }0<A\cdot A\bigr)
+(2\cdot (b'\cdot b'))\cdot (2\cdot (V\cdot V))&=2\cdot ((b'\cdot b')\cdot (2\cdot (V\cdot V)))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (((b'\cdot b')\cdot 2)\cdot (V\cdot V))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((2\cdot (b'\cdot b'))\cdot (V\cdot V))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (2\cdot ((b'\cdot b')\cdot (V\cdot V)))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b'\cdot (b'\cdot (V\cdot V))))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b'\cdot ((b'\cdot V)\cdot V)))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot (b'\cdot ((V\cdot b')\cdot V)))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot (2\cdot (b'\cdot (V\cdot (b'\cdot V))))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (2\cdot ((b'\cdot V)\cdot (b'\cdot V)))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot ((2\cdot (b'\cdot V))\cdot (b'\cdot V))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=2\cdot (((b'\cdot V)\cdot 2)\cdot (b'\cdot V))
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=2\cdot ((b'\cdot V)\cdot (2\cdot (b'\cdot V)))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(2\cdot (b'\cdot V))\cdot (2\cdot (b'\cdot V))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=((2\cdot b')\cdot V)\cdot ((2\cdot b')\cdot V)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&\le (c\cdot A)\cdot (c\cdot A)
+  &&\bigl(\because\ \text{非負の二数の平方の大小}\bigr)\\
+&=c\cdot (A\cdot (c\cdot A))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot ((A\cdot c)\cdot A)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=c\cdot ((c\cdot A)\cdot A)
+  &&\bigl(\because\ \text{積の可換則}\bigr)\\
+&=c\cdot (c\cdot (A\cdot A))
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&=(c\cdot c)\cdot (A\cdot A)
+  &&\bigl(\because\ \text{積の結合則}\bigr)\\
+&<(2\cdot (b'\cdot b'))\cdot (A\cdot A)
+  &&\bigl(\because\ \text{正数を掛けると狭義不等号を保つ}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "から正因子 ", math(String.raw`2\cdot(b'\cdot b')`), " を消去して ",
-                          math(String.raw`2\cdot(B\cdot B)=2\cdot(V\cdot V)<A\cdot A`),
-                          " を得る。したがって表示は正錐の負の第二係数条件を満たす。",
-                          "二つの場合とその中の符号の場合をあわせて、いずれも ",
-                          math(String.raw`\xi\cdot\eta\in P_s`),
-                          " である。全過程は有理数の四則と順序、および代数的数の積だけで閉じ、",
-                          "実数体も複素数体も現れない。",
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+2\cdot (B\cdot B)&=2\cdot ((-B)\cdot (-B))
+  &&\bigl(\because\ \text{二つの負号の積}\bigr)\\
+&=2\cdot (V\cdot V)
+  &&\bigl(\because\ \text{V の定義}\bigr)\\
+&<A\cdot A
+  &&\bigl(\because\ \text{正因子 2(b′b′) の消去}\bigr)
+\end{aligned}`),
+                        paragraph(["したがって ", math(String.raw`0<A`), "、", math(String.raw`B<0`), " とあわせて ", ref("def_quadratic_positive_cone"), " の負の第二係数条件を満たし、", math(String.raw`\xi\cdot\eta\in P_s`), " である。二つの平方比較と四つの符号の場合で結論が従う。全過程は有理数の演算と順序、および代数的数の積で閉じる。"]),
                       ],
                     },
                 },

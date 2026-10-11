@@ -1,0 +1,20 @@
+# 対象行: 第一係数の書き換え・積の負号
+# 関係: (a * (-c) + 2 * (b * bp)) == (-(a * c) + 2 * (b * bp))
+# 局所条件: True
+# 対象ラベル: claim_quadratic_positive_mul_nonnegative_negative_first
+# 帰属: QQ と二次体。浮動小数点を使わない。
+from pathlib import Path
+import sys
+qpf_directory = Path(__file__).resolve().parent
+if not (qpf_directory / '_prelude.sage').is_file():
+    qpf_directory = Path(sys.argv[0]).resolve().parent
+load(str(qpf_directory / '_prelude.sage'))
+
+checked = 0
+for a, b, c, bp, ap, A, B, C, V in qpf_cases():
+    if not (True):
+        continue
+    assert (a * (-c) + 2 * (b * bp)) == (-(a * c) + 2 * (b * bp)), (a, b, c, bp)
+    checked += 1
+assert checked == 17424
+print(f"RESULT: PASS (check_normalize_a_negative_factor.sage: {checked} cases)")

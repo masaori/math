@@ -1,98 +1,163 @@
 # 対象ラベル: claim_quadratic_positive_mul_nonnegative_negative_first
-# 帰属: QQ の厳密計算。浮動小数点を使わない。
-
-BOUND = 6
-nonneg = sorted(set(QQ(n) / QQ(d) for n in range(0, BOUND + 1) for d in range(1, BOUND + 1)))
-positive = [q for q in nonneg if q > 0]
-
-checked = 0
-case_counts = {"first_A_nonneg": 0, "first_A_neg": 0, "second_B_nonneg": 0, "second_B_neg": 0}
-for a in nonneg:
-    for b in nonneg:
-        if (a, b) == (0, 0):
-            continue
-        # 混合符号の排除: a*a = 2*(b*b) は起きない
-        assert a * a != 2 * (b * b)
-        for c in positive:
-            for bp in positive:
-                if not (c * c < 2 * (bp * bp)):
-                    continue
-                ap = -c
-                # 負の第一係数条件の確認
-                assert ap < 0 and bp > 0 and ap * ap < 2 * (bp * bp)
-                A = a * ap + 2 * (b * bp)
-                B = a * bp + b * ap
-                # 代入形
-                assert A == 2 * (b * bp) - a * c
-                assert B == a * bp - b * c
-                if 2 * (b * b) < a * a:
-                    # 第一の場合: 0 < B
-                    assert a > 0
-                    # 背理法の鎖: B <= 0 なら a*a < 2*(b*b) が出る
-                    if B <= 0:
-                        assert 0 < a * bp <= b * c
-                        assert b > 0
-                        assert (a * a) * (bp * bp) == (a * bp) * (a * bp)
-                        assert (a * bp) * (a * bp) <= (b * c) * (b * c)
-                        assert (b * c) * (b * c) == (b * b) * (c * c)
-                        assert (b * b) * (c * c) < (b * b) * (2 * (bp * bp))
-                        assert a * a < 2 * (b * b)  # 矛盾するのでこの枝には来ない
-                        raise AssertionError("第一の場合で B <= 0 が実現した")
-                    assert B > 0
-                    if A >= 0:
-                        assert A >= 0 and B >= 0 and (A, B) != (0, 0)
-                        case_counts["first_A_nonneg"] += 1
-                    else:
-                        C = -A
-                        assert C > 0
-                        # 線形比較の鎖
-                        assert bp * C == a * (c * bp) - 2 * (b * (bp * bp))
-                        assert a * (c * bp) - 2 * (b * (bp * bp)) <= a * (c * bp) - b * (c * c)
-                        assert a * (c * bp) - b * (c * c) == c * B
-                        assert 0 <= bp * C <= c * B
-                        # 平方の鎖
-                        assert (bp * bp) * (C * C) == (bp * C) * (bp * C)
-                        assert (bp * C) * (bp * C) <= (c * B) * (c * B)
-                        assert (c * B) * (c * B) == (c * c) * (B * B)
-                        assert (c * c) * (B * B) < (2 * (bp * bp)) * (B * B)
-                        assert A * A < 2 * (B * B)
-                        assert A < 0 and B > 0 and A * A < 2 * (B * B)
-                        case_counts["first_A_neg"] += 1
-                else:
-                    assert a * a < 2 * (b * b)
-                    # 第二の場合: 0 < A
-                    assert b > 0
-                    if A <= 0:
-                        assert 0 < 2 * (b * bp) <= a * c
-                        assert a > 0
-                        assert (2 * (b * b)) * (2 * (bp * bp)) == (2 * (b * bp)) * (2 * (b * bp))
-                        assert (2 * (b * bp)) * (2 * (b * bp)) <= (a * c) * (a * c)
-                        assert (a * c) * (a * c) == (a * a) * (c * c)
-                        assert (a * a) * (c * c) < (a * a) * (2 * (bp * bp))
-                        assert 2 * (b * b) < a * a  # 矛盾するのでこの枝には来ない
-                        raise AssertionError("第二の場合で A <= 0 が実現した")
-                    assert A > 0
-                    if B >= 0:
-                        assert A >= 0 and B >= 0 and (A, B) != (0, 0)
-                        case_counts["second_B_nonneg"] += 1
-                    else:
-                        V = -B
-                        assert V > 0
-                        # 線形比較の鎖
-                        assert (2 * bp) * V == 2 * (b * (c * bp)) - a * (2 * (bp * bp))
-                        assert 2 * (b * (c * bp)) - a * (2 * (bp * bp)) <= 2 * (b * (c * bp)) - a * (c * c)
-                        assert 2 * (b * (c * bp)) - a * (c * c) == c * A
-                        assert 0 <= (2 * bp) * V <= c * A
-                        # 平方の鎖
-                        assert (2 * (bp * bp)) * (2 * (V * V)) == ((2 * bp) * V) * ((2 * bp) * V)
-                        assert ((2 * bp) * V) * ((2 * bp) * V) <= (c * A) * (c * A)
-                        assert (c * A) * (c * A) == (c * c) * (A * A)
-                        assert (c * c) * (A * A) < (2 * (bp * bp)) * (A * A)
-                        assert 2 * (B * B) < A * A
-                        assert A > 0 and B < 0 and 2 * (B * B) < A * A
-                        case_counts["second_B_neg"] += 1
-                checked += 1
-
-assert checked > 0
-assert all(count > 0 for count in case_counts.values())
-print(f"OK: 非負係数条件と負の第一係数条件の積を {checked} 組で厳密検査した ({case_counts})")
+from pathlib import Path
+import sys
+qpf_directory = Path(__file__).resolve().parent
+if not (qpf_directory / '_prelude.sage').is_file():
+    qpf_directory = Path(sys.argv[0]).resolve().parent
+qpf_checks = [
+    'check_product_representation.sage',
+    'check_input_square_substitute_negative_first.sage',
+    'check_input_square_remove_two_negatives.sage',
+    'check_input_square_strict_input_bound.sage',
+    'check_input_square_associate_twice.sage',
+    'check_normalize_a_substitute_negative_first.sage',
+    'check_normalize_a_negative_factor.sage',
+    'check_normalize_a_commute_sum.sage',
+    'check_normalize_a_difference_definition.sage',
+    'check_normalize_b_substitute_negative_first.sage',
+    'check_normalize_b_negative_factor.sage',
+    'check_normalize_b_difference_definition.sage',
+    'check_zero_square_assumed_square_equality.sage',
+    'check_zero_square_substitute_zero.sage',
+    'check_zero_square_inner_zero_product.sage',
+    'check_zero_square_outer_zero_product.sage',
+    'check_first_a_zero_substitute_zero.sage',
+    'check_first_a_zero_zero_product.sage',
+    'check_first_b_zero_substitute_zero.sage',
+    'check_first_b_zero_zero_product.sage',
+    'check_first_contradiction_left_associate_outer.sage',
+    'check_first_contradiction_left_associate_inner.sage',
+    'check_first_contradiction_left_commute_middle.sage',
+    'check_first_contradiction_left_associate_nested.sage',
+    'check_first_contradiction_left_group_square.sage',
+    'check_first_contradiction_square_bound.sage',
+    'check_first_contradiction_right_ungroup_square.sage',
+    'check_first_contradiction_right_associate_nested.sage',
+    'check_first_contradiction_right_commute_middle.sage',
+    'check_first_contradiction_right_associate_inner.sage',
+    'check_first_contradiction_right_group_products.sage',
+    'check_first_contradiction_strict_square_bound.sage',
+    'check_first_contradiction_associate_right_factor.sage',
+    'check_first_contradiction_commute_right_factor.sage',
+    'check_first_cancel_cancel_positive_factor.sage',
+    'check_first_nonnegative_membership.sage',
+    'check_first_c_negative_definition.sage',
+    'check_first_c_substitute_first_coefficient.sage',
+    'check_first_c_negate_difference.sage',
+    'check_first_step_multiply_bound.sage',
+    'check_first_linear_substitute_negative_coefficient.sage',
+    'check_first_linear_distribute_left_factor.sage',
+    'check_first_linear_associate_products.sage',
+    'check_first_linear_commute_leading_factors.sage',
+    'check_first_linear_associate_leading_products.sage',
+    'check_first_linear_associate_inner_product.sage',
+    'check_first_linear_commute_inner_products.sage',
+    'check_first_linear_associate_inner_square.sage',
+    'check_first_linear_group_twice_b.sage',
+    'check_first_linear_commute_twice_b.sage',
+    'check_first_linear_associate_multiplier.sage',
+    'check_first_linear_subtract_product_bound.sage',
+    'check_first_linear_associate_difference_factors.sage',
+    'check_first_linear_commute_difference_factors.sage',
+    'check_first_linear_associate_difference_products.sage',
+    'check_first_linear_factor_difference.sage',
+    'check_first_linear_restore_second_coefficient.sage',
+    'check_first_square_left_associate_outer.sage',
+    'check_first_square_left_associate_inner.sage',
+    'check_first_square_left_commute_middle.sage',
+    'check_first_square_left_associate_nested.sage',
+    'check_first_square_left_group_square.sage',
+    'check_first_square_square_linear_bound.sage',
+    'check_first_square_right_ungroup_square.sage',
+    'check_first_square_right_associate_nested.sage',
+    'check_first_square_right_commute_middle.sage',
+    'check_first_square_right_associate_inner.sage',
+    'check_first_square_right_group_products.sage',
+    'check_first_square_strict_square_bound.sage',
+    'check_first_square_commute_twice_square.sage',
+    'check_first_square_group_right_factor.sage',
+    'check_first_final_insert_negative_squares.sage',
+    'check_first_final_substitute_negative_first.sage',
+    'check_first_final_cancel_positive_factor.sage',
+    'check_first_negative_membership.sage',
+    'check_second_b_zero_substitute_zero.sage',
+    'check_second_b_zero_inner_zero_product.sage',
+    'check_second_b_zero_outer_zero_product.sage',
+    'check_second_a_zero_substitute_zero.sage',
+    'check_second_a_zero_zero_product.sage',
+    'check_second_contradiction_associate_outer.sage',
+    'check_second_contradiction_associate_inner.sage',
+    'check_second_contradiction_commute_middle.sage',
+    'check_second_contradiction_group_two_factors.sage',
+    'check_second_contradiction_inner_associate_outer.sage',
+    'check_second_contradiction_inner_associate_inner.sage',
+    'check_second_contradiction_inner_commute_middle.sage',
+    'check_second_contradiction_inner_associate_nested.sage',
+    'check_second_contradiction_inner_group_square.sage',
+    'check_second_contradiction_ungroup_two_factors.sage',
+    'check_second_contradiction_commute_two_factor.sage',
+    'check_second_contradiction_associate_right.sage',
+    'check_second_contradiction_group_doubled_square.sage',
+    'check_second_contradiction_square_bound.sage',
+    'check_second_contradiction_right_ungroup_square.sage',
+    'check_second_contradiction_right_associate_nested.sage',
+    'check_second_contradiction_right_commute_middle.sage',
+    'check_second_contradiction_right_associate_inner.sage',
+    'check_second_contradiction_right_group_products.sage',
+    'check_second_contradiction_strict_square_bound.sage',
+    'check_second_cancel_cancel_positive_factor.sage',
+    'check_second_nonnegative_membership.sage',
+    'check_second_v_negative_definition.sage',
+    'check_second_v_substitute_second_coefficient.sage',
+    'check_second_v_negate_difference.sage',
+    'check_second_step_multiply_bound.sage',
+    'check_second_linear_substitute_negative_coefficient.sage',
+    'check_second_linear_distribute_left_factor.sage',
+    'check_second_linear_associate_two_products.sage',
+    'check_second_linear_associate_inner_products.sage',
+    'check_second_linear_commute_inner_products.sage',
+    'check_second_linear_associate_inner_squares.sage',
+    'check_second_linear_commute_inner_factors.sage',
+    'check_second_linear_group_twice_a.sage',
+    'check_second_linear_commute_twice_a.sage',
+    'check_second_linear_associate_multiplier.sage',
+    'check_second_linear_subtract_product_bound.sage',
+    'check_second_linear_associate_difference_factors.sage',
+    'check_second_linear_commute_difference_factors.sage',
+    'check_second_linear_associate_difference_products.sage',
+    'check_second_linear_group_twice_c.sage',
+    'check_second_linear_commute_twice_c.sage',
+    'check_second_linear_associate_outer_products.sage',
+    'check_second_linear_factor_difference.sage',
+    'check_second_linear_restore_first_coefficient.sage',
+    'check_second_square_associate_outer.sage',
+    'check_second_square_associate_inner.sage',
+    'check_second_square_commute_middle.sage',
+    'check_second_square_group_two_factors.sage',
+    'check_second_square_inner_associate_outer.sage',
+    'check_second_square_inner_associate_inner.sage',
+    'check_second_square_inner_commute_middle.sage',
+    'check_second_square_inner_associate_nested.sage',
+    'check_second_square_inner_group_square.sage',
+    'check_second_square_ungroup_two_factors.sage',
+    'check_second_square_commute_two_factor.sage',
+    'check_second_square_associate_right.sage',
+    'check_second_square_group_doubled_square.sage',
+    'check_second_square_associate_linear_factors.sage',
+    'check_second_square_square_linear_bound.sage',
+    'check_second_square_right_ungroup_square.sage',
+    'check_second_square_right_associate_nested.sage',
+    'check_second_square_right_commute_middle.sage',
+    'check_second_square_right_associate_inner.sage',
+    'check_second_square_right_group_products.sage',
+    'check_second_square_strict_square_bound.sage',
+    'check_second_final_insert_negative_squares.sage',
+    'check_second_final_substitute_negative_second.sage',
+    'check_second_final_cancel_positive_factor.sage',
+    'check_second_negative_membership.sage',
+]
+assert len(qpf_checks) == 150
+for qpf_filename in qpf_checks + ['check_global.sage']:
+    __file__ = str(qpf_directory / qpf_filename)
+    load(__file__)
+print(f"RESULT: PASS ({len(qpf_checks)} line checks and the integrated check)")
