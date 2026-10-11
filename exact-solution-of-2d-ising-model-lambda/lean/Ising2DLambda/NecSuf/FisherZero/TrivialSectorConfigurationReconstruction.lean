@@ -1,5 +1,5 @@
 /-
-「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・周期和・横辺差・縦辺差・所属・双対像・個数部分の必要十分版。
+「自明セクターの偶部分グラフから配位を復元できる」のスピン値域・行和と列和の不変性・周期和・横辺差・縦辺差・所属・双対像・個数部分の必要十分版。
 周期和では、出発点からの歩みが全点を覆い、一歩で値が変わらないことだけを残す。
 自然数の帰納法という人手証明の手順を保ち、格子・有限和・剰余類・標数を仮定しない。
 格子・辺・スピンを外し、値を保ち不動点を持たない対を与える写像と、同じ値を持つ元が
@@ -12,6 +12,97 @@ import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 namespace Ising2DLambda.NecSuf.FisherZero
 
 open Finset
+
+/-- 面の四項和から行和・列和の不変性を導く、本文の局所十七等号と有限和十六等号。
+格子・巻き数・環は使わず、加法可換モノイド、有限添字とその全単射だけを残す。
+自己和零は、局所で補う三項和と、再添字付け後に消す周期和だけに要求する。
+これらを外すと対応する重複項が残る。全単射は有限和を同じ添字へ戻すために使う。 -/
+theorem row_column_sum_invariant_necSuf {I J M : Type*}
+    [Fintype I] [Fintype J] [AddCommMonoid M]
+    (rowStep : I ≃ I) (columnStep : J ≃ J) (bh bv : I → J → M)
+    (hface : ∀ i j, ((bv i j + bh i j) + bv i (columnStep j)) + bh (rowStep i) j = 0)
+    (hrowFaceDouble : ∀ i j,
+      ((bv i j + bh i j) + bv i (columnStep j)) +
+        ((bv i j + bh i j) + bv i (columnStep j)) = 0)
+    (hcolumnFaceDouble : ∀ i j,
+      ((bv i j + bh i j) + bh (rowStep i) j) +
+        ((bv i j + bh i j) + bh (rowStep i) j) = 0)
+    (hrowSumDouble : ∀ i, (∑ j, bv i j) + (∑ j, bv i j) = 0)
+    (hcolumnSumDouble : ∀ j, (∑ i, bh i j) + (∑ i, bh i j) = 0) :
+    (∀ i, (∑ j, bh (rowStep i) j) = ∑ j, bh i j) ∧
+      (∀ j, (∑ i, bv i (columnStep j)) = ∑ i, bv i j) := by
+  have hrowFace (i : I) (j : J) : bh (rowStep i) j =
+      (bv i j + bh i j) + bv i (columnStep j) := by
+    let α := bv i j
+    let β := bh i j
+    let γ := bv i (columnStep j)
+    let δ := bh (rowStep i) j
+    calc
+      bh (rowStep i) j = δ := rfl
+      _ = δ + 0 := (add_zero _).symm
+      _ = δ + (((α + β) + γ) + ((α + β) + γ)) :=
+        congrArg (δ + ·) (hrowFaceDouble i j).symm
+      _ = (δ + ((α + β) + γ)) + ((α + β) + γ) := (add_assoc _ _ _).symm
+      _ = (((α + β) + γ) + δ) + ((α + β) + γ) := by
+        rw [add_comm δ ((α + β) + γ)]
+      _ = 0 + ((α + β) + γ) :=
+        congrArg (· + ((α + β) + γ)) (hface i j)
+      _ = (α + β) + γ := zero_add _
+      _ = (bv i j + bh i j) + bv i (columnStep j) := rfl
+  have hcolumnFace (i : I) (j : J) : bv i (columnStep j) =
+      (bv i j + bh i j) + bh (rowStep i) j := by
+    let α := bv i j
+    let β := bh i j
+    let γ := bv i (columnStep j)
+    let δ := bh (rowStep i) j
+    calc
+      bv i (columnStep j) = γ := rfl
+      _ = γ + 0 := (add_zero _).symm
+      _ = γ + (((α + β) + δ) + ((α + β) + δ)) :=
+        congrArg (γ + ·) (hcolumnFaceDouble i j).symm
+      _ = (γ + ((α + β) + δ)) + ((α + β) + δ) := (add_assoc _ _ _).symm
+      _ = ((γ + (α + β)) + δ) + ((α + β) + δ) := by
+        rw [← add_assoc γ (α + β) δ]
+      _ = (((α + β) + γ) + δ) + ((α + β) + δ) := by
+        rw [add_comm γ (α + β)]
+      _ = 0 + ((α + β) + δ) :=
+        congrArg (· + ((α + β) + δ)) (hface i j)
+      _ = (α + β) + δ := zero_add _
+      _ = (bv i j + bh i j) + bh (rowStep i) j := rfl
+  have hrowShift (j : J) : (∑ i, bh (rowStep i) j) = ∑ i, bh i j := by
+    exact Fintype.sum_bijective rowStep rowStep.bijective
+      (fun i => bh (rowStep i) j) (fun i => bh i j) (fun _ => rfl)
+  have hcolumnShift (i : I) : (∑ j, bv i (columnStep j)) = ∑ j, bv i j := by
+    exact Fintype.sum_bijective columnStep columnStep.bijective
+      (fun j => bv i (columnStep j)) (fun j => bv i j) (fun _ => rfl)
+  constructor
+  · intro i
+    calc
+      (∑ j, bh (rowStep i) j) = ∑ j, ((bv i j + bh i j) + bv i (columnStep j)) :=
+        Finset.sum_congr rfl (fun j _ => hrowFace i j)
+      _ = (∑ j, (bv i j + bh i j)) + ∑ j, bv i (columnStep j) :=
+        Finset.sum_add_distrib
+      _ = ((∑ j, bv i j) + ∑ j, bh i j) + ∑ j, bv i (columnStep j) := by
+        rw [Finset.sum_add_distrib]
+      _ = ((∑ j, bv i j) + ∑ j, bh i j) + ∑ j, bv i j := by rw [hcolumnShift]
+      _ = (∑ j, bv i j) + ((∑ j, bh i j) + ∑ j, bv i j) := add_assoc _ _ _
+      _ = (∑ j, bv i j) + ((∑ j, bv i j) + ∑ j, bh i j) := by
+        rw [add_comm (∑ j, bh i j) (∑ j, bv i j)]
+      _ = ((∑ j, bv i j) + ∑ j, bv i j) + ∑ j, bh i j := (add_assoc _ _ _).symm
+      _ = 0 + ∑ j, bh i j := by rw [hrowSumDouble]
+      _ = ∑ j, bh i j := zero_add _
+  · intro j
+    calc
+      (∑ i, bv i (columnStep j)) = ∑ i, ((bv i j + bh i j) + bh (rowStep i) j) :=
+        Finset.sum_congr rfl (fun i _ => hcolumnFace i j)
+      _ = (∑ i, (bv i j + bh i j)) + ∑ i, bh (rowStep i) j :=
+        Finset.sum_add_distrib
+      _ = ((∑ i, bv i j) + ∑ i, bh i j) + ∑ i, bh (rowStep i) j := by
+        rw [Finset.sum_add_distrib]
+      _ = ((∑ i, bv i j) + ∑ i, bh i j) + ∑ i, bh i j := by rw [hrowShift]
+      _ = (∑ i, bv i j) + ((∑ i, bh i j) + ∑ i, bh i j) := add_assoc _ _ _
+      _ = (∑ i, bv i j) + 0 := by rw [hcolumnSumDouble]
+      _ = ∑ i, bv i j := add_zero _
 
 /-- 周期境界では末尾の和へ一項を足すと周期和となる。使うのは加法モノイドの法則と、
 二点の道和表示、次の代表が零であること、末尾分離、周期和零、基点と末尾項の自己和零だけ。

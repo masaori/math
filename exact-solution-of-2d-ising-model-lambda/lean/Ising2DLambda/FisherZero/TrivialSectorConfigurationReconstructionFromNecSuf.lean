@@ -1,5 +1,5 @@
 /-
-配位復元のスピン値域・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
+配位復元のスピン値域・行和と列和の不変性・全周期和零・横辺差・縦辺差・所属・双対像・個数部分を必要十分版から導く。具体版が必要十分版の仮定をどう埋めるかを
 独立に確認するための導出である。
 -/
 import Ising2DLambda.FisherZero.TrivialSectorConfigurationReconstruction
@@ -8,6 +8,33 @@ import Ising2DLambda.NecSuf.FisherZero.TrivialSectorConfigurationReconstruction
 namespace Ising2DLambda.FisherZero
 
 open Finset Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
+
+/-- 実際の復元辺集合の面等式を、行和・列和の不変性の必要十分版へ渡す。
+二つの添字全単射は剰余類の一歩の加法であり、必要な自己和零は `ZMod 2` で確認する。 -/
+theorem reconstructedEdgeSet_row_column_sum_invariant_from_necSuf
+    (L : ℕ) [NeZero L] (A : Finset (Edge L)) (hEven : IsEvenEdgeSubset L A) :
+    (∀ i : ZMod L,
+      (∑ j : ZMod L,
+        (if edgeOfRow L false (i + 1) j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+      ∑ j : ZMod L,
+        (if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0)) ∧
+    (∀ j : ZMod L,
+      (∑ i : ZMod L,
+        (if edgeOfRow L true i (j + 1) ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) =
+      ∑ i : ZMod L,
+        (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0)) := by
+  classical
+  let bh (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L false i j ∈ reconstructedEdgeSet L A then 1 else 0
+  let bv (i j : ZMod L) : ZMod 2 :=
+    if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0
+  have hdouble (z : ZMod 2) : z + z = 0 := by
+    fin_cases z <;> rfl
+  exact Ising2DLambda.NecSuf.FisherZero.row_column_sum_invariant_necSuf
+    (Equiv.addRight (1 : ZMod L)) (Equiv.addRight (1 : ZMod L)) bh bv
+    (fun i j => reconstructedEdgeSet_face_equation L A hEven i j)
+    (fun _ _ => hdouble _) (fun _ _ => hdouble _)
+    (fun _ => hdouble _) (fun _ => hdouble _)
 
 theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
     (L : ℕ) [NeZero L] (A : Finset (Edge L))
@@ -20,7 +47,7 @@ theorem reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf
         (if edgeOfRow L true i j ∈ reconstructedEdgeSet L A then 1 else 0) : ZMod 2) = 0) := by
   classical
   obtain ⟨hwv, hwh⟩ := reconstructedEdgeSet_winding_equations L A hSector
-  obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant L A hSector.1
+  obtain ⟨hrow, hcol⟩ := reconstructedEdgeSet_row_column_sum_invariant_from_necSuf L A hSector.1
   let walk : ℕ → ZMod L := fun n => -1 + (n : ZMod L)
   let step : ZMod L → ZMod L := fun x => x + 1
   let index : ZMod L → ℕ := fun x => (x + 1).val

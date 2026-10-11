@@ -30624,6 +30624,8 @@ s_0,s_1,s_2,s_3\in\{+1,-1\}\subset\mathbb Z
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_face_equation",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_winding_equations",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant",
+                        "Ising2DLambda.NecSuf.FisherZero.row_column_sum_invariant_necSuf",
+                        "Ising2DLambda.FisherZero.reconstructedEdgeSet_row_column_sum_invariant_from_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero",
                         "Ising2DLambda.NecSuf.FisherZero.constant_on_walk_necSuf",
                         "Ising2DLambda.FisherZero.reconstructedEdgeSet_all_row_column_sums_zero_from_necSuf",
