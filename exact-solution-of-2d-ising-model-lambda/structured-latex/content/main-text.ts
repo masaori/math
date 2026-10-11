@@ -38756,73 +38756,164 @@ a\cdot (c\cdot c)&\le a\cdot (2\cdot (b'\cdot b'))
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          ref("claim_quadratic_multiplication_representation"), " により ",
-                          math(String.raw`\mathrm{rep}_s(\xi\cdot\eta)=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')`),
-                          " である。", math(String.raw`u:=-b`), "、", math(String.raw`u':=-b'`), "、",
-                          math(String.raw`A:=a\cdot a'+2\cdot(b\cdot b')`), "、",
-                          math(String.raw`B:=a\cdot b'+b\cdot a'`),
-                          " と置く。負の第二係数条件により ",
-                          math(String.raw`0<a`), "、", math(String.raw`0<u`), "、",
-                          math(String.raw`2\cdot(u\cdot u)<a\cdot a`), "、および ",
-                          math(String.raw`0<a'`), "、", math(String.raw`0<u'`), "、",
-                          math(String.raw`2\cdot(u'\cdot u')<a'\cdot a'`), " である。",
-                          math(String.raw`b=-u`), " と ", math(String.raw`b'=-u'`), " を代入して",
-                        ]),
+                        paragraph(["この証明で使う補助量を、すべて有理数として ", math(String.raw`u:=-b`), "、", math(String.raw`u':=-b'`), "、", math(String.raw`A:=a\cdot a'+2\cdot(b\cdot b')`), "、", math(String.raw`B:=a\cdot b'+b\cdot a'`), "、", math(String.raw`V:=a\cdot u'+u\cdot a'`), "、", math(String.raw`D:=a\cdot a-2\cdot(u\cdot u)`), " と置く。"]),
                         displayMath(String.raw`\begin{aligned}
-A&=a\cdot a'+2\cdot(u\cdot u')
-  &&\bigl(\because\ b=-u,\ b'=-u'\text{ と負号の積・分配則}\bigr),\\
-B&=-(a\cdot u'+u\cdot a')
-  &&\bigl(\because\ b=-u,\ b'=-u'\text{ と負号の積・分配則}\bigr)
+\mathrm{rep}_s(\xi\cdot\eta)
+&=(a\cdot a'+2\cdot(b\cdot b'),\ a\cdot b'+b\cdot a')
+  \quad(\because\ \blkref{claim_quadratic_multiplication_representation}) \\
+&=(A,B) \quad(\because\ A,B\text{ の定義})
 \end{aligned}`),
-                        paragraph([
-                          "である。", math(String.raw`0<a\cdot a'`), " と ",
-                          math(String.raw`0<2\cdot(u\cdot u')`),
-                          " はいずれも正どうしの積なので、その和として ",
-                          math(String.raw`0<A`), " である。同様に ",
-                          math(String.raw`V:=a\cdot u'+u\cdot a'`), " と置くと ",
-                          math(String.raw`0<V`), " であり、", math(String.raw`B=-V`), " から ",
-                          math(String.raw`B<0`), " である。",
-                        ]),
-                        paragraph([
-                          "次に ", math(String.raw`2\cdot(B\cdot B)<A\cdot A`), " を示す。",
-                          math(String.raw`D:=a\cdot a-2\cdot(u\cdot u)`), " と置くと、",
-                          math(String.raw`2\cdot(u\cdot u)<a\cdot a`), " の移項により ",
-                          math(String.raw`0<D`), " である。",
-                        ]),
                         displayMath(String.raw`\begin{aligned}
-(a\cdot a)\cdot\bigl(2\cdot(u'\cdot u')\bigr)-\bigl(2\cdot(u\cdot u)\bigr)\cdot\bigl(2\cdot(u'\cdot u')\bigr)
-&=D\cdot\bigl(2\cdot(u'\cdot u')\bigr)
-  &&\bigl(\because\ D\text{ の定義と分配則}\bigr)\\
-&<D\cdot(a'\cdot a')
-  &&\bigl(\because\ 2\cdot(u'\cdot u')<a'\cdot a'\text{ と }0<D\bigr)\\
-&=(a\cdot a)\cdot(a'\cdot a')-\bigl(2\cdot(u\cdot u)\bigr)\cdot(a'\cdot a')
-  &&\bigl(\because\ D\text{ の定義と分配則}\bigr)
+0 &< a\quad(\because\ \blkref{def_quadratic_positive_cone}) \\
+0 &< a'\quad(\because\ \blkref{def_quadratic_positive_cone}) \\
+b &< 0\quad(\because\ \blkref{def_quadratic_positive_cone}) \\
+b' &< 0\quad(\because\ \blkref{def_quadratic_positive_cone}) \\
+0 &< u\quad(\because\ \text{負数の加法逆元}) \\
+0 &< u'\quad(\because\ \text{負数の加法逆元}) \\
+b &= -u\quad(\because\ \text{加法逆元の二重適用}) \\
+b' &= -u'\quad(\because\ \text{加法逆元の二重適用})
 \end{aligned}`),
-                        paragraph(["である。両端を移項して"]),
-                        displayMath(String.raw`(a\cdot a)\cdot\bigl(2\cdot(u'\cdot u')\bigr)+\bigl(2\cdot(u\cdot u)\bigr)\cdot(a'\cdot a')<(a\cdot a)\cdot(a'\cdot a')+\bigl(2\cdot(u\cdot u)\bigr)\cdot\bigl(2\cdot(u'\cdot u')\bigr)`),
-                        paragraph(["を得る。これを使って"]),
                         displayMath(String.raw`\begin{aligned}
-2\cdot(B\cdot B)
-&=2\cdot(V\cdot V)
-  &&\bigl(\because\ B=-V\text{ と負号の積}\bigr)\\
-&=(a\cdot a)\cdot\bigl(2\cdot(u'\cdot u')\bigr)+4\cdot\bigl((a\cdot a')\cdot(u\cdot u')\bigr)+\bigl(2\cdot(u\cdot u)\bigr)\cdot(a'\cdot a')
-  &&\bigl(\because\ V=a\cdot u'+u\cdot a'\text{ と分配則・結合則・可換則}\bigr)\\
-&<(a\cdot a)\cdot(a'\cdot a')+\bigl(2\cdot(u\cdot u)\bigr)\cdot\bigl(2\cdot(u'\cdot u')\bigr)+4\cdot\bigl((a\cdot a')\cdot(u\cdot u')\bigr)
-  &&\bigl(\because\ \text{上の不等式の両辺へ }4\cdot\bigl((a\cdot a')\cdot(u\cdot u')\bigr)\text{ を加える}\bigr)\\
-&=A\cdot A
-  &&\bigl(\because\ A=a\cdot a'+2\cdot(u\cdot u')\text{ と分配則・結合則・可換則}\bigr)
+2 \cdot (u \cdot u)
+&= 2 \cdot ((-b) \cdot (-b))\quad(\because\ \text{u と u′ の定義}) \\
+&= 2 \cdot (b \cdot b)\quad(\because\ \text{負号どうしの積}) \\
+&< a \cdot a\quad(\because\ \blkref{def_quadratic_positive_cone})
 \end{aligned}`),
-                        paragraph([
-                          "である。したがって ", math(String.raw`0<A`), "、",
-                          math(String.raw`B<0`), "、",
-                          math(String.raw`2\cdot(B\cdot B)<A\cdot A`),
-                          " が揃い、表示は正錐の負の第二係数条件を満たす（",
-                          ref("def_quadratic_positive_cone"), "）。ゆえに ",
-                          math(String.raw`\xi\cdot\eta\in P_s`),
-                          " である。全過程は有理数の四則と順序、および代数的数の積だけで閉じ、",
-                          "実数体も複素数体も現れない。",
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+2 \cdot (u' \cdot u')
+&= 2 \cdot ((-b') \cdot (-b'))\quad(\because\ \text{u と u′ の定義}) \\
+&= 2 \cdot (b' \cdot b')\quad(\because\ \text{負号どうしの積}) \\
+&< a' \cdot a'\quad(\because\ \blkref{def_quadratic_positive_cone})
+\end{aligned}`),
+                        paragraph(["任意の ", math(String.raw`p,q,r,t\in\mathbb Q`), " に対する四因子の並べ替えを先に計算する。"]),
+                        displayMath(String.raw`\begin{aligned}
+(p \cdot q) \cdot (r \cdot t)
+&= p \cdot (q \cdot (r \cdot t))\quad(\because\ \text{積の結合則}) \\
+&= p \cdot ((q \cdot r) \cdot t)\quad(\because\ \text{積の結合則}) \\
+&= p \cdot ((r \cdot q) \cdot t)\quad(\because\ \text{積の可換則}) \\
+&= p \cdot (r \cdot (q \cdot t))\quad(\because\ \text{積の結合則}) \\
+&= (p \cdot r) \cdot (q \cdot t)\quad(\because\ \text{積の結合則})
+\end{aligned}`),
+                        paragraph(["積の二つの係数を、負号を分けて書く。"]),
+                        displayMath(String.raw`\begin{aligned}
+A
+&= a \cdot a' + 2 \cdot (b \cdot b')\quad(\because\ \text{A の定義}) \\
+&= a \cdot a' + 2 \cdot ((-u) \cdot (-u'))\quad(\because\ b=-u,\ b'= -u') \\
+&= a \cdot a' + 2 \cdot (u \cdot u')\quad(\because\ \text{負号どうしの積})
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+B
+&= a \cdot b' + b \cdot a'\quad(\because\ \text{B の定義}) \\
+&= a \cdot (-u') + (-u) \cdot a'\quad(\because\ b=-u,\ b'= -u') \\
+&= -(a \cdot u') + (-u) \cdot a'\quad(\because\ \text{右因子の負号}) \\
+&= -(a \cdot u') + -(u \cdot a')\quad(\because\ \text{左因子の負号}) \\
+&= -(a \cdot u' + u \cdot a')\quad(\because\ \text{和の負号}) \\
+&= -V\quad(\because\ \text{V の定義})
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+0 &< 2\quad(\because\ \text{有理数の順序}) \\
+0 &< a \cdot a'\quad(\because\ 0<a,\ 0<a') \\
+0 &< u \cdot u'\quad(\because\ 0<u,\ 0<u') \\
+0 &< 2 \cdot (u \cdot u')\quad(\because\ 0<2,\ 0<u\cdot u') \\
+0 &< a \cdot a' + 2 \cdot (u \cdot u')\quad(\because\ \text{正数どうしの和}) \\
+&= A\quad(\because\ \text{第一係数の表示}) \\
+0 &< a \cdot u'\quad(\because\ 0<a,\ 0<u') \\
+0 &< u \cdot a'\quad(\because\ 0<u,\ 0<a') \\
+0 &< a \cdot u' + u \cdot a'\quad(\because\ \text{正数どうしの和}) \\
+&= V\quad(\because\ V\text{ の定義}) \\
+B &= -V\quad(\because\ \text{第二係数の表示}) \\
+&< 0\quad(\because\ 0<V) \\
+0 &< a \cdot a - 2 \cdot (u \cdot u)\quad(\because\ 2\cdot(u\cdot u)<a\cdot a\text{ の移項}) \\
+&= D\quad(\because\ D\text{ の定義})
+\end{aligned}`),
+                        paragraph(["正因子 ", math(String.raw`D`), " を第二因子の平方比較へ掛ける。"]),
+                        displayMath(String.raw`\begin{aligned}
+(a \cdot a) \cdot (2 \cdot (u' \cdot u')) - (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))
+&= (a \cdot a - 2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))\quad(\because\ \text{分配則}) \\
+&= D \cdot (2 \cdot (u' \cdot u'))\quad(\because\ \text{D の定義}) \\
+&< D \cdot (a' \cdot a')\quad(\because\ \text{正因子 D を掛ける}) \\
+&= (a \cdot a - 2 \cdot (u \cdot u)) \cdot (a' \cdot a')\quad(\because\ \text{D の定義}) \\
+&= (a \cdot a) \cdot (a' \cdot a') - (2 \cdot (u \cdot u)) \cdot (a' \cdot a')\quad(\because\ \text{分配則})
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+(a \cdot a) \cdot (2 \cdot (u' \cdot u')) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a') &< (a \cdot a) \cdot (a' \cdot a') + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))\quad(\because\ \text{上の比較の移項})
+\end{aligned}`),
+                        paragraph(["第一係数の平方を、比較に用いる形まで展開する。"]),
+                        displayMath(String.raw`\begin{aligned}
+A \cdot A
+&= (a \cdot a' + 2 \cdot (u \cdot u')) \cdot (a \cdot a' + 2 \cdot (u \cdot u'))\quad(\because\ \text{第一係数の表示}) \\
+&= (a \cdot a') \cdot (a \cdot a' + 2 \cdot (u \cdot u')) + (2 \cdot (u \cdot u')) \cdot (a \cdot a' + 2 \cdot (u \cdot u'))\quad(\because\ \text{分配則}) \\
+&= \begin{aligned}[t]
+&((a \cdot a') \cdot (a \cdot a') + (a \cdot a') \cdot (2 \cdot (u \cdot u'))) \\
+& + ((2 \cdot (u \cdot u')) \cdot (a \cdot a') + (2 \cdot (u \cdot u')) \cdot (2 \cdot (u \cdot u')))\quad(\because\ \text{分配則})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + (a \cdot a') \cdot (2 \cdot (u \cdot u'))) \\
+& + ((2 \cdot (u \cdot u')) \cdot (a \cdot a') + (2 \cdot 2) \cdot ((u \cdot u') \cdot (u \cdot u')))\quad(\because\ \text{上の四因子の並べ替え})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + (a \cdot a') \cdot (2 \cdot (u \cdot u'))) \\
+& + ((2 \cdot (u \cdot u')) \cdot (a \cdot a') + (2 \cdot 2) \cdot ((u \cdot u) \cdot (u' \cdot u')))\quad(\because\ \text{上の四因子の並べ替え})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + (a \cdot a') \cdot (2 \cdot (u \cdot u'))) \\
+& + ((2 \cdot (u \cdot u')) \cdot (a \cdot a') + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')))\quad(\because\ \text{上の四因子の並べ替え})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + ((a \cdot a') \cdot 2) \cdot (u \cdot u')) \\
+& + (2 \cdot ((u \cdot u') \cdot (a \cdot a')) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')))\quad(\because\ \text{積の結合則})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + (2 \cdot (a \cdot a')) \cdot (u \cdot u')) \\
+& + (2 \cdot ((a \cdot a') \cdot (u \cdot u')) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')))\quad(\because\ \text{積の可換則})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + 2 \cdot ((a \cdot a') \cdot (u \cdot u'))) \\
+& + (2 \cdot ((a \cdot a') \cdot (u \cdot u')) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')))\quad(\because\ \text{積の結合則})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&((a \cdot a) \cdot (a' \cdot a') + (2 \cdot ((a \cdot a') \cdot (u \cdot u')) \\
+& + 2 \cdot ((a \cdot a') \cdot (u \cdot u')))) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))\quad(\because\ \text{和の結合則})
+\end{aligned} \\
+&= ((a \cdot a) \cdot (a' \cdot a') + (2 + 2) \cdot ((a \cdot a') \cdot (u \cdot u'))) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))\quad(\because\ \text{分配則}) \\
+&= ((a \cdot a) \cdot (a' \cdot a') + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u'))\quad(\because\ 2+2=4) \\
+&= (a \cdot a) \cdot (a' \cdot a') + (4 \cdot ((a \cdot a') \cdot (u \cdot u')) + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')))\quad(\because\ \text{和の結合則}) \\
+&= (a \cdot a) \cdot (a' \cdot a') + ((2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u')))\quad(\because\ \text{和の可換則}) \\
+&= (a \cdot a) \cdot (a' \cdot a') + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))\quad(\because\ \text{和の結合則})
+\end{aligned}`),
+                        paragraph(["第二係数の平方から始めて、上の比較へつなぐ。"]),
+                        displayMath(String.raw`\begin{aligned}
+2 \cdot (B \cdot B)
+&= 2 \cdot ((-V) \cdot (-V))\quad(\because\ \text{第二係数の表示}) \\
+&= 2 \cdot (V \cdot V)\quad(\because\ \text{負号どうしの積}) \\
+&= 2 \cdot ((a \cdot u' + u \cdot a') \cdot (a \cdot u' + u \cdot a'))\quad(\because\ \text{V の定義}) \\
+&= 2 \cdot ((a \cdot u') \cdot (a \cdot u' + u \cdot a') + (u \cdot a') \cdot (a \cdot u' + u \cdot a'))\quad(\because\ \text{分配則}) \\
+&= 2 \cdot (((a \cdot u') \cdot (a \cdot u') + (a \cdot u') \cdot (u \cdot a')) + ((u \cdot a') \cdot (a \cdot u') + (u \cdot a') \cdot (u \cdot a')))\quad(\because\ \text{分配則}) \\
+&= 2 \cdot (((a \cdot a) \cdot (u' \cdot u') + (a \cdot u) \cdot (u' \cdot a')) + ((u \cdot a) \cdot (a' \cdot u') + (u \cdot u) \cdot (a' \cdot a')))\quad(\because\ \text{上の四因子の並べ替え}) \\
+&= 2 \cdot (((a \cdot a) \cdot (u' \cdot u') + (a \cdot u) \cdot (a' \cdot u')) + ((a \cdot u) \cdot (a' \cdot u') + (u \cdot u) \cdot (a' \cdot a')))\quad(\because\ \text{積の可換則}) \\
+&= 2 \cdot (((a \cdot a) \cdot (u' \cdot u') + (a \cdot a') \cdot (u \cdot u')) + ((a \cdot a') \cdot (u \cdot u') + (u \cdot u) \cdot (a' \cdot a')))\quad(\because\ \text{上の四因子の並べ替え}) \\
+&= 2 \cdot ((a \cdot a) \cdot (u' \cdot u') + (a \cdot a') \cdot (u \cdot u')) + 2 \cdot ((a \cdot a') \cdot (u \cdot u') + (u \cdot u) \cdot (a' \cdot a'))\quad(\because\ \text{分配則}) \\
+&= \begin{aligned}[t]
+&(2 \cdot ((a \cdot a) \cdot (u' \cdot u')) + 2 \cdot ((a \cdot a') \cdot (u \cdot u'))) \\
+& + (2 \cdot ((a \cdot a') \cdot (u \cdot u')) + 2 \cdot ((u \cdot u) \cdot (a' \cdot a')))\quad(\because\ \text{分配則})
+\end{aligned} \\
+&= \begin{aligned}[t]
+&(2 \cdot ((a \cdot a) \cdot (u' \cdot u')) + (2 \cdot ((a \cdot a') \cdot (u \cdot u')) \\
+& + 2 \cdot ((a \cdot a') \cdot (u \cdot u')))) + 2 \cdot ((u \cdot u) \cdot (a' \cdot a'))\quad(\because\ \text{和の結合則})
+\end{aligned} \\
+&= (2 \cdot ((a \cdot a) \cdot (u' \cdot u')) + (2 + 2) \cdot ((a \cdot a') \cdot (u \cdot u'))) + 2 \cdot ((u \cdot u) \cdot (a' \cdot a'))\quad(\because\ \text{分配則}) \\
+&= (2 \cdot ((a \cdot a) \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))) + 2 \cdot ((u \cdot u) \cdot (a' \cdot a'))\quad(\because\ 2+2=4) \\
+&= (((2 \cdot (a \cdot a)) \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a')\quad(\because\ \text{積の結合則}) \\
+&= ((((a \cdot a) \cdot 2) \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a')\quad(\because\ \text{積の可換則}) \\
+&= ((a \cdot a) \cdot (2 \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a')\quad(\because\ \text{積の結合則}) \\
+&= (a \cdot a) \cdot (2 \cdot (u' \cdot u')) + (4 \cdot ((a \cdot a') \cdot (u \cdot u')) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a'))\quad(\because\ \text{和の結合則}) \\
+&= (a \cdot a) \cdot (2 \cdot (u' \cdot u')) + ((2 \cdot (u \cdot u)) \cdot (a' \cdot a') + 4 \cdot ((a \cdot a') \cdot (u \cdot u')))\quad(\because\ \text{和の可換則}) \\
+&= (a \cdot a) \cdot (2 \cdot (u' \cdot u')) + (2 \cdot (u \cdot u)) \cdot (a' \cdot a') + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))\quad(\because\ \text{和の結合則}) \\
+&< (a \cdot a) \cdot (a' \cdot a') + (2 \cdot (u \cdot u)) \cdot (2 \cdot (u' \cdot u')) + 4 \cdot ((a \cdot a') \cdot (u \cdot u'))\quad(\because\ \text{移項した比較の両辺へ同じ項を加える}) \\
+&= A \cdot A\quad(\because\ \text{第一係数の平方の展開})
+\end{aligned}`),
+                        displayMath(String.raw`\xi\cdot\eta\in P_s\quad(\because\ 0<A,\ B<0,\ 2\cdot(B\cdot B)<A\cdot A,\ \blkref{def_quadratic_positive_cone})`),
+                        paragraph(["全過程は有理数の四則と順序、および代数的数の積で閉じる。"]),
                       ],
                     },
                 },

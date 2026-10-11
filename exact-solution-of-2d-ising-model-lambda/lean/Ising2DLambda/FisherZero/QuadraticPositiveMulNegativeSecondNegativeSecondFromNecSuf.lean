@@ -1,4 +1,5 @@
 import Ising2DLambda.FisherZero.QuadraticPositiveMulNegativeSecondNegativeSecond
+import Ising2DLambda.FisherZero.QuadraticMultiplicationFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.QuadraticPositiveMulNegativeSecondNegativeSecond
 
 namespace Ising2DLambda.FisherZero
@@ -20,20 +21,43 @@ theorem quadraticPositive_mul_of_negativeSecond_negativeSecond_from_necSuf
     quadraticMulElement s hs xi eta ∈ quadraticPositiveCone s := by
   change quadraticCoefficientPositive
     (quadraticRepresentation s (quadraticMulElement s hs xi eta))
-  rw [quadraticRepresentation_mul s hs xi eta]
+  rw [quadraticRepresentation_mul_from_necSuf s hs xi eta]
   apply Or.inr
   apply Or.inl
   let a := (quadraticRepresentation s xi).1
-  let u := -(quadraticRepresentation s xi).2
+  let b := (quadraticRepresentation s xi).2
   let ap := (quadraticRepresentation s eta).1
-  let up := -(quadraticRepresentation s eta).2
+  let bp := (quadraticRepresentation s eta).2
+  let u := -b
+  let up := -bp
+  have hu : 0 < u := neg_pos.mpr hxi.2.1
+  have hup : 0 < up := neg_pos.mpr heta.2.1
+  have hSq : 2 * (u * u) < a * a := by
+    calc
+      2 * (u * u) = 2 * ((-b) * (-b)) := rfl
+      _ = 2 * (b * b) := by rw [neg_mul_neg]
+      _ < a * a := by simpa only [a, b, mul_assoc] using hxi.2.2
+  have hSqp : 2 * (up * up) < ap * ap := by
+    calc
+      2 * (up * up) = 2 * ((-bp) * (-bp)) := rfl
+      _ = 2 * (bp * bp) := by rw [neg_mul_neg]
+      _ < ap * ap := by simpa only [ap, bp, mul_assoc] using heta.2.2
   have hResult :=
     Ising2DLambda.NecSuf.FisherZero.positive_mul_negativeSecond_negativeSecond_necSuf
-      a u ap up hxi.1 (by simpa [u] using neg_pos.mpr hxi.2.1)
-      (by simpa [a, u, mul_assoc] using hxi.2.2)
-      heta.1 (by simpa [up] using neg_pos.mpr heta.2.1)
-      (by simpa [ap, up, mul_assoc] using heta.2.2)
-  simpa [a, u, ap, up, sub_eq_add_neg, add_assoc, add_left_comm, add_comm,
-    mul_assoc, mul_left_comm, mul_comm] using hResult
+      a u ap up hxi.1 hu hSq heta.1 hup hSqp
+  -- 本文の二つの係数表示を、特殊化で得た有理数の式へ戻す。
+  have hA : a * ap + 2 * (u * up) = a * ap + 2 * (b * bp) := by
+    calc
+      a * ap + 2 * (u * up) = a * ap + 2 * ((-b) * (-bp)) := rfl
+      _ = a * ap + 2 * (b * bp) := by rw [neg_mul_neg]
+  have hB : -(a * up + u * ap) = a * bp + b * ap := by
+    calc
+      -(a * up + u * ap) = -(a * (-bp) + (-b) * ap) := rfl
+      _ = -(-(a * bp) + (-b) * ap) := by rw [mul_neg]
+      _ = -(-(a * bp) + -(b * ap)) := by rw [neg_mul]
+      _ = -(-(a * bp + b * ap)) := by rw [← neg_add]
+      _ = a * bp + b * ap := neg_neg _
+  rw [hA, hB] at hResult
+  simpa only [a, b, ap, bp, mul_assoc] using hResult
 
 end Ising2DLambda.FisherZero
