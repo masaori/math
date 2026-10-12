@@ -40030,26 +40030,20 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
                       verification: ["sagemath/check/positive-rational-in-positive-cone"],
                       lean: [
                         "Ising2DLambda.FisherZero.positiveRational_mem_positiveCone",
-                        "Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf",
+                        "Ising2DLambda.NecSuf.FisherZero.embedded_coefficient_positive_necSuf",
                         "Ising2DLambda.FisherZero.positiveRational_mem_positiveCone_from_necSuf",
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（", ref("def_algebraic_numbers"), "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          math(String.raw`\iota_{\mathbb Q}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " を有理数の包含とする（", ref("def_algebraic_numbers"), "）。",
+                          math(String.raw`s\in\overline{\mathbb Q}`), " を ",
+                          math(String.raw`s\cdot s=\iota_{\mathbb Q}(2)`),
                           " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
-                          math(String.raw`q\in\mathbb{Q}_{>0}`),
-                          "（", math(String.raw`\mathbb{Q}`),
-                          " は ", ref("def_algebraic_numbers"),
-                          " の第 1 条件により ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体なので、", math(String.raw`q`),
-                          " は ", math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元でもある）について、",
-                          math(String.raw`q\in Q_s`),
+                          math(String.raw`q\in\mathbb Q_{>0}`), " について、",
+                          math(String.raw`\iota_{\mathbb Q}(q)\in Q_s`),
                           "（", ref("def_quadratic_field_set"), "）であり、",
-                          math(String.raw`q\in P_s`),
+                          math(String.raw`\iota_{\mathbb Q}(q)\in P_s`),
                           "（", ref("def_quadratic_positive_cone"), "）である。",
                         ]),
                         paragraph([
@@ -40061,28 +40055,31 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中で次の一続きの鎖を得る。",
+                          "係数の零を ", math(String.raw`0_{\mathbb Q}\in\mathbb Q`),
+                          "、代数的数の零を ", math(String.raw`0_{\overline{\mathbb Q}}\in\overline{\mathbb Q}`),
+                          " と書く。有理係数 ", math(String.raw`q,0_{\mathbb Q}\in\mathbb Q`),
+                          " を用い、代数的数の中で次の鎖を得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-q
-&=q+0
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法単位元}\bigr)\\
-&=q+0\cdot s
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元の乗法}\bigr)\\
+\iota_{\mathbb Q}(q)
+&=\iota_{\mathbb Q}(q)+0_{\overline{\mathbb Q}}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法単位元}\bigr)\\
+&=\iota_{\mathbb Q}(q)+0_{\overline{\mathbb Q}}\cdot s
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元の乗法}\bigr)\\
+&=\iota_{\mathbb Q}(q)+\iota_{\mathbb Q}(0_{\mathbb Q})\cdot s
+&&\bigl(\because\ \text{包含が零を保つ、}\blkref{def_algebraic_numbers}\bigr)\\
 &\in Q_s
-&&\bigl(\because\ q,0\in\mathbb{Q}\ \text{であり、組}\ (q,0)\ \text{が}\ \blkref{def_quadratic_field_set}\ \text{の存在条件を満たす}\bigr)
+&&\bigl(\because\ \text{有理係数の組 }(q,0_{\mathbb Q})\text{ が }\blkref{def_quadratic_field_set}\text{ の証人}\bigr).
 \end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
-\mathrm{rep}_s(q)
-&=(q,0)
-&&\bigl(\because\ \text{上の表示と}\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr)
+\mathrm{rep}_s\bigl(\iota_{\mathbb Q}(q)\bigr)
+&=(q,0_{\mathbb Q})
+&&\bigl(\because\ \text{上の表示、}\blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr).
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`(a,b):=(q,0)`),
-                          " と置く。不等号はすべて有理数体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の順序である。正錐の第一の条件は次の各行から従う。",
+                          math(String.raw`(a,b):=(q,0_{\mathbb Q})\in\mathbb Q\times\mathbb Q`),
+                          " と置く。以下の不等号と零はすべて有理数体 ",
+                          math(String.raw`\mathbb Q`), " のものである。正錐の第一条件を各行で確かめる。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 a
@@ -40093,23 +40090,22 @@ b
 &&\bigl(\because\ (a,b)=(q,0)\bigr)\\
 0
 &\le a
-&&\bigl(\because\ 0<q\ \text{と}\ a=q\bigr)\\
+&&\bigl(\because\ 0<q,\ a=q\text{ と順序の性質}\bigr)\\
 0
 &\le b
-&&\bigl(\because\ b=0\bigr)\\
+&&\bigl(\because\ b=0\text{ と順序の反射性}\bigr)\\
 q
 &\ne0
-&&\bigl(\because\ 0<q\ \text{と}\ \mathbb{Q}\ \text{の順序の非反射性}\bigr)\\
+&&\bigl(\because\ 0<q\text{ と狭義順序の非反射性}\bigr)\\
 (a,b)
 &\ne(0,0)
-&&\bigl(\because\ (a,b)=(q,0)\ \text{と}\ q\ne0\bigr)\\
-q
+&&\bigl(\because\ a=q\ne0\text{ と組の第一成分の比較}\bigr)\\
+\iota_{\mathbb Q}(q)
 &\in P_s
-&&\bigl(\because\ \mathrm{rep}_s(q)=(a,b)=(q,0)\ \text{が}\ \blkref{def_quadratic_positive_cone}\ \text{の第一の条件を満たす}\bigr)
+&&\bigl(\because\ \text{上の表示が }\blkref{def_quadratic_positive_cone}\text{ の第一条件を満たす}\bigr).
 \end{aligned}`),
                         paragraph([
-                          "全過程は有理数の四則と順序、および代数的数の表示の中で閉じ、",
-                          "実数体も複素数体も現れない。",
+                          "全過程は有理数の四則と順序、および代数的数の表示の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
                     },

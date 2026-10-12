@@ -3,7 +3,7 @@
 
 # 主張の組み立てを一行ずつ突き合わせる:
 #   所属:   q = q + 0 = q + 0*s なので組 (q, 0) が Q_s の存在条件の証人
-#   表示:   rep_s(q) = (q, 0)（一意性は他の表示 (a, b) が (q, 0) に一致することで確認）
+#   表示:   rep_s(q) = (q, 0) の証人と、表示でない組の標本を確認する。一般の一意性は本文の証明による。
 #   正錐:   (q, 0) は第一条件（0 <= q かつ 0 <= 0 かつ (q, 0) != (0, 0)）を満たす
 #   非空虚: q = 0 と q < 0 では第一条件のこの確かめ方が壊れる箇所を確認
 #           （0 は三条件のどれも満たさず、負の有理数も三条件のどれも満たさない）
@@ -49,7 +49,7 @@ for s in s_candidates:
         assert QQbar(q) == QQbar(q) + QQbar(0)
         assert QQbar(q) + QQbar(0) == QQbar(q) + QQbar(0) * s
 
-        # 表示の一意性: q = a + b*s なら (a, b) = (q, 0)。
+        # 表示の証人と非表示の標本を検査する。一般の一意性は有限標本から結論しない。
         # b != 0 なら s = (q - a)/b が有理数になり s*s = 2 に反する。
         # ここでは QQbar の厳密比較で、証人 (q, 0) が表示であることと、
         # 例として (q, 1)、(q - 1, 1) が表示でないことを確認する。
@@ -75,3 +75,20 @@ assert checked == len(s_candidates) * len(positive_rationals)
 print(f"OK: claim_positive_rational_in_positive_cone "
       f"(s 2 通り x 正の有理数 {len(positive_rationals)} 個、"
       f"非正 {len(nonpositive_rationals)} 個の排除)")
+
+from pathlib import Path
+import sys
+
+_prc_source = Path(globals().get('__file__', sys.argv[0])).resolve()
+if not (_prc_source.parent / '_prelude.sage').is_file():
+    _prc_source = Path(sys.argv[0]).resolve()
+_prc_directory = _prc_source.parent
+load(str(_prc_directory / '_prelude.sage'))
+_prc_files = ('check_add_zero.sage', 'check_zero_product.sage', 'check_embed_zero.sage', 'check_field_membership.sage', 'check_representation.sage', 'check_first_coefficient.sage', 'check_second_coefficient.sage', 'check_first_nonnegative.sage', 'check_second_nonnegative.sage', 'check_rational_nonzero.sage', 'check_pair_nonzero.sage', 'check_positive_membership.sage')
+assert {path.name for path in _prc_directory.glob('check_*.sage')} == set(_prc_files)
+for _prc_filename in _prc_files:
+    __file__ = str(_prc_directory / _prc_filename)
+    load(__file__)
+assert len(_prc_results) == 12
+assert sum(_prc_results.values()) == 216
+print('RESULT: PASS (12 lines; 216 exact checks; both roots; original integration preserved)')
