@@ -52,3 +52,40 @@ assert checked > 0
 assert set(by_case.keys()) == {(i, j) for i in range(3) for j in range(3)}
 counts = ", ".join(f"{k}: {v}" for k, v in sorted(by_case.items()))
 print(f"OK: 正錐と乗法の両立を {checked} 組で厳密検査した ({counts})")
+
+# 本文の四等号・転送の含意・九場合の十二所属を一行ずつ検査する。
+from pathlib import Path
+import sys
+
+_qpm_source = Path(globals().get('__file__', sys.argv[0])).resolve()
+if not (_qpm_source.parent / '_prelude.sage').is_file():
+    _qpm_source = Path(sys.argv[0]).resolve()
+_qpm_directory = _qpm_source.parent
+load(str(_qpm_directory / '_prelude.sage'))
+_qpm_files = (
+    'check_representation_mul.sage',
+    'check_commute_products.sage',
+    'check_commute_second_sum.sage',
+    'check_representation_reverse_mul.sage',
+    'check_membership_transfer.sage',
+    'check_nonnegative_nonnegative.sage',
+    'check_nonnegative_negative_second.sage',
+    'check_nonnegative_negative_first.sage',
+    'check_negative_second_nonnegative_reverse.sage',
+    'check_negative_second_nonnegative.sage',
+    'check_negative_second_negative_second.sage',
+    'check_negative_second_negative_first.sage',
+    'check_negative_first_nonnegative_reverse.sage',
+    'check_negative_first_nonnegative.sage',
+    'check_negative_first_negative_second_reverse.sage',
+    'check_negative_first_negative_second.sage',
+    'check_negative_first_negative_first.sage',
+)
+assert {path.name for path in _qpm_directory.glob('check_*.sage')} == set(_qpm_files)
+for _qpm_filename in _qpm_files:
+    __file__ = str(_qpm_directory / _qpm_filename)
+    load(__file__)
+assert len(_qpm_results) == 17
+print('COVERAGE: 264 coefficient pairs; two roots; %s' % dict(_qpm_case_counts))
+print('RESULT: PASS (17 lines; %d checks; legacy %d rational pairs)'
+      % (sum(count for count, kind in _qpm_results.values()), checked))

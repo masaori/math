@@ -1,8 +1,14 @@
 /-
 「正錐と乗法の両立」の導出。
-必要十分版へ、具体版の六補題・転送・所属の分解をそのまま渡す。
+積の表示公式と六つの符号場合の必要十分版から、九場合の証明を特殊化する。
 -/
-import Ising2DLambda.FisherZero.QuadraticPositiveConeMulClosed
+import Ising2DLambda.FisherZero.QuadraticMultiplicationFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulNonnegativeFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulNonnegativeNegativeSecondFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulNonnegativeNegativeFirstFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulNegativeSecondNegativeSecondFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulMixedSignsFromNecSuf
+import Ising2DLambda.FisherZero.QuadraticPositiveMulNegativeFirstNegativeFirstFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.QuadraticPositiveConeMulClosed
 
 namespace Ising2DLambda.FisherZero
@@ -15,32 +21,25 @@ theorem quadraticPositiveCone_mul_mem_from_necSuf
     (hxi : xi ∈ quadraticPositiveCone s)
     (heta : eta ∈ quadraticPositiveCone s) :
     quadraticMulElement s hs xi eta ∈ quadraticPositiveCone s := by
-  have hxi' : quadraticCoefficientPositive (quadraticRepresentation s xi) := hxi
-  have heta' : quadraticCoefficientPositive (quadraticRepresentation s eta) := heta
   exact Ising2DLambda.NecSuf.FisherZero.positive_cone_mul_closed_necSuf
-    (quadraticMulElement s hs)
-    (fun z => z ∈ quadraticPositiveCone s)
-    (fun z => 0 ≤ (quadraticRepresentation s z).1 ∧
-      0 ≤ (quadraticRepresentation s z).2 ∧
-      quadraticRepresentation s z ≠ (0, 0))
-    (fun z => 0 < (quadraticRepresentation s z).1 ∧
-      (quadraticRepresentation s z).2 < 0 ∧
-      2 * (quadraticRepresentation s z).2 * (quadraticRepresentation s z).2 <
-        (quadraticRepresentation s z).1 * (quadraticRepresentation s z).1)
-    (fun z => (quadraticRepresentation s z).1 < 0 ∧
-      0 < (quadraticRepresentation s z).2 ∧
-      (quadraticRepresentation s z).1 * (quadraticRepresentation s z).1 <
-        2 * (quadraticRepresentation s z).2 * (quadraticRepresentation s z).2)
-    xi eta hxi' heta'
-    (fun h1 h2 => quadraticPositive_mul_of_nonnegativeCoefficients s hs xi eta h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_nonnegative_negativeSecond s hs xi eta h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_nonnegative_negativeFirst s hs xi eta h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_nonnegative_negativeSecond s hs eta xi h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_nonnegative_negativeFirst s hs eta xi h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_negativeSecond_negativeSecond s hs xi eta h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_mixedSigns s hs xi eta h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_mixedSigns s hs eta xi h1 h2)
-    (fun h1 h2 => quadraticPositive_mul_of_negativeFirst_negativeFirst s hs xi eta h1 h2)
-    (quadraticPositiveCone_mul_transfer s hs xi eta)
+    (quadraticMulElement s hs) (fun a b : ℚ => a + b) (fun a b : ℚ => a * b)
+    (2 : ℚ) (quadraticRepresentation s) (quadraticRepresentation_mul_from_necSuf s hs)
+    (fun a b => mul_comm a b) (fun a b => add_comm a b)
+    (fun ab => 0 ≤ ab.1 ∧ 0 ≤ ab.2 ∧ ab ≠ (0, 0))
+    (fun ab => 0 < ab.1 ∧ ab.2 < 0 ∧ 2 * ab.2 * ab.2 < ab.1 * ab.1)
+    (fun ab => ab.1 < 0 ∧ 0 < ab.2 ∧ ab.1 * ab.1 < 2 * ab.2 * ab.2)
+    (fun x y hx hy => quadraticPositive_mul_of_nonnegativeCoefficients_from_necSuf
+      s hs x y hx hy)
+    (fun x y hx hy => quadraticPositive_mul_of_nonnegative_negativeSecond_from_necSuf
+      s hs x y hx hy)
+    (fun x y hx hy => quadraticPositive_mul_of_nonnegative_negativeFirst_from_necSuf
+      s hs x y hx hy)
+    (fun x y hx hy => quadraticPositive_mul_of_negativeSecond_negativeSecond_from_necSuf
+      s hs x y hx hy)
+    (fun x y hx hy => quadraticPositive_mul_of_mixedSigns_from_necSuf
+      s hs x y hx hy)
+    (fun x y hx hy => quadraticPositive_mul_of_negativeFirst_negativeFirst_from_necSuf
+      s hs x y hx hy)
+    xi eta hxi heta
 
 end Ising2DLambda.FisherZero
