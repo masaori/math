@@ -7890,6 +7890,120 @@ i\in\operatorname{Orb}_{\sigma}(j)
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_finite_permutation_orbit_enumeration",
+        labels: [],
+        title: { text: "有限置換の軌道の巡回表示と長さ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_orbit_enumeration",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_permutation_orbit_enumeration",
+              title: { text: "最小周期未満の反復は軌道を一度ずつ尽くす" },
+              labels: ["claim_finite_permutation_orbit_enumeration"],
+              habitat: "N",
+              verification: ["sagemath/check/finite-permutation-orbit-enumeration"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_mem_iff_lt_period",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitEnumeration",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitEnumeration_bijective",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_eq_orbitLength",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbit",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbit_mem_iff_lt_period_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbitEnumeration",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.twoWayOrbitEnumeration_bijective_necSuf",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.period_eq_twoWayOrbit_ncard_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbit_mem_iff_lt_period_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitEnumeration_bijective_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_eq_orbitLength_from_necSuf",
+              ],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）、置換 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), "、始点 ", math(String.raw`i\in\mathcal J`), " を取る。", ref("def_finite_permutation_minimal_period"), " の正の最小周期を ", math(String.raw`p:=p_\sigma(i)\in\mathbb N`), " と略し、添字集合を ", math(String.raw`I_p:=\{r\in\mathbb N\mid r<p\}\subset\mathbb N`), " とする。このとき、"]),
+                displayMath(String.raw`j\in\operatorname{Orb}_\sigma(i)
+\quad\Longleftrightarrow\quad
+\exists r\in I_p,\ \sigma^{[r]}(i)=j
+\qquad(j\in\mathcal J).`),
+                paragraph(["さらに写像 ", math(String.raw`\theta:I_p\to\operatorname{Orb}_\sigma(i)`), " を ", math(String.raw`\theta(r):=\sigma^{[r]}(i)`), " と定めると、これは全単射であり、"]),
+                displayMath(String.raw`p_\sigma(i)=\operatorname{len}_\sigma(i)`),
+                paragraph(["となる。反復・軌道の台・軌道長はそれぞれ ", ref("def_finite_map_iteration"), "、", ref("def_finite_permutation_orbit"), "、", ref("def_finite_permutation_orbit_length"), " の意味である。"]),
+              ],
+              proof: [
+                paragraph(["各 ", math(String.raw`r\in\mathbb N`), " に対して ", math(String.raw`e_r:=\sigma^{[r]}(i)\in\mathcal J`), " と置き、", math(String.raw`C:=\{e_r\mid r\in I_p\}\subseteq\mathcal J`), " とする。まず、", math(String.raw`0<p`), "（", ref("def_finite_permutation_minimal_period"), "）であり、"]),
+                displayMath(String.raw`\begin{aligned}
+e_0&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr),\\
+e_p&=i&&\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還条件}\bigr),\\
+(p-1)+1&=p&&\bigl(\because\ 0<p\text{ と自然数の加減法}\bigr),\\
+p-1&<p&&\bigl(\because\ 0<p\text{ と自然数の差}\bigr).
+\end{aligned}`),
+                paragraph(["また、任意の ", math(String.raw`r\in I_p`), " について、"]),
+                displayMath(String.raw`e_r\in C\qquad\bigl(\because\ C\text{ の定義、証人は }r\bigr).`),
+                paragraph(["順向きの一歩を調べる。任意の ", math(String.raw`r\in\mathbb N`), " に対し、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(e_r)&=\sigma^{[r]}(\sigma(i))
+&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の準備で示した反復との可換性}\bigr)\\
+&=e_{r+1}&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+\end{aligned}`),
+                paragraph(["ここで ", math(String.raw`r<p`), " とする。", math(String.raw`r+1<p`), " ならば、直前の等式と ", math(String.raw`e_{r+1}\in C`), " により ", math(String.raw`\sigma(e_r)\in C`), " である。そうでなければ、"]),
+                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p,\ \neg(r+1<p)\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\sigma(e_r)&=e_{r+1}&&\bigl(\because\ \text{直前に示した一歩の等式}\bigr)\\
+&=e_p&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
+&=i&&\bigl(\because\ e_p=i\bigr)\\
+&=e_0&&\bigl(\because\ e_0=i\text{ の対称性}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`0<p`), " なので ", math(String.raw`e_0\in C`), " であり、この場合も ", math(String.raw`\sigma(e_r)\in C`), " となる。これで ", math(String.raw`j\in C\Rightarrow\sigma(j)\in C`), " を得た。"]),
+                paragraph(["逆向きの一歩を調べる。", math(String.raw`r=0`), " のときは、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(e_0)&=\sigma^{-1}(i)&&\bigl(\because\ e_0=i\text{ の代入}\bigr)\\
+&=\sigma^{-1}(e_p)&&\bigl(\because\ e_p=i\text{ の代入}\bigr)\\
+&=\sigma^{-1}(e_{(p-1)+1})&&\bigl(\because\ (p-1)+1=p\text{ の代入}\bigr)\\
+&=\sigma^{-1}(\sigma(e_{p-1}))&&\bigl(\because\ \text{一歩の等式を }p-1\text{ に適用}\bigr)\\
+&=e_{p-1}&&\bigl(\because\ \sigma\text{ の逆写像の性質}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`p-1<p`), " により ", math(String.raw`e_{p-1}\in C`), " なので、", math(String.raw`\sigma^{-1}(e_0)\in C`), " である。", math(String.raw`0<r<p`), " のときは、ある ", math(String.raw`k\in\mathbb N`), " を用いて ", math(String.raw`r=k+1`), " と書ける。このとき、"]),
+                displayMath(String.raw`k<p\qquad\bigl(\because\ k<k+1=r<p\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(e_{k+1})&=\sigma^{-1}(\sigma(e_k))
+&&\bigl(\because\ \text{一歩の等式を }k\text{ に適用}\bigr)\\
+&=e_k&&\bigl(\because\ \sigma\text{ の逆写像の性質}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`e_k\in C`), " なので、この場合も逆向きの一歩は ", math(String.raw`C`), " に留まる。したがって ", math(String.raw`j\in C\Rightarrow\sigma^{-1}(j)\in C`), " も得た。", math(String.raw`p=1`), " の場合も ", math(String.raw`p-1=0`), " であり、零からの巻き戻しの計算がそのまま成り立つ。"]),
+                paragraph(["この閉性から、任意の回数の反復が ", math(String.raw`C`), " に留まることを示す。写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " として ", math(String.raw`\sigma`), " または ", math(String.raw`\sigma^{-1}`), " を取る。どちらについても ", math(String.raw`j\in C\Rightarrow\tau(j)\in C`), " は証明済みである。", math(String.raw`n\in\mathbb N`), " について帰納する。零回では、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)\\
+&=e_0&&\bigl(\because\ e_0=i\text{ の対称性}\bigr)\\
+&\in C&&\bigl(\because\ 0<p\text{ と }C\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`\tau^{[n]}(i)\in C`), " と仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau^{[n+1]}(i)&=\tau^{[n]}(\tau(i))
+&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
+&=\tau(\tau^{[n]}(i))
+&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の準備で示した可換性}\bigr)\\
+&\in C&&\bigl(\because\ \text{帰納法の仮定と }C\text{ の一歩の閉性}\bigr).
+\end{aligned}`),
+                paragraph(["帰納法により、順向き・逆向きのどちらの有限回の反復も ", math(String.raw`C`), " に属する。任意の ", math(String.raw`j\in\operatorname{Orb}_\sigma(i)`), " は、", ref("def_finite_permutation_orbit"), " によりいずれかの反復値に等しいため ", math(String.raw`j\in C`), " である。逆に、任意の ", math(String.raw`j\in C`), " は、ある ", math(String.raw`r<p`), " で ", math(String.raw`j=e_r=\sigma^{[r]}(i)`), " と書けるので、同じ定義の順向きの証人 ", math(String.raw`r`), " により軌道に属する。この両包含で最初の同値を得る。"]),
+                paragraph(["写像 ", math(String.raw`\theta`), " の値は、順向きの証人により軌道に属し、写像は定まる。", math(String.raw`r,t\in I_p`), " と ", math(String.raw`\theta(r)=\theta(t)`), " に対して、"]),
+                displayMath(String.raw`r=t\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\bigr).`),
+                paragraph(["よって単射である。また、任意の軌道の点 ", math(String.raw`j`), " に対して最初の同値から ", math(String.raw`r\in I_p`), " と ", math(String.raw`\theta(r)=j`), " が得られるので全射でもある。これで全単射を明示できた。最後に、"]),
+                displayMath(String.raw`\begin{aligned}
+p&=|I_p|&&\bigl(\because\ 0,\ldots,p-1\text{ の個数}\bigr)\\
+&=|\operatorname{Orb}_\sigma(i)|&&\bigl(\because\ \text{全単射 }\theta\text{ は有限集合の個数を保つ}\bigr)\\
+&=\operatorname{len}_\sigma(i)&&\bigl(\because\ \blkref{def_finite_permutation_orbit_length}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では始点がなく、主張は全称命題として成り立つ。全過程は有限集合・自然数・写像の反復だけで閉じ、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_odd_orbit_selection",
         labels: [],
         title: { text: "奇数軌道の最小元による選択" },

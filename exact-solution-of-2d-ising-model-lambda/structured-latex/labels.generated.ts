@@ -85,6 +85,7 @@ export const ALL_LABELS = [
   "claim_finite_map_iterate_add",
   "claim_finite_permutation_iterate_injective",
   "claim_finite_permutation_orbit_basepoint",
+  "claim_finite_permutation_orbit_enumeration",
   "claim_finite_permutation_orbit_invariant",
   "claim_finite_permutation_period_injective",
   "claim_finite_permutation_positive_return",
