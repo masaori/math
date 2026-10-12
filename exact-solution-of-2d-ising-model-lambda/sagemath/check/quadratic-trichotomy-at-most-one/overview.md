@@ -70,6 +70,8 @@ Lean具体版と必要十分版は、零表示、逆元側の条件の書き直�
 
 ## 実行記録
 
+2026-10-12: 通常 CLI で元の行別ファイルを実行すると、`__file__` が SageMath 本体の場所を指し、`_prelude.sage` を見つけられず終了することを再現した。補助ファイルが無い場合は起動引数の入力パスを用いるよう22本を修正した。統合1本と行別38本をすべて別プロセスの通常 CLI で再実行し、全39本が通過した。数値22行13,130件、数値事例なし16行、既存統合の各件数は変わらない。
+
 2026-10-10: 行別38本と既存統合1本の全39ファイルを実行した。
 数値22行は全13,130件（等式1,466件・同値11,664件）でPASS。
 数値事例なしの16行は数値PASSへ含めない。
@@ -78,7 +80,7 @@ Lean具体版・必要十分版・導出版の三モジュールのビルドも�
 
 ## 何を確かめるか
 
-主張は「$s\cdot s=2$ を満たす $s\in\overline{\mathbb{Q}}$ と任意の $\xi\in Q_s$ について、
+主張は「$s\cdot s=\iota(2)$ を満たす $s\in\overline{\mathbb{Q}}$ と任意の $\xi\in Q_s$ について、
 $\xi\in P_s$、$\xi=0$、$-\xi\in P_s$ のうち同時に成り立つものは高々一つ」。
 
 - **main**: 全標本（分子 $-6..6$、分母 $1..3$ の有理数の組 $(a,b)$）と
@@ -96,8 +98,10 @@ $\xi\in P_s$、$\xi=0$、$-\xi\in P_s$ のうち同時に成り立つものは�
 
 ## 実行方法
 
-プロジェクト直下から実行する。
+プロジェクト直下から各ファイルを通常起動する。
 
 ```sh
-sage -c "import glob; fs=sorted(glob.glob('sagemath/check/quadratic-trichotomy-at-most-one/check*.sage')); exec('for f in fs:\\n    __file__ = f\\n    load(f)')"
+for file in sagemath/check/quadratic-trichotomy-at-most-one/check*.sage; do
+  sage "$file" || exit 1
+done
 ```

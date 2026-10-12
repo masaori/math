@@ -2,9 +2,13 @@
 # 式ペア: (-a,-b)=(-0,-0)
 # Lean の対応: hNegZero の組の代入
 # 帰属: 有理数と二次体の厳密計算。浮動小数点は使わない。
-import os
+from pathlib import Path
+import sys
 
 if '_qtm_check' not in globals():
-    load(os.path.join(os.path.dirname(os.path.abspath(__file__)), '_prelude.sage'))
+    _source = Path(globals().get('__file__', sys.argv[0])).resolve()
+    if not (_source.parent / '_prelude.sage').is_file():
+        _source = Path(sys.argv[0]).resolve()
+    load(str(_source.parent / '_prelude.sage'))
 
 _qtm_check('zero', 1, '零表示の代入')
