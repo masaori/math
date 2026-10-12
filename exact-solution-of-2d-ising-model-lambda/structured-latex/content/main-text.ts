@@ -7440,6 +7440,62 @@ r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_finite_permutation_period_injective",
+        labels: [],
+        title: { text: "最小周期未満の反復回数の一意性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_period_injective",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_permutation_period_injective",
+              title: { text: "最小周期未満の反復回数は反復値から一意に決まる" },
+              labels: ["claim_finite_permutation_period_injective"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationIterate_injOn_period",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_injOn_of_no_short_return_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationIterate_injOn_period_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-permutation-period-injective"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）、全単射 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), " と始点 ", math(String.raw`i\in\mathcal J`), " を取る。", ref("def_finite_permutation_minimal_period"), " の最小周期を ", math(String.raw`p:=p_\sigma(i)\in\mathbb N`), " と略し、添字集合を ", math(String.raw`I_p:=\{n\in\mathbb N\mid n<p\}`), " と置く。", ref("def_finite_map_iteration"), " による写像 ", math(String.raw`I_p\ni n\longmapsto\sigma^{[n]}(i)\in\mathcal J`), " は単射である。すなわち、任意の ", math(String.raw`r,t\in I_p`), " について、"]),
+                displayMath(String.raw`\sigma^{[r]}(i)=\sigma^{[t]}(i)\quad\Longrightarrow\quad r=t`),
+                paragraph(["が成り立つ。最小周期に達する前には、同じ点を二度訪れないという主張である。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`r,t\in I_p`), " を取り、反復値が等しいと仮定する。もし ", math(String.raw`r\ne t`), " なら、自然数の大小の三分律により一方が他方より小さい。必要なら添字と等式の左右を交換し、", math(String.raw`r<t`), " としてよい。", math(String.raw`d:=t-r\in\mathbb N`), " と置くと、"]),
+                displayMath(String.raw`\begin{aligned}
+0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr),\\
+r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr),\\
+d&\le t&&\bigl(\because\ 0\le r\text{ と自然数の差}\bigr),\\
+d&<p&&\bigl(\because\ d\le t\text{ と }t\in I_p\text{ の条件 }t<p\bigr).
+\end{aligned}`),
+                paragraph(["両辺に共通する反復を取り消せる形へ、次の三等号で書き換える。"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[r]}\bigl(\sigma^{[d]}(i)\bigr)
+&=\sigma^{[r+d]}(i)&&\bigl(\because\ \blkref{claim_finite_map_iterate_add}\bigr)\\
+&=\sigma^{[t]}(i)&&\bigl(\because\ r+d=t\bigr)\\
+&=\sigma^{[r]}(i)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr).
+\end{aligned}`),
+                paragraph(["二点 ", math(String.raw`\sigma^{[d]}(i),i\in\mathcal J`), " に反復の単射性を適用すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[d]}(i)&=i&&\bigl(\because\ \blkref{claim_finite_permutation_iterate_injective}\text{ を直前の等式に適用}\bigr),\\
+p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_permutation_minimal_period}\text{ の最小性}\bigr).
+\end{aligned}`),
+                paragraph(["これは先に得た ", math(String.raw`d<p`), " と矛盾する。したがって ", math(String.raw`r=t`), " であり、写像は単射である。", math(String.raw`\mathcal J=\varnothing`), " なら始点を取れず、主張は全称命題として成り立つ。有限集合と自然数回の反復だけを使い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_invariant_subset_reversal_orbit",
         labels: [],
         title: { text: "不変部分集合上の反転と軌道" },
