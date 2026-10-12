@@ -1,4 +1,5 @@
 import Ising2DLambda.FisherZero.QuadraticZeroNegation
+import Ising2DLambda.FisherZero.QuadraticRepresentationUniqueFromNecSuf
 import Ising2DLambda.NecSuf.FisherZero.QuadraticZeroNegation
 
 namespace Ising2DLambda.FisherZero
@@ -13,27 +14,18 @@ theorem quadraticZero_mem_from_necSuf (s : Qbar) :
     (algebraMap ℚ Qbar) (map_zero (algebraMap ℚ Qbar))
     (fun z : Qbar => z * s) (zero_mul s)
 
+/-- 本文の十四等号を特殊化し、一意性はその必要十分版からの導出を供給する。 -/
 theorem quadraticRepresentation_eq_zero_iff_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (xi : QuadraticFieldElement s) :
     (xi : Qbar) = 0 ↔ quadraticRepresentation s xi = (0, 0) := by
-  apply Ising2DLambda.NecSuf.FisherZero.zero_representation_necSuf
-      (value := fun eta : QuadraticFieldElement s => (eta : Qbar))
-      (combine := fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s)
-      (rep := quadraticRepresentation s)
-      (zeroK := quadraticZeroElement s)
-  · exact quadraticRepresentation_spec s
-  · intro x a b hx
-    exact quadraticRepresentation_eq s hs x a b hx
-  · change (0 : Qbar) = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s
-    calc
-      (0 : Qbar) = 0 + 0 := (add_zero (0 : Qbar)).symm
-      _ = 0 + 0 * s := congrArg ((0 : Qbar) + ·) (zero_mul s).symm
-      _ = algebraMap ℚ Qbar 0 + 0 * s :=
-        congrArg (· + (0 : Qbar) * s) (map_zero (algebraMap ℚ Qbar)).symm
-      _ = algebraMap ℚ Qbar 0 + algebraMap ℚ Qbar 0 * s :=
-        congrArg (fun z : Qbar => algebraMap ℚ Qbar 0 + z * s)
-          (map_zero (algebraMap ℚ Qbar)).symm
+  exact Ising2DLambda.NecSuf.FisherZero.zero_representation_necSuf
+    (add_zero (0 : Qbar))
+    (algebraMap ℚ Qbar) (map_zero (algebraMap ℚ Qbar))
+    (fun z : Qbar => z * s) (zero_mul s)
+    (fun eta : QuadraticFieldElement s => (eta : Qbar)) (quadraticRepresentation s)
+    (quadraticRepresentation_spec s)
+    (quadraticRepresentationUnique_from_necSuf s hs) xi
 
 theorem quadraticNeg_mem_from_necSuf (s : Qbar) (xi : QuadraticFieldElement s) :
     -(xi : Qbar) ∈ quadraticFieldSet s := by

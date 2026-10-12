@@ -20,6 +20,7 @@ for _qzr_s in _qzr_roots:
 assert len(_qzr_cases) == 722
 
 _qzr_counts = {}
+_qzr_hypothesis_counts = {}
 def _qzr_check(group, step, label):
     checked = 0
     qzero, zero = QQ(0), QQbar(0)
@@ -46,5 +47,9 @@ def _qzr_check(group, step, label):
         assert row[step] == row[step + 1], (label, s, rep, row)
         checked += 1
     assert checked == (722 if step == 0 else 2), (label, checked)
-    _qzr_counts[label] = checked
-    print('PASS %s: %d exact equations' % (label, checked))
+    if group in ('forward', 'reverse') and step == 1:
+        _qzr_hypothesis_counts[label] = checked
+        print('PASS %s: %d hypothesis substitutions' % (label, checked))
+    else:
+        _qzr_counts[label] = checked
+        print('PASS %s: %d exact equations' % (label, checked))

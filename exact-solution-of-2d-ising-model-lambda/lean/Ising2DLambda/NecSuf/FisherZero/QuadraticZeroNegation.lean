@@ -25,38 +25,49 @@ theorem zero_mem_necSuf
     _ = embed 0 + rightMul (embed 0) :=
       congrArg (fun z : K => embed 0 + rightMul z) hEmbedZero.symm
 
-/-- 表示の仕様、零との等式、零の表示、一意性の順で具体版と同じ鎖をたどる。
-具体版の零の四則は `hzero` にまとめ、既存の一意性の入力形式へ戻す段を明示する。 -/
+/-- `claim_quadratic_zero_representation` の十四等号。
+表示の仕様と係数表示の一意性に加え、零同士の和、係数写像の零保存、
+固定した根への右乗法の零保存だけを使う。加法の結合則・可換則、係数の演算、
+乗法の全体構造は使わず、根の平方条件も既証の一意性の側だけで必要である。 -/
 theorem zero_representation_necSuf
-    {A K V : Type} [Zero A]
-    (value : K → V) (combine : A → A → V) (rep : K → A × A) (zeroK : K)
-    (hSpec : ∀ x : K, value x = combine (rep x).1 (rep x).2)
-    (hUnique : ∀ x : K, ∀ a b : A, value x = combine a b → rep x = (a, b))
-    (hzero : value zeroK = combine 0 0) (x : K) :
-    value x = value zeroK ↔ rep x = (0, 0) := by
+    {A K V : Type*} [Zero A] [Zero V] [Add V]
+    (hZeroAddZero : (0 : V) + 0 = 0)
+    (embed : A → V) (hEmbedZero : embed 0 = 0)
+    (rightMul : V → V) (hRightMulZero : rightMul 0 = 0)
+    (value : K → V) (rep : K → A × A)
+    (hSpec : ∀ x : K, value x = embed (rep x).1 + rightMul (embed (rep x).2))
+    (hUnique : ∀ a b a' b' : A,
+      embed a + rightMul (embed b) = embed a' + rightMul (embed b') →
+        a = a' ∧ b = b')
+    (x : K) :
+    value x = 0 ↔ rep x = (0, 0) := by
   let a : A := (rep x).1
   let b : A := (rep x).2
   constructor
   · intro hx
-    have hcombine : combine a b = combine 0 0 := by
+    have hvalue : embed a + rightMul (embed b) = embed 0 + rightMul (embed 0) := by
       calc
-        combine a b = value x := (hSpec x).symm
-        _ = value zeroK := hx
-        _ = combine 0 0 := hzero
-    have hvalue : value x = combine 0 0 := by
-      calc
-        value x = combine a b := hSpec x
-        _ = combine 0 0 := hcombine
+        embed a + rightMul (embed b) = value x := (hSpec x).symm
+        _ = 0 := hx
+        _ = 0 + 0 := hZeroAddZero.symm
+        _ = 0 + rightMul 0 := congrArg ((0 : V) + ·) hRightMulZero.symm
+        _ = embed 0 + rightMul 0 := congrArg (· + rightMul 0) hEmbedZero.symm
+        _ = embed 0 + rightMul (embed 0) :=
+          congrArg (fun z : V => embed 0 + rightMul z) hEmbedZero.symm
+    have hcoeff := hUnique a b 0 0 hvalue
     calc
       rep x = (a, b) := rfl
-      _ = (0, 0) := hUnique x 0 0 hvalue
+      _ = (0, 0) := Prod.ext hcoeff.1 hcoeff.2
   · intro hrep
     calc
-      value x = combine a b := hSpec x
-      _ = combine 0 0 := by
+      value x = embed a + rightMul (embed b) := hSpec x
+      _ = embed 0 + rightMul (embed 0) := by
         dsimp only [a, b]
         rw [hrep]
-      _ = value zeroK := hzero.symm
+      _ = 0 + rightMul (embed 0) := congrArg (· + rightMul (embed 0)) hEmbedZero
+      _ = 0 + rightMul 0 := congrArg (fun z : V => 0 + rightMul z) hEmbedZero
+      _ = 0 + 0 := congrArg ((0 : V) + ·) hRightMulZero
+      _ = 0 := hZeroAddZero
 
 theorem neg_mem_necSuf
     {A K : Type} (negA : A → A) (negK : K → K) (combine : A → A → K)

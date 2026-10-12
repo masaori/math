@@ -1,7 +1,12 @@
 # 対象ラベル: claim_quadratic_zero_mem
 # 所属の証人: (0_Q, 0_Q) in QQ x QQ、0 = iota(0_Q) + iota(0_Q) * s
 from pathlib import Path
-load(str(Path(__file__).resolve().with_name('_zero_membership_prelude.sage')))
+import sys
+
+_qz_source = Path(globals().get('__file__', sys.argv[0])).resolve()
+if not (_qz_source.parent / '_zero_membership_prelude.sage').is_file():
+    _qz_source = Path(sys.argv[0]).resolve()
+load(str(_qz_source.parent / '_zero_membership_prelude.sage'))
 
 for s in _qz_roots:
     a, b = QQ(0), QQ(0)

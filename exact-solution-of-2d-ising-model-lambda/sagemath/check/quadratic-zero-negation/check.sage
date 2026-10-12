@@ -67,7 +67,12 @@ print(f"OK: neg-compat {checked_neg_compat} 組, zero-iff {checked_zero_iff} 組
       f"neg-chain {checked_neg_chain} 組")
 
 from pathlib import Path
-_qz_check_dir = Path(__file__).resolve().parent
+import sys
+
+_qz_check_source = Path(globals().get('__file__', sys.argv[0])).resolve()
+if not (_qz_check_source.parent / '_zero_membership_prelude.sage').is_file():
+    _qz_check_source = Path(sys.argv[0]).resolve()
+_qz_check_dir = _qz_check_source.parent
 for _qz_check_name in (
         'check_zero_add.sage',
         'check_zero_mul.sage',
@@ -81,5 +86,6 @@ print("RESULT: PASS (零元の所属: 四等号各二根の8等式、所属の�
 for _qzr_file in sorted(_qz_check_dir.glob('check_zero_representation_*.sage')):
     __file__ = str(_qzr_file)
     load(__file__)
-assert len(_qzr_counts) == 14 and sum(_qzr_counts.values()) == 2188
-print("RESULT: PASS (零元の表示の特徴づけ: 14行、2188等式)")
+assert len(_qzr_counts) == 12 and sum(_qzr_counts.values()) == 2184
+assert len(_qzr_hypothesis_counts) == 2 and sum(_qzr_hypothesis_counts.values()) == 4
+print("RESULT: PASS (零元の表示の特徴づけ: 12行2184等式、仮定の代入2行4例)")
