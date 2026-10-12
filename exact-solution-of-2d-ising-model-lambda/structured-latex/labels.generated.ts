@@ -82,6 +82,7 @@ export const ALL_LABELS = [
   "claim_fiber_phase_weight_topological_form",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",
+  "claim_finite_map_iterate_add",
   "claim_finite_permutation_orbit_basepoint",
   "claim_finite_permutation_orbit_invariant",
   "claim_first_hit_connecting_staircase_meets_lifts_only_at_ends",

@@ -7235,6 +7235,61 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_finite_map_iterate_add",
+        labels: [],
+        title: { text: "有限写像の反復の加法則" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_map_iterate_add",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_map_iterate_add",
+              title: { text: "回数の和による反復は二段の反復に等しい" },
+              labels: ["claim_finite_map_iterate_add"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_add",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_add_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_add_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-map-iterate-add"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " を固定する。任意の ", math(String.raw`m,n\in\mathbb N`), " と ", math(String.raw`i\in\mathcal J`), " について、", ref("def_finite_map_iteration"), " の反復は、"]),
+                displayMath(String.raw`\tau^{[m+n]}(i)=\tau^{[m]}\bigl(\tau^{[n]}(i)\bigr)`),
+                paragraph(["を満たす。両辺は ", math(String.raw`\mathcal J`), " の元である。これは、まず ", math(String.raw`n`), " 回、続いて ", math(String.raw`m`), " 回進める操作を一つの反復にまとめる等式である。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`m\in\mathbb N`), " を固定する。", math(String.raw`n\in\mathbb N`), " について、すべての始点 ", math(String.raw`i\in\mathcal J`), " に対する等式を帰納法で示す。", math(String.raw`n=0`), " のときは、"]),
+                displayMath(String.raw`\begin{aligned}
+  \tau^{[m+0]}(i)
+   &=\tau^{[m]}(i)&&\bigl(\because\ \mathbb N\text{ の加法の単位元}\bigr)\\
+   &=\tau^{[m]}\bigl(\tau^{[0]}(i)\bigr)
+   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+  \end{aligned}`),
+                paragraph(["ある ", math(String.raw`n\in\mathbb N`), " で、等式がすべての始点に対して成り立つと仮定する。任意の ", math(String.raw`i\in\mathcal J`), " に対し、", math(String.raw`\tau(i)\in\mathcal J`), " なので、この点を始点とする帰納法の仮定を使える。"]),
+                displayMath(String.raw`\begin{aligned}
+  \tau^{[m+(n+1)]}(i)
+   &=\tau^{[(m+n)+1]}(i)&&\bigl(\because\ \mathbb N\text{ の加法の結合則}\bigr)\\
+   &=\tau^{[m+n]}\bigl(\tau(i)\bigr)
+   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
+   &=\tau^{[m]}\bigl(\tau^{[n]}(\tau(i))\bigr)
+   &&\bigl(\because\ \text{始点 }\tau(i)\text{ での帰納法の仮定}\bigr)\\
+   &=\tau^{[m]}\bigl(\tau^{[n+1]}(i)\bigr)
+   &&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+  \end{aligned}`),
+                paragraph(["これで帰納法が閉じる。", math(String.raw`m`), " も任意だったので主張を得る。", math(String.raw`\mathcal J=\varnothing`), " の場合は始点がなく、等式は全称命題として成り立つ。有限集合上の写像と自然数だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_invariant_subset_reversal_orbit",
         labels: [],
         title: { text: "不変部分集合上の反転と軌道" },

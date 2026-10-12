@@ -52,6 +52,9 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_add
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_add_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.finiteMapIterate_add_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.involution_neg_sum_zero
   Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero_from_necSuf
