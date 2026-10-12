@@ -69,12 +69,31 @@ theorem zero_representation_necSuf
       _ = 0 + 0 := congrArg ((0 : V) + ·) hRightMulZero
       _ = 0 := hZeroAddZero
 
+/-- `claim_quadratic_negation_mem` の五等号と所属の証人。
+表示の仕様、和の逆元則、右乗法の逆元保存、係数写像の逆元保存だけを使う。
+零・単位元・結合則・可換則、写像の単射性、表示の一意性、根の平方条件は不要である。
+右乗法は一変数写像で足り、値の側に乗法全体の構造を要求しない。 -/
 theorem neg_mem_necSuf
-    {A K : Type} (negA : A → A) (negK : K → K) (combine : A → A → K)
-    (a b : A) (x : K)
-    (hneg : negK x = combine (negA a) (negA b)) :
-    ∃ a' b' : A, negK x = combine a' b' := by
-  exact ⟨negA a, negA b, hneg⟩
+    {A K V : Type*} [Neg A] [Neg V] [Add V]
+    (hNegAdd : ∀ z w : V, -(z + w) = -z + -w)
+    (embed : A → V) (hEmbedNeg : ∀ a : A, embed (-a) = -embed a)
+    (rightMul : V → V) (hRightMulNeg : ∀ z : V, rightMul (-z) = -rightMul z)
+    (value : K → V) (rep : K → A × A)
+    (hSpec : ∀ x : K, value x = embed (rep x).1 + rightMul (embed (rep x).2))
+    (x : K) :
+    ∃ a b : A, -value x = embed a + rightMul (embed b) := by
+  let a : A := (rep x).1
+  let b : A := (rep x).2
+  refine ⟨-a, -b, ?_⟩
+  calc
+    -value x = -(embed a + rightMul (embed b)) := congrArg Neg.neg (hSpec x)
+    _ = -embed a + (-rightMul (embed b)) := hNegAdd _ _
+    _ = -embed a + rightMul (-embed b) :=
+      congrArg (-embed a + ·) (hRightMulNeg (embed b)).symm
+    _ = embed (-a) + rightMul (-embed b) :=
+      congrArg (· + rightMul (-embed b)) (hEmbedNeg a).symm
+    _ = embed (-a) + rightMul (embed (-b)) :=
+      congrArg (fun z : V => embed (-a) + rightMul z) (hEmbedNeg b).symm
 
 theorem neg_representation_necSuf
     {A K V : Type} (negA : A → A) (negK : K → K) (value : K → V)

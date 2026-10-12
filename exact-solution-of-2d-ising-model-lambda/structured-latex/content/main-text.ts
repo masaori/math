@@ -35857,11 +35857,11 @@ b
                       ],
                       statement: [
                         paragraph([
+                          math(String.raw`\iota_{\mathbb Q}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " を有理数の包含とする（", ref("def_algebraic_numbers"), "）。",
                           math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（",
-                          ref("def_algebraic_numbers"),
-                          "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          " を ",
+                          math(String.raw`s\cdot s=\iota_{\mathbb Q}(2)`),
                           " を満たす元とする（",
                           ref("claim_sqrt_two_exists"),
                           "）。任意の ",
@@ -35869,7 +35869,7 @@ b
                           "（",
                           ref("def_quadratic_field_set"),
                           "）と ",
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
                           "（",
                           ref("def_quadratic_representation_map"),
                           "）について、",
@@ -35889,8 +35889,6 @@ b
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`\iota_{\mathbb Q}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
-                          " を有理数の包含とする（", ref("def_algebraic_numbers"), "）。",
                           math(String.raw`(a,b)=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
                           "（", ref("def_quadratic_representation_map"), "）なので、",
                           math(String.raw`-a,-b\in\mathbb Q`),

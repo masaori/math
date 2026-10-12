@@ -77,7 +77,7 @@ noncomputable def quadraticNegElement (s : Qbar) (xi : QuadraticFieldElement s) 
     _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s := by
       rw [map_neg, map_neg, neg_mul]
 
-/-- `claim_quadratic_negation_mem` の具体版。 -/
+/-- `claim_quadratic_negation_mem` の五等号と、係数対 `(-a,-b)` による所属の証人。 -/
 theorem quadraticNeg_mem (s : Qbar) (xi : QuadraticFieldElement s) :
     -(xi : Qbar) ∈ quadraticFieldSet s := by
   let a : ℚ := (quadraticRepresentation s xi).1
