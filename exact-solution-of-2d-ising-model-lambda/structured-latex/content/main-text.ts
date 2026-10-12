@@ -40215,15 +40215,19 @@ q
                       habitat: "Qbar",
                       verification: ["sagemath/check/positive-cone-pow"],
                       lean: [
+                        "Ising2DLambda.FisherZero.quadraticPowElement_coe",
                         "Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem",
+                        "Ising2DLambda.NecSuf.FisherZero.iteratedPower_value_necSuf",
                         "Ising2DLambda.NecSuf.FisherZero.iteratedPower_mem_necSuf",
+                        "Ising2DLambda.FisherZero.quadraticPowElement_coe_from_necSuf",
                         "Ising2DLambda.FisherZero.quadraticPositiveCone_pow_mem_from_necSuf",
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（", ref("def_algebraic_numbers"), "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          math(String.raw`\iota_{\mathbb Q}:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " を有理数の包含とする（", ref("def_algebraic_numbers"), "）。",
+                          math(String.raw`s\in\overline{\mathbb Q}`), " を ",
+                          math(String.raw`s\cdot s=\iota_{\mathbb Q}(2)`),
                           " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
                           math(String.raw`\xi\in P_s`),
                           "（", ref("def_quadratic_positive_cone"), "）と任意の ",
@@ -40231,7 +40235,7 @@ q
                           " について、", math(String.raw`\overline{\mathbb{Q}}`),
                           " の冪 ", math(String.raw`\xi^m`), " は ",
                           math(String.raw`Q_s`), " に属し、", math(String.raw`\xi^m\in P_s`),
-                          " である。ここで ", math(String.raw`\xi^0:=1`),
+                          " である。ここで ", math(String.raw`\xi^0:=1_{\overline{\mathbb Q}}`),
                           "、", math(String.raw`\xi^{m+1}:=\xi^m\cdot\xi`),
                           " とする。",
                         ]),
@@ -40243,37 +40247,71 @@ q
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`m`), " について帰納法を使う。出発点 ",
-                          math(String.raw`m=0`), " では",
+                          "係数の一を ", math(String.raw`1_{\mathbb Q}\in\mathbb Q`),
+                          "、代数的数の一を ", math(String.raw`1_{\overline{\mathbb Q}}\in\overline{\mathbb Q}`),
+                          " と書く。始点の台集合への所属を明示すると、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\xi^0
-&=1
-&&\bigl(\because\ \text{冪の定義}\bigr)\\
-1
+\xi
 &\in Q_s
-&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1\text{ へ適用}\bigr)\\
-1
+&&\bigl(\because\ \xi\in P_s\text{ と }\blkref{def_quadratic_positive_cone}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`m\in\mathbb N`), " について二つの所属を同時に帰納法で示す。",
+                          "出発点 ", math(String.raw`m=0`), " に必要な所属は、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+0_{\mathbb Q}
+&<1_{\mathbb Q}
+&&\bigl(\because\ \mathbb Q\text{ の順序}\bigr),\\
+\iota_{\mathbb Q}(1_{\mathbb Q})
+&\in Q_s
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1_{\mathbb Q}\text{ へ適用}\bigr),\\
+\iota_{\mathbb Q}(1_{\mathbb Q})
 &\in P_s
-&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1\text{ へ適用}\bigr)
+&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=1_{\mathbb Q}\text{ へ適用}\bigr).
+\end{aligned}`),
+                        paragraph([ref("claim_positive_rational_in_positive_cone"), " の二つの所属を冪へ移すため、次の鎖を使う。"]),
+                        displayMath(String.raw`\begin{aligned}
+\xi^0
+&=1_{\overline{\mathbb Q}}
+&&\bigl(\because\ \text{零乗の定義}\bigr)\\
+&=\iota_{\mathbb Q}(1_{\mathbb Q})
+&&\bigl(\because\ \text{包含が一を保つ、}\blkref{def_algebraic_numbers}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+\xi^0
+&\in Q_s
+&&\bigl(\because\ \text{上の等号を }\iota_{\mathbb Q}(1_{\mathbb Q})\in Q_s\text{ へ代入}\bigr),\\
+\xi^0
+&\in P_s
+&&\bigl(\because\ \text{上の等号を }\iota_{\mathbb Q}(1_{\mathbb Q})\in P_s\text{ へ代入}\bigr).
 \end{aligned}`),
                         paragraph([
                           "次に、ある ", math(String.raw`m\in\mathbb{N}`), " について ",
                           math(String.raw`\xi^m\in Q_s`), " かつ ",
                           math(String.raw`\xi^m\in P_s`),
-                          " と仮定する。すると",
+                          " と仮定する。積の二つの所属を先に得る。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\xi^{m+1}
-&=\xi^m\cdot\xi
-&&\bigl(\because\ \text{冪の定義}\bigr)\\
 \xi^m\cdot\xi
 &\in Q_s
-&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr)\\
+&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\text{ を }\xi^m,\xi\in Q_s\text{ へ適用}\bigr),\\
 \xi^m\cdot\xi
 &\in P_s
 &&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}
-\text{ を }\xi^m,\xi\in P_s\text{ へ適用}\bigr)
+\text{ を }\xi^m,\xi\in P_s\text{ へ適用}\bigr).
+\end{aligned}`),
+                        paragraph([ref("claim_quadratic_multiplication_mem"), " と ", ref("claim_quadratic_positive_cone_mul_closed"), " の所属を、次の等号で後者の冪へ移す。"]),
+                        displayMath(String.raw`\xi^{m+1}=\xi^m\cdot\xi
+\qquad\bigl(\because\ \text{後者の冪の定義}\bigr).`),
+                        displayMath(String.raw`\begin{aligned}
+\xi^{m+1}
+&\in Q_s
+&&\bigl(\because\ \text{直前の等号を }\xi^m\cdot\xi\in Q_s\text{ へ代入}\bigr),\\
+\xi^{m+1}
+&\in P_s
+&&\bigl(\because\ \text{直前の等号を }\xi^m\cdot\xi\in P_s\text{ へ代入}\bigr).
 \end{aligned}`),
                         paragraph([
                           "したがって任意の ", math(String.raw`m\in\mathbb{N}`),

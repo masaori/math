@@ -54,3 +54,34 @@ for s in s_candidates:
 
 assert checked == len(s_candidates) * len(samples) * 9
 print(f"OK: claim_quadratic_positive_cone_pow_closed ({checked} 帰納法ステップ)")
+
+from pathlib import Path
+import sys
+_pcp_source = Path(globals().get('__file__', sys.argv[0])).resolve()
+if not (_pcp_source.parent / '_prelude.sage').is_file():
+    _pcp_source = Path(sys.argv[0]).resolve()
+_pcp_directory = _pcp_source.parent
+load(str(_pcp_directory / '_prelude.sage'))
+_pcp_files = [
+    'check_input_field.sage',
+    'check_rational_one_positive.sage',
+    'check_embedded_one_field.sage',
+    'check_embedded_one_cone.sage',
+    'check_zero_power.sage',
+    'check_embedded_one_identity.sage',
+    'check_zero_field_transport.sage',
+    'check_zero_cone_transport.sage',
+    'check_product_field.sage',
+    'check_product_cone.sage',
+    'check_successor_power.sage',
+    'check_successor_field_transport.sage',
+    'check_successor_cone_transport.sage',
+    'check_coe_bridge.sage',
+]
+assert {p.name for p in _pcp_directory.glob('check_*.sage')} == set(_pcp_files)
+for _pcp_filename in _pcp_files:
+    __file__ = str(_pcp_directory / _pcp_filename)
+    load(__file__)
+assert len(_pcp_results) == 14
+assert sum(_pcp_results.values()) == 1008
+print('PASS: positive-cone-pow line checks (14 files, 1008 exact checks)')
