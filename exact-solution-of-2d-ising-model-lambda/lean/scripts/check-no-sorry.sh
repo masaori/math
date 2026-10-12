@@ -55,6 +55,15 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.involution_neg_sum_zero
   Ising2DLambda.AlgebraicEigenvalue.oddOrbit_signed_sum_zero_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_inverse_color
+  Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_color
+  Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_involution
+  Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_matchings
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor_inverse_color
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor_color
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor_involution
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor_matchings
+  Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_matchings_from_necSuf
 
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbitFinset_card_odd
   Ising2DLambda.AlgebraicEigenvalue.selectedOddOrbit_skew_inside_product_neg

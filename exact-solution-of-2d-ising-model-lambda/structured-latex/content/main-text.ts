@@ -8385,6 +8385,154 @@ w_A(\sigma)+w_A(\tau)
         }],
       },
     },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "tools_heading_alternating_neighbor_matchings",
+        labels: [],
+        title: { text: "交互の二色付けからの完全マッチング" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_alternating_neighbor_matchings",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_alternating_neighbor_pairs",
+                title: { text: "二色付けに従う隣接点写像と対の族" },
+                labels: ["def_alternating_neighbor_pairs"],
+                habitat: "N",
+                lean: [
+                  "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor",
+                  "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighborPairs",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighborPairs",
+                ],
+                verification: ["sagemath/check/alternating-neighbor-matchings"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), "、全単射 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), "、部分集合 ", math(String.raw`C\subseteq\mathcal J`), " を固定する。空集合も許す。", math(String.raw`C`), " に属する点と属さない点を二つの色と考え、写像 ", math(String.raw`\tau_{\sigma,C}:\mathcal J\to\mathcal J`), " を"]),
+                  displayMath(String.raw`\tau_{\sigma,C}(i):=
+\begin{cases}
+\sigma(i)&(i\in C),\\
+\sigma^{-1}(i)&(i\notin C)
+\end{cases}
+\qquad(i\in\mathcal J)`),
+                  paragraph(["と定める。ここで ", math(String.raw`\sigma^{-1}:\mathcal J\to\mathcal J`), " は逆写像である。この写像から作る対の族を"]),
+                  displayMath(String.raw`\mathcal E_{\sigma,C}:=
+\bigl\{\{i,\tau_{\sigma,C}(i)\}\mid i\in\mathcal J\bigr\}
+\quad\in\mathcal P(\mathcal P(\mathcal J))`),
+                  paragraph(["と定める。", math(String.raw`\mathcal P`), " は ", ref("def_finite_perfect_matching"), " の部分集合全体の記号であり、族の重複は除く。この定義だけでは、対の二点が異なることや完全マッチングになることを仮定しない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_alternating_neighbor_matchings",
+              title: { text: "交互の二色付けから二つの完全マッチングが得られる" },
+              labels: ["claim_alternating_neighbor_matchings"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_inverse_color",
+                "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_color",
+                "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_involution",
+                "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_matchings",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingNeighbor_matchings",
+                "Ising2DLambda.AlgebraicEigenvalue.alternatingNeighbor_matchings_from_necSuf",
+              ],
+              verification: ["sagemath/check/alternating-neighbor-matchings"],
+              statement: [
+                paragraph([ref("def_alternating_neighbor_pairs"), " の ", math(String.raw`\mathcal J,\sigma,C`), " が、交互の二色付けの条件"]),
+                displayMath(String.raw`\sigma(i)\in C\ \Longleftrightarrow\ i\notin C
+\qquad(i\in\mathcal J)`),
+                paragraph(["を満たすとする。このとき、", ref("def_finite_perfect_matching"), " の完全マッチング全体について、"]),
+                displayMath(String.raw`(\mathcal E_{\sigma,C},\mathcal E_{\sigma^{-1},C})
+\in\mathcal M(\mathcal J)\times\mathcal M(\mathcal J)`),
+                paragraph(["が成り立つ。結論は順序付き対であり、二つの成分が等しい場合も許す。"]),
+              ],
+              proof: [
+                paragraph(["まず逆置換も色を反転することを示す。任意の ", math(String.raw`i\in\mathcal J`), " に対し、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{-1}(i)\in C
+&\ \Longleftrightarrow\ \neg\neg(\sigma^{-1}(i)\in C)
+&&\bigl(\because\ \text{二重否定}\bigr)\\
+&\ \Longleftrightarrow\ \neg(\sigma(\sigma^{-1}(i))\in C)
+&&\bigl(\because\ \text{仮定を }\sigma^{-1}(i)\text{ へ適用し両辺を否定}\bigr)\\
+&\ \Longleftrightarrow\ i\notin C
+&&\bigl(\because\ \text{逆写像の右逆性}\bigr).
+\end{aligned}`),
+                paragraph(["以下 ", math(String.raw`\tau:=\tau_{\sigma,C}:\mathcal J\to\mathcal J`), "、", math(String.raw`\eta:=\tau_{\sigma^{-1},C}:\mathcal J\to\mathcal J`), " と略す。まず ", math(String.raw`\tau`), " も色を反転する。", math(String.raw`i\in C`), " の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)\in C
+&\ \Longleftrightarrow\ \sigma(i)\in C
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ の所属側の定義}\bigr)\\
+&\ \Longleftrightarrow\ i\notin C
+&&\bigl(\because\ \text{仮定}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " の場合も、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)\in C
+&\ \Longleftrightarrow\ \sigma^{-1}(i)\in C
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ の非所属側の定義}\bigr)\\
+&\ \Longleftrightarrow\ i\notin C
+&&\bigl(\because\ \text{上で示した逆置換の色反転}\bigr).
+\end{aligned}`),
+                paragraph(["したがって両場合とも ", math(String.raw`\tau(i)\in C\Longleftrightarrow i\notin C`), " である。もし ", math(String.raw`\tau(i)=i`), " なら、この同値へ代入すると ", math(String.raw`i\in C\Longleftrightarrow i\notin C`), " となる。", math(String.raw`i\in C`), " なら非所属が、", math(String.raw`i\notin C`), " なら所属が従い、どちらも矛盾する。ゆえに、"]),
+                displayMath(String.raw`\tau(i)\ne i
+\qquad\bigl(\because\ \text{上の所属・非所属の二場合の矛盾}\bigr).`),
+                paragraph(["次に二回の適用を計算する。", math(String.raw`i\in C`), " の場合は、"]),
+                displayMath(String.raw`\sigma(i)\notin C
+\qquad\bigl(\because\ \text{仮定と }i\in C\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\tau(\tau(i))&=\tau(\sigma(i))
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ を内側へ適用}\bigr)\\
+&=\sigma^{-1}(\sigma(i))
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ と }\sigma(i)\notin C\bigr)\\
+&=i&&\bigl(\because\ \text{逆写像の左逆性}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " の場合は、"]),
+                displayMath(String.raw`\sigma^{-1}(i)\in C
+\qquad\bigl(\because\ \text{上で示した逆置換の色反転と }i\notin C\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\tau(\tau(i))&=\tau(\sigma^{-1}(i))
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ を内側へ適用}\bigr)\\
+&=\sigma(\sigma^{-1}(i))
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ と }\sigma^{-1}(i)\in C\bigr)\\
+&=i&&\bigl(\because\ \text{逆写像の右逆性}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\in\mathcal J`), " は任意なので、"]),
+                displayMath(String.raw`\tau\in\mathcal I(\mathcal J)
+\qquad\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ と上の二条件}\bigr).`),
+                paragraph(["最初に逆置換の色反転を示したので、同じ論法を ", math(String.raw`\sigma^{-1}`), " に適用でき、"]),
+                displayMath(String.raw`\eta\in\mathcal I(\mathcal J)
+\qquad\bigl(\because\ \text{上の論法を逆置換へ適用}\bigr).`),
+                paragraph(["あとは対合から完全マッチングを作る既証の対応へ接続する。第一の族について、"]),
+                displayMath(String.raw`\mathcal E_{\sigma,C}=\mathcal D_\tau
+\qquad\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ \blkref{def_fixed_point_free_involution}\text{ の族の定義}\bigr),`),
+                displayMath(String.raw`\mathcal D_\tau\in\mathcal M(\mathcal J)
+\qquad\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\tau\in\mathcal I(\mathcal J)\bigr),`),
+                displayMath(String.raw`\mathcal E_{\sigma,C}\in\mathcal M(\mathcal J)
+\qquad\bigl(\because\ \text{上の族の等号を所属へ代入}\bigr).`),
+                paragraph(["第二の族についても、"]),
+                displayMath(String.raw`\mathcal E_{\sigma^{-1},C}=\mathcal D_\eta
+\qquad\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ \blkref{def_fixed_point_free_involution}\text{ の族の定義}\bigr),`),
+                displayMath(String.raw`\mathcal D_\eta\in\mathcal M(\mathcal J)
+\qquad\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\eta\in\mathcal I(\mathcal J)\bigr),`),
+                displayMath(String.raw`\mathcal E_{\sigma^{-1},C}\in\mathcal M(\mathcal J)
+\qquad\bigl(\because\ \text{上の族の等号を所属へ代入}\bigr).`),
+                paragraph(["以上の二つの所属を組にすると、"]),
+                displayMath(String.raw`(\mathcal E_{\sigma,C},\mathcal E_{\sigma^{-1},C})
+\in\mathcal M(\mathcal J)\times\mathcal M(\mathcal J)
+\qquad\bigl(\because\ \text{直積の定義}\bigr).`),
+                paragraph(["空集合の場合も全称条件と空の族で同じ論法が成り立ち、長さ二の軌道も除外していない。この節は交互の二色付けが与えられた場合の構成であり、二色付けの存在と逆向きの再構成は別に示す。扱ったものは有限集合とその写像だけであり、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
   ],
 });
 

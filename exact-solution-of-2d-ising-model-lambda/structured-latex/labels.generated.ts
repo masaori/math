@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_adjacent_cells_ray_crossing_difference",
+  "claim_alternating_neighbor_matchings",
   "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_boundary_vertex_diagonal_contact_excluded",
@@ -553,6 +554,7 @@ export const ALL_LABELS = [
   "claim_winding_parity_symmetric_difference_additivity",
   "claim_winding_transverse_staircase_step_increase",
   "def_algebraic_numbers",
+  "def_alternating_neighbor_pairs",
   "def_attainable_broken_edge_sets",
   "def_boundary_maps",
   "def_broken_bond_count",
