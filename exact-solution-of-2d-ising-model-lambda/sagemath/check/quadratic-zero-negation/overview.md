@@ -119,3 +119,5 @@ sage sagemath/check/quadratic-zero-negation/check.sage
 | `check_negation_coefficients_unique_pair.sage` | 一意表示の組 | PASS | 722等式 |
 
 2026-10-10 実行: 追加六行の計4,332等式が通過した。既存分を含む `check*.sage` 全32本も通過した。
+
+2026-10-12 実行: 表示の六行を通常の CLI で個別実行し、二根・722表示について計4,332等式が通過した。既存分を含む全32本も通過した。

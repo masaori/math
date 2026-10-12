@@ -42,27 +42,16 @@ theorem quadraticRepresentation_neg_from_necSuf
     (xi : QuadraticFieldElement s) :
     quadraticRepresentation s (quadraticNegElement s xi) =
       (-(quadraticRepresentation s xi).1, -(quadraticRepresentation s xi).2) := by
-  let a : ℚ := (quadraticRepresentation s xi).1
-  let b : ℚ := (quadraticRepresentation s xi).2
-  have hneg : -(xi : Qbar) = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s := by
-    calc
-      -(xi : Qbar) = -(algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) :=
-        congrArg Neg.neg (quadraticRepresentation_spec s xi)
-      _ = -algebraMap ℚ Qbar a + (-(algebraMap ℚ Qbar b * s)) := neg_add _ _
-      _ = -algebraMap ℚ Qbar a + (-algebraMap ℚ Qbar b) * s :=
-        congrArg (-algebraMap ℚ Qbar a + ·) (neg_mul (algebraMap ℚ Qbar b) s).symm
-      _ = algebraMap ℚ Qbar (-a) + (-algebraMap ℚ Qbar b) * s :=
-        congrArg (· + (-algebraMap ℚ Qbar b) * s) (map_neg (algebraMap ℚ Qbar) a).symm
-      _ = algebraMap ℚ Qbar (-a) + algebraMap ℚ Qbar (-b) * s :=
-        congrArg (fun z : Qbar => algebraMap ℚ Qbar (-a) + z * s)
-          (map_neg (algebraMap ℚ Qbar) b).symm
-  calc
-    quadraticRepresentation s (quadraticNegElement s xi) = (-a, -b) :=
-      Ising2DLambda.NecSuf.FisherZero.neg_representation_necSuf
-        Neg.neg (quadraticNegElement s)
-        (fun eta : QuadraticFieldElement s => (eta : Qbar))
-        (fun c d : ℚ => algebraMap ℚ Qbar c + algebraMap ℚ Qbar d * s)
-        (quadraticRepresentation s)
-        (fun eta c d h => quadraticRepresentation_eq s hs eta c d h) xi hneg
+  exact Ising2DLambda.NecSuf.FisherZero.neg_representation_necSuf
+    (fun z w : Qbar => neg_add z w)
+    (algebraMap ℚ Qbar) (map_neg (algebraMap ℚ Qbar))
+    (fun z : Qbar => z * s) (fun z : Qbar => neg_mul z s)
+    (quadraticNegElement s) (fun eta : QuadraticFieldElement s => (eta : Qbar))
+    (fun _ => rfl) (quadraticRepresentation s) (quadraticRepresentation_spec s)
+    (fun eta a b h => by
+      have hcoeff := quadraticRepresentationUnique_from_necSuf s hs
+        (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2 a b
+        ((quadraticRepresentation_spec s eta).symm.trans h)
+      exact Prod.ext hcoeff.1 hcoeff.2) xi
 
 end Ising2DLambda.FisherZero

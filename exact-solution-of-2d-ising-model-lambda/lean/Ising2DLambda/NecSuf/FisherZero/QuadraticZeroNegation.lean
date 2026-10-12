@@ -95,14 +95,37 @@ theorem neg_mem_necSuf
     _ = embed (-a) + rightMul (embed (-b)) :=
       congrArg (fun z : V => embed (-a) + rightMul z) (hEmbedNeg b).symm
 
+/-- `claim_quadratic_negation_representation` の五等号と表示の一意性。
+和・包含・右乗法の逆元保存と表示仕様だけから値の鎖を作る。
+負元の値が元の値の逆元であることは負元写像の仕様であり、
+係数の逆元表示を仮定しない。有限性・零・乗法全体の構造は不要。 -/
 theorem neg_representation_necSuf
-    {A K V : Type} (negA : A → A) (negK : K → K) (value : K → V)
-    (combine : A → A → V)
+    {A K V : Type*} [Neg A] [Neg V] [Add V]
+    (hNegAdd : ∀ z w : V, -(z + w) = -z + -w)
+    (embed : A → V) (hEmbedNeg : ∀ a : A, embed (-a) = -embed a)
+    (rightMul : V → V) (hRightMulNeg : ∀ z : V, rightMul (-z) = -rightMul z)
+    (negK : K → K) (value : K → V)
+    (hValueNeg : ∀ x : K, value (negK x) = -value x)
     (rep : K → A × A)
-    (hUnique : ∀ x : K, ∀ a b : A, value x = combine a b → rep x = (a, b))
-    (x : K)
-    (hneg : value (negK x) = combine (negA (rep x).1) (negA (rep x).2)) :
-    rep (negK x) = (negA (rep x).1, negA (rep x).2) := by
-  exact hUnique (negK x) (negA (rep x).1) (negA (rep x).2) hneg
+    (hSpec : ∀ x : K, value x = embed (rep x).1 + rightMul (embed (rep x).2))
+    (hUnique : ∀ x : K, ∀ a b : A,
+      value x = embed a + rightMul (embed b) → rep x = (a, b))
+    (x : K) :
+    rep (negK x) = (-(rep x).1, -(rep x).2) := by
+  let a : A := (rep x).1
+  let b : A := (rep x).2
+  have hneg : -value x = embed (-a) + rightMul (embed (-b)) := by
+    calc
+      -value x = -(embed a + rightMul (embed b)) := congrArg Neg.neg (hSpec x)
+      _ = -embed a + (-rightMul (embed b)) := hNegAdd _ _
+      _ = -embed a + rightMul (-embed b) :=
+        congrArg (-embed a + ·) (hRightMulNeg (embed b)).symm
+      _ = embed (-a) + rightMul (-embed b) :=
+        congrArg (· + rightMul (-embed b)) (hEmbedNeg a).symm
+      _ = embed (-a) + rightMul (embed (-b)) :=
+        congrArg (fun z : V => embed (-a) + rightMul z) (hEmbedNeg b).symm
+  calc
+    rep (negK x) = (-a, -b) :=
+      hUnique (negK x) (-a) (-b) ((hValueNeg x).trans hneg)
 
 end Ising2DLambda.NecSuf.FisherZero
