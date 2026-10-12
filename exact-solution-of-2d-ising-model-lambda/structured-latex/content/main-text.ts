@@ -36134,7 +36134,7 @@ b
                           "、積は ",
                           math(String.raw`\mathbb{Q}`),
                           " の積）。後のセクションの三分律で、表示の組 ",
-                          math(String.raw`(a,b)`),
+                          math(String.raw`(a,b)\in\mathbb{Q}\times\mathbb{Q}`),
                           " の符号が混合する場合（正錐 ",
                           ref("def_quadratic_positive_cone"),
                           " の第二条件・第三条件）を扱うとき、",

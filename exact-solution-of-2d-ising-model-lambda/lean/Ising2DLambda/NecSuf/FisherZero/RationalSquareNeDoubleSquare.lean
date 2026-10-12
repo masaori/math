@@ -1,31 +1,50 @@
 /-
-「有理数の平方は二倍の平方にならない」の六段の鎖だけを残した必要十分版。
-逆元を持つ体は要求せず、着目する b の右逆元と、鎖で実際に使う二つの並べ替えだけを要求する。
+「有理数の平方は二倍の平方にならない」の十七等号に対応する必要十分版。
+加法・順序・体構造は用いない。乗法の結合則は括弧の移動に、二つの可換性は
+binv と a、および b と binv の交換だけに使う。b の右逆元と二つの単位元則は
+鎖の末尾の四等号で使う。two は平方にならない指定元であり、数の 2 とは限らない。
 -/
 import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 
-/-- 六段の鎖と終点での平方の非二性だけを要求する。 -/
+/-- 本文と同じ十七等号を、途中の結論を仮定せずに導く。 -/
 theorem rational_square_ne_double_square_necSuf
     {A : Type} [Mul A] [One A]
     (two a b binv r : A)
     (hNoSquareTwo : ∀ q : A, q * q ≠ two)
     (hr : r = a * binv)
-    (hReorderA : (a * binv) * (a * binv) = (a * a) * (binv * binv))
-    (hReorderB : (two * (b * b)) * (binv * binv) =
-      two * ((b * binv) * (b * binv)))
+    (hAssoc : ∀ x y z : A, (x * y) * z = x * (y * z))
+    (hCommuteA : binv * a = a * binv)
+    (hCommuteB : b * binv = binv * b)
     (hInv : b * binv = 1)
-    (hOne : two * (1 * 1) = two) :
+    (hOneOne : (1 : A) * 1 = 1)
+    (hTwoOne : two * 1 = two) :
     a * a ≠ two * (b * b) := by
   intro hSquare
   apply hNoSquareTwo r
   calc
-    r * r = (a * binv) * (a * binv) := by rw [hr]
-    _ = (a * a) * (binv * binv) := hReorderA
-    _ = (two * (b * b)) * (binv * binv) := by rw [hSquare]
-    _ = two * ((b * binv) * (b * binv)) := hReorderB
-    _ = two * (1 * 1) := by rw [hInv]
-    _ = two := hOne
+    r * r = (a * binv) * (a * binv) := congrArg (fun q : A => q * q) hr
+    _ = a * (binv * (a * binv)) := hAssoc _ _ _
+    _ = a * ((binv * a) * binv) := congrArg (a * ·) (hAssoc _ _ _).symm
+    _ = a * ((a * binv) * binv) :=
+      congrArg (fun q : A => a * (q * binv)) hCommuteA
+    _ = a * (a * (binv * binv)) := congrArg (a * ·) (hAssoc _ _ _)
+    _ = (a * a) * (binv * binv) := (hAssoc _ _ _).symm
+    _ = (two * (b * b)) * (binv * binv) := congrArg (· * (binv * binv)) hSquare
+    _ = two * ((b * b) * (binv * binv)) := hAssoc _ _ _
+    _ = two * (b * (b * (binv * binv))) := congrArg (two * ·) (hAssoc _ _ _)
+    _ = two * (b * ((b * binv) * binv)) :=
+      congrArg (fun q : A => two * (b * q)) (hAssoc _ _ _).symm
+    _ = two * (b * ((binv * b) * binv)) :=
+      congrArg (fun q : A => two * (b * (q * binv))) hCommuteB
+    _ = two * (b * (binv * (b * binv))) :=
+      congrArg (fun q : A => two * (b * q)) (hAssoc _ _ _)
+    _ = two * ((b * binv) * (b * binv)) := congrArg (two * ·) (hAssoc _ _ _).symm
+    _ = two * (1 * (b * binv)) :=
+      congrArg (fun q : A => two * (q * (b * binv))) hInv
+    _ = two * (1 * 1) := congrArg (fun q : A => two * (1 * q)) hInv
+    _ = two * 1 := congrArg (two * ·) hOneOne
+    _ = two := hTwoOne
 
 end Ising2DLambda.NecSuf.FisherZero
