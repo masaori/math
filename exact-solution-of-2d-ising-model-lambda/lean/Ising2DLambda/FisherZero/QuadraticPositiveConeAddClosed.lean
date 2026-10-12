@@ -21,16 +21,24 @@ theorem quadraticPositiveCone_add_transfer
     (xi eta : QuadraticFieldElement s)
     (h : quadraticAddElement s eta xi ∈ quadraticPositiveCone s) :
     quadraticAddElement s xi eta ∈ quadraticPositiveCone s := by
+  let a : ℚ := (quadraticRepresentation s xi).1
+  let b : ℚ := (quadraticRepresentation s xi).2
+  let a' : ℚ := (quadraticRepresentation s eta).1
+  let b' : ℚ := (quadraticRepresentation s eta).2
+  have hrep : quadraticRepresentation s (quadraticAddElement s xi eta) =
+      quadraticRepresentation s (quadraticAddElement s eta xi) := by
+    calc
+      quadraticRepresentation s (quadraticAddElement s xi eta) = (a + a', b + b') :=
+        quadraticRepresentation_add s hs xi eta
+      _ = (a' + a, b + b') := congrArg (fun z : ℚ => (z, b + b')) (add_comm a a')
+      _ = (a' + a, b' + b) := congrArg (fun z : ℚ => (a' + a, z)) (add_comm b b')
+      _ = quadraticRepresentation s (quadraticAddElement s eta xi) :=
+        (quadraticRepresentation_add s hs eta xi).symm
   change quadraticCoefficientPositive
     (quadraticRepresentation s (quadraticAddElement s xi eta))
   change quadraticCoefficientPositive
     (quadraticRepresentation s (quadraticAddElement s eta xi)) at h
-  -- 本文の鎖: rep(ξ+η) = (a+a', b+b') = (a'+a, b'+b) = rep(η+ξ)
-  rw [quadraticRepresentation_add s hs xi eta]
-  rw [quadraticRepresentation_add s hs eta xi] at h
-  rw [add_comm (quadraticRepresentation s xi).1 (quadraticRepresentation s eta).1,
-    add_comm (quadraticRepresentation s xi).2 (quadraticRepresentation s eta).2]
-  exact h
+  exact hrep.symm ▸ h
 
 /-- `claim_quadratic_positive_cone_add_closed` の具体版。
 本文と同じ九通りの場合分けで、六補題と転送を当てる。 -/
@@ -52,19 +60,19 @@ theorem quadraticPositiveCone_add_mem
       exact quadraticPositive_add_of_nonnegative_negativeFirst s hs xi eta hxi1 heta3
   · rcases heta' with heta1 | heta2 | heta3
     · -- 負の第二係数条件と非負係数条件: 役割を入れ替えて転送
-      exact quadraticPositiveCone_add_transfer s hs xi eta
-        (quadraticPositive_add_of_nonnegative_negativeSecond s hs eta xi heta1 hxi2)
+      have hrev := quadraticPositive_add_of_nonnegative_negativeSecond s hs eta xi heta1 hxi2
+      exact quadraticPositiveCone_add_transfer s hs xi eta hrev
     · -- ともに負の第二係数条件
       exact quadraticPositive_add_of_negativeSecond_negativeSecond s hs xi eta hxi2 heta2
     · -- 負の第二係数条件と負の第一係数条件
       exact quadraticPositive_add_of_mixedSigns s hs xi eta hxi2 heta3
   · rcases heta' with heta1 | heta2 | heta3
     · -- 負の第一係数条件と非負係数条件: 役割を入れ替えて転送
-      exact quadraticPositiveCone_add_transfer s hs xi eta
-        (quadraticPositive_add_of_nonnegative_negativeFirst s hs eta xi heta1 hxi3)
+      have hrev := quadraticPositive_add_of_nonnegative_negativeFirst s hs eta xi heta1 hxi3
+      exact quadraticPositiveCone_add_transfer s hs xi eta hrev
     · -- 負の第一係数条件と負の第二係数条件: 役割を入れ替えて転送
-      exact quadraticPositiveCone_add_transfer s hs xi eta
-        (quadraticPositive_add_of_mixedSigns s hs eta xi heta2 hxi3)
+      have hrev := quadraticPositive_add_of_mixedSigns s hs eta xi heta2 hxi3
+      exact quadraticPositiveCone_add_transfer s hs xi eta hrev
     · -- ともに負の第一係数条件
       exact quadraticPositive_add_of_negativeFirst_negativeFirst s hs xi eta hxi3 heta3
 

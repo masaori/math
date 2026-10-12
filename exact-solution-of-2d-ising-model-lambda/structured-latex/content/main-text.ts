@@ -39777,117 +39777,60 @@ A \cdot A &< 2 \cdot (B \cdot B)\quad(\because\ \text{上で示した平方の�
                         "Ising2DLambda.FisherZero.quadraticPositiveCone_add_mem_from_necSuf",
                       ],
                       statement: [
-                        paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          " を ", math(String.raw`s\cdot s=2`), " を満たす元とする。任意の ",
-                          math(String.raw`\xi,\eta\in P_s`), "（",
-                          ref("def_quadratic_positive_cone"),
-                          "）について、", math(String.raw`\xi+\eta\in P_s`),
-                          " である。ここで ", math(String.raw`+`), " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`), " の加法である。",
-                        ]),
+                        paragraph(["包含 ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`), "（", ref("def_algebraic_numbers"), "）を用いる。", math(String.raw`s\in\overline{\mathbb Q}`), " を ", math(String.raw`s\cdot s=\iota(2)`), " を満たす元とする。任意の ", math(String.raw`\xi,\eta\in P_s`), "（", ref("def_quadratic_positive_cone"), "）について、", math(String.raw`\xi+\eta\in P_s`), " である。ここで ", math(String.raw`+`), " は ", math(String.raw`\overline{\mathbb Q}`), " の加法である。"]),
                       ],
                       proof: [
-                        paragraph([
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`), "、",
-                          math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
-                          " と置く（", ref("def_quadratic_representation_map"), "）。",
-                          math(String.raw`\xi\in P_s`), " の定義（",
-                          ref("def_quadratic_positive_cone"),
-                          "）により、", math(String.raw`(a,b)`),
-                          " は非負係数条件・負の第二係数条件・負の第一係数条件の少なくとも一つを満たす。",
-                          math(String.raw`\eta\in P_s`), " により ", math(String.raw`(a',b')`),
-                          " も同様である。したがって条件の組み合わせは九通りであり、",
-                          "以下でそのすべてを尽くす。",
-                        ]),
-                        paragraph([
-                          "先に、", math(String.raw`\xi`), " と ", math(String.raw`\eta`),
-                          " の役割を入れ替える転送を準備する。表示は",
-                        ]),
+                        paragraph([math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`), "、", math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)\in\mathbb Q\times\mathbb Q`), " と置く（", ref("def_quadratic_representation_map"), "）。", ref("def_quadratic_positive_cone"), " により、各係数対は非負係数条件・負の第二係数条件・負の第一係数条件の少なくとも一つを満たす。以下で二つの係数対の九通りの組合せを尽くす。"]),
+                        paragraph(["先に ", math(String.raw`\xi`), " と ", math(String.raw`\eta`), " の役割を入れ替える転送を準備する。", ref("claim_quadratic_addition_mem"), " により ", math(String.raw`\xi+\eta,\eta+\xi\in Q_s`), " であり、表示は ", math(String.raw`\mathbb Q\times\mathbb Q`), " の中で次のように計算できる。"]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{rep}_s(\xi+\eta)
-&=(a+a',\ b+b')
-  &&\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr)\\
-&=(a'+a,\ b'+b)
-  &&\bigl(\because\ \mathbb{Q}\ \text{の加法の可換則を各成分に適用する}\bigr)\\
+&=(a+a',b+b')
+&&\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr)\\
+&=(a'+a,b+b')
+&&\bigl(\because\ \mathbb Q\text{ の加法の可換則を第一係数に適用}\bigr)\\
+&=(a'+a,b'+b)
+&&\bigl(\because\ \mathbb Q\text{ の加法の可換則を第二係数に適用}\bigr)\\
 &=\mathrm{rep}_s(\eta+\xi)
-  &&\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr)
+&&\bigl(\because\ \blkref{claim_quadratic_addition_representation}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "と等しく、正錐への所属は表示だけで判定される（",
-                          ref("def_quadratic_positive_cone"),
-                          "）から、", math(String.raw`\eta+\xi\in P_s`), " ならば ",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。これを以下で「転送」と呼ぶ。",
-                        ]),
-                        list([
-                          [
-                            math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
-                            " がともに非負係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_nonnegative"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`),
-                            " が負の第二係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_nonnegative_negative_second"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`),
-                            " が負の第一係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_nonnegative_negative_first"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`),
-                            " が非負係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_nonnegative_negative_second"),
-                            " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
-                            " へこの順に適用して ", math(String.raw`\eta+\xi\in P_s`),
-                            " を得て、転送により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
-                            " がともに負の第二係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_negative_second_negative_second"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`),
-                            " が負の第一係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_mixed_signs"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`),
-                            " が非負係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_nonnegative_negative_first"),
-                            " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
-                            " へこの順に適用して ", math(String.raw`\eta+\xi\in P_s`),
-                            " を得て、転送により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`),
-                            " が負の第二係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_mixed_signs"),
-                            " を ", math(String.raw`\eta`), " と ", math(String.raw`\xi`),
-                            " へこの順に適用して ", math(String.raw`\eta+\xi\in P_s`),
-                            " を得て、転送により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                          [
-                            math(String.raw`(a,b)`), " と ", math(String.raw`(a',b')`),
-                            " がともに負の第一係数条件を満たす場合。",
-                            ref("claim_quadratic_positive_add_negative_first_negative_first"),
-                            " により ", math(String.raw`\xi+\eta\in P_s`), " である。",
-                          ],
-                        ]),
-                        paragraph([
-                          "九通りの場合を尽くして、いずれの場合も ",
-                          math(String.raw`\xi+\eta\in P_s`),
-                          " である。全過程は有理数の加法と順序、および代数的数の加法だけで閉じ、",
-                          "実数体も複素数体も現れない。",
-                        ]),
+                        paragraph(["正錐への所属は表示の三条件だけで決まるので、"]),
+                        displayMath(String.raw`\eta+\xi\in P_s\ \Longrightarrow\ \xi+\eta\in P_s
+\qquad\bigl(\because\ \text{上の表示の等号を }\blkref{def_quadratic_positive_cone}\text{ へ代入}\bigr).`),
+                        paragraph(["この含意を以下で転送と呼ぶ。"]),
+                        paragraph([math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`), " が非負係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_nonnegative}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`), " が負の第二係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_nonnegative_negative_second}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が非負係数条件、", math(String.raw`(a',b')`), " が負の第一係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_nonnegative_negative_first}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`), " が非負係数条件を満たす場合。"]),
+                        displayMath(String.raw`\eta+\xi\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_nonnegative_negative_second}\text{ を }\eta,\xi\text{ の順に適用}\bigr).`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \text{直前の所属へ上の転送を適用}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`), " が負の第二係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_negative_second_negative_second}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第二係数条件、", math(String.raw`(a',b')`), " が負の第一係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_mixed_signs}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`), " が非負係数条件を満たす場合。"]),
+                        displayMath(String.raw`\eta+\xi\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_nonnegative_negative_first}\text{ を }\eta,\xi\text{ の順に適用}\bigr).`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \text{直前の所属へ上の転送を適用}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`), " が負の第二係数条件を満たす場合。"]),
+                        displayMath(String.raw`\eta+\xi\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_mixed_signs}\text{ を }\eta,\xi\text{ の順に適用}\bigr).`),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \text{直前の所属へ上の転送を適用}\bigr).`),
+                        paragraph([math(String.raw`(a,b)`), " が負の第一係数条件、", math(String.raw`(a',b')`), " が負の第一係数条件を満たす場合。"]),
+                        displayMath(String.raw`\xi+\eta\in P_s
+\qquad\bigl(\because\ \blkref{claim_quadratic_positive_add_negative_first_negative_first}\bigr).`),
+                        paragraph(["九通りを尽くし、いずれの場合も ", math(String.raw`\xi+\eta\in P_s`), " を得た。全過程は有理数の加法と順序、および代数的数の加法だけで閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },
                 },
