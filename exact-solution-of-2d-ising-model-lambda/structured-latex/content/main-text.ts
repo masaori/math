@@ -7346,6 +7346,100 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_finite_permutation_minimal_period",
+        labels: [],
+        title: { text: "有限置換の正の最小周期" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_positive_return",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_permutation_positive_return",
+              title: { text: "有限置換の反復は正の回数で始点に戻る" },
+              labels: ["claim_finite_permutation_positive_return"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutation_positive_return",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjective_positive_return",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutation_positive_return_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-permutation-minimal-period"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と全単射 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), " を固定する。任意の始点 ", math(String.raw`i\in\mathcal J`), " に対し、ある ", math(String.raw`d\in\mathbb N`), " が存在して、"]),
+                displayMath(String.raw`0<d,\qquad \sigma^{[d]}(i)=i`),
+                paragraph(["となる。反復は ", ref("def_finite_map_iteration"), " による。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`N:=|\mathcal J|\in\mathbb N`), " と置く。", math(String.raw`k\in\{0,\ldots,N\}`), " に対して ", math(String.raw`v(k):=\sigma^{[k]}(i)\in\mathcal J`), " と定める（", ref("def_finite_map_iteration"), "）。これら ", math(String.raw`N+1`), " 個の値がすべて相異なると仮定する。このとき ", math(String.raw`v`), " は単射なので、有限集合の元を数えると、"]),
+                displayMath(String.raw`\begin{aligned}
+N+1&\le |\mathcal J|&&\bigl(\because\ \text{相異なる }N+1\text{ 個の値が }\mathcal J\text{ に属する}\bigr),\\
+|\mathcal J|&=N&&\bigl(\because\ N\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["となり、自然数の大小に反する。したがって相異なる二つの添字で値が一致する。小さい添字を ", math(String.raw`r`), "、大きい添字を ", math(String.raw`t`), " と書けば、"]),
+                displayMath(String.raw`r,t\in\{0,\ldots,N\},\qquad r<t,\qquad \sigma^{[t]}(i)=\sigma^{[r]}(i)`),
+                paragraph(["である。", math(String.raw`d:=t-r\in\mathbb N`), " と置くと、"]),
+                displayMath(String.raw`\begin{aligned}
+0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr),\\
+r+d&=t&&\bigl(\because\ r\le t\text{ と自然数の加減法}\bigr).
+\end{aligned}`),
+                paragraph(["反復の加法則を用い、一行ずつ書くと、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[r]}\bigl(\sigma^{[d]}(i)\bigr)
+&=\sigma^{[r+d]}(i)&&\bigl(\because\ \blkref{claim_finite_map_iterate_add}\bigr)\\
+&=\sigma^{[t]}(i)&&\bigl(\because\ r+d=t\bigr)\\
+&=\sigma^{[r]}(i)&&\bigl(\because\ \text{選んだ二つの反復値の一致}\bigr).
+\end{aligned}`),
+                paragraph(["両方の始点 ", math(String.raw`\sigma^{[d]}(i),i`), " は ", math(String.raw`\mathcal J`), " に属するから、"]),
+                displayMath(String.raw`\sigma^{[d]}(i)=i\qquad\bigl(\because\ \blkref{claim_finite_permutation_iterate_injective}\text{ を直前の等式に適用}\bigr)`),
+                paragraph(["を得る。これと ", math(String.raw`0<d`), " が主張の証人である。", math(String.raw`\mathcal J=\varnothing`), " の場合は始点を取れず、主張は全称命題として成り立つ。有限集合と自然数だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }, {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_minimal_period",
+            focus: {
+              kind: "definition",
+              id: "tools_definition_finite_permutation_minimal_period",
+              title: { text: "有限置換の始点ごとの正の最小周期" },
+              labels: ["def_finite_permutation_minimal_period"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjectiveMinimalPeriod",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjectiveMinimalPeriod_spec",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-permutation-minimal-period"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と全単射 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), "、始点 ", math(String.raw`i\in\mathcal J`), " に対し、正の帰還時刻の集合を、"]),
+                displayMath(String.raw`K_\sigma(i):=\{\,n\in\mathbb N\mid 0<n\ \text{かつ}\ \sigma^{[n]}(i)=i\,\}\subset\mathbb N`),
+                paragraph(["と定める（反復は ", ref("def_finite_map_iteration"), "）。直前の主張の証人 ", math(String.raw`d\in\mathbb N`), " について、"]),
+                displayMath(String.raw`d\in K_\sigma(i)\qquad\bigl(\because\ \blkref{claim_finite_permutation_positive_return}\text{ の正の帰還}\bigr)`),
+                paragraph(["なので、この集合は空でない。自然数の整列性によりその最小元が存在する。それを ", math(String.raw`p_\sigma(i):=\min K_\sigma(i)\in\mathbb N`), " と書き、始点 ", math(String.raw`i`), " の正の最小周期と呼ぶ。所属と最小性をそれぞれ書くと、"]),
+                displayMath(String.raw`\begin{aligned}
+0&<p_\sigma(i)&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の正値条件}\bigr),\\
+\sigma^{[p_\sigma(i)]}(i)&=i&&\bigl(\because\ p_\sigma(i)\in K_\sigma(i)\text{ の帰還条件}\bigr).
+\end{aligned}`),
+                paragraph(["さらに、任意の ", math(String.raw`n\in\mathbb N`), " について、"]),
+                displayMath(String.raw`0<n\ \text{かつ}\ \sigma^{[n]}(i)=i\quad\Longrightarrow\quad p_\sigma(i)\le n
+\qquad\bigl(\because\ n\in K_\sigma(i)\text{ と最小性}\bigr)`),
+                paragraph(["となる。周期は始点に付随する自然数である。ここでも実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_invariant_subset_reversal_orbit",
         labels: [],
         title: { text: "不変部分集合上の反転と軌道" },

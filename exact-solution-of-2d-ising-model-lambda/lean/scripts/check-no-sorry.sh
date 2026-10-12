@@ -52,6 +52,14 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutation_positive_return
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjective_positive_return
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjectiveMinimalPeriod
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.finiteInjectiveMinimalPeriod_spec
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutation_positive_return_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.finitePermutationMinimalPeriod_spec_from_necSuf
   Ising2DLambda.FisherZero.positiveRational_value_representation
   Ising2DLambda.NecSuf.FisherZero.embedded_coefficient_positive_necSuf
   Ising2DLambda.AlgebraicEigenvalue.finitePermutationIterate_injective
