@@ -70,10 +70,11 @@ $\xi\in P_s$、$\xi=0$、$-\xi\in P_s$ の少なくとも一つが成り立つ�
 既存統合検算も、主張1,458組・符号の場合分け729組・逆元表示1,458組・混合符号338組で通過した。
 Lean具体版・必要十分版・導出版の三モジュールのビルドも通過した。
 
+2026-10-12: 通常 CLI で統合検算と全18行別ファイルを単独起動し、全19本が通過した。
+16行1,794確認（等式1,456、不等式338）と、統合検算の主張1,458組・場合分け729組・逆元表示1,458組・混合符号338組を再確認した。
+背理仮定の代入二行には数値事例がなく、数値PASS件数に含めない。
+
 ## 実行方法
 
-プロジェクト直下で、読み込むファイルを `__file__` へ明示する。
-
-```sh
-sage -c "import glob; fs=sorted(glob.glob('sagemath/check/quadratic-trichotomy-at-least-one/check*.sage')); exec('for f in fs:\n    __file__ = f\n    load(f)')"
-```
+プロジェクト直下で `sage sagemath/check/quadratic-trichotomy-at-least-one/check.sage` を実行する。
+各 `check_*.sage` も同じ CLI で単独起動できる。
