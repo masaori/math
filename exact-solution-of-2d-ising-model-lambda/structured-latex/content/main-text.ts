@@ -40505,92 +40505,51 @@ q
                   habitat: "Qbar",
                   verification: ["sagemath/check/positive-cone-nat-mul"],
                   lean: [
+                    "Ising2DLambda.FisherZero.quadraticNatMulValue_spec",
+                    "Ising2DLambda.FisherZero.quadraticNatMulValue_spec_from_necSuf",
+                    "Ising2DLambda.FisherZero.quadraticNatMulElement_coe",
                     "Ising2DLambda.FisherZero.quadraticNatMulElement_zero_or_mem_positiveCone",
                     "Ising2DLambda.NecSuf.FisherZero.natIndexed_mul_zero_or_mem_necSuf",
                     "Ising2DLambda.FisherZero.quadraticNatMulElement_zero_or_mem_positiveCone_from_necSuf",
                   ],
                   statement: [
-                    paragraph([
-                      math(String.raw`s\in\overline{\mathbb{Q}}`),
-                      "（", ref("def_algebraic_numbers"), "）を ",
-                      math(String.raw`s\cdot s=2`),
-                      " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。任意の ",
-                      math(String.raw`\xi\in P_s`),
-                      "（", ref("def_quadratic_positive_cone"), "）と任意の ",
-                      math(String.raw`c\in\mathbb{N}`),
-                      " を取る。", math(String.raw`c`), " は鎖 ",
-                      math(String.raw`\mathbb{N}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
-                      "（", ref("def_algebraic_numbers"), " の第 1 条件）で ",
-                      math(String.raw`\overline{\mathbb{Q}}`),
-                      " の元として扱う。このとき積 ",
-                      math(String.raw`c\cdot\xi`),
-                      "（", math(String.raw`\overline{\mathbb{Q}}`), " の乗法）は ",
-                      math(String.raw`Q_s`),
-                      "（", ref("def_quadratic_field_set"), "）に属する。さらに、",
-                      math(String.raw`c=0`), " ならば ", math(String.raw`c\cdot\xi`),
-                      " は ", math(String.raw`\overline{\mathbb{Q}}`),
-                      " の零元であり、", math(String.raw`1\le c`),
-                      " ならば ", math(String.raw`c\cdot\xi\in P_s`), " である。",
-                    ]),
-                    paragraph([
-                      "この主張は、分配多項式の臨界点での値 ",
-                      math(String.raw`\sum_{m}\Omega_L(m)\,x_c^{m}`),
-                      " の各項を評価するとき、多重度 ",
-                      math(String.raw`\Omega_L(m)\in\mathbb{N}`),
-                      " が零の項と正の項を分けて扱う根拠として繰り返し使う。",
-                    ]),
+                    paragraph([math(String.raw`s\in\overline{\mathbb Q}`), "（", ref("def_algebraic_numbers"), "）を ", math(String.raw`s\cdot s=\iota(2)`), " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。ここで ", math(String.raw`\nu:\mathbb N\hookrightarrow\mathbb Q`), " と ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`), " は自然数と有理数の包含である。任意の ", math(String.raw`\xi\in P_s`), "（", ref("def_quadratic_positive_cone"), "、したがって ", math(String.raw`\xi\in Q_s`), "）と ", math(String.raw`c\in\mathbb N`), " に対し、"]),
+                    displayMath(String.raw`\iota(\nu(c))\cdot\xi\in Q_s.`),
+                    paragraph(["さらに、", math(String.raw`c=0`), " ならこの積は ", math(String.raw`\overline{\mathbb Q}`), " の零元であり、", math(String.raw`1\le c`), " なら ", math(String.raw`\iota(\nu(c))\cdot\xi\in P_s`), " である。積は ", math(String.raw`\overline{\mathbb Q}`), " の乗法、台集合は ", ref("def_quadratic_field_set"), " の意味である。異なる集合の零を ", math(String.raw`0_{\mathbb N},0_{\mathbb Q},0_{\overline{\mathbb Q}}`), " と書き分ける。"]),
+                    paragraph(["この主張は、分配多項式の臨界点での値 ", math(String.raw`\sum_m\Omega_L(m)x_c^m`), " の各項を評価するとき、多重度 ", math(String.raw`\Omega_L(m)\in\mathbb N`), " が零の項と正の項を分けて扱う根拠として使う。"]),
                   ],
                   proof: [
-                    paragraph([
-                      math(String.raw`c=0`), " の場合と ",
-                      math(String.raw`1\le c`),
-                      " の場合に分ける（自然数の順序では他の場合はない）。",
-                    ]),
-                    paragraph([
-                      math(String.raw`c=0`), " の場合。",
-                    ]),
+                    paragraph([math(String.raw`c=0_{\mathbb N}`), " と ", math(String.raw`1\le c`), " の場合に分ける。自然数の順序では、この二つで全場合を尽くす。"]),
+                    paragraph([math(String.raw`c=0_{\mathbb N}`), " の場合。まず積の値は、"]),
                     displayMath(String.raw`\begin{aligned}
-c\cdot\xi
-&=0\cdot\xi
-&&\bigl(\because\ c=0\bigr)\\
-&=0
-&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の零元との積}\bigr)\\
-0
-&=0+0\cdot s
-&&\bigl(\because\ \mathbb{Q}\ \text{と}\ \overline{\mathbb{Q}}\ \text{の四則}\bigr)\\
-0
-&\in Q_s
-&&\bigl(\because\ (0,0)\in\mathbb{Q}\times\mathbb{Q},\ \blkref{def_quadratic_field_set}\bigr)
+\iota(\nu(c))\cdot\xi
+&=\iota(\nu(0_{\mathbb N}))\cdot\xi&&\bigl(\because\ c=0_{\mathbb N}\text{ の代入}\bigr)\\
+&=\iota(0_{\mathbb Q})\cdot\xi&&\bigl(\because\ \nu\text{ は零を保つ}\bigr)\\
+&=0_{\overline{\mathbb Q}}\cdot\xi&&\bigl(\because\ \iota\text{ は零を保つ}\bigr)\\
+&=0_{\overline{\mathbb Q}}&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
 \end{aligned}`),
-                    paragraph([
-                      "したがって ", math(String.raw`c\cdot\xi=0\in Q_s`), " である。",
-                    ]),
-                    paragraph([
-                      math(String.raw`1\le c`), " の場合。",
-                    ]),
+                    paragraph(["次に零元が台集合に属することを、係数の組 ", math(String.raw`(0_{\mathbb Q},0_{\mathbb Q})\in\mathbb Q\times\mathbb Q`), " を用いて確かめる。"]),
                     displayMath(String.raw`\begin{aligned}
-c
-&>0
-&&\bigl(\because\ \mathbb{Q}\ \text{の順序で }0<1\le c\bigr)\\
-c
-&\in Q_s
-&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=c\text{ へ適用}\bigr)\\
-c
-&\in P_s
-&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=c\text{ へ適用}\bigr)\\
-c\cdot\xi
-&\in Q_s
-&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),\\
-c\cdot\xi
-&\in P_s
-&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\text{ を }c\in P_s\text{ と }\xi\in P_s\text{ へ適用}\bigr)
+0_{\overline{\mathbb Q}}
+&=0_{\overline{\mathbb Q}}+0_{\overline{\mathbb Q}}&&\bigl(\because\ \text{加法の単位元則}\bigr)\\
+&=0_{\overline{\mathbb Q}}+(0_{\overline{\mathbb Q}}\cdot s)&&\bigl(\because\ \text{零元との積}\bigr)\\
+&=\iota(0_{\mathbb Q})+(0_{\overline{\mathbb Q}}\cdot s)&&\bigl(\because\ \iota\text{ の零保存を第一項へ代入}\bigr)\\
+&=\iota(0_{\mathbb Q})+\iota(0_{\mathbb Q})\cdot s&&\bigl(\because\ \iota\text{ の零保存を第二項の係数へ代入}\bigr).
 \end{aligned}`),
-                    paragraph([
-                      "である。どちらの場合も ",
-                      math(String.raw`c\cdot\xi\in Q_s`),
-                      " が成り立つ。全過程は自然数の場合分け、有理数の四則と順序、",
-                      "および代数的数の積だけで閉じ、実数体も複素数体も現れない。",
-                    ]),
+                    displayMath(String.raw`\begin{aligned}
+0_{\overline{\mathbb Q}}&\in Q_s&&\bigl(\because\ \text{直前の表示と }\blkref{def_quadratic_field_set}\bigr),\\
+\iota(\nu(c))\cdot\xi&\in Q_s&&\bigl(\because\ \text{積の零への等式による所属の移し替え}\bigr).
+\end{aligned}`),
+                    paragraph(["これで零の場合の値と所属の両方を得た。", math(String.raw`1\le c`), " の場合は、"]),
+                    displayMath(String.raw`\begin{aligned}
+0_{\mathbb N}&<c&&\bigl(\because\ 0_{\mathbb N}<1\le c\text{ と順序の推移律}\bigr),\\
+0_{\mathbb Q}&<\nu(c)&&\bigl(\because\ \nu\text{ は自然数の狭義順序を保つ}\bigr),\\
+\iota(\nu(c))&\in Q_s&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=\nu(c)\text{ へ適用}\bigr),\\
+\iota(\nu(c))&\in P_s&&\bigl(\because\ \blkref{claim_positive_rational_in_positive_cone}\text{ を }q=\nu(c)\text{ へ適用}\bigr),\\
+\iota(\nu(c))\cdot\xi&\in Q_s&&\bigl(\because\ \blkref{claim_quadratic_multiplication_mem}\bigr),\\
+\iota(\nu(c))\cdot\xi&\in P_s&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_mul_closed}\text{ と二因子の正錐への所属}\bigr).
+\end{aligned}`),
+                    paragraph(["どちらの場合も積は台集合に属し、零の場合は零元、正の場合は正錐の元である。全過程は自然数の場合分け、有理数の四則と順序、代数的数の加法・乗法だけで閉じ、実数体も複素数体も現れない。"]),
                   ],
                 },
             },
