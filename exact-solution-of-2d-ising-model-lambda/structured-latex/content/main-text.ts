@@ -7290,6 +7290,62 @@ i\notin C&\ \Longrightarrow\ \rho^{[n]}(i)=\sigma^{[n]}(i).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_finite_permutation_iterate_injective",
+        labels: [],
+        title: { text: "有限置換の反復の単射性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_finite_permutation_iterate_injective",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_finite_permutation_iterate_injective",
+              title: { text: "有限置換の反復は単射である" },
+              labels: ["claim_finite_permutation_iterate_injective"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationIterate_injective",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.iterate_injective_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationIterate_injective_from_necSuf",
+              ],
+              verification: ["sagemath/check/finite-permutation-iterate-injective"],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J`), "（空集合も許す）と全単射 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), " を固定する。任意の ", math(String.raw`n\in\mathbb N`), " と二点 ", math(String.raw`i,j\in\mathcal J`), " について、", ref("def_finite_map_iteration"), " の反復は、"]),
+                displayMath(String.raw`\sigma^{[n]}(i)=\sigma^{[n]}(j)\quad\Longrightarrow\quad i=j`),
+                paragraph(["を満たす。すなわち、同じ回数だけ進めた二点が一致するなら、始点も一致する。これにより、反復の等式から両辺に共通する反復回数を取り消せる。"]),
+              ],
+              proof: [
+                paragraph([math(String.raw`n\in\mathbb N`), " について、すべての二点に対する含意を帰納法で示す。", math(String.raw`n=0`), " の場合、任意の ", math(String.raw`i,j\in\mathcal J`), " を取り、", math(String.raw`\sigma^{[0]}(i)=\sigma^{[0]}(j)`), " と仮定する。"]),
+                displayMath(String.raw`\begin{aligned}
+  i
+  &=\sigma^{[0]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)\\
+  &=\sigma^{[0]}(j)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr)\\
+  &=j&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+\end{aligned}`),
+                paragraph(["ある ", math(String.raw`n\in\mathbb N`), " で、含意がすべての二点について成り立つと仮定する。任意の ", math(String.raw`i,j\in\mathcal J`), " を取り、", math(String.raw`\sigma^{[n+1]}(i)=\sigma^{[n+1]}(j)`), " と仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+  \sigma^{[n]}\bigl(\sigma(i)\bigr)
+  &=\sigma^{[n+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
+  &=\sigma^{[n+1]}(j)&&\bigl(\because\ \text{二つの反復値が等しいという仮定}\bigr)\\
+  &=\sigma^{[n]}\bigl(\sigma(j)\bigr)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`\sigma(i),\sigma(j)\in\mathcal J`), " なので、この二点に帰納法の仮定を適用できる。"]),
+                displayMath(String.raw`\begin{aligned}
+  \sigma(i)&=\sigma(j)&&\bigl(\because\ \text{直前の等式と帰納法の仮定}\bigr),\\
+  i&=j&&\bigl(\because\ \text{全単射 }\sigma\text{ の単射性}\bigr).
+\end{aligned}`),
+                paragraph(["これで帰納法が閉じる。", math(String.raw`\mathcal J=\varnothing`), " の場合は二点を取れず、含意は全称命題として成り立つ。有限集合上の写像と自然数回の反復だけを用い、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_invariant_subset_reversal_orbit",
         labels: [],
         title: { text: "不変部分集合上の反転と軌道" },
