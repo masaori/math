@@ -2,7 +2,7 @@
 
 ## 概要
 
-各スピン構造 $(a,b)\in\mathcal S$ について、Kac--Ward 行列式 $D^{a,b}_L(x)=\det_x K^{a,b}(x)$（`def_kac_ward_determinants`）が符号付き偶部分グラフ多項式の平方 $(Q^{a,b}_L(x))^2$（`def_signed_even_subgraph_polynomial`）に等しいことを、任意の $L\ge1$ について $\overline{\mathbb Q}[x]$ の等式として証明する。その後、既存の `claim_signed_even_subgraph_sector_sum`・`claim_arf_fourier_sign_projection`・高温展開の恒等式と合成して、分配多項式を四つの行列式の定数項一の平方根の符号付き和として書く。
+各スピン構造 $(a,b)\in\mathcal S$ について、Kac--Ward 行列式 $D^{a,b}_L(x)=\det_x K^{a,b}(x)$（`def_kac_ward_determinants`）が符号付き偶部分グラフ多項式の平方 $(Q^{a,b}_L(x))^2$（`def_signed_even_subgraph_polynomial`）に等しいことを、任意の $L\ge1$ について $\overline{\mathbb Q}[x]$ の等式として証明する。その後、既存の `claim_signed_even_subgraph_sector_sum`・`claim_low_temperature_trivial_sector_expression` と合成して、低温変数のまま $Z_L=\frac12\sum_{(a,b)}Q^{a,b}_L$ と書く。
 
 ## 採用する経路（2026-10-03 の研究管理の決定）
 
@@ -32,12 +32,12 @@
    $$\operatorname{sgn}(\mathcal D)\prod_{\{i<j\}\in\mathcal D}\widehat K_{ij}=\operatorname{sgn}(\mathcal D_0)\prod_{\{i<j\}\in\mathcal D_0}\widehat K_{ij}\cdot\chi_{a,b}\bigl(h(P),v(P)\bigr)\,(-1)^{t(\mathcal D)}\,x^{|P(\mathcal D)|}$$
    を得る（$h(P),v(P)$ は $P(\mathcal D)$ の巻き付き偶奇。閉路族の巻き付き偶奇の和に等しい）。 ここで $t(\mathcal D)$ は、同じ頂点に置かれた二つの短い対 $\{\vec e,\vec f\}$、$\{\vec e',\vec f'\}$（始点が等しい）であって、どちらも逆向きの二辺の対（$\operatorname{dir}(\vec f)=\operatorname{dir}(\vec e)+2$。すなわち通過 $\iota(\vec e)\to\vec f$ が直進）であり、かつ軸 $\operatorname{ax}(\operatorname{dir}(\vec f))$ と $\operatorname{ax}(\operatorname{dir}(\vec f'))$ が異なる組の個数である（`def_transverse_crossing` を短い対の言葉で言い直したもの。次数 4 の頂点では三つの局所対合のうち一つだけがこれに当たり、$L=1$ の短い対 $\{\vec e,\iota(\vec e)\}$ も逆向きの二辺の対なので同じ規則で数える）。研究管理（2026-10-07）が、この定義でこの等式が辺長 1〜3・四つのスピン構造の全ての標識付きマッチング（辺長 3 で各 34,656 個）について成り立つことを、本文の定義どおりの $\mathbb Q(\zeta_8)[x]$ 上の厳密計算で確かめた（証明ではない）。
 8. **局所対合の符号付き和。** 各偶部分グラフ $P$ について $\sum_{\mathcal D:\,P(\mathcal D)=P}(-1)^{t(\mathcal D)}=1$。頂点ごとの積に分かれ、次数 4 の頂点では三つの対合のうち交差するものが一つで $1+1-1=1$、次数 2 では $1$、次数 0 では因子が無い。 研究管理（2026-10-07）が、辺長 1〜3 の全ての偶部分グラフについてこの和が $1$ で、$P$ 上の標識付きマッチングの個数が次数 4 の頂点の個数を $n_4$ として $3^{n_4}$ であることを確かめた。
-9. **平方恒等式の合成。** $\operatorname{Pf}(\widehat K^{a,b}(x))=c\cdot\sum_P\chi_{a,b}(h(P),v(P))x^{|P|}=c\,Q^{a,b}_L(x)$、$c=\pm1$ は $\mathcal D_0$ の項の符号（定数項）。 線型順序を $(e,d)\mapsto 2(e-1)+d$ の辞書式に取ると、$\mathcal D_0$ の各対 $\{(e,0),(e,1)\}$ は隣接する位置を占めるので $\operatorname{sgn}(\mathcal D_0)=1$ であり、長い対の成分は $\widehat K_{(e,0),(e,1)}=\zeta_8^{\,2}v_{(e,0)}u_{(e,1)}=\zeta_8^{\,2+r_4(\operatorname{dir}(e,0))-r_4(\operatorname{dir}(e,1))}=\zeta_8^{\,0}=1$（ねじれ偶奇は $(e,0)$ と $(e,1)$ で等しく打ち消し、$r_4(\operatorname{dir}(e,1))=r_4(\operatorname{dir}(e,0))+2$）なので、$c=1$ である。研究管理（2026-10-07）が $\operatorname{Pf}(\widehat K^{a,b}(x))=Q^{a,b}_L(x)$ と $\det K^{a,b}(x)=\det\widehat K^{a,b}(x)=\operatorname{Pf}(\widehat K^{a,b}(x))^2$ を辺長 1〜3・四つのスピン構造で厳密計算により確かめた（証明ではない）。よって $D^{a,b}_L(x)=\det\widehat K^{a,b}(x)=\operatorname{Pf}(\widehat K^{a,b}(x))^2=(Q^{a,b}_L(x))^2$。定数項一の形式的平方根（`claim_formal_square_root_unique`、`claim_formal_square_root_exists`）は $Q^{a,b}_L(x)$ 自身（$Q^{a,b}_L(0)=\chi_{a,b}(0,0)=1$）。最後に `claim_signed_even_subgraph_sector_sum`、`claim_arf_fourier_sign_projection`、高温展開の恒等式を合成して、分配多項式を四つの平方根の符号付き和として書く。
+9. **平方恒等式の合成。** $\operatorname{Pf}(\widehat K^{a,b}(x))=c\cdot\sum_P\chi_{a,b}(h(P),v(P))x^{|P|}=c\,Q^{a,b}_L(x)$、$c=\pm1$ は $\mathcal D_0$ の項の符号（定数項）。 線型順序を $(e,d)\mapsto 2(e-1)+d$ の辞書式に取ると、$\mathcal D_0$ の各対 $\{(e,0),(e,1)\}$ は隣接する位置を占めるので $\operatorname{sgn}(\mathcal D_0)=1$ であり、長い対の成分は $\widehat K_{(e,0),(e,1)}=\zeta_8^{\,2}v_{(e,0)}u_{(e,1)}=\zeta_8^{\,2+r_4(\operatorname{dir}(e,0))-r_4(\operatorname{dir}(e,1))}=\zeta_8^{\,0}=1$（ねじれ偶奇は $(e,0)$ と $(e,1)$ で等しく打ち消し、$r_4(\operatorname{dir}(e,1))=r_4(\operatorname{dir}(e,0))+2$）なので、$c=1$ である。研究管理（2026-10-07）が $\operatorname{Pf}(\widehat K^{a,b}(x))=Q^{a,b}_L(x)$ と $\det K^{a,b}(x)=\det\widehat K^{a,b}(x)=\operatorname{Pf}(\widehat K^{a,b}(x))^2$ を辺長 1〜3・四つのスピン構造で厳密計算により確かめた（証明ではない）。よって $D^{a,b}_L(x)=\det\widehat K^{a,b}(x)=\operatorname{Pf}(\widehat K^{a,b}(x))^2=(Q^{a,b}_L(x))^2$。定数項一の形式的平方根（`claim_formal_square_root_unique`、`claim_formal_square_root_exists`）は $Q^{a,b}_L(x)$ 自身（$Q^{a,b}_L(0)=\chi_{a,b}(0,0)=1$）。最後に `claim_signed_even_subgraph_sector_sum` の四ねじれ和が自明セクターの四倍になることと、`claim_low_temperature_trivial_sector_expression` の $Z_L=2G^{0,0}_L$ を合成し、$Z_L=\frac12\sum_{(a,b)}Q^{a,b}_L$ を得る。Arf 符号と双対変数への置換は使わない。
 
 ## 背景・前提
 
-- `claim_high_temperature_polynomial_identity`、`claim_high_temperature_sector_decomposition`、Kac--Ward の定義群、離散 Whitney 系の補題群に依存する。
-- トーラスで単一の平方根に置き換えない。四つのスピン構造の平方根の符号付き和である。
+- `claim_low_temperature_trivial_sector_expression`、`claim_signed_even_subgraph_sector_sum`、Kac--Ward の定義群、離散 Whitney 系の補題群に依存する。
+- トーラスで単一の平方根に置き換えない。四つのスピン構造の定数項一の平方根を、全て正の符号で足した和の半分である。
 - 着手前に対象プロジェクトの README、MEMORY、CLAUDE.md、`docs/context/` を読むこと。
 
 ## スコープ
@@ -59,6 +59,6 @@
 ## 完了条件
 
 - [ ] 任意の $L\ge1$ と四つのスピン構造について $D^{a,b}_L(x)=(Q^{a,b}_L(x))^2$ が一ステップ一定理で証明されている。
-- [ ] 四つの平方根の符号付き和が全巻き付きセクターを係数一で数え、分配多項式に一致することが証明されている。
+- [ ] 四つの平方根の和の半分が自明巻き付きセクターを係数二で数え、分配多項式に一致することが証明されている。
 - [ ] 単一行列式で済む平面公式との混同がない。
 - [ ] 各節に SageMath（円分体上の厳密計算）と Lean 二版が付き、`npm run gen`、`npm run check`、`validate-content.ts`、`verify-no-lost-proofs.ts`、`verify-check-linkage.ts`、PDF build、`lake build`、`check-no-sorry.sh` が通る。

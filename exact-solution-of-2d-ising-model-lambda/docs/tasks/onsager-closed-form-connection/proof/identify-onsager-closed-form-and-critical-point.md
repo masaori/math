@@ -7,9 +7,9 @@
 ## 到達すべき式（2026-10-09 の研究管理の決定）
 
 前段の積分を本文の規約で正規化すると、$q\in\mathbb Q_{(0,1)}$ について
-$$\rho_{\mathbb R}\bigl(\phi(q)\bigr)=\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\Bigl[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\Bigr]d\theta_1\,d\theta_2$$
-（$\phi(q)$ は `def_periodic_free_energy_density_le_one` の密度）。Onsager の形との対応は、代数的略記 $\cosh2K:=(1+q^2)/(2q)$、$\sinh2K:=(1-q^2)/(2q)$（[分散因子の指示書](compute-square-lattice-dispersion-factor.md)）で被対数を $4q^2\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]$ と書き直して
-$$\rho_{\mathbb R}\bigl(\phi(q)\bigr)=\log2+\log q+\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]d\theta_1\,d\theta_2 .$$
+$$f^{\mathrm{per}}(q)=\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\Bigl[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\Bigr]d\theta_1\,d\theta_2$$
+（$f^{\mathrm{per}}(q)\in\mathbb R$ は `def_periodic_free_energy_density_le_one` の密度で、既に実数である）。Onsager の形との対応は、代数的略記 $\cosh2K:=(1+q^2)/(2q)$、$\sinh2K:=(1-q^2)/(2q)$（[分散因子の指示書](compute-square-lattice-dispersion-factor.md)）で被対数を $4q^2\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]$ と書き直して
+$$f^{\mathrm{per}}(q)=\log2+\log q+\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\bigl[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)\bigr]d\theta_1\,d\theta_2 .$$
 本文の $Z_L(x)=\sum_\sigma x^{m(\sigma)}$ は、物理の分配関数 $\sum_\sigma e^{K\sum_e\sigma\sigma'}$ と $\sum_e\sigma\sigma'=2L^2-2m(\sigma)$ により $x=e^{-2K}$ で $x^{-L^2}Z_L(x)$ の関係にあるので、右辺から $\log q$ を除いたものが Onsager の $-\beta f=\log2+\frac{1}{8\pi^2}\iint\log[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)]$ である。前因子の対応はこの一行で尽きる（$2^{L^2}$ も $(1+x)^{2L^2}$ も現れない。有限トーラス公式を低温変数のまま書いたため）。
 臨界点: 被対数の最小値は $\theta_1=\theta_2=0$ での $(1-2q-q^2)^2$ で、これが零になる条件が自己双対方程式 $\xi^2+2\xi-1=0$、正錐での唯一の根が $x_c=-1+s$（`claim_self_dual_positive_root_unique`）。非解析性は実数側で、積分の $q$ についての微分可能性の破れとして別ブロックで述べる。
 
@@ -28,7 +28,7 @@ $$\sup\rho_{\mathbb R}\bigl(A((\lambda_L)_{L\ge1})\bigr)=I .$$
 
 **同定への適用。** [四つのねじれが同じ熱力学極限を持つことを証明する](prove-twists-share-thermodynamic-limit.md) の $\Lambda$ の鎖 $\log\max_{(a,b)}|Q^{a,b}_L(q)|-2\ell_2\le\Phi_L(q)\le\log\max_{(a,b)}|Q^{a,b}_L(q)|+\ell_2$ を、$\Lambda_{\mathbb Q}$ へ埋め込んで $1/L^2$ 倍し（`claim_rational_log_order_group_nonneg_scalar_monotone`）、実現すると（単調性・有理数倍・`claim_log_order_group_realization_real_log`）
 $$\Bigl|\rho_{\mathbb R}\bigl(\Psi_L(q)\bigr)-\tfrac{1}{L^2}\log_{\mathbb R}\max_{(a,b)}|Q^{a,b}_L(q)|\Bigr|\le\frac{2\log_{\mathbb R}2}{L^2}.$$
-前段により右の項は四つとも同じ積分 $I_q$ へ収束するので $\rho_{\mathbb R}(\Psi_L(q))\to I_q$。橋を $(\lambda_L):=(\Psi_L(q))$、$I:=I_q$ で読めば $f^{\mathrm{per}}(q)=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))=I_q$ であり、これが「到達すべき式」の左辺 $\rho_{\mathbb R}(\phi(q))$ の意味である。
+前段により四つの正規化対数が同じ積分 $I_q$ へ収束し、その最大値も $I_q$ へ収束するので $\rho_{\mathbb R}(\Psi_L(q))\to I_q$。橋を $(\lambda_L):=(\Psi_L(q))$、$I:=I_q$ で読めば $f^{\mathrm{per}}(q)=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))=I_q$ であり、これが「到達すべき式」の左辺 $f^{\mathrm{per}}(q)$ の意味である。
 
 ## 背景・前提
 
