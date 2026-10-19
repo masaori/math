@@ -38,5 +38,5 @@
 - [ ] 全写像の定義域・終域と全行列の係数環・寸法が明示され、well-defined 性が証明されている。
 - [ ] 偏角・実指数を使わず `QQ(ζ₈)` 上の有限表として定義されている。
 - [ ] 一ステップ一定理、参照解決、住処宣言を満たす。
-- [ ] `npm run gen`, `npm run check`, `validate-content.ts`, `verify-no-lost-proofs.ts`, `verify-check-linkage.ts`, PDF build が通る。
+- [ ] `npm run gen`, `npm run check`, `validate-content.ts`, `verify-check-linkage.ts`, PDF build が通る。
 - [ ] SageMath と Lean は各後続タスクで行うことが本文と台帳に明記されている。

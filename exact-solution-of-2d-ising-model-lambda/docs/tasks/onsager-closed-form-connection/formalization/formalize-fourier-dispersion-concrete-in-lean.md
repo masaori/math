@@ -26,7 +26,7 @@
 
 ## 対象ファイル
 
-- `exact-solution-of-2d-ising-model-lambda/lean/IsingLambda/`
+- `exact-solution-of-2d-ising-model-lambda/lean/Ising2DLambda/`
 
 ## 完了条件
 

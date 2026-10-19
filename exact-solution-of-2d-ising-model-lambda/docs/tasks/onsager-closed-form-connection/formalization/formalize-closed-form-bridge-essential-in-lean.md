@@ -21,12 +21,13 @@
 
 ### 必要仮定の抽出
 
-- 具体版の依存を追跡し、有限積表示、境界差評価、連続性、Riemann 和収束、分散零条件を別々の仮定群にする。
+- 具体版の依存を追跡し、有限積表示、分配多項式と四ねじれの最大値の両側評価、連続性、Riemann 和収束、分散零条件を別々の仮定群にする。
 - 抽象定理から具体版を系として再導出する。
 
 ## 対象ファイル
 
-- `exact-solution-of-2d-ising-model-lambda/lean/IsingLambda/`
+- `exact-solution-of-2d-ising-model-lambda/lean/Ising2DLambda/NecSuf/`（必要十分版の本体）
+- `exact-solution-of-2d-ising-model-lambda/lean/Ising2DLambda/` の具体版と同じ章の `*FromNecSuf.lean`（具体版への導出版）
 
 ## 完了条件
 

@@ -61,4 +61,4 @@
 - [ ] 任意の $L\ge1$ と四つのスピン構造について $D^{a,b}_L(x)=(Q^{a,b}_L(x))^2$ が一ステップ一定理で証明されている。
 - [ ] 四つの平方根の和の半分が自明巻き付きセクターを係数二で数え、分配多項式に一致することが証明されている。
 - [ ] 単一行列式で済む平面公式との混同がない。
-- [ ] 各節に SageMath（円分体上の厳密計算）と Lean 二版が付き、`npm run gen`、`npm run check`、`validate-content.ts`、`verify-no-lost-proofs.ts`、`verify-check-linkage.ts`、PDF build、`lake build`、`check-no-sorry.sh` が通る。
+- [ ] 各節に SageMath（円分体上の厳密計算）と Lean 二版が付き、`npm run gen`、`npm run check`、`validate-content.ts`、`verify-check-linkage.ts`、PDF build、`lake build`、`check-no-sorry.sh` が通る。

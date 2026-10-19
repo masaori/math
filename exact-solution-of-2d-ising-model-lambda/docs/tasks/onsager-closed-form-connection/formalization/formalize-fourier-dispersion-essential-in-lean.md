@@ -26,7 +26,8 @@
 
 ## 対象ファイル
 
-- `exact-solution-of-2d-ising-model-lambda/lean/IsingLambda/`
+- `exact-solution-of-2d-ising-model-lambda/lean/Ising2DLambda/NecSuf/`（必要十分版の本体）
+- `exact-solution-of-2d-ising-model-lambda/lean/Ising2DLambda/` の具体版と同じ章の `*FromNecSuf.lean`（具体版への導出版）
 
 ## 完了条件
 
