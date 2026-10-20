@@ -4,7 +4,7 @@
 
 - **スコープ**: `onsager-closed-form-connection`
 - **タイトル**: 有限トーラスの分配多項式から Onsager 閉形式までの可算的導出
-- **概要**: 既存の分配多項式・高温展開・巻き付きセクター・熱力学極限を出発点に、トーラス上の四つの Kac--Ward 行列式、有限 Fourier 因数分解、分散因子、Riemann 和の極限を順に証明し、既存の周期境界自由エントロピー密度を Onsager 積分表示と同定する。有限系の全段は円分体を含む可算な代数世界に置き、実数への脱出は実対数・角への指数評価・連続極限だけに隔離する。
+- **概要**: 既存の分配多項式・高温展開・巻き付きセクター・熱力学極限を出発点に、トーラス上の四つの Kac--Ward 行列式、有限 Fourier 因数分解、分散因子、Riemann 和の極限を順に証明し、既存の周期境界自由エントロピー密度を Onsager 積分表示と同定する。有限系の全段は円分体を含む可算な代数世界に置き、実現写像の存在を可算側の上下界から証明し、実数・複素数への脱出を実現写像・実対数・角への指数評価・連続極限の各段で明示する。
 
 ## 依存状況
 
@@ -40,7 +40,8 @@ graph TD
   kwleanessential --> product
   dispersionleanessential --> product
   product --> twists[可算側で分配多項式と四ねじれの最大値を両側評価]
-  twists --> integral[有限モード和から積分へ実数脱出]
+  twists --> realization[実閉部分体の実現を構成しモード集合を再添字付け]
+  realization --> integral[有限モード和から積分へ実数脱出]
   integral --> onsager[既存の自由エントロピー密度を Onsager 閉形式と同定し臨界点へ接続]
   onsager --> finalleanconcrete[閉形式への橋の具体版を Lean で形式化]
   finalleanconcrete --> finalleanessential[閉形式への橋の必要十分版を Lean で形式化]
@@ -62,7 +63,7 @@ graph TD
 | `formalization/formalize-fourier-dispersion-essential-in-lean.md` | Lean 必要十分版 | 有限巡回移動の指標分解に必要な仮定を抽出 | Lean 具体版 | 不可 |
 | `proof/assemble-finite-volume-closed-product.md` | 証明 | 四つの平方根の分岐・符号を固定し有限積公式を得る | Kac--Ward と分散の全検証 | 不可 |
 | `proof/prove-twists-share-thermodynamic-limit.md` | 証明 | 可算側で最大値との両側評価を示す | 有限積公式 | 不可 |
-| `proof/pass-from-mode-sums-to-integral.md` | 証明 | 実対数を導入し Riemann 和を積分へ送る | 有限積・正値性・両側評価 | 不可 |
+| `proof/pass-from-mode-sums-to-integral.md` | 証明 | 実現写像の存在・モードの全単射・実対数・Riemann 和 | 有限積・正値性・両側評価 | 不可 |
 | `proof/identify-onsager-closed-form-and-critical-point.md` | 証明 | 既存の極限を Onsager 積分と同定し自己双対点の特異性へ接続 | 積分極限 | 不可 |
 | `formalization/formalize-closed-form-bridge-concrete-in-lean.md` | Lean 具体版 | 有限積から既存の極限対象までを本文対応で形式化 | Onsager 同定 | 不可 |
 | `formalization/formalize-closed-form-bridge-essential-in-lean.md` | Lean 必要十分版 | 閉形式への接続に本質的な仮定を抽出 | Lean 具体版 | 不可 |

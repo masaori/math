@@ -179,7 +179,7 @@ Lean だけが未了なら `done` にせず `記述と SageMath まで` と書�
   四項の符号はすべて正である。各 $Q^{a,b}_L$ はモードの軌道ごとの明示積 $\prod_{|O|=1}\sqrt{\Delta_O}\prod_{|O|=2}\Delta_O\prod_{|O|=4}\Delta_O^2$ に等しく、
   $(0,1)$ で符号が変わる因子は $1-2x-x^2$（モード $(1,1)$。$Q^{0,0}_L$ にだけ現れる）だけである。
   極限の段は「ねじれ間の密度差の評価」ではなく、有理点 $q$ での両側評価 $\frac14\max_{(a,b)}|Q^{a,b}_L(q)|\le Z_L(q)\le2\max_{(a,b)}|Q^{a,b}_L(q)|$ を
-  可算側（実閉部分体 $R$ の順序、$\mathbb Q$、$\Lambda$）で閉じてから、実対数・1 の冪根の角への読み替え・Riemann 和の極限の三種類の脱出だけで積分へ移る。
+  可算側（実閉部分体 $R$ の順序、$\mathbb Q$、$\Lambda$）で閉じ、実現写像の存在を証明してから、実対数・モード集合の角への全単射・Riemann 和の極限で積分へ移る。実現写像の構成自体も脱出として明記する。`def_real_closed_realization` は条件付きデータの定義であり、存在定理ではない。固定した原始根の像を指定せず、モード集合全体の全単射で和を再添字付けする（指示書 `pass-from-mode-sums-to-integral.md`）。
   分散因子の正値性は $R$ の順序で示す（1 の冪根の逆元が共役であること、$2-\varpi-\varpi^{-1}$ が $R$ の二つの平方の和であること）。**$|\varpi|=1$ や $\cos$ を可算側で使わない。**
   臨界点より高温側 $q^2+2q-1>0$ は、双対な点 $t=\mathrm{KW}(q)$（$t^2+2t-1=-2(q^2+2q-1)(1+q)^{-2}<0$）へ移してから評価する。
   段の形は指示書 [assemble-finite-volume-closed-product.md](onsager-closed-form-connection/proof/assemble-finite-volume-closed-product.md)・

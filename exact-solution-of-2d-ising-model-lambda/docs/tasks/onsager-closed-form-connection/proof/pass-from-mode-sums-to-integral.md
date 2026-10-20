@@ -7,11 +7,11 @@
 ## 採用する形（2026-10-09 の研究管理の決定）
 
 前段（[四つのねじれが同じ熱力学極限を持つことを証明する](prove-twists-share-thermodynamic-limit.md)）で、全ての $q\in\mathbb Q_{(0,1)}$ について $\Lambda$ の鎖
-$\log\max_{(a,b)}|Q^{a,b}_L(q)|-2\ell_2\le\Phi_L(q)\le\log\max_{(a,b)}|Q^{a,b}_L(q)|+\ell_2$ が得られ、$|Q^{a,b}_L(q)|^2=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)$ で各因子は実閉部分体 $R$ で $>_R0$ である。ここで初めて実数体へ出る。脱出は次の三種類に限る。
+$\log\max_{(a,b)}|Q^{a,b}_L(q)|-2\ell_2\le\Phi_L(q)\le\log\max_{(a,b)}|Q^{a,b}_L(q)|+\ell_2$ が得られ、$|Q^{a,b}_L(q)|^2=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)$ で各因子は実閉部分体 $R$ で $>_R0$ である。ここで初めて実数体へ出る。まず以下の実現写像を構成し、その後の実対数・指数評価・連続極限を区別する。実現写像の構成も実数体への脱出として明記する。
 
 1. **実対数（脱出: 実対数）。** `def_real_closed_realization` の実現写像 $\rho_R:R\to\mathbb R$ で $\Delta(q;\varpi,\varsigma)\in R$ を正の実数へ送り、実対数を取る。
    $\frac{1}{L^2}\log_{\mathbb R}|Q^{a,b}_L(q)|=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_R\bigl(\Delta(q;\varpi,\varsigma)\bigr)$（実対数が積を和へ送る）。$L^{-2}\log_{\mathbb R}\max_{(a,b)}|Q^{a,b}_L(q)|$ と密度 $\Psi_L(q)$ の実現との差だけが $L^{-2}\cdot2\log_{\mathbb R}2$ 以下と分かる。各ねじれ個別についてこの誤差評価を仮定しない。
-2. **モードの角への読み替え（脱出: 指数評価）。** 1 の冪根の実現 $\zeta_{2L}\mapsto e^{\pi i/L}$ により、$\mathcal U_a$ の元 $\varpi$ は $\theta_1=2\pi(k+a/2)/L$（$k=0,\dots,L-1$）、$\mathcal W_b$ の元 $\varsigma$ は $\theta_2=2\pi(l+b/2)/L$ に対応し、$\rho_R(\varpi+\varpi^{-1})=2\cos\theta_1$、$\rho_R(\varsigma+\varsigma^{-1})=2\cos\theta_2$。
+2. **モードの角への読み替え（脱出: 指数評価）。** 下記の $\rho_{\mathbb C}$ は $\mathcal U_a$ を $\{e^{2\pi i(k+a/2)/L}:0\le k<L\}$ へ全単射で送る。$\mathcal W_b$ も同様である。この全単射で有限和を再添字付けすると、対応する角について $\rho_R(\varpi+\varpi^{-1})=2\cos\theta_1$、$\rho_R(\varsigma+\varsigma^{-1})=2\cos\theta_2$ となる。固定された原始根 $\zeta_{2L}$ の像を無条件に $e^{\pi i/L}$ と指定しない。
    よって和は、連続関数 $f_q(\theta_1,\theta_2):=\log\bigl[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\bigr]$ の、$[0,2\pi]^2$ 上の格子 $\{(2\pi(k+a/2)/L,\,2\pi(l+b/2)/L)\}$ にわたる Riemann 和の $\frac12$ 倍である。$f_q$ の連続性は、被対数が $(q^2+2q-1)^2>0$ 以上であること（正値性の分解の実現）による。
 3. **極限（脱出: 連続極限）。** 四つの格子は同じ周期関数の、原点を半格子ずらした Riemann 和であり、どれも同じ積分へ収束する:
    $$\lim_{L\to\infty}\frac{1}{L^2}\log_{\mathbb R}|Q^{a,b}_L(q)|=\frac{1}{2}\cdot\frac{1}{(2\pi)^2}\int_0^{2\pi}\!\!\int_0^{2\pi}f_q(\theta_1,\theta_2)\,d\theta_1\,d\theta_2\qquad((a,b)\in\mathcal S).$$
@@ -27,14 +27,24 @@ $\log\max_{(a,b)}|Q^{a,b}_L(q)|-2\ell_2\le\Phi_L(q)\le\log\max_{(a,b)}|Q^{a,b}_L
 
 ## スコープ
 
-正の物理領域での対数・連続性・Riemann 和極限を扱う。臨界点での非解析性の証明は次タスクへ分ける。
+実現写像の存在とモード集合の全単射、および正の物理領域での対数・連続性・Riemann 和極限を扱う。臨界点での非解析性の証明は次タスクへ分ける。
 
 ## 記号の帰属と ℝ 脱出の見込み
 
-- 分散因子までは `Qbar`、実対数を取った値、連続関数、Riemann 積分は `R` に住む。
-- `realEscape` は「実対数」「指数評価」「連続極限」の三種類を混ぜず、各ブロックで理由を宣言する。
+- 分散因子と有理数による挟み込みまでは `Qbar`、実現値・実対数・連続関数・Riemann 積分は `R`、複素実現と指数表示は `C` に住む（これらはスキーマの住処名で、実閉部分体 $R$ の記号とは区別する）。
+- `realEscape` は「実現写像の構成」「複素数と指数評価」「実対数」「連続極限」を混ぜず、各ブロックで理由を宣言する。
 
 ## 作業内容
+
+### 実現写像の存在とモード集合の対応
+
+`def_real_closed_realization` は実現データの形だけを定め、存在を主張しない。既存の条件付き定義を存在定理として使わない。次の三節を台帳の順に閉じる。
+
+- **実閉部分体の有理数による挟み込み。** 固定済みの $R\subset\overline{\mathbb Q}$ の元が有理係数多項式の根であることから、順序内での有理数による上下界を示す。多項式の先頭項と残余項の評価を明示し、Archimedes 性と任意精度の有理数の挟み込みを導く。この段は可算側に置く。
+- **実閉部分体の順序を保つ実現の構成。** $\rho_R(a):=\sup\{r\in\mathbb Q:r<_R a\}$（集合の元は包含で実数として読む）と定める。前節から上限の存在を示し、挟み込みで四則・単位元・狭義順序の保存、有理数上の一致、単射性を証明する。`def_real_closed_realization` の全条件を満たすことを結論にする。実数の完備性を使うこの節から脱出し、「実数体への脱出と熱力学極限」の章に置く。
+- **複素実現とモード集合の全単射。** `def_real_closed_subfield` の一意表示を使い、$\rho_{\mathbb C}(a+b\omega):=\rho_R(a)+i\rho_R(b)$ と定め、四則保存と単射性を示す。$\mathcal U_a$ の像が $z^L=(-1)^a$ の複素根全体になることを示す（像の包含・相異なる $L$ 元・複素側の $L$ 個の指数表示）。$\mathcal W_b$ も同じ論法で扱い、直積の全単射と有限和の再添字付けを明示する。複素数と指数評価への脱出を宣言する。
+
+三節とも本文の各行に根拠を付け、独立な Lean 具体版と必要十分版・導出版へ対応させる。SageMath の有限例は四則やモードの検算に限定し、上限の存在や実数極限の証明とは数えない。
 
 ### 対数化と Riemann 和
 
@@ -49,5 +59,6 @@ $\log\max_{(a,b)}|Q^{a,b}_L(q)|-2\ell_2\le\Phi_L(q)\le\log\max_{(a,b)}|Q^{a,b}_L
 ## 完了条件
 
 - [ ] 有限モード和から積分まで全ての極限法則と前提がラベル参照されている。
-- [ ] `R` 脱出が実対数・指数評価・連続極限に限定されている。
+- [ ] 実現写像の存在とモード集合の全単射を証明し、固定原始根の像を仮定していない。
+- [ ] 実現写像の構成・複素数と指数評価・実対数・連続極限の脱出理由が明示されている。
 - [ ] 本文・SageMath linkage・Lean・PDF の全検証が通る。
