@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「離散 Whitney 系: トーラス上の閉歩道の回転数」の
 「閉歩道の回転位相積は循環総回転数の冪である」
 （`claim_closed_walk_rotation_phase`）の具体版。
 

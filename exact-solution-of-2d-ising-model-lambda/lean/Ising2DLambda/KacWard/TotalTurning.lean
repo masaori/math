@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の「回転位相は一歩の回転数の冪である」
+章「離散 Whitney 系: トーラス上の閉歩道の回転数」の「回転位相は一歩の回転数の冪である」
 （`claim_rotation_phase_as_turning_power`）と「回転位相の積は総回転数の冪である」
 （`claim_walk_rotation_phase_total_turning`）の具体版。
 

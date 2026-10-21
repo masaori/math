@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「反転対を含まない非後退置換の台は偶部分グラフである」
 （`claim_reversal_free_moved_support_even`）の具体版。
 

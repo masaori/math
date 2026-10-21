@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「行列式は非後退置換の位相表示の和である」
 （`claim_kac_ward_determinant_nonbacktracking_phase_sum`）の具体版。
 

@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「反転対を含まない非後退置換の軌道列は頂点単純な閉路族へ分かれる」
 （`claim_reversal_free_orbit_vertex_simple_decomposition`）の具体版。
 

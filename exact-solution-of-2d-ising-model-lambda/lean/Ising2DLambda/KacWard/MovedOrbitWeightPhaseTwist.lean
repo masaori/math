@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「動く軌道の遷移成分積は切断線偶奇の符号と回転位相の冪へ分かれる」
 （`claim_moved_orbit_weight_phase_twist`）の具体版。
 

@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「動く辺の軌道列は向き付き辺が相異なる閉じた非後退辺列である」の具体版。
 人手証明と 1 対 1 に対応する:
 - claim_permutation_power_return（鳩の巣による回帰の存在）= permutation_power_return

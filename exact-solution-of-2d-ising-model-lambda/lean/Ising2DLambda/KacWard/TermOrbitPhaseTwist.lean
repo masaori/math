@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「非後退置換の置換項は軌道ごとの符号と回転位相の冪の積である」
 （`claim_kac_ward_term_orbit_phase_twist_product`）の具体版。
 

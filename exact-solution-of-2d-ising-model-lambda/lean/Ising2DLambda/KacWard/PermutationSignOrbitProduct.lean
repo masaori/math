@@ -1,5 +1,5 @@
 /-
-章「トーラス上の Kac--Ward 行列式」の
+章「Kac--Ward 行列式の置換展開」の
 「置換符号は動く軌道の符号因子の積である」（`claim_permutation_sign_moved_orbit_product`）の具体版。
 
 人手証明と同じ順で進む。
