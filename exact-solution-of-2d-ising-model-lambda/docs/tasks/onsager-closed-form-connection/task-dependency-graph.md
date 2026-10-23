@@ -1,5 +1,7 @@
 # Onsager 閉形式への接続 — Task Dependency Graph
 
+平方根の対象は有限多項式に限定する。先に台帳の「定数項一の多項式平方根と一意性」で旧形式級数の可算性の誤記と依存を除く。平方根の存在は Kac--Ward の平方恒等式と軌道ごとの明示積が証人を与え、一意性だけをこの道具から引く。
+
 ## 概要
 
 - **スコープ**: `onsager-closed-form-connection`
@@ -26,6 +28,9 @@
 
 ```mermaid
 graph TD
+  polynomialroot[定数項一の多項式平方根の一意性を証明]
+  polynomialroot --> kw
+  polynomialroot --> product
   data[トーラスの向き付き辺・回転位相・四つのスピン構造を定義] --> kw[四つの Kac--Ward 行列式による有限トーラス公式を証明]
   kw --> kwcheck[Kac--Ward 公式を SageMath で厳密検算]
   kw --> kwleanconcrete[Kac--Ward 公式の具体版を Lean で形式化]
@@ -52,7 +57,7 @@ graph TD
 | ファイル | カテゴリ | 概要 | 依存先 | 並列可否 |
 |---|---|---|---|---|
 | `definition/define-torus-kac-ward-data.md` | 定義 | 向き付き辺、反転、回転位相、四つのねじれ行列 | 既存の有限トーラス | 不可 |
-| `proof/prove-torus-kac-ward-formula.md` | 証明 | 分配多項式を四平方根の和の半分で表す | Kac--Ward データ | 不可 |
+| `proof/prove-torus-kac-ward-formula.md` | 証明 | 分配多項式を四平方根の和の半分で表す | Kac--Ward データ・多項式平方根の一意性 | 不可 |
 | `verification/verify-kac-ward-formula-with-sagemath.md` | 検算 | 小さい格子で係数ごとに厳密検算 | トーラス版公式 | 可 |
 | `formalization/formalize-kac-ward-concrete-in-lean.md` | Lean 具体版 | 本文の有限和・行列式展開と一対一対応 | トーラス版公式 | 可 |
 | `formalization/formalize-kac-ward-essential-in-lean.md` | Lean 必要十分版 | 公式に必要な有限組合せ構造だけを抽出 | Lean 具体版 | 不可 |
@@ -61,7 +66,7 @@ graph TD
 | `verification/verify-fourier-and-dispersion-with-sagemath.md` | 検算 | ブロック対角化と小行列式を円分体上で検算 | 分散因子 | 可 |
 | `formalization/formalize-fourier-dispersion-concrete-in-lean.md` | Lean 具体版 | 本文の Fourier・小行列式計算と一対一対応 | 分散因子 | 可 |
 | `formalization/formalize-fourier-dispersion-essential-in-lean.md` | Lean 必要十分版 | 有限巡回移動の指標分解に必要な仮定を抽出 | Lean 具体版 | 不可 |
-| `proof/assemble-finite-volume-closed-product.md` | 証明 | 四つの平方根の分岐・符号を固定し有限積公式を得る | Kac--Ward と分散の全検証 | 不可 |
+| `proof/assemble-finite-volume-closed-product.md` | 証明 | 四つの平方根の分岐・符号を固定し有限積公式を得る | Kac--Ward と分散の全検証・多項式平方根の一意性 | 不可 |
 | `proof/prove-twists-share-thermodynamic-limit.md` | 証明 | 可算側で最大値との両側評価を示す | 有限積公式 | 不可 |
 | `proof/pass-from-mode-sums-to-integral.md` | 証明 | 実現写像の存在・モードの全単射・実対数・Riemann 和 | 有限積・正値性・両側評価 | 不可 |
 | `proof/identify-onsager-closed-form-and-critical-point.md` | 証明 | 既存の極限を Onsager 積分と同定し自己双対点の特異性へ接続 | 積分極限 | 不可 |

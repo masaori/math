@@ -2,7 +2,7 @@
 
 ## 概要
 
-分配多項式 $Z_L$ を、四つの符号付き偶部分グラフ多項式 $Q^{a,b}_L$（`def_signed_even_subgraph_polynomial`）の和として**低温変数 $x$ のまま**書き、平方恒等式（$Q^{a,b}_L$ は Kac--Ward 行列式の形式的平方根）と有限 Fourier 分解（行列式はモード積）を合わせて、$Z_L(x)$ を四つのモード積の平方根の和として明示する。各 $Q^{a,b}_L$ の $\overline{\mathbb Q}[x]$ での因数分解（軌道ごとの明示積）と、分散因子の自己双対性もここで扱う。
+分配多項式 $Z_L$ を、四つの符号付き偶部分グラフ多項式 $Q^{a,b}_L$（`def_signed_even_subgraph_polynomial`）の和として**低温変数 $x$ のまま**書き、平方恒等式（$Q^{a,b}_L$ は Kac--Ward 行列式の多項式平方根）と有限 Fourier 分解（行列式はモード積）を合わせて、$Z_L(x)$ を四つのモード積の平方根の和として明示する。各 $Q^{a,b}_L$ の $\overline{\mathbb Q}[x]$ での因数分解（軌道ごとの明示積）と、分散因子の自己双対性もここで扱う。
 
 ## 採用する形（2026-10-09 の研究管理の決定。辺長 1〜3 で厳密計算により確認済み。証明ではない）
 
@@ -17,8 +17,8 @@
    **平方恒等式にも Fourier 分解にも依存しない。** Arf 符号 $\eta_{a,b}$（`claim_arf_fourier_sign_projection`）、高温展開の前因子 $2^{L^2}$、
    双対変数 $\mathrm{KW}(x)$ への置換は、$H_L$ を四つの平方根で書くときに要るものであり、$Z_L$ には要らない。四項の符号はすべて $+$ である。
 2. **平方恒等式との合成。** 節 9 の $\operatorname{Pf}(\widehat K)=Q^{a,b}_L$ と $D^{a,b}_L=(Q^{a,b}_L)^2$、空集合の項から $Q^{a,b}_L(0)=1$、
-   `claim_kac_ward_determinant_constant_term_one`、`claim_formal_square_root_exists`・`claim_formal_square_root_unique` により、
-   $Q^{a,b}_L$ は $D^{a,b}_L$ の定数項 $1$ の形式的平方根 $\sqrt{D^{a,b}_L}\in\overline{\mathbb Q}[[x]]$ に一致する（多項式である）。
+   台帳の先頭で整備する多項式平方根の一意性により、
+   $Q^{a,b}_L$ は $D^{a,b}_L$ の定数項 $1$ の唯一の多項式平方根 $\sqrt{D^{a,b}_L}\in\overline{\mathbb Q}[x]$ である。存在の証人は $Q^{a,b}_L$ 自身であり、任意の形式的冪級数の存在定理は使わない。
    したがって $Z_L=\frac12\sum_{(a,b)\in\mathcal S}\sqrt{D^{a,b}_L}$。
 3. **Fourier 分解との合成。** $D^{a,b}_L=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(x;\varpi,\varsigma)$ を代入する。
 4. **軌道ごとの明示積（$\overline{\mathbb Q}[x]$ での因数分解）。** $\Delta(x;\varpi,\varsigma)$ は $\varpi+\varpi^{-1}$ と $\varsigma+\varsigma^{-1}$ だけで決まるので、
@@ -26,7 +26,7 @@
    $\Delta$ は一つの多項式 $\Delta_O$ に等しい。$|O|\in\{1,2,4\}$ であり、$|O|=1$ は $\varpi,\varsigma\in\{1,-1\}$ のときに限る。そのとき
    $$\Delta(x;1,1)=(1-2x-x^2)^2,\qquad \Delta(x;1,-1)=\Delta(x;-1,1)=(1+x^2)^2,\qquad \Delta(x;-1,-1)=(1+2x-x^2)^2 .$$
    よって $P^{a,b}_L:=\prod_{|O|=1}\sqrt{\Delta_O}\cdot\prod_{|O|=2}\Delta_O\cdot\prod_{|O|=4}\Delta_O^{\,2}$（$\sqrt{\Delta_O}$ は上の定数項 $1$ の多項式 $1-2x-x^2$, $1+x^2$, $1+2x-x^2$）は
-   $\overline{\mathbb Q}[x]$ の多項式で、$(P^{a,b}_L)^2=\prod_{\mathcal U_a\times\mathcal W_b}\Delta=D^{a,b}_L$ かつ定数項 $1$。形式的平方根の一意性から $Q^{a,b}_L=P^{a,b}_L$。
+   $\overline{\mathbb Q}[x]$ の多項式で、$(P^{a,b}_L)^2=\prod_{\mathcal U_a\times\mathcal W_b}\Delta=D^{a,b}_L$ かつ定数項 $1$。多項式平方根の一意性から $Q^{a,b}_L=P^{a,b}_L$。
    例: $Q^{0,0}_2=(1-2x-x^2)(1+2x-x^2)(1+x^2)^2$、$Q^{0,1}_2=\Delta(x;1,i)\,\Delta(x;-1,i)=1+14x^4+x^8$（$i^2=-1$）。
    この形が、有理点での各 $Q^{a,b}_L$ の符号を決める（[四つのねじれが同じ熱力学極限を持つことを証明する](prove-twists-share-thermodynamic-limit.md)）。
    $(0,1)$ で符号が変わりうる因子は $1-2x-x^2$ だけで、これはモード $(1,1)\in\mathcal U_0\times\mathcal W_0$ に由来し、$Q^{0,0}_L$ にだけ現れる。
@@ -51,7 +51,7 @@
 
 ## 記号の帰属と ℝ 脱出の見込み
 
-- 1・2 は $\mathbb Z[x]$、3・4・6 は $\overline{\mathbb Q}[x]$、5 は $\overline{\mathbb Q}(x)$ に住む。平方根は定数項 $1$ の形式的平方根（`def_sqrt_coefficient_recursion`）で固定する。実数への脱出はない。
+- 1・2 は $\mathbb Z[x]$、3・4・6 は $\overline{\mathbb Q}[x]$、5 は $\overline{\mathbb Q}(x)$ に住む。平方根は定数項 $1$ の多項式平方根（多項式の零因子が無いことからの一意性）で固定する。実数への脱出はない。
 
 ## 対象ファイル
 
