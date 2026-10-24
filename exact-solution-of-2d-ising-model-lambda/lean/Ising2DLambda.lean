@@ -1331,3 +1331,5 @@ import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairBijection
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairBijection
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.EmptyPfaffianDeterminant
 import Ising2DLambda.AlgebraicEigenvalue.EmptyPfaffianDeterminant
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairEntryProduct
+import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEntryProduct

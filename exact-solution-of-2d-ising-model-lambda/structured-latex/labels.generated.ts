@@ -156,6 +156,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_bijection",
   "claim_matching_pair_coloring_alternates",
   "claim_matching_pair_component_basepoint",
+  "claim_matching_pair_entry_product",
   "claim_matching_pair_even_orbit",
   "claim_matching_pair_first_recovery",
   "claim_matching_pair_orbit_exchange",

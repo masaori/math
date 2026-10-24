@@ -10869,6 +10869,59 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_entry_product",
+        labels: [],
+        title: { text: "偶数軌道の置換項の成分積を二色へ分ける" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_entry_product",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_entry_product",
+              title: { text: "マッチング対から作った置換の成分積は二色の成分積に分かれる" },
+              labels: ["claim_matching_pair_entry_product"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/matching-pair-entry-product"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairEntryProduct",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairEntryProduct_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairEntryProduct_from_necSuf",
+              ],
+              statement: [
+                paragraph(["線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）上の二つの完全マッチングの相手写像を ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), " とする。", ref("def_matching_pair_coloring"), " の第一色を ", math(String.raw`C:=C_{\tau,\upsilon}`), "、", ref("claim_matching_pair_permutation"), " の置換を ", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}`), " とし、任意の行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。このとき"]),
+                displayMath(String.raw`\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+=\left(\prod_{i\in C}A_{i,\tau(i)}\right)
+ \left(\prod_{i\in\mathcal J\setminus C}A_{i,\upsilon(i)}\right)
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。ここでは対の昇順化も符号比較も行わない。"]),
+              ],
+              proof: [
+                paragraph([ref("def_matching_pair_successor"), " により、各 ", math(String.raw`i\in C`), " では ", math(String.raw`\sigma(i)=\tau(i)`), "、各 ", math(String.raw`i\in\mathcal J\setminus C`), " では ", math(String.raw`\sigma(i)=\upsilon(i)`), " である。有限集合はこの二色の非交和だから、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+&=\left(\prod_{i\in C}A_{i,\sigma(i)}\right)
+  \left(\prod_{i\in\mathcal J\setminus C}A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \mathcal J=C\sqcup(\mathcal J\setminus C),\ \overline{\mathbb Q}[x]\text{ の可換性}\bigr)\\
+&=\left(\prod_{i\in C}A_{i,\tau(i)}\right)
+  \left(\prod_{i\in\mathcal J\setminus C}A_{i,\sigma(i)}\right)
+&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第一色の場合}\bigr)\\
+&=\left(\prod_{i\in C}A_{i,\tau(i)}\right)
+  \left(\prod_{i\in\mathcal J\setminus C}A_{i,\upsilon(i)}\right)
+&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では三つの積がいずれも空積の一であり、同じ等式が成り立つ。有限積だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
