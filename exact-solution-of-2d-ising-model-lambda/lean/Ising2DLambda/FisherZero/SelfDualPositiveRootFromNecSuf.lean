@@ -15,13 +15,11 @@ theorem selfDualRootPlus_mem_from_necSuf (s : Qbar) :
 theorem selfDualRootPlus_representation_from_necSuf (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     quadraticRepresentation s (selfDualRootPlus s) = (-1, 1) := by
-  let combine : ℚ → ℚ → QuadraticFieldElement s := fun a b =>
-    ⟨algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s, ⟨a, b, rfl⟩⟩
-  have h := Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf
-      combine (quadraticRepresentation s)
-      (fun x a b hx => quadraticRepresentation_eq s hs x a b (congrArg Subtype.val hx))
-      (-1) 1
-  simpa [combine, selfDualRootPlus] using h
+  exact Ising2DLambda.NecSuf.FisherZero.selfDualRootPlus_representation_necSuf
+    (algebraMap ℚ Qbar) s (quadraticRepresentation s (selfDualRootPlus s))
+    (quadraticRepresentation_spec s (selfDualRootPlus s))
+    (map_one (algebraMap ℚ Qbar)) (map_neg (algebraMap ℚ Qbar) (1 : ℚ))
+    (one_mul s) (quadraticRepresentationUnique s hs)
 
 theorem selfDualRootMinus_mem_from_necSuf (s : Qbar) :
     -1 - s ∈ quadraticFieldSet s := by

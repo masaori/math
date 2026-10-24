@@ -33,9 +33,21 @@ noncomputable def selfDualRootPlus (s : Qbar) : QuadraticFieldElement s :=
 theorem selfDualRootPlus_representation (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     quadraticRepresentation s (selfDualRootPlus s) = (-1, 1) := by
-  apply quadraticRepresentation_eq s hs (selfDualRootPlus s) (-1) 1
-  change -1 + s = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s
-  norm_num
+  let p : ℚ × ℚ := quadraticRepresentation s (selfDualRootPlus s)
+  have hvalue : algebraMap ℚ Qbar p.1 + algebraMap ℚ Qbar p.2 * s =
+      algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s := calc
+    _ = -1 + s := (quadraticRepresentation_spec s (selfDualRootPlus s)).symm
+    _ = (-(algebraMap ℚ Qbar 1)) + s :=
+      congrArg (fun x : Qbar => -x + s) (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + s :=
+      congrArg (fun x : Qbar => x + s) (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
+    _ = algebraMap ℚ Qbar (-1) + 1 * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x) (one_mul s).symm
+    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x * s)
+        (map_one (algebraMap ℚ Qbar)).symm
+  have hcoeff := quadraticRepresentationUnique s hs p.1 p.2 (-1) 1 hvalue
+  exact Prod.ext hcoeff.1 hcoeff.2
 
 /-- `claim_self_dual_root_minus_mem` の具体版。 -/
 theorem selfDualRootMinus_mem (s : Qbar) :

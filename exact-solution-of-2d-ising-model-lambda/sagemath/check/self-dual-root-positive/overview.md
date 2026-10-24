@@ -1,6 +1,6 @@
 # SageMath Check: 正の根の特定（x_c = −1+s）
 
-**対象ラベル**: `def_critical_point`, `claim_self_dual_root_plus_mem`
+**対象ラベル**: `def_critical_point`, `claim_self_dual_root_plus_mem`, `claim_self_dual_root_plus_representation`
 
 （同じ検証で `claim_self_dual_root_plus_mem`・`claim_self_dual_root_plus_representation`・
 `claim_self_dual_root_minus_mem`・`claim_self_dual_root_minus_representation`・
@@ -50,3 +50,26 @@ sage sagemath/check/self-dual-root-positive/check.sage
 ```
 
 2026-10-24: 本文の三所属・五等号・二所属と対応する行別10本を両平方根で個別に実行して通過した。既存の `check.sage` も両根と表示一意性98組の回帰検算を通過した。
+
+## 根 −1+s の表示の行別検算
+
+表示の係数対は、根の `QQbar` の値を両埋込みの二次数体へ逆変換して抽出する。期待する `(-1,1)` は抽出に使わず、表示一意性の行の右辺との比較だけに使う。包含写像を `j`、二つの体の一を `one_q` と `one_k` と書く。
+
+| ファイル | 本文の行 | 状態 | 件数 |
+|---|---|---|---|
+| `check_plus_rep_root_membership.sage` | 根の二次体への所属 | PASS | 2 |
+| `check_plus_rep_coefficient_membership.sage` | 表示の有理数対への所属 | PASS | 2 |
+| `check_plus_rep_reconstruction.sage` | 表示写像による値の復元 | PASS | 2 |
+| `check_plus_rep_map_one.sage` | 包含の一保存 | PASS | 2 |
+| `check_plus_rep_map_neg.sage` | 包含の負号保存 | PASS | 2 |
+| `check_plus_rep_unit_product.sage` | 左単位元の挿入 | PASS | 2 |
+| `check_plus_rep_map_one_product.sage` | 一の包含像への置換 | PASS | 2 |
+| `check_plus_rep_unique.sage` | 表示一意性による係数対の一致 | PASS | 2 |
+
+2026-10-24: 二所属・六等号を行別8本で両平方根について検算し、通過した。Lean の独立な具体版と必要十分版も、表示復元・包含保存・左単位元・係数一意性の同じ鎖に対応する。対応する具体版・必要十分版・導出版の Lean ビルドと、既存 `check.sage` の両根・一意性98組の回帰検算も通過した。
+
+```sh
+for f in sagemath/check/self-dual-root-positive/check_plus_rep_*.sage; do
+  sage "$f" || exit
+done
+```
