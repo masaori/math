@@ -1,8 +1,8 @@
-import os
+from pathlib import Path
 from itertools import combinations
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_dir = next(d / 'exact-solution-of-2d-ising-model-lambda/sagemath/check/sector-value-duality-at-self-dual-point' for d in (Path.cwd(), *Path.cwd().parents) if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/check/sector-value-duality-at-self-dual-point').is_dir())
+load(str(_dir.parent.parent / '_shared' / 'defs.sage'))
 
 R = PolynomialRing(ZZ, 'x')
 x = R.gen()

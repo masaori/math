@@ -154,6 +154,7 @@ export const ALL_LABELS = [
   "claim_low_temperature_trivial_sector_expression",
   "claim_matching_pair_coloring_alternates",
   "claim_matching_pair_component_basepoint",
+  "claim_matching_pair_even_orbit",
   "claim_matching_pair_orbit_exchange",
   "claim_matching_pair_orbit_separation",
   "claim_matching_pair_permutation",

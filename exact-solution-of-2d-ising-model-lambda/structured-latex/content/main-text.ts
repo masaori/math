@@ -10322,6 +10322,60 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_even_orbit",
+        labels: [],
+        title: { text: "二色の交替による構成した置換の軌道の偶数性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_even_orbit",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_even_orbit",
+              title: { text: "構成した置換の軌道は偶数長である" },
+              labels: ["claim_matching_pair_even_orbit"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-even-orbit"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation_even_orbit",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.even_of_color_flip",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation_even_orbit_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_coloring"), " の有限番号集合 ", math(String.raw`\mathcal J`), "（空でもよい）と第一色 ", math(String.raw`C_{\tau,\upsilon}`), "、", ref("claim_matching_pair_permutation"), " の置換 ", math(String.raw`\sigma_{\tau,\upsilon}`), " について、任意の ", math(String.raw`i\in\mathcal J`), " の軌道長は偶数である。"]),
+                displayMath(String.raw`\operatorname{len}_{\sigma_{\tau,\upsilon}}(i)\equiv0\pmod 2.`),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。この証明では ", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}\in\operatorname{Perm}(\mathcal J)`), "、", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`p:=p_\sigma(i)\in\mathbb N`), "、", math(String.raw`e_n:=\sigma^{[n]}(i)\in\mathcal J`), "（", math(String.raw`n\in\mathbb N`), "）と略す。", ref("def_finite_permutation_minimal_period"), " より ", math(String.raw`0<p`), " かつ ", math(String.raw`e_p=i`), " である。"]),
+                displayMath(String.raw`\begin{aligned}
+e_0&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
+e_{n+1}&=\sigma(e_n)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰と反復の可換性}\bigr),\\
+e_{n+1}\in C&\Longleftrightarrow e_n\notin C
+&&\bigl(\because\ \blkref{claim_matching_pair_successor_color}\bigr).
+\end{aligned}`),
+                paragraph(["自然数 ", math(String.raw`n`), " について帰納し、色が反復回数の偶奇で決まることを示す。零回では ", math(String.raw`e_0=i`), " である。", math(String.raw`n`), " 回で成り立つと仮定すると、一歩の色反転と自然数の偶奇の交替から ", math(String.raw`n+1`), " 回でも成り立つ。したがって任意の ", math(String.raw`n\in\mathbb N`), " で"]),
+                displayMath(String.raw`e_n\in C\quad\Longleftrightarrow\quad
+\bigl((n\bmod2=0)\Longleftrightarrow i\in C\bigr)
+\qquad\bigl(\because\ \text{反復回数についての帰納法}\bigr).`),
+                paragraph(["ここで ", math(String.raw`e_p=i`), " を代入する。", math(String.raw`i\in C`), " なら同値の両側が真になるため ", math(String.raw`p\bmod2=0`), " である。", math(String.raw`i\notin C`), " なら左側が偽になるため、右側も偽でなければならず、やはり ", math(String.raw`p\bmod2=0`), " である。最後に"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{len}_\sigma(i)&=p
+&&\bigl(\because\ \blkref{claim_invariant_subset_reversal_orbit}\text{ の最小周期と軌道長の一致}\bigr),\\
+\operatorname{len}_\sigma(i)\bmod2&=0
+&&\bigl(\because\ p\bmod2=0\bigr).
+\end{aligned}`),
+                paragraph(["空集合では始点がなく、全称命題として成立する。有限集合と自然数の偶奇だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -43094,7 +43148,13 @@ H^{a,b}_L(\xi)
 &&\bigl(\because\ s^2=2\ne0\bigr)
 \end{aligned}`),
                         paragraph([
-                          "以上と自己双対性を使って、セクター双対関係へ ",
+                          "また、",
+                          ref("def_critical_point"), " の不動点性により",
+                        ]),
+                        displayMath(String.raw`\mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}
+\qquad\bigl(\because\ \blkref{def_critical_point}\text{ の自己双対性}\bigr).`),
+                        paragraph([
+                          "以上を使って、セクター双対関係へ ",
                           math(String.raw`\xi=x_{\mathrm{sd}}`), " を代入する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
@@ -43102,7 +43162,7 @@ H^{a,b}_L(x_{\mathrm{sd}})
 &=(1+x_{\mathrm{sd}})^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(x_{\mathrm{sd}}))
 &&\bigl(\because\ \blkref{claim_sector_value_duality_at_algebraic_point}\bigr)\\
 &=(1+x_{\mathrm{sd}})^{2L^2}\cdot G^{a,b}_L(x_{\mathrm{sd}})
-&&\bigl(\because\ \blkref{def_critical_point}\text{ の自己双対性}\bigr)
+&&\bigl(\because\ \mathrm{KW}(x_{\mathrm{sd}})=x_{\mathrm{sd}}\bigr)
 \end{aligned}`),
                         paragraph(["を得る。全過程は代数的数と有限和の中で閉じ、実数体も複素数体も現れない。"]),
                       ],
