@@ -6,6 +6,21 @@ import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 
+/-- 本文の表示を同じ五等号で構成する。体や加法の法則は不要であり、
+一とその負号の保存、および指定された s での左単位元だけを用いる。 -/
+theorem selfDualRootPlus_mem_necSuf
+    {A K : Type*} [One A] [Neg A] [One K] [Neg K] [Add K] [Mul K]
+    (j : A → K) (s : K) (hOne : j 1 = 1) (hNegOne : j (-1) = -(j 1))
+    (hOneMul : (1 : K) * s = s) :
+    ∃ a b : A, -1 + s = j a + j b * s := by
+  refine ⟨-1, 1, ?_⟩
+  calc
+    -1 + s = (-(1 : K)) + s := rfl
+    _ = (-(j 1)) + s := congrArg (fun x : K => -x + s) hOne.symm
+    _ = j (-1) + s := congrArg (fun x : K => x + s) hNegOne.symm
+    _ = j (-1) + 1 * s := congrArg (fun x : K => j (-1) + x) hOneMul.symm
+    _ = j (-1) + j 1 * s := congrArg (fun x : K => j (-1) + x * s) hOne.symm
+
 theorem represented_value_mem_necSuf
     {A K : Type} (combine : A → A → K) (a b : A) :
     ∃ a' b' : A, combine a b = combine a' b' := by

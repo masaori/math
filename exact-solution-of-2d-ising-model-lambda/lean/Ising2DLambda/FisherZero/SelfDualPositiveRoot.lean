@@ -14,8 +14,16 @@ theorem selfDualRootPlus_mem (s : Qbar) :
     -1 + s ∈ quadraticFieldSet s := by
   refine ⟨-1, 1, ?_⟩
   calc
-    -1 + s = algebraMap ℚ Qbar (-1) + s := by norm_num
-    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s := by simp
+    -1 + s = (-(1 : Qbar)) + s := rfl
+    _ = (-(algebraMap ℚ Qbar 1)) + s :=
+      congrArg (fun x : Qbar => -x + s) (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + s :=
+      congrArg (fun x : Qbar => x + s) (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
+    _ = algebraMap ℚ Qbar (-1) + 1 * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x) (one_mul s).symm
+    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar 1 * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x * s)
+        (map_one (algebraMap ℚ Qbar)).symm
 
 /-- 根 `-1+s` を `Q_s` の元として持ち上げる。 -/
 noncomputable def selfDualRootPlus (s : Qbar) : QuadraticFieldElement s :=

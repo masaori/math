@@ -8,9 +8,9 @@ open Ising2DLambda.AlgebraicEigenvalue
 theorem selfDualRootPlus_mem_from_necSuf (s : Qbar) :
     -1 + s ∈ quadraticFieldSet s := by
   change ∃ a b : ℚ, -1 + s = algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s
-  simpa using
-    (Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf
-      (fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) (-1) 1)
+  exact Ising2DLambda.NecSuf.FisherZero.selfDualRootPlus_mem_necSuf
+    (algebraMap ℚ Qbar) s (map_one (algebraMap ℚ Qbar))
+    (map_neg (algebraMap ℚ Qbar) (1 : ℚ)) (one_mul s)
 
 theorem selfDualRootPlus_representation_from_necSuf (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :

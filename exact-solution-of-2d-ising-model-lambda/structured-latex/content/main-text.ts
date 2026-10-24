@@ -41753,52 +41753,58 @@ x_c
                       verification: ["sagemath/check/self-dual-root-positive"],
                       lean: [
                         "Ising2DLambda.FisherZero.selfDualRootPlus_mem",
-                        "Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf",
+                        "Ising2DLambda.NecSuf.FisherZero.selfDualRootPlus_mem_necSuf",
                         "Ising2DLambda.FisherZero.selfDualRootPlus_mem_from_necSuf",
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（", ref("def_algebraic_numbers"), "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          "包含写像を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          "（", ref("def_algebraic_numbers"), "）と書く。",
+                          math(String.raw`s\in\overline{\mathbb Q}`), " を ",
+                          math(String.raw`s\cdot s=\iota(2_{\mathbb Q})`),
                           " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
-                          math(String.raw`-1+s`),
-                          "（", math(String.raw`(-1)+s`),
-                          " を表す。", ref("claim_self_dual_quadratic_roots"),
-                          " と同じ記法）は ",
-                          math(String.raw`Q_s`),
-                          "（", ref("def_quadratic_field_set"), "）に属する。",
+                          "このとき ", math(String.raw`-1_{\overline{\mathbb Q}}+s`),
+                          "（", math(String.raw`(-1_{\overline{\mathbb Q}})+s`),
+                          " を表す。", ref("claim_self_dual_quadratic_roots"), " と同じ記法）は ",
+                          math(String.raw`Q_s`), "（", ref("def_quadratic_field_set"), "）に属する。",
                         ]),
                       ],
                       proof: [
                         paragraph([
-                          math(String.raw`\mathbb{Q}\subseteq\overline{\mathbb{Q}}`),
-                          " は部分体である（", ref("def_algebraic_numbers"),
-                          "）から、", math(String.raw`-1\in\mathbb{Q}`),
-                          "、", math(String.raw`1\in\mathbb{Q}`),
-                          " は ", math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元でもある。まず次の等式鎖を得る。",
+                          "有理数体の一を ", math(String.raw`1_{\mathbb Q}\in\mathbb Q`),
+                          "、代数的数の体の一を ", math(String.raw`1_{\overline{\mathbb Q}}\in\overline{\mathbb Q}`),
+                          " と区別する。包含写像は一と負号を保つ（", ref("def_algebraic_numbers"),
+                          "）。まず係数の所属を記す。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
--1+s
-&=(-1)+s
-&&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
-&=(-1)+1\cdot s
-&&\bigl(\because\ \text{単位元との積}\ 1\cdot s=s\bigr)
+1_{\mathbb Q}&\in\mathbb Q
+&&\bigl(\because\ \mathbb Q\text{ の単位元}\bigr),\\
+-1_{\mathbb Q}&\in\mathbb Q
+&&\bigl(\because\ \mathbb Q\text{ の加法逆元による閉性}\bigr),\\
+(-1_{\mathbb Q},1_{\mathbb Q})&\in\mathbb Q\times\mathbb Q
+&&\bigl(\because\ \text{直積の定義と上の二所属}\bigr).
 \end{aligned}`),
+                        paragraph(["次に代数的数の体の中で、"]),
                         displayMath(String.raw`\begin{aligned}
-(-1,1)
-&\in\mathbb Q\times\mathbb Q
-&&\bigl(\because\ -1\in\mathbb Q,\ 1\in\mathbb Q\bigr)\\
-&\Longrightarrow (-1)+1\cdot s\in Q_s
-&&\bigl(\because\ \blkref{def_quadratic_field_set}\bigr)\\
-&\Longrightarrow -1+s\in Q_s
-&&\bigl(\because\ -1+s=(-1)+1\cdot s\bigr).
+-1_{\overline{\mathbb Q}}+s
+&=(-1_{\overline{\mathbb Q}})+s
+&&\bigl(\because\ \text{記法}\ \blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&=(-\iota(1_{\mathbb Q}))+s
+&&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(-1_{\mathbb Q})+s
+&&\bigl(\because\ \iota\text{ の負号の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(-1_{\mathbb Q})+1_{\overline{\mathbb Q}}\cdot s
+&&\bigl(\because\ 1_{\overline{\mathbb Q}}\cdot s=s\text{ という左単位元則}\bigr)\\
+&=\iota(-1_{\mathbb Q})+\iota(1_{\mathbb Q})\cdot s
+&&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr).
 \end{aligned}`),
+                        displayMath(String.raw`\iota(-1_{\mathbb Q})+\iota(1_{\mathbb Q})\cdot s\in Q_s
+\qquad\bigl(\because\ \blkref{def_quadratic_field_set}\text{、係数対 }(-1_{\mathbb Q},1_{\mathbb Q})\bigr),`),
+                        displayMath(String.raw`-1_{\overline{\mathbb Q}}+s\in Q_s
+\qquad\bigl(\because\ \text{上の等式を所属へ代入}\bigr).`),
                         paragraph([
-                          "全過程は体 ",
-                          math(String.raw`\mathbb{Q}`), " と ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
+                          "全過程は体 ", math(String.raw`\mathbb Q`), " と ",
+                          math(String.raw`\overline{\mathbb Q}`),
                           " の四則の中で閉じ、実数体も複素数体も現れない。",
                         ]),
                       ],
