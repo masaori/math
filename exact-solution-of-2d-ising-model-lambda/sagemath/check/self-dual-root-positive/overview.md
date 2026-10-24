@@ -1,6 +1,6 @@
 # SageMath Check: 正の根の特定（x_c = −1+s）
 
-**対象ラベル**: `def_critical_point`, `claim_self_dual_root_plus_mem`, `claim_self_dual_root_plus_representation`, `claim_self_dual_root_plus_positive`
+**対象ラベル**: `claim_self_dual_positive_root_unique`, `def_critical_point`, `claim_self_dual_root_plus_mem`, `claim_self_dual_root_plus_representation`, `claim_self_dual_root_plus_positive`
 
 （同じ検証で `claim_self_dual_root_plus_mem`・`claim_self_dual_root_plus_representation`・
 `claim_self_dual_root_minus_mem`・`claim_self_dual_root_minus_representation`・
@@ -175,3 +175,22 @@ for p in sorted(Path("sagemath/check/self-dual-root-positive").glob("check*.sage
 初回実行は表示対の検算で未定義の `CartesianProduct` を呼んで停止した。既存と同じ `cartesian_product([QQ, QQ])` に直し、所属の検査内容を保って全対象を再実行した。
 
 2026-10-24: 新規14本を両平方根で検算し、28件すべて通過した。既存58本を含む全72本も通過し、統合検算の表示一意性98組を確認した。対応する Lean 具体版・必要十分版・導出版のビルドも通過した。有限検算は一般証明の代わりではない。
+
+## 正の根の一意性の行別検算
+
+両平方根それぞれについて自己双対多項式の根を `QQbar` で独立に求め、計四組を検査する。正錐の所属は二次数体への逆変換から得た有理係数で判定する。場合の仮定とその帰結は論理式として検査し、矛盾する第二の場合の前提を実在する証人として扱わない。
+
+| ファイル | 本文の行 | 状態 | 件数 |
+|---|---|---|---|
+| `check_unique_root_membership.sage` | 正錐の元の二次体への所属 | PASS | 4 |
+| `check_unique_equation.sage` | 自己双対方程式の仮定 | PASS | 4 |
+| `check_unique_root_cases.sage` | 二根による場合分け | PASS | 4 |
+| `check_unique_plus_case.sage` | 第一の場合の結論 | PASS | 4 |
+| `check_unique_minus_case.sage` | 第二の場合の等式 | PASS | 4 |
+| `check_unique_substitute_positive.sage` | 第二の場合の所属の代入 | PASS | 4 |
+| `check_unique_minus_not_positive.sage` | 負根の非所属 | PASS | 4 |
+| `check_unique_contradiction.sage` | 第二の場合と正錐所属の非両立 | PASS | 4 |
+| `check_unique_false_elimination.sage` | 矛盾する場合からの帰結 | PASS | 4 |
+| `check_unique_conclusion.sage` | 二つの場合を合わせた結論 | PASS | 4 |
+
+2026-10-24: 行別10本と既存72本（統合検算の表示一意性98組を含む）、計82本が通過した。独立 Lean 具体版・必要十分版・導出版の対象ビルドも通過した。等式による場合分けを一般の型と述語だけへ抽出し、体・順序を必要十分版の仮定に残していない。有限検算は一般証明の代わりではない。実行方法は上記の `check*.sage` 一括実行と同じ。

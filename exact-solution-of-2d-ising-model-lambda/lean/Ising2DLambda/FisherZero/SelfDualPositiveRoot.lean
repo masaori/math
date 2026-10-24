@@ -170,15 +170,22 @@ theorem selfDualPositiveRoot_unique {s xi : Qbar}
     (hquadratic : xi ^ 2 + 2 * xi - 1 = 0)
     (hpositive : (⟨xi, hxiMem⟩ : QuadraticFieldElement s) ∈ quadraticPositiveCone s) :
     xi = -1 + s := by
-  rcases (selfDualQuadratic_roots hs).mp hquadratic with hplus | hminus
-  · exact hplus
-  · have hSubtype : (⟨xi, hxiMem⟩ : QuadraticFieldElement s) = selfDualRootMinus s := by
+  -- 本文の所属は hxiMem と部分型の型で担う。二根を尽くす行。
+  have hroots : xi = -1 + s ∨ xi = -1 - s :=
+    (selfDualQuadratic_roots hs).mp hquadratic
+  rcases hroots with hplus | hminus
+  · -- 第一の場合の等式が結論そのものである。
+    exact hplus
+  · -- 第二の場合の等号を、正錐への所属に代入する。
+    have hSubtype : (⟨xi, hxiMem⟩ : QuadraticFieldElement s) = selfDualRootMinus s := by
       apply Subtype.ext
       exact hminus
-    have : selfDualRootMinus s ∈ quadraticPositiveCone s := by
-      rw [← hSubtype]
-      exact hpositive
-    exact (selfDualRootMinus_not_mem_positiveCone s hs this).elim
+    have hminusPositive : selfDualRootMinus s ∈ quadraticPositiveCone s :=
+      hSubtype ▸ hpositive
+    have hminusNotPositive : selfDualRootMinus s ∉ quadraticPositiveCone s :=
+      selfDualRootMinus_not_mem_positiveCone s hs
+    have hcontradiction : False := hminusNotPositive hminusPositive
+    exact hcontradiction.elim
 
 /-- `def_critical_point` の具体版。 -/
 noncomputable def criticalPoint (s : Qbar) : QuadraticFieldElement s := selfDualRootPlus s

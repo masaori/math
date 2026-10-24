@@ -68,6 +68,7 @@ theorem selfDualPositiveRoot_unique_from_necSuf {s xi : Qbar}
     (hquadratic : xi ^ 2 + 2 * xi - 1 = 0)
     (hpositive : (⟨xi, hxiMem⟩ : QuadraticFieldElement s) ∈ quadraticPositiveCone s) :
     xi = -1 + s := by
+  -- 正錐は二次体の部分型上なので、所属証拠を伴う述語として特殊化する。
   apply Ising2DLambda.NecSuf.FisherZero.positive_root_unique_necSuf
       (-1 + s) (-1 - s) xi
       (fun z => ∃ hz : z ∈ quadraticFieldSet s,

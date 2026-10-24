@@ -10165,6 +10165,114 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_permutation",
+        labels: [],
+        title: { text: "二色で相手写像を切り替えた写像の可逆性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_permutation",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_successor",
+                title: { text: "第一色から第一の相手へ進む写像" },
+                labels: ["def_matching_pair_successor"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor"],
+                statement: [
+                  paragraph([ref("def_matching_pair_coloring"), " の線型順序を持つ有限番号集合 ", math(String.raw`\mathcal J`), "、第一・第二の相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), " と第一色 ", math(String.raw`C_{\tau,\upsilon}\subseteq\mathcal J`), " を使い、写像を"]),
+                  displayMath(String.raw`\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J,\qquad
+\sigma_{\tau,\upsilon}(i):=
+  \begin{cases}
+    \tau(i)&i\in C_{\tau,\upsilon},\\
+    \upsilon(i)&i\notin C_{\tau,\upsilon}
+  \end{cases}
+\qquad(i\in\mathcal J)`),
+                  paragraph(["と定める。二つの場合は排他的で全体を覆い、どちらの値も ", math(String.raw`\mathcal J`), " に属する。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_predecessor",
+                title: { text: "第一色から第二の相手へ進む写像" },
+                labels: ["def_matching_pair_predecessor"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairPredecessor"],
+                statement: [
+                  paragraph([ref("def_matching_pair_successor"), " の記号を使い、写像を"]),
+                  displayMath(String.raw`\eta_{\tau,\upsilon}:\mathcal J\to\mathcal J,\qquad
+\eta_{\tau,\upsilon}(i):=
+  \begin{cases}
+    \upsilon(i)&i\in C_{\tau,\upsilon},\\
+    \tau(i)&i\notin C_{\tau,\upsilon}
+  \end{cases}
+\qquad(i\in\mathcal J)`),
+                  paragraph(["と定める。二つの場合は排他的で全体を覆い、どちらの値も ", math(String.raw`\mathcal J`), " に属する。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_permutation",
+              title: { text: "二色で相手を切り替えた二写像は互いに逆である" },
+              labels: ["claim_matching_pair_permutation"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-permutation"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor_inverse",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_inverse",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor_inverse_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_successor"), " と ", ref("def_matching_pair_predecessor"), " の二写像は互いに逆である。すなわち、任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\eta_{\tau,\upsilon}(\sigma_{\tau,\upsilon}(i))=i,\qquad
+\sigma_{\tau,\upsilon}(\eta_{\tau,\upsilon}(i))=i.`),
+                paragraph(["したがって ", math(String.raw`\sigma_{\tau,\upsilon}\in\operatorname{Perm}(\mathcal J)`), " であり、その逆写像は ", math(String.raw`\eta_{\tau,\upsilon}`), " である。"]),
+              ],
+              proof: [
+                paragraph(["この証明の中では ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J`), "、", math(String.raw`\eta:=\eta_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略す。任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`i\in C`), " か否かで場合分けする。まず ", math(String.raw`i\in C`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr),\\
+\upsilon(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\in C\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\eta(\sigma(i))&=\eta(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C\bigr)\\
+&=\tau(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ \tau(i)\notin C\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr),\\
+\sigma(\eta(i))&=\sigma(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ i\in C\bigr)\\
+&=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \upsilon(i)\notin C\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`i\notin C`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr),\\
+\tau(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\notin C\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\eta(\sigma(i))&=\eta(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C\bigr)\\
+&=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ \upsilon(i)\in C\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr),\\
+\sigma(\eta(i))&=\sigma(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_predecessor},\ i\notin C\bigr)\\
+&=\tau(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \tau(i)\in C\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr).
+\end{aligned}`),
+                paragraph(["両場合で二つの合成が恒等写像になるので、二写像は互いに逆である。空集合では全称条件が成り立ち、共有する対でも同じ計算を使う。有限番号集合とその写像だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -42614,48 +42722,45 @@ b&=-1&&\bigl(\because\ \blkref{claim_self_dual_root_minus_representation}\text{ 
                   ],
                   proof: [
                     paragraph([
-                      "根を尽くす主張を仮定へ適用すると、次の二つの場合で尽くされる。",
+                      math(String.raw`s,\xi\in\overline{\mathbb{Q}}`),
+                      " とし、主張の仮定を満たすものとする。正錐の所属は二次体の中で扱う。",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-\xi^2+2\xi-1
-&=0
+\xi&\in Q_s
+&&\bigl(\because\ \xi\in P_s,\ \blkref{def_quadratic_positive_cone}\bigr)\\
+\xi^2+2\xi-1&=0
 &&\bigl(\because\ \text{仮定}\bigr)\\
-&\Longrightarrow \xi=-1+s\ \text{または}\ \xi=-1-s
+&\xi=-1+s\ \lor\ \xi=-1-s
 &&\bigl(\because\ \blkref{claim_self_dual_quadratic_roots}\bigr)
 \end{aligned}`),
-                    paragraph([
-                      "二つの場合は別々の仮定なので場合分けする。",
-                    ]),
+                    paragraph(["二つの等式について場合分けする。"]),
                     list([
                       [
                         displayMath(String.raw`\begin{aligned}
-\xi
-&=-1+s
+\xi&=-1+s
 &&\bigl(\because\ \text{第一の場合の仮定}\bigr)
 \end{aligned}`),
                       ],
                       [
                         displayMath(String.raw`\begin{aligned}
-\xi
-&=-1-s
+\xi&=-1-s
 &&\bigl(\because\ \text{第二の場合の仮定}\bigr)\\
--1-s
-&\in P_s
-&&\bigl(\because\ \xi\in P_s\ \text{と}\ \xi=-1-s\bigr)\\
--1-s
-&\notin P_s
-&&\bigl(\because\ \blkref{claim_self_dual_root_minus_not_positive}\bigr)
+-1-s&\in P_s
+&&\bigl(\because\ \xi\in P_s\text{ に }\xi=-1-s\text{ を代入}\bigr)\\
+-1-s&\notin P_s
+&&\bigl(\because\ \blkref{claim_self_dual_root_minus_not_positive}\bigr)\\
+&\bot
+&&\bigl(\because\ \text{同じ所属命題とその否定}\bigr)\\
+\xi&=-1+s
+&&\bigl(\because\ \text{矛盾からの帰結}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "後二行は矛盾するので、第二の場合は起きない。",
-                        ]),
                       ],
                     ]),
-                    paragraph([
-                      "したがって第一の場合だけが残り、",
-                      math(String.raw`\xi=-1+s`),
-                      " である。全過程は代数的数の等式と有理数の順序の中で閉じ、実数体も複素数体も現れない。",
-                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\xi&=-1+s
+&&\bigl(\because\ \text{二つの場合の結論}\bigr)
+\end{aligned}`),
+                    paragraph(["代数的数の等式と正錐の所属だけで閉じ、実数体への脱出はない。"]),
                   ],
                 },
             },

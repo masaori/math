@@ -161,6 +161,9 @@ theorem not_positive_of_representation_necSuf
   · exact hSecond hsecond
   · exact hThird hthird
 
+/-- 二つの等式による場合分けと述語への代入だけを使う。
+体・順序・多項式は不要。二根の被覆、対象の所属、負根の非所属は、
+それぞれ場合分け、所属の移送、矛盾の導出に必要である。 -/
 theorem positive_root_unique_necSuf
     {K : Type} (rootPlus rootMinus x : K) (positive : K → Prop)
     (hroots : x = rootPlus ∨ x = rootMinus)
@@ -168,9 +171,10 @@ theorem positive_root_unique_necSuf
     x = rootPlus := by
   rcases hroots with hplus | hminusEq
   · exact hplus
-  · exfalso
-    apply hminus
-    rw [← hminusEq]
-    exact hxPositive
+  · -- 本文と同じく、所属の移送・非所属・矛盾の順に置く。
+    have hminusPositive : positive rootMinus := hminusEq ▸ hxPositive
+    have hminusNotPositive : ¬ positive rootMinus := hminus
+    have hcontradiction : False := hminusNotPositive hminusPositive
+    exact hcontradiction.elim
 
 end Ising2DLambda.NecSuf.FisherZero
