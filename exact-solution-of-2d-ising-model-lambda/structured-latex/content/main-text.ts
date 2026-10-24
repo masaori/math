@@ -44765,24 +44765,29 @@ z&=1&&\bigl(\because\ z\text{ の定義}\bigr)\\
                   proof: [
                     paragraph([
                       ref("def_real_closed_subfield"),
-                      " の第 2 条件（平方の三分法）を元 ",
-                      math(String.raw`z:=b-a`),
-                      " へ適用すると、第 1 の場合 ",
-                      math(String.raw`z=0`),
-                      " は ",
-                      math(String.raw`a=b`),
-                      "（移項）、第 2 の場合は ",
-                      math(String.raw`a<_{R}b`),
-                      "（",
-                      ref("def_real_algebraic_strict_order"),
-                      "）、第 3 の場合は ",
-                      math(String.raw`-z=a-b=w\cdot w`),
-                      " すなわち ",
-                      math(String.raw`b<_{R}a`),
-                      "（",
-                      ref("def_real_algebraic_strict_order"),
-                      "）にそれぞれ同値だからである。",
+                      " の部分体条件より ",
+                      math(String.raw`z:=b-a\in R`),
+                      " である。この ",
+                      math(String.raw`z`),
+                      " に同定義の第 2 条件を適用する。第 1 の場合は",
                     ]),
+                    displayMath(String.raw`\begin{aligned}
+z=0&\iff b-a=0&&\bigl(\because\ z=b-a\bigr)\\
+&\iff a=b&&\bigl(\because\ R\text{ の加法群の四則}\bigr).
+\end{aligned}`),
+                    paragraph(["第 2 の場合には零元でない ", math(String.raw`w\in R`), " が存在し、"]),
+                    displayMath(String.raw`\begin{aligned}
+b-a&=z&&\bigl(\because\ z=b-a\bigr),\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr),\\
+a&<_{R}b&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
+\end{aligned}`),
+                    paragraph(["第 3 の場合にも零元でない ", math(String.raw`w\in R`), " が存在し、"]),
+                    displayMath(String.raw`\begin{aligned}
+a-b&=-z&&\bigl(\because\ z=b-a,\ R\text{ の加法群の四則}\bigr),\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr),\\
+b&<_{R}a&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
+\end{aligned}`),
+                    paragraph([ref("def_real_algebraic_strict_order"), " により、", math(String.raw`a<_{R}b`), " の証人は第 2 の場合の証人となり、", math(String.raw`b<_{R}a`), " の証人は第 3 の場合の証人となる。", ref("def_real_closed_subfield"), " の第 2 条件は三つの場合の網羅性と排他性を与えるため、主張の三つの場合もちょうど一つだけ成り立つ。"]),
                     paragraph([
                       "この主張は場合分けの網羅性だけを与える。順序が加法・乗法と両立すること、および ",
                       math(String.raw`\mathbb{Q}`),
