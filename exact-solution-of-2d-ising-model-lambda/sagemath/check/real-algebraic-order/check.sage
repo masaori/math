@@ -5,10 +5,12 @@
 # モデル: R = AA（実代数的数体）。有限標本での検査であり、普遍量化された主張
 # そのものの証明ではない（主張の証明は本文の人手証明と Lean が担う）。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_shared = next(d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'
+               for d in (Path.cwd(), *Path.cwd().parents)
+               if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_shared))
 
 # 有理数のサンプル（零・正・負、整数・非整数）
 Q_SAMPLES = [QQ(0), QQ(1), QQ(-1), QQ(7), QQ(-4),

@@ -10752,6 +10752,66 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_bijection",
+        labels: [],
+        title: { text: "順序付き完全マッチング対と偶数軌道の置換の全単射" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_bijection",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_bijection",
+              title: { text: "順序付き完全マッチング対と偶数軌道の置換は一対一に対応する" },
+              labels: ["claim_matching_pair_bijection"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-bijection"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_evenColor_eq",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_bijection_left",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_bijection_right",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairEvenOrbitEquiv",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.equivalenceOfTwoSidedInverse",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairEvenOrbitEquiv_from_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.perfectMatchingPairEvenOrbitEquiv",
+              ],
+              statement: [
+                paragraph(["線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）を取る。", ref("def_finite_perfect_matching"), " の完全マッチングの順序付き対の集合を ", math(String.raw`\mathfrak P_{\mathcal J}`), "、全軌道長が偶数である ", math(String.raw`\operatorname{Perm}(\mathcal J)`), " の元の集合を ", math(String.raw`\mathfrak S_{\mathcal J}`), " とする。", ref("claim_perfect_matching_involution"), " により各マッチングの相手写像を ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), " と書く。写像"]),
+                displayMath(String.raw`F:\mathfrak P_{\mathcal J}\to\mathfrak S_{\mathcal J},
+\qquad (\mathcal D_\tau,\mathcal D_\upsilon)\longmapsto\sigma_{\tau,\upsilon}`),
+                paragraph(["は ", ref("claim_matching_pair_even_orbit"), " により定まる。逆向きの写像 ", math(String.raw`G:\mathfrak S_{\mathcal J}\to\mathfrak P_{\mathcal J}`), " は、", ref("def_even_orbit_coloring"), " の第一色から ", ref("def_alternating_neighbor_pairs"), " により二つの対の族を作る。このとき ", math(String.raw`F`), " と ", math(String.raw`G`), " は互いに逆である。"]),
+              ],
+              proof: [
+                paragraph(["まず ", math(String.raw`(\mathcal D_\tau,\mathcal D_\upsilon)\in\mathfrak P_{\mathcal J}`), " を固定し、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}`), " と置く。", ref("claim_matching_pair_reconstructed_orbit"), " により各点の置換軌道と二歩軌道の合併は同じ集合なので、最小元も一致する。", ref("def_even_orbit_coloring"), " と ", ref("def_matching_pair_coloring"), " の第一色はともにこの最小元を含む。さらに ", ref("claim_even_orbit_coloring"), " と ", ref("claim_matching_pair_successor_color"), " により、両方の色は ", math(String.raw`\sigma`), " の一歩ごとに反転する。軌道の最小元から順向きの反復回数に関する帰納法で"]),
+                displayMath(String.raw`C_\sigma=C_{\tau,\upsilon}
+\qquad\bigl(\because\ \blkref{claim_matching_pair_reconstructed_orbit},
+\ \blkref{claim_even_orbit_coloring},\ \blkref{claim_matching_pair_successor_color}\bigr).`),
+                paragraph(["この色の一致と ", ref("claim_matching_pair_first_recovery"), "、", ref("claim_matching_pair_second_recovery"), " を順に使うと、"]),
+                displayMath(String.raw`\begin{aligned}
+G(F(\mathcal D_\tau,\mathcal D_\upsilon))
+&=(\mathcal E_{\sigma,C_\sigma},\mathcal E_{\sigma^{-1},C_\sigma})
+&&\bigl(\because\ G\text{ の定義}\bigr)\\
+&=(\mathcal E_{\sigma,C_{\tau,\upsilon}},\mathcal E_{\sigma^{-1},C_{\tau,\upsilon}})
+&&\bigl(\because\ C_\sigma=C_{\tau,\upsilon}\bigr)\\
+&=(\mathcal D_\tau,\mathcal D_\upsilon)
+&&\bigl(\because\ \blkref{claim_matching_pair_first_recovery},
+\ \blkref{claim_matching_pair_second_recovery}\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`\sigma\in\mathfrak S_{\mathcal J}`), " を固定する。", ref("claim_matching_pair_reverse_permutation"), " を適用すると、"]),
+                displayMath(String.raw`F(G(\sigma))=\sigma
+\qquad\bigl(\because\ \blkref{claim_matching_pair_reverse_permutation}\bigr).`),
+                paragraph(["両方向の合成が恒等写像なので、", math(String.raw`F`), " は単射かつ全射である。", ref("claim_perfect_matching_involution"), " によるマッチングと相手写像の対応を使っても同じ結論である。空集合では写像の唯一性により両等号が成り立つ。長さ二の軌道と二つのマッチングが共有する対も、上の復元等号に含まれる。有限集合の反復だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -44413,75 +44473,25 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          math(String.raw`R`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
-                          ref("def_real_closed_subfield"),
-                          " の第 1 条件）。したがって ",
-                          math(String.raw`0\in R`),
-                          "、",
-                          math(String.raw`1\in R`),
-                          " であり、",
-                          math(String.raw`R`),
-                          " は加法・加法逆元・乗法・零元でない元の乗法逆元で閉じる（部分体の定義）。",
-                          "以下、自然数・整数・有理数の順に ",
-                          math(String.raw`R`),
-                          " への所属を示す。",
-                        ]),
-                        paragraph([
-                          "自然数。",
-                          math(String.raw`n\in\mathbb{N}`),
-                          " についての帰納法で ",
-                          math(String.raw`n\in R`),
-                          " を示す。",
-                          math(String.raw`n=0`),
-                          " のとき ",
-                          math(String.raw`0\in R`),
-                          " である（部分体は零元を含む）。",
-                          math(String.raw`n\in R`),
-                          " と仮定すると、",
-                          math(String.raw`n+1\in R`),
-                          " である（",
-                          math(String.raw`1\in R`),
-                          " と、加法で閉じること）。",
-                        ]),
-                        paragraph([
-                          "整数。",
-                          math(String.raw`k\in\mathbb{Z}`),
-                          " は ",
-                          math(String.raw`k\in\mathbb{N}`),
-                          " または ",
-                          math(String.raw`k=-n`),
-                          "（",
-                          math(String.raw`n\in\mathbb{N}`),
-                          "）の形である（整数の定義）。前者は上で示した。後者は ",
-                          math(String.raw`n\in R`),
-                          " と加法逆元で閉じることから ",
-                          math(String.raw`-n\in R`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "有理数。",
-                          math(String.raw`q\in\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`q=k\cdot n^{-1}`),
-                          "（",
-                          math(String.raw`k\in\mathbb{Z}`),
-                          "、",
-                          math(String.raw`n\in\mathbb{N}`),
-                          "、",
-                          math(String.raw`n\ge1`),
-                          "）の形である（有理数の定義）。",
-                          math(String.raw`n\ne0`),
-                          " なので ",
-                          math(String.raw`n^{-1}\in R`),
-                          " であり（零元でない元の乗法逆元で閉じること）、",
-                          math(String.raw`k\cdot n^{-1}\in R`),
-                          " である（乗法で閉じること）。",
-                          "全過程は部分体の演算での閉性だけを使い、実数体も複素数体も現れない。",
-                        ]),
+                        paragraph([ref("def_real_closed_subfield"), " の第一条件により、", math(String.raw`R\subseteq\overline{\mathbb Q}`), " は零元・単位元を含む部分体である。自然数 ", math(String.raw`n\in\mathbb N`), " の所属を帰納法で示す。後者の場合は ", math(String.raw`n\in R`), " を仮定する。"]),
+                        displayMath(String.raw`\begin{aligned}
+0&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
+1&\in R&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の部分体条件}\bigr),\\
+n+1&\in R&&\bigl(\because\ n,1\in R\text{ と部分体の加法閉性}\bigr).
+\end{aligned}`),
+                        paragraph(["零の場合と後者の場合から全ての自然数が ", math(String.raw`R`), " に属する。整数 ", math(String.raw`k\in\mathbb Z`), " は自然数、または自然数 ", math(String.raw`n\in\mathbb N`), " の加法逆元である。前者は上の帰納法で済み、後者では"]),
+                        displayMath(String.raw`\begin{aligned}
+-n&\in R&&\bigl(\because\ n\in R\text{ と部分体の加法逆元への閉性}\bigr),\\
+k&\in R&&\bigl(\because\ k=-n\text{ の代入}\bigr).
+\end{aligned}`),
+                        paragraph(["有理数 ", math(String.raw`q\in\mathbb Q`), " を任意に取り、", math(String.raw`k\in\mathbb Z`), "、", math(String.raw`n\in\mathbb N`), "、", math(String.raw`1\le n`), " で ", math(String.raw`q=k\cdot n^{-1}`), " と表す。有理数の定義によるこの表示を使うと、"]),
+                        displayMath(String.raw`\begin{aligned}
+n&\ne0&&\bigl(\because\ 1\le n\text{ と自然数の順序}\bigr),\\
+n^{-1}&\in R&&\bigl(\because\ n\in R,\ n\ne0\text{ と部分体の乗法逆元への閉性}\bigr),\\
+k\cdot n^{-1}&\in R&&\bigl(\because\ k,n^{-1}\in R\text{ と部分体の乗法閉性}\bigr),\\
+q&\in R&&\bigl(\because\ q=k\cdot n^{-1}\text{ の代入}\bigr).
+\end{aligned}`),
+                        paragraph(["以上は部分体の四則だけで閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },
                 },
