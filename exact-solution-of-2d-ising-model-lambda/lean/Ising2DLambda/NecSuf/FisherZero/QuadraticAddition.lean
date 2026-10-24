@@ -1,6 +1,6 @@
 /-
 「二次体の加法閉性」と「二次体の和の表示」の必要十分版。
-加法閉性では表示の展開から係数の和までを九等号で導く。
+両方とも表示の展開から係数の和までを九等号で導く。
 -/
 import Mathlib
 
@@ -31,16 +31,39 @@ theorem add_mem_necSuf
     _ = j (a + a') + scale (j b + j b') := by rw [hMap a a']
     _ = j (a + a') + scale (j (b + b')) := by rw [hMap b b']
 
+/-- 和の値への展開、表示仕様、係数整理の演算則、一意性だけを使う。
+係数の加法則・体構造・平方根条件は不要で、一意性は最後の表示確定にだけ使う。 -/
 theorem add_representation_necSuf
-    {A K V : Type} (addA : A → A → A) (addK : K → K → K)
-    (value : K → V) (combine : A → A → V) (rep : K → A × A)
-    (hUnique : ∀ x : K, ∀ a b : A, value x = combine a b → rep x = (a, b))
-    (x y : K)
-    (hadd : value (addK x y) =
-      combine (addA (rep x).1 (rep y).1) (addA (rep x).2 (rep y).2)) :
-    rep (addK x y) =
-      (addA (rep x).1 (rep y).1, addA (rep x).2 (rep y).2) := by
-  exact hUnique (addK x y)
-    (addA (rep x).1 (rep y).1) (addA (rep x).2 (rep y).2) hadd
+    {A K V : Type} [Add A] [Add V]
+    (addK : K → K → K) (value : K → V) (rep : K → A × A)
+    (j : A → V) (scale : V → V)
+    (hAssoc : ∀ u v w : V, (u + v) + w = u + (v + w))
+    (hComm : ∀ b a : A, scale (j b) + j a = j a + scale (j b))
+    (hScale : ∀ b d : A, scale (j b + j d) = scale (j b) + scale (j d))
+    (hMap : ∀ a c : A, j (a + c) = j a + j c)
+    (hValue : ∀ x y : K, value (addK x y) = value x + value y)
+    (hSpec : ∀ x : K, value x = j (rep x).1 + scale (j (rep x).2))
+    (hUnique : ∀ x : K, ∀ a b : A,
+      value x = j a + scale (j b) → rep x = (a, b))
+    (x y : K) :
+    rep (addK x y) = ((rep x).1 + (rep y).1, (rep x).2 + (rep y).2) := by
+  let a := (rep x).1
+  let b := (rep x).2
+  let a' := (rep y).1
+  let b' := (rep y).2
+  apply hUnique
+  rw [hValue]
+  -- 本文と同じ九等号で表示を作り、最後に一意性へ渡す。
+  calc
+    value x + value y = (j a + scale (j b)) + (j a' + scale (j b')) := by
+      rw [hSpec x, hSpec y]
+    _ = j a + (scale (j b) + (j a' + scale (j b'))) := hAssoc _ _ _
+    _ = j a + ((scale (j b) + j a') + scale (j b')) := by rw [hAssoc]
+    _ = j a + ((j a' + scale (j b)) + scale (j b')) := by rw [hComm]
+    _ = j a + (j a' + (scale (j b) + scale (j b'))) := by rw [hAssoc]
+    _ = (j a + j a') + (scale (j b) + scale (j b')) := (hAssoc _ _ _).symm
+    _ = (j a + j a') + scale (j b + j b') := by rw [hScale]
+    _ = j (a + a') + scale (j b + j b') := by rw [hMap a a']
+    _ = j (a + a') + scale (j (b + b')) := by rw [hMap b b']
 
 end Ising2DLambda.NecSuf.FisherZero

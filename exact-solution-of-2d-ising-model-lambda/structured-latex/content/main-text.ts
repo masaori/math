@@ -38010,10 +38010,12 @@ j(a+a')+j(b+b')\cdot s
                       statement: [
                         paragraph([
                           math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（",
+                          "、有理数の包含を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " とする（",
                           ref("def_algebraic_numbers"),
                           "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          math(String.raw`s\cdot s=j(2)`),
                           " を満たす元とする（",
                           ref("claim_sqrt_two_exists"),
                           "）。任意の ",
