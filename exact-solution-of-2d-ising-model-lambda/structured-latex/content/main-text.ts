@@ -10640,6 +10640,69 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_reverse_color",
+        labels: [],
+        title: { text: "復元したマッチング対の第一色と元の置換の第一色" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_reverse_color",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_reverse_color",
+              title: { text: "復元したマッチング対の第一色は元の偶数軌道の第一色に等しい" },
+              labels: ["claim_matching_pair_reverse_color"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-reverse-color"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_minimum_eq",
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_color_alternates",
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_color_eq",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.alternatingColor_eq_on_orbit",
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_color_eq_from_necSuf",
+              ],
+              statement: [
+                paragraph(["線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、全軌道長が偶数の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取る。", ref("def_even_orbit_coloring"), " の第一色を ", math(String.raw`C_\sigma`), " とし、", ref("def_alternating_neighbor_pairs"), " から復元した二つの相手写像を ", math(String.raw`\tau:=\tau_{\sigma,C_\sigma}`), "、", math(String.raw`\upsilon:=\tau_{\sigma^{-1},C_\sigma}`), " とする。このとき、", ref("def_matching_pair_coloring"), " の第一色について"]),
+                displayMath(String.raw`C_{\tau,\upsilon}=C_\sigma`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`S:=\operatorname{Orb}_\sigma(i)`), "、", math(String.raw`m:=m_\sigma(i)`), "、", math(String.raw`D:=C_{\tau,\upsilon}`), " と略す。", ref("claim_matching_pair_reverse_orbit"), " と有限集合の最小元の一意性により"]),
+                displayMath(String.raw`\begin{aligned}
+m_{\tau,\upsilon}(i)&=m_\sigma(i)&&\bigl(\because\ \blkref{claim_matching_pair_reverse_orbit},\ \blkref{def_matching_pair_component_minimum},\ \blkref{def_even_orbit_minimum}\bigr)\\
+&=m&&\bigl(\because\ m\text{ の略記}\bigr).
+\end{aligned}`),
+                paragraph([ref("claim_finite_permutation_orbit_basepoint"), " を最小元に適用すると ", math(String.raw`\operatorname{Orb}_\sigma(m)=S`), " なので、前行を始点 ", math(String.raw`m`), " にも適用できる。ゆえに"]),
+                displayMath(String.raw`\begin{aligned}
+m_{\tau,\upsilon}(m)&=m_\sigma(m)&&\bigl(\because\ \text{最小元の一致を }m\text{ に適用}\bigr)\\
+&=m&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\text{ の最小元の一致}\bigr),\\
+m&\in\operatorname{Orb}_p(m)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
+m&\in D&&\bigl(\because\ \blkref{def_matching_pair_coloring},\ m_{\tau,\upsilon}(m)=m\bigr),\\
+m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
+\end{aligned}`),
+                paragraph(["ここで ", math(String.raw`p:=\upsilon\circ\tau`), " は ", ref("def_matching_pair_step"), " の二歩置換である。任意の ", math(String.raw`j\in\mathcal J`), " について、", ref("def_alternating_neighbor_pairs"), " の二場合と、", ref("claim_matching_pair_coloring_alternates"), " および第二の相手写像による色反転から"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(j)\in D&\Longleftrightarrow\tau(j)\in D&&\bigl(\because\ j\in C_\sigma\text{ の場合、}\blkref{def_alternating_neighbor_pairs}\bigr)\\
+&\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\bigr),\\
+\sigma(j)\in D&\Longleftrightarrow\upsilon(j)\in D&&\bigl(\because\ j\notin C_\sigma\text{ の場合、}\blkref{def_alternating_neighbor_pairs}\bigr)\\
+&\Longleftrightarrow j\notin D&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates}\bigr).
+\end{aligned}`),
+                paragraph(["従って ", math(String.raw`D`), " は ", math(String.raw`\sigma`), " の一歩で反転する。", ref("claim_even_orbit_coloring"), " により ", math(String.raw`C_\sigma`), " も同じ性質を持つ。", math(String.raw`m\in D\cap C_\sigma`), " から、順方向の反復回数 ", math(String.raw`n\in\mathbb N`), " について帰納すると"]),
+                displayMath(String.raw`\sigma^{[n]}(m)\in D\ \Longleftrightarrow\ \sigma^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回では }m\in D\cap C_\sigma\text{、後者では両色が反転}\bigr).`),
+                paragraph(["逆方向にも、", math(String.raw`\sigma(\sigma^{-1}(j))=j`), " に両方の色反転を適用して同じ帰納法を行うと"]),
+                displayMath(String.raw`(\sigma^{-1})^{[n]}(m)\in D\ \Longleftrightarrow\ (\sigma^{-1})^{[n]}(m)\in C_\sigma\qquad\bigl(\because\ \text{零回の一致と逆方向の一歩ごとの反転}\bigr).`),
+                paragraph([ref("def_finite_permutation_orbit"), " により ", math(String.raw`i\in\operatorname{Orb}_\sigma(m)`), " だから、二方向のいずれかの等号を ", math(String.raw`i`), " に適用して ", math(String.raw`i\in D\Longleftrightarrow i\in C_\sigma`), " を得る。", math(String.raw`i`), " は任意なので二集合は等しい。空集合では始点がなく、主張は空集合どうしの等号である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -44076,16 +44139,16 @@ const chapter_zero_pinching = defineSection({
                       " の零元と同じ元なので（",
                       ref("def_algebraic_numbers"),
                       " の第 1 条件。部分体の零元はもとの体の零元である）、",
-                      math(String.raw`\mathrm{Ev}^{F}_{q}(Z_L)\ne0`),
-                      " である。ここで ",
-                      math(String.raw`q\in\mathcal{F}_{L}`),
-                      " と仮定すると、",
-                      ref("def_finite_lattice_fisher_zeros"),
-                      " により ",
-                      math(String.raw`\mathrm{Ev}^{F}_{q}(Z_L)=0`),
-                      " となり矛盾する。ゆえに ",
-                      math(String.raw`q\notin\mathcal{F}_{L}`),
-                      " である。全過程は有理数と代数的数の有限和・有限積・順序比較だけで閉じ、",
+                      "次の二行を得る。",
+                    ]),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}^{F}_{q}(Z_L)&\ne0_{\overline{\mathbb Q}}
+&&\bigl(\because\ Z_L(q)\in\mathbb Q_{>0},\ \blkref{def_algebraic_numbers}\text{ の部分体の零元}\bigr)\\
+q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathbb Q}}
+&&\bigl(\because\ \blkref{def_finite_lattice_fisher_zeros}\bigr).
+\end{aligned}`),
+                    paragraph([
+                      "第一行と第二行から ", math(String.raw`q\notin\mathcal F_L`), " である。全過程は有理数と代数的数の有限和・有限積・順序比較だけで閉じ、",
                       "実数体も複素数体も現れない。",
                     ]),
                   ],

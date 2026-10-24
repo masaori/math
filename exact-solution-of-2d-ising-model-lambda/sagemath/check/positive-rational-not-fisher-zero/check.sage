@@ -1,10 +1,10 @@
 # 対象ラベル: claim_positive_rational_not_fisher_zero
 # ZZ[x]・QQ・QQbar の厳密計算だけを使う。浮動小数点を使わない。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_project = next(d / 'exact-solution-of-2d-ising-model-lambda' for d in (Path.cwd(), *Path.cwd().parents) if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_project / 'sagemath/_shared/defs.sage'))
 
 SAMPLE_POINTS = [QQ(1)/2, QQ(1)/3, QQ(2)/5, QQ(3)/7, QQ(9)/10, QQ(1)/40,
                  QQ(1), QQ(3)/2, QQ(2), QQ(5), QQ(41)/40]
