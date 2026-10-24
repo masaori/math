@@ -10581,6 +10581,65 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_reverse_orbit",
+        labels: [],
+        title: { text: "復元したマッチング対の二歩軌道と元の置換の軌道" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_reverse_orbit",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_reverse_orbit",
+              title: { text: "復元した二歩軌道の合併は元の置換の軌道に等しい" },
+              labels: ["claim_matching_pair_reverse_orbit"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-reverse-orbit"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit",
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit_from_necSuf",
+              ],
+              statement: [
+                paragraph(["線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取り、すべての軌道長が偶数とする。", ref("def_even_orbit_coloring"), " の第一色を ", math(String.raw`C_\sigma\subseteq\mathcal J`), " とし、", ref("def_alternating_neighbor_pairs"), " の二つの相手写像を ", math(String.raw`\tau:=\tau_{\sigma,C_\sigma}`), "、", math(String.raw`\upsilon:=\tau_{\sigma^{-1},C_\sigma}`), " と置く。", ref("claim_alternating_neighbor_matchings"), " により両者は不動点のない対合である。この対から ", ref("def_matching_pair_component"), " の二歩軌道の合併を作ると、任意の ", math(String.raw`i\in\mathcal J`), " に対して"]),
+                displayMath(String.raw`\mathcal B_{\tau,\upsilon}(i)=\operatorname{Orb}_\sigma(i)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定し、", math(String.raw`S:=\operatorname{Orb}_\sigma(i)\subseteq\mathcal J`), "、", math(String.raw`B:=\mathcal B_{\tau,\upsilon}(i)\subseteq\mathcal J`), "、", math(String.raw`p:=\upsilon\circ\tau\in\operatorname{Perm}(\mathcal J)`), " と略す。", ref("def_finite_permutation_orbit"), " より ", math(String.raw`i\in S`), " であり、", ref("claim_finite_permutation_orbit_invariant"), " より ", math(String.raw`S`), " は ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " で閉じている。"]),
+                paragraph(["任意の ", math(String.raw`j\in S`), " について、", math(String.raw`j\in C_\sigma`), " なら ", math(String.raw`\tau(j)=\sigma(j)`), "、", math(String.raw`\upsilon(j)=\sigma^{-1}(j)`), " である。", math(String.raw`j\notin C_\sigma`), " なら両者の役割が入れ替わる。これは ", ref("def_alternating_neighbor_pairs"), " による。したがって両場合で"]),
+                displayMath(String.raw`\tau(j)\in S,\qquad\upsilon(j)\in S
+\qquad\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).`),
+                displayMath(String.raw`\begin{aligned}
+p(j)&=\upsilon(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr),\\
+p^{-1}(j)&=\tau(\upsilon(j))&&\bigl(\because\ \blkref{def_matching_pair_step}\text{ の逆写像}\bigr)\\
+&\in S&&\bigl(\because\ S\text{ の }\tau,\upsilon\text{ による閉性}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i,\tau(i)\in S`), " なので、二つの始点からの ", math(String.raw`p`), " の順逆の反復はすべて ", math(String.raw`S`), " に属する。ゆえに"]),
+                displayMath(String.raw`B\subseteq S
+\qquad\bigl(\because\ \blkref{def_matching_pair_component},\ \blkref{def_finite_permutation_orbit}\bigr).`),
+                paragraph(["逆の包含を示す。", math(String.raw`i\in B`), " は ", ref("def_matching_pair_component"), " の第一軌道の零回から従う。任意の ", math(String.raw`j\in B`), " を取る。", ref("claim_matching_pair_component_basepoint"), " によって ", math(String.raw`\mathcal B_{\tau,\upsilon}(j)=B`), " である。第二軌道の零回を取れば ", math(String.raw`\tau(j)\in B`), " となる。また、", ref("claim_finite_permutation_orbit_invariant"), " を二つの軌道へ適用すると ", math(String.raw`p(\tau(j))\in B`), " である。"]),
+                displayMath(String.raw`\begin{aligned}
+p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=\upsilon(j)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr),\\
+\upsilon(j)&\in B&&\bigl(\because\ p(\tau(j))\in B\bigr).
+\end{aligned}`),
+                paragraph(["したがって ", math(String.raw`B`), " は二つの相手写像で閉じる。", ref("def_alternating_neighbor_pairs"), " の二場合により、", math(String.raw`j\in C_\sigma`), " なら ", math(String.raw`\sigma(j)=\tau(j)`), " と ", math(String.raw`\sigma^{-1}(j)=\upsilon(j)`), "、補集合なら逆である。よって ", math(String.raw`B`), " は ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " でも閉じる。", math(String.raw`i\in B`), " から順逆の反復回数について帰納し、"]),
+                displayMath(String.raw`S\subseteq B
+\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の二方向の反復}\bigr).`),
+                paragraph(["両包含から等号を得る。空集合では始点がなく、共有対でも二場合の計算は変わらない。有限集合と自然数回の反復だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -43899,12 +43958,13 @@ L^2\,\ell_2+\Phi_L(q)
 &=\log\bigl((1+q)^{2L^2}\bigr)+\log S
 &&\bigl(\because\ \blkref{claim_log_additive}\text{、}(1+q)^{2L^2},S\in\mathbb{Q}_{>0}\bigr)\\
 &=2L^2\,\log(1+q)+\log S
-&&\bigl(\because\ \blkref{claim_log_power}\bigr)
+&&\bigl(\because\ \blkref{claim_log_power}\bigr)\\
+&=2L^2\,\log(1+q)+\log\Bigl(G^{0,0}_L(\mathrm{KW}(q))+G^{0,1}_L(\mathrm{KW}(q))
++G^{1,0}_L(\mathrm{KW}(q))+G^{1,1}_L(\mathrm{KW}(q))\Bigr)
+&&\bigl(\because\ S\text{ の定義}\bigr)
 \end{aligned}`),
                     paragraph([
-                      "略記 ",
-                      math(String.raw`S`),
-                      " を元の四項の和へ戻したものが主張の右辺である。全過程は有理数の四則・順序比較と ",
+                      "全過程は有理数の四則・順序比較と ",
                       math(String.raw`\Lambda`),
                       " の加法の中で閉じ、実数体も複素数体も実数の対数も現れない。",
                     ]),

@@ -140,6 +140,11 @@ for L in (1, 2, 3):
         # 6 行目: = 2L^2·log(1+q) + log S（claim_log_power）
         rhs = lambda_add(lambda_scale(2 * L * L, rational_log(1 + q)), rational_log(S))
         assert lhs == rhs
+        # 7 行目: 略記 S を定義の四項へ戻す
+        four_terms = (sector_values[(0, 0)] + sector_values[(0, 1)] +
+                      sector_values[(1, 0)] + sector_values[(1, 1)])
+        assert rhs == lambda_add(lambda_scale(2 * L * L, rational_log(1 + q)),
+                                 rational_log(four_terms))
 
     print("L=%d: 分配多項式の値の双対分解と Λ の自由エントロピー双対関係を QQ/Λ で確認（有理点 %d 個）" %
           (L, len(rational_points)))

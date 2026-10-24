@@ -160,6 +160,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_orbit_separation",
   "claim_matching_pair_permutation",
   "claim_matching_pair_reconstructed_orbit",
+  "claim_matching_pair_reverse_orbit",
   "claim_matching_pair_second_coloring_alternates",
   "claim_matching_pair_second_recovery",
   "claim_matching_pair_successor_color",

@@ -2421,6 +2421,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_pairs_recovered
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered
   Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit
+  Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_component_eq_orbit_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
