@@ -10519,6 +10519,68 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_second_recovery",
+        labels: [],
+        title: { text: "構成した置換から第二の完全マッチングを復元する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_second_recovery",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_second_recovery",
+              title: { text: "構成した置換の第二の対の族は元の第二マッチングに等しい" },
+              labels: ["claim_matching_pair_second_recovery"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-second-recovery"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_pairs_recovered",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_coloring"), " の有限番号集合 ", math(String.raw`\mathcal J`), "、第一・第二の相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), "、第一色 ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", ref("claim_matching_pair_permutation"), " の置換 ", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}`), " を取る。このとき ", ref("def_alternating_neighbor_pairs"), " の対の族について"]),
+                displayMath(String.raw`\mathcal E_{\sigma^{-1},C}=\mathcal D_\upsilon`),
+                paragraph(["が成り立つ。空集合と二つのマッチングが対を共有する場合も含める。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を取る。", math(String.raw`i\in C`), " なら、", ref("claim_matching_pair_permutation"), " により ", math(String.raw`(\sigma^{-1})^{-1}=\sigma`), " であるから、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau_{\sigma^{-1},C}(i)
+&=\sigma^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\eta_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_permutation}\bigr)\\
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau_{\sigma^{-1},C}(i)
+&=(\sigma^{-1})^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\sigma(i)&&\bigl(\because\ \sigma\text{ は全単射}\bigr)\\
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr).
+\end{aligned}`),
+                paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " に対し ", math(String.raw`\tau_{\sigma^{-1},C}(i)=\upsilon(i)`), " を得た。対の族の定義に代入すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal E_{\sigma^{-1},C}
+&=\bigl\{\{i,\tau_{\sigma^{-1},C}(i)\}\mid i\in\mathcal J\bigr\}
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\bigl\{\{i,\upsilon(i)\}\mid i\in\mathcal J\bigr\}
+&&\bigl(\because\ \text{上で示した各点の等号}\bigr)\\
+&=\mathcal D_\upsilon
+&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では二つの族はともに空である。共有対でも二場合の値は変わらない。有限集合とその写像だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -43694,15 +43756,18 @@ H^{a,b}_L(q)
 &&\bigl(\because\ \blkref{claim_high_temperature_polynomial_identity}\ \text{と、代入は環準同型}\bigr)\\
 &=H^{0,0}_L(q)+H^{0,1}_L(q)+H^{1,0}_L(q)+H^{1,1}_L(q)
 &&\bigl(\because\ \blkref{claim_high_temperature_sector_decomposition}\ \text{と、代入は環準同型なので和を保つ}\bigr)\\
+&=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}H^{a,b}_L(q)
+&&\bigl(\because\ \text{四つの組の有限和の定義}\bigr)\\
 &=\sum_{(a,b)\in\{0,1\}\times\{0,1\}}(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
-&&\bigl(\because\ \blkref{claim_sector_value_duality}\ \text{を四つの組}\ (a,b)\ \text{へ同時に適用}\bigr)\\
+&&\bigl(\because\ \blkref{claim_sector_value_duality}\ \text{を四つの組へ同時に適用}\bigr)\\
 &=(1+q)^{2L^2}\cdot\sum_{(a,b)\in\{0,1\}\times\{0,1\}}G^{a,b}_L(\mathrm{KW}(q))
-&&\bigl(\because\ \text{分配則による共通因子の括り出し}\bigr)
+&&\bigl(\because\ \text{分配則による共通因子の括り出し}\bigr)\\
+&=(1+q)^{2L^2}\cdot\Bigl(G^{0,0}_L(\mathrm{KW}(q))+G^{0,1}_L(\mathrm{KW}(q))
+ +G^{1,0}_L(\mathrm{KW}(q))+G^{1,1}_L(\mathrm{KW}(q))\Bigr)
+&&\bigl(\because\ \text{四つの組の有限和の定義}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "最後の和の四つの元 ",
-                          math(String.raw`(0,0),(0,1),(1,0),(1,1)`),
-                          " を書き並べたものが主張の右辺である。全過程は有理数の四則と有限和の中で閉じ、",
+                          "全過程は有理数の四則と有限和の中で閉じ、",
                           "実数体も複素数体も現れない。",
                         ]),
                       ],

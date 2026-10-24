@@ -1,11 +1,11 @@
 # 対象ラベル: claim_free_entropy_dual_relation（および claim_partition_value_dual_factorization）
 # 帰属: 有限集合、ZZ[x]、QQ、Λ（素因数分解の指数ベクトル）。浮動小数点を使わない。
 
-import os
+from pathlib import Path
 from itertools import combinations
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_dir = next(d / 'exact-solution-of-2d-ising-model-lambda/sagemath/check/free-entropy-dual-relation' for d in (Path.cwd(), *Path.cwd().parents) if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/check/free-entropy-dual-relation').is_dir())
+load(str(_dir.parent.parent / '_shared/defs.sage'))
 
 R = PolynomialRing(ZZ, 'x')
 x = R.gen()
@@ -106,8 +106,14 @@ for L in (1, 2, 3):
         # 5 行目: = Σ (1+q)^{2L^2}·G^{a,b}_L(KW(q))（claim_sector_value_duality の四つの適用）
         assert left == sum((1 + q) ** (2 * L * L) * sector_values[key]
                            for key in sector_values)
+        # 四つの組を明記した和と添字付き有限和の等号
+        explicit_sum = sum((1 + q) ** (2 * L * L) * sector_values[key]
+                           for key in ((0, 0), (0, 1), (1, 0), (1, 1)))
+        assert explicit_sum == sum((1 + q) ** (2 * L * L) * sector_values[key]
+                                   for key in sector_values)
         # 6 行目: = (1+q)^{2L^2}·S（分配則による括り出し）
         assert left == (1 + q) ** (2 * L * L) * S
+        assert S == sum(sector_values[key] for key in ((0, 0), (0, 1), (1, 0), (1, 1)))
 
         # --- claim_free_entropy_dual_relation の準備（正値性） ---
         assert 1 + q > 0

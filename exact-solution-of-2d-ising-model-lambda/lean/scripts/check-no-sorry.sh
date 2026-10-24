@@ -2417,6 +2417,10 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_not_mem_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered
+  Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_pairs_recovered
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered
+  Ising2DLambda.AlgebraicEigenvalue.matchingPair_second_neighbor_recovered_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
