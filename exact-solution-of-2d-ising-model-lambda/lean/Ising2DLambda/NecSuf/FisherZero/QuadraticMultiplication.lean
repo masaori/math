@@ -98,16 +98,10 @@ theorem mul_mem_necSuf
     haddAssoc haddComm hmulAssoc hmulComm haddMul hmulAdd
     q a b a' b' s xi eta hs hxi heta
 
-theorem mul_representation_necSuf
-    {A K V : Type} (mulK : K → K → K)
-    (value : K → V) (combine : A → A → V) (rep : K → A × A)
-    (hUnique : ∀ x : K, ∀ a b : A, value x = combine a b → rep x = (a, b))
-    (x y : K) (c d : A)
-    (hmul : value (mulK x y) = combine c d) :
-    rep (mulK x y) = (c, d) := by
-  exact hUnique (mulK x y) c d hmul
-
-/-- 表示復元、既証明の積の値、係数の一意性を本文の三等号に対応させる。 -/
+/-- 表示復元、既証明の積の値、係数の一意性を本文の三等号に対応させる。
+`hSpec` は選んだ表示の復元、`hUnique` は二つの表示の係数比較に必要である。
+`hmul` は閉性の計算で既に得た値の等式であり、表示写像についての結論は仮定しない。
+係数の演算則・平方根の関係は閉性の計算だけで使い、この段には持ち込まない。 -/
 theorem mul_representation_of_spec_necSuf
     {A K V : Type} (mulK : K → K → K)
     (value : K → V) (combine : A → A → V) (rep : K → A × A)
