@@ -152,6 +152,7 @@ export const ALL_LABELS = [
   "claim_log_power",
   "claim_low_temperature_polynomial_identity",
   "claim_low_temperature_trivial_sector_expression",
+  "claim_matching_pair_orbit_exchange",
   "claim_matching_pair_orbit_separation",
   "claim_matching_word_sign_swap",
   "claim_matrix_pow_entry",

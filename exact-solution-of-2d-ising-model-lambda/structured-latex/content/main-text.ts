@@ -9838,6 +9838,86 @@ q^{[k]}(i)&=\upsilon(\upsilon(q^{[k]}(i)))&&\bigl(\because\ \blkref{def_fixed_po
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_orbit_exchange",
+        labels: [],
+        title: { text: "第一の相手写像による二歩軌道の交換" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_orbit_exchange",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_orbit_exchange",
+              title: { text: "第一の相手写像は二歩の軌道を相手の軌道へ移す" },
+              labels: ["claim_matching_pair_orbit_exchange"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-orbit-exchange"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_iterate",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_inverse_iterate",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_image",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_mate_image",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_image_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_step"), " の有限番号集合 ", math(String.raw`\mathcal J`), "、相手写像 ", math(String.raw`\tau,\upsilon`), "、二歩置換 ", math(String.raw`p`), " とその逆 ", math(String.raw`q`), " を取る。任意の ", math(String.raw`i\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\{\tau(j)\mid j\in\operatorname{Orb}_p(i)\}=\operatorname{Orb}_p(\tau(i)).`),
+                paragraph(["軌道は ", ref("def_finite_permutation_orbit"), " の意味である。制限した相手写像はこの二集合間の全単射であり、その逆も相手写像の制限である。", ref("claim_matching_pair_orbit_separation"), " により、これらは交わらない二つの軌道である。"]),
+              ],
+              proof: [
+                paragraph(["まず任意の ", math(String.raw`n\in\mathbb N`), "、", math(String.raw`i\in\mathcal J`), " に対する二つの等式 ", math(String.raw`\tau(p^{[n]}(i))=q^{[n]}(\tau(i))`), "、", math(String.raw`\tau(q^{[n]}(i))=p^{[n]}(\tau(i))`), " を、始点を任意にした帰納法で同時に示す。零回では、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(p^{[0]}(i))&=\tau(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=q^{[0]}(\tau(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
+\tau(q^{[0]}(i))&=\tau(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=p^{[0]}(\tau(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph(["帰納段で、すべての始点についての帰納仮定を使うと、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(p^{[n+1]}(i))&=\tau(p^{[n]}(p(i)))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=q^{[n]}(\tau(p(i)))&&\bigl(\because\ \text{帰納仮定を }p(i)\text{ に適用}\bigr)\\
+&=q^{[n]}(\tau(\upsilon(\tau(i))))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=q^{[n]}(q(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=q^{[n+1]}(\tau(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr),\\
+\tau(q^{[n+1]}(i))&=\tau(q^{[n]}(q(i)))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=p^{[n]}(\tau(q(i)))&&\bigl(\because\ \text{帰納仮定を }q(i)\text{ に適用}\bigr)\\
+&=p^{[n]}(\tau(\tau(\upsilon(i))))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=p^{[n]}(\upsilon(i))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr)\\
+&=p^{[n]}(\upsilon(\tau(\tau(i))))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の対合性}\bigr)\\
+&=p^{[n]}(p(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=p^{[n+1]}(\tau(i))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr).
+\end{aligned}`),
+                paragraph(["したがって ", math(String.raw`j\in\operatorname{Orb}_p(i)`), " の順方向の証人 ", math(String.raw`p^{[n]}(i)=j`), " からは、"]),
+                displayMath(String.raw`\begin{aligned}
+q^{[n]}(\tau(i))&=\tau(p^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)\\
+&=\tau(j)&&\bigl(\because\ p^{[n]}(i)=j\bigr),
+\end{aligned}`),
+                paragraph(["逆方向の証人 ", math(String.raw`q^{[n]}(i)=j`), " からは、"]),
+                displayMath(String.raw`\begin{aligned}
+p^{[n]}(\tau(i))&=\tau(q^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)\\
+&=\tau(j)&&\bigl(\because\ q^{[n]}(i)=j\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\tau(j)\in\operatorname{Orb}_p(\tau(i))\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ に上の証人を代入}\bigr).`),
+                paragraph(["これで像の左から右への包含を得た。逆に任意の ", math(String.raw`j\in\operatorname{Orb}_p(\tau(i))`), " に、今の所属を始点 ", math(String.raw`\tau(i)`), " で適用する。"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(j)&\in\operatorname{Orb}_p(\tau(\tau(i)))&&\bigl(\because\ \text{今示した所属}\bigr),\\
+\tau(\tau(i))&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr),\\
+\tau(j)&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \text{直前の等号による所属の移し替え}\bigr),\\
+\tau(\tau(j))&=j&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr).
+\end{aligned}`),
+                paragraph(["よって ", math(String.raw`\tau(j)`), " が逆の包含の証人である。同じ最後の等式を両軌道で使えば、相手写像の二つの制限は互いに逆となる。空集合には始点がなく、共有する対では二つの軌道はそれぞれ一点である。使った集合は有限番号集合と自然数であり、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
