@@ -43351,103 +43351,35 @@ H^{a,b}_L(x_{\mathrm{sd}})
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          "準備。定義（",
-                          ref("def_unit_interval_rationals"),
-                          "）より ",
-                          math(String.raw`0<q`),
-                          " かつ ",
-                          math(String.raw`q<1`),
-                          " である（いずれも ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の順序）。",
-                          math(String.raw`0<q`),
-                          " の両辺へ ",
-                          math(String.raw`1`),
-                          " を加えて ",
-                          math(String.raw`1<1+q`),
-                          "、これと ",
-                          math(String.raw`0<1`),
-                          " から順序の推移律で ",
-                          math(String.raw`0<1+q`),
-                          " を得る。狭義順序であるから ",
-                          math(String.raw`1+q\ne0`),
-                          " である。",
-                          math(String.raw`\mathbb{Q}`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から、",
-                          math(String.raw`1+q`),
-                          " は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の元としても零でなく、",
-                          math(String.raw`\mathrm{KW}(q)`),
-                          " が定義される（",
-                          ref("def_kw_dual_transform"),
-                          "）。",
-                        ]),
-                        paragraph([
-                          "次に、",
-                          math(String.raw`\mathbb{Q}`),
-                          " は体であり ",
-                          math(String.raw`1+q\ne0`),
-                          " なので、",
-                          math(String.raw`(1+q)\cdot t=1`),
-                          " を満たす ",
-                          math(String.raw`t\in\mathbb{Q}`),
-                          " が取れる。この等式は、",
-                          math(String.raw`\mathbb{Q}`),
-                          " が ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の部分体である（",
-                          ref("def_algebraic_numbers"),
-                          "）から ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の中でも成り立ち、体の積の逆元は一意なので、",
-                          math(String.raw`t`),
-                          " は ",
-                          ref("def_kw_dual_transform"),
-                          " が使う逆元 ",
-                          math(String.raw`(1+q)^{-1}\in\overline{\mathbb{Q}}`),
-                          " と一致する。",
-                        ]),
-                        paragraph([
-                          "さらに ",
-                          math(String.raw`0<t`),
-                          " を背理法で示す。",
-                          math(String.raw`t\le0`),
-                          " と仮定すると、",
-                          math(String.raw`0<1+q`),
-                          " と非正の元の積は非正なので ",
-                          math(String.raw`(1+q)\cdot t\le0`),
-                          "、すなわち ",
-                          math(String.raw`1\le0`),
-                          " となり ",
-                          math(String.raw`0<1`),
-                          " と矛盾する。よって ",
-                          math(String.raw`0<t`),
-                          " である。また ",
-                          math(String.raw`q<1`),
-                          " の移項で ",
-                          math(String.raw`0<1-q`),
-                          "、",
-                          math(String.raw`0<q`),
-                          " から ",
-                          math(String.raw`-q<0`),
-                          "（両辺から ",
-                          math(String.raw`q`),
-                          " を引く）と ",
-                          math(String.raw`0<q`),
-                          " の推移律で ",
-                          math(String.raw`-q<q`),
-                          "、その両辺へ ",
-                          math(String.raw`1`),
-                          " を加えて ",
-                          math(String.raw`1-q<1+q`),
-                          " を得る。",
-                        ]),
+                        paragraph([math(String.raw`q\in\mathbb Q_{(0,1)}`), " を固定する。以降の比較はすべて ", math(String.raw`\mathbb Q`), " の順序で行う。"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<q&&\bigl(\because\ \blkref{def_unit_interval_rationals}\bigr),\\
+q&<1&&\bigl(\because\ \blkref{def_unit_interval_rationals}\bigr),\\
+0&<1&&\bigl(\because\ \mathbb Q\text{ の順序}\bigr),\\
+1&<1+q&&\bigl(\because\ 0<q\text{ に }1\text{ を加える}\bigr),\\
+0&<1+q&&\bigl(\because\ 0<1<1+q\text{ と推移律}\bigr),\\
+1+q&\ne0&&\bigl(\because\ 0<1+q\text{ と狭義順序}\bigr).
+\end{aligned}`),
+                        paragraph([ref("def_algebraic_numbers"), " の部分体への包含は零を保つので、", math(String.raw`1+q\in\overline{\mathbb Q}`), " も零でない。よって ", ref("def_kw_dual_transform"), " の ", math(String.raw`\mathrm{KW}(q)`), " が定義される。"]),
+                        paragraph([math(String.raw`t:=(1+q)^{-1}\in\mathbb Q`), " と置く。", math(String.raw`\mathbb Q`), " の逆元の存在と、", ref("def_algebraic_numbers"), " の部分体への包含により、", math(String.raw`t`), " は ", math(String.raw`\overline{\mathbb Q}`), " で計算する ", ref("def_kw_dual_transform"), " の逆元にも一致する。"]),
+                        displayMath(String.raw`\begin{aligned}
+(1+q)\cdot t
+&=(1+q)\cdot(1+q)^{-1}&&\bigl(\because\ t\text{ の定義}\bigr)\\
+&=1&&\bigl(\because\ 1+q\ne0\text{ と積の逆元の定義}\bigr).
+\end{aligned}`),
+                        paragraph([math(String.raw`0<t`), " を背理法で示す。", math(String.raw`t\le0`), " と仮定すると、"]),
+                        displayMath(String.raw`\begin{aligned}
+(1+q)\cdot t&\le0&&\bigl(\because\ 0<1+q,\ t\le0\text{ と積の符号}\bigr),\\
+1&\le0&&\bigl(\because\ (1+q)\cdot t=1\bigr),\\
+0&<1&&\bigl(\because\ \mathbb Q\text{ の順序}\bigr).
+\end{aligned}`),
+                        paragraph(["最後の二不等式は矛盾する。よって ", math(String.raw`0<t`), " である。さらに"]),
+                        displayMath(String.raw`\begin{aligned}
+0&<1-q&&\bigl(\because\ q<1\text{ の移項}\bigr),\\
+-q&<0&&\bigl(\because\ 0<q\text{ から }q\text{ を引く}\bigr),\\
+-q&<q&&\bigl(\because\ -q<0<q\text{ と推移律}\bigr),\\
+1-q&<1+q&&\bigl(\because\ -q<q\text{ に }1\text{ を加える}\bigr).
+\end{aligned}`),
                         paragraph(["以上の準備から、値の住処・正値性・上端との比較を順に得る。"]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{KW}(q)
@@ -43461,31 +43393,18 @@ H^{a,b}_L(x_{\mathrm{sd}})
 &<(1-q)\cdot t
 &&\bigl(\because\ 0<1-q,\ 0<t\ \text{と正の有理数どうしの積は正}\bigr)\\
 &=\mathrm{KW}(q)
-&&\bigl(\because\ \text{上の式変形}\bigr)\\[2mm]
+&&\bigl(\because\ \mathrm{KW}(q)=(1-q)\cdot t\bigr)\\[2mm]
 \mathrm{KW}(q)
 &=(1-q)\cdot t
-&&\bigl(\because\ \text{上の式変形}\bigr)\\
+&&\bigl(\because\ \mathrm{KW}(q)=(1-q)\cdot t\bigr)\\
 &<(1+q)\cdot t
 &&\bigl(\because\ 1-q<1+q\ \text{と}\ 0<t\ \text{（正の元を掛けても順序は保たれる）}\bigr)\\
 &=1
 &&\bigl(\because\ t\ \text{の定義}\ (1+q)\cdot t=1\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "以上で ",
-                          math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}`),
-                          "、",
-                          math(String.raw`0<\mathrm{KW}(q)`),
-                          "、",
-                          math(String.raw`\mathrm{KW}(q)<1`),
-                          " が揃い、",
-                          ref("def_unit_interval_rationals"),
-                          " の条件により ",
-                          math(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}`),
-                          " である。全過程は有理数の四則と決定可能な順序比較の中で閉じ",
-                          "（部分体としての一致の確認だけが ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の等式）、実数体も複素数体も現れない。",
-                        ]),
+                        displayMath(String.raw`\mathrm{KW}(q)\in\mathbb{Q}_{(0,1)}
+\qquad\bigl(\because\ \mathrm{KW}(q)\in\mathbb Q,\ 0<\mathrm{KW}(q)<1,\ \blkref{def_unit_interval_rationals}\bigr).`),
+                        paragraph(["全過程は有理数の四則と決定可能な順序比較の中で閉じる。部分体への包含による逆元の一致だけは ", math(String.raw`\overline{\mathbb Q}`), " の等式を使う。実数体も複素数体も現れない。"]),
                       ],
                     },
                 },

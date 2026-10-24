@@ -28,6 +28,7 @@ for q in test_points:
     # 準備: 1 < 1 + q、0 < 1 + q、1 + q != 0
     one_plus = 1 + q
     assert 1 < one_plus, f"準備 1<1+q が不成立: q = {q}"
+    assert 0 < 1, f"準備 0<1 が不成立: q = {q}"
     assert 0 < one_plus, f"準備 0<1+q が不成立: q = {q}"
     assert one_plus != 0, f"準備 1+q!=0 が不成立: q = {q}"
 
@@ -39,8 +40,13 @@ for q in test_points:
 
     # 準備: 0 < t、0 < 1-q、1-q < 1+q
     assert 0 < t, f"準備 0<t が不成立: q = {q}"
+    if t <= 0:
+        assert one_plus * t <= 0
+        assert 1 <= 0
+        raise AssertionError(f"逆元の正値性に矛盾: q = {q}")
     one_minus = 1 - q
     assert 0 < one_minus, f"準備 0<1-q が不成立: q = {q}"
+    assert -q < 0 and -q < q, f"準備 -q<0<q が不成立: q = {q}"
     assert one_minus < one_plus, f"準備 1-q<1+q が不成立: q = {q}"
 
     # 鎖 1: KW(q) = (1-q)·t ∈ QQ（QQbar の定義どおりの値との一致も確かめる）
