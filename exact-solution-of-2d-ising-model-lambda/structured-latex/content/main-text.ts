@@ -9993,6 +9993,117 @@ p^{[n]}(\tau(i))&=\tau(q^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_coloring",
+        labels: [],
+        title: { text: "合併の最小元による二色付けと第一の相手による色反転" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_coloring",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_component_minimum",
+                title: { text: "対になった二歩軌道の合併の最小元" },
+                labels: ["def_matching_pair_component_minimum"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairComponentMinimum"],
+                statement: [
+                  paragraph([ref("def_matching_pair_component"), " の有限番号集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\preceq`), " を固定する。各 ", math(String.raw`i\in\mathcal J`), " について、"]),
+                  displayMath(String.raw`\begin{aligned}
+i&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
+i&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の合併}\bigr).
+\end{aligned}`),
+                  paragraph(["なので合併は空でない。", ref("def_odd_orbit_selection"), " で述べた有限集合の最小元の構成により、写像を"]),
+                  displayMath(String.raw`m_{\tau,\upsilon}:\mathcal J\to\mathcal J,\qquad
+m_{\tau,\upsilon}(i):=\min_{\preceq}\mathcal B_{\tau,\upsilon}(i)`),
+                  paragraph(["と定める。最小元は合併に属し、その任意の元以下である。空集合では、この写像の定義域も空である。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_coloring",
+                title: { text: "合併の最小元を含む二歩軌道による第一色" },
+                labels: ["def_matching_pair_coloring"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairColor"],
+                statement: [
+                  paragraph([ref("def_matching_pair_component_minimum"), " の記号を使い、第一色を"]),
+                  displayMath(String.raw`C_{\tau,\upsilon}:=\{i\in\mathcal J\mid i\in\operatorname{Orb}_p(m_{\tau,\upsilon}(i))\}\subseteq\mathcal J`),
+                  paragraph(["と定める。第二色は補集合 ", math(String.raw`\mathcal J\setminus C_{\tau,\upsilon}`), " とする。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_coloring_alternates",
+              title: { text: "第一の相手写像は最小元から選んだ色を反転する" },
+              labels: ["claim_matching_pair_coloring_alternates"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-coloring"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairColor_alternates",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairColor_alternates",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairColor_alternates_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_coloring"), " の任意の ", math(String.raw`i\in\mathcal J`), " に対し、"]),
+                displayMath(String.raw`\tau(i)\in C_{\tau,\upsilon}\quad\Longleftrightarrow\quad i\notin C_{\tau,\upsilon}.`),
+              ],
+              proof: [
+                paragraph(["この証明では写像 ", math(String.raw`m:=m_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略す。まず任意の ", math(String.raw`i,j\in\mathcal J`), " で ", math(String.raw`j\in\mathcal B_{\tau,\upsilon}(i)`), " とすると、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal B_{\tau,\upsilon}(j)&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_component_basepoint}\bigr),\\
+m(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\bigr),\\
+m(j)&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \text{合併の等号による所属の移し替え}\bigr),\\
+m(i)&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\bigr),\\
+m(i)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \text{合併の等号による所属の移し替え}\bigr),\\
+m(j)&\preceq m(i)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\text{ の最小性}\bigr),\\
+m(i)&\preceq m(j)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\text{ の最小性}\bigr),\\
+m(j)&=m(i)&&\bigl(\because\ \text{順序の反対称律}\bigr).
+\end{aligned}`),
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。最小元から見た合併と、相手から見た最小元をそろえると、"]),
+                displayMath(String.raw`\begin{aligned}
+m(i)&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\bigr),\\
+\mathcal B_{\tau,\upsilon}(m(i))&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_component_basepoint}\bigr),\\
+i&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component_minimum}\text{ の非空性の確認}\bigr),\\
+i&\in\mathcal B_{\tau,\upsilon}(m(i))&&\bigl(\because\ \text{合併の等号による所属の移し替え}\bigr),\\
+\tau(i)&\in\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の第二軌道の零回の反復}\bigr),\\
+m(\tau(i))&=m(i)&&\bigl(\because\ \text{上で示した合併内の最小元の一致}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)\in C_{\tau,\upsilon}
+&\Longleftrightarrow\tau(i)\in\operatorname{Orb}_p(m(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr)\\
+&\Longleftrightarrow\tau(i)\in\operatorname{Orb}_p(m(i))&&\bigl(\because\ m(\tau(i))=m(i)\bigr).
+\end{aligned}`),
+                paragraph(["まず ", math(String.raw`i\in\operatorname{Orb}_p(m(i))`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)&\in\operatorname{Orb}_p(\tau(m(i)))&&\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr),\\
+\operatorname{Orb}_p(m(i))\cap\operatorname{Orb}_p(\tau(m(i)))&=\varnothing&&\bigl(\because\ \blkref{claim_matching_pair_orbit_separation}\bigr),\\
+\tau(i)&\notin\operatorname{Orb}_p(m(i))&&\bigl(\because\ \text{直前の所属と非交叉}\bigr).
+\end{aligned}`),
+                paragraph(["この場合、主張の左辺と右辺はともに偽である。次に ", math(String.raw`i\notin\operatorname{Orb}_p(m(i))`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+i&\in\operatorname{Orb}_p(\tau(m(i)))&&\bigl(\because\ i\in\mathcal B_{\tau,\upsilon}(m(i)),\ \blkref{def_matching_pair_component}\text{ と場合の仮定}\bigr),\\
+\tau(i)&\in\operatorname{Orb}_p(\tau(\tau(m(i))))&&\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr),\\
+\tau(\tau(m(i)))&=m(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr),\\
+\tau(i)&\in\operatorname{Orb}_p(m(i))&&\bigl(\because\ \text{直前の等号による所属の移し替え}\bigr).
+\end{aligned}`),
+                paragraph(["この場合、主張の左辺と右辺はともに真である。右辺の読み替えは ", ref("def_matching_pair_coloring"), " による。したがって両場合で同値が成り立つ。空集合では入力がなく、共有する対の場合にも同じ論法が通る。有限番号集合とその部分集合だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
