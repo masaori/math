@@ -15,6 +15,7 @@
 |---|---|---|---|
 | `check_dual_weight_identity.sage` | 双対変換の一辺の重みの等式 | PASS | 3つの代数的数で厳密一致 |
 | `check_sector_factorization.sage` | 有限和のセクター双対恒等式 | PASS | 格子サイズ3種・4セクター・3点で厳密一致 |
+| `check_sector_product_association.sage` | 積の冪を展開した後の三因子の結合則 | PASS | SageMath 10.9 で93件の厳密一致 |
 | `check_self_dual_fixed_point.sage` | 自己双対点が双対変換の不動点であること | PASS | `QQbar` で厳密一致 |
 | `check_self_dual_sector_correspondence.sage` | 自己双対点で高温側と低温側の変数が一致した恒等式 | PASS | 格子サイズ3種・4セクターで厳密一致 |
 

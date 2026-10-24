@@ -158,6 +158,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_orbit_separation",
   "claim_matching_pair_permutation",
   "claim_matching_pair_second_coloring_alternates",
+  "claim_matching_pair_successor_color",
   "claim_matching_word_sign_swap",
   "claim_matrix_pow_entry",
   "claim_moved_orbit_closed_nonbacktracking",

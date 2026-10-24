@@ -61,4 +61,21 @@ noncomputable def matchingPairPermutation (τ υ : J → J) (C : J → Prop) (h�
   left_inv i := (matchingPairSuccessor_inverse τ υ C hτ hυ hτcolor hυcolor i).1
   right_inv i := (matchingPairSuccessor_inverse τ υ C hτ hυ hτcolor hυcolor i).2
 
+/-- 色反転には対合性・有限性・順序を要しない。 -/
+theorem matchingPairSuccessor_color_necSuf (τ υ : J → J) (C : J → Prop)
+    (hτcolor : ∀ i, C (τ i) ↔ ¬ C i) (hυcolor : ∀ i, C (υ i) ↔ ¬ C i)
+    (i : J) : C (matchingPairSuccessor τ υ C i) ↔ ¬ C i := by
+  classical
+  by_cases hi : C i
+  · have hstep : matchingPairSuccessor τ υ C i = τ i := by
+      rw [matchingPairSuccessor, if_pos hi]
+    have hmate : ¬ C (τ i) := fun h => (hτcolor i).mp h hi
+    rw [hstep]
+    simp [hi, hmate]
+  · have hstep : matchingPairSuccessor τ υ C i = υ i := by
+      rw [matchingPairSuccessor, if_neg hi]
+    have hmate : C (υ i) := (hυcolor i).mpr hi
+    rw [hstep]
+    simp [hi, hmate]
+
 end Ising2DLambda.NecSuf.AlgebraicEigenvalue

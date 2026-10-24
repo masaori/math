@@ -55,4 +55,22 @@ noncomputable def matchingPairPermutation (τ υ : FixedPointFreeInvolution J) :
   left_inv i := (matchingPairSuccessor_inverse τ υ i).1
   right_inv i := (matchingPairSuccessor_inverse τ υ i).2
 
+/-- claim_matching_pair_successor_color: 一歩進むと第一色と第二色が入れ替わる。 -/
+theorem matchingPairSuccessor_color (τ υ : FixedPointFreeInvolution J) (i : J) :
+    matchingPairSuccessor τ υ i ∈ matchingPairColor τ υ ↔ i ∉ matchingPairColor τ υ := by
+  classical
+  by_cases hi : i ∈ matchingPairColor τ υ
+  · have hstep : matchingPairSuccessor τ υ i = τ.val i := by
+      rw [matchingPairSuccessor, if_pos hi]
+    have hmate : τ.val i ∉ matchingPairColor τ υ :=
+      fun h => (matchingPairColor_alternates τ υ i).mp h hi
+    rw [hstep]
+    simp [hi, hmate]
+  · have hstep : matchingPairSuccessor τ υ i = υ.val i := by
+      rw [matchingPairSuccessor, if_neg hi]
+    have hmate : υ.val i ∈ matchingPairColor τ υ :=
+      (matchingPairSecondColor_alternates τ υ i).mpr hi
+    rw [hstep]
+    simp [hi, hmate]
+
 end Ising2DLambda.AlgebraicEigenvalue

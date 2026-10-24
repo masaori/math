@@ -10273,6 +10273,55 @@ p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_successor_color",
+        labels: [],
+        title: { text: "二色で相手を切り替えた置換の色反転" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_successor_color",
+            focus: {
+            kind: "claim",
+            id: "tools_claim_matching_pair_successor_color",
+            title: { text: "構成した置換の一歩で色が反転する" },
+            labels: ["claim_matching_pair_successor_color"],
+            habitat: "N",
+            verification: ["sagemath/check/matching-pair-successor-color"],
+            lean: [
+              "Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor_color",
+              "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_color_necSuf",
+              "Ising2DLambda.AlgebraicEigenvalue.matchingPairSuccessor_color_from_necSuf",
+            ],
+            statement: [
+              paragraph([ref("def_matching_pair_coloring"), " の有限番号集合 ", math(String.raw`\mathcal J`), " と第一色 ", math(String.raw`C_{\tau,\upsilon}\subseteq\mathcal J`), "、", ref("def_matching_pair_successor"), " の写像 ", math(String.raw`\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " について、任意の ", math(String.raw`i\in\mathcal J`), " に対し"]),
+              displayMath(String.raw`\sigma_{\tau,\upsilon}(i)\in C_{\tau,\upsilon}\quad\Longleftrightarrow\quad i\notin C_{\tau,\upsilon}`),
+              paragraph(["が成り立つ。"]),
+            ],
+            proof: [
+              paragraph(["この証明の中では ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略す。任意の ", math(String.raw`i\in\mathcal J`), " を固定する。", math(String.raw`i\in C`), " の場合、"]),
+              displayMath(String.raw`\begin{aligned}
+\sigma(i)&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C\bigr),\\
+\tau(i)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates},\ i\in C\bigr),\\
+\sigma(i)&\notin C&&\bigl(\because\ \sigma(i)=\tau(i)\bigr).
+\end{aligned}`),
+              paragraph(["次に ", math(String.raw`i\notin C`), " の場合、"]),
+              displayMath(String.raw`\begin{aligned}
+\sigma(i)&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C\bigr),\\
+\upsilon(i)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_second_coloring_alternates},\ i\notin C\bigr),\\
+\sigma(i)&\in C&&\bigl(\because\ \sigma(i)=\upsilon(i)\bigr).
+\end{aligned}`),
+              paragraph(["二つの場合は排他的で全体を覆うため、結論が従う。空集合では全称条件が成り立つ。有限番号集合の写像だけを扱い、実数体への脱出はない。"]),
+            ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -42989,6 +43038,8 @@ H^{a,b}_L(\xi)
 &&\bigl(\because\ 1-\xi=(1+\xi)\cdot\mathrm{KW}(\xi)\bigr)\\
 &=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2-|A|}\cdot(1+\xi)^{|A|}\cdot\mathrm{KW}(\xi)^{|A|}
 &&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}\bigl((1+\xi)^{2L^2-|A|}\cdot(1+\xi)^{|A|}\bigr)\cdot\mathrm{KW}(\xi)^{|A|}
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の乗法の結合則}\bigr)\\
 &=\sum_{A\in\mathcal{E}^{a,b}_L}(1+\xi)^{2L^2}\cdot\mathrm{KW}(\xi)^{|A|}
 &&\bigl(\because\ (2L^2-|A|)+|A|=2L^2\text{ と冪の指数法則}\bigr)\\
 &=(1+\xi)^{2L^2}\cdot\sum_{A\in\mathcal{E}^{a,b}_L}\mathrm{KW}(\xi)^{|A|}

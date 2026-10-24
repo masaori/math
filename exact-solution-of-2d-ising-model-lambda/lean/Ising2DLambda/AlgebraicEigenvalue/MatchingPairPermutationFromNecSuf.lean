@@ -13,4 +13,11 @@ theorem matchingPairSuccessor_inverse_from_necSuf
     (fun j => j ∈ matchingPairColor τ υ) τ.property.2 υ.property.2
     (matchingPairColor_alternates τ υ) (matchingPairSecondColor_alternates τ υ) i
 
+theorem matchingPairSuccessor_color_from_necSuf
+    (τ υ : FixedPointFreeInvolution J) (i : J) :
+    matchingPairSuccessor τ υ i ∈ matchingPairColor τ υ ↔ i ∉ matchingPairColor τ υ :=
+  NecSuf.AlgebraicEigenvalue.matchingPairSuccessor_color_necSuf τ.val υ.val
+    (fun j => j ∈ matchingPairColor τ υ)
+    (matchingPairColor_alternates τ υ) (matchingPairSecondColor_alternates τ υ) i
+
 end Ising2DLambda.AlgebraicEigenvalue
