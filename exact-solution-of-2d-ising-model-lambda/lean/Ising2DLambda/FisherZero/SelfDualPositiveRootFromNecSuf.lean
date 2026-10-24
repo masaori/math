@@ -41,11 +41,13 @@ theorem selfDualRootMinus_representation_from_necSuf (s : Qbar)
 theorem selfDualRootPlus_mem_positiveCone_from_necSuf (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     selfDualRootPlus s ∈ quadraticPositiveCone s := by
-  apply Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf
-      (quadraticRepresentation s) quadraticCoefficientPositive
-      (selfDualRootPlus s) (-1) 1
-  · exact selfDualRootPlus_representation s hs
-  · exact Or.inr (Or.inr ⟨by norm_num, by norm_num, by norm_num⟩)
+  exact Ising2DLambda.NecSuf.FisherZero.positive_of_representation_necSuf
+    (quadraticRepresentation s) quadraticCoefficientPositive (selfDualRootPlus s)
+    (selfDualRootPlus_representation s hs)
+    (by norm_num) (by norm_num) (by norm_num)
+    (neg_mul_neg (1 : ℚ) 1) (one_mul (1 : ℚ)) (mul_one (2 : ℚ))
+    (fun b => (mul_assoc (2 : ℚ) b b).symm)
+    (fun _ ha hb hSquare => Or.inr (Or.inr ⟨ha, hb, hSquare⟩))
 
 theorem selfDualRootMinus_not_mem_positiveCone_from_necSuf (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :

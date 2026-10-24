@@ -88,12 +88,41 @@ theorem selfDualRootMinus_representation_necSuf
   have hcoeff := hUnique p.1 p.2 (-1) (-1) hvalue
   exact Prod.ext hcoeff.1 hcoeff.2
 
+/-- 正錐の第三条件を、表示と三つの基本比較、指定した積の法則から構成する。
+比較の前後は等号なので順序の推移律は使わず、LT だけで足りる。
+加法、体構造、全順序性は不要。第三条件の挿入は正錐の定義を接続する規則である。 -/
 theorem positive_of_representation_necSuf
-    {A K : Type} (rep : K → A × A) (positive : A × A → Prop)
-    (x : K) (a b : A) (hrep : rep x = (a, b)) (hab : positive (a, b)) :
+    {A K : Type*} [Zero A] [One A] [OfNat A 2] [Neg A] [Mul A] [LT A]
+    (rep : K → A × A) (positive : A × A → Prop) (x : K)
+    (hrep : rep x = (-1, 1))
+    (hNeg : (-1 : A) < 0) (hPos : (0 : A) < 1) (hTwo : (1 : A) < 2)
+    (hNegMul : (-1 : A) * (-1) = 1 * 1)
+    (hOneMul : (1 : A) * 1 = 1) (hMulOne : (2 : A) * 1 = 2)
+    (hAssoc : ∀ b : A, 2 * (b * b) = (2 * b) * b)
+    (hThird : ∀ p : A × A,
+      p.1 < 0 → 0 < p.2 → p.1 * p.1 < (2 * p.2) * p.2 → positive p) :
     positive (rep x) := by
-  rw [hrep]
-  exact hab
+  let p : A × A := rep x
+  let a : A := p.1
+  let b : A := p.2
+  have ha : a = -1 := congrArg Prod.fst hrep
+  have hb : b = 1 := congrArg Prod.snd hrep
+  have haNeg : a < 0 := calc
+    a = -1 := ha
+    _ < 0 := hNeg
+  have hbPos : 0 < b := calc
+    (0 : A) < 1 := hPos
+    _ = b := hb.symm
+  have hSquare : a * a < (2 * b) * b := calc
+    a * a = (-1) * (-1) := congrArg (fun t : A => t * t) ha
+    _ = 1 * 1 := hNegMul
+    _ = 1 := hOneMul
+    _ < 2 := hTwo
+    _ = 2 * 1 := hMulOne.symm
+    _ = 2 * (1 * 1) := congrArg (fun t : A => 2 * t) hOneMul.symm
+    _ = 2 * (b * b) := congrArg (fun t : A => 2 * (t * t)) hb.symm
+    _ = (2 * b) * b := hAssoc b
+  exact hThird p haNeg hbPos hSquare
 
 theorem not_positive_of_representation_necSuf
     {A K : Type} (rep : K → A × A) (positive : A × A → Prop)

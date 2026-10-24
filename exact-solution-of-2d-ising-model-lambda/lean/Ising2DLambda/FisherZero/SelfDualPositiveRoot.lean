@@ -104,9 +104,33 @@ theorem selfDualRootMinus_representation (s : Qbar)
 theorem selfDualRootPlus_mem_positiveCone (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     selfDualRootPlus s ∈ quadraticPositiveCone s := by
-  change quadraticCoefficientPositive (quadraticRepresentation s (selfDualRootPlus s))
-  rw [selfDualRootPlus_representation s hs]
-  exact Or.inr (Or.inr ⟨by norm_num, by norm_num, by norm_num⟩)
+  -- 本文の三所属は根の部分型、表示対の型、二つの射影の型で担う。
+  let root : QuadraticFieldElement s := selfDualRootPlus s
+  let p : ℚ × ℚ := quadraticRepresentation s root
+  let a : ℚ := p.1
+  let b : ℚ := p.2
+  have hrep : p = (-1, 1) := selfDualRootPlus_representation s hs
+  have ha : a = -1 := congrArg Prod.fst hrep
+  have hb : b = 1 := congrArg Prod.snd hrep
+  -- 本文の二つの符号比較。
+  have haNeg : a < 0 := calc
+    a = -1 := ha
+    _ < 0 := by norm_num
+  have hbPos : 0 < b := calc
+    (0 : ℚ) < 1 := by norm_num
+    _ = b := hb.symm
+  -- 本文の平方比較。負号の積と単位元の積を別々の行にする。
+  have hSquare : a * a < (2 * b) * b := calc
+    a * a = (-1) * (-1) := congrArg (fun x : ℚ => x * x) ha
+    _ = 1 * 1 := neg_mul_neg (1 : ℚ) 1
+    _ = 1 := one_mul (1 : ℚ)
+    _ < 2 := by norm_num
+    _ = 2 * 1 := (mul_one (2 : ℚ)).symm
+    _ = 2 * (1 * 1) := congrArg (fun x : ℚ => 2 * x) (one_mul (1 : ℚ)).symm
+    _ = 2 * (b * b) := congrArg (fun x : ℚ => 2 * (x * x)) hb.symm
+    _ = (2 * b) * b := (mul_assoc (2 : ℚ) b b).symm
+  -- 正錐の第三条件への挿入。
+  exact Or.inr (Or.inr ⟨haNeg, hbPos, hSquare⟩)
 
 /-- `claim_self_dual_root_minus_not_positive` の具体版。 -/
 theorem selfDualRootMinus_not_mem_positiveCone (s : Qbar)

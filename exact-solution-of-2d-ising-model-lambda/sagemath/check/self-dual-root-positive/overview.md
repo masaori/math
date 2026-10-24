@@ -1,6 +1,6 @@
 # SageMath Check: 正の根の特定（x_c = −1+s）
 
-**対象ラベル**: `def_critical_point`, `claim_self_dual_root_plus_mem`, `claim_self_dual_root_plus_representation`
+**対象ラベル**: `def_critical_point`, `claim_self_dual_root_plus_mem`, `claim_self_dual_root_plus_representation`, `claim_self_dual_root_plus_positive`
 
 （同じ検証で `claim_self_dual_root_plus_mem`・`claim_self_dual_root_plus_representation`・
 `claim_self_dual_root_minus_mem`・`claim_self_dual_root_minus_representation`・
@@ -123,3 +123,30 @@ for p in sorted(Path("sagemath/check/self-dual-root-positive").glob("check*.sage
     __file__ = str(p.resolve())
     load(__file__)'
 ```
+
+## 根 −1+s は正であることの行別検算
+
+根の値を各平方根の埋込みを持つ二次数体へ逆変換し、表示対を独立に取り出す。本文の三所属、符号の二鎖、平方の比較鎖、正錐の第三条件を一行一ファイルで検査する。順序の比較はすべて有理数上で行い、代数的数の実数順序へ置き換えない。
+
+| ファイル | 本文の行 | 状態 | 件数 |
+|---|---|---|---|
+| `check_plus_positive_root_membership.sage` | 根の二次体への所属 | PASS | 2 |
+| `check_plus_positive_representation_membership.sage` | 表示対の有理数対への所属 | PASS | 2 |
+| `check_plus_positive_coefficient_membership.sage` | 各係数の有理数への所属 | PASS | 2 |
+| `check_plus_positive_negative_coefficient.sage` | 第一係数の表示 | PASS | 2 |
+| `check_plus_positive_negative_comparison.sage` | 負の一と零の比較 | PASS | 2 |
+| `check_plus_positive_positive_comparison.sage` | 零と一の比較 | PASS | 2 |
+| `check_plus_positive_positive_coefficient.sage` | 第二係数の表示 | PASS | 2 |
+| `check_plus_positive_square_substitution.sage` | 第一係数の平方への代入 | PASS | 2 |
+| `check_plus_positive_square_sign.sage` | 二つの負号の積 | PASS | 2 |
+| `check_plus_positive_square_unit.sage` | 一の平方の整理 | PASS | 2 |
+| `check_plus_positive_square_comparison.sage` | 一と二の比較 | PASS | 2 |
+| `check_plus_positive_double_unit.sage` | 二に右単位元を挿入 | PASS | 2 |
+| `check_plus_positive_double_square_unit.sage` | 一の平方を挿入 | PASS | 2 |
+| `check_plus_positive_double_substitution.sage` | 第二係数の平方への置換 | PASS | 2 |
+| `check_plus_positive_double_associativity.sage` | 積の結合律 | PASS | 2 |
+| `check_plus_positive_cone_membership.sage` | 正錐の第三条件による所属 | PASS | 2 |
+
+2026-10-24: 新規16本を両平方根で検算して通過した。既存41本の行別検算と統合検算（表示一意性98組）を含む計58本も通過した。
+
+実行方法は上記の `check*.sage` 一括実行と同じ。有限検算は一般証明の代わりではない。
