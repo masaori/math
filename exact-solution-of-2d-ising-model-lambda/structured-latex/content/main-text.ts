@@ -9630,224 +9630,124 @@ j&<n
       role: "subsection",
       element: {
         kind: "section",
-        id: "tools_heading_formal_square_root",
+        id: "tools_heading_polynomial_square_root",
         labels: [],
-        title: { text: "定数項一の形式的平方根" },
+        title: { text: "定数項一の多項式平方根" },
         children: [
           {
             role: "primary",
             element: {
               kind: "elementGroup",
-              id: "group_of_kac_ward_claim_formal_square_root_unique",
+              id: "group_of_qbar_polynomial_square_root_unique",
               beforeFocus: [
                 {
                   role: "prerequisiteDefinition",
                   element: {
-                    id: "kac_ward_definition_qbar_formal_power_series",
+                    id: "tools_definition_qbar_polynomial_square_root",
                     kind: "definition",
-                    title: { text: "代数的数係数の形式的冪級数" },
-                    labels: ["def_qbar_formal_power_series"],
+                    title: { text: "定数項一の多項式平方根" },
+                    labels: ["def_qbar_polynomial_square_root"],
                     habitat: "Qbar",
+                    lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialSquareRoot"],
                     statement: [
                       paragraph([
-                        "代数的数の列 ", math(String.raw`C=(c_n)_{n\in\mathbb N}`),
-                        " を代数的数係数の形式的冪級数と呼び、",
+                        math(String.raw`D,S\in\overline{\mathbb Q}[t]`),
+                        " とする。多項式環と係数は ", ref("def_qbar_polynomial_ring"),
+                        " の意味で用いる。",
                       ]),
-                      displayMath(String.raw`C(x)=\sum_{n\in\mathbb N}c_nx^n\in\overline{\mathbb Q}[[x]]`),
+                      displayMath(String.raw`\mathrm{ac}_0(S)=1,\qquad SS=D`),
                       paragraph([
-                        "と書く。二つの形式的冪級数 ", math(String.raw`C(x)=\sum_n c_nx^n`),
-                        " と ", math(String.raw`E(x)=\sum_n e_nx^n`), " の積は Cauchy 積",
-                      ]),
-                      displayMath(String.raw`C(x)E(x):=\sum_{n\in\mathbb N}\left(\sum_{j=0}^{n}c_je_{n-j}\right)x^n`),
-                      paragraph(["で、和と加法逆元は係数ごとに"]),
-                      displayMath(String.raw`C(x)+E(x):=\sum_{n\in\mathbb N}(c_n+e_n)x^n,\qquad -C(x):=\sum_{n\in\mathbb N}(-c_n)x^n`),
-                      paragraph([
-                        "で定める。差は ", math(String.raw`C(x)-E(x):=C(x)+\bigl(-E(x)\bigr)`),
-                        " と書く。各係数に現れる和は有限である。定数項を ",
-                        math(String.raw`\mathrm{ac}_0(C):=c_0`), " と書く。これは可算集合 ",
-                        math(String.raw`\overline{\mathbb Q}^{\mathbb N}`),
-                        " と代数的数の有限和・有限積だけで定まり、実数体も複素数体も現れない。",
+                        "を満たすとき、", math(String.raw`S`), " を ", math(String.raw`D`),
+                        " の定数項一の多項式平方根と呼ぶ。この定義は存在を主張しない。平方根の存在は、対象ごとにこの二条件を満たす有限多項式を与えて示す。",
                       ]),
                     ],
                   },
                 },
               ],
               focus: {
-                id: "kac_ward_claim_formal_square_root_unique",
+                id: "tools_claim_qbar_polynomial_square_root_unique",
                 kind: "claim",
-                title: { text: "定数項一の形式的平方根は一意である" },
-                labels: ["claim_formal_square_root_unique"],
+                title: { text: "定数項一の多項式平方根は一意である" },
+                labels: ["claim_qbar_polynomial_square_root_unique"],
                 habitat: "Qbar",
-                verification: ["sagemath/check/formal-square-root-uniqueness"],
+                verification: ["sagemath/check/qbar-polynomial-square-root-uniqueness"],
                 lean: [
-                  "Ising2DLambda.KacWard.formalSquareRoot_unique",
-                  "Ising2DLambda.NecSuf.KacWard.formalSquareRoot_unique_necSuf",
-                  "Ising2DLambda.KacWard.formalSquareRoot_unique_from_necSuf",
+                  "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialSquareRoot_unique",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.polynomialSquareRoot_unique_necSuf",
+                  "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialSquareRoot_unique_from_necSuf",
                 ],
                 statement: [
                   paragraph([
-                    math(String.raw`D,S,T\in\overline{\mathbb Q}[[x]]`), " とする。",
-                    math(String.raw`\mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1`), " かつ",
+                    "任意の ", math(String.raw`S,T\in\overline{\mathbb Q}[t]`), " が ",
+                    math(String.raw`\mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1`), " と ",
+                    math(String.raw`SS=TT`), " を満たすならば ", math(String.raw`S=T`),
+                    " である。したがって、", ref("def_qbar_polynomial_square_root"),
+                    " の平方根は存在すれば一意である。",
                   ]),
-                  displayMath(String.raw`S(x)S(x)=D(x)=T(x)T(x)`),
-                  paragraph(["ならば ", math(String.raw`S(x)=T(x)`), " である。"]),
                 ],
                 proof: [
-                  paragraph(["二つの平方の等式から、求めたい差を因数に持つ積を作る。"]),
-                  displayMath(String.raw`\begin{aligned}
-\bigl(S(x)-T(x)\bigr)\bigl(S(x)+T(x)\bigr)
-&=S(x)S(x)-T(x)T(x)
-&&\bigl(\because\ \overline{\mathbb Q}[[x]]\text{ の分配則}\bigr)\\
-&=D(x)-D(x)
-&&\bigl(\because\ S(x)S(x)=D(x)=T(x)T(x)\text{（仮定）}\bigr)\\
-&=0
-&&\bigl(\because\ \overline{\mathbb Q}[[x]]\text{ の加法逆元}\bigr)
-\end{aligned}`),
                   paragraph([
-                    math(String.raw`\overline{\mathbb Q}`),
-                    " は体なので零因子を持たず、形式的冪級数の積も、最初の非零係数どうしの積を見ることで零因子を持たない。したがって ",
-                    math(String.raw`S(x)-T(x)=0`), " または ", math(String.raw`S(x)+T(x)=0`),
-                    " である。後者なら定数項を取って",
+                    "以下の積と和はすべて ", math(String.raw`\overline{\mathbb Q}[t]`),
+                    " の演算であり、零多項式を ", math(String.raw`0_{\mathrm{pol}}`),
+                    " と書く。まず差と和の積を計算する。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-0&=\mathrm{ac}_0\bigl(S(x)+T(x)\bigr)
-&&\bigl(\because\ S(x)+T(x)=0\text{ と }\mathrm{ac}_0(0)=0.\ \blkref{def_qbar_formal_power_series}\bigr)\\
+(S-T)(S+T)
+&=S(S+T)-T(S+T)
+&&\bigl(\because\ \text{左因子の差に対する分配則}\bigr)\\
+&=(SS+ST)-T(S+T)
+&&\bigl(\because\ \text{第一項に右因子の和の分配則}\bigr)\\
+&=(SS+ST)-(TS+TT)
+&&\bigl(\because\ \text{第二項に右因子の和の分配則}\bigr)\\
+&=(SS+ST)-(ST+TT)
+&&\bigl(\because\ TS=ST\text{（乗法の可換性）}\bigr)\\
+&=((SS+ST)-ST)-TT
+&&\bigl(\because\ \text{和を引く公式（加法群の法則）}\bigr)\\
+&=SS-TT
+&&\bigl(\because\ \text{加えた項の相殺（加法群の法則）}\bigr)\\
+&=TT-TT
+&&\bigl(\because\ SS=TT\text{（仮定）}\bigr)\\
+&=0_{\mathrm{pol}}
+&&\bigl(\because\ \text{加法逆元の法則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "次に ", math(String.raw`S+T=0_{\mathrm{pol}}`),
+                    " と仮定する。以下の係数の等式は ", math(String.raw`\overline{\mathbb Q}`),
+                    " における等式である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0
+&=\mathrm{ac}_0(0_{\mathrm{pol}})
+&&\bigl(\because\ \text{零多項式の係数。}\blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\mathrm{ac}_0(S+T)
+&&\bigl(\because\ S+T=0_{\mathrm{pol}}\text{（背理法の仮定）}\bigr)\\
 &=\mathrm{ac}_0(S)+\mathrm{ac}_0(T)
-&&\bigl(\because\ \text{和は係数ごとの和である。}\blkref{def_qbar_formal_power_series}\bigr)\\
+&&\bigl(\because\ \text{和の係数。}\blkref{def_qbar_polynomial_ring}\bigr)\\
 &=1+1
 &&\bigl(\because\ \mathrm{ac}_0(S)=\mathrm{ac}_0(T)=1\text{（仮定）}\bigr)\\
 &=2
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)
 \end{aligned}`),
                   paragraph([
-                    "となるが、", math(String.raw`2\ne0`), " は ", math(String.raw`\overline{\mathbb Q}`),
-                    " の標数が零であることに反する。ゆえに ", math(String.raw`S(x)-T(x)=0`),
-                    " であり、", math(String.raw`S(x)=T(x)`), " である。",
-                  ]),
-                ],
-              },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_kac_ward_claim_formal_square_root_exists",
-              beforeFocus: [
-                {
-                  role: "prerequisiteDefinition",
-                  element: {
-                    id: "kac_ward_definition_sqrt_coefficient_recursion",
-                    kind: "definition",
-                    title: { text: "平方根係数列の再帰" },
-                    labels: ["def_sqrt_coefficient_recursion"],
-                    habitat: "Qbar",
-                    statement: [
-                      paragraph([
-                        "代数的数の列 ", math(String.raw`D=(d_n)_{n\in\mathbb N}`),
-                        " が ", math(String.raw`d_0=1`),
-                        " を満たすとする。代数的数の列 ", math(String.raw`s=(s_n)_{n\in\mathbb N}`),
-                        " を、添字 ", math(String.raw`n\in\mathbb N`), " についての再帰",
-                      ]),
-                      displayMath(String.raw`s_0:=1,\qquad
-s_n:=\frac{1}{2}\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)\quad(n\ge1)`),
-                      paragraph([
-                        "で定め、", math(String.raw`D`), " の平方根係数列と呼ぶ。右辺の和は ",
-                        math(String.raw`j`), " が ", math(String.raw`1`), " から ",
-                        math(String.raw`n-1`), " までを走る有限和であり（",
-                        math(String.raw`n=1`), " では空和で、その値は ",
-                        math(String.raw`0\in\overline{\mathbb Q}`),
-                        " とする）、現れる ", math(String.raw`s_j`),
-                        " の添字はいずれも ", math(String.raw`n`),
-                        " より小さいので、この再帰は各 ", math(String.raw`s_n\in\overline{\mathbb Q}`),
-                        " を一意に定める。", math(String.raw`2`), " による除法は、",
-                        math(String.raw`\overline{\mathbb Q}`), " が体であり ",
-                        math(String.raw`2\ne0`), "（標数零）だから定義される。",
-                      ]),
-                    ],
-                  },
-                },
-              ],
-              focus: {
-                id: "kac_ward_claim_formal_square_root_exists",
-                kind: "claim",
-                title: { text: "定数項一の形式的平方根は存在する" },
-                labels: ["claim_formal_square_root_exists"],
-                habitat: "Qbar",
-                verification: ["sagemath/check/formal-square-root-existence"],
-                lean: [
-                  "Ising2DLambda.KacWard.formalSquareRoot_exists",
-                  "Ising2DLambda.NecSuf.KacWard.mk_sqrtCoeff_mul_self",
-                  "Ising2DLambda.KacWard.formalSquareRoot_exists_from_necSuf",
-                ],
-                statement: [
-                  paragraph([
-                    math(String.raw`D(x)=\sum_{n\in\mathbb N}d_nx^n\in\overline{\mathbb Q}[[x]]`),
-                    " が ", math(String.raw`\mathrm{ac}_0(D)=1`),
-                    " を満たすとする。", math(String.raw`D`),
-                    " の平方根係数列 ", math(String.raw`s`), "（",
-                    ref("def_sqrt_coefficient_recursion"), "）から作る形式的冪級数を ",
-                    math(String.raw`S(x):=\sum_{n\in\mathbb N}s_nx^n\in\overline{\mathbb Q}[[x]]`),
-                    " と置くと、",
-                    math(String.raw`\mathrm{ac}_0(S)=1`), " かつ ",
-                    math(String.raw`S(x)S(x)=D(x)`), " である。",
-                  ]),
-                ],
-                proof: [
-                  paragraph(["定数項について、"]),
-                  displayMath(String.raw`\begin{aligned}
-\mathrm{ac}_0(S)
-&=s_0
-&&\bigl(\because\ \blkref{def_qbar_formal_power_series}\bigr)\\
-&=1
-&&\bigl(\because\ \blkref{def_sqrt_coefficient_recursion}\bigr)
-\end{aligned}`),
-                  paragraph([
-                    "である。形式的冪級数は係数列そのものだから、",
-                    math(String.raw`S(x)S(x)=D(x)`),
-                    " を示すには、すべての ", math(String.raw`n\in\mathbb N`),
-                    " について Cauchy 積の ", math(String.raw`n`),
-                    " 次係数が ", math(String.raw`d_n`),
-                    " に一致することを示せばよい（",
-                    math(String.raw`\because`), " ", ref("def_qbar_formal_power_series"),
-                    "）。", math(String.raw`n=0`), " のとき:",
+                    ref("def_algebraic_numbers"), " により有理数体は ", math(String.raw`\overline{\mathbb Q}`),
+                    " の部分体なので ", math(String.raw`2\ne0`), " であり、矛盾する。よって ",
+                    math(String.raw`S+T\ne0_{\mathrm{pol}}`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-\sum_{j=0}^{0}s_js_{0-j}
-&=s_0s_0
-&&\bigl(\because\ \text{一項の和}\bigr)\\
-&=1\cdot1
-&&\bigl(\because\ s_0=1.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
-&=1
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法単位元}\bigr)\\
-&=d_0
-&&\bigl(\because\ \mathrm{ac}_0(D)=1\text{（仮定）と }\mathrm{ac}_0(D)=d_0.\ \blkref{def_qbar_formal_power_series}\bigr)
+(S-T)(S+T)=0_{\mathrm{pol}}
+&\Longrightarrow S-T=0_{\mathrm{pol}}\ \text{または}\ S+T=0_{\mathrm{pol}}
+&&\bigl(\because\ \text{多項式の零積性。}\blkref{claim_qbar_polynomial_zero_product}\bigr)\\
+&\Longrightarrow S-T=0_{\mathrm{pol}}
+&&\bigl(\because\ S+T\ne0_{\mathrm{pol}}\text{（直前の結論）}\bigr)
 \end{aligned}`),
-                  paragraph([
-                    math(String.raw`n\ge1`), " のとき（",
-                    math(String.raw`n=1`), " では ",
-                    math(String.raw`\sum_{j=1}^{n-1}`),
-                    " は空和で値は ", math(String.raw`0`), " である）:",
-                  ]),
                   displayMath(String.raw`\begin{aligned}
-\sum_{j=0}^{n}s_js_{n-j}
-&=s_0s_n+\left(\sum_{j=1}^{n-1}s_js_{n-j}\right)+s_ns_0
-&&\bigl(\because\ \text{有限和から }j=0\text{ と }j=n\text{ の項を分ける}\bigr)\\
-&=s_n+\left(\sum_{j=1}^{n-1}s_js_{n-j}\right)+s_n
-&&\bigl(\because\ s_0=1\text{ と }\overline{\mathbb Q}\text{ の乗法単位元}.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
-&=2s_n+\sum_{j=1}^{n-1}s_js_{n-j}
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法と分配則}\bigr)\\
-&=\left(d_n-\sum_{j=1}^{n-1}s_js_{n-j}\right)+\sum_{j=1}^{n-1}s_js_{n-j}
-&&\bigl(\because\ 2s_n=d_n-\textstyle\sum_{j=1}^{n-1}s_js_{n-j}.\ \blkref{def_sqrt_coefficient_recursion}\bigr)\\
-&=d_n
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr)
+S&=(S-T)+T
+&&\bigl(\because\ \text{加法群の法則}\bigr)\\
+&=0_{\mathrm{pol}}+T
+&&\bigl(\because\ S-T=0_{\mathrm{pol}}\text{（直前の結論）}\bigr)\\
+&=T
+&&\bigl(\because\ \text{加法単位元の法則}\bigr)
 \end{aligned}`),
-                  paragraph([
-                    "ゆえにすべての ", math(String.raw`n\in\mathbb N`),
-                    " で Cauchy 積の ", math(String.raw`n`), " 次係数は ",
-                    math(String.raw`d_n`), " に一致し、",
-                    math(String.raw`S(x)S(x)=D(x)`), " である。",
-                  ]),
                 ],
               },
             },
@@ -81917,7 +81817,8 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       ref("claim_signed_even_subgraph_sector_sum"), " から従い、Arf 符号も双対変数への置換も前因子 ",
                       math(String.raw`2^{L^2}`), " も要らない）を示し、前段の平方恒等式と合わせて各 ",
                       math(String.raw`Q^{a,b}_L`), " が ", math(String.raw`D^{a,b}_L`),
-                      " の定数項 1 の形式的平方根であることを示すこと。四項の符号はすべて正である。",
+                      " の定数項 1 の多項式平方根（", ref("def_qbar_polynomial_square_root"),
+                      "）であることを示すこと。四項の符号はすべて正である。",
                     ],
                     [
                       "有限 Fourier 分解。",
