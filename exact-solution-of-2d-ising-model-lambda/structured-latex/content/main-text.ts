@@ -9918,6 +9918,81 @@ p^{[n]}(\tau(i))&=\tau(q^{[n]}(i))&&\bigl(\because\ \text{上の帰納法}\bigr)
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_component",
+        labels: [],
+        title: { text: "対になった二歩軌道の合併の始点独立性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_component",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_component",
+                title: { text: "二歩の軌道と第一の相手の軌道の合併" },
+                labels: ["def_matching_pair_component"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent"],
+                statement: [
+                  paragraph([ref("def_matching_pair_step"), " の有限番号集合 ", math(String.raw`\mathcal J`), "、相手写像 ", math(String.raw`\tau,\upsilon`), "、二歩置換 ", math(String.raw`p`), " を固定する。各 ", math(String.raw`i\in\mathcal J`), " に対し、部分集合を"]),
+                  displayMath(String.raw`\mathcal B_{\tau,\upsilon}(i):=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))\subseteq\mathcal J`),
+                  paragraph(["と定める。軌道の意味は ", ref("def_finite_permutation_orbit"), " に従う。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_component_basepoint",
+              title: { text: "対になった二歩軌道の合併はその中の始点によらない" },
+              labels: ["claim_matching_pair_component_basepoint"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-component-basepoint"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent_basepoint",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent_basepoint",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent_basepoint_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_component"), " の記号を使う。任意の ", math(String.raw`i,j\in\mathcal J`), " について、"]),
+                displayMath(String.raw`j\in\mathcal B_{\tau,\upsilon}(i)\quad\Longrightarrow\quad\mathcal B_{\tau,\upsilon}(j)=\mathcal B_{\tau,\upsilon}(i).`),
+              ],
+              proof: [
+                paragraph([math(String.raw`j\in\mathcal B_{\tau,\upsilon}(i)`), " を仮定する。", ref("def_matching_pair_component"), " の合併の定義に従い、所属する軌道で場合分けする。まず ", math(String.raw`j\in\operatorname{Orb}_p(i)`), " の場合、"]),
+                displayMath(String.raw`\tau(j)\in\operatorname{Orb}_p(\tau(i))\qquad\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr).`),
+                displayMath(String.raw`\begin{aligned}
+\mathcal B_{\tau,\upsilon}(j)
+&=\operatorname{Orb}_p(j)\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)\\
+&=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
+&=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
+&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`j\in\operatorname{Orb}_p(\tau(i))`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau(j)&\in\operatorname{Orb}_p(\tau(\tau(i)))&&\bigl(\because\ \blkref{claim_matching_pair_orbit_exchange}\bigr),\\
+\tau(\tau(i))&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr),\\
+\tau(j)&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \text{直前の等号による所属の移し替え}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\mathcal B_{\tau,\upsilon}(j)
+&=\operatorname{Orb}_p(j)\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr)\\
+&=\operatorname{Orb}_p(\tau(i))\cup\operatorname{Orb}_p(\tau(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
+&=\operatorname{Orb}_p(\tau(i))\cup\operatorname{Orb}_p(i)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr)\\
+&=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))&&\bigl(\because\ \text{合併の可換性}\bigr)\\
+&=\mathcal B_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{def_matching_pair_component}\bigr).
+\end{aligned}`),
+                paragraph(["二つの場合で同じ結論を得た。空集合には始点がなく、共有する対でも同じ論法が通る。使った対象は有限番号集合とその部分集合だけであり、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -42129,33 +42204,63 @@ x_c
                       verification: ["sagemath/check/self-dual-root-positive"],
                       lean: [
                         "Ising2DLambda.FisherZero.selfDualRootMinus_representation",
-                        "Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf",
+                        "Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_representation_necSuf",
                         "Ising2DLambda.FisherZero.selfDualRootMinus_representation_from_necSuf",
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          "（", ref("def_algebraic_numbers"), "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          "包含写像を ", math(String.raw`\iota:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          "（", ref("def_algebraic_numbers"), "）と書く。",
+                          math(String.raw`s\in\overline{\mathbb Q}`), " を ",
+                          math(String.raw`s\cdot s=\iota(2_{\mathbb Q})`),
                           " を満たす元とする（", ref("claim_sqrt_two_exists"), "）。",
                           ref("claim_self_dual_root_minus_mem"),
-                          " により ", math(String.raw`-1-s\in Q_s`),
+                          " により ", math(String.raw`-1_{\overline{\mathbb Q}}-s\in Q_s`),
                           " であり、",
-                          math(String.raw`\mathrm{rep}_s(-1-s)=(-1,-1)`),
+                          math(String.raw`\mathrm{rep}_s(-1_{\overline{\mathbb Q}}-s)=(-1_{\mathbb Q},-1_{\mathbb Q})\in\mathbb Q\times\mathbb Q`),
                           "（", ref("def_quadratic_representation_map"), "）である。",
                         ]),
                       ],
                       proof: [
                         paragraph([
-                          ref("claim_self_dual_root_minus_mem"),
-                          " の証明の鎖により ",
-                          math(String.raw`-1-s=(-1)+(-1)\cdot s`),
-                          " である。表示の写像の値は次の等式で決まる。",
+                          "まず根と表示写像の値の所属を確かめる。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\mathrm{rep}_s(-1-s)
-&=(-1,-1)
-&&\bigl(\because\ -1-s=(-1)+(-1)\cdot s,\ \blkref{def_quadratic_representation_map},\ \blkref{claim_quadratic_representation_unique}\bigr).
+-1_{\overline{\mathbb Q}}-s&\in Q_s
+&&\bigl(\because\ \blkref{claim_self_dual_root_minus_mem}\bigr),\\
+\mathrm{rep}_s(-1_{\overline{\mathbb Q}}-s)&\in\mathbb Q\times\mathbb Q
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`(a,b):=\mathrm{rep}_s(-1_{\overline{\mathbb Q}}-s)\in\mathbb Q\times\mathbb Q`),
+                          " と置く。有理数体の一を ", math(String.raw`1_{\mathbb Q}\in\mathbb Q`),
+                          "、代数的数の体の一を ", math(String.raw`1_{\overline{\mathbb Q}}\in\overline{\mathbb Q}`),
+                          " と区別する。表示が復元する値を代数的数の体の中で計算すると、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\iota(a)+\iota(b)\cdot s
+&=-1_{\overline{\mathbb Q}}-s
+&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+&=(-1_{\overline{\mathbb Q}})+(-s)
+&&\bigl(\because\ \text{記法 }\blkref{claim_self_dual_quadratic_roots}\bigr)\\
+&=\bigl(-\iota(1_{\mathbb Q})\bigr)+(-s)
+&&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(-1_{\mathbb Q})+(-s)
+&&\bigl(\because\ \iota\text{ の負号の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(-1_{\mathbb Q})+\bigl(-(1_{\overline{\mathbb Q}}\cdot s)\bigr)
+&&\bigl(\because\ \text{左単位元則}\bigr)\\
+&=\iota(-1_{\mathbb Q})+(-1_{\overline{\mathbb Q}})\cdot s
+&&\bigl(\because\ \text{積の加法逆元}\bigr)\\
+&=\iota(-1_{\mathbb Q})+\bigl(-\iota(1_{\mathbb Q})\bigr)\cdot s
+&&\bigl(\because\ \iota\text{ の一の保存}\ \blkref{def_algebraic_numbers}\bigr)\\
+&=\iota(-1_{\mathbb Q})+\iota(-1_{\mathbb Q})\cdot s
+&&\bigl(\because\ \iota\text{ の負号の保存}\ \blkref{def_algebraic_numbers}\bigr).
+\end{aligned}`),
+                        paragraph(["したがって、有理係数の組は次のように確定する。"]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{rep}_s(-1_{\overline{\mathbb Q}}-s)
+&=(-1_{\mathbb Q},-1_{\mathbb Q})
+&&\bigl(\because\ \blkref{claim_quadratic_representation_unique}\text{ を上の等式へ適用}\bigr).
 \end{aligned}`),
                         paragraph([
                           "全過程は体 ",

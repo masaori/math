@@ -78,9 +78,27 @@ noncomputable def selfDualRootMinus (s : Qbar) : QuadraticFieldElement s :=
 theorem selfDualRootMinus_representation (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     quadraticRepresentation s (selfDualRootMinus s) = (-1, -1) := by
-  apply quadraticRepresentation_eq s hs (selfDualRootMinus s) (-1) (-1)
-  change -1 - s = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar (-1) * s
-  simp [sub_eq_add_neg]
+  let p : ℚ × ℚ := quadraticRepresentation s (selfDualRootMinus s)
+  have hvalue : algebraMap ℚ Qbar p.1 + algebraMap ℚ Qbar p.2 * s =
+      algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar (-1) * s := calc
+    _ = -1 - s := (quadraticRepresentation_spec s (selfDualRootMinus s)).symm
+    _ = -1 + (-s) := sub_eq_add_neg _ _
+    _ = (-(algebraMap ℚ Qbar 1)) + (-s) :=
+      congrArg (fun x : Qbar => -x + (-s)) (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + (-s) :=
+      congrArg (fun x : Qbar => x + (-s)) (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
+    _ = algebraMap ℚ Qbar (-1) + (-(1 * s)) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + (-x)) (one_mul s).symm
+    _ = algebraMap ℚ Qbar (-1) + ((-1) * s) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x) (neg_mul (1 : Qbar) s).symm
+    _ = algebraMap ℚ Qbar (-1) + ((-(algebraMap ℚ Qbar 1)) * s) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + (-x) * s)
+        (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar (-1) * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x * s)
+        (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
+  have hcoeff := quadraticRepresentationUnique s hs p.1 p.2 (-1) (-1) hvalue
+  exact Prod.ext hcoeff.1 hcoeff.2
 
 /-- `claim_self_dual_root_plus_positive` の具体版。 -/
 theorem selfDualRootPlus_mem_positiveCone (s : Qbar)

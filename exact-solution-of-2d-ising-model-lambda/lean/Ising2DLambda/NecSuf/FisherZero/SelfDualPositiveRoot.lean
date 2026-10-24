@@ -62,11 +62,31 @@ theorem selfDualRootMinus_mem_necSuf
     _ = j (-1) + j (-1) * s :=
       congrArg (fun x : K => j (-1) + x * s) hNegOne.symm
 
-theorem representation_of_value_necSuf
-    {A K : Type} (combine : A → A → K) (rep : K → A × A)
-    (hUnique : ∀ x a b, x = combine a b → rep x = (a, b))
-    (a b : A) : rep (combine a b) = (a, b) := by
-  exact hUnique (combine a b) a b rfl
+/-- 表示復元と係数一意性を、減法・包含保存・指定した積の法則で結ぶ。
+平方根と体構造は一意性を供給する側だけで使い、係数対の結論は仮定しない。 -/
+theorem selfDualRootMinus_representation_necSuf
+    {A K : Type*} [One A] [Neg A] [One K] [Neg K] [Add K] [Mul K] [Sub K]
+    (j : A → K) (s : K) (p : A × A)
+    (hSpec : -1 - s = j p.1 + j p.2 * s)
+    (hSub : (-1 : K) - s = -1 + (-s))
+    (hOne : j 1 = 1) (hNegOne : j (-1) = -(j 1))
+    (hOneMul : (1 : K) * s = s) (hNegMul : (-1 : K) * s = -(1 * s))
+    (hUnique : ∀ a b c d : A,
+      j a + j b * s = j c + j d * s → a = c ∧ b = d) :
+    p = (-1, -1) := by
+  have hvalue : j p.1 + j p.2 * s = j (-1) + j (-1) * s := calc
+    _ = -1 - s := hSpec.symm
+    _ = -1 + (-s) := hSub
+    _ = (-(j 1)) + (-s) := congrArg (fun x : K => -x + (-s)) hOne.symm
+    _ = j (-1) + (-s) := congrArg (fun x : K => x + (-s)) hNegOne.symm
+    _ = j (-1) + (-(1 * s)) := congrArg (fun x : K => j (-1) + (-x)) hOneMul.symm
+    _ = j (-1) + ((-1) * s) := congrArg (fun x : K => j (-1) + x) hNegMul.symm
+    _ = j (-1) + ((-(j 1)) * s) :=
+      congrArg (fun x : K => j (-1) + (-x) * s) hOne.symm
+    _ = j (-1) + j (-1) * s :=
+      congrArg (fun x : K => j (-1) + x * s) hNegOne.symm
+  have hcoeff := hUnique p.1 p.2 (-1) (-1) hvalue
+  exact Prod.ext hcoeff.1 hcoeff.2
 
 theorem positive_of_representation_necSuf
     {A K : Type} (rep : K → A × A) (positive : A × A → Prop)

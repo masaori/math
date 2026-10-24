@@ -94,3 +94,32 @@ done
 | `check_minus_mem_root.sage` | PASS | 2 |
 
 実行日: 2026-10-24。所属の十二行を両平方根で検算し、既存の全行と統合検算（表示一意性98組）も通過した。有限検算は一般証明の代わりではない。
+
+## 根 −1−s の表示の行別検算
+
+表示の係数対は、根の代数的数の値を両埋込みの数体へ逆変換して取得する。期待する係数対を抽出へ与えず、最後の表示一意性の行で比較する。本文の二所属・八等号・係数対の一等号を一行一ファイルで検査する。
+
+| ファイル | 本文の行 | 状態 | 件数 |
+|---|---|---|---|
+| `check_minus_rep_root_membership.sage` | 根の二次体への所属 | PASS | 2 |
+| `check_minus_rep_coefficient_membership.sage` | 表示の有理数対への所属 | PASS | 2 |
+| `check_minus_rep_reconstruction.sage` | 表示写像による値の復元 | PASS | 2 |
+| `check_minus_rep_notation.sage` | 減法の記法 | PASS | 2 |
+| `check_minus_rep_map_one.sage` | 包含の一保存 | PASS | 2 |
+| `check_minus_rep_map_neg.sage` | 包含の負号保存 | PASS | 2 |
+| `check_minus_rep_unit_product.sage` | 左単位元の挿入 | PASS | 2 |
+| `check_minus_rep_negative_product.sage` | 積の加法逆元 | PASS | 2 |
+| `check_minus_rep_coefficient_one.sage` | 係数の一の包含像への置換 | PASS | 2 |
+| `check_minus_rep_coefficient_neg.sage` | 係数の負号保存 | PASS | 2 |
+| `check_minus_rep_unique.sage` | 表示一意性による係数対の一致 | PASS | 2 |
+
+2026-10-24: 行別11本を両平方根で検算して通過した。既存の行別30本と統合検算（表示一意性98組）も通過した。有限検算は一般証明の代わりではない。
+
+実行コマンド（プロジェクト直下から実行し、SageMath の `load` 前に入力ファイルの `__file__` を明示する）:
+
+```sh
+micromamba run -n sage sage -c 'from pathlib import Path
+for p in sorted(Path("sagemath/check/self-dual-root-positive").glob("check*.sage")):
+    __file__ = str(p.resolve())
+    load(__file__)'
+```

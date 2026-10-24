@@ -52,6 +52,10 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_representation_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent_basepoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent_basepoint
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent_basepoint_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_iterate
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_inverse_iterate
   Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_mem
@@ -1594,7 +1598,6 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_mem_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_mem_from_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_representation
-  Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf
   Ising2DLambda.NecSuf.FisherZero.selfDualRootPlus_representation_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_representation_from_necSuf
   Ising2DLambda.FisherZero.selfDualRootMinus_mem
