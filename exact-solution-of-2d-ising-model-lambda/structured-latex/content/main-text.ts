@@ -9503,6 +9503,133 @@ w_A(\sigma)+w_A(\tau)
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_qbar_polynomial_zero_product",
+        labels: [],
+        title: { text: "代数的数係数多項式の零積性" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_qbar_polynomial_zero_product",
+            focus: {
+              id: "tools_claim_qbar_polynomial_zero_product",
+              kind: "claim",
+              title: { text: "代数的数係数多項式の積が零なら一方が零である" },
+              labels: ["claim_qbar_polynomial_zero_product"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/qbar-polynomial-zero-product"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_zero_product",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.polynomial_zero_product_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_zero_product_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  math(String.raw`f,g\in\overline{\mathbb Q}[t]`), "（",
+                  ref("def_qbar_polynomial_ring"), "）とする。零多項式を ",
+                  math(String.raw`0_{\rm pol}\in\overline{\mathbb Q}[t]`),
+                  "、係数の零元を ", math(String.raw`0\in\overline{\mathbb Q}`), " と書く。このとき",
+                ]),
+                displayMath(String.raw`fg=0_{\rm pol}\ \Longrightarrow\ f=0_{\rm pol}\ \text{または}\ g=0_{\rm pol}`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph([
+                  math(String.raw`fg=0_{\rm pol}`), " を仮定する。結論が偽だと仮定すると ",
+                  math(String.raw`f\ne0_{\rm pol}`), " かつ ", math(String.raw`g\ne0_{\rm pol}`),
+                  " である。多項式の等号は全係数の一致であるから（", ref("def_qbar_polynomial_ring"),
+                  "）、非零係数の添字の集合 ",
+                  math(String.raw`A_f:=\{k\in\mathbb N\mid\mathrm{ac}_k(f)\ne0\}`), " と ",
+                  math(String.raw`A_g:=\{k\in\mathbb N\mid\mathrm{ac}_k(g)\ne0\}`),
+                  " はともに空でない。自然数の整列性により、その最小元をそれぞれ ",
+                  math(String.raw`m:=\min A_f\in\mathbb N`), "、",
+                  math(String.raw`n:=\min A_g\in\mathbb N`), " と取れる。したがって",
+                ]),
+                displayMath(String.raw`\mathrm{ac}_m(f)\ne0,\quad\mathrm{ac}_n(g)\ne0
+\qquad\bigl(\because\ m\in A_f,\ n\in A_g\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i(f)&=0\quad(i\in\mathbb N,\ i<m)
+&&\bigl(\because\ m\text{ の最小性}\bigr)\\
+\mathrm{ac}_j(g)&=0\quad(j\in\mathbb N,\ j<n)
+&&\bigl(\because\ n\text{ の最小性}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "有限集合 ", math(String.raw`B:=\{(i,j)\in\mathbb N^2\mid i+j=m+n\}`),
+                  " を置く。", math(String.raw`(m,n)\in B`), " である。任意の ",
+                  math(String.raw`(i,j)\in B\setminus\{(m,n)\}`), " を固定する。",
+                  math(String.raw`i<m`), " のときは",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i(f)\mathrm{ac}_j(g)
+&=0\cdot\mathrm{ac}_j(g)
+&&\bigl(\because\ \mathrm{ac}_i(f)=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
+\end{aligned}`),
+                paragraph([
+                  math(String.raw`m\le i`), " のときは、もし ", math(String.raw`i=m`),
+                  " なら ", math(String.raw`m+j=m+n`), " から ", math(String.raw`j=n`),
+                  " となり、", math(String.raw`(i,j)\ne(m,n)`), " に反する。よって",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+m&<i
+&&\bigl(\because\ m\le i,\ i\ne m\bigr)\\
+m+j&<i+j
+&&\bigl(\because\ \mathbb N\text{ の加法による狭義順序の保存}\bigr)\\
+m+j&<m+n
+&&\bigl(\because\ i+j=m+n\bigr)\\
+j&<n
+&&\bigl(\because\ \mathbb N\text{ の加法の消去}\bigr),
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_i(f)\mathrm{ac}_j(g)
+&=\mathrm{ac}_i(f)\cdot0
+&&\bigl(\because\ \mathrm{ac}_j(g)=0\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零元との積}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "どちらの場合も、", math(String.raw`B`), " の ", math(String.raw`(m,n)`),
+                  " 以外の項は零である。添字の取り替えは全単射 ",
+                  math(String.raw`\{0,\ldots,m+n\}\longrightarrow B,\quad i\longmapsto(i,m+n-i)`),
+                  " による。その逆写像は ", math(String.raw`(i,j)\longmapsto i`),
+                  " であり、", math(String.raw`i+j=m+n`), " から ", math(String.raw`j=m+n-i`),
+                  " が従うので両合成は恒等写像である。積の係数を計算すると、",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+n}(fg)
+&=\sum_{i=0}^{m+n}\mathrm{ac}_i(f)\mathrm{ac}_{m+n-i}(g)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\bigr)\\
+&=\sum_{(i,j)\in B}\mathrm{ac}_i(f)\mathrm{ac}_j(g)
+&&\bigl(\because\ \text{上の全単射による再添字付け}\bigr)\\
+&=\mathrm{ac}_m(f)\mathrm{ac}_n(g)
+&&\bigl(\because\ (m,n)\in B\text{ と他の全項が零}\bigr)\\
+&\ne0
+&&\bigl(\because\ \blkref{claim_qbar_no_zero_divisors}\text{ と両係数の非零性}\bigr).
+\end{aligned}`),
+                paragraph(["一方、仮定からは、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_{m+n}(fg)
+&=\mathrm{ac}_{m+n}(0_{\rm pol})
+&&\bigl(\because\ fg=0_{\rm pol}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_qbar_polynomial_ring}\text{ の零多項式の係数}\bigr).
+\end{aligned}`),
+                paragraph([
+                  "これは上の非零性に反する。したがって ", math(String.raw`f=0_{\rm pol}`),
+                  " または ", math(String.raw`g=0_{\rm pol}`),
+                  " である。用いたのは代数的数の体演算、自然数の最小元、有限和だけであり、実数体・複素数体への脱出はない。",
+                ]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_formal_square_root",
         labels: [],
         title: { text: "定数項一の形式的平方根" },
