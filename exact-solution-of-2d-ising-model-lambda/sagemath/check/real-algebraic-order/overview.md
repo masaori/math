@@ -6,7 +6,7 @@
 `def_real_algebraic_strict_order`, `def_real_algebraic_nonstrict_order`,
 `claim_real_algebraic_order_trichotomy`
 
-- 実行日: 2026-08-14
+- 実行日: 2026-10-24
 - 結果: 有限標本検査がすべて通過
 - 帰属: `QQ`・`AA`・`QQbar` の厳密計算。浮動小数点を使わない。
 

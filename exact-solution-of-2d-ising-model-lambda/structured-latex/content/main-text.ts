@@ -10812,6 +10812,63 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_empty_pfaffian_determinant",
+        labels: [],
+        title: { text: "空の添字集合の Pfaffian と行列式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_empty_pfaffian_determinant",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_empty_pfaffian_determinant",
+              title: { text: "空の添字集合では Pfaffian も行列式も一である" },
+              labels: ["claim_empty_pfaffian_determinant"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/empty-pfaffian-determinant"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.emptyPfaffianDeterminant",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.emptyWeightedPfaffianDeterminant",
+                "Ising2DLambda.AlgebraicEigenvalue.emptyPfaffianDeterminant_from_necSuf",
+              ],
+              statement: [
+                paragraph(["空の線型順序集合 ", math(String.raw`\mathcal J=\varnothing`), " 上の唯一の零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " について、", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_determinant_with_empty_index"), " の値は"]),
+                displayMath(String.raw`\operatorname{Pf}(A)=1,\qquad \det_x(A)=1,\qquad \operatorname{Pf}(A)^2=\det_x(A)\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["である。"]),
+              ],
+              proof: [
+                paragraph(["空集合の完全マッチングは空の対の族だけである。その昇順対の集合も空であり、", ref("def_perfect_matching_sign"), " の符号は空置換の符号 ", math(String.raw`1`), " である。従って"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{Pf}(A)
+&=\sum_{D\in\{\varnothing\}}c_Db_D&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr)\\
+&=c_{\varnothing}b_{\varnothing}&&\bigl(\because\ \text{一項の和}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \blkref{def_perfect_matching_sign},\ \text{空積}\bigr)\\
+&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr).
+\end{aligned}`),
+                paragraph(["空集合の置換は空置換だけで、その符号は一、行列成分の積は空積である。よって"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(A)
+&=\sum_{\sigma\in\{\operatorname{id}_{\varnothing}\}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\varnothing}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{def_qbar_determinant_with_empty_index}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \text{空置換の符号と空積}\bigr)\\
+&=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{Pf}(A)^2
+&=1^2&&\bigl(\because\ \operatorname{Pf}(A)=1\bigr)\\
+&=1&&\bigl(\because\ \text{単位元の平方}\bigr)\\
+&=\det_x(A)&&\bigl(\because\ \det_x(A)=1\bigr).
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -42596,7 +42653,7 @@ q
                           " に属する。和は ", math(String.raw`\overline{\mathbb{Q}}`),
                           " の有限和であり、多項式とその値を区別して ", math(String.raw`Z_L(x_c)`),
                           " と書く。任意の ", math(String.raw`c\in\mathbb N`), " と ",
-                          math(String.raw`\xi\in Q_s`), " について、自然数倍 ",
+                          math(String.raw`\xi\in P_s`), " について、自然数倍 ",
                           math(String.raw`c\,\xi`), " は ", math(String.raw`j(\nu(c))\cdot\xi`),
                           " を表す（", ref("claim_quadratic_positive_cone_nat_mul"), "）。",
                           "特に各項 ", math(String.raw`\Omega_L(m)x_c^m`), " はこの自然数倍である。",
@@ -44523,40 +44580,18 @@ q&\in R&&\bigl(\because\ q=k\cdot n^{-1}\text{ の代入}\bigr).
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          "背理法による。零元でない ",
-                          math(String.raw`w\in R`),
-                          " が ",
-                          math(String.raw`w\cdot w=-1`),
-                          " を満たすと仮定する。",
-                          ref("def_real_closed_subfield"),
-                          " の第 2 条件（平方の三分法）を元 ",
-                          math(String.raw`z:=1\in R`),
-                          "（",
-                          ref("claim_rationals_are_real_algebraic"),
-                          "）へ適用する。",
-                          math(String.raw`1=1\cdot1`),
-                          " かつ ",
-                          math(String.raw`1\ne0`),
-                          " なので（体の乗法単位元の性質と、体の公理 ",
-                          math(String.raw`1\ne0`),
-                          "）、第 2 の場合「ある零元でない ",
-                          math(String.raw`w'\in R`),
-                          " が存在して ",
-                          math(String.raw`z=w'\cdot w'`),
-                          "」が成り立つ。一方、仮定から ",
-                          math(String.raw`-z=-1=w\cdot w`),
-                          " かつ ",
-                          math(String.raw`w\ne0`),
-                          " なので、第 3 の場合「ある零元でない ",
-                          math(String.raw`w\in R`),
-                          " が存在して ",
-                          math(String.raw`-z=w\cdot w`),
-                          "」も成り立つ。これは第 2 の場合と第 3 の場合が同時に成り立たないこと",
-                          "（第 2 条件の「ちょうど 1 つ」）に矛盾する。ゆえに ",
-                          math(String.raw`w\cdot w\ne-1`),
-                          " である。",
-                        ]),
+                        paragraph(["背理法による。", math(String.raw`w\in R`), " が ", math(String.raw`w\ne0`), " かつ ", math(String.raw`w\cdot w=-1`), " を満たすと仮定し、", math(String.raw`z:=1\in R`), " と置く。", ref("claim_rationals_are_real_algebraic"), " により ", math(String.raw`z\in R`), " である。"]),
+                        displayMath(String.raw`\begin{aligned}
+z&=1&&\bigl(\because\ z\text{ の定義}\bigr)\\
+&=1\cdot1&&\bigl(\because\ \text{乗法単位元則}\bigr),\\
+1&\ne0&&\bigl(\because\ \text{体の公理}\bigr).
+\end{aligned}`),
+                        paragraph([ref("def_real_closed_subfield"), " の平方の三分法の第二の場合が ", math(String.raw`z`), " について成り立つ。証人は ", math(String.raw`w':=1\in R`), " であり、", math(String.raw`w'\ne0`), " である。一方、"]),
+                        displayMath(String.raw`\begin{aligned}
+-z&=-1&&\bigl(\because\ z=1\bigr)\\
+&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr).
+\end{aligned}`),
+                        paragraph([math(String.raw`w\in R`), " かつ ", math(String.raw`w\ne0`), " なので、", ref("def_real_closed_subfield"), " の平方の三分法の第三の場合も ", math(String.raw`z`), " について成り立つ。第二の場合と第三の場合の同時成立は三分法の排他性に反する。従って ", math(String.raw`w\cdot w\ne-1`), " である。"]),
                       ],
                     },
                 },
