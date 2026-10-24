@@ -10703,6 +10703,55 @@ m&\in C_\sigma&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\bigr).
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_reverse_permutation",
+        labels: [],
+        title: { text: "マッチング対を経た置換の再構成" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_reverse_permutation",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_reverse_permutation",
+              title: { text: "マッチング対を経た置換の再構成は元の置換に等しい" },
+              labels: ["claim_matching_pair_reverse_permutation"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-reverse-permutation"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq_from_necSuf",
+              ],
+              statement: [
+                paragraph(["線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、全軌道長が偶数の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取る。", ref("def_even_orbit_coloring"), " の第一色を ", math(String.raw`C_\sigma`), " とし、", ref("def_alternating_neighbor_pairs"), " の二つの相手写像を ", math(String.raw`\tau:=\tau_{\sigma,C_\sigma}`), "、", math(String.raw`\upsilon:=\tau_{\sigma^{-1},C_\sigma}`), " と置く。", ref("claim_alternating_neighbor_matchings"), " により両者は完全マッチングの相手写像である。この対から ", ref("claim_matching_pair_permutation"), " の置換を作ると、"]),
+                displayMath(String.raw`\sigma_{\tau,\upsilon}=\sigma`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を取る。", ref("claim_matching_pair_reverse_color"), " により、復元した第一色への所属は ", math(String.raw`i\in C_{\tau,\upsilon}\Longleftrightarrow i\in C_\sigma`), " である。まず ", math(String.raw`i\in C_\sigma`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma_{\tau,\upsilon}(i)
+&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\in C_{\tau,\upsilon}\bigr)\\
+&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs},\ i\in C_\sigma\bigr).
+\end{aligned}`),
+                paragraph(["次に ", math(String.raw`i\notin C_\sigma`), " の場合、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma_{\tau,\upsilon}(i)
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_matching_pair_successor},\ i\notin C_{\tau,\upsilon}\bigr)\\
+&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\text{ を }\sigma^{-1}\text{ に適用},\ i\notin C_\sigma\bigr).
+\end{aligned}`),
+                paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " の像が一致するため、二つの置換は等しい。", math(String.raw`\mathcal J=\varnothing`), " の場合も、空集合上の二写像の外延性によって同じ結論になる。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -44299,8 +44348,10 @@ q\in\mathcal F_L&\Longleftrightarrow\mathrm{Ev}^{F}_{q}(Z_L)=0_{\overline{\mathb
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \omega^{4}
+&=\omega^{2}\cdot\omega^{2}
+&&(\because\ \text{自然数の指数法則 }4=2+2)\\
 &=(\omega\cdot\omega)\cdot(\omega\cdot\omega)
-&&(\because\ \text{冪の定義})\\
+&&(\because\ \text{二乗の定義})\\
 &=(-1)\cdot(-1)
 &&(\because\ \omega\cdot\omega=-1)\\
 &=1

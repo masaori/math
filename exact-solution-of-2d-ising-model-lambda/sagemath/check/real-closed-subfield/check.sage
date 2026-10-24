@@ -10,10 +10,9 @@
 # そのため第 4 条件の存在の検査は次数の低いサンプルに限り、有限格子の
 # Fisher 零点そのもの（次数 8 以上）は検査から外す。検査の内容自体は緩めない。
 
-import os
-
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+from pathlib import Path
+_root = next(d for d in (Path.cwd(), *Path.cwd().parents) if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 omega = QQbar(I)
 
@@ -61,6 +60,8 @@ def check_condition_square_trichotomy():
 def check_condition_imaginary_unit():
     # 第 3 条件: ω·ω = -1。あわせて ω^4 = 1（ω ∈ μ_4）も確かめる。
     assert omega * omega == QQbar(-1)
+    assert omega ** 4 == (omega ** 2) * (omega ** 2)
+    assert (omega ** 2) * (omega ** 2) == (omega * omega) * (omega * omega)
     assert omega ** 4 == QQbar(1)
     print("第 3 条件（虚数単位）: 通過（ω^2 = -1, ω^4 = 1）", flush=True)
 
