@@ -41419,11 +41419,13 @@ Z_L(x_c)
                       statement: [
                         paragraph([
                           math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
-                          " とする。", math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          " とする。有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          " と書く。", math(String.raw`s\in\overline{\mathbb{Q}}`),
                           "（", ref("def_algebraic_numbers"), "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          math(String.raw`s\cdot s=j(2)`),
                           " を満たす元とし（", ref("claim_sqrt_two_exists"), "）、臨界点を ",
-                          math(String.raw`x_c=-1+s`),
+                          math(String.raw`x_c=j(-1)+s`),
                           "（", ref("def_critical_point"), "）とする。このとき",
                         ]),
                         displayMath(String.raw`x_c\notin\mathcal{F}_{L}`),
@@ -41438,77 +41440,74 @@ Z_L(x_c)
                       ],
                       proof: [
                         paragraph([
-                          "準備。値 ",
-                          math(String.raw`\xi:=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^{m}\in\overline{\mathbb{Q}}`),
-                          " と置く（有限和と冪は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の演算）。次の鎖を得る。",
+                          "自然数の包含を ", math(String.raw`\nu:\mathbb N\hookrightarrow\mathbb Q`),
+                          " とし、値 ",
+                          math(String.raw`\xi:=\sum_{m=0}^{2L^2}j(\nu(\Omega_L(m)))\,x_c^m\in\overline{\mathbb Q}`),
+                          " と置く。有限和・積・冪は代数的数体の演算であり、",
+                          math(String.raw`m\in\mathbb N`), " である。係数組の零は有理数の零とする。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{Ev}^{F}_{x_c}(Z_L)
-&=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^{m}
-&&\bigl(\because\ \blkref{def_qbar_polynomial_evaluation}\text{、係数は }\blkref{claim_coefficient_representation}\bigr)\\
+&=\mathrm{Ev}^{F}_{x_c}\!\left(\sum_{m=0}^{2L^2}\Omega_L(m)x^m\right)
+&&\bigl(\because\ \blkref{claim_coefficient_representation}\bigr)\\
+&=\sum_{m=0}^{2L^2}j(\nu(\Omega_L(m)))\,x_c^m
+&&\bigl(\because\ \blkref{def_qbar_polynomial_evaluation}\bigr)\\
 &=\xi
-&&\bigl(\because\ \xi\ \text{の定義}\bigr)\\
+&&\bigl(\because\ \xi\text{ の定義}\bigr)\\
 &\in P_s
-&&\bigl(\because\ \blkref{claim_critical_partition_value_mem_positive_cone}\bigr)
+&&\bigl(\because\ \blkref{claim_critical_partition_value_mem_positive_cone}\bigr)\\
+\xi
+&\in Q_s
+&&\bigl(\because\ \xi\in P_s,\ \blkref{def_quadratic_positive_cone}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "背理法を使う。",
-                          math(String.raw`x_c\in\mathcal{F}_{L}`),
-                          " と仮定する。組 ",
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb{Q}\times\mathbb{Q}`),
-                          "（", ref("def_quadratic_representation_map"),
-                          "）と置くと、次の鎖を得る。",
+                          "組 ", math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
+                          "（", ref("def_quadratic_representation_map"), "）と置く。背理法のため ",
+                          math(String.raw`x_c\in\mathcal F_L`), " と仮定する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-x_c
-&\in\mathcal F_L
-&&\bigl(\because\ \text{背理法の仮定}\bigr)\\
-&\Longrightarrow \mathrm{Ev}^{F}_{x_c}(Z_L)=0
-&&\bigl(\because\ \blkref{def_finite_lattice_fisher_zeros}\bigr)\\
-&\Longrightarrow \xi=0
-&&\bigl(\because\ \mathrm{Ev}^{F}_{x_c}(Z_L)=\xi\bigr)\\
-&\Longrightarrow (a,b)=(0,0)
-&&\bigl(\because\ \xi\in P_s\subseteq Q_s,\ \blkref{def_quadratic_positive_cone},\
-\ \blkref{claim_quadratic_zero_representation}\bigr)
-\end{aligned}`),
-                        paragraph([
-                          "この組について ",
-                          ref("def_quadratic_positive_cone"),
-                          " の三つの条件を順に確かめる。不等号はすべて有理数体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の順序である。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-(a,b)
+\mathrm{Ev}^{F}_{x_c}(Z_L)
+&=0_{\overline{\mathbb Q}}
+&&\bigl(\because\ x_c\in\mathcal F_L,\ \blkref{def_finite_lattice_fisher_zeros}\bigr)\\
+\xi
+&=\mathrm{Ev}^{F}_{x_c}(Z_L)
+&&\bigl(\because\ \text{上の評価等式}\bigr)\\
+&=0_{\overline{\mathbb Q}}
+&&\bigl(\because\ \text{零点の評価等式}\bigr)\\
+\mathrm{rep}_s(\xi)
 &=(0,0)
-&&\bigl(\because\ \text{上の鎖}\bigr)\\
-&\Longrightarrow \neg\bigl((a,b)\ne(0,0)\bigr)
-&&\bigl(\because\ \text{等号と不等号の定義}\bigr),\\[2mm]
-a
-&=0
-&&\bigl(\because\ (a,b)=(0,0)\bigr)\\
-&\Longrightarrow \neg(0<a)
-&&\bigl(\because\ \mathbb Q\ \text{の狭義順序の非反射性}\bigr),\\[2mm]
-a
-&=0
-&&\bigl(\because\ (a,b)=(0,0)\bigr)\\
-&\Longrightarrow \neg(a<0)
-&&\bigl(\because\ \mathbb Q\ \text{の狭義順序の非反射性}\bigr).
+&&\bigl(\because\ \blkref{claim_quadratic_zero_representation}\bigr)\\
+(a,b)
+&=\mathrm{rep}_s(\xi)
+&&\bigl(\because\ (a,b)\text{ の定義}\bigr)\\
+&=(0,0)
+&&\bigl(\because\ \text{上の零表示}\bigr)
 \end{aligned}`),
                         paragraph([
-                          ref("def_quadratic_positive_cone"),
-                          " により、正であることは三つの条件の少なくとも一つが成り立つことである。",
-                          "上の三条件の否定から次を得る。",
+                          ref("def_quadratic_positive_cone"), " の三つの条件を順に否定する。",
+                          "以下の零と不等号は有理数体 ", math(String.raw`\mathbb Q`), " のものである。",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+\neg\bigl((a,b)\ne(0,0)\bigr)
+&&&\bigl(\because\ (a,b)=(0,0)\bigr),\\
+a
+&=0
+&&\bigl(\because\ (a,b)=(0,0)\text{ の第一成分}\bigr),\\
+\neg(0<0)
+&&&\bigl(\because\ \mathbb Q\text{ の狭義順序の非反射性}\bigr),\\
+\neg(0<a)
+&&&\bigl(\because\ a=0\text{ を上の否定へ代入}\bigr),\\
+\neg(a<0)
+&&&\bigl(\because\ a=0\text{ を }\neg(0<0)\text{ へ代入}\bigr).
+\end{aligned}`),
                         displayMath(String.raw`\begin{aligned}
 \xi
 &\notin P_s
-&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\bigr)\\
-&\Longrightarrow \bot
-&&\bigl(\because\ \xi\in P_s\bigr)\\
-&\Longrightarrow x_c\notin\mathcal F_L
+&&\bigl(\because\ \text{上の三条件の否定},\ \blkref{def_quadratic_positive_cone}\bigr)\\
+\bot
+&&&\bigl(\because\ \xi\in P_s\text{ と }\xi\notin P_s\bigr)\\
+x_c
+&\notin\mathcal F_L
 &&\bigl(\because\ \text{背理法}\bigr).
 \end{aligned}`),
                         paragraph([

@@ -70,3 +70,5 @@ for L in (1, 2, 3):
 
 assert checked == 6
 print(f"OK: claim_critical_point_not_fisher_zero ({checked} 組)")
+
+load("sagemath/check/critical-point-not-fisher-zero/check_lines.sage")

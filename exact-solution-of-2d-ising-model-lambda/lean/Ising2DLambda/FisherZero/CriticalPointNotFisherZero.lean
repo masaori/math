@@ -30,7 +30,11 @@ theorem criticalPoint_not_mem_fisherZero (L : ℕ) [NeZero L] (s : Qbar)
   intro hroot
   have hzero : qbarPolynomialEval (criticalPoint s : Qbar) (partitionPolynomial L) = 0 :=
     (mem_fisherZero).1 hroot
-  have hxi0 : (xi : Qbar) = 0 := by rw [hcoe]; exact hzero
+  have hxi0 : (xi : Qbar) = 0 := by
+    calc
+      (xi : Qbar) = qbarPolynomialEval (criticalPoint s : Qbar)
+          (partitionPolynomial L) := hcoe
+      _ = 0 := hzero
   -- 第 1 段。零元の表示は (0,0) である。
   have hrep : quadraticRepresentation s xi = (0, 0) :=
     (quadraticRepresentation_eq_zero_iff s hs xi).1 hxi0

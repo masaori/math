@@ -12,17 +12,18 @@ theorem criticalPoint_not_mem_fisherZero_from_necSuf (L : ℕ) [NeZero L] (s : Q
   obtain ⟨xi, hcoe, hpos⟩ := criticalPartitionValue_mem_positiveCone L s hs
   refine Ising2DLambda.NecSuf.FisherZero.represented_positive_value_not_mem_zeroSet_necSuf
     (fun y : QuadraticFieldElement s => (y : Qbar)) (0 : Qbar)
-    (quadraticRepresentation s) quadraticCoefficientPositive ((0 : ℚ), (0 : ℚ))
+    (quadraticRepresentation s) quadraticCoefficientPositive (0 : ℚ)
     ((criticalPoint s : Qbar)) xi
     (qbarPolynomialEval (criticalPoint s : Qbar) (partitionPolynomial L))
     (FisherZeroSet L)
-    hcoe.symm hpos ?_ ?_ ?_
+    hcoe.symm hpos ?_ ?_ ?_ ?_
   · exact fun h => (quadraticRepresentation_eq_zero_iff s hs xi).1 h
-  · intro hzero
-    rcases hzero with ⟨-, -, hne⟩ | ⟨ha, -, -⟩ | ⟨ha, -, -⟩
-    · exact hne rfl
-    · exact lt_irrefl 0 ha
-    · exact lt_irrefl 0 ha
+  · intro ab hpositive
+    rcases hpositive with ⟨-, -, hne⟩ | ⟨ha, -, -⟩ | ⟨ha, -, -⟩
+    · exact Or.inl hne
+    · exact Or.inr (Or.inl ha)
+    · exact Or.inr (Or.inr ha)
+  · exact lt_irrefl 0
   · exact fun h => (mem_fisherZero).1 h
 
 end Ising2DLambda.FisherZero
