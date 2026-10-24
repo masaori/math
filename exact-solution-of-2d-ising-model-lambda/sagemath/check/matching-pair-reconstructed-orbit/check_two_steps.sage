@@ -1,0 +1,11 @@
+load(str(_dir / '_prelude.sage'))
+for tau, upsilon, p, q, i, C in DATA:
+    sigma_i = successor(tau, upsilon, C, i)
+    sigma2_i = successor(tau, upsilon, C, sigma_i)
+    assert (sigma_i in C) == (i not in C)
+    assert sigma2_i == (p[i] if i in C else q[i])
+    eta_i = predecessor(tau, upsilon, C, i)
+    eta2_i = predecessor(tau, upsilon, C, eta_i)
+    assert (eta_i in C) == (i not in C)
+    assert eta2_i == (q[i] if i in C else p[i])
+print('PASS two steps', len(DATA))

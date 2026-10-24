@@ -10376,6 +10376,88 @@ e_{n+1}\in C&\Longleftrightarrow e_n\notin C
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_reconstructed_orbit",
+        labels: [],
+        title: { text: "構成した置換の軌道と二歩軌道の合併" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_reconstructed_orbit",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_reconstructed_orbit",
+              title: { text: "構成した置換の軌道は二歩軌道の合併に等しい" },
+              labels: ["claim_matching_pair_reconstructed_orbit"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-reconstructed-orbit"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation_orbit_eq_component",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairPermutation_orbit_eq_component",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairPermutation_orbit_eq_component_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_component"), " の有限番号集合 ", math(String.raw`\mathcal J`), "（空でもよい）と相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), "、二歩置換 ", math(String.raw`p`), "、", ref("claim_matching_pair_permutation"), " の置換 ", math(String.raw`\sigma_{\tau,\upsilon}`), " について、任意の ", math(String.raw`i\in\mathcal J`), " で"]),
+                displayMath(String.raw`\operatorname{Orb}_{\sigma_{\tau,\upsilon}}(i)=\mathcal B_{\tau,\upsilon}(i)`),
+                paragraph(["が成り立つ。軌道は ", ref("def_finite_permutation_orbit"), " の順向き・逆向きの反復で定める。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。この証明では ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}\in\operatorname{Perm}(\mathcal J)`), "、", math(String.raw`B:=\mathcal B_{\tau,\upsilon}(i)\subseteq\mathcal J`), " と略す。", ref("claim_matching_pair_successor_color"), " により一歩で色が反転する。任意の ", math(String.raw`j\in\mathcal J`), " について、まず ", math(String.raw`j\in C`), " ならば"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(j)&=\tau(j)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr),\\
+\sigma(j)&\notin C&&\bigl(\because\ \blkref{claim_matching_pair_successor_color}\bigr),\\
+\sigma^{[2]}(j)&=\sigma(\tau(j))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=\upsilon(\tau(j))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \tau(j)\notin C\bigr)\\
+&=p(j)&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr).
+\end{aligned}`),
+                paragraph(["他方、", math(String.raw`j\notin C`), " ならば"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(j)&=\upsilon(j)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr),\\
+\sigma(j)&\in C&&\bigl(\because\ \blkref{claim_matching_pair_successor_color}\bigr),\\
+\sigma^{[2]}(j)&=\sigma(\upsilon(j))&&\bigl(\because\ \blkref{def_finite_map_iteration}\bigr)\\
+&=\tau(\upsilon(j))&&\bigl(\because\ \blkref{def_matching_pair_successor},\ \upsilon(j)\in C\bigr)\\
+&=p^{-1}(j)&&\bigl(\because\ \blkref{def_matching_pair_step}\text{ の逆置換}\bigr).
+\end{aligned}`),
+                paragraph([ref("claim_matching_pair_permutation"), " より ", math(String.raw`\eta=\sigma^{-1}`), " である。", math(String.raw`j\in C`), " なら ", math(String.raw`\eta(j)=\upsilon(j)\notin C`), "、", math(String.raw`j\notin C`), " なら ", math(String.raw`\eta(j)=\tau(j)\in C`), " だから、逆向きの二歩も計算できる。"]),
+                displayMath(String.raw`\begin{aligned}
+j\in C\quad\Longrightarrow\quad\eta^{[2]}(j)
+&=\eta(\upsilon(j))&&\bigl(\because\ \blkref{def_finite_map_iteration},\ \blkref{def_matching_pair_predecessor}\bigr)\\
+&=\tau(\upsilon(j))&&\bigl(\because\ \upsilon(j)\notin C,\ \blkref{def_matching_pair_predecessor}\bigr)\\
+&=p^{-1}(j)&&\bigl(\because\ \blkref{def_matching_pair_step}\text{ の逆置換}\bigr),\\
+j\notin C\quad\Longrightarrow\quad\eta^{[2]}(j)
+&=\eta(\tau(j))&&\bigl(\because\ \blkref{def_finite_map_iteration},\ \blkref{def_matching_pair_predecessor}\bigr)\\
+&=\upsilon(\tau(j))&&\bigl(\because\ \tau(j)\in C,\ \blkref{def_matching_pair_predecessor}\bigr)\\
+&=p(j)&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr).
+\end{aligned}`),
+                paragraph(["四つの二歩の等式と ", ref("claim_finite_permutation_orbit_invariant"), " により ", math(String.raw`\operatorname{Orb}_\sigma(i)`), " は ", math(String.raw`p`), " と ", math(String.raw`p^{-1}`), " の両方で閉じる。"]),
+                paragraph(["任意の ", math(String.raw`j\in\mathcal J`), " について、", math(String.raw`j\in C`), " なら ", math(String.raw`\tau(j)=\sigma(j)`), "、", math(String.raw`j\notin C`), " なら ", math(String.raw`\tau(j)=\sigma^{-1}(j)`), " である。後者は ", ref("def_matching_pair_predecessor"), " と ", ref("claim_matching_pair_permutation"), " による。よって ", math(String.raw`i,\tau(i)\in\operatorname{Orb}_\sigma(i)`), " であり、二歩で得る点も同じ軌道に属するから"]),
+                displayMath(String.raw`\mathcal B_{\tau,\upsilon}(i)=\operatorname{Orb}_p(i)\cup\operatorname{Orb}_p(\tau(i))
+\subseteq\operatorname{Orb}_\sigma(i)
+\qquad\bigl(\because\ \blkref{def_matching_pair_component},\ \blkref{claim_finite_permutation_orbit_invariant}\bigr).`),
+                paragraph(["逆の包含を示す。任意の ", math(String.raw`j\in B`), " を取る。"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal B_{\tau,\upsilon}(j)&=B&&\bigl(\because\ \blkref{claim_matching_pair_component_basepoint}\bigr),\\
+\tau(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の第二軌道の零回の反復}\bigr),\\
+\tau(j)&\in B&&\bigl(\because\ \mathcal B_{\tau,\upsilon}(j)=B\bigr),\\
+p(\tau(j))&\in B&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ と }B\text{ の二軌道の合併}\bigr),\\
+p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=\upsilon(j)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr),\\
+\upsilon(j)&\in B&&\bigl(\because\ p(\tau(j))\in B,\ p(\tau(j))=\upsilon(j)\bigr).
+\end{aligned}`),
+                paragraph([ref("def_matching_pair_successor"), " と ", ref("def_matching_pair_predecessor"), " はそれぞれ ", math(String.raw`\tau(j)`), " と ", math(String.raw`\upsilon(j)`), " の一方を取るので、", math(String.raw`B`), " は ", math(String.raw`\sigma`), " と ", math(String.raw`\sigma^{-1}`), " の両方で閉じる。", math(String.raw`i\in B`), " から反復回数について帰納して"]),
+                displayMath(String.raw`\operatorname{Orb}_\sigma(i)\subseteq B
+\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の二方向の反復}\bigr).`),
+                paragraph(["両包含から集合の等号が従う。空集合には始点がないので全称命題として成立する。共有する対でも二歩の計算は変わらない。有限集合と自然数回の反復だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
