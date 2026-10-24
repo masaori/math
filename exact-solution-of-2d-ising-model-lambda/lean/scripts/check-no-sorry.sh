@@ -65,6 +65,9 @@ targets=(
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairColor_alternates
   Ising2DLambda.AlgebraicEigenvalue.matchingPairComponentMinimum_basepoint_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairColor_alternates_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondColor_alternates
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSecondColor_alternates
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondColor_alternates_from_necSuf
   Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_representation_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairComponent_basepoint
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairComponent_basepoint

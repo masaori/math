@@ -10104,6 +10104,67 @@ i&\in\operatorname{Orb}_p(\tau(m(i)))&&\bigl(\because\ i\in\mathcal B_{\tau,\ups
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_second_coloring",
+        labels: [],
+        title: { text: "第二の相手写像による色反転" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_second_coloring",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_second_coloring_alternates",
+              title: { text: "第二の相手写像は最小元から選んだ色を反転する" },
+              labels: ["claim_matching_pair_second_coloring_alternates"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-second-coloring"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondColor_alternates",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSecondColor_alternates",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondColor_alternates_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_coloring"), " の有限番号集合 ", math(String.raw`\mathcal J`), "、第一色 ", math(String.raw`C_{\tau,\upsilon}\subseteq\mathcal J`), " と第二の相手写像 ", math(String.raw`\upsilon:\mathcal J\to\mathcal J`), " について、任意の ", math(String.raw`i\in\mathcal J`), " に対し、"]),
+                displayMath(String.raw`\upsilon(i)\in C_{\tau,\upsilon}\quad\Longleftrightarrow\quad i\notin C_{\tau,\upsilon}.`),
+              ],
+              proof: [
+                paragraph(["写像 ", math(String.raw`m:=m_{\tau,\upsilon}:\mathcal J\to\mathcal J`), " と略し、", ref("def_matching_pair_step"), " の二歩置換 ", math(String.raw`p\in\operatorname{Perm}(\mathcal J)`), " を使う。任意の ", math(String.raw`j\in\mathcal J`), " について、"]),
+                displayMath(String.raw`\begin{aligned}
+j&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の反復}\bigr),\\
+p(j)&\in\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr),\\
+p(j)&\in\mathcal B_{\tau,\upsilon}(j)&&\bigl(\because\ \blkref{def_matching_pair_component}\text{ の合併}\bigr),\\
+m(p(j))&=m(j)&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\text{ の証明の最小元の一致}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+p(j)\in C_{\tau,\upsilon}
+&\Longleftrightarrow p(j)\in\operatorname{Orb}_p(m(p(j)))&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr)\\
+&\Longleftrightarrow p(j)\in\operatorname{Orb}_p(m(j))&&\bigl(\because\ m(p(j))=m(j)\bigr)\\
+&\Longleftrightarrow j\in\operatorname{Orb}_p(m(j))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\bigr)\\
+&\Longleftrightarrow j\in C_{\tau,\upsilon}&&\bigl(\because\ \blkref{def_matching_pair_coloring}\bigr).
+\end{aligned}`),
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を固定する。", math(String.raw`\tau(i)\in\mathcal J`), " は ", ref("def_matching_pair_step"), " の写像の値域による。"]),
+                displayMath(String.raw`\begin{aligned}
+p(\tau(i))&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\upsilon(i)\in C_{\tau,\upsilon}
+&\Longleftrightarrow p(\tau(i))\in C_{\tau,\upsilon}&&\bigl(\because\ p(\tau(i))=\upsilon(i)\bigr)\\
+&\Longleftrightarrow \tau(i)\in C_{\tau,\upsilon}&&\bigl(\because\ \text{上で示した }p\text{ による色の不変性}\bigr)\\
+&\Longleftrightarrow i\notin C_{\tau,\upsilon}&&\bigl(\because\ \blkref{claim_matching_pair_coloring_alternates}\bigr).
+\end{aligned}`),
+                paragraph(["空集合には入力がなく、二つのマッチングが同じ対を含む場合にも同じ論法が通る。有限番号集合とその部分集合だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
