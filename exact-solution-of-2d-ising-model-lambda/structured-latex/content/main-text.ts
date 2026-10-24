@@ -9727,6 +9727,117 @@ t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_orbit_separation",
+        labels: [],
+        title: { text: "二つのマッチングを交互にたどる二歩の軌道" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_orbit_separation",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_matching_pair_step",
+                title: { text: "第一の相手から第二の相手へ進む二歩置換" },
+                labels: ["def_matching_pair_step"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.matchingPairStep"],
+                verification: ["sagemath/check/matching-pair-orbit-separation"],
+                statement: [
+                  paragraph([ref("def_finite_perfect_matching"), " の有限番号集合 ", math(String.raw`\mathcal J`), " 上の順序付き完全マッチング対を取る。", ref("claim_perfect_matching_involution"), " により、その第一・第二の相手写像をそれぞれ ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), " と書く。これらは ", ref("def_fixed_point_free_involution"), " の不動点のない対合である。写像を"]),
+                  displayMath(String.raw`p(i):=\upsilon(\tau(i)),\qquad q(i):=\tau(\upsilon(i))\qquad(i\in\mathcal J)`),
+                  paragraph(["と定める。各 ", math(String.raw`i\in\mathcal J`), " について、"]),
+                  displayMath(String.raw`\begin{aligned}
+q(p(i))&=\tau(\upsilon(\upsilon(\tau(i))))&&\bigl(\because\ p,q\text{ の定義}\bigr)\\
+&=\tau(\tau(i))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr),\\
+p(q(i))&=\upsilon(\tau(\tau(\upsilon(i))))&&\bigl(\because\ p,q\text{ の定義}\bigr)\\
+&=\upsilon(\upsilon(i))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
+&=i&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr).
+\end{aligned}`),
+                  paragraph(["したがって ", math(String.raw`p\in\operatorname{Perm}(\mathcal J)`), " であり、", math(String.raw`p^{-1}=q`), " である。二つのマッチングが同じ対を含んでも、この定義を変えない。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_orbit_separation",
+              title: { text: "二歩置換の軌道と第一の相手の軌道は交わらない" },
+              labels: ["claim_matching_pair_orbit_separation"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_iterate_ne_mate",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_not_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint_from_necSuf",
+              ],
+              verification: ["sagemath/check/matching-pair-orbit-separation"],
+              statement: [
+                paragraph([ref("def_matching_pair_step"), " の ", math(String.raw`\mathcal J,\tau,\upsilon,p,q`), " について、"]),
+                displayMath(String.raw`\operatorname{Orb}_p(i)\cap\operatorname{Orb}_p(\tau(i))=\varnothing\qquad(i\in\mathcal J).`),
+                paragraph(["軌道は ", ref("def_finite_permutation_orbit"), "、反復は ", ref("def_finite_map_iteration"), " の意味である。"]),
+              ],
+              proof: [
+                paragraph(["まず、すべての ", math(String.raw`n\in\mathbb N`), " と ", math(String.raw`i\in\mathcal J`), " について ", math(String.raw`p^{[n]}(i)\ne\tau(i)`), " を、反復回数 ", math(String.raw`n`), " の強帰納法で示す。", math(String.raw`n=0`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+p^{[0]}(i)&=i&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回}\bigr)\\
+&\ne\tau(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の不動点の不在}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`n=1`), " では、"]),
+                displayMath(String.raw`\begin{aligned}
+p^{[1]}(i)&=p(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の一回反復}\bigr)\\
+&=\upsilon(\tau(i))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&\ne\tau(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ を }\upsilon,\tau(i)\text{ に適用}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`n=k+2`), "、", math(String.raw`k\in\mathbb N`), " とする。すべての小さい反復回数とすべての始点について帰納仮定を置く。反対に ", math(String.raw`p^{[k+2]}(i)=\tau(i)`), " と仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+p^{[k]}(p(i))&=p^{[k+1]}(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
+&=\tau(\tau(p^{[k+1]}(i)))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
+&=\tau(\upsilon(\upsilon(\tau(p^{[k+1]}(i)))))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)\\
+&=\tau(\upsilon(p(p^{[k+1]}(i))))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=\tau(\upsilon(p^{[k+2]}(i)))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の反復との可換性}\bigr)\\
+&=\tau(\upsilon(\tau(i)))&&\bigl(\because\ \text{反証の仮定}\bigr)\\
+&=\tau(p(i))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr).
+\end{aligned}`),
+                paragraph(["これは ", math(String.raw`k<k+2`), "、", math(String.raw`p(i)\in\mathcal J`), " に対する帰納仮定に反する。これで順方向の非到達が示された。"]),
+                paragraph(["次に ", math(String.raw`q^{[n]}(i)\ne\tau(i)`), " を示す。零回では、"]),
+                displayMath(String.raw`q^{[0]}(i)=i\qquad\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回}\bigr),`),
+                displayMath(String.raw`i\ne\tau(i)\qquad\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の不動点の不在}\bigr).`),
+                paragraph([math(String.raw`n=k+1`), " で反対に ", math(String.raw`q^{[k+1]}(i)=\tau(i)`), " と仮定すると、"]),
+                displayMath(String.raw`\begin{aligned}
+q^{[k]}(i)&=\upsilon(\upsilon(q^{[k]}(i)))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\upsilon\text{ の対合性}\bigr)\\
+&=\upsilon(\tau(\tau(\upsilon(q^{[k]}(i)))))&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr)\\
+&=\upsilon(\tau(q(q^{[k]}(i))))&&\bigl(\because\ \blkref{def_matching_pair_step}\bigr)\\
+&=\upsilon(\tau(q^{[k+1]}(i)))&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の反復との可換性}\bigr)\\
+&=\upsilon(\tau(\tau(i)))&&\bigl(\because\ \text{反証の仮定}\bigr)\\
+&=\upsilon(i)&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\text{ の }\tau\text{ の対合性}\bigr).
+\end{aligned}`),
+                paragraph(["これは、上で示した順方向の非到達を、第一の対合 ", math(String.raw`\upsilon`), "、第二の対合 ", math(String.raw`\tau`), "、二歩置換 ", math(String.raw`q`), " に適用した結果に反する。順方向・逆方向の両方を除いたので、"]),
+                displayMath(String.raw`\tau(i)\notin\operatorname{Orb}_p(i)\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の二種類の証人をともに排除}\bigr).`),
+                paragraph(["最後に、共通点 ", math(String.raw`j\in\operatorname{Orb}_p(i)\cap\operatorname{Orb}_p(\tau(i))`), " があると仮定する。始点を変えると、"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{Orb}_p(\tau(i))&=\operatorname{Orb}_p(j)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\text{ と }j\in\operatorname{Orb}_p(\tau(i))\bigr)\\
+&=\operatorname{Orb}_p(i)&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\text{ と }j\in\operatorname{Orb}_p(i)\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\tau(i)&\in\operatorname{Orb}_p(\tau(i))&&\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の零回の証人}\bigr)\\
+\tau(i)&\in\operatorname{Orb}_p(i)&&\bigl(\because\ \text{直前の集合の等号による所属の移し替え}\bigr).
+\end{aligned}`),
+                paragraph(["これは相手の非所属に反する。よって共通点はない。空集合では始点がなく、主張は成り立つ。使った対象は有限番号集合と自然数だけであり、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },

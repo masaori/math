@@ -2369,6 +2369,21 @@ targets=(
   Ising2DLambda.KacWard.oneSidedClosure_period_boundary_signs
   Ising2DLambda.KacWard.oneSidedClosure_fixedWord_nonbacktracking_of_maximum
   Ising2DLambda.KacWard.oneSidedClosurePoint_nonbacktracking
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_iterate_ne_mate
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_not_mem
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_iterate_ne_mate
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_mate_not_mem
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_eq_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_iterate_ne_mate_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_inverse_iterate_ne_mate_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_mate_not_mem_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairStep_orbits_disjoint_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
