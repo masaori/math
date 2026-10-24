@@ -84,6 +84,8 @@ for L in (1, 2, 3):
         # 3 行目: 積の冪は冪の積
         assert term == (1 + q) ** (2 * L * L - size) * (1 + q) ** size * kw_value ** size
         # 4 行目: 冪の指数法則
+        assert term == (1 + q) ** ((2 * L * L - size) + size) * kw_value ** size
+        # 5 行目: 指数の自然数計算
         assert term == (1 + q) ** (2 * L * L) * kw_value ** size
     print("L=%d: H^{a,b}_L(q) = (1+q)^{2L^2}·G^{a,b}_L(KW(q)) を QQ で確認（有理点 %d 個 × 4 セクター、項単位の検査は q=%s）" %
           (L, len(rational_points), rational_points[0]))

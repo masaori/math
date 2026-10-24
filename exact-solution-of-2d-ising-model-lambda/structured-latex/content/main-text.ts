@@ -10458,6 +10458,67 @@ p(\tau(j))&=\upsilon(\tau(\tau(j)))&&\bigl(\because\ \blkref{def_matching_pair_s
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_first_recovery",
+        labels: [],
+        title: { text: "構成した置換から第一の完全マッチングを復元する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_first_recovery",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_first_recovery",
+              title: { text: "構成した置換の第一の対の族は元の第一マッチングに等しい" },
+              labels: ["claim_matching_pair_first_recovery"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-first-recovery"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_first_neighbor_recovered",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_first_pairs_recovered",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPair_first_neighbor_recovered",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_first_neighbor_recovered_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_matching_pair_coloring"), " の有限番号集合 ", math(String.raw`\mathcal J`), "、第一・第二の相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), "、第一色 ", math(String.raw`C:=C_{\tau,\upsilon}\subseteq\mathcal J`), "、", ref("claim_matching_pair_permutation"), " の置換 ", math(String.raw`\sigma:=\sigma_{\tau,\upsilon}`), " を取る。このとき ", ref("def_alternating_neighbor_pairs"), " の対の族について"]),
+                displayMath(String.raw`\mathcal E_{\sigma,C}=\mathcal D_\tau`),
+                paragraph(["が成り立つ。空集合と二つのマッチングが対を共有する場合も含める。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を取る。", math(String.raw`i\in C`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau_{\sigma,C}(i)
+&=\sigma(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_successor}\bigr).
+\end{aligned}`),
+                paragraph([math(String.raw`i\notin C`), " なら、", ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma^{-1}=\eta_{\tau,\upsilon}`), " であるから、"]),
+                displayMath(String.raw`\begin{aligned}
+\tau_{\sigma,C}(i)
+&=\sigma^{-1}(i)&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\eta_{\tau,\upsilon}(i)&&\bigl(\because\ \blkref{claim_matching_pair_permutation}\bigr)\\
+&=\tau(i)&&\bigl(\because\ \blkref{def_matching_pair_predecessor}\bigr).
+\end{aligned}`),
+                paragraph(["二場合で任意の ", math(String.raw`i\in\mathcal J`), " に対し ", math(String.raw`\tau_{\sigma,C}(i)=\tau(i)`), " を得た。対の族の定義に代入すると、"]),
+                displayMath(String.raw`\begin{aligned}
+\mathcal E_{\sigma,C}
+&=\bigl\{\{i,\tau_{\sigma,C}(i)\}\mid i\in\mathcal J\bigr\}
+&&\bigl(\because\ \blkref{def_alternating_neighbor_pairs}\bigr)\\
+&=\bigl\{\{i,\tau(i)\}\mid i\in\mathcal J\bigr\}
+&&\bigl(\because\ \text{上で示した各点の等号}\bigr)\\
+&=\mathcal D_\tau
+&&\bigl(\because\ \blkref{def_fixed_point_free_involution}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では二つの族はともに空である。共有対でも二場合の値は変わらない。有限集合とその写像だけを扱い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -43534,8 +43595,10 @@ H^{a,b}_L(q)
 &&\bigl(\because\ \text{準備の等式}\ 1-q=(1+q)\cdot\mathrm{KW}(q)\bigr)\\
 &=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2-|A|}\cdot(1+q)^{|A|}\cdot\mathrm{KW}(q)^{|A|}
 &&\bigl(\because\ \text{積の冪は冪の積}\bigr)\\
+&=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{(2L^2-|A|)+|A|}\cdot\mathrm{KW}(q)^{|A|}
+&&\bigl(\because\ \text{冪の指数法則}\bigr)\\
 &=\sum_{A\in\mathcal{E}^{a,b}_L}(1+q)^{2L^2}\cdot\mathrm{KW}(q)^{|A|}
-&&\bigl(\because\ \text{冪の指数法則}\ (2L^2-|A|)+|A|=2L^2\bigr)\\
+&&\bigl(\because\ (2L^2-|A|)+|A|=2L^2\ \text{という自然数の計算}\bigr)\\
 &=(1+q)^{2L^2}\cdot\sum_{A\in\mathcal{E}^{a,b}_L}\mathrm{KW}(q)^{|A|}
 &&\bigl(\because\ \text{分配則による共通因子の括り出し}\bigr)\\
 &=(1+q)^{2L^2}\cdot G^{a,b}_L(\mathrm{KW}(q))
