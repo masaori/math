@@ -6,13 +6,6 @@ import Mathlib
 
 namespace Ising2DLambda.NecSuf.FisherZero
 
-theorem mul_mem_necSuf
-    {A K : Type} (mulK : K → K → K) (combine : A → A → K)
-    (a b a' b' c d : A)
-    (hmul : mulK (combine a b) (combine a' b') = combine c d) :
-    ∃ u v : A, mulK (combine a b) (combine a' b') = combine u v := by
-  exact ⟨c, d, hmul⟩
-
 /-- 閉性に使う計算の必要十分版。
 源の側は二つの演算と係数 q、像の側は結合・可換・左右分配則、写像は和と積の保存だけを使う。
 逆元、零元、単位元、順序、単射性、平方根の一意性は計算に使わない。
@@ -82,6 +75,28 @@ theorem quadratic_mul_value_necSuf
     _ = j (a * a' + q * (b * b')) +
         j (a * b' + b * a') * s := by
       rw [hmapAdd (a * b') (b * a')]
+
+/-- 本文と同じ係数を証人に取り、三補助式と十八等号から積の所属を得る。
+積の表示を仮定せず、値の計算に使う演算則だけを受け取る。 -/
+theorem mul_mem_necSuf
+    {C K : Type} [Add C] [Mul C] [Add K] [Mul K]
+    (j : C → K)
+    (hmapAdd : ∀ c d : C, j (c + d) = j c + j d)
+    (hmapMul : ∀ c d : C, j (c * d) = j c * j d)
+    (haddAssoc : ∀ x y z : K, (x + y) + z = x + (y + z))
+    (haddComm : ∀ x y : K, x + y = y + x)
+    (hmulAssoc : ∀ x y z : K, (x * y) * z = x * (y * z))
+    (hmulComm : ∀ x y : K, x * y = y * x)
+    (haddMul : ∀ x y z : K, (x + y) * z = x * z + y * z)
+    (hmulAdd : ∀ x y z : K, x * (y + z) = x * y + x * z)
+    (q a b a' b' : C) (s xi eta : K)
+    (hs : s * s = j q)
+    (hxi : xi = j a + j b * s) (heta : eta = j a' + j b' * s) :
+    ∃ c d : C, xi * eta = j c + j d * s := by
+  refine ⟨a * a' + q * (b * b'), a * b' + b * a', ?_⟩
+  exact quadratic_mul_value_necSuf j hmapAdd hmapMul
+    haddAssoc haddComm hmulAssoc hmulComm haddMul hmulAdd
+    q a b a' b' s xi eta hs hxi heta
 
 theorem mul_representation_necSuf
     {A K V : Type} (mulK : K → K → K)

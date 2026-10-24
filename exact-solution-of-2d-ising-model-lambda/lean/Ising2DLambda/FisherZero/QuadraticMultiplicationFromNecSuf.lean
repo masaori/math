@@ -26,18 +26,13 @@ theorem quadraticMul_mem_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
     (xi eta : QuadraticFieldElement s) :
     (xi : Qbar) * (eta : Qbar) ∈ quadraticFieldSet s := by
-  have hvalue := quadraticMul_value_from_necSuf s hs xi eta
-  rw [quadraticRepresentation_spec s xi, quadraticRepresentation_spec s eta] at hvalue ⊢
-  apply Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf
-      (mulK := fun x y : Qbar => x * y)
-      (combine := fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s)
-      (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2
-      (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2
-      ((quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).1 +
-        2 * ((quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).2))
-      ((quadraticRepresentation s xi).1 * (quadraticRepresentation s eta).2 +
-        (quadraticRepresentation s xi).2 * (quadraticRepresentation s eta).1)
-  exact hvalue
+  exact Ising2DLambda.NecSuf.FisherZero.mul_mem_necSuf
+    (algebraMap ℚ Qbar) (map_add (algebraMap ℚ Qbar)) (map_mul (algebraMap ℚ Qbar))
+    add_assoc add_comm mul_assoc mul_comm add_mul mul_add
+    2 (quadraticRepresentation s xi).1 (quadraticRepresentation s xi).2
+    (quadraticRepresentation s eta).1 (quadraticRepresentation s eta).2
+    s (xi : Qbar) (eta : Qbar) hs
+    (quadraticRepresentation_spec s xi) (quadraticRepresentation_spec s eta)
 
 theorem quadraticRepresentation_mul_from_necSuf
     (s : Qbar) (hs : s * s = algebraMap ℚ Qbar 2)
