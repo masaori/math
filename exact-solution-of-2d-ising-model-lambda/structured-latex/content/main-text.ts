@@ -37774,11 +37774,14 @@ a\cdot a
                       ],
                       statement: [
                         paragraph([
-                          math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          "有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
                           "（",
                           ref("def_algebraic_numbers"),
-                          "）を ",
-                          math(String.raw`s\cdot s=2`),
+                          "）とする。",
+                          math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          " を ",
+                          math(String.raw`s\cdot s=j(2)`),
                           " を満たす元とする（",
                           ref("claim_sqrt_two_exists"),
                           "）。任意の ",
@@ -37788,9 +37791,9 @@ a\cdot a
                           "（",
                           ref("def_quadratic_field_set"),
                           "）と ",
-                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)`),
+                          math(String.raw`(a,b):=\mathrm{rep}_s(\xi)\in\mathbb Q\times\mathbb Q`),
                           "、",
-                          math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)`),
+                          math(String.raw`(a',b'):=\mathrm{rep}_s(\eta)\in\mathbb Q\times\mathbb Q`),
                           "（",
                           ref("def_quadratic_representation_map"),
                           "）について、",
@@ -41241,26 +41244,40 @@ q
                       statement: [
                         paragraph([
                           math(String.raw`L\in\mathbb{N}`), "、", math(String.raw`L\ge1`),
-                          " とする。", math(String.raw`s\in\overline{\mathbb{Q}}`),
-                          " が ", math(String.raw`s\cdot s=2`), " を満たすとき、臨界点 ",
-                          math(String.raw`x_c=-1+s`), "（", ref("def_critical_point"), "）での値は",
+                          " とする。有理数の包含準同型を ",
+                          math(String.raw`j:\mathbb Q\hookrightarrow\overline{\mathbb Q}`),
+                          "（", ref("def_algebraic_numbers"), "）、自然数の包含を ",
+                          math(String.raw`\nu:\mathbb N\hookrightarrow\mathbb Q`), " とする。",
+                          math(String.raw`s\in\overline{\mathbb{Q}}`),
+                          " が ", math(String.raw`s\cdot s=j(2)`), " を満たすとき、臨界点 ",
+                          math(String.raw`x_c=j(-1)+s`), "（", ref("def_critical_point"), "）での値は",
                         ]),
                         displayMath(String.raw`Z_L(x_c)=\sum_{m=0}^{2L^2}\Omega_L(m)\,x_c^m\in P_s`),
                         paragraph([
                           "である。したがってこの値は ", math(String.raw`Q_s`),
                           " に属する。和は ", math(String.raw`\overline{\mathbb{Q}}`),
                           " の有限和であり、多項式とその値を区別して ", math(String.raw`Z_L(x_c)`),
-                          " と書く。",
+                          " と書く。任意の ", math(String.raw`c\in\mathbb N`), " と ",
+                          math(String.raw`\xi\in Q_s`), " について、自然数倍 ",
+                          math(String.raw`c\,\xi`), " は ", math(String.raw`j(\nu(c))\cdot\xi`),
+                          " を表す（", ref("claim_quadratic_positive_cone_nat_mul"), "）。",
+                          "特に各項 ", math(String.raw`\Omega_L(m)x_c^m`), " はこの自然数倍である。",
                         ]),
                       ],
                       proof: [
                         paragraph([
-                          "まず正の項を一つ確保する。次の準備を得る。",
+                          math(String.raw`\sigma_+\in\Sigma_L`), " を定数正配位（",
+                          ref("def_constant_plus_configuration"), "）とする。各 ",
+                          math(String.raw`n\in\mathbb N`), " に対し ",
+                          math(String.raw`S_n:=\sum_{m=0}^{n}\Omega_L(m)x_c^m\in\overline{\mathbb Q}`),
+                          " と置く。多重度・破れボンド数・添字・指数とその比較に現れる零と一は自然数であり、",
+                          "和の零元は ", math(String.raw`0_{\overline{\mathbb Q}}`),
+                          " と書く。まず正の初項を確保する。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 b(\sigma_+)
 &=0
-&&\bigl(\because\ \blkref{def_constant_plus_configuration},\ \blkref{claim_constant_plus_breaks_no_bond}\bigr)\\
+&&\bigl(\because\ \blkref{claim_constant_plus_breaks_no_bond}\bigr)\\
 1
 &\le\Omega_L(0)
 &&\bigl(\because\ \blkref{def_multiplicity}\bigr)\\
@@ -41275,8 +41292,7 @@ x_c^0
 &&\bigl(\because\ 1\le\Omega_L(0),\ \blkref{claim_quadratic_positive_cone_nat_mul}\bigr)
 \end{aligned}`),
                         paragraph([
-                          math(String.raw`S_n:=\sum_{m=0}^{n}\Omega_L(m)\,x_c^m`),
-                          " と置き、", math(String.raw`n`), " について帰納法を使う。出発点は",
+                          math(String.raw`n\in\mathbb N`), " について帰納法を使う。出発点は",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 S_0
@@ -41288,19 +41304,55 @@ S_0
 &&\bigl(\because\ \Omega_L(0)\,x_c^0\in P_s\bigr)
 \end{aligned}`),
                         paragraph([
-                          "である。", math(String.raw`S_n\in P_s`),
-                          " と仮定する。", math(String.raw`x_c^{n+1}\in P_s`),
-                          "（", ref("claim_quadratic_positive_cone_pow_closed"), "）なので、",
-                          ref("claim_quadratic_positive_cone_nat_mul"), " により次項は零元または正錐の元である。",
+                          "である。任意の ", math(String.raw`n\in\mathbb N`), " に対し ",
+                          math(String.raw`S_n\in P_s`), " を仮定する。次項の冪は",
+                        ]),
+                        displayMath(String.raw`x_c^{n+1}\in P_s
+\quad\bigl(\because\ \blkref{claim_quadratic_positive_cone_pow_closed}\bigr)`),
+                        paragraph([
+                          "である（", ref("claim_quadratic_positive_cone_pow_closed"), "）。",
+                          math(String.raw`\Omega_L(n+1)\in\mathbb N`), " なので、零か正かで場合を分ける。",
+                          math(String.raw`\Omega_L(n+1)=0`), " の場合は",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 S_{n+1}
-&=S_n+\Omega_L(n+1)\,x_c^{n+1}
+&=\sum_{m=0}^{n+1}\Omega_L(m)\,x_c^m
+&&\bigl(\because\ S_n\text{ の定義}\bigr)\\
+&=\sum_{m=0}^{n}\Omega_L(m)\,x_c^m+\Omega_L(n+1)\,x_c^{n+1}
 &&\bigl(\because\ \text{有限和の末項を分離}\bigr)\\
+&=S_n+\Omega_L(n+1)\,x_c^{n+1}
+&&\bigl(\because\ S_n\text{ の定義}\bigr)\\
+&=S_n+0\,x_c^{n+1}
+&&\bigl(\because\ \Omega_L(n+1)=0\bigr)\\
+&=S_n+0_{\overline{\mathbb Q}}
+&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_nat_mul}\text{ の零の場合}\bigr)\\
+&=S_n
+&&\bigl(\because\ \text{加法の零元}\bigr)\\
 &\in P_s
-&&\bigl(\because\ \Omega_L(n+1)=0\text{ なら }\overline{\mathbb Q}\text{ の四則、}
-\ 1\le\Omega_L(n+1)\text{ なら }\blkref{claim_quadratic_positive_cone_add_closed}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
+                        paragraph([
+                          "となる。", math(String.raw`1\le\Omega_L(n+1)`), " の場合は、まず",
+                        ]),
+                        displayMath(String.raw`\Omega_L(n+1)\,x_c^{n+1}\in P_s
+\quad\bigl(\because\ \blkref{claim_quadratic_positive_cone_nat_mul}\bigr)`),
+                        paragraph([
+                          "となる（", ref("claim_quadratic_positive_cone_nat_mul"), "）。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+S_{n+1}
+&=\sum_{m=0}^{n+1}\Omega_L(m)\,x_c^m
+&&\bigl(\because\ S_n\text{ の定義}\bigr)\\
+&=\sum_{m=0}^{n}\Omega_L(m)\,x_c^m+\Omega_L(n+1)\,x_c^{n+1}
+&&\bigl(\because\ \text{有限和の末項を分離}\bigr)\\
+&=S_n+\Omega_L(n+1)\,x_c^{n+1}
+&&\bigl(\because\ S_n\text{ の定義}\bigr)\\
+&\in P_s
+&&\bigl(\because\ \blkref{claim_quadratic_positive_cone_add_closed}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "となる（", ref("claim_quadratic_positive_cone_add_closed"), "）。",
+                        ]),
                         paragraph([
                           "したがって ", math(String.raw`S_{2L^2}\in P_s`), " である。最後に",
                         ]),

@@ -91,12 +91,24 @@ theorem criticalPartitionValue_mem_positiveCone (L : ℕ) [NeZero L] (s : Qbar)
       apply Subtype.ext
       simpa [positiveRationalElement] using hz
     · exact Or.inr hp
-  have hpositive := Ising2DLambda.NecSuf.FisherZero.nonempty_sum_mem_positive_necSuf
-    (quadraticPositiveCone s) (quadraticAddElement s) f (positiveRationalElement s 0)
-    (fun x => by apply Subtype.ext; simp [quadraticAddElement, positiveRationalElement])
-    (fun x y hx hy => quadraticPositiveCone_add_mem s hs x y hx hy)
-    hfirst hterm (2 * L ^ 2)
-  refine ⟨criticalPartitionPartialSum L s hs (2 * L ^ 2), ?_, hpositive⟩
+  -- 本文の S₀ と、零項／正項による Sₙ₊₁ の場合分けを独立に帰納する。
+  have hpositive : ∀ n, criticalPartitionPartialSum L s hs n ∈ quadraticPositiveCone s := by
+    intro n
+    induction n with
+    | zero => exact hfirst
+    | succ n ih =>
+        change quadraticAddElement s (criticalPartitionPartialSum L s hs n)
+          (f (n + 1)) ∈ quadraticPositiveCone s
+        rcases hterm n with hz | hp
+        · rw [hz]
+          have hzero : quadraticAddElement s (criticalPartitionPartialSum L s hs n)
+              (positiveRationalElement s 0) = criticalPartitionPartialSum L s hs n := by
+            apply Subtype.ext
+            simp [quadraticAddElement, positiveRationalElement]
+          rw [hzero]
+          exact ih
+        · exact quadraticPositiveCone_add_mem s hs _ _ ih hp
+  refine ⟨criticalPartitionPartialSum L s hs (2 * L ^ 2), ?_, hpositive (2 * L ^ 2)⟩
   rw [criticalPartitionPartialSum_coe]
   exact (qbarPolynomialEval_partitionPolynomial_eq_sum_multiplicity_qbar L
     (criticalPoint s : Qbar)).symm
