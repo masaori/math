@@ -124,12 +124,42 @@ theorem positive_of_representation_necSuf
     _ = (2 * b) * b := hAssoc b
   exact hThird p haNeg hbPos hSquare
 
+/-- 正錐三条件から必要な符号を取り出し、それぞれを負の係数と矛盾させる。
+乗法・全順序・体構造は不要。三条件の取り出しは正錐の定義仕様であり、
+非所属の結論は仮定しない。順序の非両立性は三つの符号否定に必要。 -/
 theorem not_positive_of_representation_necSuf
-    {A K : Type} (rep : K → A × A) (positive : A × A → Prop)
-    (x : K) (a b : A) (hrep : rep x = (a, b)) (hab : ¬ positive (a, b)) :
+    {A K : Type*} [Zero A] [One A] [Neg A] [LE A] [LT A]
+    (rep : K → A × A) (positive first second third : A × A → Prop) (x : K)
+    (hrep : rep x = (-1, -1)) (hNeg : (-1 : A) < 0)
+    (hNotLe : ∀ a : A, a < 0 → ¬ 0 ≤ a)
+    (hNotLt : ∀ a : A, a < 0 → ¬ 0 < a)
+    (hFirstSign : ∀ p, first p → 0 ≤ p.1)
+    (hSecondSign : ∀ p, second p → 0 < p.1)
+    (hThirdSign : ∀ p, third p → 0 < p.2)
+    (hCases : ∀ p, positive p → first p ∨ second p ∨ third p) :
     ¬ positive (rep x) := by
-  rw [hrep]
-  exact hab
+  let p : A × A := rep x
+  let a : A := p.1
+  let b : A := p.2
+  have ha : a = -1 := congrArg Prod.fst hrep
+  have hb : b = -1 := congrArg Prod.snd hrep
+  have haNeg : a < 0 := calc
+    a = -1 := ha
+    _ < 0 := hNeg
+  have hbNeg : b < 0 := calc
+    b = -1 := hb
+    _ < 0 := hNeg
+  have haNotNonneg : ¬ 0 ≤ a := hNotLe a haNeg
+  have haNotPos : ¬ 0 < a := hNotLt a haNeg
+  have hbNotPos : ¬ 0 < b := hNotLt b hbNeg
+  have hFirst : ¬ first p := fun h => haNotNonneg (hFirstSign p h)
+  have hSecond : ¬ second p := fun h => haNotPos (hSecondSign p h)
+  have hThird : ¬ third p := fun h => hbNotPos (hThirdSign p h)
+  intro hPositive
+  rcases hCases p hPositive with hfirst | hsecond | hthird
+  · exact hFirst hfirst
+  · exact hSecond hsecond
+  · exact hThird hthird
 
 theorem positive_root_unique_necSuf
     {K : Type} (rootPlus rootMinus x : K) (positive : K → Prop)

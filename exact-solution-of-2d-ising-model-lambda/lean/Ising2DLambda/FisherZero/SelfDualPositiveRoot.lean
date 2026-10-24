@@ -136,9 +136,32 @@ theorem selfDualRootPlus_mem_positiveCone (s : Qbar)
 theorem selfDualRootMinus_not_mem_positiveCone (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
     selfDualRootMinus s ∉ quadraticPositiveCone s := by
-  change ¬ quadraticCoefficientPositive (quadraticRepresentation s (selfDualRootMinus s))
-  rw [selfDualRootMinus_representation s hs]
-  simp [quadraticCoefficientPositive]
+  -- 所属は根の部分型、表示対と射影の型で担う。
+  let root : QuadraticFieldElement s := selfDualRootMinus s
+  let p : ℚ × ℚ := quadraticRepresentation s root
+  let a : ℚ := p.1
+  let b : ℚ := p.2
+  have hrep : p = (-1, -1) := selfDualRootMinus_representation s hs
+  have ha : a = -1 := congrArg Prod.fst hrep
+  have hb : b = -1 := congrArg Prod.snd hrep
+  have haNeg : a < 0 := calc
+    a = -1 := ha
+    _ < 0 := by norm_num
+  have hbNeg : b < 0 := calc
+    b = -1 := hb
+    _ < 0 := by norm_num
+  have haNotNonneg : ¬ 0 ≤ a := not_le_of_gt haNeg
+  have haNotPos : ¬ 0 < a := not_lt_of_ge (le_of_lt haNeg)
+  have hbNotPos : ¬ 0 < b := not_lt_of_ge (le_of_lt hbNeg)
+  -- 正錐の三条件を、それぞれの必要な符号から否定する。
+  have hFirst : ¬ (0 ≤ a ∧ 0 ≤ b ∧ p ≠ (0, 0)) := fun h => haNotNonneg h.1
+  have hSecond : ¬ (0 < a ∧ b < 0 ∧ 2 * b * b < a * a) := fun h => haNotPos h.1
+  have hThird : ¬ (a < 0 ∧ 0 < b ∧ a * a < 2 * b * b) := fun h => hbNotPos h.2.1
+  intro hPositive
+  rcases hPositive with hfirst | hsecond | hthird
+  · exact hFirst hfirst
+  · exact hSecond hsecond
+  · exact hThird hthird
 
 /-- `claim_self_dual_positive_root_unique` の具体版。 -/
 theorem selfDualPositiveRoot_unique {s xi : Qbar}

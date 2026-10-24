@@ -42552,41 +42552,30 @@ a\cdot a&=(-1)\cdot(-1)
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          ref("def_quadratic_positive_cone"),
-                          " の三つの条件がいずれも成り立たないことを確かめる。不等号と四則はすべて有理数体 ",
-                          math(String.raw`\mathbb{Q}`),
-                          " の中で扱う。",
-                        ]),
+                        paragraph([math(String.raw`(a,b):=\mathrm{rep}_s(-1-s)`), " と置く。三つの正錐条件を順に否定する。不等号は有理数の順序である。"]),
                         displayMath(String.raw`\begin{aligned}
-a
-&=-1
-&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1-s),\ \blkref{claim_self_dual_root_minus_representation}\bigr)\\
-a
-&<0
-&&\bigl(\because\ a=-1,\ -1<0\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
-0\le a
-&\text{ は成り立たない}
-&&\bigl(\because\ a<0\bigr)\\
-0<a
-&\text{ は成り立たない}
-&&\bigl(\because\ a<0\bigr)\\
-b
-&=-1
-&&\bigl(\because\ (a,b):=\mathrm{rep}_s(-1-s),\ \blkref{claim_self_dual_root_minus_representation}\bigr)\\
-b
-&<0
-&&\bigl(\because\ b=-1,\ -1<0\text{ は }\mathbb{Q}\text{ の順序}\bigr)\\
-0<b
-&\text{ は成り立たない}
-&&\bigl(\because\ b<0\bigr)\\
--1-s
-&\notin P_s
-&&\bigl(\because\ 0\le a,\ 0<a,\ 0<b\text{ がいずれも成り立たず、}\ \blkref{def_quadratic_positive_cone}\bigr)
+-1-s&\in Q_s&&\bigl(\because\ \blkref{claim_self_dual_root_minus_mem}\bigr)\\
+(a,b)&\in\mathbb{Q}\times\mathbb{Q}&&\bigl(\because\ \blkref{def_quadratic_representation_map}\bigr)\\
+a,b&\in\mathbb{Q}&&\bigl(\because\ \text{直積の成分}\bigr).
 \end{aligned}`),
-                        paragraph([
-                          "全過程は有理数の四則と順序の中で閉じ、実数体も複素数体も現れない。",
-                        ]),
+                        displayMath(String.raw`\begin{aligned}
+a&=-1&&\bigl(\because\ \blkref{claim_self_dual_root_minus_representation}\text{ の第一成分}\bigr)\\
+&<0&&\bigl(\because\ \mathbb{Q}\text{ の順序}\bigr),\\
+b&=-1&&\bigl(\because\ \blkref{claim_self_dual_root_minus_representation}\text{ の第二成分}\bigr)\\
+&<0&&\bigl(\because\ \mathbb{Q}\text{ の順序}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+&\neg(0\le a)&&\bigl(\because\ a<0;\ \text{順序の非両立性}\bigr),\\
+&\neg(0<a)&&\bigl(\because\ a<0;\ \text{狭義順序の非対称性}\bigr),\\
+&\neg(0<b)&&\bigl(\because\ b<0;\ \text{狭義順序の非対称性}\bigr).
+\end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+&\neg\bigl(0\le a\ \land\ 0\le b\ \land\ (a,b)\ne(0,0)\bigr)&&\bigl(\because\ \neg(0\le a)\bigr),\\
+&\neg\bigl(0<a\ \land\ b<0\ \land\ (2\cdot b)\cdot b<a\cdot a\bigr)&&\bigl(\because\ \neg(0<a)\bigr),\\
+&\neg\bigl(a<0\ \land\ 0<b\ \land\ a\cdot a<(2\cdot b)\cdot b\bigr)&&\bigl(\because\ \neg(0<b)\bigr),\\
+-1-s&\notin P_s&&\bigl(\because\ \blkref{def_quadratic_positive_cone}\text{ の三条件がすべて偽}\bigr).
+\end{aligned}`),
+                        paragraph(["有理数の順序と二次体の表示だけを使い、実数体への脱出はない。"]),
                       ],
                     },
                 },

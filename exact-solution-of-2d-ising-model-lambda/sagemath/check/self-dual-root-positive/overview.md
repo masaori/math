@@ -150,3 +150,28 @@ for p in sorted(Path("sagemath/check/self-dual-root-positive").glob("check*.sage
 2026-10-24: 新規16本を両平方根で検算して通過した。既存41本の行別検算と統合検算（表示一意性98組）を含む計58本も通過した。
 
 実行方法は上記の `check*.sage` 一括実行と同じ。有限検算は一般証明の代わりではない。
+
+## 根 −1−s は正でないことの行別検算
+
+両平方根の埋込みで根を数体へ逆変換し、期待する係数対を入力せずに表示を抽出する。本文の三所属・二つの符号の鎖・三比較の否定・三条件の否定・非所属を検査する。順序比較は有理数上に限る。
+
+| ファイル | 本文の行 | 状態 | 件数 |
+|---|---|---|---|
+| `check_minus_not_positive_root_membership.sage` | 根の二次体への所属 | PASS | 2 |
+| `check_minus_not_positive_representation_membership.sage` | 表示対の有理数対への所属 | PASS | 2 |
+| `check_minus_not_positive_coefficient_membership.sage` | 両係数の有理数への所属 | PASS | 2 |
+| `check_minus_not_positive_first_coefficient.sage` | 第一係数の表示 | PASS | 2 |
+| `check_minus_not_positive_first_negative.sage` | 第一係数の負値性 | PASS | 2 |
+| `check_minus_not_positive_second_coefficient.sage` | 第二係数の表示 | PASS | 2 |
+| `check_minus_not_positive_second_negative.sage` | 第二係数の負値性 | PASS | 2 |
+| `check_minus_not_positive_first_not_nonnegative.sage` | 第一係数の非負性の否定 | PASS | 2 |
+| `check_minus_not_positive_first_not_positive.sage` | 第一係数の正値性の否定 | PASS | 2 |
+| `check_minus_not_positive_second_not_positive.sage` | 第二係数の正値性の否定 | PASS | 2 |
+| `check_minus_not_positive_first_condition.sage` | 正錐の第一条件の否定 | PASS | 2 |
+| `check_minus_not_positive_second_condition.sage` | 正錐の第二条件の否定 | PASS | 2 |
+| `check_minus_not_positive_third_condition.sage` | 正錐の第三条件の否定 | PASS | 2 |
+| `check_minus_not_positive_cone_nonmembership.sage` | 正錐への非所属 | PASS | 2 |
+
+初回実行は表示対の検算で未定義の `CartesianProduct` を呼んで停止した。既存と同じ `cartesian_product([QQ, QQ])` に直し、所属の検査内容を保って全対象を再実行した。
+
+2026-10-24: 新規14本を両平方根で検算し、28件すべて通過した。既存58本を含む全72本も通過し、統合検算の表示一意性98組を確認した。対応する Lean 具体版・必要十分版・導出版のビルドも通過した。有限検算は一般証明の代わりではない。
