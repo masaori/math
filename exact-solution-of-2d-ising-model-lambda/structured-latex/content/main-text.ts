@@ -9503,6 +9503,230 @@ w_A(\sigma)+w_A(\tau)
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_even_orbit_coloring",
+        labels: [],
+        title: { text: "偶数軌道の最小元を起点とする二色付け" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_even_orbit_coloring",
+            beforeFocus: [{
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_even_orbit_minimum",
+                title: { text: "各軌道の最小元" },
+                labels: ["def_even_orbit_minimum"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitMinimum", "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitMinimum_mem"],
+                verification: ["sagemath/check/even-orbit-coloring"],
+                statement: [
+                  paragraph(["有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\preceq`), " を固定し、置換 ", math(String.raw`\sigma:\mathcal J\to\mathcal J`), " を取る。空集合も許す。各 ", math(String.raw`i\in\mathcal J`), " について、軌道の最小元を"]),
+                  displayMath(String.raw`m_\sigma(i):=\min_{\preceq}\operatorname{Orb}_\sigma(i)\in\mathcal J`),
+                  paragraph(["と定める。軌道は有限であり、零回の反復 ", math(String.raw`\sigma^{[0]}(i)=i`), " により空でない（", ref("def_finite_map_iteration"), "、", ref("def_finite_permutation_orbit"), "）。最小元の存在と一意性は ", ref("def_odd_orbit_selection"), " で述べた有限集合での構成による。最小元は軌道に属し、そのどの点以下でもある。空集合では ", math(String.raw`m_\sigma`), " は空の定義域を持つ写像である。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_even_orbit_coordinate",
+                title: { text: "軌道最小元からの反復座標" },
+                labels: ["def_even_orbit_coordinate"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitCoordinate", "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitCoordinate_exists", "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitCoordinate_spec", "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitCoordinate_unique"],
+                verification: ["sagemath/check/even-orbit-coloring"],
+                statement: [
+                  paragraph([ref("def_even_orbit_minimum"), " の記号を用いる。最小元は軌道に属し、", ref("claim_finite_permutation_orbit_basepoint"), " により ", math(String.raw`\operatorname{Orb}_\sigma(m_\sigma(i))=\operatorname{Orb}_\sigma(i)`), " である。従って ", math(String.raw`i\in\operatorname{Orb}_\sigma(m_\sigma(i))`), " であり、", ref("claim_finite_permutation_orbit_enumeration"), " の全単射によって次を満たす自然数 ", math(String.raw`r_\sigma(i)\in\mathbb N`), " がただ一つ存在する。"]),
+                  displayMath(String.raw`r_\sigma(i)<p_\sigma(m_\sigma(i)),\qquad
+\sigma^{[r_\sigma(i)]}(m_\sigma(i))=i.`),
+                  paragraph(["ここで ", math(String.raw`p_\sigma`), " は ", ref("def_finite_permutation_minimal_period"), " の正の最小周期である。この一意な反復回数を座標と呼ぶ。空集合では ", math(String.raw`r_\sigma`), " も空の定義域を持つ写像である。"]),
+                ],
+              },
+            }, {
+              role: "prerequisiteDefinition",
+              element: {
+                kind: "definition",
+                id: "tools_definition_even_orbit_coloring",
+                title: { text: "反復座標が偶数である点の色" },
+                labels: ["def_even_orbit_coloring"],
+                habitat: "N",
+                lean: ["Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor", "Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor_mem"],
+                verification: ["sagemath/check/even-orbit-coloring"],
+                statement: [
+                  paragraph([ref("def_even_orbit_coordinate"), " の座標を使い、第一色の集合を"]),
+                  displayMath(String.raw`C_\sigma:=\{i\in\mathcal J\mid r_\sigma(i)\bmod 2=0\}\subseteq\mathcal J`),
+                  paragraph(["と定める。", math(String.raw`n\bmod 2\in\{0,1\}`), " は自然数 ", math(String.raw`n\in\mathbb N`), " を二で割った余りである。", math(String.raw`\mathcal J=\varnothing`), " なら ", math(String.raw`C_\sigma=\varnothing`), " である。"]),
+                ],
+              },
+            }],
+            focus: {
+              kind: "claim",
+              id: "tools_claim_even_orbit_minimum_color",
+              title: { text: "各軌道の最小元は第一色に属する" },
+              labels: ["claim_even_orbit_minimum_color"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitMinimum_eq_of_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitCoordinate_minimum",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor_minimum_mem",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.cyclicCoordinates_basepoint_zero_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor_minimum_mem_from_necSuf",
+              ],
+              verification: ["sagemath/check/even-orbit-coloring"],
+              statement: [
+                paragraph([ref("def_even_orbit_coloring"), " の第一色について、軌道の長さの偶奇によらず、"]),
+                displayMath(String.raw`m_\sigma(i)\in C_\sigma\qquad(i\in\mathcal J)`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph(["まず ", math(String.raw`i\in\mathcal J`), " と ", math(String.raw`j\in\operatorname{Orb}_\sigma(i)`), " を取ると、"]),
+                displayMath(String.raw`\operatorname{Orb}_\sigma(j)=\operatorname{Orb}_\sigma(i)
+\qquad\bigl(\because\ \blkref{claim_finite_permutation_orbit_basepoint}\bigr).`),
+                paragraph(["二つの最小元は、それぞれ同じ集合に属するので、"]),
+                displayMath(String.raw`\begin{aligned}
+m_\sigma(j)&\preceq m_\sigma(i)
+&&\bigl(\because\ m_\sigma(j)\text{ の最小性と上の集合の等号}\bigr),\\
+m_\sigma(i)&\preceq m_\sigma(j)
+&&\bigl(\because\ m_\sigma(i)\text{ の最小性と上の集合の等号}\bigr),\\
+m_\sigma(j)&=m_\sigma(i)
+&&\bigl(\because\ \text{順序の反対称律}\bigr).
+\end{aligned}`),
+                paragraph(["ここで ", math(String.raw`b:=m_\sigma(i)\in\mathcal J`), "、", math(String.raw`p:=p_\sigma(b)\in\mathbb N`), " と略す。", math(String.raw`b\in\operatorname{Orb}_\sigma(i)`), " なので、直前の等式を ", math(String.raw`j=b`), " に適用すると ", math(String.raw`m_\sigma(b)=b`), " となる。従って、"]),
+                displayMath(String.raw`\begin{aligned}
+p_\sigma(m_\sigma(b))&=p_\sigma(b)
+&&\bigl(\because\ m_\sigma(b)=b\text{ の代入}\bigr)\\
+&=p&&\bigl(\because\ p\text{ の略記}\bigr),\\
+\sigma^{[0]}(m_\sigma(b))&=m_\sigma(b)
+&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr)\\
+&=b&&\bigl(\because\ m_\sigma(b)=b\bigr).
+\end{aligned}`),
+                displayMath(String.raw`0<p\qquad\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\bigr).`),
+                paragraph(["零は座標の条件を満たすので、"]),
+                displayMath(String.raw`\begin{aligned}
+r_\sigma(b)&=0&&\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標の一意性}\bigr),\\
+r_\sigma(b)\bmod2&=0\bmod2&&\bigl(\because\ r_\sigma(b)=0\text{ の代入}\bigr)\\
+&=0&&\bigl(\because\ \text{零を二で割った余り}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`b\in C_\sigma\qquad\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義}\bigr).`),
+              ],
+            },
+          },
+        }, {
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_even_orbit_alternation",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_even_orbit_coloring",
+              title: { text: "全軌道が偶数長なら最小元からの色は一歩ごとに反転する" },
+              labels: ["claim_even_orbit_coloring"],
+              habitat: "N",
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationOrbitMinimum_eq_of_mem",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor_alternates",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.cyclicCoordinates_alternate_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.finitePermutationEvenColor_alternates_from_necSuf",
+              ],
+              verification: ["sagemath/check/even-orbit-coloring"],
+              statement: [
+                paragraph([ref("def_even_orbit_coloring"), " の ", math(String.raw`\mathcal J,\sigma,m_\sigma,r_\sigma,C_\sigma`), " を取る。すべての ", math(String.raw`i\in\mathcal J`), " について ", math(String.raw`\operatorname{len}_\sigma(i)`), " が偶数、すなわち二で割った余りが零とする。このとき、"]),
+                displayMath(String.raw`\sigma(i)\in C_\sigma\ \Longleftrightarrow\ i\notin C_\sigma
+\qquad(i\in\mathcal J).`),
+                paragraph(["長さ二の軌道も含める。したがって、この ", math(String.raw`C_\sigma`), " は ", ref("claim_alternating_neighbor_matchings"), " の交互の二色付けの条件を満たす。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`i\in\mathcal J`), " を取り、", math(String.raw`b:=m_\sigma(i)\in\mathcal J`), "、", math(String.raw`p:=p_\sigma(b)\in\mathbb N`), " と略す。", math(String.raw`0<p`), " は ", ref("def_finite_permutation_minimal_period"), " による。"]),
+                paragraph(["次に一歩進むときの座標を調べる。"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[1]}(i)&=\sigma^{[0]}(\sigma(i))
+&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr)\\
+&=\sigma(i)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`\sigma(i)\in\operatorname{Orb}_\sigma(i)
+\qquad\bigl(\because\ \blkref{def_finite_permutation_orbit}\text{ の順向きの証人 }1\bigr).`),
+                displayMath(String.raw`\begin{aligned}
+m_\sigma(\sigma(i))&=b&&\bigl(\because\ \blkref{claim_even_orbit_minimum_color}\text{ の証明の軌道内の最小元の一致}\bigr),\\
+p_\sigma(m_\sigma(\sigma(i)))&=p_\sigma(b)
+&&\bigl(\because\ m_\sigma(\sigma(i))=b\text{ の代入}\bigr)\\
+&=p&&\bigl(\because\ p\text{ の略記}\bigr).
+\end{aligned}`),
+                paragraph(["以下 ", math(String.raw`r:=r_\sigma(i)\in\mathbb N`), "、", math(String.raw`t:=r_\sigma(\sigma(i))\in\mathbb N`), " と略す。定義の座標条件を同じ最小元へ書き換えると、"]),
+                displayMath(String.raw`r<p,\quad t<p
+\qquad\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標の範囲と上の周期の等号}\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[t]}(b)&=\sigma^{[t]}(m_\sigma(\sigma(i)))
+&&\bigl(\because\ m_\sigma(\sigma(i))=b\text{ の代入}\bigr)\\
+&=\sigma(i)&&\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の座標条件}\bigr)\\
+&=\sigma(\sigma^{[r]}(b))
+&&\bigl(\because\ \blkref{def_even_orbit_coordinate}\text{ の }i\text{ の座標条件}\bigr)\\
+&=\sigma^{[r]}(\sigma(b))
+&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_invariant}\text{ の準備の可換性}\bigr)\\
+&=\sigma^{[r+1]}(b)
+&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の再帰}\bigr).
+\end{aligned}`),
+                paragraph(["また、"]),
+                displayMath(String.raw`\begin{aligned}
+p\bmod2&=\operatorname{len}_\sigma(b)\bmod2
+&&\bigl(\because\ \blkref{claim_finite_permutation_orbit_enumeration}\text{ の周期と長さの一致}\bigr)\\
+&=0&&\bigl(\because\ \text{全軌道が偶数長という仮定を }b\text{ に適用}\bigr).
+\end{aligned}`),
+                paragraph(["非末端の場合、すなわち ", math(String.raw`r+1<p`), " の場合には、上の反復値の等号から、"]),
+                displayMath(String.raw`t=r+1\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ r+1<p\bigr).`),
+                paragraph(["余り ", math(String.raw`r\bmod2`), " は零か一である。零の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
+&=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
+&=(0+1)\bmod2&&\bigl(\because\ r\bmod2=0\text{ の代入}\bigr)\\
+&=1&&\bigl(\because\ \text{自然数の計算}\bigr).
+\end{aligned}`),
+                paragraph(["一の場合は、"]),
+                displayMath(String.raw`\begin{aligned}
+t\bmod2&=(r+1)\bmod2&&\bigl(\because\ t=r+1\text{ の代入}\bigr)\\
+&=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
+&=(1+1)\bmod2&&\bigl(\because\ r\bmod2=1\text{ の代入}\bigr)\\
+&=0&&\bigl(\because\ \text{自然数の計算}\bigr).
+\end{aligned}`),
+                paragraph(["この二場合で ", math(String.raw`t\bmod2=0\Longleftrightarrow r\bmod2\ne0`), " を得る。末端の場合、すなわち ", math(String.raw`\neg(r+1<p)`), " の場合には、"]),
+                displayMath(String.raw`r+1=p\qquad\bigl(\because\ r<p\text{ と自然数の順序}\bigr),`),
+                displayMath(String.raw`\begin{aligned}
+\sigma^{[t]}(b)&=\sigma^{[r+1]}(b)&&\bigl(\because\ \text{上で示した一歩の等式}\bigr)\\
+&=\sigma^{[p]}(b)&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
+&=b&&\bigl(\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還条件}\bigr)\\
+&=\sigma^{[0]}(b)&&\bigl(\because\ \blkref{def_finite_map_iteration}\text{ の零回の定義}\bigr).
+\end{aligned}`),
+                displayMath(String.raw`t=0\qquad\bigl(\because\ \blkref{claim_finite_permutation_period_injective}\text{ と }t<p,\ 0<p\bigr).`),
+                paragraph(["もし ", math(String.raw`r\bmod2=0`), " なら、"]),
+                displayMath(String.raw`\begin{aligned}
+0&=p\bmod2&&\bigl(\because\ p\bmod2=0\text{ の対称性}\bigr)\\
+&=(r+1)\bmod2&&\bigl(\because\ r+1=p\text{ の代入}\bigr)\\
+&=((r\bmod2)+1)\bmod2&&\bigl(\because\ \text{自然数の和の余り}\bigr)\\
+&=(0+1)\bmod2&&\bigl(\because\ r\bmod2=0\text{ の代入}\bigr)\\
+&=1&&\bigl(\because\ \text{自然数の計算}\bigr).
+\end{aligned}`),
+                paragraph(["これは ", math(String.raw`0\ne1`), " に反するので ", math(String.raw`r\bmod2\ne0`), " である。一方 ", math(String.raw`t=0`), " より ", math(String.raw`t\bmod2=0`), " である。従って末端でも両辺が真となり、同じ同値を得る。両場合を合わせて、"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(i)\in C_\sigma
+&\ \Longleftrightarrow\ t\bmod2=0
+&&\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義}\bigr)\\
+&\ \Longleftrightarrow\ r\bmod2\ne0
+&&\bigl(\because\ \text{非末端・末端で示した同値}\bigr)\\
+&\ \Longleftrightarrow\ i\notin C_\sigma
+&&\bigl(\because\ \blkref{def_even_orbit_coloring}\text{ の第一色の定義を否定}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では点 ", math(String.raw`i`), " がないので全称命題は成り立つ。長さ二の軌道では座標零が非末端、座標一が末端に当たり、同じ二場合で閉じる。使った対象は有限集合・自然数・置換の反復だけであり、実数体・複素数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
