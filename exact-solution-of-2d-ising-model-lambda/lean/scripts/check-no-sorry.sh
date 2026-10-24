@@ -1591,7 +1591,7 @@ targets=(
   Ising2DLambda.NecSuf.FisherZero.positive_cone_mul_closed_necSuf
   Ising2DLambda.FisherZero.quadraticPositiveCone_mul_mem_from_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_mem
-  Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf
+  Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_mem_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_mem_from_necSuf
   Ising2DLambda.FisherZero.selfDualRootPlus_representation
   Ising2DLambda.NecSuf.FisherZero.representation_of_value_necSuf

@@ -73,3 +73,24 @@ for f in sagemath/check/self-dual-root-positive/check_plus_rep_*.sage; do
   sage "$f" || exit
 done
 ```
+
+## 根 −1−s の所属の行別検算
+
+有理数の包含と両体の一を区別し、本文の三所属・七等号・二所属をそれぞれ検査する。二次体への所属は上記の数体への逆変換による。
+
+| ファイル | 状態 | 件数 |
+|---|---|---|
+| `check_minus_mem_coefficient.sage` | PASS | 2 |
+| `check_minus_mem_inclusion.sage` | PASS | 2 |
+| `check_minus_mem_pair.sage` | PASS | 2 |
+| `check_minus_mem_notation.sage` | PASS | 2 |
+| `check_minus_mem_map_one.sage` | PASS | 2 |
+| `check_minus_mem_map_neg.sage` | PASS | 2 |
+| `check_minus_mem_unit_product.sage` | PASS | 2 |
+| `check_minus_mem_negative_product.sage` | PASS | 2 |
+| `check_minus_mem_coefficient_one.sage` | PASS | 2 |
+| `check_minus_mem_coefficient_neg.sage` | PASS | 2 |
+| `check_minus_mem_field.sage` | PASS | 2 |
+| `check_minus_mem_root.sage` | PASS | 2 |
+
+実行日: 2026-10-24。所属の十二行を両平方根で検算し、既存の全行と統合検算（表示一意性98組）も通過した。有限検算は一般証明の代わりではない。

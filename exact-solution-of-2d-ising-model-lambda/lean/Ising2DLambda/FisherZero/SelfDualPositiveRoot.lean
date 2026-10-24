@@ -55,8 +55,20 @@ theorem selfDualRootMinus_mem (s : Qbar) :
   refine ⟨-1, -1, ?_⟩
   calc
     -1 - s = -1 + (-s) := sub_eq_add_neg _ _
-    _ = algebraMap ℚ Qbar (-1) + (-(algebraMap ℚ Qbar 1 * s)) := by norm_num
-    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar (-1) * s := by norm_num
+    _ = (-(algebraMap ℚ Qbar 1)) + (-s) :=
+      congrArg (fun x : Qbar => -x + (-s)) (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + (-s) :=
+      congrArg (fun x : Qbar => x + (-s)) (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
+    _ = algebraMap ℚ Qbar (-1) + (-(1 * s)) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + (-x)) (one_mul s).symm
+    _ = algebraMap ℚ Qbar (-1) + ((-1) * s) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x) (neg_mul (1 : Qbar) s).symm
+    _ = algebraMap ℚ Qbar (-1) + ((-(algebraMap ℚ Qbar 1)) * s) :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + (-x) * s)
+        (map_one (algebraMap ℚ Qbar)).symm
+    _ = algebraMap ℚ Qbar (-1) + algebraMap ℚ Qbar (-1) * s :=
+      congrArg (fun x : Qbar => algebraMap ℚ Qbar (-1) + x * s)
+        (map_neg (algebraMap ℚ Qbar) (1 : ℚ)).symm
 
 /-- 根 `-1-s` を `Q_s` の元として持ち上げる。 -/
 noncomputable def selfDualRootMinus (s : Qbar) : QuadraticFieldElement s :=

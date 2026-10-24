@@ -24,9 +24,10 @@ theorem selfDualRootPlus_representation_from_necSuf (s : Qbar)
 theorem selfDualRootMinus_mem_from_necSuf (s : Qbar) :
     -1 - s ∈ quadraticFieldSet s := by
   change ∃ a b : ℚ, -1 - s = algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s
-  simpa [sub_eq_add_neg] using
-    (Ising2DLambda.NecSuf.FisherZero.represented_value_mem_necSuf
-      (fun a b : ℚ => algebraMap ℚ Qbar a + algebraMap ℚ Qbar b * s) (-1) (-1))
+  exact Ising2DLambda.NecSuf.FisherZero.selfDualRootMinus_mem_necSuf
+    (algebraMap ℚ Qbar) s (sub_eq_add_neg _ _)
+    (map_one (algebraMap ℚ Qbar)) (map_neg (algebraMap ℚ Qbar) (1 : ℚ))
+    (one_mul s) (neg_mul (1 : Qbar) s)
 
 theorem selfDualRootMinus_representation_from_necSuf (s : Qbar)
     (hs : s * s = algebraMap ℚ Qbar 2) :
