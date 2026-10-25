@@ -71487,6 +71487,45 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_four_ports",
+              labels: [],
+              title: { text: "四つの標識付き半辺の局所対合" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_four_ports_count",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_four_ports_count",
+                    kind: "claim",
+                    title: { text: "四つの半辺のうち零・二・四本を選ぶ局所対合は一・一・三通り" },
+                    labels: ["claim_local_pairing_four_ports_count"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-four-ports-count"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingChoices_card",
+                      "Ising2DLambda.NecSuf.KacWard.localPairingChoices_card",
+                    ],
+                    statement: [
+                      paragraph(["四つの相異なる標識付き半辺の添字集合を ", math(String.raw`I:=\{0,1,2,3\}\subset\mathbb N`), " とし、任意の部分集合 ", math(String.raw`S\subseteq I`), " を取る。局所対合の有限集合 ", math(String.raw`\mathcal K(S)\subseteq\{\kappa\mid\kappa:I\to I\}`), " は、写像 ", math(String.raw`\kappa:I\to I`), " のうち、", math(String.raw`i\notin S`), " なら ", math(String.raw`\kappa(i)=i`), "、", math(String.raw`i\in S`), " なら ", math(String.raw`\kappa(i)\in S`), " かつ ", math(String.raw`\kappa(i)\ne i`), "、任意の ", math(String.raw`i\in I`), " で ", math(String.raw`\kappa(\kappa(i))=i`), " を満たすものとする。個数の記法 ", math(String.raw`|\cdot|`), " は ", ref("def_cardinality_notation"), " に従う。このとき"]),
+                      displayMath(String.raw`|S|=0\ \Longrightarrow\ |\mathcal K(S)|=1,\qquad |S|=2\ \Longrightarrow\ |\mathcal K(S)|=1,\qquad |S|=4\ \Longrightarrow\ |\mathcal K(S)|=3.`),
+                      paragraph(["添字は辺の端点番号を含む半辺を区別するためのものであり、辺長一で二つの半辺が同じ頂点にある場合も四つの標識を同一視しない。"]),
+                    ],
+                    proof: [
+                      paragraph([math(String.raw`|S|=0`), " なら全ての ", math(String.raw`i\in I`), " は非選択なので、恒等写像だけが条件を満たす。", math(String.raw`|S|=2`), " なら二つの元を互いに交換し、残りの二つを固定する以外にない。いずれも条件を満たすので一通りである。"]),
+                      paragraph([math(String.raw`|S|=4`), " なら ", math(String.raw`S=I`), " である。", math(String.raw`\kappa(0)\ne0`), " なので ", math(String.raw`\kappa(0)`), " は ", math(String.raw`1,2,3`), " のいずれかである。対合条件からその元は ", math(String.raw`0`), " に戻る。残った二元は不動点を持てないため互いに交換する。従って対応する対の集合はちょうど"]),
+                      displayMath(String.raw`\{\{0,1\},\{2,3\}\},\qquad\{\{0,2\},\{1,3\}\},\qquad\{\{0,3\},\{1,2\}\}`),
+                      paragraph(["の三つである。各対集合から定まる写像は選択集合を保ち、不動点を持たず、二回作用させると恒等になる。よって三通りであり、それ以外はない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
