@@ -2,10 +2,11 @@
 #
 # 本文の各段を、ZZ[x] と QQbar の厳密計算で確認する。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+            if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 
 def main():
@@ -32,7 +33,10 @@ def main():
         Z = partition_polynomial(L)
         roots = Z.roots(QQbar, multiplicities=False)
         assert len(roots) >= 1
+        lifted = Z.change_ring(QQbar)
         for xi in roots:
+            assert lifted(xi) == 0
+            assert QQbar(Z(xi)) == lifted(xi)
             assert QQbar(Z(xi)) == 0
     print("   通過")
 

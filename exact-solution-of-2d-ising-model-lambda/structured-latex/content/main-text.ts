@@ -45732,7 +45732,12 @@ c-a
                           ref("def_lattice"), "）ので、この辺は ", math(String.raw`\sigma_{\mathrm{flip}}`),
                           " で破れている。したがって",
                         ]),
-                        displayMath(String.raw`m:=b(\sigma_{\mathrm{flip}})\ge1`),
+                        displayMath(String.raw`\begin{aligned}
+m&=b(\sigma_{\mathrm{flip}})
+&&\bigl(\because\ m\text{ の置き方}\bigr)\\
+&\ge1
+&&\bigl(\because\ \text{横向きの最初の辺が破れている}\bigr).
+\end{aligned}`),
                         paragraph([
                           "であり、この配位は破れボンド数が ", math(String.raw`m`), " である配位として数えられるので",
                         ]),
@@ -45750,13 +45755,18 @@ c-a
                           math(String.raw`\widehat{Z_L}^{\,F}`), " には根 ",
                           math(String.raw`\xi\in\overline{\mathbb{Q}}`), " が存在する。すなわち",
                         ]),
-                        displayMath(String.raw`\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)=0`),
-                        paragraph([
-                          "である。", ref("claim_integer_polynomial_qbar_lift_evaluation"), " により左辺は ",
-                          math(String.raw`\mathrm{Ev}^{F}_{\xi}(Z_L)`), " に等しい。したがって ",
-                          ref("def_finite_lattice_fisher_zeros"), " より ",
-                          math(String.raw`\xi\in\mathcal{F}_{L}`), " である。",
-                        ]),
+                        displayMath(String.raw`\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)=0
+\qquad\bigl(\because\ \blkref{def_algebraic_numbers}\text{ の代数閉性}\bigr)`),
+                        paragraph([ref("claim_integer_polynomial_qbar_lift_evaluation"), " により、"]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{Ev}^{F}_{\xi}(Z_L)
+&=\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)
+&&\bigl(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation}\bigr)\\
+&=0
+&&\bigl(\because\ \mathrm{aev}_{\xi}(\widehat{Z_L}^{\,F})=0\bigr).
+\end{aligned}`),
+                        paragraph([ref("def_finite_lattice_fisher_zeros"), " より ",
+                          math(String.raw`\xi\in\mathcal{F}_{L}`), " である。"]),
                         paragraph([
                           "仮定 ", math(String.raw`L\ge2`), " は必要である。", math(String.raw`L=1`),
                           " では二本の辺がともに自己ループなので、任意の配位の破れボンド数は零であり、",
