@@ -11552,6 +11552,54 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_qbar_polynomial_pfaffian_determinant",
+        labels: [],
+        title: { text: "Pfaffian の平方恒等式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_qbar_polynomial_pfaffian_determinant",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_qbar_polynomial_pfaffian_square_determinant",
+              title: { text: "代数的数係数多項式行列では Pfaffian の平方が行列式に等しい" },
+              labels: ["claim_qbar_polynomial_pfaffian_square_determinant"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/qbar-polynomial-pfaffian-determinant"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian_sq_eq_det",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.sum_split_cancel",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian_sq_eq_det_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_qbar_zero_diagonal_skew_matrix"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_determinant_with_empty_index"), " の定義によって"]),
+                displayMath(String.raw`\operatorname{Pf}(A)^2=\det_x(A)\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " に対し、符号付き行列成分積を"]),
+                displayMath(String.raw`w_A(\sigma):=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}\in\overline{\mathbb Q}[x]`),
+                paragraph(["と略す。", ref("claim_matching_pair_even_sum"), " の全軌道が偶数長の集合 ", math(String.raw`\mathfrak S_{\mathcal J}`), " と ", ref("def_odd_orbit_derangements"), " の奇数長の軌道を持つ集合 ", math(String.raw`\operatorname{DerOdd}(\mathcal J)`), " は、不動点を持たない置換の集合を互いに素に分ける。不動点は長さ一の奇数軌道なので、全軌道が偶数長なら不動点を持たない。逆に、不動点を持たない置換で全軌道が偶数長でなければ、自然数の偶奇により奇数長の軌道を持つ。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(A)
+&=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}w_A(\sigma)&&\bigl(\because\ \blkref{claim_qbar_determinant_fixed_points}\bigr)\\
+&=\sum_{\sigma\in\mathfrak S_{\mathcal J}}w_A(\sigma)+\sum_{\sigma\in\operatorname{DerOdd}(\mathcal J)}w_A(\sigma)&&\bigl(\because\ \text{直前の互いに素な分割}\bigr)\\
+&=\sum_{\sigma\in\mathfrak S_{\mathcal J}}w_A(\sigma)&&\bigl(\because\ \blkref{claim_odd_orbit_signed_sum_zero}\bigr)\\
+&=\sum_{(D,E)\in\mathcal M\times\mathcal M}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{claim_matching_pair_even_sum}\bigr)\\
+&=\operatorname{Pf}(A)^2&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_expansion}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では唯一の空置換と空マッチングが残り、両辺は一である。有限和と代数的数係数多項式だけを用い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },

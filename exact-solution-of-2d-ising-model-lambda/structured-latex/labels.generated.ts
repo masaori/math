@@ -369,6 +369,7 @@ export const ALL_LABELS = [
   "claim_qbar_poly_monomial_decomposition",
   "claim_qbar_poly_power_difference_factorization",
   "claim_qbar_poly_product_coeff_bound",
+  "claim_qbar_polynomial_pfaffian_square_determinant",
   "claim_qbar_polynomial_pfaffian_square_expansion",
   "claim_qbar_polynomial_square_root_unique",
   "claim_qbar_polynomial_zero_product",
