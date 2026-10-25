@@ -283,4 +283,70 @@ theorem taggedMatching_local_pair_unique_from_necSuf {L : ℕ} (z : Qbar)
       exact matchingOrientedPairs_disjoint D (ht hp) (ht hq) hxp' hxq')
     v h
 
+/-- A half-edge outside the complement belongs to a long labelled pair,
+    so its mate is the reversal of its edge. -/
+theorem taggedMatching_mate_outside_complement {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (h : OrientedEdge L) (hh : h.1 ∉ taggedComplementEdges D t) :
+    perfectMatchingMate D h = reversal h := by
+  classical
+  obtain ⟨hLong, _⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  obtain ⟨p, hp, hhp⟩ := matching_pair_cover D h
+  have hnot : p ∉ t := by
+    intro hpt
+    rcases hhp with rfl | rfl
+    · exact hh ((complement_iff_short_endpoint D t ht hLong p.1).2
+        ⟨p, hpt, Or.inl rfl⟩)
+    · exact hh ((complement_iff_short_endpoint D t ht hLong p.2).2
+        ⟨p, hpt, Or.inr rfl⟩)
+  have hpl : p ∈ matchingOrientedPairs D \ t :=
+    Finset.mem_sdiff.mpr ⟨hp, hnot⟩
+  have hrev := hLong p hpl
+  have hp' := (Finset.mem_filter.mp hp).2
+  have hmate : perfectMatchingMate D p.1 = p.2 :=
+    perfectMatchingMate_eq_of_pair D p.1 p.2 hp'.1.ne' hp'.2
+  rcases hhp with rfl | rfl
+  · exact hmate.trans hrev
+  · have hback : perfectMatchingMate D p.2 = p.1 := by
+      rw [← hmate]
+      exact perfectMatchingMate_involutive D p.1
+    rw [hback, hrev, reversal_involutive]
+
+/-- The concrete statement is obtained from the endpoint partition argument. -/
+theorem taggedMatching_mate_outside_complement_from_necSuf {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (h : OrientedEdge L) (hh : h.1 ∉ taggedComplementEdges D t) :
+    perfectMatchingMate D h = reversal h := by
+  classical
+  obtain ⟨hLong, _⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  exact Ising2DLambda.NecSuf.KacWard.mate_outside_selected_eq_reverse
+    (matchingOrientedPairs D) t Prod.fst Prod.snd
+    (perfectMatchingMate D) reversal
+    (fun k => k.1 ∈ taggedComplementEdges D t)
+    (matching_pair_cover D)
+    (by
+      intro p hp
+      have hp' := (Finset.mem_filter.mp hp).2
+      exact perfectMatchingMate_eq_of_pair D p.1 p.2 hp'.1.ne' hp'.2)
+    (perfectMatchingMate_involutive D) reversal_involutive
+    (by
+      intro p hpt
+      exact ⟨(complement_iff_short_endpoint D t ht hLong p.1).2
+        ⟨p, hpt, Or.inl rfl⟩,
+        (complement_iff_short_endpoint D t ht hLong p.2).2
+        ⟨p, hpt, Or.inr rfl⟩⟩)
+    hLong h hh
+
 end Ising2DLambda.KacWard

@@ -55,6 +55,9 @@ targets=(
   Ising2DLambda.KacWard.localPairingMatching_recovers_local_mate
   Ising2DLambda.NecSuf.KacWard.splicePairingMatching_selected_mate
   Ising2DLambda.KacWard.localPairingMatching_complement_edges
+  Ising2DLambda.KacWard.taggedMatching_mate_outside_complement
+  Ising2DLambda.NecSuf.KacWard.mate_outside_selected_eq_reverse
+  Ising2DLambda.KacWard.taggedMatching_mate_outside_complement_from_necSuf
   Ising2DLambda.NecSuf.KacWard.selected_eq_long_pair_complement
   Ising2DLambda.KacWard.localPairingMatching_term_nonzero
   Ising2DLambda.NecSuf.KacWard.labelled_term_ne_zero

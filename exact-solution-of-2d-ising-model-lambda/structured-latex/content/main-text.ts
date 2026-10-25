@@ -71310,6 +71310,57 @@ q_{\vec e,\vec f}
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_tagged_matching_mate_outside_complement",
+              labels: [],
+              title: { text: "非零の標識付きマッチングの非選択辺の相手" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_mate_outside_complement",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_mate_outside_complement",
+                    kind: "claim",
+                    title: { text: "非選択辺の向き付き辺の相手は反転辺である" },
+                    labels: ["claim_tagged_matching_mate_outside_complement"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-mate-outside-complement"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_mate_outside_complement",
+                      "Ising2DLambda.NecSuf.KacWard.mate_outside_selected_eq_reverse",
+                      "Ising2DLambda.KacWard.taggedMatching_mate_outside_complement_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、項 ", math(String.raw`M_{D,T}(x)\in\overline{\mathbb Q}[x]`), " が非零の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", ref("def_tagged_matching_complement_edges"), " の補辺を ", math(String.raw`P(D,T)\subseteq E_L`), " とする。任意の ", math(String.raw`\vec e\in\vec E_L`), " について ", math(String.raw`p(\vec e)\notin P(D,T)`), " なら、", ref("claim_perfect_matching_involution"), " の相手写像は"]),
+                      displayMath(String.raw`\operatorname{mate}_D(\vec e)=\iota(\vec e)\quad\text{in }\vec E_L`),
+                      paragraph(["を満たす。端点番号と長短の標識を別のデータとして扱うので、辺長一でも成立する。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph(["向き付き辺 ", math(String.raw`\vec e`), " を含む完全マッチングの昇順対を ", math(String.raw`r=(\vec f,\vec g)\in E_D`), " と置く。完全マッチングの定義により、この対はただ一つで、", math(String.raw`\vec e=\vec f`), " または ", math(String.raw`\vec e=\vec g`), " である。仮定 ", math(String.raw`p(\vec e)\notin P(D,T)`), " と ", ref("def_tagged_matching_complement_edges"), " より、その台の長い標識の対が存在する。", ref("claim_tagged_matching_nonzero_support"), " より、この長い対は両向きの反転対なので ", math(String.raw`\vec e`), " を含む。もし ", math(String.raw`r\in T`), " なら ", math(String.raw`\vec e`), " は長短の二対に属して完全マッチングの一意性に反する。ゆえに ", math(String.raw`r\in E_D\setminus T`), " である。"]),
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " の長い対の支持から ", math(String.raw`\vec g=\iota(\vec f)`), " を得る。", math(String.raw`\vec e=\vec f`), " なら、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{mate}_D(\vec e)
+&=\vec g&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\vec e=\vec f\bigr)\\
+&=\iota(\vec f)&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\bigr)\\
+&=\iota(\vec e)&&\bigl(\because\ \vec e=\vec f\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`\vec e=\vec g`), " なら、相手写像と反転写像の対合性をそれぞれ使うと、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{mate}_D(\vec e)
+&=\vec f&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\vec e=\vec g\bigr)\\
+&=\iota(\vec g)&&\bigl(\because\ \vec g=\iota(\vec f)\text{ と }\blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(\vec e)&&\bigl(\because\ \vec e=\vec g\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_local_pairing_matching_local_mate_recovery",
               labels: [],
               title: { text: "構成した標識付きマッチングから局所対合を回復する" },

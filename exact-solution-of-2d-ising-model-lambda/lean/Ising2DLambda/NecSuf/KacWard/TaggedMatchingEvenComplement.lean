@@ -4,6 +4,36 @@ namespace Ising2DLambda.NecSuf.KacWard
 
 open Finset
 
+/-- Outside the selected endpoints, the mate is the prescribed involution.
+    Only pair coverage, pair disjointness encoded by the mate, and the label
+    support are used. -/
+theorem mate_outside_selected_eq_reverse {J P : Type*} [DecidableEq P]
+    (allPairs selectedPairs : Finset P) (first second : P → J)
+    (mate reverse : J → J) (selected : J → Prop)
+    (hcover : ∀ x, ∃ p ∈ allPairs, x = first p ∨ x = second p)
+    (hfirst : ∀ p ∈ allPairs, mate (first p) = second p)
+    (hmate : Function.Involutive mate)
+    (hreverse : Function.Involutive reverse)
+    (hshort : ∀ p ∈ selectedPairs, selected (first p) ∧ selected (second p))
+    (hlong : ∀ p ∈ allPairs \ selectedPairs, second p = reverse (first p))
+    (x : J) (hx : ¬ selected x) : mate x = reverse x := by
+  classical
+  obtain ⟨p, hp, hxp⟩ := hcover x
+  have hnot : p ∉ selectedPairs := by
+    intro hpt
+    rcases hxp with rfl | rfl
+    · exact hx (hshort p hpt).1
+    · exact hx (hshort p hpt).2
+  have hpl : p ∈ allPairs \ selectedPairs := Finset.mem_sdiff.mpr ⟨hp, hnot⟩
+  have hpair := hfirst p hp
+  have hrev := hlong p hpl
+  rcases hxp with rfl | rfl
+  · exact hpair.trans hrev
+  · have hback : mate (second p) = first p := by
+      rw [← hpair]
+      exact hmate (first p)
+    rw [hback, hrev, hreverse]
+
 /-- A finite partition into pairs has even total weight when every pair has even weight. -/
 theorem even_of_pair_contributions {J : Type*} [Fintype J]
     {P : Type*} (pairs : Finset P) (first second : P → J) (weight : J → ℕ)

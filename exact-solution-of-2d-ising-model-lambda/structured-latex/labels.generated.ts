@@ -569,6 +569,7 @@ export const ALL_LABELS = [
   "claim_tagged_matching_even_complement",
   "claim_tagged_matching_expansion",
   "claim_tagged_matching_local_pairs",
+  "claim_tagged_matching_mate_outside_complement",
   "claim_tagged_matching_nonzero_support",
   "claim_tagged_matching_short_pair_count",
   "claim_tagged_matching_term_degree",
