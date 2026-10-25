@@ -3,10 +3,11 @@
 # モデル: R = AA（実代数的数体）、ω = QQbar(I)。有限標本での検査であり、
 # 普遍量化された主張そのものの証明ではない（主張の証明は本文の人手証明が担う）。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+             if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 OMEGA = QQbar(I)
 

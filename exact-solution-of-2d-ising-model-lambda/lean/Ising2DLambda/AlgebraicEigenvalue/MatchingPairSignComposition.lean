@@ -9,7 +9,7 @@ open scoped Classical
 
 variable {J : Type*} [Fintype J] [LinearOrder J]
 
-private noncomputable def orientationSign (l : List (J × J)) (S : Set J) : ℤ :=
+noncomputable def orientationSign (l : List (J × J)) (S : Set J) : ℤ :=
   (l.map (fun p => if p.1 ∈ S then (1 : ℤ) else -1)).prod
 
 private theorem orientationSign_mul_self (l : List (J × J)) (S : Set J) :

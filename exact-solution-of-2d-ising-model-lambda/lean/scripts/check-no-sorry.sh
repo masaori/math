@@ -2432,6 +2432,8 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq_necSuf
   Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition
+  Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

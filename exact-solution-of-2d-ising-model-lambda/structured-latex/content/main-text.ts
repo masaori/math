@@ -11352,6 +11352,56 @@ B_{C^{\mathrm c}}(\mathcal L_\upsilon(w_2))
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_actual_sign_composition",
+        labels: [],
+        title: { text: "二色の実際の列挙と置換符号" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_actual_sign_composition",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_actual_sign_composition",
+              title: { text: "実際の二色の列挙を用いると置換符号は二つのマッチング符号の積になる" },
+              labels: ["claim_matching_pair_actual_sign_composition"],
+              habitat: "Z",
+              verification: ["sagemath/check/matching-pair-actual-sign-composition"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_first_enumeration"), " と ", ref("claim_matching_pair_second_enumeration"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、相手写像 ", math(String.raw`\tau,\upsilon`), "、第一色 ", math(String.raw`C`), "、第一色の全元を重複なく並べた列 ", math(String.raw`w`), " を取る。第一マッチングと第二マッチングを ", math(String.raw`\mathcal D_\tau,\mathcal D_\upsilon`), "、両色の昇順対列挙を ", math(String.raw`\mathcal L_\tau(w),\mathcal L_\upsilon(w_2)`), " とする。ここで ", math(String.raw`w_2=[\tau(c)\mid c\text{ は }w\text{ の項}]`), " である。" ]),
+                paragraph(["各対の向きの符号の積を ", math(String.raw`\alpha_\tau:=\prod_{(a,b)\in\mathcal L_\tau(w)}\eta_C(a,b)\in\mathbb Z`), "、", math(String.raw`\alpha_\upsilon:=\prod_{(a,b)\in\mathcal L_\upsilon(w_2)}\eta_{\mathcal J\setminus C}(a,b)\in\mathbb Z`), " と置く。このとき、", ref("def_matching_pair_successor"), " の置換 ", math(String.raw`\sigma`), " の符号は"]),
+                displayMath(String.raw`\operatorname{sgn}(\sigma)=\alpha_\tau\alpha_\upsilon\operatorname{sgn}(\mathcal D_\tau)\operatorname{sgn}(\mathcal D_\upsilon)\quad\text{in }\mathbb Z`),
+                paragraph(["である。空集合ではすべての積と符号は一である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_first_word_complete"), " より ", math(String.raw`W_\tau(w)`), " は ", math(String.raw`\mathcal J`), " の完全列挙である。", ref("claim_matching_pair_first_enumeration"), " と ", ref("claim_matching_pair_second_enumeration"), " より、実際の昇順対列挙はそれぞれ ", math(String.raw`\mathcal D_\tau,\mathcal D_\upsilon`), " の全対を一度ずつ含み、向き付き列との一致は"]),
+                displayMath(String.raw`\begin{aligned}
+W_\tau(w)&=B_C(\mathcal L_\tau(w))&&\bigl(\because\ \blkref{claim_matching_pair_first_enumeration}\bigr)\\
+W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\because\ \blkref{claim_matching_pair_second_enumeration}\bigr).
+\end{aligned}`),
+                paragraph(["ここで第二の列の ", math(String.raw`W_\upsilon(w)`), " は ", ref("claim_matching_pair_word_map"), " と同じ ", math(String.raw`[\tau(c),\upsilon(\tau(c))\mid c\text{ は }w\text{ の項}]`), " を指す。したがって ", ref("claim_matching_pair_sign_composition"), " へ、第一・第二の実際のマッチングと列挙、", math(String.raw`S=C,T=\mathcal J\setminus C`), "、上の二等式および完全列挙を代入して"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\sigma)
+&=\alpha_{\mathcal D_\tau}\alpha_{\mathcal D_\upsilon}\operatorname{sgn}(\mathcal D_\tau)\operatorname{sgn}(\mathcal D_\upsilon)
+&&\bigl(\because\ \blkref{claim_matching_pair_sign_composition}\bigr)\\
+&=\alpha_\tau\alpha_\upsilon\operatorname{sgn}(\mathcal D_\tau)\operatorname{sgn}(\mathcal D_\upsilon)
+&&\bigl(\because\ \alpha_\tau,\alpha_\upsilon\text{ の置き方}\bigr).
+\end{aligned}`),
+                paragraph(["空集合の場合も完全列挙と列の一致は空列について成立する。使ったのは有限集合、有限列と整数だけであり、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -46230,8 +46280,12 @@ w\cdot w
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{dsq}(\xi,q)
+&=(a-q)\cdot(a-q)+b\cdot b
+&&(\because\ \blkref{def_distance_squared_to_rational})\\
+&=(q-q)\cdot(q-q)+b\cdot b
+&&(\because\ a=q)\\
 &=(q-q)\cdot(q-q)+0\cdot0
-&&(\because\ \blkref{def_distance_squared_to_rational}\text{、}a=q\text{、}b=0)\\
+&&(\because\ b=0)\\
 &=0\cdot0+0\cdot0
 &&(\because\ \text{加法逆元の定義 }q-q=0)\\
 &=0
@@ -46314,8 +46368,12 @@ w\cdot w
                         ]),
                         displayMath(String.raw`\begin{aligned}
 0
+&=\mathrm{dsq}(\xi,q)
+&&(\because\ \mathrm{dsq}(\xi,q)=0\text{ の仮定})\\
+&=(a-q)\cdot(a-q)+b\cdot b
+&&(\because\ \blkref{def_distance_squared_to_rational})\\
 &=(a-q)\cdot(a-q)+0\cdot0
-&&(\because\ \blkref{def_distance_squared_to_rational}\text{、}b=0)\\
+&&(\because\ b=0)\\
 &=(a-q)\cdot(a-q)
 &&(\because\ \text{零元の乗法と加法})
 \end{aligned}`),

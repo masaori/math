@@ -153,6 +153,7 @@ export const ALL_LABELS = [
   "claim_log_power",
   "claim_low_temperature_polynomial_identity",
   "claim_low_temperature_trivial_sector_expression",
+  "claim_matching_pair_actual_sign_composition",
   "claim_matching_pair_bijection",
   "claim_matching_pair_coloring_alternates",
   "claim_matching_pair_component_basepoint",
