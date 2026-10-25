@@ -202,6 +202,7 @@ export const ALL_LABELS = [
   "claim_non_orbit_preserving_term_zero",
   "claim_non_phase_reversing_standard_smoothing_involution",
   "claim_nonbacktracking_permutation_stratified_count",
+  "claim_nonzero_long_pair_reference",
   "claim_nonzero_winding_simple_cycle_turning_zero",
   "claim_odd_orbit_selection_invariant",
   "claim_odd_orbit_signed_sum_zero",

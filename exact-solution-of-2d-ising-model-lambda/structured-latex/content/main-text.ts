@@ -71663,6 +71663,46 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_nonzero_long_pairs_reference",
+              labels: [],
+              title: { text: "非零項の長い対と基準マッチング" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_nonzero_long_pair_reference",
+                  focus: {
+                    id: "kac_ward_claim_nonzero_long_pair_reference",
+                    kind: "claim",
+                    title: { text: "非零項の長い標識の対は基準マッチングに属する" },
+                    labels: ["claim_nonzero_long_pair_reference"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/nonzero-long-pair-reference"],
+                    lean: [
+                      "Ising2DLambda.KacWard.nonzeroLongPair_mem_referenceLongPairs",
+                      "Ising2DLambda.NecSuf.KacWard.longPair_mem_reversalPairs",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、非零項の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。長い標識の昇順対 ", math(String.raw`p=(\vec e,\vec f)\in E_D\setminus T`), " について、基礎にある二元集合 ", math(String.raw`\{\vec e,\vec f\}`), " は ", ref("def_reference_long_pairs"), " の ", math(String.raw`\mathcal D_0`), " に属する。ここで長い標識は対の種類を表し、辺長一で同じ二元集合に付く短い標識と区別する。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`\vec f=\iota(\vec e)`), " である。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+\{\vec e,\vec f\}
+&=\{\vec e,\iota(\vec e)\}&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\bigr)\\
+&\in\mathcal D_0&&\bigl(\because\ \blkref{def_reference_long_pairs}\bigr).
+\end{aligned}`),
+                      paragraph(["この包含は長い標識を持つ対だけに適用した。二元集合が一致する場合も短い標識を長い標識へ変えていない。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
