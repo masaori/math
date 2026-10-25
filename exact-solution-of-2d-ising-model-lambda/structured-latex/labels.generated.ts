@@ -558,6 +558,7 @@ export const ALL_LABELS = [
   "claim_step_advances_direction",
   "claim_switchable_contact_smoothing_preserves_fiber",
   "claim_tagged_matching_expansion",
+  "claim_tagged_matching_nonzero_support",
   "claim_terminal_matrix_determinant",
   "claim_terminal_matrix_entries",
   "claim_three_term_pm_four_difference_zero",

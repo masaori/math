@@ -70640,6 +70640,60 @@ c_D(-1)^{|T|}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_nonzero_support",
+              labels: [],
+              title: { text: "標識付き完全マッチングの非零項の支持" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_nonzero_support",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_nonzero_support",
+                    kind: "claim",
+                    title: { text: "標識付き完全マッチングの非零項には許される対だけが現れる" },
+                    labels: ["claim_tagged_matching_nonzero_support"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-nonzero-support"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_nonzero_support",
+                      "Ising2DLambda.KacWard.taggedMatching_nonzero_term_support",
+                      "Ising2DLambda.NecSuf.KacWard.taggedProduct_nonzero_support",
+                      "Ising2DLambda.KacWard.taggedMatching_nonzero_support_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", math(String.raw`D\in\mathcal M(\vec E_L)`), "、", math(String.raw`T\subseteq E_D`), " である。内側の和の ", math(String.raw`(D,T)`), " に対応する ", math(String.raw`\overline{\mathbb Q}[x]`), " の項が零でないなら、"]),
+                      displayMath(String.raw`\begin{aligned}
+&\forall(\vec e,\vec f)\in E_D\setminus T,\quad \vec f=\iota(\vec e),\\
+&\forall(\vec e,\vec f)\in T,\quad \operatorname{src}(\vec f)=\operatorname{src}(\vec e)\ \land\ \vec f\ne\vec e
+\end{aligned}`),
+                      paragraph(["が成り立つ。", math(String.raw`L=1`), " で同じ二元集合が両条件を満たす場合も、対に付けた標識によってどちらの条件を使うかが決まる。"]),
+                    ],
+                    proof: [
+                      paragraph(["項の符号因子を除いた二つの有限積を ", math(String.raw`A:=\prod_{p\in E_D\setminus T}\mathsf L_p`), "、", math(String.raw`B:=\prod_{p\in T}\mathsf S_p`), " と置く。項が零でないので ", math(String.raw`A\ne0`), " かつ ", math(String.raw`B\ne0`), " である（多項式の零積性）。したがって両有限積の各因子も零でない（零因子がないこと）。", ref("def_tagged_matching_contributions"), " により、各対の条件が偽なら対応する寄与は零になる。ゆえに"]),
+                      displayMath(String.raw`\begin{aligned}
+\mathsf L_{\vec e,\vec f}\ne0
+&\Longrightarrow \ell_{\vec e,\vec f}\ne0
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と }C(0)=0\bigr)\\
+&\Longrightarrow \vec f=\iota(\vec e)
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ の場合分け}\bigr),\\
+\mathsf S_{\vec e,\vec f}\ne0
+&\Longrightarrow q_{\vec e,\vec f}\ne0
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と }xC(0)=0\bigr)\\
+&\Longrightarrow \operatorname{src}(\vec f)=\operatorname{src}(\vec e)\ \land\ \vec f\ne\vec e
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ の場合分け}\bigr).
+\end{aligned}`),
+                      paragraph(["この議論は標識ごとに独立である。有限積と ", math(String.raw`\overline{\mathbb Q}[x]`), " の零積性だけを用い、実数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
