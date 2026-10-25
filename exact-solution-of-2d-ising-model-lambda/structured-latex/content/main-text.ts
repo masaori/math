@@ -44838,14 +44838,14 @@ z=0&\iff b-a=0&&\bigl(\because\ z=b-a\bigr)\\
 \end{aligned}`),
                     paragraph(["第 2 の場合には零元でない ", math(String.raw`w\in R`), " が存在し、"]),
                     displayMath(String.raw`\begin{aligned}
-b-a&=z&&\bigl(\because\ z=b-a\bigr),\\
-&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr),\\
+b-a&=z&&\bigl(\because\ z=b-a\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
 a&<_{R}b&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
 \end{aligned}`),
                     paragraph(["第 3 の場合にも零元でない ", math(String.raw`w\in R`), " が存在し、"]),
                     displayMath(String.raw`\begin{aligned}
-a-b&=-z&&\bigl(\because\ z=b-a,\ R\text{ の加法群の四則}\bigr),\\
-&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr),\\
+a-b&=-z&&\bigl(\because\ z=b-a,\ R\text{ の加法群の四則}\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 2 条件}\bigr)\\
 b&<_{R}a&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
 \end{aligned}`),
                     paragraph([ref("def_real_algebraic_strict_order"), " により、", math(String.raw`a<_{R}b`), " の証人は第 2 の場合の証人となり、", math(String.raw`b<_{R}a`), " の証人は第 3 の場合の証人となる。", ref("def_real_closed_subfield"), " の第 2 条件は三つの場合の網羅性と排他性を与えるため、主張の三つの場合もちょうど一つだけ成り立つ。"]),
