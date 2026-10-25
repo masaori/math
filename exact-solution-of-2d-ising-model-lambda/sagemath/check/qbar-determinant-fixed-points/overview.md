@@ -1,6 +1,6 @@
 # 零対角行列の行列式で不動点を持つ項の消去の行別検算
 
-**対象ラベル**: `def_qbar_determinant_with_empty_index`, `def_fixed_point_free_permutations`, `claim_qbar_determinant_fixed_points`
+**対象ラベル**: `def_qbar_polynomial_determinant`, `def_fixed_point_free_permutations`, `claim_qbar_determinant_fixed_points`
 
 本文の十一等号を一行一ファイルに対応させる。円分体 $\mathbb Q(\zeta_8)[x]$ の厳密計算を使い、浮動小数点も変数への代入も使わない。添字集合の大きさは零から六で、零行列・密行列・反対称な非対角成分を持つ行列・巡回する疎行列・上三角行列の五族を用意する。対角を零にした35行列が主張の入力である。
 

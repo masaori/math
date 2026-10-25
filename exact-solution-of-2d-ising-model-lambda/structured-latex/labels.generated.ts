@@ -774,7 +774,6 @@ export const ALL_LABELS = [
   "def_primitive_integer_pair",
   "def_qbar_action_iterate",
   "def_qbar_constant_embedding",
-  "def_qbar_determinant_with_empty_index",
   "def_qbar_eigenspace",
   "def_qbar_eigenvalue",
   "def_qbar_eigenvector",

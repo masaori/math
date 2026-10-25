@@ -6265,7 +6265,7 @@ a+2b&=(a+b)+b
                 habitat: "Qbar",
                 statement: [
                   paragraph([
-                    "空でない有限集合 ", math(String.raw`\mathcal J`), " を取る。",
+                    "有限集合 ", math(String.raw`\mathcal J`), " を取る。空集合も許す。",
                     ref("def_qbar_polynomial_ring"), " の不定元をこの節では ",
                     math(String.raw`x`), " と書き、成分が ",
                     math(String.raw`\overline{\mathbb Q}[x]`), " に属する ",
@@ -6293,24 +6293,27 @@ a+2b&=(a+b)+b
                 kind: "definition",
                 title: { text: "代数的数係数多項式行列の行列式" },
                 labels: ["def_qbar_polynomial_determinant"],
-                lean: ["Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum"],
+                lean: ["Ising2DLambda.KacWard.qbarPolynomialDeterminant_eq_signedPermutationSum", "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion"],
+                verification: ["sagemath/check/qbar-determinant-fixed-points"],
                 habitat: "Qbar",
                 statement: [
                   paragraph([
-                    math(String.raw`\mathcal J`), " に線型順序を一つ固定する。",
+                    math(String.raw`\mathcal J`), " に線型順序を一つ固定する。空集合も許す。全単射 ",
+                    math(String.raw`\mathcal J\to\mathcal J`), " の全体を ", math(String.raw`\operatorname{Perm}(\mathcal J)`), " と書く。",
                     math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), "（",
                     ref("def_qbar_polynomial_matrix"), "）に対して、その行列式を",
                   ]),
                   displayMath(String.raw`\det_x(B):=
 \sum_{\varphi\in\operatorname{Perm}(\mathcal J)}
-\widehat{\operatorname{sgn}(\varphi)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\varphi))}
 \prod_{j\in\mathcal J}B_{j,\varphi(j)}
 \in\overline{\mathbb Q}[x]`),
                   paragraph([
                     "で定める。置換と符号は ", ref("def_permutation_sign"),
-                    " で定めた。整数の符号 ", math(String.raw`\operatorname{sgn}(\varphi)\in\mathbb Z`),
-                    " は部分集合の鎖 ",
-                    math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                    " の転倒数による式を空集合にも適用して定める。空集合では唯一の空置換の転倒数が ", math(String.raw`0`),
+                    "、符号が ", math(String.raw`1`), " となる。空積は ", math(String.raw`1`),
+                    " なので ", math(String.raw`\det_x(B)=1`), " である。整数の符号 ", math(String.raw`\operatorname{sgn}(\varphi)\in\mathbb Z`),
+                    " は整数の包含写像 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
                     " により ", math(String.raw`\overline{\mathbb Q}`),
                     " の元として扱い、代数的数を定数多項式へ送る写像 ",
                     math(String.raw`z\mapsto\widehat z`), "（", ref("def_qbar_constant_embedding"),
@@ -7476,32 +7479,6 @@ b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
               {
                 role: "prerequisiteDefinition",
                 element: {
-                  id: "tools_definition_qbar_determinant_with_empty_index",
-                  kind: "definition",
-                  title: { text: "空の添字集合も許す多項式行列式" },
-                  labels: ["def_qbar_determinant_with_empty_index"],
-                  habitat: "Qbar",
-                  lean: ["Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion"],
-                  verification: ["sagemath/check/qbar-determinant-fixed-points"],
-                  statement: [
-                    paragraph(["有限集合 ", math(String.raw`\mathcal J`), " に線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。全単射 ", math(String.raw`\mathcal J\to\mathcal J`), " の全体を ", math(String.raw`\operatorname{Perm}(\mathcal J)`), " と書く。", ref("def_permutation_sign"), " と同じ式を空集合にも用い、各 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " の転倒数と整数符号を"]),
-                    displayMath(String.raw`\operatorname{inv}(\sigma):=
-\#\{(i,j)\in\mathcal J^2\mid i\prec j,\ \sigma(j)\prec\sigma(i)\}\in\mathbb N,
-\qquad
-\operatorname{sgn}(\sigma):=(-1)^{\operatorname{inv}(\sigma)}\in\mathbb Z`),
-                    paragraph(["と定める。空集合では唯一の空置換の転倒集合が空なので、転倒数は ", math(String.raw`0`), "、符号は ", math(String.raw`1`), " である。", ref("def_qbar_polynomial_ring"), " の不定元を ", math(String.raw`x`), " と書き、行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。包含写像 ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " と ", ref("def_qbar_constant_embedding"), " の定数多項式を用いて、"]),
-                    displayMath(String.raw`\det_x(A):=
-\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}
-\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
-\prod_{i\in\mathcal J}A_{i,\sigma(i)}
-\in\overline{\mathbb Q}[x]`),
-                    paragraph(["と定める。空積は ", math(String.raw`1`), "、空和は ", math(String.raw`0`), " とする。空でない ", math(String.raw`\mathcal J`), " では ", ref("def_qbar_polynomial_determinant"), " と同じ定義である。和と積は有限で、値は多項式環の中で閉じる。"]),
-                  ],
-                },
-              },
-              {
-                role: "prerequisiteDefinition",
-                element: {
                   id: "tools_definition_fixed_point_free_permutations",
                   kind: "definition",
                   title: { text: "不動点を持たない置換の集合" },
@@ -7534,7 +7511,7 @@ b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
               ],
               verification: ["sagemath/check/qbar-determinant-fixed-points"],
               statement: [
-                paragraph([ref("def_qbar_determinant_with_empty_index"), " の行列 ", math(String.raw`A`), " が ", math(String.raw`A_{i,i}=0`), "（すべての ", math(String.raw`i\in\mathcal J`), "）を満たすとする。各置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " について"]),
+                paragraph([ref("def_qbar_polynomial_determinant"), " の行列 ", math(String.raw`A`), " が ", math(String.raw`A_{i,i}=0`), "（すべての ", math(String.raw`i\in\mathcal J`), "）を満たすとする。各置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " について"]),
                 displayMath(String.raw`c_\sigma:=
 \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))},
 \qquad
@@ -7570,7 +7547,7 @@ c_\sigma P_\sigma
                 displayMath(String.raw`\begin{aligned}
 \det_x(A)
  &=\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}c_\sigma P_\sigma
- &&\bigl(\because\ \blkref{def_qbar_determinant_with_empty_index}\bigr)\\
+ &&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
  &=\sum_{\sigma\in\operatorname{Der}(\mathcal J)}c_\sigma P_\sigma
    +\sum_{\sigma\in\mathcal F}c_\sigma P_\sigma
  &&\bigl(\because\ \text{重複のない合併で有限和を分ける}\bigr)\\
@@ -9130,7 +9107,7 @@ q(p(i))&=q(i)&&\bigl(\because\ p\text{ の定義},\ i\notin C\bigr)\\
               statement: [
                 paragraph(["有限集合 ", math(String.raw`\mathcal J`), " と線型順序 ", math(String.raw`\prec`), " を固定する。空集合も許す。多項式を成分とする行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " が、任意の ", math(String.raw`i,j\in\mathcal J`), " に対して反対称性"]),
                 displayMath(String.raw`A_{j,i}=-A_{i,j}\qquad(i,j\in\mathcal J)`),
-                paragraph(["を満たすとする。符号と定数多項式は ", ref("def_qbar_determinant_with_empty_index"), " の記法を用い、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " に対して"]),
+                paragraph(["を満たすとする。符号と定数多項式は ", ref("def_qbar_polynomial_determinant"), " の記法を用い、各 ", math(String.raw`\pi\in\operatorname{Perm}(\mathcal J)`), " に対して"]),
                 displayMath(String.raw`c_\pi:=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\pi))}
 \in\overline{\mathbb Q}[x]`),
                 paragraph(["と置く。", ref("def_odd_orbit_derangements"), " の任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " について、", ref("def_selected_odd_orbit_reversal"), " の ", math(String.raw`\tau:=R_{\mathrm{odd}}(\sigma)\in\operatorname{Perm}(\mathcal J)`), " は"]),
@@ -10833,7 +10810,7 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
                 "Ising2DLambda.AlgebraicEigenvalue.emptyPfaffianDeterminant_from_necSuf",
               ],
               statement: [
-                paragraph(["空の線型順序集合 ", math(String.raw`\mathcal J=\varnothing`), " 上の唯一の零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " について、", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_determinant_with_empty_index"), " の値は"]),
+                paragraph(["空の線型順序集合 ", math(String.raw`\mathcal J=\varnothing`), " 上の唯一の零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " について、", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_polynomial_determinant"), " の値は"]),
                 displayMath(String.raw`\operatorname{Pf}(A)=1,\qquad \det_x(A)=1,\qquad \operatorname{Pf}(A)^2=\det_x(A)\quad\text{in }\overline{\mathbb Q}[x]`),
                 paragraph(["である。"]),
               ],
@@ -10849,7 +10826,7 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
                 paragraph(["空集合の置換は空置換だけで、その符号は一、行列成分の積は空積である。よって"]),
                 displayMath(String.raw`\begin{aligned}
 \det_x(A)
-&=\sum_{\sigma\in\{\operatorname{id}_{\varnothing}\}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\varnothing}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{def_qbar_determinant_with_empty_index}\bigr)\\
+&=\sum_{\sigma\in\{\operatorname{id}_{\varnothing}\}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\varnothing}A_{i,\sigma(i)}&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
 &=1\cdot1&&\bigl(\because\ \text{空置換の符号と空積}\bigr)\\
 &=1&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の単位元則}\bigr).
 \end{aligned}`),
@@ -11530,7 +11507,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                 "Ising2DLambda.AlgebraicEigenvalue.matchingPair_even_sum_from_necSuf",
               ],
               statement: [
-                paragraph([ref("claim_matching_pair_bijection"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、", ref("def_qbar_zero_diagonal_skew_matrix"), " の行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。全軌道長が偶数の置換の集合を ", math(String.raw`\mathfrak S_{\mathcal J}`), "、完全マッチングの順序付き対の集合を ", math(String.raw`\mathfrak P_{\mathcal J}`), " とする。", ref("def_qbar_determinant_with_empty_index"), " の符号と ", ref("def_qbar_polynomial_pfaffian"), " の各対の符号・単項式を用いると、"]),
+                paragraph([ref("claim_matching_pair_bijection"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、", ref("def_qbar_zero_diagonal_skew_matrix"), " の行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。全軌道長が偶数の置換の集合を ", math(String.raw`\mathfrak S_{\mathcal J}`), "、完全マッチングの順序付き対の集合を ", math(String.raw`\mathfrak P_{\mathcal J}`), " とする。", ref("def_qbar_polynomial_determinant"), " の符号と ", ref("def_qbar_polynomial_pfaffian"), " の各対の符号・単項式を用いると、"]),
                 displayMath(String.raw`\sum_{\sigma\in\mathfrak S_{\mathcal J}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}=\sum_{(D,E)\in\mathfrak P_{\mathcal J}}(c_Dc_E)(b_Db_E)\quad\text{in }\overline{\mathbb Q}[x]`),
                 paragraph(["が成り立つ。両辺は有限和である。"]),
               ],
@@ -11573,7 +11550,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
                 "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomialPfaffian_sq_eq_det_from_necSuf",
               ],
               statement: [
-                paragraph([ref("def_qbar_zero_diagonal_skew_matrix"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_determinant_with_empty_index"), " の定義によって"]),
+                paragraph([ref("def_qbar_zero_diagonal_skew_matrix"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、零対角反対称行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_qbar_polynomial_pfaffian"), " と ", ref("def_qbar_polynomial_determinant"), " の定義によって"]),
                 displayMath(String.raw`\operatorname{Pf}(A)^2=\det_x(A)\quad\text{in }\overline{\mathbb Q}[x]`),
                 paragraph(["が成り立つ。"]),
               ],

@@ -1,4 +1,4 @@
-# 対象ラベル: def_qbar_determinant_with_empty_index, def_fixed_point_free_permutations
+# 対象ラベル: def_qbar_polynomial_determinant, def_fixed_point_free_permutations
 from pathlib import Path
 load(str(Path(__file__).resolve().parent / "_prelude.sage"))
 permutation_count=0
