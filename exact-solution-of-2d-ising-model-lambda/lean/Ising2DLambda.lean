@@ -1226,7 +1226,9 @@ import Ising2DLambda.KacWard.LocalPairingMatching
 import Ising2DLambda.NecSuf.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.TwistSignNonzero
+import Ising2DLambda.KacWard.ShortPairRotationPhaseNonzero
 import Ising2DLambda.NecSuf.KacWard.TwistSignNonzero
+import Ising2DLambda.NecSuf.KacWard.ShortPairRotationPhaseNonzero
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermDegree
 import Ising2DLambda.KacWard.TaggedMatchingTermDegree
 import Ising2DLambda.NecSuf.KacWard.GaugedTerminalSkew

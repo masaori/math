@@ -71094,6 +71094,48 @@ w_{\vec e,\vec f}&\ne0
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_short_pair_rotation_phase_nonzero",
+              labels: [],
+              title: { text: "短い対の回転位相の非零性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_short_pair_rotation_phase_nonzero",
+                  focus: {
+                    id: "kac_ward_claim_short_pair_rotation_phase_nonzero",
+                    kind: "claim",
+                    title: { text: "短い対に現れる回転位相は零でない" },
+                    labels: ["claim_short_pair_rotation_phase_nonzero"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/short-pair-rotation-phase-nonzero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.shortPair_direction_ne",
+                      "Ising2DLambda.KacWard.shortPairRotationPhase_three_values",
+                      "Ising2DLambda.KacWard.shortPairRotationPhase_ne_zero",
+                      "Ising2DLambda.NecSuf.KacWard.three_value_phase_ne_zero",
+                      "Ising2DLambda.KacWard.shortPairRotationPhase_ne_zero_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), "、同じ始点を持つ相異なる向き付き辺 ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。", ref("def_edge_reversal"), " の反転辺から ", math(String.raw`\vec f`), " への回転位相（", ref("def_rotation_phase"), "）は"]),
+                      displayMath(String.raw`\rho(\iota(\vec e),\vec f)\in\{1,\zeta_8,\zeta_8^{-1}\}\subset\overline{\mathbb Q}\setminus\{0\}.`),
+                    ],
+                    proof: [
+                      paragraph([ref("def_lattice"), " と ", ref("def_oriented_edge_direction"), " により、各頂点 ", math(String.raw`v=(i,j)\in V_L`), " には方向 ", math(String.raw`0,1,2,3`), " の向き付き辺がそれぞれ存在する。台の横辺を ", math(String.raw`(i,j),(i,j-1)`), "、縦辺を ", math(String.raw`(i,j),(i-1,j)`), " に取って向きを選べば四つを構成できる。座標の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。"]),
+                      paragraph(["写像 ", math(String.raw`\vec g\mapsto(\operatorname{src}(\vec g),\operatorname{dir}(\vec g))`), " は上の構成で全射である。", ref("def_oriented_edges"), " より定義域と値域はともに ", math(String.raw`4L^2`), " 元の有限集合なので、この全射は単射でもある。ゆえに同じ始点を持つ ", math(String.raw`\vec f\ne\vec e`), " について ", math(String.raw`\operatorname{dir}(\vec f)\ne\operatorname{dir}(\vec e)`), " である。辺長一でも方向番号は四つのままである。"]),
+                      paragraph([ref("claim_reversal_direction_shift"), " より ", math(String.raw`\operatorname{dir}(\iota(\vec e))=\operatorname{dir}(\vec e)+2`), " である。", math(String.raw`\mathbb Z/4\mathbb Z`), " の四元から ", math(String.raw`\operatorname{dir}(\vec e)`), " を除くと、反転辺の方向との差は ", math(String.raw`0,1,-1`), " のいずれかである。", ref("def_nonbacktracking_successors"), " より ", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec e))`), " なので、", ref("def_rotation_phase"), " の三つの場合を適用できる。"]),
+                      displayMath(String.raw`\rho(\iota(\vec e),\vec f)=\begin{cases}1,&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e)),\\\zeta_8,&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))+1,\\\zeta_8^{-1},&\operatorname{dir}(\vec f)=\operatorname{dir}(\iota(\vec e))-1.\end{cases}\quad(\because\ \blkref{def_rotation_phase})`),
+                      paragraph([ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8^4=-1`), " より ", math(String.raw`\zeta_8\ne0`), " である。体 ", math(String.raw`\overline{\mathbb Q}`), " の非零元の逆元も非零なので、三つの値はいずれも零でない。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_local_pairing_matching_label_support",
               labels: [],
               title: { text: "局所対合から構成した対への標識付け" },
