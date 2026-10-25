@@ -11147,6 +11147,71 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_sign_composition",
+        labels: [],
+        title: { text: "端点列の向きと二つのマッチング符号を合成する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_sign_composition",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_sign_composition",
+              title: { text: "二色の端点列が向き付き列挙なら置換符号はマッチング符号の積で決まる" },
+              labels: ["claim_matching_pair_sign_composition"],
+              habitat: "Z",
+              verification: ["sagemath/check/matching-pair-sign-composition"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSignComposition",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSignComposition_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSignComposition_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_word_sign_map"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、相手写像 ", math(String.raw`\tau,\upsilon`), "、第一色 ", math(String.raw`C`), "、置換 ", math(String.raw`\sigma`), "、第一色の列 ", math(String.raw`w`), " を取る。二つの完全マッチング ", math(String.raw`\mathcal D,\mathcal E\in\mathcal M(\mathcal J)`), " と各対から一端点ずつ選ぶ集合 ", math(String.raw`S,T\subseteq\mathcal J`), " を取る。", ref("def_perfect_matching_enumeration"), " の昇順対列挙をそれぞれ ", math(String.raw`\mathcal L_{\mathcal D},\mathcal L_{\mathcal E}`), " とする。"]),
+                paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き付き端点列について ", math(String.raw`W_\tau(w)=B_S(\mathcal L_{\mathcal D})`), "、", math(String.raw`W_\upsilon(w)=B_T(\mathcal L_{\mathcal E})`), " を仮定する。各対の向きの符号の積を ", math(String.raw`\alpha_{\mathcal D}:=\prod_{(a,b)\in\mathcal L_{\mathcal D}}\eta_S(a,b)\in\mathbb Z`), "、", math(String.raw`\alpha_{\mathcal E}:=\prod_{(a,b)\in\mathcal L_{\mathcal E}}\eta_T(a,b)\in\mathbb Z`), " と置く。このとき"]),
+                displayMath(String.raw`\operatorname{sgn}(\sigma)=\alpha_{\mathcal D}\alpha_{\mathcal E}\operatorname{sgn}(\mathcal D)\operatorname{sgn}(\mathcal E)\quad\text{in }\mathbb Z`),
+                paragraph(["が成り立つ。列挙との二つの一致は仮定であり、実際の二色のマッチングについては次の節で示す。空集合ではすべての列・積・符号は空の値一である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_word_orientation_sign"), " を二つの向き付き列挙へ適用し、仮定した列の一致を代入すると"]),
+                displayMath(String.raw`\begin{aligned}
+\varepsilon(W_\tau(w))&=\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
+\varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
+\end{aligned}`),
+                paragraph(["各 ", math(String.raw`\eta_S(a,b),\eta_T(a,b)`), " は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので、その有限積も平方が一である。", ref("def_matching_word_sign"), " と ", ref("def_perfect_matching_sign"), " では符号が ", math(String.raw`(-1)^k`), "（", math(String.raw`k\in\mathbb N`), "）の形だから、"]),
+                displayMath(String.raw`\alpha_{\mathcal D}^{2}=1,\qquad \operatorname{sgn}(\mathcal D)^{2}=1\quad\text{in }\mathbb Z`),
+                paragraph(["を得る。", ref("claim_matching_pair_word_sign_map"), " と上の二つの列符号の等号から、整数の積の可換則を一行ずつ適用すると"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\sigma)
+&=\operatorname{sgn}(\sigma)\alpha_{\mathcal D}^{2}
+&&\bigl(\because\ \alpha_{\mathcal D}^{2}=1\bigr)\\
+&=\operatorname{sgn}(\sigma)\alpha_{\mathcal D}^{2}\operatorname{sgn}(\mathcal D)^{2}
+&&\bigl(\because\ \operatorname{sgn}(\mathcal D)^{2}=1\bigr)\\
+&=\operatorname{sgn}(\sigma)\bigl(\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)\bigr)^2
+&&\bigl(\because\ \mathbb Z\text{ の積の可換則}\bigr)\\
+&=\operatorname{sgn}(\sigma)\varepsilon(W_\tau(w))^{2}
+&&\bigl(\because\ \text{第一の列符号の等号}\bigr)\\
+&=\varepsilon(W_\upsilon(w))\,\varepsilon(W_\tau(w))
+&&\bigl(\because\ \blkref{claim_matching_pair_word_sign_map}\bigr)\\
+&=\varepsilon(W_\upsilon(w))\,\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)
+&&\bigl(\because\ \text{第一の列符号の等号}\bigr)\\
+&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)\alpha_{\mathcal D}\operatorname{sgn}(\mathcal D)
+&&\bigl(\because\ \text{第二の列符号の等号}\bigr)\\
+&=\alpha_{\mathcal D}\alpha_{\mathcal E}\operatorname{sgn}(\mathcal D)\operatorname{sgn}(\mathcal E)
+&&\bigl(\because\ \mathbb Z\text{ の積の可換則}\bigr).
+\end{aligned}`),
+                paragraph(["空集合でも同じ等号が成立する。有限列と整数の符号だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -45384,14 +45449,28 @@ c-a
                           math(String.raw`u\cdot u+v\cdot v=w\cdot w`), " である。",
                         ]),
                         paragraph([
-                          math(String.raw`w\ne0`), " である。実際 ", math(String.raw`w=0`),
-                          " ならば ", math(String.raw`u\cdot u+v\cdot v=0\cdot0=0`), " となり、",
+                          math(String.raw`w\ne0`), " を背理法で示す。", math(String.raw`w=0`), " と仮定すると",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+u\cdot u+v\cdot v
+&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)\\
+&=0\cdot0&&\bigl(\because\ w=0\bigr)\\
+&=0&&\bigl(\because\ R\text{ の零元の積}\bigr).
+\end{aligned}`),
+                        paragraph([
                           ref("claim_real_closed_sum_of_two_squares_zero"), " により ",
                           math(String.raw`u=0`), " となるが、", math(String.raw`u\ne0`), " に反する。",
                         ]),
                         paragraph([
-                          "よって ", math(String.raw`c-a=w\cdot w`), " を満たす零でない ",
-                          math(String.raw`w\in R`), " が取れたので、",
+                          "従って ", math(String.raw`w\ne0`), " であり、上で示した二つの等号から",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+c-a
+&=u\cdot u+v\cdot v&&\bigl(\because\ R\text{ の加法による上の計算}\bigr)\\
+&=w\cdot w&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "零でない ", math(String.raw`w\in R`), " が取れたので、",
                           ref("def_real_algebraic_strict_order"), " により ",
                           math(String.raw`a<_{R}c`), " である。",
                           "使ったのは ", math(String.raw`R`),

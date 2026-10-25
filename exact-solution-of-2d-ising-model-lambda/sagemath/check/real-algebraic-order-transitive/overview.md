@@ -14,4 +14,4 @@ $R$ のモデルは実代数的数体 `AA`、$<_R$ は「差が零でない元�
 sage sagemath/check/real-algebraic-order-transitive/check.sage
 ```
 
-**2026-09-20 実行: すべて通過。**
+**2026-10-25 実行: すべて通過。**

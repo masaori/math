@@ -169,6 +169,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_reverse_permutation",
   "claim_matching_pair_second_coloring_alternates",
   "claim_matching_pair_second_recovery",
+  "claim_matching_pair_sign_composition",
   "claim_matching_pair_successor_color",
   "claim_matching_pair_word_map",
   "claim_matching_pair_word_orientation_sign",

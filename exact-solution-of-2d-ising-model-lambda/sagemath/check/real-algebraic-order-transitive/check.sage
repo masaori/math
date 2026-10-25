@@ -5,10 +5,11 @@
 # で w*w へ書き直し、w != 0 を平方の和が零なら両方零であること（claim_real_closed_sum_of_two_squares_zero）
 # から出す。R のモデルは AA。厳密計算のみ。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+            if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 
 def lt_R(a, b):
