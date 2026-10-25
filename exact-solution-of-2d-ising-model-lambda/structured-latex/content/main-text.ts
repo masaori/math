@@ -71605,6 +71605,64 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_reference_long_matching",
+              labels: [],
+              title: { text: "全ての長い対からなる基準マッチング" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_reference_long_matching",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_reference_long_pairs",
+                      kind: "definition",
+                      title: { text: "長い反転対からなる基準対集合" },
+                      labels: ["def_reference_long_pairs"],
+                      habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.referenceLongPairs"],
+                      statement: [
+                        paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " を固定し、", ref("def_oriented_edges"), " の有限集合 ", math(String.raw`\vec E_L`), " 上で、", ref("def_edge_reversal"), " の反転写像 ", math(String.raw`\iota:\vec E_L\to\vec E_L`), " を使う。長い標識の対だけからなる集合を"]),
+                        displayMath(String.raw`\mathcal D_0:=\bigl\{\{\vec e,\iota(\vec e)\}\mid\vec e\in\vec E_L\bigr\}`),
+                        paragraph(["と定める。対の標識は全て長い標識とし、後に現れる短い標識とは、二元集合が一致する辺長一でも区別する。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_reference_long_matching",
+                    kind: "claim",
+                    title: { text: "反転対の集合は基準完全マッチングである" },
+                    labels: ["claim_reference_long_matching"],
+                    habitat: "N",
+                    verification: ["sagemath/check/reference-long-matching"],
+                    lean: [
+                      "Ising2DLambda.KacWard.referenceLongMatching_isPerfectMatching",
+                      "Ising2DLambda.NecSuf.KacWard.reversalPairs_isPerfectMatching",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " について、", ref("def_reference_long_pairs"), " の ", math(String.raw`\mathcal D_0`), " は ", ref("def_finite_perfect_matching"), " の完全マッチングである。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`\vec e\in\vec E_L`), " を取る。", ref("claim_reversal_has_no_fixed_point"), " により ", math(String.raw`\iota(\vec e)\ne\vec e`), " なので、各対は二元集合である。また ", ref("claim_reversal_is_involution"), " により ", math(String.raw`\iota(\iota(\vec e))=\vec e`), " である。"]),
+                      paragraph(["対 ", math(String.raw`\{\vec e,\iota(\vec e)\}`), " は ", math(String.raw`\vec e`), " を含む。別の ", math(String.raw`\vec f\in\vec E_L`), " による対が ", math(String.raw`\vec e`), " を含むなら、二元集合への所属から ", math(String.raw`\vec e=\vec f`), " または ", math(String.raw`\vec e=\iota(\vec f)`), " である。前者では二つの対は定義から一致する。後者では"]),
+                      displayMath(String.raw`\begin{aligned}
+\{\vec f,\iota(\vec f)\}
+&=\{\iota(\vec e),\iota(\iota(\vec e))\}&&\bigl(\because\ \vec e=\iota(\vec f)\text{ と }\blkref{claim_reversal_is_involution}\bigr)\\
+&=\{\iota(\vec e),\vec e\}&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\{\vec e,\iota(\vec e)\}&&\bigl(\because\ \text{二元集合の順序によらない性質}\bigr).
+\end{aligned}`),
+                      paragraph(["従って各向き付き辺はただ一つの対に属する。", ref("def_finite_perfect_matching"), " の二条件が成り立つので、", math(String.raw`\mathcal D_0`), " は完全マッチングである。反転は端点番号を入れ替えるため、辺長一でも二つの元は相異なる。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
