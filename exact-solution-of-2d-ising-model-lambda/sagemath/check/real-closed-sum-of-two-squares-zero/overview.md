@@ -18,4 +18,4 @@ $R$ のモデルは実代数的数体 `AA`、$\omega$ のモデルは `QQbar(I)`
 sage sagemath/check/real-closed-sum-of-two-squares-zero/check.sage
 ```
 
-**2026-08-18 実行: すべて通過。**
+**2026-10-25 再実行: すべて通過。**

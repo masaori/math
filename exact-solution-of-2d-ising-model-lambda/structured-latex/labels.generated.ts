@@ -161,6 +161,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_first_recovery",
   "claim_matching_pair_orbit_exchange",
   "claim_matching_pair_orbit_separation",
+  "claim_matching_pair_orientation_product",
   "claim_matching_pair_permutation",
   "claim_matching_pair_reconstructed_orbit",
   "claim_matching_pair_reverse_color",

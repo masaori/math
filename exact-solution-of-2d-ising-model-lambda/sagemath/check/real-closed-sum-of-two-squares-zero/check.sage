@@ -5,10 +5,11 @@
 # および一意表示（第 4 条件）だけを使う。R のモデルとして実代数的数体 AA、ω のモデルとして
 # QQbar(I) を取り、鎖の各段と結論を厳密計算で確かめる。浮動小数点は使わない。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+             if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 OMEGA = QQbar(I)
 

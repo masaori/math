@@ -10922,6 +10922,67 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_orientation_product",
+        labels: [],
+        title: { text: "二色の成分積を昇順の対へ向け直す" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_orientation_product",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_orientation_product",
+              title: { text: "二色の各成分積は向きの符号と昇順対の積に分かれる" },
+              labels: ["claim_matching_pair_orientation_product"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/matching-pair-orientation-product"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.selectedAscendingPairs_eq_matchingOrientedPairs",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairOrientationProduct",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondOrientationProduct",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.orientationProduct_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairOrientationProduct_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_entry_product"), " の ", math(String.raw`\mathcal J,\tau,\upsilon,C,A`), " を取り、任意の ", math(String.raw`i,j\in\mathcal J`), " で ", math(String.raw`A_{j,i}=-A_{i,j}`), " を仮定する。", math(String.raw`(m,S)\in\{(\tau,C),(\upsilon,\mathcal J\setminus C)\}`), " を固定し、各 ", math(String.raw`i\in S`), " の相手との昇順対を ", math(String.raw`q_m(i):=(\min\{i,m(i)\},\max\{i,m(i)\})`), " と置く。" ]),
+                paragraph(["有限集合 ", math(String.raw`E_{m,S}:=\{q_m(i)\mid i\in S\}`), " は ", ref("def_perfect_matching_enumeration"), " のマッチング ", math(String.raw`\mathcal D_m:=\{\{i,m(i)\}\mid i\in\mathcal J\}`), " の昇順対全体である。", math(String.raw`\epsilon_m(i):=1\in\overline{\mathbb Q}[x]`), " を ", math(String.raw`i\prec m(i)`), " の場合、", math(String.raw`\epsilon_m(i):=-1\in\overline{\mathbb Q}[x]`), " を ", math(String.raw`m(i)\prec i`), " の場合と定める。このとき両方の組 ", math(String.raw`(m,S)`), " について"]),
+                displayMath(String.raw`\prod_{i\in S}A_{i,m(i)}
+=\left(\prod_{i\in S}\epsilon_m(i)\right)
+ \left(\prod_{(a,b)\in E_{m,S}}A_{a,b}\right)
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。空集合では二つの積をともに一とする。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_coloring_alternates"), " と ", ref("claim_matching_pair_second_coloring_alternates"), " により、各 ", math(String.raw`(m,S)`), " と ", math(String.raw`i\in\mathcal J`), " で ", math(String.raw`m(i)\in S\Longleftrightarrow i\notin S`), " である。", ref("def_fixed_point_free_involution"), " より ", math(String.raw`m(m(i))=i`), " かつ ", math(String.raw`m(i)\ne i`), " である。よって各対から ", math(String.raw`S`), " はちょうど一つの端点を選び、", math(String.raw`q_m:S\to E_{m,S}`), " は全単射である。逆写像は昇順対の二端点のうち ", math(String.raw`S`), " に入る方を選ぶ。" ]),
+                paragraph(["任意の ", math(String.raw`i\in S`), " について、", math(String.raw`i\prec m(i)`), " なら ", math(String.raw`q_m(i)=(i,m(i))`), " かつ ", math(String.raw`\epsilon_m(i)=1`), " である。", math(String.raw`m(i)\prec i`), " なら ", math(String.raw`q_m(i)=(m(i),i)`), " であり、反対称性から次の等号を得る。"]),
+                displayMath(String.raw`\begin{aligned}
+A_{i,m(i)}&=-A_{m(i),i}&&\bigl(\because\ \text{仮定した反対称性}\bigr)\\
+&=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}&&\bigl(\because\ \epsilon_m(i)=-1,\ q_m(i)=(m(i),i)\bigr).
+\end{aligned}`),
+                paragraph(["正向きの場合も ", math(String.raw`\epsilon_m(i)=1`), " の代入で同じ等号となる。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in S}A_{i,m(i)}
+&=\prod_{i\in S}\bigl(\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}\bigr)
+&&\bigl(\because\ \text{各 }i\text{ で得た等号}\bigr)\\
+&=\left(\prod_{i\in S}\epsilon_m(i)\right)
+  \left(\prod_{i\in S}A_{q_m(i)_1,q_m(i)_2}\right)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と積の乗法性}\bigr)\\
+&=\left(\prod_{i\in S}\epsilon_m(i)\right)
+  \left(\prod_{(a,b)\in E_{m,S}}A_{a,b}\right)
+&&\bigl(\because\ q_m:S\longrightarrow E_{m,S}\text{ は全単射}\bigr).
+\end{aligned}`),
+                paragraph(["同じ有限積の論法を ", math(String.raw`m=\tau`), " と ", math(String.raw`m=\upsilon`), " に適用した。空集合でも空積は一である。すべての量は有限集合・整数・代数的数係数多項式に属し、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -44877,21 +44938,18 @@ b&<_{R}a&&\bigl(\because\ \blkref{def_real_algebraic_strict_order}\bigr).
                           math(String.raw`0=a+b\cdot\omega`), " を満たせば ",
                           math(String.raw`a=0`), " かつ ", math(String.raw`b=0`), " である。",
                         ]),
-                        list([
-                          [
-                            math(String.raw`x+y\cdot\omega=0`), " の場合。組 ",
-                            math(String.raw`(x,y)`), " へ上を当てて ", math(String.raw`x=0`), "、",
-                            math(String.raw`y=0`), " を得る。",
-                          ],
-                          [
-                            math(String.raw`x-y\cdot\omega=0`), " の場合。",
-                            math(String.raw`x-y\cdot\omega=x+(-y)\cdot\omega`),
-                            " であり（", math(String.raw`R`), " は部分体なので ",
-                            math(String.raw`-y\in R`), "）、組 ", math(String.raw`(x,-y)`),
-                            " へ上を当てて ", math(String.raw`x=0`), "、",
-                            math(String.raw`-y=0`), " すなわち ", math(String.raw`y=0`), " を得る。",
-                          ],
-                        ]),
+                        paragraph([math(String.raw`x+y\cdot\omega=0`), " の場合は"]),
+                        displayMath(String.raw`\begin{aligned}
+(x,y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
+x&=0,\quad y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr).
+\end{aligned}`),
+                        paragraph([math(String.raw`x-y\cdot\omega=0`), " の場合は ", math(String.raw`-y\in R`), "（", ref("def_real_closed_subfield"), " の部分体条件）であり、"]),
+                        displayMath(String.raw`\begin{aligned}
+x-y\cdot\omega&=x+(-y)\cdot\omega&&\bigl(\because\ R\text{ の加法の逆元}\bigr)\\
+(x,-y)&=(0,0)&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の第 4 条件の一意性}\bigr)\\
+x&=0,\quad -y=0&&\bigl(\because\ \text{組の等号は各成分の等号}\bigr)\\
+y&=0&&\bigl(\because\ R\text{ の加法の逆元}\bigr).
+\end{aligned}`),
                         paragraph([
                           "どちらの場合も ", math(String.raw`x=0`), " かつ ", math(String.raw`y=0`),
                           " である。使ったのは ", math(String.raw`\overline{\mathbb{Q}}`),
