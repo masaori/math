@@ -146,6 +146,7 @@ export const ALL_LABELS = [
   "claim_leading_distance_positive",
   "claim_lifted_steps_do_not_reverse",
   "claim_local_pairing_matching_construction",
+  "claim_local_pairing_matching_label_support",
   "claim_local_pairing_matching_pair_support",
   "claim_log_additive",
   "claim_log_order_group_add_monotone",

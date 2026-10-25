@@ -70982,6 +70982,51 @@ M_{D,T}(x)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_label_support",
+              labels: [],
+              title: { text: "局所対合から構成した対への標識付け" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_label_support",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_label_support",
+                    kind: "claim",
+                    title: { text: "構成した対には選択辺に従う標識が一意に付く" },
+                    labels: ["claim_local_pairing_matching_label_support"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-matching-label-support"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatchingShortPairs",
+                      "Ising2DLambda.KacWard.localPairingMatching_label_support",
+                      "Ising2DLambda.NecSuf.KacWard.splice_label_support",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_local_pairing_matching_pair_support"), " の ", math(String.raw`P\subseteq E_L`), "、局所対合 ", math(String.raw`\kappa`), "、構成した完全マッチング ", math(String.raw`\mathcal D_\tau`), " を取る。", math(String.raw`E_{\mathcal D_\tau}`), " の昇順対 ", math(String.raw`r=(\vec e,\vec f)`), " に対し、"]),
+                      displayMath(String.raw`T_P:=\{r\in E_{\mathcal D_\tau}\mid p(\vec e)\in P\}`),
+                      paragraph(["と定める。", math(String.raw`r\in T_P`), " を短い標識の対、", math(String.raw`r\in E_{\mathcal D_\tau}\setminus T_P`), " を長い標識の対とする。この二集合は ", math(String.raw`E_{\mathcal D_\tau}`), " の分割である。短い標識では ", math(String.raw`\vec f=\kappa(\vec e)`), "、", math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e)`), "、", math(String.raw`\vec f\ne\vec e`), " が成り立ち、長い標識では ", math(String.raw`\vec f=\iota(\vec e)`), " が成り立つ。標識は選択辺への所属で決まり、辺長一で二元集合が同じでも区別される。"]),
+                    ],
+                    proof: [
+                      paragraph(["定義から ", math(String.raw`T_P\subseteq E_{\mathcal D_\tau}`), " であり、任意の ", math(String.raw`r=(\vec e,\vec f)\in E_{\mathcal D_\tau}`), " は ", math(String.raw`p(\vec e)\in P`), " の真偽のちょうど一方に属する。従って二集合は重ならず、和集合は全ての昇順対である。"]),
+                      paragraph(["もし ", math(String.raw`r\in T_P`), " なら ", math(String.raw`p(\vec e)\in P`), " なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\vec f&=\kappa(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_pair_support}\bigr),\\
+\operatorname{src}(\vec f)&=\operatorname{src}(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_pair_support}\bigr).
+\end{aligned}`),
+                      paragraph(["昇順対の二元は相異なるので ", math(String.raw`\vec f\ne\vec e`), " である。もし ", math(String.raw`r\notin T_P`), " なら ", math(String.raw`p(\vec e)\notin P`), " なので、"]),
+                      displayMath(String.raw`\vec f=\iota(\vec e)\quad\bigl(\because\ \blkref{claim_local_pairing_matching_pair_support}\bigr).`),
+                      paragraph(["標識は ", math(String.raw`p(\vec e)\in P`), " の真偽だけで定まり、長い対と短い対の二元集合が一致する場合にも選択は変わらない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

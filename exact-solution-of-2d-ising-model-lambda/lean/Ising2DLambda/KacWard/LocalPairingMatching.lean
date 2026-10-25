@@ -109,4 +109,45 @@ theorem localPairingMatching_pair_support_from_necSuf {L : ℕ}
     hlocalSelected hlocalSource
     (by intro h hh; simpa [reversal] using hh) p hmate
 
+/-- A pair receives the short label exactly when its first oriented edge lies over P. -/
+noncomputable def localPairingMatchingShortPairs {L : ℕ} (P : Finset (Edge L))
+    (D : PerfectMatching (OrientedEdge L)) :
+    Finset (OrientedEdge L × OrientedEdge L) := by
+  classical
+  exact (matchingOrientedPairs D).filter (fun p => p.1.1 ∈ P)
+
+theorem localPairingMatching_label_support {L : ℕ} (P : Finset (Edge L))
+    (κ : OrientedEdge L → OrientedEdge L)
+    (hlocalSelected : ∀ h, h.1 ∈ P → (κ h).1 ∈ P)
+    (hlocalInvolutive : ∀ h, h.1 ∈ P → κ (κ h) = h)
+    (hlocalNe : ∀ h, h.1 ∈ P → κ h ≠ h)
+    (hlocalSource : ∀ h, h.1 ∈ P → orientedSource (κ h) = orientedSource h) :
+    let D := localPairingMatching P κ hlocalSelected hlocalInvolutive hlocalNe
+    let t := localPairingMatchingShortPairs P D
+    t ⊆ matchingOrientedPairs D ∧
+      (∀ p ∈ t, p.2 = κ p.1 ∧ p.2.1 ∈ P ∧
+        orientedSource p.2 = orientedSource p.1 ∧ p.2 ≠ p.1) ∧
+      (∀ p ∈ matchingOrientedPairs D \ t,
+        p.2 = reversal p.1 ∧ p.2.1 ∉ P) := by
+  classical
+  dsimp only
+  constructor
+  · intro p hp
+    exact (Finset.mem_filter.mp hp).1
+  constructor
+  · intro p hp
+    have hP := (Finset.mem_filter.mp hp).2
+    have hpair := (localPairingMatching_pair_support P κ hlocalSelected
+      hlocalInvolutive hlocalNe hlocalSource p (Finset.mem_filter.mp hp).1).1 hP
+    refine ⟨hpair.1, hpair.2.1, hpair.2.2, ?_⟩
+    have hlt := (Finset.mem_filter.mp (Finset.mem_filter.mp hp).1).2.1
+    exact hlt.ne'
+  · intro p hp
+    have hp' := Finset.mem_sdiff.mp hp
+    have hnot : p.1.1 ∉ P := by
+      intro hP
+      exact hp'.2 (Finset.mem_filter.mpr ⟨hp'.1, hP⟩)
+    exact (localPairingMatching_pair_support P κ hlocalSelected
+      hlocalInvolutive hlocalNe hlocalSource p hp'.1).2 hnot
+
 end Ising2DLambda.KacWard

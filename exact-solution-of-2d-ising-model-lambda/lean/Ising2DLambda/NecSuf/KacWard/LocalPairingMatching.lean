@@ -1,4 +1,5 @@
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatching
+import Mathlib.Data.Finset.Basic
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -66,5 +67,38 @@ theorem splice_pair_support {J : Type*} (selected : J → Prop)
   · intro hp
     have hpair : p.2 = reverse p.1 := by simpa [hp] using hmate
     exact ⟨hpair, hpair ▸ hreverseOutside p.1 hp⟩
+
+/-- Filtering canonical pairs by the selected first endpoint gives the unique
+    label determined by the two branches of the splice. -/
+theorem splice_label_support {J V : Type*} [DecidableEq J]
+    (pairs : Finset (J × J)) (selected : J → Prop) [DecidablePred selected]
+    (localMate reverse : J → J) (source : J → V)
+    (hlocalSelected : ∀ j, selected j → selected (localMate j))
+    (hlocalSource : ∀ j, selected j → source (localMate j) = source j)
+    (hreverseOutside : ∀ j, ¬ selected j → ¬ selected (reverse j))
+    (hmate : ∀ p ∈ pairs,
+      p.2 = if selected p.1 then localMate p.1 else reverse p.1) :
+    let short := pairs.filter (fun p => selected p.1)
+    short ⊆ pairs ∧
+      (∀ p ∈ short,
+        p.2 = localMate p.1 ∧ selected p.2 ∧ source p.2 = source p.1) ∧
+      (∀ p ∈ pairs \ short, p.2 = reverse p.1 ∧ ¬ selected p.2) := by
+  classical
+  dsimp only
+  constructor
+  · intro p hp
+    exact (Finset.mem_filter.mp hp).1
+  constructor
+  · intro p hp
+    have hmem := (Finset.mem_filter.mp hp)
+    exact (splice_pair_support selected localMate reverse source
+      hlocalSelected hlocalSource hreverseOutside p (hmate p hmem.1)).1 hmem.2
+  · intro p hp
+    have hmem := Finset.mem_sdiff.mp hp
+    have hnot : ¬ selected p.1 := by
+      intro hselected
+      exact hmem.2 (Finset.mem_filter.mpr ⟨hmem.1, hselected⟩)
+    exact (splice_pair_support selected localMate reverse source
+      hlocalSelected hlocalSource hreverseOutside p (hmate p hmem.1)).2 hnot
 
 end Ising2DLambda.NecSuf.KacWard
