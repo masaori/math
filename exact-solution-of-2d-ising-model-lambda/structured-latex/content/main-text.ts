@@ -71566,6 +71566,45 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_vertex_local_pairing_product",
+              labels: [],
+              title: { text: "頂点ごとの局所対合の独立な選択" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_local_pairing_product",
+                  focus: {
+                    id: "kac_ward_claim_vertex_local_pairing_product",
+                    kind: "claim",
+                    title: { text: "頂点ごとの局所対合の選択数は局所選択数の積である" },
+                    labels: ["claim_vertex_local_pairing_product"],
+                    habitat: "N",
+                    verification: ["sagemath/check/vertex-local-pairing-product"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexLocalPairingChoices_card",
+                      "Ising2DLambda.NecSuf.KacWard.localChoiceFamilies_card",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と偶部分グラフ ", math(String.raw`P\subseteq E_L`), " を固定する。各頂点 ", math(String.raw`v\in V_L`), " の選択半辺の方向番号集合 ", math(String.raw`S_v(P)\subseteq I`), " は ", ref("claim_vertex_port_bijection"), " に従う。", ref("claim_local_pairing_four_ports_count"), " の局所対合集合を ", math(String.raw`\mathcal K(S_v(P))`), " とし、頂点ごとの選択の集合を"]),
+                      displayMath(String.raw`\mathcal C(P):=\{(\kappa_v)_{v\in V_L}\mid\forall v\in V_L,\ \kappa_v\in\mathcal K(S_v(P))\}`),
+                      paragraph(["と定める。このとき"]),
+                      displayMath(String.raw`|\mathcal C(P)|=\prod_{v\in V_L}|\mathcal K(S_v(P))|.`),
+                      paragraph(["各辺の選択は ", math(String.raw`P`), " に固定されている。頂点ごとの半辺の対合は別の半辺集合上で定義されるため、異なる頂点間に追加の一致条件はない。辺長一でも端点番号付き半辺を区別する。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_vertex_port_bijection"), " より各 ", math(String.raw`S_v(P)`), " は実際の頂点の選択半辺から得られる。各頂点で局所対合を一つ選んだ族は、定義により ", math(String.raw`\mathcal C(P)`), " の元である。逆に ", math(String.raw`\mathcal C(P)`), " の元を各頂点へ射影すれば、各 ", math(String.raw`\mathcal K(S_v(P))`), " の元を一つずつ得る。二操作は各頂点で互いに逆なので一対一対応である。"]),
+                      paragraph(["有限集合 ", math(String.raw`V_L`), " 上の直積の個数を、一つの頂点を追加するごとに積の原理で数えると ", math(String.raw`|\mathcal C(P)|=\prod_{v\in V_L}|\mathcal K(S_v(P))|`), " を得る。", ref("claim_local_pairing_four_ports_count"), " により偶次数の各局所因子は ", math(String.raw`|S_v(P)|=0,2`), " で一、", math(String.raw`|S_v(P)|=4`), " で三である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

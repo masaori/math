@@ -1227,6 +1227,8 @@ import Ising2DLambda.NecSuf.KacWard.LocalPairingChoiceCount
 import Ising2DLambda.KacWard.LocalPairingChoiceCount
 import Ising2DLambda.NecSuf.KacWard.VertexPortBijection
 import Ising2DLambda.KacWard.VertexPortBijection
+import Ising2DLambda.NecSuf.KacWard.VertexLocalPairingProduct
+import Ising2DLambda.KacWard.VertexLocalPairingProduct
 import Ising2DLambda.NecSuf.KacWard.MatchingRecovery
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingLabelRecovery
 import Ising2DLambda.NecSuf.KacWard.GaugePairWeightNonzero
