@@ -2,6 +2,7 @@ import Ising2DLambda.AlgebraicEigenvalue.MatchingPairActualSignComposition
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairActualMonomial
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEntryProduct
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairOrientationProduct
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingPairTermEquality
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -63,19 +64,20 @@ private theorem orientationSign_sq (l : List (J × J)) (S : Set J) :
       simp only [List.map_cons, List.prod_cons]
       by_cases h : p.1 ∈ S <;> simp [h] at * <;> nlinarith
 
-/-- The determinant summand of an even-orbit permutation equals the summand of
-the two matchings recovered from its alternating coloring. -/
-theorem matchingPairTermEquality (τ υ : FixedPointFreeInvolution J)
+private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     (A : Matrix J J (Polynomial Qbar))
     (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A)
     (w : List J) (hw : w.Nodup)
     (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
-    Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) *
-        (∏ i : J, A i (matchingPairPermutation τ υ i)) =
-      (matchingSignPolynomial (involutionToPerfectMatching τ) *
-        matchingSignPolynomial (involutionToPerfectMatching υ)) *
-      (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
-        matchingMatrixMonomial A (involutionToPerfectMatching υ)) := by
+    ∃ α β : Polynomial Qbar,
+      α * α = 1 ∧ β * β = 1 ∧
+      Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) =
+        α * β * matchingSignPolynomial (involutionToPerfectMatching τ) *
+          matchingSignPolynomial (involutionToPerfectMatching υ) ∧
+      (∏ i : J, A i (matchingPairPermutation τ υ i)) =
+        (α * β) *
+          (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
+            matchingMatrixMonomial A (involutionToPerfectMatching υ)) := by
   classical
   let C := matchingPairColor τ υ
   let Sτ := Finset.univ.filter (· ∈ C)
@@ -117,7 +119,6 @@ theorem matchingPairTermEquality (τ υ : FixedPointFreeInvolution J)
       ∏ i ∈ Sυ, (orientationFactor υ.val i : Polynomial Qbar) := by
     simpa only [Sυ, Finset.mem_filter, Finset.mem_univ, true_and, Set.mem_setOf_eq]
       using orientationSign_cast_eq_product υ.val {i | i ∉ C} w₂ hw₂ hcolor₂ hυmate
-  have hmono := matchingPairActualMonomial τ υ A w hw hcolor
   have hsign := matchingPairActualSignComposition τ υ w hw hcolor
   have hsignPoly := congrArg (fun z : ℤ => Polynomial.C (z : Qbar)) hsign
   have hατsq : Polynomial.C ((ατ : ℤ) : Qbar) * Polynomial.C ((ατ : ℤ) : Qbar) = 1 := by
@@ -147,15 +148,50 @@ theorem matchingPairTermEquality (τ υ : FixedPointFreeInvolution J)
     simp only [matchingMatrixMonomial]
     ring
   simp only [Int.cast_mul, map_mul] at hsignPoly
-  rw [hprod, hsignPoly]
-  simp only [matchingSignPolynomial]
+  refine ⟨Polynomial.C ((ατ : ℤ) : Qbar), Polynomial.C ((αυ : ℤ) : Qbar),
+    hατsq, hαυsq, ?_, hprod⟩
+  simpa only [matchingSignPolynomial] using hsignPoly
+
+/-- The determinant summand of an even-orbit permutation equals the summand of
+the two matchings recovered from its alternating coloring. -/
+theorem matchingPairTermEquality (τ υ : FixedPointFreeInvolution J)
+    (A : Matrix J J (Polynomial Qbar))
+    (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A)
+    (w : List J) (hw : w.Nodup)
+    (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
+    Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) *
+        (∏ i : J, A i (matchingPairPermutation τ υ i)) =
+      (matchingSignPolynomial (involutionToPerfectMatching τ) *
+        matchingSignPolynomial (involutionToPerfectMatching υ)) *
+      (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
+        matchingMatrixMonomial A (involutionToPerfectMatching υ)) := by
+  obtain ⟨α, β, hα, hβ, hs, hp⟩ := matchingPairTermData τ υ A hA w hw hcolor
   calc
-    _ = (Polynomial.C ((ατ : ℤ) : Qbar) * Polynomial.C ((ατ : ℤ) : Qbar)) *
-        (Polynomial.C ((αυ : ℤ) : Qbar) * Polynomial.C ((αυ : ℤ) : Qbar)) *
-        ((Polynomial.C ((perfectMatchingSign (involutionToPerfectMatching τ) : ℤ) : Qbar) *
-          Polynomial.C ((perfectMatchingSign (involutionToPerfectMatching υ) : ℤ) : Qbar)) *
+    _ = (α * β * matchingSignPolynomial (involutionToPerfectMatching τ) *
+          matchingSignPolynomial (involutionToPerfectMatching υ)) *
+        ((α * β) * (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
+          matchingMatrixMonomial A (involutionToPerfectMatching υ))) := by rw [hs, hp]
+    _ = (α * α) * (β * β) *
+        ((matchingSignPolynomial (involutionToPerfectMatching τ) *
+          matchingSignPolynomial (involutionToPerfectMatching υ)) *
           (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
             matchingMatrixMonomial A (involutionToPerfectMatching υ))) := by ring
-    _ = _ := by rw [hατsq, hαυsq]; ring
+    _ = _ := by rw [hα, hβ]; ring
+
+/-- The concrete argument specializes the same cancellation over a commutative ring. -/
+theorem matchingPairTermEquality_from_necSuf (τ υ : FixedPointFreeInvolution J)
+    (A : Matrix J J (Polynomial Qbar))
+    (hA : IsZeroDiagonalSkewQbarPolynomialMatrix A)
+    (w : List J) (hw : w.Nodup)
+    (hcolor : ∀ i : J, i ∈ w ↔ i ∈ matchingPairColor τ υ) :
+    Polynomial.C ((sign (fun x y : J => x < y) (matchingPairPermutation τ υ) : ℤ) : Qbar) *
+        (∏ i : J, A i (matchingPairPermutation τ υ i)) =
+      (matchingSignPolynomial (involutionToPerfectMatching τ) *
+        matchingSignPolynomial (involutionToPerfectMatching υ)) *
+      (matchingMatrixMonomial A (involutionToPerfectMatching τ) *
+        matchingMatrixMonomial A (involutionToPerfectMatching υ)) := by
+  obtain ⟨α, β, hα, hβ, hs, hp⟩ := matchingPairTermData τ υ A hA w hw hcolor
+  exact NecSuf.AlgebraicEigenvalue.matchingPairTermEquality_necSuf
+    _ _ α β _ _ _ _ hs hp hα hβ
 
 end Ising2DLambda.AlgebraicEigenvalue

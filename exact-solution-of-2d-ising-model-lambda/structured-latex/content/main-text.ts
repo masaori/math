@@ -11476,6 +11476,7 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
               lean: [
                 "Ising2DLambda.AlgebraicEigenvalue.matchingPairTermEquality",
                 "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairTermEquality_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairTermEquality_from_necSuf",
               ],
               statement: [
                 paragraph([ref("claim_matching_pair_actual_monomial"), " の ", math(String.raw`\mathcal J,\tau,\upsilon,C,w,A`), " を取り、", math(String.raw`A_{j,i}=-A_{i,j}`), " をすべての ", math(String.raw`i,j\in\mathcal J`), " について仮定する。", math(String.raw`\sigma=\sigma_{\tau,\upsilon}`), "、", math(String.raw`D=\mathcal D_\tau`), "、", math(String.raw`E=\mathcal D_\upsilon`), " とする。", ref("def_qbar_polynomial_pfaffian"), " の符号と単項式を ", math(String.raw`c_D,b_D,c_E,b_E`), " とすると、" ]),
@@ -46449,9 +46450,16 @@ w\cdot w
                         paragraph([
                           "である。ここで ",
                           math(String.raw`w=0`),
-                          " とすると ",
-                          math(String.raw`0=0\cdot0=w\cdot w=-1`),
-                          "（零元の乗法）となり、両辺へ ",
+                          " とすると、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+0
+&=0\cdot0&&\bigl(\because\ \text{零元の乗法}\bigr)\\
+&=w\cdot w&&\bigl(\because\ w=0\bigr)\\
+&=-1&&\bigl(\because\ \text{直前の等号}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "となる。両辺へ ",
                           math(String.raw`1`),
                           " を加えて ",
                           math(String.raw`1=0`),
