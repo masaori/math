@@ -11255,6 +11255,56 @@ x&=\tau(\tau(x))&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\big
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_first_enumeration",
+        labels: [],
+        title: { text: "第一色の端点列と第一マッチングの列挙" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_first_enumeration",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_first_enumeration",
+              title: { text: "第一色の端点列は第一マッチングの昇順対を一度ずつ列挙する" },
+              labels: ["claim_matching_pair_first_enumeration"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-first-enumeration"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairFirstEnumeration",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairFirstEnumeration_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairFirstEnumeration_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_first_word_complete"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、二つの相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), "、第一色 ", math(String.raw`C\subseteq\mathcal J`), "、重複のない第一色の列 ", math(String.raw`w=[c_1,\ldots,c_m]`), " を取る。第一マッチングを ", math(String.raw`\mathcal D_\tau`), " とする。各 ", math(String.raw`c\in C`), " について ", math(String.raw`q_\tau(c):=(\min\{c,\tau(c)\},\max\{c,\tau(c)\})`), " と置き、対の列 ", math(String.raw`\mathcal L_\tau(w):=[q_\tau(c_1),\ldots,q_\tau(c_m)]`), " を作る。"]),
+                paragraph([ref("def_perfect_matching_enumeration"), " の意味で ", math(String.raw`\mathcal L_\tau(w)`), " は ", math(String.raw`\mathcal D_\tau`), " の昇順対を一度ずつ列挙する。また、各対の第一色側を先に置く端点列は"]),
+                displayMath(String.raw`B_C(\mathcal L_\tau(w))=W_\tau(w)=[c_1,\tau(c_1),\ldots,c_m,\tau(c_m)]`),
+                paragraph(["である。空集合では両列は空列である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_coloring_alternates"), " より、各 ", math(String.raw`c\in C`), " に対して ", math(String.raw`\tau(c)\notin C`), " である。各昇順対 ", math(String.raw`q_\tau(c)`), " の二端点のうち ", math(String.raw`C`), " に入るものは ", math(String.raw`c`), " だけである。したがって ", math(String.raw`q_\tau(c)=q_\tau(d)`), " なら、第一色側の端点を取って ", math(String.raw`c=d`), " となる。", math(String.raw`w`), " に重複がないので ", math(String.raw`\mathcal L_\tau(w)`), " にも重複はない。"]),
+                paragraph(["第一マッチング ", math(String.raw`\mathcal D_\tau`), " の任意の昇順対 ", math(String.raw`(a,b)`), " を取る。", ref("claim_matching_pair_orientation_product"), " の『選んだ端点と昇順対』の対応より、ある ", math(String.raw`c\in C`), " について ", math(String.raw`(a,b)=q_\tau(c)`), " である。", math(String.raw`w`), " は ", math(String.raw`C`), " の全元を含むので、この対は ", math(String.raw`\mathcal L_\tau(w)`), " に現れる。逆に、各 ", math(String.raw`q_\tau(c)`), " は第一マッチングの対である。よって列は全昇順対を一度ずつ含む。"]),
+                paragraph(["各 ", math(String.raw`c\in C`), " について、", math(String.raw`c\prec\tau(c)`), " なら ", math(String.raw`q_\tau(c)=(c,\tau(c))`), " で、第一色側を先にした列は ", math(String.raw`[c,\tau(c)]`), " となる。逆に ", math(String.raw`\tau(c)\prec c`), " なら ", math(String.raw`q_\tau(c)=(\tau(c),c)`), " で、", math(String.raw`\tau(c)\notin C`), " より向きを戻した列は再び ", math(String.raw`[c,\tau(c)]`), " である。列の各対に同じ操作を施して連結すると"]),
+                displayMath(String.raw`\begin{aligned}
+B_C(\mathcal L_\tau(w))
+&=\mathop{\mathbin{+\!+}}_{r=1}^{m}B_C(q_\tau(c_r))
+&&\bigl(\because\ B_C\text{ と }\mathcal L_\tau(w)\text{ の定義}\bigr)\\
+&=\mathop{\mathbin{+\!+}}_{r=1}^{m}[c_r,\tau(c_r)]
+&&\bigl(\because\ \text{各対の向きの二場合}\bigr)\\
+&=W_\tau(w)
+&&\bigl(\because\ W_\tau\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では対の列と端点列はともに空列である。有限集合と有限列だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
