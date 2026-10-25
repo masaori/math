@@ -1392,3 +1392,5 @@ import Ising2DLambda.AlgebraicEigenvalue.PfaffianDeterminant
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingEnumerationMonomial
 import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
 import Ising2DLambda.KacWard.TaggedSymmetricDifferenceDegree
+import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceActiveVertices
+import Ising2DLambda.KacWard.TaggedDifferenceActiveVertices

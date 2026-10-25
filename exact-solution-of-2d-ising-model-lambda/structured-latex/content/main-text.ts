@@ -57586,6 +57586,7 @@ Q^{a,b}_L
               }],
             },
           },
+
         ],
       },
     },
@@ -71760,6 +71761,62 @@ q_{\vec e,\vec f}
                       paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。それらを ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
                       paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{long}`), " なら、", ref("claim_nonzero_long_pair_reference"), " より ", math(String.raw`d_{\vec e}\in\mathcal D_0`), " である。", math(String.raw`\mathcal D_0`), " における対の一意性から ", math(String.raw`d_{\vec e}=r_{\vec e}`), " である。従って二つの標識付き対は同じであり、対称差では共に消える。"]),
                       paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{short}`), " なら、二つの標識付き対は標識が異なるので等しくない。各完全マッチングで ", math(String.raw`\vec e`), " を含む別の対は存在しないから、この二本だけが対称差に残る。特に ", math(String.raw`d_{\vec e}=r_{\vec e}`), " が二元集合として成立しても二本は残る。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_difference_active_vertices",
+              labels: [],
+              title: { text: "標識付き対称差の活動点と相手写像" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_difference_active_mates",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_tagged_difference_active_vertices",
+                      kind: "definition",
+                      title: { text: "標識付き対称差の活動点" },
+                      labels: ["def_tagged_difference_active_vertices"],
+                      habitat: "N",
+                      lean: [
+                        "Ising2DLambda.NecSuf.KacWard.activeVertices",
+                        "Ising2DLambda.NecSuf.KacWard.mem_activeVertices_iff_incident",
+                      ],
+                      statement: [
+                        paragraph([ref("def_tagged_symmetric_difference"), " の ", math(String.raw`\mathcal A(D,T)`), " について、標識付き対が接する向き付き辺の集合を "]),
+                        displayMath(String.raw`V_{\mathcal A}:=\{\vec e\in\vec E_L\mid\exists q\in\mathcal A(D,T),\ \vec e\in U(q)\}`),
+                        paragraph(["と定め、活動点と呼ぶ。ここで ", math(String.raw`U(q)`), " は標識付き対 ", math(String.raw`q`), " の二元集合成分である。", ref("claim_tagged_symmetric_difference_degree"), " により、活動点には長短の対が一本ずつ接する。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_tagged_difference_active_mates",
+                    kind: "claim",
+                    title: { text: "活動点の二つの相手は活動点である" },
+                    labels: ["claim_tagged_difference_active_mates"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-difference-active-mates"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedDifference_active_mates",
+                      "Ising2DLambda.NecSuf.KacWard.activeVertices_mates",
+                      "Ising2DLambda.KacWard.taggedDifference_active_mates_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " と ", ref("def_reference_long_pairs"), " の基準マッチング ", math(String.raw`\mathcal D_0`), " を取る。", ref("claim_perfect_matching_involution"), " の相手写像を ", math(String.raw`m_D,m_{\mathcal D_0}:\vec E_L\to\vec E_L`), " と書く。このとき任意の ", math(String.raw`\vec e\in V_{\mathcal A}`), " について ", math(String.raw`m_D(\vec e),m_{\mathcal D_0}(\vec e)\in V_{\mathcal A}`), " である。辺長一の平行な長短の対も含む。"]),
+                    ],
+                    proof: [
+                      paragraph(["点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " を固定する。", ref("claim_tagged_symmetric_difference_degree"), " により、接する短い対は ", math(String.raw`D`), " の唯一の対 ", math(String.raw`d_{\vec e}`), " であり、長い対は ", math(String.raw`\mathcal D_0`), " の唯一の対 ", math(String.raw`r_{\vec e}`), " である。"]),
+                      paragraph([ref("claim_perfect_matching_involution"), " より ", math(String.raw`m_D(\vec e)\in U(d_{\vec e})`), " である。対 ", math(String.raw`d_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義をこの対と相手に適用すると ", math(String.raw`m_D(\vec e)\in V_{\mathcal A}`), " を得る。"]),
+                      paragraph(["同様に ", ref("claim_perfect_matching_involution"), " より ", math(String.raw`m_{\mathcal D_0}(\vec e)\in U(r_{\vec e})`), " である。対 ", math(String.raw`r_{\vec e}`), " は ", math(String.raw`\mathcal A(D,T)`), " に残っているため、活動点の定義から ", math(String.raw`m_{\mathcal D_0}(\vec e)\in V_{\mathcal A}`), " を得る。二元集合が同じでも標識が異なれば二つの対はともに残る。実数体と複素数体は現れない。"]),
                     ],
                   },
                 },
