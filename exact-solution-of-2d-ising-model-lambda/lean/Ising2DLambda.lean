@@ -1390,3 +1390,5 @@ import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenSum
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PfaffianDeterminant
 import Ising2DLambda.AlgebraicEigenvalue.PfaffianDeterminant
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatchingEnumerationMonomial
+import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
+import Ising2DLambda.KacWard.TaggedSymmetricDifferenceDegree

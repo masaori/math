@@ -71703,6 +71703,69 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_symmetric_difference_degree",
+              labels: [],
+              title: { text: "標識付き対称差の各点の次数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_symmetric_difference_degree",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_tagged_symmetric_difference",
+                      kind: "definition",
+                      title: { text: "標識付き完全マッチングと基準の対称差" },
+                      labels: ["def_tagged_symmetric_difference"],
+                      habitat: "N",
+                      lean: [
+                        "Ising2DLambda.KacWard.shortUnderlyingPairs",
+                        "Ising2DLambda.KacWard.shortUnderlyingPairs_iff",
+                        "Ising2DLambda.NecSuf.KacWard.taggedEdges",
+                      ],
+                      statement: [
+                        paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " と ", ref("def_reference_long_pairs"), " の ", math(String.raw`\mathcal D_0`), " を取る。標識の集合を ", math(String.raw`\{\mathsf{long},\mathsf{short}\}`), " とする。昇順対 ", math(String.raw`p=(\vec e,\vec f)`), " の二元集合を ", math(String.raw`U(p):=\{\vec e,\vec f\}`), " と書き、標識付きの対集合を"]),
+                        displayMath(String.raw`\begin{aligned}
+\widetilde D&:=\{(U(p),\mathsf{long})\mid p\in E_D\setminus T\}
+\cup\{(U(p),\mathsf{short})\mid p\in T\},\\
+\widetilde D_0&:=\{(r,\mathsf{long})\mid r\in\mathcal D_0\},\\
+\mathcal A(D,T)&:=\widetilde D\mathbin\triangle\widetilde D_0
+\end{aligned}`),
+                        paragraph(["と定める。対称差は標識付きの組に対して取る。従って ", math(String.raw`(U(p),\mathsf{short})`), " と ", math(String.raw`(U(p),\mathsf{long})`), " は、二元集合が一致しても相殺しない。これは辺長一にも適用する。全て有限集合である。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_tagged_symmetric_difference_degree",
+                    kind: "claim",
+                    title: { text: "標識付き対称差の各点には零本または長短一対が接する" },
+                    labels: ["claim_tagged_symmetric_difference_degree"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-symmetric-difference-degree"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedDifference_local_degree",
+                      "Ising2DLambda.KacWard.taggedDifference_incident_iff",
+                      "Ising2DLambda.NecSuf.KacWard.taggedDifference_local_degree",
+                      "Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。任意の ", math(String.raw`\vec e\in\vec E_L`), " に対し、", ref("def_tagged_symmetric_difference"), " の ", math(String.raw`\mathcal A(D,T)`), " で ", math(String.raw`\vec e`), " を含む標識付き対は、存在しないか、長い対と短い対が各一本ずつの二本である。二本の場合は ", math(String.raw`\vec e`), " を含む ", math(String.raw`D`), " の唯一の短い対と、", math(String.raw`\mathcal D_0`), " の唯一の長い対である。"]),
+                    ],
+                    proof: [
+                      paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。それらを ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
+                      paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{long}`), " なら、", ref("claim_nonzero_long_pair_reference"), " より ", math(String.raw`d_{\vec e}\in\mathcal D_0`), " である。", math(String.raw`\mathcal D_0`), " における対の一意性から ", math(String.raw`d_{\vec e}=r_{\vec e}`), " である。従って二つの標識付き対は同じであり、対称差では共に消える。"]),
+                      paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{short}`), " なら、二つの標識付き対は標識が異なるので等しくない。各完全マッチングで ", math(String.raw`\vec e`), " を含む別の対は存在しないから、この二本だけが対称差に残る。特に ", math(String.raw`d_{\vec e}=r_{\vec e}`), " が二元集合として成立しても二本は残る。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
