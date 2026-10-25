@@ -71446,6 +71446,47 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_label_recovery",
+              labels: [],
+              title: { text: "非零の標識付きマッチングの標識の復元" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_label_recovery",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_label_recovery",
+                    kind: "claim",
+                    title: { text: "復元した完全マッチングの長短の標識は元の標識に等しい" },
+                    labels: ["claim_tagged_matching_label_recovery"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-matching-label-recovery"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_recovers_labels",
+                      "Ising2DLambda.KacWard.taggedMatching_recovers_matching",
+                      "Ising2DLambda.NecSuf.KacWard.labels_eq_filter_of_endpoint_cover",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_matching_recovery"), " の非零項を持つ標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", ref("def_tagged_matching_complement_edges"), " の補辺を ", math(String.raw`P=P(D,T)`), " とし、元の短い標識から得た局所対合で完全マッチング ", math(String.raw`\mathcal D_\tau`), " を復元する。", ref("claim_local_pairing_matching_label_support"), " に従う短い標識の対集合を ", math(String.raw`T_P`), " とすると、"]),
+                      displayMath(String.raw`\mathcal D_\tau=D,\qquad T_P=T.`),
+                      paragraph(["長い標識の対集合も ", math(String.raw`E_D\setminus T_P=E_D\setminus T`), " である。標識は二元対とは別のデータなので、辺長一でも主張が成り立つ。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
+                      displayMath(String.raw`r\in T_P\iff p(\vec e)\in P.`),
+                      paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。異なる二対が ", math(String.raw`\vec e`), " を共有するのは完全マッチングに反するので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
+                      paragraph(["逆に ", math(String.raw`r\in T_P`), " とする。もし ", math(String.raw`r\notin T`), " なら ", math(String.raw`r\in E_D\setminus T`), " であり、", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_edge_reversal"), " より両者の台は ", math(String.raw`p(\vec e)`), " であり、", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`p(\vec e)\notin P`), " となる。これは ", math(String.raw`r\in T_P`), " に矛盾する。従って ", math(String.raw`r\in T`), " である。"]),
+                      paragraph(["二つの包含から ", math(String.raw`T_P=T`), " を得る。共通の ", math(String.raw`E_D`), " から同じ集合を除けば長い標識の集合も等しい。辺長一で同じ二元対に二種類の寄与があっても、短い標識への所属は ", math(String.raw`T`), " で判定しており、二元対の形から推測していない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

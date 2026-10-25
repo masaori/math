@@ -1,6 +1,7 @@
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.NecSuf.KacWard.LocalPairingMatching
 import Ising2DLambda.NecSuf.KacWard.MatchingRecovery
+import Ising2DLambda.NecSuf.KacWard.TaggedMatchingLabelRecovery
 
 namespace Ising2DLambda.KacWard
 
@@ -174,6 +175,26 @@ noncomputable def localPairingMatchingShortPairs {L : ℕ} (P : Finset (Edge L))
     Finset (OrientedEdge L × OrientedEdge L) := by
   classical
   exact (matchingOrientedPairs D).filter (fun p => p.1.1 ∈ P)
+
+/-- The complement identifies the short label independently of the underlying
+    two-element pair, including when the long and short entries coincide. -/
+theorem taggedMatching_recovers_labels {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0) :
+    t = localPairingMatchingShortPairs (taggedComplementEdges D t) D := by
+  classical
+  obtain ⟨hLong, _⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  exact Ising2DLambda.NecSuf.KacWard.labels_eq_filter_of_endpoint_cover
+    (matchingOrientedPairs D) t (fun h => h.1 ∈ taggedComplementEdges D t)
+    ht (by
+      intro p hp q hq x hxp hxq
+      exact matchingOrientedPairs_disjoint D hp hq hxp hxq)
+    (fun h => complement_iff_short_endpoint D t ht hLong h)
 
 theorem localPairingMatching_label_support {L : ℕ} (P : Finset (Edge L))
     (κ : OrientedEdge L → OrientedEdge L)

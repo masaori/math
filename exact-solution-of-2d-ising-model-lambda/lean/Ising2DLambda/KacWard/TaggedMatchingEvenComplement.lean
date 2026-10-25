@@ -39,7 +39,7 @@ private theorem same_base_or_reverse {L : ℕ} {h k : OrientedEdge L}
     change e = e' at he <;> subst e' <;>
     simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
 
-private theorem complement_iff_short_endpoint {L : ℕ}
+theorem complement_iff_short_endpoint {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
     (ht : t ⊆ matchingOrientedPairs D)
