@@ -11305,6 +11305,53 @@ B_C(\mathcal L_\tau(w))
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_second_enumeration",
+        labels: [],
+        title: { text: "第二色の端点列と第二マッチングの列挙" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_second_enumeration",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_second_enumeration",
+              title: { text: "第二色の端点列は第二マッチングの昇順対を一度ずつ列挙する" },
+              labels: ["claim_matching_pair_second_enumeration"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-second-enumeration"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondEnumeration",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairSecondEnumeration_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairSecondEnumeration_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_first_enumeration"), " の ", math(String.raw`\mathcal J,\tau,\upsilon,C,w=[c_1,\ldots,c_m]`), " を取る。第二色を ", math(String.raw`C^{\mathrm c}:=\mathcal J\setminus C`), "、第二色の列を ", math(String.raw`w_2:=[\tau(c_1),\ldots,\tau(c_m)]`), " とする。各 ", math(String.raw`d\in C^{\mathrm c}`), " について ", math(String.raw`q_\upsilon(d):=(\min\{d,\upsilon(d)\},\max\{d,\upsilon(d)\})`), " と置き、", math(String.raw`\mathcal L_\upsilon(w_2):=[q_\upsilon(\tau(c_1)),\ldots,q_\upsilon(\tau(c_m))]`), " とする。"]),
+                paragraph([ref("def_perfect_matching_enumeration"), " の意味で ", math(String.raw`\mathcal L_\upsilon(w_2)`), " は第二マッチング ", math(String.raw`\mathcal D_\upsilon`), " の昇順対を一度ずつ列挙する。第二色側を先にした端点列は"]),
+                displayMath(String.raw`B_{C^{\mathrm c}}(\mathcal L_\upsilon(w_2))=W_\upsilon(w_2)=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(c_m))]`),
+                paragraph(["である。空集合では両列は空列である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_coloring_alternates"), " と ", ref("claim_matching_pair_second_coloring_alternates"), " より、両方の相手写像は二色を入れ替える。", math(String.raw`\tau`), " の対合性から ", math(String.raw`\tau:C\to C^{\mathrm c}`), " は逆写像も ", math(String.raw`\tau`), " の全単射である。", math(String.raw`w`), " が ", math(String.raw`C`), " を一度ずつ列挙するので、", math(String.raw`w_2`), " は ", math(String.raw`C^{\mathrm c}`), " を一度ずつ列挙する。"]),
+                paragraph(["各 ", math(String.raw`d\in C^{\mathrm c}`), " に対して ", math(String.raw`\upsilon(d)\in C`), " である。昇順対 ", math(String.raw`q_\upsilon(d)`), " の第二色側の端点は ", math(String.raw`d`), " だけなので、", math(String.raw`q_\upsilon(d)=q_\upsilon(e)`), " なら ", math(String.raw`d=e`), " である。従って ", math(String.raw`\mathcal L_\upsilon(w_2)`), " に重複はない。第二マッチングの任意の対は ", math(String.raw`\upsilon`), " の二元軌道であり、二端点の一方だけが ", math(String.raw`C^{\mathrm c}`), " にある。", math(String.raw`w_2`), " の完全列挙によってその対は ", math(String.raw`\mathcal L_\upsilon(w_2)`), " に一度現れる。"]),
+                paragraph(["各 ", math(String.raw`d\in C^{\mathrm c}`), " について、", math(String.raw`d\prec\upsilon(d)`), " の場合は ", math(String.raw`q_\upsilon(d)=(d,\upsilon(d))`), "、逆の場合は ", math(String.raw`q_\upsilon(d)=(\upsilon(d),d)`), " である。どちらも第二色側を先に戻すと ", math(String.raw`[d,\upsilon(d)]`), " になる。従って"]),
+                displayMath(String.raw`\begin{aligned}
+B_{C^{\mathrm c}}(\mathcal L_\upsilon(w_2))
+&=\mathop{\mathbin{+\!+}}_{r=1}^{m}B_{C^{\mathrm c}}(q_\upsilon(\tau(c_r)))&&\bigl(\because\ B_{C^{\mathrm c}},\mathcal L_\upsilon\text{ の定義}\bigr)\\
+&=\mathop{\mathbin{+\!+}}_{r=1}^{m}[\tau(c_r),\upsilon(\tau(c_r))]&&\bigl(\because\ \text{昇順の二場合}\bigr)\\
+&=W_\upsilon(w_2)&&\bigl(\because\ W_\upsilon\text{ の定義}\bigr).
+\end{aligned}`),
+                paragraph(["空集合ではどちらも空列である。有限集合の演算だけであり、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -45812,12 +45859,18 @@ m&=b(\sigma_{\mathrm{flip}})
                       ref("claim_real_closed_sum_of_two_squares_is_square"),
                       " の証明と同じ展開により",
                     ]),
-                    displayMath(String.raw`2=s\cdot s=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega`),
+                    displayMath(String.raw`\begin{aligned}
+2&=s\cdot s&&\bigl(\because\ s\cdot s=2\bigr)\\
+&=(a+b\cdot\omega)(a+b\cdot\omega)&&\bigl(\because\ s=a+b\cdot\omega\bigr)\\
+&=a\cdot a+a\cdot b\cdot\omega+b\cdot\omega\cdot a+b\cdot b\cdot\omega^2&&\bigl(\because\ R\text{ の分配律}\bigr)\\
+&=a\cdot a+b\cdot b\cdot\omega^2+(2\cdot a\cdot b)\cdot\omega&&\bigl(\because\ R\text{ の可換則と結合則}\bigr)\\
+&=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\bigr).
+\end{aligned}`),
                     paragraph([
                       "である。一方 ", math(String.raw`2=2+0\cdot\omega`), " であり、",
                       math(String.raw`2,0\in R`), " なので、第 4 条件の一意性から",
                     ]),
-                    displayMath(String.raw`a\cdot a-b\cdot b=2,\qquad 2\cdot a\cdot b=0`),
+                    displayMath(String.raw`a\cdot a-b\cdot b=2,\qquad 2\cdot a\cdot b=0\quad\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の一意性}\bigr)`),
                     paragraph([
                       "を得る。", math(String.raw`\overline{\mathbb{Q}}`), " の中で ",
                       math(String.raw`2\ne0`), " なので、第 2 の等式から ",

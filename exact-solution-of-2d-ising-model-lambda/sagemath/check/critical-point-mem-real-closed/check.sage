@@ -4,10 +4,11 @@
 # 本文の証明は s = a + b ω と一意表示して a*a - b*b = 2、2*a*b = 0 を読み、a = 0 の枝を
 # 「-2 は R の平方でない」で潰す。R のモデルは AA、ω のモデルは QQbar(I)。厳密計算のみ。
 
-import os
+from pathlib import Path
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+_root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+             if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(_root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 OMEGA = QQbar(I)
 
@@ -20,6 +21,15 @@ def decompose(u):
 
 
 def main():
+    ring = PolynomialRing(QQbar, names=('a', 'b'))
+    av, bv = ring.gens()
+    expanded = av * av + av * bv * OMEGA + bv * OMEGA * av + bv * bv * OMEGA**2
+    collected = av * av + bv * bv * OMEGA**2 + (2 * av * bv) * OMEGA
+    reduced = (av * av - bv * bv) + (2 * av * bv) * OMEGA
+    assert (av + bv * OMEGA) * (av + bv * OMEGA) == expanded
+    assert expanded == collected
+    assert collected == reduced
+
     roots = [QQbar(2).sqrt(), -QQbar(2).sqrt()]
 
     print("1. s*s = 2 の根は 2 つあり、どちらも AA の元である（= R の元）")
