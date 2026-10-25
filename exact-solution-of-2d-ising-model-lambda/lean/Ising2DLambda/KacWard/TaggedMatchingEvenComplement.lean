@@ -221,4 +221,66 @@ theorem taggedMatching_short_pairs_card {L : ℕ} (z : Qbar) (s : SpinStructure)
     (matchingOrientedPairs D) t P Prod.fst Prod.snd
     (fun h => if h.1 ∈ P then 1 else 0) ht hcount hpair hleft
 
+/-- At a fixed vertex, every selected half-edge belongs to exactly one short pair. -/
+theorem taggedMatching_local_pair_unique {L : ℕ} (z : Qbar) (s : SpinStructure)
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (v : Vertex L) (h : OrientedEdge L) :
+    (h.1 ∈ taggedComplementEdges D t ∧ orientedSource h = v) ↔
+      ∃! p : OrientedEdge L × OrientedEdge L,
+        p ∈ t ∧ orientedSource p.1 = v ∧ (h = p.1 ∨ h = p.2) := by
+  classical
+  obtain ⟨hLong, hShort⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  constructor
+  · rintro ⟨hP, hv⟩
+    obtain ⟨p, hp, hhp⟩ :=
+      (complement_iff_short_endpoint D t ht hLong h).mp hP
+    have hsrc : orientedSource p.1 = v := by
+      rcases hhp with rfl | rfl
+      · exact hv
+      · exact (hShort p hp).1.symm.trans hv
+    refine ⟨p, ⟨hp, hsrc, hhp⟩, ?_⟩
+    intro q hq
+    obtain ⟨hqt, _, hhq⟩ := hq
+    have hxp : h ∈ [p.1, p.2] := by rcases hhp with rfl | rfl <;> simp
+    have hxq : h ∈ [q.1, q.2] := by rcases hhq with rfl | rfl <;> simp
+    exact (matchingOrientedPairs_disjoint D (ht hqt) (ht hp) hxq hxp)
+  · rintro ⟨p, ⟨hp, hsrc, hhp⟩, _⟩
+    refine ⟨(complement_iff_short_endpoint D t ht hLong h).mpr ⟨p, hp, hhp⟩, ?_⟩
+    rcases hhp with rfl | rfl
+    · exact hsrc
+    · exact (hShort p hp).1.trans hsrc
+
+/-- The generic partition statement specializes to oriented edges and their sources. -/
+theorem taggedMatching_local_pair_unique_from_necSuf {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (v : Vertex L) (h : OrientedEdge L) :
+    (h.1 ∈ taggedComplementEdges D t ∧ orientedSource h = v) ↔
+      ∃! p : OrientedEdge L × OrientedEdge L,
+        p ∈ t ∧ orientedSource p.1 = v ∧ (h = p.1 ∨ h = p.2) := by
+  classical
+  obtain ⟨hLong, hShort⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  exact Ising2DLambda.NecSuf.KacWard.local_pair_unique_of_partition
+    t Prod.fst Prod.snd orientedSource
+    (fun h => h.1 ∈ taggedComplementEdges D t)
+    (fun h => complement_iff_short_endpoint D t ht hLong h)
+    (fun p hp => (hShort p hp).1.symm)
+    (by
+      intro p hp q hq x hxp hxq
+      have hxp' : x ∈ [p.1, p.2] := by rcases hxp with rfl | rfl <;> simp
+      have hxq' : x ∈ [q.1, q.2] := by rcases hxq with rfl | rfl <;> simp
+      exact matchingOrientedPairs_disjoint D (ht hp) (ht hq) hxp' hxq')
+    v h
+
 end Ising2DLambda.KacWard

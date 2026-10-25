@@ -36,4 +36,35 @@ theorem short_pair_count_of_double_count {J P E : Type*} [Fintype J] [DecidableE
   rw [hpartition, hpairs] at hedges
   omega
 
+/-- A disjoint pair partition restricts to a unique local pair at each source.
+Coverage supplies existence, common sources give locality, and disjointness gives uniqueness. -/
+theorem local_pair_unique_of_partition {J P V : Type*}
+    (selectedPairs : Finset P) (first second : P → J) (source : J → V)
+    (active : J → Prop)
+    (hcover : ∀ j, active j ↔ ∃ p ∈ selectedPairs, j = first p ∨ j = second p)
+    (hsame : ∀ p ∈ selectedPairs, source (first p) = source (second p))
+    (hdisjoint : ∀ p ∈ selectedPairs, ∀ q ∈ selectedPairs,
+      ∀ j, (j = first p ∨ j = second p) →
+        (j = first q ∨ j = second q) → p = q)
+    (v : V) (j : J) :
+    (active j ∧ source j = v) ↔
+      ∃! p : P, p ∈ selectedPairs ∧ source (first p) = v ∧
+        (j = first p ∨ j = second p) := by
+  classical
+  constructor
+  · rintro ⟨hj, hjv⟩
+    obtain ⟨p, hp, hmember⟩ := (hcover j).mp hj
+    have hsource : source (first p) = v := by
+      rcases hmember with rfl | rfl
+      · exact hjv
+      · exact (hsame p hp).trans hjv
+    refine ⟨p, ⟨hp, hsource, hmember⟩, ?_⟩
+    intro q hq
+    exact (hdisjoint p hp q hq.1 j hmember hq.2.2).symm
+  · rintro ⟨p, ⟨hp, hpv, hmember⟩, _⟩
+    refine ⟨(hcover j).mpr ⟨p, hp, hmember⟩, ?_⟩
+    rcases hmember with rfl | rfl
+    · exact hpv
+    · exact (hsame p hp).symm.trans hpv
+
 end Ising2DLambda.NecSuf.KacWard

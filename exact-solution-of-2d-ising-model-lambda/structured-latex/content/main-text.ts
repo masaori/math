@@ -70845,6 +70845,43 @@ M_{D,T}(x)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_local_pairs",
+              labels: [],
+              title: { text: "標識付きマッチングから頂点ごとの局所対合を取り出す" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_local_pairs",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_local_pairs",
+                    kind: "claim",
+                    title: { text: "補辺の各半辺はただ一つの局所的な短い対に属する" },
+                    labels: ["claim_tagged_matching_local_pairs"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-matching-local-pairs"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_local_pair_unique",
+                      "Ising2DLambda.NecSuf.KacWard.local_pair_unique_of_partition",
+                      "Ising2DLambda.KacWard.taggedMatching_local_pair_unique_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " の項が零でないとする。", ref("def_tagged_matching_complement_edges"), " の ", math(String.raw`P=P(D,T)\subseteq E_L`), " と頂点 ", math(String.raw`v\in V_L`), " を固定する。半辺の集合 ", math(String.raw`H_v(P):=\{(e,a)\mid e\in P,\ a\in\{0,1\},\ \operatorname{src}(\vec e_a)=v\}`), " と短い対の集合 ", math(String.raw`T_v:=\{p\in T\mid\operatorname{src}(p_1)=v\}`), " を取る。このとき各 ", math(String.raw`(e,a)\in H_v(P)`), " は ", math(String.raw`T_v`), " のただ一つの対に属する。" ]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`(e,a)\in H_v(P)`), " を取り、対応する向き付き辺を ", math(String.raw`\vec e_a\in\vec E_L`), " とする。", ref("claim_tagged_matching_even_complement"), " の証明で使った端点番号つき半辺と向き付き辺の全単射により、", math(String.raw`e\in P`), " と ", math(String.raw`\operatorname{src}(\vec e_a)=v`), " である。", ref("claim_tagged_matching_nonzero_support"), " より、", math(String.raw`e\in P`), " の二つの向きはいずれも短い標識の対に属する。従って ", math(String.raw`\vec e_a`), " を含む ", math(String.raw`p\in T`), " が存在する。" ]),
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " により短い対の二つの向きは同じ始点を持つ。ゆえに ", math(String.raw`\operatorname{src}(p_1)=v`), " であり、", math(String.raw`p\in T_v`), " である。" ]),
+                      paragraph(["もし ", math(String.raw`p,q\in T_v`), " がともに ", math(String.raw`\vec e_a`), " を含むなら、", ref("claim_tagged_matching_expansion"), " の完全マッチング ", math(String.raw`D`), " では各向き付き辺はただ一つの対に属するため ", math(String.raw`p=q`), " である。従って ", math(String.raw`T_v`), " は ", math(String.raw`H_v(P)`), " の半辺を重なりなく二つずつ組む。", math(String.raw`L=1`), " の自己ループでも端点番号 ", math(String.raw`0,1`), " は異なる半辺として扱い、長短の標識は別々に保つ。" ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
