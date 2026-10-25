@@ -11509,6 +11509,49 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_even_sum",
+        labels: [],
+        title: { text: "偶数軌道の置換和とマッチング対の和" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_even_sum",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_even_sum",
+              title: { text: "偶数軌道の置換和は順序付きマッチング対の和に等しい" },
+              labels: ["claim_matching_pair_even_sum"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/matching-pair-even-sum"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_even_sum",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedSum_reindex_of_term_eq",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPair_even_sum_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_bijection"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、", ref("def_qbar_zero_diagonal_skew_matrix"), " の行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " を取る。全軌道長が偶数の置換の集合を ", math(String.raw`\mathfrak S_{\mathcal J}`), "、完全マッチングの順序付き対の集合を ", math(String.raw`\mathfrak P_{\mathcal J}`), " とする。", ref("def_qbar_determinant_with_empty_index"), " の符号と ", ref("def_qbar_polynomial_pfaffian"), " の各対の符号・単項式を用いると、"]),
+                displayMath(String.raw`\sum_{\sigma\in\mathfrak S_{\mathcal J}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}=\sum_{(D,E)\in\mathfrak P_{\mathcal J}}(c_Dc_E)(b_Db_E)\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。両辺は有限和である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_bijection"), " の全単射を ", math(String.raw`F:\mathfrak P_{\mathcal J}\to\mathfrak S_{\mathcal J}`), " と書く。任意の ", math(String.raw`(D,E)\in\mathfrak P_{\mathcal J}`), " に対し、対応する第一色の元を小さい順に並べた有限列を取る。この列を使って ", ref("claim_matching_pair_term_equality"), " を適用すると、その置換項は対応するマッチング対の項に等しい。従って"]),
+                displayMath(String.raw`\begin{aligned}
+\sum_{\sigma\in\mathfrak S_{\mathcal J}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+&=\sum_{(D,E)\in\mathfrak P_{\mathcal J}}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(F(D,E)))}\prod_{i\in\mathcal J}A_{i,F(D,E)(i)}&&\bigl(\because\ \blkref{claim_matching_pair_bijection}\text{ による再添字付け}\bigr)\\
+&=\sum_{(D,E)\in\mathfrak P_{\mathcal J}}(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{claim_matching_pair_term_equality}\bigr).
+\end{aligned}`),
+                paragraph(["空集合でも全単射は唯一の空マッチング対と空置換を対応させ、二つの和はともに ", math(String.raw`1\in\overline{\mathbb Q}[x]`), " になる。実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },

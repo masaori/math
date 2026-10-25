@@ -160,6 +160,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_component_basepoint",
   "claim_matching_pair_entry_product",
   "claim_matching_pair_even_orbit",
+  "claim_matching_pair_even_sum",
   "claim_matching_pair_first_enumeration",
   "claim_matching_pair_first_recovery",
   "claim_matching_pair_first_word_complete",
