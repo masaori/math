@@ -14,7 +14,7 @@ namespace Ising2DLambda.KacWard
 open Ising2DLambda.AlgebraicEigenvalue
 open Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
 
-private theorem sourceDirection_surjective {L : ℕ} [NeZero L] :
+theorem sourceDirection_surjective {L : ℕ} [NeZero L] :
     Function.Surjective (fun e : OrientedEdge L => (orientedSource e, directionNumber e)) := by
   rintro ⟨⟨i, j⟩, d⟩
   fin_cases d
@@ -51,10 +51,8 @@ private theorem sourceDirection_surjective {L : ℕ} [NeZero L] :
     · simp [directionNumber, edgeOfRow]
       rfl
 
-/-- At a fixed source, the direction identifies the oriented edge. -/
-theorem shortPair_direction_ne {L : ℕ} [NeZero L] (e f : OrientedEdge L)
-    (hsource : orientedSource e = orientedSource f) (hne : e ≠ f) :
-    directionNumber e ≠ directionNumber f := by
+theorem sourceDirection_bijective {L : ℕ} [NeZero L] :
+    Function.Bijective (fun e : OrientedEdge L => (orientedSource e, directionNumber e)) := by
   have hcard : Fintype.card (OrientedEdge L) =
       Fintype.card (Vertex L × ZMod 4) := by
     rw [show Fintype.card (OrientedEdge L) = Fintype.card (Edge L) * 2 by
@@ -63,12 +61,17 @@ theorem shortPair_direction_ne {L : ℕ} [NeZero L] (e f : OrientedEdge L)
       show Fintype.card (Vertex L × ZMod 4) = L ^ 2 * 4 by
         simp [Fintype.card_prod, card_vertex, ZMod.card], card_edge]
     ring
-  have hinj := (Fintype.bijective_iff_surjective_and_card
+  exact (Fintype.bijective_iff_surjective_and_card
     (fun e : OrientedEdge L => (orientedSource e, directionNumber e))).mpr
     ⟨sourceDirection_surjective, hcard⟩
+
+/-- At a fixed source, the direction identifies the oriented edge. -/
+theorem shortPair_direction_ne {L : ℕ} [NeZero L] (e f : OrientedEdge L)
+    (hsource : orientedSource e = orientedSource f) (hne : e ≠ f) :
+    directionNumber e ≠ directionNumber f := by
   intro hdir
   apply hne
-  apply hinj.1
+  apply sourceDirection_bijective.1
   exact Prod.ext hsource hdir
 
 /-- The finite direction table excludes the fourth, zero-valued case. -/

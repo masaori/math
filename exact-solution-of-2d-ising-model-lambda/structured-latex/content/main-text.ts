@@ -71526,6 +71526,46 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_vertex_port_bijection",
+              labels: [],
+              title: { text: "頂点の半辺と四つの添字との対応" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_vertex_port_bijection",
+                  focus: {
+                    id: "kac_ward_claim_vertex_port_bijection",
+                    kind: "claim",
+                    title: { text: "各頂点の標識付き半辺は四つの方向番号と一対一に対応する" },
+                    labels: ["claim_vertex_port_bijection"],
+                    habitat: "N",
+                    verification: ["sagemath/check/vertex-port-bijection"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexPort_bijective",
+                      "Ising2DLambda.KacWard.selectedVertexPort_bijective",
+                      "Ising2DLambda.NecSuf.KacWard.fiber_bijective",
+                      "Ising2DLambda.NecSuf.KacWard.selected_fiber_bijective",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、頂点 ", math(String.raw`v\in V_L`), "、選択辺集合 ", math(String.raw`P\subseteq E_L`), " を取る。", ref("def_oriented_edges"), " の向き付き辺を端点番号付き半辺 ", math(String.raw`(e,d)\in E_L\times\{0,1\}`), " とみなす。", ref("def_oriented_edge_endpoints"), " の始点を使い、", math(String.raw`H_v:=\{(e,d)\in\vec E_L\mid\operatorname{src}(e,d)=v\}`), " および ", math(String.raw`H_v(P):=\{(e,d)\in H_v\mid e\in P\}`), " とする。", ref("def_oriented_edge_direction"), " の方向番号を標準代表 ", math(String.raw`I:=\{0,1,2,3\}`), " で読む写像 ", math(String.raw`d_v:H_v\to I`), " は全単射である。"]),
+                      paragraph(["選択添字集合 ", math(String.raw`S_v(P):=d_v(H_v(P))\subseteq I`), " への制限 ", math(String.raw`d_v|_{H_v(P)}:H_v(P)\to S_v(P)`), " も全単射である。辺長一でも半辺の端点番号 ", math(String.raw`d\in\{0,1\}`), " を保ち、同じ頂点にある二つの端点を同一視しない。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`v=(i,j)\in V_L`), " を取る。", ref("def_boundary_maps"), " により、", math(String.raw`(i,j)`), " を始点とする横辺と縦辺を向き ", math(String.raw`0`), " で一つずつ取れる。また、", math(String.raw`(i,j-1)`), " の横辺と ", math(String.raw`(i-1,j)`), " の縦辺を向き ", math(String.raw`1`), " で取れば始点はいずれも ", math(String.raw`v`), " となる。座標の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`), " で行う。", ref("def_oriented_edge_direction"), " の四つの場合により、それらの方向番号は順に ", math(String.raw`0,1,2,3`), " である。従って写像 ", math(String.raw`(e,d)\mapsto(\operatorname{src}(e,d),\operatorname{dir}(e,d))`), " は全射である。"]),
+                      paragraph([ref("def_oriented_edges"), " により定義域は ", math(String.raw`4L^2`), " 元であり、", ref("def_lattice"), " により値域 ", math(String.raw`V_L\times I`), " も ", math(String.raw`L^2\cdot4=4L^2`), " 元である。有限集合の全射で同じ個数なら単射なので、この写像は全単射である。"]),
+                      paragraph(["頂点 ", math(String.raw`v`), " を固定すると、全単射の逆像により、各 ", math(String.raw`i\in I`), " に対して ", math(String.raw`\operatorname{src}(e,d)=v`), " かつ ", math(String.raw`\operatorname{dir}(e,d)=i`), " を満たす半辺がちょうど一つある。従って ", math(String.raw`d_v`), " は全射かつ単射である。"]),
+                      paragraph(["制限写像の値は ", math(String.raw`S_v(P)`), " の定義からそこに属する。", math(String.raw`d_v`), " の単射性から制限も単射であり、", math(String.raw`S_v(P)`), " を像として定めたので全射である。", math(String.raw`L=1`), " でも ", math(String.raw`(e,0)\ne(e,1)`), " であり、二つの向きの区別は消えない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
