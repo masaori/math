@@ -45065,8 +45065,10 @@ x+y\cdot\omega
 &&(\because\ \text{上の一意表示})\\
 &=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega+b\cdot b\cdot(\omega\cdot\omega)
 &&(\because\ \overline{\mathbb{Q}}\ \text{の分配則と積の可換則})\\
+&=a\cdot a+(a\cdot b+b\cdot a)\cdot\omega-b\cdot b
+&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件}\ \omega\cdot\omega=-1)\\
 &=(a\cdot a-b\cdot b)+(2\cdot a\cdot b)\cdot\omega
-&&(\because\ \blkref{def_real_closed_subfield}\ \text{の第 3 条件}\ \omega\cdot\omega=-1)
+&&(\because\ R\ \text{の積の可換則と加法の結合則、}2=1+1)
 \end{aligned}`),
                         paragraph([
                           "である。", math(String.raw`a\cdot a-b\cdot b`), " と ",

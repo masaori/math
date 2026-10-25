@@ -7,7 +7,7 @@ $R$ のモデルは実代数的数体 `AA`、$\omega$ のモデルは `QQbar(I)`
 `QQbar` の平方根で代用する。
 
 - 恒等式 $(a^2-b^2)^2+(2ab)^2=(a^2+b^2)^2$（必要十分版の中身そのもの）。
-- $u\cdot u=x+y\omega$ を満たす $u$ の一意表示 $u=a+b\omega$ から $x=a^2-b^2$、$y=2ab$ が読めること、
+- $u\cdot u=x+y\omega$ を満たす $u$ の一意表示 $u=a+b\omega$ から、分配、$\omega^2=-1$、加法の整理の各等号を経て $x=a^2-b^2$、$y=2ab$ が読めること、
   および $c:=a^2+b^2$ が $x\cdot x+y\cdot y=c\cdot c$ を与えること。
 - $2$ が $R$ の零でない元の平方であること、$-2$ が $R$ の平方でないこと（三分法のうち第 2 の場合だけが
   成り立つこと）。
@@ -19,4 +19,4 @@ $x,y$ は $0,\pm1,\tfrac23,\sqrt2,-\tfrac{\sqrt5}{7}$ の組すべて。
 sage sagemath/check/real-closed-sum-of-two-squares-is-square/check.sage
 ```
 
-**2026-09-20 実行: すべて通過。**
+**2026-10-25 実行: すべて通過。**

@@ -11,7 +11,7 @@
 
 import os
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = os.path.abspath('sagemath/check/real-closed-sum-of-two-squares-is-square')
 load(os.path.join(_dir, '../../_shared/defs.sage'))
 
 OMEGA = QQbar(I)
@@ -41,6 +41,12 @@ def main():
             u = z.sqrt()                      # Qbar の代数閉性のモデル
             assert u * u == z
             a, b = decompose(u)
+            expanded = QQbar(a * a) + QQbar(a * b + b * a) * OMEGA + QQbar(b * b) * (OMEGA * OMEGA)
+            omega_reduced = QQbar(a * a) + QQbar(a * b + b * a) * OMEGA - QQbar(b * b)
+            regrouped = QQbar(a * a - b * b) + QQbar(2 * a * b) * OMEGA
+            assert u * u == expanded
+            assert expanded == omega_reduced
+            assert omega_reduced == regrouped
             assert a * a - b * b == x
             assert 2 * a * b == y
             c = a * a + b * b
