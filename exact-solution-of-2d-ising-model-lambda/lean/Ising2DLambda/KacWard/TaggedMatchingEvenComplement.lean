@@ -170,4 +170,55 @@ theorem taggedMatching_even_complement {L : ℕ} (z : Qbar) (s : SpinStructure)
       simpa [hrev, reversal] using hp₁
     simp [hp₁, hp₂]
 
+/-- Counting both orientations of each unused edge counts every short pair twice. -/
+theorem taggedMatching_short_pairs_card {L : ℕ} (z : Qbar) (s : SpinStructure)
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0) :
+    t.card = (taggedComplementEdges D t).card := by
+  classical
+  obtain ⟨hLong, hShort⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  let P := taggedComplementEdges D t
+  have hcount : (∑ h : OrientedEdge L, if h.1 ∈ P then 1 else 0) =
+      ∑ p ∈ matchingOrientedPairs D,
+        ((if p.1.1 ∈ P then 1 else 0) + (if p.2.1 ∈ P then 1 else 0)) :=
+    matching_sum_by_pairs D _
+  have hleft : (∑ h : OrientedEdge L, if h.1 ∈ P then 1 else 0) =
+      2 * P.card := by
+    change (∑ h : Edge L × Bool, if h.1 ∈ P then 1 else 0) = 2 * P.card
+    rw [Fintype.sum_prod_type]
+    simp only [Fintype.sum_bool]
+    calc
+      (∑ e : Edge L, ((if e ∈ P then 1 else 0) + if e ∈ P then 1 else 0)) =
+          2 * (∑ e : Edge L, if e ∈ P then 1 else 0) := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro e he
+        split_ifs <;> omega
+      _ = 2 * P.card := by simp
+  have hpair : ∀ p ∈ matchingOrientedPairs D,
+      ((if p.1.1 ∈ P then 1 else 0) + (if p.2.1 ∈ P then 1 else 0)) =
+        if p ∈ t then 2 else 0 := by
+    intro p hp
+    by_cases hpt : p ∈ t
+    · have hp₁ : p.1.1 ∈ P :=
+        (complement_iff_short_endpoint D t ht hLong p.1).2 ⟨p, hpt, Or.inl rfl⟩
+      have hp₂ : p.2.1 ∈ P :=
+        (complement_iff_short_endpoint D t ht hLong p.2).2 ⟨p, hpt, Or.inr rfl⟩
+      simp [hpt, hp₁, hp₂]
+    · have hpl : p ∈ matchingOrientedPairs D \ t := Finset.mem_sdiff.mpr ⟨hp, hpt⟩
+      have hrev := hLong p hpl
+      have hp₁ : p.1.1 ∉ P := by
+        intro hP
+        exact (Finset.mem_filter.mp hP).2 ⟨p, hpl, rfl, by simp [hrev, reversal]⟩
+      have hp₂ : p.2.1 ∉ P := by simpa [hrev, reversal] using hp₁
+      simp [hpt, hp₁, hp₂]
+  exact Ising2DLambda.NecSuf.KacWard.short_pair_count_of_double_count
+    (matchingOrientedPairs D) t P Prod.fst Prod.snd
+    (fun h => if h.1 ∈ P then 1 else 0) ht hcount hpair hleft
+
 end Ising2DLambda.KacWard

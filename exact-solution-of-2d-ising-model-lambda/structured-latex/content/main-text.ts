@@ -70755,6 +70755,48 @@ d_{P(D,T)}(v)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_short_pair_count",
+              labels: [],
+              title: { text: "短い標識の対と補辺の個数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_short_pair_count",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_short_pair_count",
+                    kind: "claim",
+                    title: { text: "短い標識の対の個数は補辺の個数に等しい" },
+                    labels: ["claim_tagged_matching_short_pair_count"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-matching-short-pair-count"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_short_pairs_card",
+                      "Ising2DLambda.NecSuf.KacWard.short_pair_count_of_double_count",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取り、その項が零でないとする。", math(String.raw`T`), " は短い標識の対の集合であり、", ref("def_tagged_matching_complement_edges"), " の補辺は ", math(String.raw`P(D,T)\subseteq E_L`), " である。このとき自然数として"]),
+                      displayMath(String.raw`|T|=|P(D,T)|`),
+                      paragraph(["が成り立つ。"]),
+                    ],
+                    proof: [
+                      paragraph(["補辺の各辺には端点番号 ", math(String.raw`0,1`), " による二つの向きがある。", ref("claim_tagged_matching_nonzero_support"), " と ", ref("claim_tagged_matching_even_complement"), " の証明で構成した対応により、それらは短い標識の対に属する向き付き辺全体と一致する。したがって"]),
+                      displayMath(String.raw`\begin{aligned}
+\#\{(e,a)\in\vec E_L\mid e\in P(D,T)\}
+&=2|P(D,T)|&&\bigl(\because\ \blkref{def_tagged_matching_complement_edges}\text{ と二つの端点番号}\bigr)\\
+&=2|T|&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\text{ と完全マッチングの分割}\bigr).
+\end{aligned}`),
+                      paragraph(["自然数の二倍の消去により ", math(String.raw`|P(D,T)|=|T|`), " である。辺長一でも同一の二元集合に長短の別の標識を付けて数え、二つの向きを区別するため、同じ計数が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
