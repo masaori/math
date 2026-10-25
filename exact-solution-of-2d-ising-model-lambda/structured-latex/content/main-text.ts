@@ -10983,6 +10983,60 @@ A_{i,m(i)}&=-A_{m(i),i}&&\bigl(\because\ \text{仮定した反対称性}\bigr)\\
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_word_map",
+        labels: [],
+        title: { text: "第一色の端点列を置換で写す" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_word_map",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_word_map",
+              title: { text: "置換は第一色の端点列を第二色の端点列へ写す" },
+              labels: ["claim_matching_pair_word_map"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-word-map"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordMap",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordMap_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordMap_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_entry_product"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "、二つの相手写像 ", math(String.raw`\tau,\upsilon:\mathcal J\to\mathcal J`), "、第一色 ", math(String.raw`C\subseteq\mathcal J`), "、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取る。", math(String.raw`w=[c_1,\ldots,c_m]`), " は ", math(String.raw`C`), " の元を重複なくすべて並べた有限列、", math(String.raw`m=|C|\in\mathbb N`), " とする。次の二つは ", math(String.raw`\mathcal J`), " の元の有限列である。"]),
+                displayMath(String.raw`\begin{aligned}
+W_{\tau}(w)&:=[c_1,\tau(c_1),\ldots,c_m,\tau(c_m)],\\
+W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(c_m))].
+\end{aligned}`),
+                paragraph([math(String.raw`\sigma(W_{\tau}(w))`), " は列の各元に ", math(String.raw`\sigma`), " を適用した列とする。このとき"]),
+                displayMath(String.raw`\sigma(W_{\tau}(w))=W_{\upsilon}(w)`),
+                paragraph(["が成り立つ。空の第一色では両列とも空列である。"]),
+              ],
+              proof: [
+                paragraph(["各 ", math(String.raw`c_r\in C`), " について、", ref("def_matching_pair_successor"), " から ", math(String.raw`\sigma(c_r)=\tau(c_r)`), " である。", ref("claim_matching_pair_coloring_alternates"), " より ", math(String.raw`\tau(c_r)\notin C`), " だから、同じ後続写像の第二色の場合を適用して ", math(String.raw`\sigma(\tau(c_r))=\upsilon(\tau(c_r))`), " を得る。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+\sigma(W_{\tau}(w))
+&=[\sigma(c_1),\sigma(\tau(c_1)),\ldots,\sigma(c_m),\sigma(\tau(c_m))]
+&&\bigl(\because\ \text{列の各元への写像の定義}\bigr)\\
+&=[\tau(c_1),\sigma(\tau(c_1)),\ldots,\tau(c_m),\sigma(\tau(c_m))]
+&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第一色の場合}\bigr)\\
+&=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(c_m))]
+&&\bigl(\because\ \blkref{def_matching_pair_successor}\text{ の第二色の場合}\bigr)\\
+&=W_{\upsilon}(w)
+&&\bigl(\because\ W_{\upsilon}(w)\text{ の置き方}\bigr).
+\end{aligned}`),
+                paragraph(["空列でも各行は空列の等号となる。有限列と有限置換だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
