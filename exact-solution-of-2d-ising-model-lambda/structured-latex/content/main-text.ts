@@ -70797,6 +70797,54 @@ d_{P(D,T)}(v)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_term_degree",
+              labels: [],
+              title: { text: "標識付き完全マッチングの項の多項式次数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_term_degree",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_term_degree",
+                    kind: "claim",
+                    title: { text: "非零の標識付き完全マッチング項の次数は補辺の個数に等しい" },
+                    labels: ["claim_tagged_matching_term_degree"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-term-degree"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_term_monomial",
+                      "Ising2DLambda.KacWard.taggedMatching_term_natDegree",
+                      "Ising2DLambda.NecSuf.KacWard.shortProduct_monomial",
+                      "Ising2DLambda.NecSuf.KacWard.monomial_term_natDegree",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取り、その項 ", math(String.raw`M_{D,T}(x)\in\overline{\mathbb Q}[x]`), " が零でないとする。", ref("def_tagged_matching_complement_edges"), " の補辺を ", math(String.raw`P(D,T)\subseteq E_L`), " とする。このとき非零の ", math(String.raw`c_{D,T}\in\overline{\mathbb Q}`), " が存在して"]),
+                      displayMath(String.raw`M_{D,T}(x)=c_{D,T}x^{|P(D,T)|}`),
+                      paragraph(["が成り立つ。したがって ", math(String.raw`M_{D,T}(x)`), " の多項式次数は ", math(String.raw`|P(D,T)|\in\mathbb N`), " である。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_tagged_matching_contributions"), " より、各短い標識の対 ", math(String.raw`p\in T`), " の寄与は ", math(String.raw`\mathsf S_p=xC(q_p)`), " で、", math(String.raw`q_p\in\overline{\mathbb Q}`), " である。各長い寄与は ", math(String.raw`\mathsf L_p=C(\ell_p)`), " で、", math(String.raw`\ell_p\in\overline{\mathbb Q}`), " である。", ref("claim_tagged_matching_expansion"), " の符号因子を ", math(String.raw`c_D=C(\gamma_D),\ \gamma_D\in\overline{\mathbb Q}`), " と書き、", math(String.raw`c_{D,T}:=\gamma_D(-1)^{|T|}\prod_{p\in E_D\setminus T}\ell_p\prod_{p\in T}q_p\in\overline{\mathbb Q}`), " と置く。"]),
+                      displayMath(String.raw`\begin{aligned}
+M_{D,T}(x)
+&=C(\gamma_D)(-1)^{|T|}\prod_{p\in E_D\setminus T}C(\ell_p)\prod_{p\in T}\bigl(xC(q_p)\bigr)
+&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\text{ と }\blkref{def_tagged_matching_contributions}\bigr)\\
+&=C(\gamma_D)(-1)^{|T|}\prod_{p\in E_D\setminus T}C(\ell_p)\,x^{|T|}\prod_{p\in T}C(q_p)
+&&\bigl(\because\ \text{可換環の有限積の交換則}\bigr)\\
+&=x^{|T|}C(c_{D,T})
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の積の保存と可換則}\bigr).
+\end{aligned}`),
+                      paragraph(["左辺は非零なので ", math(String.raw`c_{D,T}\ne0`), " である（", math(String.raw`C(0)=0`), "）。", ref("claim_tagged_matching_short_pair_count"), " より ", math(String.raw`|T|=|P(D,T)|`), " である。ゆえに上の等式の指数は補辺の個数に等しく、非零定数倍の単項式の次数はその指数である。辺長一でも標識で二寄与を区別するため、同じ有限積の計算が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

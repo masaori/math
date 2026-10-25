@@ -561,6 +561,7 @@ export const ALL_LABELS = [
   "claim_tagged_matching_expansion",
   "claim_tagged_matching_nonzero_support",
   "claim_tagged_matching_short_pair_count",
+  "claim_tagged_matching_term_degree",
   "claim_terminal_matrix_determinant",
   "claim_terminal_matrix_entries",
   "claim_three_term_pm_four_difference_zero",
