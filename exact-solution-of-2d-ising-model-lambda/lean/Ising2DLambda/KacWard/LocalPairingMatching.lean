@@ -150,4 +150,55 @@ theorem localPairingMatching_label_support {L : ℕ} (P : Finset (Edge L))
     exact (localPairingMatching_pair_support P κ hlocalSelected
       hlocalInvolutive hlocalNe hlocalSource p hp'.1).2 hnot
 
+/-- The edges unused by long labelled pairs are exactly the selected edges. -/
+theorem localPairingMatching_complement_edges {L : ℕ} (P : Finset (Edge L))
+    (κ : OrientedEdge L → OrientedEdge L)
+    (hlocalSelected : ∀ h, h.1 ∈ P → (κ h).1 ∈ P)
+    (hlocalInvolutive : ∀ h, h.1 ∈ P → κ (κ h) = h)
+    (hlocalNe : ∀ h, h.1 ∈ P → κ h ≠ h)
+    (hlocalSource : ∀ h, h.1 ∈ P → orientedSource (κ h) = orientedSource h) :
+    let D := localPairingMatching P κ hlocalSelected hlocalInvolutive hlocalNe
+    taggedComplementEdges D (localPairingMatchingShortPairs P D) = P := by
+  classical
+  dsimp only
+  let D := localPairingMatching P κ hlocalSelected hlocalInvolutive hlocalNe
+  let t := localPairingMatchingShortPairs P D
+  have hlabels := localPairingMatching_label_support P κ hlocalSelected
+    hlocalInvolutive hlocalNe hlocalSource
+  dsimp only at hlabels
+  apply Finset.ext
+  intro e
+  constructor
+  · intro he
+    by_contra hnot
+    obtain ⟨p, hp, hh⟩ := matching_pair_cover D (e, false)
+    have hbranch := localPairingMatching_pair_support P κ hlocalSelected
+      hlocalInvolutive hlocalNe hlocalSource p hp
+    have hpnot : p.1.1 ∉ P := by
+      intro hpP
+      rcases hh with hh | hh
+      · have hb : e = p.1.1 := by simpa only using congrArg Prod.fst hh
+        exact hnot (hb.symm ▸ hpP)
+      · have hb : e = p.2.1 := by simpa only using congrArg Prod.fst hh
+        exact hnot (hb.symm ▸ (hbranch.1 hpP).2.1)
+    have hpt : p ∉ t := by
+      intro hpt
+      exact hpnot (Finset.mem_filter.mp hpt).2
+    have hpl : p ∈ matchingOrientedPairs D \ t :=
+      Finset.mem_sdiff.mpr ⟨hp, hpt⟩
+    have hrev : p.2 = reversal p.1 := (hlabels.2.2 p hpl).1
+    have hbase : p.1.1 = e := by
+      rcases hh with hh | hh
+      · exact (congrArg Prod.fst hh).symm
+      · have hb : e = p.2.1 := congrArg Prod.fst hh
+        simpa [hrev, reversal] using hb.symm
+    exact (Finset.mem_filter.mp he).2
+      ⟨p, hpl, hbase, by simpa [hrev, reversal] using hbase⟩
+  · intro he
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, ?_⟩
+    rintro ⟨p, hpl, hbase, _⟩
+    have hpnot : p.2.1 ∉ P := (hlabels.2.2 p hpl).2
+    exact hpnot (by simpa [hbase, (hlabels.2.2 p hpl).1, reversal] using he)
+
 end Ising2DLambda.KacWard

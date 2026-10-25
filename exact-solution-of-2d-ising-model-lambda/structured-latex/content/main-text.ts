@@ -71267,6 +71267,45 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_complement_recovery",
+              labels: [],
+              title: { text: "局所対合から構成した標識付きマッチングの補辺の回復" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_complement_recovery",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_complement_recovery",
+                    kind: "claim",
+                    title: { text: "構成した標識付きマッチングの補辺は元の選択辺に等しい" },
+                    labels: ["claim_local_pairing_matching_complement_recovery"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-matching-complement-recovery"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatching_complement_edges",
+                      "Ising2DLambda.NecSuf.KacWard.selected_eq_long_pair_complement",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_local_pairing_matching_label_support"), " の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、選択辺 ", math(String.raw`P\subseteq E_L`), "、局所対合 ", math(String.raw`\kappa`), "、構成した完全マッチング ", math(String.raw`\mathcal D_\tau`), " と短い標識の対集合 ", math(String.raw`T_P\subseteq E_{\mathcal D_\tau}`), " を取る。", ref("def_tagged_matching_complement_edges"), " の補辺について"]),
+                      displayMath(String.raw`P(\mathcal D_\tau,T_P)=P`),
+                      paragraph(["が成り立つ。辺長一の自己ループでも二つの端点番号を区別し、長短の標識は対の二元集合と別のデータとして扱う。"]),
+                    ],
+                    proof: [
+                      paragraph(["まず ", math(String.raw`e\in P`), " とする。もし ", math(String.raw`e\notin P(\mathcal D_\tau,T_P)`), " なら、", ref("def_tagged_matching_complement_edges"), " より長い標識の対 ", math(String.raw`r=(\vec g,\vec h)\in E_{\mathcal D_\tau}\setminus T_P`), " があり、その両辺の台は ", math(String.raw`e`), " である。", ref("claim_local_pairing_matching_label_support"), " の長い枝から ", math(String.raw`p(\vec h)\notin P`), " かつ ", math(String.raw`\vec h=\iota(\vec g)`), " である。", ref("def_edge_reversal"), " より反転は台を保つので ", math(String.raw`p(\vec g)=p(\vec h)=e`), " となり、", math(String.raw`e\in P`), " と矛盾する。従って ", math(String.raw`P\subseteq P(\mathcal D_\tau,T_P)`), " である。"]),
+                      paragraph(["逆に ", math(String.raw`e\notin P`), " とする。端点番号 ", math(String.raw`0`), " の向き付き辺 ", math(String.raw`\vec e_0=(e,0)`), " を取る。", ref("claim_local_pairing_matching_construction"), " の完全マッチングには ", math(String.raw`\vec e_0`), " を含むただ一つの昇順対 ", math(String.raw`r=(\vec g,\vec h)\in E_{\mathcal D_\tau}`), " がある。"]),
+                      paragraph(["もし ", math(String.raw`\vec e_0=\vec g`), " なら ", math(String.raw`p(\vec g)=e\notin P`), " である。もし ", math(String.raw`\vec e_0=\vec h`), " かつ ", math(String.raw`p(\vec g)\in P`), " なら、", ref("claim_local_pairing_matching_pair_support"), " の短い枝により ", math(String.raw`p(\vec h)\in P`), " となり矛盾する。ゆえにどちらの場合も ", math(String.raw`p(\vec g)\notin P`), " である。"]),
+                      paragraph([ref("claim_local_pairing_matching_label_support"), " の標識の定義により ", math(String.raw`r\in E_{\mathcal D_\tau}\setminus T_P`), " である。同じ主張の長い枝から ", math(String.raw`\vec h=\iota(\vec g)`), " なので両辺の台は同じで、", math(String.raw`\vec e_0`), " がどちらの成分でもその台は ", math(String.raw`e`), " である。従って ", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`e\notin P(\mathcal D_\tau,T_P)`), " である。対偶から ", math(String.raw`P(\mathcal D_\tau,T_P)\subseteq P`), " となり、両包含から等号を得る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

@@ -1,5 +1,5 @@
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PerfectMatching
-import Mathlib.Data.Finset.Basic
+import Mathlib
 
 namespace Ising2DLambda.NecSuf.KacWard
 
@@ -100,5 +100,47 @@ theorem splice_label_support {J V : Type*} [DecidableEq J]
       exact hmem.2 (Finset.mem_filter.mpr ⟨hmem.1, hselected⟩)
     exact (splice_pair_support selected localMate reverse source
       hlocalSelected hlocalSource hreverseOutside p (hmate p hmem.1)).2 hnot
+
+/-- Pair coverage, selected-state agreement and the long-pair base equation
+    suffice to recover the selected base set from the long-pair complement. -/
+theorem selected_eq_long_pair_complement {E J : Type*}
+    [Fintype E] [DecidableEq E] [DecidableEq J]
+    (base : J → E) (selected : Finset E) (pairs short : Finset (J × J))
+    (hcover : ∀ e : E, ∃ p ∈ pairs, base p.1 = e ∨ base p.2 = e)
+    (hagrees : ∀ p ∈ pairs, base p.1 ∈ selected ↔ base p.2 ∈ selected)
+    (hshort : short = pairs.filter (fun p => base p.1 ∈ selected))
+    (hlong : ∀ p ∈ pairs \ short, base p.1 = base p.2) :
+    (Finset.univ.filter fun e =>
+      ¬ ∃ p ∈ pairs \ short, base p.1 = e ∧ base p.2 = e) = selected := by
+  classical
+  apply Finset.ext
+  intro e
+  constructor
+  · intro he
+    by_contra hnot
+    obtain ⟨p, hp, hpe | hpe⟩ := hcover e
+    · have hpnot : p ∉ short := by
+        rw [hshort]
+        intro hs
+        exact hnot (hpe ▸ (Finset.mem_filter.mp hs).2)
+      have hpl : p ∈ pairs \ short := Finset.mem_sdiff.mpr ⟨hp, hpnot⟩
+      exact (Finset.mem_filter.mp he).2
+        ⟨p, hpl, hpe, (hlong p hpl).symm ▸ hpe⟩
+    · have hpnot : p ∉ short := by
+        rw [hshort]
+        intro hs
+        exact hnot (hpe ▸ (hagrees p hp).mp (Finset.mem_filter.mp hs).2)
+      have hpl : p ∈ pairs \ short := Finset.mem_sdiff.mpr ⟨hp, hpnot⟩
+      have hb : base p.1 = e := (hlong p hpl).trans hpe
+      exact (Finset.mem_filter.mp he).2 ⟨p, hpl, hb, hpe⟩
+  · intro he
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, ?_⟩
+    rintro ⟨p, hpl, hb, _⟩
+    have hpnot : p ∉ short := (Finset.mem_sdiff.mp hpl).2
+    have hfirst : base p.1 ∉ selected := by
+      intro hs
+      exact hpnot (hshort ▸ Finset.mem_filter.mpr ⟨(Finset.mem_sdiff.mp hpl).1, hs⟩)
+    exact hfirst (hb ▸ he)
 
 end Ising2DLambda.NecSuf.KacWard

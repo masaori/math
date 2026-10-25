@@ -16,7 +16,7 @@ noncomputable def taggedComplementEdges {L : ℕ}
   exact Finset.univ.filter fun e =>
     ¬ ∃ p ∈ matchingOrientedPairs D \ t, p.1.1 = e ∧ p.2.1 = e
 
-private theorem matching_pair_cover {J : Type*} [Fintype J] [LinearOrder J]
+theorem matching_pair_cover {J : Type*} [Fintype J] [LinearOrder J]
     (D : PerfectMatching J) (x : J) :
     ∃ p ∈ matchingOrientedPairs D, x = p.1 ∨ x = p.2 := by
   classical
