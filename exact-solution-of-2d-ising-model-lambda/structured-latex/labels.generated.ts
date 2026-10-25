@@ -145,6 +145,7 @@ export const ALL_LABELS = [
   "claim_leading_distance_pinching_implies_predicate",
   "claim_leading_distance_positive",
   "claim_lifted_steps_do_not_reverse",
+  "claim_local_pairing_matching_construction",
   "claim_log_additive",
   "claim_log_order_group_add_monotone",
   "claim_log_order_group_linear_order",

@@ -70882,6 +70882,58 @@ M_{D,T}(x)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_construction",
+              labels: [],
+              title: { text: "局所対合と反転対から完全マッチングを作る" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_construction",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_construction",
+                    kind: "claim",
+                    title: { text: "補辺の半辺の対合と残りの反転対は完全マッチングを定める" },
+                    labels: ["claim_local_pairing_matching_construction"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-matching-construction"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatching",
+                      "Ising2DLambda.KacWard.localPairingMatching_mate",
+                      "Ising2DLambda.NecSuf.KacWard.splicePairings",
+                      "Ising2DLambda.NecSuf.KacWard.splicePairingMatching",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と辺集合 ", math(String.raw`P\subseteq E_L`), " を固定する。", ref("def_oriented_edges"), " の台の辺への射影を ", math(String.raw`p:\vec E_L\to E_L,\ p(e,d):=e`), " と書き、", math(String.raw`H(P):=\{\vec e\in\vec E_L\mid p(\vec e)\in P\}`), " を取る。写像 ", math(String.raw`\kappa:\vec E_L\to\vec E_L`), " は、任意の ", math(String.raw`\vec e\in H(P)`), " について ", math(String.raw`\kappa(\vec e)\in H(P)`), "、", math(String.raw`\kappa(\kappa(\vec e))=\vec e`), "、", math(String.raw`\kappa(\vec e)\ne\vec e`), " を満たすとする。頂点ごとの局所対合はこの条件を満たす。"]),
+                      paragraph([ref("def_edge_reversal"), " の反転写像を ", math(String.raw`\iota`), " とし、相手写像 ", math(String.raw`\tau:\vec E_L\to\vec E_L`), " を"]),
+                      displayMath(String.raw`\tau(\vec e):=\begin{cases}\kappa(\vec e),&p(\vec e)\in P,\\\iota(\vec e),&p(\vec e)\notin P\end{cases}`),
+                      paragraph(["で定める。このとき ", math(String.raw`\tau`), " は不動点のない対合であり、", ref("claim_perfect_matching_involution"), " の二元軌道の族 ", math(String.raw`\mathcal D_\tau=\{\{\vec e,\tau(\vec e)\}\mid\vec e\in\vec E_L\}`), " は完全マッチングである。その相手写像は ", math(String.raw`\tau`), " に等しい。"]),
+                    ],
+                    proof: [
+                      paragraph(["まず ", math(String.raw`p(\vec e)\in P`), " なら ", math(String.raw`p(\kappa(\vec e))\in P`), " なので、二回目も同じ場合を使う。従って"]),
+                      displayMath(String.raw`\begin{aligned}
+\tau(\tau(\vec e))
+&=\kappa(\kappa(\vec e))&&\bigl(\because\ \tau\text{ の場合分けと }\kappa(\vec e)\in H(P)\bigr)\\
+&=\vec e&&\bigl(\because\ \kappa\text{ の対合性}\bigr).
+\end{aligned}`),
+                      paragraph(["また ", math(String.raw`\tau(\vec e)=\kappa(\vec e)\ne\vec e`), " である（", math(String.raw`\tau`), " の場合分けと ", math(String.raw`\kappa`), " の固定点不在）。"]),
+                      paragraph(["次に ", math(String.raw`p(\vec e)\notin P`), " とする。反転は端点番号だけを変え、辺 ", math(String.raw`p(\vec e)`), " を変えない（", ref("def_edge_reversal"), "）。従って二回目も反転の場合を使い、"]),
+                      displayMath(String.raw`\begin{aligned}
+\tau(\tau(\vec e))
+&=\iota(\iota(\vec e))&&\bigl(\because\ \blkref{def_edge_reversal}\text{ と場合分け}\bigr)\\
+&=\vec e&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_reversal_has_no_fixed_point"), " よりこの場合も ", math(String.raw`\tau(\vec e)\ne\vec e`), " である。", ref("claim_perfect_matching_involution"), " を ", math(String.raw`\tau`), " に適用すると ", math(String.raw`\mathcal D_\tau\in\mathcal M(\vec E_L)`), " と相手写像の等式が従う。辺長一でも ", math(String.raw`(e,0)`), " と ", math(String.raw`(e,1)`), " は別の元であるため、同じ場合分けが成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
