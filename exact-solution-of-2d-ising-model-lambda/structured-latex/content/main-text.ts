@@ -1065,7 +1065,7 @@ q
                     {
                       id: "free_entropy_claim_log_order_group_linear_order",
                       kind: "claim",
-                      title: { text: "対数順序群の順序は線形順序である" },
+                      title: { text: "対数順序群の順序は線型順序である" },
                       labels: ["claim_log_order_group_linear_order"],
                       habitat: "Lambda",
                       verification: ["sagemath/check/log-order-group-linear-order"],
@@ -1084,7 +1084,7 @@ q
                           math(String.raw`\le_{\Lambda}`),
                           " は ",
                           math(String.raw`\Lambda`),
-                          " 上の線形順序である。すなわち任意の ",
+                          " 上の線型順序である。すなわち任意の ",
                           math(String.raw`\lambda,\mu,\nu\in\Lambda`),
                           " について次の四つが成り立つ。",
                         ]),
@@ -1109,7 +1109,7 @@ q
                             "。",
                           ],
                           [
-                            "全順序性: ",
+                            "比較可能性: ",
                             math(String.raw`\lambda\le_{\Lambda}\mu`),
                             " または ",
                             math(String.raw`\mu\le_{\Lambda}\lambda`),
@@ -1181,9 +1181,9 @@ q
                           "である。",
                         ]),
                         paragraph([
-                          "全順序性。",
+                          "比較可能性。",
                           math(String.raw`\mathbb Q`),
-                          " の順序の全順序性から ",
+                          " の順序の比較可能性から ",
                           math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)`),
                           " または ",
                           math(String.raw`\operatorname{rat}_{\Lambda}(\mu)\le\operatorname{rat}_{\Lambda}(\lambda)`),
@@ -8852,7 +8852,7 @@ m'&\preceq m&&\bigl(\because\ m\in O'\text{ と }\blkref{def_odd_orbit_selection
             ],
             verification: ["sagemath/check/selected-odd-orbit-reversal-nontrivial"],
             statement: [
-              paragraph([ref("def_odd_orbit_derangements"), " の有限全順序集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " を取る。", ref("def_odd_orbit_selection"), " の最小の奇数点を ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " とすると、"]),
+              paragraph([ref("def_odd_orbit_derangements"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と、任意の ", math(String.raw`\sigma\in\operatorname{DerOdd}(\mathcal J)`), " を取る。", ref("def_odd_orbit_selection"), " の最小の奇数点を ", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in\mathcal J`), " とすると、"]),
               displayMath(String.raw`3\le\operatorname{len}_{\sigma}(m),\qquad
 R_{\mathrm{odd}}(\sigma)\ne\sigma.`),
               paragraph(["したがって、", ref("claim_selected_odd_orbit_reversal_involution"), " の自己写像は不動点のない対合である。ここでの不動点は、個々の点 ", math(String.raw`j\in\mathcal J`), " ではなく、対象集合の元である置換 ", math(String.raw`\sigma`), " を指す。"]),
@@ -14565,7 +14565,7 @@ const chapter_shift_symmetry = defineSection({
         kind: "section",
         id: "shift_symmetry_heading_order_and_sign",
         labels: [],
-        title: { text: "行配位の線形順序と置換の符号" },
+        title: { text: "行配位の線型順序と置換の符号" },
         children: [
           {
             role: "primary",
@@ -14597,7 +14597,7 @@ const chapter_shift_symmetry = defineSection({
                       "）に属することを示し、そこから固有値が代数的であることを出すことである。",
                       "特性多項式は行列式で定め、行列式は添字集合の置換にわたる和として定め、",
                       "置換の符号は転倒数（順序が入れ替わる対の個数）で定める。",
-                      "転倒数を書くには添字集合に線形順序が要る。この定義はその順序を与える。",
+                      "転倒数を書くには添字集合に線型順序が要る。この定義はその順序を与える。",
                     ]),
                     paragraph([
                       ref("def_row_configuration"),
@@ -14704,7 +14704,7 @@ const chapter_shift_symmetry = defineSection({
                 {
                   id: "algebraic_eigenvalue_claim_row_config_order_linear",
                   kind: "claim",
-                  title: { text: "行配位の辞書式順序は線形順序である" },
+                  title: { text: "行配位の辞書式順序は線型順序である" },
                   labels: ["claim_row_config_order_linear"],
                   habitat: "N",
                   lean: [
@@ -14755,7 +14755,7 @@ const chapter_shift_symmetry = defineSection({
                       math(String.raw`\prec`),
                       " は ",
                       math(String.raw`R_L`),
-                      " の上の狭義の線形順序である。",
+                      " の上の狭義の線型順序である。",
                       "両者はどちらも有限集合の元についての言明であり、実数体は現れない。",
                     ]),
                   ],
@@ -24553,7 +24553,7 @@ S^{[a]}\bigl(S^{[b-a]}(\tau)\bigr)
                           " である。",
                         ]),
                         paragraph([
-                          "そのうえで一般の場合を示す。自然数の大小は全順序なので ",
+                          "そのうえで一般の場合を示す。自然数の大小は線型順序なので ",
                           math(String.raw`a\le b`),
                           " と ",
                           math(String.raw`b\le a`),
@@ -40394,7 +40394,7 @@ p\cdot p
                           math(String.raw`q\le p`),
                           " は偽であり、",
                           math(String.raw`\mathbb{Q}`),
-                          " の順序は全順序である（",
+                          " の順序は線型順序である（",
                           math(String.raw`q\le p`),
                           " と ",
                           math(String.raw`p<q`),
@@ -40592,7 +40592,7 @@ b'
                           " でない場合。まず第二係数の順序を得る。",
                         ]),
                         displayMath(String.raw`B<0
-\qquad\bigl(\because\ \neg(0\le B)\text{ と有理数の全順序}\bigr).`),
+\qquad\bigl(\because\ \neg(0\le B)\text{ と有理数の線型順序}\bigr).`),
                         displayMath(String.raw`\begin{aligned}
 b'
 &=0+b'
@@ -40723,7 +40723,7 @@ a'\cdot a'
                           " でない場合。まず第一係数の順序を得る。",
                         ]),
                         displayMath(String.raw`A<0
-\qquad\bigl(\because\ \neg(0\le A)\text{ と有理数の全順序}\bigr).`),
+\qquad\bigl(\because\ \neg(0\le A)\text{ と有理数の線型順序}\bigr).`),
                         displayMath(String.raw`\begin{aligned}
 a'
 &=0+a'
@@ -41134,7 +41134,7 @@ a\cdot b'&<a\cdot u
                         paragraph(["となり、", math(String.raw`c\cdot u<a\cdot b'`), " に反する。したがって、"]),
                         displayMath(String.raw`\begin{aligned}
 0&<A
-&&\bigl(\because\ 0\le A,\ A\ne0;\ \mathbb Q\text{ の全順序}\bigr)
+&&\bigl(\because\ 0\le A,\ A\ne0;\ \mathbb Q\text{ の線型順序}\bigr)
 \end{aligned}`),
                         paragraph([math(String.raw`U:=u-b'\in\mathbb Q`), " と置き、その符号と ", math(String.raw`B`), " との関係を記す。"]),
                         displayMath(String.raw`\begin{aligned}
@@ -41226,7 +41226,7 @@ a\cdot b'&<c\cdot b'
                         paragraph(["となり、", math(String.raw`c\cdot u<a\cdot b'`), " と矛盾する。ゆえに、"]),
                         displayMath(String.raw`\begin{aligned}
 0&<B
-&&\bigl(\because\ B\le0\text{ が不可能};\ \mathbb Q\text{ の全順序}\bigr)
+&&\bigl(\because\ B\le0\text{ が不可能};\ \mathbb Q\text{ の線型順序}\bigr)
 \end{aligned}`),
                         paragraph([math(String.raw`C:=c-a\in\mathbb Q`), " と置く。"]),
                         displayMath(String.raw`\begin{aligned}
@@ -41301,7 +41301,7 @@ A\cdot A&=C\cdot C
 \xi+\eta&\in P_s
 &&\bigl(\because\ \mathrm{rep}_s(\xi+\eta)=(A,B),\ A<0,\ 0<B,\ A\cdot A<2\cdot(B\cdot B);\ \blkref{def_quadratic_positive_cone}\text{ の第三条件}\bigr)
 \end{aligned}`),
-                        paragraph(["三つの場合は ", math(String.raw`\mathbb Q`), " の全順序によりすべてを尽くすので、", math(String.raw`\xi+\eta\in P_s`), " が従う。全過程は ", math(String.raw`\mathbb Q`), " の加法・積・順序と ", math(String.raw`\overline{\mathbb Q}`), " の加法の中で閉じ、実数体も複素数体も現れない。"]),
+                        paragraph(["三つの場合は ", math(String.raw`\mathbb Q`), " の線型順序によりすべてを尽くすので、", math(String.raw`\xi+\eta\in P_s`), " が従う。全過程は ", math(String.raw`\mathbb Q`), " の加法・積・順序と ", math(String.raw`\overline{\mathbb Q}`), " の加法の中で閉じ、実数体も複素数体も現れない。"]),
                       ],
                     },
                 },
@@ -47816,7 +47816,7 @@ const chapter_thermodynamic_limit = defineSection({
 N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
                     paragraph([
                       "であり、この関係は決定可能である。実数体は現れない。",
-                      "この関係が線形順序であることと加法について単調であることは続く主張で示す。",
+                      "この関係が線型順序であることと加法について単調であることは続く主張で示す。",
                     ]),
                   ],
                 },
@@ -47834,7 +47834,7 @@ N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
                     {
                       id: "thermodynamic_limit_claim_rational_log_order_group_linear_order",
                       kind: "claim",
-                      title: { text: "有理係数の対数順序群の順序は線形順序である" },
+                      title: { text: "有理係数の対数順序群の順序は線型順序である" },
                       labels: ["claim_rational_log_order_group_linear_order"],
                       habitat: "Lambda",
                       verification: ["sagemath/check/rational-log-order-group-linear-order"],
@@ -47861,7 +47861,7 @@ N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
                           math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
                           " は ",
                           math(String.raw`\Lambda_{\mathbb{Q}}`),
-                          " 上の線形順序である。すなわち任意の ",
+                          " 上の線型順序である。すなわち任意の ",
                           math(String.raw`\lambda,\mu,\nu\in\Lambda_{\mathbb{Q}}`),
                           " について次の四つが成り立つ。",
                         ]),
@@ -47886,7 +47886,7 @@ N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
                             "。",
                           ],
                           [
-                            "全順序性: ",
+                            "比較可能性: ",
                             math(String.raw`\lambda\le_{\Lambda_{\mathbb{Q}}}\mu`),
                             " または ",
                             math(String.raw`\mu\le_{\Lambda_{\mathbb{Q}}}\lambda`),
@@ -48020,9 +48020,9 @@ N_{\mu}\lambda_{N_{\lambda}}\le_{\Lambda}N_{\lambda}\mu_{N_{\mu}}`),
                           "である。",
                         ]),
                         paragraph([
-                          "全順序性。",
+                          "比較可能性。",
                           ref("claim_log_order_group_linear_order"),
-                          " の全順序性から ",
+                          " の比較可能性から ",
                           math(String.raw`\lambda_N\le_{\Lambda}\mu_N`),
                           " または ",
                           math(String.raw`\mu_N\le_{\Lambda}\lambda_N`),
@@ -53128,7 +53128,7 @@ N\cdot(n\cdot\varepsilon)
                       math(String.raw`\operatorname{rat}_{\Lambda}(\varepsilon_N)\le\operatorname{rat}_{\Lambda}(0)=1`),
                       " ではない。",
                       math(String.raw`\mathbb{Q}`),
-                      " の順序は全順序なので ",
+                      " の順序は線型順序なので ",
                       math(String.raw`1<\operatorname{rat}_{\Lambda}(\varepsilon_N)`),
                       " である。そこで",
                     ]),
@@ -59150,7 +59150,7 @@ t_{\circ}(\gamma)
 \mid k<l,\ k\text{ と }l\text{ が横断する}\}\,\bigr|`),
                             paragraph([
                               "で定める。横断は ", ref("def_index_pair_crossing"),
-                              "、順序は自然数の全順序である。有限集合 ",
+                              "、順序は自然数の線型順序である。有限集合 ",
                               math(String.raw`I_m\times I_m`),
                               " の部分集合の元の個数なので、値は自然数として定まる。",
                             ]),
@@ -59191,7 +59191,7 @@ t_{\circ}(\gamma)
                         displayMath(String.raw`A_{<}:=\{(k,l)\in A\mid k<l\},\qquad
 A_{>}:=\{(k,l)\in A\mid l<k\}`),
                         paragraph([
-                          "と置く。自然数の全順序の三分律により、",
+                          "と置く。自然数の線型順序の三分律により、",
                           math(String.raw`k\ne l`), " なら ", math(String.raw`k<l`), " か ",
                           math(String.raw`l<k`), " のちょうど一方が成り立つので、",
                           math(String.raw`A`), " は互いに交わらない ",
@@ -61052,7 +61052,7 @@ c(\gamma_A)+c(\gamma_B)+2
                         math(String.raw`c(\gamma)`),
                         " より小さいすべての閉じた非後退辺列で主張が成り立つと仮定して、",
                         math(String.raw`\gamma`),
-                        " で主張を示す。自然数の全順序は整礎なので、この帰納ですべての閉じた非後退辺列が尽くされる。",
+                        " で主張を示す。自然数の線型順序は整礎なので、この帰納ですべての閉じた非後退辺列が尽くされる。",
                       ]),
                       paragraph([
                         "場合分けの第一は ", math(String.raw`c(\gamma)=0`), " のときである。",
@@ -61517,7 +61517,7 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
                       "で定める（通過の頂点 ",
                       math(String.raw`\operatorname{tgt}(\vec e_a)`), " は ",
                       ref("def_closed_walk_passes"),
-                      "、順序は自然数の全順序）。有限集合 ",
+                      "、順序は自然数の線型順序）。有限集合 ",
                       math(String.raw`I_m\times I_m`),
                       " の部分集合の元の個数なので、値は自然数として定まる。",
                     ]),
@@ -61672,7 +61672,7 @@ n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
               proof: [
                 paragraph([
                   "接触対数 ", math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`),
-                  " についての累積帰納で示す。接触対数がこれより小さいすべての台の辺が相異なる閉歩道で主張が成り立つと仮定する。自然数の全順序は整礎なので、この帰納ですべての場合が尽くされる。",
+                  " についての累積帰納で示す。接触対数がこれより小さいすべての台の辺が相異なる閉歩道で主張が成り立つと仮定する。自然数の線型順序は整礎なので、この帰納ですべての場合が尽くされる。",
                 ]),
                 paragraph([
                   "第一に ", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら、",
@@ -73447,9 +73447,9 @@ q_{a,b}(h,v)
                             math(String.raw`e,e'\in E_L\subseteq\mathbb N`), " と ",
                             math(String.raw`d,d'\in\{0,1\}\subseteq\mathbb N`),
                             " の比較はいずれも ", math(String.raw`\mathbb N`),
-                            " の大小である。これは全順序集合の有限直積の辞書式順序なので、",
+                            " の大小である。これは線型順序を持つ集合の有限直積の辞書式順序なので、",
                             math(String.raw`\le_{\vec E}`), " は ", math(String.raw`\vec E_L`),
-                            " の全順序である。",
+                            " の線型順序である。",
                           ]),
                           paragraph([
                             math(String.raw`\vec E_L`), " の二元部分集合 ", math(String.raw`P`),
@@ -73460,13 +73460,13 @@ q_{a,b}(h,v)
                             math(String.raw`\min P<_{\vec E}\min P'`), "、または ",
                             math(String.raw`\min P=\min P'`), " かつ ",
                             math(String.raw`\max P\le_{\vec E}\max P'`),
-                            "」で定める。これも全順序集合の対の辞書式順序なので全順序である。",
+                            "」で定める。これも線型順序を持つ集合の対の辞書式順序なので線型順序である。",
                           ]),
                           paragraph([
                             math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " のとき、標準接触対 ",
-                            math(String.raw`\operatorname{ct}_{\min}(\varphi)`), " を、有限で空でない全順序集合 ",
+                            math(String.raw`\operatorname{ct}_{\min}(\varphi)`), " を、線型順序を持つ空でない有限集合 ",
                             math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
-                            " のただ一つの最小元と定める。有限で空でない全順序集合の最小元は存在してただ一つなので、",
+                            " のただ一つの最小元と定める。線型順序を持つ空でない有限集合の最小元は存在してただ一つなので、",
                             "この値は定まる。切り替え可能性（", ref("def_switchable_permutation_contact_pair"),
                             "）は要求しない。全て有限集合の元の比較であり、実数体も複素数体も現れない。",
                           ]),
@@ -73521,7 +73521,7 @@ N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
                             " の第一の条件と ", math(String.raw`\vec e,\vec f\in M(\varphi)`),
                             "、", math(String.raw`\vec e\ne\vec f`), "）なので ",
                             math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
-                            " であり、両辺の標準接触対が定義される。同じ有限で空でない全順序集合 ",
+                            " であり、両辺の標準接触対が定義される。同じ線型順序を持つ空でない有限集合 ",
                             math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
                             " のただ一つの最小元なので ",
                             math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)`),
@@ -77657,7 +77657,7 @@ k\in\mathcal G
                         math(String.raw`\mathcal G=\mathcal R`), " である。",
                       ]),
                       paragraph([
-                        math(String.raw`\mathcal R\ne\varnothing`), " なら、有限全順序集合 ", math(String.raw`K=\{0,1\}`),
+                        math(String.raw`\mathcal R\ne\varnothing`), " なら、線型順序を持つ有限集合 ", math(String.raw`K=\{0,1\}`),
                         " の空でない部分集合 ", math(String.raw`\mathcal R`), " には最小元がある。",
                         math(String.raw`\mathcal G=\mathcal R`), " により、その最小元は ", math(String.raw`\mathcal G`),
                         " に属するので実現可能である。",
