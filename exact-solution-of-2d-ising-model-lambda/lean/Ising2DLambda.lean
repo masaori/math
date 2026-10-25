@@ -1219,6 +1219,8 @@ import Ising2DLambda.NecSuf.KacWard.TaggedMatchingExpansion
 import Ising2DLambda.KacWard.TaggedMatchingExpansion
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingNonzeroSupport
 import Ising2DLambda.KacWard.TaggedMatchingNonzeroSupport
+import Ising2DLambda.NecSuf.KacWard.TaggedMatchingEvenComplement
+import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.NecSuf.KacWard.GaugedTerminalSkew
 import Ising2DLambda.KacWard.GaugedTerminalSkewFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialNoninjectiveCancellation

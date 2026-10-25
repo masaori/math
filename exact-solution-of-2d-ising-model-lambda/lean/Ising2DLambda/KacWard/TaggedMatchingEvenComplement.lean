@@ -1,0 +1,173 @@
+import Ising2DLambda.KacWard.TaggedMatchingNonzeroSupport
+import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
+import Ising2DLambda.AlgebraicEigenvalue.PerfectMatchingSign
+import Ising2DLambda.NecSuf.KacWard.TaggedMatchingEvenComplement
+
+namespace Ising2DLambda.KacWard
+
+open Finset Ising2DLambda.AlgebraicEigenvalue Ising2DLambda.FisherZero
+  Ising2DLambda.PartitionPolynomial
+
+/-- A base edge is selected precisely when no long labelled pair uses its two orientations. -/
+noncomputable def taggedComplementEdges {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) : Finset (Edge L) := by
+  classical
+  exact Finset.univ.filter fun e =>
+    ¬ ∃ p ∈ matchingOrientedPairs D \ t, p.1.1 = e ∧ p.2.1 = e
+
+private theorem matching_pair_cover {J : Type*} [Fintype J] [LinearOrder J]
+    (D : PerfectMatching J) (x : J) :
+    ∃ p ∈ matchingOrientedPairs D, x = p.1 ∨ x = p.2 := by
+  classical
+  obtain ⟨q, hq, _⟩ := D.property.2 x
+  obtain ⟨a, b, hab, hqab⟩ := D.property.1 q hq.1
+  have hx : x = a ∨ x = b := by
+    simpa [hqab] using hq.2
+  rcases lt_or_gt_of_ne hab with hlt | hgt
+  · refine ⟨(a, b), Finset.mem_filter.mpr ⟨Finset.mem_univ _, hlt, ?_⟩, ?_⟩
+    · simpa [hqab] using hq.1
+    · exact hx
+  · refine ⟨(b, a), Finset.mem_filter.mpr ⟨Finset.mem_univ _, hgt, ?_⟩, ?_⟩
+    · simpa [hqab, Set.pair_comm] using hq.1
+    · exact hx.elim Or.inr Or.inl
+
+private theorem same_base_or_reverse {L : ℕ} {h k : OrientedEdge L}
+    (he : h.1 = k.1) : h = k ∨ h = reversal k := by
+  rcases h with ⟨e, false | true⟩ <;>
+    rcases k with ⟨e', false | true⟩ <;>
+    change e = e' at he <;> subst e' <;>
+    simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
+
+private theorem complement_iff_short_endpoint {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hLong : ∀ p ∈ matchingOrientedPairs D \ t, p.2 = reversal p.1)
+    (h : OrientedEdge L) :
+    h.1 ∈ taggedComplementEdges D t ↔
+      ∃ p ∈ t, h = p.1 ∨ h = p.2 := by
+  classical
+  constructor
+  · intro hP
+    obtain ⟨p, hp, hhp⟩ := matching_pair_cover D h
+    by_cases hpt : p ∈ t
+    · exact ⟨p, hpt, hhp⟩
+    · have hpl : p ∈ matchingOrientedPairs D \ t := Finset.mem_sdiff.mpr ⟨hp, hpt⟩
+      have heq := hLong p hpl
+      have hbase : p.1.1 = h.1 := by
+        rcases hhp with rfl | rfl
+        · rfl
+        · simp [heq, reversal]
+      have hP' := (Finset.mem_filter.mp hP).2
+      exact False.elim (hP' ⟨p, hpl, hbase, by simpa [heq, reversal] using hbase⟩)
+  · rintro ⟨p, hpt, hhp⟩
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, ?_⟩
+    rintro ⟨q, hq, hqbase₁, hqbase₂⟩
+    have hqs : q ∈ matchingOrientedPairs D := (Finset.mem_sdiff.mp hq).1
+    have hqn : q ∉ t := (Finset.mem_sdiff.mp hq).2
+    have hrev := hLong q hq
+    have hhbase : h.1 = q.1.1 := by
+      rcases hhp with rfl | rfl <;> simp [hqbase₁, hqbase₂]
+    have hhq : h = q.1 ∨ h = q.2 := by
+      rcases same_base_or_reverse hhbase with hfirst | hsecond
+      · exact Or.inl hfirst
+      · exact Or.inr (by simpa [hrev] using hsecond)
+    have hxp : h ∈ [p.1, p.2] := by rcases hhp with rfl | rfl <;> simp
+    have hxq : h ∈ [q.1, q.2] := by rcases hhq with rfl | rfl <;> simp
+    have hpq := matchingOrientedPairs_disjoint D (ht hpt) hqs hxp hxq
+    exact hqn (hpq ▸ hpt)
+
+private theorem matching_sum_by_pairs {J : Type*} [Fintype J] [LinearOrder J]
+    (D : PerfectMatching J) (f : J → ℕ) :
+    (∑ x : J, f x) =
+      ∑ p ∈ matchingOrientedPairs D, (f p.1 + f p.2) := by
+  classical
+  let pairSet : J × J → Finset J := fun p => {p.1, p.2}
+  have hdisj : (↑(matchingOrientedPairs D) : Set (J × J)).PairwiseDisjoint pairSet := by
+    intro p hp q hq hpq
+    apply Finset.disjoint_left.mpr
+    intro x hxp hxq
+    have hpq' := matchingOrientedPairs_disjoint D hp hq
+      (by simpa [pairSet] using hxp) (by simpa [pairSet] using hxq)
+    exact hpq hpq'
+  have hcover : (matchingOrientedPairs D).biUnion pairSet = Finset.univ := by
+    ext x
+    simp only [Finset.mem_biUnion, Finset.mem_univ, iff_true]
+    obtain ⟨p, hp, hx⟩ := matching_pair_cover D x
+    refine ⟨p, hp, ?_⟩
+    rcases hx with rfl | rfl <;> simp [pairSet]
+  calc
+    (∑ x : J, f x) = ∑ x ∈ (matchingOrientedPairs D).biUnion pairSet, f x := by
+      rw [hcover]
+    _ = ∑ p ∈ matchingOrientedPairs D, ∑ x ∈ pairSet p, f x :=
+      Finset.sum_biUnion hdisj
+    _ = ∑ p ∈ matchingOrientedPairs D, (f p.1 + f p.2) := by
+      apply Finset.sum_congr rfl
+      intro p hp
+      have hlt := (Finset.mem_filter.mp hp).2.1
+      simp [pairSet, hlt.ne]
+
+private theorem incidence_as_oriented_sum {L : ℕ} (P : Finset (Edge L))
+    (v : Vertex L) :
+    edgeSubsetIncidenceCount L P v =
+      ∑ h : OrientedEdge L,
+        if h.1 ∈ P ∧ orientedSource h = v then 1 else 0 := by
+  classical
+  change edgeSubsetIncidenceCount L P v =
+    ∑ h : Edge L × Bool,
+      if h.1 ∈ P ∧ orientedSource h = v then 1 else 0
+  rw [Fintype.sum_prod_type]
+  simp only [Fintype.sum_bool]
+  simp [edgeSubsetIncidenceCount, orientedSource, Finset.sum_add_distrib]
+  have h₀ : (P.filter fun x => boundary0 L x = v) =
+      (Finset.univ.filter fun x => x ∈ P ∧ boundary0 L x = v) := by
+    ext x
+    simp
+  have h₁ : (P.filter fun x => boundary1 L x = v) =
+      (Finset.univ.filter fun x => x ∈ P ∧ boundary1 L x = v) := by
+    ext x
+    simp
+  rw [h₀, h₁]
+  exact add_comm _ _
+
+/-- Every surviving labelled pair contributes either zero or two incidences. -/
+theorem taggedMatching_even_complement {L : ℕ} (z : Qbar) (s : SpinStructure)
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0) :
+    IsEvenEdgeSubset L (taggedComplementEdges D t) := by
+  classical
+  obtain ⟨hLong, hShort⟩ := taggedMatching_nonzero_term_support z s D t hterm
+  intro v
+  rw [incidence_as_oriented_sum]
+  apply Ising2DLambda.NecSuf.KacWard.even_of_pair_contributions
+    (matchingOrientedPairs D) Prod.fst Prod.snd
+    (fun h => if h.1 ∈ taggedComplementEdges D t ∧ orientedSource h = v then 1 else 0)
+    (matching_sum_by_pairs D _)
+  intro p hp
+  by_cases hpt : p ∈ t
+  · have hp₁ : p.1.1 ∈ taggedComplementEdges D t :=
+      (complement_iff_short_endpoint D t ht hLong p.1).2 ⟨p, hpt, Or.inl rfl⟩
+    have hp₂ : p.2.1 ∈ taggedComplementEdges D t :=
+      (complement_iff_short_endpoint D t ht hLong p.2).2 ⟨p, hpt, Or.inr rfl⟩
+    have hs := (hShort p hpt).1
+    by_cases hv : orientedSource p.1 = v
+    · simp [hp₁, hp₂, hs, hv]
+    · simp [hp₁, hp₂, hs, hv]
+  · have hpl : p ∈ matchingOrientedPairs D \ t :=
+      Finset.mem_sdiff.mpr ⟨hp, hpt⟩
+    have hrev := hLong p hpl
+    have hp₁ : p.1.1 ∉ taggedComplementEdges D t := by
+      intro hP
+      exact (Finset.mem_filter.mp hP).2 ⟨p, hpl, rfl, by simp [hrev, reversal]⟩
+    have hp₂ : p.2.1 ∉ taggedComplementEdges D t := by
+      simpa [hrev, reversal] using hp₁
+    simp [hp₁, hp₂]
+
+end Ising2DLambda.KacWard

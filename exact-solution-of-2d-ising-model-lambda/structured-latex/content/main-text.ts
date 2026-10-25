@@ -70694,6 +70694,67 @@ c_D(-1)^{|T|}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_even_complement",
+              labels: [],
+              title: { text: "標識付き完全マッチングの補辺は偶部分グラフ" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_even_complement",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_tagged_matching_complement_edges",
+                      kind: "definition",
+                      title: { text: "標識付き完全マッチングで長い標識に使われない辺" },
+                      labels: ["def_tagged_matching_complement_edges"],
+                      habitat: "N",
+                      lean: ["Ising2DLambda.KacWard.taggedComplementEdges"],
+                      statement: [
+                        paragraph([ref("claim_tagged_matching_expansion"), " の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。各辺 ", math(String.raw`e\in E_L`), " の二つの向き ", math(String.raw`\vec e_0,\vec e_1\in\vec E_L`), " を、端点番号 ", math(String.raw`a\in\{0,1\}`), " を始点とする向きで定める。長い標識の対に使われない辺の集合を"]),
+                        displayMath(String.raw`P(D,T):=\{e\in E_L\mid \{\vec e_0,\vec e_1\}\notin\{\{\vec f,\vec g\}\mid(\vec f,\vec g)\in E_D\setminus T\}\}`),
+                        paragraph(["と定める。これは ", math(String.raw`E_L`), " の部分集合である。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_even_complement",
+                    kind: "claim",
+                    title: { text: "長い標識に使われない辺は偶部分グラフをなす" },
+                    labels: ["claim_tagged_matching_even_complement"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-even-complement"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_even_complement",
+                      "Ising2DLambda.NecSuf.KacWard.even_of_pair_contributions",
+                    ],
+                    statement: [
+                      paragraph([ref("def_tagged_matching_complement_edges"), " の ", math(String.raw`P(D,T)\subseteq E_L`), " を取る。", ref("claim_tagged_matching_expansion"), " の ", math(String.raw`(D,T)`), " に対応する項が零でないなら、", ref("def_even_edge_subset"), " の意味で"]),
+                      displayMath(String.raw`\operatorname{Even}_L(P(D,T))`),
+                      paragraph(["が成り立つ。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の ", math(String.raw`e\in P(D,T)`), " を取る。", ref("claim_tagged_matching_nonzero_support"), " より、長い標識の対は反転対に限る。完全マッチングでは各向き付き辺がちょうど一つの対に属するので、", math(String.raw`\vec e_0,\vec e_1`), " はいずれも短い標識の対に属する。逆に ", math(String.raw`e\notin P(D,T)`), " では二つとも長い標識の対に属する。したがって各頂点 ", math(String.raw`v\in V_L`), " で、", ref("def_edge_subset_incidence_count"), " の端点番号つき集合と、始点が ", math(String.raw`v`), " で短い標識の対に属する向き付き辺の集合は、", math(String.raw`(e,a)\mapsto\vec e_a`), " で全単射になる。"]),
+                      paragraph(["短い標識の各対の二辺は同じ始点を持ち、相異なる（", ref("claim_tagged_matching_nonzero_support"), "）。完全マッチングの対は重ならないので、始点が ", math(String.raw`v`), " である短い標識の対の個数を ", math(String.raw`k_v\in\mathbb N`), " と置くと、"]),
+                      displayMath(String.raw`\begin{aligned}
+d_{P(D,T)}(v)
+&=\#\{\vec e\in\vec E_L\mid\operatorname{src}(\vec e)=v,\ \vec e\text{ が短い標識の対に属する}\}
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\text{ と上記の全単射}\bigr)\\
+&=2k_v
+&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\text{ と完全マッチングの対の分割}\bigr).
+\end{aligned}`),
+                      paragraph(["頂点 ", math(String.raw`v`), " は任意なので、", ref("def_even_edge_subset"), " より ", math(String.raw`\operatorname{Even}_L(P(D,T))`), " が従う。", math(String.raw`L=1`), " でも自己ループの二端点は番号 ", math(String.raw`0,1`), " で別々に数えるため、同じ全単射が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
