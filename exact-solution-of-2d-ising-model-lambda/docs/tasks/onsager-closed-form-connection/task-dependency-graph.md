@@ -1,6 +1,6 @@
 # Onsager 閉形式への接続 — Task Dependency Graph
 
-平方根の対象は有限多項式に限定する。先に台帳の「定数項一の多項式平方根と一意性」で旧形式級数の可算性の誤記と依存を除く。平方根の存在は Kac--Ward の平方恒等式と軌道ごとの明示積が証人を与え、一意性だけをこの道具から引く。
+平方根の対象は有限多項式に限定する。「定数項一の多項式平方根と一意性」と旧形式級数の退避は四層で完了した。平方根の存在は Kac--Ward の平方恒等式と軌道ごとの明示積が証人を与え、一意性だけをこの道具から引く。
 
 ## 概要
 
@@ -15,7 +15,7 @@
 - `claim_low_temperature_trivial_sector_expression`, `claim_sector_value_duality`: 完了
 - `def_kw_dual_transform`, `claim_kw_self_dual_quadratic_equivalence`, `def_critical_point`: 完了
 - `def_periodic_free_energy_density_le_one`: 完了
-- トーラス版 Kac--Ward 公式: 反対称化と行列式保存まで完了、Pfaffian 平方恒等式以降は未完了。有限 Fourier 分解、Onsager 閉形式との同定: 未着手
+- トーラス版 Kac--Ward 公式: 反対称化と行列式保存、一般の零対角反対称行列の Pfaffian 平方恒等式、標識付きマッチングの補辺の偶次数と短い対の個数まで完了。符号付き偶部分グラフ多項式との平方恒等式は未完了。有限 Fourier 分解、Onsager 閉形式との同定は未着手
 
 ## 採用する経路と出典
 
@@ -28,7 +28,7 @@
 
 ```mermaid
 graph TD
-  polynomialroot[定数項一の多項式平方根の一意性を証明]
+  polynomialroot[定数項一の多項式平方根の一意性は証明済み]
   polynomialroot --> kw
   polynomialroot --> product
   data[トーラスの向き付き辺・回転位相・四つのスピン構造を定義] --> kw[四つの Kac--Ward 行列式による有限トーラス公式を証明]
