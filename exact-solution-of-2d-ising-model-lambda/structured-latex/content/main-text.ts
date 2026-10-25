@@ -11458,6 +11458,56 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_term_equality",
+        labels: [],
+        title: { text: "偶数軌道の置換項とマッチング対の項" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_term_equality",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_term_equality",
+              title: { text: "偶数軌道の置換項は対応するマッチング対の項に等しい" },
+              labels: ["claim_matching_pair_term_equality"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/matching-pair-term-equality"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairTermEquality",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairTermEquality_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_actual_monomial"), " の ", math(String.raw`\mathcal J,\tau,\upsilon,C,w,A`), " を取り、", math(String.raw`A_{j,i}=-A_{i,j}`), " をすべての ", math(String.raw`i,j\in\mathcal J`), " について仮定する。", math(String.raw`\sigma=\sigma_{\tau,\upsilon}`), "、", math(String.raw`D=\mathcal D_\tau`), "、", math(String.raw`E=\mathcal D_\upsilon`), " とする。", ref("def_qbar_polynomial_pfaffian"), " の符号と単項式を ", math(String.raw`c_D,b_D,c_E,b_E`), " とすると、" ]),
+                displayMath(String.raw`\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}=(c_Dc_E)(b_Db_E)\quad\text{in }\overline{\mathbb Q}[x]`),
+                paragraph(["である。空の添字集合も含む。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_entry_product"), " と ", ref("claim_matching_pair_orientation_product"), " により、", math(String.raw`\alpha_\tau,\alpha_\upsilon`), " を各色の向きの整数符号の積とすると、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+&=\left(\prod_{i\in C}A_{i,\tau(i)}\right)\left(\prod_{i\in\mathcal J\setminus C}A_{i,\upsilon(i)}\right)&&\bigl(\because\ \blkref{claim_matching_pair_entry_product}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon)}\left(\prod_{(a,b)\in\mathcal L_\tau(w)}A_{a,b}\right)\left(\prod_{(a,b)\in\mathcal L_\upsilon(w_2)}A_{a,b}\right)&&\bigl(\because\ \blkref{claim_matching_pair_orientation_product},\ \text{二色の列挙}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon)}b_Db_E&&\bigl(\because\ \blkref{claim_matching_pair_actual_monomial}\bigr).
+\end{aligned}`),
+                paragraph([ref("claim_matching_pair_actual_sign_composition"), " の整数等号に定数多項式への写像を適用して、"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}A_{i,\sigma(i)}
+&=\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon\operatorname{sgn}(D)\operatorname{sgn}(E))}\widehat{\iota_{\mathbb Z}(\alpha_\tau\alpha_\upsilon)}b_Db_E&&\bigl(\because\ \blkref{claim_matching_pair_actual_sign_composition}\text{ と直前の等号}\bigr)\\
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(D)\operatorname{sgn}(E))}b_Db_E&&\bigl(\because\ \alpha_\tau^2=\alpha_\upsilon^2=1\bigr)\\
+&=(c_Dc_E)(b_Db_E)&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
+\end{aligned}`),
+                paragraph(["各向きの符号は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので二乗が一である。空集合では四つの積とすべての符号が一になる。有限集合と代数的数係数多項式だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
