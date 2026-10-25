@@ -11096,6 +11096,57 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_word_sign_map",
+        labels: [],
+        title: { text: "第一色と第二色の端点列の符号を置換符号で結ぶ" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_word_sign_map",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_word_sign_map",
+              title: { text: "第二色の端点列の符号は置換符号と第一色の端点列の符号の積である" },
+              labels: ["claim_matching_pair_word_sign_map"],
+              habitat: "Z",
+              verification: ["sagemath/check/matching-pair-word-sign-map"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordSignMap",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordSignMap_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordSignMap_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_word_map"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "、相手写像 ", math(String.raw`\tau,\upsilon`), "、第一色 ", math(String.raw`C`), "、置換 ", math(String.raw`\sigma`), " を取る。", math(String.raw`w`), " は第一色の元を重複なくすべて並べた列とし、", math(String.raw`W_\tau(w)`), " が ", math(String.raw`\mathcal J`), " の全元を一度ずつ含むとする。このとき ", ref("def_matching_word_sign"), " の整数値の符号について"]),
+                displayMath(String.raw`\varepsilon(W_\upsilon(w))=\operatorname{sgn}(\sigma)\,\varepsilon(W_\tau(w))\quad\text{in }\mathbb Z`),
+                paragraph(["が成り立つ。空集合では三つの符号は一である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_word_map"), " により、", math(String.raw`W_\upsilon(w)=\sigma(W_\tau(w))`), " である。", ref("def_matching_word_sign"), " の昇順基準列の各元 ", math(String.raw`j_k\in\mathcal J`), " において、", math(String.raw`\pi_{\sigma(W_\tau(w))}(j_k)=\sigma(\pi_{W_\tau(w)}(j_k))`), " だから、二つの置換は ", math(String.raw`\pi_{\sigma(W_\tau(w))}=\sigma\circ\pi_{W_\tau(w)}`), " と等しい。よって"]),
+                displayMath(String.raw`\begin{aligned}
+\varepsilon(W_\upsilon(w))
+&=\varepsilon(\sigma(W_\tau(w)))
+&&\bigl(\because\ \blkref{claim_matching_pair_word_map}\bigr)\\
+&=\operatorname{sgn}(\pi_{\sigma(W_\tau(w))})
+&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr)\\
+&=\operatorname{sgn}(\sigma\circ\pi_{W_\tau(w)})
+&&\bigl(\because\ \text{上で得た置換の等号}\bigr)\\
+&=\operatorname{sgn}(\sigma)\operatorname{sgn}(\pi_{W_\tau(w)})
+&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+&=\operatorname{sgn}(\sigma)\,\varepsilon(W_\tau(w))
+&&\bigl(\because\ \blkref{def_matching_word_sign}\bigr).
+\end{aligned}`),
+                paragraph(["空集合では置換は恒等写像で、両列は空列である。有限列と整数の符号だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -45259,18 +45310,23 @@ s\cdot s
                       ],
                       proof: [
                         paragraph([
-                          ref("claim_two_is_square_in_real_closed"), " と ",
-                          ref("def_real_closed_subfield"),
-                          " の第 2 条件（平方の三分法）を使う。元 ",
-                          math(String.raw`z:=2\in R`), " について三分法の 3 つのうちちょうど 1 つが成り立つが、",
-                          ref("claim_two_is_square_in_real_closed"), " により第 2 の場合（",
-                          math(String.raw`z=s\cdot s`), "、", math(String.raw`s\ne0`),
-                          "）が成り立っている。したがって第 3 の場合（",
-                          math(String.raw`-z=-2`), " が零でない元の平方であること）は成り立たない。",
+                          math(String.raw`z:=2\in R`), " と置く。", ref("claim_two_is_square_in_real_closed"),
+                          " により、ある零でない ", math(String.raw`s\in R`), " について",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+z&=2&&\bigl(\because\ z\text{ の置き方}\bigr)\\
+&=s\cdot s&&\bigl(\because\ \blkref{claim_two_is_square_in_real_closed}\bigr).
+\end{aligned}`),
+                        paragraph(["背理法で、零でない ", math(String.raw`w\in R`), " が ", math(String.raw`-2=w\cdot w`), " を満たすと仮定する。すると"]),
+                        displayMath(String.raw`\begin{aligned}
+-z&=-2&&\bigl(\because\ z\text{ の置き方}\bigr)\\
+&=w\cdot w&&\bigl(\because\ \text{背理法の仮定}\bigr).
+\end{aligned}`),
                         paragraph([
-                          "これで ", math(String.raw`-2`),
-                          " 側の枝が起きないことが確定した。実数体も複素数体も現れない。",
+                          ref("def_real_closed_subfield"), " の第 2 条件では、零でない元 ",
+                          math(String.raw`z`), " と ", math(String.raw`-z`),
+                          " がともに平方になることはない。上の二つの等号はこれに反するため、",
+                          math(String.raw`w`), " は存在しない。実数体も複素数体も現れない。",
                         ]),
                       ],
                     },
