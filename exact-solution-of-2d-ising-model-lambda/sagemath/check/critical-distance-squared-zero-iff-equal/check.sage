@@ -17,9 +17,19 @@ for s in (QQbar(2).sqrt(), -QQbar(2).sqrt()):
         assert xi == QQbar(a) + QQbar(b) * I
         dsq = (a - xcR) * (a - xcR) + b * b
         assert dsq in AA
+        assert dsq == (a - xcR) * (a - xcR) + b * b
         assert (dsq == 0) == (xi == xc)
         if xi == xc:
             assert a == xcR and b == 0
+            assert dsq == (xcR - xcR) * (xcR - xcR) + AA(0) * AA(0)
+            assert (xcR - xcR) * (xcR - xcR) + AA(0) * AA(0) == AA(0) * AA(0) + AA(0) * AA(0)
+            assert AA(0) * AA(0) + AA(0) * AA(0) == 0
+        if dsq == 0:
+            assert AA(0) == dsq
+            assert AA(0) == (a - xcR) * (a - xcR) + b * b
+            assert b == 0
+            assert AA(0) == (a - xcR) * (a - xcR) + AA(0) * AA(0)
+            assert AA(0) == (a - xcR) * (a - xcR)
         if b != 0:
             w = (a - xcR) * b ** (-1)
             assert w * w == ((a - xcR) * (a - xcR)) * (b * b) ** (-1)

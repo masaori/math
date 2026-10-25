@@ -11402,6 +11402,62 @@ W_\upsilon(w)&=B_{\mathcal J\setminus C}(\mathcal L_\upsilon(w_2))&&\bigl(\becau
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_actual_monomial",
+        labels: [],
+        title: { text: "二色の実際の列挙とマッチング単項式" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_actual_monomial",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_actual_monomial",
+              title: { text: "実際の二色の列挙に沿う成分積は二つのマッチング単項式である" },
+              labels: ["claim_matching_pair_actual_monomial"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/matching-pair-actual-monomial"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairActualMonomial",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingEnumerationMonomial_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairActualMonomial_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_first_enumeration"), " と ", ref("claim_matching_pair_second_enumeration"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、二つの相手写像 ", math(String.raw`\tau,\upsilon`), "、第一色の全元を重複なく並べた列 ", math(String.raw`w`), " を取る。両色の昇順対列挙を ", math(String.raw`\mathcal L_\tau(w),\mathcal L_\upsilon(w_2)`), "、対応する完全マッチングを ", math(String.raw`\mathcal D_\tau,\mathcal D_\upsilon`), " とする。任意の行列 ", math(String.raw`A:\mathcal J\times\mathcal J\to\overline{\mathbb Q}[x]`), " について、", ref("def_qbar_polynomial_pfaffian"), " の単項式は" ]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{(a,b)\in\mathcal L_\tau(w)}A_{a,b}&=b_{\mathcal D_\tau},\\
+\prod_{(a,b)\in\mathcal L_\upsilon(w_2)}A_{a,b}&=b_{\mathcal D_\upsilon}
+\end{aligned}`),
+                paragraph(["を満たす。列の積は列の順に取る。空列と空集合の積は一である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_matching_pair_first_enumeration"), " により、第一の列は ", math(String.raw`\mathcal D_\tau`), " の昇順対全体 ", math(String.raw`E_{\mathcal D_\tau}`), " を重複なく列挙する。有限積は可換な ", math(String.raw`\overline{\mathbb Q}[x]`), " で取るので、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{(a,b)\in\mathcal L_\tau(w)}A_{a,b}
+&=\prod_{(a,b)\in E_{\mathcal D_\tau}}A_{a,b}
+&&\bigl(\because\ \blkref{claim_matching_pair_first_enumeration}\text{ と有限積の並べ替え}\bigr)\\
+&=b_{\mathcal D_\tau}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
+\end{aligned}`),
+                paragraph([ref("claim_matching_pair_second_enumeration"), " により第二の列も ", math(String.raw`E_{\mathcal D_\upsilon}`), " を重複なく列挙する。同じ有限積の等号を適用して、"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{(a,b)\in\mathcal L_\upsilon(w_2)}A_{a,b}
+&=\prod_{(a,b)\in E_{\mathcal D_\upsilon}}A_{a,b}
+&&\bigl(\because\ \blkref{claim_matching_pair_second_enumeration}\text{ と有限積の並べ替え}\bigr)\\
+&=b_{\mathcal D_\upsilon}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_pfaffian}\bigr).
+\end{aligned}`),
+                paragraph(["空集合でも両列挙は空列であり、各等号は空積 ", math(String.raw`1\in\overline{\mathbb Q}[x]`), " の等号になる。有限集合と代数的数係数多項式だけを用い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -46140,8 +46196,10 @@ m&=b(\sigma_{\mathrm{flip}})
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{dsq}_{c}(\xi)
+&=(a-x_c)\cdot(a-x_c)+b\cdot b
+&&(\because\ \blkref{def_distance_squared_to_critical_point})\\
 &=(x_c-x_c)\cdot(x_c-x_c)+0\cdot0
-&&(\because\ \blkref{def_distance_squared_to_critical_point}\text{、}a=x_c\text{、}b=0)\\
+&&(\because\ a=x_c\text{、}b=0)\\
 &=0\cdot0+0\cdot0
 &&(\because\ R\text{ の四則})\\
 &=0
@@ -46179,8 +46237,12 @@ w\cdot w
                         ]),
                         displayMath(String.raw`\begin{aligned}
 0
+&=\mathrm{dsq}_{c}(\xi)
+&&(\because\ \mathrm{dsq}_{c}(\xi)=0)\\
+&=(a-x_c)\cdot(a-x_c)+b\cdot b
+&&(\because\ \blkref{def_distance_squared_to_critical_point})\\
 &=(a-x_c)\cdot(a-x_c)+0\cdot0
-&&(\because\ \blkref{def_distance_squared_to_critical_point}\text{、}b=0)\\
+&&(\because\ b=0)\\
 &=(a-x_c)\cdot(a-x_c)
 &&(\because\ R\text{ の四則})
 \end{aligned}`),
