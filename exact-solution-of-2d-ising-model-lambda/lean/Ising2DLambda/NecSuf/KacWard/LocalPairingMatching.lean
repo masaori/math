@@ -45,4 +45,26 @@ noncomputable def splicePairingMatching {J : Type*}
     (splicePairings selected localMate reverse hlocalSelected hlocalInvolutive
       hlocalNe hreverseOutside hreverseInvolutive hreverseNe)
 
+/-- Only branch preservation and a mate equation are needed for pair support. -/
+theorem splice_pair_support {J : Type*} (selected : J → Prop)
+    [DecidablePred selected]
+    (localMate reverse : J → J) (source : J → J')
+    (hlocalSelected : ∀ j, selected j → selected (localMate j))
+    (hlocalSource : ∀ j, selected j → source (localMate j) = source j)
+    (hreverseOutside : ∀ j, ¬ selected j → ¬ selected (reverse j))
+    (p : J × J)
+    (hmate : p.2 = if selected p.1 then localMate p.1 else reverse p.1) :
+    (selected p.1 → p.2 = localMate p.1 ∧ selected p.2 ∧
+      source p.2 = source p.1) ∧
+    (¬ selected p.1 → p.2 = reverse p.1 ∧ ¬ selected p.2) := by
+  classical
+  constructor
+  · intro hp
+    have hpair : p.2 = localMate p.1 := by simpa [hp] using hmate
+    exact ⟨hpair, hpair ▸ hlocalSelected p.1 hp,
+      hpair ▸ hlocalSource p.1 hp⟩
+  · intro hp
+    have hpair : p.2 = reverse p.1 := by simpa [hp] using hmate
+    exact ⟨hpair, hpair ▸ hreverseOutside p.1 hp⟩
+
 end Ising2DLambda.NecSuf.KacWard

@@ -70934,6 +70934,54 @@ M_{D,T}(x)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_pair_support",
+              labels: [],
+              title: { text: "局所対合から構成した完全マッチングの対の支持" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_pair_support",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_pair_support",
+                    kind: "claim",
+                    title: { text: "構成した対は局所対合または辺の反転対である" },
+                    labels: ["claim_local_pairing_matching_pair_support"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-matching-pair-support"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatching_pair_support",
+                      "Ising2DLambda.NecSuf.KacWard.splice_pair_support",
+                      "Ising2DLambda.KacWard.localPairingMatching_pair_support_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_local_pairing_matching_construction"), " の ", math(String.raw`P\subseteq E_L`), " と ", math(String.raw`\kappa:\vec E_L\to\vec E_L`), " を取る。さらに任意の ", math(String.raw`\vec e\in H(P)`), " について ", math(String.raw`\operatorname{src}(\kappa(\vec e))=\operatorname{src}(\vec e)`), " とする。構成した完全マッチングを ", math(String.raw`\mathcal D_\tau`), " と書く。" ]),
+                      paragraph(["任意の昇順対 ", math(String.raw`r=(\vec e,\vec f)\in E_{\mathcal D_\tau}`), " について、", math(String.raw`p(\vec e)\in P`), " なら ", math(String.raw`\vec f=\kappa(\vec e)`), "、", math(String.raw`p(\vec f)\in P`), "、", math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e)`), " である。", math(String.raw`p(\vec e)\notin P`), " なら ", math(String.raw`\vec f=\iota(\vec e)`), "、", math(String.raw`p(\vec f)\notin P`), " である。" ]),
+                    ],
+                    proof: [
+                      paragraph(["昇順対 ", math(String.raw`(\vec e,\vec f)`), " が ", math(String.raw`\mathcal D_\tau`), " に属するので、", ref("claim_perfect_matching_involution"), " の相手写像と ", ref("claim_local_pairing_matching_construction"), " から ", math(String.raw`\vec f=\tau(\vec e)`), " である。" ]),
+                      paragraph(["もし ", math(String.raw`p(\vec e)\in P`), " なら、"]),
+                      displayMath(String.raw`\begin{aligned}
+\vec f&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\blkref{claim_local_pairing_matching_construction}\bigr)\\
+&=\kappa(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の場合分け}\bigr).
+\end{aligned}`),
+                      paragraph(["仮定から ", math(String.raw`p(\vec f)\in P`), " と ", math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e)`), " が従う。" ]),
+                      paragraph(["もし ", math(String.raw`p(\vec e)\notin P`), " なら、"]),
+                      displayMath(String.raw`\begin{aligned}
+\vec f&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\blkref{claim_local_pairing_matching_construction}\bigr)\\
+&=\iota(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の場合分け}\bigr).
+\end{aligned}`),
+                      paragraph([ref("def_edge_reversal"), " より反転は台の辺を変えないので ", math(String.raw`p(\vec f)\notin P`), " である。", math(String.raw`L=1`), " の自己ループでも端点番号が異なる二元を反転するため、この場合分けは変わらない。" ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
