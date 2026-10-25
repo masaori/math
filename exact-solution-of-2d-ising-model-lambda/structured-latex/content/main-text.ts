@@ -71221,6 +71221,52 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_term_nonzero",
+              labels: [],
+              title: { text: "局所対合から構成した標識付きマッチングの項の非零性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_term_nonzero",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_term_nonzero",
+                    kind: "claim",
+                    title: { text: "局所対合から構成した標識付きマッチングの項全体は零でない" },
+                    labels: ["claim_local_pairing_matching_term_nonzero"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/local-pairing-matching-term-nonzero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatching_term_nonzero",
+                      "Ising2DLambda.NecSuf.KacWard.labelled_term_ne_zero",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_local_pairing_matching_label_support"), " の偶部分グラフ ", math(String.raw`P\subseteq E_L`), "、局所対合 ", math(String.raw`\kappa`), "、完全マッチング ", math(String.raw`\mathcal D_\tau`), " と短い標識の対集合 ", math(String.raw`T_P\subseteq E_{\mathcal D_\tau}`), " を取る。辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " とする。", ref("claim_tagged_matching_expansion"), " におけるこの標識付きマッチングの項は"]),
+                      displayMath(String.raw`M_{\mathcal D_\tau,T_P}(x)=c_{\mathcal D_\tau}(-1)^{|T_P|}\prod_{p\in E_{\mathcal D_\tau}\setminus T_P}\mathsf L_p\prod_{p\in T_P}\mathsf S_p\ne0\quad\text{in }\overline{\mathbb Q}[x].`),
+                      paragraph(["長短の標識は別のデータとして扱い、辺長一も含む。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_local_pairing_matching_label_support"), " により、長い標識の対 ", math(String.raw`p=(\vec e,\vec f)\in E_{\mathcal D_\tau}\setminus T_P`), " では ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_tagged_matching_contributions"), " と ", ref("claim_gauge_pair_weight_nonzero"), " から、その寄与は非零である。"]),
+                      displayMath(String.raw`\begin{aligned}
+\mathsf L_p&=C(w_{\vec e,\vec f})&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と }\vec f=\iota(\vec e)\bigr)\\
+&\ne0&&\bigl(\because\ \blkref{claim_gauge_pair_weight_nonzero}\text{ と }C\text{ の単射性}\bigr).
+\end{aligned}`),
+                      paragraph(["短い標識の対 ", math(String.raw`p=(\vec e,\vec f)\in T_P`), " では、同じ始点を持ち ", math(String.raw`\vec e\ne\vec f`), " である（", ref("claim_local_pairing_matching_label_support"), "）。", ref("claim_short_pair_coefficient_nonzero"), " と ", ref("def_tagged_matching_contributions"), " から ", math(String.raw`q_{\vec e,\vec f}\ne0`), " なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\mathsf S_p&=xC(q_{\vec e,\vec f})&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\bigr)\\
+&\ne0&&\bigl(\because\ x\ne0,\ C\text{ の単射性と多項式環の零積性}\bigr).
+\end{aligned}`),
+                      paragraph([ref("def_qbar_polynomial_pfaffian"), " により ", math(String.raw`c_{\mathcal D_\tau}\in\{1,-1\}\subset\overline{\mathbb Q}[x]`), " で、これも零でない。両有限積は、各因子が非零なので非零である。空積の場合も一である。さらに ", math(String.raw`(-1)^{|T_P|}\ne0`), " である。よって有限個の非零因子の積として ", math(String.raw`M_{\mathcal D_\tau,T_P}(x)\ne0`), " を得る（多項式環の零積性）。辺長一でも標識ごとに別の因子を選ぶので同じ証明が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
