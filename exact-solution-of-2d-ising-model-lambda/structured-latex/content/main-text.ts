@@ -11037,6 +11037,65 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_word_orientation_sign",
+        labels: [],
+        title: { text: "向き付き端点列の符号を昇順マッチングの符号へ直す" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_word_orientation_sign",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_word_orientation_sign",
+              title: { text: "向き付き端点列の符号は向きの積とマッチングの符号の積である" },
+              labels: ["claim_matching_pair_word_orientation_sign"],
+              habitat: "Z",
+              verification: ["sagemath/check/matching-pair-word-orientation-sign"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordOrientationSign",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairWordOrientationSign",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairWordOrientationSign_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("def_perfect_matching_enumeration"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）と完全マッチング ", math(String.raw`\mathcal D\in\mathcal M(\mathcal J)`), " を取る。", math(String.raw`S\subseteq\mathcal J`), " は各対からちょうど一つの端点を選ぶ。昇順対の列挙 ", math(String.raw`\mathcal L=[(a_1,b_1),\ldots,(a_m,b_m)]`), "（", math(String.raw`m\in\mathbb N`), "）を取り、次の有限列と整数を置く。"]),
+                displayMath(String.raw`B_S(\mathcal L):=[d_1,e_1,\ldots,d_m,e_m],\qquad
+(d_r,e_r):=\begin{cases}(a_r,b_r)&a_r\in S,\\(b_r,a_r)&a_r\notin S,\end{cases}\qquad
+\eta_S(a_r,b_r):=\begin{cases}1&a_r\in S,\\-1&a_r\notin S.\end{cases}`),
+                paragraph(["このとき ", ref("def_matching_word_sign"), " の符号について"]),
+                displayMath(String.raw`\varepsilon(B_S(\mathcal L))
+=\left(\prod_{r=1}^{m}\eta_S(a_r,b_r)\right)\operatorname{sgn}(\mathcal D)\quad\text{in }\mathbb Z`),
+                paragraph(["が成り立つ。第一色では ", math(String.raw`(\mathcal D,S)=(\mathcal D_\tau,C)`), "、第二色では ", math(String.raw`(\mathcal D,S)=(\mathcal D_\upsilon,\mathcal J\setminus C)`), " と取れる（", ref("claim_matching_pair_coloring_alternates"), "、", ref("claim_matching_pair_second_coloring_alternates"), "）。空集合では列は空列、積と両符号は一である。"]),
+              ],
+              proof: [
+                paragraph([ref("claim_perfect_matching_enumeration_complete"), " により ", math(String.raw`W(\mathcal L)`), " は完全列挙である。", math(String.raw`U`), " を処理済みの端点列、", math(String.raw`V`), " を未処理の対から作る端点列とし、各交換の前後でも ", math(String.raw`U\mathbin{+\!+}[a_r,b_r]\mathbin{+\!+}V`), " 全体を完全列挙として保つ。"]),
+                paragraph([math(String.raw`a_r\in S`), " なら ", math(String.raw`(d_r,e_r)=(a_r,b_r)`), " なので、その対は符号を変えない。", math(String.raw`a_r\notin S`), " なら ", ref("claim_matching_word_sign_swap"), " をこの対へ適用して"]),
+                displayMath(String.raw`\begin{aligned}
+\varepsilon(U\mathbin{+\!+}[b_r,a_r]\mathbin{+\!+}V)
+&=-\varepsilon(U\mathbin{+\!+}[a_r,b_r]\mathbin{+\!+}V)
+&&\bigl(\because\ \blkref{claim_matching_word_sign_swap}\bigr)\\
+&=\eta_S(a_r,b_r)\varepsilon(U\mathbin{+\!+}[a_r,b_r]\mathbin{+\!+}V)
+&&\bigl(\because\ a_r\notin S\text{ での }\eta_S\text{ の置き方}\bigr).
+\end{aligned}`),
+                paragraph(["列挙の長さ ", math(String.raw`m`), " に関する帰納法で、処理済みの端点を ", math(String.raw`U`), " に残したまま各対に上の交換を適用する。空列では積は一である。各段で一つの因子を掛けるので"]),
+                displayMath(String.raw`\begin{aligned}
+\varepsilon(B_S(\mathcal L))
+&=\left(\prod_{r=1}^{m}\eta_S(a_r,b_r)\right)\varepsilon(W(\mathcal L))
+&&\bigl(\because\ \text{対の個数に関する上の帰納法}\bigr)\\
+&=\left(\prod_{r=1}^{m}\eta_S(a_r,b_r)\right)\operatorname{sgn}(\mathcal D)
+&&\bigl(\because\ \blkref{claim_perfect_matching_sign_enumeration_independent}\bigr).
+\end{aligned}`),
+                paragraph(["対の並べ替えは ", ref("claim_perfect_matching_sign_enumeration_independent"), " の四回の隣接交換で符号を保ち、積は整数の可換性で順序に依存しない。第一色と第二色には同じ帰納法を適用する。有限列と整数だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -45152,8 +45211,15 @@ s\cdot s
                           "である（", math(String.raw`1\in R`), " は部分体の単位元。",
                           math(String.raw`1\cdot1=1`), " は積の単位元）。",
                           math(String.raw`s\ne0`), " である。実際 ", math(String.raw`s=0`),
-                          " ならば ", math(String.raw`2=0\cdot0=0`),
-                          " となるが、", math(String.raw`\mathbb{Q}`), " の中で ",
+                          " と仮定すると",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+2&=s\cdot s&&\bigl(\because\ \text{上で得た等号}\bigr)\\
+&=0\cdot0&&\bigl(\because\ s=0\text{ の仮定}\bigr)\\
+&=0&&\bigl(\because\ R\text{ の零元による乗法}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "これは ", math(String.raw`\mathbb{Q}`), " の中で ",
                           math(String.raw`2\ne0`), " であり ", math(String.raw`\mathbb{Q}`),
                           " は ", math(String.raw`R`), " の部分体（",
                           ref("def_real_closed_subfield"), " の第 1 条件と ",
