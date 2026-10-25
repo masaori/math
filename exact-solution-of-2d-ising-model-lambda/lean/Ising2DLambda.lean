@@ -1223,6 +1223,7 @@ import Ising2DLambda.NecSuf.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.NecSuf.KacWard.LocalPairingMatching
 import Ising2DLambda.KacWard.LocalPairingMatching
+import Ising2DLambda.NecSuf.KacWard.MatchingRecovery
 import Ising2DLambda.NecSuf.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.TwistSignNonzero

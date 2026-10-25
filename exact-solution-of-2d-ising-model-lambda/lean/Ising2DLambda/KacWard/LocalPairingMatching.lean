@@ -1,5 +1,6 @@
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.NecSuf.KacWard.LocalPairingMatching
+import Ising2DLambda.NecSuf.KacWard.MatchingRecovery
 
 namespace Ising2DLambda.KacWard
 
@@ -64,6 +65,51 @@ theorem localPairingMatching_recovers_local_mate {L : ℕ} (P : Finset (Edge L))
       (localPairingMatching P κ hlocalSelected hlocalInvolutive hlocalNe) h = κ h := by
   rw [localPairingMatching_mate]
   simp [hh]
+
+/-- The selected local mate and the reversal outside the complement recover
+    the entire matching underlying a nonzero tagged term. -/
+theorem taggedMatching_recovers_matching {L : ℕ} (z : Qbar)
+    (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (ht : t ⊆ matchingOrientedPairs D)
+    (hterm : matchingSignPolynomial D *
+      ((-1 : Polynomial Qbar) ^ t.card *
+        (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
+        (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
+    (κ : OrientedEdge L → OrientedEdge L)
+    (hlocalSelected : ∀ h, h.1 ∈ taggedComplementEdges D t →
+      (κ h).1 ∈ taggedComplementEdges D t)
+    (hlocalInvolutive : ∀ h, h.1 ∈ taggedComplementEdges D t → κ (κ h) = h)
+    (hlocalNe : ∀ h, h.1 ∈ taggedComplementEdges D t → κ h ≠ h)
+    (hκ : ∀ h, h.1 ∈ taggedComplementEdges D t →
+      κ h = perfectMatchingMate D h) :
+    localPairingMatching (taggedComplementEdges D t) κ
+      hlocalSelected hlocalInvolutive hlocalNe = D := by
+  classical
+  apply Ising2DLambda.NecSuf.KacWard.matching_eq_of_branch_mates
+    (fun M h => perfectMatchingMate M h)
+    (fun M N hMN => by
+      apply (perfectMatchingToInvolution_bijective (J := OrientedEdge L)).1
+      apply Subtype.ext
+      funext h
+      exact congrFun hMN h)
+    (fun h => h.1 ∈ taggedComplementEdges D t)
+  · intro h hh
+    calc
+      perfectMatchingMate
+          (localPairingMatching (taggedComplementEdges D t) κ
+            hlocalSelected hlocalInvolutive hlocalNe) h = κ h :=
+        localPairingMatching_recovers_local_mate _ _ _ _ _ h hh
+      _ = perfectMatchingMate D h := hκ h hh
+  · intro h hh
+    calc
+      perfectMatchingMate
+          (localPairingMatching (taggedComplementEdges D t) κ
+            hlocalSelected hlocalInvolutive hlocalNe) h = reversal h := by
+        rw [localPairingMatching_mate]
+        simp [hh]
+      _ = perfectMatchingMate D h :=
+        (taggedMatching_mate_outside_complement z s D t ht hterm h hh).symm
 
 /-- Each canonical pair of the constructed matching stays in the selected
     half-edges or is exactly one reversal pair outside them. -/

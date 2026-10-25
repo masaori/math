@@ -53,6 +53,8 @@ fi
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
   Ising2DLambda.KacWard.localPairingMatching_recovers_local_mate
+  Ising2DLambda.KacWard.taggedMatching_recovers_matching
+  Ising2DLambda.NecSuf.KacWard.matching_eq_of_branch_mates
   Ising2DLambda.NecSuf.KacWard.splicePairingMatching_selected_mate
   Ising2DLambda.KacWard.localPairingMatching_complement_edges
   Ising2DLambda.KacWard.taggedMatching_mate_outside_complement

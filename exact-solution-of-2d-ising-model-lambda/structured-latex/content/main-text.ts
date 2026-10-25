@@ -71398,6 +71398,54 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_matching_recovery",
+              labels: [],
+              title: { text: "非零の標識付きマッチングの完全マッチングの復元" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_matching_recovery",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_matching_recovery",
+                    kind: "claim",
+                    title: { text: "局所対合と反転対から元の完全マッチングを復元する" },
+                    labels: ["claim_tagged_matching_matching_recovery"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-matching-recovery"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedMatching_recovers_matching",
+                      "Ising2DLambda.NecSuf.KacWard.matching_eq_of_branch_mates",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_matching_expansion"), " の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、項 ", math(String.raw`M_{D,T}(x)\in\overline{\mathbb Q}[x]`), " が非零の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。補辺 ", math(String.raw`P:=P(D,T)\subseteq E_L`), " は ", ref("def_tagged_matching_complement_edges"), " に従う。", math(String.raw`\kappa:\vec E_L\to\vec E_L`), " は ", math(String.raw`H(P)`), " 上で元の相手写像に等しい頂点ごとの局所対合とする。", ref("claim_local_pairing_matching_construction"), " により作る完全マッチングを ", math(String.raw`\mathcal D_\tau`), " と書く。このとき"]),
+                      displayMath(String.raw`\mathcal D_\tau=D`),
+                      paragraph(["が成り立つ。長短の標識の一致はここでは主張しない。向き付き辺は端点番号を保つので、辺長一でも成立する。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " を取る。", math(String.raw`p(\vec e)\in P`), " なら、", ref("claim_local_pairing_matching_local_mate_recovery"), " と ", math(String.raw`\kappa`), " の取り方より"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{mate}_{\mathcal D_\tau}(\vec e)
+&=\kappa(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_local_mate_recovery}\bigr)\\
+&=\operatorname{mate}_D(\vec e)&&\bigl(\because\ \kappa\text{ の取り方}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`p(\vec e)\notin P`), " なら、", ref("claim_local_pairing_matching_construction"), " の非選択辺の場合分けと ", ref("claim_tagged_matching_mate_outside_complement"), " より"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{mate}_{\mathcal D_\tau}(\vec e)
+&=\iota(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の非選択辺の場合分け}\bigr)\\
+&=\operatorname{mate}_D(\vec e)&&\bigl(\because\ \blkref{claim_tagged_matching_mate_outside_complement}\bigr).
+\end{aligned}`),
+                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " は以上のいずれかに属するので二つの相手写像は全域で等しい。", ref("claim_perfect_matching_involution"), " の完全マッチングと不動点のない対合の一対一対応により、", math(String.raw`\mathcal D_\tau=D`), " である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
