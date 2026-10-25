@@ -70570,6 +70570,76 @@ c^n&=C(\zeta_8^{\,2})^{4L^2}&&\bigl(\because\ c,n\text{ の定義}\bigr)\\
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_expansion",
+              labels: [],
+              title: { text: "Pfaffian の標識付き完全マッチング展開" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_expansion",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_tagged_matching_contributions",
+                      kind: "definition",
+                      title: { text: "長い標識と短い標識を付けた対の寄与" },
+                      labels: ["def_tagged_matching_contributions"],
+                      habitat: "Qbar",
+                      lean: [
+                        "Ising2DLambda.KacWard.gaugedLongContribution",
+                        "Ising2DLambda.KacWard.gaugedShortContribution",
+                      ],
+                      statement: [
+                        paragraph(["辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), " とねじれ ", math(String.raw`(a,b)\in\mathcal S`), " を固定する。", ref("def_gauged_terminal_matrix"), " の ", math(String.raw`w_{\vec e,\vec f}\in\overline{\mathbb Q}`), " を用いる。各 ", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対し、"]),
+                        displayMath(String.raw`\ell_{\vec e,\vec f}:=\begin{cases}w_{\vec e,\vec f},&\vec f=\iota(\vec e),\\0,&\text{それ以外},\end{cases}\qquad
+q_{\vec e,\vec f}:=\begin{cases}w_{\vec e,\vec f}\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f),&\operatorname{src}(\vec f)=\operatorname{src}(\vec e),\ \vec f\ne\vec e,\\0,&\text{それ以外}\end{cases}`),
+                        paragraph(["を ", math(String.raw`\overline{\mathbb Q}`), " の元として定める。", ref("def_qbar_constant_embedding"), " の定数埋込み ", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " で、長い標識の寄与 ", math(String.raw`\mathsf L_{\vec e,\vec f}:=C(\ell_{\vec e,\vec f})`), " と短い標識の寄与 ", math(String.raw`\mathsf S_{\vec e,\vec f}:=xC(q_{\vec e,\vec f})`), " を定める。両者は ", math(String.raw`\overline{\mathbb Q}[x]`), " の元である。標識は対に付ける別のデータなので、辺長一で同じ二元集合が両方の条件を満たしても二つの寄与を同一視しない。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_expansion",
+                    kind: "claim",
+                    title: { text: "Pfaffian は標識付き完全マッチングの和へ展開する" },
+                    labels: ["claim_tagged_matching_expansion"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-expansion"],
+                    lean: [
+                      "Ising2DLambda.KacWard.gaugedPfaffian_taggedMatchingExpansion",
+                      "Ising2DLambda.NecSuf.KacWard.taggedProductExpansion",
+                    ],
+                    statement: [
+                      paragraph([ref("def_qbar_polynomial_pfaffian"), " の線型順序を ", math(String.raw`\vec E_L`), " に固定する。完全マッチング ", math(String.raw`D\in\mathcal M(\vec E_L)`), " の昇順対集合を ", math(String.raw`E_D`), " とし、", math(String.raw`T\subseteq E_D`), " を短い標識を付ける対の集合とする。", math(String.raw`E_D\setminus T`), " の対には長い標識を付ける。組 ", math(String.raw`(D,T)`), " が標識付き完全マッチングであり、標識を忘れる写像は ", math(String.raw`(D,T)\mapsto D`), " である。"]),
+                      displayMath(String.raw`\operatorname{Pf}(\widehat K)
+=\sum_{D\in\mathcal M(\vec E_L)}\ \sum_{T\subseteq E_D}
+c_D(-1)^{|T|}
+\left(\prod_{(\vec e,\vec f)\in E_D\setminus T}\mathsf L_{\vec e,\vec f}\right)
+\left(\prod_{(\vec e,\vec f)\in T}\mathsf S_{\vec e,\vec f}\right)
+\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["が成り立つ。", math(String.raw`c_D`), " は ", ref("def_qbar_polynomial_pfaffian"), " の符号因子である。空積は一とする。", math(String.raw`L=1`), " も含む。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の昇順対 ", math(String.raw`p=(\vec e,\vec f)\in E_D`), " について、", ref("claim_gauged_terminal_matrix_entries"), " の二つの条件をそれぞれ分配し、", ref("def_tagged_matching_contributions"), " の場合分けを代入すると"]),
+                      displayMath(String.raw`\widehat K_{\vec e,\vec f}=\mathsf L_{\vec e,\vec f}-\mathsf S_{\vec e,\vec f}\quad(\because\ \text{二寄与への分配と定数埋込みの積の保存})`),
+                      paragraph(["を得る。有限集合 ", math(String.raw`E_D`), " の対の数について帰納する。空集合では両辺は空積の一である。帰納段では ", math(String.raw`p\notin E`), " を一つ加え、短い標識の集合を ", math(String.raw`p\notin T`), " と ", math(String.raw`p\in T`), " に分ける。前者の各項は ", math(String.raw`\mathsf L_p`), "、後者の各項は ", math(String.raw`-\mathsf S_p`), " を一つ掛けるので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_{r\in E\cup\{p\}}(\mathsf L_r-\mathsf S_r)
+&=(\mathsf L_p-\mathsf S_p)\prod_{r\in E}(\mathsf L_r-\mathsf S_r)&&\bigl(\because\ \text{有限積の定義}\bigr)\\
+&=\mathsf L_p\prod_{r\in E}(\mathsf L_r-\mathsf S_r)-\mathsf S_p\prod_{r\in E}(\mathsf L_r-\mathsf S_r)&&\bigl(\because\ \text{分配則}\bigr)\\
+&=\sum_{T\subseteq E\cup\{p\}}(-1)^{|T|}\prod_{r\in(E\cup\{p\})\setminus T}\mathsf L_r\prod_{r\in T}\mathsf S_r&&\bigl(\because\ \text{帰納法の仮定と二つの標識集合への分割}\bigr).
+\end{aligned}`),
+                      paragraph(["したがって任意の ", math(String.raw`D`), " で積の展開が成り立つ。", ref("def_qbar_polynomial_pfaffian"), " の有限和に代入し、各内側の和へ ", math(String.raw`c_D`), " を分配すると主張の式になる。すべて有限和・有限積であり、実数体への脱出はない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
