@@ -70986,6 +70986,62 @@ M_{D,T}(x)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_gauge_pair_weight_nonzero",
+              labels: [],
+              title: { text: "対角ゲージから得る対の重みの非零性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_gauge_pair_weight_nonzero",
+                  focus: {
+                    id: "kac_ward_claim_gauge_pair_weight_nonzero",
+                    kind: "claim",
+                    title: { text: "対角ゲージから得る任意の対の重みは零でない" },
+                    labels: ["claim_gauge_pair_weight_nonzero"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/gauge-pair-weight-nonzero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.gaugePairWeight_ne_zero",
+                      "Ising2DLambda.NecSuf.KacWard.gauge_pair_weight_ne_zero_necSuf",
+                      "Ising2DLambda.KacWard.gaugePairWeight_ne_zero_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。", ref("def_gauged_terminal_matrix"), " の ", math(String.raw`w_{\vec e,\vec f}\in\overline{\mathbb Q}`), " は ", math(String.raw`w_{\vec e,\vec f}\ne0`), " を満たす。長い標識と短い標識のどちらでも同じ重みを使う。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_rotation_phase"), " の ", math(String.raw`z:=\zeta_8\in\overline{\mathbb Q}`), " は ", math(String.raw`z^4=-1`), " を満たす。", math(String.raw`z=0`), " なら左辺は零になり矛盾するので ", math(String.raw`z\ne0`), " である。", ref("def_diagonal_gauge"), " の整数指数を ", math(String.raw`p_{\vec e},q_{\vec e},p_{\vec f},q_{\vec f}\in\mathbb Z`), " と置く。"]),
+                      displayMath(String.raw`\begin{aligned}
+w_{\vec e,\vec f}
+&=z^2\bigl((z^{-q_{\vec e}}z^{-p_{\vec e}})(z^{p_{\vec f}}z^{q_{\vec f}})\bigr)
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix},\ \blkref{def_diagonal_gauge}\bigr).
+\end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
+z^2&\ne0&&\bigl(\because\ z\ne0\text{ と非零元の自然数冪}\bigr),\\
+z^{-q_{\vec e}}&\ne0,\quad z^{-p_{\vec e}}\ne0,\quad
+z^{p_{\vec f}}\ne0,\quad z^{q_{\vec f}}\ne0
+&&\bigl(\because\ z\ne0\text{ と非零元の整数冪を四因子に適用}\bigr),\\
+z^{-q_{\vec e}}z^{-p_{\vec e}}&\ne0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零積性}\bigr),\\
+z^{p_{\vec f}}z^{q_{\vec f}}&\ne0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零積性}\bigr),\\
+(z^{-q_{\vec e}}z^{-p_{\vec e}})(z^{p_{\vec f}}z^{q_{\vec f}})&\ne0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零積性}\bigr),\\
+z^2\bigl((z^{-q_{\vec e}}z^{-p_{\vec e}})(z^{p_{\vec f}}z^{q_{\vec f}})\bigr)&\ne0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の零積性}\bigr),\\
+w_{\vec e,\vec f}&\ne0
+&&\bigl(\because\ \text{上で示した重みの等号}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_local_pairing_matching_label_support",
               labels: [],
               title: { text: "局所対合から構成した対への標識付け" },

@@ -107,6 +107,7 @@ export const ALL_LABELS = [
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",
   "claim_fully_unswitchable_contacts_witness_doubled_edges",
+  "claim_gauge_pair_weight_nonzero",
   "claim_gauged_terminal_matrix_determinant",
   "claim_gauged_terminal_matrix_entries",
   "claim_gauged_terminal_matrix_skew",
