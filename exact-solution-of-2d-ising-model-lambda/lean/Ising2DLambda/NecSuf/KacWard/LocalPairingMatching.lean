@@ -46,6 +46,32 @@ noncomputable def splicePairingMatching {J : Type*}
     (splicePairings selected localMate reverse hlocalSelected hlocalInvolutive
       hlocalNe hreverseOutside hreverseInvolutive hreverseNe)
 
+/-- The matching made by splicing retains the chosen mate on selected points. -/
+theorem splicePairingMatching_selected_mate {J : Type*}
+    (selected : J → Prop) [DecidablePred selected]
+    (localMate reverse : J → J)
+    (hlocalSelected : ∀ j, selected j → selected (localMate j))
+    (hlocalInvolutive : ∀ j, selected j → localMate (localMate j) = j)
+    (hlocalNe : ∀ j, selected j → localMate j ≠ j)
+    (hreverseOutside : ∀ j, ¬ selected j → ¬ selected (reverse j))
+    (hreverseInvolutive : ∀ j, ¬ selected j → reverse (reverse j) = j)
+    (hreverseNe : ∀ j, ¬ selected j → reverse j ≠ j)
+    (j : J) (hj : selected j) :
+    Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingMate
+      (splicePairingMatching selected localMate reverse hlocalSelected
+        hlocalInvolutive hlocalNe hreverseOutside hreverseInvolutive hreverseNe) j =
+      localMate j := by
+  classical
+  let τ := splicePairings selected localMate reverse hlocalSelected
+    hlocalInvolutive hlocalNe hreverseOutside hreverseInvolutive hreverseNe
+  have hm : Ising2DLambda.NecSuf.AlgebraicEigenvalue.perfectMatchingMate
+      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.involutionToPerfectMatching τ) j =
+      τ.val j :=
+    congrArg (fun σ : Ising2DLambda.NecSuf.AlgebraicEigenvalue.FixedPointFreeInvolution J =>
+      σ.val j)
+      (Ising2DLambda.NecSuf.AlgebraicEigenvalue.matching_involution_right_inverse τ)
+  simpa [splicePairingMatching, τ, splicePairings, hj] using hm
+
 /-- Only branch preservation and a mate equation are needed for pair support. -/
 theorem splice_pair_support {J : Type*} (selected : J → Prop)
     [DecidablePred selected]

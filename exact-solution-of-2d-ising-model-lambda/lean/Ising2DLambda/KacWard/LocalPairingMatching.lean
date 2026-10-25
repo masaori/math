@@ -52,6 +52,19 @@ theorem localPairingMatching_mate {L : ℕ} (P : Finset (Edge L))
   simp only [Ising2DLambda.NecSuf.KacWard.splicePairings]
   split_ifs <;> rfl
 
+/-- On each selected half-edge the constructed matching recovers the
+    originally chosen local involution, including the two endpoints at L=1. -/
+theorem localPairingMatching_recovers_local_mate {L : ℕ} (P : Finset (Edge L))
+    (κ : OrientedEdge L → OrientedEdge L)
+    (hlocalSelected : ∀ h, h.1 ∈ P → (κ h).1 ∈ P)
+    (hlocalInvolutive : ∀ h, h.1 ∈ P → κ (κ h) = h)
+    (hlocalNe : ∀ h, h.1 ∈ P → κ h ≠ h)
+    (h : OrientedEdge L) (hh : h.1 ∈ P) :
+    perfectMatchingMate
+      (localPairingMatching P κ hlocalSelected hlocalInvolutive hlocalNe) h = κ h := by
+  rw [localPairingMatching_mate]
+  simp [hh]
+
 /-- Each canonical pair of the constructed matching stays in the selected
     half-edges or is exactly one reversal pair outside them. -/
 theorem localPairingMatching_pair_support {L : ℕ} (P : Finset (Edge L))

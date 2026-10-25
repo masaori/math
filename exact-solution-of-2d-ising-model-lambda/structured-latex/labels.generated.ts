@@ -149,6 +149,7 @@ export const ALL_LABELS = [
   "claim_local_pairing_matching_complement_recovery",
   "claim_local_pairing_matching_construction",
   "claim_local_pairing_matching_label_support",
+  "claim_local_pairing_matching_local_mate_recovery",
   "claim_local_pairing_matching_pair_support",
   "claim_local_pairing_matching_term_nonzero",
   "claim_log_additive",

@@ -71306,6 +71306,47 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_matching_local_mate_recovery",
+              labels: [],
+              title: { text: "構成した標識付きマッチングから局所対合を回復する" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_matching_local_mate_recovery",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_matching_local_mate_recovery",
+                    kind: "claim",
+                    title: { text: "選択辺の半辺の相手は元の局所対合に等しい" },
+                    labels: ["claim_local_pairing_matching_local_mate_recovery"],
+                    habitat: "N",
+                    verification: ["sagemath/check/local-pairing-matching-local-mate-recovery"],
+                    lean: [
+                      "Ising2DLambda.KacWard.localPairingMatching_recovers_local_mate",
+                      "Ising2DLambda.NecSuf.KacWard.splicePairingMatching_selected_mate",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_local_pairing_matching_construction"), " の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、選択辺 ", math(String.raw`P\subseteq E_L`), "、局所対合 ", math(String.raw`\kappa`), " と、構成した完全マッチング ", math(String.raw`\mathcal D_\tau`), " を取る。任意の ", math(String.raw`\vec e\in H(P)`), " について、", ref("claim_perfect_matching_involution"), " の相手写像を ", math(String.raw`\operatorname{mate}_{\mathcal D_\tau}`), " と書けば、"]),
+                      displayMath(String.raw`\operatorname{mate}_{\mathcal D_\tau}(\vec e)=\kappa(\vec e).`),
+                      paragraph(["端点番号を区別した向き付き辺の等式なので、辺長一でも成立する。"]),
+                    ],
+                    proof: [
+                      paragraph(["選択辺上の向き付き辺 ", math(String.raw`\vec e\in H(P)`), " を取る。", ref("claim_local_pairing_matching_construction"), " の相手写像とその場合分けを順に用いると、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{mate}_{\mathcal D_\tau}(\vec e)
+&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ と }\blkref{claim_perfect_matching_involution}\bigr)\\
+&=\kappa(\vec e)&&\bigl(\because\ \vec e\in H(P)\text{ に対する }\tau\text{ の選択辺の場合分け}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
