@@ -11212,6 +11212,49 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_matching_pair_first_word_complete",
+        labels: [],
+        title: { text: "第一色の端点列は全点を一度ずつ列挙する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_matching_pair_first_word_complete",
+            focus: {
+              kind: "claim",
+              id: "tools_claim_matching_pair_first_word_complete",
+              title: { text: "第一色の端点と第一の相手を並べると完全列挙になる" },
+              labels: ["claim_matching_pair_first_word_complete"],
+              habitat: "N",
+              verification: ["sagemath/check/matching-pair-first-word-complete"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairFirstWordComplete",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.matchingPairFirstWordComplete_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.matchingPairFirstWordComplete_from_necSuf",
+              ],
+              statement: [
+                paragraph([ref("claim_matching_pair_word_map"), " の線型順序を持つ有限集合 ", math(String.raw`\mathcal J`), "（空でもよい）、第一の相手写像 ", math(String.raw`\tau:\mathcal J\to\mathcal J`), " と第一色 ", math(String.raw`C\subseteq\mathcal J`), " を取る。", math(String.raw`w=[c_1,\ldots,c_m]`), " は ", math(String.raw`C`), " の全元を重複なく並べた列とする。このとき ", ref("def_perfect_matching_enumeration"), " の意味で"]),
+                displayMath(String.raw`W_\tau(w)=[c_1,\tau(c_1),\ldots,c_m,\tau(c_m)]`),
+                paragraph(["は ", math(String.raw`\mathcal J`), " の全元をちょうど一度含む。空集合では空列が完全列挙である。"]),
+              ],
+              proof: [
+                paragraph(["まず各 ", math(String.raw`c\in C`), " について ", ref("claim_matching_pair_coloring_alternates"), " から ", math(String.raw`\tau(c)\notin C`), " を得る。", ref("claim_perfect_matching_involution"), " より ", math(String.raw`\tau(c)\ne c`), " かつ ", math(String.raw`\tau(\tau(c))=c`), " である。相異なる ", math(String.raw`c,d\in C`), " に対して二組 ", math(String.raw`\{c,\tau(c)\}`), " と ", math(String.raw`\{d,\tau(d)\}`), " が元を共有すると仮定する。", math(String.raw`c=d`), " は列 ", math(String.raw`w`), " の重複なしに反し、", math(String.raw`c=\tau(d)`), " と ", math(String.raw`\tau(c)=d`), " は第一色と第二色の排反に反する。残る ", math(String.raw`\tau(c)=\tau(d)`), " は対合性から ", math(String.raw`c=d`), " を含意する。よって列 ", math(String.raw`W_\tau(w)`), " に重複はない。"]),
+                paragraph(["任意の ", math(String.raw`x\in\mathcal J`), " を取る。", math(String.raw`x\in C`), " なら ", math(String.raw`x`), " は ", math(String.raw`w`), " のある項 ", math(String.raw`c_r`), " に等しいので ", math(String.raw`W_\tau(w)`), " に現れる。", math(String.raw`x\notin C`), " なら ", ref("claim_matching_pair_coloring_alternates"), " により ", math(String.raw`\tau(x)\in C`), " である。このとき ", math(String.raw`\tau(x)=c_r`), " となる ", math(String.raw`r`), " があり、"]),
+                displayMath(String.raw`\begin{aligned}
+x&=\tau(\tau(x))&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\bigr)\\
+&=\tau(c_r)&&\bigl(\because\ \tau(x)=c_r\text{ の置き方}\bigr).
+\end{aligned}`),
+                paragraph(["なので ", math(String.raw`x`), " も ", math(String.raw`W_\tau(w)`), " に現れる。空集合でも同じ結論である。有限集合と対合だけを使い、実数体への脱出はない。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_qbar_polynomial_zero_product",
         labels: [],
         title: { text: "代数的数係数多項式の零積性" },
@@ -45537,7 +45580,14 @@ c-a
                           " である空でない有限部分集合については条件を満たす元が存在すると仮定する。",
                           math(String.raw`X`), " から元 ", math(String.raw`x_1`),
                           " を 1 つ取り、", math(String.raw`Y:=X\setminus\{x_1\}`),
-                          " と置く。", math(String.raw`|Y|=n\ge1`), " なので ",
+                          " と置く。次の等号で ", math(String.raw`Y`), " の個数を求める。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+|Y|&=|X|-1&&\bigl(\because\ x_1\in X\text{ を一つ除いた}\bigr)\\
+&=n&&\bigl(\because\ |X|=n+1\text{ の仮定と }\mathbb N\text{ の四則}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`n\ge1`), " なので ",
                           math(String.raw`Y`), " は空でなく、帰納法の仮定より ",
                           math(String.raw`Y`), " の最小元 ", math(String.raw`x_2`),
                           " が取れる。", math(String.raw`x_2\in Y`), " かつ ",

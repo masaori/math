@@ -5,11 +5,12 @@
 # 本文の証明は、存在が |X| の帰納法（1 元の場合 → 元を 1 つ足す場合。三分法で x_1 と x_2 を比べ、
 # x_1 <_R x_2 の枝で推移律を使う）、一意性が三分法の排他性である。R のモデルは AA。厳密計算のみ。
 
-import os
+from pathlib import Path
 from itertools import combinations
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '../../_shared/defs.sage'))
+root = next(d for d in (Path.cwd(), *Path.cwd().parents)
+            if (d / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage').is_file())
+load(str(root / 'exact-solution-of-2d-ising-model-lambda/sagemath/_shared/defs.sage'))
 
 
 def lt_R(a, b):
@@ -62,6 +63,8 @@ def main():
                 if x1 in Y:
                     continue
                 X = Y + [x1]
+                assert len(Y) == len(X) - 1
+                assert len(X) - 1 == k
                 # 三分法: x1 ≠ x2 なので x1 <_R x2 と x2 <_R x1 のちょうど一方
                 assert x1 != x2
                 assert lt_R(x1, x2) != lt_R(x2, x1)
