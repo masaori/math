@@ -71823,6 +71823,42 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_symmetric_difference_active_vertices",
+              labels: [],
+              title: { text: "活動点と短い標識の対" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_symmetric_difference_active_vertices",
+                  focus: {
+                    id: "kac_ward_claim_tagged_symmetric_difference_active_vertices",
+                    kind: "claim",
+                    title: { text: "対称差に接する点は短い標識の対に属する点に限る" },
+                    labels: ["claim_tagged_symmetric_difference_active_vertices"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-symmetric-difference-active-vertices"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedDifference_active_iff_short",
+                      "Ising2DLambda.NecSuf.KacWard.taggedDifference_active_iff_short",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。点 ", math(String.raw`\vec e\in\vec E_L`), " について、", ref("def_tagged_difference_active_vertices"), " の活動点であることと、", math(String.raw`D`), " において ", math(String.raw`\vec e`), " を含む唯一の対の標識が短いことは同値である。従って、活動点の集合は短い標識の対の端点集合に等しい。辺長一で長短の対の端点集合が同じでも標識は区別する。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph(["点 ", math(String.raw`\vec e`), " と、", math(String.raw`D`), " でそれを含む唯一の対 ", math(String.raw`d_{\vec e}`), " を固定する。この一意性は ", ref("def_finite_perfect_matching"), " による。"]),
+                      paragraph(["まず ", math(String.raw`d_{\vec e}`), " の標識が短いとする。", ref("claim_tagged_symmetric_difference_degree"), " の短い場合により、", math(String.raw`d_{\vec e}`), " と基準マッチングの長い対が標識付き対称差に残る。従って ", math(String.raw`\vec e`), " は対称差に接する。"]),
+                      paragraph(["逆に ", math(String.raw`\vec e`), " が対称差の標識付き対に接するとする。", ref("claim_tagged_symmetric_difference_degree"), " により、接する対が存在する場合は長い対と短い対が各一本残り、短い対は ", math(String.raw`D`), " の ", math(String.raw`d_{\vec e}`), " である。従って ", math(String.raw`d_{\vec e}`), " の標識は短い。二方向を合わせて同値を得る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

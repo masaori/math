@@ -1394,3 +1394,5 @@ import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceDegree
 import Ising2DLambda.KacWard.TaggedSymmetricDifferenceDegree
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceActiveVertices
 import Ising2DLambda.KacWard.TaggedDifferenceActiveVertices
+import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceActiveVertices
+import Ising2DLambda.KacWard.TaggedSymmetricDifferenceActiveVertices
