@@ -71136,6 +71136,50 @@ w_{\vec e,\vec f}&\ne0
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_short_pair_coefficient_nonzero",
+              labels: [],
+              title: { text: "短い対の係数の非零性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_short_pair_coefficient_nonzero",
+                  focus: {
+                    id: "kac_ward_claim_short_pair_coefficient_nonzero",
+                    kind: "claim",
+                    title: { text: "短い対の係数は零でない" },
+                    labels: ["claim_short_pair_coefficient_nonzero"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/short-pair-coefficient-nonzero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.shortPairCoefficient_ne_zero",
+                      "Ising2DLambda.NecSuf.KacWard.three_factor_coefficient_ne_zero",
+                      "Ising2DLambda.KacWard.shortPairCoefficient_ne_zero_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、同じ始点を持つ相異なる二辺 ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。", ref("def_tagged_matching_contributions"), " の短い対の係数は"]),
+                      displayMath(String.raw`q_{\vec e,\vec f}=w_{\vec e,\vec f}\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)\ne0\quad\text{in }\overline{\mathbb Q}.`),
+                      paragraph(["整数値のねじれ符号は標準の単射 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で代数的数として読む。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_gauge_pair_weight_nonzero"), "、", ref("claim_twist_sign_nonzero"), " と定数埋込みの単射性、", ref("claim_short_pair_rotation_phase_nonzero"), " から、", math(String.raw`w_{\vec e,\vec f}\ne0`), "、", math(String.raw`\varepsilon_{a,b}(\vec f)\ne0`), "、", math(String.raw`\rho(\iota(\vec e),\vec f)\ne0`), " を得る。前二者の積も ", math(String.raw`w_{\vec e,\vec f}\varepsilon_{a,b}(\vec f)\ne0`), " である（代数的数の零積性）。"]),
+                      displayMath(String.raw`\begin{aligned}
+q_{\vec e,\vec f}
+&=\bigl(w_{\vec e,\vec f}\varepsilon_{a,b}(\vec f)\bigr)\rho(\iota(\vec e),\vec f)
+&&(\because\ \blkref{def_tagged_matching_contributions}\text{ と乗法の結合律})\\
+&\ne0
+&&(\because\ \overline{\mathbb Q}\text{ の零積性を非零な二因子へ適用}).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_local_pairing_matching_label_support",
               labels: [],
               title: { text: "局所対合から構成した対への標識付け" },
