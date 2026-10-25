@@ -71042,6 +71042,58 @@ w_{\vec e,\vec f}&\ne0
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_twist_sign_nonzero",
+              labels: [],
+              title: { text: "短い対のねじれ符号の非零性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_twist_sign_nonzero",
+                  focus: {
+                    id: "kac_ward_claim_twist_sign_nonzero",
+                    kind: "claim",
+                    title: { text: "短い対に現れるねじれ符号は零でない" },
+                    labels: ["claim_twist_sign_nonzero"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/twist-sign-nonzero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.twistSign_eq_one_or_neg_one",
+                      "Ising2DLambda.KacWard.twistSign_qbar_ne_zero",
+                      "Ising2DLambda.KacWard.twistSign_constant_nonzero",
+                      "Ising2DLambda.NecSuf.KacWard.two_value_power_ne_zero",
+                      "Ising2DLambda.KacWard.twistSign_qbar_ne_zero_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N,\ L\ge1`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、向き付き辺 ", math(String.raw`\vec f\in\vec E_L`), " を取る。", ref("claim_twist_sign_from_parity"), " のねじれ符号は "]),
+                      displayMath(String.raw`C(\varepsilon_{a,b}(\vec f))\ne0\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["を満たす。整数 ", math(String.raw`\varepsilon_{a,b}(\vec f)`), " は標準の単射 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " の像として引数に入れる。", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " は ", ref("def_qbar_constant_embedding"), " の埋込みである。短い標識の対では ", ref("def_tagged_matching_contributions"), " の係数にこの符号が現れる。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_twist_parity"), " の ", math(String.raw`\kappa:=\kappa_{a,b}(\vec f)\in\{0,1\}`), " を取る。", ref("claim_twist_sign_from_parity"), " により ", math(String.raw`\varepsilon_{a,b}(\vec f)=(-1)^\kappa`), " である。"]),
+                      paragraph([math(String.raw`\kappa=0`), " のとき "]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)
+&=(-1)^0&&\bigl(\because\ \blkref{claim_twist_sign_from_parity}\text{ と }\kappa=0\bigr)\\
+&=1&&\bigl(\because\ \text{零乗}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`\kappa=1`), " のとき "]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)
+&=(-1)^1&&\bigl(\because\ \blkref{claim_twist_sign_from_parity}\text{ と }\kappa=1\bigr)\\
+&=-1&&\bigl(\because\ \text{一乗}\bigr).
+\end{aligned}`),
+                      paragraph(["従って符号は二つの非零な整数のいずれかである。", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " は単射であり、", ref("def_qbar_constant_embedding"), " も単射なので、定数多項式としても零でない。実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_local_pairing_matching_label_support",
               labels: [],
               title: { text: "局所対合から構成した対への標識付け" },

@@ -579,6 +579,7 @@ export const ALL_LABELS = [
   "claim_transverse_translates_of_periodic_plane_lift_disjoint",
   "claim_trivial_sector_configuration_reconstruction",
   "claim_twist_sign_from_parity",
+  "claim_twist_sign_nonzero",
   "claim_two_is_square_in_real_closed",
   "claim_two_support_coefficient_formula",
   "claim_unswitchable_standard_pair_forces_doubled_edge",
