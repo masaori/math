@@ -6331,6 +6331,65 @@ a+2b&=(a+b)+b
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_diagonal_zero_terms",
+        labels: [],
+        title: { text: "ブロック対角行列の置換展開に現れる零項" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_diagonal_zero_terms",
+            focus: {
+              id: "tools_claim_block_diagonal_zero_terms",
+              kind: "claim",
+              title: { text: "ブロックを保たない置換の行列式項は零" },
+              labels: ["claim_block_diagonal_zero_terms"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/block-diagonal-zero-terms"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_signedPermutationTerm_eq_zero",
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_det_eq_sum_preserving",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockDiagonal_product_zero",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockDiagonal_weighted_sum_filter",
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_det_eq_sum_preserving_from_necSuf",
+              ],
+              statement: [
+                paragraph([
+                  "有限線型順序集合 ", math(String.raw`\mathcal J`), "、有限集合 ",
+                  math(String.raw`\mathcal K`), "、ブロック写像 ",
+                  math(String.raw`b:\mathcal J\to\mathcal K`), "、行列 ",
+                  math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`),
+                  "（", ref("def_qbar_polynomial_matrix"), "）を取る。",
+                  math(String.raw`b(i)\ne b(j)`), " なら ", math(String.raw`B_{i,j}=0`), " と仮定する。",
+                  "ブロックを保つ置換の集合を",
+                ]),
+                displayMath(String.raw`\operatorname{Perm}_b(\mathcal J):=\{\sigma\in\operatorname{Perm}(\mathcal J)\mid\forall i\in\mathcal J,\ b(\sigma(i))=b(i)\}`),
+                paragraph(["と定める。任意の ", math(String.raw`\sigma\notin\operatorname{Perm}_b(\mathcal J)`), " の行列式項は零であり、", ref("def_qbar_polynomial_determinant"), " の行列式は"]),
+                displayMath(String.raw`\det_x(B)=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}B_{i,\sigma(i)}`),
+                paragraph(["となる。有限集合と代数的数係数多項式だけを使い、実数体・複素数体へは脱出しない。"]),
+              ],
+              proof: [
+                paragraph(["ブロックを保たない ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J)`), " を取る。否定の量化子を展開すると、ある ", math(String.raw`j\in\mathcal J`), " が存在して ", math(String.raw`b(\sigma(j))\ne b(j)`), " である。仮定より ", math(String.raw`B_{j,\sigma(j)}=0`), " となる。有限積をこの因子で分けると"]),
+                displayMath(String.raw`\begin{aligned}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&=B_{j,\sigma(j)}\prod_{i\in\mathcal J\setminus\{j\}}B_{i,\sigma(i)}
+&&(\because\ \text{有限積から }j\text{ の因子を取り出す})\\
+&=0\cdot\prod_{i\in\mathcal J\setminus\{j\}}B_{i,\sigma(i)}
+&&(\because\ b(j)\ne b(\sigma(j))\text{ とブロック外の零成分})\\
+&=0
+&&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
+\end{aligned}`),
+                paragraph(["である。よって定数多項式の符号を掛けた項も零である。", ref("def_qbar_polynomial_determinant"), " の置換展開を、ブロックを保つ置換と保たない置換に分け、後者の零項を除くと主張の和を得る。空の添字集合でも保たない置換が存在しないので同じ等式が成り立つ。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
