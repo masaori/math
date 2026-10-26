@@ -126,8 +126,74 @@ theorem taggedDifference_incident_iff {L : ℕ}
         (shortUnderlyingPairs t) e
       let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
       d ≠ r ∧ (q = d ∨ q = r) := by
-  exact Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff
-    D ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (shortUnderlyingPairs t) e q
+  classical
+  let R : PerfectMatching (OrientedEdge L) :=
+    ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
+  let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D (shortUnderlyingPairs t) e
+  let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
+  have hD (u : Set (OrientedEdge L) × Bool) :
+      (u ∈ concreteTaggedPairs D t ∧ e ∈ u.1) ↔ u = d := by
+    constructor
+    · rintro ⟨⟨p, hp, rfl⟩, he⟩
+      have hp0 : ({e, perfectMatchingMate D e} : Set (OrientedEdge L)) ∈ D.val :=
+        (perfectMatchingMate_spec D e).2
+      have heq : p = ({e, perfectMatchingMate D e} : Set (OrientedEdge L)) :=
+        (D.property.2 e).unique ⟨hp, he⟩ ⟨hp0, by simp⟩
+      subst p
+      rfl
+    · intro hu
+      rw [hu]
+      exact ⟨⟨{e, perfectMatchingMate D e},
+        (perfectMatchingMate_spec D e).2, rfl⟩,
+        by simp [d, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩
+  have hR (u : Set (OrientedEdge L) × Bool) :
+      (u ∈ concreteReferenceTaggedPairs L ∧ e ∈ u.1) ↔ u = r := by
+    constructor
+    · rintro ⟨⟨p, hp, rfl⟩, he⟩
+      have hp0 : ({e, perfectMatchingMate R e} : Set (OrientedEdge L)) ∈ R.val :=
+        (perfectMatchingMate_spec R e).2
+      have heq : p = ({e, perfectMatchingMate R e} : Set (OrientedEdge L)) :=
+        (R.property.2 e).unique ⟨hp, he⟩ ⟨hp0, by simp⟩
+      subst p
+      simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
+    · intro hu
+      rw [hu]
+      exact ⟨⟨{e, perfectMatchingMate R e},
+        (perfectMatchingMate_spec R e).2,
+        by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩,
+        by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩
+  have hdmem : e ∈ d.1 := by simp [d, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
+  have hrmem : e ∈ r.1 := by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
+  have hEq : concreteTaggedDifference D t =
+      Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
+        Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅ := by
+    ext u
+    simp [concreteTaggedDifference, concreteTaggedPairs,
+      concreteReferenceTaggedPairs, Ising2DLambda.NecSuf.KacWard.taggedEdges, R]
+  dsimp
+  rw [← hEq]
+  change (q ∈ concreteTaggedPairs D t ∆ concreteReferenceTaggedPairs L ∧ e ∈ q.1) ↔
+    d ≠ r ∧ (q = d ∨ q = r)
+  constructor
+  · rintro ⟨hq, he⟩
+    rcases Set.mem_symmDiff.mp hq with ⟨ha, hb⟩ | ⟨hb, ha⟩
+    · have hqd := (hD q).mp ⟨ha, he⟩
+      refine ⟨?_, Or.inl hqd⟩
+      intro heq
+      exact hb ((hR q).mpr (hqd.trans heq)).1
+    · have hqr := (hR q).mp ⟨hb, he⟩
+      refine ⟨?_, Or.inr hqr⟩
+      intro heq
+      exact ha ((hD q).mpr (hqr.trans heq.symm)).1
+  · rintro ⟨hne, hq⟩
+    rcases hq with hq | hq
+    · have he : e ∈ q.1 := hq ▸ hdmem
+      refine ⟨Set.mem_symmDiff.mpr (Or.inl ⟨((hD q).mpr hq).1, ?_⟩), he⟩
+      intro hb
+      exact hne (hq.symm.trans ((hR q).mp ⟨hb, he⟩))
+    · have he : e ∈ q.1 := hq ▸ hrmem
+      refine ⟨Set.mem_symmDiff.mpr (Or.inr ⟨((hR q).mpr hq).1, ?_⟩), he⟩
+      intro ha
+      exact hne (((hD q).mp ⟨ha, he⟩).symm.trans hq)
 
 end Ising2DLambda.KacWard
