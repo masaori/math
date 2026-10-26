@@ -4,8 +4,8 @@
 
 **対象ラベル**: `claim_open_square_density_lower_set_subset_periodic_le_one`
 
-- 実行日: 2026-08-17
-- 状態: PASS（$L\le3$、有理点 6 点、所属の証人 1632 組（うち密度を要する段が空でない証人 931 組）、662530 検査。所要 10 秒程度）
+- 実行日: 2026-10-26
+- 状態: PASS（$L\le3$、有理点 6 点、所属の証人 1632 組（うち密度を要する段が空でない証人 931 組）、667534 検査）
 - 帰属: `ZZ`/`QQ` と素因数分解、有限台辞書による厳密計算。浮動小数点は使わない
   （主張は $\Lambda_{\mathbb{Q}}$ で閉じており、実数体も実対数も現れない）。
 
@@ -26,7 +26,7 @@ $\varepsilon$ を引いた元で、有限範囲 $N\le L\le3$ で $A^{\mathrm{op}
   （本文は $n$ を明示的に与えるが、ここでは存在だけを使う）、$N':=N+n$ が $N'\ge N\ge1$、$N'\ge n$ を満たすこと。
 - **準備の第四**（誤差の比較。密度を要しないので $N'\le L\le60$ で検査）: $\tfrac1L\cdot(2\cdot\delta)\le\varepsilon'$ と
   一続き五段 $-\varepsilon'\le-(\tfrac1L\cdot(2\cdot\delta))=-((\tfrac1L\cdot2)\cdot\delta)=-(\tfrac2L\cdot\delta)=-(\tfrac2L\cdot(-\iota(\log q)))=\tfrac2L\cdot\iota(\log q)$。
-- **本体**（密度を要するので $N'\le L\le3$ で検査）: 一続き八段
+- **本体**（密度を要するので $N'\le L\le3$ で検査）: 加法の可換則を独立した二行として照合し、
   $\mu+\varepsilon'=(\mu+\varepsilon')+0=\dots=(\mu+\varepsilon)+(-\varepsilon')\le\Psi^{\mathrm{op}}_L(q)+(-\varepsilon')\le\Psi^{\mathrm{op}}_L(q)+\tfrac2L\cdot\iota(\log q)\le\Psi_L(q)$
   と推移律の結論、および証人 $(\varepsilon',N')$ で $\mu\in A^{\mathrm{per}}(q)$（有限範囲の所属）。
   $N'>3$ の証人では密度を要する段が空になる。空でなかった証人の数を出力に含める（931 組）。

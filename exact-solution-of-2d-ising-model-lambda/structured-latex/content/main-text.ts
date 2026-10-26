@@ -81429,8 +81429,12 @@ const chapter_real_escape = defineSection({
 &&(\because\ \text{準備の第一 }\varepsilon'+\varepsilon'=\varepsilon)\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)+(-\varepsilon')
 &&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=\mu+\varepsilon\text{、}\mu:=\Psi^{\mathrm{op}}_L(q)\text{、}\nu:=-\varepsilon'\text{ で読む。}\mu+\varepsilon\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)\text{ は証人の性質。}N\le L)\\
-&\le_{\Lambda_{\mathbb{Q}}}\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=-\varepsilon'\text{、}\mu:=\tfrac{2}{L}\cdot\iota(\log q)\text{、}\nu:=\Psi^{\mathrm{op}}_L(q)\text{ で読み、両辺を加法の可換則で並べ替える。}-\varepsilon'\le_{\Lambda_{\mathbb{Q}}}\tfrac{2}{L}\cdot\iota(\log q)\text{ は準備の第四})\\
+&=(-\varepsilon')+\Psi^{\mathrm{op}}_L(q)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の可換則})\\
+&\le_{\Lambda_{\mathbb{Q}}}\bigl(\tfrac{2}{L}\cdot\iota(\log q)\bigr)+\Psi^{\mathrm{op}}_L(q)
+&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=-\varepsilon'\text{、}\mu:=\tfrac{2}{L}\cdot\iota(\log q)\text{、}\nu:=\Psi^{\mathrm{op}}_L(q)\text{ で読む。}-\varepsilon'\le_{\Lambda_{\mathbb{Q}}}\tfrac{2}{L}\cdot\iota(\log q)\text{ は準備の第四})\\
+&=\Psi^{\mathrm{op}}_L(q)+\tfrac{2}{L}\cdot\iota(\log q)
+&&(\because\ \blkref{def_rational_log_order_group}\text{ の加法の可換則})\\
 &\le_{\Lambda_{\mathbb{Q}}}\Psi_L(q)
 &&(\because\ \blkref{claim_periodic_open_boundary_comparison_density_le_one}\text{ の左の不等式を }L:=L\text{、}q:=q\text{ で読む。}L\ge1\text{、}0<q\le1)
 \end{aligned}`),

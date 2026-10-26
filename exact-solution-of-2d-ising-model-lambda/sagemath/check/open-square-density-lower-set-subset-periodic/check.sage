@@ -256,11 +256,16 @@ for q in test_points:
                     s6 = lamq_add(seq_op[L], qneg(eps_h))
                     assert rational_log_order_le(lamq_add(mu, eps), seq_op[L])                    # 証人の性質（N ≤ L）
                     assert rational_log_order_le(s5, s6)                                          # add_monotone
+                    s6_commuted = lamq_add(qneg(eps_h), seq_op[L])
+                    assert s6 == s6_commuted                                                     # 加法の可換則
+                    s7_commuted = lamq_add(err, seq_op[L])
+                    assert rational_log_order_le(s6_commuted, s7_commuted)                       # add_monotone（準備の第四）
                     s7 = lamq_add(seq_op[L], err)
-                    assert rational_log_order_le(s6, s7)                                          # add_monotone（準備の第四）
+                    assert s7_commuted == s7                                                       # 加法の可換則
+                    assert rational_log_order_le(s6, s7)                                          # 推移律
                     assert rational_log_order_le(s7, seq_per[L])                                  # comparison_density の左
                     assert rational_log_order_le(s0, seq_per[L])                                  # 推移律の結論
-                    total += 10
+                    total += 13
                 # 主張そのもの（証人 (ε', N') で A^per(q) に所属。有限範囲）
                 if Np <= L_MAX:
                     assert in_lower_set_with_witness(seq_per, mu, eps_h, Np)
