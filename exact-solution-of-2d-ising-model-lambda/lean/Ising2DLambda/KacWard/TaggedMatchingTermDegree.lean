@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
-import Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermDegree
 
 namespace Ising2DLambda.KacWard
 
@@ -66,7 +65,7 @@ theorem taggedMatching_term_natDegree {L : ℕ} (z : Qbar) (s : SpinStructure)
   have hc : taggedMatchingTermCoefficient z s D t ≠ 0 := by
     intro h
     exact hterm (by simp [h])
-  rw [Ising2DLambda.NecSuf.KacWard.monomial_term_natDegree _ _ hc]
+  rw [natDegree_mul_C hc, natDegree_X_pow]
   exact taggedMatching_short_pairs_card z s D t ht
     (by simpa only [← taggedMatching_term_monomial] using hterm)
 
