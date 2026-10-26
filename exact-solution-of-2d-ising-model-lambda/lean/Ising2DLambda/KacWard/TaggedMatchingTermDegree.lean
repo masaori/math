@@ -32,9 +32,18 @@ theorem taggedMatching_term_monomial {L : ℕ} (z : Qbar) (s : SpinStructure)
         (∏ p ∈ t, gaugedShortContribution z s p)) =
       X ^ t.card * C (taggedMatchingTermCoefficient z s D t) := by
   classical
-  simp only [gaugedLongContribution, gaugedShortContribution, qbarConst,
-    matchingSignPolynomial]
-  rw [Ising2DLambda.NecSuf.KacWard.shortProduct_monomial]
+  have hshort (u : Finset (OrientedEdge L × OrientedEdge L)) :
+      (∏ p ∈ u, gaugedShortContribution z s p) =
+        X ^ u.card * C (∏ p ∈ u, shortWeight z s p) := by
+    induction u using Finset.induction_on with
+    | empty => simp
+    | @insert p u hp ih =>
+      rw [Finset.prod_insert hp, ih, Finset.card_insert_of_notMem hp,
+        Finset.prod_insert hp, map_mul]
+      simp only [gaugedShortContribution, qbarConst, shortWeight]
+      ring
+  rw [hshort]
+  simp only [gaugedLongContribution, qbarConst, matchingSignPolynomial]
   unfold taggedMatchingTermCoefficient longWeight shortWeight
   simp only [← map_prod, map_mul, map_pow, map_neg, map_one]
   ring
