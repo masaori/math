@@ -72052,6 +72052,49 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_reference_long_mate_reversal",
+              labels: [],
+              title: { text: "長い対の相手と向きの反転" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_reference_long_mate_reversal",
+                  focus: {
+                    id: "kac_ward_claim_reference_long_mate_reversal",
+                    kind: "claim",
+                    title: { text: "基準マッチングの長い相手は向きを反転した辺である" },
+                    labels: ["claim_reference_long_mate_reversal"],
+                    habitat: "N",
+                    verification: ["sagemath/check/reference-long-mate-reversal"],
+                    lean: [
+                      "Ising2DLambda.KacWard.referenceLongMate_eq_reversal",
+                      "Ising2DLambda.NecSuf.KacWard.referenceLongMate_eq_involution",
+                      "Ising2DLambda.KacWard.referenceLongMate_eq_reversal_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " を取る。", ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"), " の基準完全マッチングを ", math(String.raw`\mathcal D_0`), "、", ref("claim_perfect_matching_involution"), " の相手写像を ", math(String.raw`m_{\mathcal D_0}:\vec E_L\to\vec E_L`), " とすると、"]),
+                      displayMath(String.raw`m_{\mathcal D_0}(\vec e)=\iota(\vec e)`),
+                      paragraph(["である。", math(String.raw`L=1`), " でも向きの異なる二辺は相異なる。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_reference_long_pairs"), " により ", math(String.raw`\{\vec e,\iota(\vec e)\}\in\mathcal D_0`), " である。", ref("claim_reversal_is_involution"), " と ", ref("claim_reversal_has_no_fixed_point"), " により反転は不動点のない対合である。", ref("claim_perfect_matching_involution"), " の相手の一意性をこの対へ適用すると"]),
+                      displayMath(String.raw`\begin{aligned}
+m_{\mathcal D_0}(\vec e)
+&=\iota(\vec e)
+&&(\because\ \blkref{claim_perfect_matching_involution}\text{ の相手の一意性})
+\end{aligned}`),
+                      paragraph(["を得る。辺長一でも ", ref("claim_reversal_has_no_fixed_point"), " により二端は相異なる。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

@@ -458,6 +458,7 @@ export const ALL_LABELS = [
   "claim_real_logarithm_int_power",
   "claim_reconnection_turning_difference",
   "claim_reference_long_matching",
+  "claim_reference_long_mate_reversal",
   "claim_repeated_adjacent_sum_difference",
   "claim_representative_increment",
   "claim_residual_fiber_phase_signed_count",
