@@ -45,6 +45,13 @@ for u in units:
         assert L(u * v) == L(u) + L(v)
         checks += 1
 
+# 準備の第二: ι が逆元を保つ三等号（模型では ι は有理数の恒等写像）
+for v in units:
+    assert QQ(v) * QQ(v ** (-1)) == QQ(v * v ** (-1))
+    assert QQ(v * v ** (-1)) == QQ(1)
+    assert QQ(1) == 1
+    checks += 3
+
 # 準備の第三: 有限積の実対数は和（S の元の個数についての帰納法）
 import itertools
 for r in range(0, 4):

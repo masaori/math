@@ -6,7 +6,7 @@ namespace Ising2DLambda.KacWard
 open Ising2DLambda.AlgebraicEigenvalue
 attribute [local instance] Classical.propDecidable
 
-private noncomputable def shortInvolution {L : ℕ}
+noncomputable def shortInvolution {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L)) :
     FixedPointFreeInvolution {i : OrientedEdge L // i ∈
@@ -17,7 +17,7 @@ private noncomputable def shortInvolution {L : ℕ}
     (fun i h => perfectMatchingMate_ne D i.1 (congrArg Subtype.val h)),
     (fun i => Subtype.ext (perfectMatchingMate_involutive D i.1))⟩
 
-private noncomputable def longInvolution {L : ℕ}
+noncomputable def longInvolution {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L)) :
     FixedPointFreeInvolution {i : OrientedEdge L // i ∈

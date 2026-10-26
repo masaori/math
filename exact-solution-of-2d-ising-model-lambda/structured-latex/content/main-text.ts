@@ -71935,6 +71935,44 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_difference_alternating_cycle",
+              labels: [],
+              title: { text: "分離した二歩軌道の交互閉路" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_difference_alternating_cycle",
+                  focus: {
+                    id: "kac_ward_claim_tagged_difference_alternating_cycle",
+                    kind: "claim",
+                    title: { text: "対になった二歩軌道は頂点単純な交互閉路になる" },
+                    labels: ["claim_tagged_difference_alternating_cycle"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-difference-alternating-cycle"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_alternatingCycle",
+                      "Ising2DLambda.NecSuf.KacWard.alternatingCycle",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " と活動点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " を取る。", ref("def_matching_pair_component_minimum"), " の意味で二歩軌道の合併の最小元を ", math(String.raw`m`), " とし、", ref("def_matching_pair_successor"), " の第一の相手を ", math(String.raw`m_D`), "、第二の相手を ", math(String.raw`m_{\mathcal D_0}`), " とした後続置換を ", math(String.raw`\sigma`), " とする。", math(String.raw`n:=\operatorname{per}_{\sigma}(m)\in\mathbb N_{\ge1}`), " は ", ref("def_finite_permutation_minimal_period"), " の最小正周期とする。"]),
+                      displayMath(String.raw`c(r):=\sigma^{[r]}(m)\quad(0\le r<n),\qquad c(n):=c(0)=m`),
+                      paragraph(["と置くと、", math(String.raw`n`), " は偶数で、", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なり、二歩軌道の合併をちょうど一度ずつ通る。隣接する二点を結ぶ対は短い標識と長い標識が交互に現れる。最後の点から ", math(String.raw`c(0)`), " へも同じ規則で進むので、頂点（向き付き辺）が相異なる閉路を得る。", math(String.raw`L=1`), " で二元集合として同じ対が二回現れても、長短の標識を区別した二辺閉路である。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_active_mates"), " と ", ref("claim_perfect_matching_involution"), " により、活動点上の ", math(String.raw`m_D,m_{\mathcal D_0}`), " は不動点のない二つの対合である。", ref("claim_tagged_difference_two_step_orbit"), " の二歩はこの二対合の合成であり、", ref("claim_tagged_difference_orbit_separation"), " により二つの二歩軌道は交わらない。"]),
+                      paragraph([ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma`), " は置換である。", ref("claim_matching_pair_even_orbit"), " により軌道長は偶数である。", ref("claim_finite_permutation_orbit_enumeration"), " により最小正周期未満の反復回数と軌道上の点は一対一に対応し、", ref("claim_matching_pair_reconstructed_orbit"), " によりその軌道は二歩軌道の合併と一致する。従って列 ", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる点をちょうど一度ずつ並べる。"]),
+                      paragraph([ref("def_finite_permutation_minimal_period"), " の帰還等式から ", math(String.raw`c(n)=m=c(0)`), " である。", ref("def_matching_pair_successor"), " により、第一色にいる点の次は短い相手、第二色にいる点の次は長い相手である。", ref("claim_matching_pair_successor_color"), " により後続のたびに色が反転するから、閉路の対は長短交互である。偶数長なので最後から最初への対も交替を保つ。各相手は不動点を持たないので最小の閉路長は二である。辺長一でも標識付きの二対は異なる。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
@@ -80355,11 +80393,21 @@ const chapter_real_escape = defineSection({
                           math(String.raw`S`),
                           " の元の個数についての帰納法。空積は ",
                           math(String.raw`1`),
-                          "）、また ",
+                          "）である。また ",
                           math(String.raw`v\in\mathbb{Q}_{>0}`),
-                          " について ",
-                          math(String.raw`\iota(v)\cdot\iota(v^{-1})=\iota(v\cdot v^{-1})=\iota(1)=1`),
-                          " なので ",
+                          " について",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\iota(v)\cdot\iota(v^{-1})
+&=\iota(v\cdot v^{-1})
+&&(\because\ \iota\text{ は乗法を保つ。}\blkref{def_real_logarithm})\\
+&=\iota(1)
+&&(\because\ v\cdot v^{-1}=1\text{。}\mathbb{Q}\text{ の逆元})\\
+&=1
+&&(\because\ \iota(1)=1\text{。}\blkref{def_real_logarithm})
+\end{aligned}`),
+                        paragraph([
+                          "である。よって ",
                           math(String.raw`\iota(v^{-1})=\iota(v)^{-1}`),
                           "（",
                           math(String.raw`\mathbb{R}`),

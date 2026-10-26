@@ -1400,3 +1400,5 @@ import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceTwoStepOrbit
 import Ising2DLambda.KacWard.TaggedDifferenceTwoStepOrbit
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceOrbitSeparation
 import Ising2DLambda.KacWard.TaggedDifferenceOrbitSeparation
+import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceAlternatingCycle
+import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycle
