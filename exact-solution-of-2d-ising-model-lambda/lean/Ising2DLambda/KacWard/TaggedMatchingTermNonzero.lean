@@ -2,7 +2,6 @@ import Ising2DLambda.KacWard.LocalPairingMatching
 import Ising2DLambda.KacWard.GaugePairWeightNonzero
 import Ising2DLambda.KacWard.ShortPairCoefficientNonzero
 import Ising2DLambda.KacWard.TaggedMatchingTermDegree
-import Ising2DLambda.NecSuf.KacWard.TaggedMatchingTermNonzero
 
 namespace Ising2DLambda.KacWard
 
@@ -50,10 +49,17 @@ theorem localPairingMatching_term_nonzero {L : ℕ} [NeZero L]
     apply Polynomial.C_ne_zero.mpr
     simpa only [mul_assoc] using
       shortPairCoefficient_ne_zero z hz s p.1 p.2 hsource.symm hne.symm
-  have h := Ising2DLambda.NecSuf.KacWard.labelled_term_ne_zero
-    (matchingOrientedPairs D) t (matchingSignPolynomial D)
-    (gaugedLongContribution z s) (gaugedShortContribution z s)
-    hsign hlongFactor hshortFactor
-  simpa only [mul_assoc] using h
+  have hminus : (-1 : Polynomial Qbar) ^ t.card ≠ 0 :=
+    pow_ne_zero _ (neg_ne_zero.mpr one_ne_zero)
+  have hlongProd :
+      (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) ≠ 0 := by
+    apply Finset.prod_ne_zero_iff.mpr
+    intro p hp
+    exact hlongFactor p hp
+  have hshortProd : (∏ p ∈ t, gaugedShortContribution z s p) ≠ 0 := by
+    apply Finset.prod_ne_zero_iff.mpr
+    intro p hp
+    exact hshortFactor p hp
+  exact mul_ne_zero hsign (mul_ne_zero (mul_ne_zero hminus hlongProd) hshortProd)
 
 end Ising2DLambda.KacWard
