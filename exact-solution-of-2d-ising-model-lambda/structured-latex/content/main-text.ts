@@ -6450,6 +6450,75 @@ a+2b&=(a+b)+b
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_preserving_permutation_sign",
+        labels: [],
+        title: { text: "ブロックを保つ置換の符号" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_preserving_permutation_sign",
+            focus: {
+              id: "tools_claim_block_preserving_permutation_sign",
+              kind: "claim",
+              title: { text: "ブロックを保つ置換の符号は各ブロックの符号の積" },
+              labels: ["claim_block_preserving_permutation_sign"],
+              habitat: "Z",
+              verification: ["sagemath/check/block-preserving-permutation-sign"],
+              statement: [
+                paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J`), "、有限集合 ", math(String.raw`\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), " を取る。", ref("claim_block_preserving_permutation_bijection"), " の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と各ファイバー上の制限 ", math(String.raw`\sigma_k\in\operatorname{Perm}(\mathcal J_k)`), " に対して"]),
+                displayMath(String.raw`\operatorname{sgn}(\sigma)=\prod_{k\in\mathcal K}\operatorname{sgn}(\sigma_k)\in\mathbb Z`),
+                paragraph(["である。各ファイバーは ", math(String.raw`\mathcal J`), " の順序を引き継ぎ、空のファイバーの符号は ", math(String.raw`1`), " とする。符号は ", ref("def_permutation_sign"), " の転倒数で定める。"]),
+              ],
+              proof: [
+                paragraph(["証明のためだけに ", math(String.raw`\mathcal K`), " に線型順序を固定する。任意の ", math(String.raw`k<l`), " に対し ", math(String.raw`C_{k,l}:=\mathcal J_k\times\mathcal J_l`), " とし、", math(String.raw`c_{k,l}:=|\{(i,j)\in C_{k,l}:i<j\}|\in\mathbb N`), " と置く。", math(String.raw`(i,j)\mapsto(\sigma(i),\sigma(j))`), " は ", math(String.raw`C_{k,l}`), " の全単射なので"]),
+                displayMath(String.raw`\begin{aligned}
+|\{(i,j)\in C_{k,l}:\sigma(i)<\sigma(j)\}|
+&=|\{(i,j)\in C_{k,l}:i<j\}|
+&&(\because\ \text{ファイバーごとの制限は全単射})\\
+&=c_{k,l}
+&&(\because\ c_{k,l}\text{ の定義})
+\end{aligned}`),
+                paragraph(["となる。異なるファイバーの二元からなる組のうち、", math(String.raw`\sigma`), " が順序を逆転させる組の数を ", math(String.raw`N_{k,l}`), " とする。各 ", math(String.raw`(i,j)\in C_{k,l}`), " では二つの狭義順序 ", math(String.raw`i<j`), " と ", math(String.raw`\sigma(i)<\sigma(j)`), " の真偽が異なるときに限り逆転する。真理値の排他的論理和を整数の偶奇へ写すと"]),
+                displayMath(String.raw`\begin{aligned}
+N_{k,l}
+&\equiv\sum_{(i,j)\in C_{k,l}}\bigl([i<j]+[\sigma(i)<\sigma(j)]\bigr)\pmod 2
+&&(\because\ \text{異なる真理値の指示数は和と同じ偶奇})\\
+&\equiv c_{k,l}+c_{k,l}\pmod 2
+&&(\because\ \text{直前の全単射による等式})\\
+&\equiv0\pmod 2
+&&(\because\ \mathbb Z/2\mathbb Z\text{ の加法})
+\end{aligned}`),
+                paragraph(["を得る。同じファイバー内の転倒対は、引き継いだ順序に関する ", math(String.raw`\sigma_k`), " の転倒対に一対一に対応する。異なるファイバーの転倒対は ", math(String.raw`k<l`), " ごとに重複なく分かれる。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{inv}(\sigma)
+&=\sum_{k\in\mathcal K}\operatorname{inv}(\sigma_k)+\sum_{k<l}N_{k,l}
+&&(\because\ \text{転倒対を同じファイバーと異なるファイバーへ分割})\\
+&\equiv\sum_{k\in\mathcal K}\operatorname{inv}(\sigma_k)\pmod 2
+&&(\because\ N_{k,l}\equiv0\pmod 2)
+\end{aligned}`),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\sigma)
+&=(-1)^{\operatorname{inv}(\sigma)}
+&&(\because\ \blkref{def_permutation_sign})\\
+&=(-1)^{\sum_{k\in\mathcal K}\operatorname{inv}(\sigma_k)}
+&&(\because\ \text{直前の偶奇の等式})\\
+&=\prod_{k\in\mathcal K}(-1)^{\operatorname{inv}(\sigma_k)}
+&&(\because\ \mathbb Z\text{ の冪の法則})\\
+&=\prod_{k\in\mathcal K}\operatorname{sgn}(\sigma_k)
+&&(\because\ \blkref{def_permutation_sign})
+\end{aligned}`),
+                paragraph(["である。空のファイバーでは転倒数は零、符号は一である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
