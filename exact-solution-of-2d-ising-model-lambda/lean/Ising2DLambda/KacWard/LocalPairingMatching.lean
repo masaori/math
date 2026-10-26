@@ -87,23 +87,20 @@ theorem taggedMatching_recovers_matching {L : ℕ} (z : Qbar)
     localPairingMatching (taggedComplementEdges D t) κ
       hlocalSelected hlocalInvolutive hlocalNe = D := by
   classical
-  apply Ising2DLambda.NecSuf.KacWard.matching_eq_of_branch_mates
-    (fun M h => perfectMatchingMate M h)
-    (fun M N hMN => by
-      apply (perfectMatchingToInvolution_bijective (J := OrientedEdge L)).1
-      apply Subtype.ext
-      funext h
-      exact congrFun hMN h)
-    (fun h => h.1 ∈ taggedComplementEdges D t)
-  · intro h hh
-    calc
+  apply (perfectMatchingToInvolution_bijective (J := OrientedEdge L)).1
+  apply Subtype.ext
+  funext h
+  change perfectMatchingMate
+      (localPairingMatching (taggedComplementEdges D t) κ
+        hlocalSelected hlocalInvolutive hlocalNe) h = perfectMatchingMate D h
+  by_cases hh : h.1 ∈ taggedComplementEdges D t
+  · calc
       perfectMatchingMate
           (localPairingMatching (taggedComplementEdges D t) κ
             hlocalSelected hlocalInvolutive hlocalNe) h = κ h :=
         localPairingMatching_recovers_local_mate _ _ _ _ _ h hh
       _ = perfectMatchingMate D h := hκ h hh
-  · intro h hh
-    calc
+  · calc
       perfectMatchingMate
           (localPairingMatching (taggedComplementEdges D t) κ
             hlocalSelected hlocalInvolutive hlocalNe) h = reversal h := by
