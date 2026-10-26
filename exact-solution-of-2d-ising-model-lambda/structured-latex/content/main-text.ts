@@ -71727,6 +71727,10 @@ q_{\vec e,\vec f}
                       lean: [
                         "Ising2DLambda.KacWard.shortUnderlyingPairs",
                         "Ising2DLambda.KacWard.shortUnderlyingPairs_iff",
+                        "Ising2DLambda.KacWard.concreteTaggedPairs",
+                        "Ising2DLambda.KacWard.concreteReferenceTaggedPairs",
+                        "Ising2DLambda.KacWard.concreteTaggedDifference",
+                        "Ising2DLambda.KacWard.concreteTaggedDifference_eq_necSuf",
                         "Ising2DLambda.NecSuf.KacWard.taggedEdges",
                       ],
                       statement: [
@@ -71788,6 +71792,8 @@ q_{\vec e,\vec f}
                       labels: ["def_tagged_difference_active_vertices"],
                       habitat: "N",
                       lean: [
+                        "Ising2DLambda.KacWard.concreteTaggedActiveVertices",
+                        "Ising2DLambda.KacWard.concreteTaggedActiveVertices_eq_necSuf",
                         "Ising2DLambda.KacWard.taggedActiveByLabels",
                         "Ising2DLambda.KacWard.taggedActiveByLabels_eq_activeVertices",
                         "Ising2DLambda.NecSuf.KacWard.activeVertices",

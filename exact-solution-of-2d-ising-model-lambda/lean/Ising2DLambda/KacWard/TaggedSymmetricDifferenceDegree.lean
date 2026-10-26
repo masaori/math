@@ -33,6 +33,33 @@ theorem shortUnderlyingPairs_iff {L : ℕ}
   · intro h
     exact ⟨p, h, rfl⟩
 
+/-- The matching pairs retain their short labels as data. -/
+noncomputable def concreteTaggedPairs {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Set (Set (OrientedEdge L) × Bool) := by
+  classical
+  exact {q | ∃ p ∈ D.val, q = (p, decide (p ∈ shortUnderlyingPairs t))}
+
+/-- Every reference pair has the long label. -/
+def concreteReferenceTaggedPairs (L : ℕ) :
+    Set (Set (OrientedEdge L) × Bool) :=
+  {q | ∃ p ∈ referenceLongPairs L, q = (p, false)}
+
+/-- Symmetric difference is taken after attaching labels. -/
+noncomputable def concreteTaggedDifference {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Set (Set (OrientedEdge L) × Bool) :=
+  concreteTaggedPairs D t ∆ concreteReferenceTaggedPairs L
+
+/-- An oriented edge is active when it meets a retained labelled pair. -/
+noncomputable def concreteTaggedActiveVertices {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Set (OrientedEdge L) :=
+  {e | ∃ q ∈ concreteTaggedDifference D t, e ∈ q.1}
+
 theorem taggedDifference_local_degree {L : ℕ} (z : Qbar)
     (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
