@@ -72095,6 +72095,61 @@ m_{\mathcal D_0}(\vec e)
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_projected_edge_cycle_closure",
+              labels: [],
+              title: { text: "交互閉路から射影した辺列の閉性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_projected_edge_cycle_closure",
+                  focus: {
+                    id: "kac_ward_claim_projected_edge_cycle_closure",
+                    kind: "claim",
+                    title: { text: "第一色の点を取り出した辺列は閉じる" },
+                    labels: ["claim_projected_edge_cycle_closure"],
+                    habitat: "N",
+                    verification: ["sagemath/check/projected-edge-cycle-closure"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_projectedClosedEdgeCycle",
+                      "Ising2DLambda.NecSuf.KacWard.projectedClosedEdgeCycle",
+                      "Ising2DLambda.KacWard.taggedActive_projectedClosedEdgeCycle_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " と、その標識付き対称差の交互閉路を取る。", ref("claim_tagged_difference_alternating_cycle"), " の第一色の始点を ", math(String.raw`m\in\vec E_L`), "、後続置換を ", math(String.raw`\sigma`), "、最小正周期を ", math(String.raw`n\in\mathbb N_{\ge1}`), " とし、", math(String.raw`c(r):=\sigma^{[r]}(m)\in\vec E_L\ (0\le r\le n)`), " と置く。", math(String.raw`n=2k`), " を満たす ", math(String.raw`k\in\mathbb N_{\ge1}`), " を取り、" ]),
+                      displayMath(String.raw`e_r:=c(2r)\in\vec E_L\qquad(0\le r\le k)`),
+                      paragraph(["と定める。このとき各 ", math(String.raw`0\le r<k`), " について、長い対の相手は ", math(String.raw`c(2r+2)=\iota(c(2r+1))=e_{r+1}`), " であり、", math(String.raw`e_k=e_0`), " である。辺長一でも長短の標識を区別し、実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_alternating_cycle"), " により ", math(String.raw`n`), " は偶数で正である。従って自然数 ", math(String.raw`k\ge1`), " が存在して ", math(String.raw`n=2k`), " となる。第一色から後続置換で一歩進むと第二色へ移り、そこから長い対の相手へ進むと再び第一色へ戻る（", ref("def_matching_pair_successor"), "、", ref("claim_matching_pair_successor_color"), "）。各 ", math(String.raw`0\le r<k`), " について、"]),
+                      displayMath(String.raw`\begin{aligned}
+c(2r+2)
+&=m_{\mathcal D_0}(c(2r+1))
+  &&(\because\ \blkref{def_matching_pair_successor},\ \blkref{claim_matching_pair_successor_color})\\
+&=\iota(c(2r+1))
+  &&(\because\ \blkref{claim_reference_long_mate_reversal})\\
+&=e_{r+1}
+  &&(\because\ e_r\text{ の定義})
+\end{aligned}`),
+                      paragraph([ref("def_finite_permutation_minimal_period"), " の帰還等式と ", math(String.raw`n=2k`), " により、"]),
+                      displayMath(String.raw`\begin{aligned}
+e_k
+&=c(2k) &&(\because\ e_r\text{ の定義})\\
+&=c(n) &&(\because\ n=2k)\\
+&=c(0) &&(\because\ \blkref{def_finite_permutation_minimal_period})\\
+&=e_0 &&(\because\ e_r\text{ の定義})
+\end{aligned}`),
+                      paragraph(["を得る。", math(String.raw`k=1`), " の場合も同じ帰還等式を使う。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

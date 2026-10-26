@@ -1408,3 +1408,5 @@ import Ising2DLambda.NecSuf.KacWard.TaggedShortPairSuccessor
 import Ising2DLambda.KacWard.TaggedShortPairSuccessor
 import Ising2DLambda.NecSuf.KacWard.ReferenceLongMate
 import Ising2DLambda.KacWard.ReferenceLongMate
+import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycle
+import Ising2DLambda.KacWard.ProjectedClosedEdgeCycle
