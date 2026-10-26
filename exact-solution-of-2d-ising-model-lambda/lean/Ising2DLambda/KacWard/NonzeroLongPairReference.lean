@@ -1,6 +1,5 @@
 import Ising2DLambda.KacWard.ReferenceLongMatching
 import Ising2DLambda.KacWard.TaggedMatchingNonzeroSupport
-import Ising2DLambda.NecSuf.KacWard.NonzeroLongPairReference
 
 namespace Ising2DLambda.KacWard
 
@@ -18,7 +17,9 @@ theorem nonzeroLongPair_mem_referenceLongPairs {L : ℕ} (z : Qbar)
     (hp : p ∈ matchingOrientedPairs D \ t) :
     ({p.1, p.2} : Set (OrientedEdge L)) ∈ referenceLongPairs L := by
   have hreverse := (taggedMatching_nonzero_term_support z s D t hterm).1 p hp
-  exact Ising2DLambda.NecSuf.KacWard.longPair_mem_reversalPairs
-    (reversal (L := L)) p hreverse
+  change ∃ e : OrientedEdge L, ({p.1, p.2} : Set (OrientedEdge L)) =
+    {e, reversal e}
+  refine ⟨p.1, ?_⟩
+  rw [hreverse]
 
 end Ising2DLambda.KacWard
