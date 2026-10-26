@@ -186,12 +186,19 @@ theorem taggedMatching_recovers_labels {L : ℕ} (z : Qbar)
     t = localPairingMatchingShortPairs (taggedComplementEdges D t) D := by
   classical
   obtain ⟨hLong, _⟩ := taggedMatching_nonzero_term_support z s D t hterm
-  exact Ising2DLambda.NecSuf.KacWard.labels_eq_filter_of_endpoint_cover
-    (matchingOrientedPairs D) t (fun h => h.1 ∈ taggedComplementEdges D t)
-    ht (by
-      intro p hp q hq x hxp hxq
-      exact matchingOrientedPairs_disjoint D hp hq hxp hxq)
-    (fun h => complement_iff_short_endpoint D t ht hLong h)
+  ext p
+  constructor
+  · intro hp
+    exact Finset.mem_filter.mpr ⟨ht hp,
+      (complement_iff_short_endpoint D t ht hLong p.1).mpr
+        ⟨p, hp, Or.inl rfl⟩⟩
+  · intro hp
+    obtain ⟨hpD, hpP⟩ := Finset.mem_filter.mp hp
+    obtain ⟨q, hq, hendpoint⟩ :=
+      (complement_iff_short_endpoint D t ht hLong p.1).mp hpP
+    have hpq : p = q := matchingOrientedPairs_disjoint D hpD (ht hq)
+      (x := p.1) (by simp) (by simpa using hendpoint)
+    exact hpq ▸ hq
 
 theorem localPairingMatching_label_support {L : ℕ} (P : Finset (Edge L))
     (κ : OrientedEdge L → OrientedEdge L)
