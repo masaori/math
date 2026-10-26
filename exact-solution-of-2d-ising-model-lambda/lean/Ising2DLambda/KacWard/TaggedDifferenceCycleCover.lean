@@ -11,30 +11,24 @@ attribute [local instance] Classical.propDecidable
 theorem taggedActive_cycleCover {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L)) :
-    let R : PerfectMatching (OrientedEdge L) :=
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    let A := Ising2DLambda.NecSuf.KacWard.activeVertices D R (shortUnderlyingPairs t)
-    let τ := shortInvolution D t
-    let υ := longInvolution D t
-    (∀ i : {i : OrientedEdge L // i ∈ A}, i ∈ matchingPairComponent τ υ i) ∧
+    let A := concreteTaggedActiveVertices D t
+    (∀ i : {i : OrientedEdge L // i ∈ A}, i ∈ concreteAlternatingComponent D t i) ∧
     (∀ i j : {i : OrientedEdge L // i ∈ A},
-      matchingPairComponent τ υ i = matchingPairComponent τ υ j ∨
-        Disjoint (matchingPairComponent τ υ i) (matchingPairComponent τ υ j)) ∧
-    (∀ q ∈ (Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
-      Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅),
+      concreteAlternatingComponent D t i = concreteAlternatingComponent D t j ∨
+        Disjoint (concreteAlternatingComponent D t i)
+          (concreteAlternatingComponent D t j)) ∧
+    (∀ q ∈ concreteTaggedDifference D t,
       ∀ i ∈ q.1, ∀ j ∈ q.1, i ≠ j →
         ∃ (ii jj : {k : OrientedEdge L // k ∈ A}),
-          ii.1 = i ∧ jj.1 = j ∧ jj ∈ matchingPairComponent τ υ ii ∧
-            (matchingPairPermutation τ υ ii = jj ∨
-              matchingPairPermutation τ υ jj = ii)) := by
+          ii.1 = i ∧ jj.1 = j ∧ jj ∈ concreteAlternatingComponent D t ii ∧
+            (concreteAlternatingSuccessor D t ii = jj ∨
+              concreteAlternatingSuccessor D t jj = ii)) := by
   dsimp
   let R : PerfectMatching (OrientedEdge L) :=
     ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-  let T := shortUnderlyingPairs t
-  let A := Ising2DLambda.NecSuf.KacWard.activeVertices D R T
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
-  let σ := matchingPairPermutation τ υ
+  let A := concreteTaggedActiveVertices D t
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
   have hself (i : {i : OrientedEdge L // i ∈ A}) :
       i ∈ matchingPairComponent τ υ i :=
     Or.inl (finitePermutationOrbit_self_mem (matchingPairStep τ υ) i)
@@ -64,40 +58,48 @@ theorem taggedActive_cycleCover {L : ℕ}
       exact Or.inr hp
   refine ⟨hself, hdisj, ?_⟩
   intro q hq i hi j hj hne
-  have hqi := (taggedDifference_incident_iff D t i q).mp ⟨hq, hi⟩
-  have hqj := (taggedDifference_incident_iff D t j q).mp ⟨hq, hj⟩
-  let ii : {k : OrientedEdge L // k ∈ A} := ⟨i, hqi.1⟩
-  let jj : {k : OrientedEdge L // k ∈ A} := ⟨j, hqj.1⟩
+  have hpair :
+      (j = i ∨ j = perfectMatchingMate D i) ∨
+        (j = i ∨ j = perfectMatchingMate R i) := by
+    rcases Set.mem_symmDiff.mp hq with ⟨hD, _⟩ | ⟨hR, _⟩
+    · obtain ⟨p, hp, hqeq⟩ := hD
+      have hip : i ∈ p := by rw [hqeq] at hi; exact hi
+      have hjp : j ∈ p := by rw [hqeq] at hj; exact hj
+      have hp0 : ({i, perfectMatchingMate D i} : Set (OrientedEdge L)) ∈ D.val :=
+        (perfectMatchingMate_spec D i).2
+      have heq : p = ({i, perfectMatchingMate D i} : Set (OrientedEdge L)) :=
+        (D.property.2 i).unique ⟨hp, hip⟩ ⟨hp0, by simp⟩
+      left
+      simpa [heq] using hjp
+    · obtain ⟨p, hp, hqeq⟩ := hR
+      have hip : i ∈ p := by rw [hqeq] at hi; exact hi
+      have hjp : j ∈ p := by rw [hqeq] at hj; exact hj
+      have hp0 : ({i, perfectMatchingMate R i} : Set (OrientedEdge L)) ∈ R.val :=
+        (perfectMatchingMate_spec R i).2
+      have heq : p = ({i, perfectMatchingMate R i} : Set (OrientedEdge L)) :=
+        (R.property.2 i).unique ⟨hp, hip⟩ ⟨hp0, by simp⟩
+      right
+      simpa [heq] using hjp
+  let ii : {k : OrientedEdge L // k ∈ A} := ⟨i, ⟨q, hq, hi⟩⟩
+  let jj : {k : OrientedEdge L // k ∈ A} := ⟨j, ⟨q, hq, hj⟩⟩
   refine ⟨ii, jj, rfl, rfl, ?_, ?_⟩
-  · rcases hqi.2 with hd | hr
-    · have hjpair : j ∈ (Ising2DLambda.NecSuf.KacWard.taggedPairAt D T i).1 := by
-        rw [← hd]
-        exact hj
-      rcases (by simpa [Ising2DLambda.NecSuf.KacWard.taggedPairAt] using hjpair :
-        j = i ∨ j = perfectMatchingMate D i) with h | h
+  · rcases hpair with hd | hr
+    · rcases hd with h | h
       · have hsub : jj = ii := Subtype.ext h
         rw [hsub]
         exact hself ii
       · have hsub : jj = τ.val ii := Subtype.ext h
         rw [hsub]
         exact (hmates ii).1
-    · have hjpair : j ∈ (Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ i).1 := by
-        rw [← hr]
-        exact hj
-      rcases (by simpa [Ising2DLambda.NecSuf.KacWard.taggedPairAt] using hjpair :
-        j = i ∨ j = perfectMatchingMate R i) with h | h
+    · rcases hr with h | h
       · have hsub : jj = ii := Subtype.ext h
         rw [hsub]
         exact hself ii
       · have hsub : jj = υ.val ii := Subtype.ext h
         rw [hsub]
         exact (hmates ii).2
-  · rcases hqi.2 with hd | hr
-    · have hjpair : j ∈ (Ising2DLambda.NecSuf.KacWard.taggedPairAt D T i).1 := by
-        rw [← hd]
-        exact hj
-      rcases (by simpa [Ising2DLambda.NecSuf.KacWard.taggedPairAt] using hjpair :
-        j = i ∨ j = perfectMatchingMate D i) with h | h
+  · rcases hpair with hd | hr
+    · rcases hd with h | h
       · exact False.elim (hne h.symm)
       · have hsub : jj = τ.val ii := Subtype.ext h
         rw [hsub]
@@ -111,11 +113,7 @@ theorem taggedActive_cycleCover {L : ℕ}
           change (if τ.val ii ∈ matchingPairColor τ υ then
             τ.val (τ.val ii) else υ.val (τ.val ii)) = ii
           rw [if_pos hm, τ.property.2 ii]
-    · have hjpair : j ∈ (Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ i).1 := by
-        rw [← hr]
-        exact hj
-      rcases (by simpa [Ising2DLambda.NecSuf.KacWard.taggedPairAt] using hjpair :
-        j = i ∨ j = perfectMatchingMate R i) with h | h
+    · rcases hr with h | h
       · exact False.elim (hne h.symm)
       · have hsub : jj = υ.val ii := Subtype.ext h
         rw [hsub]

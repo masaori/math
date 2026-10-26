@@ -50,9 +50,7 @@ theorem projectedCycleSupportUnion_eq_complement {L : ℕ} (z : Qbar)
     have ha : a ∈ A :=
       (taggedComplement_iff_active_from_necSuf z s D t ht hterm a).1 (by simpa [a] using he)
     let i : {a : OrientedEdge L // a ∈ A} := ⟨a, ha⟩
-    have hcover := taggedActive_cycleCover D t
-    change (∀ x : {a : OrientedEdge L // a ∈ A},
-      x ∈ matchingPairComponent τ υ x) ∧ _ at hcover
+    have hcover := Ising2DLambda.NecSuf.KacWard.alternatingCycle_cover τ υ
     by_cases hfirst : i ∈ matchingPairColor τ υ
     · exact ⟨i, i, hcover.1 i, hfirst, by simp [i, a, reversal]⟩
     · let j := υ.val i
