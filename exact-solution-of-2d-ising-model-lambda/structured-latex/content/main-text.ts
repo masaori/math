@@ -71973,6 +71973,42 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_difference_cycle_cover",
+              labels: [],
+              title: { text: "交互閉路による活動点と標識付き対の被覆" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_difference_cycle_cover",
+                  focus: {
+                    id: "kac_ward_claim_tagged_difference_cycle_cover",
+                    kind: "claim",
+                    title: { text: "交互閉路は活動点と標識付き対を重複なく覆う" },
+                    labels: ["claim_tagged_difference_cycle_cover"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-difference-cycle-cover"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_cycleCover",
+                      "Ising2DLambda.NecSuf.KacWard.alternatingCycle_cover",
+                      "Ising2DLambda.NecSuf.KacWard.alternatingCycle_pair_step",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("def_tagged_difference_active_vertices"), " の活動点集合を ", math(String.raw`V_{\mathcal A}`), "、標識付き対称差を ", math(String.raw`\mathcal A`), " とする。各 ", math(String.raw`\vec e\in V_{\mathcal A}`), " に対し、", ref("claim_tagged_difference_alternating_cycle"), " の交互閉路が通る点の集合を ", math(String.raw`C(\vec e)`), " とする。異なる二つの ", math(String.raw`C(\vec e)`), " は等しいか交わらず、全ての活動点は自分の閉路に属する。さらに、任意の標識付き対 ", math(String.raw`q\in\mathcal A`), " の両端は一つの ", math(String.raw`C(\vec e)`), " に属する。従って各標識付き対も重複なく一つの交互閉路に属する。辺長一で二元集合が同じ長短の対も、標識ごとに別の対として数える。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph(["任意の活動点 ", math(String.raw`\vec e`), " は ", ref("def_finite_permutation_orbit"), " の反復回数零によって自分の二歩軌道に属し、従って ", math(String.raw`C(\vec e)`), " に属する。二つの閉路に共通点 ", math(String.raw`\vec g`), " があるなら、", ref("claim_matching_pair_reconstructed_orbit"), " により双方の点集合は二歩軌道の合併であり、", ref("claim_matching_pair_component_basepoint"), " を ", math(String.raw`\vec g`), " に適用すると両集合は等しい。共通点が無い場合は交わらない。"]),
+                      paragraph(["標識付き対 ", math(String.raw`q\in\mathcal A`), " の一端 ", math(String.raw`\vec e\in q`), " を取る。", ref("claim_tagged_symmetric_difference_degree"), " により ", math(String.raw`q`), " は活動点 ", math(String.raw`\vec e`), " に接する短い対 ", math(String.raw`d_{\vec e}`), " または長い対 ", math(String.raw`r_{\vec e}`), " のどちらかである。もう一端はそれぞれ ", math(String.raw`m_D(\vec e)`), " または ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " である。", ref("claim_tagged_difference_active_mates"), " によりもう一端も活動点である。", ref("claim_tagged_difference_alternating_cycle"), " では二つの相手写像を交互にたどるので、いずれの一端も同じ ", math(String.raw`C(\vec e)`), " にある。閉路の点集合が互いに等しいか交わらないことから、", math(String.raw`q`), " を別の閉路が含むことはない。短長の標識は対称差の元の一部なので、二元集合の一致で二対を同一視しない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },

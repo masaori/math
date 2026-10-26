@@ -571,6 +571,7 @@ export const ALL_LABELS = [
   "claim_switchable_contact_smoothing_preserves_fiber",
   "claim_tagged_difference_active_mates",
   "claim_tagged_difference_alternating_cycle",
+  "claim_tagged_difference_cycle_cover",
   "claim_tagged_difference_orbit_separation",
   "claim_tagged_difference_two_step_orbit",
   "claim_tagged_matching_even_complement",
