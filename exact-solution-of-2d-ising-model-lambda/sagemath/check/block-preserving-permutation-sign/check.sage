@@ -11,6 +11,14 @@ for n in range(6):
                 continue
             same = sum(sigma[i] > sigma[j]
                        for fiber in fibers for i in fiber for j in fiber if i < j)
+            for fiber in fibers:
+                restricted = tuple(fiber.index(sigma[i]) for i in fiber)
+                global_pairs = sum(sigma[i] > sigma[j]
+                                   for i in fiber for j in fiber if i < j)
+                restricted_pairs = sum(restricted[i] > restricted[j]
+                                       for i in range(len(fiber))
+                                       for j in range(i + 1, len(fiber)))
+                assert global_pairs == restricted_pairs
             cross = 0
             for k in range(3):
                 for l in range(k + 1, 3):

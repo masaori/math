@@ -631,6 +631,7 @@ export const ALL_LABELS = [
   "claim_winding_parallel_staircase_step_increase",
   "claim_winding_parity_symmetric_difference_additivity",
   "claim_winding_transverse_staircase_step_increase",
+  "claim_within_fiber_inversion_restriction",
   "def_algebraic_numbers",
   "def_alternating_neighbor_pairs",
   "def_attainable_broken_edge_sets",

@@ -6458,6 +6458,28 @@ a+2b&=(a+b)+b
           element: {
             kind: "elementGroup",
             id: "group_of_block_preserving_permutation_sign",
+            beforeFocus: [{
+              role: "supportingClaim",
+              element: {
+                id: "tools_claim_within_fiber_inversion_restriction",
+                kind: "claim",
+                title: { text: "同じファイバー内の転倒対は制限置換の転倒対に対応する" },
+                labels: ["claim_within_fiber_inversion_restriction"],
+                habitat: "N",
+                verification: ["sagemath/check/block-preserving-permutation-sign"],
+                lean: [
+                  "Ising2DLambda.AlgebraicEigenvalue.blockWithinFiberInversions_card_eq_restriction",
+                  "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockWithinFiberInversions_card_eq_restriction",
+                ],
+                statement: [
+                  paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J`), "、有限集合 ", math(String.raw`\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), "、", ref("claim_block_preserving_permutation_bijection"), " の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`k\in\mathcal K`), " を取る。ファイバー ", math(String.raw`\mathcal J_k`), " は ", math(String.raw`\mathcal J`), " の順序を引き継ぐ。"]),
+                  paragraph(["同じファイバー内の転倒対 ", math(String.raw`(i,j)\in\mathcal J_k\times\mathcal J_k`), " は、制限置換 ", math(String.raw`\sigma_k`), " の転倒対と一対一に対応する。特に個数は ", math(String.raw`\operatorname{inv}(\sigma_k)`), " である。"]),
+                ],
+                proof: [
+                  paragraph(["写像 ", math(String.raw`(i,j)\mapsto(i,j)`), " を使う。", math(String.raw`i,j\in\mathcal J_k`), " なら、", math(String.raw`i<j`), " は引き継いだ順序でも同じ条件であり、", math(String.raw`\sigma_k(i)=\sigma(i)`), " と ", math(String.raw`\sigma_k(j)=\sigma(j)`), " が成り立つ（", ref("claim_block_preserving_permutation_bijection"), "）。したがって ", math(String.raw`\sigma(j)<\sigma(i)`), " と ", math(String.raw`\sigma_k(j)<\sigma_k(i)`), " は同値である。逆写像も ", math(String.raw`(i,j)\mapsto(i,j)`), " なので全単射であり、個数の等号が従う。"]),
+                ],
+              },
+            }],
             focus: {
               id: "tools_claim_block_preserving_permutation_sign",
               kind: "claim",
@@ -6489,7 +6511,7 @@ N_{k,l}
 &\equiv0\pmod 2
 &&(\because\ \mathbb Z/2\mathbb Z\text{ の加法})
 \end{aligned}`),
-                paragraph(["を得る。同じファイバー内の転倒対は、引き継いだ順序に関する ", math(String.raw`\sigma_k`), " の転倒対に一対一に対応する。異なるファイバーの転倒対は ", math(String.raw`k<l`), " ごとに重複なく分かれる。したがって"]),
+                paragraph(["を得る。同じファイバー内の転倒対は ", ref("claim_within_fiber_inversion_restriction"), " により ", math(String.raw`\sigma_k`), " の転倒対と対応する。異なるファイバーの転倒対は ", math(String.raw`k<l`), " ごとに重複なく分かれる。したがって"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{inv}(\sigma)
 &=\sum_{k\in\mathcal K}\operatorname{inv}(\sigma_k)+\sum_{k<l}N_{k,l}
