@@ -71788,6 +71788,8 @@ q_{\vec e,\vec f}
                       labels: ["def_tagged_difference_active_vertices"],
                       habitat: "N",
                       lean: [
+                        "Ising2DLambda.KacWard.taggedActiveByLabels",
+                        "Ising2DLambda.KacWard.taggedActiveByLabels_eq_activeVertices",
                         "Ising2DLambda.NecSuf.KacWard.activeVertices",
                         "Ising2DLambda.NecSuf.KacWard.mem_activeVertices_iff_incident",
                       ],
@@ -72239,6 +72241,47 @@ w_{r+1}
                       paragraph([ref("claim_tagged_difference_alternating_cycle"), " より、最小正周期は ", math(String.raw`n=2k`), " であり、", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる。", ref("claim_matching_pair_successor_color"), " により偶数番目の ", math(String.raw`e_r`), " は第一色、長い対の相手は第二色である。", ref("claim_reference_long_mate_reversal"), " によりその長い相手は ", math(String.raw`\iota(e_r)`), " である。"]),
                       paragraph([math(String.raw`p(w_r)=p(e_r)`), " は反転が台の辺を保つという ", ref("def_edge_reversal"), " の定義から従う。", math(String.raw`p(w_r)=p(w_s)`), " を仮定する。この等号から ", math(String.raw`p(e_r)=p(e_s)`), " を得る。一つの無向辺の向きは二つだけなので、", math(String.raw`e_r=e_s`), " または ", math(String.raw`e_r=\iota(e_s)`), " である（", ref("def_oriented_edges"), "、", ref("def_edge_reversal"), "）。"]),
                       paragraph(["後者なら ", math(String.raw`e_r`), " は第一色であると同時に ", math(String.raw`e_s`), " の長い相手として第二色となり矛盾する（", ref("claim_matching_pair_second_coloring_alternates"), "、", ref("claim_reference_long_mate_reversal"), "）。従って ", math(String.raw`e_r=e_s`), " である。", math(String.raw`2r,2s<n`), " だから ", ref("claim_finite_permutation_orbit_enumeration"), " の最小正周期未満の一意性から ", math(String.raw`2r=2s`), "、自然数の乗法の消去により ", math(String.raw`r=s`), " を得る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_complement_active_vertices",
+              labels: [],
+              title: { text: "補辺と活動点の対応" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_complement_active_vertices",
+                  focus: {
+                    id: "kac_ward_claim_tagged_complement_active_vertices",
+                    kind: "claim",
+                    title: { text: "補辺の両向きはちょうど活動点である" },
+                    labels: ["claim_tagged_complement_active_vertices"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-complement-active-vertices"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActiveByLabels",
+                      "Ising2DLambda.KacWard.taggedComplement_iff_active_concrete",
+                      "Ising2DLambda.NecSuf.KacWard.referencePair_uncovered_iff_active",
+                      "Ising2DLambda.KacWard.taggedComplement_iff_active_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と ", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("def_tagged_matching_complement_edges"), " の補辺を ", math(String.raw`P(D,T)\subseteq E_L`), "、", ref("def_tagged_difference_active_vertices"), " の活動点を ", math(String.raw`V_{\mathcal A}\subseteq\vec E_L`), " とする。任意の ", math(String.raw`\vec e\in\vec E_L`), " について、台への射影 ", math(String.raw`p:\vec E_L\to E_L`), " を ", ref("def_oriented_edges"), " の ", math(String.raw`p(e,d)=e`), " とすれば"]),
+                      displayMath(String.raw`p(\vec e)\in P(D,T)\quad\Longleftrightarrow\quad\vec e\in V_{\mathcal A}.`),
+                      paragraph(["両向きについて同じ同値が成り立つ。辺長一でも長短の標識を区別する。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph(["向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " で ", math(String.raw`\vec e`), " を含む対 ", math(String.raw`d_{\vec e}`), " はただ一つである。", ref("claim_tagged_matching_nonzero_support"), " により、長い標識の対は必ず同じ辺の二つの向きを組にする。"]),
+                      paragraph([math(String.raw`p(\vec e)\in P(D,T)`), " ならば、", ref("def_tagged_matching_complement_edges"), " により、", math(String.raw`p(\vec e)`), " の二向きを組にした長い標識の対は無い。", math(String.raw`d_{\vec e}`), " が長い標識ならその対が存在して矛盾する。ゆえに ", math(String.raw`d_{\vec e}`), " は短い標識である。"]),
+                      paragraph(["逆に ", math(String.raw`d_{\vec e}`), " が短い標識とする。もし ", math(String.raw`p(\vec e)\notin P(D,T)`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対がある。", ref("claim_tagged_matching_nonzero_support"), " によりそれは ", math(String.raw`\vec e`), " を含み、", math(String.raw`d_{\vec e}`), " の一意性に反する。従って ", math(String.raw`p(\vec e)\in P(D,T)`), " である。"]),
+                      paragraph(["これで補辺への所属と ", math(String.raw`d_{\vec e}`), " の短い標識は同値である。", ref("claim_tagged_symmetric_difference_active_vertices"), " より、後者は ", math(String.raw`\vec e\in V_{\mathcal A}`), " と同値である。", ref("def_edge_reversal"), " より ", math(String.raw`p(\iota(\vec e))=p(\vec e)`), " なので、同じ結論は反転した向きにも成り立つ。"]),
                     ],
                   },
                 },

@@ -1414,3 +1414,6 @@ import Ising2DLambda.NecSuf.KacWard.ProjectedCycleNonbacktracking
 import Ising2DLambda.KacWard.ProjectedCycleNonbacktracking
 import Ising2DLambda.NecSuf.KacWard.ProjectedCycleDistinctEdges
 import Ising2DLambda.KacWard.ProjectedCycleDistinctEdges
+import Ising2DLambda.KacWard.TaggedComplementActiveVertices
+import Ising2DLambda.NecSuf.KacWard.TaggedComplementActiveVertices
+import Ising2DLambda.KacWard.TaggedComplementActiveVerticesConcrete
