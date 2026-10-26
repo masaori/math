@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.TaggedDifferenceAlternatingCycle
-import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceCycleCover
 
 namespace Ising2DLambda.KacWard
 
@@ -35,14 +34,38 @@ theorem taggedActive_cycleCover {L : ℕ}
   let A := Ising2DLambda.NecSuf.KacWard.activeVertices D R T
   let τ := shortInvolution D t
   let υ := longInvolution D t
-  obtain ⟨hself, hdisj, hmates⟩ :=
-    Ising2DLambda.NecSuf.KacWard.alternatingCycle_cover τ υ
+  let σ := matchingPairPermutation τ υ
+  have hself (i : {i : OrientedEdge L // i ∈ A}) :
+      i ∈ matchingPairComponent τ υ i :=
+    Or.inl (finitePermutationOrbit_self_mem (matchingPairStep τ υ) i)
+  have hdisj (i j : {i : OrientedEdge L // i ∈ A}) :
+      matchingPairComponent τ υ i = matchingPairComponent τ υ j ∨
+        Disjoint (matchingPairComponent τ υ i) (matchingPairComponent τ υ j) := by
+    by_cases h : matchingPairComponent τ υ i ∩ matchingPairComponent τ υ j = ∅
+    · exact Or.inr (Set.disjoint_iff_inter_eq_empty.mpr h)
+    · left
+      obtain ⟨k, hki, hkj⟩ :
+          (matchingPairComponent τ υ i ∩ matchingPairComponent τ υ j).Nonempty :=
+        Set.nonempty_iff_ne_empty.mpr h
+      exact (matchingPairComponent_basepoint τ υ i k hki).symm.trans
+        (matchingPairComponent_basepoint τ υ j k hkj)
+  have hmates (i : {i : OrientedEdge L // i ∈ A}) :
+      τ.val i ∈ matchingPairComponent τ υ i ∧
+        υ.val i ∈ matchingPairComponent τ υ i := by
+    constructor
+    · exact Or.inr (finitePermutationOrbit_self_mem (matchingPairStep τ υ) (τ.val i))
+    · have hτ : τ.val i ∈ finitePermutationOrbit (matchingPairStep τ υ) (τ.val i) :=
+        finitePermutationOrbit_self_mem _ _
+      have hp := (finitePermutationOrbit_invariant (matchingPairStep τ υ)
+        (τ.val i) (τ.val i)).mpr hτ
+      change υ.val (τ.val (τ.val i)) ∈
+        finitePermutationOrbit (matchingPairStep τ υ) (τ.val i) at hp
+      rw [τ.property.2 i] at hp
+      exact Or.inr hp
   refine ⟨hself, hdisj, ?_⟩
   intro q hq i hi j hj hne
-  have hqi := (Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff
-    D R T i q).mp ⟨hq, hi⟩
-  have hqj := (Ising2DLambda.NecSuf.KacWard.taggedDifference_incident_iff
-    D R T j q).mp ⟨hq, hj⟩
+  have hqi := (taggedDifference_incident_iff D t i q).mp ⟨hq, hi⟩
+  have hqj := (taggedDifference_incident_iff D t j q).mp ⟨hq, hj⟩
   let ii : {k : OrientedEdge L // k ∈ A} := ⟨i, hqi.1⟩
   let jj : {k : OrientedEdge L // k ∈ A} := ⟨j, hqj.1⟩
   refine ⟨ii, jj, rfl, rfl, ?_, ?_⟩
@@ -78,7 +101,16 @@ theorem taggedActive_cycleCover {L : ℕ}
       · exact False.elim (hne h.symm)
       · have hsub : jj = τ.val ii := Subtype.ext h
         rw [hsub]
-        exact (Ising2DLambda.NecSuf.KacWard.alternatingCycle_pair_step τ υ ii).1
+        by_cases hc : ii ∈ matchingPairColor τ υ
+        · left
+          change (if ii ∈ matchingPairColor τ υ then τ.val ii else υ.val ii) = τ.val ii
+          rw [if_pos hc]
+        · right
+          have hm : τ.val ii ∈ matchingPairColor τ υ :=
+            (matchingPairColor_alternates τ υ ii).mpr hc
+          change (if τ.val ii ∈ matchingPairColor τ υ then
+            τ.val (τ.val ii) else υ.val (τ.val ii)) = ii
+          rw [if_pos hm, τ.property.2 ii]
     · have hjpair : j ∈ (Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ i).1 := by
         rw [← hr]
         exact hj
@@ -87,6 +119,16 @@ theorem taggedActive_cycleCover {L : ℕ}
       · exact False.elim (hne h.symm)
       · have hsub : jj = υ.val ii := Subtype.ext h
         rw [hsub]
-        exact (Ising2DLambda.NecSuf.KacWard.alternatingCycle_pair_step τ υ ii).2
+        by_cases hc : ii ∈ matchingPairColor τ υ
+        · right
+          have hm : υ.val ii ∉ matchingPairColor τ υ := by
+            intro h
+            exact ((matchingPairSecondColor_alternates τ υ ii).mp h) hc
+          change (if υ.val ii ∈ matchingPairColor τ υ then
+            τ.val (υ.val ii) else υ.val (υ.val ii)) = ii
+          rw [if_neg hm, υ.property.2 ii]
+        · left
+          change (if ii ∈ matchingPairColor τ υ then τ.val ii else υ.val ii) = υ.val ii
+          rw [if_neg hc]
 
 end Ising2DLambda.KacWard

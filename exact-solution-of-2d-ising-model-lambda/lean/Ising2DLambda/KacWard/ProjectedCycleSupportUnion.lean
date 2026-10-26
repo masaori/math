@@ -1,6 +1,7 @@
 import Ising2DLambda.KacWard.ProjectedCycleDistinctEdges
 import Ising2DLambda.KacWard.TaggedComplementActiveVertices
 import Ising2DLambda.KacWard.TaggedDifferenceCycleCover
+import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceCycleCover
 
 namespace Ising2DLambda.KacWard
 
