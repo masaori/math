@@ -79,4 +79,72 @@ theorem taggedActiveTwoStep_periodic {L : ℕ}
   simpa only [finiteMapIterate] using
     finitePermutation_positive_return (taggedActiveTwoStep D t) i
 
+/-- Both matching mates preserve the active edges defined by the actual labels. -/
+theorem concreteTaggedActiveVertices_mates {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (i : OrientedEdge L) (hi : i ∈ concreteTaggedActiveVertices D t) :
+    perfectMatchingMate D i ∈ concreteTaggedActiveVertices D t ∧
+      perfectMatchingMate
+        (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+          PerfectMatching (OrientedEdge L)) i ∈ concreteTaggedActiveVertices D t := by
+  rw [concreteTaggedActiveVertices_eq_activeVertices] at hi ⊢
+  exact taggedDifference_active_mates D t i hi
+
+/-- The short matching mate on the concretely labelled active edges. -/
+noncomputable def taggedConcreteShortMate {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Equiv.Perm {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t} where
+  toFun i := ⟨perfectMatchingMate D i.1,
+    (concreteTaggedActiveVertices_mates D t i.1 i.2).1⟩
+  invFun i := ⟨perfectMatchingMate D i.1,
+    (concreteTaggedActiveVertices_mates D t i.1 i.2).1⟩
+  left_inv i := Subtype.ext (perfectMatchingMate_involutive D i.1)
+  right_inv i := Subtype.ext (perfectMatchingMate_involutive D i.1)
+
+/-- The reference long matching mate on the same concrete active edges. -/
+noncomputable def taggedConcreteLongMate {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Equiv.Perm {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t} where
+  toFun i := ⟨perfectMatchingMate
+    (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+      PerfectMatching (OrientedEdge L)) i.1,
+    (concreteTaggedActiveVertices_mates D t i.1 i.2).2⟩
+  invFun i := ⟨perfectMatchingMate
+    (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+      PerfectMatching (OrientedEdge L)) i.1,
+    (concreteTaggedActiveVertices_mates D t i.1 i.2).2⟩
+  left_inv i := Subtype.ext (perfectMatchingMate_involutive
+    (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+      PerfectMatching (OrientedEdge L)) i.1)
+  right_inv i := Subtype.ext (perfectMatchingMate_involutive
+    (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+      PerfectMatching (OrientedEdge L)) i.1)
+
+/-- One short step followed by one reference long step. -/
+noncomputable def taggedConcreteTwoStep {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    Equiv.Perm {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t} :=
+  (taggedConcreteShortMate D t).trans (taggedConcreteLongMate D t)
+
+theorem taggedConcreteTwoStep_apply {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    (taggedConcreteTwoStep D t i).1 = perfectMatchingMate
+      (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+        PerfectMatching (OrientedEdge L)) (perfectMatchingMate D i.1) := rfl
+
+theorem taggedConcreteTwoStep_periodic {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    ∃ n : ℕ, 0 < n ∧ (taggedConcreteTwoStep D t)^[n] i = i := by
+  classical
+  simpa only [finiteMapIterate] using
+    finitePermutation_positive_return (taggedConcreteTwoStep D t) i
+
 end Ising2DLambda.KacWard
