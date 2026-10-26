@@ -215,9 +215,17 @@ theorem taggedMatching_short_pairs_card {L : ℕ} (z : Qbar) (s : SpinStructure)
         exact (Finset.mem_filter.mp hP).2 ⟨p, hpl, rfl, by simp [hrev, reversal]⟩
       have hp₂ : p.2.1 ∉ P := by simpa [hrev, reversal] using hp₁
       simp [hpt, hp₁, hp₂]
-  exact Ising2DLambda.NecSuf.KacWard.short_pair_count_of_double_count
-    (matchingOrientedPairs D) t P Prod.fst Prod.snd
-    (fun h => if h.1 ∈ P then 1 else 0) ht hcount hpair hleft
+  have hpairs : (∑ p ∈ matchingOrientedPairs D,
+      ((if p.1.1 ∈ P then 1 else 0) + (if p.2.1 ∈ P then 1 else 0))) =
+      2 * t.card := by
+    calc
+      _ = ∑ p ∈ matchingOrientedPairs D, if p ∈ t then 2 else 0 :=
+        Finset.sum_congr rfl hpair
+      _ = 2 * t.card := by
+        simp [Finset.inter_eq_right.mpr ht, mul_comm]
+  rw [hcount, hpairs] at hleft
+  dsimp [P] at hleft
+  omega
 
 /-- At a fixed vertex, every selected half-edge belongs to exactly one short pair. -/
 theorem taggedMatching_local_pair_unique {L : ℕ} (z : Qbar) (s : SpinStructure)
