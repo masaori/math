@@ -71859,6 +71859,45 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_difference_two_step_orbit",
+              labels: [],
+              title: { text: "活動点上の交互二歩の周期軌道" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_difference_two_step_orbit",
+                  focus: {
+                    id: "kac_ward_claim_tagged_difference_two_step_orbit",
+                    kind: "claim",
+                    title: { text: "活動点上の交互二歩は周期軌道を持つ" },
+                    labels: ["claim_tagged_difference_two_step_orbit"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-difference-two-step-orbit"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActiveTwoStep_apply",
+                      "Ising2DLambda.KacWard.taggedActiveTwoStep_periodic",
+                      "Ising2DLambda.NecSuf.KacWard.activeTwoStep_apply",
+                      "Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " の非零項 ", math(String.raw`(D,T)`), " について、", ref("def_tagged_difference_active_vertices"), " の活動点集合 ", math(String.raw`V_{\mathcal A}`), " 上に写像 "]),
+                      displayMath(String.raw`F_{\mathcal A}(\vec e):=m_{\mathcal D_0}(m_D(\vec e))\qquad(\vec e\in V_{\mathcal A})`),
+                      paragraph(["を定める。", ref("claim_tagged_difference_active_mates"), " により ", math(String.raw`F_{\mathcal A}:V_{\mathcal A}\to V_{\mathcal A}`), " である。", math(String.raw`F_{\mathcal A}`), " は置換であり、各 ", math(String.raw`\vec e\in V_{\mathcal A}`), " について、ある ", math(String.raw`n\in\mathbb N_{\ge1}`), " が存在して ", math(String.raw`F_{\mathcal A}^{[n]}(\vec e)=\vec e`), " となる。反復は ", ref("def_finite_map_iteration"), " による。長短の対が同じ二元集合を持つ辺長一でも、二つの相手写像を順に適用する。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_perfect_matching_involution"), " により、活動点に制限した ", math(String.raw`m_D`), " と ", math(String.raw`m_{\mathcal D_0}`), " はそれぞれ自分自身を逆写像に持つ。制限が全域で定まることは ", ref("claim_tagged_difference_active_mates"), " による。従って二写像の合成 ", math(String.raw`F_{\mathcal A}`), " の逆写像は ", math(String.raw`m_D\circ m_{\mathcal D_0}`), " であり、", math(String.raw`F_{\mathcal A}`), " は置換である。"]),
+                      paragraph(["活動点集合は ", ref("def_tagged_difference_active_vertices"), " により有限集合 ", math(String.raw`\vec E_L`), " の部分集合である。", ref("claim_finite_permutation_positive_return"), " を置換 ", math(String.raw`F_{\mathcal A}`), " と始点 ", math(String.raw`\vec e`), " に適用し、正の帰還時刻 ", math(String.raw`n`), " を得る。長短の標識は二つの相手写像の適用順を定めるので、二元集合の一致によって二歩を消していない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
