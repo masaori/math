@@ -95,9 +95,24 @@ theorem taggedDifference_local_degree {L : ℕ} (z : Qbar)
       (Finset.mem_sdiff.mpr ⟨hp, hpt⟩)
     change q ∈ referenceLongPairs L
     rwa [hqeq]
-  simpa only using
-    (Ising2DLambda.NecSuf.KacWard.taggedDifference_local_degree D R
-      (shortUnderlyingPairs t) hLong e)
+  dsimp
+  by_cases hshort : ({e, perfectMatchingMate D e} : Set (OrientedEdge L)) ∈
+      shortUnderlyingPairs t
+  · right
+    constructor
+    · intro heq
+      have htag := congrArg Prod.snd heq
+      simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort] at htag
+    · simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort]
+  · left
+    have hp : ({e, perfectMatchingMate D e} : Set (OrientedEdge L)) ∈ R.val :=
+      hLong _ (perfectMatchingMate_spec D e).2 hshort
+    have hm : perfectMatchingMate R e = perfectMatchingMate D e :=
+      perfectMatchingMate_eq_of_pair R e (perfectMatchingMate D e)
+        (perfectMatchingMate_spec D e).1 hp
+    simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort]
+    exact congrArg (fun x : OrientedEdge L =>
+      ({e, x} : Set (OrientedEdge L))) hm.symm
 
 theorem taggedDifference_incident_iff {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
