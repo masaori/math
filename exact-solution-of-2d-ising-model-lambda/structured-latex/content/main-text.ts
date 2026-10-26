@@ -6390,6 +6390,66 @@ a+2b&=(a+b)+b
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_preserving_permutation_bijection",
+        labels: [],
+        title: { text: "ブロックを保つ置換と各ブロックの置換の対応" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_preserving_permutation_bijection",
+            focus: {
+              id: "tools_claim_block_preserving_permutation_bijection",
+              kind: "claim",
+              title: { text: "ブロックを保つ置換は各ブロックの置換の組と一対一に対応する" },
+              labels: ["claim_block_preserving_permutation_bijection"],
+              habitat: "N",
+              verification: ["sagemath/check/block-preserving-permutation-bijection"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockRestriction_blockGluing",
+                "Ising2DLambda.AlgebraicEigenvalue.blockGluing_blockRestriction",
+                "Ising2DLambda.AlgebraicEigenvalue.blockPreservingPermutationEquiv",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockRestriction_blockGluing",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockGluing_blockRestriction",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockPreservingPermutationEquiv",
+              ],
+              statement: [
+                paragraph(["有限集合 ", math(String.raw`\mathcal J,\mathcal K`), " と写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), " を取る。", ref("claim_block_diagonal_zero_terms"), " の ", math(String.raw`\operatorname{Perm}_b(\mathcal J)`), " を用い、各 ", math(String.raw`k\in\mathcal K`), " のファイバーを ", math(String.raw`\mathcal J_k:=\{j\in\mathcal J\mid b(j)=k\}`), " と定める。空のファイバーも許す。各 ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " の制限は ", math(String.raw`\sigma_k\in\operatorname{Perm}(\mathcal J_k)`), " を与え、写像"]),
+                displayMath(String.raw`\operatorname{Res}:\operatorname{Perm}_b(\mathcal J)\longrightarrow\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k),\qquad\sigma\longmapsto(\sigma_k)_{k\in\mathcal K}`),
+                paragraph(["は全単射である。ここで右辺の積は有限集合を添字とする置換の組の集合であり、実数体・複素数体は使わない。"]),
+              ],
+              proof: [
+                paragraph(["任意の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`k\in\mathcal K`), " を取る。", math(String.raw`j\in\mathcal J_k`), " ならば ", math(String.raw`b(\sigma(j))=b(j)=k`), " なので制限 ", math(String.raw`\sigma_k:\mathcal J_k\to\mathcal J_k`), " が定まる。元の置換の単射性から制限も単射である。また ", math(String.raw`j\in\mathcal J_k`), " に対し ", math(String.raw`i:=\sigma^{-1}(j)`), " と置くと、", math(String.raw`b(i)=b(\sigma(i))=b(j)=k`), " だから制限は全射である。"]),
+                paragraph(["任意の組 ", math(String.raw`(\tau_k)_{k\in\mathcal K}\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)`), " から、各 ", math(String.raw`j\in\mathcal J`), " に対して ", math(String.raw`\tau(j):=\tau_{b(j)}(j)`), " を定める。逆写像は ", math(String.raw`j\mapsto\tau_{b(j)}^{-1}(j)`), " である。各置換とその逆は同じファイバー上で作用するので、両合成は各 ", math(String.raw`j`), " を固定する。よって ", math(String.raw`\tau\in\operatorname{Perm}_b(\mathcal J)`), " である。"]),
+                paragraph(["この ", math(String.raw`\tau`), " を ", math(String.raw`\operatorname{Glue}((\tau_k)_k)`), " と書く。任意の ", math(String.raw`k\in\mathcal K`), " と ", math(String.raw`j\in\mathcal J_k`), " について"]),
+                displayMath(String.raw`\begin{aligned}
+(\operatorname{Res}(\operatorname{Glue}((\tau_h)_h)))_k(j)
+&=\operatorname{Glue}((\tau_h)_h)(j)
+&&(\because\ \operatorname{Res}\text{ の定義})\\
+&=\tau_{b(j)}(j)
+&&(\because\ \operatorname{Glue}\text{ の定義})\\
+&=\tau_k(j)
+&&(\because\ j\in\mathcal J_k)
+\end{aligned}`),
+                paragraph(["である。また任意の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`j\in\mathcal J`), " について"]),
+                displayMath(String.raw`\begin{aligned}
+\operatorname{Glue}(\operatorname{Res}(\sigma))(j)
+&=\sigma_{b(j)}(j)
+&&(\because\ \operatorname{Glue}\text{ の定義})\\
+&=\sigma(j)
+&&(\because\ \operatorname{Res}\text{ の定義})
+\end{aligned}`),
+                paragraph(["となる。二つの合成が恒等写像なので ", math(String.raw`\operatorname{Res}`), " は全単射である。空のファイバー上には空置換がただ一つあり、同じ議論が成り立つ。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
