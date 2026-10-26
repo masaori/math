@@ -72009,6 +72009,49 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_short_pair_successor",
+              labels: [],
+              title: { text: "短い標識の対から後続辺への接続" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_short_pair_successor",
+                  focus: {
+                    id: "kac_ward_claim_tagged_short_pair_successor",
+                    kind: "claim",
+                    title: { text: "短い標識の対は反転辺からの非後退な一歩を与える" },
+                    labels: ["claim_tagged_short_pair_successor"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-short-pair-successor"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedShortPair_successor",
+                      "Ising2DLambda.NecSuf.KacWard.shortPair_successor",
+                      "Ising2DLambda.KacWard.taggedShortPair_successor_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。短い標識の順序付き対 ", math(String.raw`(\vec g,\vec f)\in T`), " の二端 ", math(String.raw`\vec g,\vec f\in\vec E_L`), " について、", math(String.raw`\vec f\in\operatorname{Next}(\iota(\vec g))`), " である。", math(String.raw`L=1`), " で ", math(String.raw`\vec f=\iota(\vec g)`), " となる場合も含む。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " により、短い標識の対の二端は始点が等しく、相異なる。反転辺の終点については ", ref("claim_terminal_matrix_entries"), " の端点計算を使う。" ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(\iota(\vec g))
+&=\operatorname{src}(\vec g)
+&&(\because\ \blkref{claim_terminal_matrix_entries}\text{ の端点計算})\\
+&=\operatorname{src}(\vec f)
+&&(\because\ \blkref{claim_tagged_matching_nonzero_support})
+\end{aligned}`),
+                      paragraph([ref("claim_reversal_is_involution"), " と ", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f\ne\iota(\iota(\vec g))`), " である。よって ", ref("def_nonbacktracking_successors"), " から結論を得る。辺長一でも反転辺は元の辺と異なるので、この条件は保たれる。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
