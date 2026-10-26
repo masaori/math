@@ -146,10 +146,8 @@ theorem taggedMatching_even_complement {L : ℕ} (z : Qbar) (s : SpinStructure)
   obtain ⟨hLong, hShort⟩ := taggedMatching_nonzero_term_support z s D t hterm
   intro v
   rw [incidence_as_oriented_sum]
-  apply Ising2DLambda.NecSuf.KacWard.even_of_pair_contributions
-    (matchingOrientedPairs D) Prod.fst Prod.snd
-    (fun h => if h.1 ∈ taggedComplementEdges D t ∧ orientedSource h = v then 1 else 0)
-    (matching_sum_by_pairs D _)
+  rw [matching_sum_by_pairs D]
+  apply Finset.even_sum
   intro p hp
   by_cases hpt : p ∈ t
   · have hp₁ : p.1.1 ∈ taggedComplementEdges D t :=
