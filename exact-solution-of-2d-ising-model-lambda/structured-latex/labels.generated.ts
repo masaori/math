@@ -331,6 +331,7 @@ export const ALL_LABELS = [
   "claim_prod_orbit_decomposition",
   "claim_prod_pair_eq_pow_card",
   "claim_projected_cycle_distinct_edges",
+  "claim_projected_cycle_support_union",
   "claim_projected_edge_cycle_closure",
   "claim_projected_edge_cycle_nonbacktracking",
   "claim_projected_plane_cycle_lift_translation",

@@ -72288,6 +72288,47 @@ w_{r+1}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_projected_cycle_support_union",
+              labels: [],
+              title: { text: "射影した閉歩道の台の合併と補辺" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_projected_cycle_support_union",
+                  focus: {
+                    id: "kac_ward_claim_projected_cycle_support_union",
+                    kind: "claim",
+                    title: { text: "射影した閉歩道の台の合併は補辺になる" },
+                    labels: ["claim_projected_cycle_support_union"],
+                    habitat: "N",
+                    verification: ["sagemath/check/projected-cycle-support-union"],
+                    lean: [
+                      "Ising2DLambda.KacWard.projectedCycleSupportUnion",
+                      "Ising2DLambda.KacWard.projectedCycleSupportUnion_eq_complement",
+                      "Ising2DLambda.NecSuf.KacWard.projectedCycleSupportUnion_eq_range",
+                      "Ising2DLambda.KacWard.projectedCycleSupportUnion_eq_complement_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_alternating_cycle"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各閉路 ", math(String.raw`C\in\mathcal C(D,T)`), " について、第一色の点を ", math(String.raw`c_C(2r)`), "、周期の半分を ", math(String.raw`k_C`), "、", ref("claim_projected_edge_cycle_nonbacktracking"), " の閉辺列を ", math(String.raw`w_{C,r}=\iota(c_C(2r))\ (0\le r<k_C)`), " と置く。このとき"]),
+                      displayMath(String.raw`P(D,T)=\bigcup_{C\in\mathcal C(D,T)}\{p(w_{C,r})\mid 0\le r<k_C\}.`),
+                      paragraph(["辺長一の一歩閉路も含む。両辺は有限集合であり、実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph(["右辺の元 ", math(String.raw`e=p(w_{C,r})`), " を取る。", ref("claim_projected_edge_cycle_nonbacktracking"), " により ", math(String.raw`w_{C,r}=\iota(c_C(2r))`), " である。", ref("def_edge_reversal"), " により ", math(String.raw`p(w_{C,r})=p(c_C(2r))`), " となる。", ref("claim_tagged_difference_alternating_cycle"), " により ", math(String.raw`c_C(2r)`), " は活動点なので、", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`e\in P(D,T)`), " である。"]),
+                      paragraph(["逆に ", math(String.raw`e\in P(D,T)`), " を取る。", ref("def_oriented_edges"), " の二方向のうち一つを ", math(String.raw`\vec e`), " とする。", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`\vec e`), " は活動点である。", ref("claim_tagged_difference_cycle_cover"), " により ", math(String.raw`\vec e`), " はある交互閉路 ", math(String.raw`C`), " に属する。"]),
+                      paragraph(["もし ", math(String.raw`\vec e`), " が第一色なら、", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\vec e=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき ", ref("def_edge_reversal"), " により ", math(String.raw`e=p(\vec e)=p(w_{C,r})`), " である。"]),
+                      paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_matching_pair_second_coloring_alternates"), " により長い相手 ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " は同じ閉路の第一色である。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " で、その台は ", math(String.raw`e`), " のままである。前の場合を ", math(String.raw`\iota(\vec e)`), " に適用し、", math(String.raw`e=p(w_{C,r})`), " を得る。従って逆の包含も成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
