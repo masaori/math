@@ -1398,3 +1398,5 @@ import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceActiveVertices
 import Ising2DLambda.KacWard.TaggedSymmetricDifferenceActiveVertices
 import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceTwoStepOrbit
 import Ising2DLambda.KacWard.TaggedDifferenceTwoStepOrbit
+import Ising2DLambda.NecSuf.KacWard.TaggedDifferenceOrbitSeparation
+import Ising2DLambda.KacWard.TaggedDifferenceOrbitSeparation

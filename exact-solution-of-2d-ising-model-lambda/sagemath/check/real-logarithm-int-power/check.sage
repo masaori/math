@@ -44,9 +44,10 @@ for u in units:
         assert L(u ** (n + 1)) == L(u ** n * u)          # u^{n+1} = u^n · u
         assert L(u ** n * u) == L(u ** n) + L(u)         # 乗法を加法へ
         assert L(u ** n) + L(u) == QQ(n) * L(u) + L(u)   # 帰納法の仮定
-        assert QQ(n) * L(u) + L(u) == (QQ(n) + 1) * L(u) # 分配則
+        assert QQ(n) * L(u) + L(u) == QQ(n) * L(u) + 1 * L(u) # 単位元
+        assert QQ(n) * L(u) + 1 * L(u) == (QQ(n) + 1) * L(u) # 分配則
         assert (QQ(n) + 1) * L(u) == QQ(n + 1) * L(u)    # ι は加法を保つ
-        checks += 6
+        checks += 7
     # 逆数 log(v^{-1}) = -log(v)
     v = u
     assert 0 == L(1)

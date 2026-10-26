@@ -71898,6 +71898,43 @@ q_{\vec e,\vec f}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_difference_orbit_separation",
+              labels: [],
+              title: { text: "交互二歩の二つの軌道の分離" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_difference_orbit_separation",
+                  focus: {
+                    id: "kac_ward_claim_tagged_difference_orbit_separation",
+                    kind: "claim",
+                    title: { text: "活動点の二歩軌道と短い相手の二歩軌道は交わらない" },
+                    labels: ["claim_tagged_difference_orbit_separation"],
+                    habitat: "N",
+                    verification: ["sagemath/check/tagged-difference-orbit-separation"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_orbits_disjoint",
+                      "Ising2DLambda.NecSuf.KacWard.activeTwoStep_orbits_disjoint",
+                    ],
+                    statement: [
+                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の活動点 ", math(String.raw`\vec e\in V_{\mathcal A}`), " と二歩置換 ", math(String.raw`F_{\mathcal A}`), " について、"]),
+                      displayMath(String.raw`\operatorname{Orb}_{F_{\mathcal A}}(\vec e)\cap\operatorname{Orb}_{F_{\mathcal A}}(m_D(\vec e))=\varnothing.`),
+                      paragraph(["軌道は ", ref("def_finite_permutation_orbit"), " の意味である。辺長一で長短の対の端点が一致しても、標識と二歩の順序は保持する。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_active_mates"), " により、", math(String.raw`m_D,m_{\mathcal D_0}`), " は有限集合 ", math(String.raw`V_{\mathcal A}`), " 上へ制限できる。", ref("claim_perfect_matching_involution"), " により各制限は不動点のない対合である。"]),
+                      paragraph([ref("claim_tagged_difference_two_step_orbit"), " の定義から、その二対合の合成は ", math(String.raw`F_{\mathcal A}`), " である。よって ", ref("claim_matching_pair_orbit_separation"), " を第一の相手 ", math(String.raw`m_D`), "、第二の相手 ", math(String.raw`m_{\mathcal D_0}`), " に適用すると表示した空共通部分を得る。使った集合は有限であり、実数体と複素数体は現れない。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
@@ -80152,8 +80189,10 @@ const chapter_real_escape = defineSection({
 &&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})\\
 &=\iota(n)\cdot\log_{\mathbb{R}}(u)+\log_{\mathbb{R}}(u)
 &&(\because\ \text{帰納法の仮定})\\
+&=\iota(n)\cdot\log_{\mathbb{R}}(u)+1\cdot\log_{\mathbb{R}}(u)
+&&(\because\ \mathbb{R}\text{ の乗法の単位元})\\
 &=\bigl(\iota(n)+1\bigr)\cdot\log_{\mathbb{R}}(u)
-&&(\because\ \mathbb{R}\text{ の分配則と }1\cdot t=t)\\
+&&(\because\ \mathbb{R}\text{ の分配則})\\
 &=\iota(n+1)\cdot\log_{\mathbb{R}}(u)
 &&(\because\ \iota\text{ は加法を保ち }\iota(1)=1\text{。}\blkref{def_real_logarithm})
 \end{aligned}`),
