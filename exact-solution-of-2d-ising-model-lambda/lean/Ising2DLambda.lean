@@ -1412,3 +1412,5 @@ import Ising2DLambda.NecSuf.KacWard.ProjectedClosedEdgeCycle
 import Ising2DLambda.KacWard.ProjectedClosedEdgeCycle
 import Ising2DLambda.NecSuf.KacWard.ProjectedCycleNonbacktracking
 import Ising2DLambda.KacWard.ProjectedCycleNonbacktracking
+import Ising2DLambda.NecSuf.KacWard.ProjectedCycleDistinctEdges
+import Ising2DLambda.KacWard.ProjectedCycleDistinctEdges

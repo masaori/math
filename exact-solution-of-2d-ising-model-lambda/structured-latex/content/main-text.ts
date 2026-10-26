@@ -72207,6 +72207,44 @@ w_{r+1}
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_projected_cycle_distinct_edges",
+              labels: [],
+              title: { text: "射影した閉歩道の台の辺の相異性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_projected_cycle_distinct_edges",
+                  focus: {
+                    id: "kac_ward_claim_projected_cycle_distinct_edges",
+                    kind: "claim",
+                    title: { text: "射影した閉歩道の一周期に現れる台の辺は相異なる" },
+                    labels: ["claim_projected_cycle_distinct_edges"],
+                    habitat: "N",
+                    verification: ["sagemath/check/projected-cycle-distinct-edges"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_projectedCycle_distinctEdges",
+                      "Ising2DLambda.NecSuf.KacWard.projectedCycle_edges_injective",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " の交互閉路を取る。", ref("claim_projected_edge_cycle_nonbacktracking"), " の第一色の点 ", math(String.raw`e_r=c(2r)\in\vec E_L\ (0\le r<k)`), " と閉辺列 ", math(String.raw`w_r=\iota(e_r)`), " を用いる。台の辺への射影 ", math(String.raw`p:\vec E_L\to E_L`), " は ", ref("def_oriented_edges"), " の ", math(String.raw`p(e,d)=e`), " である。任意の ", math(String.raw`0\le r,s<k`), " について、"]),
+                      displayMath(String.raw`p(w_r)=p(w_s)\Longrightarrow r=s.`),
+                      paragraph(["従って一周期の ", math(String.raw`p(w_0),\ldots,p(w_{k-1})`), " は相異なる。", math(String.raw`k=1`), " と ", math(String.raw`L=1`), " も含む。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_alternating_cycle"), " より、最小正周期は ", math(String.raw`n=2k`), " であり、", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる。", ref("claim_matching_pair_successor_color"), " により偶数番目の ", math(String.raw`e_r`), " は第一色、長い対の相手は第二色である。", ref("claim_reference_long_mate_reversal"), " によりその長い相手は ", math(String.raw`\iota(e_r)`), " である。"]),
+                      paragraph([math(String.raw`p(w_r)=p(e_r)`), " は反転が台の辺を保つという ", ref("def_edge_reversal"), " の定義から従う。", math(String.raw`p(w_r)=p(w_s)`), " を仮定する。この等号から ", math(String.raw`p(e_r)=p(e_s)`), " を得る。一つの無向辺の向きは二つだけなので、", math(String.raw`e_r=e_s`), " または ", math(String.raw`e_r=\iota(e_s)`), " である（", ref("def_oriented_edges"), "、", ref("def_edge_reversal"), "）。"]),
+                      paragraph(["後者なら ", math(String.raw`e_r`), " は第一色であると同時に ", math(String.raw`e_s`), " の長い相手として第二色となり矛盾する（", ref("claim_matching_pair_second_coloring_alternates"), "、", ref("claim_reference_long_mate_reversal"), "）。従って ", math(String.raw`e_r=e_s`), " である。", math(String.raw`2r,2s<n`), " だから ", ref("claim_finite_permutation_orbit_enumeration"), " の最小正周期未満の一意性から ", math(String.raw`2r=2s`), "、自然数の乗法の消去により ", math(String.raw`r=s`), " を得る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
