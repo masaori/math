@@ -72150,6 +72150,63 @@ e_k
               }],
             },
           },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_projected_edge_cycle_nonbacktracking",
+              labels: [],
+              title: { text: "交互閉路から射影した閉辺列の非後退性" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_projected_edge_cycle_nonbacktracking",
+                  focus: {
+                    id: "kac_ward_claim_projected_edge_cycle_nonbacktracking",
+                    kind: "claim",
+                    title: { text: "反転した第一色の辺列は閉じた非後退辺列である" },
+                    labels: ["claim_projected_edge_cycle_nonbacktracking"],
+                    habitat: "N",
+                    verification: ["sagemath/check/projected-edge-cycle-nonbacktracking"],
+                    lean: [
+                      "Ising2DLambda.KacWard.taggedActive_projectedCycle_nonbacktracking",
+                      "Ising2DLambda.NecSuf.KacWard.projectedCycle_nonbacktracking",
+                      "Ising2DLambda.KacWard.taggedActive_projectedCycle_nonbacktracking_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " から得る交互閉路を取る。", ref("claim_projected_edge_cycle_closure"), " の ", math(String.raw`k\in\mathbb N_{\ge1}`), " と ", math(String.raw`e_r=c(2r)\in\vec E_L\ (0\le r\le k)`), " を用い、"]),
+                      displayMath(String.raw`w_r:=\iota(e_r)\in\vec E_L\qquad(0\le r\le k)`),
+                      paragraph(["と定める。このとき ", math(String.raw`w_k=w_0`), " であり、全ての ", math(String.raw`0\le r<k`), " について ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " である。最後から最初への接続も ", math(String.raw`r=k-1`), " の場合に含まれる。", math(String.raw`L=1,\ k=1`), " も同じ条件を満たす。実数体と複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_projected_edge_cycle_closure"), " より ", math(String.raw`e_k=e_0`), " なので、反転写像を両辺へ適用して ", math(String.raw`w_k=w_0`), " を得る。", math(String.raw`0\le r<k`), " を固定する。", ref("claim_tagged_difference_alternating_cycle"), " の第一色の ", math(String.raw`c(2r)`), " の短い相手は、", ref("def_matching_pair_successor"), " と ", ref("claim_matching_pair_successor_color"), " により ", math(String.raw`c(2r+1)`), " である。"]),
+                      displayMath(String.raw`\begin{aligned}
+w_{r+1}
+&=\iota(c(2r+2))
+&&\bigl(\because\ w_{r+1}\text{ の定義}\bigr)\\
+&=\iota(\iota(c(2r+1)))
+&&\bigl(\because\ \blkref{claim_projected_edge_cycle_closure}\bigr)\\
+&=c(2r+1)
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
+\end{aligned}`),
+                      paragraph(["短い対の二端は始点を共有して相異なる（", ref("claim_tagged_matching_nonzero_support"), "）。短い対の順序が逆であってもこの二条件は同じである。反転辺の端点計算は ", ref("claim_tagged_short_pair_successor"), " と同じであり、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(w_r)
+&=\operatorname{src}(c(2r))
+&&\bigl(\because\ \blkref{claim_terminal_matrix_entries}\bigr)\\
+&=\operatorname{src}(c(2r+1))
+&&\bigl(\because\ \blkref{claim_tagged_matching_nonzero_support}\bigr)\\
+&=\operatorname{src}(w_{r+1})
+&&\bigl(\because\ w_{r+1}=c(2r+1)\bigr)
+\end{aligned}`),
+                      paragraph([ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`c(2r+1)\ne c(2r)`), " である。", math(String.raw`w_{r+1}=c(2r+1)`), " は上で示し、", math(String.raw`\iota(w_r)=c(2r)`), " は ", ref("claim_reversal_is_involution"), " と ", math(String.raw`w_r=\iota(c(2r))`), " から従う。よって ", math(String.raw`w_{r+1}\ne\iota(w_r)`), " である。", ref("def_nonbacktracking_successors"), " により ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " を得る。", math(String.raw`r=k-1`), " では ", math(String.raw`w_k=w_0`), " なので周期境界の接続となる。辺長一でも長短の標識を区別する。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
