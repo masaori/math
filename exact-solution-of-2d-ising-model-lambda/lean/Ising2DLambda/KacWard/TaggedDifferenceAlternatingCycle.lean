@@ -11,12 +11,9 @@ attribute [local instance] Classical.propDecidable
 theorem taggedActive_alternatingCycle {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
-    (i : {i : OrientedEdge L // i ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t)}) :
-    let τ := shortInvolution D t
-    let υ := longInvolution D t
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    let τ := concreteShortInvolution D t
+    let υ := concreteLongInvolution D t
     let m := matchingPairComponentMinimum τ υ i
     let σ := matchingPairPermutation τ υ
     let n := finitePermutationMinimalPeriod σ m
@@ -27,8 +24,8 @@ theorem taggedActive_alternatingCycle {L : ℕ}
       (∀ j, σ j ∈ matchingPairColor τ υ ↔ j ∉ matchingPairColor τ υ) ∧
       (∀ j, σ j = if j ∈ matchingPairColor τ υ then τ.val j else υ.val j) := by
   dsimp
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
   have hm : matchingPairComponentMinimum τ υ i ∈ matchingPairComponent τ υ i :=
     matchingPairComponentMinimum_mem τ υ i
   constructor

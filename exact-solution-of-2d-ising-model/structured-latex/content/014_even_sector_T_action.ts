@@ -1781,7 +1781,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
    \right)
-   \quad (\because \text{T\_actions\_on\_check\_Z\_Y を 2 列へ同時適用}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ を 2 列へ同時適用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
    \cosh(K_1) & -i \exp(i\tilde\theta)\sinh(K_1) \\
@@ -1789,7 +1789,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
    \end{pmatrix}
    \quad (\because \text{statement の行ベクトルと行列の積の定義}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1\!\left(\tilde\theta_\mu\right)
-   \quad (\because \text{def\_B1\_theta\_B2})
+   \quad (\because \blkref{def_B1_theta_B2})
 \end{aligned}`,
       ),
       paragraph([math(String.raw`V_2`), " 分も同様に、"]),
@@ -1802,7 +1802,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
    \right)
-   \quad (\because \text{T\_actions\_on\_check\_Z\_Y を 2 列へ同時適用}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ を 2 列へ同時適用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
    \cosh(2K_2^*) & i\sinh(2K_2^*) \\
@@ -1810,7 +1810,7 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
    \end{pmatrix}
    \quad (\because \text{statement の行ベクトルと行列の積の定義}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
-   \quad (\because \text{def\_B1\_theta\_B2})
+   \quad (\because \blkref{def_B1_theta_B2})
 \end{aligned}`,
       ),
       paragraph([
