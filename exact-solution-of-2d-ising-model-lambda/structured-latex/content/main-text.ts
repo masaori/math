@@ -81066,6 +81066,86 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_mode_power_sum",
+              focus: {
+                id: "finite_fourier_claim_twisted_mode_power_sum",
+                kind: "claim",
+                title: { text: "ねじれた横・縦モードの冪和" },
+                labels: ["claim_twisted_mode_power_sum"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.twistedModeRootEquiv",
+                  "Ising2DLambda.KacWard.twistedMode_powerSum",
+                  "Ising2DLambda.NecSuf.KacWard.twistedMode_powerSum_necSuf",
+                ],
+                verification: ["sagemath/check/twisted-mode-power-sum"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、指数 ",
+                    math(String.raw`k\in\mathbb N`), " を任意に取る。",
+                    ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " のモード集合について、",
+                    math(String.raw`\xi_a^L=(-1)^a`), "、",
+                    math(String.raw`\eta_b^L=(-1)^b`), " を満たす ",
+                    math(String.raw`\xi_a,\eta_b\in\overline{\mathbb Q}`), " を固定する。",
+                    "その存在は ", ref("claim_antiperiodic_mode_exists"), " と ",
+                    math(String.raw`1^L=1`), " による。このとき",
+                  ]),
+                  displayMath(String.raw`\sum_{z\in\mathcal U_a}z^k
+=\xi_a^k\begin{cases}L&L\mid k,\\0&L\nmid k,\end{cases}
+\qquad
+\sum_{z\in\mathcal W_b}z^k
+=\eta_b^k\begin{cases}L&L\mid k,\\0&L\nmid k.\end{cases}`),
+                  paragraph(["すべての和と値は ", math(String.raw`\overline{\mathbb Q}`), " に属し、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "横方向を示す。", math(String.raw`a=0`), " なら ",
+                    math(String.raw`\mathcal U_a=\mu_L`), " であり、",
+                    math(String.raw`\xi_a\in\mu_L`), " による乗法は ",
+                    math(String.raw`\mu_L`), " の全単射である。",
+                    math(String.raw`a=1`), " なら ",
+                    ref("claim_horizontal_twisted_modes_coset"), " により ",
+                    math(String.raw`\mathcal U_a=\xi_a\mu_L`), " であり、",
+                    math(String.raw`\xi_a\ne0`), " なので乗法は像への全単射である。",
+                    "どちらの場合も同じ再添字付けができる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{z\in\mathcal U_a}z^k
+&=\sum_{y\in\mu_L}(\xi_a y)^k
+&&\bigl(\because\ \blkref{claim_horizontal_twisted_modes_coset}\text{ と乗法の全単射による再添字付け}\bigr)\\
+&=\xi_a^k\sum_{y\in\mu_L}y^k
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪法則と有限和の分配律}\bigr)\\
+&=\xi_a^k\begin{cases}L&L\mid k,\\0&L\nmid k\end{cases}
+&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "縦方向でも ", ref("claim_vertical_twisted_modes_coset"),
+                    " と乗法の全単射を使う。", math(String.raw`b=0`),
+                    " のときは ", math(String.raw`\mathcal W_b=\mu_L`),
+                    " と ", math(String.raw`\eta_b\in\mu_L`),
+                    " を使い、", math(String.raw`b=1`),
+                    " のときは ", math(String.raw`\mathcal W_b=\eta_b\mu_L`),
+                    " と ", math(String.raw`\eta_b\ne0`), " を使う。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{z\in\mathcal W_b}z^k
+&=\sum_{y\in\mu_L}(\eta_b y)^k
+&&\bigl(\because\ \blkref{claim_vertical_twisted_modes_coset}\text{ と乗法の全単射による再添字付け}\bigr)\\
+&=\eta_b^k\sum_{y\in\mu_L}y^k
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪法則と有限和の分配律}\bigr)\\
+&=\eta_b^k\begin{cases}L&L\mid k,\\0&L\nmid k\end{cases}
+&&\bigl(\because\ \blkref{claim_root_of_unity_power_sum_value},\ n=L,\ m=k\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
               focus: {
                 id: "finite_fourier_claim_twisted_mode_wrap_phase",

@@ -1504,6 +1504,8 @@ import Ising2DLambda.KacWard.SameDirectionDualInnerOrthogonalityFromNecSuf
 import Ising2DLambda.KacWard.TwistedFourierLeftInverse
 import Ising2DLambda.NecSuf.KacWard.TwistedFourierLeftInverse
 import Ising2DLambda.KacWard.TwistedFourierLeftInverseFromNecSuf
+import Ising2DLambda.KacWard.TwistedModePowerSum
+import Ising2DLambda.NecSuf.KacWard.TwistedModePowerSum
 import Ising2DLambda.NecSuf.KacWard.SourceDirectionBijection
 import Ising2DLambda.KacWard.SourceDirectionBijectionFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TargetDirectionBijection
