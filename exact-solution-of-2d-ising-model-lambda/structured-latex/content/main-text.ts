@@ -80763,6 +80763,61 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_distinct_direction_dual_inner_zero",
+              focus: {
+                id: "finite_fourier_claim_distinct_direction_dual_inner_zero",
+                kind: "claim",
+                title: { text: "異なる方向の双対 Fourier ベクトルの内積は零である" },
+                labels: ["claim_distinct_direction_dual_inner_zero"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/distinct-direction-dual-inner-zero"],
+                lean: [
+                  "Ising2DLambda.KacWard.distinctDirection_dualInner_zero",
+                  "Ising2DLambda.NecSuf.KacWard.distinctDirection_dualInner_zero_necSuf",
+                  "Ising2DLambda.KacWard.distinctDirection_dualInner_zero_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、二つのモード ",
+                    math(String.raw`(\varpi,\varsigma),(\varpi',\varsigma')\in\mathcal U_a\times\mathcal W_b`),
+                    " と相異なる方向番号 ",
+                    math(String.raw`\delta,\delta'\in\mathbb Z/4\mathbb Z`), " を任意に取る。",
+                    "このとき ", math(String.raw`\overline{\mathbb Q}`), " の有限和について",
+                  ]),
+                  displayMath(String.raw`\sum_{\vec e\in\vec E_L}
+\bar\psi^{\varpi,\varsigma,\delta}(\vec e)
+\psi^{\varpi',\varsigma',\delta'}(\vec e)=0`),
+                  paragraph([
+                    "が成り立つ。向き付き辺集合は ", ref("def_oriented_edges"),
+                    "、二つのベクトルは ", ref("def_dual_endpoint_mode_vector"),
+                    " と ", ref("def_endpoint_mode_vector"), " に従う。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`\vec e\in\vec E_L`), " を取る。",
+                    math(String.raw`\operatorname{dir}(\vec e)=\delta`),
+                    " なら ", math(String.raw`\operatorname{dir}(\vec e)\ne\delta'`),
+                    " であり、そうでなければ双対ベクトルの成分が零である。",
+                    "したがって各項は零である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\vec E_L}\bar\psi^{\varpi,\varsigma,\delta}(\vec e)
+\psi^{\varpi',\varsigma',\delta'}(\vec e)
+&=\sum_{\vec e\in\vec E_L}0
+&&\bigl(\because\ \blkref{def_dual_endpoint_mode_vector},\ \blkref{def_endpoint_mode_vector}\text{ と }\delta\ne\delta'\bigr)\\
+&=0&&\bigl(\because\ \overline{\mathbb Q}\text{ の有限和の零元}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",

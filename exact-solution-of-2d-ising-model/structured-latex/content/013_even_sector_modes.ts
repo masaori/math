@@ -2331,11 +2331,11 @@ M_{\mathrm{col}} & (j = k) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(i(j-k)\tilde\theta_\mu)
-&&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M_{\mathrm{col}}}\cdot Z_j\cdot M_{\mathrm{col}}
-&&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
+&&(\because \blkref{antiperiodic_exp_sum}\text{ と準備の等式により } k = j \text{ の項だけが残る}) \\
 &= Z_j
 &&(\because M_{\mathrm{col}}\ne 0\text{ なのでスカラー }\tfrac{1}{M_{\mathrm{col}}}\text{ と }M_{\mathrm{col}}\text{ が相殺する})
 \end{aligned}`,
@@ -2355,11 +2355,11 @@ M_{\mathrm{col}} & (j = k) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
 &&(\because \text{有限和への分配}) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k\,\exp(i(j-k)\tilde\theta_\mu)
-&&(\because \text{theorem\_exp\_product}\ (n=1)) \\
+&&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(j-k)\tilde\theta_\mu)
 &&(\because \text{有限和の順序交換}) \\
 &= \frac{1}{M_{\mathrm{col}}}\cdot Y_j\cdot M_{\mathrm{col}}
-&&(\because \text{準備の等式により } k = j \text{ の項だけが残る}) \\
+&&(\because \blkref{antiperiodic_exp_sum}\text{ と準備の等式により } k = j \text{ の項だけが残る}) \\
 &= Y_j
 &&(\because M_{\mathrm{col}}\ne 0\text{ なのでスカラー }\tfrac{1}{M_{\mathrm{col}}}\text{ と }M_{\mathrm{col}}\text{ が相殺する})
 \end{aligned}`,

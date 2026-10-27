@@ -73,6 +73,7 @@ export const ALL_LABELS = [
   "claim_displacement_is_direction_unit",
   "claim_distance_positive_on_fisher_zeros",
   "claim_distance_squared_zero_iff_equal",
+  "claim_distinct_direction_dual_inner_zero",
   "claim_doubled_edge_fiber_phase_reduction",
   "claim_doubled_edge_free_fiber_phase_reduction",
   "claim_downward_seam_mode_phase",
