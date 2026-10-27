@@ -80329,6 +80329,64 @@ y^L
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_mode_sets_card",
+              focus: {
+                id: "finite_fourier_claim_twisted_mode_sets_card",
+                kind: "claim",
+                title: { text: "横・縦のねじれたモード集合はそれぞれ辺長個の元を持つ" },
+                labels: ["claim_twisted_mode_sets_card"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/twisted-mode-sets-card"],
+                lean: [
+                  "Ising2DLambda.KacWard.twistedModeSets_ncard",
+                  "Ising2DLambda.NecSuf.KacWard.scalarModeImage_ncard_necSuf",
+                  "Ising2DLambda.KacWard.twistedModeSets_ncard_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`a,b\in\{0,1\}`), " に対して、",
+                  ]),
+                  displayMath(String.raw`|\mathcal U_a|=|\mathcal W_b|=L`),
+                  paragraph([
+                    "が成り立つ。集合は ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " に従う。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_antiperiodic_mode_exists"), " により、",
+                    math(String.raw`\xi^L=-1`), " を満たす ",
+                    math(String.raw`\xi\in\mu_{2L}`), " を取る。",
+                    math(String.raw`\xi^L\ne0`), " なので ", math(String.raw`\xi\ne0`), "。",
+                  ]),
+                  paragraph([
+                    "写像 ", math(String.raw`m_\xi:\mu_L\to\overline{\mathbb Q},\ y\mapsto\xi y`),
+                    " は単射である。実際、", math(String.raw`\xi y=\xi y'`), " なら、",
+                    math(String.raw`\xi^{-1}`), " を掛けて ", math(String.raw`y=y'`), " を得る。",
+                    "像への全射性は像の定義によるので、", math(String.raw`m_\xi`),
+                    " は ", math(String.raw`\mu_L`), " とその像の全単射である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|m_\xi(\mu_L)|
+&=|\mu_L|&&\bigl(\because\ m_\xi\text{ は像への全単射}\bigr)\\
+&=L&&\bigl(\because\ \blkref{claim_root_of_unity_card}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_horizontal_twisted_modes_coset"), " と ",
+                    ref("claim_vertical_twisted_modes_coset"), " により、",
+                    math(String.raw`\mathcal U_0=\mathcal W_0=\mu_L`), " および ",
+                    math(String.raw`\mathcal U_1=\mathcal W_1=m_\xi(\mu_L)`), "。",
+                    "したがって各集合の元の個数は ", math(String.raw`L`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

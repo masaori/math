@@ -1466,3 +1466,6 @@ import Ising2DLambda.NecSuf.KacWard.TwistedModeCoset
 import Ising2DLambda.KacWard.HorizontalTwistedModesCosetFromNecSuf
 import Ising2DLambda.KacWard.VerticalTwistedModesCoset
 import Ising2DLambda.KacWard.VerticalTwistedModesCosetFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.TwistedModeCard
+import Ising2DLambda.KacWard.TwistedModeCard
+import Ising2DLambda.KacWard.TwistedModeCardFromNecSuf
