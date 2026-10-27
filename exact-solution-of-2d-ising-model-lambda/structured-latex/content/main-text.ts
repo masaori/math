@@ -81983,6 +81983,74 @@ G^{a,b,\kappa}_{\vec g,\vec f}
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_similarity_preserves_determinant",
+              focus: {
+                id: "finite_fourier_claim_similarity_preserves_determinant",
+                kind: "claim",
+                title: { text: "Fourier 相似は Kac--Ward 行列式を保存する" },
+                labels: ["claim_fourier_similarity_preserves_determinant"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/fourier-similarity-determinant"],
+                lean: [
+                  "Ising2DLambda.KacWard.fourier_similarity_preserves_determinant",
+                  "Ising2DLambda.NecSuf.KacWard.similarity_preserves_determinant_necSuf",
+                  "Ising2DLambda.KacWard.fourier_similarity_preserves_determinant_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に取る。行列のハットは ", ref("def_qbar_constant_embedding"),
+                    " の成分ごとの適用である。", ref("def_kac_ward_determinants"), " の多項式について",
+                  ]),
+                  displayMath(String.raw`D^{a,b}_L(x)=\det_x\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)
+\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "以下、", math(String.raw`F=F^{a,b,\kappa}`), "、",
+                    math(String.raw`G=G^{a,b,\kappa}`), "、",
+                    math(String.raw`B=B^{a,b,\kappa}`), "、",
+                    math(String.raw`T=I_{\vec E_L}-x\widehat B`),
+                    " と置く。行列式は ", ref("def_qbar_polynomial_determinant"), " に従う。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\det_x(\widehat F)\det_x(\widehat G)
+&=\det_x(\widehat F\widehat G)
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
+&=\det_x I_{\vec E_L}
+&&\bigl(\because\ \blkref{claim_twisted_fourier_right_inverse},\ \blkref{def_qbar_constant_embedding}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}:\ \text{恒等置換の項だけが }1\bigr).
+\end{aligned}`),
+                  paragraph(["よって有限多項式行列の積について"]),
+                  displayMath(String.raw`\begin{aligned}
+D^{a,b}_L(x)
+&=\det_x(\widehat F T\widehat G)
+&&\bigl(\because\ \blkref{def_kac_ward_determinants},\ \blkref{claim_polynomial_fourier_similarity}\bigr)\\
+&=\bigl(\det_x(\widehat F)\det_x(T)\bigr)\det_x(\widehat G)
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\text{ を二回適用}\bigr)\\
+&=\det_x(\widehat F)\bigl(\det_x(T)\det_x(\widehat G)\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法の結合律}\bigr)\\
+&=\det_x(\widehat F)\bigl(\det_x(\widehat G)\det_x(T)\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法の交換律}\bigr)\\
+&=\bigl(\det_x(\widehat F)\det_x(\widehat G)\bigr)\det_x(T)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法の結合律}\bigr)\\
+&=1\cdot\det_x(T)
+&&\bigl(\because\ \text{上の行列式の積が }1\bigr)\\
+&=\det_x(T)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法単位元}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

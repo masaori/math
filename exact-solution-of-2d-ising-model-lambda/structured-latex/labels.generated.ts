@@ -115,6 +115,7 @@ export const ALL_LABELS = [
   "claim_fixed_or_shift_preserves_orbit",
   "claim_four_part_adjacent_sum",
   "claim_four_part_repeated_difference",
+  "claim_fourier_similarity_preserves_determinant",
   "claim_free_entropy_at_one",
   "claim_free_entropy_dual_relation",
   "claim_fully_unswitchable_contacts_witness_doubled_edges",
