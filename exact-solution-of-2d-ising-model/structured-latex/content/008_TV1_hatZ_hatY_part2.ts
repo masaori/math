@@ -57,20 +57,20 @@ c_1
 &= \cosh 2K_1
 && (\because\ \text{記号の定義})\\
 &> \sinh 2K_1
-&& (\because\ 2K_1>0\ \text{における}\ \cosh x>\sinh x)\\
+&& (\because\ 2K_1>0\ \text{における}\ \cosh x>\sinh x,\ \blkref{cosh_sinh_basic_properties})\\
 &= s_1
 && (\because\ \text{記号の定義})\\
 &> 0
-&& (\because\ 2K_1>0\ \text{における}\ \sinh x>0)\\[3pt]
+&& (\because\ 2K_1>0\ \text{における}\ \sinh x>0,\ \blkref{cosh_sinh_basic_properties})\\[3pt]
 c_2
 &= \cosh 2K_2
 && (\because\ \text{記号の定義})\\
 &> \sinh 2K_2
-&& (\because\ 2K_2>0\ \text{における}\ \cosh x>\sinh x)\\
+&& (\because\ 2K_2>0\ \text{における}\ \cosh x>\sinh x,\ \blkref{cosh_sinh_basic_properties})\\
 &= s_2
 && (\because\ \text{記号の定義})\\
 &> 0
-&& (\because\ 2K_2>0\ \text{における}\ \sinh x>0)
+&& (\because\ 2K_2>0\ \text{における}\ \sinh x>0,\ \blkref{cosh_sinh_basic_properties})
 \end{aligned}`,
       ),
       paragraph([
@@ -82,10 +82,10 @@ c_2
         String.raw`\begin{aligned}
 c_1^2
 &= 1+s_1^2
-&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_1\ \text{へ適用})\\
+&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_1\ \text{へ適用},\ \blkref{cosh_sinh_basic_properties})\\
 c_2^2
 &= 1+s_2^2
-&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_2\ \text{へ適用})
+&& (\because\ \cosh^2 x-\sinh^2 x=1\ \text{を}\ x=2K_2\ \text{へ適用},\ \blkref{cosh_sinh_basic_properties})
 \end{aligned}`,
       ),
       paragraph([
