@@ -1959,24 +1959,25 @@ N_{22}
         String.raw`\begin{aligned}
 P_{11}
 &= a\, N_{11} + \left(-i \exp(i\theta) b\right) N_{21}
-   \quad (\because \text{mat\_mult}) \\
+   &&(\because \blkref{mat_mult}) \\
 &= a\left(Ca - S b\, \exp(-i\theta)\right)
    + \left(-i \exp(i\theta) b\right)\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
-   \quad (\because \text{Step 1 の } N_{11}, N_{21}) \\
+   &&(\because \text{Step 1 の } N_{11}, N_{21}) \\
 &= Ca^2 - S ab\, \exp(-i\theta)
    + \exp(i\theta) b\left(C b\, \exp(-i\theta) - Sa\right)
-   \quad (\because -i\cdot i = 1) \\
+   &&(\because -i\cdot i = 1) \\
 &= Ca^2 - S ab\, \exp(-i\theta) + C b^2 - S ab\, \exp(i\theta)
-   \quad (\because \exp(i\theta)\exp(-i\theta) = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right) \\
+   &&(\because \exp(i\theta)\exp(-i\theta) = 1,\ \blkref{theorem_exp_product}\ (n=1)) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
+   &&(\because\ \mathbb C\text{ の分配則}) \\
 &= C\, c_1 - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\left(\exp(i\theta) + \exp(-i\theta)\right)
-   \quad (\because \text{倍角公式 } 2ab = s_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
 &= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
-   \quad (\because \text{euler\_formula\_cos\_sin より } \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
+   &&(\because \blkref{euler_formula_cos_sin}\text{ より } \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
-   \quad (\because C := c_2^*,\ S := s_2^*)
+   &&(\because C := c_2^*,\ S := s_2^*)
 \end{aligned}`,
       ),
       paragraph([
@@ -1995,17 +1996,24 @@ P_{11}
         String.raw`\begin{aligned}
 P_{22}
 &= \left(i \exp(-i\theta) b\right) N_{12} + a\, N_{22}
-   \quad (\because \text{mat\_mult}) \\
+   &&(\because \blkref{mat_mult}) \\
 &= \left(i \exp(-i\theta) b\right)\cdot i\left(Sa - C b\, \exp(i\theta)\right)
    + a\left(Ca - S b\, \exp(i\theta)\right)
-   \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
+   &&(\because \text{Step 1 の } N_{12}, N_{22}) \\
 &= -\exp(-i\theta) b\left(Sa - C b\, \exp(i\theta)\right) + Ca^2 - S ab\, \exp(i\theta)
-   \quad (\because i\cdot i = -1) \\
+   &&(\because i\cdot i = -1) \\
 &= -S ab\, \exp(-i\theta) + C b^2 + Ca^2 - S ab\, \exp(i\theta)
-   \quad (\because \exp(-i\theta)\exp(i\theta) = 1,\ \text{theorem\_exp\_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right) \\
+   &&(\because \exp(-i\theta)\exp(i\theta) = 1,\ \blkref{theorem_exp_product}\ (n=1)) \\
+&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
+   &&(\because\ \mathbb C\text{ の分配則}) \\
+&= Cc_1 - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}) \\
+&= Cc_1 - S\frac{s_1}{2}\left(\exp(i\theta) + \exp(-i\theta)\right)
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}) \\
+&= Cc_1 - Ss_1\cos\theta
+   &&(\because\ \blkref{euler_formula_cos_sin}) \\
 &= c_1 c_2^* - s_1 s_2^*\cos\theta
-   \quad (\because P_{11} \text{ の計算の最後の 4 段と同じ})
+   &&(\because\ C=c_2^*,\ S=s_2^*)
 \end{aligned}`,
       ),
       paragraph([
@@ -2022,14 +2030,15 @@ P_{22}
         String.raw`\begin{aligned}
 a^2 + b^2 \exp(2i\theta)
 &= \exp(i\theta)\left(a^2 \exp(-i\theta) + b^2 \exp(i\theta)\right)
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \exp(i\theta)\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
-   \quad (\because \text{euler\_formula\_cos\_sin を 2 箇所へ同時適用}) \\
-&= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right) \\
+   &&(\because \blkref{euler_formula_cos_sin}\text{ を 2 箇所へ同時適用}) \\
+&= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
+   &&(\because\ \mathbb C\text{ の分配則}) \\
 &= \exp(i\theta)\left(c_1\cos\theta - i\left(a^2-b^2\right)\sin\theta\right)
-   \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
 &= \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right)
-   \quad (\because a^2-b^2 = 1)
+   &&(\because a^2-b^2 = 1)
 \end{aligned}`,
       ),
       paragraph([
@@ -2047,23 +2056,25 @@ a^2 + b^2 \exp(2i\theta)
         String.raw`\begin{aligned}
 P_{12}
 &= a\, N_{12} + \left(-i \exp(i\theta) b\right) N_{22}
-   \quad (\because \text{mat\_mult}) \\
+   &&(\because \blkref{mat_mult}) \\
 &= a\cdot i\left(Sa - C b\, \exp(i\theta)\right)
    + \left(-i \exp(i\theta) b\right)\left(Ca - S b\, \exp(i\theta)\right)
-   \quad (\because \text{Step 1 の } N_{12}, N_{22}) \\
+   &&(\because \text{Step 1 の } N_{12}, N_{22}) \\
 &= i\left[S a^2 - C ab\, \exp(i\theta)\right]
    + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (\exp(i\theta)\exp(i\theta) = \exp(2i\theta))) \\
-&= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right] \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)\ (\exp(i\theta)\exp(i\theta) = \exp(2i\theta))) \\
+&= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right]
+   &&(\because\ \mathbb C\text{ の分配則}) \\
 &= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - 2C ab\, \exp(i\theta)\right]
-   \quad (\because \text{準備の補助的な等式}) \\
+   &&(\because \text{準備の補助的な等式}) \\
 &= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - C s_1 \exp(i\theta)\right]
-   \quad (\because \text{倍角公式 } 2ab = s_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
 &= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
-   \quad (\because C := c_2^*,\ S := s_2^*) \\
+   &&(\because C := c_2^*,\ S := s_2^*) \\
 &= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
+   &&(\because \blkref{duality_c2_star_eq_s2_star_c2}:\ c_2^* = s_2^* c_2) \\
 &= i \exp(i\theta) s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
+   &&(\because\ \mathbb C\text{ の分配則})
 \end{aligned}`,
       ),
       paragraph([
@@ -2080,14 +2091,15 @@ P_{12}
         String.raw`\begin{aligned}
 P_{21}
 &= \left(i \exp(-i\theta) b\right) N_{11} + a\, N_{21}
-   \quad (\because \text{mat\_mult}) \\
+   &&(\because \blkref{mat_mult}) \\
 &= \left(i \exp(-i\theta) b\right)\left(Ca - S b\, \exp(-i\theta)\right)
    + a\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
-   \quad (\because \text{Step 1 の } N_{11}, N_{21}) \\
+   &&(\because \text{Step 1 の } N_{11}, N_{21}) \\
 &= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
    + i\left[C ab\, \exp(-i\theta) - S a^2\right]
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)\ (\exp(-i\theta)\exp(-i\theta) = \exp(-2i\theta))) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)\ (\exp(-i\theta)\exp(-i\theta) = \exp(-2i\theta))) \\
 &= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
+   &&(\because\ \mathbb C\text{ の分配則})
 \end{aligned}`,
       ),
       paragraph([
@@ -2097,14 +2109,15 @@ P_{21}
         String.raw`\begin{aligned}
 a^2 + b^2 \exp(-2i\theta)
 &= \exp(-i\theta)\left(a^2 \exp(i\theta) + b^2 \exp(-i\theta)\right)
-   \quad (\because \text{theorem\_exp\_product}\ (n=1)) \\
+   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \exp(-i\theta)\left(a^2(\cos\theta + i\sin\theta) + b^2(\cos\theta - i\sin\theta)\right)
-   \quad (\because \text{euler\_formula\_cos\_sin を 2 箇所へ同時適用}) \\
-&= \exp(-i\theta)\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right) \\
+   &&(\because \blkref{euler_formula_cos_sin}\text{ を 2 箇所へ同時適用}) \\
+&= \exp(-i\theta)\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right)
+   &&(\because\ \mathbb C\text{ の分配則}) \\
 &= \exp(-i\theta)\left(c_1\cos\theta + i\left(a^2-b^2\right)\sin\theta\right)
-   \quad (\because \text{倍角公式 } a^2+b^2 = c_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
 &= \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right)
-   \quad (\because a^2-b^2 = 1)
+   &&(\because a^2-b^2 = 1)
 \end{aligned}`,
       ),
       paragraph([
@@ -2124,16 +2137,17 @@ a^2 + b^2 \exp(-2i\theta)
         String.raw`\begin{aligned}
 P_{21}
 &= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
-   \quad (\because \text{直前の } P_{21} \text{ の表示}) \\
+   &&(\because \text{直前の } P_{21} \text{ の表示}) \\
 &= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - 2C ab\, \exp(-i\theta)\right]
-   \quad (\because \text{準備の補助的な等式}) \\
+   &&(\because \text{準備の補助的な等式}) \\
 &= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - C s_1 \exp(-i\theta)\right]
-   \quad (\because \text{倍角公式 } 2ab = s_1) \\
+   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
 &= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - c_2^*\, s_1\right]
-   \quad (\because C := c_2^*,\ S := s_2^*) \\
+   &&(\because C := c_2^*,\ S := s_2^*) \\
 &= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   \quad (\because \text{duality\_c2\_star\_eq\_s2\_star\_c2}:\ c_2^* = s_2^* c_2) \\
+   &&(\because \blkref{duality_c2_star_eq_s2_star_c2}:\ c_2^* = s_2^* c_2) \\
 &= -i \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
+   &&(\because\ \mathbb C\text{ の分配則})
 \end{aligned}`,
       ),
       paragraph([

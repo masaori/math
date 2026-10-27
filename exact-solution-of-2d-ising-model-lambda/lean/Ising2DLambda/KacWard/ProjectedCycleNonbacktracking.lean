@@ -82,7 +82,7 @@ theorem taggedActive_projectedCycle_nonbacktracking {L : ℕ} (z : Qbar)
   let m := matchingPairComponentMinimum τ υ i
   let σ := matchingPairPermutation τ υ
   let C := matchingPairColor τ υ
-  obtain ⟨k, hk, hreturn, hlong⟩ := taggedActive_projectedClosedEdgeCycle D t i
+  obtain ⟨k, hk, hreturn, hlong⟩ := taggedActive_projectedClosedEdgeCycle_abstractActivity D t i
   have hcomponent : m ∈ matchingPairComponent τ υ i :=
     matchingPairComponentMinimum_mem τ υ i
   have hbase : matchingPairComponentMinimum τ υ m = m :=
