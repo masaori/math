@@ -80539,6 +80539,56 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
+              focus: {
+                id: "finite_fourier_claim_twisted_mode_wrap_phase",
+                kind: "claim",
+                title: { text: "ねじれたモードの周期端で符号と冪が相殺する" },
+                labels: ["claim_twisted_mode_wrap_phase"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/twisted-mode-wrap-phase"],
+                lean: [
+                  "Ising2DLambda.KacWard.twistedMode_wrapPhase",
+                  "Ising2DLambda.NecSuf.KacWard.twistedMode_wrapPhase_necSuf",
+                  "Ising2DLambda.KacWard.twistedMode_wrapPhase_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、符号 ",
+                    math(String.raw`\sigma\in\{1,-1\}\subset\overline{\mathbb Q}`),
+                    " と非零の代数的数 ", math(String.raw`z\in\overline{\mathbb Q}^{\times}`),
+                    " が ", math(String.raw`z^L=\sigma`), " を満たすとする。",
+                    "これは ", ref("def_horizontal_twisted_modes"), " または ",
+                    ref("def_vertical_twisted_modes"), " のモードに適用できる。",
+                  ]),
+                  displayMath(String.raw`\sigma z^0=z^L,\qquad \sigma z^{L-1}=z^{-1}.`),
+                  paragraph(["前進と後退の両方を含み、辺長一でも成り立つ。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph(["前進の等式は仮定を一度代入して得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+\sigma z^0
+&=\sigma\quad(\because z^0=1)\\
+&=z^L\quad(\because z^L=\sigma).
+\end{aligned}`),
+                  paragraph(["後退ではまず積を計算する。"]),
+                  displayMath(String.raw`\begin{aligned}
+(\sigma z^{L-1})z
+&=\sigma(z^{L-1}z)\quad(\because \text{乗法の結合律})\\
+&=\sigma z^{(L-1)+1}\quad(\because \text{冪の加法則})\\
+&=\sigma z^L\quad(\because L\ge1)\\
+&=\sigma^2\quad(\because z^L=\sigma)\\
+&=1\quad(\because \sigma\in\{1,-1\}).
+\end{aligned}`),
+                  paragraph(["非零の ", math(String.raw`z`), " の逆元を右から掛けて、", math(String.raw`\sigma z^{L-1}=z^{-1}`), " を得る。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_successor_direction_selection",
               focus: {
                 id: "finite_fourier_claim_successor_direction_selection",

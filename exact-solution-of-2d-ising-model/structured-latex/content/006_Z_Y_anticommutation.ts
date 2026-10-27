@@ -366,7 +366,6 @@ YX
         " にとってよい。この範囲では ",
         math(String.raw`\mu \equiv \nu \pmod M_{\mathrm{col}} \iff \mu = \nu`),
         " であるから、",
-        " であるから",
       ]),
       displayMath(
         String.raw`\delta^{(M_{\mathrm{col}})}_{(\mu,\nu)} =
@@ -423,7 +422,7 @@ Y_\mu &= \overbrace{\sigma^x}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{\si
       paragraph([
         "（",
         math(String.raw`\mu = 1`),
-        " のときは第 1 因子の左に因子が無い。この端の場合も次の一続きで定義と一致する。",
+        " のときは第 1 因子の左に因子が無い）。この端の場合も次の一続きで定義と一致する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
