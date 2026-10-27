@@ -80927,6 +80927,83 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_same_direction_dual_inner_orthogonality",
+              focus: {
+                id: "finite_fourier_claim_same_direction_dual_inner_orthogonality",
+                kind: "claim",
+                title: { text: "同方向の双対 Fourier ベクトルの内積はモードを直交させる" },
+                labels: ["claim_same_direction_dual_inner_orthogonality"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.sameDirection_dualInner_orthogonality",
+                  "Ising2DLambda.NecSuf.KacWard.sameDirection_dualInner_orthogonality_necSuf",
+                  "Ising2DLambda.KacWard.sameDirection_dualInner_orthogonality_from_necSuf",
+                ],
+                verification: ["sagemath/check/same-direction-dual-inner-orthogonality"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、二つのモード ",
+                    math(String.raw`(\varpi,\varsigma),(\varpi',\varsigma')\in\mathcal U_a\times\mathcal W_b`),
+                    " と方向番号 ", math(String.raw`\delta\in\mathbb Z/4\mathbb Z`), " を任意に取る。このとき ",
+                    math(String.raw`\overline{\mathbb Q}`), " の有限和について",
+                  ]),
+                  displayMath(String.raw`\sum_{\vec e\in\vec E_L}
+\bar\psi^{\varpi,\varsigma,\delta}(\vec e)
+\psi^{\varpi',\varsigma',\delta}(\vec e)
+=\begin{cases}L^2,&(\varpi,\varsigma)=(\varpi',\varsigma'),\\
+0,&(\varpi,\varsigma)\ne(\varpi',\varsigma').\end{cases}`),
+                  paragraph([
+                    "二つのベクトルは ", ref("def_dual_endpoint_mode_vector"), " と ",
+                    ref("def_endpoint_mode_vector"), " に従う。右辺の自然数は ",
+                    math(String.raw`\mathbb N\hookrightarrow\overline{\mathbb Q}`),
+                    " で移した値である。実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`r:=\varpi'/\varpi`), " と ",
+                    math(String.raw`t:=\varsigma'/\varsigma`), " を ",
+                    math(String.raw`\overline{\mathbb Q}`), " に置く。モードは零でないので商が定義できる。",
+                    ref("claim_twisted_mode_ratio_root"), " より ",
+                    math(String.raw`r,t\in\mu_L`), " である。",
+                    ref("claim_target_direction_bijection"), " で終点と方向を再添字付けすると、",
+                    ref("def_lattice"), " と ", ref("def_residue_maps"),
+                    " により二つの座標の代表はそれぞれ ",
+                    math(String.raw`0,\ldots,L-1`), " を一度ずつ走る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\vec E_L}\bar\psi^{\varpi,\varsigma,\delta}(\vec e)
+\psi^{\varpi',\varsigma',\delta}(\vec e)
+&=\sum_{(i,j)\in V_L}\varpi^{-s(j)}\varsigma^{-s(i)}
+(\varpi')^{s(j)}(\varsigma')^{s(i)}
+&&\bigl(\because\ \blkref{claim_target_direction_bijection},\ \blkref{def_dual_endpoint_mode_vector},\ \blkref{def_endpoint_mode_vector}\bigr)\\
+&=\sum_{(i,j)\in V_L}r^{s(j)}t^{s(i)}
+&&\bigl(\because\ r=\varpi'/\varpi,\ t=\varsigma'/\varsigma\text{ と体の冪法則}\bigr)\\
+&=\sum_{i=0}^{L-1}\sum_{j=0}^{L-1}r^jt^i
+&&\bigl(\because\ \blkref{def_lattice},\ \blkref{def_residue_maps}\text{ の代表による再添字付け}\bigr)\\
+&=\left(\sum_{j=0}^{L-1}r^j\right)
+\left(\sum_{i=0}^{L-1}t^i\right)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の有限和の分配律}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`r=1`), " なら ",
+                    math(String.raw`\sum_{j=0}^{L-1}r^j=L`), " である。",
+                    math(String.raw`r\ne1`), " なら ", ref("claim_root_of_unity_geometric_sum_zero"),
+                    " によりその和は零である。縦の ", math(String.raw`t`), " も同じである。",
+                    "また、分母が零でないので ", math(String.raw`r=1\iff\varpi'=\varpi`),
+                    " および ", math(String.raw`t=1\iff\varsigma'=\varsigma`),
+                    " が体の四則から従う。ゆえに上の積はモードの組が等しい場合だけ ",
+                    math(String.raw`L^2`), " であり、それ以外は零である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
               focus: {
                 id: "finite_fourier_claim_twisted_mode_wrap_phase",

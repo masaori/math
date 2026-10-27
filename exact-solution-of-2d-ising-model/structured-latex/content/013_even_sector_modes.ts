@@ -2314,7 +2314,7 @@ j-k
 = \begin{cases}
 M_{\mathrm{col}} & (j = k) \\
 0 & (j \neq k)
-\end{cases}`,
+\end{cases}\quad(\because\ \blkref{antiperiodic_exp_sum}\text{ と }|j-k|<M_{\mathrm{col}})`,
       ),
       paragraph([
         "である。第 1 式は、",
