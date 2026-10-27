@@ -1,0 +1,10 @@
+import os
+prelude = 'sagemath/check/block-diagonal-term-factorization/_prelude.sage'
+if not os.path.isfile(prelude):
+    prelude = 'exact-solution-of-2d-ising-model-lambda/' + prelude
+load(prelude)
+cases = 0
+for values in term_values():
+    assert values[0] == values[1]
+    cases += 1
+print(f"PASS: sign factor, {cases} terms")

@@ -6593,6 +6593,65 @@ N_{k,l}
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_diagonal_term_factorization",
+        labels: [],
+        title: { text: "ブロック対角行列の置換項をファイバー別に分解する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_diagonal_term_factorization",
+            focus: {
+              id: "tools_claim_block_diagonal_term_factorization",
+              kind: "claim",
+              title: { text: "ブロック対角行列の置換項のファイバー別分解" },
+              labels: ["claim_block_diagonal_term_factorization"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/block-diagonal-term-factorization"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_term_eq_prod_fiber_terms",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockGluing_entryProduct_fiberProduct",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockGluing_weightedTerm_fiberProduct",
+              ],
+              statement: [
+                paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J,\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), "、多項式行列 ", math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), " を取る。", ref("claim_block_preserving_permutation_bijection"), " のファイバーを ", math(String.raw`\mathcal J_k`), " とし、置換の組 ", math(String.raw`\boldsymbol\tau=(\tau_k)_{k\in\mathcal K}\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)`), " を取る。", math(String.raw`\sigma:=\operatorname{Glue}(\boldsymbol\tau)\in\operatorname{Perm}_b(\mathcal J)`), " と置く。"]),
+                paragraph(["包含写像を ", math(String.raw`\nu_k:\mathcal J_k\to\mathcal J`), " と書く。", math(String.raw`\nu:\coprod_{k\in\mathcal K}\mathcal J_k\to\mathcal J,\ (k,i)\mapsto\nu_k(i)`), " は全単射である。整数の包含を ", math(String.raw`\iota_{\mathbb Z}:\mathbb Z\hookrightarrow\overline{\mathbb Q}`), "、定数多項式への埋込みを ", ref("def_qbar_constant_embedding"), " の帽子で表す。このとき各置換項は"]),
+                displayMath(String.raw`\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+=\prod_{k\in\mathcal K}\left(
+  \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}
+  \prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}
+\right)\in\overline{\mathbb Q}[x]`),
+                paragraph(["と分解される。空のファイバーは符号も成分積も一である。"]),
+              ],
+              proof: [
+                paragraph(["符号には ", ref("claim_block_preserving_permutation_sign"), " を使う。貼合せのファイバーへの制限は ", ref("claim_block_preserving_permutation_bijection"), " により ", math(String.raw`\tau_k`), " である。各 ", math(String.raw`i\in\mathcal J_k`), " に対し ", math(String.raw`\sigma(\nu_k(i))=\nu_k(\tau_k(i))`), " であり、", math(String.raw`\mathcal J`), " はファイバーの非交和なので"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&=\widehat{\iota_{\mathbb Z}\left(\prod_{k\in\mathcal K}\operatorname{sgn}(\tau_k)\right)}
+  \prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&(\because\ \blkref{claim_block_preserving_permutation_sign})\\
+&=\left(\prod_{k\in\mathcal K}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}\right)
+  \prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ は積を保つ})\\
+&=\left(\prod_{k\in\mathcal K}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}\right)
+  \left(\prod_{k\in\mathcal K}\prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}\right)
+&&(\because\ \nu:\coprod_{k\in\mathcal K}\mathcal J_k\xrightarrow{\sim}\mathcal J)\\
+&=\prod_{k\in\mathcal K}\left(
+  \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}
+  \prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}
+\right)
+&&(\because\ \overline{\mathbb Q}[x]\text{ の有限積の乗法性}).
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
