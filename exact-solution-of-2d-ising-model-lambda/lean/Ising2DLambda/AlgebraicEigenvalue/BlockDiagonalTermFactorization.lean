@@ -41,12 +41,19 @@ theorem blockDiagonal_term_eq_prod_fiber_terms
         congr 1
         ext p
         simp
-  have hentry := NecSuf.AlgebraicEigenvalue.blockGluing_entryProduct_fiberProduct
-    block B parts
-  have hglue : σ.1 = (NecSuf.AlgebraicEigenvalue.blockGluing block parts).1 := by
-    apply Equiv.ext
-    intro i
-    rfl
+  have hentry : (∏ i : J, B i (σ.1 i)) =
+      ∏ k : K, ∏ i : {j : J // block j = k}, B i.1 ((parts k i).1) := by
+    calc
+      (∏ i : J, B i (σ.1 i)) =
+          ∏ p : Σ k : K, {j : J // block j = k},
+            B p.2.1 ((parts p.1 p.2).1) := by
+        exact Fintype.prod_equiv (Equiv.sigmaFiberEquiv block).symm _ _ (by
+          intro i
+          rfl)
+      _ = ∏ k : K, ∏ i : {j : J // block j = k},
+            B i.1 ((parts k i).1) := by
+        exact Fintype.prod_sigma (fun p : Σ k : K, {j : J // block j = k} =>
+          B p.2.1 ((parts p.1 p.2).1))
   calc
     _ = Polynomial.C ((∏ k : K, NecSuf.AlgebraicEigenvalue.sign
           (fun i j : {v : J // block v = k} => i < j) (parts k) : ℤ) : Qbar) *
@@ -55,7 +62,6 @@ theorem blockDiagonal_term_eq_prod_fiber_terms
           (fun i j : J => i < j) σ.1 : ℤ) : Qbar) *
         (∏ i : J, B i (σ.1 i)) = _
       rw [hsign]
-      rw [hglue]
       exact congrArg (fun p : Polynomial Qbar =>
         Polynomial.C ((∏ k : K, NecSuf.AlgebraicEigenvalue.sign
           (fun i j : {v : J // block v = k} => i < j) (parts k) : ℤ) : Qbar) * p)
