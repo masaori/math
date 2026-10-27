@@ -81153,6 +81153,11 @@ y^L
                 title: { text: "双対 Fourier 行列から作った逆候補は右逆である" },
                 labels: ["claim_twisted_fourier_right_inverse"],
                 habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.twistedFourier_rightInverse",
+                  "Ising2DLambda.NecSuf.KacWard.fourier_rightInverse_necSuf",
+                  "Ising2DLambda.KacWard.twistedFourier_rightInverse_from_necSuf",
+                ],
                 verification: ["sagemath/check/twisted-fourier-right-inverse"],
                 statement: [
                   paragraph([

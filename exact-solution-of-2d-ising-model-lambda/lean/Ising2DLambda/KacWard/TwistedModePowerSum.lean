@@ -62,15 +62,12 @@ theorem twistedMode_powerSum {L : ℕ} (hL : 1 ≤ L)
 
 /-- The twisted power sum evaluates a pair of target-coordinate monomials. -/
 theorem twistedMode_coordinateKernel {L : ℕ} (hL : 1 ≤ L)
-    [Fintype (RootOfUnity L)] {σ ξ : Qbar} (hσ : σ ≠ 0)
+    [Fintype (RootOfUnity L)] {σ ξ : Qbar}
+    [Fintype {z : Qbar // z ^ L = σ}] (hσ : σ ≠ 0)
     (hξ : ξ ^ L = σ) (i j : ℕ) (hi : i < L) (hj : j < L) :
-    (letI : Fintype {z : Qbar // z ^ L = σ} :=
-      Fintype.ofEquiv (RootOfUnity L) (twistedModeRootEquiv hL hσ hξ)
-     ∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ i * (z.1⁻¹) ^ j) =
+    (∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ i * (z.1⁻¹) ^ j) =
       if i = j then (L : Qbar) else 0 := by
   classical
-  letI : Fintype {z : Qbar // z ^ L = σ} :=
-    Fintype.ofEquiv (RootOfUnity L) (twistedModeRootEquiv hL hσ hξ)
   let k := i + L - j
   have hjle : j ≤ i + L := by omega
   have hkadd : k + j = i + L := Nat.sub_add_cancel hjle
@@ -119,7 +116,14 @@ theorem twistedMode_coordinateKernel {L : ℕ} (hL : 1 ≤ L)
     _ = σ⁻¹ * (∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ k) := by
       rw [Finset.mul_sum]
     _ = σ⁻¹ * (ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0)) := by
-      rw [twistedMode_powerSum hL hσ hξ k]
+      rw [← Fintype.sum_equiv (twistedModeRootEquiv hL hσ hξ)
+        (fun z : RootOfUnity L => (ξ * z.1) ^ k)
+        (fun z : {z : Qbar // z ^ L = σ} => z.1 ^ k) (fun _ => rfl)]
+      simp_rw [mul_pow]
+      rw [← Finset.mul_sum]
+      change σ⁻¹ * (ξ ^ k * powerSum L k) = _
+      rw [powerSumValue hL k]
+      rfl
     _ = if i = j then (L : Qbar) else 0 := by
       simp only [hdiv]
       by_cases heq : i = j
