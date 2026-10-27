@@ -821,15 +821,23 @@ A
 &&\bigl(\because\ \log \text{ の微分と合成関数の微分}\bigr) \\
 &= -\frac{1}{2}\cdot\frac{\cosh K}{\sinh K}\cdot\frac{1}{\cosh^2 K}
 &&\bigl(\because\ (\tanh)' = 1/\cosh^2\bigr) \\
-&= -\frac{1}{2\sinh K\cosh K} \\
+&= -\frac{1}{2\sinh K\cosh K}
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr) \\
 &= -\frac{1}{\sinh 2K}
-&&\bigl(\because\ \text{cosh\_addition\_and\_half\_angle (2) を }x=2K\text{ に適用}\bigr)
+&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ の倍角公式}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`\kappa'(K) = 2 - 2\dfrac{dK^*}{dK} = 2 + \dfrac{2}{\sinh 2K}`),
-        "。",
+        "よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\kappa'(K)
+&=2-2\frac{dK^*}{dK}
+&&\bigl(\because\ \blkref{isotropic_A_equals_one}\text{ の }\kappa(K)\text{ の定義}\bigr) \\
+&=2+\frac{2}{\sinh 2K}
+&&\bigl(\because\ \text{上の }dK^*/dK\text{ の表示}\bigr).
+\end{aligned}`),
+      paragraph([
         ref("cosh_sinh_basic_properties"),
         " (3) より ",
         math(String.raw`K > 0`),
@@ -868,10 +876,15 @@ A
         "(3) の証明。(1) の式を微分して",
       ]),
       displayMath(
-        String.raw`\kappa''(K)
-= \frac{d}{dK}\left(2 + \frac{2}{\sinh 2K}\right)
-= -\frac{2}{\sinh^2 2K}\cdot 2\cosh 2K
-= -\frac{4\cosh 2K}{\sinh^2 2K}`,
+        String.raw`\begin{aligned}
+\kappa''(K)
+&= \frac{d}{dK}\left(2 + \frac{2}{\sinh 2K}\right)
+&&\bigl(\because\ \text{上の }\kappa'(K)\text{ の表示}\bigr) \\
+&= -\frac{2}{\sinh^2 2K}\cdot 2\cosh 2K
+&&\bigl(\because\ \text{逆数と合成関数の微分}\bigr) \\
+&= -\frac{4\cosh 2K}{\sinh^2 2K}
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "(4) の証明。",
@@ -893,9 +906,10 @@ A
       displayMath(
         String.raw`\begin{aligned}
 \sinh 2K
-&= \sinh\left(2K_c + 2(K-K_c)\right) \\
+&= \sinh\left(2K_c + 2(K-K_c)\right)
+&&(\because\ \mathbb R\text{ の四則}) \\
 &= \sinh 2K_c\cosh\left(2(K-K_c)\right) + \cosh 2K_c\sinh\left(2(K-K_c)\right)
-&&(\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
+&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の加法公式}) \\
 &= \cosh\left(2(K-K_c)\right) + \sqrt2\,\sinh\left(2(K-K_c)\right)
 &&(\because \sinh 2K_c = 1,\ \cosh 2K_c = \sqrt2)
 \end{aligned}`,
@@ -917,19 +931,29 @@ A
       ),
       paragraph([
         "数値評価 ",
-        math(String.raw`1.02006 \leq \cosh 0.2 \leq 1.02007`),
+        math(String.raw`1.02006 \leq \cosh 0.2 \leq 1.020067`),
         "、",
-        math(String.raw`0.201336 \leq \sinh 0.2 \leq 0.201337`),
+        math(String.raw`0.201336 \leq \sinh 0.2 \leq 0.2013361`),
         "、",
         math(String.raw`1.414213 \leq \sqrt2 \leq 1.414214`),
         " を使うと",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sinh 2K &\geq \cosh 0.2 - \sqrt2\sinh 0.2 \geq 1.02006 - 1.414214\cdot 0.201337 \geq 0.7353
-&&(\because \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ の単調性と上の数値評価}) \\
-\sinh 2K &\leq \cosh 0.2 + \sqrt2\sinh 0.2 \leq 1.02007 + 1.414214\cdot 0.201337 \leq 1.3048
-&&(\because \text{同上})
+\sinh 2K
+&\geq \cosh 0.2-\sqrt2\sinh 0.2
+&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の単調性と上の端点の式}) \\
+&\geq 1.02006-1.414214\cdot0.2013361
+&&(\because\ \text{上の数値評価}) \\
+&\geq 0.7353
+&&(\because\ \mathbb Q\text{ の四則}). \\
+\sinh 2K
+&\leq \cosh 0.2+\sqrt2\sinh 0.2
+&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の単調性と上の端点の式}) \\
+&\leq 1.020067+1.414214\cdot0.2013361
+&&(\because\ \text{上の数値評価}) \\
+&\leq 1.3048
+&&(\because\ \mathbb Q\text{ の四則}).
 \end{aligned}`,
       ),
       paragraph([
@@ -950,10 +974,15 @@ A
         " で狭義単調減少であること",
       ]),
       displayMath(
-        String.raw`\frac{d}{dt}\frac{\cosh t}{\sinh^2 t}
-= \frac{\sinh^2 t\cdot\sinh t - \cosh t\cdot 2\sinh t\cosh t}{\sinh^4 t}
-= \frac{\sinh^2 t - 2\cosh^2 t}{\sinh^3 t} < 0
-\quad (\because \sinh^2 t < \cosh^2 t < 2\cosh^2 t,\ \sinh t>0)`,
+        String.raw`\begin{aligned}
+\frac{d}{dt}\frac{\cosh t}{\sinh^2 t}
+&= \frac{\sinh^2 t\cdot\sinh t - \cosh t\cdot 2\sinh t\cosh t}{\sinh^4 t}
+&&(\because\ \text{商と合成関数の微分}) \\
+&= \frac{\sinh^2 t - 2\cosh^2 t}{\sinh^3 t}
+&&(\because\ \mathbb R\text{ の四則}) \\
+&<0
+&&(\because\ \sinh^2 t<\cosh^2 t<2\cosh^2 t,\ \sinh t>0).
+\end{aligned}`,
       ),
       paragraph([
         "より、",
@@ -961,20 +990,34 @@ A
         " での最大値をとればよい。",
         math(String.raw`\sinh(2K_c-0.2) \geq 0.7353`),
         " と ",
-        math(String.raw`\cosh(2K_c-0.2) = \sqrt2\cosh 0.2 - \sinh 0.2 \leq 1.414214\cdot 1.02007 - 0.201336 \leq 1.2413`),
+        math(String.raw`\cosh(2K_c-0.2) = \sqrt2\cosh 0.2 - \sinh 0.2 \leq 1.414214\cdot 1.020067 - 0.201336 \leq 1.2413`),
         " より",
       ]),
       displayMath(
-        String.raw`\left|\kappa''(K)\right| = \frac{4\cosh 2K}{\sinh^2 2K}
-\leq \frac{4\cdot 1.2413}{0.7353^2} \leq 9.19`,
+        String.raw`\begin{aligned}
+\left|\kappa''(K)\right|
+&=\frac{4\cosh 2K}{\sinh^2 2K}
+&&(\because\ \text{上の }\kappa''(K)\text{ の表示と }\cosh 2K>0) \\
+&\leq\frac{4\cosh(2K_c-0.2)}{\sinh^2(2K_c-0.2)}
+&&(\because\ \cosh t/\sinh^2t\text{ の単調減少}) \\
+&\leq\frac{4\cdot1.2413}{0.7353^2}
+&&(\because\ \text{下端 }2K_c-0.2\text{ での数値評価}) \\
+&\leq9.19
+&&(\because\ \mathbb Q\text{ の四則}).
+\end{aligned}`,
       ),
       paragraph([
         "最後に ",
         math(String.raw`\left(\kappa'^2\right)' = 2\kappa'\kappa''`),
-        " なので ",
-        math(String.raw`\left|\left(\kappa'^2\right)'\right| \leq 2\cdot 4.72\cdot 9.19 \leq 87`),
-        "。",
+        " なので",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\left|\left(\kappa'^2\right)'(K)\right|
+&\leq2\cdot4.72\cdot9.19
+&&(\because\ \text{上の }\kappa'(K)\text{ と }\kappa''(K)\text{ の上界}) \\
+&\leq87
+&&(\because\ \mathbb Q\text{ の四則}).
+\end{aligned}`),
       paragraph([
         "(5) の証明。(R4) を ",
         math(String.raw`F = \kappa`),
@@ -985,7 +1028,17 @@ A
         " なので、(R3) の単調性より",
       ]),
       displayMath(
-        String.raw`3.53\,|K-K_c| \ \leq\ |\kappa(K)| \ \leq\ 4.72\,|K-K_c| \ \leq\ 4.72\cdot\frac{1}{10} = 0.472`,
+        String.raw`\begin{aligned}
+3.53\,|K-K_c|
+&\leq|\kappa(K)|
+&&(\because\ \text{(R4)、(R3) と }\kappa'(t)\geq3.53) \\
+&\leq4.72\,|K-K_c|
+&&(\because\ \text{(R4)、(R3) と }\kappa'(t)\leq4.72) \\
+&\leq4.72\cdot\frac{1}{10}
+&&(\because\ |K-K_c|\leq\tfrac{1}{10}) \\
+&=0.472
+&&(\because\ \mathbb Q\text{ の四則}).
+\end{aligned}`,
       ),
       paragraph([
         "同様に (R4) を ",
@@ -1007,11 +1060,17 @@ A
         "に注意すると",
       ]),
       displayMath(
-        String.raw`\left|\kappa'(K)^2 - 16\right|
-= \left|\int_{K_c}^{K}\left(\kappa'^2\right)'(t)\,dt\right|
-\leq 87\,|K-K_c|
-\leq 87\cdot\frac{|\kappa(K)|}{3.53}
-\leq 24.7\,|\kappa(K)|`,
+        String.raw`\begin{aligned}
+\left|\kappa'(K)^2-16\right|
+&=\left|\int_{K_c}^{K}\left(\kappa'^2\right)'(t)\,dt\right|
+&&(\because\ \text{(R4) と }\kappa'(K_c)=4) \\
+&\leq87\,|K-K_c|
+&&(\because\ \text{(R3) と上の }\left|\left(\kappa'^2\right)'\right|\leq87) \\
+&\leq87\cdot\frac{|\kappa(K)|}{3.53}
+&&(\because\ \text{上の }3.53|K-K_c|\leq|\kappa(K)|) \\
+&\leq24.7\,|\kappa(K)|
+&&(\because\ \mathbb Q\text{ の四則}).
+\end{aligned}`,
       ),
     ],
     conversion: {
