@@ -80483,6 +80483,50 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_def_dual_endpoint_mode_vector",
+              focus: {
+                id: "finite_fourier_def_dual_endpoint_mode_vector",
+                kind: "definition",
+                title: { text: "終点を使う双対 Fourier ベクトル" },
+                labels: ["def_dual_endpoint_mode_vector"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.dualEndpointModeVector",
+                  "Ising2DLambda.NecSuf.KacWard.dualEndpointModeVector",
+                  "Ising2DLambda.KacWard.dualEndpointModeVector_from_necSuf",
+                ],
+                verification: ["sagemath/check/dual-endpoint-mode-vector"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、方向番号 ", math(String.raw`\delta_0\in\mathbb Z/4\mathbb Z`),
+                    " を任意に取る。各 ", math(String.raw`\vec e\in\vec E_L`),
+                    " の終点を ", math(String.raw`\operatorname{tgt}(\vec e)=(i,j)\in V_L`),
+                    " と書く。代表元写像 ", math(String.raw`s:\mathbb Z/L\mathbb Z\to\mathbb Z`),
+                    " は ", ref("def_residue_maps"), " に従う。",
+                  ]),
+                  displayMath(String.raw`\bar\psi^{\varpi,\varsigma,\delta_0}(\vec e):=
+\begin{cases}
+\varpi^{-s(j)}\varsigma^{-s(i)},&\operatorname{dir}(\vec e)=\delta_0,\\
+0,&\operatorname{dir}(\vec e)\ne\delta_0.
+\end{cases}`),
+                  paragraph([
+                    "これにより ", math(String.raw`\bar\psi^{\varpi,\varsigma,\delta_0}:\vec E_L\to\overline{\mathbb Q}`),
+                    " を定める。モードは ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " により零でなく、負の冪が定義できる。",
+                    "方向番号は ", ref("def_oriented_edge_direction"), "、終点は ",
+                    ref("def_oriented_edge_endpoints"), " に従う。実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",

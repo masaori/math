@@ -693,6 +693,7 @@ export const ALL_LABELS = [
   "def_distance_squared_to_rational",
   "def_doubled_edge_set",
   "def_dual_edge_map",
+  "def_dual_endpoint_mode_vector",
   "def_edge_connected_cell_set",
   "def_edge_numbering",
   "def_edge_reversal",

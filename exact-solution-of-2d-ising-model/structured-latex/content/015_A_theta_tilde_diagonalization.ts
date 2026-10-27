@@ -734,7 +734,7 @@ s_1c_2
         String.raw`\begin{aligned}
 \det\left(A(\theta) - \lambda I\right)
 &= \det\begin{pmatrix} g_1-\lambda & a \\ -b & g_1-\lambda\end{pmatrix}
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
 &= (g_1-\lambda)(g_1-\lambda) + ab
@@ -748,13 +748,13 @@ s_1c_2
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 + ab\right)
    \quad (\because \mathbb{C}\text{ の加法の交換則と結合則}) \\
 &= \lambda^2 - 2g_1\lambda + \left(g_1^2 - r^2\right)
-   \quad (\because \text{準備の略記}\ ab = -r^2) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (ab = -r^2)) \\
 &= (\lambda - (g_1+r))(\lambda - (g_1-r))
    \quad (\because \text{準備の因数分解の恒等式})
 \end{aligned}`,
       ),
       paragraph([
-        "である。", ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " を使った。",
+        "である。",
         math(String.raw`\mathbb{C}`),
         " は体（",
         ref("complex_numbers_form_a_field"),
@@ -795,18 +795,18 @@ s_1c_2
         String.raw`\begin{aligned}
 \left(A(\theta)v_\pm\right)_1
 &= g_1(\mp r) + a\,b
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta と行列とベクトルの積の定義}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}\text{ と行列とベクトルの積の定義}) \\
 &= \mp g_1 r + a\left(-\bar a\right)
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (b = -\bar a)) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (b = -\bar a)) \\
 &= \mp g_1 r - r^2
-   \quad (\because \text{abs\_basic\_properties}\ (a\bar a = |a|^2 = r^2)) \\
+   \quad (\because \blkref{abs_basic_properties}\ (a\bar a = |a|^2 = r^2)) \\
 &= \left(g_1 \pm r\right)\left(\mp r\right)
    \quad (\because \text{分配則}\ (\left(g_1 \pm r\right)\left(\mp r\right) = \mp g_1 r - r^2)) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_1
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_1 = \mp r)
 \end{aligned}`,
       ),
-      paragraph([ref("def_gamma1_gamma2_of_theta"), "、", ref("relation_of_gamma_2_theta_tilde"), "、", ref("abs_basic_properties"), " を使った。"]),
+      paragraph([ref("def_gamma1_gamma2_of_theta"), "、", ref("relation_of_gamma_2_theta_tilde"), "、", ref("abs_basic_properties"), " が各行の根拠である。"]),
       paragraph([
         "第 2 成分は ",
         ref("relation_of_gamma_2_theta_tilde"),
@@ -820,9 +820,9 @@ s_1c_2
         String.raw`\begin{aligned}
 \left(A(\theta)v_\pm\right)_2
 &= (-b)(\mp r) + g_1 b
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta と行列とベクトルの積の定義}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}\text{ と行列とベクトルの積の定義}) \\
 &= \bar a\left(\mp r\right) + g_1\left(-\bar a\right)
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (1)}\ (-b = \bar a) \text{ を 2 箇所へ同時適用}) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (-b = \bar a) \text{ を 2 箇所へ同時適用}) \\
 &= \left(\mp r - g_1\right)\bar a
    \quad (\because \text{分配則で } \bar a \text{ を括り出す}) \\
 &= \left(g_1 \pm r\right)\left(-\bar a\right)
@@ -831,7 +831,7 @@ s_1c_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b = -\bar a)
 \end{aligned}`,
       ),
-      paragraph([ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " を使った。"]),
+      paragraph([ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " が各行の根拠である。"]),
       paragraph([
         "よって ",
         math(String.raw`A(\theta)v_\pm = \lambda_{\pm,\mu}v_\pm`),
