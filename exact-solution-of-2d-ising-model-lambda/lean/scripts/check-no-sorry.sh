@@ -52,6 +52,11 @@ fi
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 #    形式化した定理を増やしたら、必ずこの配列へ追加する（追加漏れは検査の穴になる）。
 targets=(
+  Ising2DLambda.KacWard.horizontalTwistedModes_eq_coset
+  Ising2DLambda.KacWard.horizontalTwistedModes_eq_coset_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.twistedModes_eq_coset_necSuf
+  Ising2DLambda.KacWard.verticalTwistedModes_eq_coset
+  Ising2DLambda.KacWard.verticalTwistedModes_eq_coset_from_necSuf
   Ising2DLambda.KacWard.taggedActiveTwoStep_apply
   Ising2DLambda.KacWard.taggedActiveTwoStep_periodic
   Ising2DLambda.NecSuf.KacWard.activeTwoStep_apply

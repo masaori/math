@@ -1464,3 +1464,5 @@ import Ising2DLambda.AlgebraicEigenvalue.BlockDiagonalDeterminantProduct
 import Ising2DLambda.KacWard.HorizontalTwistedModesCoset
 import Ising2DLambda.NecSuf.KacWard.TwistedModeCoset
 import Ising2DLambda.KacWard.HorizontalTwistedModesCosetFromNecSuf
+import Ising2DLambda.KacWard.VerticalTwistedModesCoset
+import Ising2DLambda.KacWard.VerticalTwistedModesCosetFromNecSuf

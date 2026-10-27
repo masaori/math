@@ -80253,6 +80253,82 @@ y^L
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_vertical_modes_coset",
+              focus: {
+                id: "finite_fourier_claim_vertical_modes_coset",
+                kind: "claim",
+                title: { text: "縦方向のねじれたモード集合は冪根集合の剰余類である" },
+                labels: ["claim_vertical_twisted_modes_coset"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/vertical-twisted-modes-coset"],
+                lean: [
+                  "Ising2DLambda.KacWard.verticalTwistedModes_eq_coset",
+                  "Ising2DLambda.NecSuf.KacWard.twistedModes_eq_coset_necSuf",
+                  "Ising2DLambda.KacWard.verticalTwistedModes_eq_coset_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`\xi\in\mu_{2L}`), " で ",
+                    math(String.raw`\xi^L=-1`), " を満たす元を任意に取る（",
+                    ref("claim_antiperiodic_mode_exists"), "）。このとき",
+                  ]),
+                  displayMath(String.raw`\mathcal W_0=\mu_L,\qquad
+\mathcal W_1=\{\xi y\mid y\in\mu_L\}`),
+                  paragraph([
+                    "が成り立つ。", math(String.raw`\mathcal W_b`), " は ",
+                    ref("def_vertical_twisted_modes"), "、", math(String.raw`\mu_L`),
+                    " は ", ref("def_root_of_unity_set"), " の集合である。",
+                    "積と逆元は ", math(String.raw`\overline{\mathbb Q}`), " で取る。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\mathcal W_0=\mu_L`), " は、両集合の元の条件が ",
+                    math(String.raw`z^L=1`), " で一致することから従う（",
+                    ref("def_vertical_twisted_modes"), "、", ref("def_root_of_unity_set"), "）。",
+                  ]),
+                  paragraph([
+                    math(String.raw`z\in\mathcal W_1`), " を任意に取る。",
+                    math(String.raw`z^L=-1`), " である（", ref("def_vertical_twisted_modes"), "）。",
+                    math(String.raw`\xi^L=-1\ne0`), " なので ", math(String.raw`\xi\ne0`),
+                    " であり、", math(String.raw`y:=\xi^{-1}z\in\overline{\mathbb Q}`), " と置ける。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+y^L
+&=(\xi^{-1}z)^L&&\bigl(\because\ y\text{ の定義}\bigr)\\
+&=(\xi^L)^{-1}z^L&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=(-1)^{-1}(-1)&&\bigl(\because\ \xi^L=z^L=-1\bigr)\\
+&=1&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "ゆえに ", math(String.raw`y\in\mu_L`), "（", ref("def_root_of_unity_set"),
+                    "）。また ", math(String.raw`z=\xi y`), " なので ",
+                    math(String.raw`\mathcal W_1\subseteq\{\xi y\mid y\in\mu_L\}`), "。",
+                  ]),
+                  paragraph([
+                    "逆に ", math(String.raw`y\in\mu_L`), " を任意に取る。",
+                    math(String.raw`y^L=1`), " である（", ref("def_root_of_unity_set"), "）。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\xi y)^L
+&=\xi^L y^L&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=(-1)\cdot1&&\bigl(\because\ \xi^L=-1,\ y^L=1\bigr)\\
+&=-1&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`\xi y\in\mathcal W_1`), "（",
+                    ref("def_vertical_twisted_modes"), "）。両包含から集合の等号を得る。",
+                    "計算は ", math(String.raw`\overline{\mathbb Q}`), " で閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
