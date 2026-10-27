@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.TaggedComplementActiveVertices
+import Ising2DLambda.KacWard.TaggedActiveByLabelsFromNecSuf
 
 namespace Ising2DLambda.KacWard
 

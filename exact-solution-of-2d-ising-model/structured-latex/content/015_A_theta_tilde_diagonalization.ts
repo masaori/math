@@ -211,10 +211,14 @@ export default defineBlocks([
    \quad (\because\ \blkref{def_first_dual_coupling_constant}\text{ と }K_1 \in \mathbb{R}_{>0}) \\
 &K_2^* \in \mathbb{R}_{>0}
    \quad (\because\ \blkref{def_second_dual_coupling_constant}\text{ と }K_2 \in \mathbb{R}_{>0}) \\
-&c_1 > 0,\quad s_1 > 0
-   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=1\text{ に適用。}K_1, K_1^* \in \mathbb{R}_{>0}) \\
-&c_2 > 0,\quad s_2^* > 0
-   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=2\text{ に適用。}K_2, K_2^* \in \mathbb{R}_{>0})
+&c_1 > 0
+   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=1\text{ に適用。}K_1 \in \mathbb{R}_{>0}) \\
+&s_1 > 0
+   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=1\text{ に適用。}K_1 \in \mathbb{R}_{>0}) \\
+&c_2 > 0
+   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=2\text{ に適用。}K_2 \in \mathbb{R}_{>0}) \\
+&s_2^* > 0
+   \quad (\because\ \blkref{indexed_hyperbolic_abbreviations_positive}\text{ を }i=2\text{ に適用。}K_2^* \in \mathbb{R}_{>0})
 \end{aligned}`,
       ),
       paragraph([
