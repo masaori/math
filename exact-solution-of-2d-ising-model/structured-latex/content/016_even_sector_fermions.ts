@@ -317,11 +317,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \exp(i(t+2k\pi))
 &= \cos(t+2k\pi) + i\sin(t+2k\pi)
-   \quad (\because \text{Euler の公式}) \\
+   \quad (\because \blkref{euler_formula_cos_sin}) \\
 &= \cos t + i\sin t
    \quad (\because \cos, \sin \text{ の } 2\pi \text{ 周期性}) \\
 &= \exp(it)
-   \quad (\because \text{Euler の公式})
+   \quad (\because \blkref{euler_formula_cos_sin})
 \end{aligned}`,
       ),
       paragraph([
@@ -348,13 +348,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \tilde\theta_{\mu+kM_{\mathrm{col}}}
 &= \frac{2\pi\left(\mu+kM_{\mathrm{col}}-\frac12\right)}{M_{\mathrm{col}}}
-   \quad (\because \tilde\theta \text{ の定義}) \\
+   \quad (\because \blkref{antiperiodic_exp_sum}) \\
 &= \frac{2\pi\left(\mu-\frac12\right) + 2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
    \quad (\because \mathbb{R}\text{ の分配則}) \\
 &= \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}} + \frac{2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
    \quad (\because \text{分数の和（分母 }M_{\mathrm{col}}\neq0\text{）}) \\
 &= \tilde\theta_\mu + \frac{2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
-   \quad (\because \tilde\theta \text{ の定義}) \\
+   \quad (\because \blkref{antiperiodic_exp_sum}) \\
 &= \tilde\theta_\mu + 2k\pi
    \quad (\because M_{\mathrm{col}}\neq0\text{ による約分})
 \end{aligned}`,

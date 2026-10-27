@@ -73453,7 +73453,9 @@ T^{a,b}_{\varphi}(x)
                       paragraph([
                         "であり、右辺の向き付き辺は相異なり、",
                         math(String.raw`\varphi^{\circ m_C}(\vec e_C)=\vec e_C`), " である（",
-                        ref("claim_finite_permutation_orbit_enumeration"), " を一般の有限置換へ適用する）。したがって ",
+                        ref("claim_finite_permutation_orbit_enumeration"), " を ",
+                        math(String.raw`\mathcal J=\vec E_L,\ \sigma=\varphi,\ i=\vec e_C`),
+                        " に適用する）。したがって ",
                         math(String.raw`\varphi_C`), " は",
                       ]),
                       displayMath(String.raw`(\vec e_C\ \varphi^{\circ(m_C-1)}(\vec e_C))\circ\cdots\circ
@@ -80598,6 +80600,46 @@ y^L
                     " でもある。同じ個数の有限集合には全単射がある。",
                     "全単射の選択は添字の付け方だけを決め、二つの集合を同一視しない。",
                     "実数体と複素数体は使わない。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_def_fourier_matrix",
+              focus: {
+                id: "finite_fourier_def_fourier_matrix",
+                kind: "definition",
+                title: { text: "ねじれた Fourier 行列" },
+                labels: ["def_twisted_fourier_matrix"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.twistedFourierMatrix",
+                  "Ising2DLambda.NecSuf.KacWard.fourierMatrix",
+                  "Ising2DLambda.KacWard.twistedFourierMatrix_from_necSuf",
+                ],
+                verification: ["sagemath/check/twisted-fourier-matrix"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。",
+                    ref("claim_edge_mode_index_bijection"), " の全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を一つ固定する。行と列の添字集合はともに ",
+                    math(String.raw`\vec E_L`), " とする。各 ",
+                    math(String.raw`\vec e,\vec g\in\vec E_L`), " について、",
+                  ]),
+                  displayMath(String.raw`F^{a,b,\kappa}_{\vec e,\vec g}
+:=\psi^{\kappa(\vec g)}(\vec e)\in\overline{\mathbb Q}`),
+                  paragraph([
+                    "と定める。ここで ", math(String.raw`\kappa(\vec g)=(\varpi,\varsigma,\delta)`),
+                    " なら ", math(String.raw`\psi^{\kappa(\vec g)}=\psi^{\varpi,\varsigma,\delta}`),
+                    " は ", ref("def_endpoint_mode_vector"), " のベクトルである。したがって ",
+                    math(String.raw`F^{a,b,\kappa}\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`),
+                    " である。モード添字集合と向き付き辺集合を同一視しない。",
+                  ]),
                 ],
               },
             },

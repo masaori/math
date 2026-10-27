@@ -943,6 +943,7 @@ export const ALL_LABELS = [
   "def_transverse_crossing",
   "def_transverse_translate_of_periodic_plane_lift",
   "def_twist_parity",
+  "def_twisted_fourier_matrix",
   "def_unit_interval_rationals",
   "def_unswitchable_standard_pair_subset",
   "def_vertex_axis_straight_visit_count",
