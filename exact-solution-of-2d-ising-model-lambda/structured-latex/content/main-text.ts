@@ -81924,6 +81924,65 @@ G^{a,b,\kappa}_{\vec g,\vec f}
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_polynomial_fourier_similarity",
+              focus: {
+                id: "finite_fourier_claim_polynomial_fourier_similarity",
+                kind: "claim",
+                title: { text: "Kac--Ward 多項式行列はモードブロック行列に相似である" },
+                labels: ["claim_polynomial_fourier_similarity"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/polynomial-fourier-similarity"],
+                lean: [
+                  "Ising2DLambda.KacWard.polynomial_fourier_similarity",
+                  "Ising2DLambda.NecSuf.KacWard.polynomial_fourier_similarity_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に固定する。行列のハットは ", ref("def_qbar_constant_embedding"),
+                    " を各成分に施すことを表す。", ref("def_kac_ward_polynomial_matrices"),
+                    " の行列について",
+                  ]),
+                  displayMath(String.raw`K^{a,b}(x)=\widehat{F^{a,b,\kappa}}\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)\widehat{G^{a,b,\kappa}}
+\quad\text{in }\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x]).`),
+                  paragraph(["右辺は有限多項式行列の積である。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_transition_fourier_intertwining"), " の両辺に成分ごとの定数埋込みを施す。",
+                    ref("def_qbar_constant_embedding"), " は有限和と積を保つので、行列積も保つ。",
+                  ]),
+                  displayMath(String.raw`\widehat M^{a,b}\widehat F^{a,b,\kappa}
+=\widehat F^{a,b,\kappa}\widehat B^{a,b,\kappa}
+\qquad(\because\ \blkref{claim_transition_fourier_intertwining},\ \blkref{def_qbar_constant_embedding}).`),
+                  paragraph([
+                    "同様に ", ref("claim_twisted_fourier_left_inverse"), " と ",
+                    ref("claim_twisted_fourier_right_inverse"), " を定数埋込みすると、",
+                    math(String.raw`\widehat G\widehat F=I_{\vec E_L}`), " と ",
+                    math(String.raw`\widehat F\widehat G=I_{\vec E_L}`), " を得る。",
+                    "多項式行列の中で計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\widehat F(I_{\vec E_L}-x\widehat B)\widehat G
+&=\widehat F\widehat G-x\widehat F\widehat B\widehat G
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ 上の行列積の分配律}\bigr)\\
+&=I_{\vec E_L}-x\widehat M\widehat F\widehat G
+&&\bigl(\because\ \blkref{claim_twisted_fourier_right_inverse},\ \blkref{claim_transition_fourier_intertwining}\bigr)\\
+&=I_{\vec E_L}-x\widehat M
+&&\bigl(\because\ \blkref{claim_twisted_fourier_right_inverse}\bigr)\\
+&=K^{a,b}(x)
+&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

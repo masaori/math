@@ -1478,18 +1478,18 @@ T_{V_2}(\check{Y}_\mu)
         String.raw`\begin{aligned}
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
 &= \left(V_1^{(+)}\right)^{1/2}\,\check{Z}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
-   \quad (\because \text{def\_T\_g}) \\
+   \quad (\because \blkref{def_T_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
    \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \text{def\_V1\_plus\_square\_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+   \quad \left(\because \blkref{def_V1_plus_square_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
+   \quad \left(\because \blkref{matrix_exp_conjugation}\text{ (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
+   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
 &= \cosh(K_1)\check{Z}_\mu + i\,\exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
-   \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h1.z)})
+   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h1.z)})
 \end{aligned}`,
       ),
       paragraph([
@@ -1506,18 +1506,18 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
         String.raw`\begin{aligned}
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
 &= \left(V_1^{(+)}\right)^{1/2}\,\check{Y}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
-   \quad (\because \text{def\_T\_g}) \\
+   \quad (\because \blkref{def_T_g}) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
    \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \text{def\_V1\_plus\_square\_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
+   \quad \left(\because \blkref{def_V1_plus_square_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
 &= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
    \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \text{matrix\_exp\_conjugation (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
+   \quad \left(\because \blkref{matrix_exp_conjugation}\text{ (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
+   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
 &= -i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
-   \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h1.y)})
+   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h1.y)})
 \end{aligned}`,
       ),
       paragraph([
@@ -1546,40 +1546,40 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
         String.raw`\begin{aligned}
 T_{V_2}(\check{Z}_\mu)
 &= V_2\,\check{Z}_\mu\,V_2^{-1}
-   \quad (\because \text{def\_T\_g}) \\
+   \quad (\because \blkref{def_T_g}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
    \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
+   \quad (\because \blkref{scalar_identity_commutes}\text{（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
 &= \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
+   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
 &= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
-   \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h2.z)})
+   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h2.z)})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 T_{V_2}(\check{Y}_\mu)
 &= V_2\,\check{Y}_\mu\,V_2^{-1}
-   \quad (\because \text{def\_T\_g}) \\
+   \quad (\because \blkref{def_T_g}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
    \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
    \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
    \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \text{scalar\_identity\_commutes（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
+   \quad (\because \blkref{scalar_identity_commutes}\text{（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
 &= \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
    \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
 &= \sum_{n=0}^{\infty}\frac{1}{n!}
    \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{exp\_X\_Y\_exp\_-X}) \\
+   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
 &= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
-   \quad (\because \text{extract\_taylor\_coefficient\_of\_check\_Z\_Y (h2.y)})
+   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h2.y)})
 \end{aligned}`,
       ),
       paragraph([

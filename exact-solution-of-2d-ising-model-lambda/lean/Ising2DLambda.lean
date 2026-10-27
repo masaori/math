@@ -1542,3 +1542,5 @@ import Ising2DLambda.KacWard.ModeBlockMatrix
 import Ising2DLambda.NecSuf.KacWard.ModeBlockMatrix
 import Ising2DLambda.KacWard.TransitionFourierIntertwining
 import Ising2DLambda.NecSuf.KacWard.TransitionFourierIntertwining
+import Ising2DLambda.KacWard.PolynomialFourierSimilarity
+import Ising2DLambda.NecSuf.KacWard.PolynomialFourierSimilarity
