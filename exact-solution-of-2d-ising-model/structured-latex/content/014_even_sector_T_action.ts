@@ -1002,7 +1002,7 @@ i^n
 (-1)^{(n-1)/2}(2K_1)^{n} \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h1.z)}) \\
+   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.z)}) \\
 &= \begin{cases}
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
@@ -1064,7 +1064,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 (-1)^{(n+1)/2}(2K_1)^{n} \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_1)^{n}\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h1.y)}) \\
+   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.y)}) \\
 &= \begin{cases}
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
@@ -1130,7 +1130,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 (-1)^{(n+1)/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h2.z)}) \\
+   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.z)}) \\
 &= \begin{cases}
 i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
@@ -1169,7 +1169,7 @@ i\,(-1)^{n}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
 (-1)^{(n-1)/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{nesting\_of\_commutator\_of\_H\_and\_check\_Z (h2.y)}) \\
+   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.y)}) \\
 &= \begin{cases}
 i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
 (-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})

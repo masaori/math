@@ -81807,6 +81807,115 @@ G^{a,b,\kappa}_{\vec g,\vec f}
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_def_mode_block_matrix",
+              focus: {
+                id: "finite_fourier_def_mode_block_matrix",
+                kind: "definition",
+                title: { text: "モードごとの小行列を並べたブロック行列" },
+                labels: ["def_mode_block_matrix"],
+                habitat: "Qbar",
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を固定する（", ref("claim_edge_mode_index_bijection"), "）。",
+                    "各 ", math(String.raw`\vec g,\vec h\in\vec E_L`), " に対し ",
+                    math(String.raw`\kappa(\vec g)=(\varpi,\varsigma,\delta)`),
+                    "、", math(String.raw`\kappa(\vec h)=(\varpi',\varsigma',\delta')`),
+                    " と書き、",
+                  ]),
+                  displayMath(String.raw`B^{a,b,\kappa}_{\vec g,\vec h}:=
+\begin{cases}
+\breve M(\varpi,\varsigma)_{\delta,\delta'},&\varpi=\varpi',\ \varsigma=\varsigma',\\
+0,&\text{それ以外}
+\end{cases}`),
+                  paragraph([
+                    "と定める。", ref("def_mode_small_matrix"), " より ",
+                    math(String.raw`B^{a,b,\kappa}\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`),
+                    " である。各モードの四方向だけが同じブロックに属する。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_transition_fourier_intertwining",
+              focus: {
+                id: "finite_fourier_claim_transition_fourier_intertwining",
+                kind: "claim",
+                title: { text: "遷移行列と Fourier 行列はブロック行列で交換する" },
+                labels: ["claim_transition_fourier_intertwining"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/transition-fourier-intertwining"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に取る。", ref("def_kac_ward_transition_matrices"), "、",
+                    ref("def_twisted_fourier_matrix"), "、", ref("def_mode_block_matrix"), " の行列について",
+                  ]),
+                  displayMath(String.raw`M^{a,b}F^{a,b,\kappa}=F^{a,b,\kappa}B^{a,b,\kappa}
+\quad\text{in }\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}).`),
+                  paragraph(["実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`\vec e,\vec h\in\vec E_L`), " を固定し、",
+                    math(String.raw`\kappa(\vec h)=(\varpi,\varsigma,\delta')`),
+                    "、", math(String.raw`\delta=\operatorname{dir}(\vec e)`),
+                    " と書く。左辺の成分を計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(M^{a,b}F^{a,b,\kappa})_{\vec e,\vec h}
+&=\sum_{\vec f\in\vec E_L}M^{a,b}_{\vec e,\vec f}F^{a,b,\kappa}_{\vec f,\vec h}
+&&\bigl(\because\ \text{行列積の定義}\bigr)\\
+&=\bigl(M^{a,b}\psi^{\varpi,\varsigma,\delta'}\bigr)(\vec e)
+&&\bigl(\because\ \blkref{def_twisted_fourier_matrix}\bigr)\\
+&=\breve M(\varpi,\varsigma)_{\delta,\delta'}\psi^{\varpi,\varsigma,\delta}(\vec e)
+&&\bigl(\because\ \blkref{claim_transition_on_endpoint_mode_vector}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "右辺では ", math(String.raw`\kappa(\vec g)=(\varpi_g,\varsigma_g,\delta_g)`),
+                    " と書く。", ref("def_mode_block_matrix"), " により ",
+                    math(String.raw`(\varpi_g,\varsigma_g)=(\varpi,\varsigma)`),
+                    " の項だけが残る。全単射 ", math(String.raw`\kappa`),
+                    " によって、その項は四つの方向で一度ずつ現れる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(F^{a,b,\kappa}B^{a,b,\kappa})_{\vec e,\vec h}
+&=\sum_{\vec g\in\vec E_L}F^{a,b,\kappa}_{\vec e,\vec g}B^{a,b,\kappa}_{\vec g,\vec h}
+&&\bigl(\because\ \text{行列積の定義}\bigr)\\
+&=\sum_{\vec g\in\vec E_L}\psi^{\kappa(\vec g)}(\vec e)B^{a,b,\kappa}_{\vec g,\vec h}
+&&\bigl(\because\ \blkref{def_twisted_fourier_matrix}\bigr)\\
+&=\sum_{(\varpi_g,\varsigma_g,\delta_g)\in\mathcal M_{a,b}}
+\psi^{\varpi_g,\varsigma_g,\delta_g}(\vec e)B^{a,b,\kappa}_{\kappa^{-1}(\varpi_g,\varsigma_g,\delta_g),\vec h}
+&&\bigl(\because\ \kappa\text{ の全単射による再添字付け}\bigr)\\
+&=\sum_{\delta_g\in\mathbb Z/4\mathbb Z}
+\psi^{\varpi,\varsigma,\delta_g}(\vec e)
+\breve M(\varpi,\varsigma)_{\delta_g,\delta'}
+&&\bigl(\because\ \blkref{def_mode_block_matrix}\text{ と零項の除去}\bigr)\\
+&=\psi^{\varpi,\varsigma,\delta}(\vec e)
+\breve M(\varpi,\varsigma)_{\delta,\delta'}
+&&\bigl(\because\ \blkref{def_endpoint_mode_vector}\bigr)\\
+&=\breve M(\varpi,\varsigma)_{\delta,\delta'}
+\psi^{\varpi,\varsigma,\delta}(\vec e)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の交換律}\bigr).
+\end{aligned}`),
+                  paragraph(["両辺の任意の成分が一致するので行列が等しい。"]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
