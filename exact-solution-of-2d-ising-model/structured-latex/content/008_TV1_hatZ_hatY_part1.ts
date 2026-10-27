@@ -309,8 +309,10 @@ h_1
       displayMath(
         String.raw`\begin{aligned}
 (g_1g_2)h
-&= g_1 g_2 g_2^{-1} g_1^{-1}
-&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入と行列の積の結合律})\\
+&= (g_1g_2)(g_2^{-1}g_1^{-1})
+&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入})\\
+&= g_1(g_2g_2^{-1})g_1^{-1}
+&&(\because\ \text{行列の積の結合律})\\
 &= g_1 I g_1^{-1}
 &&(\because\ g_2 g_2^{-1} = I)\\
 &= g_1g_1^{-1}
@@ -322,8 +324,10 @@ h_1
       displayMath(
         String.raw`\begin{aligned}
 h(g_1g_2)
-&= g_2^{-1} g_1^{-1} g_1 g_2
-&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入と行列の積の結合律})\\
+&= (g_2^{-1}g_1^{-1})(g_1g_2)
+&&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入})\\
+&= g_2^{-1}(g_1^{-1}g_1)g_2
+&&(\because\ \text{行列の積の結合律})\\
 &= g_2^{-1} I g_2
 &&(\because\ g_1^{-1} g_1 = I)\\
 &= g_2^{-1}g_2

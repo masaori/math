@@ -1486,3 +1486,6 @@ import Ising2DLambda.KacWard.TwistedModeWrapPhaseFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.RightwardSeamModePhase
 import Ising2DLambda.KacWard.RightwardSeamModePhase
 import Ising2DLambda.KacWard.RightwardSeamModePhaseFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.DownwardSeamModePhase
+import Ising2DLambda.KacWard.DownwardSeamModePhase
+import Ising2DLambda.KacWard.DownwardSeamModePhaseFromNecSuf

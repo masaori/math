@@ -74,6 +74,7 @@ export const ALL_LABELS = [
   "claim_distance_squared_zero_iff_equal",
   "claim_doubled_edge_fiber_phase_reduction",
   "claim_doubled_edge_free_fiber_phase_reduction",
+  "claim_downward_seam_mode_phase",
   "claim_dual_broken_edges_even",
   "claim_dual_broken_edges_winding_zero",
   "claim_dual_edge_map_bijective",
