@@ -145,15 +145,17 @@ export default defineBlocks([
    \quad (\because \sin(-\theta) = -\sin\theta)
 \end{aligned}`,
       ),
-      paragraph([
-        "であるから ",
-        math(String.raw`-\gamma_2(-\theta) = -i\,\exp(-i\theta)s_2^*(c_1\cos\theta + i\sin\theta - s_1c_2)`),
-        " となり、",
-        ref("def_A_theta"),
-        " の ",
-        math(String.raw`(2,1)`),
-        " 成分に一致する。",
-      ]),
+      paragraph(["したがって ", ref("def_A_theta"), " の ", math(String.raw`(2,1)`), " 成分は"]),
+      displayMath(
+        String.raw`\begin{aligned}
+A(\theta)_{2,1}
+&= -i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+   \quad (\because \blkref{def_A_theta}) \\
+&= -\gamma_2(-\theta)
+   \quad (\because \text{直前の }\gamma_2(-\theta)\text{ の式})
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "added",
