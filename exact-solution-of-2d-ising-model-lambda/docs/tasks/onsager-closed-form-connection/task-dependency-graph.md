@@ -15,7 +15,9 @@
 - `claim_low_temperature_trivial_sector_expression`, `claim_sector_value_duality`: 完了
 - `def_kw_dual_transform`, `claim_kw_self_dual_quadratic_equivalence`, `def_critical_point`: 完了
 - `def_periodic_free_energy_density_le_one`: 完了
-- トーラス版 Kac--Ward 公式: 反対称化と行列式保存、一般の零対角反対称行列の Pfaffian 平方恒等式、標識付きマッチングの補辺の偶次数と短い対の個数まで完了。符号付き偶部分グラフ多項式との平方恒等式は未完了。有限 Fourier 分解、Onsager 閉形式との同定は未着手
+- トーラス版 Kac--Ward 公式: 反対称化と行列式保存、一般の零対角反対称行列の Pfaffian 平方恒等式、標識付きマッチングと偶部分グラフ上の局所対合の対応（指示書の節 4）、基準マッチングとの対称差の閉路と閉じた非後退辺列への射影（節 5）まで完了。閉歩道の位相と二次符号の一般形（節 6）から平方恒等式の合成（節 9）までは未完了
+- 有限 Fourier 分解: ブロック対角行列の行列式の小行列式の積への分解（道具）、モード集合、小行列、終点を使う Fourier ベクトル、後続方向の辺の選択、四方向の切断線位相まで完了。固有ベクトル等式、Fourier 行列の両側逆と行列式の積公式、分散因子は未完了
+- 有限トーラス公式、両側評価、Onsager 閉形式との同定は未着手
 
 ## 採用する経路と出典
 
