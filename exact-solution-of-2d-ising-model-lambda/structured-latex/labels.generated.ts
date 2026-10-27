@@ -154,6 +154,7 @@ export const ALL_LABELS = [
   "claim_leading_distance_lt_iff_close_zero",
   "claim_leading_distance_pinching_implies_predicate",
   "claim_leading_distance_positive",
+  "claim_leftward_seam_mode_phase",
   "claim_lifted_steps_do_not_reverse",
   "claim_local_pairing_four_ports_count",
   "claim_local_pairing_matching_complement_recovery",

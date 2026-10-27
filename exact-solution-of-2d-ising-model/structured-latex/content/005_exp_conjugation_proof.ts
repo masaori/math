@@ -1840,7 +1840,7 @@ X(-X)
         String.raw`\begin{aligned}
 \mathrm{ad}_X^{m}(Y)
 &= \underbrace{\left[X,\left[X,\dots,\left[X,Y\right]\dots\right]\right]}_{m\text{ times}}
-   \quad (\because \mathrm{ad}_X^m \text{ の再帰的定義})
+   \quad (\because \mathrm{ad}_X^m \text{ の再帰的定義}\ \blkref{ad_binomial})
 \end{aligned}
 \qquad (m=0 \text{ のときは } Y)`,
       ),
