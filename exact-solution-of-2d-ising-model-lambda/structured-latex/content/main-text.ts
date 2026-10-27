@@ -79995,6 +79995,136 @@ c_{\oplus}(\omega,k)
   ],
 });
 
+const chapter_finite_fourier = defineSection({
+  kind: "section",
+  id: "finite_fourier_heading_chapter",
+  labels: [],
+  title: { text: "有限 Fourier 分解と分散関係" },
+  children: [
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "finite_fourier_heading_twisted_mode_sets",
+        labels: [],
+        title: { text: "ねじれたモード集合" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_def_horizontal_modes",
+              focus: {
+                id: "finite_fourier_def_horizontal_modes",
+                kind: "definition",
+                title: { text: "横方向のねじれたモード集合" },
+                labels: ["def_horizontal_twisted_modes"],
+                habitat: "Qbar",
+                lean: ["Ising2DLambda.KacWard.horizontalTwistedModes"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                    "）を任意に取る。横方向のモード集合を",
+                  ]),
+                  displayMath(String.raw`\mathcal U_a:=\{\varpi\in\overline{\mathbb Q}\mid\varpi^L=(-1)^a\}`),
+                  paragraph([
+                    "と定める。冪と等号は体 ", math(String.raw`\overline{\mathbb Q}`),
+                    " の中で取る（", ref("def_algebraic_numbers"), "）。",
+                    "従って実数体も複素数体も使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_def_vertical_modes",
+              focus: {
+                id: "finite_fourier_def_vertical_modes",
+                kind: "definition",
+                title: { text: "縦方向のねじれたモード集合" },
+                labels: ["def_vertical_twisted_modes"],
+                habitat: "Qbar",
+                lean: ["Ising2DLambda.KacWard.verticalTwistedModes"],
+                statement: [
+                  paragraph([
+                    "同じ辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                    "）について、縦方向のモード集合を",
+                  ]),
+                  displayMath(String.raw`\mathcal W_b:=\{\varsigma\in\overline{\mathbb Q}\mid\varsigma^L=(-1)^b\}`),
+                  paragraph([
+                    "と定める。冪と等号は体 ", math(String.raw`\overline{\mathbb Q}`),
+                    " の中で取る（", ref("def_algebraic_numbers"), "）。",
+                    "従って実数体も複素数体も使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_modes_are_double_roots",
+              focus: {
+                id: "finite_fourier_claim_twisted_modes_are_double_roots",
+                kind: "claim",
+                title: { text: "ねじれたモードは二倍の辺長を指数とする1の冪根である" },
+                labels: ["claim_twisted_modes_are_double_roots"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/twisted-modes-double-roots"],
+                lean: [
+                  "Ising2DLambda.KacWard.twistedModes_subset_doubleRoots",
+                  "Ising2DLambda.NecSuf.KacWard.twistedPow_mem_doubleRoots_necSuf",
+                  "Ising2DLambda.KacWard.twistedModes_subset_doubleRoots_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " に対し、",
+                  ]),
+                  displayMath(String.raw`\mathcal U_a\cup\mathcal W_b\subseteq\mu_{2L}`),
+                  paragraph([
+                    "が成り立つ。左辺は ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), "、右辺は ", ref("def_root_of_unity_set"),
+                    " の集合である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`z\in\mathcal U_a\cup\mathcal W_b`), " を任意に取る。",
+                    "和集合の定義により ", math(String.raw`z\in\mathcal U_a`), " または ",
+                    math(String.raw`z\in\mathcal W_b`), " である。前者では ",
+                    math(String.raw`c:=a`), "、後者では ", math(String.raw`c:=b`),
+                    " と置く。どちらも ", math(String.raw`c\in\{0,1\}`), " で、",
+                    math(String.raw`z^L=(-1)^c`), " となる（",
+                    ref("def_horizontal_twisted_modes"), "、", ref("def_vertical_twisted_modes"), "）。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+z^{2L}
+&=(z^L)^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=\bigl((-1)^c\bigr)^2&&\bigl(\because\ z^L=(-1)^c\bigr)\\
+&=1&&\bigl(\because\ c\in\{0,1\}\text{ と }1^2=(-1)^2=1\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`z\in\mu_{2L}`), "（", ref("def_root_of_unity_set"),
+                    "）。任意の ", math(String.raw`z`), " について示したので包含を得る。",
+                    "計算は ", math(String.raw`\overline{\mathbb Q}`), " で閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
+
 const chapter_real_escape = defineSection({
   kind: "section",
   id: "real_escape_heading_chapter",
@@ -86078,6 +86208,7 @@ const chapters = [
   chapter_kac_ward_antisymmetrization,
   chapter_kac_ward_permutation_expansion,
   chapter_kac_ward_direct_comparison,
+  chapter_finite_fourier,
   chapter_real_escape,
   chapter_fisher_zero_density,
   chapter_critical_exponent,
