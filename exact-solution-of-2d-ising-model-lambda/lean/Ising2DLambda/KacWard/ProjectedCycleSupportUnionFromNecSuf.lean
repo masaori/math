@@ -18,11 +18,9 @@ theorem projectedCycleSupportUnion_eq_complement_from_necSuf {L : ℕ} (z : Qbar
         (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0) :
     projectedCycleSupportUnion D t = ↑(taggedComplementEdges D t) := by
   classical
-  let A := Ising2DLambda.NecSuf.KacWard.activeVertices D
-    (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
-      PerfectMatching (OrientedEdge L)) (shortUnderlyingPairs t)
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
+  let A := concreteTaggedActiveVertices D t
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
   have hp (j : {a : OrientedEdge L // a ∈ A}) : (υ.val j).val.1 = j.val.1 := by
     change (perfectMatchingMate
       (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
@@ -31,18 +29,24 @@ theorem projectedCycleSupportUnion_eq_complement_from_necSuf {L : ℕ} (z : Qbar
     rfl
   have hcover : projectedCycleSupportUnion D t =
       Set.range (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) := by
-    simpa [projectedCycleSupportUnion, reversal] using
+    simpa [projectedCycleSupportUnion, concreteAlternatingComponent, reversal] using
       (Ising2DLambda.NecSuf.KacWard.projectedCycleSupportUnion_eq_range
         τ υ (fun j : {a : OrientedEdge L // a ∈ A} => j.val.1) hp)
   rw [hcover]
   ext e
   constructor
   · rintro ⟨j, rfl⟩
-    exact (taggedComplement_iff_active_from_necSuf z s D t ht hterm j.val).2 j.property
+    have hj : j.val ∈ taggedActiveByLabels D t := by
+      rw [taggedActiveByLabels_eq_concreteTaggedActiveVertices]
+      exact j.property
+    exact (taggedComplement_iff_active_concrete z s D t ht hterm j.val).2 hj
   · intro he
     let a : OrientedEdge L := (e, false)
-    have ha : a ∈ A :=
-      (taggedComplement_iff_active_from_necSuf z s D t ht hterm a).1 (by simpa [a] using he)
+    have ha : a ∈ A := by
+      dsimp [A]
+      rw [← taggedActiveByLabels_eq_concreteTaggedActiveVertices D t]
+      exact (taggedComplement_iff_active_concrete z s D t ht hterm a).1
+        (by simpa [a] using he)
     exact ⟨⟨a, ha⟩, rfl⟩
 
 end Ising2DLambda.KacWard

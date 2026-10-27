@@ -1669,8 +1669,13 @@ T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(a\check Z_\mu+b\check Y_\mu\right)
         math(String.raw`X=\check Z_\mu`),
         "、",
         math(String.raw`W=\check Y_\mu`),
-        " と置けば主張を得る。",
+        " と置く。一続きである。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+T_{V_2}\!\left(a\check Z_\mu+b\check Y_\mu\right)
+&=a\,T_{V_2}(\check Z_\mu)+b\,T_{V_2}(\check Y_\mu)
+&&\left(\because\ \blkref{linearity_of_T}\right).
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
