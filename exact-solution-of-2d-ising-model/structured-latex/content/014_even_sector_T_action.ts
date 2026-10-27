@@ -1292,7 +1292,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
 i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{展開係数への変換 (h1.z)}) \\
+   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h1.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Z}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1335,7 +1335,7 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 -i\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu & (n\text{ 奇数}) \\
 K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{展開係数への変換 (h1.y)}) \\
+   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h1.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1361,7 +1361,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 -i\,(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 奇数}) \\
 (2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{展開係数への変換 (h2.z)}) \\
+   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h2.z)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Z}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\check{Y}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
@@ -1385,7 +1385,7 @@ K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
 (2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad (\because \text{展開係数への変換 (h2.y)}) \\
+   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h2.y)}) \\
 &= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Y}_\mu\right)
    + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,(2K_2^*)^{n}\,\check{Z}_\mu\right)
    \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\

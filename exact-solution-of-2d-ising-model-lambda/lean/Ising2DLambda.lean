@@ -1540,3 +1540,5 @@ import Ising2DLambda.NecSuf.KacWard.TransitionOnEndpointModeVector
 import Ising2DLambda.KacWard.ModeBlockMatrixFromNecSuf
 import Ising2DLambda.KacWard.ModeBlockMatrix
 import Ising2DLambda.NecSuf.KacWard.ModeBlockMatrix
+import Ising2DLambda.KacWard.TransitionFourierIntertwining
+import Ising2DLambda.NecSuf.KacWard.TransitionFourierIntertwining

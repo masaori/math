@@ -81860,6 +81860,10 @@ G^{a,b,\kappa}_{\vec g,\vec f}
                 labels: ["claim_transition_fourier_intertwining"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/transition-fourier-intertwining"],
+                lean: [
+                  "Ising2DLambda.KacWard.transition_fourier_intertwining",
+                  "Ising2DLambda.NecSuf.KacWard.transition_fourier_intertwining_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
