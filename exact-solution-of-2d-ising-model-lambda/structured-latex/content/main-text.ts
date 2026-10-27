@@ -82053,6 +82053,81 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_block_entries",
+              focus: {
+                id: "finite_fourier_claim_mode_block_entries",
+                kind: "claim",
+                title: { text: "Fourier 行列の基底で Kac--Ward 行列はモードブロックになる" },
+                labels: ["claim_fourier_mode_block_entries"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/fourier-mode-block-entries"],
+                lean: [
+                  "Ising2DLambda.KacWard.fourier_mode_block_entries",
+                  "Ising2DLambda.NecSuf.KacWard.fourier_mode_block_entries_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`), " を任意に取る。",
+                    "二つのモード ", math(String.raw`m=(\varpi,\varsigma)`), "、",
+                    math(String.raw`n=(\varpi',\varsigma')\in\mathcal U_a\times\mathcal W_b`),
+                    " と方向 ", math(String.raw`\delta,\delta'\in\mathbb Z/4\mathbb Z`),
+                    " を任意に取る。行列のハットは ", ref("def_qbar_constant_embedding"),
+                    " の成分ごとの適用である。",
+                  ]),
+                  displayMath(String.raw`\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)_{\kappa^{-1}(\varpi,\varsigma,\delta),\,\kappa^{-1}(\varpi',\varsigma',\delta')}
+=\begin{cases}
+\bigl(I_{\mathbb Z/4\mathbb Z}-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{\delta,\delta'},&m=n,\\
+0,&m\ne n.
+\end{cases}`),
+                  paragraph(["各成分は ", math(String.raw`\overline{\mathbb Q}[x]`), " の元である。実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\vec g:=\kappa^{-1}(\varpi,\varsigma,\delta)`), "、",
+                    math(String.raw`\vec h:=\kappa^{-1}(\varpi',\varsigma',\delta')`), " と置く。",
+                    "以下、", math(String.raw`B:=B^{a,b,\kappa}`), " と略す。",
+                    ref("claim_edge_mode_index_bijection"), " より、これらは向き付き辺である。",
+                  ]),
+                  paragraph([
+                    "もし ", math(String.raw`m=n`), " なら ",
+                    ref("def_mode_block_matrix"), " より ",
+                    math(String.raw`B^{a,b,\kappa}_{\vec g,\vec h}=\breve M(\varpi,\varsigma)_{\delta,\delta'}`),
+                    " である。したがって",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(I_{\vec E_L}-x\widehat B\bigr)_{\vec g,\vec h}
+&=(I_{\vec E_L})_{\vec g,\vec h}-x\widehat{B_{\vec g,\vec h}}
+&&(\because\ \text{行列の差とスカラー倍の定義})\\
+&=(I_{\mathbb Z/4\mathbb Z})_{\delta,\delta'}-x\widehat{\breve M(\varpi,\varsigma)_{\delta,\delta'}}
+&&(\because\ \blkref{def_mode_block_matrix},\ \kappa\text{ の単射性})\\
+&=\bigl(I_{\mathbb Z/4\mathbb Z}-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{\delta,\delta'}
+&&(\because\ \text{行列の差とスカラー倍の定義}).
+\end{aligned}`),
+                  paragraph([
+                    "もし ", math(String.raw`m\ne n`), " なら ",
+                    math(String.raw`\vec g\ne\vec h`), " であり、",
+                    ref("def_mode_block_matrix"), " より ",
+                    math(String.raw`B^{a,b,\kappa}_{\vec g,\vec h}=0`), " である。よって",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(I_{\vec E_L}-x\widehat B\bigr)_{\vec g,\vec h}
+&=(I_{\vec E_L})_{\vec g,\vec h}-x\widehat{B_{\vec g,\vec h}}
+&&(\because\ \text{行列の差とスカラー倍の定義})\\
+&=0-x\widehat 0
+&&(\because\ m\ne n,\ \blkref{def_mode_block_matrix})\\
+&=0
+&&(\because\ \blkref{def_qbar_constant_embedding}\text{ と }\overline{\mathbb Q}[x]\text{ の零元}).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },
@@ -88083,7 +88158,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                     [
                       "有限 Fourier 分解。",
                       "各行列式を、ねじれた 1 の冪根による有限 Fourier 分解でモードごとの小行列式の積へ落とす段である。",
-                      "現在地: 未着手。",
+                      "現在地: モードブロックの成分対応まで四層で済み、行列式の積公式と分散因子の計算が残る。",
                       "完了条件: 分散関係を ", math(String.raw`\overline{\mathbb{Q}(x)}`),
                       " 上の代数的な等式として書き、モードごとの因子を明示すること。ここまでは可算な世界で閉じる。",
                     ],

@@ -1547,3 +1547,5 @@ import Ising2DLambda.NecSuf.KacWard.PolynomialFourierSimilarity
 import Ising2DLambda.KacWard.FourierSimilarityPreservesDeterminant
 import Ising2DLambda.NecSuf.KacWard.FourierSimilarityPreservesDeterminant
 import Ising2DLambda.KacWard.FourierSimilarityPreservesDeterminantFromNecSuf
+import Ising2DLambda.KacWard.FourierModeBlockEntries
+import Ising2DLambda.NecSuf.KacWard.FourierModeBlockEntries
