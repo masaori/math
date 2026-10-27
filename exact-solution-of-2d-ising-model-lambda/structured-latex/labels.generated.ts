@@ -79,6 +79,7 @@ export const ALL_LABELS = [
   "claim_dual_broken_edges_even",
   "claim_dual_broken_edges_winding_zero",
   "claim_dual_edge_map_bijective",
+  "claim_edge_mode_index_bijection",
   "claim_edge_representative_displacement",
   "claim_edge_row_partition",
   "claim_edge_simple_contact_split",

@@ -1152,7 +1152,7 @@ A(\tilde\theta_\mu)
    \gamma_1(\theta) & \gamma_2(\theta) \\
    -\gamma_2(-\theta) & \gamma_1(\theta)
    \end{pmatrix}
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \gamma_1(\theta)\gamma_1(\theta) - \gamma_2(\theta)\bigl(-\gamma_2(-\theta)\bigr)
    \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
@@ -1191,11 +1191,11 @@ A(\tilde\theta_\mu)
         String.raw`\begin{aligned}
 \exp(i\theta)\exp(-i\theta)
 &= \exp(i\theta + (-i\theta))
-   \quad (\because \text{可換な指数の積公式を } n=1 \text{ に適用}) \\
+   \quad (\because \blkref{theorem_exp_product}\text{ を }n=1\text{ に適用}) \\
 &= \exp(0)
    \quad (\because \mathbb{C} \text{ の加法 } i\theta + (-i\theta) = 0) \\
 &= 1
-   \quad (\because \exp(0) = 1)
+   \quad (\because \blkref{theorem_exp_zero})
 \end{aligned}`,
       ),
       paragraph([
@@ -1317,11 +1317,11 @@ s_1^2c_2^2(s_2^*)^2
         String.raw`\begin{aligned}
 \lambda_{+,\mu}\lambda_{-,\mu}
 &= \left(\gamma_1(\theta) + r\right)\left(\gamma_1(\theta) - r\right)
-   \quad (\because \text{eigenvector\_of\_A\_theta\_tilde}) \\
+   \quad (\because \blkref{eigenvector_of_A_theta_tilde}) \\
 &= \gamma_1(\theta)^2 - r^2
    \quad (\because \mathbb{R} \text{ の分配則による平方差}) \\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-   \quad (\because \text{relation\_of\_gamma\_2\_theta\_tilde (2)}) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\text{ の積の式}) \\
 &= 1
    \quad (\because \text{Step 5})
 \end{aligned}`,
@@ -1335,7 +1335,7 @@ s_1^2c_2^2(s_2^*)^2
         String.raw`\begin{aligned}
 \gamma_1(\theta)^2
 &= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + r^2\bigr)
-   \quad (\because \text{上で引いた } \gamma_2(-\tilde\theta_\mu)=-\overline{\gamma_2(\tilde\theta_\mu)} \text{ とその帰結 (2) より } \gamma_2(\theta)\gamma_2(-\theta) + r^2 = 0_{\mathbb{C}}) \\
+   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\text{ の積の式より }\gamma_2(\theta)\gamma_2(-\theta)+r^2=0_{\mathbb C}) \\
 &= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + r^2
    \quad (\because \mathbb{C} \text{ の加法の結合律}) \\
 &= 1 + r^2

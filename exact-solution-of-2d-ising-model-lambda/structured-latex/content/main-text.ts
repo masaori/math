@@ -80563,6 +80563,49 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_edge_mode_index_bijection",
+              focus: {
+                id: "finite_fourier_claim_edge_mode_index_bijection",
+                kind: "claim",
+                title: { text: "向き付き辺とモード添字の間に全単射がある" },
+                labels: ["claim_edge_mode_index_bijection"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/edge-mode-index-bijection"],
+                lean: [
+                  "Ising2DLambda.KacWard.edgeModeIndex_equiv_exists",
+                  "Ising2DLambda.NecSuf.KacWard.edgeModeIndex_equiv_exists_necSuf",
+                  "Ising2DLambda.KacWard.edgeModeIndex_equiv_exists_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。",
+                    ref("def_oriented_edges"), " の向き付き辺集合 ", math(String.raw`\vec E_L`),
+                    " と ", ref("def_fourier_mode_index_set"), " のモード添字集合 ",
+                    math(String.raw`\mathcal M_{a,b}`), " の間には全単射がある。",
+                    "以後、その一つを ", math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`), " として固定する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph(["各集合の元の個数を数える。", ref("claim_twisted_mode_sets_card"), " より ",
+                    math(String.raw`|\mathcal U_a|=|\mathcal W_b|=L`), " である。"]),
+                  displayMath(String.raw`\begin{aligned}
+|\mathcal M_{a,b}|&=|\mathcal U_a|\,|\mathcal W_b|\,|\mathbb Z/4\mathbb Z|&&\bigl(\because\ \blkref{def_fourier_mode_index_set}\text{ と有限集合の直積の濃度}\bigr)\\
+&=L\cdot L\cdot4&&\bigl(\because\ \blkref{claim_twisted_mode_sets_card}\bigr)\\
+&=4L^2&&\bigl(\because\ \mathbb N\text{ の乗法の交換律}\bigr).
+\end{aligned}`),
+                  paragraph([ref("def_oriented_edges"), " より ", math(String.raw`|\vec E_L|=4L^2`),
+                    " でもある。同じ個数の有限集合には全単射がある。",
+                    "全単射の選択は添字の付け方だけを決め、二つの集合を同一視しない。",
+                    "実数体と複素数体は使わない。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",
