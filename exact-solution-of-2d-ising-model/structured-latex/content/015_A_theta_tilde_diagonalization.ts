@@ -433,7 +433,7 @@ s_1c_2
       displayMath(
         String.raw`\gamma_2(-\theta)
 = i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
-\quad (\because \text{def\_gamma1\_gamma2\_of\_theta})`,
+\quad (\because \blkref{def_gamma1_gamma2_of_theta})`,
       ),
       paragraph([
         "である。一方 ",
@@ -460,7 +460,7 @@ s_1c_2
         String.raw`\begin{aligned}
 \overline{\gamma_2(\theta)}
 &= \overline{i\,\exp(i\theta)s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \text{def\_gamma1\_gamma2\_of\_theta}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \bar i\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because \text{複素共役が積を保つこと}) \\
@@ -469,7 +469,7 @@ s_1c_2
    \quad (\because \bar i = -i) \\
 &= (-i)\,\exp(-i\theta)\;\overline{s_2^*}\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \theta \in \mathbb{R} \text{ と euler\_formula\_cos\_sin より } \overline{\exp(i\theta)} = \exp(-i\theta)) \\
+   \quad (\because \theta \in \mathbb{R} \text{ と }\blkref{euler_formula_cos_sin}\text{ より } \overline{\exp(i\theta)} = \exp(-i\theta)) \\
 &= (-i)\,\exp(-i\theta)\,s_2^*\;
    \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
    \quad (\because s_2^* \in \mathbb{R}) \\
@@ -520,9 +520,10 @@ s_1c_2
 \gamma_2(\theta)\gamma_2(-\theta)
 &= \gamma_2(\theta)\left(-\overline{\gamma_2(\theta)}\right)
    \quad (\because (1)) \\
-&= -\gamma_2(\theta)\overline{\gamma_2(\theta)} \\
+&= -\gamma_2(\theta)\overline{\gamma_2(\theta)}
+   \quad (\because \mathbb{C}\text{ の四則}) \\
 &= -\left|\gamma_2(\theta)\right|^2
-   \quad (\because \text{abs\_basic\_properties}\ (z\bar z = |z|^2))
+   \quad (\because \blkref{abs_basic_properties}\ (z\bar z = |z|^2))
 \end{aligned}`,
       ),
       paragraph([
@@ -567,13 +568,13 @@ s_1c_2
         String.raw`\begin{aligned}
 \sqrt{-\gamma_2(\theta)\gamma_2(-\theta)}
 &= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\cdot 0/2)
-   \quad (\because \text{def\_sqrt\_cc を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } 0 \text{ に適用}) \\
+   \quad (\because \blkref{def_sqrt_cc}\text{ を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } 0 \text{ に適用}) \\
 &= \sqrt{\left|\gamma_2(\theta)\right|^2}
    \quad (\because \exp(i\cdot 0) = 1) \\
 &= \left|\gamma_2(\theta)\right|
-   \quad (\because \text{sqrt\_nonnegative\_existence\_uniqueness と } |\gamma_2(\theta)| \geq 0) \\
+   \quad (\because \blkref{sqrt_nonnegative_existence_uniqueness}\text{ と } |\gamma_2(\theta)| \geq 0) \\
 &> 0
-   \quad (\because \text{gamma\_2\_theta\_tilde\_nonzero})
+   \quad (\because \blkref{gamma_2_theta_tilde_nonzero})
 \end{aligned}`,
       ),
       paragraph([
@@ -598,11 +599,11 @@ s_1c_2
         String.raw`\begin{aligned}
 \sqrt{\gamma_2(\theta)\gamma_2(-\theta)}
 &= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\pi/2)
-   \quad (\because \text{def\_sqrt\_cc を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } \pi \text{ に適用}) \\
+   \quad (\because \blkref{def_sqrt_cc}\text{ を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } \pi \text{ に適用}) \\
 &= \left|\gamma_2(\theta)\right|\,\exp(i\pi/2)
-   \quad (\because \text{sqrt\_nonnegative\_existence\_uniqueness}) \\
+   \quad (\because \blkref{sqrt_nonnegative_existence_uniqueness}) \\
 &= \left|\gamma_2(\theta)\right|\left(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2}\right)
-   \quad (\because \text{euler\_formula\_cos\_sin}) \\
+   \quad (\because \blkref{euler_formula_cos_sin}) \\
 &= i\left|\gamma_2(\theta)\right|
    \quad (\because \cos\tfrac{\pi}{2}=0,\ \sin\tfrac{\pi}{2}=1\text{ と複素数の四則})
 \end{aligned}`,
