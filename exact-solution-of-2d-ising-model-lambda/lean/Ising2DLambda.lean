@@ -1475,3 +1475,5 @@ import Ising2DLambda.KacWard.ModeSmallMatrixFromNecSuf
 import Ising2DLambda.KacWard.EndpointModeVector
 import Ising2DLambda.NecSuf.KacWard.EndpointModeVector
 import Ising2DLambda.KacWard.EndpointModeVectorFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.SourceDirectionBijection
+import Ising2DLambda.KacWard.SourceDirectionBijectionFromNecSuf

@@ -80476,6 +80476,65 @@ y^L
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_source_direction_bijection",
+              focus: {
+                id: "finite_fourier_claim_source_direction_bijection",
+                kind: "claim",
+                title: { text: "始点と方向は向き付き辺を一意に定める" },
+                labels: ["claim_source_direction_bijection"],
+                habitat: "N",
+                verification: ["sagemath/check/source-direction-bijection"],
+                lean: [
+                  "Ising2DLambda.KacWard.sourceDirection_bijective",
+                  "Ising2DLambda.NecSuf.KacWard.sourceDirection_bijective_necSuf",
+                  "Ising2DLambda.KacWard.sourceDirection_bijective_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " に対し、",
+                    ref("def_oriented_edges"), " の向き付き辺から始点と方向番号を取る写像",
+                  ]),
+                  displayMath(String.raw`\vec E_L\longrightarrow V_L\times\mathbb Z/4\mathbb Z,\qquad
+\vec f\longmapsto(\operatorname{src}(\vec f),\operatorname{dir}(\vec f))`),
+                  paragraph(["は全単射である。始点と方向番号はそれぞれ ", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"), " に従う。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の頂点 ", math(String.raw`(i,j)\in V_L`), " を取る。",
+                    ref("def_lattice"), " の辺の番号と ", ref("def_boundary_maps"),
+                    " の端点から、始点が ", math(String.raw`(i,j)`), " である四方向の辺を次のように構成する。",
+                  ]),
+                  displayMath(String.raw`\begin{array}{c|c}
+\operatorname{dir}&\text{台の辺の始点側座標と向き}\\\hline
+0&(i,j),\ 0\\
+1&(i,j),\ 0\\
+2&(i,j-1),\ 1\\
+3&(i-1,j),\ 1
+\end{array}`),
+                  paragraph([
+                    "方向 ", math(String.raw`0,2`), " では横辺、方向 ", math(String.raw`1,3`),
+                    " では縦辺を選ぶ。表の減算は ", math(String.raw`\mathbb Z/L\mathbb Z`),
+                    " の中で行う。", ref("def_oriented_edge_endpoints"), " と ", ref("def_oriented_edge_direction"),
+                    " により、各行の始点と方向は指定どおりである。よって写像は全射である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|\vec E_L|&=4L^2&&\bigl(\because\ \blkref{def_oriented_edges}\bigr)\\
+|V_L\times\mathbb Z/4\mathbb Z|&=|V_L|\cdot4&&\bigl(\because\ \text{有限集合の直積の濃度}\bigr)\\
+&=L^2\cdot4&&\bigl(\because\ \blkref{def_lattice}\bigr)\\
+&=4L^2&&\bigl(\because\ \mathbb N\text{ の乗法の交換律}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "同じ濃度の有限集合の間の全射は単射でもある。したがって写像は全単射である。",
+                    "辺長一でも辺の番号と向きは区別される。実数体と複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

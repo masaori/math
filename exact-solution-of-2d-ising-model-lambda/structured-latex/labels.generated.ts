@@ -574,6 +574,7 @@ export const ALL_LABELS = [
   "claim_smoothing_splits_closed_walk",
   "claim_smoothing_straight_visit_count_update",
   "claim_smoothing_vertex_crossing_number_update",
+  "claim_source_direction_bijection",
   "claim_sqrt_two_exists",
   "claim_square_difference_from_multiple_side_bound",
   "claim_square_of_sum_le_twice_sum_of_squares",
