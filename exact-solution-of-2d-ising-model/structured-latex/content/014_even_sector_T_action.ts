@@ -1003,11 +1003,21 @@ i^n
 (-1)^{n/2}(2K_1)^{n}\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.z)}) \\
+&= i^n2^{-n}\begin{cases}
+(-1)^{(n-1)/2}(2K_1)^n\exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_1)^n\check{Z}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because (i/2)^n=i^n2^{-n}) \\
+&= i^n2^{-n}\begin{cases}
+(-1)^{(n-1)/2}2^nK_1^n\exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}2^nK_1^n\check{Z}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because (2K_1)^n=2^nK_1^n) \\
 &= \begin{cases}
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad \left(\because \text{冪の指数法則を商 }\left(\tfrac{i}{2}\right)^{n}=i^{n}2^{-n}\text{ と積 }(2K_1)^n=2^{n}K_1^n\text{ の両方へ適用し、スカラーを並べ替えた}\right) \\
+   \quad (\because \mathbb C\text{ の分配律・交換律}) \\
 &= \begin{cases}
 i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
@@ -1065,11 +1075,21 @@ K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
 (-1)^{n/2}(2K_1)^{n}\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
    \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.y)}) \\
+&= i^n2^{-n}\begin{cases}
+(-1)^{(n+1)/2}(2K_1)^n\exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}(2K_1)^n\check{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because (i/2)^n=i^n2^{-n}) \\
+&= i^n2^{-n}\begin{cases}
+(-1)^{(n+1)/2}2^nK_1^n\exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
+(-1)^{n/2}2^nK_1^n\check{Y}_\mu & (n\text{ 偶数})
+\end{cases}
+   \quad (\because (2K_1)^n=2^nK_1^n) \\
 &= \begin{cases}
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
 \end{cases}
-   \quad \left(\because \text{冪の指数法則を商 }\left(\tfrac{i}{2}\right)^{n}=i^{n}2^{-n}\text{ と積 }(2K_1)^n=2^{n}K_1^n\text{ の両方へ適用し、スカラーを並べ替えた}\right) \\
+   \quad (\because \mathbb C\text{ の分配律・交換律}) \\
 &= \begin{cases}
 i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
 i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})

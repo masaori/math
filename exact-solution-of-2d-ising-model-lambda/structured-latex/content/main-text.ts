@@ -81818,6 +81818,10 @@ G^{a,b,\kappa}_{\vec g,\vec f}
                 title: { text: "モードごとの小行列を並べたブロック行列" },
                 labels: ["def_mode_block_matrix"],
                 habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.modeBlockMatrix",
+                  "Ising2DLambda.NecSuf.KacWard.modeBlockMatrix",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
