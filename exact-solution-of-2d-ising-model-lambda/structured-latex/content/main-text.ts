@@ -80527,6 +80527,42 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_def_mode_index_set",
+              focus: {
+                id: "finite_fourier_def_mode_index_set",
+                kind: "definition",
+                title: { text: "Fourier 行列のモード添字集合" },
+                labels: ["def_fourier_mode_index_set"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.fourierModeIndexSet",
+                  "Ising2DLambda.NecSuf.KacWard.fourierModeIndexSet",
+                  "Ising2DLambda.KacWard.fourierModeIndexSet_from_necSuf",
+                ],
+                verification: ["sagemath/check/fourier-mode-index-set"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。横・縦のモード集合は ",
+                    ref("def_horizontal_twisted_modes"), " と ", ref("def_vertical_twisted_modes"),
+                    " に従う。Fourier 行列の列に使うモード添字集合を",
+                  ]),
+                  displayMath(String.raw`\mathcal M_{a,b}:=\mathcal U_a\times\mathcal W_b\times\mathbb Z/4\mathbb Z`),
+                  paragraph([
+                    "で定める。各元は横モード ", math(String.raw`\varpi\in\mathcal U_a`),
+                    "、縦モード ", math(String.raw`\varsigma\in\mathcal W_b`),
+                    "、方向番号 ", math(String.raw`\delta\in\mathbb Z/4\mathbb Z`),
+                    " の順序付き組 ", math(String.raw`(\varpi,\varsigma,\delta)`),
+                    " である。これは代数的数と有限方向集合からなる有限集合であり、実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",

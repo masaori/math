@@ -997,7 +997,7 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
 &= \left(A(\tilde\theta_\mu)v_{+,\mu}\ \ A(\tilde\theta_\mu)v_{-,\mu}\right)
    \quad (\because \text{行列の積を列ごとに見た}) \\
 &= \left(\lambda_{+,\mu}v_{+,\mu}\ \ \lambda_{-,\mu}v_{-,\mu}\right)
-   \quad (\because \text{eigenvector\_of\_A\_theta\_tilde を 2 列へ同時適用}) \\
+   \quad (\because \blkref{eigenvector_of_A_theta_tilde}\text{ を 2 列へ同時適用}) \\
 &= \check{P}_\mu\,\check{D}_\mu
    \quad (\because \check{D}_\mu = \mathrm{diag}(\lambda_{+,\mu}, \lambda_{-,\mu}) \text{ の右乗が列ごとのスカラー倍})
 \end{aligned}`,

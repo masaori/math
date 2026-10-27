@@ -724,6 +724,7 @@ export const ALL_LABELS = [
   "def_fisher_zero_mult_count_in_rational_disc",
   "def_fixed_point_free_involution",
   "def_fixed_point_free_permutations",
+  "def_fourier_mode_index_set",
   "def_fully_unswitchable_residual_subset",
   "def_gauged_terminal_matrix",
   "def_global_spin_reversal",

@@ -1480,6 +1480,9 @@ import Ising2DLambda.KacWard.EndpointModeVectorFromNecSuf
 import Ising2DLambda.KacWard.DualEndpointModeVector
 import Ising2DLambda.NecSuf.KacWard.DualEndpointModeVector
 import Ising2DLambda.KacWard.DualEndpointModeVectorFromNecSuf
+import Ising2DLambda.KacWard.FourierModeIndexSet
+import Ising2DLambda.NecSuf.KacWard.FourierModeIndexSet
+import Ising2DLambda.KacWard.FourierModeIndexSetFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SourceDirectionBijection
 import Ising2DLambda.KacWard.SourceDirectionBijectionFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TargetDirectionBijection
