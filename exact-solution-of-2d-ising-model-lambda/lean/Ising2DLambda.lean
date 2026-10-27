@@ -1489,6 +1489,9 @@ import Ising2DLambda.KacWard.EdgeModeIndexBijectionFromNecSuf
 import Ising2DLambda.KacWard.TwistedFourierMatrix
 import Ising2DLambda.NecSuf.KacWard.TwistedFourierMatrix
 import Ising2DLambda.KacWard.TwistedFourierMatrixFromNecSuf
+import Ising2DLambda.KacWard.DualTwistedFourierMatrix
+import Ising2DLambda.NecSuf.KacWard.DualTwistedFourierMatrix
+import Ising2DLambda.KacWard.DualTwistedFourierMatrixFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SourceDirectionBijection
 import Ising2DLambda.KacWard.SourceDirectionBijectionFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TargetDirectionBijection

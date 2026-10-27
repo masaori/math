@@ -80648,6 +80648,55 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_def_dual_fourier_matrix_inverse_candidate",
+              focus: {
+                id: "finite_fourier_def_dual_fourier_matrix_inverse_candidate",
+                kind: "definition",
+                title: { text: "双対 Fourier 行列と逆候補" },
+                labels: ["def_dual_fourier_matrix_inverse_candidate"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.dualTwistedFourierMatrix",
+                  "Ising2DLambda.KacWard.twistedFourierInverseCandidate",
+                  "Ising2DLambda.NecSuf.KacWard.dualFourierMatrix",
+                  "Ising2DLambda.NecSuf.KacWard.fourierInverseCandidate",
+                  "Ising2DLambda.KacWard.dualTwistedFourierMatrix_from_necSuf",
+                  "Ising2DLambda.KacWard.twistedFourierInverseCandidate_from_necSuf",
+                ],
+                verification: ["sagemath/check/dual-twisted-fourier-matrix"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。",
+                    ref("claim_edge_mode_index_bijection"), " の全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を一つ固定する。行と列の添字集合はともに ",
+                    math(String.raw`\vec E_L`), " とする。各 ",
+                    math(String.raw`\vec e,\vec g\in\vec E_L`), " について、",
+                  ]),
+                  displayMath(String.raw`\bar F^{a,b,\kappa}_{\vec g,\vec e}
+:=\bar\psi^{\kappa(\vec g)}(\vec e)\in\overline{\mathbb Q}`),
+                  paragraph([
+                    "と定める。", math(String.raw`\bar\psi^{\kappa(\vec g)}`), " は ",
+                    ref("def_dual_endpoint_mode_vector"), " の双対ベクトルである。",
+                    "さらに逆候補を",
+                  ]),
+                  displayMath(String.raw`G^{a,b,\kappa}:=L^{-2}\bar F^{a,b,\kappa}
+\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q})`),
+                  paragraph([
+                    "で定める。", math(String.raw`L\ge1`), " なので ",
+                    math(String.raw`L^{-2}\in\mathbb Q`), " が定義できる。",
+                    "ここでの「逆候補」は名称であり、両側逆の等式は後続の主張で示す。",
+                    "実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",

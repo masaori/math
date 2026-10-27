@@ -529,9 +529,12 @@ export default defineBlocks([
         " は",
       ]),
       displayMath(
-        String.raw`\check\psi_\mu^\dagger = c_\mu\left(-r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right),
-\qquad
-\check\psi_\mu = c_\mu\left(+r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)`,
+        String.raw`\begin{aligned}
+\check\psi_\mu^\dagger &= c_\mu\left(-r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)
+&&\bigl(\because\ \blkref{def_check_fermi}\text{ と上の略記}\bigr),\\
+\check\psi_\mu &= c_\mu\left(+r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)
+&&\bigl(\because\ \blkref{def_check_fermi}\text{ と上の略記}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "と書ける。また ",
@@ -539,12 +542,18 @@ export default defineBlocks([
         " より",
       ]),
       displayMath(
-        String.raw`\left[\check{Z}_\mu, \check{Z}_\nu\right]_+ = 2M_{\mathrm{col}}\,\delta\,I,
-\qquad
-\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ = \left[\check{Y}_\mu, \check{Z}_\nu\right]_+ = 0,
-\qquad
-\left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M_{\mathrm{col}}\,\delta\,I,
-\qquad \delta := \delta_{\nu,\,M_{\mathrm{col}}+1-\mu}`,
+        String.raw`\begin{aligned}
+\left[\check{Z}_\mu,\check{Z}_\nu\right]_+ &= 2M_{\mathrm{col}}\,\delta\,I
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
+\left[\check{Z}_\mu,\check{Y}_\nu\right]_+ &= 0
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
+\left[\check{Y}_\mu,\check{Z}_\nu\right]_+ &= 0
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\text{ と反交換子の対称性}\bigr),\\
+\left[\check{Y}_\mu,\check{Y}_\nu\right]_+ &= 2M_{\mathrm{col}}\,\delta\,I
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
+\delta &:= \delta_{\nu,\,M_{\mathrm{col}}+1-\mu}
+&&\bigl(\because\ \text{略記}\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "である（",
