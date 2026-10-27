@@ -6487,6 +6487,11 @@ a+2b&=(a+b)+b
               labels: ["claim_block_preserving_permutation_sign"],
               habitat: "Z",
               verification: ["sagemath/check/block-preserving-permutation-sign"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockPreserving_sign_eq_prod",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockPreserving_pow_eq_prod_fiber_pow",
+                "Ising2DLambda.AlgebraicEigenvalue.blockPreserving_sign_eq_prod_from_necSuf",
+              ],
               statement: [
                 paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J`), "、有限集合 ", math(String.raw`\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), " を取る。", ref("claim_block_preserving_permutation_bijection"), " の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と各ファイバー上の制限 ", math(String.raw`\sigma_k\in\operatorname{Perm}(\mathcal J_k)`), " に対して"]),
                 displayMath(String.raw`\operatorname{sgn}(\sigma)=\prod_{k\in\mathcal K}\operatorname{sgn}(\sigma_k)\in\mathbb Z`),
