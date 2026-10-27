@@ -754,7 +754,7 @@ s_1c_2
 \end{aligned}`,
       ),
       paragraph([
-        "である。",
+        "である。", ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " を使った。",
         math(String.raw`\mathbb{C}`),
         " は体（",
         ref("complex_numbers_form_a_field"),
@@ -806,6 +806,7 @@ s_1c_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_1 = \mp r)
 \end{aligned}`,
       ),
+      paragraph([ref("def_gamma1_gamma2_of_theta"), "、", ref("relation_of_gamma_2_theta_tilde"), "、", ref("abs_basic_properties"), " を使った。"]),
       paragraph([
         "第 2 成分は ",
         ref("relation_of_gamma_2_theta_tilde"),
@@ -830,6 +831,7 @@ s_1c_2
    \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b = -\bar a)
 \end{aligned}`,
       ),
+      paragraph([ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " を使った。"]),
       paragraph([
         "よって ",
         math(String.raw`A(\theta)v_\pm = \lambda_{\pm,\mu}v_\pm`),

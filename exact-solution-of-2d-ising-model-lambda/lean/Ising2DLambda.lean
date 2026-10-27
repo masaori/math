@@ -1479,6 +1479,9 @@ import Ising2DLambda.NecSuf.KacWard.EndpointModeVector
 import Ising2DLambda.KacWard.EndpointModeVectorFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SourceDirectionBijection
 import Ising2DLambda.KacWard.SourceDirectionBijectionFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.TargetDirectionBijection
+import Ising2DLambda.KacWard.TargetDirectionBijection
+import Ising2DLambda.KacWard.TargetDirectionBijectionFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.SuccessorDirectionSelection
 import Ising2DLambda.KacWard.SuccessorDirectionSelection
 import Ising2DLambda.KacWard.SuccessorDirectionSelectionFromNecSuf

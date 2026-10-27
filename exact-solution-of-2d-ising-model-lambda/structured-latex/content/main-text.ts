@@ -80542,6 +80542,56 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_target_direction_bijection",
+              focus: {
+                id: "finite_fourier_claim_target_direction_bijection",
+                kind: "claim",
+                title: { text: "終点と方向は向き付き辺を一意に定める" },
+                labels: ["claim_target_direction_bijection"],
+                habitat: "N",
+                verification: ["sagemath/check/target-direction-bijection"],
+                lean: [
+                  "Ising2DLambda.KacWard.targetDirection_bijective",
+                  "Ising2DLambda.NecSuf.KacWard.targetDirection_bijective_necSuf",
+                  "Ising2DLambda.KacWard.targetDirection_bijective_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " に対し、向き付き辺の終点と方向番号を取る写像",
+                  ]),
+                  displayMath(String.raw`\vec E_L\longrightarrow V_L\times\mathbb Z/4\mathbb Z,\qquad
+\vec e\longmapsto(\operatorname{tgt}(\vec e),\operatorname{dir}(\vec e))`),
+                  paragraph([
+                    "は全単射である。終点と方向番号は ", ref("def_oriented_edge_endpoints"), " と ",
+                    ref("def_oriented_edge_direction"), " に従う。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "反転写像 ", math(String.raw`\iota`), " は ", ref("claim_reversal_is_involution"),
+                    " により全単射である。", ref("def_oriented_edge_endpoints"), " の二つの向きの場合から、任意の ",
+                    math(String.raw`\vec e\in\vec E_L`), " について次を得る。",
+                  ]),
+                  displayMath(String.raw`\operatorname{tgt}(\iota(\vec e))
+=\operatorname{src}(\vec e)\quad(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints})`),
+                  paragraph([ref("claim_reversal_direction_shift"), " により方向番号は次を満たす。"]),
+                  displayMath(String.raw`\operatorname{dir}(\iota(\vec e))
+=\operatorname{dir}(\vec e)+2\quad(\because\ \blkref{claim_reversal_direction_shift})`),
+                  paragraph([
+                    math(String.raw`d\mapsto d+2`), " は ", math(String.raw`\mathbb Z/4\mathbb Z`),
+                    " 上の全単射である。二度適用すると ", math(String.raw`d+4=d`),
+                    " になる。", ref("claim_source_direction_bijection"),
+                    " による始点と方向の全単射に、反転とこの方向の全単射を合成して終点と方向の全単射を得る。",
+                    "すべて有限集合の写像であり、実数体と複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
               focus: {
                 id: "finite_fourier_claim_twisted_mode_wrap_phase",

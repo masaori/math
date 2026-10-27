@@ -606,6 +606,7 @@ export const ALL_LABELS = [
   "claim_tagged_short_pair_successor",
   "claim_tagged_symmetric_difference_active_vertices",
   "claim_tagged_symmetric_difference_degree",
+  "claim_target_direction_bijection",
   "claim_terminal_matrix_determinant",
   "claim_terminal_matrix_entries",
   "claim_three_term_pm_four_difference_zero",
