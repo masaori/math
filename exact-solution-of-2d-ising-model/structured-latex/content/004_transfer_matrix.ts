@@ -396,7 +396,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   1 \\
   0
 \end{pmatrix}
-\quad (\because \text{定義の代入}) \\
+\quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
   1 \\
@@ -404,7 +404,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 \end{pmatrix}
 \quad (\because \text{行列と列ベクトルの積}) \\
 &= e_1
-\quad (\because e_1 \text{ の定義}),
+\quad (\because \blkref{def_end_iso}),
 \end{aligned}`,
       ),
       displayMath(
@@ -419,7 +419,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
   0 \\
   1
 \end{pmatrix}
-\quad (\because \text{定義の代入}) \\
+\quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
   0 \\
@@ -427,7 +427,7 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 \end{pmatrix}
 \quad (\because \text{行列と列ベクトルの積}) \\
 &= -e_2
-\quad (\because e_2 \text{ の定義}).
+\quad (\because \blkref{def_end_iso}).
 \end{aligned}`,
       ),
       paragraph([
@@ -468,20 +468,20 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 \sigma_m^z\, f_{\iota(\mu)}
 &= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
    f_{\iota(\mu)}
-   \quad (\because \text{サイト演算子 }\sigma_m^z\text{ の定義}) \\
+   \quad (\because \blkref{def_site_pauli_matrices}) \\
 &= \left(I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I\right)
    \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)
-   \quad (\because \text{配位基底同型の定義}) \\
+   \quad (\because \blkref{def_config_basis_iso}) \\
 &= (I e_{i_1})\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes(I e_{i_{M_{\mathrm{col}}}})
-   \quad (\because \text{クロネッカー積の積の規則}) \\
+   \quad (\because \blkref{kronecker_product_rule}) \\
 &= e_{i_1}\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
    \quad (\because \text{恒等行列の作用}) \\
 &= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
    \quad (\because \sigma^z e_{i_m}=\mu(m)e_{i_m}) \\
 &= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)
-   \quad (\because \text{クロネッカー積の多重線型性}) \\
+   \quad (\because \blkref{kronecker_multilinear}) \\
 &= \mu(m)\, f_{\iota(\mu)}
-   \quad (\because \text{配位基底同型の定義})
+   \quad (\because \blkref{def_config_basis_iso})
 \end{aligned}`,
       ),
       paragraph(["積については、いま示した作用を 2 回用いると"]),

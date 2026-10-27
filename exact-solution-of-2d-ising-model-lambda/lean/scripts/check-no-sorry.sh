@@ -2459,6 +2459,9 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.recoveredMatchingPair_permutation_eq_from_necSuf
   Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition
   Ising2DLambda.AlgebraicEigenvalue.matchingPairActualSignComposition_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements
+  Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements_from_necSuf
 )
 
 if [ ${#targets[@]} -eq 0 ]; then

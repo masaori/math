@@ -28,6 +28,10 @@ for n in range(6):
                     assert original_order == image_order
                     flipped = sum((i < j) != (sigma[i] < sigma[j])
                                   for i, j in fiber_pairs)
+                    pair_inversions = sum(sigma[i] > sigma[j]
+                                          for i in indices for j in indices if i < j
+                                          and {blocks[i], blocks[j]} == {k, l})
+                    assert pair_inversions == flipped
                     assert flipped % 2 == 0
                     cross += flipped
             inversions = sum(sigma[i] > sigma[j]
