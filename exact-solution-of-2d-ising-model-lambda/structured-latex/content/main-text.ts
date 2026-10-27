@@ -72789,8 +72789,9 @@ const chapter_kac_ward_permutation_expansion = defineSection({
 \varphi(\vec e)\ne\vec e\Longrightarrow
 M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                         paragraph([
-                          "は同値である。さらに遷移行列の定義から、右辺は ",
-                          math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
+                          "は同値である。さらに遷移行列の定義から、右辺は任意の ",
+                          math(String.raw`\vec e\in\vec E_L`), " について ",
+                          math(String.raw`\varphi(\vec e)\ne\vec e\Longrightarrow\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
                           " と同値である。",
                         ]),
                       ],
