@@ -16,9 +16,9 @@ $\mathcal F_L$ の任意の有限部分集合 $S$ について $\lvert S\rvert\l
 
 確かめるのは次の四つである。
 
-1. 準備: $\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)$（$k\le2L^2$）、$0$（$2L^2<k$）。
-2. 第 1 の仮定: $\widehat{Z_L}^{\,F}\ne0$（多重度の総和が $2^{L^2}\ne0$ なので零な係数ばかりではない）。
-3. 第 3 の仮定: $\xi\in\mathcal F_L$ ならば $\mathrm{aev}_\xi(\widehat{Z_L}^{\,F})=\mathrm{Ev}^F_\xi(Z_L)=0$。
+1. 準備: $\mathrm{ac}_k(\operatorname{Lift}^{F}(Z_L))=\Omega_L(k)$（$k\le2L^2$）、$0$（$2L^2<k$）。
+2. 第 1 の仮定: $\operatorname{Lift}^{F}(Z_L)\ne0$（多重度の総和が $2^{L^2}\ne0$ なので零な係数ばかりではない）。
+3. 第 3 の仮定: $\xi\in\mathcal F_L$ ならば $\mathrm{aev}_\xi(\operatorname{Lift}^{F}(Z_L))=\mathrm{Ev}^F_\xi(Z_L)=0$。
 4. 主張そのもの: $\mathcal F_L$ 全体と、大きさ 1・2 の部分集合すべてについて $\lvert S\rvert\le2L^2$。
 
 対象は $L\le3$（$\lvert\mathcal F_1\rvert=0$、$\lvert\mathcal F_2\rvert=8$、$\lvert\mathcal F_3\rvert=12$）。

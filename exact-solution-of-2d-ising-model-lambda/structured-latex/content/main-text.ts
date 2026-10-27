@@ -46391,23 +46391,23 @@ m&=b(\sigma_{\mathrm{flip}})
                           math(String.raw`Z_L`), " の正次数 ", math(String.raw`m`), " の係数は零でない。",
                           ref("def_integer_polynomial_qbar_lift"), " で係数を ",
                           math(String.raw`\overline{\mathbb{Q}}`), " へ送った多項式 ",
-                          math(String.raw`\widehat{Z_L}^{\,F}`), " でも同じ ", math(String.raw`m`),
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)`), " でも同じ ", math(String.raw`m`),
                           " 次の係数は零でないから、その次数は零でない。",
                         ]),
                         paragraph([
                           ref("def_algebraic_numbers"), " の第 3 条件（代数閉性）により、次数が零でない ",
-                          math(String.raw`\widehat{Z_L}^{\,F}`), " には根 ",
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)`), " には根 ",
                           math(String.raw`\xi\in\overline{\mathbb{Q}}`), " が存在する。すなわち",
                         ]),
-                        displayMath(String.raw`\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)=0
+                        displayMath(String.raw`\mathrm{aev}_{\xi}\!\left(\operatorname{Lift}^{F}(Z_L)\right)=0
 \qquad\bigl(\because\ \blkref{def_algebraic_numbers}\text{ の代数閉性}\bigr)`),
                         paragraph([ref("claim_integer_polynomial_qbar_lift_evaluation"), " により、"]),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{Ev}^{F}_{\xi}(Z_L)
-&=\mathrm{aev}_{\xi}\!\left(\widehat{Z_L}^{\,F}\right)
+&=\mathrm{aev}_{\xi}\!\left(\operatorname{Lift}^{F}(Z_L)\right)
 &&\bigl(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation}\bigr)\\
 &=0
-&&\bigl(\because\ \mathrm{aev}_{\xi}(\widehat{Z_L}^{\,F})=0\bigr).
+&&\bigl(\because\ \mathrm{aev}_{\xi}(\operatorname{Lift}^{F}(Z_L))=0\bigr).
 \end{aligned}`),
                         paragraph([ref("def_finite_lattice_fisher_zeros"), " より ",
                           math(String.raw`\xi\in\mathcal{F}_{L}`), " である。"]),
@@ -70418,8 +70418,8 @@ C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
                       statement: [
                         paragraph(["自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`), " を固定し、", ref("def_qbar_constant_embedding"), " の定数埋込みを ", math(String.raw`C:\overline{\mathbb Q}\to\overline{\mathbb Q}[x]`), " と書く。", ref("def_diagonal_gauge"), " の重みから、各 ", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対して"]),
                         displayMath(String.raw`w_{\vec e,\vec f}:=\zeta_8^{\,2}(v_{\vec e}u_{\vec f})\in\overline{\mathbb Q}`),
-                        paragraph(["と定める。", ref("def_terminal_matrix"), " の端末行列と ", ref("def_polynomial_diagonal_gauge"), " の対角行列を用い、変換後の行列 ", math(String.raw`\widehat K\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), " を成分ごとに"]),
-                        displayMath(String.raw`\widehat K_{\vec e,\vec f}:=C(\zeta_8^{\,2})\bigl((\widehat V K^{a,b}_{\mathrm t}(x))\widehat U\bigr)_{\vec e,\vec f}`),
+                        paragraph(["と定める。", ref("def_terminal_matrix"), " の端末行列と ", ref("def_polynomial_diagonal_gauge"), " の対角行列を用い、変換後の行列 ", math(String.raw`K^{\mathrm{as}}\in\mathrm{Mat}_{\vec E_L}(\overline{\mathbb Q}[x])`), " を成分ごとに"]),
+                        displayMath(String.raw`K^{\mathrm{as}}_{\vec e,\vec f}:=C(\zeta_8^{\,2})\bigl((\widehat V K^{a,b}_{\mathrm t}(x))\widehat U\bigr)_{\vec e,\vec f}`),
                         paragraph(["で定める。括弧内は多項式行列の積であり、その外の積は多項式の積である。", ref("claim_polynomial_diagonal_gauge_inverse"), " より ", math(String.raw`\widehat V`), " は ", math(String.raw`\widehat U`), " の両側逆なので、この変換は対角相似と ", math(String.raw`C(\zeta_8^{\,2})`), " によるスカラー倍である。"]),
                       ],
                     },
@@ -70438,7 +70438,7 @@ C\bigl((I_{\overline{\mathbb Q}})_{\vec e,\vec f}\bigr)
                     ],
                     statement: [
                         paragraph(["任意の自然数 ", math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`), "、", math(String.raw`\vec e,\vec f\in\vec E_L`), " に対し、", ref("def_gauged_terminal_matrix"), " の成分は"]),
-                        displayMath(String.raw`\widehat K_{\vec e,\vec f}=C(w_{\vec e,\vec f})\left[
+                        displayMath(String.raw`K^{\mathrm{as}}_{\vec e,\vec f}=C(w_{\vec e,\vec f})\left[
 \begin{cases}1,&\vec f=\iota(\vec e),\\0,&\text{それ以外}\end{cases}
 -x\begin{cases}
 C(\varepsilon_{a,b}(\vec f)\rho(\iota(\vec e),\vec f)),
@@ -70499,7 +70499,7 @@ B_{\vec e,\vec g}\widehat U_{\vec g,\vec f}
 \end{aligned}`),
                         paragraph(["である。これらを変換後の成分へ代入すると、"]),
                         displayMath(String.raw`\begin{aligned}
-\widehat K_{\vec e,\vec f}
+K^{\mathrm{as}}_{\vec e,\vec f}
 &=C(c)(B\widehat U)_{\vec e,\vec f}
 &&(\because\ \blkref{def_gauged_terminal_matrix})\\
 &=C(c)\bigl(B_{\vec e,\vec f}C(u_{\vec f})\bigr)
@@ -70562,8 +70562,8 @@ B_{\vec e,\vec g}\widehat U_{\vec g,\vec f}
                       paragraph(["任意の自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`),
                         " に対し、", ref("def_gauged_terminal_matrix"), " の行列は、すべての ",
                         math(String.raw`\vec e,\vec f\in\vec E_L`), " について"]),
-                      displayMath(String.raw`\widehat K_{\vec e,\vec f}=-\widehat K_{\vec f,\vec e},
-\qquad \widehat K_{\vec e,\vec e}=0\quad\text{in }\overline{\mathbb Q}[x]`),
+                      displayMath(String.raw`K^{\mathrm{as}}_{\vec e,\vec f}=-K^{\mathrm{as}}_{\vec f,\vec e},
+\qquad K^{\mathrm{as}}_{\vec e,\vec e}=0\quad\text{in }\overline{\mathbb Q}[x]`),
                       paragraph(["を満たす。", math(String.raw`L=1`), " も含む。"]),
                     ],
                     proof: [
@@ -70750,7 +70750,7 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
 \end{aligned}`),
                       paragraph(["したがって、各辺対について、"]),
                       displayMath(String.raw`\begin{aligned}
-\widehat K_{\vec e,\vec f}
+K^{\mathrm{as}}_{\vec e,\vec f}
 &=C(w)(\delta-x\beta)&&(\because\ \blkref{claim_gauged_terminal_matrix_entries})\\
 &=C(w)\delta-C(w)(x\beta)&&(\because\ \text{分配則})\\
 &=C(w)\delta-(C(w)x)\beta&&(\because\ \text{乗法の結合則})\\
@@ -70761,7 +70761,7 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
 \end{aligned}`),
                       paragraph(["ここまでで得た係数の反対称性を代入すると、"]),
                       displayMath(String.raw`\begin{aligned}
-\widehat K_{\vec e,\vec f}
+K^{\mathrm{as}}_{\vec e,\vec f}
 &=C(\ell_{\vec e,\vec f})-xC(q_{\vec e,\vec f})&&(\because\ \text{直前の成分の式})\\
 &=C(-\ell_{\vec f,\vec e})-xC(q_{\vec e,\vec f})&&(\because\ \ell\text{ の反対称性})\\
 &=C(-\ell_{\vec f,\vec e})-xC(-q_{\vec f,\vec e})&&(\because\ q\text{ の反対称性})\\
@@ -70771,7 +70771,7 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
 &=-C(\ell_{\vec f,\vec e})+\bigl(-(-xC(q_{\vec f,\vec e}))\bigr)&&(\because\ \text{減法の定義})\\
 &=-\bigl(C(\ell_{\vec f,\vec e})+(-xC(q_{\vec f,\vec e}))\bigr)&&(\because\ \text{和の加法逆元})\\
 &=-\bigl(C(\ell_{\vec f,\vec e})-xC(q_{\vec f,\vec e})\bigr)&&(\because\ \text{減法の定義})\\
-&=-\widehat K_{\vec f,\vec e}&&(\because\ \text{二辺を入れ替えた成分の式}).
+&=-K^{\mathrm{as}}_{\vec f,\vec e}&&(\because\ \text{二辺を入れ替えた成分の式}).
 \end{aligned}`),
                       paragraph(["対角成分は成分式から直接求める。",
                         ref("claim_reversal_has_no_fixed_point"), " より ", math(String.raw`\vec e\ne\iota(\vec e)`),
@@ -70779,7 +70779,7 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
                         math(String.raw`\beta_{\vec e,\vec e}`), " を上で定めた ", math(String.raw`\beta`),
                         " の対角での値と書くと、"]),
                       displayMath(String.raw`\begin{aligned}
-\widehat K_{\vec e,\vec e}
+K^{\mathrm{as}}_{\vec e,\vec e}
 &=C(w_{\vec e,\vec e})\left[\begin{cases}1,&\vec e=\iota(\vec e),\\0,&\text{それ以外}\end{cases}-x\beta_{\vec e,\vec e}\right]
 &&(\because\ \blkref{claim_gauged_terminal_matrix_entries})\\
 &=C(w_{\vec e,\vec e})(0-x\beta_{\vec e,\vec e})
@@ -70834,7 +70834,7 @@ C(w)\beta&=C(w)\cdot0&&(\because\ \beta\text{ の偽の場合})\\
                       paragraph(["任意の自然数 ", math(String.raw`L\ge1`), " と ", math(String.raw`(a,b)\in\mathcal S`),
                         " に対して、", ref("def_gauged_terminal_matrix"), " の行列と ",
                         ref("def_kac_ward_determinants"), " の多項式は、"]),
-                      displayMath(String.raw`\det_x(\widehat K)=D_L^{a,b}(x)
+                      displayMath(String.raw`\det_x(K^{\mathrm{as}})=D_L^{a,b}(x)
 \quad\text{in }\overline{\mathbb Q}[x]`),
                       paragraph(["を満たす。行列式は ", ref("def_qbar_polynomial_determinant"), " の置換展開である。"]),
                     ],
@@ -70911,7 +70911,7 @@ c^n&=C(\zeta_8^{\,2})^{4L^2}&&\bigl(\because\ c,n\text{ の定義}\bigr)\\
                       paragraph(["以上を変換後の行列の定義へ代入し、", ref("def_qbar_polynomial_ring"),
                         " の可換環の中で順に計算する。"]),
                       displayMath(String.raw`\begin{aligned}
-\det_x\widehat K
+\det_x K^{\mathrm{as}}
 &=\det_x\bigl(c((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U)\bigr)
 &&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
 &=c^n\det_x\bigl((\widehat V K_{\mathrm t}^{a,b}(x))\widehat U\bigr)
@@ -70988,7 +70988,7 @@ q_{\vec e,\vec f}:=\begin{cases}w_{\vec e,\vec f}\varepsilon_{a,b}(\vec f)\rho(\
                     ],
                     statement: [
                       paragraph([ref("def_qbar_polynomial_pfaffian"), " の線型順序を ", math(String.raw`\vec E_L`), " に固定する。完全マッチング ", math(String.raw`D\in\mathcal M(\vec E_L)`), " の昇順対集合を ", math(String.raw`E_D`), " とし、", math(String.raw`T\subseteq E_D`), " を短い標識を付ける対の集合とする。", math(String.raw`E_D\setminus T`), " の対には長い標識を付ける。組 ", math(String.raw`(D,T)`), " が標識付き完全マッチングであり、標識を忘れる写像は ", math(String.raw`(D,T)\mapsto D`), " である。"]),
-                      displayMath(String.raw`\operatorname{Pf}(\widehat K)
+                      displayMath(String.raw`\operatorname{Pf}(K^{\mathrm{as}})
 =\sum_{D\in\mathcal M(\vec E_L)}\ \sum_{T\subseteq E_D}
 c_D(-1)^{|T|}
 \left(\prod_{(\vec e,\vec f)\in E_D\setminus T}\mathsf L_{\vec e,\vec f}\right)
@@ -70998,7 +70998,7 @@ c_D(-1)^{|T|}
                     ],
                     proof: [
                       paragraph(["任意の昇順対 ", math(String.raw`p=(\vec e,\vec f)\in E_D`), " について、", ref("claim_gauged_terminal_matrix_entries"), " の二つの条件をそれぞれ分配し、", ref("def_tagged_matching_contributions"), " の場合分けを代入すると"]),
-                      displayMath(String.raw`\widehat K_{\vec e,\vec f}=\mathsf L_{\vec e,\vec f}-\mathsf S_{\vec e,\vec f}\quad(\because\ \text{二寄与への分配と定数埋込みの積の保存})`),
+                      displayMath(String.raw`K^{\mathrm{as}}_{\vec e,\vec f}=\mathsf L_{\vec e,\vec f}-\mathsf S_{\vec e,\vec f}\quad(\because\ \text{二寄与への分配と定数埋込みの積の保存})`),
                       paragraph(["を得る。有限集合 ", math(String.raw`E_D`), " の対の数について帰納する。空集合では両辺は空積の一である。帰納段では ", math(String.raw`p\notin E`), " を一つ加え、短い標識の集合を ", math(String.raw`p\notin T`), " と ", math(String.raw`p\in T`), " に分ける。前者の各項は ", math(String.raw`\mathsf L_p`), "、後者の各項は ", math(String.raw`-\mathsf S_p`), " を一つ掛けるので、"]),
                       displayMath(String.raw`\begin{aligned}
 \prod_{r\in E\cup\{p\}}(\mathsf L_r-\mathsf S_r)
@@ -80414,7 +80414,7 @@ y^L
                     math(String.raw`u(\delta')=(u_1(\delta'),u_2(\delta'))`),
                     " と書く（", ref("def_direction_unit_vector"), "）。",
                   ]),
-                  displayMath(String.raw`\widehat M(\varpi,\varsigma)_{\delta,\delta'}:=
+                  displayMath(String.raw`\breve M(\varpi,\varsigma)_{\delta,\delta'}:=
 \begin{cases}
 \varpi^{u_2(\delta')}\varsigma^{u_1(\delta')},&\delta'=\delta,\\
 \zeta_8\varpi^{u_2(\delta')}\varsigma^{u_1(\delta')},&\delta'=\delta+1,\\
@@ -80422,7 +80422,7 @@ y^L
 0,&\delta'=\delta+2
 \end{cases}`),
                   paragraph([
-                    "で ", math(String.raw`\widehat M(\varpi,\varsigma)\in\mathrm{Mat}_{\mathbb Z/4\mathbb Z}(\overline{\mathbb Q})`),
+                    "で ", math(String.raw`\breve M(\varpi,\varsigma)\in\mathrm{Mat}_{\mathbb Z/4\mathbb Z}(\overline{\mathbb Q})`),
                     " を定める。四つの場合は方向番号を尽くし、位相 ",
                     math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
                     "、モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
@@ -81044,7 +81044,7 @@ y^L
                     "、向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " に対し、",
                   ]),
                   displayMath(String.raw`\bigl(M^{a,b}\psi^{\varpi,\varsigma,\delta_0}\bigr)(\vec e)
-=\widehat M(\varpi,\varsigma)_{\operatorname{dir}(\vec e),\delta_0}
+=\breve M(\varpi,\varsigma)_{\operatorname{dir}(\vec e),\delta_0}
 \psi^{\varpi,\varsigma,\operatorname{dir}(\vec e)}(\vec e)
 \quad\text{in }\overline{\mathbb Q}.`),
                   paragraph([
@@ -81076,7 +81076,7 @@ y^L
 &&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\bigr)\\
 &=0
 &&\bigl(\because\ \blkref{claim_successor_direction_selection},\ \blkref{def_endpoint_mode_vector}\bigr)\\
-&=\widehat M(\varpi,\varsigma)_{\delta,\delta_0}
+&=\breve M(\varpi,\varsigma)_{\delta,\delta_0}
   \psi^{\varpi,\varsigma,\delta}(\vec e)
 &&\bigl(\because\ \blkref{def_mode_small_matrix},\ \delta_0=\delta+2\bigr).
 \end{aligned}`),
@@ -81101,7 +81101,7 @@ y^L
 &=\rho(\vec e,\vec f)\varpi^{u_2(\delta_0)}\varsigma^{u_1(\delta_0)}
   \varpi^{s(j)}\varsigma^{s(i)}
 &&\bigl(\because\ \blkref{claim_all_direction_seam_mode_phase}\bigr)\\
-&=\widehat M(\varpi,\varsigma)_{\delta,\delta_0}
+&=\breve M(\varpi,\varsigma)_{\delta,\delta_0}
   \psi^{\varpi,\varsigma,\delta}(\vec e)
 &&\bigl(\because\ \blkref{def_rotation_phase},\ \blkref{def_mode_small_matrix},\ \blkref{def_endpoint_mode_vector}\bigr).
 \end{aligned}`),
@@ -83688,14 +83688,14 @@ const chapter_fisher_zero_density = defineSection({
                       " と同じ約束）、",
                       math(String.raw`f`),
                       " の持ち上げ ",
-                      math(String.raw`\widehat{f}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                      math(String.raw`\operatorname{Lift}^{F}(f)\in\overline{\mathbb{Q}}[t]`),
                       " を、その係数（",
                       ref("def_qbar_polynomial_ring"),
                       " の ",
                       math(String.raw`\mathrm{ac}_k`),
                       "）で",
                     ]),
-                    displayMath(String.raw`\mathrm{ac}_k\bigl(\widehat{f}^{\,F}\bigr):=\begin{cases}a_k&(k\le n)\\ 0&(n<k)\end{cases}\qquad(k\in\mathbb{N})`),
+                    displayMath(String.raw`\mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(f)\bigr):=\begin{cases}a_k&(k\le n)\\ 0&(n<k)\end{cases}\qquad(k\in\mathbb{N})`),
                     paragraph([
                       "で定める。零でない係数の添字は ",
                       math(String.raw`k\le n`),
@@ -83720,7 +83720,7 @@ const chapter_fisher_zero_density = defineSection({
                       "）が ",
                       math(String.raw`\mathrm{Ev}^{F}_{\xi}(f)`),
                       " に一致することを示し、",
-                      math(String.raw`\widehat{Z_L}^{\,F}`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)`),
                       " の相異なる根の個数を ",
                       ref("claim_qbar_distinct_roots_card_bound"),
                       " で抑える。",
@@ -83765,7 +83765,7 @@ const chapter_fisher_zero_density = defineSection({
                           "）を任意に取る。このとき、",
                           math(String.raw`f`),
                           " の持ち上げ ",
-                          math(String.raw`\widehat{f}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                          math(String.raw`\operatorname{Lift}^{F}(f)\in\overline{\mathbb{Q}}[t]`),
                           "（",
                           ref("def_integer_polynomial_qbar_lift"),
                           "）の ",
@@ -83780,13 +83780,13 @@ const chapter_fisher_zero_density = defineSection({
                           ref("def_qbar_polynomial_evaluation"),
                           "）に一致する。",
                         ]),
-                        displayMath(String.raw`\mathrm{aev}_{\xi}\bigl(\widehat{f}^{\,F}\bigr)=\mathrm{Ev}^{F}_{\xi}(f)`),
+                        displayMath(String.raw`\mathrm{aev}_{\xi}\bigl(\operatorname{Lift}^{F}(f)\bigr)=\mathrm{Ev}^{F}_{\xi}(f)`),
                         paragraph([
                           "両辺とも代数的数の有限和・有限積であり、実数体も複素数体も現れない。",
                           "とくに ",
                           math(String.raw`\xi`),
                           " が ",
-                          math(String.raw`\widehat{f}^{\,F}`),
+                          math(String.raw`\operatorname{Lift}^{F}(f)`),
                           " の根であることと ",
                           math(String.raw`\mathrm{Ev}^{F}_{\xi}(f)=0`),
                           " とは同じことである。",
@@ -83798,11 +83798,11 @@ const chapter_fisher_zero_density = defineSection({
                           " が ",
                           math(String.raw`n<k`),
                           " を満たすならば ",
-                          math(String.raw`\mathrm{ac}_k(\widehat{f}^{\,F})=0`),
+                          math(String.raw`\mathrm{ac}_k(\operatorname{Lift}^{F}(f))=0`),
                           " である（",
                           ref("def_integer_polynomial_qbar_lift"),
                           " の定義式の下の場合）。したがって ",
-                          math(String.raw`\widehat{f}^{\,F}`),
+                          math(String.raw`\operatorname{Lift}^{F}(f)`),
                           " と ",
                           math(String.raw`n`),
                           " は ",
@@ -83810,8 +83810,8 @@ const chapter_fisher_zero_density = defineSection({
                           " の仮定を満たす。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\mathrm{aev}_{\xi}\bigl(\widehat{f}^{\,F}\bigr)
-&=\sum_{k=0}^{n}\mathrm{ac}_k\bigl(\widehat{f}^{\,F}\bigr)\cdot\xi^{\,k}
+\mathrm{aev}_{\xi}\bigl(\operatorname{Lift}^{F}(f)\bigr)
+&=\sum_{k=0}^{n}\mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(f)\bigr)\cdot\xi^{\,k}
 &&(\because\ \blkref{claim_qbar_evaluation_coefficient_sum})\\
 &=\sum_{k=0}^{n}a_k\cdot\xi^{\,k}
 &&(\because\ \blkref{def_integer_polynomial_qbar_lift}\ \text{の定義式の上の場合}\ (k\le n)\ \text{を各項へ同時に当てる})\\
@@ -83822,9 +83822,9 @@ const chapter_fisher_zero_density = defineSection({
                           "最後の文は、",
                           math(String.raw`\xi`),
                           " が ",
-                          math(String.raw`\widehat{f}^{\,F}`),
+                          math(String.raw`\operatorname{Lift}^{F}(f)`),
                           " の根であるとは ",
-                          math(String.raw`\mathrm{aev}_{\xi}(\widehat{f}^{\,F})=0`),
+                          math(String.raw`\mathrm{aev}_{\xi}(\operatorname{Lift}^{F}(f))=0`),
                           " のことなので（",
                           ref("claim_qbar_distinct_roots_card_bound"),
                           " の仮定と同じ書き方）、いま示した等号から従う。",
@@ -83849,21 +83849,21 @@ const chapter_fisher_zero_density = defineSection({
                     paragraph([
                       math(String.raw`L\ge1`), " とし、分配多項式 ", math(String.raw`Z_L\in\mathbb{Z}[x]`),
                       "（", ref("def_partition_polynomial"), "）の持ち上げ ",
-                      math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)\in\overline{\mathbb{Q}}[t]`),
                       "（", ref("def_integer_polynomial_qbar_lift"), "）を考える。このとき次の 3 つが成り立つ。",
                     ]),
                     list([
                       [
                         "任意の ", math(String.raw`k\in\mathbb{N}`), " について ",
-                        math(String.raw`\mathrm{ac}_k(\widehat{Z_L}^{\,F})=\Omega_L(k)`), "（",
+                        math(String.raw`\mathrm{ac}_k(\operatorname{Lift}^{F}(Z_L))=\Omega_L(k)`), "（",
                         math(String.raw`k\le2L^{2}`), " のとき）、", math(String.raw`=0`), "（",
                         math(String.raw`2L^{2}<k`), " のとき）である（", math(String.raw`\Omega_L`), " は ",
                         ref("def_multiplicity"), "）。",
                       ],
-                      [math(String.raw`\widehat{Z_L}^{\,F}\ne0`), " である。"],
+                      [math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`), " である。"],
                       [
                         math(String.raw`k\in\mathbb{N}`), " が ", math(String.raw`2L^{2}<k`), " を満たすならば ",
-                        math(String.raw`\mathrm{ac}_k(\widehat{Z_L}^{\,F})=0`), " である（1 つめの下の場合）。",
+                        math(String.raw`\mathrm{ac}_k(\operatorname{Lift}^{F}(Z_L))=0`), " である（1 つめの下の場合）。",
                       ],
                     ]),
                     paragraph([
@@ -83881,7 +83881,7 @@ const chapter_fisher_zero_density = defineSection({
                       math(String.raw`a_m=\Omega_L(m)`), " として読むと、任意の ", math(String.raw`k\in\mathbb{N}`),
                       " について",
                     ]),
-                    displayMath(String.raw`\mathrm{ac}_k\bigl(\widehat{Z_L}^{\,F}\bigr)=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}`),
+                    displayMath(String.raw`\mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}`),
                     paragraph([
                       "である（", math(String.raw`\Omega_L(k)\in\mathbb{N}`), " は ", ref("def_multiplicity"), "。",
                       math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
@@ -83889,9 +83889,9 @@ const chapter_fisher_zero_density = defineSection({
                     ]),
                     paragraph([
                       "第 1 に ",
-                      math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`),
                       " である。もし ",
-                      math(String.raw`\widehat{Z_L}^{\,F}=0`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)=0`),
                       " ならば、",
                       math(String.raw`0\le m\le2L^{2}`),
                       " を満たす任意の ",
@@ -83900,10 +83900,10 @@ const chapter_fisher_zero_density = defineSection({
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \Omega_L(m)
-&=\mathrm{ac}_m\bigl(\widehat{Z_L}^{\,F}\bigr)
+&=\mathrm{ac}_m\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &&(\because\ \text{上の準備の上の場合}\ (m\le2L^{2}))\\
 &=\mathrm{ac}_m(0)
-&&(\because\ \widehat{Z_L}^{\,F}=0)\\
+&&(\because\ \operatorname{Lift}^{F}(Z_L)=0)\\
 &=0
 &&(\because\ \blkref{def_qbar_polynomial_ring}\text{。零元はすべての係数が零の族})
 \end{aligned}`),
@@ -83931,7 +83931,7 @@ const chapter_fisher_zero_density = defineSection({
                       " は正の自然数なので ",
                       math(String.raw`2^{L^{2}}\ne0`),
                       " であり、矛盾する。ゆえに ",
-                      math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`),
                       " である。",
                     ]),
                     paragraph([
@@ -83940,7 +83940,7 @@ const chapter_fisher_zero_density = defineSection({
                       " が ",
                       math(String.raw`2L^{2}<k`),
                       " を満たすならば、上の準備の下の場合より ",
-                      math(String.raw`\mathrm{ac}_k(\widehat{Z_L}^{\,F})=0`),
+                      math(String.raw`\mathrm{ac}_k(\operatorname{Lift}^{F}(Z_L))=0`),
                       " である。",
                     ]),
                   ],
@@ -84011,7 +84011,7 @@ const chapter_fisher_zero_density = defineSection({
                         paragraph([
                           ref("claim_qbar_distinct_roots_card_bound"),
                           " を、多項式 ",
-                          math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)\in\overline{\mathbb{Q}}[t]`),
                           "（",
                           ref("def_integer_polynomial_qbar_lift"),
                           "）、有限集合 ",
@@ -84019,11 +84019,11 @@ const chapter_fisher_zero_density = defineSection({
                           "、上界 ",
                           math(String.raw`2L^{2}`),
                           " に当てるために、その 3 つの仮定を順に確かめる。第 1 の ",
-                          math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`),
                           " と、第 2 の「",
                           math(String.raw`2L^{2}<k`),
                           " ならば ",
-                          math(String.raw`\mathrm{ac}_k(\widehat{Z_L}^{\,F})=0`),
+                          math(String.raw`\mathrm{ac}_k(\operatorname{Lift}^{F}(Z_L))=0`),
                           "」は ",
                           ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
                           " が与える。",
@@ -84032,7 +84032,7 @@ const chapter_fisher_zero_density = defineSection({
                           "第 3 に、",
                           math(String.raw`w\in S`),
                           " ならば ",
-                          math(String.raw`\mathrm{aev}_{w}(\widehat{Z_L}^{\,F})=0`),
+                          math(String.raw`\mathrm{aev}_{w}(\operatorname{Lift}^{F}(Z_L))=0`),
                           " である。",
                           math(String.raw`S\subset\mathcal{F}_{L}`),
                           " より ",
@@ -84040,7 +84040,7 @@ const chapter_fisher_zero_density = defineSection({
                           " なので、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\mathrm{aev}_{w}\bigl(\widehat{Z_L}^{\,F}\bigr)
+\mathrm{aev}_{w}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &=\mathrm{Ev}^{F}_{w}(Z_L)
 &&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
 &=0
@@ -84050,7 +84050,7 @@ const chapter_fisher_zero_density = defineSection({
                           "である。以上の 3 つにより ",
                           ref("claim_qbar_distinct_roots_card_bound"),
                           " を ",
-                          math(String.raw`\widehat{Z_L}^{\,F}`),
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)`),
                           "、",
                           math(String.raw`S`),
                           "、",
@@ -85633,13 +85633,13 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           "）であり、これは ", ref("def_fisher_zero_count_in_rational_disc"),
                           " で見たとおり有限集合である。各 ", math(String.raw`\xi`),
                           " の重複度が定まるのは、持ち上げ ",
-                          math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                          math(String.raw`\operatorname{Lift}^{F}(Z_L)\in\overline{\mathbb{Q}}[t]`),
                           "（", ref("def_integer_polynomial_qbar_lift"), "）が零でないこと（",
                           ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
                           "）による（", ref("def_qbar_root_multiplicity"),
                           " は零でない多項式についてしか重複度を定めない）。そこで",
                         ]),
-                        displayMath(String.raw`N^{\mathrm{mult}}_{L}(c,r):=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)\ \in\ \mathbb{N}`),
+                        displayMath(String.raw`N^{\mathrm{mult}}_{L}(c,r):=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)\ \in\ \mathbb{N}`),
                         paragraph([
                           "と定め、円板 ", math(String.raw`D(c,r)`),
                           " に入る重複度付きの Fisher 零点の個数と呼ぶ。有限個の自然数の和なので ",
@@ -85696,7 +85696,7 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
                           math(String.raw`\xi\in\mathcal{F}_{L}`), " である。したがって",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-\mathrm{aev}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+\mathrm{aev}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &=\mathrm{Ev}^{F}_{\xi}(Z_L)
 &&(\because\ \blkref{claim_integer_polynomial_qbar_lift_evaluation})\\
 &=0
@@ -85704,11 +85704,11 @@ g&=1\cdot g&&(\because\ \overline{\mathbb{Q}}[t]\ \text{の積の単位元})\\
 \end{aligned}`),
                         paragraph([
                           "である。", ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
-                          " により ", math(String.raw`\widehat{Z_L}^{\,F}\ne0`), " なので、",
+                          " により ", math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`), " なので、",
                           ref("claim_qbar_root_multiplicity_ge_one_iff_root"),
                           " の右から左への含意により",
                         ]),
-                        displayMath(String.raw`1\le\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)`),
+                        displayMath(String.raw`1\le\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)`),
                         paragraph(["である。これで準備が済んだ。主張の左辺から始める。"]),
                         displayMath(String.raw`\begin{aligned}
 N_{L}(c,r)
@@ -85716,7 +85716,7 @@ N_{L}(c,r)
 &&(\because\ \blkref{def_fisher_zero_count_in_rational_disc})\\
 &=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}1
 &&(\because\ \text{有限集合の元の個数は各元を 1 と数えた有限和})\\
-&\le\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&\le\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &&(\because\ \text{準備の各項 }1\le\mathrm{mult}_{\xi}\text{ と有限和の単調性})\\
 &=N^{\mathrm{mult}}_{L}(c,r)
 &&(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc})
@@ -85762,21 +85762,21 @@ N_{L}(c,r)
                   proof: [
                     paragraph([
                       ref("claim_qbar_finite_root_multiplicity_sum_le_coeff_bound"),
-                      " を、多項式 ", math(String.raw`\widehat{Z_L}^{\,F}\in\overline{\mathbb{Q}}[t]`),
+                      " を、多項式 ", math(String.raw`\operatorname{Lift}^{F}(Z_L)\in\overline{\mathbb{Q}}[t]`),
                       "（", ref("def_integer_polynomial_qbar_lift"), "）、有限集合 ",
                       math(String.raw`\mathcal{F}_{L}\cap D(c,r)`),
                       "（有限であることは ", ref("def_fisher_zero_count_in_rational_disc"),
                       " で見たとおり）、上界 ", math(String.raw`2L^{2}`),
                       " に当てるために、残る 2 つの仮定を確かめる。第 1 の ",
-                      math(String.raw`\widehat{Z_L}^{\,F}\ne0`),
+                      math(String.raw`\operatorname{Lift}^{F}(Z_L)\ne0`),
                       " と、第 2 の「", math(String.raw`2L^{2}<i`), " ならば ",
-                      math(String.raw`\mathrm{ac}_i(\widehat{Z_L}^{\,F})=0`), "」は ",
+                      math(String.raw`\mathrm{ac}_i(\operatorname{Lift}^{F}(Z_L))=0`), "」は ",
                       ref("claim_partition_polynomial_qbar_lift_nonzero_coeff_bound"),
                       " が与える。したがって",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 N^{\mathrm{mult}}_{L}(c,r)
-&=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\widehat{Z_L}^{\,F}\bigr)
+&=\sum_{\xi\in\mathcal{F}_{L}\cap D(c,r)}\mathrm{mult}_{\xi}\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
 &&(\because\ \blkref{def_fisher_zero_mult_count_in_rational_disc})\\
 &\le2L^{2}
 &&(\because\ \blkref{claim_qbar_finite_root_multiplicity_sum_le_coeff_bound})
@@ -87108,7 +87108,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       math(String.raw`D^{a,b}_L(x)`), " が符号付き偶部分グラフ多項式の平方 ",
                       math(String.raw`(Q^{a,b}_L(x))^2`), " に等しいことを示す段である。",
                       "経路: ", ref("claim_gauged_terminal_matrix_skew"), " と ",
-                      ref("claim_gauged_terminal_matrix_determinant"), " の行列 ", math(String.raw`\widehat K`),
+                      ref("claim_gauged_terminal_matrix_determinant"), " の行列 ", math(String.raw`K^{\mathrm{as}}`),
                       " に Pfaffian を導入する。反対称行列の行列式が Pfaffian の平方であることを証明し、",
                       "Pfaffian の完全マッチング展開では各辺が高々一度しか使われないので、基準マッチングとの対称差は台の辺が相異なる閉歩道の族になり、",
                       "その符号は本文にある回転位相・横断消去・接触点分割・頂点単純閉路の回転数の補題で決まる。各偶部分グラフの上で局所対合の符号付き和は 1 である。",

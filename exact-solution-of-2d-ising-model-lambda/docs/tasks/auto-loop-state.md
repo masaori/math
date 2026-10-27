@@ -6,11 +6,11 @@
 
 ## 現在地
 
+- **2026-10-27（連続実行）、定数埋込み以外のハットを改名した。** 次はブロック対角行列の Lean 具体版の委譲を外す。
 - **2026-10-27（連続実行）、遷移行列の終点 Fourier ベクトルへの作用を四層で示した。** 次は台帳先頭のハットの改名。
 - **2026-10-27（連続実行）、四方向の切断線位相を一つの等式にまとめた。** 次は固有ベクトル等式の合成。
 - **2026-10-27（連続実行）、上向き辺の切断線座標とねじれ符号を結んだ。** 次は固有ベクトル等式の合成。
 - **2026-10-27（連続実行）、左向き辺の切断線座標とねじれ符号を結んだ。** 次は上向き辺の同じ等式。
-- **2026-10-27（連続実行）、下向き辺の切断線座標とねじれ符号を結んだ。** 次は左向き辺の同じ等式。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -20,12 +20,11 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 全章 | 記号の濫用を外す: ハットを定数埋込みだけに使う | 未着手 | 本文の $\widehat{\ \cdot\ }$ は定数埋込み（`def_qbar_constant_embedding`、$\widehat z$・$\widehat{M^{a,b}}$・$\widehat J_L$）の記号である。ところがモードごとの四方向小行列 `def_mode_small_matrix` は $\overline{\mathbb Q}$ 成分の行列の**名前**として $\widehat M(\varpi,\varsigma)$ を使い、反対称化した行列 $\widehat K$ も埋込みではない新しい行列の名前である。行列式の積公式では小行列の定数埋込みが要り $\widehat{\widehat M(\varpi,\varsigma)}$ と二つの意味が重なる（README「1 つの記号は 1 つの意味に固定する」）。小行列を $\breve M(\varpi,\varsigma)$、反対称化した行列を $K^{\mathrm{as}}$ へ改名し（どちらも本文で未使用）、ほかに埋込みでないのにハットを付けた名前が無いかを全て洗い出して同じく改名する。本文・ノート・SageMath の overview・指示書（`prove-finite-fourier-factorization.md`・`compute-square-lattice-dispersion-factor.md`・`prove-torus-kac-ward-formula.md`・`assemble-finite-volume-closed-product.md`）と台帳の表を揃える。数学の中身は変えない（2026-10-27 の研究管理）。 |
 | 道具: ブロック対角行列の置換展開 | Lean 具体版の必要十分版への委譲を外す: ブロック対角行列の置換項のファイバー別分解 | 未着手 | 具体版 `blockDiagonal_term_eq_prod_fiber_terms` が成分積の分解を必要十分版の定理 `NecSuf.AlgebraicEigenvalue.blockGluing_entryProduct_fiberProduct` 一つで済ませている（2026-10-26 の runbook の規定の後に入った委譲。2026-10-27 の研究管理の判定）。本文の証明の行と一対一に具体版で示す。 |
 | Onsager 閉形式への接続 | Lean 具体版の必要十分版への委譲を外す: 射影した閉歩道の台の合併と活動点の定義 | 未着手 | 具体版 `projectedCycleSupportUnion_eq_complement` が交互閉路の被覆を必要十分版の定理 `NecSuf.KacWard.alternatingCycle_cover` から引いている。具体版の被覆 `taggedActive_cycleCover` を引く形に直す。あわせて、具体版の `projectedCycleSupportUnion`・`taggedActive_projectedClosedEdgeCycle`・`taggedActive_projectedCycle_nonbacktracking`・`taggedActive_projectedCycle_distinctEdges`・`taggedActive_alternatingCycle`・`taggedActiveByLabels_eq_activeVertices` の主張が必要十分版の定義 `NecSuf.KacWard.activeVertices`・`taggedPairAt` で述べられているので、具体版の活動点の定義で述べ直し、一致は導出版（`concreteTaggedActiveVertices_eq_necSuf`）へ寄せる（2026-10-27 の研究管理の判定）。 |
 | 全章 | Lean 具体版の委譲を検出する検査を検証へ入れる | 未着手 | `lean:` に登録された具体版の定理・定義（名前に `from_necSuf`・`_eq_necSuf` を含まず、`*FromNecSuf.lean` に無いもの）の本文（コメントを除く）に `NecSuf.` が現れたら落とす検査を TypeScript で書き、`npm run check` か `lean/scripts` の検証コマンドから呼ぶ。既知の委譲は検査の外の台帳ファイルに定理名で列挙し、台帳に無い委譲も、台帳にあるのに委譲が消えた項目も落とす（fail-closed）。台帳の初期値は、行「Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外」に挙げた定理と、上の二行が直すもの。2026-10-27 の研究管理の実測では、登録された具体版 1,233 件のうち 26 件が必要十分版の定理を呼び、そのうち 2 件は runbook に規定を入れた後に連続実行が「独立な Lean 具体版」と記録して入れたものだった。目視の確認だけでは規定が守られないので検査にする。 |
-| Onsager 閉形式への接続 | ねじれた有限 Fourier 分解: Fourier 行列の両側逆と行列式の積公式 | 未着手 | 全単射 $\kappa:\vec E_L\to\mathcal U_a\times\mathcal W_b\times\mathbb Z/4\mathbb Z$ を固定し、$F$ と双対ベクトルから $G=L^{-2}\bar F$ を作って $GF=I$（幾何和 `claim_root_of_unity_geometric_sum_zero`）と $FG=I$（冪和 `claim_root_of_unity_power_sum_value`）を別々に示し、乗法性とブロック対角行列の行列式で $D^{a,b}_L(x)=\prod_{(\varpi,\varsigma)}\det_x(I_4-x\widehat{\widehat M(\varpi,\varsigma)})$ を得る。正規化に $1/\sqrt L$ を使わない。指示書の節 5〜6。 |
-| Onsager 閉形式への接続 | 正方格子の分散因子: モードごとの 4×4 小行列式 | 未着手 | $\Delta(x;\varpi,\varsigma)=\det_x(I_4-x\widehat{\widehat M(\varpi,\varsigma)})=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})$ を置換展開の 24 項から一行ずつ示す（$\zeta_8$ は消える）。設計ノート 09 の $\cosh2K,\sinh2K,\cos\theta$ との対応と、$\varpi=\varsigma=1$ での零条件が自己双対方程式 $x^2+2x-1=0$ になることを書く。指示書 `compute-square-lattice-dispersion-factor.md`。研究管理（2026-10-08）が辺長 1〜3 で $\prod\Delta=(Q^{a,b}_L)^2$ を確認済み（証明ではない）。 |
+| Onsager 閉形式への接続 | ねじれた有限 Fourier 分解: Fourier 行列の両側逆と行列式の積公式 | 未着手 | 全単射 $\kappa:\vec E_L\to\mathcal U_a\times\mathcal W_b\times\mathbb Z/4\mathbb Z$ を固定し、$F$ と双対ベクトルから $G=L^{-2}\bar F$ を作って $GF=I$（幾何和 `claim_root_of_unity_geometric_sum_zero`）と $FG=I$（冪和 `claim_root_of_unity_power_sum_value`）を別々に示し、乗法性とブロック対角行列の行列式で $D^{a,b}_L(x)=\prod_{(\varpi,\varsigma)}\det_x(I_4-x\widehat{\breve M(\varpi,\varsigma)})$ を得る。正規化に $1/\sqrt L$ を使わない。指示書の節 5〜6。 |
+| Onsager 閉形式への接続 | 正方格子の分散因子: モードごとの 4×4 小行列式 | 未着手 | $\Delta(x;\varpi,\varsigma)=\det_x(I_4-x\widehat{\breve M(\varpi,\varsigma)})=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})$ を置換展開の 24 項から一行ずつ示す（$\zeta_8$ は消える）。設計ノート 09 の $\cosh2K,\sinh2K,\cos\theta$ との対応と、$\varpi=\varsigma=1$ での零条件が自己双対方程式 $x^2+2x-1=0$ になることを書く。指示書 `compute-square-lattice-dispersion-factor.md`。研究管理（2026-10-08）が辺長 1〜3 で $\prod\Delta=(Q^{a,b}_L)^2$ を確認済み（証明ではない）。 |
 | Onsager 閉形式への接続 | 有限トーラス公式（低温変数のまま）: 分配多項式は四つの符号付き偶部分グラフ多項式の和の半分 | 未着手 | $\mathbb Z[x]$ の等式 $Z_L=\frac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L$。根拠は `claim_low_temperature_trivial_sector_expression`（$Z_L=2G^{0,0}_L$）と `claim_signed_even_subgraph_sector_sum`（$Q^{a,b}_L=\sum_{(c,d)}\chi_{a,b}(c,d)G^{c,d}_L$）だけで、$(c,d)$ を固定した $\sum_{(a,b)}\chi_{a,b}(c,d)=4[c=0][d=0]$ を示して有限和の順序を交換する（一つの論法）。平方恒等式にも Fourier 分解にも依存しない。**Arf 符号 `claim_arf_fourier_sign_projection`、双対変数への置換、前因子 $2^{L^2}$ は使わない**（それらは $H_L$ を書くときのもの）。指示書 `assemble-finite-volume-closed-product.md` の 1（2026-10-09 の研究管理）。 |
 | Onsager 閉形式への接続 | 分散因子の自己双対性と正値性の分解 | 未着手 | $\overline{\mathbb Q}(x)$ の等式 $(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)=4\Delta(x;\varpi,\varsigma)$（`def_kw_dual_transform`）と、$\overline{\mathbb Q}[x]$ の等式 $\Delta(x;\varpi,\varsigma)-(x^2+2x-1)^2=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)$、および $\Delta(x;1,1)=(1-2x-x^2)^2$、$\Delta(x;1,-1)=\Delta(x;-1,1)=(1+x^2)^2$、$\Delta(x;-1,-1)=(1+2x-x^2)^2$。分散因子の定義だけに依存する。指示書 `assemble-finite-volume-closed-product.md` の 4・5 と `prove-twists-share-thermodynamic-limit.md` の 2（2026-10-09 の研究管理。辺長 1〜3 で確認済み）。 |
 | 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外 | 未着手 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: 道具の章の `matchingPair_evenColor_eq`・`qbarPolynomial_noninjective_inner_sum_zero`、Kac--Ward 章の `reversal_involutive`・`reversal_ne`・`spinStructures_card`・`transitionEntry_mem_mu8`・`kacWardDeterminantEntryProduct_ne_zero_iff`・`signedEvenSubgraphPolynomial_eq_sectorSum`・`walkTwistSign_product`・`vertexIncidentEdgeTraversal_even`・`firstHitConnectingStaircase_meets_lifts_only_at_ends`・`iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top`、置換展開の章の `movedEdgeOrbitSet_partition`・`kacWardSignedPermutationTerm_orbit_product`・`kacWardEntryProduct_orbit_factorization`・`kacWardSignedPermutationTerm_orbit_phase_twist`・`reversalFreeMovedSupport_even`・`reversalFreeOrbitSupportEdges_distinct`・`reversalFreeOrbit_vertexSimpleDecomposition`・`crossingFreeSignCounterexample`、臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 |
@@ -46,9 +45,9 @@
 | Onsager 閉形式への接続 | 頂点単純閉路の循環総回転数は切断線偶奇で決まる | 記述・SageMath 済。Lean 二版は未着手 | 零巻き付きと非零巻き付きの結果を切断線偶奇へ接続する。 |
 | Onsager 閉形式への接続 | 頂点単純な置換軌道の位相因子はトーラスの巻き付き二次符号に等しい | 記述・SageMath 済。Lean 二版は未着手 | 平方恒等式の節 6 が直接引く。旧経路の言葉（非後退置換の軌道）で書かれているので、節 6 で使う「台の辺が相異なる閉歩道」の言葉で引けるかを確かめ、必要なら言い換えの主張を足す。 |
 | Onsager 閉形式への接続 | 平方恒等式: 閉歩道の位相と二次符号の一般形 | 未着手 | 台の辺が相異なる閉歩道について $-(\prod\varepsilon_{a,b})\zeta_8^{t_\circ}=\chi_{a,b}(h,v)(-1)^{t}$。頂点単純の場合は済（`claim_vertex_simple_orbit_quadratic_sign`）。横断消去と接触点分割で落とす。混合横断数の偶奇と交差形式の補題が新しく要る。指示書の節 6。 この節の Lean は、直前に並べた離散 Whitney 系の Lean 配線が閉じてから書く。 |
-| Onsager 閉形式への接続 | 平方恒等式: マッチングの符号と基準マッチングの比較 | 未着手 | $\operatorname{sgn}(\mathcal D)\prod\widehat K$ を閉路ごとの寄与へ分解し、$U$ と $\zeta_8^{\,2}$ の因子が閉路に沿って打ち消すことを示す。指示書の節 7。 節 7 の等式は、研究管理（2026-10-07）が辺長 1〜3・四つのスピン構造の全ての標識付きマッチングについて厳密計算で確かめた。$t(\mathcal D)$ の定義は指示書の節 7（同じ頂点の二つの短い対が、ともに逆向きの二辺の対で軸が異なる組の個数）。 |
+| Onsager 閉形式への接続 | 平方恒等式: マッチングの符号と基準マッチングの比較 | 未着手 | $\operatorname{sgn}(\mathcal D)\prod K^{\mathrm{as}}$ を閉路ごとの寄与へ分解し、$U$ と $\zeta_8^{\,2}$ の因子が閉路に沿って打ち消すことを示す。指示書の節 7。 節 7 の等式は、研究管理（2026-10-07）が辺長 1〜3・四つのスピン構造の全ての標識付きマッチングについて厳密計算で確かめた。$t(\mathcal D)$ の定義は指示書の節 7（同じ頂点の二つの短い対が、ともに逆向きの二辺の対で軸が異なる組の個数）。 |
 | Onsager 閉形式への接続 | 平方恒等式: 局所対合の符号付き和 | 未着手 | 各偶部分グラフの上で $\sum(-1)^{t(\mathcal D)}=1$（次数 4 の頂点で $1+1-1$）。指示書の節 8。 辺長 1〜3 の全ての偶部分グラフで確認済み（研究管理 2026-10-07）。 |
-| Onsager 閉形式への接続 | 平方恒等式の合成: 符号付き偶部分グラフ多項式は Kac--Ward 行列式の多項式平方根 | 未着手 | $\operatorname{Pf}(\widehat K)=Q^{a,b}_L$（線型順序を $(e,d)$ の辞書式に取れば符号は $+1$。指示書の節 9。辺長 1〜3 で確認済み、研究管理 2026-10-07）、$D^{a,b}_L=(Q^{a,b}_L)^2$、$Q^{a,b}_L(0)=1$ と 台帳の先頭で整備する多項式平方根の一意性から $Q^{a,b}_L$ は $D^{a,b}_L$ の定数項 1 の多項式平方根。有限トーラス公式の行と合わせて $Z_L=\frac12\sum_{(a,b)}\sqrt{D^{a,b}_L}$（四項とも符号は正）。**Arf 符号付き四項和と高温展開の恒等式は使わない**（2026-10-09 の研究管理）。指示書 `assemble-finite-volume-closed-product.md` の 2・3。 |
+| Onsager 閉形式への接続 | 平方恒等式の合成: 符号付き偶部分グラフ多項式は Kac--Ward 行列式の多項式平方根 | 未着手 | $\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L$（線型順序を $(e,d)$ の辞書式に取れば符号は $+1$。指示書の節 9。辺長 1〜3 で確認済み、研究管理 2026-10-07）、$D^{a,b}_L=(Q^{a,b}_L)^2$、$Q^{a,b}_L(0)=1$ と 台帳の先頭で整備する多項式平方根の一意性から $Q^{a,b}_L$ は $D^{a,b}_L$ の定数項 1 の多項式平方根。有限トーラス公式の行と合わせて $Z_L=\frac12\sum_{(a,b)}\sqrt{D^{a,b}_L}$（四項とも符号は正）。**Arf 符号付き四項和と高温展開の恒等式は使わない**（2026-10-09 の研究管理）。指示書 `assemble-finite-volume-closed-product.md` の 2・3。 |
 | Onsager 閉形式への接続 | 符号付き偶部分グラフ多項式の軌道ごとの明示積 | 未着手 | $\Delta$ は $\varpi+\varpi^{-1}$ と $\varsigma+\varsigma^{-1}$ だけで決まるので、$(\varpi,\varsigma)\mapsto(\varpi^{-1},\varsigma),(\varpi,\varsigma^{-1})$ の軌道 $O$（$|O|\in\{1,2,4\}$）の上で定数。$P^{a,b}_L:=\prod_{|O|=1}\sqrt{\Delta_O}\prod_{|O|=2}\Delta_O\prod_{|O|=4}\Delta_O^2$（$\sqrt{\Delta_O}$ は $1-2x-x^2$, $1+x^2$, $1+2x-x^2$）は平方が $D^{a,b}_L$ で定数項 1 なので $Q^{a,b}_L=P^{a,b}_L$。平方恒等式と Fourier 分解の後に進める。指示書 `assemble-finite-volume-closed-product.md` の 4（辺長 1〜3 で確認済み、研究管理 2026-10-09）。 |
 | Onsager 閉形式への接続 | 1 の冪根の逆元は共役であり、分散因子は有理点で正である（実閉部分体の順序） | 未着手 | $\zeta=\alpha+\beta\omega\in\mu_n$（`def_real_closed_subfield` の一意表示）について $\zeta^{-1}=\alpha-\beta\omega$（$\tau(\alpha+\beta\omega)=\alpha-\beta\omega$ が $R$ を固定する環自己同型、ノルム $\zeta\tau(\zeta)=\alpha^2+\beta^2$ は $\ge_R0$ で $n$ 乗が 1 なので 1）。帰結 $2-\varpi-\varpi^{-1}=(1-\alpha)^2+\beta^2$ は $R$ の平方（`claim_real_closed_sum_of_two_squares_is_square`）。正値性の分解と合わせて $q\in\mathbb Q_{(0,1)}$ で $\Delta(q;\varpi,\varsigma)\ge_R(q^2+2q-1)^2>_R0$。**$|\varpi|=1$ や $\cos$ を使わない。** 指示書 `prove-twists-share-thermodynamic-limit.md` の 1・2。 |
 | Onsager 閉形式への接続 | 符号付き偶部分グラフ多項式の自己双対性 | 未着手 | $\overline{\mathbb Q}[x]$ の等式 $(1+x)^{2L^2}Q^{a,b}_L(\mathrm{KW}(x))=\eta_{a,b}2^{L^2}Q^{a,b}_L(x)$（$\eta_{0,0}=-1$、他は $+1$）。分散因子の自己双対性から両辺の平方が等しく、整域で $f=\pm g$。符号は $(a,b)\ne(0,0)$ では自己双対点 $x_{\mathrm{sd}}$（$(1+x_{\mathrm{sd}})^2=2$、$Q^{a,b}_L(x_{\mathrm{sd}})\ne0$）で、$(0,0)$ では $\sum_{(a,b)}Q^{a,b}_L(1)=2^{L^2+1}$ で決める。指示書 `assemble-finite-volume-closed-product.md` の 6（辺長 1〜3 で確認済み、研究管理 2026-10-09）。 |
@@ -71,24 +70,24 @@
 
 ## レビュー記録
 
+- 2026-10-27: 「遷移行列を終点 Fourier ベクトルに作用させる」の二つの場合と根拠を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-27: 「後続方向の辺の選択」の一意性・辺長一での反転方向の除外を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-27: 「上向き辺の切断線座標とねじれ符号」の通常端・周期端と Lean 具体版を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-27: 「左向き辺の切断線座標とねじれ符号」の通常端・周期端と Lean の独立性を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-27: 「下向き辺の切断線座標とねじれ符号」の通常端・周期端、SageMath と Lean の対応を照合し、修正不要だった。次は本文順の証明。
-- 2026-10-27: 「右向き辺の切断線座標とねじれ符号」の通常端・周期端・辺長一を照合し、修正不要だった。次は本文順の証明。
 
 ## 式変形の書き方の統一
 
+- 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「行列の指数関数による共役」の適用証明は三つの式変形と行末の根拠が揃っていたため修正不要だった。次は本文順の証明。
 - 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「ZとYの反交換関係」で、既存の等式鎖の行末にクロネッカー積と Pauli 行列の根拠ラベルを補った。次は本文順の証明。
 - 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「1 因子だけ反可換ならクロネッカー積は反交換する」は等式鎖と行末の根拠が揃っていたため修正不要だった。次は本文順の証明。
 - 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「Pauli 行列の積」は、各等式鎖と行末の根拠が揃っていたため修正不要だった。次は本文順の証明。
 - 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「指数を交換子へ適用した級数展開」で、再帰の等式行末に既存の根拠ラベルを補った。次は本文順の証明。
-- 2026-10-27（連続実行の書式統一）: 姉妹プロジェクトの「行列の可逆元」は積の逆元を確かめる二つの鎖で代入と結合律を別行に分けた。次は本文順の証明。
 
 ## 前進の記録
 
+- 2026-10-27: 四方向小行列を $\breve M$、反対称化した行列を $K^{\mathrm{as}}$、整係数多項式の持ち上げを $\operatorname{Lift}^{F}$ と書き分け、本文・検証記録・指示書を揃えた。
 - 2026-10-27: 後続辺の一意性・四方向の切断線位相・回転位相を合成し、遷移行列の成分作用を記述・SageMath・独立な Lean 具体版と必要十分版で示した。
 - 2026-10-27（研究管理）: 小行列と反対称化した行列のハットの二重の意味を外す行、新しく入った Lean 具体版の委譲二件を外す行、委譲を検出する検査の行を表の先頭に足した。数学の順序は変えない。
 - 2026-10-27: 四方向の切断線位相を記述・SageMath・独立な Lean 具体版と必要十分版で一つの等式にまとめた。
 - 2026-10-27: 固有ベクトル等式の合成を四方向の位相と行列作用の二つの論法へ割った。
-- 2026-10-27: 上向き辺の切断線座標とねじれ符号を通常端・周期端に分け、記述・SageMath・独立な Lean 具体版と必要十分版で示した。

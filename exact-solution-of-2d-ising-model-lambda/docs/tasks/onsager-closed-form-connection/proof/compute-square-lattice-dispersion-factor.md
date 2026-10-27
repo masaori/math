@@ -2,7 +2,7 @@
 
 ## 概要
 
-Fourier 分解で得た向き成分の小行列式 $\Delta(x;\varpi,\varsigma):=\det_x\bigl(I_4-x\,\widehat{\widehat M(\varpi,\varsigma)}\bigr)$（$\widehat M(\varpi,\varsigma)$ は [ねじれた有限 Fourier 因数分解を証明する](prove-finite-fourier-factorization.md) の節 2）を置換展開で一行ずつ計算し、正方格子 Ising 模型の分散因子を $\varpi,\varsigma$ の Laurent 多項式として導く。
+Fourier 分解で得た向き成分の小行列式 $\Delta(x;\varpi,\varsigma):=\det_x\bigl(I_4-x\,\widehat{\breve M(\varpi,\varsigma)}\bigr)$（$\breve M(\varpi,\varsigma)$ は [ねじれた有限 Fourier 因数分解を証明する](prove-finite-fourier-factorization.md) の節 2）を置換展開で一行ずつ計算し、正方格子 Ising 模型の分散因子を $\varpi,\varsigma$ の Laurent 多項式として導く。
 
 ## 到達すべき式（2026-10-08 の研究管理が辺長 1〜3 で確認。証明ではない）
 

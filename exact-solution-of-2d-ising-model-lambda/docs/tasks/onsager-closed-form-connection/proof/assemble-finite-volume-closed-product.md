@@ -16,7 +16,7 @@
    $\sum_{(a,b)}Q^{a,b}_L=4G^{0,0}_L=2Z_L$ である（有限和の順序の交換。一つの論法）。
    **平方恒等式にも Fourier 分解にも依存しない。** Arf 符号 $\eta_{a,b}$（`claim_arf_fourier_sign_projection`）、高温展開の前因子 $2^{L^2}$、
    双対変数 $\mathrm{KW}(x)$ への置換は、$H_L$ を四つの平方根で書くときに要るものであり、$Z_L$ には要らない。四項の符号はすべて $+$ である。
-2. **平方恒等式との合成。** 節 9 の $\operatorname{Pf}(\widehat K)=Q^{a,b}_L$ と $D^{a,b}_L=(Q^{a,b}_L)^2$、空集合の項から $Q^{a,b}_L(0)=1$、
+2. **平方恒等式との合成。** 節 9 の $\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L$ と $D^{a,b}_L=(Q^{a,b}_L)^2$、空集合の項から $Q^{a,b}_L(0)=1$、
    証明済みの多項式平方根の一意性により、
    $Q^{a,b}_L$ は $D^{a,b}_L$ の定数項 $1$ の唯一の多項式平方根 $\sqrt{D^{a,b}_L}\in\overline{\mathbb Q}[x]$ である。存在の証人は $Q^{a,b}_L$ 自身であり、任意の形式的冪級数の存在定理は使わない。
    したがって $Z_L=\frac12\sum_{(a,b)\in\mathcal S}\sqrt{D^{a,b}_L}$。
