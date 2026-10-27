@@ -80812,6 +80812,83 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_upward_seam_mode_phase",
+              focus: {
+                id: "finite_fourier_claim_upward_seam_mode_phase",
+                kind: "claim",
+                title: { text: "上向き辺の切断線座標とねじれ符号" },
+                labels: ["claim_upward_seam_mode_phase"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.upwardSeam_modePhase",
+                  "Ising2DLambda.NecSuf.KacWard.upwardSeam_modePhase_necSuf",
+                  "Ising2DLambda.KacWard.upwardSeam_modePhase_from_necSuf",
+                ],
+                verification: ["sagemath/check/upward-seam-mode-phase"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、頂点 ", math(String.raw`(i,j)\in V_L`), " を取る。上向きの辺 ",
+                    math(String.raw`\vec f:=(n_{\mathrm v}(i,j),1)\in\vec E_L`),
+                    " の始点を ", math(String.raw`\operatorname{src}(\vec f)=(i_{\vec f},j_{\vec f})`),
+                    " と書く。代表元写像は ", ref("def_residue_maps"), " に従う。",
+                  ]),
+                  displayMath(String.raw`\varepsilon_{a,b}(\vec f)\varpi^{s(j)}\varsigma^{s(i)}
+=\varsigma^{-1}\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}\quad\text{in }\overline{\mathbb Q}.`),
+                  paragraph([
+                    "辺と端点は ", ref("def_edge_numbering"), " と ", ref("def_oriented_edge_endpoints"),
+                    "、符号は ", ref("def_spin_structures"), "、モードは ",
+                    ref("def_horizontal_twisted_modes"), " と ", ref("def_vertical_twisted_modes"),
+                    " に従う。辺長一も含み、実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_boundary_maps"), " と ", ref("def_oriented_edge_endpoints"),
+                    " より ", math(String.raw`j_{\vec f}=j`), "、",
+                    math(String.raw`i_{\vec f}=i+\bar1`), " である。",
+                    ref("def_seam_parities"), " より横の切断線の指示子は零である。",
+                    "まず ", math(String.raw`0\le s(i)<L-1`), " の場合を取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)\varpi^{s(j)}\varsigma^{s(i)}
+&=1\cdot\varpi^{s(j)}\varsigma^{s(i)}
+&&\bigl(\because\ \blkref{def_seam_parities},\ \blkref{def_spin_structures}\bigr)\\
+&=\varsigma^{-1}\varpi^{s(j)}\varsigma^{s(i)+1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法と逆元}\bigr)\\
+&=\varsigma^{-1}\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+&&\bigl(\because\ \blkref{def_residue_maps},\ s(i)<L-1\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "残る ", math(String.raw`s(i)=L-1`), " の場合は ",
+                    math(String.raw`s(i_{\vec f})=0`), " であり、符号は ",
+                    math(String.raw`(-1)^b`), " になる（", ref("def_residue_maps"), "、",
+                    ref("def_seam_parities"), "、", ref("def_spin_structures"), "）。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)\varpi^{s(j)}\varsigma^{s(i)}
+&=(-1)^b\varpi^{s(j)}\varsigma^{L-1}
+&&\bigl(\because\ \blkref{def_residue_maps},\ \blkref{def_spin_structures}\bigr)\\
+&=\varpi^{s(j)}\bigl((-1)^b\varsigma^{L-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の交換律・結合律}\bigr)\\
+&=\varpi^{s(j)}\varsigma^{-1}
+&&\bigl(\because\ \blkref{claim_twisted_mode_wrap_phase},\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&=\varsigma^{-1}\varpi^{s(j)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法の交換律}\bigr)\\
+&=\varsigma^{-1}\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+&&\bigl(\because\ \blkref{def_residue_maps},\ \varsigma^0=1\bigr).
+\end{aligned}`),
+                  paragraph(["二つの場合は ", math(String.raw`0\le s(i)\le L-1`), " を尽くす。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_successor_direction_selection",
               focus: {
                 id: "finite_fourier_claim_successor_direction_selection",
