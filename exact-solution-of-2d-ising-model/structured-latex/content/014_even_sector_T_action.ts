@@ -2239,10 +2239,10 @@ P_{21}
 T_{(V^{(+)})}(\check{Z}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)\right)\right)
-   \quad (\because \text{def\_T\_V\_plus}) \\
+   \quad (\because \blkref{def_T_V_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu\right)\right)
-   \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
    \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
@@ -2250,7 +2250,7 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
    \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}\right)
-   \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y}) \\
+   \quad (\because \blkref{calc_of_TxT_check_Z_Y}) \\
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
    \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
@@ -2258,7 +2258,7 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
    \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix}
-   \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y})
+   \quad (\because \blkref{calc_of_TxT_check_Z_Y})
 \end{aligned}`,
       ),
       paragraph([
@@ -2282,10 +2282,10 @@ T_{(V^{(+)})}(\check{Z}_\mu)
 T_{(V^{(+)})}(\check{Y}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)\right)
-   \quad (\because \text{def\_T\_V\_plus}) \\
+   \quad (\because \blkref{def_T_V_plus}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(T_{V_2}\!\left(
    -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu\right)\right)
-   \quad (\because \text{T\_actions\_on\_check\_Z\_Y}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}) \\
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
    \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
@@ -2293,7 +2293,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
 &= T_{\left(V_1^{(+)}\right)^{1/2}}\!\left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
    \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}\right)
-   \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y}) \\
+   \quad (\because \blkref{calc_of_TxT_check_Z_Y}) \\
 &= \left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
    T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) B_2
    \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
@@ -2301,7 +2301,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2
    \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
-   \quad (\because \text{calc\_of\_TxT\_check\_Z\_Y})
+   \quad (\because \blkref{calc_of_TxT_check_Z_Y})
 \end{aligned}`,
       ),
       paragraph([
@@ -2320,9 +2320,9 @@ T_{(V^{(+)})}(\check{Y}_\mu)
 \left(T_{(V^{(+)})}(\check{Z}_\mu),\ T_{(V^{(+)})}(\check{Y}_\mu)\right)
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    B_1(\tilde\theta)\, B_2\, B_1(\tilde\theta)
-   \quad (\because \text{(z), (y) の鎖と def\_B1\_theta\_B2}) \\
+   \quad (\because \text{(z), (y) の鎖と }\blkref{def_B1_theta_B2}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} A(\tilde\theta_\mu)
-   \quad (\because \text{factorization\_of\_A\_theta\_general})
+   \quad (\because \blkref{factorization_of_A_theta_general})
 \end{aligned}`,
       ),
     ],

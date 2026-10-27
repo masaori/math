@@ -17,15 +17,18 @@ private theorem active_shortMate_successor {L : ℕ} (z : Qbar) (s : SpinStructu
         (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
         (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
     (e : OrientedEdge L)
-    (he : e ∈ Ising2DLambda.NecSuf.KacWard.activeVertices D
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-      (shortUnderlyingPairs t)) :
+    (he : e ∈ concreteTaggedActiveVertices D t) :
     perfectMatchingMate D e ∈ nonbacktrackingSuccessors (reversal e) := by
   classical
-  have hincident := (Ising2DLambda.NecSuf.KacWard.mem_activeVertices_iff_incident
+  have habstract : e ∈ Ising2DLambda.NecSuf.KacWard.activeVertices D
+      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
+      (shortUnderlyingPairs t) := by
+    rw [← concreteTaggedActiveVertices_eq_activeVertices D t]
+    exact he
+  have habstractIncident := (Ising2DLambda.NecSuf.KacWard.mem_activeVertices_iff_incident
     D ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (shortUnderlyingPairs t) e).mp he
-  have hshort := (taggedDifference_active_iff_short z s D t hterm e).mp hincident
+    (shortUnderlyingPairs t) e).mp habstract
+  have hshort := (taggedDifference_active_iff_short z s D t hterm e).mp habstractIncident
   obtain ⟨p, hp, hcover⟩ := matching_pair_cover D e
   have hp' := (Finset.mem_filter.mp hp).2
   have hmate : perfectMatchingMate D p.1 = p.2 :=
@@ -61,12 +64,9 @@ theorem taggedActive_projectedCycle_nonbacktracking {L : ℕ} (z : Qbar)
       ((-1 : Polynomial Qbar) ^ t.card *
         (∏ p ∈ matchingOrientedPairs D \ t, gaugedLongContribution z s p) *
         (∏ p ∈ t, gaugedShortContribution z s p)) ≠ 0)
-    (i : {i : OrientedEdge L // i ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t)}) :
-    let τ := shortInvolution D t
-    let υ := longInvolution D t
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    let τ := concreteShortInvolution D t
+    let υ := concreteLongInvolution D t
     let m := matchingPairComponentMinimum τ υ i
     let σ := matchingPairPermutation τ υ
     ∃ k : ℕ, 0 < k ∧
@@ -77,12 +77,12 @@ theorem taggedActive_projectedCycle_nonbacktracking {L : ℕ} (z : Qbar)
             (reversal (finiteMapIterate σ (2 * r) m).val) := by
   classical
   dsimp
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
   let m := matchingPairComponentMinimum τ υ i
   let σ := matchingPairPermutation τ υ
   let C := matchingPairColor τ υ
-  obtain ⟨k, hk, hreturn, hlong⟩ := taggedActive_projectedClosedEdgeCycle_abstractActivity D t i
+  obtain ⟨k, hk, hreturn, hlong⟩ := taggedActive_projectedClosedEdgeCycle D t i
   have hcomponent : m ∈ matchingPairComponent τ υ i :=
     matchingPairComponentMinimum_mem τ υ i
   have hbase : matchingPairComponentMinimum τ υ m = m :=
@@ -175,7 +175,9 @@ theorem taggedActive_projectedCycle_nonbacktracking_from_necSuf {L : ℕ} (z : Q
       (τ.val j).val ∈ nonbacktrackingSuccessors (υ.val j).val := by
     change perfectMatchingMate D j.val ∈ nonbacktrackingSuccessors (υ.val j).val
     rw [hrev]
-    exact active_shortMate_successor z s D t ht hterm j.val j.property
+    apply active_shortMate_successor z s D t ht hterm j.val
+    rw [concreteTaggedActiveVertices_eq_activeVertices D t]
+    exact j.property
   obtain ⟨k, hk, hreturn, hsteps⟩ :=
     Ising2DLambda.NecSuf.KacWard.projectedCycle_nonbacktracking
       τ υ υ.val
