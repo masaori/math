@@ -80387,6 +80387,52 @@ y^L
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_def_mode_small_matrix",
+              focus: {
+                id: "finite_fourier_def_mode_small_matrix",
+                kind: "definition",
+                title: { text: "モードごとの四方向小行列" },
+                labels: ["def_mode_small_matrix"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_from_necSuf",
+                ],
+                verification: ["sagemath/check/mode-small-matrix"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " と方向番号 ", math(String.raw`\delta,\delta'\in\mathbb Z/4\mathbb Z`),
+                    " を任意に取る。方向単位ベクトルを ",
+                    math(String.raw`u(\delta')=(u_1(\delta'),u_2(\delta'))`),
+                    " と書く（", ref("def_direction_unit_vector"), "）。",
+                  ]),
+                  displayMath(String.raw`\widehat M(\varpi,\varsigma)_{\delta,\delta'}:=
+\begin{cases}
+\varpi^{u_2(\delta')}\varsigma^{u_1(\delta')},&\delta'=\delta,\\
+\zeta_8\varpi^{u_2(\delta')}\varsigma^{u_1(\delta')},&\delta'=\delta+1,\\
+\zeta_8^{-1}\varpi^{u_2(\delta')}\varsigma^{u_1(\delta')},&\delta'=\delta-1,\\
+0,&\delta'=\delta+2
+\end{cases}`),
+                  paragraph([
+                    "で ", math(String.raw`\widehat M(\varpi,\varsigma)\in\mathrm{Mat}_{\mathbb Z/4\mathbb Z}(\overline{\mathbb Q})`),
+                    " を定める。四つの場合は方向番号を尽くし、位相 ",
+                    math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                    "、モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " に従う。",
+                    "モードは零でないので負の冪が定義できる。実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

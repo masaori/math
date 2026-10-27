@@ -754,6 +754,7 @@ export const ALL_LABELS = [
   "def_matrix_over_row_configs",
   "def_matrix_product",
   "def_matrix_trace",
+  "def_mode_small_matrix",
   "def_moved_edge_set",
   "def_moved_edge_support_set",
   "def_moved_orbit_family",
