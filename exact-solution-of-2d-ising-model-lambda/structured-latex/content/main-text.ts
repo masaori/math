@@ -82128,6 +82128,54 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_block_fiber_determinant_product",
+              focus: {
+                id: "finite_fourier_claim_block_fiber_determinant_product",
+                kind: "claim",
+                title: { text: "Fourier モードのファイバーごとに行列式を分解する" },
+                labels: ["claim_fourier_block_fiber_determinant_product"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/fourier-mode-block-entries"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に固定する。", ref("def_fourier_mode_index_set"),
+                    " のモードの集合を ", math(String.raw`\mathcal K:=\mathcal U_a\times\mathcal W_b`),
+                    " とし、", math(String.raw`b:\vec E_L\to\mathcal K`),
+                    " を ", math(String.raw`b(\vec e):=(\kappa(\vec e)_1,\kappa(\vec e)_2)`),
+                    " と定める。各 ", math(String.raw`m\in\mathcal K`),
+                    " に対し ", math(String.raw`\mathcal J_m:=\{\vec e\in\vec E_L\mid b(\vec e)=m\}`),
+                    " と置く。行列のハットは ", ref("def_qbar_constant_embedding"),
+                    " の成分ごとの適用である。このとき",
+                  ]),
+                  displayMath(String.raw`D^{a,b}_L(x)=\prod_{m\in\mathcal K}\det_x\!\left(\left.\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)\right|_{\mathcal J_m\times\mathcal J_m}\right)\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["各ファイバーの制限行列は、そのファイバーを行と列の添字とする多項式行列である。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`T:=I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}`),
+                    " と置く。", ref("claim_fourier_mode_block_entries"),
+                    " により、", math(String.raw`b(\vec e)\ne b(\vec f)`),
+                    " なら ", math(String.raw`T_{\vec e,\vec f}=0`), " である。",
+                    "したがって ", ref("claim_block_diagonal_determinant_product"), " を適用できる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+D^{a,b}_L(x)
+&=\det_x(T)
+&&(\because\ \blkref{claim_fourier_similarity_preserves_determinant})\\
+&=\prod_{m\in\mathcal K}\det_x\!\left(\left.T\right|_{\mathcal J_m\times\mathcal J_m}\right)
+&&(\because\ \blkref{claim_fourier_mode_block_entries},\ \blkref{claim_block_diagonal_determinant_product}).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

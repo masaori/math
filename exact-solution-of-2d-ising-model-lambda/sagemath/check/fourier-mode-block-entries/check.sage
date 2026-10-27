@@ -1,4 +1,4 @@
-# 対象ラベル: claim_fourier_mode_block_entries
+# 対象ラベル: claim_fourier_mode_block_entries, claim_fourier_block_fiber_determinant_product
 K = CyclotomicField(24)
 xroots = PolynomialRing(K, 't').gen()
 steps = ((0, 1), (1, 0), (0, -1), (-1, 0))

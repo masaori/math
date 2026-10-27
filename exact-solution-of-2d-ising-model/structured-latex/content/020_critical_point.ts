@@ -720,11 +720,17 @@ A
 &=1
 &&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の }K^*\text{ の定義}\bigr)
 \end{aligned}`),
-      paragraph([
-        "これを ",
-        ref("gamma_kappa_identity"),
-        " の 3 番目の式へ代入すれば主張の表示を得る。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma(\theta)
+&=2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+A\sin^2\!\left(\frac{\theta}{2}\right)}
+\right)
+&&(\because\ \blkref{gamma_kappa_identity}\text{ の第3式})\\
+&=2\,\mathrm{arcsinh}\!\left(
+  \sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)+\sin^2\!\left(\frac{\theta}{2}\right)}
+\right)
+&&(\because\ A=1).
+\end{aligned}`),
     ],
     conversion: { status: "added" },
   },
