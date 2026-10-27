@@ -123,6 +123,7 @@ export const ALL_LABELS = [
   "claim_high_temperature_polynomial_identity",
   "claim_high_temperature_sector_decomposition",
   "claim_hole_free_cell_set_euler_number_one",
+  "claim_horizontal_twisted_modes_coset",
   "claim_integer_polynomial_qbar_lift_evaluation",
   "claim_integer_sequence_level_crossing",
   "claim_inter_row_shift_invariant",
