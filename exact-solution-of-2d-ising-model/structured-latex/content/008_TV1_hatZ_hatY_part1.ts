@@ -117,7 +117,7 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \exp(X)\,Y\,\exp(-X)
 &= \sum_{m=0}^{\infty}\frac{1}{m!}\,\mathrm{ad}_X^{m}(Y)
-&&\left(\because\ \text{「行列の exp による共役と交換子級数」(2)}\right) \\
+&&\left(\because\ \blkref{matrix_exp_conjugation}\text{ (2)}\right) \\
 &= \exp\!\left(\mathrm{ad}_X\right)(Y)
 &&\left(\because\ \text{行列への線型写像 }\mathrm{ad}_X\text{ の exp の定義}\right)
 \end{aligned}`,
@@ -141,7 +141,7 @@ export default defineBlocks([
 &&\left(\because\ \mathrm{ad}_X\text{ の反復の定義}\right), \\
 \mathrm{ad}_X^{m}(Y)
 &= \underbrace{[X,[X,\dots,[X,Y]\dots]]}_{m}
-&&\left(\because\ m\in\mathbb{Z}_{\ge 0}\text{ について上の二式を反復}\right)
+&&\left(\because\ m\in\mathbb{Z}_{\ge 0}\text{ について }\blkref{ad_binomial}\text{ の再帰を反復}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -166,7 +166,7 @@ export default defineBlocks([
 &= \exp(X)\,Y\,\exp(X)^{-1}
 &&\left(\because\ \mathrm{Ad}_{g}(Y)=gYg^{-1}\text{ の定義}\right) \\
 &= \exp(X)\,Y\,\exp(-X)
-&&\left(\because\ \exp(X)^{-1}=\exp(-X)\right)
+&&\left(\because\ \blkref{matrix_exp_conjugation}\text{ (3)}\right)
 \end{aligned}`,
       ),
       paragraph([
