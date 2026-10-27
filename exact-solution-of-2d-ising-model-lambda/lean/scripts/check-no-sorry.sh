@@ -61,6 +61,9 @@ targets=(
   Ising2DLambda.KacWard.horizontalTwistedModes_eq_coset
   Ising2DLambda.KacWard.horizontalTwistedModes_eq_coset_from_necSuf
   Ising2DLambda.NecSuf.KacWard.twistedModes_eq_coset_necSuf
+  Ising2DLambda.KacWard.twistedMode_ratio_root
+  Ising2DLambda.NecSuf.KacWard.equalPower_ratio_root_necSuf
+  Ising2DLambda.KacWard.twistedMode_ratio_root_from_necSuf
   Ising2DLambda.KacWard.verticalTwistedModes_eq_coset
   Ising2DLambda.KacWard.verticalTwistedModes_eq_coset_from_necSuf
   Ising2DLambda.KacWard.taggedActiveTwoStep_apply

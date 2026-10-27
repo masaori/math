@@ -1006,7 +1006,9 @@ g_{12}T_{(V^{(+)})}(A_0)+g_{22}T_{(V^{(+)})}(B_0)\right)
 \end{aligned}`,
       ),
       paragraph([
-        "両辺の第 1 列・第 2 列を比べ、",
+        "直前の等式鎖の定義と代入は ", ref("def_check_fermi"), "、",
+        ref("T_V_plus_check_Z_Y"), "、", ref("diagonalization_check_P_D"),
+        " による。両辺の第 1 列・第 2 列を比べ、",
         ref("lambda_eq_exp_gamma_theta_tilde"),
         " を各列へ代入すると",
       ]),

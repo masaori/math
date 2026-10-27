@@ -80697,6 +80697,72 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_mode_ratio_root",
+              focus: {
+                id: "finite_fourier_claim_twisted_mode_ratio_root",
+                kind: "claim",
+                title: { text: "同じねじれの二つのモードの比は一の冪根である" },
+                labels: ["claim_twisted_mode_ratio_root"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.twistedMode_ratio_root",
+                  "Ising2DLambda.NecSuf.KacWard.equalPower_ratio_root_necSuf",
+                  "Ising2DLambda.KacWard.twistedMode_ratio_root_from_necSuf",
+                ],
+                verification: ["sagemath/check/twisted-mode-ratio-root"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。横モード ",
+                    math(String.raw`\varpi,\varpi'\in\mathcal U_a`), " と縦モード ",
+                    math(String.raw`\varsigma,\varsigma'\in\mathcal W_b`), " について",
+                  ]),
+                  displayMath(String.raw`\varpi'/\varpi\in\mu_L,\qquad\varsigma'/\varsigma\in\mu_L`),
+                  paragraph([
+                    "が成り立つ。モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), "、一の冪根は ",
+                    ref("def_root_of_unity_set"), " に従う。比は ",
+                    math(String.raw`\overline{\mathbb Q}`), " の元であり、実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_horizontal_twisted_modes"), " より ",
+                    math(String.raw`\varpi^L=(\varpi')^L=(-1)^a`), " である。",
+                    math(String.raw`(-1)^a\ne0`), " なので ",
+                    math(String.raw`\varpi\ne0`), " であり、商を取れる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\varpi'/\varpi)^L
+&=(\varpi')^L/\varpi^L&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の商法則}\bigr)\\
+&=(-1)^a/(-1)^a&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\bigr)\\
+&=1&&\bigl(\because\ (-1)^a\ne0\text{ と体の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    ref("def_root_of_unity_set"), " より ",
+                    math(String.raw`\varpi'/\varpi\in\mu_L`), " である。",
+                    ref("def_vertical_twisted_modes"), " より ",
+                    math(String.raw`\varsigma^L=(\varsigma')^L=(-1)^b`), " である。",
+                    math(String.raw`(-1)^b\ne0`), " なので縦モードの商を取れる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\varsigma'/\varsigma)^L
+&=(\varsigma')^L/\varsigma^L&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の商法則}\bigr)\\
+&=(-1)^b/(-1)^b&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&=1&&\bigl(\because\ (-1)^b\ne0\text{ と体の四則}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    ref("def_root_of_unity_set"), " より ",
+                    math(String.raw`\varsigma'/\varsigma\in\mu_L`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_source_direction_bijection",
               focus: {
                 id: "finite_fourier_claim_source_direction_bijection",
