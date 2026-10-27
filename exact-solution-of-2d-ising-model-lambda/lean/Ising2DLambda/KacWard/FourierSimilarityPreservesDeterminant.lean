@@ -36,8 +36,10 @@ theorem fourier_similarity_preserves_determinant {L : ℕ} [NeZero L]
   calc
     kacWardDeterminant (kacWardTransitionMatrix L z s) = Matrix.det (F * T * G) := by
       exact congrArg Matrix.det (polynomial_fourier_similarity z s κ)
+    _ = Matrix.det (F * T) * Matrix.det G :=
+      qbarPolynomial_det_mul (F * T) G
     _ = (Matrix.det F * Matrix.det T) * Matrix.det G := by
-      rw [qbarPolynomial_det_mul (F * T) G, qbarPolynomial_det_mul F T]
+      rw [qbarPolynomial_det_mul F T]
     _ = Matrix.det F * (Matrix.det T * Matrix.det G) := mul_assoc _ _ _
     _ = Matrix.det F * (Matrix.det G * Matrix.det T) :=
       congrArg (Matrix.det F * ·) (mul_comm _ _)

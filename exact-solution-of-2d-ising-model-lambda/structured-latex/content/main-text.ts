@@ -82034,8 +82034,10 @@ G^{a,b,\kappa}_{\vec g,\vec f}
 D^{a,b}_L(x)
 &=\det_x(\widehat F T\widehat G)
 &&\bigl(\because\ \blkref{def_kac_ward_determinants},\ \blkref{claim_polynomial_fourier_similarity}\bigr)\\
+&=\det_x(\widehat F T)\det_x(\widehat G)
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
 &=\bigl(\det_x(\widehat F)\det_x(T)\bigr)\det_x(\widehat G)
-&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\text{ を二回適用}\bigr)\\
+&&\bigl(\because\ \blkref{claim_polynomial_determinant_mul}\bigr)\\
 &=\det_x(\widehat F)\bigl(\det_x(T)\det_x(\widehat G)\bigr)
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の乗法の結合律}\bigr)\\
 &=\det_x(\widehat F)\bigl(\det_x(\widehat G)\det_x(T)\bigr)
