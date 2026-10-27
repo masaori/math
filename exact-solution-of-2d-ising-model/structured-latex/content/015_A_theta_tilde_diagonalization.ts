@@ -136,7 +136,9 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \gamma_2(-\theta)
 &= i\,\exp(i(-\theta))s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
-   \quad (\because \text{本ブロックの } \gamma_2 \text{ の定義式を } \theta \to -\theta \text{ として適用}) \\
+   \quad (\because \text{本ブロックの } \gamma_2 \text{ の定義式}) \\
+&= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
+   \quad (\because i(-\theta)=-i\theta) \\
 &= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta - i\sin(-\theta) - s_1c_2\bigr)
    \quad (\because \cos(-\theta) = \cos\theta) \\
 &= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)

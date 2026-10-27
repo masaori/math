@@ -20,12 +20,9 @@ private theorem same_edge_eq_or_reversal {L : ℕ}
 theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
-    (i : {i : OrientedEdge L // i ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t)}) :
-    let τ := shortInvolution D t
-    let υ := longInvolution D t
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    let τ := concreteShortInvolution D t
+    let υ := concreteLongInvolution D t
     let m := matchingPairComponentMinimum τ υ i
     let σ := matchingPairPermutation τ υ
     let k := finitePermutationMinimalPeriod σ m / 2
@@ -33,8 +30,8 @@ theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
       (reversal (finiteMapIterate σ (2 * r) m).val).1 =
         (reversal (finiteMapIterate σ (2 * s) m).val).1 → r = s := by
   dsimp
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
   let m := matchingPairComponentMinimum τ υ i
   have hcomponent : m ∈ matchingPairComponent τ υ i :=
     matchingPairComponentMinimum_mem τ υ i
@@ -45,10 +42,7 @@ theorem taggedActive_projectedCycle_distinctEdges {L : ℕ}
       (matchingPairComponentMinimum τ υ m)
     rw [hbase]
     exact finitePermutationOrbit_self_mem _ m
-  have hfibre (j l : {e : OrientedEdge L // e ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t)})
+  have hfibre (j l : {e : OrientedEdge L // e ∈ concreteTaggedActiveVertices D t})
       (h : j.val.1 = l.val.1) : j = l ∨ j = υ.val l := by
     rcases same_edge_eq_or_reversal j.val l.val h with heq | heq
     · exact Or.inl (Subtype.ext heq)
