@@ -1285,55 +1285,20 @@ K\in\mathbb{R}
         math(String.raw`y\in\mathbb{R}`),
         " かつ ",
         math(String.raw`0<y<1`),
-        " とする。まず、",
+        " とする。実対数の定義より ",
+        math(String.raw`y,1\in\mathbb{R}_{>0}`),
+        " および ",
+        math(String.raw`\log y,\log 1\in\mathbb{R}`),
+        " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
-0<y
-&\Longrightarrow y\in\mathbb{R}_{>0}
-&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-1>0
-&\Longrightarrow 1\in\mathbb{R}_{>0}
-&&\left(\because\ \mathbb{R}_{>0}\text{ の定義}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-y\in\mathbb{R}_{>0}
-&\Longrightarrow \log y\in\mathbb{R}
-&&\left(\because\ \log:\mathbb{R}_{>0}\to\mathbb{R}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-1\in\mathbb{R}_{>0}
-&\Longrightarrow \log 1\in\mathbb{R}
-&&\left(\because\ \log:\mathbb{R}_{>0}\to\mathbb{R}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-0<y<1
-&\Longrightarrow \log y<\log 1
-&&\left(\because\ \log\text{ は狭義単調増加}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\exp 0&=1
-&&\left(\because\ \blkref{scalar_exp_zero}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\exp 0=1
-&\Longrightarrow \log 1=\log(\exp 0)
-&&\left(\because\ \exp 0=1\text{ による左辺の置換}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\log(\exp 0)&=0
+\log y
+&<\log 1
+&&\left(\because\ 0<y<1\text{ と }\log\text{ の狭義単調増加性}\right)\\
+&=\log(\exp 0)
+&&\left(\because\ \blkref{scalar_exp_zero}\right)\\
+&=0
 &&\left(\because\ \log\text{ は }\exp\text{ の逆写像}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\log 1=\log(\exp 0)\ \land\ \log(\exp 0)=0
-&\Longrightarrow \log 1=0
-&&\left(\because\ \mathbb{R}\text{ の等号の推移律}\right)
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-\log y<\log 1\ \land\ \log 1=0
-&\Longrightarrow \log y<0
-&&\left(\because\ \text{等しい実数による右辺の置換}\right)
 \end{aligned}`),
       paragraph([
         "ゆえに ",

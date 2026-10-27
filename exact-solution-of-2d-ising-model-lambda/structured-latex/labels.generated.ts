@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_block_diagonal_determinant_fiber_reindex",
+  "claim_block_diagonal_determinant_product",
   "claim_block_diagonal_term_factorization",
   "claim_block_diagonal_zero_terms",
   "claim_block_preserving_permutation_bijection",

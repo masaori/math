@@ -6652,6 +6652,57 @@ N_{k,l}
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_diagonal_determinant_product",
+        labels: [],
+        title: { text: "ブロック対角行列の行列式を小行列式の積に分解する" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_diagonal_determinant_product",
+            focus: {
+              id: "tools_claim_block_diagonal_determinant_product",
+              kind: "claim",
+              title: { text: "ブロック対角行列の行列式は小行列式の積である" },
+              labels: ["claim_block_diagonal_determinant_product"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/block-diagonal-determinant-product"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_det_eq_prod_fiber_dets",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedFiberFamily_sum_eq_prod_sums",
+              ],
+              statement: [
+                paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J,\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), "、多項式行列 ", math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), " を取る。", math(String.raw`b(i)\ne b(j)`), " なら ", math(String.raw`B_{i,j}=0`), " とする。各 ", math(String.raw`k\in\mathcal K`), " で、", ref("claim_block_preserving_permutation_bijection"), " のファイバー ", math(String.raw`\mathcal J_k`), " 上の行列を ", math(String.raw`B^{(k)}_{i,j}:=B_{\nu_k(i),\nu_k(j)}`), " と定める。このとき"]),
+                displayMath(String.raw`\det_x(B)=\prod_{k\in\mathcal K}\det_x(B^{(k)})\in\overline{\mathbb Q}[x]`),
+                paragraph(["が成り立つ。空のファイバーでは ", ref("def_qbar_polynomial_determinant"), " により小行列式は一である。"]),
+              ],
+              proof: [
+                paragraph(["各 ", math(String.raw`k\in\mathcal K`), "、", math(String.raw`\tau\in\operatorname{Perm}(\mathcal J_k)`), " に対して ", math(String.raw`t_k(\tau):=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau))}\prod_{i\in\mathcal J_k}B^{(k)}_{i,\tau(i)}`), " と置く。全ての和と積は有限である。"]),
+                paragraph(["和の積の分配には ", ref("claim_polynomial_product_of_sums"), " の帰納法を使う。添字を一つ加える段では、その添字の選択集合だけから値を選び、既存の選択の組に付け足す。各添字の選択集合が同じであることは使わないので、", math(String.raw`\operatorname{Perm}(\mathcal J_k)`), " が ", math(String.raw`k`), " ごとに異なる場合にも同じ帰納法が成立する。空のファイバーにも空置換が一つある。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(B)
+&=\sum_{\boldsymbol\tau\in\prod_k\operatorname{Perm}(\mathcal J_k)}
+  \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\operatorname{Glue}(\boldsymbol\tau)))}
+  \prod_{i\in\mathcal J}B_{i,\operatorname{Glue}(\boldsymbol\tau)(i)}
+&&(\because\ \blkref{claim_block_diagonal_determinant_fiber_reindex})\\
+&=\sum_{\boldsymbol\tau\in\prod_k\operatorname{Perm}(\mathcal J_k)}
+  \prod_{k\in\mathcal K}t_k(\tau_k)
+&&(\because\ \blkref{claim_block_diagonal_term_factorization},\ t_k\text{ の定義})\\
+&=\prod_{k\in\mathcal K}\left(\sum_{\tau\in\operatorname{Perm}(\mathcal J_k)}t_k(\tau)\right)
+&&(\because\ \blkref{claim_polynomial_product_of_sums}\text{ の帰納法を各ファイバーの選択集合に適用})\\
+&=\prod_{k\in\mathcal K}\det_x(B^{(k)})
+&&(\because\ \blkref{def_qbar_polynomial_determinant}).
+\end{aligned}`),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
