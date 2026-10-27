@@ -80119,6 +80119,64 @@ z^{2L}
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_antiperiodic_mode_exists",
+              focus: {
+                id: "finite_fourier_claim_antiperiodic_mode_exists",
+                kind: "claim",
+                title: { text: "反周期のねじれたモードが存在する" },
+                labels: ["claim_antiperiodic_mode_exists"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/antiperiodic-mode-exists"],
+                lean: [
+                  "Ising2DLambda.KacWard.antiperiodicMode_exists",
+                  "Ising2DLambda.NecSuf.KacWard.antiperiodicMode_exists_necSuf",
+                  "Ising2DLambda.KacWard.antiperiodicMode_exists_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " に対し、",
+                  ]),
+                  displayMath(String.raw`\exists\xi\in\mu_{2L},\quad \xi^L=-1`),
+                  paragraph([
+                    "が成り立つ。冪根の集合は ", ref("def_root_of_unity_set"),
+                    " のものであり、等式は ", math(String.raw`\overline{\mathbb Q}`), " の中で成り立つ。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`2L>L`), " なので ", math(String.raw`2L\nmid L`),
+                    " である。実際、もし ", math(String.raw`2L\mid L`),
+                    " なら正の整数 ", math(String.raw`L`),
+                    " は自分より大きい正の整数 ", math(String.raw`2L`),
+                    " の倍数となり矛盾する。",
+                    ref("claim_root_of_unity_power_not_one_exists"), " を指数 ",
+                    math(String.raw`n=2L`), "、", math(String.raw`m=L`),
+                    " に適用し、", math(String.raw`\xi\in\mu_{2L}`),
+                    " かつ ", math(String.raw`\xi^L\ne1`), " を満たす元を取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\xi^L)^2
+&=\xi^{2L}&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=1&&\bigl(\because\ \xi\in\mu_{2L},\ \blkref{def_root_of_unity_set}\bigr),\\
+(\xi^L-1)(\xi^L+1)
+&=(\xi^L)^2-1&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則}\bigr)\\
+&=0&&\bigl(\because\ (\xi^L)^2=1\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\overline{\mathbb Q}`),
+                    " は体なので零因子がない。", math(String.raw`\xi^L-1\ne0`),
+                    " だから ", math(String.raw`\xi^L+1=0`),
+                    "、従って ", math(String.raw`\xi^L=-1`), " である。",
+                    "実数体・複素数体への脱出はない。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

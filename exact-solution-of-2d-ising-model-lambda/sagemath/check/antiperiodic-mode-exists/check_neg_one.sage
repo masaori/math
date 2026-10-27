@@ -1,0 +1,6 @@
+# 対象ラベル: claim_antiperiodic_mode_exists
+# ξ^L+1 = 0 から ξ^L = -1。
+for L in range(1, 7):
+    xi = QQbar.zeta(2 * L)
+    assert xi^L == -1
+print('RESULT: PASS')

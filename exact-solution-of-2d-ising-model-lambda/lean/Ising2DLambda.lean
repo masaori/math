@@ -933,6 +933,9 @@ import Ising2DLambda.KacWard.Basic
 import Ising2DLambda.KacWard.TwistedModeSets
 import Ising2DLambda.NecSuf.KacWard.TwistedModeSets
 import Ising2DLambda.KacWard.TwistedModeSetsFromNecSuf
+import Ising2DLambda.KacWard.AntiperiodicModeExists
+import Ising2DLambda.NecSuf.KacWard.AntiperiodicModeExists
+import Ising2DLambda.KacWard.AntiperiodicModeExistsFromNecSuf
 import Ising2DLambda.KacWard.BasicFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ArfFourierSignProjection
 import Ising2DLambda.KacWard.ArfFourierSignProjection

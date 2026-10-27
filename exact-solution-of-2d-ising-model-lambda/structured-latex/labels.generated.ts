@@ -8,6 +8,7 @@
 export const ALL_LABELS = [
   "claim_adjacent_cells_ray_crossing_difference",
   "claim_alternating_neighbor_matchings",
+  "claim_antiperiodic_mode_exists",
   "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_block_diagonal_determinant_fiber_reindex",
