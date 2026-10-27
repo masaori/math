@@ -2462,6 +2462,8 @@ targets=(
   Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements
   Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements
   Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberPairInversions_card_eq_disagreements_from_necSuf
+  Ising2DLambda.AlgebraicEigenvalue.blockAcrossFiberInversions_card_even
+  Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockAcrossFiberInversions_card_even
 )
 
 if [ ${#targets[@]} -eq 0 ]; then
