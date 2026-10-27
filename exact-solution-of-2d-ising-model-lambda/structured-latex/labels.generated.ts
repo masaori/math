@@ -582,6 +582,7 @@ export const ALL_LABELS = [
   "claim_standard_contact_obstruction_witnesses_doubled_edge",
   "claim_standard_contact_smoothing_involution",
   "claim_step_advances_direction",
+  "claim_successor_direction_selection",
   "claim_switchable_contact_smoothing_preserves_fiber",
   "claim_tagged_complement_active_vertices",
   "claim_tagged_difference_active_mates",

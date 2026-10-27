@@ -80535,6 +80535,64 @@ y^L
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_successor_direction_selection",
+              focus: {
+                id: "finite_fourier_claim_successor_direction_selection",
+                kind: "claim",
+                title: { text: "後続方向の辺の選択" },
+                labels: ["claim_successor_direction_selection"],
+                habitat: "N",
+                verification: ["sagemath/check/successor-direction-selection"],
+                lean: [
+                  "Ising2DLambda.KacWard.successorDirection_selection",
+                  "Ising2DLambda.NecSuf.KacWard.successorDirection_selection_necSuf",
+                  "Ising2DLambda.KacWard.successorDirection_selection_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、向き付き辺 ",
+                    math(String.raw`\vec e\in\vec E_L`), "、方向番号 ",
+                    math(String.raw`\delta'\in\mathbb Z/4\mathbb Z`), " を任意に取る。",
+                    "始点が ", math(String.raw`\operatorname{tgt}(\vec e)`), "、方向番号が ",
+                    math(String.raw`\delta'`), " である向き付き辺 ",
+                    math(String.raw`\vec f\in\vec E_L`), " は一意に存在する。",
+                  ]),
+                  displayMath(String.raw`\vec f\in\operatorname{Next}(\vec e)
+\quad\Longleftrightarrow\quad
+\delta'\ne\operatorname{dir}(\vec e)+2\quad(\mathbb Z/4\mathbb Z).`),
+                  paragraph([
+                    "ここで ", math(String.raw`\operatorname{Next}`), " は ",
+                    ref("def_nonbacktracking_successors"), " に従う。",
+                    "辺長一でも辺の番号と向きを区別する。実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_source_direction_bijection"), " の全単射を、組 ",
+                    math(String.raw`(\operatorname{tgt}(\vec e),\delta')\in V_L\times\mathbb Z/4\mathbb Z`),
+                    " に適用する。対応する ", math(String.raw`\vec f`), " が一意に存在する。",
+                  ]),
+                  paragraph([
+                    ref("def_edge_reversal"), " と ", ref("def_oriented_edge_endpoints"),
+                    " により ", math(String.raw`\operatorname{src}(\iota(\vec e))=\operatorname{tgt}(\vec e)`),
+                    " である。", ref("claim_reversal_direction_shift"), " より、",
+                  ]),
+                  displayMath(String.raw`\operatorname{dir}(\iota(\vec e))
+=\operatorname{dir}(\vec e)+2\quad(\because\ \blkref{claim_reversal_direction_shift}).`),
+                  paragraph([
+                    "始点と方向の一意性から ",
+                    math(String.raw`\vec f=\iota(\vec e)\Longleftrightarrow\delta'=\operatorname{dir}(\vec e)+2`),
+                    " である。", ref("def_nonbacktracking_successors"),
+                    " に代入すると主張を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
