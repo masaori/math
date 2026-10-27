@@ -73453,7 +73453,7 @@ T^{a,b}_{\varphi}(x)
                       paragraph([
                         "であり、右辺の向き付き辺は相異なり、",
                         math(String.raw`\varphi^{\circ m_C}(\vec e_C)=\vec e_C`), " である（",
-                        ref("claim_moved_orbit_closed_nonbacktracking"), "）。したがって ",
+                        ref("claim_finite_permutation_orbit_enumeration"), " を一般の有限置換へ適用する）。したがって ",
                         math(String.raw`\varphi_C`), " は",
                       ]),
                       displayMath(String.raw`(\vec e_C\ \varphi^{\circ(m_C-1)}(\vec e_C))\circ\cdots\circ
