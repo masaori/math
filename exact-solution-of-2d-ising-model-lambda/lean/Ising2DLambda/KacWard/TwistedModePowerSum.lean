@@ -60,4 +60,72 @@ theorem twistedMode_powerSum {L : ℕ} (hL : 1 ≤ L)
       rw [powerSumValue hL k]
       rfl
 
+/-- The twisted power sum evaluates a pair of target-coordinate monomials. -/
+theorem twistedMode_coordinateKernel {L : ℕ} (hL : 1 ≤ L)
+    [Fintype (RootOfUnity L)] {σ ξ : Qbar} (hσ : σ ≠ 0)
+    (hξ : ξ ^ L = σ) (i j : ℕ) (hi : i < L) (hj : j < L) :
+    (letI : Fintype {z : Qbar // z ^ L = σ} :=
+      Fintype.ofEquiv (RootOfUnity L) (twistedModeRootEquiv hL hσ hξ)
+     ∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ i * (z.1⁻¹) ^ j) =
+      if i = j then (L : Qbar) else 0 := by
+  classical
+  letI : Fintype {z : Qbar // z ^ L = σ} :=
+    Fintype.ofEquiv (RootOfUnity L) (twistedModeRootEquiv hL hσ hξ)
+  let k := i + L - j
+  have hjle : j ≤ i + L := by omega
+  have hkadd : k + j = i + L := Nat.sub_add_cancel hjle
+  have hterm (z : {z : Qbar // z ^ L = σ}) :
+      z.1 ^ i * (z.1⁻¹) ^ j = σ⁻¹ * z.1 ^ k := by
+    have hz0 : z.1 ≠ 0 := by
+      intro hzero
+      apply hσ
+      rw [← z.property, hzero]
+      simp [Nat.ne_of_gt hL]
+    apply (mul_right_cancel₀ (pow_ne_zero j hz0))
+    have hright : (σ⁻¹ * z.1 ^ k) * z.1 ^ j = z.1 ^ i := by
+      calc
+        (σ⁻¹ * z.1 ^ k) * z.1 ^ j = σ⁻¹ * z.1 ^ (k + j) := by
+          rw [mul_assoc, pow_add]
+        _ = σ⁻¹ * z.1 ^ (i + L) := by rw [hkadd]
+        _ = σ⁻¹ * (z.1 ^ i * σ) := by rw [pow_add, z.property]
+        _ = z.1 ^ i := by field_simp
+    calc
+      (z.1 ^ i * (z.1⁻¹) ^ j) * z.1 ^ j = z.1 ^ i := by
+        rw [inv_pow]
+        simp [hz0]
+      _ = (σ⁻¹ * z.1 ^ k) * z.1 ^ j := hright.symm
+  have hdiv : L ∣ k ↔ i = j := by
+    constructor
+    · intro hd
+      have hkpos : 0 < k := by dsimp [k]; omega
+      have hklt : k < 2 * L := by dsimp [k]; omega
+      have hk_eq : k = L := by
+        by_contra hne
+        rcases lt_or_gt_of_ne hne with hsmall | hlarge
+        · exact (Nat.not_dvd_of_pos_of_lt hkpos hsmall) hd
+        · have hdsub : L ∣ k - L := (Nat.dvd_sub_self_right).2 (Or.inl hd)
+          exact (Nat.not_dvd_of_pos_of_lt (by omega) (by omega)) hdsub
+      omega
+    · intro heq
+      subst j
+      have hk_eq : k = L := by omega
+      rw [hk_eq]
+  calc
+    (∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ i * (z.1⁻¹) ^ j)
+        = ∑ z : {z : Qbar // z ^ L = σ}, σ⁻¹ * z.1 ^ k := by
+          apply Finset.sum_congr rfl
+          intro z _
+          exact hterm z
+    _ = σ⁻¹ * (∑ z : {z : Qbar // z ^ L = σ}, z.1 ^ k) := by
+      rw [Finset.mul_sum]
+    _ = σ⁻¹ * (ξ ^ k * (if L ∣ k then algebraMap ℚ Qbar (L : ℚ) else 0)) := by
+      rw [twistedMode_powerSum hL hσ hξ k]
+    _ = if i = j then (L : Qbar) else 0 := by
+      simp only [hdiv]
+      by_cases heq : i = j
+      · subst j
+        have hk_eq : k = L := by omega
+        simp [hk_eq, hξ, hσ]
+      · simp [heq]
+
 end Ising2DLambda.KacWard

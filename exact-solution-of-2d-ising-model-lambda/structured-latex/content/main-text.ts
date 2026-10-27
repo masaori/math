@@ -81146,6 +81146,91 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_fourier_right_inverse",
+              focus: {
+                id: "finite_fourier_claim_twisted_fourier_right_inverse",
+                kind: "claim",
+                title: { text: "双対 Fourier 行列から作った逆候補は右逆である" },
+                labels: ["claim_twisted_fourier_right_inverse"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/twisted-fourier-right-inverse"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " と ", ref("claim_edge_mode_index_bijection"),
+                    " の全単射 ", math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に固定する。", ref("def_twisted_fourier_matrix"), " と ",
+                    ref("def_dual_fourier_matrix_inverse_candidate"), " の行列について",
+                  ]),
+                  displayMath(String.raw`F^{a,b,\kappa}G^{a,b,\kappa}=I_{\vec E_L}.`),
+                  paragraph(["等式は ", math(String.raw`\overline{\mathbb Q}`), " で成り立つ。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`\vec e,\vec f\in\vec E_L`), " を取る。",
+                    "両辺の行列成分を比較する。", ref("claim_target_direction_bijection"),
+                    " により、終点と方向がともに等しいことは ",
+                    math(String.raw`\vec e=\vec f`), " と同値である。",
+                  ]),
+                  paragraph([
+                    "横モードの境界符号を ", math(String.raw`\sigma_a=(-1)^a`),
+                    "、終点の横座標の代表を ", math(String.raw`j_e,j_f\in\{0,\ldots,L-1\}`),
+                    " とする。", math(String.raw`k=j_e+L-j_f`), " は自然数である。",
+                    "モードは零でなく ", math(String.raw`z^L=\sigma_a`), " だから",
+                  ]),
+                  displayMath(String.raw`z^{j_e}(z^{-1})^{j_f}=\sigma_a^{-1}z^k
+\qquad(\because\ \blkref{def_horizontal_twisted_modes}\text{ と体の冪法則}).`),
+                  paragraph([
+                    "横モード和を ", ref("claim_twisted_mode_power_sum"), " で評価する。",
+                    math(String.raw`0\le j_e,j_f<L`), " より ",
+                    math(String.raw`L\mid k\iff j_e=j_f`), " である。",
+                    "等しい場合は ", math(String.raw`k=L`), " かつ ",
+                    math(String.raw`\xi_a^L=\sigma_a`), " となる。したがって",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{z\in\mathcal U_a}z^{j_e}(z^{-1})^{j_f}
+&=\sigma_a^{-1}\sum_{z\in\mathcal U_a}z^k
+&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\text{ と直前の等式}\bigr)\\
+&=\sigma_a^{-1}\xi_a^k\begin{cases}L,&L\mid k,\\0,&L\nmid k\end{cases}
+&&\bigl(\because\ \blkref{claim_twisted_mode_power_sum}\bigr)\\
+&=L\,[j_e=j_f]
+&&\bigl(\because\ L\mid k\iff j_e=j_f,\ k=L\text{ if }j_e=j_f,\ \xi_a^L=\sigma_a\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "縦座標の代表 ", math(String.raw`i_e,i_f\in\{0,\ldots,L-1\}`),
+                    " についても ", ref("claim_twisted_mode_power_sum"),
+                    " を ", math(String.raw`\sigma_b=(-1)^b`), " と ",
+                    math(String.raw`\eta_b^L=\sigma_b`), " に適用し、",
+                    math(String.raw`\sum_{z\in\mathcal W_b}z^{i_e}(z^{-1})^{i_f}=L[i_e=i_f]`),
+                    " を得る。方向が異なる場合はベクトル成分の積が零である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(F^{a,b,\kappa}G^{a,b,\kappa})_{\vec e,\vec f}
+&=\sum_{\vec g\in\vec E_L}F^{a,b,\kappa}_{\vec e,\vec g}
+G^{a,b,\kappa}_{\vec g,\vec f}
+&&\bigl(\because\ \text{行列積の定義}\bigr)\\
+&=L^{-2}\sum_{(\varpi,\varsigma,\delta)\in\mathcal M_{a,b}}
+\psi^{\varpi,\varsigma,\delta}(\vec e)\bar\psi^{\varpi,\varsigma,\delta}(\vec f)
+&&\bigl(\because\ \blkref{def_twisted_fourier_matrix},\ \blkref{def_dual_fourier_matrix_inverse_candidate},\ \kappa\text{ の全単射}\bigr)\\
+&=L^{-2}[\delta_e=\delta_f]
+\left(\sum_{z\in\mathcal U_a}z^{j_e}(z^{-1})^{j_f}\right)
+\left(\sum_{z\in\mathcal W_b}z^{i_e}(z^{-1})^{i_f}\right)
+&&\bigl(\because\ \blkref{def_endpoint_mode_vector},\ \blkref{def_dual_endpoint_mode_vector}\text{ と有限和の分配律}\bigr)\\
+&=L^{-2}[\delta_e=\delta_f]L[j_e=j_f]L[i_e=i_f]
+&&\bigl(\because\ \text{上で示した二つのモード和}\bigr)\\
+&=[\vec e=\vec f]
+&&\bigl(\because\ L\ge1,\ \blkref{claim_target_direction_bijection}\bigr)\\
+&=(I_{\vec E_L})_{\vec e,\vec f}
+&&\bigl(\because\ \text{恒等行列の定義}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
               focus: {
                 id: "finite_fourier_claim_twisted_mode_wrap_phase",

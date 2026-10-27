@@ -471,13 +471,13 @@ T_{(V^{(+)})}
         String.raw`\begin{aligned}
 [\alpha X, \beta W]
 &= (\alpha X)(\beta W) - (\beta W)(\alpha X)
-   \quad (\because \text{交換子の定義}) \\
+&&\bigl(\because \text{交換子の定義}\bigr) \\
 &= \alpha\beta\,XW - \alpha\beta\,WX
-   \quad (\because \text{スカラー倍が積と可換であること}) \\
+&&\bigl(\because \text{スカラー倍が積と可換であること}\bigr) \\
 &= \alpha\beta\,(XW - WX)
-   \quad (\because \text{分配則}) \\
+&&\bigl(\because \text{分配則}\bigr) \\
 &= \alpha\beta\,[X, W]
-   \quad (\because \text{交換子の定義})
+&&\bigl(\because \text{交換子の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -514,9 +514,9 @@ T_{(V^{(+)})}
         String.raw`\begin{aligned}
 C_0
 &= \check{Z}_\mu
-   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&&\bigl(\because\ 0\ \text{重交換子は恒等写像}\bigr) \\
 &= (-1)^0(2K_1)^0\check{Z}_\mu
-   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1)
+&&\bigl(\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1\bigr)
 \end{aligned}`,
       ),
       paragraph(["となり、偶数側の右辺と一致する。"]),
@@ -533,13 +533,13 @@ C_0
         String.raw`\begin{aligned}
 C_{n+1}
 &= \left[K_1 H_1^{(+)},\ (-1)^{n/2}(2K_1)^n\check{Z}_\mu\right]
-   \quad (\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(+)},\ \check{Z}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot 2 \exp(-i\tilde\theta)\check{Y}_\mu
-   \quad (\because \text{(A)}) \\
+&&\bigl(\because \text{(A)}\bigr) \\
 &= (-1)^{n/2}(2K_1)^{n+1} \exp(-i\tilde\theta)\check{Y}_\mu
-   \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1})
+&&\bigl(\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -565,17 +565,17 @@ C_{n+1}
         String.raw`\begin{aligned}
 C_{n+1}
 &= \left[K_1 H_1^{(+)},\ (-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\check{Y}_\mu\right]
-   \quad (\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because C_{n+1} = [K_1 H_1^{(+)},\, C_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\left[H_1^{(+)},\ \check{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_1\cdot(-1)^{(n-1)/2}(2K_1)^n \exp(-i\tilde\theta)\cdot\left(-2 \exp(i\tilde\theta)\check{Z}_\mu\right)
-   \quad (\because \text{(B)}) \\
+&&\bigl(\because \text{(B)}\bigr) \\
 &= (-1)\cdot(-1)^{(n-1)/2}(2K_1)^{n+1}\,\overbrace{\exp(-i\tilde\theta)\exp(i\tilde\theta)}^{=\,1}\,\check{Z}_\mu
-   \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1}) \\
+&&\bigl(\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1}\bigr) \\
 &= (-1)^{(n-1)/2+1}(2K_1)^{n+1}\check{Z}_\mu
-   \quad (\because \exp(-i\tilde\theta)\exp(i\tilde\theta) = 1 \text{ と } (-1)\cdot(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}) \\
+&&\bigl(\because \exp(-i\tilde\theta)\exp(i\tilde\theta) = 1 \text{ と } (-1)\cdot(-1)^{(n-1)/2} = (-1)^{(n-1)/2+1}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\check{Z}_\mu
-   \quad \left(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\right)
+&&\bigl(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -603,9 +603,9 @@ C_{n+1}
         String.raw`\begin{aligned}
 D_0
 &= \check{Y}_\mu
-   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&&\bigl(\because\ 0\ \text{重交換子は恒等写像}\bigr) \\
 &= (-1)^0(2K_1)^0\check{Y}_\mu
-   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1)
+&&\bigl(\because\ (-1)^0=1\ \text{かつ}\ (2K_1)^0=1\bigr)
 \end{aligned}`,
       ),
       paragraph(["となり、偶数側の右辺と一致する。"]),
@@ -622,13 +622,13 @@ D_0
         String.raw`\begin{aligned}
 D_{n+1}
 &= \left[K_1 H_1^{(+)},\ (-1)^{n/2}(2K_1)^n\check{Y}_\mu\right]
-   \quad (\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\left[H_1^{(+)},\ \check{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_1\cdot(-1)^{n/2}(2K_1)^n\cdot\left(-2 \exp(i\tilde\theta)\check{Z}_\mu\right)
-   \quad (\because \text{(B)}) \\
+&&\bigl(\because \text{(B)}\bigr) \\
 &= (-1)^{n/2+1}(2K_1)^{n+1} \exp(i\tilde\theta)\check{Z}_\mu
-   \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1})
+&&\bigl(\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot(-2) = (-1)(2K_1)^{n+1}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -650,15 +650,15 @@ D_{n+1}
         String.raw`\begin{aligned}
 D_{n+1}
 &= \left[K_1 H_1^{(+)},\ (-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\check{Z}_\mu\right]
-   \quad (\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because D_{n+1} = [K_1 H_1^{(+)},\, D_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\left[H_1^{(+)},\ \check{Z}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_1\cdot(-1)^{(n+1)/2}(2K_1)^n \exp(i\tilde\theta)\cdot 2 \exp(-i\tilde\theta)\check{Y}_\mu
-   \quad (\because \text{(A)}) \\
+&&\bigl(\because \text{(A)}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\,\overbrace{\exp(i\tilde\theta)\exp(-i\tilde\theta)}^{=\,1}\,\check{Y}_\mu
-   \quad (\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1}) \\
+&&\bigl(\because \text{スカラー倍の交換と } K_1\cdot(2K_1)^n\cdot 2 = (2K_1)^{n+1}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_1)^{n+1}\check{Y}_\mu
-   \quad (\because \exp(i\tilde\theta)\exp(-i\tilde\theta) = 1)
+&&\bigl(\because \exp(i\tilde\theta)\exp(-i\tilde\theta) = 1\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -683,9 +683,9 @@ D_{n+1}
         String.raw`\begin{aligned}
 E_0
 &= \check{Z}_\mu
-   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&&\bigl(\because\ 0\ \text{重交換子は恒等写像}\bigr) \\
 &= (-1)^0(2K_2^*)^0\check{Z}_\mu
-   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1)
+&&\bigl(\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1\bigr)
 \end{aligned}`,
       ),
       paragraph(["となり、偶数側の右辺と一致する。"]),
@@ -702,15 +702,15 @@ E_0
         String.raw`\begin{aligned}
 E_{n+1}
 &= \left[K_2^* H_2,\ (-1)^{n/2}(2K_2^*)^n\check{Z}_\mu\right]
-   \quad (\because E_{n+1} = [K_2^* H_2,\, E_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because E_{n+1} = [K_2^* H_2,\, E_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\left[H_2,\ \check{Z}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\cdot\left(-2\,\check{Y}_\mu\right)
-   \quad (\because \text{(C)}) \\
+&&\bigl(\because \text{(C)}\bigr) \\
 &= (-1)^{n/2}(-1)(2K_2^*)^n(2K_2^*)\check{Y}_\mu
-   \quad (\because \text{スカラー倍の交換と結合。} K_2^*\cdot(-2) = (-1)(2K_2^*)) \\
+&&\bigl(\because \text{スカラー倍の交換と結合。} K_2^*\cdot(-2) = (-1)(2K_2^*)\bigr) \\
 &= (-1)^{n/2+1}(2K_2^*)^{n+1}\check{Y}_\mu
-   \quad (\because \text{冪の指数法則を } (-1) \text{ と } 2K_2^* \text{ の両方へ適用})
+&&\bigl(\because \text{冪の指数法則を } (-1) \text{ と } 2K_2^* \text{ の両方へ適用}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -732,15 +732,15 @@ E_{n+1}
         String.raw`\begin{aligned}
 E_{n+1}
 &= \left[K_2^* H_2,\ (-1)^{(n+1)/2}(2K_2^*)^n\check{Y}_\mu\right]
-   \quad (\because E_{n+1} = [K_2^* H_2,\, E_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because E_{n+1} = [K_2^* H_2,\, E_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_2^*\cdot(-1)^{(n+1)/2}(2K_2^*)^n\left[H_2,\ \check{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_2^*\cdot(-1)^{(n+1)/2}(2K_2^*)^n\cdot 2\,\check{Z}_\mu
-   \quad (\because \text{(D)}) \\
+&&\bigl(\because \text{(D)}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_2^*)^n(2K_2^*)\check{Z}_\mu
-   \quad (\because \text{スカラー倍の交換と結合}) \\
+&&\bigl(\because \text{スカラー倍の交換と結合}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_2^*)^{n+1}\check{Z}_\mu
-   \quad (\because \text{冪の指数法則})
+&&\bigl(\because \text{冪の指数法則}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -763,9 +763,9 @@ E_{n+1}
         String.raw`\begin{aligned}
 F_0
 &= \check{Y}_\mu
-   \quad (\because\ 0\ \text{重交換子は恒等写像}) \\
+&&\bigl(\because\ 0\ \text{重交換子は恒等写像}\bigr) \\
 &= (-1)^0(2K_2^*)^0\check{Y}_\mu
-   \quad (\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1)
+&&\bigl(\because\ (-1)^0=1\ \text{かつ}\ (2K_2^*)^0=1\bigr)
 \end{aligned}`,
       ),
       paragraph(["となり、偶数側の右辺と一致する。"]),
@@ -782,15 +782,15 @@ F_0
         String.raw`\begin{aligned}
 F_{n+1}
 &= \left[K_2^* H_2,\ (-1)^{n/2}(2K_2^*)^n\check{Y}_\mu\right]
-   \quad (\because F_{n+1} = [K_2^* H_2,\, F_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because F_{n+1} = [K_2^* H_2,\, F_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\left[H_2,\ \check{Y}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_2^*\cdot(-1)^{n/2}(2K_2^*)^n\cdot 2\,\check{Z}_\mu
-   \quad (\because \text{(D)}) \\
+&&\bigl(\because \text{(D)}\bigr) \\
 &= (-1)^{n/2}(2K_2^*)^n(2K_2^*)\check{Z}_\mu
-   \quad (\because \text{スカラー倍の交換と結合}) \\
+&&\bigl(\because \text{スカラー倍の交換と結合}\bigr) \\
 &= (-1)^{n/2}(2K_2^*)^{n+1}\check{Z}_\mu
-   \quad (\because \text{冪の指数法則})
+&&\bigl(\because \text{冪の指数法則}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -812,17 +812,17 @@ F_{n+1}
         String.raw`\begin{aligned}
 F_{n+1}
 &= \left[K_2^* H_2,\ (-1)^{(n-1)/2}(2K_2^*)^n\check{Z}_\mu\right]
-   \quad (\because F_{n+1} = [K_2^* H_2,\, F_n] \text{ と帰納法の仮定}) \\
+&&\bigl(\because F_{n+1} = [K_2^* H_2,\, F_n] \text{ と帰納法の仮定}\bigr) \\
 &= K_2^*\cdot(-1)^{(n-1)/2}(2K_2^*)^n\left[H_2,\ \check{Z}_\mu\right]
-   \quad (\because \text{交換子の双線型性}) \\
+&&\bigl(\because \text{交換子の双線型性}\bigr) \\
 &= K_2^*\cdot(-1)^{(n-1)/2}(2K_2^*)^n\cdot\left(-2\,\check{Y}_\mu\right)
-   \quad (\because \text{(C)}) \\
+&&\bigl(\because \text{(C)}\bigr) \\
 &= (-1)^{(n-1)/2}(-1)(2K_2^*)^n(2K_2^*)\check{Y}_\mu
-   \quad (\because \text{スカラー倍の交換と結合。} K_2^*\cdot(-2) = (-1)(2K_2^*)) \\
+&&\bigl(\because \text{スカラー倍の交換と結合。} K_2^*\cdot(-2) = (-1)(2K_2^*)\bigr) \\
 &= (-1)^{(n-1)/2+1}(2K_2^*)^{n+1}\check{Y}_\mu
-   \quad (\because \text{冪の指数法則を } (-1) \text{ と } 2K_2^* \text{ の両方へ適用}) \\
+&&\bigl(\because \text{冪の指数法則を } (-1) \text{ と } 2K_2^* \text{ の両方へ適用}\bigr) \\
 &= (-1)^{(n+1)/2}(2K_2^*)^{n+1}\check{Y}_\mu
-   \quad \left(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\right)
+&&\bigl(\because \tfrac{n-1}{2}+1 = \tfrac{n+1}{2}\bigr)
 \end{aligned}`,
       ),
       paragraph([
