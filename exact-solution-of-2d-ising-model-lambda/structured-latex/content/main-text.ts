@@ -80889,6 +80889,82 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_all_direction_seam_mode_phase",
+              focus: {
+                id: "finite_fourier_claim_all_direction_seam_mode_phase",
+                kind: "claim",
+                title: { text: "四方向の切断線位相を一つの等式にまとめる" },
+                labels: ["claim_all_direction_seam_mode_phase"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/all-direction-seam-mode-phase"],
+                lean: [
+                  "Ising2DLambda.KacWard.seamModePhase_allDirections",
+                  "Ising2DLambda.NecSuf.KacWard.seamModePhase_allDirections_necSuf",
+                  "Ising2DLambda.KacWard.seamModePhase_allDirections_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、向き付き辺 ", math(String.raw`\vec f\in\vec E_L`), " を任意に取る。",
+                    math(String.raw`\operatorname{src}(\vec f)=(i,j)`), "、",
+                    math(String.raw`\operatorname{tgt}(\vec f)=(i_{\vec f},j_{\vec f})`),
+                    " と書く。方向単位ベクトル ",
+                    math(String.raw`u(\operatorname{dir}(\vec f))=(u_1(\operatorname{dir}(\vec f)),u_2(\operatorname{dir}(\vec f)))`),
+                    " は ", ref("def_direction_unit_vector"), " に従う。",
+                  ]),
+                  displayMath(String.raw`\varepsilon_{a,b}(\vec f)\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+=\varpi^{u_2(\operatorname{dir}(\vec f))}\varsigma^{u_1(\operatorname{dir}(\vec f))}
+\varpi^{s(j)}\varsigma^{s(i)}\quad\text{in }\overline{\mathbb Q}.`),
+                  paragraph([
+                    "負の冪は零でないモードの逆元で定める（",
+                    ref("def_horizontal_twisted_modes"), "、", ref("def_vertical_twisted_modes"),
+                    "）。辺長一を含み、実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_direction_unit_vector"), " により、",
+                    "方向番号 ", math(String.raw`0,1,2,3`), " に対する右辺の前因子は順に ",
+                    math(String.raw`\varpi,\varsigma,\varpi^{-1},\varsigma^{-1}`), " である。",
+                  ]),
+                  paragraph(["方向番号が ", math(String.raw`0`), " なら、"]),
+                  displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+&=\varpi^{s(j)+1}\varsigma^{s(i)}
+&&\bigl(\because\ \blkref{claim_rightward_seam_mode_phase}\bigr)\\
+&=\varpi\,\varpi^{s(j)}\varsigma^{s(i)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の加法則}\bigr).
+\end{aligned}`),
+                  paragraph(["方向番号が ", math(String.raw`1`), " なら、"]),
+                  displayMath(String.raw`\begin{aligned}
+\varepsilon_{a,b}(\vec f)\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+&=\varpi^{s(j)}\varsigma^{s(i)+1}
+&&\bigl(\because\ \blkref{claim_downward_seam_mode_phase}\bigr)\\
+&=\varsigma\,\varpi^{s(j)}\varsigma^{s(i)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の加法則と乗法の交換律}\bigr).
+\end{aligned}`),
+                  paragraph(["方向番号が ", math(String.raw`2`), " なら、"]),
+                  displayMath(String.raw`\varepsilon_{a,b}(\vec f)\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+=\varpi^{-1}\varpi^{s(j)}\varsigma^{s(i)}
+\quad\bigl(\because\ \blkref{claim_leftward_seam_mode_phase}\bigr).`),
+                  paragraph(["方向番号が ", math(String.raw`3`), " なら、"]),
+                  displayMath(String.raw`\varepsilon_{a,b}(\vec f)\varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+=\varsigma^{-1}\varpi^{s(j)}\varsigma^{s(i)}
+\quad\bigl(\because\ \blkref{claim_upward_seam_mode_phase}\bigr).`),
+                  paragraph([
+                    "四方向は ", ref("def_oriented_edge_direction"), " の場合分けを尽くす。",
+                    "各前因子は ", ref("def_direction_unit_vector"), " の該当する二成分の冪である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_successor_direction_selection",
               focus: {
                 id: "finite_fourier_claim_successor_direction_selection",
