@@ -242,11 +242,11 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \gamma_2(\theta) = 0_{\mathbb{C}}
 &\iff \left(i\,\exp(i\theta)s_2^*\right)w(\theta) = 0_{\mathbb{C}}
-   \quad (\because \gamma_1,\gamma_2 \text{ の定義}) \\
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &\iff w(\theta) = 0_{\mathbb{C}}
-   \quad (\because i\,\exp(i\theta)s_2^* \neq 0 \text{ と、体 } \mathbb{C} \text{ が零因子を持たないこと}) \\
+   \quad (\because i\,\exp(i\theta)s_2^* \neq 0 \text{ と } \blkref{complex_numbers_form_a_field}) \\
 &\iff \begin{cases} \sin\theta = 0 \\ c_1\cos\theta = s_1c_2 \end{cases}
-   \quad (\because \text{複素数の定義の成分表示（実部と虚部が共に } 0\text{）})
+   \quad (\because \blkref{definition_of_cc}\text{ の成分表示})
 \end{aligned}`,
       ),
       paragraph([
@@ -279,7 +279,7 @@ export default defineBlocks([
 &\iff \exists k \in \mathbb{Z}:\ \tilde\theta_\mu = k\pi
    \quad (\because \sin t = 0 \iff \exists k \in \mathbb{Z}:\ t = k\pi) \\
 &\iff \exists k \in \mathbb{Z}:\ \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k\pi
-   \quad (\because \tilde\theta_\mu \text{ の定義}) \\
+   \quad (\because \blkref{antiperiodic_exp_sum}\text{ の定義}) \\
 &\iff \exists k \in \mathbb{Z}:\ \frac{2\left(\mu-\frac12\right)}{M_{\mathrm{col}}} = k
    \quad (\because \text{両辺を } \pi > 0 \text{ で割る}) \\
 &\iff \exists k \in \mathbb{Z}:\ 2\left(\mu - \tfrac12\right) = kM_{\mathrm{col}}
