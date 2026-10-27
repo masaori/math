@@ -2,6 +2,7 @@ import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
 import Ising2DLambda.KacWard.TaggedSymmetricDifferenceActiveVertices
 import Ising2DLambda.KacWard.TaggedDifferenceActiveVertices
 import Ising2DLambda.KacWard.TaggedComplementActiveVerticesConcrete
+import Ising2DLambda.KacWard.TaggedSymmetricDifferenceConcreteFromNecSuf
 import Ising2DLambda.KacWard.ReferenceLongMate
 
 namespace Ising2DLambda.KacWard
@@ -23,6 +24,21 @@ theorem taggedActiveByLabels_eq_activeVertices {L : ℕ}
     Ising2DLambda.NecSuf.KacWard.taggedPairAt, Set.mem_setOf_eq]
   rw [referenceLongMate_eq_reversal]
   simp
+
+/-- The activity predicate obtained by comparing labelled pairs is exactly
+    incidence with the concrete tagged symmetric difference. -/
+theorem taggedActiveByLabels_eq_concreteTaggedActiveVertices {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L)) :
+    taggedActiveByLabels D t = concreteTaggedActiveVertices D t := by
+  calc
+    taggedActiveByLabels D t =
+        Ising2DLambda.NecSuf.KacWard.activeVertices D
+          (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
+            PerfectMatching (OrientedEdge L)) (shortUnderlyingPairs t) :=
+      taggedActiveByLabels_eq_activeVertices D t
+    _ = concreteTaggedActiveVertices D t :=
+      (concreteTaggedActiveVertices_eq_necSuf D t).symm
 
 /-- An unoriented edge is in the complement exactly when each of its orientations
     is active in the tagged symmetric difference. -/
