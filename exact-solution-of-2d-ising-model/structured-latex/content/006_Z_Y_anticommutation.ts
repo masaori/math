@@ -464,19 +464,19 @@ Z_\mu Z_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{I}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^z\sigma^z = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^z\sigma^z = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 &&(\because\ II = I) \\
 &= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&(\because\ \text{クロネッカー積の積の規則 (2)})
+&&(\because\ \blkref{kronecker_product_rule}\text{ の単位行列の規則})
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
@@ -515,7 +515,7 @@ Z_\mu Z_\nu
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^z)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -540,7 +540,7 @@ Z_\nu Z_\mu
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z I)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -580,13 +580,13 @@ Z_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^x\sigma^z = -\,\sigma^z\sigma^x.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^z = -\,\sigma^z\sigma^x.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\mu\text{ 因子についての線型性}) \\
 &= -\,Z_\mu Z_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -619,14 +619,14 @@ Z_\mu Z_\nu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則と}\ \sigma^x\sigma^x = II = I) \\
 Z_\nu Z_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I)
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則と}\ \sigma^x\sigma^x = II = I)
 \end{aligned}`,
       ),
       paragraph([
@@ -680,13 +680,13 @@ Z_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^z\sigma^x = -\,\sigma^x\sigma^z.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^z\sigma^x = -\,\sigma^x\sigma^z.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\nu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\nu\text{ 因子についての線型性}) \\
 &= -\,Z_\mu Z_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -749,11 +749,11 @@ Z_\mu Y_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
@@ -766,11 +766,11 @@ Y_\mu Z_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
@@ -804,11 +804,11 @@ Y_\mu Z_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(-\,\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^y\sigma^z = -\,\sigma^z\sigma^y.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^y\sigma^z = -\,\sigma^z\sigma^y.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\mu\text{ 因子についての線型性}) \\
 &= -\,Z_\mu Y_\mu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -854,13 +854,13 @@ Z_\mu Y_\nu
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -891,13 +891,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -965,13 +965,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^x\sigma^z = -\,\sigma^z\sigma^x.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^z = -\,\sigma^z\sigma^x.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\mu\text{ 因子についての線型性}) \\
 &= -\,Z_\mu Y_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -1020,13 +1020,13 @@ Z_\mu Y_\nu
 \boxtimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{(\sigma^x I)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^z I)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
@@ -1057,13 +1057,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{(I\sigma^x)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
@@ -1111,13 +1111,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\nu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\nu\text{ 因子についての線型性}) \\
 &= -\,Z_\mu Y_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -1152,19 +1152,19 @@ Y_\mu Y_\mu
 &= \overbrace{(\sigma^x\sigma^x)}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^x)}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^x\sigma^x = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^x = I.\ \blkref{pauli_matrix_products}) \\
 &= \overbrace{I}^{1\text{st}}\boxtimes\cdots\boxtimes\overbrace{I}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{I}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \sigma^y\sigma^y = I.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^y\sigma^y = I.\ \blkref{pauli_matrix_products}) \\
 &= I\boxtimes\cdots\boxtimes I
 &&(\because\ II = I) \\
 &= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
-&&(\because\ \text{クロネッカー積の積の規則 (2)})
+&&(\because\ \blkref{kronecker_product_rule}\text{ の単位行列の規則})
 \end{aligned}`,
       ),
       paragraph(["であるから"]),
@@ -1198,7 +1198,7 @@ Y_\mu Y_\nu
 \boxtimes\overbrace{(I\sigma^x)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(I\sigma^x)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(I\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -1223,7 +1223,7 @@ Y_\nu Y_\mu
 \boxtimes\overbrace{(\sigma^x I)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(\sigma^x I)}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{(\sigma^y I)}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ \text{クロネッカー積の積の規則 (1)}) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
@@ -1265,13 +1265,13 @@ Y_\nu Y_\mu
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^x\sigma^y = -\,\sigma^y\sigma^x.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^x\sigma^y = -\,\sigma^y\sigma^x.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\mu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\mu\text{ 因子についての線型性}) \\
 &= -\,Y_\mu Y_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,
@@ -1304,14 +1304,14 @@ Y_\mu Y_\nu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I) \\
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則と}\ \sigma^x\sigma^x = II = I) \\
 Y_\nu Y_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \text{クロネッカー積の積の規則 (1)、}\ \sigma^x\sigma^x = II = I)
+&&(\because\ \blkref{kronecker_product_rule}\text{ の積の規則と}\ \sigma^x\sigma^x = II = I)
 \end{aligned}`,
       ),
       paragraph([
@@ -1363,13 +1363,13 @@ Y_\nu Y_\mu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \text{Pauli 行列の積}) \\
+&&(\because\ \sigma^y\sigma^x = -\,\sigma^x\sigma^y.\ \blkref{pauli_matrix_products}) \\
 &= -\left(I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I\right)
-&&(\because\ \text{第 }\nu\text{ 因子についての線型性}) \\
+&&(\because\ \blkref{kronecker_multilinear}\text{ の第 }\nu\text{ 因子についての線型性}) \\
 &= -\,Y_\mu Y_\nu
 &&(\because\ \text{上の計算})
 \end{aligned}`,

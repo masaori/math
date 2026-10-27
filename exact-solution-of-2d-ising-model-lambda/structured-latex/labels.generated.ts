@@ -613,6 +613,7 @@ export const ALL_LABELS = [
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
   "claim_transition_entries_in_mu8",
+  "claim_transition_on_endpoint_mode_vector",
   "claim_transposition_sign_on_finite_ordered_set",
   "claim_transverse_crossing_symmetric",
   "claim_transverse_translates_of_periodic_plane_lift_disjoint",

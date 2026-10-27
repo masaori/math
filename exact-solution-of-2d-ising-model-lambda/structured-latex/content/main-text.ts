@@ -81019,6 +81019,97 @@ y^L
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_transition_on_endpoint_mode_vector",
+              focus: {
+                id: "finite_fourier_claim_transition_on_endpoint_mode_vector",
+                kind: "claim",
+                title: { text: "遷移行列を終点 Fourier ベクトルに作用させる" },
+                labels: ["claim_transition_on_endpoint_mode_vector"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/transition-on-endpoint-mode-vector"],
+                lean: [
+                  "Ising2DLambda.KacWard.transition_on_endpointModeVector",
+                  "Ising2DLambda.NecSuf.KacWard.transition_on_endpointModeVector_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、方向 ", math(String.raw`\delta_0\in\mathbb Z/4\mathbb Z`),
+                    "、向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " に対し、",
+                  ]),
+                  displayMath(String.raw`\bigl(M^{a,b}\psi^{\varpi,\varsigma,\delta_0}\bigr)(\vec e)
+=\widehat M(\varpi,\varsigma)_{\operatorname{dir}(\vec e),\delta_0}
+\psi^{\varpi,\varsigma,\operatorname{dir}(\vec e)}(\vec e)
+\quad\text{in }\overline{\mathbb Q}.`),
+                  paragraph([
+                    "行列とベクトルは ", ref("def_kac_ward_transition_matrices"), "、",
+                    ref("def_mode_small_matrix"), "、", ref("def_endpoint_mode_vector"),
+                    " に従う。辺長一を含み、実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`\delta:=\operatorname{dir}(\vec e)`), "、",
+                    math(String.raw`\operatorname{tgt}(\vec e)=(i,j)`), " と置く。",
+                    ref("claim_successor_direction_selection"), " により、始点が ",
+                    math(String.raw`(i,j)`), " で方向が ", math(String.raw`\delta_0`),
+                    " の辺 ", math(String.raw`\vec f`), " は一意である。",
+                  ]),
+                  paragraph([
+                    "まず ", math(String.raw`\delta_0=\delta+2`), " とする。",
+                    ref("claim_successor_direction_selection"),
+                    " より該当する後続辺は無い。",
+                    ref("def_endpoint_mode_vector"), " により、その他の後続辺では ",
+                    math(String.raw`\psi^{\varpi,\varsigma,\delta_0}(\vec g)=0`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(M^{a,b}\psi^{\varpi,\varsigma,\delta_0}\bigr)(\vec e)
+&=\sum_{\vec g\in\operatorname{Next}(\vec e)}
+  \varepsilon_{a,b}(\vec g)\rho(\vec e,\vec g)
+  \psi^{\varpi,\varsigma,\delta_0}(\vec g)
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{claim_successor_direction_selection},\ \blkref{def_endpoint_mode_vector}\bigr)\\
+&=\widehat M(\varpi,\varsigma)_{\delta,\delta_0}
+  \psi^{\varpi,\varsigma,\delta}(\vec e)
+&&\bigl(\because\ \blkref{def_mode_small_matrix},\ \delta_0=\delta+2\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "次に ", math(String.raw`\delta_0\ne\delta+2`), " とする。",
+                    ref("claim_successor_direction_selection"),
+                    " により、方向 ", math(String.raw`\delta_0`),
+                    " の後続辺は ", math(String.raw`\vec f`), " だけである。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(M^{a,b}\psi^{\varpi,\varsigma,\delta_0}\bigr)(\vec e)
+&=\sum_{\vec g\in\operatorname{Next}(\vec e)}
+  \varepsilon_{a,b}(\vec g)\rho(\vec e,\vec g)
+  \psi^{\varpi,\varsigma,\delta_0}(\vec g)
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\bigr)\\
+&=\varepsilon_{a,b}(\vec f)\rho(\vec e,\vec f)
+  \psi^{\varpi,\varsigma,\delta_0}(\vec f)
+&&\bigl(\because\ \blkref{claim_successor_direction_selection},\ \blkref{def_endpoint_mode_vector}\bigr)\\
+&=\rho(\vec e,\vec f)\varepsilon_{a,b}(\vec f)
+  \varpi^{s(j_{\vec f})}\varsigma^{s(i_{\vec f})}
+&&\bigl(\because\ \blkref{def_endpoint_mode_vector},\ \overline{\mathbb Q}\text{ の交換律}\bigr)\\
+&=\rho(\vec e,\vec f)\varpi^{u_2(\delta_0)}\varsigma^{u_1(\delta_0)}
+  \varpi^{s(j)}\varsigma^{s(i)}
+&&\bigl(\because\ \blkref{claim_all_direction_seam_mode_phase}\bigr)\\
+&=\widehat M(\varpi,\varsigma)_{\delta,\delta_0}
+  \psi^{\varpi,\varsigma,\delta}(\vec e)
+&&\bigl(\because\ \blkref{def_rotation_phase},\ \blkref{def_mode_small_matrix},\ \blkref{def_endpoint_mode_vector}\bigr).
+\end{aligned}`),
+                  paragraph(["二つの場合は方向 ", math(String.raw`\delta_0`), " を尽くす。"]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

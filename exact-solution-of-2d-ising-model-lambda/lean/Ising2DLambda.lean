@@ -1498,3 +1498,5 @@ import Ising2DLambda.KacWard.UpwardSeamModePhaseFromNecSuf
 import Ising2DLambda.KacWard.SeamModePhaseAllDirections
 import Ising2DLambda.NecSuf.KacWard.SeamModePhaseAllDirections
 import Ising2DLambda.KacWard.SeamModePhaseAllDirectionsFromNecSuf
+import Ising2DLambda.KacWard.TransitionOnEndpointModeVector
+import Ising2DLambda.NecSuf.KacWard.TransitionOnEndpointModeVector
