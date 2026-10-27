@@ -689,6 +689,7 @@ export const ALL_LABELS = [
   "def_edge_sequence_seam_parities",
   "def_edge_subset_incidence_count",
   "def_edge_subset_spin_sum",
+  "def_endpoint_mode_vector",
   "def_even_edge_subset",
   "def_even_orbit_coloring",
   "def_even_orbit_coordinate",
