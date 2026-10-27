@@ -81004,6 +81004,68 @@ y^L
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_twisted_fourier_left_inverse",
+              focus: {
+                id: "finite_fourier_claim_twisted_fourier_left_inverse",
+                kind: "claim",
+                title: { text: "双対 Fourier 行列から作った逆候補は左逆である" },
+                labels: ["claim_twisted_fourier_left_inverse"],
+                habitat: "Qbar",
+                lean: [
+                  "Ising2DLambda.KacWard.twistedFourier_leftInverse",
+                  "Ising2DLambda.NecSuf.KacWard.fourier_leftInverse_necSuf",
+                  "Ising2DLambda.KacWard.twistedFourier_leftInverse_from_necSuf",
+                ],
+                verification: ["sagemath/check/twisted-fourier-left-inverse"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " と ", ref("claim_edge_mode_index_bijection"),
+                    " の全単射 ", math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`),
+                    " を任意に固定する。", ref("def_twisted_fourier_matrix"), " と ",
+                    ref("def_dual_fourier_matrix_inverse_candidate"), " の ",
+                    math(String.raw`\overline{\mathbb Q}`), " 係数行列について",
+                  ]),
+                  displayMath(String.raw`G^{a,b,\kappa}F^{a,b,\kappa}=I_{\vec E_L}`),
+                  paragraph(["が成り立つ。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`\vec g,\vec h\in\vec E_L`), " を取る。",
+                    math(String.raw`\kappa(\vec g)=(\varpi,\varsigma,\delta)`), "、",
+                    math(String.raw`\kappa(\vec h)=(\varpi',\varsigma',\delta')`),
+                    " と書く。", math(String.raw`\delta\ne\delta'`), " の場合は ",
+                    ref("claim_distinct_direction_dual_inner_zero"), "、",
+                    math(String.raw`\delta=\delta'`), " の場合は ",
+                    ref("claim_same_direction_dual_inner_orthogonality"),
+                    " を使う。全単射 ", math(String.raw`\kappa`), " により二つのモード添字が等しいことと ",
+                    math(String.raw`\vec g=\vec h`), " は同値である。",
+                    "角括弧 ", math(String.raw`[\vec g=\vec h]`), " は等しいとき一、異なるとき零の ",
+                    math(String.raw`\overline{\mathbb Q}`), " の値を表す。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(G^{a,b,\kappa}F^{a,b,\kappa})_{\vec g,\vec h}
+&=\sum_{\vec e\in\vec E_L}G^{a,b,\kappa}_{\vec g,\vec e}F^{a,b,\kappa}_{\vec e,\vec h}
+&&\bigl(\because\ \text{行列積の定義}\bigr)\\
+&=L^{-2}\sum_{\vec e\in\vec E_L}
+\bar\psi^{\varpi,\varsigma,\delta}(\vec e)
+\psi^{\varpi',\varsigma',\delta'}(\vec e)
+&&\bigl(\because\ \blkref{def_dual_fourier_matrix_inverse_candidate},\ \blkref{def_twisted_fourier_matrix}\bigr)\\
+&=L^{-2}L^2\,[\vec g=\vec h]
+&&\bigl(\because\ \blkref{claim_distinct_direction_dual_inner_zero},\ \blkref{claim_same_direction_dual_inner_orthogonality},\ \kappa\text{ の単射性}\bigr)\\
+&=[\vec g=\vec h]
+&&\bigl(\because\ L\ge1\text{ と }\overline{\mathbb Q}\text{ の四則}\bigr)\\
+&=(I_{\vec E_L})_{\vec g,\vec h}
+&&\bigl(\because\ \text{恒等行列の定義}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_twisted_mode_wrap_phase",
               focus: {
                 id: "finite_fourier_claim_twisted_mode_wrap_phase",

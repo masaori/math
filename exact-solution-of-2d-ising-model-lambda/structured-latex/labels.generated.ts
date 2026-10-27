@@ -624,6 +624,7 @@ export const ALL_LABELS = [
   "claim_trivial_sector_configuration_reconstruction",
   "claim_twist_sign_from_parity",
   "claim_twist_sign_nonzero",
+  "claim_twisted_fourier_left_inverse",
   "claim_twisted_mode_ratio_root",
   "claim_twisted_mode_sets_card",
   "claim_twisted_mode_wrap_phase",

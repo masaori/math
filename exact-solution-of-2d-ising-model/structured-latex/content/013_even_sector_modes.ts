@@ -2441,7 +2441,7 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
 &= \sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(-ik\tilde\theta_{M_{\mathrm{col}}+1-\mu})
 && (\because \blkref{def_half_integer_checkZ}) \\
 &= \sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(ik\tilde\theta_\mu)
-&& (\because \text{conjugate\_index\_of\_check\_Z\_Y (2)})
+&& (\because \blkref{conjugate_index_of_check_Z_Y}\text{ (2)})
 \end{aligned}`,
       ),
       paragraph([
@@ -2478,12 +2478,12 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
 && (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\sum_{j=1}^{M_{\mathrm{col}}} Z_kY_j\,
    \exp(i(k-j)\tilde\theta_\mu)
-&& (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&& (\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\sum_{j=1}^{M_{\mathrm{col}}} Z_kY_j
    \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(k-j)\tilde\theta_\mu)
 && (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{j=1}^{M_{\mathrm{col}}} Z_jY_j\cdot M_{\mathrm{col}}
-&& (\because \text{antiperiodic\_exp\_sum}) \\
+&& (\because \blkref{antiperiodic_exp_sum}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}} Z_jY_j
 && (\because \text{スカラー } \tfrac{1}{M_{\mathrm{col}}} \text{ と } M_{\mathrm{col}} \text{ の相殺}) \\
 &= H_2
@@ -2559,12 +2559,12 @@ H_2 = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_{M_{\m
 && (\because \text{積を二重和へ分配}) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_jZ_k\,
    \exp(-i(j-k+1)\tilde\theta_\mu)
-&& (\because \text{theorem\_exp\_product}\ (n=1)) \\
+&& (\because \blkref{theorem_exp_product}\ (n=1)) \\
 &= \frac{1}{M_{\mathrm{col}}}\sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_jZ_k
    \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(-i(j-k+1)\tilde\theta_\mu)
 && (\because \text{有限和の順序交換}) \\
 &= \frac{1}{M_{\mathrm{col}}}\left(\sum_{j=1}^{M_{\mathrm{col}}-1} Y_jZ_{j+1}\cdot M_{\mathrm{col}} + Y_{M_{\mathrm{col}}}Z_1\cdot(-M_{\mathrm{col}})\right)
-&& (\because \text{antiperiodic\_exp\_sum と直上の 2 つの場合分け}) \\
+&& (\because \blkref{antiperiodic_exp_sum}\text{ と直上の 2 つの場合分け}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}-1} Y_jZ_{j+1} - Y_{M_{\mathrm{col}}}Z_1
 && (\because \text{スカラー } \tfrac{1}{M_{\mathrm{col}}} \text{ の分配と } \tfrac{1}{M_{\mathrm{col}}}\cdot M_{\mathrm{col}} = 1,\ \tfrac{1}{M_{\mathrm{col}}}\cdot(-M_{\mathrm{col}}) = -1 \text{ の相殺}) \\
 &= H_1^{(+)}
