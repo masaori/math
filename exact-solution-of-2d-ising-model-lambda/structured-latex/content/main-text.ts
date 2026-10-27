@@ -6546,6 +6546,53 @@ N_{k,l}
       role: "subsection",
       element: {
         kind: "section",
+        id: "tools_heading_block_diagonal_determinant_fiber_reindex",
+        labels: [],
+        title: { text: "ブロック対角行列の行列式をファイバーの置換の組へ再添字付けする" },
+        children: [{
+          role: "primary",
+          element: {
+            kind: "elementGroup",
+            id: "group_of_block_diagonal_determinant_fiber_reindex",
+            focus: {
+              id: "tools_claim_block_diagonal_determinant_fiber_reindex",
+              kind: "claim",
+              title: { text: "ブロック対角行列の行列式のファイバー別再添字付け" },
+              labels: ["claim_block_diagonal_determinant_fiber_reindex"],
+              habitat: "Qbar",
+              verification: ["sagemath/check/block-diagonal-determinant-fiber-reindex"],
+              lean: [
+                "Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_det_eq_sum_fiber_permutation_families",
+                "Ising2DLambda.NecSuf.AlgebraicEigenvalue.blockPreserving_weightedSum_reindex",
+              ],
+              statement: [
+                paragraph(["有限線型順序集合 ", math(String.raw`\mathcal J`), "、有限集合 ", math(String.raw`\mathcal K`), "、写像 ", math(String.raw`b:\mathcal J\to\mathcal K`), " と ", ref("def_qbar_polynomial_matrix"), " の行列 ", math(String.raw`B\in\mathrm{Mat}_{\mathcal J}(\overline{\mathbb Q}[x])`), " を取る。", math(String.raw`b(i)\ne b(j)`), " なら ", math(String.raw`B_{i,j}=0`), " とする。各 ", math(String.raw`k\in\mathcal K`), " に対し ", ref("claim_block_preserving_permutation_bijection"), " のファイバー ", math(String.raw`\mathcal J_k`), " を用いる。"]),
+                paragraph(["置換の組 ", math(String.raw`\boldsymbol\tau=(\tau_k)_{k\in\mathcal K}\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)`), " を ", ref("claim_block_preserving_permutation_bijection"), " の写像で貼り合わせた置換を ", math(String.raw`\operatorname{Glue}(\boldsymbol\tau)`), " と書く。このとき ", ref("def_qbar_polynomial_determinant"), " の行列式は"]),
+                displayMath(String.raw`\det_x(B)=\sum_{\boldsymbol\tau\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\operatorname{Glue}(\boldsymbol\tau)))}\prod_{i\in\mathcal J}B_{i,\operatorname{Glue}(\boldsymbol\tau)(i)}\in\overline{\mathbb Q}[x]`),
+                paragraph(["である。空のファイバーには空置換が一つあるので、その場合も同じ和で表せる。実数体・複素数体は使わない。"]),
+              ],
+              proof: [
+                paragraph(["各 ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " に対し、符号付き項を ", math(String.raw`T(\sigma):=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\prod_{i\in\mathcal J}B_{i,\sigma(i)}\in\overline{\mathbb Q}[x]`), " と置く。", ref("claim_block_diagonal_zero_terms"), " によりブロックを保たない置換の項は消える。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(B)
+&=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}T(\sigma)
+&&(\because\ \blkref{claim_block_diagonal_zero_terms})\\
+&=\sum_{\boldsymbol\tau\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)}T(\operatorname{Glue}(\boldsymbol\tau))
+&&(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ の全単射による再添字付け})\\
+&=\sum_{\boldsymbol\tau\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\operatorname{Glue}(\boldsymbol\tau)))}\prod_{i\in\mathcal J}B_{i,\operatorname{Glue}(\boldsymbol\tau)(i)}
+&&(\because\ T\text{ の定義})
+\end{aligned}`),
+                paragraph(["と得る。空集合を含め、全ての和と積は有限である。"]),
+              ],
+            },
+          },
+        }],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "tools_heading_polynomial_product_of_sums",
         labels: [],
         title: { text: "多項式の有限和と有限積" },
