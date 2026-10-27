@@ -330,13 +330,13 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
         String.raw`\begin{aligned}
 T_{(V^{(+)})}
 &=T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \blkref{def_T_V_plus}\right) \\
+&&\bigl(\because\ \blkref{def_T_V_plus}\bigr)\\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\right) \\
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
 &= T_{\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}}
-   \quad \left(\because \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\right) \\
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
 &= T_{V^{(+)}}
-   \quad \left(\because \blkref{def_V_plus}\right)
+&&\bigl(\because\ \blkref{def_V_plus}\bigr)
 \end{aligned}`,
       ),
       paragraph([
