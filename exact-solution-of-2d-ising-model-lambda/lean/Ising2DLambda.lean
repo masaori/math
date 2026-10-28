@@ -1575,3 +1575,6 @@ import Ising2DLambda.KacWard.ModeSmallMatrixFourCycles
 import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixFourCycles
 import Ising2DLambda.KacWard.ModeSmallMatrixRemainingTerms
 import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixRemainingTerms
+import Ising2DLambda.KacWard.ModeSmallMatrixSignedSumAlgebra
+import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixSignedSumAlgebra
+import Ising2DLambda.KacWard.ModeSmallMatrixSignedSumAlgebraFromNecSuf

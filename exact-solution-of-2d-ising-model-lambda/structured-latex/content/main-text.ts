@@ -82570,6 +82570,54 @@ A_{0,3}A_{1,0}A_{2,1}A_{3,2}
             role: "supporting",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_small_matrix_signed_sum_algebra",
+              focus: {
+                id: "finite_fourier_claim_mode_small_matrix_signed_sum_algebra",
+                kind: "claim",
+                title: { text: "九つの置換項の符号付き和を分散因子へ整理する" },
+                labels: ["claim_mode_small_matrix_signed_sum_algebra"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-small-matrix-signed-sum-algebra"],
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix_signed_sum_algebra",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix_signed_sum_algebra",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_signed_sum_algebra_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取り、", math(String.raw`d_0:=1-x\varpi,\ d_1:=1-x\varsigma,\ d_2:=1-x\varpi^{-1},\ d_3:=1-x\varsigma^{-1}`),
+                    " と置く。次の等式は ", math(String.raw`\overline{\mathbb Q}[x]`), " で成り立つ。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+&d_0d_1d_2d_3-x^2(\varpi^{-1}\varsigma^{-1}d_0d_1
++\varpi^{-1}\varsigma d_0d_3+\varpi\varsigma d_2d_3
++\varpi\varsigma^{-1}d_1d_2)+4x^4\\
+&\qquad=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1}).
+\end{aligned}`),
+                  paragraph(["多項式中のモード係数は ", ref("def_qbar_constant_embedding"), " で埋め込む。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph(["各モードは冪根なので零でない。", math(String.raw`S:=\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1}`), " と置く。分配律と逆元の等式で左辺を次数ごとに整理する。"]),
+                  displayMath(String.raw`\begin{aligned}
+&d_0d_1d_2d_3-x^2(\varpi^{-1}\varsigma^{-1}d_0d_1
++\varpi^{-1}\varsigma d_0d_3+\varpi\varsigma d_2d_3
++\varpi\varsigma^{-1}d_1d_2)+4x^4\\
+&=1-xS+2x^2+x^3S+x^4
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律と }\varpi\varpi^{-1}=\varsigma\varsigma^{-1}=1\bigr)\\
+&=(1+x^2)^2-x(1-x^2)S
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_mode_small_matrix_remaining_terms",
               focus: {
                 id: "finite_fourier_claim_mode_small_matrix_remaining_terms",
