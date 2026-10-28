@@ -60,11 +60,11 @@ for kap in KAPPAS:
     B = PI ** 2 / (12 * (1 - PI ** 2 / 24) * (2 - PI ** 2 / 24))
     c4a = (-(PI / 2) * mp.cosh(kap / 2) <= R <= 2 * d ** 2 / PI ** 2 + B)
     c4 = c4a and abs(R) <= mp.mpf('1.621')
-    c5 = (0 <= T <= mp.mpf('3.614'))
+    c5 = (0 <= T <= mp.mpf('3.615'))
     c6 = step6 <= mp.mpf('2.201')
     ok = c4 and c5 and c6
     print(f"  kappa={mp.nstr(kap,4)}: |R|={mp.nstr(abs(R),8)} (<=1.621 {int(c4)}), "
-          f"(両側 {int(c4a)}), T={mp.nstr(T,8)} (<=3.614 {int(c5)}), "
+          f"(両側 {int(c4a)}), T={mp.nstr(T,8)} (<=3.615 {int(c5)}), "
           f"Step6={mp.nstr(step6,8)} (<=2.201 {int(c6)})  -> {'PASS' if ok else 'FAIL'}")
     all_ok = ok and all_ok
 

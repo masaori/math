@@ -2112,17 +2112,19 @@ R
         String.raw`\begin{aligned}
 T
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{S^{3/2}}
-   \quad (\because \text{直前の各点評価と (R3) の単調性}) \\
+&& (\because \text{直前の各点評価と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{\left(\delta^2+\frac{c_0^2\theta^2}{4}\right)^{3/2}}
-   \quad (\because \text{(R3) の単調性}) \\
+&& (\because \blkref{elementary_sine_bounds}\text{ と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\cdot\frac{2}{c_0\delta^2}
-   \quad (\because \text{closed\_form\_log\_integral (3)}) \\
+&& (\because \blkref{closed_form_log_integral}\text{ (3)}) \\
 &= \frac{4\delta^2\cosh^2\!\left(\frac{\kappa}{2}\right)}{4}\cdot\frac{2}{c_0\delta^2}
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)：} \sinh\kappa = 2\delta\cosh(\tfrac\kappa2)) \\
-&= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0} \\
+&& (\because \blkref{cosh_addition_and_half_angle}\text{ (2)}:\ \sinh\kappa=2\delta\cosh(\tfrac\kappa2)) \\
+&= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0}
+&& (\because \delta>0\text{ と }\mathbb R\text{ の四則}) \\
 &\leq \frac{2\cdot 1.0315^2}{0.5887}
-   \quad (\because \kappa \leq \tfrac12 \text{ と elementary\_sine\_bounds の } c_0 \geq 0.5887) \\
-&\leq 3.614
+&& (\because \kappa \leq \tfrac12,\ \cosh(\tfrac\kappa2)\leq1.0315,\ \blkref{elementary_sine_bounds}:c_0\geq0.5887) \\
+&\leq 3.615
+&& (\because \text{有理数の大小比較})
 \end{aligned}`,
       ),
       paragraph([
@@ -2209,10 +2211,10 @@ T
 &\leq \left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right|
  + \frac{\cosh\kappa}{2}|R| + |T|
    \quad (\because \text{三角不等式}) \\
-&\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.614
+&\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.615
    \quad (\because \text{Step 4, Step 5, Step 6}) \\
-&\leq 2.201 + 0.915 + 3.614 \\
-&= 6.730
+&\leq 2.201 + 0.915 + 3.615 \\
+&= 6.731
 \end{aligned}`,
       ),
       paragraph([
@@ -2221,7 +2223,7 @@ T
       ]),
       displayMath(
         String.raw`\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{\kappa}\right|
-\ \leq\ \frac{6.730}{6.2831} \ \leq\ 1.08 \ \leq\ \frac{6}{5}`,
+\ \leq\ \frac{6.731}{6.2831} \ \leq\ 1.08 \ \leq\ \frac{6}{5}`,
       ),
       paragraph([
         "最後に ",
