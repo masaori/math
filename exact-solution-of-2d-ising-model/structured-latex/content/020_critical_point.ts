@@ -2246,10 +2246,11 @@ T
         String.raw`\begin{aligned}
 2\pi\,G''(\kappa)
 &= \frac{\cosh\kappa}{2}J - T
-   \quad (\because \text{Step 2, Step 3}) \\
+&&\bigl(\because\ \text{Step 2 と Step 3}\bigr) \\
 &= \frac{\cosh\kappa}{2}\left(2\log\frac{\pi}{\delta} + R\right) - T
-   \quad (\because \text{Step 4}) \\
+&&\bigl(\because\ \text{Step 4 の }J\text{ の表示}\bigr) \\
 &= \cosh\kappa\,\log\frac{\pi}{\delta} + \frac{\cosh\kappa}{2}R - T
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
 \end{aligned}`,
       ),
       paragraph(["したがって"]),
@@ -2258,13 +2259,13 @@ T
 \left|2\pi\,G''(\kappa) - \log\frac{1}{\kappa}\right|
 &\leq \left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right|
  + \frac{\cosh\kappa}{2}|R| + |T|
-   \quad (\because \text{三角不等式}) \\
+&&\bigl(\because\ \text{直前の }G''\text{ の表示と三角不等式}\bigr) \\
 &\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.615
-   \quad (\because \text{Step 4, Step 5, Step 6}) \\
+&&\bigl(\because\ \text{Step 4、Step 5、Step 6 の上界}\bigr) \\
 &\leq 2.201 + 0.915 + 3.615
-   \quad (\because \tfrac{1.1277}{2}\cdot1.621\leq0.915) \\
+&&\bigl(\because\ \tfrac{1.1277}{2}\cdot1.621\leq0.915\bigr) \\
 &= 6.731
-   \quad (\because \text{有理数の加法})
+&&\bigl(\because\ \text{有理数の加法}\bigr)
 \end{aligned}`,
       ),
       paragraph([

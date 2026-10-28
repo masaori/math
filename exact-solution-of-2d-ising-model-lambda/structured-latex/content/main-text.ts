@@ -82892,6 +82892,60 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_mode_product",
+              focus: {
+                id: "finite_fourier_claim_dispersion_mode_product",
+                kind: "theorem",
+                title: { text: "Kac--Ward 行列式のモード積公式" },
+                labels: ["claim_dispersion_mode_product"],
+                standing: "mainTheorem",
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-mode-product"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_mode_product",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_mode_product_necSuf",
+                  "Ising2DLambda.KacWard.dispersion_mode_product_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。",
+                    ref("def_kac_ward_determinants"), " の多項式は、",
+                    ref("def_dispersion_polynomial"), " の有限積に等しい。",
+                  ]),
+                  displayMath(String.raw`D^{a,b}_L(x)=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(x;\varpi,\varsigma)\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["右辺は Fourier 添字の全単射の選択に依らない。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_edge_mode_index_bijection"), " により全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`), " を一つ取る。",
+                    math(String.raw`\mathcal K:=\mathcal U_a\times\mathcal W_b`), " と置き、",
+                    "各 ", math(String.raw`m=(\varpi,\varsigma)\in\mathcal K`), " について ",
+                    ref("claim_fourier_fiber_direction_bijection"), " のファイバー ",
+                    math(String.raw`\mathcal J_m`), " を使う。行列のハットは ",
+                    ref("def_qbar_constant_embedding"), " の成分ごとの適用である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+D^{a,b}_L(x)
+&=\prod_{m\in\mathcal K}\det_x\!\left(\left.\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)\right|_{\mathcal J_m\times\mathcal J_m}\right)
+&&\bigl(\because\ \blkref{claim_fourier_block_fiber_determinant_product}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal K}\det_x\!\left(I_{\mathbb Z/4\mathbb Z}-x\widehat{\breve M(\varpi,\varsigma)}\right)
+&&\bigl(\because\ \blkref{claim_fourier_fiber_direction_determinant}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal K}\bigl((1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_determinant_dispersion}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal K}\Delta(x;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
+\end{aligned}`),
+                  paragraph(["右辺には ", math(String.raw`\kappa`), " が現れないので、等式は全単射の選択に依らない。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_dispersion_algebraic_onsager_form",
               focus: {
                 id: "finite_fourier_claim_dispersion_algebraic_onsager_form",
