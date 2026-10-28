@@ -75294,9 +75294,12 @@ q_{a,b}(h,v)
 &&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
 &\equiv(h_1+h_2)(v_1+v_2)+(1-a)(h_1+h_2)+(1-b)(v_1+v_2)
 &&\bigl(\because\ h\equiv h_1+h_2,\ v\equiv v_1+v_2\pmod2\bigr)\\
+&\equiv h_1v_1+h_1v_2+h_2v_1+h_2v_2
++(1-a)h_1+(1-a)h_2+(1-b)v_1+(1-b)v_2
+&&\bigl(\because\ \mathbb Z\text{ の分配律}\bigr)\\
 &\equiv\bigl(h_1v_1+(1-a)h_1+(1-b)v_1\bigr)
 +\bigl(h_2v_2+(1-a)h_2+(1-b)v_2\bigr)+h_1v_2+h_2v_1
-&&\bigl(\because\ \mathbb Z\text{ の分配律と交換律}\bigr)\\
+&&\bigl(\because\ \mathbb Z\text{ の交換律と結合律}\bigr)\\
 &\equiv q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1\pmod2
 &&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
 \end{aligned}`),
@@ -75307,8 +75310,10 @@ q_{a,b}(h,v)
 &&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
 &=(-1)^{q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1}
 &&\bigl(\because\ \text{上の合同式と }(-1)^2=1\bigr)\\
+&=(-1)^{q_{a,b}(h_1,v_1)}(-1)^{q_{a,b}(h_2,v_2)}(-1)^{h_1v_2+h_2v_1}
+&&\bigl(\because\ \text{整数指数の加法則}\bigr)\\
 &=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と整数指数の加法則}\bigr).
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
 \end{aligned}`),
                     ],
                   },
@@ -76120,6 +76125,106 @@ n_{\mathrm{ct}}(\gamma_A)
 &&\bigl(\because\ \blkref{claim_edge_distinct_crossing_elimination_parity}\bigr).
 \end{aligned}`),
                       paragraph(["使った集合と和は全て有限であり、位相は代数的数の整数冪である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_reference_matching_constant_term",
+              labels: [],
+              title: { text: "基準マッチングの符号と定数項" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_reference_matching_constant_term",
+                  focus: {
+                    id: "kac_ward_claim_reference_matching_constant_term",
+                    kind: "claim",
+                    title: { text: "基準マッチングの長い標識の項は一である" },
+                    labels: ["claim_reference_matching_constant_term"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/reference-matching-constant-term"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        " とする。", ref("def_reference_long_pairs"), " の基準完全マッチング ",
+                        math(String.raw`\mathcal D_0`), " の全ての対に長い標識を付ける。",
+                        ref("claim_tagged_matching_expansion"), " のこの項を ",
+                        math(String.raw`M_{\mathcal D_0,\varnothing}(x)\in\overline{\mathbb Q}[x]`),
+                        " とすると、辺番号を先に、向きを後に比べる辞書式順序で",
+                      ]),
+                      displayMath(String.raw`\operatorname{sgn}(\mathcal D_0)=1,\qquad
+\mathsf L_{(e,0),(e,1)}=1\quad(e\in E_L),\qquad
+M_{\mathcal D_0,\varnothing}(x)=1.`),
+                      paragraph(["この等式は辺長一と四つのねじれを含む。実数体と複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("def_oriented_edges"), " より ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
+                        " である。辞書式順序では各辺の二向き ",
+                        math(String.raw`(e,0)\prec(e,1)`), " が隣接する。",
+                        ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"),
+                        " により、これらの隣接対を辺番号順に並べた列は基準完全マッチングの列挙である。",
+                        ref("def_perfect_matching_sign"), " の端点列は昇順の全元列に一致するので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\mathcal D_0)
+&=\operatorname{sgn}(\operatorname{id}_{\vec E_L})
+&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
+&=1
+&&\bigl(\because\ \text{恒等置換の符号}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        math(String.raw`e\in E_L`), " を固定する。", ref("def_oriented_edge_direction"),
+                        " により方向代表は横辺で ", math(String.raw`(0,2)`),
+                        "、縦辺で ", math(String.raw`(1,3)`), " である。",
+                        ref("def_seam_parities"), " と ", ref("def_twist_parity"),
+                        " により切断線の偶奇は辺の反転で変わらない。",
+                        ref("def_gauged_terminal_matrix"), " と ", ref("def_diagonal_gauge"),
+                        " の重みへ代入すると、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+w_{(e,0),(e,1)}
+&=\zeta_8^{\,2}v_{(e,0)}u_{(e,1)}
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
+&=\zeta_8^{\,2+r_4(\operatorname{dir}(e,0))-r_4(\operatorname{dir}(e,1))}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転での偶奇の一致}\bigr)\\
+&=\zeta_8^{\,0}
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の二つの場合}\bigr)\\
+&=1
+&&\bigl(\because\ \text{零乗}\bigr).
+\end{aligned}`),
+                      paragraph([ref("def_tagged_matching_contributions"), " の長い寄与を求める。"]),
+                      displayMath(String.raw`\begin{aligned}
+\mathsf L_{(e,0),(e,1)}
+&=C(w_{(e,0),(e,1)})
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と反転対の条件}\bigr)\\
+&=C(1)
+&&\bigl(\because\ \text{上で求めた重み}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        ref("claim_tagged_matching_expansion"), " の項は短い標識を持たない。",
+                        "整数の符号は標準の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
+                        " で定数多項式へ送る。有限積と符号の等号から",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+M_{\mathcal D_0,\varnothing}(x)
+&=C(\operatorname{sgn}(\mathcal D_0))
+\prod_{e\in E_L}\mathsf L_{(e,0),(e,1)}
+&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=1\cdot\prod_{e\in E_L}1
+&&\bigl(\because\ \text{上の符号と長い寄与}\bigr)\\
+&=1
+&&\bigl(\because\ \text{有限積の単位元}\bigr).
+\end{aligned}`),
                     ],
                   },
                 },
