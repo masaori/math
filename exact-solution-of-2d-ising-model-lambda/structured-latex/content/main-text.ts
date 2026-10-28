@@ -72782,7 +72782,18 @@ w_{r+1}
                     proof: [
                       paragraph(["右辺の元 ", math(String.raw`e=p(w_{C,r})`), " を取る。", ref("claim_projected_edge_cycle_nonbacktracking"), " により ", math(String.raw`w_{C,r}=\iota(c_C(2r))`), " である。", ref("def_edge_reversal"), " により ", math(String.raw`p(w_{C,r})=p(c_C(2r))`), " となる。", ref("claim_tagged_difference_alternating_cycle"), " により ", math(String.raw`c_C(2r)`), " は活動点なので、", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`e\in P(D,T)`), " である。"]),
                       paragraph(["逆に ", math(String.raw`e\in P(D,T)`), " を取る。", ref("def_oriented_edges"), " の二方向のうち一つを ", math(String.raw`\vec e`), " とする。", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`\vec e`), " は活動点である。", ref("claim_tagged_difference_cycle_cover"), " により ", math(String.raw`\vec e`), " はある交互閉路 ", math(String.raw`C`), " に属する。"]),
-                      paragraph(["もし ", math(String.raw`\vec e`), " が第一色なら、", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\vec e=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき ", ref("def_edge_reversal"), " により ", math(String.raw`e=p(\vec e)=p(w_{C,r})`), " である。"]),
+                      paragraph(["もし ", math(String.raw`\vec e`), " が第一色なら、", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\vec e=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
+                      displayMath(String.raw`\begin{aligned}
+e
+&=p(\vec e)
+&&\bigl(\because\ \vec e\text{ の台の定義}\bigr)\\
+&=p(c_C(2r))
+&&\bigl(\because\ \vec e=c_C(2r)\bigr)\\
+&=p(\iota(c_C(2r)))
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr)\\
+&=p(w_{C,r})
+&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr).
+\end{aligned}`),
                       paragraph(["もし ", math(String.raw`\vec e`), " が第二色なら、", ref("claim_matching_pair_second_coloring_alternates"), " により長い相手 ", math(String.raw`m_{\mathcal D_0}(\vec e)`), " は同じ閉路の第一色である。", ref("claim_reference_long_mate_reversal"), " によりこの相手は ", math(String.raw`\iota(\vec e)`), " で、その台は ", math(String.raw`e`), " のままである。前の場合を ", math(String.raw`\iota(\vec e)`), " に適用し、", math(String.raw`e=p(w_{C,r})`), " を得る。従って逆の包含も成り立つ。"]),
                     ],
                   },
@@ -76435,6 +76446,66 @@ M_{D,T}(x)
 &&\bigl(\because\ (-1)^{2k_C}=1\bigr).
 \end{aligned}`),
                       paragraph(["全ての分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。有限積と定数多項式への埋込みだけを用いた。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_quadratic_crossing_weight",
+              labels: [],
+              title: { text: "非零項の二次符号と局所横断数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_quadratic_crossing_weight",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_quadratic_crossing_weight",
+                    kind: "claim",
+                    title: { text: "非零項の位相は補辺の二次符号と短い対の横断数に等しい" },
+                    labels: ["claim_tagged_matching_quadratic_crossing_weight"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-quadratic-crossing-weight"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。補辺を ", math(String.raw`P:=P(D,T)\subseteq E_L`), " とし、", ref("claim_tagged_matching_cycle_weight"), " の交互閉路集合を ", math(String.raw`\mathcal C(D,T)`), " とする。短い標識の対は ", ref("claim_projected_edge_cycle_nonbacktracking"), " により閉歩道の通過に一対一に対応する。" ]),
+                      paragraph(["相異なる二つの短い標識の対が横断するとは、対応する通過の終点が等しく、ともに直進し、方向軸が異なることとする（", ref("def_transverse_crossing"), "）。そのような順序のない対の個数を ", math(String.raw`t(D,T)\in\mathbb N`), " と定める。補辺の切断線偶奇を ", math(String.raw`h(P),v(P)\in\{0,1\}`), " と書く。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式" ]),
+                      displayMath(String.raw`M_{D,T}(x)=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}`),
+                      paragraph(["が成り立つ。辺長一の短い対も標識と方向で区別して数える。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C`), "、その無向辺の台を ", math(String.raw`P_C`), "、横断数を ", math(String.raw`c_C:=c(\gamma_C)\in\mathbb N`), "、長さを ", math(String.raw`k_C\in\mathbb N_{>0}`), " と書く。", ref("claim_projected_cycle_distinct_edges"), " と ", ref("claim_projected_cycle_support_union"), " により、台 ", math(String.raw`P_C`), " は互いに素で ", math(String.raw`P=\bigsqcup_C P_C`), " である。各短い対はただ一つの閉路の通過を与えるので、横断する対は同じ閉路内のものと異なる二閉路間のものに重複なく分かれる。" ]),
+                      displayMath(String.raw`t(D,T)=\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})\quad(\because\ \blkref{def_closed_walk_crossing_number}\text{ と短い対の分割})`),
+                      paragraph(["閉路集合には任意の線型順序を固定し、", math(String.raw`C<C'`), " はその順序で読む。", ref("claim_disjoint_walk_mutual_crossing_intersection"), " と ", ref("claim_torus_quadratic_sign_polarization"), " を各二閉路に適用する。切断線偶奇は台の非交和で加わる。従って整数の偶奇として" ]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
+&=\chi_{a,b}(h(P),v(P))
+  (-1)^{\sum_C c_C+\sum_{C<C'}I_L(P_C,P_{C'})}
+&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))
+  (-1)^{\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})}
+&&\bigl(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
+&&\bigl(\because\ \text{上の横断対の分割}\bigr).
+\end{aligned}`),
+                      paragraph(["求めたい左辺から始める。各閉路の回転位相積には ", ref("claim_closed_walk_rotation_phase"), "、位相と二次符号には ", ref("claim_edge_distinct_walk_quadratic_sign"), " を適用する。" ]),
+                      displayMath(String.raw`\begin{aligned}
+M_{D,T}(x)
+&=\prod_C\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_tagged_matching_cycle_weight}\bigr)\\
+&=x^{\sum_C k_C}\prod_C\left[-\Bigl(\prod_r\varepsilon_{a,b}(\vec e_{C,r})\Bigr)\zeta_8^{\,t_{\circ}(\gamma_C)}\right]
+&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\text{ と有限積の分配律}\bigr)\\
+&=x^{\sum_C k_C}\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
+&&\bigl(\because\ \blkref{claim_edge_distinct_walk_quadratic_sign}\text{ を各閉路へ適用}\bigr)\\
+&=x^{\sum_C k_C}\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
+&&\bigl(\because\ \text{上の二次符号と横断数の等式}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}
+&&\bigl(\because\ \blkref{claim_projected_cycle_support_union}\text{ と台の非交和}\bigr).
+\end{aligned}`),
                     ],
                   },
                 },

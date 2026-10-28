@@ -637,6 +637,7 @@ export const ALL_LABELS = [
   "claim_tagged_matching_matching_recovery",
   "claim_tagged_matching_mate_outside_complement",
   "claim_tagged_matching_nonzero_support",
+  "claim_tagged_matching_quadratic_crossing_weight",
   "claim_tagged_matching_short_pair_count",
   "claim_tagged_matching_term_degree",
   "claim_tagged_short_pair_successor",
