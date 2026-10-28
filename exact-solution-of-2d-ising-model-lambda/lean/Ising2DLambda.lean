@@ -1566,3 +1566,5 @@ import Ising2DLambda.KacWard.ModeSmallMatrixEntriesFromNecSuf
 import Ising2DLambda.KacWard.ModeSmallMatrixForbiddenTerm
 import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixForbiddenTerm
 import Ising2DLambda.KacWard.ModeSmallMatrixForbiddenTermFromNecSuf
+import Ising2DLambda.KacWard.AdmissibleDirectionPermutations
+import Ising2DLambda.NecSuf.KacWard.AdmissibleDirectionPermutations

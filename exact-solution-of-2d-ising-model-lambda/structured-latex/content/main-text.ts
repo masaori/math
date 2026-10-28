@@ -82391,6 +82391,54 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_admissible_direction_permutations",
+              focus: {
+                id: "finite_fourier_claim_admissible_direction_permutations",
+                kind: "claim",
+                title: { text: "逆方向を選ばない四方向の置換を列挙する" },
+                labels: ["claim_admissible_direction_permutations"],
+                habitat: "N",
+                verification: ["sagemath/check/admissible-direction-permutations"],
+                lean: [
+                  "Ising2DLambda.KacWard.admissibleDirectionPermutations",
+                  "Ising2DLambda.NecSuf.KacWard.admissibleDirectionPermutations",
+                ],
+                statement: [
+                  paragraph([
+                    "方向番号の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathbb Z/4\mathbb Z)`),
+                    " を取る。行番号 ", math(String.raw`0,1,2,3`),
+                    " に対する列番号を順に並べた四桁の列で置換を書く。すべての ",
+                    math(String.raw`j\in\mathbb Z/4\mathbb Z`), " で ",
+                    math(String.raw`\sigma(j)\ne j+2`), " となる置換の全体は",
+                  ]),
+                  displayMath(String.raw`\{0123,0132,0213,1023,1032,1230,3012,3120,3210\}`),
+                  paragraph(["であり、九個である。この列挙は方向番号だけの有限計算であり、実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "置換の最初の値を ", math(String.raw`\sigma(0)`), " とする。",
+                    math(String.raw`\sigma(0)=2`), " は条件に反する。残る三つの場合に、",
+                    "未使用の列番号と各行の禁止列を突き合わせる。",
+                  ]),
+                  displayMath(String.raw`\begin{array}{c|l}
+\sigma(0)&(\sigma(0),\sigma(1),\sigma(2),\sigma(3))\\\hline
+0&0123,0132,0213\\
+1&1023,1032,1230\\
+3&3012,3120,3210
+\end{array}`),
+                  paragraph([
+                    "各行に示した列は相異なる四つの値を一度ずつ使い、",
+                    math(String.raw`\sigma(j)\ne j+2`), " を満たす。逆に、",
+                    "各行で次の値を選ぶ際に未使用の値と禁止列を除くと、表に示した三つ以外は残らない。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_adjacent_cells_ray_crossing_difference",
+  "claim_admissible_direction_permutations",
   "claim_all_direction_seam_mode_phase",
   "claim_alternating_neighbor_matchings",
   "claim_antiperiodic_mode_exists",

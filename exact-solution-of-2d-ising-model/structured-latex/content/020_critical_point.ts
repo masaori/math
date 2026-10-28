@@ -1998,9 +1998,17 @@ G''(\kappa)
         math(String.raw`[0,\pi]`),
         " 上で使うと",
       ]),
-      displayMath(
-        String.raw`0 \ \leq\ \int_0^{\pi}\frac{d\theta}{\sqrt S} - J \ \leq\ \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+0
+&\leq \int_0^{\pi}\left(\frac{1}{\sqrt S}-\frac{1}{\sqrt{S(1+S)}}\right)d\theta
+&& (\because\ \text{直前の各点評価と積分の単調性 (R3)})\\
+&=\int_0^{\pi}\frac{d\theta}{\sqrt S}-J
+&& (\because\ J\text{ の定義と積分の線型性 (R3)})\\
+&\leq\int_0^{\pi}\frac{\cosh(\kappa/2)}{2}\,d\theta
+&& (\because\ \text{直前の各点評価と積分の単調性 (R3)})\\
+&=\frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)
+&& (\because\ \text{定数関数の積分 (R4)}).
+\end{aligned}`),
       paragraph([
         ref("sine_integral_two_sided"),
         " を ",
