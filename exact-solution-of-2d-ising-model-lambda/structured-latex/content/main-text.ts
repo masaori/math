@@ -82566,6 +82566,100 @@ A_{0,3}A_{1,0}A_{2,1}A_{3,2}
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_small_matrix_remaining_terms",
+              focus: {
+                id: "finite_fourier_claim_mode_small_matrix_remaining_terms",
+                kind: "claim",
+                title: { text: "四方向小行列式の恒等置換と互換・二重互換の成分積" },
+                labels: ["claim_mode_small_matrix_remaining_terms"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-small-matrix-remaining-terms"],
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix_remaining_terms",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_remaining_terms_of_modes",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix_remaining_terms",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取る。", math(String.raw`A:=I_4-x\widehat{\breve M(\varpi,\varsigma)}`),
+                    "、", math(String.raw`d_0:=1-x\varpi,\ d_1:=1-x\varsigma,\ d_2:=1-x\varpi^{-1},\ d_3:=1-x\varsigma^{-1}`),
+                    " と置く。", ref("claim_admissible_direction_permutations"),
+                    " の四桁表示に対応する成分積は次のとおりである。",
+                  ]),
+                  displayMath(String.raw`\begin{array}{c|l}
+\sigma&\prod_{j\in\mathbb Z/4\mathbb Z}A_{j,\sigma(j)}\\\hline
+0123&d_0d_1d_2d_3\\
+0132&x^2\varpi^{-1}\varsigma^{-1}d_0d_1\\
+0213&x^2\varpi^{-1}\varsigma d_0d_3\\
+1023&x^2\varpi\varsigma d_2d_3\\
+1032&x^4\\
+3120&x^2\varpi\varsigma^{-1}d_1d_2\\
+3210&x^4
+\end{array}`),
+                  paragraph(["各等式は ", math(String.raw`\overline{\mathbb Q}[x]`), " で成り立つ。実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "各 ", math(String.raw`d_j`), " は ", ref("claim_mode_small_matrix_entries"),
+                    " の対角成分から得る。", ref("def_qbar_constant_embedding"),
+                    " により係数を多項式へ埋め込む。モードは冪根なので零でない。",
+                    ref("def_rotation_phase"), " より ", math(String.raw`\zeta_8^4=-1`), " なので ",
+                    math(String.raw`\zeta_8\ne0`), " でもある。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+A_{0,0}A_{1,1}A_{2,2}A_{3,3}
+&=d_0d_1d_2d_3
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries},\ \blkref{def_qbar_constant_embedding}\bigr),\\
+A_{0,0}A_{1,1}A_{2,3}A_{3,2}
+&=d_0d_1(-x\zeta_8\varsigma^{-1})(-x\zeta_8^{-1}\varpi^{-1})
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^2\varpi^{-1}\varsigma^{-1}d_0d_1
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と }\zeta_8\zeta_8^{-1}=1\bigr),\\
+A_{0,0}A_{1,2}A_{2,1}A_{3,3}
+&=d_0(-x\zeta_8\varpi^{-1})(-x\zeta_8^{-1}\varsigma)d_3
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^2\varpi^{-1}\varsigma d_0d_3
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と }\zeta_8\zeta_8^{-1}=1\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+A_{0,1}A_{1,0}A_{2,2}A_{3,3}
+&=(-x\zeta_8\varsigma)(-x\zeta_8^{-1}\varpi)d_2d_3
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^2\varpi\varsigma d_2d_3
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と }\zeta_8\zeta_8^{-1}=1\bigr),\\
+A_{0,1}A_{1,0}A_{2,3}A_{3,2}
+&=(-x\zeta_8\varsigma)(-x\zeta_8^{-1}\varpi)(-x\zeta_8\varsigma^{-1})(-x\zeta_8^{-1}\varpi^{-1})
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^4(\zeta_8\zeta_8^{-1})^2(\varpi\varpi^{-1})(\varsigma\varsigma^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性}\bigr)\\
+&=x^4
+&&\bigl(\because\ \varpi\ne0,\ \varsigma\ne0,\ \zeta_8\ne0\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+A_{0,3}A_{1,1}A_{2,2}A_{3,0}
+&=(-x\zeta_8^{-1}\varsigma^{-1})d_1d_2(-x\zeta_8\varpi)
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^2\varpi\varsigma^{-1}d_1d_2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と }\zeta_8^{-1}\zeta_8=1\bigr),\\
+A_{0,3}A_{1,2}A_{2,1}A_{3,0}
+&=(-x\zeta_8^{-1}\varsigma^{-1})(-x\zeta_8\varpi^{-1})(-x\zeta_8^{-1}\varsigma)(-x\zeta_8\varpi)
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=x^4(\zeta_8^{-1}\zeta_8)^2(\varpi^{-1}\varpi)(\varsigma^{-1}\varsigma)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性}\bigr)\\
+&=x^4
+&&\bigl(\because\ \varpi\ne0,\ \varsigma\ne0,\ \zeta_8\ne0\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

@@ -213,6 +213,7 @@ export const ALL_LABELS = [
   "claim_matrix_pow_entry",
   "claim_mode_small_matrix_entries",
   "claim_mode_small_matrix_four_cycle_terms",
+  "claim_mode_small_matrix_remaining_terms",
   "claim_moved_orbit_closed_nonbacktracking",
   "claim_moved_orbit_length_sum_stratified",
   "claim_moved_orbit_partition",
