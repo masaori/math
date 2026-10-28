@@ -1173,14 +1173,14 @@ A
         String.raw`\begin{aligned}
 \sinh\gamma
 &= 2\sinh\!\left(\frac{\gamma}{2}\right)\cosh\!\left(\frac{\gamma}{2}\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)}) \\
-&= 2\sqrt{S}\sqrt{1+S} \\
-&= 2\sqrt{S(1+S)} \\
+   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
+&= 2\sqrt{S}\sqrt{1+S} &&(\because\ \text{本主張 (1) の二つの半角等式}) \\
+&= 2\sqrt{S(1+S)} &&(\because\ \mathbb R\text{ の平方根の積}) \\
 \cosh\gamma
 &= 1 + 2\sinh^2\!\left(\frac{\gamma}{2}\right)
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)}) \\
+   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
 &= 1 + 2S
-   \quad (\because \text{本主張 (1) の } \sinh(\tfrac\gamma2) = \sqrt S)
+   &&(\because\ \text{本主張 (1) の } \sinh(\tfrac\gamma2) = \sqrt S)
 \end{aligned}`,
       ),
       paragraph([
@@ -1202,10 +1202,10 @@ A
         String.raw`\begin{aligned}
 \frac{\partial S}{\partial\kappa}
 &= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\cosh\!\left(\frac{\kappa}{2}\right)\cdot\frac{1}{2}
-   \quad (\because (\sinh)' = \cosh \text{ と合成関数の微分}) \\
-&= \sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right) \\
+   &&(\because (\sinh)' = \cosh \text{ と合成関数の微分}) \\
+&= \sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right) &&(\because\ \mathbb R\text{ の四則}) \\
 &= \frac{1}{2}\sinh\kappa
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)})
+   &&(\because\ \blkref{cosh_addition_and_half_angle})
 \end{aligned}`,
       ),
       paragraph(["したがって"]),
@@ -1213,12 +1213,12 @@ A
         String.raw`\begin{aligned}
 \frac{\partial\gamma}{\partial\kappa}
 &= 2\cdot\mathrm{arcsinh}'\!\left(\sqrt S\right)\cdot\frac{1}{2\sqrt S}\cdot\frac{\partial S}{\partial\kappa}
-   \quad (\because \text{合成関数の微分と } (\sqrt{\ })' = \tfrac{1}{2\sqrt{\ }}) \\
+   &&(\because \text{合成関数の微分と } (\sqrt{\ })' = \tfrac{1}{2\sqrt{\ }}) \\
 &= 2\cdot\frac{1}{\sqrt{S+1}}\cdot\frac{1}{2\sqrt S}\cdot\frac{1}{2}\sinh\kappa
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (4)}) \\
-&= \frac{\sinh\kappa}{2\sqrt{S(1+S)}} \\
+   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
+&= \frac{\sinh\kappa}{2\sqrt{S(1+S)}} &&(\because\ \mathbb R\text{ の四則と平方根の積}) \\
 &= \frac{\sinh\kappa}{\sinh\gamma}
-   \quad (\because \text{本主張 (1)})
+   &&(\because\ \text{本主張 (1)})
 \end{aligned}`,
       ),
       paragraph(["もう一度微分すると"]),
@@ -1226,11 +1226,11 @@ A
         String.raw`\begin{aligned}
 \frac{\partial^2\gamma}{\partial\kappa^2}
 &= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\cosh\gamma\cdot\dfrac{\partial\gamma}{\partial\kappa}}{\sinh^2\gamma}
-   \quad (\because \text{商の微分と } (\sinh)' = \cosh) \\
+   &&(\because \text{商の微分と } (\sinh)' = \cosh) \\
 &= \frac{\cosh\kappa}{\sinh\gamma}
  - \frac{\sinh\kappa\cosh\gamma}{\sinh^2\gamma}\cdot\frac{\sinh\kappa}{\sinh\gamma}
-   \quad (\because \text{直前の式}) \\
-&= \frac{\cosh\kappa}{\sinh\gamma} - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}
+   &&(\because \text{直前の式}) \\
+&= \frac{\cosh\kappa}{\sinh\gamma} - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma} &&(\because\ \mathbb R\text{ の四則})
 \end{aligned}`,
       ),
       paragraph([
@@ -1246,13 +1246,13 @@ A
         String.raw`\begin{aligned}
 \sinh\gamma
 &= 2\sqrt{S(1+S)}
-   \quad (\because \text{本主張 (1)}) \\
+   &&(\because\ \text{本主張 (1)}) \\
 &\geq 2\sqrt{\sinh^2\!\left(\frac{\kappa}{2}\right)\cosh^2\!\left(\frac{\kappa}{2}\right)}
-   \quad (\because S \geq \sinh^2(\tfrac\kappa2),\ 1+S \geq \cosh^2(\tfrac\kappa2)) \\
+   &&(\because S \geq \sinh^2(\tfrac\kappa2),\ 1+S \geq \cosh^2(\tfrac\kappa2)) \\
 &= 2\left|\sinh\!\left(\frac{\kappa}{2}\right)\right|\cosh\!\left(\frac{\kappa}{2}\right)
-   \quad (\because \cosh > 0) \\
+   &&(\because \cosh > 0) \\
 &= \left|\sinh\kappa\right|
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (2)})
+   &&(\because\ \blkref{cosh_addition_and_half_angle})
 \end{aligned}`,
       ),
       paragraph([
