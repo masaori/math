@@ -79012,9 +79012,15 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`), " である。",
                         "仮定の等式と接触の等式を代入すると",
                       ]),
-                      displayMath(String.raw`\operatorname{src}(\vec e)
-=\operatorname{tgt}(\vec f)
-=\operatorname{tgt}(\vec e)`),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{src}(\vec e)
+&=\operatorname{src}(\varphi(\vec f))
+&&\bigl(\because\ \varphi(\vec f)=\vec e\bigr)\\
+&=\operatorname{tgt}(\vec f)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \blkref{def_standard_contact_pair}\text{ の接触の等式}\bigr)
+\end{aligned}`),
                       paragraph([
                         "となり、前段の端点相異に反する。よって ", math(String.raw`\varphi(\vec f)\ne\vec e`),
                         " である。", math(String.raw`\vec e`), " と ", math(String.raw`\vec f`),
