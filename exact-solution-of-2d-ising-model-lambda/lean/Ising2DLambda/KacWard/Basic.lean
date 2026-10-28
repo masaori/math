@@ -22,13 +22,12 @@ instance (L : ℕ) : DecidableEq (OrientedEdge L) := by
   infer_instance
 
 def reversal {L : ℕ} (e : OrientedEdge L) : OrientedEdge L :=
-  (e.1, Ising2DLambda.NecSuf.KacWard.reverseBool e.2)
+  (e.1, !e.2)
 
 lemma reversal_involutive {L : ℕ} (e : OrientedEdge L) :
     reversal (reversal e) = e := by
   rcases e with ⟨edge, direction⟩
-  simp only [reversal]
-  rw [Ising2DLambda.NecSuf.KacWard.reverseBool_involutive]
+  cases direction <;> rfl
 
 lemma reversal_ne {L : ℕ} (e : OrientedEdge L) : reversal e ≠ e := by
   rcases e with ⟨edge, direction⟩

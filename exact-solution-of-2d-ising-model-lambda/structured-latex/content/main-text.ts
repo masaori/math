@@ -77322,14 +77322,16 @@ S(S(\varphi))
                       ]),
                       paragraph([
                         "第二の主張。", math(String.raw`\vec e\ne\vec f`), " と ",
-                        math(String.raw`\varphi`), " の単射性により ",
-                        math(String.raw`\varphi(\vec f)\ne\varphi(\vec e)`), " であり、",
-                        ref("def_permutation_contact_smoothing"), " により ",
-                        math(String.raw`\psi(\vec e)=\varphi(\vec f)`), " なので ",
-                        math(String.raw`\psi(\vec e)\ne\varphi(\vec e)`),
-                        " である。入力 ", math(String.raw`\vec e`),
-                        " で値が異なるので ", math(String.raw`S(\varphi)=\psi\ne\varphi`), " である。",
+                        math(String.raw`\varphi`), " の単射性を使うと",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+\psi(\vec e)
+&=\varphi(\vec f)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&\ne\varphi(\vec e)
+&&\bigl(\because\ \vec e\ne\vec f\text{ と }\varphi\text{ の単射性}\bigr).
+\end{aligned}`),
+                      paragraph(["入力 ", math(String.raw`\vec e`), " で値が異なるので ", math(String.raw`S(\varphi)=\psi\ne\varphi`), " である。"]),
                       paragraph([
                         "第三の主張は、切り替え可能な接触対 ", math(String.raw`\{\vec e,\vec f\}`),
                         " での平滑化についての ",
