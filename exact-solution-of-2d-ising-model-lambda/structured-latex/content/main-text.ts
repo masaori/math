@@ -76626,6 +76626,48 @@ M_{D,T}(x)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_determinant_signed_even_subgraph_square",
+              labels: [],
+              title: { text: "Kac--Ward 行列式と符号付き偶部分グラフ多項式の平方" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_determinant_signed_even_subgraph_square",
+                  focus: {
+                    id: "kac_ward_claim_determinant_signed_even_subgraph_square",
+                    kind: "claim",
+                    title: { text: "Kac--Ward 行列式は符号付き偶部分グラフ多項式の平方に等しい" },
+                    labels: ["claim_determinant_signed_even_subgraph_square"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/determinant-signed-even-subgraph-square"],
+                    statement: [
+                      paragraph(["任意の辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とねじれ ", math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("def_kac_ward_determinants"), " と ", ref("def_signed_even_subgraph_polynomial"), " の多項式は、係数を ", math(String.raw`\overline{\mathbb Q}`), " に送ったとき"]),
+                      displayMath(String.raw`D_L^{a,b}(x)=\bigl(Q_L^{a,b}\bigr)^2\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["を満たす。両辺は多項式そのものであり、特定の値への代入は行わない。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " を ", math(String.raw`\vec E_L`), " の辺番号・端点番号の辞書式に並べる。", ref("claim_pfaffian_signed_even_subgraph"), " と同じ順序を用いる。", ref("claim_gauged_terminal_matrix_skew"), " により ", math(String.raw`K^{\mathrm{as}}`), " は零対角反対称行列であり、Pfaffian の平方公式の仮定を満たす。"]),
+                      displayMath(String.raw`\begin{aligned}
+D_L^{a,b}(x)
+&=\det_x(K^{\mathrm{as}})
+&&\bigl(\because\ \blkref{claim_gauged_terminal_matrix_determinant}\bigr)\\
+&=\operatorname{Pf}(K^{\mathrm{as}})^2
+&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_determinant}\bigr)\\
+&=\bigl(Q_L^{a,b}\bigr)^2
+&&\bigl(\because\ \blkref{claim_pfaffian_signed_even_subgraph}\bigr).
+\end{aligned}`),
+                      paragraph(["各等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で成立する。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
@@ -76987,15 +77029,17 @@ M_{D,T}(x)
                         "最後に対合の等式を示す。", ref("def_permutation_contact_smoothing"),
                         " の場合分けを二回適用すると、任意の ", math(String.raw`\vec g\in\vec E_L`), " について",
                       ]),
-                      displayMath(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)(\vec g)=
-\begin{cases}
-\psi(\vec f)=\varphi(\vec e),&\vec g=\vec e,\\
-\psi(\vec e)=\varphi(\vec f),&\vec g=\vec f,\\
-\psi(\vec g)=\varphi(\vec g),&\vec g\notin\{\vec e,\vec f\}
-\end{cases}`),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{Sm}_{\vec e,\vec f}(\psi)(\vec g)
+&=\begin{cases}\psi(\vec f),&\vec g=\vec e,\\\psi(\vec e),&\vec g=\vec f,\\\psi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&=\begin{cases}\varphi(\vec e),&\vec g=\vec e,\\\varphi(\vec f),&\vec g=\vec f,\\\varphi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\text{ の }\psi\text{ の定義を代入}\bigr)\\
+&=\varphi(\vec g)
+&&\bigl(\because\ \text{三つの場合の各値}\bigr).
+\end{aligned}`),
                       paragraph([
-                        "であり、どの場合も ", math(String.raw`\varphi(\vec g)`),
-                        " に一致する。有限集合上の二つの写像が全ての入力で一致するので ",
+                        "有限集合上の二つの写像が全ての入力で一致するので ",
                         math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
                       ]),
                     ],
