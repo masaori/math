@@ -82501,6 +82501,71 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_small_matrix_four_cycle_terms",
+              focus: {
+                id: "finite_fourier_claim_mode_small_matrix_four_cycle_terms",
+                kind: "claim",
+                title: { text: "四方向小行列式の四周期二項の成分積" },
+                labels: ["claim_mode_small_matrix_four_cycle_terms"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-small-matrix-four-cycle-terms"],
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix_four_cycle_terms",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_four_cycle_terms_of_modes",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix_four_cycle_terms",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取る。", math(String.raw`A:=I_4-x\widehat{\breve M(\varpi,\varsigma)}`),
+                    " と置く。", ref("claim_admissible_direction_permutations"),
+                    " の四桁表示で 1230 と 3012 に対応する成分積は、それぞれ次のとおりである。",
+                  ]),
+                  displayMath(String.raw`A_{0,1}A_{1,2}A_{2,3}A_{3,0}=-x^4,\qquad
+A_{0,3}A_{1,0}A_{2,1}A_{3,2}=-x^4\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["ハットは ", ref("def_qbar_constant_embedding"), " の成分ごとの適用である。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "モードは 1 の冪根なので ", math(String.raw`\varpi\ne0,\ \varsigma\ne0`),
+                    " である。回転位相は ", ref("def_rotation_phase"),
+                    " により ", math(String.raw`\zeta_8^4=-1`), " を満たす。",
+                    ref("claim_mode_small_matrix_entries"), " の四成分を各積へ代入する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+A_{0,1}A_{1,2}A_{2,3}A_{3,0}
+&=(-x\zeta_8\varsigma)(-x\zeta_8\varpi^{-1})(-x\zeta_8\varsigma^{-1})(-x\zeta_8\varpi)
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries},\ \blkref{def_qbar_constant_embedding}\bigr)\\
+&=x^4\zeta_8^4(\varsigma\varsigma^{-1})(\varpi^{-1}\varpi)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性}\bigr)\\
+&=x^4\zeta_8^4
+&&\bigl(\because\ \varpi\ne0,\ \varsigma\ne0\bigr)\\
+&=-x^4
+&&\bigl(\because\ \blkref{def_rotation_phase}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+A_{0,3}A_{1,0}A_{2,1}A_{3,2}
+&=(-x\zeta_8^{-1}\varsigma^{-1})(-x\zeta_8^{-1}\varpi)(-x\zeta_8^{-1}\varsigma)(-x\zeta_8^{-1}\varpi^{-1})
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries},\ \blkref{def_qbar_constant_embedding}\bigr)\\
+&=x^4\zeta_8^{-4}(\varsigma^{-1}\varsigma)(\varpi\varpi^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性}\bigr)\\
+&=x^4\zeta_8^{-4}
+&&\bigl(\because\ \varpi\ne0,\ \varsigma\ne0\bigr)\\
+&=x^4(\zeta_8^4)^{-1}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の逆元}\bigr)\\
+&=-x^4
+&&\bigl(\because\ \blkref{def_rotation_phase},\ (-1)^{-1}=-1\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

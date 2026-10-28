@@ -1571,3 +1571,5 @@ import Ising2DLambda.KacWard.AdmissibleDirectionPermutationSigns
 import Ising2DLambda.NecSuf.KacWard.AdmissibleDirectionPermutationSigns
 import Ising2DLambda.KacWard.AdmissibleDirectionPermutationSignsFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.AdmissibleDirectionPermutations
+import Ising2DLambda.KacWard.ModeSmallMatrixFourCycles
+import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixFourCycles

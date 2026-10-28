@@ -2057,10 +2057,15 @@ R
         math(String.raw`\pi \leq 3.1416`),
         " なので",
       ]),
-      displayMath(
-        String.raw`|R| \ \leq\ \max\left\{\frac{2\cdot 0.2527^2}{9.8696} + 0.88,\ \ \frac{3.1416}{2}\cdot 1.0315\right\}
-\ \leq\ \max\left\{0.0130 + 0.88,\ \ 1.6203\right\} \ \leq\ 1.621`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+|R|
+&\leq\max\left\{\frac{2\cdot 0.2527^2}{9.8696}+0.88,\ \frac{3.1416}{2}\cdot1.0315\right\}
+&&\bigl(\because\ \text{直前の }|R|\text{ の評価と数値上下界}\bigr)\\
+&\leq\max\left\{0.0130+0.88,\ 1.6203\right\}
+&&\bigl(\because\ \text{有理数の四則}\bigr)\\
+&\leq1.621
+&&\bigl(\because\ \text{有理数の大小比較}\bigr).
+\end{aligned}`),
       paragraph([
         "Step 5（",
         math(String.raw`T`),
