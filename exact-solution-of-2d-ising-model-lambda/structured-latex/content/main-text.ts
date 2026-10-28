@@ -75920,6 +75920,114 @@ c(\gamma)\bmod2
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_crossing_free_contact_elimination_phase",
+              labels: [],
+              title: { text: "接触点分割の帰納法と頂点単純閉路族の回転位相" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_crossing_free_contact_elimination_phase",
+                  focus: {
+                    id: "kac_ward_claim_crossing_free_contact_elimination_phase",
+                    kind: "claim",
+                    title: { text: "横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される" },
+                    labels: ["claim_crossing_free_contact_elimination_phase"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/crossing-free-contact-elimination-phase"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なり ",
+                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
+                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
+                        " が存在する。各子は無向辺の標識と通過する頂点がそれぞれ相異なり、横断を持たない。",
+                        "各子の無向辺の台 ", math(String.raw`C_i`), " は互いに素で、合併は元の台 ",
+                        math(String.raw`C_{\gamma}`), " である。切断線偶奇と回転位相について",
+                      ]),
+                      displayMath(String.raw`(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
+\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)}
+\prod_{i=1}^{n}\zeta_8^{\,t_{\circ}(\delta_i)}`),
+                      paragraph([
+                        "が成り立つ。", math(String.raw`\bigoplus`), " と符号の指数は ",
+                        math(String.raw`\mathbb F_2`), " で計算し、符号の指数は整数代表 ",
+                        math(String.raw`0,1`), " で読む。交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " による。回転位相の等式は ",
+                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "接触対数 ", math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`),
+                        "（", ref("def_contact_pair_count"), "）の整礎帰納法を使う。",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら ",
+                        math(String.raw`n=1,\ \delta_1=\gamma`), " と取る。",
+                        "台と切断線偶奇は同じであり、交差形式の和は空、符号の指数は零である。",
+                      ]),
+                      paragraph([
+                        math(String.raw`n_{\mathrm{ct}}(\gamma)>0`), " とする。接触対 ",
+                        math(String.raw`k<l`), " を一つ選び、", ref("claim_edge_simple_contact_split"),
+                        " の二本を ", math(String.raw`\gamma_A,\gamma_B`), "、その台を ",
+                        math(String.raw`C_A,C_B`), " とする。二本の台は互いに素で元の台を尽くす。",
+                        ref("claim_crossing_free_contact_split_children"), " により両子の横断数は零である。",
+                        "接触対数について両子それぞれに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+n_{\mathrm{ct}}(\gamma_A)
+&\le n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
+&&\bigl(\because\ n_{\mathrm{ct}}(\gamma_B)\in\mathbb N\bigr)\\
+&<n_{\mathrm{ct}}(\gamma)
+&&\bigl(\because\ \blkref{claim_contact_split_pair_descent}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "が成り立つ。最初の行で両子を交換すると ",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
+                        " も得る。",
+                        "そこで帰納法を両子に適用し、頂点単純な二族 ",
+                        math(String.raw`(\alpha_i)_{1\le i\le p}`), " と ",
+                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。",
+                        "これらを順に連結して ", math(String.raw`(\delta_i)_{1\le i\le p+q}`),
+                        " と置く。台の分割と頂点単純性は帰納法の仮定から従う。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
+&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
+&&\bigl(\because\ \text{二本への帰納法の仮定と有限和の分割}\bigr)\\
+&=(h(\gamma),v(\gamma))
+&&\bigl(\because\ \blkref{claim_contact_split_seam_parity}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配できる。",
+                        "帰納法による台の互いに素な分割を代入すると",
+                      ]),
+                      displayMath(String.raw`I_L(C_A,C_B)=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
+\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と有限和の分配則}\bigr).`),
+                      paragraph(["位相の左辺から接触点分割の局所関係と帰納法を順に適用する。"]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta_8^{\,t_{\circ}(\gamma)}
+&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
+&&\bigl(\because\ \blkref{claim_crossing_free_contact_split_phase}\bigr)\\
+&=(-1)^{1+I_L(C_A,C_B)}
+\prod_{i=1}^{p}\zeta_8^{\,t_{\circ}(\alpha_i)}
+\prod_{j=1}^{q}\zeta_8^{\,t_{\circ}(\beta_j)}
+(-1)^{(p-1)+(q-1)+\sum_{i<i'}I_L(C_{\alpha_i},C_{\alpha_{i'}})
++\sum_{j<j'}I_L(C_{\beta_j},C_{\beta_{j'}})}
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=(-1)^{(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)}
+\prod_{i=1}^{p+q}\zeta_8^{\,t_{\circ}(\delta_i)}
+&&\bigl(\because\ \text{上の交差形式の分配、有限積の分割、}\mathbb F_2\text{ の加法}\bigr).
+\end{aligned}`),
+                      paragraph(["接触対数の狭義減少により帰納法は止まる。有限集合と代数的数の整数冪だけを使った。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },

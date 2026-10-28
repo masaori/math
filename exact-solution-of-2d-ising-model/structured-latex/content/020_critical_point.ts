@@ -2685,17 +2685,30 @@ C := \frac{\partial u}{\partial T}`,
       ]),
       displayMath(
         String.raw`\begin{aligned}
-u &= -\mathcal{J}\,\frac{df}{dK}
-   \quad (\because \tfrac{dK}{d\beta} = \mathcal{J} \text{ と合成関数の微分}) \\
-\frac{\partial u}{\partial\beta} &= -\mathcal{J}^2\,\frac{d^2f}{dK^2}
-   \quad (\because \text{もう一度 } \tfrac{dK}{d\beta} = \mathcal{J} \text{ を適用}) \\
-\frac{d\beta}{dT} &= -\frac{1}{k_BT^2} = -k_B\beta^2
-   \quad (\because \beta = \tfrac{1}{k_BT} \text{ の微分}) \\
-C &= \frac{\partial u}{\partial\beta}\cdot\frac{d\beta}{dT}
-   \quad (\because \text{合成関数の微分})
-   = \left(-\mathcal{J}^2\frac{d^2f}{dK^2}\right)\left(-k_B\beta^2\right)
-   = k_B\left(\beta\mathcal{J}\right)^2\frac{d^2f}{dK^2}
-   = k_B K^2\,\frac{d^2f}{dK^2}
+u
+&=-\frac{df}{dK}\frac{dK}{d\beta}
+&&\bigl(\because\ u\text{ の定義と合成関数の微分}\bigr)\\
+&=-\mathcal{J}\frac{df}{dK}
+&&\bigl(\because\ K=\beta\mathcal{J}\bigr),\\
+\frac{\partial u}{\partial\beta}
+&=-\mathcal{J}\frac{d^2f}{dK^2}\frac{dK}{d\beta}
+&&\bigl(\because\ \mathcal{J}\text{ は定数であり合成関数の微分}\bigr)\\
+&=-\mathcal{J}^2\frac{d^2f}{dK^2}
+&&\bigl(\because\ dK/d\beta=\mathcal{J}\bigr),\\
+\frac{d\beta}{dT}
+&=-\frac{1}{k_BT^2}
+&&\bigl(\because\ \beta=1/(k_BT)\text{ の微分}\bigr)\\
+&=-k_B\beta^2
+&&\bigl(\because\ \beta=1/(k_BT)\bigr),\\
+C
+&=\frac{\partial u}{\partial\beta}\frac{d\beta}{dT}
+&&\bigl(\because\ C\text{ の定義と合成関数の微分}\bigr)\\
+&=\left(-\mathcal{J}^2\frac{d^2f}{dK^2}\right)\left(-k_B\beta^2\right)
+&&\bigl(\because\ \text{上の二式}\bigr)\\
+&=k_B(\beta\mathcal{J})^2\frac{d^2f}{dK^2}
+&&\bigl(\because\ \text{積の交換と結合}\bigr)\\
+&=k_BK^2\frac{d^2f}{dK^2}
+&&\bigl(\because\ K=\beta\mathcal{J}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -2710,9 +2723,13 @@ C &= \frac{\partial u}{\partial\beta}\cdot\frac{d\beta}{dT}
         " はそのまま比熱の対数発散",
       ]),
       displayMath(
-        String.raw`C = k_BK^2\,\frac{d^2f}{dK^2}
-= k_BK^2\left(\frac{8}{\pi}\log\frac{1}{\left|K-K_c\right|} + O\right),
-\qquad |O| \leq 49`,
+        String.raw`\begin{aligned}
+C
+&=k_BK^2\frac{d^2f}{dK^2}
+&&\bigl(\because\ \text{上の等式}\bigr)\\
+&=k_BK^2\left(\frac{8}{\pi}\log\frac{1}{|K-K_c|}+O\right)
+&&\bigl(\because\ \blkref{specific_heat_log_divergence},\ |O|\leq49\bigr)
+\end{aligned}`,
       ),
       paragraph([
         "を意味する。**",
