@@ -75796,6 +75796,130 @@ c(\gamma)\bmod2
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_crossing_free_contact_split_phase",
+              labels: [],
+              title: { text: "横断のない閉歩道の接触点分割と回転位相" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_crossing_free_contact_split_phase",
+                  beforeFocus: [{
+                    role: "supportingClaim",
+                    element: {
+                      id: "kac_ward_claim_crossing_free_contact_split_children",
+                      kind: "claim",
+                      title: { text: "横断のない閉歩道を接触点で分けても各子に横断は生じない" },
+                      labels: ["claim_crossing_free_contact_split_children"],
+                      habitat: "N",
+                      verification: ["sagemath/check/crossing-free-contact-split-phase"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
+                          math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                          math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
+                          ref("claim_edge_simple_contact_split"), " の二本を ",
+                          math(String.raw`\gamma_A,\gamma_B`), " とすると、",
+                        ]),
+                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0.`),
+                      ],
+                      proof: [
+                        paragraph([
+                          "元の辺の標識は相異なるので、接触頂点 ", math(String.raw`v`),
+                          " の通過は選んだ二つだけである。分割後は各子が ",
+                          math(String.raw`v`), " に一度ずつ通る（",
+                          ref("claim_edge_simple_contact_split"), "）ので、そこで自己横断は起きない。",
+                          "他の頂点では通過が元と同じであり、元の横断数は零なので、",
+                          "どちらの子にも自己横断は無い（", ref("def_closed_walk_crossing_number"), "）。",
+                        ]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_crossing_free_contact_split_phase",
+                    kind: "claim",
+                    title: { text: "接触点分割の回転位相は交差形式で更新される" },
+                    labels: ["claim_crossing_free_contact_split_phase"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/crossing-free-contact-split-phase"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
+                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
+                        ref("claim_edge_simple_contact_split"), " の二本を ",
+                        math(String.raw`\gamma_A,\gamma_B`), "、それらの辺の台を ",
+                        math(String.raw`C_A,C_B`), " とする。このとき ",
+                      ]),
+                      displayMath(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{1+I_L(C_A,C_B)}
+\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}`),
+                      paragraph([
+                        "が成り立つ。右辺の符号の指数は二元体の値を整数代表 ",
+                        math(String.raw`0,1`), " で読む。交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " による。等式は ",
+                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "辺の標識が相異なるので、接触頂点 ", math(String.raw`v`),
+                        " で使う四半辺は全て相異なる。従って ", math(String.raw`v`),
+                        " の通過は選んだ二つだけである。元に横断が無いので、二通過はともに曲がる。",
+                        "実際、一方が直進なら残る二半辺も対向し、二通過が横断してしまう（",
+                        ref("def_index_pair_crossing"), "）。",
+                      ]),
+                      paragraph([
+                        "四方向を巡回して最初の入辺の方向番号を零とし、もう一方の入辺、",
+                        "最初の出辺、もう一方の出辺の方向番号を順に並べる。",
+                        "四半辺の相異性と非後退性を満たす場合は次の四つで尽くされる。",
+                        "表の最後の値は、分割後の二通過が横断する場合に一、それ以外に零とする。",
+                      ]),
+                      displayMath(String.raw`\begin{array}{c|c|c}
+(d_k,d_l,d_{\sigma(k)},d_{\sigma(l)})
+&t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
+&\text{分割後の混合横断}\\ \hline
+(0,1,1,0)&0&1\\
+(0,2,1,3)&-4&0\\
+(0,2,3,1)&4&0\\
+(0,3,3,0)&0&1
+\end{array}`),
+                      paragraph([
+                        "各行の回転差は ", ref("claim_contact_split_turning_update"),
+                        " の四つの ", math(String.raw`\tau`), " を ",
+                        ref("def_step_turning"), " の方向差で評価した値である。",
+                        "分割は選んだ二接続以外の通過を変えない（",
+                        ref("claim_edge_simple_contact_split"), "）。",
+                        "従って他の頂点では横断が生じず、選んだ頂点で横断が生じる場合も二本の間だけである（",
+                        ref("claim_crossing_free_contact_split_children"), "）。",
+                      ]),
+                      paragraph([
+                        "二本の混合横断は表の最後の値だけである。",
+                        ref("claim_disjoint_walk_mutual_crossing_intersection"),
+                        " により、この値の偶奇は ", math(String.raw`I_L(C_A,C_B)`),
+                        " に等しい。表の各行で回転差を ", math(String.raw`D`),
+                        " と置くと ", math(String.raw`D/4\equiv1+I_L(C_A,C_B)\pmod2`),
+                        " である。", ref("def_rotation_phase"),
+                        " の ", math(String.raw`\zeta_8^4=-1`), " と ",
+                        math(String.raw`\zeta_8^8=1`), " を使うと",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
+&=\zeta_8^{\,t_{\circ}(\gamma)+D}
+&&\bigl(\because\ D\text{ の定義}\bigr)\\
+&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ D/4\equiv1+I_L(C_A,C_B)\pmod2,\ \zeta_8^4=-1\bigr).
+\end{aligned}`),
+                      paragraph(["符号を両辺に掛ければ求める等式になる。四方向の有限な場合分けと代数的数の整数冪だけを使った。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
