@@ -1812,14 +1812,23 @@ G'(\theta)
         "Step 0（",
         math(String.raw`\kappa > 0`),
         " としてよいこと）。",
-        ref("gamma_kappa_identity"),
-        " より ",
-        math(String.raw`\gamma(\theta,-\kappa) = \gamma(\theta,\kappa)`),
-        " なので、被積分関数が一致することから ",
-        math(String.raw`G(-\kappa) = G(\kappa)`),
-        "（すべての実数 ",
+        "すべての実数 ",
         math(String.raw`\kappa`),
-        "）。ここから ",
+        " について、",
+        ref("gamma_kappa_identity"),
+        " から次の式を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+G(-\kappa)
+&=\frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta,-\kappa)\,d\theta
+&& (\because\ G\text{ の定義})\\
+&=\frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta,\kappa)\,d\theta
+&& (\because\ \blkref{gamma_kappa_identity})\\
+&=G(\kappa)
+&& (\because\ G\text{ の定義}).
+\end{aligned}`),
+      paragraph([
+        "ここから ",
         math(String.raw`\kappa < 0`),
         " の場合を ",
         math(String.raw`\kappa > 0`),
