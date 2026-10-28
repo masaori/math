@@ -2287,15 +2287,15 @@ T
 &&\bigl(\because\ \text{有理数の大小比較}\bigr).
 \end{aligned}`,
       ),
-      paragraph([
-        "最後に ",
-        math(String.raw`\kappa \to 0`),
-        " で ",
-        math(String.raw`\log\frac1{|\kappa|} \to +\infty`),
-        " なので ",
-        math(String.raw`G''(\kappa) \geq \frac{1}{2\pi}\log\frac{1}{|\kappa|} - \frac65 \to +\infty`),
-        "。",
-      ]),
+      paragraph(["上の評価と ", math(String.raw`\log(1/|\kappa|)\to+\infty`), "（", math(String.raw`\kappa\to0`), "）から" ]),
+      displayMath(String.raw`\begin{aligned}
+G''(\kappa)
+&\geq\frac{1}{2\pi}\log\frac{1}{|\kappa|}-\frac65
+&&\bigl(\because\ \text{直前の絶対値評価}\bigr),\\
+\frac{1}{2\pi}\log\frac{1}{|\kappa|}-\frac65
+&\longrightarrow+\infty
+&&\bigl(\because\ \log(1/|\kappa|)\to+\infty,\ 2\pi>0\bigr).
+\end{aligned}`),
     ],
     conversion: {
       status: "added",

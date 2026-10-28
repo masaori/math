@@ -82997,6 +82997,49 @@ D^{a,b}_L(x)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_positive_decomposition",
+              focus: {
+                id: "finite_fourier_claim_dispersion_positive_decomposition",
+                kind: "claim",
+                title: { text: "分散因子の正値性の分解" },
+                labels: ["claim_dispersion_positive_decomposition"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-positive-decomposition"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_positive_decomposition",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_positive_decomposition",
+                  "Ising2DLambda.KacWard.dispersion_positive_decomposition_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\varpi,\varsigma\in\overline{\mathbb Q}\setminus\{0\}`),
+                    " を固定し、", math(String.raw`x`), " を ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の不定元とする。",
+                    ref("def_dispersion_polynomial"), " に対して次が成り立つ。",
+                  ]),
+                  displayMath(String.raw`\Delta(x;\varpi,\varsigma)-(x^2+2x-1)^2=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr).`),
+                  paragraph(["この等式は代数的数係数の多項式環で成立する。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;\varpi,\varsigma)-(x^2+2x-1)^2
+&=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})-(x^2+2x-1)^2
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=4x(1-x^2)-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の展開と同類項の整理}\bigr)\\
+&=x(1-x^2)\bigl(4-\varpi-\varpi^{-1}-\varsigma-\varsigma^{-1}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr)\\
+&=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の結合律}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_dispersion_kw_duality",
               focus: {
                 id: "finite_fourier_claim_dispersion_kw_duality",

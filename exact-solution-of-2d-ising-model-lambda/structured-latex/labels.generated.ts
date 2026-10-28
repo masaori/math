@@ -75,6 +75,7 @@ export const ALL_LABELS = [
   "claim_dispersion_algebraic_onsager_form",
   "claim_dispersion_kw_duality",
   "claim_dispersion_mode_product",
+  "claim_dispersion_positive_decomposition",
   "claim_displacement_is_direction_unit",
   "claim_distance_positive_on_fisher_zeros",
   "claim_distance_squared_zero_iff_equal",
