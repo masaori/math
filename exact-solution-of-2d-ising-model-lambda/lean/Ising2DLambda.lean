@@ -1587,3 +1587,6 @@ import Ising2DLambda.KacWard.DispersionAlgebraicOnsagerFormFromNecSuf
 import Ising2DLambda.KacWard.UntwistedModeZeroCondition
 import Ising2DLambda.NecSuf.KacWard.UntwistedModeZeroCondition
 import Ising2DLambda.KacWard.UntwistedModeZeroConditionFromNecSuf
+import Ising2DLambda.KacWard.FiniteTorusPolynomial
+import Ising2DLambda.NecSuf.KacWard.FiniteTorusPolynomial
+import Ising2DLambda.KacWard.FiniteTorusPolynomialFromNecSuf

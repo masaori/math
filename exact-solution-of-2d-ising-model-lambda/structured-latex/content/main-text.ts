@@ -57959,6 +57959,87 @@ Q^{a,b}_L
             },
           },
 
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_finite_torus_polynomial",
+              labels: [],
+              title: { text: "低温変数での有限トーラス公式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_finite_torus_polynomial",
+                  focus: {
+                    id: "kac_ward_claim_finite_torus_polynomial",
+                    kind: "claim",
+                    title: { text: "分配多項式は四つの符号付き偶部分グラフ多項式の和の半分" },
+                    labels: ["claim_finite_torus_polynomial"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/finite-torus-polynomial"],
+                    lean: [
+                      "Ising2DLambda.KacWard.finiteTorusPolynomial",
+                      "Ising2DLambda.NecSuf.KacWard.finiteTorusPolynomial",
+                      "Ising2DLambda.KacWard.finiteTorusPolynomial_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " を取る。",
+                        "分配多項式 ", math(String.raw`Z_L\in\mathbb Z[x]`), "（", ref("def_partition_polynomial"),
+                        "）と四つの ", math(String.raw`Q^{a,b}_L\in\mathbb Z[x]`), "（",
+                        ref("def_signed_even_subgraph_polynomial"), "）について、",
+                      ]),
+                      displayMath(String.raw`2Z_L=\sum_{(a,b)\in\mathcal S}Q^{a,b}_L\qquad\text{in }\mathbb Z[x]`),
+                      paragraph([
+                        "が成り立つ。従って ", math(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L`),
+                        " であり、右辺も ", math(String.raw`\mathbb Z[x]`), " に属する。",
+                        "実数体・複素数体は使わない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`(c,d)\in\{0,1\}^2`), " を固定する。",
+                        "符号係数の四項和は次のとおりである。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{(a,b)\in\mathcal S}(-1)^{(1+a)c+(1+b)d+cd}
+&=(-1)^{c+d+cd}\left(\sum_{a=0}^1(-1)^{ac}\right)
+  \left(\sum_{b=0}^1(-1)^{bd}\right)
+&&\bigl(\because\ \text{整数の指数法則と有限和の分配則}\bigr)\\
+&=4[c=0][d=0]
+&&\bigl(\because\ \sum_{a=0}^1(-1)^{ac}=2[c=0],\ \,
+  \sum_{b=0}^1(-1)^{bd}=2[d=0]\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "ここで ", math(String.raw`[P]\in\{0,1\}\subset\mathbb Z`),
+                        " は命題 ", math(String.raw`P`), " の真偽を表す。",
+                        "以下の有限和はすべて ", math(String.raw`\mathbb Z[x]`), " に属する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{(a,b)\in\mathcal S}Q^{a,b}_L
+&=\sum_{(a,b)\in\mathcal S}\sum_{(c,d)\in\{0,1\}^2}
+  (-1)^{(1+a)c+(1+b)d+cd}G^{c,d}_L
+&&\bigl(\because\ \blkref{claim_signed_even_subgraph_sector_sum}\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}^2}\sum_{(a,b)\in\mathcal S}
+  (-1)^{(1+a)c+(1+b)d+cd}G^{c,d}_L
+&&\bigl(\because\ \text{有限和の順序交換}\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}^2}
+  \left(\sum_{(a,b)\in\mathcal S}(-1)^{(1+a)c+(1+b)d+cd}\right)G^{c,d}_L
+&&\bigl(\because\ \mathbb Z[x]\text{ の分配則}\bigr)\\
+&=\sum_{(c,d)\in\{0,1\}^2}4[c=0][d=0]G^{c,d}_L
+&&\bigl(\because\ \text{上の四項和}\bigr)\\
+&=4G^{0,0}_L
+&&\bigl(\because\ \text{零でない項は }(c,d)=(0,0)\text{ のみ}\bigr)\\
+&=2Z_L
+&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
         ],
       },
     },
@@ -88896,13 +88977,8 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                     [
                       "四つの有限トーラス行列式。",
                       "分配多項式 ", math(String.raw`Z_L(x)\in\mathbb{Z}[x]`),
-                      " を、四つのスピン構造に対応する Kac--Ward 行列式の平方根の符号付き和として書く段である。",
-                      "完了条件: 低温変数のまま、",
-                      math(String.raw`Z_L=\tfrac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L`),
-                      "（分配多項式は四つの符号付き偶部分グラフ多項式の和の半分。",
-                      ref("claim_low_temperature_trivial_sector_expression"), " と ",
-                      ref("claim_signed_even_subgraph_sector_sum"), " から従い、Arf 符号も双対変数への置換も前因子 ",
-                      math(String.raw`2^{L^2}`), " も要らない）を示し、前段の平方恒等式と合わせて各 ",
+                      " を、四つのスピン構造に対応する Kac--Ward 行列式の平方根の和として書く段である。",
+                      "完了条件: 前段の平方恒等式と ", ref("claim_finite_torus_polynomial"), " を合わせて各 ",
                       math(String.raw`Q^{a,b}_L`), " が ", math(String.raw`D^{a,b}_L`),
                       " の定数項 1 の多項式平方根（", ref("def_qbar_polynomial_square_root"),
                       "）であることを示すこと。四項の符号はすべて正である。",

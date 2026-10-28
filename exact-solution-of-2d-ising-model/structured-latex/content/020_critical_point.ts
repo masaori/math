@@ -2222,10 +2222,15 @@ T
         math(String.raw`\log(2\pi) \leq 1.8380`),
         " より",
       ]),
-      displayMath(
-        String.raw`\left|\cosh\kappa\left(\log(2\pi)+\rho\right)\right|
-\ \leq\ 1.1277\left(1.8380 + 0.0310\right) \ \leq\ 2.108`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\left|\cosh\kappa\left(\log(2\pi)+\rho\right)\right|
+&\leq\cosh\kappa\left(\left|\log(2\pi)\right|+|\rho|\right)
+&&\bigl(\because\ \cosh\kappa>0\text{ と三角不等式}\bigr)\\
+&\leq1.1277\left(1.8380+0.0310\right)
+&&\bigl(\because\ 0<\log(2\pi)\leq1.8380,\ \cosh\kappa\leq1.1277,\ |\rho|\leq0.0310\bigr)\\
+&\leq2.108
+&&\bigl(\because\ \text{有理数の大小比較}\bigr).
+\end{aligned}`),
       paragraph(["以上を合わせると"]),
       displayMath(
         String.raw`\left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right| \ \leq\ 0.093 + 2.108 \ =\ 2.201`,

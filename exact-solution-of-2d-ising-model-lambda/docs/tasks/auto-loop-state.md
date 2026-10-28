@@ -6,7 +6,7 @@
 
 ## 現在地
 
-- **2026-10-28（連続実行）、無ねじれモードの零条件を四層で示した。** 次は有限トーラス公式を示す。
+- **2026-10-28（連続実行）、低温変数での有限トーラス公式を四層で示した。** 次は分散因子の自己双対性と正値性の分解を進める。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -18,7 +18,6 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 有限トーラス公式（低温変数のまま）: 分配多項式は四つの符号付き偶部分グラフ多項式の和の半分 | 未着手 | $\mathbb Z[x]$ の等式 $Z_L=\frac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L$。根拠は `claim_low_temperature_trivial_sector_expression`（$Z_L=2G^{0,0}_L$）と `claim_signed_even_subgraph_sector_sum`（$Q^{a,b}_L=\sum_{(c,d)}\chi_{a,b}(c,d)G^{c,d}_L$）だけで、$(c,d)$ を固定した $\sum_{(a,b)}\chi_{a,b}(c,d)=4[c=0][d=0]$ を示して有限和の順序を交換する（一つの論法）。平方恒等式にも Fourier 分解にも依存しない。**Arf 符号 `claim_arf_fourier_sign_projection`、双対変数への置換、前因子 $2^{L^2}$ は使わない**（それらは $H_L$ を書くときのもの）。指示書 `assemble-finite-volume-closed-product.md` の 1（2026-10-09 の研究管理）。 |
 | Onsager 閉形式への接続 | 分散因子の自己双対性と正値性の分解 | 未着手 | $\overline{\mathbb Q}(x)$ の等式 $(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)=4\Delta(x;\varpi,\varsigma)$（`def_kw_dual_transform`）と、$\overline{\mathbb Q}[x]$ の等式 $\Delta(x;\varpi,\varsigma)-(x^2+2x-1)^2=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)$、および $\Delta(x;1,1)=(1-2x-x^2)^2$、$\Delta(x;1,-1)=\Delta(x;-1,1)=(1+x^2)^2$、$\Delta(x;-1,-1)=(1+2x-x^2)^2$。分散因子の定義だけに依存する。指示書 `assemble-finite-volume-closed-product.md` の 4・5 と `prove-twists-share-thermodynamic-limit.md` の 2（2026-10-09 の研究管理。辺長 1〜3 で確認済み）。 |
 | 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外 | 未着手 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: 道具の章の `matchingPair_evenColor_eq`・`qbarPolynomial_noninjective_inner_sum_zero`、Kac--Ward 章の `reversal_involutive`・`reversal_ne`・`spinStructures_card`・`transitionEntry_mem_mu8`・`kacWardDeterminantEntryProduct_ne_zero_iff`・`signedEvenSubgraphPolynomial_eq_sectorSum`・`walkTwistSign_product`・`vertexIncidentEdgeTraversal_even`・`firstHitConnectingStaircase_meets_lifts_only_at_ends`・`iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top`、置換展開の章の `movedEdgeOrbitSet_partition`・`kacWardSignedPermutationTerm_orbit_product`・`kacWardEntryProduct_orbit_factorization`・`kacWardSignedPermutationTerm_orbit_phase_twist`・`reversalFreeMovedSupport_even`・`reversalFreeOrbitSupportEdges_distinct`・`reversalFreeOrbit_vertexSimpleDecomposition`・`crossingFreeSignCounterexample`、臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 |
 | Onsager 閉形式への接続 | Kac--Ward 章の定義の Lean 対応を揃える | 未着手 | Lean に定義があるのに `lean:` を宣言していない定義ブロック（向き付き辺の集合、向き付き辺の方向番号、四つの Kac--Ward 多項式行列 など）へ宣言を足す。Lean に無い定義（閉じた非後退辺列、一歩の回転数、向き付き辺の行変位と列変位、閉歩道の向き付き切断線横断数、非後退辺列の平面持ち上げ など）を、実際の閉歩道から構成する形で定義する。離散 Whitney 系の Lean は点列 `base` を仮定で受ける形なので、この定義群が無いと具体版が本文の対象について述べていない（2026-10-04 の研究管理の判定。2026-10-05 の実測では、Kac--Ward 章の定義 109 件のうち 76 件、主張 176 件のうち 57 件に `lean:` が無い。2026-10-04 以降に置いた節の定義・主張は全て Lean 付き）。 |
@@ -63,28 +62,28 @@
 
 ## レビュー記録
 
+- 2026-10-28: 「無ねじれモードの零条件」の平方因子・零条件と SageMath・独立な Lean 二版を照合し、修正不要だった。
 - 2026-10-28: 「分散因子と Onsager 表示の代数的対応」の本文・SageMath・独立な Lean 二版を照合し、修正不要だった。
 - 2026-10-28: 「四方向小行列式は分散因子に等しい」の本文・SageMath・独立な Lean 二版を照合し、修正不要だった。
 - 2026-10-28: 「九つの置換項の符号付き和を分散因子へ整理する」を本文・SageMath・独立な Lean 二版と照合し、修正不要だった。
 
 - 2026-10-28: 「恒等置換と互換・二重互換の成分積」の七項と SageMath・Lean 二版を照合し、修正不要だった。
-- 2026-10-28: 「四方向小行列式の四周期二項の成分積」の本文・SageMath・Lean 二版を照合し、修正不要だった。
 
 ## 式変形の書き方の統一
 
+- 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、対数を含む第二項の絶対値上界を行末根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、双曲線余弦の差と対数を含む積の上界を行末根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、対数の分解と補正項の上界を行末根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、κ/δ と対数の上下界を行末根拠付きの式鎖にした。次は同じ証明の続き。
 
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、T の積分上界を行末根拠付きの式鎖にし、誤った丸めを 3.615 に直した。次は同じ証明の続き。
-- 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、T の被積分関数の上界を一行一根拠の式鎖にした。次は同じ証明の続き。
 
 
 ## 前進の記録
 
+- 2026-10-28: 低温変数の有限トーラス公式を、四つの符号係数の和と有限和の順序交換で四層に示した。
 - 2026-10-28: 無ねじれモードの分散因子を平方に分解し、自己双対方程式と零条件の同値を四層で示した。
 - 2026-10-28: 分散因子の評価値と設計ノートの略記の対応を、有理関数の恒等式として本文・SageMath・独立な Lean 二版で示した。
 - 2026-10-28: 四方向小行列式の置換展開から零項を消して九項を代入し、分散因子との等式を四層で示した。
 
 - 2026-10-28: 九項の総和を代数整理と行列式への代入に割り、符号付き和の多項式恒等式を四層で示した。
-- 2026-10-28: 恒等置換と互換・二重互換の七項を成分表で展開し、本文・SageMath・独立な Lean 二版で示した。
