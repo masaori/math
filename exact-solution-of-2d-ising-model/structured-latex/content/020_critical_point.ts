@@ -1422,12 +1422,26 @@ t-\sin t
         math(String.raw`c_0`),
         " の数値評価は ",
         math(String.raw`9.8696 \leq \pi^2 \leq 9.8697`),
-        " より ",
-        math(String.raw`1 - \tfrac{9.8697}{24} \leq c_0 \leq 1 - \tfrac{9.8696}{24}`),
-        " すなわち ",
-        math(String.raw`0.5887 \leq c_0 \leq 0.5888`),
-        "。",
+        " を使う。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+c_0
+&=1-\frac{\pi^2}{24}
+&& (\because c_0\text{ の定義})\\
+&\geq 1-\frac{9.8697}{24}
+&& (\because \pi^2\leq9.8697)\\
+&\geq 0.5887
+&& (\because \mathbb R\text{ の四則}).
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_0
+&=1-\frac{\pi^2}{24}
+&& (\because c_0\text{ の定義})\\
+&\leq 1-\frac{9.8696}{24}
+&& (\because 9.8696\leq\pi^2)\\
+&\leq 0.5888
+&& (\because \mathbb R\text{ の四則}).
+\end{aligned}`),
     ],
     conversion: { status: "added" },
   },

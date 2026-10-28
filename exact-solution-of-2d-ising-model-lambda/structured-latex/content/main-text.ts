@@ -82140,6 +82140,11 @@ D^{a,b}_L(x)
                 labels: ["claim_fourier_block_fiber_determinant_product"],
                 habitat: "Qbar",
                 verification: ["sagemath/check/fourier-mode-block-entries"],
+                lean: [
+                  "Ising2DLambda.KacWard.fourier_block_fiber_determinant_product",
+                  "Ising2DLambda.NecSuf.KacWard.fourier_block_fiber_determinant_product_necSuf",
+                  "Ising2DLambda.KacWard.fourier_block_fiber_determinant_product_from_necSuf",
+                ],
                 statement: [
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
