@@ -83105,6 +83105,74 @@ D^{a,b}_L(x)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_special_mode_squares",
+              focus: {
+                id: "finite_fourier_claim_dispersion_special_mode_squares",
+                kind: "claim",
+                title: { text: "分散因子の特殊モードでの平方分解" },
+                labels: ["claim_dispersion_special_mode_squares"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-special-mode-squares"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_special_mode_squares",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_special_mode_squares",
+                  "Ising2DLambda.KacWard.dispersion_special_mode_squares_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`x`), " を ", math(String.raw`\overline{\mathbb Q}[x]`),
+                    " の不定元とする。", ref("def_dispersion_polynomial"),
+                    " の四つの特殊モードは、次の多項式平方に分解する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;1,1)&=(1-2x-x^2)^2,\\
+\Delta(x;1,-1)&=(1+x^2)^2,\\
+\Delta(x;-1,1)&=(1+x^2)^2,\\
+\Delta(x;-1,-1)&=(1+2x-x^2)^2.
+\end{aligned}`),
+                  paragraph(["各因子の定数項は 1 である。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;1,1)
+&=(1+x^2)^2-x(1-x^2)(1+1+1+1)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2-4x(1-x^2)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の加法}\bigr)\\
+&=(1-2x-x^2)^2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;1,-1)
+&=(1+x^2)^2-x(1-x^2)(1+1-1-1)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の加法}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;-1,1)
+&=(1+x^2)^2-x(1-x^2)(-1-1+1+1)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の加法}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;-1,-1)
+&=(1+x^2)^2-x(1-x^2)(-1-1-1-1)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2+4x(1-x^2)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の加法}\bigr)\\
+&=(1+2x-x^2)^2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_untwisted_mode_zero_condition",
               focus: {
                 id: "finite_fourier_claim_untwisted_mode_zero_condition",

@@ -2407,11 +2407,13 @@ G''(\kappa)
 \frac{d}{dK}\left(\frac12\log\left(2\sinh 2K\right)\right)
 &= \frac12\cdot\frac{2\cosh 2K}{\sinh 2K}
    \quad (\because \log \text{ の微分と } (\sinh)'=\cosh) \\
-&= \frac{\cosh 2K}{\sinh 2K} \\
+&= \frac{\cosh 2K}{\sinh 2K}
+   \quad (\because \mathbb R\text{ の四則}) \\
 \frac{d^2}{dK^2}\left(\frac12\log\left(2\sinh 2K\right)\right)
 &= \frac{2\sinh 2K\cdot\sinh 2K - \cosh 2K\cdot 2\cosh 2K}{\sinh^2 2K}
    \quad (\because \text{商の微分}) \\
-&= \frac{2\left(\sinh^2 2K - \cosh^2 2K\right)}{\sinh^2 2K} \\
+&= \frac{2\left(\sinh^2 2K - \cosh^2 2K\right)}{\sinh^2 2K}
+   \quad (\because \mathbb R\text{ の分配律}) \\
 &= -\frac{2}{\sinh^2 2K}
    \quad (\because \text{cosh\_sinh\_basic\_properties (2)})
 \end{aligned}`,
