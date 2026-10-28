@@ -76235,6 +76235,60 @@ M_{\mathcal D_0,\varnothing}(x)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_alternating_cycle_matching_sign",
+              labels: [],
+              title: { text: "交互閉路による完全マッチングの符号比較" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_alternating_cycle_matching_sign",
+                  focus: {
+                    id: "kac_ward_claim_alternating_cycle_matching_sign",
+                    kind: "claim",
+                    title: { text: "交互閉路ごとの向き直しが二つのマッチングの符号比を与える" },
+                    labels: ["claim_alternating_cycle_matching_sign"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/alternating-cycle-matching-sign"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と非零の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", ref("def_reference_long_pairs"), " の基準マッチングを ", math(String.raw`\mathcal D_0`), " とし、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の有限集合を ", math(String.raw`\mathcal C`), " とする。各 ", math(String.raw`C\in\mathcal C`), " の第一色から始まる点列を ", math(String.raw`c_C(0),\ldots,c_C(2k_C-1)`), " とし、", math(String.raw`c_C(2k_C)=c_C(0)`), " と置く。" ]),
+                      paragraph(["線型順序 ", math(String.raw`\prec`), " は辺番号と向きの辞書式とする。相異なる二点 ", math(String.raw`i,j\in\vec E_L`), " に対し ", math(String.raw`\eta(i,j):=1\ (i\prec j),\ -1\ (j\prec i)`), " と置き、各閉路で ", math(String.raw`\alpha_D(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r),c_C(2r+1))`), " および ", math(String.raw`\alpha_0(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r+1),c_C(2r+2))`), " を定める。これらは ", math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。このとき整数の等式"]),
+                      displayMath(String.raw`\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+=(-1)^{|\mathcal C|}\prod_{C\in\mathcal C}\alpha_D(C)\alpha_0(C)`),
+                      paragraph(["が成り立つ。空の閉路集合では右辺は一である。辺長一で同じ二元集合に長短の標識が付く一歩閉路も含む。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により交互閉路の点集合は互いに素で、全活動点を覆う。", ref("claim_tagged_symmetric_difference_degree"), " より活動点以外の ", math(String.raw`D`), " の対は ", math(String.raw`\mathcal D_0`), " の長い対と一致する。両マッチングに共通する対を昇順に並べ、各閉路の後ろへ同じ順で付ける。" ]),
+                      paragraph(["各閉路 ", math(String.raw`C`), " について、", ref("claim_tagged_difference_alternating_cycle"), " と ", ref("def_matching_pair_successor"), " により ", math(String.raw`(c_C(2r),c_C(2r+1))`), " は ", math(String.raw`D`), " の対の向き付き列挙であり、", math(String.raw`(c_C(2r+1),c_C(2r+2))`), " は ", math(String.raw`\mathcal D_0`), " の対の向き付き列挙である。共通する対は両列挙で同じ昇順の向きに取る。" ]),
+                      paragraph(["閉路を同じ順で並べて ", math(String.raw`D`), " の向き付き端点列を ", math(String.raw`W_D`), "、基準マッチングの列を ", math(String.raw`W_0`), " と書く。各列の対の第一端点を選んだ集合は各対から一端点だけを含むので、", ref("claim_matching_pair_word_orientation_sign"), " を適用できる。各閉路で後者の部分列は前者の ", math(String.raw`2k_C`), " 個の文字を一つ左へ巡回移動したものなので、その置換の符号は ", math(String.raw`(-1)^{2k_C-1}=-1`), " である。共通対の部分列は変わらない。", ref("def_matching_word_sign"), " に従って端点列の符号を ", math(String.raw`\varepsilon`), " と書くと、"]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon(W_0)
+&=\prod_{C\in\mathcal C}(-1)^{2k_C-1}\,\varepsilon(W_D)
+&&\bigl(\because\ \text{閉路ごとの巡回移動と置換符号の積}\bigr)\\
+&=(-1)^{|\mathcal C|}\varepsilon(W_D)
+&&\bigl(\because\ 2k_C-1\text{ は奇数}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き直しの等式を各列挙へ適用する。対の列挙順序は ", ref("claim_perfect_matching_sign_enumeration_independent"), " で符号に影響しない。共通対の向きは両側で ", math(String.raw`+1`), " なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\alpha_0\operatorname{sgn}(\mathcal D_0)
+&=\varepsilon(W_0)
+&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
+&=(-1)^{|\mathcal C|}\varepsilon(W_D)
+&&\bigl(\because\ \text{上の巡回移動の等式}\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_D\operatorname{sgn}(D)
+&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
+\end{aligned}`),
+                      paragraph(["ここで ", math(String.raw`\alpha_D:=\prod_C\alpha_D(C)`), "、", math(String.raw`\alpha_0:=\prod_C\alpha_0(C)`), " は整数値の符号であり、各因子の平方は一である。直前の等式の両辺に ", math(String.raw`\alpha_0\operatorname{sgn}(D)`), " を掛け、符号の平方を一へ直すと主張を得る。空集合でも同じ空積の計算が成り立つ。" ]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },

@@ -10,6 +10,7 @@ export const ALL_LABELS = [
   "claim_admissible_direction_permutation_signs",
   "claim_admissible_direction_permutations",
   "claim_all_direction_seam_mode_phase",
+  "claim_alternating_cycle_matching_sign",
   "claim_alternating_neighbor_matchings",
   "claim_antiperiodic_mode_exists",
   "claim_arf_fourier_sign_projection",
