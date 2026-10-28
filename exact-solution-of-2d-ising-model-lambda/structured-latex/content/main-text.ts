@@ -82824,6 +82824,69 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_untwisted_mode_zero_condition",
+              focus: {
+                id: "finite_fourier_claim_untwisted_mode_zero_condition",
+                kind: "claim",
+                title: { text: "無ねじれモードの零条件は自己双対方程式である" },
+                labels: ["claim_untwisted_mode_zero_condition"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/untwisted-mode-zero-condition"],
+                lean: [
+                  "Ising2DLambda.KacWard.untwistedMode_zero_condition",
+                  "Ising2DLambda.NecSuf.KacWard.untwistedMode_zero_condition",
+                  "Ising2DLambda.KacWard.untwistedMode_zero_condition_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`q\in\overline{\mathbb Q}`), " を取る。無ねじれスピン構造 ",
+                    math(String.raw`(a,b)=(0,0)`), " のモード値を次で定める。",
+                  ]),
+                  displayMath(String.raw`\Delta(q;1,1):=(1+q^2)^2-q(1-q^2)(1+1+1+1)\in\overline{\mathbb Q}.`),
+                  paragraph(["このとき無ねじれモードの零条件は次と同値である。"]),
+                  displayMath(String.raw`\Delta(q;1,1)=0\ \Longleftrightarrow\ q^2+2q-1=0.`),
+                  paragraph([
+                    "モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), "、分散因子は ",
+                    ref("claim_mode_small_matrix_determinant_dispersion"),
+                    " の右辺による。実数体・複素数体は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`1^L=1=(-1)^0`), " より ",
+                    math(String.raw`1\in\mathcal U_0`), "（", ref("def_horizontal_twisted_modes"),
+                    "）かつ ", math(String.raw`1\in\mathcal W_0`), "（", ref("def_vertical_twisted_modes"),
+                    "）である。分散因子をこのモードで評価すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(q;1,1)
+&=(1+q^2)^2-q(1-q^2)(1+1+1+1)
+&&\bigl(\because\ \Delta\text{ の定義}\bigr)\\
+&=(1+q^2)^2-4q(1-q^2)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
+&=(1-2q-q^2)^2
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr).
+\end{aligned}`),
+                  paragraph(["体 ", math(String.raw`\overline{\mathbb Q}`), " に零因子は無いので、平方が零であることは底が零であることと同値である。従って"]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(q;1,1)=0
+&\Longleftrightarrow (1-2q-q^2)^2=0
+&&\bigl(\because\ \text{上の等式}\bigr)\\
+&\Longleftrightarrow 1-2q-q^2=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ は整域}\bigr)\\
+&\Longleftrightarrow q^2+2q-1=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

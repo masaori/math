@@ -2185,12 +2185,17 @@ T
  + \cosh\kappa\left(\log(2\pi) + \rho\right)
 \end{aligned}`,
       ),
+      paragraph(["右辺第 1 項は、", ref("cosh_addition_and_half_angle"), " (2)(5) より"]),
+      displayMath(String.raw`\begin{aligned}
+\cosh\kappa-1
+&=2\sinh^2\!\left(\frac\kappa2\right)
+&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (2)}\bigr)\\
+&\leq2\left(\frac\kappa2\cosh\frac14\right)^2
+&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (5) と }0<\kappa\leq\tfrac12\bigr)\\
+&\leq0.532\,\kappa^2
+&&\bigl(\because\ \cosh\tfrac14\text{ の数値上界}\bigr).
+\end{aligned}`),
       paragraph([
-        "右辺第 1 項は、",
-        ref("cosh_addition_and_half_angle"),
-        " (2)(5) より ",
-        math(String.raw`\cosh\kappa - 1 = 2\sinh^2\!\left(\tfrac\kappa2\right) \leq 2\left(\tfrac\kappa2\cosh\tfrac14\right)^2 \leq 0.532\,\kappa^2`),
-        " であり、",
         math(String.raw`\kappa^2\log\frac1\kappa`),
         " は ",
         math(String.raw`(0,\tfrac12]`),
@@ -2200,9 +2205,16 @@ T
         math(String.raw`\tfrac14\log 2 \leq 0.1733`),
         " なので",
       ]),
-      displayMath(
-        String.raw`0 \ \leq\ \left(\cosh\kappa-1\right)\log\frac{1}{\kappa} \ \leq\ 0.532\cdot 0.1733 \ \leq\ 0.093`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+0&\leq(\cosh\kappa-1)\log\frac1\kappa
+&&\bigl(\because\ \cosh\kappa\geq1,\ 0<\kappa\leq\tfrac12\bigr)\\
+&\leq0.532\,\kappa^2\log\frac1\kappa
+&&\bigl(\because\ \text{直前の }\cosh\kappa-1\text{ の上界}\bigr)\\
+&\leq0.532\cdot0.1733
+&&\bigl(\because\ \kappa^2\log(1/\kappa)\leq0.1733\bigr)\\
+&\leq0.093
+&&\bigl(\because\ \text{有理数の大小比較}\bigr).
+\end{aligned}`),
       paragraph([
         "第 2 項は ",
         math(String.raw`\cosh\kappa \leq \cosh\tfrac12 \leq 1.1277`),

@@ -650,6 +650,7 @@ export const ALL_LABELS = [
   "claim_two_is_square_in_real_closed",
   "claim_two_support_coefficient_formula",
   "claim_unswitchable_standard_pair_forces_doubled_edge",
+  "claim_untwisted_mode_zero_condition",
   "claim_upward_seam_mode_phase",
   "claim_value_at_rational_is_positive",
   "claim_vertex_crossing_number_factorization",
