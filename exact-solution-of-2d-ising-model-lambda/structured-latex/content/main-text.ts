@@ -75382,12 +75382,29 @@ q_{a,b}(h,v)
                         " の縦辺係数は、正方形境界の定義から"]),
                       displayMath(String.raw`V^{\mathrm v}_{i,j}=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
 \qquad(\because\ P_{i,j}\text{ の縦辺の配置}).`),
-                      paragraph(["この式へ部分和を代入すると ", math(String.raw`1\le j<L`),
-                        " では ", math(String.raw`V^{\mathrm v}_{i,j}=0`),
-                        "、", math(String.raw`j=0`), " では ",
-                        math(String.raw`V^{\mathrm v}_{i,0}=\sum_{r=0}^{L-1}V_{i,r}=v`),
-                        " となる。各 ", math(String.raw`P_{i,j}`),
-                        " は頂点偶次数なので ", math(String.raw`C^{\mathrm v}`), " も頂点偶次数である。"]),
+                      paragraph([math(String.raw`1\le j<L`), " では部分和を代入して"]),
+                      displayMath(String.raw`\begin{aligned}
+V^{\mathrm v}_{i,j}
+&=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
+&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
+&=V_{i,j}+\sum_{r=1}^{j-1}V_{i,r}+\sum_{r=1}^{j}V_{i,r}
+&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`j=0`), " では添字を法 ", math(String.raw`L`), " で読み、"]),
+                      displayMath(String.raw`\begin{aligned}
+V^{\mathrm v}_{i,0}
+&=V_{i,0}+p^{\mathrm v}_{i,L-1}+p^{\mathrm v}_{i,0}
+&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
+&=V_{i,0}+\sum_{r=1}^{L-1}V_{i,r}
+&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
+&=\sum_{r=0}^{L-1}V_{i,r}
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=v
+&&\bigl(\because\ \text{上で示した行によらない和}\bigr).
+\end{aligned}`),
+                      paragraph(["各 ", math(String.raw`P_{i,j}`), " は頂点偶次数なので ", math(String.raw`C^{\mathrm v}`), " も頂点偶次数である。"]),
                       paragraph(["従って頂点条件へ上の縦辺係数を代入すると ",
                         math(String.raw`H^{\mathrm v}_{i,j}=H^{\mathrm v}_{i,j-1}`),
                         " である。行 ", math(String.raw`i`), " に共通な係数を ",
@@ -75401,12 +75418,29 @@ q_{a,b}(h,v)
                         " の行 ", math(String.raw`i`), " の横辺係数は"]),
                       displayMath(String.raw`H^{\mathrm h}_{i,j}=a_i+q_i+q_{i-1}
 \qquad(\because\ \sum_jP_{i,j}\text{ の横辺の配置}).`),
-                      paragraph(["部分和の定義により ", math(String.raw`1\le i<L`),
-                        " の係数は零で、行 ", math(String.raw`i=0`),
-                        " の係数は ", math(String.raw`\sum_{r=0}^{L-1}a_r`),
-                        " である。正方形境界は切断線を横切る横辺を各々零回または二回含むので、この和は元の ",
-                        math(String.raw`h`), " に等しい。縦辺は先の ", math(String.raw`v`),
-                        " の列のままである。従って"]),
+                      paragraph([math(String.raw`1\le i<L`), " では"]),
+                      displayMath(String.raw`\begin{aligned}
+H^{\mathrm h}_{i,j}
+&=a_i+q_i+q_{i-1}
+&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
+&=a_i+\sum_{r=1}^{i}a_r+\sum_{r=1}^{i-1}a_r
+&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`i=0`), " では"]),
+                      displayMath(String.raw`\begin{aligned}
+H^{\mathrm h}_{0,j}
+&=a_0+q_0+q_{L-1}
+&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
+&=a_0+\sum_{r=1}^{L-1}a_r
+&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
+&=\sum_{r=0}^{L-1}a_r
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=h
+&&\bigl(\because\ \text{正方形境界は切断線の横辺を偶数回含む}\bigr).
+\end{aligned}`),
+                      paragraph(["縦辺は先の ", math(String.raw`v`), " の列のままである。従って"]),
                       displayMath(String.raw`C^{\mathrm h}=hR_{\mathrm h}+vR_{\mathrm v}
 \qquad(\because\ \text{行と列の係数の決定}).`),
                       paragraph(["両側へ加えた正方形境界を再び加えると同じ辺が二度現れて消え、",
