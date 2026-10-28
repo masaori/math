@@ -75687,6 +75687,115 @@ c(\gamma)+1
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_edge_distinct_crossing_elimination_parity",
+              labels: [],
+              title: { text: "辺の重複がない閉歩道の横断消去と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_distinct_crossing_elimination_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_distinct_crossing_elimination_parity",
+                    kind: "claim",
+                    title: { text: "横断消去の帰納法は位相と切断線偶奇と交差形式を保つ" },
+                    labels: ["claim_edge_distinct_crossing_elimination_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/edge-distinct-crossing-elimination-parity"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なる閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
+                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
+                        " が存在する。任意のこの議論の辺列 ", math(String.raw`\eta`),
+                        " の無向辺の台を ", math(String.raw`C_{\eta}`), " と書き、",
+                        math(String.raw`C_i:=C_{\delta_i}`), " と置く。台 ",
+                        math(String.raw`C_i`), " は互いに素で、合併は ", math(String.raw`C_{\gamma}`),
+                        " であり、各 ", math(String.raw`c(\delta_i)=0`), " である。さらに整数の等式と二元体の等式",
+                      ]),
+                      displayMath(String.raw`\sum_{i=1}^{n}t_{\circ}(\delta_i)=t_{\circ}(\gamma),\qquad
+(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
+c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
+                      paragraph([
+                        "循環総回転数・切断線偶奇・横断数はそれぞれ ",
+                        ref("def_cyclic_total_turning"), "、", ref("def_edge_sequence_seam_parities"),
+                        "、", ref("def_closed_walk_crossing_number"), " で定め、交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " で定める。",
+                        math(String.raw`\bigoplus`), " は二成分ごとに法二で加えることを表す。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`c(\gamma)\in\mathbb N`), " に関する整礎帰納法を用いる。",
+                        math(String.raw`c(\gamma)=0`), " なら ", math(String.raw`n=1`),
+                        "、", math(String.raw`\delta_1=\gamma`), " と取る。辺の台、回転数、切断線偶奇は同じで、",
+                        "対 ", math(String.raw`i<j`), " の集合は空であり、横断数の式の両辺は零である。",
+                      ]),
+                      paragraph([
+                        math(String.raw`c(\gamma)>0`), " とする。", ref("def_closed_walk_crossing_number"),
+                        " から横断する添字 ", math(String.raw`k<l`), " を選ぶ。",
+                        ref("claim_smoothing_splits_closed_walk"), " の二本を ",
+                        math(String.raw`\gamma_A,\gamma_B`), " とし、その辺の台を ",
+                        math(String.raw`C_A,C_B`), " とする。元の辺が相異なるので ",
+                        math(String.raw`C_A\cap C_B=\varnothing`), " かつ ",
+                        math(String.raw`C_A\cup C_B=C_{\gamma}`), " である。",
+                        ref("claim_smoothing_split_crossing_descent"), " により各子の横断数は元より小さい。",
+                        "帰納法を二本へ適用し、横断のない族 ",
+                        math(String.raw`(\alpha_i)_{1\le i\le p}`), "、",
+                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。両族を連結して ",
+                        math(String.raw`(\delta_i)_{1\le i\le p+q}`), " と置く。",
+                        "帰納法の台の条件と二本の台の分割により、連結族の台も互いに素で元の台を尽くす。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p+q}t_{\circ}(\delta_i)
+&=\sum_{i=1}^{p}t_{\circ}(\alpha_i)+\sum_{j=1}^{q}t_{\circ}(\beta_j)
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "切断線偶奇も成分ごとに帰納法の仮定を適用し、",
+                        ref("claim_smoothing_split_seam_parity"), " を適用すると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
+&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
+&&\bigl(\because\ \text{有限和の分割と二本への帰納法の仮定}\bigr)\\
+&=(h(\gamma),v(\gamma))
+&&\bigl(\because\ \blkref{claim_smoothing_split_seam_parity}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "交差形式 ", math(String.raw`I_L`), " は ",
+                        ref("def_even_edge_chain_intersection"), " の各項が二つの辺鎖の係数の積なので、",
+                        "二つの引数のそれぞれについて有限和に分配する。台の分割を代入して",
+                      ]),
+                      displayMath(String.raw`I_L(C_A,C_B)
+=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
+\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と辺の台の互いに素な分割}\bigr).`),
+                      paragraph(["横断数については、求める左辺から一回の平滑化と帰納法を順に適用する。"]),
+                      displayMath(String.raw`\begin{aligned}
+c(\gamma)\bmod2
+&=c(\gamma_A)+c(\gamma_B)+1+I_L(C_A,C_B)
+&&\bigl(\because\ \blkref{claim_edge_distinct_smoothing_crossing_parity}\bigr)\\
+&=(p-1)+(q-1)+1+\sum_{1\le i<j\le p}I_L(C_{\alpha_i},C_{\alpha_j})
++\sum_{1\le i<j\le q}I_L(C_{\beta_i},C_{\beta_j})+I_L(C_A,C_B)
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)
+&&\bigl(\because\ \text{上の交差形式の分配と有限和の分割}\bigr)\quad(\mathbb F_2).
+\end{aligned}`),
+                      paragraph(["以上の帰納は有限集合、整数、二元体の演算だけで閉じる。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },

@@ -2564,15 +2564,34 @@ G''(\kappa)
         " の単調性より",
       ]),
       displayMath(
-        String.raw`\left|\log\frac{1}{|\kappa|} - \log\frac{1}{|K-K_c|}\right|
-= \left|\log\frac{|\kappa|}{|K-K_c|}\right|
-\ \leq\ \log 4.72 \ \leq\ 1.5518`,
+        String.raw`\begin{aligned}
+\left|\log\frac{1}{|\kappa|} - \log\frac{1}{|K-K_c|}\right|
+&= \left|\log\frac{|K-K_c|}{|\kappa|}\right|
+&&\bigl(\because\ \log A-\log B=\log(A/B)\bigr)\\
+&= \left|\log\frac{|\kappa|}{|K-K_c|}\right|
+&&\bigl(\because\ \log(1/r)=-\log r\bigr)\\
+&= \log\frac{|\kappa|}{|K-K_c|}
+&&\bigl(\because\ 3.53\leq |\kappa|/|K-K_c|\bigr)\\
+&\leq \log 4.72
+&&\bigl(\because\ \blkref{kappa_of_K_basic}\text{ (5) と対数の単調性}\bigr)\\
+&\leq 1.5519
+&&\bigl(\because\ \log 4.72\leq1.5519\bigr).
+\end{aligned}`,
       ),
       paragraph(["したがって"]),
       displayMath(
-        String.raw`\left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|K-K_c|}\right|
-\ \leq\ 45 + \frac{8}{\pi}\cdot 1.5518
-\ \leq\ 45 + 3.96 \ \leq\ 49`,
+        String.raw`\begin{aligned}
+\left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|K-K_c|}\right|
+&\leq \left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
++\frac{8}{\pi}\left|\log\frac{1}{|\kappa|}-\log\frac{1}{|K-K_c|}\right|
+&&\bigl(\because\ \mathbb R\text{ の三角不等式}\bigr)\\
+&\leq 45+\frac{8}{\pi}\cdot1.5519
+&&\bigl(\because\ \text{Step 6 と直前の評価}\bigr)\\
+&\leq 45+3.96
+&&\bigl(\because\ 8\cdot1.5519/\pi\leq3.96\bigr)\\
+&\leq49
+&&\bigl(\because\ \mathbb R\text{ の有理数の順序}\bigr).
+\end{aligned}`,
       ),
       paragraph([
         "Step 8（極限）。",
