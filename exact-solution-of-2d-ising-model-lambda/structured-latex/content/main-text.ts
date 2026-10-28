@@ -77000,9 +77000,15 @@ Z_L
                       ]),
                       paragraph([
                         ref("def_doubled_edge_set"), " と ", ref("def_single_traversal_edge_set"),
-                        " は動く辺の集合だけから定まるので、直前の集合の等式をそれぞれの定義へ代入して ",
-                        math(String.raw`D(\psi)=D(\varphi)`), " と ", math(String.raw`E_1(\psi)=E_1(\varphi)`),
-                        " を得る。最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
+                        " は動く辺の集合だけから定まる。直前に示した ", math(String.raw`M(\psi)=M(\varphi)`),
+                        " を代入すると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+D(\psi)&=D(\varphi)&&\bigl(\because\ \blkref{def_doubled_edge_set}\text{ と }M(\psi)=M(\varphi)\bigr),\\
+E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \blkref{def_single_traversal_edge_set}\text{ と }M(\psi)=M(\varphi)\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
                         " の二つの等式へこれらを代入したものである。",
                       ]),
                     ],

@@ -1,4 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairReverseColor
+import Ising2DLambda.NecSuf.AlgebraicEigenvalue.AlternatingColorUniqueness
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 variable {J : Type*} [Fintype J] [LinearOrder J]

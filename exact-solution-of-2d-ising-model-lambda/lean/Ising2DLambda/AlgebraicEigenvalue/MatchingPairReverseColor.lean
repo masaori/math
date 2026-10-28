@@ -1,13 +1,12 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairReverseOrbit
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairSecondColoring
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.AlternatingColorUniqueness
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 variable {J : Type*} [Fintype J] [LinearOrder J]
 open Classical
 
 /-- 一歩ごとに反転する二色は、同じ軌道の一つの点で一致すれば全点で一致する。 -/
-private theorem finiteAlternatingColor_eq_on_orbit (σ : Equiv.Perm J)
+theorem finiteAlternatingColor_eq_on_orbit (σ : Equiv.Perm J)
     (C D : Set J)
     (hC : ∀ j, σ j ∈ C ↔ j ∉ C)
     (hD : ∀ j, σ j ∈ D ↔ j ∉ D)

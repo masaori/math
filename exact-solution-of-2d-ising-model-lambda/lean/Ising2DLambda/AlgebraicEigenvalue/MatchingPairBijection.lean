@@ -62,8 +62,7 @@ theorem matchingPair_evenColor_eq (τ υ : FixedPointFreeInvolution J) (i : J) :
   let C : Set J := finitePermutationEvenColor σ
   let D : Set J := matchingPairColor τ υ
   have hbase : m ∈ C ↔ m ∈ D := iff_of_true hmEven hmPair
-  exact NecSuf.AlgebraicEigenvalue.alternatingColor_eq_on_orbit
-    σ C D hC hD m i hbase hi
+  exact finiteAlternatingColor_eq_on_orbit σ C D hC hD m i hbase hi
 
 theorem matchingPair_bijection_left
     (p : FixedPointFreeInvolution J × FixedPointFreeInvolution J) :
