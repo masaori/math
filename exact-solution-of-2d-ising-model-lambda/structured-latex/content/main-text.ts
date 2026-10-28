@@ -82773,6 +82773,57 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_algebraic_onsager_form",
+              focus: {
+                id: "finite_fourier_claim_dispersion_algebraic_onsager_form",
+                kind: "claim",
+                title: { text: "分散因子と Onsager 表示の代数的対応" },
+                labels: ["claim_dispersion_algebraic_onsager_form"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-algebraic-onsager-form"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_algebraic_onsager_form",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_algebraic_onsager_form",
+                  "Ising2DLambda.KacWard.dispersion_algebraic_onsager_form_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`q\in\overline{\mathbb Q}\setminus\{0\}`), " と ",
+                    math(String.raw`\varpi,\varsigma\in\overline{\mathbb Q}\setminus\{0\}`),
+                    " を取る。以下の四つの量はすべて ", math(String.raw`\overline{\mathbb Q}`),
+                    " に属する。",
+                  ]),
+                  displayMath(String.raw`C_2(q):=\frac{1+q^2}{2q},\quad S_2(q):=\frac{1-q^2}{2q},\quad c:\overline{\mathbb Q}\setminus\{0\}\to\overline{\mathbb Q},\quad c(z):=\frac{z+z^{-1}}2\quad(z\in\overline{\mathbb Q}\setminus\{0\}).`),
+                  paragraph([
+                    "このとき次の等式が ", math(String.raw`\overline{\mathbb Q}`), " で成り立つ。左辺は ",
+                    ref("claim_mode_small_matrix_determinant_dispersion"),
+                    " の多項式を ", math(String.raw`x=q`), " で評価した値である。",
+                  ]),
+                  displayMath(String.raw`(1+q^2)^2-q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})=4q^2\bigl(C_2(q)^2-S_2(q)(c(\varpi)+c(\varsigma))\bigr).`),
+                  paragraph([
+                    math(String.raw`C_2,S_2,c`), " はそれぞれ設計ノートの ",
+                    math(String.raw`\cosh 2K,\sinh 2K,\cos\theta`),
+                    " に対応する代数的略記であり、解析関数や実数の角を定義しない。",
+                  ]),
+                ],
+                proof: [
+                  displayMath(String.raw`\begin{aligned}
+4q^2\bigl(C_2(q)^2-S_2(q)(c(\varpi)+c(\varsigma))\bigr)
+&=4q^2\left(\frac{(1+q^2)^2}{4q^2}-\frac{1-q^2}{2q}\left(\frac{\varpi+\varpi^{-1}}2+\frac{\varsigma+\varsigma^{-1}}2\right)\right)
+&&\bigl(\because\ C_2,S_2,c\text{ の定義}\bigr)\\
+&=(1+q^2)^2-q(1-q^2)\bigl((\varpi+\varpi^{-1})+(\varsigma+\varsigma^{-1})\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則と }q\ne0\bigr)\\
+&=(1+q^2)^2-q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の結合律}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },

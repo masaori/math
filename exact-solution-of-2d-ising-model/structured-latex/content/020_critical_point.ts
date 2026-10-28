@@ -2156,12 +2156,28 @@ T
       ),
       paragraph([
         math(String.raw`\rho := \log\frac{\kappa}{\delta} - \log 2`),
-        " とおくと ",
-        math(String.raw`\log\frac{\pi}{\delta} = \log\frac{1}{\kappa} + \log(2\pi) + \rho`),
-        " であり、",
-        math(String.raw`|\rho| \leq \log\cosh\tfrac14 \leq 0.0310`),
-        "。よって",
+        " とおく。直前の評価と ", ref("cosh_addition_and_half_angle"),
+        " (5) を用いると、",
       ]),
+      displayMath(String.raw`\cosh\!\left(\frac\kappa2\right)\leq\cosh\tfrac14
+\quad(\because\ 0<\kappa\leq\tfrac12\text{ と }\blkref{cosh_addition_and_half_angle}\text{ (2)(3)}).`),
+      displayMath(String.raw`\begin{aligned}
+\log\frac{\pi}{\delta}
+&=\log\frac1\kappa+\log\pi+\log\frac\kappa\delta
+&& (\because\ \text{対数の積の法則})\\
+&=\log\frac1\kappa+\log(2\pi)+\left(\log\frac\kappa\delta-\log2\right)
+&& (\because\ \text{対数の積の法則})\\
+&=\log\frac1\kappa+\log(2\pi)+\rho
+&& (\because\ \rho\text{ の定義}),\\[2pt]
+|\rho|
+&\leq\log\cosh\!\left(\frac\kappa2\right)
+&& (\because\ -\log\cosh\!\left(\frac\kappa2\right)\leq\rho\leq0)\\
+&\leq\log\cosh\tfrac14
+&& (\because\ \text{直前の評価と対数の単調性})\\
+&\leq0.0310
+&& (\because\ \text{有理数による数値上界}).
+\end{aligned}`),
+      paragraph(["よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}
