@@ -92,6 +92,7 @@ export const ALL_LABELS = [
   "claim_edge_row_partition",
   "claim_edge_simple_contact_split",
   "claim_empty_pfaffian_determinant",
+  "claim_even_edge_chain_torus_normal_form",
   "claim_even_orbit_coloring",
   "claim_even_orbit_minimum_color",
   "claim_even_subgraph_pair_fiber_bijection",

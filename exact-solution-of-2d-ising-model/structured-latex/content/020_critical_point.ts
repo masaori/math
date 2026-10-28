@@ -2450,7 +2450,8 @@ G''(\kappa)
       ]),
       displayMath(
         String.raw`\frac{d^2}{dK^2}G\!\left(\kappa(K)\right)
-= G''\!\left(\kappa(K)\right)\kappa'(K)^2 + G'\!\left(\kappa(K)\right)\kappa''(K)`,
+= G''\!\left(\kappa(K)\right)\kappa'(K)^2 + G'\!\left(\kappa(K)\right)\kappa''(K)
+\qquad(\because\ \text{合成関数の微分を二度適用})`,
       ),
       paragraph([
         "第 2 項は ",
@@ -2464,7 +2465,15 @@ G''(\kappa)
         " より",
       ]),
       displayMath(
-        String.raw`\left|G'\!\left(\kappa(K)\right)\kappa''(K)\right| \ \leq\ \frac{9.19}{2} \ \leq\ 4.60`,
+        String.raw`\begin{aligned}
+\left|G'\!\left(\kappa(K)\right)\kappa''(K)\right|
+&=\left|G'\!\left(\kappa(K)\right)\right|\left|\kappa''(K)\right|
+   \qquad(\because\ \text{絶対値の積の性質})\\
+&\leq\frac12\cdot9.19
+   \qquad(\because\ \text{second\_derivative\_log\_divergence と kappa\_of\_K\_basic (4)})\\
+&\leq4.60
+   \qquad(\because\ \mathbb R\text{ の有理数計算}).
+\end{aligned}`,
       ),
       paragraph([
         "Step 4（",
