@@ -2536,13 +2536,20 @@ G''(\kappa)
       displayMath(
         String.raw`\begin{aligned}
 \left|\frac{d^2f}{dK^2} - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
+&=\left|\frac{d^2}{dK^2}\left(\tfrac12\log(2\sinh 2K)\right)
+ +G'\kappa''+(\kappa'^2-16)G''+16G''-\frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
+&&\bigl(\because\ \text{Step 1 の表式、Step 3 の合成関数の微分と分配律}\bigr)\\
 &\leq \left|\frac{d^2}{dK^2}\left(\tfrac12\log(2\sinh 2K)\right)\right|
  + \left|G'\kappa''\right|
  + \left|\left(\kappa'^2-16\right)G''\right|
- + \left|16G'' - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right| \\
-&\leq 3.70 + 4.60 + 15.44 + 19.2 \\
-&= 42.94 \\
+ + \left|16G'' - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
+&&\bigl(\because\ \mathbb R\text{ の三角不等式}\bigr)\\
+&\leq 3.70 + 4.60 + 15.44 + 19.2
+&&\bigl(\because\ \text{Step 2、Step 3、Step 4、Step 5 の評価}\bigr)\\
+&= 42.94
+&&\bigl(\because\ \mathbb R\text{ の有理数計算}\bigr)\\
 &\leq 45
+&&\bigl(\because\ \mathbb R\text{ の有理数の順序}\bigr)
 \end{aligned}`,
       ),
       paragraph([

@@ -75619,6 +75619,74 @@ c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_edge_distinct_smoothing_crossing_parity",
+              labels: [],
+              title: { text: "辺の重複がない閉歩道の一回の平滑化と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_distinct_smoothing_crossing_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_distinct_smoothing_crossing_parity",
+                    kind: "claim",
+                    title: { text: "辺の重複がない閉歩道の平滑化で横断数の偶奇は交差形式に分かれる" },
+                    labels: ["claim_edge_distinct_smoothing_crossing_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/edge-distinct-smoothing-crossing-parity"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なる閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " の横断する添字 ", math(String.raw`k<l`), " を一組取る。",
+                        ref("def_smoothed_split_edge_sequences"), " の二本を ", math(String.raw`\gamma_A,\gamma_B`),
+                        " とし、その辺の台を ", math(String.raw`C_A,C_B`), " とする。このとき二元体の等式",
+                      ]),
+                      displayMath(String.raw`(c(\gamma)\bmod2)=((c(\gamma_A)+c(\gamma_B)+1)\bmod2)+I_L(C_A,C_B)\quad(\mathbb F_2)`),
+                      paragraph([
+                        "が成り立つ。", math(String.raw`I_L`), " は ", ref("def_even_edge_chain_intersection"), " の値である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "横断する二通過は同じ頂点 ", math(String.raw`v`), " にあり、二軸をそれぞれ直進する（",
+                        ref("def_index_pair_crossing"), "）。それぞれの通過が使う入出半辺は対向する二半辺であり、",
+                        "二通過で四半辺を使い尽くす。辺の標識が相異なるので、", math(String.raw`v`),
+                        " に別の通過はない。従って ", ref("def_vertex_axis_straight_visit_count"), " により",
+                      ]),
+                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1.`),
+                      paragraph([
+                        ref("claim_smoothing_crossing_number_update"), " と ",
+                        ref("claim_smoothing_split_crossing_partition"), " を一行ずつ適用する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+c(\gamma)+1
+&=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_crossing_number_update}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)+2
+&&\bigl(\because\ n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\bigr)\\
+&=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+2
+&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "自然数の加法の消去律で ", math(String.raw`c(\gamma)=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+1`), " を得る。",
+                        ref("def_smoothed_split_edge_sequences"), " により二本の辺の台は互いに素である。",
+                        ref("claim_smoothing_splits_closed_walk"), " により二本は閉じた非後退辺列である。",
+                        ref("claim_smoothing_splits_closed_walk"), " により二本の各通過は元の添字の平滑化後の通過と一致する。",
+                        "従って ", ref("def_split_mutual_crossing_number"), " の混合横断と二本の巡回後続写像による混合横断は、同じ添字対を数える。",
+                        "従って ", ref("claim_disjoint_walk_mutual_crossing_intersection"), " により",
+                      ]),
+                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B).`),
+                      paragraph(["自然数の等式を二で割った余りを取って、上の交差数との等式を代入する。辺長一でも四半辺を方向と辺の標識で区別する。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
