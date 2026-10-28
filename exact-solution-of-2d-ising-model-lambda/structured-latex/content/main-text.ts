@@ -82235,6 +82235,64 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_fiber_direction_determinant",
+              focus: {
+                id: "finite_fourier_claim_fiber_direction_determinant",
+                kind: "claim",
+                title: { text: "Fourier ファイバーの行列式を四方向の小行列式へ移す" },
+                labels: ["claim_fourier_fiber_direction_determinant"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/fourier-mode-block-entries"],
+                lean: [
+                  "Ising2DLambda.KacWard.fourier_fiber_direction_determinant",
+                  "Ising2DLambda.NecSuf.KacWard.fiberDirectionDeterminant",
+                  "Ising2DLambda.KacWard.fourier_fiber_direction_determinant_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`), "、モード ",
+                    math(String.raw`m=(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を任意に取る。ファイバー ", math(String.raw`\mathcal J_m`),
+                    " とその方向写像 ", math(String.raw`d_m`), " は ",
+                    ref("claim_fourier_fiber_direction_bijection"), " のものとする。このとき",
+                  ]),
+                  displayMath(String.raw`\det_x\!\left(\left.\bigl(I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}\bigr)\right|_{\mathcal J_m\times\mathcal J_m}\right)
+=\det_x\!\left(I_{\mathbb Z/4\mathbb Z}-x\widehat{\breve M(\varpi,\varsigma)}\right)
+\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["ハットは ", ref("def_qbar_constant_embedding"), " の成分ごとの適用である。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`T:=I_{\vec E_L}-x\widehat{B^{a,b,\kappa}}`),
+                    " と置く。", ref("claim_fourier_fiber_direction_bijection"),
+                    " により各 ", math(String.raw`\delta\in\mathbb Z/4\mathbb Z`),
+                    " に対応するファイバーの辺は ",
+                    math(String.raw`d_m^{-1}(\delta)=\kappa^{-1}(\varpi,\varsigma,\delta)`), " である。",
+                  ]),
+                  paragraph([
+                    "任意の方向 ", math(String.raw`\delta,\delta'\in\mathbb Z/4\mathbb Z`),
+                    " について ", ref("claim_fourier_mode_block_entries"), " から",
+                  ]),
+                  displayMath(String.raw`\left(T\big|_{\mathcal J_m\times\mathcal J_m}\right)_{d_m^{-1}(\delta),d_m^{-1}(\delta')}
+=\bigl(I_{\mathbb Z/4\mathbb Z}-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{\delta,\delta'}
+\quad(\because\ \blkref{claim_fourier_mode_block_entries}).`),
+                  paragraph([
+                    "行列式の ", ref("def_qbar_polynomial_determinant"),
+                    " の有限和を、置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathcal J_m)`),
+                    " から ", math(String.raw`d_m\circ\sigma\circ d_m^{-1}\in\operatorname{Perm}(\mathbb Z/4\mathbb Z)`),
+                    " への全単射で再添字付けする。", ref("claim_permutation_sign_mul"),
+                    " により、共役で置換符号は変わらない。成分の有限積は上の等式で一致するため、二つの行列式は等しい。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
@@ -88265,7 +88323,7 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                     [
                       "有限 Fourier 分解。",
                       "各行列式を、ねじれた 1 の冪根による有限 Fourier 分解でモードごとの小行列式の積へ落とす段である。",
-                      "現在地: モードブロックの成分対応まで四層で済み、行列式の積公式と分散因子の計算が残る。",
+                      "現在地: ファイバーごとの行列式の積と四方向の小行列式への移し替えまで四層で済み、分散因子の計算が残る。",
                       "完了条件: 分散関係を ", math(String.raw`\overline{\mathbb{Q}(x)}`),
                       " 上の代数的な等式として書き、モードごとの因子を明示すること。ここまでは可算な世界で閉じる。",
                     ],

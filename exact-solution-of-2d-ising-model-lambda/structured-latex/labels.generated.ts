@@ -117,6 +117,7 @@ export const ALL_LABELS = [
   "claim_four_part_repeated_difference",
   "claim_fourier_block_fiber_determinant_product",
   "claim_fourier_fiber_direction_bijection",
+  "claim_fourier_fiber_direction_determinant",
   "claim_fourier_mode_block_entries",
   "claim_fourier_similarity_preserves_determinant",
   "claim_free_entropy_at_one",

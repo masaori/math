@@ -1,4 +1,4 @@
-# 対象ラベル: claim_fourier_mode_block_entries, claim_fourier_fiber_direction_bijection, claim_fourier_block_fiber_determinant_product
+# 対象ラベル: claim_fourier_mode_block_entries, claim_fourier_fiber_direction_bijection, claim_fourier_block_fiber_determinant_product, claim_fourier_fiber_direction_determinant
 K = CyclotomicField(24)
 xroots = PolynomialRing(K, 't').gen()
 steps = ((0, 1), (1, 0), (0, -1), (-1, 0))
@@ -59,6 +59,7 @@ for L in range(1, 4):
                                if e != (d + 2) % 4 else 0)
                 block = identity_matrix(R, 4) - x * small.change_ring(R)
                 assert T.matrix_from_rows_and_columns(fiber, fiber) == block
+                assert T.matrix_from_rows_and_columns(fiber, fiber).det() == block.det()
                 blocks.append(block)
             assert all(T[i, j] == 0 for i in range(len(modes))
                        for j in range(len(modes)) if modes[i][:2] != modes[j][:2])

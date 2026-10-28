@@ -1926,11 +1926,19 @@ G''(\kappa) = \frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^
         math(String.raw`\int_\pi^{2\pi} = \int_0^{\pi}`),
         " となるので",
       ]),
-      displayMath(
-        String.raw`G''(\kappa)
-= \frac{1}{4\pi}\left(\int_0^{\pi} + \int_{\pi}^{2\pi}\right)\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
-= \frac{1}{2\pi}\int_0^{\pi}\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+G''(\kappa)
+&=\frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
+&& (\because\ \blkref{gamma_derivatives_in_kappa}\text{ と微分積分交換 (R5)})\\
+&=\frac{1}{4\pi}\left(\int_0^{\pi}+\int_{\pi}^{2\pi}\right)
+  \frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
+&& (\because\ \text{積分区間の分割 (R3)})\\
+&=\frac{1}{4\pi}\left(\int_0^{\pi}+\int_0^{\pi}\right)
+  \frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
+&& (\because\ \theta\mapsto2\pi-\theta\text{ の置換積分 (R6)})\\
+&=\frac{1}{2\pi}\int_0^{\pi}\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
+&& (\because\ \mathbb R\text{ の四則と積分の線型性 (R3)}).
+\end{aligned}`),
       paragraph([
         "Step 3（2 つの項に分ける）。",
         ref("gamma_derivatives_in_kappa"),
