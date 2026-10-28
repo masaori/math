@@ -82909,6 +82909,71 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_kw_duality",
+              focus: {
+                id: "finite_fourier_claim_dispersion_kw_duality",
+                kind: "claim",
+                title: { text: "分散因子の自己双対性" },
+                labels: ["claim_dispersion_kw_duality"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-kw-duality"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersion_kw_duality",
+                  "Ising2DLambda.NecSuf.KacWard.dispersion_kw_duality",
+                  "Ising2DLambda.KacWard.dispersion_kw_duality_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`x`), " を ", math(String.raw`\overline{\mathbb Q}(x)`),
+                    " の不定元、", math(String.raw`\varpi,\varsigma\in\overline{\mathbb Q}\setminus\{0\}`),
+                    " を固定したモード値とする。分散因子 ",
+                    math(String.raw`\Delta(y;\varpi,\varsigma):=(1+y^2)^2-y(1-y^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})`),
+                    " を ", math(String.raw`y\in\overline{\mathbb Q}(x)`), " に対して定める。このとき ",
+                    math(String.raw`\mathrm{KW}(x):=(1-x)(1+x)^{-1}`), " とすると、",
+                  ]),
+                  displayMath(String.raw`(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)=4\Delta(x;\varpi,\varsigma).`),
+                  paragraph(["等式は代数的数の有理関数体で成立し、実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_kw_dual_transform"), " の有理式を ", math(String.raw`\overline{\mathbb Q}(x)`),
+                    " で用いる。", math(String.raw`1+x\ne0`), " であり、その逆元が存在する。",
+                    math(String.raw`S:=\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1}\in\overline{\mathbb Q}`),
+                    " と置く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+1+\mathrm{KW}(x)^2
+&=1+\frac{(1-x)^2}{(1+x)^2}
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=\frac{2(1+x^2)}{(1+x)^2}
+&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr),\\[1mm]
+\mathrm{KW}(x)(1-\mathrm{KW}(x)^2)
+&=\frac{1-x}{1+x}\left(1-\frac{(1-x)^2}{(1+x)^2}\right)
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\bigr)\\
+&=\frac{4x(1-x)}{(1+x)^3}
+&&\bigl(\because\ \overline{\mathbb Q}(x)\text{ の分配律}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)
+&=(1+x)^4\bigl((1+\mathrm{KW}(x)^2)^2-\mathrm{KW}(x)(1-\mathrm{KW}(x)^2)S\bigr)
+&&\bigl(\because\ \Delta\text{ の定義}\bigr)\\
+&=(1+x)^4\left(\frac{4(1+x^2)^2}{(1+x)^4}-\frac{4x(1-x)}{(1+x)^3}S\right)
+&&\bigl(\because\ \text{上の二つの等式}\bigr)\\
+&=4\bigl((1+x^2)^2-x(1-x)(1+x)S\bigr)
+&&\bigl(\because\ 1+x\ne0\text{ による約分}\bigr)\\
+&=4\bigl((1+x^2)^2-x(1-x^2)S\bigr)
+&&\bigl(\because\ (1-x)(1+x)=1-x^2\bigr)\\
+&=4\Delta(x;\varpi,\varsigma)
+&&\bigl(\because\ \Delta\text{ の定義}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_untwisted_mode_zero_condition",
               focus: {
                 id: "finite_fourier_claim_untwisted_mode_zero_condition",

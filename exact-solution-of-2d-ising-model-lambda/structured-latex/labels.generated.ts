@@ -73,6 +73,7 @@ export const ALL_LABELS = [
   "claim_directed_winding_parity",
   "claim_direction_gate_crossing_turning",
   "claim_dispersion_algebraic_onsager_form",
+  "claim_dispersion_kw_duality",
   "claim_displacement_is_direction_unit",
   "claim_distance_positive_on_fisher_zeros",
   "claim_distance_squared_zero_iff_equal",

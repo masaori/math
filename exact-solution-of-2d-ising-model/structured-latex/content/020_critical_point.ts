@@ -2255,8 +2255,10 @@ T
    \quad (\because \text{三角不等式}) \\
 &\leq 2.201 + \frac{1.1277}{2}\cdot 1.621 + 3.615
    \quad (\because \text{Step 4, Step 5, Step 6}) \\
-&\leq 2.201 + 0.915 + 3.615 \\
+&\leq 2.201 + 0.915 + 3.615
+   \quad (\because \tfrac{1.1277}{2}\cdot1.621\leq0.915) \\
 &= 6.731
+   \quad (\because \text{有理数の加法})
 \end{aligned}`,
       ),
       paragraph([
