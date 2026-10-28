@@ -82439,6 +82439,68 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_admissible_direction_permutation_signs",
+              focus: {
+                id: "finite_fourier_claim_admissible_direction_permutation_signs",
+                kind: "claim",
+                title: { text: "逆方向を選ばない四方向の置換の符号" },
+                labels: ["claim_admissible_direction_permutation_signs"],
+                habitat: "Z",
+                verification: ["sagemath/check/admissible-direction-permutation-signs"],
+                lean: [
+                  "Ising2DLambda.KacWard.admissibleDirectionPermutationInversionCounts",
+                  "Ising2DLambda.KacWard.directionPermSign_eq_sign",
+                  "Ising2DLambda.KacWard.admissibleDirectionPermutationSigns",
+                  "Ising2DLambda.NecSuf.KacWard.admissibleDirectionPermutationInversionCounts",
+                  "Ising2DLambda.NecSuf.KacWard.directionPermSign_eq_sign",
+                  "Ising2DLambda.NecSuf.KacWard.admissibleDirectionPermutationSigns",
+                  "Ising2DLambda.KacWard.admissibleDirectionPermutationInversionCounts_from_necSuf",
+                  "Ising2DLambda.KacWard.admissibleDirectionPermutationSigns_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "方向番号の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathbb Z/4\mathbb Z)`),
+                    " が全ての ", math(String.raw`j\in\mathbb Z/4\mathbb Z`), " で ",
+                    math(String.raw`\sigma(j)\ne j+2`), " を満たすとする。",
+                    ref("claim_admissible_direction_permutations"), " の四桁表示に対する転倒数と符号は次のとおりである。",
+                  ]),
+                  displayMath(String.raw`\begin{array}{c|rrrrrrrrr}
+\sigma&0123&0132&0213&1023&1032&1230&3012&3120&3210\\\hline
+\operatorname{inv}(\sigma)&0&1&1&1&2&3&3&5&6\\
+\operatorname{sgn}(\sigma)&+1&-1&-1&-1&+1&-1&-1&-1&+1
+\end{array}`),
+                  paragraph(["転倒数は自然数、符号は整数であり、実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_inversion_count"), " に従い、四桁の列の六つの位置対を比較する。",
+                    "列挙の完全性は ", ref("claim_admissible_direction_permutations"), " による。",
+                  ]),
+                  displayMath(String.raw`\begin{array}{c|l}
+\sigma&\text{転倒を作る位置対}\\\hline
+0123&\varnothing\\
+0132&(2,3)\\
+0213&(1,2)\\
+1023&(0,1)\\
+1032&(0,1),(2,3)\\
+1230&(0,3),(1,3),(2,3)\\
+3012&(0,1),(0,2),(0,3)\\
+3120&(0,1),(0,2),(0,3),(1,3),(2,3)\\
+3210&(0,1),(0,2),(0,3),(1,2),(1,3),(2,3)
+\end{array}`),
+                  paragraph([
+                    "各列の転倒数は右欄の位置対の個数である。",
+                    ref("def_permutation_sign"), " の ", math(String.raw`\operatorname{sgn}(\sigma)=(-1)^{\operatorname{inv}(\sigma)}`),
+                    " を各列に適用すると、表示した符号を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

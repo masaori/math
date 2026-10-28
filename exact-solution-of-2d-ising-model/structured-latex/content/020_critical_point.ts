@@ -2013,23 +2013,35 @@ G''(\kappa)
         ref("sine_integral_two_sided"),
         " を ",
         math(String.raw`\delta = \sinh(\tfrac\kappa2)`),
-        " に適用すると ",
-        math(String.raw`\displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S} = 2\log\frac{\pi}{\delta} + R_0`),
-        "（",
+        " に適用し、",
+        math(String.raw`R_0 := \displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S}-2\log\frac{\pi}{\delta}`),
+        " とおく。このとき ",
         math(String.raw`0 \leq R_0 \leq \frac{2\delta^2}{\pi^2} + B`),
-        "）なので、",
+        " である。",
         math(String.raw`R := J - 2\log\frac{\pi}{\delta}`),
-        " とおくと ",
-        math(String.raw`R = R_0 - \left(\displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S} - J\right)`),
-        " であり、**上界は ",
-        math(String.raw`R_0`),
-        " だけから、下界は直前の評価だけから来る**（両者を足す必要はない）：",
+        " とおく。先に得た差の評価を使う。",
       ]),
-      displayMath(
-        String.raw`J = 2\log\frac{\pi}{\delta} + R,
-\qquad
--\frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right) \ \leq\ R \ \leq\ \frac{2\delta^2}{\pi^2} + B`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+R
+&=J-2\log\frac{\pi}{\delta}
+&& (\because\ R\text{ の定義})\\
+&=R_0-\left(\int_0^{\pi}\frac{d\theta}{\sqrt S}-J\right)
+&& (\because\ R_0\text{ の定義と }\mathbb R\text{ の四則}).
+\end{aligned}`),
+      paragraph(["直前の差の評価から下界を、", ref("sine_integral_two_sided"), " から上界をそれぞれ得る。"]),
+      displayMath(String.raw`\begin{aligned}
+R
+&\geq-\left(\int_0^{\pi}\frac{d\theta}{\sqrt S}-J\right)
+&& (\because\ R_0\geq0)\\
+&\geq-\frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)
+&& (\because\ \text{直前の差の評価}),\\[2pt]
+R
+&\leq R_0
+&& (\because\ \int_0^{\pi}\frac{d\theta}{\sqrt S}-J\geq0)\\
+&\leq\frac{2\delta^2}{\pi^2}+B
+&& (\because\ \blkref{sine_integral_two_sided}).
+\end{aligned}`),
+      displayMath(String.raw`J=2\log\frac{\pi}{\delta}+R\qquad(\because\ R\text{ の定義}).`),
       paragraph([
         "したがって ",
         math(String.raw`|R| \leq \max\left\{\frac{2\delta^2}{\pi^2} + B,\ \frac{\pi}{2}\cosh\!\left(\frac{\kappa}{2}\right)\right\}`),
