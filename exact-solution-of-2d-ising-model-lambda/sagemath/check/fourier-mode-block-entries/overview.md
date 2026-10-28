@@ -1,6 +1,6 @@
 # モードごとのブロック行列式の検証
 
-**対象ラベル**: `claim_fourier_mode_block_entries`, `claim_fourier_block_fiber_determinant_product`
+**対象ラベル**: `claim_fourier_mode_block_entries`, `claim_fourier_fiber_direction_bijection`, `claim_fourier_block_fiber_determinant_product`
 
 円分体の代数的数として辺長一〜三の四ねじれで、異なるモード間の成分が零であること、各ファイバーの四方向が一度ずつ現れること、制限行列が小行列と一致することを検証する。辺長一・二では多項式行列式の積も直接計算する。一般の辺長の証明は本文と Lean が担う。
 

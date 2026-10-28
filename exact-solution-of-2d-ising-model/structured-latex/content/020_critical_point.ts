@@ -1898,10 +1898,21 @@ G''(\kappa) = \frac{1}{4\pi}\int_0^{2\pi}\frac{\partial^2\gamma}{\partial\kappa^
         ref("gamma_derivatives_in_kappa"),
         " (3) の ",
         math(String.raw`|\partial_\kappa\gamma| \leq 1`),
-        " と (R3) より ",
-        math(String.raw`|G'(\kappa)| \leq \dfrac{1}{4\pi}\cdot 2\pi\cdot 1 = \dfrac12`),
-        "。",
+        " と (R3) より、次の式鎖を得る。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+|G'(\kappa)|
+&=\left|\frac{1}{4\pi}\int_0^{2\pi}\frac{\partial\gamma}{\partial\kappa}\,d\theta\right|
+&& (\because\ \blkref{gamma_derivatives_in_kappa}\text{ と微分積分交換 (R5)})\\
+&\leq\frac{1}{4\pi}\int_0^{2\pi}\left|\frac{\partial\gamma}{\partial\kappa}\right|\,d\theta
+&& (\because\ \text{積分の三角不等式 (R3)})\\
+&\leq\frac{1}{4\pi}\int_0^{2\pi}1\,d\theta
+&& (\because\ \blkref{gamma_derivatives_in_kappa})\\
+&=\frac{1}{4\pi}\cdot 2\pi
+&& (\because\ \text{定数関数の積分})\\
+&=\frac12
+&& (\because\ \mathbb R\text{ の四則}).
+\end{aligned}`),
       paragraph([
         "Step 2（半区間への折り返し）。",
         math(String.raw`\sin\!\left(\tfrac{2\pi-\theta}{2}\right) = \sin\!\left(\pi - \tfrac\theta2\right) = \sin\tfrac\theta2`),

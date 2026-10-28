@@ -82132,6 +82132,60 @@ D^{a,b}_L(x)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_fiber_direction_bijection",
+              focus: {
+                id: "finite_fourier_claim_fiber_direction_bijection",
+                kind: "claim",
+                title: { text: "各 Fourier モードのファイバーと四方向は全単射である" },
+                labels: ["claim_fourier_fiber_direction_bijection"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/fourier-mode-block-entries"],
+                lean: [
+                  "Ising2DLambda.KacWard.fourierFiberDirectionEquiv",
+                  "Ising2DLambda.NecSuf.KacWard.fiberDirectionEquiv",
+                  "Ising2DLambda.KacWard.fourier_fiber_direction_bijective_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、全単射 ",
+                    math(String.raw`\kappa:\vec E_L\to\mathcal M_{a,b}`), "、モード ",
+                    math(String.raw`m=(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を任意に取る。", math(String.raw`\mathcal J_m:=\{\vec e\in\vec E_L\mid
+((\kappa(\vec e))_1,(\kappa(\vec e))_2)=m\}`), " と定める。このファイバーについて、",
+                  ]),
+                  displayMath(String.raw`d_m:\mathcal J_m\longrightarrow\mathbb Z/4\mathbb Z,\qquad
+\vec e\longmapsto(\kappa(\vec e))_3`),
+                  paragraph(["は全単射である。添字と方向は有限集合に属し、実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず ", math(String.raw`\vec e,\vec f\in\mathcal J_m`), " とし、",
+                    math(String.raw`d_m(\vec e)=d_m(\vec f)`), " と仮定する。",
+                    "ファイバーの定義により両者の第一・第二成分は ",
+                    math(String.raw`(\varpi,\varsigma)`), " であり、第三成分も等しい。",
+                    "ゆえに ", math(String.raw`\kappa(\vec e)=\kappa(\vec f)`),
+                    "。", ref("claim_edge_mode_index_bijection"), " の単射性から ",
+                    math(String.raw`\vec e=\vec f`), " である。",
+                  ]),
+                  paragraph([
+                    "次に任意の ", math(String.raw`\delta\in\mathbb Z/4\mathbb Z`),
+                    " に対し、", math(String.raw`(\varpi,\varsigma,\delta)\in\mathcal M_{a,b}`),
+                    " である（", ref("def_fourier_mode_index_set"), "）。",
+                    ref("claim_edge_mode_index_bijection"), " の全射性から、",
+                    math(String.raw`\kappa(\vec e)=(\varpi,\varsigma,\delta)`),
+                    " を満たす ", math(String.raw`\vec e\in\vec E_L`), " がある。",
+                    "この辺は ", math(String.raw`\mathcal J_m`), " に属し、",
+                    math(String.raw`d_m(\vec e)=\delta`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_block_fiber_determinant_product",
               focus: {
                 id: "finite_fourier_claim_block_fiber_determinant_product",
