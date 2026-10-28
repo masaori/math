@@ -75538,6 +75538,87 @@ I_L(C,D)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_disjoint_walk_mutual_crossing_intersection",
+              labels: [],
+              title: { text: "二本の閉歩道の混合横断数と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
+                  focus: {
+                    id: "kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
+                    kind: "claim",
+                    title: { text: "辺を共有しない二本の閉歩道の混合横断数は交差形式に等しい" },
+                    labels: ["claim_disjoint_walk_mutual_crossing_intersection"],
+                    habitat: "N",
+                    verification: ["sagemath/check/disjoint-walk-mutual-crossing-intersection"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。",
+                        ref("def_closed_walk_passes"), " の閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " と ",
+                        math(String.raw`\eta=(\vec f_1,\ldots,\vec f_n)`),
+                        " を取り、二本を通じて無向辺の標識が相異なるとする。",
+                        "それぞれの巡回後続写像を ",
+                        math(String.raw`\sigma_\gamma:I_m\to I_m`), "、",
+                        math(String.raw`\sigma_\eta:I_n\to I_n`), " とする（",
+                        ref("def_closed_walk_passes"), "）。混合横断数 ",
+                        math(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta):=\bigl|\{(r,s)\in I_m\times I_n\mid
+\operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec f_s),\quad
+\tau(\vec e_r,\vec e_{\sigma_\gamma(r)})=\tau(\vec f_s,\vec f_{\sigma_\eta(s)})=0,\quad
+\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec f_s))\}\bigr|`),
+                      paragraph(["と定める。これは有限集合の元の個数である（", ref("def_closed_walk_crossing_number"), " の横断の条件）。"]),
+                      paragraph([
+                        "二本の辺の台を ", math(String.raw`C,D`),
+                        " という有限辺鎖とし、切断線偶奇を ",
+                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`),
+                        " とする（", ref("claim_even_edge_chain_torus_normal_form"), "）。このとき",
+                      ]),
+                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
+=I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
+                      paragraph(["辺長一でも四つの入出半辺は辺の標識と方向で区別する。有限集合の偶奇だけを使う。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "各頂点の四つの半辺を左・上・右・下と呼ぶ。閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
+                        "二本を通じて辺の標識が相異なるので、同じ頂点で両方の歩道が通過する場合、",
+                        "それぞれが相異なる二半辺を使い、四半辺を使い尽くす。",
+                        "少なくとも一方が通過しない頂点では、混合横断も ",
+                        ref("def_even_edge_chain_intersection"), " の局所項も零である。",
+                      ]),
+                      paragraph([
+                        "両方が通過する頂点では、", ref("def_even_edge_chain_intersection"),
+                        " の局所項は「左を ", math(String.raw`C`), "、上を ",
+                        math(String.raw`D`), " が使う」と「下を ", math(String.raw`C`),
+                        "、右を ", math(String.raw`D`), " が使う」の二つの真偽値の和である。",
+                        "両歩道が直進すると、一方が左右、他方が上下を使い、二真偽値の一方だけが一となる。",
+                        "両歩道が曲がると、二真偽値はともに零、またはともに一となる。",
+                        "これらは二半辺の選び方六通りを尽くす。従って局所項の偶奇は、",
+                        "二本の通過が横断する場合だけ一である。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
+&=\sum_{i,j=0}^{L-1}\bigl(H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)
+&&\bigl(\because\ \text{各頂点の四半辺の場合分けと有限和}\bigr)\\
+&=I_L(C,D)
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\bigr)\\
+&=h_Cv_D+v_Ch_D
+&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr).
+\end{aligned}`),
+                      paragraph(["各歩道は閉じているので台は偶辺鎖である。辺長一の自己ループも、入る半辺と出る半辺を区別するため同じ場合分けに入る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },

@@ -2522,9 +2522,15 @@ G''(\kappa)
         " より",
       ]),
       displayMath(
-        String.raw`\left|16\,G''(\kappa) - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
-= 16\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{|\kappa|}\right|
-\ \leq\ 16\cdot\frac65 \ =\ 19.2`,
+        String.raw`\begin{aligned}
+\left|16\,G''(\kappa) - \frac{8}{\pi}\log\frac{1}{|\kappa|}\right|
+&=16\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{|\kappa|}\right|
+&&\bigl(\because\ \mathbb R\text{ の分配律と絶対値の積の性質}\bigr)\\
+&\leq16\cdot\frac65
+&&\bigl(\because\ \blkref{second_derivative_log_divergence}\bigr)\\
+&=19.2
+&&\bigl(\because\ \mathbb R\text{ の有理数計算}\bigr).
+\end{aligned}`,
       ),
       paragraph(["Step 6（総合）。Step 2〜5 と三角不等式より"]),
       displayMath(
