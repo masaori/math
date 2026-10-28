@@ -2603,8 +2603,16 @@ G''(\kappa)
         " で割ると",
       ]),
       displayMath(
-        String.raw`\left|\frac{\dfrac{d^2f}{dK^2}}{\log\dfrac{1}{|K-K_c|}} - \frac{8}{\pi}\right|
-\ \leq\ \frac{49}{\log\dfrac{1}{|K-K_c|}} \ \xrightarrow[K\to K_c]{}\ 0`,
+        String.raw`\begin{aligned}
+0
+&\leq\left|\frac{\dfrac{d^2f}{dK^2}}{\log\dfrac{1}{|K-K_c|}} - \frac{8}{\pi}\right|
+&&\bigl(\because\ \text{絶対値の非負性}\bigr)\\
+&\leq\frac{49}{\log\dfrac{1}{|K-K_c|}}
+&&\bigl(\because\ \text{Step 7 の評価を正の分母で割る}\bigr),\\
+\frac{49}{\log\dfrac{1}{|K-K_c|}}
+&\xrightarrow[K\to K_c]{}0
+&&\bigl(\because\ \log(1/|K-K_c|)\to+\infty\bigr).
+\end{aligned}`,
       ),
       paragraph([
         "（",
