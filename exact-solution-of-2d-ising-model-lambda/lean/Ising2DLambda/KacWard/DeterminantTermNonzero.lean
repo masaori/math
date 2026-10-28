@@ -18,8 +18,21 @@ theorem kacWardDeterminantEntryProduct_ne_zero_iff {ι : Type}
     [Fintype ι] [DecidableEq ι] (M : Matrix ι ι Qbar) (σ : Equiv.Perm ι) :
     kacWardDeterminantEntryProduct M σ ≠ 0 ↔
       ∀ i, σ i ≠ i → M i (σ i) ≠ 0 := by
-  change Ising2DLambda.NecSuf.KacWard.determinantEntryProduct M σ ≠ 0 ↔ _
-  exact Ising2DLambda.NecSuf.KacWard.determinantEntryProduct_ne_zero_iff M σ
+  classical
+  rw [kacWardDeterminantEntryProduct, Finset.prod_ne_zero_iff]
+  constructor
+  · intro h i hi
+    have hfactor := h i (Finset.mem_univ i)
+    simpa [kacWardPolynomialMatrix, hi, Ne.symm hi, Polynomial.C_ne_zero] using hfactor
+  · intro h i _
+    by_cases hi : σ i = i
+    · have hconstant : (kacWardPolynomialMatrix M i (σ i)).coeff 0 = 1 := by
+        simp [kacWardPolynomialMatrix, hi]
+      intro hzero
+      rw [hzero, Polynomial.coeff_zero] at hconstant
+      exact zero_ne_one hconstant
+    · simpa [kacWardPolynomialMatrix, hi, Ne.symm hi, Polynomial.C_ne_zero]
+        using h i hi
 
 theorem kacWardDeterminantEntryProduct_ne_zero_from_necSuf {ι : Type}
     [Fintype ι] [DecidableEq ι] (M : Matrix ι ι Qbar) (σ : Equiv.Perm ι) :

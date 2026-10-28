@@ -78091,8 +78091,11 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         math(String.raw`\vec g=\iota(\varphi(\vec h))`), " で付け替える。",
                         ref("claim_reversal_direction_shift"), " と ", ref("def_step_turning"), " の三つの場合から",
                       ]),
-                      displayMath(String.raw`\tau\bigl(\iota(\varphi(\vec h)),\iota(\vec h)\bigr)
-=-\tau\bigl(\vec h,\varphi(\vec h)\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\tau\bigl(\iota(\varphi(\vec h)),\iota(\vec h)\bigr)
+&=-\tau\bigl(\vec h,\varphi(\vec h)\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_direction_shift},\ \blkref{def_step_turning}\text{ の三つの場合}\bigr).
+\end{aligned}`),
                       paragraph([
                         "である。また切断線偶奇は向きに依らない（", ref("def_seam_parities"),
                         "）ので ", math(String.raw`\varepsilon_{a,b}(\iota(\vec h))=\varepsilon_{a,b}(\vec h)`),
