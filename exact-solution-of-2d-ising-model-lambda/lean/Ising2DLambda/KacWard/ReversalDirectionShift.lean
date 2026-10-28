@@ -26,7 +26,7 @@ theorem directionNumber_reversal {L : ℕ} (e : OrientedEdge L) :
     directionNumber (reversal e) = directionNumber e + 2 := by
   rcases e with ⟨edge, d⟩
   by_cases hk : edge.val < L ^ 2 <;> cases d <;>
-    simp [directionNumber, reversal, Ising2DLambda.NecSuf.KacWard.reverseBool, hk] <;>
+    simp [directionNumber, reversal, hk] <;>
     decide
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。基底値を辺の種類から、

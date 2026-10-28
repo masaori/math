@@ -77736,8 +77736,16 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}`), " から ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}`),
                         " への位相寄与を保つ全単射であり、左辺の有限和を ", math(String.raw`S`),
-                        " で添字変換すれば末尾の等式を得る。全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。",
+                        " で添字変換する。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}\mathcal W^{a,b}_L(\varphi)
+&=\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}\mathcal W^{a,b}_L(S(\varphi))
+&&\bigl(\because\ \mathcal W^{a,b}_L(S(\varphi))=\mathcal W^{a,b}_L(\varphi)\bigr)\\
+&=\sum_{\psi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}\mathcal W^{a,b}_L(\psi)
+&&\bigl(\because\ S\text{ は上記二集合の全単射、有限和の添字変換}\bigr).
+\end{aligned}`),
+                      paragraph(["全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。"]),
                     ],
                   },
                 },
