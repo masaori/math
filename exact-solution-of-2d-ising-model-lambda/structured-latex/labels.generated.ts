@@ -715,6 +715,7 @@ export const ALL_LABELS = [
   "def_direction_residue_projection",
   "def_direction_standard_representative",
   "def_direction_unit_vector",
+  "def_dispersion_polynomial",
   "def_distance_squared_to_critical_point",
   "def_distance_squared_to_rational",
   "def_doubled_edge_set",

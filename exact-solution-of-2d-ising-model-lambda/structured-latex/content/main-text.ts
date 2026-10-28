@@ -37043,19 +37043,19 @@ e\in\mathcal B_L(\sigma_A)
                     paragraph([
                       math(String.raw`L\in\mathbb N,\ L\ge1`), " を固定する。", ref("def_attainable_broken_edge_sets"), " の各 ",
                       math(String.raw`B\in\mathfrak{B}_L`), " をその ", ref("def_dual_edge_map"),
-                      " による像へ送る対応を ", math(String.raw`\Delta_L(B):=\delta_L(B)\subseteq E_L`),
+                      " による像へ送る対応を ", math(String.raw`\Xi_L(B):=\delta_L(B)\subseteq E_L`),
                       " と書く。部分集合に対する ", math(String.raw`\delta_L^{-1}`),
                       " は、", ref("claim_dual_edge_map_bijective"), " の逆写像による像を表す。終域と全射性は",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-\{\Delta_L(B)\mid B\in\mathfrak B_L\}
+\{\Xi_L(B)\mid B\in\mathfrak B_L\}
 &=\{\delta_L(B)\mid B\in\mathfrak B_L\}
-&&\bigl(\because\ \Delta_L\ \text{の定め方}\bigr)\\
+&&\bigl(\because\ \Xi_L\ \text{の定め方}\bigr)\\
 &=\mathcal E_L^{0,0}
 &&\bigl(\because\ \blkref{claim_attainable_dual_image_trivial_sector}\bigr).
 \end{aligned}`),
                     paragraph([
-                      "から従う。したがって ", math(String.raw`\Delta_L:\mathfrak B_L\to\mathcal E_L^{0,0}`),
+                      "から従う。したがって ", math(String.raw`\Xi_L:\mathfrak B_L\to\mathcal E_L^{0,0}`),
                       " は全射である。単射性について、", math(String.raw`B,B'\in\mathfrak{B}_L`), " が ",
                       math(String.raw`\delta_L(B)=\delta_L(B')`), " を満たすとする。",
                     ]),
@@ -37069,13 +37069,13 @@ B
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{の往復（部分集合の像にも及ぶ）}\bigr).
 \end{aligned}`),
                     paragraph([
-                      "ゆえに ", math(String.raw`\Delta_L`), " は全単射である。任意の ",
+                      "ゆえに ", math(String.raw`\Xi_L`), " は全単射である。任意の ",
                       math(String.raw`B\in\mathfrak{B}_L`), " に対し、有限集合の元の個数は自然数であり、",
                     ]),
                     displayMath(String.raw`\begin{aligned}
-|\Delta_L(B)|
+|\Xi_L(B)|
 &=|\delta_L(B)|
-&&\bigl(\because\ \Delta_L(B)=\delta_L(B)\ \text{の定義}\bigr)\\
+&&\bigl(\because\ \Xi_L(B)=\delta_L(B)\ \text{の定義}\bigr)\\
 &=|B|
 &&\bigl(\because\ \blkref{claim_dual_edge_map_bijective}\ \text{と、単射写像は有限集合の元の個数を保つこと}\bigr).
 \end{aligned}`),
@@ -37086,10 +37086,10 @@ Z_L
 &&\bigl(\because\ \blkref{claim_low_temperature_polynomial_identity}\bigr)\\
 &=2\sum_{B\in\mathfrak{B}_L}x^{\,|B|}
 &&\bigl(\because\ \blkref{def_broken_edge_set_polynomial}\bigr)\\
-&=2\sum_{B\in\mathfrak{B}_L}x^{\,|\Delta_L(B)|}
-&&\bigl(\because\ |\Delta_L(B)|=|B|\bigr)\\
+&=2\sum_{B\in\mathfrak{B}_L}x^{\,|\Xi_L(B)|}
+&&\bigl(\because\ |\Xi_L(B)|=|B|\bigr)\\
 &=2\sum_{A\in\mathcal{E}^{0,0}_L}x^{\,|A|}
-&&\bigl(\because\ \text{全単射 }\Delta_L\text{ による有限和の添字の取り替え}\bigr)\\
+&&\bigl(\because\ \text{全単射 }\Xi_L\text{ による有限和の添字の取り替え}\bigr)\\
 &=2G^{0,0}_L
 &&\bigl(\because\ \blkref{def_sector_generating_polynomial}\bigr)
 \end{aligned}`),
@@ -75952,24 +75952,24 @@ S(S(\varphi))
                       paragraph([
                         "となる。平滑化で変わる二因子だけを取り出す。整数",
                       ]),
-                      displayMath(String.raw`\Delta:=
+                      displayMath(String.raw`t_{\mathrm{diff}}:=
 \tau(\vec e,\varphi(\vec e))+\tau(\vec f,\varphi(\vec f))
 -\tau(\vec e,\varphi(\vec f))-\tau(\vec f,\varphi(\vec e))`),
                       paragraph(["と置くと、"]),
                       displayMath(String.raw`\begin{aligned}
 M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
-&=M^{a,b}_{\vec e,\varphi(\vec e)}M^{a,b}_{\vec f,\varphi(\vec f)}\,\zeta_8^{-\Delta}
+&=M^{a,b}_{\vec e,\varphi(\vec e)}M^{a,b}_{\vec f,\varphi(\vec f)}\,\zeta_8^{-t_{\mathrm{diff}}}
 &&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\text{、ねじれ符号の二因子の交換、代数的数の指数法則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。", ref("claim_reconnection_turning_difference"), " により ",
-                        math(String.raw`\Delta\in\{-4,0,4\}`), " である。", ref("def_rotation_phase"),
+                        math(String.raw`t_{\mathrm{diff}}\in\{-4,0,4\}`), " である。", ref("def_rotation_phase"),
                         " の ", math(String.raw`\zeta_8^4=-1`), " から、",
-                        math(String.raw`\Delta=0`), " のときだけ ", math(String.raw`\zeta_8^{-\Delta}=1`),
-                        " であり、", math(String.raw`\Delta=\pm4`), " では ",
-                        math(String.raw`\zeta_8^{-\Delta}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
+                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ ", math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=1`),
+                        " であり、", math(String.raw`t_{\mathrm{diff}}=\pm4`), " では ",
+                        math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
                         math(String.raw`\mathcal W`), " の表示へ代入すると、",
-                        math(String.raw`\Delta=0`), " のときだけ位相寄与の符号が反転する。これは ",
+                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ位相寄与の符号が反転する。これは ",
                         ref("def_phase_reversing_contact_pair"), " の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
                       ]),
                     ],
@@ -82793,6 +82793,40 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_def_dispersion_polynomial",
+              focus: {
+                id: "finite_fourier_def_dispersion_polynomial",
+                kind: "definition",
+                title: { text: "分散因子の多項式" },
+                labels: ["def_dispersion_polynomial"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-polynomial"],
+                lean: [
+                  "Ising2DLambda.KacWard.dispersionPolynomial",
+                  "Ising2DLambda.NecSuf.KacWard.dispersionPolynomial",
+                  "Ising2DLambda.KacWard.dispersionPolynomial_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    math(String.raw`\varpi,\varsigma\in\overline{\mathbb Q}\setminus\{0\}`),
+                    " を固定し、", math(String.raw`x`), " を ",
+                    math(String.raw`\overline{\mathbb Q}[x]`), " の不定元とする。",
+                    "分散因子を次の多項式として定める。",
+                  ]),
+                  displayMath(String.raw`\Delta(x;\varpi,\varsigma):=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\in\overline{\mathbb Q}[x].`),
+                  paragraph([
+                    math(String.raw`q\in\overline{\mathbb Q}`), " に対する ",
+                    math(String.raw`\Delta(q;\varpi,\varsigma)\in\overline{\mathbb Q}`),
+                    " はこの多項式の評価値を表す。実数体・複素数体は使わない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_mode_small_matrix_determinant_dispersion",
               focus: {
                 id: "finite_fourier_claim_mode_small_matrix_determinant_dispersion",
@@ -82926,9 +82960,9 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
                   paragraph([
                     math(String.raw`x`), " を ", math(String.raw`\overline{\mathbb Q}(x)`),
                     " の不定元、", math(String.raw`\varpi,\varsigma\in\overline{\mathbb Q}\setminus\{0\}`),
-                    " を固定したモード値とする。分散因子 ",
-                    math(String.raw`\Delta(y;\varpi,\varsigma):=(1+y^2)^2-y(1-y^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})`),
-                    " を ", math(String.raw`y\in\overline{\mathbb Q}(x)`), " に対して定める。このとき ",
+                    " を固定したモード値とする。", ref("def_dispersion_polynomial"),
+                    " の分散因子を ", math(String.raw`\overline{\mathbb Q}(x)`),
+                    " で評価する。このとき ",
                     math(String.raw`\mathrm{KW}(x):=(1-x)(1+x)^{-1}`), " とすると、",
                   ]),
                   displayMath(String.raw`(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)=4\Delta(x;\varpi,\varsigma).`),
@@ -82956,7 +82990,7 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
                   displayMath(String.raw`\begin{aligned}
 (1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)
 &=(1+x)^4\bigl((1+\mathrm{KW}(x)^2)^2-\mathrm{KW}(x)(1-\mathrm{KW}(x)^2)S\bigr)
-&&\bigl(\because\ \Delta\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
 &=(1+x)^4\left(\frac{4(1+x^2)^2}{(1+x)^4}-\frac{4x(1-x)}{(1+x)^3}S\right)
 &&\bigl(\because\ \text{上の二つの等式}\bigr)\\
 &=4\bigl((1+x^2)^2-x(1-x)(1+x)S\bigr)
@@ -82964,7 +82998,7 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
 &=4\bigl((1+x^2)^2-x(1-x^2)S\bigr)
 &&\bigl(\because\ (1-x)(1+x)=1-x^2\bigr)\\
 &=4\Delta(x;\varpi,\varsigma)
-&&\bigl(\because\ \Delta\text{ の定義}\bigr).
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
 \end{aligned}`),
                 ],
               },
@@ -82991,16 +83025,15 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
                   paragraph([
                     "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
                     math(String.raw`q\in\overline{\mathbb Q}`), " を取る。無ねじれスピン構造 ",
-                    math(String.raw`(a,b)=(0,0)`), " のモード値を次で定める。",
+                    math(String.raw`(a,b)=(0,0)`), " のモード値を ", ref("def_dispersion_polynomial"), " により評価する。",
                   ]),
-                  displayMath(String.raw`\Delta(q;1,1):=(1+q^2)^2-q(1-q^2)(1+1+1+1)\in\overline{\mathbb Q}.`),
                   paragraph(["このとき無ねじれモードの零条件は次と同値である。"]),
                   displayMath(String.raw`\Delta(q;1,1)=0\ \Longleftrightarrow\ q^2+2q-1=0.`),
                   paragraph([
                     "モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
                     ref("def_vertical_twisted_modes"), "、分散因子は ",
-                    ref("claim_mode_small_matrix_determinant_dispersion"),
-                    " の右辺による。実数体・複素数体は使わない。",
+                    ref("def_dispersion_polynomial"),
+                    " の評価値による。実数体・複素数体は使わない。",
                   ]),
                 ],
                 proof: [
@@ -83013,7 +83046,7 @@ A_{0,3}A_{1,2}A_{2,1}A_{3,0}
                   displayMath(String.raw`\begin{aligned}
 \Delta(q;1,1)
 &=(1+q^2)^2-q(1-q^2)(1+1+1+1)
-&&\bigl(\because\ \Delta\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
 &=(1+q^2)^2-4q(1-q^2)
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
 &=(1-2q-q^2)^2

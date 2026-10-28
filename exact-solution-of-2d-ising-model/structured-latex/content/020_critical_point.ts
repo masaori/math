@@ -2233,7 +2233,13 @@ T
 \end{aligned}`),
       paragraph(["以上を合わせると"]),
       displayMath(
-        String.raw`\left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right| \ \leq\ 0.093 + 2.108 \ =\ 2.201`,
+        String.raw`\begin{aligned}
+\left|\cosh\kappa\,\log\frac{\pi}{\delta} - \log\frac{1}{\kappa}\right|
+&\leq 0.093+2.108
+&&\bigl(\because\ \text{直前の二項の上界と三角不等式}\bigr)\\
+&=2.201
+&&\bigl(\because\ \text{有理数の加法}\bigr).
+\end{aligned}`,
       ),
       paragraph(["Step 7（総合）。Step 2〜6 より"]),
       displayMath(
@@ -2266,8 +2272,19 @@ T
         " で割ると",
       ]),
       displayMath(
-        String.raw`\left|G''(\kappa) - \frac{1}{2\pi}\log\frac{1}{\kappa}\right|
-\ \leq\ \frac{6.731}{6.2831} \ \leq\ 1.08 \ \leq\ \frac{6}{5}`,
+        String.raw`\begin{aligned}
+\left|G''(\kappa)-\frac{1}{2\pi}\log\frac{1}{\kappa}\right|
+&=\frac{1}{2\pi}\left|2\pi G''(\kappa)-\log\frac{1}{\kappa}\right|
+&&\bigl(\because\ 2\pi>0\bigr)\\
+&\leq\frac{6.731}{2\pi}
+&&\bigl(\because\ \text{直前の総合評価}\bigr)\\
+&\leq\frac{6.731}{6.2831}
+&&\bigl(\because\ 2\pi\geq6.2831\bigr)\\
+&\leq1.08
+&&\bigl(\because\ \text{有理数の大小比較}\bigr)\\
+&\leq\frac65
+&&\bigl(\because\ \text{有理数の大小比較}\bigr).
+\end{aligned}`,
       ),
       paragraph([
         "最後に ",
