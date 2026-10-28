@@ -2492,12 +2492,15 @@ G''(\kappa)
         String.raw`\begin{aligned}
 \left|\left(\kappa'(K)^2 - 16\right)G''\!\left(\kappa\right)\right|
 &\leq 24.7\,|\kappa|\left(\frac{1}{2\pi}\log\frac{1}{|\kappa|} + \frac65\right)
-   \quad (\because \text{second\_derivative\_log\_divergence}) \\
-&= 24.7\left(\frac{1}{2\pi}\,|\kappa|\log\frac{1}{|\kappa|} + \frac65|\kappa|\right) \\
+   \quad (\because \blkref{kappa_of_K_basic}\text{ (5) と }\blkref{second_derivative_log_divergence}) \\
+&= 24.7\left(\frac{1}{2\pi}\,|\kappa|\log\frac{1}{|\kappa|} + \frac65|\kappa|\right)
+   \quad (\because \mathbb R\text{ の分配律}) \\
 &\leq 24.7\left(\frac{1}{2\pi}\cdot\frac1e + \frac65\cdot 0.472\right)
-   \quad (\because |\kappa| \leq 0.472 \text{ と下記の } |\kappa|\log\tfrac1{|\kappa|}\leq \tfrac1e) \\
-&\leq 24.7\left(0.0586 + 0.5664\right) \\
+   \quad (\because |\kappa| \leq 0.472\text{ と下記の } |\kappa|\log\tfrac1{|\kappa|}\leq \tfrac1e) \\
+&\leq 24.7\left(0.0586 + 0.5664\right)
+   \quad (\because \mathbb R\text{ の有理数評価}) \\
 &\leq 15.44
+   \quad (\because \mathbb R\text{ の有理数計算})
 \end{aligned}`,
       ),
       paragraph([

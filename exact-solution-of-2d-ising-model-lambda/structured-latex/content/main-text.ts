@@ -75417,6 +75417,127 @@ q_{a,b}(h,v)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_even_edge_chain_intersection",
+              labels: [],
+              title: { text: "正方形境界と基本周回の交差数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_even_edge_chain_intersection",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_even_edge_chain_intersection",
+                      kind: "definition",
+                      title: { text: "二つの有限辺鎖の交差数" },
+                      labels: ["def_even_edge_chain_intersection"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          ref("claim_even_edge_chain_torus_normal_form"), " と同じ辺の標識を用いる。",
+                          "二つの有限辺鎖 ", math(String.raw`C,D`), " の係数をそれぞれ ",
+                          math(String.raw`H^C_{i,j},V^C_{i,j},H^D_{i,j},V^D_{i,j}\in\mathbb F_2`),
+                          " と書く。添字を ", math(String.raw`L`), " を法として読み、交差数 ",
+                          math(String.raw`I_L(C,D)\in\mathbb F_2`), " を",
+                        ]),
+                        displayMath(String.raw`I_L(C,D):=\sum_{i,j=0}^{L-1}\bigl(
+H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)`),
+                        paragraph([
+                          "で定める。第一項は頂点 ", math(String.raw`(i,j+1)`),
+                          " に左から入る横辺と上から入る縦辺、第二項は頂点 ",
+                          math(String.raw`(i,j)`), " から下へ出る縦辺と右へ出る横辺の組を数える。",
+                          "各和は有限である。辺長一でも辺の標識を保って計算する。",
+                        ]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_even_edge_chain_intersection",
+                    kind: "claim",
+                    title: { text: "正方形境界との交差数は零で基本周回は一度交差する" },
+                    labels: ["claim_even_edge_chain_intersection"],
+                    habitat: "N",
+                    verification: ["sagemath/check/even-edge-chain-intersection"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。任意の頂点で偶次数となる辺鎖 ",
+                        math(String.raw`C`), " と任意の代表座標 ",
+                        math(String.raw`(r,s)\in\{0,\ldots,L-1\}^2`), " について、",
+                      ]),
+                      displayMath(String.raw`I_L(P_{r,s},C)=I_L(C,P_{r,s})=0,\qquad
+I_L(R_{\mathrm h},R_{\mathrm h})=I_L(R_{\mathrm v},R_{\mathrm v})=0,\qquad
+I_L(R_{\mathrm h},R_{\mathrm v})=I_L(R_{\mathrm v},R_{\mathrm h})=1`),
+                      paragraph([
+                        "が ", math(String.raw`\mathbb F_2`), " で成り立つ。ここで ",
+                        math(String.raw`P_{r,s},R_{\mathrm h},R_{\mathrm v}`), " は ",
+                        ref("claim_even_edge_chain_torus_normal_form"), " の辺鎖である。",
+                        "従って任意の偶辺鎖 ", math(String.raw`C,D`), " の切断線偶奇を ",
+                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`), " と書くと、",
+                      ]),
+                      displayMath(String.raw`I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
+                      paragraph(["有限集合と二元体の演算だけを使い、実数体・複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "正方形境界 ", math(String.raw`P_{r,s}`), " の係数は ",
+                        math(String.raw`H_{r,s}=H_{r+1,s}=V_{r,s}=V_{r,s+1}=1`),
+                        " の寄与を ", math(String.raw`\mathbb F_2`), " で加えたものとする。",
+                        "重なる標識は二度現れて消える。偶次数条件は任意の ",
+                        math(String.raw`i,j`), " について ",
+                        math(String.raw`H^C_{i,j}+H^C_{i,j-1}+V^C_{i,j}+V^C_{i-1,j}=0`),
+                        " である（", ref("claim_even_edge_chain_torus_normal_form"), "）。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+I_L(P_{r,s},C)
+&=V^C_{r-1,s+1}+V^C_{r,s+1}+H^C_{r,s}+H^C_{r,s+1}
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
+&=0
+&&\bigl(\because\ \text{頂点 }(r,s+1)\text{ の偶次数条件}\bigr),\\
+I_L(C,P_{r,s})
+&=H^C_{r+1,s-1}+H^C_{r+1,s}+V^C_{r,s}+V^C_{r+1,s}
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
+&=0
+&&\bigl(\because\ \text{頂点 }(r+1,s)\text{ の偶次数条件}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "基本周回の係数は ", math(String.raw`H^{R_{\mathrm h}}_{i,j}=1`),
+                        " が ", math(String.raw`i=0`), " のときだけ、",
+                        math(String.raw`V^{R_{\mathrm v}}_{i,j}=1`), " が ",
+                        math(String.raw`j=0`), " のときだけであり、他は零である（",
+                        ref("claim_even_edge_chain_torus_normal_form"), "）。",
+                        "交差数の定義へ代入すると、同種の二周回では各積が零である。",
+                        "異種の二周回では、第一の順は ",
+                        math(String.raw`(i,j)=(0,L-1)`), "、逆順は ",
+                        math(String.raw`(i,j)=(0,0)`), " の項だけが一となる。",
+                        "これは ", math(String.raw`L=1`), " でも同じである。",
+                      ]),
+                      paragraph([
+                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配的である。",
+                        ref("claim_even_edge_chain_torus_normal_form"), " により ",
+                        math(String.raw`C=h_CR_{\mathrm h}+v_CR_{\mathrm v}+\sum p_{i,j}P_{i,j}`),
+                        " と ", math(String.raw`D=h_DR_{\mathrm h}+v_DR_{\mathrm v}+\sum q_{i,j}P_{i,j}`),
+                        " と書ける。正方形境界も偶辺鎖なので、上の零等式を両引数の有限和へ適用して",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+I_L(C,D)
+&=I_L(h_CR_{\mathrm h}+v_CR_{\mathrm v},h_DR_{\mathrm h}+v_DR_{\mathrm v})
+&&\bigl(\because\ \text{分配律と正方形境界の零等式}\bigr)\\
+&=h_Cv_DI_L(R_{\mathrm h},R_{\mathrm v})+v_Ch_DI_L(R_{\mathrm v},R_{\mathrm h})
+&&\bigl(\because\ \text{分配律と同種の基本周回の零等式}\bigr)\\
+&=h_Cv_D+v_Ch_D
+&&\bigl(\because\ \text{異種の基本周回の交差数は一}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
