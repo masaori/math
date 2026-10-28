@@ -32,9 +32,8 @@ lemma reversal_involutive {L : ℕ} (e : OrientedEdge L) :
 lemma reversal_ne {L : ℕ} (e : OrientedEdge L) : reversal e ≠ e := by
   rcases e with ⟨edge, direction⟩
   intro h
-  have hDirection : Ising2DLambda.NecSuf.KacWard.reverseBool direction = direction :=
-    congrArg Prod.snd h
-  exact Ising2DLambda.NecSuf.KacWard.reverseBool_ne direction hDirection
+  have hDirection : Bool.not direction = direction := congrArg Prod.snd h
+  cases direction <;> simp at hDirection
 
 def SpinStructure : Type := Bool × Bool
 

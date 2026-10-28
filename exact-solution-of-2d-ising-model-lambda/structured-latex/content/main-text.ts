@@ -77448,9 +77448,12 @@ S(S(\varphi))
                         "である。さらに ", ref("claim_permutation_sign_moved_orbit_product"),
                         " と有限積の並べ替えから、任意の非後退置換 ", math(String.raw`\eta`), " について",
                       ]),
-                      displayMath(String.raw`\mathcal W^{a,b}_L(\eta)
-=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
-\prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}`),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\eta)
+&=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
+\prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と }\blkref{claim_permutation_sign_moved_orbit_product}\text{、有限積の並べ替え}\bigr)
+\end{aligned}`),
                       paragraph([
                         "となる。平滑化で変わる二因子だけを取り出す。整数",
                       ]),
