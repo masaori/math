@@ -37,6 +37,5 @@ Ising2DLambda.KacWard.taggedDifference_active_iff_short
 Ising2DLambda.KacWard.taggedDifference_active_mates
 Ising2DLambda.KacWard.taggedDifference_incident_iff
 Ising2DLambda.KacWard.taggedDifference_local_degree
-Ising2DLambda.KacWard.transitionEntry_mem_mu8
 Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even
 Ising2DLambda.KacWard.walkTwistSign_product

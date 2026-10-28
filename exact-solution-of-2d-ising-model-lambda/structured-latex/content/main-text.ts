@@ -77844,8 +77844,10 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                       paragraph([
                         "準備として、任意の ", math(String.raw`\vec g=(e,d)\in\vec E_L`), " について",
                       ]),
-                      displayMath(String.raw`\operatorname{tgt}(\iota(\vec g))=\operatorname{src}(\vec g),\qquad
-\operatorname{src}(\iota(\vec g))=\operatorname{tgt}(\vec g)`),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(\iota(\vec g))&=\operatorname{src}(\vec g)&&\bigl(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints}\bigr),\\
+\operatorname{src}(\iota(\vec g))&=\operatorname{tgt}(\vec g)&&\bigl(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints}\bigr).
+\end{aligned}`),
                       paragraph([
                         "が成り立つことを見る。", math(String.raw`d=0`), " の場合、",
                         ref("def_edge_reversal"), " により ", math(String.raw`\iota(e,0)=(e,1)`), " なので、",
@@ -77936,8 +77938,21 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "であり、", math(String.raw`\mathcal T(\varphi)\bigl((\iota\circ\varphi\circ\iota)(\vec g)\bigr)=\vec g`),
-                        " も同じ三つの根拠を逆の順で並べた計算で従う。よって ",
+                        "である。逆の合成も次の通りである。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal T(\varphi)\bigl((\iota\circ\varphi\circ\iota)(\vec g)\bigr)
+&=\iota\Bigl(\varphi^{-1}\Bigl(\iota\Bigl(\iota\bigl(\varphi(\iota(\vec g))\bigr)\Bigr)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&=\iota\bigl(\varphi^{-1}(\varphi(\iota(\vec g)))\bigr)
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=\iota(\iota(\vec g))
+&&\bigl(\because\ \varphi^{-1}\circ\varphi\text{ は恒等写像}\bigr)\\
+&=\vec g
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "二つの合成が恒等写像なので ",
                         math(String.raw`\mathcal T(\varphi)^{-1}=\iota\circ\varphi\circ\iota`), " である。これを使うと",
                       ]),
                       displayMath(String.raw`\begin{aligned}

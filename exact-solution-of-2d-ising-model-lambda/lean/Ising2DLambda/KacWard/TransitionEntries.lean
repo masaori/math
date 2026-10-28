@@ -29,7 +29,26 @@ theorem transitionEntry_mem_mu8 {z s r : Qbar} (hz : z ^ 4 = -1)
     rcases hs with h1 | hneg
     · rw [h1, one_pow]
     · rw [hneg]; exact neg_one_sq
-  exact Ising2DLambda.NecSuf.KacWard.signed_phase_pow_eight hz hs2 hr
+  have hz8 : z ^ 8 = 1 := by
+    calc
+      z ^ 8 = (z ^ 4) ^ 2 := by rw [← pow_mul]
+      _ = (-1 : Qbar) ^ 2 := by rw [hz]
+      _ = 1 := neg_one_sq
+  have hr8 : r ^ 8 = 1 := by
+    rcases hr with h1 | hz1 | hzinv
+    · rw [h1, one_pow]
+    · rw [hz1, hz8]
+    · calc
+        r ^ 8 = (z⁻¹) ^ 8 := by rw [hzinv]
+        _ = (z ^ 8)⁻¹ := inv_pow z 8
+        _ = (1 : Qbar)⁻¹ := by rw [hz8]
+        _ = 1 := inv_one
+  calc
+    (s * r) ^ 8 = s ^ 8 * r ^ 8 := mul_pow s r 8
+    _ = (s ^ 2) ^ 4 * r ^ 8 := by rw [← pow_mul]
+    _ = (1 : Qbar) ^ 4 * r ^ 8 := by rw [hs2]
+    _ = r ^ 8 := by rw [one_pow, one_mul]
+    _ = 1 := hr8
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem transitionEntry_mem_mu8_from_necSuf {z s r : Qbar} (hz : z ^ 4 = -1)
