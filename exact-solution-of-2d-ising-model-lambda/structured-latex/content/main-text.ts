@@ -76547,7 +76547,13 @@ M_{D,T}(x)
                     ],
                     proof: [
                       paragraph([ref("claim_local_pairing_four_ports_count"), " による偶次数の選択は、", math(String.raw`|S_v(P)|=0,2`), " なら一通りであり、その ", math(String.raw`c_v`), " は零である。", math(String.raw`|S_v(P)|=4`), " なら ", math(String.raw`S_v(P)=I`), " で、三つの対合のうち ", math(String.raw`\{\{0,2\},\{1,3\}\}`), " だけが二本の直進通過を異なる方向軸で交差させる（", ref("def_transverse_crossing"), "）。ゆえに各頂点で"]),
-                      displayMath(String.raw`\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}=\begin{cases}1&(|S_v(P)|=0,2),\\1+1-1=1&(|S_v(P)|=4).\end{cases}`),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
+&=\begin{cases}1&(|S_v(P)|=0,2),\\1+1-1&(|S_v(P)|=4)\end{cases}
+&&\bigl(\because\ \blkref{claim_local_pairing_four_ports_count}\text{ と }\blkref{def_transverse_crossing}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr).
+\end{aligned}`),
                       paragraph([ref("claim_vertex_local_pairing_product"), " の直積の対応で各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
