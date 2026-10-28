@@ -76668,6 +76668,64 @@ D_L^{a,b}(x)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_determinant_square_root_torus_formula",
+              labels: [],
+              title: { text: "四つの多項式平方根による有限トーラス公式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_determinant_square_root_torus_formula",
+                  beforeFocus: [{
+                    role: "supportingClaim",
+                    element: {
+                      id: "kac_ward_claim_determinant_polynomial_square_root_exists",
+                      kind: "claim",
+                      title: { text: "四つの行列式には定数項一の多項式平方根が存在する" },
+                      labels: ["claim_determinant_polynomial_square_root_exists"],
+                      habitat: "Qbar",
+                      verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                      statement: [
+                        paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と各ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " について、", ref("def_kac_ward_determinants"), " の ", math(String.raw`D_L^{a,b}\in\overline{\mathbb Q}[x]`), " には ", ref("def_qbar_polynomial_square_root"), " の意味で定数項一の多項式平方根が存在する。その平方根を ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " と書く。", ref("claim_qbar_polynomial_square_root_unique"), " により一意である。実数体・複素数体は使わない。"]),
+                      ],
+                      proof: [
+                        paragraph([ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`Q_L^{a,b}`), " を係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送る。空の偶部分グラフだけが次数零の項を与えるので ", math(String.raw`\mathrm{ac}_0(Q_L^{a,b})=1`), " である。さらに"]),
+                        displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square}).`),
+                        paragraph(["よって ", math(String.raw`Q_L^{a,b}`), " が平方根の存在証人であり、", ref("claim_qbar_polynomial_square_root_unique"), " により ", math(String.raw`S_L^{a,b}=Q_L^{a,b}`), " である。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_determinant_square_root_torus_formula",
+                    kind: "claim",
+                    title: { text: "分配多項式は四つの行列式の定数項一の平方根の和の半分である" },
+                    labels: ["claim_determinant_square_root_torus_formula"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とし、", ref("claim_determinant_polynomial_square_root_exists"), " の四つの平方根 ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_partition_polynomial"), " の ", math(String.raw`Z_L`), " について"]),
+                      displayMath(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["が成り立つ。四項の係数はすべて正である。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      displayMath(String.raw`\begin{aligned}
+Z_L
+&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
+&=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
+&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
+\end{aligned}`),
+                      paragraph(["最初の等号は ", math(String.raw`\mathbb Z[x]`), " の等式を ", math(String.raw`\overline{\mathbb Q}[x]`), " に送ったものである。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
@@ -77152,16 +77210,28 @@ N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
                           paragraph([
                             ref("claim_switchable_contact_smoothing_preserves_fiber"), " により ",
                             math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " かつ ",
-                            math(String.raw`M(\psi)=M(\varphi)`), " である。",
-                            ref("def_standard_contact_pair"), " の ", math(String.raw`\operatorname{Ct}`),
-                            " の右辺は、動かす辺の集合 ", math(String.raw`M`),
-                            " と、置換に依らない終点写像 ", math(String.raw`\operatorname{tgt}`),
-                            " だけで書かれているので、この集合の等式を代入して ",
-                            math(String.raw`\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)`),
-                            " を得る。等しい有限集合の元の個数は等しいので ",
-                            math(String.raw`N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi)`),
-                            "（", ref("def_permutation_contact_pair_count"), "）である。",
+                            math(String.raw`M(\psi)=M(\varphi)`), " である。終点写像は置換に依らない。よって",
                           ]),
+                          displayMath(String.raw`\begin{aligned}
+\operatorname{Ct}(\psi)
+&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\psi),\ \vec g\ne\vec h,\
+\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
+&&\bigl(\because\ \blkref{def_standard_contact_pair}\bigr)\\
+&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\varphi),\ \vec g\ne\vec h,\
+\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
+&&\bigl(\because\ \blkref{claim_switchable_contact_smoothing_preserves_fiber}\bigr)\\
+&=\operatorname{Ct}(\varphi)
+&&\bigl(\because\ \blkref{def_standard_contact_pair}\bigr).
+\end{aligned}`),
+                          displayMath(String.raw`\begin{aligned}
+N_{\mathrm{ct}}(\psi)
+&=|\operatorname{Ct}(\psi)|
+&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr)\\
+&=|\operatorname{Ct}(\varphi)|
+&&\bigl(\because\ \operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)\bigr)\\
+&=N_{\mathrm{ct}}(\varphi)
+&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr).
+\end{aligned}`),
                           paragraph([
                             "仮定の対について ", math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
                             "（", ref("def_switchable_permutation_contact_pair"),
@@ -77170,10 +77240,10 @@ N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
                             math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
                             " であり、両辺の標準接触対が定義される。同じ線型順序を持つ空でない有限集合 ",
                             math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
-                            " のただ一つの最小元なので ",
-                            math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)`),
-                            "（", ref("def_standard_contact_pair"), "）である。",
+                            " のただ一つの最小元なので",
                           ]),
+                          displayMath(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)
+\quad(\because\ \blkref{def_standard_contact_pair}\text{ と }\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)).`),
                         ],
                       },
                     },
