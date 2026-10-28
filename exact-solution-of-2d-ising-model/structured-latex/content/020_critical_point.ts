@@ -2079,14 +2079,21 @@ R
         math(String.raw`(1+S)^{3/2} \geq 1+S`),
         " より",
       ]),
+      displayMath(String.raw`0\leq\frac{\cosh\gamma}{\sinh^3\gamma}
+\qquad(\because\ \blkref{gamma_derivatives_in_kappa},\ S>0).`),
       displayMath(
         String.raw`\begin{aligned}
-0 \ \leq\ \frac{\cosh\gamma}{\sinh^3\gamma}
+\frac{\cosh\gamma}{\sinh^3\gamma}
+&= \frac{1+2S}{8\left(S(1+S)\right)^{3/2}}
+&& (\because\ \blkref{gamma_derivatives_in_kappa}) \\
 &= \frac{1+2S}{8\,S^{3/2}(1+S)^{3/2}}
-   \quad (\because \text{gamma\_derivatives\_in\_kappa (1)}) \\
+&& (\because\ \text{正の数の冪法則}) \\
+&\leq \frac{2(1+S)}{8\,S^{3/2}(1+S)^{3/2}}
+&& (\because\ 1+2S\leq2(1+S)) \\
 &\leq \frac{2(1+S)}{8\,S^{3/2}(1+S)}
-   \quad (\because 1+2S \leq 2(1+S) \text{ と } (1+S)^{3/2} \geq 1+S) \\
+&& (\because\ (1+S)^{3/2}\geq1+S) \\
 &= \frac{1}{4\,S^{3/2}}
+&& (\because\ \mathbb R\text{ の四則}).
 \end{aligned}`,
       ),
       paragraph([
