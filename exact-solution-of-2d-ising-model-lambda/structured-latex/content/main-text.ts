@@ -76312,7 +76312,77 @@ M_{\mathcal D_0,\varnothing}(x)
 &=(-1)^{|\mathcal C|}\alpha_D\operatorname{sgn}(D)
 &&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
 \end{aligned}`),
-                      paragraph(["ここで ", math(String.raw`\alpha_D:=\prod_C\alpha_D(C)`), "、", math(String.raw`\alpha_0:=\prod_C\alpha_0(C)`), " は整数値の符号であり、各因子の平方は一である。直前の等式の両辺に ", math(String.raw`\alpha_0\operatorname{sgn}(D)`), " を掛け、符号の平方を一へ直すと主張を得る。空集合でも同じ空積の計算が成り立つ。" ]),
+                      paragraph(["ここで ", math(String.raw`\alpha_D:=\prod_C\alpha_D(C)`), "、", math(String.raw`\alpha_0:=\prod_C\alpha_0(C)`), " は整数値の符号であり、各因子の平方は一である。直前の等式の両辺に ", math(String.raw`\alpha_0\operatorname{sgn}(D)`), " を掛けると、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+&=\alpha_0^2\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+&&\bigl(\because\ \alpha_0^2=1\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_0\alpha_D\operatorname{sgn}(D)^2
+&&\bigl(\because\ \text{上の端点列の符号の等式}\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_0\alpha_D
+&&\bigl(\because\ \operatorname{sgn}(D)^2=1\bigr).
+\end{aligned}`),
+                      paragraph(["空集合でも同じ空積の計算が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_alternating_cycle_gauge_ratio",
+              labels: [],
+              title: { text: "交互閉路に沿う対角変換の因子" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_alternating_cycle_gauge_ratio",
+                  focus: {
+                    id: "kac_ward_claim_alternating_cycle_gauge_ratio",
+                    kind: "claim",
+                    title: { text: "短い対と基準の長い対の対角変換因子の比" },
+                    labels: ["claim_alternating_cycle_gauge_ratio"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/alternating-cycle-gauge-ratio"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路一つを固定する。", ref("claim_projected_edge_cycle_nonbacktracking"), " の閉歩道を ", math(String.raw`\gamma=(\vec e_0,\ldots,\vec e_{k-1})`), " と書き、添字は ", math(String.raw`\mathbb Z/k\mathbb Z`), " で読む。", math(String.raw`k\in\mathbb N_{>0}`), " である。閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{r-1}),\vec e_r)`), "、基準マッチングの長い標識の対を ", math(String.raw`(\vec e_r,\iota(\vec e_r))`), " の向きで取る。", ref("def_gauged_terminal_matrix"), " の重みについて、"]),
+                      displayMath(String.raw`\prod_{r\in\mathbb Z/k\mathbb Z}
+w_{\iota(\vec e_{r-1}),\vec e_r}
+=(-1)^k\prod_{r\in\mathbb Z/k\mathbb Z}w_{\vec e_r,\iota(\vec e_r)}\qquad\text{in }\overline{\mathbb Q}.`),
+                      paragraph(["積は対の向きを上記の順に固定したものであり、昇順対への向き直しの符号は含めない。辺長一の一歩閉路も含む。実数体と複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について ", ref("def_diagonal_gauge"), " と ", ref("claim_diagonal_gauge_inverse"), " より ", math(String.raw`v_{\vec e}=u_{\vec e}^{-1}`), " である。", ref("def_twist_parity"), " より反転辺のねじれ偶奇は同じである。", ref("def_oriented_edge_direction"), " と ", ref("def_direction_standard_representative"), " より、反転した方向の代表と元の方向の代表の差は ", math(String.raw`2`), " または ", math(String.raw`-2`), " である。従って各 ", math(String.raw`r\in\mathbb Z/k\mathbb Z`), " で"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
+&=\zeta_8^{\,2(r_4(\operatorname{dir}(\iota(\vec e_r)))-r_4(\operatorname{dir}(\vec e_r)))}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転でのねじれ偶奇の一致}\bigr)\\
+&=\zeta_8^{\,4}\text{ または }\zeta_8^{\,-4}
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\bigr)\\
+&=-1
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と }\zeta_8^{\,-4}=\zeta_8^{\,4}\bigr).
+\end{aligned}`),
+                      paragraph(["全ての ", math(String.raw`u_{\vec e}`), " と ", math(String.raw`w_{\vec e,\vec f}`), " は非零である。閉路の添字を巡回して ", math(String.raw`\prod_r v_{\iota(\vec e_{r-1})}=\prod_r v_{\iota(\vec e_r)}`), " と書き直す。すると"]),
+                      displayMath(String.raw`\begin{aligned}
+\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}
+&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_{r-1})}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
+&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_r)}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \text{有限積の巡回再添字付け}\bigr)\\
+&=\prod_r\frac{v_{\iota(\vec e_r)}u_{\vec e_r}}{v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \text{非零の共通因子の約分}\bigr)\\
+&=\prod_r\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
+&&\bigl(\because\ v_{\vec e}=u_{\vec e}^{-1}\bigr)\\
+&=\prod_r(-1)
+&&\bigl(\because\ \text{上で求めた各因子の値}\bigr)\\
+&=(-1)^k
+&&\bigl(\because\ \text{有限積の定義}\bigr).
+\end{aligned}`),
+                      paragraph(["分母は非零なので、最後の等式の両辺に基準の長い対の重みの積を掛けて主張を得る。"]),
                     ],
                   },
                 },
