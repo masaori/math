@@ -71973,7 +71973,14 @@ q_{\vec e,\vec f}
                       paragraph([math(String.raw`|S|=0`), " なら全ての ", math(String.raw`i\in I`), " は非選択なので、恒等写像だけが条件を満たす。", math(String.raw`|S|=2`), " なら二つの元を互いに交換し、残りの二つを固定する以外にない。いずれも条件を満たすので一通りである。"]),
                       paragraph([math(String.raw`|S|=4`), " なら ", math(String.raw`S=I`), " である。", math(String.raw`\kappa(0)\ne0`), " なので ", math(String.raw`\kappa(0)`), " は ", math(String.raw`1,2,3`), " のいずれかである。対合条件からその元は ", math(String.raw`0`), " に戻る。残った二元は不動点を持てないため互いに交換する。従って対応する対の集合はちょうど"]),
                       displayMath(String.raw`\{\{0,1\},\{2,3\}\},\qquad\{\{0,2\},\{1,3\}\},\qquad\{\{0,3\},\{1,2\}\}`),
-                      paragraph(["の三つである。各対集合から定まる写像は選択集合を保ち、不動点を持たず、二回作用させると恒等になる。よって三通りであり、それ以外はない。"]),
+                      paragraph(["の三つである。各対集合から定まる写像は選択集合を保ち、不動点を持たず、二回作用させると恒等になる。従って、上で示した全列挙について"]),
+                      displayMath(String.raw`\begin{aligned}
+|\mathcal K(I)|
+&=\bigl|\{\{\{0,1\},\{2,3\}\},\{\{0,2\},\{1,3\}\},\{\{0,3\},\{1,2\}\}\bigr|
+&&\bigl(\because\ \text{上の全列挙と各対集合の条件充足}\bigr)\\
+&=3
+&&\bigl(\because\ \text{三つの対集合は相異なる}\bigr).
+\end{aligned}`),
                     ],
                   },
                 },
@@ -76506,6 +76513,54 @@ M_{D,T}(x)
 &=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}
 &&\bigl(\because\ \blkref{claim_projected_cycle_support_union}\text{ と台の非交和}\bigr).
 \end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_signed_sum",
+              labels: [],
+              title: { text: "局所対合の符号付き和" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_signed_sum",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_signed_sum",
+                    kind: "claim",
+                    title: { text: "偶部分グラフ上の局所対合の符号付き和は一である" },
+                    labels: ["claim_local_pairing_signed_sum"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/local-pairing-signed-sum"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と偶部分グラフ ", math(String.raw`P\subseteq E_L`), " を固定する。", ref("claim_vertex_port_bijection"), " の各頂点の選択方向集合を ", math(String.raw`S_v(P)\subseteq I`), "、", ref("claim_vertex_local_pairing_product"), " の局所対合族の集合を ", math(String.raw`\mathcal C(P)`), " とする。各 ", math(String.raw`\boldsymbol\kappa=(\kappa_v)_{v\in V_L}\in\mathcal C(P)`), " について、", math(String.raw`c_v(\kappa_v)\in\{0,1\}`), " は ", math(String.raw`S_v(P)=I`), " かつ ", math(String.raw`\kappa_v(0)=2,\ \kappa_v(1)=3`), " のときだけ一、その他は零とする。", math(String.raw`t_P(\boldsymbol\kappa):=\sum_{v\in V_L}c_v(\kappa_v)\in\mathbb N`), " と置く。このとき整数の等式"]),
+                      displayMath(String.raw`\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}=1`),
+                      paragraph(["が成り立つ。非零項を持ち、補辺が ", math(String.raw`P`), " に等しい標識付き完全マッチング全体についても、", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " による対応の下で ", math(String.raw`t_P(\boldsymbol\kappa)=t(D,T)`), "（", ref("claim_tagged_matching_quadratic_crossing_weight"), "）だから、"]),
+                      displayMath(String.raw`\sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}=1.`),
+                      paragraph(["辺長一でも端点番号付き半辺を別々に数える。実数体・複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_local_pairing_four_ports_count"), " による偶次数の選択は、", math(String.raw`|S_v(P)|=0,2`), " なら一通りであり、その ", math(String.raw`c_v`), " は零である。", math(String.raw`|S_v(P)|=4`), " なら ", math(String.raw`S_v(P)=I`), " で、三つの対合のうち ", math(String.raw`\{\{0,2\},\{1,3\}\}`), " だけが二本の直進通過を異なる方向軸で交差させる（", ref("def_transverse_crossing"), "）。ゆえに各頂点で"]),
+                      displayMath(String.raw`\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}=\begin{cases}1&(|S_v(P)|=0,2),\\1+1-1=1&(|S_v(P)|=4).\end{cases}`),
+                      paragraph([ref("claim_vertex_local_pairing_product"), " の直積の対応で各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
+&=\sum_{\boldsymbol\kappa\in\mathcal C(P)}\prod_{v\in V_L}(-1)^{c_v(\kappa_v)}
+&&\bigl(\because\ t_P\text{ の定義と整数の冪の法則}\bigr)\\
+&=\prod_{v\in V_L}\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
+&&\bigl(\because\ \blkref{claim_vertex_local_pairing_product}\text{ と有限和の分配律}\bigr)\\
+&=\prod_{v\in V_L}1
+&&\bigl(\because\ \text{上の頂点ごとの計算}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
                     ],
                   },
                 },

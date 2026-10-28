@@ -190,6 +190,7 @@ export const ALL_LABELS = [
   "claim_local_pairing_matching_local_mate_recovery",
   "claim_local_pairing_matching_pair_support",
   "claim_local_pairing_matching_term_nonzero",
+  "claim_local_pairing_signed_sum",
   "claim_log_additive",
   "claim_log_order_group_add_monotone",
   "claim_log_order_group_linear_order",
