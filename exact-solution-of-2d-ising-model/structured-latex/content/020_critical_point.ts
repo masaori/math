@@ -2425,8 +2425,17 @@ G''(\kappa)
         " より",
       ]),
       displayMath(
-        String.raw`\left|\frac{d^2}{dK^2}\left(\frac12\log\left(2\sinh 2K\right)\right)\right|
-\ \leq\ \frac{2}{0.7353^2} \ \leq\ 3.70`,
+        String.raw`\begin{aligned}
+\left|\frac{d^2}{dK^2}\left(\frac12\log\left(2\sinh 2K\right)\right)\right|
+&=\left|-\frac{2}{\sinh^2 2K}\right|
+   \quad (\because \text{直前の二階微分の等式}) \\
+&=\frac{2}{\sinh^2 2K}
+   \quad (\because \sinh 2K>0) \\
+&\leq\frac{2}{0.7353^2}
+   \quad (\because \sinh 2K\geq 0.7353\text{ と正数の逆数の単調性}) \\
+&\leq 3.70
+   \quad (\because \mathbb R\text{ の有理数計算})
+\end{aligned}`,
       ),
       paragraph([
         "Step 3（第 2 項の 2 階微分）。",

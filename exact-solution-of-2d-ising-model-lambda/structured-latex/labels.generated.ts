@@ -634,6 +634,7 @@ export const ALL_LABELS = [
   "claim_terminal_matrix_entries",
   "claim_three_term_pm_four_difference_zero",
   "claim_torus_homology_sector_partition",
+  "claim_torus_quadratic_sign_polarization",
   "claim_transfer_matrix_shift_invariant",
   "claim_transfer_weight_product",
   "claim_transition_entries_in_mu8",

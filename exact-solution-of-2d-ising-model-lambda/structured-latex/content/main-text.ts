@@ -75246,6 +75246,79 @@ q_{a,b}(h,v)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_torus_quadratic_sign_polarization",
+              labels: [],
+              title: { text: "巻き付き二次符号の加法則" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_torus_quadratic_sign_polarization",
+                  focus: {
+                    id: "kac_ward_claim_torus_quadratic_sign_polarization",
+                    kind: "claim",
+                    title: { text: "巻き付き二次符号の積と交差形式" },
+                    labels: ["claim_torus_quadratic_sign_polarization"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/torus-quadratic-sign-polarization"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）と ",
+                        math(String.raw`(h_1,v_1),(h_2,v_2)\in\{0,1\}\times\{0,1\}`),
+                        " を取る。", ref("def_torus_quadratic_sign"),
+                        " の二次符号について、整数の等式",
+                      ]),
+                      displayMath(String.raw`\chi_{a,b}(h_1\oplus h_2,v_1\oplus v_2)
+=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}`),
+                      paragraph([
+                        "が成り立つ。ここで ", math(String.raw`r,s\in\{0,1\}`), " に対し、",
+                        math(String.raw`r\oplus s\in\{0,1\}`),
+                        " は整数 ", math(String.raw`r+s`), " の偶奇の代表を表す。",
+                        "右端の指数は整数である。実数体・複素数体は使わない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`h:=h_1\oplus h_2`), "、",
+                        math(String.raw`v:=v_1\oplus v_2`),
+                        " と置く。これらは ", math(String.raw`\{0,1\}`),
+                        " の元で、整数の合同式 ",
+                        math(String.raw`h\equiv h_1+h_2`), "、",
+                        math(String.raw`v\equiv v_1+v_2\pmod 2`),
+                        " を満たす。二次符号の指数は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+q_{a,b}(h,v)
+&\equiv hv+(1-a)h+(1-b)v
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
+&\equiv(h_1+h_2)(v_1+v_2)+(1-a)(h_1+h_2)+(1-b)(v_1+v_2)
+&&\bigl(\because\ h\equiv h_1+h_2,\ v\equiv v_1+v_2\pmod2\bigr)\\
+&\equiv\bigl(h_1v_1+(1-a)h_1+(1-b)v_1\bigr)
++\bigl(h_2v_2+(1-a)h_2+(1-b)v_2\bigr)+h_1v_2+h_2v_1
+&&\bigl(\because\ \mathbb Z\text{ の分配律と交換律}\bigr)\\
+&\equiv q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1\pmod2
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
+\end{aligned}`),
+                      paragraph(["整数指数の加法則により"]),
+                      displayMath(String.raw`\begin{aligned}
+\chi_{a,b}(h,v)
+&=(-1)^{q_{a,b}(h,v)}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
+&=(-1)^{q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1}
+&&\bigl(\because\ \text{上の合同式と }(-1)^2=1\bigr)\\
+&=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と整数指数の加法則}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
