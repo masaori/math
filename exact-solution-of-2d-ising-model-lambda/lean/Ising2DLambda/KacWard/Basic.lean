@@ -42,7 +42,7 @@ instance : Fintype SpinStructure := by
   infer_instance
 
 lemma spinStructures_card : Fintype.card SpinStructure = 4 := by
-  unfold SpinStructure
-  exact Ising2DLambda.NecSuf.KacWard.card_bool_product
+  have hEquiv : SpinStructure ≃ Bool × Bool := Equiv.refl _
+  rw [Fintype.card_congr hEquiv, Fintype.card_prod, Fintype.card_bool]
 
 end Ising2DLambda.KacWard
