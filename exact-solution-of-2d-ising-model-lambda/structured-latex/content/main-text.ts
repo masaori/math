@@ -82345,6 +82345,52 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "supporting",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_opposite_direction_permutation_term_zero",
+              focus: {
+                id: "finite_fourier_claim_opposite_direction_permutation_term_zero",
+                kind: "claim",
+                title: { text: "逆方向を選ぶ置換の小行列式項は零である" },
+                labels: ["claim_opposite_direction_permutation_term_zero"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-small-matrix-forbidden-term"],
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix_forbidden_term_zero",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix_forbidden_term_zero",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_forbidden_term_zero_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、方向番号の置換 ", math(String.raw`\sigma\in\operatorname{Perm}(\mathbb Z/4\mathbb Z)`),
+                    " を取る。ある ", math(String.raw`\delta\in\mathbb Z/4\mathbb Z`),
+                    " で ", math(String.raw`\sigma(\delta)=\delta+2`), " なら、",
+                  ]),
+                  displayMath(String.raw`\prod_{j\in\mathbb Z/4\mathbb Z}
+\bigl(I_4-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{j,\sigma(j)}=0
+\quad\text{in }\overline{\mathbb Q}[x].`),
+                ],
+                proof: [
+                  paragraph(["上の ", math(String.raw`\delta`), " を固定する。", ref("claim_mode_small_matrix_entries"), " の逆方向成分は零であり、", ref("def_qbar_constant_embedding"), " は零を零へ送る。したがって、"]),
+                  displayMath(String.raw`\begin{aligned}
+\bigl(I_4-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{\delta,\sigma(\delta)}
+&=\bigl(I_4-x\widehat{\breve M(\varpi,\varsigma)}\bigr)_{\delta,\delta+2}
+&&\bigl(\because\ \sigma(\delta)=\delta+2\bigr)\\
+&=0-x\widehat{0}
+&&\bigl(\because\ \blkref{claim_mode_small_matrix_entries}\bigr)\\
+&=0
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\bigr).
+\end{aligned}`),
+                  paragraph(["有限積にはこの零因子があるので、主張の積は零である。実数体・複素数体は使わない。"]),
+                ],
+              },
+            },
+          },
         ],
       },
     },

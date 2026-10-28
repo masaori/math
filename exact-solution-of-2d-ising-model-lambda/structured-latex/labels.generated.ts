@@ -267,6 +267,7 @@ export const ALL_LABELS = [
   "claim_open_square_subsquare_comparison_density_le_one",
   "claim_open_square_subsquare_comparison_log_le_one",
   "claim_open_square_subsquare_comparison_rational_le_one",
+  "claim_opposite_direction_permutation_term_zero",
   "claim_orbit_bijection_id_or_shift",
   "claim_orbit_factor_root",
   "claim_orbit_factor_zero",

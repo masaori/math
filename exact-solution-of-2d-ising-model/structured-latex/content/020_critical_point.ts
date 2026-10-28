@@ -1975,19 +1975,22 @@ G''(\kappa)
       ]),
       displayMath(
         String.raw`\begin{aligned}
-0 \ \leq\ \frac{1}{\sqrt S} - \frac{1}{\sqrt{S(1+S)}}
+0 &\leq \frac{1}{\sqrt S} - \frac{1}{\sqrt{S(1+S)}}
+&& (\because S>0,\ 1+S\geq1) \\
 &= \frac{1}{\sqrt S}\left(1 - \frac{1}{\sqrt{1+S}}\right)
-   \quad (\because 1+S \geq 1 \text{ より } \sqrt{1+S} \geq 1) \\
-&= \frac{1}{\sqrt S}\cdot\frac{\sqrt{1+S}-1}{\sqrt{1+S}} \\
+&& (\because \mathbb R\text{ の四則}) \\
+&= \frac{1}{\sqrt S}\cdot\frac{\sqrt{1+S}-1}{\sqrt{1+S}}
+&& (\because \mathbb R\text{ の四則}) \\
 &= \frac{1}{\sqrt S}\cdot\frac{S}{\sqrt{1+S}\left(\sqrt{1+S}+1\right)}
-   \quad (\because \sqrt{1+S}-1 = \tfrac{S}{\sqrt{1+S}+1}) \\
+&& (\because (\sqrt{1+S}-1)(\sqrt{1+S}+1)=S) \\
 &\leq \frac{1}{\sqrt S}\cdot\frac{S}{2}
-   \quad (\because \sqrt{1+S}\geq 1 \text{ より分母} \geq 2) \\
-&= \frac{\sqrt S}{2} \\
+&& (\because \sqrt{1+S}\geq1) \\
+&= \frac{\sqrt S}{2}
+&& (\because S>0) \\
 &\leq \frac{\sqrt{\delta^2+1}}{2}
-   \quad (\because \sin^2 \leq 1) \\
+&& (\because \sin^2(\theta/2)\leq1) \\
 &= \frac{\cosh\!\left(\frac{\kappa}{2}\right)}{2}
-   \quad (\because \text{cosh\_sinh\_basic\_properties (2)})
+&& (\because \blkref{cosh_sinh_basic_properties}).
 \end{aligned}`,
       ),
       paragraph([

@@ -1563,3 +1563,6 @@ import Ising2DLambda.KacWard.FourierFiberDirectionDeterminantFromNecSuf
 import Ising2DLambda.KacWard.ModeSmallMatrixEntries
 import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixEntries
 import Ising2DLambda.KacWard.ModeSmallMatrixEntriesFromNecSuf
+import Ising2DLambda.KacWard.ModeSmallMatrixForbiddenTerm
+import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixForbiddenTerm
+import Ising2DLambda.KacWard.ModeSmallMatrixForbiddenTermFromNecSuf
