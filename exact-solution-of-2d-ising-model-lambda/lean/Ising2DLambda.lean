@@ -1560,3 +1560,6 @@ import Ising2DLambda.KacWard.FourierFiberDirectionBijectionFromNecSuf
 import Ising2DLambda.KacWard.FourierFiberDirectionDeterminant
 import Ising2DLambda.NecSuf.KacWard.FiberDirectionDeterminant
 import Ising2DLambda.KacWard.FourierFiberDirectionDeterminantFromNecSuf
+import Ising2DLambda.KacWard.ModeSmallMatrixEntries
+import Ising2DLambda.NecSuf.KacWard.ModeSmallMatrixEntries
+import Ising2DLambda.KacWard.ModeSmallMatrixEntriesFromNecSuf

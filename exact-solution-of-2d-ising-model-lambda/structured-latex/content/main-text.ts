@@ -82293,6 +82293,58 @@ D^{a,b}_L(x)
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_small_matrix_entries",
+              focus: {
+                id: "finite_fourier_claim_mode_small_matrix_entries",
+                kind: "claim",
+                title: { text: "四方向小行列の成分を明示する" },
+                labels: ["claim_mode_small_matrix_entries"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-small-matrix-entries"],
+                lean: [
+                  "Ising2DLambda.KacWard.modeSmallMatrix_eq_entries",
+                  "Ising2DLambda.NecSuf.KacWard.modeSmallMatrix_eq_entries",
+                  "Ising2DLambda.KacWard.modeSmallMatrix_eq_entries_from_necSuf",
+                ],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " とモード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取る。行と列を方向番号 ", math(String.raw`0,1,2,3\in\mathbb Z/4\mathbb Z`),
+                    " の順に並べると、小行列 ", ref("def_mode_small_matrix"), " は",
+                  ]),
+                  displayMath(String.raw`\breve M(\varpi,\varsigma)=
+\begin{pmatrix}
+\varpi & \zeta_8\varsigma & 0 & \zeta_8^{-1}\varsigma^{-1}\\
+\zeta_8^{-1}\varpi & \varsigma & \zeta_8\varpi^{-1} & 0\\
+0 & \zeta_8^{-1}\varsigma & \varpi^{-1} & \zeta_8\varsigma^{-1}\\
+\zeta_8\varpi & 0 & \zeta_8^{-1}\varpi^{-1} & \varsigma^{-1}
+\end{pmatrix}`),
+                  paragraph(["となる。全成分は ", math(String.raw`\overline{\mathbb Q}`), " に属し、実数体・複素数体を使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "方向単位ベクトル ", ref("def_direction_unit_vector"), " により、方向 ",
+                    math(String.raw`0,1,2,3`), " のモード重みは順に ",
+                    math(String.raw`\varpi,\varsigma,\varpi^{-1},\varsigma^{-1}`), " である。",
+                  ]),
+                  paragraph([
+                    "各行の方向番号 ", math(String.raw`\delta\in\{0,1,2,3\}`),
+                    " に対し、各列 ", math(String.raw`\delta'\in\{0,1,2,3\}`),
+                    " を ", ref("def_mode_small_matrix"), " の四つの場合へ代入する。",
+                    "同方向には重みをそのまま、右回転には ", math(String.raw`\zeta_8`),
+                    "、左回転には ", math(String.raw`\zeta_8^{-1}`),
+                    "、逆方向には零を掛けると、表示した16成分を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
         ],
       },
     },
@@ -88279,10 +88331,8 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                   ]),
                   paragraph([
                     "上の項目は本文へ足す章の話である。ここでは、有限の符号の等式から Onsager の積分表示へ至るまでの",
-                    "段取りを、段ごとの現在地と完了条件を付けて並べる。",
-                    "細かな現在地と実行の順序は docs/tasks/auto-loop-state.md のセクション表が正本であり、",
-                    "ここに置くのは、読む人が「いまどの段にいて、その段が何をもって終わるのか」を",
-                    "この文書だけで追えるようにするための骨組みである。",
+                    "段取りを、段ごとの完了条件を付けて並べる。",
+                    "実行の順序は docs/tasks/auto-loop-state.md のセクション表が正本である。",
                   ]),
                   list([
                     [
@@ -88295,7 +88345,6 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       " に Pfaffian を導入する。反対称行列の行列式が Pfaffian の平方であることを証明し、",
                       "Pfaffian の完全マッチング展開では各辺が高々一度しか使われないので、基準マッチングとの対称差は台の辺が相異なる閉歩道の族になり、",
                       "その符号は本文にある回転位相・横断消去・接触点分割・頂点単純閉路の回転数の補題で決まる。各偶部分グラフの上で局所対合の符号付き和は 1 である。",
-                      "現在地: 未完了。置換展開と偶部分グラフ対を鍵ごとに直接比較する旧経路は、一辺二・三の有限データへの当てはめで止まり、2026-10-03 に打ち切った（経過は docs/tasks/auto-loop-archive.md）。",
                       "完了条件: 任意の ", math(String.raw`L\ge1`), " と四つのスピン構造について ",
                       math(String.raw`D^{a,b}_L(x)=(Q^{a,b}_L(x))^2`), " を ", math(String.raw`\overline{\mathbb Q}[x]`),
                       " の等式として証明すること。扱う量は有限集合の数え上げと ",
@@ -88306,10 +88355,6 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                       "四つの有限トーラス行列式。",
                       "分配多項式 ", math(String.raw`Z_L(x)\in\mathbb{Z}[x]`),
                       " を、四つのスピン構造に対応する Kac--Ward 行列式の平方根の符号付き和として書く段である。",
-                      "現在地: 一辺二・三では行列式が符号付き偶部分グラフ多項式の平方に等しいことを厳密計算で観測し、",
-                      "離散 Whitney 系の補題列は記述と SageMath を終えている。Lean は、点列を仮定で受ける形の補題群が済み、",
-                      "実際の閉歩道から平面持ち上げを構成する定義群と、それに基づく主張（巻き付きと変位、持ち上げ点の相異性、",
-                      "周期数差の実際の閉歩道への適用、周期単純路と頂点単純閉路の回転数）の Lean 対応が未完了である。",
                       "完了条件: 低温変数のまま、",
                       math(String.raw`Z_L=\tfrac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L`),
                       "（分配多項式は四つの符号付き偶部分グラフ多項式の和の半分。",
@@ -88323,14 +88368,12 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                     [
                       "有限 Fourier 分解。",
                       "各行列式を、ねじれた 1 の冪根による有限 Fourier 分解でモードごとの小行列式の積へ落とす段である。",
-                      "現在地: ファイバーごとの行列式の積と四方向の小行列式への移し替えまで四層で済み、分散因子の計算が残る。",
                       "完了条件: 分散関係を ", math(String.raw`\overline{\mathbb{Q}(x)}`),
                       " 上の代数的な等式として書き、モードごとの因子を明示すること。ここまでは可算な世界で閉じる。",
                     ],
                     [
                       "熱力学極限。",
                       "有限体積の積公式から密度の極限を取る段である。",
-                      "現在地: 自由エントロピー密度の Cauchy 性は本文にあるが、Kac--Ward 側の積公式との接続は未着手。",
                       "完了条件: 有理点 ", math(String.raw`q`), " での分配多項式の値を四つの ",
                       math(String.raw`|Q^{a,b}_L(q)|`),
                       " の最大で両側から定数倍の範囲に評価すること（各 ", math(String.raw`Q^{a,b}_L`),
@@ -88340,7 +88383,6 @@ z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
                     [
                       "Onsager 積分。",
                       "モードごとの和を Riemann 和として実数体で読み、Onsager の積分表示を得る段である。",
-                      "現在地: 未着手。",
                       "完了条件: 脱出として使うのは実対数・1 の冪根の角への読み替え・極限だけに留め、得た積分表示 ",
                       math(String.raw`\frac{1}{8\pi^2}\int_0^{2\pi}\!\!\int_0^{2\pi}\log\bigl[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\bigr]\,d\theta_1\,d\theta_2`),
                       " を、すでに本文にある自由エントロピー密度と同じものとして同定すること。",

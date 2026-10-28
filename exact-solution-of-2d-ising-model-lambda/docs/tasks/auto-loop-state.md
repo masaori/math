@@ -6,7 +6,7 @@
 
 ## 現在地
 
-- **2026-10-28（連続実行）、各 Fourier モードファイバーの行列式を四方向の小行列式へ移すことを四層で示した。** 次はモードごとの小行列式を計算する。
+- **2026-10-28（連続実行）、四方向小行列の16成分を四層で明示した。** 次は置換展開で小行列式を計算する。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -18,7 +18,9 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Onsager 閉形式への接続 | 正方格子の分散因子: モードごとの 4×4 小行列式 | 未着手 | $\Delta(x;\varpi,\varsigma)=\det_x(I_4-x\widehat{\breve M(\varpi,\varsigma)})=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})$ を置換展開の 24 項から一行ずつ示す（$\zeta_8$ は消える）。設計ノート 09 の $\cosh2K,\sinh2K,\cos\theta$ との対応と、$\varpi=\varsigma=1$ での零条件が自己双対方程式 $x^2+2x-1=0$ になることを書く。指示書 `compute-square-lattice-dispersion-factor.md`。研究管理（2026-10-08）が辺長 1〜3 で $\prod\Delta=(Q^{a,b}_L)^2$ を確認済み（証明ではない）。 |
+| Onsager 閉形式への接続 | 正方格子の分散因子: 置換展開による 4×4 小行列式 | 未着手 | 成分表を使い、$\Delta(x;\varpi,\varsigma)=\det_x(I_4-x\widehat{\breve M(\varpi,\varsigma)})=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})$ を置換展開の 24 項から一行ずつ示す。指示書 `compute-square-lattice-dispersion-factor.md`。 |
+| Onsager 閉形式への接続 | 正方格子の分散因子: 設計ノートとの代数的対応 | 未着手 | $\cosh2K,\sinh2K,\cos\theta$ の代数的略記を定め、分散因子との等式を示す。解析関数としては扱わない。 |
+| Onsager 閉形式への接続 | 正方格子の分散因子: 無ねじれモードの零条件 | 未着手 | $\varpi=\varsigma=1$ のときの平方因子と自己双対方程式 $x^2+2x-1=0$ の同値を示す。 |
 | Onsager 閉形式への接続 | 有限トーラス公式（低温変数のまま）: 分配多項式は四つの符号付き偶部分グラフ多項式の和の半分 | 未着手 | $\mathbb Z[x]$ の等式 $Z_L=\frac12\sum_{(a,b)\in\mathcal S}Q^{a,b}_L$。根拠は `claim_low_temperature_trivial_sector_expression`（$Z_L=2G^{0,0}_L$）と `claim_signed_even_subgraph_sector_sum`（$Q^{a,b}_L=\sum_{(c,d)}\chi_{a,b}(c,d)G^{c,d}_L$）だけで、$(c,d)$ を固定した $\sum_{(a,b)}\chi_{a,b}(c,d)=4[c=0][d=0]$ を示して有限和の順序を交換する（一つの論法）。平方恒等式にも Fourier 分解にも依存しない。**Arf 符号 `claim_arf_fourier_sign_projection`、双対変数への置換、前因子 $2^{L^2}$ は使わない**（それらは $H_L$ を書くときのもの）。指示書 `assemble-finite-volume-closed-product.md` の 1（2026-10-09 の研究管理）。 |
 | Onsager 閉形式への接続 | 分散因子の自己双対性と正値性の分解 | 未着手 | $\overline{\mathbb Q}(x)$ の等式 $(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)=4\Delta(x;\varpi,\varsigma)$（`def_kw_dual_transform`）と、$\overline{\mathbb Q}[x]$ の等式 $\Delta(x;\varpi,\varsigma)-(x^2+2x-1)^2=x(1-x^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)$、および $\Delta(x;1,1)=(1-2x-x^2)^2$、$\Delta(x;1,-1)=\Delta(x;-1,1)=(1+x^2)^2$、$\Delta(x;-1,-1)=(1+2x-x^2)^2$。分散因子の定義だけに依存する。指示書 `assemble-finite-volume-closed-product.md` の 4・5 と `prove-twists-share-thermodynamic-limit.md` の 2（2026-10-09 の研究管理。辺長 1〜3 で確認済み）。 |
 | 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外 | 未着手 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: 道具の章の `matchingPair_evenColor_eq`・`qbarPolynomial_noninjective_inner_sum_zero`、Kac--Ward 章の `reversal_involutive`・`reversal_ne`・`spinStructures_card`・`transitionEntry_mem_mu8`・`kacWardDeterminantEntryProduct_ne_zero_iff`・`signedEvenSubgraphPolynomial_eq_sectorSum`・`walkTwistSign_product`・`vertexIncidentEdgeTraversal_even`・`firstHitConnectingStaircase_meets_lifts_only_at_ends`・`iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top`、置換展開の章の `movedEdgeOrbitSet_partition`・`kacWardSignedPermutationTerm_orbit_product`・`kacWardEntryProduct_orbit_factorization`・`kacWardSignedPermutationTerm_orbit_phase_twist`・`reversalFreeMovedSupport_even`・`reversalFreeOrbitSupportEdges_distinct`・`reversalFreeOrbit_vertexSimpleDecomposition`・`crossingFreeSignCounterexample`、臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 |
@@ -64,23 +66,23 @@
 
 ## レビュー記録
 
+- 2026-10-28: 「Fourier ファイバーの行列式を四方向の小行列式へ移す」は修正不要だった。本文末尾「この先に書くこと」から済んだことと現在地の記述を除いた。次は本文順の証明。
 - 2026-10-28: 「各 Fourier モードのファイバーと四方向は全単射である」の逆写像と Lean 対応を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-28: 「Fourier モードのファイバーごとに行列式を分解する」の本文と Lean のファイバー添字を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-28: 「Fourier モードのファイバーごとに行列式を分解する」の本文で、零成分から積公式への依存と多項式の住処を照合し、修正不要だった。次は本文順の証明。
 - 2026-10-28: 「Fourier モードのファイバーごとに行列式を分解する」の零成分条件と積公式への引用を照合し、修正不要だった。次は本文順の証明。
-- 2026-10-27: 「Fourier モードのファイバーごとに行列式を分解する」の本文で、モード対・ファイバー・零成分・行列式積の根拠を照合し、修正不要だった。次は本文順の証明。
 ## 式変形の書き方の統一
 
+- 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、二つの積分への分解を定義の準備と行末根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、半区間への折り返しを根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」で、一次微分の上界を根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「二階微分の対数発散」の冒頭で、γ の偶性から G の偶性までを根拠付きの式鎖にした。次は同じ証明の続き。
 - 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「初等的な正弦の上下界」で、定数の数値評価を行末根拠付きの式鎖にした。次は本文順の証明。
-- 2026-10-28（連続実行の書式統一）: 姉妹プロジェクトの「γ の κ 微分と上界」の末尾評価を行末根拠付きの式鎖にした。次は本文順の証明。
 
 ## 前進の記録
 
+- 2026-10-28: 分散因子の行を成分表・置換展開・代数的対応・零条件に割り、四方向小行列の16成分を四層で示した。
 - 2026-10-28: Fourier ファイバーの行列式を四方向の小行列式へ再添字付けし、本文・SageMath・独立な Lean 具体版と必要十分版で示した。
 - 2026-10-28: ファイバーを四方向へ移す項目を添字全単射と行列式の再添字付けに分割し、前者を四層で示した。
 - 2026-10-28: Fourier モードファイバー間の零成分と相似による行列式の保存を、有限ブロック行列式の積公式へ適用した。
 - 2026-10-28: Fourier モード対の添字写像について、異なるファイバー間の行列成分が零になることを Lean 具体版で示した。行列式積への適用は未了。
-- 2026-10-27: モードファイバーへの Lean 適用を有限モード対の添字構成・異なるファイバー間の零成分・行列式積への適用に割り、最初の添字構成を Lean で示した。

@@ -1948,21 +1948,26 @@ G''(\kappa)
         math(String.raw`\cosh\gamma = 1+2S`),
         "、",
         math(String.raw`S = \delta^2 + \sin^2\!\left(\tfrac\theta2\right)`),
-        " なので",
+        " である。さらに ",
+        math(String.raw`J := \int_0^{\pi}\frac{d\theta}{\sqrt{S(1+S)}}`),
+        "、",
+        math(String.raw`T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta`),
+        " とおく。このとき",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 \int_0^{\pi}\frac{\partial^2\gamma}{\partial\kappa^2}\,d\theta
 &= \int_0^{\pi}\left(\frac{\cosh\kappa}{\sinh\gamma}
    - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\right)d\theta
-   \quad (\because \text{gamma\_derivatives\_in\_kappa (2)}) \\
-&= \frac{\cosh\kappa}{2}\,J \;-\; T
-   \quad (\because \text{(R3) の線型性}) \\
-J &:= \int_0^{\pi}\frac{d\theta}{\sqrt{S(1+S)}},
-\qquad
-T := \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
-\end{aligned}`,
-      ),
+&& (\because\ \blkref{gamma_derivatives_in_kappa}) \\
+&= \int_0^{\pi}\left(\frac{\cosh\kappa}{2\sqrt{S(1+S)}}
+   - \frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\right)d\theta
+&& (\because\ \blkref{gamma_derivatives_in_kappa}) \\
+&= \frac{\cosh\kappa}{2}\int_0^{\pi}\frac{d\theta}{\sqrt{S(1+S)}}
+   - \int_0^{\pi}\frac{\sinh^2\kappa\,\cosh\gamma}{\sinh^3\gamma}\,d\theta
+&& (\because\ \text{積分の線型性 (R3)}) \\
+&= \frac{\cosh\kappa}{2}\,J - T
+&& (\because\ J,T\text{ の定義}).
+\end{aligned}`),
       paragraph([
         "Step 4（",
         math(String.raw`J`),
