@@ -76382,7 +76382,59 @@ w_{\iota(\vec e_{r-1}),\vec e_r}
 &=(-1)^k
 &&\bigl(\because\ \text{有限積の定義}\bigr).
 \end{aligned}`),
-                      paragraph(["分母は非零なので、最後の等式の両辺に基準の長い対の重みの積を掛けて主張を得る。"]),
+                      paragraph(["分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。最後の等式の両辺に長い対の重みの積を掛けると"]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}
+&=\left(\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}\right)\prod_r w_{\vec e_r,\iota(\vec e_r)}
+&&\bigl(\because\ \blkref{claim_gauge_pair_weight_nonzero}\text{ と非零元の四則}\bigr)\\
+&=(-1)^k\prod_r w_{\vec e_r,\iota(\vec e_r)}
+&&\bigl(\because\ \text{直前の比の等式}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_cycle_weight",
+              labels: [],
+              title: { text: "非零の標識付きマッチング項の閉路別の重み" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_cycle_weight",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_cycle_weight",
+                    kind: "claim",
+                    title: { text: "非零項は閉歩道ごとのねじれ・回転位相の積に分かれる" },
+                    labels: ["claim_tagged_matching_cycle_weight"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-cycle-weight"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C=(\vec e_{C,0},\ldots,\vec e_{C,k_C-1})`), " と置き、添字を ", math(String.raw`\mathbb Z/k_C\mathbb Z`), " で読む。", math(String.raw`k_C\in\mathbb N_{>0}`), " である。" ]),
+                      displayMath(String.raw`M_{D,T}(x)=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]\quad\text{in }\overline{\mathbb Q}[x].`),
+                      paragraph(["左辺は ", ref("claim_tagged_matching_expansion"), " の当該項である。空積は一であり、辺長一の一歩閉路も含む。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
+                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により、閉路の対は重複しない。", ref("claim_tagged_matching_short_pair_count"), " と ", ref("claim_projected_cycle_support_union"), " より短い対の総数は ", math(String.raw`|T|=\sum_C k_C`), " である。活動点の外の長い対は基準項と一致し、", ref("claim_reference_matching_constant_term"), " より基準項は一である。従って各閉路の項の比を掛ければ ", math(String.raw`M_{D,T}(x)`), " を得る。"]),
+                      displayMath(String.raw`\begin{aligned}
+M_{D,T}(x)
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}\alpha_D(C)^2\alpha_0(C)^2x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_alternating_cycle_matching_sign},\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \alpha_D(C)^2=\alpha_0(C)^2=1\text{ と昇順への向き直し}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}(-1)^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_alternating_cycle_gauge_ratio}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ (-1)^{2k_C}=1\bigr).
+\end{aligned}`),
+                      paragraph(["全ての分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。有限積と定数多項式への埋込みだけを用いた。"]),
                     ],
                   },
                 },

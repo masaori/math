@@ -629,6 +629,7 @@ export const ALL_LABELS = [
   "claim_tagged_difference_cycle_cover",
   "claim_tagged_difference_orbit_separation",
   "claim_tagged_difference_two_step_orbit",
+  "claim_tagged_matching_cycle_weight",
   "claim_tagged_matching_even_complement",
   "claim_tagged_matching_expansion",
   "claim_tagged_matching_label_recovery",
