@@ -353,6 +353,7 @@ export const ALL_LABELS = [
   "claim_permutation_sign_moved_orbit_product",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
+  "claim_pfaffian_signed_even_subgraph",
   "claim_phase_contribution_sign_value",
   "claim_phase_contribution_signed_rotation_power",
   "claim_phase_reversing_standard_smoothing_involution",

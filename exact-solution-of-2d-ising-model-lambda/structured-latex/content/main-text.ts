@@ -76571,6 +76571,55 @@ M_{D,T}(x)
             role: "subsection",
             element: {
               kind: "section",
+              id: "kac_ward_heading_pfaffian_signed_even_subgraph",
+              labels: [],
+              title: { text: "Pfaffian と符号付き偶部分グラフ多項式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_pfaffian_signed_even_subgraph",
+                  focus: {
+                    id: "kac_ward_claim_pfaffian_signed_even_subgraph",
+                    kind: "claim",
+                    title: { text: "反対称化した行列の Pfaffian は符号付き偶部分グラフ多項式に等しい" },
+                    labels: ["claim_pfaffian_signed_even_subgraph"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/pfaffian-signed-even-subgraph"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " を取る。", ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " の添字を ", math(String.raw`\vec E_L=E_L\times\{0,1\}`), " の辺番号・端点番号の辞書式に並べる。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式"]),
+                      displayMath(String.raw`\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L`),
+                      paragraph(["が成り立つ。右辺は ", ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`\mathbb Z[x]`), " の多項式を係数の包含で送ったものである。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["偶部分グラフの有限集合を ", math(String.raw`\mathcal W_L:=\{P\subseteq E_L\mid\operatorname{Even}_L(P)\}`), " と置く。", ref("claim_tagged_matching_even_complement"), " により、非零項の補辺は ", math(String.raw`\mathcal W_L`), " に属する。各 ", math(String.raw`P\in\mathcal W_L`), " の上の非零項は ", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " により局所対合族と一対一に対応する。"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{Pf}(K^{\mathrm{as}})
+&=\sum_{D\in\mathcal M(\vec E_L)}\sum_{T\subseteq E_D}M_{D,T}(x)
+&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\ \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}M_{D,T}(x)
+&&\bigl(\because\ \blkref{claim_tagged_matching_even_complement}\text{ と有限和の再添字付け}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
+  \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}
+&&\bigl(\because\ \blkref{claim_tagged_matching_quadratic_crossing_weight}\text{ と分配則}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
+&&\bigl(\because\ \blkref{claim_local_pairing_signed_sum}\bigr)\\
+&=\sum_{P\in\mathcal W_L}(-1)^{(1+a)h(P)+(1+b)v(P)+h(P)v(P)}x^{|P|}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と指数の偶奇}\bigr)\\
+&=Q^{a,b}_L
+&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
+\end{aligned}`),
+                      paragraph(["辺長一でも長短の標識を区別した有限和を使う。最後の等号で係数を ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " に送る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
               id: "kac_ward_heading_contact_free_permutation_phase_product",
               labels: [],
               title: { text: "接触の無い置換の位相積" },
