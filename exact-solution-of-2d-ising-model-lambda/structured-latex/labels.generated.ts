@@ -211,6 +211,7 @@ export const ALL_LABELS = [
   "claim_matching_pair_word_sign_map",
   "claim_matching_word_sign_swap",
   "claim_matrix_pow_entry",
+  "claim_mode_small_matrix_determinant_dispersion",
   "claim_mode_small_matrix_entries",
   "claim_mode_small_matrix_four_cycle_terms",
   "claim_mode_small_matrix_remaining_terms",

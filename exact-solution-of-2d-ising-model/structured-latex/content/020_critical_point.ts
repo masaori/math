@@ -2138,12 +2138,21 @@ T
         math(String.raw`t = \tfrac\kappa2`),
         " に適用すると ",
         math(String.raw`\tfrac\kappa2 \leq \delta \leq \tfrac\kappa2\cosh\tfrac\kappa2`),
-        " なので",
+        " となる。正の数の逆数の順序と対数の単調性を順に使う。",
       ]),
       displayMath(
-        String.raw`\frac{2}{\cosh\!\left(\frac{\kappa}{2}\right)} \ \leq\ \frac{\kappa}{\delta} \ \leq\ 2,
-\qquad\text{すなわち}\qquad
--\log\cosh\!\left(\frac{\kappa}{2}\right) \ \leq\ \log\frac{\kappa}{\delta} - \log 2 \ \leq\ 0`,
+        String.raw`\begin{aligned}
+\frac{2}{\cosh\!\left(\frac{\kappa}{2}\right)}
+&\leq\frac{\kappa}{\delta}
+&& (\because\ \delta\leq\frac\kappa2\cosh\!\left(\frac\kappa2\right),\ \kappa,\delta>0)\\
+&\leq 2
+&& (\because\ \frac\kappa2\leq\delta),\\[2pt]
+-\log\cosh\!\left(\frac{\kappa}{2}\right)
+&\leq\log\frac{\kappa}{\delta}-\log 2
+&& (\because\ \text{直前の左辺の評価と対数の単調性})\\
+&\leq 0
+&& (\because\ \text{直前の右辺の評価と対数の単調性}).
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\rho := \log\frac{\kappa}{\delta} - \log 2`),
