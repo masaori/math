@@ -19,7 +19,7 @@
 - **この VM の SageMath**: Ubuntu のパッケージに無いため、conda-forge 版を `/home/masaori/.cache/masaori-math/sage-env/bin/sage` に用意した。連続実行ではこの実行ファイルを使える。
 - **Lean の依存は作業ツリーの外で共有する。** `lake build` の前に `lean/scripts/use-shared-dependencies.sh` を打つ。`lake update` を打たない（共有ディレクトリは書き込み禁止）。手順は `lean/README.md` の「セットアップと検証」。
 - **PDF は Linux では CJK フォントを指定して組む**: `ISING_LAMBDA_PDF_CJK_MAIN_FONT="Noto Serif CJK JP"` `ISING_LAMBDA_PDF_CJK_SANS_FONT="Noto Sans CJK JP"`。フォントの不在を本文の欠陥と誤診しない（runbook「PDF を毎 tick 更新する」）。 `npm run check` も同じ組版入力を書き出すので、PDF 生成と同時に実行しない。
-- **論文の公開は名前空間 `math`・パス `ising-lambda` へ、`document.html` を `index.html` としても置いたディレクトリから行う**（`build/` をそのまま公開すると末尾スラッシュの URL が 404 を返す）。研究管理だけが公開する。連続実行は Slack 報告も公開もしない。 main の push で姉妹論文を公開する [workflow](../.github/workflows/build-pdf.yml) があるため、公開しない実行のコミットには GitHub の起動抑止指定 `[skip actions]` を付ける。必須のローカル検証は省かない。
+- **論文の公開は名前空間 `math`（publish の `--repo math`。`masaori/math` は別の成果物で、旧形式の URL に出ない）・パス `ising-lambda` へ、`document.html` を `index.html` としても置いたディレクトリから行う**（`build/` をそのまま公開すると末尾スラッシュの URL が 404 を返す）。研究管理だけが公開する。連続実行は Slack 報告も公開もしない。 main の push で姉妹論文を公開する [workflow](../.github/workflows/build-pdf.yml) があるため、公開しない実行のコミットには GitHub の起動抑止指定 `[skip actions]` を付ける。必須のローカル検証は省かない。
 - **方向性と台帳の順序は研究管理（毎日 18 時）が決める。** 連続実行は自分で方向を変えず、台帳の先頭が判断待ちなら次に実行可能な項目へ進んで「前進の記録」に一行残す。
 - **本文で $u$ は方向単位ベクトルの名前。** Fourier 分解のモード変数には $u,w$ を使わず $\varpi,\varsigma$ を使う（1 記号 1 意味）。
 
