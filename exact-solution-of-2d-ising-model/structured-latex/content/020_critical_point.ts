@@ -1259,10 +1259,17 @@ A
         math(String.raw`\sinh\gamma > 0`),
         "（",
         math(String.raw`S>0`),
-        " より）なので ",
-        math(String.raw`\left|\dfrac{\partial\gamma}{\partial\kappa}\right| = \dfrac{|\sinh\kappa|}{\sinh\gamma} \leq 1`),
-        "。",
+        " より）なので、(2) と直前の評価から",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|\frac{\partial\gamma}{\partial\kappa}\right|
+&= \frac{|\sinh\kappa|}{\sinh\gamma}
+   &&(\because\ \text{本主張 (2) と }\sinh\gamma>0) \\
+&\leq 1
+   &&(\because\ \text{直前の }\sinh\gamma\geq|\sinh\kappa|)
+\end{aligned}`,
+      ),
       paragraph([
         "(4) の証明。",
         math(String.raw`(\theta,\kappa) \in [0,2\pi]\times[\kappa_1,\kappa_2]`),

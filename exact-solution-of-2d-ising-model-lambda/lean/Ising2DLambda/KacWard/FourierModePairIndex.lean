@@ -1,4 +1,5 @@
 import Ising2DLambda.KacWard.EdgeModeIndexBijection
+import Ising2DLambda.KacWard.FourierModeBlockEntries
 
 namespace Ising2DLambda.KacWard
 
@@ -37,5 +38,18 @@ theorem fourierModeBlockIndex_eq_iff {L : ℕ} (s : SpinStructure)
     exact congrArg Subtype.val h
   · intro h
     exact Subtype.ext h
+
+theorem fourierModeBlock_off_fiber_zero {L : ℕ} [DecidableEq Qbar]
+    (z : Qbar) (s : SpinStructure)
+    (κ : OrientedEdge L ≃ {m // m ∈ fourierModeIndexSet L s})
+    (g h : OrientedEdge L)
+    (hneq : fourierModeBlockIndex s κ g ≠ fourierModeBlockIndex s κ h) :
+    (1 - (Polynomial.X : QbarPoly) • (modeBlockMatrix z s κ).map Polynomial.C) g h = 0 := by
+  have hm : ((κ g).val.1, (κ g).val.2.1) ≠
+      ((κ h).val.1, (κ h).val.2.1) := by
+    intro heq
+    exact hneq ((fourierModeBlockIndex_eq_iff s κ g h).2 heq)
+  rw [fourier_mode_block_entries]
+  simp [hm]
 
 end Ising2DLambda.KacWard
