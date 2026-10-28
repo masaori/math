@@ -93,6 +93,7 @@ export const ALL_LABELS = [
   "claim_dual_edge_map_bijective",
   "claim_edge_distinct_crossing_elimination_parity",
   "claim_edge_distinct_smoothing_crossing_parity",
+  "claim_edge_distinct_walk_quadratic_sign",
   "claim_edge_mode_index_bijection",
   "claim_edge_representative_displacement",
   "claim_edge_row_partition",
