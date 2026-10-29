@@ -381,13 +381,16 @@ v_p(a)+v_p(b')
 &=v_p(a')+v_p(b)
 &&(\because\ \blkref{def_prime_exponent})
 \end{aligned}`),
-                        paragraph([
-                          "であり、両辺から ",
-                          math(String.raw`v_p(b)+v_p(b')`),
-                          " を引いて ",
-                          math(String.raw`v_p(a)-v_p(b)=v_p(a')-v_p(b')`),
-                          " を得る。",
-                        ]),
+                        paragraph(["上の等式の両辺から ", math(String.raw`v_p(b)+v_p(b')`), " を引く。"]),
+                        displayMath(String.raw`\begin{aligned}
+v_p(a)-v_p(b)
+&=v_p(a)+v_p(b')-v_p(b)-v_p(b')
+&&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr)\\
+&=v_p(a')+v_p(b)-v_p(b)-v_p(b')
+&&\bigl(\because\ \text{上の等式}\bigr)\\
+&=v_p(a')-v_p(b')
+&&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr).
+\end{aligned}`),
                         paragraph([
                           "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
                           "引き算のためだけに ",
@@ -84929,6 +84932,85 @@ z=z^{-1}
                     "元数は二つの元数の積として ", math(String.raw`1,2,4`),
                     " のいずれかである。元数が一であるのは両成分がそれぞれ逆元に等しい場合に限る。",
                     "上の同値を両成分へ適用すると、表示した条件を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_signed_even_subgraph_orbit_product",
+              focus: {
+                id: "finite_fourier_claim_signed_even_subgraph_orbit_product",
+                kind: "claim",
+                title: { text: "符号付き偶部分グラフ多項式の軌道ごとの明示積" },
+                labels: ["claim_signed_even_subgraph_orbit_product"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/signed-even-subgraph-orbit-product"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取り、",
+                    math(String.raw`\mathcal K:=\mathcal U_a\times\mathcal W_b`),
+                    " と置く。", ref("claim_mode_inversion_orbit_cardinality"),
+                    " の軌道の集合を ", math(String.raw`\mathfrak M_L^{a,b}:=\{O(m):m\in\mathcal K\}`),
+                    " とする。各 ", math(String.raw`O\in\mathfrak M_L^{a,b}`), " の任意の元 ",
+                    math(String.raw`m=(\varpi,\varsigma)`), " について ",
+                    math(String.raw`\Delta_O:=\Delta(x;\varpi,\varsigma)\in\overline{\mathbb Q}[x]`),
+                    " と置き、以下では ", math(String.raw`\Delta(x;m):=\Delta(x;\varpi,\varsigma)`),
+                    " と略記する。逆元不変性により、この多項式は元の選択に依らない。",
+                  ]),
+                  paragraph(["一元軌道 ", math(String.raw`O=\{(\varpi,\varsigma)\}`), " には次の多項式を対応させる。"]),
+                  displayMath(String.raw`F_O:=\begin{cases}
+1-2x-x^2&((\varpi,\varsigma)=(1,1)),\\
+1+x^2&((\varpi,\varsigma)=(1,-1)\text{ または }(-1,1)),\\
+1+2x-x^2&((\varpi,\varsigma)=(-1,-1)).
+\end{cases}`),
+                  paragraph(["すると、次の多項式 ", math(String.raw`P_L^{a,b}\in\overline{\mathbb Q}[x]`), " は ", ref("def_signed_even_subgraph_polynomial"), " の多項式と等しい。ここで ", math(String.raw`Q_L^{a,b}`), " は係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送った多項式を表す。"]),
+                  displayMath(String.raw`P_L^{a,b}:=\prod_{\substack{O\in\mathfrak M_L^{a,b}\\|O|=1}}F_O\cdot
+\prod_{\substack{O\in\mathfrak M_L^{a,b}\\|O|=2}}\Delta_O\cdot
+\prod_{\substack{O\in\mathfrak M_L^{a,b}\\|O|=4}}\Delta_O^2
+=Q_L^{a,b}.`),
+                  paragraph(["空積は一とする。全ての因子は代数的数係数の有限多項式であり、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_dispersion_inversion_invariant"), " により ", math(String.raw`\Delta_O`),
+                    " は元の選択に依らない。逆元操作は互いに可換な対合なので、二つの軌道が交われば一致する。",
+                    ref("claim_twisted_mode_sets_card"), " により ", math(String.raw`\mathcal K`),
+                    " は有限であり、この集合は ", math(String.raw`\mathfrak M_L^{a,b}`),
+                    " によって重複なく分割される。", ref("claim_mode_inversion_orbit_cardinality"),
+                    " により軌道の元数は一、二、四だけで、一元軌道の元は ",
+                    math(String.raw`\{1,-1\}^2`), " に属する。",
+                  ]),
+                  paragraph([
+                    ref("claim_dispersion_special_mode_squares"), " より一元軌道では ",
+                    math(String.raw`F_O^2=\Delta_O`), " である。その他の軌道についても冪の法則により",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(P_L^{a,b})^2
+&=\prod_{|O|=1}F_O^2\cdot\prod_{|O|=2}\Delta_O^2\cdot\prod_{|O|=4}\Delta_O^4
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の可換性と冪の法則}\bigr)\\
+&=\prod_{|O|=1}\Delta_O\cdot\prod_{|O|=2}\Delta_O^2\cdot\prod_{|O|=4}\Delta_O^4
+&&\bigl(\because\ \blkref{claim_dispersion_special_mode_squares}\bigr)\\
+&=\prod_{O\in\mathfrak M_L^{a,b}}\prod_{m\in O}\Delta(x;m)
+&&\bigl(\because\ \blkref{claim_mode_inversion_orbit_cardinality}\text{ と }\blkref{claim_dispersion_inversion_invariant}\bigr)\\
+&=\prod_{m\in\mathcal K}\Delta(x;m)
+&&\bigl(\because\ \mathfrak M_L^{a,b}\text{ は }\mathcal K\text{ の分割}\bigr)\\
+&=D_L^{a,b}(x)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "各 ", math(String.raw`F_O`), " と ", math(String.raw`\Delta_O`),
+                    " の定数項は一である（", ref("claim_dispersion_special_mode_squares"),
+                    "、", ref("def_dispersion_polynomial"), "）。有限積の定数項は定数項の積なので ",
+                    math(String.raw`\mathrm{ac}_0(P_L^{a,b})=1`), " である。",
+                    ref("claim_determinant_polynomial_square_root_exists"),
+                    " により ", math(String.raw`Q_L^{a,b}`),
+                    " も同じ多項式の定数項一の平方根である。", ref("claim_qbar_polynomial_square_root_unique"),
+                    " を適用して ", math(String.raw`P_L^{a,b}=Q_L^{a,b}`), " を得る。",
                   ]),
                 ],
               },

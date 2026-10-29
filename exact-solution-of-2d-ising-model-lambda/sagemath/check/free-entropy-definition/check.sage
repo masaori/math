@@ -15,8 +15,9 @@
 # 本文がこの章で R へ脱出していないので、検証側にも脱出を持ち込まない。
 
 import os
+import sys
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
+_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
 
 
