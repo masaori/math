@@ -87841,7 +87841,9 @@ e_{L,c,k}^{L}
 \Theta_{L,a,b}(\varpi,\varsigma)
 &=\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
 &&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr)\\
-&=(z,w)&&\bigl(\because\ \varpi,\varsigma\text{ の選択}\bigr).
+&=\bigl(z,\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
+&&\bigl(\because\ \varpi\text{ の選択}\bigr)\\
+&=(z,w)&&\bigl(\because\ \varsigma\text{ の選択}\bigr).
 \end{aligned}`),
                   paragraph(["よって全射である。"]),
                 ],
