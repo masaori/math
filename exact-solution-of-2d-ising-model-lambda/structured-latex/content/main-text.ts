@@ -85512,6 +85512,57 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_low_temperature_partition_bounds",
+              focus: {
+                id: "finite_fourier_claim_low_temperature_partition_bounds",
+                kind: "claim",
+                title: { text: "自己双対点より低温側での分配多項式の両側評価" },
+                labels: ["claim_low_temperature_partition_bounds"],
+                habitat: "Q",
+                verification: ["sagemath/check/low-temperature-partition-bounds"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と有理数 ",
+                    math(String.raw`q\in\mathbb Q`), " で ",
+                    math(String.raw`0<q<1`), " かつ ",
+                    math(String.raw`q^2+2q-1<0`), " を満たすものを取る。",
+                    ref("def_signed_even_subgraph_polynomial"), " の四つの値の最大を ",
+                    math(String.raw`M_L(q):=\max_{(a,b)\in\mathcal S}Q_L^{a,b}(q)\in\mathbb Q`),
+                    " と書く。このとき ", ref("def_partition_polynomial"), " の値は",
+                  ]),
+                  displayMath(String.raw`\frac12M_L(q)\le Z_L(q)\le2M_L(q)`),
+                  paragraph(["を満たす。全て有理数の順序であり、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_signed_even_subgraph_rational_sign"), " より四つの ",
+                    math(String.raw`Q_L^{a,b}(q)`), " は正である。",
+                    ref("def_spin_structures"), " の ", math(String.raw`\mathcal S`), " は四元集合なので最大 ",
+                    math(String.raw`M_L(q)>0`), " はそのうち一つの値である。",
+                  ]),
+                  paragraph([ref("claim_finite_torus_polynomial"), " を ", math(String.raw`x=q`), " で評価し、有理数の中で順に比較すると"]),
+                  displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}(q)
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ を }q\text{ で評価}\bigr)\\
+&\ge\frac12M_L(q)
+&&\bigl(\because\ \text{最大を与える項以外も正、}\blkref{claim_signed_even_subgraph_rational_sign}\bigr)\\
+Z_L(q)
+&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}(q)
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ を }q\text{ で評価}\bigr)\\
+&\le\frac12\sum_{(a,b)\in\mathcal S}M_L(q)
+&&\bigl(\because\ M_L(q)\text{ は四つの値の最大}\bigr)\\
+&=2M_L(q)
+&&\bigl(\because\ |\mathcal S|=4\text{、}\blkref{def_spin_structures}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_untwisted_mode_zero_condition",
               focus: {
                 id: "finite_fourier_claim_untwisted_mode_zero_condition",
@@ -85541,8 +85592,12 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
                   ]),
                 ],
                 proof: [
+                  displayMath(String.raw`\begin{aligned}
+1^L&=1&&\bigl(\because\ L\ge1\text{ と冪の定義}\bigr)\\
+&=(-1)^0&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗は }1\bigr).
+\end{aligned}`),
                   paragraph([
-                    math(String.raw`1^L=1=(-1)^0`), " より ",
+                    "従って ",
                     math(String.raw`1\in\mathcal U_0`), "（", ref("def_horizontal_twisted_modes"),
                     "）かつ ", math(String.raw`1\in\mathcal W_0`), "（", ref("def_vertical_twisted_modes"),
                     "）である。分散因子をこのモードで評価すると",

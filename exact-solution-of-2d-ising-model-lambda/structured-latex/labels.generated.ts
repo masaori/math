@@ -202,6 +202,7 @@ export const ALL_LABELS = [
   "claim_log_order_group_positive_multiple_invariant",
   "claim_log_order_group_realization_real_log",
   "claim_log_power",
+  "claim_low_temperature_partition_bounds",
   "claim_low_temperature_polynomial_identity",
   "claim_low_temperature_trivial_sector_expression",
   "claim_matching_pair_actual_monomial",
