@@ -85227,8 +85227,13 @@ z=z^{-1}
                     ref("claim_determinant_polynomial_square_root_exists"),
                     " により ", math(String.raw`Q_L^{a,b}`),
                     " も同じ多項式の定数項一の平方根である。", ref("claim_qbar_polynomial_square_root_unique"),
-                    " を適用して ", math(String.raw`P_L^{a,b}=Q_L^{a,b}`), " を得る。",
+                    " を適用すると",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+P_L^{a,b}
+&=S_L^{a,b}&&\bigl(\because\ \blkref{claim_qbar_polynomial_square_root_unique}\text{ と上で示した平方・定数項}\bigr)\\
+&=Q_L^{a,b}&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
+\end{aligned}`),
                 ],
               },
             },
