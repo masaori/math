@@ -86916,10 +86916,15 @@ const chapter_real_escape = defineSection({
                     math(String.raw`r\in C_a`), " なので、像は空でない。",
                   ]),
                   paragraph([
-                    "任意の ", math(String.raw`t\in C_a`), " について ",
-                    math(String.raw`t<_R a<_R s`), " である（切断の定義と上の挟み込み）。",
-                    "順序の推移律（", ref("claim_real_algebraic_order_transitive"),
-                    "）により ", math(String.raw`t<_R s`), " となる。",
+                    "任意の ", math(String.raw`t\in C_a`), " について、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+t&<_R a&&(\because\ t\in C_a\text{ と }C_a\text{ の定義})\\
+&<_R s&&(\because\ \blkref{claim_real_algebraic_rational_pinching}).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_real_algebraic_order_transitive"),
+                    " により ", math(String.raw`t<_R s`), " となる。",
                     "もし有理数の順序で ", math(String.raw`s<t`), " なら ",
                     math(String.raw`t-s\in\mathbb Q_{>0}`), " に ",
                     ref("claim_positive_rational_positive_in_real_closed"),
@@ -87036,6 +87041,109 @@ const chapter_real_escape = defineSection({
 &=\iota_{\mathbb Q\to\mathbb R}(q)
 &&(\because\ \iota_{\mathbb Q\to\mathbb R}(q)\text{ は上界で、これより小さい実数は上界でない})
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_cut_realization_preserves_addition",
+              focus: {
+                id: "real_escape_claim_cut_realization_preserves_addition",
+                kind: "claim",
+                title: { text: "下切断による実現写像は加法を保つ" },
+                labels: ["claim_cut_realization_preserves_addition"],
+                habitat: "R",
+                realEscape: "有理下切断の実数上限で定めた二つの実現像と和の実現像を実数体で比較する。",
+                verification: ["sagemath/check/cut-realization-preserves-addition"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`a,b\in R`), " について、",
+                    ref("def_real_closed_subfield"), " の体の閉性により ",
+                    math(String.raw`a+b\in R`), " である。",
+                    ref("def_real_algebraic_cut_realization"), " の写像は",
+                  ]),
+                  displayMath(String.raw`\rho_{R\to\mathbb R}(a+b)=\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b)`),
+                  paragraph([
+                    "を満たす。左辺の加法は ", math(String.raw`R`),
+                    "、右辺の加法は ", math(String.raw`\mathbb R`), " のものである。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`x\in R`), " と ",
+                    math(String.raw`r,s\in\mathbb Q`), " が ",
+                    math(String.raw`r<_R x<_R s`), " を満たすとする。",
+                    ref("claim_real_algebraic_lower_cut_has_supremum"), " の下切断では ",
+                    math(String.raw`r\in C_x`), " なので、上限の定義から ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(r)\le\rho_{R\to\mathbb R}(x)`),
+                    " である。任意の ", math(String.raw`t\in C_x`), " について ",
+                    math(String.raw`t<_R x<_R s`), " だから、",
+                    ref("claim_real_algebraic_order_transitive"), " より ",
+                    math(String.raw`t<_R s`), " である。",
+                    "有理数として ", math(String.raw`s<t`), " なら、",
+                    ref("claim_positive_rational_positive_in_real_closed"),
+                    " を ", math(String.raw`t-s\in\mathbb Q_{>0}`),
+                    " に適用して ", math(String.raw`s<_R t`),
+                    " となり、順序の推移律と非反射性に反する。",
+                    math(String.raw`s=t`), " も非反射性に反する。",
+                    "有理数の三分律より ", math(String.raw`t<s`), " となる。",
+                    ref("def_real_logarithm"), " の包含写像は順序を保つので ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " は切断の像の上界である。従って",
+                  ]),
+                  displayMath(String.raw`\iota_{\mathbb Q\to\mathbb R}(r)
+\le\rho_{R\to\mathbb R}(x)
+\le\iota_{\mathbb Q\to\mathbb R}(s)\quad(\because\ \blkref{def_real_algebraic_cut_realization}\text{ と上限の性質})`),
+                  paragraph([
+                    math(String.raw`\varepsilon\in\mathbb Q_{>0}`), " を任意に取る。",
+                    ref("claim_real_algebraic_rational_pinching"), " を ",
+                    math(String.raw`a,b`), " に適用し、",
+                    math(String.raw`r_a<_R a<_R s_a`), "、",
+                    math(String.raw`r_b<_R b<_R s_b`), " および ",
+                    math(String.raw`0<s_a-r_a<\varepsilon`), "、",
+                    math(String.raw`0<s_b-r_b<\varepsilon`),
+                    " を満たす有理数 ",
+                    math(String.raw`r_a,s_a,r_b,s_b\in\mathbb Q`), " を取る。",
+                    ref("def_real_algebraic_strict_order"),
+                    " によれば不等式への同じ元の加算は差を変えない。",
+                    "二つの不等式を加算し、",
+                    ref("claim_real_algebraic_order_transitive"), " を適用すると",
+                  ]),
+                  displayMath(String.raw`r_a+r_b<_R a+b<_R s_a+s_b\quad(\because\ \blkref{def_real_algebraic_strict_order}\text{ の加法移送と }\blkref{claim_real_algebraic_order_transitive})`),
+                  paragraph([
+                    "初めに示した切断の挟み込みを ",
+                    math(String.raw`a,b,a+b`), " に適用する。",
+                    ref("def_real_logarithm"), " の包含写像は有理数の加法を保つので、",
+                    math(String.raw`A:=\iota_{\mathbb Q\to\mathbb R}(r_a+r_b)\in\mathbb R`),
+                    " と ",
+                    math(String.raw`B:=\iota_{\mathbb Q\to\mathbb R}(s_a+s_b)\in\mathbb R`),
+                    " に対し、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+A&\le\rho_{R\to\mathbb R}(a+b)\le B
+&&(\because\ r_a+r_b<_R a+b<_R s_a+s_b\text{ と切断の挟み込み})\\
+A&\le\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b)\le B
+&&(\because\ a,b\text{ の切断の挟み込みと }\blkref{def_real_logarithm}\text{ の加法性})\\
+B-A&=\iota_{\mathbb Q\to\mathbb R}((s_a-r_a)+(s_b-r_b))
+&&(\because\ \blkref{def_real_logarithm}\text{ の加法性と有理数の四則})\\
+&<\iota_{\mathbb Q\to\mathbb R}(2\varepsilon)
+&&(\because\ s_a-r_a<\varepsilon,\ s_b-r_b<\varepsilon\text{ と順序保存}).
+\end{aligned}`),
+                  paragraph([
+                    "二つの実数 ",
+                    math(String.raw`\rho_{R\to\mathbb R}(a+b)`), " と ",
+                    math(String.raw`\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(b)`),
+                    " はともに ", math(String.raw`[A,B]\subset\mathbb R`),
+                    " にある。従って両者の差の絶対値は ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(2\varepsilon)`),
+                    " より小さい。これが任意の正の有理数 ",
+                    math(String.raw`\varepsilon`),
+                    " について成り立つ。実数内で正の有理数が零へ近づけることから差は零である。",
+                    "この最後の結論は実数の Archimedes 性を使う実数体への脱出である。",
+                  ]),
                 ],
               },
             },
