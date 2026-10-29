@@ -76717,7 +76717,7 @@ D_L^{a,b}(x)
                     statement: [
                       paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とし、", ref("claim_determinant_polynomial_square_root_exists"), " の四つの平方根 ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_partition_polynomial"), " の ", math(String.raw`Z_L`), " について"]),
                       displayMath(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}\quad\text{in }\overline{\mathbb Q}[x]`),
-                      paragraph(["が成り立つ。四項の係数はすべて正である。実数体・複素数体は使わない。"]),
+                      paragraph(["が成り立つ。四項に掛かる係数 ", math(String.raw`\frac12`), " はいずれも正である。実数体・複素数体は使わない。"]),
                     ],
                     proof: [
                       displayMath(String.raw`\begin{aligned}
