@@ -87520,7 +87520,8 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 \xi\eta
 &=(a+b\omega)(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
 &=ac+ad\omega+bc\omega+bd\omega^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr)\\
-&=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\text{ と四則}\bigr).
+&=ac+ad\omega+bc\omega-bd&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\bigr)\\
+&=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の結合法則と分配法則}\bigr).
 \end{aligned}`),
                   paragraph([
                     ref("def_real_closed_subfield"), " の一意性により、最後の式は ",
