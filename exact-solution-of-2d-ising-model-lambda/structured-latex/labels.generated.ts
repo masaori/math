@@ -85,6 +85,7 @@ export const ALL_LABELS = [
   "claim_dispersion_inversion_invariant",
   "claim_dispersion_kw_duality",
   "claim_dispersion_mode_product",
+  "claim_dispersion_positive_at_rational_point",
   "claim_dispersion_positive_decomposition",
   "claim_dispersion_special_mode_squares",
   "claim_displacement_is_direction_unit",

@@ -84981,6 +84981,85 @@ N^n&=\zeta^n\operatorname{conj}_R(\zeta^n)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_positive_at_rational_point",
+              focus: {
+                id: "finite_fourier_claim_dispersion_positive_at_rational_point",
+                kind: "claim",
+                title: { text: "分散因子は零と一の間の有理点で正である" },
+                labels: ["claim_dispersion_positive_at_rational_point"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-positive-at-rational-point"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    "、有理数 ", math(String.raw`q\in\mathbb Q`), " で ",
+                    math(String.raw`0<q<1`), " を満たすものを取る。",
+                    ref("def_real_closed_subfield"), " の固定した組 ",
+                    math(String.raw`(R,\omega)`), " の順序について、",
+                  ]),
+                  displayMath(String.raw`0<_R(q^2+2q-1)^2\le_R\Delta(q;\varpi,\varsigma).`),
+                  paragraph(["有理数の包含と代数的数の順序だけを使い、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_root_of_unity_inverse_is_real_closed_conjugate"), " により、",
+                    math(String.raw`\varpi=\alpha+\beta\omega`), "、",
+                    math(String.raw`\varsigma=\gamma+\delta\omega`),
+                    " と一意に書ける（", math(String.raw`\alpha,\beta,\gamma,\delta\in R`),
+                    "）。各モードは ", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " により 1 の冪根である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+2-\varpi-\varpi^{-1}
+&=2-(\alpha+\beta\omega)-(\alpha-\beta\omega)
+&&\bigl(\because\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr)\\
+&=2-2\alpha
+&&\bigl(\because\ R\text{ の加法}\bigr)\\
+&=(1-\alpha)^2+\beta^2
+&&\bigl(\because\ \alpha^2+\beta^2=1,\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_real_closed_sum_of_two_squares_is_square"), " により最後の和は ",
+                    math(String.raw`R`), " の平方なので ",
+                    math(String.raw`0\le_R2-\varpi-\varpi^{-1}`), "（",
+                    ref("def_real_algebraic_nonstrict_order"), "）。同じ計算で ",
+                    math(String.raw`0\le_R2-\varsigma-\varsigma^{-1}`), " である。",
+                    math(String.raw`0<q<1`), " より ", math(String.raw`0<_Rq(1-q^2)`),
+                    " であり、", ref("claim_dispersion_positive_decomposition"), " から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(q;\varpi,\varsigma)-(q^2+2q-1)^2
+&=q(1-q^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{claim_dispersion_positive_decomposition}\text{ を }x:=q\text{ で評価}\bigr)\\
+&\ge_R0
+&&\bigl(\because\ R\text{ の順序と非負元の積・和}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "残る平方が零でないことを有理数の中で示す。仮に ",
+                    math(String.raw`q^2+2q-1=0`), " とすると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(q+1)^2&=2
+&&\bigl(\because\ q^2+2q-1=0\text{ と }\mathbb Q\text{ の分配律}\bigr)\\
+(q+1)^2&\ne2
+&&\bigl(\because\ q+1\in\mathbb Q,\ \blkref{claim_no_rational_square_two}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "矛盾する。従って ", math(String.raw`q^2+2q-1\ne0`),
+                    " であり、その平方は ",
+                    ref("def_real_algebraic_strict_order"), " により正である。",
+                    "先の非負性と順序の推移性から主張を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_mode_inversion_orbit_cardinality",
               focus: {
                 id: "finite_fourier_claim_mode_inversion_orbit_cardinality",
