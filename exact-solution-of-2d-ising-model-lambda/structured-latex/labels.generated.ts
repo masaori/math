@@ -39,6 +39,7 @@ export const ALL_LABELS = [
   "claim_common_denominator_multiple",
   "claim_common_denominator_order_independent",
   "claim_complex_realization_preserves_addition",
+  "claim_complex_realization_preserves_multiplication",
   "claim_configuration_partition",
   "claim_const_embedding_prod",
   "claim_constant_plus_breaks_no_bond",

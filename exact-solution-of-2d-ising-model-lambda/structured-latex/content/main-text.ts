@@ -87460,6 +87460,7 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
                   displayMath(String.raw`\begin{aligned}
 \xi+\eta
 &=(a+b\omega)+(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
+&=(a+c)+b\omega+d\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の結合法則と交換法則}\bigr)\\
 &=(a+c)+(b+d)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr).
 \end{aligned}`),
                   paragraph([
@@ -87479,6 +87480,84 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)
  +\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)
 &&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_complex_realization_preserves_multiplication",
+              focus: {
+                id: "real_escape_claim_complex_realization_preserves_multiplication",
+                kind: "claim",
+                title: { text: "複素実現は乗法と単位元を保つ" },
+                labels: ["claim_complex_realization_preserves_multiplication"],
+                habitat: "C",
+                realEscape: "代数的数の二係数表示を複素数の実部と虚部へ送り、乗法と単位元を比較する。",
+                verification: ["sagemath/check/complex-realization-preserves-multiplication"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`\xi,\eta\in\overline{\mathbb Q}`),
+                    " について、", ref("def_complex_algebraic_realization"),
+                    " の写像は次を満たす。",
+                  ]),
+                  displayMath(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi\eta)
+=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta),\qquad
+\rho_{\overline{\mathbb Q}\to\mathbb C}(1)=1.`),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_real_closed_subfield"), " の一意表示により ",
+                    math(String.raw`\xi=a+b\omega`), "、", math(String.raw`\eta=c+d\omega`),
+                    " と置く。ここで ", math(String.raw`a,b,c,d\in R`), " である。",
+                    math(String.raw`R`), " は部分体なので ",
+                    math(String.raw`ac-bd,ad+bc\in R`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi\eta
+&=(a+b\omega)(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
+&=ac+ad\omega+bc\omega+bd\omega^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr)\\
+&=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\text{ と四則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("def_real_closed_subfield"), " の一意性により、最後の式は ",
+                    math(String.raw`\xi\eta`), " の係数表示である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi\eta)
+&=\rho_{R\to\mathbb R}(ac-bd)+i\rho_{R\to\mathbb R}(ad+bc)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=\rho_{R\to\mathbb R}(ac)-\rho_{R\to\mathbb R}(bd)
+ +i\bigl(\rho_{R\to\mathbb R}(ad)+\rho_{R\to\mathbb R}(bc)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
+ -\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
+ +i\bigl(\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
+ +\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
+ \bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ i^2=-1\text{ と複素数の分配法則}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)
+ \rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "さらに ", math(String.raw`1=1+0\omega`), " は ",
+                    ref("def_real_closed_subfield"), " の一意な係数表示であり、",
+                    ref("claim_cut_realization_agrees_on_rationals"), " により ",
+                    math(String.raw`\rho_{R\to\mathbb R}(1)=1`), " と ",
+                    math(String.raw`\rho_{R\to\mathbb R}(0)=0`), " である。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(1)
+&=\rho_{R\to\mathbb R}(1)+i\rho_{R\to\mathbb R}(0)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=1+i0&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
+&=1&&\bigl(\because\ \mathbb C\text{ の零元}\bigr).
 \end{aligned}`),
                 ],
               },
