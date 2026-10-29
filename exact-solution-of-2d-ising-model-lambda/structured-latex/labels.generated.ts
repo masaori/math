@@ -41,6 +41,7 @@ export const ALL_LABELS = [
   "claim_complex_realization_injective",
   "claim_complex_realization_preserves_addition",
   "claim_complex_realization_preserves_multiplication",
+  "claim_complex_realization_twisted_modes_are_complex_roots",
   "claim_configuration_partition",
   "claim_const_embedding_prod",
   "claim_constant_plus_breaks_no_bond",

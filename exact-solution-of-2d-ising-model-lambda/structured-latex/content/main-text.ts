@@ -87521,7 +87521,8 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &=(a+b\omega)(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
 &=ac+ad\omega+bc\omega+bd\omega^2&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr)\\
 &=ac+ad\omega+bc\omega-bd&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の }\omega^2=-1\bigr)\\
-&=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の結合法則と分配法則}\bigr).
+&=(ac-bd)+ad\omega+bc\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の結合法則と交換法則}\bigr)\\
+&=(ac-bd)+(ad+bc)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr).
 \end{aligned}`),
                   paragraph([
                     ref("def_real_closed_subfield"), " の一意性により、最後の式は ",
@@ -87621,6 +87622,89 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &=a+b\omega&&\bigl(\because\ \xi\text{ の係数表示}\bigr)\\
 &=c+d\omega&&\bigl(\because\ a=c,\ b=d\bigr)\\
 &=\eta&&\bigl(\because\ \eta\text{ の係数表示}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_complex_realization_twisted_modes_are_complex_roots",
+              focus: {
+                id: "real_escape_claim_complex_realization_twisted_modes_are_complex_roots",
+                kind: "claim",
+                title: { text: "複素実現した横・縦モードは対応する複素方程式の根である" },
+                labels: ["claim_complex_realization_twisted_modes_are_complex_roots"],
+                habitat: "C",
+                realEscape: "代数的数の有限モードを複素実現し、冪の等式を複素数の等式として読む。指数表示はまだ使わない。",
+                verification: ["sagemath/check/complex-realization-twisted-mode-roots"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " について、",
+                    ref("def_horizontal_twisted_modes"), " の任意の ",
+                    math(String.raw`\varpi\in\mathcal U_a`), " と ",
+                    ref("def_vertical_twisted_modes"), " の任意の ",
+                    math(String.raw`\varsigma\in\mathcal W_b`), " は次を満たす。",
+                  ]),
+                  displayMath(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)^L=(-1)^a,\qquad
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)^L=(-1)^b\quad\text{in }\mathbb C.`),
+                ],
+                proof: [
+                  paragraph([
+                    "まず任意の ", math(String.raw`z\in\overline{\mathbb Q}`), " と ",
+                    math(String.raw`n\in\mathbb N`), " について、複素実現が冪を保つことを帰納法で示す。",
+                    math(String.raw`n=0`), " では",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(z^0)
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(1)&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗}\bigr)\\
+&=1&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\text{ の単位元保存}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(z)^0&&\bigl(\because\ \mathbb C\text{ の零乗}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`n`), " で等式が成り立つと仮定すると、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(z^{n+1})
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(z^n z)&&\bigl(\because\ \overline{\mathbb Q}\text{ の冪の定義}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(z^n)\rho_{\overline{\mathbb Q}\to\mathbb C}(z)&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(z)^n\rho_{\overline{\mathbb Q}\to\mathbb C}(z)&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(z)^{n+1}&&\bigl(\because\ \mathbb C\text{ の冪の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "次に ", math(String.raw`c\in\{0,1\}`), " と置く。",
+                    ref("def_real_closed_subfield"), " の部分体には有理数 ",
+                    math(String.raw`(-1)^c,0\in R`), " が属する。",
+                    ref("claim_cut_realization_agrees_on_rationals"), " と ",
+                    ref("def_complex_algebraic_realization"), " から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}((-1)^c)
+&=\rho_{R\to\mathbb R}((-1)^c)+i\rho_{R\to\mathbb R}(0)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\text{ と }(-1)^c=(-1)^c+0\omega\bigr)\\
+&=(-1)^c+i0&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
+&=(-1)^c&&\bigl(\because\ \mathbb C\text{ の零元}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\varpi\in\mathcal U_a`), " と ",
+                    math(String.raw`\varsigma\in\mathcal W_b`), " を取る。",
+                    ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " の定義から ",
+                    math(String.raw`\varpi^L=(-1)^a`), "、",
+                    math(String.raw`\varsigma^L=(-1)^b`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)^L
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^L)&&\bigl(\because\ \text{上の帰納法}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}((-1)^a)&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\bigr)\\
+&=(-1)^a&&\bigl(\because\ a\in\{0,1\}\text{ と上の有理数の実現}\bigr),\\
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)^L
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma^L)&&\bigl(\because\ \text{上の帰納法}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}((-1)^b)&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&=(-1)^b&&\bigl(\because\ b\in\{0,1\}\text{ と上の有理数の実現}\bigr).
 \end{aligned}`),
                 ],
               },

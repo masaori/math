@@ -33,7 +33,9 @@
 | Onsager 閉形式への接続 | 複素実現の定義と加法保存 | 記述・SageMath の有限例まで済。Lean 二版は「熱力学極限の段の Lean 二版」で行う | $\overline{\mathbb Q}=R+R\omega$ の一意表示を使い、係数ごとの加法で閉じる。 |
 | Onsager 閉形式への接続 | 複素実現の乗法・単位元保存 | 記述・SageMath の有限例まで済。Lean 二版は「熱力学極限の段の Lean 二版」で行う | $\omega^2=-1$ と実現写像の乗法保存を使う。 |
 | Onsager 閉形式への接続 | 複素実現の単射性 | 記述・SageMath の有限例まで済。Lean 二版は「熱力学極限の段の Lean 二版」で行う | 複素数の実部・虚部の一意性と実実現の単射性を使う。 |
-| Onsager 閉形式への接続 | 複素実現とモード集合の全単射（複素数と指数評価への脱出） | 未着手（記述と SageMath を先に行う。Lean 二版は下の「熱力学極限の段の Lean 二版」の行で書く） | 各モード集合の像を $z^L=(-1)^a$ の複素根全体と同定する。直積の全単射で和を再添字付けする。固定原始根の像は指定しない。指示書 `pass-from-mode-sums-to-integral.md`。 |
+| Onsager 閉形式への接続 | 複素実現した横・縦モードの複素根集合への包含 | 記述・SageMath の有限例まで済。Lean 二版は「熱力学極限の段の Lean 二版」で行う | 複素実現の乗法・単位元保存から冪を保ち、各モードの定義方程式を複素数へ移した。 |
+| Onsager 閉形式への接続 | 各モード集合と複素根集合の全単射 | 未着手（記述と SageMath を先に行う。Lean 二版は「熱力学極限の段の Lean 二版」で行う） | 複素根の指数表示と辺長個の相異なる像で全射を示す。固定原始根の像は指定しない。指示書 `pass-from-mode-sums-to-integral.md`。 |
+| Onsager 閉形式への接続 | 横・縦モードの直積全単射と有限和の再添字付け | 未着手（記述と SageMath を先に行う。Lean 二版は「熱力学極限の段の Lean 二版」で行う） | 横と縦の全単射を直積にし、有限和の添字を複素根の組へ移す。指示書 `pass-from-mode-sums-to-integral.md`。 |
 | Onsager 閉形式への接続 | 実対数と Riemann 和: 四つのモード格子の極限は同じ積分（実数体への脱出） | 未着手（記述と SageMath を先に行う。Lean 二版は下の「熱力学極限の段の Lean 二版」の行で書く） | 前三節で存在を証明した実現写像とモード集合の全単射を使う。正の分散因子へ実対数を適用し、半格子ずれた四つの Riemann 和が同じ積分へ収束することを示す。$\lim L^{-2}\log|Q^{a,b}_L(q)|=\frac{1}{8\pi^2}\iint_{[0,2\pi]^2}\log[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)]$。指示書 `pass-from-mode-sums-to-integral.md`。 |
 | Onsager 閉形式への接続 | 下組の実現像の上限は実現した列の実数極限に等しい（実数体への脱出: 連続極限） | 未着手（記述と SageMath を先に行う。Lean 二版は下の「熱力学極限の段の Lean 二版」の行で書く） | 一般の列 $(\lambda_L)_{L\ge1}\subset\Lambda_{\mathbb Q}$ と実数 $I$ について、$\rho_{\mathbb R}(\lambda_L)\to I$ なら $\sup\rho_{\mathbb R}(A((\lambda_L)))=I$（`def_rational_log_order_group_sequence_lower_set`）。上から: $0\le\varepsilon$ と `claim_rational_log_order_group_add_monotone`、`claim_rational_log_order_group_realization_monotone`、極限の順序保存。下から: $\mathbb R$ の Archimedes 性で $\iota(\ell_2)$ の有理数倍 $(k/n)\iota(\ell_2)$・$(1/n)\iota(\ell_2)$ を証人に取り、`claim_rational_log_order_group_realization_smul`・`claim_log_order_group_realization_real_log`・全順序性で $\mu+\varepsilon\le_{\Lambda_{\mathbb Q}}\lambda_L$ を出す（実現写像の加法性は本文に無いが、この取り方なら要らない。足さない）。既存の密度 `def_periodic_free_energy_density_le_one`（下組の実現像の上限）と Riemann 和の極限を結ぶ唯一の橋。Ising を参照しないが実数体へ脱出するので「実数体への脱出と熱力学極限」の章（`def_open_square_free_energy_density` の近く）に置く。両包含 1 組（一つの論法）。指示書 `identify-onsager-closed-form-and-critical-point.md` の「密度との同定の橋」（2026-10-10 の研究管理）。 |
 | Onsager 閉形式への接続 | Onsager 閉形式との同定と臨界点 | 未着手（記述と SageMath を先に行う。Lean 二版は下の「熱力学極限の段の Lean 二版」の行で書く） | 両側評価と Riemann 和から、既存の実数値密度 `def_periodic_free_energy_density_le_one` が上の積分に等しいことを示す。代数的略記 $\cosh2K=(1+q^2)/(2q)$、$\sinh2K=(1-q^2)/(2q)$ で $\log2+\log q+\frac{1}{8\pi^2}\iint\log[\cosh^22K-\sinh2K(\cos\theta_1+\cos\theta_2)]$ と書き直す（実数側で $q=e^{-2K}$ と対応させると物理の分配関数は $q^{-L^2}Z_L(q)$ なので、本文の密度には $+\log q$ が残る）。臨界点は被対数の最小値 $(1-2q-q^2)^2$ の零条件 $=$ 自己双対方程式、`claim_self_dual_positive_root_unique`。非解析性は実数側で別ブロック。指示書 `identify-onsager-closed-form-and-critical-point.md`。 |
@@ -77,16 +79,16 @@
 
 ## 式変形の書き方の統一
 
+- 2026-10-29（連続実行の書式統一）: 「複素実現は乗法と単位元を保つ」の積の項の整理と分配法則を別行にした。
 - 2026-10-29（連続実行の書式統一）: 「複素実現は乗法と単位元を保つ」の負号の導出を加法保存と零元の二行に分けた。
 - 2026-10-29（連続実行の書式統一）: 「複素実現は加法を保つ」の係数表示の和を結合法則と分配法則の二行に分けた。
 - 2026-10-29（連続実行の書式統一）: 「整数冪の実対数は整数倍である」の零と逆元の移項を根拠付きの式鎖にした。
 - 2026-10-29（連続実行の書式統一）: 「下切断による実現写像は乗法を保つ」の正数の積の比較を根拠付きの式鎖にした。
-- 2026-10-29（連続実行の書式統一）: 「実閉部分体の元は任意の有理幅で挟める」の幅の正値性を根拠付きの式鎖にした。
 
 ## 前進の記録
 
+- 2026-10-29: 複素モード対応を包含・全射・直積再添字の論法へ割り、冪保存から複素根集合への包含を示した（Lean 二版は未着手）。
 - 2026-10-29: 複素像の実部と虚部を比較し、実実現の単射性から複素実現の単射性を示した（Lean 二版は未着手）。
 - 2026-10-29: 二係数表示の積と実現写像の四則保存から、複素実現の乗法・単位元保存を示した（Lean 二版は未着手）。
 - 2026-10-29: 複素実現とモードの全単射を係数表示の加法・乗法・単射とモード対応に割り、加法保存を示した（Lean 二版は未着手）。
 - 2026-10-29: 二つの有理数を順序の間に構成し、下切断の実数上限による写像の狭義順序保存と単射性を示した（Lean 二版は未着手）。
-- 2026-10-29: 正の二元の積を有理区間に挟み、符号の場合を加法保存で帰着して実現写像の乗法保存を示した（Lean 二版は未着手）。
