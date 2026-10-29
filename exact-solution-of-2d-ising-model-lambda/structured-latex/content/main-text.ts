@@ -84933,11 +84933,23 @@ D^{a,b}_L(x)
 \end{aligned}`),
                   paragraph([
                     math(String.raw`r\in R`), " の表示は ", math(String.raw`r+0\omega`),
-                    " なので ", math(String.raw`\operatorname{conj}_R(r)=r`),
-                    "。同じ定義を二度適用すると ",
-                    math(String.raw`\operatorname{conj}_R(\operatorname{conj}_R(z))=z`),
-                    " であり、この写像は全単射である。加法・乗法と単位元を保つので体の自己同型である。",
+                    " である。同じ定義を二度適用する。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{conj}_R(r)
+&=r-0\omega
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
+&=r
+&&\bigl(\because\ R\text{ の零元}\bigr),\\
+\operatorname{conj}_R(\operatorname{conj}_R(z))
+&=\operatorname{conj}_R(\alpha-\beta\omega)
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
+&=\alpha+\beta\omega
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr)\\
+&=z
+&&\bigl(\because\ z\text{ の表示}\bigr).
+\end{aligned}`),
+                  paragraph(["従って、この写像は全単射である。加法・乗法と単位元を保つので体の自己同型である。"]),
                   paragraph([
                     math(String.raw`N:=\zeta\operatorname{conj}_R(\zeta)`),
                     " と置く。", ref("claim_real_closed_sum_of_two_squares_is_square"),
@@ -85209,6 +85221,85 @@ z=z^{-1}
                     " により ", math(String.raw`Q_L^{a,b}`),
                     " も同じ多項式の定数項一の平方根である。", ref("claim_qbar_polynomial_square_root_unique"),
                     " を適用して ", math(String.raw`P_L^{a,b}=Q_L^{a,b}`), " を得る。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_signed_even_subgraph_duality_up_to_sign",
+              focus: {
+                id: "finite_fourier_claim_signed_even_subgraph_duality_up_to_sign",
+                kind: "claim",
+                title: { text: "符号付き偶部分グラフ多項式の自己双対変換は符号を除いて一致する" },
+                labels: ["claim_signed_even_subgraph_duality_up_to_sign"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/signed-even-subgraph-duality-up-to-sign"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取る。",
+                    math(String.raw`N:=L^2\in\mathbb N_{\ge1}`), " と置き、",
+                    ref("def_kw_dual_transform"), " の有理式を ",
+                    math(String.raw`\overline{\mathbb Q}(x)`), " で使う。",
+                    "次の左辺は ", math(String.raw`\overline{\mathbb Q}[x]`),
+                    " に属し、ある符号 ", math(String.raw`\epsilon_L^{a,b}\in\{1,-1\}`),
+                    " が存在して",
+                  ]),
+                  displayMath(String.raw`(1+x)^{2N}Q_L^{a,b}(\mathrm{KW}(x))
+=\epsilon_L^{a,b}2^NQ_L^{a,b}(x)\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["符号の決定は次の節で行う。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_lattice"), " より ", math(String.raw`|E_L|=2N`),
+                    " である。", ref("def_signed_even_subgraph_polynomial"),
+                    " の各単項式の次数は ", math(String.raw`|A|\le |E_L|=2N`),
+                    " なので ", math(String.raw`\deg Q_L^{a,b}\le2N`),
+                    " である。係数を ", math(String.raw`\overline{\mathbb Q}`),
+                    " に送って ",
+                    math(String.raw`Q_L^{a,b}(x)=\sum_{j=0}^{2N}c_jx^j`),
+                    "（", math(String.raw`c_j\in\overline{\mathbb Q}`), "）と書くと、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(1+x)^{2N}Q_L^{a,b}(\mathrm{KW}(x))
+&=\sum_{j=0}^{2N}c_j(1+x)^{2N}\left(\frac{1-x}{1+x}\right)^j
+&&\bigl(\because\ \blkref{def_kw_dual_transform}\text{ と有限和の分配律}\bigr)\\
+&=\sum_{j=0}^{2N}c_j(1-x)^j(1+x)^{2N-j}
+&&\bigl(\because\ j\le2N\text{ と有理関数体の約分}\bigr)
+\in\overline{\mathbb Q}[x].
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`F_L^{a,b}(x):=(1+x)^{2N}Q_L^{a,b}(\mathrm{KW}(x))`),
+                    " と置く。", ref("claim_determinant_signed_even_subgraph_square"),
+                    "、", ref("claim_dispersion_mode_product"), " と ",
+                    ref("claim_dispersion_kw_duality"), " を順に用いると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(F_L^{a,b})^2
+&=(1+x)^{4N}D_L^{a,b}(\mathrm{KW}(x))
+&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr)\\
+&=(1+x)^{4N}\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+\Delta(\mathrm{KW}(x);\varpi,\varsigma)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+(1+x)^4\Delta(\mathrm{KW}(x);\varpi,\varsigma)
+&&\bigl(\because\ |\mathcal U_a\times\mathcal W_b|=N,\ \blkref{claim_twisted_mode_sets_card}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}4\Delta(x;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{claim_dispersion_kw_duality}\bigr)\\
+&=4^ND_L^{a,b}(x)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr)\\
+&=(2^NQ_L^{a,b}(x))^2
+&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\overline{\mathbb Q}[x]`),
+                    " の零積性（", ref("claim_qbar_polynomial_zero_product"),
+                    "）を ", math(String.raw`(F_L^{a,b}-2^NQ_L^{a,b})(F_L^{a,b}+2^NQ_L^{a,b})=0`),
+                    " に適用すると、主張する二つの符号のいずれかを得る。",
                   ]),
                 ],
               },

@@ -607,6 +607,7 @@ export const ALL_LABELS = [
   "claim_shift_orbit_preserving",
   "claim_short_pair_coefficient_nonzero",
   "claim_short_pair_rotation_phase_nonzero",
+  "claim_signed_even_subgraph_duality_up_to_sign",
   "claim_signed_even_subgraph_orbit_product",
   "claim_signed_even_subgraph_sector_sum",
   "claim_signed_even_subgraph_square_stratified",
