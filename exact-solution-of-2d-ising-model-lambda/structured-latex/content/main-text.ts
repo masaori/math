@@ -47487,10 +47487,16 @@ p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
                     math(String.raw`\varepsilon=e/f`), "、",
                     math(String.raw`e,f\in\mathbb N_{>0}`), " と書き、",
                     math(String.raw`n:=2f+1\in\mathbb N_{>0}`), " と置く。",
-                    "有理数の四則から ", math(String.raw`0<2/n<e/f=\varepsilon`),
-                    " である。", math(String.raw`\mathbb Q\subseteq R`), " は ",
+                    math(String.raw`\mathbb Q\subseteq R`), " は ",
                     ref("claim_rationals_are_real_algebraic"), " による。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+0&<2/n&&(\because\ n=2f+1>0)\\
+2/n&=2/(2f+1)&&(\because\ n=2f+1)\\
+&<1/f&&(\because\ 2f<2f+1\text{ と }f>0)\\
+&\le e/f&&(\because\ e\ge1\text{ と }f>0)\\
+&=\varepsilon&&(\because\ \varepsilon=e/f).
+\end{aligned}`),
                   paragraph([
                     math(String.raw`J:=\{j\in\mathbb Z:-Mn\le j\le Mn,\ j/n\le_R a\}`),
                     " と置く。", math(String.raw`J`), " は有限である。",
@@ -86928,6 +86934,108 @@ const chapter_real_escape = defineSection({
                     "この最後の適用が実数体への脱出であり、有限側の元 ",
                     math(String.raw`a\in R`), " 自体は変えない。",
                   ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_def_real_algebraic_cut_realization",
+              focus: {
+                id: "real_escape_def_real_algebraic_cut_realization",
+                kind: "definition",
+                title: { text: "有理下切断の上限による実閉部分体の実現写像" },
+                labels: ["def_real_algebraic_cut_realization"],
+                habitat: "R",
+                realEscape: "実数の完備性。有理下切断の実数像の上限を取って、実閉部分体の元を実数へ送る。",
+                statement: [
+                  paragraph([
+                    "各 ", math(String.raw`a\in R`), " について ",
+                    ref("claim_real_algebraic_lower_cut_has_supremum"), " の下切断 ",
+                    math(String.raw`C_a=\{r\in\mathbb Q:r<_R a\}`), " を用い、写像",
+                  ]),
+                  displayMath(String.raw`\rho_{R\to\mathbb R}:R\to\mathbb R,\qquad
+\rho_{R\to\mathbb R}(a):=\sup\iota_{\mathbb Q\to\mathbb R}(C_a)`),
+                  paragraph([
+                    "と定める。右辺が実数として存在することは ",
+                    ref("claim_real_algebraic_lower_cut_has_supremum"), " による。",
+                    "この段階では四則と順序の保存を主張しない。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_cut_realization_agrees_on_rationals",
+              focus: {
+                id: "real_escape_claim_cut_realization_agrees_on_rationals",
+                kind: "claim",
+                title: { text: "下切断による実現写像は有理数をそのまま実現する" },
+                labels: ["claim_cut_realization_agrees_on_rationals"],
+                habitat: "R",
+                realEscape: "実数の完備性で定めた実現写像の値を、有理数の実数への包含写像と比較する。比較には実数における有理数の稠密性を用いる。",
+                verification: ["sagemath/check/cut-realization-agrees-on-rationals"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`q\in\mathbb Q`), " について、",
+                    ref("claim_rationals_are_real_algebraic"), " により ",
+                    math(String.raw`q\in R`), " であり、",
+                  ]),
+                  displayMath(String.raw`\rho_{R\to\mathbb R}(q)=\iota_{\mathbb Q\to\mathbb R}(q)`),
+                  paragraph([
+                    "が成り立つ。左辺の写像は ", ref("def_real_algebraic_cut_realization"),
+                    "、右辺の包含写像は ", ref("def_real_logarithm"), " による。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず任意の ", math(String.raw`r\in\mathbb Q`), " について、",
+                    math(String.raw`r<_R q\iff r<q`), " を示す。",
+                    math(String.raw`r<q`), " なら ", math(String.raw`q-r\in\mathbb Q_{>0}`),
+                    " なので、", ref("claim_positive_rational_positive_in_real_closed"),
+                    " から ", math(String.raw`r<_R q`), " である。",
+                    "逆に ", math(String.raw`r<_R q`), " とする。",
+                    math(String.raw`q<r`), " なら同じ主張を ",
+                    math(String.raw`r-q\in\mathbb Q_{>0}`), " に適用して ",
+                    math(String.raw`q<_R r`), " となり、",
+                    ref("claim_real_algebraic_order_transitive"),
+                    " と狭義順序の非反射性に反する。",
+                    math(String.raw`q=r`), " も非反射性に反する。",
+                    "有理数の三分律より ", math(String.raw`r<q`), " である。",
+                  ]),
+                  paragraph([
+                    "したがって ", math(String.raw`C_q=\{r\in\mathbb Q:r<q\}`),
+                    " である（", ref("claim_real_algebraic_lower_cut_has_supremum"),
+                    " と上の同値）。", ref("def_real_logarithm"),
+                    " の包含写像は順序を保つので、",
+                    "任意の ", math(String.raw`r\in C_q`), " に対し ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(r)<\iota_{\mathbb Q\to\mathbb R}(q)`),
+                    " である。ゆえに ", math(String.raw`\iota_{\mathbb Q\to\mathbb R}(q)`),
+                    " は像の実数上界である。",
+                  ]),
+                  paragraph([
+                    "任意の実数 ", math(String.raw`y<\iota_{\mathbb Q\to\mathbb R}(q)`),
+                    " を取る。実数内の有理数の稠密性により、",
+                    math(String.raw`y<\iota_{\mathbb Q\to\mathbb R}(r)<\iota_{\mathbb Q\to\mathbb R}(q)`),
+                    " を満たす ", math(String.raw`r\in\mathbb Q`), " がある。",
+                    ref("def_real_logarithm"), " の包含写像は順序を保つ単射なので ",
+                    math(String.raw`r<q`), " であり、上の同値から ",
+                    math(String.raw`r\in C_q`), " である。",
+                    "したがって ", math(String.raw`y`), " は像の上界ではない。",
+                    "上界の定義と実数の上限の性質から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(q)
+&=\sup\iota_{\mathbb Q\to\mathbb R}(C_q)
+&&(\because\ \blkref{def_real_algebraic_cut_realization})\\
+&=\iota_{\mathbb Q\to\mathbb R}(q)
+&&(\because\ \iota_{\mathbb Q\to\mathbb R}(q)\text{ は上界で、これより小さい実数は上界でない})
+\end{aligned}`),
                 ],
               },
             },
