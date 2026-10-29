@@ -87769,8 +87769,16 @@ e_{L,c,k}^{L}
                     "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " である。",
                     "もし ", math(String.raw`e_{L,c,j}=e_{L,c,k}`), " なら、複素指数関数の周期性から ",
                     math(String.raw`(j-k)/L\in\mathbb Z`), " となる。",
-                    math(String.raw`0\le j,k<L`), " より ", math(String.raw`-1<(j-k)/L<1`),
-                    " なので ", math(String.raw`j=k`), " である。よってこれらは相異なる ",
+                    math(String.raw`0\le j,k<L`), " より、差の範囲は次の式鎖で分かる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+-L&<j-k&&\bigl(\because\ j\ge0,\ k<L\bigr)\\
+&<L&&\bigl(\because\ j<L,\ k\ge0\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`-1<(j-k)/L<1`),
+                    " であり、この区間に属する整数は零だけなので ", math(String.raw`j=k`),
+                    " である。よってこれらは相異なる ",
                     math(String.raw`L`), " 個の根である。",
                   ]),
                   paragraph([
@@ -87952,6 +87960,94 @@ F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q
 &&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr).
 \end{aligned}`),
                   paragraph(["両辺を正の自然数 ", math(String.raw`2L^2`), " で割ると主張を得る。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_dispersion_angle_realization",
+              focus: {
+                id: "real_escape_claim_dispersion_angle_realization",
+                kind: "claim",
+                title: { text: "複素根の角表示は分散因子の実現値を余弦で表す" },
+                labels: ["claim_dispersion_angle_realization"],
+                habitat: "mixed",
+                realEscape: "指数評価。複素実現したモードを複素指数関数で角表示し、実現した分散因子を実数の余弦で表す。",
+                verification: ["sagemath/check/dispersion-angle-realization"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、有理点 ", math(String.raw`q\in\mathbb Q`),
+                    "（", math(String.raw`0<q<1`), "）を取る。", ref("claim_twisted_mode_product_bijection"),
+                    " の全単射について、", math(String.raw`\Theta_{L,a,b}(\varpi,\varsigma)=(e_{L,a,k},e_{L,b,l})`),
+                    " となる ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " と ", math(String.raw`k,l\in\{0,\ldots,L-1\}`), " を取る。角を",
+                  ]),
+                  displayMath(String.raw`\theta_1:=\frac{2\pi(k+a/2)}{L},\qquad
+\theta_2:=\frac{2\pi(l+b/2)}{L}`),
+                  paragraph(["と定める。", ref("claim_dispersion_positive_at_rational_point"), " により分散因子の値は ", math(String.raw`R`), " に属する。このとき、", ref("def_real_algebraic_cut_realization"), " の実現写像について"]),
+                  displayMath(String.raw`\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
+=(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)`),
+                  paragraph(["が成り立つ。右辺の有理数は実数への標準埋込みによる値とする。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_twisted_modes_complex_roots_bijection"), " と ",
+                    ref("claim_twisted_mode_product_bijection"), " により、角の組は全モードの組を重複なく走る。",
+                    ref("claim_complex_realization_preserves_multiplication"),
+                    " により複素実現は逆元を保つ。複素指数関数の加法法則と Euler の公式から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi^{-1})
+&&\bigl(\because\ \blkref{claim_complex_realization_preserves_addition}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)^{-1}
+&&\bigl(\because\ \blkref{claim_complex_realization_preserves_multiplication}\text{ と単位元保存}\bigr)\\
+&=e^{i\theta_1}+(e^{i\theta_1})^{-1}
+&&\bigl(\because\ \Theta_{L,a,b}(\varpi,\varsigma)=(e_{L,a,k},e_{L,b,l})\text{ と角の定義}\bigr)\\
+&=e^{i\theta_1}+e^{-i\theta_1}
+&&\bigl(\because\ e^{i\theta_1}e^{-i\theta_1}=e^0=1\bigr)\\
+&=2\cos\theta_1
+&&\bigl(\because\ e^{it}=\cos t+i\sin t\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "縦方向も同じ計算を ", math(String.raw`\varsigma,\theta_2`),
+                    " に適用する。", ref("def_complex_algebraic_realization"),
+                    " により ", math(String.raw`R`), " 上の複素実現は実現写像 ",
+                    math(String.raw`\rho_{R\to\mathbb R}`), " と一致するので、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi+\varpi^{-1})
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=2\cos\theta_1&&\bigl(\because\ \text{上の計算}\bigr),\\
+\rho_{R\to\mathbb R}(\varsigma+\varsigma^{-1})
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=2\cos\theta_2&&\bigl(\because\ \text{縦方向の同じ計算}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("def_dispersion_polynomial"), " の多項式へ ", math(String.raw`x:=q`),
+                    " を代入し、実現写像の加法・乗法保存と有理数上の一致を各項に適用すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
+&=\rho_{R\to\mathbb R}\bigl((1+q^2)^2-q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=\rho_{R\to\mathbb R}((1+q^2)^2)-\rho_{R\to\mathbb R}\bigl(q(1-q^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\text{ と負号の保存}\bigr)\\
+&=\rho_{R\to\mathbb R}((1+q^2)^2)-\rho_{R\to\mathbb R}(q(1-q^2))\rho_{R\to\mathbb R}(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=(1+q^2)^2-q(1-q^2)\rho_{R\to\mathbb R}(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
+&=(1+q^2)^2-q(1-q^2)\bigl(\rho_{R\to\mathbb R}(\varpi+\varpi^{-1})+\rho_{R\to\mathbb R}(\varsigma+\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ \text{上の二つの余弦表示}\bigr).
+\end{aligned}`),
                 ],
               },
             },
