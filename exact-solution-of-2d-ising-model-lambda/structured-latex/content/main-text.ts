@@ -87762,7 +87762,8 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 e_{L,c,k}^{L}
 &=\exp(2\pi i(k+c/2))&&\bigl(\because\ \exp(t)^L=\exp(Lt)\bigr)\\
 &=\exp(2\pi i k)\exp(\pi i c)&&\bigl(\because\ \exp(s+t)=\exp(s)\exp(t)\bigr)\\
-&=(-1)^c&&\bigl(\because\ k\in\mathbb Z,\ c\in\{0,1\}\text{ と複素指数関数の周期性}\bigr).
+&=\exp(\pi i c)&&\bigl(\because\ k\in\mathbb Z,\ \exp(2\pi i k)=1\bigr)\\
+&=(-1)^c&&\bigl(\because\ c\in\{0,1\},\ \exp(0)=1,\ \exp(\pi i)=-1\bigr).
 \end{aligned}`),
                   paragraph([
                     "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " である。",
