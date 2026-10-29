@@ -80545,10 +80545,8 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         ref("claim_selection_complement_sign_preserving_involution"), " により ",
                         math(String.raw`E\setminus C`), " は同じ符号集合に属し、",
                       ]),
-                      displayMath(String.raw`\begin{aligned}
-E\setminus(E\setminus C)&=C
-&&\bigl(\because\ \blkref{claim_selection_complement_sign_preserving_involution}\bigr).
-\end{aligned}`),
+                      displayMath(String.raw`E\setminus(E\setminus C)=C
+\qquad\bigl(\because\ \blkref{claim_selection_complement_sign_preserving_involution}\bigr)`),
                       paragraph([
                         "従って ",
                         math(String.raw`\{C,E\setminus C\}`), " は一元または二元で、上と同じ対合の論法により、",
