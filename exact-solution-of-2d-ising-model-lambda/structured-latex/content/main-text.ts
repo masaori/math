@@ -47187,7 +47187,7 @@ w\cdot w
         kind: "section",
         id: "zero_pinching_heading_real_algebraic_rational_bounds",
         labels: [],
-        title: { text: "実代数的数の有理上下界" },
+        title: { text: "実代数的数の有理上下界と挟み込み" },
         children: [
           {
             role: "primary",
@@ -47390,16 +47390,135 @@ p(x)/c_d
                   ]),
                   paragraph([
                     "負側には ", math(String.raw`p(-X)=\sum_{j=0}^{d}(-1)^jc_jX^j`),
-                    " を用いる。", math(String.raw`p(-(-a))=p(a)=0`),
-                    "、その最高次係数は零でなく、係数比の絶対値の和は ",
-                    math(String.raw`\sum_{j=0}^{d-1}|(-1)^jc_j/((-1)^dc_d)|=S`),
-                    " である。上の正側の論証を根 ", math(String.raw`-a`),
+                    " を用いる。その最高次係数は零でなく、係数比の絶対値の和は ",
+                    math(String.raw`S`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+p(-(-a))&=p(a)&&(\because\ -(-a)=a)\\
+&=0&&(\because\ p(a)=0),\\
+\sum_{j=0}^{d-1}|(-1)^jc_j/((-1)^dc_d)|
+&=\sum_{j=0}^{d-1}|c_j/c_d|&&(\because\ |(-1)^j/(-1)^d|=1)\\
+&=S&&(\because\ S\text{ の定義}).
+\end{aligned}`),
+                  paragraph([
+                    "上の正側の論証を根 ", math(String.raw`-a`),
                     " に適用して ", math(String.raw`-a<_R B`),
                     " を得る。順序体の加法単調性により ",
                     math(String.raw`-B<_R a`),
                     " である。議論は ", math(String.raw`\mathbb Q`),
                     " と ", math(String.raw`R\subset\overline{\mathbb Q}`),
                     " の四則・有限和・順序で閉じる。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_zero_pinching_claim_real_algebraic_rational_pinching",
+              beforeFocus: [
+                {
+                  role: "supportingClaim",
+                  element: {
+                    id: "zero_pinching_claim_real_algebraic_archimedean",
+                    kind: "claim",
+                    title: { text: "実閉部分体の順序は Archimedes 性を持つ" },
+                    labels: ["claim_real_algebraic_archimedean"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/real-algebraic-rational-pinching"],
+                    statement: [paragraph([
+                      "任意の ", math(String.raw`a\in R`), " に対し、ある ",
+                      math(String.raw`N\in\mathbb N_{>0}`), " が存在して ",
+                      math(String.raw`-N<_R a<_R N`), " となる。順序 ",
+                      math(String.raw`<_R`), " は ", ref("def_real_algebraic_strict_order"),
+                      " による。",
+                    ])],
+                    proof: [
+                      paragraph([
+                        ref("claim_real_algebraic_rational_bounds"), " により、",
+                        math(String.raw`-B<_R a<_R B`), " を満たす ",
+                        math(String.raw`B\in\mathbb Q_{>0}`), " を取る。",
+                        math(String.raw`B=h/k`), "、", math(String.raw`h,k\in\mathbb N_{>0}`),
+                        " と書き、", math(String.raw`N:=h+1\in\mathbb N_{>0}`),
+                        " と置く。", math(String.raw`k\ge1`), " なので有理数の順序で ",
+                        math(String.raw`B=h/k\le h<N`), " である。",
+                        ref("claim_positive_rational_positive_in_real_closed"),
+                        " を差 ", math(String.raw`N-B\in\mathbb Q_{>0}`),
+                        " に適用すると ", math(String.raw`B<_R N`), " となる。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+-N&<_R-B&&(\because\ B<_R N\text{ の加法逆元による順序反転})\\
+&<_R a&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
+&<_R B&&(\because\ \blkref{claim_real_algebraic_rational_bounds})\\
+&<_R N&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }N-B\text{ に適用}).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "zero_pinching_claim_real_algebraic_rational_pinching",
+                kind: "claim",
+                title: { text: "実閉部分体の元は任意の有理幅で挟める" },
+                labels: ["claim_real_algebraic_rational_pinching"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/real-algebraic-rational-pinching"],
+                statement: [paragraph([
+                  "任意の ", math(String.raw`a\in R`), " と ",
+                  math(String.raw`\varepsilon\in\mathbb Q_{>0}`), " に対し、",
+                  math(String.raw`r,s\in\mathbb Q`), " が存在して ",
+                  math(String.raw`r<_R a<_R s`), " かつ ",
+                  math(String.raw`0<s-r<\varepsilon`), " となる。",
+                  "順序 ", math(String.raw`<_R`), " は ",
+                  ref("def_real_algebraic_strict_order"), " による。",
+                ])],
+                proof: [
+                  paragraph([
+                    ref("claim_real_algebraic_archimedean"), " より ",
+                    math(String.raw`-M<_R a<_R M`), " となる ",
+                    math(String.raw`M\in\mathbb N_{>0}`), " を取る。",
+                    math(String.raw`\varepsilon=e/f`), "、",
+                    math(String.raw`e,f\in\mathbb N_{>0}`), " と書き、",
+                    math(String.raw`n:=2f+1\in\mathbb N_{>0}`), " と置く。",
+                    "有理数の四則から ", math(String.raw`0<2/n<e/f=\varepsilon`),
+                    " である。", math(String.raw`\mathbb Q\subseteq R`), " は ",
+                    ref("claim_rationals_are_real_algebraic"), " による。",
+                  ]),
+                  paragraph([
+                    math(String.raw`J:=\{j\in\mathbb Z:-Mn\le j\le Mn,\ j/n\le_R a\}`),
+                    " と置く。", math(String.raw`J`), " は有限である。",
+                    math(String.raw`-M<_R a`), " より ",
+                    math(String.raw`-Mn\in J`), " なので空でない。",
+                    "よって最大元 ", math(String.raw`j_0:=\max J\in\mathbb Z`),
+                    " がある。", math(String.raw`j_0/n\le_R a<_R M`),
+                    " から ", math(String.raw`j_0<Mn`),
+                    "（有理数の順序と ",
+                    ref("claim_positive_rational_positive_in_real_closed"),
+                    "）である。従って ", math(String.raw`j_0+1\le Mn`),
+                    " であり、最大性から ", math(String.raw`a<_R(j_0+1)/n`),
+                    " となる。",
+                  ]),
+                  paragraph([
+                    math(String.raw`r:=(j_0-1)/n\in\mathbb Q`), "、",
+                    math(String.raw`s:=(j_0+1)/n\in\mathbb Q`),
+                    " と置く。", math(String.raw`1/n>0`),
+                    " を有理数から ", math(String.raw`R`),
+                    " の順序へ移すと、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+r&<_R j_0/n&&(\because\ \blkref{claim_positive_rational_positive_in_real_closed}\text{ を }1/n\text{ に適用})\\
+&\le_R a&&(\because\ j_0\in J),\\
+a&<_R s&&(\because\ J\text{ の最大性}),\\
+s-r&=2/n&&(\because\ r,s\text{ の定義と }\mathbb Q\text{ の四則})\\
+&<\varepsilon&&(\because\ n=2f+1,\ \varepsilon=e/f,\ e\ge1).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`0<s-r`), " も有理数の四則で従う。",
+                    "構成は有限集合と ", math(String.raw`\mathbb Q`), "、",
+                    math(String.raw`R\subset\overline{\mathbb Q}`),
+                    " の順序だけを用いる。",
                   ]),
                 ],
               },
