@@ -80918,8 +80918,18 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                         math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`),
                         " の恒等写像である。互いに逆写像を持つ写像は全単射なので、制限は全単射である。",
                         "二つの有限集合の間に全単射があるので元の個数は等しく、",
-                        math(String.raw`N_{\mathrm{sw}}(\mathcal T(\varphi))=N_{\mathrm{sw}}(\varphi)`),
-                        "（", ref("def_switchable_contact_count_classification"), "）である。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+N_{\mathrm{sw}}(\mathcal T(\varphi))
+&=\lvert\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))\rvert
+&&\bigl(\because\ \blkref{def_switchable_contact_count_classification}\bigr)\\
+&=\lvert\operatorname{Ct}_{\mathrm{sw}}(\varphi)\rvert
+&&\bigl(\because\ \Psi_{\varphi}\text{ の制限が全単射}\bigr)\\
+&=N_{\mathrm{sw}}(\varphi)
+&&\bigl(\because\ \blkref{def_switchable_contact_count_classification}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。",
                       ]),
                       paragraph([
                         "第二の主張を示す。三集合の所属条件は、非後退置換であることのほかは ",
