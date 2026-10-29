@@ -80297,9 +80297,11 @@ H_C&=C_0\mathbin\triangle C&&\bigl(\because\ H_C\text{ の定義}\bigr)\\
                       ]),
                     ],
                     proof: [
+                      paragraph(["選択集合が空なら、選択和の定義の添字集合が空なので"]),
+                      displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=0
+\qquad\bigl(\because\ \blkref{def_signed_selection_sum}\text{ の空和}\bigr)`),
                       paragraph([
-                        "選択集合が空なら、選択和の定義の添字集合が空なので ",
-                        math(String.raw`\mathcal U^{a,b}_L(D,E)=0`), " である。以下、選択集合は空でなく ",
+                        "である。以下、選択集合は空でなく ",
                         math(String.raw`C_0`), " を固定する。", ref("claim_selection_even_subgraph_action_simply_transitive"),
                         " の全単射で有限和の添字を取り替え、", ref("claim_selection_even_subgraph_action_character"),
                         " の符号の等式を各項へ適用すると",

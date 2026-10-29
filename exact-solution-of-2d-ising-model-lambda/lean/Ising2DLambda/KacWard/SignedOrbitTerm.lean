@@ -49,10 +49,21 @@ theorem kacWardSignedPermutationTerm_orbit_product
             ∏ e ∈ O, Polynomial.C (M e (σ e))) = _
   rw [map_prod]
   simp only [map_pow, map_neg, map_one]
-  exact Ising2DLambda.NecSuf.KacWard.signedOrbitWeights_combine
-    (movedEdgeOrbitSet σ) Finset.card
-    (fun O => ∏ e ∈ O, Polynomial.C (M e (σ e))) Polynomial.X
-    (fun O hO => Finset.card_pos.mpr ((movedEdgeOrbitSet_partition σ).1 O hO))
+  rw [← Finset.prod_mul_distrib]
+  apply Finset.prod_congr rfl
+  intro O hO
+  have hpos : 0 < O.card :=
+    Finset.card_pos.mpr ((movedEdgeOrbitSet_partition σ).1 O hO)
+  obtain ⟨n, hn⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hpos)
+  rw [hn]
+  simp only [Nat.succ_sub_one, pow_succ, neg_mul, mul_neg]
+  have hsign : (-1 : QbarPoly) ^ n * (-1 : QbarPoly) ^ n = 1 := by
+    rw [← pow_add, ← two_mul, pow_mul, neg_one_sq, one_pow]
+  calc
+    _ = -((Polynomial.X * Polynomial.X ^ n *
+          ∏ e ∈ O, Polynomial.C (M e (σ e))) *
+          ((-1 : QbarPoly) ^ n * (-1 : QbarPoly) ^ n)) := by ring
+    _ = _ := by rw [hsign]; ring
 
 /-- 行列式の置換展開は、各置換の閉路軌道重みの積の和になる。 -/
 theorem kacWardSignedPermutationSum_orbit_product
