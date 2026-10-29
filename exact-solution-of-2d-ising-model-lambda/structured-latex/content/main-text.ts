@@ -61667,9 +61667,21 @@ t_{\circ}(\gamma_{\mathrm c})
                       paragraph([
                         "横の切断線を横切るのは二番目と五番目の辺だけであり（", math(String.raw`s(j)=1=L-1`),
                         " の横辺）、縦の切断線を横切る辺は無い（二つの縦辺はいずれも ", math(String.raw`s(i)=0\ne L-1`),
-                        "）。よって ", ref("def_edge_sequence_seam_parities"),
-                        " より二つの偶奇はいずれも ", math(String.raw`0`), " である。従って",
+                        "）。よって二つの偶奇は次の通りである。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+h(\gamma_{\mathrm c})
+&=(0+1+0+0+1+0)\bmod2
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)\\
+&=0
+&&\bigl(\because\ 2\bmod2=0\bigr),\\
+v(\gamma_{\mathrm c})
+&=(0+0+0+0+0+0)\bmod2
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr)\\
+&=0
+&&\bigl(\because\ 0\bmod2=0\bigr).
+\end{aligned}`),
+                      paragraph(["従って"]),
                       displayMath(String.raw`\begin{aligned}
 \left(\prod_{k=1}^{5}\rho(\vec e_k,\vec e_{k+1})\right)\rho(\vec e_6,\vec e_1)
 &=(-1)^{\operatorname{rot}(\gamma_{\mathrm c})}
