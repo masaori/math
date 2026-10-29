@@ -81041,10 +81041,18 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         math(String.raw`s`), " に一定である（", ref("claim_path_reversal_selection_complement_orbits"),
                         "）。したがって各分類と符号を固定した有限和は",
                       ]),
-                      displayMath(String.raw`\sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
 \mathcal W^{a,b}_L(\varphi)=s}}\mathcal W^{a,b}_L(\varphi)
-=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
-\qquad\bigl(\because\ \text{互いに素な軌道分割と軌道上の符号一定性}\bigr)`),
+&=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits},\ \blkref{claim_path_reversal_switchable_classification_preservation}\text{ の互いに素な軌道分割}\bigr)\\
+&=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}s
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の軌道上の符号一定性}\bigr)\\
+&=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}w(O)
+&&\bigl(\because\ w(O)=\lvert O\rvert\text{ の定義}\bigr)
+\end{aligned}`),
                       paragraph([
                         "となる。", math(String.raw`s=1,-1`), " の二つを加え、さらに三分類について加えると、",
                         ref("def_fiber_phase_weight"), " の有限和そのものになり、第一の等式を得る。",
@@ -81053,9 +81061,13 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "選択側でも、各符号集合は選択補集合軌道に互いに素に分かれ、軌道上の符号は一定である（",
                         ref("claim_path_reversal_selection_complement_orbits"), "）。ゆえに",
                       ]),
-                      displayMath(String.raw`\bigl\lvert\mathcal C^s_L(D,E;a,b)\bigr\rvert
-=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}\lvert O\rvert
-\qquad\bigl(\because\ \text{有限集合の互いに素な軌道分割}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\bigl\lvert\mathcal C^s_L(D,E;a,b)\bigr\rvert
+&=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}\lvert O\rvert
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の互いに素な軌道分割}\bigr)\\
+&=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}w(O)
+&&\bigl(\because\ w(O)=\lvert O\rvert\text{ の定義}\bigr)
+\end{aligned}`),
                       paragraph([
                         "である。", math(String.raw`s=1`), " の等式から ", math(String.raw`s=-1`),
                         " の等式を引き、", ref("claim_selection_sum_signed_count"),
