@@ -695,6 +695,7 @@ export const ALL_LABELS = [
   "claim_twisted_mode_sets_card",
   "claim_twisted_mode_wrap_phase",
   "claim_twisted_modes_are_double_roots",
+  "claim_twisted_modes_complex_roots_bijection",
   "claim_two_is_square_in_real_closed",
   "claim_two_support_coefficient_formula",
   "claim_unswitchable_standard_pair_forces_doubled_edge",

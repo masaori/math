@@ -87543,9 +87543,24 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
  +i\bigl(\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
  +\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)\bigr)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
+ -\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
+ +i\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
+ +i\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)
+&&\bigl(\because\ \mathbb C\text{ の分配法則}\bigr)\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
+ +i\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
+ +i\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)
+ -\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
+&&\bigl(\because\ \mathbb C\text{ の加法の交換法則}\bigr)\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
+ +i\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
+ +i\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(c)
+ +i^2\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
+&&\bigl(\because\ i^2=-1\bigr)\\
 &=\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
  \bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
-&&\bigl(\because\ i^2=-1\text{ と複素数の分配法則}\bigr)\\
+&&\bigl(\because\ \mathbb C\text{ の分配法則}\bigr)\\
 &=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)
  \rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)
 &&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
@@ -87706,6 +87721,73 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &=\rho_{\overline{\mathbb Q}\to\mathbb C}((-1)^b)&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
 &=(-1)^b&&\bigl(\because\ b\in\{0,1\}\text{ と上の有理数の実現}\bigr).
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_twisted_modes_complex_roots_bijection",
+              focus: {
+                id: "real_escape_claim_twisted_modes_complex_roots_bijection",
+                kind: "claim",
+                title: { text: "横・縦モードの複素実現は複素根全体への全単射である" },
+                labels: ["claim_twisted_modes_complex_roots_bijection"],
+                habitat: "C",
+                realEscape: "複素実現した有限モードを複素指数関数で表示するため、指数評価として複素数体へ脱出する。固定した代数的原始根の像は指定しない。",
+                verification: ["sagemath/check/twisted-modes-complex-roots-bijection"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`c\in\{0,1\}`), " に対し、複素根集合を",
+                  ]),
+                  displayMath(String.raw`E_{L,c}:=\{z\in\mathbb C\mid z^L=(-1)^c\}
+=\left\{\exp\!\left(\frac{2\pi i(k+c/2)}{L}\right)\in\mathbb C\ \middle|\ k\in\{0,\ldots,L-1\}\right\}`),
+                  paragraph([
+                    "と置く。", ref("def_horizontal_twisted_modes"), " の ", math(String.raw`\mathcal U_a`),
+                    " と ", ref("def_vertical_twisted_modes"), " の ", math(String.raw`\mathcal W_b`),
+                    " について、", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal U_a}:\mathcal U_a\to E_{L,a}`),
+                    " および ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}|_{\mathcal W_b}:\mathcal W_b\to E_{L,b}`),
+                    " はそれぞれ全単射である。ここで ", math(String.raw`(a,b)\in\mathcal S`), " とする。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず ", math(String.raw`k\in\{0,\ldots,L-1\}`), " に対し ",
+                    math(String.raw`e_{L,c,k}:=\exp(2\pi i(k+c/2)/L)\in\mathbb C`), " と置く。複素指数関数の加法法則から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+e_{L,c,k}^{L}
+&=\exp(2\pi i(k+c/2))&&\bigl(\because\ \exp(t)^L=\exp(Lt)\bigr)\\
+&=\exp(2\pi i k)\exp(\pi i c)&&\bigl(\because\ \exp(s+t)=\exp(s)\exp(t)\bigr)\\
+&=(-1)^c&&\bigl(\because\ k\in\mathbb Z,\ c\in\{0,1\}\text{ と複素指数関数の周期性}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`e_{L,c,k}\in E_{L,c}`), " である。",
+                    "もし ", math(String.raw`e_{L,c,j}=e_{L,c,k}`), " なら、複素指数関数の周期性から ",
+                    math(String.raw`(j-k)/L\in\mathbb Z`), " となる。",
+                    math(String.raw`0\le j,k<L`), " より ", math(String.raw`-1<(j-k)/L<1`),
+                    " なので ", math(String.raw`j=k`), " である。よってこれらは相異なる ",
+                    math(String.raw`L`), " 個の根である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`X^L-(-1)^c\in\mathbb C[X]`), " は零でない次数 ",
+                    math(String.raw`L`), " の多項式なので、異なる複素根を ",
+                    math(String.raw`L`), " 個より多く持たない。従って ",
+                    math(String.raw`E_{L,c}=\{e_{L,c,k}\mid 0\le k<L\}`), " かつ ",
+                    math(String.raw`|E_{L,c}|=L`), " である。",
+                  ]),
+                  paragraph([
+                    ref("claim_complex_realization_twisted_modes_are_complex_roots"),
+                    " により二つの制限写像の像はそれぞれ対応する ", math(String.raw`E_{L,a},E_{L,b}`),
+                    " に含まれる。", ref("claim_complex_realization_injective"),
+                    " により二つとも単射である。", ref("claim_twisted_mode_sets_card"),
+                    " により各定義域は ", math(String.raw`L`), " 個の元を持つ。",
+                    "像は ", math(String.raw`E_{L,c}`), " と同じ ", math(String.raw`L`),
+                    " 個の元を持つので全射であり、各制限写像は全単射である。",
+                  ]),
                 ],
               },
             },
