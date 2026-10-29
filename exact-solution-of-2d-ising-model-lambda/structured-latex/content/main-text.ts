@@ -85419,9 +85419,90 @@ Q_L^{0,0}(1)
                   paragraph([
                     "一方、", ref("claim_signed_even_subgraph_duality_up_to_sign"),
                     " を ", math(String.raw`x=0`), "、", math(String.raw`(a,b)=(0,0)`),
-                    " で評価すると ", math(String.raw`Q_L^{0,0}(1)=\epsilon_L^{0,0}2^N`),
-                    " となる。", math(String.raw`2^N\ne0`), " を消去して ",
-                    math(String.raw`\epsilon_L^{0,0}=-1`), " を得る。",
+                    " で評価すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+Q_L^{0,0}(1)
+&=(1+0)^{2N}Q_L^{0,0}(\mathrm{KW}(0))
+&&\bigl(\because\ \mathrm{KW}(0)=1,\ \blkref{def_kw_dual_transform}\bigr)\\
+&=\epsilon_L^{0,0}2^NQ_L^{0,0}(0)
+&&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr)\\
+&=\epsilon_L^{0,0}2^N
+&&\bigl(\because\ Q_L^{0,0}(0)=1,\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
+\end{aligned}`),
+                  paragraph([math(String.raw`Q_L^{0,0}(1)=-2^N`), " と ", math(String.raw`2^N\ne0`), " から ", math(String.raw`\epsilon_L^{0,0}=-1`), " を得る。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_signed_even_subgraph_rational_sign",
+              focus: {
+                id: "finite_fourier_claim_signed_even_subgraph_rational_sign",
+                kind: "claim",
+                title: { text: "有理点での四つの符号付き偶部分グラフ多項式の符号" },
+                labels: ["claim_signed_even_subgraph_rational_sign"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/signed-even-subgraph-rational-sign"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、有理数 ",
+                    math(String.raw`q\in\mathbb Q`), " で ", math(String.raw`0<q<1`),
+                    " を満たすものを取る。", ref("claim_no_rational_square_two"),
+                    " より ", math(String.raw`q^2+2q-1\ne0`), " である。このとき ",
+                    math(String.raw`Q_L^{a,b}(q)\in\mathbb Q`), " の符号は次の通りである。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+q^2+2q-1<0&\Longrightarrow Q_L^{a,b}(q)>0\quad((a,b)\in\mathcal S),\\
+q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a,b)\ne(0,0)).
+\end{aligned}`),
+                  paragraph(["順序は有理数と実閉部分体の順序だけで判定する。実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph(["まず ", math(String.raw`q^2+2q-1\ne0`), " を確かめる。仮に ", math(String.raw`q^2+2q-1=0`), " なら"]),
+                  displayMath(String.raw`\begin{aligned}
+(q+1)^2&=q^2+2q+1&&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
+&=(q^2+2q-1)+2&&\bigl(\because\ \mathbb Q\text{ の四則}\bigr)\\
+&=2&&\bigl(\because\ q^2+2q-1=0\bigr).
+\end{aligned}`),
+                  paragraph([math(String.raw`q+1\in\mathbb Q`), " なので ", ref("claim_no_rational_square_two"), " と矛盾する。"]),
+                  paragraph([
+                    ref("claim_signed_even_subgraph_orbit_product"),
+                    " の軌道積を ", math(String.raw`x=q`), " で評価する。",
+                    "二元・四元軌道の因子は ", ref("claim_dispersion_positive_at_rational_point"),
+                    " により実閉部分体 ", math(String.raw`R`), " で正である。",
+                    "一元軌道の因子は同じ軌道積の定義から三種類だけである。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+1+q^2&>0&&\bigl(\because\ 0<q\text{ と }\mathbb Q\text{ の順序}\bigr)\\
+1+2q-q^2&=(1-q^2)+2q&&\bigl(\because\ \mathbb Q\text{ の四則}\bigr)\\
+&>0&&\bigl(\because\ 0<q<1\bigr)\\
+1-2q-q^2&=-(q^2+2q-1)&&\bigl(\because\ \mathbb Q\text{ の加法逆元}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_mode_inversion_orbit_cardinality"),
+                    " より一元軌道の元は ", math(String.raw`\{1,-1\}^2`),
+                    " に属する。", math(String.raw`(1,1)`), " がモード集合に属する条件は ",
+                    math(String.raw`1^L=(-1)^a`), " かつ ", math(String.raw`1^L=(-1)^b`),
+                    " であり、", ref("def_horizontal_twisted_modes"), " と ",
+                    ref("def_vertical_twisted_modes"), " により ",
+                    math(String.raw`(a,b)=(0,0)`), " と同値である。",
+                    "このモードの軌道は一つであり、対応する因子だけが ",
+                    math(String.raw`-(q^2+2q-1)`), " となる。",
+                  ]),
+                  paragraph([
+                    "従って ", math(String.raw`q^2+2q-1<0`), " なら全因子が正で、",
+                    math(String.raw`q^2+2q-1>0`), " なら無ねじれの積だけに負の因子が一つある。",
+                    "空積は一である。値 ", math(String.raw`Q_L^{a,b}(q)\in\mathbb Q`),
+                    " は上の積により零でない。もしその有理数の符号が ",
+                    math(String.raw`R`), " での符号と違えば、",
+                    "正の有理数として ", math(String.raw`Q_L^{a,b}(q)`),
+                    " またはその加法逆元を取れて、", ref("claim_positive_rational_positive_in_real_closed"),
+                    " に矛盾する。従って二つの順序で符号は一致する。",
                   ]),
                 ],
               },

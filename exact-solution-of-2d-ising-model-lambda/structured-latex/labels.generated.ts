@@ -610,6 +610,7 @@ export const ALL_LABELS = [
   "claim_signed_even_subgraph_duality_sign",
   "claim_signed_even_subgraph_duality_up_to_sign",
   "claim_signed_even_subgraph_orbit_product",
+  "claim_signed_even_subgraph_rational_sign",
   "claim_signed_even_subgraph_sector_sum",
   "claim_signed_even_subgraph_square_stratified",
   "claim_single_traversal_edge_set_even",
