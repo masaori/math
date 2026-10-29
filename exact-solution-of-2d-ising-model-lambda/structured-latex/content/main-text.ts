@@ -79541,7 +79541,11 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       ]),
                       displayMath(String.raw`A_C\cap B_C=D,\qquad A_C\mathbin\triangle B_C=E`),
                       paragraph(["なので ", math(String.raw`(A_C,B_C)\in\mathcal P_L(D,E)`), " である。"]),
-                      displayMath(String.raw`\Theta(A_C,B_C)=(D\cup C)\setminus D=C\quad\bigl(\because\ D\cap C=\varnothing\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+\Theta(A_C,B_C)&=A_C\setminus D&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
+&=(D\cup C)\setminus D&&\bigl(\because\ A_C\text{ の定義}\bigr)\\
+&=C&&\bigl(\because\ D\cap C=\varnothing\bigr)
+\end{aligned}`),
                       paragraph([
                         "であり、逆に ", math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " から得た ",
                         math(String.raw`C=A\setminus D`), " については ", math(String.raw`A_C=A`), " かつ ",

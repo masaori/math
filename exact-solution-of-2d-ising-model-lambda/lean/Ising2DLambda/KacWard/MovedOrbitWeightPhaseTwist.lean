@@ -47,9 +47,30 @@ theorem movedOrbitWeight_phase_twist {L : ℕ} (a b : Bool)
       (walk.map fun e => phase e (σ e)).prod =
         z ^ ((turns.map turnValue).sum + turnValue closing) := by
     rw [hphase, closed_walk_rotation_phase hz4 turns closing]
-  exact orbitEntryProduct_phase_twist_necSuf walk σ entry phase
-    (fun e => (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)) _ _
-    hentry hperm htwistQbar hphaseTotal
+  have hsplit :
+      (walk.map fun e => entry e (σ e)).prod =
+        (walk.map fun e =>
+          (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical (σ e) : Qbar)).prod *
+          (walk.map fun e => phase e (σ e)).prod := by
+    clear hperm hphase htwistInt htwistQbar hphaseTotal
+    induction walk with
+    | nil => simp
+    | cons e es ih =>
+        rw [List.map_cons, List.prod_cons, hentry e (by simp),
+          List.map_cons, List.prod_cons, List.map_cons, List.prod_cons,
+          ih (fun f hf => hentry f (by simp [hf]))]
+        ac_rfl
+  have htwistReindex :
+      (walk.map fun e =>
+        (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical (σ e) : Qbar)).prod =
+      (walk.map fun e =>
+        (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)).prod := by
+    change (walk.map ((fun e =>
+      (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)) ∘ σ)).prod = _
+    simpa [List.map_map] using
+      List.Perm.prod_eq (hperm.map fun e =>
+        (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar))
+  rw [hsplit, htwistReindex, htwistQbar, hphaseTotal]
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
 theorem movedOrbitWeight_phase_twist_from_necSuf {L : ℕ} (a b : Bool)
