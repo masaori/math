@@ -79306,7 +79306,9 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 &&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
 &=\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
 -\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
-&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)\\
+&\in\mathbb Z
+&&\bigl(\because\ \text{有限集合の元の個数の差は整数}\bigr)
 \end{aligned}`),
                       paragraph([
                         "を得る。全過程は有限集合の分割と整数の有限和だけで閉じる。",

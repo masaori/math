@@ -9,7 +9,6 @@
 import Mathlib.Tactic
 import Ising2DLambda.KacWard.MovedOrbitClosedWalk
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
-import Ising2DLambda.NecSuf.KacWard.ReversalFreeOrbitSupportDistinct
 
 namespace Ising2DLambda.KacWard
 
@@ -19,7 +18,7 @@ private lemma sameBase_or_reversal {L : ℕ} {e f : OrientedEdge L}
     (hbase : e.1 = f.1) : e = f ∨ reversal e = f := by
   rcases e with ⟨e, false | true⟩ <;> rcases f with ⟨f, false | true⟩ <;>
     change e = f at hbase <;> subst f <;>
-    simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
+    simp [reversal]
 
 /-- `claim_reversal_free_orbit_support_edges_distinct` の具体版。 -/
 theorem reversalFreeOrbitSupportEdges_distinct (L : ℕ) [NeZero L]
@@ -37,22 +36,19 @@ theorem reversalFreeOrbitSupportEdges_distinct (L : ℕ) [NeZero L]
   intro j k hjpos hjle hkpos hkle hbase
   have hjr : j - 1 < minimalReturnTime σ e := by omega
   have hkr : k - 1 < minimalReturnTime σ e := by omega
-  have hindex := Ising2DLambda.NecSuf.KacWard.reversalFreeProjectedSequence_distinct_necSuf
-    (fun n ↦ (⇑σ)^[n] e) Prod.fst reversal (minimalReturnTime σ e)
-    (fun i l hir hlr hil ↦ by
-      rcases lt_or_gt_of_ne hil with hilt | hlti
-      · exact hdistinctOrbit i l hilt hlr
-      · exact (hdistinctOrbit l i hlti hir).symm)
-    (fun a b h ↦ sameBase_or_reversal h)
-    (fun i l hir hlr hrev ↦ by
-      have hui : (⇑σ)^[i] e ∈ movedOrientedEdges σ := by
-        rw [movedOrientedEdges, Finset.mem_filter]
-        exact ⟨Finset.mem_univ _, hmoved i⟩
-      have hul : (⇑σ)^[l] e ∈ movedOrientedEdges σ := by
-        rw [movedOrientedEdges, Finset.mem_filter]
-        exact ⟨Finset.mem_univ _, hmoved l⟩
-      exact hfree _ hui (hrev ▸ hul))
-    (j - 1) (k - 1) hjr hkr hbase
-  omega
+  rcases sameBase_or_reversal hbase with hsame | hreverse
+  · have hindex : j - 1 = k - 1 := by
+      by_contra hne
+      rcases lt_or_gt_of_ne hne with hlt | hgt
+      · exact hdistinctOrbit (j - 1) (k - 1) hlt hkr hsame
+      · exact hdistinctOrbit (k - 1) (j - 1) hgt hjr hsame.symm
+    omega
+  · have hjmoved : (⇑σ)^[j - 1] e ∈ movedOrientedEdges σ := by
+      rw [movedOrientedEdges, Finset.mem_filter]
+      exact ⟨Finset.mem_univ _, hmoved (j - 1)⟩
+    have hkmoved : (⇑σ)^[k - 1] e ∈ movedOrientedEdges σ := by
+      rw [movedOrientedEdges, Finset.mem_filter]
+      exact ⟨Finset.mem_univ _, hmoved (k - 1)⟩
+    exact False.elim (hfree _ hjmoved (hreverse ▸ hkmoved))
 
 end Ising2DLambda.KacWard
