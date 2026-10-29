@@ -95,6 +95,7 @@ export const ALL_LABELS = [
   "claim_dispersion_mode_product",
   "claim_dispersion_positive_at_rational_point",
   "claim_dispersion_positive_decomposition",
+  "claim_dispersion_product_real_log_sum",
   "claim_dispersion_special_mode_squares",
   "claim_displacement_is_direction_unit",
   "claim_distance_positive_on_fisher_zeros",

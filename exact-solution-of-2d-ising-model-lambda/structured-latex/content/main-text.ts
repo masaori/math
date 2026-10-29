@@ -87892,6 +87892,72 @@ F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_real_escape_claim_dispersion_product_real_log_sum",
+              focus: {
+                id: "real_escape_claim_dispersion_product_real_log_sum",
+                kind: "claim",
+                title: { text: "分散因子の有限積の実対数はモードごとの和になる" },
+                labels: ["claim_dispersion_product_real_log_sum"],
+                habitat: "R",
+                realEscape: "実対数。可算側で正と示した分散因子を実現写像で正の実数へ送り、有限積の実対数を有限和へ移す。",
+                verification: ["sagemath/check/dispersion-product-real-log-sum"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、有理点 ",
+                    math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`), "）を取る。",
+                    ref("def_signed_even_subgraph_polynomial"), " の値 ",
+                    math(String.raw`Q_L^{a,b}(q)\in R`), " と、",
+                    ref("def_real_algebraic_cut_realization"), " の実現写像を用いる。このとき",
+                  ]),
+                  displayMath(String.raw`\frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma)).`),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_dispersion_positive_at_rational_point"), " により各因子は ",
+                    math(String.raw`R`), " で正である。",
+                    ref("claim_cut_realization_preserves_strict_order"), " によりその実現値も正の実数である。",
+                    ref("claim_determinant_signed_even_subgraph_square"), " と ",
+                    ref("claim_dispersion_mode_product"), " を ", math(String.raw`x:=q`),
+                    " で評価すると、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(Q_L^{a,b}(q))^2
+&=D_L^{a,b}(q)&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "右辺は正元の有限積なので ", math(String.raw`Q_L^{a,b}(q)\ne0`), " である。",
+                    ref("claim_cut_realization_preserves_multiplication"), " により実現写像を等式へ適用し、",
+                    ref("def_real_logarithm"), " の乗法法則を正の実数の有限積と平方へ適用する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+2\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+&=\log_{\mathbb R}\left(\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|^2\right)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則}\bigr)\\
+&=\log_{\mathbb R}\left(\rho_{R\to\mathbb R}(Q_L^{a,b}(q))^2\right)
+&&\bigl(\because\ \text{実数の絶対値の平方}\bigr)\\
+&=\log_{\mathbb R}\rho_{R\to\mathbb R}\left((Q_L^{a,b}(q))^2\right)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
+&=\log_{\mathbb R}\rho_{R\to\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)\right)
+&&\bigl(\because\ \text{上の多項式等式を }x:=q\text{ で評価}\bigr)\\
+&=\log_{\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))\right)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\text{ を有限積に適用}\bigr)\\
+&=\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr).
+\end{aligned}`),
+                  paragraph(["両辺を正の自然数 ", math(String.raw`2L^2`), " で割ると主張を得る。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_thermodynamic_limit_def_open_square_free_energy_density",
               beforeFocus: [
                 {
