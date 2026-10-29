@@ -85038,9 +85038,16 @@ N^n&=\zeta^n\operatorname{conj}_R(\zeta^n)
                     math(String.raw`0\le_R2-\varpi-\varpi^{-1}`), "（",
                     ref("def_real_algebraic_nonstrict_order"), "）。同じ計算で ",
                     math(String.raw`0\le_R2-\varsigma-\varsigma^{-1}`), " である。",
-                    math(String.raw`0<q<1`), " より ", math(String.raw`0<_Rq(1-q^2)`),
-                    " であり、", ref("claim_dispersion_positive_decomposition"), " から",
+                    math(String.raw`0<q<1`), " より",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+q(1-q^2)
+&=q(1-q)(1+q)
+&&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
+&>_R0
+&&\bigl(\because\ 0<q<1\text{ と順序体の正元の積}\bigr).
+\end{aligned}`),
+                  paragraph([ref("claim_dispersion_positive_decomposition"), " から"]),
                   displayMath(String.raw`\begin{aligned}
 \Delta(q;\varpi,\varsigma)-(q^2+2q-1)^2
 &=q(1-q^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
@@ -85300,6 +85307,121 @@ z=z^{-1}
                     " の零積性（", ref("claim_qbar_polynomial_zero_product"),
                     "）を ", math(String.raw`(F_L^{a,b}-2^NQ_L^{a,b})(F_L^{a,b}+2^NQ_L^{a,b})=0`),
                     " に適用すると、主張する二つの符号のいずれかを得る。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_signed_even_subgraph_duality_sign",
+              focus: {
+                id: "finite_fourier_claim_signed_even_subgraph_duality_sign",
+                kind: "claim",
+                title: { text: "符号付き偶部分グラフ多項式の自己双対変換の符号" },
+                labels: ["claim_signed_even_subgraph_duality_sign"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/signed-even-subgraph-duality-sign"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " を任意に取り、",
+                    math(String.raw`N:=L^2`), " と置く。",
+                    ref("claim_signed_even_subgraph_duality_up_to_sign"), " の符号は",
+                  ]),
+                  displayMath(String.raw`\epsilon_L^{a,b}=\begin{cases}-1&((a,b)=(0,0)),\\1&((a,b)\ne(0,0))\end{cases}`),
+                  paragraph(["である。従って、係数を ", math(String.raw`\overline{\mathbb Q}`), " に送った多項式について"]),
+                  displayMath(String.raw`(1+x)^{2N}Q_L^{a,b}(\mathrm{KW}(x))=\epsilon_L^{a,b}2^NQ_L^{a,b}(x)\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず ", math(String.raw`(a,b)\ne(0,0)`), " とする。臨界点 ",
+                    math(String.raw`x_c\in R`), " は ", ref("def_critical_point"), "、",
+                    ref("claim_critical_point_mem_real_closed"), " により定まり、",
+                    ref("claim_critical_point_positive"), " と ", ref("claim_critical_point_lt_one"),
+                    " により ", math(String.raw`0<_Rx_c<_R1`), " である。",
+                    math(String.raw`x_c^2+2x_c-1=0`), "、",
+                    math(String.raw`\mathrm{KW}(x_c)=x_c`), " および ",
+                    math(String.raw`(1+x_c)^2=2`), " は ", ref("def_critical_point"), " に従う。",
+                    "任意の ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取り、", ref("claim_root_of_unity_inverse_is_real_closed_conjugate"),
+                    " に従って ", math(String.raw`\varpi=\alpha+\beta\omega`), "、",
+                    math(String.raw`\varsigma=\gamma+\delta\omega`),
+                    "（", math(String.raw`\alpha,\beta,\gamma,\delta\in R`), "）と書く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x_c;\varpi,\varsigma)
+&=(x_c^2+2x_c-1)^2+x_c(1-x_c^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
+&&\bigl(\because\ \blkref{claim_dispersion_positive_decomposition}\bigr)\\
+&=x_c(1-x_c^2)\bigl((2-\varpi-\varpi^{-1})+(2-\varsigma-\varsigma^{-1})\bigr)
+&&\bigl(\because\ x_c^2+2x_c-1=0,\ \blkref{def_critical_point}\bigr)\\
+&=x_c(1-x_c^2)\bigl((1-\alpha)^2+\beta^2+(1-\gamma)^2+\delta^2\bigr)
+&&\bigl(\because\ \blkref{claim_root_of_unity_inverse_is_real_closed_conjugate}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`x_c(1-x_c^2)>_R0`), " である。平方は全て非負なので、",
+                    "最後の平方和が零なら二つの平方和もそれぞれ零となる。",
+                    ref("claim_real_closed_sum_of_two_squares_zero"),
+                    " を各組へ適用して ", math(String.raw`\alpha=\gamma=1`), "、",
+                    math(String.raw`\beta=\delta=0`), "、従って ",
+                    math(String.raw`(\varpi,\varsigma)=(1,1)`), " となる。しかし ",
+                    math(String.raw`(a,b)\ne(0,0)`), " なので ",
+                    ref("def_horizontal_twisted_modes"), " と ", ref("def_vertical_twisted_modes"),
+                    " により ", math(String.raw`(1,1)\notin\mathcal U_a\times\mathcal W_b`),
+                    " である。ゆえに各分散因子は零でない。",
+                    ref("claim_dispersion_mode_product"), " と ",
+                    ref("claim_determinant_signed_even_subgraph_square"), " から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+Q_L^{a,b}(x_c)^2
+&=D_L^{a,b}(x_c)
+&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr)\\
+&=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(x_c;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr)\\
+&\ne0
+&&\bigl(\because\ \text{非零因子の有限積は非零}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`Q_L^{a,b}(x_c)\ne0`), " である。",
+                    ref("claim_signed_even_subgraph_duality_up_to_sign"), " を ",
+                    math(String.raw`x=x_c`), " で評価すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+2^NQ_L^{a,b}(x_c)
+&=(1+x_c)^{2N}Q_L^{a,b}(\mathrm{KW}(x_c))
+&&\bigl(\because\ (1+x_c)^2=2,\ \mathrm{KW}(x_c)=x_c\bigr)\\
+&=\epsilon_L^{a,b}2^NQ_L^{a,b}(x_c)
+&&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_up_to_sign}\bigr).
+\end{aligned}`),
+                  paragraph(["非零の ", math(String.raw`2^NQ_L^{a,b}(x_c)`), " を消去して ", math(String.raw`\epsilon_L^{a,b}=1`), " を得る。"]),
+                  paragraph([
+                    "次に ", math(String.raw`(a,b)=(0,0)`), " とする。",
+                    ref("def_signed_even_subgraph_polynomial"), " より、空の偶部分グラフだけが定数項へ寄与し、",
+                    math(String.raw`Q_L^{a,b}(0)=1`), " は四つのスピン構造すべてで成り立つ。",
+                    "上の三つの符号と ", ref("claim_signed_even_subgraph_duality_up_to_sign"),
+                    " を ", math(String.raw`x=0`), " で評価すると、非自明な三つの ",
+                    math(String.raw`(a,b)`), " について ", math(String.raw`Q_L^{a,b}(1)=2^N`), " である。",
+                    ref("claim_finite_torus_polynomial"), "、", ref("claim_coefficient_representation"),
+                    " と ", ref("claim_coefficient_sum"), " により",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+Q_L^{0,0}(1)
+&=2Z_L(1)-\sum_{(a,b)\in\mathcal S\setminus\{(0,0)\}}Q_L^{a,b}(1)
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
+&=2\cdot2^N-3\cdot2^N
+&&\bigl(\because\ \blkref{claim_coefficient_representation},\ \blkref{claim_coefficient_sum}\text{ と上の三つの評価}\bigr)\\
+&=-2^N
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "一方、", ref("claim_signed_even_subgraph_duality_up_to_sign"),
+                    " を ", math(String.raw`x=0`), "、", math(String.raw`(a,b)=(0,0)`),
+                    " で評価すると ", math(String.raw`Q_L^{0,0}(1)=\epsilon_L^{0,0}2^N`),
+                    " となる。", math(String.raw`2^N\ne0`), " を消去して ",
+                    math(String.raw`\epsilon_L^{0,0}=-1`), " を得る。",
                   ]),
                 ],
               },
