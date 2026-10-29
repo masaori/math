@@ -84883,6 +84883,104 @@ D^{a,b}_L(x)
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_root_of_unity_inverse_is_real_closed_conjugate",
+              focus: {
+                id: "finite_fourier_claim_root_of_unity_inverse_is_real_closed_conjugate",
+                kind: "claim",
+                title: { text: "1 の冪根の逆元は実閉部分体上の共役である" },
+                labels: ["claim_root_of_unity_inverse_is_real_closed_conjugate"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/root-of-unity-real-closed-conjugate"],
+                statement: [
+                  paragraph([
+                    ref("def_real_closed_subfield"), " の固定した組 ",
+                    math(String.raw`(R,\omega)`), " について、写像 ",
+                    math(String.raw`\operatorname{conj}_R:\overline{\mathbb Q}\to\overline{\mathbb Q}`),
+                    " を、各元の一意表示 ", math(String.raw`z=\alpha+\beta\omega`),
+                    "（", math(String.raw`\alpha,\beta\in R`), "）に対し ",
+                    math(String.raw`\operatorname{conj}_R(z):=\alpha-\beta\omega`),
+                    " で定める。この写像は ", math(String.raw`R`),
+                    " を点ごとに固定する体の自己同型である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`n\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`\zeta=\alpha+\beta\omega\in\mu_n`),
+                    " を任意に取る（", ref("def_root_of_unity_set"), "）。このとき",
+                  ]),
+                  displayMath(String.raw`\alpha^2+\beta^2=1,\qquad \zeta^{-1}=\operatorname{conj}_R(\zeta)=\alpha-\beta\omega.`),
+                  paragraph(["全て代数的数とその部分体の順序だけで述べ、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "一意表示（", ref("def_real_closed_subfield"), " の第 4 条件）により写像は一意に定まる。",
+                    math(String.raw`z=\alpha+\beta\omega`), " と ",
+                    math(String.raw`w=\gamma+\delta\omega`),
+                    "（係数は全て ", math(String.raw`R`), " の元）を取る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{conj}_R(z+w)
+&=(\alpha+\gamma)-(\beta+\delta)\omega
+&&\bigl(\because\ \blkref{def_real_closed_subfield}\text{ の一意表示}\bigr)\\
+&=\operatorname{conj}_R(z)+\operatorname{conj}_R(w)
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr),\\
+\operatorname{conj}_R(zw)
+&=(\alpha\gamma-\beta\delta)-(\alpha\delta+\beta\gamma)\omega
+&&\bigl(\because\ \omega^2=-1\text{ と一意表示}\bigr)\\
+&=(\alpha-\beta\omega)(\gamma-\delta\omega)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&=\operatorname{conj}_R(z)\operatorname{conj}_R(w)
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`r\in R`), " の表示は ", math(String.raw`r+0\omega`),
+                    " なので ", math(String.raw`\operatorname{conj}_R(r)=r`),
+                    "。同じ定義を二度適用すると ",
+                    math(String.raw`\operatorname{conj}_R(\operatorname{conj}_R(z))=z`),
+                    " であり、この写像は全単射である。加法・乗法と単位元を保つので体の自己同型である。",
+                  ]),
+                  paragraph([
+                    math(String.raw`N:=\zeta\operatorname{conj}_R(\zeta)`),
+                    " と置く。", ref("claim_real_closed_sum_of_two_squares_is_square"),
+                    " により ", math(String.raw`N`), " は ", math(String.raw`R`),
+                    " の平方であり、", ref("def_real_algebraic_nonstrict_order"),
+                    " により ", math(String.raw`0\le_R N`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+N&=(\alpha+\beta\omega)(\alpha-\beta\omega)
+&&\bigl(\because\ N\text{ と }\operatorname{conj}_R\text{ の定義}\bigr)\\
+&=\alpha^2+\beta^2
+&&\bigl(\because\ \omega^2=-1\text{ と分配律}\bigr),\\
+N^n&=\zeta^n\operatorname{conj}_R(\zeta^n)
+&&\bigl(\because\ \operatorname{conj}_R\text{ の乗法保存と冪の法則}\bigr)\\
+&=1
+&&\bigl(\because\ \zeta\in\mu_n\text{ と }\operatorname{conj}_R(1)=1\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`n\ge1`), " なので ", math(String.raw`N^n=1`),
+                    " から ", math(String.raw`N\ne0`), " である。順序体 ", math(String.raw`R`),
+                    " で ", math(String.raw`N>_R1`), " なら、正元を掛ける操作の単調性を ",
+                    math(String.raw`n`), " 回適用して ", math(String.raw`N^n>_R1`),
+                    " となる。", math(String.raw`0<_RN<_R1`),
+                    " なら同様に ", math(String.raw`N^n<_R1`),
+                    " となる。いずれも ", math(String.raw`N^n=1`),
+                    " と矛盾するから ", math(String.raw`N=1`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\alpha^2+\beta^2&=N&&\bigl(\because\ N\text{ の計算}\bigr)\\
+&=1&&\bigl(\because\ \text{上の順序による結論}\bigr),\\
+\zeta^{-1}&=\operatorname{conj}_R(\zeta)
+&&\bigl(\because\ \zeta\operatorname{conj}_R(\zeta)=N=1\bigr)\\
+&=\alpha-\beta\omega
+&&\bigl(\because\ \operatorname{conj}_R\text{ の定義}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_finite_fourier_claim_mode_inversion_orbit_cardinality",
               focus: {
                 id: "finite_fourier_claim_mode_inversion_orbit_cardinality",
@@ -84929,8 +85027,17 @@ z=z^{-1}
                     "横成分の集合 ", math(String.raw`\{\varpi,\varpi^{-1}\}`),
                     " と縦成分の集合 ", math(String.raw`\{\varsigma,\varsigma^{-1}\}`),
                     " はそれぞれ一元または二元である。軌道はこの二集合の直積なので、",
-                    "元数は二つの元数の積として ", math(String.raw`1,2,4`),
-                    " のいずれかである。元数が一であるのは両成分がそれぞれ逆元に等しい場合に限る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+|O(\varpi,\varsigma)|
+&=|\{\varpi,\varpi^{-1}\}\times\{\varsigma,\varsigma^{-1}\}|
+&&\bigl(\because\ O\text{ の定義}\bigr)\\
+&=|\{\varpi,\varpi^{-1}\}|\,|\{\varsigma,\varsigma^{-1}\}|
+&&\bigl(\because\ \text{有限集合の直積の元数}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "二つの因子はそれぞれ一または二なので、積は一、二、四のいずれかである。",
+                    "積が一となるのは両成分がそれぞれ逆元に等しい場合に限る。",
                     "上の同値を両成分へ適用すると、表示した条件を得る。",
                   ]),
                 ],

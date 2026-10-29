@@ -536,6 +536,7 @@ export const ALL_LABELS = [
   "claim_root_of_unity_element_ne_zero",
   "claim_root_of_unity_finite_card_bound",
   "claim_root_of_unity_geometric_sum_zero",
+  "claim_root_of_unity_inverse_is_real_closed_conjugate",
   "claim_root_of_unity_mul",
   "claim_root_of_unity_mul_map_bijective",
   "claim_root_of_unity_pow",
