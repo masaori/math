@@ -85666,7 +85666,13 @@ Z_L(q)
 &=M_L^{\mathrm{abs}}(q)
 &&\bigl(\because\ M_L^{\mathrm{abs}}(q)\text{ の定義}\bigr).
 \end{aligned}`),
-                  paragraph(["この等式を上の下界へ代入して ", math(String.raw`Z_L(q)\ge M_L^{\mathrm{abs}}(q)/4`), " を得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&\ge\frac{(1+q)^{2L^2}}{2^{L^2+2}}M_L(t)
+&&\bigl(\because\ \text{上で示した下界}\bigr)\\
+&=\frac14M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ \text{直前の最大値の等式}\bigr).
+\end{aligned}`),
                   paragraph([ref("claim_finite_torus_polynomial"), " を ", math(String.raw`x=q`), " で評価し、上界を得る。"]),
                   displayMath(String.raw`\begin{aligned}
 Z_L(q)
@@ -85678,6 +85684,100 @@ Z_L(q)
 &&\bigl(\because\ M_L^{\mathrm{abs}}(q)\text{ は四つの絶対値の最大}\bigr)\\
 &=2M_L^{\mathrm{abs}}(q)
 &&\bigl(\because\ |\mathcal S|=4,\ \blkref{def_spin_structures}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_partition_log_order_bounds",
+              focus: {
+                id: "finite_fourier_claim_partition_log_order_bounds",
+                kind: "claim",
+                title: { text: "分配多項式の両側評価を対数順序群の鎖へ移す" },
+                labels: ["claim_partition_log_order_bounds"],
+                habitat: "Lambda",
+                verification: ["sagemath/check/partition-log-order-bounds"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`q\in\mathbb Q`), " で ", math(String.raw`0<q<1`),
+                    " を満たすものを取る。", ref("def_spin_structures"), " の四元集合を ",
+                    math(String.raw`\mathcal S`), " とし、", ref("def_signed_even_subgraph_polynomial"),
+                    " の値から ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q):=\max_{(a,b)\in\mathcal S}|Q_L^{a,b}(q)|\in\mathbb Q_{>0}`),
+                    " と置く。", ref("def_finite_free_entropy"), " の ",
+                    math(String.raw`\Phi_L(q)\in\Lambda`), " について",
+                  ]),
+                  displayMath(String.raw`\log M_L^{\mathrm{abs}}(q)-2\ell_2
+\le_{\Lambda}\Phi_L(q)
+\le_{\Lambda}\log M_L^{\mathrm{abs}}(q)+\ell_2`),
+                  paragraph([
+                    "が成り立つ。", math(String.raw`\ell_2=\log2\in\Lambda`),
+                    " と ", math(String.raw`\log:\mathbb Q_{>0}\to\Lambda`),
+                    " は ", ref("def_rational_log"), " の記法である。",
+                    "順序は ", ref("def_log_order_group_order"), " で定める。",
+                    "実数体・実対数は使わない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず ", math(String.raw`q^2+2q-1\ne0`), " である。",
+                    "もし零なら ", math(String.raw`(q+1)^2=2`), " となり、",
+                    math(String.raw`q+1\in\mathbb Q`), " は ",
+                    ref("claim_no_rational_square_two"), " に反する。",
+                    "従って有理数の全順序で符号による二場合に分かれる。",
+                  ]),
+                  paragraph([
+                    math(String.raw`q^2+2q-1<0`), " の場合、",
+                    ref("claim_signed_even_subgraph_rational_sign"),
+                    " により四つの値は正なので ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)=M_L(q)>0`), " である。",
+                    ref("claim_low_temperature_partition_bounds"), " から ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)/4\le Z_L(q)\le2M_L^{\mathrm{abs}}(q)`),
+                    " を得る。", math(String.raw`q^2+2q-1>0`), " の場合も ",
+                    ref("claim_high_temperature_partition_bounds"), " が同じ不等式を与える。",
+                    "両場合で ", math(String.raw`M_L^{\mathrm{abs}}(q)>0`),
+                    " であり、", ref("claim_value_at_rational_is_positive"),
+                    " により ", math(String.raw`Z_L(q)>0`), " である。",
+                  ]),
+                  paragraph([
+                    "有理数の正の数倍と ", ref("claim_rational_log_order_iff"),
+                    " を使うと、下界は次の鎖になる。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+M_L^{\mathrm{abs}}(q)&\le4Z_L(q)
+&&\bigl(\because\ M_L^{\mathrm{abs}}(q)/4\le Z_L(q)\bigr)\\
+\log M_L^{\mathrm{abs}}(q)&\le_{\Lambda}\log(4Z_L(q))
+&&\bigl(\because\ \blkref{claim_rational_log_order_iff}\bigr)\\
+&=\log4+\log Z_L(q)
+&&\bigl(\because\ \blkref{claim_log_additive}\bigr)\\
+&=2\ell_2+\log Z_L(q)
+&&\bigl(\because\ \blkref{claim_log_power},\ \ell_2=\log2\bigr)\\
+&=2\ell_2+\Phi_L(q)
+&&\bigl(\because\ \blkref{def_finite_free_entropy}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_log_order_group_add_monotone"),
+                    " を使い両辺に ", math(String.raw`-2\ell_2\in\Lambda`),
+                    " を加えると ",
+                    math(String.raw`\log M_L^{\mathrm{abs}}(q)-2\ell_2\le_{\Lambda}\Phi_L(q)`),
+                    " となる。上界についても",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+Z_L(q)&\le2M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ \text{上の有理数での両側評価}\bigr)\\
+\Phi_L(q)&=\log Z_L(q)
+&&\bigl(\because\ \blkref{def_finite_free_entropy}\bigr)\\
+&\le_{\Lambda}\log(2M_L^{\mathrm{abs}}(q))
+&&\bigl(\because\ \blkref{claim_rational_log_order_iff}\bigr)\\
+&=\log2+\log M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ \blkref{claim_log_additive}\bigr)\\
+&=\log M_L^{\mathrm{abs}}(q)+\ell_2
+&&\bigl(\because\ \ell_2=\log2\text{ と }\Lambda\text{ の加法の交換律}\bigr).
 \end{aligned}`),
                 ],
               },
