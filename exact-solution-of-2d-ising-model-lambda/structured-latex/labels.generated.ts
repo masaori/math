@@ -82,6 +82,7 @@ export const ALL_LABELS = [
   "claim_direction_gate_crossing_turning",
   "claim_disjoint_walk_mutual_crossing_intersection",
   "claim_dispersion_algebraic_onsager_form",
+  "claim_dispersion_inversion_invariant",
   "claim_dispersion_kw_duality",
   "claim_dispersion_mode_product",
   "claim_dispersion_positive_decomposition",

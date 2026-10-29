@@ -81276,7 +81276,15 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       paragraph([
                         "逆に ", math(String.raw`\forall f\in F,\ r=f`), " かつ ", math(String.raw`r\notin B`), " とする。任意の ", math(String.raw`i`),
                         " を取る。", math(String.raw`z_i=1`), " なら ", math(String.raw`[-\delta_i]_L\in F`), " なので ",
-                        math(String.raw`r=[-\delta_i]_L`), "、従って ", math(String.raw`[r+\delta_i]_L=0`), " である。逆に ",
+                        math(String.raw`r=[-\delta_i]_L`), " である。従って",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+[r+\delta_i]_L
+&=[[-\delta_i]_L+\delta_i]_L&&\bigl(\because\ r=[-\delta_i]_L\bigr)\\
+&=0&&\bigl(\because\ \text{剰余の定義}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "逆に ",
                         math(String.raw`z_i=0`), " なら ", math(String.raw`[-\delta_i]_L\in B`), " であり、",
                         math(String.raw`r\notin B`), " から ", math(String.raw`r\ne[-\delta_i]_L`), "、従って ",
                         math(String.raw`[r+\delta_i]_L\ne0`), " である。同じ議論を ", math(String.raw`\ell_i`), " と ",
@@ -84558,6 +84566,78 @@ D^{a,b}_L(x)
 &&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
 \end{aligned}`),
                   paragraph(["右辺には ", math(String.raw`\kappa`), " が現れないので、等式は全単射の選択に依らない。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_dispersion_inversion_invariant",
+              focus: {
+                id: "finite_fourier_claim_dispersion_inversion_invariant",
+                kind: "claim",
+                title: { text: "モードの逆元操作は分散因子を保つ" },
+                labels: ["claim_dispersion_inversion_invariant"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/dispersion-inversion-invariant"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " とモード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を取る。横または縦の成分を逆元に替えた組も同じモード集合に属し、",
+                    ref("def_dispersion_polynomial"), " の多項式はその操作で変わらない。",
+                  ]),
+                  displayMath(String.raw`\Delta(x;\varpi^{-1},\varsigma)=\Delta(x;\varpi,\varsigma)=\Delta(x;\varpi,\varsigma^{-1})\quad\text{in }\overline{\mathbb Q}[x].`),
+                  paragraph(["実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_horizontal_twisted_modes"), " より ",
+                    math(String.raw`\varpi^L=(-1)^a\ne0`), " なので ",
+                    math(String.raw`\varpi\ne0`), " である。同様に ",
+                    ref("def_vertical_twisted_modes"), " より ",
+                    math(String.raw`\varsigma\ne0`), " である。まず逆元の冪を計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(\varpi^{-1})^L
+&=(\varpi^L)^{-1}&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=((-1)^a)^{-1}&&\bigl(\because\ \blkref{def_horizontal_twisted_modes}\bigr)\\
+&=(-1)^a&&\bigl(\because\ a\in\{0,1\}\bigr).
+\end{aligned}`),
+                  paragraph(["従って ", math(String.raw`\varpi^{-1}\in\mathcal U_a`), "（", ref("def_horizontal_twisted_modes"), "）。縦の成分でも"]),
+                  displayMath(String.raw`\begin{aligned}
+(\varsigma^{-1})^L
+&=(\varsigma^L)^{-1}&&\bigl(\because\ \overline{\mathbb Q}\text{ の指数法則}\bigr)\\
+&=((-1)^b)^{-1}&&\bigl(\because\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&=(-1)^b&&\bigl(\because\ b\in\{0,1\}\bigr).
+\end{aligned}`),
+                  paragraph(["従って ", math(String.raw`\varsigma^{-1}\in\mathcal W_b`), "（", ref("def_vertical_twisted_modes"), "）。分散因子は横の逆元操作について"]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;\varpi^{-1},\varsigma)
+&=(1+x^2)^2-x(1-x^2)(\varpi^{-1}+(\varpi^{-1})^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2-x(1-x^2)(\varpi^{-1}+\varpi+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ (\varpi^{-1})^{-1}=\varpi\bigr)\\
+&=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr)\\
+&=\Delta(x;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
+\end{aligned}`),
+                  paragraph(["縦の逆元操作については"]),
+                  displayMath(String.raw`\begin{aligned}
+\Delta(x;\varpi,\varsigma^{-1})
+&=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma^{-1}+(\varsigma^{-1})^{-1})
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
+&=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma^{-1}+\varsigma)
+&&\bigl(\because\ (\varsigma^{-1})^{-1}=\varsigma\bigr)\\
+&=(1+x^2)^2-x(1-x^2)(\varpi+\varpi^{-1}+\varsigma+\varsigma^{-1})
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法の交換律}\bigr)\\
+&=\Delta(x;\varpi,\varsigma)
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr).
+\end{aligned}`),
                 ],
               },
             },
