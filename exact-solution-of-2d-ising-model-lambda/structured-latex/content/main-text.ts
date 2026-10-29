@@ -81394,10 +81394,17 @@ w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
 &&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ独立に適用}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "を得る。この同値の左辺と座標列の定義を ", math(String.raw`\mathcal P`),
-                        " の定義へ代入すれば、表示した ", math(String.raw`\mathcal P`),
-                        " の等式を得る。この等式は両方向の同値なので、復元規則は座標列を落とさず、余分な座標列も加えない。",
+                        "を得る。座標列を ", math(String.raw`v_{r,c}:=\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)_{i=0}^{n-1}`),
+                        " と略記すると、上の同値から",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal P
+&=\{v_{r,c}:r,c\in\{0,\ldots,L-1\},\ r,c\text{ が全切断旗に整合する}\}
+&&\bigl(\because\ \mathcal P\text{ の定義}\bigr)\\
+&=\{v_{r,c}:r\in S_{\mathrm r},\ c\in S_{\mathrm c}\}
+&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ適用した上の同値}\bigr).
+\end{aligned}`),
+                      paragraph(["この等式は両方向の同値なので、復元規則は座標列を落とさず、余分な座標列も加えない。"]),
                       paragraph([
                         "次に整合する座標列を一つ取り、その始点を ", math(String.raw`(r,c)`),
                         " とする。反対端点は始点から整数変位 ", math(String.raw`(\alpha,\beta)`),
@@ -84865,6 +84872,64 @@ D^{a,b}_L(x)
 &=(1+2x-x^2)^2
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr).
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_mode_inversion_orbit_cardinality",
+              focus: {
+                id: "finite_fourier_claim_mode_inversion_orbit_cardinality",
+                kind: "claim",
+                title: { text: "逆元操作のモード軌道は一元・二元・四元のいずれかである" },
+                labels: ["claim_mode_inversion_orbit_cardinality"],
+                habitat: "Qbar",
+                verification: ["sagemath/check/mode-inversion-orbit-cardinality"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、モード ",
+                    math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " を任意に取る。逆元操作が作る軌道を有限集合",
+                  ]),
+                  displayMath(String.raw`O(\varpi,\varsigma):=
+\{(\varpi,\varsigma),(\varpi^{-1},\varsigma),
+(\varpi,\varsigma^{-1}),(\varpi^{-1},\varsigma^{-1})\}
+\subseteq\mathcal U_a\times\mathcal W_b`),
+                  paragraph(["で定める。この軌道は一元・二元・四元のいずれかであり、"]),
+                  displayMath(String.raw`|O(\varpi,\varsigma)|=1
+\Longleftrightarrow\varpi,\varsigma\in\{1,-1\}.`),
+                  paragraph(["全て代数的数の等号で判定でき、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_dispersion_inversion_invariant"), " の証明により、",
+                    math(String.raw`\varpi^{-1}\in\mathcal U_a`), " と ",
+                    math(String.raw`\varsigma^{-1}\in\mathcal W_b`),
+                    " であり、四点はいずれも同じモード集合に属する。",
+                    math(String.raw`z\in\{\varpi,\varsigma\}`), " を一つ取る。",
+                    "各成分は非零であり、体 ", math(String.raw`\overline{\mathbb Q}`), " の中で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+z=z^{-1}
+&\Longleftrightarrow z^2=1
+&&\bigl(\because\ z\ne0\text{ と }\overline{\mathbb Q}\text{ の乗法}\bigr)\\
+&\Longleftrightarrow (z-1)(z+1)=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr)\\
+&\Longleftrightarrow z\in\{1,-1\}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ は整域}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "横成分の集合 ", math(String.raw`\{\varpi,\varpi^{-1}\}`),
+                    " と縦成分の集合 ", math(String.raw`\{\varsigma,\varsigma^{-1}\}`),
+                    " はそれぞれ一元または二元である。軌道はこの二集合の直積なので、",
+                    "元数は二つの元数の積として ", math(String.raw`1,2,4`),
+                    " のいずれかである。元数が一であるのは両成分がそれぞれ逆元に等しい場合に限る。",
+                    "上の同値を両成分へ適用すると、表示した条件を得る。",
+                  ]),
                 ],
               },
             },
