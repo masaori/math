@@ -14,11 +14,11 @@ theorem polynomialOrientedIdentity_determinant (L : ℕ) :
   classical
   let I : QbarPolynomialMatrix (OrientedEdge L) := 1
   let w : Equiv.Perm (OrientedEdge L) → QbarPoly := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((Equiv.Perm.sign σ : ℤ) : Qbar)
   have hw : w 1 = 1 := by
     calc
       w 1 = Polynomial.C (1 : Qbar) := by
-        simp [w, IntegerMatrix.inversionSign_eq_mathlibSign]
+        simp [w]
       _ = 1 := map_one Polynomial.C
   have hzero (σ : Equiv.Perm (OrientedEdge L)) (hσ : σ ≠ 1) :
       w σ * ∏ i, I i (σ i) = 0 := by
@@ -33,8 +33,9 @@ theorem polynomialOrientedIdentity_determinant (L : ℕ) :
       w σ * ∏ j, I j (σ j) = w σ * 0 := congrArg (w σ * ·) hprod
       _ = 0 := mul_zero _
   calc
-    Matrix.det I = ∑ σ : Equiv.Perm (OrientedEdge L), w σ * ∏ i, I i (σ i) :=
-      qbarPolynomial_det_row_expansion I
+    Matrix.det I = ∑ σ : Equiv.Perm (OrientedEdge L), w σ * ∏ i, I i (σ i) := by
+      rw [← Matrix.det_transpose I]
+      simp only [Matrix.det_apply', Matrix.transpose_apply, map_intCast, w]
     _ = w 1 * ∏ i, I i ((1 : Equiv.Perm (OrientedEdge L)) i) := by
       apply Finset.sum_eq_single 1
       · intro σ _ hσ

@@ -81253,11 +81253,18 @@ B&:=\left\{[-\delta_i]_L:z_i=0\right\}
                         [
                           math(String.raw`f=[-\delta_i]_L`), " かつ ", math(String.raw`z_i=1`), " となる ", math(String.raw`i`), " がある場合、",
                           math(String.raw`r`), " が満たす切断旗の同値条件から ", math(String.raw`[r+\delta_i]_L=0`), " である。よって ",
-                          math(String.raw`r=[-\delta_i]_L=f`), " である（", math(String.raw`\because`), " 整数の合同式の移項）。",
+                          displayMath(String.raw`\begin{aligned}
+r&=[-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=0\text{ の合同式の移項}\bigr)\\
+&=f&&\bigl(\because\ f=[-\delta_i]_L\text{ の仮定}\bigr)
+\end{aligned}`),
                         ],
                         [
                           math(String.raw`f=[L-1-\delta_i]_L`), " かつ ", math(String.raw`\ell_i=1`), " となる ", math(String.raw`i`), " がある場合も、",
-                          math(String.raw`[r+\delta_i]_L=L-1`), " から ", math(String.raw`r=[L-1-\delta_i]_L=f`), " である（", math(String.raw`\because`), " 整数の合同式の移項）。",
+                          math(String.raw`[r+\delta_i]_L=L-1`), " から ",
+                          displayMath(String.raw`\begin{aligned}
+r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移項}\bigr)\\
+&=f&&\bigl(\because\ f=[L-1-\delta_i]_L\text{ の仮定}\bigr)
+\end{aligned}`),
                         ],
                       ]),
                       paragraph([
