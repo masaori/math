@@ -26,6 +26,17 @@ private lemma permutation_iterLeft_return (σ : Equiv.Perm E) (e : E) :
   obtain ⟨k, hk, hreturn⟩ := permutation_power_return σ e
   exact ⟨k, hk, (iterLeft_perm_eq σ k e).trans hreturn⟩
 
+omit [Fintype E] in
+private lemma permutation_moved_iterate (σ : Equiv.Perm E) {e : E}
+    (he : σ e ≠ e) : ∀ k, σ (σ^[k] e) ≠ σ^[k] e := by
+  intro k
+  induction k with
+  | zero => simpa using he
+  | succ k ih =>
+    intro h
+    rw [Function.iterate_succ_apply'] at h
+    exact ih (σ.injective h)
+
 variable [DecidableEq E]
 
 /-- 動く辺の集合。 -/
@@ -76,8 +87,7 @@ theorem movedEdgeOrbitSet_partition (σ : Equiv.Perm E) :
       obtain ⟨k, hk⟩ := mem_orbit.mp haO
       rw [hk, mem_movedEdgeSet]
       rw [iterLeft_perm_eq]
-      exact Ising2DLambda.NecSuf.KacWard.moved_iterate_ne σ.injective
-        (mem_movedEdgeSet.mp he) k
+      exact permutation_moved_iterate σ (mem_movedEdgeSet.mp he) k
     · intro ha
       exact mem_biUnion.mpr
         ⟨movedOrbit σ a, mem_movedEdgeOrbitSet.mpr ⟨a, ha, rfl⟩, self_mem_orbit σ a⟩
