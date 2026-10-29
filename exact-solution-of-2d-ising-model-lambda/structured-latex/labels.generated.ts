@@ -512,6 +512,7 @@ export const ALL_LABELS = [
   "claim_real_algebraic_min_unique",
   "claim_real_algebraic_order_transitive",
   "claim_real_algebraic_order_trichotomy",
+  "claim_real_algebraic_rational_bounds",
   "claim_real_closed_sum_of_two_squares_is_square",
   "claim_real_closed_sum_of_two_squares_zero",
   "claim_real_logarithm_int_power",
