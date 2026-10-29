@@ -23,20 +23,20 @@ theorem movedOrbitWeight_phase_twist {L : ℕ} (a b : Bool)
     (turns : List Turn) (closing : Turn) {z : Qbar} (hz4 : z ^ 4 = -1)
     (hentry : ∀ e ∈ walk,
       entry e (σ e) =
-        (twistSign a b horizontal vertical (σ e) : Qbar) * phase e (σ e))
+        (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical (σ e) : Qbar) * phase e (σ e))
     (hperm : (walk.map σ).Perm walk)
     (hphase : (walk.map fun e => phase e (σ e)).prod =
       (turns.map (phaseOfTurn z)).prod * phaseOfTurn z closing) :
     (walk.map fun e => entry e (σ e)).prod =
       (boolSign (Bool.xor (a && parity horizontal walk) (b && parity vertical walk)) : Qbar) *
         z ^ ((turns.map turnValue).sum + turnValue closing) := by
-  have htwistInt := walkTwistSign_product a b horizontal vertical walk
+  have htwistInt := walkTwistSign_product_from_necSuf a b horizontal vertical walk
   have htwistQbar :
-      (walk.map fun e => (twistSign a b horizontal vertical e : Qbar)).prod =
+      (walk.map fun e => (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)).prod =
         (boolSign (Bool.xor (a && parity horizontal walk) (b && parity vertical walk)) : Qbar) := by
     have hcast :
-        (walk.map fun e => (twistSign a b horizontal vertical e : Qbar)).prod =
-          ((walk.map (twistSign a b horizontal vertical)).prod : Qbar) := by
+        (walk.map fun e => (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)).prod =
+          ((walk.map (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical)).prod : Qbar) := by
       clear hentry hperm hphase htwistInt
       induction walk with
       | nil => simp
@@ -48,7 +48,7 @@ theorem movedOrbitWeight_phase_twist {L : ℕ} (a b : Bool)
         z ^ ((turns.map turnValue).sum + turnValue closing) := by
     rw [hphase, closed_walk_rotation_phase hz4 turns closing]
   exact orbitEntryProduct_phase_twist_necSuf walk σ entry phase
-    (fun e => (twistSign a b horizontal vertical e : Qbar)) _ _
+    (fun e => (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical e : Qbar)) _ _
     hentry hperm htwistQbar hphaseTotal
 
 /-- 具体版が必要十分版の特殊化として得られることの記録。 -/
@@ -58,7 +58,7 @@ theorem movedOrbitWeight_phase_twist_from_necSuf {L : ℕ} (a b : Bool)
     (turns : List Turn) (closing : Turn) {z : Qbar} (hz4 : z ^ 4 = -1)
     (hentry : ∀ e ∈ walk,
       entry e (σ e) =
-        (twistSign a b horizontal vertical (σ e) : Qbar) * phase e (σ e))
+        (Ising2DLambda.NecSuf.KacWard.twistSign a b horizontal vertical (σ e) : Qbar) * phase e (σ e))
     (hperm : (walk.map σ).Perm walk)
     (hphase : (walk.map fun e => phase e (σ e)).prod =
       (turns.map (phaseOfTurn z)).prod * phaseOfTurn z closing) :

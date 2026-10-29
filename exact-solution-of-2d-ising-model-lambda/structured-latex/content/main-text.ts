@@ -80508,7 +80508,13 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         "選択側も同じ論法である。", math(String.raw`C\in\mathcal C^s_L(D,E;a,b)`), " を取る。",
                         ref("claim_selection_complement_sign_preserving_involution"), " により ",
                         math(String.raw`E\setminus C`), " は同じ符号集合に属し、",
-                        math(String.raw`E\setminus(E\setminus C)=C`), " である。従って ",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+E\setminus(E\setminus C)&=C
+&&\bigl(\because\ \blkref{claim_selection_complement_sign_preserving_involution}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "従って ",
                         math(String.raw`\{C,E\setminus C\}`), " は一元または二元で、上と同じ対合の論法により、",
                         "これらは符号 ", math(String.raw`s`), " の選択集合を互いに素に覆う。さらに ",
                         math(String.raw`E\ne\varnothing`), " なら同じ既証明により補集合対合は不動点を持たないので、",
