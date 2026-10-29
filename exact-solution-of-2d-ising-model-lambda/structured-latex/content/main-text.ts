@@ -87399,6 +87399,95 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_real_escape_claim_complex_realization_preserves_addition",
+              beforeFocus: [
+                {
+                  role: "prerequisiteDefinition",
+                  element: {
+                    id: "real_escape_def_complex_algebraic_realization",
+                    kind: "definition",
+                    title: { text: "実閉部分体の複素実現（複素数への脱出）" },
+                    labels: ["def_complex_algebraic_realization"],
+                    habitat: "C",
+                    realEscape: "実閉部分体の実現値を複素数の実部と虚部へ送り、代数的数全体を複素数として実現する。",
+                    statement: [
+                      paragraph([
+                        ref("def_real_closed_subfield"), " の ", math(String.raw`R\subset\overline{\mathbb Q}`),
+                        " と ", math(String.raw`\omega\in\overline{\mathbb Q}`),
+                        " を固定し、", ref("def_real_algebraic_cut_realization"),
+                        " の実現写像 ", math(String.raw`\rho_{R\to\mathbb R}:R\to\mathbb R`),
+                        " を使う。任意の ", math(String.raw`\xi\in\overline{\mathbb Q}`),
+                        " に一意な ", math(String.raw`a,b\in R`),
+                        " があり ", math(String.raw`\xi=a+b\omega`), " と書ける。",
+                        "実数を複素数の実部へ入れ、虚数単位 ", math(String.raw`i\in\mathbb C`),
+                        " を ", math(String.raw`i^2=-1`), " として、写像を定める。",
+                      ]),
+                      displayMath(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}:\overline{\mathbb Q}\to\mathbb C,\qquad
+\rho_{\overline{\mathbb Q}\to\mathbb C}(a+b\omega):=\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b).`),
+                      paragraph([
+                        "係数表示の一意性により右辺は ", math(String.raw`\xi`),
+                        " だけで定まり、この写像は well-defined である。",
+                      ]),
+                    ],
+                  },
+                },
+              ],
+              focus: {
+                id: "real_escape_claim_complex_realization_preserves_addition",
+                kind: "claim",
+                title: { text: "複素実現は加法を保つ" },
+                labels: ["claim_complex_realization_preserves_addition"],
+                habitat: "C",
+                realEscape: "代数的数の一意な二係数表示を実数の実現値へ送り、複素数の加法と比較する。",
+                verification: ["sagemath/check/complex-realization-preserves-addition"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`\xi,\eta\in\overline{\mathbb Q}`),
+                    " について ", ref("def_complex_algebraic_realization"),
+                    " の写像は次を満たす。",
+                  ]),
+                  displayMath(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi+\eta)
+=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)+\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta).`),
+                ],
+                proof: [
+                  paragraph([
+                    ref("def_real_closed_subfield"), " の一意表示により ",
+                    math(String.raw`\xi=a+b\omega`), "、", math(String.raw`\eta=c+d\omega`),
+                    " と置く。ここで ", math(String.raw`a,b,c,d\in R`), " である。",
+                    math(String.raw`R`), " は部分体なので ",
+                    math(String.raw`a+c,b+d\in R`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi+\eta
+&=(a+b\omega)+(c+d\omega)&&\bigl(\because\ \xi,\eta\text{ の表示}\bigr)\\
+&=(a+c)+(b+d)\omega&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配法則}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("def_real_closed_subfield"), " の一意性により、これが ",
+                    math(String.raw`\xi+\eta`), " の係数表示である。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi+\eta)
+&=\rho_{R\to\mathbb R}(a+c)+i\rho_{R\to\mathbb R}(b+d)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=\bigl(\rho_{R\to\mathbb R}(a)+\rho_{R\to\mathbb R}(c)\bigr)
+ +i\bigl(\rho_{R\to\mathbb R}(b)+\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\bigl(\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)\bigr)
+ +\bigl(\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)\bigr)
+&&\bigl(\because\ \mathbb C\text{ の加法の結合法則と交換法則}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)
+ +\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_thermodynamic_limit_def_open_square_free_energy_density",
               beforeFocus: [
                 {
@@ -87655,13 +87744,20 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
-                          "両辺から ",
-                          math(String.raw`\log_{\mathbb{R}}(1)`),
-                          " を引いて（",
-                          math(String.raw`\mathbb{R}`),
-                          " の加法群の移項）",
-                          math(String.raw`0=\log_{\mathbb{R}}(1)`),
-                          " を得る。次に ",
+                          "両辺から ", math(String.raw`\log_{\mathbb R}(1)`),
+                          " を引くと",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+0
+&=\log_{\mathbb R}(1)-\log_{\mathbb R}(1)
+&&\bigl(\because\ \mathbb R\text{ の加法逆元}\bigr)\\
+&=\log_{\mathbb R}(1)+\log_{\mathbb R}(1)-\log_{\mathbb R}(1)
+&&\bigl(\because\ \log_{\mathbb R}(1)=2\log_{\mathbb R}(1)\text{ を上で示した}\bigr)\\
+&=\log_{\mathbb R}(1)
+&&\bigl(\because\ \mathbb R\text{ の加法の結合法則と逆元}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "次に ",
                           math(String.raw`n\in\mathbb{N}`),
                           " について ",
                           math(String.raw`\log_{\mathbb{R}}(u^{n})=\iota(n)\cdot\log_{\mathbb{R}}(u)`),
@@ -87717,13 +87813,20 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &&(\because\ \text{乗法を加法へ移す。}\blkref{def_real_logarithm})
 \end{aligned}`),
                         paragraph([
-                          "両辺から ",
-                          math(String.raw`\log_{\mathbb{R}}(v)`),
-                          " を引いて（",
-                          math(String.raw`\mathbb{R}`),
-                          " の加法群の移項）",
-                          math(String.raw`-\log_{\mathbb{R}}(v)=\log_{\mathbb{R}}(v^{-1})`),
-                          " を得る。最後に主張を ",
+                          "上の等号を ", math(String.raw`\mathbb R`),
+                          " の加法群で移項すると",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+-\log_{\mathbb R}(v)
+&=0-\log_{\mathbb R}(v)
+&&\bigl(\because\ \mathbb R\text{ の加法単位元}\bigr)\\
+&=\log_{\mathbb R}(v)+\log_{\mathbb R}(v^{-1})-\log_{\mathbb R}(v)
+&&\bigl(\because\ 0=\log_{\mathbb R}(v)+\log_{\mathbb R}(v^{-1})\text{ を上で示した}\bigr)\\
+&=\log_{\mathbb R}(v^{-1})
+&&\bigl(\because\ \mathbb R\text{ の加法の結合法則と逆元}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          "最後に主張を ",
                           math(String.raw`k`),
                           " の符号で分ける。",
                           math(String.raw`k=n\ge0`),
