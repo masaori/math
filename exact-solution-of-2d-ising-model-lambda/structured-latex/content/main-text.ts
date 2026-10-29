@@ -47526,7 +47526,13 @@ s-r&=2/n&&(\because\ r,s\text{ の定義と }\mathbb Q\text{ の四則})\\
 &<\varepsilon&&(\because\ n=2f+1,\ \varepsilon=e/f,\ e\ge1).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`0<s-r`), " も有理数の四則で従う。",
+                    "幅の正値性は、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+0&<2/n&&(\because\ n=2f+1>0)\\
+&=s-r&&(\because\ r,s\text{ の定義と }\mathbb Q\text{ の四則}).
+\end{aligned}`),
+                  paragraph([
                     "構成は有限集合と ", math(String.raw`\mathbb Q`), "、",
                     math(String.raw`R\subset\overline{\mathbb Q}`),
                     " の順序だけを用いる。",
@@ -87144,6 +87150,151 @@ B-A&=\iota_{\mathbb Q\to\mathbb R}((s_a-r_a)+(s_b-r_b))
                     " について成り立つ。実数内で正の有理数が零へ近づけることから差は零である。",
                     "この最後の結論は実数の Archimedes 性を使う実数体への脱出である。",
                   ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_cut_realization_preserves_multiplication",
+              focus: {
+                id: "real_escape_claim_cut_realization_preserves_multiplication",
+                kind: "claim",
+                title: { text: "下切断による実現写像は乗法を保つ" },
+                labels: ["claim_cut_realization_preserves_multiplication"],
+                habitat: "R",
+                realEscape: "有理下切断の実数上限で定めた積の実現像と二つの実現像の積を、実数の Archimedes 性で比較する。",
+                verification: ["sagemath/check/cut-realization-preserves-multiplication"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`a,b\in R`), " について、",
+                    ref("def_real_closed_subfield"), " の体の閉性により ",
+                    math(String.raw`ab\in R`), " であり、",
+                  ]),
+                  displayMath(String.raw`\rho_{R\to\mathbb R}(ab)=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(b)`),
+                  paragraph([
+                    "が成り立つ。左辺の積は ", math(String.raw`R`),
+                    "、右辺の積は ", math(String.raw`\mathbb R`), " である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "まず ", math(String.raw`0<_R a,0<_R b`), " とする。",
+                    "正の元の逆元も正であることと ",
+                    ref("claim_real_algebraic_rational_bounds"),
+                    " により、正の有理数 ", math(String.raw`c_a,c_b`),
+                    " で ", math(String.raw`c_a<_R a`), "、",
+                    math(String.raw`c_b<_R b`), " となるものがある。",
+                    "逆元の有理上界を正に取り、その逆数を選べばよい。",
+                    ref("claim_real_algebraic_rational_pinching"),
+                    " により、任意の ",
+                    math(String.raw`\eta\in\mathbb Q_{>0}`), " に対し ",
+                    math(String.raw`0<r_a<_R a<_R s_a`), "、",
+                    math(String.raw`0<r_b<_R b<_R s_b`), "、",
+                    math(String.raw`0<s_a-r_a<\eta`), "、",
+                    math(String.raw`0<s_b-r_b<\eta`),
+                    " を満たす ", math(String.raw`r_a,s_a,r_b,s_b\in\mathbb Q`), " を取れる。",
+                    "実際、挟み込みの幅を ",
+                    math(String.raw`\min\{\eta,c_a,c_b,1\}`), " より小さくすればよい。",
+                    "各挟み込みの左端が正であることは差の比較から従う。",
+                  ]),
+                  paragraph([
+                    ref("claim_real_algebraic_rational_bounds"),
+                    " により ", math(String.raw`a,b`), " の有理上界がある。",
+                    "それぞれの上界より一以上大きい ", math(String.raw`M\in\mathbb Q_{>0}`),
+                    " を固定し、上の挟み込みをさらに ",
+                    math(String.raw`s_a,s_b<M`), " となるように取る。",
+                    ref("def_real_algebraic_strict_order"),
+                    " の正錐の積による閉性と ",
+                    ref("claim_real_algebraic_order_transitive"), " から",
+                  ]),
+                  displayMath(String.raw`r_ar_b<_R ab<_R s_as_b\quad(\because\ \blkref{def_real_algebraic_strict_order}\text{ の正錐の積と }\blkref{claim_real_algebraic_order_transitive})`),
+                  paragraph([
+                    ref("claim_cut_realization_preserves_addition"),
+                    " の証明にある下切断の挟み込みを ",
+                    math(String.raw`a,b,ab`), " に適用する。",
+                    ref("def_real_logarithm"),
+                    " の有理数の包含写像は順序と乗法を保つ。",
+                    "従って実数の順序と正数の積の単調性により、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\iota_{\mathbb Q\to\mathbb R}(r_ar_b)
+&\le\rho_{R\to\mathbb R}(ab)\le\iota_{\mathbb Q\to\mathbb R}(s_as_b)
+&&(\because\ r_ar_b<_R ab<_R s_as_b\text{ と切断の挟み込み})\\
+\iota_{\mathbb Q\to\mathbb R}(r_ar_b)
+&\le\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(b)
+\le\iota_{\mathbb Q\to\mathbb R}(s_as_b)
+&&(\because\ a,b\text{ の切断の挟み込みと正数の積の単調性}).
+\end{aligned}`),
+                  paragraph([
+                    "両実数を挟む区間の幅は ",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+s_as_b-r_ar_b
+&=(s_a-r_a)s_b+r_a(s_b-r_b)
+&&(\because\ \mathbb Q\text{ の分配律})\\
+&<M\eta+M\eta
+&&(\because\ 0<r_a<s_a<M,\ 0<s_b<M\text{ と幅の選択})\\
+&=2M\eta
+&&(\because\ \mathbb Q\text{ の四則}).
+\end{aligned}`),
+                  paragraph([
+                    "任意の正の有理数 ", math(String.raw`\eta`),
+                    " で両実数の差の絶対値が ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(2M\eta)`),
+                    " より小さい。実数の Archimedes 性によりこの差は零である。",
+                  ]),
+                  paragraph([
+                    "次に ", math(String.raw`a=0`), " または ",
+                    math(String.raw`b=0`), " なら、",
+                    ref("claim_cut_realization_agrees_on_rationals"),
+                    " を ", math(String.raw`0\in\mathbb Q`),
+                    " に適用して両辺とも零となる。",
+                  ]),
+                  paragraph([
+                    "最後に負の元を扱う。任意の ", math(String.raw`x\in R`),
+                    " に対して ", ref("claim_cut_realization_preserves_addition"),
+                    " と ", ref("claim_cut_realization_agrees_on_rationals"), " より",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(x)+\rho_{R\to\mathbb R}(-x)
+&=\rho_{R\to\mathbb R}(x+(-x))
+&&(\because\ \blkref{claim_cut_realization_preserves_addition})\\
+&=\rho_{R\to\mathbb R}(0)
+&&(\because\ R\text{ の加法逆元})\\
+&=0
+&&(\because\ \blkref{claim_cut_realization_agrees_on_rationals}).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`\rho_{R\to\mathbb R}(-x)=-\rho_{R\to\mathbb R}(x)`),
+                    " である。", ref("def_real_algebraic_strict_order"),
+                    " の三分律で非零の ", math(String.raw`a,b`),
+                    " の符号を分ける。", math(String.raw`a<_R0<_Rb`),
+                    " の場合、", math(String.raw`a':=-a`),
+                    " は正であり、正の二元の結果から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(ab)
+&=\rho_{R\to\mathbb R}(-(a'b))&&(\because\ a'=-a)\\
+&=-\rho_{R\to\mathbb R}(a'b)&&(\because\ \blkref{claim_cut_realization_preserves_addition}\text{ と零の実現})\\
+&=-\rho_{R\to\mathbb R}(a')\rho_{R\to\mathbb R}(b)&&(\because\ \text{正の二元の場合})\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(b)&&(\because\ a'=-a\text{ と加法逆元の実現}).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`0<_Ra`), "、", math(String.raw`b<_R0`),
+                    " の場合は因子を交換して同じ論法を適用する。",
+                    math(String.raw`a<_R0`), "、", math(String.raw`b<_R0`),
+                    " の場合、", math(String.raw`a':=-a`), "、",
+                    math(String.raw`b':=-b`), " はともに正であり、",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(ab)
+&=\rho_{R\to\mathbb R}(a'b')&&(\because\ a'=-a,\ b'=-b\text{ と }R\text{ の符号規則})\\
+&=\rho_{R\to\mathbb R}(a')\rho_{R\to\mathbb R}(b')&&(\because\ \text{正の二元の場合})\\
+&=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(b)&&(\because\ \text{両因子の加法逆元の実現}).
+\end{aligned}`),
                 ],
               },
             },

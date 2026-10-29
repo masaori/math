@@ -74,6 +74,7 @@ export const ALL_LABELS = [
   "claim_cut_flag_two_coordinate_boundary_completeness",
   "claim_cut_realization_agrees_on_rationals",
   "claim_cut_realization_preserves_addition",
+  "claim_cut_realization_preserves_multiplication",
   "claim_cyclic_shift_adjacent_integer_sum",
   "claim_cyclic_total_turning_multiple_of_four",
   "claim_determinant_polynomial_square_root_exists",
