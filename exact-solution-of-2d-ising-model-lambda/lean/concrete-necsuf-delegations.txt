@@ -36,4 +36,3 @@ Ising2DLambda.KacWard.taggedDifference_active_iff_short
 Ising2DLambda.KacWard.taggedDifference_active_mates
 Ising2DLambda.KacWard.taggedDifference_incident_iff
 Ising2DLambda.KacWard.taggedDifference_local_degree
-Ising2DLambda.KacWard.vertexIncidentEdgeTraversal_even

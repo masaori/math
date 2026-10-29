@@ -8,7 +8,6 @@
 閉性による巡回的な添字の付け替えは必要十分版と同じ手順で行う。
 -/
 import Ising2DLambda.KacWard.AdjacentCellsBoundaryParity
-import Ising2DLambda.NecSuf.KacWard.VertexIncidentEdgeTraversalEven
 import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
@@ -41,6 +40,28 @@ theorem vertexIncidentEdgeTraversal_even
     rcases hunit k hk with h | h | h | h <;>
       simp only [crossesRowLevel, crossesColLevel] <;>
       split_ifs <;> omega
+  let f : ℕ → ℕ := fun k => if row k = a ∧ col k = b then 1 else 0
+  have hshift_all : ∀ m : ℕ,
+      f 0 + ∑ k ∈ Finset.range m, f (k + 1) =
+        (∑ k ∈ Finset.range m, f k) + f m := by
+    intro m
+    induction m with
+    | zero => simp
+    | succ m ih =>
+        rw [Finset.sum_range_succ]
+        calc
+          f 0 + ((∑ k ∈ Finset.range m, f (k + 1)) + f (m + 1)) =
+              (f 0 + ∑ k ∈ Finset.range m, f (k + 1)) + f (m + 1) := by omega
+          _ = ((∑ k ∈ Finset.range m, f k) + f m) + f (m + 1) := by rw [ih]
+          _ = (∑ k ∈ Finset.range (m + 1), f k) + f (m + 1) := by
+                rw [Finset.sum_range_succ]
+  have hend : f n = f 0 := by
+    simp [f, hclosedRow, hclosedCol]
+  have hshift : ∑ k ∈ Finset.range n, f (k + 1) =
+      ∑ k ∈ Finset.range n, f k := by
+    have h := hshift_all n
+    rw [hend] at h
+    omega
   unfold verticalEdgeTraversalCount horizontalEdgeTraversalCount vertexVisitCount
   rw [← Finset.sum_add_distrib, ← Finset.sum_add_distrib,
     ← Finset.sum_add_distrib]
@@ -53,9 +74,9 @@ theorem vertexIncidentEdgeTraversal_even
       exact hpoint k (Finset.mem_range.mp hk)
     _ = 2 * ∑ k ∈ Finset.range n,
         (if row k = a ∧ col k = b then 1 else 0) := by
-      apply Ising2DLambda.NecSuf.KacWard.closed_endpoint_incidence_double_necSuf
-      constructor <;> intro h
-      · simpa [hclosedRow, hclosedCol] using h
-      · simpa [hclosedRow, hclosedCol] using h
+      change (∑ k ∈ Finset.range n, (f k + f (k + 1))) =
+        2 * ∑ k ∈ Finset.range n, f k
+      rw [Finset.sum_add_distrib, hshift]
+      omega
 
 end Ising2DLambda.KacWard

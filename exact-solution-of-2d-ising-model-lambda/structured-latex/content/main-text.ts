@@ -79031,8 +79031,17 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " または ",
                         math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " が成り立つ。第一の場合、もし ",
                         math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"),
-                        " により ", math(String.raw`\varphi(\iota(\vec e))=\iota(\vec e)=\varphi(\vec f)`),
-                        " である。置換の単射性（", ref("def_row_permutation"), "）から ",
+                        " により次の式鎖を得る。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\varphi(\iota(\vec e))
+&=\iota(\vec e)
+&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)\\
+&=\varphi(\vec f)
+&&\bigl(\because\ \varphi(\vec f)=\iota(\vec e)\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "置換の単射性（", ref("def_row_permutation"), "）から ",
                         math(String.raw`\iota(\vec e)=\vec f`), "、従って ",
                         math(String.raw`\varphi(\vec f)=\vec f`), " となり ",
                         math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
