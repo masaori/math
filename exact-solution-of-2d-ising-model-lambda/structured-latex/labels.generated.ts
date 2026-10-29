@@ -153,6 +153,7 @@ export const ALL_LABELS = [
   "claim_gauged_terminal_matrix_skew",
   "claim_global_spin_reversal_preserves_broken_edge",
   "claim_gluing_restriction_family",
+  "claim_high_temperature_partition_bounds",
   "claim_high_temperature_polynomial_identity",
   "claim_high_temperature_sector_decomposition",
   "claim_hole_free_cell_set_euler_number_one",

@@ -85308,10 +85308,19 @@ P_L^{a,b}
 &&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr).
 \end{aligned}`),
                   paragraph([
-                    math(String.raw`\overline{\mathbb Q}[x]`),
-                    " の零積性（", ref("claim_qbar_polynomial_zero_product"),
-                    "）を ", math(String.raw`(F_L^{a,b}-2^NQ_L^{a,b})(F_L^{a,b}+2^NQ_L^{a,b})=0`),
-                    " に適用すると、主張する二つの符号のいずれかを得る。",
+                    "上の平方の等式から、", math(String.raw`\overline{\mathbb Q}[x]`), " で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(F_L^{a,b}-2^NQ_L^{a,b})(F_L^{a,b}+2^NQ_L^{a,b})
+&=(F_L^{a,b})^2-(2^NQ_L^{a,b})^2
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配律}\bigr)\\
+&=0
+&&\bigl(\because\ \text{上で示した平方の等式}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_qbar_polynomial_zero_product"), " をこの積へ適用すると、",
+                    math(String.raw`F_L^{a,b}=2^NQ_L^{a,b}`), " または ",
+                    math(String.raw`F_L^{a,b}=-2^NQ_L^{a,b}`), " を得る。",
                   ]),
                 ],
               },
@@ -85559,6 +85568,116 @@ Z_L(q)
 &&\bigl(\because\ M_L(q)\text{ は四つの値の最大}\bigr)\\
 &=2M_L(q)
 &&\bigl(\because\ |\mathcal S|=4\text{、}\blkref{def_spin_structures}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_finite_fourier_claim_high_temperature_partition_bounds",
+              focus: {
+                id: "finite_fourier_claim_high_temperature_partition_bounds",
+                kind: "claim",
+                title: { text: "自己双対点より高温側での分配多項式の両側評価" },
+                labels: ["claim_high_temperature_partition_bounds"],
+                habitat: "Q",
+                verification: ["sagemath/check/high-temperature-partition-bounds"],
+                statement: [
+                  paragraph([
+                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と有理数 ",
+                    math(String.raw`q\in\mathbb Q`), " で ", math(String.raw`0<q<1`),
+                    " かつ ", math(String.raw`q^2+2q-1>0`), " を満たすものを取る。",
+                    ref("def_signed_even_subgraph_polynomial"), " の四つの値の絶対値の最大を ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q):=\max_{(a,b)\in\mathcal S}|Q_L^{a,b}(q)|\in\mathbb Q`),
+                    " と書く。このとき ", ref("def_partition_polynomial"), " の値は",
+                  ]),
+                  displayMath(String.raw`\frac14M_L^{\mathrm{abs}}(q)\le Z_L(q)\le2M_L^{\mathrm{abs}}(q)`),
+                  paragraph(["を満たす。絶対値と順序は有理数上のものであり、実数体・複素数体は使わない。"]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`t:=\mathrm{KW}(q)=(1-q)/(1+q)\in\mathbb Q`), " と置く（",
+                    ref("def_kw_dual_transform"), "、", ref("claim_kw_dual_preserves_unit_interval"),
+                    "）。有理数の四則で",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+t^2+2t-1
+&=\left(\frac{1-q}{1+q}\right)^2+2\frac{1-q}{1+q}-1
+&&\bigl(\because\ t=(1-q)/(1+q)\bigr)\\
+&=\frac{(1-q)^2+2(1-q)(1+q)-(1+q)^2}{(1+q)^2}
+&&\bigl(\because\ \mathbb Q\text{ の通分}\bigr)\\
+&=-\frac{2(q^2+2q-1)}{(1+q)^2}
+&&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
+&<0
+&&\bigl(\because\ q^2+2q-1>0,\ (1+q)^2>0\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`0<t<1`), " かつ ", math(String.raw`t^2+2t-1<0`),
+                    " なので、", ref("claim_signed_even_subgraph_rational_sign"),
+                    " により四つの ", math(String.raw`Q_L^{a,b}(t)`), " は正である。",
+                    math(String.raw`M_L(t):=\max_{(a,b)\in\mathcal S}Q_L^{a,b}(t)\in\mathbb Q_{>0}`),
+                    " と置く。", ref("claim_low_temperature_partition_bounds"), " より ",
+                    math(String.raw`Z_L(t)\ge M_L(t)/2`), " である。",
+                  ]),
+                  paragraph([
+                    ref("def_sector_generating_polynomial"), " の係数は非負整数なので、",
+                    math(String.raw`G_L^{c,d}(t)\ge0`), " である。",
+                    ref("claim_partition_value_dual_factorization"), " と ",
+                    ref("claim_low_temperature_trivial_sector_expression"), " を用いると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\frac{(1+q)^{2L^2}}{2^{L^2}}\sum_{(c,d)\in\mathcal S}G_L^{c,d}(t)
+&&\bigl(\because\ \blkref{claim_partition_value_dual_factorization}\bigr)\\
+&\ge\frac{(1+q)^{2L^2}}{2^{L^2}}G_L^{0,0}(t)
+&&\bigl(\because\ G_L^{c,d}(t)\ge0\bigr)\\
+&=\frac{(1+q)^{2L^2}}{2^{L^2+1}}Z_L(t)
+&&\bigl(\because\ \blkref{claim_low_temperature_trivial_sector_expression}\bigr)\\
+&\ge\frac{(1+q)^{2L^2}}{2^{L^2+2}}M_L(t)
+&&\bigl(\because\ \blkref{claim_low_temperature_partition_bounds}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    ref("claim_signed_even_subgraph_duality_sign"), " を ",
+                    math(String.raw`x=q`), " で評価する。",
+                    "両辺の値は有理数に属するので、",
+                    ref("def_algebraic_numbers"), " の有理数から代数的数への単射により、",
+                    "以下の等号は有理数の等号である。",
+                    math(String.raw`(1+q)^{2L^2}/2^{L^2}>0`), " であり、",
+                    math(String.raw`Q_L^{a,b}(t)>0`), " だから、各 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\frac{(1+q)^{2L^2}}{2^{L^2}}Q_L^{a,b}(t)
+&=\epsilon_L^{a,b}Q_L^{a,b}(q)
+&&\bigl(\because\ \blkref{claim_signed_even_subgraph_duality_sign}\bigr)\\
+&=|Q_L^{a,b}(q)|
+&&\bigl(\because\ \text{左辺は正で }\epsilon_L^{a,b}\in\{1,-1\}\bigr).
+\end{aligned}`),
+                  paragraph(["四つの値の最大を取ると、正の数による乗法と最大値の定義から"]),
+                  displayMath(String.raw`\begin{aligned}
+\frac{(1+q)^{2L^2}}{2^{L^2}}M_L(t)
+&=\max_{(a,b)\in\mathcal S}\frac{(1+q)^{2L^2}}{2^{L^2}}Q_L^{a,b}(t)
+&&\bigl(\because\ \text{正の有理数倍は最大値を保つ}\bigr)\\
+&=\max_{(a,b)\in\mathcal S}|Q_L^{a,b}(q)|
+&&\bigl(\because\ \text{各 }(a,b)\text{ について示した等式}\bigr)\\
+&=M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ M_L^{\mathrm{abs}}(q)\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph(["この等式を上の下界へ代入して ", math(String.raw`Z_L(q)\ge M_L^{\mathrm{abs}}(q)/4`), " を得る。"]),
+                  paragraph([ref("claim_finite_torus_polynomial"), " を ", math(String.raw`x=q`), " で評価し、上界を得る。"]),
+                  displayMath(String.raw`\begin{aligned}
+Z_L(q)
+&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}(q)
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
+&\le\frac12\sum_{(a,b)\in\mathcal S}|Q_L^{a,b}(q)|
+&&\bigl(\because\ r\le|r|\ (r\in\mathbb Q)\bigr)\\
+&\le\frac12\sum_{(a,b)\in\mathcal S}M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ M_L^{\mathrm{abs}}(q)\text{ は四つの絶対値の最大}\bigr)\\
+&=2M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ |\mathcal S|=4,\ \blkref{def_spin_structures}\bigr).
 \end{aligned}`),
                 ],
               },
