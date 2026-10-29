@@ -117,7 +117,19 @@ theorem qbarPolynomial_noninjective_inner_sum_zero
           _ = f b := hf
       · exact congrArg f (transpositionPerm_apply_of_ne a b hia hib)
   have htt (i : J) : t (t i) = i := by
-    exact NecSuf.AlgebraicEigenvalue.transpositionOn_involutive a b i
+    by_cases hia : i = a
+    · subst i
+      calc
+        t (t a) = t b := congrArg t (transpositionPerm_apply_left a b)
+        _ = a := transpositionPerm_apply_right a b
+    · by_cases hib : i = b
+      · subst i
+        calc
+          t (t b) = t a := congrArg t (transpositionPerm_apply_right a b)
+          _ = b := transpositionPerm_apply_left a b
+      · calc
+          t (t i) = t i := congrArg t (transpositionPerm_apply_of_ne a b hia hib)
+          _ = i := transpositionPerm_apply_of_ne a b hia hib
   -- 二重合成を点ごとに計算し、対合性を得る。
   have hF : Function.Involutive F := by
     intro σ

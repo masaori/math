@@ -79539,7 +79539,10 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "となり ", math(String.raw`\operatorname{Even}_L(B_C)`), " である。また辺ごとの所属を ",
                         math(String.raw`D,C,E\setminus C`), " の三場合に分けると",
                       ]),
-                      displayMath(String.raw`A_C\cap B_C=D,\qquad A_C\mathbin\triangle B_C=E`),
+                      displayMath(String.raw`\begin{aligned}
+A_C\cap B_C&=D&&\bigl(\because\ D\cap E=\varnothing,\ C\subseteq E\bigr)\\
+A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
+\end{aligned}`),
                       paragraph(["なので ", math(String.raw`(A_C,B_C)\in\mathcal P_L(D,E)`), " である。"]),
                       displayMath(String.raw`\begin{aligned}
 \Theta(A_C,B_C)&=A_C\setminus D&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
