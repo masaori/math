@@ -87530,9 +87530,12 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 \rho_{\overline{\mathbb Q}\to\mathbb C}(\xi\eta)
 &=\rho_{R\to\mathbb R}(ac-bd)+i\rho_{R\to\mathbb R}(ad+bc)
 &&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
-&=\rho_{R\to\mathbb R}(ac)-\rho_{R\to\mathbb R}(bd)
+&=\rho_{R\to\mathbb R}(ac)+\rho_{R\to\mathbb R}(-bd)
  +i\bigl(\rho_{R\to\mathbb R}(ad)+\rho_{R\to\mathbb R}(bc)\bigr)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\bigr)\\
+&=\rho_{R\to\mathbb R}(ac)-\rho_{R\to\mathbb R}(bd)
+ +i\bigl(\rho_{R\to\mathbb R}(ad)+\rho_{R\to\mathbb R}(bc)\bigr)
+&&\bigl(\because\ \blkref{claim_cut_realization_preserves_addition}\text{ と }\blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
 &=\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(c)
  -\rho_{R\to\mathbb R}(b)\rho_{R\to\mathbb R}(d)
  +i\bigl(\rho_{R\to\mathbb R}(a)\rho_{R\to\mathbb R}(d)
@@ -87558,6 +87561,65 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
 &&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
 &=1+i0&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\bigr)\\
 &=1&&\bigl(\because\ \mathbb C\text{ の零元}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_complex_realization_injective",
+              focus: {
+                id: "real_escape_claim_complex_realization_injective",
+                kind: "claim",
+                title: { text: "複素実現は単射である" },
+                labels: ["claim_complex_realization_injective"],
+                habitat: "C",
+                realEscape: "実閉部分体の実現写像の単射性を、複素数の実部と虚部を通じて代数的数の二係数表示へ移す。",
+                verification: ["sagemath/check/complex-realization-injective"],
+                statement: [
+                  paragraph([
+                    ref("def_complex_algebraic_realization"), " の写像 ",
+                    math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}:\overline{\mathbb Q}\to\mathbb C`),
+                    " は単射である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`\xi,\eta\in\overline{\mathbb Q}`),
+                    " について ",
+                    math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)=\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)`),
+                    " と仮定する。",
+                    ref("def_real_closed_subfield"), " の一意表示により ",
+                    math(String.raw`\xi=a+b\omega`), "、",
+                    math(String.raw`\eta=c+d\omega`),
+                    " と置く。ただし ", math(String.raw`a,b,c,d\in R`), " である。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{R\to\mathbb R}(a)+i\rho_{R\to\mathbb R}(b)
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\xi)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr)\\
+&=\rho_{\overline{\mathbb Q}\to\mathbb C}(\eta)
+&&\bigl(\because\ \text{仮定}\bigr)\\
+&=\rho_{R\to\mathbb R}(c)+i\rho_{R\to\mathbb R}(d)
+&&\bigl(\because\ \blkref{def_complex_algebraic_realization}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "複素数の実部と虚部の一意性から ",
+                    math(String.raw`\rho_{R\to\mathbb R}(a)=\rho_{R\to\mathbb R}(c)`),
+                    " および ",
+                    math(String.raw`\rho_{R\to\mathbb R}(b)=\rho_{R\to\mathbb R}(d)`),
+                    " である。", ref("claim_cut_realization_preserves_strict_order"),
+                    " の単射性より ", math(String.raw`a=c`), " および ",
+                    math(String.raw`b=d`), " となる。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi
+&=a+b\omega&&\bigl(\because\ \xi\text{ の係数表示}\bigr)\\
+&=c+d\omega&&\bigl(\because\ a=c,\ b=d\bigr)\\
+&=\eta&&\bigl(\because\ \eta\text{ の係数表示}\bigr).
 \end{aligned}`),
                 ],
               },
