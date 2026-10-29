@@ -85191,8 +85191,20 @@ z=z^{-1}
                   paragraph([
                     "各 ", math(String.raw`F_O`), " と ", math(String.raw`\Delta_O`),
                     " の定数項は一である（", ref("claim_dispersion_special_mode_squares"),
-                    "、", ref("def_dispersion_polynomial"), "）。有限積の定数項は定数項の積なので ",
-                    math(String.raw`\mathrm{ac}_0(P_L^{a,b})=1`), " である。",
+                    "、", ref("def_dispersion_polynomial"), "）。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_0(P_L^{a,b})
+&=\mathrm{ac}_0\!\left(\prod_{|O|=1}F_O\cdot\prod_{|O|=2}\Delta_O\cdot\prod_{|O|=4}\Delta_O^2\right)
+&&\bigl(\because\ P_L^{a,b}\text{ の定義}\bigr)\\
+&=\prod_{|O|=1}\mathrm{ac}_0(F_O)\cdot\prod_{|O|=2}\mathrm{ac}_0(\Delta_O)\cdot\prod_{|O|=4}\mathrm{ac}_0(\Delta_O)^2
+&&\bigl(\because\ \text{有限積の定数項は各因子の定数項の積}\bigr)\\
+&=\prod_{|O|=2}\mathrm{ac}_0(\Delta_O)\cdot\prod_{|O|=4}\mathrm{ac}_0(\Delta_O)^2
+&&\bigl(\because\ F_O\text{ の定義から定数項は一}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_dispersion_polynomial}\text{ から }\mathrm{ac}_0(\Delta_O)=1\bigr).
+\end{aligned}`),
+                  paragraph([
                     ref("claim_determinant_polynomial_square_root_exists"),
                     " により ", math(String.raw`Q_L^{a,b}`),
                     " も同じ多項式の定数項一の平方根である。", ref("claim_qbar_polynomial_square_root_unique"),
