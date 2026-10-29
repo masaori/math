@@ -80703,8 +80703,10 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
 &&\bigl(\because\ \Psi\text{ の定義の二回の適用}\bigr)\\
 &=\bigl\{\,\iota(\iota(\vec e)),\ \iota(\iota(\vec f))\,\bigr\}
 &&\bigl(\because\ \text{準備の第二の事実}\bigr)\\
-&=\{\vec e,\vec f\}=P
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
+&=\{\vec e,\vec f\}
+&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
+&=P
+&&\bigl(\because\ P=\{\vec e,\vec f\}\text{ の定義}\bigr)
 \end{aligned}`),
                       paragraph([
                         "同じ計算を ", math(String.raw`\mathcal T(\varphi)`), " と ",

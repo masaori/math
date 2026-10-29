@@ -9,7 +9,6 @@
 import Mathlib.Tactic
 import Ising2DLambda.FisherZero.EvenSubgraphSpinSum
 import Ising2DLambda.KacWard.Basic
-import Ising2DLambda.NecSuf.KacWard.ReversalFreeMovedSupportEven
 
 namespace Ising2DLambda.KacWard
 
@@ -59,7 +58,7 @@ private lemma same_base_or_reversal {L : ℕ} {e f : OrientedEdge L}
     (hbase : e.1 = f.1) : e = f ∨ reversal e = f := by
   rcases e with ⟨e, false | true⟩ <;> rcases f with ⟨f, false | true⟩ <;>
     change e = f at hbase <;> subst f <;>
-    simp [reversal, Ising2DLambda.NecSuf.KacWard.reverseBool]
+    simp [reversal]
 
 /-- 反転対を含まなければ、台の各辺には動く向き付き辺がちょうど一つ載る。 -/
 noncomputable def movedSupportEquiv {L : ℕ} (σ : Equiv.Perm (OrientedEdge L))
@@ -89,25 +88,43 @@ theorem reversalFreeMovedSupport_even (L : ℕ) [NeZero L]
     (hnext : ∀ e, e ∈ movedOrientedEdges σ → orientedSource (σ e) = orientedTarget e) :
     IsEvenEdgeSubset L (movedEdgeSupport σ) := by
   intro v
-  have h := Ising2DLambda.NecSuf.KacWard.supportIncidence_even_necSuf
-    (E := {e // e ∈ movedEdgeSupport σ})
-    (O := {e // e ∈ movedOrientedEdges σ})
-    (fun e ↦ boundary0 L e.1) (fun e ↦ boundary1 L e.1)
-    (fun e ↦ orientedSource e.1) (fun e ↦ orientedTarget e.1)
-    (movedSupportEquiv σ hfree) (movedPermutation σ) (by
-      intro e
-      rcases e with ⟨e, he⟩
-      let o := movedSupportEquiv σ hfree ⟨e, he⟩
-      have hproject := (movedSupportEquiv σ hfree).symm_apply_apply ⟨e, he⟩
-      have hbase : o.1.1 = e := congrArg Subtype.val hproject
-      change (boundary0 L e, boundary1 L e) =
-          (orientedSource o.1, orientedTarget o.1) ∨
-        (boundary0 L e, boundary1 L e) =
-          (orientedTarget o.1, orientedSource o.1)
-      cases hdirection : o.1.2 <;>
-        simp [orientedSource, orientedTarget, hdirection, hbase]) (by
+  let lift := movedSupportEquiv σ hfree
+  let cycle := movedPermutation σ
+  let incoming : ℕ := ∑ o : {e // e ∈ movedOrientedEdges σ},
+    if orientedTarget o.1 = v then 1 else 0
+  have h : Even (∑ e : {e // e ∈ movedEdgeSupport σ},
+      ((if boundary0 L e.1 = v then 1 else 0) +
+        (if boundary1 L e.1 = v then 1 else 0))) := by
+    refine ⟨incoming, ?_⟩
+    calc
+      ∑ e : {e // e ∈ movedEdgeSupport σ},
+          ((if boundary0 L e.1 = v then 1 else 0) +
+            (if boundary1 L e.1 = v then 1 else 0)) =
+          ∑ o : {e // e ∈ movedOrientedEdges σ},
+            ((if orientedSource o.1 = v then 1 else 0) +
+              (if orientedTarget o.1 = v then 1 else 0)) := by
+        apply Fintype.sum_equiv lift
         intro e
-        exact hnext e e.property) v
+        have hproject := lift.symm_apply_apply e
+        have hbase : (lift e).1.1 = e.1 := congrArg Subtype.val hproject
+        cases hdirection : (lift e).1.2 <;>
+          simp [orientedSource, orientedTarget, hdirection, hbase, Nat.add_comm]
+      _ = (∑ o : {e // e ∈ movedOrientedEdges σ},
+            if orientedSource o.1 = v then 1 else 0) + incoming := by
+        simp only [incoming, Finset.sum_add_distrib]
+      _ = (∑ o : {e // e ∈ movedOrientedEdges σ},
+            if orientedSource (cycle o).1 = v then 1 else 0) + incoming := by
+        congr 1
+        exact (Fintype.sum_equiv cycle
+          (fun o : {e // e ∈ movedOrientedEdges σ} =>
+            if orientedSource (cycle o).1 = v then 1 else 0)
+          (fun o : {e // e ∈ movedOrientedEdges σ} =>
+            if orientedSource o.1 = v then 1 else 0) (fun _ => rfl)).symm
+      _ = incoming + incoming := by
+        congr 1
+        apply Finset.sum_congr rfl
+        intro o _
+        exact congrArg (fun w : Vertex L => if w = v then 1 else 0) (hnext o.1 o.property)
   rw [edgeSubsetIncidenceCount]
   have sum_support (f : Edge L → ℕ) :
       (∑ e : {e // e ∈ movedEdgeSupport σ}, f e.1) = ∑ e ∈ movedEdgeSupport σ, f e := by
