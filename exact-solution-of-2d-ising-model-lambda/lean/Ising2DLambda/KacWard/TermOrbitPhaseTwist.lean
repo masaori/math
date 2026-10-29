@@ -8,7 +8,6 @@
 -/
 import Ising2DLambda.KacWard.SignedOrbitTerm
 import Ising2DLambda.KacWard.MovedOrbitWeightPhaseTwist
-import Ising2DLambda.NecSuf.KacWard.TermOrbitPhaseTwist
 
 namespace Ising2DLambda.KacWard
 
@@ -34,14 +33,10 @@ theorem kacWardSignedPermutationTerm_orbit_phase_twist {ι : Type} [Fintype ι]
           ((boolSign (Bool.xor (a && parity horizontal O.toList)
               (b && parity vertical O.toList)) : Qbar) *
             z ^ (((turns O).map turnValue).sum + turnValue (closing O)))) := by
-  exact Ising2DLambda.NecSuf.KacWard.termOrbitPhaseTwist_necSuf
-    (movedEdgeOrbitSet σ) id (fun _ e => M e (σ e))
-    (fun O =>
-      (boolSign (Bool.xor (a && parity horizontal O.toList)
-          (b && parity vertical O.toList)) : Qbar) *
-        z ^ (((turns O).map turnValue).sum + turnValue (closing O)))
-    (fun O => -(Polynomial.X ^ O.card)) Polynomial.C
-    (kacWardSignedPermutationTerm M σ) Polynomial.C_1 (fun _ _ => Polynomial.C_mul)
-    (kacWardSignedPermutationTerm_orbit_product M σ hdiag) horbitPhase
+  rw [kacWardSignedPermutationTerm_orbit_product M σ hdiag]
+  refine Finset.prod_congr rfl ?_
+  intro O hO
+  congr 1
+  simpa only [map_prod] using congrArg Polynomial.C (horbitPhase O hO)
 
 end Ising2DLambda.KacWard
