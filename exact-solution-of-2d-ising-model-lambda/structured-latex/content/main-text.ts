@@ -79603,7 +79603,13 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
                         math(String.raw`v\in V_L`),
                         " ごとに、対称差では共通辺の端点寄与が二度現れて法 2 で消えるので",
                       ]),
-                      displayMath(String.raw`d_{E}(v)\bmod2=\bigl(d_A(v)+d_B(v)\bigr)\bmod2=0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+d_{E}(v)\bmod2
+&=\bigl(d_A(v)+d_B(v)\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\text{ と対称差での共通辺の相殺}\bigr)\\
+&=0
+&&\bigl(\because\ \operatorname{Even}_L(A),\operatorname{Even}_L(B),\ \blkref{def_even_edge_subset}\bigr)
+\end{aligned}`),
                       paragraph([
                         "となり ", math(String.raw`\operatorname{Even}_L(E)`),
                         " である。したがって対 ", math(String.raw`(D,E)`),

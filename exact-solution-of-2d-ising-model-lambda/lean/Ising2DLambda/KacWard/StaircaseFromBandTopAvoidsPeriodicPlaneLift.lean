@@ -8,7 +8,6 @@
 -/
 import Ising2DLambda.KacWard.IteratedTransverseStaircase
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
-import Ising2DLambda.NecSuf.KacWard.StaircaseAboveUpperAvoidsFamily
 
 namespace Ising2DLambda.KacWard
 
@@ -22,9 +21,10 @@ theorem iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
     (t s : ℕ) (_ht : 1 ≤ t) (hs : 1 ≤ s)
     (_hsle : s ≤ t * (wh.natAbs + wv.natAbs)) (k : ℤ) :
     iteratedTransverseStaircase wh wv Q s ≠ periodicPlaneLift m base L wv wh k := by
-  exact Ising2DLambda.NecSuf.KacWard.staircase_above_upper_avoids_family_necSuf
-    (iteratedTransverseStaircase wh wv Q) (periodicPlaneLift m base L wv wh)
-    (windingTransverseCoordinate wh wv) Q Kmax hbase
-    (iteratedTransverseStaircase_lower_bound wh wv Q hwind).2.2.1 hupper s hs k
+  intro heq
+  have hstep := (iteratedTransverseStaircase_lower_bound wh wv Q hwind).2.2.1 s
+  have htop := hupper k
+  rw [heq] at hstep
+  omega
 
 end Ising2DLambda.KacWard

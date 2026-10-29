@@ -6,7 +6,7 @@
 
 ## 現在地
 
-- **2026-10-29（連続実行）、非単射な添字写像の相殺で使う互換の対合性を Lean 具体版で独立に証明した。** 次は委譲を一論法ずつ外す。
+- **2026-10-29（連続実行）、反復横断階段と周期持ち上げの非交差を Lean 具体版で独立に証明した。** 次は委譲を一論法ずつ外す。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -18,7 +18,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外の残り | 一論法ずつ作業中 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: Kac--Ward 章の `firstHitConnectingStaircase_meets_lifts_only_at_ends`・`iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top`、置換展開の章の `kacWardSignedPermutationTerm_orbit_product`・`kacWardEntryProduct_orbit_factorization`・`kacWardSignedPermutationTerm_orbit_phase_twist`・`reversalFreeMovedSupport_even`・`reversalFreeOrbit_vertexSimpleDecomposition`・`crossingFreeSignCounterexample`、臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 **直す対象の正本は `lean/concrete-necsuf-delegations.txt`（委譲検査の既知の例外。2026-10-29 時点で 33 件）である。** 上の列挙に無いものも含む: ブロック対角行列の行列式の具体版五件（`blockDiagonal_*`。主張が必要十分版の置換の符号で述べられている）、`qbarPolynomial_det_*` など道具の章の多項式行列式の五件、標識付き対称差と活動点の七件（`taggedDifference_*`・`taggedActive*`。必要十分版の `taggedPairAt` を使う）、`localPairingMatching`・`localPairingMatching_mate`（必要十分版の `splicePairings` を使う）、`matchingPairOrientationProduct`・`matchingPairSecondOrientationProduct`、`movedOrbitWeight_phase_twist`（ねじれ符号の定義を参照）、`polynomialOrientedIdentity_determinant`。2026-10-26・27 の研究管理が足した行は台帳から消えたが、これらは例外の台帳に残っており、委譲は解消していない。この行を消してよいのは例外の台帳が空になったときだけである（2026-10-28 の研究管理）。 |
+| 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外の残り | 一論法ずつ作業中 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: Kac--Ward 章の `firstHitConnectingStaircase_meets_lifts_only_at_ends`、置換展開の章の `kacWardSignedPermutationTerm_orbit_product`・`kacWardEntryProduct_orbit_factorization`・`kacWardSignedPermutationTerm_orbit_phase_twist`・`reversalFreeMovedSupport_even`・`reversalFreeOrbit_vertexSimpleDecomposition`・`crossingFreeSignCounterexample`、臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 **直す対象の正本は `lean/concrete-necsuf-delegations.txt`（委譲検査の既知の例外。2026-10-29 時点で 32 件）である。** 上の列挙に無いものも含む: ブロック対角行列の行列式の具体版五件（`blockDiagonal_*`。主張が必要十分版の置換の符号で述べられている）、`qbarPolynomial_det_*` など道具の章の多項式行列式の五件、標識付き対称差と活動点の七件（`taggedDifference_*`・`taggedActive*`。必要十分版の `taggedPairAt` を使う）、`localPairingMatching`・`localPairingMatching_mate`（必要十分版の `splicePairings` を使う）、`matchingPairOrientationProduct`・`matchingPairSecondOrientationProduct`、`movedOrbitWeight_phase_twist`（ねじれ符号の定義を参照）、`polynomialOrientedIdentity_determinant`。2026-10-26・27 の研究管理が足した行は台帳から消えたが、これらは例外の台帳に残っており、委譲は解消していない。この行を消してよいのは例外の台帳が空になったときだけである（2026-10-28 の研究管理）。 |
 | Onsager 閉形式への接続 | Kac--Ward 章の定義の Lean 対応を揃える | 未着手 | Lean に定義があるのに `lean:` を宣言していない定義ブロック（向き付き辺の集合、向き付き辺の方向番号、四つの Kac--Ward 多項式行列 など）へ宣言を足す。Lean に無い定義（閉じた非後退辺列、一歩の回転数、向き付き辺の行変位と列変位、閉歩道の向き付き切断線横断数、非後退辺列の平面持ち上げ など）を、実際の閉歩道から構成する形で定義する。離散 Whitney 系の Lean は点列 `base` を仮定で受ける形なので、この定義群が無いと具体版が本文の対象について述べていない（2026-10-04 の研究管理の判定。2026-10-05 の実測では、Kac--Ward 章の定義 109 件のうち 76 件、主張 176 件のうち 57 件に `lean:` が無い。2026-10-04 以降に置いた節の定義・主張は全て Lean 付き）。 |
 | Onsager 閉形式への接続 | 一歩は方向番号を回転数だけ進める | 記述・SageMath 済。Lean 二版は未着手 | 本文ブロックに `lean:` が無い。既存の Lean に対応物があれば宣言を足し、無ければ具体版・必要十分版を書く。実際の閉歩道・持ち上げについて述べる形にする。 |
 | Onsager 閉形式への接続 | 整数巻き付き数の偶奇は切断線偶奇に等しい | 記述・SageMath 済。Lean 二版は未着手 | 本文ブロックに `lean:` が無い。既存の Lean に対応物があれば宣言を足し、無ければ具体版・必要十分版を書く。実際の閉歩道・持ち上げについて述べる形にする。 |
@@ -59,21 +59,24 @@
 
 ## レビュー記録
 
+- 2026-10-29: 「偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる」の逆写像と偶次数を照合し、修正不要だった。
 - 2026-10-29: 「ファイバー位相和は三つの整数の符号付き数え上げに分かれる」の有限集合分割と零和の適用を照合し、修正不要だった。
 - 2026-10-29: 「接触の無い部分の位相和は整数の符号付き数え上げである」の非交和と定数和を照合し、修正不要だった。
 - 2026-10-29: 「完全に切り替え不能な残余の各接触は反転対の辺を指し示す」の端点相異・置換の単射性・反転対の結論を照合し、修正不要だった。
 - 2026-10-29: 「反転対を持つファイバーでも位相反転部分集合が相殺する」の集合分割と零和を照合し、修正不要だった。
+
 ## 式変形の書き方の統一
 
+- 2026-10-29（連続実行の書式統一）: 「偶部分グラフ順序対の母関数は選択集合の個数で層別される」の偶次数の式を二行の根拠付き式鎖にした。
 - 2026-10-29（連続実行の書式統一）: 「偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる」の交差・対称差の等式に行末根拠を付けた。
 - 2026-10-29（連続実行の書式統一）: 「偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる」の逆写像の計算を根拠付きの式鎖にした。次は本文順の未統一の証明を探す。
 - 2026-10-29（連続実行の書式統一）: 「残余の位相和は整数の符号付き数え上げである」の整数への所属式に行末根拠を付けた。
 - 2026-10-29（連続実行の書式統一）: 「位相寄与は 1 か −1 である」の最終所属式に行末根拠を付けた。次は本文順の未統一の証明を探す。
-- 2026-10-29（連続実行の書式統一）: 「完全に切り替え不能な残余の各接触は反転対の辺を指し示す」の反転辺の等式を根拠付きの式鎖にした。
+
 ## 前進の記録
 
+- 2026-10-29: 委譲解消の大項目から反復横断階段と周期持ち上げの非交差を一論法として分け、整数の下界と上界から Lean 具体版で独立に証明した。
 - 2026-10-29: 委譲解消の大項目から非単射な添字写像の相殺を一論法として分け、互換の対合性を具体版で独立に証明した。
 - 2026-10-29: 委譲解消の大項目から動く軌道の成分積の分離を一論法として分け、積の帰納法と再添字付けを独立に証明した。ねじれ符号の定義は委譲例外に残る。
 - 2026-10-29: 委譲解消の大項目から軌道列の台の辺の相異性を一論法として分け、同じ向きと逆向きの二場合を具体版で独立に証明した。
 - 2026-10-29: 委譲解消の大項目から動く辺の軌道分割の反復後の非固定性を一論法として分け、Lean 具体版を独立に証明した。
-- 2026-10-29: 委譲解消の大項目から格子頂点の通過回数を一論法として分け、閉じた有限列の添字ずらしを具体版で独立に証明した。
