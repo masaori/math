@@ -691,6 +691,8 @@ export const ALL_LABELS = [
   "claim_twisted_fourier_left_inverse",
   "claim_twisted_fourier_right_inverse",
   "claim_twisted_mode_power_sum",
+  "claim_twisted_mode_product_bijection",
+  "claim_twisted_mode_product_sum_reindex",
   "claim_twisted_mode_ratio_root",
   "claim_twisted_mode_sets_card",
   "claim_twisted_mode_wrap_phase",

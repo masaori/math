@@ -87796,6 +87796,101 @@ e_{L,c,k}^{L}
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_real_escape_claim_twisted_mode_product_bijection",
+              focus: {
+                id: "real_escape_claim_twisted_mode_product_bijection",
+                kind: "claim",
+                title: { text: "横・縦モードの複素実現は直積でも全単射である" },
+                labels: ["claim_twisted_mode_product_bijection"],
+                habitat: "C",
+                realEscape: "代数的な二つのモードを複素実現し、複素根集合の直積へ送る。",
+                verification: ["sagemath/check/twisted-mode-product-reindex"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " とスピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("claim_twisted_modes_complex_roots_bijection"),
+                    " の複素根集合を用いて写像",
+                  ]),
+                  displayMath(String.raw`\Theta_{L,a,b}:\mathcal U_a\times\mathcal W_b\longrightarrow E_{L,a}\times E_{L,b},\qquad
+(\varpi,\varsigma)\longmapsto\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)`),
+                  paragraph(["を定める。この写像は全単射である。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "任意の ", math(String.raw`(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b`),
+                    " について、", ref("claim_twisted_modes_complex_roots_bijection"),
+                    " により二つの成分はそれぞれ ", math(String.raw`E_{L,a}`), " と ",
+                    math(String.raw`E_{L,b}`), " に属する。従って写像は指定した直積へ値を取る。",
+                  ]),
+                  paragraph([
+                    "二つの組の像が等しければ、組の等号から二つの成分の像がそれぞれ等しい。",
+                    ref("claim_twisted_modes_complex_roots_bijection"),
+                    " の各成分の単射性により元の二つの成分が等しく、組も等しい。よって単射である。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`(z,w)\in E_{L,a}\times E_{L,b}`),
+                    " を取る。", ref("claim_twisted_modes_complex_roots_bijection"),
+                    " の横方向の全射性から ", math(String.raw`\varpi\in\mathcal U_a`),
+                    " で ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi)=z`),
+                    " となるものがあり、縦方向の全射性から ", math(String.raw`\varsigma\in\mathcal W_b`),
+                    " で ", math(String.raw`\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)=w`),
+                    " となるものがある。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\Theta_{L,a,b}(\varpi,\varsigma)
+&=\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
+&&\bigl(\because\ \Theta_{L,a,b}\text{ の定義}\bigr)\\
+&=(z,w)&&\bigl(\because\ \varpi,\varsigma\text{ の選択}\bigr).
+\end{aligned}`),
+                  paragraph(["よって全射である。"]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_twisted_mode_product_sum_reindex",
+              focus: {
+                id: "real_escape_claim_twisted_mode_product_sum_reindex",
+                kind: "claim",
+                title: { text: "横・縦モードの有限和は複素根の組で再添字付けできる" },
+                labels: ["claim_twisted_mode_product_sum_reindex"],
+                habitat: "C",
+                realEscape: "代数的なモードの有限和を複素実現し、複素根の組を添字とする有限和へ移す。",
+                verification: ["sagemath/check/twisted-mode-product-reindex"],
+                statement: [
+                  paragraph([
+                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
+                    math(String.raw`(a,b)\in\mathcal S`), "、写像 ",
+                    math(String.raw`F:E_{L,a}\times E_{L,b}\to\mathbb C`), " について、",
+                  ]),
+                  displayMath(String.raw`\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
+=\sum_{(z,w)\in E_{L,a}\times E_{L,b}}F(z,w).`),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_twisted_mode_product_bijection"),
+                    " により、左辺の添字の各組は右辺の添字のただ一つの組へ対応し、右辺の各組は一度ずつ現れる。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
+&=\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}F\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)
+&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の写像の定義}\bigr)\\
+&=\sum_{(z,w)\in E_{L,a}\times E_{L,b}}F(z,w)
+&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の全単射による再添字付け}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_thermodynamic_limit_def_open_square_free_energy_density",
               beforeFocus: [
                 {
