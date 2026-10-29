@@ -47302,8 +47302,13 @@ q
 &&(\because\ w\text{ の定義})
 \end{aligned}`),
                         paragraph([
-                          "したがって ", math(String.raw`q-0=q=w\cdot w`), " かつ ",
-                          math(String.raw`w\ne0`), " なので、",
+                          math(String.raw`w\ne0`), " は上で示した。したがって",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+q-0&=q&&(\because\ R\text{ の加法})\\
+&=w\cdot w&&(\because\ \text{上の }q\text{ の式変形})
+\end{aligned}`),
+                        paragraph([
                           ref("def_real_algebraic_strict_order"), " により ",
                           math(String.raw`0<_{R}q`), " である。全過程は ",
                           math(String.raw`\mathbb{N}`), "、", math(String.raw`\mathbb{Q}`),
@@ -86866,6 +86871,65 @@ const chapter_real_escape = defineSection({
                     ]),
                   ],
                 },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_real_algebraic_lower_cut_has_supremum",
+              focus: {
+                id: "real_escape_claim_real_algebraic_lower_cut_has_supremum",
+                kind: "claim",
+                title: { text: "実閉部分体の元の有理下切断は実数上限を持つ" },
+                labels: ["claim_real_algebraic_lower_cut_has_supremum"],
+                habitat: "R",
+                realEscape: "実現写像を構成するための実数の完備性。実閉部分体の順序で定めた有理下切断を有理数の包含写像で実数へ送り、その上限を取る。",
+                verification: ["sagemath/check/real-algebraic-lower-cut-supremum"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`a\in R`), "（", ref("def_real_closed_subfield"),
+                    "）について ", math(String.raw`C_a:=\{r\in\mathbb Q:r<_R a\}`),
+                    " と置く。", math(String.raw`<_R`), " は ",
+                    ref("def_real_algebraic_strict_order"), " の順序である。",
+                    "有理数を実数へ送る ", ref("def_real_logarithm"), " の包含写像 ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}:\mathbb Q\to\mathbb R`),
+                    " による像 ",
+                    math(String.raw`\iota_{\mathbb Q\to\mathbb R}(C_a)`),
+                    " は空でなく、実数で上に有界である。ゆえに実数の上限 ",
+                    math(String.raw`\sup\iota_{\mathbb Q\to\mathbb R}(C_a)\in\mathbb R`),
+                    " が存在する。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_real_algebraic_rational_pinching"), " を ",
+                    math(String.raw`\varepsilon:=1\in\mathbb Q_{>0}`),
+                    " に適用し、", math(String.raw`r,s\in\mathbb Q`),
+                    " で ", math(String.raw`r<_R a<_R s`), " を満たすものを取る。",
+                    math(String.raw`r\in C_a`), " なので、像は空でない。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`t\in C_a`), " について ",
+                    math(String.raw`t<_R a<_R s`), " である（切断の定義と上の挟み込み）。",
+                    "順序の推移律（", ref("claim_real_algebraic_order_transitive"),
+                    "）により ", math(String.raw`t<_R s`), " となる。",
+                    "もし有理数の順序で ", math(String.raw`s<t`), " なら ",
+                    math(String.raw`t-s\in\mathbb Q_{>0}`), " に ",
+                    ref("claim_positive_rational_positive_in_real_closed"),
+                    " を適用して ", math(String.raw`s<_R t`), " となり矛盾する。",
+                    math(String.raw`s=t`), " も ", math(String.raw`t<_R s`),
+                    " に反する。ゆえに有理数の三分律から ", math(String.raw`t<s`), " である。",
+                  ]),
+                  displayMath(String.raw`\iota_{\mathbb Q\to\mathbb R}(t)<\iota_{\mathbb Q\to\mathbb R}(s)\quad(\because\ \blkref{def_real_logarithm}\text{ の包含写像は順序を保つ})`),
+                  paragraph([
+                    "したがって ", math(String.raw`\iota_{\mathbb Q\to\mathbb R}(s)`),
+                    " は像の実数上界である。実数の完備性より、空でない上に有界な実数集合は上限を持つ。",
+                    "この最後の適用が実数体への脱出であり、有限側の元 ",
+                    math(String.raw`a\in R`), " 自体は変えない。",
+                  ]),
+                ],
+              },
             },
           },
           {

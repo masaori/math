@@ -510,6 +510,7 @@ export const ALL_LABELS = [
   "claim_rational_square_ne_double_square",
   "claim_rationals_are_real_algebraic",
   "claim_real_algebraic_archimedean",
+  "claim_real_algebraic_lower_cut_has_supremum",
   "claim_real_algebraic_min_unique",
   "claim_real_algebraic_order_transitive",
   "claim_real_algebraic_order_trichotomy",
