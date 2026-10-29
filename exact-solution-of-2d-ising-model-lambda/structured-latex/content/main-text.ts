@@ -80227,8 +80227,11 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                             math(String.raw`C_0,C\subseteq E`), " なので ", math(String.raw`H_C\subseteq E`),
                             " である。また ", math(String.raw`D\cap E=\varnothing`), " なので、辺ごとの所属の場合分けにより",
                           ]),
-                          displayMath(String.raw`H_C=
-\bigl(D\cup C_0\bigr)\mathbin\triangle\bigl(D\cup C\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+H_C&=C_0\mathbin\triangle C&&\bigl(\because\ H_C\text{ の定義}\bigr)\\
+&=\bigl(D\cup C_0\bigr)\mathbin\triangle\bigl(D\cup C\bigr)
+&&\bigl(\because\ D\cap E=\varnothing,\ C_0,C\subseteq E\text{ と辺ごとの所属の場合分け}\bigr)
+\end{aligned}`),
                           paragraph([
                             "である。", math(String.raw`D\cup C_0`), " と ", math(String.raw`D\cup C`),
                             " は選択集合の定義により偶部分グラフである。各頂点 ", math(String.raw`v\in V_L`),
@@ -80241,9 +80244,13 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                             "となり ", math(String.raw`H_C\in\mathcal H_L(E)`), " である。対称差の結合則と ",
                             math(String.raw`C_0\mathbin\triangle C_0=\varnothing`), " から",
                           ]),
-                          displayMath(String.raw`\tau_{C_0}(H_C)
-=C_0\mathbin\triangle(C_0\mathbin\triangle C)
-=C\qquad\bigl(\because\ \text{対称差の結合則と同じ集合の相殺}\bigr)`),
+                          displayMath(String.raw`\begin{aligned}
+\tau_{C_0}(H_C)&=C_0\mathbin\triangle H_C
+&&\bigl(\because\ \tau_{C_0}\text{ の定義}\bigr)\\
+&=C_0\mathbin\triangle(C_0\mathbin\triangle C)
+&&\bigl(\because\ H_C\text{ の定義}\bigr)\\
+&=C&&\bigl(\because\ \text{対称差の結合則と同じ集合の相殺}\bigr)
+\end{aligned}`),
                           paragraph([
                             "なので全射である。最後に ", math(String.raw`H_1,H_2\in\mathcal H_L(E)`),
                             " が ", math(String.raw`\tau_{C_0}(H_1)=\tau_{C_0}(H_2)`), " を満たすなら、両辺と ",

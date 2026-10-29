@@ -8,9 +8,11 @@
 -/
 import Ising2DLambda.KacWard.StaircaseFromBandTopAvoidsPeriodicPlaneLift
 import Ising2DLambda.KacWard.TransverseTranslatedPeriodicPlaneLift
-import Ising2DLambda.NecSuf.KacWard.FirstHitConnectingStaircase
+import Mathlib.Tactic
 
 namespace Ising2DLambda.KacWard
+
+open Ising2DLambda.NecSuf.KacWard
 
 /-- `claim_first_hit_connecting_staircase_meets_lifts_only_at_ends`。 -/
 theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
@@ -25,7 +27,7 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
       (periodicPlaneLift m base L wv wh k) ≤ Kmax)
     (hgap : u * (wh ^ 2 + wv ^ 2) > Kmax - Kmin)
     (hu : 1 ≤ u.natAbs)
-    (hhitPositive : 1 ≤ hit)
+    (_hhitPositive : 1 ≤ hit)
     (hhitBound : hit ≤ u.natAbs * (wh.natAbs + wv.natAbs))
     (hhit : ∃ k : ℤ, iteratedTransverseStaircase wh wv Q hit =
       transverseTranslatedPeriodicPlaneLift m L base wv wh u k)
@@ -43,35 +45,37 @@ theorem firstHitConnectingStaircase_meets_lifts_only_at_ends
       (∀ s : ℕ, s < hit → ∀ k : ℤ,
         iteratedTransverseStaircase wh wv Q s ≠
           transverseTranslatedPeriodicPlaneLift m L base wv wh u k) := by
-  apply Ising2DLambda.NecSuf.KacWard.first_hit_prefix_meets_families_only_at_ends_necSuf
-    (iteratedTransverseStaircase wh wv Q)
-    (periodicPlaneLift m base L wv wh)
-    (transverseTranslatedPeriodicPlaneLift m L base wv wh u)
-    (windingTransverseCoordinate wh wv) hit k0 Kmin Kmax
-    (u * (wh ^ 2 + wv ^ 2))
-  · exact (iteratedTransverseStaircase_lower_bound wh wv Q hwind).2.2.2
-  · rw [show iteratedTransverseStaircase wh wv Q 0 = Q by
-      simp [iteratedTransverseStaircase,
-        Ising2DLambda.NecSuf.KacWard.iteratedStaircase,
-        windingTransverseStaircase,
-        Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase]]
-    exact hbase
-  · rw [show iteratedTransverseStaircase wh wv Q 0 = Q by
-      simp [iteratedTransverseStaircase,
-        Ising2DLambda.NecSuf.KacWard.iteratedStaircase,
-        windingTransverseStaircase,
-        Ising2DLambda.NecSuf.KacWard.twoPhaseStaircase]]
-    exact hbaseCoordinate
-  · exact hlower
-  · intro k
-    exact transverseTranslatedPeriodicPlaneLift_coordinate m L base wv wh u k
-  · exact hgap
-  · exact hhitPositive
-  · intro s hs hsle k
+  have hzero : iteratedTransverseStaircase wh wv Q 0 = Q := by
+    simp [iteratedTransverseStaircase, iteratedStaircase,
+      windingTransverseStaircase, twoPhaseStaircase]
+  have hinjective := (iteratedTransverseStaircase_lower_bound wh wv Q hwind).2.2.2
+  have horiginal : ∀ s : ℕ, 1 ≤ s → s ≤ hit → ∀ k : ℤ,
+      iteratedTransverseStaircase wh wv Q s ≠ periodicPlaneLift m base L wv wh k := by
+    intro s hs hsle k
     exact iteratedTransverseStaircase_ne_periodicPlaneLift_of_band_top
       m L base wv wh Q Kmax hwind (le_of_eq hbaseCoordinate.symm) hupper
       u.natAbs s hu hs (le_trans hsle hhitBound) k
+  constructor
+  · intro s s' _ _ heq
+    exact hinjective heq
+  constructor
+  · rw [hzero]
+    exact hbase
+  constructor
+  · exact horiginal
+  constructor
   · exact hhit
-  · exact hminimal
+  · intro s hs k
+    by_cases hs0 : s = 0
+    · subst s
+      intro heq
+      have htranslated := transverseTranslatedPeriodicPlaneLift_coordinate
+        m L base wv wh u k
+      have horiginalLower := hlower k
+      rw [hzero] at heq
+      rw [← heq] at htranslated
+      rw [hbaseCoordinate] at htranslated
+      omega
+    · exact hminimal s (Nat.one_le_iff_ne_zero.mpr hs0) hs k
 
 end Ising2DLambda.KacWard
