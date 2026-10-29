@@ -9,7 +9,6 @@
 -/
 import Mathlib.Tactic
 import Ising2DLambda.KacWard.ReversalFreeOrbitSupportDistinct
-import Ising2DLambda.NecSuf.KacWard.ReversalFreeOrbitVertexSimpleDecomposition
 
 namespace Ising2DLambda.KacWard
 
@@ -61,7 +60,42 @@ theorem reversalFreeOrbit_vertexSimpleDecomposition (L : ℕ) [NeZero L]
     have h := reversalFreeOrbitSupportEdges_distinct L σ hfree e he
       (j + 1) (k + 1) (by omega) hjr (by omega) hkr
     simpa using h hbase'
-  exact Ising2DLambda.NecSuf.KacWard.invariant_elimination_by_splitting_necSuf
-    contactCount baseEdges horizontalParity verticalParity edgeSimple split orbit horbitSimple
+  -- 接触対数に関する累積帰納で分割を反復する。
+  have main : ∀ n : ℕ, ∀ γ : W, edgeSimple γ → contactCount γ ≤ n →
+      ∃ family : List W,
+        family ≠ [] ∧
+        (∀ δ ∈ family, edgeSimple δ ∧ contactCount δ = 0) ∧
+        (family.map baseEdges).sum = baseEdges γ ∧
+        (family.map horizontalParity).sum % 2 = horizontalParity γ % 2 ∧
+        (family.map verticalParity).sum % 2 = verticalParity γ % 2 := by
+    intro n
+    induction n with
+    | zero =>
+      intro γ hsimple hbound
+      refine ⟨[γ], by simp, ?_, by simp, by simp, by simp⟩
+      intro δ hδ
+      rw [List.mem_singleton.mp hδ]
+      exact ⟨hsimple, by omega⟩
+    | succ n ih =>
+      intro γ hsimple hbound
+      by_cases hzero : contactCount γ = 0
+      · refine ⟨[γ], by simp, ?_, by simp, by simp, by simp⟩
+        intro δ hδ
+        rw [List.mem_singleton.mp hδ]
+        exact ⟨hsimple, hzero⟩
+      · obtain ⟨γA, γB, hA, hB, hless, hedges, hhorizontal, hvertical⟩ :=
+          split γ hsimple (Nat.pos_of_ne_zero hzero)
+        obtain ⟨familyA, hAne, hAz, hAe, hAh, hAv⟩ := ih γA hA (by omega)
+        obtain ⟨familyB, _, hBz, hBe, hBh, hBv⟩ := ih γB hB (by omega)
+        refine ⟨familyA ++ familyB, by simp [hAne], ?_, ?_, ?_, ?_⟩
+        · intro δ hδ
+          rcases List.mem_append.mp hδ with h | h
+          exacts [hAz δ h, hBz δ h]
+        · rw [List.map_append, List.sum_append, hAe, hBe, hedges]
+        · rw [List.map_append, List.sum_append, Nat.add_mod, hAh, hBh,
+            ← Nat.add_mod, hhorizontal]
+        · rw [List.map_append, List.sum_append, Nat.add_mod, hAv, hBv,
+            ← Nat.add_mod, hvertical]
+  exact main (contactCount orbit) orbit horbitSimple le_rfl
 
 end Ising2DLambda.KacWard
