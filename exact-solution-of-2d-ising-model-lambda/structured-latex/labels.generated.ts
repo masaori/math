@@ -534,7 +534,6 @@ export const ALL_LABELS = [
   "claim_reversal_direction_shift",
   "claim_reversal_free_moved_support_even",
   "claim_reversal_free_orbit_support_edges_distinct",
-  "claim_reversal_free_orbit_vertex_simple_decomposition",
   "claim_reversal_has_no_fixed_point",
   "claim_reversal_is_involution",
   "claim_reversal_matrix_determinant_one",

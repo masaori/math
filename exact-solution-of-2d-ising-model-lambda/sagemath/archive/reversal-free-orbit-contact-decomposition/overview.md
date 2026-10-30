@@ -1,6 +1,6 @@
 # SageMath Check: 反転対を含まない非後退置換の軌道列の頂点単純閉路分解
 
-**対象ラベル**: `claim_reversal_free_orbit_vertex_simple_decomposition`
+旧対象 `claim_reversal_free_orbit_vertex_simple_decomposition` は参照用ノート「不採用経路: 反転対のない軌道の頂点単純閉路分解」に退避した。
 
 一辺二のトーラスで非後退置換を全列挙（$30{,}784$ 件）し、動く辺の集合が反転対
 $\{(e,0),(e,1)\}$ を含まない置換（$497$ 件）について、各動く辺 $\vec e$ から始まる
@@ -12,6 +12,6 @@ $\{(e,0),(e,1)\}$ を含まない置換（$497$ 件）について、各動く�
 実際に二本以上へ分かれた軌道列が $2{,}048$ 本あることも確かめる（手続きが
 恒等的に一本を返すだけではないことの確認）。
 
-- 実行: `sage sagemath/check/reversal-free-orbit-contact-decomposition/check.sage`
+- 実行: `sage sagemath/archive/reversal-free-orbit-contact-decomposition/check.sage`
 - 状態: PASS（2026-08-31、軌道列 $3{,}376$ 本・頂点単純閉路 $6{,}768$ 本）
 - 浮動小数点: 不使用
