@@ -1310,12 +1310,11 @@ q
 &&(\because\ \blkref{claim_rational_of_log_additive})
 \end{aligned}`),
                         paragraph([
-                          "である。",
-                          ref("def_log_order_group_order"),
-                          " により、これは ",
-                          math(String.raw`\lambda+\nu\le_{\Lambda}\mu+\nu`),
-                          " を意味する。",
+                          "直前の有理数の不等式を ", ref("def_log_order_group_order"),
+                          " の順序へ戻す。",
                         ]),
+                        displayMath(String.raw`\lambda+\nu\le_{\Lambda}\mu+\nu
+\qquad(\because\ \blkref{def_log_order_group_order}\text{ と直前の有理数の不等式})`),
                       ],
                     },
                 },
