@@ -7,6 +7,34 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_permutation_path_reversal_archived",
+    targets: ["def_nonbacktracking_permutations"],
+    title: { text: "不採用経路: 置換の経路反転" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の経路反転による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        "（", ref("def_row_permutation"), " を有限集合 ",
+        math(String.raw`\vec E_L`), " に適用したもの）に対し、経路反転を",
+      ]),
+      displayMath(String.raw`\mathcal T(\varphi):=\iota\circ\varphi^{-1}\circ\iota`),
+      paragraph([
+        "で定める。", ref("def_row_permutation"), " により ",
+        math(String.raw`\varphi`), " は全単射なので逆写像 ",
+        math(String.raw`\varphi^{-1}`), " を持ち、それも全単射である。反転写像 ",
+        math(String.raw`\iota`), "（", ref("def_edge_reversal"), "）は ",
+        ref("claim_reversal_is_involution"),
+        " により自分自身を逆写像に持つので全単射である。全単射の合成は全単射なので ",
+        math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}(\vec E_L)`),
+        " であり、経路反転は ",
+        math(String.raw`\operatorname{Perm}(\vec E_L)`),
+        " から自分自身への写像として定まる。全過程は有限集合の写像の合成だけで閉じ、",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_free_permutation_phase_product_archived",
     targets: ["def_permutation_contact_pair_count"],
     title: { text: "不採用経路: 接触の無い置換の位相積" },
@@ -683,7 +711,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_path_reversal_fiber_preservation_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転による非後退置換ファイバーの保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転による置換ファイバーの直接比較は採らない。元の主張と証明を保存する。"]),
@@ -736,7 +764,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \vec g\in M(\mathcal T(\varphi))
 &\Longleftrightarrow
 \iota\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\ne\vec g
-&&\bigl(\because\ \blkref{def_moved_edge_set},\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \blkref{def_moved_edge_set},\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &\Longleftrightarrow
 \varphi^{-1}(\iota(\vec g))\ne\iota(\vec g)
 &&\bigl(\because\ \vec g=\iota(\iota(\vec g))\text{（}\blkref{claim_reversal_is_involution}\text{）と }\iota\text{ の単射性}\bigr)\\
@@ -800,7 +828,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 (\iota\circ\varphi\circ\iota)\bigl(\mathcal T(\varphi)(\vec g)\bigr)
 &=\iota\Bigl(\varphi\Bigl(\iota\Bigl(\iota\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\Bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &=\iota\bigl(\varphi\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\bigr)
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
 &=\iota(\iota(\vec g))
@@ -814,7 +842,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 \mathcal T(\varphi)\bigl((\iota\circ\varphi\circ\iota)(\vec g)\bigr)
 &=\iota\Bigl(\varphi^{-1}\Bigl(\iota\Bigl(\iota\bigl(\varphi(\iota(\vec g))\bigr)\Bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &=\iota\bigl(\varphi^{-1}(\varphi(\iota(\vec g)))\bigr)
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
 &=\iota(\iota(\vec g))
@@ -829,7 +857,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 \mathcal T(\mathcal T(\varphi))(\vec g)
 &=\iota\Bigl(\mathcal T(\varphi)^{-1}\bigl(\iota(\vec g)\bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &=\iota\Bigl(\iota\Bigl(\varphi\bigl(\iota(\iota(\vec g))\bigr)\Bigr)\Bigr)
 &&\bigl(\because\ \mathcal T(\varphi)^{-1}=\iota\circ\varphi\circ\iota\bigr)\\
 &=\varphi(\vec g)
@@ -1559,7 +1587,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       displayMath(String.raw`\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
 =\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)`),
                       paragraph([
-                        "が成り立つ。経路反転は ", ref("def_permutation_path_reversal"),
+                        "が成り立つ。経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
                         "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         " で定めた。全て有限集合上の有限積・有限和と代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。",
@@ -1577,7 +1605,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       displayMath(String.raw`\begin{aligned}
 \mathcal T(\varphi)\bigl(\iota(\varphi(\vec h))\bigr)
 &=\iota\Bigl(\varphi^{-1}\bigl(\iota(\iota(\varphi(\vec h)))\bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &=\iota\bigl(\varphi^{-1}(\varphi(\vec h))\bigr)
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
 &=\iota(\vec h)
@@ -1915,7 +1943,7 @@ d_{E}(v)\bmod2
                       ]),
                       paragraph([
                         "経路反転 ", math(String.raw`\mathcal T`),
-                        "（", ref("def_permutation_path_reversal"), "）は ",
+                        "（", "参照用ノート「不採用経路: 置換の経路反転」", "）は ",
                         "参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」", " により、ファイバー ",
                         math(String.raw`\mathcal N_L(D,E)`),
                         "（", ref("def_nonbacktracking_permutation_fiber"),
@@ -2474,7 +2502,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_path_reversal_contact_pair_preservation_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転と接触対の対応" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触対の経路反転軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2491,7 +2519,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       paragraph([
                         "を定める（", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
                         "、経路反転 ", math(String.raw`\mathcal T`), " は ",
-                        ref("def_permutation_path_reversal"), "）。このとき",
+                        "参照用ノート「不採用経路: 置換の経路反転」", "）。このとき",
                       ]),
                       list([
                         [math(String.raw`\Psi_{\varphi}`), " は ",
@@ -2525,7 +2553,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       displayMath(String.raw`\begin{aligned}
 \mathcal T(\varphi)\bigl(\iota(\varphi(\vec g))\bigr)
 &=\iota\Bigl(\varphi^{-1}\Bigl(\iota\bigl(\iota(\varphi(\vec g))\bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &=\iota\bigl(\varphi^{-1}\bigl(\varphi(\vec g)\bigr)\bigr)
 &&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
 &=\iota(\vec g)
@@ -2705,7 +2733,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_path_reversal_switchable_classification_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転による接触対の分類保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触対を分類して経路反転軌道を直接比較する経路は採らない。元の定義・主張・証明を保存する。"]),
@@ -2756,7 +2784,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                         math(String.raw`L\ge1`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）を取る。経路反転 ",
-                        math(String.raw`\mathcal T`), " は ", ref("def_permutation_path_reversal"),
+                        math(String.raw`\mathcal T`), " は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、接触対の対応 ", math(String.raw`\Psi_{\varphi}`), " は ",
                         "参照用ノート「不採用経路: 経路反転と接触対の対応」",
                         "、切り替え可能な接触対の集合 ",
@@ -2892,7 +2920,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
   },
   {
     id: "note_kac_ward_path_reversal_phase_preservation_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転の位相寄与の保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2917,7 +2945,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                       paragraph([
                         "をそれぞれ自分自身へ写す対合である。位相寄与は ",
                         ref("def_nonbacktracking_permutation_phase_contribution"),
-                        "、経路反転は ", ref("def_permutation_path_reversal"),
+                        "、経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                         " で定めた。位相寄与の二つの値は ", ref("claim_phase_contribution_sign_value"),
                         " により尽くされている。全て有限集合上の有限積と代数的数の四則だけで判定でき、実数体も複素数体も現れない。",
@@ -2979,7 +3007,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
   },
   {
     id: "note_kac_ward_path_reversal_selection_complement_orbits_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 二つの符号保存対合の軌道分割" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3040,7 +3068,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
   },
   {
     id: "note_kac_ward_weighted_path_reversal_selection_orbit_sums_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転軌道と選択補集合軌道の重み付き和" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3117,7 +3145,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
   },
   {
     id: "note_kac_ward_path_reversal_fixed_point_no_single_traversal_archived",
-    targets: ["def_permutation_path_reversal"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転の不動点と軌道の元数" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3127,7 +3155,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）を取る。",
                         math(String.raw`\mathcal T(\varphi)=\varphi`),
-                        "（", ref("def_permutation_path_reversal"), "）ならば ",
+                        "（", "参照用ノート「不採用経路: 置換の経路反転」", "）ならば ",
                         math(String.raw`E_1(\varphi)=\varnothing`),
                         "（", ref("def_single_traversal_edge_set"), "）である。",
                         "とくに、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
@@ -3845,7 +3873,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_weighted_path_reversal_selection_orbit_sums_sign_bijection_counterexample",
     targets: [
-      "def_permutation_path_reversal",
+      "def_nonbacktracking_permutations",
     ],
     title: { text: "経路反転軌道と選択補集合軌道の符号保存対応は存在しない" },
     body: [
@@ -3873,7 +3901,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_fiber_phase_sums",
     targets: [
       "def_kac_ward_determinants",
-      "def_permutation_path_reversal",
+      "def_nonbacktracking_permutations",
     ],
     title: { text: "三分類の部分和はファイバー単位では選択和に一致しない" },
     body: [
@@ -4022,7 +4050,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_oriented_edge_conjugation_counterexample",
     targets: [
       "def_signed_selection_sum",
-      "def_permutation_path_reversal",
+      "def_nonbacktracking_permutations",
     ],
     title: { text: "偶部分グラフ上の向き反転共役は置換側の文字作用にならない（一辺二の全数反例）" },
     body: [

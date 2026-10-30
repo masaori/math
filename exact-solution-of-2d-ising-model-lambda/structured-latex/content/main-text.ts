@@ -77552,62 +77552,6 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
-        id: "kac_ward_direct_comparison_heading_group_path_reversal",
-        labels: [],
-        title: { text: "経路反転と実二次整数" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_permutation_path_reversal",
-              labels: [],
-              title: { text: "置換の経路反転" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_permutation_path_reversal",
-                  beforeFocus: [],
-                  focus: {
-                        id: "kac_ward_definition_permutation_path_reversal",
-                        kind: "definition",
-                        title: { text: "置換の経路反転" },
-                        labels: ["def_permutation_path_reversal"],
-                        habitat: "N",
-                        statement: [
-                          paragraph([
-                            math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                            "（", ref("def_row_permutation"), " を有限集合 ",
-                            math(String.raw`\vec E_L`), " に適用したもの）に対し、経路反転を",
-                          ]),
-                          displayMath(String.raw`\mathcal T(\varphi):=\iota\circ\varphi^{-1}\circ\iota`),
-                          paragraph([
-                            "で定める。", ref("def_row_permutation"), " により ",
-                            math(String.raw`\varphi`), " は全単射なので逆写像 ",
-                            math(String.raw`\varphi^{-1}`), " を持ち、それも全単射である。反転写像 ",
-                            math(String.raw`\iota`), "（", ref("def_edge_reversal"), "）は ",
-                            ref("claim_reversal_is_involution"),
-                            " により自分自身を逆写像に持つので全単射である。全単射の合成は全単射なので ",
-                            math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}(\vec E_L)`),
-                            " であり、経路反転は ",
-                            math(String.raw`\operatorname{Perm}(\vec E_L)`),
-                            " から自分自身への写像として定まる。全過程は有限集合の写像の合成だけで閉じ、",
-                            "実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                  },
-                },
-              }],
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
         id: "kac_ward_direct_comparison_heading_group_switchability",
         labels: [],
         title: { text: "接触対の切り替え可能性" },

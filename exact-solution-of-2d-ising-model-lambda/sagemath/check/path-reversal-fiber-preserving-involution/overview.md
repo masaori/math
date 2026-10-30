@@ -2,7 +2,9 @@
 
 旧主張「経路反転は非後退置換のファイバーを保つ対合である」は参照用ノートへ退避した。
 
-**対象ラベル**: `def_permutation_path_reversal`
+**対象ラベル**: `def_nonbacktracking_permutations`
+
+経路反転の定義も参照用ノート「不採用経路: 置換の経路反転」に保存した。
 
 経路反転 $\mathcal T(\varphi)=\iota\circ\varphi^{-1}\circ\iota$ が、非後退置換を
 非後退置換へ写し、二回適用で元へ戻り、動く辺の集合を反転写像による像
