@@ -1,7 +1,6 @@
 # 曲がり型を持たない均衡配向の重み付き数
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 自明文字で選択集合が非空な一辺二の各ファイバーについて、曲がり型頂点を
 持たない均衡配向 $o$ に重み $2^{s(o)}$ を付けた。ここで $s(o)$ は直進型の

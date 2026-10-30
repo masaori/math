@@ -1,7 +1,6 @@
 # 曲がり型なし配向の局所選択のトレイル台写像の反例
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 重み $2^{s(o)}$ の局所選択展開（曲がり型なし均衡配向 $o$ と直進型頂点の
 部分集合 $S$ の対）を選択集合へ写す候補として、次のトレイル台写像を検査した。

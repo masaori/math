@@ -1,7 +1,6 @@
 # 交差する二つの非可縮一周路を持つ鍵の局所符号反転対合
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 - 住処: 有限集合、整数、有限積
 - 実行: `sage sagemath/check/translation-crossing-cycles-local-involution/check.sage`
 - 状態: PASS（2026-09-04。一辺三の実在する全 $1{,}442$ 鍵、全 $5{,}768$ 動辺配向で実行済み）

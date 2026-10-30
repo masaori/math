@@ -1,7 +1,6 @@
 # 非自明な選択文字が曲がり型頂点を強制すること
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 - 住処: 有限集合、整数、$\mathbb F_2$
 - 実行: `sage sagemath/check/translation-nontrivial-character-forces-curved-vertex/check.sage`
 - 状態: PASS（2026-09-04。一辺三の互いに素な偶部分グラフ対 $8{,}589$ 組と

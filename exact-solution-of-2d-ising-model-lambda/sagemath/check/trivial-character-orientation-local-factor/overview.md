@@ -1,7 +1,6 @@
 # 自明文字ファイバーの均衡配向類の局所行列式
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 単純通過部分の均衡配向を一つ固定すると、ファイバーの置換は各頂点で
 「その頂点へ入る動辺」から「その頂点を出る動辺」への非後退全単射を

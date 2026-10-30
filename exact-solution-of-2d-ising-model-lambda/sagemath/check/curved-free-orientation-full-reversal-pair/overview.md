@@ -1,7 +1,6 @@
 # 各成分の曲がり型なし均衡配向の全反転対（一般証明の核）
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 一般の辺長 $L$ のトーラス正方格子の偶部分グラフ $E$（各頂点の次数は $2$ か $4$）の
 任意の連結成分 $K$ について、曲がり型なし均衡配向（次数 $4$ の頂点の入辺二本の軸が

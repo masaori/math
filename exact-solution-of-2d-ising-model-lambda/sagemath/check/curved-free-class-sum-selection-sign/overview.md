@@ -1,7 +1,6 @@
 # 曲がり型なし配向類の局所行列式和と選択符号の同定
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 自明文字で選択集合が非空な鍵 $(D,E)$ について、曲がり型なし均衡配向を
 置換の列挙に頼らず局所決定性の伝播で構成し、各配向類の位相和を分解済みの

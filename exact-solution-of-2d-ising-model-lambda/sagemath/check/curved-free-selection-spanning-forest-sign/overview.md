@@ -1,7 +1,6 @@
 # 生成森座標を生の置換へ持ち上げる符号対応の反例
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 曲がり型なし均衡配向を誘導する一辺二の各置換から、直進型頂点での
 左折・右折を読み取り、成分指示元を先頭に置いた Kruskal 基本閉路基底の

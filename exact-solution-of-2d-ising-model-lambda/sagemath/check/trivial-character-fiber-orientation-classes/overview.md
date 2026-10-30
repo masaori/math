@@ -1,7 +1,6 @@
 # 自明文字ファイバーの配向差による類別と類和の構造
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 選択集合が非空で文字が自明な添字 $(D,E)$ について、ファイバーの各置換の
 単純通過部分が誘導する $E$ の均衡配向を、ファイバーの辞書式最小置換の配向と

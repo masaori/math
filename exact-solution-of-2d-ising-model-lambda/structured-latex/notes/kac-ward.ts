@@ -7,6 +7,106 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selection_sum_character_evaluation_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 選択和は空性と巻き付き文字によって評価できる" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。選択集合が空なら",
+                      ]),
+      displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=0`),
+      paragraph([
+                        "である。選択集合が空でなく ", math(String.raw`C_0\in\mathcal C_L(D,E)`),
+                        " を一つ固定したとき、偶部分グラフ ", math(String.raw`H\in\mathcal H_L(E)`), " の符号を",
+                      ]),
+      displayMath(String.raw`\chi_E(H):=(-1)^{
+\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)}`),
+      paragraph(["と置くと、", math(String.raw`\mathbb Z`), " の等式"]),
+      displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=
+\begin{cases}
+0,
+&\exists H_0\in\mathcal H_L(E),\ \chi_E(H_0)=-1,\\[2mm]
+(-1)^{\vartheta^{a,b}_L(D,E;C_0)}\,\lvert\mathcal H_L(E)\rvert,
+&\forall H\in\mathcal H_L(E),\ \chi_E(H)=1
+\end{cases}`),
+      paragraph([
+                        "が成り立つ。選択和と符号指数は ", ref("def_signed_selection_sum"), " と ",
+                        ref("claim_selection_sum_signed_count"), " で定めた。したがって選択和は有限集合の空性、",
+                        "巻き付き偶奇、有限集合の元数だけで決まり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+      paragraph(["選択集合が空なら、選択和の定義の添字集合が空なので"]),
+      displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=0
+\qquad\bigl(\because\ \blkref{def_signed_selection_sum}\text{ の空和}\bigr)`),
+      paragraph([
+                        "である。以下、選択集合は空でなく ",
+                        math(String.raw`C_0`), " を固定する。", ref("claim_selection_even_subgraph_action_simply_transitive"),
+                        " の全単射で有限和の添字を取り替え、", ref("claim_selection_even_subgraph_action_character"),
+                        " の符号の等式を各項へ適用すると",
+                      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
+&&\bigl(\because\ \blkref{def_signed_selection_sum}\bigr)\\
+&=\sum_{H\in\mathcal H_L(E)}(-1)^{\vartheta^{a,b}_L(D,E;C_0\mathbin\triangle H)}
+&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_simply_transitive}\text{ による添字の取り替え}\bigr)\\
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
+\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_character}\text{ の符号の等式}\bigr)
+\end{aligned}`),
+      paragraph([
+                        "まず ", math(String.raw`H_0\in\mathcal H_L(E)`), " が ",
+                        math(String.raw`\chi_E(H_0)=-1`), " を満たすとする。任意の ",
+                        math(String.raw`H\in\mathcal H_L(E)`), " に対し ",
+                        math(String.raw`H\mathbin\triangle H_0`), " は ", math(String.raw`E`),
+                        " に含まれ、各頂点で二つの偶次数の和を法二で取るので再び ",
+                        math(String.raw`\mathcal H_L(E)`), " に属する。写像 ",
+                        math(String.raw`H\mapsto H\mathbin\triangle H_0`),
+                        " は同じ集合との対称差を二度取ると元へ戻るため全単射である。巻き付き偶奇の対称差加法性（",
+                        ref("claim_winding_parity_symmetric_difference_additivity"), "）により",
+                      ]),
+      displayMath(String.raw`\begin{aligned}
+\chi_E(H\mathbin\triangle H_0)
+&=\chi_E(H)\,\chi_E(H_0)
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}\text{ と }(-1)^{r+s}=(-1)^r(-1)^s\bigr)\\
+&=-\chi_E(H)
+&&\bigl(\because\ \chi_E(H_0)=-1\bigr)
+\end{aligned}`),
+      paragraph(["である。よって添字をこの全単射で取り替えると"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&=\sum_{H\in\mathcal H_L(E)}\chi_E(H\mathbin\triangle H_0)
+&&\bigl(\because\ \text{有限和の添字の全単射による取り替え}\bigr)\\
+&=-\sum_{H\in\mathcal H_L(E)}\chi_E(H)
+&&\bigl(\because\ \chi_E(H\mathbin\triangle H_0)=-\chi_E(H)\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+      paragraph([
+                        "を得て、最初の鎖から選択和は零である。一方、全ての ",
+                        math(String.raw`H\in\mathcal H_L(E)`), " について ", math(String.raw`\chi_E(H)=1`),
+                        " なら、有限集合上の定数和により",
+                      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
+\sum_{H\in\mathcal H_L(E)}1
+&&\bigl(\because\ \chi_E(H)=1\bigr)\\
+&=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}\,\lvert\mathcal H_L(E)\rvert
+&&\bigl(\because\ \text{有限集合上の定数和}\bigr)
+\end{aligned}`),
+      paragraph([
+                        "となる。", math(String.raw`\chi_E(H)`), " は常に ", math(String.raw`\{-1,1\}`),
+                        " の一方なので、二つの場合は全てを尽くす。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_doubled_edge_free_fiber_phase_reduction_archived",
     targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 反転対の無いファイバーの位相寄与の簡約" },
@@ -2547,7 +2647,6 @@ c_{\oplus}(\omega,k)
       "claim_selection_sum_signed_count",
       "claim_selection_even_subgraph_action_character",
       "claim_selection_even_subgraph_action_simply_transitive",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
@@ -2610,7 +2709,6 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_sum_character_evaluation_fiber_phase_part_vanishing",
     targets: [
-      "claim_selection_sum_character_evaluation",
       "def_kac_ward_determinants",
     ],
     title: { text: "文字による消滅は三分類の各部分ごとに成立する（一辺二の全数観察）" },
@@ -2669,7 +2767,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_vertex_rewiring_counterexample",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "頂点の入出接続の組み替えも一様な文字作用にならない（一辺二の全数反例）" },
     body: [
@@ -2702,7 +2799,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_global_rewiring_matching",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "置換ごとに偶部分グラフを選ぶ大域的組み替えは完全マッチングを持つ（一辺二の全数観察）" },
     body: [
@@ -2724,7 +2820,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_fiberwise_uniform_matching",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "ファイバーごとに固定した偶部分グラフでは覆えないものが残る（一辺二の全数観察）" },
     body: [
@@ -2756,7 +2851,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_uncovered_fiber_structure",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "単一の偶部分グラフで覆えないファイバーでは軌道分解が必ず変わる（一辺二の全数観察）" },
     body: [
@@ -2777,7 +2871,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_orbit_splitting",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "覆えないファイバーの候補は一軌道の二分裂か二軌道の合併に限られる（一辺二の全数観察）" },
     body: [
@@ -2806,7 +2899,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_local_cut_join",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "軌道の分裂・合併で変わる後続遷移は一つまたは二つの頂点に局在する（一辺二の全数観察）" },
     body: [
@@ -2829,7 +2921,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_swap_rule",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "局所変更の交換形だけでは候補を一意に選べない（一辺二の全数観察）" },
     body: [
@@ -2853,7 +2944,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_candidate_discrimination",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "所属の型と軌道形では候補を区別できない（一辺二の全数観察）" },
     body: [
@@ -2883,7 +2973,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_cut_location",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "二候補の大部分は切断・接合する頂点の位置で区別できる（一辺二の全数観察）" },
     body: [
@@ -2907,7 +2996,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_translation_stabilizer",
     targets: [
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_sum_character_evaluation",
     ],
     title: { text: "二候補の選択に平行移動の対称性の障害は無い（一辺二の全数観察）" },
     body: [
@@ -3315,7 +3403,7 @@ c_{\oplus}(\omega,k)
         "水平一周閉路 ", math(String.raw`H_0\subseteq E_L`), " の巻き付き偶奇は ",
         math(String.raw`(1,0)`), " なので ",
         math(String.raw`\chi_{E_L}(H_0)=(-1)^{1\cdot0+1\cdot1}=-1`), " となる。",
-        ref("claim_selection_sum_character_evaluation"), " により ",
+        "退避した「選択和は空性と巻き付き文字によって評価できる」により ",
         math(String.raw`\mathcal U^{a,b}_L(\varnothing,E_L)=0`), " であり、従ってこの添字では ",
         math(String.raw`\mathcal K=\mathcal U=0`), " が成り立つ。",
         ref("claim_kac_ward_determinant_fiber_stratified_phase_sum"), " と ",
@@ -3344,7 +3432,7 @@ c_{\oplus}(\omega,k)
         math(String.raw`49{,}344`), " 個である。従って全辺鍵以外の非自明文字鍵では ",
         math(String.raw`\mathcal U^{a,b}_L(D,E)=0`),
         " が文字評価から軌道ごとに一括で従い（",
-        ref("claim_selection_sum_character_evaluation"), "。文字は軌道上で一定）、",
+        "退避した「選択和は空性と巻き付き文字によって評価できる」。文字は軌道上で一定）、",
         math(String.raw`\mathcal K^{a,b}_L(D,E)=0`),
         " は軌道代表一つでの符号反転完全マッチングを自由作用で運べば軌道全体へ広がる",
         "（位相寄与は平行移動共役で不変。一辺二の全鍵と一辺三の全辺鍵で等号 assert 済み）。",
@@ -3389,8 +3477,7 @@ c_{\oplus}(\omega,k)
         math(String.raw`\mathcal K^{a,b}_3(D,E)=0`),
         " が直接従い、軌道代表からの運搬は不要になった。文字評価による ",
         math(String.raw`\mathcal U^{a,b}_3(D,E)=0`),
-        "（", ref("claim_selection_sum_character_evaluation"),
-        "）と合わせ、一辺三の非自明文字鍵は平方恒等式の両側で消える。",
+        "（退避した「選択和は空性と巻き付き文字によって評価できる」）と合わせ、一辺三の非自明文字鍵は平方恒等式の両側で消える。",
         "次は一般の辺長で、非自明文字の偶部分グラフの全ての均衡配向に曲がり型頂点が",
         "存在すること（曲がり型にならない次数 ", math(String.raw`4`),
         " 配置は水平二辺が入り垂直二辺が出る交差二型に限るので、その排除）を証明する。",
@@ -3427,8 +3514,7 @@ c_{\oplus}(\omega,k)
         math(String.raw`\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)=0`),
         " が閉じる（sagemath/check/translation-nontrivial-key-general-composition）。",
         "選択側は文字評価そのものである（",
-        ref("claim_selection_sum_character_evaluation"),
-        "。非自明文字の選択和は辺長によらず零）。置換側は五段の合成である。",
+        "退避した「選択和は空性と巻き付き文字によって評価できる」。非自明文字の選択和は辺長によらず零）。置換側は五段の合成である。",
         "ファイバーの各置換は各頂点での非後退局所全単射の積であり、反転対辺は各端点へ",
         "入と出を一本ずつ与えるので、単純通過部分は ", math(String.raw`E`),
         " の均衡配向を誘導する（辺長に依存しない）。非自明文字の ", math(String.raw`E`),

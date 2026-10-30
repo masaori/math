@@ -1,7 +1,6 @@
 # 偶奇恒等式の二重辺つき鍵での交差対項の検査（一辺三）
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 未ねじれの符号同定を還元した $\mathbb F_2$ 偶奇恒等式のうち、交差対項
 $\langle D\cup C_0,E\rangle$ は、一辺三ではこれまで $D=\varnothing$ の

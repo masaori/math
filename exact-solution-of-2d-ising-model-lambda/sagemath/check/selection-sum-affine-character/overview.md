@@ -2,7 +2,9 @@
 
 **対象ラベル**: `claim_selection_even_subgraph_action_character`,
 `claim_selection_even_subgraph_action_simply_transitive`,
-`claim_selection_sum_character_evaluation`
+`def_signed_selection_sum`
+
+選択和の評価の元の主張と証明は参照用ノート「不採用経路: 選択和は空性と巻き付き文字によって評価できる」に保存した。
 
 （あわせて `def_signed_selection_sum`, `claim_selection_sum_signed_count` の被加数・符号指数を使う。）
 
@@ -24,7 +26,7 @@ $$
 （`claim_selection_sum_character_evaluation`）。
 
 - 実行: `sage sagemath/check/selection-sum-affine-character/check.sage`
-- 状態: PASS（2026-09-03。一般の辺長の単純推移性と選択和評価を本文へ追加後に再実行）
+- 状態: PASS（2026-10-30。退避後に再実行）
 - 方法: 有限集合、$\mathbb F_2$ の算術、$\mathbb Z$ の有限和だけ。浮動小数点は使わない。
 - 結果: 全 $609$ ファイバー×四スピン構造の $2{,}436$ 組を検査した。選択集合が空なのは
   $192$ ファイバー、非空の場合に非自明文字で零になるのは $192$ 組、文字が自明で

@@ -1,7 +1,6 @@
 # 曲がり型なし配向と局所選択の分離ビット全単射
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 前のトレイル台写像が情報を失う唯一の全辺ファイバーについて、配向と局所選択を
 別々のビットとして保つ対応を構成した。一辺二の全辺ファイバーでは、曲がり型なし

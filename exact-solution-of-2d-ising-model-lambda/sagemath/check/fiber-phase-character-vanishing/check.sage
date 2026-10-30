@@ -1,7 +1,7 @@
 """文字によるファイバーの三種別ごとに三分類の部分和が個別に消えるかを検査する（文字和構成のための観察）。
 
 対象: claim_selection_sum_character_evaluation,
-      claim_fully_unswitchable_contacts_witness_doubled_edges。
+      def_fiber_phase_weight。
 
 一辺 L=2 の全ファイバー (D, E) と四つのスピン構造 (a, b) について、
 選択和の文字評価が与える三種別（選択集合が空 / 文字が非自明 / 文字が自明）ごとに、

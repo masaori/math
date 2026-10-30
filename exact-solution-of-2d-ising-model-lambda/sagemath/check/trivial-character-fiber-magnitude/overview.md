@@ -1,7 +1,6 @@
 # 自明文字ファイバーの巡回階数による共通絶対値
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 選択集合が非空で文字が自明な添字 $(D,E)$ では、選択和の全項が同符号なので、
 $|\mathcal U^{a,b}_L(D,E)|$ は $E$ に含まれる偶部分グラフの個数に等しい。

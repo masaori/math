@@ -1,7 +1,6 @@
 # 曲がり型なし均衡配向の成分ごとの構造
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 一般の辺長で配向側の座標を列挙に頼らず取るための構造を、一辺二・一辺三の
 トーラスの全偶部分グラフで固定した。

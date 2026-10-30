@@ -1,7 +1,6 @@
 # 均衡配向の局所行列式の型分類（辺長によらない全局所配置）
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 頂点の局所遷移行列の成分は、入る動辺の方向と出る動辺の方向の差
 （四半回転数の $\zeta_8$ 冪）だけで決まり、継ぎ目のねじれ符号は

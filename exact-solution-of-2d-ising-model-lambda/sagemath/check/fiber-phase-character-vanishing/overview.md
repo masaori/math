@@ -1,7 +1,6 @@
 # SageMath Check: 文字の三種別ごとの三分類部分和の個別消滅
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_fully_unswitchable_contacts_witness_doubled_edges`
+**対象ラベル**: `def_fiber_phase_weight`
 
 一辺 $L=2$ の全ファイバー $(D,E)$ と四つのスピン構造 $(a,b)$ について、選択和の文字評価が
 与える三種別（選択集合が空 / 文字が非自明 / 文字が自明）ごとに、ファイバー位相和の三分類の

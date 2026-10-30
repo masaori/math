@@ -1,7 +1,6 @@
 # 未ねじれの配向類符号の偶奇恒等式への還元
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 曲がり型のない均衡配向について、配向類の局所行列式和から絶対値
 $2^{n_4(E)}$ を除いた符号を、動辺数、終点別の行順序への置換、始点別の

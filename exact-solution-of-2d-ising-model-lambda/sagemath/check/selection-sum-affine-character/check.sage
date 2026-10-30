@@ -2,8 +2,8 @@
 
 対象: claim_selection_even_subgraph_action_character,
 claim_selection_even_subgraph_action_simply_transitive,
-claim_selection_sum_character_evaluation
-（および def_signed_selection_sum, claim_selection_sum_signed_count）。
+def_signed_selection_sum（選択和の評価は参照用ノートへ退避）、
+claim_selection_sum_signed_count。
 
 一辺 L=2 の全ファイバー (D,E) について、E の偶部分グラフ H を対称差で
 選択集合 C_L(D,E) に作用させる。任意の選択 C と任意の偶 H⊆E について
@@ -14,7 +14,37 @@ eps_h(E) eps_v(H) + eps_v(E) eps_h(H) (mod 2) に等しいこと（全対検査�
 計算は有限集合、F_2 の算術、ZZ だけで行い、浮動小数点は使わない。
 """
 
-load("sagemath/check/path-reversal-selection-complement-orbits/check.sage")
+load("sagemath/check/fiber-phase-integer-decomposition/check.sage")
+
+selection_base_edges = [(kind, i, j) for kind in ("h", "v") for i in range(L) for j in range(L)]
+selection_subsets = [frozenset(subset) for subset in Subsets(set(selection_base_edges))]
+
+
+def selection_edge_endpoints(edge):
+    kind, i, j = edge
+    return ((i, j), (i, (j + 1) % L) if kind == "h" else ((i + 1) % L, j))
+
+
+def is_even_selection_subset(subset):
+    degree = {}
+    for edge in subset:
+        for vertex in selection_edge_endpoints(edge):
+            degree[vertex] = degree.get(vertex, 0) + 1
+    return all(value % 2 == 0 for value in degree.values())
+
+
+def selection_winding_parities(subset):
+    return (
+        sum(ZZ(kind == "h" and j == L - 1) for kind, i, j in subset) % 2,
+        sum(ZZ(kind == "v" and i == L - 1) for kind, i, j in subset) % 2,
+    )
+
+
+def selection_exponent(a, b, doubled, single, selected):
+    first_h, first_v = selection_winding_parities(doubled.union(selected))
+    second_h, second_v = selection_winding_parities(doubled.union(single.difference(selected)))
+    return ZZ((1 + a) * first_h + (1 + b) * first_v + first_h * first_v
+              + (1 + a) * second_h + (1 + b) * second_v + second_h * second_v)
 
 
 def winding_pairing(first, second):

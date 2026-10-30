@@ -1,7 +1,6 @@
 # 非自明文字鍵の K=U=0 を一般の辺長で閉じる合成
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 - 住処: 有限集合、整数、$\mathbb F_2$、$\mathbb Q(\zeta_8)$
 - 実行: `sage sagemath/check/translation-nontrivial-key-general-composition/check.sage`
 - 状態: PASS（2026-09-04。一辺四の偶部分グラフ $131{,}072$ 個の文字全数調査、

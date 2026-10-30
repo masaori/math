@@ -1,7 +1,6 @@
 # 非自明文字鍵の対角軌道の自由性
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 - 住処: 有限集合、GF(2) の線型代数、整数
 - 実行: `sage sagemath/check/translation-nonfull-key-orbit-freeness/check.sage`
 - 状態: PASS（2026-09-04。一辺三の偶部分グラフ $1{,}024$ 個と鍵 $148{,}033$ 個で実行済み）

@@ -1,7 +1,6 @@
 # 成分指示元と生成森による局所選択座標
 
-**対象ラベル**: `claim_selection_sum_character_evaluation`,
-`claim_kac_ward_determinant_fiber_stratified_phase_sum`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 
 有限偶グラフ $E$ の各連結成分の辺指示元を先頭に置く。辺の固定順序に従う
 Kruskal 森を作り、非森辺が定める基本閉路を順に走査して、階数を増やすものだけを
