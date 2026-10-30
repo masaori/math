@@ -26771,13 +26771,13 @@ t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
                         displayMath(String.raw`\begin{aligned}
 W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)
 &=\iota\bigl(\kappa(\mathrm{sgn}_{O}(\mathrm{id}_{O}))\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\mathrm{id}_{O}(\tau)}
-&&(\because\ \blkref{def_orbit_term_factor})\\
+&&\bigl(\because\ \blkref{def_orbit_term_factor}\bigr)\\
 &=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\mathrm{id}_{O}(\tau)}
-&&(\because\ \blkref{claim_orbit_permutation_sign_values}\ \text{の第 3 の主張})\\
+&&\bigl(\because\ \blkref{claim_orbit_permutation_sign_values}\ \text{の第 3 の主張}\bigr)\\
 &=\iota\bigl(\kappa(1)\bigr)\cdot\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
-&&(\because\ \mathrm{id}_{O}(\tau)=\tau)\\
+&&\bigl(\because\ \mathrm{id}_{O}(\tau)=\tau\bigr)\\
 &=\prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
-&&(\because\ \blkref{def_second_constant_embedding}\ \text{より}\ \iota(\kappa(1))\ \text{は}\ \mathbb{Z}[x][t]\ \text{の単位元})
+&&\bigl(\because\ \blkref{def_second_constant_embedding}\ \text{より}\ \iota(\kappa(1))\ \text{は}\ \mathbb{Z}[x][t]\ \text{の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。以下、2 つの場合を別々に示す。",
@@ -26790,9 +26790,9 @@ W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)
                         displayMath(String.raw`\begin{aligned}
 \prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
 &=\prod_{\tau\in O}t
-&&(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第一の場合を各}\ \tau\in O\ \text{へ当てる})\\
+&&\bigl(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第一の場合を各}\ \tau\in O\ \text{へ当てる}\bigr)\\
 &=t^{\lvert O\rvert}
-&&(\because\ \text{等しい因子の有限積は、因子の個数を指数とする冪である})
+&&\bigl(\because\ \text{等しい因子の有限積は、因子の個数を指数とする冪である}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。第 2 の等号で使った「等しい因子の有限積は、因子の個数を指数とする冪である」は、",
@@ -26821,9 +26821,9 @@ W_{O}\bigl(\mathrm{ch}(U),\mathrm{id}_{O}\bigr)
                         displayMath(String.raw`\begin{aligned}
 \prod_{\tau\in O}\mathrm{ch}(U)_{\tau,\tau}
 &=\mathrm{ch}(U)_{\tau_1,\tau_1}
-&&(\because\ \text{1 元集合にわたる有限積は 1 つの因子である})\\
+&&\bigl(\because\ \text{1 元集合にわたる有限積は 1 つの因子である}\bigr)\\
 &=t+\iota\bigl(-\kappa(1)\bigr)
-&&(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第二の場合を}\ \tau_1\in O\ \text{へ当てる})
+&&\bigl(\because\ \blkref{claim_shift_char_diagonal_entry}\ \text{の第二の場合を}\ \tau_1\in O\ \text{へ当てる}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。",
