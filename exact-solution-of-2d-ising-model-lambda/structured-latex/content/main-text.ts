@@ -87991,7 +87991,7 @@ F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q
                   paragraph(["と定める。", ref("claim_dispersion_positive_at_rational_point"), " により分散因子の値は ", math(String.raw`R`), " に属する。このとき、", ref("def_real_algebraic_cut_realization"), " の実現写像について"]),
                   displayMath(String.raw`\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
 =(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)`),
-                  paragraph(["が成り立つ。右辺の有理数は実数への標準埋込みによる値とする。"]),
+                  paragraph(["が成り立つ。右辺の有理係数は実数への標準埋込みによる値とする。"]),
                 ],
                 proof: [
                   paragraph([
