@@ -88084,9 +88084,23 @@ f_q(\theta_1,\theta_2):=\log_{\mathbb R}B_q(\theta_1,\theta_2)`),
                 proof: [
                   paragraph([
                     ref("claim_no_rational_square_two"), " により ",
-                    math(String.raw`q^2+2q-1\ne0`), " である。実際、等号を仮定すると ",
-                    math(String.raw`(q+1)^2=2`), " となり、", math(String.raw`q+1\in\mathbb Q`),
-                    " に矛盾する。", ref("def_real_logarithm"),
+                    math(String.raw`q^2+2q-1\ne0`), " である。実際、", math(String.raw`q^2+2q-1=0`),
+                    " を仮定すると、次の式鎖を得る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(q+1)^2
+&=q^2+2q+1
+&&\bigl(\because\ \mathbb Q\text{ の分配律}\bigr)\\
+&=(q^2+2q-1)+2
+&&\bigl(\because\ \mathbb Q\text{ の四則}\bigr)\\
+&=0+2
+&&\bigl(\because\ q^2+2q-1=0\bigr)\\
+&=2
+&&\bigl(\because\ \mathbb Q\text{ の加法}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "これは ", math(String.raw`q+1\in\mathbb Q`), " と ",
+                    ref("claim_no_rational_square_two"), " に矛盾する。", ref("def_real_logarithm"),
                     " の包含写像は単射で四則と順序を保つので、",
                     math(String.raw`(r^2+2r-1)^2>0`), " である。",
                   ]),
