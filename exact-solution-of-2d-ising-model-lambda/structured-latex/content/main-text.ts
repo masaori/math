@@ -27687,16 +27687,19 @@ t^{d(k+1)}+u
                           math(String.raw`\because`),
                           " ",
                           ref("claim_row_config_minimal_period_divides_L"),
-                          "）、",
-                          math(String.raw`L=e(\tau_0)\cdot k=\lvert O\rvert\cdot k`),
-                          " を満たす ",
+                          "）、自然数の整除の定義から ",
                           math(String.raw`k\in\mathbb{N}`),
-                          " が存在する（",
-                          math(String.raw`\because`),
-                          " 自然数の整除の定義）。この ",
+                          " が存在する。この ",
                           math(String.raw`k`),
-                          " について次が成り立つ。",
+                          " について",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+L&=e(\tau_0)\cdot k
+&&(\because\ e(\tau_0)\mid L\text{ と自然数の整除の定義})\\
+&=\lvert O\rvert\cdot k
+&&(\because\ \blkref{claim_row_config_orbit_card})
+\end{aligned}`),
+                        paragraph(["である。したがって次が成り立つ。"]),
                         displayMath(String.raw`\begin{aligned}
 t^{L}+u
 &=t^{\lvert O\rvert k}+u

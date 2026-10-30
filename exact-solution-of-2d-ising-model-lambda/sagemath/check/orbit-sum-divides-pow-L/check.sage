@@ -27,11 +27,9 @@
 #   （|O| <= 6 なので |B_O| <= 720）。
 #   本文の主張は任意の L についてのものなので、有限個で確かめたことは証明ではない。
 
-import os
 from itertools import permutations
 
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
+load("sagemath/_shared/defs.sage")
 
 
 # def_second_polynomial_ring: ZZ[x] を係数環とする、もう 1 つの不定元 t の多項式環。
