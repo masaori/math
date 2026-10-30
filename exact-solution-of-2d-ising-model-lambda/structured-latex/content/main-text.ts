@@ -28699,11 +28699,11 @@ const chapter_algebraic_eigenvalue = defineSection({
                     ]),
                     displayMath(String.raw`\begin{aligned}
 0&=\mathrm{ev}_{\xi,z}\bigl(\chi_U\bigr)
-&&(\because\ \text{仮定})\\
+&&\bigl(\because\ \text{仮定}\bigr)\\
 &=\mathrm{ev}_{\xi,z}\Bigl(\prod_{O\in\mathcal{O}_L}\bigl(t^{\lvert O\rvert}+u\bigr)\Bigr)
-&&(\because\ \blkref{claim_shift_char_orbit_factorization})\\
+&&\bigl(\because\ \blkref{claim_shift_char_orbit_factorization}\bigr)\\
 &=\prod_{O\in\mathcal{O}_L}\mathrm{ev}_{\xi,z}\bigl(t^{\lvert O\rvert}+u\bigr)
-&&(\because\ \blkref{claim_second_evaluation_prod})
+&&\bigl(\because\ \blkref{claim_second_evaluation_prod}\bigr)
 \end{aligned}`),
                     paragraph([
                       ref("claim_qbar_prod_eq_zero"),
@@ -28744,9 +28744,9 @@ const chapter_algebraic_eigenvalue = defineSection({
                     displayMath(String.raw`\begin{aligned}
 \lvert O_0\rvert
 &=\lvert O(\tau_0)\rvert
-&&(\because\ O_0=O(\tau_0))\\
+&&\bigl(\because\ O_0=O(\tau_0)\bigr)\\
 &=e(\tau_0)
-&&(\because\ \blkref{claim_row_config_orbit_card})
+&&\bigl(\because\ \blkref{claim_row_config_orbit_card}\bigr)
 \end{aligned}`),
                     paragraph([
                       ref("claim_row_config_minimal_period_divides_L"),
