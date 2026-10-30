@@ -1,6 +1,6 @@
 # 選択項の共通符号の閉じた式
 
-**対象ラベル**: `claim_winding_parity_symmetric_difference_additivity`
+**対象ラベル**: `def_torus_winding_parities`
 
 鍵 $(D,E)$ の選択項 $w^{a,b}(D\cup C)\,w^{a,b}(D\cup(E\setminus C))$ は、
 $A:=D\cup C$ と置くと巻き付き偶奇の $\mathbb F_2$ 双線形計算だけから

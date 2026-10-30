@@ -567,19 +567,19 @@ v_p(a)-v_p(b)
                         displayMath(String.raw`\begin{aligned}
 \bigl(\log(q_1q_2)\bigr)(p)
 &=w_p(q_1q_2)
-&&(\because\ \blkref{def_rational_log})\\
+&&\bigl(\because\ \blkref{def_rational_log}\bigr)\\
 &=w_p\Bigl(\frac{a_1a_2}{b_1b_2}\Bigr)
-&&(\because\ \text{有理数の積の定義})\\
+&&\bigl(\because\ \text{有理数の積の定義}\bigr)\\
 &=v_p(a_1a_2)-v_p(b_1b_2)
-&&(\because\ \text{正の有理数の対数の定義、有理数の指数は表示によらない})\\
+&&\bigl(\because\ \blkref{def_rational_log}\text{ と }\blkref{claim_rational_exponent_well_defined}\bigr)\\
 &=\bigl(v_p(a_1)+v_p(a_2)\bigr)-\bigl(v_p(b_1)+v_p(b_2)\bigr)
-&&(\because\ \blkref{def_prime_exponent})\\
+&&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
 &=\bigl(v_p(a_1)-v_p(b_1)\bigr)+\bigl(v_p(a_2)-v_p(b_2)\bigr)
-&&(\because\ \mathbb{Z}\ \text{の加法の可換性と結合性})\\
+&&\bigl(\because\ \mathbb{Z}\ \text{の加法の可換性と結合性}\bigr)\\
 &=w_p(q_1)+w_p(q_2)
-&&(\because\ \blkref{def_rational_log})\\
+&&\bigl(\because\ \blkref{def_rational_log}\bigr)\\
 &=\bigl(\log q_1+\log q_2\bigr)(p)
-&&(\because\ \Lambda\ \text{の加法は素数ごとの }\mathbb{Z}\text{ の加法})
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の }\Lambda\text{ の加法は素数ごとの }\mathbb{Z}\text{ の加法}\bigr)
 \end{aligned}`),
                         paragraph([
                           "が成り立つ。写像としてすべての素数で値が等しいので、",
@@ -78574,68 +78574,6 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
                         "有限集合の元の個数の比較に帰着する。全過程は有限集合の分割と整数の有限和だけで閉じる。",
                       ]),
                     ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_winding_parity_symmetric_difference",
-              labels: [],
-              title: { text: "巻き付き偶奇の対称差加法性" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_winding_parity_symmetric_difference_additivity",
-                  focus: {
-                        id: "kac_ward_claim_winding_parity_symmetric_difference_additivity",
-                        kind: "claim",
-                        title: { text: "巻き付き偶奇の対称差加法性" },
-                        labels: ["claim_winding_parity_symmetric_difference_additivity"],
-                        habitat: "N",
-                        verification: ["sagemath/check/winding-parity-symmetric-difference-additivity"],
-                        statement: [
-                          paragraph([
-                            math(String.raw`L\ge1`), " とする。任意の辺集合 ",
-                            math(String.raw`X,Y\subseteq E_L`), " について、",
-                            math(String.raw`\mathbb Z`), " の合同式",
-                          ]),
-                          displayMath(String.raw`\varepsilon_{L,\mathrm h}(X\mathbin\triangle Y)
-\equiv\varepsilon_{L,\mathrm h}(X)+\varepsilon_{L,\mathrm h}(Y)\pmod2,\qquad
-\varepsilon_{L,\mathrm v}(X\mathbin\triangle Y)
-\equiv\varepsilon_{L,\mathrm v}(X)+\varepsilon_{L,\mathrm v}(Y)\pmod2`),
-                          paragraph([
-                            "が成り立つ。巻き付き偶奇 ",
-                            math(String.raw`\varepsilon_{L,\mathrm h},\varepsilon_{L,\mathrm v}`), " は ",
-                            ref("def_torus_winding_parities"),
-                            " で定めた。全て有限集合の演算と整数の合同だけで判定でき、実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                        proof: [
-                          paragraph([
-                            "境界横断辺集合 ",
-                            math(String.raw`W\in\{C_{L,\mathrm h},C_{L,\mathrm v}\}`),
-                            "（", ref("def_torus_winding_parities"), "）を一つ取る。",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-\bigl\lvert(X\mathbin\triangle Y)\cap W\bigr\rvert
-&=\bigl\lvert(X\cap W)\mathbin\triangle(Y\cap W)\bigr\rvert
-&&\bigl(\because\ \text{対称差と共通部分の分配則}\bigr)\\
-&=\lvert X\cap W\rvert+\lvert Y\cap W\rvert-2\,\lvert X\cap Y\cap W\rvert
-&&\bigl(\because\ \text{互いに素な分割による個数の加法性と }\mathbb Z\text{ の四則}\bigr)
-\end{aligned}`),
-                          paragraph([
-                            "両辺を法 2 で見ると 2 の倍数の項が消えるので、",
-                            ref("def_torus_winding_parities"), " の法 2 の値について、",
-                            math(String.raw`W=C_{L,\mathrm h}`), " の場合が横方向、",
-                            math(String.raw`W=C_{L,\mathrm v}`),
-                            " の場合が縦方向の主張の合同式を与える。",
-                          ]),
-                        ],
                   },
                 },
               }],

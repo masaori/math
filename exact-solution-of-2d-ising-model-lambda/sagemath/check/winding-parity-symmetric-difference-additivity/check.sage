@@ -1,6 +1,6 @@
 """巻き付き偶奇の対称差加法性を厳密検査する。
 
-対象: claim_winding_parity_symmetric_difference_additivity。
+対象: 参照用ノート「不採用経路: 巻き付き偶奇の対称差加法性」。
 
 一辺 L=2 の全ての辺集合対 (X, Y) について、
 eps_h(X △ Y) ≡ eps_h(X) + eps_h(Y) (mod 2) と

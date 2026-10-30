@@ -1,6 +1,6 @@
 # 配向類の局所行列式和と選択項の継ぎ目符号
 
-**対象ラベル**: `claim_winding_parity_symmetric_difference_additivity`,
+**対象ラベル**: `def_torus_winding_parities`,
 `claim_selection_sum_character_evaluation`,
 `claim_kac_ward_determinant_fiber_stratified_phase_sum`
 

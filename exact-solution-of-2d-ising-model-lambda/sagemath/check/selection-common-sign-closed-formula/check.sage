@@ -1,7 +1,7 @@
 """選択項の符号の閉じた式と、共通性が文字の自明性と同値であることを検査する。
 
 対象: claim_selection_sum_character_evaluation,
-      claim_winding_parity_symmetric_difference_additivity。
+      参照用ノート「不採用経路: 巻き付き偶奇の対称差加法性」。
 
 鍵 (D,E) の選択項 w^{a,b}(D∪C)·w^{a,b}(D∪(E\C)) について、A := D∪C と置き、
 巻き付き偶奇の F_2 双線形計算だけから従う恒等式

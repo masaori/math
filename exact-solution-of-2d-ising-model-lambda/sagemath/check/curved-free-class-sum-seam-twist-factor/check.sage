@@ -1,6 +1,6 @@
 """配向類の局所行列式和と選択項が同じ継ぎ目符号を受けることを検査する。
 
-対象: claim_winding_parity_symmetric_difference_additivity,
+対象: 参照用ノート「不採用経路: 巻き付き偶奇の対称差加法性」,
       claim_selection_sum_character_evaluation,
       claim_kac_ward_determinant_fiber_stratified_phase_sum。
 
