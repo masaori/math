@@ -2,8 +2,9 @@
 
 ## 対象
 
-**対象ラベル**: `claim_cut_flag_congruence_start_recovery`、
-`claim_cut_flag_two_coordinate_boundary_completeness`
+**対象ラベル**: `claim_cut_flag_congruence_start_recovery`
+
+旧対象 `claim_cut_flag_two_coordinate_boundary_completeness` は参照用ノート「不採用経路: 二次元座標列と境界延長候補の復元」に退避した。
 
 旧対象 `claim_cut_flag_realizable_candidate_selection` は参照用ノート「不採用経路: 実現可能な切断候補の濾過」に退避した。
 
@@ -27,9 +28,9 @@
 元の座標列が候補に含まれ、両端の一辺延長が返す切断旗も実際の反対端点と一致することを確かめる。
 さらに、復元された行始点と列始点の直積から作る座標列の集合が、全列挙で得た座標列の集合と一致することを
 各合同系で確かめる。従って二次元座標列と境界延長候補の完全性も同じ有限検算の対象である。
-一般の辺長と語長に対する命題と Lean 二版は `claim_cut_flag_congruence_start_recovery` に置き、
-`claim_cut_flag_two_coordinate_boundary_completeness` が行列の独立適用を述べる。この有限全探索は
-それらの具体例と実装経路を厳密整数計算で検算する。
+一般の辺長と語長に対する始点復元の命題と Lean 二版は `claim_cut_flag_congruence_start_recovery` に置く。
+行列の独立適用の元の主張と証明は参照用ノートに保存した。この有限全探索は
+これらの具体例と実装経路を厳密整数計算で検算する。
 
 ## 実行方法
 

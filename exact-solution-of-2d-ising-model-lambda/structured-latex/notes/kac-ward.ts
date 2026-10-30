@@ -638,8 +638,114 @@ M(\varphi)
     ],
   },
   {
+    id: "note_kac_ward_two_coordinate_boundary_completeness_archived",
+    targets: ["claim_cut_flag_congruence_start_recovery"],
+    title: { text: "不採用経路: 二次元座標列と境界延長候補の復元" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、切断旗から支持を再構成する経路は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                      paragraph([
+                        math(String.raw`L,n\in\mathbb N`), "、", math(String.raw`2\le L`),
+                        " とする。各 ", math(String.raw`i\in\{0,\ldots,n-1\}`), " に対し、行と列の累積変位を ",
+                        math(String.raw`\delta_i^{\mathrm r},\delta_i^{\mathrm c}\in\mathbb Z`),
+                        "、行と列の零側・末尾側の切断旗を ",
+                        math(String.raw`(z_i^{\mathrm r},\ell_i^{\mathrm r}),(z_i^{\mathrm c},\ell_i^{\mathrm c})\in\{0,1\}^2`),
+                        " とし、各対で二つの旗が同時に一にならないとする。",
+                      ]),
+                      paragraph([
+                        ref("claim_cut_flag_congruence_start_recovery"),
+                        " を行の変位と旗へ適用して得る始点剰余類の有限集合を ", math(String.raw`S_{\mathrm r}`),
+                        "、列へ適用して得るものを ", math(String.raw`S_{\mathrm c}`), " と書く。また ",
+                      ]),
+                      displayMath(String.raw`w_L(u):=
+\left(\mathbf 1_{[u]_L=0},\mathbf 1_{[u]_L=L-1}\right),\qquad
+W_L(u,v):=\bigl(w_L(u),w_L(v)\bigr)`),
+                      paragraph([
+                        "と定める。記録された四つの切断旗に整合する二次元座標列の集合を ",
+                      ]),
+                      displayMath(String.raw`\mathcal P:=\left\{
+\left(\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)\right)_{i=0}^{n-1}:
+\begin{array}{l}
+r,c\in\{0,\ldots,L-1\},\\
+w_L(r+\delta_i^{\mathrm r})=(z_i^{\mathrm r},\ell_i^{\mathrm r})\quad(0\le i<n),\\
+w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
+\end{array}
+\right\}`),
+                      paragraph(["とすると、有限集合の等式"]),
+                      displayMath(String.raw`\mathcal P=
+\left\{
+\left(\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)\right)_{i=0}^{n-1}:
+r\in S_{\mathrm r},\ c\in S_{\mathrm c}
+\right\}`),
+                      paragraph([
+                        "が成り立つ。さらに、内部語の反対端点までの行列変位を ",
+                        math(String.raw`(\alpha,\beta)\in\mathbb Z^2`),
+                        " とする。この変位は、内部方向列の累積変位へ境界の一辺の変位を足したものである。",
+                        "整合する二次元座標列を反対端点まで延長して得る切断旗候補の集合は",
+                      ]),
+                      displayMath(String.raw`\mathcal B_{\alpha,\beta}=
+\left\{W_L(r+\alpha,c+\beta):r\in S_{\mathrm r},\ c\in S_{\mathrm c}\right\}`),
+                      paragraph([
+                        "に等しい。従って、行と列の有限合同条件を独立に解き、その直積から座標列を作って一辺延長する規則は、",
+                        "実現可能な座標列も境界延長候補も落とさず、実現不能な候補を加えない。扱う量は有限集合と整数の剰余だけであり、",
+                        "実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        "任意の ", math(String.raw`r,c\in\{0,\ldots,L-1\}`), " を取る。",
+                        ref("claim_cut_flag_congruence_start_recovery"),
+                        " を行の累積変位と行の旗へ適用すると、行の全切断旗に整合することと ",
+                        math(String.raw`r\in S_{\mathrm r}`), " は同値である。同じ命題を列へ適用すると、列の全切断旗に整合することと ",
+                        math(String.raw`c\in S_{\mathrm c}`), " は同値である。よって二つを合わせて",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+&\left(
+\begin{array}{l}
+w_L(r+\delta_i^{\mathrm r})=(z_i^{\mathrm r},\ell_i^{\mathrm r})\quad(0\le i<n),\\
+w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
+\end{array}
+\right)\\
+&\qquad\Longleftrightarrow
+\bigl(r\in S_{\mathrm r}\ \land\ c\in S_{\mathrm c}\bigr)
+&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ独立に適用}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "を得る。座標列を ", math(String.raw`v_{r,c}:=\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)_{i=0}^{n-1}`),
+                        " と略記すると、上の同値から",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal P
+&=\{v_{r,c}:r,c\in\{0,\ldots,L-1\},\ r,c\text{ が全切断旗に整合する}\}
+&&\bigl(\because\ \mathcal P\text{ の定義}\bigr)\\
+&=\{v_{r,c}:r\in S_{\mathrm r},\ c\in S_{\mathrm c}\}
+&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ適用した上の同値}\bigr).
+\end{aligned}`),
+                      paragraph(["この等式は両方向の同値なので、復元規則は座標列を落とさず、余分な座標列も加えない。"]),
+                      paragraph([
+                        "次に整合する座標列を一つ取り、その始点を ", math(String.raw`(r,c)`),
+                        " とする。反対端点は始点から整数変位 ", math(String.raw`(\alpha,\beta)`),
+                        " だけ進んだ剰余類なので、その四つの切断旗は ",
+                        math(String.raw`W_L(r+\alpha,c+\beta)`), " である。上の座標列の等式により、整合する始点対はちょうど ",
+                        math(String.raw`S_{\mathrm r}\times S_{\mathrm c}`), " を尽くす。従って境界延長後の旗の像は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal B_{\alpha,\beta}
+&=\left\{W_L(r+\alpha,c+\beta):(r,c)\in S_{\mathrm r}\times S_{\mathrm c}\right\}
+&&\bigl(\because\ \text{整合する始点対の完全性と整数剰余による一辺延長}\bigr)\\
+&=\left\{W_L(r+\alpha,c+\beta):r\in S_{\mathrm r},\ c\in S_{\mathrm c}\right\}
+&&\bigl(\because\ \text{直積の所属の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。これは像の等式なので、境界延長候補についても欠落と余分な候補の双方が無い。",
+                        "全過程は有限集合の直積、整数の加法と剰余、有限個の等式と除外条件だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_cut_candidate_filter_archived",
-    targets: ["claim_cut_flag_two_coordinate_boundary_completeness"],
+    targets: ["claim_cut_flag_congruence_start_recovery"],
     title: { text: "不採用経路: 実現可能な切断候補の濾過" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、切断旗による支持係数の再構成は採らない。元の主張と証明を保存する。"]),
@@ -658,7 +764,7 @@ M(\varphi)
                         math(String.raw`q_k\in(\{0,1\}^2)^2`), " とする。",
                       ]),
                       paragraph([
-                        ref("claim_cut_flag_two_coordinate_boundary_completeness"),
+                        "参照用ノート「不採用経路: 二次元座標列と境界延長候補の復元」",
                         " の規則で候補 ", math(String.raw`k`), " の行と列の始点集合を独立に復元し、",
                         "その直積を変位 ", math(String.raw`(\alpha_k,\beta_k)`),
                         " だけ延長して得る四切断旗の有限集合を ", math(String.raw`\mathcal B_k`),
@@ -684,14 +790,14 @@ M(\varphi)
                         " とは、候補 ", math(String.raw`k`), " の内部語の全切断旗に整合する始点対があり、",
                         "その始点対を変位 ", math(String.raw`(\alpha_k,\beta_k)`),
                         " だけ延長した旗が ", math(String.raw`q_k`), " に等しいことである。",
-                        ref("claim_cut_flag_two_coordinate_boundary_completeness"),
+                        "参照用ノート「不採用経路: 二次元座標列と境界延長候補の復元」",
                         " は、整合する始点対が復元した行列始点集合の直積を尽くし、延長後の旗がその直積の像 ",
                         math(String.raw`\mathcal B_k`), " を尽くすことを与える。従って",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 k\in\mathcal G
 &\Longleftrightarrow q_k\in\mathcal B_k
-&&\bigl(\because\ \blkref{claim_cut_flag_two_coordinate_boundary_completeness}\text{ を候補 }k\text{ へ適用}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 二次元座標列と境界延長候補の復元」}\text{ を候補 }k\text{ へ適用}\bigr)\\
 &\Longleftrightarrow k\in\mathcal R
 &&\bigl(\because\ \mathcal R\text{ の定義}\bigr)
 \end{aligned}`),
@@ -709,7 +815,7 @@ k\in\mathcal G
   },
   {
     id: "note_kac_ward_selected_support_coefficient_reconstruction_archived",
-    targets: ["claim_cut_flag_two_coordinate_boundary_completeness"],
+    targets: ["claim_cut_flag_congruence_start_recovery"],
     title: { text: "不採用経路: 実現可能な最小切断による支持係数の再構成" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、巡回支持の係数を再構成する経路は採らない。元の主張と証明を保存する。"]),
@@ -763,7 +869,7 @@ k\in\mathcal G
   },
   {
     id: "note_kac_ward_two_support_coefficient_formula_archived",
-    targets: ["claim_cut_flag_two_coordinate_boundary_completeness"],
+    targets: ["claim_cut_flag_congruence_start_recovery"],
     title: { text: "不採用経路: 二つの正準巡回支持の係数式" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開の支持係数を有限データから再構成する経路は採らない。以下は元の主張と証明を保存したものである。"]),
