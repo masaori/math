@@ -7,6 +7,117 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_non_phase_reversing_standard_smoothing_archived",
+    targets: ["claim_standard_contact_smoothing_involution"],
+    title: { text: "不採用経路: 標準対平滑化の非位相反転部分集合への制限" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の定義・主張・証明を保存する。"]),
+      paragraph(["元の定義:"]),
+                          paragraph([
+                            math(String.raw`\delta\in\{-4,4\}`), " に対して、有限集合 ",
+                            math(String.raw`\mathcal A_L^{(\delta)}`), " を",
+                          ]),
+                          displayMath(String.raw`\mathcal A_L^{(\delta)}:=\left\{\,\varphi\in\mathcal A_L\ \middle|\
+\begin{aligned}
+&\tau\bigl(\vec e,\varphi(\vec e)\bigr)+\tau\bigl(\vec f,\varphi(\vec f)\bigr)\\
+&\quad-\tau\bigl(\vec e,\varphi(\vec f)\bigr)-\tau\bigl(\vec f,\varphi(\vec e)\bigr)=\delta,\\
+&\{\vec e,\vec f\}=\operatorname{ct}_{\min}(\varphi)
+\end{aligned}\right\}`),
+                          paragraph([
+                            "と定める。", math(String.raw`\mathcal A_L`), " と標準接触対は ",
+                            ref("claim_standard_contact_smoothing_involution"), " と ",
+                            ref("def_standard_contact_pair"), "、一歩の回転数は ",
+                            ref("def_step_turning"), " で定めた。所属は有限集合の元と整数の等式だけで判定される。",
+                            ref("claim_reconnection_turning_difference"), " により、",
+                            math(String.raw`\mathcal A_L`), " は ",
+                            math(String.raw`\mathcal B_L`), "（", ref("def_phase_reversing_standard_subset"), "）と ",
+                            math(String.raw`\mathcal A_L^{(-4)}`), " と ",
+                            math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な和に分かれる。",
+                          ]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`\delta\in\{-4,4\}`), " とし、任意の ",
+                        math(String.raw`\varphi\in\mathcal A_L^{(\delta)}`),
+                        "（", "上の定義", "）を取る。このとき",
+                      ]),
+                      list([
+                        [math(String.raw`S(\varphi)\in\mathcal A_L^{(-\delta)}`), " である。"],
+                        ["任意の ", math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）について、",
+                          math(String.raw`\mathcal W^{a,b}_L(S(\varphi))=\mathcal W^{a,b}_L(\varphi)`), " である。"],
+                      ]),
+                      paragraph([
+                        "したがって標準対平滑化 ", math(String.raw`S`), " は、各ファイバーを保つ不動点の無い対合として ",
+                        math(String.raw`\mathcal A_L^{(-4)}`), " と ", math(String.raw`\mathcal A_L^{(4)}`),
+                        " を全単射で交換するが、この二集合の位相寄与を相殺しない。",
+                      ]),
+                      paragraph([
+                        "とくに、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
+                        math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
+                        "）を満たすなら、任意の ", math(String.raw`(a,b)\in\mathcal S`), " について",
+                      ]),
+                      displayMath(String.raw`\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}
+\mathcal W^{a,b}_L(\varphi)
+=\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)`),
+                      paragraph([
+                        "が成り立つ。したがってファイバー位相和の回転差二部分は、その一方の二倍として書ける。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
+                        math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`), " と置く。",
+                        ref("claim_standard_contact_smoothing_involution"), " により ", math(String.raw`\psi\in\mathcal A_L`),
+                        " であり、", ref("claim_contact_pair_set_smoothing_invariant"), " により ",
+                        math(String.raw`\operatorname{ct}_{\min}(\psi)=\{\vec e,\vec f\}`), " である。標準対の回転差は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+&\tau\bigl(\vec e,\psi(\vec e)\bigr)+\tau\bigl(\vec f,\psi(\vec f)\bigr)
+-\tau\bigl(\vec e,\psi(\vec f)\bigr)-\tau\bigl(\vec f,\psi(\vec e)\bigr)\\
+&=\tau\bigl(\vec e,\varphi(\vec f)\bigr)+\tau\bigl(\vec f,\varphi(\vec e)\bigr)
+-\tau\bigl(\vec e,\varphi(\vec e)\bigr)-\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&=-\delta
+&&\bigl(\because\ \text{上の定義}\text{ と整数の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "なので、", math(String.raw`\psi\in\mathcal A_L^{(-\delta)}`), " である。",
+                      ]),
+                      paragraph([
+                        "位相寄与を比較する。", ref("claim_contact_smoothing_phase_reversal_iff"), " の証明で得た表示において、",
+                        "平滑化は置換符号へ ", math(String.raw`-1`), " を掛け、変わる二つの遷移成分の積へ ",
+                        math(String.raw`\zeta_8^{-\delta}`), " を掛ける。", math(String.raw`\delta\in\{-4,4\}`), " と ",
+                        ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8^4=-1`), " により ",
+                        math(String.raw`\zeta_8^{-\delta}=-1`), " なので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\psi)
+&=(-1)\,\zeta_8^{-\delta}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_contact_smoothing_phase_reversal_iff}\text{ の位相寄与の比較}\bigr)\\
+&=(-1)(-1)\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \delta\in\{-4,4\},\ \blkref{def_rotation_phase}\bigr)\\
+&=\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。対合性・不動点なし・ファイバー保存は ",
+                        ref("claim_standard_contact_smoothing_involution"), " から従い、第一の主張から二集合を交換する。",
+                        "よって ", math(String.raw`S`), " は ",
+                        math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}`), " から ",
+                        math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}`),
+                        " への位相寄与を保つ全単射であり、左辺の有限和を ", math(String.raw`S`),
+                        " で添字変換する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}\mathcal W^{a,b}_L(\varphi)
+&=\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}}\mathcal W^{a,b}_L(S(\varphi))
+&&\bigl(\because\ \mathcal W^{a,b}_L(S(\varphi))=\mathcal W^{a,b}_L(\varphi)\bigr)\\
+&=\sum_{\psi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}\mathcal W^{a,b}_L(\psi)
+&&\bigl(\because\ S\text{ は上記二集合の全単射、有限和の添字変換}\bigr).
+\end{aligned}`),
+                      paragraph(["全過程は有限集合の元の比較、整数と代数的数の有限演算だけで閉じる。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_fiber_phase_integer_decomposition_archived",
     targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: ファイバー位相和の三つの符号付き数え上げへの分解" },
@@ -30,7 +141,7 @@ export default defineNotes([
 \end{aligned}`),
                         paragraph([
                           "を定める。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
-                          "、回転差が四である集合は ", ref("def_standard_turning_difference_subsets"),
+                          "、回転差が四である集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                           "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                           " で定めた。いずれも有限集合であり、所属は有限集合の元と代数的数の等号で判定できる。",
                         ]),
@@ -70,7 +181,7 @@ export default defineNotes([
                         math(String.raw`\varphi\in\mathcal A_L`), " と ",
                         math(String.raw`\varphi\in\mathcal R_L`),
                         "（", ref("def_unswitchable_standard_pair_subset"), "）のちょうど一方が成り立つ。さらに ",
-                        ref("def_standard_turning_difference_subsets"), " により ",
+                        "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義", " により ",
                         math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`), "、",
                         math(String.raw`\mathcal A_L^{(-4)}`), "、", math(String.raw`\mathcal A_L^{(4)}`),
                         " の互いに素な合併である。したがってファイバーは、接触の無い部分、",
@@ -99,7 +210,7 @@ export default defineNotes([
 \mathcal W^{a,b}_L(\varphi)
 +\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
 \mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_non_phase_reversing_standard_smoothing_involution}\text{ と }\overline{\mathbb Q}\text{ の分配則}\bigr)
+&&\bigl(\because\ \text{参照用ノートの標準対平滑化の主張}\text{ と }\overline{\mathbb Q}\text{ の分配則}\bigr)
 \end{aligned}`),
                       paragraph([
                         ref("claim_contact_free_fiber_phase_signed_count"), "、",
@@ -1077,7 +1188,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
                         "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
-                        "、回転差が正負四である二集合は ", ref("def_standard_turning_difference_subsets"),
+                        "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         " で定めた。全て有限集合上の有限和であり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -1087,7 +1198,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`D(\varphi)=\varnothing`), " なので、",
                         "退避した主張「切り替え不能な標準接触対は反転対の辺を強制する」の対偶により標準接触対は切り替え可能であり、",
                         math(String.raw`\varphi\in\mathcal A_L`), "（", ref("claim_standard_contact_smoothing_involution"),
-                        "）である。", ref("def_standard_turning_difference_subsets"), " により ",
+                        "）である。", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義", " により ",
                         math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
                         " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
                         math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な合併である。したがって ",
@@ -1150,7 +1261,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
                         "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
-                        "、回転差が正負四である二集合は ", ref("def_standard_turning_difference_subsets"),
+                        "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         "、標準対が切り替え不能な置換の集合は ", ref("def_unswitchable_standard_pair_subset"),
                         " で定めた。元の主張は有限集合上の有限和だけを用い、実数体も複素数体も現れない。",
                       ]),
@@ -1169,7 +1280,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\varphi\in\mathcal A_L`), " と ",
                         math(String.raw`\varphi\in\mathcal R_L`),
                         "（", ref("def_unswitchable_standard_pair_subset"),
-                        "）のちょうど一方が成り立つ。", ref("def_standard_turning_difference_subsets"),
+                        "）のちょうど一方が成り立つ。", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         " により ", math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
                         " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
                         math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な合併である。したがって ",
@@ -3476,10 +3587,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample",
-    targets: [
-      "def_standard_turning_difference_subsets",
-      "def_unswitchable_standard_pair_subset",
-    ],
+    targets: ["def_unswitchable_standard_pair_subset"],
     title: { text: "標準接触対に依存する分類は経路反転で保たれない" },
     body: [
       paragraph([

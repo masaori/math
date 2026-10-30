@@ -1,6 +1,8 @@
 # SageMath Check: 標準対の回転差が正負四である部分集合上の位相保存対合
 
-**対象ラベル**: `claim_non_phase_reversing_standard_smoothing_involution`
+旧主張「標準対平滑化は正負四の部分集合を交換して位相寄与を保つ」は参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」に保存した。
+
+**対象ラベル**: `claim_standard_contact_smoothing_involution`
 
 標準接触対が切り替え可能で、その回転差が $-4$ または $4$ である置換の集合
 $\mathcal A_L^{(-4)}$ と $\mathcal A_L^{(4)}$ を作る。標準対平滑化が両集合を交換し、

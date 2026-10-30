@@ -12,4 +12,3 @@ def standard_delta(phi):
     pair = tuple(ct_min(phi))
     return standard_pair_delta(phi, pair)
 fiber_members = {delta: {} for delta in (ZZ(-4), ZZ(4))}
-all_fibers = set(fiber_members[-4]).union(fiber_members[4])

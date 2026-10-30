@@ -1,6 +1,6 @@
 """標準対の回転差が正負四である部分集合上の位相保存対合を厳密検査する。
 
-対象: claim_non_phase_reversing_standard_smoothing_involution。
+対象: 参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」。
 
 一辺 L=2 の全非後退置換から A_L^(-4) と A_L^(4) を作り、標準対平滑化が
 両集合を交換し、二回適用で元へ戻り、不動点を持たず、M・D・E_1 と四つの
@@ -45,6 +45,8 @@ for delta in (ZZ(-4), ZZ(4)):
                 assert after == before
                 checked += 1
 
+all_fibers = set(fiber_members[-4]).union(fiber_members[4])
+assert len(all_fibers) > 0
 fiber_sum_equalities = 0
 for fiber in all_fibers:
     for a in (0, 1):

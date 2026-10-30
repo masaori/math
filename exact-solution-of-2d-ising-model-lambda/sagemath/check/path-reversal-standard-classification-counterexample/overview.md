@@ -1,6 +1,6 @@
 # 経路反転で標準接触対に依存する分類は保たれない
 
-**対象ラベル**: `def_standard_turning_difference_subsets`, `def_unswitchable_standard_pair_subset`
+**対象ラベル**: `def_unswitchable_standard_pair_subset`（回転差の定義は参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」に保存）
 
 旧対象 `claim_path_reversal_contact_pair_preservation` は参照用ノート「不採用経路: 経路反転と接触対の対応」に退避した。
 
