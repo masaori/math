@@ -19,7 +19,7 @@ S_Y（全対切り替え不能）が個別に消えるかを数える。確か�
 計算は ZZ と Q(zeta8) の等号だけで行い、浮動小数点は使わない。
 """
 
-load("sagemath/check/path-reversal-selection-complement-orbits/check.sage")
+load("sagemath/archive/path-reversal-selection-complement-orbits/check.sage")
 
 
 def winding_pairing(first, second):

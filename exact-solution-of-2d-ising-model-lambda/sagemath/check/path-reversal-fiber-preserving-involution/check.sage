@@ -1,6 +1,6 @@
 """経路反転が非後退置換のファイバーを保つ対合であることを厳密検査する。
 
-対象: claim_path_reversal_fiber_preserving_involution。
+対象: 参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」。
 
 一辺 L=2 のトーラスの全非後退置換 phi について、経路反転
 T(phi) = iota . phi^{-1} . iota を構成し、

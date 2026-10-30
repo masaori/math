@@ -77913,16 +77913,14 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
               kind: "section",
               id: "kac_ward_heading_permutation_path_reversal",
               labels: [],
-              title: { text: "置換の経路反転とファイバーの保存" },
+              title: { text: "置換の経路反転" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_path_reversal_fiber_preserving_involution",
-                  beforeFocus: [
-                    {
-                      role: "prerequisiteDefinition",
-                      element: {
+                  id: "group_of_kac_ward_definition_permutation_path_reversal",
+                  beforeFocus: [],
+                  focus: {
                         id: "kac_ward_definition_permutation_path_reversal",
                         kind: "definition",
                         title: { text: "置換の経路反転" },
@@ -77949,194 +77947,6 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                             "実数体も複素数体も現れない。",
                           ]),
                         ],
-                      },
-                    },
-                  ],
-                  focus: {
-                    id: "kac_ward_claim_path_reversal_fiber_preserving_involution",
-                    kind: "claim",
-                    title: { text: "経路反転は非後退置換のファイバーを保つ対合である" },
-                    labels: ["claim_path_reversal_fiber_preserving_involution"],
-                    habitat: "N",
-                    verification: ["sagemath/check/path-reversal-fiber-preserving-involution"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\ge1`), " とし、",
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。このとき",
-                      ]),
-                      list([
-                        [math(String.raw`M(\mathcal T(\varphi))=\{\iota(\vec g)\mid\vec g\in M(\varphi)\}`),
-                          " である（", math(String.raw`M`), " は ", ref("def_moved_edge_set"), "）。"],
-                        [math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " である。"],
-                        [math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。"],
-                        [math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
-                          math(String.raw`E_1(\mathcal T(\varphi))=E_1(\varphi)`), " である（",
-                          ref("def_doubled_edge_set"), "、", ref("def_single_traversal_edge_set"), "）。"],
-                      ]),
-                      paragraph([
-                        "とくに、", math(String.raw`D\cap E=\varnothing`), " かつ ",
-                        math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
-                        "）を満たす任意の辺集合 ", math(String.raw`D,E\subseteq E_L`),
-                        " について、経路反転はファイバー ", math(String.raw`\mathcal N_L(D,E)`),
-                        "（", ref("def_nonbacktracking_permutation_fiber"),
-                        "）から自分自身への全単射である。全て有限集合の元の比較だけで判定でき、",
-                        "実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "準備として、任意の ", math(String.raw`\vec g=(e,d)\in\vec E_L`), " について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{tgt}(\iota(\vec g))&=\operatorname{src}(\vec g)&&\bigl(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints}\bigr),\\
-\operatorname{src}(\iota(\vec g))&=\operatorname{tgt}(\vec g)&&\bigl(\because\ \blkref{def_edge_reversal},\ \blkref{def_oriented_edge_endpoints}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "が成り立つことを見る。", math(String.raw`d=0`), " の場合、",
-                        ref("def_edge_reversal"), " により ", math(String.raw`\iota(e,0)=(e,1)`), " なので、",
-                        ref("def_oriented_edge_endpoints"), " により ",
-                        math(String.raw`\operatorname{tgt}(e,1)=\partial_0(e)=\operatorname{src}(e,0)`), " かつ ",
-                        math(String.raw`\operatorname{src}(e,1)=\partial_1(e)=\operatorname{tgt}(e,0)`), " である。",
-                        math(String.raw`d=1`), " の場合も同じ二つの等式を逆向きに読んで ",
-                        math(String.raw`\operatorname{tgt}(e,0)=\partial_1(e)=\operatorname{src}(e,1)`), " かつ ",
-                        math(String.raw`\operatorname{src}(e,0)=\partial_0(e)=\operatorname{tgt}(e,1)`), " である。",
-                      ]),
-                      paragraph([
-                        "第一の主張を示す。任意の ", math(String.raw`\vec g\in\vec E_L`), " について、所属を同値変形する。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\vec g\in M(\mathcal T(\varphi))
-&\Longleftrightarrow
-\iota\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\ne\vec g
-&&\bigl(\because\ \blkref{def_moved_edge_set},\ \blkref{def_permutation_path_reversal}\bigr)\\
-&\Longleftrightarrow
-\varphi^{-1}(\iota(\vec g))\ne\iota(\vec g)
-&&\bigl(\because\ \vec g=\iota(\iota(\vec g))\text{（}\blkref{claim_reversal_is_involution}\text{）と }\iota\text{ の単射性}\bigr)\\
-&\Longleftrightarrow
-\iota(\vec g)\ne\varphi(\iota(\vec g))
-&&\bigl(\because\ \text{両辺への }\varphi\text{ の適用。}\varphi\text{ は単射（}\blkref{def_row_permutation}\text{）}\bigr)\\
-&\Longleftrightarrow
-\iota(\vec g)\in M(\varphi)
-&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "であり、", math(String.raw`\iota`), " は対合（", ref("claim_reversal_is_involution"),
-                        "）なので、最後の条件は ", math(String.raw`\vec g\in\{\iota(\vec h)\mid\vec h\in M(\varphi)\}`),
-                        " と同値である。よって ",
-                        math(String.raw`M(\mathcal T(\varphi))=\{\iota(\vec h)\mid\vec h\in M(\varphi)\}`), " である。",
-                      ]),
-                      paragraph([
-                        "第二の主張を示す。", math(String.raw`\vec g\in\vec E_L`), " が ",
-                        math(String.raw`\mathcal T(\varphi)(\vec g)\ne\vec g`), " を満たすとする。第一の主張の同値変形により ",
-                        math(String.raw`\iota(\vec g)\in M(\varphi)`), " である。",
-                        math(String.raw`\vec h:=\varphi^{-1}(\iota(\vec g))`), " と置くと ",
-                        math(String.raw`\varphi(\vec h)=\iota(\vec g)`), " であり、",
-                        math(String.raw`\mathcal T(\varphi)(\vec g)=\iota(\vec h)`), " である。もし ",
-                        math(String.raw`\varphi(\vec h)=\vec h`), " なら ", math(String.raw`\vec h=\iota(\vec g)`),
-                        " となり、代入して ", math(String.raw`\varphi(\iota(\vec g))=\iota(\vec g)`), " が従うが、これは ",
-                        math(String.raw`\iota(\vec g)\in M(\varphi)`), "（", ref("def_moved_edge_set"),
-                        "）に反する。よって ", math(String.raw`\vec h\in M(\varphi)`), " であり、",
-                        ref("def_nonbacktracking_permutations"), " により ",
-                        math(String.raw`\varphi(\vec h)\in\operatorname{Next}(\vec h)`), "、すなわち ",
-                        ref("def_nonbacktracking_successors"), " により ",
-                        math(String.raw`\operatorname{src}(\varphi(\vec h))=\operatorname{tgt}(\vec h)`), " かつ ",
-                        math(String.raw`\varphi(\vec h)\ne\iota(\vec h)`), " である。終点を計算する。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{tgt}(\vec g)
-&=\operatorname{tgt}\bigl(\iota(\varphi(\vec h))\bigr)
-&&\bigl(\because\ \varphi(\vec h)=\iota(\vec g)\text{ と }\vec g=\iota(\iota(\vec g))\text{（}\blkref{claim_reversal_is_involution}\text{）}\bigr)\\
-&=\operatorname{src}(\varphi(\vec h))
-&&\bigl(\because\ \text{準備の等式}\bigr)\\
-&=\operatorname{tgt}(\vec h)
-&&\bigl(\because\ \blkref{def_nonbacktracking_successors}\bigr)\\
-&=\operatorname{src}(\iota(\vec h))
-&&\bigl(\because\ \text{準備の等式}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "さらに ", math(String.raw`\iota(\vec h)\ne\iota(\vec g)`), " である。実際、もし ",
-                        math(String.raw`\iota(\vec h)=\iota(\vec g)`), " なら ", math(String.raw`\iota`),
-                        " の単射性から ", math(String.raw`\vec h=\vec g`), " となり、",
-                        math(String.raw`\varphi(\vec h)=\iota(\vec g)=\iota(\vec h)`), " が従うが、これは上の ",
-                        math(String.raw`\varphi(\vec h)\ne\iota(\vec h)`), " に反する。したがって ",
-                        ref("def_nonbacktracking_successors"), " により ",
-                        math(String.raw`\mathcal T(\varphi)(\vec g)=\iota(\vec h)\in\operatorname{Next}(\vec g)`),
-                        " であり、", ref("def_nonbacktracking_permutations"), " により ",
-                        math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " である。",
-                      ]),
-                      paragraph([
-                        "第三の主張を示す。まず ", math(String.raw`\mathcal T(\varphi)`), " の逆写像が ",
-                        math(String.raw`\iota\circ\varphi\circ\iota`), " であることを、両側の合成の計算で見る。任意の ",
-                        math(String.raw`\vec g\in\vec E_L`), " について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-(\iota\circ\varphi\circ\iota)\bigl(\mathcal T(\varphi)(\vec g)\bigr)
-&=\iota\Bigl(\varphi\Bigl(\iota\Bigl(\iota\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\Bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
-&=\iota\bigl(\varphi\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\bigr)
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
-&=\iota(\iota(\vec g))
-&&\bigl(\because\ \varphi\circ\varphi^{-1}\text{ は恒等写像（逆写像の定義）}\bigr)\\
-&=\vec g
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。逆の合成も次の通りである。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\mathcal T(\varphi)\bigl((\iota\circ\varphi\circ\iota)(\vec g)\bigr)
-&=\iota\Bigl(\varphi^{-1}\Bigl(\iota\Bigl(\iota\bigl(\varphi(\iota(\vec g))\bigr)\Bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
-&=\iota\bigl(\varphi^{-1}(\varphi(\iota(\vec g)))\bigr)
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
-&=\iota(\iota(\vec g))
-&&\bigl(\because\ \varphi^{-1}\circ\varphi\text{ は恒等写像}\bigr)\\
-&=\vec g
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "二つの合成が恒等写像なので ",
-                        math(String.raw`\mathcal T(\varphi)^{-1}=\iota\circ\varphi\circ\iota`), " である。これを使うと",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\mathcal T(\mathcal T(\varphi))(\vec g)
-&=\iota\Bigl(\mathcal T(\varphi)^{-1}\bigl(\iota(\vec g)\bigr)\Bigr)
-&&\bigl(\because\ \blkref{def_permutation_path_reversal}\bigr)\\
-&=\iota\Bigl(\iota\Bigl(\varphi\bigl(\iota(\iota(\vec g))\bigr)\Bigr)\Bigr)
-&&\bigl(\because\ \mathcal T(\varphi)^{-1}=\iota\circ\varphi\circ\iota\bigr)\\
-&=\varphi(\vec g)
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\text{（外側と内側の二重反転を除く）}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "が任意の ", math(String.raw`\vec g\in\vec E_L`), " で成り立つので、",
-                        math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。",
-                      ]),
-                      paragraph([
-                        "第四の主張を示す。任意の ", math(String.raw`e\in E_L`), " と ",
-                        math(String.raw`d\in\{0,1\}`), " について、第一の主張と ",
-                        ref("def_edge_reversal"), " により ",
-                        math(String.raw`(e,d)\in M(\mathcal T(\varphi))\Longleftrightarrow(e,1-d)\in M(\varphi)`),
-                        " である。したがって、二つの向きが両方 ", math(String.raw`M(\mathcal T(\varphi))`),
-                        " に属することと両方 ", math(String.raw`M(\varphi)`), " に属することは同値であり（",
-                        ref("def_doubled_edge_set"), "）、少なくとも一方が属することも同値である（",
-                        ref("def_moved_edge_support_set"), "）。よって ",
-                        math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
-                        math(String.raw`E_{\mathrm{supp}}(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)`), " であり、",
-                        ref("def_single_traversal_edge_set"), " により ",
-                        math(String.raw`E_1(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)=E_1(\varphi)`),
-                        " である。",
-                      ]),
-                      paragraph([
-                        "最後に「とくに」を示す。", math(String.raw`\varphi\in\mathcal N_L(D,E)`),
-                        " なら、第二・第四の主張と ", ref("def_nonbacktracking_permutation_fiber"), " により ",
-                        math(String.raw`\mathcal T(\varphi)\in\mathcal N_L(D,E)`),
-                        " である。第三の主張により経路反転は二回適用で元へ戻るので、",
-                        math(String.raw`\mathcal N_L(D,E)`),
-                        " からそれ自身への全単射である。全過程は有限集合の元の比較と写像の合成だけで閉じ、",
-                        "実数体も複素数体も現れない。",
-                      ]),
-                    ],
                   },
                 },
               }],

@@ -9,7 +9,7 @@
 $U=0$（文字評価）を assert する。
 
 - 実行: `sage sagemath/check/fiber-phase-character-vanishing/check.sage`
-- 状態: PASS（2026-09-03。実行 4 分 32 秒）
+- 状態: PASS（2026-10-30）
 - 方法: $\mathbb Z$ と $\mathbb Q(\zeta_8)$ の等号だけ。浮動小数点は使わない。
 - 結果: 全 $2{,}436$ 組の種別は、空 $768$ 組・非自明文字 $192$ 組・自明文字 $1{,}476$ 組。
   **空と非自明文字の全 $960$ 組で $S_Z,S_X,S_Y$ は全て個別に零**であり、非零の部分和は

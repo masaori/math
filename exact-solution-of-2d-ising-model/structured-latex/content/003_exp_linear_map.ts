@@ -1399,7 +1399,11 @@ S_NT_N
         ref("matrix_norm_triangle_inequality"),
         " (1) より",
       ]),
-      displayMath(String.raw`\exp(A)\exp(B)=\exp(A+B)`),
+      displayMath(String.raw`\begin{aligned}
+\exp(A)\exp(B)
+&=\exp(A+B)
+&&(\because\ \text{直前のノルム零の結論と}\ \blkref{matrix_norm_triangle_inequality}\text{ (1)})
+\end{aligned}`),
       paragraph([
         "なお、この証明で用いたのは行列の積・和の計算と ",
         ref("def_matrix_norm"),

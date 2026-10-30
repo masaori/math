@@ -2,15 +2,16 @@
 
 旧主張「選択集合への偶部分グラフの対称差作用」は参照用ノートへ退避した。
 
-**対象ラベル**: `def_signed_selection_sum`,
-`claim_path_reversal_fiber_preserving_involution`
+旧主張「経路反転による非後退置換ファイバーの保存」も参照用ノートへ退避した。
+
+**対象ラベル**: `def_signed_selection_sum`
 
 一辺 $L=2$ の非後退置換 $\varphi$ と、その単純通過辺集合 $E$ に含まれる偶部分グラフ
 $H$ の全 $78{,}752$ 組について、$H$ 上だけ二つの向きを交換する対合 $\rho_H$ による共役
 $\rho_H\circ\varphi\circ\rho_H$ が、選択和の文字に対応する置換側の作用になるかを検査する。
 
 - 実行: `sage sagemath/check/even-subgraph-oriented-edge-conjugation/check.sage`
-- 状態: PASS（2026-09-03）
+- 状態: PASS（2026-10-30）
 - 方法: 有限集合・有限写像と $\mathbb Q(\zeta_8)$ の等号だけ。浮動小数点は使わない。
 - 結果: 共役は全組で反転対辺集合 $D$ と単純通過辺集合 $E$ を保ったが、$43{,}664$ 組で
   非後退性を壊した。非後退性を保った像についても、期待する文字符号
