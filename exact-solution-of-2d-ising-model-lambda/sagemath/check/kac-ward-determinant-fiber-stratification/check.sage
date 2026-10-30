@@ -47,7 +47,7 @@ for a in (0, 1):
                 phi = nonbacktracking_permutations[index]
                 walks = orbits_of[index]
 
-                # 軌道長総和 = 2|D|+|E|（claim_moved_orbit_length_sum_stratified）。
+                # 軌道長総和 = 2|D|+|E|（参照用ノート「不採用経路: 軌道の長さの総和は反転対と単純通過で数えられる」）。
                 assert sum(len(walk) for walk in walks) \
                     == 2 * len(doubled) + len(single)
 
