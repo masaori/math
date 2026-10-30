@@ -7,6 +7,75 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_contact_free_fiber_phase_signed_count_archived",
+    targets: ["claim_contact_free_permutation_phase_product"],
+    title: { text: "不採用経路: 接触の無い部分の位相和の符号付き数え上げ" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`D\cap E=\varnothing`), " かつ ",
+                        math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。有限集合",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal N^{0,+}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\ \bigm|\
+N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=1\,\bigr\},\\
+\mathcal N^{0,-}_L(D,E;a,b)
+&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\ \bigm|\
+N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
+\end{aligned}`),
+                      paragraph([
+                        "を定めると、", math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\sum_{\substack{\varphi\in\mathcal N_L(D,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
+=\bigl\lvert\mathcal N^{0,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{0,-}_L(D,E;a,b)\bigr\rvert
+\in\mathbb Z`),
+                      paragraph([
+                        "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                        "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\mathcal N_L(D,E)`), " が ",
+                        math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " を満たすとする。",
+                        ref("claim_contact_free_permutation_phase_product"), " により、各軌道の二次符号の積として",
+                      ]),
+                      displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)
+=\prod_{C\in\mathcal C(\varphi)}
+\chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)
+\in\{-1,1\}
+\qquad\bigl(\because\ \blkref{claim_contact_free_permutation_phase_product}\text{ と }\{-1,1\}\text{ の積の閉性}\bigr)`),
+                      paragraph([
+                        "したがって接触の無い部分は ",
+                        math(String.raw`\mathcal N^{0,+}_L(D,E;a,b)`), " と ",
+                        math(String.raw`\mathcal N^{0,-}_L(D,E;a,b)`),
+                        " の互いに素な合併である。この非交和で有限和を分けると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{\varphi\in\mathcal N_L(D,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
+&=\sum_{\varphi\in\mathcal N^{0,+}_L(D,E;a,b)}1
++\sum_{\varphi\in\mathcal N^{0,-}_L(D,E;a,b)}(-1)
+&&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
+&=\bigl\lvert\mathcal N^{0,+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal N^{0,-}_L(D,E;a,b)\bigr\rvert
+&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "を得る。全過程は有限集合の分割、二次符号の有限積、整数の有限和だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_residual_fiber_phase_signed_count_archived",
     targets: ["claim_phase_contribution_sign_value"],
     title: { text: "不採用経路: 残余の位相和の符号付き数え上げ" },
@@ -233,7 +302,7 @@ export default defineNotes([
 \end{aligned}`),
                       paragraph([
                         "が成り立つ。接触の無い部分の二集合は ",
-                        ref("claim_contact_free_fiber_phase_signed_count"),
+                        "参照用ノート「不採用経路: 接触の無い部分の位相和の符号付き数え上げ」",
                         "、回転差が四の部分の二集合は ",
                         "上の正負符号集合の定義",
                         "、残余の二集合は ", "参照用ノート「不採用経路: 残余の位相和の符号付き数え上げ」",
@@ -279,7 +348,7 @@ export default defineNotes([
 &&\bigl(\because\ \text{参照用ノートの標準対平滑化の主張}\text{ と }\overline{\mathbb Q}\text{ の分配則}\bigr)
 \end{aligned}`),
                       paragraph([
-                        ref("claim_contact_free_fiber_phase_signed_count"), "、",
+                        "参照用ノート「不採用経路: 接触の無い部分の位相和の符号付き数え上げ」", "、",
                         ref("claim_phase_contribution_sign_value"), " を回転差が四の部分へ適用した符号別の非交和、",
                         "参照用ノート「不採用経路: 残余の位相和の符号付き数え上げ」",
                         " を三つの有限和へ順に適用すると、主張の右辺を得る。",
