@@ -1,7 +1,6 @@
 """奇数辺長の全辺鍵で K=U=0 となり、平方恒等式の同じ項が消えることを検査する。
 
 対象: claim_kac_ward_determinant_fiber_stratified_phase_sum,
-      claim_signed_even_subgraph_square_stratified,
       claim_selection_sum_character_evaluation。
 
 奇数辺長の全辺鍵 (D,E)=(空集合,E_L) では、対角共変な符号反転完全

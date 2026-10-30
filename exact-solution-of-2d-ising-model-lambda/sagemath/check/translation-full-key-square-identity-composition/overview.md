@@ -1,7 +1,6 @@
 # 奇数辺長の全辺鍵の零和と平方恒等式への合成
 
 **対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`,
-`claim_signed_even_subgraph_square_stratified`,
 `claim_selection_sum_character_evaluation`
 - 住処: 有限集合、有限置換、整数、円分体
 - 実行: `sage sagemath/check/translation-full-key-square-identity-composition/check.sage`

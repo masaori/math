@@ -1,6 +1,8 @@
 # SageMath Check: 符号付き偶部分グラフ多項式の平方の選択集合による層別
 
-**対象ラベル**: `claim_signed_even_subgraph_square_stratified`
+**対象ラベル**: `def_signed_selection_sum`
+
+平方の層別は参照用ノート「不採用経路: 符号付き偶部分グラフ多項式の平方の層別」に保存した。
 
 $L=2$ のトーラスと四つのスピン構造 $(a,b)$ について、次を `ZZ[x]` で厳密検査する。
 
