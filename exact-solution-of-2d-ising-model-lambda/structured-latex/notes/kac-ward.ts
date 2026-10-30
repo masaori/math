@@ -3,9 +3,196 @@
  * 検算は証明ではなく、一般化できない有限標本を本文へ混ぜない。
  */
 
-import { defineNotes, displayMath, math, paragraph, ref } from "../schema.ts";
+import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.ts";
 
 export default defineNotes([
+  {
+    id: "note_kac_ward_path_reversal_switchable_classification_archived",
+    targets: ["def_permutation_path_reversal"],
+    title: { text: "不採用経路: 経路反転による接触対の分類保存" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触対を分類して経路反転軌道を直接比較する経路は採らない。元の定義・主張・証明を保存する。"]),
+      paragraph(["元の定義:"]),
+                          paragraph([
+                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                            "（", ref("def_nonbacktracking_permutations"), "）に対し、切り替え可能な接触対の集合を",
+                          ]),
+                          displayMath(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi):=\bigl\{\,P\in\operatorname{Ct}(\varphi)\ \bigm|\
+P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
+                          paragraph([
+                            "と定め、その元の個数を ",
+                            math(String.raw`N_{\mathrm{sw}}(\varphi):=\lvert\operatorname{Ct}_{\mathrm{sw}}(\varphi)\rvert\in\mathbb N`),
+                            " と書く（接触対の集合 ", math(String.raw`\operatorname{Ct}(\varphi)`), " は ",
+                            ref("def_standard_contact_pair"), "、切り替え可能な接触対は ",
+                            ref("def_switchable_permutation_contact_pair"),
+                            "。ここで二重の縦棒は有限集合の元の個数を表す）。さらに三つの有限集合を",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathcal Z_L&:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ N_{\mathrm{ct}}(\varphi)=0\,\bigr\},\\
+\mathcal X_L&:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ N_{\mathrm{sw}}(\varphi)\ge1\,\bigr\},\\
+\mathcal Y_L&:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ N_{\mathrm{ct}}(\varphi)\ge1,\ N_{\mathrm{sw}}(\varphi)=0\,\bigr\}
+\end{aligned}`),
+                          paragraph([
+                            "と定める（接触対の個数 ", math(String.raw`N_{\mathrm{ct}}`), " は ",
+                            ref("def_permutation_contact_pair_count"), "）。",
+                            math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)\subseteq\operatorname{Ct}(\varphi)`),
+                            " なので ", math(String.raw`N_{\mathrm{sw}}(\varphi)\le N_{\mathrm{ct}}(\varphi)`),
+                            " であり、とくに ", math(String.raw`N_{\mathrm{sw}}(\varphi)\ge1`), " なら ",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " である。したがって任意の ",
+                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " は、",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " か、",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " かつ ",
+                            math(String.raw`N_{\mathrm{sw}}(\varphi)\ge1`), " か、",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " かつ ",
+                            math(String.raw`N_{\mathrm{sw}}(\varphi)=0`),
+                            " のちょうど一つを満たし、三集合 ",
+                            math(String.raw`\mathcal Z_L,\mathcal X_L,\mathcal Y_L`),
+                            " は互いに素で、その合併は ",
+                            math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                            " 全体である。この分類は接触対の集合と各対の切り替え可能性だけで定まり、",
+                            "接触対の間の順序（", ref("def_standard_contact_pair"), " の ",
+                            math(String.raw`\preceq`),
+                            "）を用いない。所属は有限集合の元の比較と自然数の比較で判定でき、実数体も複素数体も現れない。",
+                          ]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), " とし、",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）を取る。経路反転 ",
+                        math(String.raw`\mathcal T`), " は ", ref("def_permutation_path_reversal"),
+                        "、接触対の対応 ", math(String.raw`\Psi_{\varphi}`), " は ",
+                        ref("claim_path_reversal_contact_pair_preservation"),
+                        "、切り替え可能な接触対の集合 ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}`), "・その個数 ",
+                        math(String.raw`N_{\mathrm{sw}}`), "・三集合 ",
+                        math(String.raw`\mathcal Z_L,\mathcal X_L,\mathcal Y_L`), " は ",
+                        "上記の定義", " とする。このとき",
+                      ]),
+                      list([
+                        [math(String.raw`\Psi_{\varphi}`), " の ",
+                          math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)`), " への制限は ",
+                          math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)`), " から ",
+                          math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`),
+                          " への全単射であり、",
+                          math(String.raw`N_{\mathrm{sw}}(\mathcal T(\varphi))=N_{\mathrm{sw}}(\varphi)`),
+                          " である。"],
+                        ["経路反転 ", math(String.raw`\mathcal T`), " は三集合 ",
+                          math(String.raw`\mathcal Z_L,\mathcal X_L,\mathcal Y_L`),
+                          " のそれぞれから自分自身への写像である。"],
+                        ["任意の添字 ", math(String.raw`(D,E)`),
+                          "（", ref("def_nonbacktracking_permutation_fiber"), "）、任意の ",
+                          math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                          "）、任意の ", math(String.raw`\epsilon\in\{-1,1\}`),
+                          " と、三集合のいずれか一つ ", math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`),
+                          " について、", math(String.raw`\mathcal T`), " は集合 ",
+                          math(String.raw`\bigl\{\,\varphi'\in\mathcal N_L(D,E)\cap\mathcal P\ \bigm|\ \mathcal W^{a,b}_L(\varphi')=\epsilon\,\bigr\}`),
+                          " の上の対合である（位相寄与 ", math(String.raw`\mathcal W^{a,b}_L`), " は ",
+                          ref("def_nonbacktracking_permutation_phase_contribution"), "）。"],
+                      ]),
+                      paragraph([
+                        "したがってこの分類は、接触対の間に順序を選ばずに定まり、経路反転で保たれる。",
+                        "全て有限集合の写像と円分体 ",
+                        math(String.raw`\mathbb Q(\zeta_8)\subseteq\overline{\mathbb Q}`),
+                        " の元を比較して判定でき、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "第一の主張を示す。", math(String.raw`P\in\operatorname{Ct}_{\mathrm{sw}}(\varphi)`),
+                        " を取る。", "上記の定義", " により ",
+                        math(String.raw`P\in\operatorname{Ct}(\varphi)`), " であり、",
+                        math(String.raw`P`), " は ", math(String.raw`\varphi`),
+                        " の切り替え可能な接触対である。",
+                        ref("claim_path_reversal_contact_pair_preservation"),
+                        " の第一の主張により ",
+                        math(String.raw`\Psi_{\varphi}(P)\in\operatorname{Ct}(\mathcal T(\varphi))`),
+                        " であり、第三の主張により ", math(String.raw`\Psi_{\varphi}(P)`), " は ",
+                        math(String.raw`\mathcal T(\varphi)`), " の切り替え可能な接触対である。ゆえに ",
+                        math(String.raw`\Psi_{\varphi}(P)\in\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`),
+                        "（", "上記の定義",
+                        "）であり、", math(String.raw`\Psi_{\varphi}`), " の制限は ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)`), " から ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`),
+                        " への写像である。",
+                      ]),
+                      paragraph([
+                        ref("claim_path_reversal_fiber_preserving_involution"), " により ",
+                        math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " かつ ", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`),
+                        " なので、同じ議論を ", math(String.raw`\mathcal T(\varphi)`),
+                        " へ適用すると、", math(String.raw`\Psi_{\mathcal T(\varphi)}`), " の制限は ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`), " から ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)`), " への写像である。",
+                        ref("claim_path_reversal_contact_pair_preservation"), " の第一の主張により ",
+                        math(String.raw`\Psi_{\mathcal T(\varphi)}\circ\Psi_{\varphi}`), " は ",
+                        math(String.raw`\operatorname{Ct}(\varphi)`), " の恒等写像、",
+                        math(String.raw`\Psi_{\varphi}\circ\Psi_{\mathcal T(\varphi)}`), " は ",
+                        math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
+                        " の恒等写像なので、部分集合への制限同士の合成もそれぞれ ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)`), " と ",
+                        math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))`),
+                        " の恒等写像である。互いに逆写像を持つ写像は全単射なので、制限は全単射である。",
+                        "二つの有限集合の間に全単射があるので元の個数は等しく、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+N_{\mathrm{sw}}(\mathcal T(\varphi))
+&=\lvert\operatorname{Ct}_{\mathrm{sw}}(\mathcal T(\varphi))\rvert
+&&\bigl(\because\ \text{上記の定義}\bigr)\\
+&=\lvert\operatorname{Ct}_{\mathrm{sw}}(\varphi)\rvert
+&&\bigl(\because\ \Psi_{\varphi}\text{ の制限が全単射}\bigr)\\
+&=N_{\mathrm{sw}}(\varphi)
+&&\bigl(\because\ \text{上記の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。",
+                      ]),
+                      paragraph([
+                        "第二の主張を示す。三集合の所属条件は、非後退置換であることのほかは ",
+                        math(String.raw`N_{\mathrm{ct}}`), " と ", math(String.raw`N_{\mathrm{sw}}`),
+                        " についての自然数の等式・不等式だけで書かれている（",
+                        "上記の定義", "、",
+                        ref("def_permutation_contact_pair_count"), "）。",
+                        ref("claim_path_reversal_fiber_preserving_involution"), " により ",
+                        math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " であり、", ref("claim_path_reversal_contact_pair_preservation"),
+                        " の第二の主張の ",
+                        math(String.raw`N_{\mathrm{ct}}(\mathcal T(\varphi))=N_{\mathrm{ct}}(\varphi)`),
+                        " と本主張の第一の ",
+                        math(String.raw`N_{\mathrm{sw}}(\mathcal T(\varphi))=N_{\mathrm{sw}}(\varphi)`),
+                        " を所属条件へ代入すると、",
+                        math(String.raw`\varphi\in\mathcal Z_L`), " と ",
+                        math(String.raw`\mathcal T(\varphi)\in\mathcal Z_L`), " は同値、",
+                        math(String.raw`\varphi\in\mathcal X_L`), " と ",
+                        math(String.raw`\mathcal T(\varphi)\in\mathcal X_L`), " は同値、",
+                        math(String.raw`\varphi\in\mathcal Y_L`), " と ",
+                        math(String.raw`\mathcal T(\varphi)\in\mathcal Y_L`),
+                        " は同値である。したがって ", math(String.raw`\mathcal T`),
+                        " は三集合のそれぞれから自分自身への写像である。",
+                      ]),
+                      paragraph([
+                        "第三の主張を示す。添字 ", math(String.raw`(D,E)`), "、",
+                        math(String.raw`(a,b)\in\mathcal S`), "、",
+                        math(String.raw`\epsilon\in\{-1,1\}`), "、",
+                        math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`),
+                        " を取り、主張の集合の元 ", math(String.raw`\varphi'`), " を取る。",
+                        ref("claim_path_reversal_fiber_preserving_involution"), " により ",
+                        math(String.raw`\mathcal T(\varphi')\in\mathcal N_L(D,E)`), " かつ ",
+                        math(String.raw`\mathcal T(\mathcal T(\varphi'))=\varphi'`),
+                        " であり、第二の主張により ",
+                        math(String.raw`\mathcal T(\varphi')\in\mathcal P`), " である。",
+                        ref("claim_path_reversal_phase_preservation"), " により ",
+                        math(String.raw`\mathcal W^{a,b}_L(\mathcal T(\varphi'))=\mathcal W^{a,b}_L(\varphi')=\epsilon`),
+                        " なので、", math(String.raw`\mathcal T(\varphi')`),
+                        " も主張の集合の元である。二回適用が恒等写像なので、",
+                        math(String.raw`\mathcal T`),
+                        " の制限はこの集合の上の対合である。なお ",
+                        ref("claim_phase_contribution_sign_value"), " により ",
+                        math(String.raw`\mathcal W^{a,b}_L(\varphi')\in\{-1,1\}`), " なので、",
+                        math(String.raw`\epsilon\in\{-1,1\}`), " の二つの集合は ",
+                        math(String.raw`\mathcal N_L(D,E)\cap\mathcal P`),
+                        " を尽くす。全過程は有限集合の写像の合成と円分体の元の比較だけで閉じる。",
+                      ]),
+    ],
+  },
   {
     id: "note_kac_ward_weighted_path_reversal_selection_orbit_sums_archived",
     targets: ["def_permutation_path_reversal"],
@@ -37,14 +224,14 @@ export default defineNotes([
 \end{aligned}`),
                       paragraph([
                         "が成り立つ。軌道族は ", ref("claim_path_reversal_selection_complement_orbits"),
-                        "、三分類とその反転不変性は ", ref("claim_path_reversal_switchable_classification_preservation"),
+                        "、三分類とその反転不変性は ", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」",
                         "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
                         ref("claim_selection_sum_signed_count"), " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
                         "置換側では、三分類が非後退置換全体を互いに素に覆い、経路反転が各分類を保つ（",
-                        ref("claim_path_reversal_switchable_classification_preservation"), "）。さらに符号 ",
+                        "参照用ノート「不採用経路: 経路反転による接触対の分類保存」", "）。さらに符号 ",
                         math(String.raw`s`), " の各部分集合は経路反転軌道に互いに素に分かれ、各軌道上の位相寄与は ",
                         math(String.raw`s`), " に一定である（", ref("claim_path_reversal_selection_complement_orbits"),
                         "）。したがって各分類と符号を固定した有限和は",
@@ -53,7 +240,7 @@ export default defineNotes([
 \sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
 \mathcal W^{a,b}_L(\varphi)=s}}\mathcal W^{a,b}_L(\varphi)
 &=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits},\ \blkref{claim_path_reversal_switchable_classification_preservation}\text{ の互いに素な軌道分割}\bigr)\\
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits},\ \text{参照用ノート「不採用経路: 経路反転による接触対の分類保存」}\text{ の互いに素な軌道分割}\bigr)\\
 &=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}s
 &&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の軌道上の符号一定性}\bigr)\\
 &=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
@@ -106,7 +293,7 @@ export default defineNotes([
                         "（", ref("def_spin_structures"), "）、",
                         math(String.raw`s\in\{-1,1\}`), "、",
                         math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`),
-                        "（", ref("def_switchable_contact_count_classification"), "）について、",
+                        "（", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」の定義", "）について、",
                         math(String.raw`\mathfrak O^{\mathcal N,s}_L(D,E;a,b)`), " と ",
                         math(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)`),
                         "（", ref("claim_path_reversal_selection_complement_orbits"), "、",
