@@ -89120,6 +89120,176 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
       role: "subsection",
       element: {
         kind: "section",
+        id: "real_escape_heading_sequence_limit",
+        labels: [],
+        title: { text: "下組の実現像と列の極限" },
+        children: [
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_sequence_lower_set_sup_eq_real_limit",
+              focus: {
+                id: "real_escape_claim_sequence_lower_set_sup_eq_real_limit",
+                kind: "claim",
+                title: { text: "下組の実現像の上限は列の実数極限に等しい" },
+                labels: ["claim_sequence_lower_set_sup_eq_real_limit"],
+                habitat: "R",
+                realEscape: "連続極限と完備性。可算側で定義した下組の実現像を実数体の順序で挟み、実数列の極限と実数集合の上限を取る。",
+                verification: ["sagemath/check/sequence-lower-set-sup-real-limit"],
+                statement: [
+                  paragraph([
+                    math(String.raw`(\lambda_L)_{L\ge1}`), " を ", math(String.raw`\Lambda_{\mathbb Q}`),
+                    " の任意の列とし（", ref("def_rational_log_order_group_sequence_lower_set"), "）、",
+                    math(String.raw`I\in\mathbb R`), " とする。", ref("def_rational_log_order_group_realization"),
+                    " の実現写像について、実数列 ", math(String.raw`\rho_{\mathbb R}(\lambda_L)`),
+                    " が ", math(String.raw`I`), " に収束すると仮定する。このとき",
+                  ]),
+                  displayMath(String.raw`\sup\{\rho_{\mathbb R}(\mu)\in\mathbb R\mid\mu\in A((\lambda_L)_{L\ge1})\}=I`),
+                  paragraph([
+                    "が成り立つ。", math(String.raw`A((\lambda_L)_{L\ge1})\subset\Lambda_{\mathbb Q}`),
+                    " は ", ref("def_rational_log_order_group_sequence_lower_set"), " の下組である。",
+                    "左辺の集合は空でなく上に有界であり、上限は実数の完備性で存在する。",
+                    "この主張は Ising の列に限らない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "以下 ", math(String.raw`\rho:=\rho_{\mathbb R}`), "、",
+                    math(String.raw`\jmath:=\iota_{\Lambda\to\Lambda_{\mathbb Q}}`),
+                    " と略記する。まず ", math(String.raw`\rho`),
+                    " が狭義順序を保ち、実数の比較を順序へ戻せることを確かめる。",
+                    math(String.raw`\alpha,\beta\in\Lambda_{\mathbb Q}`),
+                    " について ", math(String.raw`\alpha<_{\Lambda_{\mathbb Q}}\beta`),
+                    " なら、", ref("def_rational_log_order_group_order"),
+                    " の共通分母 ", math(String.raw`N\in\mathbb N_{\ge1}`),
+                    " と証人 ", math(String.raw`\alpha_N,\beta_N\in\Lambda`),
+                    " は ", math(String.raw`\alpha_N<_{\Lambda}\beta_N`),
+                    " を満たす。等号なら ", ref("def_common_denominator"),
+                    " の等式を ", math(String.raw`1/N`),
+                    " 倍して ", math(String.raw`\alpha=\beta`), " となるからである。",
+                    "次の鎖では ", math(String.raw`\iota:=\iota_{\mathbb Q\to\mathbb R}`),
+                    " と書く。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\alpha_N)
+&<\operatorname{rat}_{\Lambda}(\beta_N)
+&&(\because\ \blkref{def_log_order_group_order})\\
+\iota(\operatorname{rat}_{\Lambda}(\alpha_N))
+&<\iota(\operatorname{rat}_{\Lambda}(\beta_N))
+&&(\because\ \blkref{def_real_logarithm}\text{ の有理数包含の狭義順序保存})\\
+\log_{\mathbb R}\iota(\operatorname{rat}_{\Lambda}(\alpha_N))
+&<\log_{\mathbb R}\iota(\operatorname{rat}_{\Lambda}(\beta_N))
+&&(\because\ \blkref{def_real_logarithm}\text{ の実対数の狭義単調性})\\
+\rho(\jmath(\alpha_N))
+&<\rho(\jmath(\beta_N))
+&&(\because\ \blkref{claim_log_order_group_realization_real_log})\\
+\rho(N\cdot\alpha)
+&<\rho(N\cdot\beta)
+&&(\because\ \blkref{def_common_denominator})\\
+\iota(N)\rho(\alpha)
+&<\iota(N)\rho(\beta)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul})\\
+\rho(\alpha)
+&<\rho(\beta)
+&&(\because\ 0<\iota(N)\text{。実数の正の数による除法})
+\end{aligned}`),
+                  paragraph([
+                    "逆に ", math(String.raw`\rho(\alpha)<\rho(\beta)`),
+                    " なら ", math(String.raw`\alpha<_{\Lambda_{\mathbb Q}}\beta`),
+                    " である。", ref("claim_rational_log_order_group_linear_order"),
+                    " の三分律で ", math(String.raw`\beta\le_{\Lambda_{\mathbb Q}}\alpha`),
+                    " とすると、", ref("claim_rational_log_order_group_realization_monotone"),
+                    " により ", math(String.raw`\rho(\beta)\le\rho(\alpha)`),
+                    " となり矛盾する。これで実数の狭義比較を可算側の順序へ戻せる。",
+                  ]),
+                  paragraph([
+                    "上から示す。任意の ", math(String.raw`\mu\in A((\lambda_L))`),
+                    " を取り、", ref("def_rational_log_order_group_sequence_lower_set"),
+                    " の証人 ", math(String.raw`\varepsilon\in\Lambda_{\mathbb Q}`),
+                    " と ", math(String.raw`N\in\mathbb N_{\ge1}`), " を取る。",
+                    math(String.raw`0\le_{\Lambda_{\mathbb Q}}\varepsilon`),
+                    " から ", ref("claim_rational_log_order_group_add_monotone"),
+                    " により ", math(String.raw`0+\mu\le_{\Lambda_{\mathbb Q}}\varepsilon+\mu`),
+                    " である。", ref("def_rational_log_order_group"),
+                    " の単位元と加法の可換則を使って ",
+                    math(String.raw`\mu\le_{\Lambda_{\mathbb Q}}\mu+\varepsilon`),
+                    " である。任意の ", math(String.raw`L\ge N`), " について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho(\mu)
+&\le\rho(\mu+\varepsilon)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_monotone}\text{ と直前の比較})\\
+&\le\rho(\lambda_L)
+&&(\because\ \blkref{def_rational_log_order_group_sequence_lower_set}\text{ の証人と }\blkref{claim_rational_log_order_group_realization_monotone})
+\end{aligned}`),
+                  paragraph([
+                    "である。実数列の極限に順序を渡すと ", math(String.raw`\rho(\mu)\le I`),
+                    "。ゆえに ", math(String.raw`I`), " は実現像の上界である。",
+                  ]),
+                  paragraph([
+                    "下から示す。", ref("def_log_order_group"), " の ",
+                    math(String.raw`\ell_2\in\Lambda`), " は ",
+                    math(String.raw`\operatorname{rat}_{\Lambda}(\ell_2)=2`),
+                    " なので、", ref("claim_log_order_group_realization_real_log"),
+                    " により ", math(String.raw`c:=\rho(\jmath(\ell_2))=\log_{\mathbb R}2>0`),
+                    " である。任意の ", math(String.raw`b\in\mathbb R`),
+                    "、", math(String.raw`b<I`), " を取る。実数の Archimedes 性から有理数 ",
+                    math(String.raw`r\in\mathbb Q`), " と ", math(String.raw`s\in\mathbb Q_{>0}`),
+                    " を ", math(String.raw`b<\iota(r)c<\iota(r+s)c<I`),
+                    " となるように取れる。有理数の稠密性を二度用い、",
+                    math(String.raw`b/c<\iota(r)<I/c`),
+                    " の内部に ", math(String.raw`\iota(r+s)`),
+                    " を選べばよい。", math(String.raw`\mu:=r\cdot\jmath(\ell_2)`),
+                    "、", math(String.raw`\varepsilon:=s\cdot\jmath(\ell_2)`),
+                    " と置く。", ref("def_rational_log_order_group"),
+                    " の有理数倍と加法の分配則により ",
+                    math(String.raw`\mu+\varepsilon=(r+s)\cdot\jmath(\ell_2)`),
+                    " である。", ref("claim_rational_log_order_group_realization_smul"),
+                    " から",
+                  ]),
+                  displayMath(String.raw`b<\rho(\mu)=\iota(r)c<\rho(\mu+\varepsilon)=\iota(r+s)c<I`),
+                  paragraph([
+                    math(String.raw`0<_{\Lambda_{\mathbb Q}}\varepsilon`),
+                    " も成り立つ。実際、", math(String.raw`s=m/n`),
+                    " と ", math(String.raw`m,n\in\mathbb N_{\ge1}`),
+                    " で書けば、", ref("def_rational_log_order_group"),
+                    " の有理数倍により ", math(String.raw`n\cdot\varepsilon=m\cdot\jmath(\ell_2)`),
+                    " である。", ref("def_log_order_group_order"),
+                    " では ", math(String.raw`1<2^m`),
+                    " だから ", math(String.raw`0<_{\Lambda}m\cdot\ell_2`),
+                    " であり、", ref("def_rational_log_order_group_order"),
+                    " を共通分母 ", math(String.raw`n`),
+                    " で読めば ", math(String.raw`0<_{\Lambda_{\mathbb Q}}\varepsilon`),
+                    " となる。特に ", math(String.raw`\varepsilon\ne0`),
+                    " である。収束の仮定と ",
+                    math(String.raw`\rho(\mu+\varepsilon)<I`),
+                    " により、ある ", math(String.raw`N\in\mathbb N_{\ge1}`),
+                    " 以降の全ての ", math(String.raw`L`),
+                    " で ", math(String.raw`\rho(\mu+\varepsilon)<\rho(\lambda_L)`),
+                    " となる。先に確かめた狭義比較の逆向きにより",
+                  ]),
+                  displayMath(String.raw`\mu+\varepsilon<_{\Lambda_{\mathbb Q}}\lambda_L\qquad(L\ge N)`),
+                  paragraph([
+                    "である。", ref("def_rational_log_order_group_sequence_lower_set"),
+                    " により ", math(String.raw`\mu\in A((\lambda_L))`),
+                    "、しかも ", math(String.raw`b<\rho(\mu)`),
+                    " である。よって任意の ", math(String.raw`b<I`),
+                    " は実現像の上界ではない。この構成で下組が空でないことも分かった。",
+                    "上からの評価と実数の完備性により実現像の上限が存在し、",
+                    "その値は ", math(String.raw`I`), " である。",
+                  ]),
+                ],
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
         id: "real_escape_heading_density_agreement",
         labels: [],
         title: { text: "周期境界と開境界の密度の一致" },

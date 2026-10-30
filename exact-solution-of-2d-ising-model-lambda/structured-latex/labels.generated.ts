@@ -609,6 +609,7 @@ export const ALL_LABELS = [
   "claim_self_dual_root_plus_mem",
   "claim_self_dual_root_plus_positive",
   "claim_self_dual_root_plus_representation",
+  "claim_sequence_lower_set_sup_eq_real_limit",
   "claim_shift_char_diagonal_entry",
   "claim_shift_char_dvd_pow_L",
   "claim_shift_char_matrix_entry_zero",
