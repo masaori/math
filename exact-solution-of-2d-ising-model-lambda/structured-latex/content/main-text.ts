@@ -86806,7 +86806,7 @@ const chapter_real_escape = defineSection({
                   labels: ["def_real_logarithm"],
                   habitat: "R",
                   realEscape:
-                    "実対数。実数体 ℝ とその正の元の上の自然対数 log_ℝ をここで初めて呼び出す。ここから先の実数体はすべてこの定義を経由し、使う性質は「正の実数の乗法を加法へ移す」「狭義単調」の二つだけである。有限系の可算側の量には触れない。",
+                    "実対数。実数体 ℝ とその正の元の上の自然対数 log_ℝ をここで初めて呼び出す。ここから先の実数体はすべてこの定義を経由し、使う性質は「正の実数の乗法を加法へ移す」「狭義単調」「正の実数上で連続」の三つである。有限系の可算側の量には触れない。",
                   lean: [
                     "Ising2DLambda.ThermodynamicLimit.PositiveReal",
                     "Ising2DLambda.ThermodynamicLimit.realLog",
@@ -86846,7 +86846,7 @@ const chapter_real_escape = defineSection({
                       math(String.raw`\log:\mathbb{Q}_{>0}\to\Lambda`),
                       "（素因数分解）と同じ記号で書かないためである。本文が ",
                       math(String.raw`\log_{\mathbb{R}}`),
-                      " について使う性質は次の二つだけである。",
+                      " について使う性質は次の三つだけである。",
                     ]),
                     list([
                       [
@@ -86869,9 +86869,14 @@ const chapter_real_escape = defineSection({
                         math(String.raw`u<v`),
                         " なら狭義単調による）。",
                       ],
+                      [
+                        "連続性: ",
+                        math(String.raw`\log_{\mathbb{R}}:\mathbb{R}_{>0}\to\mathbb{R}`),
+                        " は正の実数の通常の位相について連続である。",
+                      ],
                     ]),
                     paragraph([
-                      "級数による定義、微分可能性、連続性、完備性は使わない。とくに素数 ",
+                      "級数による定義、微分可能性、完備性は使わない。とくに素数 ",
                       math(String.raw`p\in\mathcal{P}`),
                       " について ",
                       math(String.raw`0<\iota_{\mathbb{Q}\to\mathbb{R}}(p)`),
@@ -88048,6 +88053,70 @@ F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q
 &=(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)
 &&\bigl(\because\ \text{上の二つの余弦表示}\bigr).
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_dispersion_angle_log_continuous",
+              focus: {
+                id: "real_escape_claim_dispersion_angle_log_continuous",
+                kind: "claim",
+                title: { text: "正の分散因子から角の対数関数の連続性を得る" },
+                labels: ["claim_dispersion_angle_log_continuous"],
+                habitat: "R",
+                realEscape: "実対数。可算側の有理点を実数へ埋め込み、全ての実数の角で正となる分散式に実対数を適用する。連続性は実数体の位相で述べる。",
+                verification: ["sagemath/check/dispersion-angle-log-continuity"],
+                statement: [
+                  paragraph([
+                    "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`),
+                    "）を取り、", ref("def_real_logarithm"), " の包含写像で ",
+                    math(String.raw`r:=\iota_{\mathbb Q\to\mathbb R}(q)\in\mathbb R`), " と置く。",
+                    "実数 ", math(String.raw`\theta_1,\theta_2\in\mathbb R`), " に対して",
+                  ]),
+                  displayMath(String.raw`B_q(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
+                  paragraph([
+                    "と定める。この値は全ての角で正であり、関数",
+                  ]),
+                  displayMath(String.raw`f_q:\mathbb R^2\to\mathbb R,\qquad
+f_q(\theta_1,\theta_2):=\log_{\mathbb R}B_q(\theta_1,\theta_2)`),
+                  paragraph(["は全域で定まり連続である。"]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_no_rational_square_two"), " により ",
+                    math(String.raw`q^2+2q-1\ne0`), " である。実際、等号を仮定すると ",
+                    math(String.raw`(q+1)^2=2`), " となり、", math(String.raw`q+1\in\mathbb Q`),
+                    " に矛盾する。", ref("def_real_logarithm"),
+                    " の包含写像は単射で四則と順序を保つので、",
+                    math(String.raw`(r^2+2r-1)^2>0`), " である。",
+                  ]),
+                  paragraph([
+                    "任意の ", math(String.raw`\theta_1,\theta_2\in\mathbb R`),
+                    " について、実余弦の値域 ", math(String.raw`-1\le\cos\theta_j\le1`),
+                    "（", math(String.raw`j\in\{1,2\}`), "）と ", math(String.raw`0<r<1`),
+                    " を使う。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+B_q(\theta_1,\theta_2)-(r^2+2r-1)^2
+&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)-(r^2+2r-1)^2
+&&\bigl(\because\ B_q\text{ の定義}\bigr)\\
+&=2r(1-r^2)\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
+&&\bigl(\because\ \mathbb R\text{ の分配律}\bigr)\\
+&\ge0
+&&\bigl(\because\ 0<r<1,\ \cos\theta_1\le1,\ \cos\theta_2\le1\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`B_q(\theta_1,\theta_2)\ge(r^2+2r-1)^2>0`),
+                    " であり、", ref("def_real_logarithm"), " の実対数は全域で定まる。",
+                    "実余弦の連続性と実数の四則の連続性から ", math(String.raw`B_q`),
+                    " は ", math(String.raw`\mathbb R^2`), " 上連続である。",
+                    ref("def_real_logarithm"), " の実対数の連続性を合成して ",
+                    math(String.raw`f_q`), " も連続である。",
+                  ]),
                 ],
               },
             },
