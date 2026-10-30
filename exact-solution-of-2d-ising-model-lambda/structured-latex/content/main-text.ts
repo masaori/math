@@ -6401,7 +6401,26 @@ a+2b&=(a+b)+b
 &=0
 &&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
 \end{aligned}`),
-                paragraph(["である。よって定数多項式の符号を掛けた項も零である。", ref("def_qbar_polynomial_determinant"), " の置換展開を、ブロックを保つ置換と保たない置換に分け、後者の零項を除くと主張の和を得る。空の添字集合でも保たない置換が存在しないので同じ等式が成り立つ。"]),
+                paragraph(["である。よって定数多項式の符号を掛けた項も零である。置換展開を、ブロックを保つ置換と保たない置換に分ける。"]),
+                displayMath(String.raw`\begin{aligned}
+\det_x(B)
+&=\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\bigr)\\
+&=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
++\sum_{\sigma\in\operatorname{Perm}(\mathcal J)\setminus\operatorname{Perm}_b(\mathcal J)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&&\bigl(\because\ \text{保たない置換の項は上の等式により零}\bigr).
+\end{aligned}`),
+                paragraph(["空の添字集合でも保たない置換が存在しないので同じ等式が成り立つ。"]),
               ],
             },
           },
