@@ -194,6 +194,67 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
     ],
   },
   {
+    id: "note_kac_ward_path_reversal_selection_complement_orbits_archived",
+    targets: ["def_permutation_path_reversal"],
+    title: { text: "不採用経路: 二つの符号保存対合の軌道分割" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。", math(String.raw`s\in\{-1,1\}`),
+                        " に対し、有限集合",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathfrak O^{\mathcal N,s}_L(D,E;a,b)
+&:=\Bigl\{\,\{\varphi,\mathcal T(\varphi)\}\ \Bigm|\
+\varphi\in\mathcal N_L(D,E),\ \mathcal W^{a,b}_L(\varphi)=s\,\Bigr\},\\
+\mathfrak O^{\mathcal C,s}_L(D,E;a,b)
+&:=\Bigl\{\,\{C,E\setminus C\}\ \Bigm|\
+C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
+\end{aligned}`),
+                      paragraph([
+                        "を定める。ここで ", math(String.raw`\mathcal C^1_L:=\mathcal C^+_L`), "、",
+                        math(String.raw`\mathcal C^{-1}_L:=\mathcal C^-_L`), " と書く。このとき各集合族は、",
+                        "それぞれ対応する符号 ", math(String.raw`s`), " の置換集合と選択集合を互いに素に覆う軌道分割である。",
+                        "置換側の各軌道の元の個数は一または二である。選択側の各軌道の元の個数は一または二であり、",
+                        math(String.raw`E\ne\varnothing`), " なら全て二である。各軌道上で符号は ", math(String.raw`s`),
+                        " に一定である。経路反転と位相寄与は ", ref("claim_path_reversal_phase_preservation"),
+                        "、選択補集合と選択符号は ", ref("claim_selection_complement_sign_preserving_involution"),
+                        " で与えられる。全て有限集合の像・等号・元の個数だけで判定できる。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "まず置換側を示す。符号 ", math(String.raw`s`), " の置換 ", math(String.raw`\varphi`),
+                        " を取る。", ref("claim_path_reversal_phase_preservation"), " により ",
+                        math(String.raw`\mathcal T(\varphi)`), " も同じファイバーに属して符号 ", math(String.raw`s`),
+                        " を持ち、", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。したがって ",
+                        math(String.raw`\{\varphi,\mathcal T(\varphi)\}`), " は符号 ", math(String.raw`s`),
+                        " の集合に含まれ、元の個数は一または二である。任意の二軌道が一つの元を共有するとき、",
+                        "その共有元に経路反転を適用すれば残る元も一致するので二軌道は等しい。ゆえに軌道族は互いに素で、",
+                        "各 ", math(String.raw`\varphi`), " は自分から作った軌道に属するので全体を覆う。",
+                      ]),
+                      paragraph([
+                        "選択側も同じ論法である。", math(String.raw`C\in\mathcal C^s_L(D,E;a,b)`), " を取る。",
+                        ref("claim_selection_complement_sign_preserving_involution"), " により ",
+                        math(String.raw`E\setminus C`), " は同じ符号集合に属し、",
+                      ]),
+                      displayMath(String.raw`E\setminus(E\setminus C)=C
+\qquad\bigl(\because\ \blkref{claim_selection_complement_sign_preserving_involution}\bigr)`),
+                      paragraph([
+                        "従って ",
+                        math(String.raw`\{C,E\setminus C\}`), " は一元または二元で、上と同じ対合の論法により、",
+                        "これらは符号 ", math(String.raw`s`), " の選択集合を互いに素に覆う。さらに ",
+                        math(String.raw`E\ne\varnothing`), " なら同じ既証明により補集合対合は不動点を持たないので、",
+                        "各軌道の元の個数は二である。符号一定性は、どちらの軌道も最初から符号 ", math(String.raw`s`),
+                        " の集合の部分集合として構成したことによる。",
+                      ]),
+
+    ],
+  },
+  {
     id: "note_kac_ward_weighted_path_reversal_selection_orbit_sums_archived",
     targets: ["def_permutation_path_reversal"],
     title: { text: "不採用経路: 経路反転軌道と選択補集合軌道の重み付き和" },
@@ -223,7 +284,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
 -\sum_{O\in\mathfrak O^{\mathcal C,-1}_L(D,E;a,b)}w(O)
 \end{aligned}`),
                       paragraph([
-                        "が成り立つ。軌道族は ", ref("claim_path_reversal_selection_complement_orbits"),
+                        "が成り立つ。軌道族は ", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」",
                         "、三分類とその反転不変性は ", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」",
                         "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
                         ref("claim_selection_sum_signed_count"), " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
@@ -233,16 +294,16 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "置換側では、三分類が非後退置換全体を互いに素に覆い、経路反転が各分類を保つ（",
                         "参照用ノート「不採用経路: 経路反転による接触対の分類保存」", "）。さらに符号 ",
                         math(String.raw`s`), " の各部分集合は経路反転軌道に互いに素に分かれ、各軌道上の位相寄与は ",
-                        math(String.raw`s`), " に一定である（", ref("claim_path_reversal_selection_complement_orbits"),
+                        math(String.raw`s`), " に一定である（", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」",
                         "）。したがって各分類と符号を固定した有限和は",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
 \mathcal W^{a,b}_L(\varphi)=s}}\mathcal W^{a,b}_L(\varphi)
 &=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits},\ \text{参照用ノート「不採用経路: 経路反転による接触対の分類保存」}\text{ の互いに素な軌道分割}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」},\ \text{参照用ノート「不採用経路: 経路反転による接触対の分類保存」}\text{ の互いに素な軌道分割}\bigr)\\
 &=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}s
-&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の軌道上の符号一定性}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」}\text{ の軌道上の符号一定性}\bigr)\\
 &=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
 &&\bigl(\because\ \text{有限和の分配則}\bigr)\\
 &=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}w(O)
@@ -254,12 +315,12 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                       ]),
                       paragraph([
                         "選択側でも、各符号集合は選択補集合軌道に互いに素に分かれ、軌道上の符号は一定である（",
-                        ref("claim_path_reversal_selection_complement_orbits"), "）。ゆえに",
+                        "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」", "）。ゆえに",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \bigl\lvert\mathcal C^s_L(D,E;a,b)\bigr\rvert
 &=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}\lvert O\rvert
-&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の互いに素な軌道分割}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」}\text{ の互いに素な軌道分割}\bigr)\\
 &=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}w(O)
 &&\bigl(\because\ w(O)=\lvert O\rvert\text{ の定義}\bigr)
 \end{aligned}`),
@@ -296,7 +357,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "（", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」の定義", "）について、",
                         math(String.raw`\mathfrak O^{\mathcal N,s}_L(D,E;a,b)`), " と ",
                         math(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)`),
-                        "（", ref("claim_path_reversal_selection_complement_orbits"), "、",
+                        "（", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」", "、",
                         "参照用ノート「不採用経路: 経路反転軌道と選択補集合軌道の重み付き和」の定義",
                         "）の全ての軌道の元の個数は二である。全て有限集合の元の比較だけで判定でき、",
                         "実数体も複素数体も現れない。",
@@ -342,7 +403,7 @@ M(\varphi)
                         " である。もし ", math(String.raw`\mathcal T(\varphi)=\varphi`),
                         " なら第一の主張により ", math(String.raw`E_1(\varphi)=\varnothing`),
                         " となって矛盾するので、", math(String.raw`\mathcal T(\varphi)\ne\varphi`),
-                        " である。", ref("claim_path_reversal_selection_complement_orbits"),
+                        " である。", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」",
                         " の置換側の各軌道は ", math(String.raw`\{\varphi,\mathcal T(\varphi)\}`),
                         " の形なので、その元の個数は二である。三分類で細分した軌道族 ",
                         math(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)`), " は ",
