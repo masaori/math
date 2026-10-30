@@ -1,7 +1,7 @@
 """ファイバー位相和が Z + Z(zeta8 - zeta8^3) に属することを厳密検査する。
 
-対象: claim_fiber_phase_weight_real_quadratic_integrality と
-その補題 claim_phase_contribution_signed_rotation_power。
+対象: claim_phase_contribution_signed_rotation_power。
+ファイバー位相和の格子への所属は参照用ノートに退避した。
 
 一辺 L=2 の全非後退置換について、
 (1) W^{a,b}(phi) * zeta8^(-Theta(phi)) が {-1, 1} に属すること、

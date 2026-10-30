@@ -124,7 +124,6 @@ export const ALL_LABELS = [
   "claim_even_subgraph_spin_sum",
   "claim_exterior_cell_set_edge_connected",
   "claim_fiber_phase_integer_decomposition",
-  "claim_fiber_phase_weight_real_quadratic_integrality",
   "claim_finite_free_entropy_density_nonnegative",
   "claim_finite_free_entropy_density_upper_bound",
   "claim_finite_map_iterate_add",

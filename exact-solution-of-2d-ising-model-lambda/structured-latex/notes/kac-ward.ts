@@ -7,6 +7,208 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_fiber_phase_weight_real_quadratic_integrality_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: ファイバー位相和の実二次整数への所属" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`D\cap E=\varnothing`), " かつ ",
+                        math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。このとき、ある整数 ",
+                        math(String.raw`u,v\in\mathbb Z`), " が存在して、",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=u+v\,(\zeta_8-\zeta_8^3)`),
+                      paragraph([
+                        "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                        " で定めた。全過程は有限集合上の有限和と代数的数の四則だけで閉じ、",
+                        "実数体も複素数体も現れない。",
+                      ]),
+                          paragraph(["元の証明:"]),
+                      paragraph([
+                        "準備として ", math(String.raw`\zeta_8`), " の冪の関係を確定する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta_8^{8}
+&=\bigl(\zeta_8^{4}\bigr)^{2}
+&&\bigl(\because\ \text{指数法則 }y^{8}=(y^{4})^{2}\bigr)\\
+&=(-1)^{2}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の約束 }\zeta_8^{4}=-1\bigr)\\
+&=1
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積 }(-1)\cdot(-1)=1\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "同じ約束 ", math(String.raw`\zeta_8^{4}=-1`), " と指数法則から ",
+                        math(String.raw`\zeta_8^{5}=-\zeta_8`), "、",
+                        math(String.raw`\zeta_8^{6}=-\zeta_8^{2}`), "、",
+                        math(String.raw`\zeta_8^{7}=-\zeta_8^{3}`), " である。また ",
+                        math(String.raw`\zeta_8^{2}\ne1`), " である（もし ",
+                        math(String.raw`\zeta_8^{2}=1`), " なら両辺を二乗して ",
+                        math(String.raw`\zeta_8^{4}=1`), " となるが、",
+                        math(String.raw`\zeta_8^{4}=-1`), " と体 ",
+                        math(String.raw`\overline{\mathbb Q}`), " の標数が ",
+                        math(String.raw`0`), " であることから ",
+                        math(String.raw`1\ne-1`), " なので矛盾する）。同様に ",
+                        math(String.raw`\zeta_8^{2}\ne-1`), " である（もし ",
+                        math(String.raw`\zeta_8^{2}=-1`), " なら両辺を二乗して ",
+                        math(String.raw`\zeta_8^{4}=1`), " となり同じ矛盾に至る）。",
+                      ]),
+                      paragraph([
+                        "経路反転 ", math(String.raw`\mathcal T`),
+                        "（", ref("def_permutation_path_reversal"), "）は ",
+                        ref("claim_path_reversal_fiber_preserving_involution"), " により、ファイバー ",
+                        math(String.raw`\mathcal N_L(D,E)`),
+                        "（", ref("def_nonbacktracking_permutation_fiber"),
+                        "）からそれ自身への全単射であり、二回適用すると元に戻る。不動点の集合を",
+                      ]),
+                      displayMath(String.raw`F:=\bigl\{\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal T(\varphi)=\varphi\bigr\}`),
+                      paragraph([
+                        "と置く。", math(String.raw`\varphi\in\mathcal N_L(D,E)\setminus F`),
+                        " に対し二元集合 ", math(String.raw`\{\varphi,\mathcal T(\varphi)\}`),
+                        " を対応させる。", math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi\ne\mathcal T(\varphi)`),
+                        " なので ", math(String.raw`\mathcal T(\varphi)\notin F`),
+                        " であり、この二元集合は ", math(String.raw`\mathcal N_L(D,E)\setminus F`),
+                        " に含まれる。二つのこの形の集合が交われば、対合性により一致する（共有元 ",
+                        math(String.raw`\psi`), " から他方の元は ", math(String.raw`\mathcal T(\psi)`),
+                        " として定まるため）。したがって ",
+                        math(String.raw`\mathcal N_L(D,E)\setminus F`),
+                        " はこの形の二元集合の非交和であり、その族を ", math(String.raw`\mathcal P`),
+                        " と置く。有限和を非交和で分割すると",
+                      ]),
+                      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
+=\sum_{\varphi\in F}\mathcal W^{a,b}_L(\varphi)
++\sum_{P\in\mathcal P}\ \sum_{\varphi\in P}\mathcal W^{a,b}_L(\varphi)
+\qquad\bigl(\because\ \blkref{def_fiber_phase_weight},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と有限和の非交和分割}\bigr)`),
+                      paragraph([
+                        "不動点の加数を見る。", math(String.raw`\varphi\in F`), " を取り、",
+                        math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}`),
+                        " と置くと、", ref("claim_phase_contribution_signed_rotation_power"),
+                        " により ", math(String.raw`s\in\{-1,1\}`), " であり、両辺に ",
+                        math(String.raw`\zeta_8^{\Theta(\varphi)}`), " を掛けて ",
+                        math(String.raw`\mathcal W^{a,b}_L(\varphi)=s\,\zeta_8^{\Theta(\varphi)}`),
+                        " である。", math(String.raw`\mathcal T(\varphi)=\varphi`), " なので",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+s\,\zeta_8^{\Theta(\varphi)}
+&=\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&&\bigl(\because\ \mathcal T(\varphi)=\varphi\text{ と上の表示}\bigr)\\
+&=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_path_reversal_phase_conjugation}\bigr)\\
+&=s\,\zeta_8^{-\Theta(\varphi)}
+&&\bigl(\because\ \text{上の表示と指数法則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "両辺に ", math(String.raw`s\,\zeta_8^{\Theta(\varphi)}`),
+                        " を掛けると、", math(String.raw`s^{2}=1`), " と指数法則から ",
+                        math(String.raw`\zeta_8^{2\Theta(\varphi)}=1`),
+                        " である。整数の除法で ",
+                        math(String.raw`\Theta(\varphi)=4q+r`), "（",
+                        math(String.raw`q\in\mathbb Z`), "、",
+                        math(String.raw`r\in\{0,1,2,3\}`), "）と書くと",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+1=\zeta_8^{2\Theta(\varphi)}
+&=\bigl(\zeta_8^{8}\bigr)^{q}\,\zeta_8^{2r}
+&&\bigl(\because\ \text{指数法則 }2\Theta(\varphi)=8q+2r\bigr)\\
+&=\zeta_8^{2r}
+&&\bigl(\because\ \text{準備の }\zeta_8^{8}=1\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。", math(String.raw`r=1`), " なら ",
+                        math(String.raw`\zeta_8^{2}=1`), " となり準備に矛盾、",
+                        math(String.raw`r=2`), " なら ", math(String.raw`\zeta_8^{4}=1`),
+                        " となり ", math(String.raw`\zeta_8^{4}=-1`), " と ",
+                        math(String.raw`1\ne-1`), " に矛盾、",
+                        math(String.raw`r=3`), " なら ",
+                        math(String.raw`\zeta_8^{6}=-\zeta_8^{2}=1`), " すなわち ",
+                        math(String.raw`\zeta_8^{2}=-1`), " となり準備に矛盾する。よって ",
+                        math(String.raw`r=0`), " であり、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=s\,\zeta_8^{4q}
+&&\bigl(\because\ \Theta(\varphi)=4q\text{ と上の表示}\bigr)\\
+&=s\,(-1)^{q}
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ の約束 }\zeta_8^{4}=-1\text{ と指数法則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。したがって不動点の加数は ",
+                        math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。",
+                      ]),
+                      paragraph([
+                        "二元軌道の加数を見る。", math(String.raw`P=\{\varphi,\mathcal T(\varphi)\}\in\mathcal P`),
+                        " を取り、上と同様に ",
+                        math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}`),
+                        "（", ref("claim_phase_contribution_signed_rotation_power"), "）と置く。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\psi\in P}\mathcal W^{a,b}_L(\psi)
+&=\mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
+&&\bigl(\because\ P\text{ の二元の列挙}\bigr)\\
+&=s\,\zeta_8^{\Theta(\varphi)}+\zeta_8^{-2\Theta(\varphi)}\,s\,\zeta_8^{\Theta(\varphi)}
+&&\bigl(\because\ \text{上の表示と }\blkref{claim_path_reversal_phase_conjugation}\bigr)\\
+&=s\,\bigl(\zeta_8^{\Theta(\varphi)}+\zeta_8^{-\Theta(\varphi)}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配則と指数法則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "整数の除法で ", math(String.raw`\Theta(\varphi)=8q'+r'`), "（",
+                        math(String.raw`q'\in\mathbb Z`), "、",
+                        math(String.raw`r'\in\{0,1,\ldots,7\}`), "）と書くと、準備の ",
+                        math(String.raw`\zeta_8^{8}=1`), " と指数法則から ",
+                        math(String.raw`\zeta_8^{\Theta(\varphi)}=\zeta_8^{r'}`), " かつ ",
+                        math(String.raw`\zeta_8^{-\Theta(\varphi)}=\zeta_8^{8-r'}\cdot\bigl(\zeta_8^{8}\bigr)^{-q'-1}=\zeta_8^{8-r'}`),
+                        " である。八つの場合を、準備の ",
+                        math(String.raw`\zeta_8^{5}=-\zeta_8`), "、",
+                        math(String.raw`\zeta_8^{6}=-\zeta_8^{2}`), "、",
+                        math(String.raw`\zeta_8^{7}=-\zeta_8^{3}`), "、",
+                        math(String.raw`\zeta_8^{8}=1`), " で順に評価する。",
+                      ]),
+                      displayMath(String.raw`\zeta_8^{r'}+\zeta_8^{8-r'}=
+\begin{cases}
+1+1=2,&r'=0,\\
+\zeta_8+(-\zeta_8^{3})=\zeta_8-\zeta_8^{3},&r'=1,\\
+\zeta_8^{2}+(-\zeta_8^{2})=0,&r'=2,\\
+\zeta_8^{3}+(-\zeta_8)=-(\zeta_8-\zeta_8^{3}),&r'=3,\\
+(-1)+(-1)=-2,&r'=4,\\
+(-\zeta_8)+\zeta_8^{3}=-(\zeta_8-\zeta_8^{3}),&r'=5,\\
+(-\zeta_8^{2})+\zeta_8^{2}=0,&r'=6,\\
+(-\zeta_8^{3})+\zeta_8=\zeta_8-\zeta_8^{3},&r'=7
+\end{cases}
+\qquad\bigl(\because\ \text{準備の冪の関係と }\overline{\mathbb Q}\text{ の加法}\bigr)`),
+                      paragraph([
+                        "どの場合も ", math(String.raw`\zeta_8^{r'}+\zeta_8^{8-r'}`),
+                        " は ", math(String.raw`u_P+v_P\,(\zeta_8-\zeta_8^{3})`),
+                        "（", math(String.raw`u_P\in\{-2,0,2\}`), "、",
+                        math(String.raw`v_P\in\{-1,0,1\}`),
+                        "）の形である。", math(String.raw`s\in\{-1,1\}`),
+                        " を掛けても同じ形に留まる（", math(String.raw`\overline{\mathbb Q}`),
+                        " の分配則と整数の積）。",
+                      ]),
+                      paragraph([
+                        "最後に合成する。不動点の加数は整数、二元軌道の加数は ",
+                        math(String.raw`u_P+v_P\,(\zeta_8-\zeta_8^{3})`),
+                        "（", math(String.raw`u_P,v_P\in\mathbb Z`),
+                        "）の形なので、", math(String.raw`\overline{\mathbb Q}`),
+                        " の分配則で ", math(String.raw`\zeta_8-\zeta_8^{3}`),
+                        " の係数をまとめると、整数の有限和 ",
+                        math(String.raw`u,v\in\mathbb Z`), " により",
+                      ]),
+                      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=u+v\,(\zeta_8-\zeta_8^{3})
+\qquad\bigl(\because\ \text{非交和分割の和と }\overline{\mathbb Q}\text{ の分配則、整数の有限和は整数}\bigr)`),
+                      paragraph([
+                        "が成り立つ。全過程は有限集合の分割、整数の除法と有限和、",
+                        math(String.raw`\overline{\mathbb Q}`),
+                        " の四則だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+                        ],
+  },
+  {
     id: "note_kac_ward_fully_unswitchable_contacts_witness_doubled_edges_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 完全に切り替え不能な残余の各接触" },

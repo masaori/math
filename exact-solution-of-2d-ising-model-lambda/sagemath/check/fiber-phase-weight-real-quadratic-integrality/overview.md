@@ -1,8 +1,8 @@
 # SageMath Check: ファイバー位相和の実二次整数への所属
 
-**対象ラベル**: `claim_fiber_phase_weight_real_quadratic_integrality`
+**対象ラベル**: `claim_phase_contribution_signed_rotation_power`
 
-補題 `claim_phase_contribution_signed_rotation_power` も同じ実行で検査する。
+ファイバー位相和の格子への所属は参照用ノート「不採用経路: ファイバー位相和の実二次整数への所属」に保存した。
 
 一辺 $L=2$ の全非後退置換について、
 
