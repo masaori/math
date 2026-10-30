@@ -87936,35 +87936,31 @@ F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q
                     ref("claim_cut_realization_preserves_strict_order"), " によりその実現値も正の実数である。",
                     ref("claim_determinant_signed_even_subgraph_square"), " と ",
                     ref("claim_dispersion_mode_product"), " を ", math(String.raw`x:=q`),
-                    " で評価すると、",
+                    " で評価すると、", math(String.raw`(Q_L^{a,b}(q))^2`),
+                    " は正元の有限積に等しい。従って ", math(String.raw`Q_L^{a,b}(q)\ne0`),
+                    " である。", math(String.raw`T:=\rho_{R\to\mathbb R}(Q_L^{a,b}(q))`),
+                    " と置くと、", ref("claim_cut_realization_preserves_strict_order"),
+                    " と実現写像の単射性により ", math(String.raw`T\ne0`), " である。",
                   ]),
                   displayMath(String.raw`\begin{aligned}
-(Q_L^{a,b}(q))^2
-&=D_L^{a,b}(q)&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\bigr)\\
-&=\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)
-&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\bigr).
-\end{aligned}`),
-                  paragraph([
-                    "右辺は正元の有限積なので ", math(String.raw`Q_L^{a,b}(q)\ne0`), " である。",
-                    ref("claim_cut_realization_preserves_multiplication"), " により実現写像を等式へ適用し、",
-                    ref("def_real_logarithm"), " の乗法法則を正の実数の有限積と平方へ適用する。",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-2\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
-&=\log_{\mathbb R}\left(\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|^2\right)
+\frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+&=\frac{1}{L^2}\log_{\mathbb R}|T|
+&&\bigl(\because\ T\text{ の定義}\bigr)\\
+&=\frac{1}{2L^2}\log_{\mathbb R}(|T|^2)
 &&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則}\bigr)\\
-&=\log_{\mathbb R}\left(\rho_{R\to\mathbb R}(Q_L^{a,b}(q))^2\right)
+&=\frac{1}{2L^2}\log_{\mathbb R}(T^2)
 &&\bigl(\because\ \text{実数の絶対値の平方}\bigr)\\
-&=\log_{\mathbb R}\rho_{R\to\mathbb R}\left((Q_L^{a,b}(q))^2\right)
+&=\frac{1}{2L^2}\log_{\mathbb R}\rho_{R\to\mathbb R}((Q_L^{a,b}(q))^2)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\bigr)\\
-&=\log_{\mathbb R}\rho_{R\to\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)\right)
-&&\bigl(\because\ \text{上の多項式等式を }x:=q\text{ で評価}\bigr)\\
-&=\log_{\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))\right)
+&=\frac{1}{2L^2}\log_{\mathbb R}\rho_{R\to\mathbb R}(D_L^{a,b}(q))
+&&\bigl(\because\ \blkref{claim_determinant_signed_even_subgraph_square}\text{ を }x:=q\text{ で評価}\bigr)\\
+&=\frac{1}{2L^2}\log_{\mathbb R}\rho_{R\to\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\Delta(q;\varpi,\varsigma)\right)
+&&\bigl(\because\ \blkref{claim_dispersion_mode_product}\text{ を }x:=q\text{ で評価}\bigr)\\
+&=\frac{1}{2L^2}\log_{\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))\right)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\text{ を有限積に適用}\bigr)\\
-&=\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
+&=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
 &&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr).
 \end{aligned}`),
-                  paragraph(["両辺を正の自然数 ", math(String.raw`2L^2`), " で割ると主張を得る。"]),
                 ],
               },
             },
