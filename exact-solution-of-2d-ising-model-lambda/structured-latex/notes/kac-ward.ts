@@ -47,9 +47,9 @@ export default defineNotes([
 
                       paragraph([
                         "仮定 ", math(String.raw`D\ne\varnothing`),
-                        " は以下の議論では使わない。反転対の無いファイバーは ",
+                        " は以下の議論では使わない。辺長が 2 以上の反転対の無いファイバーについては ",
                         ref("claim_doubled_edge_free_fiber_phase_reduction"),
-                        " が第四の和の無い形で既に示しているので、本主張は残る場合だけを述べる。",
+                        " が第四の和の無い形を示している。本主張の議論自体は辺長 1 も扱う。",
                       ]),
                       paragraph([
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
