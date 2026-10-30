@@ -7,8 +7,62 @@ import { defineNotes, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selected_support_coefficient_reconstruction_archived",
+    targets: ["claim_cut_flag_realizable_candidate_selection"],
+    title: { text: "不採用経路: 実現可能な最小切断による支持係数の再構成" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、巡回支持の係数を再構成する経路は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+      paragraph([
+        "空でない内部語の巡回・反転軌道の有限集合を ", math(String.raw`\Omega`),
+        "、切断候補の添字集合を ", math(String.raw`K:=\{0,1\}`),
+        " とする。各 ", math(String.raw`\omega\in\Omega`),
+        " について、", ref("claim_cut_flag_realizable_candidate_selection"),
+        " が復元した空でない実現可能候補集合を ", math(String.raw`\mathcal R_\omega\subseteq K`),
+        "、その最小元を ", math(String.raw`\kappa(\omega):=\min\mathcal R_\omega`),
+        " と書く。切断位置を保った係数を ", math(String.raw`c:\Omega\times K\to\mathbb F_2`),
+        " とし、", math(String.raw`k\ne\kappa(\omega)`), " ならば ",
+        math(String.raw`c(\omega,k)=0`), " と仮定する。巡回軌道の係数を",
+      ]),
+      displayMath(String.raw`\bar c(\omega):=\sum_{j\in K}c(\omega,j)\in\mathbb F_2`),
+      paragraph(["と定める。このとき各切断位置の係数は"]),
+      displayMath(String.raw`c(\omega,k)=
+\begin{cases}
+\bar c(\omega),&k=\kappa(\omega),\\
+0,&k\ne\kappa(\omega)
+\end{cases}`),
+      paragraph([
+        "で一意に復元される。各巡回軌道で非零係数を持つ切断位置が実現可能候補の最小元だけなら、",
+        "切断前の支持を保存するデータは巡回軌道の係数と有限合同条件から得る最小候補だけである。",
+        "二つの正準巡回支持では、軌道への射影がそれぞれ単射であり、",
+        "方向上連結する二候補を持つ 489 項の保存済み切断位置が最小候補に一致することを有限検算した。",
+        "全ての量は有限集合と ", math(String.raw`\mathbb F_2`), " の有限和の中にあり、実数体も複素数体も現れない。",
+      ]),
+      paragraph(["元の証明:"]),
+      paragraph([math(String.raw`\omega\in\Omega`), " と ", math(String.raw`k\in K`), " を固定する。まず ", math(String.raw`k=\kappa(\omega)`), " とする。"]),
+      displayMath(String.raw`\begin{aligned}
+\bar c(\omega)
+&=\sum_{j\in K}c(\omega,j)
+&&\bigl(\because\ \bar c\text{ の定義}\bigr)\\
+&=c\bigl(\omega,\kappa(\omega)\bigr)
+ +\sum_{\substack{j\in K\\j\ne\kappa(\omega)}}c(\omega,j)
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=c\bigl(\omega,\kappa(\omega)\bigr)
+&&\bigl(\because\ j\ne\kappa(\omega)\text{ の係数は }0\bigr)\\
+&=c(\omega,k)
+&&\bigl(\because\ k=\kappa(\omega)\bigr)
+\end{aligned}`),
+      paragraph([
+        "次に ", math(String.raw`k\ne\kappa(\omega)`), " とすると、仮定から ",
+        math(String.raw`c(\omega,k)=0`), " である。二つの場合は ", math(String.raw`K`),
+        " の全てを尽くす。等式は各 ", math(String.raw`(\omega,k)\in\Omega\times K`),
+        " の係数を定めるので再構成は一意である。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_two_support_coefficient_formula_archived",
-    targets: ["claim_selected_support_coefficient_reconstruction"],
+    targets: ["claim_cut_flag_realizable_candidate_selection"],
     title: { text: "不採用経路: 二つの正準巡回支持の係数式" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開の支持係数を有限データから再構成する経路は採らない。以下は元の主張と証明を保存したものである。"]),
@@ -49,15 +103,14 @@ export default defineNotes([
                       paragraph([
                         math(String.raw`\omega\in\Omega`), " と ", math(String.raw`k\in K`),
                         " を固定する。まず ", math(String.raw`k=\kappa(\omega)`), " とする。",
-                        ref("claim_selected_support_coefficient_reconstruction"),
-                        " を二つの係数へそれぞれ適用すると",
+                        "上記の支持係数の再構成を二つの係数へそれぞれ適用すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 c_{\oplus}(\omega,k)
 &=c_{\mathrm e}(\omega,k)+c_{\mathrm{se}}(\omega,k)
 &&\bigl(\because\ c_{\oplus}\text{ の定義}\bigr)\\
 &=\bar c_{\mathrm e}(\omega)+\bar c_{\mathrm{se}}(\omega)
-&&\bigl(\because\ \blkref{claim_selected_support_coefficient_reconstruction}\text{ を二つの係数へ適用}\bigr)
+&&\bigl(\because\ \text{上記の支持係数の再構成を二つの係数へ適用}\bigr)
 \end{aligned}`),
                       paragraph([
                         "次に ", math(String.raw`k\ne\kappa(\omega)`), " とする。このとき",

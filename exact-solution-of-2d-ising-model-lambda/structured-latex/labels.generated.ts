@@ -596,7 +596,6 @@ export const ALL_LABELS = [
   "claim_selected_odd_orbit_reversal_involution",
   "claim_selected_odd_orbit_reversal_nontrivial",
   "claim_selected_odd_orbit_skew_product_neg",
-  "claim_selected_support_coefficient_reconstruction",
   "claim_selection_complement_sign_preserving_involution",
   "claim_selection_even_subgraph_action_character",
   "claim_selection_even_subgraph_action_simply_transitive",

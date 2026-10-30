@@ -18,5 +18,7 @@
 ## 実行方法
 
 ```sh
-sage sagemath/check/parity-identity-simple-cycle-arc-orientation-selected-support-coefficient-reconstruction/check.sage
+sage sagemath/archive/parity-identity-simple-cycle-arc-orientation-selected-support-coefficient-reconstruction/check.sage
 ```
+
+この検算は、Pfaffian 経路を採用したため本文から退避した主張の有限標本を保存する。

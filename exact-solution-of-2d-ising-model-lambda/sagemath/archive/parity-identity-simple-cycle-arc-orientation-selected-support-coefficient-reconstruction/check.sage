@@ -83,7 +83,7 @@ certificate = {
     "summaries": summaries,
 }
 certificate_path = Path(
-    "sagemath/check/"
+    "sagemath/archive/"
     "parity-identity-simple-cycle-arc-orientation-selected-support-coefficient-reconstruction/"
     "certificate.json")
 certificate_path.write_text(
