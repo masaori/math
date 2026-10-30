@@ -1,6 +1,8 @@
 # SageMath Check: 接触対の切り替え可能性の局所判定
 
-**対象ラベル**: `claim_contact_pair_switchability_criterion`
+**対象ラベル**: `def_switchable_permutation_contact_pair`
+
+元の主張と証明は参照用ノート「不採用経路: 接触対の切り替え可能性の局所判定」に保存した。
 
 全非後退置換の全接触対（切り替え可能に限らない）について、切り替え可能性の三条件と、
 四つの不等式 $\varphi(\vec f)\ne\iota(\vec e)$、$\varphi(\vec e)\ne\iota(\vec f)$、

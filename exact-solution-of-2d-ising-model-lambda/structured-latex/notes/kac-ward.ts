@@ -7,6 +7,77 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_contact_pair_switchability_criterion_archived",
+    targets: ["def_switchable_permutation_contact_pair"],
+    title: { text: "不採用経路: 接触対の切り替え可能性の局所判定" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）と、接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
+                        "（", ref("def_standard_contact_pair"), "）を取る。このとき ",
+                        math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対（",
+                        ref("def_switchable_permutation_contact_pair"), "）であることと、四つの不等式",
+                      ]),
+                      displayMath(String.raw`\varphi(\vec f)\ne\iota(\vec e),\qquad
+\varphi(\vec e)\ne\iota(\vec f),\qquad
+\varphi(\vec f)\ne\vec e,\qquad
+\varphi(\vec e)\ne\vec f`),
+                      paragraph([
+                        "がすべて成り立つことは同値である（", math(String.raw`\iota`), " は ",
+                        ref("def_edge_reversal"), "）。とくに、接触対が切り替え可能でないのは、",
+                        "一方の辺の像が他方の辺の反転辺または他方の辺自身に一致する場合に限る。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        ref("def_standard_contact_pair"), " により ",
+                        math(String.raw`\vec e,\vec f\in M(\varphi)`), "、",
+                        math(String.raw`\vec e\ne\vec f`), "、",
+                        math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                        " である。", math(String.raw`\vec e\in M(\varphi)`), " すなわち ",
+                        math(String.raw`\varphi(\vec e)\ne\vec e`),
+                        "（", ref("def_moved_edge_set"), "）なので、",
+                        ref("def_nonbacktracking_permutations"), " により ",
+                        math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " であり、",
+                        ref("def_nonbacktracking_successors"), " により ",
+                        math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
+                        " である。同様に ",
+                        math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`),
+                        " である。",
+                      ]),
+                      paragraph([
+                        ref("def_switchable_permutation_contact_pair"), " の三つの条件を順に見る。",
+                        "第一の条件 ",
+                        math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                        " は仮定の接触そのものなので、常に成り立つ。第二の条件の一方の所属を同値変形する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\varphi(\vec f)\in\operatorname{Next}(\vec e)
+&\Longleftrightarrow
+\operatorname{tgt}(\vec e)=\operatorname{src}(\varphi(\vec f))
+\ \text{かつ}\ \varphi(\vec f)\ne\iota(\vec e)
+&&\bigl(\because\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&\Longleftrightarrow
+\varphi(\vec f)\ne\iota(\vec e)
+&&\bigl(\because\ \operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)=\operatorname{tgt}(\vec e)\text{（冒頭の等式と仮定の接触）}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        math(String.raw`\vec e`), " と ", math(String.raw`\vec f`),
+                        " を入れ替えて同じ変形を行うと、",
+                        math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec f)
+\Longleftrightarrow\varphi(\vec e)\ne\iota(\vec f)`),
+                        " である。第三の条件は ", math(String.raw`\varphi(\vec f)\ne\vec e`),
+                        " かつ ", math(String.raw`\varphi(\vec e)\ne\vec f`),
+                        " そのものである。したがって三つの条件の連言は四つの不等式の連言と同値である。",
+                        "全過程は有限集合の元の比較だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_standard_contact_obstruction_doubled_edge_archived",
     targets: ["def_doubled_edge_set"],
     title: { text: "不採用経路: 標準接触対の反転像の障害と反転対" },
@@ -162,7 +233,7 @@ export default defineNotes([
       paragraph(["元の証明:"]),
 
                       paragraph([
-                        ref("claim_contact_pair_switchability_criterion"), " により、",
+                        "参照用ノート「接触対の切り替え可能性の局所判定」", " により、",
                         math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能でないことは、四つの等式",
                       ]),
                       displayMath(String.raw`\varphi(\vec f)=\iota(\vec e),\qquad
@@ -1030,7 +1101,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       paragraph([
                         "退避した全接触対が切り替え不能な残余の定義により ",
                         math(String.raw`\{\vec e,\vec f\}`), " は切り替え可能でない。",
-                        ref("claim_contact_pair_switchability_criterion"), " により、四つの等式",
+                        "参照用ノート「接触対の切り替え可能性の局所判定」", " により、四つの等式",
                       ]),
                       displayMath(String.raw`\varphi(\vec f)=\iota(\vec e),\qquad
 \varphi(\vec e)=\iota(\vec f),\qquad
@@ -1538,7 +1609,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                         ref("def_permutation_contact_pair_count"), "）そのものである。",
                       ]),
                       paragraph([
-                        "第三の主張を示す。", ref("claim_contact_pair_switchability_criterion"),
+                        "第三の主張を示す。", "参照用ノート「接触対の切り替え可能性の局所判定」",
                         " を ", math(String.raw`\mathcal T(\varphi)`), " と接触対 ",
                         math(String.raw`\Psi_{\varphi}(P)=\{\iota(\varphi(\vec e)),\iota(\varphi(\vec f))\}`),
                         " へ適用すると、切り替え可能性は四つの不等式の連言と同値である。各不等式を同値変形する。",
@@ -1562,7 +1633,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
 &&\bigl(\because\ \text{準備の第二の事実と }\iota\text{ の単射性（}\blkref{claim_reversal_is_involution}\text{）}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "右側の四条件の連言は、", ref("claim_contact_pair_switchability_criterion"),
+                        "右側の四条件の連言は、", "参照用ノート「接触対の切り替え可能性の局所判定」",
                         " が ", math(String.raw`\varphi`), " と ", math(String.raw`P=\{\vec e,\vec f\}`),
                         " について与える四つの不等式 ",
                         math(String.raw`\varphi(\vec f)\ne\iota(\vec e)`), "、",

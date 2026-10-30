@@ -1,6 +1,6 @@
 """接触対の切り替え可能性が四つの不等式で判定されることを厳密検査する。
 
-対象: claim_contact_pair_switchability_criterion。
+対象: def_switchable_permutation_contact_pair。
 
 一辺 L=2 のトーラスの全非後退置換について、接触対の集合 Ct(phi)（切り替え可能に
 限らない）を全列挙し、各接触対 {e,f} について、切り替え可能性の三条件
