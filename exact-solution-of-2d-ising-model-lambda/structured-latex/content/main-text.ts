@@ -73191,6 +73191,1487 @@ e
   ],
 });
 
+const chapter_kac_ward_pfaffian_torus_formula = defineSection({
+  kind: "section",
+  id: "kac_ward_pfaffian_torus_formula_heading_chapter",
+  labels: [],
+  title: { text: "閉歩道の位相と Pfaffian による有限トーラス公式" },
+  children: [
+    {
+      role: "subsection",
+      element: {
+        kind: "section",
+        id: "kac_ward_pfaffian_torus_formula_heading_proof",
+        labels: [],
+        title: { text: "二次符号から有限トーラス公式まで" },
+        children: [
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_torus_quadratic_sign_polarization",
+              labels: [],
+              title: { text: "巻き付き二次符号の加法則" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_torus_quadratic_sign_polarization",
+                  focus: {
+                    id: "kac_ward_claim_torus_quadratic_sign_polarization",
+                    kind: "claim",
+                    title: { text: "巻き付き二次符号の積と交差形式" },
+                    labels: ["claim_torus_quadratic_sign_polarization"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/torus-quadratic-sign-polarization"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）と ",
+                        math(String.raw`(h_1,v_1),(h_2,v_2)\in\{0,1\}\times\{0,1\}`),
+                        " を取る。", ref("def_torus_quadratic_sign"),
+                        " の二次符号について、整数の等式",
+                      ]),
+                      displayMath(String.raw`\chi_{a,b}(h_1\oplus h_2,v_1\oplus v_2)
+=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}`),
+                      paragraph([
+                        "が成り立つ。ここで ", math(String.raw`r,s\in\{0,1\}`), " に対し、",
+                        math(String.raw`r\oplus s\in\{0,1\}`),
+                        " は整数 ", math(String.raw`r+s`), " の偶奇の代表を表す。",
+                        "右端の指数は整数である。実数体・複素数体は使わない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`h:=h_1\oplus h_2`), "、",
+                        math(String.raw`v:=v_1\oplus v_2`),
+                        " と置く。これらは ", math(String.raw`\{0,1\}`),
+                        " の元で、整数の合同式 ",
+                        math(String.raw`h\equiv h_1+h_2`), "、",
+                        math(String.raw`v\equiv v_1+v_2\pmod 2`),
+                        " を満たす。二次符号の指数は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+q_{a,b}(h,v)
+&\equiv hv+(1-a)h+(1-b)v
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
+&\equiv(h_1+h_2)(v_1+v_2)+(1-a)(h_1+h_2)+(1-b)(v_1+v_2)
+&&\bigl(\because\ h\equiv h_1+h_2,\ v\equiv v_1+v_2\pmod2\bigr)\\
+&\equiv h_1v_1+h_1v_2+h_2v_1+h_2v_2
++(1-a)h_1+(1-a)h_2+(1-b)v_1+(1-b)v_2
+&&\bigl(\because\ \mathbb Z\text{ の分配律}\bigr)\\
+&\equiv\bigl(h_1v_1+(1-a)h_1+(1-b)v_1\bigr)
++\bigl(h_2v_2+(1-a)h_2+(1-b)v_2\bigr)+h_1v_2+h_2v_1
+&&\bigl(\because\ \mathbb Z\text{ の交換律と結合律}\bigr)\\
+&\equiv q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1\pmod2
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
+\end{aligned}`),
+                      paragraph(["整数指数の加法則により"]),
+                      displayMath(String.raw`\begin{aligned}
+\chi_{a,b}(h,v)
+&=(-1)^{q_{a,b}(h,v)}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
+&=(-1)^{q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1}
+&&\bigl(\because\ \text{上の合同式と }(-1)^2=1\bigr)\\
+&=(-1)^{q_{a,b}(h_1,v_1)}(-1)^{q_{a,b}(h_2,v_2)}(-1)^{h_1v_2+h_2v_1}
+&&\bigl(\because\ \text{整数指数の加法則}\bigr)\\
+&=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_even_edge_chain_torus_normal_form",
+              labels: [],
+              title: { text: "有限トーラスの偶辺鎖の標準形" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_even_edge_chain_torus_normal_form",
+                  focus: {
+                    id: "kac_ward_claim_even_edge_chain_torus_normal_form",
+                    kind: "claim",
+                    title: { text: "偶辺鎖は正方形境界と二つの基本周回に分解できる" },
+                    labels: ["claim_even_edge_chain_torus_normal_form"],
+                    habitat: "N",
+                    verification: ["sagemath/check/even-edge-chain-torus-normal-form"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " を取り、", ref("def_lattice"),
+                        " の辺を係数 ", math(String.raw`\mathbb F_2:=\{0,1\}`),
+                        " で数える。横辺 ", math(String.raw`H_{i,j}`), " と縦辺 ",
+                        math(String.raw`V_{i,j}`), " はそれぞれ代表座標 ",
+                        math(String.raw`(i,j)\in\{0,\ldots,L-1\}^2`),
+                        " から右（列を進める）・下（行を進める）へ進む辺の係数とする。添字は ",
+                        math(String.raw`L`), " を法として読む。各頂点で接する辺の係数の和が ",
+                        math(String.raw`0\in\mathbb F_2`), " である辺鎖 ",
+                        math(String.raw`C`), " を取る。",
+                      ]),
+                      paragraph([
+                        math(String.raw`P_{i,j}`), " を ", math(String.raw`(i,j)`),
+                        " を左上とする正方形の四辺の和、",
+                        math(String.raw`R_{\mathrm h}`), " を行 ", math(String.raw`i=0`),
+                        " の横辺の和、", math(String.raw`R_{\mathrm v}`),
+                        " を列 ", math(String.raw`j=0`), " の縦辺の和とする。",
+                        "横・縦の切断線偶奇 ", math(String.raw`h,v\in\mathbb F_2`), " を",
+                      ]),
+                      displayMath(String.raw`h:=\sum_{i=0}^{L-1}H_{i,L-1},\qquad v:=\sum_{j=0}^{L-1}V_{L-1,j}`),
+                      paragraph(["と置く。このときある ", math(String.raw`p_{i,j}\in\mathbb F_2`),
+                        " について、有限辺鎖の等式"]),
+                      displayMath(String.raw`C=hR_{\mathrm h}+vR_{\mathrm v}+\sum_{i,j=0}^{L-1}p_{i,j}P_{i,j}`),
+                      paragraph(["が成り立つ。重なった辺は ", math(String.raw`\mathbb F_2`),
+                        " で相殺する。辺は標識で区別し、", math(String.raw`L=1`),
+                        " の周回辺もこのまま扱う。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["頂点での偶次数条件は、各 ", math(String.raw`i,j`), " について"]),
+                      displayMath(String.raw`H_{i,j}+H_{i,j-1}+V_{i,j}+V_{i-1,j}=0\quad(\mathbb F_2)
+\qquad(\because\ C\text{ の頂点偶次数条件})`),
+                      paragraph(["である。これを ", math(String.raw`j`), " にわたって足すと、各横辺が二度現れて消えるので、"]),
+                      displayMath(String.raw`\sum_jV_{i,j}=\sum_jV_{i-1,j}\quad(\mathbb F_2)
+\qquad(\because\ \text{横辺は各々二度現れて消える}).`),
+                      paragraph(["従ってこの和は ", math(String.raw`i`), " によらず ", math(String.raw`v`), " である。", math(String.raw`p^{\mathrm v}_{i,0}:=0`),
+                        " とし、", math(String.raw`1\le j<L`), " では ",
+                        math(String.raw`p^{\mathrm v}_{i,j}:=\sum_{r=1}^{j}V_{i,r}`),
+                        " と置く。", math(String.raw`C^{\mathrm v}:=C+\sum_{i,j}p^{\mathrm v}_{i,j}P_{i,j}`),
+                        " の縦辺係数は、正方形境界の定義から"]),
+                      displayMath(String.raw`V^{\mathrm v}_{i,j}=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
+\qquad(\because\ P_{i,j}\text{ の縦辺の配置}).`),
+                      paragraph([math(String.raw`1\le j<L`), " では部分和を代入して"]),
+                      displayMath(String.raw`\begin{aligned}
+V^{\mathrm v}_{i,j}
+&=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
+&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
+&=V_{i,j}+\sum_{r=1}^{j-1}V_{i,r}+\sum_{r=1}^{j}V_{i,r}
+&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`j=0`), " では添字を法 ", math(String.raw`L`), " で読み、"]),
+                      displayMath(String.raw`\begin{aligned}
+V^{\mathrm v}_{i,0}
+&=V_{i,0}+p^{\mathrm v}_{i,L-1}+p^{\mathrm v}_{i,0}
+&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
+&=V_{i,0}+\sum_{r=1}^{L-1}V_{i,r}
+&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
+&=\sum_{r=0}^{L-1}V_{i,r}
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=v
+&&\bigl(\because\ \text{上で示した行によらない和}\bigr).
+\end{aligned}`),
+                      paragraph(["各 ", math(String.raw`P_{i,j}`), " は頂点偶次数なので ", math(String.raw`C^{\mathrm v}`), " も頂点偶次数である。"]),
+                      paragraph(["従って頂点条件へ上の縦辺係数を代入すると ",
+                        math(String.raw`H^{\mathrm v}_{i,j}=H^{\mathrm v}_{i,j-1}`),
+                        " である。行 ", math(String.raw`i`), " に共通な係数を ",
+                        math(String.raw`a_i\in\mathbb F_2`), " と書く。", math(String.raw`q_0:=0`),
+                        "、", math(String.raw`1\le i<L`), " では ",
+                        math(String.raw`q_i:=\sum_{r=1}^{i}a_r`), " と置く。"]),
+                      paragraph(["各行の正方形境界の和 ", math(String.raw`\sum_jP_{i,j}`),
+                        " では縦辺が二度現れて消え、横辺は行 ", math(String.raw`i`),
+                        " と行 ", math(String.raw`i+1`), " に一度ずつ現れる。従って ",
+                        math(String.raw`C^{\mathrm h}:=C^{\mathrm v}+\sum_iq_i\sum_jP_{i,j}`),
+                        " の行 ", math(String.raw`i`), " の横辺係数は"]),
+                      displayMath(String.raw`H^{\mathrm h}_{i,j}=a_i+q_i+q_{i-1}
+\qquad(\because\ \sum_jP_{i,j}\text{ の横辺の配置}).`),
+                      paragraph([math(String.raw`1\le i<L`), " では"]),
+                      displayMath(String.raw`\begin{aligned}
+H^{\mathrm h}_{i,j}
+&=a_i+q_i+q_{i-1}
+&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
+&=a_i+\sum_{r=1}^{i}a_r+\sum_{r=1}^{i-1}a_r
+&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`i=0`), " では"]),
+                      displayMath(String.raw`\begin{aligned}
+H^{\mathrm h}_{0,j}
+&=a_0+q_0+q_{L-1}
+&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
+&=a_0+\sum_{r=1}^{L-1}a_r
+&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
+&=\sum_{r=0}^{L-1}a_r
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=h
+&&\bigl(\because\ \text{正方形境界は切断線の横辺を偶数回含む}\bigr).
+\end{aligned}`),
+                      paragraph(["縦辺は先の ", math(String.raw`v`), " の列のままである。従って"]),
+                      displayMath(String.raw`C^{\mathrm h}=hR_{\mathrm h}+vR_{\mathrm v}
+\qquad(\because\ \text{行と列の係数の決定}).`),
+                      paragraph(["両側へ加えた正方形境界を再び加えると同じ辺が二度現れて消え、",
+                        math(String.raw`p_{i,j}:=p^{\mathrm v}_{i,j}+q_i`),
+                        " で主張の等式を得る。全操作は有限集合上の ",
+                        math(String.raw`\mathbb F_2`), " の計算である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_even_edge_chain_intersection",
+              labels: [],
+              title: { text: "正方形境界と基本周回の交差数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_even_edge_chain_intersection",
+                  beforeFocus: [{
+                    role: "prerequisiteDefinition",
+                    element: {
+                      id: "kac_ward_definition_even_edge_chain_intersection",
+                      kind: "definition",
+                      title: { text: "二つの有限辺鎖の交差数" },
+                      labels: ["def_even_edge_chain_intersection"],
+                      habitat: "N",
+                      statement: [
+                        paragraph([
+                          ref("claim_even_edge_chain_torus_normal_form"), " と同じ辺の標識を用いる。",
+                          "二つの有限辺鎖 ", math(String.raw`C,D`), " の係数をそれぞれ ",
+                          math(String.raw`H^C_{i,j},V^C_{i,j},H^D_{i,j},V^D_{i,j}\in\mathbb F_2`),
+                          " と書く。添字を ", math(String.raw`L`), " を法として読み、交差数 ",
+                          math(String.raw`I_L(C,D)\in\mathbb F_2`), " を",
+                        ]),
+                        displayMath(String.raw`I_L(C,D):=\sum_{i,j=0}^{L-1}\bigl(
+H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)`),
+                        paragraph([
+                          "で定める。第一項は頂点 ", math(String.raw`(i,j+1)`),
+                          " に左から入る横辺と上から入る縦辺、第二項は頂点 ",
+                          math(String.raw`(i,j)`), " から下へ出る縦辺と右へ出る横辺の組を数える。",
+                          "各和は有限である。辺長一でも辺の標識を保って計算する。",
+                        ]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_even_edge_chain_intersection",
+                    kind: "claim",
+                    title: { text: "正方形境界との交差数は零で基本周回は一度交差する" },
+                    labels: ["claim_even_edge_chain_intersection"],
+                    habitat: "N",
+                    verification: ["sagemath/check/even-edge-chain-intersection"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。任意の頂点で偶次数となる辺鎖 ",
+                        math(String.raw`C`), " と任意の代表座標 ",
+                        math(String.raw`(r,s)\in\{0,\ldots,L-1\}^2`), " について、",
+                      ]),
+                      displayMath(String.raw`I_L(P_{r,s},C)=I_L(C,P_{r,s})=0,\qquad
+I_L(R_{\mathrm h},R_{\mathrm h})=I_L(R_{\mathrm v},R_{\mathrm v})=0,\qquad
+I_L(R_{\mathrm h},R_{\mathrm v})=I_L(R_{\mathrm v},R_{\mathrm h})=1`),
+                      paragraph([
+                        "が ", math(String.raw`\mathbb F_2`), " で成り立つ。ここで ",
+                        math(String.raw`P_{r,s},R_{\mathrm h},R_{\mathrm v}`), " は ",
+                        ref("claim_even_edge_chain_torus_normal_form"), " の辺鎖である。",
+                        "従って任意の偶辺鎖 ", math(String.raw`C,D`), " の切断線偶奇を ",
+                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`), " と書くと、",
+                      ]),
+                      displayMath(String.raw`I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
+                      paragraph(["有限集合と二元体の演算だけを使い、実数体・複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "正方形境界 ", math(String.raw`P_{r,s}`), " の係数は ",
+                        math(String.raw`H_{r,s}=H_{r+1,s}=V_{r,s}=V_{r,s+1}=1`),
+                        " の寄与を ", math(String.raw`\mathbb F_2`), " で加えたものとする。",
+                        "重なる標識は二度現れて消える。偶次数条件は任意の ",
+                        math(String.raw`i,j`), " について ",
+                        math(String.raw`H^C_{i,j}+H^C_{i,j-1}+V^C_{i,j}+V^C_{i-1,j}=0`),
+                        " である（", ref("claim_even_edge_chain_torus_normal_form"), "）。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+I_L(P_{r,s},C)
+&=V^C_{r-1,s+1}+V^C_{r,s+1}+H^C_{r,s}+H^C_{r,s+1}
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
+&=0
+&&\bigl(\because\ \text{頂点 }(r,s+1)\text{ の偶次数条件}\bigr),\\
+I_L(C,P_{r,s})
+&=H^C_{r+1,s-1}+H^C_{r+1,s}+V^C_{r,s}+V^C_{r+1,s}
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
+&=0
+&&\bigl(\because\ \text{頂点 }(r+1,s)\text{ の偶次数条件}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "基本周回の係数は ", math(String.raw`H^{R_{\mathrm h}}_{i,j}=1`),
+                        " が ", math(String.raw`i=0`), " のときだけ、",
+                        math(String.raw`V^{R_{\mathrm v}}_{i,j}=1`), " が ",
+                        math(String.raw`j=0`), " のときだけであり、他は零である（",
+                        ref("claim_even_edge_chain_torus_normal_form"), "）。",
+                        "交差数の定義へ代入すると、同種の二周回では各積が零である。",
+                        "異種の二周回では、第一の順は ",
+                        math(String.raw`(i,j)=(0,L-1)`), "、逆順は ",
+                        math(String.raw`(i,j)=(0,0)`), " の項だけが一となる。",
+                        "これは ", math(String.raw`L=1`), " でも同じである。",
+                      ]),
+                      paragraph([
+                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配的である。",
+                        ref("claim_even_edge_chain_torus_normal_form"), " により ",
+                        math(String.raw`C=h_CR_{\mathrm h}+v_CR_{\mathrm v}+\sum p_{i,j}P_{i,j}`),
+                        " と ", math(String.raw`D=h_DR_{\mathrm h}+v_DR_{\mathrm v}+\sum q_{i,j}P_{i,j}`),
+                        " と書ける。正方形境界も偶辺鎖なので、上の零等式を両引数の有限和へ適用して",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+I_L(C,D)
+&=I_L(h_CR_{\mathrm h}+v_CR_{\mathrm v},h_DR_{\mathrm h}+v_DR_{\mathrm v})
+&&\bigl(\because\ \text{分配律と正方形境界の零等式}\bigr)\\
+&=h_Cv_DI_L(R_{\mathrm h},R_{\mathrm v})+v_Ch_DI_L(R_{\mathrm v},R_{\mathrm h})
+&&\bigl(\because\ \text{分配律と同種の基本周回の零等式}\bigr)\\
+&=h_Cv_D+v_Ch_D
+&&\bigl(\because\ \text{異種の基本周回の交差数は一}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_disjoint_walk_mutual_crossing_intersection",
+              labels: [],
+              title: { text: "二本の閉歩道の混合横断数と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
+                  focus: {
+                    id: "kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
+                    kind: "claim",
+                    title: { text: "辺を共有しない二本の閉歩道の混合横断数は交差形式に等しい" },
+                    labels: ["claim_disjoint_walk_mutual_crossing_intersection"],
+                    habitat: "N",
+                    verification: ["sagemath/check/disjoint-walk-mutual-crossing-intersection"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。",
+                        ref("def_closed_walk_passes"), " の閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " と ",
+                        math(String.raw`\eta=(\vec f_1,\ldots,\vec f_n)`),
+                        " を取り、二本を通じて無向辺の標識が相異なるとする。",
+                        "それぞれの巡回後続写像を ",
+                        math(String.raw`\sigma_\gamma:I_m\to I_m`), "、",
+                        math(String.raw`\sigma_\eta:I_n\to I_n`), " とする（",
+                        ref("def_closed_walk_passes"), "）。混合横断数 ",
+                        math(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\in\mathbb N`), " を",
+                      ]),
+                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta):=\bigl|\{(r,s)\in I_m\times I_n\mid
+\operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec f_s),\quad
+\tau(\vec e_r,\vec e_{\sigma_\gamma(r)})=\tau(\vec f_s,\vec f_{\sigma_\eta(s)})=0,\quad
+\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec f_s))\}\bigr|`),
+                      paragraph(["と定める。これは有限集合の元の個数である（", ref("def_closed_walk_crossing_number"), " の横断の条件）。"]),
+                      paragraph([
+                        "二本の辺の台を ", math(String.raw`C,D`),
+                        " という有限辺鎖とし、切断線偶奇を ",
+                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`),
+                        " とする（", ref("claim_even_edge_chain_torus_normal_form"), "）。このとき",
+                      ]),
+                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
+=I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
+                      paragraph(["辺長一でも四つの入出半辺は辺の標識と方向で区別する。有限集合の偶奇だけを使う。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "各頂点の四つの半辺を左・上・右・下と呼ぶ。閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
+                        "二本を通じて辺の標識が相異なるので、同じ頂点で両方の歩道が通過する場合、",
+                        "それぞれが相異なる二半辺を使い、四半辺を使い尽くす。",
+                        "少なくとも一方が通過しない頂点では、混合横断も ",
+                        ref("def_even_edge_chain_intersection"), " の局所項も零である。",
+                      ]),
+                      paragraph([
+                        "両方が通過する頂点では、", ref("def_even_edge_chain_intersection"),
+                        " の局所項は「左を ", math(String.raw`C`), "、上を ",
+                        math(String.raw`D`), " が使う」と「下を ", math(String.raw`C`),
+                        "、右を ", math(String.raw`D`), " が使う」の二つの真偽値の和である。",
+                        "両歩道が直進すると、一方が左右、他方が上下を使い、二真偽値の一方だけが一となる。",
+                        "両歩道が曲がると、二真偽値はともに零、またはともに一となる。",
+                        "これらは二半辺の選び方六通りを尽くす。従って局所項の偶奇は、",
+                        "二本の通過が横断する場合だけ一である。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
+&=\sum_{i,j=0}^{L-1}\bigl(H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)
+&&\bigl(\because\ \text{各頂点の四半辺の場合分けと有限和}\bigr)\\
+&=I_L(C,D)
+&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\bigr)\\
+&=h_Cv_D+v_Ch_D
+&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr).
+\end{aligned}`),
+                      paragraph(["各歩道は閉じているので台は偶辺鎖である。辺長一の自己ループも、入る半辺と出る半辺を区別するため同じ場合分けに入る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_edge_distinct_smoothing_crossing_parity",
+              labels: [],
+              title: { text: "辺の重複がない閉歩道の一回の平滑化と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_distinct_smoothing_crossing_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_distinct_smoothing_crossing_parity",
+                    kind: "claim",
+                    title: { text: "辺の重複がない閉歩道の平滑化で横断数の偶奇は交差形式に分かれる" },
+                    labels: ["claim_edge_distinct_smoothing_crossing_parity"],
+                    habitat: "N",
+                    verification: ["sagemath/check/edge-distinct-smoothing-crossing-parity"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なる閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " の横断する添字 ", math(String.raw`k<l`), " を一組取る。",
+                        ref("def_smoothed_split_edge_sequences"), " の二本を ", math(String.raw`\gamma_A,\gamma_B`),
+                        " とし、その辺の台を ", math(String.raw`C_A,C_B`), " とする。このとき二元体の等式",
+                      ]),
+                      displayMath(String.raw`(c(\gamma)\bmod2)=((c(\gamma_A)+c(\gamma_B)+1)\bmod2)+I_L(C_A,C_B)\quad(\mathbb F_2)`),
+                      paragraph([
+                        "が成り立つ。", math(String.raw`I_L`), " は ", ref("def_even_edge_chain_intersection"), " の値である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "横断する二通過は同じ頂点 ", math(String.raw`v`), " にあり、二軸をそれぞれ直進する（",
+                        ref("def_index_pair_crossing"), "）。それぞれの通過が使う入出半辺は対向する二半辺であり、",
+                        "二通過で四半辺を使い尽くす。辺の標識が相異なるので、", math(String.raw`v`),
+                        " に別の通過はない。従って ", ref("def_vertex_axis_straight_visit_count"), " により",
+                      ]),
+                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1.`),
+                      paragraph([
+                        ref("claim_smoothing_crossing_number_update"), " と ",
+                        ref("claim_smoothing_split_crossing_partition"), " を一行ずつ適用する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+c(\gamma)+1
+&=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_crossing_number_update}\bigr)\\
+&=c_{\mathrm{sm}}(\gamma;k,l)+2
+&&\bigl(\because\ n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\bigr)\\
+&=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+2
+&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "自然数の加法の消去律で ", math(String.raw`c(\gamma)=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+1`), " を得る。",
+                        ref("def_smoothed_split_edge_sequences"), " により二本の辺の台は互いに素である。",
+                        ref("claim_smoothing_splits_closed_walk"), " により二本は閉じた非後退辺列である。",
+                        ref("claim_smoothing_splits_closed_walk"), " により二本の各通過は元の添字の平滑化後の通過と一致する。",
+                        "従って ", ref("def_split_mutual_crossing_number"), " の混合横断と二本の巡回後続写像による混合横断は、同じ添字対を数える。",
+                        "従って ", ref("claim_disjoint_walk_mutual_crossing_intersection"), " により",
+                      ]),
+                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B).`),
+                      paragraph(["自然数の等式を二で割った余りを取って、上の交差数との等式を代入する。辺長一でも四半辺を方向と辺の標識で区別する。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_edge_distinct_crossing_elimination_parity",
+              labels: [],
+              title: { text: "辺の重複がない閉歩道の横断消去と交差形式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_distinct_crossing_elimination_parity",
+                  focus: {
+                    id: "kac_ward_claim_edge_distinct_crossing_elimination_parity",
+                    kind: "claim",
+                    title: { text: "横断消去の帰納法は位相と切断線偶奇と交差形式を保つ" },
+                    labels: ["claim_edge_distinct_crossing_elimination_parity"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/edge-distinct-crossing-elimination-parity"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なる閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
+                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
+                        " が存在する。任意のこの議論の辺列 ", math(String.raw`\eta`),
+                        " の無向辺の台を ", math(String.raw`C_{\eta}`), " と書き、",
+                        math(String.raw`C_i:=C_{\delta_i}`), " と置く。台 ",
+                        math(String.raw`C_i`), " は互いに素で、合併は ", math(String.raw`C_{\gamma}`),
+                        " であり、各 ", math(String.raw`c(\delta_i)=0`), " である。さらに整数の等式と二元体の等式",
+                      ]),
+                      displayMath(String.raw`\sum_{i=1}^{n}t_{\circ}(\delta_i)=t_{\circ}(\gamma),\qquad
+(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
+c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
+                      paragraph([
+                        "循環総回転数・切断線偶奇・横断数はそれぞれ ",
+                        ref("def_cyclic_total_turning"), "、", ref("def_edge_sequence_seam_parities"),
+                        "、", ref("def_closed_walk_crossing_number"), " で定め、交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " で定める。",
+                        math(String.raw`\bigoplus`), " は二成分ごとに法二で加えることを表す。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        math(String.raw`c(\gamma)\in\mathbb N`), " に関する整礎帰納法を用いる。",
+                        math(String.raw`c(\gamma)=0`), " なら ", math(String.raw`n=1`),
+                        "、", math(String.raw`\delta_1=\gamma`), " と取る。辺の台、回転数、切断線偶奇は同じで、",
+                        "対 ", math(String.raw`i<j`), " の集合は空であり、横断数の式の両辺は零である。",
+                      ]),
+                      paragraph([
+                        math(String.raw`c(\gamma)>0`), " とする。", ref("def_closed_walk_crossing_number"),
+                        " から横断する添字 ", math(String.raw`k<l`), " を選ぶ。",
+                        ref("claim_smoothing_splits_closed_walk"), " の二本を ",
+                        math(String.raw`\gamma_A,\gamma_B`), " とし、その辺の台を ",
+                        math(String.raw`C_A,C_B`), " とする。元の辺が相異なるので ",
+                        math(String.raw`C_A\cap C_B=\varnothing`), " かつ ",
+                        math(String.raw`C_A\cup C_B=C_{\gamma}`), " である。",
+                        ref("claim_smoothing_split_crossing_descent"), " により各子の横断数は元より小さい。",
+                        "帰納法を二本へ適用し、横断のない族 ",
+                        math(String.raw`(\alpha_i)_{1\le i\le p}`), "、",
+                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。両族を連結して ",
+                        math(String.raw`(\delta_i)_{1\le i\le p+q}`), " と置く。",
+                        "帰納法の台の条件と二本の台の分割により、連結族の台も互いに素で元の台を尽くす。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{i=1}^{p+q}t_{\circ}(\delta_i)
+&=\sum_{i=1}^{p}t_{\circ}(\alpha_i)+\sum_{j=1}^{q}t_{\circ}(\beta_j)
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=t_{\circ}(\gamma)
+&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "切断線偶奇も成分ごとに帰納法の仮定を適用し、",
+                        ref("claim_smoothing_split_seam_parity"), " を適用すると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
+&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
+&&\bigl(\because\ \text{有限和の分割と二本への帰納法の仮定}\bigr)\\
+&=(h(\gamma),v(\gamma))
+&&\bigl(\because\ \blkref{claim_smoothing_split_seam_parity}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "交差形式 ", math(String.raw`I_L`), " は ",
+                        ref("def_even_edge_chain_intersection"), " の各項が二つの辺鎖の係数の積なので、",
+                        "二つの引数のそれぞれについて有限和に分配する。台の分割を代入して",
+                      ]),
+                      displayMath(String.raw`I_L(C_A,C_B)
+=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
+\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と辺の台の互いに素な分割}\bigr).`),
+                      paragraph(["横断数については、求める左辺から一回の平滑化と帰納法を順に適用する。"]),
+                      displayMath(String.raw`\begin{aligned}
+c(\gamma)\bmod2
+&=c(\gamma_A)+c(\gamma_B)+1+I_L(C_A,C_B)
+&&\bigl(\because\ \blkref{claim_edge_distinct_smoothing_crossing_parity}\bigr)\\
+&=(p-1)+(q-1)+1+\sum_{1\le i<j\le p}I_L(C_{\alpha_i},C_{\alpha_j})
++\sum_{1\le i<j\le q}I_L(C_{\beta_i},C_{\beta_j})+I_L(C_A,C_B)
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)
+&&\bigl(\because\ \text{上の交差形式の分配と有限和の分割}\bigr)\quad(\mathbb F_2).
+\end{aligned}`),
+                      paragraph(["以上の帰納は有限集合、整数、二元体の演算だけで閉じる。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_crossing_free_contact_split_phase",
+              labels: [],
+              title: { text: "横断のない閉歩道の接触点分割と回転位相" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_crossing_free_contact_split_phase",
+                  beforeFocus: [{
+                    role: "supportingClaim",
+                    element: {
+                      id: "kac_ward_claim_crossing_free_contact_split_children",
+                      kind: "claim",
+                      title: { text: "横断のない閉歩道を接触点で分けても各子に横断は生じない" },
+                      labels: ["claim_crossing_free_contact_split_children"],
+                      habitat: "N",
+                      verification: ["sagemath/check/crossing-free-contact-split-phase"],
+                      statement: [
+                        paragraph([
+                          math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
+                          math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                          math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
+                          ref("claim_edge_simple_contact_split"), " の二本を ",
+                          math(String.raw`\gamma_A,\gamma_B`), " とすると、",
+                        ]),
+                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0.`),
+                      ],
+                      proof: [
+                        paragraph([
+                          "元の辺の標識は相異なるので、接触頂点 ", math(String.raw`v`),
+                          " の通過は選んだ二つだけである。分割後は各子が ",
+                          math(String.raw`v`), " に一度ずつ通る（",
+                          ref("claim_edge_simple_contact_split"), "）ので、そこで自己横断は起きない。",
+                          "他の頂点では通過が元と同じであり、元の横断数は零なので、",
+                          "どちらの子にも自己横断は無い（", ref("def_closed_walk_crossing_number"), "）。",
+                        ]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_crossing_free_contact_split_phase",
+                    kind: "claim",
+                    title: { text: "接触点分割の回転位相は交差形式で更新される" },
+                    labels: ["claim_crossing_free_contact_split_phase"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/crossing-free-contact-split-phase"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
+                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
+                        ref("claim_edge_simple_contact_split"), " の二本を ",
+                        math(String.raw`\gamma_A,\gamma_B`), "、それらの辺の台を ",
+                        math(String.raw`C_A,C_B`), " とする。このとき ",
+                      ]),
+                      displayMath(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{1+I_L(C_A,C_B)}
+\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}`),
+                      paragraph([
+                        "が成り立つ。右辺の符号の指数は二元体の値を整数代表 ",
+                        math(String.raw`0,1`), " で読む。交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " による。等式は ",
+                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "辺の標識が相異なるので、接触頂点 ", math(String.raw`v`),
+                        " で使う四半辺は全て相異なる。従って ", math(String.raw`v`),
+                        " の通過は選んだ二つだけである。元に横断が無いので、二通過はともに曲がる。",
+                        "実際、一方が直進なら残る二半辺も対向し、二通過が横断してしまう（",
+                        ref("def_index_pair_crossing"), "）。",
+                      ]),
+                      paragraph([
+                        "四方向を巡回して最初の入辺の方向番号を零とし、もう一方の入辺、",
+                        "最初の出辺、もう一方の出辺の方向番号を順に並べる。",
+                        "四半辺の相異性と非後退性を満たす場合は次の四つで尽くされる。",
+                        "表の最後の値は、分割後の二通過が横断する場合に一、それ以外に零とする。",
+                      ]),
+                      displayMath(String.raw`\begin{array}{c|c|c}
+(d_k,d_l,d_{\sigma(k)},d_{\sigma(l)})
+&t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
+&\text{分割後の混合横断}\\ \hline
+(0,1,1,0)&0&1\\
+(0,2,1,3)&-4&0\\
+(0,2,3,1)&4&0\\
+(0,3,3,0)&0&1
+\end{array}`),
+                      paragraph([
+                        "各行の回転差は ", ref("claim_contact_split_turning_update"),
+                        " の四つの ", math(String.raw`\tau`), " を ",
+                        ref("def_step_turning"), " の方向差で評価した値である。",
+                        "分割は選んだ二接続以外の通過を変えない（",
+                        ref("claim_edge_simple_contact_split"), "）。",
+                        "従って他の頂点では横断が生じず、選んだ頂点で横断が生じる場合も二本の間だけである（",
+                        ref("claim_crossing_free_contact_split_children"), "）。",
+                      ]),
+                      paragraph([
+                        "二本の混合横断は表の最後の値だけである。",
+                        ref("claim_disjoint_walk_mutual_crossing_intersection"),
+                        " により、この値の偶奇は ", math(String.raw`I_L(C_A,C_B)`),
+                        " に等しい。表の各行で回転差を ", math(String.raw`D`),
+                        " と置くと ", math(String.raw`D/4\equiv1+I_L(C_A,C_B)\pmod2`),
+                        " である。", ref("def_rotation_phase"),
+                        " の ", math(String.raw`\zeta_8^4=-1`), " と ",
+                        math(String.raw`\zeta_8^8=1`), " を使うと",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
+&=\zeta_8^{\,t_{\circ}(\gamma)+D}
+&&\bigl(\because\ D\text{ の定義}\bigr)\\
+&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ D/4\equiv1+I_L(C_A,C_B)\pmod2,\ \zeta_8^4=-1\bigr).
+\end{aligned}`),
+                      paragraph(["符号を両辺に掛ければ求める等式になる。四方向の有限な場合分けと代数的数の整数冪だけを使った。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_crossing_free_contact_elimination_phase",
+              labels: [],
+              title: { text: "接触点分割の帰納法と頂点単純閉路族の回転位相" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_crossing_free_contact_elimination_phase",
+                  focus: {
+                    id: "kac_ward_claim_crossing_free_contact_elimination_phase",
+                    kind: "claim",
+                    title: { text: "横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される" },
+                    labels: ["claim_crossing_free_contact_elimination_phase"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/crossing-free-contact-elimination-phase"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なり ",
+                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
+                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
+                        " が存在する。各子は無向辺の標識と通過する頂点がそれぞれ相異なり、横断を持たない。",
+                        "各子の無向辺の台 ", math(String.raw`C_i`), " は互いに素で、合併は元の台 ",
+                        math(String.raw`C_{\gamma}`), " である。切断線偶奇と回転位相について",
+                      ]),
+                      displayMath(String.raw`(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
+\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)}
+\prod_{i=1}^{n}\zeta_8^{\,t_{\circ}(\delta_i)}`),
+                      paragraph([
+                        "が成り立つ。", math(String.raw`\bigoplus`), " と符号の指数は ",
+                        math(String.raw`\mathbb F_2`), " で計算し、符号の指数は整数代表 ",
+                        math(String.raw`0,1`), " で読む。交差形式は ",
+                        ref("def_even_edge_chain_intersection"), " による。回転位相の等式は ",
+                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        "接触対数 ", math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`),
+                        "（", ref("def_contact_pair_count"), "）の整礎帰納法を使う。",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら ",
+                        math(String.raw`n=1,\ \delta_1=\gamma`), " と取る。",
+                        "台と切断線偶奇は同じであり、交差形式の和は空、符号の指数は零である。",
+                      ]),
+                      paragraph([
+                        math(String.raw`n_{\mathrm{ct}}(\gamma)>0`), " とする。接触対 ",
+                        math(String.raw`k<l`), " を一つ選び、", ref("claim_edge_simple_contact_split"),
+                        " の二本を ", math(String.raw`\gamma_A,\gamma_B`), "、その台を ",
+                        math(String.raw`C_A,C_B`), " とする。二本の台は互いに素で元の台を尽くす。",
+                        ref("claim_crossing_free_contact_split_children"), " により両子の横断数は零である。",
+                        "接触対数について両子それぞれに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+n_{\mathrm{ct}}(\gamma_A)
+&\le n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
+&&\bigl(\because\ n_{\mathrm{ct}}(\gamma_B)\in\mathbb N\bigr)\\
+&<n_{\mathrm{ct}}(\gamma)
+&&\bigl(\because\ \blkref{claim_contact_split_pair_descent}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "が成り立つ。最初の行で両子を交換すると ",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
+                        " も得る。",
+                        "そこで帰納法を両子に適用し、頂点単純な二族 ",
+                        math(String.raw`(\alpha_i)_{1\le i\le p}`), " と ",
+                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。",
+                        "これらを順に連結して ", math(String.raw`(\delta_i)_{1\le i\le p+q}`),
+                        " と置く。台の分割と頂点単純性は帰納法の仮定から従う。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
+&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
+&&\bigl(\because\ \text{二本への帰納法の仮定と有限和の分割}\bigr)\\
+&=(h(\gamma),v(\gamma))
+&&\bigl(\because\ \blkref{claim_contact_split_seam_parity}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配できる。",
+                        "帰納法による台の互いに素な分割を代入すると",
+                      ]),
+                      displayMath(String.raw`I_L(C_A,C_B)=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
+\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と有限和の分配則}\bigr).`),
+                      paragraph(["位相の左辺から接触点分割の局所関係と帰納法を順に適用する。"]),
+                      displayMath(String.raw`\begin{aligned}
+\zeta_8^{\,t_{\circ}(\gamma)}
+&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
+&&\bigl(\because\ \blkref{claim_crossing_free_contact_split_phase}\bigr)\\
+&=(-1)^{1+I_L(C_A,C_B)}
+\prod_{i=1}^{p}\zeta_8^{\,t_{\circ}(\alpha_i)}
+\prod_{j=1}^{q}\zeta_8^{\,t_{\circ}(\beta_j)}
+(-1)^{(p-1)+(q-1)+\sum_{i<i'}I_L(C_{\alpha_i},C_{\alpha_{i'}})
++\sum_{j<j'}I_L(C_{\beta_j},C_{\beta_{j'}})}
+&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
+&=(-1)^{(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)}
+\prod_{i=1}^{p+q}\zeta_8^{\,t_{\circ}(\delta_i)}
+&&\bigl(\because\ \text{上の交差形式の分配、有限積の分割、}\mathbb F_2\text{ の加法}\bigr).
+\end{aligned}`),
+                      paragraph(["接触対数の狭義減少により帰納法は止まる。有限集合と代数的数の整数冪だけを使った。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_edge_distinct_walk_quadratic_sign",
+              labels: [],
+              title: { text: "閉歩道の位相と巻き付き二次符号" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_edge_distinct_walk_quadratic_sign",
+                  focus: {
+                    id: "kac_ward_claim_edge_distinct_walk_quadratic_sign",
+                    kind: "claim",
+                    title: { text: "辺の重複がない閉歩道の位相は二次符号と横断数で決まる" },
+                    labels: ["claim_edge_distinct_walk_quadratic_sign"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/edge-distinct-walk-quadratic-sign"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とする。無向辺の標識が相異なる閉じた非後退辺列 ",
+                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " に対し、",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`-\Bigl(\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)\Bigr)\zeta_8^{\,t_{\circ}(\gamma)}
+=\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)(-1)^{c(\gamma)}`),
+                      paragraph([
+                        "が成り立つ。", math(String.raw`c(\gamma)\in\mathbb N`), " は ",
+                        ref("def_closed_walk_crossing_number"), " の横断数、",
+                        math(String.raw`\chi_{a,b}`), " は ", ref("def_torus_quadratic_sign"),
+                        " の二次符号である。整数の符号は ",
+                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                        " で読み、実数体・複素数体は使わない。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("claim_edge_distinct_crossing_elimination_parity"), " により、",
+                        math(String.raw`\gamma`), " は横断のない閉歩道の族 ",
+                        math(String.raw`(\delta_i)_{1\le i\le n}`), " に分かれる。",
+                        "各台を ", math(String.raw`C_i`), " と置く。切断線偶奇と回転数は同じ主張の等式を満たす。",
+                        "まず各 ", math(String.raw`\delta_i`), " に ",
+                        ref("claim_crossing_free_contact_elimination_phase"), " を適用し、",
+                        "頂点単純な閉歩道の族 ", math(String.raw`(\alpha_j)_{1\le j\le p}`),
+                        " と互いに素な台 ", math(String.raw`A_j`), " を得る。",
+                        "この段では一つの ", math(String.raw`\delta_i`), " を固定する。",
+                      ]),
+                      paragraph([
+                        ref("claim_vertex_simple_orbit_quadratic_sign"), " は各 ",
+                        math(String.raw`\alpha_j`), " に適用できる。",
+                        "切断線偶奇の和からねじれ符号は積に分かれるので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+-(-1)^{a h(\delta_i)+b v(\delta_i)}\zeta_8^{\,t_{\circ}(\delta_i)}
+&=(-1)^{\sum_{j<k}I_L(A_j,A_k)}
+ \prod_{j=1}^{p}\bigl(-(-1)^{a h(\alpha_j)+b v(\alpha_j)}\zeta_8^{\,t_{\circ}(\alpha_j)}\bigr)
+&&\bigl(\because\ \blkref{claim_crossing_free_contact_elimination_phase}\text{ と整数指数の加法則}\bigr)\\
+&=(-1)^{\sum_{j<k}I_L(A_j,A_k)}
+ \prod_{j=1}^{p}\chi_{a,b}\bigl(h(\alpha_j),v(\alpha_j)\bigr)
+&&\bigl(\because\ \blkref{claim_vertex_simple_orbit_quadratic_sign}\text{ を各子へ適用}\bigr)\\
+&=(-1)^{\sum_{j<k}(h(\alpha_j)v(\alpha_k)+v(\alpha_j)h(\alpha_k))}
+ \prod_{j=1}^{p}\chi_{a,b}\bigl(h(\alpha_j),v(\alpha_j)\bigr)
+&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr)\\
+&=\chi_{a,b}\bigl(h(\delta_i),v(\delta_i)\bigr)
+&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復と }
+\blkref{claim_crossing_free_contact_elimination_phase}\text{ の切断線偶奇}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "最後の行では、二次符号の加法則を ", math(String.raw`p-1`),
+                        " 回適用し、交差形式の二重和を ",
+                        math(String.raw`\sum_{j<k}I_L(A_j,A_k)`),
+                        " と同定した。次に横断消去の族全体に同じ加法則を適用する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+-\Bigl(\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)\Bigr)\zeta_8^{\,t_{\circ}(\gamma)}
+&=-(-1)^{a h(\gamma)+b v(\gamma)}\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ \blkref{claim_walk_twist_sign_product}\bigr)\\
+&=(-1)^{n-1}\prod_{i=1}^{n}
+ \bigl(-(-1)^{a h(\delta_i)+b v(\delta_i)}\zeta_8^{\,t_{\circ}(\delta_i)}\bigr)
+&&\bigl(\because\ \blkref{claim_edge_distinct_crossing_elimination_parity}\text{ と整数指数の加法則}\bigr)\\
+&=(-1)^{n-1}\prod_{i=1}^{n}\chi_{a,b}\bigl(h(\delta_i),v(\delta_i)\bigr)
+&&\bigl(\because\ \text{上で各 }\delta_i\text{ に示した等式}\bigr)\\
+&=(-1)^{n-1+\sum_{i<j}(h(\delta_i)v(\delta_j)+v(\delta_i)h(\delta_j))}
+ \chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復と }
+\blkref{claim_edge_distinct_crossing_elimination_parity}\text{ の切断線偶奇}\bigr)\\
+&=(-1)^{n-1+\sum_{i<j}I_L(C_i,C_j)}
+ \chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr)\\
+&=(-1)^{c(\gamma)}\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
+&&\bigl(\because\ \blkref{claim_edge_distinct_crossing_elimination_parity}\bigr).
+\end{aligned}`),
+                      paragraph(["使った集合と和は全て有限であり、位相は代数的数の整数冪である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_reference_matching_constant_term",
+              labels: [],
+              title: { text: "基準マッチングの符号と定数項" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_reference_matching_constant_term",
+                  focus: {
+                    id: "kac_ward_claim_reference_matching_constant_term",
+                    kind: "claim",
+                    title: { text: "基準マッチングの長い標識の項は一である" },
+                    labels: ["claim_reference_matching_constant_term"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/reference-matching-constant-term"],
+                    statement: [
+                      paragraph([
+                        math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        " とする。", ref("def_reference_long_pairs"), " の基準完全マッチング ",
+                        math(String.raw`\mathcal D_0`), " の全ての対に長い標識を付ける。",
+                        ref("claim_tagged_matching_expansion"), " のこの項を ",
+                        math(String.raw`M_{\mathcal D_0,\varnothing}(x)\in\overline{\mathbb Q}[x]`),
+                        " とすると、辺番号を先に、向きを後に比べる辞書式順序で",
+                      ]),
+                      displayMath(String.raw`\operatorname{sgn}(\mathcal D_0)=1,\qquad
+\mathsf L_{(e,0),(e,1)}=1\quad(e\in E_L),\qquad
+M_{\mathcal D_0,\varnothing}(x)=1.`),
+                      paragraph(["この等式は辺長一と四つのねじれを含む。実数体と複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("def_oriented_edges"), " より ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
+                        " である。辞書式順序では各辺の二向き ",
+                        math(String.raw`(e,0)\prec(e,1)`), " が隣接する。",
+                        ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"),
+                        " により、これらの隣接対を辺番号順に並べた列は基準完全マッチングの列挙である。",
+                        ref("def_perfect_matching_sign"), " の端点列は昇順の全元列に一致するので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\mathcal D_0)
+&=\operatorname{sgn}(\operatorname{id}_{\vec E_L})
+&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
+&=1
+&&\bigl(\because\ \text{恒等置換の符号}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        math(String.raw`e\in E_L`), " を固定する。", ref("def_oriented_edge_direction"),
+                        " により方向代表は横辺で ", math(String.raw`(0,2)`),
+                        "、縦辺で ", math(String.raw`(1,3)`), " である。",
+                        ref("def_seam_parities"), " と ", ref("def_twist_parity"),
+                        " により切断線の偶奇は辺の反転で変わらない。",
+                        ref("def_gauged_terminal_matrix"), " と ", ref("def_diagonal_gauge"),
+                        " の重みへ代入すると、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+w_{(e,0),(e,1)}
+&=\zeta_8^{\,2}v_{(e,0)}u_{(e,1)}
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
+&=\zeta_8^{\,2+r_4(\operatorname{dir}(e,0))-r_4(\operatorname{dir}(e,1))}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転での偶奇の一致}\bigr)\\
+&=\zeta_8^{\,0}
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の二つの場合}\bigr)\\
+&=1
+&&\bigl(\because\ \text{零乗}\bigr).
+\end{aligned}`),
+                      paragraph([ref("def_tagged_matching_contributions"), " の長い寄与を求める。"]),
+                      displayMath(String.raw`\begin{aligned}
+\mathsf L_{(e,0),(e,1)}
+&=C(w_{(e,0),(e,1)})
+&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と反転対の条件}\bigr)\\
+&=C(1)
+&&\bigl(\because\ \text{上で求めた重み}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        ref("claim_tagged_matching_expansion"), " の項は短い標識を持たない。",
+                        "整数の符号は標準の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
+                        " で定数多項式へ送る。有限積と符号の等号から",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+M_{\mathcal D_0,\varnothing}(x)
+&=C(\operatorname{sgn}(\mathcal D_0))
+\prod_{e\in E_L}\mathsf L_{(e,0),(e,1)}
+&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=1\cdot\prod_{e\in E_L}1
+&&\bigl(\because\ \text{上の符号と長い寄与}\bigr)\\
+&=1
+&&\bigl(\because\ \text{有限積の単位元}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_alternating_cycle_matching_sign",
+              labels: [],
+              title: { text: "交互閉路による完全マッチングの符号比較" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_alternating_cycle_matching_sign",
+                  focus: {
+                    id: "kac_ward_claim_alternating_cycle_matching_sign",
+                    kind: "claim",
+                    title: { text: "交互閉路ごとの向き直しが二つのマッチングの符号比を与える" },
+                    labels: ["claim_alternating_cycle_matching_sign"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/alternating-cycle-matching-sign"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と非零の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", ref("def_reference_long_pairs"), " の基準マッチングを ", math(String.raw`\mathcal D_0`), " とし、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の有限集合を ", math(String.raw`\mathcal C`), " とする。各 ", math(String.raw`C\in\mathcal C`), " の第一色から始まる点列を ", math(String.raw`c_C(0),\ldots,c_C(2k_C-1)`), " とし、", math(String.raw`c_C(2k_C)=c_C(0)`), " と置く。" ]),
+                      paragraph(["線型順序 ", math(String.raw`\prec`), " は辺番号と向きの辞書式とする。相異なる二点 ", math(String.raw`i,j\in\vec E_L`), " に対し ", math(String.raw`\eta(i,j):=1\ (i\prec j),\ -1\ (j\prec i)`), " と置き、各閉路で ", math(String.raw`\alpha_D(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r),c_C(2r+1))`), " および ", math(String.raw`\alpha_0(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r+1),c_C(2r+2))`), " を定める。これらは ", math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。このとき整数の等式"]),
+                      displayMath(String.raw`\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+=(-1)^{|\mathcal C|}\prod_{C\in\mathcal C}\alpha_D(C)\alpha_0(C)`),
+                      paragraph(["が成り立つ。空の閉路集合では右辺は一である。辺長一で同じ二元集合に長短の標識が付く一歩閉路も含む。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により交互閉路の点集合は互いに素で、全活動点を覆う。", ref("claim_tagged_symmetric_difference_degree"), " より活動点以外の ", math(String.raw`D`), " の対は ", math(String.raw`\mathcal D_0`), " の長い対と一致する。両マッチングに共通する対を昇順に並べ、各閉路の後ろへ同じ順で付ける。" ]),
+                      paragraph(["各閉路 ", math(String.raw`C`), " について、", ref("claim_tagged_difference_alternating_cycle"), " と ", ref("def_matching_pair_successor"), " により ", math(String.raw`(c_C(2r),c_C(2r+1))`), " は ", math(String.raw`D`), " の対の向き付き列挙であり、", math(String.raw`(c_C(2r+1),c_C(2r+2))`), " は ", math(String.raw`\mathcal D_0`), " の対の向き付き列挙である。共通する対は両列挙で同じ昇順の向きに取る。" ]),
+                      paragraph(["閉路を同じ順で並べて ", math(String.raw`D`), " の向き付き端点列を ", math(String.raw`W_D`), "、基準マッチングの列を ", math(String.raw`W_0`), " と書く。各列の対の第一端点を選んだ集合は各対から一端点だけを含むので、", ref("claim_matching_pair_word_orientation_sign"), " を適用できる。各閉路で後者の部分列は前者の ", math(String.raw`2k_C`), " 個の文字を一つ左へ巡回移動したものなので、その置換の符号は ", math(String.raw`(-1)^{2k_C-1}=-1`), " である。共通対の部分列は変わらない。", ref("def_matching_word_sign"), " に従って端点列の符号を ", math(String.raw`\varepsilon`), " と書くと、"]),
+                      displayMath(String.raw`\begin{aligned}
+\varepsilon(W_0)
+&=\prod_{C\in\mathcal C}(-1)^{2k_C-1}\,\varepsilon(W_D)
+&&\bigl(\because\ \text{閉路ごとの巡回移動と置換符号の積}\bigr)\\
+&=(-1)^{|\mathcal C|}\varepsilon(W_D)
+&&\bigl(\because\ 2k_C-1\text{ は奇数}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き直しの等式を各列挙へ適用する。対の列挙順序は ", ref("claim_perfect_matching_sign_enumeration_independent"), " で符号に影響しない。共通対の向きは両側で ", math(String.raw`+1`), " なので、"]),
+                      displayMath(String.raw`\begin{aligned}
+\alpha_0\operatorname{sgn}(\mathcal D_0)
+&=\varepsilon(W_0)
+&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
+&=(-1)^{|\mathcal C|}\varepsilon(W_D)
+&&\bigl(\because\ \text{上の巡回移動の等式}\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_D\operatorname{sgn}(D)
+&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
+\end{aligned}`),
+                      paragraph(["ここで ", math(String.raw`\alpha_D:=\prod_C\alpha_D(C)`), "、", math(String.raw`\alpha_0:=\prod_C\alpha_0(C)`), " は整数値の符号であり、各因子の平方は一である。直前の等式の両辺に ", math(String.raw`\alpha_0\operatorname{sgn}(D)`), " を掛けると、"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+&=\alpha_0^2\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
+&&\bigl(\because\ \alpha_0^2=1\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_0\alpha_D\operatorname{sgn}(D)^2
+&&\bigl(\because\ \text{上の端点列の符号の等式}\bigr)\\
+&=(-1)^{|\mathcal C|}\alpha_0\alpha_D
+&&\bigl(\because\ \operatorname{sgn}(D)^2=1\bigr).
+\end{aligned}`),
+                      paragraph(["空集合でも同じ空積の計算が成り立つ。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_alternating_cycle_gauge_ratio",
+              labels: [],
+              title: { text: "交互閉路に沿う対角変換の因子" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_alternating_cycle_gauge_ratio",
+                  focus: {
+                    id: "kac_ward_claim_alternating_cycle_gauge_ratio",
+                    kind: "claim",
+                    title: { text: "短い対と基準の長い対の対角変換因子の比" },
+                    labels: ["claim_alternating_cycle_gauge_ratio"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/alternating-cycle-gauge-ratio"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路一つを固定する。", ref("claim_projected_edge_cycle_nonbacktracking"), " の閉歩道を ", math(String.raw`\gamma=(\vec e_0,\ldots,\vec e_{k-1})`), " と書き、添字は ", math(String.raw`\mathbb Z/k\mathbb Z`), " で読む。", math(String.raw`k\in\mathbb N_{>0}`), " である。閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{r-1}),\vec e_r)`), "、基準マッチングの長い標識の対を ", math(String.raw`(\vec e_r,\iota(\vec e_r))`), " の向きで取る。", ref("def_gauged_terminal_matrix"), " の重みについて、"]),
+                      displayMath(String.raw`\prod_{r\in\mathbb Z/k\mathbb Z}
+w_{\iota(\vec e_{r-1}),\vec e_r}
+=(-1)^k\prod_{r\in\mathbb Z/k\mathbb Z}w_{\vec e_r,\iota(\vec e_r)}\qquad\text{in }\overline{\mathbb Q}.`),
+                      paragraph(["積は対の向きを上記の順に固定したものであり、昇順対への向き直しの符号は含めない。辺長一の一歩閉路も含む。実数体と複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について ", ref("def_diagonal_gauge"), " と ", ref("claim_diagonal_gauge_inverse"), " より ", math(String.raw`v_{\vec e}=u_{\vec e}^{-1}`), " である。", ref("def_twist_parity"), " より反転辺のねじれ偶奇は同じである。", ref("def_oriented_edge_direction"), " と ", ref("def_direction_standard_representative"), " より、反転した方向の代表と元の方向の代表の差は ", math(String.raw`2`), " または ", math(String.raw`-2`), " である。従って各 ", math(String.raw`r\in\mathbb Z/k\mathbb Z`), " で"]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
+&=\zeta_8^{\,2(r_4(\operatorname{dir}(\iota(\vec e_r)))-r_4(\operatorname{dir}(\vec e_r)))}
+&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転でのねじれ偶奇の一致}\bigr)\\
+&=\zeta_8^{\,4}\text{ または }\zeta_8^{\,-4}
+&&\bigl(\because\ \blkref{def_oriented_edge_direction}\bigr)\\
+&=-1
+&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と }\zeta_8^{\,-4}=\zeta_8^{\,4}\bigr).
+\end{aligned}`),
+                      paragraph(["全ての ", math(String.raw`u_{\vec e}`), " と ", math(String.raw`w_{\vec e,\vec f}`), " は非零である。閉路の添字を巡回して ", math(String.raw`\prod_r v_{\iota(\vec e_{r-1})}=\prod_r v_{\iota(\vec e_r)}`), " と書き直す。すると"]),
+                      displayMath(String.raw`\begin{aligned}
+\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}
+&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_{r-1})}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
+&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_r)}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \text{有限積の巡回再添字付け}\bigr)\\
+&=\prod_r\frac{v_{\iota(\vec e_r)}u_{\vec e_r}}{v_{\vec e_r}u_{\iota(\vec e_r)}}
+&&\bigl(\because\ \text{非零の共通因子の約分}\bigr)\\
+&=\prod_r\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
+&&\bigl(\because\ v_{\vec e}=u_{\vec e}^{-1}\bigr)\\
+&=\prod_r(-1)
+&&\bigl(\because\ \text{上で求めた各因子の値}\bigr)\\
+&=(-1)^k
+&&\bigl(\because\ \text{有限積の定義}\bigr).
+\end{aligned}`),
+                      paragraph(["分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。最後の等式の両辺に長い対の重みの積を掛けると"]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}
+&=\left(\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}\right)\prod_r w_{\vec e_r,\iota(\vec e_r)}
+&&\bigl(\because\ \blkref{claim_gauge_pair_weight_nonzero}\text{ と非零元の四則}\bigr)\\
+&=(-1)^k\prod_r w_{\vec e_r,\iota(\vec e_r)}
+&&\bigl(\because\ \text{直前の比の等式}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_cycle_weight",
+              labels: [],
+              title: { text: "非零の標識付きマッチング項の閉路別の重み" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_cycle_weight",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_cycle_weight",
+                    kind: "claim",
+                    title: { text: "非零項は閉歩道ごとのねじれ・回転位相の積に分かれる" },
+                    labels: ["claim_tagged_matching_cycle_weight"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-cycle-weight"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C=(\vec e_{C,0},\ldots,\vec e_{C,k_C-1})`), " と置き、添字を ", math(String.raw`\mathbb Z/k_C\mathbb Z`), " で読む。", math(String.raw`k_C\in\mathbb N_{>0}`), " である。" ]),
+                      displayMath(String.raw`M_{D,T}(x)=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]\quad\text{in }\overline{\mathbb Q}[x].`),
+                      paragraph(["左辺は ", ref("claim_tagged_matching_expansion"), " の当該項である。空積は一であり、辺長一の一歩閉路も含む。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
+                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により、閉路の対は重複しない。", ref("claim_tagged_matching_short_pair_count"), " と ", ref("claim_projected_cycle_support_union"), " より短い対の総数は ", math(String.raw`|T|=\sum_C k_C`), " である。活動点の外の長い対は基準項と一致し、", ref("claim_reference_matching_constant_term"), " より基準項は一である。従って各閉路の項の比を掛ければ ", math(String.raw`M_{D,T}(x)`), " を得る。"]),
+                      displayMath(String.raw`\begin{aligned}
+M_{D,T}(x)
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}\alpha_D(C)^2\alpha_0(C)^2x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_alternating_cycle_matching_sign},\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \alpha_D(C)^2=\alpha_0(C)^2=1\text{ と昇順への向き直し}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}(-1)^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_alternating_cycle_gauge_ratio}\bigr)\\
+&=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ (-1)^{2k_C}=1\bigr).
+\end{aligned}`),
+                      paragraph(["全ての分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。有限積と定数多項式への埋込みだけを用いた。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_tagged_matching_quadratic_crossing_weight",
+              labels: [],
+              title: { text: "非零項の二次符号と局所横断数" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_tagged_matching_quadratic_crossing_weight",
+                  focus: {
+                    id: "kac_ward_claim_tagged_matching_quadratic_crossing_weight",
+                    kind: "claim",
+                    title: { text: "非零項の位相は補辺の二次符号と短い対の横断数に等しい" },
+                    labels: ["claim_tagged_matching_quadratic_crossing_weight"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/tagged-matching-quadratic-crossing-weight"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。補辺を ", math(String.raw`P:=P(D,T)\subseteq E_L`), " とし、", ref("claim_tagged_matching_cycle_weight"), " の交互閉路集合を ", math(String.raw`\mathcal C(D,T)`), " とする。短い標識の対は ", ref("claim_projected_edge_cycle_nonbacktracking"), " により閉歩道の通過に一対一に対応する。" ]),
+                      paragraph(["相異なる二つの短い標識の対が横断するとは、対応する通過の終点が等しく、ともに直進し、方向軸が異なることとする（", ref("def_transverse_crossing"), "）。そのような順序のない対の個数を ", math(String.raw`t(D,T)\in\mathbb N`), " と定める。補辺の切断線偶奇を ", math(String.raw`h(P),v(P)\in\{0,1\}`), " と書く。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式" ]),
+                      displayMath(String.raw`M_{D,T}(x)=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}`),
+                      paragraph(["が成り立つ。辺長一の短い対も標識と方向で区別して数える。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C`), "、その無向辺の台を ", math(String.raw`P_C`), "、横断数を ", math(String.raw`c_C:=c(\gamma_C)\in\mathbb N`), "、長さを ", math(String.raw`k_C\in\mathbb N_{>0}`), " と書く。", ref("claim_projected_cycle_distinct_edges"), " と ", ref("claim_projected_cycle_support_union"), " により、台 ", math(String.raw`P_C`), " は互いに素で ", math(String.raw`P=\bigsqcup_C P_C`), " である。各短い対はただ一つの閉路の通過を与えるので、横断する対は同じ閉路内のものと異なる二閉路間のものに重複なく分かれる。" ]),
+                      displayMath(String.raw`t(D,T)=\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})\quad(\because\ \blkref{def_closed_walk_crossing_number}\text{ と短い対の分割})`),
+                      paragraph(["閉路集合には任意の線型順序を固定し、", math(String.raw`C<C'`), " はその順序で読む。", ref("claim_disjoint_walk_mutual_crossing_intersection"), " と ", ref("claim_torus_quadratic_sign_polarization"), " を各二閉路に適用する。切断線偶奇は台の非交和で加わる。従って整数の偶奇として" ]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
+&=\chi_{a,b}(h(P),v(P))
+  (-1)^{\sum_C c_C+\sum_{C<C'}I_L(P_C,P_{C'})}
+&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))
+  (-1)^{\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})}
+&&\bigl(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
+&&\bigl(\because\ \text{上の横断対の分割}\bigr).
+\end{aligned}`),
+                      paragraph(["求めたい左辺から始める。各閉路の回転位相積には ", ref("claim_closed_walk_rotation_phase"), "、位相と二次符号には ", ref("claim_edge_distinct_walk_quadratic_sign"), " を適用する。" ]),
+                      displayMath(String.raw`\begin{aligned}
+M_{D,T}(x)
+&=\prod_C\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
+&&\bigl(\because\ \blkref{claim_tagged_matching_cycle_weight}\bigr)\\
+&=x^{\sum_C k_C}\prod_C\left[-\Bigl(\prod_r\varepsilon_{a,b}(\vec e_{C,r})\Bigr)\zeta_8^{\,t_{\circ}(\gamma_C)}\right]
+&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\text{ と有限積の分配律}\bigr)\\
+&=x^{\sum_C k_C}\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
+&&\bigl(\because\ \blkref{claim_edge_distinct_walk_quadratic_sign}\text{ を各閉路へ適用}\bigr)\\
+&=x^{\sum_C k_C}\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
+&&\bigl(\because\ \text{上の二次符号と横断数の等式}\bigr)\\
+&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}
+&&\bigl(\because\ \blkref{claim_projected_cycle_support_union}\text{ と台の非交和}\bigr).
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_local_pairing_signed_sum",
+              labels: [],
+              title: { text: "局所対合の符号付き和" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_local_pairing_signed_sum",
+                  focus: {
+                    id: "kac_ward_claim_local_pairing_signed_sum",
+                    kind: "claim",
+                    title: { text: "偶部分グラフ上の局所対合の符号付き和は一である" },
+                    labels: ["claim_local_pairing_signed_sum"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/local-pairing-signed-sum"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と偶部分グラフ ", math(String.raw`P\subseteq E_L`), " を固定する。", ref("claim_vertex_port_bijection"), " の各頂点の選択方向集合を ", math(String.raw`S_v(P)\subseteq I`), "、", ref("claim_vertex_local_pairing_product"), " の局所対合族の集合を ", math(String.raw`\mathcal C(P)`), " とする。各 ", math(String.raw`\boldsymbol\kappa=(\kappa_v)_{v\in V_L}\in\mathcal C(P)`), " について、", math(String.raw`c_v(\kappa_v)\in\{0,1\}`), " は ", math(String.raw`S_v(P)=I`), " かつ ", math(String.raw`\kappa_v(0)=2,\ \kappa_v(1)=3`), " のときだけ一、その他は零とする。", math(String.raw`t_P(\boldsymbol\kappa):=\sum_{v\in V_L}c_v(\kappa_v)\in\mathbb N`), " と置く。このとき整数の等式"]),
+                      displayMath(String.raw`\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}=1`),
+                      paragraph(["が成り立つ。非零項を持ち、補辺が ", math(String.raw`P`), " に等しい標識付き完全マッチング全体についても、", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " による対応の下で ", math(String.raw`t_P(\boldsymbol\kappa)=t(D,T)`), "（", ref("claim_tagged_matching_quadratic_crossing_weight"), "）だから、"]),
+                      displayMath(String.raw`\sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}=1.`),
+                      paragraph(["辺長一でも端点番号付き半辺を別々に数える。実数体・複素数体は現れない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("claim_local_pairing_four_ports_count"), " による偶次数の選択は、", math(String.raw`|S_v(P)|=0,2`), " なら一通りであり、その ", math(String.raw`c_v`), " は零である。", math(String.raw`|S_v(P)|=4`), " なら ", math(String.raw`S_v(P)=I`), " で、三つの対合のうち ", math(String.raw`\{\{0,2\},\{1,3\}\}`), " だけが二本の直進通過を異なる方向軸で交差させる（", ref("def_transverse_crossing"), "）。ゆえに各頂点で"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
+&=\begin{cases}1&(|S_v(P)|=0,2),\\1+1-1&(|S_v(P)|=4)\end{cases}
+&&\bigl(\because\ \blkref{claim_local_pairing_four_ports_count}\text{ と }\blkref{def_transverse_crossing}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_vertex_local_pairing_product"), " の直積の対応で各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
+&=\sum_{\boldsymbol\kappa\in\mathcal C(P)}\prod_{v\in V_L}(-1)^{c_v(\kappa_v)}
+&&\bigl(\because\ t_P\text{ の定義と整数の冪の法則}\bigr)\\
+&=\prod_{v\in V_L}\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
+&&\bigl(\because\ \blkref{claim_vertex_local_pairing_product}\text{ と有限和の分配律}\bigr)\\
+&=\prod_{v\in V_L}1
+&&\bigl(\because\ \text{上の頂点ごとの計算}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_pfaffian_signed_even_subgraph",
+              labels: [],
+              title: { text: "Pfaffian と符号付き偶部分グラフ多項式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_pfaffian_signed_even_subgraph",
+                  focus: {
+                    id: "kac_ward_claim_pfaffian_signed_even_subgraph",
+                    kind: "claim",
+                    title: { text: "反対称化した行列の Pfaffian は符号付き偶部分グラフ多項式に等しい" },
+                    labels: ["claim_pfaffian_signed_even_subgraph"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/pfaffian-signed-even-subgraph"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " を取る。", ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " の添字を ", math(String.raw`\vec E_L=E_L\times\{0,1\}`), " の辺番号・端点番号の辞書式に並べる。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式"]),
+                      displayMath(String.raw`\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L`),
+                      paragraph(["が成り立つ。右辺は ", ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`\mathbb Z[x]`), " の多項式を係数の包含で送ったものである。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph(["偶部分グラフの有限集合を ", math(String.raw`\mathcal W_L:=\{P\subseteq E_L\mid\operatorname{Even}_L(P)\}`), " と置く。", ref("claim_tagged_matching_even_complement"), " により、非零項の補辺は ", math(String.raw`\mathcal W_L`), " に属する。各 ", math(String.raw`P\in\mathcal W_L`), " の上の非零項は ", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " により局所対合族と一対一に対応する。"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{Pf}(K^{\mathrm{as}})
+&=\sum_{D\in\mathcal M(\vec E_L)}\sum_{T\subseteq E_D}M_{D,T}(x)
+&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\ \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}M_{D,T}(x)
+&&\bigl(\because\ \blkref{claim_tagged_matching_even_complement}\text{ と有限和の再添字付け}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
+  \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}
+&&\bigl(\because\ \blkref{claim_tagged_matching_quadratic_crossing_weight}\text{ と分配則}\bigr)\\
+&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
+&&\bigl(\because\ \blkref{claim_local_pairing_signed_sum}\bigr)\\
+&=\sum_{P\in\mathcal W_L}(-1)^{(1+a)h(P)+(1+b)v(P)+h(P)v(P)}x^{|P|}
+&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と指数の偶奇}\bigr)\\
+&=Q^{a,b}_L
+&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
+\end{aligned}`),
+                      paragraph(["辺長一でも長短の標識を区別した有限和を使う。最後の等号で係数を ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " に送る。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_determinant_signed_even_subgraph_square",
+              labels: [],
+              title: { text: "Kac--Ward 行列式と符号付き偶部分グラフ多項式の平方" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_determinant_signed_even_subgraph_square",
+                  focus: {
+                    id: "kac_ward_claim_determinant_signed_even_subgraph_square",
+                    kind: "claim",
+                    title: { text: "Kac--Ward 行列式は符号付き偶部分グラフ多項式の平方に等しい" },
+                    labels: ["claim_determinant_signed_even_subgraph_square"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/determinant-signed-even-subgraph-square"],
+                    statement: [
+                      paragraph(["任意の辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とねじれ ", math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("def_kac_ward_determinants"), " と ", ref("def_signed_even_subgraph_polynomial"), " の多項式は、係数を ", math(String.raw`\overline{\mathbb Q}`), " に送ったとき"]),
+                      displayMath(String.raw`D_L^{a,b}(x)=\bigl(Q_L^{a,b}\bigr)^2\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["を満たす。両辺は多項式そのものであり、特定の値への代入は行わない。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      paragraph([ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " を ", math(String.raw`\vec E_L`), " の辺番号・端点番号の辞書式に並べる。", ref("claim_pfaffian_signed_even_subgraph"), " と同じ順序を用いる。", ref("claim_gauged_terminal_matrix_skew"), " により ", math(String.raw`K^{\mathrm{as}}`), " は零対角反対称行列であり、Pfaffian の平方公式の仮定を満たす。"]),
+                      displayMath(String.raw`\begin{aligned}
+D_L^{a,b}(x)
+&=\det_x(K^{\mathrm{as}})
+&&\bigl(\because\ \blkref{claim_gauged_terminal_matrix_determinant}\bigr)\\
+&=\operatorname{Pf}(K^{\mathrm{as}})^2
+&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_determinant}\bigr)\\
+&=\bigl(Q_L^{a,b}\bigr)^2
+&&\bigl(\because\ \blkref{claim_pfaffian_signed_even_subgraph}\bigr).
+\end{aligned}`),
+                      paragraph(["各等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で成立する。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_determinant_square_root_torus_formula",
+              labels: [],
+              title: { text: "四つの多項式平方根による有限トーラス公式" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_determinant_square_root_torus_formula",
+                  beforeFocus: [{
+                    role: "supportingClaim",
+                    element: {
+                      id: "kac_ward_claim_determinant_polynomial_square_root_exists",
+                      kind: "claim",
+                      title: { text: "四つの行列式には定数項一の多項式平方根が存在する" },
+                      labels: ["claim_determinant_polynomial_square_root_exists"],
+                      habitat: "Qbar",
+                      verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                      statement: [
+                        paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と各ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " について、", ref("def_kac_ward_determinants"), " の ", math(String.raw`D_L^{a,b}\in\overline{\mathbb Q}[x]`), " には ", ref("def_qbar_polynomial_square_root"), " の意味で定数項一の多項式平方根が存在する。その平方根を ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " と書く。", ref("claim_qbar_polynomial_square_root_unique"), " により一意である。実数体・複素数体は使わない。"]),
+                      ],
+                      proof: [
+                        paragraph([ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`Q_L^{a,b}`), " を係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送る。空の偶部分グラフだけが次数零の項を与えるので ", math(String.raw`\mathrm{ac}_0(Q_L^{a,b})=1`), " である。さらに"]),
+                        displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square}).`),
+                        paragraph(["よって ", math(String.raw`Q_L^{a,b}`), " が平方根の存在証人であり、", ref("claim_qbar_polynomial_square_root_unique"), " により ", math(String.raw`S_L^{a,b}=Q_L^{a,b}`), " である。"]),
+                      ],
+                    },
+                  }],
+                  focus: {
+                    id: "kac_ward_claim_determinant_square_root_torus_formula",
+                    kind: "claim",
+                    title: { text: "分配多項式は四つの行列式の定数項一の平方根の和の半分である" },
+                    labels: ["claim_determinant_square_root_torus_formula"],
+                    habitat: "Qbar",
+                    verification: ["sagemath/check/determinant-square-root-torus-formula"],
+                    statement: [
+                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とし、", ref("claim_determinant_polynomial_square_root_exists"), " の四つの平方根 ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_partition_polynomial"), " の ", math(String.raw`Z_L`), " について"]),
+                      displayMath(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}\quad\text{in }\overline{\mathbb Q}[x]`),
+                      paragraph(["が成り立つ。四項に掛かる係数 ", math(String.raw`\frac12`), " はいずれも正である。実数体・複素数体は使わない。"]),
+                    ],
+                    proof: [
+                      displayMath(String.raw`\begin{aligned}
+Z_L
+&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
+&=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
+&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
+\end{aligned}`),
+                      paragraph(["最初の等号は ", math(String.raw`\mathbb Z[x]`), " の等式を ", math(String.raw`\overline{\mathbb Q}[x]`), " に送ったものである。"]),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+        ],
+      },
+    },
+  ],
+});
+
 const chapter_kac_ward_permutation_expansion = defineSection({
   kind: "section",
   id: "kac_ward_permutation_expansion_heading_chapter",
@@ -75632,1467 +77113,6 @@ q_{a,b}(h,v)
                         math(String.raw`\zeta_8\in\overline{\mathbb Q}`),
                         " の整数冪だけで閉じ、実数体も複素数体も現れない。",
                       ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_torus_quadratic_sign_polarization",
-              labels: [],
-              title: { text: "巻き付き二次符号の加法則" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_torus_quadratic_sign_polarization",
-                  focus: {
-                    id: "kac_ward_claim_torus_quadratic_sign_polarization",
-                    kind: "claim",
-                    title: { text: "巻き付き二次符号の積と交差形式" },
-                    labels: ["claim_torus_quadratic_sign_polarization"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/torus-quadratic-sign-polarization"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）と ",
-                        math(String.raw`(h_1,v_1),(h_2,v_2)\in\{0,1\}\times\{0,1\}`),
-                        " を取る。", ref("def_torus_quadratic_sign"),
-                        " の二次符号について、整数の等式",
-                      ]),
-                      displayMath(String.raw`\chi_{a,b}(h_1\oplus h_2,v_1\oplus v_2)
-=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}`),
-                      paragraph([
-                        "が成り立つ。ここで ", math(String.raw`r,s\in\{0,1\}`), " に対し、",
-                        math(String.raw`r\oplus s\in\{0,1\}`),
-                        " は整数 ", math(String.raw`r+s`), " の偶奇の代表を表す。",
-                        "右端の指数は整数である。実数体・複素数体は使わない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`h:=h_1\oplus h_2`), "、",
-                        math(String.raw`v:=v_1\oplus v_2`),
-                        " と置く。これらは ", math(String.raw`\{0,1\}`),
-                        " の元で、整数の合同式 ",
-                        math(String.raw`h\equiv h_1+h_2`), "、",
-                        math(String.raw`v\equiv v_1+v_2\pmod 2`),
-                        " を満たす。二次符号の指数は",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-q_{a,b}(h,v)
-&\equiv hv+(1-a)h+(1-b)v
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
-&\equiv(h_1+h_2)(v_1+v_2)+(1-a)(h_1+h_2)+(1-b)(v_1+v_2)
-&&\bigl(\because\ h\equiv h_1+h_2,\ v\equiv v_1+v_2\pmod2\bigr)\\
-&\equiv h_1v_1+h_1v_2+h_2v_1+h_2v_2
-+(1-a)h_1+(1-a)h_2+(1-b)v_1+(1-b)v_2
-&&\bigl(\because\ \mathbb Z\text{ の分配律}\bigr)\\
-&\equiv\bigl(h_1v_1+(1-a)h_1+(1-b)v_1\bigr)
-+\bigl(h_2v_2+(1-a)h_2+(1-b)v_2\bigr)+h_1v_2+h_2v_1
-&&\bigl(\because\ \mathbb Z\text{ の交換律と結合律}\bigr)\\
-&\equiv q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1\pmod2
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
-\end{aligned}`),
-                      paragraph(["整数指数の加法則により"]),
-                      displayMath(String.raw`\begin{aligned}
-\chi_{a,b}(h,v)
-&=(-1)^{q_{a,b}(h,v)}
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr)\\
-&=(-1)^{q_{a,b}(h_1,v_1)+q_{a,b}(h_2,v_2)+h_1v_2+h_2v_1}
-&&\bigl(\because\ \text{上の合同式と }(-1)^2=1\bigr)\\
-&=(-1)^{q_{a,b}(h_1,v_1)}(-1)^{q_{a,b}(h_2,v_2)}(-1)^{h_1v_2+h_2v_1}
-&&\bigl(\because\ \text{整数指数の加法則}\bigr)\\
-&=\chi_{a,b}(h_1,v_1)\chi_{a,b}(h_2,v_2)(-1)^{h_1v_2+h_2v_1}
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\bigr).
-\end{aligned}`),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_even_edge_chain_torus_normal_form",
-              labels: [],
-              title: { text: "有限トーラスの偶辺鎖の標準形" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_even_edge_chain_torus_normal_form",
-                  focus: {
-                    id: "kac_ward_claim_even_edge_chain_torus_normal_form",
-                    kind: "claim",
-                    title: { text: "偶辺鎖は正方形境界と二つの基本周回に分解できる" },
-                    labels: ["claim_even_edge_chain_torus_normal_form"],
-                    habitat: "N",
-                    verification: ["sagemath/check/even-edge-chain-torus-normal-form"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " を取り、", ref("def_lattice"),
-                        " の辺を係数 ", math(String.raw`\mathbb F_2:=\{0,1\}`),
-                        " で数える。横辺 ", math(String.raw`H_{i,j}`), " と縦辺 ",
-                        math(String.raw`V_{i,j}`), " はそれぞれ代表座標 ",
-                        math(String.raw`(i,j)\in\{0,\ldots,L-1\}^2`),
-                        " から右（列を進める）・下（行を進める）へ進む辺の係数とする。添字は ",
-                        math(String.raw`L`), " を法として読む。各頂点で接する辺の係数の和が ",
-                        math(String.raw`0\in\mathbb F_2`), " である辺鎖 ",
-                        math(String.raw`C`), " を取る。",
-                      ]),
-                      paragraph([
-                        math(String.raw`P_{i,j}`), " を ", math(String.raw`(i,j)`),
-                        " を左上とする正方形の四辺の和、",
-                        math(String.raw`R_{\mathrm h}`), " を行 ", math(String.raw`i=0`),
-                        " の横辺の和、", math(String.raw`R_{\mathrm v}`),
-                        " を列 ", math(String.raw`j=0`), " の縦辺の和とする。",
-                        "横・縦の切断線偶奇 ", math(String.raw`h,v\in\mathbb F_2`), " を",
-                      ]),
-                      displayMath(String.raw`h:=\sum_{i=0}^{L-1}H_{i,L-1},\qquad v:=\sum_{j=0}^{L-1}V_{L-1,j}`),
-                      paragraph(["と置く。このときある ", math(String.raw`p_{i,j}\in\mathbb F_2`),
-                        " について、有限辺鎖の等式"]),
-                      displayMath(String.raw`C=hR_{\mathrm h}+vR_{\mathrm v}+\sum_{i,j=0}^{L-1}p_{i,j}P_{i,j}`),
-                      paragraph(["が成り立つ。重なった辺は ", math(String.raw`\mathbb F_2`),
-                        " で相殺する。辺は標識で区別し、", math(String.raw`L=1`),
-                        " の周回辺もこのまま扱う。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph(["頂点での偶次数条件は、各 ", math(String.raw`i,j`), " について"]),
-                      displayMath(String.raw`H_{i,j}+H_{i,j-1}+V_{i,j}+V_{i-1,j}=0\quad(\mathbb F_2)
-\qquad(\because\ C\text{ の頂点偶次数条件})`),
-                      paragraph(["である。これを ", math(String.raw`j`), " にわたって足すと、各横辺が二度現れて消えるので、"]),
-                      displayMath(String.raw`\sum_jV_{i,j}=\sum_jV_{i-1,j}\quad(\mathbb F_2)
-\qquad(\because\ \text{横辺は各々二度現れて消える}).`),
-                      paragraph(["従ってこの和は ", math(String.raw`i`), " によらず ", math(String.raw`v`), " である。", math(String.raw`p^{\mathrm v}_{i,0}:=0`),
-                        " とし、", math(String.raw`1\le j<L`), " では ",
-                        math(String.raw`p^{\mathrm v}_{i,j}:=\sum_{r=1}^{j}V_{i,r}`),
-                        " と置く。", math(String.raw`C^{\mathrm v}:=C+\sum_{i,j}p^{\mathrm v}_{i,j}P_{i,j}`),
-                        " の縦辺係数は、正方形境界の定義から"]),
-                      displayMath(String.raw`V^{\mathrm v}_{i,j}=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
-\qquad(\because\ P_{i,j}\text{ の縦辺の配置}).`),
-                      paragraph([math(String.raw`1\le j<L`), " では部分和を代入して"]),
-                      displayMath(String.raw`\begin{aligned}
-V^{\mathrm v}_{i,j}
-&=V_{i,j}+p^{\mathrm v}_{i,j-1}+p^{\mathrm v}_{i,j}
-&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
-&=V_{i,j}+\sum_{r=1}^{j-1}V_{i,r}+\sum_{r=1}^{j}V_{i,r}
-&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
-&=0
-&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
-\end{aligned}`),
-                      paragraph([math(String.raw`j=0`), " では添字を法 ", math(String.raw`L`), " で読み、"]),
-                      displayMath(String.raw`\begin{aligned}
-V^{\mathrm v}_{i,0}
-&=V_{i,0}+p^{\mathrm v}_{i,L-1}+p^{\mathrm v}_{i,0}
-&&\bigl(\because\ P_{i,j}\text{ の縦辺の配置}\bigr)\\
-&=V_{i,0}+\sum_{r=1}^{L-1}V_{i,r}
-&&\bigl(\because\ p^{\mathrm v}_{i,j}\text{ の定義}\bigr)\\
-&=\sum_{r=0}^{L-1}V_{i,r}
-&&\bigl(\because\ \text{有限和の分割}\bigr)\\
-&=v
-&&\bigl(\because\ \text{上で示した行によらない和}\bigr).
-\end{aligned}`),
-                      paragraph(["各 ", math(String.raw`P_{i,j}`), " は頂点偶次数なので ", math(String.raw`C^{\mathrm v}`), " も頂点偶次数である。"]),
-                      paragraph(["従って頂点条件へ上の縦辺係数を代入すると ",
-                        math(String.raw`H^{\mathrm v}_{i,j}=H^{\mathrm v}_{i,j-1}`),
-                        " である。行 ", math(String.raw`i`), " に共通な係数を ",
-                        math(String.raw`a_i\in\mathbb F_2`), " と書く。", math(String.raw`q_0:=0`),
-                        "、", math(String.raw`1\le i<L`), " では ",
-                        math(String.raw`q_i:=\sum_{r=1}^{i}a_r`), " と置く。"]),
-                      paragraph(["各行の正方形境界の和 ", math(String.raw`\sum_jP_{i,j}`),
-                        " では縦辺が二度現れて消え、横辺は行 ", math(String.raw`i`),
-                        " と行 ", math(String.raw`i+1`), " に一度ずつ現れる。従って ",
-                        math(String.raw`C^{\mathrm h}:=C^{\mathrm v}+\sum_iq_i\sum_jP_{i,j}`),
-                        " の行 ", math(String.raw`i`), " の横辺係数は"]),
-                      displayMath(String.raw`H^{\mathrm h}_{i,j}=a_i+q_i+q_{i-1}
-\qquad(\because\ \sum_jP_{i,j}\text{ の横辺の配置}).`),
-                      paragraph([math(String.raw`1\le i<L`), " では"]),
-                      displayMath(String.raw`\begin{aligned}
-H^{\mathrm h}_{i,j}
-&=a_i+q_i+q_{i-1}
-&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
-&=a_i+\sum_{r=1}^{i}a_r+\sum_{r=1}^{i-1}a_r
-&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
-&=0
-&&\bigl(\because\ \mathbb F_2\text{ では各係数が二度現れて消える}\bigr).
-\end{aligned}`),
-                      paragraph([math(String.raw`i=0`), " では"]),
-                      displayMath(String.raw`\begin{aligned}
-H^{\mathrm h}_{0,j}
-&=a_0+q_0+q_{L-1}
-&&\bigl(\because\ \sum_jP_{i,j}\text{ の横辺の配置}\bigr)\\
-&=a_0+\sum_{r=1}^{L-1}a_r
-&&\bigl(\because\ q_i\text{ の定義}\bigr)\\
-&=\sum_{r=0}^{L-1}a_r
-&&\bigl(\because\ \text{有限和の分割}\bigr)\\
-&=h
-&&\bigl(\because\ \text{正方形境界は切断線の横辺を偶数回含む}\bigr).
-\end{aligned}`),
-                      paragraph(["縦辺は先の ", math(String.raw`v`), " の列のままである。従って"]),
-                      displayMath(String.raw`C^{\mathrm h}=hR_{\mathrm h}+vR_{\mathrm v}
-\qquad(\because\ \text{行と列の係数の決定}).`),
-                      paragraph(["両側へ加えた正方形境界を再び加えると同じ辺が二度現れて消え、",
-                        math(String.raw`p_{i,j}:=p^{\mathrm v}_{i,j}+q_i`),
-                        " で主張の等式を得る。全操作は有限集合上の ",
-                        math(String.raw`\mathbb F_2`), " の計算である。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_even_edge_chain_intersection",
-              labels: [],
-              title: { text: "正方形境界と基本周回の交差数" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_even_edge_chain_intersection",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
-                      id: "kac_ward_definition_even_edge_chain_intersection",
-                      kind: "definition",
-                      title: { text: "二つの有限辺鎖の交差数" },
-                      labels: ["def_even_edge_chain_intersection"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          ref("claim_even_edge_chain_torus_normal_form"), " と同じ辺の標識を用いる。",
-                          "二つの有限辺鎖 ", math(String.raw`C,D`), " の係数をそれぞれ ",
-                          math(String.raw`H^C_{i,j},V^C_{i,j},H^D_{i,j},V^D_{i,j}\in\mathbb F_2`),
-                          " と書く。添字を ", math(String.raw`L`), " を法として読み、交差数 ",
-                          math(String.raw`I_L(C,D)\in\mathbb F_2`), " を",
-                        ]),
-                        displayMath(String.raw`I_L(C,D):=\sum_{i,j=0}^{L-1}\bigl(
-H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)`),
-                        paragraph([
-                          "で定める。第一項は頂点 ", math(String.raw`(i,j+1)`),
-                          " に左から入る横辺と上から入る縦辺、第二項は頂点 ",
-                          math(String.raw`(i,j)`), " から下へ出る縦辺と右へ出る横辺の組を数える。",
-                          "各和は有限である。辺長一でも辺の標識を保って計算する。",
-                        ]),
-                      ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_even_edge_chain_intersection",
-                    kind: "claim",
-                    title: { text: "正方形境界との交差数は零で基本周回は一度交差する" },
-                    labels: ["claim_even_edge_chain_intersection"],
-                    habitat: "N",
-                    verification: ["sagemath/check/even-edge-chain-intersection"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とする。任意の頂点で偶次数となる辺鎖 ",
-                        math(String.raw`C`), " と任意の代表座標 ",
-                        math(String.raw`(r,s)\in\{0,\ldots,L-1\}^2`), " について、",
-                      ]),
-                      displayMath(String.raw`I_L(P_{r,s},C)=I_L(C,P_{r,s})=0,\qquad
-I_L(R_{\mathrm h},R_{\mathrm h})=I_L(R_{\mathrm v},R_{\mathrm v})=0,\qquad
-I_L(R_{\mathrm h},R_{\mathrm v})=I_L(R_{\mathrm v},R_{\mathrm h})=1`),
-                      paragraph([
-                        "が ", math(String.raw`\mathbb F_2`), " で成り立つ。ここで ",
-                        math(String.raw`P_{r,s},R_{\mathrm h},R_{\mathrm v}`), " は ",
-                        ref("claim_even_edge_chain_torus_normal_form"), " の辺鎖である。",
-                        "従って任意の偶辺鎖 ", math(String.raw`C,D`), " の切断線偶奇を ",
-                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`), " と書くと、",
-                      ]),
-                      displayMath(String.raw`I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
-                      paragraph(["有限集合と二元体の演算だけを使い、実数体・複素数体は現れない。"]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "正方形境界 ", math(String.raw`P_{r,s}`), " の係数は ",
-                        math(String.raw`H_{r,s}=H_{r+1,s}=V_{r,s}=V_{r,s+1}=1`),
-                        " の寄与を ", math(String.raw`\mathbb F_2`), " で加えたものとする。",
-                        "重なる標識は二度現れて消える。偶次数条件は任意の ",
-                        math(String.raw`i,j`), " について ",
-                        math(String.raw`H^C_{i,j}+H^C_{i,j-1}+V^C_{i,j}+V^C_{i-1,j}=0`),
-                        " である（", ref("claim_even_edge_chain_torus_normal_form"), "）。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-I_L(P_{r,s},C)
-&=V^C_{r-1,s+1}+V^C_{r,s+1}+H^C_{r,s}+H^C_{r,s+1}
-&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
-&=0
-&&\bigl(\because\ \text{頂点 }(r,s+1)\text{ の偶次数条件}\bigr),\\
-I_L(C,P_{r,s})
-&=H^C_{r+1,s-1}+H^C_{r+1,s}+V^C_{r,s}+V^C_{r+1,s}
-&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と }P_{r,s}\text{ の四辺}\bigr)\\
-&=0
-&&\bigl(\because\ \text{頂点 }(r+1,s)\text{ の偶次数条件}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "基本周回の係数は ", math(String.raw`H^{R_{\mathrm h}}_{i,j}=1`),
-                        " が ", math(String.raw`i=0`), " のときだけ、",
-                        math(String.raw`V^{R_{\mathrm v}}_{i,j}=1`), " が ",
-                        math(String.raw`j=0`), " のときだけであり、他は零である（",
-                        ref("claim_even_edge_chain_torus_normal_form"), "）。",
-                        "交差数の定義へ代入すると、同種の二周回では各積が零である。",
-                        "異種の二周回では、第一の順は ",
-                        math(String.raw`(i,j)=(0,L-1)`), "、逆順は ",
-                        math(String.raw`(i,j)=(0,0)`), " の項だけが一となる。",
-                        "これは ", math(String.raw`L=1`), " でも同じである。",
-                      ]),
-                      paragraph([
-                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配的である。",
-                        ref("claim_even_edge_chain_torus_normal_form"), " により ",
-                        math(String.raw`C=h_CR_{\mathrm h}+v_CR_{\mathrm v}+\sum p_{i,j}P_{i,j}`),
-                        " と ", math(String.raw`D=h_DR_{\mathrm h}+v_DR_{\mathrm v}+\sum q_{i,j}P_{i,j}`),
-                        " と書ける。正方形境界も偶辺鎖なので、上の零等式を両引数の有限和へ適用して",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-I_L(C,D)
-&=I_L(h_CR_{\mathrm h}+v_CR_{\mathrm v},h_DR_{\mathrm h}+v_DR_{\mathrm v})
-&&\bigl(\because\ \text{分配律と正方形境界の零等式}\bigr)\\
-&=h_Cv_DI_L(R_{\mathrm h},R_{\mathrm v})+v_Ch_DI_L(R_{\mathrm v},R_{\mathrm h})
-&&\bigl(\because\ \text{分配律と同種の基本周回の零等式}\bigr)\\
-&=h_Cv_D+v_Ch_D
-&&\bigl(\because\ \text{異種の基本周回の交差数は一}\bigr).
-\end{aligned}`),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_disjoint_walk_mutual_crossing_intersection",
-              labels: [],
-              title: { text: "二本の閉歩道の混合横断数と交差形式" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
-                  focus: {
-                    id: "kac_ward_claim_disjoint_walk_mutual_crossing_intersection",
-                    kind: "claim",
-                    title: { text: "辺を共有しない二本の閉歩道の混合横断数は交差形式に等しい" },
-                    labels: ["claim_disjoint_walk_mutual_crossing_intersection"],
-                    habitat: "N",
-                    verification: ["sagemath/check/disjoint-walk-mutual-crossing-intersection"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とする。",
-                        ref("def_closed_walk_passes"), " の閉じた非後退辺列 ",
-                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " と ",
-                        math(String.raw`\eta=(\vec f_1,\ldots,\vec f_n)`),
-                        " を取り、二本を通じて無向辺の標識が相異なるとする。",
-                        "それぞれの巡回後続写像を ",
-                        math(String.raw`\sigma_\gamma:I_m\to I_m`), "、",
-                        math(String.raw`\sigma_\eta:I_n\to I_n`), " とする（",
-                        ref("def_closed_walk_passes"), "）。混合横断数 ",
-                        math(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\in\mathbb N`), " を",
-                      ]),
-                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta):=\bigl|\{(r,s)\in I_m\times I_n\mid
-\operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec f_s),\quad
-\tau(\vec e_r,\vec e_{\sigma_\gamma(r)})=\tau(\vec f_s,\vec f_{\sigma_\eta(s)})=0,\quad
-\operatorname{ax}(\operatorname{dir}(\vec e_r))\ne\operatorname{ax}(\operatorname{dir}(\vec f_s))\}\bigr|`),
-                      paragraph(["と定める。これは有限集合の元の個数である（", ref("def_closed_walk_crossing_number"), " の横断の条件）。"]),
-                      paragraph([
-                        "二本の辺の台を ", math(String.raw`C,D`),
-                        " という有限辺鎖とし、切断線偶奇を ",
-                        math(String.raw`h_C,v_C,h_D,v_D\in\mathbb F_2`),
-                        " とする（", ref("claim_even_edge_chain_torus_normal_form"), "）。このとき",
-                      ]),
-                      displayMath(String.raw`c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
-=I_L(C,D)=h_Cv_D+v_Ch_D\quad(\mathbb F_2)`),
-                      paragraph(["辺長一でも四つの入出半辺は辺の標識と方向で区別する。有限集合の偶奇だけを使う。"]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "各頂点の四つの半辺を左・上・右・下と呼ぶ。閉歩道が半辺を使うときは入辺と出辺を一つずつ使う。",
-                        "二本を通じて辺の標識が相異なるので、同じ頂点で両方の歩道が通過する場合、",
-                        "それぞれが相異なる二半辺を使い、四半辺を使い尽くす。",
-                        "少なくとも一方が通過しない頂点では、混合横断も ",
-                        ref("def_even_edge_chain_intersection"), " の局所項も零である。",
-                      ]),
-                      paragraph([
-                        "両方が通過する頂点では、", ref("def_even_edge_chain_intersection"),
-                        " の局所項は「左を ", math(String.raw`C`), "、上を ",
-                        math(String.raw`D`), " が使う」と「下を ", math(String.raw`C`),
-                        "、右を ", math(String.raw`D`), " が使う」の二つの真偽値の和である。",
-                        "両歩道が直進すると、一方が左右、他方が上下を使い、二真偽値の一方だけが一となる。",
-                        "両歩道が曲がると、二真偽値はともに零、またはともに一となる。",
-                        "これらは二半辺の選び方六通りを尽くす。従って局所項の偶奇は、",
-                        "二本の通過が横断する場合だけ一である。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
-&=\sum_{i,j=0}^{L-1}\bigl(H^C_{i,j}V^D_{i-1,j+1}+V^C_{i,j}H^D_{i,j}\bigr)
-&&\bigl(\because\ \text{各頂点の四半辺の場合分けと有限和}\bigr)\\
-&=I_L(C,D)
-&&\bigl(\because\ \blkref{def_even_edge_chain_intersection}\bigr)\\
-&=h_Cv_D+v_Ch_D
-&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr).
-\end{aligned}`),
-                      paragraph(["各歩道は閉じているので台は偶辺鎖である。辺長一の自己ループも、入る半辺と出る半辺を区別するため同じ場合分けに入る。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_edge_distinct_smoothing_crossing_parity",
-              labels: [],
-              title: { text: "辺の重複がない閉歩道の一回の平滑化と交差形式" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_edge_distinct_smoothing_crossing_parity",
-                  focus: {
-                    id: "kac_ward_claim_edge_distinct_smoothing_crossing_parity",
-                    kind: "claim",
-                    title: { text: "辺の重複がない閉歩道の平滑化で横断数の偶奇は交差形式に分かれる" },
-                    labels: ["claim_edge_distinct_smoothing_crossing_parity"],
-                    habitat: "N",
-                    verification: ["sagemath/check/edge-distinct-smoothing-crossing-parity"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なる閉じた非後退辺列 ",
-                        math(String.raw`\gamma`), " の横断する添字 ", math(String.raw`k<l`), " を一組取る。",
-                        ref("def_smoothed_split_edge_sequences"), " の二本を ", math(String.raw`\gamma_A,\gamma_B`),
-                        " とし、その辺の台を ", math(String.raw`C_A,C_B`), " とする。このとき二元体の等式",
-                      ]),
-                      displayMath(String.raw`(c(\gamma)\bmod2)=((c(\gamma_A)+c(\gamma_B)+1)\bmod2)+I_L(C_A,C_B)\quad(\mathbb F_2)`),
-                      paragraph([
-                        "が成り立つ。", math(String.raw`I_L`), " は ", ref("def_even_edge_chain_intersection"), " の値である。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "横断する二通過は同じ頂点 ", math(String.raw`v`), " にあり、二軸をそれぞれ直進する（",
-                        ref("def_index_pair_crossing"), "）。それぞれの通過が使う入出半辺は対向する二半辺であり、",
-                        "二通過で四半辺を使い尽くす。辺の標識が相異なるので、", math(String.raw`v`),
-                        " に別の通過はない。従って ", ref("def_vertex_axis_straight_visit_count"), " により",
-                      ]),
-                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1.`),
-                      paragraph([
-                        ref("claim_smoothing_crossing_number_update"), " と ",
-                        ref("claim_smoothing_split_crossing_partition"), " を一行ずつ適用する。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-c(\gamma)+1
-&=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
-&&\bigl(\because\ \blkref{claim_smoothing_crossing_number_update}\bigr)\\
-&=c_{\mathrm{sm}}(\gamma;k,l)+2
-&&\bigl(\because\ n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\bigr)\\
-&=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+2
-&&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "自然数の加法の消去律で ", math(String.raw`c(\gamma)=c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+1`), " を得る。",
-                        ref("def_smoothed_split_edge_sequences"), " により二本の辺の台は互いに素である。",
-                        ref("claim_smoothing_splits_closed_walk"), " により二本は閉じた非後退辺列である。",
-                        ref("claim_smoothing_splits_closed_walk"), " により二本の各通過は元の添字の平滑化後の通過と一致する。",
-                        "従って ", ref("def_split_mutual_crossing_number"), " の混合横断と二本の巡回後続写像による混合横断は、同じ添字対を数える。",
-                        "従って ", ref("claim_disjoint_walk_mutual_crossing_intersection"), " により",
-                      ]),
-                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B).`),
-                      paragraph(["自然数の等式を二で割った余りを取って、上の交差数との等式を代入する。辺長一でも四半辺を方向と辺の標識で区別する。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_edge_distinct_crossing_elimination_parity",
-              labels: [],
-              title: { text: "辺の重複がない閉歩道の横断消去と交差形式" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_edge_distinct_crossing_elimination_parity",
-                  focus: {
-                    id: "kac_ward_claim_edge_distinct_crossing_elimination_parity",
-                    kind: "claim",
-                    title: { text: "横断消去の帰納法は位相と切断線偶奇と交差形式を保つ" },
-                    labels: ["claim_edge_distinct_crossing_elimination_parity"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/edge-distinct-crossing-elimination-parity"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なる閉じた非後退辺列 ",
-                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
-                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
-                        " が存在する。任意のこの議論の辺列 ", math(String.raw`\eta`),
-                        " の無向辺の台を ", math(String.raw`C_{\eta}`), " と書き、",
-                        math(String.raw`C_i:=C_{\delta_i}`), " と置く。台 ",
-                        math(String.raw`C_i`), " は互いに素で、合併は ", math(String.raw`C_{\gamma}`),
-                        " であり、各 ", math(String.raw`c(\delta_i)=0`), " である。さらに整数の等式と二元体の等式",
-                      ]),
-                      displayMath(String.raw`\sum_{i=1}^{n}t_{\circ}(\delta_i)=t_{\circ}(\gamma),\qquad
-(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
-c(\gamma)\bmod2=(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)\quad(\mathbb F_2)`),
-                      paragraph([
-                        "循環総回転数・切断線偶奇・横断数はそれぞれ ",
-                        ref("def_cyclic_total_turning"), "、", ref("def_edge_sequence_seam_parities"),
-                        "、", ref("def_closed_walk_crossing_number"), " で定め、交差形式は ",
-                        ref("def_even_edge_chain_intersection"), " で定める。",
-                        math(String.raw`\bigoplus`), " は二成分ごとに法二で加えることを表す。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`c(\gamma)\in\mathbb N`), " に関する整礎帰納法を用いる。",
-                        math(String.raw`c(\gamma)=0`), " なら ", math(String.raw`n=1`),
-                        "、", math(String.raw`\delta_1=\gamma`), " と取る。辺の台、回転数、切断線偶奇は同じで、",
-                        "対 ", math(String.raw`i<j`), " の集合は空であり、横断数の式の両辺は零である。",
-                      ]),
-                      paragraph([
-                        math(String.raw`c(\gamma)>0`), " とする。", ref("def_closed_walk_crossing_number"),
-                        " から横断する添字 ", math(String.raw`k<l`), " を選ぶ。",
-                        ref("claim_smoothing_splits_closed_walk"), " の二本を ",
-                        math(String.raw`\gamma_A,\gamma_B`), " とし、その辺の台を ",
-                        math(String.raw`C_A,C_B`), " とする。元の辺が相異なるので ",
-                        math(String.raw`C_A\cap C_B=\varnothing`), " かつ ",
-                        math(String.raw`C_A\cup C_B=C_{\gamma}`), " である。",
-                        ref("claim_smoothing_split_crossing_descent"), " により各子の横断数は元より小さい。",
-                        "帰納法を二本へ適用し、横断のない族 ",
-                        math(String.raw`(\alpha_i)_{1\le i\le p}`), "、",
-                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。両族を連結して ",
-                        math(String.raw`(\delta_i)_{1\le i\le p+q}`), " と置く。",
-                        "帰納法の台の条件と二本の台の分割により、連結族の台も互いに素で元の台を尽くす。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\sum_{i=1}^{p+q}t_{\circ}(\delta_i)
-&=\sum_{i=1}^{p}t_{\circ}(\alpha_i)+\sum_{j=1}^{q}t_{\circ}(\beta_j)
-&&\bigl(\because\ \text{有限和の分割}\bigr)\\
-&=t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
-&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
-&=t_{\circ}(\gamma)
-&&\bigl(\because\ \blkref{claim_smoothing_split_turning_sum}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "切断線偶奇も成分ごとに帰納法の仮定を適用し、",
-                        ref("claim_smoothing_split_seam_parity"), " を適用すると",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
-&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
-&&\bigl(\because\ \text{有限和の分割と二本への帰納法の仮定}\bigr)\\
-&=(h(\gamma),v(\gamma))
-&&\bigl(\because\ \blkref{claim_smoothing_split_seam_parity}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "交差形式 ", math(String.raw`I_L`), " は ",
-                        ref("def_even_edge_chain_intersection"), " の各項が二つの辺鎖の係数の積なので、",
-                        "二つの引数のそれぞれについて有限和に分配する。台の分割を代入して",
-                      ]),
-                      displayMath(String.raw`I_L(C_A,C_B)
-=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
-\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と辺の台の互いに素な分割}\bigr).`),
-                      paragraph(["横断数については、求める左辺から一回の平滑化と帰納法を順に適用する。"]),
-                      displayMath(String.raw`\begin{aligned}
-c(\gamma)\bmod2
-&=c(\gamma_A)+c(\gamma_B)+1+I_L(C_A,C_B)
-&&\bigl(\because\ \blkref{claim_edge_distinct_smoothing_crossing_parity}\bigr)\\
-&=(p-1)+(q-1)+1+\sum_{1\le i<j\le p}I_L(C_{\alpha_i},C_{\alpha_j})
-+\sum_{1\le i<j\le q}I_L(C_{\beta_i},C_{\beta_j})+I_L(C_A,C_B)
-&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
-&=(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)
-&&\bigl(\because\ \text{上の交差形式の分配と有限和の分割}\bigr)\quad(\mathbb F_2).
-\end{aligned}`),
-                      paragraph(["以上の帰納は有限集合、整数、二元体の演算だけで閉じる。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_crossing_free_contact_split_phase",
-              labels: [],
-              title: { text: "横断のない閉歩道の接触点分割と回転位相" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_crossing_free_contact_split_phase",
-                  beforeFocus: [{
-                    role: "supportingClaim",
-                    element: {
-                      id: "kac_ward_claim_crossing_free_contact_split_children",
-                      kind: "claim",
-                      title: { text: "横断のない閉歩道を接触点で分けても各子に横断は生じない" },
-                      labels: ["claim_crossing_free_contact_split_children"],
-                      habitat: "N",
-                      verification: ["sagemath/check/crossing-free-contact-split-phase"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
-                          math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
-                          math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
-                          ref("claim_edge_simple_contact_split"), " の二本を ",
-                          math(String.raw`\gamma_A,\gamma_B`), " とすると、",
-                        ]),
-                        displayMath(String.raw`c(\gamma_A)=c(\gamma_B)=0.`),
-                      ],
-                      proof: [
-                        paragraph([
-                          "元の辺の標識は相異なるので、接触頂点 ", math(String.raw`v`),
-                          " の通過は選んだ二つだけである。分割後は各子が ",
-                          math(String.raw`v`), " に一度ずつ通る（",
-                          ref("claim_edge_simple_contact_split"), "）ので、そこで自己横断は起きない。",
-                          "他の頂点では通過が元と同じであり、元の横断数は零なので、",
-                          "どちらの子にも自己横断は無い（", ref("def_closed_walk_crossing_number"), "）。",
-                        ]),
-                      ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_crossing_free_contact_split_phase",
-                    kind: "claim",
-                    title: { text: "接触点分割の回転位相は交差形式で更新される" },
-                    labels: ["claim_crossing_free_contact_split_phase"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/crossing-free-contact-split-phase"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とする。無向辺の標識が相異なり ",
-                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
-                        math(String.raw`\gamma`), " の接触対 ", math(String.raw`k<l`), " を取る。",
-                        ref("claim_edge_simple_contact_split"), " の二本を ",
-                        math(String.raw`\gamma_A,\gamma_B`), "、それらの辺の台を ",
-                        math(String.raw`C_A,C_B`), " とする。このとき ",
-                      ]),
-                      displayMath(String.raw`\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{1+I_L(C_A,C_B)}
-\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}`),
-                      paragraph([
-                        "が成り立つ。右辺の符号の指数は二元体の値を整数代表 ",
-                        math(String.raw`0,1`), " で読む。交差形式は ",
-                        ref("def_even_edge_chain_intersection"), " による。等式は ",
-                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "辺の標識が相異なるので、接触頂点 ", math(String.raw`v`),
-                        " で使う四半辺は全て相異なる。従って ", math(String.raw`v`),
-                        " の通過は選んだ二つだけである。元に横断が無いので、二通過はともに曲がる。",
-                        "実際、一方が直進なら残る二半辺も対向し、二通過が横断してしまう（",
-                        ref("def_index_pair_crossing"), "）。",
-                      ]),
-                      paragraph([
-                        "四方向を巡回して最初の入辺の方向番号を零とし、もう一方の入辺、",
-                        "最初の出辺、もう一方の出辺の方向番号を順に並べる。",
-                        "四半辺の相異性と非後退性を満たす場合は次の四つで尽くされる。",
-                        "表の最後の値は、分割後の二通過が横断する場合に一、それ以外に零とする。",
-                      ]),
-                      displayMath(String.raw`\begin{array}{c|c|c}
-(d_k,d_l,d_{\sigma(k)},d_{\sigma(l)})
-&t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
-&\text{分割後の混合横断}\\ \hline
-(0,1,1,0)&0&1\\
-(0,2,1,3)&-4&0\\
-(0,2,3,1)&4&0\\
-(0,3,3,0)&0&1
-\end{array}`),
-                      paragraph([
-                        "各行の回転差は ", ref("claim_contact_split_turning_update"),
-                        " の四つの ", math(String.raw`\tau`), " を ",
-                        ref("def_step_turning"), " の方向差で評価した値である。",
-                        "分割は選んだ二接続以外の通過を変えない（",
-                        ref("claim_edge_simple_contact_split"), "）。",
-                        "従って他の頂点では横断が生じず、選んだ頂点で横断が生じる場合も二本の間だけである（",
-                        ref("claim_crossing_free_contact_split_children"), "）。",
-                      ]),
-                      paragraph([
-                        "二本の混合横断は表の最後の値だけである。",
-                        ref("claim_disjoint_walk_mutual_crossing_intersection"),
-                        " により、この値の偶奇は ", math(String.raw`I_L(C_A,C_B)`),
-                        " に等しい。表の各行で回転差を ", math(String.raw`D`),
-                        " と置くと ", math(String.raw`D/4\equiv1+I_L(C_A,C_B)\pmod2`),
-                        " である。", ref("def_rotation_phase"),
-                        " の ", math(String.raw`\zeta_8^4=-1`), " と ",
-                        math(String.raw`\zeta_8^8=1`), " を使うと",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
-&=\zeta_8^{\,t_{\circ}(\gamma)+D}
-&&\bigl(\because\ D\text{ の定義}\bigr)\\
-&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma)}
-&&\bigl(\because\ D/4\equiv1+I_L(C_A,C_B)\pmod2,\ \zeta_8^4=-1\bigr).
-\end{aligned}`),
-                      paragraph(["符号を両辺に掛ければ求める等式になる。四方向の有限な場合分けと代数的数の整数冪だけを使った。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_crossing_free_contact_elimination_phase",
-              labels: [],
-              title: { text: "接触点分割の帰納法と頂点単純閉路族の回転位相" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_crossing_free_contact_elimination_phase",
-                  focus: {
-                    id: "kac_ward_claim_crossing_free_contact_elimination_phase",
-                    kind: "claim",
-                    title: { text: "横断のない閉歩道の回転位相は頂点単純閉路族の位相と交差形式に還元される" },
-                    labels: ["claim_crossing_free_contact_elimination_phase"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/crossing-free-contact-elimination-phase"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), " とし、無向辺の標識が相異なり ",
-                        math(String.raw`c(\gamma)=0`), " である閉じた非後退辺列 ",
-                        math(String.raw`\gamma`), " を取る。ある ", math(String.raw`n\in\mathbb N_{>0}`),
-                        " と閉じた非後退辺列 ", math(String.raw`(\delta_i)_{1\le i\le n}`),
-                        " が存在する。各子は無向辺の標識と通過する頂点がそれぞれ相異なり、横断を持たない。",
-                        "各子の無向辺の台 ", math(String.raw`C_i`), " は互いに素で、合併は元の台 ",
-                        math(String.raw`C_{\gamma}`), " である。切断線偶奇と回転位相について",
-                      ]),
-                      displayMath(String.raw`(h(\gamma),v(\gamma))=\bigoplus_{i=1}^{n}(h(\delta_i),v(\delta_i)),\qquad
-\zeta_8^{\,t_{\circ}(\gamma)}=(-1)^{(n-1)+\sum_{1\le i<j\le n}I_L(C_i,C_j)}
-\prod_{i=1}^{n}\zeta_8^{\,t_{\circ}(\delta_i)}`),
-                      paragraph([
-                        "が成り立つ。", math(String.raw`\bigoplus`), " と符号の指数は ",
-                        math(String.raw`\mathbb F_2`), " で計算し、符号の指数は整数代表 ",
-                        math(String.raw`0,1`), " で読む。交差形式は ",
-                        ref("def_even_edge_chain_intersection"), " による。回転位相の等式は ",
-                        math(String.raw`\overline{\mathbb Q}`), " に属する。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "接触対数 ", math(String.raw`n_{\mathrm{ct}}(\gamma)\in\mathbb N`),
-                        "（", ref("def_contact_pair_count"), "）の整礎帰納法を使う。",
-                        math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " なら ",
-                        math(String.raw`n=1,\ \delta_1=\gamma`), " と取る。",
-                        "台と切断線偶奇は同じであり、交差形式の和は空、符号の指数は零である。",
-                      ]),
-                      paragraph([
-                        math(String.raw`n_{\mathrm{ct}}(\gamma)>0`), " とする。接触対 ",
-                        math(String.raw`k<l`), " を一つ選び、", ref("claim_edge_simple_contact_split"),
-                        " の二本を ", math(String.raw`\gamma_A,\gamma_B`), "、その台を ",
-                        math(String.raw`C_A,C_B`), " とする。二本の台は互いに素で元の台を尽くす。",
-                        ref("claim_crossing_free_contact_split_children"), " により両子の横断数は零である。",
-                        "接触対数について両子それぞれに",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-n_{\mathrm{ct}}(\gamma_A)
-&\le n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
-&&\bigl(\because\ n_{\mathrm{ct}}(\gamma_B)\in\mathbb N\bigr)\\
-&<n_{\mathrm{ct}}(\gamma)
-&&\bigl(\because\ \blkref{claim_contact_split_pair_descent}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "が成り立つ。最初の行で両子を交換すると ",
-                        math(String.raw`n_{\mathrm{ct}}(\gamma_B)<n_{\mathrm{ct}}(\gamma)`),
-                        " も得る。",
-                        "そこで帰納法を両子に適用し、頂点単純な二族 ",
-                        math(String.raw`(\alpha_i)_{1\le i\le p}`), " と ",
-                        math(String.raw`(\beta_j)_{1\le j\le q}`), " を得る。",
-                        "これらを順に連結して ", math(String.raw`(\delta_i)_{1\le i\le p+q}`),
-                        " と置く。台の分割と頂点単純性は帰納法の仮定から従う。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\bigoplus_{i=1}^{p+q}(h(\delta_i),v(\delta_i))
-&=(h(\gamma_A),v(\gamma_A))\oplus(h(\gamma_B),v(\gamma_B))
-&&\bigl(\because\ \text{二本への帰納法の仮定と有限和の分割}\bigr)\\
-&=(h(\gamma),v(\gamma))
-&&\bigl(\because\ \blkref{claim_contact_split_seam_parity}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        ref("def_even_edge_chain_intersection"), " の有限和は各引数について分配できる。",
-                        "帰納法による台の互いに素な分割を代入すると",
-                      ]),
-                      displayMath(String.raw`I_L(C_A,C_B)=\sum_{i=1}^{p}\sum_{j=1}^{q}I_L(C_{\alpha_i},C_{\beta_j})\quad(\mathbb F_2)
-\qquad\bigl(\because\ \blkref{def_even_edge_chain_intersection}\text{ と有限和の分配則}\bigr).`),
-                      paragraph(["位相の左辺から接触点分割の局所関係と帰納法を順に適用する。"]),
-                      displayMath(String.raw`\begin{aligned}
-\zeta_8^{\,t_{\circ}(\gamma)}
-&=(-1)^{1+I_L(C_A,C_B)}\zeta_8^{\,t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)}
-&&\bigl(\because\ \blkref{claim_crossing_free_contact_split_phase}\bigr)\\
-&=(-1)^{1+I_L(C_A,C_B)}
-\prod_{i=1}^{p}\zeta_8^{\,t_{\circ}(\alpha_i)}
-\prod_{j=1}^{q}\zeta_8^{\,t_{\circ}(\beta_j)}
-(-1)^{(p-1)+(q-1)+\sum_{i<i'}I_L(C_{\alpha_i},C_{\alpha_{i'}})
-+\sum_{j<j'}I_L(C_{\beta_j},C_{\beta_{j'}})}
-&&\bigl(\because\ \text{二本への帰納法の仮定}\bigr)\\
-&=(-1)^{(p+q-1)+\sum_{1\le i<j\le p+q}I_L(C_i,C_j)}
-\prod_{i=1}^{p+q}\zeta_8^{\,t_{\circ}(\delta_i)}
-&&\bigl(\because\ \text{上の交差形式の分配、有限積の分割、}\mathbb F_2\text{ の加法}\bigr).
-\end{aligned}`),
-                      paragraph(["接触対数の狭義減少により帰納法は止まる。有限集合と代数的数の整数冪だけを使った。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_edge_distinct_walk_quadratic_sign",
-              labels: [],
-              title: { text: "閉歩道の位相と巻き付き二次符号" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_edge_distinct_walk_quadratic_sign",
-                  focus: {
-                    id: "kac_ward_claim_edge_distinct_walk_quadratic_sign",
-                    kind: "claim",
-                    title: { text: "辺の重複がない閉歩道の位相は二次符号と横断数で決まる" },
-                    labels: ["claim_edge_distinct_walk_quadratic_sign"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/edge-distinct-walk-quadratic-sign"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                        "（", ref("def_spin_structures"), "）とする。無向辺の標識が相異なる閉じた非後退辺列 ",
-                        math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " に対し、",
-                        math(String.raw`\overline{\mathbb Q}`), " の等式",
-                      ]),
-                      displayMath(String.raw`-\Bigl(\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)\Bigr)\zeta_8^{\,t_{\circ}(\gamma)}
-=\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)(-1)^{c(\gamma)}`),
-                      paragraph([
-                        "が成り立つ。", math(String.raw`c(\gamma)\in\mathbb N`), " は ",
-                        ref("def_closed_walk_crossing_number"), " の横断数、",
-                        math(String.raw`\chi_{a,b}`), " は ", ref("def_torus_quadratic_sign"),
-                        " の二次符号である。整数の符号は ",
-                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
-                        " で読み、実数体・複素数体は使わない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        ref("claim_edge_distinct_crossing_elimination_parity"), " により、",
-                        math(String.raw`\gamma`), " は横断のない閉歩道の族 ",
-                        math(String.raw`(\delta_i)_{1\le i\le n}`), " に分かれる。",
-                        "各台を ", math(String.raw`C_i`), " と置く。切断線偶奇と回転数は同じ主張の等式を満たす。",
-                        "まず各 ", math(String.raw`\delta_i`), " に ",
-                        ref("claim_crossing_free_contact_elimination_phase"), " を適用し、",
-                        "頂点単純な閉歩道の族 ", math(String.raw`(\alpha_j)_{1\le j\le p}`),
-                        " と互いに素な台 ", math(String.raw`A_j`), " を得る。",
-                        "この段では一つの ", math(String.raw`\delta_i`), " を固定する。",
-                      ]),
-                      paragraph([
-                        ref("claim_vertex_simple_orbit_quadratic_sign"), " は各 ",
-                        math(String.raw`\alpha_j`), " に適用できる。",
-                        "切断線偶奇の和からねじれ符号は積に分かれるので、",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
--(-1)^{a h(\delta_i)+b v(\delta_i)}\zeta_8^{\,t_{\circ}(\delta_i)}
-&=(-1)^{\sum_{j<k}I_L(A_j,A_k)}
- \prod_{j=1}^{p}\bigl(-(-1)^{a h(\alpha_j)+b v(\alpha_j)}\zeta_8^{\,t_{\circ}(\alpha_j)}\bigr)
-&&\bigl(\because\ \blkref{claim_crossing_free_contact_elimination_phase}\text{ と整数指数の加法則}\bigr)\\
-&=(-1)^{\sum_{j<k}I_L(A_j,A_k)}
- \prod_{j=1}^{p}\chi_{a,b}\bigl(h(\alpha_j),v(\alpha_j)\bigr)
-&&\bigl(\because\ \blkref{claim_vertex_simple_orbit_quadratic_sign}\text{ を各子へ適用}\bigr)\\
-&=(-1)^{\sum_{j<k}(h(\alpha_j)v(\alpha_k)+v(\alpha_j)h(\alpha_k))}
- \prod_{j=1}^{p}\chi_{a,b}\bigl(h(\alpha_j),v(\alpha_j)\bigr)
-&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr)\\
-&=\chi_{a,b}\bigl(h(\delta_i),v(\delta_i)\bigr)
-&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復と }
-\blkref{claim_crossing_free_contact_elimination_phase}\text{ の切断線偶奇}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "最後の行では、二次符号の加法則を ", math(String.raw`p-1`),
-                        " 回適用し、交差形式の二重和を ",
-                        math(String.raw`\sum_{j<k}I_L(A_j,A_k)`),
-                        " と同定した。次に横断消去の族全体に同じ加法則を適用する。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
--\Bigl(\prod_{k=1}^{m}\varepsilon_{a,b}(\vec e_k)\Bigr)\zeta_8^{\,t_{\circ}(\gamma)}
-&=-(-1)^{a h(\gamma)+b v(\gamma)}\zeta_8^{\,t_{\circ}(\gamma)}
-&&\bigl(\because\ \blkref{claim_walk_twist_sign_product}\bigr)\\
-&=(-1)^{n-1}\prod_{i=1}^{n}
- \bigl(-(-1)^{a h(\delta_i)+b v(\delta_i)}\zeta_8^{\,t_{\circ}(\delta_i)}\bigr)
-&&\bigl(\because\ \blkref{claim_edge_distinct_crossing_elimination_parity}\text{ と整数指数の加法則}\bigr)\\
-&=(-1)^{n-1}\prod_{i=1}^{n}\chi_{a,b}\bigl(h(\delta_i),v(\delta_i)\bigr)
-&&\bigl(\because\ \text{上で各 }\delta_i\text{ に示した等式}\bigr)\\
-&=(-1)^{n-1+\sum_{i<j}(h(\delta_i)v(\delta_j)+v(\delta_i)h(\delta_j))}
- \chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
-&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復と }
-\blkref{claim_edge_distinct_crossing_elimination_parity}\text{ の切断線偶奇}\bigr)\\
-&=(-1)^{n-1+\sum_{i<j}I_L(C_i,C_j)}
- \chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
-&&\bigl(\because\ \blkref{claim_even_edge_chain_intersection}\bigr)\\
-&=(-1)^{c(\gamma)}\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)
-&&\bigl(\because\ \blkref{claim_edge_distinct_crossing_elimination_parity}\bigr).
-\end{aligned}`),
-                      paragraph(["使った集合と和は全て有限であり、位相は代数的数の整数冪である。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_reference_matching_constant_term",
-              labels: [],
-              title: { text: "基準マッチングの符号と定数項" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_reference_matching_constant_term",
-                  focus: {
-                    id: "kac_ward_claim_reference_matching_constant_term",
-                    kind: "claim",
-                    title: { text: "基準マッチングの長い標識の項は一である" },
-                    labels: ["claim_reference_matching_constant_term"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/reference-matching-constant-term"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\in\mathbb N_{>0}`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                        " とする。", ref("def_reference_long_pairs"), " の基準完全マッチング ",
-                        math(String.raw`\mathcal D_0`), " の全ての対に長い標識を付ける。",
-                        ref("claim_tagged_matching_expansion"), " のこの項を ",
-                        math(String.raw`M_{\mathcal D_0,\varnothing}(x)\in\overline{\mathbb Q}[x]`),
-                        " とすると、辺番号を先に、向きを後に比べる辞書式順序で",
-                      ]),
-                      displayMath(String.raw`\operatorname{sgn}(\mathcal D_0)=1,\qquad
-\mathsf L_{(e,0),(e,1)}=1\quad(e\in E_L),\qquad
-M_{\mathcal D_0,\varnothing}(x)=1.`),
-                      paragraph(["この等式は辺長一と四つのねじれを含む。実数体と複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph([
-                        ref("def_oriented_edges"), " より ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
-                        " である。辞書式順序では各辺の二向き ",
-                        math(String.raw`(e,0)\prec(e,1)`), " が隣接する。",
-                        ref("def_reference_long_pairs"), " と ", ref("claim_reference_long_matching"),
-                        " により、これらの隣接対を辺番号順に並べた列は基準完全マッチングの列挙である。",
-                        ref("def_perfect_matching_sign"), " の端点列は昇順の全元列に一致するので、",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{sgn}(\mathcal D_0)
-&=\operatorname{sgn}(\operatorname{id}_{\vec E_L})
-&&\bigl(\because\ \blkref{def_perfect_matching_sign}\bigr)\\
-&=1
-&&\bigl(\because\ \text{恒等置換の符号}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        math(String.raw`e\in E_L`), " を固定する。", ref("def_oriented_edge_direction"),
-                        " により方向代表は横辺で ", math(String.raw`(0,2)`),
-                        "、縦辺で ", math(String.raw`(1,3)`), " である。",
-                        ref("def_seam_parities"), " と ", ref("def_twist_parity"),
-                        " により切断線の偶奇は辺の反転で変わらない。",
-                        ref("def_gauged_terminal_matrix"), " と ", ref("def_diagonal_gauge"),
-                        " の重みへ代入すると、",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-w_{(e,0),(e,1)}
-&=\zeta_8^{\,2}v_{(e,0)}u_{(e,1)}
-&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
-&=\zeta_8^{\,2+r_4(\operatorname{dir}(e,0))-r_4(\operatorname{dir}(e,1))}
-&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転での偶奇の一致}\bigr)\\
-&=\zeta_8^{\,0}
-&&\bigl(\because\ \blkref{def_oriented_edge_direction}\text{ の二つの場合}\bigr)\\
-&=1
-&&\bigl(\because\ \text{零乗}\bigr).
-\end{aligned}`),
-                      paragraph([ref("def_tagged_matching_contributions"), " の長い寄与を求める。"]),
-                      displayMath(String.raw`\begin{aligned}
-\mathsf L_{(e,0),(e,1)}
-&=C(w_{(e,0),(e,1)})
-&&\bigl(\because\ \blkref{def_tagged_matching_contributions}\text{ と反転対の条件}\bigr)\\
-&=C(1)
-&&\bigl(\because\ \text{上で求めた重み}\bigr)\\
-&=1
-&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の一の保存}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        ref("claim_tagged_matching_expansion"), " の項は短い標識を持たない。",
-                        "整数の符号は標準の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`),
-                        " で定数多項式へ送る。有限積と符号の等号から",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-M_{\mathcal D_0,\varnothing}(x)
-&=C(\operatorname{sgn}(\mathcal D_0))
-\prod_{e\in E_L}\mathsf L_{(e,0),(e,1)}
-&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
-&=1\cdot\prod_{e\in E_L}1
-&&\bigl(\because\ \text{上の符号と長い寄与}\bigr)\\
-&=1
-&&\bigl(\because\ \text{有限積の単位元}\bigr).
-\end{aligned}`),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_alternating_cycle_matching_sign",
-              labels: [],
-              title: { text: "交互閉路による完全マッチングの符号比較" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_alternating_cycle_matching_sign",
-                  focus: {
-                    id: "kac_ward_claim_alternating_cycle_matching_sign",
-                    kind: "claim",
-                    title: { text: "交互閉路ごとの向き直しが二つのマッチングの符号比を与える" },
-                    labels: ["claim_alternating_cycle_matching_sign"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/alternating-cycle-matching-sign"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と非零の標識付き完全マッチング ", math(String.raw`(D,T)`), " を取る。", ref("def_reference_long_pairs"), " の基準マッチングを ", math(String.raw`\mathcal D_0`), " とし、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の有限集合を ", math(String.raw`\mathcal C`), " とする。各 ", math(String.raw`C\in\mathcal C`), " の第一色から始まる点列を ", math(String.raw`c_C(0),\ldots,c_C(2k_C-1)`), " とし、", math(String.raw`c_C(2k_C)=c_C(0)`), " と置く。" ]),
-                      paragraph(["線型順序 ", math(String.raw`\prec`), " は辺番号と向きの辞書式とする。相異なる二点 ", math(String.raw`i,j\in\vec E_L`), " に対し ", math(String.raw`\eta(i,j):=1\ (i\prec j),\ -1\ (j\prec i)`), " と置き、各閉路で ", math(String.raw`\alpha_D(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r),c_C(2r+1))`), " および ", math(String.raw`\alpha_0(C):=\prod_{r=0}^{k_C-1}\eta(c_C(2r+1),c_C(2r+2))`), " を定める。これらは ", math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。このとき整数の等式"]),
-                      displayMath(String.raw`\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
-=(-1)^{|\mathcal C|}\prod_{C\in\mathcal C}\alpha_D(C)\alpha_0(C)`),
-                      paragraph(["が成り立つ。空の閉路集合では右辺は一である。辺長一で同じ二元集合に長短の標識が付く一歩閉路も含む。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により交互閉路の点集合は互いに素で、全活動点を覆う。", ref("claim_tagged_symmetric_difference_degree"), " より活動点以外の ", math(String.raw`D`), " の対は ", math(String.raw`\mathcal D_0`), " の長い対と一致する。両マッチングに共通する対を昇順に並べ、各閉路の後ろへ同じ順で付ける。" ]),
-                      paragraph(["各閉路 ", math(String.raw`C`), " について、", ref("claim_tagged_difference_alternating_cycle"), " と ", ref("def_matching_pair_successor"), " により ", math(String.raw`(c_C(2r),c_C(2r+1))`), " は ", math(String.raw`D`), " の対の向き付き列挙であり、", math(String.raw`(c_C(2r+1),c_C(2r+2))`), " は ", math(String.raw`\mathcal D_0`), " の対の向き付き列挙である。共通する対は両列挙で同じ昇順の向きに取る。" ]),
-                      paragraph(["閉路を同じ順で並べて ", math(String.raw`D`), " の向き付き端点列を ", math(String.raw`W_D`), "、基準マッチングの列を ", math(String.raw`W_0`), " と書く。各列の対の第一端点を選んだ集合は各対から一端点だけを含むので、", ref("claim_matching_pair_word_orientation_sign"), " を適用できる。各閉路で後者の部分列は前者の ", math(String.raw`2k_C`), " 個の文字を一つ左へ巡回移動したものなので、その置換の符号は ", math(String.raw`(-1)^{2k_C-1}=-1`), " である。共通対の部分列は変わらない。", ref("def_matching_word_sign"), " に従って端点列の符号を ", math(String.raw`\varepsilon`), " と書くと、"]),
-                      displayMath(String.raw`\begin{aligned}
-\varepsilon(W_0)
-&=\prod_{C\in\mathcal C}(-1)^{2k_C-1}\,\varepsilon(W_D)
-&&\bigl(\because\ \text{閉路ごとの巡回移動と置換符号の積}\bigr)\\
-&=(-1)^{|\mathcal C|}\varepsilon(W_D)
-&&\bigl(\because\ 2k_C-1\text{ は奇数}\bigr).
-\end{aligned}`),
-                      paragraph([ref("claim_matching_pair_word_orientation_sign"), " の向き直しの等式を各列挙へ適用する。対の列挙順序は ", ref("claim_perfect_matching_sign_enumeration_independent"), " で符号に影響しない。共通対の向きは両側で ", math(String.raw`+1`), " なので、"]),
-                      displayMath(String.raw`\begin{aligned}
-\alpha_0\operatorname{sgn}(\mathcal D_0)
-&=\varepsilon(W_0)
-&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr)\\
-&=(-1)^{|\mathcal C|}\varepsilon(W_D)
-&&\bigl(\because\ \text{上の巡回移動の等式}\bigr)\\
-&=(-1)^{|\mathcal C|}\alpha_D\operatorname{sgn}(D)
-&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
-\end{aligned}`),
-                      paragraph(["ここで ", math(String.raw`\alpha_D:=\prod_C\alpha_D(C)`), "、", math(String.raw`\alpha_0:=\prod_C\alpha_0(C)`), " は整数値の符号であり、各因子の平方は一である。直前の等式の両辺に ", math(String.raw`\alpha_0\operatorname{sgn}(D)`), " を掛けると、"]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
-&=\alpha_0^2\operatorname{sgn}(D)\operatorname{sgn}(\mathcal D_0)
-&&\bigl(\because\ \alpha_0^2=1\bigr)\\
-&=(-1)^{|\mathcal C|}\alpha_0\alpha_D\operatorname{sgn}(D)^2
-&&\bigl(\because\ \text{上の端点列の符号の等式}\bigr)\\
-&=(-1)^{|\mathcal C|}\alpha_0\alpha_D
-&&\bigl(\because\ \operatorname{sgn}(D)^2=1\bigr).
-\end{aligned}`),
-                      paragraph(["空集合でも同じ空積の計算が成り立つ。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_alternating_cycle_gauge_ratio",
-              labels: [],
-              title: { text: "交互閉路に沿う対角変換の因子" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_alternating_cycle_gauge_ratio",
-                  focus: {
-                    id: "kac_ward_claim_alternating_cycle_gauge_ratio",
-                    kind: "claim",
-                    title: { text: "短い対と基準の長い対の対角変換因子の比" },
-                    labels: ["claim_alternating_cycle_gauge_ratio"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/alternating-cycle-gauge-ratio"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_difference_cycle_cover"), " の交互閉路一つを固定する。", ref("claim_projected_edge_cycle_nonbacktracking"), " の閉歩道を ", math(String.raw`\gamma=(\vec e_0,\ldots,\vec e_{k-1})`), " と書き、添字は ", math(String.raw`\mathbb Z/k\mathbb Z`), " で読む。", math(String.raw`k\in\mathbb N_{>0}`), " である。閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{r-1}),\vec e_r)`), "、基準マッチングの長い標識の対を ", math(String.raw`(\vec e_r,\iota(\vec e_r))`), " の向きで取る。", ref("def_gauged_terminal_matrix"), " の重みについて、"]),
-                      displayMath(String.raw`\prod_{r\in\mathbb Z/k\mathbb Z}
-w_{\iota(\vec e_{r-1}),\vec e_r}
-=(-1)^k\prod_{r\in\mathbb Z/k\mathbb Z}w_{\vec e_r,\iota(\vec e_r)}\qquad\text{in }\overline{\mathbb Q}.`),
-                      paragraph(["積は対の向きを上記の順に固定したものであり、昇順対への向き直しの符号は含めない。辺長一の一歩閉路も含む。実数体と複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " について ", ref("def_diagonal_gauge"), " と ", ref("claim_diagonal_gauge_inverse"), " より ", math(String.raw`v_{\vec e}=u_{\vec e}^{-1}`), " である。", ref("def_twist_parity"), " より反転辺のねじれ偶奇は同じである。", ref("def_oriented_edge_direction"), " と ", ref("def_direction_standard_representative"), " より、反転した方向の代表と元の方向の代表の差は ", math(String.raw`2`), " または ", math(String.raw`-2`), " である。従って各 ", math(String.raw`r\in\mathbb Z/k\mathbb Z`), " で"]),
-                      displayMath(String.raw`\begin{aligned}
-\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
-&=\zeta_8^{\,2(r_4(\operatorname{dir}(\iota(\vec e_r)))-r_4(\operatorname{dir}(\vec e_r)))}
-&&\bigl(\because\ \blkref{def_diagonal_gauge}\text{ と反転でのねじれ偶奇の一致}\bigr)\\
-&=\zeta_8^{\,4}\text{ または }\zeta_8^{\,-4}
-&&\bigl(\because\ \blkref{def_oriented_edge_direction}\bigr)\\
-&=-1
-&&\bigl(\because\ \blkref{def_rotation_phase}\text{ と }\zeta_8^{\,-4}=\zeta_8^{\,4}\bigr).
-\end{aligned}`),
-                      paragraph(["全ての ", math(String.raw`u_{\vec e}`), " と ", math(String.raw`w_{\vec e,\vec f}`), " は非零である。閉路の添字を巡回して ", math(String.raw`\prod_r v_{\iota(\vec e_{r-1})}=\prod_r v_{\iota(\vec e_r)}`), " と書き直す。すると"]),
-                      displayMath(String.raw`\begin{aligned}
-\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}
-&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_{r-1})}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
-&&\bigl(\because\ \blkref{def_gauged_terminal_matrix}\bigr)\\
-&=\frac{\prod_r\zeta_8^{\,2}v_{\iota(\vec e_r)}u_{\vec e_r}}{\prod_r\zeta_8^{\,2}v_{\vec e_r}u_{\iota(\vec e_r)}}
-&&\bigl(\because\ \text{有限積の巡回再添字付け}\bigr)\\
-&=\prod_r\frac{v_{\iota(\vec e_r)}u_{\vec e_r}}{v_{\vec e_r}u_{\iota(\vec e_r)}}
-&&\bigl(\because\ \text{非零の共通因子の約分}\bigr)\\
-&=\prod_r\left(\frac{u_{\vec e_r}}{u_{\iota(\vec e_r)}}\right)^2
-&&\bigl(\because\ v_{\vec e}=u_{\vec e}^{-1}\bigr)\\
-&=\prod_r(-1)
-&&\bigl(\because\ \text{上で求めた各因子の値}\bigr)\\
-&=(-1)^k
-&&\bigl(\because\ \text{有限積の定義}\bigr).
-\end{aligned}`),
-                      paragraph(["分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。最後の等式の両辺に長い対の重みの積を掛けると"]),
-                      displayMath(String.raw`\begin{aligned}
-\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}
-&=\left(\frac{\prod_r w_{\iota(\vec e_{r-1}),\vec e_r}}{\prod_r w_{\vec e_r,\iota(\vec e_r)}}\right)\prod_r w_{\vec e_r,\iota(\vec e_r)}
-&&\bigl(\because\ \blkref{claim_gauge_pair_weight_nonzero}\text{ と非零元の四則}\bigr)\\
-&=(-1)^k\prod_r w_{\vec e_r,\iota(\vec e_r)}
-&&\bigl(\because\ \text{直前の比の等式}\bigr).
-\end{aligned}`),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_tagged_matching_cycle_weight",
-              labels: [],
-              title: { text: "非零の標識付きマッチング項の閉路別の重み" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_tagged_matching_cycle_weight",
-                  focus: {
-                    id: "kac_ward_claim_tagged_matching_cycle_weight",
-                    kind: "claim",
-                    title: { text: "非零項は閉歩道ごとのねじれ・回転位相の積に分かれる" },
-                    labels: ["claim_tagged_matching_cycle_weight"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/tagged-matching-cycle-weight"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), "、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。", ref("claim_tagged_difference_cycle_cover"), " の交互閉路の集合を ", math(String.raw`\mathcal C(D,T)`), " とする。各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C=(\vec e_{C,0},\ldots,\vec e_{C,k_C-1})`), " と置き、添字を ", math(String.raw`\mathbb Z/k_C\mathbb Z`), " で読む。", math(String.raw`k_C\in\mathbb N_{>0}`), " である。" ]),
-                      displayMath(String.raw`M_{D,T}(x)=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_{r\in\mathbb Z/k_C\mathbb Z}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]\quad\text{in }\overline{\mathbb Q}[x].`),
-                      paragraph(["左辺は ", ref("claim_tagged_matching_expansion"), " の当該項である。空積は一であり、辺長一の一歩閉路も含む。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph(["各閉路の短い標識の対を ", math(String.raw`(\iota(\vec e_{C,r-1}),\vec e_{C,r})`), "、基準の長い標識の対を ", math(String.raw`(\vec e_{C,r},\iota(\vec e_{C,r}))`), " の向きで取る。各対を辞書式の昇順へ直す符号は、順に ", math(String.raw`\alpha_D(C),\alpha_0(C)`), " である（", ref("claim_alternating_cycle_matching_sign"), "）。", ref("def_tagged_matching_contributions"), " より、短い対には ", math(String.raw`-xw_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})`), "、長い対には ", math(String.raw`w_{\vec e_{C,r},\iota(\vec e_{C,r})}`), " が対応する。"]),
-                      paragraph([ref("claim_tagged_difference_cycle_cover"), " により、閉路の対は重複しない。", ref("claim_tagged_matching_short_pair_count"), " と ", ref("claim_projected_cycle_support_union"), " より短い対の総数は ", math(String.raw`|T|=\sum_C k_C`), " である。活動点の外の長い対は基準項と一致し、", ref("claim_reference_matching_constant_term"), " より基準項は一である。従って各閉路の項の比を掛ければ ", math(String.raw`M_{D,T}(x)`), " を得る。"]),
-                      displayMath(String.raw`\begin{aligned}
-M_{D,T}(x)
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}\alpha_D(C)^2\alpha_0(C)^2x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \blkref{claim_alternating_cycle_matching_sign},\ \blkref{claim_tagged_matching_expansion}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}\prod_r\frac{w_{\iota(\vec e_{C,r-1}),\vec e_{C,r}}}{w_{\vec e_{C,r},\iota(\vec e_{C,r})}}\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \alpha_D(C)^2=\alpha_0(C)^2=1\text{ と昇順への向き直し}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[(-1)^{1+k_C}x^{k_C}(-1)^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \blkref{claim_alternating_cycle_gauge_ratio}\bigr)\\
-&=\prod_{C\in\mathcal C(D,T)}\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ (-1)^{2k_C}=1\bigr).
-\end{aligned}`),
-                      paragraph(["全ての分母は ", ref("claim_gauge_pair_weight_nonzero"), " により非零である。有限積と定数多項式への埋込みだけを用いた。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_tagged_matching_quadratic_crossing_weight",
-              labels: [],
-              title: { text: "非零項の二次符号と局所横断数" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_tagged_matching_quadratic_crossing_weight",
-                  focus: {
-                    id: "kac_ward_claim_tagged_matching_quadratic_crossing_weight",
-                    kind: "claim",
-                    title: { text: "非零項の位相は補辺の二次符号と短い対の横断数に等しい" },
-                    labels: ["claim_tagged_matching_quadratic_crossing_weight"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/tagged-matching-quadratic-crossing-weight"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " と、", ref("claim_tagged_matching_expansion"), " の非零項 ", math(String.raw`(D,T)`), " を取る。補辺を ", math(String.raw`P:=P(D,T)\subseteq E_L`), " とし、", ref("claim_tagged_matching_cycle_weight"), " の交互閉路集合を ", math(String.raw`\mathcal C(D,T)`), " とする。短い標識の対は ", ref("claim_projected_edge_cycle_nonbacktracking"), " により閉歩道の通過に一対一に対応する。" ]),
-                      paragraph(["相異なる二つの短い標識の対が横断するとは、対応する通過の終点が等しく、ともに直進し、方向軸が異なることとする（", ref("def_transverse_crossing"), "）。そのような順序のない対の個数を ", math(String.raw`t(D,T)\in\mathbb N`), " と定める。補辺の切断線偶奇を ", math(String.raw`h(P),v(P)\in\{0,1\}`), " と書く。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式" ]),
-                      displayMath(String.raw`M_{D,T}(x)=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}`),
-                      paragraph(["が成り立つ。辺長一の短い対も標識と方向で区別して数える。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph(["各 ", math(String.raw`C\in\mathcal C(D,T)`), " の射影した閉歩道を ", math(String.raw`\gamma_C`), "、その無向辺の台を ", math(String.raw`P_C`), "、横断数を ", math(String.raw`c_C:=c(\gamma_C)\in\mathbb N`), "、長さを ", math(String.raw`k_C\in\mathbb N_{>0}`), " と書く。", ref("claim_projected_cycle_distinct_edges"), " と ", ref("claim_projected_cycle_support_union"), " により、台 ", math(String.raw`P_C`), " は互いに素で ", math(String.raw`P=\bigsqcup_C P_C`), " である。各短い対はただ一つの閉路の通過を与えるので、横断する対は同じ閉路内のものと異なる二閉路間のものに重複なく分かれる。" ]),
-                      displayMath(String.raw`t(D,T)=\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})\quad(\because\ \blkref{def_closed_walk_crossing_number}\text{ と短い対の分割})`),
-                      paragraph(["閉路集合には任意の線型順序を固定し、", math(String.raw`C<C'`), " はその順序で読む。", ref("claim_disjoint_walk_mutual_crossing_intersection"), " と ", ref("claim_torus_quadratic_sign_polarization"), " を各二閉路に適用する。切断線偶奇は台の非交和で加わる。従って整数の偶奇として" ]),
-                      displayMath(String.raw`\begin{aligned}
-\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
-&=\chi_{a,b}(h(P),v(P))
-  (-1)^{\sum_C c_C+\sum_{C<C'}I_L(P_C,P_{C'})}
-&&\bigl(\because\ \blkref{claim_torus_quadratic_sign_polarization}\text{ の反復}\bigr)\\
-&=\chi_{a,b}(h(P),v(P))
-  (-1)^{\sum_C c_C+\sum_{C<C'}c_{\mathrm{mut}}(\gamma_C,\gamma_{C'})}
-&&\bigl(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection}\bigr)\\
-&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
-&&\bigl(\because\ \text{上の横断対の分割}\bigr).
-\end{aligned}`),
-                      paragraph(["求めたい左辺から始める。各閉路の回転位相積には ", ref("claim_closed_walk_rotation_phase"), "、位相と二次符号には ", ref("claim_edge_distinct_walk_quadratic_sign"), " を適用する。" ]),
-                      displayMath(String.raw`\begin{aligned}
-M_{D,T}(x)
-&=\prod_C\left[-x^{k_C}\prod_r\varepsilon_{a,b}(\vec e_{C,r})\rho(\vec e_{C,r-1},\vec e_{C,r})\right]
-&&\bigl(\because\ \blkref{claim_tagged_matching_cycle_weight}\bigr)\\
-&=x^{\sum_C k_C}\prod_C\left[-\Bigl(\prod_r\varepsilon_{a,b}(\vec e_{C,r})\Bigr)\zeta_8^{\,t_{\circ}(\gamma_C)}\right]
-&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\text{ と有限積の分配律}\bigr)\\
-&=x^{\sum_C k_C}\prod_C\chi_{a,b}(h(P_C),v(P_C))(-1)^{c_C}
-&&\bigl(\because\ \blkref{claim_edge_distinct_walk_quadratic_sign}\text{ を各閉路へ適用}\bigr)\\
-&=x^{\sum_C k_C}\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}
-&&\bigl(\because\ \text{上の二次符号と横断数の等式}\bigr)\\
-&=\chi_{a,b}(h(P),v(P))(-1)^{t(D,T)}x^{|P|}
-&&\bigl(\because\ \blkref{claim_projected_cycle_support_union}\text{ と台の非交和}\bigr).
-\end{aligned}`),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_local_pairing_signed_sum",
-              labels: [],
-              title: { text: "局所対合の符号付き和" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_local_pairing_signed_sum",
-                  focus: {
-                    id: "kac_ward_claim_local_pairing_signed_sum",
-                    kind: "claim",
-                    title: { text: "偶部分グラフ上の局所対合の符号付き和は一である" },
-                    labels: ["claim_local_pairing_signed_sum"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/local-pairing-signed-sum"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と偶部分グラフ ", math(String.raw`P\subseteq E_L`), " を固定する。", ref("claim_vertex_port_bijection"), " の各頂点の選択方向集合を ", math(String.raw`S_v(P)\subseteq I`), "、", ref("claim_vertex_local_pairing_product"), " の局所対合族の集合を ", math(String.raw`\mathcal C(P)`), " とする。各 ", math(String.raw`\boldsymbol\kappa=(\kappa_v)_{v\in V_L}\in\mathcal C(P)`), " について、", math(String.raw`c_v(\kappa_v)\in\{0,1\}`), " は ", math(String.raw`S_v(P)=I`), " かつ ", math(String.raw`\kappa_v(0)=2,\ \kappa_v(1)=3`), " のときだけ一、その他は零とする。", math(String.raw`t_P(\boldsymbol\kappa):=\sum_{v\in V_L}c_v(\kappa_v)\in\mathbb N`), " と置く。このとき整数の等式"]),
-                      displayMath(String.raw`\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}=1`),
-                      paragraph(["が成り立つ。非零項を持ち、補辺が ", math(String.raw`P`), " に等しい標識付き完全マッチング全体についても、", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " による対応の下で ", math(String.raw`t_P(\boldsymbol\kappa)=t(D,T)`), "（", ref("claim_tagged_matching_quadratic_crossing_weight"), "）だから、"]),
-                      displayMath(String.raw`\sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}=1.`),
-                      paragraph(["辺長一でも端点番号付き半辺を別々に数える。実数体・複素数体は現れない。"]),
-                    ],
-                    proof: [
-                      paragraph([ref("claim_local_pairing_four_ports_count"), " による偶次数の選択は、", math(String.raw`|S_v(P)|=0,2`), " なら一通りであり、その ", math(String.raw`c_v`), " は零である。", math(String.raw`|S_v(P)|=4`), " なら ", math(String.raw`S_v(P)=I`), " で、三つの対合のうち ", math(String.raw`\{\{0,2\},\{1,3\}\}`), " だけが二本の直進通過を異なる方向軸で交差させる（", ref("def_transverse_crossing"), "）。ゆえに各頂点で"]),
-                      displayMath(String.raw`\begin{aligned}
-\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
-&=\begin{cases}1&(|S_v(P)|=0,2),\\1+1-1&(|S_v(P)|=4)\end{cases}
-&&\bigl(\because\ \blkref{claim_local_pairing_four_ports_count}\text{ と }\blkref{def_transverse_crossing}\bigr)\\
-&=1
-&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr).
-\end{aligned}`),
-                      paragraph([ref("claim_vertex_local_pairing_product"), " の直積の対応で各頂点の選択は独立である。", math(String.raw`(-1)^{\sum_v c_v}=\prod_v(-1)^{c_v}`), " は整数の冪の法則である。有限和への分配律を一頂点ずつ適用して"]),
-                      displayMath(String.raw`\begin{aligned}
-\sum_{\boldsymbol\kappa\in\mathcal C(P)}(-1)^{t_P(\boldsymbol\kappa)}
-&=\sum_{\boldsymbol\kappa\in\mathcal C(P)}\prod_{v\in V_L}(-1)^{c_v(\kappa_v)}
-&&\bigl(\because\ t_P\text{ の定義と整数の冪の法則}\bigr)\\
-&=\prod_{v\in V_L}\sum_{\kappa_v\in\mathcal K(S_v(P))}(-1)^{c_v(\kappa_v)}
-&&\bigl(\because\ \blkref{claim_vertex_local_pairing_product}\text{ と有限和の分配律}\bigr)\\
-&=\prod_{v\in V_L}1
-&&\bigl(\because\ \text{上の頂点ごとの計算}\bigr)\\
-&=1
-&&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
-\end{aligned}`),
-                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_pfaffian_signed_even_subgraph",
-              labels: [],
-              title: { text: "Pfaffian と符号付き偶部分グラフ多項式" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_pfaffian_signed_even_subgraph",
-                  focus: {
-                    id: "kac_ward_claim_pfaffian_signed_even_subgraph",
-                    kind: "claim",
-                    title: { text: "反対称化した行列の Pfaffian は符号付き偶部分グラフ多項式に等しい" },
-                    labels: ["claim_pfaffian_signed_even_subgraph"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/pfaffian-signed-even-subgraph"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), "、ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " を取る。", ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " の添字を ", math(String.raw`\vec E_L=E_L\times\{0,1\}`), " の辺番号・端点番号の辞書式に並べる。このとき ", math(String.raw`\overline{\mathbb Q}[x]`), " の等式"]),
-                      displayMath(String.raw`\operatorname{Pf}(K^{\mathrm{as}})=Q^{a,b}_L`),
-                      paragraph(["が成り立つ。右辺は ", ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`\mathbb Z[x]`), " の多項式を係数の包含で送ったものである。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph(["偶部分グラフの有限集合を ", math(String.raw`\mathcal W_L:=\{P\subseteq E_L\mid\operatorname{Even}_L(P)\}`), " と置く。", ref("claim_tagged_matching_even_complement"), " により、非零項の補辺は ", math(String.raw`\mathcal W_L`), " に属する。各 ", math(String.raw`P\in\mathcal W_L`), " の上の非零項は ", ref("claim_tagged_matching_local_pairs"), " と ", ref("claim_tagged_matching_label_recovery"), " により局所対合族と一対一に対応する。"]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{Pf}(K^{\mathrm{as}})
-&=\sum_{D\in\mathcal M(\vec E_L)}\sum_{T\subseteq E_D}M_{D,T}(x)
-&&\bigl(\because\ \blkref{claim_tagged_matching_expansion}\bigr)\\
-&=\sum_{P\in\mathcal W_L}\ \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}M_{D,T}(x)
-&&\bigl(\because\ \blkref{claim_tagged_matching_even_complement}\text{ と有限和の再添字付け}\bigr)\\
-&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
-  \sum_{\substack{(D,T):\ M_{D,T}(x)\ne0\\P(D,T)=P}}(-1)^{t(D,T)}
-&&\bigl(\because\ \blkref{claim_tagged_matching_quadratic_crossing_weight}\text{ と分配則}\bigr)\\
-&=\sum_{P\in\mathcal W_L}\chi_{a,b}(h(P),v(P))x^{|P|}
-&&\bigl(\because\ \blkref{claim_local_pairing_signed_sum}\bigr)\\
-&=\sum_{P\in\mathcal W_L}(-1)^{(1+a)h(P)+(1+b)v(P)+h(P)v(P)}x^{|P|}
-&&\bigl(\because\ \blkref{def_torus_quadratic_sign}\text{ と指数の偶奇}\bigr)\\
-&=Q^{a,b}_L
-&&\bigl(\because\ \blkref{def_signed_even_subgraph_polynomial}\bigr).
-\end{aligned}`),
-                      paragraph(["辺長一でも長短の標識を区別した有限和を使う。最後の等号で係数を ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " に送る。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_determinant_signed_even_subgraph_square",
-              labels: [],
-              title: { text: "Kac--Ward 行列式と符号付き偶部分グラフ多項式の平方" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_determinant_signed_even_subgraph_square",
-                  focus: {
-                    id: "kac_ward_claim_determinant_signed_even_subgraph_square",
-                    kind: "claim",
-                    title: { text: "Kac--Ward 行列式は符号付き偶部分グラフ多項式の平方に等しい" },
-                    labels: ["claim_determinant_signed_even_subgraph_square"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/determinant-signed-even-subgraph-square"],
-                    statement: [
-                      paragraph(["任意の辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とねじれ ", math(String.raw`(a,b)\in\mathcal S`), " に対し、", ref("def_kac_ward_determinants"), " と ", ref("def_signed_even_subgraph_polynomial"), " の多項式は、係数を ", math(String.raw`\overline{\mathbb Q}`), " に送ったとき"]),
-                      displayMath(String.raw`D_L^{a,b}(x)=\bigl(Q_L^{a,b}\bigr)^2\quad\text{in }\overline{\mathbb Q}[x]`),
-                      paragraph(["を満たす。両辺は多項式そのものであり、特定の値への代入は行わない。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      paragraph([ref("def_gauged_terminal_matrix"), " の反対称行列 ", math(String.raw`K^{\mathrm{as}}`), " を ", math(String.raw`\vec E_L`), " の辺番号・端点番号の辞書式に並べる。", ref("claim_pfaffian_signed_even_subgraph"), " と同じ順序を用いる。", ref("claim_gauged_terminal_matrix_skew"), " により ", math(String.raw`K^{\mathrm{as}}`), " は零対角反対称行列であり、Pfaffian の平方公式の仮定を満たす。"]),
-                      displayMath(String.raw`\begin{aligned}
-D_L^{a,b}(x)
-&=\det_x(K^{\mathrm{as}})
-&&\bigl(\because\ \blkref{claim_gauged_terminal_matrix_determinant}\bigr)\\
-&=\operatorname{Pf}(K^{\mathrm{as}})^2
-&&\bigl(\because\ \blkref{claim_qbar_polynomial_pfaffian_square_determinant}\bigr)\\
-&=\bigl(Q_L^{a,b}\bigr)^2
-&&\bigl(\because\ \blkref{claim_pfaffian_signed_even_subgraph}\bigr).
-\end{aligned}`),
-                      paragraph(["各等号は ", math(String.raw`\overline{\mathbb Q}[x]`), " の中で成立する。"]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_determinant_square_root_torus_formula",
-              labels: [],
-              title: { text: "四つの多項式平方根による有限トーラス公式" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_determinant_square_root_torus_formula",
-                  beforeFocus: [{
-                    role: "supportingClaim",
-                    element: {
-                      id: "kac_ward_claim_determinant_polynomial_square_root_exists",
-                      kind: "claim",
-                      title: { text: "四つの行列式には定数項一の多項式平方根が存在する" },
-                      labels: ["claim_determinant_polynomial_square_root_exists"],
-                      habitat: "Qbar",
-                      verification: ["sagemath/check/determinant-square-root-torus-formula"],
-                      statement: [
-                        paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " と各ねじれ ", math(String.raw`(a,b)\in\mathcal S`), " について、", ref("def_kac_ward_determinants"), " の ", math(String.raw`D_L^{a,b}\in\overline{\mathbb Q}[x]`), " には ", ref("def_qbar_polynomial_square_root"), " の意味で定数項一の多項式平方根が存在する。その平方根を ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " と書く。", ref("claim_qbar_polynomial_square_root_unique"), " により一意である。実数体・複素数体は使わない。"]),
-                      ],
-                      proof: [
-                        paragraph([ref("def_signed_even_subgraph_polynomial"), " の ", math(String.raw`Q_L^{a,b}`), " を係数の包含 ", math(String.raw`\mathbb Z\hookrightarrow\overline{\mathbb Q}`), " で送る。空の偶部分グラフだけが次数零の項を与えるので ", math(String.raw`\mathrm{ac}_0(Q_L^{a,b})=1`), " である。さらに"]),
-                        displayMath(String.raw`Q_L^{a,b}Q_L^{a,b}=D_L^{a,b}\quad(\because\ \blkref{claim_determinant_signed_even_subgraph_square}).`),
-                        paragraph(["よって ", math(String.raw`Q_L^{a,b}`), " が平方根の存在証人であり、", ref("claim_qbar_polynomial_square_root_unique"), " により ", math(String.raw`S_L^{a,b}=Q_L^{a,b}`), " である。"]),
-                      ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_determinant_square_root_torus_formula",
-                    kind: "claim",
-                    title: { text: "分配多項式は四つの行列式の定数項一の平方根の和の半分である" },
-                    labels: ["claim_determinant_square_root_torus_formula"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/determinant-square-root-torus-formula"],
-                    statement: [
-                      paragraph(["辺長 ", math(String.raw`L\in\mathbb N_{>0}`), " とし、", ref("claim_determinant_polynomial_square_root_exists"), " の四つの平方根 ", math(String.raw`S_L^{a,b}\in\overline{\mathbb Q}[x]`), " を取る。このとき ", ref("def_partition_polynomial"), " の ", math(String.raw`Z_L`), " について"]),
-                      displayMath(String.raw`Z_L=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}\quad\text{in }\overline{\mathbb Q}[x]`),
-                      paragraph(["が成り立つ。四項に掛かる係数 ", math(String.raw`\frac12`), " はいずれも正である。実数体・複素数体は使わない。"]),
-                    ],
-                    proof: [
-                      displayMath(String.raw`\begin{aligned}
-Z_L
-&=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
-&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
-&=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
-&&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
-\end{aligned}`),
-                      paragraph(["最初の等号は ", math(String.raw`\mathbb Z[x]`), " の等式を ", math(String.raw`\overline{\mathbb Q}[x]`), " に送ったものである。"]),
                     ],
                   },
                 },
@@ -94004,6 +94024,7 @@ const chapters = [
   chapter_kac_ward,
   chapter_discrete_whitney,
   chapter_kac_ward_antisymmetrization,
+  chapter_kac_ward_pfaffian_torus_formula,
   chapter_kac_ward_permutation_expansion,
   chapter_kac_ward_direct_comparison,
   chapter_finite_fourier,
