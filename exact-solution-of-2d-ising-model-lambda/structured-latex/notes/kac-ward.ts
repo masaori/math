@@ -7,8 +7,105 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_contact_free_permutation_phase_product_archived",
+    targets: ["def_permutation_contact_pair_count"],
+    title: { text: "不採用経路: 接触の無い置換の位相積" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道の位相積による比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）とし、",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）は ",
+                        math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
+                        "（", ref("def_permutation_contact_pair_count"), "）を満たすとする。各 ",
+                        math(String.raw`C\in\mathcal C(\varphi)`), "（", ref("def_moved_orbit_family"),
+                        "）について ", math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                        " を一つ選び（各 ", math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
+                        " により空でない）、",
+                        math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                        "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+=\prod_{C\in\mathcal C(\varphi)}
+\chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)`),
+                      paragraph([
+                        "が成り立つ。遷移行列の成分は ", ref("def_kac_ward_transition_matrices"),
+                        "、切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
+                        "、巻き付き二次符号は ", ref("def_torus_quadratic_sign"),
+                        " で定めた。符号は部分集合の鎖 ",
+                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                        " により代数的数として掛ける。左辺は基点の選択を含まないので、この等式により右辺の値も写像の族 ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}`),
+                        " の選び方に依らない。実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "まず、任意の ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0`),
+                        "（", ref("def_contact_pair_count"), "）を示す。",
+                        math(String.raw`\vec e_0:=\vec e_{\ast}^{\,\varphi}(C)`), "、",
+                        math(String.raw`r:=r_{\varphi}(\vec e_0)`),
+                        "（", ref("def_permutation_minimal_return"), "）と置き、",
+                        math(String.raw`\gamma^{\varphi}_C`), " の第 ", math(String.raw`k`), " 項を ",
+                        math(String.raw`\vec\gamma_k:=\varphi^{\circ(k-1)}(\vec e_0)`),
+                        "（", math(String.raw`1\le k\le r`), "、", ref("def_permutation_orbit_sequence"),
+                        "）と書く。", ref("claim_moved_orbit_closed_nonbacktracking"), " により ",
+                        math(String.raw`\gamma^{\varphi}_C`), " は閉じた非後退辺列であり、その ",
+                        math(String.raw`r`), " 個の項は相異なる。", ref("def_permutation_orbit_set"),
+                        " により各項 ", math(String.raw`\vec\gamma_k`), " は ", math(String.raw`C`),
+                        " の元であり、", ref("claim_moved_orbit_partition"), " により ",
+                        math(String.raw`C\subseteq M(\varphi)`), " なので、各項は ",
+                        math(String.raw`M(\varphi)`), " の元である。",
+                      ]),
+                      paragraph([
+                        "添字 ", math(String.raw`j,k\in\{1,\ldots,r\}`), " が ",
+                        math(String.raw`j<k`), " かつ ",
+                        math(String.raw`\operatorname{tgt}(\vec\gamma_j)=\operatorname{tgt}(\vec\gamma_k)`),
+                        " を満たすと仮定して矛盾を導く。前段により ",
+                        math(String.raw`\vec\gamma_j`), " と ", math(String.raw`\vec\gamma_k`),
+                        " は相異なる ", math(String.raw`M(\varphi)`),
+                        " の元なので、二元部分集合 ",
+                        math(String.raw`\{\vec\gamma_j,\vec\gamma_k\}`), " は ",
+                        ref("def_permutation_contact_pair_count"),
+                        " の右辺の集合の元であり、その個数について ",
+                        math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
+                        " が従う。これは仮定 ", math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
+                        " に反する。よってそのような添字対は存在せず、",
+                        ref("def_contact_pair_count"), " の添字対の集合は空なので ",
+                        math(String.raw`n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0`), " である。",
+                      ]),
+                      paragraph([
+                        "次に位相積を計算する。各 ", math(String.raw`C\in\mathcal C(\varphi)`),
+                        " について、", math(String.raw`\vec e_0\in C\subseteq M(\varphi)`), " なので ",
+                        ref("def_moved_edge_set"), " により ",
+                        math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " であり、",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " なので ", ref("claim_moved_orbit_weight_phase_twist"),
+                        " の仮定を満たす。求めたい左辺から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)
+&&\bigl(\because\ n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0\text{ と }\blkref{claim_vertex_simple_orbit_quadratic_sign}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全ての積は有限集合の上の有限積であり ",
+                        math(String.raw`\overline{\mathbb Q}`),
+                        " の中で閉じる。実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_free_fiber_phase_signed_count_archived",
-    targets: ["claim_contact_free_permutation_phase_product"],
+    targets: ["def_permutation_contact_pair_count"],
     title: { text: "不採用経路: 接触の無い部分の位相和の符号付き数え上げ" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の主張と証明を保存する。"]),
@@ -47,13 +144,13 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " が ",
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " を満たすとする。",
-                        ref("claim_contact_free_permutation_phase_product"), " により、各軌道の二次符号の積として",
+                        "参照用ノート「不採用経路: 接触の無い置換の位相積」により、各軌道の二次符号の積として",
                       ]),
                       displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)
 =\prod_{C\in\mathcal C(\varphi)}
 \chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)
 \in\{-1,1\}
-\qquad\bigl(\because\ \blkref{claim_contact_free_permutation_phase_product}\text{ と }\{-1,1\}\text{ の積の閉性}\bigr)`),
+\qquad\bigl(\because\ \text{退避した「接触の無い置換の位相積」の主張と }\{-1,1\}\text{ の積の閉性}\bigr)`),
                       paragraph([
                         "したがって接触の無い部分は ",
                         math(String.raw`\mathcal N^{0,+}_L(D,E;a,b)`), " と ",

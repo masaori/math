@@ -1,7 +1,7 @@
 """接触の無い非後退置換の位相積が、軌道ごとの巻き付き二次符号の積に一致することを
 厳密検査する。
 
-対象: claim_contact_free_permutation_phase_product。
+対象: def_permutation_contact_pair_count と参照用ノート「不採用経路: 接触の無い置換の位相積」。
 
 一辺 L=2 のトーラスで、非後退置換を全列挙し、置換の接触対の個数
   N_ct(φ) = |{ {e,f} ⊆ M(φ) : e ≠ f, tgt(e) = tgt(f) }|
