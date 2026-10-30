@@ -1,6 +1,8 @@
 # SageMath Check: 残余の位相和の符号付き数え上げ
 
-**対象ラベル**: `claim_phase_contribution_sign_value`, `claim_residual_fiber_phase_signed_count`
+旧主張「残余の位相和は整数の符号付き数え上げである」は参照用ノート「不採用経路: 残余の位相和の符号付き数え上げ」に保存した。
+
+**対象ラベル**: `claim_phase_contribution_sign_value`
 
 一辺 $L=2$ の全非後退置換について、次を検査する。
 
@@ -9,7 +11,7 @@
   位相寄与 $1$ の置換の個数から位相寄与 $-1$ の置換の個数を引いた整数に等しい。
 
 - 実行: `sage sagemath/check/residual-fiber-phase-signed-count/check.sage`
-- 状態: PASS（2026-09-02）
+- 状態: PASS（2026-10-30）
 - 結果: 位相寄与の符号性 $123{,}136$ 件（非後退置換 $30{,}784$ 個×四スピン構造）と、
   残余 $18{,}755$ 個を含むファイバー×四スピン構造の全 $2{,}288$ 組の符号付き数え上げを検査した。
 

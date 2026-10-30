@@ -516,7 +516,6 @@ export const ALL_LABELS = [
   "claim_reference_matching_constant_term",
   "claim_repeated_adjacent_sum_difference",
   "claim_representative_increment",
-  "claim_residual_fiber_phase_signed_count",
   "claim_restriction_family_gluing",
   "claim_reversal_direction_shift",
   "claim_reversal_free_moved_support_even",

@@ -1197,19 +1197,19 @@ q
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(\operatorname{rat}_{\Lambda}(\lambda+\nu)\bigr)
 &=\lambda+\nu
-&&(\because\ \blkref{claim_rational_log_surjective})\\
+&&\bigl(\because\ \blkref{claim_rational_log_surjective}\bigr)\\
 &=\log\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)
   +\log\bigl(\operatorname{rat}_{\Lambda}(\nu)\bigr)
-&&(\because\ \blkref{claim_rational_log_surjective}\text{ を二回})\\
+&&\bigl(\because\ \blkref{claim_rational_log_surjective}\text{ を二回}\bigr)\\
 &=\log\bigl(
   \operatorname{rat}_{\Lambda}(\lambda)
   \operatorname{rat}_{\Lambda}(\nu)
 \bigr)
-&&(\because\ \blkref{claim_log_additive})
+&&\bigl(\because\ \blkref{claim_log_additive}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda+\nu)
 =\operatorname{rat}_{\Lambda}(\lambda)\operatorname{rat}_{\Lambda}(\nu)
-\qquad(\because\ \blkref{claim_rational_log_injective}\text{ を上の二つの正の有理数へ適用})`),
+\qquad\bigl(\because\ \blkref{claim_rational_log_injective}\text{ を上の二つの正の有理数へ適用}\bigr)`),
                       ],
                     },
                 },
@@ -77857,17 +77857,15 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_residual_fiber_phase_signed_count",
+              id: "kac_ward_heading_phase_contribution_sign_value",
               labels: [],
-              title: { text: "残余の位相和の符号付き数え上げ" },
+              title: { text: "位相寄与の符号性" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_residual_fiber_phase_signed_count",
-                  beforeFocus: [{
-                    role: "supportingClaim",
-                    element: {
+                  id: "group_of_kac_ward_claim_phase_contribution_sign_value",
+                  focus: {
                       id: "kac_ward_claim_phase_contribution_sign_value",
                       kind: "claim",
                       title: { text: "位相寄与は 1 か −1 である" },
@@ -77944,75 +77942,6 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         ]),
                       ],
                     },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_residual_fiber_phase_signed_count",
-                    kind: "claim",
-                    title: { text: "残余の位相和は整数の符号付き数え上げである" },
-                    labels: ["claim_residual_fiber_phase_signed_count"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/residual-fiber-phase-signed-count"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
-                        math(String.raw`D,E\subseteq E_L`), " は ",
-                        math(String.raw`D\cap E=\varnothing`), " かつ ",
-                        math(String.raw`\operatorname{Even}_L(E)`),
-                        "（", ref("def_even_edge_subset"), "）を満たすとする。有限集合",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\mathcal N^{\mathcal R,+}_L(D,E;a,b)
-&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L\ \bigm|\
-\mathcal W^{a,b}_L(\varphi)=1\,\bigr\},\\
-\mathcal N^{\mathcal R,-}_L(D,E;a,b)
-&:=\bigl\{\,\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L\ \bigm|\
-\mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
-\end{aligned}`),
-                      paragraph([
-                        "を定めると、", math(String.raw`\overline{\mathbb Q}`), " の等式",
-                      ]),
-                      displayMath(String.raw`\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
-\mathcal W^{a,b}_L(\varphi)
-=\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
--\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
-\in\mathbb Z`),
-                      paragraph([
-                        "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
-                        "、標準対が切り替え不能な置換の集合 ", math(String.raw`\mathcal R_L`), " は ",
-                        ref("def_unswitchable_standard_pair_subset"),
-                        "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
-                        " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "任意の ", math(String.raw`\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L`),
-                        " について、", ref("claim_phase_contribution_sign_value"), " により ",
-                        math(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
-                        " である。したがって ",
-                        math(String.raw`\mathcal N_L(D,E)\cap\mathcal R_L`), " は ",
-                        math(String.raw`\mathcal N^{\mathcal R,+}_L(D,E;a,b)`), " と ",
-                        math(String.raw`\mathcal N^{\mathcal R,-}_L(D,E;a,b)`),
-                        " の互いに素な合併である。この非交和で有限和を分けると",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
-\mathcal W^{a,b}_L(\varphi)
-&=\sum_{\varphi\in\mathcal N^{\mathcal R,+}_L(D,E;a,b)}1
-+\sum_{\varphi\in\mathcal N^{\mathcal R,-}_L(D,E;a,b)}(-1)
-&&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
-&=\bigl\lvert\mathcal N^{\mathcal R,+}_L(D,E;a,b)\bigr\rvert
--\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
-&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)\\
-&\in\mathbb Z
-&&\bigl(\because\ \text{有限集合の元の個数の差は整数}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "を得る。全過程は有限集合の分割と整数の有限和だけで閉じる。",
-                      ]),
-                    ],
-                  },
                 },
               }],
             },

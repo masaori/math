@@ -1,6 +1,6 @@
 """位相寄与が {-1,1} に属し、残余の位相和が符号付き数え上げになることを厳密検査する。
 
-対象: claim_phase_contribution_sign_value と claim_residual_fiber_phase_signed_count。
+対象: claim_phase_contribution_sign_value と参照用ノート「不採用経路: 残余の位相和の符号付き数え上げ」。
 
 一辺 L=2 の全非後退置換について、
 (1) 位相寄与 W^{a,b}(phi) が四つのスピン構造の全てで {-1, 1} に属すること、
