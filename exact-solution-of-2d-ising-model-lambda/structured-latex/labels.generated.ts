@@ -1049,6 +1049,7 @@ export const ALL_LABELS = [
   "remark_positive_cone_sign_choice",
   "remark_real_escape_plan",
   "theorem_partition_polynomial_is_trace",
+  "theorem_periodic_density_onsager_integral",
   "theorem_shift_matrix_commutes",
   "theorem_shift_matrix_order",
 ] as const

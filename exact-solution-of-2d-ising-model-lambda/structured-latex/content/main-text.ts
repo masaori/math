@@ -89260,7 +89260,18 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                     " である。", ref("claim_rational_log_order_group_realization_smul"),
                     " から",
                   ]),
-                  displayMath(String.raw`b<\rho(\mu)=\iota(r)c<\rho(\mu+\varepsilon)=\iota(r+s)c<I`),
+                  displayMath(String.raw`\begin{aligned}
+b&<\iota(r)c
+&&(\because\ \text{有理数 }r\text{ の選び方})\\
+&=\rho(\mu)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul})\\
+&<\iota(r+s)c
+&&(\because\ \text{有理数 }r,s\text{ の選び方})\\
+&=\rho(\mu+\varepsilon)
+&&(\because\ \blkref{claim_rational_log_order_group_realization_smul}\text{ と加法の分配則})\\
+&<I
+&&(\because\ \text{有理数 }r,s\text{ の選び方}).
+\end{aligned}`),
                   paragraph([
                     math(String.raw`0<_{\Lambda_{\mathbb Q}}\varepsilon`),
                     " も成り立つ。実際、", math(String.raw`s=m/n`),
@@ -90184,6 +90195,94 @@ f^{\mathrm{per}}(q)
                     },
                 },
               ],
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_theorem_periodic_density_onsager_integral",
+              focus: {
+                id: "real_escape_theorem_periodic_density_onsager_integral",
+                kind: "theorem",
+                title: { text: "周期境界の自由エネルギー密度は分散因子の積分に等しい" },
+                labels: ["theorem_periodic_density_onsager_integral"],
+                habitat: "R",
+                realEscape: "連続極限と積分。可算側の有限体積の両側評価を実現し、四つのモード和の共通実数極限を下組の上限と同定する。",
+                verification: ["sagemath/check/periodic-density-onsager-integral"],
+                statement: [
+                  paragraph([
+                    "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`), "）を取る。",
+                    ref("def_periodic_free_energy_density_le_one"), " の実数 ",
+                    math(String.raw`f^{\mathrm{per}}(q)\in\mathbb R`), " は次を満たす。",
+                  ]),
+                  displayMath(String.raw`f^{\mathrm{per}}(q)=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}\!\left[(1+q^2)^2-2q(1-q^2)(\cos\theta_1+\cos\theta_2)\right]d\theta_2\,d\theta_1`),
+                  paragraph([
+                    "角 ", math(String.raw`\theta_1,\theta_2\in[0,2\pi]`), " の被対数は ",
+                    ref("claim_dispersion_angle_log_continuous"), " により正である。",
+                    "積分は実数の連続関数の Riemann 積分である。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    "右辺を ", math(String.raw`I_q\in\mathbb R`), " と置く。辺長 ",
+                    math(String.raw`L\in\mathbb N_{\ge1}`), " と ", ref("def_spin_structures"),
+                    " の ", math(String.raw`(a,b)\in\mathcal S`), " について、",
+                    ref("claim_partition_log_order_bounds"), " の ",
+                    math(String.raw`M_L^{\mathrm{abs}}(q)\in\mathbb Q_{>0}`), " を用いて",
+                    math(String.raw`u_{L,a,b}:=L^{-2}\log_{\mathbb R}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|\in\mathbb R`),
+                    "、", math(String.raw`v_L:=\max_{(a,b)\in\mathcal S}u_{L,a,b}\in\mathbb R`),
+                    " と置く。", ref("claim_shifted_mode_riemann_sums"),
+                    " により四つの列 ", math(String.raw`u_{L,a,b}`), " はいずれも ",
+                    math(String.raw`I_q`), " に収束する。有限集合上の最大値は各成分の共通極限へ収束するから ",
+                    math(String.raw`v_L\to I_q`), " である。",
+                    ref("claim_cut_realization_agrees_on_rationals"),
+                    " により四つの有理数値は実現後も変わらず、実対数の単調性から ",
+                    math(String.raw`v_L=L^{-2}\log_{\mathbb R}M_L^{\mathrm{abs}}(q)`), " である。",
+                  ]),
+                  paragraph([
+                    ref("claim_partition_log_order_bounds"), " の鎖を ",
+                    ref("claim_rational_embedded_log_order_iff"), " で埋め込み、",
+                    ref("claim_rational_log_order_group_nonneg_scalar_monotone"),
+                    " で正の有理数 ", math(String.raw`L^{-2}`), " 倍する。",
+                    ref("def_finite_free_entropy_density"), " の ",
+                    math(String.raw`\Psi_L(q)\in\Lambda_{\mathbb Q}`), " を用いると",
+                  ]),
+                  displayMath(String.raw`L^{-2}\jmath(\log M_L^{\mathrm{abs}}(q)-2\ell_2)\le_{\Lambda_{\mathbb Q}}\Psi_L(q)\le_{\Lambda_{\mathbb Q}}L^{-2}\jmath(\log M_L^{\mathrm{abs}}(q)+\ell_2)`),
+                  paragraph([
+                    "ここで ", math(String.raw`\jmath:=\iota_{\Lambda\to\Lambda_{\mathbb Q}}`),
+                    " と略記した。", ref("claim_rational_log_order_group_realization_monotone"),
+                    "、", ref("claim_rational_log_order_group_realization_smul"),
+                    "、", ref("claim_log_order_group_realization_real_log"),
+                    " を順に適用すると、左辺の実現値は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\rho_{\mathbb R}\!\left(L^{-2}\jmath(\log M_L^{\mathrm{abs}}(q)-2\ell_2)\right)
+&=L^{-2}\rho_{\mathbb R}\!\left(\jmath(\log M_L^{\mathrm{abs}}(q)-2\ell_2)\right)
+&&\bigl(\because\ \blkref{claim_rational_log_order_group_realization_smul}\bigr)\\
+&=L^{-2}\log_{\mathbb R}\!\left(M_L^{\mathrm{abs}}(q)/4\right)
+&&\bigl(\because\ \blkref{claim_log_order_group_realization_real_log},\ \blkref{claim_log_additive},\ \blkref{claim_log_power}\bigr)\\
+&=v_L-2L^{-2}\log_{\mathbb R}2
+&&\bigl(\because\ \text{実対数の積法則・単調性と有限集合上の最大値の定義}\bigr).
+\end{aligned}`),
+                  paragraph(["同じ計算を右辺に施すと、実数の両側評価は"]),
+                  displayMath(String.raw`v_L-\frac{2\log_{\mathbb R}2}{L^2}\le\rho_{\mathbb R}(\Psi_L(q))\le v_L+\frac{\log_{\mathbb R}2}{L^2}`),
+                  paragraph([
+                    "となる。実数列 ", math(String.raw`v_L\to I_q`), " と ",
+                    math(String.raw`L^{-2}\log_{\mathbb R}2\to0`),
+                    " から、挟み込みにより ", math(String.raw`\rho_{\mathbb R}(\Psi_L(q))\to I_q`),
+                    " である。最後に ", ref("def_periodic_density_lower_set"), " と ",
+                    ref("claim_sequence_lower_set_sup_eq_real_limit"), " をこの列に適用すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+f^{\mathrm{per}}(q)
+&=\sup\rho_{\mathbb R}(A^{\mathrm{per}}(q))
+&&\bigl(\because\ \blkref{def_periodic_free_energy_density_le_one}\bigr)\\
+&=I_q
+&&\bigl(\because\ \blkref{claim_sequence_lower_set_sup_eq_real_limit}\text{ と }\blkref{def_periodic_density_lower_set}\bigr).
+\end{aligned}`),
+                ],
+              },
             },
           },
         ],
