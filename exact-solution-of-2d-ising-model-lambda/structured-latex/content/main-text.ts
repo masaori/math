@@ -77843,44 +77843,6 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
               }],
             },
           },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_permutation_total_turning",
-              labels: [],
-              title: { text: "非後退置換の一歩回転数の総和" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_permutation_total_turning",
-                  focus: {
-                    id: "kac_ward_definition_permutation_total_turning",
-                    kind: "definition",
-                    title: { text: "非後退置換の一歩回転数の総和" },
-                    labels: ["def_permutation_total_turning"],
-                    habitat: "Z",
-                    statement: [
-                      paragraph([
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）に対し、一歩回転数の総和を",
-                      ]),
-                      displayMath(String.raw`\Theta(\varphi):=
-\sum_{\vec g\in M(\varphi)}\tau\bigl(\vec g,\varphi(\vec g)\bigr)\in\mathbb Z`),
-                      paragraph([
-                        "で定める。動く辺の集合は ", ref("def_moved_edge_set"), "、一歩の回転数は ",
-                        ref("def_step_turning"), " で定めた。", math(String.raw`\vec g\in M(\varphi)`),
-                        " なら非後退置換の定義により ",
-                        math(String.raw`\varphi(\vec g)\in\operatorname{Next}(\vec g)`),
-                        " なので各加数は定まり、有限集合上の整数の有限和だから値は整数に属する。実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
         ],
       },
     },

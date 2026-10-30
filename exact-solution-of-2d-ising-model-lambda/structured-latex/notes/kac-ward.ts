@@ -7,6 +7,28 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_permutation_total_turning_archived",
+    targets: ["def_nonbacktracking_permutations"],
+    title: { text: "不採用経路: 非後退置換の一歩回転数の総和" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の経路反転による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）に対し、一歩回転数の総和を",
+                      ]),
+                      displayMath(String.raw`\Theta(\varphi):=
+\sum_{\vec g\in M(\varphi)}\tau\bigl(\vec g,\varphi(\vec g)\bigr)\in\mathbb Z`),
+                      paragraph([
+                        "で定める。動く辺の集合は ", ref("def_moved_edge_set"), "、一歩の回転数は ",
+                        ref("def_step_turning"), " で定めた。", math(String.raw`\vec g\in M(\varphi)`),
+                        " なら非後退置換の定義により ",
+                        math(String.raw`\varphi(\vec g)\in\operatorname{Next}(\vec g)`),
+                        " なので各加数は定まり、有限集合上の整数の有限和だから値は整数に属する。実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_selection_sum_signed_count_archived",
     targets: ["def_signed_selection_sum"],
     title: { text: "不採用経路: 選択和の符号付き数え上げ表示" },
@@ -1076,7 +1098,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_path_reversal_phase_conjugation_archived",
-    targets: ["def_permutation_total_turning"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 経路反転による位相寄与の共役" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転による置換の位相寄与の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -1092,7 +1114,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 =\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)`),
                       paragraph([
                         "が成り立つ。経路反転は ", ref("def_permutation_path_reversal"),
-                        "、一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                        "、一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
                         "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         " で定めた。全て有限集合上の有限積・有限和と代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。",
                       ]),
@@ -1174,7 +1196,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \left(-\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
 &&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と有限積の指数法則}\bigr)\\
 &=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{def_permutation_total_turning},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)
 \end{aligned}`),
                       paragraph([
                         "全過程は有限集合上の添字の全単射、整数の有限和、代数的数の有限積と整数冪だけで閉じ、実数体も複素数体も現れない。",
@@ -1199,7 +1221,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \in\{-1,1\}`),
                           paragraph([
                             "が成り立つ。位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
-                            "、一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                            "、一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
                             " で定めた。", math(String.raw`\zeta_8^4=-1`), " から ",
                             math(String.raw`\zeta_8\ne0`), " なので、負の指数の冪は体 ",
                             math(String.raw`\overline{\mathbb Q}`), " の逆元により定まる。",
@@ -1227,7 +1249,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &=(-1)^{\lvert\mathcal C(\varphi)\rvert}
 \left(\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\right)
 \zeta_8^{\,\Theta(\varphi)}
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の並べ替えと指数法則、}\blkref{def_permutation_total_turning}\bigr)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の並べ替えと指数法則、}\text{参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」}\bigr)
 \end{aligned}`),
                           paragraph([
                             "である。両辺に ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
@@ -2458,7 +2480,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
       paragraph(["元の証明:"]),
                       paragraph([
                         "まず回転位相の冪 ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
-                        "（一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                        "（一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
                         "）が ", math(String.raw`\{-1,1\}`), " に属することを示す。",
                         "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」", " により ",
                         math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`), " なので、求めたい冪から始める。",

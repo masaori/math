@@ -1,6 +1,8 @@
 # SageMath Check: 経路反転による位相寄与の共役
 
-**対象ラベル**: `def_permutation_total_turning`
+**対象ラベル**: `def_nonbacktracking_permutations`
+
+一歩回転数の総和の元の定義は参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」に保存した。
 
 元の主張と証明は参照用ノート「不採用経路: 経路反転による位相寄与の共役」に保存した。
 
