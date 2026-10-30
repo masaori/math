@@ -7,6 +7,92 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_even_subgraph_pair_stratified_count_archived",
+    targets: ["def_even_subgraph_pair_fiber"],
+    title: { text: "不採用経路: 偶部分グラフ順序対の母関数の層別" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、偶部分グラフ順序対の母関数による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb{Z}[x]`), " の等式"]),
+                      displayMath(String.raw`\sum_{\substack{A\subseteq E_L,\ B\subseteq E_L\\ \operatorname{Even}_L(A),\ \operatorname{Even}_L(B)}}x^{\,\lvert A\rvert+\lvert B\rvert}
+=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\lvert\mathcal C_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
+                      paragraph([
+                        "が成り立つ。偶部分グラフの述語 ", math(String.raw`\operatorname{Even}_L`), " は ",
+                        ref("def_even_edge_subset"), "、選択集合 ", math(String.raw`\mathcal C_L(D,E)`),
+                        " と対称差 ", math(String.raw`A\mathbin\triangle B`), " は ",
+                        ref("def_even_subgraph_pair_fiber"), " で定めた。",
+                        math(String.raw`\lvert A\rvert\in\mathbb N`),
+                        " は有限集合の元の個数である。両辺の和はいずれも有限集合の上の有限和である。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`A,B\subseteq E_L`), " が ", math(String.raw`\operatorname{Even}_L(A)`),
+                        " かつ ", math(String.raw`\operatorname{Even}_L(B)`), " を満たすとし、",
+                        math(String.raw`D:=A\cap B`), "、", math(String.raw`E:=A\mathbin\triangle B`),
+                        " と置く。集合の恒等式 ",
+                        math(String.raw`A\mathbin\triangle B=(A\cup B)\setminus(A\cap B)`),
+                        " から ", math(String.raw`D\cap E=\varnothing`), " である。頂点 ",
+                        math(String.raw`v\in V_L`),
+                        " ごとに、共通辺の端点寄与は対称差で二度現れて法 2 で消えるので",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+d_{E}(v)\bmod2
+&=\bigl(d_A(v)+d_B(v)\bigr)\bmod2
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\text{ と対称差での共通辺の相殺}\bigr)\\
+&=0
+&&\bigl(\because\ \operatorname{Even}_L(A),\operatorname{Even}_L(B),\ \blkref{def_even_edge_subset}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となり ", math(String.raw`\operatorname{Even}_L(E)`),
+                        " である。したがって対 ", math(String.raw`(D,E)`),
+                        " は右辺の和の添字集合（互いに素で第 2 成分が偶部分グラフである辺集合の順序対の全体）に属する。",
+                      ]),
+                      paragraph([
+                        "さらにこの ", math(String.raw`(A,B)`), " は ", ref("def_even_subgraph_pair_fiber"),
+                        " の四条件 ", math(String.raw`\operatorname{Even}_L(A)`), "、",
+                        math(String.raw`\operatorname{Even}_L(B)`), "、", math(String.raw`A\cap B=D`), "、",
+                        math(String.raw`A\mathbin\triangle B=E`), " をすべて満たすので ",
+                        math(String.raw`(A,B)\in\mathcal P_L(D,E)`),
+                        " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
+                        math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " を取ると、同じ定義により ",
+                        math(String.raw`A\cap B=D`), " かつ ", math(String.raw`A\mathbin\triangle B=E`),
+                        " である。相異なる添字では ", math(String.raw`A\cap B`), " または ",
+                        math(String.raw`A\mathbin\triangle B`),
+                        " の値が異なるので、二つの添字のファイバーは交わらない。したがって左辺の和が走る順序対の全体は、右辺の添字ごとの ",
+                        math(String.raw`\mathcal P_L(D,E)`), " の互いに素な合併である。",
+                      ]),
+                      paragraph([
+                        "次に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
+                        math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " について、位数の和を求める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\lvert A\rvert+\lvert B\rvert
+&=\bigl(\lvert A\setminus B\rvert+\lvert A\cap B\rvert\bigr)+\bigl(\lvert B\setminus A\rvert+\lvert A\cap B\rvert\bigr)
+&&\bigl(\because\ A=(A\setminus B)\cup(A\cap B)\text{ と }B=(B\setminus A)\cup(A\cap B)\text{ は互いに素な分割。個数の加法性}\bigr)\\
+&=\lvert A\mathbin\triangle B\rvert+2\,\lvert A\cap B\rvert
+&&\bigl(\because\ A\mathbin\triangle B=(A\setminus B)\cup(B\setminus A)\text{ は互いに素な分割。}\mathbb N\text{ の四則}\bigr)\\
+&=\lvert E\rvert+2\,\lvert D\rvert
+&&\bigl(\because\ (A,B)\in\mathcal P_L(D,E)\text{ の条件 }A\cap B=D,\ A\mathbin\triangle B=E.\ \blkref{def_even_subgraph_pair_fiber}\bigr)
+\end{aligned}`),
+                      paragraph(["求めたい左辺から始める。"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{A\subseteq E_L,\ B\subseteq E_L\\ \operatorname{Even}_L(A),\ \operatorname{Even}_L(B)}}x^{\,\lvert A\rvert+\lvert B\rvert}
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\ \sum_{(A,B)\in\mathcal P_L(D,E)}x^{\,\lvert A\rvert+\lvert B\rvert}
+&&\bigl(\because\ \text{上の互いに素な合併で有限和が分かれる}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\ \sum_{(A,B)\in\mathcal P_L(D,E)}x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \text{上の位数の和の等式}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\lvert\mathcal P_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \text{内側の項は }(A,B)\text{ に依らない。}\mathbb{Z}[x]\text{ の分配則}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\lvert\mathcal C_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \text{各添字は }D\cap E=\varnothing\text{ と }\operatorname{Even}_L(E)\text{ を満たすので }\blkref{claim_even_subgraph_pair_fiber_bijection}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全ての和は有限集合の上の有限和であり ", math(String.raw`\mathbb{Z}[x]`),
+                        " の中で閉じる。実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_signed_even_subgraph_square_stratified_archived",
     targets: ["def_signed_selection_sum"],
     title: { text: "不採用経路: 符号付き偶部分グラフ多項式の平方の層別" },
@@ -31,7 +117,7 @@ export default defineNotes([
                         math(String.raw`\vartheta_{a,b}(A)`), " と略記する。偶部分グラフの順序対 ",
                         math(String.raw`(A,B)`), " に ", math(String.raw`D:=A\cap B`), "、",
                         math(String.raw`E:=A\mathbin\triangle B`), " を対応させると、",
-                        ref("claim_even_subgraph_pair_stratified_count"), " の証明冒頭により、順序対全体は添字 ",
+                        "参照用ノート「不採用経路: 偶部分グラフ順序対の母関数の層別」の証明冒頭により、順序対全体は添字 ",
                         math(String.raw`D\cap E=\varnothing`), "、", math(String.raw`\operatorname{Even}_L(E)`),
                         " ごとの ", math(String.raw`\mathcal P_L(D,E)`), " の互いに素な合併である。同じ証明の位数計算により、各ファイバー上で ",
                         math(String.raw`\lvert A\rvert+\lvert B\rvert=2\lvert D\rvert+\lvert E\rvert`), " である。求めたい左辺から始める。",

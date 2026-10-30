@@ -1,6 +1,6 @@
 """偶部分グラフ順序対の母関数の層別を厳密検査する。
 
-対象: claim_even_subgraph_pair_stratified_count。
+対象: def_even_subgraph_pair_fiber。母関数の層別は参照用ノートに保存した。
 一辺 L=2 のトーラスで、偶部分グラフの順序対 (A,B) の母関数
 Σ x^{|A|+|B|} が、互いに素で E が偶部分グラフの添字 (D,E) ごとの
 選択集合の個数 |C_L(D,E)| による層別

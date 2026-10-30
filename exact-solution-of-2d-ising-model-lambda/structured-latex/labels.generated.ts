@@ -120,7 +120,6 @@ export const ALL_LABELS = [
   "claim_even_orbit_coloring",
   "claim_even_orbit_minimum_color",
   "claim_even_subgraph_pair_fiber_bijection",
-  "claim_even_subgraph_pair_stratified_count",
   "claim_even_subgraph_spin_sum",
   "claim_exterior_cell_set_edge_connected",
   "claim_fiber_phase_integer_decomposition",

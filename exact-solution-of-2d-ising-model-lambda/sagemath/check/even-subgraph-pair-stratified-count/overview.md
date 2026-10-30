@@ -1,6 +1,8 @@
 # SageMath Check: 偶部分グラフ順序対の層別による数え上げ
 
-**対象ラベル**: `claim_even_subgraph_pair_stratified_count`
+**対象ラベル**: `def_even_subgraph_pair_fiber`
+
+母関数の層別は参照用ノート「不採用経路: 偶部分グラフ順序対の母関数の層別」に保存した。
 
 一辺 $L=2$ の周期正方格子で、偶部分グラフの順序対 $(A,B)$ の母関数
 $\sum x^{|A|+|B|}$ が、互いに素で $E$ が偶部分グラフである添字 $(D,E)$ ごとの
