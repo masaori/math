@@ -661,7 +661,7 @@ v_p(a)-v_p(b)
 &=v_p(1)-v_p(1)
 &&(\because\ 1=1/1)\\
 &=0
-&&\\
+&&(\because\ \mathbb{Z}\text{ の減法})\\
 &=\bigl(0\cdot\log q\bigr)(p)
 &&(\because\ \Lambda\ \text{の整数倍の定義})
 \end{aligned}`),

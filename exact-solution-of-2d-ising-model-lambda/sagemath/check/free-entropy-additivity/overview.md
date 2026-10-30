@@ -40,7 +40,7 @@ sage sagemath/check/free-entropy-additivity/check.sage
 
 | 項目 | 状態 |
 | --- | --- |
-| 実行 | 2026-08-08 実行（SageMath, `/usr/local/bin/sage`） |
+| 実行 | 2026-10-30 実行（SageMath、`__file__` を検証ファイルへ設定して実行） |
 | 結果 | 全アサーション成立（有理点 10 個の全対、$k=0,\dots,7$、$L=1,2,3$） |
 
 $\Phi_L(1)$ の出力:
