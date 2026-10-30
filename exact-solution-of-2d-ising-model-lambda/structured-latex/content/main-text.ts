@@ -1253,10 +1253,9 @@ q
 \bigr)
 &&(\because\ \blkref{claim_log_additive})
 \end{aligned}`),
-                        paragraph([
-                          ref("claim_rational_log_injective"),
-                          " をこの二つの正の有理数へ適用すると、主張の等式を得る。",
-                        ]),
+                        displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda+\nu)
+=\operatorname{rat}_{\Lambda}(\lambda)\operatorname{rat}_{\Lambda}(\nu)
+\qquad(\because\ \blkref{claim_rational_log_injective}\text{ を上の二つの正の有理数へ適用})`),
                       ],
                     },
                 },
