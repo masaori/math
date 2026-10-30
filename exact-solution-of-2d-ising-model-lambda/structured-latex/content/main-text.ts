@@ -26597,7 +26597,8 @@ t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
                           math(String.raw`\tau=\tau'`),
                           " の場合により",
                         ]),
-                        displayMath(String.raw`\mathrm{ch}(U)_{\tau,\tau}=t+\iota\bigl(-U_{\tau,\tau}\bigr)`),
+                        displayMath(String.raw`\mathrm{ch}(U)_{\tau,\tau}=t+\iota\bigl(-U_{\tau,\tau}\bigr)
+\qquad\bigl(\because\ \blkref{def_characteristic_matrix}\text{ の対角成分の定義}\bigr)`),
                         paragraph([
                           "である。以下、2 つの場合を別々に示す。",
                         ]),
@@ -26606,14 +26607,10 @@ t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
                           math(String.raw`\lvert O\rvert\ge2`),
                           " を仮定する。このとき ",
                           math(String.raw`\lvert O\rvert\ne1`),
-                          " なので ",
-                          math(String.raw`S(\tau)\ne\tau`),
-                          " である（",
-                          math(String.raw`\because`),
-                          " ",
-                          ref("claim_orbit_fixed_iff_card_one"),
-                          " の対偶）。したがって",
+                          " であり、固定点条件から",
                         ]),
+                        displayMath(String.raw`S(\tau)\ne\tau
+\qquad\bigl(\because\ \lvert O\rvert\ne1\text{ と }\blkref{claim_orbit_fixed_iff_card_one}\text{ の対偶}\bigr)`),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{ch}(U)_{\tau,\tau}
 &=t+\iota\bigl(-U_{\tau,\tau}\bigr)
@@ -26631,14 +26628,10 @@ t+\iota\bigl(-\kappa(1)\bigr) & (\lvert O\rvert=1\ \text{のとき})
                         paragraph([
                           "第二の場合。",
                           math(String.raw`\lvert O\rvert=1`),
-                          " を仮定する。このとき ",
-                          math(String.raw`S(\tau)=\tau`),
-                          " である（",
-                          math(String.raw`\because`),
-                          " ",
-                          ref("claim_orbit_fixed_iff_card_one"),
-                          " を右辺から左辺へ用いる）。したがって",
+                          " を仮定する。固定点条件から",
                         ]),
+                        displayMath(String.raw`S(\tau)=\tau
+\qquad\bigl(\because\ \lvert O\rvert=1\text{ と }\blkref{claim_orbit_fixed_iff_card_one}\text{ の右辺から左辺への適用}\bigr)`),
                         displayMath(String.raw`\begin{aligned}
 \mathrm{ch}(U)_{\tau,\tau}
 &=t+\iota\bigl(-U_{\tau,\tau}\bigr)
