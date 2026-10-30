@@ -7,7 +7,7 @@
 直接つなぐ。この操作が置換性・非後退性を保つか、反転対の辺集合 $D$ だけを一辺減らして
 単純通過の辺集合 $E$ を保つかを、一辺二の有限集合で厳密に検査する。
 
-- 実行: `sage sagemath/check/doubled-edge-splice-reduction/check.sage`
+- 実行: `sage sagemath/archive/doubled-edge-splice-reduction/check.sage`
 - 状態: PASS（2026-09-02）
 - 方法: 有限集合・有限写像の等号と所属判定だけ。浮動小数点は使わない。
 - 結果: 完全切り替え不能な残余について、同じ置換と同じ反転対の重複を除いた $2{,}912$ 件を

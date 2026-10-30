@@ -7,6 +7,110 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_fully_unswitchable_contacts_witness_doubled_edges_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 完全に切り替え不能な残余の各接触" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触対による直接比較は採らない。元の定義・主張・証明を保存する。"]),
+      paragraph(["元の定義: 全接触対が切り替え不能な残余の集合"]),
+                        paragraph([
+                          "有限集合 ", math(String.raw`\mathcal R_L^{\mathrm{lock}}`), " を",
+                        ]),
+                        displayMath(String.raw`\mathcal R_L^{\mathrm{lock}}
+:=\bigl\{\,\varphi\in\mathcal R_L\ \bigm|\
+\text{任意の }\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)\text{ は切り替え可能でない}\,\bigr\}`),
+                        paragraph([
+                          "と定める。残余の集合 ", math(String.raw`\mathcal R_L`), " は ",
+                          ref("def_unswitchable_standard_pair_subset"), "、接触対の集合は ",
+                          ref("def_standard_contact_pair"), "、切り替え可能性は ",
+                          ref("def_switchable_permutation_contact_pair"), " で定めた。所属は有限集合上の全称命題として判定でき、",
+                          "実数体も複素数体も現れない。",
+                        ]),
+      paragraph(["元の主張: 完全に切り替え不能な残余の各接触は反転対の辺を指し示す"]),
+                      paragraph([
+                        math(String.raw`L\ge2`), "、",
+                        math(String.raw`\varphi\in\mathcal R_L^{\mathrm{lock}}`), " とし、任意の接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`), " を取る。このとき",
+                      ]),
+                      displayMath(String.raw`p(\vec e)\in D(\varphi)\quad\text{または}\quad p(\vec f)\in D(\varphi)`),
+                      paragraph([
+                        "が成り立つ。台の辺への射影 ", math(String.raw`p`), " は ", ref("def_oriented_edges"),
+                        "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"),
+                        " で定めた。したがって完全に切り替え不能な残余では、接触対を一つ選ぶたびに、",
+                        "その二辺の少なくとも一方が反転対として動いている。全て有限集合の元と部分集合の比較だけで閉じる。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "退避した全接触対が切り替え不能な残余の定義により ",
+                        math(String.raw`\{\vec e,\vec f\}`), " は切り替え可能でない。",
+                        ref("claim_contact_pair_switchability_criterion"), " により、四つの等式",
+                      ]),
+                      displayMath(String.raw`\varphi(\vec f)=\iota(\vec e),\qquad
+\varphi(\vec e)=\iota(\vec f),\qquad
+\varphi(\vec f)=\vec e,\qquad
+\varphi(\vec e)=\vec f`),
+                      paragraph([
+                        "の少なくとも一つが成り立つ。ここで ", math(String.raw`\iota`), " は ",
+                        ref("def_edge_reversal"), " で定めた。",
+                      ]),
+                      paragraph([
+                        "任意の向き付き辺 ", math(String.raw`\vec g=(g,d)\in\vec E_L`),
+                        " について、", ref("def_boundary_maps"), " の二端点は行番号または列番号が ",
+                        math(String.raw`\bar1`), " だけ異なる。", math(String.raw`L\ge2`), " では ",
+                        math(String.raw`1`), " は ", math(String.raw`L`), " の倍数でないので ",
+                        math(String.raw`\bar1\ne\bar0`), "（", ref("def_residue_addition_notation"), "）である。よって ",
+                        ref("def_oriented_edge_endpoints"), " により ",
+                        math(String.raw`\operatorname{src}(\vec g)\ne\operatorname{tgt}(\vec g)`), " である。",
+                      ]),
+                      paragraph([
+                        "もし ", math(String.raw`\varphi(\vec f)=\vec e`), " なら、接触対の定義（",
+                        ref("def_standard_contact_pair"), "）により ", math(String.raw`\vec f\in M(\varphi)`),
+                        " である。したがって ", ref("def_nonbacktracking_permutations"), " と ",
+                        ref("def_nonbacktracking_successors"), " により ",
+                        math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`), " である。",
+                        "仮定の等式と接触の等式を代入すると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{src}(\vec e)
+&=\operatorname{src}(\varphi(\vec f))
+&&\bigl(\because\ \varphi(\vec f)=\vec e\bigr)\\
+&=\operatorname{tgt}(\vec f)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&=\operatorname{tgt}(\vec e)
+&&\bigl(\because\ \blkref{def_standard_contact_pair}\text{ の接触の等式}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となり、前段の端点相異に反する。よって ", math(String.raw`\varphi(\vec f)\ne\vec e`),
+                        " である。", math(String.raw`\vec e`), " と ", math(String.raw`\vec f`),
+                        " を入れ替えた同じ論法により ", math(String.raw`\varphi(\vec e)\ne\vec f`), " である。",
+                      ]),
+                      paragraph([
+                        "したがって反転像による障害 ",
+                        math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " または ",
+                        math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " が成り立つ。第一の場合、もし ",
+                        math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"),
+                        " により次の式鎖を得る。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\varphi(\iota(\vec e))
+&=\iota(\vec e)
+&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)\\
+&=\varphi(\vec f)
+&&\bigl(\because\ \varphi(\vec f)=\iota(\vec e)\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "置換の単射性（", ref("def_row_permutation"), "）から ",
+                        math(String.raw`\iota(\vec e)=\vec f`), "、従って ",
+                        math(String.raw`\varphi(\vec f)=\vec f`), " となり ",
+                        math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
+                        math(String.raw`\vec e,\iota(\vec e)\in M(\varphi)`), " であり、",
+                        ref("def_doubled_edge_set"), " により ", math(String.raw`p(\vec e)\in D(\varphi)`),
+                        " である。第二の場合も二辺を入れ替えた同じ論法により ",
+                        math(String.raw`p(\vec f)\in D(\varphi)`), " を与える。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_free_orbit_support_edges_distinct_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対を含まない軌道列の台の辺の相異性" },
@@ -1715,7 +1819,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_fiber_phase_sums",
     targets: [
-      "claim_fully_unswitchable_contacts_witness_doubled_edges",
+      "def_kac_ward_determinants",
       "def_permutation_path_reversal",
     ],
     title: { text: "三分類の部分和はファイバー単位では選択和に一致しない" },
@@ -1750,7 +1854,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_splice_reduction_counterexample",
-    targets: ["claim_fully_unswitchable_contacts_witness_doubled_edges"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "反転対の二方向を巡回から抜く縮約候補は非後退性を保たない" },
     body: [
       paragraph([
@@ -1807,7 +1911,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_same_support_aggregation",
-    targets: ["claim_fully_unswitchable_contacts_witness_doubled_edges"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "台固定の集約でも三分類の部分和は消えない（全分解の実現は成立）" },
     body: [
       paragraph([
@@ -1838,7 +1942,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_sum_character_evaluation_fiber_phase_part_vanishing",
     targets: [
       "claim_selection_sum_character_evaluation",
-      "claim_fully_unswitchable_contacts_witness_doubled_edges",
+      "def_kac_ward_determinants",
     ],
     title: { text: "文字による消滅は三分類の各部分ごとに成立する（一辺二の全数観察）" },
     body: [

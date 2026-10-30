@@ -1121,56 +1121,31 @@ q
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          "四つとも、",
-                          ref("def_log_order_group_order"),
-                          " により ",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の同じ名前の性質へ落ちる。反対称律だけは、",
-                          math(String.raw`\mathbb Q`),
-                          " の元の等号から ",
-                          math(String.raw`\Lambda`),
-                          " の元の等号へ戻す一段を要する。",
-                        ]),
-                        paragraph([
-                          "反射律。",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\lambda)`),
-                          " は ",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の反射律であり、",
-                          ref("def_log_order_group_order"),
-                          " により ",
-                          math(String.raw`\lambda\le_{\Lambda}\lambda`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "推移律。仮定を ",
-                          ref("def_log_order_group_order"),
-                          " で読むと ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)`),
-                          " かつ ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\mu)\le\operatorname{rat}_{\Lambda}(\nu)`),
-                          " であり、",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の推移律から ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\nu)`),
-                          "、すなわち ",
-                          math(String.raw`\lambda\le_{\Lambda}\nu`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "反対称律。仮定を ",
-                          ref("def_log_order_group_order"),
-                          " で読むと ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)`),
-                          " かつ ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\mu)\le\operatorname{rat}_{\Lambda}(\lambda)`),
-                          " であり、",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の反対称律から ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)=\operatorname{rat}_{\Lambda}(\mu)`),
-                          " である。すると",
-                        ]),
+                        paragraph(["反射律。", ref("def_log_order_group_order"), " と ", math(String.raw`\mathbb Q`), " の順序の反射律から"]),
+                        displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\lambda)
+\qquad(\because\ \mathbb Q\text{ の順序の反射律})`),
+                        displayMath(String.raw`\lambda\le_{\Lambda}\lambda
+\qquad(\because\ \blkref{def_log_order_group_order}\text{ と直前の有理数の不等式})`),
+                        paragraph(["推移律。", math(String.raw`\lambda\le_{\Lambda}\mu`), " と ", math(String.raw`\mu\le_{\Lambda}\nu`), " を仮定する。すると"]),
+                        displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\lambda)
+&\le\operatorname{rat}_{\Lambda}(\mu)
+&&(\because\ \blkref{def_log_order_group_order}\text{ と第一の仮定})\\
+&\le\operatorname{rat}_{\Lambda}(\nu)
+&&(\because\ \blkref{def_log_order_group_order}\text{ と第二の仮定})
+\end{aligned}`),
+                        displayMath(String.raw`\lambda\le_{\Lambda}\nu
+\qquad(\because\ \mathbb Q\text{ の順序の推移律と }\blkref{def_log_order_group_order})`),
+                        paragraph(["反対称律。", math(String.raw`\lambda\le_{\Lambda}\mu`), " と ", math(String.raw`\mu\le_{\Lambda}\lambda`), " を仮定する。すると"]),
+                        displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\lambda)
+&\le\operatorname{rat}_{\Lambda}(\mu)
+&&(\because\ \blkref{def_log_order_group_order}\text{ と第一の仮定})\\
+&\le\operatorname{rat}_{\Lambda}(\lambda)
+&&(\because\ \blkref{def_log_order_group_order}\text{ と第二の仮定})
+\end{aligned}`),
+                        displayMath(String.raw`\operatorname{rat}_{\Lambda}(\lambda)=\operatorname{rat}_{\Lambda}(\mu)
+\qquad(\because\ \mathbb Q\text{ の順序の反対称律})`),
                         displayMath(String.raw`\begin{aligned}
 \lambda
 &=\log\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)
@@ -1180,31 +1155,16 @@ q
 &=\mu
 &&(\because\ \blkref{claim_rational_log_surjective})
 \end{aligned}`),
-                        paragraph([
-                          "である。",
-                        ]),
-                        paragraph([
-                          "比較可能性。",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の比較可能性から ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)`),
-                          " または ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}(\mu)\le\operatorname{rat}_{\Lambda}(\lambda)`),
-                          " が成り立ち、",
-                          ref("def_log_order_group_order"),
-                          " により ",
-                          math(String.raw`\lambda\le_{\Lambda}\mu`),
-                          " または ",
-                          math(String.raw`\mu\le_{\Lambda}\lambda`),
-                          " である。",
-                        ]),
-                        paragraph([
-                          "使ったのは ",
-                          math(String.raw`\mathbb Q`),
-                          " の順序の四つの性質と、対数が ",
-                          math(String.raw`\operatorname{rat}_{\Lambda}`),
-                          " を元へ戻すことだけであり、実数体は現れない。",
-                        ]),
+                        paragraph(["比較可能性。", math(String.raw`\mathbb Q`), " の順序の比較可能性から、次の二場合のいずれかである。"]),
+                        displayMath(String.raw`\begin{aligned}
+\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)
+&\Longrightarrow\lambda\le_{\Lambda}\mu
+&&(\because\ \blkref{def_log_order_group_order})\\
+\operatorname{rat}_{\Lambda}(\mu)\le\operatorname{rat}_{\Lambda}(\lambda)
+&\Longrightarrow\mu\le_{\Lambda}\lambda
+&&(\because\ \blkref{def_log_order_group_order})
+\end{aligned}`),
+                        paragraph(["使ったのは有理数の順序と可算な対数順序群の演算だけであり、実数体は現れない。"]),
                       ],
                     },
                 },
@@ -79059,139 +79019,6 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         "なので、この部分集合にわたる有限和は零である。", ref("def_fiber_phase_weight"),
                         " の有限和を冒頭の互いに素な合併で分け、この零和を除けば主張の等式を得る。",
                         "全過程は有限集合の分割と代数的数の有限加法だけで閉じる。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_fully_unswitchable_residual_subset",
-              labels: [],
-              title: { text: "全接触対が切り替え不能な残余" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
-                      id: "kac_ward_definition_fully_unswitchable_residual_subset",
-                      kind: "definition",
-                      title: { text: "全接触対が切り替え不能な残余の集合" },
-                      labels: ["def_fully_unswitchable_residual_subset"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          "有限集合 ", math(String.raw`\mathcal R_L^{\mathrm{lock}}`), " を",
-                        ]),
-                        displayMath(String.raw`\mathcal R_L^{\mathrm{lock}}
-:=\bigl\{\,\varphi\in\mathcal R_L\ \bigm|\
-\text{任意の }\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)\text{ は切り替え可能でない}\,\bigr\}`),
-                        paragraph([
-                          "と定める。残余の集合 ", math(String.raw`\mathcal R_L`), " は ",
-                          ref("def_unswitchable_standard_pair_subset"), "、接触対の集合は ",
-                          ref("def_standard_contact_pair"), "、切り替え可能性は ",
-                          ref("def_switchable_permutation_contact_pair"), " で定めた。所属は有限集合上の全称命題として判定でき、",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges",
-                    kind: "claim",
-                    title: { text: "完全に切り替え不能な残余の各接触は反転対の辺を指し示す" },
-                    labels: ["claim_fully_unswitchable_contacts_witness_doubled_edges"],
-                    habitat: "N",
-                    verification: ["sagemath/check/fully-unswitchable-contacts-witness-doubled-edges"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\ge2`), "、",
-                        math(String.raw`\varphi\in\mathcal R_L^{\mathrm{lock}}`), " とし、任意の接触対 ",
-                        math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`), " を取る。このとき",
-                      ]),
-                      displayMath(String.raw`p(\vec e)\in D(\varphi)\quad\text{または}\quad p(\vec f)\in D(\varphi)`),
-                      paragraph([
-                        "が成り立つ。台の辺への射影 ", math(String.raw`p`), " は ", ref("def_oriented_edges"),
-                        "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"),
-                        " で定めた。したがって完全に切り替え不能な残余では、接触対を一つ選ぶたびに、",
-                        "その二辺の少なくとも一方が反転対として動いている。全て有限集合の元と部分集合の比較だけで閉じる。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        ref("def_fully_unswitchable_residual_subset"), " により ",
-                        math(String.raw`\{\vec e,\vec f\}`), " は切り替え可能でない。",
-                        ref("claim_contact_pair_switchability_criterion"), " により、四つの等式",
-                      ]),
-                      displayMath(String.raw`\varphi(\vec f)=\iota(\vec e),\qquad
-\varphi(\vec e)=\iota(\vec f),\qquad
-\varphi(\vec f)=\vec e,\qquad
-\varphi(\vec e)=\vec f`),
-                      paragraph([
-                        "の少なくとも一つが成り立つ。ここで ", math(String.raw`\iota`), " は ",
-                        ref("def_edge_reversal"), " で定めた。",
-                      ]),
-                      paragraph([
-                        "任意の向き付き辺 ", math(String.raw`\vec g=(g,d)\in\vec E_L`),
-                        " について、", ref("def_boundary_maps"), " の二端点は行番号または列番号が ",
-                        math(String.raw`\bar1`), " だけ異なる。", math(String.raw`L\ge2`), " では ",
-                        math(String.raw`1`), " は ", math(String.raw`L`), " の倍数でないので ",
-                        math(String.raw`\bar1\ne\bar0`), "（", ref("def_residue_addition_notation"), "）である。よって ",
-                        ref("def_oriented_edge_endpoints"), " により ",
-                        math(String.raw`\operatorname{src}(\vec g)\ne\operatorname{tgt}(\vec g)`), " である。",
-                      ]),
-                      paragraph([
-                        "もし ", math(String.raw`\varphi(\vec f)=\vec e`), " なら、接触対の定義（",
-                        ref("def_standard_contact_pair"), "）により ", math(String.raw`\vec f\in M(\varphi)`),
-                        " である。したがって ", ref("def_nonbacktracking_permutations"), " と ",
-                        ref("def_nonbacktracking_successors"), " により ",
-                        math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`), " である。",
-                        "仮定の等式と接触の等式を代入すると",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{src}(\vec e)
-&=\operatorname{src}(\varphi(\vec f))
-&&\bigl(\because\ \varphi(\vec f)=\vec e\bigr)\\
-&=\operatorname{tgt}(\vec f)
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
-&=\operatorname{tgt}(\vec e)
-&&\bigl(\because\ \blkref{def_standard_contact_pair}\text{ の接触の等式}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "となり、前段の端点相異に反する。よって ", math(String.raw`\varphi(\vec f)\ne\vec e`),
-                        " である。", math(String.raw`\vec e`), " と ", math(String.raw`\vec f`),
-                        " を入れ替えた同じ論法により ", math(String.raw`\varphi(\vec e)\ne\vec f`), " である。",
-                      ]),
-                      paragraph([
-                        "したがって反転像による障害 ",
-                        math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " または ",
-                        math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " が成り立つ。第一の場合、もし ",
-                        math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"),
-                        " により次の式鎖を得る。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\varphi(\iota(\vec e))
-&=\iota(\vec e)
-&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)\\
-&=\varphi(\vec f)
-&&\bigl(\because\ \varphi(\vec f)=\iota(\vec e)\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "置換の単射性（", ref("def_row_permutation"), "）から ",
-                        math(String.raw`\iota(\vec e)=\vec f`), "、従って ",
-                        math(String.raw`\varphi(\vec f)=\vec f`), " となり ",
-                        math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
-                        math(String.raw`\vec e,\iota(\vec e)\in M(\varphi)`), " であり、",
-                        ref("def_doubled_edge_set"), " により ", math(String.raw`p(\vec e)\in D(\varphi)`),
-                        " である。第二の場合も二辺を入れ替えた同じ論法により ",
-                        math(String.raw`p(\vec f)\in D(\varphi)`), " を与える。",
                       ]),
                     ],
                   },

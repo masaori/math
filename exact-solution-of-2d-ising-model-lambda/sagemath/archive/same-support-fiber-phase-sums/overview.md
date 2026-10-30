@@ -8,7 +8,7 @@
 あわせて、台の分解 $F=D\sqcup E$（$E$ は偶）のうち置換が一つも無い分解で選択和 $U$ が
 零になるか（ファイバー単位の一致 $\mathcal K=\mathcal U$ が空のファイバーで破れないか）も確かめる。
 
-- 実行: `sage sagemath/check/same-support-fiber-phase-sums/check.sage`
+- 実行: `sage sagemath/archive/same-support-fiber-phase-sums/check.sage`
 - 状態: PASS（2026-09-03。実行 5 分 24 秒）
 - 方法: 有限集合の数え上げと $\mathbb Q(\zeta_8)$ の等号だけ。浮動小数点は使わない。
 - 結果: 台は $104$ 個、四スピン構造で $416$ 組。**置換の無い分解は $0$ 組**であり、

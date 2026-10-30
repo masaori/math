@@ -8,7 +8,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/fully-unswitchable-contacts-witness-doubled-edges/check.sage")
+load("sagemath/archive/fully-unswitchable-contacts-witness-doubled-edges/check.sage")
 
 
 def splice_out_doubled_edge(phi, base):

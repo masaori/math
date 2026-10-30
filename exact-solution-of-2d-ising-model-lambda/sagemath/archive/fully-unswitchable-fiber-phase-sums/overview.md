@@ -8,7 +8,7 @@ $S_Z, S_X, S_Y$ へ分け、選択和 $U$ と比較する。$D$ を縮約する�
 各部分和がファイバー単位で零（または $U$）になるなら固定ファイバー内の対合で足りるが、
 ならないならファイバーを跨ぐ構成が必要になる。
 
-- 実行: `sage sagemath/check/fully-unswitchable-fiber-phase-sums/check.sage`
+- 実行: `sage sagemath/archive/fully-unswitchable-fiber-phase-sums/check.sage`
 - 状態: PASS（2026-09-02）
 - 方法: 有限集合の数え上げと $\mathbb Q(\zeta_8)$ の等号だけ。浮動小数点は使わない。
 - 結果: 全 $609$ ファイバー×四スピン構造の $2{,}436$ 組で $S_Z+S_X+S_Y=U$ は成立した

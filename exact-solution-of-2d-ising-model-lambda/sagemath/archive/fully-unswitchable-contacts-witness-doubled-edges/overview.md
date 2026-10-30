@@ -7,7 +7,7 @@
 後者の各接触対について、像が他方自身になる障害は起こらず、反転像による障害が
 接触対の少なくとも一方の台の辺を $D(\varphi)$ に入れることを厳密に検査する。
 
-- 実行: `sage sagemath/check/fully-unswitchable-contacts-witness-doubled-edges/check.sage`
+- 実行: `sage sagemath/archive/fully-unswitchable-contacts-witness-doubled-edges/check.sage`
 - 状態: PASS（2026-09-02）
 - 結果: 一辺 $L=2$ の残余を、別の切り替え可能な接触対を持つ $17{,}925$ 個と、
   全接触対が切り替え不能な $830$ 個へ分類した。後者の全接触対について、

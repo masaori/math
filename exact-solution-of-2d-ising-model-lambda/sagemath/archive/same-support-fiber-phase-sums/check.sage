@@ -17,7 +17,7 @@
 計算は ZZ と Q(zeta8) の等号だけで行い、浮動小数点は使わない。
 """
 
-load("sagemath/check/fully-unswitchable-fiber-phase-sums/check.sage")
+load("sagemath/archive/fully-unswitchable-fiber-phase-sums/check.sage")
 
 support_groups = {}
 for (doubled, single), fiber in all_fibers.items():
