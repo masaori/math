@@ -28423,18 +28423,18 @@ const chapter_algebraic_eigenvalue = defineSection({
                         ]),
                         paragraph([
                           math(String.raw`s`),
-                          " が空のとき、左辺は ",
-                          math(String.raw`\mathrm{ev}_{\xi,z}`),
-                          " が ",
-                          math(String.raw`\mathbb{Z}[x][t]`),
-                          " の単位元へ与える値、右辺は ",
-                          math(String.raw`\overline{\mathbb{Q}}`),
-                          " の単位元 ",
-                          math(String.raw`1`),
-                          " であり、",
-                          ref("def_second_evaluation"),
-                          " が単位元を単位元へ送ることから両者は等しい（空の積は単位元である）。",
+                          " が空のとき、空の積はそれぞれの環の単位元である。したがって",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathrm{ev}_{\xi,z}\Bigl(\textstyle\prod_{i\in\varnothing}f_i\Bigr)
+&=\mathrm{ev}_{\xi,z}(1)
+&&\bigl(\because\ \mathbb{Z}[x][t]\text{ の空の積は単位元}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{def_second_evaluation}\text{ は単位元を単位元へ送る}\bigr)\\
+&=\prod_{i\in\varnothing}\mathrm{ev}_{\xi,z}(f_i)
+&&\bigl(\because\ \overline{\mathbb{Q}}\text{ の空の積は単位元}\bigr)
+\end{aligned}`),
+                        paragraph(["この等式には ", ref("def_second_evaluation"), " を使った。"]),
                         paragraph([
                           math(String.raw`s`),
                           " について主張が成り立つとし、",
