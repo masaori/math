@@ -745,17 +745,17 @@ v_p(a)-v_p(b)
                         displayMath(String.raw`\begin{aligned}
 v_p(ab')
 &=v_p(a)+v_p(b')
-&&(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性})\\
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性}\bigr)\\
 &=\bigl(w_p(q)+v_p(b)\bigr)+v_p(b')
-&&(\because\ \blkref{def_rational_log}\text{ の }w_p(q)=v_p(a)-v_p(b)\text{ を移項})\\
+&&\bigl(\because\ \blkref{def_rational_log}\text{ の }w_p(q)=v_p(a)-v_p(b)\text{ を移項}\bigr)\\
 &=\bigl(w_p(q')+v_p(b)\bigr)+v_p(b')
-&&(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\text{。}\blkref{def_rational_log})\\
+&&\bigl(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\text{。}\blkref{def_rational_log}\bigr)\\
 &=\bigl(v_p(a')-v_p(b')+v_p(b)\bigr)+v_p(b')
-&&(\because\ \blkref{def_rational_log}\text{ の }w_p(q')=v_p(a')-v_p(b'))\\
+&&\bigl(\because\ \blkref{def_rational_log}\text{ の }w_p(q')=v_p(a')-v_p(b')\bigr)\\
 &=v_p(a')+v_p(b)
-&&(\because\ \mathbb{Z}\text{ の加法の結合則・可換則と }-v_p(b')+v_p(b')=0)\\
+&&\bigl(\because\ \mathbb{Z}\text{ の加法の結合則・可換則と }-v_p(b')+v_p(b')=0\bigr)\\
 &=v_p(a'b)
-&&(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性})
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ の指数の加法性}\bigr)
 \end{aligned}`),
                         paragraph([
                           "この等式はすべての素数 ",
@@ -769,11 +769,11 @@ v_p(ab')
                         displayMath(String.raw`\begin{aligned}
 ab'
 &=\prod_{p:\ v_p(ab')\ne0}p^{\,v_p(ab')}
-&&(\because\ \blkref{def_prime_exponent}\text{ の有限積表示})\\
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ の有限積表示}\bigr)\\
 &=\prod_{p:\ v_p(a'b)\ne0}p^{\,v_p(a'b)}
-&&(\because\ \text{上で示した }v_p(ab')=v_p(a'b)\text{（すべての }p\text{）})\\
+&&\bigl(\because\ \text{上で示した }v_p(ab')=v_p(a'b)\text{（すべての }p\text{）}\bigr)\\
 &=a'b
-&&(\because\ \blkref{def_prime_exponent}\text{ の有限積表示})
+&&\bigl(\because\ \blkref{def_prime_exponent}\text{ の有限積表示}\bigr)
 \end{aligned}`),
                         paragraph([
                           "最後に ",
@@ -783,15 +783,15 @@ ab'
                         displayMath(String.raw`\begin{aligned}
 q
 &=\frac{a}{b}
-&&(\because\ q\text{ の表示})\\
+&&\bigl(\because\ q\text{ の表示}\bigr)\\
 &=\frac{ab'}{bb'}
-&&(\because\ b'\ge1\text{ なので }b'\ne0\text{、}\mathbb{Q}\text{ の約分の逆})\\
+&&\bigl(\because\ b'\ge1\text{ なので }b'\ne0\text{、}\mathbb{Q}\text{ の約分の逆}\bigr)\\
 &=\frac{a'b}{bb'}
-&&(\because\ ab'=a'b)\\
+&&\bigl(\because\ ab'=a'b\bigr)\\
 &=\frac{a'}{b'}
-&&(\because\ b\ge1\text{ なので }b\ne0\text{、}\mathbb{Q}\text{ の約分})\\
+&&\bigl(\because\ b\ge1\text{ なので }b\ne0\text{、}\mathbb{Q}\text{ の約分}\bigr)\\
 &=q'
-&&(\because\ q'\text{ の表示})
+&&\bigl(\because\ q'\text{ の表示}\bigr)
 \end{aligned}`),
                         paragraph([
                           "以上は 1 以上の整数の指数の加法性と有限積表示、および有理数の四則だけからなり、",
