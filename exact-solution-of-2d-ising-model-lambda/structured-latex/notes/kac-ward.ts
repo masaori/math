@@ -7,6 +7,73 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_doubled_edge_free_fiber_phase_reduction_archived",
+    targets: ["def_fiber_phase_weight"],
+    title: { text: "不採用経路: 反転対の無いファイバーの位相寄与の簡約" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge2`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                        math(String.raw`E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。このとき ",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(\varnothing,E)
+&=\sum_{\substack{\varphi\in\mathcal N_L(\varnothing,E)\\N_{\mathrm{ct}}(\varphi)=0}}
+\mathcal W^{a,b}_L(\varphi)
++\sum_{\varphi\in\mathcal N_L(\varnothing,E)\cap\mathcal A_L^{(-4)}}
+\mathcal W^{a,b}_L(\varphi)\\
+&\quad+\sum_{\varphi\in\mathcal N_L(\varnothing,E)\cap\mathcal A_L^{(4)}}
+\mathcal W^{a,b}_L(\varphi)
+\end{aligned}`),
+                      paragraph([
+                        "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                        "、回転差が正負四である二集合は ", ref("def_standard_turning_difference_subsets"),
+                        " で定めた。全て有限集合上の有限和であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\mathcal N_L(\varnothing,E)`), " を取る。",
+                        math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " でなければ接触対を持つ。さらに ",
+                        math(String.raw`D(\varphi)=\varnothing`), " なので、",
+                        ref("claim_unswitchable_standard_pair_forces_doubled_edge"), " の対偶により標準接触対は切り替え可能であり、",
+                        math(String.raw`\varphi\in\mathcal A_L`), "（", ref("claim_standard_contact_smoothing_involution"),
+                        "）である。", ref("def_standard_turning_difference_subsets"), " により ",
+                        math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
+                        " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
+                        math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な合併である。したがって ",
+                        math(String.raw`\mathcal N_L(\varnothing,E)`), " は、主張の右辺に現れる三集合と ",
+                        math(String.raw`\mathcal N_L(\varnothing,E)\cap\mathcal B_L`),
+                        " の互いに素な合併である。",
+                      ]),
+                      paragraph([
+                        ref("claim_phase_reversing_standard_smoothing_involution"), " により、標準対平滑化 ",
+                        math(String.raw`S`), " は ", math(String.raw`\mathcal B_L`),
+                        " 上の不動点の無い対合であり、各ファイバーを保ち、位相寄与の符号を反転する。ゆえに ",
+                        math(String.raw`\mathcal N_L(\varnothing,E)\cap\mathcal B_L`),
+                        " も ", math(String.raw`S`), " で保たれ、その元は二元軌道 ",
+                        math(String.raw`\{\varphi,S(\varphi)\}`), " に互いに素に分かれる。各二元軌道について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L(S(\varphi))
+&=\mathcal W^{a,b}_L(\varphi)-\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&=0
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "なので、この部分集合にわたる有限和は零である。", ref("def_fiber_phase_weight"),
+                        " の有限和を冒頭の互いに素な合併で分け、この零和を除けば主張の等式を得る。",
+                        "全過程は有限集合の分割と代数的数の有限加法だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_doubled_edge_fiber_phase_reduction_archived",
     targets: ["def_unswitchable_standard_pair_subset"],
     title: { text: "不採用経路: 反転対を持つファイバーの位相寄与の簡約" },
@@ -48,7 +115,7 @@ export default defineNotes([
                       paragraph([
                         "仮定 ", math(String.raw`D\ne\varnothing`),
                         " は以下の議論では使わない。辺長が 2 以上の反転対の無いファイバーについては ",
-                        ref("claim_doubled_edge_free_fiber_phase_reduction"),
+                        "退避した「反転対の無いファイバーの位相寄与の簡約」",
                         " が第四の和の無い形を示している。本主張の議論自体は辺長 1 も扱う。",
                       ]),
                       paragraph([

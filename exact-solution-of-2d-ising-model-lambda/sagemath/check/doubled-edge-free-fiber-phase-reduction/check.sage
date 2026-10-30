@@ -1,6 +1,6 @@
 """反転対の無いファイバーで位相反転部分集合が相殺することを厳密検査する。
 
-対象: claim_doubled_edge_free_fiber_phase_reduction。
+対象: def_fiber_phase_weight。
 
 一辺 L=2 の全非後退置換を (D,E_1) のファイバーに分け、D が空の各ファイバーを
 接触なし、B_L、A_L^(-4)、A_L^(4) の四集合へ分類する。四つのスピン構造ごとに
