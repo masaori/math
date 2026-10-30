@@ -1,6 +1,8 @@
 # SageMath Check: 経路反転による位相寄与の共役
 
-**対象ラベル**: `claim_path_reversal_phase_conjugation`
+**対象ラベル**: `def_permutation_total_turning`
+
+元の主張と証明は参照用ノート「不採用経路: 経路反転による位相寄与の共役」に保存した。
 
 経路反転 $\mathcal T(\varphi)=\iota\circ\varphi^{-1}\circ\iota$ が、置換の各軌道を
 反転辺からなる逆順の軌道へ写し、位相寄与について
@@ -13,7 +15,7 @@ $$
 を満たすことを検査する。ここで $\Theta(\varphi)$ は動く辺上の一歩回転数の総和である。
 
 - 実行: `sage sagemath/check/path-reversal-phase-conjugation/check.sage`
-- 状態: PASS（2026-09-02）
+- 状態: PASS（2026-10-30）
 - 結果: 一辺 $L=2$ の非後退置換 $30{,}784$ 個と四つのスピン構造の全
   $123{,}136$ 件で等式を検査した。
 

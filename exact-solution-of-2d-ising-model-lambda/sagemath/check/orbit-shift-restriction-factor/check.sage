@@ -25,10 +25,7 @@
 # 走らせる範囲（打ち切りを隠さない）。
 #   軌道 O をすべて走らせる。L = 1,...,6 まで回す（本文の他の検証と範囲を揃えた）。
 
-import os
-
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
+load("sagemath/_shared/defs.sage")
 
 
 # def_second_polynomial_ring: ZZ[x] を係数環とする、もう 1 つの不定元 t の多項式環。

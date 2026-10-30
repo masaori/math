@@ -1,6 +1,6 @@
 """経路反転が位相寄与の回転位相指数を反転することを厳密検査する。
 
-対象: claim_path_reversal_phase_conjugation。
+対象: def_permutation_total_turning。元の主張と証明は参照用ノートに保存した。
 
 一辺 L=2 の全非後退置換と四つのスピン構造について、
 W(T(phi)) = zeta8^(-2 Theta(phi)) W(phi)
