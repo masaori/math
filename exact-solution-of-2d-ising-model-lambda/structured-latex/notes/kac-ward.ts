@@ -7,6 +7,76 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_phase_contribution_signed_rotation_power_archived",
+    targets: ["def_nonbacktracking_permutation_phase_contribution"],
+    title: { text: "不採用経路: 位相寄与の符号付き回転位相冪" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与を使う直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                          paragraph([
+                            "任意の ", math(String.raw`(a,b)\in\mathcal S`),
+                            "（", ref("def_spin_structures"), "）と ",
+                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                            "（", ref("def_nonbacktracking_permutations"), "）について、",
+                          ]),
+                          displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
+\in\{-1,1\}`),
+                          paragraph([
+                            "が成り立つ。位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                            "、一歩回転数の総和は ", ref("def_permutation_total_turning"),
+                            " で定めた。", math(String.raw`\zeta_8^4=-1`), " から ",
+                            math(String.raw`\zeta_8\ne0`), " なので、負の指数の冪は体 ",
+                            math(String.raw`\overline{\mathbb Q}`), " の逆元により定まる。",
+                            "とくに ", math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`), " である。",
+                          ]),
+      paragraph(["元の証明:"]),
+                          paragraph([
+                            "位相寄与を回転位相の冪へ書き直す。求めたい積から始めると",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{C\in\mathcal C(\varphi)}\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性で }-1\text{ の因子をまとめた}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}M^{a,b}_{\vec g,\varphi(\vec g)}
+&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ の非交和による有限積の分割}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\,
+\zeta_8^{\,\tau(\vec g,\varphi(\vec g))}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices},\ \blkref{claim_rotation_phase_as_turning_power}\text{（}\vec g\in M(\varphi)\text{ なら }\varphi(\vec g)\in\operatorname{Next}(\vec g)\text{）}\bigr)\\
+&=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\left(\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\right)
+\zeta_8^{\,\Theta(\varphi)}
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の並べ替えと指数法則、}\blkref{def_permutation_total_turning}\bigr)
+\end{aligned}`),
+                          paragraph([
+                            "である。両辺に ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
+                            " を掛けると（", math(String.raw`\zeta_8^4=-1`), " から ",
+                            math(String.raw`\zeta_8\ne0`), " なので逆元は存在する）、",
+                          ]),
+                          displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
+=(-1)^{\lvert\mathcal C(\varphi)\rvert}
+\prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)
+\qquad\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と指数法則}\bigr)`),
+                          paragraph([
+                            "右辺は ", math(String.raw`(-1)^{\lvert\mathcal C(\varphi)\rvert}\in\{-1,1\}`),
+                            " と、", ref("def_spin_structures"), " による ",
+                            math(String.raw`\varepsilon_{a,b}(\varphi(\vec g))\in\{-1,1\}`),
+                            " の有限個の積である。", math(String.raw`\{-1,1\}`),
+                            " は整数の積で閉じるので、右辺は ", math(String.raw`\{-1,1\}`),
+                            " に属する。とくに零でないから ",
+                            math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`),
+                            " である。全過程は有限集合上の有限積と ",
+                            math(String.raw`\overline{\mathbb Q}`),
+                            " の四則だけで閉じ、実数体も複素数体も現れない。",
+                          ]),
+    ],
+  },
+  {
     id: "note_kac_ward_even_subgraph_pair_stratified_count_archived",
     targets: ["def_even_subgraph_pair_fiber"],
     title: { text: "不採用経路: 偶部分グラフ順序対の母関数の層別" },
@@ -228,7 +298,7 @@ d_{E}(v)\bmod2
                       paragraph([
                         "不動点の加数を見る。", math(String.raw`\varphi\in F`), " を取り、",
                         math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}`),
-                        " と置くと、", ref("claim_phase_contribution_signed_rotation_power"),
+                        " と置くと、", "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」",
                         " により ", math(String.raw`s\in\{-1,1\}`), " であり、両辺に ",
                         math(String.raw`\zeta_8^{\Theta(\varphi)}`), " を掛けて ",
                         math(String.raw`\mathcal W^{a,b}_L(\varphi)=s\,\zeta_8^{\Theta(\varphi)}`),
@@ -285,7 +355,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                         "二元軌道の加数を見る。", math(String.raw`P=\{\varphi,\mathcal T(\varphi)\}\in\mathcal P`),
                         " を取り、上と同様に ",
                         math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}`),
-                        "（", ref("claim_phase_contribution_signed_rotation_power"), "）と置く。",
+                        "（", "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」", "）と置く。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \sum_{\psi\in P}\mathcal W^{a,b}_L(\psi)
@@ -1214,14 +1284,14 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "まず回転位相の冪 ", math(String.raw`\zeta_8^{-\Theta(\varphi)}`),
                         "（一歩回転数の総和は ", ref("def_permutation_total_turning"),
                         "）が ", math(String.raw`\{-1,1\}`), " に属することを示す。",
-                        ref("claim_phase_contribution_signed_rotation_power"), " により ",
+                        "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」", " により ",
                         math(String.raw`\mathcal W^{a,b}_L(\varphi)\ne0`), " なので、求めたい冪から始める。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \zeta_8^{-\Theta(\varphi)}
 &=\mathcal W^{a,b}_L(\varphi)^{-1}\cdot
 \Bigl(\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\Bigr)
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と結合則。}\mathcal W^{a,b}_L(\varphi)\ne0\text{ は }\blkref{claim_phase_contribution_signed_rotation_power}\bigr)\\
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と結合則。}\mathcal W^{a,b}_L(\varphi)\ne0\text{ は }\text{参照用ノート「位相寄与の符号付き回転位相冪」}\bigr)\\
 &=\mathcal W^{a,b}_L(\varphi)\cdot
 \Bigl(\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\Bigr)
 &&\bigl(\because\ \mathcal W^{a,b}_L(\varphi)\in\{-1,1\}\text{（}\blkref{claim_phase_contribution_sign_value}\text{）と }1^{-1}=1,\ (-1)^{-1}=-1\bigr)
@@ -1230,7 +1300,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "右辺は ", math(String.raw`\{-1,1\}`), " の元（",
                         ref("claim_phase_contribution_sign_value"), "）と ",
                         math(String.raw`\{-1,1\}`), " の元（",
-                        ref("claim_phase_contribution_signed_rotation_power"),
+                        "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」",
                         "）の積であり、", math(String.raw`\{-1,1\}`),
                         " は積で閉じるので、", math(String.raw`\zeta_8^{-\Theta(\varphi)}\in\{-1,1\}`),
                         " である。次に求めたい位相寄与から始める。",

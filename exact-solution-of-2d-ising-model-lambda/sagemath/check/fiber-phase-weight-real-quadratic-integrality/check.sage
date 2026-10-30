@@ -1,6 +1,6 @@
 """ファイバー位相和が Z + Z(zeta8 - zeta8^3) に属することを厳密検査する。
 
-対象: claim_phase_contribution_signed_rotation_power。
+対象: def_nonbacktracking_permutation_phase_contribution。符号付き回転位相冪は参照用ノートに保存した。
 ファイバー位相和の格子への所属は参照用ノートに退避した。
 
 一辺 L=2 の全非後退置換について、

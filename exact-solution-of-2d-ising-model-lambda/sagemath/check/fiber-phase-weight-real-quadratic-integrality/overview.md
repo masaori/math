@@ -1,8 +1,9 @@
 # SageMath Check: ファイバー位相和の実二次整数への所属
 
-**対象ラベル**: `claim_phase_contribution_signed_rotation_power`
+**対象ラベル**: `def_nonbacktracking_permutation_phase_contribution`
 
 ファイバー位相和の格子への所属は参照用ノート「不採用経路: ファイバー位相和の実二次整数への所属」に保存した。
+符号付き回転位相冪も参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」に保存した。
 
 一辺 $L=2$ の全非後退置換について、
 
