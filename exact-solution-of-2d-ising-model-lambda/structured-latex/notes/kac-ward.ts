@@ -7,6 +7,80 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selection_sum_signed_count_archived",
+    targets: ["def_signed_selection_sum"],
+    title: { text: "不採用経路: 選択和の符号付き数え上げ表示" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開と偶部分グラフ対の直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。選択 ",
+                        math(String.raw`C\in\mathcal C_L(D,E)`),
+                        "（", ref("def_even_subgraph_pair_fiber"), "）の符号指数を",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\vartheta^{a,b}_L(D,E;C)
+&:=(1+a)\varepsilon_{L,\mathrm h}(D\cup C)+(1+b)\varepsilon_{L,\mathrm v}(D\cup C)
++\varepsilon_{L,\mathrm h}(D\cup C)\varepsilon_{L,\mathrm v}(D\cup C)\\
+&\quad+(1+a)\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))+(1+b)\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))\\
+&\quad+\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))
+\ \in\ \mathbb Z
+\end{aligned}`),
+                      paragraph([
+                        "と書き（", ref("def_signed_selection_sum"),
+                        " の被加数の指数そのものである。巻き付き偶奇は ",
+                        ref("def_torus_winding_parities"), "）、有限集合",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal C^{+}_L(D,E;a,b)
+&:=\bigl\{\,C\in\mathcal C_L(D,E)\ \bigm|\ (-1)^{\vartheta^{a,b}_L(D,E;C)}=1\,\bigr\},\\
+\mathcal C^{-}_L(D,E;a,b)
+&:=\bigl\{\,C\in\mathcal C_L(D,E)\ \bigm|\ (-1)^{\vartheta^{a,b}_L(D,E;C)}=-1\,\bigr\}
+\end{aligned}`),
+                      paragraph(["を定める。このとき ", math(String.raw`\mathbb Z`), " の等式"]),
+                      displayMath(String.raw`\mathcal U^{a,b}_L(D,E)
+=\bigl\lvert\mathcal C^{+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal C^{-}_L(D,E;a,b)\bigr\rvert`),
+                      paragraph([
+                        "が成り立つ。選択和は ", ref("def_signed_selection_sum"),
+                        " で定めた（旧経路）。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。",
+                        ref("def_torus_winding_parities"), " により四つの巻き付き偶奇は ",
+                        math(String.raw`\{0,1\}\subset\mathbb N`), " に属するので、",
+                        math(String.raw`\vartheta^{a,b}_L(D,E;C)`), " は整数の有限和と有限積として ",
+                        math(String.raw`\mathbb Z`), " に属し、",
+                        math(String.raw`(-1)^{\vartheta^{a,b}_L(D,E;C)}\in\{-1,1\}`),
+                        " である。したがって ", math(String.raw`\mathcal C_L(D,E)`), " は ",
+                        math(String.raw`\mathcal C^{+}_L(D,E;a,b)`), " と ",
+                        math(String.raw`\mathcal C^{-}_L(D,E;a,b)`),
+                        " の互いに素な合併である（旧経路）。この非交和で有限和を分けると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
+&&\bigl(\because\ \blkref{def_signed_selection_sum}\text{ と指数の略記}\bigr)\\
+&=\sum_{C\in\mathcal C^{+}_L(D,E;a,b)}1
++\sum_{C\in\mathcal C^{-}_L(D,E;a,b)}(-1)
+&&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
+&=\bigl\lvert\mathcal C^{+}_L(D,E;a,b)\bigr\rvert
+-\bigl\lvert\mathcal C^{-}_L(D,E;a,b)\bigr\rvert
+&&\bigl(\because\ \text{有限集合上の定数和と }\mathbb Z\text{ の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "を得る。これで ", ref("claim_fiber_phase_integer_decomposition"),
+                        " の三つの符号付き数え上げと同じ形が選択和の側にも立ち、両者の同定は",
+                        "有限集合の元の個数の比較に帰着する。全過程は有限集合の分割と整数の有限和だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_winding_parity_symmetric_difference_archived",
     targets: ["def_torus_winding_parities"],
     title: { text: "不採用経路: 巻き付き偶奇の対称差加法性" },
@@ -342,7 +416,7 @@ export default defineNotes([
                       ]),
                       displayMath(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
                       paragraph([
-                        "であり、符号指数（", ref("claim_selection_sum_signed_count"), "）は ",
+                        "であり、符号指数（", "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", "）は ",
                         math(String.raw`\mathbb Z`), " の合同式",
                       ]),
                       displayMath(String.raw`\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)
@@ -433,7 +507,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &+(1+a)\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)+(1+b)\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
 +\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)\,\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
 \end{aligned}
-&&\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と準備の二つの合併の等式}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」}\text{ の符号指数の定義と準備の二つの合併の等式}\bigr)\\
 &\equiv\begin{aligned}[t]
 &(1+a)(\alpha_{\mathrm h}+h_{\mathrm h})+(1+b)(\alpha_{\mathrm v}+h_{\mathrm v})
 +(\alpha_{\mathrm h}+h_{\mathrm h})(\alpha_{\mathrm v}+h_{\mathrm v})\\
@@ -444,7 +518,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &\equiv\vartheta^{a,b}_L(D,E;C)
 +2\bigl((1+a)h_{\mathrm h}+(1+b)h_{\mathrm v}+h_{\mathrm h}h_{\mathrm v}\bigr)
 +(\alpha_{\mathrm h}+\beta_{\mathrm h})h_{\mathrm v}+(\alpha_{\mathrm v}+\beta_{\mathrm v})h_{\mathrm h}\pmod2
-&&\bigl(\because\ \text{展開して }\blkref{claim_selection_sum_signed_count}\text{ の六項をまとめる。}\mathbb Z\text{ の分配則}\bigr)\\
+&&\bigl(\because\ \text{展開して }\text{参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」}\text{ の六項をまとめる。}\mathbb Z\text{ の分配則}\bigr)\\
 &\equiv\vartheta^{a,b}_L(D,E;C)
 +(2\alpha_{\mathrm h}+e_{\mathrm h})h_{\mathrm v}+(2\alpha_{\mathrm v}+e_{\mathrm v})h_{\mathrm h}\pmod2
 &&\bigl(\because\ 2\text{ の倍数の消去と }\beta\equiv\alpha+e\text{ の二つの合同式}\bigr)\\
@@ -781,7 +855,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \end{cases}`),
       paragraph([
                         "が成り立つ。選択和と符号指数は ", ref("def_signed_selection_sum"), " と ",
-                        ref("claim_selection_sum_signed_count"), " で定めた。したがって選択和は有限集合の空性、",
+                        "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", " で定めた。したがって選択和は有限集合の空性、",
                         "巻き付き偶奇、有限集合の元数だけで決まり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -2105,7 +2179,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_selection_complement_sign_preserving_involution_archived",
-    targets: ["claim_selection_sum_signed_count"],
+    targets: ["def_signed_selection_sum"],
     title: { text: "不採用経路: 選択補集合の符号保存対合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択補集合の軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2125,7 +2199,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                         "が成り立つ。したがって ", math(String.raw`\kappa_{D,E}`), " は二つの符号別選択集合 ",
                         math(String.raw`\mathcal C^{+}_L(D,E;a,b)`), " と ", math(String.raw`\mathcal C^{-}_L(D,E;a,b)`),
                         " をそれぞれ保つ。さらに ", math(String.raw`E\ne\varnothing`), " なら不動点を持たない。選択集合と符号指数は ",
-                        ref("claim_selection_sum_signed_count"), " で定めた。全て有限辺集合の差・等号と整数の有限演算だけで判定でき、実数体も複素数体も現れない。",
+                        "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", " で定めた。全て有限辺集合の差・等号と整数の有限演算だけで判定でき、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
@@ -2151,7 +2225,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       ]),
                       displayMath(String.raw`\vartheta^{a,b}_L\bigl(D,E;\kappa_{D,E}(C)\bigr)
 =\vartheta^{a,b}_L(D,E;C)
-\qquad\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と }\mathbb Z\text{ の加法の可換性}\bigr)`),
+\qquad\bigl(\because\ \text{参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」}\text{ の符号指数の定義と }\mathbb Z\text{ の加法の可換性}\bigr)`),
                       paragraph([
                         "を得る。両辺を ", math(String.raw`(-1)`), " の指数に入れれば符号も等しいので、",
                         math(String.raw`\kappa_{D,E}`), " は正符号集合と負符号集合をそれぞれ保つ。最後に ",
@@ -2529,7 +2603,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         "が成り立つ。軌道族は ", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」",
                         "、三分類とその反転不変性は ", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」",
                         "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
-                        ref("claim_selection_sum_signed_count"), " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
+                        "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
@@ -2568,7 +2642,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
 \end{aligned}`),
                       paragraph([
                         "である。", math(String.raw`s=1`), " の等式から ", math(String.raw`s=-1`),
-                        " の等式を引き、", ref("claim_selection_sum_signed_count"),
+                        " の等式を引き、", "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」",
                         " を適用すると第二の等式を得る。どちらの重みも軌道の有限な元数であり、実数体も複素数体も現れない。",
                       ]),
     ],
@@ -3389,7 +3463,6 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_selection_sum_affine_character",
     targets: [
       "def_signed_selection_sum",
-      "claim_selection_sum_signed_count",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
