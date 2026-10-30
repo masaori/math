@@ -74,7 +74,6 @@ export const ALL_LABELS = [
   "claim_crossing_free_sign_counterexample",
   "claim_crossing_number_vertex_decomposition",
   "claim_cut_flag_congruence_start_recovery",
-  "claim_cut_flag_realizable_candidate_selection",
   "claim_cut_flag_two_coordinate_boundary_completeness",
   "claim_cut_realization_agrees_on_rationals",
   "claim_cut_realization_preserves_addition",

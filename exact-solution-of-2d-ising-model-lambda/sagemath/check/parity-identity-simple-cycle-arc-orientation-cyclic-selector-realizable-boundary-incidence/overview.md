@@ -2,11 +2,13 @@
 
 ## 対象
 
-**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`、`claim_cut_flag_realizable_candidate_selection`
+**対象ラベル**: `claim_kac_ward_determinant_fiber_stratified_phase_sum`
+
+旧対象 `claim_cut_flag_realizable_candidate_selection` は参照用ノート「不採用経路: 実現可能な切断候補の濾過」に退避した。
 
 - 帰属: 有限集合と整数の厳密演算。浮動小数点を使わない。
 - 一般の辺長についての命題ではない。
-- 実行日: 2026-09-18
+- 実行日: 2026-10-30
 - 結果: 成功。方向上連結する 1,036 入射から座標上実現不能な 385 入射を除くと、残る
   651 入射の記述は 94 種になり、選択順位が反対になる衝突は無かった。
 - 二候補の実現可能性は、候補 0 だけが 174 項、候補 1 だけが 153 項、両方が 162 項だった。

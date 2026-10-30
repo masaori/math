@@ -3,12 +3,13 @@
 ## 対象
 
 **対象ラベル**: `claim_cut_flag_congruence_start_recovery`、
-`claim_cut_flag_two_coordinate_boundary_completeness`、
-`claim_cut_flag_realizable_candidate_selection`
+`claim_cut_flag_two_coordinate_boundary_completeness`
+
+旧対象 `claim_cut_flag_realizable_candidate_selection` は参照用ノート「不採用経路: 実現可能な切断候補の濾過」に退避した。
 
 - 帰属: 有限集合と整数の厳密演算。浮動小数点を使わない。
 - 一般の辺長についての証明ではない。
-- 実行日: 2026-09-18
+- 実行日: 2026-10-30
 - 結果: 辺長二から四、語長一から四の非後戻り内部語について、方向列の累積変位と各頂点の
   切断旗が課す始点座標の合同条件を 13,920 系で解き、始点を全列挙する旧規則と完全に一致した。
   復元した行始点集合と列始点集合の直積が全座標列を尽くすことも 13,920 系で一致した。
