@@ -8472,7 +8472,10 @@ d&<p&&\bigl(\because\ d\le t\text{ と }t\in I_p\text{ の条件 }t<p\bigr).
 \sigma^{[d]}(i)&=i&&\bigl(\because\ \blkref{claim_finite_permutation_iterate_injective}\text{ を直前の等式に適用}\bigr),\\
 p&\le d&&\bigl(\because\ 0<d\text{ と帰還の等式、}\blkref{def_finite_permutation_minimal_period}\text{ の最小性}\bigr).
 \end{aligned}`),
-                paragraph(["これは先に得た ", math(String.raw`d<p`), " と矛盾する。したがって ", math(String.raw`r=t`), " であり、写像は単射である。", math(String.raw`\mathcal J=\varnothing`), " なら始点を取れず、主張は全称命題として成り立つ。有限集合と自然数回の反復だけを使い、実数体・複素数体への脱出はない。"]),
+                displayMath(String.raw`p\le d<p\qquad\bigl(\because\ \text{直前の }p\le d\text{ と先に得た }d<p\bigr)`),
+                paragraph(["これは自然数の大小に矛盾する。よって"]),
+                displayMath(String.raw`r=t\qquad\bigl(\because\ r\ne t\text{ から矛盾を導いた}\bigr)`),
+                paragraph(["であり、写像は単射である。", math(String.raw`\mathcal J=\varnothing`), " なら始点を取れず、主張は全称命題として成り立つ。有限集合と自然数回の反復だけを使い、実数体・複素数体への脱出はない。"]),
               ],
             },
           },
