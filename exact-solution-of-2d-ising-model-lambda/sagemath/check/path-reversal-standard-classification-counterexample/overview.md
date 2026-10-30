@@ -1,6 +1,9 @@
 # 経路反転で標準接触対に依存する分類は保たれない
 
-**対象ラベル**: `claim_path_reversal_contact_pair_preservation`, `def_standard_turning_difference_subsets`, `def_unswitchable_standard_pair_subset`
+**対象ラベル**: `def_standard_turning_difference_subsets`, `def_unswitchable_standard_pair_subset`
+
+旧対象 `claim_path_reversal_contact_pair_preservation` は参照用ノート「不採用経路: 経路反転と接触対の対応」に退避した。
+
 - 検証コード: `check.sage`
 - 方法: 一辺 $L=2$ の全非後退置換を、接触の無い部分・位相反転部分・標準対の回転差が $-4,4$ の二部分・残余へ分類し、経路反転の前後の分類を全数比較する。
 - 浮動小数点: 使用しない。

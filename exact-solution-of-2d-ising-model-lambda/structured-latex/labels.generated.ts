@@ -347,7 +347,6 @@ export const ALL_LABELS = [
   "claim_partition_value_dual_factorization",
   "claim_partition_value_ge_one_at_positive_rational",
   "claim_partition_value_upper_bound_at_positive_rational",
-  "claim_path_reversal_contact_pair_preservation",
   "claim_path_reversal_fiber_preserving_involution",
   "claim_path_reversal_phase_conjugation",
   "claim_perfect_matching_enumeration_complete",
