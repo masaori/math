@@ -90340,9 +90340,25 @@ f^{\mathrm{per}}(q)
                     math(String.raw`r=e^{-2K_q}`), " なので ",
                     math(String.raw`e^{2K_q}=r^{-1}`), "、",
                     math(String.raw`e^{-2K_q}=r`), " である。",
-                    "双曲線関数の定義に代入すると ",
-                    math(String.raw`\cosh(2K_q)=(r^{-1}+r)/2=c_q`), "、",
-                    math(String.raw`\sinh(2K_q)=(r^{-1}-r)/2=s_q`), " となる。",
+                    "双曲線関数の定義から、二つの式鎖を得る。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\cosh(2K_q)
+&=(e^{2K_q}+e^{-2K_q})/2
+&&\bigl(\because\ \cosh\text{ の定義}\bigr)\\
+&=(r^{-1}+r)/2
+&&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
+&=c_q
+&&\bigl(\because\ c_q\text{ の定義}\bigr),\\
+\sinh(2K_q)
+&=(e^{2K_q}-e^{-2K_q})/2
+&&\bigl(\because\ \sinh\text{ の定義}\bigr)\\
+&=(r^{-1}-r)/2
+&&\bigl(\because\ e^{2K_q}=r^{-1},\ e^{-2K_q}=r\bigr)\\
+&=s_q
+&&\bigl(\because\ s_q\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
                     "以下、", math(String.raw`B_q(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
                     " と略記する。", ref("claim_dispersion_algebraic_onsager_form"),
                     " と同じ有理式を、ここでは実数の余弦値について直接計算する。",
@@ -90384,6 +90400,88 @@ f^{\mathrm{per}}(q)
 &=\log_{\mathbb R}2+\log_{\mathbb R}r+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
 &&\bigl(\because\ \mathbb R\text{ の四則}\bigr).
 \end{aligned}`),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_dispersion_minimum_self_dual_point",
+              focus: {
+                id: "real_escape_claim_dispersion_minimum_self_dual_point",
+                kind: "claim",
+                title: { text: "分散因子の最小値は自己双対点で零になる" },
+                labels: ["claim_dispersion_minimum_self_dual_point"],
+                habitat: "R",
+                realEscape: "実数の角と余弦。実閉部分体の元を実現写像で実数へ送り、角に関する分散式の最小値を取る。零点の同定は実閉部分体の代数と順序へ戻す。",
+                verification: ["sagemath/check/dispersion-minimum-self-dual-point"],
+                statement: [
+                  paragraph([
+                    "任意の ", math(String.raw`\xi\in R`), "（", ref("def_real_closed_subfield"),
+                    "）で ", math(String.raw`0<_R\xi<_R1`), " を満たすものを取る。",
+                    "実現写像 ", ref("def_real_algebraic_cut_realization"), " により ",
+                    math(String.raw`r:=\rho_{R\to\mathbb R}(\xi)\in\mathbb R`), " と置く。",
+                    "実数の角 ", math(String.raw`\theta_1,\theta_2\in[0,2\pi]`), " に対する値を",
+                  ]),
+                  displayMath(String.raw`B_\xi(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
+                  paragraph(["と定める。このとき"]),
+                  displayMath(String.raw`\min_{(\theta_1,\theta_2)\in[0,2\pi]^2}B_\xi(\theta_1,\theta_2)=(1-2r-r^2)^2`),
+                  paragraph([
+                    "であり、最小値は ", math(String.raw`(\theta_1,\theta_2)=(0,0)`), " で達成する。",
+                    "最小値が零であることと ", math(String.raw`\xi=x_c`), "（", ref("def_critical_point"),
+                    "）は同値であり、この点では ", math(String.raw`\mathrm{KW}(\xi)=\xi`), " である。",
+                    "これは分散式の零条件であり、密度の非解析性は主張しない。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    ref("claim_cut_realization_preserves_addition"), "、",
+                    ref("claim_cut_realization_preserves_multiplication"), "、",
+                    ref("claim_cut_realization_agrees_on_rationals"), "、",
+                    ref("claim_cut_realization_preserves_strict_order"),
+                    " により ", math(String.raw`0<r<1`), " である。従って ",
+                    math(String.raw`2r(1-r^2)>0`), "。実余弦の上界 ",
+                    math(String.raw`\cos\theta_j\le1`), " を用いると、任意の角について",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+B_\xi(\theta_1,\theta_2)-(1-2r-r^2)^2
+&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)-(1-2r-r^2)^2
+&&\bigl(\because\ B_\xi\text{ の定義}\bigr)\\
+&=2r(1-r^2)\bigl((1-\cos\theta_1)+(1-\cos\theta_2)\bigr)
+&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
+&\ge0
+&&\bigl(\because\ 2r(1-r^2)>0\text{ と余弦の上界}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    math(String.raw`\cos0=1`), " なので角 ", math(String.raw`(0,0)`),
+                    " で等号が成り立ち、これが最小値である。実現写像の単射性と四則保存から",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(1-2r-r^2)^2=0
+&\iff 1-2r-r^2=0
+&&\bigl(\because\ \mathbb R\text{ は零因子を持たない}\bigr)\\
+&\iff 1-2\xi-\xi^2=0
+&&\bigl(\because\ \rho_{R\to\mathbb R}\text{ の単射性と四則保存}\bigr)\\
+&\iff \xi^2+2\xi-1=0
+&&\bigl(\because\ R\text{ の加法の逆元}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "後者の方程式の根は ", ref("claim_self_dual_quadratic_roots"),
+                    " により ", math(String.raw`-1+s`), " と ", math(String.raw`-1-s`),
+                    " である。", ref("def_critical_point"), " により ",
+                    math(String.raw`x_c=-1+s`), " であり、",
+                    ref("claim_critical_point_positive"), " から ", math(String.raw`0<_Rx_c`),
+                    " である。", math(String.raw`s=1+x_c`), " より ",
+                    math(String.raw`-1-s=-2-x_c<_R0`), " だから、",
+                    math(String.raw`0<_R\xi`), " の下では ", math(String.raw`\xi=x_c`),
+                    " に限る。逆向きは ", ref("def_critical_point"),
+                    " の二次方程式から従う。さらに ", math(String.raw`1+x_c=s\ne0`),
+                    " なので ", ref("claim_kw_self_dual_quadratic_equivalence"),
+                    " を ", math(String.raw`\xi=x_c`), " に適用でき、",
+                    math(String.raw`\mathrm{KW}(x_c)=x_c`), " を得る。",
+                  ]),
                 ],
               },
             },

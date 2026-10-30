@@ -94,6 +94,7 @@ export const ALL_LABELS = [
   "claim_dispersion_angle_realization",
   "claim_dispersion_inversion_invariant",
   "claim_dispersion_kw_duality",
+  "claim_dispersion_minimum_self_dual_point",
   "claim_dispersion_mode_product",
   "claim_dispersion_positive_at_rational_point",
   "claim_dispersion_positive_decomposition",
