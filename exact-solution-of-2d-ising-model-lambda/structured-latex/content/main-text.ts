@@ -90285,6 +90285,103 @@ f^{\mathrm{per}}(q)
               },
             },
           },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
+              id: "group_of_real_escape_claim_onsager_hyperbolic_integral_form",
+              focus: {
+                id: "real_escape_claim_onsager_hyperbolic_integral_form",
+                kind: "claim",
+                title: { text: "分散因子の積分の Onsager 表示への書換え" },
+                labels: ["claim_onsager_hyperbolic_integral_form"],
+                habitat: "R",
+                realEscape: "実対数と指数評価。代数的略記を実数の双曲線関数に読み替え、正の因子の実対数を積分から取り出す。",
+                verification: ["sagemath/check/onsager-hyperbolic-integral-form"],
+                statement: [
+                  paragraph([
+                    "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`), "）を取る。",
+                    ref("def_real_logarithm"), " の包含写像を使って ",
+                    math(String.raw`r:=\iota_{\mathbb Q\to\mathbb R}(q)\in\mathbb R_{>0}`),
+                    "、", math(String.raw`K_q:=-\tfrac12\log_{\mathbb R}r\in\mathbb R`), " と置く。",
+                    "さらに実数 ", math(String.raw`c_q:=(1+r^2)/(2r)`), "、",
+                    math(String.raw`s_q:=(1-r^2)/(2r)`), " を定める。",
+                    "この二つは ", ref("claim_dispersion_algebraic_onsager_form"),
+                    " の代数的略記を包含写像で送った値である。",
+                    "実数の双曲線関数を ",
+                    math(String.raw`\cosh t:=(e^t+e^{-t})/2`), "、",
+                    math(String.raw`\sinh t:=(e^t-e^{-t})/2`),
+                    " と定めると ", math(String.raw`c_q=\cosh(2K_q)`), "、",
+                    math(String.raw`s_q=\sinh(2K_q)`), " である。",
+                  ]),
+                  paragraph([
+                    "角 ", math(String.raw`\theta_1,\theta_2\in[0,2\pi]`), " に対して ",
+                    math(String.raw`H_q(\theta_1,\theta_2):=c_q^2-s_q(\cos\theta_1+\cos\theta_2)>0`),
+                    " と置く。正値性は ", ref("claim_dispersion_angle_log_continuous"),
+                    " と正の因子 ", math(String.raw`4r^2`), " から従う。",
+                    "周期境界の密度は次の Onsager 表示を持つ。",
+                  ]),
+                  displayMath(String.raw`f^{\mathrm{per}}(q)=\log_{\mathbb R}2+\log_{\mathbb R}r+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1.`),
+                  paragraph([
+                    "ここで ", math(String.raw`H_q`), " の ", math(String.raw`c_q,s_q`),
+                    " はそれぞれ ", math(String.raw`\cosh(2K_q),\sinh(2K_q)`),
+                    " と等しい。元の分配多項式の密度には ", math(String.raw`\log_{\mathbb R}r`),
+                    " が残る。",
+                  ]),
+                ],
+                proof: [
+                  paragraph([
+                    math(String.raw`r=e^{-2K_q}`), " なので ",
+                    math(String.raw`e^{2K_q}=r^{-1}`), "、",
+                    math(String.raw`e^{-2K_q}=r`), " である。",
+                    "双曲線関数の定義に代入すると ",
+                    math(String.raw`\cosh(2K_q)=(r^{-1}+r)/2=c_q`), "、",
+                    math(String.raw`\sinh(2K_q)=(r^{-1}-r)/2=s_q`), " となる。",
+                    "以下、", math(String.raw`B_q(\theta_1,\theta_2):=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)`),
+                    " と略記する。", ref("claim_dispersion_algebraic_onsager_form"),
+                    " と同じ有理式を、ここでは実数の余弦値について直接計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+B_q(\theta_1,\theta_2)
+&=(1+r^2)^2-2r(1-r^2)(\cos\theta_1+\cos\theta_2)
+&&\bigl(\because\ B_q\text{ の定義}\bigr)\\
+&=4r^2\left(\frac{(1+r^2)^2}{4r^2}-\frac{1-r^2}{2r}(\cos\theta_1+\cos\theta_2)\right)
+&&\bigl(\because\ r>0\text{ と実数の四則}\bigr)\\
+&=4r^2H_q(\theta_1,\theta_2)
+&&\bigl(\because\ c_q,s_q,H_q\text{ の定義}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+\log_{\mathbb R}(4r^2)
+&=\log_{\mathbb R}4+\log_{\mathbb R}(r^2)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則と }r>0\bigr)\\
+&=\log_{\mathbb R}(2^2)+\log_{\mathbb R}(r^2)
+&&\bigl(\because\ 4=2^2\bigr)\\
+&=2\log_{\mathbb R}2+\log_{\mathbb R}(r^2)
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則}\bigr)\\
+&=2\log_{\mathbb R}2+2\log_{\mathbb R}r
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の積法則}\bigr).
+\end{aligned}`),
+                  displayMath(String.raw`\begin{aligned}
+f^{\mathrm{per}}(q)
+&=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}B_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \blkref{theorem_periodic_density_onsager_integral}\bigr)\\
+&=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}(4r^2H_q(\theta_1,\theta_2))\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \text{直前の実数上の恒等式 }B_q=4r^2H_q\bigr)\\
+&=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\bigl(\log_{\mathbb R}(4r^2)+\log_{\mathbb R}H_q(\theta_1,\theta_2)\bigr)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ 4r^2>0,\ H_q>0\text{ と }\blkref{def_real_logarithm}\text{ の積法則}\bigr)\\
+&=\frac{4\pi^2}{8\pi^2}\log_{\mathbb R}(4r^2)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \text{積分の線型性と長方形の面積 }(2\pi)^2=4\pi^2\bigr)\\
+&=\tfrac12\log_{\mathbb R}(4r^2)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr)\\
+&=\tfrac12\bigl(2\log_{\mathbb R}2+2\log_{\mathbb R}r\bigr)+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \text{直前の実対数の式鎖}\bigr)\\
+&=\log_{\mathbb R}2+\log_{\mathbb R}r+\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi}\log_{\mathbb R}H_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1
+&&\bigl(\because\ \mathbb R\text{ の四則}\bigr).
+\end{aligned}`),
+                ],
+              },
+            },
+          },
         ],
       },
     },
