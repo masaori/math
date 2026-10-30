@@ -90236,10 +90236,16 @@ f^{\mathrm{per}}(q)
                     " により四つの列 ", math(String.raw`u_{L,a,b}`), " はいずれも ",
                     math(String.raw`I_q`), " に収束する。有限集合上の最大値は各成分の共通極限へ収束するから ",
                     math(String.raw`v_L\to I_q`), " である。",
-                    ref("claim_cut_realization_agrees_on_rationals"),
-                    " により四つの有理数値は実現後も変わらず、実対数の単調性から ",
-                    math(String.raw`v_L=L^{-2}\log_{\mathbb R}M_L^{\mathrm{abs}}(q)`), " である。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+v_L
+&=\max_{(a,b)\in\mathcal S}L^{-2}\log_{\mathbb R}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
+&&\bigl(\because\ v_L,u_{L,a,b}\text{ の定義}\bigr)\\
+&=L^{-2}\log_{\mathbb R}\max_{(a,b)\in\mathcal S}|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))|
+&&\bigl(\because\ L^{-2}>0\text{、実対数の単調性。}\blkref{def_real_logarithm}\bigr)\\
+&=L^{-2}\log_{\mathbb R}M_L^{\mathrm{abs}}(q)
+&&\bigl(\because\ \blkref{claim_cut_realization_agrees_on_rationals}\text{ と }\blkref{claim_partition_log_order_bounds}\text{ の最大値の定義}\bigr).
+\end{aligned}`),
                   paragraph([
                     ref("claim_partition_log_order_bounds"), " の鎖を ",
                     ref("claim_rational_embedded_log_order_iff"), " で埋め込み、",
