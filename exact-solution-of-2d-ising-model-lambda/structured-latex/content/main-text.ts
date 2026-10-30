@@ -649,15 +649,15 @@ v_p(a)-v_p(b)
                         displayMath(String.raw`\begin{aligned}
 \bigl(\log(q^{0})\bigr)(p)
 &=\bigl(\log 1\bigr)(p)
-&&(\because\ q^{0}=1)\\
+&&\bigl(\because\ q^{0}=1\bigr)\\
 &=w_p(1)
-&&(\because\ \blkref{def_rational_log})\\
+&&\bigl(\because\ \blkref{def_rational_log}\bigr)\\
 &=v_p(1)-v_p(1)
-&&(\because\ 1=1/1)\\
+&&\bigl(\because\ 1=1/1\bigr)\\
 &=0
-&&(\because\ \mathbb{Z}\text{ の減法})\\
+&&\bigl(\because\ \mathbb{Z}\text{ の減法}\bigr)\\
 &=\bigl(0\cdot\log q\bigr)(p)
-&&(\because\ \Lambda\ \text{の整数倍の定義})
+&&\bigl(\because\ \Lambda\ \text{の整数倍の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "であり、両辺は ",
@@ -671,13 +671,13 @@ v_p(a)-v_p(b)
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(q^{\,k+1}\bigr)
 &=\log\bigl(q^{\,k}\cdot q\bigr)
-&&(\because\ \text{冪の定義})\\
+&&\bigl(\because\ \text{冪の定義}\bigr)\\
 &=\log\bigl(q^{\,k}\bigr)+\log q
-&&(\because\ \blkref{claim_log_additive}\text{、}q^{\,k},q\in\mathbb{Q}_{>0})\\
+&&\bigl(\because\ \blkref{claim_log_additive}\text{、}q^{\,k},q\in\mathbb{Q}_{>0}\bigr)\\
 &=k\,\log q+\log q
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=(k+1)\,\log q
-&&(\because\ \Lambda\ \text{の整数倍の定義と }\mathbb{Z}\ \text{の分配則})
+&&\bigl(\because\ \Lambda\ \text{の整数倍の定義と }\mathbb{Z}\ \text{の分配則}\bigr)
 \end{aligned}`),
                         paragraph([
                           "となる。したがって k=0 の場合と合わせて、すべての ",
