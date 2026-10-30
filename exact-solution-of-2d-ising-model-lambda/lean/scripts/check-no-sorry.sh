@@ -2320,9 +2320,6 @@ targets=(
   Ising2DLambda.KacWard.reversalFreeOrbitSupportEdges_distinct
   Ising2DLambda.NecSuf.KacWard.invariant_elimination_by_splitting_necSuf
   Ising2DLambda.KacWard.reversalFreeOrbit_vertexSimpleDecomposition
-  Ising2DLambda.NecSuf.KacWard.two_support_coefficient_formula_necSuf
-  Ising2DLambda.KacWard.twoSupportCoefficientFormula
-  Ising2DLambda.KacWard.twoSupportCoefficientFormula_from_necSuf
   Ising2DLambda.Tools.integerSequence_levelCrossing
   Ising2DLambda.NecSuf.Tools.adjacent_difference_sum_necSuf
   Ising2DLambda.Tools.integerSequence_levelCrossing_from_necSuf

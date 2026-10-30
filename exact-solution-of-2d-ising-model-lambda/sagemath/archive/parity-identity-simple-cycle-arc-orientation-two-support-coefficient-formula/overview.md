@@ -18,5 +18,7 @@ $1+1=0$ で相殺する。残る 624 軌道について、「二つの軌道係�
 ## 実行方法
 
 ```sh
-sage sagemath/check/parity-identity-simple-cycle-arc-orientation-two-support-coefficient-formula/check.sage
+sage sagemath/archive/parity-identity-simple-cycle-arc-orientation-two-support-coefficient-formula/check.sage
 ```
+
+この検算は、Pfaffian 経路を採用したため本文から退避した主張の有限標本を保存する。

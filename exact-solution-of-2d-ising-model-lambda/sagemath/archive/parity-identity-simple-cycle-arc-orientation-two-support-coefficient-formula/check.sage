@@ -110,7 +110,7 @@ certificate = {
     "formula": "(endpoint orbit coefficient + step-endpoint orbit coefficient) at the shared selected cut",
 }
 output_path = Path(
-    "sagemath/check/"
+    "sagemath/archive/"
     "parity-identity-simple-cycle-arc-orientation-two-support-coefficient-formula/"
     "certificate.json")
 output_path.write_text(
