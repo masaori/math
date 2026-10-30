@@ -7,6 +7,94 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_reversal_free_orbit_support_edges_distinct_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 反転対を含まない軌道列の台の辺の相異性" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道を使う直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), " とし、非後退置換 ",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"),
+                        "）を取る。任意の ", math(String.raw`\vec f\in M(\varphi)`),
+                        " について ", math(String.raw`\iota(\vec f)\notin M(\varphi)`),
+                        " が成り立つ（動く辺の集合が反転対を含まない。動く辺の集合 ",
+                        math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
+                        "、反転写像 ", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
+                        "）と仮定する。", math(String.raw`\vec e\in M(\varphi)`), " を取り、",
+                        math(String.raw`r:=r_{\varphi}(\vec e)`), "（",
+                        ref("def_permutation_minimal_return"), "）と置き、軌道列 ",
+                        math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
+                        ref("def_permutation_orbit_sequence"), "）の第 ", math(String.raw`k`),
+                        " 項（", math(String.raw`1\le k\le r`), "）を ",
+                        math(String.raw`\varphi^{\circ(k-1)}(\vec e)=(e_k,d_k)\in\vec E_L`),
+                        " と書く（", ref("def_oriented_edges"), "）。このとき、任意の ",
+                        math(String.raw`j,k\in\mathbb N`), "、",
+                        math(String.raw`1\le j\le r`), "、", math(String.raw`1\le k\le r`),
+                        " について、", math(String.raw`e_j=e_k`), " ならば ",
+                        math(String.raw`j=k`),
+                        " である（軌道列の台の辺が相異なる）。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "準備。", ref("def_nonbacktracking_permutations"), " により ",
+                        math(String.raw`\varphi`), " は、任意の ",
+                        math(String.raw`\vec f\in\vec E_L`), " について ",
+                        math(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
+                        " を満たし、", math(String.raw`\vec e\in M(\varphi)`), " は ",
+                        math(String.raw`\varphi(\vec e)\ne\vec e`), " を意味する（",
+                        ref("def_moved_edge_set"), "）。したがって ",
+                        ref("claim_moved_orbit_closed_nonbacktracking"),
+                        " が適用でき、第一の主張により各項は ",
+                        math(String.raw`\varphi\bigl((e_k,d_k)\bigr)\ne(e_k,d_k)`),
+                        " を満たす。すなわち各項は ", math(String.raw`M(\varphi)`),
+                        " に属する（", ref("def_moved_edge_set"), "）。第三の主張により ",
+                        math(String.raw`r`), " 個の項は相異なる。",
+                      ]),
+                      paragraph([
+                        "本体。", math(String.raw`j,k\in\mathbb N`), "、",
+                        math(String.raw`1\le j\le r`), "、", math(String.raw`1\le k\le r`), "、",
+                        math(String.raw`e_j=e_k`), " とし、", math(String.raw`j\ne k`),
+                        " と仮定して矛盾を導く。", ref("def_oriented_edges"), " により ",
+                        math(String.raw`d_j,d_k\in\{0,1\}`),
+                        " なので、二つの場合に分ける。",
+                      ]),
+                      paragraph([
+                        "場合 ", math(String.raw`d_j=d_k`), "。対の相等は成分ごとの相等なので、",
+                        math(String.raw`e_j=e_k`), " と合わせて ",
+                        math(String.raw`(e_j,d_j)=(e_k,d_k)`),
+                        " である。これは、準備の「", math(String.raw`r`),
+                        " 個の項は相異なる」と ", math(String.raw`j\ne k`), " に矛盾する。",
+                      ]),
+                      paragraph([
+                        "場合 ", math(String.raw`d_j\ne d_k`), "。",
+                        math(String.raw`d_j,d_k\in\{0,1\}`), " の相異なる二元なので、",
+                        math(String.raw`d_j=0`), " ならば ", math(String.raw`d_k=1=1-d_j`), "、",
+                        math(String.raw`d_j=1`), " ならば ", math(String.raw`d_k=0=1-d_j`),
+                        " であり、どちらの場合も ", math(String.raw`d_k=1-d_j`), " である。したがって",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+(e_k,d_k)
+&=(e_j,1-d_j)
+&&\bigl(\because\ e_j=e_k\text{（仮定）と }d_k=1-d_j\text{（直前）}\bigr)\\
+&=\iota\bigl((e_j,d_j)\bigr)
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。準備により ", math(String.raw`(e_j,d_j)\in M(\varphi)`),
+                        " かつ ", math(String.raw`(e_k,d_k)\in M(\varphi)`), " なので、",
+                        math(String.raw`\iota\bigl((e_j,d_j)\bigr)\in M(\varphi)`),
+                        " となり、動く辺の集合が反転対を含まないという仮定に矛盾する。",
+                      ]),
+                      paragraph([
+                        "いずれの場合も矛盾したので ", math(String.raw`j=k`),
+                        " である。全過程は有限集合の元の有限個の比較だけで閉じ、",
+                        "実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_nonbacktracking_permutation_stratified_count_archived",
     targets: ["def_nonbacktracking_permutation_fiber"],
     title: { text: "不採用経路: 非後退置換の母関数の層別" },
@@ -127,7 +215,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                       ]),
                       paragraph([
                         "本体。動く辺の集合が反転対を含まないという仮定の下で、",
-                        ref("claim_reversal_free_orbit_support_edges_distinct"), " により ",
+                        "退避した「反転対を含まない軌道列の台の辺の相異性」により ",
                         math(String.raw`\gamma`),
                         " の台の辺は相異なる。準備と合わせて、", math(String.raw`\gamma`),
                         " は台の辺が相異なる閉じた非後退辺列なので、",

@@ -2300,8 +2300,6 @@ targets=(
   Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_eq_sectorSum
   Ising2DLambda.NecSuf.KacWard.supportIncidence_even_necSuf
   Ising2DLambda.KacWard.reversalFreeMovedSupport_even
-  Ising2DLambda.NecSuf.KacWard.reversalFreeProjectedSequence_distinct_necSuf
-  Ising2DLambda.KacWard.reversalFreeOrbitSupportEdges_distinct
   Ising2DLambda.Tools.integerSequence_levelCrossing
   Ising2DLambda.NecSuf.Tools.adjacent_difference_sum_necSuf
   Ising2DLambda.Tools.integerSequence_levelCrossing_from_necSuf

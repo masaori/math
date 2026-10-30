@@ -8,6 +8,6 @@ $\{(e,0),(e,1)\}$ を含まない置換（$497$ 件）について、各動く�
 （第 1 成分）が互いに相異なることを検査する。あわせて、証明の準備が引く二つの事実
 （各項が動く辺であること、項が向き付き辺として相異なること）も同じ列挙で確かめる。
 
-- 実行: `sage sagemath/check/reversal-free-orbit-support-distinct/check.sage`
+- 実行: `sage sagemath/archive/reversal-free-orbit-support-distinct/check.sage`
 - 状態: PASS（2026-08-31、反転対なし $497$ 件・軌道列 $3{,}376$ 本）
 - 浮動小数点: 不使用
