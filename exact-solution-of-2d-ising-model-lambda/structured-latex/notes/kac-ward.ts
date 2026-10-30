@@ -7,6 +7,65 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_nonbacktracking_permutation_stratified_count_archived",
+    targets: ["def_nonbacktracking_permutation_fiber"],
+    title: { text: "不採用経路: 非後退置換の母関数の層別" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の母関数による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb Z[x]`), " の等式"]),
+                      displayMath(String.raw`\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
+x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
+=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
+                      paragraph([
+                        "が成り立つ。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
+                        ref("def_nonbacktracking_permutation_fiber"), " で定めた。両辺は有限和なので ",
+                        math(String.raw`\mathbb Z[x]`), " の元である。",
+                      ]),
+
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " を取る。", ref("def_single_traversal_edge_set"), " により ",
+                        math(String.raw`D(\varphi)\cap E_1(\varphi)=\varnothing`), " であり、",
+                        ref("claim_single_traversal_edge_set_even"), " により ",
+                        math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",
+                        math(String.raw`\bigl(D(\varphi),E_1(\varphi)\bigr)`),
+                        " は右辺の添字集合に属する。また定義から ",
+                        math(String.raw`\varphi\in\mathcal N_L\bigl(D(\varphi),E_1(\varphi)\bigr)`),
+                        " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
+                        math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取れば、",
+                        ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        math(String.raw`D(\varphi)=D`), " かつ ", math(String.raw`E_1(\varphi)=E`),
+                        " である。異なる添字のファイバーは、この二値のいずれかが違うので共通元を持たない。従って非後退置換の集合は、右辺の添字に従う ",
+                        math(String.raw`\mathcal N_L(D,E)`), " の互いに素な合併である。",
+                      ]),
+                      paragraph(["求めたい左辺から始める。"]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
+x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\ \sum_{\varphi\in\mathcal N_L(D,E)}
+x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
+&&\bigl(\because\ \text{上の互いに素な合併で有限和が分かれる}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\ \sum_{\varphi\in\mathcal N_L(D,E)}x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ D(\varphi)=D,\ E_1(\varphi)=E\text{ と }\blkref{claim_moved_orbit_length_sum_stratified}\bigr)\\
+&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
+\lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
+&&\bigl(\because\ \text{内側の項は }\varphi\text{ に依らない。}\mathbb Z[x]\text{ の分配則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全ての和は有限集合の上の有限和であり、有限集合の数え上げと ",
+                        math(String.raw`\mathbb Z[x]`), " の四則で完結する。実数体と複素数体は使わない。",
+                      ]),
+
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_free_orbit_vertex_simple_decomposition_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対のない軌道の頂点単純閉路分解" },

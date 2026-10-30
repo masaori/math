@@ -5798,12 +5798,22 @@ a_k&=c
                     math(String.raw`-1`), " になるのは ",
                     math(String.raw`g_c(a_k)=1`), " かつ ",
                     math(String.raw`g_c(a_{k+1})=0`),
-                    " だけである。このとき、直前の場合と ",
-                    math(String.raw`a_k`), " と ", math(String.raw`a_{k+1}`),
-                    " の役割を入れ替えた同じ鎖（隣接差条件は ",
-                    math(String.raw`a_k-a_{k+1}\le1`), " の側を使う）により ",
-                    math(String.raw`a_k=c+1`), " かつ ",
-                    math(String.raw`a_{k+1}=c`), " となるので ",
+                    " だけである。このとき",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+a_{k+1}&\le c
+&&\bigl(\because\ g_c(a_{k+1})=0\text{ と }g_c\text{ の定義}\bigr)\\
+c+1&\le a_k
+&&\bigl(\because\ g_c(a_k)=1\text{ と }g_c\text{ の定義、整数では }c<x\iff c+1\le x\bigr)\\
+a_k&\le a_{k+1}+1
+&&\bigl(\because\ \text{隣接差条件 }a_{k+1}-a_k\ge-1\text{ の移項}\bigr)\\
+a_k&=c+1
+&&\bigl(\because\ c+1\le a_k\le a_{k+1}+1\le c+1\text{ と順序の反対称性}\bigr)\\
+a_{k+1}&=c
+&&\bigl(\because\ c+1=a_k\le a_{k+1}+1\text{ の移項で }c\le a_{k+1}\text{、これと }a_{k+1}\le c\text{ と順序の反対称性}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となるので ",
                     math(String.raw`\chi^{-}_c(k)=1`), "、",
                     math(String.raw`\chi^{+}_c(k)=0`),
                     " であり、右辺も ", math(String.raw`-1`), " である。",
@@ -76639,17 +76649,16 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_nonbacktracking_permutation_stratified_count",
+              id: "kac_ward_heading_nonbacktracking_permutation_fiber",
               labels: [],
-              title: { text: "非後退置換の反転対と単純通過による層別" },
+              title: { text: "反転対と単純通過を固定した非後退置換" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_nonbacktracking_permutation_stratified_count",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
+                  id: "group_of_kac_ward_definition_nonbacktracking_permutation_fiber",
+                  beforeFocus: [],
+                  focus: {
                       id: "kac_ward_definition_nonbacktracking_permutation_fiber",
                       kind: "definition",
                       title: { text: "反転対と単純通過を固定した非後退置換" },
@@ -76671,66 +76680,6 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                           math(String.raw`\mathbb N`), " に属する。実数体も複素数体も現れない。",
                         ]),
                       ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_nonbacktracking_permutation_stratified_count",
-                    kind: "claim",
-                    title: { text: "非後退置換の母関数は反転対と単純通過で層別される" },
-                    labels: ["claim_nonbacktracking_permutation_stratified_count"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/nonbacktracking-permutation-stratified-count"],
-                    statement: [
-                      paragraph([math(String.raw`L\ge1`), " とする。このとき ", math(String.raw`\mathbb Z[x]`), " の等式"]),
-                      displayMath(String.raw`\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
-x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
-=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
-\lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
-                      paragraph([
-                        "が成り立つ。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-                        "、軌道族は ", ref("def_moved_orbit_family"),
-                        "、ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
-                        ref("def_nonbacktracking_permutation_fiber"), " で定めた。両辺は有限和なので ",
-                        math(String.raw`\mathbb Z[x]`), " の元である。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " を取る。", ref("def_single_traversal_edge_set"), " により ",
-                        math(String.raw`D(\varphi)\cap E_1(\varphi)=\varnothing`), " であり、",
-                        ref("claim_single_traversal_edge_set_even"), " により ",
-                        math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",
-                        math(String.raw`\bigl(D(\varphi),E_1(\varphi)\bigr)`),
-                        " は右辺の添字集合に属する。また定義から ",
-                        math(String.raw`\varphi\in\mathcal N_L\bigl(D(\varphi),E_1(\varphi)\bigr)`),
-                        " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
-                        math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取れば、",
-                        ref("def_nonbacktracking_permutation_fiber"), " により ",
-                        math(String.raw`D(\varphi)=D`), " かつ ", math(String.raw`E_1(\varphi)=E`),
-                        " である。相異なる添字のファイバーは、この二つの値の少なくとも一方が異なるので交わらない。よって非後退置換の全体は、右辺の添字ごとの ",
-                        math(String.raw`\mathcal N_L(D,E)`), " の互いに素な合併である。",
-                      ]),
-                      paragraph(["求めたい左辺から始める。"]),
-                      displayMath(String.raw`\begin{aligned}
-\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
-x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
-&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
-\ \sum_{\varphi\in\mathcal N_L(D,E)}
-x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
-&&\bigl(\because\ \text{上の互いに素な合併で有限和が分かれる}\bigr)\\
-&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
-\ \sum_{\varphi\in\mathcal N_L(D,E)}x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ D(\varphi)=D,\ E_1(\varphi)=E\text{ と }\blkref{claim_moved_orbit_length_sum_stratified}\bigr)\\
-&=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
-\lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ \text{内側の項は }\varphi\text{ に依らない。}\mathbb Z[x]\text{ の分配則}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "全ての和は有限集合の上の有限和であり、有限集合の数え上げと ",
-                        math(String.raw`\mathbb Z[x]`), " の四則だけで閉じる。実数体も複素数体も現れない。",
-                      ]),
-                    ],
                   },
                 },
               }],
