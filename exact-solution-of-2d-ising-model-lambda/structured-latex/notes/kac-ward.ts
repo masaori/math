@@ -7,6 +7,89 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selection_even_subgraph_simple_transitivity_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 非空な選択集合への偶部分グラフの単純推移的作用" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択集合による直接比較は採らない。元の定義・主張・証明を保存する。"]),
+      paragraph(["元の定義: 辺集合に含まれる偶部分グラフの有限集合"]),
+
+                          paragraph([
+                            math(String.raw`L\ge1`), " と辺集合 ", math(String.raw`E\subseteq E_L`),
+                            " に対し、", math(String.raw`E`), " に含まれる偶部分グラフの有限集合を",
+                          ]),
+                          displayMath(String.raw`\mathcal H_L(E):=
+\bigl\{\,H\subseteq E\ \bigm|\ \operatorname{Even}_L(H)\,\bigr\}`),
+                          paragraph([
+                            "と定める。偶部分グラフは ", ref("def_even_edge_subset"),
+                            " で定めた。これは有限集合 ", math(String.raw`E`),
+                            " の部分集合だけからなるので有限であり、実数体も複素数体も現れない。",
+                          ]),
+      paragraph(["元の主張: 非空な選択集合では偶部分グラフの対称差作用が単純推移的である"]),
+
+                      paragraph([
+                        math(String.raw`L\ge1`), " とし、互いに素な辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。選択 ",
+                        math(String.raw`C_0\in\mathcal C_L(D,E)`), " を任意に一つ固定すると、写像",
+                      ]),
+                      displayMath(String.raw`\tau_{C_0}:\mathcal H_L(E)\longrightarrow\mathcal C_L(D,E),
+  \qquad \tau_{C_0}(H):=C_0\mathbin\triangle H`),
+                      paragraph([
+                        "は全単射である。したがって、選択集合が非空なら対称差作用は単純推移的である。",
+                        "選択集合は ", ref("def_even_subgraph_pair_fiber"), "、作用する有限集合は ",
+                        "上の定義", " で定めた。全て有限集合の演算と ",
+                        math(String.raw`\mathbb N`), " の偶奇だけで閉じる。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        "まず任意の ", math(String.raw`H\in\mathcal H_L(E)`), " について ",
+                        math(String.raw`H\subseteq E`), " かつ ",
+                        math(String.raw`\operatorname{Even}_L(H)`), " なので、",
+                        ref("claim_selection_even_subgraph_action_character"), " の第一の主張から ",
+                        math(String.raw`C_0\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                        " であり、写像は定まる。",
+                      ]),
+                      paragraph([
+                        "任意の ", math(String.raw`C\in\mathcal C_L(D,E)`), " を取り、",
+                        math(String.raw`H_C:=C_0\mathbin\triangle C`), " と置く。",
+                        math(String.raw`C_0,C\subseteq E`), " なので ", math(String.raw`H_C\subseteq E`),
+                        " である。また ", math(String.raw`D\cap E=\varnothing`), " なので、辺ごとの所属の場合分けにより",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+  H_C&=C_0\mathbin\triangle C&&\bigl(\because\ H_C\text{ の定義}\bigr)\\
+  &=\bigl(D\cup C_0\bigr)\mathbin\triangle\bigl(D\cup C\bigr)
+  &&\bigl(\because\ D\cap E=\varnothing,\ C_0,C\subseteq E\text{ と辺ごとの所属の場合分け}\bigr)
+  \end{aligned}`),
+                      paragraph([
+                        "である。", math(String.raw`D\cup C_0`), " と ", math(String.raw`D\cup C`),
+                        " は選択集合の定義により偶部分グラフである。各頂点 ", math(String.raw`v\in V_L`),
+                        " で共通する接辺の寄与は二度現れて法二で消えるので",
+                      ]),
+                      displayMath(String.raw`d_{H_C}(v)\bmod2
+  =\bigl(d_{D\cup C_0}(v)+d_{D\cup C}(v)\bigr)\bmod2
+  =0\qquad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\bigr)`),
+                      paragraph([
+                        "となり ", math(String.raw`H_C\in\mathcal H_L(E)`), " である。対称差の結合則と ",
+                        math(String.raw`C_0\mathbin\triangle C_0=\varnothing`), " から",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+  \tau_{C_0}(H_C)&=C_0\mathbin\triangle H_C
+  &&\bigl(\because\ \tau_{C_0}\text{ の定義}\bigr)\\
+  &=C_0\mathbin\triangle(C_0\mathbin\triangle C)
+  &&\bigl(\because\ H_C\text{ の定義}\bigr)\\
+  &=C&&\bigl(\because\ \text{対称差の結合則と同じ集合の相殺}\bigr)
+  \end{aligned}`),
+                      paragraph([
+                        "なので全射である。最後に ", math(String.raw`H_1,H_2\in\mathcal H_L(E)`),
+                        " が ", math(String.raw`\tau_{C_0}(H_1)=\tau_{C_0}(H_2)`), " を満たすなら、両辺と ",
+                        math(String.raw`C_0`), " の対称差を取り、同じ結合則と相殺を使って ",
+                        math(String.raw`H_1=H_2`), " を得る。よって単射でもあり、全単射である。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_unswitchable_standard_pair_forces_doubled_edge_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 切り替え不能な標準接触対は反転対の辺を強制する" },
@@ -136,7 +219,7 @@ export default defineNotes([
 \qquad\bigl(\because\ \blkref{def_signed_selection_sum}\text{ の空和}\bigr)`),
       paragraph([
                         "である。以下、選択集合は空でなく ",
-                        math(String.raw`C_0`), " を固定する。", ref("claim_selection_even_subgraph_action_simply_transitive"),
+                        math(String.raw`C_0`), " を固定する。", "退避した「偶部分グラフ作用の単純推移性」",
                         " の全単射で有限和の添字を取り替え、", ref("claim_selection_even_subgraph_action_character"),
                         " の符号の等式を各項へ適用すると",
                       ]),
@@ -145,7 +228,7 @@ export default defineNotes([
 &=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
 &&\bigl(\because\ \blkref{def_signed_selection_sum}\bigr)\\
 &=\sum_{H\in\mathcal H_L(E)}(-1)^{\vartheta^{a,b}_L(D,E;C_0\mathbin\triangle H)}
-&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_simply_transitive}\text{ による添字の取り替え}\bigr)\\
+&&\bigl(\because\ \text{退避した「偶部分グラフ作用の単純推移性」}\text{ による添字の取り替え}\bigr)\\
 &=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
 \sum_{H\in\mathcal H_L(E)}\chi_E(H)
 &&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_character}\text{ の符号の等式}\bigr)
@@ -2737,7 +2820,6 @@ c_{\oplus}(\omega,k)
       "def_signed_selection_sum",
       "claim_selection_sum_signed_count",
       "claim_selection_even_subgraph_action_character",
-      "claim_selection_even_subgraph_action_simply_transitive",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [

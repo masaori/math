@@ -1,7 +1,7 @@
 """選択集合への偶部分グラフの作用と選択符号の文字を厳密検査する。
 
 対象: claim_selection_even_subgraph_action_character,
-claim_selection_even_subgraph_action_simply_transitive,
+単純推移性は参照用ノートに退避、
 def_signed_selection_sum（選択和の評価は参照用ノートへ退避）、
 claim_selection_sum_signed_count。
 

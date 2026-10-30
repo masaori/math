@@ -1,9 +1,9 @@
 # SageMath Check: 選択集合の偶部分グラフ作用と文字和
 
 **対象ラベル**: `claim_selection_even_subgraph_action_character`,
-`claim_selection_even_subgraph_action_simply_transitive`,
 `def_signed_selection_sum`
 
+選択集合の単純推移的作用の元の定義・主張・証明は参照用ノート「不採用経路: 非空な選択集合への偶部分グラフの単純推移的作用」に保存した。
 選択和の評価の元の主張と証明は参照用ノート「不採用経路: 選択和は空性と巻き付き文字によって評価できる」に保存した。
 
 （あわせて `def_signed_selection_sum`, `claim_selection_sum_signed_count` の被加数・符号指数を使う。）
@@ -20,7 +20,7 @@ $$
 
 に等しいことを全対で検査する（`claim_selection_even_subgraph_action_character` の二つの主張）。
 さらに、この対称差作用が選択集合の上で単純推移的であること
-（`claim_selection_even_subgraph_action_simply_transitive`）を検査する。
+（参照用ノート「不採用経路: 非空な選択集合への偶部分グラフの単純推移的作用」）を検査する。
 選択集合が空なら選択和は零である。空でない場合、右辺は $H$ の文字なので、非自明なら選択和は対消滅して零、
 自明なら全ての選択が同じ符号を持ち、選択和はその符号と選択集合の元数の積になる
 （`claim_selection_sum_character_evaluation`）。
