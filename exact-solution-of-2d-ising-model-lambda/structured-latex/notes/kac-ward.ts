@@ -7,6 +7,64 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selection_complement_sign_preserving_involution_archived",
+    targets: ["claim_selection_sum_signed_count"],
+    title: { text: "不採用経路: 選択補集合の符号保存対合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択補集合の軌道による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。写像",
+                      ]),
+                      displayMath(String.raw`\kappa_{D,E}:\mathcal C_L(D,E)\longrightarrow\mathcal C_L(D,E),\qquad
+\kappa_{D,E}(C):=E\setminus C`),
+                      paragraph(["は対合であり、任意の ", math(String.raw`C\in\mathcal C_L(D,E)`), " について"]),
+                      displayMath(String.raw`\vartheta^{a,b}_L\bigl(D,E;\kappa_{D,E}(C)\bigr)
+=\vartheta^{a,b}_L(D,E;C)`),
+                      paragraph([
+                        "が成り立つ。したがって ", math(String.raw`\kappa_{D,E}`), " は二つの符号別選択集合 ",
+                        math(String.raw`\mathcal C^{+}_L(D,E;a,b)`), " と ", math(String.raw`\mathcal C^{-}_L(D,E;a,b)`),
+                        " をそれぞれ保つ。さらに ", math(String.raw`E\ne\varnothing`), " なら不動点を持たない。選択集合と符号指数は ",
+                        ref("claim_selection_sum_signed_count"), " で定めた。全て有限辺集合の差・等号と整数の有限演算だけで判定でき、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。", ref("def_even_subgraph_pair_fiber"),
+                        " により ", math(String.raw`C\subseteq E`), " かつ ", math(String.raw`\operatorname{Even}_L(D\cup C)`),
+                        " である。さらに ", ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+                        math(String.raw`\operatorname{Even}_L\bigl(D\cup(E\setminus C)\bigr)`), " である。したがって ",
+                        math(String.raw`E\setminus C\in\mathcal C_L(D,E)`), " であり、", math(String.raw`\kappa_{D,E}`),
+                        " は選択集合から自分自身への写像として定まる。",
+                      ]),
+                      paragraph(["補集合を二回取ると、"]),
+                      displayMath(String.raw`\begin{aligned}
+\kappa_{D,E}\bigl(\kappa_{D,E}(C)\bigr)
+&=E\setminus(E\setminus C)
+&&\bigl(\because\ \kappa_{D,E}\text{ の定義}\bigr)\\
+&=C
+&&\bigl(\because\ C\subseteq E\text{ と有限集合の差の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "なので対合である。符号指数では、", math(String.raw`C`), " を ", math(String.raw`E\setminus C`),
+                        " に替えると二つの偶部分グラフ ", math(String.raw`D\cup C`), " と ",
+                        math(String.raw`D\cup(E\setminus C)`), " が交換される。符号指数はこの二つに対する同じ三項の和なので、整数の加法の可換性により",
+                      ]),
+                      displayMath(String.raw`\vartheta^{a,b}_L\bigl(D,E;\kappa_{D,E}(C)\bigr)
+=\vartheta^{a,b}_L(D,E;C)
+\qquad\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と }\mathbb Z\text{ の加法の可換性}\bigr)`),
+                      paragraph([
+                        "を得る。両辺を ", math(String.raw`(-1)`), " の指数に入れれば符号も等しいので、",
+                        math(String.raw`\kappa_{D,E}`), " は正符号集合と負符号集合をそれぞれ保つ。最後に ",
+                        math(String.raw`E\ne\varnothing`), " とし、もし ", math(String.raw`\kappa_{D,E}(C)=C`),
+                        " なら、", math(String.raw`e\in E`), " を一つ取る。", math(String.raw`e\in C`),
+                        " と ", math(String.raw`e\in E\setminus C`), " の一方だけが成り立つ一方、集合の等号から両者は同値となり矛盾する。よって不動点は無い。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_path_reversal_switchable_classification_archived",
     targets: ["def_permutation_path_reversal"],
     title: { text: "不採用経路: 経路反転による接触対の分類保存" },
@@ -222,7 +280,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         "置換側の各軌道の元の個数は一または二である。選択側の各軌道の元の個数は一または二であり、",
                         math(String.raw`E\ne\varnothing`), " なら全て二である。各軌道上で符号は ", math(String.raw`s`),
                         " に一定である。経路反転と位相寄与は ", ref("claim_path_reversal_phase_preservation"),
-                        "、選択補集合と選択符号は ", ref("claim_selection_complement_sign_preserving_involution"),
+                        "、選択補集合と選択符号は ", "参照用ノート「不採用経路: 選択補集合の符号保存対合」",
                         " で与えられる。全て有限集合の像・等号・元の個数だけで判定できる。",
                       ]),
       paragraph(["元の証明:"]),
@@ -238,11 +296,11 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                       ]),
                       paragraph([
                         "選択側も同じ論法である。", math(String.raw`C\in\mathcal C^s_L(D,E;a,b)`), " を取る。",
-                        ref("claim_selection_complement_sign_preserving_involution"), " により ",
+                        "参照用ノート「不採用経路: 選択補集合の符号保存対合」", " により ",
                         math(String.raw`E\setminus C`), " は同じ符号集合に属し、",
                       ]),
                       displayMath(String.raw`E\setminus(E\setminus C)=C
-\qquad\bigl(\because\ \blkref{claim_selection_complement_sign_preserving_involution}\bigr)`),
+\qquad\bigl(\because\ \text{参照用ノート「不採用経路: 選択補集合の符号保存対合」}\bigr)`),
                       paragraph([
                         "従って ",
                         math(String.raw`\{C,E\setminus C\}`), " は一元または二元で、上と同じ対合の論法により、",
