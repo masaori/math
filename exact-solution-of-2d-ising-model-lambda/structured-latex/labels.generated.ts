@@ -351,7 +351,6 @@ export const ALL_LABELS = [
   "claim_path_reversal_contact_pair_preservation",
   "claim_path_reversal_fiber_preserving_involution",
   "claim_path_reversal_phase_conjugation",
-  "claim_path_reversal_phase_preservation",
   "claim_perfect_matching_enumeration_complete",
   "claim_perfect_matching_involution",
   "claim_perfect_matching_sign_enumeration_independent",
