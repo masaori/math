@@ -1,6 +1,6 @@
 # SageMath Check: 切り替え可能接触を持つ残余は符号反転対合で相殺できない
 
-**対象ラベル**: `claim_doubled_edge_fiber_phase_reduction`
+**対象ラベル**: `def_unswitchable_standard_pair_subset`
 
 不採用経路の検算。標準対が切り替え不能な残余のうち、別の切り替え可能な接触対を持つ
 部分（unlocked）について、二つのことを厳密検査する。第一に、切り替え可能な接触対の
@@ -11,7 +11,7 @@
 反転する不動点の無い対合は unlocked 上に存在しない（存在すれば総和は零になる）。
 
 - 実行: `sage sagemath/check/unlocked-residual-phase-noncancellation/check.sage`
-- 状態: PASS（2026-09-02）
+- 状態: PASS（2026-10-30）
 - 結果: 一辺 $L=2$ の unlocked $17{,}925$ 個で、辞書式最小の切り替え可能対での平滑化が
   残余から出すもの $4{,}638$ 個、選択を変えるもの $7{,}935$ 個。位相寄与の総和が非零の
   （ファイバー×スピン構造）の組は unlocked で $380$ 件（unlocked が空でない組 $1{,}288$ 件中）、
