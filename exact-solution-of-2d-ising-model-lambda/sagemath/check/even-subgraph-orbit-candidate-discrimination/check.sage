@@ -1,6 +1,6 @@
 """二頂点変更の受け渡しの配置と、二候補を分ける不変量を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 で単一の偶部分グラフでは覆えない 16 ファイバーの符号反転候補辺を対象にする。

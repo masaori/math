@@ -1,6 +1,6 @@
 """全ての位相反転候補辺を保持した集合の平行移動共変性と局所形を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の単一の偶部分グラフでは覆えない 16 ファイバーについて、各 (phi, H) で

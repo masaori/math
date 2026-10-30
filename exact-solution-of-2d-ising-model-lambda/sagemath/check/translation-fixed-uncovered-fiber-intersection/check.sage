@@ -1,6 +1,6 @@
 """平行移動固定ファイバーと単一偶部分グラフで覆えないファイバーの交わりを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の巻き付き文字が非自明なファイバーについて、単一の偶部分グラフ H では

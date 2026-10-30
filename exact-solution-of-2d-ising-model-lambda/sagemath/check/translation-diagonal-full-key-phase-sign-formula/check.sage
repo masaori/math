@@ -1,6 +1,6 @@
 """全辺鍵の位相ベクトルの符号公式を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 全辺鍵のファイバーの置換 phi について、四つのスピン構造の位相寄与は

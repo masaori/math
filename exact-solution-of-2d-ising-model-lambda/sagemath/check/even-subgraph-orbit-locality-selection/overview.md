@@ -1,6 +1,8 @@
 # 切断・接合位置の局在数による候補選択と候補辺の逆向き
 
-**対象ラベル**: `claim_selection_even_subgraph_action_character`,
+旧主張「選択集合への偶部分グラフの対称差作用」は参照用ノートへ退避した。
+
+**対象ラベル**: `def_signed_selection_sum`,
 `claim_selection_sum_character_evaluation`
 - 住処: 有限集合、有限写像、$\mathbb{Q}(\zeta_8)$
 - 実行: `sage sagemath/check/even-subgraph-orbit-locality-selection/check.sage`

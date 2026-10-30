@@ -7,6 +7,145 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_selection_even_subgraph_action_character_archived",
+    targets: ["def_signed_selection_sum"],
+    title: { text: "不採用経路: 選択集合への偶部分グラフの対称差作用" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択集合の文字作用による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。任意の選択 ",
+                        math(String.raw`C\in\mathcal C_L(D,E)`),
+                        "（", ref("def_even_subgraph_pair_fiber"), "）と、",
+                        math(String.raw`\operatorname{Even}_L(H)`), " を満たす任意の部分集合 ",
+                        math(String.raw`H\subseteq E`), " について、",
+                      ]),
+                      displayMath(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                      paragraph([
+                        "であり、符号指数（", ref("claim_selection_sum_signed_count"), "）は ",
+                        math(String.raw`\mathbb Z`), " の合同式",
+                      ]),
+                      displayMath(String.raw`\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)
+\equiv\vartheta^{a,b}_L(D,E;C)
++\varepsilon_{L,\mathrm h}(E)\,\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\,\varepsilon_{L,\mathrm h}(H)\pmod 2`),
+                      paragraph(["を満たす。とくに符号について"]),
+                      displayMath(String.raw`(-1)^{\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)}
+=(-1)^{\vartheta^{a,b}_L(D,E;C)}\cdot
+(-1)^{\varepsilon_{L,\mathrm h}(E)\varepsilon_{L,\mathrm v}(H)
++\varepsilon_{L,\mathrm v}(E)\varepsilon_{L,\mathrm h}(H)}`),
+                      paragraph([
+                        "が成り立ち、符号の変化は ", math(String.raw`C`), " に依らず ",
+                        math(String.raw`H`), " だけで決まる。巻き付き偶奇 ",
+                        math(String.raw`\varepsilon_{L,\mathrm h},\varepsilon_{L,\mathrm v}`), " は ",
+                        ref("def_torus_winding_parities"),
+                        " で定めた。元の主張は有限集合の演算と整数の合同だけで判定でき、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "この証明の中だけで ", math(String.raw`A:=D\cup C`), "、",
+                        math(String.raw`B:=D\cup(E\setminus C)`), " と置き、",
+                        math(String.raw`\alpha_{\mathrm h}:=\varepsilon_{L,\mathrm h}(A)`), "、",
+                        math(String.raw`\alpha_{\mathrm v}:=\varepsilon_{L,\mathrm v}(A)`), "、",
+                        math(String.raw`\beta_{\mathrm h}:=\varepsilon_{L,\mathrm h}(B)`), "、",
+                        math(String.raw`\beta_{\mathrm v}:=\varepsilon_{L,\mathrm v}(B)`), "、",
+                        math(String.raw`h_{\mathrm h}:=\varepsilon_{L,\mathrm h}(H)`), "、",
+                        math(String.raw`h_{\mathrm v}:=\varepsilon_{L,\mathrm v}(H)`), "、",
+                        math(String.raw`e_{\mathrm h}:=\varepsilon_{L,\mathrm h}(E)`), "、",
+                        math(String.raw`e_{\mathrm v}:=\varepsilon_{L,\mathrm v}(E)`),
+                        " と略記する。いずれも ", math(String.raw`\{0,1\}\subset\mathbb N`),
+                        " に属する（", ref("def_torus_winding_parities"), "）。",
+                      ]),
+                      paragraph([
+                        "準備として集合の等式を三つ置く。", math(String.raw`C\subseteq E`), "、",
+                        math(String.raw`H\subseteq E`), "、", math(String.raw`D\cap E=\varnothing`),
+                        " なので、辺 ", math(String.raw`e\in E_L`), " ごとの所属の場合分けにより",
+                      ]),
+                      displayMath(String.raw`C\mathbin\triangle H\subseteq E,\qquad
+D\cup(C\mathbin\triangle H)=A\mathbin\triangle H,\qquad
+E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
+                      paragraph([
+                        "が成り立つ（対称差・合併・差はいずれも辺ごとの所属だけで決まり、",
+                        math(String.raw`D`), " の辺は ", math(String.raw`C,H,E`),
+                        " のどれにも属さない）。同じ辺ごとの所属の場合分けを ",
+                        math(String.raw`E\setminus C`), " と ", math(String.raw`H`), " に適用すると ",
+                        math(String.raw`D\cup\bigl((E\setminus C)\mathbin\triangle H\bigr)=B\mathbin\triangle H`),
+                        " も従う。また ", math(String.raw`D`), " の辺は ", math(String.raw`E`),
+                        " に属さず所属が変わらない一方、", math(String.raw`E`), " の辺では ",
+                        math(String.raw`C`), " との所属が反転するので、同じ場合分けにより ",
+                        math(String.raw`A\mathbin\triangle E=D\cup(C\mathbin\triangle E)=D\cup(E\setminus C)=B`),
+                        " である。",
+                      ]),
+                      paragraph([
+                        "次に偶性の保存を置く。", math(String.raw`X\subseteq E_L`), " が ",
+                        math(String.raw`\operatorname{Even}_L(X)`),
+                        " を満たすなら、各頂点 ", math(String.raw`v\in V_L`),
+                        " で対称差では両方に属する辺の端点寄与が二度現れて法 2 で消えるので",
+                      ]),
+                      displayMath(String.raw`d_{X\mathbin\triangle H}(v)\bmod2
+=\bigl(d_X(v)+d_H(v)\bigr)\bmod2
+=0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\text{ と }\operatorname{Even}_L(H)\bigr)`),
+                      paragraph([
+                        "となり ", math(String.raw`\operatorname{Even}_L(X\mathbin\triangle H)`),
+                        " である。さらに、巻き付き偶奇の対称差加法性（",
+                        ref("claim_winding_parity_symmetric_difference_additivity"),
+                        "）を ", math(String.raw`B=A\mathbin\triangle E`), " へ適用して",
+                      ]),
+                      displayMath(String.raw`\beta_{\mathrm h}\equiv\alpha_{\mathrm h}+e_{\mathrm h}\pmod2,\qquad
+\beta_{\mathrm v}\equiv\alpha_{\mathrm v}+e_{\mathrm v}\pmod2`),
+                      paragraph([
+                        "を得る。第一の主張を示す。", math(String.raw`C\in\mathcal C_L(D,E)`), " より ",
+                        math(String.raw`\operatorname{Even}_L(A)`),
+                        "（", ref("def_even_subgraph_pair_fiber"), "）なので、偶性の保存により ",
+                        math(String.raw`\operatorname{Even}_L(A\mathbin\triangle H)`),
+                        " である。準備の等式 ",
+                        math(String.raw`D\cup(C\mathbin\triangle H)=A\mathbin\triangle H`), " と ",
+                        math(String.raw`C\mathbin\triangle H\subseteq E`), " から ",
+                        math(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
+                        "（", ref("def_even_subgraph_pair_fiber"), "）である。",
+                      ]),
+                      paragraph(["第二の主張を示す。求めたい値から始める。"]),
+                      displayMath(String.raw`\begin{aligned}
+\vartheta^{a,b}_L(D,E;C\mathbin\triangle H)
+&=\begin{aligned}[t]
+&(1+a)\varepsilon_{L,\mathrm h}(A\mathbin\triangle H)+(1+b)\varepsilon_{L,\mathrm v}(A\mathbin\triangle H)
++\varepsilon_{L,\mathrm h}(A\mathbin\triangle H)\,\varepsilon_{L,\mathrm v}(A\mathbin\triangle H)\\
+&+(1+a)\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)+(1+b)\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
++\varepsilon_{L,\mathrm h}(B\mathbin\triangle H)\,\varepsilon_{L,\mathrm v}(B\mathbin\triangle H)
+\end{aligned}
+&&\bigl(\because\ \blkref{claim_selection_sum_signed_count}\text{ の符号指数の定義と準備の二つの合併の等式}\bigr)\\
+&\equiv\begin{aligned}[t]
+&(1+a)(\alpha_{\mathrm h}+h_{\mathrm h})+(1+b)(\alpha_{\mathrm v}+h_{\mathrm v})
++(\alpha_{\mathrm h}+h_{\mathrm h})(\alpha_{\mathrm v}+h_{\mathrm v})\\
+&+(1+a)(\beta_{\mathrm h}+h_{\mathrm h})+(1+b)(\beta_{\mathrm v}+h_{\mathrm v})
++(\beta_{\mathrm h}+h_{\mathrm h})(\beta_{\mathrm v}+h_{\mathrm v})
+\end{aligned}\pmod2
+&&\bigl(\because\ \blkref{claim_winding_parity_symmetric_difference_additivity}\text{。合同式は }\mathbb Z\text{ の加法・乗法と両立する}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)
++2\bigl((1+a)h_{\mathrm h}+(1+b)h_{\mathrm v}+h_{\mathrm h}h_{\mathrm v}\bigr)
++(\alpha_{\mathrm h}+\beta_{\mathrm h})h_{\mathrm v}+(\alpha_{\mathrm v}+\beta_{\mathrm v})h_{\mathrm h}\pmod2
+&&\bigl(\because\ \text{展開して }\blkref{claim_selection_sum_signed_count}\text{ の六項をまとめる。}\mathbb Z\text{ の分配則}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)
++(2\alpha_{\mathrm h}+e_{\mathrm h})h_{\mathrm v}+(2\alpha_{\mathrm v}+e_{\mathrm v})h_{\mathrm h}\pmod2
+&&\bigl(\because\ 2\text{ の倍数の消去と }\beta\equiv\alpha+e\text{ の二つの合同式}\bigr)\\
+&\equiv\vartheta^{a,b}_L(D,E;C)+e_{\mathrm h}h_{\mathrm v}+e_{\mathrm v}h_{\mathrm h}\pmod2
+&&\bigl(\because\ 2\text{ の倍数の消去}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "最後の右辺は略記を戻せば主張の合同式そのものである。符号の等式は、この合同式の両辺を ",
+                        math(String.raw`(-1)`), " の指数に入れると法 2 で等しい指数が同じ符号を与えることから従う。増分 ",
+                        math(String.raw`e_{\mathrm h}h_{\mathrm v}+e_{\mathrm v}h_{\mathrm h}`), " は ",
+                        math(String.raw`\alpha_{\mathrm h},\alpha_{\mathrm v}`),
+                        " を含まないので ", math(String.raw`C`),
+                        " に依らない。全過程は有限集合の演算と ", math(String.raw`\mathbb Z`),
+                        " の合同だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_pair_switchability_criterion_archived",
     targets: ["def_switchable_permutation_contact_pair"],
     title: { text: "不採用経路: 接触対の切り替え可能性の局所判定" },
@@ -162,7 +301,7 @@ export default defineNotes([
                         "まず任意の ", math(String.raw`H\in\mathcal H_L(E)`), " について ",
                         math(String.raw`H\subseteq E`), " かつ ",
                         math(String.raw`\operatorname{Even}_L(H)`), " なので、",
-                        ref("claim_selection_even_subgraph_action_character"), " の第一の主張から ",
+                        "参照用ノート「選択集合への偶部分グラフの対称差作用」", " の第一の主張から ",
                         math(String.raw`C_0\mathbin\triangle H\in\mathcal C_L(D,E)`),
                         " であり、写像は定まる。",
                       ]),
@@ -335,7 +474,7 @@ export default defineNotes([
       paragraph([
                         "である。以下、選択集合は空でなく ",
                         math(String.raw`C_0`), " を固定する。", "退避した「偶部分グラフ作用の単純推移性」",
-                        " の全単射で有限和の添字を取り替え、", ref("claim_selection_even_subgraph_action_character"),
+                        " の全単射で有限和の添字を取り替え、", "参照用ノート「選択集合への偶部分グラフの対称差作用」",
                         " の符号の等式を各項へ適用すると",
                       ]),
       displayMath(String.raw`\begin{aligned}
@@ -346,7 +485,7 @@ export default defineNotes([
 &&\bigl(\because\ \text{退避した「偶部分グラフ作用の単純推移性」}\text{ による添字の取り替え}\bigr)\\
 &=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
 \sum_{H\in\mathcal H_L(E)}\chi_E(H)
-&&\bigl(\because\ \blkref{claim_selection_even_subgraph_action_character}\text{ の符号の等式}\bigr)
+&&\bigl(\because\ \text{参照用ノート「選択集合への偶部分グラフの対称差作用」}\text{ の符号の等式}\bigr)
 \end{aligned}`),
       paragraph([
                         "まず ", math(String.raw`H_0\in\mathcal H_L(E)`), " が ",
@@ -2934,7 +3073,6 @@ c_{\oplus}(\omega,k)
     targets: [
       "def_signed_selection_sum",
       "claim_selection_sum_signed_count",
-      "claim_selection_even_subgraph_action_character",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
@@ -3028,7 +3166,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_oriented_edge_conjugation_counterexample",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
       "claim_path_reversal_fiber_preserving_involution",
     ],
     title: { text: "偶部分グラフ上の向き反転共役は置換側の文字作用にならない（一辺二の全数反例）" },
@@ -3054,7 +3192,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_vertex_rewiring_counterexample",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "頂点の入出接続の組み替えも一様な文字作用にならない（一辺二の全数反例）" },
     body: [
@@ -3086,7 +3224,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_global_rewiring_matching",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "置換ごとに偶部分グラフを選ぶ大域的組み替えは完全マッチングを持つ（一辺二の全数観察）" },
     body: [
@@ -3107,7 +3245,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_fiberwise_uniform_matching",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "ファイバーごとに固定した偶部分グラフでは覆えないものが残る（一辺二の全数観察）" },
     body: [
@@ -3138,7 +3276,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_uncovered_fiber_structure",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "単一の偶部分グラフで覆えないファイバーでは軌道分解が必ず変わる（一辺二の全数観察）" },
     body: [
@@ -3158,7 +3296,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_orbit_splitting",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "覆えないファイバーの候補は一軌道の二分裂か二軌道の合併に限られる（一辺二の全数観察）" },
     body: [
@@ -3186,7 +3324,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_local_cut_join",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "軌道の分裂・合併で変わる後続遷移は一つまたは二つの頂点に局在する（一辺二の全数観察）" },
     body: [
@@ -3208,7 +3346,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_swap_rule",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "局所変更の交換形だけでは候補を一意に選べない（一辺二の全数観察）" },
     body: [
@@ -3231,7 +3369,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_candidate_discrimination",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "所属の型と軌道形では候補を区別できない（一辺二の全数観察）" },
     body: [
@@ -3260,7 +3398,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_cut_location",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "二候補の大部分は切断・接合する頂点の位置で区別できる（一辺二の全数観察）" },
     body: [
@@ -3283,7 +3421,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_translation_stabilizer",
     targets: [
-      "claim_selection_even_subgraph_action_character",
+      "def_signed_selection_sum",
     ],
     title: { text: "二候補の選択に平行移動の対称性の障害は無い（一辺二の全数観察）" },
     body: [

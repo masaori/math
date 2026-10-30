@@ -1,6 +1,6 @@
 """対角平行移動で固定される鍵の非自明な選択文字を小さい辺長で判定する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L の対角平行移動 (1,1) で固定されるファイバー鍵 (D,E) は、D と E が

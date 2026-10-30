@@ -1,6 +1,6 @@
 """共変な全候補集合の切断・接合位置（局在頂点数）による選択規則の候補を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の単一の偶部分グラフでは覆えない 16 ファイバーの、全ての位相反転候補を

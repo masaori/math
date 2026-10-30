@@ -1,6 +1,6 @@
 """奇数辺長の全辺鍵で、対角固定置換の位相対消滅の必要条件を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L の対角平行移動 (1,1)（位数 L）で固定され選択文字が非自明なファイバー鍵は、

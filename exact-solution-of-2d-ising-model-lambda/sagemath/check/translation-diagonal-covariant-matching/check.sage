@@ -1,6 +1,6 @@
 """対角平行移動部分群と可換な符号反転完全マッチング族を全 64 鍵に構成する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の一様被覆検査の対象（巻き付き文字が非自明で有効な偶部分グラフ H を

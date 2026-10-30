@@ -1,6 +1,6 @@
 """奇数辺長の全辺鍵ファイバーの符号反転対合を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 氷型配向の頂点で、入辺二本が反対方向なら直線型、そうでなければ曲がり型と呼ぶ。

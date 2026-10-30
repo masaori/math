@@ -1,6 +1,6 @@
 """一辺三の全辺鍵ファイバーに対角共変な位相反転完全マッチングを構成する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 対角平行移動で固定される 80 置換には、前段で構成した位相ベクトルの直接対

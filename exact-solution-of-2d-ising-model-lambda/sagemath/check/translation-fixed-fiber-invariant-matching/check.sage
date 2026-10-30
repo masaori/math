@@ -1,6 +1,6 @@
 """平行移動固定ファイバーの候補グラフに固定部分群不変な完全マッチングがあるかを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 で、置換を持つ全ファイバー鍵のうち非零平行移動の固定部分群が非自明な

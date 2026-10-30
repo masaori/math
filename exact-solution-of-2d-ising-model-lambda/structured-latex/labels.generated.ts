@@ -576,7 +576,6 @@ export const ALL_LABELS = [
   "claim_selected_odd_orbit_reversal_involution",
   "claim_selected_odd_orbit_reversal_nontrivial",
   "claim_selected_odd_orbit_skew_product_neg",
-  "claim_selection_even_subgraph_action_character",
   "claim_selection_sum_signed_count",
   "claim_self_dual_point_low_high_sector_correspondence",
   "claim_self_dual_positive_root_unique",

@@ -1,6 +1,6 @@
 """ファイバーごとに固定した偶部分グラフだけで符号反転対合を作れるかを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 置換ごとに偶部分グラフを選ぶ大域的組み替えには完全マッチングがある

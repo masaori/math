@@ -1,6 +1,6 @@
 """平行移動で固定されるファイバー鍵が辺軌道の和で尽くされることと、その個数を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 ファイバー鍵は (D, E)（D, E は基底辺集合の互いに素な部分集合で E は偶部分グラフ）。

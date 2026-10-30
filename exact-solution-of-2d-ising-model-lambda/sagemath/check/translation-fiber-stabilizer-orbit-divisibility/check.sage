@@ -1,6 +1,6 @@
 """平行移動で固定されるファイバーの辺集合に課される可除条件を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L のトーラスの非零平行移動 (a,b) は、水平辺と垂直辺の各集合へ

@@ -1,6 +1,6 @@
 """偶部分グラフに沿った頂点の入出接続の組み替えが文字作用を与えるかを厳密検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の各ファイバー (D, E) のうち、E に含まれる偶部分グラフ H で

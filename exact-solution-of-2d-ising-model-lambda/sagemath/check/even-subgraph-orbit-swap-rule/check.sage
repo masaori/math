@@ -1,6 +1,6 @@
 """局所変更の形（一頂点の後続交換・二頂点の交差交換）と配置の型・一意性を検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 で単一の偶部分グラフでは覆えない 16 ファイバーの符号反転候補辺を対象にする。

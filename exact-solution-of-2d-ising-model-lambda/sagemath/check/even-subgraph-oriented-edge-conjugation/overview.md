@@ -1,6 +1,8 @@
 # SageMath Check: 偶部分グラフ上の向き反転共役の反例
 
-**対象ラベル**: `claim_selection_even_subgraph_action_character`,
+旧主張「選択集合への偶部分グラフの対称差作用」は参照用ノートへ退避した。
+
+**対象ラベル**: `def_signed_selection_sum`,
 `claim_path_reversal_fiber_preserving_involution`
 
 一辺 $L=2$ の非後退置換 $\varphi$ と、その単純通過辺集合 $E$ に含まれる偶部分グラフ

@@ -1,6 +1,6 @@
 """二候補が平行移動の対称性で入れ替わるかを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 の単一の偶部分グラフでは覆えない 16 ファイバーで、候補を二本持つ置換に

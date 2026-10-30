@@ -1,6 +1,6 @@
 """代表上の完全マッチングを軌道へ運べる条件を有限作用の全数検査で切り出す。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 有限群 G がファイバーの有限集合に作用し、各ファイバーの候補グラフを

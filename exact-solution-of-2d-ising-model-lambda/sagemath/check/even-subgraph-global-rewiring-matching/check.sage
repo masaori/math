@@ -1,6 +1,6 @@
 """置換ごとに偶部分グラフを選べば大域的な符号反転対応を作れるかを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 一辺 L=2 で巻き付き文字が非自明な各ファイバーについて、前段の頂点組み替え候補のうち

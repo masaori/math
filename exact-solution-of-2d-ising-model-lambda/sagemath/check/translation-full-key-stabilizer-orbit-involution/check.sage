@@ -1,6 +1,6 @@
 """全辺鍵ファイバーの部分群固定集合上の一括交換対合と、対角共変な符号反転マッチングを検査する。
 
-対象: claim_selection_even_subgraph_action_character,
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」,
       claim_selection_sum_character_evaluation。
 
 奇数辺長 L の全辺鍵ファイバーに対角平行移動群 Z_L が作用する。L の約数 d ごとに

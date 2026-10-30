@@ -1,6 +1,6 @@
 """偶部分グラフ上の向き反転共役が文字作用になるかを厳密検査する。
 
-対象: claim_selection_even_subgraph_action_character と
+対象: 参照用ノート「不採用経路: 選択集合への偶部分グラフの対称差作用」 と
       claim_path_reversal_fiber_preserving_involution。
 
 一辺 L=2 の各非後退置換 phi と、その単純通過辺集合 E に含まれる

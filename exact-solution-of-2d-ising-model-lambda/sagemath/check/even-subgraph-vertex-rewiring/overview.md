@@ -1,6 +1,8 @@
 # SageMath Check: 偶部分グラフに沿った頂点の入出接続の組み替え
 
-**対象ラベル**: `claim_selection_even_subgraph_action_character`,
+旧主張「選択集合への偶部分グラフの対称差作用」は参照用ノートへ退避した。
+
+**対象ラベル**: `def_signed_selection_sum`,
 `claim_selection_sum_character_evaluation`
 
 一辺 $L=2$ の各ファイバー $(D,E)$ のうち、$E$ に含まれる偶部分グラフ $H$ で巻き付き文字が
