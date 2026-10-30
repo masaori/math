@@ -5851,23 +5851,57 @@ U_c(a)-D_c(a)
                     math(String.raw`a_1\le c`), " かつ ",
                     math(String.raw`c<a_n`), " のときは ",
                     math(String.raw`g_c(a_1)=0`), "、",
-                    math(String.raw`g_c(a_n)=1`), " なので ",
-                    math(String.raw`g_c(a_n)-g_c(a_1)=1`), " である。",
+                    math(String.raw`g_c(a_n)=1`), " である。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_n)-g_c(a_1)
+&=1-0
+&&\bigl(\because\ g_c(a_n)=1,\ g_c(a_1)=0\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
                     math(String.raw`a_n\le c`), " かつ ",
                     math(String.raw`c<a_1`), " のときは ",
                     math(String.raw`g_c(a_1)=1`), "、",
-                    math(String.raw`g_c(a_n)=0`), " なので ",
-                    math(String.raw`g_c(a_n)-g_c(a_1)=-1`), " である。それ以外は、",
+                    math(String.raw`g_c(a_n)=0`), " である。従って",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_n)-g_c(a_1)
+&=0-1
+&&\bigl(\because\ g_c(a_n)=0,\ g_c(a_1)=1\bigr)\\
+&=-1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "それ以外は、",
                     math(String.raw`c<a_1`), " かつ ",
-                    math(String.raw`c<a_n`), " の場合が ",
-                    math(String.raw`1-1=0`), "、",
+                    math(String.raw`c<a_n`), " の場合と、",
                     math(String.raw`a_1\le c`), " かつ ",
-                    math(String.raw`a_n\le c`), " の場合が ",
-                    math(String.raw`0-0=0`),
-                    " であり（この二つで「それ以外」を尽くす。各端点について ",
+                    math(String.raw`a_n\le c`), " の場合で尽くす。各端点について ",
                     math(String.raw`x\le c`), " と ", math(String.raw`c<x`),
-                    " が排反かつ網羅のため）、いずれも ",
-                    math(String.raw`0`), " である。",
+                    " は排反かつ網羅である。前者では ",
+                    math(String.raw`g_c(a_1)=g_c(a_n)=1`), " なので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_n)-g_c(a_1)
+&=1-1
+&&\bigl(\because\ g_c(a_n)=g_c(a_1)=1\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "後者では ", math(String.raw`g_c(a_1)=g_c(a_n)=0`), " なので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_n)-g_c(a_1)
+&=0-0
+&&\bigl(\because\ g_c(a_n)=g_c(a_1)=0\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "である。",
                     "全過程は整数の比較・加法・有限和だけで閉じ、実数体も複素数体も現れない。",
                   ]),
                 ],
