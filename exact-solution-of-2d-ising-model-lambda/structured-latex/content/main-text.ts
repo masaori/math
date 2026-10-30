@@ -88220,8 +88220,20 @@ t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
                     "右辺は ", math(String.raw`\varepsilon`), " より小さい。これは任意の ", math(String.raw`\varepsilon>0`), " と全ての ",
                     math(String.raw`L\ge L_0`), " について成り立つので、",
                     math(String.raw`h_L^2\sum_{k,l}f_q(t^{a,b}_{L,k,l})\to I`),
-                    " である。", math(String.raw`h_L^2=4\pi^2/L^2`),
-                    " を代入し、上の有限和の等式を用いれば結論を得る。",
+                    " である。結論まで一続きに計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\lim_{L\to\infty}\frac1{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+&=\lim_{L\to\infty}\frac1{2L^2}\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})
+&&(\because\ \blkref{claim_dispersion_product_real_log_sum}\text{ から上で得た有限和の等式})\\
+&=\frac1{8\pi^2}\lim_{L\to\infty}h_L^2\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})
+&&(\because\ h_L^2=4\pi^2/L^2\text{ を代入})\\
+&=\frac{I}{8\pi^2}
+&&(\because\ \text{直前に示した小区画の誤差評価})
+\end{aligned}`),
+                  paragraph([
+                    "最初の等号には上の有限和の等式と ",
+                    ref("claim_dispersion_product_real_log_sum"), " を用いた。",
                     "一様連続性の評価は ", math(String.raw`a,b`),
                     " によらないので四つの極限は同じである。",
                   ]),
