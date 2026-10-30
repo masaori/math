@@ -90493,12 +90493,31 @@ B_\xi(\theta_1,\theta_2)-(1-2r-r^2)^2
                     " である。", ref("def_critical_point"), " により ",
                     math(String.raw`x_c=-1+s`), " であり、",
                     ref("claim_critical_point_positive"), " から ", math(String.raw`0<_Rx_c`),
-                    " である。", math(String.raw`s=1+x_c`), " より ",
-                    math(String.raw`-1-s=-2-x_c<_R0`), " だから、",
-                    math(String.raw`0<_R\xi`), " の下では ", math(String.raw`\xi=x_c`),
-                    " に限る。逆向きは ", ref("def_critical_point"),
-                    " の二次方程式から従う。さらに ", math(String.raw`1+x_c=s\ne0`),
-                    " なので ", ref("claim_kw_self_dual_quadratic_equivalence"),
+                    " である。もう一つの根は",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+-1-s
+&=-1-(1+x_c)
+&&\bigl(\because\ s=1+x_c\text{ と }\blkref{def_critical_point}\bigr)\\
+&=-2-x_c
+&&\bigl(\because\ R\text{ の四則}\bigr)\\
+&<_R0
+&&\bigl(\because\ 0<_Rx_c\text{ と }-2<_R0\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "従って ", math(String.raw`0<_R\xi`), " の下では ",
+                    math(String.raw`\xi=x_c`), " に限る。逆向きは ",
+                    ref("def_critical_point"), " の二次方程式から従う。さらに",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+1+x_c
+&=s
+&&\bigl(\because\ x_c=-1+s\text{ と }\blkref{def_critical_point}\bigr)\\
+&\ne0
+&&\bigl(\because\ s=1+x_c>_R0\text{ と }\blkref{claim_critical_point_positive}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "よって ", ref("claim_kw_self_dual_quadratic_equivalence"),
                     " を ", math(String.raw`\xi=x_c`), " に適用でき、",
                     math(String.raw`\mathrm{KW}(x_c)=x_c`), " を得る。",
                   ]),
