@@ -373,21 +373,15 @@ const chapter_tools = defineSection({
                           " を掛けた。両辺は 1 以上の整数の積なので 1 以上の整数）。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
-v_p(a)+v_p(b')
-&=v_p(ab')
-&&(\because\ \blkref{def_prime_exponent})\\
-&=v_p(a'b)
-&&(\because\ ab'=a'b)\\
-&=v_p(a')+v_p(b)
-&&(\because\ \blkref{def_prime_exponent})
-\end{aligned}`),
-                        paragraph(["上の等式の両辺から ", math(String.raw`v_p(b)+v_p(b')`), " を引く。"]),
-                        displayMath(String.raw`\begin{aligned}
 v_p(a)-v_p(b)
 &=v_p(a)+v_p(b')-v_p(b)-v_p(b')
 &&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr)\\
+&=v_p(ab')-v_p(b)-v_p(b')
+&&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
+&=v_p(a'b)-v_p(b)-v_p(b')
+&&\bigl(\because\ ab'=a'b\bigr)\\
 &=v_p(a')+v_p(b)-v_p(b)-v_p(b')
-&&\bigl(\because\ \text{上の等式}\bigr)\\
+&&\bigl(\because\ \blkref{def_prime_exponent}\bigr)\\
 &=v_p(a')-v_p(b')
 &&\bigl(\because\ \mathbb Z\text{ の加法逆元の法則}\bigr).
 \end{aligned}`),
