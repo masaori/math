@@ -1,6 +1,6 @@
 """切り替え不能な標準接触対が反転対の辺を強制することを厳密検査する。
 
-対象: claim_unswitchable_standard_pair_forces_doubled_edge。
+対象: def_kac_ward_determinants。元の主張と証明は参照用ノートに保存した。
 
 一辺 L=2 のトーラスについて、まず全向き付き辺の始点と終点が相異なることを
 検査する。次に全非後退置換について、標準接触対 {e,f} が切り替え可能でない

@@ -683,7 +683,6 @@ export const ALL_LABELS = [
   "claim_twisted_modes_are_double_roots",
   "claim_twisted_modes_complex_roots_bijection",
   "claim_two_is_square_in_real_closed",
-  "claim_unswitchable_standard_pair_forces_doubled_edge",
   "claim_untwisted_mode_zero_condition",
   "claim_upward_seam_mode_phase",
   "claim_value_at_rational_is_positive",
