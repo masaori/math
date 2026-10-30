@@ -26,10 +26,7 @@
 #   d = 0,...,8 と k = 0,...,8 の全組（81 組）。応用の形は L = 1,...,6 の全約数 d。
 #   本文の主張は任意の d, k についてのものなので、有限個で確かめたことは証明ではない。
 
-import os
-
-_dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
-load(os.path.join(_dir, '..', '..', '_shared', 'defs.sage'))
+load("sagemath/_shared/defs.sage")
 
 
 # def_second_polynomial_ring: ZZ[x] を係数環とする、もう 1 つの不定元 t の多項式環。
@@ -71,6 +68,9 @@ for d in D_RANGE:
     assert (t**d + u) * zero == zero, '1: 零元を掛けて零元にならない'
 
 # 2. 準備の第二。
+assert one + u == one + iota(-const_poly(1)), '2: u の代入が一致しない'
+assert one + iota(-const_poly(1)) == iota(const_poly(1) + (-const_poly(1))), '2: iota の加法保存が破れた'
+assert iota(const_poly(1) + (-const_poly(1))) == zero, '2: 加法逆元の等式が破れた'
 assert one + u == zero, '2: iota(kappa(1)) + u が零元でない'
 assert u == iota_kappa(-1), '2: u と iota(kappa(-1)) が一致しない'
 

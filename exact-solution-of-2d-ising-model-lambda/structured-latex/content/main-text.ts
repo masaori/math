@@ -27467,18 +27467,24 @@ W_{O}\bigl(\mathrm{ch}(U),S\!\restriction_{O}\bigr)
                         ]),
                         paragraph([
                           "第二に、",
-                          math(String.raw`\kappa(1)+\bigl(-\kappa(1)\bigr)=\kappa(0)`),
-                          " が ",
-                          math(String.raw`\mathbb{Z}[x]`),
-                          " で成り立ち、",
                           math(String.raw`\iota`),
                           " は和を和へ写すので（",
                           math(String.raw`\because`),
                           " ",
                           ref("def_second_constant_embedding"),
-                          "）",
-                          math(String.raw`\iota(\kappa(1))+u=\iota(\kappa(0))`),
-                          " である。すなわち ",
+                          "）、",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\iota(\kappa(1))+u
+&=\iota(\kappa(1))+\iota\bigl(-\kappa(1)\bigr)
+&&(\because\ u\text{ の置き方})\\
+&=\iota\bigl(\kappa(1)+(-\kappa(1))\bigr)
+&&(\because\ \blkref{def_second_constant_embedding}\text{ の加法保存})\\
+&=\iota(\kappa(0))
+&&(\because\ \mathbb{Z}[x]\text{ の加法逆元と }\kappa(0)\text{ の定義})
+\end{aligned}`),
+                        paragraph([
+                          "である。すなわち ",
                           math(String.raw`u`),
                           " は単位元の加法についての逆元である。",
                         ]),
