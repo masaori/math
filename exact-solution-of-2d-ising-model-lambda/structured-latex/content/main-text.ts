@@ -8361,7 +8361,11 @@ N+1&\le |\mathcal J|&&\bigl(\because\ \text{相異なる }N+1\text{ 個の値が
 |\mathcal J|&=N&&\bigl(\because\ N\text{ の定義}\bigr).
 \end{aligned}`),
                 paragraph(["となり、自然数の大小に反する。したがって相異なる二つの添字で値が一致する。小さい添字を ", math(String.raw`r`), "、大きい添字を ", math(String.raw`t`), " と書けば、"]),
-                displayMath(String.raw`r,t\in\{0,\ldots,N\},\qquad r<t,\qquad \sigma^{[t]}(i)=\sigma^{[r]}(i)`),
+                displayMath(String.raw`\begin{aligned}
+r,t&\in\{0,\ldots,N\}&&\bigl(\because\ \text{値が一致する二つの添字の選択}\bigr),\\
+r&<t&&\bigl(\because\ r\text{ を小さい添字、}t\text{ を大きい添字とした}\bigr),\\
+\sigma^{[t]}(i)&=\sigma^{[r]}(i)&&\bigl(\because\ v(t)=v(r)\text{ と }v(k)=\sigma^{[k]}(i)\bigr).
+\end{aligned}`),
                 paragraph(["である。", math(String.raw`d:=t-r\in\mathbb N`), " と置くと、"]),
                 displayMath(String.raw`\begin{aligned}
 0&<d&&\bigl(\because\ r<t\text{ と自然数の差}\bigr),\\
