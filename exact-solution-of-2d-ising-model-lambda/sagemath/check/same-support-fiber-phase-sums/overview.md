@@ -1,6 +1,6 @@
 # SageMath Check: 台固定の集約でも三分類の部分和は消えない（全分解の実現は成立）
 
-**対象ラベル**: `claim_fully_unswitchable_contacts_witness_doubled_edges`, `claim_weighted_path_reversal_selection_orbit_sums`
+**対象ラベル**: `claim_fully_unswitchable_contacts_witness_doubled_edges`
 
 選択和の側は偶部分グラフ対 $(P,Q)$ の $P\cap Q=D$, $P\triangle Q=E$ による分類であり、
 和集合 $P\cup Q=D\cup E$ はファイバーをまたいで共有される。そこで一辺 $L=2$ の全ファイバーを

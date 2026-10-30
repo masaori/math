@@ -1,7 +1,6 @@
 """台（D ∪ E）を固定して集約した三分類の部分和と選択和の関係を厳密検査する。
 
-対象: claim_fully_unswitchable_contacts_witness_doubled_edges,
-      claim_weighted_path_reversal_selection_orbit_sums。
+対象: claim_fully_unswitchable_contacts_witness_doubled_edges。
 
 選択和の側は偶部分グラフ対 (P, Q) の P ∩ Q = D, P △ Q = E による分類であり、
 和集合 P ∪ Q = D ∪ E はファイバーをまたいで共有される。そこで一辺 L=2 の全ファイバーを

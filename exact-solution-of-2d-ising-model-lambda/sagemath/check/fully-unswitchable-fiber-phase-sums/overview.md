@@ -1,6 +1,6 @@
 # SageMath Check: 三分類の部分和はファイバー単位では選択和に一致しない
 
-**対象ラベル**: `claim_weighted_path_reversal_selection_orbit_sums`, `claim_fully_unswitchable_contacts_witness_doubled_edges`
+**対象ラベル**: `claim_fully_unswitchable_contacts_witness_doubled_edges`
 
 一辺 $L=2$ の全ファイバー $(D,E)$ と四つのスピン構造 $(a,b)$ について、ファイバー位相和を
 順序に依らない三分類（接触なし・切り替え可能対あり・全対切り替え不能）ごとの部分和

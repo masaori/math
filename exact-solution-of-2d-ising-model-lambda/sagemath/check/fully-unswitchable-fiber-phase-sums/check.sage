@@ -1,7 +1,6 @@
 """三分類ごとのファイバー位相和と選択和の関係を厳密検査する（帰納の設計のための観察）。
 
-対象: claim_weighted_path_reversal_selection_orbit_sums,
-      claim_fully_unswitchable_contacts_witness_doubled_edges。
+対象: claim_fully_unswitchable_contacts_witness_doubled_edges。
 
 一辺 L=2 の全ファイバー (D, E) と四つのスピン構造 (a, b) について、
 ファイバー位相和を三分類（接触なし / 切り替え可能対あり / 全対切り替え不能）ごとの

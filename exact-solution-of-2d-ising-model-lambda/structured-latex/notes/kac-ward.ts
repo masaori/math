@@ -7,6 +7,83 @@ import { defineNotes, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineNotes([
   {
+    id: "note_kac_ward_weighted_path_reversal_selection_orbit_sums_archived",
+    targets: ["def_permutation_path_reversal"],
+    title: { text: "不採用経路: 経路反転軌道と選択補集合軌道の重み付き和" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。",
+                        math(String.raw`s\in\{-1,1\}`), " と ",
+                        math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`), " に対して",
+                      ]),
+                      displayMath(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)
+:=\Bigl\{\,O\in\mathfrak O^{\mathcal N,s}_L(D,E;a,b)\ \Bigm|\ O\subseteq\mathcal P\,\Bigr\}`),
+                      paragraph([
+                        "と定める。各有限軌道 ", math(String.raw`O`), " の重みをその元の個数 ",
+                        math(String.raw`w(O):=\lvert O\rvert\in\{1,2\}`), " とする。このとき整数の等式",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(D,E)
+&=\sum_{\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}}
+\left(\sum_{O\in\mathfrak O^{\mathcal P,1}_L(D,E;a,b)}w(O)
+-\sum_{O\in\mathfrak O^{\mathcal P,-1}_L(D,E;a,b)}w(O)\right),\\
+\mathcal U^{a,b}_L(D,E)
+&=\sum_{O\in\mathfrak O^{\mathcal C,1}_L(D,E;a,b)}w(O)
+-\sum_{O\in\mathfrak O^{\mathcal C,-1}_L(D,E;a,b)}w(O)
+\end{aligned}`),
+                      paragraph([
+                        "が成り立つ。軌道族は ", ref("claim_path_reversal_selection_complement_orbits"),
+                        "、三分類とその反転不変性は ", ref("claim_path_reversal_switchable_classification_preservation"),
+                        "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
+                        ref("claim_selection_sum_signed_count"), " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "置換側では、三分類が非後退置換全体を互いに素に覆い、経路反転が各分類を保つ（",
+                        ref("claim_path_reversal_switchable_classification_preservation"), "）。さらに符号 ",
+                        math(String.raw`s`), " の各部分集合は経路反転軌道に互いに素に分かれ、各軌道上の位相寄与は ",
+                        math(String.raw`s`), " に一定である（", ref("claim_path_reversal_selection_complement_orbits"),
+                        "）。したがって各分類と符号を固定した有限和は",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\substack{\varphi\in\mathcal N_L(D,E)\cap\mathcal P\\
+\mathcal W^{a,b}_L(\varphi)=s}}\mathcal W^{a,b}_L(\varphi)
+&=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}\mathcal W^{a,b}_L(\varphi)
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits},\ \blkref{claim_path_reversal_switchable_classification_preservation}\text{ の互いに素な軌道分割}\bigr)\\
+&=\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\ \sum_{\varphi\in O}s
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の軌道上の符号一定性}\bigr)\\
+&=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}\lvert O\rvert
+&&\bigl(\because\ \text{有限和の分配則}\bigr)\\
+&=s\sum_{O\in\mathfrak O^{\mathcal P,s}_L(D,E;a,b)}w(O)
+&&\bigl(\because\ w(O)=\lvert O\rvert\text{ の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となる。", math(String.raw`s=1,-1`), " の二つを加え、さらに三分類について加えると、",
+                        ref("def_fiber_phase_weight"), " の有限和そのものになり、第一の等式を得る。",
+                      ]),
+                      paragraph([
+                        "選択側でも、各符号集合は選択補集合軌道に互いに素に分かれ、軌道上の符号は一定である（",
+                        ref("claim_path_reversal_selection_complement_orbits"), "）。ゆえに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\bigl\lvert\mathcal C^s_L(D,E;a,b)\bigr\rvert
+&=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}\lvert O\rvert
+&&\bigl(\because\ \blkref{claim_path_reversal_selection_complement_orbits}\text{ の互いに素な軌道分割}\bigr)\\
+&=\sum_{O\in\mathfrak O^{\mathcal C,s}_L(D,E;a,b)}w(O)
+&&\bigl(\because\ w(O)=\lvert O\rvert\text{ の定義}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。", math(String.raw`s=1`), " の等式から ", math(String.raw`s=-1`),
+                        " の等式を引き、", ref("claim_selection_sum_signed_count"),
+                        " を適用すると第二の等式を得る。どちらの重みも軌道の有限な元数であり、実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_path_reversal_fixed_point_no_single_traversal_archived",
     targets: ["def_permutation_path_reversal"],
     title: { text: "不採用経路: 経路反転の不動点と軌道の元数" },
@@ -33,7 +110,7 @@ export default defineNotes([
                         math(String.raw`\mathfrak O^{\mathcal N,s}_L(D,E;a,b)`), " と ",
                         math(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)`),
                         "（", ref("claim_path_reversal_selection_complement_orbits"), "、",
-                        ref("claim_weighted_path_reversal_selection_orbit_sums"),
+                        "参照用ノート「不採用経路: 経路反転軌道と選択補集合軌道の重み付き和」の定義",
                         "）の全ての軌道の元の個数は二である。全て有限集合の元の比較だけで判定でき、",
                         "実数体も複素数体も現れない。",
                       ]),
@@ -83,7 +160,7 @@ M(\varphi)
                         " の形なので、その元の個数は二である。三分類で細分した軌道族 ",
                         math(String.raw`\mathfrak O^{\mathcal P,s}_L(D,E;a,b)`), " は ",
                         math(String.raw`\mathfrak O^{\mathcal N,s}_L(D,E;a,b)`), " の部分集合（",
-                        ref("claim_weighted_path_reversal_selection_orbit_sums"),
+                        "参照用ノート「不採用経路: 経路反転軌道と選択補集合軌道の重み付き和」の定義",
                         " の定義）なので、その軌道の元の個数も二である。",
                       ]),
 
@@ -564,7 +641,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_weighted_path_reversal_selection_orbit_sums_sign_bijection_counterexample",
     targets: [
-      "claim_weighted_path_reversal_selection_orbit_sums",
+      "def_permutation_path_reversal",
     ],
     title: { text: "経路反転軌道と選択補集合軌道の符号保存対応は存在しない" },
     body: [
@@ -581,7 +658,7 @@ c_{\oplus}(\omega,k)
         math(String.raw`D=\{h(1,1)\}`), "、単純通過辺集合 ",
         math(String.raw`E=\{v(0,0),v(0,1),v(1,0),v(1,1)\}`),
         "、スピン構造 ", math(String.raw`(a,b)=(0,0)`), "、符号 ", math(String.raw`+1`), " であった",
-        "（sagemath/check/path-reversal-selection-sign-bijection-counterexample）。",
+        "（sagemath/archive/path-reversal-selection-sign-bijection-counterexample）。",
         "従って経路反転軌道全体と選択補集合軌道全体の間に符号と重みを保つ全単射を構成する経路は採用しない。",
         "符号付き総和の一致は、既存の切り替え平滑化による相殺を残したまま直接示す必要がある。",
         "これは一般の不存在定理ではなく、候補経路を排除する有限反例である。",
@@ -592,7 +669,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_fiber_phase_sums",
     targets: [
       "claim_fully_unswitchable_contacts_witness_doubled_edges",
-      "claim_weighted_path_reversal_selection_orbit_sums",
+      "def_permutation_path_reversal",
     ],
     title: { text: "三分類の部分和はファイバー単位では選択和に一致しない" },
     body: [

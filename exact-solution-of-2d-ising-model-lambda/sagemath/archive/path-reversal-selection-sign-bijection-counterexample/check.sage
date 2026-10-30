@@ -10,7 +10,7 @@ claim_weighted_path_reversal_selection_orbit_sums。
 浮動小数点は使わない。
 """
 
-load("sagemath/check/weighted-path-reversal-selection-orbit-sums/check.sage")
+load("sagemath/archive/weighted-path-reversal-selection-orbit-sums/check.sage")
 
 mismatches = []
 for (doubled, single), fiber in all_fibers.items():
