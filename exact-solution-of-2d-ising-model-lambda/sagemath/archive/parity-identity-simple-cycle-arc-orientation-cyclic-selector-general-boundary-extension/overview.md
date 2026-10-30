@@ -2,7 +2,7 @@
 
 ## 対象
 
-**対象ラベル**: `claim_cut_flag_congruence_start_recovery`
+**保管先**: 参照用ノート「不採用経路: 切断旗の合同条件による始点復元」
 
 旧対象 `claim_cut_flag_two_coordinate_boundary_completeness` は参照用ノート「不採用経路: 二次元座標列と境界延長候補の復元」に退避した。
 
@@ -28,12 +28,12 @@
 元の座標列が候補に含まれ、両端の一辺延長が返す切断旗も実際の反対端点と一致することを確かめる。
 さらに、復元された行始点と列始点の直積から作る座標列の集合が、全列挙で得た座標列の集合と一致することを
 各合同系で確かめる。従って二次元座標列と境界延長候補の完全性も同じ有限検算の対象である。
-一般の辺長と語長に対する始点復元の命題と Lean 二版は `claim_cut_flag_congruence_start_recovery` に置く。
+一般の辺長と語長に対する始点復元の命題は参照用ノートに保存した。専用 Lean 二版は採用経路から外した。
 行列の独立適用の元の主張と証明は参照用ノートに保存した。この有限全探索は
 これらの具体例と実装経路を厳密整数計算で検算する。
 
 ## 実行方法
 
 ```sh
-sage sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension/check.sage
+sage sagemath/archive/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension/check.sage
 ```

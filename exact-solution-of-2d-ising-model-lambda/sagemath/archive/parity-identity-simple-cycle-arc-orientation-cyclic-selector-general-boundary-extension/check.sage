@@ -11,7 +11,7 @@ import itertools
 import json
 from pathlib import Path
 
-load("sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension/construction.sage")
+load("sagemath/archive/parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension/construction.sage")
 
 
 def word_from_path(side, first_vertex, first_incoming, outgoing_directions):
@@ -191,7 +191,7 @@ certificate = {
     "rule": "solve the row and column start residues from cumulative direction displacements and every recorded cut-flag congruence, then extend one boundary edge",
 }
 certificate_path = Path(
-    "sagemath/check/"
+    "sagemath/archive/"
     "parity-identity-simple-cycle-arc-orientation-cyclic-selector-general-boundary-extension/"
     "certificate.json")
 certificate_path.write_text(

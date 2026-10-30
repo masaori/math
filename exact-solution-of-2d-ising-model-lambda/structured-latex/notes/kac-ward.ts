@@ -7,6 +7,90 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_cut_flag_congruence_start_recovery_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 切断旗の合同条件による始点復元" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、切断旗による支持係数の再構成は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L,n\in\mathbb N`), "、", math(String.raw`2\le L`), " とし、",
+                        math(String.raw`i\in\{0,\ldots,n-1\}`), " ごとに累積変位 ",
+                        math(String.raw`\delta_i\in\mathbb Z`), " と切断旗 ",
+                        math(String.raw`(z_i,\ell_i)\in\{0,1\}^2`), " を取り、",
+                        math(String.raw`z_i\ell_i=0`), " とする。整数 ", math(String.raw`u`),
+                        " の ", math(String.raw`0`), " 以上 ", math(String.raw`L-1`),
+                        " 以下の剰余を ", math(String.raw`[u]_L`), " と書く。始点候補の集合を",
+                      ]),
+                      displayMath(String.raw`S:=\left\{r\in\{0,\ldots,L-1\}:
+\forall i,\quad
+\bigl(z_i=1\Longleftrightarrow[r+\delta_i]_L=0\bigr)\ \land
+\bigl(\ell_i=1\Longleftrightarrow[r+\delta_i]_L=L-1\bigr)
+\right\}`),
+                      paragraph(["と定める。また、正の切断旗が強制する剰余類の集合と、負の切断旗が除外する剰余類の集合を"]),
+                      displayMath(String.raw`\begin{aligned}
+F&:=\left\{[-\delta_i]_L:z_i=1\right\}
+\cup\left\{[L-1-\delta_i]_L:\ell_i=1\right\},\\
+B&:=\left\{[-\delta_i]_L:z_i=0\right\}
+\cup\left\{[L-1-\delta_i]_L:\ell_i=0\right\}
+\end{aligned}`),
+                      paragraph(["と定める。このとき整数の有限集合の等式"]),
+                      displayMath(String.raw`S=\left\{r\in\{0,\ldots,L-1\}:
+\bigl(\forall f\in F,\ r=f\bigr)\ \land\ r\notin B
+\right\}`),
+                      paragraph([
+                        "が成り立つ。したがって始点候補は、方向列の累積変位から作った有限個の等式と除外条件だけで復元でき、",
+                        "トーラスの全頂点を先に列挙する必要はない。扱う量は有限集合と整数の剰余だけであり、実数体も複素数体も現れない。",
+                      ]),
+
+      paragraph(["元の証明:"]),
+                      paragraph([math(String.raw`r\in\{0,\ldots,L-1\}`), " を固定する。まず ", math(String.raw`r\in S`), " とする。任意の ", math(String.raw`f\in F`), " を取る。"]),
+                      list([
+                        [
+                          math(String.raw`f=[-\delta_i]_L`), " かつ ", math(String.raw`z_i=1`), " となる ", math(String.raw`i`), " がある場合、",
+                          math(String.raw`r`), " が満たす切断旗の同値条件から ", math(String.raw`[r+\delta_i]_L=0`), " である。よって ",
+                          displayMath(String.raw`\begin{aligned}
+r&=[-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=0\text{ の合同式の移項}\bigr)\\
+&=f&&\bigl(\because\ f=[-\delta_i]_L\text{ の仮定}\bigr)
+\end{aligned}`),
+                        ],
+                        [
+                          math(String.raw`f=[L-1-\delta_i]_L`), " かつ ", math(String.raw`\ell_i=1`), " となる ", math(String.raw`i`), " がある場合も、",
+                          math(String.raw`[r+\delta_i]_L=L-1`), " から ",
+                          displayMath(String.raw`\begin{aligned}
+r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移項}\bigr)\\
+&=f&&\bigl(\because\ f=[L-1-\delta_i]_L\text{ の仮定}\bigr)
+\end{aligned}`),
+                        ],
+                      ]),
+                      paragraph([
+                        "従って ", math(String.raw`\forall f\in F,\ r=f`), " である。一方、もし ", math(String.raw`r\in B`), " なら、",
+                        "ある負の切断旗に対応する剰余が ", math(String.raw`r`), " に等しい。零側なら ", math(String.raw`[r+\delta_i]_L=0`),
+                        "、末尾側なら ", math(String.raw`[r+\delta_i]_L=L-1`), " となり、対応する旗が ", math(String.raw`0`),
+                        " であることと ", math(String.raw`S`), " の同値条件が矛盾する。従って ", math(String.raw`r\notin B`), " である。",
+                      ]),
+                      paragraph([
+                        "逆に ", math(String.raw`\forall f\in F,\ r=f`), " かつ ", math(String.raw`r\notin B`), " とする。任意の ", math(String.raw`i`),
+                        " を取る。", math(String.raw`z_i=1`), " なら ", math(String.raw`[-\delta_i]_L\in F`), " なので ",
+                        math(String.raw`r=[-\delta_i]_L`), " である。従って",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+[r+\delta_i]_L
+&=[[-\delta_i]_L+\delta_i]_L&&\bigl(\because\ r=[-\delta_i]_L\bigr)\\
+&=0&&\bigl(\because\ \text{剰余の定義}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "逆に ",
+                        math(String.raw`z_i=0`), " なら ", math(String.raw`[-\delta_i]_L\in B`), " であり、",
+                        math(String.raw`r\notin B`), " から ", math(String.raw`r\ne[-\delta_i]_L`), "、従って ",
+                        math(String.raw`[r+\delta_i]_L\ne0`), " である。同じ議論を ", math(String.raw`\ell_i`), " と ",
+                        math(String.raw`[L-1-\delta_i]_L`), " へ適用すると、", math(String.raw`\ell_i=1\Longleftrightarrow[r+\delta_i]_L=L-1`),
+                        " を得る。よって ", math(String.raw`r\in S`), " である。両包含から表示した集合の等式を得る。",
+                      ]),
+
+    ],
+  },
+  {
     id: "note_kac_ward_path_reversal_contact_pair_preservation_archived",
     targets: ["def_permutation_path_reversal"],
     title: { text: "不採用経路: 経路反転と接触対の対応" },
@@ -812,7 +896,7 @@ M(\varphi)
   },
   {
     id: "note_kac_ward_two_coordinate_boundary_completeness_archived",
-    targets: ["claim_cut_flag_congruence_start_recovery"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 二次元座標列と境界延長候補の復元" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、切断旗から支持を再構成する経路は採らない。元の主張と証明を保存する。"]),
@@ -827,7 +911,7 @@ M(\varphi)
                         " とし、各対で二つの旗が同時に一にならないとする。",
                       ]),
                       paragraph([
-                        ref("claim_cut_flag_congruence_start_recovery"),
+                        "参照用ノート「不採用経路: 切断旗の合同条件による始点復元」",
                         " を行の変位と旗へ適用して得る始点剰余類の有限集合を ", math(String.raw`S_{\mathrm r}`),
                         "、列へ適用して得るものを ", math(String.raw`S_{\mathrm c}`), " と書く。また ",
                       ]),
@@ -868,7 +952,7 @@ r\in S_{\mathrm r},\ c\in S_{\mathrm c}
 
                       paragraph([
                         "任意の ", math(String.raw`r,c\in\{0,\ldots,L-1\}`), " を取る。",
-                        ref("claim_cut_flag_congruence_start_recovery"),
+                        "参照用ノート「不採用経路: 切断旗の合同条件による始点復元」",
                         " を行の累積変位と行の旗へ適用すると、行の全切断旗に整合することと ",
                         math(String.raw`r\in S_{\mathrm r}`), " は同値である。同じ命題を列へ適用すると、列の全切断旗に整合することと ",
                         math(String.raw`c\in S_{\mathrm c}`), " は同値である。よって二つを合わせて",
@@ -882,7 +966,7 @@ w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
 \right)\\
 &\qquad\Longleftrightarrow
 \bigl(r\in S_{\mathrm r}\ \land\ c\in S_{\mathrm c}\bigr)
-&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ独立に適用}\bigr)
+&&\bigl(\because\ \text{参照用ノートの始点復元}\text{ を行と列へ独立に適用}\bigr)
 \end{aligned}`),
                       paragraph([
                         "を得る。座標列を ", math(String.raw`v_{r,c}:=\bigl([r+\delta_i^{\mathrm r}]_L,[c+\delta_i^{\mathrm c}]_L\bigr)_{i=0}^{n-1}`),
@@ -893,7 +977,7 @@ w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
 &=\{v_{r,c}:r,c\in\{0,\ldots,L-1\},\ r,c\text{ が全切断旗に整合する}\}
 &&\bigl(\because\ \mathcal P\text{ の定義}\bigr)\\
 &=\{v_{r,c}:r\in S_{\mathrm r},\ c\in S_{\mathrm c}\}
-&&\bigl(\because\ \blkref{claim_cut_flag_congruence_start_recovery}\text{ を行と列へ適用した上の同値}\bigr).
+&&\bigl(\because\ \text{参照用ノートの始点復元}\text{ を行と列へ適用した上の同値}\bigr).
 \end{aligned}`),
                       paragraph(["この等式は両方向の同値なので、復元規則は座標列を落とさず、余分な座標列も加えない。"]),
                       paragraph([
@@ -918,7 +1002,7 @@ w_L(c+\delta_i^{\mathrm c})=(z_i^{\mathrm c},\ell_i^{\mathrm c})\quad(0\le i<n)
   },
   {
     id: "note_kac_ward_cut_candidate_filter_archived",
-    targets: ["claim_cut_flag_congruence_start_recovery"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 実現可能な切断候補の濾過" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、切断旗による支持係数の再構成は採らない。元の主張と証明を保存する。"]),
@@ -988,7 +1072,7 @@ k\in\mathcal G
   },
   {
     id: "note_kac_ward_selected_support_coefficient_reconstruction_archived",
-    targets: ["claim_cut_flag_congruence_start_recovery"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 実現可能な最小切断による支持係数の再構成" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、巡回支持の係数を再構成する経路は採らない。元の主張と証明を保存する。"]),
@@ -1042,7 +1126,7 @@ k\in\mathcal G
   },
   {
     id: "note_kac_ward_two_support_coefficient_formula_archived",
-    targets: ["claim_cut_flag_congruence_start_recovery"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 二つの正準巡回支持の係数式" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開の支持係数を有限データから再構成する経路は採らない。以下は元の主張と証明を保存したものである。"]),
