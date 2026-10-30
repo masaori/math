@@ -28947,17 +28947,17 @@ const chapter_algebraic_eigenvalue = defineSection({
                         displayMath(String.raw`\begin{aligned}
 \bigl(\mathrm{Ev}_{\xi}(AB)\bigr)_{\tau,\tau''}
 &=\bigl((AB)_{\tau,\tau''}\bigr)(\xi)
-&&(\because\ \blkref{def_qbar_matrix_eval})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_eval}\bigr)\\
 &=\Bigl(\sum_{\tau'\in R_L}A_{\tau,\tau'}\,B_{\tau',\tau''}\Bigr)(\xi)
-&&(\because\ \blkref{def_matrix_product})\\
+&&\bigl(\because\ \blkref{def_matrix_product}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\,B_{\tau',\tau''}\bigr)(\xi)
-&&(\because\ \text{代入が有限和を保つこと。}\ \blkref{def_partition_polynomial})\\
+&&\bigl(\because\ \text{代入が有限和を保つこと。}\ \blkref{def_partition_polynomial}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(A_{\tau,\tau'}\bigr)(\xi)\,\bigl(B_{\tau',\tau''}\bigr)(\xi)
-&&(\because\ \text{代入が積を保つこと。}\ \blkref{def_partition_polynomial})\\
+&&\bigl(\because\ \text{代入が積を保つこと。}\ \blkref{def_partition_polynomial}\bigr)\\
 &=\sum_{\tau'\in R_L}\bigl(\mathrm{Ev}_{\xi}(A)\bigr)_{\tau,\tau'}\,\bigl(\mathrm{Ev}_{\xi}(B)\bigr)_{\tau',\tau''}
-&&(\because\ \blkref{def_qbar_matrix_eval}\ \text{を 2 箇所へ適用})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_eval}\ \text{を 2 箇所へ適用}\bigr)\\
 &=\bigl(\mathrm{Ev}_{\xi}(A)\,\mathrm{Ev}_{\xi}(B)\bigr)_{\tau,\tau''}
-&&(\because\ \blkref{def_qbar_matrix_product})
+&&\bigl(\because\ \blkref{def_qbar_matrix_product}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`\tau`),
