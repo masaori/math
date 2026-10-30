@@ -7,6 +7,84 @@ import { defineNotes, displayMath, math, paragraph, ref } from "../schema.ts";
 
 export default defineNotes([
   {
+    id: "note_kac_ward_fiber_phase_weight_topological_form_archived",
+    targets: ["def_fiber_phase_weight"],
+    title: { text: "不採用経路: ファイバーの位相付き寄与の位相形" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、ファイバーの位相付き寄与による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                      paragraph([
+                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
+                        math(String.raw`D,E\subseteq E_L`), " は ",
+                        math(String.raw`D\cap E=\varnothing`), " かつ ",
+                        math(String.raw`\operatorname{Even}_L(E)`),
+                        "（", ref("def_even_edge_subset"), "）を満たすとする。各 ",
+                        math(String.raw`\varphi\in\mathcal N_L(D,E)`),
+                        "（", ref("def_nonbacktracking_permutation_fiber"), "）について写像 ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
+                        " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`),
+                        "（", ref("def_moved_orbit_family"), "）について ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                        " となるように一つ選び、",
+                        math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                        "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
+=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)`),
+                      paragraph([
+                        "が成り立つ。とくに、左辺は基点の選択を含まない式なので（",
+                        ref("def_fiber_phase_weight"),
+                        "）、右辺の値は写像の族 ",
+                        math(String.raw`\bigl(\vec e_{\ast}^{\,\varphi}\bigr)_{\varphi\in\mathcal N_L(D,E)}`),
+                        " の選び方に依らない。二つの切断線偶奇は ",
+                        ref("def_edge_sequence_seam_parities"),
+                        "、循環総回転数は ", ref("def_cyclic_total_turning"),
+                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                        " である。符号は整数だが、部分集合の鎖 ",
+                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                        " により ", math(String.raw`\overline{\mathbb Q}`),
+                        " の元として掛ける。全ての和と積は有限であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
+                        ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " であり、", ref("def_nonbacktracking_permutations"), " により ",
+                        math(String.raw`\varphi`),
+                        " は、動く辺を直ちに引き返さない後続へ写すので、",
+                        ref("claim_moved_orbit_weight_phase_twist"),
+                        " の仮定を満たす。各 ", math(String.raw`C\in\mathcal C(\varphi)`), " は ",
+                        ref("claim_moved_orbit_partition"),
+                        " により空でないので基点 ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                        " が取れ、", math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
+                        math(String.raw`\sim_{\varphi}`), " の同値類の集合なので ",
+                        math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C`),
+                        " である。求めたい値から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal K^{a,b}_L(D,E)
+&=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+&&\bigl(\because\ \blkref{def_fiber_phase_weight}\bigr)\\
+&=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "和と積の添字集合はすべて有限であり ",
+                        math(String.raw`\overline{\mathbb Q}`),
+                        " の中で閉じる。実数体も複素数体も現れない。左辺が基点の選択を含まないので、この等式により右辺の値も写像の族の選び方に依らない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_selected_support_coefficient_reconstruction_archived",
     targets: ["claim_cut_flag_realizable_candidate_selection"],
     title: { text: "不採用経路: 実現可能な最小切断による支持係数の再構成" },

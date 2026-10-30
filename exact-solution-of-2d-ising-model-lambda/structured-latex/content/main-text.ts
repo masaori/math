@@ -76933,100 +76933,6 @@ const chapter_kac_ward_direct_comparison = defineSection({
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_fiber_phase_weight_topological_form",
-              labels: [],
-              title: { text: "ファイバーの位相付き寄与の位相形" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_fiber_phase_weight_topological_form",
-                  focus: {
-                    id: "kac_ward_claim_fiber_phase_weight_topological_form",
-                    kind: "claim",
-                    title: { text: "ファイバーの位相付き寄与は切断線偶奇の符号と回転位相の冪で書ける" },
-                    labels: ["claim_fiber_phase_weight_topological_form"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/fiber-phase-weight-topological-form"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                        "（", ref("def_spin_structures"), "）とし、辺集合 ",
-                        math(String.raw`D,E\subseteq E_L`), " は ",
-                        math(String.raw`D\cap E=\varnothing`), " かつ ",
-                        math(String.raw`\operatorname{Even}_L(E)`),
-                        "（", ref("def_even_edge_subset"), "）を満たすとする。各 ",
-                        math(String.raw`\varphi\in\mathcal N_L(D,E)`),
-                        "（", ref("def_nonbacktracking_permutation_fiber"), "）について写像 ",
-                        math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
-                        " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`),
-                        "（", ref("def_moved_orbit_family"), "）について ",
-                        math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
-                        " となるように一つ選び、",
-                        math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
-                        "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
-                        math(String.raw`\overline{\mathbb Q}`), " の等式",
-                      ]),
-                      displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
-=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
-\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)`),
-                      paragraph([
-                        "が成り立つ。とくに、左辺は基点の選択を含まない式なので（",
-                        ref("def_fiber_phase_weight"),
-                        "）、右辺の値は写像の族 ",
-                        math(String.raw`\bigl(\vec e_{\ast}^{\,\varphi}\bigr)_{\varphi\in\mathcal N_L(D,E)}`),
-                        " の選び方に依らない。二つの切断線偶奇は ",
-                        ref("def_edge_sequence_seam_parities"),
-                        "、循環総回転数は ", ref("def_cyclic_total_turning"),
-                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
-                        " である。符号は整数だが、部分集合の鎖 ",
-                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
-                        " により ", math(String.raw`\overline{\mathbb Q}`),
-                        " の元として掛ける。全ての和と積は有限であり、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
-                        ref("def_nonbacktracking_permutation_fiber"), " により ",
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " であり、", ref("def_nonbacktracking_permutations"), " により ",
-                        math(String.raw`\varphi`),
-                        " は、動く辺を直ちに引き返さない後続へ写すので、",
-                        ref("claim_moved_orbit_weight_phase_twist"),
-                        " の仮定を満たす。各 ", math(String.raw`C\in\mathcal C(\varphi)`), " は ",
-                        ref("claim_moved_orbit_partition"),
-                        " により空でないので基点 ",
-                        math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
-                        " が取れ、", math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
-                        math(String.raw`\sim_{\varphi}`), " の同値類の集合なので ",
-                        math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C`),
-                        " である。求めたい値から始める。",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\mathcal K^{a,b}_L(D,E)
-&=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
-\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
-&&\bigl(\because\ \blkref{def_fiber_phase_weight}\bigr)\\
-&=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
-\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "全ての和と積は有限集合の上の有限和・有限積であり ",
-                        math(String.raw`\overline{\mathbb Q}`),
-                        " の中で閉じる。実数体も複素数体も現れない。左辺が基点の選択を含まないので、この等式により右辺の値も写像の族の選び方に依らない。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
               id: "kac_ward_heading_vertex_simple_orbit_quadratic_sign",
               labels: [],
               title: { text: "頂点単純な置換軌道の二次符号" },
@@ -77052,8 +76958,7 @@ const chapter_kac_ward_direct_comparison = defineSection({
                       displayMath(String.raw`-(-1)^{a\,h(\gamma)+b\,v(\gamma)}\,\zeta_8^{\,t_{\circ}(\gamma)}
 =\chi_{a,b}\bigl(h(\gamma),v(\gamma)\bigr)`),
                       paragraph([
-                        "が成り立つ。左辺はファイバーの位相形（", ref("claim_fiber_phase_weight_topological_form"),
-                        "）で一つの置換軌道が与える因子であり、右辺は ", ref("def_torus_quadratic_sign"),
+                        "が成り立つ。左辺は一つの置換軌道の位相因子であり、右辺は ", ref("def_torus_quadratic_sign"),
                         " の巻き付き二次符号である。符号は部分集合の鎖 ",
                         math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
                         " により代数的数として掛ける。実数体も複素数体も現れない。",
@@ -85698,11 +85603,16 @@ q^2+2q-1>0&\Longrightarrow Q_L^{0,0}(q)<0\ \text{かつ}\ Q_L^{a,b}(q)>0\quad((a
                   paragraph([
                     ref("claim_mode_inversion_orbit_cardinality"),
                     " より一元軌道の元は ", math(String.raw`\{1,-1\}^2`),
-                    " に属する。", math(String.raw`(1,1)`), " がモード集合に属する条件は ",
-                    math(String.raw`1^L=(-1)^a`), " かつ ", math(String.raw`1^L=(-1)^b`),
-                    " であり、", ref("def_horizontal_twisted_modes"), " と ",
-                    ref("def_vertical_twisted_modes"), " により ",
-                    math(String.raw`(a,b)=(0,0)`), " と同値である。",
+                    " に属する。", math(String.raw`(1,1)`), " がモード集合に属する条件を計算する。",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+(1,1)\in\mathcal U_a\times\mathcal W_b
+&\Longleftrightarrow 1^L=(-1)^a\ \text{かつ}\ 1^L=(-1)^b
+&&\bigl(\because\ \blkref{def_horizontal_twisted_modes},\ \blkref{def_vertical_twisted_modes}\bigr)\\
+&\Longleftrightarrow (a,b)=(0,0)
+&&\bigl(\because\ 1^L=1\text{ と }\blkref{def_spin_structures}\bigr).
+\end{aligned}`),
+                  paragraph([
                     "このモードの軌道は一つであり、対応する因子だけが ",
                     math(String.raw`-(q^2+2q-1)`), " となる。",
                   ]),

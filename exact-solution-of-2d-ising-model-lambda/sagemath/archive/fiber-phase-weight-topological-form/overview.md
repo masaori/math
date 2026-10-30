@@ -9,8 +9,10 @@ $L=2$ のトーラスと四つのスピン構造 $(a,b)$、全ての非空ファ
   位相形 $\sum_\varphi\prod_C\bigl(-(-1)^{a\,h(\gamma^\varphi_C)+b\,v(\gamma^\varphi_C)}\zeta_8^{t_\circ(\gamma^\varphi_C)}\bigr)$ の一致、
 - 位相形の値が基点の選び方に依らないこと（各軌道列を一つ回した基点で再計算して比較）。
 
-- 実行: `sage sagemath/check/fiber-phase-weight-topological-form/check.sage`
+- 実行: `sage sagemath/archive/fiber-phase-weight-topological-form/check.sage`
 - 状態: PASS（2026-09-02）
 - 結果: 非後退置換 $30{,}784$ 個・非空ファイバー $609$ 個・スピン構造 4 件、検査 $2{,}436$ 件。
 
 計算はすべて円分体 $\mathbb{Q}(\zeta_8)$ の厳密計算であり、浮動小数点は使わない。
+
+Pfaffian 経路の採用により本文から退避した主張の有限検算を保管する。
