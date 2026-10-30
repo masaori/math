@@ -88121,6 +88121,104 @@ B_q(\theta_1,\theta_2)-(r^2+2r-1)^2
             role: "primary",
             element: {
               kind: "elementGroup",
+              id: "group_of_real_escape_claim_shifted_mode_riemann_sums",
+              focus: {
+                id: "real_escape_claim_shifted_mode_riemann_sums",
+                kind: "claim",
+                title: { text: "半格子ずれた四つのモード和は同じ積分へ収束する" },
+                labels: ["claim_shifted_mode_riemann_sums"],
+                habitat: "R",
+                realEscape: "連続極限。有限モード和を実数の角の格子和として読み、連続関数の一様連続性と Riemann 積分により辺長を無限大へ送る。",
+                verification: ["sagemath/check/shifted-mode-riemann-sums"],
+                statement: [
+                  paragraph([
+                    "有理数 ", math(String.raw`q\in\mathbb Q`), "（", math(String.raw`0<q<1`),
+                    "）とスピン構造 ", math(String.raw`(a,b)\in\mathcal S`), " を固定する。",
+                    ref("claim_dispersion_angle_log_continuous"), " の連続関数 ", math(String.raw`f_q:\mathbb R^2\to\mathbb R`),
+                    " を使う。各辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
+                    math(String.raw`k,l\in\{0,\ldots,L-1\}`), " に対して",
+                  ]),
+                  displayMath(String.raw`h_L:=\frac{2\pi}{L},\qquad
+t^{a,b}_{L,k,l}:=\bigl(h_L(k+a/2),h_L(l+b/2)\bigr)\in[0,2\pi]^2`),
+                  paragraph(["と置く。このとき四つの ", math(String.raw`(a,b)\in\mathcal S`), " のどれについても"]),
+                  displayMath(String.raw`\lim_{L\to\infty}\frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+=\frac{1}{8\pi^2}\int_0^{2\pi}\!\int_0^{2\pi} f_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1`),
+                  paragraph(["が成り立つ。積分は実数体上の連続関数の Riemann 積分である。"]),
+                ],
+                proof: [
+                  paragraph([
+                    "各 ", math(String.raw`L\ge1`), " と各 ", math(String.raw`k,l\in\{0,\ldots,L-1\}`),
+                    " について、", ref("claim_twisted_mode_product_bijection"), " の全単射による唯一の逆像を ",
+                    math(String.raw`(\varpi^{a,b}_{L,k,l},\varsigma^{a,b}_{L,k,l})\in\mathcal U_a\times\mathcal W_b`),
+                    " と書く。", ref("claim_dispersion_product_real_log_sum"), " から一続きに計算すると",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\frac{1}{L^2}\log_{\mathbb R}\left|\rho_{R\to\mathbb R}(Q_L^{a,b}(q))\right|
+&=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
+\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
+&&\bigl(\because\ \blkref{claim_dispersion_product_real_log_sum}\bigr)\\
+&=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}
+\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi^{a,b}_{L,k,l},\varsigma^{a,b}_{L,k,l}))
+&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ による再添字付け}\bigr)\\
+&=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}\log_{\mathbb R}B_q(t^{a,b}_{L,k,l})
+&&\bigl(\because\ \blkref{claim_dispersion_angle_realization}\bigr)\\
+&=\frac{1}{2L^2}\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})
+&&\bigl(\because\ \blkref{claim_dispersion_angle_log_continuous}\text{ の定義}\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "次に ", math(String.raw`I:=\int_0^{2\pi}\!\int_0^{2\pi}f_q(\theta_1,\theta_2)\,d\theta_2\,d\theta_1`),
+                    " と置く。", ref("claim_dispersion_angle_log_continuous"), " により ",
+                    math(String.raw`f_q`), " はコンパクトな正方形 ", math(String.raw`[0,2\pi]^2`),
+                    " 上で一様連続であり、Riemann 可積分である。任意の実数 ",
+                    math(String.raw`\varepsilon>0`), " を取る。一様連続性から、",
+                    math(String.raw`x,y\in[0,2\pi]^2`), " が ",
+                    math(String.raw`\max_{j\in\{1,2\}}|x_j-y_j|<\eta`),
+                    " を満たせば ", math(String.raw`|f_q(x)-f_q(y)|<\varepsilon/(8\pi^2)`),
+                    " となる実数 ", math(String.raw`\eta>0`), " を取る。",
+                  ]),
+                  paragraph([
+                    "自然数の Archimedes 性から ", math(String.raw`L_0\ge1`),
+                    " を ", math(String.raw`2\pi/L_0<\eta`), " となるように取る。",
+                    "任意の ", math(String.raw`L\ge L_0`), " と ",
+                    math(String.raw`k,l\in\{0,\ldots,L-1\}`), " について、小区画",
+                  ]),
+                  displayMath(String.raw`C_{L,k,l}:=[kh_L,(k+1)h_L]\times[lh_L,(l+1)h_L]`),
+                  paragraph([
+                    "を定める。", math(String.raw`a,b\in\{0,1\}`), " より標本点 ",
+                    math(String.raw`t^{a,b}_{L,k,l}`), " はこの小区画に属する。",
+                    "小区画内の任意の ", math(String.raw`x`), " に対して各座標の差は ",
+                    math(String.raw`h_L\le h_{L_0}<\eta`), " 以下なので、",
+                    math(String.raw`|f_q(x)-f_q(t^{a,b}_{L,k,l})|<\varepsilon/(8\pi^2)`),
+                    " である。積分の加法性と絶対値の三角不等式を使うと",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\left|I-h_L^2\sum_{k,l=0}^{L-1}f_q(t^{a,b}_{L,k,l})\right|
+&=\left|\sum_{k,l=0}^{L-1}\int_{C_{L,k,l}}\bigl(f_q(x)-f_q(t^{a,b}_{L,k,l})\bigr)\,dx\right|
+&&\bigl(\because\ C_{L,k,l}\text{ は境界を除き正方形を分割する}\bigr)\\
+&\le\sum_{k,l=0}^{L-1}\int_{C_{L,k,l}}\left|f_q(x)-f_q(t^{a,b}_{L,k,l})\right|\,dx
+&&\bigl(\because\ \text{積分の三角不等式}\bigr)\\
+&\le\frac{\varepsilon}{8\pi^2}\sum_{k,l=0}^{L-1}\operatorname{area}(C_{L,k,l})
+&&\bigl(\because\ \text{各小区画での一様評価と積分の単調性}\bigr)\\
+&=\frac{\varepsilon}{2}
+&&\bigl(\because\ \sum_{k,l}\operatorname{area}(C_{L,k,l})=(2\pi)^2\bigr).
+\end{aligned}`),
+                  paragraph([
+                    "右辺は ", math(String.raw`\varepsilon`), " より小さい。これは任意の ", math(String.raw`\varepsilon>0`), " と全ての ",
+                    math(String.raw`L\ge L_0`), " について成り立つので、",
+                    math(String.raw`h_L^2\sum_{k,l}f_q(t^{a,b}_{L,k,l})\to I`),
+                    " である。", math(String.raw`h_L^2=4\pi^2/L^2`),
+                    " を代入し、上の有限和の等式を用いれば結論を得る。",
+                    "一様連続性の評価は ", math(String.raw`a,b`),
+                    " によらないので四つの極限は同じである。",
+                  ]),
+                ],
+              },
+            },
+          },
+          {
+            role: "primary",
+            element: {
+              kind: "elementGroup",
               id: "group_of_thermodynamic_limit_def_open_square_free_energy_density",
               beforeFocus: [
                 {

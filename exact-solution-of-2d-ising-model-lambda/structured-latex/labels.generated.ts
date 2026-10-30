@@ -623,6 +623,7 @@ export const ALL_LABELS = [
   "claim_shift_matrix_pow",
   "claim_shift_matrix_right",
   "claim_shift_orbit_preserving",
+  "claim_shifted_mode_riemann_sums",
   "claim_short_pair_coefficient_nonzero",
   "claim_short_pair_rotation_phase_nonzero",
   "claim_signed_even_subgraph_duality_sign",
