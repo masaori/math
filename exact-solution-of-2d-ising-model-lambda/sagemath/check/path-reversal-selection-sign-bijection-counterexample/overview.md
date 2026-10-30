@@ -1,6 +1,6 @@
 # 経路反転軌道と選択補集合軌道の符号保存対応は存在しない
 
-**対象ラベル**: `claim_path_reversal_fixed_point_no_single_traversal`, `claim_weighted_path_reversal_selection_orbit_sums`
+**対象ラベル**: `claim_weighted_path_reversal_selection_orbit_sums`（経路反転の不動点補題は参照用ノートへ退避）
 - 検証コード: `check.sage`
 - 方法: 一辺 $L=2$ の単純通過辺集合が非空な全ファイバーについて、四つのスピン構造と二つの符号ごとに、経路反転軌道側と選択補集合軌道側の元数を比較する。両側の軌道は全て二元なので、符号と重みを保つ全単射が存在するなら符号別元数は一致しなければならない。
 - 浮動小数点: 使用しない（有限集合の元数と $\mathbb Q(\zeta_8)$ の等号だけ）。

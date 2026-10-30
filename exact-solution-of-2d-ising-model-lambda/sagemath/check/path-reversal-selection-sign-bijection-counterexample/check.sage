@@ -1,6 +1,6 @@
 """経路反転軌道と選択補集合軌道の符号保存対応が存在しない有限反例を検査する。
 
-対象: claim_path_reversal_fixed_point_no_single_traversal と
+対象: 退避済みの経路反転不動点補題と
 claim_weighted_path_reversal_selection_orbit_sums。
 
 一辺 L=2 の単純通過辺集合が非空な全ファイバーについて、四つの
