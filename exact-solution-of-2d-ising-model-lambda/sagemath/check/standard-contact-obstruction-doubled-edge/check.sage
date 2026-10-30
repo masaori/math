@@ -1,6 +1,6 @@
 """標準接触対の反転像による障害が反転対の辺を与えることを厳密検査する。
 
-対象: claim_standard_contact_obstruction_witnesses_doubled_edge。
+退避した「標準接触対の反転像の障害と反転対」の有限検算。
 
 一辺 L=2 の全非後退置換について、標準接触対 {e,f} が
 phi(f)=iota(e) または phi(e)=iota(f) を満たすなら、対応する台の辺が

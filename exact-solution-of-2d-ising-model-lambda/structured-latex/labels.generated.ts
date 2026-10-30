@@ -629,7 +629,6 @@ export const ALL_LABELS = [
   "claim_square_difference_from_multiple_side_bound",
   "claim_square_of_sum_le_twice_sum_of_squares",
   "claim_staircase_from_band_top_meets_lift_only_at_base",
-  "claim_standard_contact_obstruction_witnesses_doubled_edge",
   "claim_standard_contact_smoothing_involution",
   "claim_step_advances_direction",
   "claim_successor_direction_selection",

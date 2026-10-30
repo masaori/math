@@ -7,6 +7,50 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_standard_contact_obstruction_doubled_edge_archived",
+    targets: ["def_doubled_edge_set"],
+    title: { text: "不採用経路: 標準接触対の反転像の障害と反転対" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）が接触対を持ち、標準接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`),
+                        "（", ref("def_standard_contact_pair"), "）が、反転像による障害",
+                      ]),
+                      displayMath(String.raw`\varphi(\vec f)=\iota(\vec e)\quad\text{または}\quad
+\varphi(\vec e)=\iota(\vec f)`),
+                      paragraph(["を持つとする。このとき"]),
+                      displayMath(String.raw`p(\vec e)\in D(\varphi)\quad\text{または}\quad p(\vec f)\in D(\varphi)`),
+                      paragraph([
+                        "であり、とくに ", math(String.raw`D(\varphi)\ne\varnothing`), " である。ここで台の辺への射影 ",
+                        math(String.raw`p(e,d):=e`), " は ", ref("def_oriented_edges"), "、反転対の辺集合 ",
+                        math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"), " で定めた。したがってこの反転像による障害は、",
+                        "反転対を含まないファイバーでは起こらない。全て有限集合の元と部分集合の比較だけで判定できる。",
+                        "実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "仮定の二場合を分ける。第一の場合 ", math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " を取る。",
+                      ]),
+                      paragraph([
+                        "もし ", math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"), " により ",
+                        math(String.raw`\varphi(\iota(\vec e))=\iota(\vec e)=\varphi(\vec f)`), " である。置換の単射性（",
+                        ref("def_row_permutation"), "）から ", math(String.raw`\iota(\vec e)=\vec f`), " となるが、これを仮定の等式へ代入すると ",
+                        math(String.raw`\varphi(\vec f)=\vec f`), " となり ", math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
+                        math(String.raw`\iota(\vec e)\in M(\varphi)`), " である。", math(String.raw`\vec e\in M(\varphi)`),
+                        " と合わせ、", ref("def_doubled_edge_set"), " により ", math(String.raw`p(\vec e)\in D(\varphi)`), " である。",
+                      ]),
+                      paragraph([
+                        "第二の場合 ", math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " も ", math(String.raw`\vec e`), " と ",
+                        math(String.raw`\vec f`), " を入れ替えた同じ論法により ", math(String.raw`p(\vec f)\in D(\varphi)`), " を与える。",
+                        "したがってどちらの場合にも主張の選言が成り立ち、", math(String.raw`D(\varphi)\ne\varnothing`), " である。",
+                      ]),
+    ],
+  },
+
+  {
     id: "note_kac_ward_selection_even_subgraph_simple_transitivity_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 非空な選択集合への偶部分グラフの単純推移的作用" },
@@ -172,7 +216,7 @@ export default defineNotes([
                         "したがって第一または第二の等式、すなわち反転像による障害 ",
                         math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " または ",
                         math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " が成り立つ。",
-                        ref("claim_standard_contact_obstruction_witnesses_doubled_edge"), " により ",
+                        "退避した「標準接触対の反転像の障害は反転対の辺を指し示す」", " により ",
                         math(String.raw`p(\vec e)\in D(\varphi)`), " または ",
                         math(String.raw`p(\vec f)\in D(\varphi)`), " であり、とくに ",
                         math(String.raw`D(\varphi)\ne\varnothing`), " である。",

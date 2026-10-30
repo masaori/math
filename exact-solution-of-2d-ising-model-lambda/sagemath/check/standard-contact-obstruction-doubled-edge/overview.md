@@ -1,6 +1,8 @@
 # SageMath Check: 標準接触対の反転像の障害と反転対の辺
 
-**対象ラベル**: `claim_standard_contact_obstruction_witnesses_doubled_edge`
+**対象ラベル**: `def_doubled_edge_set`
+
+元の主張と証明は参照用ノート「不採用経路: 標準接触対の反転像の障害と反転対」に保存した。
 
 標準接触対 $\{\vec e,\vec f\}$ が
 $\varphi(\vec f)=\iota(\vec e)$ または
