@@ -890,13 +890,13 @@ q
                         displayMath(String.raw`\begin{aligned}
 (\log p)(r)
 &=v_r(p)-v_r(1)
-&&(\because\ \blkref{def_rational_log}\text{ を表示 }p=p/1\text{ へ適用})\\
+&&\bigl(\because\ \blkref{def_rational_log}\text{ を表示 }p=p/1\text{ へ適用}\bigr)\\
 &=v_r(p)
-&&(\because\ v_r(1)=0\text{。}\blkref{def_prime_exponent})\\
+&&\bigl(\because\ v_r(1)=0\text{。}\blkref{def_prime_exponent}\bigr)\\
 &=\begin{cases}1,&r=p,\\0,&r\ne p,\end{cases}
-&&(\because\ p=p^1\text{ は素数 }p\text{ の有限積表示。}\blkref{def_prime_exponent})\\
+&&\bigl(\because\ p=p^1\text{ は素数 }p\text{ の有限積表示。}\blkref{def_prime_exponent}\bigr)\\
 &=\ell_p(r)
-&&(\because\ \blkref{def_log_order_group}\text{ の生成元 }\ell_p\text{ の定義})
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の生成元 }\ell_p\text{ の定義}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\log p=\ell_p
 \qquad\bigl(\because\ \text{全ての素数 }r\text{ で値が等しい。}\Lambda\text{ の写像としての相等}\bigr)`),
@@ -912,13 +912,13 @@ q
                         displayMath(String.raw`\begin{aligned}
 \log(p^z)
 &=\log(p^n)
-&&(\because\ z=n)\\
+&&\bigl(\because\ z=n\bigr)\\
 &=n\log p
-&&(\because\ \blkref{claim_log_power})\\
+&&\bigl(\because\ \blkref{claim_log_power}\bigr)\\
 &=n\ell_p
-&&(\because\ \log p=\ell_p)\\
+&&\bigl(\because\ \log p=\ell_p\bigr)\\
 &=z\ell_p
-&&(\because\ z=n)
+&&\bigl(\because\ z=n\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`z=-(n+1)<0`),
@@ -931,25 +931,25 @@ q
                         displayMath(String.raw`\begin{aligned}
 0
 &=\log 1
-&&(\because\ \blkref{claim_log_power}\text{ の }k=0)\\
+&&\bigl(\because\ \blkref{claim_log_power}\text{ の }k=0\bigr)\\
 &=\log\bigl(p^{n+1}(p^{n+1})^{-1}\bigr)
-&&(\because\ p^{n+1}(p^{n+1})^{-1}=1)\\
+&&\bigl(\because\ p^{n+1}(p^{n+1})^{-1}=1\bigr)\\
 &=\log(p^{n+1})+\log\bigl((p^{n+1})^{-1}\bigr)
-&&(\because\ \blkref{claim_log_additive})
+&&\bigl(\because\ \blkref{claim_log_additive}\bigr)
 \end{aligned}`),
                         paragraph(["を得る。したがって"]),
                         displayMath(String.raw`\begin{aligned}
 \log(p^z)
 &=\log\bigl((p^{n+1})^{-1}\bigr)
-&&(\because\ z=-(n+1)\text{ と整数冪の定義})\\
+&&\bigl(\because\ z=-(n+1)\text{ と整数冪の定義}\bigr)\\
 &=-\log(p^{n+1})
-&&(\because\ \text{直前の等式を }\Lambda\text{ の加法群で移項})\\
+&&\bigl(\because\ \text{直前の等式を }\Lambda\text{ の加法群で移項}\bigr)\\
 &=-(n+1)\log p
-&&(\because\ \blkref{claim_log_power})\\
+&&\bigl(\because\ \blkref{claim_log_power}\bigr)\\
 &=-(n+1)\ell_p
-&&(\because\ \log p=\ell_p)\\
+&&\bigl(\because\ \log p=\ell_p\bigr)\\
 &=z\ell_p
-&&(\because\ z=-(n+1))
+&&\bigl(\because\ z=-(n+1)\bigr)
 \end{aligned}`),
                         paragraph([
                           "最後に有限台の大きさについて帰納する。零写像 ",
@@ -961,9 +961,9 @@ q
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(\operatorname{rat}_{\Lambda}(0)\bigr)
 &=\log1
-&&(\because\ \blkref{def_rational_of_log}\text{ の空積})\\
+&&\bigl(\because\ \blkref{def_rational_of_log}\text{ の空積}\bigr)\\
 &=0
-&&(\because\ \blkref{claim_log_power}\text{ の }k=0)
+&&\bigl(\because\ \blkref{claim_log_power}\text{ の }k=0\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。",
@@ -977,13 +977,13 @@ q
                         displayMath(String.raw`\begin{aligned}
 \log\bigl(\operatorname{rat}_{\Lambda}(z\ell_p+\mu)\bigr)
 &=\log\bigl(p^z\operatorname{rat}_{\Lambda}(\mu)\bigr)
-&&(\because\ \blkref{def_rational_of_log}\text{、}p\notin\operatorname{supp}(\mu))\\
+&&\bigl(\because\ \blkref{def_rational_of_log}\text{、}p\notin\operatorname{supp}(\mu)\bigr)\\
 &=\log(p^z)+\log\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)
-&&(\because\ \blkref{claim_log_additive})\\
+&&\bigl(\because\ \blkref{claim_log_additive}\bigr)\\
 &=z\ell_p+\log\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)
-&&(\because\ \log(p^z)=z\ell_p)\\
+&&\bigl(\because\ \log(p^z)=z\ell_p\bigr)\\
 &=z\ell_p+\mu
-&&(\because\ \text{帰納法の仮定})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
                         paragraph([
                           "となる。すべての ",
@@ -77288,12 +77288,12 @@ S(S(\varphi))
               kind: "section",
               id: "kac_ward_heading_phase_reversing_contact_smoothing",
               labels: [],
-              title: { text: "位相寄与の符号を反転する接触平滑化" },
+              title: { text: "位相反転接触対" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_contact_smoothing_phase_reversal_iff",
+                  id: "group_of_kac_ward_definition_phase_reversing_contact_pair",
                   beforeFocus: [
                     {
                       role: "prerequisiteDefinition",
@@ -77320,100 +77320,26 @@ S(S(\varphi))
                         ],
                       },
                     },
-                    {
-                      role: "prerequisiteDefinition",
-                      element: {
-                        id: "kac_ward_definition_phase_reversing_contact_pair",
-                        kind: "definition",
-                        title: { text: "位相反転接触対" },
-                        labels: ["def_phase_reversing_contact_pair"],
-                        habitat: "Z",
-                        statement: [
-                          paragraph([
-                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の切り替え可能な接触対 ",
-                            math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"),
-                            "）が位相反転接触対であるとは、整数の等式",
-                          ]),
-                          displayMath(String.raw`\tau\bigl(\vec e,\varphi(\vec e)\bigr)
-+\tau\bigl(\vec f,\varphi(\vec f)\bigr)
-=\tau\bigl(\vec e,\varphi(\vec f)\bigr)
-+\tau\bigl(\vec f,\varphi(\vec e)\bigr)`),
-                          paragraph([
-                            "が成り立つことと定める。一歩の回転数は ", ref("def_step_turning"), " である。",
-                            "二辺を交換しても両辺が同時に入れ替わるので、二元部分集合の元の並べ方に依らない。",
-                          ]),
-                        ],
-                      },
-                    },
                   ],
                   focus: {
-                    id: "kac_ward_claim_contact_smoothing_phase_reversal_iff",
-                    kind: "claim",
-                    title: { text: "接触平滑化が位相寄与の符号を反転するための必要十分条件" },
-                    labels: ["claim_contact_smoothing_phase_reversal_iff"],
-                    habitat: "Qbar",
-                    verification: ["sagemath/check/contact-smoothing-phase-reversal"],
+                    id: "kac_ward_definition_phase_reversing_contact_pair",
+                    kind: "definition",
+                    title: { text: "位相反転接触対" },
+                    labels: ["def_phase_reversing_contact_pair"],
+                    habitat: "Z",
                     statement: [
                       paragraph([
-                        math(String.raw`(a,b)\in\mathcal S`), "、",
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " と、その切り替え可能な接触対 ",
-                        math(String.raw`\{\vec e,\vec f\}`), " を取り、",
-                        math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
-                        "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の切り替え可能な接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"),
+                        "）が位相反転接触対であるとは、整数の等式",
                       ]),
-                      displayMath(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
+                      displayMath(String.raw`\tau\bigl(\vec e,\varphi(\vec e)\bigr)
+    +\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+    =\tau\bigl(\vec e,\varphi(\vec f)\bigr)
+    +\tau\bigl(\vec f,\varphi(\vec e)\bigr)`),
                       paragraph([
-                        "が成り立つことと、", math(String.raw`\{\vec e,\vec f\}`), " が位相反転接触対（",
-                        ref("def_phase_reversing_contact_pair"), "）であることは同値である。",
-                        "この条件はスピン構造に依らない。したがって、切り替え可能性だけから符号反転を結論してはならない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`m:=\lvert M(\varphi)\rvert=\lvert M(\psi)\rvert\in\mathbb N`),
-                        " と置く（", ref("claim_switchable_contact_smoothing_preserves_fiber"), "）。",
-                        math(String.raw`t_{\vec e,\vec f}`), " を二辺だけの互換とすると、平滑化の定義から ",
-                        math(String.raw`\psi=\varphi\circ t_{\vec e,\vec f}`), " である。ゆえに",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{sgn}(\psi)
-&=\operatorname{sgn}(\varphi)\operatorname{sgn}(t_{\vec e,\vec f})
-&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
-&=-\operatorname{sgn}(\varphi)
-&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。さらに ", ref("claim_permutation_sign_moved_orbit_product"),
-                        " と有限積の並べ替えから、任意の非後退置換 ", math(String.raw`\eta`), " について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\mathcal W^{a,b}_L(\eta)
-&=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
-\prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と }\blkref{claim_permutation_sign_moved_orbit_product}\text{、有限積の並べ替え}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "となる。平滑化で変わる二因子だけを取り出す。整数",
-                      ]),
-                      displayMath(String.raw`t_{\mathrm{diff}}:=
-\tau(\vec e,\varphi(\vec e))+\tau(\vec f,\varphi(\vec f))
--\tau(\vec e,\varphi(\vec f))-\tau(\vec f,\varphi(\vec e))`),
-                      paragraph(["と置くと、"]),
-                      displayMath(String.raw`\begin{aligned}
-M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
-&=M^{a,b}_{\vec e,\varphi(\vec e)}M^{a,b}_{\vec f,\varphi(\vec f)}\,\zeta_8^{-t_{\mathrm{diff}}}
-&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\text{、ねじれ符号の二因子の交換、代数的数の指数法則}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。", ref("claim_reconnection_turning_difference"), " により ",
-                        math(String.raw`t_{\mathrm{diff}}\in\{-4,0,4\}`), " である。", ref("def_rotation_phase"),
-                        " の ", math(String.raw`\zeta_8^4=-1`), " から、",
-                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ ", math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=1`),
-                        " であり、", math(String.raw`t_{\mathrm{diff}}=\pm4`), " では ",
-                        math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
-                        math(String.raw`\mathcal W`), " の表示へ代入すると、",
-                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ位相寄与の符号が反転する。これは ",
-                        ref("def_phase_reversing_contact_pair"), " の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
+                        "が成り立つことと定める。一歩の回転数は ", ref("def_step_turning"), " である。",
+                        "二辺を交換しても両辺が同時に入れ替わるので、二元部分集合の元の並べ方に依らない。",
                       ]),
                     ],
                   },

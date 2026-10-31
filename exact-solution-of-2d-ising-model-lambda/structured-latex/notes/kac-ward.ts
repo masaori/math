@@ -7,6 +7,77 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_contact_smoothing_phase_reversal_iff_archived",
+    targets: ["def_phase_reversing_contact_pair"],
+    title: { text: "不採用経路: 接触平滑化の位相符号反転条件" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "、",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " と、その切り替え可能な接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}`), " を取り、",
+                        math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                        "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき",
+                      ]),
+                      displayMath(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
+                      paragraph([
+                        "が成り立つことと、", math(String.raw`\{\vec e,\vec f\}`), " が位相反転接触対（",
+                        ref("def_phase_reversing_contact_pair"), "）であることは同値である。",
+                        "この条件はスピン構造に依らない。したがって、切り替え可能性だけから符号反転を結論してはならない。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        math(String.raw`m:=\lvert M(\varphi)\rvert=\lvert M(\psi)\rvert\in\mathbb N`),
+                        " と置く（", ref("claim_switchable_contact_smoothing_preserves_fiber"), "）。",
+                        math(String.raw`t_{\vec e,\vec f}`), " を二辺だけの互換とすると、平滑化の定義から ",
+                        math(String.raw`\psi=\varphi\circ t_{\vec e,\vec f}`), " である。ゆえに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{sgn}(\psi)
+&=\operatorname{sgn}(\varphi)\operatorname{sgn}(t_{\vec e,\vec f})
+&&\bigl(\because\ \blkref{claim_permutation_sign_mul}\bigr)\\
+&=-\operatorname{sgn}(\varphi)
+&&\bigl(\because\ \blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。さらに ", ref("claim_permutation_sign_moved_orbit_product"),
+                        " と有限積の並べ替えから、任意の非後退置換 ", math(String.raw`\eta`), " について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\eta)
+&=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
+\prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と }\blkref{claim_permutation_sign_moved_orbit_product}\text{、有限積の並べ替え}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "となる。平滑化で変わる二因子だけを取り出す。整数",
+                      ]),
+                      displayMath(String.raw`t_{\mathrm{diff}}:=
+\tau(\vec e,\varphi(\vec e))+\tau(\vec f,\varphi(\vec f))
+-\tau(\vec e,\varphi(\vec f))-\tau(\vec f,\varphi(\vec e))`),
+                      paragraph(["と置くと、"]),
+                      displayMath(String.raw`\begin{aligned}
+M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
+&=M^{a,b}_{\vec e,\varphi(\vec e)}M^{a,b}_{\vec f,\varphi(\vec f)}\,\zeta_8^{-t_{\mathrm{diff}}}
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\text{、ねじれ符号の二因子の交換、代数的数の指数法則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。", ref("claim_reconnection_turning_difference"), " により ",
+                        math(String.raw`t_{\mathrm{diff}}\in\{-4,0,4\}`), " である。", ref("def_rotation_phase"),
+                        " の ", math(String.raw`\zeta_8^4=-1`), " から、",
+                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ ", math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=1`),
+                        " であり、", math(String.raw`t_{\mathrm{diff}}=\pm4`), " では ",
+                        math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
+                        math(String.raw`\mathcal W`), " の表示へ代入すると、",
+                        math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ位相寄与の符号が反転する。これは ",
+                        ref("def_phase_reversing_contact_pair"), " の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_phase_reversing_standard_subset_archived",
     targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 標準対が位相反転する置換の集合" },
@@ -101,7 +172,7 @@ export default defineNotes([
                       paragraph([
                         "第三の主張。", math(String.raw`\{\vec e,\vec f\}`), " は ",
                         math(String.raw`\varphi`), " の切り替え可能な接触対であり、かつ位相反転接触対なので、",
-                        ref("claim_contact_smoothing_phase_reversal_iff"), " の同値の十分の向きにより、任意の ",
+                        "参照用ノート「不採用経路: 接触平滑化の位相符号反転条件」", " の同値の十分の向きにより、任意の ",
                         math(String.raw`(a,b)\in\mathcal S`), " について ",
                         math(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
                         " である。全過程は有限集合の元の比較と代数的数の有限演算だけで閉じる。",
@@ -541,7 +612,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "なので、", math(String.raw`\psi\in\mathcal A_L^{(-\delta)}`), " である。",
                       ]),
                       paragraph([
-                        "位相寄与を比較する。", ref("claim_contact_smoothing_phase_reversal_iff"), " の証明で得た表示において、",
+                        "位相寄与を比較する。", "参照用ノート「不採用経路: 接触平滑化の位相符号反転条件」", " の証明で得た表示において、",
                         "平滑化は置換符号へ ", math(String.raw`-1`), " を掛け、変わる二つの遷移成分の積へ ",
                         math(String.raw`\zeta_8^{-\delta}`), " を掛ける。", math(String.raw`\delta\in\{-4,4\}`), " と ",
                         ref("def_rotation_phase"), " の ", math(String.raw`\zeta_8^4=-1`), " により ",
@@ -550,7 +621,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 \mathcal W^{a,b}_L(\psi)
 &=(-1)\,\zeta_8^{-\delta}\,\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_contact_smoothing_phase_reversal_iff}\text{ の位相寄与の比較}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 接触平滑化の位相符号反転条件」}\text{ の位相寄与の比較}\bigr)\\
 &=(-1)(-1)\,\mathcal W^{a,b}_L(\varphi)
 &&\bigl(\because\ \delta\in\{-4,4\},\ \blkref{def_rotation_phase}\bigr)\\
 &=\mathcal W^{a,b}_L(\varphi)
