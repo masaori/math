@@ -60,6 +60,7 @@ export const ALL_LABELS = [
   "chapter_organization_goal_diagonalization_and_exponential_form",
   "chapter_organization_goal_eigenvalues_of_V_plus",
   "chapter_organization_goal_eigenvector_of_max_eigenvalue",
+  "chapter_organization_goal_of_this_paper",
   "chapter_organization_goal_projection_and_jordan_wigner",
   "chapter_organization_goal_reduction_to_A_theta",
   "chapter_organization_goal_row_limit_and_max_eigenvalue",

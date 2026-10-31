@@ -14,6 +14,38 @@ export default defineBlocks([
     labels: ["chapter_organization"],
   },
   {
+    id: "chapter_organization_remark_goal_of_this_paper",
+    kind: "remark",
+    title: { text: "この論文のゴール" },
+    labels: ["chapter_organization_goal_of_this_paper"],
+    statement: [
+      paragraph(["この論文のゴールは、次の三つである。"]),
+      list([
+        [
+          "2次元 Ising 模型の分配関数 ",
+          math(String.raw`Z`),
+          " を用いて、この系の自由エネルギー ",
+          math(String.raw`\log Z`),
+          " を表す（格子点 1 個あたりでは ",
+          math(String.raw`\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z`),
+          "）。",
+        ],
+        [
+          "その熱力学極限（格子サイズ ",
+          math(String.raw`M_{\mathrm{col}},N_{\mathrm{row}}\to\infty`),
+          "）における閉形式を表示する（Onsager の厳密解）。",
+        ],
+        ["閉形式を解析することで、臨界点を計算する。"],
+      ]),
+      paragraph(["閉形式は次である。"]),
+      displayMath(String.raw`\lim_{M_{\mathrm{col}}\to\infty}\lim_{N_{\mathrm{row}}\to\infty}\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z
+=\frac12\log\left(2\sinh 2K_2\right)+\frac1{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta,`),
+      displayMath(String.raw`\gamma(\theta)=\mathrm{arccosh}\left(\cosh 2K_1\cosh 2K_2^*-\sinh 2K_1\sinh 2K_2^*\cos\theta\right)`),
+      paragraph(["臨界点は次の条件で与えられる（", math(String.raw`K_1=K_2=K`), " のときは ", math(String.raw`\sinh 2K_c=1`), "）。"]),
+      displayMath(String.raw`\sinh 2K_1\,\sinh 2K_2=1`),
+    ],
+  },
+  {
     id: "chapter_organization_remark_parts_and_chapters",
     kind: "remark",
     title: { text: "部と章の並び" },
