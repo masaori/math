@@ -33,7 +33,6 @@ fi
 
 # 2. 主要定理の依存公理に sorryAx が含まれていないか
 targets=(
-  Ising2D.tensorPowBasis
   Ising2D.card_spinVal
   Ising2D.spinBit_eq
   Ising2D.rowConfigOrd
@@ -79,6 +78,8 @@ targets=(
   Ising2D.TConj_V2_checkY
   Ising2D.linearity_of_T_V2
   Ising2D.linearity_of_T_V2H2Form
+  # --- 数学的道具立て「クロネッカー積と多因子基底」（MathematicalTools/KroneckerProductAndMultiFactorBasis/。必要十分版は NecSuf/TensorPowerBasis.lean）---
+  Ising2D.tensorPowBasis
   Ising2D.matTensorPowBasis
   Ising2D.NecSuf.matrix_eq_sum_smul_single
   Ising2D.NecSuf.sum_smul_single_apply
@@ -92,6 +93,7 @@ targets=(
   Ising2D.matrix_eq_sum_E
   Ising2D.kroneckerTensorPowBasis
   Ising2D.kroneckerTensorPowBasis_apply
+  # --- 全章の土台（Representation.lean）と旧 Part000・Part002 ---
   Ising2D.tensorPowAlgEquiv
   Ising2D.toFinPowAlgEquiv
   Ising2D.E_mul_E

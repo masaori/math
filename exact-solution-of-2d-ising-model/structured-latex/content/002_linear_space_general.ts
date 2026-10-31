@@ -978,7 +978,7 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ、(C^2)^{⊗M} を数ベクトル空間 C^{2^M} へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文(Typst)のステートメントは「単一のテンソル積が基底である」と読め、" +
           "かつ V の次元とテンソル冪の階数に同じ記号 m を二重使用していた。" +
-          "Lean 形式化(lean/Ising2D/Part002/Theorem000_TensorBasis.lean)で判明したため、" +
+          "Lean 形式化(lean/Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean)で判明したため、" +
           "原文側を修正し本ブロックも同期済み。",
         "さらに本ブロックは「任意の体 K 上の任意の n 次元線型空間のテンソル冪の基底」という" +
           "抽象テンソル積の一般論だった。README 2 節がまさにこの主張（基底のテンソル積が基底）を" +

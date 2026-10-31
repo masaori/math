@@ -10,7 +10,7 @@
 
 具体版（人手証明と 1 対 1 に対応する主張）は `Ising2D/Representation.lean` の
 `Ising2D.matrixUnitBasis`、特殊化による導出は
-`Ising2D/Part002/Theorem000_TensorBasisFromNecSuf.lean`。
+`Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasisFromNecSuf.lean`。
 
 ## この主張が本文で使われる形
 

@@ -9,7 +9,7 @@
 「必要十分版から具体版が特殊化で得られる場合は、その導出を明示的に書く」に従って、
 既存の具体版（`Ising2D.tensorPowBasis` / `Ising2D.matTensorPowBasis` /
 `Ising2D.matrixUnitBasis`）が必要十分版の特殊化であることを明示する。
-**既存の `Theorem000_TensorBasis.lean` と `Representation.lean` は編集していない。**
+**既存の `TheoremTensorBasis.lean` と `Representation.lean` は編集していない。**
 
 ## 何が具体で何が抽象か（判断の根拠）
 

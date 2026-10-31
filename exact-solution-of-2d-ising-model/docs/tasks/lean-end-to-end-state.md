@@ -157,6 +157,10 @@
     `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（`cosh_addition_and_half_angle` だけを形式化）。
     棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」の項目（`set_and_algebra_notation`・`definition_of_cc`・`def_complex_conjugate` など）を形式化したファイルは無かった。
     このまとまりのほかの項目（`def_cosh_sinh`・`cosh_sinh_basic_properties`・平方根の 4 項目）を形式化したファイルも無い。
+  - 部「数学的道具立て」のまとまり「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」: 形式化したファイルは無い（`Part008/Definition030_Fermi.lean` は `def_sqrt_cc` に説明で触れるだけで、形式化しているのは整数運動量の経路の `ψ_μ` である）。
+  - 部「数学的道具立て」のまとまり「クロネッカー積と多因子基底」（済み）: 旧 `Part002/Theorem000_TensorBasis`（と `FromNecSuf`）を
+    `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean`（と `TheoremTensorBasisFromNecSuf.lean`）へ移した（`tensor_basis` だけを形式化）。
+    このまとまりのほかの項目（`def_kronecker`・`kronecker_product_rule`・`kronecker_multilinear`・`kronecker_transpose`）を形式化したファイルは旧フォルダに無い（`Representation.lean` は全章の土台なので動かさない）。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
@@ -164,10 +168,11 @@
 ## 次の一歩
 
 項目 7 の部「数学的道具立て」の続きを、棚卸しの `mathematicalToolGroups` の並びで一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
-次は、形式化したファイルがある次のまとまりである（「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」に形式化したファイルがあるかを先に調べ、無ければ
-「クロネッカー積と多因子基底」の `Part002/Theorem000_TensorBasis`（と `FromNecSuf`）へ進む）。
-残りの候補は `Part000/`・`Part002/`（冒頭が旧 Typst のパスで書かれたファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）、`Part004/ClaimExpOfDiagonalMatrix`、
+次はまとまり「有限行列・Pauli行列・交換子」である。旧フォルダでこのまとまりの項目を形式化しているのは
+`Part000/Claim046_CommutatorViaAnticommutators`（`commutator_via_anticommutators`）・`Part002/Lemma001_ScalarIdentityCommutes`（`scalar_identity_commutes`）・
+`Part002/Lemma003_CentralizerIsScalar`（`centralizer_is_scalar`）の 3 本である。それぞれが形式化しているほかの項目を数え、runbook の多数決の規則で置き場を確かめてから移す。
+残りの候補は `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`）、`Part004/ClaimExpOfDiagonalMatrix`、
 `Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、
 `Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
-1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
+1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

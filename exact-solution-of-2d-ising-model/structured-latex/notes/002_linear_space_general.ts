@@ -130,7 +130,7 @@ export default defineNotes([
       ]),
       paragraph([
         "抽象版の Lean 形式化は ",
-        math(String.raw`\texttt{lean/Ising2D/Part002/Theorem000\_TensorBasis.lean}`),
+        math(String.raw`\texttt{lean/Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean}`),
         " にある（README 4 節の「抽象版は Lean の中だけに置く」に従い、本文へは戻さない）。",
       ]),
     ],

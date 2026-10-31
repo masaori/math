@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「クロネッカー積と多因子基底」を移した。旧 `Part002/Theorem000_TensorBasis`（と `FromNecSuf`。`tensor_basis`）を `lean/Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean`（と `TheoremTensorBasisFromNecSuf.lean`）へ移した（名前空間不変）。本文 `content/002_linear_space_general.ts` とノートの中の Lean のパスも直した。「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」には形式化したファイルが無い。次は「有限行列・Pauli行列・交換子」。
+
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」の、形式化したファイルがある最初のまとまり「実数の平方根・指数関数・双曲線関数」を移した。旧 `Part020/Claim001_CoshAddHalfAngle`（`cosh, sinh` の加法定理と半角公式）を `lean/Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（名前空間不変）。棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」には形式化したファイルが無い。次は形式化したファイルのある次のまとまり。
 
 2026-10-31: Lean の通しの証明の項目 7 の九番目（最後）の章「臨界点 K_c と d²f/dK² の対数発散」を移した。6 ファイル（旧 `Part020/` の `κ`・`A` と臨界条件、`κ(K)` の基本性質、`γ` の `κ` 微分、`G''` と `f''` の対数発散、章末のゴールの主張）を `lean/Ising2D/CriticalPoint/CriticalPointAndLogDivergence/` へ移した（名前空間不変。番号を外した名前にした）。人手の定義と別表示だった `KStar`（`arsinh(1/sinh 2K)/2`）を消して `Kstar`（`-(1/2)log(tanh K)`）に一本化し、`κ'` は人手どおり `dK^*/dK = -1/sinh 2K`（`hasDerivAt_Kstar`）から、`κ(K)=0 ⟺ K=K_c` は `critical_point_iff_kappa_zero` から出すようにした。`Part020/` に残る 4 本は数学的道具立ての項。次は数学的道具立てのまとまりを一つずつ移す。

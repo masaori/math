@@ -18,7 +18,7 @@ import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Data.Matrix.Basis
 import Mathlib.LinearAlgebra.Multilinear.Basic
 import Ising2D.NecSuf.MatrixUnits
-import Ising2D.Part002.Theorem000_TensorBasis
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.TheoremTensorBasis
 
 open scoped TensorProduct
 open Module
