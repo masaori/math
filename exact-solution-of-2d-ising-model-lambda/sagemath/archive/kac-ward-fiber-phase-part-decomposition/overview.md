@@ -1,6 +1,6 @@
 # SageMath Check: ファイバー位相和の簡約四部分の内訳
 
-**対象ラベル**: `def_fiber_phase_weight`, `def_signed_even_subgraph_polynomial`
+**保存先**: 参照用ノート「不採用経路: ファイバーの位相付き寄与」, `def_signed_even_subgraph_polynomial`
 
 旧経路の選択和の定義は参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」に保存した。
 
@@ -9,7 +9,7 @@ $\mathcal B_L$ の零和で簡約した後に残る四部分（接触の無い�
 回転差 $4$、残余 $\mathcal R_L$）の位相和を $\mathbb Q(\zeta_8)$ で計算し、
 偶部分グラフ選択和 $\mathcal U^{a,b}_L(D,E)$ と比較する。
 
-- 実行: `sage sagemath/check/kac-ward-fiber-phase-part-decomposition/check.sage`
+- 実行: `sage sagemath/archive/kac-ward-fiber-phase-part-decomposition/check.sage`
 - 状態: PASS（2026-09-02。実行 10 分 5 秒）
 - 結果: 全 $609$ ファイバー×四スピン構造 $2{,}436$ 組で、四部分の和が
   $\mathcal U^{a,b}_L(D,E)$ に等しく、回転差 $-4$ と $4$ の二部分の位相和は

@@ -7,7 +7,7 @@
 Q(zeta8) と ZZ の厳密演算で検査する。浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-fiber-phase-part-decomposition/check.sage")
+load("sagemath/archive/kac-ward-fiber-phase-part-decomposition/check.sage")
 
 checked = 0
 for (doubled, single), fiber in all_fibers.items():

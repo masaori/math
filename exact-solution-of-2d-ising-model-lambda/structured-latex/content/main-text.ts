@@ -12988,15 +12988,15 @@ m
                     displayMath(String.raw`\begin{aligned}
 Z_L
 &=\sum_{\sigma\in\Sigma_L}x^{\,b(\sigma)}
-&&(\because\ \blkref{def_partition_polynomial})\\
+&&\bigl(\because\ \blkref{def_partition_polynomial}\bigr)\\
 &=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,b(\sigma)}
-&&(\because\ \blkref{claim_configuration_partition})\\
+&&\bigl(\because\ \blkref{claim_configuration_partition}\bigr)\\
 &=\sum_{m=0}^{2L^2}\ \sum_{\sigma\in A_{L,m}}x^{\,m}
-&&(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m)\\
+&&\bigl(\because\ \sigma\in A_{L,m}\ \Rightarrow\ b(\sigma)=m\bigr)\\
 &=\sum_{m=0}^{2L^2}|A_{L,m}|\cdot x^{\,m}
-&&(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した})\\
+&&\bigl(\because\ \text{同じ元を }|A_{L,m}|\text{ 個足した}\bigr)\\
 &=\sum_{m=0}^{2L^2}\Omega_L(m)\,x^{\,m}
-&&(\because\ \blkref{def_multiplicity})
+&&\bigl(\because\ \blkref{def_multiplicity}\bigr)
 \end{aligned}`),
                     paragraph([
                       "以上は有限和の組み替えと数え上げだけからなり、",
@@ -76089,68 +76089,6 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         " である。全過程は有限集合と自然数の加法だけで閉じ、実数体も複素数体も現れない。",
                       ]),
                     ],
-                  },
-                },
-              }],
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "kac_ward_permutation_expansion_heading_group_stratification",
-        labels: [],
-        title: { text: "反転対と単純通過による層別" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_determinant_fiber_stratified_phase_sum",
-              labels: [],
-              title: { text: "ファイバーの位相付き寄与" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_determinant_fiber_stratified_phase_sum",
-                  focus: {
-                      id: "kac_ward_definition_fiber_phase_weight",
-                      kind: "definition",
-                      title: { text: "ファイバーの位相付き寄与" },
-                      labels: ["def_fiber_phase_weight"],
-                      habitat: "Qbar",
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                          "（", ref("def_spin_structures"), "）とし、辺集合 ",
-                          math(String.raw`D,E\subseteq E_L`), " は ",
-                          math(String.raw`D\cap E=\varnothing`), " かつ ",
-                          math(String.raw`\operatorname{Even}_L(E)`),
-                          "（", ref("def_even_edge_subset"), "）を満たすとする。",
-                          "ファイバーの位相付き寄与を",
-                        ]),
-                        displayMath(String.raw`\mathcal K^{a,b}_L(D,E):=
-\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
-\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)\ \in\ \overline{\mathbb Q}`),
-                        paragraph([
-                          "で定める。ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
-                          "参照用ノート「不採用経路: 反転対と単純通過を固定した非後退置換」",
-                          "、軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ",
-                          ref("def_moved_orbit_family"),
-                          "、遷移行列の成分 ", math(String.raw`M^{a,b}_{\vec e,\vec f}`), " は ",
-                          ref("def_kac_ward_transition_matrices"),
-                          " で定めた。全ての和と積は有限集合の上の有限和・有限積であり、各成分は ",
-                          math(String.raw`\overline{\mathbb Q}`), " の元なので、値は ",
-                          math(String.raw`\overline{\mathbb Q}`),
-                          " に属する。基点や順序の選択を含まない式なので、値は ",
-                          math(String.raw`(a,b,L,D,E)`),
-                          " だけで定まる。実数体も複素数体も現れない。",
-                        ]),
-                      ],
                   },
                 },
               }],

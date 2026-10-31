@@ -5,7 +5,7 @@
 assertion を再実行しない（全先行検算は check.sage に残してある）。
 """
 
-load("sagemath/check/kac-ward-fiber-signed-selection-equality/construction.sage")
+load("sagemath/archive/kac-ward-fiber-signed-selection-equality/construction.sage")
 
 
 def even_subgraphs_inside(edge_subset):

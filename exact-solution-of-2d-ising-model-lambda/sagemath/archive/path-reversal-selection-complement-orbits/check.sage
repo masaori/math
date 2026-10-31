@@ -7,7 +7,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/fiber-phase-integer-decomposition/check.sage")
+load("sagemath/archive/fiber-phase-integer-decomposition/check.sage")
 
 
 def reverse_edge(edge):

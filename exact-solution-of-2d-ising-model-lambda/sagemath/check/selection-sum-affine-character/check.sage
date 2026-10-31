@@ -14,7 +14,7 @@ eps_h(E) eps_v(H) + eps_v(E) eps_h(H) (mod 2) に等しいこと（全対検査�
 計算は有限集合、F_2 の算術、ZZ だけで行い、浮動小数点は使わない。
 """
 
-load("sagemath/check/fiber-phase-integer-decomposition/check.sage")
+load("sagemath/archive/fiber-phase-integer-decomposition/check.sage")
 
 selection_base_edges = [(kind, i, j) for kind in ("h", "v") for i in range(L) for j in range(L)]
 selection_subsets = [frozenset(subset) for subset in Subsets(set(selection_base_edges))]

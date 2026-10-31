@@ -1,6 +1,6 @@
 # SageMath Check: 置換ファイバー位相和と偶部分グラフ選択和の一致
 
-**対象ラベル**: `def_fiber_phase_weight`, `def_signed_even_subgraph_polynomial`
+**保存先**: 参照用ノート「不採用経路: ファイバーの位相付き寄与」, `def_signed_even_subgraph_polynomial`
 
 旧経路の選択和の定義は参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」に保存した。
 
@@ -9,7 +9,7 @@
 $\mathcal K^{a,b}_L(D,E)$ を $\mathbb Q(\zeta_8)$ で、偶部分グラフ対側の符号付き選択和
 $\mathcal U^{a,b}_L(D,E)$ を $\mathbb Z$ で定義から直接計算し、両者を比較する。
 
-- 実行: `sage sagemath/check/kac-ward-fiber-signed-selection-equality/check.sage`
+- 実行: `sage sagemath/archive/kac-ward-fiber-signed-selection-equality/check.sage`
 - 状態: PASS（2026-09-02）
 - 結果: 一辺 $L=2$ の全 $609$ ファイバーと四つのスピン構造、合計 $2{,}436$ 件で
   $\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)$ が成立した。

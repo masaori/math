@@ -7,6 +7,34 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_fiber_phase_weight_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: ファイバーの位相付き寄与" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換項のファイバー別の位相和は採らない。元の定義を保存する。"]),
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+        "（", ref("def_spin_structures"), "）とし、辺集合 ",
+        math(String.raw`D,E\subseteq E_L`), " は ",
+        math(String.raw`D\cap E=\varnothing`), " かつ ",
+        math(String.raw`\operatorname{Even}_L(E)`),
+        "（", ref("def_even_edge_subset"), "）を満たすとする。ファイバーの位相付き寄与を",
+      ]),
+      displayMath(String.raw`\mathcal K^{a,b}_L(D,E):=
+\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)\ \in\ \overline{\mathbb Q}`),
+      paragraph([
+        "で定める。ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は参照用ノート「不採用経路: 反転対と単純通過を固定した非後退置換」、軌道族 ",
+        math(String.raw`\mathcal C(\varphi)`), " は ", ref("def_moved_orbit_family"),
+        "、遷移行列の成分 ", math(String.raw`M^{a,b}_{\vec e,\vec f}`), " は ",
+        ref("def_kac_ward_transition_matrices"), " で定めた。全ての和と積は有限集合上にあり、各成分は ",
+        math(String.raw`\overline{\mathbb Q}`), " の元なので、値は ",
+        math(String.raw`\overline{\mathbb Q}`), " に属する。基点や順序の選択を含まない式なので、値は ",
+        math(String.raw`(a,b,L,D,E)`), " だけで定まる。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_doubled_edge_set_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対の辺集合" },
@@ -59,7 +87,7 @@ export default defineNotes([
   },
   {
     id: "note_kac_ward_determinant_fiber_stratified_phase_sum_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 行列式の位相和の層別" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換項を反転対と単純通過で層別する直接比較は採らない。元の主張と証明を保存する。"]),
@@ -74,7 +102,7 @@ export default defineNotes([
 \widehat{\mathcal K^{a,b}_L(D,E)}\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
                       paragraph([
                         "が成り立つ。行列式は ", ref("def_kac_ward_determinants"),
-                        "、ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "、ファイバーの位相付き寄与は ", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         "、定数多項式への埋め込みは ", ref("def_qbar_constant_embedding"),
                         " である。両辺は有限和なので ", math(String.raw`\overline{\mathbb Q}[x]`),
                         " の元である。",
@@ -156,7 +184,7 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の分配則}\bigr)\\
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
 \widehat{\mathcal K^{a,b}_L(D,E)}\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の }\widehat{a+b}=\widehat{a}+\widehat{b},\ \widehat{a\,b}=\widehat{a}\,\widehat{b}\text{ を有限和・有限積へ繰り返し、}\blkref{def_fiber_phase_weight}\bigr)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の }\widehat{a+b}=\widehat{a}+\widehat{b},\ \widehat{a\,b}=\widehat{a}\,\widehat{b}\text{ を有限和・有限積へ繰り返し、}\text{参照用ノート「不採用経路: ファイバーの位相付き寄与」}\bigr)
 \end{aligned}`),
                       paragraph([
                         "元の証明の結び: 全ての和と積は有限集合の上の有限和・有限積であり ",
@@ -989,7 +1017,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
   },
   {
     id: "note_kac_ward_nonbacktracking_permutation_phase_contribution_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 非後退置換一つの位相寄与" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の定義を保存する。"]),
@@ -1005,7 +1033,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
       paragraph([
         "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
         ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
-        ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
+        "参照用ノート「不採用経路: ファイバーの位相付き寄与」", " の各加数として繰り返し引く。実数体も複素数体も現れない。",
       ]),
     ],
   },
@@ -1228,7 +1256,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
   },
   {
     id: "note_kac_ward_phase_contribution_sign_value_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 位相寄与は 1 か −1 である" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -1518,7 +1546,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_residual_fiber_phase_signed_count_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 残余の位相和の符号付き数え上げ" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、残余ファイバーの位相和による比較は採らない。元の主張と証明を保存する。"]),
@@ -1695,7 +1723,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_fiber_phase_integer_decomposition_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: ファイバー位相和の三つの符号付き数え上げへの分解" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開と偶部分グラフ対の直接比較は採らない。元の定義・主張・証明を保存する。"]),
@@ -1767,7 +1795,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」", " により ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal B_L`),
                         " の位相寄与の和は零である。この非交和で ",
-                        ref("def_fiber_phase_weight"), " の有限和を分け、零和を除くと",
+                        "参照用ノート「不採用経路: ファイバーの位相付き寄与」", " の有限和を分け、零和を除くと",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \mathcal K^{a,b}_L(D,E)
@@ -2739,7 +2767,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_doubled_edge_free_fiber_phase_reduction_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対の無いファイバーの位相寄与の簡約" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2761,7 +2789,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \mathcal W^{a,b}_L(\varphi)
 \end{aligned}`),
                       paragraph([
-                        "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "が成り立つ。ファイバーの位相付き寄与は ", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
@@ -2798,7 +2826,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "なので、この部分集合にわたる有限和は零である。", ref("def_fiber_phase_weight"),
+                        "なので、この部分集合にわたる有限和は零である。", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         " の有限和を冒頭の互いに素な合併で分け、この零和を除けば主張の等式を得る。",
                         "全過程は有限集合の分割と代数的数の有限加法だけで閉じる。",
                       ]),
@@ -2834,7 +2862,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \mathcal W^{a,b}_L(\varphi)
 \end{aligned}`),
                       paragraph([
-                        "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "が成り立つ。ファイバーの位相付き寄与は ", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
@@ -2880,7 +2908,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "なので、この部分集合にわたる有限和は零である。", ref("def_fiber_phase_weight"),
+                        "なので、この部分集合にわたる有限和は零である。", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         " の有限和を冒頭の互いに素な合併で分け、この零和を除けば元の主張の等式を得る。",
                         "この退避した論法は有限集合の分割と代数的数の有限加法だけで閉じる。",
                       ]),
@@ -2996,7 +3024,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_phase_contribution_signed_rotation_power_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 位相寄与の符号付き回転位相冪" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与を使う直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3223,7 +3251,7 @@ d_{E}(v)\bmod2
                       ]),
                       displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=u+v\,(\zeta_8-\zeta_8^3)`),
                       paragraph([
-                        "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
+                        "が成り立つ。ファイバーの位相付き寄与は ", "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
                         " で定めた。全過程は有限集合上の有限和と代数的数の四則だけで閉じ、",
                         "実数体も複素数体も現れない。",
@@ -3282,7 +3310,7 @@ d_{E}(v)\bmod2
                       displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
 =\sum_{\varphi\in F}\mathcal W^{a,b}_L(\varphi)
 +\sum_{P\in\mathcal P}\ \sum_{\varphi\in P}\mathcal W^{a,b}_L(\varphi)
-\qquad\bigl(\because\ \blkref{def_fiber_phase_weight},\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\text{ と有限和の非交和分割}\bigr)`),
+\qquad\bigl(\because\ \text{参照用ノート「不採用経路: ファイバーの位相付き寄与」},\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\text{ と有限和の非交和分割}\bigr)`),
                       paragraph([
                         "不動点の加数を見る。", math(String.raw`\varphi\in F`), " を取り、",
                         math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}`),
@@ -4414,7 +4442,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                       paragraph([
                         "が成り立つ。軌道族は ", "参照用ノート「不採用経路: 二つの符号保存対合の軌道分割」",
                         "、三分類とその反転不変性は ", "参照用ノート「不採用経路: 経路反転による接触対の分類保存」",
-                        "、二つの符号付き数え上げは ", ref("def_fiber_phase_weight"), " と ",
+                        "、二つの符号付き数え上げは ", "参照用ノート「不採用経路: ファイバーの位相付き寄与」", " と ",
                         "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", " で与えられる。全て有限集合の元の個数と整数の有限和だけで閉じる。",
                       ]),
       paragraph(["元の証明:"]),
@@ -4439,7 +4467,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
 \end{aligned}`),
                       paragraph([
                         "となる。", math(String.raw`s=1,-1`), " の二つを加え、さらに三分類について加えると、",
-                        ref("def_fiber_phase_weight"), " の有限和そのものになり、第一の等式を得る。",
+                        "参照用ノート「不採用経路: ファイバーの位相付き寄与」", " の有限和そのものになり、第一の等式を得る。",
                       ]),
                       paragraph([
                         "選択側でも、各符号集合は選択補集合軌道に互いに素に分かれ、軌道上の符号は一定である（",
@@ -4544,7 +4572,7 @@ M(\varphi)
   },
   {
     id: "note_kac_ward_fiber_phase_weight_topological_form_archived",
-    targets: ["def_fiber_phase_weight"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: ファイバーの位相付き寄与の位相形" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、ファイバーの位相付き寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -4573,7 +4601,7 @@ M(\varphi)
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)`),
                       paragraph([
                         "が成り立つ。とくに、左辺は基点の選択を含まない式なので（",
-                        ref("def_fiber_phase_weight"),
+                        "参照用ノート「不採用経路: ファイバーの位相付き寄与」",
                         "）、右辺の値は写像の族 ",
                         math(String.raw`\bigl(\vec e_{\ast}^{\,\varphi}\bigr)_{\varphi\in\mathcal N_L(D,E)}`),
                         " の選び方に依らない。二つの切断線偶奇は ",
@@ -4608,7 +4636,7 @@ M(\varphi)
 \mathcal K^{a,b}_L(D,E)
 &=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
-&&\bigl(\because\ \blkref{def_fiber_phase_weight}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: ファイバーの位相付き寄与」}\bigr)\\
 &=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
 &&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)
@@ -5086,7 +5114,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_def_fiber_phase_weight_signed_selection_sum_fiberwise_equality",
-    targets: ["def_fiber_phase_weight", "def_signed_even_subgraph_polynomial"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "一辺二では置換ファイバー位相和と偶部分グラフ選択和が添字ごとに一致する" },
     body: [
       paragraph([
@@ -5100,7 +5128,7 @@ c_{\oplus}(\omega,k)
       ]),
       displayMath(String.raw`\mathcal K^{a,b}_L(D,E)=\mathcal U^{a,b}_L(D,E)`),
       paragraph([
-        "が成立した（sagemath/check/kac-ward-fiber-signed-selection-equality）。したがって、",
+        "が成立した（sagemath/archive/kac-ward-fiber-signed-selection-equality）。したがって、",
         "多項式全体の係数をまとめて比較するだけでなく、接触の無い置換、回転差が正負四の置換、",
         "残余を合わせた位相和を、同じ ", math(String.raw`(D,E)`),
         " の選択集合と数え上げで対応づければ平方恒等式へ合成できる。これは一般の ",
@@ -5112,7 +5140,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_def_fiber_phase_weight_signed_selection_sum_part_decomposition",
-    targets: ["def_fiber_phase_weight", "def_signed_even_subgraph_polynomial"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "一辺二では簡約四部分の位相和がすべて有理整数に落ち回転差二部分は相等である" },
     body: [
       paragraph([
@@ -5123,7 +5151,7 @@ c_{\oplus}(\omega,k)
         "）へ分解し、全 ", math(String.raw`609`), " ファイバー×四スピン構造 ",
         math(String.raw`2{,}436`), " 組で各部分の位相和を ",
         math(String.raw`\mathbb Q(\zeta_8)`),
-        " の厳密和として計算した（sagemath/check/kac-ward-fiber-phase-part-decomposition）。",
+        " の厳密和として計算した（sagemath/archive/kac-ward-fiber-phase-part-decomposition）。",
         "三つの観察を得た。第一に、四部分の位相和 ", math(String.raw`2{,}436\times4`),
         " 個はすべて有理整数に落ちた。第二に、回転差 ", math(String.raw`-4`), " と ",
         math(String.raw`4`), " の二部分の位相和は全組で互いに等しかった",
@@ -5342,7 +5370,7 @@ c_{\oplus}(\omega,k)
         "選択和の文字評価は、選択集合が空か文字が非自明なら選択和が零であることを与える。",
         "ファイバー位相和の側で同じ消滅がどの粒度で起きるかを、一辺 ",
         math(String.raw`L=2`), " の全ファイバー×四スピン構造の ", math(String.raw`2{,}436`),
-        " 組で調べた（sagemath/check/fiber-phase-character-vanishing）。種別は、選択集合が空 ",
+        " 組で調べた（sagemath/archive/fiber-phase-character-vanishing）。種別は、選択集合が空 ",
         math(String.raw`768`), " 組、文字が非自明 ", math(String.raw`192`),
         " 組、文字が自明 ", math(String.raw`1{,}476`), " 組である。",
         "空と非自明文字の全 ", math(String.raw`960`),

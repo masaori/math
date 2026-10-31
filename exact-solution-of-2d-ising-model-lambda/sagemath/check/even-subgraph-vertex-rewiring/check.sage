@@ -26,7 +26,7 @@
 from itertools import permutations as _permutations
 from itertools import product as _product
 
-load("sagemath/check/fiber-phase-character-vanishing/check.sage")
+load("sagemath/archive/fiber-phase-character-vanishing/check.sage")
 
 
 def base_edge(edge):

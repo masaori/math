@@ -11,7 +11,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-fiber-signed-selection-equality/check.sage")
+load("sagemath/archive/kac-ward-fiber-signed-selection-equality/check.sage")
 
 
 def phase_part_sum(part, a, b):

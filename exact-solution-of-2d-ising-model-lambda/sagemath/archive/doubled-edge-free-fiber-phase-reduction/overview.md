@@ -1,6 +1,6 @@
 # SageMath Check: 反転対の無いファイバーの位相寄与の簡約
 
-**対象ラベル**: `def_fiber_phase_weight`
+**保存先**: 参照用ノート「不採用経路: ファイバーの位相付き寄与」
 
 元の主張と証明は参照用ノート「不採用経路: 反転対の無いファイバーの位相寄与の簡約」に保存した。
 
@@ -10,7 +10,7 @@ $\mathcal A_L^{(4)}$ の四集合へ分類する。四つのスピン構造ご�
 $\mathcal B_L$ の位相寄与の総和が零であり、ファイバー全体の和が残る三集合の和に
 等しいことを厳密に検査する。
 
-- 実行: `sage sagemath/check/doubled-edge-free-fiber-phase-reduction/check.sage`
+- 実行: `sage sagemath/archive/doubled-edge-free-fiber-phase-reduction/check.sage`
 - 状態: PASS（2026-10-30）
 - 結果: 反転対の無い $32$ ファイバーの置換 $497$ 個を四集合へ分類し、
   四スピン構造について位相反転部分の零和と簡約等式 $128$ 件を確認した

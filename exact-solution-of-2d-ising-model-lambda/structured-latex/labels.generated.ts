@@ -740,7 +740,6 @@ export const ALL_LABELS = [
   "def_even_orbit_coloring",
   "def_even_orbit_coordinate",
   "def_even_orbit_minimum",
-  "def_fiber_phase_weight",
   "def_finite_free_entropy",
   "def_finite_free_entropy_density",
   "def_finite_lattice_fisher_zeros",

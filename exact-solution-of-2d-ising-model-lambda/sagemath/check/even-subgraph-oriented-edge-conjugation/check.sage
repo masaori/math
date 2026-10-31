@@ -9,7 +9,7 @@ rho_H o phi o rho_H が同じ非後退置換ファイバーを保つかを検査
 計算は有限集合・有限写像と Q(zeta_8) の等号だけで行う。
 """
 
-load("sagemath/check/fiber-phase-character-vanishing/check.sage")
+load("sagemath/archive/fiber-phase-character-vanishing/check.sage")
 
 
 def base_edge(edge):

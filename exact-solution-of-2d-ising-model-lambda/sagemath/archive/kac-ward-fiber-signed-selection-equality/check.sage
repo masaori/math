@@ -8,7 +8,7 @@ U_L^{a,b}(D,E) を ZZ で定義から計算し、両者が一致することを�
 浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-fiber-signed-selection-equality/construction.sage")
+load("sagemath/archive/kac-ward-fiber-signed-selection-equality/construction.sage")
 
 # 構成側でも回している文をここでもう一度回すので、累算器を初期化し直す
 # （初期化が構成側にしかないと、構成での実行ぶんへ二重に足し込む）。
