@@ -7,6 +7,81 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_phase_contribution_sign_value_archived",
+    targets: ["def_nonbacktracking_permutation_phase_contribution"],
+    title: { text: "不採用経路: 位相寄与は 1 か −1 である" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                        paragraph([
+                          "任意の ", math(String.raw`(a,b)\in\mathcal S`),
+                          "（", ref("def_spin_structures"), "）と ",
+                          math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                          "（", ref("def_nonbacktracking_permutations"), "）について、",
+                        ]),
+                        displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
+                        paragraph([
+                          "が成り立つ。位相寄与は ",
+                          ref("def_nonbacktracking_permutation_phase_contribution"),
+                          " で定めた。とくに、任意の部分集合にわたる位相寄与の有限和は、",
+                          "値が 1 の元の個数から値が −1 の元の個数を引いた整数に等しい。",
+                        ]),
+      paragraph(["元の証明:"]),
+                        paragraph([
+                          "各 ", math(String.raw`C\in\mathcal C(\varphi)`),
+                          "（", ref("def_moved_orbit_family"), "）は ",
+                          ref("claim_moved_orbit_partition"), " により空でないので、基点 ",
+                          math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`), " を一つ選び、",
+                          math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                          "（", ref("def_permutation_orbit_sequence"), "）と置く。",
+                          ref("claim_moved_orbit_partition"), " により ",
+                          math(String.raw`C\subseteq M(\varphi)`), " なので ",
+                          ref("def_moved_edge_set"), " により ",
+                          math(String.raw`\varphi\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)\ne\vec e_{\ast}^{\,\varphi}(C)`),
+                          " であり、", ref("claim_moved_orbit_weight_phase_twist"),
+                          " の仮定を満たす。また ", ref("claim_moved_orbit_closed_nonbacktracking"),
+                          " により ", math(String.raw`\gamma^{\varphi}_C`),
+                          " は閉じた非後退辺列なので、回転数 ",
+                          math(String.raw`\operatorname{rot}(\gamma^{\varphi}_C)\in\mathbb Z`),
+                          "（", ref("def_closed_walk_rotation_number"), "）が定まり ",
+                          math(String.raw`t_{\circ}(\gamma^{\varphi}_C)=4\operatorname{rot}(\gamma^{\varphi}_C)`),
+                          " である。求めたい位相寄与から始める。",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\mathcal W^{a,b}_L(\varphi)
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
+&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+\bigl(\zeta_8^{4}\bigr)^{\operatorname{rot}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \blkref{def_closed_walk_rotation_number}\text{ と }\overline{\mathbb Q}^{\times}\text{ の整数指数の積の法則}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}
+\left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
+(-1)^{\operatorname{rot}(\gamma^{\varphi}_C)}\right)
+&&\bigl(\because\ \zeta_8^4=-1\text{。}\blkref{def_rotation_phase}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "最終行の各因子は ", math(String.raw`\{-1,1\}`),
+                          " の元の三つの積なので ", math(String.raw`\{-1,1\}`),
+                          " に属する（", math(String.raw`\{-1,1\}`),
+                          " は積で閉じる）。有限積も同じ理由で ", math(String.raw`\{-1,1\}`),
+                          " に属する（軌道族が空なら空積は 1 である）。ゆえに",
+                        ]),
+                        displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}
+\qquad\bigl(\because\ \{-1,1\}\text{ の積の閉性と上の式鎖}\bigr)`),
+                        paragraph([
+                          "を得る。「とくに」の部分は、部分集合を値が 1 の元と −1 の元へ非交和分割し、",
+                          "有限和を定数和の差として数えれば従う。全過程は有限集合上の有限積と代数的数の整数冪だけで閉じ、",
+                          "実数体も複素数体も現れない。",
+                        ]),
+    ],
+  },
+  {
     id: "note_kac_ward_unswitchable_standard_pair_subset_archived",
     targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 標準対が切り替え不能な置換の集合" },
@@ -223,7 +298,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_residual_fiber_phase_signed_count_archived",
-    targets: ["claim_phase_contribution_sign_value"],
+    targets: ["def_nonbacktracking_permutation_phase_contribution"],
     title: { text: "不採用経路: 残余の位相和の符号付き数え上げ" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、残余ファイバーの位相和による比較は採らない。元の主張と証明を保存する。"]),
@@ -262,7 +337,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
       paragraph(["元の証明:"]),
                       paragraph([
                         "任意の ", math(String.raw`\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L`),
-                        " について、", ref("claim_phase_contribution_sign_value"), " により ",
+                        " について、", "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」", " により ",
                         math(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
                         " である。したがって ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal R_L`), " は ",
@@ -495,7 +570,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \end{aligned}`),
                       paragraph([
                         "参照用ノート「不採用経路: 接触の無い部分の位相和の符号付き数え上げ」", "、",
-                        ref("claim_phase_contribution_sign_value"), " を回転差が四の部分へ適用した符号別の非交和、",
+                        "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」", " を回転差が四の部分へ適用した符号別の非交和、",
                         "参照用ノート「不採用経路: 残余の位相和の符号付き数え上げ」",
                         " を三つの有限和へ順に適用すると、主張の右辺を得る。",
                         "全過程は有限集合の非交和、整数の有限和、代数的数の有限加法だけで閉じる。",
@@ -2931,7 +3006,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         " も主張の集合の元である。二回適用が恒等写像なので、",
                         math(String.raw`\mathcal T`),
                         " の制限はこの集合の上の対合である。なお ",
-                        ref("claim_phase_contribution_sign_value"), " により ",
+                        "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」", " により ",
                         math(String.raw`\mathcal W^{a,b}_L(\varphi')\in\{-1,1\}`), " なので、",
                         math(String.raw`\epsilon\in\{-1,1\}`), " の二つの集合は ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal P`),
@@ -2968,7 +3043,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         ref("def_nonbacktracking_permutation_phase_contribution"),
                         "、経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
-                        " で定めた。位相寄与の二つの値は ", ref("claim_phase_contribution_sign_value"),
+                        " で定めた。位相寄与の二つの値は ", "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」",
                         " により尽くされている。全て有限集合上の有限積と代数的数の四則だけで判定でき、実数体も複素数体も現れない。",
                       ]),
 
@@ -2987,11 +3062,11 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の逆元と結合則。}\mathcal W^{a,b}_L(\varphi)\ne0\text{ は }\text{参照用ノート「位相寄与の符号付き回転位相冪」}\bigr)\\
 &=\mathcal W^{a,b}_L(\varphi)\cdot
 \Bigl(\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}\Bigr)
-&&\bigl(\because\ \mathcal W^{a,b}_L(\varphi)\in\{-1,1\}\text{（}\blkref{claim_phase_contribution_sign_value}\text{）と }1^{-1}=1,\ (-1)^{-1}=-1\bigr)
+&&\bigl(\because\ \mathcal W^{a,b}_L(\varphi)\in\{-1,1\}\text{（}\text{参照用ノート「不採用経路: 位相寄与は 1 か −1 である」}\text{）と }1^{-1}=1,\ (-1)^{-1}=-1\bigr)
 \end{aligned}`),
                       paragraph([
                         "右辺は ", math(String.raw`\{-1,1\}`), " の元（",
-                        ref("claim_phase_contribution_sign_value"), "）と ",
+                        "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」", "）と ",
                         math(String.raw`\{-1,1\}`), " の元（",
                         "参照用ノート「不採用経路: 位相寄与の符号付き回転位相冪」",
                         "）の積であり、", math(String.raw`\{-1,1\}`),
