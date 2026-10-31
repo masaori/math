@@ -165,8 +165,8 @@ $$
 
 ## 章の依存関係
 
-矢印は「矢印の元の章を、矢印の先の章が使う」を表す。矢印に添えた数は、先の章の項目が元の章の項目を
-直接参照している件数である（棚卸しの依存ラベルから数えた。$\Lambda^{(\delta)}$ の定義は分離を済ませた前提）。
+矢印は「矢印の元の章を、矢印の先の章が使う」を表す。棚卸しの依存ラベルから章どうしの直接の参照を集め
+（$\Lambda^{(\delta)}$ の定義は分離を済ませた前提）、ほかの矢印を辿って届く矢印は省いた。
 数学的道具立てはすべての章が使うので、図から省いた。
 
 ```mermaid
@@ -181,39 +181,22 @@ flowchart TD
   collim["列数の極限：Onsager の閉形式"]
   crit["臨界点と比熱の対数発散"]
 
-  trace -->|25| sector
-  trace -->|5| diag
-  trace -->|7| evenvec
-  trace -->|3| rowlim
-  trace -->|4| collim
-  sector -->|22| fourier
-  sector -->|9| diag
-  sector -->|13| eig
-  sector -->|14| evenvec
-  sector -->|8| rowlim
-  sector -->|13| collim
-  sector -->|6| crit
-  fourier -->|45| diag
-  fourier -->|5| eig
-  fourier -->|2| evenvec
-  fourier -->|1| collim
-  fourier -->|1| crit
-  diag -->|13| eig
-  diag -->|2| evenvec
-  eig -->|10| evenvec
-  eig -->|7| collim
-  eig -->|1| crit
-  evenvec -->|5| collim
-  rowlim -->|4| collim
-  collim -->|2| crit
+  trace --> sector
+  sector --> fourier
+  fourier --> diag
+  diag --> eig
+  eig --> evenvec
+  evenvec --> collim
+  sector --> rowlim
+  rowlim --> collim
+  collim --> crit
 ```
 
 図から読めること:
 
-- 後ろの章から前の章への矢印は無い。並びのとおりに読めば、前方参照は起きない。
-- 行数の極限の章は、トレースの章と偶セクターへの射影の章だけを使う。固有値問題の後半の四章とは独立で、
+- 後ろの章から前の章への依存は無い。並びのとおりに読めば、前方参照は起きない。
+- 偶セクターへの射影の章のあとで流れが二つに分かれる。固有値問題の四章と、行数の極限の章である。
   二つの流れは列数の極限の章で合流する。
-- 最も太い依存は、Fourier 変換の章から対角化の章への 45 件である。
 
 ### 振り分けの決め方
 
