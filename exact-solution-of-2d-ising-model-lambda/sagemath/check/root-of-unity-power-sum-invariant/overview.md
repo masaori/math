@@ -62,7 +62,7 @@ sage sagemath/check/root-of-unity-power-sum-invariant/check.sage
 
 ## 結果
 
-**2026-08-11 実行。すべて通過。**
+**2026-10-31 実行。すべて通過。**
 
 ```
 == 1 の冪根の全体にわたる冪の和は、1 の冪根の冪を掛けても動かない ==

@@ -1,7 +1,7 @@
 # SageMath Check: 動く辺の軌道列の閉路性
 
 **対象ラベル**: `claim_permutation_power_return`, `def_permutation_minimal_return`,
-`def_permutation_orbit_sequence`, `claim_moved_orbit_closed_nonbacktracking`
+`claim_moved_orbit_closed_nonbacktracking`
 
 一辺二の周期正方格子の向き付き辺のうち先頭六本の全置換 $6!$ 個を取り、残りを固定した
 （前 tick の非零置換項の検査と同じ標本）。全置換・全辺で回帰の存在
@@ -16,5 +16,5 @@ $1\le k\le|\vec E_L|$ と最小回帰時刻の最小性を検査した。その�
 標本中に実在することも確認した。
 
 - 実行: `sage sagemath/check/permutation-orbit-closed-walk/check.sage`
-- 状態: PASS（2026-08-30）
+- 状態: PASS（2026-10-31）
 - 浮動小数点: 不使用

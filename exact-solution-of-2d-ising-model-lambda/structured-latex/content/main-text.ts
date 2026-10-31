@@ -4979,17 +4979,17 @@ z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
-&&(\because\ S_{n,m}\ \text{の定義})\\
+&&\bigl(\because\ S_{n,m}\ \text{の定義}\bigr)\\
 &=\sum_{z\in\mu_{n}}w^{m}z^{m}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和へ})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則を有限和へ}\bigr)\\
 &=\sum_{z\in\mu_{n}}(wz)^{m}
-&&(\because\ \blkref{claim_qbar_mul_pow}\ \text{を}\ w\ \text{と}\ z\ \text{へ})\\
+&&\bigl(\because\ \blkref{claim_qbar_mul_pow}\ \text{を}\ w\ \text{と}\ z\ \text{へ}\bigr)\\
 &=\sum_{z\in\mu_{n}}\bigl(\theta^{(n)}_{w}(z)\bigr)^{m}
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&&\bigl(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ}\bigr)\\
 &=\sum_{y\in\mu_{n}}y^{m}
-&&(\because\ \blkref{claim_root_of_unity_mul_map_bijective}\ \text{による添字の取り替え})\\
+&&\bigl(\because\ \blkref{claim_root_of_unity_mul_map_bijective}\ \text{による添字の取り替え}\bigr)\\
 &=S_{n,m}
-&&(\because\ S_{n,m}\ \text{の定義})
+&&\bigl(\because\ S_{n,m}\ \text{の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "第 5 の等号は和の添字の取り替えである。",
@@ -75069,34 +75069,6 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                           ],
                         },
                       },
-                      {
-                        role: "prerequisiteDefinition",
-                        element: {
-                          id: "kac_ward_definition_permutation_orbit_sequence",
-                          kind: "definition",
-                          title: { text: "軌道列" },
-                          labels: ["def_permutation_orbit_sequence"],
-                          habitat: "N",
-                          statement: [
-                            paragraph([
-                              math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
-                              math(String.raw`\vec e\in\vec E_L`), " に対し、",
-                              math(String.raw`r:=r_{\varphi}(\vec e)`), "（",
-                              ref("def_permutation_minimal_return"), "）と置き、軌道列 ",
-                              math(String.raw`\gamma_{\varphi}(\vec e)`), " を長さ ",
-                              math(String.raw`r`), " の向き付き辺列",
-                            ]),
-                            displayMath(String.raw`\gamma_{\varphi}(\vec e):=
-\bigl(\varphi^{\circ 0}(\vec e),\varphi^{\circ 1}(\vec e),\ldots,\varphi^{\circ(r-1)}(\vec e)\bigr)`),
-                            paragraph([
-                              "で定める（", ref("def_permutation_iterate"), "）。第 ",
-                              math(String.raw`k`), " 項（", math(String.raw`1\le k\le r`),
-                              "）は ", math(String.raw`\varphi^{\circ(k-1)}(\vec e)\in\vec E_L`),
-                              " である。この定義は有限集合の元の有限列だけで閉じる。",
-                            ]),
-                          ],
-                        },
-                      },
                     ],
                     focus: {
                       id: "kac_ward_claim_moved_orbit_closed_nonbacktracking",
@@ -75125,7 +75097,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                           math(String.raw`\varphi(\vec e)\ne\vec e`), " を満たすとする。",
                           math(String.raw`r:=r_{\varphi}(\vec e)`), " と置く。このとき軌道列 ",
                           math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
-                          ref("def_permutation_orbit_sequence"), "）について次が成り立つ。",
+                          "参照用ノート「不採用経路: 軌道列」", "）について次が成り立つ。",
                           "第一に、各項 ", math(String.raw`\varphi^{\circ(k-1)}(\vec e)`),
                           "（", math(String.raw`1\le k\le r`), "）は ",
                           math(String.raw`\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)\ne\varphi^{\circ(k-1)}(\vec e)`),
@@ -75715,7 +75687,7 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`r:=r_{\varphi}(\vec e_0)`), "（",
                         ref("def_permutation_minimal_return"), "）、",
                         math(String.raw`\gamma:=\gamma_{\varphi}(\vec e_0)`), "（",
-                        ref("def_permutation_orbit_sequence"), "）、",
+                        "参照用ノート「不採用経路: 軌道列」", "）、",
                         math(String.raw`C:=O_{\varphi}(\vec e_0)`), "（",
                         "参照用ノート「不採用経路: 置換の軌道集合」", "）と置く。このとき ",
                         math(String.raw`\overline{\mathbb Q}`), " の等式",
@@ -75738,7 +75710,7 @@ T^{a,b}_{\varphi}(x)
                         "第 ", math(String.raw`k`), " 項を ",
                         math(String.raw`\vec\gamma_k:=\varphi^{\circ(k-1)}(\vec e_0)`),
                         "（", math(String.raw`1\le k\le r`), "、",
-                        ref("def_permutation_orbit_sequence"), "）と書く。",
+                        "参照用ノート「不採用経路: 軌道列」", "）と書く。",
                         ref("claim_moved_orbit_closed_nonbacktracking"), " により ",
                         math(String.raw`\gamma`), " は閉じた非後退辺列であり、その ",
                         math(String.raw`r`), " 個の項は相異なり、各項は ",
@@ -75826,7 +75798,7 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
                         " により空でない）、",
                         math(String.raw`\gamma_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)`),
-                        "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
+                        "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
                         math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
                       ]),
                       displayMath(String.raw`T^{a,b}_{\varphi}(x)
@@ -75956,7 +75928,7 @@ T^{a,b}_{\varphi}(x)
                         " となるように一つ選び（各 ", math(String.raw`C`), " は ",
                         ref("claim_moved_orbit_partition"), " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
-                        "（", ref("def_permutation_orbit_sequence"), "）と置く。このとき ",
+                        "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
                         math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
                       ]),
                       displayMath(String.raw`D^{a,b}_L(x)
@@ -76601,7 +76573,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                         " となるように一つ選び（各 ", math(String.raw`C`), " は ",
                         ref("claim_moved_orbit_partition"), " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
-                        "（", ref("def_permutation_orbit_sequence"), "）と置く。",
+                        "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi`), " は、動く辺を直ちに引き返さない後続へ写すので、",
                         ref("claim_moved_orbit_weight_phase_twist"), " の仮定を満たす。さらに ",
