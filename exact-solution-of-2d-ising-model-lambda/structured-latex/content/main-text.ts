@@ -3827,23 +3827,23 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl(A\cdot(c\odot v)\bigr)(u)
 &=\bigl(c\odot(A\cdot v)\bigr)(u)
-&&(\because\ \blkref{claim_qbar_action_smul})\\
+&&\bigl(\because\ \blkref{claim_qbar_action_smul}\bigr)\\
 &=c\,(A\cdot v)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=c\,(z\odot v)(u)
-&&(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&&\bigl(\because\ v\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace}\bigr)\\
 &=c\bigl(z\,v(u)\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=(c\,z)\,v(u)
-&&(\because\ \text{積の結合則})\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=(z\,c)\,v(u)
-&&(\because\ \text{積の可換性})\\
+&&\bigl(\because\ \text{積の可換性}\bigr)\\
 &=z\bigl(c\,v(u)\bigr)
-&&(\because\ \text{積の結合則})\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=z\,(c\odot v)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=\bigl(z\odot(c\odot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
