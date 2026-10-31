@@ -2,7 +2,7 @@
 
 旧主張は参照用ノート「不採用経路: 同じ接触対での平滑化の対合性」に退避した。
 
-**対象ラベル**: `def_permutation_contact_smoothing`
+**対象ラベル**: `def_nonbacktracking_permutations`（参照用ノート「不採用経路: 切り替え可能な接触の平滑化」に対応）
 
 一辺 $L=2$ のトーラスの全非後退置換について、切り替え可能な接触対を全列挙する。像を交換した置換でも同じ対が切り替え可能な接触対の三条件を満たすこと、証明が使う等式（$\psi(\vec f)=\varphi(\vec e)$、$\psi(\vec e)=\varphi(\vec f)$、非後退性からの後続所属 $\varphi(\vec e)\in\operatorname{Next}(\vec e)$・$\varphi(\vec f)\in\operatorname{Next}(\vec f)$）、および同じ対で再び平滑化すると元の置換へ戻ることを有限集合の等号として厳密検査する。
 

@@ -1,6 +1,6 @@
 # SageMath Check: 接触平滑化による位相寄与の符号反転
 
-**対象ラベル**: `def_switchable_permutation_contact_pair`
+**対象ラベル**: `def_nonbacktracking_permutations`（参照用ノート「不採用経路: 切り替え可能な接触の平滑化」に対応）
 
 元の定義は参照用ノート「不採用経路: 位相反転接触対」に、元の主張と証明は参照用ノート「不採用経路: 接触平滑化の位相符号反転条件」に保存した。
 

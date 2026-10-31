@@ -1,6 +1,6 @@
 # SageMath Check: 接触対の切り替え可能性の局所判定
 
-**対象ラベル**: `def_switchable_permutation_contact_pair`
+**対象ラベル**: `def_nonbacktracking_permutations`（参照用ノート「不採用経路: 切り替え可能な接触の平滑化」に対応）
 
 元の主張と証明は参照用ノート「不採用経路: 接触対の切り替え可能性の局所判定」に保存した。
 
