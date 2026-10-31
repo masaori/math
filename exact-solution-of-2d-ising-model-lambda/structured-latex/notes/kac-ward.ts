@@ -7,6 +7,94 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_moved_orbit_weight_phase_twist_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道の遷移成分積による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                        "）とする。", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                        " は、任意の ", math(String.raw`\vec f\in\vec E_L`), " について",
+                      ]),
+                      displayMath(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow
+\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
+                      paragraph([
+                        "を満たすとし（", ref("def_nonbacktracking_successors"), "）、",
+                        math(String.raw`\vec e_0\in\vec E_L`), " は ",
+                        math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " を満たすとする。",
+                        math(String.raw`r:=r_{\varphi}(\vec e_0)`), "（",
+                        ref("def_permutation_minimal_return"), "）、",
+                        math(String.raw`\gamma:=\gamma_{\varphi}(\vec e_0)`), "（",
+                        "参照用ノート「不採用経路: 軌道列」", "）、",
+                        math(String.raw`C:=O_{\varphi}(\vec e_0)`), "（",
+                        "参照用ノート「不採用経路: 置換の軌道集合」", "）と置く。このとき ",
+                        math(String.raw`\overline{\mathbb Q}`), " の等式",
+                      ]),
+                      displayMath(String.raw`\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}
+=(-1)^{a\,h(\gamma)+b\,v(\gamma)}\cdot\zeta_8^{\,t_{\circ}(\gamma)}`),
+                      paragraph([
+                        "が成り立つ。左辺の遷移行列は ", ref("def_kac_ward_transition_matrices"),
+                        "、右辺の二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
+                        "、循環総回転数は ", ref("def_cyclic_total_turning"),
+                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                        " である。右辺の符号は整数だが、部分集合の鎖 ",
+                        math(String.raw`\mathbb Z\subset\mathbb Q\subset\overline{\mathbb Q}`),
+                        " により ", math(String.raw`\overline{\mathbb Q}`),
+                        " の元として掛ける。全ての積は有限であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "第 ", math(String.raw`k`), " 項を ",
+                        math(String.raw`\vec\gamma_k:=\varphi^{\circ(k-1)}(\vec e_0)`),
+                        "（", math(String.raw`1\le k\le r`), "、",
+                        "参照用ノート「不採用経路: 軌道列」", "）と書く。",
+                        ref("claim_moved_orbit_closed_nonbacktracking"), " により ",
+                        math(String.raw`\gamma`), " は閉じた非後退辺列であり、その ",
+                        math(String.raw`r`), " 個の項は相異なり、各項は ",
+                        math(String.raw`\varphi(\vec\gamma_k)\ne\vec\gamma_k`), " を満たすので、",
+                        math(String.raw`\varphi`), " への仮定により ",
+                        math(String.raw`\varphi(\vec\gamma_k)\in\operatorname{Next}(\vec\gamma_k)`),
+                        " である。参照用ノート「不採用経路: 置換の軌道集合」により ",
+                        math(String.raw`C`), " はこの ", math(String.raw`r`),
+                        " 個の項の集合に等しいので、写像 ",
+                        math(String.raw`k\mapsto\vec\gamma_k`), " は ",
+                        math(String.raw`\{1,\ldots,r\}`), " から ", math(String.raw`C`),
+                        " への全単射である。また ", ref("def_permutation_iterate"), " により ",
+                        math(String.raw`1\le k\le r-1`), " で ",
+                        math(String.raw`\varphi(\vec\gamma_k)=\vec\gamma_{k+1}`), "、",
+                        ref("def_permutation_minimal_return"), " により ",
+                        math(String.raw`\varphi(\vec\gamma_r)=\varphi^{\circ r}(\vec e_0)=\vec e_0=\vec\gamma_1`),
+                        " である。求めたい積から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}
+&=\prod_{k=1}^{r}M^{a,b}_{\vec\gamma_k,\varphi(\vec\gamma_k)}
+&&\bigl(\because\ \text{全単射 }k\mapsto\vec\gamma_k\text{ による有限積の添字の付け替え}\bigr)\\
+&=\prod_{k=1}^{r}\varepsilon_{a,b}\bigl(\varphi(\vec\gamma_k)\bigr)\cdot\rho\bigl(\vec\gamma_k,\varphi(\vec\gamma_k)\bigr)
+&&\bigl(\because\ \blkref{def_kac_ward_transition_matrices}\text{ と }\varphi(\vec\gamma_k)\in\operatorname{Next}(\vec\gamma_k)\bigr)\\
+&=\left(\prod_{k=1}^{r}\varepsilon_{a,b}\bigl(\varphi(\vec\gamma_k)\bigr)\right)
+\left(\prod_{k=1}^{r}\rho\bigl(\vec\gamma_k,\varphi(\vec\gamma_k)\bigr)\right)
+&&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性}\bigr)\\
+&=\left(\prod_{k=1}^{r}\varepsilon_{a,b}(\vec\gamma_k)\right)
+\left(\prod_{k=1}^{r}\rho\bigl(\vec\gamma_k,\varphi(\vec\gamma_k)\bigr)\right)
+&&\bigl(\because\ \bigl(\varphi(\vec\gamma_1),\ldots,\varphi(\vec\gamma_r)\bigr)=(\vec\gamma_2,\ldots,\vec\gamma_r,\vec\gamma_1)\text{ と積の可換性}\bigr)\\
+&=(-1)^{a\,h(\gamma)+b\,v(\gamma)}
+\left(\prod_{k=1}^{r}\rho\bigl(\vec\gamma_k,\varphi(\vec\gamma_k)\bigr)\right)
+&&\bigl(\because\ \blkref{claim_walk_twist_sign_product}\text{ を }\mathbb Z\subset\overline{\mathbb Q}\text{ で読み替える}\bigr)\\
+&=(-1)^{a\,h(\gamma)+b\,v(\gamma)}
+\left(\prod_{k=1}^{r-1}\rho(\vec\gamma_k,\vec\gamma_{k+1})\right)\rho(\vec\gamma_r,\vec\gamma_1)
+&&\bigl(\because\ \varphi(\vec\gamma_k)=\vec\gamma_{k+1}\ (1\le k\le r-1)\text{ と }\varphi(\vec\gamma_r)=\vec\gamma_1\bigr)\\
+&=(-1)^{a\,h(\gamma)+b\,v(\gamma)}\cdot\zeta_8^{\,t_{\circ}(\gamma)}
+&&\bigl(\because\ \blkref{claim_closed_walk_rotation_phase}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全過程は有限集合上の有限積と代数的数の演算だけで閉じ、実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_term_orbit_weight_factorization_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 置換項の重みの軌道ごとの分解" },
@@ -285,7 +373,7 @@ T^{a,b}_{\varphi}(x)
 &=\prod_{C\in\mathcal C(\varphi)}\left(
 -x^{\lvert C\rvert}\cdot
 \widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\,\zeta_8^{\,t_{\circ}(\gamma_C)}}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)=C\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」}\text{ を基点 }\vec e_{\ast}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)=C\bigr)
 \end{aligned}`),
                       paragraph([
                         "左辺は写像 ", math(String.raw`\vec e_{\ast}`),
@@ -654,7 +742,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi`), " は、動く辺を直ちに引き返さない後続へ写すので、",
-                        ref("claim_moved_orbit_weight_phase_twist"), " の仮定を満たす。さらに ",
+                        "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」", " の仮定を満たす。さらに ",
                         ref("claim_moved_orbit_partition"), " により ",
                         math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
                         math(String.raw`\sim_{\varphi}`), " の同値類の集合なので、",
@@ -672,7 +760,7 @@ D^{a,b}_L(x)
 \prod_{C\in\mathcal C(\varphi)}\left(
 -x^{\lvert C\rvert}\cdot
 \widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}
 \left(\prod_{C\in\mathcal C(\varphi)}x^{\lvert C\rvert}\right)\cdot
 \prod_{C\in\mathcal C(\varphi)}\left(
@@ -1804,7 +1892,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                           math(String.raw`C\subseteq M(\varphi)`), " なので ",
                           ref("def_moved_edge_set"), " により ",
                           math(String.raw`\varphi\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)\ne\vec e_{\ast}^{\,\varphi}(C)`),
-                          " であり、", ref("claim_moved_orbit_weight_phase_twist"),
+                          " であり、", "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
                           " の仮定を満たす。また ", ref("claim_moved_orbit_closed_nonbacktracking"),
                           " により ", math(String.raw`\gamma^{\varphi}_C`),
                           " は閉じた非後退辺列なので、回転数 ",
@@ -1821,7 +1909,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
 \zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
 \bigl(\zeta_8^{4}\bigr)^{\operatorname{rot}(\gamma^{\varphi}_C)}\right)
@@ -1973,7 +2061,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         ref("def_moved_edge_set"), " により ",
                         math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " であり、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " なので ", ref("claim_moved_orbit_weight_phase_twist"),
+                        " なので ", "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
                         " の仮定を満たす。求めたい左辺から始める。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -1981,7 +2069,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
 \left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」}\text{ を各軌道へ基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ で適用}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}
 \chi_{a,b}\bigl(h(\gamma^{\varphi}_C),v(\gamma^{\varphi}_C)\bigr)
 &&\bigl(\because\ n_{\mathrm{ct}}(\gamma^{\varphi}_C)=0\text{ と }\blkref{claim_vertex_simple_orbit_quadratic_sign}\bigr)
@@ -5140,7 +5228,7 @@ M(\varphi)
                         " であり、", ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi`),
                         " は、動く辺を直ちに引き返さない後続へ写すので、",
-                        ref("claim_moved_orbit_weight_phase_twist"),
+                        "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
                         " の仮定を満たす。各 ", math(String.raw`C\in\mathcal C(\varphi)`), " は ",
                         ref("claim_moved_orbit_partition"),
                         " により空でないので基点 ",
@@ -5157,7 +5245,7 @@ M(\varphi)
 &&\bigl(\because\ \text{参照用ノート「不採用経路: ファイバーの位相付き寄与」}\bigr)\\
 &=\sum_{\varphi\in\mathcal N_L(D,E)}\ \prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」}\text{ を基点 }\vec e_{\ast}^{\,\varphi}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C\bigr)
 \end{aligned}`),
                       paragraph([
                         "和と積の添字集合はすべて有限であり ",

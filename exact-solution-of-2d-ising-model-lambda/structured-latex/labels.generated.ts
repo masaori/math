@@ -233,7 +233,6 @@ export const ALL_LABELS = [
   "claim_mode_small_matrix_signed_sum_algebra",
   "claim_moved_orbit_closed_nonbacktracking",
   "claim_moved_orbit_partition",
-  "claim_moved_orbit_weight_phase_twist",
   "claim_neg_one_not_square",
   "claim_neg_two_not_square_in_real_closed",
   "claim_negated_parallel_staircase_turning_zero",
