@@ -32387,9 +32387,9 @@ w'
                       " である。すべての係数が零である 2 つの多項式は等しいので ", math(String.raw`g=0`), " であり、"]),
                     displayMath(String.raw`\begin{aligned}
 f
-&=(t-\widehat w)g \quad(\because\ \blkref{claim_qbar_factor_theorem})\\
-&=(t-\widehat w)0 \quad(\because\ g=0)\\
-&=0 \quad(\because\ \text{零元との積})
+&=(t-\widehat w)g &&\bigl(\because\ \blkref{claim_qbar_factor_theorem}\bigr)\\
+&=(t-\widehat w)0 &&\bigl(\because\ g=0\bigr)\\
+&=0 &&\bigl(\because\ \text{零元との積}\bigr)
 \end{aligned}`),
                     paragraph(["となって ", math(String.raw`f\ne0`), " に反する。したがって ", math(String.raw`s=\varnothing`),
                       " であり、", math(String.raw`\lvert s\rvert=0`), " である。"]),
@@ -32409,8 +32409,8 @@ f
                     paragraph(["を得る。", math(String.raw`w\in s`), " なので、"]),
                     displayMath(String.raw`\begin{aligned}
 \lvert s\rvert
-&=\lvert s\setminus\{w\}\rvert+1 \quad(\because\ w\in s)\\
-&\le n+1 \quad(\because\ \text{帰納法の仮定})
+&=\lvert s\setminus\{w\}\rvert+1 &&\bigl(\because\ w\in s\bigr)\\
+&\le n+1 &&\bigl(\because\ \text{帰納法の仮定}\bigr)
 \end{aligned}`),
                     paragraph(["である。これで帰納法が閉じた。この議論に実数体も複素数体も現れず、代数的数と有限集合の中で閉じている。"]),
                   ],
@@ -76134,41 +76134,6 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         ],
                       },
                     },
-                    {
-                      role: "prerequisiteDefinition",
-                      element: {
-                        id: "kac_ward_definition_single_traversal_edge_set",
-                        kind: "definition",
-                        title: { text: "単純通過の辺集合" },
-                        labels: ["def_single_traversal_edge_set"],
-                        habitat: "N",
-                        statement: [
-                          paragraph([
-                            math(String.raw`L\ge1`), " とし、",
-                            math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                            " を取る。単純通過の辺集合を",
-                          ]),
-                          displayMath(String.raw`E_1(\varphi):=
-E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)
-\ \subseteq\ E_L`),
-                          paragraph([
-                            "で定める。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`),
-                            " は ", "参照用ノート「不採用経路: 動く辺の台の辺集合」", "、反転対の辺集合 ",
-                            math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"),
-                            " で定めた。定義から ",
-                            math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ",
-                            math(String.raw`E_1(\varphi)`), " と ", math(String.raw`D(\varphi)`),
-                            " の互いに素な合併であり、",
-                            math(String.raw`e\in E_1(\varphi)`), " とは、二つの向き ",
-                            math(String.raw`(e,0),(e,1)`),
-                            " のうちちょうど一方だけが動く辺の集合に属することである",
-                            "（少なくとも一方が属することは ", "参照用ノート「不採用経路: 動く辺の台の辺集合」",
-                            "、両方は属さないことは ", ref("def_doubled_edge_set"),
-                            " の否定）。実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                    },
                   ],
                   focus: {
                     id: "kac_ward_claim_single_traversal_edge_set_even",
@@ -76187,7 +76152,7 @@ E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)
                       displayMath(String.raw`\operatorname{Even}_L\bigl(E_1(\varphi)\bigr)`),
                       paragraph([
                         "である。単純通過の辺集合 ", math(String.raw`E_1(\varphi)`), " は ",
-                        ref("def_single_traversal_edge_set"), "、偶部分グラフの述語 ",
+                        "参照用ノート「不採用経路: 単純通過の辺集合」", "、偶部分グラフの述語 ",
                         math(String.raw`\operatorname{Even}_L`), " は ", ref("def_even_edge_subset"),
                         " で定めた。反転対を含まない場合は ",
                         math(String.raw`D(\varphi)=\varnothing`), " かつ ",
@@ -76262,7 +76227,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                         ref("def_doubled_edge_set"), " により ",
                         math(String.raw`e\in D(\varphi)`), " と ",
                         math(String.raw`M_e(\varphi)=I`), " は同値であり、",
-                        ref("def_single_traversal_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
                         math(String.raw`e\in E_1(\varphi)`),
                         " ならば ", math(String.raw`M_e(\varphi)`),
                         " はちょうど一つの元を持つ。したがって有限集合の個数（",
@@ -76306,7 +76271,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
 &&\bigl(\because\ \text{内側の和の項は }d\text{ に依らない}\bigr)\\
 &=\sum_{e\in E_1(\varphi)}\Bigl(\chi_v\bigl(\partial_0(e)\bigr)+\chi_v\bigl(\partial_1(e)\bigr)\Bigr)
  +\sum_{e\in D(\varphi)}2\,\Bigl(\chi_v\bigl(\partial_0(e)\bigr)+\chi_v\bigl(\partial_1(e)\bigr)\Bigr)
-&&\bigl(\because\ E_{\mathrm{supp}}(\varphi)=E_1(\varphi)\sqcup D(\varphi)\text{（\blkref{def_single_traversal_edge_set}）と }\lvert M_e(\varphi)\rvert\text{ の二場合}\bigr)\\
+&&\bigl(\because\ E_{\mathrm{supp}}(\varphi)=E_1(\varphi)\sqcup D(\varphi)\text{（参照用ノート「不採用経路: 単純通過の辺集合」）と }\lvert M_e(\varphi)\rvert\text{ の二場合}\bigr)\\
 &=d_{E_1(\varphi)}(v)
  +2\sum_{e\in D(\varphi)}\Bigl(\chi_v\bigl(\partial_0(e)\bigr)+\chi_v\bigl(\partial_1(e)\bigr)\Bigr)
 &&\bigl(\because\ \blkref{def_edge_subset_incidence_count}\text{ と }\mathbb N\text{ の分配則}\bigr)
@@ -76374,7 +76339,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                         paragraph([
                           "で定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
                           "、反転対の辺集合は ", ref("def_doubled_edge_set"),
-                          "、単純通過の辺集合は ", ref("def_single_traversal_edge_set"),
+                          "、単純通過の辺集合は ", "参照用ノート「不採用経路: 単純通過の辺集合」",
                           " で定めた。いずれも有限集合の部分集合の等号で判定できるので、",
                           math(String.raw`\mathcal N_L(D,E)`), " は有限集合であり、その個数は ",
                           math(String.raw`\mathbb N`), " に属する。実数体も複素数体も現れない。",
@@ -76463,7 +76428,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                     proof: [
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " を取る。", ref("def_single_traversal_edge_set"), " により ",
+                        " を取る。", "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
                         math(String.raw`D(\varphi)\cap E_1(\varphi)=\varnothing`), " であり、",
                         ref("claim_single_traversal_edge_set_even"), " により ",
                         math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",

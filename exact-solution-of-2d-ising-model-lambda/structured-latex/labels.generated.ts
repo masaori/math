@@ -936,7 +936,6 @@ export const ALL_LABELS = [
   "def_selected_odd_orbit_reversal",
   "def_shift_matrix",
   "def_signed_even_subgraph_polynomial",
-  "def_single_traversal_edge_set",
   "def_smoothed_crossing_number",
   "def_smoothed_cyclic_total_turning",
   "def_smoothed_seam_parity_pair",

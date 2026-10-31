@@ -7,6 +7,31 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_single_traversal_edge_set_archived",
+    targets: ["claim_single_traversal_edge_set_even"],
+    title: { text: "不採用経路: 単純通過の辺集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の辺集合による直接比較は採らない。元の定義を保存する。"]),
+      paragraph([
+        math(String.raw`L\ge1`), " と ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        " に対し、単純通過の辺集合を",
+      ]),
+      displayMath(String.raw`E_1(\varphi):=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)\subseteq E_L`),
+      paragraph([
+        "で定める。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`),
+        " は参照用ノート「不採用経路: 動く辺の台の辺集合」、反転対の辺集合 ",
+        math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"), " で定めた。定義から ",
+        math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ", math(String.raw`E_1(\varphi)`),
+        " と ", math(String.raw`D(\varphi)`), " の互いに素な合併であり、",
+        math(String.raw`e\in E_1(\varphi)`), " とは、二つの向き ", math(String.raw`(e,0),(e,1)`),
+        " のうちちょうど一方だけが動く辺の集合に属することである",
+        "（少なくとも一方が属することは参照用ノート「不採用経路: 動く辺の台の辺集合」、",
+        "両方は属さないことは ", ref("def_doubled_edge_set"),
+        " の否定）。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_signed_orbit_term_product_archived",
     targets: ["claim_kac_ward_term_orbit_weight_factorization"],
     title: { text: "不採用経路: 閉路軌道ごとの置換項" },
@@ -196,13 +221,13 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`M(\psi)`), " にも属する。従って ", math(String.raw`M(\psi)=M(\varphi)`), " である。",
                       ]),
                       paragraph([
-                        ref("def_doubled_edge_set"), " と ", ref("def_single_traversal_edge_set"),
+                        ref("def_doubled_edge_set"), " と ", "参照用ノート「不採用経路: 単純通過の辺集合」",
                         " は動く辺の集合だけから定まる。直前に示した ", math(String.raw`M(\psi)=M(\varphi)`),
                         " を代入すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 D(\psi)&=D(\varphi)&&\bigl(\because\ \blkref{def_doubled_edge_set}\text{ と }M(\psi)=M(\varphi)\bigr),\\
-E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \blkref{def_single_traversal_edge_set}\text{ と }M(\psi)=M(\varphi)\bigr).
+E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経路: 単純通過の辺集合」}\text{ と }M(\psi)=M(\varphi)\bigr).
 \end{aligned}`),
                       paragraph([
                         "最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
@@ -1620,7 +1645,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ",
                         ref("def_doubled_edge_set"), "、単純通過の辺集合 ",
                         math(String.raw`E_1(\varphi)`), " は ",
-                        ref("def_single_traversal_edge_set"), "、有限集合の個数 ",
+                        "参照用ノート「不採用経路: 単純通過の辺集合」", "、有限集合の個数 ",
                         math(String.raw`\lvert X\rvert\in\mathbb N`), " は ",
                         ref("def_cardinality_notation"),
                         " で定めた。三つの量はいずれも有限集合の個数であり、",
@@ -1650,7 +1675,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "は互いに素な合併である。さらに ", ref("def_doubled_edge_set"),
                         " により ", math(String.raw`e\in D(\varphi)`), " と ",
                         math(String.raw`M_e(\varphi)=I`), " は同値であり、",
-                        ref("def_single_traversal_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
                         math(String.raw`e\in E_1(\varphi)`), " ならば ",
                         math(String.raw`M_e(\varphi)`),
                         " はちょうど一つの元を持つ。したがって",
@@ -1669,7 +1694,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 &&\bigl(\because\ \text{準備の台の辺ごとの互いに素な合併。個数の加法性と }\lvert\{e\}\times M_e(\varphi)\rvert=\lvert M_e(\varphi)\rvert\bigr)\\
 &=\sum_{e\in D(\varphi)}\lvert M_e(\varphi)\rvert
  +\sum_{e\in E_1(\varphi)}\lvert M_e(\varphi)\rvert
-&&\bigl(\because\ E_{\mathrm{supp}}(\varphi)=D(\varphi)\sqcup E_1(\varphi)\text{（\blkref{def_single_traversal_edge_set}）で有限和が分かれる}\bigr)\\
+&&\bigl(\because\ E_{\mathrm{supp}}(\varphi)=D(\varphi)\sqcup E_1(\varphi)\text{（\text{参照用ノート「不採用経路: 単純通過の辺集合」}）で有限和が分かれる}\bigr)\\
 &=\sum_{e\in D(\varphi)}2+\sum_{e\in E_1(\varphi)}1
 &&\bigl(\because\ \text{準備の }\lvert M_e(\varphi)\rvert\text{ の二場合}\bigr)\\
 &=2\,\lvert D(\varphi)\rvert+\lvert E_1(\varphi)\rvert
@@ -1701,7 +1726,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         [math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。"],
                         [math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
                           math(String.raw`E_1(\mathcal T(\varphi))=E_1(\varphi)`), " である（",
-                          ref("def_doubled_edge_set"), "、", ref("def_single_traversal_edge_set"), "）。"],
+                          ref("def_doubled_edge_set"), "、", "参照用ノート「不採用経路: 単純通過の辺集合」", "）。"],
                       ]),
                       paragraph([
                         "とくに、", math(String.raw`D\cap E=\varnothing`), " かつ ",
@@ -1851,7 +1876,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "「動く辺の台の辺集合」の退避ノート", "）。よって ",
                         math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
                         math(String.raw`E_{\mathrm{supp}}(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)`), " であり、",
-                        ref("def_single_traversal_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
                         math(String.raw`E_1(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)=E_1(\varphi)`),
                         " である。",
                       ]),
@@ -3278,7 +3303,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
       paragraph(["元の証明:"]),
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " を取る。", ref("def_single_traversal_edge_set"), " により ",
+                        " を取る。", "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
                         math(String.raw`D(\varphi)\cap E_1(\varphi)=\varnothing`), " であり、",
                         ref("claim_single_traversal_edge_set_even"), " により ",
                         math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",
@@ -4130,7 +4155,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         math(String.raw`\mathcal T(\varphi)=\varphi`),
                         "（", "参照用ノート「不採用経路: 置換の経路反転」", "）ならば ",
                         math(String.raw`E_1(\varphi)=\varnothing`),
-                        "（", ref("def_single_traversal_edge_set"), "）である。",
+                        "（", "参照用ノート「不採用経路: 単純通過の辺集合」", "）である。",
                         "とくに、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
                         math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
                         "）と ", math(String.raw`E\ne\varnothing`), " を満たすなら、経路反転はファイバー ",
@@ -4152,7 +4177,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                       paragraph([
                         "第一の主張を対偶ではなく直接示す。", math(String.raw`\mathcal T(\varphi)=\varphi`),
                         " と仮定し、", math(String.raw`e\in E_1(\varphi)`),
-                        " が存在したとして矛盾を導く。", ref("def_single_traversal_edge_set"),
+                        " が存在したとして矛盾を導く。", "参照用ノート「不採用経路: 単純通過の辺集合」",
                         " により、二つの向き ", math(String.raw`(e,0),(e,1)`),
                         " のうちちょうど一方だけが ", math(String.raw`M(\varphi)`),
                         "（", ref("def_moved_edge_set"), "）に属する。属する側を ",
@@ -4177,7 +4202,7 @@ M(\varphi)
                         ref("def_doubled_edge_set"), " により ",
                         math(String.raw`e\in D(\varphi)`), " である。これは ",
                         math(String.raw`E_1(\varphi)=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)`),
-                        "（", ref("def_single_traversal_edge_set"), "）と ",
+                        "（", "参照用ノート「不採用経路: 単純通過の辺集合」", "）と ",
                         math(String.raw`e\in E_1(\varphi)`), " に反する。ゆえに ",
                         math(String.raw`E_1(\varphi)=\varnothing`), " である。",
                       ]),
