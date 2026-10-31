@@ -196,21 +196,29 @@ c_+(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathcal F^{(+)}\cap\mathbb R^{2^M},\
 
 ## 章の依存関係
 
-矢印は「矢印の元の章を、矢印の先の章が使う」を表す。棚卸しの依存ラベルから章どうしの直接の参照を集め
+枠は部を、矢印は「矢印の元の章を、矢印の先の章が使う」を表す。棚卸しの依存ラベルから章どうしの直接の参照を集め
 （$`\Lambda^{(\delta)}`$ の定義は分離を済ませた前提）、ほかの矢印を辿って届く矢印は省いた。
 数学的道具立てはすべての章が使うので、図から省いた。
 
 ```mermaid
 flowchart TD
-  trace["転送行列による表示"]
-  proj["射影と Jordan–Wigner 表示"]
-  fourier["離散 Fourier 変換による 2×2 行列 A(θ̃) への帰着"]
-  diag["A(θ̃) の対角化と V⁽⁺⁾ の指数表示"]
-  eig["V⁽⁺⁾ の固有値"]
-  maxvec["V⁽⁺⁾ の最大固有値に属する固有ベクトル"]
-  rowlim["N→∞ の極限と最大固有値 c(M)"]
-  collim["M→∞ の極限と閉形式"]
-  crit["臨界点 K_c と d²f/dK² の対数発散"]
+  subgraph partition["分配関数"]
+    trace["転送行列による表示"]
+    proj["射影と Jordan–Wigner 表示"]
+  end
+  subgraph eigenproblem["固有値問題"]
+    fourier["離散 Fourier 変換による 2×2 行列 A(θ̃) への帰着"]
+    diag["A(θ̃) の対角化と V⁽⁺⁾ の指数表示"]
+    eig["V⁽⁺⁾ の固有値"]
+    maxvec["V⁽⁺⁾ の最大固有値に属する固有ベクトル"]
+  end
+  subgraph limits["極限"]
+    rowlim["N→∞ の極限と最大固有値 c(M)"]
+    collim["M→∞ の極限と閉形式"]
+  end
+  subgraph critical["臨界点"]
+    crit["臨界点 K_c と d²f/dK² の対数発散"]
+  end
 
   trace --> proj
   proj --> fourier
