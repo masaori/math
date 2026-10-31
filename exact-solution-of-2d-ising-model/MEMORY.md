@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、本文から退避した (−) セクターの形式化 8 ファイル（旧 `Part010/` の 2 本、`Part011/Claim010_SectorDecomposition`、`Part004/OddEigenvectors`、`Part019/` の 4 本）を `lean/Ising2D/RoutesNotAdopted/MinusSector/` へ番号を外した名前で移した（名前空間・主張・証明は不変）。`Part010/`・`Part011/`・`Part019/` は無くなった。次は参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避した主張だけのファイル（`Part004/` の 2 本、`Part013/` の 1 本）の置き場を runbook に足して移す。
+
 2026-10-31: Lean の通しの証明の項目 7 で、本文から退避した整数運動量の経路の形式化 19 ファイル（旧 `Part004/` の `hat(Z), hat(Y)`、`Part007/`、`Part008/`、`Part009/`、`Part013/Claim001_WhyMinusOnly`）を `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ番号を外した名前で移した（名前空間・主張・証明は不変）。`check-no-sorry.sh` の該当定理は新しい区切りへ集めた。次は (−) セクターの形式化を `RoutesNotAdopted/MinusSector/` へ移す。
 
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」の最後のまとまり「三角関数の評価・有限和・積分」を移した。旧 `Part012/Theorem004_RiemannSumToIntegral` と `Part020/` の 3 本（正弦の初等評価・対数積分の閉形式・正弦を含む積分の両側評価）を `lean/Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/` へ番号を外した名前で移した（名前空間・中身は不変）。`Part012/`・`Part020/` は無くなり、数学的道具立てのファイルはすべて `MathematicalTools/` にある。次は整数運動量の経路の形式化を `RoutesNotAdopted/IntegerMomentum/` へ移す（状態台帳の「次の一歩」）。

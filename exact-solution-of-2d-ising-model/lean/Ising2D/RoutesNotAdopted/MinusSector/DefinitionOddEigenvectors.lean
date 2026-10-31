@@ -1,16 +1,16 @@
 /-
 # 全スピン反転行列の固有値 -1 の固有ベクトル全体（形式化の記録。人手の本文からは退避済み）
 
-`(−)` セクターを本文から外したため、次の二つの主張は参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した。本ファイルは形式化の記録として残し、
-ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次の二つである（`(−)` セクターを本文から外したため）。
 
-退避した主張は、もと `structured-latex/content/004_transfer_matrix.ts` の
-`transfer_matrix_004_definition_eigenspace_odd_of_epsilon`（ラベル `def_odd_eigenvectors_of_epsilon`）と
-`odd_eigenspace_is_complex_subspace` である。
+* もと `transfer_matrix_004_definition_eigenspace_odd_of_epsilon`（ラベル `def_odd_eigenvectors_of_epsilon`）
+* もと `transfer_matrix_004_claim_odd_eigenspace_is_complex_subspace`（ラベル `odd_eigenspace_is_complex_subspace`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
 
 ノートの記述と同じく、抽象線型写像を経由せず、具体的な複素行列 `epsilon M` の
-数ベクトルへの作用だけで定義する。続いて本文ラベル
+数ベクトルへの作用だけで定義する。続いて参照用ノートのラベル
 `odd_eigenspace_is_complex_subspace` の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。
 -/
@@ -21,12 +21,12 @@ namespace Ising2D
 
 open Matrix
 
-/-- **人手本文 `def_odd_eigenvectors_of_epsilon`**:
+/-- **参照用ノートの `def_odd_eigenvectors_of_epsilon`**:
 全スピン反転行列を左から掛けると符号が反転する複素数ベクトルの集合 `𝓕⁽⁻⁾`。 -/
 def oddEigenvectors (M : ℕ) (_hM : 1 ≤ M) : Set (Conf M → ℂ) :=
   {f | epsilon M *ᵥ f = -f}
 
-/-- **人手本文 `odd_eigenspace_is_complex_subspace` の零ベクトルの場合**。 -/
+/-- **参照用ノートの `odd_eigenspace_is_complex_subspace` の零ベクトルの場合**。 -/
 theorem zero_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M) :
     (0 : Conf M → ℂ) ∈ oddEigenvectors M hM := by
   simp only [oddEigenvectors, Set.mem_setOf_eq]
@@ -40,7 +40,7 @@ theorem zero_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M) :
     _ = 0 := Finset.sum_const_zero
     _ = -0 := (neg_zero : -(0 : ℂ) = 0).symm
 
-/-- **人手本文 `odd_eigenspace_is_complex_subspace` の和の場合**。 -/
+/-- **参照用ノートの `odd_eigenspace_is_complex_subspace` の和の場合**。 -/
 theorem add_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M)
     {f g : Conf M → ℂ} (hf : f ∈ oddEigenvectors M hM)
     (hg : g ∈ oddEigenvectors M hM) :
@@ -62,7 +62,7 @@ theorem add_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M)
     _ = -(f r + g r) := (neg_add (f r) (g r)).symm
     _ = (-(f + g)) r := rfl
 
-/-- **人手本文 `odd_eigenspace_is_complex_subspace` の複素スカラー倍の場合**。 -/
+/-- **参照用ノートの `odd_eigenspace_is_complex_subspace` の複素スカラー倍の場合**。 -/
 theorem smul_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M)
     (a : ℂ) {f : Conf M → ℂ} (hf : f ∈ oddEigenvectors M hM) :
     a • f ∈ oddEigenvectors M hM := by
@@ -90,7 +90,7 @@ theorem smul_mem_oddEigenvectors (M : ℕ) (hM : 1 ≤ M)
     _ = -(a * f r) := mul_neg a (f r)
     _ = (-(a • f)) r := rfl
 
-/-- **人手本文 `odd_eigenspace_is_complex_subspace`**:
+/-- **参照用ノートの `odd_eigenspace_is_complex_subspace`**:
 `oddEigenvectors M hM` を台集合とする `ℂ`-部分加群。 -/
 def oddEigenspace (M : ℕ) (hM : 1 ≤ M) : Submodule ℂ (Conf M → ℂ) where
   carrier := oddEigenvectors M hM

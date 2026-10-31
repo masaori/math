@@ -19,7 +19,7 @@
 
 ## 解消前に Lean 側でどう扱ったか（一次情報）
 
-`lean/Ising2D/Part010/Claim011_SectorReplacement.lean` で、原文の主張を
+`lean/Ising2D/RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean` で、原文の主張を
 仮定として明示的に受け取る述語を定義した。
 
 ```lean

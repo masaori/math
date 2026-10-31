@@ -1,10 +1,12 @@
 /-
 # `ε` は不動点をもたない対合の置換行列（具体版。形式化の記録）
 
-対応する人手の主張は、章 019 ごと本文から参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
-もと `sector_001_claim_epsilon_is_permutation`（ラベル `epsilon_is_sign_flip_permutation`）である。
-本ファイルは形式化の記録として残し、ビルドは通し続ける。
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次のものである（`(−)` セクターを本文から外したため。もとは最大固有値の所在を述べる章にあった）。
+
+* もと `sector_001_claim_epsilon_is_permutation`（ラベル `epsilon_is_sign_flip_permutation`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。
 
 本文の主張も使う部分（`π`（`flipConf`）、実行列 `epsilonR`、`ε` の成分表示 `epsilon_apply`、
 `epsilon_eq_ofReal_epsilonR`、`epsilonR_isSymm`、`epsilonR_mul_self`、`epsilonR_mulVec_apply`）は

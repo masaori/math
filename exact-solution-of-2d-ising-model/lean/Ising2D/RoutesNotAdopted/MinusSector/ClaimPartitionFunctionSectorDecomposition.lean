@@ -20,7 +20,7 @@
   これを `partition_function_via_transfer_matrix`（`PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean`）の
   `X = (V_1V_2)^{N_row}` に適用する段は `partition_function_sector_decomposition` の中。
 * Step 2（各セクターで `V_1 → V_1^{(±)}`）→ `sector_replacement_pow`
-  （`Part010/Claim011_SectorReplacement.lean`）。
+  （`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`）。
 * Step 3（対称形 `(B V_2 B)^n` の解消）→ `trace_epsProj_sym_pow`。
   代数的な核は必要十分版 `Ising2D.NecSuf.mul_pow_conj_left`
   （`B (B V B)^n = (B B V)^n B`、結合法則のみ）。トレース側で使うのは
@@ -35,7 +35,7 @@
 `V1_restrictsOnEvenSector` と `V1_restrictsOnOddSector` から得られる。
 以下ではこの格子幅条件を下流へ渡し、`RestrictsOnSector` を仮定として受け取らない。
 -/
-import Ising2D.Part010.Claim011_SectorReplacement
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimSectorReplacementOfV1
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
 
 namespace Ising2D

@@ -213,10 +213,21 @@
     `DefinitionCheckFermi`・`ClaimCommutationVPlusCheckPsi`・`DefinitionCheckNumberOperator`・`ClaimVPlusPositiveDefinite`・`DefinitionOpenChainAndBoundaryOperators`・`ClaimOpenChainSpinSums`・`CheckFermiInput`）が
     このフォルダのファイルを import している（共有の定義・補題を使うため。名前空間は変えていないので主張は変わらない）。runbook のゴールラインはフォルダの対応だけを求めるので、依存の切り離しは差に数えない。
 
+  - 本文から退避した (−) セクター（済み）: 8 ファイルを `Ising2D/RoutesNotAdopted/MinusSector/` へ番号を外し中身の分かる名前で移した。
+    旧 `Part010/Claim011_SectorReplacement`（`ClaimSectorReplacementOfV1`）・`Part010/Claim012_SectorDecomposition`（`ClaimPartitionFunctionSectorDecomposition`）、
+    旧 `Part011/Claim010_SectorDecomposition`（`ClaimRayleighSupSectorDecomposition`）、旧 `Part004/OddEigenvectors`（`DefinitionOddEigenvectors`）、
+    旧 `Part019/` の 4 本（`ClaimEpsilonIsSignFlipPermutation`・`ClaimAbsVectorMovesToEvenSector`・`TheoremCMinusLeCPlus`・`TheoremCEqualsCPlus`）である。
+    8 本とも、冒頭が宣言する人手の項目（`sector_replacement_of_V1`・`sector_replacement_pow`・`partition_function_sector_decomposition`・`sector_decomposition_of_rayleigh_sup`・
+    `def_odd_eigenvectors_of_epsilon`・`odd_eigenspace_is_complex_subspace`・`epsilon_is_sign_flip_permutation`・`abs_vector_moves_to_even_sector`・`c_minus_le_c_plus`・`c_equals_c_plus`）は
+    すべて参照用ノート `minus_sector_not_adopted.ts` へ退避した項目で、棚卸しには無い。`Part010/`・`Part011/`・`Part019/` は無くなった。
+    `check-no-sorry.sh` では、これらのファイルの定理を新しい区切り「本文から参照用ノートへ退避した (−) セクターの形式化の記録」へ集めた
+    （同じ定理が 2 か所に書かれていた `sector_replacement_pow`・`partition_function_sector_decomposition` は 1 行にした。対象の集合は変えていない）。
+    本文の章のファイルでこのフォルダを import するものは無い（import するのは必要十分版 `NecSuf/PermSector.lean` だけ）。
+
 ## 次の一歩
 
-項目 7 の続きとして、本文から退避した (−) セクターの形式化を `Ising2D/RoutesNotAdopted/MinusSector/` へ移す。
-候補は `Part010/` の 2 本（`Claim011_SectorReplacement`・`Claim012_SectorDecomposition`）、`Part011/Claim010_SectorDecomposition`、`Part004/OddEigenvectors`、`Part019/` の 4 本である。
-各ファイルの冒頭の人手の項目を棚卸しと参照用ノート `minus_sector_not_adopted.ts` で確かめ、runbook の多数決の規則で置き場を決める。
-`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
-続けて、参照用ノートへ退避した主張だけのファイル（`Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`）・`Part013/Claim007_H1H2ViaCheck`）の置き場を runbook に足してから移し、旧番号のフォルダを無くす。
+項目 7 の続きとして、本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した主張だけを形式化したファイル
+（`Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`。`epsilon_action_eigenvalues_are_signs`）・`Part013/Claim007_H1H2ViaCheck`（`H1_H2_via_check_Z_Y`））の置き場を決める。
+runbook の項目 7 の置き場の規則にこのノートの項目の置き場が無いので、先に runbook に置き場（例えば `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/`）を足し、
+同じ回でファイルを番号を外した名前で移し、`Part004/`・`Part013/` を無くす。`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表も同じ回で直す。
+これで旧番号のフォルダ（`Part000`〜`Part020`）が無くなれば、runbook のゴールラインを一つずつ確かめる（`lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを含む）。

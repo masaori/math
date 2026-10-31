@@ -20,7 +20,7 @@
 ## 他章への依存について
 
 この章の `W` は章 010 の `V_1`, `V_2` から作られるが、章 010 の Lean 形式化は
-本タスクの担当外なので、**`W` の作り方によらない部分（`Part011` の主要な不等式）は
+本タスクの担当外なので、**`W` の作り方によらない部分（旧 `Part011` の主要な不等式）は
 `W : Matrix n n ℝ` とその対称性・正定値性だけを仮定して述べる**。
 `W = V_1^{1/2} V_2 V_1^{1/2}` という具体形は
 `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` で扱う。

@@ -1,10 +1,12 @@
 /-
 # `c_-(M) ≤ c_+(M)`（具体版。形式化の記録）
 
-対応する人手の主張は、章 019 ごと本文から参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
-もと `sector_003_theorem_c_minus_le_c_plus`（ラベル `c_minus_le_c_plus`）である。
-本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次のものである（`(−)` セクターを本文から外したため。もとは最大固有値の所在を述べる章にあった）。
+
+* もと `sector_003_theorem_c_minus_le_c_plus`（ラベル `c_minus_le_c_plus`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）の
 `Ising2D.NecSuf.sectorRayleighSup_neg_le_pos`。本ファイルの主定理はその**系**である。
@@ -13,7 +15,7 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
-| Step 1（`𝓡_±` が空でなく上に有界、`c_±(M) ∈ ℝ`） | `sectorSet_neg_nonempty_epsilonR` / `sectorSet_pos_nonempty_epsilonR`（章 019 の Claim001）＋ `Ising2D.sectorSet_bddAbove`（章 011） |
+| Step 1（`𝓡_±` が空でなく上に有界、`c_±(M) ∈ ℝ`） | `sectorSet_neg_nonempty_epsilonR` / `sectorSet_pos_nonempty_epsilonR`（`ClaimEpsilonIsSignFlipPermutation.lean`）＋ `Ising2D.sectorSet_bddAbove`（`RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean`） |
 | Step 2（各点での比較 `xᵀWx ≤ uᵀWu ≤ c_+(M)`） | `quad_le_sectorRayleighSup_pos` |
 | Step 3（上限を取る） | `c_minus_le_c_plus` |
 
@@ -27,7 +29,7 @@
 また、`W_{kl} > 0` の**狭義**の正値性も不等式には不要である（`0 ≤ W_{kl}` で足りる。
 `c_minus_le_c_plus_of_nonneg` 参照）。
 -/
-import Ising2D.Part019.Claim002_AbsVectorEvenSector
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimAbsVectorMovesToEvenSector
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
 
 set_option linter.unusedSectionVars false

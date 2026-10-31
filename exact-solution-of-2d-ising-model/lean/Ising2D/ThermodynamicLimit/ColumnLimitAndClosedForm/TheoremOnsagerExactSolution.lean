@@ -26,7 +26,7 @@
 以前の形式化は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 章 019 の `c_equals_c_plus`（`c(M) = max(c_+, c_-) = c_+(M)`）を使って挟み撃ちなしに
 `c(M) = Λ^{(1/2)}_M` を出していた。いまは人手の本文と同じく、`c_-(M)` に触れない
-`Λ ≤ c(M) ≤ 2Λ` の挟み撃ちで述べる。章 019 の Lean（`Part019/`）は形式化の記録として残してあり、
+`Λ ≤ c(M) ≤ 2Λ` の挟み撃ちで述べる。章 019 の Lean（`RoutesNotAdopted/MinusSector/`）は形式化の記録として残してあり、
 本ファイルはそれに依存しない。
 
 必要十分版は `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の不等式だけに置く（`NecSuf/EvenSectorUpperBound.lean`）。Step 1・Step 3 は

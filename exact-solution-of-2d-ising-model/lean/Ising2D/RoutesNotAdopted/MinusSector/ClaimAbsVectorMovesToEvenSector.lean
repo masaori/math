@@ -1,10 +1,12 @@
 /-
 # 成分ごとの絶対値を取ると偶セクターへ移る（具体版。形式化の記録）
 
-対応する人手の主張は、章 019 ごと本文から参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
-もと `sector_002_claim_abs_vector_moves_to_even_sector`（ラベル `abs_vector_moves_to_even_sector`）である。
-本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次のものである（`(−)` セクターを本文から外したため。もとは最大固有値の所在を述べる章にあった）。
+
+* もと `sector_002_claim_abs_vector_moves_to_even_sector`（ラベル `abs_vector_moves_to_even_sector`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない
 （本文の `c_between_Lambda_half_and_twice_Lambda_half` Step 2 が使う `uᵀWu ≥ xᵀWx` と `‖u‖ = ‖x‖` は
 `Ising2D/NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` / `vecNormSq_absVec`）。
 
@@ -29,7 +31,7 @@
 
 Perron–Frobenius の定理・スペクトル定理・行列の対角化可能性は使っていない。
 -/
-import Ising2D.Part019.Claim001_EpsilonSignFlipPermutation
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimEpsilonIsSignFlipPermutation
 
 set_option linter.unusedSectionVars false
 

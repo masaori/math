@@ -2,8 +2,11 @@
 # `c(M) = max(c₊(M), c₋(M))`（偶奇セクターへの分解。形式化の記録）
 
 対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
-退避したもと `maxeig_010_claim_sector_decomposition_of_c`（ラベル `sector_decomposition_of_rayleigh_sup`）
-である（`(−)` セクターを本文から外したため）。本ファイルは形式化の記録として残し、ビルドは通し続ける。
+退避した次のものである（`(−)` セクターを本文から外したため）。
+
+* もと `maxeig_010_claim_sector_decomposition_of_c`（ラベル `sector_decomposition_of_rayleigh_sup`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。
 本文の主張の Lean は本ファイルに依存しない。
 
 本文で置き換わった主張は次のとおり。

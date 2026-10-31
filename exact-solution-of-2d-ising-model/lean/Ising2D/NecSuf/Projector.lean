@@ -6,8 +6,8 @@
 `Ising2D/PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean`）。
 本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 `sector_replacement_of_V1` / `sector_replacement_pow` / `partition_function_sector_decomposition` の
-形式化の記録（`Ising2D/Part010/Claim011_SectorReplacement.lean`,
-`Ising2D/Part010/Claim012_SectorDecomposition.lean`）も本ファイルを使う。
+形式化の記録（`Ising2D/RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`,
+`Ising2D/RoutesNotAdopted/MinusSector/ClaimPartitionFunctionSectorDecomposition.lean`）も本ファイルを使う。
 
 ## この主張に本質的に効いている構造は何か
 

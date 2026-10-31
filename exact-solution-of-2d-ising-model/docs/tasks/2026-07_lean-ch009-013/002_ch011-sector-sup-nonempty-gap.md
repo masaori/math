@@ -2,7 +2,7 @@
 
 - 対象: `structured-latex/content/011_max_eigenvalue.ts`
   / `maxeig_010_claim_sector_decomposition_of_c`（ラベル `sector_decomposition_of_rayleigh_sup`）(3)
-- 発見経緯: Lean 形式化（`lean/Ising2D/Part011/Claim010_SectorDecomposition.lean`）
+- 発見経緯: Lean 形式化（`lean/Ising2D/RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean`）
 - 影響: 結論 `c(M) = max(c₊(M), c₋(M))` は正しい。**穴は「`c_±(M)` が定義できること」の根拠が
   本文に無い**点である。
 

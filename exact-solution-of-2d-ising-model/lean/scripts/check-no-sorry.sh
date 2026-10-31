@@ -67,8 +67,6 @@ targets=(
   Ising2D.isoParam_K2star
   Ising2D.commute_V1_epsProj
   Ising2D.commute_V2_epsProj
-  Ising2D.sector_replacement_pow
-  Ising2D.partition_function_sector_decomposition
   Ising2D.V2Units
   Ising2D.V2Units_eq_V2H2FormUnits
   Ising2D.isUnit_V2
@@ -125,9 +123,6 @@ targets=(
   Ising2D.V1_generators_pow_mulVec_eq
   Ising2D.V1_generator_partialSums_mulVec_eq
   Ising2D.V1_mulVec_eq_V1pm
-  Ising2D.V1_restrictsOnSector_of_opposite_sign
-  Ising2D.V1_restrictsOnEvenSector
-  Ising2D.V1_restrictsOnOddSector
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
@@ -491,12 +486,6 @@ targets=(
   Ising2D.NecSuf.add_mem_fixedVectors
   Ising2D.NecSuf.smul_mem_fixedVectors
   Ising2D.NecSuf.fixedSubmodule
-  Ising2D.oddEigenvectors
-  Ising2D.zero_mem_oddEigenvectors
-  Ising2D.add_mem_oddEigenvectors
-  Ising2D.smul_mem_oddEigenvectors
-  Ising2D.oddEigenspace
-  Ising2D.oddEigenspace_eq_negatedSubmodule
   Ising2D.NecSuf.negatedVectors
   Ising2D.NecSuf.zero_mem_negatedVectors
   Ising2D.NecSuf.add_mem_negatedVectors
@@ -517,12 +506,6 @@ targets=(
   Ising2D.epsilon_commute_V1pm
   Ising2D.epsilon_commute_V1pmHalf
   Ising2D.commute_epsProj_of_commute_epsilon
-  Ising2D.sector_replacement_of_V1
-  Ising2D.sector_replacement_pow
-  Ising2D.trace_eq_sector_sum
-  Ising2D.trace_epsProj_sym_pow
-  Ising2D.trace_epsProj_sym_pow_eq_plain
-  Ising2D.partition_function_sector_decomposition
   Ising2D.NecSuf.continuous_arcosh_comp
   Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub
   Ising2D.NecSuf.one_le_cosh_mul_cosh_sub
@@ -616,7 +599,6 @@ targets=(
   Ising2D.commute_V1plus_epsProjPlus
   Ising2D.commute_V1plusHalf_epsProjPlus
   Ising2D.V1_restriction_to_eigenspaces
-  Ising2D.Vsym_neg_one_eq_VPlusOfTransfer
   Ising2D.Uflip_conj_H1plus
   Ising2D.Uflip_conj_S1plus
   Ising2D.epsilon_transpose
@@ -633,8 +615,6 @@ targets=(
   Ising2D.epsilon_commute_physicalSymTransferC
   Ising2D.epsilon_commutes_with_W
   Ising2D.epsilonR_mulVec_physicalSymTransferR_of_mem
-  Ising2D.sectorSet_one_eq
-  Ising2D.sectorRayleighSup_one_eq
   Ising2D.NecSuf.vecNormSq_permMat_mulVec
   Ising2D.NecSuf.bilin_nonneg_of_nonneg
   Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup
@@ -667,21 +647,6 @@ targets=(
   Ising2D.physicalV2R_isSymm
   Ising2D.physicalV2R_posDef
   Ising2D.partition_function_sandwich_physical
-  Ising2D.sectorSet
-  Ising2D.sectorRayleighSup
-  Ising2D.sector_invariant
-  Ising2D.sector_orthogonal
-  Ising2D.sector_smul
-  Ising2D.sectorSet_subset
-  Ising2D.sectorSet_bddAbove
-  Ising2D.sectorRayleighSup_le
-  Ising2D.sector_quad_le
-  Ising2D.projPlus
-  Ising2D.projMinus
-  Ising2D.proj_add_eq_one
-  Ising2D.projPlus_mulVec_eigen
-  Ising2D.projMinus_mulVec_eigen
-  Ising2D.sector_decomposition_of_rayleigh_sup
   # --- 数演算子と同時固有空間の必要十分版（NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean。章「V^{(+)} の固有値」と整数運動量の経路の記録が共有）と、それに続く各章 ---
   Ising2D.NecSuf.num_mul_num
   Ising2D.NecSuf.ann_mul_cre
@@ -785,30 +750,11 @@ targets=(
   Ising2D.NecSuf.sectorRayleighSup_neg_le_pos
   Ising2D.NecSuf.rayleighSup_eq_sectorRayleighSup_pos
   Ising2D.flipConf_involutive
-  Ising2D.flipConf_ne_self
   Ising2D.epsilon_apply
   Ising2D.epsilon_eq_ofReal_epsilonR
   Ising2D.epsilon_mulVec_basisVec
-  Ising2D.epsilonR_entry_zero_or_one
-  Ising2D.epsilonR_row_sum
-  Ising2D.epsilonR_col_sum
   Ising2D.epsilonR_mulVec_apply
   Ising2D.epsilonR_mulVec_single
-  Ising2D.epsilonR_mulVec_oddUnit
-  Ising2D.vecNormSq_oddUnit
-  Ising2D.sectorSet_neg_nonempty_epsilonR
-  Ising2D.epsilonR_mulVec_absVec
-  Ising2D.vecNormSq_absVec_eq
-  Ising2D.quad_le_quad_absVec_epsilonR
-  Ising2D.exists_even_sector_unit_ge
-  Ising2D.quad_le_sectorRayleighSup_pos
-  Ising2D.c_minus_le_c_plus
-  Ising2D.c_minus_le_c_plus_symTransfer
-  Ising2D.c_equals_c_plus
-  Ising2D.c_equals_c_plus_symTransfer
-  Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
-  Ising2D.rayleighSup_attained_in_even_sector
-  Ising2D.rayleighSup_mem_rayleighSet
   Ising2D.NecSuf.lie_creAnn_cre
   Ising2D.NecSuf.lie_creAnn_ann
   Ising2D.NecSuf.lie_carHam_cre
@@ -1651,6 +1597,59 @@ targets=(
   Ising2D.FermiSetup.exists_eigenBasis_Vprime
   Ising2D.FermiSetup.exists_conj_diagonal_Vprime
   Ising2D.FermiSetup.exists_conj_diagonal_Vmat
+  # --- 本文から参照用ノートへ退避した (−) セクター（全スピン反転 ε の固有値 −1 の側）の形式化の記録（RoutesNotAdopted/MinusSector/。必要十分版は NecSuf/NegatedVectorsSubmodule.lean・NecSuf/Projector.lean・NecSuf/PermSector.lean）---
+  Ising2D.sector_replacement_pow
+  Ising2D.partition_function_sector_decomposition
+  Ising2D.V1_restrictsOnSector_of_opposite_sign
+  Ising2D.V1_restrictsOnEvenSector
+  Ising2D.V1_restrictsOnOddSector
+  Ising2D.oddEigenvectors
+  Ising2D.zero_mem_oddEigenvectors
+  Ising2D.add_mem_oddEigenvectors
+  Ising2D.smul_mem_oddEigenvectors
+  Ising2D.oddEigenspace
+  Ising2D.oddEigenspace_eq_negatedSubmodule
+  Ising2D.sector_replacement_of_V1
+  Ising2D.trace_eq_sector_sum
+  Ising2D.trace_epsProj_sym_pow
+  Ising2D.trace_epsProj_sym_pow_eq_plain
+  Ising2D.Vsym_neg_one_eq_VPlusOfTransfer
+  Ising2D.sectorSet_one_eq
+  Ising2D.sectorRayleighSup_one_eq
+  Ising2D.sectorSet
+  Ising2D.sectorRayleighSup
+  Ising2D.sector_invariant
+  Ising2D.sector_orthogonal
+  Ising2D.sector_smul
+  Ising2D.sectorSet_subset
+  Ising2D.sectorSet_bddAbove
+  Ising2D.sectorRayleighSup_le
+  Ising2D.sector_quad_le
+  Ising2D.projPlus
+  Ising2D.projMinus
+  Ising2D.proj_add_eq_one
+  Ising2D.projPlus_mulVec_eigen
+  Ising2D.projMinus_mulVec_eigen
+  Ising2D.sector_decomposition_of_rayleigh_sup
+  Ising2D.flipConf_ne_self
+  Ising2D.epsilonR_entry_zero_or_one
+  Ising2D.epsilonR_row_sum
+  Ising2D.epsilonR_col_sum
+  Ising2D.epsilonR_mulVec_oddUnit
+  Ising2D.vecNormSq_oddUnit
+  Ising2D.sectorSet_neg_nonempty_epsilonR
+  Ising2D.epsilonR_mulVec_absVec
+  Ising2D.vecNormSq_absVec_eq
+  Ising2D.quad_le_quad_absVec_epsilonR
+  Ising2D.exists_even_sector_unit_ge
+  Ising2D.quad_le_sectorRayleighSup_pos
+  Ising2D.c_minus_le_c_plus
+  Ising2D.c_minus_le_c_plus_symTransfer
+  Ising2D.c_equals_c_plus
+  Ising2D.c_equals_c_plus_symTransfer
+  Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
+  Ising2D.rayleighSup_attained_in_even_sector
+  Ising2D.rayleighSup_mem_rayleighSet
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。

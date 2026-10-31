@@ -13,7 +13,7 @@
 `c_+(M)` だけの定義（`def_sector_rayleigh_sup`）、`c_plus_le_c`（`c_+(M) ≤ c(M)`）、
 `epsilon_is_real_symmetric`（`ε^⊤ = ε`）が立ち、`epsilon_commutes_with_W` と
 `symmetrized_transfer_matrix_on_sectors` は `(+)` だけの主張になった。
-`sector_decomposition_of_rayleigh_sup` の Lean（`Part011/Claim010_SectorDecomposition.lean`）は
+`sector_decomposition_of_rayleigh_sup` の Lean（`RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean`）は
 形式化の記録として残し、ビルドは通し続ける（下の表の「ノート」の行）。本文の主張の Lean はこれに依存しない。
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
@@ -32,7 +32,9 @@
 
 ## 1. 形式化した定理の一覧
 
-### 1.1 具体版（`lean/Ising2D/Part011/`）
+### 1.1 具体版
+
+`c(M) = max(c_+(M), c_-(M))`（参照用ノートへ退避した `sector_decomposition_of_rayleigh_sup`）の形式化の記録は `lean/Ising2D/RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean` にある。
 
 `psd_cauchy_schwarz`（数学的道具立て「トレース・共役転置・正定値性」）の `ClaimPsdCauchySchwarz.lean` と補助の `RealMatrixBilinearFormAndNorm.lean` は
 `lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある。

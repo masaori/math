@@ -8,7 +8,7 @@
 本文の `onsager_exact_solution` は `c(M) = c_+(M)` を使わず、`c_+(M) ≤ c(M) ≤ 2c_+(M)` の挟み撃ちで
 述べる（`lean/docs/ch018-formalization.md` 4 章）。
 
-**本章の Lean（`Ising2D/Part019/`, `Ising2D/NecSuf/PermSector.lean`）は形式化の記録として残し、
+**本章の Lean（`Ising2D/RoutesNotAdopted/MinusSector/`, `Ising2D/NecSuf/PermSector.lean`）は形式化の記録として残し、
 ビルドは通し続ける。対応先は本文ではなく上のノートである。本文の主張の Lean はこれらに依存しない。**
 本文の主張も使う部分は次のファイルへ移した（以下の記述でこれらの名前が出てきたら移動先を参照）。
 
@@ -40,9 +40,9 @@
 
 ## 1. 形式化した定理の一覧
 
-### 1.1 具体版（`lean/Ising2D/Part019/`）
+### 1.1 具体版（`lean/Ising2D/RoutesNotAdopted/MinusSector/`）
 
-#### `Claim001_EpsilonSignFlipPermutation.lean`（ラベル `epsilon_is_sign_flip_permutation`）
+#### `ClaimEpsilonIsSignFlipPermutation.lean`（ラベル `epsilon_is_sign_flip_permutation`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -65,7 +65,7 @@
 | `Ising2D.sectorSet_neg_nonempty_epsilonR` | `𝓡_- ≠ ∅` | (4) の使い道 |
 | `Ising2D.sectorSet_pos_nonempty_epsilonR` | `𝓡_+ ≠ ∅` | `c_minus_le_c_plus` Step 1 |
 
-#### `Claim002_AbsVectorEvenSector.lean`（ラベル `abs_vector_moves_to_even_sector`）
+#### `ClaimAbsVectorMovesToEvenSector.lean`（ラベル `abs_vector_moves_to_even_sector`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -76,7 +76,7 @@
 | `Ising2D.quad_le_quad_absVec_epsilonR_of_nonneg` | 同上の非負版（`0 ≤ W_{kl}` だけ） | (3)（必要十分版で判明した最小の仮定） |
 | `Ising2D.exists_even_sector_unit_ge` | (1)(2)(3) をまとめた形 | Step 2 で使う形 |
 
-#### `Theorem003_CMinusLeCPlus.lean`（ラベル `c_minus_le_c_plus`）
+#### `TheoremCMinusLeCPlus.lean`（ラベル `c_minus_le_c_plus`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -88,7 +88,7 @@
 | `Ising2D.isUnit_diagonal_of_pos` | 成分の正な対角行列は可逆 | 補助 |
 | `Ising2D.c_minus_le_c_plus_symTransfer` | 章 011 の `W = V_1^{1/2}V_2V_1^{1/2}` への特殊化 | 同上 |
 
-#### `Theorem004_CEqualsCPlus.lean`（ラベル `c_equals_c_plus`）
+#### `TheoremCEqualsCPlus.lean`（ラベル `c_equals_c_plus`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |

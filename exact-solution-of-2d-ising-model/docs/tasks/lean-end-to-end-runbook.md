@@ -22,22 +22,22 @@
 
 上から順に、未完了の最初の項目を進める。進んだ位置は状態台帳 [lean-end-to-end-state.md](lean-end-to-end-state.md) に書く。
 
-2026-10-31 時点で、最終定理 `Ising2D.onsager_exact_solution_unconditional`（`Ising2D/Part018/Theorem013_OnsagerUnconditional.lean`）は
+2026-10-31 時点で、最終定理 `Ising2D.onsager_exact_solution_unconditional`（当時 `Ising2D/Part018/Theorem013_OnsagerUnconditional.lean`、いまは `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerUnconditional.lean`）は
 次の仮定を取っている。項目 1〜5 はこれらを一つずつ消す作業である。
 
 1. **双対結合定数を $K_2$ から定める。**（2026-10-31 済み）`IsingParam.K2star := Kstar K2`
    （`PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean`）とし、人手 `duality_c2_star_eq_s2_star_c2` を
    `EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean` で形式化して `hdual` を定理 `IsingParam.c2_mul_s2star_eq_c2star` にした。
 2. **具体的な分配関数と挟み撃ちをつなぐ。** 最終定理の `Z` はいま「挟み撃ちを満たす任意の関数」である。
-   `partitionFunction`（`PartitionFunction/TransferMatrixRepresentation`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean` の
+   `partitionFunction`（`PartitionFunction/TransferMatrixRepresentation`）の転送行列表示と、`ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` の `partition_function_sandwich`・`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean` の
    具体的な $V_1^{1/2}, V_2, W$ をつなぎ、`hZ1`・`hZ2` を具体的な $c(M)$（具体的な $W$ の Rayleigh 上限）について証明する。
-3. **$W$ と $V^{(+)}$ の橋渡しを構成する。** `EvenSectorBridge`（`Part018/Theorem009_CPlusEqualsLambda.lean`）を、具体的な $W$ と
+3. **$W$ と $V^{(+)}$ の橋渡しを構成する。** `EvenSectorBridge`（`ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremCPlusEqualsLambda.lean`）を、具体的な $W$ と
    `vPlusDataOf` の $V^{(+)}$ について作る（$V^{(+)}$ の実行列表示と、$\mathcal F^{(+)}$ 上で $W x = V^{(+)} x$）。
    `symmetrized_transfer_matrix_on_sectors` は形式化済みなので、実ベクトル上の主張へ変換する。
 4. **$\mathrm{tr}(\varepsilon V^{(+)})>0$ を証明する。** 人手証明の `trace_of_epsilon_V_plus`（018 の 1 次元開鎖のスピン和
    `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive` と、
    開鎖項・周期境界項 $D_0, G$ の対角作用）を具体版で形式化する。
-5. **$W$ の成分の正値性と $\varepsilon$ との可換性を最終定理へ渡す。** `Part011` の `W_has_positive_entries`・
+5. **$W$ の成分の正値性と $\varepsilon$ との可換性を最終定理へ渡す。** `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean` の `W_has_positive_entries_physical`（人手 `W_has_positive_entries`）・
    `ClaimEpsilonCommutesWithW.lean` を、項目 3 の具体的な $W$ について使う。
 6. **通しの定理を立てる。** 項目 1〜5 を合わせて `Ising2D.onsager_exact_solution_end_to_end` を証明し、
    `scripts/check-end-to-end.sh` を通す。`check-no-sorry.sh` の `targets` にも足す。ゴール台帳を更新する。

@@ -24,7 +24,7 @@
 であり、`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 が使う（`epsilonR_mulVec_apply`）。
 
 以上の内容（`flipConf` から `epsilon_eq_ofReal_epsilonR` まで）は、もと
-`Part019/Claim001_EpsilonSignFlipPermutation.lean`（章 019 ごとノートへ退避）にあった。
+`RoutesNotAdopted/MinusSector/ClaimEpsilonIsSignFlipPermutation.lean`（章 019 ごとノートへ退避）にあった。
 
 必要十分版は置かない。置換行列の一般的な性質（対称性・対合性）は `Ising2D/NecSuf/PermMatrix.lean`
 にあり、`epsilonR_isSymm` / `epsilonR_mul_self` はその系である。

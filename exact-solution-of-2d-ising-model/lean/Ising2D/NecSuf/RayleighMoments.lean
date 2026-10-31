@@ -28,7 +28,7 @@
 「ノルム」という言い方をするためだけであって、証明の内容ではない。
 
 なお `c` の存在（上限 `sup` が取れること）と、跡による下からの評価だけは
-ℝ の完備性・平方根を使うので、具体版の側（`Part011`）に置いてある。
+ℝ の完備性・平方根を使うので、具体版の側（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/`）に置いてある。
 -/
 import Ising2D.NecSuf.PsdCauchySchwarz
 

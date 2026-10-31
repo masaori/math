@@ -18,7 +18,7 @@
 Step 3〜6 の補題は、`ε` の固有値 `η` と境界項の係数 `ηsign` を引数にもつ一般形で書いてある
 （`η = 1`, `ηsign = -1` が人手の `𝓕^{(+)}` と `H_1^{(+)}`）。一般形のまま残すのは、人手の本文から
 参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した `(−)` セクターの議論
-（`Part010/Claim011_SectorReplacement.lean`）の形式化の記録も同じ補題を使うためである。
+（`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`）の形式化の記録も同じ補題を使うためである。
 人手の主張に対応する `V1_restriction_to_eigenspaces` は `η = 1` に特殊化した `(+)` だけの主張である。
 
 人手は「両辺は `𝓕^{(+)}` から `𝓕` への写像として一致する」を `end` の制限の等号で述べる。

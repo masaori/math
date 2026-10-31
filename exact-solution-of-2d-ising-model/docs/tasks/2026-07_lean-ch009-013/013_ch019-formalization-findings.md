@@ -1,7 +1,7 @@
 # 章 019「最大固有値の所在（偶セクターへの確定）」の Lean 形式化で見つかったこと
 
 - 対象: `structured-latex/content/019_max_eigenvalue_sector.ts`（6 ブロック）
-- 発見経緯: Lean 形式化（`lean/Ising2D/Part019/`、抽象版 `lean/Ising2D/Abstract/PermSector.lean`）
+- 発見経緯: Lean 形式化（`lean/Ising2D/RoutesNotAdopted/MinusSector/`、必要十分版 `lean/Ising2D/NecSuf/PermSector.lean`）
 - 結論から言うと、**本文の主張に誤りは見つからなかった**。以下は
   (a) 形式化できなかった箇所とその理由、(b) 本文が置いている仮定が結論に対して過剰である箇所、
   (c) 章 011 の既知の穴が本章で埋まったこと、の 3 点である。

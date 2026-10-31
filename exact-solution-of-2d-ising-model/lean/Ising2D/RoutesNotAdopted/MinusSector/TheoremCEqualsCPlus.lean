@@ -1,10 +1,12 @@
 /-
-# `c(M) = c_+(M)`（具体版・もと章 019 の結論。形式化の記録）
+# `c(M) = c_+(M)`（具体版・もと最大固有値の所在を述べる章の結論。形式化の記録）
 
-対応する人手の主張は、章 019 ごと本文から参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
-もと `sector_004_theorem_c_equals_c_plus`（ラベル `c_equals_c_plus`）である。
-本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の `onsager_exact_solution` は
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ
+退避した次のものである（`(−)` セクターを本文から外したため。もとは最大固有値の所在を述べる章にあった）。
+
+* もと `sector_004_theorem_c_equals_c_plus`（ラベル `c_equals_c_plus`）
+
+本ファイルはその形式化の記録として残し、ビルドは通し続ける。本文の `onsager_exact_solution` は
 `c(M) = c_+(M)` を使わず、`c_+(M) ≤ c(M) ≤ 2c_+(M)` の挟み撃ちで述べる
 （`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）。
 
@@ -43,7 +45,7 @@
 **複素の `V_1, V_2` と実行列 `W` を結ぶ橋渡し（章 009・010 → 章 011）が未形式化**なので、
 本ファイルでも実行列としての可換性 `epsilonR M * W = W * epsilonR M` は仮定として受け取る。
 -/
-import Ising2D.Part019.Theorem003_CMinusLeCPlus
+import Ising2D.RoutesNotAdopted.MinusSector.TheoremCMinusLeCPlus
 
 set_option linter.unusedSectionVars false
 

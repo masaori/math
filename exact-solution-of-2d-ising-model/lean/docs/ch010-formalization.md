@@ -7,7 +7,7 @@
 `ε` と `P^{(+)}` が `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` と可換であることを述べる。
 
 本文の主張の Lean は部「分配関数」の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」のフォルダ
-`PartitionFunction/ProjectionAndJordanWigner/` にある。`(−)` セクターの形式化の記録は `Part010/` に残っている。
+`PartitionFunction/ProjectionAndJordanWigner/` にある。`(−)` セクターの形式化の記録は `RoutesNotAdopted/MinusSector/` にある。
 
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `P^{(-)}`, `V_1^{(-)}` を使う主張（`sector_replacement_of_V1`, `sector_replacement_pow`,
@@ -15,8 +15,8 @@
 `Z = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})`）と 004 章の
 `def_odd_eigenvectors_of_epsilon` / `odd_eigenspace_is_complex_subspace` は参照用ノート
 `structured-latex/notes/minus_sector_not_adopted.ts` へ移った。対応する Lean
-（`Part010/Claim011_SectorReplacement.lean`, `Part010/Claim012_SectorDecomposition.lean`,
-`Part004/OddEigenvectors.lean`, `NecSuf/NegatedVectorsSubmodule.lean`）は形式化の記録として残し、
+（`RoutesNotAdopted/MinusSector/ClaimSectorReplacementOfV1.lean`, `RoutesNotAdopted/MinusSector/ClaimPartitionFunctionSectorDecomposition.lean`,
+`RoutesNotAdopted/MinusSector/DefinitionOddEigenvectors.lean`, `NecSuf/NegatedVectorsSubmodule.lean`）は形式化の記録として残し、
 ビルドは通し続ける（下の表の「ノート」の行）。本文の主張の Lean はこれらに依存しない。
 境界項の符号を引数に持つ一般形（`H1 M η`, `V1pm`, `V1pmHalf`, `epsProj M η` ほか）は補助として残し、
 本文のラベルに対応する `(+)` の定義・主張はその特殊化と定義から一致する。
@@ -109,8 +109,8 @@
 | `V2_in_Z_Y` | **形式化済み**（004 章の主張）。`I_smul_H2_eq_sum_sigmaX` が各サイトの `iZ_mY_m=σ_m^x` を有限和へ持ち上げ、`V2_in_Z_Y` が `def_transfer_matrix` の `V_2` について `second_transfer_matrix_pauli_form` から本文どおりに導く | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`・`Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
 | `def_even_eigenvectors_of_epsilon` | **固有値 `+1` の集合定義を同期済み**。`evenEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = f` を満たす数ベクトルの集合として定める | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean` |
 | `even_eigenspace_is_complex_subspace` | **固有値 `+1` の集合の複素部分線型空間性を同期済み**。本文の零・和・複素スカラー倍に含まれる17段の成分計算を同じ順で `zero_mem_evenEigenvectors`・`add_mem_evenEigenvectors`・`smul_mem_evenEigenvectors` に展開し、同じ集合を台集合とする `evenEigenspace` を構成した。必要十分版は有限添字と可換半環行列だけを仮定して同じ17段を証明し、`evenEigenspace_eq_fixedSubmodule` が具体版との一致を示す | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean`・`Ising2D/NecSuf/FixedVectorsSubmodule.lean` |
-| （ノート）`def_odd_eigenvectors_of_epsilon` | **固有値 `-1` の集合定義を同期済み（形式化の記録）**。`oddEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = -f` を満たす数ベクトルの集合として定める | `Ising2D/Part004/OddEigenvectors.lean` |
-| （ノート）`odd_eigenspace_is_complex_subspace` | **固有値 `-1` の集合の複素部分線型空間性を同期済み（形式化の記録）**。本文の零・和・複素スカラー倍に含まれる20段の成分計算を同じ順で `zero_mem_oddEigenvectors`・`add_mem_oddEigenvectors`・`smul_mem_oddEigenvectors` に展開し、同じ集合を台集合とする `oddEigenspace` を構成した。必要十分版は有限添字と可換環行列だけを仮定して同じ20段を証明し、`oddEigenspace_eq_negatedSubmodule` が具体版との一致を示す | `Ising2D/Part004/OddEigenvectors.lean`・`Ising2D/NecSuf/NegatedVectorsSubmodule.lean` |
+| （ノート）`def_odd_eigenvectors_of_epsilon` | **固有値 `-1` の集合定義を同期済み（形式化の記録）**。`oddEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = -f` を満たす数ベクトルの集合として定める | `Ising2D/RoutesNotAdopted/MinusSector/DefinitionOddEigenvectors.lean` |
+| （ノート）`odd_eigenspace_is_complex_subspace` | **固有値 `-1` の集合の複素部分線型空間性を同期済み（形式化の記録）**。本文の零・和・複素スカラー倍に含まれる20段の成分計算を同じ順で `zero_mem_oddEigenvectors`・`add_mem_oddEigenvectors`・`smul_mem_oddEigenvectors` に展開し、同じ集合を台集合とする `oddEigenspace` を構成した。必要十分版は有限添字と可換環行列だけを仮定して同じ20段を証明し、`oddEigenspace_eq_negatedSubmodule` が具体版との一致を示す | `Ising2D/RoutesNotAdopted/MinusSector/DefinitionOddEigenvectors.lean`・`Ising2D/NecSuf/NegatedVectorsSubmodule.lean` |
 | `epsilon_action_eigenvalues_are_signs` | **固有値候補を同期済み**。具体版は本文と同じ `M≥1`、非零数ベクトル `f`、`epsilon M *ᵥ f = lambda • f` の下で、行列作用の結合則、複素線型性、単位行列の作用を成分和から示し、`epsilon_mul_self` から `f=lambda^2f` を得る。非零成分と複素数の零積の法則から `lambda=1` または `lambda=-1` を示す。必要十分版は二回作用で元へ戻る線型写像、非可換でもよい整域、無ねじれ加群に抽象化した。特殊化定理と必要十分性の記録は専用ファイルへ分離した。固有空間の次元公式は対象外である | `Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean`・`Ising2D/NecSuf/InvolutionEigenvalue.lean`・`Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean`・`docs/necsuf-involution-eigenvalue.md` |
 | `epsilon_projector_properties` (2) の「`im P^{(+)} = 𝓕^{(+)}`」 | **同期済み**。2 つの包含（`epsProjPlus_mulVec_mem` / `epsProjPlus_mulVec_eq_self`）と、像を数ベクトル空間の部分集合として述べた集合の等式（`epsilon_projector_properties_image`）。人手の (2) の証明は `(P^{(+)})^2 = P^{(+)}` を経由して `ε y = y` を示すが、Lean は一般形の行列の等式 `ε P = ηP`（`epsilon_mul_epsProj`）を `η = 1` で作用させる | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonProjectors.lean` |
 | `bridge_000_remark_overview`（旧 010 の章の内容の説明） | 主張ではなく章の概要なので、定理としては形式化していない。2026-10-31 の章立ての組み直しで、説明する中身がすべて別の章へ移ったので本文から外した | 本ファイル |

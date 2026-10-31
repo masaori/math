@@ -13,7 +13,7 @@
 `V_2 = (2 sinh 2K_2)^{M_col/2} exp(K_2^* ∑_{m=1}^{M_col} σ^x_m)` と表せる。
 
 `V2PauliForm M s2 K2star` はこの**右辺の式**に付けた名前であり、`V_2` の定義ではない。
-`s2`, `K2star` を独立な引数とする一般化として定義しておき（`Part010` の偶奇セクターの議論は
+`s2`, `K2star` を独立な引数とする一般化として定義しておき（`RoutesNotAdopted/MinusSector/` の偶奇セクターの議論は
 この一般形のまま使う）、人手の主張は `s2 = sinh 2K_2`, `K2star = K_2^*`（`Ising2D.Kstar`）の値について
 述べる（`second_transfer_matrix_pauli_form`）。前係数は `V2PauliForm` の中では実冪 `(2 s_2)^{M/2}`
 （`Real.rpow`）で書き、人手の定義 `(√(2 sinh 2K_2))^{M_col}`（`secondTransferPrefactor`）と

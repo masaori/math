@@ -14,9 +14,9 @@
 （`trace_of_epsilon_V_plus` の Step 3 (b)、`c_between_Lambda_half_and_twice_Lambda_half` の Step 2）も使うので
 `Ising2D/NecSuf/PermMatrix.lean` へ移した。
 
-具体版は `Ising2D/Part019/`（`Claim001_EpsilonSignFlipPermutation.lean`,
-`Claim002_AbsVectorEvenSector.lean`, `Theorem003_CMinusLeCPlus.lean`,
-`Theorem004_CEqualsCPlus.lean`）。具体版はすべて本ファイルの定理の**系として**導いてある。
+具体版は `Ising2D/RoutesNotAdopted/MinusSector/`（`ClaimEpsilonIsSignFlipPermutation.lean`,
+`ClaimAbsVectorMovesToEvenSector.lean`, `TheoremCMinusLeCPlus.lean`,
+`TheoremCEqualsCPlus.lean`）。具体版はすべて本ファイルの定理の**系として**導いてある。
 
 ## この主張に本質的に効いている構造（具体版が過剰な構造を要求していないかの検査）
 
@@ -51,7 +51,7 @@
 Ising 模型の構造を含んでいない。したがって本章の必要十分版は、その上に
 「`ε` が対合の置換行列である」という仮定だけを追加した形になる。
 -/
-import Ising2D.Part011.Claim010_SectorDecomposition
+import Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
 import Ising2D.NecSuf.PermMatrix
 
 set_option linter.unusedSectionVars false
