@@ -29,7 +29,7 @@
 1 本に対応する。原文が proof 冒頭で明示的に確かめている
 「行ベクトル×行列の結合律」は、`ActsBy.eigen` の証明の中に吸収されている。
 -/
-import Ising2D.Part016.Claim003_AnticommutatorCheckPsi
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckPsi
 import Ising2D.Part008.Claim027_EigenATheta
 
 namespace Ising2D

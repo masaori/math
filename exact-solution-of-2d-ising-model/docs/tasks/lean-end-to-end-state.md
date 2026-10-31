@@ -90,13 +90,23 @@
     `Part013/Claim001_WhyMinusOnly`）は数えず、`RoutesNotAdopted/IntegerMomentum/` へ移すときに扱う。
     `Part008/Definition016_TV` は数学的道具立て「可逆行列・線型写像との対応・共役変換」の `def_T_g`・`linearity_of_T` を形式化しているので残した。
     `Part013/Claim007_H1H2ViaCheck`（`H1_H2_via_check_Z_Y`）は未割り当てなので残した。
+  - 部「固有値問題」の章「A(θ̃_μ) の対角化と V^{(+)} の指数表示」（済み）: 26 ファイルを `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/` へ移した。
+    旧 `Part004/` から `ClaimZYGenerateAlgebra`（と `FromNecSuf`）、旧 `Part012/` から `ClaimGamma1LowerBound`、
+    旧 `Part013/` から `ClaimConjugateIndex`・`ClaimAnticommutatorCheckZY`（と `FromNecSuf`）・`ClaimRecoverZYFromCheckZY`（と `FromNecSuf`）、
+    旧 `Part015/` の 6 本全部、旧 `Part016/` の 10 本全部、旧 `Part017/` から `TheoremMaxEigenvalueSimple`・`ClaimEigenvaluesCheckVprime` である。
+    `TheoremMaxEigenvalueSimple` は `max_eigenvalue_of_V_plus_simple`（「V^{(+)} の固有値」の章）と `gamma_theta_tilde_mu_positive`（この章）を 1 対 1 で形式化し、`ClaimEigenvaluesCheckVprime` は `eigenvalues_of_check_Vprime`（同）と `def_check_number_operator` (2) の `X̌`・`def_check_Vprime` の `V̌'`（この章）を形式化しているので、同数以上で並びの先のこの章へ置いた。
+    名前は内容から `DefinitionGamma1Gamma2OfThetaTilde`（旧 `Definition001_GammaTilde`）・`ClaimTVPlusEqTCheckVprime`（旧 `Claim008_TEq`）・`ClaimTVPlusEqTCheckVprimeOnCheckZY`（旧 `Claim007_TEqOnCheckZY`）とした。`Part015/`・`Part016/` は無くなった。章のフォルダへ移すときにファイル名の番号を外し、
+    旧 `Claim010_UnconditionalViaPart015` は、章の対角化の結果で仮定を落とす内容から `ClaimCheckFermiResultsUnconditional` とした。
+    `ClaimZYGenerateAlgebra` は `tensor_basis`（数学的道具立て）を引くだけで形式化していないので、この章の 1 項目だけで数えた。
+    `Part017/Definition001_CheckNumberOperator` は `def_check_number_operator`（この章）1 つと `check_number_operator_idempotent`・`check_number_operators_commute`（「V^{(+)} の固有値」の章）2 つを形式化しているので残した。
+    `Part018/Claim011_CheckFermiFromPart016` は `check_number_operator_is_hermitian` (3)（「M→∞ の極限と閉形式」の章）だけを新しく証明し、`def_check_fermi`・`anticommutator_of_check_psi` は既存の定理を使うだけなので残した。
+    人手の `def_arccosh`・`arccosh_properties` は mathlib の `Real.arcosh` を使い（必要十分版 `NecSuf/Arcosh.lean`）、`V_plus_factors_invertible`・`T_V_plus_is_conjugation` は `ReductionToATheta/DefinitionVPlus.lean` にある（前の章で多数決により置いた）。
   - 未割り当ての項目だけを形式化していて動かさないファイル: `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）と、
     その必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。割り当ては構成再編の連続実行を待つ。
 
 ## 次の一歩
 
-項目 7 の 4 番目の章、部「固有値問題」の「A(θ̃_μ) の対角化と V^{(+)} の指数表示」（フォルダ `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_diagonalization_and_exponential_form` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part013/` の `Claim003b_ConjugateIndex`・`Claim005_AnticommutatorCheckZY`・`Claim006_RecoverZY`（と各 `FromNecSuf`）、`Part015/`・`Part016/` の全部、
-`Part004/Claim014_ZYGenerateAlgebra`（と `FromNecSuf`）、`Part012/Claim001_Gamma1LowerBound` など。整数運動量の経路の記録は数えない）。
+項目 7 の 5 番目の章、部「固有値問題」の「V^{(+)} の固有値」（フォルダ `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_eigenvalues_of_V_plus` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part017/` に残る全部。`Part017/Definition001_CheckNumberOperator` はこの章の項目 2 つを形式化している。冒頭の項目名を数え、参照だけの項目は数えない）。
 `Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

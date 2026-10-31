@@ -22,13 +22,13 @@
 
 ## `def_check_fermi` と `P̌_μ` の突き合わせ
 
-`Ising2D/Part016/Definition001_CheckFermi.lean` は、015 章の完成を待たずに閉じるため
+`Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean` は、015 章の完成を待たずに閉じるため
 原文が「すなわち」として与える明示式を `ψ̌^†, ψ̌` の定義に採った。
 本ファイルの `checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` が、
 **その定義が原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` と一致すること**を示す。
 -/
-import Ising2D.Part016.Claim009_VPlusEqCCheckVprime
-import Ising2D.Part015.Definition008_GammaTildeMu
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimVPlusEqCCheckVprime
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGammaTildeMu
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 
 namespace Ising2D

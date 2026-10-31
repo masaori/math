@@ -36,7 +36,7 @@
 となり、`I ≠ 0` から `g_b = 0`。これが本ファイルの証明である
 （反交換子の左線型性は `Ising2D.acomm_sum_smul_left`）。
 -/
-import Ising2D.Part004.Claim014_ZYGenerateAlgebra
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 
 namespace Ising2D

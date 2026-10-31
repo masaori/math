@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_002_claim_gamma2_nonzero`）
 
-具体版: `Ising2D/Part015/Claim002_Gamma2TildeNonzero.lean`
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma2TildeNonzero.lean`
 （`Ising2D.gamma2_thetaTilde_ne_zero`）。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）

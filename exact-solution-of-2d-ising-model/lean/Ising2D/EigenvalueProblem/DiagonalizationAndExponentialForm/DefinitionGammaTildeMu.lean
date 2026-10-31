@@ -24,7 +24,7 @@
   その源は `gamma_2_theta_tilde_nonzero` である。
   008 章（整数運動量）では `γ(θ_μ) ≥ 0` しか言えない。
 -/
-import Ising2D.Part015.Claim006_DetATilde
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimDetATilde
 
 namespace Ising2D
 

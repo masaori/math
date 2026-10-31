@@ -20,8 +20,8 @@
 Step 2・Step 3 はそのまま「線型写像が 2 つの基底元の上で一致すれば
 その張る空間の上で一致する」ことに帰着する。
 -/
-import Ising2D.Part016.Claim006_ActionTCheckVprime
-import Ising2D.Part016.Claim004_CommutationVPlusCheckPsi
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCommutationVPlusCheckPsi
 
 namespace Ising2D
 

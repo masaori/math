@@ -103,8 +103,8 @@
 | `Ising2D.checkPhase_M_of_necSuf` | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `Ising2D.checkZ_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkZ_periodicity` |
 | `Ising2D.checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkY_periodicity` |
-| `Ising2D.acomm_checkZ_checkZ_of_necSuf` / `acomm_checkY_checkY_of_necSuf` | `NecSuf.acomm_antiperiodic_fourier_clifford`（それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化） | `Part013/Claim005_AnticommutatorCheckZYFromNecSuf.lean` |
-| `Ising2D.inverse_dft_check_of_necSuf` / `recover_checkZ_of_necSuf` / `recover_checkY_of_necSuf` | `NecSuf.inverse_dft_antiperiodic` | `Part013/Claim006_RecoverZYFromNecSuf.lean` |
+| `Ising2D.acomm_checkZ_checkZ_of_necSuf` / `acomm_checkY_checkY_of_necSuf` | `NecSuf.acomm_antiperiodic_fourier_clifford`（それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化） | `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckZYFromNecSuf.lean` |
+| `Ising2D.inverse_dft_check_of_necSuf` / `recover_checkZ_of_necSuf` / `recover_checkY_of_necSuf` | `NecSuf.inverse_dft_antiperiodic` | `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRecoverZYFromCheckZYFromNecSuf.lean` |
 | (A)〜(D)（`lie_H1Plus_checkZ` ほか 4 本） | **既存の** `NecSuf.CliffordTriple.lie_sum_*` | `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`（本体がそのまま導出） |
 
 橋渡し補題は `Ising2D.isPrimitiveRoot_expPhase_one`（`e^{-2π√-1/N}` は 1 の原始 `N` 乗根）と

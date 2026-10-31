@@ -12,7 +12,7 @@
 Step 3（合成）に、それぞれ `continuous_gamma1R` / `gamma1R_periodic`、
 mathlib の `Real.continuousOn_arcosh`、`gamma_is_continuous` が対応する。
 -/
-import Ising2D.Part012.Claim001_Gamma1LowerBound
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 
 namespace Ising2D
 

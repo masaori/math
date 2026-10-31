@@ -5,9 +5,9 @@
 
 | | ファイル | 主要定理 |
 | --- | --- | --- |
-| 具体版 | `Ising2D/Part004/Claim014_ZYGenerateAlgebra.lean` | `Ising2D.Z_Y_generate_algebra` |
+| 具体版 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` | `Ising2D.Z_Y_generate_algebra` |
 | 必要十分版 | `Ising2D/NecSuf/GeneratedByBasis.lean` | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_basis_mem` ほか |
-| 具体版の再導出 | `Ising2D/Part004/Claim014_ZYGenerateAlgebraFromNecSuf.lean` | `Ising2D.Z_Y_generate_algebra_of_necSuf` |
+| 具体版の再導出 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebraFromNecSuf.lean` | `Ising2D.Z_Y_generate_algebra_of_necSuf` |
 
 この文書は、必要十分版を実際に書いて `lake build` を通した結果として判明したことだけを書く
 （推測は書かない。根拠はすべて上記 3 ファイルの仮定と証明本体である）。
@@ -77,7 +77,7 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 ## 2. 具体版で埋める必要が残ったもの（＝本当に複素 2×2 行列が要るところ）
 
-`Claim014_ZYGenerateAlgebraFromNecSuf.lean` で必要十分版に渡すために補ったのは 3 つだけである。
+`ClaimZYGenerateAlgebraFromNecSuf.lean` で必要十分版に渡すために補ったのは 3 つだけである。
 
 1. **`Ising2D.span_pauli_eq_top`**:
    `{I, σ^x, σ^y, σ^z}` が `Mat(2, ℂ)` を ℂ-加群として張る。
@@ -98,7 +98,7 @@ z n ∈ S, y n ∈ S          -- 生成元は 𝒜 に入る
 
 必要十分版を書く過程で、具体版が不要な性質に依存している箇所は見つからなかった。
 具体版 `Z_Y_generate_algebra` の各ステップは、必要十分版の仮定へ 1 対 1 に対応する
-（対応表は `Claim014_ZYGenerateAlgebraFromNecSuf.lean` の冒頭コメント）。
+（対応表は `ClaimZYGenerateAlgebraFromNecSuf.lean` の冒頭コメント）。
 
 ただし次の 2 点は「必要十分版のほうが仮定が弱い」ことが分かった。
 

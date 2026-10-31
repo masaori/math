@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_008_claim_gamma_theta_tilde_positive`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
-具体版: `Ising2D/Part015/Definition008_GammaTildeMu.lean`。
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionGammaTildeMu.lean`。
 
 ## mathlib の状況
 

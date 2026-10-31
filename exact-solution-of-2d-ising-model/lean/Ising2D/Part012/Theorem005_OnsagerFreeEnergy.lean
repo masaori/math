@@ -19,7 +19,7 @@
 
 `Λ^{(δ)}_M` は本ファイル内で人手証明の式そのままに定義する（011 章の `c(M)` や
 `eigenvalues_of_V` の `Λ_max` との同定は本章の主張ではない）。
-`γ` は `Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`）。
+`γ` は `Ising2D.gammaFn`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）。
 -/
 import Ising2D.Part012.Claim002_GammaContinuous
 import Ising2D.Part012.Theorem004_RiemannSumToIntegral

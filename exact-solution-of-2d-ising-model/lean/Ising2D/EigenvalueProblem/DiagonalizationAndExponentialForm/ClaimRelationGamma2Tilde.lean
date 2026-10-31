@@ -26,7 +26,7 @@
   (3)（偏角が `π`）は `def_sqrt_cc` を経由するための中間段階なので、
   この方針では対応物が不要になる。積が負の実数であることは (2) で述べている。
 -/
-import Ising2D.Part015.Claim002_Gamma2TildeNonzero
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma2TildeNonzero
 import Ising2D.NecSuf.NegConjPair
 
 namespace Ising2D

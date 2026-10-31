@@ -21,8 +21,8 @@ mathlib の `AlgHom.equalizer`（2 つの代数準同型が一致する部分代
 「可逆元による共役どうしが `Ž, Y̌` 上で一致すれば全体で一致する」という形で述べており、
 `V^{(+)}` はその特殊化にすぎない。
 -/
-import Ising2D.Part016.Claim007_TEqOnCheckZY
-import Ising2D.Part013.Claim006_RecoverZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimTVPlusEqTCheckVprimeOnCheckZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 
 namespace Ising2D
 

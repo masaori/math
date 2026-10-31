@@ -7,9 +7,9 @@
 
 対応する人手証明のラベル: **`<Z_Y_generate_algebra>`**
 （`parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ`。
-具体版は `Ising2D/Part004/Claim014_ZYGenerateAlgebra.lean` の
+具体版は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` の
 `Ising2D.Z_Y_generate_algebra`、特殊化による導出は
-`Ising2D/Part004/Claim014_ZYGenerateAlgebraFromNecSuf.lean`）。
+`Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebraFromNecSuf.lean`）。
 
 ## 何を抽象化したか
 

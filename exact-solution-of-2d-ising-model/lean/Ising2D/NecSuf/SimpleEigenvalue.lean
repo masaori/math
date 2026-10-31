@@ -2,7 +2,7 @@
 # 単純固有値（**必要十分版**）
 
 対応する人手証明のラベル（具体版は
-`Ising2D/Part017/Theorem011_MaxEigenvalueSimple.lean`）:
+`Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`）:
 `max_eigenvalue_of_V_plus_simple` (2)(3)。
 
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査）

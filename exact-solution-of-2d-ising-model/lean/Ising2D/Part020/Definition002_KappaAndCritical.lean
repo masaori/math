@@ -9,7 +9,7 @@
 - `critical_005_claim_isotropic_setting`（ラベル `isotropic_A_equals_one`）
 
 **具体版**（人手証明と同じ抽象度）。`γ` は 012 章で形式化済みの `Ising2D.gammaFn`
-（`Part012/Claim001_Gamma1LowerBound.lean`）をそのまま使う。
+（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）をそのまま使う。
 
 ## 原文との対応で明示した前提
 
@@ -18,7 +18,7 @@
 `sinh 2K sinh 2K^* = 1` を定義から直接読める `Ising2D.KStar`（`K^* := arsinh(1/sinh 2K)/2`）で
 述べてあり、両者が `K > 0` で一致することを `Kstar_eq_KStar` で示して接続する。
 -/
-import Ising2D.Part012.Claim001_Gamma1LowerBound
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.Part020.Claim001_CoshAddHalfAngle
 
 namespace Ising2D

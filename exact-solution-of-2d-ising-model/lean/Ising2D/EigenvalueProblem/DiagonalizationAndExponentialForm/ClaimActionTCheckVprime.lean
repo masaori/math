@@ -35,7 +35,7 @@
   `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` ただ 1 つで、仮定 `hgconj` として明示する。
 * `gamma_2_theta_tilde_nonzero`（015 章）は仮定 `hga` として明示する。
 -/
-import Ising2D.Part016.Definition005_CheckVprime
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckVprime
 import Ising2D.NecSuf.FermionLadder
 import Ising2D.NecSuf.ExpEigenvector
 import Ising2D.Part008.Definition016_TV

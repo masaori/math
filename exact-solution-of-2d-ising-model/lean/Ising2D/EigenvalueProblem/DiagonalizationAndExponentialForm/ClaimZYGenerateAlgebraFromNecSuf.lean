@@ -8,7 +8,7 @@
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.Z_Y_generate_algebra`（`Claim014_ZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
+| **具体版** | `Ising2D.Z_Y_generate_algebra`（`ClaimZYGenerateAlgebra.lean`） | 複素行列・クロネッカー積・Pauli 行列 |
 | **必要十分版** | `NecSuf.string_mem` / `NecSuf.local_mem` / `NecSuf.map_mem_of_mulSingle_mem` / `NecSuf.eq_top_of_basis_mem`（`NecSuf/GeneratedByBasis.lean`） | 可換半環 `R` 上の代数、有限添字の直積モノイド、基底 |
 
 本ファイルは、同じ結論 `Algebra.adjoin ℂ (ZYSet M) = ⊤` を
@@ -36,7 +36,7 @@ Step 2（Jordan–Wigner 文字列の帰納法）は、`P_m P_m = I` から得�
 族（`ZNat` 等）を作って渡す。範囲外の値は必要十分版の仮定にも結論にも現れない。
 -/
 import Ising2D.NecSuf.GeneratedByBasis
-import Ising2D.Part004.Claim014_ZYGenerateAlgebra
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 
 namespace Ising2D
 

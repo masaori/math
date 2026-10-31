@@ -44,9 +44,9 @@
 `hga : gamma2 K (thetaTilde M μ) ≠ 0` — 015 章の `gamma_2_theta_tilde_nonzero`。
 015 章がこれを無条件に閉じれば消える（`K_1, K_2 ∈ ℝ_{>0}` から従う）。
 -/
-import Ising2D.Part016.Definition001_CheckFermi
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Ising2D.NecSuf.Fermion
-import Ising2D.Part013.Claim005_AnticommutatorCheckZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 
 namespace Ising2D
 

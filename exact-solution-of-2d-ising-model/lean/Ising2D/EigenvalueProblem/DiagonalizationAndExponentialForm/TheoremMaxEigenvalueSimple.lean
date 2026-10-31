@@ -24,7 +24,7 @@
 
 `Ising2D.LambdaM`（`Part012/Theorem005_OnsagerFreeEnergy.lean`、形式化済み）は
 人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M` そのものである。
-`Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`）が
+`Ising2D.gammaFn`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）が
 `def_gamma_theta` の `γ(θ) = arccosh(γ_1(θ))` である。
 -/
 import Ising2D.Part017.Theorem010_EigenvaluesVPlus

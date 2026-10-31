@@ -7,7 +7,7 @@
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
 `Ising2D.NecSuf.inverse_dft_antiperiodic`（同じラベル）。
-必要十分版からの導出は `Ising2D/Part013/Claim006_RecoverZYFromNecSuf.lean`。
+必要十分版からの導出は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRecoverZYFromCheckZYFromNecSuf.lean`。
 
 ## 原文の主張（`j ∈ {1,…,M}`）
 
@@ -23,8 +23,8 @@
 に対する一般形（`inverse_dft_check`）を証明し、それを `Z`, `Y` に適用する。
 違いは直交性として `Ising2D.sum_checkPhase`（反周期的指数和）を使う点だけである。
 -/
-import Ising2D.Part013.Claim003b_ConjugateIndex
-import Ising2D.Part004.Claim014_ZYGenerateAlgebra
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimZYGenerateAlgebra
 
 namespace Ising2D
 

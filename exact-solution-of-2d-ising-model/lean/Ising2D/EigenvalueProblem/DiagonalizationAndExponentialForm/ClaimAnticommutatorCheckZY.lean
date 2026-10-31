@@ -7,7 +7,7 @@
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
 `Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford`（同じラベル）。
-必要十分版からの導出は `Ising2D/Part013/Claim005_AnticommutatorCheckZYFromNecSuf.lean`。
+必要十分版からの導出は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckZYFromNecSuf.lean`。
 
 ## 原文の主張（`μ, ν ∈ 𝓜̌`）
 
@@ -23,7 +23,7 @@
 * 対になる添字が `μ+ν ≡ 1` になるのは、奇数周波数の和
   `(2μ-1) + (2ν-1) = 2(μ+ν-1)` の `-1` に由来する（この 1 点だけ）。
 -/
-import Ising2D.Part013.Claim003b_ConjugateIndex
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
 
 namespace Ising2D

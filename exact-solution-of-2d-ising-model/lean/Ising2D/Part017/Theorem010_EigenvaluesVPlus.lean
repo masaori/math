@@ -14,7 +14,7 @@
 - 重複度が `2^{M-m}` から `1` に（`m = M`）、
 - 和の範囲が `I` から `𝓜̌ = {1,…,M}` に、
 - `γ(θ~_μ) > 0` が狭義なので大小比較も狭義に（`checkBigLambda_lt_max`）
-なる。狭義性は `Theorem011_MaxEigenvalueSimple.lean` の単純性の根拠である。
+なる。狭義性は `TheoremMaxEigenvalueSimple.lean` の単純性の根拠である。
 -/
 import Ising2D.Part017.Claim009_ConstantCEvenSector
 import Ising2D.NecSuf.SimpleEigenvalue

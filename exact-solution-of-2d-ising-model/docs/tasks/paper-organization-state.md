@@ -88,7 +88,7 @@
   - **章末のゴールの主張を足した。** ある $c\in\mathbb C^\times$ について $V^{(+)}=c\exp(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)(\check n_\mu-\tfrac12I))$ を主張する claim
     `V_plus_eq_c_exp_sum_gamma_check_number_operator` を章の最後に置いた。証明は `V_plus_eq_c_check_Vprime` に $\check V'$・$\check X$・$\check n_\mu$ の定義を代入する 4 行である。
     SageMath（`sagemath/check/V_plus_eq_c_exp_sum_gamma_check_number_operator/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で隣接行の相対残差 ≤ 6.8e-13。指数評価の ℝ 脱出のため倍精度。
-    否定コントロールは $\check n_\mu$ の対を $\mu$ にしたもの）と Lean（`lean/Ising2D/Part016/ClaimVPlusEqCExpSumCheckNumberOperator.lean`。双対関係は定理で与え、仮定は $M\ne0$ だけ。
+    否定コントロールは $\check n_\mu$ の対を $\mu$ にしたもの）と Lean（`lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimVPlusEqCExpSumCheckNumberOperator.lean`。双対関係は定理で与え、仮定は $M\ne0$ だけ。
     `check-no-sorry.sh` の対象に足した）を足した。
   - `tools/chapter-plan.ts` のこの章の `goalLabels` を、この主張と `gamma1_lower_bound_all_theta`（ゴールの式の一般の $\theta$ での $\gamma(\theta)$ を定める）の二つにした。
     後者を外すと、この項は $V^{(+)}$ の固有値の章へ移る。冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号（$\check P_\mu$ による対角化、$\gamma(\theta)$、$\check\psi_\mu$、$\check n_\mu$）に分けた。

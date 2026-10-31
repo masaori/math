@@ -11,7 +11,7 @@
 **仮定として**受け取っていた（`lean/docs/ch018-formalization.md` の 0 章の表）。
 
 その後 `Ising2D/Part016/` が main に入り、`Ising2D.checkPsi_car'`
-（`Part016/Claim010_UnconditionalViaPart015.lean`）が CAR を**無条件に**（仮定は `M ≠ 0` だけ）
+（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimCheckFermiResultsUnconditional.lean`）が CAR を**無条件に**（仮定は `M ≠ 0` だけ）
 与えるようになった。本ファイルはそれを使って `CheckFermi` の
 **インスタンスを実際に構成する**（`Ising2D.checkFermiOf`）。
 
@@ -21,7 +21,7 @@
 本ファイルで証明する（`checkPsiDag_conjTranspose`）。これが**噛み合わせのための橋渡し補題**である。
 -/
 import Ising2D.Part018.Claim008_CheckQHermitian
-import Ising2D.Part016.Claim010_UnconditionalViaPart015
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCheckFermiResultsUnconditional
 
 namespace Ising2D
 

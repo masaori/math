@@ -27,13 +27,13 @@
   （原文 008 章の `gamma_2_theta_is_0` の修正版として既に形式化済み）。
   したがって本ファイルで新たに必要なのは Step 2〜Step 4 だけである。
 * 正値性の前提は `Ising2D.IsingParam`（`K_1, K_2, K_2^* > 0`、
-  `Part012/Claim001_Gamma1LowerBound.lean`）を使う。人手証明が Step 0 で
+  `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）を使う。人手証明が Step 0 で
   `K_2^* = -½log(tanh K_2) > 0` を導いている部分に対応する。
 * **人手証明は `μ ∈ 𝓜̌ = {1,…,M}` に限って述べているが、Lean の証明は `μ ∈ ℤ` 全体で通る**
   （`μ` の範囲はどこにも効かない）。人手証明と 1 対 1 に対応する `𝓜̌` 版も別に立てる
   （`gamma2_thetaTilde_ne_zero_checkIndex`）。
 -/
-import Ising2D.Part015.Definition001_GammaTilde
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGamma1Gamma2OfThetaTilde
 import Ising2D.NecSuf.OddModePhase
 
 namespace Ising2D

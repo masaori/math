@@ -15,7 +15,7 @@
 原文の主張はその特殊化である。008 章の `V_eq_Vprime` と同じく
 クリフォード群には依存しない。
 -/
-import Ising2D.Part016.Claim008_TEq
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimTVPlusEqTCheckVprime
 import Ising2D.Part002.Lemma003_CentralizerIsScalar
 
 namespace Ising2D

@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_006_claim_recover_Z_Y`）
 
-具体版（直接証明）は `Ising2D/Part013/Claim006_RecoverZY.lean`、
+具体版（直接証明）は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRecoverZYFromCheckZY.lean`、
 必要十分版は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
 `Ising2D.NecSuf.inverse_dft_antiperiodic`。
 
@@ -13,7 +13,7 @@
 `V := Mat(2,ℂ)^{⊗M}` を `ℂ`-加群として渡すことだけである。
 **行列であること・積があること・Clifford 関係は使っていない。**
 -/
-import Ising2D.Part013.Claim006_RecoverZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSumFromNecSuf
 
 namespace Ising2D

@@ -36,7 +36,7 @@
 本ファイルの 4 本は `μ ∈ ℤ` 全体で成り立つ（`𝓜̌` に絞る必要があるのは
 反交換関係を `δ_{ν,M+1-μ}` の形で述べるときだけである）。
 -/
-import Ising2D.Part013.Claim005_AnticommutatorCheckZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.Part013.Claim007_H1H2ViaCheck
 import Ising2D.Part008.Claim001_CommutatorHZY
 

@@ -34,7 +34,7 @@
 -/
 import Ising2D.Part018.Claim011_CheckFermiFromPart016
 import Ising2D.Part018.Claim003_TraceEpsilonVPlus
-import Ising2D.Part017.Theorem011_MaxEigenvalueSimple
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.TheoremMaxEigenvalueSimple
 
 namespace Ising2D
 
@@ -77,7 +77,7 @@ noncomputable def checkFermiSetupOf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) :
     rw [h]
     split <;> simp
 
-/-- 章 017 の `X̌` は章 016 の `checkX`（`Part016/Definition005_CheckVprime.lean`）と同じ行列。 -/
+/-- 章 017 の `X̌` は章 016 の `checkX`（`EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckVprime.lean`）と同じ行列。 -/
 theorem checkFermiSetupOf_Xop (P : IsingParam) (hM : M ≠ 0) :
     (checkFermiSetupOf P hM).Xop (fun i => gammaTilde P M i.1)
       = checkX P.const M (gammaTildeC P M) := by

@@ -27,7 +27,7 @@
   本章に固有なのは Step 2（`γ_1^2 = 1 + |γ_2|^2 > 1`、`gamma_2_theta_tilde_nonzero` による）と
   Step 3（`t > 0 ∧ t^2 > 1 ⟹ t > 1`）である。
 -/
-import Ising2D.Part015.Claim004_EigenATildeDiag
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenATildeDiag
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
 

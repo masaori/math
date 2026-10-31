@@ -4,8 +4,8 @@
 
 新規ファイル:
 
-- 具体版 `lean/Ising2D/Part016/`（9 ファイル。うち
-  `Claim010_UnconditionalViaPart015.lean` は 015 章の成果を入れて仮定を落とす後段）
+- 具体版 `lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`（016 章の分は 10 ファイル。うち
+  `ClaimCheckFermiResultsUnconditional.lean` は 015 章の成果を入れて仮定を落とす後段）
 - 必要十分版 `lean/Ising2D/NecSuf/FermionLadder.lean`, `lean/Ising2D/NecSuf/ExpEigenvector.lean`
 
 `lean/Ising2D.lean` と `lean/scripts/check-no-sorry.sh` へは末尾追記のみ。
@@ -59,7 +59,7 @@
 | `Ising2D.NecSuf.cosh_add_sinh_eq_exp` | `cosh c + sinh c = e^c` | 補助 |
 | `Ising2D.NecSuf.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**必要十分版**） | 同 Step 3〜5 |
 
-### 1-2. 015 章の成果で仮定を落とした版（`Part016/Claim010_UnconditionalViaPart015.lean`）
+### 1-2. 015 章の成果で仮定を落とした版（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimCheckFermiResultsUnconditional.lean`）
 
 本章の形式化中に 015 章（`Ising2D/Part015/`）が `origin/main` に入ったため、
 そこで無条件に証明された `γ_2(θ̃_μ) ≠ 0`・`λ_{±,μ} = e^{±γ(θ̃_μ)}`・重み `γ(θ̃_μ)` を代入して、
@@ -91,7 +91,7 @@
 
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`Part016/Claim003_AnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
+| `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
 | `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
 | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
 
@@ -137,7 +137,7 @@
 `IsingParam` を取る章 018 の最終定理には仮定として残らない。
 
 当初あった仮定は、014 章・015 章がマージされたことにより
-`Part016/Claim010_UnconditionalViaPart015.lean` ですべて解消した（上記 1-2 節）。
+`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimCheckFermiResultsUnconditional.lean` ですべて解消した（上記 1-2 節）。
 
 | 当初の仮定 | 出所 | 解消した定理 |
 | --- | --- | --- |

@@ -358,12 +358,12 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 | もとの仮定 | 出典の章 | 埋めた定理 |
 | --- | --- | --- |
-| `CheckFermi.hcre` / `hann`（`ψ̌^†, ψ̌` が `Ž, Y̌` の 1 次結合） | 016 | `Ising2D.checkPsiDag` / `checkPsi` の定義そのもの（`Part016/Definition001_CheckFermi.lean`） |
-| `CheckFermi.acomm_cre_cre` / `acomm_ann_ann` / `acomm_cre_ann`（CAR） | 016 | `Ising2D.checkPsi_car'`（`Part016/Claim010_UnconditionalViaPart015.lean`。仮定は `M ≠ 0` だけ） |
+| `CheckFermi.hcre` / `hann`（`ψ̌^†, ψ̌` が `Ž, Y̌` の 1 次結合） | 016 | `Ising2D.checkPsiDag` / `checkPsi` の定義そのもの（`EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean`） |
+| `CheckFermi.acomm_cre_cre` / `acomm_ann_ann` / `acomm_cre_ann`（CAR） | 016 | `Ising2D.checkPsi_car'`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimCheckFermiResultsUnconditional.lean`。仮定は `M ≠ 0` だけ） |
 | `CheckFermi.hstar`（`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`） | 016 | **本セッションで新たに証明**した `Ising2D.checkPsiDag_conjTranspose`（章 018 の `checkZ_conjTranspose` / `checkY_conjTranspose` と章 008 の `gamma2_neg_eq_neg_conj` だけを使う） |
 | `VPlusData.hV`（`V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`） | 016・017 | `Ising2D.VPlus_eq_smul_checkVprime_const`（016 の `VPlus_eq_smul_checkVprime_of_dual` ＋ 017 の `constant_c_value_even_sector`）と `Ising2D.checkVprime_mul_Qproj` |
 | `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
-| `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`Part017/Theorem011_MaxEigenvalueSimple.lean`。**無条件**） |
+| `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`。**無条件**） |
 | `rayleighSup_sandwich_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
 | `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
 | `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`） |

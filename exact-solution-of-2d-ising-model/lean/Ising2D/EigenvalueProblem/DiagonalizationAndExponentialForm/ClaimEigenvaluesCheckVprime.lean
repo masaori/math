@@ -18,10 +18,10 @@
 ## `γ(θ~_μ)` の扱い
 
 原文の `γ(θ~_μ) = arccosh(γ_1(θ~_μ))`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta` の `θ = θ~_μ` での値）は
-`Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`、形式化済み）で書ける。
+`Ising2D.gammaFn`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`、形式化済み）で書ける。
 本ファイルでは章 009 と同じく**実数の族 `g : CheckIdx M → ℝ` として受け取り**、
 `γ(θ~_μ) > 0` が要るところ（章 017 の単純性）でだけ狭義正値性を仮定に加える
-（`Theorem011_MaxEigenvalueSimple.lean` で `gammaFn` との同定と狭義正値性を証明する）。
+（`TheoremMaxEigenvalueSimple.lean` で `gammaFn` との同定と狭義正値性を証明する）。
 -/
 import Ising2D.Part017.Claim005_CheckJointEigenspace
 import Ising2D.NecSuf.SimpleEigenvalue

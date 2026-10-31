@@ -30,7 +30,7 @@ Lean では `expPhase_nextSite`（`e^{-i(k₁-k₂+1)θ~} = lastSign (-1) k₁`�
 `k₁` が最終サイトのときだけ指数が `M` になり、反周期性 `expPhase (2M) M = -1` で
 符号 `-1`（= `H_1^{(+)}` の最終項の係数）が出る。
 -/
-import Ising2D.Part013.Claim003b_ConjugateIndex
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 
 namespace Ising2D
 

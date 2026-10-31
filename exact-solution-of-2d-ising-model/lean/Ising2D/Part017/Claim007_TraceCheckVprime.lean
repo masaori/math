@@ -15,7 +15,7 @@
 半整数運動量では `m = M` なので**前因子 `2^{M-m}` が消える**
 （`tr(Q̌_ε) = 1` になったことの直接の帰結）。
 -/
-import Ising2D.Part017.Claim006_EigenvaluesCheckVprime
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimEigenvaluesCheckVprime
 
 namespace Ising2D
 

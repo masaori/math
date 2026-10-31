@@ -22,7 +22,7 @@
 **(1)(2) は無条件である。**
 -/
 import Ising2D.Part018.Setup
-import Ising2D.Part013.Claim003b_ConjugateIndex
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 
 namespace Ising2D
 

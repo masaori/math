@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_003_claim_relation_of_gamma2`）
 
-具体版: `Ising2D/Part015/Claim003_RelationGamma2Tilde.lean`。
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRelationGamma2Tilde.lean`。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 

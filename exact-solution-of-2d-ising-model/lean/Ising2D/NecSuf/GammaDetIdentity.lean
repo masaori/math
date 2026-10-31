@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_006_claim_det_A`。008 章の `det_A_theta` も同じ計算）
 
-具体版: `Ising2D/Part015/Claim006_DetATilde.lean`
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimDetATilde.lean`
 （既存の `Ising2D.det_AMat_eq_one`（`Part008/Claim027_EigenATheta.lean`）も具体版）。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）

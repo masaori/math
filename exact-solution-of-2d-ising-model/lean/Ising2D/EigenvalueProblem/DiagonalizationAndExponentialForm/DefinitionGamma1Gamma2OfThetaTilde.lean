@@ -25,7 +25,7 @@ Lean 側では 008 章の時点で既に `θ ∈ ℝ` 全体の関数として
 これが 015 章全体の要である（整数運動量では `M · θ_μ = 2μπ` で偶数倍）。
 -/
 import Ising2D.Part008.Claim027_EigenATheta
-import Ising2D.Part012.Claim001_Gamma1LowerBound
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 
 namespace Ising2D

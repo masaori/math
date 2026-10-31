@@ -17,7 +17,7 @@
   **任意の関数 `g : ℤ → ℂ` として持つ**。015 章が `γ` を用意したら `g := fun μ => γ(θ̃_μ)`
   と置くだけでよい。原文が使う `γ` の性質は
   `periodicity_of_check_fermi` (3) の `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` ただ 1 つで、
-  これは `Ising2D.Part016.Claim006_ActionTCheckVprime` の仮定 `hgconj` として明示する。
+  これは `Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimActionTCheckVprime` の仮定 `hgconj` として明示する。
 * 原文 (1)（和の範囲に例外が要らないこと）は、`Ising2D.checkIdx_rev`
   （`M+1-checkIdx j = checkIdx (Fin.rev j)`、`Fin.rev` は `Fin M` 上の対合）と
   `Ising2D.checkIndex_checkIdx`（すべての `j : Fin M` で `checkIdx j ∈ 𝓜̌`）に対応する。
@@ -25,7 +25,7 @@
   ここでは `Fin M` 全体を走る（除外は無い）。
 * 原文 (2)（`V̌'` の可逆性）は 004 章の `Ising2D.matExpUnits` に帰着する。
 -/
-import Ising2D.Part016.Claim003_AnticommutatorCheckPsi
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckPsi
 
 namespace Ising2D
 

@@ -2,7 +2,7 @@
 # `c_1c_2^* - s_1s_2^* x` の下界（必要十分版）
 
 対応する人手証明のラベル: `gamma1_lower_bound_all_theta`
-具体版: `Ising2D/Part012/Claim001_Gamma1LowerBound.lean`
+具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 

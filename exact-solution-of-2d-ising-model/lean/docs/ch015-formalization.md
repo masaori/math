@@ -15,7 +15,7 @@
 
 ## 1. 形式化した定理の一覧
 
-### 具体版（`lean/Ising2D/Part015/`）
+### 具体版（`lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`）
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |

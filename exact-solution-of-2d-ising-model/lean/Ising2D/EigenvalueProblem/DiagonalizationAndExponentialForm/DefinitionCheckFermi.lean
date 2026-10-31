@@ -31,8 +31,8 @@
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
 import Ising2D.Part008.Definition030_Fermi
-import Ising2D.Part013.Claim003b_ConjugateIndex
-import Ising2D.Part013.Claim006_RecoverZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 
 namespace Ising2D
 

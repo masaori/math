@@ -5,7 +5,7 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_005_claim_anticommutator_check_Z_Y`）
 
-具体版（直接証明）は `Ising2D/Part013/Claim005_AnticommutatorCheckZY.lean`、
+具体版（直接証明）は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckZY.lean`、
 必要十分版は `Ising2D/NecSuf/AntiperiodicFourier.lean` の
 `Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford`
 （それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化）。
@@ -13,7 +13,7 @@
 特殊化の中身は `ξ := expPhase (2M) 1 = e^{-iπ/M}`（1 の原始 `2M` 乗根）と、
 `x = y = Z`（あるいは `Y`）に Clifford 関係 `[Z_j, Z_k]₊ = 2δ_{jk} I` を渡すことだけである。
 -/
-import Ising2D.Part013.Claim005_AnticommutatorCheckZY
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSumFromNecSuf
 
 namespace Ising2D

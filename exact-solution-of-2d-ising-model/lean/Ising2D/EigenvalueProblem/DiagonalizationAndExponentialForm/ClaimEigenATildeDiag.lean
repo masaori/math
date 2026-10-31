@@ -15,7 +15,7 @@
   （`Ising2D.AMat_mulVec_eigen`, `Ising2D.AMat_mul_Pmat`,
   `Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv`、`Part008/Claim027_EigenATheta.lean`）。
   本ファイルで新しく要るのは、**平方根の分岐が `|γ_2|` に確定すること**
-  （`Part015/Claim003_RelationGamma2Tilde.lean` の (4)(5)）を代入して
+  （`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRelationGamma2Tilde.lean` の (4)(5)）を代入して
   人手証明の形（`λ_± = γ_1 ± |γ_2|`、`v_± = c(∓|γ_2|, γ_2(-θ~))`）に直すことだけである。
 * 008 章の `Pmat K θ t sM` は `t^2 = γ_2(θ)γ_2(-θ)` を満たす `t` でパラメトライズされている。
   半整数運動量では (5) により `t := i|γ_2(θ~_μ)|` と取れる（`checkT`）。
@@ -26,7 +26,7 @@
   `gamma_2_theta_tilde_nonzero`（`Ising2D.gamma2_thetaTilde_ne_zero`）が無条件だからである。
   Lean 側では `Pmat` の可逆性（`det P̌ ≠ 0`）にそれが効く。
 -/
-import Ising2D.Part015.Claim003_RelationGamma2Tilde
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
 import Ising2D.NecSuf.TwoByTwoSkew
 
 namespace Ising2D
