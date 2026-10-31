@@ -1490,6 +1490,17 @@ targets=(
   Ising2D.neg_I_smul_Y_last_mul_Z_first
   Ising2D.H1plus_eq_bulk_sub_boundary
   Ising2D.H1_plus_in_sigma_z_form
+  Ising2D.epsilon_mul_sigmaZ_mul_sigmaZ
+  Ising2D.epsilon_mul_openChainD0
+  Ising2D.epsilon_mul_boundaryG
+  Ising2D.sigmaZ_mul_sigmaZ_mul_comm
+  Ising2D.openChainD0_mul_boundaryG
+  Ising2D.sigmaZ_mul_self
+  Ising2D.boundaryG_mul_self
+  Ising2D.epsilon_mul_boundaryG_sq
+  Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin
+  Ising2D.openChainD0_mulVec_basisVec
+  Ising2D.boundaryG_mulVec_basisVec
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input

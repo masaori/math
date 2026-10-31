@@ -26,8 +26,9 @@
   - 4a（済み）: 人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`
     （`iH_1^{(+)} = D_0 + εG`）を `Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`Part018/ClaimH1PlusInSigmaZForm.lean` で形式化した
     （`openChainD0`・`boundaryG`・`H1_plus_in_sigma_z_form`）。
-  - 4b: 人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`（`ε, D_0, G` の可換性、`(εG)^2 = I`、
-    配置基底の上での `D_0, G` の対角作用）。
+  - 4b（済み）: 人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` を
+    `Part018/ClaimEpsilonD0GCommuteAndDiagonalAction.lean` で形式化した（`epsilon_mul_openChainD0`・`epsilon_mul_boundaryG`・
+    `openChainD0_mul_boundaryG`・`epsilon_mul_boundaryG_sq`・`openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`）。
   - 4c: 人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`
     （1 次元開鎖の二つのスピン和と正値性）。
   - 4d: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
@@ -41,6 +42,7 @@
 
 ## 次の一歩
 
-項目 4b：人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` を具体版で形式化する。
-`ε σ^z_k = -σ^z_k ε` は `Part010/Claim010_EpsilonCommutes.lean`、`σ^z` の対角作用は `Part004/ClaimSigmaZDiagonalAction.lean`
-（`sigmaZ_mul_sigmaZ_eq_diagonal`）、`ε^2 = I` は `epsilon_sq` にある。大きければ「可換性と `(εG)^2 = I`」と「対角作用」に割り、前者だけを行う。
+項目 4c：人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`
+（1 次元開鎖の二つのスピン和と正値性）を具体版で形式化する。スピン配置は `SpinConf M`（`Part001/DefinitionRowConfigurations.lean`）、
+開鎖のエネルギーの和の範囲は `openChainD0` と同じ `(m : ℕ) + 1 ≠ M` なる `m : Fin M` と `nextSite m` で書き、
+4b の `openChainD0_mulVec_basisVec` の係数と定義から一致させる。大きければ「定義と端点因子のない和」と「端点因子つきの和と正値性」に割る。
