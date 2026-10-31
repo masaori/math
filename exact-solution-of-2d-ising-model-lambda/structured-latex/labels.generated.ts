@@ -817,7 +817,6 @@ export const ALL_LABELS = [
   "def_negative_direction_gate_crossing_count",
   "def_nonbacktracking_edge_sequence",
   "def_nonbacktracking_permutation_fiber",
-  "def_nonbacktracking_permutation_phase_contribution",
   "def_nonbacktracking_permutations",
   "def_nonbacktracking_successors",
   "def_odd_orbit_derangements",

@@ -7,6 +7,28 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_nonbacktracking_permutation_phase_contribution_archived",
+    targets: ["def_fiber_phase_weight"],
+    title: { text: "不採用経路: 非後退置換一つの位相寄与" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`(a,b)\in\mathcal S`), " と ",
+        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " に対し、",
+      ]),
+      displayMath(String.raw`\mathcal W^{a,b}_L(\varphi):=
+\prod_{C\in\mathcal C(\varphi)}
+\left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
+\in\overline{\mathbb Q}`),
+      paragraph([
+        "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
+        ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
+        ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_phase_reversing_contact_pair_archived",
     targets: ["def_switchable_permutation_contact_pair"],
     title: { text: "不採用経路: 位相反転接触対" },
@@ -94,7 +116,7 @@ export default defineNotes([
 \mathcal W^{a,b}_L(\eta)
 &=(-1)^{\lvert M(\eta)\rvert}\operatorname{sgn}(\eta)
 \prod_{\vec g\in M(\eta)}M^{a,b}_{\vec g,\eta(\vec g)}
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と }\blkref{claim_permutation_sign_moved_orbit_product}\text{、有限積の並べ替え}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\text{ と }\blkref{claim_permutation_sign_moved_orbit_product}\text{、有限積の並べ替え}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となる。平滑化で変わる二因子だけを取り出す。整数",
@@ -164,7 +186,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         ["任意の ", math(String.raw`(a,b)\in\mathcal S`),
                           "（", ref("def_spin_structures"), "）について、",
                           math(String.raw`\mathcal W^{a,b}_L(S(\varphi))=-\mathcal W^{a,b}_L(\varphi)`),
-                          "（", ref("def_nonbacktracking_permutation_phase_contribution"), "）である。"],
+                          "（", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」", "）である。"],
                       ]),
                       paragraph([
                         "すなわち標準対平滑化 ", math(String.raw`S`), " は ",
@@ -225,7 +247,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
   },
   {
     id: "note_kac_ward_phase_contribution_sign_value_archived",
-    targets: ["def_nonbacktracking_permutation_phase_contribution"],
+    targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 位相寄与は 1 か −1 である" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -239,7 +261,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
                         paragraph([
                           "が成り立つ。位相寄与は ",
-                          ref("def_nonbacktracking_permutation_phase_contribution"),
+                          "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                           " で定めた。とくに、任意の部分集合にわたる位相寄与の有限和は、",
                           "値が 1 の元の個数から値が −1 の元の個数を引いた整数に等しい。",
                         ]),
@@ -268,7 +290,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 \mathcal W^{a,b}_L(\varphi)
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,
 \zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}\right)
@@ -478,7 +500,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
-                        "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -515,7 +537,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_residual_fiber_phase_signed_count_archived",
-    targets: ["def_nonbacktracking_permutation_phase_contribution"],
+    targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 残余の位相和の符号付き数え上げ" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、残余ファイバーの位相和による比較は採らない。元の主張と証明を保存する。"]),
@@ -548,7 +570,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                         "、標準対が切り替え不能な置換の集合 ", math(String.raw`\mathcal R_L`), " は ",
                         "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
-                        "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         " で定めた。元の主張の右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -715,7 +737,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         paragraph([
                           "を定める。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                           "、回転差が四である集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
-                          "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                          "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                           " で定めた。いずれも有限集合であり、所属は有限集合の元と代数的数の等号で判定できる。",
                         ]),
       paragraph(["元の主張:"]),
@@ -1759,7 +1781,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \end{aligned}`),
                       paragraph([
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
-                        "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         " で定めた。全て有限集合上の有限和であり、実数体も複素数体も現れない。",
@@ -1832,7 +1854,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \end{aligned}`),
                       paragraph([
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
-                        "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         "、標準対が切り替え不能な置換の集合は ", "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
@@ -1902,7 +1924,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "が成り立つ。経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
-                        "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         " で定めた。全て有限集合上の有限積・有限和と代数的数の整数冪だけで閉じ、実数体も複素数体も現れない。",
                       ]),
 
@@ -1973,7 +1995,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec g\in\iota(C)}M^{a,b}_{\vec g,\mathcal T(\varphi)(\vec g)}\right)
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と上の軌道族の全単射}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\text{ と上の軌道族の全単射}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-\zeta_8^{-2\sum_{\vec h\in C}\tau(\vec h,\varphi(\vec h))}
 \prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
@@ -1983,7 +2005,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \left(-\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
 &&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と有限積の指数法則}\bigr)\\
 &=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」},\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\bigr)
 \end{aligned}`),
                       paragraph([
                         "全過程は有限集合上の添字の全単射、整数の有限和、代数的数の有限積と整数冪だけで閉じ、実数体も複素数体も現れない。",
@@ -1993,7 +2015,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_phase_contribution_signed_rotation_power_archived",
-    targets: ["def_nonbacktracking_permutation_phase_contribution"],
+    targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 位相寄与の符号付き回転位相冪" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与を使う直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2007,7 +2029,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                           displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
 \in\{-1,1\}`),
                           paragraph([
-                            "が成り立つ。位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
+                            "が成り立つ。位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                             "、一歩回転数の総和は ", "参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」",
                             " で定めた。", math(String.raw`\zeta_8^4=-1`), " から ",
                             math(String.raw`\zeta_8\ne0`), " なので、負の指数の冪は体 ",
@@ -2022,7 +2044,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 \mathcal W^{a,b}_L(\varphi)
 &=\prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutation_phase_contribution}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\bigr)\\
 &=(-1)^{\lvert\mathcal C(\varphi)\rvert}
 \prod_{C\in\mathcal C(\varphi)}\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性で }-1\text{ の因子をまとめた}\bigr)\\
@@ -2279,7 +2301,7 @@ d_{E}(v)\bmod2
                       displayMath(String.raw`\mathcal K^{a,b}_L(D,E)
 =\sum_{\varphi\in F}\mathcal W^{a,b}_L(\varphi)
 +\sum_{P\in\mathcal P}\ \sum_{\varphi\in P}\mathcal W^{a,b}_L(\varphi)
-\qquad\bigl(\because\ \blkref{def_fiber_phase_weight},\ \blkref{def_nonbacktracking_permutation_phase_contribution}\text{ と有限和の非交和分割}\bigr)`),
+\qquad\bigl(\because\ \blkref{def_fiber_phase_weight},\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\text{ と有限和の非交和分割}\bigr)`),
                       paragraph([
                         "不動点の加数を見る。", math(String.raw`\varphi\in F`), " を取り、",
                         math(String.raw`s:=\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}`),
@@ -3125,7 +3147,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                           " について、", math(String.raw`\mathcal T`), " は集合 ",
                           math(String.raw`\bigl\{\,\varphi'\in\mathcal N_L(D,E)\cap\mathcal P\ \bigm|\ \mathcal W^{a,b}_L(\varphi')=\epsilon\,\bigr\}`),
                           " の上の対合である（位相寄与 ", math(String.raw`\mathcal W^{a,b}_L`), " は ",
-                          ref("def_nonbacktracking_permutation_phase_contribution"), "）。"],
+                          "参照用ノート「不採用経路: 非後退置換一つの位相寄与」", "）。"],
                       ]),
                       paragraph([
                         "したがってこの分類は、接触対の間に順序を選ばずに定まり、経路反転で保たれる。",
@@ -3257,7 +3279,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
 \bigl\{\,\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}`),
                       paragraph([
                         "をそれぞれ自分自身へ写す対合である。位相寄与は ",
-                        ref("def_nonbacktracking_permutation_phase_contribution"),
+                        "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                         " で定めた。位相寄与の二つの値は ", "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」",

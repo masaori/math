@@ -3750,19 +3750,19 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl(A\cdot(v\oplus w)\bigr)(u)
 &=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
-&&(\because\ \blkref{claim_qbar_action_add})\\
+&&\bigl(\because\ \blkref{claim_qbar_action_add}\bigr)\\
 &=(A\cdot v)(u)+(A\cdot w)(u)
-&&(\because\ \blkref{def_qbar_vector_add})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_add}\bigr)\\
 &=(z\odot v)(u)+(z\odot w)(u)
-&&(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace})\\
+&&\bigl(\because\ v,w\in E_{A}(z)\ \text{すなわち}\ \blkref{def_qbar_eigenspace}\bigr)\\
 &=z\,v(u)+z\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=z\bigl(v(u)+w(u)\bigr)
-&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&&\bigl(\because\ \text{元と 2 元の和の積についての分配則}\bigr)\\
 &=z\,(v\oplus w)(u)
-&&(\because\ \blkref{def_qbar_vector_add})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_add}\bigr)\\
 &=\bigl(z\odot(v\oplus w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
@@ -77251,45 +77251,6 @@ S(S(\varphi))
                         " での平滑化についての ",
                         ref("claim_switchable_contact_smoothing_preserves_fiber"),
                         " をそのまま適用したものである。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_nonbacktracking_permutation_phase_contribution",
-              labels: [],
-              title: { text: "非後退置換一つの位相寄与" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_nonbacktracking_permutation_phase_contribution",
-                  beforeFocus: [],
-                  focus: {
-                    id: "kac_ward_definition_nonbacktracking_permutation_phase_contribution",
-                    kind: "definition",
-                    title: { text: "非後退置換一つの位相寄与" },
-                    labels: ["def_nonbacktracking_permutation_phase_contribution"],
-                    habitat: "Qbar",
-                    statement: [
-                      paragraph([
-                        math(String.raw`(a,b)\in\mathcal S`), " と ",
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " に対し、",
-                      ]),
-                      displayMath(String.raw`\mathcal W^{a,b}_L(\varphi):=
-\prod_{C\in\mathcal C(\varphi)}
-\left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
-\in\overline{\mathbb Q}`),
-                      paragraph([
-                        "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
-                        ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
-                        ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
