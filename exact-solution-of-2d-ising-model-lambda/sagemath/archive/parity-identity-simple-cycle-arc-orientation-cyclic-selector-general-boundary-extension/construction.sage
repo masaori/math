@@ -1,6 +1,6 @@
 """任意の辺長と有限内部語に使える境界延長規則の厳密構成。"""
 
-load("sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-boundary-cut-geometry/construction.sage")
+load("sagemath/archive/parity-identity-simple-cycle-arc-orientation-cyclic-selector-boundary-cut-geometry/construction.sage")
 
 
 def coordinate_start_residues_from_cut_flags(

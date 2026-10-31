@@ -8,7 +8,7 @@ import ast
 import json
 from pathlib import Path
 
-load("sagemath/check/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence/construction.sage")
+load("sagemath/archive/parity-identity-simple-cycle-arc-orientation-cyclic-selector-realizable-boundary-incidence/construction.sage")
 
 
 lift_path = Path(

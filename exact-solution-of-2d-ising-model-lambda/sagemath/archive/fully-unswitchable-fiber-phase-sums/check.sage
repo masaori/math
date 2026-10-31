@@ -15,7 +15,7 @@
 計算は ZZ と Q(zeta8) の等号だけで行い、浮動小数点は使わない。
 """
 
-load("sagemath/check/path-reversal-selection-complement-orbits/check.sage")
+load("sagemath/archive/path-reversal-selection-complement-orbits/check.sage")
 
 
 def switchable_pairs(phi):

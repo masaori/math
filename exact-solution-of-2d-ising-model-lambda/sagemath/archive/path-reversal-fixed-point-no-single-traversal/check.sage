@@ -9,7 +9,7 @@
 浮動小数点は使わない。
 """
 
-load("sagemath/check/path-reversal-selection-complement-orbits/check.sage")
+load("sagemath/archive/path-reversal-selection-complement-orbits/check.sage")
 
 fixed_point_count = 0
 fixed_point_checks = 0

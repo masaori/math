@@ -12,7 +12,7 @@
 を有限集合の等号と Q(zeta8) の等号だけで検査する。浮動小数点は使わない。
 """
 
-load("sagemath/check/path-reversal-contact-pair-preservation/check.sage")
+load("sagemath/archive/path-reversal-contact-pair-preservation/check.sage")
 
 
 def seam_sign(a, b, edge):

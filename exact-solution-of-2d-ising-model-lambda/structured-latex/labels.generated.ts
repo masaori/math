@@ -169,7 +169,6 @@ export const ALL_LABELS = [
   "claim_iterated_staircase_parallel_width_bound",
   "claim_iterated_transverse_staircase_lower_bound",
   "claim_kac_ward_determinant_constant_term_one",
-  "claim_kac_ward_determinant_fiber_stratified_phase_sum",
   "claim_kac_ward_determinant_nonbacktracking_phase_sum",
   "claim_kac_ward_determinant_term_nonzero_iff",
   "claim_kac_ward_term_orbit_phase_twist_product",

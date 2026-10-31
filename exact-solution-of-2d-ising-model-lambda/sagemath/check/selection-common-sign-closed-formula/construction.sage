@@ -5,7 +5,7 @@
 assertion を再実行しない（全先行検算は check.sage に残してある）。
 """
 
-load("sagemath/check/curved-free-class-sum-selection-sign/construction.sage")
+load("sagemath/archive/curved-free-class-sum-selection-sign/construction.sage")
 
 
 def intersection_pairing(side, left, right):
