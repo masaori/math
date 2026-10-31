@@ -5345,19 +5345,12 @@ b&=1\cdot b
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (z-1)\,G_{n}(z)&=z^{n}-1
-&&(\because\ \text{伸縮の等式})\\
+&&\bigl(\because\ \blkref{claim_qbar_geometric_telescope}\text{ の伸縮等式}\bigr)\\
 &=1-1
-&&(\because\ z\in\mu_{n}\ \text{すなわち}\ z^{n}=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\text{ により }z\in\mu_{n}\text{ ならば }z^{n}=1\bigr)\\
 &=0
-&&(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の同じ元どうしの差は零元}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "第 1 の等号は ",
-                          ref("claim_qbar_geometric_telescope"),
-                          "、第 2 の等号は ",
-                          ref("def_root_of_unity_set"),
-                          " による。",
-                        ]),
                         paragraph([
                           "この等式に、積が零元ならば零元でない方で割って他方が零元と分かること（",
                           ref("claim_qbar_no_zero_divisors"),
