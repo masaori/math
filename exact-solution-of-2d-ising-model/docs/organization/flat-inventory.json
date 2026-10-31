@@ -9391,7 +9391,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
+        "incomingReferenceCount": 4,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12664,7 +12664,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12732,7 +12732,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -18318,7 +18318,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -18387,7 +18387,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -18461,7 +18461,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -19247,7 +19247,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
+        "incomingReferenceCount": 3,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -19420,8 +19420,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3814,
-        "inspectedContentSha256": "fa6544bb57d4fa05771cc77fa127581c3071f84db3e0aecb691b356ac4fe5b14",
+        "inspectedCharacterCount": 4048,
+        "inspectedContentSha256": "73d01d674b3e97d7aed6c559a7f0589a1f77222b4a675f7b22b1122e5a9c1924",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -27175,16 +27175,23 @@
         "T_V_plus_check_Z_Y_via_B1_B2_B1",
         "T_V_plus_is_conjugation",
         "T_actions_on_check_Z_Y",
+        "V1_plus_half_invertible",
+        "V2_invertible",
         "V_plus_factors_invertible",
         "commutator_of_H_and_check_Z_Y",
+        "conjugation_is_ring_homomorphism",
         "def_A_theta",
         "def_H1_plus",
+        "def_T_V_plus",
+        "def_T_g",
         "def_V1_plus_square_root",
         "def_V_plus",
         "def_check_index_set",
         "def_half_integer_checkY",
         "def_half_integer_checkZ",
+        "def_invertible_elements_of_R",
         "exp_X_Y_exp_-X",
+        "factorization_of_A_theta_general",
         "half_integer_checkZ_periodicity",
         "nesting_of_commutator_of_H_and_check_Z"
       ]
