@@ -12,7 +12,7 @@ T(phi) = iota . phi^{-1} . iota を構成し、
 を有限集合の等号だけで検査する。浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/check.sage")
+load("sagemath/archive/kac-ward-nonbacktracking-sum/check.sage")
 
 
 def reverse_edge(edge):

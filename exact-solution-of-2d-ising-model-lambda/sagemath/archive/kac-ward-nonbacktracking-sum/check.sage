@@ -7,7 +7,7 @@
 和なので、この一致は「非後退でない置換の項が零である」ことも同時に確かめる。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/construction.sage")
+load("sagemath/archive/kac-ward-nonbacktracking-sum/construction.sage")
 
 
 def orbit_phase_twist_product(a, b, walks):

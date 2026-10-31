@@ -5,7 +5,7 @@
 assertion を再実行しない（全先行検算は check.sage に残してある）。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/construction.sage")
+load("sagemath/archive/kac-ward-nonbacktracking-sum/construction.sage")
 
 
 def moved_edges(phi):

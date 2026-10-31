@@ -12,7 +12,7 @@
 各軌道列を一つ回した基点で再計算して確かめる。浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/check.sage")
+load("sagemath/archive/kac-ward-nonbacktracking-sum/check.sage")
 
 
 def permutation_stratum(phi):

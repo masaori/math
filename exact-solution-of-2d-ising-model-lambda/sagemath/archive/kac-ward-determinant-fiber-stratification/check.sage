@@ -11,7 +11,7 @@ det(I - x M^{a,b}) の直接計算と、非後退置換をファイバー N_L(D,
 全数で確かめる。浮動小数点は使わない。
 """
 
-load("sagemath/check/kac-ward-nonbacktracking-sum/check.sage")
+load("sagemath/archive/kac-ward-nonbacktracking-sum/check.sage")
 
 
 def permutation_stratum(phi):

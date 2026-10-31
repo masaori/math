@@ -7,6 +7,88 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_determinant_nonbacktracking_phase_sum_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 行列式の非後退置換の位相表示の和" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、非後退置換による行列式の直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                        "）とする。各 ",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）について写像 ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
+                        " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
+                        math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
+                        " となるように一つ選び（各 ", math(String.raw`C`), " は ",
+                        ref("claim_moved_orbit_partition"), " により空でない）、",
+                        math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
+                        "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
+                        math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
+                      ]),
+                      displayMath(String.raw`D^{a,b}_L(x)
+=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\
+\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)`),
+                      paragraph([
+                        "が成り立つ。行列式は ", ref("def_kac_ward_determinants"),
+                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
+                        "、循環総回転数は ", ref("def_cyclic_total_turning"),
+                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                        "、定数多項式への埋め込みは ", ref("def_qbar_constant_embedding"),
+                        " である。各和の項は ", ref("claim_kac_ward_term_orbit_phase_twist_product"),
+                        " により写像 ", math(String.raw`\vec e_{\ast}^{\,\varphi}`),
+                        " の選び方に依存しないので、右辺の値も選び方に依存しない。",
+                      ]),
+
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        ref("def_row_permutation"), " により ",
+                        math(String.raw`\operatorname{Perm}(\vec E_L)`),
+                        " は有限集合であり、", ref("def_nonbacktracking_permutations"),
+                        " により部分集合 ",
+                        math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " とその補集合 ",
+                        math(String.raw`\operatorname{Perm}(\vec E_L)\setminus\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        " は ", math(String.raw`\operatorname{Perm}(\vec E_L)`),
+                        " を互いに素に覆う。補集合の任意の元 ", math(String.raw`\varphi`),
+                        " は、ある ", math(String.raw`\vec f\in\vec E_L`), " について ",
+                        math(String.raw`\varphi(\vec f)\ne\vec f`), " かつ ",
+                        math(String.raw`\varphi(\vec f)\notin\operatorname{Next}(\vec f)`),
+                        " を満たすので、", ref("claim_kac_ward_determinant_term_nonzero_iff"),
+                        " の同値の対偶により ", math(String.raw`T^{a,b}_{\varphi}(x)=0`),
+                        " である。求めたい行列式から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+D^{a,b}_L(x)
+&=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}T^{a,b}_{\varphi}(x)
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\text{ と参照用ノート「不採用経路: Kac--Ward 行列式の置換項」の定義}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
++\sum_{\varphi\in\operatorname{Perm}(\vec E_L)\setminus\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
+&&\bigl(\because\ \text{冒頭の互いに素な覆いで有限和が分かれる}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
++\sum_{\varphi\in\operatorname{Perm}(\vec E_L)\setminus\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}0
+&&\bigl(\because\ \text{冒頭のとおり }\blkref{claim_kac_ward_determinant_term_nonzero_iff}\text{ の対偶}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の四則}\bigr)\\
+&=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\
+\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)
+&&\bigl(\because\ \blkref{claim_kac_ward_term_orbit_phase_twist_product}\text{ を各 }\varphi\text{ と }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全ての和と積は有限集合の上の有限和・有限積であり ",
+                        math(String.raw`\overline{\mathbb Q}[x]`),
+                        " の中で閉じる。実数体も複素数体も現れない。",
+                      ]),
+
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_free_moved_support_even_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対を含まない非後退置換の台の偶数性" },
@@ -295,7 +377,7 @@ D^{a,b}_L(x)
 \prod_{C\in\mathcal C(\varphi)}\left(
 -x^{\lvert C\rvert}\cdot
 \widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)
-&&\bigl(\because\ \blkref{claim_kac_ward_determinant_nonbacktracking_phase_sum}\text{ を写像 }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 行列式の非後退置換の位相表示の和」}\text{ を写像 }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\
 \prod_{C\in\mathcal C(\varphi)}\left(
 -x^{\lvert C\rvert}\cdot
