@@ -7,15 +7,36 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_phase_reversing_standard_subset_archived",
+    targets: ["def_nonbacktracking_permutations"],
+    title: { text: "不採用経路: 標準対が位相反転する置換の集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準対平滑化の位相反転部分集合は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph(["集合 ", math(String.raw`\mathcal B_L`), " を"]),
+      displayMath(String.raw`\mathcal B_L:=\bigl\{\,\varphi\in\mathcal A_L\ \bigm|\
+\operatorname{ct}_{\min}(\varphi)\text{ は }\varphi\text{ の位相反転接触対}\,\bigr\}`),
+      paragraph([
+        "と定める。", math(String.raw`\mathcal A_L`), " と写像 ",
+        math(String.raw`S`), " は ", ref("claim_standard_contact_smoothing_involution"),
+        "、標準接触対 ", math(String.raw`\operatorname{ct}_{\min}`), " は ",
+        ref("def_standard_contact_pair"), "、位相反転接触対は ",
+        ref("def_phase_reversing_contact_pair"), " である。",
+        "有限集合の部分集合であり、所属は一歩の回転数（", ref("def_step_turning"),
+        "）の整数の等式で判定される。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_phase_reversing_standard_smoothing_involution_archived",
-    targets: ["def_phase_reversing_standard_subset"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
       paragraph(["元の主張:"]),
                       paragraph([
                         "任意の ", math(String.raw`\varphi\in\mathcal B_L`),
-                        "（", ref("def_phase_reversing_standard_subset"), "）について次が成り立つ。",
+                        "（参照用ノート「不採用経路: 標準対が位相反転する置換の集合」）について次が成り立つ。",
                       ]),
                       list([
                         [math(String.raw`S(\varphi)\in\mathcal B_L`), " であり、",
@@ -40,7 +61,7 @@ export default defineNotes([
                         math(String.raw`\varphi\in\mathcal B_L`), " を取り、",
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
                         math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
-                        " と置く。", ref("def_phase_reversing_standard_subset"), " により ",
+                        " と置く。参照用ノート「不採用経路: 標準対が位相反転する置換の集合」により ",
                         math(String.raw`\varphi\in\mathcal A_L`), " であり、",
                         math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\varphi`),
                         " の切り替え可能な接触対（", ref("claim_standard_contact_smoothing_involution"),
@@ -467,7 +488,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                             ref("def_step_turning"), " で定めた。所属は有限集合の元と整数の等式だけで判定される。",
                             ref("claim_reconnection_turning_difference"), " により、",
                             math(String.raw`\mathcal A_L`), " は ",
-                            math(String.raw`\mathcal B_L`), "（", ref("def_phase_reversing_standard_subset"), "）と ",
+                            math(String.raw`\mathcal B_L`), "（参照用ノート「不採用経路: 標準対が位相反転する置換の集合」）と ",
                             math(String.raw`\mathcal A_L^{(-4)}`), " と ",
                             math(String.raw`\mathcal A_L^{(4)}`), " の互いに素な和に分かれる。",
                           ]),

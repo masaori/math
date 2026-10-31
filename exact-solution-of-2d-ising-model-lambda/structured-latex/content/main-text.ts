@@ -77421,45 +77421,6 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
               }],
             },
           },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_phase_reversing_standard_smoothing",
-              labels: [],
-              title: { text: "標準対平滑化の位相反転部分集合への制限" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_phase_reversing_standard_subset",
-                  focus: {
-                    id: "kac_ward_definition_phase_reversing_standard_subset",
-                    kind: "definition",
-                    title: { text: "標準対が位相反転する置換の集合" },
-                    labels: ["def_phase_reversing_standard_subset"],
-                    habitat: "N",
-                    statement: [
-                      paragraph([
-                        "集合 ", math(String.raw`\mathcal B_L`), " を",
-                      ]),
-                      displayMath(String.raw`\mathcal B_L:=\bigl\{\,\varphi\in\mathcal A_L\ \bigm|\
-\operatorname{ct}_{\min}(\varphi)\text{ は }\varphi\text{ の位相反転接触対}\,\bigr\}`),
-                      paragraph([
-                        "と定める。", math(String.raw`\mathcal A_L`), " と写像 ",
-                        math(String.raw`S`), " は ", ref("claim_standard_contact_smoothing_involution"),
-                        "、標準接触対 ", math(String.raw`\operatorname{ct}_{\min}`), " は ",
-                        ref("def_standard_contact_pair"), "、位相反転接触対は ",
-                        ref("def_phase_reversing_contact_pair"), " である。",
-                        "有限集合の部分集合であり、所属は一歩の回転数（", ref("def_step_turning"),
-                        "）の整数の等式で判定される。実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
         ],
       },
     },

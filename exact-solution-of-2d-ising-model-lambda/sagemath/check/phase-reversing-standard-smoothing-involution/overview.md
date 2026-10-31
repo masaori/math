@@ -2,7 +2,7 @@
 
 旧主張は参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」に保存した。
 
-**対象ラベル**: `def_phase_reversing_standard_subset`
+**対象ラベル**: `def_nonbacktracking_permutations`
 
 標準接触対が切り替え可能な置換の集合 $\mathcal A_L$ の中で、標準対が位相反転接触対
 （二接続の回転数和が平滑化前後で等しい）である部分集合 $\mathcal B_L$ を作り、

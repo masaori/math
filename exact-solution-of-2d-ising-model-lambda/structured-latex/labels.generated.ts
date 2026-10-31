@@ -869,7 +869,6 @@ export const ALL_LABELS = [
   "def_permutation_orbit_set",
   "def_permutation_sign",
   "def_phase_reversing_contact_pair",
-  "def_phase_reversing_standard_subset",
   "def_phase_transition_countable_statement",
   "def_plane_displacement",
   "def_plane_lift",
