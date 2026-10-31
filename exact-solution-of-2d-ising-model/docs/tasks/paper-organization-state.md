@@ -2,6 +2,14 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の七番目（完了の確認）をやり直し、ゴールラインの全項目が成り立った。組み直しは完了した。
+  - **並びと見出し。** 文書順で、冒頭の章立ての説明ページのあと、部「数学的道具立て」（道具の章 11）・「分配関数」（2 章）・「固有値問題」（4 章）・「熱力学極限」（2 章）・「臨界点」（1 章）が並び、9 章の見出しは章立て案の題と一致する。
+  - **章末の主張。** 9 章とも、`tools/chapter-plan.ts` の `goalLabels` のブロックが章の最後の本文ブロックで、主張は章立て案のゴールの式と同じか、それより強い。章立て案と書き方が違うのは三章で、どれも説明ページの側は本文と一致する（転送行列による表示は $V_1,V_2$ を代入済みの $Z$ の式で述べ、$V_1,V_2$ の Pauli 表示は同じ章の別の主張に在る。離散 Fourier 変換の章は共役との等号が一つ多い。固有ベクトルの章は含意を二つの主張に分けて両方を言い切る）。証明の根拠は、同じ章の前のブロック・前の章・数学的道具立てだけである。
+  - **前方参照。** イジング側の章から後ろの章を指す参照は 0 件。同じ章の後ろを指す参照は、章冒頭の案内文と、後ろの主張を名指しする案内（`evenEigen_004`・`evenEigen_006`・`closing_002`）だけで、根拠には使っていない。
+  - **説明ページ。** 部・章の題、各章のゴールの式、依存の図の 9 本の矢印は、本文の見出し・章末の主張・章間の直接参照の推移簡約と一致する。
+  - **題の物理用語。** 本文の全ブロックの題に「セクター」「運動量」「フェルミオン」は無い。
+  - **検証。** `check`・`build:html`・`build:pdf`（308 ページ、未解決参照 0）・SageMath の対応検査（103 件）・Lean の `lake build`（3059 件）と `check-no-sorry.sh` が通り、棚卸しを生成し直しても差分は無かった。章の項目数は 22・29・30・30・17・17・10・14・11（章立て案との差の理由は下の各回の記録に在る）。
+  - 別のエージェントが独立に照合した（本文の全参照の収集と、$M=2,3,4$ での数値の検算）。ゴールラインの項目に差は無かった。ゴールラインの外の指摘は下の「未確定」に書いた。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の三つ目（最後）を直した。離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせた。
   - **依存が前の章で閉じることを確かめて移した。** `T_V_plus_is_conjugation`（合成で定めた $T_{(V^{(+)})}$ が $V^{(+)}$ による共役に一致）と `V_plus_factors_invertible`（$V^{(+)}$ の可逆性）が本文の参照（`ref` と `\blkref`）で直接引くのは、`V1_plus_half_invertible`・`V2_invertible`・`def_T_V_plus`（同じ章）、`def_V_plus`（射影の章）、`def_invertible_elements_of_R`・`conjugation_is_ring_homomorphism`（数学的道具立て）だけで、その先の依存（`def_V1_plus_square_root`・`V2_exponential_representation`・`matrix_exp_conjugation` など）も同じ章より前で閉じていた。二つを対角化の章から離散 Fourier 変換の章の `def_T_V_plus` の直後へ丸ごと移した（id・ラベル・本文は不変。`T_V_plus_is_conjugation` の `conversion.notes` のうち、退避済みの旧 008 章のブロックを本文に在るように書いていた二項目だけ直した）。
   - **章末の主張を共役で述べた。** `T_V_plus_check_Z_Y_via_B1_B2_B1` を、$(V^{(+)}\check Z_\mu(V^{(+)})^{-1},V^{(+)}\check Y_\mu(V^{(+)})^{-1})=(T_{(V^{(+)})}(\check Z_\mu),T_{(V^{(+)})}(\check Y_\mu))=(\check Z_\mu,\check Y_\mu)A(\tilde\theta_\mu)=(\check Z_\mu,\check Y_\mu)B_1B_2B_1$ を主張とし、証明は途中に $(T_{V^{(+)}}(\check Z_\mu),T_{V^{(+)}}(\check Y_\mu))$ を挟む 4 行の一続きの式変形にした（各行の根拠は順に `def_T_g` と `V_plus_factors_invertible`、`T_V_plus_is_conjugation`、`T_V_plus_check_Z_Y`、`factorization_of_A_theta_general`）。章の冒頭の案内文に到達点を書き足した。
@@ -1314,10 +1322,15 @@
 
 ## 次の一歩
 
-runbook の作業の順序の七番目（完了の確認）をやり直す。完了の確認で見つかった差の三つ（射影の章・対角化の章・離散 Fourier 変換の章の章末の主張）は 2026-10-31 にすべて直した（上の「現在地」の先頭三つを見よ）。
+runbook の作業の順序はすべて終えた。ゴールラインはすべて成り立つ（2026-10-31）。残る作業は下の「未確定」の、作業の順序の外の項目だけである。
 
 ## 未確定
 
+- **冒頭の「この論文のゴール」（`chapter_organization_remark_goal_of_this_paper`）に、本文が示していない記述が二つある（2026-10-31 の完了の確認のレビューの指摘。代表の指示で書いた文なので、組み直しでは変えていない）。**
+  「臨界点は $\sinh 2K_1\sinh 2K_2=1$ で与えられる」は、本文が示すのが式の同値（`TV1_hatZ_hatY_044_claim_critical_condition`）と等方な場合の $\sinh 2K_c=1$ だけで、異方な場合にそれが臨界点であることは示していない。
+  $\log Z$ を「自由エネルギー」と呼んでいるが、本文に自由エネルギーの定義は無い（題に「自由エネルギー」を含むブロックが `freeenergy_005_theorem_onsager_expression`・`closing_010_theorem_onsager_exact_solution` の 2 件ある）。
+- **数学的道具立ての部の中で、後ろの章のブロックを根拠にしている箇所がある（ゴールラインの外）。** `exp_conjugation_proof_003_definition_M_n_C_convergence`・`exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms` が後ろの「トレース・エルミート行列・正定値性」の `def_trace`・`def_hermitian_positive_definite` を、`exp_linear_map_003_theorem_exp_product_formula_commuting_matrices` が後ろの `ad_binomial` を使う。`calc_formulae_006_definition_of_cc` が後ろの `matrix_exp_series_converges` を指す。
+- **臨界点の章の章末の主張の $f(K)$ の式は、$\gamma$ が $K$ に依ることを記号に出していない（読みやすさの指摘）。** 証明の側では $\gamma(\theta,\kappa(K))$ と書き分けている。
 - **本文の段落に、本文で定義されていない物理の用語が残っている（2026-10-31 の完了の確認のレビューの指摘。ゴールラインは題だけを対象にするので、作業の順序の外）。** `evensector_003a_definition_check_index_set` の statement が「半整数運動量の添字集合と呼ぶ」「相異なる M 個の運動量」と書いている。
 - **記号 $\gamma$ が 1 変数と 2 変数で重なっている（2026-10-31 のレビューの指摘。既存の問題）。** 1 変数の $\gamma(\theta)$ は `def_gamma_theta` だけが定めるが、臨界点の章の `gamma_derivatives_in_kappa` が
   2 変数の $\gamma(\theta,\kappa):=2\,\mathrm{arcsinh}(\sqrt{S(\theta,\kappa)})$ を同じ文字で定めている。「1 つの記号は 1 つの意味に固定する」に照らし、2 変数の側を別の文字にするかを、作業の順序の外の一単位で扱う。
