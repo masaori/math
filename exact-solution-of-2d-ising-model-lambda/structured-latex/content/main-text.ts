@@ -69977,19 +69977,25 @@ w_{\mathrm h}(\gamma)b-w_{\mathrm v}(\gamma)a
                   " により一周期の持ち上げ点は二つずつ相異なるので、",
                   ref("claim_plane_simple_polygon_cyclic_turning"), " を適用して",
                 ]),
-                displayMath(String.raw`t_{\circ}(\gamma)\in\{4,-4\}`),
+                displayMath(String.raw`t_{\circ}(\gamma)\in\{4,-4\}
+\qquad\bigl(\because\ \blkref{claim_vertex_simple_plane_lift_points_distinct},\ \blkref{claim_plane_simple_polygon_cyclic_turning}\bigr)`),
                 paragraph([
                   "を得る。次に ", math(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)`),
                   " とする。巻き付きベクトルが零なら、", ref("claim_directed_winding_parity"), " により",
                 ]),
-                displayMath(String.raw`\bigl(h(\gamma),v(\gamma)\bigr)
-=\bigl(w_{\mathrm h}(\gamma)\bmod2,w_{\mathrm v}(\gamma)\bmod2\bigr)
-=(0,0)`),
+                displayMath(String.raw`\begin{aligned}
+\bigl(h(\gamma),v(\gamma)\bigr)
+&=\bigl(w_{\mathrm h}(\gamma)\bmod2,w_{\mathrm v}(\gamma)\bmod2\bigr)
+&&\bigl(\because\ \blkref{claim_directed_winding_parity}\bigr)\\
+&=(0,0)
+&&\bigl(\because\ \text{巻き付きベクトルが零であるという仮定}\bigr)
+\end{aligned}`),
                 paragraph([
                   "となって仮定に反する。従って巻き付きベクトルは零でない。",
                   ref("claim_nonzero_winding_simple_cycle_turning_zero"), " を適用して",
                 ]),
-                displayMath(String.raw`t_{\circ}(\gamma)=0`),
+                displayMath(String.raw`t_{\circ}(\gamma)=0
+\qquad\bigl(\because\ \blkref{claim_nonzero_winding_simple_cycle_turning_zero}\bigr)`),
                 paragraph([
                   "を得る。二場合を合わせて主張が従う。全過程は有限列・整数の偶奇・Bézout の整数等式だけで閉じ、実数体も複素数体も現れない。",
                 ]),
@@ -74876,140 +74882,6 @@ const chapter_kac_ward_permutation_expansion = defineSection({
   labels: [],
   title: { text: "Kac--Ward 行列式の置換展開" },
   children: [
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "kac_ward_permutation_expansion_heading_group_moved_orbits",
-        labels: [],
-        title: { text: "非零な置換項と動く辺の軌道" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_moved_orbit_closed_walk",
-              labels: [],
-              title: { text: "置換の反復と最小回帰時刻" },
-              children: [
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_kac_ward_definition_permutation_minimal_return",
-                    beforeFocus: [
-                      {
-                        role: "prerequisiteDefinition",
-                        element: {
-                          id: "kac_ward_definition_permutation_iterate",
-                          kind: "definition",
-                          title: { text: "置換の反復合成" },
-                          labels: ["def_permutation_iterate"],
-                          habitat: "N",
-                          statement: [
-                            paragraph([
-                              "置換 ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                              "（", ref("def_row_permutation"), " を有限集合 ",
-                              math(String.raw`\vec E_L`), " に適用したもの）と ",
-                              math(String.raw`k\in\mathbb N`), " に対し、反復合成 ",
-                              math(String.raw`\varphi^{\circ k}:\vec E_L\to\vec E_L`), " を",
-                            ]),
-                            displayMath(String.raw`\varphi^{\circ 0}:=\mathrm{id}_{\vec E_L},\qquad
-\varphi^{\circ(k+1)}:=\varphi\circ\varphi^{\circ k}`),
-                            paragraph([
-                              "で再帰的に定める。", ref("def_row_permutation"),
-                              " により置換の合成と恒等写像は再び置換なので、各 ",
-                              math(String.raw`\varphi^{\circ k}`),
-                              " は置換である。この定義は有限集合の写像の有限回の合成だけで閉じる。",
-                            ]),
-                          ],
-                        },
-                      },
-                      {
-                        role: "supportingClaim",
-                        element: {
-                          id: "kac_ward_claim_permutation_power_return",
-                          kind: "claim",
-                          title: { text: "反復合成の回帰の存在" },
-                          labels: ["claim_permutation_power_return"],
-                          habitat: "N",
-                          verification: ["sagemath/check/permutation-orbit-closed-walk"],
-                          lean: ["Ising2DLambda.KacWard.permutation_power_return"],
-                          statement: [
-                            paragraph([
-                              "任意の ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                              " と ", math(String.raw`\vec e\in\vec E_L`), " について、",
-                              math(String.raw`1\le k`), " かつ ",
-                              math(String.raw`\varphi^{\circ k}(\vec e)=\vec e`),
-                              " を満たす自然数 ", math(String.raw`k\in\mathbb N`), " が存在する。",
-                            ]),
-                          ],
-                          proof: [
-                            paragraph([
-                              math(String.raw`N:=|\vec E_L|\in\mathbb N`), " と置く。写像 ",
-                              math(String.raw`\{0,1,\ldots,N\}\to\vec E_L,\ j\mapsto\varphi^{\circ j}(\vec e)`),
-                              " の定義域の元の個数は ", math(String.raw`N+1`),
-                              " で、終域の元の個数 ", math(String.raw`N`),
-                              " より大きいので、この写像は単射でない（鳩の巣原理）。よって ",
-                              math(String.raw`j<l`), " かつ ",
-                              math(String.raw`\varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)`),
-                              " を満たす ", math(String.raw`j,l\in\{0,1,\ldots,N\}`), " がある。",
-                              "ここで次の式鎖を得る。",
-                            ]),
-                            displayMath(String.raw`\begin{aligned}
-\varphi^{\circ j}\bigl(\varphi^{\circ(l-j)}(\vec e)\bigr)
-&=\varphi^{\circ l}(\vec e)
-&&\bigl(\because\ \blkref{def_permutation_iterate}\text{ の再帰を }l-j\text{ 回適用}\bigr)\\
-&=\varphi^{\circ j}(\vec e)
-&&\bigl(\because\ \varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)\text{ の選択}\bigr)
-\end{aligned}`),
-                            paragraph([
-                              "置換 ", math(String.raw`\varphi^{\circ j}`),
-                              " の単射性（", ref("def_row_permutation"), "）により ",
-                              math(String.raw`\varphi^{\circ(l-j)}(\vec e)=\vec e`),
-                              " を得る。", math(String.raw`k:=l-j`), " は ",
-                              math(String.raw`1\le k`),
-                              " を満たす。全過程は有限集合の写像と自然数の比較だけで閉じる。",
-                            ]),
-                          ],
-                        },
-                      },
-                    ],
-                    focus: {
-                      id: "kac_ward_definition_permutation_minimal_return",
-                      kind: "definition",
-                      title: { text: "最小回帰時刻" },
-                      labels: ["def_permutation_minimal_return"],
-                      habitat: "N",
-                      lean: ["Ising2DLambda.KacWard.minimalReturnTime"],
-                      statement: [
-                        paragraph([
-                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
-                          math(String.raw`\vec e\in\vec E_L`), " に対し、最小回帰時刻 ",
-                          math(String.raw`r_{\varphi}(\vec e)\in\mathbb N`), " を",
-                        ]),
-                        displayMath(String.raw`r_{\varphi}(\vec e):=
-\min\{\,k\in\mathbb N\mid 1\le k,\ \varphi^{\circ k}(\vec e)=\vec e\,\}`),
-                        paragraph([
-                          "で定める。この集合は ", ref("claim_permutation_power_return"),
-                          " により空でなく、自然数の空でない部分集合は最小元を持つので、",
-                          "この定義は well-defined である。定義から ",
-                          math(String.raw`1\le r_{\varphi}(\vec e)`), " かつ ",
-                          math(String.raw`\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)=\vec e`),
-                          " であり、", math(String.raw`1\le k<r_{\varphi}(\vec e)`),
-                          " なる ", math(String.raw`k\in\mathbb N`), " については ",
-                          math(String.raw`\varphi^{\circ k}(\vec e)\ne\vec e`), " である。",
-                        ]),
-                      ],
-                    },
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
     {
       role: "subsection",
       element: {

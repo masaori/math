@@ -7,6 +7,81 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_permutation_return_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 置換の反復と最小回帰時刻" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道による直接比較は採らない。元の二定義と主張・証明を保存する。"]),
+      paragraph(["元の定義「置換の反復合成」:"]),
+      paragraph([
+        "置換 ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        "（", ref("def_row_permutation"), " を有限集合 ", math(String.raw`\vec E_L`),
+        " に適用したもの）と ", math(String.raw`k\in\mathbb N`),
+        " に対し、反復合成 ", math(String.raw`\varphi^{\circ k}:\vec E_L\to\vec E_L`), " を",
+      ]),
+      displayMath(String.raw`\varphi^{\circ 0}:=\mathrm{id}_{\vec E_L},\qquad
+\varphi^{\circ(k+1)}:=\varphi\circ\varphi^{\circ k}`),
+      paragraph([
+        "で再帰的に定める。", ref("def_row_permutation"),
+        " により置換の合成と恒等写像は再び置換なので、各 ",
+        math(String.raw`\varphi^{\circ k}`),
+        " は置換である。この定義は有限集合の写像の有限回の合成だけで閉じる。",
+      ]),
+      paragraph(["元の主張「反復合成の回帰の存在」:"]),
+      paragraph([
+        "任意の ", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        " と ", math(String.raw`\vec e\in\vec E_L`), " について、",
+        math(String.raw`1\le k`), " かつ ",
+        math(String.raw`\varphi^{\circ k}(\vec e)=\vec e`),
+        " を満たす自然数 ", math(String.raw`k\in\mathbb N`), " が存在する。",
+      ]),
+      paragraph(["元の証明:"]),
+      paragraph([
+        math(String.raw`N:=|\vec E_L|\in\mathbb N`), " と置く。写像 ",
+        math(String.raw`\{0,1,\ldots,N\}\to\vec E_L,\ j\mapsto\varphi^{\circ j}(\vec e)`),
+        " の定義域の元の個数は ", math(String.raw`N+1`),
+        " で、終域の元の個数 ", math(String.raw`N`),
+        " より大きいので、この写像は単射でない（鳩の巣原理）。よって ",
+        math(String.raw`j<l`), " かつ ",
+        math(String.raw`\varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)`),
+        " を満たす ", math(String.raw`j,l\in\{0,1,\ldots,N\}`),
+        " がある。ここで次の式鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varphi^{\circ j}\bigl(\varphi^{\circ(l-j)}(\vec e)\bigr)
+&=\varphi^{\circ l}(\vec e)
+&&\bigl(\because\ \text{元の定義「置換の反復合成」の再帰を }l-j\text{ 回適用}\bigr)\\
+&=\varphi^{\circ j}(\vec e)
+&&\bigl(\because\ \varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)\text{ の選択}\bigr)
+\end{aligned}`),
+      paragraph([
+        "置換 ", math(String.raw`\varphi^{\circ j}`),
+        " の単射性（", ref("def_row_permutation"), "）により ",
+        math(String.raw`\varphi^{\circ(l-j)}(\vec e)=\vec e`),
+        " を得る。", math(String.raw`k:=l-j`), " は ",
+        math(String.raw`1\le k`),
+        " を満たす。全過程は有限集合の写像と自然数の比較だけで閉じる。",
+      ]),
+      paragraph(["元の定義「最小回帰時刻」:"]),
+      paragraph([
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
+        math(String.raw`\vec e\in\vec E_L`), " に対し、最小回帰時刻 ",
+        math(String.raw`r_{\varphi}(\vec e)\in\mathbb N`), " を",
+      ]),
+      displayMath(String.raw`r_{\varphi}(\vec e):=
+\min\{\,k\in\mathbb N\mid 1\le k,\ \varphi^{\circ k}(\vec e)=\vec e\,\}`),
+      paragraph([
+        "で定める。この集合は元の主張「反復合成の回帰の存在」により空でなく、自然数の空でない部分集合は最小元を持つので、",
+        "この定義は well-defined である。定義から ",
+        math(String.raw`1\le r_{\varphi}(\vec e)`), " かつ ",
+        math(String.raw`\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)=\vec e`),
+        " であり、", math(String.raw`1\le k<r_{\varphi}(\vec e)`),
+        " なる ", math(String.raw`k\in\mathbb N`), " については ",
+        math(String.raw`\varphi^{\circ k}(\vec e)\ne\vec e`), " である。",
+      ]),
+    ],
+  },
+  {
     id: "note_moved_orbit_closed_nonbacktracking_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 動く辺の軌道列の閉路性" },
@@ -38,7 +113,7 @@ export default defineNotes([
                           "第一の主張。", math(String.raw`k\in\mathbb N`), "、",
                           math(String.raw`1\le k\le r`), " とし、",
                           math(String.raw`\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)=\varphi^{\circ(k-1)}(\vec e)`),
-                          " と仮定する。", ref("def_permutation_iterate"), " により左辺は ",
+                          " と仮定する。", "元の定義「置換の反復合成」", " により左辺は ",
                           math(String.raw`\varphi^{\circ(k-1)}\bigl(\varphi(\vec e)\bigr)`),
                           " に等しい（再帰をほどくと ",
                           math(String.raw`\varphi\circ\varphi^{\circ(k-1)}=\varphi^{\circ(k-1)}\circ\varphi`),
@@ -62,7 +137,7 @@ export default defineNotes([
                         displayMath(String.raw`\varphi^{\circ k}(\vec e)
 =\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)
 \in\operatorname{Next}\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)
-\qquad\bigl(\because\ \blkref{def_permutation_iterate}\text{ と }\varphi\text{ への仮定}\bigr)`),
+\qquad\bigl(\because\ \text{元の定義「置換の反復合成」}\text{ と }\varphi\text{ への仮定}\bigr)`),
                         paragraph([
                           "であり、", math(String.raw`\gamma_{\varphi}(\vec e)`),
                           " は非後退辺列である（", ref("def_nonbacktracking_edge_sequence"),
@@ -74,7 +149,7 @@ export default defineNotes([
 =\varphi^{\circ r}(\vec e)
 =\varphi\bigl(\varphi^{\circ(r-1)}(\vec e)\bigr)
 \in\operatorname{Next}\bigl(\varphi^{\circ(r-1)}(\vec e)\bigr)
-\qquad\bigl(\because\ \blkref{def_permutation_minimal_return}\text{ と }\blkref{def_permutation_iterate}\text{ と }\varphi\text{ への仮定}\bigr)`),
+\qquad\bigl(\because\ \text{元の定義「最小回帰時刻」}\text{ と }\text{元の定義「置換の反復合成」}\text{ と }\varphi\text{ への仮定}\bigr)`),
                         paragraph([
                           "である。第 1 項は ",
                           math(String.raw`\varphi^{\circ 0}(\vec e)=\vec e`),
@@ -85,14 +160,14 @@ export default defineNotes([
                           "第三の主張。", math(String.raw`j,l\in\mathbb N`), "、",
                           math(String.raw`0\le j<l\le r-1`), " とし、",
                           math(String.raw`\varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)`),
-                          " と仮定する。", ref("def_permutation_iterate"), " の再帰を ",
+                          " と仮定する。", "元の定義「置換の反復合成」", " の再帰を ",
                           math(String.raw`l-j`), " 回ほどくと ",
                           math(String.raw`\varphi^{\circ l}(\vec e)=\varphi^{\circ j}\bigl(\varphi^{\circ(l-j)}(\vec e)\bigr)`),
                           " なので、置換 ", math(String.raw`\varphi^{\circ j}`),
                           " の単射性（", ref("def_row_permutation"), "）により ",
                           math(String.raw`\varphi^{\circ(l-j)}(\vec e)=\vec e`),
                           " を得る。ところが ", math(String.raw`1\le l-j\le r-1<r`),
-                          " なので、これは ", ref("def_permutation_minimal_return"),
+                          " なので、これは ", "元の定義「最小回帰時刻」",
                           " の最小性に矛盾する。よって ", math(String.raw`r`),
                           " 個の項は相異なる。全過程は有限集合の写像の反復と自然数の比較だけで閉じる。",
                         ]),
@@ -163,20 +238,20 @@ export default defineNotes([
       &=\varphi^{\circ k}\bigl(\varphi^{\circ j}(\vec e)\bigr)
       &&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\bigr)\\
       &=\varphi^{\circ(k+j)}(\vec e)
-      &&\bigl(\because\ \blkref{def_permutation_iterate}\text{ の再帰}\bigr)
+      &&\bigl(\because\ \text{元の定義「置換の反復合成」}\text{ の再帰}\bigr)
       \end{aligned}`),
       paragraph([
       "なので ", math(String.raw`O_{\varphi}(\vec f)\subset O_{\varphi}(\vec e)`),
       " である。", math(String.raw`j`), " は ",
       math(String.raw`0\le j<r_{\varphi}(\vec e)`), " の代表へ取り直せる。",
-      ref("def_permutation_minimal_return"), " により",
+      "元の定義「最小回帰時刻」", " により",
       ]),
       displayMath(String.raw`\begin{aligned}
       \varphi^{\circ(r_{\varphi}(\vec e)-j)}(\vec f)
       &=\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)
-      &&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\text{ と }\blkref{def_permutation_iterate}\bigr)\\
+      &&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\text{ と }\text{元の定義「置換の反復合成」}\bigr)\\
       &=\vec e
-      &&\bigl(\because\ \blkref{def_permutation_minimal_return}\bigr)
+      &&\bigl(\because\ \text{元の定義「最小回帰時刻」}\bigr)
       \end{aligned}`),
       paragraph([
       "なので、同じ包含を ", math(String.raw`(\vec f,\vec e)`),
@@ -184,7 +259,7 @@ export default defineNotes([
       ]),
       paragraph([
       "各軌道が空でないこと。", math(String.raw`O_{\varphi}(\vec e)\in\mathcal C(\varphi)`),
-      " とすると、", ref("def_permutation_iterate"), " の ",
+      " とすると、", "元の定義「置換の反復合成」", " の ",
       math(String.raw`\varphi^{\circ0}=\mathrm{id}_{\vec E_L}`), " により ",
       math(String.raw`\vec e\in O_{\varphi}(\vec e)`), " である。",
       ]),
@@ -236,7 +311,7 @@ export default defineNotes([
                         math(String.raw`\vec e_0\in\vec E_L`), " は ",
                         math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " を満たすとする。",
                         math(String.raw`r:=r_{\varphi}(\vec e_0)`), "（",
-                        ref("def_permutation_minimal_return"), "）、",
+                        "元の定義「最小回帰時刻」", "）、",
                         math(String.raw`\gamma:=\gamma_{\varphi}(\vec e_0)`), "（",
                         "参照用ノート「不採用経路: 軌道列」", "）、",
                         math(String.raw`C:=O_{\varphi}(\vec e_0)`), "（",
@@ -272,10 +347,10 @@ export default defineNotes([
                         " 個の項の集合に等しいので、写像 ",
                         math(String.raw`k\mapsto\vec\gamma_k`), " は ",
                         math(String.raw`\{1,\ldots,r\}`), " から ", math(String.raw`C`),
-                        " への全単射である。また ", ref("def_permutation_iterate"), " により ",
+                        " への全単射である。また ", "元の定義「置換の反復合成」", " により ",
                         math(String.raw`1\le k\le r-1`), " で ",
                         math(String.raw`\varphi(\vec\gamma_k)=\vec\gamma_{k+1}`), "、",
-                        ref("def_permutation_minimal_return"), " により ",
+                        "元の定義「最小回帰時刻」", " により ",
                         math(String.raw`\varphi(\vec\gamma_r)=\varphi^{\circ r}(\vec e_0)=\vec e_0=\vec\gamma_1`),
                         " である。求めたい積から始める。",
                       ]),
@@ -1259,7 +1334,7 @@ T^{a,b}_{\varphi}(x)
   },
   {
     id: "note_kac_ward_permutation_orbit_sequence_archived",
-    targets: ["def_permutation_iterate"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 軌道列" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道による直接比較は採らない。元の定義を保存する。"]),
@@ -1267,14 +1342,14 @@ T^{a,b}_{\varphi}(x)
         math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
         math(String.raw`\vec e\in\vec E_L`), " に対し、",
         math(String.raw`r:=r_{\varphi}(\vec e)`), "（",
-        ref("def_permutation_minimal_return"), "）と置き、軌道列 ",
+        "元の定義「最小回帰時刻」", "）と置き、軌道列 ",
         math(String.raw`\gamma_{\varphi}(\vec e)`), " を長さ ",
         math(String.raw`r`), " の向き付き辺列",
       ]),
       displayMath(String.raw`\gamma_{\varphi}(\vec e):=
 \bigl(\varphi^{\circ 0}(\vec e),\varphi^{\circ 1}(\vec e),\ldots,\varphi^{\circ(r-1)}(\vec e)\bigr)`),
       paragraph([
-        "で定める（", ref("def_permutation_iterate"), "）。第 ",
+        "で定める（", "元の定義「置換の反復合成」", "）。第 ",
         math(String.raw`k`), " 項（", math(String.raw`1\le k\le r`),
         "）は ", math(String.raw`\varphi^{\circ(k-1)}(\vec e)\in\vec E_L`),
         " である。この定義は有限集合の元の有限列だけで閉じる。",
@@ -1283,7 +1358,7 @@ T^{a,b}_{\varphi}(x)
   },
   {
     id: "note_kac_ward_permutation_orbit_set_archived",
-    targets: ["def_permutation_iterate"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 置換の軌道集合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の軌道による直接比較は採らない。元の定義を保存する。"]),
@@ -1294,8 +1369,8 @@ T^{a,b}_{\varphi}(x)
       displayMath(String.raw`O_{\varphi}(\vec e):=
 \{\,\varphi^{\circ k}(\vec e)\mid k\in\mathbb N\,\}\subset\vec E_L`),
       paragraph([
-        "で定める（反復合成は ", ref("def_permutation_iterate"), "）。",
-        ref("def_permutation_minimal_return"), " により、これは軌道列 ",
+        "で定める（反復合成は ", "元の定義「置換の反復合成」", "）。",
+        "元の定義「最小回帰時刻」", " により、これは軌道列 ",
         math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
         "参照用ノート「不採用経路: 軌道列」", "）に現れる ",
         math(String.raw`r_{\varphi}(\vec e)`), " 個の向き付き辺の集合に等しい。",
@@ -2237,7 +2312,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         "（", ref("def_contact_pair_count"), "）を示す。",
                         math(String.raw`\vec e_0:=\vec e_{\ast}^{\,\varphi}(C)`), "、",
                         math(String.raw`r:=r_{\varphi}(\vec e_0)`),
-                        "（", ref("def_permutation_minimal_return"), "）と置き、",
+                        "（", "元の定義「最小回帰時刻」", "）と置き、",
                         math(String.raw`\gamma^{\varphi}_C`), " の第 ", math(String.raw`k`), " 項を ",
                         math(String.raw`\vec\gamma_k:=\varphi^{\circ(k-1)}(\vec e_0)`),
                         "（", math(String.raw`1\le k\le r`), "、", "参照用ノート「不採用経路: 軌道列」",
@@ -4373,7 +4448,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                         "、反転写像 ", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
                         "）と仮定する。", math(String.raw`\vec e\in M(\varphi)`), " を取り、",
                         math(String.raw`r:=r_{\varphi}(\vec e)`), "（",
-                        ref("def_permutation_minimal_return"), "）と置き、軌道列 ",
+                        "元の定義「最小回帰時刻」", "）と置き、軌道列 ",
                         math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
                         "参照用ノート「不採用経路: 軌道列」", "）の第 ", math(String.raw`k`),
                         " 項（", math(String.raw`1\le k\le r`), "）を ",
