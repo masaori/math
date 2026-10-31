@@ -14,7 +14,7 @@
 
 必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない）。
 -/
-import Ising2D.Part011.TraceBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.TraceBound
 
 set_option linter.unusedSectionVars false
 

@@ -26,8 +26,8 @@
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
 （(2) の必要十分版は `Ising2D/NecSuf/LogSqueeze.lean`、(1) の中身は `Ising2D/NecSuf/RayleighMoments.lean` が持つ）。
 -/
-import Ising2D.Part011.PhysicalPartitionFunctionSandwich
-import Ising2D.Part012.Claim003_LimitInNRow
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimLimitInNRow
 
 namespace Ising2D
 

@@ -167,7 +167,7 @@ theorem Real.continuousOn_arcosh : ContinuousOn Real.arcosh (Set.Ici 1)
 - `def_rayleigh_sup`: `c(M) > 0`
 - `def_partition_function_2d_ising`: `Z > 0`（挟み撃ちの下側から従うので明示仮定にしていない）
 
-`Ising2D.limit_of_log_Z_in_N_row`（`lean/Ising2D/Part012/Claim003_LimitInNRow.lean`）は
+`Ising2D.limit_of_log_Z_in_N_row`（`lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimLimitInNRow.lean`）は
 「これらを認めれば `N_row → ∞` の極限が `(1/M) log c(M)` になること」を主張する。
 章 011 の形式化が入った時点で仮定を実際の定理で埋めればよい。
 

@@ -27,7 +27,7 @@
 これ以上ほどく余地がない（`sSup` は ℝ の完備性そのもの）。
 -/
 import Ising2D.Part011.DefinitionSectorRayleighSup
-import Ising2D.Part011.Claim008_TracePowerSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 
 set_option linter.unusedSectionVars false
 

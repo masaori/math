@@ -32,7 +32,7 @@ Step 1・Step 2 で使う `W` と `V^{(+)}` の事実を束ねた構造である
 既に形式化した欄を具体的な行列について組み合わせただけなので、必要十分版は置かない
 （各欄の必要十分な内容は `NecSuf/EvenSectorAgreement.lean` と `Ising2D/NecSuf/RayleighMoments.lean` にある）。
 -/
-import Ising2D.Part011.PhysicalPartitionFunctionSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
 import Ising2D.Part018.ClaimWEqVPlusOnEvenSector
 
 namespace Ising2D

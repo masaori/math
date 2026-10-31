@@ -11,7 +11,7 @@
 それについて自己共役かつ半正定値な作用素だけから従う。本ファイルではそれを実行列へ
 特殊化し、人手証明と同じ「平方根を取った形」`‖Wx‖ ≤ c(M)‖x‖` を系として述べる。
 -/
-import Ising2D.Part011.Definition006_RayleighSup
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 
 set_option linter.unusedSectionVars false
 

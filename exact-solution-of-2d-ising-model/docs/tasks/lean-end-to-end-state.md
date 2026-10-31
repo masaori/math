@@ -8,13 +8,13 @@
   - 1: `IsingParam.K2star := Kstar K2` で、双対関係は定理 `IsingParam.c2_mul_s2star_eq_c2star` になり、最終定理の仮定に `hdual` は無い。
   - 2: 最終定理 `Ising2D.onsager_exact_solution_unconditional`（`Part018/Theorem013_OnsagerUnconditional.lean`）の
     `Z` は具体的な `partitionFunction N m P.K1 P.K2`、`c(M)` は `rayleighSup (physicalSymTransferR m P.K1 P.K2)` である。
-    挟み撃ちは `partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）で与えた。
+    挟み撃ちは `partition_function_sandwich_physical`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）で与えた。
     人手 `partition_function_sandwich`・`limit_of_log_Z_in_N_row` に合わせ、`limit_of_log_Z_in_N_row`・`onsager_exact_solution`・
     `onsager_exact_solution_isoParam` の挟み撃ちの仮定は `1 ≤ N` の範囲だけで受け取る。
 - 項目 3 は済んでいる。具体的な `W = physicalSymTransferR M P.K1 P.K2` と `vPlusDataOf` の `V^{(+)}` についての
   `EvenSectorBridge` を `physicalEvenSectorBridge`（`Part018/PhysicalEvenSectorBridge.lean`）で構成した。
   欄は `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`
-  （`Part011/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
+  （`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
   （`Part018/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`Part018/ClaimWEqVPlusOnEvenSector.lean`）である。
   最終定理の入力から `bridge` と `hW` を外した。
 - 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
@@ -123,14 +123,22 @@
     この章の `V1_plus_square_root_property` は `PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean` にあり、そのファイルは前の章の
     `def_V1_plus_square_root`・`def_V_plus` が 2 対 1 で多いので残した。`Part011/ClaimEpsilonIsRealSymmetric.lean` は `trace_of_epsilon_V_plus` の Step 3 (b) に説明で触れるだけで、
     形式化しているのは `epsilon_is_real_symmetric`（「M→∞ の極限と閉形式」の章）なので動かさなかった。`Part018/` に残ったファイルは「M→∞ の極限と閉形式」の章の項目だけを形式化している。
+  - 部「熱力学極限」の章「N→∞ の極限と最大固有値 c(M)」（済み）: 8 ファイルを `Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` へ移した。
+    旧 `Part011/` から `ClaimOperatorBound`（旧 `Claim007_OperatorBound`）・`ClaimTracePowerSandwich`（旧 `Claim008_TracePowerSandwich`）・
+    `ClaimPartitionFunctionSandwich`（旧 `Claim009_PartitionFunctionSandwich`）・`DefinitionRayleighSup`（旧 `Definition006_RayleighSup`）・`PhysicalPartitionFunctionSandwich`・`TraceBound`、
+    旧 `Part012/` から `ClaimLimitInNRow`（旧 `Claim003_LimitInNRow`）・`ClaimPartitionFunctionSandwichAndLimitInNRow` である。
+    `PhysicalPartitionFunctionSandwich` は `def_transfer_matrix_square_root`（前の章）1 項と `W_is_real_symmetric_positive_definite`・`partition_function_sandwich`（この章）2 項なのでこの章へ置いた。
+    `TraceBound` は `trace_power_sandwich` の Step 3 の補題で、import 元も `DefinitionRayleighSup` だけなのでこの章へ置いた。
+    `Part011/Basic.lean` は人手の項目を持たない補助のファイルで、import 元は数学的道具立て「トレース・共役転置・正定値性」の `Claim005_PsdCauchySchwarz` と
+    `NecSuf/PermMatrix`（置き場に数えない）なので、数学的道具立てへ移すときに扱う。`Part011/` と `Part018/` に残る項目付きのファイルは「M→∞ の極限と閉形式」の章の項目が多い。ただし `Part011/Claim005_PsdCauchySchwarz.lean`（`psd_cauchy_schwarz`）は数学的道具立て「トレース・共役転置・正定値性」、`Part011/Claim010_SectorDecomposition.lean`（参照用ノートへ退避した `sector_decomposition_of_rayleigh_sup`）は `RoutesNotAdopted/MinusSector/` の置き場なので、次の章では移さない。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の 7 番目の章、部「熱力学極限」の「N→∞ の極限と最大固有値 c(M)」（フォルダ `Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_row_limit_and_max_eigenvalue` の 10 項（`Z_equals_trace_of_W` から
-`row_limit_and_max_eigenvalue_claim_sandwich_and_limit_in_N_row` のラベルまで）を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part011/`・`Part012/Claim003_LimitInNRow`・`Part018/` の挟み撃ちと `N` の極限のファイルなど。冒頭の項目名を数え、参照だけの項目は数えない）。
+項目 7 の 8 番目の章、部「熱力学極限」の「M→∞ の極限と閉形式」（フォルダ `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_column_limit_and_closed_form` の 14 項（`W_has_positive_entries` から
+`c_plus_value_c_sandwich_and_double_limit_of_log_Z` まで）を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part011/` の残り・`Part012/Claim002_GammaContinuous`・`Part018/` の残りなど。冒頭の項目名を数え、参照だけの項目は数えない）。
 `Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

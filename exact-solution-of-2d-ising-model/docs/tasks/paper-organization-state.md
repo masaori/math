@@ -59,7 +59,7 @@
   - **章末のゴールの主張を足した。** $K_1,K_2>0$、$M_{\mathrm{col}}\ge2$ で、$W=V_1^{1/2}V_2V_1^{1/2}$ と $c(M)=\sup\{x^\top Wx\mid\|x\|=1\}>0$ について (1) $c(M)^N\le Z\le2^Mc(M)^N$、(2) $\lim_{N\to\infty}\frac1{MN}\log Z=\frac1M\log c(M)$ を主張する claim
     `partition_function_sandwich_and_limit_in_N_row` を章の最後に置いた。証明は `partition_function_sandwich` と `limit_of_log_Z_in_N_row` を挙げるだけである。
     SageMath（`sagemath/check/partition_function_sandwich_and_limit_in_N_row/`、$M\in\{2,3,4\}$・臨界点上を含む 8 組。$Z$ は直接和、大きい $N$ は $\log\mathrm{tr}((W/c)^N)$ を行列の積で作る。$\mathrm{tr}$ の相対残差 ≤ 5.6e-15、(2) の誤差は $(\log2)/N$ の 0.68 倍以下。
-    否定コントロールは上界の $2^M$ を 1 にしたもの、下界の $c$ を $1.05c$ にしたもの、極限値を $\frac1M\log(2c)$ にしたもの）と Lean（`lean/Ising2D/Part012/ClaimPartitionFunctionSandwichAndLimitInNRow.lean`。仮定は $K_2>0$ と $M\ge2$ だけ。
+    否定コントロールは上界の $2^M$ を 1 にしたもの、下界の $c$ を $1.05c$ にしたもの、極限値を $\frac1M\log(2c)$ にしたもの）と Lean（`lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwichAndLimitInNRow.lean`。仮定は $K_2>0$ と $M\ge2$ だけ。
     `check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。章の項目数は 10（割り当て 9 とゴールの主張 1。章立て案は 9）。
   - **011 の案内文を二つに分けた。** `maxeig_000_remark_overview` を新しい章の冒頭へ移し（題を「$Z$ を $c(M_{\mathrm{col}})$ で挟み、$N_{\mathrm{row}}\to\infty$ の極限を取る道筋」にし、「この章」を「以下」に直し、極限の段落を足した）、
     $c_+(M)$ と $\varepsilon$ の段落を 011 の新しい案内文 `maxeig_remark_overview_c_plus_and_epsilon` として残した（「偶セクター」を「$\varepsilon$ の固有値 $+1$ の固有空間」に直した）。011 の章見出しを、残った中身に合わせて「$c_+(M_{\mathrm{col}})$ と、$W$ と $\varepsilon$ の性質」にした。

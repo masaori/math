@@ -41,13 +41,13 @@
 `c(M)` は具体的な対称化転送行列 `W = V_1^{1/2} V_2 V_1^{1/2}` の Rayleigh 上限
 `rayleighSup (physicalSymTransferR M K_1 K_2)`（人手 `def_rayleigh_sup`）である。
 `N_row ≥ 1` での挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}` は、章 011 の
-`Ising2D.partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
+`Ising2D.partition_function_sandwich_physical`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）が与える。
 Step 1 で `log c(M)` を定めるための `c(M) > 0` は、人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から
 （`W` の正定値性と `rayleighSup_pos` で）出す（`onsager_limit_in_N_row_physical`）。挟み撃ち `Λ ≤ c(M)` からは出さない。
 `c_+(M)` を経る挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` も、同じ具体的な `W` についての橋渡し
 `Ising2D.physicalEvenSectorBridge` から得る。
 -/
-import Ising2D.Part011.PhysicalPartitionFunctionSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
 import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
 import Ising2D.Part011.ClaimEpsilonCommutesWithW
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus

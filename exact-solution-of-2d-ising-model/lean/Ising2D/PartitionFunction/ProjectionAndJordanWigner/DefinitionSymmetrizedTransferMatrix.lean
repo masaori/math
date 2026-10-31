@@ -24,7 +24,7 @@
 それらの Lean 形式化は本タスクの担当外なので **import せず仮定として受け取る**。
 具体的には次を仮定の形にしている。
 
-1. `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）— `Claim009_PartitionFunctionSandwich.lean` の仮定。
+1. `Z(K_1,K_2) = tr((V₁V₂)^{N_row})`（章 001 の `partition_function_via_transfer_matrix`）— `ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimPartitionFunctionSandwich.lean` の仮定。
 2. `V₁^{1/2}` が**正の対角行列**であること（章 009 の `sigma_z_diagonal_action` +
    `exp_of_diagonal_matrix`）— ここでは `Ising2D.diagExp d`（`d : n → ℝ`）として与える。
    人手証明の `d μ = (1/2)K₁ ∑_m μ(m)μ(m+1)` に対応する。
@@ -34,7 +34,7 @@
    `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef`（実対称行列の指数関数は
    実対称正定値）は本ファイルで証明済みなので、章 009 が形式化されればそのまま接続できる。
 -/
-import Ising2D.Part011.Claim008_TracePowerSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
 set_option linter.unusedSectionVars false

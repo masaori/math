@@ -37,7 +37,7 @@
 import Ising2D.Part018.Theorem009_CPlusEqualsLambda
 import Ising2D.Part011.ClaimCPlusLeC
 import Ising2D.NecSuf.EvenSectorUpperBound
-import Ising2D.Part012.Claim003_LimitInNRow
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimLimitInNRow
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremOnsagerFreeEnergy
 
 namespace Ising2D

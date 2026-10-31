@@ -8,7 +8,7 @@
 `c_+(M)` は章 011 `def_sector_rayleigh_sup` の `Ising2D.evenSectorRayleighSup`（`(+)` だけの定義）。
 本定理は `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 が引く（`Theorem010_OnsagerExactSolution.lean`）。
 
-必要十分版は置かない。理由は章 011 の `Definition006_RayleighSup.lean` と同じで、
+必要十分版は置かない。理由は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる
 道具は「実行列・実ベクトルと複素行列・複素ベクトルの橋渡し」だけで、これは
 章 011 の `epsilon_eq_ofReal_epsilonR`（`epsilon_is_real_symmetric`）と同じ性質のものである。

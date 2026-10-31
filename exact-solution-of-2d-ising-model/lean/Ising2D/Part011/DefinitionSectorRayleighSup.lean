@@ -21,7 +21,7 @@
 ## 人手証明と 1 対 1 にならない箇所
 
 * `𝓡` が上に有界であることの根拠は、人手が成分の絶対値の和 `∑|W_ij|` を挙げるのに対し、
-  Lean は章 011 の `Definition006_RayleighSup.lean` と同じく半正定値行列の評価
+  Lean は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じく半正定値行列の評価
   `xᵀWx ≤ ‖x‖² tr W` を使う（`rayleighSet_bddAbove`）。
 * 単位ベクトル `x^{(+)} = a_+⊠⋯⊠a_+` は、人手が確かめた「各成分が `2^{-M/2}`」の形
   （定数ベクトル `evenUnit`）で直接定義した。`ε x^{(+)} = x^{(+)}` は、人手が
@@ -29,9 +29,9 @@
   置換行列であること（`epsilonR_mulVec_apply`）と成分が定数であることから示す。
 
 必要十分版はない（`sSup` は ℝ の完備性そのものなので、ほどく余地がない。章 011 の
-`Definition006_RayleighSup.lean` と同じ）。
+`ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。
 -/
-import Ising2D.Part011.Definition006_RayleighSup
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 
 set_option linter.unusedSectionVars false

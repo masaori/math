@@ -238,7 +238,7 @@
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
 | `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
-| `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `Definition006_RayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
+| `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_smul_family` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
@@ -392,7 +392,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は
 `rayleighSup (physicalSymTransferR M K_1 K_2)` で、挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`N_row ≥ 1`）は
-章 011 の `partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
+章 011 の `partition_function_sandwich_physical`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）が与える。
 `W` と `V^{(+)}` の橋渡し（もとの場 `bridge` と、`bridge.W` が具体的な `W` であるという仮定 `hW`）は、
 `Ising2D.physicalEvenSectorBridge`（`PhysicalEvenSectorBridge.lean`）で具体的な `W` について構成し、仮定から外した。
 

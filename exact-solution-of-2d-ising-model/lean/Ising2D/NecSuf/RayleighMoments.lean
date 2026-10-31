@@ -6,8 +6,8 @@
 * **`trace_power_sandwich`** の Step 2・Step 3（`maxeig_008_claim_trace_power_sandwich`）
 
 具体版:
-* `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/Part011/Claim007_OperatorBound.lean`）
-* `Ising2D.trace_power_sandwich`（`Ising2D/Part011/Claim008_TracePowerSandwich.lean`）
+* `Ising2D.rayleigh_bounds_operator_norm`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimOperatorBound.lean`）
+* `Ising2D.trace_power_sandwich`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimTracePowerSandwich.lean`）
 
 いずれも本ファイルの結果の特殊化として導出している。
 

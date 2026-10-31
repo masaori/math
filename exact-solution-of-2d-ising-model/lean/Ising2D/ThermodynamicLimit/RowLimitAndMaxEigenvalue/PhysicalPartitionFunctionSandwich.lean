@@ -12,7 +12,7 @@
   のうち `B := V_1^{1/2}` と `V_2` についての部分（Step 1・Step 2 と、Step 3 の `V_2 = (2s_2)^{M_col/2}A`）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）
 
-`Ising2D.partition_function_sandwich`（`Claim009_PartitionFunctionSandwich.lean`）は一般の実行列
+`Ising2D.partition_function_sandwich`（`ClaimPartitionFunctionSandwich.lean`）は一般の実行列
 `B, V_1, V_2` と、`Z = tr((V_1V_2)^{N_row})` を仮定として受け取る。本ファイルはその仮定を、
 章 001 の具体的な分配関数 `Ising2D.partitionFunction` と、`PhysicalSymTransferBridge.lean` の
 具体的な実行列 `physicalV1halfR`（`V_1^{1/2}`）・`physicalV2R`（`V_2`）についてすべて証明し、
@@ -56,7 +56,7 @@ import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunc
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 import Ising2D.Part009.Claim013_PositiveDefinite
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
-import Ising2D.Part011.Claim009_PartitionFunctionSandwich
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimPartitionFunctionSandwich
 
 namespace Ising2D
 

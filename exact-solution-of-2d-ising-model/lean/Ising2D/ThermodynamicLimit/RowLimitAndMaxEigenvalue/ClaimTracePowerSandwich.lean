@@ -17,7 +17,7 @@
 人手証明の `2^M` は空間の次元なので、ここでは `Fintype.card n` として述べる
 （Ising の場合 `n = Conf M` で `Fintype.card (Conf M) = 2^M`）。
 -/
-import Ising2D.Part011.Claim007_OperatorBound
+import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimOperatorBound
 
 set_option linter.unusedSectionVars false
 
