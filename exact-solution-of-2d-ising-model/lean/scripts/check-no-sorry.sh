@@ -1557,6 +1557,15 @@ targets=(
   Ising2D.boundaryG_mul_apply
   Ising2D.epsilon_apply_configBasisIso
   Ising2D.epsilon_mul_apply_configBasisIso
+  Ising2D.trace_eq_sum_configBasisIso
+  Ising2D.trace_epsilon_VPlusOfTransfer_split
+  Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self
+  Ising2D.matExp_openChainD0_mul_boundaryG_mul_V2_apply_self
+  Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums
+  Ising2D.trace_epsilon_VPlusOfTransfer_closed_form
+  Ising2D.trace_epsilon_VPlusOfTransfer_pos
+  Ising2D.trace_of_epsilon_V_plus
+  Ising2D.trace_epsilon_vPlusDataOf_pos
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input

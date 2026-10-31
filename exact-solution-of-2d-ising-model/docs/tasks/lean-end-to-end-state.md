@@ -19,10 +19,9 @@
   最終定理の入力から `bridge` と `hW` を外した。
 - `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
 - 最終定理 `onsager_exact_solution_unconditional` に残る仮定は `In m hm : EvenSectorClosureInput P m`（`2 ≤ m`）の中身だけである。
-  - `hM : m ≠ 0`（`2 ≤ m` から従う。`htr` の型が `vPlusDataOf P hM _` を含むので欄に残っている）
-  - `htr`: `tr(εV^{(+)}) > 0`（項目 4。4d で消える）
   - `hWpos`: 具体的な `W` の成分の正値性、`hWcomm`: `ε` と具体的な `W` の可換性（項目 5）
-- 項目 4 は次の四つに割った。
+- 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`Part018/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
+  `EvenSectorClosureInput` から `htr` と、その型のために置いていた `hM` を外した（`M ≠ 0` は `2 ≤ M` から出す）。次の四つに割って進めた。
   - 4a（済み）: 人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`
     （`iH_1^{(+)} = D_0 + εG`）を `Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`Part018/ClaimH1PlusInSigmaZForm.lean` で形式化した
     （`openChainD0`・`boundaryG`・`H1_plus_in_sigma_z_form`）。
@@ -35,7 +34,7 @@
     両端のスピンは `s (lastSite M _) * s (firstSite M _)` の順で書いた（`boundaryG_mulVec_basisVec` の係数と同じ）。
     値は可換半環で足りるので、必要十分版 `NecSuf/OpenChainSpinSum.lean` を置き、具体版を `Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で系として導出した。
     4d で使う `D_0f_{ι(s)} = E(s)f_{ι(s)}` は `openChainD0_mulVec_basisVec_eq_energy`。二つの和は `ℝ` の `Real.exp` で書いてあるので、4d で `ℂ` へ移す。
-  - 4d: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
+  - 4d（済み）: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
     証明し、`EvenSectorClosureInput` から `htr` を外す。人手の Step の単位で次の三つに割った。
     - Step 1・Step 2 の形式化（済み）: Step 1（`tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`）と Step 2（`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`）を
       `Part018/ClaimTraceEpsilonVPlusReduction.lean` で形式化した（`trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`）。
@@ -45,9 +44,9 @@
       (a) `exp(K_1D_0)` の対角性 `matExp_smul_openChainD0`（成分 `matExp_smul_openChainD0_apply`）、`G` の対角性 `boundaryG_eq_diagonal`（成分 `boundaryG_apply`）、
       (b) `εf_{ι(s)} = f_{ι(-s)}` は `epsilon_mulVec_basisVec_configBasisIso`（`-s` は `negSpinConf`）、Step 4 が使う行の形は `epsilon_mul_apply_configBasisIso`、
       (c) `V2_apply_configBasisIso`・`V2_apply_configBasisIso_self`・`V2_apply_configBasisIso_neg_self`。
-    - 二つのスピン和の代入と正値性の形式化: Step 4（トレースを二つのスピン和で書き、4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum` を代入して閉じた式にする）と
-      Step 5（正値性）。`K1 = P.K1`、`vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` で `vPlusDataOf` の `V^{(+)}` へ移し、
-      `EvenSectorClosureInput` から `htr` を外す。
+    - 二つのスピン和の代入と正値性の形式化（済み）: Step 4・Step 5 と主張を `Part018/ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した
+      （`trace_epsilon_VPlusOfTransfer_split`・`trace_epsilon_VPlusOfTransfer_eq_spin_sums`・`trace_epsilon_VPlusOfTransfer_closed_form`・
+      `trace_epsilon_VPlusOfTransfer_pos`・`trace_of_epsilon_V_plus`、`vPlusDataOf` へ移した `trace_epsilon_vPlusDataOf_pos`）。必要十分版は置かない。
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
   挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
   通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
@@ -57,10 +56,8 @@
 
 ## 次の一歩
 
-項目 4d のうち「二つのスピン和の代入と正値性の形式化」：人手 `trace_of_epsilon_V_plus` の Step 4（トレースを二つのスピン和で書き、
-4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum` を代入して閉じた式にする）と Step 5（正値性）を形式化し、
-`vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` で `vPlusDataOf` の `V^{(+)}` へ移して `EvenSectorClosureInput` から `htr` を外す。
-材料は Step 1・2 の `trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`、Step 3 の `matExp_smul_openChainD0_mul_apply`・`boundaryG_mul_apply`
-（(a) の対角性を左から掛けた積の行で使う形）・`epsilon_mul_apply_configBasisIso`（(b) を行の形で使う `(εA)_{ι(s),J} = A_{ι(-s),J}`）・
-`V2_apply_configBasisIso_self`・`V2_apply_configBasisIso_neg_self` である。
-大きければ Step 4 と Step 5（`htr` の除去を含む）に割り、先頭だけを行う。
+項目 5：`EvenSectorClosureInput` の `hWcomm`・`hWpos` を外す。
+`hWcomm` は `Part011/ClaimEpsilonCommutesWithW.lean` の `epsilon_commutes_with_W P.K1 P.K2_pos` と同じ型なので、それで埋める。
+`hWpos`（具体的な `W = physicalSymTransferR M P.K1 P.K2` の成分がすべて正）は人手 `W_has_positive_entries`（`structured-latex/content/011_max_eigenvalue.ts`）を
+具体的な `V_1^{1/2}`・`V_2` について 1 対 1 で形式化して埋める。大きければ「`hWcomm` の除去」と「`W_has_positive_entries` の形式化と `hWpos` の除去」に割り、先頭だけを行う。
+欄が無くなったら `EvenSectorClosureInput` を消し、最終定理の入力から `In` を外す（項目 6 の通しの定理の準備）。

@@ -195,6 +195,19 @@
 | `Ising2D.matExp_smul_openChainD0_mul_apply` / `boundaryG_mul_apply` | `(exp(K_1D_0)X)_{ι(s),J} = exp(K_1E(s))X_{ι(s),J}`、`(GX)_{ι(s),J} = s(M_col)s(1)X_{ι(s),J}` | Step 4 が (a) として使う形 |
 | `Ising2D.sum_spin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `V2_apply_configBasisIso`） |
 
+#### `ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.trace_eq_sum_configBasisIso` | `tr(X) = ∑_{s∈𝔐} X_{ι(s),ι(s)}` | Step 4（`def_trace`） |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_split` | `tr(εV^{(+)}) = cosh(K_1)tr(exp(K_1D_0)εV_2) + sinh(K_1)tr(exp(K_1D_0)GV_2)` | Step 4 の最初の式 |
+| `Ising2D.matExp_openChainD0_mul_epsilon_mul_V2_apply_self` / `matExp_openChainD0_mul_boundaryG_mul_V2_apply_self` | 二つの項の対角成分 `exp(K_1E(s))exp(-M_colK_2)`、`exp(K_1E(s))s(M_col)s(1)exp(M_colK_2)` | Step 4 |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_eq_spin_sums` | トレースを二つのスピン和で書いた形（実数） | Step 4 の最後の式鎖の 1 行目 |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_closed_form` | `tr(εV^{(+)}) = (2exp(-K_2)cosh K_1)^{M_col} + (2exp(K_2)sinh K_1)^{M_col}` | Step 4 の最後の式鎖の 2〜4 行目 |
+| `Ising2D.trace_epsilon_VPlusOfTransfer_pos` | `0 < Re tr(εV^{(+)})`（`K_1 > 0`） | Step 5 |
+| **`Ising2D.trace_of_epsilon_V_plus`** | **閉じた式と正値性** | **主張本体** |
+| `Ising2D.trace_epsilon_vPlusDataOf_pos` | `vPlusDataOf` の `V^{(+)}` について `0 < Re tr(εV^{(+)})`（`VPlusOfTransfer_eq_VPlus` で人手の形へ戻す） | 最終定理の入力から欄 `htr` を外すために使う |
+
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/ParityFermion.lean`、名前空間 `Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
@@ -277,7 +290,7 @@
 
 | 人手証明（ブロック） | 状況 | 理由 |
 | --- | --- | --- |
-| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 依存先の `D_0,G` の定義・`H1_plus_in_sigma_z_form`・可換性と対角作用・二つのスピン和は形式化した（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`・`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`・`ClaimOpenChainSpinSums.lean` の表）。この定理本体のうち Step 1・Step 2 は `ClaimTraceEpsilonVPlusReduction.lean`、Step 3 は `ClaimTraceEpsilonVPlusMatrixEntries.lean` で形式化した。Step 4・Step 5 の形式化は通しの証明の項目 4d で行う。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
+| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **形式化した**（`ClaimTraceEpsilonVPlusClosedForm.lean` の `trace_of_epsilon_V_plus`） | 依存先の `D_0,G` の定義・`H1_plus_in_sigma_z_form`・可換性と対角作用・二つのスピン和は形式化した（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`・`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`・`ClaimOpenChainSpinSums.lean` の表）。この定理本体のうち Step 1・Step 2 は `ClaimTraceEpsilonVPlusReduction.lean`、Step 3 は `ClaimTraceEpsilonVPlusMatrixEntries.lean`、Step 4・Step 5 は `ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した。`Ising2D.VPlusData.eta_univ_eq_one` 以降は一般の `VPlusData` について述べるので `0 < (tr(εV^{(+)})).re` を仮定に置き、最終定理では `trace_epsilon_vPlusDataOf_pos` で埋める。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
@@ -368,12 +381,11 @@ OK: 主要定理はいずれも sorryAx に依存していない
 ### 6.4 残った仮定と、それが消せない理由（一次情報）
 
 `Ising2D.EvenSectorClosureInput`（`Theorem013_OnsagerUnconditional.lean`）に束ねてある。
-**いずれも章 014–017 由来ではない。**
+**いずれも章 014–017 由来ではない。** もとの場 `htr`（`tr(εV^{(+)}) > 0`）は `trace_epsilon_vPlusDataOf_pos` で埋め、
+その型のために欄に置いていた `hM`（`M ≠ 0`）も外して `2 ≤ M` から出す。
 
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
-| `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`）。最終定理では `2 ≤ m` から従うが、`htr` の型が `vPlusDataOf P hM _` を含むので欄に置いている |
-| `htr` | `tr(εV^{(+)}) > 0` | 依存先の `closing_004`（`D_0, G` の可換性・対角作用）と `closing_005`（1 次元開鎖のスピン和）は形式化した。`closing_006`（`trace_of_epsilon_V_plus` 本体）は Step 1〜3 まで形式化し、Step 4・Step 5 が未形式化で、通しの証明の項目 4d で行う（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | 具体的な `W`（`physicalSymTransferR`）の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | 未着手（runbook の項目 5）。`hWcomm` は章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）と同じ型。`hWpos` は具体的な `W` についての `W_has_positive_entries` の定理がまだ無い |
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は

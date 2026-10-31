@@ -26,17 +26,20 @@
 | `D.gam μ > 0`（`γ(θ̃_μ) > 0`） | 章 017 `Ising2D.gammaFn_thetaTilde_pos`（無条件） |
 | `∑_μ D.gam μ = ∑_{μ=1}^{M} γ(t^{(M)}_μ)`（`δ = 1/2`） | 本ファイルの `Ising2D.sum_checkGam`（章 017 `tagPoint_half_eq_thetaTilde` の系） |
 | `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`Part008/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
+| `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`、`ClaimTraceEpsilonVPlusClosedForm.lean`）。`M ≠ 0` は `2 ≤ M` から出す |
 | `bridge`（章 011 の実行列 `W` と `V^{(+)}` の橋渡し）と `hW`（`bridge.W` が具体的な `W` であること） | `Ising2D.physicalEvenSectorBridge`（`PhysicalEvenSectorBridge.lean`）。具体的な `W` について、章 011 の `W_is_real_symmetric_positive_definite` と、`c_plus_equals_Lambda_half_integer` の Step 0・Step 2 の実行列表示を組み合わせて構成する |
 
 ## 残った仮定（`Ising2D.EvenSectorClosureInput` に束ねた）
 
-`htr`・`hWpos` は接続する Lean の補題がまだ無い。`hM`・`hWcomm` は表の理由で欄に残している。いずれも数学的な穴ではない。
+`hWpos` は接続する Lean の補題がまだ無い。`hWcomm` は表の理由で欄に残している。いずれも数学的な穴ではない。
 
 | 場 | 内容 | なぜ消せないか（一次情報） |
 | --- | --- | --- |
-| `hM` | `M ≠ 0` | 章 016・017 の主張自体が `M ≠ 0` を要求する（`CheckFermiSetup.hM`）。最終定理では `2 ≤ m` から従うが、`htr` の型が `vPlusDataOf P hM _` を含むので欄に置いている |
-| `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
 | `hWpos`, `hWcomm` | 具体的な `W`（`physicalSymTransferR`）の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | 未着手（runbook の項目 5）。`hWcomm` は章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）と同じ型。`hWpos` は具体的な `W` についての `W_has_positive_entries` の定理がまだ無い |
+
+`tr(εV^{(+)}) > 0`（人手 `trace_of_epsilon_V_plus`）は `Ising2D.trace_epsilon_vPlusDataOf_pos`
+（`ClaimTraceEpsilonVPlusClosedForm.lean`）で証明した。それに伴い、`htr` の型のために欄に置いていた `M ≠ 0` も外し、
+`2 ≤ M` から出す。
 
 ## 分配関数と `c(M)` は具体的なもの
 
@@ -51,6 +54,7 @@
 import Ising2D.Part011.PhysicalPartitionFunctionSandwich
 import Ising2D.Part018.Claim012_VPlusDataFromPart017
 import Ising2D.Part018.PhysicalEvenSectorBridge
+import Ising2D.Part018.ClaimTraceEpsilonVPlusClosedForm
 import Ising2D.Part018.Theorem010_OnsagerExactSolution
 
 namespace Ising2D
@@ -78,10 +82,6 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
 
 内訳と「なぜ埋められないか」はファイル冒頭の表を参照。 -/
 structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
-  /-- 章 016・017 が要求する `M ≠ 0` -/
-  hM : M ≠ 0
-  /-- `tr(εV^{(+)}) > 0`（章 018 の `closing_006`。Lean 未形式化） -/
-  htr : 0 < ((epsilon M * (vPlusDataOf P hM P.c2_mul_s2star_eq_c2star).V).trace).re
   /-- 具体的な `W` の成分はすべて正（章 011 の `W_has_positive_entries`。Step 3 が使う） -/
   hWpos : ∀ k l, 0 < physicalSymTransferR M P.K1 P.K2 k l
   /-- `ε` は具体的な `W` と可換（章 011 の `epsilon_commutes_with_W`。Step 3 が使う） -/
@@ -97,8 +97,9 @@ theorem rayleighSup_sandwich_LambdaM_of_input (P : IsingParam) (hM2 : 2 ≤ M)
     (In : EvenSectorClosureInput P M) :
     LambdaM P (1 / 2) M ≤ rayleighSup (physicalSymTransferR M P.K1 P.K2)
       ∧ rayleighSup (physicalSymTransferR M P.K1 P.K2) ≤ 2 * LambdaM P (1 / 2) M :=
-  (physicalEvenSectorBridge P hM2 In.hM).rayleighSup_sandwich_LambdaM P In.htr In.hWpos In.hWcomm rfl
-    (sum_checkGam P M)
+  have hM : M ≠ 0 := by omega
+  (physicalEvenSectorBridge P hM2 hM).rayleighSup_sandwich_LambdaM P (trace_epsilon_vPlusDataOf_pos P hM2 hM)
+    In.hWpos In.hWcomm rfl (sum_checkGam P M)
 
 /-! ## Onsager の厳密解 -/
 
@@ -107,7 +108,7 @@ theorem rayleighSup_sandwich_LambdaM_of_input (P : IsingParam) (hM2 : 2 ≤ M)
   `lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z(K_1,K_2) = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`
 
 `Z` は `partitionFunction N_row M K_1 K_2`、`c(M)` は `rayleighSup (physicalSymTransferR M K_1 K_2)` である。
-残る入力は `In m hm`（ファイル冒頭の表の `hM`・`htr`・`hWpos`・`hWcomm`）だけであり、
+残る入力は `In m hm`（ファイル冒頭の表の `hWpos`・`hWcomm`）だけであり、
 **章 014・015・016・017 に由来する仮定、双対関係、分配関数の挟み撃ち、`W` と `V^{(+)}` の橋渡しは 1 つも残っていない**。 -/
 theorem onsager_exact_solution_unconditional (P : IsingParam)
     (In : ∀ m : ℕ, 2 ≤ m → EvenSectorClosureInput P m) :
