@@ -2,6 +2,19 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の七番目の章、部「熱力学極限」の最初の章「$N\to\infty$ の極限と最大固有値 $c(M)$」を組み直した。
+  棚卸しでこの章に割り当てた 9 項を、`011_max_eigenvalue.ts`（8 項）と `012_free_energy.ts`（1 項）から、新しいファイル `content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の部見出し「熱力学極限」・章見出しの下へ
+  棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の最大固有値に属する固有ベクトルの章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（機械比較で origin のパス以外一致）。
+  半正定値の Cauchy–Schwarz（数学的道具立て）は 011 に残した。011 には ε の固有値 $+1$ の固有空間の上の上限 $c_+(M)$ と $W$・$\varepsilon$ の性質の 5 項（次の章に割り当て済み）が残る。
+  - **章末のゴールの主張を足した。** $K_1,K_2>0$、$M_{\mathrm{col}}\ge2$ で、$W=V_1^{1/2}V_2V_1^{1/2}$ と $c(M)=\sup\{x^\top Wx\mid\|x\|=1\}>0$ について (1) $c(M)^N\le Z\le2^Mc(M)^N$、(2) $\lim_{N\to\infty}\frac1{MN}\log Z=\frac1M\log c(M)$ を主張する claim
+    `partition_function_sandwich_and_limit_in_N_row` を章の最後に置いた。証明は `partition_function_sandwich` と `limit_of_log_Z_in_N_row` を挙げるだけである。
+    SageMath（`sagemath/check/partition_function_sandwich_and_limit_in_N_row/`、$M\in\{2,3,4\}$・臨界点上を含む 8 組。$Z$ は直接和、大きい $N$ は $\log\mathrm{tr}((W/c)^N)$ を行列の積で作る。$\mathrm{tr}$ の相対残差 ≤ 5.6e-15、(2) の誤差は $(\log2)/N$ の 0.68 倍以下。
+    否定コントロールは上界の $2^M$ を 1 にしたもの、下界の $c$ を $1.05c$ にしたもの、極限値を $\frac1M\log(2c)$ にしたもの）と Lean（`lean/Ising2D/Part012/ClaimPartitionFunctionSandwichAndLimitInNRow.lean`。仮定は $K_2>0$ と $M\ge2$ だけ。
+    `check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。章の項目数は 10（割り当て 9 とゴールの主張 1。章立て案は 9）。
+  - **011 の案内文を二つに分けた。** `maxeig_000_remark_overview` を新しい章の冒頭へ移し（題を「$Z$ を $c(M_{\mathrm{col}})$ で挟み、$N_{\mathrm{row}}\to\infty$ の極限を取る道筋」にし、「この章」を「以下」に直し、極限の段落を足した）、
+    $c_+(M)$ と $\varepsilon$ の段落を 011 の新しい案内文 `maxeig_remark_overview_c_plus_and_epsilon` として残した（「偶セクター」を「$\varepsilon$ の固有値 $+1$ の固有空間」に直した）。011 の章見出しを、残った中身に合わせて「$c_+(M_{\mathrm{col}})$ と、$W$ と $\varepsilon$ の性質」にした。
+  - Lean・SageMath の注記と `lean/docs/ch011`・`ch012` の正本のファイル名を直した。別のエージェントのレビューを経た（指摘 6 件。SageMath の (2) を固有値分解に依らない作り方に直し、ゴールの主張の $K_1,K_2$・$W$ の成分・$Z$ に ℝ に住む理由を添え、011 の見出しと Lean の import の位置を直した。
+    章の依存関係の図の食い違いは下の「未確定」へ引き継いだ）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の六番目の章「$V^{(+)}$ の最大固有値に属する固有ベクトル」を組み直した。
   棚卸しでこの章に割り当てた 15 項を、すべて `018_even_sector_closing.ts` から新しいファイル `content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の章見出しの下へ
   棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $V^{(+)}$ の固有値の章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（下の言い回しの直しを除く）。
@@ -1223,12 +1236,15 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の七番目の章：部「熱力学極限」の最初の章「$N\to\infty$ の極限と最大固有値 $c(M)$」に割り当てた 9 項
-（棚卸し `parts` の三番目の部の最初の章の `dependencyOrder`。`011_max_eigenvalue.ts` に 8 項、`012_free_energy.ts` に 1 項）を、新しいファイルの部見出し「熱力学極限」・章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の最大固有値に属する固有ベクトルの章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の八番目の章：部「熱力学極限」の二番目の章「$M\to\infty$ の極限と閉形式」に割り当てた 9 項
+（棚卸し `parts` の三番目の部の二番目の章の `dependencyOrder`。`011_max_eigenvalue.ts` に 5 項、`012_free_energy.ts` に 2 項、`018_even_sector_closing.ts` に 2 項）を、新しいファイルの章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の $N\to\infty$ の極限の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする（$\Lambda^{(1/2)}_M\le c(M)\le2\Lambda^{(1/2)}_M$ を主張するブロックが無いことに注意。下の「未確定」）。
 
 ## 未確定
 
+- **章の依存関係の図（冒頭の章立ての説明ページ）に、$V^{(+)}$ の固有値の章 → $N\to\infty$ の極限の章の矢印が無い（2026-10-31 のレビューの指摘。作業の順序の六番目で扱う）。**
+  $N\to\infty$ の極限の章の `W_is_real_symmetric_positive_definite` の証明が、$V^{(+)}$ の固有値の章の `iH_is_real_symmetric` を引いている。前方参照ではないが、図（`content/chapter_organization.ts` の edges と章立て案の図）は
+  この章の入り口を射影の章からの矢印だけにしており、「射影の章のあとで流れが二つに分かれる」という説明も本文と合わない。図と説明を本文に合わせるか、`iH_is_real_symmetric` の Step 1・Step 3 の内容の置き場を見直すかを、作業の順序の六番目で決める。
 - **$\gamma(\theta)$（$\theta\in\mathbb R$）の定義を主張から分ける（2026-10-31 のレビューの指摘。章ごとの組み直しの後、作業の順序の五番目の前に行う）。**
   いまは `gamma1_lower_bound_all_theta` の statement の中で $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$ を定めており、「1 ブロック 1 主張」に反する。
   $\theta=\tilde\theta_\mu$ の $\gamma$ も `def_gamma_theta_tilde_mu` で別に定めているので、記号 $\gamma$ の定義が二重である。$\Lambda^{(\delta)}_M$ の定義の分離と同じ型の作業で、

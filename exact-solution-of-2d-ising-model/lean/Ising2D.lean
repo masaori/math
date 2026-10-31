@@ -103,6 +103,7 @@ import Ising2D.Part012.Claim002_GammaContinuous
 import Ising2D.Part012.Claim003_LimitInNRow
 import Ising2D.Part012.Theorem004_RiemannSumToIntegral
 import Ising2D.Part012.Theorem005_OnsagerFreeEnergy
+import Ising2D.Part012.ClaimPartitionFunctionSandwichAndLimitInNRow
 import Ising2D.NecSuf.PsdCauchySchwarz
 import Ising2D.NecSuf.RayleighMoments
 import Ising2D.Part011.Basic

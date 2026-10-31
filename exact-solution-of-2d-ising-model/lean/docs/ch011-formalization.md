@@ -2,6 +2,8 @@
 
 正本: `structured-latex/content/011_max_eigenvalue.ts`。ただし `def_transfer_matrix_square_root`・`def_symmetrized_transfer_matrix`・
 `symmetrized_transfer_matrix_on_sectors` の正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（2026-10-31 の章立ての組み直しで移した）。
+`Z_equals_trace_of_W`・`W_is_real_symmetric_positive_definite`・`def_rayleigh_sup`・`rayleigh_bounds_operator_norm`・`trace_power_upper_bound`・
+`moment_log_convexity`・`trace_power_sandwich`・`partition_function_sandwich` の正本は `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`（同じく移した）。
 
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `c(M) = max(c_+(M), c_-(M))`（`sector_decomposition_of_rayleigh_sup`）は参照用ノート

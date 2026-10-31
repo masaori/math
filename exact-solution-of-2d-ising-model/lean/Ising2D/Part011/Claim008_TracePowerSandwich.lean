@@ -1,7 +1,7 @@
 /-
 # `c(M)^n ≤ tr(W^n) ≤ 2^M c(M)^n`（具体版）
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich`、ラベル **`trace_power_sandwich`**）
 
 必要十分版: `Ising2D.NecSuf.IsPsdPair.moment_le_pow`（Step 1）、

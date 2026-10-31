@@ -47,6 +47,7 @@ export const TRAILING_CONTENT_FILES = [
   "eigenvalue_problem_diagonalization_and_exponential_form.ts",
   "eigenvalue_problem_eigenvalues_of_V_plus.ts",
   "eigenvalue_problem_eigenvector_of_max_eigenvalue.ts",
+  "thermodynamic_limit_row_limit_and_max_eigenvalue.ts",
 ] as const;
 
 /**

@@ -44,6 +44,7 @@ import blocks_eigenvalue_problem_eigenvector_of_max_eigenvalue from './content/e
 import blocks_eigenvalue_problem_reduction_to_A_theta from './content/eigenvalue_problem_reduction_to_A_theta.ts'
 import blocks_partition_function_projection_and_jordan_wigner from './content/partition_function_projection_and_jordan_wigner.ts'
 import blocks_partition_function_transfer_matrix_representation from './content/partition_function_transfer_matrix_representation.ts'
+import blocks_thermodynamic_limit_row_limit_and_max_eigenvalue from './content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts'
 import notes_000_calculation_formulae from './notes/000_calculation_formulae.ts'
 import notes_001_partition_function_2d_ising from './notes/001_partition_function_2d_ising.ts'
 import notes_002_linear_space_general from './notes/002_linear_space_general.ts'
@@ -84,6 +85,7 @@ export type AllBlocks = [
   ...typeof blocks_eigenvalue_problem_reduction_to_A_theta,
   ...typeof blocks_partition_function_projection_and_jordan_wigner,
   ...typeof blocks_partition_function_transfer_matrix_representation,
+  ...typeof blocks_thermodynamic_limit_row_limit_and_max_eigenvalue,
 ]
 
 /** 全ノート。 */

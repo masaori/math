@@ -1,7 +1,7 @@
 /-
 # `N_row → ∞` の極限: `(1/(M N_row)) log Z → (1/M) log c(M)`
 
-人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
+人手証明（正本は `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`）:
 - `freeenergy_003_claim_limit_in_N_row`（ラベル `limit_of_log_Z_in_N_row`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/LogSqueeze.lean` の

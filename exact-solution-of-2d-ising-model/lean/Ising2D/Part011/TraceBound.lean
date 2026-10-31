@@ -1,7 +1,7 @@
 /-
 # 半正定値行列に対する `xᵀAx ≤ ‖x‖² tr(A)`
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_008_claim_trace_power_sandwich` の Step 3 の途中で使われる補題）
 
 人手証明の該当箇所:

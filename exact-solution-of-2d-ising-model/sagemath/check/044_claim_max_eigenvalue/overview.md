@@ -4,7 +4,8 @@
 
 **対象ラベル**: `partition_function_sandwich` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/011_max_eigenvalue.ts`
+- ファイル: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
+  （`W_has_positive_entries`・`epsilon_commutes_with_W` は `structured-latex/content/011_max_eigenvalue.ts` にある）
 - 併せて検証:
   - `Z_equals_trace_of_W` / `W_is_real_symmetric_positive_definite` / `W_has_positive_entries`
   - `rayleigh_bounds_operator_norm` / `trace_power_sandwich`

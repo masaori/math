@@ -1,7 +1,7 @@
 /-
 # `‖Wx‖ ≤ c(M)‖x‖`（具体版）
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_007_claim_operator_bound`、ラベル **`rayleigh_bounds_operator_norm`**）
 
 必要十分版: `Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm`

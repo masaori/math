@@ -1,7 +1,7 @@
 /-
 # `c(M) := sup_{‖x‖=1} xᵀ W x` の定義
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_006_definition_rayleigh_sup`、ラベル **`def_rayleigh_sup`**）
 
 人手証明のとおり、**`c(M)` は最大固有値ではなく Rayleigh 商の上限として定義する。**

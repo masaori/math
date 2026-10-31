@@ -1356,6 +1356,7 @@ targets=(
   Ising2D.VPlusData.epsilon_mul_Qproj_univ
   Ising2D.VPlusData.mem_evenSector_of_mem_range_univ
   Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus
+  Ising2D.partition_function_sandwich_and_limit_in_N_row
   Ising2D.cvec
   Ising2D.cvec_ne_zero
   Ising2D.star_cvec

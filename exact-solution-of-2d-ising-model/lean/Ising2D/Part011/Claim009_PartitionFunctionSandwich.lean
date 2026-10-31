@@ -1,7 +1,7 @@
 /-
 # 分配関数の挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 （`maxeig_009_claim_partition_function_sandwich`、ラベル **`partition_function_sandwich`**）
 
 人手証明は `Z_equals_trace_of_W` と `trace_power_sandwich` を合わせるだけなので、

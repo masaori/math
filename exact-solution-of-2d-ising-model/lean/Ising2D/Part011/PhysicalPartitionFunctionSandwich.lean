@@ -6,7 +6,7 @@
 * `maxeig_001_definition_transfer_matrix_square_root`（ラベル **`def_transfer_matrix_square_root`**）
   の「`V_1^{1/2}V_1^{1/2} = V_1`」
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`
 
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
   のうち `B := V_1^{1/2}` と `V_2` についての部分（Step 1・Step 2 と、Step 3 の `V_2 = (2s_2)^{M_col/2}A`）

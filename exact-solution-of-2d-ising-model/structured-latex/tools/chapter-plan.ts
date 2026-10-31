@@ -82,11 +82,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`N\to\infty\text{ の極限と最大固有値 }c(M)` },
         organizationGoalLabel: "chapter_organization_goal_row_limit_and_max_eigenvalue",
-        goalLabels: [
-          "def_rayleigh_sup",
-          "partition_function_sandwich",
-          "limit_of_log_Z_in_N_row",
-        ],
+        goalLabels: ["partition_function_sandwich_and_limit_in_N_row"],
         proposalEntryCount: 9,
       },
       {

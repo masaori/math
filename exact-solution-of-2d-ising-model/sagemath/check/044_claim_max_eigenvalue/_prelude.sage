@@ -1,5 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 対称化転送行列 W = V_1^{1/2} V_2 V_1^{1/2}
+#   structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts と
 #   structured-latex/content/011_max_eigenvalue.ts に対応
 #   V_1 = exp(K_1 D), D = sum_m sigma^z_m sigma^z_{m+1}
 #   V_1^{1/2} = exp(K_1 D / 2)
