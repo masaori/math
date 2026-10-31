@@ -1,7 +1,7 @@
 /-
 # 個数演算子（**必要十分版**）
 
-対応する人手証明のラベル（具体版は `Ising2D/Part009/` 以下）:
+対応する人手証明のラベル（具体版は `Ising2D/RoutesNotAdopted/IntegerMomentum/` 以下）:
 
 - `def_number_operator`（`Ising2D.NecSuf.num`）
 - `number_operator_idempotent`（`Ising2D.NecSuf.num_mul_num`）

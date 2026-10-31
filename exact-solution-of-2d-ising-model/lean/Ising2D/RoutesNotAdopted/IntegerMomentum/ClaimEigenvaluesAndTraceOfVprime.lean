@@ -1,9 +1,11 @@
 /-
 # `V'` の固有値とトレース（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
-- `eigenvalues_of_Vprime`（`eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`）
-- `trace_of_Vprime`（`eigenvalues_of_V_010_claim_trace_of_Vprime`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`（ラベル `eigenvalues_of_Vprime`）
+* もと `eigenvalues_of_V_010_claim_trace_of_Vprime`（ラベル `trace_of_Vprime`）
 
 必要十分版は `Ising2D/NecSuf/JointEigenspace.lean` の
 `NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
@@ -16,7 +18,7 @@
 `γ(θ_μ) ≥ 0` だけである）。`g` が実際に `arccosh(γ_1(θ_μ))` であることは
 008 章の `def_gamma_theta_mu` の内容であり、本章の結論には効かない。
 -/
-import Ising2D.Part009.Claim008_JointEigenspace
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimJointEigenspaceDecomposition
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Analysis.SpecialFunctions.Exponential
 

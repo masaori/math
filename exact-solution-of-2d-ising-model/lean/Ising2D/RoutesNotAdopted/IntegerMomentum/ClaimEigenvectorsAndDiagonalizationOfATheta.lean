@@ -1,10 +1,12 @@
 /-
 # `A(θ)` の固有値・固有ベクトルと対角化 `A = P D P⁻¹`
 
-対応する人手証明（正本は `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
-- `TV1_hatZ_hatY_027_claim_eigenvector_A_theta`（ラベル `eigenvector_of_A_theta`）
-- `TV1_hatZ_hatY_028_claim_P_mu_D_mu`（ラベル `diagonalization_P_D`）
-- `TV1_hatZ_hatY_035_claim_det_A_theta`（ラベル `det_A_theta`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `TV1_hatZ_hatY_027_claim_eigenvector_A_theta`（ラベル `eigenvector_of_A_theta`）
+* もと `TV1_hatZ_hatY_028_claim_P_mu_D_mu`（ラベル `diagonalization_P_D`）
+* もと `TV1_hatZ_hatY_035_claim_det_A_theta`（ラベル `det_A_theta`）
 
 ## 形式化の方針
 

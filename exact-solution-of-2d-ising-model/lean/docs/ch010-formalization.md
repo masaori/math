@@ -28,7 +28,7 @@
 `V2_component_equals_pauli`）、その前提（`def_config_basis_iso`, `sigma_z_diagonal_action`,
 `exp_of_diagonal_matrix`, `two_by_two_transfer_identity`）、分配関数の定義と表式は、人手の本文に
 合わせて部「分配関数」の章「転送行列による表示」（`PartitionFunction/TransferMatrixRepresentation/`）へ置いてある
-（`exp_of_diagonal_matrix` だけは部「数学的道具立て」の項目で、まだ `Part004/` にある）。一覧は `lean/README.md` の
+（`exp_of_diagonal_matrix` だけは部「数学的道具立て」の項目なので `MathematicalTools/MatrixExponentialAndCommutators/` にある）。一覧は `lean/README.md` の
 「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節にある。
 
 ---

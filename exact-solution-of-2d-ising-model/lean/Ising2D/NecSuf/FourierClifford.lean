@@ -9,11 +9,11 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean` |
+| `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimAnticommutatorHatZHatY.lean` |
 | （使う 2 つの材料）`anticommutator_of_Z_and_Y`, `exp_sum` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean`, `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean` |
 
 具体版を本ファイルの必要十分版の特殊化として導出したものは
-`Ising2D/Part007/Claim000_AnticommutatorHatZHatYFromNecSuf.lean` にある。
+`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimAnticommutatorHatZHatYFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

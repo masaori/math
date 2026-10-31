@@ -165,7 +165,7 @@ print(tn - (-tm), abs(g2(tn) - g2(-tm)), g2(tn)*g2(-tn), g2(tm)*g2(-tm))
 Lean 側は **√ という関数を使わず**、`t² = γ₂(θ_μ)γ₂(−θ_μ)` を満たす `t` を引数に取る形で
 形式化してある。この形では t は符号の分だけ決まらないので、μ と ν で同じ側を取ることを
 仮定として持たなければならない。それが
-`lean/Ising2D/Part008/Definition030_Fermi.lean` の仮定
+`lean/Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の仮定
 
 ```
 hbr : (M : ℤ) ∣ (μ + ν) → tν = tμ
@@ -181,7 +181,7 @@ hbr : (M : ℤ) ∣ (μ + ν) → tν = tμ
 - `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi` — `hbr` を仮定した本体
 
 **逆分枝を取ると本当に偽になること**も定理として証明してある
-（`lean/Ising2D/Part008/Claim032_AnticommutatorPsiAbstract.lean`）:
+（`lean/Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimAnticommutatorPsiFromNecSuf.lean`）:
 
 - `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` — `t_ν = −t_μ` のとき
   `[ψ_μ†, ψ_ν†]₊ = I`（本来は 0）

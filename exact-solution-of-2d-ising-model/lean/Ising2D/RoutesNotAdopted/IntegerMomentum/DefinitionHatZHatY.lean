@@ -1,8 +1,11 @@
 /-
 # `hat(Z)` と `hat(Y)` の二定義（離散フーリエ変換）
 
-対応する人手証明:
-`structured-latex/content/004_transfer_matrix.ts` の `<def_hatZ_pm>` と `<def_hatY>`
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `transfer_matrix_010a_definition_hatZ_pm`（ラベル `def_hatZ_pm`）
+* もと `transfer_matrix_010b_definition_hatY`（ラベル `def_hatY`）
 
 原文の定義（`ℳ := {-M, …, -1, 1, …, M}`、`μ ∈ ℳ`）:
 
@@ -16,7 +19,7 @@
 ## 形式化の方針
 
 * 添字 `μ` は `ℤ` のまま扱う（原文の `ℳ` は `ℤ` の部分集合であり、定義式自体は
-  すべての `μ ∈ ℤ` で意味を持つ。`M` 周期性は `Claim012_HatPeriodicity.lean` で述べる）。
+  すべての `μ ∈ ℤ` で意味を持つ。`M` 周期性は `ClaimHatZHatYPeriodicity.lean` で述べる）。
 * サイトの添字は Lean では `Fin M`（`0, …, M-1`）で、原文の `j` は `(j : ℕ) + 1`。
   したがって位相因子は `expPhase M (((j : ℕ) + 1) * μ)`、
   原文の「`j = 1` の項」は Lean の `(j : ℕ) = 0` の項である。

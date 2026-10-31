@@ -151,7 +151,7 @@ print(A(th, c2), A(th, c2+0.3), A(th, 1.0))
 
 ### Lean の裏づけ
 
-`lean/Ising2D/Part008/Claim027_EigenATheta.lean`:
+`lean/Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`:
 
 - `Ising2D.det_AMat` — **無条件**に成り立つ形
   `det A(θ) = γ₁(θ)² + γ₂(θ)γ₂(−θ)`

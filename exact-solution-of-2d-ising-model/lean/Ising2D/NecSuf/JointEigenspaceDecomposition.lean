@@ -14,8 +14,8 @@
   `evenEigen_008_claim_eigenvalues_of_V_plus`）
 
 具体版:
-- 章 009: `Ising2D/Part009/Claim008_JointEigenspace.lean`,
-  `Ising2D/Part009/Claim009_EigenvaluesVprime.lean`
+- 章 009: `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimJointEigenspaceDecomposition.lean`,
+  `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimEigenvaluesAndTraceOfVprime.lean`
 - 章 017: `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimCheckJointEigenspace.lean`,
   `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimEigenvaluesCheckVprime.lean`
 

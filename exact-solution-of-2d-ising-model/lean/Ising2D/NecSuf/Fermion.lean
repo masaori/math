@@ -6,11 +6,11 @@
 （`exact-solution-of-2d-ising-model/README.md` 4 節）。
 
 対応する人手証明（具体版は下記のファイルにあり、本ファイルの必要十分版からの特殊化として
-`Ising2D/Part008/Claim032_AnticommutatorPsiFromNecSuf.lean` で導出される）:
+`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimAnticommutatorPsiFromNecSuf.lean` で導出される）:
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `<anticommutator_of_psi>` | `Ising2D/Part008/Definition030_Fermi.lean` |
+| `<anticommutator_of_psi>` | `Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` |
 | （係数の由来）`<def_fermi>` | 同上 |
 
 ## 必要十分版が何を明らかにするか

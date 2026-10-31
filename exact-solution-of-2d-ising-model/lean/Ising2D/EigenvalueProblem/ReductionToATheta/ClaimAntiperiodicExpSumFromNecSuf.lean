@@ -275,7 +275,7 @@ theorem checkPhase_eq_weight_mul (hM : M ≠ 0) (b μ : ℤ) :
 
 /-- **`half_integer_checkZ_periodicity` を `NecSuf.transform_periodic` の特殊化として導いたもの**。
 
-整数運動量の `hatZ_hatY_M_periodicity`（`Part004/Claim012_HatPeriodicityFromNecSuf.lean`）と
+整数運動量の `hatZ_hatY_M_periodicity`（`RoutesNotAdopted/IntegerMomentum/ClaimHatZHatYPeriodicityFromNecSuf.lean`）と
 **同じ必要十分版**を、重み `w_j = e^{iπ j/M}` に取り替えて使っているだけである。 -/
 theorem checkZ_period_of_necSuf (hM : M ≠ 0) (μ : ℤ) :
     checkZ M (μ + (M : ℤ)) = checkZ M μ := by

@@ -15,7 +15,7 @@
 
 ## 008 章との関係（本章の要点）
 
-008 章の同じ主張（`<ホロノミック量子場_p142下段_1>`、`Part008/Claim012_TVActions.lean` の
+008 章の同じ主張（`<ホロノミック量子場_p142下段_1>`、`RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` の
 `actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form`）と本ファイルの主張は、
 **同じ必要十分版 `NecSuf.exp_conj_two_dim_actsBy` の別の特殊化**である。
 渡す `(α, β, s)` は
@@ -43,7 +43,7 @@
 人手の第 3・第 4 式の証明が `V2_exponential_representation` を引いて `V_2 = (2s_2)^{M/2}exp(iK_2^*H_2)`
 と書く段がこの書き換えにあたる。
 -/
-import Ising2D.Part008.Claim012_TVActions
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimTVActionsOnHatZHatY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExtractTaylor
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus

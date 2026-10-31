@@ -30,7 +30,7 @@
 `V^{(+)}` の固有値は別途 `Ising2D.VPlusData`（`ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` 冒頭）で受け取る。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonAnticommutesWithCheckZY
-import Ising2D.Part009.Claim008_JointEigenspace
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimJointEigenspaceDecomposition
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 
 namespace Ising2D

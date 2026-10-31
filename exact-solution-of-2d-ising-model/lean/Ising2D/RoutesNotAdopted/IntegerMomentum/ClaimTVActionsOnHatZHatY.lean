@@ -1,15 +1,16 @@
 /-
 # 具体版: `T_{(V_1^{(±)})^{1/2}}`, `T_{V_2}`, `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用
 
-対応する人手証明のラベル（正本は `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`）:
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
 
-* **`<nesting_of_commutator_of_H_and_Z>`**（`TV1_hatZ_hatY_002_claim_nesting_commutator`）
+* もと `TV1_hatZ_hatY_002_claim_nesting_commutator`（ラベル `nesting_of_commutator_of_H_and_Z`）
   — `n` 重の入れ子交換子の偶奇による閉じた形
-* **`<extract_taylor_coefficient_of_Z_Y>`**（`TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）
+* もと `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`（ラベル `extract_taylor_coefficient_of_Z_Y`）
   — 上の級数和が `cosh K_1`, `i e^{-iθ_μ} sinh K_1` 等になること
-* **`<ホロノミック量子場_p142下段_1>`**（`TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
+* もと `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（ラベル `ホロノミック量子場_p142下段_1`）
   — `T_{(V_1^{(±)})^{1/2}}`, `T_{V_2}` の作用行列が `B_1(θ_μ)`, `B_2` であること
-* **`<T_V_hatZ_hatY>`**（`TV1_hatZ_hatY_018_claim_T_V_action`）
+* もと `TV1_hatZ_hatY_018_claim_T_V_action`（ラベル `T_V_hatZ_hatY`）
   — `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(2πμ/M)`
 
 **必要十分版は `Ising2D/NecSuf/TVAction.lean`**（名前空間 `Ising2D.NecSuf`）。
@@ -18,7 +19,7 @@
 ## このファイルで解消した「未証明の穴」
 
 `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の `TV_hatZ_hatY_of_action` /
-`TV_hatZ_hatY_of_action'`、および `Part008/Definition030_Fermi.lean` の
+`TV_hatZ_hatY_of_action'`、および `RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の
 `TV_psiDag_of_action` / `TV_psi_of_action` は、`ActsBy`（原文の行ベクトル記法）を
 **明示的な仮定**として持っていた。本ファイルでその仮定を証明して除去し、
 `TV_hatZ_hatY`（原文 `<T_V_hatZ_hatY>`）と
@@ -58,7 +59,7 @@
 （すなわち `H_1^{(-)}` と `hat(Z)_μ^{(-)}` の組）を選んで適用する」と明記している。
 Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引数 `η` が原文の `∓1`）
 なので、本ファイルでは一貫して `η = 1` を使う。`<commutator_of_H_and_Z_Y>` のうち
-**偽であることが判明している (2)(5)**（`Part008/Claim001_CommutatorHZY.lean` 冒頭参照）は
+**偽であることが判明している (2)(5)**（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` 冒頭参照）は
 `hat(Z)^{(∓)}` すなわち逆符号の組についての式なので、**本ファイルの経路では一切使わない**。
 
 ## 残っている仮定について
@@ -69,10 +70,10 @@ Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引�
 同様に `c_1 = cosh 2K_1` 等の `IsingConst` の成分と `K_1, K_2^*` の関係も仮定として持つ。
 -/
 import Ising2D.NecSuf.TVAction
-import Ising2D.Part008.Claim001_CommutatorHZY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
-import Ising2D.Part008.Definition030_Fermi
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 
 namespace Ising2D
 
@@ -272,7 +273,7 @@ variable (K : IsingConst)
 
 /-- **原文 `<commutation_V_psi>` 第 1 式（無条件版）**: `T_{(V)}(ψ_μ^†) = λ_{+,μ} ψ_μ^†`。
 
-`Part008/Definition030_Fermi.lean` の `TV_psiDag_of_action` が持っていた
+`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の `TV_psiDag_of_action` が持っていた
 `ActsBy` の仮定 `hT` を `TV_hatZ_hatY` で埋めた形。 -/
 theorem TV_psiDag (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 : ℝ} (hs2 : 0 < s2)
     (ht : t ^ 2 = gamma2 K (thetaMu M μ) * gamma2 K (-thetaMu M μ))

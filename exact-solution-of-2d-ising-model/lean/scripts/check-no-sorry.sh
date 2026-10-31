@@ -191,31 +191,6 @@ targets=(
   Ising2D.expPhase_eq_one_iff
   Ising2D.expPhase_sum
   Ising2D.dvd_sub_iff_eq
-  Ising2D.hatZMinus_eq
-  Ising2D.hatZPlus_eq_hatZMinus_sub
-  Ising2D.expPhase_add_mul_natCast
-  Ising2D.hatZ_periodic
-  Ising2D.hatY_periodic
-  Ising2D.hatZMinus_M_eq_neg_M
-  Ising2D.hatY_M_eq_neg_M
-  Ising2D.inverse_dft
-  Ising2D.recover_Y
-  Ising2D.recover_Z
-  Ising2D.Y_eq_inverse_dft
-  Ising2D.Z_eq_inverse_dft
-  Ising2D.acomm_sum_smul_clifford
-  Ising2D.acomm_sum_smul_zero
-  Ising2D.acomm_Z_Z_clifford
-  Ising2D.acomm_Y_Y_clifford
-  Ising2D.expPhase_site_mul
-  Ising2D.acomm_hatZ_hatZ_same
-  Ising2D.acomm_hatZ_hatZ_opp
-  Ising2D.acomm_hatZ_hatY
-  Ising2D.acomm_hatY_hatZ
-  Ising2D.acomm_hatY_hatY
-  Ising2D.acomm_hatZPlus_hatZPlus
-  Ising2D.acomm_hatZMinus_hatZMinus
-  Ising2D.acomm_hatZPlus_hatZMinus
   Ising2D.nextSite
   Ising2D.nextSite_val_of_lt
   Ising2D.nextSite_val_of_last
@@ -259,66 +234,9 @@ targets=(
   Ising2D.gamma2_eq_zero_iff
   Ising2D.gamma2_eq_zero_iff_of_s2star_ne_zero
   Ising2D.sin_thetaMu_eq_zero_iff
-  Ising2D.charPoly_expand
-  Ising2D.charPoly_root
-  Ising2D.charPoly_factor
-  Ising2D.AMat_mulVec_eigen
-  "Ising2D.AMat_mulVec_eigen'"
-  Ising2D.AMat_mulVec_col_pos
-  Ising2D.AMat_mulVec_col_neg
-  Ising2D.AMat_of_gamma2_eq_zero
-  Ising2D.det_AMat
-  Ising2D.gamma2_mul_gamma2_neg
-  Ising2D.det_AMat_eq_one
-  Ising2D.gamma1_sq_eq_one_of_gamma2_eq_zero
-  Ising2D.lambda_mul_lambda
-  Ising2D.det_Pmat
-  Ising2D.det_Pmat_ne_zero
-  Ising2D.AMat_mul_Pmat
-  Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv
-  Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv
-  Ising2D.acomm_lin2
-  Ising2D.acomm_hatZMinus_hatY_lin2
-  Ising2D.sqrtM
-  Ising2D.sqrtM_ne_zero
-  Ising2D.sqrtM_sq
-  Ising2D.psiDag
-  Ising2D.psi
-  Ising2D.psiDag_eq
-  Ising2D.psi_eq
-  Ising2D.t_ne_zero
-  Ising2D.gamma2_neg_mul_gamma2_neg_of_dvd
-  Ising2D.t_sq_eq_of_dvd
-  Ising2D.acomm_psiDag_psiDag
-  Ising2D.acomm_psi_psi
-  Ising2D.acomm_psiDag_psi
-  Ising2D.Pmat_col_zero
-  Ising2D.Pmat_col_one
-  Ising2D.AMat_mulVec_Pmat_col_zero
-  Ising2D.AMat_mulVec_Pmat_col_one
-  Ising2D.Dmat_zero_zero
-  Ising2D.Dmat_one_one
-  Ising2D.TV_psiDag_of_action
-  Ising2D.TV_psi_of_action
-  Ising2D.TV_psiDag_psi_of_action
   Ising2D.NecSuf.acomm_lincomb
   Ising2D.NecSuf.acomm_lincomb_clifford
   Ising2D.NecSuf.car_of_coeffs
-  Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf
-  Ising2D.psi_eq_neg_coeff
-  Ising2D.psi_coeff_identities
-  Ising2D.acomm_psi_relations_of_car
-  Ising2D.acomm_psiDag_psiDag_of_opposite_branch
-  Ising2D.acomm_psiDag_psi_of_opposite_branch
-  Ising2D.expPhase_congr
-  Ising2D.hatZ_congr
-  Ising2D.hatY_congr
-  Ising2D.nextSite_val
-  Ising2D.dvd_succ_sub_iff_eq_nextSite
-  Ising2D.firstSign_nextSite
-  Ising2D.H1_eq_hat_sum
-  Ising2D.H2_eq_hat_sum
-  Ising2D.H2_eq_hatZMinus_sum
   Ising2D.NecSuf.lie_smul_left
   Ising2D.NecSuf.lie_sum_smul_left
   Ising2D.NecSuf.lie_mul_of_acomm_smul_one
@@ -329,30 +247,6 @@ targets=(
   Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z
   "Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z'"
   Ising2D.NecSuf.CliffordTriple.lie_sum_zy_y
-  Ising2D.expPhase_ne_zero
-  Ising2D.deltaMod_neg
-  Ising2D.deltaMod_succ_eq
-  Ising2D.deltaMod_val_eq
-  Ising2D.sum_deltaMod_select
-  Ising2D.sum_hatY
-  Ising2D.sum_expPhase_neg_smul_hatY
-  Ising2D.hatCliffordTriple
-  Ising2D.lie_H1_hatZ_same
-  Ising2D.lie_H1_hatY
-  Ising2D.lie_H1_hatZ_opp
-  Ising2D.lie_H2_hatZMinus
-  Ising2D.lie_H2_hatY
-  Ising2D.lie_H2_hatZPlus
-  Ising2D.Y_ne_zero
-  Ising2D.lie_H1_hatZ_opp_ne_orig
-  Ising2D.lie_H2_hatZPlus_ne_orig
-  Ising2D.lie_H1Plus_hatZPlus
-  Ising2D.lie_H1Minus_hatZMinus
-  Ising2D.lie_H1Plus_hatY
-  Ising2D.lie_H1Minus_hatY
-  "Ising2D.lie_H2_hatZMinus'"
-  "Ising2D.lie_H2_hatY'"
-  "Ising2D.lie_H2_hatZPlus'"
   Ising2D.NecSuf.sinhc
   Ising2D.NecSuf.sinhc_zero
   Ising2D.NecSuf.sinhc_of_ne_zero
@@ -391,22 +285,6 @@ targets=(
   Ising2D.NecSuf.conj_smul_eq
   Ising2D.NecSuf.twoDimConjMat
   Ising2D.NecSuf.exp_conj_two_dim_actsBy
-  Ising2D.expPhase_eq_exp_neg_thetaMu
-  Ising2D.expPhase_neg_eq_exp_thetaMu
-  Ising2D.B1mat_eq_twoDimConjMat
-  Ising2D.B2mat_eq_twoDimConjMat
-  Ising2D.actsBy_TConj_matExpUnits
-  Ising2D.actsBy_TConj_smulUnits
-  Ising2D.ad_V1pmHalf_hatZMinus
-  Ising2D.ad_V1pmHalf_hatY
-  Ising2D.actsBy_TConj_V1pmHalf
-  Ising2D.ad_V2H2Form_hatZMinus
-  Ising2D.ad_V2H2Form_hatY
-  Ising2D.actsBy_TConj_V2H2Form
-  Ising2D.TV_hatZ_hatY
-  Ising2D.TV_psiDag
-  Ising2D.TV_psi
-  Ising2D.TV_psiDag_psi
   Ising2D.NecSuf.acomm_sum_smul_clifford_left
   Ising2D.NecSuf.linearIndependent_of_clifford_necSuf
   Ising2D.smul_one_faithful_tensorPow
@@ -422,12 +300,6 @@ targets=(
   Ising2D.NecSuf.acomm_fourier_clifford_weights
   Ising2D.NecSuf.acomm_fourier_clifford
   Ising2D.NecSuf.acomm_fourier_clifford_flip
-  Ising2D.hatZ_eq_weighted_zetaM
-  Ising2D.hatY_eq_weighted_zetaM
-  Ising2D.deltaMod_eq_ite_neg
-  Ising2D.acomm_hatZ_hatZ_same_of_necSuf
-  Ising2D.acomm_hatY_hatY_of_necSuf
-  Ising2D.acomm_hatZPlus_hatZMinus_of_necSuf
   Ising2D.NecSuf.acomm_of_single_site
   Ising2D.NecSuf.sq_eq_one_of_site_sq_eq_one
   Ising2D.NecSuf.jwStr
@@ -444,14 +316,6 @@ targets=(
   Ising2D.NecSuf.zpow_mul_add_natCast
   Ising2D.NecSuf.transform_periodic
   Ising2D.NecSuf.inverse_dft_necSuf
-  Ising2D.expPhase_eq_zetaM_zpow_freq
-  Ising2D.hatZ_periodic_of_necSuf
-  Ising2D.hatY_periodic_of_necSuf
-  Ising2D.hatZMinus_M_eq_neg_M_of_necSuf
-  Ising2D.hatY_M_eq_neg_M_of_necSuf
-  Ising2D.inverse_dft_of_necSuf
-  Ising2D.recover_Y_of_necSuf
-  Ising2D.recover_Z_of_necSuf
   Ising2D.configBasisIso
   Ising2D.sgn_configBasisIso
   Ising2D.NecSuf.prod_entry_eq_zero_of_ne
@@ -818,7 +682,7 @@ targets=(
   Ising2D.projPlus_mulVec_eigen
   Ising2D.projMinus_mulVec_eigen
   Ising2D.sector_decomposition_of_rayleigh_sup
-  # --- 009 章（転送行列 V の固有値）---
+  # --- 数演算子と同時固有空間の必要十分版（NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean。章「V^{(+)} の固有値」と整数運動量の経路の記録が共有）と、それに続く各章 ---
   Ising2D.NecSuf.num_mul_num
   Ising2D.NecSuf.ann_mul_cre
   Ising2D.NecSuf.commute_cre_num
@@ -832,36 +696,6 @@ targets=(
   Ising2D.NecSuf.two_pow_smul_tau_projOn
   Ising2D.NecSuf.pow_mul_eq_of_mul_eq_smul
   Ising2D.NecSuf.exp_mul_eq_of_mul_eq_smul
-  Ising2D.tensorPow_two_torsion_free
-  Ising2D.FermiSetup.acomm_cre_cre
-  Ising2D.FermiSetup.acomm_ann_ann
-  Ising2D.FermiSetup.acomm_cre_ann
-  Ising2D.FermiSetup.cre_sq
-  Ising2D.FermiSetup.ann_sq
-  Ising2D.FermiSetup.ann_mul_cre
-  Ising2D.FermiSetup.nOp_mul_self
-  Ising2D.FermiSetup.commute_cre_nOp
-  Ising2D.FermiSetup.commute_ann_nOp
-  Ising2D.FermiSetup.commute_nOp_nOp
-  Ising2D.FermiSetup.Qproj_mul_self
-  Ising2D.FermiSetup.Qproj_mul_Qproj_of_ne
-  Ising2D.FermiSetup.sum_Qproj
-  Ising2D.FermiSetup.nOp_mul_Qproj
-  Ising2D.FermiSetup.two_pow_mul_trace_Qproj
-  Ising2D.FermiSetup.card_I_le
-  Ising2D.FermiSetup.trace_Qproj
-  Ising2D.FermiSetup.finrank_range_Qproj
-  Ising2D.FermiSetup.sum_Qproj_mulVec
-  Ising2D.FermiSetup.eq_zero_of_sum_eq_zero
-  Ising2D.FermiSetup.Xop_mul_Qproj
-  Ising2D.FermiSetup.Vprime_mul_Qproj
-  Ising2D.FermiSetup.Vprime_mulVec_of_mem_range
-  Ising2D.FermiSetup.Vprime_mul_Vprime_neg
-  Ising2D.FermiSetup.Vprime_neg_mul_Vprime
-  Ising2D.FermiSetup.sum_exp_gval
-  Ising2D.FermiSetup.trace_Vprime
-  Ising2D.FermiSetup.trace_Vprime_inv
-  Ising2D.FermiSetup.trace_Vprime_pos
   Ising2D.Uflip_mul_inv
   Ising2D.UflipInv_mul
   Ising2D.Uflip_conj_Z
@@ -871,17 +705,6 @@ targets=(
   Ising2D.Uflip_conj_S1
   Ising2D.Uflip_conj_S2
   Ising2D.Uflip_conj_matExp
-  Ising2D.VmatInv_mul_Vmat
-  Ising2D.Vmat_mul_VmatInv
-  Ising2D.trace_Vmat
-  Ising2D.trace_exp_neg_eq_tau
-  Ising2D.trace_VmatInv
-  Ising2D.constant_c_value
-  Ising2D.Vmat_mul_Qproj
-  Ising2D.bigLambda_pos
-  Ising2D.bigLambda_le_max
-  Ising2D.bigLambda_min_le
-  Ising2D.bigLambda_max_mul_min
   Ising2D.NecSuf.pow_half_eq_neg_one
   Ising2D.NecSuf.sq_isPrimitiveRoot
   Ising2D.NecSuf.zpow_mul_natCast
@@ -889,10 +712,6 @@ targets=(
   Ising2D.NecSuf.sum_zpow_antiperiodic
   Ising2D.NecSuf.inverse_dft_antiperiodic
   Ising2D.NecSuf.acomm_antiperiodic_fourier_clifford
-  Ising2D.lie_H2_hatZMinus_eq
-  Ising2D.lie_H2_hatZPlus_eq
-  Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus
-  Ising2D.lie_H2_hatZPlus_ne_hatZMinus
   Ising2D.expPhase_zpow
   Ising2D.expPhase_two_mul
   Ising2D.expPhase_two_mul_half
@@ -1637,12 +1456,6 @@ targets=(
   Ising2D.NecSuf.isInternal_range_matrix_proj
   Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj
   Ising2D.NecSuf.exists_conj_diagonal_of_matrix_proj
-  Ising2D.FermiSetup.isInternal_range_Qproj
-  Ising2D.FermiSetup.iSup_range_Qproj_eq_top
-  Ising2D.FermiSetup.iSupIndep_range_Qproj
-  Ising2D.FermiSetup.exists_eigenBasis_Vprime
-  Ising2D.FermiSetup.exists_conj_diagonal_Vprime
-  Ising2D.FermiSetup.exists_conj_diagonal_Vmat
   Ising2D.CheckFermiSetup.isInternal_range_Qproj
   Ising2D.CheckFermiSetup.iSup_range_Qproj_eq_top
   Ising2D.CheckFermiSetup.iSupIndep_range_Qproj
@@ -1650,6 +1463,194 @@ targets=(
   Ising2D.CheckFermiSetup.exists_conj_diagonal_Vprime
   Ising2D.exists_eigenBasis_VPlus
   Ising2D.exists_conj_diagonal_VPlus
+  # --- 本文から参照用ノートへ退避した整数運動量の経路の形式化の記録（RoutesNotAdopted/IntegerMomentum/。必要十分版は NecSuf/DiscreteFourier.lean・NecSuf/FourierClifford.lean・NecSuf/CommutatorClifford.lean・NecSuf/TVAction.lean・NecSuf/Fermion.lean・NecSuf/NumberOperator.lean・NecSuf/JointEigenspace.lean・NecSuf/JointEigenspaceDecomposition.lean）---
+  Ising2D.hatZMinus_eq
+  Ising2D.hatZPlus_eq_hatZMinus_sub
+  Ising2D.expPhase_add_mul_natCast
+  Ising2D.hatZ_periodic
+  Ising2D.hatY_periodic
+  Ising2D.hatZMinus_M_eq_neg_M
+  Ising2D.hatY_M_eq_neg_M
+  Ising2D.inverse_dft
+  Ising2D.recover_Y
+  Ising2D.recover_Z
+  Ising2D.Y_eq_inverse_dft
+  Ising2D.Z_eq_inverse_dft
+  Ising2D.acomm_sum_smul_clifford
+  Ising2D.acomm_sum_smul_zero
+  Ising2D.acomm_Z_Z_clifford
+  Ising2D.acomm_Y_Y_clifford
+  Ising2D.expPhase_site_mul
+  Ising2D.acomm_hatZ_hatZ_same
+  Ising2D.acomm_hatZ_hatZ_opp
+  Ising2D.acomm_hatZ_hatY
+  Ising2D.acomm_hatY_hatZ
+  Ising2D.acomm_hatY_hatY
+  Ising2D.acomm_hatZPlus_hatZPlus
+  Ising2D.acomm_hatZMinus_hatZMinus
+  Ising2D.acomm_hatZPlus_hatZMinus
+  Ising2D.charPoly_expand
+  Ising2D.charPoly_root
+  Ising2D.charPoly_factor
+  Ising2D.AMat_mulVec_eigen
+  "Ising2D.AMat_mulVec_eigen'"
+  Ising2D.AMat_mulVec_col_pos
+  Ising2D.AMat_mulVec_col_neg
+  Ising2D.AMat_of_gamma2_eq_zero
+  Ising2D.det_AMat
+  Ising2D.gamma2_mul_gamma2_neg
+  Ising2D.det_AMat_eq_one
+  Ising2D.gamma1_sq_eq_one_of_gamma2_eq_zero
+  Ising2D.lambda_mul_lambda
+  Ising2D.det_Pmat
+  Ising2D.det_Pmat_ne_zero
+  Ising2D.AMat_mul_Pmat
+  Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv
+  Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv
+  Ising2D.acomm_lin2
+  Ising2D.acomm_hatZMinus_hatY_lin2
+  Ising2D.sqrtM
+  Ising2D.sqrtM_ne_zero
+  Ising2D.sqrtM_sq
+  Ising2D.psiDag
+  Ising2D.psi
+  Ising2D.psiDag_eq
+  Ising2D.psi_eq
+  Ising2D.t_ne_zero
+  Ising2D.gamma2_neg_mul_gamma2_neg_of_dvd
+  Ising2D.t_sq_eq_of_dvd
+  Ising2D.acomm_psiDag_psiDag
+  Ising2D.acomm_psi_psi
+  Ising2D.acomm_psiDag_psi
+  Ising2D.Pmat_col_zero
+  Ising2D.Pmat_col_one
+  Ising2D.AMat_mulVec_Pmat_col_zero
+  Ising2D.AMat_mulVec_Pmat_col_one
+  Ising2D.Dmat_zero_zero
+  Ising2D.Dmat_one_one
+  Ising2D.TV_psiDag_of_action
+  Ising2D.TV_psi_of_action
+  Ising2D.TV_psiDag_psi_of_action
+  Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf
+  Ising2D.psi_eq_neg_coeff
+  Ising2D.psi_coeff_identities
+  Ising2D.acomm_psi_relations_of_car
+  Ising2D.acomm_psiDag_psiDag_of_opposite_branch
+  Ising2D.acomm_psiDag_psi_of_opposite_branch
+  Ising2D.expPhase_congr
+  Ising2D.hatZ_congr
+  Ising2D.hatY_congr
+  Ising2D.nextSite_val
+  Ising2D.dvd_succ_sub_iff_eq_nextSite
+  Ising2D.firstSign_nextSite
+  Ising2D.H1_eq_hat_sum
+  Ising2D.H2_eq_hat_sum
+  Ising2D.H2_eq_hatZMinus_sum
+  Ising2D.expPhase_ne_zero
+  Ising2D.deltaMod_neg
+  Ising2D.deltaMod_succ_eq
+  Ising2D.deltaMod_val_eq
+  Ising2D.sum_deltaMod_select
+  Ising2D.sum_hatY
+  Ising2D.sum_expPhase_neg_smul_hatY
+  Ising2D.hatCliffordTriple
+  Ising2D.lie_H1_hatZ_same
+  Ising2D.lie_H1_hatY
+  Ising2D.lie_H1_hatZ_opp
+  Ising2D.lie_H2_hatZMinus
+  Ising2D.lie_H2_hatY
+  Ising2D.lie_H2_hatZPlus
+  Ising2D.Y_ne_zero
+  Ising2D.lie_H1_hatZ_opp_ne_orig
+  Ising2D.lie_H2_hatZPlus_ne_orig
+  Ising2D.lie_H1Plus_hatZPlus
+  Ising2D.lie_H1Minus_hatZMinus
+  Ising2D.lie_H1Plus_hatY
+  Ising2D.lie_H1Minus_hatY
+  "Ising2D.lie_H2_hatZMinus'"
+  "Ising2D.lie_H2_hatY'"
+  "Ising2D.lie_H2_hatZPlus'"
+  Ising2D.expPhase_eq_exp_neg_thetaMu
+  Ising2D.expPhase_neg_eq_exp_thetaMu
+  Ising2D.B1mat_eq_twoDimConjMat
+  Ising2D.B2mat_eq_twoDimConjMat
+  Ising2D.actsBy_TConj_matExpUnits
+  Ising2D.actsBy_TConj_smulUnits
+  Ising2D.ad_V1pmHalf_hatZMinus
+  Ising2D.ad_V1pmHalf_hatY
+  Ising2D.actsBy_TConj_V1pmHalf
+  Ising2D.ad_V2H2Form_hatZMinus
+  Ising2D.ad_V2H2Form_hatY
+  Ising2D.actsBy_TConj_V2H2Form
+  Ising2D.TV_hatZ_hatY
+  Ising2D.TV_psiDag
+  Ising2D.TV_psi
+  Ising2D.TV_psiDag_psi
+  Ising2D.hatZ_eq_weighted_zetaM
+  Ising2D.hatY_eq_weighted_zetaM
+  Ising2D.deltaMod_eq_ite_neg
+  Ising2D.acomm_hatZ_hatZ_same_of_necSuf
+  Ising2D.acomm_hatY_hatY_of_necSuf
+  Ising2D.acomm_hatZPlus_hatZMinus_of_necSuf
+  Ising2D.expPhase_eq_zetaM_zpow_freq
+  Ising2D.hatZ_periodic_of_necSuf
+  Ising2D.hatY_periodic_of_necSuf
+  Ising2D.hatZMinus_M_eq_neg_M_of_necSuf
+  Ising2D.hatY_M_eq_neg_M_of_necSuf
+  Ising2D.inverse_dft_of_necSuf
+  Ising2D.recover_Y_of_necSuf
+  Ising2D.recover_Z_of_necSuf
+  Ising2D.tensorPow_two_torsion_free
+  Ising2D.FermiSetup.acomm_cre_cre
+  Ising2D.FermiSetup.acomm_ann_ann
+  Ising2D.FermiSetup.acomm_cre_ann
+  Ising2D.FermiSetup.cre_sq
+  Ising2D.FermiSetup.ann_sq
+  Ising2D.FermiSetup.ann_mul_cre
+  Ising2D.FermiSetup.nOp_mul_self
+  Ising2D.FermiSetup.commute_cre_nOp
+  Ising2D.FermiSetup.commute_ann_nOp
+  Ising2D.FermiSetup.commute_nOp_nOp
+  Ising2D.FermiSetup.Qproj_mul_self
+  Ising2D.FermiSetup.Qproj_mul_Qproj_of_ne
+  Ising2D.FermiSetup.sum_Qproj
+  Ising2D.FermiSetup.nOp_mul_Qproj
+  Ising2D.FermiSetup.two_pow_mul_trace_Qproj
+  Ising2D.FermiSetup.card_I_le
+  Ising2D.FermiSetup.trace_Qproj
+  Ising2D.FermiSetup.finrank_range_Qproj
+  Ising2D.FermiSetup.sum_Qproj_mulVec
+  Ising2D.FermiSetup.eq_zero_of_sum_eq_zero
+  Ising2D.FermiSetup.Xop_mul_Qproj
+  Ising2D.FermiSetup.Vprime_mul_Qproj
+  Ising2D.FermiSetup.Vprime_mulVec_of_mem_range
+  Ising2D.FermiSetup.Vprime_mul_Vprime_neg
+  Ising2D.FermiSetup.Vprime_neg_mul_Vprime
+  Ising2D.FermiSetup.sum_exp_gval
+  Ising2D.FermiSetup.trace_Vprime
+  Ising2D.FermiSetup.trace_Vprime_inv
+  Ising2D.FermiSetup.trace_Vprime_pos
+  Ising2D.VmatInv_mul_Vmat
+  Ising2D.Vmat_mul_VmatInv
+  Ising2D.trace_Vmat
+  Ising2D.trace_exp_neg_eq_tau
+  Ising2D.trace_VmatInv
+  Ising2D.constant_c_value
+  Ising2D.Vmat_mul_Qproj
+  Ising2D.bigLambda_pos
+  Ising2D.bigLambda_le_max
+  Ising2D.bigLambda_min_le
+  Ising2D.bigLambda_max_mul_min
+  Ising2D.lie_H2_hatZMinus_eq
+  Ising2D.lie_H2_hatZPlus_eq
+  Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus
+  Ising2D.lie_H2_hatZPlus_ne_hatZMinus
+  Ising2D.FermiSetup.isInternal_range_Qproj
+  Ising2D.FermiSetup.iSup_range_Qproj_eq_top
+  Ising2D.FermiSetup.iSupIndep_range_Qproj
+  Ising2D.FermiSetup.exists_eigenBasis_Vprime
+  Ising2D.FermiSetup.exists_conj_diagonal_Vprime
+  Ising2D.FermiSetup.exists_conj_diagonal_Vmat
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。

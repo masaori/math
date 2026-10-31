@@ -1,9 +1,10 @@
 /-
 # `hat(Z)` と `hat(Y)` の反交換関係
 
-対応する人手証明:
-`parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ`
-(`<anticommutator_of_hat_Z_and_hat_Y>`)
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `hatZ_hatY_anticommutation_001_claim_anticommutation_relations`（ラベル `anticommutator_of_hat_Z_and_hat_Y`）
 
 原文の主張（複号同順）:
 
@@ -26,12 +27,12 @@ Lean では 4 つとも証明する。
 3. 残った `∑_{j=1}^M exp(-√-1·2π j(μ+ν)/M) = M δ^M_{μ+ν,0}` を使う
    → `Ising2D.expPhase_sum`（`<exp_sum>`、`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean`）
 
-符号 `(±)` は `hat(Z)` の定義（`Ising2D/Part004/Definition009_HatZHatY.lean`）と同じく
+符号 `(±)` は `hat(Z)` の定義（`Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionHatZHatY.lean`）と同じく
 引数 `η : ℂ`（原文の `∓1`、`j = 1` の項の係数）で表す。本質的に効くのは `η^2 = 1` だけで、
 1. は「同じ `η`」、2. は「`η` と `-η`」の場合にあたる。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
-import Ising2D.Part004.Claim012_HatPeriodicity
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimHatZHatYPeriodicity
 
 namespace Ising2D
 

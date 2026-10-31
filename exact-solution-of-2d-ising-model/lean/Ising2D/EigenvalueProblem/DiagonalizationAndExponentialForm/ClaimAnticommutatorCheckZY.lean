@@ -24,7 +24,7 @@
   `(2μ-1) + (2ν-1) = 2(μ+ν-1)` の `-1` に由来する（この 1 点だけ）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
-import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 
 namespace Ising2D
 

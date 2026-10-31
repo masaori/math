@@ -1,10 +1,10 @@
 /-
 # `H_1^{(±)}, H_2` を `hat(Z), hat(Y)` で表す（**具体版**）
 
-対応する人手証明のラベル: `<H1_H2_via_hatZ_hatY>`
-（`structured-latex/content/004_transfer_matrix.mjs` の
-`transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`。
-旧 Typst は `_old/typst/parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`（ラベル `H1_H2_via_hatZ_hatY`）
 
 原文の主張:
 
@@ -13,7 +13,7 @@
 
 必要十分版はこの主張には無い（この等式は `hat(Z), hat(Y)` の**具体形**＝離散フーリエ変換に
 本質的に依存するので、抽象化する余地がない）。本ファイルの結果を使う交換関係の側は
-具体版 `Ising2D/Part008/Claim001_CommutatorHZY.lean` と
+具体版 `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` と
 必要十分版 `Ising2D/NecSuf/CommutatorClifford.lean` の 2 本立てになっている。
 
 ## 形式化の方針
@@ -21,7 +21,7 @@
 * 添字 `μ` は `ℤ` のまま扱う（既存の `hatZ`, `hatY` と同じ）。原文の site 添字 `j ∈ {1,…,M}` は
   Lean では `j : Fin M` で `(j : ℕ) + 1` が原文の `j`。
 * 原文の `(±)` の符号は、`H1 M η`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）と
-  `hatZ M η μ`（`Definition009_HatZHatY.lean`）が**どちらも原文の `∓1` を `η` で持たせている**
+  `hatZ M η μ`（`DefinitionHatZHatY.lean`）が**どちらも原文の `∓1` を `η` で持たせている**
   ので、`H_1^{(±)}` と `hat(Z)^{(±)}` は同じ `η` で対応する
   （`H1 M η` の最終項の係数 `∓1` と `hat(Z)^{(±)}` の `j = 1` の項の係数 `∓1` が
   原文で同じ記号だから）。この対応が正しいことは、下の `firstSign_nextSite`
@@ -40,7 +40,7 @@ variable {M : ℕ}
 
 /-! ## 位相因子・`hat` の合同による一致（`M` 周期性の一般形）
 
-`Claim012_HatPeriodicity.lean` の `hatZ_periodic` / `hatY_periodic` は「`+M` で不変」の形。
+`ClaimHatZHatYPeriodicity.lean` の `hatZ_periodic` / `hatY_periodic` は「`+M` で不変」の形。
 以下の計算では「添字が `M` を法として合同なら等しい」という形が要るので、定義から直接出す。 -/
 
 /-- `M ∣ a - b` なら位相因子は等しい。 -/

@@ -4,7 +4,7 @@
 
 新規ファイル:
 
-- 具体版: `lean/Ising2D/Part013/`（指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
+- 具体版: `lean/Ising2D/Part013/`（`why_008_applies_only_to_minus_sector` のファイルは整数運動量の経路の記録なので `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ移した。指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
 - 必要十分版: `lean/Ising2D/NecSuf/AntiperiodicFourier.lean`
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 013 の作業記録）。
@@ -17,7 +17,7 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.lie_H2_hatZMinus_eq` | `[H_2, hat(Z)^{(-)}_μ] = -2 hat(Y)_μ`（`Part008` の再掲） | `why_008_applies_only_to_minus_sector` |
+| `Ising2D.lie_H2_hatZMinus_eq` | `[H_2, hat(Z)^{(-)}_μ] = -2 hat(Y)_μ`（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の再掲） | `why_008_applies_only_to_minus_sector` |
 | `Ising2D.lie_H2_hatZPlus_eq` | `[H_2, hat(Z)^{(+)}_μ] = -2 hat(Y)_μ + 4 e^{-iθ_μ} Y_1`（同上） | 同上 |
 | `Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus` | `[H_2, hat(Z)^{(+)}_μ] ≠ -2 hat(Y)_μ`（**本章で新規**） | 同上 |
 | `Ising2D.lie_H2_hatZPlus_ne_hatZMinus` | 2 つの交換子が一致しないこと | 同上 |
@@ -153,7 +153,7 @@
 5. **交換関係 (A)〜(D) も既存の必要十分版の特殊化である。**
    `NecSuf.CliffordTriple`（3 族 `z, z', y` と反交換子の値 `Dz, Dz', Dy`）に
    `z = z' = check(Z)`, `y = check(Y)`, `Dz = Dz' = Dy = 2M δ^M_{μ+ν,1}` を渡すだけで
-   (A)〜(D) が出る。整数運動量版（`Part008/Claim001_CommutatorHZY.lean` の 6 本）は
+   (A)〜(D) が出る。整数運動量版（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の 6 本）は
    同じ構造に `z = hat(Z)^{(±)}`, `z' = hat(Z)^{(∓)}`, `Dz ≠ Dz'` を渡したものである。
 
 6. **「`(+)` セクターで 008 章が壊れる」ことの正体は `Dz ≠ Dz'` の 1 点である。**
@@ -201,6 +201,6 @@ Lean で形式化した主張はいずれもこれと整合し、**本文の誤�
 - `why_008_applies_only_to_minus_sector` の第 2 式
   `[H_2, hat(Z)^{(+)}_μ] = -2 hat(Y)_μ + 4 e^{-i2πμ/M} Y_1` は、
   **008 章の原文 (5) の訂正版**である（008 章の原文は符号と係数を誤っており、
-  `Part008/Claim001_CommutatorHZY.lean` の冒頭コメントに記録がある）。
+  `RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の冒頭コメントに記録がある）。
   013 章の本文は訂正後の値を採用しており、Lean（`Ising2D.lie_H2_hatZPlus`）と一致する。
   したがって 013 章側に誤りは無い。

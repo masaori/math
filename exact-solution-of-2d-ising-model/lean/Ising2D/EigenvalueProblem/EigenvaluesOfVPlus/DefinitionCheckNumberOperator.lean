@@ -37,7 +37,7 @@
   `[ψ̌_μ^†, ψ̌_ν]_+ = δ_{ν, M+1-μ} I`,
   `[ψ̌_μ, ψ̌_ν]_+ = 0`.
 -/
-import Ising2D.Part009.Claim009_EigenvaluesVprime
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.NecSuf.PairedFermion
 

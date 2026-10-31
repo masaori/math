@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、本文から退避した整数運動量の経路の形式化 19 ファイル（旧 `Part004/` の `hat(Z), hat(Y)`、`Part007/`、`Part008/`、`Part009/`、`Part013/Claim001_WhyMinusOnly`）を `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ番号を外した名前で移した（名前空間・主張・証明は不変）。`check-no-sorry.sh` の該当定理は新しい区切りへ集めた。次は (−) セクターの形式化を `RoutesNotAdopted/MinusSector/` へ移す。
+
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」の最後のまとまり「三角関数の評価・有限和・積分」を移した。旧 `Part012/Theorem004_RiemannSumToIntegral` と `Part020/` の 3 本（正弦の初等評価・対数積分の閉形式・正弦を含む積分の両側評価）を `lean/Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/` へ番号を外した名前で移した（名前空間・中身は不変）。`Part012/`・`Part020/` は無くなり、数学的道具立てのファイルはすべて `MathematicalTools/` にある。次は整数運動量の経路の形式化を `RoutesNotAdopted/IntegerMomentum/` へ移す（状態台帳の「次の一歩」）。
 
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「トレース・共役転置・正定値性」を移した。旧 `Part009/Definition001_Trace`・`Part009/Claim013_PositiveDefinite`・`Part011/Claim005_PsdCauchySchwarz` と補助の `Part011/Basic` を `lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` へ番号を外した名前（補助は `RealMatrixBilinearFormAndNorm`）で移した（名前空間・中身は不変）。判定の根拠は状態台帳。次は最後のまとまり「三角関数の評価・有限和・積分」（`Part012/Theorem004_RiemannSumToIntegral` と `Part020/` の 3 本）。worktree では `lake` が PATH に無いことがあるので `~/.elan/bin` を足す。

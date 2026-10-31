@@ -1,10 +1,10 @@
 /-
 # `H_1^{(±)}, H_2` と `hat(Z)_μ^{(±)}, hat(Y)_μ` の交換関係（**具体版**）
 
-対応する人手証明のラベル: `<commutator_of_H_and_Z_Y>`
-（`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
-`TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`。
-旧 Typst は `_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/000_claim_H1_H2とhatZ_hatYの交換関係.typ`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`（ラベル `commutator_of_H_and_Z_Y`）
 
 **必要十分版**は `Ising2D/NecSuf/CommutatorClifford.lean`（名前空間 `Ising2D.NecSuf`、
 同じラベル `<commutator_of_H_and_Z_Y>`）。本ファイルの 6 本はすべて必要十分版
@@ -59,8 +59,8 @@ Lean では「`M` を法として合同なら `hat(Z)`, `hat(Y)`, 位相因子�
 （`hatZ_congr`, `hatY_congr`, `expPhase_congr`）にまとめてある。
 原文の 3 通りの場合分けは、この合同不変性を `μ` の範囲ごとに手で書き下したものにほかならない。
 -/
-import Ising2D.Part004.Claim011_H1H2ViaHat
-import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimH1H2ViaHatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 import Ising2D.NecSuf.CommutatorClifford
 
 namespace Ising2D

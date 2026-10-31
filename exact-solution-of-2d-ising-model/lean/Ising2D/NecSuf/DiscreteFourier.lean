@@ -9,12 +9,12 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `hatZ_hatY_M_periodicity` | `Ising2D/Part004/Claim012_HatPeriodicity.lean` |
-| `recover_Z_Y_from_hatZ_hatY` | `Ising2D/Part004/Claim013_RecoverZY.lean` |
+| `hatZ_hatY_M_periodicity` | `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimHatZHatYPeriodicity.lean` |
+| `recover_Z_Y_from_hatZ_hatY` | `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimRecoverZYFromHatZHatY.lean` |
 
 具体版を本ファイルの必要十分版の特殊化として導出したものは
-`Ising2D/Part004/Claim012_HatPeriodicityFromNecSuf.lean` と
-`Ising2D/Part004/Claim013_RecoverZYFromNecSuf.lean` にある。
+`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimHatZHatYPeriodicityFromNecSuf.lean` と
+`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimRecoverZYFromHatZHatYFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

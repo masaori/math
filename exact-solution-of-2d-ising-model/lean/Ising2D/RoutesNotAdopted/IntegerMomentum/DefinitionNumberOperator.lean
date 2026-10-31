@@ -1,10 +1,12 @@
 /-
 # フェルミオン数演算子（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
-- `def_number_operator`（`eigenvalues_of_V_004_definition_number_operator`）
-- `number_operator_idempotent`（`eigenvalues_of_V_005_claim_number_operator_idempotent`）
-- `number_operators_commute`（`eigenvalues_of_V_006_claim_number_operators_commute`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `eigenvalues_of_V_004_definition_number_operator`（ラベル `def_number_operator`）
+* もと `eigenvalues_of_V_005_claim_number_operator_idempotent`（ラベル `number_operator_idempotent`）
+* もと `eigenvalues_of_V_006_claim_number_operators_commute`（ラベル `number_operators_commute`）
 
 必要十分版は `Ising2D/NecSuf/NumberOperator.lean`。本ファイルの主定理は
 **すべて必要十分版の特殊化として導出する**（`Ising2D.NecSuf.num_mul_num` /
@@ -20,7 +22,7 @@
 「そういう `I` が与えられた」形にして依存を切っている。
 
 `ψ_μ^†` の定義には平方根 `t_μ = √(γ_2(θ_μ)γ_2(-θ_μ))` の**分枝の選択**が要る
-（`Ising2D/Part008/Definition030_Fermi.lean` 冒頭の「原文の穴」参照）。
+（`Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` 冒頭の「原文の穴」参照）。
 本章でも同じく、分枝関数 `t : ℤ → ℂ` と整合条件
 `hbr : M ∣ (a+b) → t b = t a` を仮定として受け取る。
 
@@ -28,7 +30,7 @@
 `Real.arccosh` が無いため、**非負実数値の族 `g : Idx → ℝ` として仮定に持つ**
 （本章が `γ` について使うのは `γ(θ_μ) ≥ 0` だけである）。
 -/
-import Ising2D.Part008.Definition030_Fermi
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.NecSuf.JointEigenspace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace

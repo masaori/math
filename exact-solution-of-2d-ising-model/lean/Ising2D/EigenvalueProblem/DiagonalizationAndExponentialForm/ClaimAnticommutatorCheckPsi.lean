@@ -27,7 +27,7 @@
 ## 008 章との差（原文 Step 1 の指摘の機械的裏づけ）
 
 008 章の `anticommutator_of_psi` では係数に平方根 `√(γ_2(θ_μ)γ_2(-θ_μ))` が入るため、
-`Ising2D/Part008/Definition030_Fermi.lean` は分枝の一致を仮定
+`Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` は分枝の一致を仮定
 `hbr : (M:ℤ) ∣ (μ+ν) → tν = tμ` として持っている。
 
 半整数運動量では係数が `r_μ = |γ_2(θ̃_μ)|`（非負実数）なので、

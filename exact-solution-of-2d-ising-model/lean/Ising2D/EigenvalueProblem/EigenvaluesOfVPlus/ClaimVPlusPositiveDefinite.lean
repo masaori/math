@@ -25,7 +25,7 @@
 これは章 009 では述べられていなかった（章 009 の `V_is_positive_definite` は
 `V^{-1}` の明示形までしか出していない）。
 -/
-import Ising2D.Part009.Claim017_ConstantC
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimConstantCAndEigenvaluesOfV
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
 

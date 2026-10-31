@@ -29,7 +29,7 @@
 
 `(V_1^{(+)})^{1/2}` とその単元は章 010 の `Ising2D.V1plusHalf` / `V1plusHalfUnits`。
 これは符号引数つきの補助の一般形 `V1pmHalf M K1 η` の `η = -1` と定義から一致する
-（`V1plusHalf_eq_V1pmHalf`）。整数運動量の経路（`Part008/Claim012_TVActions.lean`、形式化の記録）は
+（`V1plusHalf_eq_V1pmHalf`）。整数運動量の経路（`RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`、形式化の記録）は
 一般形の `η = 1` を使っており、本章はその `(+)` 版である。
 
 ### `V_2` について

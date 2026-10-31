@@ -30,7 +30,7 @@
   **015 章がこれを無条件に閉じれば、本章の仮定はそのまま消える。**
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
-import Ising2D.Part008.Definition030_Fermi
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 

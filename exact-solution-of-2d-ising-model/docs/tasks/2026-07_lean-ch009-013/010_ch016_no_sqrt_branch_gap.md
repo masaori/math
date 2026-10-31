@@ -11,7 +11,7 @@
     √(γ_2(θ_ν)γ_2(-θ_ν)) = √(γ_2(θ_μ)γ_2(-θ_μ))
 
 を「根号の中身が等しい」ことから使っており、`μ` と `ν` で同じ分枝を取ることが
-自明でないという論点があった（Lean 側では `Ising2D/Part008/Definition030_Fermi.lean` の
+自明でないという論点があった（Lean 側では `Ising2D/RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の
 仮定 `hbr` として明示され、逆分枝では第 1・第 2 式が偽になることが
 `acomm_psiDag_psiDag_of_opposite_branch` / `acomm_psiDag_psi_of_opposite_branch` で
 証明されている）。

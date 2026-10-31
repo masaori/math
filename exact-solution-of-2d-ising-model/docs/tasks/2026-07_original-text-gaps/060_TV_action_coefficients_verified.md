@@ -3,7 +3,7 @@
 **現況: 穴なし。本文の修正は不要。**（調査日 2026-07-26）
 
 `T_V_hatZ_hatY` を「仮定つきの定理」から「無条件の定理」へ閉じる作業
-（Lean 側の `Ising2D/Part008/Claim012_TVActions.lean`）の過程で、原文
+（Lean 側の `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`）の過程で、原文
 `008_TV1_hatZ_hatY_part1.ts` の 4 ブロックの係数を**原文を見ずに独立に導出して
 突き合わせた**。結果、**原文の値はすべて正しかった**。
 
@@ -95,7 +95,7 @@ B_2 = ( cosh 2K_2^*         i sinh 2K_2^* )
 原文 `012` の proof は「本主張では `Ẑ_μ^{(-)}` に作用させるので、`±` はいずれも `-`
 （`H_1^{(-)}` と `Ẑ_μ^{(-)}` の組）を選ぶ」と明記している。この選択は必要かつ十分で、
 **偽であることが判明している (2)(5)**（逆符号の組についての式。
-`lean/Ising2D/Part008/Claim001_CommutatorHZY.lean` 冒頭参照）は
+`lean/Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` 冒頭参照）は
 この経路では一度も使われない。したがって (2)(5) の誤りは `T_V_hatZ_hatY` に波及しない。
 
 ## (3) 検算の根拠（Lean の定理名）

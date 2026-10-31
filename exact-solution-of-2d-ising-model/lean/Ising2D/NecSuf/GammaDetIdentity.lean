@@ -6,7 +6,7 @@
 `Athetatilde_006_claim_det_A`。008 章の `det_A_theta` も同じ計算）
 
 具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimDetATilde.lean`
-（既存の `Ising2D.det_AMat_eq_one`（`Part008/Claim027_EigenATheta.lean`）も具体版）。
+（既存の `Ising2D.det_AMat_eq_one`（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）も具体版）。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 
@@ -30,7 +30,7 @@
 
 は一切効いていない。とくに (iii)（双対関係の帰結）を落とすと恒等式は成り立たない
 （`u` の 1 次の項が相殺しなくなる）。これは 008 章の `det_A_theta` について
-`Part008/Claim027_EigenATheta.lean` が指摘している原文の穴と同じ構造である。
+`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` が指摘している原文の穴と同じ構造である。
 -/
 import Mathlib.Algebra.Ring.Basic
 import Mathlib.Tactic.LinearCombination

@@ -13,7 +13,7 @@
 
 * 人手証明も「008 章 `det_A_theta` の証明と同じ計算であり、`θ` が整数運動量であることを
   どこにも使っていない」と明記している。Lean 側でも既存の `Ising2D.det_AMat_eq_one`
-  （`Part008/Claim027_EigenATheta.lean`、任意の `θ ∈ ℝ`）に `θ := θ~_μ` を代入するだけでよい。
+  （`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`、任意の `θ ∈ ℝ`）に `θ := θ~_μ` を代入するだけでよい。
 * **双対関係が要る点は 008 章と同じ。** `det A(θ) = 1` は `A(θ)` の定義だけからは出ず、
   (iii) `c_2 s_2^* = c_2^*`（双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` の帰結）が要る。
   人手証明 Step 0 は (iii) を `duality_c2_star_eq_s2_star_c2` として引用している。

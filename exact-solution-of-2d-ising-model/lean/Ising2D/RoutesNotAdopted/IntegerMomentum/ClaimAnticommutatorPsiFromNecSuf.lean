@@ -1,13 +1,15 @@
 /-
 # `ψ` の反交換関係 — **必要十分版**と、そこからの具体版の導出、および分枝の必要性
 
-対応する人手証明（正本は `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
-- `TV1_hatZ_hatY_032_claim_anticommutator_psi`（ラベル `anticommutator_of_psi`）
-- 係数の由来: `TV1_hatZ_hatY_030_definition_fermi`（ラベル `def_fermi`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `TV1_hatZ_hatY_032_claim_anticommutator_psi`（ラベル `anticommutator_of_psi`）
+* 係数の由来: もと `TV1_hatZ_hatY_030_definition_fermi`（ラベル `def_fermi`）
 
 ## このファイルの位置づけ（README のゴール設定 4 節「2 本立て」）
 
-`Part008/Definition030_Fermi.lean` にある `acomm_psiDag_psiDag` / `acomm_psiDag_psi` /
+`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` にある `acomm_psiDag_psiDag` / `acomm_psiDag_psi` /
 `acomm_psi_psi` は、人手証明と 1 対 1 に対応する **具体版**（`TensorPow M` の
 `hat(Z)_μ^{(-)}`, `hat(Y)_μ` を直接扱う）である。本ファイルはその **必要十分版**を置き、
 **具体版が必要十分版の特殊化として得られることを実際に導出**する。
@@ -15,19 +17,19 @@
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
 | **必要十分版** | `NecSuf.acomm_lincomb_clifford`, `NecSuf.car_of_coeffs` | ℂ-代数の 4 元 `z, y, z', y'` の反交換関係 `[z,z']₊ = D·1`, `[z,y']₊ = 0`, `[y,z']₊ = 0`, `[y,y']₊ = D·1` と、係数のスカラー恒等式 2 本**だけ**。行列であることも `hat(Z)`, `hat(Y)` の具体形も、`M`・`δ^M`・`γ_2` も使わない |
-| **具体版** | `Definition030_Fermi.lean` の 3 定理。本ファイルの `acomm_psi_relations_of_car` はそれと同じ主張を**必要十分版の系として**導いたもの | 上に `z = hat(Z)_μ^{(-)}`, `y = hat(Y)_μ`, `D = 2Mδ^M_{μ+ν,0}`, `p = i t_μ/(2√M γ_2(-θ_μ))`, `q = 1/(2√M)` を代入 |
+| **具体版** | `DefinitionFermiPsi.lean` の 3 定理。本ファイルの `acomm_psi_relations_of_car` はそれと同じ主張を**必要十分版の系として**導いたもの | 上に `z = hat(Z)_μ^{(-)}`, `y = hat(Y)_μ`, `D = 2Mδ^M_{μ+ν,0}`, `p = i t_μ/(2√M γ_2(-θ_μ))`, `q = 1/(2√M)` を代入 |
 
 必要十分版が明らかにしているのは「**この主張に効いているのは反交換関係と係数の 2 本の恒等式だけ**」
 ということである。逆に、具体版が余計な構造（複素行列であること、テンソル冪であること、
 `γ_2` の具体形）に依存していないことの検査にもなっている。
 持ち込んだ抽象化は ℂ-代数までで、テンソル積の一般論は使っていない。
 
-具体版の反交換関係 `acomm_hatZMinus_hatY_lin2`（`Definition030_Fermi.lean`）が
+具体版の反交換関係 `acomm_hatZMinus_hatY_lin2`（`DefinitionFermiPsi.lean`）が
 必要十分版の特殊化にすぎないことも `acomm_hatZMinus_hatY_lin2_of_necSuf` で確認する。
 
 ## 平方根の分枝の必要性（原文の穴の定量化）
 
-`Definition030_Fermi.lean` の冒頭が述べているとおり、`M ∣ μ+ν` のとき
+`DefinitionFermiPsi.lean` の冒頭が述べているとおり、`M ∣ μ+ν` のとき
 `t_ν = ±t_μ` のどちらであるかは原文の statement からは決まらず、
 逆分枝を取ると結論が破れる。本ファイルではそれを**定理として証明**する:
 
@@ -40,15 +42,15 @@
 なお原文の `√` を「積の値だけで決まる単一値関数」と読めば逆分枝は起こらないので、
 **原文が誤っているわけではない**（statement に分枝の指定が無い、という穴である）。
 -/
-import Ising2D.Part008.Definition030_Fermi
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.NecSuf.Fermion
 
 namespace Ising2D
 
 /-! ## 具体版が必要十分版の特殊化であることの確認 -/
 
-/-- `Definition030_Fermi.lean` の `acomm_hatZMinus_hatY_lin2` は
-必要十分版 `NecSuf.acomm_lincomb_clifford` に `Part007` の 4 つの反交換関係を代入しただけである。 -/
+/-- `DefinitionFermiPsi.lean` の `acomm_hatZMinus_hatY_lin2` は
+必要十分版 `NecSuf.acomm_lincomb_clifford` に `ClaimAnticommutatorHatZHatY.lean` の 4 つの反交換関係を代入しただけである。 -/
 theorem acomm_hatZMinus_hatY_lin2_of_necSuf {M : ℕ} (hM : M ≠ 0) (a b c d : ℂ) (μ ν : ℤ) :
     acomm (a • hatZMinus M μ + b • hatY M μ) (c • hatZMinus M ν + d • hatY M ν)
       = ((a * c + b * d) * (2 * (M : ℂ) * deltaMod M (μ + ν) 0)) • (1 : TensorPow M) :=
@@ -118,7 +120,7 @@ theorem psi_coeff_identities (hM : M ≠ 0)
 
 /-- **原文 `anticommutator_of_psi` の 3 式を、必要十分版 `NecSuf.car_of_coeffs` の系として導いたもの。**
 
-`Definition030_Fermi.lean` の `acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`
+`DefinitionFermiPsi.lean` の `acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`
 と同じ主張であり、**具体版が必要十分版の特殊化で得られる**ことを示している
 （仮定も同じ。ただし `t_ν` 側の平方根条件 `htν` は必要十分版の経路では不要なので現れない）。 -/
 theorem acomm_psi_relations_of_car (hM : M ≠ 0)

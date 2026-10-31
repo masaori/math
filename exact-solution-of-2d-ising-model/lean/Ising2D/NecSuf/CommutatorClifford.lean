@@ -6,11 +6,11 @@
 * `<H1_H2_via_hatZ_hatY>`
   （`structured-latex/content/004_transfer_matrix.mjs` の
   `transfer_matrix_012_claim_H1_H2_via_hatZ_hatY`）— 具体版は
-  `Ising2D/Part004/Claim011_H1H2ViaHat.lean`
+  `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimH1H2ViaHatZHatY.lean`
 * `<commutator_of_H_and_Z_Y>`
   （`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
   `TV1_hatZ_hatY_001_claim_commutator_H_Z_Y`）— 具体版は
-  `Ising2D/Part008/Claim001_CommutatorHZY.lean`
+  `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean`
 
 ## このファイルの目的（`lean/README.md`「具体版と必要十分版の 2 本立て」）
 

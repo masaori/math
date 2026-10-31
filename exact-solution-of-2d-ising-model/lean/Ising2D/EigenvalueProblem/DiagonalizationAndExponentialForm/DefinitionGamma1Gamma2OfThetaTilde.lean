@@ -24,7 +24,7 @@ Lean 側では 008 章の時点で既に `θ ∈ ℝ` 全体の関数として
 `M · θ~_μ = (2μ-1)π`（半整数運動量が `π` の**奇数**倍になること）を用意する。
 これが 015 章全体の要である（整数運動量では `M · θ_μ = 2μπ` で偶数倍）。
 -/
-import Ising2D.Part008.Claim027_EigenATheta
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvectorsAndDiagonalizationOfATheta
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 

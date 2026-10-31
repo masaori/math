@@ -1,8 +1,10 @@
 /-
 # `hat(Z), hat(Y)` から `Z, Y` の復元（離散フーリエ逆変換）
 
-対応する人手証明:
-`parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ` (`<recover_Z_Y_from_hatZ_hatY>`)
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `transfer_matrix_014_claim_recover_Z_Y_from_hatZ_hatY`（ラベル `recover_Z_Y_from_hatZ_hatY`）
 
 原文の主張（各 `m ∈ {1, …, M}` について）:
 
@@ -21,12 +23,12 @@
 原文が `hat(Z)^{(-)}`（一様和の方）でしか復元を述べていない理由もこれで明確になる:
 `hat(Z)^{(+)}` は `j = 1` の項の重みが `-1` なので、この形の逆変換は成り立たない。
 
-添字の読み替えは `Definition009_HatZHatY.lean` と同じ
+添字の読み替えは `DefinitionHatZHatY.lean` と同じ
 （原文の `j, μ, m ∈ {1, …, M}` は Lean の `Fin M` の元 `j` に対して `(j : ℕ) + 1`）。
 位相因子 `exp(√-1 m · 2πμ/M)` は `expPhase M (-(m μ))` である。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
-import Ising2D.Part004.Definition009_HatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionHatZHatY
 
 namespace Ising2D
 

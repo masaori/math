@@ -42,7 +42,7 @@
 内容であり、以前は「ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）が
 未形式化なので証明できない」という理由で仮定に残していた。
 
-**この仮定は現在 `Ising2D/Part008/Claim012_TVActions.lean` で証明されており、
+**この仮定は現在 `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` で証明されており、
 穴は残っていない。** 同ファイルの
 
 * `Ising2D.actsBy_TConj_V1pmHalf` — `hT1` にあたる主張（証明済み）
@@ -50,7 +50,7 @@
 * `Ising2D.TV_hatZ_hatY` — 原文 `T_V_hatZ_hatY` の**無条件版**
 
 を参照すること。証明は `<commutator_of_H_and_Z_Y>` の (1)(3)(4)(6)
-（`Part008/Claim001_CommutatorHZY.lean`）と、`ad X` が 2 次元部分空間を保つ場合の
+（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean`）と、`ad X` が 2 次元部分空間を保つ場合の
 閉じた形（`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean` の `matExp_conj_two_dim_z` / `..._y`）
 だけから通る。必要十分版は `Ising2D/NecSuf/TVAction.lean`。
 

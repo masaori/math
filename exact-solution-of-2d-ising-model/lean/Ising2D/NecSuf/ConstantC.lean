@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル（具体版は
 `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean`、および
-章 009 の `Ising2D/Part009/Claim017_ConstantC.lean` の `constant_c_value`）:
+章 009 の `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimConstantCAndEigenvaluesOfV.lean` の `constant_c_value`）:
 `constant_c_value_even_sector`。
 
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査）

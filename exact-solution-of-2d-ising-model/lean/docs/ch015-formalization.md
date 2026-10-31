@@ -7,7 +7,7 @@
 **008 章で形式化済みの定理の多くは `θ := θ~_μ` を代入するだけで使える**。
 実際、固有ベクトル・対角化・行列式は既存の
 `Ising2D.AMat_mulVec_eigen` / `AMat_mul_Pmat` / `AMat_eq_Pmat_mul_Dmat_mul_inv` /
-`det_AMat_eq_one`（`Part008/Claim027_EigenATheta.lean`）の特殊化として得られ、再証明していない。
+`det_AMat_eq_one`（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）の特殊化として得られ、再証明していない。
 
 **本章に固有で、かつ本章の最大の価値は `γ_2(θ~_μ) ≠ 0` を無条件に閉じたこと**である
 （`Ising2D.gamma2_thetaTilde_ne_zero`）。これにより整数運動量にあった臨界点の例外処理
@@ -117,7 +117,7 @@
    （`sq_absGamma2` / `sq_I_absGamma2`）として述べるので、偏角の計算が不要になる。
    「積が負の実数である」という (3) の内容自体は (2)（`gamma2_mul_gamma2_neg_eq_neg_absSq` と
    `absGamma2_thetaTilde_pos`）で述べてある。この方針は 008 章
-   （`Part008/Claim027_EigenATheta.lean`）と同じである。
+   （`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）と同じである。
 2. **`eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元で尽きること）を独立の定理にしていない。**
    固有値が `λ_±` の 2 つに限ることは `charPoly_factor_thetaTilde`（特性多項式の因数分解）で、
    固有ベクトルが `v_±` のスカラー倍で尽きることは対角化

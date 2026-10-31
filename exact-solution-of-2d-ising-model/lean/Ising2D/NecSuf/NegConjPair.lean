@@ -22,7 +22,7 @@
 
 なお人手証明が `arg^{[0,2π)}` 分岐つきの平方根 `def_sqrt_cc` を経由している (4)(5) は、
 ここでは**平方根関数を使わず**「`(|z|)^2 = -(z w)`」「`(i|z|)^2 = z w`」という
-2 乗の等式として述べる（`Part008/Claim027_EigenATheta.lean` と同じ方針）。
+2 乗の等式として述べる（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` と同じ方針）。
 分岐の選択は「`|z|` と `-|z|` のどちらを取るか」に還元され、人手証明が
 `arg^{[0,2π)}` で固定しているのは前者（非負の方）である。
 -/

@@ -1,9 +1,10 @@
 /-
 # 008 章の議論が `(-)` セクター専用である理由（**具体版**）
 
-対応する人手証明のラベル: `why_008_applies_only_to_minus_sector`
-（`structured-latex/content/013_even_sector_modes.ts` の
-`evensector_001_claim_why_minus_only`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `evensector_001_claim_why_minus_only`（ラベル `why_008_applies_only_to_minus_sector`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/CommutatorClifford.lean`
 （`Ising2D.NecSuf.CliffordTriple.lie_sum_zy_z` / `lie_sum_zy_z'`）。
@@ -25,27 +26,27 @@
 
 ## 形式化の状況
 
-2 つの等式は**すでに `Part008/Claim001_CommutatorHZY.lean` で証明済み**である
+2 つの等式は**すでに `RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` で証明済み**である
 （`Ising2D.lie_H2_hatZMinus`, `Ising2D.lie_H2_hatZPlus`）。013 章の
 `why_008_applies_only_to_minus_sector` は、これに「2 つは一致しない」という
 不等式を足したものなので、本ファイルではその不等式だけを新たに証明する。
 
 なお `lie_H2_hatZPlus` の右辺（`+4 e^{-iθ_μ} Y_1`）は、008 章の原文 (5) の
-**訂正版**である（原文 (5) は符号と係数を誤っている。`Part008/Claim001_CommutatorHZY.lean`
+**訂正版**である（原文 (5) は符号と係数を誤っている。`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean`
 の冒頭コメント参照）。013 章の本文はこの訂正後の値を採用しており、Lean と一致する。
 -/
-import Ising2D.Part008.Claim001_CommutatorHZY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 
 namespace Ising2D
 
 variable {M : ℕ}
 
-/-- **原文第 1 式**: `[H_2, hat(Z)_μ^{(-)}] = -2 hat(Y)_μ`（`Part008` の再掲）。 -/
+/-- **原文第 1 式**: `[H_2, hat(Z)_μ^{(-)}] = -2 hat(Y)_μ`（`ClaimCommutatorHAndHatZHatY.lean` の再掲）。 -/
 theorem lie_H2_hatZMinus_eq (hM : M ≠ 0) (μ : ℤ) :
     ⁅H2 M, hatZMinus M μ⁆ = (-2 : ℂ) • hatY M μ :=
   lie_H2_hatZMinus hM μ
 
-/-- **原文第 2 式**: `[H_2, hat(Z)_μ^{(+)}] = -2 hat(Y)_μ + 4 e^{-i2πμ/M} Y_1`（`Part008` の再掲）。 -/
+/-- **原文第 2 式**: `[H_2, hat(Z)_μ^{(+)}] = -2 hat(Y)_μ + 4 e^{-i2πμ/M} Y_1`（`ClaimCommutatorHAndHatZHatY.lean` の再掲）。 -/
 theorem lie_H2_hatZPlus_eq (hM : M ≠ 0) (μ : ℤ) :
     ⁅H2 M, hatZPlus M μ⁆
       = (-2 : ℂ) • hatY M μ + (4 * expPhase M μ) • Y (firstSite M hM) :=

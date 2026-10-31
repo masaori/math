@@ -2,7 +2,7 @@
 
 対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック。章立ての組み直しで、`iH_is_real_symmetric`・`sign_flip_conjugation` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った）
 
-- 具体版: `Ising2D/Part009/`（`def_trace`・`trace_basic_properties`・`trace_of_idempotent` の `DefinitionTrace.lean` と、`def_hermitian_positive_definite`・`star_preserves_norm_and_limits`・`exp_hermitian_is_positive_definite`・`iH_is_real_symmetric` の `ClaimPositiveDefinite.lean` は、数学的道具立て「トレース・共役転置・正定値性」の項が多いので `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある）
+- 具体版: `Ising2D/RoutesNotAdopted/IntegerMomentum/`（この章は整数運動量の経路として参照用ノートへ退避済みで、Lean は形式化の記録。`def_trace`・`trace_basic_properties`・`trace_of_idempotent` の `DefinitionTrace.lean` と、`def_hermitian_positive_definite`・`star_preserves_norm_and_limits`・`exp_hermitian_is_positive_definite`・`iH_is_real_symmetric` の `ClaimPositiveDefinite.lean` は、数学的道具立て「トレース・共役転置・正定値性」の項が多いので `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある）
 - 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`
 
 `lake build` 成功・`scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
@@ -116,8 +116,8 @@
 | `joint_eigenspace_decomposition` (5) | `FermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`（既存の `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` が人手証明の書き方に 1 対 1 で対応する版） | `NecSuf.isInternal_range_proj` / `isInternal_range_matrix_proj`（任意の環上の加群、有限個の直交射影だけ） |
 | `eigenvalues_of_Vprime` / `eigenvalues_of_V`（対角化可能） | `FermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` / `exists_conj_diagonal_Vmat` | `NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（任意の体上の有限次元、固有関係 `f Q_ε = c_ε Q_ε` だけ） |
 
-具体版はいずれも**必要十分版を特殊化して導出している**（`Definition004_NumberOperator.lean` /
-`Claim008_JointEigenspace.lean` / `Claim009_EigenvaluesVprime.lean` を参照）。
+具体版はいずれも**必要十分版を特殊化して導出している**（`DefinitionNumberOperator.lean` /
+`ClaimJointEigenspaceDecomposition.lean` / `ClaimEigenvaluesAndTraceOfVprime.lean` を参照）。
 そのうえで、人手証明と 1 対 1 に対応する形の主張を具体版として別に立ててある。
 
 ### 必要十分版で判明した本質
@@ -176,7 +176,7 @@
 
 | 原文の主張 | 状況 | 理由 |
 | --- | --- | --- |
-| `joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.isInternal_range_Qproj`（`Part009/Claim009_DirectSumAndDiagonalization.lean`）。必要十分版 `Ising2D.NecSuf.isInternal_range_matrix_proj`（`NecSuf/JointEigenspaceDecomposition.lean`）の特殊化。人手証明 Step 5 の 2 つの事実（`x = ∑_ε Q_ε x` / 直和性）は従来どおり `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` にあり、`Submodule` の言葉での対応物が `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` である |
+| `joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.isInternal_range_Qproj`（`RoutesNotAdopted/IntegerMomentum/ClaimDirectSumAndDiagonalizationOfV.lean`）。必要十分版 `Ising2D.NecSuf.isInternal_range_matrix_proj`（`NecSuf/JointEigenspaceDecomposition.lean`）の特殊化。人手証明 Step 5 の 2 つの事実（`x = ∑_ε Q_ε x` / 直和性）は従来どおり `sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` にあり、`Submodule` の言葉での対応物が `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` である |
 | `eigenvalues_of_Vprime` / `eigenvalues_of_V` の「`V'`（`V`）は対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.FermiSetup.exists_eigenBasis_Vprime`（固有ベクトルからなる基底 `b` と `LinearMap.toMatrix b b V' = diagonal Λ`）、`exists_conj_diagonal_Vprime`（`P' V' P = diagonal Λ`, `P P' = P' P = 1`）、`exists_conj_diagonal_Vmat`（`V = cV'` を仮定した `V` 版）。いずれも必要十分版 `Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化 |
 | `γ(θ_μ) = arccosh(γ_1(θ_μ))` であること | **仮定として受け取った** | mathlib に `Real.arccosh` が無い（`lean/README.md`「mathlib に無いことが分かっているもの」に既出）。本章が `γ` について使うのは `γ(θ_μ) ≥ 0` だけなので、非負実数の族 `g : 𝓘 → ℝ` として受け取っている |
 | `V_eq_Vprime`（008 章、「ある `c ∈ ℂ^×` が存在して `V = cV'`」） | **仮定として受け取った** | 008 章の内容で本リポジトリでは未形式化。`constant_c_value` の仮定 `hVeq : Vmat = c • Vprime` として明示 |

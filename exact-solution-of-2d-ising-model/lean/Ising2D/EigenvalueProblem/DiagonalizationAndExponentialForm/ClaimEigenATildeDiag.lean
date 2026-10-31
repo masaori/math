@@ -13,7 +13,7 @@
 * 008 章の `A(θ)` は `θ ∈ ℝ` について述べられた 2×2 の主張なので、
   **固有ベクトルと対角化の骨格は既存の定理に `θ := θ~_μ` を代入するだけで得られる**
   （`Ising2D.AMat_mulVec_eigen`, `Ising2D.AMat_mul_Pmat`,
-  `Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv`、`Part008/Claim027_EigenATheta.lean`）。
+  `Ising2D.AMat_eq_Pmat_mul_Dmat_mul_inv`、`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）。
   本ファイルで新しく要るのは、**平方根の分岐が `|γ_2|` に確定すること**
   （`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRelationGamma2Tilde.lean` の (4)(5)）を代入して
   人手証明の形（`λ_± = γ_1 ± |γ_2|`、`v_± = c(∓|γ_2|, γ_2(-θ~))`）に直すことだけである。
@@ -55,7 +55,7 @@ theorem lambdaMinusR_ofReal :
 /-! ## 固有ベクトル（人手証明 `eigenvector_of_A_theta_tilde` Step 1・Step 2） -/
 
 /-- **人手証明 Step 1**: 特性多項式の因数分解 `= (λ - λ_+)(λ - λ_-)`。
-`Part008` の `charPoly_factor` に (4) を代入したもの。 -/
+`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` の `charPoly_factor` に (4) を代入したもの。 -/
 theorem charPoly_factor_thetaTilde (lam : ℂ) :
     lam ^ 2 - 2 * gamma1 K θ * lam + (gamma1 K θ ^ 2 + gamma2 K θ * gamma2 K (-θ))
       = (lam - ((lambdaPlusR K θ : ℝ) : ℂ)) * (lam - ((lambdaMinusR K θ : ℝ) : ℂ)) := by

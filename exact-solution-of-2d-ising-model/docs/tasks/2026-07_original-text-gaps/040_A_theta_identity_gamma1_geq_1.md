@@ -71,7 +71,7 @@ A(θ_μ) = γ₁(θ_μ) · I
 
 ### Lean の裏づけ
 
-`lean/Ising2D/Part008/Claim027_EigenATheta.lean`:
+`lean/Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`:
 
 - `Ising2D.AMat_of_gamma2_eq_zero` — `γ₂(θ) = 0 ⇒ A(θ) = γ₁(θ) · I`
   （**定義だけから出る部分。ここでは `I` とは言っていない**）

@@ -1,7 +1,7 @@
 /-
 # 個数演算子の同時固有射影（**必要十分版**）
 
-対応する人手証明のラベル（具体版は `Ising2D/Part009/Claim008_JointEigenspace.lean`）:
+対応する人手証明のラベル（具体版は `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimJointEigenspaceDecomposition.lean`）:
 `joint_eigenspace_decomposition`、および `trace_of_number_operator_product`。
 
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査）
@@ -21,7 +21,7 @@
 割り算も、値域が ℂ であることも要らない）。
 
 (5)（`ℂ^{2^M}` の直和分解）は台が行列環であることを本質的に使うので、
-具体版だけに置く（`Ising2D/Part009/Claim008_JointEigenspace.lean`）。
+具体版だけに置く（`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimJointEigenspaceDecomposition.lean`）。
 
 ## 添字づけについて
 

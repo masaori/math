@@ -12,7 +12,7 @@
   `TV1_hatZ_hatY_018_claim_T_V_action`）
 
 **具体版は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`**（半整数運動量）と
-`Ising2D/Part008/Claim012_TVActions.lean`（整数運動量）。
+`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`（整数運動量）。
 **この 2 つは本ファイルの同じ定理の別の特殊化である**ことを
 `EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean` の末尾で明示的に示している。
 

@@ -5,7 +5,7 @@
 （`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（2026-10-31 に本文から参照用ノートへ退避した。この Lean は形式化の記録として残す）の
 `evensector_007_claim_H1_H2_via_check_Z_Y`）
 
-**必要十分版は無い。** 整数運動量版 `H1_H2_via_hatZ_hatY`（`Part004/Claim011_H1H2ViaHat.lean`）
+**必要十分版は無い。** 整数運動量版 `H1_H2_via_hatZ_hatY`（`RoutesNotAdopted/IntegerMomentum/ClaimH1H2ViaHatZHatY.lean`）
 と同じ理由で、この等式は `check(Z), check(Y)` の**具体形（半整数運動量の離散フーリエ変換）**に
 本質的に依存しており、抽象化する余地がない。本ファイルの結果を使う交換関係の側
 （`commutator_of_H_and_check_Z_Y`）は、既存の必要十分版
@@ -19,7 +19,7 @@
 
 ## 形式化の方針
 
-整数運動量版（`Part004/Claim011_H1H2ViaHat.lean`）と同じ 3 段構成:
+整数運動量版（`RoutesNotAdopted/IntegerMomentum/ClaimH1H2ViaHatZHatY.lean`）と同じ 3 段構成:
 
 1. 2 つの和の積を `Y_{k₁} Z_{k₂}`（`Z_{k₁} Y_{k₂}`）の二重和へ展開する
 2. `μ` の和を最内へ移し、反周期的指数和（`Ising2D.sum_checkPhase`）で潰す

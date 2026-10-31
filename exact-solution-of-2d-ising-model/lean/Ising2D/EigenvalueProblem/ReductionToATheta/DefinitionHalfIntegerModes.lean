@@ -35,7 +35,7 @@
   定義域を `ℤ` にしているのと同じ）。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
-import Ising2D.Part004.Claim011_H1H2ViaHat
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimH1H2ViaHatZHatY
 
 namespace Ising2D
 

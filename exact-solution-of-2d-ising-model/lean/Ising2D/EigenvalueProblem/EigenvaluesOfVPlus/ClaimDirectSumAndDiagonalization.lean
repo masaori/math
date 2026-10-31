@@ -7,7 +7,7 @@
 - `eigenvalues_of_V_plus`（`evenEigen_010_theorem_...`）の「`V^{(+)}` は対角化可能」
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspaceDecomposition.lean`。
-章 009（`Ising2D/Part009/Claim009_DirectSumAndDiagonalization.lean`）と
+章 009（`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimDirectSumAndDiagonalizationOfV.lean`）と
 **まったく同じ必要十分版の特殊化**であり、違いは同時固有空間の次元
 （章 009 の `2^{M-m}` が `m = M` により `1` になる）だけである。
 

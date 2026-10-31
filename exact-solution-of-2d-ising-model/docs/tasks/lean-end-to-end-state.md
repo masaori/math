@@ -84,9 +84,8 @@
     旧 `Part014/` の 9 本全部である。`Part006/`・`Part014/` は無くなった。章のフォルダへ移すときにファイル名の番号を外した。
     `ClaimExpConjugation` は `exp_X_Y_exp_-X` だけを形式化している（`adPow` は主張の式に出る n 重の入れ子交換子の定義で、1 回の `ad_X` を定める `def_ad_X_matrix` や `ad_binomial` の主張の形式化ではなく、`matrix_exp_conjugation` は参照だけ）のでこの章へ置いた。
     `DefinitionThetaGamma` が形式化する人手の項目のうち棚卸しにあるのは `def_A_theta` だけ（`θ_μ`・`γ_2` の性質は整数運動量の経路のノート）なのでこの章へ置いた。
-    人手の項目を持たない `DefinitionExpPhase` は、import する 2 本（`ClaimExpSum` とまだ動かさない `Part004/Definition009_HatZHatY`）が同数なので、この章へ置いた。
-    整数運動量の経路の記録（`Part004/` の `hat(Z), hat(Y)` の 4 本、`Part007/`、`Part008/` の `Claim001_CommutatorHZY`・`Claim012_TVActions`・`Claim027_EigenATheta`、
-    `Part013/Claim001_WhyMinusOnly`）は数えず、`RoutesNotAdopted/IntegerMomentum/` へ移すときに扱う。
+    人手の項目を持たない `DefinitionExpPhase` は、import する 2 本（`ClaimExpSum` と整数運動量の経路の `DefinitionHatZHatY`）が同数なので、この章へ置いた。
+    整数運動量の経路の記録は数えなかった（のちに `RoutesNotAdopted/IntegerMomentum/` へ移した）。
     `Part008/Definition016_TV` は数学的道具立て「可逆行列・線型写像との対応・共役変換」の `def_T_g`・`linearity_of_T` を形式化しているので残した。
     `Part013/Claim007_H1H2ViaCheck`（`H1_H2_via_check_Z_Y`）は未割り当てなので残した。
   - 部「固有値問題」の章「A(θ̃_μ) の対角化と V^{(+)} の指数表示」（済み）: 26 ファイルを `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/` へ移した。
@@ -157,7 +156,7 @@
     `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（`cosh_addition_and_half_angle` だけを形式化）。
     棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」の項目（`set_and_algebra_notation`・`definition_of_cc`・`def_complex_conjugate` など）を形式化したファイルは無かった。
     このまとまりのほかの項目（`def_cosh_sinh`・`cosh_sinh_basic_properties`・平方根の 4 項目）を形式化したファイルも無い。
-  - 部「数学的道具立て」のまとまり「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」: 形式化したファイルは無い（`Part008/Definition030_Fermi.lean` は `def_sqrt_cc` に説明で触れるだけで、形式化しているのは整数運動量の経路の `ψ_μ` である）。
+  - 部「数学的道具立て」のまとまり「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」: 形式化したファイルは無い（`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` は `def_sqrt_cc` に説明で触れるだけで、形式化しているのは整数運動量の経路の `ψ_μ` である）。
   - 部「数学的道具立て」のまとまり「クロネッカー積と多因子基底」（済み）: 旧 `Part002/Theorem000_TensorBasis`（と `FromNecSuf`）を
     `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean`（と `TheoremTensorBasisFromNecSuf.lean`）へ移した（`tensor_basis` だけを形式化）。
     このまとまりのほかの項目（`def_kronecker`・`kronecker_product_rule`・`kronecker_multilinear`・`kronecker_transpose`）を形式化したファイルは旧フォルダに無い（`Representation.lean` は全章の土台なので動かさない）。
@@ -203,12 +202,21 @@
     `check-no-sorry.sh` では 4 本の具体版の対象をこのまとまりの区切りへ移した（必要十分版 `NecSuf/RiemannSum.lean`・`LogDivergentIntegral.lean`・`HyperbolicBounds.lean` の対象は元の区切りのまま）。
     これで部「数学的道具立て」の項目を形式化したファイルはすべて `MathematicalTools/` にある。
 
+  - 本文から退避した整数運動量の経路（済み）: 19 ファイルを `Ising2D/RoutesNotAdopted/IntegerMomentum/` へ番号を外し中身の分かる名前で移した。
+    旧 `Part004/` の `hat(Z), hat(Y)` の 6 本（`DefinitionHatZHatY`・`ClaimH1H2ViaHatZHatY`・`ClaimHatZHatYPeriodicity`（と `FromNecSuf`）・`ClaimRecoverZYFromHatZHatY`（と `FromNecSuf`））、
+    旧 `Part007/` の 2 本（`ClaimAnticommutatorHatZHatY` と `FromNecSuf`）、旧 `Part008/` の 5 本（`ClaimCommutatorHAndHatZHatY`・`ClaimTVActionsOnHatZHatY`・
+    `ClaimEigenvectorsAndDiagonalizationOfATheta`・`DefinitionFermiPsi`・`ClaimAnticommutatorPsiFromNecSuf`）、旧 `Part009/` の 5 本（`DefinitionNumberOperator`・`ClaimJointEigenspaceDecomposition`・
+    `ClaimEigenvaluesAndTraceOfVprime`・`ClaimDirectSumAndDiagonalizationOfV`・`ClaimConstantCAndEigenvaluesOfV`）、旧 `Part013/Claim001_WhyMinusOnly`（`ClaimWhyIntegerMomentumOnlyMinusSector`）である。
+    19 本とも、冒頭が宣言する人手の項目はすべて参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した項目だった（`def_A_theta` は定義を使うだけで数えない）。`Part007/`・`Part008/`・`Part009/` は無くなった。
+    `check-no-sorry.sh` では、これらのファイルの定理 187 件を新しい区切り「本文から参照用ノートへ退避した整数運動量の経路の形式化の記録」へ集めた（件数は変えていない）。
+    本文の章のファイル 13 本（`DefinitionH1H2V1V2`・`DefinitionHalfIntegerModes`・`ClaimCommutatorHCheckZY`・`ClaimTActionsOnCheck`・`ClaimAnticommutatorCheckZY`・`DefinitionGamma1Gamma2OfThetaTilde`・
+    `DefinitionCheckFermi`・`ClaimCommutationVPlusCheckPsi`・`DefinitionCheckNumberOperator`・`ClaimVPlusPositiveDefinite`・`DefinitionOpenChainAndBoundaryOperators`・`ClaimOpenChainSpinSums`・`CheckFermiInput`）が
+    このフォルダのファイルを import している（共有の定義・補題を使うため。名前空間は変えていないので主張は変わらない）。runbook のゴールラインはフォルダの対応だけを求めるので、依存の切り離しは差に数えない。
+
 ## 次の一歩
 
-項目 7 の続きとして、本文から退避した整数運動量の経路の形式化を `Ising2D/RoutesNotAdopted/IntegerMomentum/` へ移す。
-候補は `Part004/` の `hat(Z), hat(Y)` の 4 本（`Definition009_HatZHatY`・`Claim011_H1H2ViaHat`・`Claim012_HatPeriodicity`（と `FromNecSuf`）・`Claim013_RecoverZY`（と `FromNecSuf`））、`Part007/` の 2 本、
-`Part008/` の `Claim001_CommutatorHZY`・`Claim012_TVActions`・`Claim027_EigenATheta`・`Claim032_AnticommutatorPsiFromNecSuf`・`Definition030_Fermi`、`Part013/Claim001_WhyMinusOnly` である。
-`Part009/` に残る 5 本（`Claim008_JointEigenspace`・`Claim009_DirectSumAndDiagonalization`・`Claim009_EigenvaluesVprime`・`Claim017_ConstantC`・`Definition004_NumberOperator`）も、冒頭の人手の項目を棚卸しと参照用ノートで確かめ、整数運動量の経路の項目なら同じ回で扱う。
-各ファイルの置き場は runbook の多数決の規則で決める（参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した項目を `RoutesNotAdopted/IntegerMomentum/` の置き場として数える）。
-`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。大きければファイルの単位で割り直す。
-続けて `RoutesNotAdopted/MinusSector/`（`Part010/` の 2 本、`Part011/Claim010_SectorDecomposition`、`Part004/OddEigenvectors`、`Part019/`）、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。
+項目 7 の続きとして、本文から退避した (−) セクターの形式化を `Ising2D/RoutesNotAdopted/MinusSector/` へ移す。
+候補は `Part010/` の 2 本（`Claim011_SectorReplacement`・`Claim012_SectorDecomposition`）、`Part011/Claim010_SectorDecomposition`、`Part004/OddEigenvectors`、`Part019/` の 4 本である。
+各ファイルの冒頭の人手の項目を棚卸しと参照用ノート `minus_sector_not_adopted.ts` で確かめ、runbook の多数決の規則で置き場を決める。
+`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+続けて、参照用ノートへ退避した主張だけのファイル（`Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`）・`Part013/Claim007_H1H2ViaCheck`）の置き場を runbook に足してから移し、旧番号のフォルダを無くす。

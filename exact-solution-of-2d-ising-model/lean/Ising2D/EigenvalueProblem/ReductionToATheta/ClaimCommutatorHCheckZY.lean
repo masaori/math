@@ -8,7 +8,7 @@
 **必要十分版**は既存の `Ising2D/NecSuf/CommutatorClifford.lean`
 （`Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z` ほか）。
 本ファイルの 4 本 (A)〜(D) はすべてその系として導く。
-すなわち**整数運動量の 6 本（`Part008/Claim001_CommutatorHZY.lean`）と
+すなわち**整数運動量の 6 本（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean`）と
 半整数運動量の 4 本は、同じ必要十分版の別の特殊化である**。
 違いは `CliffordTriple` に渡す反交換子の値 `D` だけで、
 整数運動量では `2M δ^M_{μ+ν,0}`、半整数運動量では `2M δ^M_{μ+ν,1}` である。
@@ -38,7 +38,7 @@
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.Part013.Claim007_H1H2ViaCheck
-import Ising2D.Part008.Claim001_CommutatorHZY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 
 namespace Ising2D
 

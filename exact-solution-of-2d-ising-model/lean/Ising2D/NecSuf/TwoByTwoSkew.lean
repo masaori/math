@@ -6,7 +6,7 @@
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
 具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimEigenATildeDiag.lean`
-（既存の `Ising2D/Part008/Claim027_EigenATheta.lean` の `AMat_mulVec_eigen` 等も同じ主張の具体版）。
+（既存の `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` の `AMat_mulVec_eigen` 等も同じ主張の具体版）。
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 
@@ -23,7 +23,7 @@
 という仮定だけに退化する（分岐の選択は `s` と `-s` の交換にすぎない）。
 
 対角化 `A = P D P⁻¹` については、可逆性（`det P` が単元であること）が別途要る。
-これは人手証明が確認していない点であり（`Part008/Claim027_EigenATheta.lean` 冒頭を参照）、
+これは人手証明が確認していない点であり（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` 冒頭を参照）、
 必要十分版では `Invertible` 仮定として明示される。
 -/
 import Mathlib.LinearAlgebra.Matrix.Notation

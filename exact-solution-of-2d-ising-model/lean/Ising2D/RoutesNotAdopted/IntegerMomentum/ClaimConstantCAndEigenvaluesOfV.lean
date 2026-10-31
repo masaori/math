@@ -1,9 +1,11 @@
 /-
 # 定数 `c` の決定と `V` の固有値（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
-- `constant_c_value`（`eigenvalues_of_V_017_claim_constant_c_value`）
-- `eigenvalues_of_V`（`eigenvalues_of_V_018_claim_eigenvalues_of_V`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `eigenvalues_of_V_017_claim_constant_c_value`（ラベル `constant_c_value`）
+* もと `eigenvalues_of_V_018_claim_eigenvalues_of_V`（ラベル `eigenvalues_of_V`）
 
 ## 他章への依存（仮定として受け取るもの）
 
@@ -12,7 +14,7 @@
 本章の主張はこの `c` の値を決めるものである。
 
 `γ(θ_μ) = arccosh(γ_1(θ_μ))` も（mathlib に `Real.arccosh` が無いため）
-非負実数の族 `g` として受け取る（`Claim009_EigenvaluesVprime.lean` 冒頭参照）。
+非負実数の族 `g` として受け取る（`ClaimEigenvaluesAndTraceOfVprime.lean` 冒頭参照）。
 
 必要十分版は置かない。理由: この主張は
 「`tr(V)/tr(V^{-1}) = c^2`」＋「符号反転共役で `tr` が不変」＋「`V` が正定値」という
@@ -21,7 +23,7 @@
 `Ising2D/NecSuf/NumberOperator.lean` 側で「加法的かつ巡回的な汎関数」として
 抽象化してある）。
 -/
-import Ising2D.Part009.Claim009_EigenvaluesVprime
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 

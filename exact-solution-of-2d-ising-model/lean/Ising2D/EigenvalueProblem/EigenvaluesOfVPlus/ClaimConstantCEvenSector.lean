@@ -16,7 +16,7 @@
 
 ## 章 009 との関係
 
-章 009 の `constant_c_value`（`Ising2D/Part009/Claim017_ConstantC.lean`）と
+章 009 の `constant_c_value`（`Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimConstantCAndEigenvaluesOfV.lean`）と
 本ファイルは、**同じ必要十分版 `NecSuf.const_eq_of_trace_ratio` の別の特殊化**である。
 違うのは
 - 符号 `η`（章 009 は一般の `η`、本章は `(+)` すなわち `η = -1`）、

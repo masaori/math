@@ -1,21 +1,22 @@
 /-
 # フェルミオン演算子 `ψ_μ`, `ψ_μ^†` の定義・反交換関係・`T_{(V)}` の作用
 
-対応する人手証明（正本は `structured-latex/content/008_TV1_hatZ_hatY_part2.mjs`）:
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
 
-* `TV1_hatZ_hatY_030_definition_fermi`（ラベル `def_fermi`）— `ψ_μ, ψ_μ^†` の定義
-* `TV1_hatZ_hatY_031_claim_V_psi_commutator`（ラベル `commutation_V_psi`）
+* もと `TV1_hatZ_hatY_030_definition_fermi`（ラベル `def_fermi`）— `ψ_μ, ψ_μ^†` の定義
+* もと `TV1_hatZ_hatY_031_claim_V_psi_commutator`（ラベル `commutation_V_psi`）
   — `T_{(V)}(ψ_μ^†) = λ_{+,μ}ψ_μ^†`, `T_{(V)}(ψ_μ) = λ_{-,μ}ψ_μ`
-* `TV1_hatZ_hatY_032_claim_anticommutator_psi`（ラベル `anticommutator_of_psi`）
+* もと `TV1_hatZ_hatY_032_claim_anticommutator_psi`（ラベル `anticommutator_of_psi`）
   — `[ψ_μ^†, ψ_ν^†]₊ = 0`, `[ψ_μ^†, ψ_ν]₊ = δ^M_{μ+ν,0} I`, `[ψ_μ, ψ_ν]₊ = 0`
 
 ## 形式化の方針
 
 * 原文の定義は行ベクトル記法 `(ψ_μ^†, ψ_μ) := (hat(Z)_μ^{(-)}, hat(Y)_μ) · P_μ` である。
   すなわち **`P_μ` の第 0 列が `ψ_μ^†` の係数、第 1 列が `ψ_μ` の係数**であるから、
-  `Part008/Claim027_EigenATheta.lean` の `Pmat` の列をそのまま使って `psiDag`, `psi` を定義する。
+  `RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean` の `Pmat` の列をそのまま使って `psiDag`, `psi` を定義する。
   原文が「すなわち」として与えている明示式との一致は `psiDag_eq` / `psi_eq` で検算する。
-* 平方根は既存ファイル（`Claim027_EigenATheta.lean`）と同じ流儀で、
+* 平方根は既存ファイル（`ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）と同じ流儀で、
   `t : ℂ` が `t^2 = γ_2(θ_μ)γ_2(-θ_μ)` を満たす、という**仮定**として受け取る。
   複素平方根の分枝関数は導入しない。
 * 原文が statement へ格上げしている「定義が意味をもつ条件」`γ_2(θ_μ) ≠ 0` は、
@@ -60,7 +61,7 @@
 以前は「ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）が未形式化なので
 この仮定は証明できない」という状態だった。
 
-**この仮定は現在 `Ising2D/Part008/Claim012_TVActions.lean` の `Ising2D.TV_hatZ_hatY` で
+**この仮定は現在 `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` の `Ising2D.TV_hatZ_hatY` で
 証明されており、穴は残っていない。** 同ファイルには原文 `commutation_V_psi` に対応する
 **無条件版** `Ising2D.TV_psiDag` / `Ising2D.TV_psi` / `Ising2D.TV_psiDag_psi` を置いてある
 （`T` を具体的に `T_{(V)} = T_{(V_1^{(-)})^{1/2}} ∘ T_{V_2} ∘ T_{(V_1^{(-)})^{1/2}}` に取った形）。
@@ -72,9 +73,9 @@
 なお、上に述べた**平方根の分枝の仮定 `hbr` は原文の穴に由来するもので、性質が異なる**
 （未形式化に由来する仮定ではないので、これは除去できない）。
 -/
-import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
-import Ising2D.Part008.Claim027_EigenATheta
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvectorsAndDiagonalizationOfATheta
 import Mathlib.Tactic.Module
 
 namespace Ising2D

@@ -54,7 +54,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 
 * `Fin M` の加法は `NeZero M` インスタンスを要求するため、`M` を一般の自然数のまま扱えない。
   `nextSite` は `m : Fin M` が存在する時点で `0 < M` が従う（`Fin.pos`）ので、
-  `M` に追加の仮定を置かずに書ける。既存ファイル（`Definition009_HatZHatY.lean` 等）も
+  `M` に追加の仮定を置かずに書ける。既存ファイル（`DefinitionHatZHatY.lean` 等）も
   `M` に `NeZero` を課さない流儀なので、それに揃える。
 * 原文の「最終項だけ符号が付く」は `lastSign η m := if (m : ℕ) + 1 = M then η else 1`
   で表す（原文の `m = M` が Lean の `(m : ℕ) + 1 = M`）。
@@ -62,7 +62,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 ### 境界項の符号
 
 `H_1^{(+)}` の最終項 `-Y_M Z_1` の係数 `-1` は `lastSign (-1) m` で書く。一般形の `H1 M η` では
-この係数を引数 `η : ℂ` として持たせる（既存の `hatZ M η μ`（`Definition009_HatZHatY.lean`）
+この係数を引数 `η : ℂ` として持たせる（既存の `hatZ M η μ`（`DefinitionHatZHatY.lean`）
 が整数運動量の経路で `∓1` を `η` で持たせている流儀と同じ）。
 
 ### `(2 s_2)^{M/2}`
@@ -78,7 +78,7 @@ Lean では site 添字を `Fin M`（`0, …, M-1`）で表し、原文の `m` �
 全サイトで足し合わせたものが `I_smul_H2_eq_sum_sigmaX` である。人手 `V2_in_Z_Y` の Step 3 は
 これを指数の肩の等式として使う。
 -/
-import Ising2D.Part004.Definition009_HatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionHatZHatY
 import Ising2D.Representation
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp

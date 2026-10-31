@@ -1,8 +1,10 @@
 /-
 # `hat(Z)`, `hat(Y)` の `M` 周期性
 
-対応する人手証明:
-`parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ` (`<hatZ_hatY_M_periodicity>`)
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `transfer_matrix_013_claim_hatZ_hatY_M_periodicity`（ラベル `hatZ_hatY_M_periodicity`）
 
 原文の主張: `hat(Z)_M^{(-)} = hat(Z)_{-M}^{(-)}`、`hat(Y)_M = hat(Y)_{-M}`。
 
@@ -17,7 +19,7 @@
 原文が特殊値 `μ = ±M` でしか述べていないのは、それが使われる場面だけを書いたためで、
 一般の `μ` でも同じ計算が通る。
 -/
-import Ising2D.Part004.Definition009_HatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionHatZHatY
 
 namespace Ising2D
 

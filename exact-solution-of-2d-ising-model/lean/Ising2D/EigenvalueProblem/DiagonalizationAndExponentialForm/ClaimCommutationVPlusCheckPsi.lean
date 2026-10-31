@@ -30,7 +30,7 @@
 「行ベクトル×行列の結合律」は、`ActsBy.eigen` の証明の中に吸収されている。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckPsi
-import Ising2D.Part008.Claim027_EigenATheta
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvectorsAndDiagonalizationOfATheta
 
 namespace Ising2D
 

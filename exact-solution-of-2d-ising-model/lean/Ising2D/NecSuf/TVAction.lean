@@ -9,7 +9,7 @@
 * **`<ホロノミック量子場_p142下段_1>`**（同 `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
 * **`<T_V_hatZ_hatY>`**（同 `TV1_hatZ_hatY_018_claim_T_V_action`）
 
-**具体版は `Ising2D/Part008/Claim012_TVActions.lean`**（`Mat(2,ℂ)^{⊗M}` の
+**具体版は `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`**（`Mat(2,ℂ)^{⊗M}` の
 `hat(Z)_μ^{(-)}, hat(Y)_μ` について人手証明と 1 対 1 に対応する形で述べ、本ファイルの系として導出する）。
 
 **このファイルには必要十分版だけを置く。必要十分版は Lean の中だけの道具であり、

@@ -1,13 +1,12 @@
 /-
 # 同時固有空間分解の直和形と `V'`・`V` の対角化可能性（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
-- `joint_eigenspace_decomposition` (5)
-  （`eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）
-- `eigenvalues_of_Vprime`（`eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`）の
-  「`V'` は対角化可能」
-- `eigenvalues_of_V`（`eigenvalues_of_V_011_claim_eigenvalues_of_V`）の
-  「`V` は対角化可能」
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`（ラベル `joint_eigenspace_decomposition`）の (5)
+* もと `eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`（ラベル `eigenvalues_of_Vprime`）の「`V'` は対角化可能」
+* もと `eigenvalues_of_V_018_claim_eigenvalues_of_V`（ラベル `eigenvalues_of_V`）の「`V` は対角化可能」
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspaceDecomposition.lean`。
 本ファイルの主張はすべて必要十分版の特殊化として導出する
@@ -15,13 +14,13 @@
 
 ## 既存の (5) との関係
 
-`Claim008_JointEigenspace.lean` の `sum_Qproj_mulVec`（`x = ∑_ε Q_ε x`）と
+`ClaimJointEigenspaceDecomposition.lean` の `sum_Qproj_mulVec`（`x = ∑_ε Q_ε x`）と
 `eq_zero_of_sum_eq_zero`（`∑ y_ε = 0` かつ `y_ε ∈ im Q_ε` なら各 `y_ε = 0`）は、
 人手証明 Step 5 が実際に書いている 2 つの事実をそのまま述べたものである。
 本ファイルはそれを mathlib の内部直和（`DirectSum.IsInternal`）の言葉へ翻訳し、
 そこから固有ベクトルからなる基底を構成する。
 -/
-import Ising2D.Part009.Claim009_EigenvaluesVprime
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.NecSuf.JointEigenspaceDecomposition
 
@@ -92,7 +91,7 @@ theorem exists_conj_diagonal_Vprime (g : F.Idx → ℝ) :
 `V = c V'` なら `V` も同じ射影の族で対角化でき、固有値は `c e^{g(ε)}` である。
 
 原文どおり `V = cV'` は 008 章の内容なので仮定として受け取る
-（`Claim017_ConstantC.lean` の `constant_c_value` と同じ扱い）。 -/
+（`ClaimConstantCAndEigenvaluesOfV.lean` の `constant_c_value` と同じ扱い）。 -/
 theorem exists_conj_diagonal_Vmat (g : F.Idx → ℝ) {K1 η : ℂ} {s2 : ℝ} {K2star c : ℂ}
     (hVeq : Vmat M K1 η s2 K2star = c • F.Vprime g) :
     ∃ (P P' : TensorPow M) (lam : Conf M → ℂ),

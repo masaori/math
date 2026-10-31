@@ -1,9 +1,11 @@
 /-
 # 数演算子の同時固有空間分解（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
-- `joint_eigenspace_decomposition`（`eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）
-- `trace_of_number_operator_product`（`eigenvalues_of_V_007_claim_trace_of_number_operator_product`）
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`（ラベル `joint_eigenspace_decomposition`）
+* もと `eigenvalues_of_V_007_claim_trace_of_number_operator_product`（ラベル `trace_of_number_operator_product`）
 
 必要十分版は `Ising2D/NecSuf/JointEigenspace.lean`。(1)(2)(3)(4) は
 **すべて必要十分版の特殊化として導出する**。(5)（`ℂ^{2^M}` の直和分解）だけは
@@ -15,7 +17,7 @@
 Lean では `T : Finset 𝓘` で添字づける（`ε_μ = 1 ⟺ μ ∈ T`）。
 `ε : 𝓘 → Bool` の形も `Qproj'` として与える。
 -/
-import Ising2D.Part009.Definition004_NumberOperator
+import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionNumberOperator
 
 namespace Ising2D
 

@@ -1,14 +1,16 @@
 /-
 # `<hatZ_hatY_M_periodicity>` — 具体版を必要十分版の特殊化として導出する
 
-対応する人手証明:
-`parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ` (`<hatZ_hatY_M_periodicity>`)
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `transfer_matrix_013_claim_hatZ_hatY_M_periodicity`（ラベル `hatZ_hatY_M_periodicity`）
 
 ## このファイルの位置づけ（README のゴール設定 4 節「2 本立て」）
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.hatZ_periodic` / `Ising2D.hatY_periodic`（`Claim012_HatPeriodicity.lean`） | 複素指数関数 `exp(-2π√-1 k/M)` と `Z_j, Y_j` |
+| **具体版** | `Ising2D.hatZ_periodic` / `Ising2D.hatY_periodic`（`ClaimHatZHatYPeriodicity.lean`） | 複素指数関数 `exp(-2π√-1 k/M)` と `Z_j, Y_j` |
 | **必要十分版** | `NecSuf.transform_periodic`（`NecSuf/DiscreteFourier.lean`） | 任意の体 `K`、`ζ^M = 1`、任意の `K`-加群 |
 
 特殊化で埋めるべきなのは「原文の位相因子が `zetaM M` の整数べきであること」だけである。
@@ -18,7 +20,7 @@
 -/
 import Ising2D.NecSuf.DiscreteFourier
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSumFromNecSuf
-import Ising2D.Part004.Claim012_HatPeriodicity
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimHatZHatYPeriodicity
 
 namespace Ising2D
 

@@ -19,7 +19,7 @@
 
 ## 形式化の方針
 
-整数運動量版（`Part004/Claim013_RecoverZY.lean`）と同じく、まず族 `x : Fin M → TensorPow M`
+整数運動量版（`RoutesNotAdopted/IntegerMomentum/ClaimRecoverZYFromHatZHatY.lean`）と同じく、まず族 `x : Fin M → TensorPow M`
 に対する一般形（`inverse_dft_check`）を証明し、それを `Z`, `Y` に適用する。
 違いは直交性として `Ising2D.sum_checkPhase`（反周期的指数和）を使う点だけである。
 -/

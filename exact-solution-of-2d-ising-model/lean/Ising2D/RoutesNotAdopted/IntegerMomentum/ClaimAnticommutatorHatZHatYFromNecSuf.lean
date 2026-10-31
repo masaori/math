@@ -1,15 +1,16 @@
 /-
 # `hat(Z)`, `hat(Y)` の反交換関係 — 具体版を必要十分版の特殊化として導出する
 
-対応する人手証明:
-`parts/007_hatZとhatYの反交換関係/000_claim_hatZ同士_hatZとhatY_hatY同士の反交換関係.typ`
-(`<anticommutator_of_hat_Z_and_hat_Y>`)
+対応する人手の主張は、本文から参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts` へ
+退避した次のものである（整数運動量の経路を本文から外したため）。本ファイルはその形式化の記録として残す。
+
+* もと `hatZ_hatY_anticommutation_001_claim_anticommutation_relations`（ラベル `anticommutator_of_hat_Z_and_hat_Y`）
 
 ## このファイルの位置づけ（README のゴール設定 4 節「2 本立て」）
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY`（`Claim000_AnticommutatorHatZHatY.lean`） | `TensorPow M` の `hat(Z), hat(Y)`（`Z_j, Y_j` の複素指数関数によるフーリエ和） |
+| **具体版** | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY`（`ClaimAnticommutatorHatZHatY.lean`） | `TensorPow M` の `hat(Z), hat(Y)`（`Z_j, Y_j` の複素指数関数によるフーリエ和） |
 | **必要十分版** | `NecSuf.acomm_fourier_clifford` / `acomm_fourier_clifford_flip`（`NecSuf/FourierClifford.lean`） | 体 `K` 上の任意の環 `A`、Clifford 関係、`ζ` が 1 の原始 `M` 乗根、両側の重みの積 |
 
 本ファイルは、**具体版が必要十分版の特殊化にすぎないこと**を導出として書く。
@@ -27,7 +28,7 @@
 -/
 import Ising2D.NecSuf.FourierClifford
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSumFromNecSuf
-import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 
 namespace Ising2D
 
