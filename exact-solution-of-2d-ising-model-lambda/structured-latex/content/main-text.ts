@@ -1481,7 +1481,7 @@ N\lambda\le_{\Lambda}N\mu
                     displayMath(String.raw`\begin{aligned}
 \log\bigl(\operatorname{rat}_{\Lambda}(\log q)\bigr)
 &=\log q
-&&(\because\ \blkref{claim_rational_log_surjective}\text{ を }\lambda=\log q\text{ に適用})
+&&\bigl(\because\ \blkref{claim_rational_log_surjective}\text{ を }\lambda=\log q\text{ に適用}\bigr)
 \end{aligned}`),
                     paragraph([
                       "であり、両辺は正の有理数 ",
@@ -1495,7 +1495,7 @@ N\lambda\le_{\Lambda}N\mu
                     displayMath(String.raw`\begin{aligned}
 \operatorname{rat}_{\Lambda}(\log q)
 &=q
-&&(\because\ \blkref{claim_rational_log_injective}\text{ と上の等式})
+&&\bigl(\because\ \blkref{claim_rational_log_injective}\text{ と上の等式}\bigr)
 \end{aligned}`),
                     paragraph([
                       "である。主張は同値の鎖で示す。",
@@ -1503,9 +1503,9 @@ N\lambda\le_{\Lambda}N\mu
                     displayMath(String.raw`\begin{aligned}
 \log q\le_{\Lambda}\log q'
 &\iff\operatorname{rat}_{\Lambda}(\log q)\le\operatorname{rat}_{\Lambda}(\log q')
-&&(\because\ \blkref{def_log_order_group_order})\\
+&&\bigl(\because\ \blkref{def_log_order_group_order}\bigr)\\
 &\iff q\le q'
-&&(\because\ \text{上の補助等式を両辺へ})
+&&\bigl(\because\ \text{上の補助等式を両辺へ}\bigr)
 \end{aligned}`),
                     paragraph([
                       "である。使ったのは、",
