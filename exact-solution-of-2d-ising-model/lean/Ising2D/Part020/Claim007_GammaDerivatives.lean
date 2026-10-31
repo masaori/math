@@ -1,7 +1,7 @@
 /-
 # `∂γ/∂κ = sinh κ / sinh γ`、`|∂γ/∂κ| ≤ 1`、および 2 階導関数
 
-人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
+人手証明（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）:
 - `critical_007_claim_gamma_derivatives_in_kappa`（ラベル `gamma_derivatives_in_kappa`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は不要（後述）。

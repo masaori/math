@@ -99,10 +99,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`\text{臨界点 }K_c\text{ と }\frac{d^2f}{dK^2}\text{ の対数発散}` },
         organizationGoalLabel: "chapter_organization_goal_critical_point_and_log_divergence",
-        goalLabels: [
-          "kappa_of_K_basic",
-          "specific_heat_log_divergence",
-        ],
+        goalLabels: ["critical_point_sinh_K_c_and_second_derivative_log_divergence"],
         proposalEntryCount: 10,
       },
     ],

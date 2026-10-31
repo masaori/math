@@ -1,6 +1,7 @@
 # ---------------------------------------------------------
-# 共通: 章 E（臨界点と比熱の対数発散）の数値検証の土台
-#   structured-latex/content/020_critical_point.ts に対応
+# 共通: 臨界点の章（臨界点 K_c と d²f/dK² の対数発散）の数値検証の土台
+#   structured-latex/content/critical_point_and_log_divergence.ts（臨界点の章）と
+#   structured-latex/content/020_critical_point.ts（加法定理と正弦を含む積分の評価）に対応
 #
 #   kappa := 2K1 - 2K2*,  A := sinh(2K1) sinh(2K2*)
 #   gamma(theta) = arccosh( cosh2K1 cosh2K2* - sinh2K1 sinh2K2* cos theta )

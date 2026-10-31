@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル: `remark_real_analysis_escape_chapter_E` の **(R5)**、および
 それを使う `second_derivative_log_divergence`
-（正本は `structured-latex/content/020_critical_point.ts`）
+（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）
 
 具体版: `Ising2D/Part020/Theorem011_SecondDerivativeLogDivergence.lean`
 

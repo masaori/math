@@ -9,14 +9,14 @@
     "2次元イジングモデル"
   ],
   "mathematicalToolPartTitle": "数学的道具立て",
-  "entryCount": 295,
+  "entryCount": 296,
   "classificationEntryCounts": {
     "数学的道具立て": 114,
-    "2次元イジングモデル": 181
+    "2次元イジングモデル": 182
   },
   "chapterPlacementProgress": {
-    "assignedChapterEntryCount": 174,
-    "placedUnderChapterHeadingEntryCount": 164,
+    "assignedChapterEntryCount": 175,
+    "placedUnderChapterHeadingEntryCount": 175,
     "unassignedIsingEntryCount": 7
   },
   "parts": [
@@ -1304,10 +1304,9 @@
           "title": "\\text{臨界点 }K_c\\text{ と }\\frac{d^2f}{dK^2}\\text{ の対数発散}",
           "titleFormat": "tex",
           "goalEntryIds": [
-            "critical_006_claim_kappa_of_K_basic",
-            "critical_012_theorem_specific_heat_log_divergence"
+            "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
           ],
-          "entryCount": 10,
+          "entryCount": 11,
           "proposalEntryCount": 10,
           "dependencyOrder": [
             {
@@ -1369,9 +1368,27 @@
                 "critical_012_theorem_specific_heat_log_divergence"
               ],
               "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
+              ],
+              "inseparableDependencyUnit": false
             }
           ],
-          "placedUnderChapterHeadingEntryIds": []
+          "placedUnderChapterHeadingEntryIds": [
+            "TV1_hatZ_hatY_044_claim_critical_condition",
+            "critical_002_definition_kappa",
+            "critical_002a_definition_critical_sinh_product_A",
+            "critical_003_claim_gamma_kappa_identity",
+            "critical_004_claim_critical_point_iff_kappa_zero",
+            "critical_005_claim_isotropic_setting",
+            "critical_006_claim_kappa_of_K_basic",
+            "critical_007_claim_gamma_derivatives_in_kappa",
+            "critical_011_theorem_second_derivative_log_divergence",
+            "critical_012_theorem_specific_heat_log_divergence",
+            "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
+          ]
         }
       ]
     }
@@ -1599,7 +1616,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 295,
+    "reviewedEntryCount": 296,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -2494,7 +2511,7 @@
     },
     {
       "classification": "2次元イジングモデル",
-      "entryCount": 181,
+      "entryCount": 182,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -3746,19 +3763,26 @@
         {
           "order": 179,
           "entryIds": [
-            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+            "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 180,
           "entryIds": [
-            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 181,
+          "entryIds": [
+            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 182,
           "entryIds": [
             "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
           ],
@@ -3803,14 +3827,6 @@
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
-          "dependentId": "TV1_hatZ_hatY_044_claim_critical_condition",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "TV1_hatZ_hatY_044_claim_critical_condition",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
           "dependentId": "evensector_007_claim_H1_H2_via_check_Z_Y",
           "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
@@ -3837,98 +3853,6 @@
         {
           "dependentId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
           "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "critical_002_definition_kappa",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_002a_definition_critical_sinh_product_A",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_002a_definition_critical_sinh_product_A",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_003_claim_gamma_kappa_identity",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_003_claim_gamma_kappa_identity",
-          "prerequisiteId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness"
-        },
-        {
-          "dependentId": "critical_003_claim_gamma_kappa_identity",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_003_claim_gamma_kappa_identity",
-          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
-        },
-        {
-          "dependentId": "critical_004_claim_critical_point_iff_kappa_zero",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_004_claim_critical_point_iff_kappa_zero",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_005_claim_isotropic_setting",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_006_claim_kappa_of_K_basic",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_006_claim_kappa_of_K_basic",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_006_claim_kappa_of_K_basic",
-          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
-        },
-        {
-          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
-          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "critical_008_claim_elementary_sine_bounds"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "critical_009_claim_closed_form_log_integral"
-        },
-        {
-          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
-          "prerequisiteId": "critical_010_claim_sine_integral_two_sided"
-        },
-        {
-          "dependentId": "critical_012_theorem_specific_heat_log_divergence",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
           "dependentId": "partition_function_2d_ising_001_definition_lattice_size",
@@ -5849,11 +5773,119 @@
         {
           "dependentId": "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "TV1_hatZ_hatY_044_claim_critical_condition",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "TV1_hatZ_hatY_044_claim_critical_condition",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_002_definition_kappa",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_002a_definition_critical_sinh_product_A",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_002a_definition_critical_sinh_product_A",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_003_claim_gamma_kappa_identity",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_003_claim_gamma_kappa_identity",
+          "prerequisiteId": "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness"
+        },
+        {
+          "dependentId": "critical_003_claim_gamma_kappa_identity",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_003_claim_gamma_kappa_identity",
+          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
+        },
+        {
+          "dependentId": "critical_004_claim_critical_point_iff_kappa_zero",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_004_claim_critical_point_iff_kappa_zero",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_005_claim_isotropic_setting",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_006_claim_kappa_of_K_basic",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_006_claim_kappa_of_K_basic",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_006_claim_kappa_of_K_basic",
+          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
+        },
+        {
+          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_007_claim_gamma_derivatives_in_kappa",
+          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "critical_008_claim_elementary_sine_bounds"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "critical_009_claim_closed_form_log_integral"
+        },
+        {
+          "dependentId": "critical_011_theorem_second_derivative_log_divergence",
+          "prerequisiteId": "critical_010_claim_sine_integral_two_sided"
+        },
+        {
+          "dependentId": "critical_012_theorem_specific_heat_log_divergence",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence",
+          "prerequisiteId": "critical_001_claim_cosh_addition_and_half_angle"
         }
       ]
     }
   ],
-  "dependencySupportNodeCount": 57,
+  "dependencySupportNodeCount": 59,
   "unnamedEntryIds": [
     "calculation_formulae_032_claim_arg_of_product",
     "calculation_formulae_033_claim_arg_of_quotient",
@@ -13029,73 +13061,6 @@
       }
     },
     {
-      "id": "TV1_hatZ_hatY_044_claim_critical_condition",
-      "kind": "claim",
-      "title": "c_1 = s_1 c_2 \\text{ は臨界条件 } s_1 s_2 = 1 \\text{ と同値}",
-      "titleFormat": "tex",
-      "labels": [
-        "critical_condition_c1_eq_s1_c2"
-      ],
-      "sourceFile": "008_TV1_hatZ_hatY_part2.ts",
-      "sourceOrdinal": 44,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5169,
-        "inspectedContentSha256": "e982c43ee907e5d70abaacbc6629d8e7c2ab0fe8524c96f9ca2f095275e48fca",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_sinh_basic_properties",
-        "def_transfer_matrix_symbols",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_transfer_matrix_symbols"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 137,
-        "dependencyUnitEntryIds": [
-          "TV1_hatZ_hatY_044_claim_critical_condition"
-        ]
-      }
-    },
-    {
       "id": "eigenvalues_of_V_001_definition_trace",
       "kind": "definition",
       "title": "\\text{トレース } \\mathrm{tr}",
@@ -13875,7 +13840,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13921,487 +13886,6 @@
         "classificationOrder": 98,
         "dependencyUnitEntryIds": [
           "critical_001_claim_cosh_addition_and_half_angle"
-        ]
-      }
-    },
-    {
-      "id": "critical_002_definition_kappa",
-      "kind": "definition",
-      "title": "\\kappa := 2K_1 - 2K_2^*",
-      "titleFormat": "tex",
-      "labels": [
-        "def_kappa"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 4,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 408,
-        "inspectedContentSha256": "acd5ce9a1658584ca9ece23706585a304c38ac9e05fdd1474805b4cd4dd2a556",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_transfer_matrix_symbols",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_transfer_matrix_symbols"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 38,
-        "dependencyUnitEntryIds": [
-          "critical_002_definition_kappa"
-        ]
-      }
-    },
-    {
-      "id": "critical_002a_definition_critical_sinh_product_A",
-      "kind": "definition",
-      "title": "A := \\sinh 2K_1\\sinh 2K_2^*",
-      "titleFormat": "tex",
-      "labels": [
-        "def_critical_sinh_product_A"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 4,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1190,
-        "inspectedContentSha256": "99c5d647ef4a1d869147904be1ccbaf48495d1d22bdb0360bb3d58b4eb00f477",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_sinh_basic_properties",
-        "def_transfer_matrix_symbols",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_transfer_matrix_symbols"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 39,
-        "dependencyUnitEntryIds": [
-          "critical_002a_definition_critical_sinh_product_A"
-        ]
-      }
-    },
-    {
-      "id": "critical_003_claim_gamma_kappa_identity",
-      "kind": "claim",
-      "title": "\\sinh^2\\!\\left(\\tfrac{\\gamma(\\theta)}{2}\\right) = \\sinh^2\\!\\left(\\tfrac{\\kappa}{2}\\right) + A\\sin^2\\!\\left(\\tfrac{\\theta}{2}\\right)",
-      "titleFormat": "tex",
-      "labels": [
-        "gamma_kappa_identity"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 5,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5781,
-        "inspectedContentSha256": "9facb94d89e923a71a8f6c31434e40c8034bbe7dd47acbe97a628504dd191f36",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_addition_and_half_angle",
-        "cosh_sinh_basic_properties",
-        "def_A_theta",
-        "def_critical_sinh_product_A",
-        "def_kappa",
-        "gamma1_lower_bound_all_theta",
-        "set_and_algebra_notation",
-        "sqrt_nonnegative_existence_uniqueness"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_017_definition_A_theta",
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "critical_001_claim_cosh_addition_and_half_angle",
-        "critical_002_definition_kappa",
-        "critical_002a_definition_critical_sinh_product_A",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "gamma1_lower_bound_all_theta"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 129,
-        "dependencyUnitEntryIds": [
-          "critical_003_claim_gamma_kappa_identity"
-        ]
-      }
-    },
-    {
-      "id": "critical_004_claim_critical_point_iff_kappa_zero",
-      "kind": "claim",
-      "title": "\\sinh 2K_1\\sinh 2K_2 = 1 \\iff K_1 = K_2^* \\iff \\kappa = 0",
-      "titleFormat": "tex",
-      "labels": [
-        "critical_point_iff_kappa_zero"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 6,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "Ising"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2331,
-        "inspectedContentSha256": "13c7167a7f99d10425fc7d617acb9c2e8815e707badb39b62949d2ea8cab1e13",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_sinh_basic_properties",
-        "critical_condition_c1_eq_s1_c2",
-        "def_kappa",
-        "def_transfer_matrix_symbols",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_044_claim_critical_condition",
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "critical_002_definition_kappa",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 138,
-        "dependencyUnitEntryIds": [
-          "critical_004_claim_critical_point_iff_kappa_zero"
-        ]
-      }
-    },
-    {
-      "id": "critical_005_claim_isotropic_setting",
-      "kind": "claim",
-      "title": "\\text{等方な場合 } K_1 = K_2 = K \\text{ では } A = 1",
-      "titleFormat": "tex",
-      "labels": [
-        "isotropic_A_equals_one"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 7,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2415,
-        "inspectedContentSha256": "032747404c6f233ff85990aab1b87cf9c2a208f5024c6773b0931ff544a2d419",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_critical_sinh_product_A",
-        "def_transfer_matrix_symbols",
-        "gamma_kappa_identity",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "critical_002a_definition_critical_sinh_product_A",
-        "critical_003_claim_gamma_kappa_identity",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 130,
-        "dependencyUnitEntryIds": [
-          "critical_005_claim_isotropic_setting"
-        ]
-      }
-    },
-    {
-      "id": "critical_006_claim_kappa_of_K_basic",
-      "kind": "claim",
-      "title": "\\kappa(K) \\text{ の基本性質と臨界点 } K_c",
-      "titleFormat": "tex",
-      "labels": [
-        "kappa_of_K_basic"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 8,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11738,
-        "inspectedContentSha256": "fcb66973bdda71bd59b13d4f4a489636f6b32b2acae4bc0c66b27558534b3595",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_addition_and_half_angle",
-        "cosh_sinh_basic_properties",
-        "critical_point_iff_kappa_zero",
-        "def_transfer_matrix_symbols",
-        "isotropic_A_equals_one",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "critical_001_claim_cosh_addition_and_half_angle",
-        "critical_004_claim_critical_point_iff_kappa_zero",
-        "critical_005_claim_isotropic_setting",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 139,
-        "dependencyUnitEntryIds": [
-          "critical_006_claim_kappa_of_K_basic"
-        ]
-      }
-    },
-    {
-      "id": "critical_007_claim_gamma_derivatives_in_kappa",
-      "kind": "claim",
-      "title": "\\frac{\\partial\\gamma}{\\partial\\kappa} = \\frac{\\sinh\\kappa}{\\sinh\\gamma},\\quad \\left|\\frac{\\partial\\gamma}{\\partial\\kappa}\\right| \\leq 1",
-      "titleFormat": "tex",
-      "labels": [
-        "gamma_derivatives_in_kappa"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 9,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 8531,
-        "inspectedContentSha256": "7e4557e87ec88e6d6e0feab7ce544257225e802be28e7de2a744a799d157407d",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_addition_and_half_angle",
-        "cosh_sinh_basic_properties",
-        "gamma_kappa_identity",
-        "isotropic_A_equals_one",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "critical_001_claim_cosh_addition_and_half_angle",
-        "critical_003_claim_gamma_kappa_identity",
-        "critical_005_claim_isotropic_setting"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 131,
-        "dependencyUnitEntryIds": [
-          "critical_007_claim_gamma_derivatives_in_kappa"
         ]
       }
     },
@@ -14597,158 +14081,6 @@
         "classificationOrder": 101,
         "dependencyUnitEntryIds": [
           "critical_010_claim_sine_integral_two_sided"
-        ]
-      }
-    },
-    {
-      "id": "critical_011_theorem_second_derivative_log_divergence",
-      "kind": "theorem",
-      "title": "\\left|G''(\\kappa) - \\frac{1}{2\\pi}\\log\\frac{1}{|\\kappa|}\\right| \\leq \\frac{6}{5} \\quad \\left(0 < |\\kappa| \\leq \\tfrac12\\right)",
-      "titleFormat": "tex",
-      "labels": [
-        "second_derivative_log_divergence"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 13,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 23115,
-        "inspectedContentSha256": "2ee74ae25ae13efd9360b2158a2c0011f8e2410887803bce04fd1051afbf524d",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "closed_form_log_integral",
-        "cosh_addition_and_half_angle",
-        "cosh_sinh_basic_properties",
-        "elementary_sine_bounds",
-        "gamma_derivatives_in_kappa",
-        "gamma_kappa_identity",
-        "isotropic_A_equals_one",
-        "onsager_exact_solution",
-        "set_and_algebra_notation",
-        "sine_integral_two_sided"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "closing_010_theorem_onsager_exact_solution",
-        "critical_001_claim_cosh_addition_and_half_angle",
-        "critical_003_claim_gamma_kappa_identity",
-        "critical_005_claim_isotropic_setting",
-        "critical_007_claim_gamma_derivatives_in_kappa",
-        "critical_008_claim_elementary_sine_bounds",
-        "critical_009_claim_closed_form_log_integral",
-        "critical_010_claim_sine_integral_two_sided"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "onsager_exact_solution"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 177,
-        "dependencyUnitEntryIds": [
-          "critical_011_theorem_second_derivative_log_divergence"
-        ]
-      }
-    },
-    {
-      "id": "critical_012_theorem_specific_heat_log_divergence",
-      "kind": "theorem",
-      "title": "\\left|\\frac{d^2f}{dK^2} - \\frac{8}{\\pi}\\log\\frac{1}{|\\kappa(K)|}\\right| \\leq 45",
-      "titleFormat": "tex",
-      "labels": [
-        "specific_heat_log_divergence"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "sourceOrdinal": 14,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 12261,
-        "inspectedContentSha256": "d9a08f3edfdc3d356990214bf5a56468dee65ca2d941ac2fa5f1ed857f18f683",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "critical_point_iff_kappa_zero",
-        "gamma_derivatives_in_kappa",
-        "isotropic_A_equals_one",
-        "kappa_of_K_basic",
-        "onsager_exact_solution",
-        "second_derivative_log_divergence",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "closing_010_theorem_onsager_exact_solution",
-        "critical_004_claim_critical_point_iff_kappa_zero",
-        "critical_005_claim_isotropic_setting",
-        "critical_006_claim_kappa_of_K_basic",
-        "critical_007_claim_gamma_derivatives_in_kappa",
-        "critical_011_theorem_second_derivative_log_divergence"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "onsager_exact_solution"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
-      "dependencyPlacement": {
-        "classificationOrder": 178,
-        "dependencyUnitEntryIds": [
-          "critical_012_theorem_specific_heat_log_divergence"
         ]
       }
     },
@@ -20432,7 +19764,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 181,
+        "classificationOrder": 182,
         "dependencyUnitEntryIds": [
           "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
         ]
@@ -20661,7 +19993,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -23918,7 +23250,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 179,
+        "classificationOrder": 180,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
         ]
@@ -25103,7 +24435,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 180,
+        "classificationOrder": 181,
         "dependencyUnitEntryIds": [
           "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
         ]
@@ -26736,7 +26068,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [
           "ising"
         ],
@@ -26803,6 +26135,773 @@
         "classificationOrder": 176,
         "dependencyUnitEntryIds": [
           "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
+        ]
+      }
+    },
+    {
+      "id": "TV1_hatZ_hatY_044_claim_critical_condition",
+      "kind": "claim",
+      "title": "c_1 = s_1 c_2 \\text{ は臨界条件 } s_1 s_2 = 1 \\text{ と同値}",
+      "titleFormat": "tex",
+      "labels": [
+        "critical_condition_c1_eq_s1_c2"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 44,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5169,
+        "inspectedContentSha256": "e982c43ee907e5d70abaacbc6629d8e7c2ab0fe8524c96f9ca2f095275e48fca",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_sinh_basic_properties",
+        "def_transfer_matrix_symbols",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 137,
+        "dependencyUnitEntryIds": [
+          "TV1_hatZ_hatY_044_claim_critical_condition"
+        ]
+      }
+    },
+    {
+      "id": "critical_002_definition_kappa",
+      "kind": "definition",
+      "title": "\\kappa := 2K_1 - 2K_2^*",
+      "titleFormat": "tex",
+      "labels": [
+        "def_kappa"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 4,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 408,
+        "inspectedContentSha256": "acd5ce9a1658584ca9ece23706585a304c38ac9e05fdd1474805b4cd4dd2a556",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_transfer_matrix_symbols",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 38,
+        "dependencyUnitEntryIds": [
+          "critical_002_definition_kappa"
+        ]
+      }
+    },
+    {
+      "id": "critical_002a_definition_critical_sinh_product_A",
+      "kind": "definition",
+      "title": "A := \\sinh 2K_1\\sinh 2K_2^*",
+      "titleFormat": "tex",
+      "labels": [
+        "def_critical_sinh_product_A"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 4,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1190,
+        "inspectedContentSha256": "99c5d647ef4a1d869147904be1ccbaf48495d1d22bdb0360bb3d58b4eb00f477",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_sinh_basic_properties",
+        "def_transfer_matrix_symbols",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 39,
+        "dependencyUnitEntryIds": [
+          "critical_002a_definition_critical_sinh_product_A"
+        ]
+      }
+    },
+    {
+      "id": "critical_003_claim_gamma_kappa_identity",
+      "kind": "claim",
+      "title": "\\sinh^2\\!\\left(\\tfrac{\\gamma(\\theta)}{2}\\right) = \\sinh^2\\!\\left(\\tfrac{\\kappa}{2}\\right) + A\\sin^2\\!\\left(\\tfrac{\\theta}{2}\\right)",
+      "titleFormat": "tex",
+      "labels": [
+        "gamma_kappa_identity"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 5,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5781,
+        "inspectedContentSha256": "9facb94d89e923a71a8f6c31434e40c8034bbe7dd47acbe97a628504dd191f36",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_addition_and_half_angle",
+        "cosh_sinh_basic_properties",
+        "def_A_theta",
+        "def_critical_sinh_product_A",
+        "def_kappa",
+        "gamma1_lower_bound_all_theta",
+        "set_and_algebra_notation",
+        "sqrt_nonnegative_existence_uniqueness"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_017_definition_A_theta",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_001_claim_cosh_addition_and_half_angle",
+        "critical_002_definition_kappa",
+        "critical_002a_definition_critical_sinh_product_A",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 129,
+        "dependencyUnitEntryIds": [
+          "critical_003_claim_gamma_kappa_identity"
+        ]
+      }
+    },
+    {
+      "id": "critical_004_claim_critical_point_iff_kappa_zero",
+      "kind": "claim",
+      "title": "\\sinh 2K_1\\sinh 2K_2 = 1 \\iff K_1 = K_2^* \\iff \\kappa = 0",
+      "titleFormat": "tex",
+      "labels": [
+        "critical_point_iff_kappa_zero"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 6,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "Ising"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2331,
+        "inspectedContentSha256": "13c7167a7f99d10425fc7d617acb9c2e8815e707badb39b62949d2ea8cab1e13",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_sinh_basic_properties",
+        "critical_condition_c1_eq_s1_c2",
+        "def_kappa",
+        "def_transfer_matrix_symbols",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_044_claim_critical_condition",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_002_definition_kappa",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 138,
+        "dependencyUnitEntryIds": [
+          "critical_004_claim_critical_point_iff_kappa_zero"
+        ]
+      }
+    },
+    {
+      "id": "critical_005_claim_isotropic_setting",
+      "kind": "claim",
+      "title": "\\text{等方な場合 } K_1 = K_2 = K \\text{ では } A = 1",
+      "titleFormat": "tex",
+      "labels": [
+        "isotropic_A_equals_one"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 7,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2415,
+        "inspectedContentSha256": "032747404c6f233ff85990aab1b87cf9c2a208f5024c6773b0931ff544a2d419",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_critical_sinh_product_A",
+        "def_transfer_matrix_symbols",
+        "gamma_kappa_identity",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_002a_definition_critical_sinh_product_A",
+        "critical_003_claim_gamma_kappa_identity",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 130,
+        "dependencyUnitEntryIds": [
+          "critical_005_claim_isotropic_setting"
+        ]
+      }
+    },
+    {
+      "id": "critical_006_claim_kappa_of_K_basic",
+      "kind": "claim",
+      "title": "\\kappa(K) \\text{ の基本性質と臨界点 } K_c",
+      "titleFormat": "tex",
+      "labels": [
+        "kappa_of_K_basic"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 8,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 11738,
+        "inspectedContentSha256": "fcb66973bdda71bd59b13d4f4a489636f6b32b2acae4bc0c66b27558534b3595",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_addition_and_half_angle",
+        "cosh_sinh_basic_properties",
+        "critical_point_iff_kappa_zero",
+        "def_transfer_matrix_symbols",
+        "isotropic_A_equals_one",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_001_claim_cosh_addition_and_half_angle",
+        "critical_004_claim_critical_point_iff_kappa_zero",
+        "critical_005_claim_isotropic_setting",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 139,
+        "dependencyUnitEntryIds": [
+          "critical_006_claim_kappa_of_K_basic"
+        ]
+      }
+    },
+    {
+      "id": "critical_007_claim_gamma_derivatives_in_kappa",
+      "kind": "claim",
+      "title": "\\frac{\\partial\\gamma}{\\partial\\kappa} = \\frac{\\sinh\\kappa}{\\sinh\\gamma},\\quad \\left|\\frac{\\partial\\gamma}{\\partial\\kappa}\\right| \\leq 1",
+      "titleFormat": "tex",
+      "labels": [
+        "gamma_derivatives_in_kappa"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 9,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 8531,
+        "inspectedContentSha256": "7e4557e87ec88e6d6e0feab7ce544257225e802be28e7de2a744a799d157407d",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_addition_and_half_angle",
+        "cosh_sinh_basic_properties",
+        "gamma_kappa_identity",
+        "isotropic_A_equals_one",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "critical_001_claim_cosh_addition_and_half_angle",
+        "critical_003_claim_gamma_kappa_identity",
+        "critical_005_claim_isotropic_setting"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 131,
+        "dependencyUnitEntryIds": [
+          "critical_007_claim_gamma_derivatives_in_kappa"
+        ]
+      }
+    },
+    {
+      "id": "critical_011_theorem_second_derivative_log_divergence",
+      "kind": "theorem",
+      "title": "\\left|G''(\\kappa) - \\frac{1}{2\\pi}\\log\\frac{1}{|\\kappa|}\\right| \\leq \\frac{6}{5} \\quad \\left(0 < |\\kappa| \\leq \\tfrac12\\right)",
+      "titleFormat": "tex",
+      "labels": [
+        "second_derivative_log_divergence"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 13,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 23115,
+        "inspectedContentSha256": "2ee74ae25ae13efd9360b2158a2c0011f8e2410887803bce04fd1051afbf524d",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "closed_form_log_integral",
+        "cosh_addition_and_half_angle",
+        "cosh_sinh_basic_properties",
+        "elementary_sine_bounds",
+        "gamma_derivatives_in_kappa",
+        "gamma_kappa_identity",
+        "isotropic_A_equals_one",
+        "onsager_exact_solution",
+        "set_and_algebra_notation",
+        "sine_integral_two_sided"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_010_theorem_onsager_exact_solution",
+        "critical_001_claim_cosh_addition_and_half_angle",
+        "critical_003_claim_gamma_kappa_identity",
+        "critical_005_claim_isotropic_setting",
+        "critical_007_claim_gamma_derivatives_in_kappa",
+        "critical_008_claim_elementary_sine_bounds",
+        "critical_009_claim_closed_form_log_integral",
+        "critical_010_claim_sine_integral_two_sided"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 177,
+        "dependencyUnitEntryIds": [
+          "critical_011_theorem_second_derivative_log_divergence"
+        ]
+      }
+    },
+    {
+      "id": "critical_012_theorem_specific_heat_log_divergence",
+      "kind": "theorem",
+      "title": "\\left|\\frac{d^2f}{dK^2} - \\frac{8}{\\pi}\\log\\frac{1}{|\\kappa(K)|}\\right| \\leq 45",
+      "titleFormat": "tex",
+      "labels": [
+        "specific_heat_log_divergence"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": 14,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 12261,
+        "inspectedContentSha256": "d9a08f3edfdc3d356990214bf5a56468dee65ca2d941ac2fa5f1ed857f18f683",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "critical_point_iff_kappa_zero",
+        "gamma_derivatives_in_kappa",
+        "isotropic_A_equals_one",
+        "kappa_of_K_basic",
+        "onsager_exact_solution",
+        "second_derivative_log_divergence",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_010_theorem_onsager_exact_solution",
+        "critical_004_claim_critical_point_iff_kappa_zero",
+        "critical_005_claim_isotropic_setting",
+        "critical_006_claim_kappa_of_K_basic",
+        "critical_007_claim_gamma_derivatives_in_kappa",
+        "critical_011_theorem_second_derivative_log_divergence"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 178,
+        "dependencyUnitEntryIds": [
+          "critical_012_theorem_specific_heat_log_divergence"
+        ]
+      }
+    },
+    {
+      "id": "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence",
+      "kind": "claim",
+      "title": "\\sinh 2K_c = 1\\text{ と }\\left|\\frac{d^2f}{dK^2}(K) - \\frac{8}{\\pi}\\log\\frac{1}{|K-K_c|}\\right| \\leq 49",
+      "titleFormat": "tex",
+      "labels": [
+        "critical_point_sinh_K_c_and_second_derivative_log_divergence"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "sourceOrdinal": null,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 0,
+        "isingSemanticMatches": [
+          "ising"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5483,
+        "inspectedContentSha256": "eda38e1db3cad8bd2b4211938074bcda231459b6ae5a8afd38939f8c3169456a",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "c_plus_value_c_sandwich_and_double_limit_of_log_Z",
+        "cosh_addition_and_half_angle",
+        "def_partition_function_2d_ising",
+        "gamma1_lower_bound_all_theta",
+        "gamma_derivatives_in_kappa",
+        "isotropic_A_equals_one",
+        "kappa_of_K_basic",
+        "second_derivative_log_divergence",
+        "set_and_algebra_notation",
+        "specific_heat_log_divergence"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit",
+        "critical_001_claim_cosh_addition_and_half_angle",
+        "critical_005_claim_isotropic_setting",
+        "critical_006_claim_kappa_of_K_basic",
+        "critical_007_claim_gamma_derivatives_in_kappa",
+        "critical_011_theorem_second_derivative_log_divergence",
+        "critical_012_theorem_specific_heat_log_divergence",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "partition_function_2d_ising_002_definition_partition_function"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
+      "dependencyPlacement": {
+        "classificationOrder": 179,
+        "dependencyUnitEntryIds": [
+          "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
         ]
       }
     }
@@ -27097,42 +27196,24 @@
     {
       "id": "heading_critical_point",
       "kind": "heading",
-      "title": "臨界点と比熱の対数発散",
+      "title": "\\cosh,\\sinh \\text{ の加法定理と、正弦およびそれを含む積分の評価}",
       "labels": [],
       "sourceFile": "020_critical_point.ts",
       "dependsOnLabels": []
     },
     {
-      "id": "critical_000_remark_escape_to_real_analysis_chapter_E",
+      "id": "critical_remark_real_analysis_facts_R3_R4",
       "kind": "remark",
-      "title": "この章で新たに持ち込む実数解析の事実（(R3)〜(R6)）",
+      "title": "積分の評価で持ち込む実数解析の事実（(R3)・(R4)）",
       "labels": [
-        "remark_real_analysis_escape_chapter_E"
+        "remark_real_analysis_facts_R3_R4"
       ],
       "sourceFile": "020_critical_point.ts",
       "dependsOnLabels": [
         "closed_form_log_integral",
+        "cosh_addition_and_half_angle",
         "elementary_sine_bounds",
-        "kappa_of_K_basic",
-        "onsager_exact_solution",
-        "remark_real_analysis_escape_point",
-        "riemann_sum_to_integral",
-        "second_derivative_log_divergence",
         "sine_integral_two_sided"
-      ]
-    },
-    {
-      "id": "critical_013_remark_physical_specific_heat",
-      "kind": "remark",
-      "title": "\\text{物理的な比熱 } C \\text{ との対応：} C = k_B K^2 \\frac{d^2 f}{dK^2}",
-      "labels": [
-        "remark_physical_specific_heat"
-      ],
-      "sourceFile": "020_critical_point.ts",
-      "dependsOnLabels": [
-        "def_partition_function_2d_ising",
-        "kappa_of_K_basic",
-        "specific_heat_log_divergence"
       ]
     },
     {
@@ -27401,7 +27482,7 @@
         "onsager_exact_solution",
         "onsager_free_energy_expression",
         "partition_function_sandwich",
-        "remark_real_analysis_escape_chapter_E",
+        "remark_real_analysis_facts_R3_R4",
         "riemann_sum_to_integral"
       ]
     },
@@ -27429,6 +27510,39 @@
         "onsager_free_energy_expression",
         "partition_function_sandwich",
         "partition_function_via_transfer_matrix"
+      ]
+    },
+    {
+      "id": "heading_part_critical_point",
+      "kind": "heading",
+      "title": "臨界点",
+      "labels": [],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "dependsOnLabels": []
+    },
+    {
+      "id": "heading_chapter_critical_point_and_log_divergence",
+      "kind": "heading",
+      "title": "\\text{臨界点 }K_c\\text{ と }\\frac{d^2f}{dK^2}\\text{ の対数発散}",
+      "labels": [],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "dependsOnLabels": []
+    },
+    {
+      "id": "critical_000_remark_escape_to_real_analysis_chapter_E",
+      "kind": "remark",
+      "title": "この章で新たに持ち込む実数解析の事実（(R5)・(R6)）",
+      "labels": [
+        "remark_real_analysis_escape_chapter_E"
+      ],
+      "sourceFile": "critical_point_and_log_divergence.ts",
+      "dependsOnLabels": [
+        "kappa_of_K_basic",
+        "onsager_exact_solution",
+        "remark_real_analysis_escape_point",
+        "remark_real_analysis_facts_R3_R4",
+        "riemann_sum_to_integral",
+        "second_derivative_log_divergence"
       ]
     }
   ]

@@ -5,7 +5,7 @@ from sage.all_cmdline import *   # import sage library
 
 _sage_const_15 = Integer(15); _sage_const_1 = Integer(1); _sage_const_2 = Integer(2); _sage_const_0 = Integer(0); _sage_const_4 = Integer(4); _sage_const_3 = Integer(3); _sage_const_8 = Integer(8); _sage_const_45 = Integer(45); _sage_const_49 = Integer(49); _sage_const_10 = Integer(10); _sage_const_6 = Integer(6); _sage_const_12 = Integer(12); _sage_const_18 = Integer(18); _sage_const_24 = Integer(24); _sage_const_16 = Integer(16); _sage_const_64 = Integer(64); _sage_const_256 = Integer(256); _sage_const_1024 = Integer(1024)# ---------------------------------------------------------
 # SageMath: 比熱の対数発散（章 E の主定理）
-#   対象: structured-latex specific_heat_log_divergence, remark_physical_specific_heat
+#   対象: structured-latex specific_heat_log_divergence と、参照用ノートへ退避した物理的な比熱の対応（もと remark_physical_specific_heat）
 #
 #   |f''(K) - (8/pi) log(1/|kappa(K)|)| <= 45      (0 < |K - K_c| <= 1/10)
 #   |f''(K) - (8/pi) log(1/|K - K_c|)| <= 49

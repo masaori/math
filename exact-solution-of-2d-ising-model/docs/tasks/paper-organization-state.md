@@ -2,6 +2,18 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の九番目の章、部「臨界点」の章「臨界点 $K_c$ と $\frac{d^2f}{dK^2}$ の対数発散」を組み直した。これで四番目の項目（章ごとの組み直し）は全章を終えた。
+  棚卸しでこの章に割り当てた 10 項を、`008_TV1_hatZ_hatY_part2.ts`（1 項）と `020_critical_point.ts`（9 項）から、新しいファイル `content/critical_point_and_log_divergence.ts` の部見出し「臨界点」・章見出しの下へ
+  棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $M\to\infty$ の極限の章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（下の注記の直しを除く）。空になった 008 の後半のファイルは消した。
+  020 には数学的道具立ての 4 項（`cosh_addition_and_half_angle`・`elementary_sine_bounds`・`closed_form_log_integral`・`sine_integral_two_sided`）が残り、章見出しを「$\cosh,\sinh$ の加法定理と、正弦およびそれを含む積分の評価」にした。棚卸しでは 175 項のすべてが章見出しの下に入った。
+  - **章末のゴールの主張を足した。** (1) `kappa_of_K_basic` の $K_c$ は $K_c=\frac12\log(1+\sqrt2)\in\mathbb R_{>0}$ を満たし、$\sinh2K=1$ を満たす $K\in\mathbb R_{>0}$ は $K_c$ だけ、(2) $0<|K-K_c|\le\frac1{10}$ で $f(K):=\frac12\log(2\sinh2K)+\frac1{4\pi}\int_0^{2\pi}\gamma(\theta)d\theta$ は 2 回微分可能で
+    $|f''(K)-\frac8\pi\log\frac1{|K-K_c|}|\le49$、を主張する claim `critical_point_sinh_K_c_and_second_derivative_log_divergence` を章の最後に置いた。証明は `cosh_addition_and_half_angle` (3)(4) による式変形と、$f$ を `specific_heat_log_divergence` の $f$ に書き直して二つ目の不等式を引くだけである。
+    SageMath（`sagemath/check/critical_point_sinh_K_c_and_second_derivative_log_divergence/`。(1) は QQbar で厳密、(2) は mpmath で $|K-K_c|$ を 0.1 から 1e-24 まで。否定コントロールは $K_c'=\frac12\log2$ と係数 $4/\pi$）と
+    Lean（`lean/Ising2D/Part020/ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`。仮定は $K>0$ だけ。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。章の項目数は 11（割り当て 10 とゴールの主張 1。章立て案は 10）。
+  - **実数解析の事実の注記を二つに分けた。** 020 に残った 4 項が (R3) 積分の線型性と単調性・(R4) 微分積分学の基本定理を使うので、その宣言を 020 の章見出しの直後の新しい注記 `remark_real_analysis_facts_R3_R4` に置き（文面は旧注記のまま）、
+    臨界点の章の冒頭へ移した `remark_real_analysis_escape_chapter_E` はそれを引いて (R5)(R6) だけを足す形にした。前の章の `remark_real_analysis_escape_point` が後ろの章の注記を指していた参照は、(R3)(R4) の注記への参照と「臨界点の章の冒頭」という言葉に直した。
+  - **物理的な比熱との対応の注記（`remark_physical_specific_heat`）を本文から参照用ノート `notes/critical_point_physical_specific_heat_not_adopted.ts` へ退避した。** 比熱・絶対温度・Boltzmann 定数は本文で定義されない物理の量で、数学的主張ではないため。理由をノートに書いた。
+  - Lean・SageMath の注記と `lean/docs/ch020-formalization.md` の正本のファイル名を直した。別のエージェントのレビューを経た（指摘 8 件を直した。上の注記の分割・物理の注記の退避のほか、ゴールの主張の (1) を $K_c$ を定義し直さない形にし一意性の根拠を 1 行 1 根拠で書き、Lean の定理から人手に無い極限の連言を外した）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の八番目の章、部「熱力学極限」の二番目の章「$M\to\infty$ の極限と閉形式」を組み直した。
   棚卸しでこの章に割り当てた 9 項を、`011_max_eigenvalue.ts`（5 項）・`012_free_energy.ts`（2 項）・`018_even_sector_closing.ts`（2 項）から、新しいファイル `content/thermodynamic_limit_column_limit_and_closed_form.ts` の章見出しの下へ
   棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $N\to\infty$ の極限の章のファイルの後ろに置いた。ブロックの id・ラベルは変えていない。案内文と注記の 4 つ（018 の `closing_remark_overview_c_plus_and_onsager`、011 の `maxeig_remark_overview_c_plus_and_epsilon`、012 の `remark_real_analysis_escape_point`・`remark_remaining_input_even_sector`）も、中身がこの章の項の説明なので一緒に移した。
@@ -1251,9 +1263,8 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の九番目の章：部「臨界点」の章「臨界点 $K_c$ と $\frac{d^2f}{dK^2}$ の対数発散」に割り当てた 10 項
-（棚卸し `parts` の四番目の部の章の `dependencyOrder`。`020_critical_point.ts` に 9 項、`008_TV1_hatZ_hatY_part2.ts` に 1 項）を、新しいファイルの部見出し「臨界点」・章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の $M\to\infty$ の極限の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+`未確定` の「$\gamma(\theta)$ の定義を主張から分ける」（作業の順序の五番目の前に行うと決めた一単位）：`gamma1_lower_bound_all_theta` の statement の中で定めている $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$（$\theta\in\mathbb R$）を独立した definition ブロックに分け、
+`def_gamma_theta_tilde_mu` との関係をそこで一本化し、参照を付け替え、`chapter-plan.ts` の対角化の章の `goalLabels` をその定義に付け替える。Lean・SageMath の対応も同じ回で揃える。その次が作業の順序の五番目（どの章のゴールの式からも辿れない 7 項の確認）である。
 
 ## 未確定
 
@@ -1264,12 +1275,13 @@ runbook の「作業の順序」の四番目の項目の九番目の章：部「
   いまは `gamma1_lower_bound_all_theta` の statement の中で $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$ を定めており、「1 ブロック 1 主張」に反する。
   $\theta=\tilde\theta_\mu$ の $\gamma$ も `def_gamma_theta_tilde_mu` で別に定めているので、記号 $\gamma$ の定義が二重である。$\Lambda^{(\delta)}_M$ の定義の分離と同じ型の作業で、
   独立した definition ブロックに分け、`def_gamma_theta_tilde_mu` との関係をそこで一本化し、`chapter-plan.ts` の対角化の章の `goalLabels` をその定義に付け替える。
+- **`second_derivative_log_divergence` の証明が、積分区間の分割の根拠に (R3)（積分の線型性と単調性）を挙げている（2026-10-31 のレビューの指摘。数学の中身を変えない組み直しの範囲外）。**
+  区間の加法性は (R3) の文面に含まれないので、(R3) の文面に区間の加法性を足すか、別の事実として宣言するかを、式変形の書き方の統一か作業の順序の外の一単位で扱う。
 - **逆双曲線余弦の 2 項（`def_arccosh`・`arccosh_properties`）の分類。** 依存先は実対数・平方根・双曲線関数・集合の記法だけで、イジング模型を参照しないが、
   旧 `004_transfer_matrix.ts` に在ったため2次元イジングモデルに分類され、いまは対角化の章のファイルに在る。分類規則に照らせば数学的道具立てである（下の分類の項と同じ問題）。
-- 章ごとの組み直し（作業の順序の四番目）で扱うこと:
-  - 組み直しの途中は、組み直した章が本文の末尾に来るので、公開する本文では部「分配関数」が臨界点の章より後ろにあり、旧い章（004 以降）が
-    末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。
-    残ったファイルに部見出し「数学的道具立て」を置くのは、全章を組み直した後（作業の順序の六番目まで）に行う。
+- 章ごとの組み直し（作業の順序の四番目）は全章を終えた。残りの扱い:
+  - 番号を持つファイルには、数学的道具立てと、どの章にも割り当てていない 7 項（`004_transfer_matrix.ts`・`013_even_sector_modes.ts`・`017_even_sector_eigenvalues.ts` など）が残る。
+    残ったファイルに部見出し「数学的道具立て」を置き、旧い章見出しを道具の中身に合わせるのは、未割り当ての 7 項を片付けた後（作業の順序の六番目まで）に行う。
   - 後ろの章を指す案内の参照は、平方根の定義 → 平方根性の主張の 1 本だけが残る（棚卸しの `crossChapterNavigationReferences`。
     平方根性の主張はどの章にも割り当てられない 9 項の一つで、作業の順序の五番目の項目で扱う）。
 - 分類（作業の順序の外）: 逆双曲線余弦の定義と性質、正の実数上の実対数、正の結合定数上の双曲線正接は、イジング模型を参照しない実関数の道具だが、

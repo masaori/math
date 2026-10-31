@@ -1,7 +1,7 @@
 /-
 # `|G''(κ) - (1/2π) log(1/|κ|)| ≤ 6/5`（`0 < |κ| ≤ 1/2`）— 自由エネルギーの 2 階微分の対数発散
 
-人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
+人手証明（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）:
 - `critical_011_theorem_second_derivative_log_divergence`
   （ラベル `second_derivative_log_divergence`）
 

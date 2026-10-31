@@ -1,7 +1,7 @@
 /-
 # `|d²f/dK² - (8/π) log(1/|κ(K)|)| ≤ 45` — 比熱の対数発散（章 020 の到達点）
 
-人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
+人手証明（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）:
 - `critical_012_theorem_specific_heat_log_divergence`（ラベル `specific_heat_log_divergence`）
 
 **具体版**（人手証明と同じ抽象度）。

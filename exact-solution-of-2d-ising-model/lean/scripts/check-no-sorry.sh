@@ -1613,6 +1613,8 @@ targets=(
   Ising2D.specific_heat_log_divergence_dist
   Ising2D.tendsto_log_inv_dist_atTop
   Ising2D.specific_heat_ratio_tendsto
+  Ising2D.Kc_eq_half_log_and_unique
+  Ising2D.critical_point_sinh_K_c_and_second_derivative_log_divergence
   Ising2D.NecSuf.idem_of_ortho_of_sum_eq_one
   Ising2D.NecSuf.iSupIndep_range_proj
   Ising2D.NecSuf.iSup_range_proj_eq_top

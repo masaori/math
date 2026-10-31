@@ -1,6 +1,6 @@
-# 章 020「臨界点と比熱の対数発散」の Lean 形式化
+# 臨界点の章「臨界点 K_c と d²f/dK² の対数発散」の Lean 形式化
 
-正本: `structured-latex/content/020_critical_point.ts`（15 ブロック）
+正本: `structured-latex/content/critical_point_and_log_divergence.ts`（臨界点の章。`κ`・`A`・臨界条件・`γ` の `κ` 微分・`G''` と `f''` の対数発散と、章の冒頭の (R5)(R6) の注記）と `structured-latex/content/020_critical_point.ts`（数学的道具立てとして残った (R3)(R4) の注記と、`cosh,sinh` の加法定理と、正弦およびそれを含む積分の評価の 4 ブロック）
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 
@@ -192,6 +192,15 @@
 `eventually_hasDerivAt_fFun` で「近傍で一致する」ことを示してから
 `HasDerivAt.congr_of_eventuallyEq` で 2 階微分へ渡している。
 
+### 1.10 `ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`（ラベル `critical_point_sinh_K_c_and_second_derivative_log_divergence`）
+
+臨界点の章の最後に置いたゴールの主張。既存の定理を並べるだけで、仮定は `K > 0` だけである。
+
+| Lean | 内容 | 人手 |
+| --- | --- | --- |
+| `Ising2D.Kc_eq_half_log_and_unique` | `K_c = (1/2)log(1+√2)`、`K_c > 0`、`sinh 2K_c = 1`、`sinh 2K = 1` を満たす正の `K` は `K_c` だけ | (1) |
+| `Ising2D.critical_point_sinh_K_c_and_second_derivative_log_divergence` | (1) と、(2) `0 < \|K-K_c\| ≤ 1/10` で `(1/2)log(2 sinh 2K) + (1/4π)∫γ = fFun K`（証明 (2) の式変形）、2 回微分可能、`\|d²f/dK² - (8/π)log(1/\|K-K_c\|)\| ≤ 49` | 主張全体 |
+
 ## 2. 具体版と必要十分版の 2 本立ての対応
 
 | 必要十分版（`lean/Ising2D/NecSuf/`） | 対応する具体版 | 必要十分版で判明した本質 |
@@ -217,7 +226,7 @@
 
 | 原文のブロック（ラベル） | 内容 | 形式化しなかった理由 |
 | --- | --- | --- |
-| `critical_013_remark_physical_specific_heat`（`remark_physical_specific_heat`） | 物理的な比熱 `C = k_B K² d²f/dK²` との対応 | **形式化の対象外。** 数学的主張ではなく、無次元量と物理量の辞書（記号の読み替え）を述べる注記である。 |
+| `critical_013_remark_physical_specific_heat`（`remark_physical_specific_heat`） | 物理的な比熱 `C = k_B K² d²f/dK²` との対応 | **形式化の対象外。** 数学的主張ではなく、無次元量と物理量の辞書（記号の読み替え）を述べる注記である。2026-10-31 に本文から参照用ノート `structured-latex/notes/critical_point_physical_specific_heat_not_adopted.ts` へ退避した。 |
 | `critical_000_remark_escape_to_real_analysis_chapter_E`（`remark_real_analysis_escape_chapter_E`） | (R3)〜(R6) の宣言 | **形式化の対象外（ただし全項目を mathlib へ対応づけ済み）。** これは「この章でどこまで実数解析へ脱出するか」を宣言するメタな注記であり、定理ではない。対応表は §0 に、(R5) の導出は `NecSuf/DiffUnderIntegral.lean` にある。 |
 
 ## 4. 人手証明との定数の差（原文の数値評価を持ち込まなかったことによる）

@@ -1,7 +1,7 @@
 /-
 # `κ := 2K_1 - 2K_2^*`、`A := sinh 2K_1 sinh 2K_2^*` と臨界条件
 
-人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
+人手証明（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）:
 - `critical_002_definition_kappa`（ラベル `def_kappa`）
 - `critical_002a_definition_critical_sinh_product_A`（ラベル `def_critical_sinh_product_A`）
 - `critical_003_claim_gamma_kappa_identity`（ラベル `gamma_kappa_identity`）

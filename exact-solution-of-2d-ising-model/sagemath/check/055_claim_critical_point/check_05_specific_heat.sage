@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # SageMath: 比熱の対数発散（章 E の主定理）
-#   対象: structured-latex specific_heat_log_divergence, remark_physical_specific_heat
+#   対象: structured-latex specific_heat_log_divergence と、参照用ノートへ退避した物理的な比熱の対応（もと remark_physical_specific_heat）
 #
 #   |f''(K) - (8/pi) log(1/|kappa(K)|)| <= 45      (0 < |K - K_c| <= 1/10)
 #   |f''(K) - (8/pi) log(1/|K - K_c|)| <= 49

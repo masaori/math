@@ -4,7 +4,7 @@
 
 **対象ラベル**: `specific_heat_log_divergence` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/020_critical_point.ts`（章 E: 臨界点と比熱の対数発散）
+- ファイル: `structured-latex/content/critical_point_and_log_divergence.ts`（臨界点の章）。`cosh_addition_and_half_angle`・`elementary_sine_bounds`・`closed_form_log_integral`・`sine_integral_two_sided` は `structured-latex/content/020_critical_point.ts`（数学的道具立て）
 - 併せて検証:
   - `cosh_addition_and_half_angle`（加法定理・半角公式・`arcsinh`）
   - `def_kappa` / `def_critical_sinh_product_A` / `gamma_kappa_identity`（鍵の恒等式）
@@ -13,7 +13,7 @@
   - `gamma_derivatives_in_kappa`（`κ` についての 1 階・2 階導関数）
   - `elementary_sine_bounds` / `closed_form_log_integral` / `sine_integral_two_sided`（初等評価）
   - `second_derivative_log_divergence`（`G''(κ)` の対数発散）
-  - `remark_physical_specific_heat`（物理的な比熱 `C = k_B K² f''(K)` との対応）
+  - 物理的な比熱 `C = k_B K² f''(K)` との対応（もと本文の注記 `remark_physical_specific_heat`。2026-10-31 に参照用ノート `structured-latex/notes/critical_point_physical_specific_heat_not_adopted.ts` へ退避した）
 
 ### 何を確定させるための検証か
 
@@ -95,5 +95,5 @@ Step 6 の実測 2.1492 は本文の限界 2.201 に最も近い。**この段�
 - **有限 `M` からの収束は単調ではない**（`M = 8` より `M = 16` の方が誤差が大きい）。
   半整数運動量の標本点の並びによる振動で、`M = 64, 256, 1024` では単調に減り
   `M = 1024` で `4.4e-34` まで落ちる。
-- `remark_physical_specific_heat` の `C = k_B K² f''(K)` は、`k_B = 𝒥 = 1` とおいて
+- 物理的な比熱の対応（参照用ノートへ退避したもと `remark_physical_specific_heat`）の `C = k_B K² f''(K)` は、`k_B = 𝒥 = 1` とおいて
   `C := dU/dT` を数値微分で作り、`k_B K² f''` と一致することで確認した（残差 4.6e-41）。

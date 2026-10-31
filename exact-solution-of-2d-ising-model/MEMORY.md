@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの四番目の項目の九番目（最後）の章「臨界点 K_c と d²f/dK² の対数発散」を組み直し、章ごとの組み直しを全章終えた。10 項を `structured-latex/content/critical_point_and_log_divergence.ts`（部「臨界点」）へ依存順で移し（id・ラベル不変。008 の後半のファイルは空になったので消した）、章末にゴールの主張 `critical_point_sinh_K_c_and_second_derivative_log_divergence`（SageMath と Lean つき）を足した。(R3)(R4) の宣言を 020 に残った道具の前の注記 `remark_real_analysis_facts_R3_R4` へ分け、物理的な比熱の注記は参照用ノートへ退避した。次は γ(θ) の定義を主張から分ける一単位（状態台帳の「次の一歩」）。
 2026-10-31: Lean の通しの証明の項目 7（フォルダを章立てに合わせる）の最初の章「転送行列による表示」を移した。14 ファイルを `lean/Ising2D/PartitionFunction/TransferMatrixRepresentation/` へ移し（名前空間不変）、import・コメントのパス・`lean/README.md`・`lean/docs/ch010-formalization.md` を直した。置き場の規則（章は `Ising2D/<部>/<章>/`、項目の章は棚卸しの `chapterKey`、混在ファイルは形式化している項目の多数決、数学的道具立ては `MathematicalTools/`、退避した経路は `RoutesNotAdopted/`）を runbook の項目 7 に書いた。`lake build`・`check-no-sorry.sh`・`check-end-to-end.sh` は通る。次は「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」の章。
 
 2026-10-31: Lean の通しの証明の項目 6 を終えた。通しの定理 `onsager_exact_solution_end_to_end`（`lean/Ising2D/Part018/TheoremOnsagerExactSolutionEndToEnd.lean`）を立て、`lean/scripts/check-end-to-end.sh` が通る（`sorryAx` 非依存）。Step 1 の `c(M) > 0` は人手どおり `def_rayleigh_sup` から（`onsager_limit_in_N_row_physical`）。ゴール台帳の「Lean で通しに証明」は、フォルダの組み直し（項目 7）が残るので未達のまま。次は項目 7 の最初の章「転送行列による表示」（状態台帳の「次の一歩」）。

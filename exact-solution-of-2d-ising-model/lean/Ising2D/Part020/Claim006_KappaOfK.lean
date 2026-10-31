@@ -1,7 +1,7 @@
 /-
 # `κ(K)` の基本性質と臨界点 `K_c`
 
-人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
+人手証明（正本は `structured-latex/content/critical_point_and_log_divergence.ts`）:
 - `critical_006_claim_kappa_of_K_basic`（ラベル `kappa_of_K_basic`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は
