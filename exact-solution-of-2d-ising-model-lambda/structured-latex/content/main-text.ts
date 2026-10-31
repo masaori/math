@@ -23611,15 +23611,15 @@ S(\tau')
                         displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}_{O}(\psi)
 &=(-1)^{\mathrm{inv}_{O}(\psi)}
-&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&&\bigl(\because\ \blkref{def_orbit_permutation_sign}\bigr)\\
 &=(-1)^{2k}
-&&(\because\ \mathrm{inv}_{O}(\psi)=2k)\\
+&&\bigl(\because\ \mathrm{inv}_{O}(\psi)=2k\bigr)\\
 &=\bigl((-1)^{2}\bigr)^{k}
-&&(\because\ \text{指数法則})\\
+&&\bigl(\because\ \text{指数法則}\bigr)\\
 &=1^{k}
-&&(\because\ (-1)^{2}=1)\\
+&&\bigl(\because\ (-1)^{2}=1\bigr)\\
 &=1
-&&(\because\ 1\ \text{の冪は}\ 1)
+&&\bigl(\because\ 1\ \text{の冪は}\ 1\bigr)
 \end{aligned}`),
                         paragraph([
                           "転倒数が奇数の場合。ある ",
@@ -23633,19 +23633,19 @@ S(\tau')
                         displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}_{O}(\psi)
 &=(-1)^{\mathrm{inv}_{O}(\psi)}
-&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&&\bigl(\because\ \blkref{def_orbit_permutation_sign}\bigr)\\
 &=(-1)^{2k+1}
-&&(\because\ \mathrm{inv}_{O}(\psi)=2k+1)\\
+&&\bigl(\because\ \mathrm{inv}_{O}(\psi)=2k+1\bigr)\\
 &=(-1)^{2k}\cdot(-1)
-&&(\because\ \text{指数法則})\\
+&&\bigl(\because\ \text{指数法則}\bigr)\\
 &=\bigl((-1)^{2}\bigr)^{k}\cdot(-1)
-&&(\because\ \text{指数法則})\\
+&&\bigl(\because\ \text{指数法則}\bigr)\\
 &=1^{k}\cdot(-1)
-&&(\because\ (-1)^{2}=1)\\
+&&\bigl(\because\ (-1)^{2}=1\bigr)\\
 &=1\cdot(-1)
-&&(\because\ 1\ \text{の冪は}\ 1)\\
+&&\bigl(\because\ 1\ \text{の冪は}\ 1\bigr)\\
 &=-1
-&&(\because\ 1\ \text{は乗法の単位元})
+&&\bigl(\because\ 1\ \text{は乗法の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "いずれの場合も ",
@@ -23658,13 +23658,13 @@ S(\tau')
                         displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}_{O}(\psi)\cdot\mathrm{sgn}_{O}(\psi)
 &=(-1)^{\mathrm{inv}_{O}(\psi)}\cdot(-1)^{\mathrm{inv}_{O}(\psi)}
-&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&&\bigl(\because\ \blkref{def_orbit_permutation_sign}\bigr)\\
 &=\bigl((-1)^{2}\bigr)^{\mathrm{inv}_{O}(\psi)}
-&&(\because\ \text{指数法則})\\
+&&\bigl(\because\ \text{指数法則}\bigr)\\
 &=1^{\mathrm{inv}_{O}(\psi)}
-&&(\because\ (-1)^{2}=1)\\
+&&\bigl(\because\ (-1)^{2}=1\bigr)\\
 &=1
-&&(\because\ 1\ \text{の冪は}\ 1)
+&&\bigl(\because\ 1\ \text{の冪は}\ 1\bigr)
 \end{aligned}`),
                         paragraph([
                           "第三の主張。",
@@ -23692,11 +23692,11 @@ S(\tau')
                         displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}_{O}(\mathrm{id}_{O})
 &=(-1)^{\mathrm{inv}_{O}(\mathrm{id}_{O})}
-&&(\because\ \blkref{def_orbit_permutation_sign})\\
+&&\bigl(\because\ \blkref{def_orbit_permutation_sign}\bigr)\\
 &=(-1)^{0}
-&&(\because\ \mathrm{inv}_{O}(\mathrm{id}_{O})=0)\\
+&&\bigl(\because\ \mathrm{inv}_{O}(\mathrm{id}_{O})=0\bigr)\\
 &=1
-&&(\because\ \text{0 乗は}\ 1)
+&&\bigl(\because\ \text{0 乗は}\ 1\bigr)
 \end{aligned}`),
                         paragraph([
                           "現れるのは有限集合 ",
