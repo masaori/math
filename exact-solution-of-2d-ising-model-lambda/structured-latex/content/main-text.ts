@@ -75245,32 +75245,6 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                       {
                         role: "prerequisiteDefinition",
                         element: {
-                          id: "kac_ward_definition_permutation_orbit_set",
-                          kind: "definition",
-                          title: { text: "置換の軌道集合" },
-                          labels: ["def_permutation_orbit_set"],
-                          habitat: "N",
-                          lean: ["Ising2DLambda.KacWard.movedOrbit"],
-                          statement: [
-                            paragraph([
-                              math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
-                              math(String.raw`\vec e\in\vec E_L`), " に対し、軌道集合を",
-                            ]),
-                            displayMath(String.raw`O_{\varphi}(\vec e):=
-\{\,\varphi^{\circ k}(\vec e)\mid k\in\mathbb N\,\}\subset\vec E_L`),
-                            paragraph([
-                              "で定める（反復合成は ", ref("def_permutation_iterate"), "）。",
-                              ref("def_permutation_minimal_return"), " により、これは軌道列 ",
-                              math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
-                              ref("def_permutation_orbit_sequence"), "）に現れる ",
-                              math(String.raw`r_{\varphi}(\vec e)`), " 個の向き付き辺の集合に等しい。",
-                            ]),
-                          ],
-                        },
-                      },
-                      {
-                        role: "prerequisiteDefinition",
-                        element: {
                           id: "kac_ward_definition_moved_orbit_family",
                           kind: "definition",
                           title: { text: "動く辺の相異なる軌道の族" },
@@ -75331,7 +75305,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                         paragraph([
                           "まず、", math(String.raw`\vec f\in O_{\varphi}(\vec e)`), " ならば ",
                           math(String.raw`O_{\varphi}(\vec f)=O_{\varphi}(\vec e)`), " であることを示す。",
-                          ref("def_permutation_orbit_set"), " により、ある ",
+                          "参照用ノート「不採用経路: 置換の軌道集合」により、ある ",
                           math(String.raw`j\in\mathbb N`), " が存在して ",
                           math(String.raw`\vec f=\varphi^{\circ j}(\vec e)`), " である。任意の ",
                           math(String.raw`k\in\mathbb N`), " について",
@@ -75743,7 +75717,7 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`\gamma:=\gamma_{\varphi}(\vec e_0)`), "（",
                         ref("def_permutation_orbit_sequence"), "）、",
                         math(String.raw`C:=O_{\varphi}(\vec e_0)`), "（",
-                        ref("def_permutation_orbit_set"), "）と置く。このとき ",
+                        "参照用ノート「不採用経路: 置換の軌道集合」", "）と置く。このとき ",
                         math(String.raw`\overline{\mathbb Q}`), " の等式",
                       ]),
                       displayMath(String.raw`\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}
@@ -75771,7 +75745,7 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`\varphi(\vec\gamma_k)\ne\vec\gamma_k`), " を満たすので、",
                         math(String.raw`\varphi`), " への仮定により ",
                         math(String.raw`\varphi(\vec\gamma_k)\in\operatorname{Next}(\vec\gamma_k)`),
-                        " である。", ref("def_permutation_orbit_set"), " により ",
+                        " である。参照用ノート「不採用経路: 置換の軌道集合」により ",
                         math(String.raw`C`), " はこの ", math(String.raw`r`),
                         " 個の項の集合に等しいので、写像 ",
                         math(String.raw`k\mapsto\vec\gamma_k`), " は ",

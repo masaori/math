@@ -7,6 +7,27 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_permutation_orbit_set_archived",
+    targets: ["def_permutation_iterate"],
+    title: { text: "不採用経路: 置換の軌道集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の軌道による直接比較は採らない。元の定義を保存する。"]),
+      paragraph([
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
+        math(String.raw`\vec e\in\vec E_L`), " に対し、軌道集合を",
+      ]),
+      displayMath(String.raw`O_{\varphi}(\vec e):=
+\{\,\varphi^{\circ k}(\vec e)\mid k\in\mathbb N\,\}\subset\vec E_L`),
+      paragraph([
+        "で定める（反復合成は ", ref("def_permutation_iterate"), "）。",
+        ref("def_permutation_minimal_return"), " により、これは軌道列 ",
+        math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
+        ref("def_permutation_orbit_sequence"), "）に現れる ",
+        math(String.raw`r_{\varphi}(\vec e)`), " 個の向き付き辺の集合に等しい。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_switchable_contact_smoothing_archived",
     targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 切り替え可能な接触の平滑化" },
@@ -947,7 +968,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         "（", math(String.raw`1\le k\le r`), "、", ref("def_permutation_orbit_sequence"),
                         "）と書く。", ref("claim_moved_orbit_closed_nonbacktracking"), " により ",
                         math(String.raw`\gamma^{\varphi}_C`), " は閉じた非後退辺列であり、その ",
-                        math(String.raw`r`), " 個の項は相異なる。", ref("def_permutation_orbit_set"),
+                        math(String.raw`r`), " 個の項は相異なる。", "参照用ノート「不採用経路: 置換の軌道集合」",
                         " により各項 ", math(String.raw`\vec\gamma_k`), " は ", math(String.raw`C`),
                         " の元であり、", ref("claim_moved_orbit_partition"), " により ",
                         math(String.raw`C\subseteq M(\varphi)`), " なので、各項は ",

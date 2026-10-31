@@ -1,6 +1,6 @@
 # SageMath Check: 動く辺の軌道族による分割
 
-**対象ラベル**: `def_moved_edge_set`, `def_permutation_orbit_set`,
+**対象ラベル**: `def_moved_edge_set`, `def_permutation_iterate`（参照用ノート「不採用経路: 置換の軌道集合」に対応）,
 `def_moved_orbit_family`, `claim_moved_orbit_partition`
 
 一辺二の周期正方格子の向き付き辺のうち先頭六本の全置換 $6!$ 個を取り、残りを固定した。
