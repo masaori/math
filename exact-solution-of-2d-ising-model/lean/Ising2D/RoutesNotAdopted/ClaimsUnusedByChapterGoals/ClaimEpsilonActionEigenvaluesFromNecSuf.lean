@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `<epsilon_action_eigenvalues_are_signs>`。
 
 具体版 `Ising2D.epsilon_action_eigenvalues_are_signs` は
-`Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean` にあり、必要十分版
+`Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimEpsilonActionEigenvalues.lean` にあり、必要十分版
 `Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution` は
 `Ising2D/NecSuf/InvolutionEigenvalue.lean` にある。
 
@@ -18,7 +18,7 @@
   具体版の `hdifference` 以後 / 必要十分版の `hdifference` 以後。
 -/
 import Ising2D.NecSuf.InvolutionEigenvalue
-import Ising2D.Part004.ClaimEpsilonActionEigenvalues
+import Ising2D.RoutesNotAdopted.ClaimsUnusedByChapterGoals.ClaimEpsilonActionEigenvalues
 
 namespace Ising2D
 

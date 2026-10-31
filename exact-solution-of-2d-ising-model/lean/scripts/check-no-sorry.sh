@@ -146,9 +146,6 @@ targets=(
   Ising2D.NecSuf.prefix_eq_of_same_recursion
   Ising2D.NecSuf.prefix_terminal_mul_self
   Ising2D.epsilon_mul_self_of_necSuf
-  Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution
-  Ising2D.epsilon_action_eigenvalues_are_signs
-  Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf
   Ising2D.siteProd_smul_family
   Ising2D.siteProd_anticomm_of_single_site
   Ising2D.jw_sq
@@ -713,9 +710,6 @@ targets=(
   Ising2D.acomm_checkZ_checkY
   Ising2D.acomm_checkZ_checkZ_of_mem
   Ising2D.acomm_checkY_checkY_of_mem
-  Ising2D.expPhase_nextSite
-  Ising2D.H2_eq_check_sum
-  Ising2D.H1Plus_eq_check_sum
   Ising2D.lie_H1Plus_checkZ
   Ising2D.lie_H1Plus_checkY
   Ising2D.lie_H2_checkZ
@@ -1650,6 +1644,13 @@ targets=(
   Ising2D.rayleighSup_eq_of_sectorRayleighSup_pos_eq
   Ising2D.rayleighSup_attained_in_even_sector
   Ising2D.rayleighSup_mem_rayleighSet
+  # --- 本文から参照用ノート claims_unused_by_chapter_goals_not_adopted.ts へ退避した、どの章のゴールの主張からも使われない主張の形式化の記録（RoutesNotAdopted/ClaimsUnusedByChapterGoals/。必要十分版は NecSuf/InvolutionEigenvalue.lean）---
+  Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution
+  Ising2D.epsilon_action_eigenvalues_are_signs
+  Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf
+  Ising2D.expPhase_nextSite
+  Ising2D.H2_eq_check_sum
+  Ising2D.H1Plus_eq_check_sum
 )
 
 # 生成する一時ファイルは worktree ごとに別名にする。

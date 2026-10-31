@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避した主張だけのファイル 3 本（旧 `Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`）、旧 `Part013/Claim007_H1H2ViaCheck`）を `lean/Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/` へ番号を外した名前で移し、runbook に置き場を足した（名前空間・主張・証明は不変）。旧番号のフォルダ（`Part000`〜`Part020`）は無くなった。本文の `ClaimCommutatorHCheckZY` が退避した `H1_H2_via_check_Z_Y` の形式化を使っており人手証明と 1 対 1 でない。次はゴールラインの確認（状態台帳の「次の一歩」）。
+
 2026-10-31: Lean の通しの証明の項目 7 で、本文から退避した (−) セクターの形式化 8 ファイル（旧 `Part010/` の 2 本、`Part011/Claim010_SectorDecomposition`、`Part004/OddEigenvectors`、`Part019/` の 4 本）を `lean/Ising2D/RoutesNotAdopted/MinusSector/` へ番号を外した名前で移した（名前空間・主張・証明は不変）。`Part010/`・`Part011/`・`Part019/` は無くなった。次は参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避した主張だけのファイル（`Part004/` の 2 本、`Part013/` の 1 本）の置き場を runbook に足して移す。
 
 2026-10-31: Lean の通しの証明の項目 7 で、本文から退避した整数運動量の経路の形式化 19 ファイル（旧 `Part004/` の `hat(Z), hat(Y)`、`Part007/`、`Part008/`、`Part009/`、`Part013/Claim001_WhyMinusOnly`）を `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ番号を外した名前で移した（名前空間・主張・証明は不変）。`check-no-sorry.sh` の該当定理は新しい区切りへ集めた。次は (−) セクターの形式化を `RoutesNotAdopted/MinusSector/` へ移す。

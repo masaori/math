@@ -4,7 +4,7 @@
 
 新規ファイル:
 
-- 具体版: `lean/Ising2D/Part013/`（`why_008_applies_only_to_minus_sector` のファイルは整数運動量の経路の記録なので `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ移した。指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
+- 具体版: `lean/Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY.lean`（参照用ノートへ退避した `H1_H2_via_check_Z_Y` の形式化の記録。旧 `Part013/Claim007_H1H2ViaCheck.lean`。`why_008_applies_only_to_minus_sector` のファイルは整数運動量の経路の記録なので `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ移した。指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
 - 必要十分版: `lean/Ising2D/NecSuf/AntiperiodicFourier.lean`
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 013 の作業記録）。

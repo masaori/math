@@ -66,6 +66,9 @@
    - 未割り当ての項目だけを形式化したファイルは、割り当てが出るまで動かさず、状態台帳に書く。
    - 本文から退避した経路の形式化（整数運動量の経路、全スピン反転行列の固有値 −1 の側）は
      `Ising2D/RoutesNotAdopted/IntegerMomentum/`・`Ising2D/RoutesNotAdopted/MinusSector/` へ置く。
+   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した、どの章のゴールの主張からも使われない主張の形式化は
+     `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/` へ置く（2026-10-31 に足した）。退避した経路の 2 つと同じく、数えるときは 1 つの置き場とする。
+     「使われない」は人手の本文での意味である。Lean で本文の章のファイルがこのフォルダの定理を使っていても、置き場はこの規則で決める（その使い方が人手証明と 1 対 1 かは別に確かめる）。
    - 人手の項目を持たない補助のファイル（旧 `Part011/Basic.lean`（いまの `MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）・旧 `Part018/Setup.lean`（いまの `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）など）は、それを import するファイルが
      最も多い置き場（数学的道具立てを含む）へ置く。同数のときは上と同じ並びで先の置き場へ置く。`Ising2D/Basic.lean`・`Ising2D/Representation.lean` は全章の土台なので動かさない。
    - 必要十分版は `Ising2D/NecSuf/` から動かさない。`*FromNecSuf.lean` は対応する具体版と同じ章へ置く。

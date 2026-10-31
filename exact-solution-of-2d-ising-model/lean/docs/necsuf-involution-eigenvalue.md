@@ -5,9 +5,9 @@
 
 | 役割 | ファイル | 主要定理 |
 | --- | --- | --- |
-| 具体版 | `Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean` | `Ising2D.epsilon_action_eigenvalues_are_signs` |
+| 具体版 | `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimEpsilonActionEigenvalues.lean` | `Ising2D.epsilon_action_eigenvalues_are_signs` |
 | 必要十分版 | `Ising2D/NecSuf/InvolutionEigenvalue.lean` | `Ising2D.NecSuf.eigenvalue_eq_one_or_neg_one_of_involution` |
-| 具体版の再導出 | `Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean` | `Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf` |
+| 具体版の再導出 | `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimEpsilonActionEigenvaluesFromNecSuf.lean` | `Ising2D.epsilon_action_eigenvalues_are_signs_of_necSuf` |
 
 ## 実際に効く仮定
 

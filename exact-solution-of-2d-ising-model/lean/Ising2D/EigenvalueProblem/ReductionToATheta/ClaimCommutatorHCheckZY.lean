@@ -37,7 +37,7 @@
 反交換関係を `δ_{ν,M+1-μ}` の形で述べるときだけである）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
-import Ising2D.Part013.Claim007_H1H2ViaCheck
+import Ising2D.RoutesNotAdopted.ClaimsUnusedByChapterGoals.ClaimH1H2ViaCheckZY
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 
 namespace Ising2D

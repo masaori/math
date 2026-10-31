@@ -59,7 +59,7 @@
   `onsager_limit_in_M` は人手 `onsager_exact_solution` の Step 3（挟み撃ち）と同じく `Λ ≤ c(M)` から正値性を出す。必要十分版は置かない（新しい計算を含まない）。
 - `lake build`、`check-no-sorry.sh`、`check-end-to-end.sh` はすべて通る（通しの定理は `sorryAx` に依存しない）。
 - 人手の定義と別表示だった `KStar`（`arsinh(1/sinh 2K)/2`）は、臨界点の章を移したときに消し、`Kstar`（人手 `def_second_dual_coupling_constant`）に一本化した。
-- 項目 7 は章ごとに進めている。置き場の規則は runbook の項目 7 に書いた。
+- 項目 7 は済んでいる（旧番号のフォルダは残っていない）。置き場の規則は runbook の項目 7 に書いた。
   - 部「分配関数」の章「転送行列による表示」（済み）: 14 ファイルを `Ising2D/PartitionFunction/TransferMatrixRepresentation/` へ移した
     （旧 `Part001/` の 6 本は全部、旧 `Part004/` から `DefinitionConfigBasisIso`・`ClaimConfigNumberingEqualsKroneckerNumbering`・`ClaimSigmaZDiagonalAction`・
     `ClaimFirstTransferMatrixPauliForm`・`DefinitionSecondDualCouplingConstant`・`ClaimTwoByTwoTransferIdentity`・`ClaimSecondTransferMatrixPauliForm`・
@@ -172,9 +172,6 @@
     `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` へ移した（必要十分版は `NecSuf/ExpDiagonal.lean` のまま）。
     このまとまりの `ad_binomial`・`matrix_exp_conjugation` は `EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`・`ClaimNestedCommutator.lean` が参照するだけで（前の章で判断したとおり、`ClaimExpConjugation` が形式化するのは章の `exp_X_Y_exp_-X`）、
     `theorem_exp_product`・`def_exp` は章のファイルが根拠として引くだけである。ほかの項目を形式化したファイルは旧フォルダに無い。
-  - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
-    `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
-    runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
   - 部「数学的道具立て」のまとまり「可逆行列・線型写像との対応・共役変換」（済み）: 旧 `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism` だけを形式化）と
     旧 `Part008/Definition016_TV` を `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` へ番号を外した名前（`ClaimConjugationIsRingHom`・`ClaimConjugationIsRingHomFromNecSuf`・`DefinitionTgAndTV`）で移した。`Part000/` は無くなった。
     `DefinitionTgAndTV` が形式化する人手の項目は、このまとまりの `def_T_g`（`TConj`）・`linearity_of_T`（`TConj_linear`）の 2 項と、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した
@@ -224,10 +221,20 @@
     （同じ定理が 2 か所に書かれていた `sector_replacement_pow`・`partition_function_sector_decomposition` は 1 行にした。対象の集合は変えていない）。
     本文の章のファイルでこのフォルダを import するものは無い（import するのは必要十分版 `NecSuf/PermSector.lean` だけ）。
 
+  - 本文から退避した、どの章のゴールの主張からも使われない主張（済み）: 3 ファイルを `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/` へ番号を外し中身の分かる名前で移した。
+    runbook の項目 7 の置き場の規則に、参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` の項目の置き場としてこのフォルダを足した。
+    旧 `Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`。`epsilon_action_eigenvalues_are_signs`）、旧 `Part013/Claim007_H1H2ViaCheck`（`ClaimH1H2ViaCheckZY`。`H1_H2_via_check_Z_Y`）である。
+    3 本とも、冒頭が宣言する人手の項目はそのノートへ退避した項目で、棚卸しには無い。`Part004/`・`Part013/` は無くなり、**旧番号のフォルダ（`Part000`〜`Part020`）は残っていない。**
+    `check-no-sorry.sh` では、これらのファイルの定理 6 件（必要十分版 `NecSuf/InvolutionEigenvalue.lean` の 1 件を含む）を新しい区切りへ集めた（対象の集合は変えていない）。
+    本文の章のファイル `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`（人手 `commutator_of_H_and_check_Z_Y`）が `ClaimH1H2ViaCheckZY` を import し、
+    `H1Plus_eq_check_sum`・`H2_eq_check_sum`（退避した `H1_H2_via_check_Z_Y`）を使って証明している。人手の証明はサイトごとの交換関係（Step 1）から出しており、退避した主張を使わない。
+    フォルダの対応の差ではないが、ゴールラインの「通しの証明の各段は人手証明と 1 対 1」に関わるので、次の一歩で確かめる。
+
 ## 次の一歩
 
-項目 7 の続きとして、本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した主張だけを形式化したファイル
-（`Part004/ClaimEpsilonActionEigenvalues`（と `FromNecSuf`。`epsilon_action_eigenvalues_are_signs`）・`Part013/Claim007_H1H2ViaCheck`（`H1_H2_via_check_Z_Y`））の置き場を決める。
-runbook の項目 7 の置き場の規則にこのノートの項目の置き場が無いので、先に runbook に置き場（例えば `Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/`）を足し、
-同じ回でファイルを番号を外した名前で移し、`Part004/`・`Part013/` を無くす。`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表も同じ回で直す。
-これで旧番号のフォルダ（`Part000`〜`Part020`）が無くなれば、runbook のゴールラインを一つずつ確かめる（`lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを含む）。
+項目 7 のフォルダの移動は終わった。runbook のゴールラインを一つずつ確かめる。最初に次の二つを行う。
+
+- 通しの定理 `Ising2D.onsager_exact_solution_end_to_end` が依存する定理のうち、本文から参照用ノートへ退避した主張の形式化（`RoutesNotAdopted/` 配下の定義・定理）に
+  依存しているものを洗い出す。特に `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean` が `H1Plus_eq_check_sum`・`H2_eq_check_sum` を使う点は、
+  人手 `commutator_of_H_and_check_Z_Y` の証明（サイトごとの交換関係から出す）と 1 対 1 でないので、通しの証明の経路に乗っていれば人手の Step どおりの証明へ直す。
+- `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
