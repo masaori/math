@@ -74876,70 +74876,6 @@ Z_L
   ],
 });
 
-const chapter_kac_ward_permutation_expansion = defineSection({
-  kind: "section",
-  id: "kac_ward_permutation_expansion_heading_chapter",
-  labels: [],
-  title: { text: "Kac--Ward 行列式の置換展開" },
-  children: [
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
-        id: "kac_ward_permutation_expansion_heading_group_phase_sum",
-        labels: [],
-        title: { text: "位相表示と非後退置換和" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_nonbacktracking_sum",
-              labels: [],
-              title: { text: "非後退置換の集合" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_nonbacktracking_permutations",
-                  focus: {
-                      id: "kac_ward_definition_nonbacktracking_permutations",
-                      kind: "definition",
-                      title: { text: "非後退置換の集合" },
-                      labels: ["def_nonbacktracking_permutations"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          "非後退置換の集合 ",
-                          math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\subset\operatorname{Perm}(\vec E_L)`),
-                          " を",
-                        ]),
-                        displayMath(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L):=
-\bigl\{\varphi\in\operatorname{Perm}(\vec E_L)\ \bigm|\
-\text{任意の }\vec f\in\vec E_L\text{ について }
-\varphi(\vec f)\ne\vec f\Longrightarrow
-\varphi(\vec f)\in\operatorname{Next}(\vec f)\bigr\}`),
-                        paragraph([
-                          "で定める。置換の集合は ", ref("def_row_permutation"),
-                          " を有限集合 ", math(String.raw`\vec E_L`),
-                          " に適用したもの、直ちに引き返さない後続辺の集合 ",
-                          math(String.raw`\operatorname{Next}`), " は ",
-                          ref("def_nonbacktracking_successors"),
-                          " で定めた。有限集合の置換の有限集合の部分集合であり、",
-                          "所属の判定は向き付き辺の有限個の比較で決まる。",
-                        ]),
-                      ],
-                  },
-                },
-              }],
-            },
-          },
-        ],
-      },
-    },
-  ],
-});
-
 const chapter_finite_fourier = defineSection({
   kind: "section",
   id: "finite_fourier_heading_chapter",
@@ -86849,7 +86785,6 @@ const chapters = [
   chapter_discrete_whitney,
   chapter_kac_ward_antisymmetrization,
   chapter_kac_ward_pfaffian_torus_formula,
-  chapter_kac_ward_permutation_expansion,
   chapter_finite_fourier,
   chapter_real_escape,
   chapter_fisher_zero_density,

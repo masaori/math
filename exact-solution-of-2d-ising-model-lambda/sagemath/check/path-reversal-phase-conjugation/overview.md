@@ -1,6 +1,6 @@
 # SageMath Check: 経路反転による位相寄与の共役
 
-**対象ラベル**: `def_nonbacktracking_permutations`
+**対象ラベル**: `def_kac_ward_determinants`（旧定義「非後退置換の集合」は参照用ノートへ退避）
 
 一歩回転数の総和の元の定義は参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」に保存した。
 

@@ -2,7 +2,7 @@
 
 旧主張は参照用ノート「不採用経路: 標準接触対の平滑化」に退避した。
 
-**対象ラベル**: `def_nonbacktracking_permutations`
+**対象ラベル**: `def_kac_ward_determinants`（旧定義「非後退置換の集合」は参照用ノートへ退避）
 
 接触対の集合 $\operatorname{Ct}(\varphi)$（切り替え可能に限らない）と、参照用ノートの辞書式順序（辺の番号、次に向き。対は最小元・最大元の順）による最小元 $\operatorname{ct}_{\min}(\varphi)$ を全非後退置換で計算する。切り替え可能な接触対での平滑化の前後で $\operatorname{Ct}$・$N_{\mathrm{ct}}$・$\operatorname{ct}_{\min}$ が変わらないこと、標準接触対が切り替え可能な置換の集合 $\mathcal A_L$ の上で $S(\varphi)=\operatorname{Sm}_{\operatorname{ct}_{\min}(\varphi)}(\varphi)$ が $\mathcal A_L$ に留まり、二回適用で元へ戻り、不動点を持たず、$M$・$D$・$E_1$ を保つことを有限集合の等号だけで検査する。
 

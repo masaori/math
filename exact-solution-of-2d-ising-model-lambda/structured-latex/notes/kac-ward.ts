@@ -7,6 +7,33 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_nonbacktracking_permutations_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 非後退置換の集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、行列式の置換展開による直接比較は採らない。元の定義を保存する。"]),
+      paragraph([
+        "非後退置換の集合 ",
+        math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\subset\operatorname{Perm}(\vec E_L)`),
+        " を",
+      ]),
+      displayMath(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L):=
+\bigl\{\varphi\in\operatorname{Perm}(\vec E_L)\ \bigm|\
+\text{任意の }\vec f\in\vec E_L\text{ について }
+\varphi(\vec f)\ne\vec f\Longrightarrow
+\varphi(\vec f)\in\operatorname{Next}(\vec f)\bigr\}`),
+      paragraph([
+        "で定める。置換の集合は ", ref("def_row_permutation"),
+        " を有限集合 ", math(String.raw`\vec E_L`),
+        " に適用したもの、直ちに引き返さない後続辺の集合 ",
+        math(String.raw`\operatorname{Next}`), " は ",
+        ref("def_nonbacktracking_successors"),
+        " で定めた。有限集合の置換の有限集合の部分集合であり、",
+        "所属の判定は向き付き辺の有限個の比較で決まる。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_permutation_return_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 置換の反復と最小回帰時刻" },
@@ -681,7 +708,7 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
                         "）とする。各 ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）について写像 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）について写像 ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
@@ -712,7 +739,7 @@ T^{a,b}_{\varphi}(x)
                       paragraph([
                         ref("def_row_permutation"), " により ",
                         math(String.raw`\operatorname{Perm}(\vec E_L)`),
-                        " は有限集合であり、", ref("def_nonbacktracking_permutations"),
+                        " は有限集合であり、", "参照用ノート「不採用経路: 非後退置換の集合」",
                         " により部分集合 ",
                         math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         " とその補集合 ",
@@ -762,7 +789,7 @@ D^{a,b}_L(x)
                       paragraph([
                         math(String.raw`L\ge1`), " とし、非後退置換 ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"),
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」",
                         "）を取る。任意の ", math(String.raw`\vec e\in M(\varphi)`),
                         " について ", math(String.raw`\iota(\vec e)\notin M(\varphi)`),
                         " が成り立つ（動く辺の集合が反転対を含まない。反転写像 ",
@@ -830,7 +857,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                         math(String.raw`\varphi(\vec e)\in M(\varphi)`), " である。また ",
                         math(String.raw`\vec e\in M(\varphi)`), " では ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`), " なので ",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
                         " であり、", ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
@@ -968,7 +995,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
       displayMath(String.raw`\mathcal N_L(D,E):=
 \bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ D(\varphi)=D,\ E_1(\varphi)=E\,\bigr\}`),
       paragraph([
-        "で定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+        "で定める。非後退置換の集合は ", "参照用ノート「不採用経路: 非後退置換の集合」",
         "、反転対の辺集合は ", "参照用ノート「不採用経路: 反転対の辺集合」",
         "、単純通過の辺集合は参照用ノート「不採用経路: 単純通過の辺集合」",
         " で定めた。いずれも有限集合の部分集合の等号で判定できるので、",
@@ -1026,7 +1053,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi`), " は、動く辺を直ちに引き返さない後続へ写すので、",
                         "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」", " の仮定を満たす。さらに ",
                         "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により ",
@@ -1095,7 +1122,7 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
       paragraph([
         math(String.raw`L\ge1`), " とし、非後退置換 ",
         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-        "（", ref("def_nonbacktracking_permutations"),
+        "（", "参照用ノート「不採用経路: 非後退置換の集合」",
         "）を取る。動く辺の集合が反転対を含むかどうかにかかわらず",
       ]),
       displayMath(String.raw`\operatorname{Even}_L\bigl(E_1(\varphi)\bigr)`),
@@ -1136,7 +1163,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
         math(String.raw`\varphi(\vec e)\in M(\varphi)`), " である。また ",
         math(String.raw`\vec e\in M(\varphi)`), " では ",
         math(String.raw`\varphi(\vec e)\ne\vec e`), " なので ",
-        ref("def_nonbacktracking_permutations"), " により ",
+        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
         math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
         " であり、", ref("def_nonbacktracking_successors"), " により ",
         math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
@@ -1379,14 +1406,14 @@ T^{a,b}_{\varphi}(x)
   },
   {
     id: "note_kac_ward_switchable_contact_smoothing_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 切り替え可能な接触の平滑化" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触平滑化による直接比較は採らない。元の二つの定義と主張・証明を保存する。"]),
       paragraph(["元の定義「切り替え可能な置換の接触対」:"]),
                           paragraph([
                             math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                            "（", ref("def_nonbacktracking_permutations"), "）を取る。相異なる二辺 ",
+                            "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。相異なる二辺 ",
                             math(String.raw`\vec e,\vec f\in M(\varphi)`), " の二元部分集合 ",
                             math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対であるとは、",
                           ]),
@@ -1443,7 +1470,7 @@ T^{a,b}_{\varphi}(x)
                       paragraph([
                         "次に非後退性を見る。", math(String.raw`\vec g\notin\{\vec e,\vec f\}`),
                         " ならば ", math(String.raw`\psi(\vec g)=\varphi(\vec g)`),
-                        " なので ", ref("def_nonbacktracking_permutations"), " の条件は変わらない。",
+                        " なので ", "参照用ノート「不採用経路: 非後退置換の集合」", " の条件は変わらない。",
                         math(String.raw`\vec g=\vec e`), " ならば切り替え可能性から ",
                         math(String.raw`\psi(\vec e)=\varphi(\vec f)\in\operatorname{Next}(\vec e)`),
                         "、", math(String.raw`\vec g=\vec f`), " でも同様に ",
@@ -1502,14 +1529,14 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
   },
   {
     id: "note_kac_ward_contact_smoothing_same_pair_involution_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 同じ接触対での平滑化の対合性" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触平滑化による置換項の相殺は採らない。元の主張と証明を保存する。"]),
       paragraph(["元の主張「同じ接触対は平滑化後も切り替え可能であり同じ対での平滑化は対合である」:"]),
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）と、その切り替え可能な接触対 ",
                         math(String.raw`\{\vec e,\vec f\}`),
                         "（", "参照用ノート「不採用経路: 切り替え可能な接触の平滑化」", "）を取り、",
                         math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
@@ -1540,7 +1567,7 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
                       paragraph([
                         "第二の条件。", math(String.raw`\vec e\in M(\varphi)`), " なので ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`), " であり、",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " である。",
                         "参照用ノート「不採用経路: 切り替え可能な接触の平滑化」", " により ",
                         math(String.raw`\psi(\vec f)=\varphi(\vec e)`), " なので ",
@@ -1578,7 +1605,7 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
   },
   {
     id: "note_kac_ward_standard_contact_smoothing_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準接触対の平滑化" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準接触対による置換項の相殺は採らない。元の定義と二つの主張・証明を保存する。"]),
@@ -1636,7 +1663,7 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
 
                           paragraph([
                             math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                            "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
+                            "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）と、その切り替え可能な接触対 ",
                             math(String.raw`\{\vec e,\vec f\}`),
                             "（", "参照用ノート「不採用経路: 切り替え可能な接触の平滑化」", "）を取り、",
                             math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
@@ -1931,7 +1958,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
   },
   {
     id: "note_kac_ward_phase_reversing_contact_pair_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 位相反転接触対" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の定義を保存する。"]),
@@ -1975,7 +2002,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
   },
   {
     id: "note_kac_ward_contact_smoothing_phase_reversal_iff_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 接触平滑化の位相符号反転条件" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2046,7 +2073,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
   },
   {
     id: "note_kac_ward_phase_reversing_standard_subset_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準対が位相反転する置換の集合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準対平滑化の位相反転部分集合は採らない。元の定義を保存する。"]),
@@ -2067,7 +2094,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
   },
   {
     id: "note_kac_ward_phase_reversing_standard_smoothing_involution_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2157,7 +2184,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                           "任意の ", math(String.raw`(a,b)\in\mathcal S`),
                           "（", ref("def_spin_structures"), "）と ",
                           math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                          "（", ref("def_nonbacktracking_permutations"), "）について、",
+                          "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）について、",
                         ]),
                         displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\in\{-1,1\}`),
                         paragraph([
@@ -2223,7 +2250,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
   },
   {
     id: "note_kac_ward_unswitchable_standard_pair_subset_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準対が切り替え不能な置換の集合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準接触対の切り替え可能性による直接比較は採らない。元の定義を保存する。"]),
@@ -2232,7 +2259,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       displayMath(String.raw`\mathcal R_L:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\
 N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       paragraph([
-        "と定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+        "と定める。非後退置換の集合は ", "参照用ノート「不採用経路: 非後退置換の集合」",
         "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
         "、", math(String.raw`\mathcal A_L`), " は ",
         "参照用ノート「不採用経路: 標準接触対の平滑化」",
@@ -2244,7 +2271,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
   },
   {
     id: "note_kac_ward_permutation_path_reversal_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 置換の経路反転" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の経路反転による直接比較は採らない。元の定義を保存する。"]),
@@ -2280,7 +2307,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                       paragraph([
                         math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）は ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）は ",
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
                         "（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）を満たすとする。各 ",
                         math(String.raw`C\in\mathcal C(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
@@ -2504,7 +2531,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_non_phase_reversing_standard_smoothing_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準対平滑化の非位相反転部分集合への制限" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の定義・主張・証明を保存する。"]),
@@ -2718,14 +2745,14 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_permutation_total_turning_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 非後退置換の一歩回転数の総和" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の経路反転による直接比較は採らない。元の定義を保存する。"]),
       paragraph(["元の定義:"]),
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）に対し、一歩回転数の総和を",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）に対し、一歩回転数の総和を",
                       ]),
                       displayMath(String.raw`\Theta(\varphi):=
 \sum_{\vec g\in M(\varphi)}\tau\bigl(\vec g,\varphi(\vec g)\bigr)\in\mathbb Z`),
@@ -2947,7 +2974,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_path_reversal_fiber_preservation_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転による非後退置換ファイバーの保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転による置換ファイバーの直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2955,7 +2982,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         math(String.raw`L\ge1`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。このとき",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。このとき",
                       ]),
                       list([
                         [math(String.raw`M(\mathcal T(\varphi))=\{\iota(\vec g)\mid\vec g\in M(\varphi)\}`),
@@ -3028,7 +3055,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         " となり、代入して ", math(String.raw`\varphi(\iota(\vec g))=\iota(\vec g)`), " が従うが、これは ",
                         math(String.raw`\iota(\vec g)\in M(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "）に反する。よって ", math(String.raw`\vec h\in M(\varphi)`), " であり、",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi(\vec h)\in\operatorname{Next}(\vec h)`), "、すなわち ",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec h))=\operatorname{tgt}(\vec h)`), " かつ ",
@@ -3053,7 +3080,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`\varphi(\vec h)\ne\iota(\vec h)`), " に反する。したがって ",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\mathcal T(\varphi)(\vec g)=\iota(\vec h)\in\operatorname{Next}(\vec g)`),
-                        " であり、", ref("def_nonbacktracking_permutations"), " により ",
+                        " であり、", "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " である。",
                       ]),
                       paragraph([
@@ -3270,7 +3297,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_contact_pair_switchability_criterion_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 接触対の切り替え可能性の局所判定" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3278,7 +3305,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）と、接触対 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）と、接触対 ",
                         math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
                         "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）を取る。このとき ",
                         math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対（",
@@ -3303,7 +3330,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         " である。", math(String.raw`\vec e\in M(\varphi)`), " すなわち ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`),
                         "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）なので、",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " であり、",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec e))=\operatorname{tgt}(\vec e)`),
@@ -3348,7 +3375,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
       paragraph(["元の主張:"]),
                       paragraph([
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）が接触対を持ち、標準接触対 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）が接触対を持ち、標準接触対 ",
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`),
                         "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）が、反転像による障害",
                       ]),
@@ -3477,7 +3504,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         math(String.raw`L\ge2`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）が接触対を持つとする。標準接触対 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）が接触対を持つとする。標準接触対 ",
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`),
                         "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）が切り替え可能な接触対（",
                         "参照用ノート「不採用経路: 切り替え可能な接触の平滑化」", "）でないならば、",
@@ -3531,7 +3558,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\vec f\in M(\varphi)`), " すなわち ",
                         math(String.raw`\varphi(\vec f)\ne\vec f`),
                         "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）なので、",
-                        ref("def_nonbacktracking_permutations"), " により ",
+                        "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi(\vec f)\in\operatorname{Next}(\vec f)`), " であり、",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`),
@@ -3726,7 +3753,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_doubled_edge_fiber_phase_reduction_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対を持つファイバーの位相寄与の簡約" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3808,7 +3835,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_path_reversal_phase_conjugation_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転による位相寄与の共役" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転による置換の位相寄与の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3925,7 +3952,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                             "任意の ", math(String.raw`(a,b)\in\mathcal S`),
                             "（", ref("def_spin_structures"), "）と ",
                             math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                            "（", ref("def_nonbacktracking_permutations"), "）について、",
+                            "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）について、",
                           ]),
                           displayMath(String.raw`\mathcal W^{a,b}_L(\varphi)\cdot\zeta_8^{-\Theta(\varphi)}
 \in\{-1,1\}`),
@@ -4385,7 +4412,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       paragraph([
                         "もし ", math(String.raw`\varphi(\vec f)=\vec e`), " なら、接触対の定義（",
                         "参照用ノート「不採用経路: 標準接触対の平滑化」", "）により ", math(String.raw`\vec f\in M(\varphi)`),
-                        " である。したがって ", ref("def_nonbacktracking_permutations"), " と ",
+                        " である。したがって ", "参照用ノート「不採用経路: 非後退置換の集合」", " と ",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`), " である。",
                         "仮定の等式と接触の等式を代入すると",
@@ -4395,7 +4422,7 @@ s\,\zeta_8^{\Theta(\varphi)}
 &=\operatorname{src}(\varphi(\vec f))
 &&\bigl(\because\ \varphi(\vec f)=\vec e\bigr)\\
 &=\operatorname{tgt}(\vec f)
-&&\bigl(\because\ \blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の集合」},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}(\vec e)
 &&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」の接触の等式}\bigr)
 \end{aligned}`),
@@ -4440,7 +4467,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       paragraph([
                         math(String.raw`L\ge1`), " とし、非後退置換 ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"),
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」",
                         "）を取る。任意の ", math(String.raw`\vec f\in M(\varphi)`),
                         " について ", math(String.raw`\iota(\vec f)\notin M(\varphi)`),
                         " が成り立つ（動く辺の集合が反転対を含まない。動く辺の集合 ",
@@ -4462,7 +4489,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
-                        "準備。", ref("def_nonbacktracking_permutations"), " により ",
+                        "準備。", "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi`), " は、任意の ",
                         math(String.raw`\vec f\in\vec E_L`), " について ",
                         math(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
@@ -4531,7 +4558,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
 =\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
 \lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
                       paragraph([
-                        "が成り立つ。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+                        "が成り立つ。非後退置換の集合は ", "参照用ノート「不採用経路: 非後退置換の集合」",
                         "、軌道族は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "、ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
                         "退避したファイバーの定義", " で定めた。両辺は有限和なので ",
@@ -4587,7 +4614,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                       paragraph([
                         math(String.raw`L\ge1`), " とし、非後退置換 ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"),
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」",
                         "）を取る。任意の ", math(String.raw`\vec f\in M(\varphi)`),
                         " について ", math(String.raw`\iota(\vec f)\notin M(\varphi)`),
                         " が成り立つ。これは動く辺の集合が反転対を含まないという仮定である（動く辺の集合 ",
@@ -4625,7 +4652,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
-                        "準備。", ref("def_nonbacktracking_permutations"), " により ",
+                        "準備。", "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi`), " は、任意の ",
                         math(String.raw`\vec f\in\vec E_L`), " について ",
                         math(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
@@ -4738,7 +4765,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_path_reversal_contact_pair_preservation_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転と接触対の対応" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触対の経路反転軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -4746,7 +4773,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       paragraph([
                         math(String.raw`L\ge1`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。接触対 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。接触対 ",
                         math(String.raw`P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
                         "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）に対し、二元部分集合",
                       ]),
@@ -4823,11 +4850,11 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
 &=\operatorname{src}\bigl(\varphi(\vec e)\bigr)
 &&\bigl(\because\ \text{準備の第三の事実}\bigr)\\
 &=\operatorname{tgt}(\vec e)
-&&\bigl(\because\ \vec e\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&&\bigl(\because\ \vec e\in M(\varphi)\text{ と }\text{参照用ノート「不採用経路: 非後退置換の集合」},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}(\vec f)
 &&\bigl(\because\ \text{接触の仮定。参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr)\\
 &=\operatorname{src}\bigl(\varphi(\vec f)\bigr)
-&&\bigl(\because\ \vec f\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
+&&\bigl(\because\ \vec f\in M(\varphi)\text{ と }\text{参照用ノート「不採用経路: 非後退置換の集合」},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}\bigl(\iota(\varphi(\vec f))\bigr)
 &&\bigl(\because\ \text{準備の第三の事実}\bigr)
 \end{aligned}`),
@@ -4969,14 +4996,14 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_path_reversal_switchable_classification_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転による接触対の分類保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触対を分類して経路反転軌道を直接比較する経路は採らない。元の定義・主張・証明を保存する。"]),
       paragraph(["元の定義:"]),
                           paragraph([
                             math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                            "（", ref("def_nonbacktracking_permutations"), "）に対し、切り替え可能な接触対の集合を",
+                            "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）に対し、切り替え可能な接触対の集合を",
                           ]),
                           displayMath(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi):=\bigl\{\,P\in\operatorname{Ct}(\varphi)\ \bigm|\
 P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
@@ -5019,7 +5046,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                       paragraph([
                         math(String.raw`L\ge1`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。経路反転 ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。経路反転 ",
                         math(String.raw`\mathcal T`), " は ", "参照用ノート「不採用経路: 置換の経路反転」",
                         "、接触対の対応 ", math(String.raw`\Psi_{\varphi}`), " は ",
                         "参照用ノート「不採用経路: 経路反転と接触対の対応」",
@@ -5156,7 +5183,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
   },
   {
     id: "note_kac_ward_path_reversal_phase_preservation_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転の位相寄与の保存" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -5165,7 +5192,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
                         "（", ref("def_spin_structures"), "）とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。このとき ",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。このとき ",
                         math(String.raw`\overline{\mathbb Q}`), " の等式",
                       ]),
                       displayMath(String.raw`\mathcal W^{a,b}_L\bigl(\mathcal T(\varphi)\bigr)
@@ -5243,7 +5270,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
   },
   {
     id: "note_kac_ward_path_reversal_selection_complement_orbits_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 二つの符号保存対合の軌道分割" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -5304,7 +5331,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
   },
   {
     id: "note_kac_ward_weighted_path_reversal_selection_orbit_sums_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転軌道と選択補集合軌道の重み付き和" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -5381,7 +5408,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
   },
   {
     id: "note_kac_ward_path_reversal_fixed_point_no_single_traversal_archived",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 経路反転の不動点と軌道の元数" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、経路反転軌道と選択補集合軌道の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -5389,7 +5416,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                       paragraph([
                         math(String.raw`L\ge1`), " とし、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）を取る。",
+                        "（", "参照用ノート「不採用経路: 非後退置換の集合」", "）を取る。",
                         math(String.raw`\mathcal T(\varphi)=\varphi`),
                         "（", "参照用ノート「不採用経路: 置換の経路反転」", "）ならば ",
                         math(String.raw`E_1(\varphi)=\varnothing`),
@@ -5511,7 +5538,7 @@ M(\varphi)
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
                         "退避したファイバーの定義", " により ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        " であり、", ref("def_nonbacktracking_permutations"), " により ",
+                        " であり、", "参照用ノート「不採用経路: 非後退置換の集合」", " により ",
                         math(String.raw`\varphi`),
                         " は、動く辺を直ちに引き返さない後続へ写すので、",
                         "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
@@ -5977,7 +6004,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_doubled_edge_fiber_phase_reduction_unlocked_residual_noncancellation",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "切り替え可能接触を持つ残余は符号反転対合で相殺できない" },
     body: [
       paragraph([
@@ -6062,7 +6089,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_contact_smoothing_same_pair_involution_lexicographic_choice_counterexample",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "辞書式最小の切り替え可能接触対は平滑化で保たれない" },
     body: [
       paragraph([
@@ -6083,7 +6110,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample",
-    targets: ["def_nonbacktracking_permutations"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "標準接触対に依存する分類は経路反転で保たれない" },
     body: [
       paragraph([
@@ -6109,7 +6136,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_weighted_path_reversal_selection_orbit_sums_sign_bijection_counterexample",
     targets: [
-      "def_nonbacktracking_permutations",
+      "def_kac_ward_determinants",
     ],
     title: { text: "経路反転軌道と選択補集合軌道の符号保存対応は存在しない" },
     body: [
@@ -6137,7 +6164,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_fully_unswitchable_contacts_witness_doubled_edges_fiber_phase_sums",
     targets: [
       "def_kac_ward_determinants",
-      "def_nonbacktracking_permutations",
+      "def_kac_ward_determinants",
     ],
     title: { text: "三分類の部分和はファイバー単位では選択和に一致しない" },
     body: [
@@ -6286,7 +6313,7 @@ c_{\oplus}(\omega,k)
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_oriented_edge_conjugation_counterexample",
     targets: [
       "def_signed_even_subgraph_polynomial",
-      "def_nonbacktracking_permutations",
+      "def_kac_ward_determinants",
     ],
     title: { text: "偶部分グラフ上の向き反転共役は置換側の文字作用にならない（一辺二の全数反例）" },
     body: [
