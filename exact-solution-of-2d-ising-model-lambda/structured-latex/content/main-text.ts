@@ -5458,13 +5458,13 @@ b&=1\cdot b
                     ]),
                     displayMath(String.raw`\begin{aligned}
 z\,z^{0}&=z\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)\\
 &=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=1\cdot z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=z^{0}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)
 \end{aligned}`),
                     paragraph([
                       math(String.raw`z\,z^{k}=z^{k}z`),
@@ -5472,13 +5472,13 @@ z\,z^{0}&=z\cdot 1
                     ]),
                     displayMath(String.raw`\begin{aligned}
 z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z\bigr)\\
 &=\bigl(z\,z^{k}\bigr)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=\bigl(z^{k}z\bigr)z
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=z^{k+1}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z\bigr)
 \end{aligned}`),
                     paragraph([
                       "以下、主張を ",
@@ -5492,15 +5492,15 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
                     ]),
                     displayMath(String.raw`\begin{aligned}
 (z-w)\,H_{0}(z,w)&=(z-w)\cdot 0
-&&(\because\ H_{0}(z,w)=0\ \text{の約束})\\
+&&\bigl(\because\ H_{0}(z,w)=0\ \text{の約束}\bigr)\\
 &=0
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&&\bigl(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元}\bigr)\\
 &=1-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元}\bigr)\\
 &=z^{0}-1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)\\
 &=z^{0}-w^{0}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{0}=1\bigr)
 \end{aligned}`),
                     paragraph([
                       "一歩（",
@@ -5513,27 +5513,27 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
                     ]),
                     displayMath(String.raw`\begin{aligned}
 (z-w)\,H_{n+1}(z,w)&=(z-w)\bigl(H_{n}(z,w)\,w+z^{n}\bigr)
-&&(\because\ H_{n+1}(z,w)\ \text{の約束})\\
+&&\bigl(\because\ H_{n+1}(z,w)\ \text{の約束}\bigr)\\
 &=(z-w)\bigl(H_{n}(z,w)\,w\bigr)+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\bigl((z-w)H_{n}(z,w)\bigr)w+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=\bigl(z^{n}-w^{n}\bigr)w+(z-w)z^{n}
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=\bigl(z^{n}w-w^{n}w\bigr)+(z-w)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+(z-w)z^{n}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ w^{n+1}=w^{n}w\bigr)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z\,z^{n}-w\,z^{n}\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n}z-w\,z^{n}\bigr)
-&&(\because\ \text{準備の等式}\ z\,z^{n}=z^{n}z)\\
+&&\bigl(\because\ \text{準備の等式}\ z\,z^{n}=z^{n}z\bigr)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-w\,z^{n}\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z\bigr)\\
 &=\bigl(z^{n}w-w^{n+1}\bigr)+\bigl(z^{n+1}-z^{n}w\bigr)
-&&(\because\ z\ \text{と}\ w\ \text{が可換であること})\\
+&&\bigl(\because\ z\ \text{と}\ w\ \text{が可換であること}\bigr)\\
 &=z^{n+1}-w^{n+1}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}w\ \text{が相殺する}\bigr)
 \end{aligned}`),
                     paragraph([
                       "出発点と一歩により、すべての ",
@@ -76142,46 +76142,6 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_nonbacktracking_permutation_fiber",
-              labels: [],
-              title: { text: "反転対と単純通過を固定した非後退置換" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_nonbacktracking_permutation_fiber",
-                  beforeFocus: [],
-                  focus: {
-                      id: "kac_ward_definition_nonbacktracking_permutation_fiber",
-                      kind: "definition",
-                      title: { text: "反転対と単純通過を固定した非後退置換" },
-                      labels: ["def_nonbacktracking_permutation_fiber"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), " とし、辺集合 ", math(String.raw`D,E\subseteq E_L`),
-                          " を取る。反転対の辺集合と単純通過の辺集合を固定した非後退置換の集合を",
-                        ]),
-                        displayMath(String.raw`\mathcal N_L(D,E):=
-\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ D(\varphi)=D,\ E_1(\varphi)=E\,\bigr\}`),
-                        paragraph([
-                          "で定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-                          "、反転対の辺集合は ", ref("def_doubled_edge_set"),
-                          "、単純通過の辺集合は ", "参照用ノート「不採用経路: 単純通過の辺集合」",
-                          " で定めた。いずれも有限集合の部分集合の等号で判定できるので、",
-                          math(String.raw`\mathcal N_L(D,E)`), " は有限集合であり、その個数は ",
-                          math(String.raw`\mathbb N`), " に属する。実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
               id: "kac_ward_heading_determinant_fiber_stratified_phase_sum",
               labels: [],
               title: { text: "ファイバーの位相付き寄与" },
@@ -76211,7 +76171,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
 \left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)\ \in\ \overline{\mathbb Q}`),
                         paragraph([
                           "で定める。ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
-                          ref("def_nonbacktracking_permutation_fiber"),
+                          "参照用ノート「不採用経路: 反転対と単純通過を固定した非後退置換」",
                           "、軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ",
                           ref("def_moved_orbit_family"),
                           "、遷移行列の成分 ", math(String.raw`M^{a,b}_{\vec e,\vec f}`), " は ",

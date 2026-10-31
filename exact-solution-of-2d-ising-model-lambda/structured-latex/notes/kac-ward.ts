@@ -7,6 +7,28 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_nonbacktracking_permutation_fiber_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 反転対と単純通過を固定した非後退置換" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、反転対と単純通過による置換の層別は採らない。元の定義を保存する。"]),
+      paragraph([
+        math(String.raw`L\ge1`), " とし、辺集合 ", math(String.raw`D,E\subseteq E_L`),
+        " を取る。反転対の辺集合と単純通過の辺集合を固定した非後退置換の集合を",
+      ]),
+      displayMath(String.raw`\mathcal N_L(D,E):=
+\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ D(\varphi)=D,\ E_1(\varphi)=E\,\bigr\}`),
+      paragraph([
+        "で定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+        "、反転対の辺集合は ", ref("def_doubled_edge_set"),
+        "、単純通過の辺集合は参照用ノート「不採用経路: 単純通過の辺集合」",
+        " で定めた。いずれも有限集合の部分集合の等号で判定できるので、",
+        math(String.raw`\mathcal N_L(D,E)`), " は有限集合であり、その個数は ",
+        math(String.raw`\mathbb N`), " に属する。実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_determinant_fiber_stratified_phase_sum_archived",
     targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 行列式の位相和の層別" },
@@ -36,12 +58,12 @@ export default defineNotes([
                         "「単純通過の辺集合の偶性」を述べた参照用ノート", " により ",
                         math(String.raw`\operatorname{Even}_L(E_1(\varphi))`), " である。したがって ",
                         math(String.raw`\bigl(D(\varphi),E_1(\varphi)\bigr)`),
-                        " は右辺の添字集合に属し、", ref("def_nonbacktracking_permutation_fiber"),
+                        " は右辺の添字集合に属し、", "退避したファイバーの定義",
                         " により ",
                         math(String.raw`\varphi\in\mathcal N_L\bigl(D(\varphi),E_1(\varphi)\bigr)`),
                         " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取れば、",
-                        ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        "退避したファイバーの定義", " により ",
                         math(String.raw`D(\varphi)=D`), " かつ ", math(String.raw`E_1(\varphi)=E`),
                         " である。相異なる添字のファイバーは、この二つの値の少なくとも一方が異なるので交わらない。よって非後退置換の全体は、右辺の添字ごとの ",
                         math(String.raw`\mathcal N_L(D,E)`), " の互いに素な合併である。",
@@ -456,7 +478,7 @@ T^{a,b}_{\varphi}(x)
                       ]),
                       displayMath(String.raw`M(\psi)=M(\varphi),\qquad D(\psi)=D(\varphi),\qquad E_1(\psi)=E_1(\varphi)`),
                       paragraph([
-                        "を満たす。したがって ", ref("def_nonbacktracking_permutation_fiber"), " の任意の添字 ",
+                        "を満たす。したがって ", "退避したファイバーの定義", " の任意の添字 ",
                         math(String.raw`(D,E)`), " について、", math(String.raw`\varphi\in\mathcal N_L(D,E)`),
                         " ならば ", math(String.raw`\psi\in\mathcal N_L(D,E)`), " である。全て有限集合の写像と部分集合の等式であり、",
                         "実数体も複素数体も現れない。",
@@ -497,7 +519,7 @@ D(\psi)&=D(\varphi)&&\bigl(\because\ \blkref{def_doubled_edge_set}\text{ と }M(
 E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経路: 単純通過の辺集合」}\text{ と }M(\psi)=M(\varphi)\bigr).
 \end{aligned}`),
                       paragraph([
-                        "最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
+                        "最後のファイバーへの帰属は ", "退避したファイバーの定義",
                         " の二つの等式へこれらを代入したものである。",
                       ]),
     ],
@@ -740,7 +762,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \operatorname{ct}_{\min}(\varphi)\text{ は }\var
                           math(String.raw`S(S(\varphi))=\varphi`), " である。"],
                         [math(String.raw`S(\varphi)\ne\varphi`), " である。"],
                         ["任意の添字 ", math(String.raw`(D,E)`),
-                          "（", ref("def_nonbacktracking_permutation_fiber"), "）について、",
+                          "（", "退避したファイバーの定義", "）について、",
                           math(String.raw`\varphi\in\mathcal N_L(D,E)`), " ならば ",
                           math(String.raw`S(\varphi)\in\mathcal N_L(D,E)`), " である。"],
                       ]),
@@ -1110,7 +1132,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                           math(String.raw`S(S(\varphi))=\varphi`), " であり、",
                           math(String.raw`S(\varphi)\ne\varphi`), " である。"],
                         ["任意の添字 ", math(String.raw`(D,E)`),
-                          "（", ref("def_nonbacktracking_permutation_fiber"), "）について、",
+                          "（", "退避したファイバーの定義", "）について、",
                           math(String.raw`\varphi\in\mathcal N_L(D,E)`), " ならば ",
                           math(String.raw`S(\varphi)\in\mathcal N_L(D,E)`), " である。"],
                         ["任意の ", math(String.raw`(a,b)\in\mathcal S`),
@@ -1428,7 +1450,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 -\bigl\lvert\mathcal N^{0,-}_L(D,E;a,b)\bigr\rvert
 \in\mathbb Z`),
                       paragraph([
-                        "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                        "が成り立つ。ファイバーは ", "退避したファイバーの定義",
                         "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
@@ -1497,7 +1519,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 -\bigl\lvert\mathcal N^{\mathcal R,-}_L(D,E;a,b)\bigr\rvert
 \in\mathbb Z`),
                       paragraph([
-                        "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                        "が成り立つ。ファイバーは ", "退避したファイバーの定義",
                         "、標準対が切り替え不能な置換の集合 ", math(String.raw`\mathcal R_L`), " は ",
                         "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
                         "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
@@ -1665,7 +1687,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \end{aligned}`),
                         paragraph([
-                          "を定める。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                          "を定める。ファイバーは ", "退避したファイバーの定義",
                           "、回転差が四である集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                           "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                           " で定めた。いずれも有限集合であり、所属は有限集合の元と代数的数の等号で判定できる。",
@@ -2000,7 +2022,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
                         "）を満たす任意の辺集合 ", math(String.raw`D,E\subseteq E_L`),
                         " について、経路反転はファイバー ", math(String.raw`\mathcal N_L(D,E)`),
-                        "（", ref("def_nonbacktracking_permutation_fiber"),
+                        "（", "退避したファイバーの定義",
                         "）から自分自身への全単射である。全て有限集合の元の比較だけで判定でき、",
                         "実数体も複素数体も現れない。",
                       ]),
@@ -2149,7 +2171,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       ]),
                       paragraph([
                         "最後に「とくに」を示す。", math(String.raw`\varphi\in\mathcal N_L(D,E)`),
-                        " なら、第二・第四の主張と ", ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        " なら、第二・第四の主張と ", "退避したファイバーの定義", " により ",
                         math(String.raw`\mathcal T(\varphi)\in\mathcal N_L(D,E)`),
                         " である。第三の主張により経路反転は二回適用で元へ戻るので、",
                         math(String.raw`\mathcal N_L(D,E)`),
@@ -3211,7 +3233,7 @@ d_{E}(v)\bmod2
                         "（", "参照用ノート「不採用経路: 置換の経路反転」", "）は ",
                         "参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」", " により、ファイバー ",
                         math(String.raw`\mathcal N_L(D,E)`),
-                        "（", ref("def_nonbacktracking_permutation_fiber"),
+                        "（", "退避したファイバーの定義",
                         "）からそれ自身への全単射であり、二回適用すると元に戻る。不動点の集合を",
                       ]),
                       displayMath(String.raw`F:=\bigl\{\varphi\in\mathcal N_L(D,E)\ \bigm|\ \mathcal T(\varphi)=\varphi\bigr\}`),
@@ -3549,7 +3571,7 @@ s\,\zeta_8^{\Theta(\varphi)}
   },
   {
     id: "note_kac_ward_nonbacktracking_permutation_stratified_count_archived",
-    targets: ["def_nonbacktracking_permutation_fiber"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 非後退置換の母関数の層別" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の母関数による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -3563,7 +3585,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                         "が成り立つ。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
                         "、軌道族は ", ref("def_moved_orbit_family"),
                         "、ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
-                        ref("def_nonbacktracking_permutation_fiber"), " で定めた。両辺は有限和なので ",
+                        "退避したファイバーの定義", " で定めた。両辺は有限和なので ",
                         math(String.raw`\mathbb Z[x]`), " の元である。",
                       ]),
 
@@ -3579,7 +3601,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                         math(String.raw`\varphi\in\mathcal N_L\bigl(D(\varphi),E_1(\varphi)\bigr)`),
                         " である。逆に、右辺の添字 ", math(String.raw`(D,E)`), " と ",
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取れば、",
-                        ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        "退避したファイバーの定義", " により ",
                         math(String.raw`D(\varphi)=D`), " かつ ", math(String.raw`E_1(\varphi)=E`),
                         " である。異なる添字のファイバーは、この二値のいずれかが違うので共通元を持たない。従って非後退置換の集合は、右辺の添字に従う ",
                         math(String.raw`\mathcal N_L(D,E)`), " の互いに素な合併である。",
@@ -4070,7 +4092,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                           math(String.raw`\mathcal Z_L,\mathcal X_L,\mathcal Y_L`),
                           " のそれぞれから自分自身への写像である。"],
                         ["任意の添字 ", math(String.raw`(D,E)`),
-                          "（", ref("def_nonbacktracking_permutation_fiber"), "）、任意の ",
+                          "（", "退避したファイバーの定義", "）、任意の ",
                           math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
                           "）、任意の ", math(String.raw`\epsilon\in\{-1,1\}`),
                           " と、三集合のいずれか一つ ", math(String.raw`\mathcal P\in\{\mathcal Z_L,\mathcal X_L,\mathcal Y_L\}`),
@@ -4211,7 +4233,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         "をそれぞれ自分自身へ写す対合である。位相寄与は ",
                         "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         "、経路反転は ", "参照用ノート「不採用経路: 置換の経路反転」",
-                        "、ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
+                        "、ファイバーは ", "退避したファイバーの定義",
                         " で定めた。位相寄与の二つの値は ", "参照用ノート「不採用経路: 位相寄与は 1 か −1 である」",
                         " により尽くされている。全て有限集合上の有限積と代数的数の四則だけで判定でき、実数体も複素数体も現れない。",
                       ]),
@@ -4426,7 +4448,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         "とくに、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`), " が ",
                         math(String.raw`\operatorname{Even}_L(E)`), "（", ref("def_even_edge_subset"),
                         "）と ", math(String.raw`E\ne\varnothing`), " を満たすなら、経路反転はファイバー ",
-                        math(String.raw`\mathcal N_L(D,E)`), "（", ref("def_nonbacktracking_permutation_fiber"),
+                        math(String.raw`\mathcal N_L(D,E)`), "（", "退避したファイバーの定義",
                         "）の上に不動点を持たず、任意の ", math(String.raw`(a,b)\in\mathcal S`),
                         "（", ref("def_spin_structures"), "）、",
                         math(String.raw`s\in\{-1,1\}`), "、",
@@ -4475,7 +4497,7 @@ M(\varphi)
                       ]),
                       paragraph([
                         "第二の主張を示す。", math(String.raw`\varphi\in\mathcal N_L(D,E)`),
-                        " を取ると、", ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        " を取ると、", "退避したファイバーの定義", " により ",
                         math(String.raw`E_1(\varphi)=E\ne\varnothing`),
                         " である。もし ", math(String.raw`\mathcal T(\varphi)=\varphi`),
                         " なら第一の主張により ", math(String.raw`E_1(\varphi)=\varnothing`),
@@ -4507,7 +4529,7 @@ M(\varphi)
                         math(String.raw`\operatorname{Even}_L(E)`),
                         "（", ref("def_even_edge_subset"), "）を満たすとする。各 ",
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`),
-                        "（", ref("def_nonbacktracking_permutation_fiber"), "）について写像 ",
+                        "（", "退避したファイバーの定義", "）について写像 ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`),
                         "（", ref("def_moved_orbit_family"), "）について ",
@@ -4538,7 +4560,7 @@ M(\varphi)
 
                       paragraph([
                         math(String.raw`\varphi\in\mathcal N_L(D,E)`), " を取る。",
-                        ref("def_nonbacktracking_permutation_fiber"), " により ",
+                        "退避したファイバーの定義", " により ",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         " であり、", ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi`),
