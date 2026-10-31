@@ -243,6 +243,7 @@ export const ALL_LABELS = [
   "matrix_norm_vector_bound",
   "max_eigenvalue_of_V_plus_simple",
   "max_eigenvector_in_even_sector",
+  "max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus",
   "moment_log_convexity",
   "multiplicative_group_of_cc",
   "multiplicative_group_of_polar_representation",

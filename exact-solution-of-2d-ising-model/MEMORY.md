@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの四番目の項目の六番目の章「V^{(+)} の最大固有値に属する固有ベクトル」を組み直した。15 項を `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` へ依存順で移し（id・ラベル不変）、018 の案内文を二つに分け、章末にゴールの主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`（SageMath と Lean 付き。Lean は tr(εV^{(+)}) > 0 を仮定に取る）を置いた。次は部「熱力学極限」の最初の章「N→∞ の極限と最大固有値 c(M)」。新しい worktree では `lake exe cache get` の後に `lake build` が要る。
+
 2026-10-31: Lean の通しの証明の項目 4d を人手 `trace_of_epsilon_V_plus` の Step の単位で三つに割り、最初の「Step 1・Step 2 の形式化」を終えた。`lean/Ising2D/Part018/ClaimTraceEpsilonVPlusReduction.lean` で `tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`（`trace_epsilon_VPlusOfTransfer`）と `εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`（`epsilon_mul_V1plus`）を形式化した。`exp(K_1εG)` の偶奇分解は `A^2 = 1` と極限の扱いだけで通るので、必要十分版 `NecSuf/ExpOfInvolution.lean`（仮定は部分和の極限）と系の導出を置いた。人手側の未解決: Step 1 の `BB = V_1^{(+)}` の行は根拠に `theorem_exp_product` を引いているが、平方根性 `V1_plus_square_root_property` を引くほうが正確である。また Step 1 冒頭の「ε は V_2 とも可換」は式変形で使っていない。次は「成分の読み取りの形式化」（Step 3。状態台帳の「次の一歩」）。
 
 2026-10-31: 章立ての組み直しの四番目の項目の五番目の章「V^{(+)} の固有値」を組み直した。16 項を `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ依存順で移し（id・ラベル不変。017 には未割り当ての 2 項だけが残る）、章末にゴールの主張 `V_plus_eigenvalues_with_c_value_and_strict_maximum`（SageMath と Lean 付き）を置いた。worktree の Lean は、メインの作業ツリーの `lean/.lake/packages` を `cp -al`（ハードリンク）で持ち込めば mathlib を作り直さずに論文側だけビルドできる。次は「V^{(+)} の最大固有値に属する固有ベクトル」の章（018 の 15 項）。

@@ -215,6 +215,7 @@ import Ising2D.Part018.Claim002_EpsilonEigenvalueOnQ
 import Ising2D.Part018.Claim003_TraceEpsilonVPlus
 import Ising2D.Part018.Claim008_CheckQHermitian
 import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
+import Ising2D.Part018.ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus
 import Ising2D.Part018.Theorem009_CPlusEqualsLambda
 import Ising2D.Part018.Theorem010_OnsagerExactSolution
 import Ising2D.Part018.Claim011_CheckFermiFromPart016

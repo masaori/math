@@ -2,6 +2,21 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の六番目の章「$V^{(+)}$ の最大固有値に属する固有ベクトル」を組み直した。
+  棚卸しでこの章に割り当てた 15 項を、すべて `018_even_sector_closing.ts` から新しいファイル `content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の章見出しの下へ
+  棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $V^{(+)}$ の固有値の章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（下の言い回しの直しを除く）。
+  018 には章見出し、$\check n_\mu$ のエルミート性（どの章にも割り当てていない 9 項の一つ）、$c_+(M)$ の定理、Onsager の厳密解の定理が残る。
+  - **章末のゴールの主張を足した。** (1) $\mathrm{tr}(\varepsilon V^{(+)})=(2\exp(-K_2)\cosh K_1)^M+(2\exp(K_2)\sinh K_1)^M\in\mathbb R_{>0}$、(2) $\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}$ を主張する claim
+    `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` を章の最後に置いた。(2) の証明は $\mathrm{tr}>0\Rightarrow\eta_{(1,\dots,1)}=+1\Rightarrow\varepsilon\check Q_{(1,\dots,1)}=\check Q_{(1,\dots,1)}$ と、
+    `max_eigenvector_in_even_sector` (4) の証明と同じ $\varepsilon y=y$ の計算である。SageMath（`sagemath/check/max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で各行の残差 ≤ 7.2e-15。
+    指数評価の ℝ 脱出のため倍精度。否定コントロールは右辺を差にしたものと $\epsilon=(0,1,\dots,1)$ の $\check Q_\epsilon$）と Lean（`lean/Ising2D/Part018/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`。
+    (1) の等式は Lean の通しの証明の項目 4 の残りで形式化中なので、正値性を仮定に取り (2) を示す。`check-no-sorry.sh` の対象に足した）を足した。
+    `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章に記号（$\varepsilon,\check Q_{(1,\dots,1)},\mathcal F^{(+)}$）を足した。章の項目数は 16（割り当て 15 とゴールの主張 1。章立て案は 17）。
+  - **018 の章の案内文を二つに分けた。** (i)〜(v) の筋を新しい章の冒頭へ移し（id `closing_000_remark_overview` のまま。題を「$\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}$ を示す道筋」にし、
+    $c_+(M)$ への言及を外した）、$c_+(M)$ と Onsager の段落を 018 の新しい案内文 `closing_remark_overview_c_plus_and_onsager` として残した。
+  - **移した本文の言い回しを直した（数学の中身は変えていない）。** 「$\mu$ をモードの添字に使う」「半整数運動量も現れない」「偶セクターに属する」を、$\check{\mathcal M}$・$\tilde\theta_\mu$・$\mathcal F^{(+)}$ で指す言い方にした。
+  - Lean・SageMath の注記の正本のファイル名を直した。別のエージェントのレビューを経た（指摘 3 件を直した。ゴールの主張の (2) の証明を別の定理の証明を指す形から式変形に書き直し、(1) の ℝ の理由を指数評価と書き、
+    018 に残した案内文に $\check\Lambda_{\max}$ の出どころを添えた）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の五番目の章「$V^{(+)}$ の固有値」を組み直した。
   棚卸しでこの章に割り当てた 16 項を、`009_eigenvalues_of_V.ts`（2 項）・`012_free_energy.ts`（2 項）・`017_even_sector_eigenvalues.ts`（12 項）から、新しいファイル
   `content/eigenvalue_problem_eigenvalues_of_V_plus.ts` の章見出しの下へ章の中の依存順で移し、`TRAILING_CONTENT_FILES` の対角化と指数表示の章のファイルの後ろに置いた。
@@ -1208,9 +1223,9 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の六番目の章：「$V^{(+)}$ の最大固有値に属する固有ベクトル」の章に割り当てた 15 項
-（棚卸し `parts` の二番目の部の四番目の章の `dependencyOrder`。すべて `018_even_sector_closing.ts` にある）を、新しいファイルの章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の $V^{(+)}$ の固有値の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の七番目の章：部「熱力学極限」の最初の章「$N\to\infty$ の極限と最大固有値 $c(M)$」に割り当てた 9 項
+（棚卸し `parts` の三番目の部の最初の章の `dependencyOrder`。`011_max_eigenvalue.ts` に 8 項、`012_free_energy.ts` に 1 項）を、新しいファイルの部見出し「熱力学極限」・章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の最大固有値に属する固有ベクトルの章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 

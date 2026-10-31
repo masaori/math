@@ -71,10 +71,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`V^{(+)}\text{ の最大固有値に属する固有ベクトル}` },
         organizationGoalLabel: "chapter_organization_goal_eigenvector_of_max_eigenvalue",
-        goalLabels: [
-          "trace_of_epsilon_V_plus",
-          "max_eigenvector_in_even_sector",
-        ],
+        goalLabels: ["max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus"],
         proposalEntryCount: 17,
       },
     ],

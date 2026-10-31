@@ -40,6 +40,7 @@ import blocks_020_critical_point from './content/020_critical_point.ts'
 import blocks_chapter_organization from './content/chapter_organization.ts'
 import blocks_eigenvalue_problem_diagonalization_and_exponential_form from './content/eigenvalue_problem_diagonalization_and_exponential_form.ts'
 import blocks_eigenvalue_problem_eigenvalues_of_V_plus from './content/eigenvalue_problem_eigenvalues_of_V_plus.ts'
+import blocks_eigenvalue_problem_eigenvector_of_max_eigenvalue from './content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts'
 import blocks_eigenvalue_problem_reduction_to_A_theta from './content/eigenvalue_problem_reduction_to_A_theta.ts'
 import blocks_partition_function_projection_and_jordan_wigner from './content/partition_function_projection_and_jordan_wigner.ts'
 import blocks_partition_function_transfer_matrix_representation from './content/partition_function_transfer_matrix_representation.ts'
@@ -79,6 +80,7 @@ export type AllBlocks = [
   ...typeof blocks_chapter_organization,
   ...typeof blocks_eigenvalue_problem_diagonalization_and_exponential_form,
   ...typeof blocks_eigenvalue_problem_eigenvalues_of_V_plus,
+  ...typeof blocks_eigenvalue_problem_eigenvector_of_max_eigenvalue,
   ...typeof blocks_eigenvalue_problem_reduction_to_A_theta,
   ...typeof blocks_partition_function_projection_and_jordan_wigner,
   ...typeof blocks_partition_function_transfer_matrix_representation,

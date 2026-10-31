@@ -27,7 +27,7 @@
 ## 形式化できなかった部分と、その理由（一次情報）
 
 人手証明 Step 2・Step 3 が引く `c_plus_equals_Lambda_half_integer` は
-**章 018（`structured-latex/content/018_even_sector_closing.ts` の 2061 行目でラベル定義）**の
+**章 018（`structured-latex/content/018_even_sector_closing.ts` でラベル定義）**の
 定理であり、本リポジトリの Lean 側には対応する形式化が存在しない
 （`lean/Ising2D/` 全体を `c_plus` / `cPlus` / `Lambda_half` で検索しても該当なし。
 `Ising2D.LambdaM` は章 012 の自由エネルギーの表式であって `c_+(M)` との等号ではない）。

@@ -1,7 +1,7 @@
 /-
 # `i H_1^{(+)} = D_0 + ε G`（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_004_claim_H1_plus_in_sigma_z_form`、ラベル **`H1_plus_in_sigma_z_form`**）
 
 ## 人手証明との対応

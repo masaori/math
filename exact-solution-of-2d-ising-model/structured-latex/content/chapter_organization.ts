@@ -230,6 +230,10 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
       displayMath(String.raw`\mathrm{tr}\left(\varepsilon V^{(+)}\right)=\left(2\exp(-K_2)\cosh K_1\right)^{M}+\left(2\exp(K_2)\sinh K_1\right)^{M}>0
 \ \Longrightarrow\
 \mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}`),
+      paragraph(["ここに現れる記号は次である。"]),
+      displayMath(String.raw`\varepsilon=\sigma^x_1\cdots\sigma^x_M,\qquad
+\check Q_{(1,\dots,1)}=\prod_{\mu=1}^{M}\check n_\mu,\qquad
+\mathcal F^{(+)}=\left\{x\in\mathbb C^{2^M}\ \middle|\ \varepsilon x=x\right\}`),
     ],
   },
   {

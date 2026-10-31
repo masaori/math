@@ -1,6 +1,6 @@
 # 章 018「偶セクターの完結（Onsager の厳密解）」の Lean 形式化
 
-正本: `structured-latex/content/018_even_sector_closing.ts`（12 ブロック）
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）と `structured-latex/content/018_even_sector_closing.ts`（`check_number_operator_is_hermitian` 以降）
 
 この文書は `lean/README.md` への統合前の記録である（統合は呼び出し元が行う）。
 

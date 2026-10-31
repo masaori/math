@@ -1,7 +1,7 @@
 /-
 # `tr(ε V^{(+)})` を `η_{(1,…,1)}` で表す（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_003_claim_trace_epsilon_V_plus_via_eigenvalues`、
 ラベル **`trace_of_epsilon_V_plus_via_check_eigenvalues`**）
 

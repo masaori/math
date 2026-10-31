@@ -4,7 +4,7 @@
 
 **対象ラベル**: `onsager_exact_solution` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/018_even_sector_closing.ts`
+- ファイル: `structured-latex/content/018_even_sector_closing.ts`（`check_number_operator_is_hermitian` 以降）と `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）
 - 併せて検証（この章の全ブロック）:
   - `epsilon_anticommutes_with_check_Z_Y`（`ε` は `Z_j, Y_j, Ž_μ, Y̌_μ, ψ̌_μ^†, ψ̌_μ` と反可換、
     したがって `ň_μ, Q̌_ε` とは可換）

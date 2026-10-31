@@ -1,7 +1,7 @@
 /-
 # 開鎖項 `D_0` と周期境界項 `G`（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 
 | 人手 | Lean |
 | --- | --- |

@@ -1,7 +1,7 @@
 /-
 # `ε Q̌_ε = η_ε Q̌_ε` と符号の反転則（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の

@@ -1,7 +1,7 @@
 /-
 # `exp(tA) = cosh(t)I + sinh(t)A`（`A^2 = I`）を必要十分版の系として導く
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （ラベル **`trace_of_epsilon_V_plus`** の Step 2 の偶奇分解）
 
 人手と 1 対 1 に対応する主張は `Ising2D.matExp_smul_of_sq_eq_one`

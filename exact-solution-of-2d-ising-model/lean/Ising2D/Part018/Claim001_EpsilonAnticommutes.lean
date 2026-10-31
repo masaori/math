@@ -1,7 +1,7 @@
 /-
 # `ε` は `Ž, Y̌, ψ̌` と反可換（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_001_claim_epsilon_anticommutes`、ラベル **`epsilon_anticommutes_with_check_Z_Y`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の

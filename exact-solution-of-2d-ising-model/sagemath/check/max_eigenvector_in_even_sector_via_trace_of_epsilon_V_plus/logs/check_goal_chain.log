@@ -1,0 +1,9 @@
+  (1) tr(εV^{(+)}) = (2e^{−K_2}cosh K_1)^M + (2e^{K_2}sinh K_1)^M: max residual = 4.710e-15  ->  PASS
+  tr(εV^{(+)}) の全体最小値: 3.2953e+00  ->  PASS（正）
+  (2) 2 行目 η_{(1,…,1)} = +1（εQ^ = ηQ^ の比）: max residual = 6.662e-16  ->  PASS
+  (2) 2 行目 tr(εV^{(+)}) = η (2 sinh 2K_2)^{M/2} Π 2 sinh(γ/2): max residual = 7.222e-15  ->  PASS
+  (2) 3 行目 εQ^_{(1,…,1)} = Q^_{(1,…,1)}（im ⊆ F^{(+)}）: max residual = 2.798e-15  ->  PASS
+  (独立) 数値対角化の最大固有ベクトル v で εv = v: max residual = 1.926e-15  ->  PASS
+  否定コントロール: 右辺を差にしたものとの相対差の最小 1.692e-06  ->  PASS
+  否定コントロール: ε=(0,1,…,1) の ‖εQ^ − Q^‖/‖Q^‖ の最小 2.000e+00  ->  PASS
+=== max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus: ALL PASS ===

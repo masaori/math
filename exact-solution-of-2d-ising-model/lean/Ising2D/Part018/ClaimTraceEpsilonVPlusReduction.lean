@@ -1,7 +1,7 @@
 /-
 # `tr(εV^{(+)})` を `tr(εV_1^{(+)}V_2)` へ移し、`εV_1^{(+)}` を `exp(K_1D_0)` と `ε, G` で書く（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_006_theorem_trace_of_epsilon_V_plus`、ラベル **`trace_of_epsilon_V_plus`** の Step 1・Step 2）
 
 | 人手 | Lean |
