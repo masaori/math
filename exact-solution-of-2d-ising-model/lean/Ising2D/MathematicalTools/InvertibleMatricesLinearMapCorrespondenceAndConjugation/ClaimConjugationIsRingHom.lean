@@ -1,7 +1,7 @@
 /-
 # 共役写像は環準同型
 
-対応する人手証明:
+対応する人手証明（本文の正本は `structured-latex/content/000_calculation_formulae_45_46.ts`）:
 `parts/000_計算公式/045_claim_共役写像は環準同型.typ`
 (`<conjugation_is_ring_homomorphism>`)
 

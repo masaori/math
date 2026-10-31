@@ -17,7 +17,7 @@
 * **双対関係が要る点は 008 章と同じ。** `det A(θ) = 1` は `A(θ)` の定義だけからは出ず、
   (iii) `c_2 s_2^* = c_2^*`（双対関係 `sinh 2K_2 · sinh 2K_2^* = 1` の帰結）が要る。
   人手証明 Step 0 は (iii) を `duality_c2_star_eq_s2_star_c2` として引用している。
-  本章の定理は (iii) を引数 `hdual` に取る形のまま置く（`Part008/Definition016_TV.lean` と同じ扱い）。
+  本章の定理は (iii) を引数 `hdual` に取る形のまま置く（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` と同じ扱い）。
   `IsingParam` の上では (iii) は定理 `IsingParam.c2_mul_s2star_eq_c2star`
   （`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
   (i) `c_1^2 - s_1^2 = 1`、(ii) `(c_2^*)^2 - (s_2^*)^2 = 1` は

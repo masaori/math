@@ -45,12 +45,12 @@
 
 ## 記法について
 
-行ベクトル記法の述語 `Ising2D.ActsBy`（`Part008/Definition016_TV.lean`）は
+行ベクトル記法の述語 `Ising2D.ActsBy`（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`）は
 `{A : Type*} [AddCommMonoid A] [Module ℂ A]` で定義された**記法だけの道具**なので、
 必要十分版でもそのまま使う（重複定義を避ける）。
 -/
 import Ising2D.NecSuf.TVAction
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 
 namespace Ising2D.NecSuf
 

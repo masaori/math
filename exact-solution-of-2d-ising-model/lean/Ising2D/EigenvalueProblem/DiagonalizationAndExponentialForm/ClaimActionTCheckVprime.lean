@@ -38,7 +38,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckVprime
 import Ising2D.NecSuf.FermionLadder
 import Ising2D.NecSuf.ExpEigenvector
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 
 namespace Ising2D
 

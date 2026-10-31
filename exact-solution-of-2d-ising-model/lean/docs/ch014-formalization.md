@@ -86,7 +86,7 @@
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
-| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Part008/Definition016_TV.lean`） |
+| `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本 | 既存の `NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y` |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
 | `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |

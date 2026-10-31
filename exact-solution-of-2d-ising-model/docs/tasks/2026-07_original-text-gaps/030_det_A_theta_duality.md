@@ -161,6 +161,6 @@ print(A(th, c2), A(th, c2+0.3), A(th, 1.0))
 この 2 つが別々の定理になっていること自体が、「無条件で言えるのはどこまでか」と
 「1 になるのに何が要るか」を分離した機械的裏づけである。
 
-双対関係そのものの Lean 側の対応は、`lean/Ising2D/Part008/Definition016_TV.lean` の
+双対関係そのものの Lean 側の対応は、`lean/Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の
 `Ising2D.B1_mul_B2_mul_B1_eq_explicit` / `Ising2D.B1_mul_B2_mul_B1_eq_AMat` の仮定
 `hdual : s₂* c₂ = c₂*` である（この仮定を落とすと `B₁B₂B₁ = A(θ)` が証明できない）。

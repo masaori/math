@@ -9,10 +9,10 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `<conjugation_is_ring_homomorphism>` | `Ising2D/Part000/Claim045_ConjugationIsRingHom.lean` |
+| `<conjugation_is_ring_homomorphism>` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
 
 本ファイルの必要十分版から具体版（`Mat(n,ℂ)` と `Matrix.inv` による共役）を系として導出したものは
-`Ising2D/Part000/Claim045_ConjugationIsRingHomFromNecSuf.lean` にある。
+`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

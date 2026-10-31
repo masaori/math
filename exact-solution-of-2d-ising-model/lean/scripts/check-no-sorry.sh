@@ -103,7 +103,7 @@ targets=(
   Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
-  # --- 全章の土台（Representation.lean。行列単位は NecSuf/MatrixUnits.lean）と旧 Part000 ---
+  # --- 全章の土台（Representation.lean。行列単位は NecSuf/MatrixUnits.lean）と、転送行列・射影の章の一部 ---
   Ising2D.tensorPowAlgEquiv
   Ising2D.toFinPowAlgEquiv
   Ising2D.E_mul_E
@@ -128,33 +128,6 @@ targets=(
   Ising2D.V1_restrictsOnSector_of_opposite_sign
   Ising2D.V1_restrictsOnEvenSector
   Ising2D.V1_restrictsOnOddSector
-  Ising2D.Conjugation.T_mul
-  Ising2D.Conjugation.T_one
-  Ising2D.Conjugation.T_add
-  Ising2D.Conjugation.T_comp
-  Ising2D.Conjugation.TMonoidHom
-  Ising2D.Conjugation.matrix_conj_mul
-  Ising2D.Conjugation.matrix_conj_one
-  Ising2D.Conjugation.matrix_conj_comp
-  Ising2D.NecSuf.Conj.sandwich_comp
-  Ising2D.NecSuf.Conj.sandwich_mul
-  Ising2D.NecSuf.Conj.sandwich_one
-  Ising2D.NecSuf.Conj.sandwich_add
-  Ising2D.NecSuf.Conj.conjMonoidHom
-  Ising2D.NecSuf.Conj.conjMulAut
-  Ising2D.NecSuf.Conj.conjMulAutHom
-  Ising2D.NecSuf.Conj.conjMonoidHom_comp
-  Ising2D.NecSuf.Conj.conjRingHom
-  Ising2D.NecSuf.Conj.conjRingAutHom
-  Ising2D.NecSuf.Conj.sandwich_mul_needs_left_inv
-  Ising2D.NecSuf.Conj.sandwich_one_needs_right_inv
-  Ising2D.Conjugation.T_eq_conjMonoidHom
-  Ising2D.Conjugation.matrix_conj_mul_of_necSuf
-  Ising2D.Conjugation.matrix_conj_one_of_necSuf
-  Ising2D.Conjugation.matrix_conj_comp_of_necSuf
-  Ising2D.Conjugation.matrix_conj_add_of_necSuf
-  Ising2D.Conjugation.matrixConjRingAutHom
-  Ising2D.Conjugation.matrixConjRingAutHom_nonsingInvUnit
   Ising2D.commutator_via_anticommutators
   Ising2D.lie_mul_eq_acomm_sub_acomm
   Ising2D.matrix_commutator_via_anticommutators
@@ -271,25 +244,6 @@ targets=(
   Ising2D.V2H2FormUnits
   Ising2D.V2H2FormUnits_val
   Ising2D.isUnit_V2H2Form
-  Ising2D.TConj
-  Ising2D.TConj_apply
-  Ising2D.TConj_linear
-  Ising2D.TConj_trans
-  Ising2D.TV
-  Ising2D.TV_apply
-  Ising2D.TV_eq_TConj
-  Ising2D.TV_linear
-  Ising2D.TV_mul
-  Ising2D.TV_one
-  Ising2D.ActsBy
-  Ising2D.ActsBy.comp
-  Ising2D.ActsBy.eigen
-  Ising2D.B1mat
-  Ising2D.B2mat
-  Ising2D.B1_mul_B2_mul_B1_eq_explicit
-  Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  Ising2D.TV_hatZ_hatY_of_action
-  "Ising2D.TV_hatZ_hatY_of_action'"
   Ising2D.gamma2_neg
   Ising2D.gamma1_neg
   Ising2D.AMat_eq
@@ -511,7 +465,54 @@ targets=(
   Ising2D.matrixExp_diagonal
   Ising2D.matrixExp_diagonal_apply
   Ising2D.matExp_diagonal
-  # --- 各章（旧 Part000 の続き）---
+  # --- 数学的道具立て「可逆行列・線型写像との対応・共役変換」（MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/。必要十分版は NecSuf/Conjugation.lean）---
+  Ising2D.Conjugation.T_mul
+  Ising2D.Conjugation.T_one
+  Ising2D.Conjugation.T_add
+  Ising2D.Conjugation.T_comp
+  Ising2D.Conjugation.TMonoidHom
+  Ising2D.Conjugation.matrix_conj_mul
+  Ising2D.Conjugation.matrix_conj_one
+  Ising2D.Conjugation.matrix_conj_comp
+  Ising2D.NecSuf.Conj.sandwich_comp
+  Ising2D.NecSuf.Conj.sandwich_mul
+  Ising2D.NecSuf.Conj.sandwich_one
+  Ising2D.NecSuf.Conj.sandwich_add
+  Ising2D.NecSuf.Conj.conjMonoidHom
+  Ising2D.NecSuf.Conj.conjMulAut
+  Ising2D.NecSuf.Conj.conjMulAutHom
+  Ising2D.NecSuf.Conj.conjMonoidHom_comp
+  Ising2D.NecSuf.Conj.conjRingHom
+  Ising2D.NecSuf.Conj.conjRingAutHom
+  Ising2D.NecSuf.Conj.sandwich_mul_needs_left_inv
+  Ising2D.NecSuf.Conj.sandwich_one_needs_right_inv
+  Ising2D.Conjugation.T_eq_conjMonoidHom
+  Ising2D.Conjugation.matrix_conj_mul_of_necSuf
+  Ising2D.Conjugation.matrix_conj_one_of_necSuf
+  Ising2D.Conjugation.matrix_conj_comp_of_necSuf
+  Ising2D.Conjugation.matrix_conj_add_of_necSuf
+  Ising2D.Conjugation.matrixConjRingAutHom
+  Ising2D.Conjugation.matrixConjRingAutHom_nonsingInvUnit
+  Ising2D.TConj
+  Ising2D.TConj_apply
+  Ising2D.TConj_linear
+  Ising2D.TConj_trans
+  Ising2D.TV
+  Ising2D.TV_apply
+  Ising2D.TV_eq_TConj
+  Ising2D.TV_linear
+  Ising2D.TV_mul
+  Ising2D.TV_one
+  Ising2D.ActsBy
+  Ising2D.ActsBy.comp
+  Ising2D.ActsBy.eigen
+  Ising2D.B1mat
+  Ising2D.B2mat
+  Ising2D.B1_mul_B2_mul_B1_eq_explicit
+  Ising2D.B1_mul_B2_mul_B1_eq_AMat
+  Ising2D.TV_hatZ_hatY_of_action
+  "Ising2D.TV_hatZ_hatY_of_action'"
+  # --- 各章（上の区切りの続き）---
   Ising2D.V1PauliForm_eq_diagonal
   Ising2D.V1PauliForm_apply_configBasisIso
   Ising2D.first_transfer_matrix_pauli_form

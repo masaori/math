@@ -6,7 +6,7 @@
 (`<conjugation_is_ring_homomorphism>`)
 
 人手証明と 1 対 1 に対応する具体版は
-`Ising2D/Part000/Claim045_ConjugationIsRingHom.lean`（`Ising2D.Conjugation.matrix_conj_*` ほか）にある。
+`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean`（`Ising2D.Conjugation.matrix_conj_*` ほか）にある。
 必要十分版は `Ising2D/NecSuf/Conjugation.lean`（`Ising2D.NecSuf.Conj.*`）にある。
 
 本ファイルは、**具体版（`Mat(n,ℂ)` と `Matrix.inv` による共役）を必要十分版の系として導出する**
@@ -22,7 +22,7 @@
   mathlib の `Matrix.inv` は特異行列に `0` を返す全域関数なので、この書き直しにも正則性は要らない。
 -/
 import Ising2D.NecSuf.Conjugation
-import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 namespace Ising2D.Conjugation

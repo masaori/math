@@ -98,13 +98,14 @@ EOF
   | クロネッカー積と多因子基底 | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/` |
   | 有限行列・Pauli行列・交換子 | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` |
   | 行列指数関数と交換子計算 | `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/` |
+  | 可逆行列・線型写像との対応・共役変換 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` |
 
-- まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
+- まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part004`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
 
   | 人手証明（Typst） | Lean |
   | --- | --- |
-  | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/Part000/Claim045_ConjugationIsRingHom.lean` |
+  | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
   | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` |
   | `parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` |
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaScalarIdentityCommutes.lean` |
@@ -115,7 +116,7 @@ EOF
   | `parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean` |
   | `parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` | `Ising2D/Part004/Definition009_HatZHatY.lean` |
   | `parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ` | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` |
-  | `parts/008_T_V1_hatZとhatZ_hatYの関係/010,014,015,016,017` | `Ising2D/Part008/Definition016_TV.lean` |
+  | `parts/008_T_V1_hatZとhatZ_hatYの関係/010,014,015,016,017` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` |
   | `parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ` | `Ising2D/Part004/Claim012_HatPeriodicity.lean` |
   | `parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ` | `Ising2D/Part004/Claim013_RecoverZY.lean` |
   | `parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimZYGenerateAlgebra.lean` |
@@ -528,14 +529,14 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**。作用行列は `AMat K θ`） | `T_V_hatZ_hatY` |
 
 > **`A(θ)` の二重定義（解消済み・2026-07-26）**: 以前は `A(θ)` が `Ising2D.Amat`
-> （`Part008/Definition016_TV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
+> （`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
 > （`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっており、
 > 名前が大文字小文字違いだけで紛らわしかった。**`AMat` に一本化し `Amat` を削除した。**
 > 現在 `A(θ)` の定義は `Ising2D.AMat` ただ 1 つである。
 >
 > 具体的な変更:
 >
-> - `Part008/Definition016_TV.lean` が `EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` を import するようにした
+> - `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` が `EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` を import するようにした
 >   （`Definition019` は mathlib 以外に依存しないので循環しない）。
 > - `Ising2D.Amat` の定義を削除。`B1_mul_B2_mul_B1_eq_Amat` は
 >   **`B1_mul_B2_mul_B1_eq_explicit`**（右辺を `Amat` の代わりに同じ内容の `!![…]` リテラルで書いた版。
@@ -698,7 +699,7 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
 | `transfer_matrix_001_definition_symbols` と `transfer_matrix_011d_claim_V2_exponential_representation`（`V_2` の 2 つの表式） | （形式化時点）一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていなかった | **解消済み**。現在の本文は `V2_in_Z_Y` の Step 2 の直後にこの等式を置き、Step 3 で `second_transfer_matrix_pauli_form` から `V_2` の Jordan--Wigner 表示を導く。Lean は `I_smul_H2_eq_sum_sigmaX`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）と `V2_in_Z_Y`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`） |
-| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
+| `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
 | `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（`ホロノミック量子場_p142下段_1`） | （かつて）ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）に依存し、本リポジトリでは未形式化だった | **解消済み（2026-07-26）**。`Ising2D/Part008/Claim012_TVActions.lean` の `actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` として証明した。係数を独立に導出して原文の `cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` と突き合わせた結果、**原文の誤りは無かった**（`B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat`） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_035`（`det_A_theta`） | `det A(θ_μ) = 1` は `A(θ)` の定義からは出ず、**`c_2 s_2^* = c_2^*`（双対関係の帰結）が要る**。原文は `A = B_1B_2B_1` からこれを出しているが、`B_1, B_2` には `c_2^*, s_2^*` しか現れず `c_2` は展開の結果 `c_2^*/s_2^*` として出る。つまり (iii) は `factorization_of_A_theta`（proof が原文では TODO）に埋め込まれた前提 | `Ising2D/Part008/Claim027_EigenATheta.lean` の `det_AMat`（無条件）と `det_AMat_eq_one`（3 関係を仮定）に分離 |

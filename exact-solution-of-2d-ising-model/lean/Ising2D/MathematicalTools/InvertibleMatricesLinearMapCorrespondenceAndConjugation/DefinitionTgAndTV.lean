@@ -1,17 +1,18 @@
 /-
 # 共役作用 `T_g` と `T_{(V)}`、およびその `hat(Z)^{(-)}, hat(Y)` への作用
 
-対応する人手証明（正本は `structured-latex/content/*.mjs`）:
+対応する人手証明:
 
-* `structured-latex/content/008_TV1_hatZ_hatY_part1.mjs`
+* `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`（本文の正本）
   * `TV1_hatZ_hatY_011_definition_T_g`（ラベル `def_T_g`）
     — `g ∈ (Mat(2,ℂ)^{⊗M})^×` に対し `T_g : h ↦ g h g⁻¹`
   * `TV1_hatZ_hatY_015_claim_linearity_of_T`（ラベル `linearity_of_T`）
     — `T` の ℂ-線型性
-  * `TV1_hatZ_hatY_016_definition_T_V`（ラベル `def_T_V`）
-    — `T_{(V)}(X) := T_{(V_1^{(±)})^{1/2}}(T_{V_2}(T_{(V_1^{(±)})^{1/2}}(X)))`
   * `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）— `A(θ)`。
     章立ての組み直しで `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ移った
+* 参照用ノート `structured-latex/notes/integer_momentum_route_not_adopted.ts`（整数運動量の経路。本文から退避した）
+  * `TV1_hatZ_hatY_016_definition_T_V`（ラベル `def_T_V`）
+    — `T_{(V)}(X) := T_{(V_1^{(±)})^{1/2}}(T_{V_2}(T_{(V_1^{(±)})^{1/2}}(X)))`
   * `TV1_hatZ_hatY_018_claim_T_V_action`（ラベル `T_V_hatZ_hatY`）
     — `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(2πμ/M)`
   * `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（ラベル `ホロノミック量子場_p142下段_1`）
@@ -19,7 +20,7 @@
 
 ## 形式化の方針
 
-* `T_g` は既存の `Ising2D.Conjugation.*`（`Part000/Claim045_ConjugationIsRingHom.lean`）を
+* `T_g` は既存の `Ising2D.Conjugation.*`（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean`）を
   再利用する。あちらで `T B (A) = B A B⁻¹` が環自己同型であることまで証明済みなので、
   ここでは `commutes'`（スカラーを固定すること）だけを足して **ℂ-代数自己同型 `A ≃ₐ[ℂ] A`**
   に持ち上げる（`TConj`）。ℂ-線型性（原文 `linearity_of_T`）・乗法性・単位性は
@@ -74,7 +75,7 @@
 `AMat` へ一本化して削除した（`lean/README.md` の該当節を参照）。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
-import Ising2D.Part000.Claim045_ConjugationIsRingHom
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Mathlib.Algebra.Algebra.Equiv
 import Mathlib.LinearAlgebra.Matrix.Notation

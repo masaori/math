@@ -116,5 +116,5 @@ B_2 = ( cosh 2K_2^*         i sinh 2K_2^* )
 
 `B_1(θ_μ) B_2 B_1(θ_μ) = A(θ_μ)` には双対関係の帰結 `s_2^* c_2 = c_2^*` が要る。
 これは既知の指摘で、`030_det_A_theta_duality.md` と
-`lean/Ising2D/Part008/Definition016_TV.lean` 冒頭に記録済みである。
+`lean/Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` 冒頭に記録済みである。
 Lean では `hdual` として明示の仮定に持ち上げてある（`Ising2D.TV_hatZ_hatY` の引数）。

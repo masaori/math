@@ -7,9 +7,9 @@
 
 | | ファイル | 主要な宣言 |
 | --- | --- | --- |
-| 具体版（人手証明と 1 対 1） | `Ising2D/Part000/Claim045_ConjugationIsRingHom.lean` | `Ising2D.Conjugation.matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` |
+| 具体版（人手証明と 1 対 1） | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` | `Ising2D.Conjugation.matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` |
 | 必要十分版 | `Ising2D/NecSuf/Conjugation.lean` | `Ising2D.NecSuf.Conj.sandwich_mul` / `sandwich_one` / `sandwich_comp` / `sandwich_add` / `conjMulAutHom` |
-| 必要十分版からの導出 | `Ising2D/Part000/Claim045_ConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.matrix_conj_mul_of_necSuf` ほか |
+| 必要十分版からの導出 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.matrix_conj_mul_of_necSuf` ほか |
 
 以下はすべて Lean で通っている証明（`lake build` と `scripts/check-no-sorry.sh` が通る状態）に
 基づく記述であり、見込みや推測ではない。

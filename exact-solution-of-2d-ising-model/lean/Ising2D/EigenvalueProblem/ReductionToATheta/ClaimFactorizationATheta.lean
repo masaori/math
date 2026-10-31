@@ -11,7 +11,7 @@
 `θ~_μ` に使えないので、本章で `θ ∈ ℝ` 一般の主張として立て直している。
 
 **Lean 側の既存定理 `Ising2D.B1_mul_B2_mul_B1_eq_AMat`
-（`Part008/Definition016_TV.lean`）は最初から `θ : ℝ` 一般で述べられている**ので、
+（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`）は最初から `θ : ℝ` 一般で述べられている**ので、
 本章の `factorization_of_A_theta_general` はそれそのものである。
 本ファイルでは名前を原文のラベルに合わせて言い直し、`θ = θ~_μ` への特殊化を与える。
 

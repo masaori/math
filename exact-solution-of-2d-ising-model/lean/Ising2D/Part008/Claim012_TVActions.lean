@@ -17,7 +17,7 @@
 
 ## このファイルで解消した「未証明の穴」
 
-`Part008/Definition016_TV.lean` の `TV_hatZ_hatY_of_action` /
+`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の `TV_hatZ_hatY_of_action` /
 `TV_hatZ_hatY_of_action'`、および `Part008/Definition030_Fermi.lean` の
 `TV_psiDag_of_action` / `TV_psi_of_action` は、`ActsBy`（原文の行ベクトル記法）を
 **明示的な仮定**として持っていた。本ファイルでその仮定を証明して除去し、
@@ -64,14 +64,14 @@ Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引�
 ## 残っている仮定について
 
 `B_1 B_2 B_1 = A(θ)` には双対関係の帰結 `s_2^* c_2 = c_2^*` が要る（原文はこれを
-明示していない。`Part008/Definition016_TV.lean` 冒頭「原文の問題」参照）。これは
+明示していない。`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` 冒頭「原文の問題」参照）。これは
 **未形式化に由来する穴ではなく数学的に必要な仮定**なので、`hdual` として残す。
 同様に `c_1 = cosh 2K_1` 等の `IsingConst` の成分と `K_1, K_2^*` の関係も仮定として持つ。
 -/
 import Ising2D.NecSuf.TVAction
 import Ising2D.Part008.Claim001_CommutatorHZY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 import Ising2D.Part008.Definition030_Fermi
 
 namespace Ising2D
@@ -247,7 +247,7 @@ theorem actsBy_TConj_V2H2Form (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star :
 
   `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(θ_μ)`
 
-`Part008/Definition016_TV.lean` の `TV_hatZ_hatY_of_action'` が持っていた
+`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の `TV_hatZ_hatY_of_action'` が持っていた
 `ActsBy` の仮定 `hT1`, `hT2` を、`actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` で埋めた形。
 
 残る仮定は「`IsingConst` の成分が `K_1, K_2^*` の双曲線関数であること」と

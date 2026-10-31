@@ -16,12 +16,12 @@
 本章でそれを `θ ∈ ℝ` 一般へ広げ直している。
 
 **Lean 側の既存定義 `Ising2D.B1mat` / `Ising2D.B2mat`
-（`Part008/Definition016_TV.lean`）は最初から `θ : ℂ` 一般で定義されているので、
+（`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`）は最初から `θ : ℂ` 一般で定義されているので、
 本章の `def_B1_theta_B2` はその `θ = (θ : ℝ) : ℂ` への制限そのものである。**
 新しい定義は要らない。本ファイルでは、原文の行列成分と `B1mat` / `B2mat` の成分が
 一致することを明示するだけにする（原文との突き合わせ）。
 -/
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 
 namespace Ising2D
 

@@ -73,7 +73,7 @@
 （未形式化に由来する仮定ではないので、これは除去できない）。
 -/
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 import Ising2D.Part008.Claim027_EigenATheta
 import Mathlib.Tactic.Module
 

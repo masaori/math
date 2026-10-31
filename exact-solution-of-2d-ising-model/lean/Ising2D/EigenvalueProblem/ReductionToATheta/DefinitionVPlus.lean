@@ -44,7 +44,7 @@ Lean の `VPlus M s2 K1 K2star` / `VPlusUnits` / `TVPlus` は、この右辺の�
 原文が「`exp(X)` の `1/2` 乗」と書いているものを Lean では最初から `exp(X/2)` としている点も
 既存の定義と同じである（原文もこの章では最初から `exp((i/2)K_1H_1^{(+)})` を定義に採っている）。
 -/
-import Ising2D.Part008.Definition016_TV
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 

@@ -176,13 +176,19 @@
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
+  - 部「数学的道具立て」のまとまり「可逆行列・線型写像との対応・共役変換」（済み）: 旧 `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism` だけを形式化）と
+    旧 `Part008/Definition016_TV` を `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` へ番号を外した名前（`ClaimConjugationIsRingHom`・`ClaimConjugationIsRingHomFromNecSuf`・`DefinitionTgAndTV`）で移した。`Part000/` は無くなった。
+    `DefinitionTgAndTV` が形式化する人手の項目は、このまとまりの `def_T_g`（`TConj`）・`linearity_of_T`（`TConj_linear`）の 2 項と、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した
+    整数運動量の経路の `def_T_V`（`TV`）・`T_V_hatZ_hatY`（仮定つき版 `TV_hatZ_hatY_of_action`）の 2 項である（`ホロノミック量子場_p142下段_1` は仮定に取るだけ、`def_A_theta` は `DefinitionThetaGamma` の定義を使うだけで数えない）。
+    整数運動量の 2 項を数えなければ数学的道具立てだけ、`RoutesNotAdopted/IntegerMomentum/` の置き場として数えれば 2 対 2 の同数で、どちらでも数学的道具立てを先とする規則でこのまとまりへ置いた。
+    このまとまりのほかの項目（`def_ad_X_matrix`・`def_end_iso`・`end_is_algebra_isomorphism`・`end_preserves_matrix_exponential`・`end_acts_on_kronecker_products`・`def_invertible_elements_of_R`）を冒頭で宣言するファイルは旧フォルダに無い
+    （`def_ad_X_matrix` は `EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean` が参照として触れるだけ）。
 
 ## 次の一歩
 
-項目 7 の部「数学的道具立て」の続きとして、「可逆行列・線型写像との対応・共役変換」の `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism`）を
-`Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。同じまとまりの `def_T_g`・`linearity_of_T` を形式化する `Part008/Definition016_TV` は、
-`def_T_V`（章の項目）と混在するので、runbook の多数決の規則で置き場を決めてから同じ回で扱う。
-残りの候補は `Part008/Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、
-`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
+項目 7 の部「数学的道具立て」の続きとして、「トレース・共役転置・正定値性」に当たるファイルを `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
+候補は `Part009/Definition001_Trace`・`Part009/Claim013_PositiveDefinite`（数学的道具立ての 3 項と「V^{(+)} の固有値」の章の `iH_is_real_symmetric` 1 項）、
+`Part011/Claim005_PsdCauchySchwarz`（と、import 元の多数決で置く補助の `Part011/Basic`）である。各ファイルの置き場は runbook の多数決の規則で決める。
+残りの候補は `Part008/Definition030_Fermi`、`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本（「三角関数の評価・有限和・積分」）である。
 1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。
