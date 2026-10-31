@@ -227,7 +227,7 @@ theorem Uflip_conj_S1plus (K1 : ℂ) :
     Uflip M * ((Complex.I * K1) • H1plus M) * UflipInv M = -((Complex.I * K1) • H1plus M) :=
   Uflip_conj_S1 K1 (-1)
 
-/-! ## 指数関数への作用（原文 `constant_c_value` Step 2） -/
+/-! ## 指数関数への作用（人手本文 `constant_c_value_even_sector` Step 2） -/
 
 /-- `U` を単元として取り出したもの。 -/
 noncomputable def UflipUnits (M : ℕ) : (TensorPow M)ˣ where
@@ -242,7 +242,7 @@ theorem UflipUnits_val : ((UflipUnits M : (TensorPow M)ˣ) : TensorPow M) = Ufli
 @[simp]
 theorem UflipUnits_inv : (((UflipUnits M)⁻¹ : (TensorPow M)ˣ) : TensorPow M) = UflipInv M := rfl
 
-/-- **原文 `constant_c_value` Step 2** の `U exp(S) U^{-1} = exp(U S U^{-1})`。 -/
+/-- **人手本文 `constant_c_value_even_sector` Step 2** の `U exp(S) U^{-1} = exp(U S U^{-1})`。 -/
 theorem Uflip_conj_matExp (A : TensorPow M) :
     Uflip M * matExp A * UflipInv M = matExp (Uflip M * A * UflipInv M) := by
   have h := matExp_units_conj (UflipUnits M) A

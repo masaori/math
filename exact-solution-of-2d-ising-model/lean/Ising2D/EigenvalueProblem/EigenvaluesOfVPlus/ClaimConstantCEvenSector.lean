@@ -23,10 +23,12 @@
 - `p = tr(V̌')` の値（章 009 は前因子 `2^{M-m}` つき、本章は前因子なし）
 の 2 点だけで、`τ` を経由する筋（`tr(V)/tr(V^{-1}) = c^2`、符号反転共役 `U` による
 `tr(exp(-S_1)exp(-S_2)) = τ`、正定値性による符号確定）はまったく同じである。
-符号反転共役 `Ising2D.Uflip_conj_S1`（章 009 `sign_flip_conjugation`）は
-`η` について複号同順の形で証明されているので、`η = -1` を代入するだけでよい。
+本ファイルの Step 1・Step 2（`trace_VPlus`・`trace_expNegS1plus_expNegS2_eq_tauPlus`・`trace_VPlusInv`）は
+`S_1^{(+)}` について人手の式変形どおりに書く。符号反転共役は人手本文 `sign_flip_conjugation` の `(+)` の主張
+`Ising2D.Uflip_conj_S1plus`・`Ising2D.Uflip_conj_S2` を使う。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 import Ising2D.NecSuf.ConstantC
 
 namespace Ising2D
@@ -38,18 +40,94 @@ section ConstantCEven
 
 variable {M : ℕ}
 
+/-- **原文 `constant_c_value_even_sector` の `τ`**: `τ := tr(exp(S_1) exp(S_2))`
+（`S_1 := S_1^{(+)} = iK_1H_1^{(+)}`、`S_2 = iK_2^*H_2`）。 -/
+noncomputable def tauPlus (M : ℕ) (K1 K2star : ℂ) : ℂ :=
+  (matExp ((Complex.I * K1) • H1plus M) * matExp ((Complex.I * K2star) • H2 M)).trace
+
+/-- `exp(X/2) exp(X/2) = exp(X)`（人手 Step 1 の「可換なので `exp(S_1/2)^2 = exp(S_1)`」。
+`theorem_exp_product` と `X/2 + X/2 = X`）。`X = ±S_1` の両方に使う。 -/
+theorem matExp_half_mul_matExp_half (X : TensorPow M) :
+    matExp ((1 / 2 : ℂ) • X) * matExp ((1 / 2 : ℂ) • X) = matExp X := by
+  calc matExp ((1 / 2 : ℂ) • X) * matExp ((1 / 2 : ℂ) • X)
+      = matExp ((1 / 2 : ℂ) • X + (1 / 2 : ℂ) • X) := by
+        -- `theorem_exp_product`（自分自身とは可換）
+        rw [matExp, matExp, Matrix.exp_add_of_commute _ _ (Commute.refl _)]
+    _ = matExp X := by
+        rw [← add_smul]
+        norm_num
+
 /-- **原文 `constant_c_value_even_sector` Step 1**: `tr(V^{(+)}) = (2s_2)^{M/2} τ`。 -/
 theorem trace_VPlus (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
     (VPlus M s2 K1 K2star).trace
-      = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) * tauTrace M K1 (-1) K2star :=
-  trace_Vmat K1 (-1) s2 K2star
+      = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ)) * tauPlus M K1 K2star := by
+  set a : ℂ := (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) with ha
+  set E := matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)) with hE
+  set B := matExp ((Complex.I * K2star) • H2 M) with hB
+  calc (VPlus M s2 K1 K2star).trace
+      = (a • (E * B * E)).trace := by
+        -- `V_plus_is_positive_definite` の表示
+        rw [VPlus_eq_smul]
+    _ = a * (E * B * E).trace := by
+        -- トレースの線型性（`trace_basic_properties` (1)）
+        rw [Matrix.trace_smul, smul_eq_mul]
+    _ = a * (E * (E * B)).trace := by
+        -- 巡回性（`trace_basic_properties` (2)）を `E B` と `E` に適用
+        rw [Matrix.trace_mul_comm (E * B) E]
+    _ = a * ((E * E) * B).trace := by rw [mul_assoc]
+    _ = a * (matExp ((Complex.I * K1) • H1plus M) * B).trace := by
+        -- 可換なので `exp(S_1/2)^2 = exp(S_1)`
+        rw [hE, matExp_half_mul_matExp_half]
+    _ = a * tauPlus M K1 K2star := by rw [tauPlus]
+
+/-- **原文 `constant_c_value_even_sector` Step 2**: `tr(exp(-S_1) exp(-S_2)) = τ`
+（`sign_flip_conjugation` の `U` による共役で `τ` に戻る）。 -/
+theorem trace_expNegS1plus_expNegS2_eq_tauPlus (K1 K2star : ℂ) :
+    (matExp (-((Complex.I * K1) • H1plus M)) * matExp (-((Complex.I * K2star) • H2 M))).trace
+      = tauPlus M K1 K2star := by
+  set S1 := (Complex.I * K1) • H1plus M with hS1
+  set S2 := (Complex.I * K2star) • H2 M with hS2
+  symm
+  calc tauPlus M K1 K2star
+      = (matExp S1 * matExp S2).trace := by rw [tauPlus]
+    _ = (Uflip M * (matExp S1 * matExp S2) * UflipInv M).trace := by
+        -- トレースは共役で不変（`trace_basic_properties` (4)）
+        rw [trace_conj _ _ _ UflipInv_mul]
+    _ = ((Uflip M * matExp S1 * UflipInv M) * (Uflip M * matExp S2 * UflipInv M)).trace := by
+        -- `U^{-1}U = I`
+        rw [Uflip_conj_mul]
+    _ = (matExp (Uflip M * S1 * UflipInv M) * matExp (Uflip M * S2 * UflipInv M)).trace := by
+        -- `U exp(S) U^{-1} = exp(U S U^{-1})`
+        rw [Uflip_conj_matExp, Uflip_conj_matExp]
+    _ = (matExp (-S1) * matExp (-S2)).trace := by
+        -- 符号反転共役（`sign_flip_conjugation`）
+        rw [Uflip_conj_S1plus, Uflip_conj_S2]
 
 /-- **原文 `constant_c_value_even_sector` Step 1（後半）＋ Step 2**:
 `tr((V^{(+)})^{-1}) = (2s_2)^{-M/2} τ`（符号反転共役で `τ` に戻る）。 -/
 theorem trace_VPlusInv (K1 : ℂ) (s2 : ℝ) (K2star : ℂ) :
     (VPlusInv M K1 s2 K2star).trace
-      = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ))⁻¹ * tauTrace M K1 (-1) K2star :=
-  trace_VmatInv K1 (-1) s2 K2star
+      = ((((2 * s2) ^ (-((M : ℝ) / 2)) : ℝ) : ℂ)) * tauPlus M K1 K2star := by
+  set b : ℂ := (((2 * s2) ^ (-((M : ℝ) / 2)) : ℝ) : ℂ) with hb
+  set E := matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) with hE
+  set B := matExp (-((Complex.I * K2star) • H2 M)) with hB
+  calc (VPlusInv M K1 s2 K2star).trace
+      = (b • (E * B * E)).trace := by
+        -- `V_plus_is_invertible` の表示
+        rw [VPlusInv]
+    _ = b * (E * B * E).trace := by
+        -- トレースの線型性（`trace_basic_properties` (1)）
+        rw [Matrix.trace_smul, smul_eq_mul]
+    _ = b * (E * (E * B)).trace := by
+        -- 巡回性（`trace_basic_properties` (2)）
+        rw [Matrix.trace_mul_comm (E * B) E]
+    _ = b * ((E * E) * B).trace := by rw [mul_assoc]
+    _ = b * (matExp (-((Complex.I * K1) • H1plus M)) * B).trace := by
+        -- 可換なので `exp(-S_1/2)^2 = exp(-S_1)`
+        rw [hE, ← smul_neg, matExp_half_mul_matExp_half]
+    _ = b * tauPlus M K1 K2star := by
+        -- Step 2
+        rw [trace_expNegS1plus_expNegS2_eq_tauPlus]
 
 /-- `V^{(+)} = c V̌'` から `(V^{(+)})^{-1} = c⁻¹ (V̌')^{-1}`（逆元の一意性）。 -/
 theorem VPlusInv_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
@@ -90,7 +168,8 @@ theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M →
   have h2 : (VPlusInv M K1 s2 K2star).trace = c⁻¹ * ((p : ℝ) : ℂ) := by
     rw [VPlusInv_eq F g hs2 hcne hVeq, Matrix.trace_smul, smul_eq_mul, F.trace_Vprime_inv g, hP]
   exact NecSuf.const_eq_of_trace_ratio hapos hppos h1 h2
-    (trace_VPlus K1 s2 K2star) (trace_VPlusInv K1 s2 K2star) hVpos
+    (trace_VPlus K1 s2 K2star)
+    (by rw [trace_VPlusInv, rpow_neg_half_M_eq_inv hs2]) hVpos
 
 end ConstantCEven
 

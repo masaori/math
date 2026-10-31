@@ -268,6 +268,21 @@
     `DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi`・`DiagonalizationAndExponentialForm/DefinitionCheckFermi`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・
     `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY` を import）。
 
+  - ゴールラインの確認の四つ目（済み、2026-10-31）: `ClaimConstantCAndEigenvaluesOfV` の 8 定数（`VmatInv`・`VmatInv_mul_Vmat`・`Vmat_eq_smul`・`matExp_neg_mul`・`tauTrace`・`trace_Vmat`・`trace_VmatInv`・`trace_exp_neg_eq_tau`）と非公開の `neg_mul_V1pmHalf` を判定した。
+    どれも整数運動量の `V`（符号 `η` を引数に持つ一般形）の逆と `τ` の補題で、本文の `EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean`・`ClaimConstantCEvenSector.lean` は `η = -1` を代入して借りていた。
+    人手 `V_plus_is_positive_definite`（statement の表示 `VPlus_eq_smul` と Step 2〜3 の `VPlus_posDef`）・`V_plus_is_invertible`（`R^{(+)}` を係数 `(2s_2)^{-M/2}` のまま `VPlusInv` とし、Step 1 の 4 つの左右逆・Step 2〜3 の `calc`、`a^{-1} = (2s_2)^{-M/2}` は `rpow_neg_half_M_eq_inv`）・
+    `constant_c_value_even_sector` の Step 1〜2（`tauPlus`・`trace_VPlus`・`trace_expNegS1plus_expNegS2_eq_tauPlus`・`trace_VPlusInv`）を `S_1^{(+)}` について人手の式変形どおりに書き直した。
+    `VPlus_posDef` は整数運動量の `V_is_positive_definite` の形式化 `Vmat_posDef` の系だったので、同じく人手の Step どおりに直し、`VPlus_eq_Vmat`・`star_neg_one` を消した。
+    `trace_VPlusInv` の主張は人手どおり `(2s_2)^{-M/2} τ` にし、必要十分版 `NecSuf.const_eq_of_trace_ratio` へ渡すところで `a^{-1}` へ直す（`constant_c_value_even_sector` の主張の型は不変）。
+    `ClaimVPlusPositiveDefinite.lean` から `RoutesNotAdopted/` の import を外した。本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 8 本である。レビューで指摘なしになるまで直した。
+    同じメタプログラムで数え直すと、通しの定理が使う `RoutesNotAdopted/IntegerMomentum/` の公開の定数は次の 12 個である:
+    `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 個（`AMat_mulVec_eigen`・`det_AMat`・`det_AMat_eq_one`・`gamma2_mul_gamma2_neg`）、`ClaimTVActionsOnHatZHatY` の 4 個（`B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`）、
+    `DefinitionFermiPsi` の 3 個（`sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`）、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`
+    （ほかに `lastSite.eq_1`・`H1.eq_1` の等式補題が退避先のモジュールに数えられるが、定義の本体は本文側にあり、等式補題が最初に使われたモジュールへ置かれるためである）。
+    レビューで、`constant_c_value_even_sector` Step 2 の行「`U exp(S) U^{-1} = exp(U S U^{-1})`」の `Uflip_conj_matExp`（`EigenvaluesOfVPlus/ClaimSignFlipConjugation.lean`）が
+    `matExp_units_conj`（`Representation.lean`）すなわち mathlib の `Matrix.exp_units_conj` に委ねていることが分かった。人手は行列ノルムの劣乗法性・`US^kU^{-1} = (USU^{-1})^k`・`def_exp` から導いている。
+    この 8 定数の外の既存の補題なので、下の「この後に残る確認」に載せた。それまでこの 2 ファイルは、この 1 行について人手証明と 1 対 1 になっていない。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -275,11 +290,13 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 上の残りの `RoutesNotAdopted/IntegerMomentum/` の定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
-  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数と `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite` は済み。次は `ClaimConstantCAndEigenvaluesOfV` の 8 定数と非公開の `neg_mul_V1pmHalf`。
-  名前で使っている本文のファイルは `EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean`・`EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean`）。
-  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 9 本）は、ファイルごとに import を外せるかを確かめる。
+  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数は済み。
+  次は `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数 `AMat_mulVec_eigen`・`det_AMat`・`det_AMat_eq_one`・`gamma2_mul_gamma2_neg`。使っている本文のファイルは `grep` で特定する）。
+  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 8 本）は、ファイルごとに import を外せるかを確かめる。
 
 この後に残る確認:
 
+- `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
+  `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。

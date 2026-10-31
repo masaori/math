@@ -1200,11 +1200,23 @@ targets=(
   Ising2D.CheckFermiSetup.trace_Vprime
   Ising2D.CheckFermiSetup.trace_Vprime_inv
   Ising2D.CheckFermiSetup.trace_Vprime_pos
+  Ising2D.VPlus_eq_smul
   Ising2D.VPlus_posDef
+  Ising2D.rpow_neg_half_M_eq_inv
+  Ising2D.matExp_mul_matExp_neg_eq_one
+  Ising2D.matExp_neg_mul_matExp_eq_one
+  Ising2D.expHalfS1plus_mul_expNegHalfS1plus
+  Ising2D.expNegHalfS1plus_mul_expHalfS1plus
+  Ising2D.expS2_mul_expNegS2
+  Ising2D.expNegS2_mul_expS2
+  Ising2D.VPlus_mul_VPlusInv
+  Ising2D.VPlusInv_mul_VPlus
   Ising2D.VPlusInv_posDef
   Ising2D.trace_VPlus_pos
   Ising2D.trace_VPlusInv_pos
+  Ising2D.matExp_half_mul_matExp_half
   Ising2D.trace_VPlus
+  Ising2D.trace_expNegS1plus_expNegS2_eq_tauPlus
   Ising2D.trace_VPlusInv
   Ising2D.VPlusInv_eq
   Ising2D.constant_c_value_even_sector
@@ -1225,7 +1237,6 @@ targets=(
   Ising2D.checkBigLambda_lt_max_of_gammaFn
   Ising2D.eq_Qproj_univ_mulVec_of_eigen
   Ising2D.finrank_range_Qproj_univ
-  Ising2D.VPlus_eq_Vmat
   Ising2D.star_checkQ
   Ising2D.star_two_mul_sqrtM
   Ising2D.star_checkP

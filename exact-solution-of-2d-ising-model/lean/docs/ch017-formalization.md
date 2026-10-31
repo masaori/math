@@ -96,13 +96,15 @@
 | `CheckFermiSetup.sum_exp_gval` | `∑_ε e^{ǧ(ε)} = ∏_μ 2cosh(γ(θ~_μ)/2)` | `trace_of_check_Vprime` Step 2 |
 | `CheckFermiSetup.trace_Vprime` | **`tr(V̌') = ∏_μ 2cosh(γ/2)`（前因子なし）** | 同 Step 1〜2 |
 | `CheckFermiSetup.trace_Vprime_inv` / `trace_Vprime_pos` | `tr((V̌')^{-1}) = tr(V̌') > 0` | 同 Step 3〜4 |
-| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_Vmat` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `VPlus_eq_Vmat` で明示した | `def_V_plus` |
-| `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` |
-| `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | 明示した候補が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` |
+| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_smul` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。`V^{(+)} = (2s_2)^{M/2}exp(S_1^{(+)}/2)exp(S_2)exp(S_1^{(+)}/2)` | `def_V_plus`、`V_plus_is_positive_definite` Step 1 |
+| `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` Step 2〜3 |
+| `matExp_mul_matExp_neg_eq_one` / `matExp_neg_mul_matExp_eq_one` / `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2` | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
+| `VPlusInv` / `rpow_neg_half_M_eq_inv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`、`a^{-1} = (2s_2)^{-M/2}`、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)})` の正値性 | `trace_V_plus_is_positive` |
 | `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
-| `trace_VPlus` / `trace_VPlusInv` | `tr(V^{(+)}) = (2s_2)^{M/2}τ`, `tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
+| `tauPlus` / `matExp_half_mul_matExp_half` / `trace_VPlus` | `τ := tr(exp(S_1^{(+)})exp(S_2))`、`exp(X/2)^2 = exp(X)`、`tr(V^{(+)}) = (2s_2)^{M/2}τ` | `constant_c_value_even_sector` Step 1 |
+| `trace_expNegS1plus_expNegS2_eq_tauPlus` / `trace_VPlusInv` | `tr(exp(-S_1^{(+)})exp(-S_2)) = τ`、`tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
 | `VPlusInv_eq` | `V^{(+)} = cV̌' ⇒ (V^{(+)})^{-1} = c⁻¹(V̌')^{-1}` | 同 Step 3（逆元の一意性） |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value_even_sector` |
 | `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus` | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |
