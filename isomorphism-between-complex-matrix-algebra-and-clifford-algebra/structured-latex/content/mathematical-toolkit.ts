@@ -1,0 +1,70 @@
+import { defineBlocks, list, math, paragraph } from "../schema.ts";
+
+export default defineBlocks([
+  {
+    id: "mathematical_toolkit_heading",
+    kind: "heading",
+    level: 1,
+    title: { text: "数学的道具立て" },
+    labels: [],
+  },
+  {
+    id: "mathematical_toolkit_ring_heading",
+    kind: "heading",
+    level: 2,
+    title: { text: "環" },
+    labels: [],
+  },
+  {
+    id: "mathematical_toolkit_definition_unital_ring",
+    kind: "definition",
+    title: { text: "単位元をもつ環" },
+    labels: ["def_unital_ring"],
+    statement: [
+      paragraph([
+        "集合 ",
+        math(String.raw`R`),
+        "、写像 ",
+        math(String.raw`+_R:R\times R\to R`),
+        " と ",
+        math(String.raw`\cdot_R:R\times R\to R`),
+        "、元 ",
+        math(String.raw`0_R\in R`),
+        " と ",
+        math(String.raw`1_R\in R`),
+        " の組 ",
+        math(String.raw`(R,+_R,\cdot_R,0_R,1_R)`),
+        " が次をすべて満たすとき、これを単位元をもつ環と呼ぶ。以下、",
+        math(String.raw`x,y,z`),
+        " は ",
+        math(String.raw`R`),
+        " の任意の元を表す。",
+      ]),
+      list([
+        [math(String.raw`(x+_R y)+_R z=x+_R(y+_R z)`), "（加法の結合法則）"],
+        [math(String.raw`x+_R y=y+_R x`), "（加法の交換法則）"],
+        [math(String.raw`x+_R 0_R=x`), "（加法の単位元）"],
+        [
+          "各 ",
+          math(String.raw`x\in R`),
+          " に対し ",
+          math(String.raw`x+_R x'=0_R`),
+          " を満たす ",
+          math(String.raw`x'\in R`),
+          " が存在する（加法の逆元）",
+        ],
+        [math(String.raw`(x\cdot_R y)\cdot_R z=x\cdot_R(y\cdot_R z)`), "（乗法の結合法則）"],
+        [math(String.raw`x\cdot_R 1_R=x`), " かつ ", math(String.raw`1_R\cdot_R x=x`), "（乗法の単位元）"],
+        [
+          math(String.raw`x\cdot_R(y+_R z)=x\cdot_R y+_R x\cdot_R z`),
+          " かつ ",
+          math(String.raw`(x+_R y)\cdot_R z=x\cdot_R z+_R y\cdot_R z`),
+          "（分配法則）",
+        ],
+      ]),
+      paragraph([
+        "演算と単位元には、それが属する環を必ず添字で書く。乗法の交換法則は仮定しない。",
+      ]),
+    ],
+  },
+]);

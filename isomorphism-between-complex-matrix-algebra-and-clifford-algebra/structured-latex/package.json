@@ -1,0 +1,30 @@
+{
+  "name": "@clifford-matrix-isomorphism/structured-latex",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "複素数体上のクリフォード代数と複素行列環の同型を、逆写像を明示した全単射として証明する本体（構造化テキスト）。",
+  "scripts": {
+    "gen": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project .",
+    "check:generated": "node ../../structured-latex/codegen/structured-text-index/cli.ts --project . --check",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "validate": "node tools/validate-content.ts",
+    "build:tex": "node tools/build-latex.ts",
+    "build:html": "node tools/build-html.ts",
+    "build:pdf": "node tools/build-latex.ts --pdf && node tools/verify-no-notes-in-output.ts",
+    "verify:no-notes": "node tools/build-latex.ts && node tools/verify-no-notes-in-output.ts",
+    "check": "npm run check:generated && npm run typecheck && npm run validate && npm run verify:no-notes"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/katex": "^0.16.8",
+    "@types/node": "^22.10.2",
+    "katex": "^0.18.4",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=22.18"
+  }
+}
