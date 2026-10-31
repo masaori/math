@@ -13,8 +13,8 @@
 本ファイルの上界の定数 `B = π²/(12 c_0(1+c_0))` は必要十分版の
 `C b²/(c_0(1+c_0)a²)` に `a = 1/2, b = π, C = 1/48` を入れたものと厳密に一致する。
 -/
-import Ising2D.Part020.Claim008_ElementarySineBounds
-import Ising2D.Part020.Claim009_ClosedFormLogIntegral
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimElementarySineBounds
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimClosedFormLogIntegral
 
 namespace Ising2D
 

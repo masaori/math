@@ -4,8 +4,8 @@
 対応する人手証明のラベル: `closed_form_log_integral`, `sine_integral_two_sided`
 （正本は `structured-latex/content/020_critical_point.ts`）
 
-具体版: `Ising2D/Part020/Claim009_ClosedFormLogIntegral.lean`,
-`Ising2D/Part020/Claim010_SineIntegralTwoSided.lean`
+具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`,
+`Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean`
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 

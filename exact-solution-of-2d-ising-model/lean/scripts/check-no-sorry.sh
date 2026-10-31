@@ -559,6 +559,26 @@ targets=(
   Ising2D.psd_cauchy_schwarz
   Ising2D.NecSuf.psd_cauchy_schwarz
   Ising2D.NecSuf.bilin_quadratic_expand
+  # --- 数学的道具立て「三角関数の評価・有限和・積分」（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/。必要十分版は NecSuf/RiemannSum.lean・NecSuf/LogDivergentIntegral.lean・NecSuf/HyperbolicBounds.lean）---
+  Ising2D.riemann_sum_to_integral_error
+  Ising2D.riemann_sum_to_integral
+  Ising2D.riemann_sum_to_integral_indep_delta
+  Ising2D.c0
+  Ising2D.c0_bounds
+  Ising2D.c0_pos
+  Ising2D.c0_le_one
+  Ising2D.elementary_sine_bounds_cube
+  Ising2D.elementary_sine_bounds_linear
+  Ising2D.integral_inv_sqrt_pi
+  Ising2D.arsinh_log_bounds
+  Ising2D.integral_inv_sqrt_pi_bounds
+  Ising2D.integral_inv_pow_three_half_pi
+  Ising2D.Bconst
+  Ising2D.Bconst_le
+  Ising2D.Bconst_nonneg
+  Ising2D.continuous_sineIntegrand
+  Ising2D.continuous_quadIntegrand
+  Ising2D.sine_integral_two_sided
   # --- 各章（上の区切りの続き）---
   Ising2D.V1PauliForm_eq_diagonal
   Ising2D.V1PauliForm_apply_configBasisIso
@@ -658,9 +678,6 @@ targets=(
   Ising2D.gammaFn_periodic
   Ising2D.abs_log_Z_sub_log_c_le
   Ising2D.limit_of_log_Z_in_N_row
-  Ising2D.riemann_sum_to_integral_error
-  Ising2D.riemann_sum_to_integral
-  Ising2D.riemann_sum_to_integral_indep_delta
   Ising2D.log_LambdaM
   Ising2D.inv_M_log_LambdaM
   Ising2D.onsager_free_energy_expression
@@ -1219,22 +1236,6 @@ targets=(
   Ising2D.continuous_gammaK_fixed
   Ising2D.continuous_dgammaK_fixed
   Ising2D.continuous_d2gammaK_fixed
-  Ising2D.c0
-  Ising2D.c0_bounds
-  Ising2D.c0_pos
-  Ising2D.c0_le_one
-  Ising2D.elementary_sine_bounds_cube
-  Ising2D.elementary_sine_bounds_linear
-  Ising2D.integral_inv_sqrt_pi
-  Ising2D.arsinh_log_bounds
-  Ising2D.integral_inv_sqrt_pi_bounds
-  Ising2D.integral_inv_pow_three_half_pi
-  Ising2D.Bconst
-  Ising2D.Bconst_le
-  Ising2D.Bconst_nonneg
-  Ising2D.continuous_sineIntegrand
-  Ising2D.continuous_quadIntegrand
-  Ising2D.sine_integral_two_sided
   Ising2D.Gfun
   Ising2D.Gfirst
   Ising2D.Gsecond

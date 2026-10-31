@@ -100,8 +100,9 @@ EOF
   | 行列指数関数と交換子計算 | `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/` |
   | 可逆行列・線型写像との対応・共役変換 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` |
   | トレース・共役転置・正定値性 | `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` |
+  | 三角関数の評価・有限和・積分 | `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/` |
 
-- まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part004`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
+- まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part004`〜`Part019`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
 
   | 人手証明（Typst） | Lean |
@@ -642,7 +643,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 009 | 転送行列 `V` の固有値（個数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`） | `Part009/`（トレースの定義と基本性質、エルミート性・正定値性は数学的道具立て「トレース・共役転置・正定値性」の項なので `MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/`） | [ch009](docs/ch009-formalization.md) |
 | 010 | 偶セクターへの射影 `P^{(+)}`、`(V_1^{(+)})^{1/2}`, `V^{(+)}`、`ε` との可換性（`(−)` セクターとの分解は形式化の記録） | `Part010/` | [ch010](docs/ch010-formalization.md) |
 | 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち、`c_+ ≤ c`、`ε^⊤ = ε`、`εW = Wε`） | `Part011/`（半正定値形式の Cauchy–Schwarz と実行列の双線型形式・ノルムの補助は `MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/`、Rayleigh 商の上限 `c(M)` の定義と分配関数の挟み撃ちは `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・`W` の成分の正値性は `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch011](docs/ch011-formalization.md) |
-| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/`（`N_row → ∞` の極限は `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`、`Λ^{(δ)}_M` の定義と Onsager の表式は `EigenvalueProblem/EigenvaluesOfVPlus/`、`γ` の連続性は `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch012](docs/ch012-formalization.md) |
+| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/`（等間隔点の平均の積分への収束は数学的道具立て「三角関数の評価・有限和・積分」の項。`N_row → ∞` の極限は `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`、`Λ^{(δ)}_M` の定義と Onsager の表式は `EigenvalueProblem/EigenvaluesOfVPlus/`、`γ` の連続性は `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch012](docs/ch012-formalization.md) |
 | 013 | 偶セクターの半整数運動量モード | `Part013/`（半整数運動量の定義・反周期指数和・`[H, check(Z/Y)]` は `EigenvalueProblem/ReductionToATheta/`、共役添字・`check(Z/Y)` の反交換関係・`Z, Y` の復元は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch013](docs/ch013-formalization.md) |
 | 014 | 偶セクターでの `T` の作用 | `EigenvalueProblem/ReductionToATheta/` | [ch014](docs/ch014-formalization.md) |
 | 015 | `A(θ~)` の対角化 | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch015](docs/ch015-formalization.md) |
@@ -650,7 +651,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 017 | 偶セクターの固有値 | `EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
 | 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/`（`Q̌_ε` のエルミート性と章「M→∞ の極限と閉形式」に当たるファイルは `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch018](docs/ch018-formalization.md) |
 | 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
-| 020 | 臨界点での比熱の対数発散 | `CriticalPoint/CriticalPointAndLogDivergence/`（`cosh, sinh` の加法定理は数学的道具立て「実数の平方根・指数関数・双曲線関数」の項なので `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/`、正弦およびそれを含む積分の評価は数学的道具立ての項なので `Part020/`） | [ch020](docs/ch020-formalization.md) |
+| 020 | 臨界点での比熱の対数発散 | `CriticalPoint/CriticalPointAndLogDivergence/`（`cosh, sinh` の加法定理は数学的道具立て「実数の平方根・指数関数・双曲線関数」の項なので `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/`、正弦およびそれを含む積分の評価は数学的道具立て「三角関数の評価・有限和・積分」の項なので `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/`） | [ch020](docs/ch020-formalization.md) |
 
 ### 2 本立てが出した最大の答え
 

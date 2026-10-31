@@ -2,7 +2,7 @@
 # 等分割リーマン和の積分への収束（必要十分版）
 
 対応する人手証明のラベル: `riemann_sum_to_integral`
-具体版: `Ising2D/Part012/Theorem004_RiemannSumToIntegral.lean`
+具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/TheoremRiemannSumToIntegral.lean`
 
 人手証明（`structured-latex/content/012_free_energy.ts` の
 `freeenergy_004_theorem_riemann_sum_to_integral`）は

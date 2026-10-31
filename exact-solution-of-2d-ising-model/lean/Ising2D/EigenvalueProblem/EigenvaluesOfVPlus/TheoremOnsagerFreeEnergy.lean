@@ -22,7 +22,7 @@
 `γ` は `Ising2D.gammaFn`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）。
 -/
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimGammaContinuous
-import Ising2D.Part012.Theorem004_RiemannSumToIntegral
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.TheoremRiemannSumToIntegral
 import Ising2D.NecSuf.LogSqueeze
 
 namespace Ising2D

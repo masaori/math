@@ -101,7 +101,7 @@
 | `Ising2D.sinh_sq_div_four_le_Qfun` | `sinh²(κ/2)·(…)/4 ≤ Q`（下界評価） | (4) の評価 |
 | `Ising2D.continuous_*`（10 本） | `S, Q, γ, ∂γ/∂κ, ∂²γ/∂κ²` の（2 変数・1 変数固定の）連続性 | (R5) 適用のため |
 
-### 1.5 `Claim008_ElementarySineBounds.lean`（ラベル `elementary_sine_bounds`）
+### 1.5 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimElementarySineBounds.lean`（ラベル `elementary_sine_bounds`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -109,7 +109,7 @@
 | `Ising2D.elementary_sine_bounds_cube` | **`0 ≤ θ/2 - sin(θ/2) ≤ θ³/48`**（`0 ≤ θ ≤ π`） | (1) |
 | `Ising2D.elementary_sine_bounds_linear` | **`c_0(θ/2) ≤ sin(θ/2) ≤ θ/2`**（`0 ≤ θ ≤ π`） | (2) |
 
-### 1.6 `Claim009_ClosedFormLogIntegral.lean`（ラベル `closed_form_log_integral`）
+### 1.6 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（ラベル `closed_form_log_integral`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -118,7 +118,7 @@
 | `Ising2D.integral_inv_sqrt_pi_bounds` | **`2log(π/δ) ≤ ∫ ≤ 2log(π/δ)+2δ²/π²`** | (2) 後半 |
 | `Ising2D.integral_inv_pow_three_half_pi` | `∫_0^π dθ/(δ²+θ²/4)^{3/2}` の閉じた形 | (3) |
 
-### 1.7 `Claim010_SineIntegralTwoSided.lean`（ラベル `sine_integral_two_sided`）
+### 1.7 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean`（ラベル `sine_integral_two_sided`）
 
 **対数発散の源。**
 
@@ -203,9 +203,9 @@
 
 | 必要十分版（`lean/Ising2D/NecSuf/`） | 対応する具体版 | 必要十分版で判明した本質 |
 | --- | --- | --- |
-| `HyperbolicBounds.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`, `Part020/Claim009_ClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
+| `HyperbolicBounds.lean` | `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
 | `MeanValueTwoSided.lean` | `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean` (5) | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
-| `LogDivergentIntegral.lean` | `Part020/Claim009_ClosedFormLogIntegral.lean`, `Part020/Claim010_SineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
+| `LogDivergentIntegral.lean` | `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`, `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
 | `DiffUnderIntegral.lean` | `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean` | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
 
 ### 必要十分版を立てなかった主張とその理由
@@ -215,7 +215,7 @@
   合成関数の微分と `arcsinh' = 1/√(1+y²)` だけ。`θ` は「`κ` に依存しない非負定数 `c` を足す」
   以上の役割を持たない。この観察を必要十分版に切り出しても mathlib の `HasDerivAt` の合成規則を
   書き写すだけになるので、具体版のみとした。
-* **`Claim008_ElementarySineBounds.lean`（`elementary_sine_bounds`）**:
+* **`MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimElementarySineBounds.lean`（`elementary_sine_bounds`）**:
   原文は (R4)(R3) を 3 段重ねて `t - t³/6 ≤ sin t ≤ t` を導くが、**mathlib はこれをそのまま持つ**
   （`Real.sin_le`, `Real.sin_ge_sub_cube`）。本主張に固有なのは `t = θ/2` と置いて `θ ∈ [0,π]` に
   制限することだけで、必要十分版は mathlib の 2 補題そのものになる。

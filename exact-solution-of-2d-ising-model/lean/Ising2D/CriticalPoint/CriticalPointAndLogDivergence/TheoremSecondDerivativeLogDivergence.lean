@@ -22,7 +22,7 @@
 `-(π/2)cosh(κ/2) ≤ R ≤ 2δ²/π² + B` であり和を取る必要はない（本形式化ではこちらを使う）。
 -/
 import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimGammaDerivativesInKappa
-import Ising2D.Part020.Claim010_SineIntegralTwoSided
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimSineIntegralTwoSided
 import Ising2D.NecSuf.DiffUnderIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds
 
