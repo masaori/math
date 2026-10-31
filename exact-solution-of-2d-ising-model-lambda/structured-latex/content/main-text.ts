@@ -1952,30 +1952,33 @@ C&:=\bigl\{\,(u,u')\in P_L \bigm| \varphi\bigl(\Psi(u,u')_2\bigr)\prec\varphi\bi
                     displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
 &=(-1)^{\mathrm{inv}(\varphi\circ\psi)}\cdot(-1)^{\mathrm{inv}(\varphi)}\cdot(-1)^{\mathrm{inv}(\psi)}
-&&(\because\ \text{符号の定義})\\
+&&\bigl(\because\ \text{符号の定義}\bigr)\\
 &=(-1)^{|A|}\cdot(-1)^{|C|}\cdot(-1)^{|B|}
-&&(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi))\\
+&&\bigl(\because\ |A|=\mathrm{inv}(\varphi\circ\psi),\ |C|=\mathrm{inv}(\varphi),\ |B|=\mathrm{inv}(\psi)\bigr)\\
 &=\prod_{(u,u')\in P_L}f_A(u,u')\cdot\prod_{(u,u')\in P_L}f_C(u,u')\cdot\prod_{(u,u')\in P_L}f_B(u,u')
-&&(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗})\\
+&&\bigl(\because\ \text{属するときだけ}\ -1\ \text{を掛けた有限積は}\ (-1)\ \text{の個数乗}\bigr)\\
 &=\prod_{(u,u')\in P_L}\bigl(f_A(u,u')\cdot f_C(u,u')\cdot f_B(u,u')\bigr)
-&&(\because\ \text{有限積の各因子ごとのまとめ})\\
+&&\bigl(\because\ \text{有限積の各因子ごとのまとめ}\bigr)\\
 &=\prod_{(u,u')\in P_L}1
-&&(\because\ \text{属するものの個数が偶数})\\
+&&\bigl(\because\ \text{属するものの個数が偶数}\bigr)\\
 &=1
-&&(\because\ 1\ \text{の有限積は}\ 1)
+&&\bigl(\because\ 1\ \text{の有限積は}\ 1\bigr)
 \end{aligned}`),
                     paragraph([
                       "である。これを使って",
                     ]),
                     displayMath(String.raw`\begin{aligned}
 \mathrm{sgn}(\varphi\circ\psi)
-&=\mathrm{sgn}(\varphi\circ\psi)\cdot1\cdot1\\
+&=\mathrm{sgn}(\varphi\circ\psi)\cdot1\cdot1
+&&\bigl(\because\ 1\text{ は乗法単位元}\bigr)\\
 &=\mathrm{sgn}(\varphi\circ\psi)\cdot\bigl(\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\varphi)\bigr)\cdot\bigl(\mathrm{sgn}(\psi)\cdot\mathrm{sgn}(\psi)\bigr)
-&&(\because\ \text{符号の 2 乗は}\ 1)\\
-&=\bigl(\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\bigr)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\\
+&&\bigl(\because\ \text{符号の 2 乗は}\ 1\bigr)\\
+&=\bigl(\mathrm{sgn}(\varphi\circ\psi)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)\bigr)\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&&\bigl(\because\ \mathbb Z\text{ の積の結合則}\bigr)\\
 &=1\cdot\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
-&&(\because\ \text{直前の等式})\\
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
 &=\mathrm{sgn}(\varphi)\cdot\mathrm{sgn}(\psi)
+&&\bigl(\because\ 1\text{ は乗法単位元}\bigr)
 \end{aligned}`),
                     paragraph(["を得る。"]),
                     paragraph([
