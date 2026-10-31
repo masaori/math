@@ -1,6 +1,6 @@
 # SageMath Check: 行列式の置換展開の閉路軌道表示
 
-**対象ラベル**: `claim_kac_ward_term_orbit_weight_factorization`
+**旧対象ラベル**: `claim_kac_ward_term_orbit_weight_factorization`（本文から退避）
 
 元の軌道別表示の主張と証明は参照用ノート「不採用経路: 閉路軌道ごとの置換項」へ退避した。
 
@@ -10,6 +10,6 @@ $-x^{|C|}\prod_{\vec e\in C}\widehat M_{\vec e,\varphi(\vec e)}$ の積を
 $\mathbb Q(\zeta_8)[x]$ で独立に計算して一致を検査する。
 同時に全置換の和も両経路で一致することを検査する。
 
-- 実行: `sage sagemath/check/kac-ward-signed-orbit-term/check.sage`
+- 実行: `sage sagemath/archive/kac-ward-signed-orbit-term/check.sage`
 - 状態: PASS（2026-10-31、$4\times6!=2{,}880$ 項）
 - 浮動小数点: 不使用
