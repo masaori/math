@@ -1,16 +1,16 @@
 /-
 # 全スピン反転行列の固有値 +1 の固有ベクトル全体
 
-対応する人手本文は `structured-latex/content/004_transfer_matrix.ts` の
+対応する人手本文は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts` の
 `transfer_matrix_004_definition_eigenspace_even_of_epsilon`
 （ラベル **`def_even_eigenvectors_of_epsilon`**）。
 
 本文と同じく、抽象線型写像を経由せず、具体的な複素行列 `epsilon M` の
 数ベクトルへの作用だけで定義する。続いて本文ラベル
-`even_eigenspace_is_complex_subspace` の零・和・複素スカラー倍に関する三つの計算を
+`even_eigenspace_is_complex_subspace`（正本は `structured-latex/content/004_transfer_matrix.ts`）の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。
 
-本文ラベル `def_eigenspaces_of_epsilon`（`𝓕^{(+)}` は `ℂ^{2^M}` の `ℂ`-部分線型空間である、という
+本文ラベル `def_eigenspaces_of_epsilon`（正本は `structured-latex/content/004_transfer_matrix.ts`。`𝓕^{(+)}` は `ℂ^{2^M}` の `ℂ`-部分線型空間である、という
 `even_eigenspace_is_complex_subspace` の統合結果。`(+)` だけ）の Lean は、同じ `evenEigenspace` である
 （`evenEigenspace_carrier`）。
 -/

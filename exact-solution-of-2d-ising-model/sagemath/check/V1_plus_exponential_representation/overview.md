@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V1_plus_exponential_representation` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`（ブロック `transfer_matrix_011c_claim_V1_pm_exponential_representation`）
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（ブロック `transfer_matrix_011c_claim_V1_pm_exponential_representation`）
 - 範囲: `def_V1_plus` の指数の中の有限和 `Σ_{m=1}^{M_col-1} Y_mZ_{m+1} − Y_{M_col}Z_1` を
   `def_H1_plus` の `H_1^{(+)}` へ置換する証明行
 

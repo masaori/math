@@ -11,7 +11,7 @@
     `sigma_z_diagonal_action` / `first_transfer_matrix_pauli_form`、
     `two_by_two_transfer_identity` / `second_transfer_matrix_pauli_form`
   - `structured-latex/content/004_transfer_matrix.ts`: `exp_of_diagonal_matrix`
-  - `structured-latex/content/010_transfer_matrix_bridge.ts`:
+  - `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`:
     `epsilon_projector_properties` / `epsilon_commutes_with_transfer_matrices` /
     `epsilon_projectors_commute_with_transfer_matrices`（いずれも (+) セクターだけの主張）
 
@@ -24,7 +24,7 @@
 1. 成分定義の `V_1, V_2` とパウリ行列表示が**行列として一致すること**
 2. スピン配置についての**直接和で定義された分配関数** `Z(K_1,K_2)` が `tr((V_1V_2)^{N_row})` に一致すること
 3. `ε` の偶セクターへの射影子 `P^{(+)}` の性質と、`ε`・`P^{(+)}` が転送行列と可換であること
-   （`010_transfer_matrix_bridge.ts`）
+   （`partition_function_projection_and_jordan_wigner.ts`）
 
 を、いずれも定義に戻って数値的に確かめる。1 と 2 は、厳密計算による専用の check
 （`first_transfer_matrix_pauli_form/`、`second_transfer_matrix_pauli_form/`、
@@ -137,7 +137,7 @@ Z(K_1,K_2) = Σ_s exp( Σ_{i,j} ( K_1 s(i,j)s(i,j+1) + K_2 s(i,j)s(i+1,j) ) )
   同じ主張の厳密計算（Laurent 多項式としての一致）は `252_partition_function_via_transfer_matrix/` にある。
 - 直接和のコストは `2^{N_row·M_col}` なので `N_row·M_col ≤ 9` に抑えた。`M_col = 4` は `N_row = 2` のみ。
 - `M_col = 2` を含めているのは、`H_1^{(+)}` の境界項の扱いが `M_col = 2` で退化する（中間の `σ^x` が消える）
-  ためで、`010_transfer_matrix_bridge.ts` の主張はその場合も含む。
+  ためで、`partition_function_projection_and_jordan_wigner.ts` の主張はその場合も含む。
 - 行・列番号を以前は `ι` を経由した独自の関数で作っていたが、本文が番号付け `ord` を明示したので
   `ord_number` に置き換えた（並びは同じで、実行結果の残差も以前と同じ桁）。
 

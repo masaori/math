@@ -40,7 +40,10 @@ export const LEADING_CONTENT_FILES = ["chapter_organization.ts"] as const;
  * 番号を持つ既存の章のファイルには数学的道具立てが散らばっており、組み直した章はそれらを使うので、
  * 組み直した章はそれらより後ろに置く。
  */
-export const TRAILING_CONTENT_FILES = ["partition_function_transfer_matrix_representation.ts"] as const;
+export const TRAILING_CONTENT_FILES = [
+  "partition_function_transfer_matrix_representation.ts",
+  "partition_function_projection_and_jordan_wigner.ts",
+] as const;
 
 /**
  * dir 直下のソースファイル名をファイル名昇順（＝文書順）で返す。

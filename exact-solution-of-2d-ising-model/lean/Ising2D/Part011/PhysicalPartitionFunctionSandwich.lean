@@ -1,10 +1,13 @@
 /-
 # 具体的な分配関数 `Z(K_1,K_2)` と具体的な `W` についての挟み撃ち
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 
 * `maxeig_001_definition_transfer_matrix_square_root`（ラベル **`def_transfer_matrix_square_root`**）
   の「`V_1^{1/2}V_1^{1/2} = V_1`」
+
+正本: `structured-latex/content/011_max_eigenvalue.ts`
+
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
   のうち `B := V_1^{1/2}` と `V_2` についての部分（Step 1・Step 2 と、Step 3 の `V_2 = (2s_2)^{M_col/2}A`）
 * `maxeig_009_claim_partition_function_sandwich`（ラベル **`partition_function_sandwich`**）

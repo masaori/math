@@ -96,7 +96,6 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["exp_linear_map_003_theorem_exp_product_formula_commuting_matrices", new Set(["ad_binomial"])],
   ["exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms", new Set(["def_hermitian_positive_definite", "def_trace"])],
   ["exp_conjugation_proof_003_definition_M_n_C_convergence", new Set(["def_hermitian_positive_definite", "def_trace"])],
-  ["transfer_matrix_001_definition_symbols", new Set(["pauli_matrix_products"])],
   // 行列の積の定義は成分が複素数であることを前提にする。複素数の定義は本文では後ろに置かれているが、
   // 依存順では先行する（提示順と依存順が食い違う箇所であり、案内ではなく前提である）。
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],

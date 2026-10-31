@@ -4,7 +4,7 @@
 
 **対象ラベル**: `second_dual_coupling_relation` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`（ブロック `transfer_matrix_000l_claim_second_dual_coupling_relation`）
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（ブロック `transfer_matrix_000l_claim_second_dual_coupling_relation`）
 - 範囲: 双対結合定数の定義から `sinh(2K_2)sinh(2K_2^*)=1` までの全等号
 - 併せて検証: 双曲線正弦の倍角公式を定義から導く等号列
 

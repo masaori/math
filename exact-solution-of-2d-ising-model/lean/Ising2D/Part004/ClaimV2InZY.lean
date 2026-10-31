@@ -1,7 +1,7 @@
 /-
 # 人手の `V_2` についての `V2_in_Z_Y` と `V2_exponential_representation`
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `transfer_matrix_003a_claim_V2_in_Z_Y`（ラベル **`V2_in_Z_Y`**）:
   `V_2 = (2s_2)^{M_col/2} exp(i K_2^* (Z_1 Y_1 + ⋯ + Z_{M_col} Y_{M_col}))`

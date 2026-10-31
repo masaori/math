@@ -31,7 +31,6 @@ import blocks_006_Z_Y_anticommutation from './content/006_Z_Y_anticommutation.ts
 import blocks_008_TV1_hatZ_hatY_part1 from './content/008_TV1_hatZ_hatY_part1.ts'
 import blocks_008_TV1_hatZ_hatY_part2 from './content/008_TV1_hatZ_hatY_part2.ts'
 import blocks_009_eigenvalues_of_V from './content/009_eigenvalues_of_V.ts'
-import blocks_010_transfer_matrix_bridge from './content/010_transfer_matrix_bridge.ts'
 import blocks_011_max_eigenvalue from './content/011_max_eigenvalue.ts'
 import blocks_012_free_energy from './content/012_free_energy.ts'
 import blocks_013_even_sector_modes from './content/013_even_sector_modes.ts'
@@ -42,6 +41,7 @@ import blocks_017_even_sector_eigenvalues from './content/017_even_sector_eigenv
 import blocks_018_even_sector_closing from './content/018_even_sector_closing.ts'
 import blocks_020_critical_point from './content/020_critical_point.ts'
 import blocks_chapter_organization from './content/chapter_organization.ts'
+import blocks_partition_function_projection_and_jordan_wigner from './content/partition_function_projection_and_jordan_wigner.ts'
 import blocks_partition_function_transfer_matrix_representation from './content/partition_function_transfer_matrix_representation.ts'
 import notes_000_calculation_formulae from './notes/000_calculation_formulae.ts'
 import notes_001_partition_function_2d_ising from './notes/001_partition_function_2d_ising.ts'
@@ -70,7 +70,6 @@ export type AllBlocks = [
   ...typeof blocks_008_TV1_hatZ_hatY_part1,
   ...typeof blocks_008_TV1_hatZ_hatY_part2,
   ...typeof blocks_009_eigenvalues_of_V,
-  ...typeof blocks_010_transfer_matrix_bridge,
   ...typeof blocks_011_max_eigenvalue,
   ...typeof blocks_012_free_energy,
   ...typeof blocks_013_even_sector_modes,
@@ -81,6 +80,7 @@ export type AllBlocks = [
   ...typeof blocks_018_even_sector_closing,
   ...typeof blocks_020_critical_point,
   ...typeof blocks_chapter_organization,
+  ...typeof blocks_partition_function_projection_and_jordan_wigner,
   ...typeof blocks_partition_function_transfer_matrix_representation,
 ]
 

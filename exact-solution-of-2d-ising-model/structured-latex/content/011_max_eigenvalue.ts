@@ -71,17 +71,17 @@ export default defineBlocks([
         math(String.raw`\varepsilon`),
         " が実対称であること（",
         ref("epsilon_is_real_symmetric"),
-        "）、および ",
+        "）を示す。これらと、",
         math(String.raw`\mathcal{F}^{(+)}`),
         " の上で ",
         math(String.raw`W`),
-        " が偶セクターの転送行列 ",
+        " が ",
         math(String.raw`V^{(+)}`),
         " に一致すること ",
         math(String.raw`WP^{(+)} = V^{(+)}P^{(+)}`),
         "（",
         ref("symmetrized_transfer_matrix_on_sectors"),
-        "）を示す。これらは ",
+        "）は、",
         ref("onsager_exact_solution"),
         " で ",
         math(String.raw`c(M_{\mathrm{col}})`),
@@ -95,75 +95,9 @@ export default defineBlocks([
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-10-31: 章立ての組み直しで W の定義と WP^{(+)} = V^{(+)}P^{(+)} を ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示の章へ移したので、後者をこの章で示すという文を、使うという文に直した。",
       ],
     },
-  },
-
-  {
-    id: "maxeig_001_definition_transfer_matrix_square_root",
-    kind: "definition",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1D\right)` },
-    labels: ["def_transfer_matrix_square_root"],
-    statement: [
-      paragraph([
-        ref("first_transfer_matrix_pauli_form"),
-        " の ",
-        math(String.raw`V_1 = \exp(K_1 D)`),
-        "（",
-        math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
-        "、",
-        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z := \sigma_1^z`),
-        "）について",
-      ]),
-      displayMath(
-        String.raw`V_1^{1/2} := \exp\!\left(\tfrac{1}{2}K_1 D\right)
-\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-      paragraph([
-        "と定める。",
-        ref("theorem_exp_product"),
-        " より ",
-        math(String.raw`V_1^{1/2}V_1^{1/2} = \exp(K_1D) = V_1`),
-        " であり、記号 ",
-        math(String.raw`V_1^{1/2}`),
-        " はこの意味での平方根である（",
-        math(String.raw`\tfrac12 K_1D`),
-        " は自分自身と可換）。",
-      ]),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。V_1 = exp(K_1 D) の参照先を <first_transfer_matrix_pauli_form> にした。",
-      ],
-    },
-  },
-
-  {
-    id: "maxeig_001a_definition_symmetrized_transfer_matrix",
-    kind: "definition",
-    origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\text{対称化転送行列 } W` },
-    labels: ["def_symmetrized_transfer_matrix"],
-    statement: [
-      paragraph([
-        ref("def_transfer_matrix_square_root"),
-        " の ",
-        math(String.raw`V_1^{1/2}`),
-        " と ",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`V_2`),
-        " を用いて",
-      ]),
-      displayMath(
-        String.raw`W := V_1^{1/2}\,V_2\,V_1^{1/2}
-\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-      paragraph(["と定める。"]),
-    ],
-    conversion: { status: "added" },
   },
 
   {
@@ -1642,65 +1576,6 @@ c_+(M_{\mathrm{col}})
       status: "added",
       notes: [
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 <sector_decomposition_of_rayleigh_sup> の証明の中にあった ε^⊤ = ε の導出を、最終定理が引く独立した主張として取り出した。",
-      ],
-    },
-  },
-
-  {
-    id: "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
-    kind: "claim",
-    origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`W P^{(+)} = V^{(+)}P^{(+)}` },
-    labels: ["symmetrized_transfer_matrix_on_sectors"],
-    statement: [
-      paragraph([
-        ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`),
-        "、", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(+)}`),
-        "、", ref("def_V_plus"), " の ", math(String.raw`V^{(+)}`),
-        " について、次が成り立つ。",
-      ]),
-      displayMath(String.raw`W P^{(+)} = V^{(+)}P^{(+)}`),
-    ],
-    proof: [
-      paragraph([
-        math(String.raw`B:=V_1^{1/2}`), " は ", ref("def_transfer_matrix_square_root"),
-        "、", math(String.raw`C:=(V_1^{(+)})^{1/2}`), " は ", ref("def_V1_plus_square_root"),
-        " の行列とし、", math(String.raw`P:=P^{(+)}`), " と略記する。",
-        ref("V1_restriction_to_eigenspaces"), " に結合定数 ", math(String.raw`K_1/2`),
-        " を代入すると（右辺の指数の中身は ", ref("def_H1_plus"), " の ", math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}`),
-        " である）、任意の ", math(String.raw`f\in\mathcal F^{(+)}`),
-        " について ", math(String.raw`Bf=Cf`), " を得る。",
-        ref("epsilon_projector_properties"), " (2) より任意の ", math(String.raw`x\in\mathbb C^{2^{M_{\mathrm{col}}}}`),
-        " に対して ", math(String.raw`Px\in\mathcal F^{(+)}`), " なので、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-(BP)x
-&=B(Px) &&(\because\ \text{行列積の結合則})\\
-&=C(Px) &&(\because\ \blkref{V1_restriction_to_eigenspaces}\text{ に }K_1/2\text{ と }Px\text{ を代入})\\
-&=(CP)x &&(\because\ \text{行列積の結合則}).
-\end{aligned}`),
-      paragraph([
-        "すべての数ベクトルへの作用が等しいため ", math(String.raw`BP=CP`), " である。",
-        ref("epsilon_projectors_commute_with_transfer_matrices"), " の ",
-        math(String.raw`PC=CP`), " と ", math(String.raw`PV_2=V_2P`), " を用いると、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-WP
-&=BV_2BP &&(\because\ \blkref{def_symmetrized_transfer_matrix})\\
-&=BV_2CP &&(\because\ BP=CP)\\
-&=BV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }CP=PC)\\
-&=BPV_2C &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }V_2P=PV_2)\\
-&=CPV_2C &&(\because\ BP=CP)\\
-&=CV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PV_2=V_2P)\\
-&=CV_2CP &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PC=CP)\\
-&=V^{(+)}P &&(\because\ \blkref{def_V_plus}).
-\end{aligned}`),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "セクター射影子による表示を上限の最大値分解から分離した。BP=CP と後続の等式鎖は一行ずつ SageMath 検査へ対応済みである。Lean では physicalSymTransferR_map_mul_epsProj_eq_Vsym として同じ九段を形式化済みである。有限個の浮動小数点計算の成功と形式証明は別の検証層として扱う。",
-        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。V^{(+)} の定義の参照先を <def_V_plus> にし、射影子の像の参照を <epsilon_projector_properties> (2) に直した。",
       ],
     },
   },

@@ -1,7 +1,7 @@
 /-
 # `V_1` の `𝓕^{(+)}` への制限
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `transfer_matrix_006_claim_V1_restriction_to_eigenspaces`
   （ラベル **`V1_restriction_to_eigenspaces`**）

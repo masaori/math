@@ -2,7 +2,7 @@
 # 双対結合定数の関係に効く代数計算（必要十分版）
 
 対応する人手証明のラベル: `second_dual_coupling_relation`
-（正本は `structured-latex/content/004_transfer_matrix.ts`）。
+（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）。
 
 具体版は `Ising2D/Part004/ClaimSecondDualCouplingRelation.lean` に置く。
 

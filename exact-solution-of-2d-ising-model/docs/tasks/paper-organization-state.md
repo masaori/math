@@ -2,6 +2,23 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の二番目の章「$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示」を組み直した。
+  棚卸しでこの章に割り当てた 27 項を、`004_transfer_matrix.ts`（18 項）・`010_transfer_matrix_bridge.ts`（6 項）・`011_max_eigenvalue.ts`（3 項）から
+  新しいファイル `content/partition_function_projection_and_jordan_wigner.ts` の章見出しの下へ、章の中の依存順で移し、`TRAILING_CONTENT_FILES` の「転送行列による表示」のファイルの後ろに置いた。
+  ブロックの本文・id・ラベルは変えていない（旧版と機械比較で一致）。
+  - **章末のゴールの主張を足した。** $WP^{(+)}=\exp(\tfrac i2K_1H_1^{(+)})(2\sinh2K_2)^{M/2}\exp(iK_2^*H_2)\exp(\tfrac i2K_1H_1^{(+)})P^{(+)}$ を主張する claim
+    `symmetrized_transfer_matrix_on_sector_exponential_form` を章の最後に置いた。証明は `symmetrized_transfer_matrix_on_sectors`・`def_V_plus`・`def_V1_plus_square_root`・
+    `V2_exponential_representation`・`def_indexed_hyperbolic_abbreviations` の代入だけである。SageMath（`sagemath/check/symmetrized_transfer_matrix_on_sector_exponential_form/`、
+    7 組で隣接行の相対残差 ≤ 7.7e-16。指数評価の ℝ 脱出のため倍精度）と Lean（`lean/Ising2D/Part011/ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean`、五つの書き換え）を足した。
+    `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号の定義（$P^{(+)},\varepsilon,H_1^{(+)},H_2$）に分けた
+    （主張していない $\mathcal F^{(+)}=\mathrm{im}\,P^{(+)}$ は外した）。章の項目数は 28（割り当て 27 とゴールの主張 1。章立て案は 27）。
+  - **どの章のゴールからも辿れない項のうち、平方根性の主張 `bridge_claim_V1_pm_square_root_squares_to_V1_pm` を先行してこの章に置いた。** 定義 `def_V1_plus_square_root` の
+    「二乗が $V_1^{(+)}$ に等しいことは〜で示す」という案内の直後に置くためである（旧い 010 に残すと案内が前方参照でなくなり、生成器が案内の記録を外すよう求め、外すと定義と主張の循環になる）。
+    棚卸しでは引き続きどの章にも割り当てられない項（9 項の一つ）であり、作業の順序の五番目の項目で扱いを確かめる。
+  - 中身が全部この章へ移った `010_transfer_matrix_bridge.ts`（章見出しと章の案内文 `bridge_000_remark_overview` だけが残った）を消した。
+    `011_max_eigenvalue.ts` の章の案内文の、$WP^{(+)}=V^{(+)}P^{(+)}$ を「この章で示す」という文を「使う」に直した。
+  - 前方参照でなくなった `transfer_matrix_001_definition_symbols` → `pauli_matrix_products` の前提の記録を生成器から外した。
+  - Lean・SageMath の注記、`lean/docs/ch010`・`ch011` の正本のファイル名を直した。別のエージェントのレビューを経た。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の最初の章「転送行列による表示」を組み直した。
   棚卸しでこの章に割り当てた 21 項を、`001_partition_function_2d_ising.ts`（全 7 項）と `004_transfer_matrix.ts`（14 項）から
   新しいファイル `content/partition_function_transfer_matrix_representation.ts` の部見出し「分配関数」・章見出し「転送行列による表示」の下へ、
@@ -1142,9 +1159,9 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の二番目の章：「$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示」の章に割り当てた 27 項
-（棚卸し `parts` の最初の部の二番目の章の `dependencyOrder`）を、新しいファイルの部「分配関数」の下の章見出しへ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の「転送行列による表示」のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の三番目の章：「離散 Fourier 変換による $2\times2$ 行列 $A(\tilde\theta_\mu)$ への帰着」の章に割り当てた 27 項
+（棚卸し `parts` の二番目の部の最初の章の `dependencyOrder`）を、新しいファイルの部「固有値問題」の見出しと章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の射影の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 
@@ -1153,10 +1170,8 @@ runbook の「作業の順序」の四番目の項目の二番目の章：「$\v
     末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。
     残ったファイルに部見出し「数学的道具立て」を置くのは、全章を組み直した後（作業の順序の六番目まで）に行う。
   - $M\to\infty$ の章のゴールの式の $\Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M$ を主張するブロックが無い（`onsager_exact_solution` の証明の中にだけある）。
-  - 後ろの章を指す案内の参照が 3 本ある（棚卸しの `crossChapterNavigationReferences`。$V_1^{(+)}$ の平方根の定義 → 平方根性、
+  - 後ろの章を指す案内の参照が 2 本ある（棚卸しの `crossChapterNavigationReferences`。
     $\check{\mathcal M}$ の定義 → $\check Z,\check Y$ の反交換関係・$\check\psi$ の周期性）。組み直した本文で前方参照にならない書き方へ直す。
-  - 射影の章のゴールの式は $V^{(+)}$ を $\exp(\tfrac i2K_1H_1^{(+)})$ と $\exp(iK_2^*H_2)$ の積で書くが、本文はこれを定義 `def_V_plus` と二つの指数表示に分けて持つ。
-    章末のゴールのブロックをどう立てるかはその章の回で決める。
 - 分類（作業の順序の外）: 逆双曲線余弦の定義と性質、正の実数上の実対数、正の結合定数上の双曲線正接は、イジング模型を参照しない実関数の道具だが、
   `004_transfer_matrix.ts` に在るので2次元イジングモデルに分類され、転送行列の章・対角化の章に入っている。分類規則に照らせば数学的道具立てである。
 - 旧生成器が「未レビュー」として記録していた項（道具: `calc_formulae_000c0_claim_positive_real_square_injective`、`exp_linear_map_005`〜`012` の数の指数関数の 8 項。

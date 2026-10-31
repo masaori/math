@@ -2,7 +2,7 @@
 # 第二の双対関係 — 具体版を必要十分版の特殊化として導出する
 
 対応する人手証明のラベル: `second_dual_coupling_relation`
-（正本は `structured-latex/content/004_transfer_matrix.ts`）。
+（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）。
 
 `ClaimSecondDualCouplingRelation.lean` の具体版は、人手証明の全計算列を直接たどる。
 本ファイルはそれとは分けて、同じ具体的主張が必要十分版

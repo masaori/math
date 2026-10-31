@@ -1,7 +1,7 @@
 /-
 # 第二の結合定数と双対結合定数の双対関係
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `transfer_matrix_000l_claim_second_dual_coupling_relation`
   （ラベル **`second_dual_coupling_relation`**）

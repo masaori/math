@@ -4,7 +4,7 @@
 
 **対象ラベル**: `epsilon_square_identity` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 - 範囲: 全スピン反転行列について `ε²=I` が成り立つこと
 
 ## チェック一覧

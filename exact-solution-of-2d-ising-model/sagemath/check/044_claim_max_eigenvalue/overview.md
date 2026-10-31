@@ -8,7 +8,8 @@
 - 併せて検証:
   - `Z_equals_trace_of_W` / `W_is_real_symmetric_positive_definite` / `W_has_positive_entries`
   - `rayleigh_bounds_operator_norm` / `trace_power_sandwich`
-  - `epsilon_commutes_with_W`（check_01 の `[W, ε]`）/ `symmetrized_transfer_matrix_on_sectors`（`W P^{(+)} = V^{(+)} P^{(+)}`）
+  - `epsilon_commutes_with_W`（check_01 の `[W, ε]`）
+  - `symmetrized_transfer_matrix_on_sectors`（`W P^{(+)} = V^{(+)} P^{(+)}`。このブロックは `structured-latex/content/partition_function_projection_and_jordan_wigner.ts` にある）
   - `c_+(M) ≤ c(M)`（`c_plus_le_c`）は `check/c_plus_le_c/` が、`ε^⊤ = ε`（`epsilon_is_real_symmetric`）は
     `check/epsilon_is_real_symmetric/` が検証する
 

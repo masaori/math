@@ -1,6 +1,7 @@
 # 章 011「転送行列の最大固有値と分配関数の挟み撃ち」の Lean 形式化
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/011_max_eigenvalue.ts`。ただし `def_transfer_matrix_square_root`・`def_symmetrized_transfer_matrix`・
+`symmetrized_transfer_matrix_on_sectors` の正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（2026-10-31 の章立ての組み直しで移した）。
 
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `c(M) = max(c_+(M), c_-(M))`（`sector_decomposition_of_rayleigh_sup`）は参照用ノート

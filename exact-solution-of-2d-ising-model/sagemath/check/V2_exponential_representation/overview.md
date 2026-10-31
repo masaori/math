@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V2_exponential_representation` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`（ブロック `transfer_matrix_011d_claim_V2_exponential_representation`）
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（ブロック `transfer_matrix_011d_claim_V2_exponential_representation`）
 - 範囲: `V2_in_Z_Y` の有限和を `def_H2` の `H_2` へ置換する証明行
 
 ## チェック一覧

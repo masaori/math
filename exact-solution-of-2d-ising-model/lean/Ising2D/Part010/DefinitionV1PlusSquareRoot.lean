@@ -1,7 +1,7 @@
 /-
 # `(V_1^{(+)})^{1/2}` の定義と平方根性、偶セクターの転送行列 `V^{(+)}` の定義
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `bridge_definition_V1_pm_square_root`（ラベル **`def_V1_plus_square_root`**）
   — `(V_1^{(+)})^{1/2} := exp((i/2) K_1 H_1^{(+)})`（`Ising2D.V1plusHalf`）

@@ -1,7 +1,7 @@
 /-
 # 章 011 の実行列 `W` と複素行列としての物理的転送行列の同一視
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 
 * `maxeig_001_definition_transfer_matrix_square_root`
   （ラベル **`def_transfer_matrix_square_root`**）

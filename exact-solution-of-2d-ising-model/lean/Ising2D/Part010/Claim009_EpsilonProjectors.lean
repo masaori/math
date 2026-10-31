@@ -1,7 +1,7 @@
 /-
 # `ε` の固有空間への射影子 `P^{(+)}` とその性質
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `bridge_008_definition_epsilon_projectors`（ラベル **`def_epsilon_projectors`**）
   — `P^{(+)} := (1/2)(I + ε)`（`Ising2D.epsProjPlus`）

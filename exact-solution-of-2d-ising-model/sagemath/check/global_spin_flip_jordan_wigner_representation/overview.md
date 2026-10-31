@@ -4,7 +4,7 @@
 
 **対象ラベル**: `global_spin_flip_jordan_wigner_representation`
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 - 範囲: `ε=i^M(Z_1Y_1)⋯(Z_MY_M)` の二次行列計算、二つの有限帰納法、終端の係数計算
 - 帰属: 全成分を Gaussian 有理数体 `QQ(i)` 上で扱い、浮動小数点と `RR` / `CC` は使わない
 

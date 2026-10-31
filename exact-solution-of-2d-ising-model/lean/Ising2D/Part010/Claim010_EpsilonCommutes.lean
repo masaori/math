@@ -1,7 +1,7 @@
 /-
 # `ε` は `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` と可換、`P^{(+)}` も同じ行列と可換
 
-対応する人手証明（正本は `structured-latex/content/010_transfer_matrix_bridge.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * `bridge_010_claim_epsilon_commutes`（ラベル **`epsilon_commutes_with_transfer_matrices`**）
 * `bridge_claim_epsilon_projectors_commute_with_transfer_matrices`

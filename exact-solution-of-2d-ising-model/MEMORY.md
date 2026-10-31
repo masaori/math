@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの四番目の項目の二番目の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」を組み直した。27 項を `structured-latex/content/partition_function_projection_and_jordan_wigner.ts` へ依存順で移し（本文不変、010 は削除）、平方根性の主張を定義の直後へ先行して置き、章末にゴールの主張 `symmetrized_transfer_matrix_on_sector_exponential_form`（SageMath・Lean つき）を足した。次は固有値問題の部の最初の章「離散 Fourier 変換による A(θ̃_μ) への帰着」。
+
 2026-10-31: Lean の通しの証明の項目 3b を終えた。人手 `c_plus_equals_Lambda_half_integer` Step 0（`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する）を `lean/Ising2D/Part018/ClaimWEqVPlusOnEvenSector.lean` で形式化し、具体的な `W` と `VPlusR` についての実ベクトル版 `hWV_physical` を立てた（`EvenSectorBridge` の欄 `hWV`）。次は項目 3c（具体的な `W` についての `EvenSectorBridge` の構成と最終定理の `bridge`・`hW` の除去）。
 
 2026-10-31: 章立ての組み直しの四番目の項目の最初の章「転送行列による表示」を組み直した。21 項を `structured-latex/content/partition_function_transfer_matrix_representation.ts`（部「分配関数」・章「転送行列による表示」）へ依存順で移し（本文不変、001 は削除）、章末にゴールの主張 `partition_function_via_pauli_transfer_matrices`（SageMath・Lean つき）を足した。組み直した章は `tools/content-modules.ts` の `TRAILING_CONTENT_FILES` で本文の末尾に置く。棚卸しの生成器は、旧い章から組み直した章への前方参照を組み直し途中のものとして区別する。次は射影と Jordan–Wigner 表示の章。

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `indexed_hyperbolic_abbreviations_positive`
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 - 範囲: 正の `K_i,K_i^*` に対する `2K_i,2K_i^*>0`、`cosh(2K)>sinh(2K)>0`、定義置換後の `c_i>s_i>0`、`c_i^*>s_i^*>0`、および四つの略記の正値性
 
 ## チェック一覧

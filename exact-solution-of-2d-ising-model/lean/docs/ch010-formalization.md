@@ -1,6 +1,6 @@
 # 章 010「偶セクターへの射影と転送行列」の形式化
 
-対象: `structured-latex/content/010_transfer_matrix_bridge.ts`。
+対象: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（2026-10-31 の章立ての組み直しで、旧 `010_transfer_matrix_bridge.ts` の定義・主張はすべてこのファイルへ移った）。
 
 この章は、全スピン反転行列 `ε` の固有値 `+1` の固有空間 `𝓕^{(+)}` への射影子 `P^{(+)} = (I + ε)/2` と
 その性質、`(V_1^{(+)})^{1/2}` と偶セクターの転送行列 `V^{(+)} = (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}` の定義、
@@ -108,7 +108,7 @@
 | （ノート）`odd_eigenspace_is_complex_subspace` | **固有値 `-1` の集合の複素部分線型空間性を同期済み（形式化の記録）**。本文の零・和・複素スカラー倍に含まれる20段の成分計算を同じ順で `zero_mem_oddEigenvectors`・`add_mem_oddEigenvectors`・`smul_mem_oddEigenvectors` に展開し、同じ集合を台集合とする `oddEigenspace` を構成した。必要十分版は有限添字と可換環行列だけを仮定して同じ20段を証明し、`oddEigenspace_eq_negatedSubmodule` が具体版との一致を示す | `Ising2D/Part004/OddEigenvectors.lean`・`Ising2D/NecSuf/NegatedVectorsSubmodule.lean` |
 | `epsilon_action_eigenvalues_are_signs` | **固有値候補を同期済み**。具体版は本文と同じ `M≥1`、非零数ベクトル `f`、`epsilon M *ᵥ f = lambda • f` の下で、行列作用の結合則、複素線型性、単位行列の作用を成分和から示し、`epsilon_mul_self` から `f=lambda^2f` を得る。非零成分と複素数の零積の法則から `lambda=1` または `lambda=-1` を示す。必要十分版は二回作用で元へ戻る線型写像、非可換でもよい整域、無ねじれ加群に抽象化した。特殊化定理と必要十分性の記録は専用ファイルへ分離した。固有空間の次元公式は対象外である | `Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean`・`Ising2D/NecSuf/InvolutionEigenvalue.lean`・`Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean`・`docs/necsuf-involution-eigenvalue.md` |
 | `epsilon_projector_properties` (2) の「`im P^{(+)} = 𝓕^{(+)}`」 | **同期済み**。2 つの包含（`epsProjPlus_mulVec_mem` / `epsProjPlus_mulVec_eq_self`）と、像を数ベクトル空間の部分集合として述べた集合の等式（`epsilon_projector_properties_image`）。人手の (2) の証明は `(P^{(+)})^2 = P^{(+)}` を経由して `ε y = y` を示すが、Lean は一般形の行列の等式 `ε P = ηP`（`epsilon_mul_epsProj`）を `η = 1` で作用させる | `Ising2D/Part010/Claim009_EpsilonProjectors.lean` |
-| `bridge_000_remark_overview`（この章の内容の説明） | 主張ではなく章の概要なので、定理としては形式化していない | 本ファイル |
+| `bridge_000_remark_overview`（旧 010 の章の内容の説明） | 主張ではなく章の概要なので、定理としては形式化していない。2026-10-31 の章立ての組み直しで、説明する中身がすべて別の章へ移ったので本文から外した | 本ファイル |
 
 ### mathlib について調べた結果（一次情報）
 

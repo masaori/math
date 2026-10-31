@@ -1,10 +1,13 @@
 /-
 # 対称化転送行列 `W := V₁^{1/2} V₂ V₁^{1/2}` と `Z = tr(W^{N_row})`
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`
 
 * `maxeig_001_definition_transfer_matrix_square_root`（ラベル **`def_transfer_matrix_square_root`**）
 * `maxeig_001a_definition_symmetrized_transfer_matrix`（ラベル **`def_symmetrized_transfer_matrix`**）
+
+正本: `structured-latex/content/011_max_eigenvalue.ts`
+
 * `maxeig_002_claim_Z_equals_trace_of_W`（ラベル **`Z_equals_trace_of_W`**）
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
 * `maxeig_004_claim_W_has_positive_entries`（ラベル **`W_has_positive_entries`**）

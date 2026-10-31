@@ -120,6 +120,7 @@ import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 import Ising2D.Part011.DefinitionSectorRayleighSup
 import Ising2D.Part011.ClaimCPlusLeC
 import Ising2D.Part011.ClaimEpsilonCommutesWithW
+import Ising2D.Part011.ClaimSymmetrizedTransferMatrixOnSectorExponentialForm
 import Ising2D.NecSuf.EvenSectorUpperBound
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.NecSuf.JointEigenspace
