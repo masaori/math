@@ -17,7 +17,7 @@ xᵀ A x ≤ (∑_k |x_k| √(A_kk))² ≤ (∑_k x_k²)(∑_k A_kk) = ‖x‖²
 本質的に使う（跡は有限添字でしか定義されず、`√(A_kk)` を経由しない証明を人手証明は
 採っていない）。ここでの `n` は既に任意の有限型なので、これ以上ほどく余地がない。
 -/
-import Ising2D.Part011.Claim005_PsdCauchySchwarz
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
 
 set_option linter.unusedSectionVars false
 

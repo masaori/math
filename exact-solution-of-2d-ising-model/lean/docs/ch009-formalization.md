@@ -2,7 +2,7 @@
 
 対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック。章立ての組み直しで、`iH_is_real_symmetric`・`sign_flip_conjugation` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った）
 
-- 具体版: `Ising2D/Part009/`
+- 具体版: `Ising2D/Part009/`（`def_trace`・`trace_basic_properties`・`trace_of_idempotent` の `DefinitionTrace.lean` と、`def_hermitian_positive_definite`・`star_preserves_norm_and_limits`・`exp_hermitian_is_positive_definite`・`iH_is_real_symmetric` の `ClaimPositiveDefinite.lean` は、数学的道具立て「トレース・共役転置・正定値性」の項が多いので `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある）
 - 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`
 
 `lake build` 成功・`scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。

@@ -29,7 +29,7 @@
 -/
 import Ising2D.NecSuf.PermMatrix
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
-import Ising2D.Part011.Claim005_PsdCauchySchwarz
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPsdCauchySchwarz
 
 set_option linter.unusedSectionVars false
 

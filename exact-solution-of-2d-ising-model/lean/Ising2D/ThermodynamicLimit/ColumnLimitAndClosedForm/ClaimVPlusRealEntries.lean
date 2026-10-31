@@ -29,7 +29,7 @@ Lean の `VPlus` は `(V_1^{(+)})^{1/2} · (2s_2)^{M_col/2}exp(S_2) · (V_1^{(+)
 
 人手の「実対称行列の指数関数は実対称」は、部分和と極限の実対称性で示す。Lean では
 `Matrix.IsHermitian.exp`（`exp(A^*) = exp(A)^*` から従う）と `Matrix.exp_transpose`（`exp(A^⊤) = exp(A)^⊤`）を使う。
-共役転置の側は章 009 の `Claim013_PositiveDefinite.lean`、転置の側は章 011 の
+共役転置の側は数学的道具立て「トレース・共役転置・正定値性」の `ClaimPositiveDefinite.lean`、転置の側は章 011 の
 `PhysicalPartitionFunctionSandwich.lean`（`physicalV1halfC_transpose`・`V2_transpose`）が同じ置き換えをしている。
 
 具体的な `V^{(+)}` の成分についての主張で、`EvenSectorBridge` の欄を埋めるためだけに立てるので、必要十分版は置かない。

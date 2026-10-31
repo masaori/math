@@ -512,6 +512,53 @@ targets=(
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
   Ising2D.TV_hatZ_hatY_of_action
   "Ising2D.TV_hatZ_hatY_of_action'"
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean）---
+  Ising2D.trace_eq_sum_diag
+  Ising2D.trace_linear
+  Ising2D.trace_cyclic
+  Ising2D.trace_one_eq_card
+  Ising2D.trace_conj
+  Ising2D.trace_of_idempotent
+  Ising2D.isCompl_range_ker_of_idempotent
+  Ising2D.trace_one_tensorPow
+  Ising2D.Z_transpose
+  Ising2D.Z_conjTranspose
+  Ising2D.Y_conjTranspose
+  Ising2D.Y_transpose
+  Ising2D.S1_isHermitian
+  Ising2D.S1_transpose
+  Ising2D.S1plus_isHermitian
+  Ising2D.S1plus_transpose
+  Ising2D.S2_isHermitian
+  Ising2D.S2_transpose
+  Ising2D.entries_real_of_isHermitian_of_transpose
+  Ising2D.posDef_smul_of_pos
+  Ising2D.posDef_exp_of_isHermitian
+  Ising2D.Vmat_posDef
+  Ising2D.trace_Vmat_pos
+  Ising2D.matBilin
+  Ising2D.matBilin_apply
+  Ising2D.matBilin_one_apply
+  Ising2D.dotProduct_mulVec_comm
+  Ising2D.mulVec_dotProduct_selfadjoint
+  Ising2D.single_dotProduct_mulVec_single
+  Ising2D.vecNormSq
+  Ising2D.vecNorm
+  Ising2D.vecNormSq_eq_sum
+  Ising2D.vecNormSq_nonneg
+  Ising2D.vecNormSq_eq_zero_iff
+  Ising2D.vecNormSq_pos
+  Ising2D.vecNormSq_smul
+  Ising2D.vecNormSq_single
+  Ising2D.vecNorm_nonneg
+  Ising2D.vecNorm_sq
+  Ising2D.mulVecLin_pow
+  Ising2D.mulVecLin_pow_apply
+  Ising2D.isPsdPair_of_matrix
+  Ising2D.isPdPair_of_matrix
+  Ising2D.psd_cauchy_schwarz
+  Ising2D.NecSuf.psd_cauchy_schwarz
+  Ising2D.NecSuf.bilin_quadratic_expand
   # --- 各章（上の区切りの続き）---
   Ising2D.V1PauliForm_eq_diagonal
   Ising2D.V1PauliForm_apply_configBasisIso
@@ -618,8 +665,6 @@ targets=(
   Ising2D.inv_M_log_LambdaM
   Ising2D.onsager_free_energy_expression
   Ising2D.onsager_free_energy_expression_indep_delta
-  Ising2D.NecSuf.bilin_quadratic_expand
-  Ising2D.NecSuf.psd_cauchy_schwarz
   Ising2D.NecSuf.IsPsdPair.cs_ip
   Ising2D.NecSuf.IsPsdPair.cs_W
   Ising2D.NecSuf.IsPsdPair.rayleigh_bounds_operator_norm
@@ -633,27 +678,6 @@ targets=(
   Ising2D.NecSuf.IsPdPair.moment_pos
   Ising2D.NecSuf.IsPdPair.moment_ratio_le
   Ising2D.NecSuf.IsPdPair.moment_pow_le
-  Ising2D.matBilin
-  Ising2D.matBilin_apply
-  Ising2D.matBilin_one_apply
-  Ising2D.dotProduct_mulVec_comm
-  Ising2D.mulVec_dotProduct_selfadjoint
-  Ising2D.single_dotProduct_mulVec_single
-  Ising2D.vecNormSq
-  Ising2D.vecNorm
-  Ising2D.vecNormSq_eq_sum
-  Ising2D.vecNormSq_nonneg
-  Ising2D.vecNormSq_eq_zero_iff
-  Ising2D.vecNormSq_pos
-  Ising2D.vecNormSq_smul
-  Ising2D.vecNormSq_single
-  Ising2D.vecNorm_nonneg
-  Ising2D.vecNorm_sq
-  Ising2D.mulVecLin_pow
-  Ising2D.mulVecLin_pow_apply
-  Ising2D.isPsdPair_of_matrix
-  Ising2D.isPdPair_of_matrix
-  Ising2D.psd_cauchy_schwarz
   Ising2D.psd_diag_nonneg
   Ising2D.psd_abs_entry_le
   Ising2D.psd_quad_le_normSq_mul_trace
@@ -712,8 +736,6 @@ targets=(
   Ising2D.commute_V1plusHalf_epsProjPlus
   Ising2D.V1_restriction_to_eigenspaces
   Ising2D.Vsym_neg_one_eq_VPlusOfTransfer
-  Ising2D.S1plus_isHermitian
-  Ising2D.S1plus_transpose
   Ising2D.Uflip_conj_H1plus
   Ising2D.Uflip_conj_S1plus
   Ising2D.epsilon_transpose
@@ -793,14 +815,6 @@ targets=(
   Ising2D.NecSuf.two_pow_smul_tau_projOn
   Ising2D.NecSuf.pow_mul_eq_of_mul_eq_smul
   Ising2D.NecSuf.exp_mul_eq_of_mul_eq_smul
-  Ising2D.trace_eq_sum_diag
-  Ising2D.trace_linear
-  Ising2D.trace_cyclic
-  Ising2D.trace_one_eq_card
-  Ising2D.trace_conj
-  Ising2D.trace_of_idempotent
-  Ising2D.isCompl_range_ker_of_idempotent
-  Ising2D.trace_one_tensorPow
   Ising2D.tensorPow_two_torsion_free
   Ising2D.FermiSetup.acomm_cre_cre
   Ising2D.FermiSetup.acomm_ann_ann
@@ -831,19 +845,6 @@ targets=(
   Ising2D.FermiSetup.trace_Vprime
   Ising2D.FermiSetup.trace_Vprime_inv
   Ising2D.FermiSetup.trace_Vprime_pos
-  Ising2D.Z_transpose
-  Ising2D.Z_conjTranspose
-  Ising2D.Y_transpose
-  Ising2D.Y_conjTranspose
-  Ising2D.S1_isHermitian
-  Ising2D.S1_transpose
-  Ising2D.S2_isHermitian
-  Ising2D.S2_transpose
-  Ising2D.entries_real_of_isHermitian_of_transpose
-  Ising2D.posDef_smul_of_pos
-  Ising2D.posDef_exp_of_isHermitian
-  Ising2D.Vmat_posDef
-  Ising2D.trace_Vmat_pos
   Ising2D.Uflip_mul_inv
   Ising2D.UflipInv_mul
   Ising2D.Uflip_conj_Z

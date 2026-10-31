@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「トレース・共役転置・正定値性」を移した。旧 `Part009/Definition001_Trace`・`Part009/Claim013_PositiveDefinite`・`Part011/Claim005_PsdCauchySchwarz` と補助の `Part011/Basic` を `lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` へ番号を外した名前（補助は `RealMatrixBilinearFormAndNorm`）で移した（名前空間・中身は不変）。判定の根拠は状態台帳。次は最後のまとまり「三角関数の評価・有限和・積分」（`Part012/Theorem004_RiemannSumToIntegral` と `Part020/` の 3 本）。worktree では `lake` が PATH に無いことがあるので `~/.elan/bin` を足す。
+
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「可逆行列・線型写像との対応・共役変換」を移した。旧 `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`）と旧 `Part008/Definition016_TV`（`T_g`・その線型性と、整数運動量の経路の `T_{(V)}`）を `lean/Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` へ番号を外した名前で移した（名前空間・中身は不変）。`Part000/` は無くなった。`Definition016_TV` は数学的道具立て 2 項と整数運動量の経路 2 項の同数なので、規則どおり数学的道具立てへ置いた。次は「トレース・共役転置・正定値性」（状態台帳の「次の一歩」）。
 
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「行列指数関数と交換子計算」を移した。旧 `Part004/ClaimExpOfDiagonalMatrix`（`exp_of_diagonal_matrix`）を `lean/Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` へ移した（名前空間・中身は不変）。「数ベクトル・行列の長さと収束」には形式化したファイルが無い。次は「可逆行列・線型写像との対応・共役変換」の `Part000/Claim045_ConjugationIsRingHom`（と `Part008/Definition016_TV` の置き場の判断）。

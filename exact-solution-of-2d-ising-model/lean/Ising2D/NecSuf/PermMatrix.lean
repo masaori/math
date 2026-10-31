@@ -19,7 +19,7 @@
 本ファイルの内容はもと `Ising2D/NecSuf/PermSector.lean`（人手の本文から参照用ノートへ退避した
 章 019 の必要十分版）にあった。本文の主張が使う部分だけをここへ移した。
 -/
-import Ising2D.Part011.Basic
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
 
 set_option linter.unusedSectionVars false
 

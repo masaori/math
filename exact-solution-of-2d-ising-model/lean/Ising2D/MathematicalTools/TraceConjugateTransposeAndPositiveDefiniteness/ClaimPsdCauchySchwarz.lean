@@ -11,7 +11,7 @@
 （`P ∈ Mat(n, ℝ)` が対称かつ半正定値、`x, y ∈ ℝ^n`）で主張を立て、
 必要十分版の系として導出している。
 -/
-import Ising2D.Part011.Basic
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.RealMatrixBilinearFormAndNorm
 
 set_option linter.unusedSectionVars false
 

@@ -31,7 +31,7 @@
 -/
 import Ising2D.NecSuf.PermMatrix
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
-import Ising2D.Part009.Claim013_PositiveDefinite
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 
 set_option linter.unusedSectionVars false

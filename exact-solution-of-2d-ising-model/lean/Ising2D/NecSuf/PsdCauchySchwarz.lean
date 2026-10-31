@@ -5,7 +5,7 @@
 （`structured-latex/content/011_max_eigenvalue.ts` の `maxeig_005_claim_psd_cauchy_schwarz`）
 
 具体版: `Ising2D.psd_cauchy_schwarz`
-（`Ising2D/Part011/Claim005_PsdCauchySchwarz.lean`。本ファイルの系として導出している）
+（`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPsdCauchySchwarz.lean`。本ファイルの系として導出している）
 
 ## この主張に本質的に効いている構造
 

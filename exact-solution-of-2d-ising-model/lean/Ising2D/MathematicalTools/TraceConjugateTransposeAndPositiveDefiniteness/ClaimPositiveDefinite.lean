@@ -38,7 +38,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
-import Ising2D.Part009.Definition001_Trace
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 

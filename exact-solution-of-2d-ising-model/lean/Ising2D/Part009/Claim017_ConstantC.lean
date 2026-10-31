@@ -22,7 +22,7 @@
 抽象化してある）。
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
-import Ising2D.Part009.Claim013_PositiveDefinite
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 
 namespace Ising2D

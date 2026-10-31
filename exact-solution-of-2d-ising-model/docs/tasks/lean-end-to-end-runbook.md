@@ -66,7 +66,7 @@
    - 未割り当ての項目だけを形式化したファイルは、割り当てが出るまで動かさず、状態台帳に書く。
    - 本文から退避した経路の形式化（整数運動量の経路、全スピン反転行列の固有値 −1 の側）は
      `Ising2D/RoutesNotAdopted/IntegerMomentum/`・`Ising2D/RoutesNotAdopted/MinusSector/` へ置く。
-   - 人手の項目を持たない補助のファイル（`Part011/Basic.lean`・旧 `Part018/Setup.lean`（いまの `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）など）は、それを import するファイルが
+   - 人手の項目を持たない補助のファイル（旧 `Part011/Basic.lean`（いまの `MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）・旧 `Part018/Setup.lean`（いまの `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）など）は、それを import するファイルが
      最も多い置き場（数学的道具立てを含む）へ置く。同数のときは上と同じ並びで先の置き場へ置く。`Ising2D/Basic.lean`・`Ising2D/Representation.lean` は全章の土台なので動かさない。
    - 必要十分版は `Ising2D/NecSuf/` から動かさない。`*FromNecSuf.lean` は対応する具体版と同じ章へ置く。
 

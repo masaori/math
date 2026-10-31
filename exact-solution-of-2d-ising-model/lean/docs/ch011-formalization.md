@@ -34,6 +34,8 @@
 
 ### 1.1 具体版（`lean/Ising2D/Part011/`）
 
+`psd_cauchy_schwarz`（数学的道具立て「トレース・共役転置・正定値性」）の `ClaimPsdCauchySchwarz.lean` と補助の `RealMatrixBilinearFormAndNorm.lean` は
+`lean/Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある。
 章「N→∞ の極限と最大固有値 c(M)」に当たる `c(M)` の定義・`‖Wx‖ ≤ c(M)‖x‖`・`xᵀAx ≤ ‖x‖² tr A`・`trace_power_sandwich`・分配関数の挟み撃ち（一般の行列の版と具体的な `Z`・`W` の版）のファイルは
 `lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` にある（`DefinitionRayleighSup`・`ClaimOperatorBound`・`TraceBound`・`ClaimTracePowerSandwich`・`ClaimPartitionFunctionSandwich`・`PhysicalPartitionFunctionSandwich`）。
 章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・具体的な `W` の成分の正値性のファイルは
@@ -94,7 +96,7 @@
 | `Ising2D.sector_invariant` / `sector_orthogonal` / `projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` / `sector_quad_le` / `sectorRayleighSup_le` | `W` は `F^{(±)}` を保つ、直交性、実行列の `P^{(±)}`、セクター内の評価 | ノート（同上） |
 | `Ising2D.sector_decomposition_of_rayleigh_sup` | `c(M) = max(c₊(M), c₋(M))` | ノート `sector_decomposition_of_rayleigh_sup` (3) |
 
-補助（`Part011/Basic.lean`）: `matBilin`, `dotProduct_mulVec_comm`,
+補助（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/RealMatrixBilinearFormAndNorm.lean`）: `matBilin`, `dotProduct_mulVec_comm`,
 `mulVec_dotProduct_selfadjoint`, `single_dotProduct_mulVec_single`,
 `vecNormSq` 系, `mulVecLin_pow`, `isPsdPair_of_matrix`, `isPdPair_of_matrix`。
 

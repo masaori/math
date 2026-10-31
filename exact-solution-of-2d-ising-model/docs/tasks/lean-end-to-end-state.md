@@ -184,11 +184,21 @@
     このまとまりのほかの項目（`def_ad_X_matrix`・`def_end_iso`・`end_is_algebra_isomorphism`・`end_preserves_matrix_exponential`・`end_acts_on_kronecker_products`・`def_invertible_elements_of_R`）を冒頭で宣言するファイルは旧フォルダに無い
     （`def_ad_X_matrix` は `EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean` が参照として触れるだけ）。
 
+  - 部「数学的道具立て」のまとまり「トレース・共役転置・正定値性」（済み）: 旧 `Part009/Definition001_Trace`・`Part009/Claim013_PositiveDefinite`・`Part011/Claim005_PsdCauchySchwarz` と補助の `Part011/Basic` を
+    `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` へ番号を外した名前（`DefinitionTrace`・`ClaimPositiveDefinite`・`ClaimPsdCauchySchwarz`、補助は中身から `RealMatrixBilinearFormAndNorm`）で移した。`Part011/` に残るのは `Claim010_SectorDecomposition`（(−) セクターの記録）だけである。
+    `DefinitionTrace` はこのまとまりの `def_trace`・`trace_basic_properties`・`trace_of_idempotent` の 3 項だけを形式化している。
+    `ClaimPositiveDefinite` が冒頭で宣言する項目は、このまとまりの `def_hermitian_positive_definite`・`star_preserves_norm_and_limits`（(1) だけ）・`exp_hermitian_is_positive_definite` の 3 項、
+    「V^{(+)} の固有値」の章の `iH_is_real_symmetric` 1 項、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路の `V_is_positive_definite`（`Vmat_posDef`・`trace_Vmat_pos`）1 項である。
+    前の 2 項は mathlib の定義・補題を使うと書くだけで独自の定義・定理を持たないので、定義・定理を持つ項だけで数えるとこのまとまり 1 項・章 1 項・整数運動量の経路 1 項になる。
+    どちらで数えても、同数のときは数学的道具立てを先とする規則でこのまとまりへ置く。
+    `ClaimPsdCauchySchwarz` は `psd_cauchy_schwarz` だけを形式化している。補助の `Basic` を import するのは `ClaimPsdCauchySchwarz` と `NecSuf/PermMatrix`（置き場に数えない）なので、このまとまりへ置いた。
+    `check-no-sorry.sh` では 4 本と必要十分版 `NecSuf/PsdCauchySchwarz.lean` の対象をこのまとまりの区切りへ移した。
+    このまとまりのほかの項目（`def_frobenius_inner_product`・`frobenius_inner_product_axioms`）を形式化したファイルは無い。
+
 ## 次の一歩
 
-項目 7 の部「数学的道具立て」の続きとして、「トレース・共役転置・正定値性」に当たるファイルを `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
-候補は `Part009/Definition001_Trace`・`Part009/Claim013_PositiveDefinite`（数学的道具立ての 3 項と「V^{(+)} の固有値」の章の `iH_is_real_symmetric` 1 項）、
-`Part011/Claim005_PsdCauchySchwarz`（と、import 元の多数決で置く補助の `Part011/Basic`）である。各ファイルの置き場は runbook の多数決の規則で決める。
-残りの候補は `Part008/Definition030_Fermi`、`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本（「三角関数の評価・有限和・積分」）である。
+項目 7 の部「数学的道具立て」の最後のまとまり「三角関数の評価・有限和・積分」に当たるファイルを `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
+候補は `Part012/Theorem004_RiemannSumToIntegral`（`riemann_sum_to_integral`）と `Part020/` に残る 3 本（`Claim008_ElementarySineBounds`・`Claim009_ClosedFormLogIntegral`・`Claim010_SineIntegralTwoSided`）である。各ファイルの置き場は runbook の多数決の規則で決める。
+`Part008/Definition030_Fermi` は `def_sqrt_cc` に説明で触れるだけで、形式化しているのは参照用ノートへ退避した整数運動量の経路の `def_fermi`・`commutation_V_psi`・`anticommutator_of_psi` なので、`RoutesNotAdopted/IntegerMomentum/` へ移すときに扱う。
 1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

@@ -22,7 +22,7 @@
 そこから固有ベクトルからなる基底を構成する。
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
-import Ising2D.Part009.Claim013_PositiveDefinite
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.NecSuf.JointEigenspaceDecomposition
 
 namespace Ising2D

@@ -31,7 +31,7 @@
 import Ising2D.Part008.Definition030_Fermi
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.NecSuf.JointEigenspace
-import Ising2D.Part009.Definition001_Trace
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 
 namespace Ising2D
 

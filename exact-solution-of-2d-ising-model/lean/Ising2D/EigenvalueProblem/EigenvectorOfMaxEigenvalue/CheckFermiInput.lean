@@ -31,7 +31,7 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonAnticommutesWithCheckZY
 import Ising2D.Part009.Claim008_JointEigenspace
-import Ising2D.Part009.Claim013_PositiveDefinite
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 
 namespace Ising2D
 

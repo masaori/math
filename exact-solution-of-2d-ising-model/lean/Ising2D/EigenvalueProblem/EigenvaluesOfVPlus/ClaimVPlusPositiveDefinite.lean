@@ -8,8 +8,8 @@
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、
-`B^* A B` が正定値、正実数倍が正定値）は章 009 の
-`Ising2D/Part009/Claim013_PositiveDefinite.lean` で既に「任意の有限次元複素行列」について
+`B^* A B` が正定値、正実数倍が正定値）は数学的道具立て「トレース・共役転置・正定値性」の
+`Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean` で既に「任意の有限次元複素行列」について
 述べてあり、そこがこの主張の必要十分版にあたる。
 
 ## 章 009 との関係（本章の要点）
