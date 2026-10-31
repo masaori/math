@@ -16,7 +16,7 @@
 * `εW = Wε` と `W` が `𝓕^{(+)}` を保つこと → `Ising2D.epsilon_commutes_with_W`
   （`Part011/ClaimEpsilonCommutesWithW.lean`）
 * `W P^{(+)} = V^{(+)} P^{(+)}` → `Ising2D.symmetrized_transfer_matrix_on_sectors`
-  （`Part011/PhysicalSymTransferBridge.lean`）
+  （`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean`）
 
 ## この主張に効いている構造（必要十分版を別に置かない理由）
 

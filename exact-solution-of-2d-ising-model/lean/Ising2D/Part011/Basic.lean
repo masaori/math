@@ -23,7 +23,7 @@
 本タスクの担当外なので、**`W` の作り方によらない部分（`Part011` の主要な不等式）は
 `W : Matrix n n ℝ` とその対称性・正定値性だけを仮定して述べる**。
 `W = V_1^{1/2} V_2 V_1^{1/2}` という具体形は
-`Ising2D/Part011/Definition001_SymmetrizedTransferMatrix.lean` で扱う。
+`Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` で扱う。
 -/
 import Ising2D.NecSuf.RayleighMoments
 import Mathlib.LinearAlgebra.Matrix.Symmetric

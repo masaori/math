@@ -44,11 +44,11 @@
 
 `<exp_X_Y_exp_-X>` の statement には `exp(X)` の正則性が書かれているが、その逆行列が
 `exp(-X)` であること（`Ad_{exp X}` の well-defined 性）は `<matrix_exp_conjugation>` (3) に
-委ねられている。Lean 側では `Ising2D.matExpUnits`（`Part004/Definition010_H1H2V1V2.lean`）が
+委ねられている。Lean 側では `Ising2D.matExpUnits`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）が
 `exp X` を単元として与えており、その逆元が定義から `exp (-X)` なので、この点に穴は無い。
 -/
 import Ising2D.NecSuf.ExpConjugation
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

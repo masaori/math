@@ -65,15 +65,26 @@
     （旧 `Part001/` の 6 本は全部、旧 `Part004/` から `DefinitionConfigBasisIso`・`ClaimConfigNumberingEqualsKroneckerNumbering`・`ClaimSigmaZDiagonalAction`・
     `ClaimFirstTransferMatrixPauliForm`・`DefinitionSecondDualCouplingConstant`・`ClaimTwoByTwoTransferIdentity`・`ClaimSecondTransferMatrixPauliForm`・
     `ClaimPartitionFunctionViaPauliTransferMatrices`）。`Part001/` は無くなった。
-    この章の項目のうち `def_site_pauli_matrices` は `Part004/Definition000_TransferMatrixSymbols.lean`（多数決で次の章）の中にあり、
+    この章の項目のうち `def_site_pauli_matrices` は `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`（多数決で次の章へ置いた）の中にあり、
     `def_real_logarithm_positive`・`def_first_dual_coupling_constant` は形式化されていない。
+  - 部「分配関数」の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」（済み）: 16 ファイルを `Ising2D/PartitionFunction/ProjectionAndJordanWigner/` へ移した。
+    旧 `Part004/` から `DefinitionTransferMatrixSymbols`（旧 `Definition000_TransferMatrixSymbols`）・`ClaimEpsilonSquareFromNecSuf`・
+    `ClaimGlobalSpinFlipJordanWignerRepresentationFromNecSuf`・`ClaimSecondDualCouplingRelation`（と `FromNecSuf`）・`ClaimV1InZYEpsilon`・`ClaimV2InZY`・
+    `ClaimV1RestrictionToEigenspaces`・`DefinitionH1H2V1V2`（旧 `Definition010_H1H2V1V2`）・`EvenEigenvectors`、
+    旧 `Part010/` から `ClaimEpsilonProjectors`（旧 `Claim009_EpsilonProjectors`）・`ClaimEpsilonCommutes`（旧 `Claim010_EpsilonCommutes`）・`DefinitionV1PlusSquareRoot`、
+    旧 `Part011/` から `ClaimSymmetrizedTransferMatrixOnSectorExponentialForm`・`PhysicalSymTransferBridge`・
+    `DefinitionSymmetrizedTransferMatrix`（旧 `Definition001_SymmetrizedTransferMatrix`）である。章のフォルダへ移すときにファイル名の番号を外した。
+    `DefinitionSymmetrizedTransferMatrix` は、この章の `def_transfer_matrix_square_root`・`def_symmetrized_transfer_matrix` と
+    「N→∞ の極限と最大固有値 c(M)」の章の `Z_equals_trace_of_W`・`W_is_real_symmetric_positive_definite` が 2 対 2 の同数なので、並びで先のこの章へ置いた。
+    `Part010/` に残る `Claim011_SectorReplacement`・`Claim012_SectorDecomposition` と `Part004/OddEigenvectors` は (−) セクターの記録なので、
+    `RoutesNotAdopted/MinusSector/` へ移すときに扱う。`Part014/Definition001_VPlus` は「A(θ̃_μ) への帰着」の章の項目が多いので残した。
   - 未割り当ての項目だけを形式化していて動かさないファイル: `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）と、
     その必要十分版の導出。割り当ては構成再編の連続実行を待つ。
 
 ## 次の一歩
 
-項目 7 の 2 番目の章、部「分配関数」の「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」（フォルダ `Ising2D/PartitionFunction/ProjectionAndJordanWigner/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_projection_and_jordan_wigner` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補: `Part004/Definition000_TransferMatrixSymbols.lean`・`Definition010_H1H2V1V2.lean`・`ClaimV1InZYEpsilon.lean`・`ClaimV2InZY.lean`・
-`ClaimV1RestrictionToEigenspaces.lean`・`ClaimSecondDualCouplingRelation.lean`（と `FromNecSuf`）・`Part010/DefinitionV1PlusSquareRoot.lean` など）。
+項目 7 の 3 番目の章、部「固有値問題」の最初の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」（フォルダ `Ising2D/EigenvalueProblem/ReductionToATheta/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_reduction_to_A_theta` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part013/`・`Part014/` の半整数運動量の定義と `T_{V^{(+)}}` の作用の主張、`Part004/Claim008_ExpSum`・`Part006/Claim000_AnticommutatorZY`・
+`Part008/Definition019_ThetaGamma`・`Part008/ClaimDualityC2StarEqS2StarC2` など。整数運動量の経路の記録は数えない）。
 `Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

@@ -26,7 +26,7 @@
     （ラベル `V2_exponential_representation`）
     — `V_2 = (2 s_2)^{M/2} exp(√-1 K_2^* H_2)` の右辺（`V2H2Form`）
   * 人手の `V_2`（`def_transfer_matrix`）そのものについての主張 `V2_in_Z_Y`・
-    `V2_exponential_representation` は `Part004/ClaimV2InZY.lean` にある。
+    `V2_exponential_representation` は `PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` にある。
 （旧 Typst の対応ファイルは `_old/typst/parts/004_転送行列/006, 010`。）
 
 ## 符号引数つきの一般形（補助）
@@ -251,12 +251,12 @@ theorem indexedHyperbolicAbbreviations_pos
 * `V1plus M K1` は人手 `def_V1_plus` の `V_1^{(+)}`。人手 `def_transfer_matrix` の `V_1` とは
   別の行列であり、`V_1` は `Ising2D.V1`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）である。
   平方根 `(V_1^{(+)})^{1/2}`（人手 `def_V1_plus_square_root`、章 010）は
-  `Ising2D.V1plusHalf`（`Part010/DefinitionV1PlusSquareRoot.lean`）。
+  `Ising2D.V1plusHalf`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`）。
 * `V1pm M K1 η` / `V1pmHalf M K1 η` / `V1pmFromDefinition M K1 η` は符号引数つきの補助の一般形。
 * `V2FromJordanWigner M s2 K2star`, `V2H2Form M s2 K2star` は、人手 `V2_in_Z_Y`・
   `V2_exponential_representation` の**右辺の式**に名前を付けたもの。`s2`, `K2star` を
   独立な引数として持つ一般化であり、人手の `V_2`（`Ising2D.V2`）と一致するのは
-  `s2 = sinh 2K_2`, `K2star = K_2^*` のとき（`Part004/ClaimV2InZY.lean` の
+  `s2 = sinh 2K_2`, `K2star = K_2^*` のとき（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` の
   `V2_in_Z_Y` / `V2_exponential_representation`）。
 -/
 
@@ -309,7 +309,7 @@ noncomputable def V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) : TensorPow M :=
 
 /-- 人手 `V2_exponential_representation` の証明の第 2 段（`def_H2` で有限和を `H_2` に置き換える）を、
 右辺の式どうしの等式として述べたもの。人手の `V_2` についての主張は
-`Ising2D.V2_exponential_representation`（`Part004/ClaimV2InZY.lean`）。 -/
+`Ising2D.V2_exponential_representation`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`）。 -/
 theorem V2FromJordanWigner_eq_V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) :
     V2FromJordanWigner M s2 K2star = V2H2Form M s2 K2star := by
   rfl
@@ -411,7 +411,7 @@ theorem V2H2FormUnits_val {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) :
     ((V2H2FormUnits M hs2 K2star : (TensorPow M)ˣ) : TensorPow M) = V2H2Form M s2 K2star := rfl
 
 /-- `V2H2Form` は可逆（人手 `V2_invertible` の一般化。人手の `V_2` については
-`Ising2D.isUnit_V2`（`Part004/ClaimV2InZY.lean`））。 -/
+`Ising2D.isUnit_V2`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`））。 -/
 theorem isUnit_V2H2Form {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) : IsUnit (V2H2Form M s2 K2star) :=
   ⟨V2H2FormUnits M hs2 K2star, rfl⟩
 

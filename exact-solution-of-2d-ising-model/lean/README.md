@@ -81,8 +81,10 @@ EOF
   | 部 | 章 | フォルダ |
   | --- | --- | --- |
   | 分配関数 | 転送行列による表示 | `Ising2D/PartitionFunction/TransferMatrixRepresentation/` |
+  | 分配関数 | ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示 | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/` |
 
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
+  章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
 
   | 人手証明（Typst） | Lean |
   | --- | --- |
@@ -91,12 +93,12 @@ EOF
   | `parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` | `Ising2D/Part002/Theorem000_TensorBasis.lean` |
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/Part002/Lemma001_ScalarIdentityCommutes.lean` |
   | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/Part002/Lemma003_CentralizerIsScalar.lean` |
-  | `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` | `Ising2D/Part004/Definition000_TransferMatrixSymbols.lean` |
+  | `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` |
   | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | `Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean` |
   | `<def_hatZ_pm>`・`<def_hatY>`・`<exp_sum>` に共通する複素位相因子 | `Ising2D/Part004/DefinitionExpPhase.lean` |
   | `parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ` | `Ising2D/Part004/Claim008_ExpSum.lean` |
   | `parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` | `Ising2D/Part004/Definition009_HatZHatY.lean` |
-  | `parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ` | `Ising2D/Part004/Definition010_H1H2V1V2.lean` |
+  | `parts/004_転送行列/010_definition_H1_H2の定義とV1V2の表式.typ` | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` |
   | `parts/008_T_V1_hatZとhatZ_hatYの関係/010,014,015,016,017` | `Ising2D/Part008/Definition016_TV.lean` |
   | `parts/004_転送行列/012_claim_hatZ_hatYのM周期性.typ` | `Ising2D/Part004/Claim012_HatPeriodicity.lean` |
   | `parts/004_転送行列/013_claim_hatZ_hatYからZ_Yの復元.typ` | `Ising2D/Part004/Claim013_RecoverZY.lean` |
@@ -128,7 +130,7 @@ EOF
   `Part011/Claim010_SectorDecomposition.lean`, `NecSuf/PermSector.lean`, `Part019/`）は形式化の記録として
   残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。本文の主張の Lean はこれらに依存しない。
   本文の主張も使う部分（`V_1` の `𝓕^{(+)}` への制限の補題、実行列 `epsilonR` と `ε` の成分表示、
-  置換行列 `permMat` と成分の絶対値 `absVec`）は、`Part004/ClaimV1RestrictionToEigenspaces.lean`,
+  置換行列 `permMat` と成分の絶対値 `absVec`）は、`PartitionFunction/ProjectionAndJordanWigner/ClaimV1RestrictionToEigenspaces.lean`,
   `Part011/ClaimEpsilonIsRealSymmetric.lean`, `NecSuf/PermMatrix.lean` へ移した。
   境界項の符号を引数に持つ一般形（`H1 M η`, `V1pm`, `V1pmHalf`, `V1pmUnits`, `V1pmHalfUnits`,
   `V1pmFromDefinition`, `epsProj M η`）は、これらの記録と整数運動量の経路のために補助として残し、
@@ -323,7 +325,7 @@ Lean も同じ構成にしてある。
 | `Ising2D.V2PauliForm M s2 K2star` | `second_transfer_matrix_pauli_form` の右辺 `(2s_2)^{M/2}exp(K_2^*∑σ^x_m)`（`s2`, `K2star` は独立な引数） |
 | `Ising2D.V2FromJordanWigner` / `Ising2D.V2H2Form` | `V2_in_Z_Y` / `V2_exponential_representation` の右辺（同上） |
 | `Ising2D.V1plus M K1` / `V1plusUnits` | `V_1^{(+)}`（`def_V1_plus`）とその単元。`V_1` とは別の行列 |
-| `Ising2D.V1plusHalf M K1` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`、`Part010/DefinitionV1PlusSquareRoot.lean`）とその単元 |
+| `Ising2D.V1plusHalf M K1` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`、`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`）とその単元 |
 | `Ising2D.VPlusOfTransfer M K1 K2` | `V^{(+)} = (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`（`def_V_plus`。`V_2` は `def_transfer_matrix` の `V_2`） |
 | `Ising2D.V1pm M K1 η` / `V1pmHalf` / `V1pmUnits` / `V1pmHalfUnits` / `V1pmFromDefinition` | 境界項の係数を `η` にした補助の一般形（`η = -1` が `(+)`）。整数運動量の経路と退避した `(−)` セクターの形式化の記録が使う |
 | `Ising2D.V2H2FormUnits` | `V2H2Form` の単元 |
@@ -336,7 +338,7 @@ Lean も同じ構成にしてある。
 (−) セクターの退避（同日）に伴う変更: `(+)` の定義 `H1plus` / `V1plus` / `V1plusUnits` /
 `V1plusHalf` / `V1plusHalfUnits` / `VPlusOfTransfer` / `epsProjPlus` を新設し、
 `V1plusHalf_mul_V2_mul_V1plusHalf → VPlusOfTransfer_eq_VPlus`、
-`V1plusHalf_sq`（`Part014`）は `V1_plus_square_root_property`（`Part010`）へ一本化、
+`V1plusHalf_sq`（`Part014`）は `V1_plus_square_root_property`（`DefinitionV1PlusSquareRoot.lean`）へ一本化、
 `physicalSymTransferR_map_mul_epsProj_eq_Vsym → symmetrized_transfer_matrix_on_sectors`（`(+)` だけ）、
 `EvenSectorBridge.rayleighSup_eq_LambdaM → EvenSectorBridge.rayleighSup_sandwich_LambdaM`（挟み撃ち）、
 `rayleighSup_eq_LambdaM_of_input → rayleighSup_sandwich_LambdaM_of_input`
@@ -368,11 +370,11 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `Part004/ClaimExpOfDiagonalMatrix.lean` |
 | `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
 | `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean` |
-| `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `Part004/ClaimSecondDualCouplingRelation.lean`（必要十分版からの導出は同 `FromNecSuf`） |
+| `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelation.lean`（必要十分版からの導出は同 `FromNecSuf`） |
 | `two_by_two_transfer_identity` | `Ising2D.two_by_two_transfer_identity` | `PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` |
 | `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean` |
-| `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `Part004/ClaimV1InZYEpsilon.lean` |
-| `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `Part004/ClaimV2InZY.lean` |
+| `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean` |
+| `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
 
 ### 下流で `V_2` をどう扱っているか
 
@@ -659,11 +661,11 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 | 箇所 | 問題 | 対応 |
 | --- | --- | --- |
 | `parts/002_線型空間の一般論/000_theorem_...`（`<tensor_basis>`） | 「各元が基底」「添字 `m` の二重使用」 | `Ising2D/Part002/Theorem000_TensorBasis.lean` 冒頭に修正版を明記 |
-| `parts/004_転送行列/000_definition_...`（`<def_transfer_matrix_symbols>`） | `ε = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` の `+` は**積の誤り**（`M = 2` で反例） | `Ising2D/Part004/Definition000_...` 冒頭に記載。`Z_mul_Y_same`（`Z_m Y_m = -√-1 σ^x_m`）と `xString_succ_eq` が積であることの根拠 |
+| `parts/004_転送行列/000_definition_...`（`<def_transfer_matrix_symbols>`） | `ε = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` の `+` は**積の誤り**（`M = 2` で反例） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` 冒頭に記載。`Z_mul_Y_same`（`Z_m Y_m = -√-1 σ^x_m`）と `xString_succ_eq` が積であることの根拠 |
 | `parts/006_ZとYの反交換関係/000_claim_...`（`<anticommutator_of_Z_and_Y>`） | `[Z_μ, Y_ν]₊`, `[Y_μ, Y_ν]₊` の証明が TODO のまま | Lean 側で 3 式とも証明済み（`Ising2D/Part006/Claim000_AnticommutatorZY.lean`） |
 | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
-| `transfer_matrix_001_definition_symbols` と `transfer_matrix_011d_claim_V2_exponential_representation`（`V_2` の 2 つの表式） | （形式化時点）一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていなかった | **解消済み**。現在の本文は `V2_in_Z_Y` の Step 2 の直後にこの等式を置き、Step 3 で `second_transfer_matrix_pauli_form` から `V_2` の Jordan--Wigner 表示を導く。Lean は `I_smul_H2_eq_sum_sigmaX`（`Part004/Definition010_H1H2V1V2.lean`）と `V2_in_Z_Y`（`Part004/ClaimV2InZY.lean`） |
+| `transfer_matrix_001_definition_symbols` と `transfer_matrix_011d_claim_V2_exponential_representation`（`V_2` の 2 つの表式） | （形式化時点）一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていなかった | **解消済み**。現在の本文は `V2_in_Z_Y` の Step 2 の直後にこの等式を置き、Step 3 で `second_transfer_matrix_pauli_form` から `V_2` の Jordan--Wigner 表示を導く。Lean は `I_smul_H2_eq_sum_sigmaX`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）と `V2_in_Z_Y`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`） |
 | `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |
 | `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（`ホロノミック量子場_p142下段_1`） | （かつて）ネストした交換子のテイラー係数抽出（`parts 008` の 001〜005）に依存し、本リポジトリでは未形式化だった | **解消済み（2026-07-26）**。`Ising2D/Part008/Claim012_TVActions.lean` の `actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` として証明した。係数を独立に導出して原文の `cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` と突き合わせた結果、**原文の誤りは無かった**（`B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat`） |
 | `008_TV1_hatZ_hatY_part2.mjs` の `TV1_hatZ_hatY_022`（`gamma_2_theta_is_0`） | 形式化時点の原文は `γ_2(θ_μ) = 0` の同値条件で **`s_2^* = 0` の場合を落としていた**（`γ_2` は `s_2^*` を因子に持つ）。また「`sin θ_μ = 0 ⟺ μ = ±M`」は単独では偽で、正しくは `M ∣ 2μ`（`M` が偶数なら `μ = ±M/2` も該当） | **並行して原文側が修正済み**（現在は `K_1, K_2 ∈ ℝ_{>0}` を前提に置き、`μ = ±M/2` が排除される理由も明記）。Lean 側は `gamma2_eq_zero_iff` と `sin_thetaMu_eq_zero_iff` として機械的裏づけを残した |
@@ -707,8 +709,8 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 
      いずれも上の「原文の問題」表を参照
   3. ~~`V_1` を `Z, Y, ε` で表す表式（`V1_in_Z_Y_epsilon`）と、`V_2` を `Z, Y` で表す表式
-     （`V2_in_Z_Y`）~~ **形式化済み**。前者は `Ising2D/Part004/ClaimV1InZYEpsilon.lean`、後者は
-     `Ising2D/Part004/ClaimV2InZY.lean`（いずれも `def_transfer_matrix` の `V_1, V_2` についての主張）。
+     （`V2_in_Z_Y`）~~ **形式化済み**。前者は `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`、後者は
+     `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`（いずれも `def_transfer_matrix` の `V_1, V_2` についての主張）。
   4. `ε = (√-1)^M Z_1 Y_1 ⋯ Z_M Y_M`（積）の完全形。
      現状は再帰形 `xString_succ_eq` まで。順序つき積（`List.prod` / `Finset.noncommProd`）の
      整備が要る

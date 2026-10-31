@@ -29,7 +29,7 @@
 -/
 import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
-import Ising2D.Part010.Claim010_EpsilonCommutes
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 
 namespace Ising2D
 

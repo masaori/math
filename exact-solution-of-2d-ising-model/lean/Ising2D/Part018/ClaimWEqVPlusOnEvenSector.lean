@@ -41,7 +41,7 @@ Step 1 でそれを実ベクトルへ `ℝ ⊂ ℂ` の包含を明示せずに�
 -/
 import Ising2D.Part018.Theorem009_CPlusEqualsLambda
 import Ising2D.Part018.ClaimVPlusRealEntries
-import Ising2D.Part011.PhysicalSymTransferBridge
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 import Ising2D.NecSuf.EvenSectorAgreement
 

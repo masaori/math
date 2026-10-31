@@ -9,7 +9,7 @@
 `Ising2D.NecSuf.dualCouplingProduct_eq_one` の特殊化としても得られることを明示する。
 -/
 import Ising2D.NecSuf.DualCouplingRelation
-import Ising2D.Part004.ClaimSecondDualCouplingRelation
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSecondDualCouplingRelation
 
 namespace Ising2D
 

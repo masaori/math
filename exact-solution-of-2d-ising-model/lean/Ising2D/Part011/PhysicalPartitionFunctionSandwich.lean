@@ -53,9 +53,9 @@
 （抽象的な内容は `partition_function_sandwich` と `Ising2D/NecSuf/RayleighMoments.lean` に尽きている）。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
-import Ising2D.Part004.ClaimV2InZY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 import Ising2D.Part009.Claim013_PositiveDefinite
-import Ising2D.Part011.PhysicalSymTransferBridge
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.Part011.Claim009_PartitionFunctionSandwich
 
 namespace Ising2D

@@ -19,7 +19,7 @@ Lean では添字型 `Conf M` がスピン配置そのものなので、
 ことと「Pauli 行列 `σ^z` が対角行列であること」だけで、`σ^z` の具体的な成分も
 複素数であることも効いていない。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.SiteDiagonal
 

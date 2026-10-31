@@ -3,9 +3,9 @@
 
 対応する人手証明のラベル: `<epsilon_square_identity>`。
 
-具体版は `Ising2D/Part004/Definition000_TransferMatrixSymbols.lean` の
+具体版は `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の
 `Ising2D.epsilon_mul_self`、本必要十分版から同じ主張を導く特殊化は
-`Ising2D/Part004/ClaimEpsilonSquareFromNecSuf.lean` に置く。
+`Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonSquareFromNecSuf.lean` に置く。
 
 ## 本文との段対応
 

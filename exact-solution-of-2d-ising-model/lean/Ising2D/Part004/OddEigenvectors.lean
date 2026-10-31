@@ -14,7 +14,7 @@
 `odd_eigenspace_is_complex_subspace` の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.NecSuf.NegatedVectorsSubmodule
 
 namespace Ising2D

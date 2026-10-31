@@ -14,7 +14,7 @@
 `hmulVec_smul` が線型写像の `map_smul` に当たる。その後のスカラー計算は
 同じ順序で一段ずつ対応する。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 

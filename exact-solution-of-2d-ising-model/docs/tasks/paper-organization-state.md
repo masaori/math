@@ -113,7 +113,7 @@
   - **章末のゴールの主張を足した。** $WP^{(+)}=\exp(\tfrac i2K_1H_1^{(+)})(2\sinh2K_2)^{M/2}\exp(iK_2^*H_2)\exp(\tfrac i2K_1H_1^{(+)})P^{(+)}$ を主張する claim
     `symmetrized_transfer_matrix_on_sector_exponential_form` を章の最後に置いた。証明は `symmetrized_transfer_matrix_on_sectors`・`def_V_plus`・`def_V1_plus_square_root`・
     `V2_exponential_representation`・`def_indexed_hyperbolic_abbreviations` の代入だけである。SageMath（`sagemath/check/symmetrized_transfer_matrix_on_sector_exponential_form/`、
-    7 組で隣接行の相対残差 ≤ 7.7e-16。指数評価の ℝ 脱出のため倍精度）と Lean（`lean/Ising2D/Part011/ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean`、五つの書き換え）を足した。
+    7 組で隣接行の相対残差 ≤ 7.7e-16。指数評価の ℝ 脱出のため倍精度）と Lean（`lean/Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean`、五つの書き換え）を足した。
     `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号の定義（$P^{(+)},\varepsilon,H_1^{(+)},H_2$）に分けた
     （主張していない $\mathcal F^{(+)}=\mathrm{im}\,P^{(+)}$ は外した）。章の項目数は 28（割り当て 27 とゴールの主張 1。章立て案は 27）。
   - **どの章のゴールからも辿れない項のうち、平方根性の主張 `bridge_claim_V1_pm_square_root_squares_to_V1_pm` を先行してこの章に置いた。** 定義 `def_V1_plus_square_root` の

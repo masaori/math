@@ -11,8 +11,8 @@
 ## 人手の Step との対応
 
 * Step 1（`ε` と `Z_m`, `Y_m` の反交換）→ `Ising2D.epsilon_anticomm_Z` / `epsilon_anticomm_Y`
-  （`Part010/Claim010_EpsilonCommutes.lean`）。
-* Step 2 の `V_1 = exp(G)` → `Ising2D.V1_in_Z_Y_epsilon`（`Part004/ClaimV1InZYEpsilon.lean`）。
+  （`PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonCommutes.lean`）。
+* Step 2 の `V_1 = exp(G)` → `Ising2D.V1_in_Z_Y_epsilon`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`）。
 * Step 3〜6 → 下の `mulVec_mem_sector_of_commute_epsilon` から `V1_mulVec_eq_V1pm` まで。
 
 Step 3〜6 の補題は、`ε` の固有値 `η` と境界項の係数 `ηsign` を引数にもつ一般形で書いてある
@@ -24,8 +24,8 @@ Step 3〜6 の補題は、`ε` の固有値 `η` と境界項の係数 `ηsign` 
 人手は「両辺は `𝓕^{(+)}` から `𝓕` への写像として一致する」を `end` の制限の等号で述べる。
 Lean では `f ∈ 𝓕^{(+)}`（`ε f = f`）への行列の作用の等号として述べる。
 -/
-import Ising2D.Part010.Claim010_EpsilonCommutes
-import Ising2D.Part004.ClaimV1InZYEpsilon
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon
 
 namespace Ising2D
 

@@ -30,7 +30,7 @@
 にあり、`epsilonR_isSymm` / `epsilonR_mul_self` はその系である。
 -/
 import Ising2D.NecSuf.PermMatrix
-import Ising2D.Part010.Claim010_EpsilonCommutes
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.Part009.Claim013_PositiveDefinite
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 

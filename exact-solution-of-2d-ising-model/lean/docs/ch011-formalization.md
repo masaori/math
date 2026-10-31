@@ -174,7 +174,7 @@
 ## 3. 他章に仮定として置いた事実
 
 章 009 / 010 などの結果は、次を **import せず仮定として受け取っている**（本章の定理は一般の実行列について述べてある）。
-（`Part011/Definition001_SymmetrizedTransferMatrix.lean` と
+（`PartitionFunction/ProjectionAndJordanWigner/DefinitionSymmetrizedTransferMatrix.lean` と
 `Part011/Claim009_PartitionFunctionSandwich.lean` の冒頭コメントにも明記した。）
 
 | 仮定 | 対応する人手証明 | Lean での受け取り方 |

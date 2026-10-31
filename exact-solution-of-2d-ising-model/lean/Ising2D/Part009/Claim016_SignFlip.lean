@@ -27,7 +27,7 @@ Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj
 （整数運動量の経路の形式化の記録と章 017 が使う）、人手の主張に対応する `(+)` の定理
 `Uflip_conj_H1plus` / `Uflip_conj_S1plus` はその `η = -1` の場合として立てる。
 -/
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

@@ -36,7 +36,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 （`Vmat` ほか）が使う）、人手の主張に対応する `(+)` の定理 `S1plus_isHermitian` / `S1plus_transpose` は
 その `η = -1` の場合として立てる。
 -/
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.Part006.Claim000_AnticommutatorZY
 import Ising2D.Part009.Definition001_Trace
 import Mathlib.LinearAlgebra.Matrix.PosDef

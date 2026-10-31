@@ -33,7 +33,7 @@
 取り払える構造が無い）。
 -/
 import Ising2D.Part004.ClaimExpOfDiagonalMatrix
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionSecondDualCouplingConstant
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp

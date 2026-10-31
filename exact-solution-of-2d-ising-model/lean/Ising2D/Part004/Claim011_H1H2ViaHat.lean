@@ -20,7 +20,7 @@
 
 * 添字 `μ` は `ℤ` のまま扱う（既存の `hatZ`, `hatY` と同じ）。原文の site 添字 `j ∈ {1,…,M}` は
   Lean では `j : Fin M` で `(j : ℕ) + 1` が原文の `j`。
-* 原文の `(±)` の符号は、`H1 M η`（`Definition010_H1H2V1V2.lean`）と
+* 原文の `(±)` の符号は、`H1 M η`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）と
   `hatZ M η μ`（`Definition009_HatZHatY.lean`）が**どちらも原文の `∓1` を `η` で持たせている**
   ので、`H_1^{(±)}` と `hat(Z)^{(±)}` は同じ `η` で対応する
   （`H1 M η` の最終項の係数 `∓1` と `hat(Z)^{(±)}` の `j = 1` の項の係数 `∓1` が
@@ -32,7 +32,7 @@
   `k_2 = k_1 + 1` と `k_1 = M, k_2 = 1` に手で分けたものにほかならない。
 -/
 import Ising2D.Part004.Claim008_ExpSum
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

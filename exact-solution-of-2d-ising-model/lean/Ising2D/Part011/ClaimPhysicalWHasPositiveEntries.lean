@@ -31,7 +31,7 @@ Step 1・Step 2 の実成分は、人手の `V_1^{1/2} = exp(½K_1D)`・`V_2` �
 結合律・可換律を仮定しない半環の係数で書いたもの）。具体版をその特殊化として導出するのは
 `ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
 -/
-import Ising2D.Part011.PhysicalSymTransferBridge
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 
 namespace Ising2D
 

@@ -6,6 +6,9 @@
 その性質、`(V_1^{(+)})^{1/2}` と偶セクターの転送行列 `V^{(+)} = (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}` の定義、
 `ε` と `P^{(+)}` が `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` と可換であることを述べる。
 
+本文の主張の Lean は部「分配関数」の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」のフォルダ
+`PartitionFunction/ProjectionAndJordanWigner/` にある。`(−)` セクターの形式化の記録は `Part010/` に残っている。
+
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `P^{(-)}`, `V_1^{(-)}` を使う主張（`sector_replacement_of_V1`, `sector_replacement_pow`,
 `partition_function_sector_decomposition`。以前この章の結論だった
@@ -39,13 +42,13 @@
 | `Ising2D.Y_mul_Z_next_mulVec_mem_sector` / `V1JordanWigner_generator_mulVec_mem_sector` / `V1fixed_generator_mulVec_mem_sector` | **`W` と二つの生成子が固有空間を保つこと**（固有値 `η` の一般形） | `V1_restriction_to_eigenspaces` Step 3 |
 | `Ising2D.H1JordanWigner_mulVec_eq_H1` / `V1_generators_mulVec_eq` | **`ηsign=-η` のときの固有ベクトル上の生成子一致**（一般形） | 同 Step 4 |
 | `Ising2D.V1_generators_pow_mulVec_eq` / `V1_generator_partialSums_mulVec_eq` / `V1_mulVec_eq_V1pm` | **ベクトル作用の冪を直接帰納し、有限部分和と指数級数の極限を一致させる**（`M>=2`、一般形） | 同 Step 5, 6 |
-| `Ising2D.V1_restriction_to_eigenspaces` | **`f ∈ 𝓕^{(+)}` なら `V_1 f = V_1^{(+)} f`**（一般形の `η = 1`。`Part004/ClaimV1RestrictionToEigenspaces.lean`） | `V1_restriction_to_eigenspaces` |
+| `Ising2D.V1_restriction_to_eigenspaces` | **`f ∈ 𝓕^{(+)}` なら `V_1 f = V_1^{(+)} f`**（一般形の `η = 1`。`PartitionFunction/ProjectionAndJordanWigner/ClaimV1RestrictionToEigenspaces.lean`） | `V1_restriction_to_eigenspaces` |
 | `Ising2D.instInvertibleTwoTensorPow` | `Mat(2^M,ℂ)` で `2` が可逆 | `def_epsilon_projectors`（`/2` の意味づけ） |
 | `Ising2D.epsProjPlus` / `epsProjPlus_eq_epsProj` | **`P^{(+)} = (I + ε)/2`**（一般形 `epsProj M η` の `η = 1`） | `def_epsilon_projectors` |
 | `Ising2D.epsilon_sq` | `ε² = I` | `epsilon_square_and_eigenvalues` |
 | `Ising2D.epsProjPlus_sq` | `(P^{(+)})² = P^{(+)}` | `epsilon_projector_properties` (1) |
 | `Ising2D.epsProjPlus_mulVec_mem` / `epsProjPlus_mulVec_eq_self` / `epsilon_projector_properties_image` | `im P^{(+)} = 𝓕^{(+)}`（2 つの包含と集合の等式） | 同 (2) |
-| `Ising2D.V1plusHalf` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2} := exp((i/2)K_1H_1^{(+)})`（`Part010/DefinitionV1PlusSquareRoot.lean`） | `def_V1_plus_square_root` |
+| `Ising2D.V1plusHalf` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2} := exp((i/2)K_1H_1^{(+)})`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`） | `def_V1_plus_square_root` |
 | `Ising2D.V1_plus_square_root_property` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
 | `Ising2D.VPlusOfTransfer` | `V^{(+)} := (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`（`V_2` は `def_transfer_matrix` の `V_2`） | `def_V_plus` |
 | `Ising2D.epsilon_eq_siteProd` | `ε = σ^x ⊠ ⋯ ⊠ σ^x` | `epsilon_commutes_with_transfer_matrices` Step 1 |
@@ -92,7 +95,7 @@
 必要十分版を置かなかった主張とその理由: 本章の主張は上の表のとおり必要十分版を持つか、その系である。
 この章から移した主張のうち、`first_transfer_matrix_pauli_form`, `second_transfer_matrix_pauli_form`,
 `two_by_two_transfer_identity`, `def_config_basis_iso` は `PartitionFunction/TransferMatrixRepresentation/` に、
-`V1_in_Z_Y_epsilon`, `V2_in_Z_Y` は `Part004/` にある。これらで
+`V1_in_Z_Y_epsilon`, `V2_in_Z_Y` は `PartitionFunction/ProjectionAndJordanWigner/` にある。これらで
 必要十分版を置かなかった理由は、各 Lean ファイルの冒頭コメントと `lean/README.md` の
 「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節に書いた。
 
@@ -103,13 +106,13 @@
 | 主張 | 状況 | 記録 |
 | --- | --- | --- |
 | （ノート）`sector_replacement_of_V1` と、それに依存する `partition_function_sector_decomposition` | **同期済み（形式化の記録）**。`sector_replacement_of_V1` と冪・トレースの補助定理は `M>=2` と `η²=1` を受けて `ηsign=-η` を内部で使い、最終定理も `M>=2` を直接受け取る。下流の `RestrictsOnSector` 仮定は残らない | `docs/tasks/2026-07_lean-ch009-013/001_ch010_sector_replacement_depends_on_unformalized_ch004.md` |
-| `V2_in_Z_Y` | **形式化済み**（004 章の主張）。`I_smul_H2_eq_sum_sigmaX` が各サイトの `iZ_mY_m=σ_m^x` を有限和へ持ち上げ、`V2_in_Z_Y` が `def_transfer_matrix` の `V_2` について `second_transfer_matrix_pauli_form` から本文どおりに導く | `Ising2D/Part004/Definition010_H1H2V1V2.lean`・`Ising2D/Part004/ClaimV2InZY.lean` |
-| `def_even_eigenvectors_of_epsilon` | **固有値 `+1` の集合定義を同期済み**。`evenEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = f` を満たす数ベクトルの集合として定める | `Ising2D/Part004/EvenEigenvectors.lean` |
-| `even_eigenspace_is_complex_subspace` | **固有値 `+1` の集合の複素部分線型空間性を同期済み**。本文の零・和・複素スカラー倍に含まれる17段の成分計算を同じ順で `zero_mem_evenEigenvectors`・`add_mem_evenEigenvectors`・`smul_mem_evenEigenvectors` に展開し、同じ集合を台集合とする `evenEigenspace` を構成した。必要十分版は有限添字と可換半環行列だけを仮定して同じ17段を証明し、`evenEigenspace_eq_fixedSubmodule` が具体版との一致を示す | `Ising2D/Part004/EvenEigenvectors.lean`・`Ising2D/NecSuf/FixedVectorsSubmodule.lean` |
+| `V2_in_Z_Y` | **形式化済み**（004 章の主張）。`I_smul_H2_eq_sum_sigmaX` が各サイトの `iZ_mY_m=σ_m^x` を有限和へ持ち上げ、`V2_in_Z_Y` が `def_transfer_matrix` の `V_2` について `second_transfer_matrix_pauli_form` から本文どおりに導く | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`・`Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
+| `def_even_eigenvectors_of_epsilon` | **固有値 `+1` の集合定義を同期済み**。`evenEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = f` を満たす数ベクトルの集合として定める | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean` |
+| `even_eigenspace_is_complex_subspace` | **固有値 `+1` の集合の複素部分線型空間性を同期済み**。本文の零・和・複素スカラー倍に含まれる17段の成分計算を同じ順で `zero_mem_evenEigenvectors`・`add_mem_evenEigenvectors`・`smul_mem_evenEigenvectors` に展開し、同じ集合を台集合とする `evenEigenspace` を構成した。必要十分版は有限添字と可換半環行列だけを仮定して同じ17段を証明し、`evenEigenspace_eq_fixedSubmodule` が具体版との一致を示す | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean`・`Ising2D/NecSuf/FixedVectorsSubmodule.lean` |
 | （ノート）`def_odd_eigenvectors_of_epsilon` | **固有値 `-1` の集合定義を同期済み（形式化の記録）**。`oddEigenvectors` は本文と同じ `M≥1` の下で、`epsilon M *ᵥ f = -f` を満たす数ベクトルの集合として定める | `Ising2D/Part004/OddEigenvectors.lean` |
 | （ノート）`odd_eigenspace_is_complex_subspace` | **固有値 `-1` の集合の複素部分線型空間性を同期済み（形式化の記録）**。本文の零・和・複素スカラー倍に含まれる20段の成分計算を同じ順で `zero_mem_oddEigenvectors`・`add_mem_oddEigenvectors`・`smul_mem_oddEigenvectors` に展開し、同じ集合を台集合とする `oddEigenspace` を構成した。必要十分版は有限添字と可換環行列だけを仮定して同じ20段を証明し、`oddEigenspace_eq_negatedSubmodule` が具体版との一致を示す | `Ising2D/Part004/OddEigenvectors.lean`・`Ising2D/NecSuf/NegatedVectorsSubmodule.lean` |
 | `epsilon_action_eigenvalues_are_signs` | **固有値候補を同期済み**。具体版は本文と同じ `M≥1`、非零数ベクトル `f`、`epsilon M *ᵥ f = lambda • f` の下で、行列作用の結合則、複素線型性、単位行列の作用を成分和から示し、`epsilon_mul_self` から `f=lambda^2f` を得る。非零成分と複素数の零積の法則から `lambda=1` または `lambda=-1` を示す。必要十分版は二回作用で元へ戻る線型写像、非可換でもよい整域、無ねじれ加群に抽象化した。特殊化定理と必要十分性の記録は専用ファイルへ分離した。固有空間の次元公式は対象外である | `Ising2D/Part004/ClaimEpsilonActionEigenvalues.lean`・`Ising2D/NecSuf/InvolutionEigenvalue.lean`・`Ising2D/Part004/ClaimEpsilonActionEigenvaluesFromNecSuf.lean`・`docs/necsuf-involution-eigenvalue.md` |
-| `epsilon_projector_properties` (2) の「`im P^{(+)} = 𝓕^{(+)}`」 | **同期済み**。2 つの包含（`epsProjPlus_mulVec_mem` / `epsProjPlus_mulVec_eq_self`）と、像を数ベクトル空間の部分集合として述べた集合の等式（`epsilon_projector_properties_image`）。人手の (2) の証明は `(P^{(+)})^2 = P^{(+)}` を経由して `ε y = y` を示すが、Lean は一般形の行列の等式 `ε P = ηP`（`epsilon_mul_epsProj`）を `η = 1` で作用させる | `Ising2D/Part010/Claim009_EpsilonProjectors.lean` |
+| `epsilon_projector_properties` (2) の「`im P^{(+)} = 𝓕^{(+)}`」 | **同期済み**。2 つの包含（`epsProjPlus_mulVec_mem` / `epsProjPlus_mulVec_eq_self`）と、像を数ベクトル空間の部分集合として述べた集合の等式（`epsilon_projector_properties_image`）。人手の (2) の証明は `(P^{(+)})^2 = P^{(+)}` を経由して `ε y = y` を示すが、Lean は一般形の行列の等式 `ε P = ηP`（`epsilon_mul_epsProj`）を `η = 1` で作用させる | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonProjectors.lean` |
 | `bridge_000_remark_overview`（旧 010 の章の内容の説明） | 主張ではなく章の概要なので、定理としては形式化していない。2026-10-31 の章立ての組み直しで、説明する中身がすべて別の章へ移ったので本文から外した | 本ファイル |
 
 ### mathlib について調べた結果（一次情報）
@@ -126,7 +129,7 @@
   なお `second_transfer_matrix_pauli_form` の「1 因子の `exp` をサイト演算子の `exp` にする」段
   （`Ising2D.exp_smul_sigmaX`）は、`Matrix.Norms.Operator` を証明の中だけで有効にし、
   級数 `NormedSpace.exp_series_hasSum_exp'` を連続線型写像で移して極限の一意性で閉じている
-  （`Part004/ClaimV1RestrictionToEigenspaces.lean` の `V1_mulVec_eq_V1pm` と同じ手法）。
+  （`PartitionFunction/ProjectionAndJordanWigner/ClaimV1RestrictionToEigenspaces.lean` の `V1_mulVec_eq_V1pm` と同じ手法）。
 * `Commute.exp_left` / `Commute.exp_right`（同 228, 235 行目）は位相環の設定で使えるので、
   「`ε` が指数の肩と可換なら `exp` とも可換」はノルムを経由せずに済む。
 * 行列の冪のトレースを「道の総和」へ展開する補題は mathlib に**無い**

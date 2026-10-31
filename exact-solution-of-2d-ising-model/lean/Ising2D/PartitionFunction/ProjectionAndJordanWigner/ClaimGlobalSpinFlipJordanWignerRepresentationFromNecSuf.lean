@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル: `<global_spin_flip_jordan_wigner_representation>`。
 
-具体版は `Definition000_TransferMatrixSymbols.lean` に置き、本文の二つの有限帰納法、
+具体版は `DefinitionTransferMatrixSymbols.lean` に置き、本文の二つの有限帰納法、
 局所積、終端を各等号に対応する `calc` で追う。本ファイルは、第二帰納法の結論だけが
 `NecSuf.prefix_eq_pow_smul_of_local_smul` の特殊化でも得られることを記録する。
 
@@ -11,7 +11,7 @@
 およびスカラー作用と行列積の左右の両立だけである。
 -/
 import Ising2D.NecSuf.ScalarPrefixProduct
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 

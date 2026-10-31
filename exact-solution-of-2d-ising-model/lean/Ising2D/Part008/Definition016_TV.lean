@@ -73,7 +73,7 @@
 以前は本ファイルにも 5 個の複素パラメータ版 `Ising2D.Amat` があり二重定義になっていたが、
 `AMat` へ一本化して削除した（`lean/README.md` の該当節を参照）。
 -/
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
 import Ising2D.Part008.Definition019_ThetaGamma
 import Mathlib.Algebra.Algebra.Equiv

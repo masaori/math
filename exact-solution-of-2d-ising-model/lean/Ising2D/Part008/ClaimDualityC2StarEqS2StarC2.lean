@@ -31,7 +31,7 @@
 `exp` の加法則・`exp ∘ log = id`（正の実数上）だけである。これを一般の構造へ持ち上げても
 `exp`・`log` を持つ体を述べ直すだけになり、何が本質的かについて新しい情報を与えない。
 -/
-import Ising2D.Part004.ClaimSecondDualCouplingRelation
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimSecondDualCouplingRelation
 
 namespace Ising2D
 

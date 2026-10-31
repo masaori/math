@@ -46,7 +46,7 @@
 `Ising2D/Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.Part008.Claim001_CommutatorHZY
 import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction

@@ -37,7 +37,7 @@ Lean では `Fin M` 上の `deltaM μ ν = if μ = ν then 1 else 0` として�
    `μ`, `μ`, `ν` になる。
 -/
 import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 

@@ -8,9 +8,9 @@
 
 | 人手 | Lean |
 | --- | --- |
-| 1 サイトの積 `σ^yσ^x = -iσ^z`, `σ^xσ^x = I`（`V1_in_Z_Y_epsilon` の Step 0） | `pauliY_mul_pauliX_eq`（`Ising2D.Part004.ClaimV1InZYEpsilon`）、`pauliX_mul_pauliX`（`Ising2D.Part004.Definition000_TransferMatrixSymbols`） |
+| 1 サイトの積 `σ^yσ^x = -iσ^z`, `σ^xσ^x = I`（`V1_in_Z_Y_epsilon` の Step 0） | `pauliY_mul_pauliX_eq`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`）、`pauliX_mul_pauliX`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols`） |
 | 1 サイトの積 `σ^xσ^z = -iσ^y`（2 次の成分計算） | `pauliX_mul_pauliZ_eq` |
-| 内部辺 `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_mul_Z_next_of_not_last`（`Ising2D.Part004.ClaimV1InZYEpsilon`。人手と同じ計算） |
+| 内部辺 `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_mul_Z_next_of_not_last`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`。人手と同じ計算） |
 | 両辺に `i` を掛けて `iY_mZ_{m+1} = σ^z_mσ^z_{m+1}` | `I_smul_Y_mul_Z_next_of_not_last` |
 | 境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
 | 境界項の右辺 `εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` |

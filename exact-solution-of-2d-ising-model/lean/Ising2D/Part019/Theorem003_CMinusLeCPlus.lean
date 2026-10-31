@@ -28,7 +28,7 @@
 `c_minus_le_c_plus_of_nonneg` 参照）。
 -/
 import Ising2D.Part019.Claim002_AbsVectorEvenSector
-import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
 
 set_option linter.unusedSectionVars false
 

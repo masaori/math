@@ -29,12 +29,12 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は `Mat(2^{M_col}, ℂ)` 
 ## 記号
 
 * 人手の列数 `M_col` は Lean の束縛変数 `M`（列の添字は `Fin M`）。
-* 周期規約 `μ(M_col+1) := μ(1)` は巡回後者 `Ising2D.nextSite`（`Part004/Definition010_H1H2V1V2.lean`）。
+* 周期規約 `μ(M_col+1) := μ(1)` は巡回後者 `Ising2D.nextSite`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）。
 * 人手の `K_1, K_2 ∈ ℝ_{>0}` は `K1 K2 : ℝ`。定義に正値性は要らないので仮定に置かない。
 * 成分の値は人手どおり実数 `exp(…) ∈ ℝ_{>0}` を `ℂ` へ埋め込んだもの。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
-import Ising2D.Part004.Definition010_H1H2V1V2
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

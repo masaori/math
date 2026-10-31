@@ -15,7 +15,7 @@ Lean のサイト添字は 0 始まりなので、人手の `m ∈ {1,…,M_col-
 人手は両定義で `M_col ∈ ℤ_{≥2}` を置くが、`D_0` は仮定なしで、`G` はサイト `1` と `M_col` が在ること
 （`M ≠ 0`）だけで定まるので、Lean の仮定はそれだけにする。
 -/
-import Ising2D.Part004.ClaimV1InZYEpsilon
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon
 import Ising2D.Part008.Claim001_CommutatorHZY
 
 namespace Ising2D

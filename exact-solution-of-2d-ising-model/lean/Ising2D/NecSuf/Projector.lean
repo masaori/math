@@ -2,8 +2,8 @@
 # 必要十分版: 対合から作る射影子と、セクター上での因子の置き換え
 
 対応する人手証明のラベル: **`epsilon_projector_properties`** / **`symmetrized_transfer_matrix_on_sectors`**
-（具体版は `Ising2D/Part010/Claim009_EpsilonProjectors.lean` と
-`Ising2D/Part011/PhysicalSymTransferBridge.lean`）。
+（具体版は `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonProjectors.lean` と
+`Ising2D/PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean`）。
 本文から参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 `sector_replacement_of_V1` / `sector_replacement_pow` / `partition_function_sector_decomposition` の
 形式化の記録（`Ising2D/Part010/Claim011_SectorReplacement.lean`,

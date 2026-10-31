@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `<epsilon_square_identity>`。
 
 具体版 `Ising2D.epsilon_mul_self` は
-`Ising2D/Part004/Definition000_TransferMatrixSymbols.lean` にあり、必要十分版
+`Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` にあり、必要十分版
 `Ising2D.NecSuf.prefix_terminal_mul_self` は
 `Ising2D/NecSuf/EpsilonSquare.lean` にある。
 
@@ -18,7 +18,7 @@
   `pauliX_mul_pauliX`, `siteProd_one` / `hfactor`, `map_one`。
 -/
 import Ising2D.NecSuf.EpsilonSquare
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 

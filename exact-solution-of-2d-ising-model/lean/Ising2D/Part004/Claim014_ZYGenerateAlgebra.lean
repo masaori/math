@@ -14,7 +14,7 @@ Lean では「`S` を含む最小の ℂ-部分多元環」を mathlib の `Alge
 
 | 原文 | Lean |
 | --- | --- |
-| Step 1（単一サイトの積公式・異サイト可換性） | `Ising2D/Part004/Definition000_...` の `pauli*`, `siteOp_mul_same`, `siteOp_mul_comm` |
+| Step 1（単一サイトの積公式・異サイト可換性） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の `pauli*`, `siteOp_mul_same`, `siteOp_mul_comm` |
 | Step 2（帰納法で `σ^x_m, σ^y_m, σ^z_m ∈ 𝒜`） | `xString_mem_adjoin`, `sigmaX_mem_adjoin` ほか |
 | Step 3 前半（`{I, σ^x, σ^y, σ^z}` は `Mat(2,ℂ)` の基底） | `matrix_two_decomp`（原文の成分比較の式そのもの） |
 | Step 3 後半（基底のテンソル積が全体を張る） | `matrixUnitBasis`（`Ising2D/Representation.lean`）+ `E_eq_siteProd` |
@@ -24,7 +24,7 @@ Step 3 後半だけ原文と経路が違う。原文は基底として `{I, σ^x
 `matrixUnitBasis`（これも `<tensor_basis>` の帰結）を使うほうが短い。
 どちらも「`𝒜` は ℂ-線型結合で閉じた部分空間で、ある基底を全部含むから全体」という論法で同じ。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 

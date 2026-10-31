@@ -22,7 +22,7 @@
 必要十分版は置かない。可換性の鎖は結合律だけで、置き換えた構造は章 010 の
 `epsilon_commutes_with_transfer_matrices`（Pauli 行列の具体的な反交換関係）が担う。
 -/
-import Ising2D.Part011.PhysicalSymTransferBridge
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 
 namespace Ising2D

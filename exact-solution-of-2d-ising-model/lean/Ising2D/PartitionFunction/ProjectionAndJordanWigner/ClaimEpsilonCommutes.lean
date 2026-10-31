@@ -35,8 +35,8 @@
 必要十分版は射影子との可換性の部分だけ（`Ising2D/NecSuf/Projector.lean`）。Step 1〜4 は
 `ε` と Pauli 行列の具体的な反交換関係の計算であり、取り払える構造が無い。
 -/
-import Ising2D.Part010.Claim009_EpsilonProjectors
-import Ising2D.Part010.DefinitionV1PlusSquareRoot
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonProjectors
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
 import Ising2D.Part006.Claim000_AnticommutatorZY

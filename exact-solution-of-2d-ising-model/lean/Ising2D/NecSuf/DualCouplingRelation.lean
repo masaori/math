@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `second_dual_coupling_relation`
 （正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）。
 
-具体版は `Ising2D/Part004/ClaimSecondDualCouplingRelation.lean` に置く。
+具体版は `Ising2D/PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelation.lean` に置く。
 
 ## 何が効いているか / 効いていないか
 

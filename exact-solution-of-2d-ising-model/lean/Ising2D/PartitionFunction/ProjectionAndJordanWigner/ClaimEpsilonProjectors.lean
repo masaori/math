@@ -26,7 +26,7 @@
 (2)（`im P^{(+)} = 𝓕^{(+)}`）は「行列がベクトルに作用する」という具体的な文脈が要るので、
 ベクトルの言葉で直接述べる。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.NecSuf.Projector
 
 namespace Ising2D

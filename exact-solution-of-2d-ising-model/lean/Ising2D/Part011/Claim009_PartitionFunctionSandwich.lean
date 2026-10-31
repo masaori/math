@@ -14,7 +14,7 @@ Lean では `Ising2D.partition_function_via_transfer_matrix`）は **仮定 `hZ`
 必要十分版は置かない（この主張は `trace_power_sandwich` の言い換えであり、
 抽象的な内容は `Ising2D/NecSuf/RayleighMoments.lean` に尽きている）。
 -/
-import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
 
 set_option linter.unusedSectionVars false
 

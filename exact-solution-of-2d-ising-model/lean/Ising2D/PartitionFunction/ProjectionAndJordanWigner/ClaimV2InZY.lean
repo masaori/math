@@ -14,7 +14,7 @@
 ## 人手証明との対応
 
 * `V2_in_Z_Y` の Step 0–2（`σ^x_m = i Z_m Y_m`）→ `Ising2D.Z_mul_Y_same` と、その有限和版
-  `Ising2D.I_smul_H2_eq_sum_sigmaX`（`Part004/Definition010_H1H2V1V2.lean`）。
+  `Ising2D.I_smul_H2_eq_sum_sigmaX`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）。
 * `V2_in_Z_Y` の Step 3（指数の肩の等式）→ `V2PauliForm_eq_V2FromJordanWigner`（右辺の式どうし。
   `s2`, `K2star` は独立な引数）。最終の式変形
   `V_2 = (2 sinh 2K_2)^{M/2} exp(K_2^* ∑σ^x) = (2s_2)^{M/2} exp(K_2^* ∑σ^x) = (2s_2)^{M/2} exp(iK_2^*∑Z_mY_m)`

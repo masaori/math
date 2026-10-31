@@ -21,8 +21,8 @@
 これは同じ具体的な行列の二つの係数体での表示を突き合わせる主張なので、必要十分版は置かない。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
-import Ising2D.Part004.ClaimV1RestrictionToEigenspaces
-import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1RestrictionToEigenspaces
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionSymmetrizedTransferMatrix
 
 namespace Ising2D
 

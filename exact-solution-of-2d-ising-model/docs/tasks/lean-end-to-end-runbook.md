@@ -29,7 +29,7 @@
    （`PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean`）とし、人手 `duality_c2_star_eq_s2_star_c2` を
    `Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して `hdual` を定理 `IsingParam.c2_mul_s2star_eq_c2star` にした。
 2. **具体的な分配関数と挟み撃ちをつなぐ。** 最終定理の `Z` はいま「挟み撃ちを満たす任意の関数」である。
-   `partitionFunction`（`PartitionFunction/TransferMatrixRepresentation`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PhysicalSymTransferBridge.lean` の
+   `partitionFunction`（`PartitionFunction/TransferMatrixRepresentation`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean` の
    具体的な $V_1^{1/2}, V_2, W$ をつなぎ、`hZ1`・`hZ2` を具体的な $c(M)$（具体的な $W$ の Rayleigh 上限）について証明する。
 3. **$W$ と $V^{(+)}$ の橋渡しを構成する。** `EvenSectorBridge`（`Part018/Theorem009_CPlusEqualsLambda.lean`）を、具体的な $W$ と
    `vPlusDataOf` の $V^{(+)}$ について作る（$V^{(+)}$ の実行列表示と、$\mathcal F^{(+)}$ 上で $W x = V^{(+)} x$）。

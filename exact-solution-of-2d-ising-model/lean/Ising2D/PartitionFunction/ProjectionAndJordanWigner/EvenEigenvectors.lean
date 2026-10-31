@@ -14,7 +14,7 @@
 `even_eigenspace_is_complex_subspace` の統合結果。`(+)` だけ）の Lean は、同じ `evenEigenspace` である
 （`evenEigenspace_carrier`）。
 -/
-import Ising2D.Part004.Definition000_TransferMatrixSymbols
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.NecSuf.FixedVectorsSubmodule
 
 namespace Ising2D

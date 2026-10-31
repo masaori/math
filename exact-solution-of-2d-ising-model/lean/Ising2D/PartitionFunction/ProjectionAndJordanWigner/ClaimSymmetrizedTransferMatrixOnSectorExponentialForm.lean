@@ -26,8 +26,8 @@ Lean の `V2_exponential_representation` の右辺 `V2H2Form M (sinh 2K_2) K_2^*
 人手の主張は既存の主張と定義の代入だけなので、必要十分版は置かない（代入の鎖で使う構造の必要十分版は
 1 行目の `Ising2D.NecSuf.sandwich_mul_proj_eq` が持つ）。
 -/
-import Ising2D.Part011.PhysicalSymTransferBridge
-import Ising2D.Part004.ClaimV2InZY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 
 namespace Ising2D
 

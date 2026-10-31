@@ -14,7 +14,7 @@
 ## `sector_replacement_of_V1` の根拠となる命題
 
 ノートの証明は 004 章の `V_1` の固有空間への制限から導いている。その一般形の補題
-（`V1_mulVec_eq_V1pm` ほか）は `Part004/ClaimV1RestrictionToEigenspaces.lean` にあり、
+（`V1_mulVec_eq_V1pm` ほか）は `PartitionFunction/ProjectionAndJordanWigner/ClaimV1RestrictionToEigenspaces.lean` にあり、
 本文の `(+)` だけの主張 `V1_restriction_to_eigenspaces` も同じファイルにある。
 `V1_restrictsOnSector_of_opposite_sign` は一般形の補題からセクターごとの制限を導く。Lean の符号引数では
 `ηsign = -η` であり、偶セクターは `(η, ηsign) = (1, -1)`、奇セクターは `(-1, 1)` である。
@@ -24,8 +24,8 @@
 冪の置き換えに効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」
 「`V_1 P = V_1^{(±)} P`」の 3 点だけで、`P` が射影子の形をしていることすら使わない。
 -/
-import Ising2D.Part004.ClaimV1RestrictionToEigenspaces
-import Ising2D.Part004.ClaimV2InZY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1RestrictionToEigenspaces
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV2InZY
 
 namespace Ising2D
 

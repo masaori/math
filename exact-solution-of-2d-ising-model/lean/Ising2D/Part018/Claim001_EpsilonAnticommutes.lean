@@ -22,7 +22,7 @@
 述語 `Ising2D.IsCheckMode` として受け取る形にしてある。
 -/
 import Ising2D.NecSuf.ParityFermion
-import Ising2D.Part010.Claim010_EpsilonCommutes
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.Part013.Definition003_HalfIntegerModes
 
 namespace Ising2D
