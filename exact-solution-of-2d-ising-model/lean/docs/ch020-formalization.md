@@ -50,7 +50,7 @@
 | `Ising2D.sinh_le_mul_cosh_of_nonneg` | **`sinh t ≤ t cosh t`**（`t ≥ 0`） | (5) 後半 |
 | `Ising2D.cosh_addition_and_half_angle_five` | (1)〜(5) をまとめた形 | 主張全体 |
 
-### 1.2 `Definition002_KappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）
+### 1.2 `CriticalPoint/CriticalPointAndLogDivergence/DefinitionKappaAndCritical.lean`（ラベル `def_kappa`, `def_critical_sinh_product_A`, `gamma_kappa_identity`, `critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -61,26 +61,24 @@
 | `Ising2D.Sparam` / `Sparam_nonneg` / `Sparam_even` | `S(θ) := sinh²(κ/2) + A sin²(θ/2)` | `gamma_kappa_identity` |
 | `Ising2D.sinh_half_gammaFn_sq` | **`sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)`** | `gamma_kappa_identity` (2) |
 | `Ising2D.gammaFn_eq_two_arsinh` | **`γ(θ) = 2 arcsinh √S`** | `gamma_kappa_identity` (3) |
-| `Ising2D.KStar` / `sinh_two_KStar` | `K^* := arsinh(1/sinh 2K)/2` と `sinh 2K^* = 1/sinh 2K`。人手には無い Lean 内の別表示 | `Kstar_eq_KStar` で人手 `def_second_dual_coupling_constant` に接続 |
-| `Ising2D.Kstar_eq_KStar` | `K > 0` で 004 章の `Kstar K`（`-(1/2) log(tanh K)`）と `KStar K` が一致する | `def_second_dual_coupling_constant` |
-| `Ising2D.isoParam_K2star` | 等方な場合の `K_2^*` は `KStar K` | 同上 |
-| `Ising2D.sinh_two_mul_sinh_two_KStar` / `KStar_pos` | `sinh 2K sinh 2K^* = 1`、`K^* > 0` | `sinh_two_mul_sinh_two_KStar` は `KStar` 上の `second_dual_coupling_relation` の対応物、`KStar_pos` は `def_second_dual_coupling_constant` の正値性の対応物。どちらも `Kstar_eq_KStar` を経て人手に接続 |
+| `Ising2D.sinh_two_mul_sinh_two_Kstar` | `sinh 2K sinh 2K^* = 1`（`K^*` は `def_second_dual_coupling_constant` の `Kstar`。`s2star_eq_inv_s2` から） | `def_transfer_matrix_symbols` の `K^*` の定義として引く関係 |
+| `Ising2D.isoParam_K2star` | 等方な場合の `K_2^*` は `Kstar K`（定義から `rfl`） | `isotropic_A_equals_one` の証明の `K_2^* = K^*` |
 | `Ising2D.critical_point_iff_kappa_zero` | **`sinh 2K_1 sinh 2K_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0`** | `critical_point_iff_kappa_zero` |
 | `Ising2D.isoParam` / `AP_isoParam` | 等方な場合 `K_1=K_2=K` と **`A = 1`** | `isotropic_A_equals_one` (1) |
 | `Ising2D.kappaK` / `kappaP_isoParam` | **`κ(K) = 2K - 2K^*`** | `isotropic_A_equals_one` (2) |
 | `Ising2D.gammaFn_isoParam` | 等方な場合の `γ(θ) = 2 arcsinh√(sinh²(κ/2)+sin²(θ/2))` | `isotropic_A_equals_one` (3) |
 
-### 1.3 `Claim006_KappaOfK.lean`（ラベル `kappa_of_K_basic`）
+### 1.3 `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean`（ラベル `kappa_of_K_basic`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.sqrt_two_bounds` / `cosh_02_bounds` / `sinh_02_bounds` | 数値評価の下準備（外部数値を使わず導出） | (4)(5) の数値部分 |
 | `Ising2D.Kc` / `sinh_two_Kc` / `cosh_two_Kc` | **臨界点 `K_c := arsinh 1 / 2`**、`sinh 2K_c = 1` | (1) |
 | `Ising2D.Kc_gt_tenth` / `Kc_pos` | `K_c > 0.1 > 0` | (1) |
-| `Ising2D.kappaK_eq` | `κ(K) = 2K - arsinh(1/sinh 2K)` | (2) |
-| `Ising2D.hasDerivAt_kappaK` / `kappaDeriv` | **`κ'(K) = 2 + 4cosh 2K/sinh 2K · (…)`** | (3) |
+| `Ising2D.hasDerivAt_tanh_real` / `hasDerivAt_Kstar` | `(tanh)' = 1/cosh²`、**`dK^*/dK = -1/sinh 2K`**（`K^* = -(1/2) log(tanh K)` を微分） | (1) の証明 |
+| `Ising2D.hasDerivAt_kappaK` / `kappaDeriv` | **`κ'(K) = 2 + 2/sinh 2K`** | (1) |
 | `Ising2D.hasDerivAt_kappaDeriv` / `kappaSecond` | **`κ''(K)`** | (3) |
-| `Ising2D.kappaK_Kc` / `kappaK_eq_zero_iff` | **`κ(K_c) = 0`、`κ(K) = 0 ⟺ K = K_c`** | (1)(2) |
+| `Ising2D.kappaK_Kc` / `kappaK_eq_zero_iff` | **`κ(K_c) = 0`、`κ(K) = 0 ⟺ K = K_c`**（`critical_point_iff_kappa_zero` の (1) ⟺ (3) と `sinh` の単射性） | (2) |
 | `Ising2D.Dnbhd` / `Dnbhd_convex` / `Kc_mem_Dnbhd` | 近傍 `D = [K_c-0.1, K_c+0.1]`（凸、`K_c` を含む） | (4) |
 | `Ising2D.sinh_two_K_bounds` | `D` 上での `sinh 2K` の上下界 | (4) |
 | `Ising2D.kappaDeriv_bounds` | **`D` 上で `3.52 ≤ κ' ≤ 4.74`**（原文は `[3.53, 4.72]`） | (4) |
@@ -89,7 +87,7 @@
 | `Ising2D.kappaDerivSq` / `abs_deriv_kappaDerivSq_le` | `(κ'²)'` と **`\|(κ'²)'\| ≤ 88.2`**（原文は `87`） | (6) |
 | `Ising2D.abs_kappaDerivSq_sub_le` | **`\|κ'(K)² - 16\| ≤ 25.1\|κ(K)\|`**（原文は `24.7`） | (6) |
 
-### 1.4 `Claim007_GammaDerivatives.lean`（ラベル `gamma_derivatives_in_kappa`）
+### 1.4 `CriticalPoint/CriticalPointAndLogDivergence/ClaimGammaDerivativesInKappa.lean`（ラベル `gamma_derivatives_in_kappa`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -130,7 +128,7 @@
 | `Ising2D.continuous_sineIntegrand` / `continuous_quadIntegrand` | 被積分関数の連続性 | 積分可能性 |
 | `Ising2D.sine_integral_two_sided` | **`2log(π/δ) ≤ ∫_0^π dθ/√(δ²+sin²(θ/2)) ≤ 2log(π/δ)+2δ²/π²+B`** | 主張全体 |
 
-### 1.8 `Theorem011_SecondDerivativeLogDivergence.lean`（ラベル `second_derivative_log_divergence`）
+### 1.8 `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean`（ラベル `second_derivative_log_divergence`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -151,7 +149,7 @@
 | `Ising2D.second_derivative_log_divergence` | **`\|G''(κ) - (1/2π)log(1/\|κ\|)\| ≤ 6/5`（`0 < \|κ\| ≤ 1/2`）** | **主張全体** |
 | `Ising2D.Gsecond_ge` | **`G''(κ) ≥ (1/2π)log(1/\|κ\|) - 6/5 → +∞`（`κ → 0`）** | 主張の帰結 |
 
-### 1.9 `Theorem012_SpecificHeatLogDivergence.lean`（ラベル `specific_heat_log_divergence`）
+### 1.9 `CriticalPoint/CriticalPointAndLogDivergence/TheoremSpecificHeatLogDivergence.lean`（ラベル `specific_heat_log_divergence`）
 
 **章 020 の到達点。** 章 012・018 の自由エネルギー（極限で与えられる）と本章の `G ∘ κ` を
 結ぶ橋渡しを含む。
@@ -192,7 +190,7 @@
 `eventually_hasDerivAt_fFun` で「近傍で一致する」ことを示してから
 `HasDerivAt.congr_of_eventuallyEq` で 2 階微分へ渡している。
 
-### 1.10 `ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`（ラベル `critical_point_sinh_K_c_and_second_derivative_log_divergence`）
+### 1.10 `CriticalPoint/CriticalPointAndLogDivergence/ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`（ラベル `critical_point_sinh_K_c_and_second_derivative_log_divergence`）
 
 臨界点の章の最後に置いたゴールの主張。既存の定理を並べるだけで、仮定は `K > 0` だけである。
 
@@ -206,13 +204,13 @@
 | 必要十分版（`lean/Ising2D/NecSuf/`） | 対応する具体版 | 必要十分版で判明した本質 |
 | --- | --- | --- |
 | `HyperbolicBounds.lean` | `Part020/Claim001_CoshAddHalfAngle.lean`, `Part020/Claim009_ClosedFormLogIntegral.lean` | 原文 (1)〜(5) のうち mathlib に無いのは **`sinh t ≤ t cosh t` 1 本だけ**で、それも `(t cosh t - sinh t)' = t sinh t` の**符号**だけで出る。`t ≥ 0` の仮定は結論の向きのためだけで、単調性自体は `ℝ` 全体で成り立つ。原文の `arcsinh` の逆関数性・微分は**対数発散の本体には効いていない**——効いているのは `arsinh y - log(2y) ∈ [0, 1/(4y²)]` という**平方根の 2 次評価**だけである。 |
-| `MeanValueTwoSided.lean` | `Part020/Claim006_KappaOfK.lean` (5) | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
+| `MeanValueTwoSided.lean` | `CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean` (5) | 原文は (R4)（微分積分学の基本定理）＋(R3)（積分の単調性）で `3.53\|K-K_c\| ≤ \|κ\| ≤ 4.72\|K-K_c\|` を出すが、**積分は効いていない**。効いているのは (a) 定義域が凸 (b) 導関数が定数で両側から抑えられる (c) 下界が非負、の 3 点だけで、**平均値の定理で足りる**。`κ` が Ising 模型の量であることも `arcsinh` で書けることも効いていない。 |
 | `LogDivergentIntegral.lean` | `Part020/Claim009_ClosedFormLogIntegral.lean`, `Part020/Claim010_SineIntegralTwoSided.lean` | **`sin` は効いていない。** 対数発散に効いているのは被積分関数の分母 `w` についての 2 つの各点評価 `c₀(aθ) ≤ w(θ) ≤ aθ` と `aθ - w(θ) ≤ Cθ³` **だけ**である。この 2 条件から差が `δ` に依存しない定数で抑えられ、発散の形は `∫_0^b dθ/√(δ²+(aθ)²) = arsinh(ab/δ)/a` という**完全に初等的な積分**だけで決まる。三角関数も周期性も `θ/2` という内部関数も効いていない。さらに原文の定数 `B = π²/(12c_0(1+c_0))` は必要十分版の `Cb²/(c_0(1+c_0)a²)` に `a=1/2, b=π, C=1/48` を入れたものと**厳密に一致する**（原文の定数は最良化されていないが、必要十分版と同じ値）。 |
-| `DiffUnderIntegral.lean` | `Part020/Theorem011_SecondDerivativeLogDivergence.lean` | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
+| `DiffUnderIntegral.lean` | `CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean` | 原文 (R5) は `[a,b]×[x_1,x_2]`（有界閉長方形）で述べているが、効いているのは (a) 積分区間がコンパクト (b) パラメータの動く範囲が `x_0` の**近傍**（閉区間である必要はない） (c) `g` と `∂g/∂x` がその上で連続、の 3 点だけである。被積分関数が `θ` について偶関数であることも、`γ` が Ising 模型に由来することも効いていない。**mathlib に (R5) のこの形は無く**、優関数版から導出する必要があった（コンパクト上の連続関数の有界性で優関数を定数に取る）。 |
 
 ### 必要十分版を立てなかった主張とその理由
 
-* **`Claim007_GammaDerivatives.lean`（`gamma_derivatives_in_kappa`）**:
+* **`CriticalPoint/CriticalPointAndLogDivergence/ClaimGammaDerivativesInKappa.lean`（`gamma_derivatives_in_kappa`）**:
   内容は「`κ ↦ 2 arcsinh√(sinh²(κ/2)+c)` の 1・2 階導関数を計算する」ことで、効いているのは
   合成関数の微分と `arcsinh' = 1/√(1+y²)` だけ。`θ` は「`κ` に依存しない非負定数 `c` を足す」
   以上の役割を持たない。この観察を必要十分版に切り出しても mathlib の `HasDerivAt` の合成規則を

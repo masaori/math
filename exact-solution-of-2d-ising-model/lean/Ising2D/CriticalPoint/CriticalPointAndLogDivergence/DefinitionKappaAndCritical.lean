@@ -13,10 +13,10 @@
 
 ## 原文との対応で明示した前提
 
-`Ising2D.IsingParam.K2star` は 004 章の `Kstar`（`-(1/2) log(tanh K_2)`）で定まる。
-双対関係が要る主張（`critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）は、
-`sinh 2K sinh 2K^* = 1` を定義から直接読める `Ising2D.KStar`（`K^* := arsinh(1/sinh 2K)/2`）で
-述べてあり、両者が `K > 0` で一致することを `Kstar_eq_KStar` で示して接続する。
+`K^*` は `def_second_dual_coupling_constant` の `Ising2D.Kstar`（`-(1/2) log(tanh K)`）だけを使う。
+人手が `def_transfer_matrix_symbols` の `K^*` の定義として引く `sinh 2K sinh 2K^* = 1` は、
+`duality_c2_star_eq_s2_star_c2` の第一式 `s2star_eq_inv_s2`（`sinh 2K^* = 1/sinh 2K`）から得る
+（`sinh_two_mul_sinh_two_Kstar`）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
 import Ising2D.Part020.Claim001_CoshAddHalfAngle
@@ -102,45 +102,35 @@ theorem Sparam_even (κ A θ : ℝ) :
 
 /-! ## 臨界条件 -/
 
-/-- 原文 `def_transfer_matrix_symbols` の `K^*`（`sinh 2K sinh 2K^* = 1` で定まる）。 -/
-noncomputable def KStar (K : ℝ) : ℝ := Real.arsinh (1 / Real.sinh (2 * K)) / 2
-
-theorem sinh_two_KStar (K : ℝ) : Real.sinh (2 * KStar K) = 1 / Real.sinh (2 * K) := by
-  rw [KStar, show 2 * (Real.arsinh (1 / Real.sinh (2 * K)) / 2)
-    = Real.arsinh (1 / Real.sinh (2 * K)) by ring, Real.sinh_arsinh]
-
-/-- 原文の定義そのもの: `sinh 2K sinh 2K^* = 1`（`K > 0`）。 -/
-theorem sinh_two_mul_sinh_two_KStar {K : ℝ} (hK : 0 < K) :
-    Real.sinh (2 * K) * Real.sinh (2 * KStar K) = 1 := by
+/-- 人手 `def_transfer_matrix_symbols` の `K^*` の定義として引く `sinh 2K sinh 2K^* = 1`（`K > 0`）。
+`s2star_eq_inv_s2`（`sinh 2K^* = 1/sinh 2K`）の両辺に `sinh 2K ≠ 0` を掛けたもの。 -/
+theorem sinh_two_mul_sinh_two_Kstar {K : ℝ} (hK : 0 < K) :
+    Real.sinh (2 * K) * Real.sinh (2 * Kstar K) = 1 := by
   have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
-  rw [sinh_two_KStar]
+  rw [s2star_eq_inv_s2 hK]
   field_simp
-
-theorem KStar_pos {K : ℝ} (hK : 0 < K) : 0 < KStar K := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
-  have : 0 < 1 / Real.sinh (2 * K) := by positivity
-  have := Real.arsinh_pos_iff.2 this
-  simp only [KStar]
-  linarith
 
 /-- **人手証明 `critical_point_iff_kappa_zero`**:
 `sinh 2K_1 sinh 2K_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0`。 -/
 theorem critical_point_iff_kappa_zero {K1 K2 : ℝ} (_hK1 : 0 < K1) (hK2 : 0 < K2) :
-    (Real.sinh (2 * K1) * Real.sinh (2 * K2) = 1 ↔ K1 = KStar K2) ∧
-    (K1 = KStar K2 ↔ 2 * K1 - 2 * KStar K2 = 0) := by
+    (Real.sinh (2 * K1) * Real.sinh (2 * K2) = 1 ↔ K1 = Kstar K2) ∧
+    (K1 = Kstar K2 ↔ 2 * K1 - 2 * Kstar K2 = 0) := by
   have hs2 : 0 < Real.sinh (2 * K2) := Real.sinh_pos_iff.2 (by linarith)
   constructor
   · constructor
     · intro h
+      -- `s_2 > 0` で両辺を割る
       have h1 : Real.sinh (2 * K1) = 1 / Real.sinh (2 * K2) := by
         field_simp at h ⊢; linarith [h]
-      rw [← sinh_two_KStar K2] at h1
+      -- `sinh 2K_2^* = 1/s_2`
+      rw [← s2star_eq_inv_s2 hK2] at h1
+      -- `sinh` の単射性（`cosh_addition_and_half_angle` (3)）
       have := sinh_injective_real h1
       linarith
     · intro h
       rw [h]
-      have := sinh_two_mul_sinh_two_KStar hK2
-      linarith [this, sinh_two_KStar K2]
+      have := sinh_two_mul_sinh_two_Kstar hK2
+      linarith [this]
   · constructor
     · intro h; rw [h]; ring
     · intro h; linarith
@@ -154,25 +144,17 @@ noncomputable def isoParam (K : ℝ) (hK : 0 < K) : IsingParam where
   K1_pos := hK
   K2_pos := hK
 
-/-- 004 章の `Kstar`（`-(1/2) log(tanh K)`）と本ファイルの `KStar`（`arsinh(1/sinh 2K)/2`）は
-`K > 0` で一致する。どちらも `sinh 2K^* = 1/sinh 2K` を満たし、`sinh` は単射である。 -/
-theorem Kstar_eq_KStar {K : ℝ} (hK : 0 < K) : Kstar K = KStar K := by
-  have h : Real.sinh (2 * Kstar K) = Real.sinh (2 * KStar K) := by
-    rw [s2star_eq_inv_s2 hK, sinh_two_KStar]
-  have := sinh_injective_real h
-  linarith
-
-/-- 等方な場合の `K_2^*` は `KStar K`。 -/
-theorem isoParam_K2star (K : ℝ) (hK : 0 < K) : (isoParam K hK).K2star = KStar K :=
-  Kstar_eq_KStar hK
+/-- 等方な場合の `K_2^*` は `K^*`（人手 `isotropic_A_equals_one` の証明の `K_2^* = K^*`）。 -/
+theorem isoParam_K2star (K : ℝ) (hK : 0 < K) : (isoParam K hK).K2star = Kstar K :=
+  rfl
 
 /-- **人手証明 `isotropic_A_equals_one`**: 等方な場合 `A = 1`。 -/
 theorem AP_isoParam (K : ℝ) (hK : 0 < K) : AP (isoParam K hK) = 1 := by
   rw [AP, isoParam_K2star]
-  exact sinh_two_mul_sinh_two_KStar hK
+  exact sinh_two_mul_sinh_two_Kstar hK
 
 /-- 等方な場合の `κ(K) = 2K - 2K^*`。 -/
-noncomputable def kappaK (K : ℝ) : ℝ := 2 * K - 2 * KStar K
+noncomputable def kappaK (K : ℝ) : ℝ := 2 * K - 2 * Kstar K
 
 theorem kappaP_isoParam (K : ℝ) (hK : 0 < K) : kappaP (isoParam K hK) = kappaK K := by
   rw [kappaP, isoParam_K2star, kappaK]

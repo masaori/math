@@ -27,17 +27,16 @@
 | `\|κ'²-16\|/\|κ\|` | `24.7` | `25.1` |
 
 **この差は `second_derivative_log_divergence` の結論の定数 `6/5` を変えない**ことを
-`Theorem011_SecondDerivativeLogDivergence.lean` で確認してある。
-（`specific_heat_log_divergence`（原文 `critical_012`）は未形式化。
-理由は `lean/docs/ch020-formalization.md` の「3. 形式化できなかった主張」を見よ。）
+`TheoremSecondDerivativeLogDivergence.lean` で確認してある。
 
 また原文は `|κ''|` の上界に「`t ↦ 4cosh t/sinh²t` が `t > 0` で単調減少」を使うが、
 本形式化では `cosh 2K = √(1 + sinh²2K)` に直して
 「`s ↦ 4√(1+s²)/s²` が `s > 0` で単調減少」という**代数的な**形で使う
 （`sinh` の単調性しか要らず、微分が要らない）。
 -/
-import Ising2D.Part020.Definition002_KappaAndCritical
+import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.DefinitionKappaAndCritical
 import Ising2D.NecSuf.MeanValueTwoSided
+import Mathlib.Analysis.SpecialFunctions.Log.Deriv
 
 namespace Ising2D
 
@@ -103,38 +102,55 @@ noncomputable def kappaDeriv (K : ℝ) : ℝ := 2 + 2 / Real.sinh (2 * K)
 noncomputable def kappaSecond (K : ℝ) : ℝ :=
   -(4 * Real.cosh (2 * K)) / Real.sinh (2 * K) ^ 2
 
-theorem kappaK_eq (K : ℝ) : kappaK K = 2 * K - Real.arsinh ((Real.sinh (2 * K))⁻¹) := by
-  simp only [kappaK, KStar, one_div]; ring
+/-- 人手 `kappa_of_K_basic` (1) の証明の `(tanh)' = 1/cosh²`。`tanh = sinh/cosh` の商の微分。 -/
+theorem hasDerivAt_tanh_real (K : ℝ) : HasDerivAt Real.tanh (1 / Real.cosh K ^ 2) K := by
+  have hc : Real.cosh K ≠ 0 := ne_of_gt (Real.cosh_pos K)
+  have hfun : Real.tanh = Real.sinh / Real.cosh := by
+    funext x; exact Real.tanh_eq_sinh_div_cosh x
+  have h := (Real.hasDerivAt_sinh K).div (Real.hasDerivAt_cosh K) hc
+  -- `cosh² K - sinh² K = 1`
+  have hv : (Real.cosh K * Real.cosh K - Real.sinh K * Real.sinh K) / Real.cosh K ^ 2
+      = 1 / Real.cosh K ^ 2 := by
+    rw [← Real.cosh_sq_sub_sinh_sq K]; ring
+  rw [hfun, ← hv]
+  exact h
 
-/-- **人手証明 `kappa_of_K_basic` (1)**: `κ'(K) = 2 + 2/sinh 2K`。 -/
+/-- 人手 `kappa_of_K_basic` (1) の証明の `dK^*/dK = -1/sinh 2K`（`K > 0`）。
+`K^* = -(1/2) log(tanh K)`（`def_second_dual_coupling_constant`）を、`log` の微分と合成関数の微分、
+`(tanh)' = 1/cosh²`、倍角公式 `sinh 2K = 2 sinh K cosh K` の順に使って微分する。 -/
+theorem hasDerivAt_Kstar {K : ℝ} (hK : 0 < K) :
+    HasDerivAt Kstar (-(1 / Real.sinh (2 * K))) K := by
+  have ht : 0 < Real.tanh K := tanh_pos hK
+  have hs : 0 < Real.sinh K := Real.sinh_pos_iff.2 hK
+  have hc : 0 < Real.cosh K := Real.cosh_pos K
+  -- `log` の微分と合成関数の微分
+  have h := (HasDerivAt.log (hasDerivAt_tanh_real K) (ne_of_gt ht)).const_mul (-(1 / 2 : ℝ))
+  have hfun : Kstar = fun x => -(1 / 2) * Real.log (Real.tanh x) := by
+    funext x; rfl
+  -- `tanh = sinh/cosh` と倍角公式、`ℝ` の四則
+  have hv : -(1 / 2 : ℝ) * (1 / Real.cosh K ^ 2 / Real.tanh K) = -(1 / Real.sinh (2 * K)) :=
+    calc -(1 / 2 : ℝ) * (1 / Real.cosh K ^ 2 / Real.tanh K)
+        = -(1 / 2 : ℝ) * (Real.cosh K / Real.sinh K) * (1 / Real.cosh K ^ 2) := by
+          -- `1/tanh = cosh/sinh`
+          rw [Real.tanh_eq_sinh_div_cosh]; field_simp
+      _ = -(1 / (2 * Real.sinh K * Real.cosh K)) := by
+          -- `ℝ` の四則
+          field_simp
+      _ = -(1 / Real.sinh (2 * K)) := by
+          -- 倍角公式 `sinh 2K = 2 sinh K cosh K`
+          rw [Real.sinh_two_mul]
+  rw [hfun, ← hv]
+  exact h
+
+/-- **人手証明 `kappa_of_K_basic` (1)**: `κ'(K) = 2 - 2 dK^*/dK = 2 + 2/sinh 2K`。 -/
 theorem hasDerivAt_kappaK {K : ℝ} (hK : 0 < K) : HasDerivAt kappaK (kappaDeriv K) K := by
-  have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
-  have hc : 0 < Real.cosh (2 * K) := Real.cosh_pos _
-  have hcs : Real.cosh (2 * K) ^ 2 = Real.sinh (2 * K) ^ 2 + 1 := Real.cosh_sq _
-  have hfun : kappaK = fun x : ℝ => 2 * x - Real.arsinh ((Real.sinh (2 * x))⁻¹) := by
-    funext x; exact kappaK_eq x
   have h2 : HasDerivAt (fun x : ℝ => 2 * x) 2 K := by
     simpa using (hasDerivAt_id K).const_mul (2 : ℝ)
-  have hsin : HasDerivAt (fun x : ℝ => Real.sinh (2 * x)) (Real.cosh (2 * K) * 2) K := h2.sinh
-  have hone : HasDerivAt (fun x : ℝ => (Real.sinh (2 * x))⁻¹)
-      (-(Real.cosh (2 * K) * 2) / Real.sinh (2 * K) ^ 2) K := hsin.inv (ne_of_gt hs)
-  have harc := hone.arsinh
-  have hroot : Real.sqrt (1 + ((Real.sinh (2 * K))⁻¹) ^ 2)
-      = Real.cosh (2 * K) / Real.sinh (2 * K) := by
-    have heq : (1 : ℝ) + ((Real.sinh (2 * K))⁻¹) ^ 2
-        = (Real.cosh (2 * K) / Real.sinh (2 * K)) ^ 2 := by
-      field_simp
-      linarith [hcs]
-    rw [heq, Real.sqrt_sq (by positivity)]
-  have hval : (Real.sqrt (1 + ((Real.sinh (2 * K))⁻¹) ^ 2))⁻¹
-      • (-(Real.cosh (2 * K) * 2) / Real.sinh (2 * K) ^ 2) = -(2 / Real.sinh (2 * K)) := by
-    simp only [smul_eq_mul, hroot]
-    field_simp
-  rw [hval] at harc
-  have hres := h2.sub harc
-  have hv2 : (2 : ℝ) - -(2 / Real.sinh (2 * K)) = kappaDeriv K := by
+  have hres := h2.sub ((hasDerivAt_Kstar hK).const_mul 2)
+  have hv : (2 : ℝ) - 2 * -(1 / Real.sinh (2 * K)) = kappaDeriv K := by
     simp only [kappaDeriv]; ring
-  rw [hv2] at hres
+  rw [hv] at hres
+  have hfun : kappaK = fun x : ℝ => 2 * x - 2 * Kstar x := rfl
   rw [hfun]
   exact hres
 
@@ -155,27 +171,24 @@ theorem hasDerivAt_kappaDeriv {K : ℝ} (hK : 0 < K) :
   rw [hv] at hres
   exact hres
 
-/-- **人手証明 `kappa_of_K_basic` (2)**: `κ(K_c) = 0`。 -/
+/-- **人手証明 `kappa_of_K_basic` (2)**: `κ(K_c) = 0`。
+`sinh 2K_c = 1` から `s_1 s_2 = sinh² 2K_c = 1` で、`critical_point_iff_kappa_zero` の (1) ⟹ (3)。 -/
 theorem kappaK_Kc : kappaK Kc = 0 := by
-  rw [kappaK_eq, sinh_two_Kc]
-  norm_num
-  rw [Kc]
-  ring
+  have h1 : Real.sinh (2 * Kc) * Real.sinh (2 * Kc) = 1 := by
+    rw [sinh_two_Kc]; norm_num
+  have hcrit := critical_point_iff_kappa_zero Kc_pos Kc_pos
+  exact hcrit.2.1 (hcrit.1.1 h1)
 
-/-- **人手証明 `kappa_of_K_basic` (2)**: `κ(K) = 0 ⟺ K = K_c`（`K > 0`）。 -/
+/-- **人手証明 `kappa_of_K_basic` (2)**: `κ(K) = 0 ⟺ K = K_c`（`K > 0`）。
+`κ(K) = 0` なら `critical_point_iff_kappa_zero` の (3) ⟹ (1) で `sinh² 2K = 1`、
+`sinh 2K > 0` より `sinh 2K = 1 = sinh 2K_c`、`sinh` の単射性で `K = K_c`。 -/
 theorem kappaK_eq_zero_iff {K : ℝ} (hK : 0 < K) : kappaK K = 0 ↔ K = Kc := by
   constructor
   · intro h
+    have hcrit := critical_point_iff_kappa_zero hK hK
+    have h1 : Real.sinh (2 * K) * Real.sinh (2 * K) = 1 := hcrit.1.2 (hcrit.2.2 h)
     have hs : 0 < Real.sinh (2 * K) := Real.sinh_pos_iff.2 (by linarith)
-    have h1 : Real.arsinh ((Real.sinh (2 * K))⁻¹) = 2 * K := by
-      rw [kappaK_eq] at h; linarith
-    have h2 : Real.sinh (Real.arsinh ((Real.sinh (2 * K))⁻¹)) = (Real.sinh (2 * K))⁻¹ :=
-      Real.sinh_arsinh _
-    rw [h1] at h2
-    have h3 : Real.sinh (2 * K) = 1 := by
-      have hne : Real.sinh (2 * K) ≠ 0 := ne_of_gt hs
-      field_simp at h2
-      nlinarith [h2, hs]
+    have h3 : Real.sinh (2 * K) = 1 := by nlinarith [h1, hs]
     have h4 : Real.sinh (2 * K) = Real.sinh (2 * Kc) := by rw [h3, sinh_two_Kc]
     have := sinh_injective_real h4
     linarith

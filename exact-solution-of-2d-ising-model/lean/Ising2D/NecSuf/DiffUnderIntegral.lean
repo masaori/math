@@ -5,7 +5,7 @@
 それを使う `second_derivative_log_divergence`
 （正本は `structured-latex/content/critical_point_and_log_divergence.ts`）
 
-具体版: `Ising2D/Part020/Theorem011_SecondDerivativeLogDivergence.lean`
+具体版: `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/TheoremSecondDerivativeLogDivergence.lean`
 
 ## 人手証明が外から持ち込むと宣言している事実と、mathlib の対応
 

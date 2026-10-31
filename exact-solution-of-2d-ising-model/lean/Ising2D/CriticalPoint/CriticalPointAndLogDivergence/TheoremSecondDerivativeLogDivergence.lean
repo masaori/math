@@ -13,7 +13,7 @@
 ## 原文との差
 
 原文は各段の数値評価に `cosh 0.2 ≤ 1.02007` のような外部の数値を使うが、本形式化では
-`Ising2D/NecSuf/HyperbolicBounds.lean` の `cosh t ≤ (1-t²/2)⁻¹` だけを使う（`Claim006` 参照）。
+`Ising2D/NecSuf/HyperbolicBounds.lean` の `cosh t ≤ (1-t²/2)⁻¹` だけを使う（`ClaimKappaOfKBasic.lean` 参照）。
 そのため途中の定数は原文とわずかに異なるが、**結論の定数 `6/5` は原文のまま成立する**
 （本形式化の評価では `|2πG'' - log(1/κ)| ≤ 6.9`、`6.9/2π ≤ 1.10 ≤ 6/5`)。
 
@@ -21,7 +21,7 @@
 `R` の上界と下界は別々の項から来るので、実際には
 `-(π/2)cosh(κ/2) ≤ R ≤ 2δ²/π² + B` であり和を取る必要はない（本形式化ではこちらを使う）。
 -/
-import Ising2D.Part020.Claim007_GammaDerivatives
+import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimGammaDerivativesInKappa
 import Ising2D.Part020.Claim010_SineIntegralTwoSided
 import Ising2D.NecSuf.DiffUnderIntegral
 import Mathlib.Analysis.Complex.ExponentialBounds

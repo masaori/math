@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `kappa_of_K_basic` (5)
 （正本は `structured-latex/content/critical_point_and_log_divergence.ts`）
 
-具体版: `Ising2D/Part020/Claim006_KappaOfK.lean`
+具体版: `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean`
 
 ## この主張に本質的に効いている構造は何か
 

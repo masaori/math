@@ -54,7 +54,7 @@
   - **章末のゴールの主張を足した。** (1) `kappa_of_K_basic` の $K_c$ は $K_c=\frac12\log(1+\sqrt2)\in\mathbb R_{>0}$ を満たし、$\sinh2K=1$ を満たす $K\in\mathbb R_{>0}$ は $K_c$ だけ、(2) $0<|K-K_c|\le\frac1{10}$ で $f(K):=\frac12\log(2\sinh2K)+\frac1{4\pi}\int_0^{2\pi}\gamma(\theta)d\theta$ は 2 回微分可能で
     $|f''(K)-\frac8\pi\log\frac1{|K-K_c|}|\le49$、を主張する claim `critical_point_sinh_K_c_and_second_derivative_log_divergence` を章の最後に置いた。証明は `cosh_addition_and_half_angle` (3)(4) による式変形と、$f$ を `specific_heat_log_divergence` の $f$ に書き直して二つ目の不等式を引くだけである。
     SageMath（`sagemath/check/critical_point_sinh_K_c_and_second_derivative_log_divergence/`。(1) は QQbar で厳密、(2) は mpmath で $|K-K_c|$ を 0.1 から 1e-24 まで。否定コントロールは $K_c'=\frac12\log2$ と係数 $4/\pi$）と
-    Lean（`lean/Ising2D/Part020/ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`。仮定は $K>0$ だけ。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。章の項目数は 11（割り当て 10 とゴールの主張 1。章立て案は 10）。
+    Lean（`lean/Ising2D/CriticalPoint/CriticalPointAndLogDivergence/ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`。仮定は $K>0$ だけ。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。章の項目数は 11（割り当て 10 とゴールの主張 1。章立て案は 10）。
   - **実数解析の事実の注記を二つに分けた。** 020 に残った 4 項が (R3) 積分の線型性と単調性・(R4) 微分積分学の基本定理を使うので、その宣言を 020 の章見出しの直後の新しい注記 `remark_real_analysis_facts_R3_R4` に置き（文面は旧注記のまま）、
     臨界点の章の冒頭へ移した `remark_real_analysis_escape_chapter_E` はそれを引いて (R5)(R6) だけを足す形にした。前の章の `remark_real_analysis_escape_point` が後ろの章の注記を指していた参照は、(R3)(R4) の注記への参照と「臨界点の章の冒頭」という言葉に直した。
   - **物理的な比熱との対応の注記（`remark_physical_specific_heat`）を本文から参照用ノート `notes/critical_point_physical_specific_heat_not_adopted.ts` へ退避した。** 比熱・絶対温度・Boltzmann 定数は本文で定義されない物理の量で、数学的主張ではないため。理由をノートに書いた。

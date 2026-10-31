@@ -21,18 +21,18 @@
 
 2. **本体**（人手証明 Step 2〜6）。`fFun` を `K` について 2 回微分し、
    `Ising2D.second_derivative_log_divergence`（章 020）と
-   `Ising2D.kappa_of_K_basic` 系の評価（`Part020/Claim006_KappaOfK.lean`）から
+   `Ising2D.kappa_of_K_basic` 系の評価（`CriticalPoint/CriticalPointAndLogDivergence/ClaimKappaOfKBasic.lean`）から
    `|f''(K) - (8/π) log(1/|κ(K)|)| ≤ 45` を出す。
 
 ## 原文との差
 
-各段の定数は `Claim006_KappaOfK.lean` / `Theorem011_...` と同じく、原文の外部数値
+各段の定数は `ClaimKappaOfKBasic.lean` / `TheoremSecondDerivativeLogDivergence.lean` と同じく、原文の外部数値
 （`cosh 0.2 ≤ 1.02007` 等）を持ち込まずに導いた値を使う。そのため原文の
 `3.70 + 4.60 + 15.44 + 19.2 = 42.94` に対し本形式化では
 `3.74 + 4.65 + 15.75 + 19.2 = 43.34` となるが、**結論の定数 45 は原文のまま成立する**。
 -/
-import Ising2D.Part020.Claim006_KappaOfK
-import Ising2D.Part020.Theorem011_SecondDerivativeLogDivergence
+import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.ClaimKappaOfKBasic
+import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.TheoremSecondDerivativeLogDivergence
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerExactSolution
 
 namespace Ising2D

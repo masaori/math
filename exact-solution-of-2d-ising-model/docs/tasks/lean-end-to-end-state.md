@@ -58,8 +58,7 @@
   `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`）にし、`onsager_exact_solution_unconditional` の第 1 成分をそれで与えた。
   `onsager_limit_in_M` は人手 `onsager_exact_solution` の Step 3（挟み撃ち）と同じく `Λ ≤ c(M)` から正値性を出す。必要十分版は置かない（新しい計算を含まない）。
 - `lake build`、`check-no-sorry.sh`、`check-end-to-end.sh` はすべて通る（通しの定理は `sorryAx` に依存しない）。
-- Part020 に人手の定義と別表示の `KStar`（`arsinh(1/sinh 2K)/2`）が残っている。`Kstar_eq_KStar` で
-  人手の `Kstar` へ接続したが、二重定義の解消は項目 7 の章ごとの移動のときに行う。
+- 人手の定義と別表示だった `KStar`（`arsinh(1/sinh 2K)/2`）は、臨界点の章を移したときに消し、`Kstar`（人手 `def_second_dual_coupling_constant`）に一本化した。
 - 項目 7 は章ごとに進めている。置き場の規則は runbook の項目 7 に書いた。
   - 部「分配関数」の章「転送行列による表示」（済み）: 14 ファイルを `Ising2D/PartitionFunction/TransferMatrixRepresentation/` へ移した
     （旧 `Part001/` の 6 本は全部、旧 `Part004/` から `DefinitionConfigBasisIso`・`ClaimConfigNumberingEqualsKroneckerNumbering`・`ClaimSigmaZDiagonalAction`・
@@ -143,15 +142,27 @@
     `EigenvalueProblem/EigenvaluesOfVPlus/TheoremOnsagerFreeEnergy.lean` にあり、どちらも前の章で多数決により置いた。
     `Part011/` に残るのは `Basic`（補助）・`Claim005_PsdCauchySchwarz`（数学的道具立て）・`Claim010_SectorDecomposition`（(−) セクターの記録）、
     `Part012/` に残るのは `Theorem004_RiemannSumToIntegral`（`riemann_sum_to_integral`）である。
+  - 部「臨界点」の章「臨界点 K_c と d²f/dK² の対数発散」（済み）: 6 ファイルを `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/` へ移した。
+    旧 `Part020/` から `DefinitionKappaAndCritical`（旧 `Definition002_KappaAndCritical`）・`ClaimKappaOfKBasic`（旧 `Claim006_KappaOfK`）・
+    `ClaimGammaDerivativesInKappa`（旧 `Claim007_GammaDerivatives`）・`TheoremSecondDerivativeLogDivergence`（旧 `Theorem011_SecondDerivativeLogDivergence`）・
+    `TheoremSpecificHeatLogDivergence`（旧 `Theorem012_SpecificHeatLogDivergence`）・`ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence` である。
+    `Part020/` に残る `Claim001_CoshAddHalfAngle`（`cosh_addition_and_half_angle`。数学的道具立て「実数の平方根・指数関数・双曲線関数」）と
+    `Claim008`〜`Claim010`（数学的道具立て「三角関数の評価・有限和・積分」）は数学的道具立てへ移すときに扱う。
+    同じ回で `KStar` の二重定義を解消した。`kappaK K := 2K - 2·Kstar K` とし、`critical_point_iff_kappa_zero`・`isoParam_K2star`（`rfl`）・`AP_isoParam` を `Kstar` で書き直した
+    （`sinh 2K sinh 2K^* = 1` は `s2star_eq_inv_s2` から `sinh_two_mul_sinh_two_Kstar`）。`ClaimKappaOfKBasic` の arsinh 形の `kappaK_eq` を消し、
+    人手 `kappa_of_K_basic` (1) の証明どおり `(tanh)' = 1/cosh²`（`hasDerivAt_tanh_real`）と `dK^*/dK = -1/sinh 2K`（`hasDerivAt_Kstar`）から `κ'` を出し、
+    (2) は `critical_point_iff_kappa_zero` の (1) ⟺ (3) と `sinh` の単射性で示すようにした。`check-no-sorry.sh` の対象も入れ替えた。
+    人手 (1) の `κ' > 0` と (2) の `κ(K)=0 ⟺ sinh² 2K = 1` は独立した定理として置いていない（以前からの差。後退ではない）。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の 9 番目の章、部「臨界点」の「臨界点 K_c と d²f/dK² の対数発散」（フォルダ `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/`。
-章の英語名は、論文側のファイル名 `critical_point_and_log_divergence.ts` と棚卸しの `chapterKey` の `chapter_organization_goal_` の後ろの語）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_critical_point_and_log_divergence` の項を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part020/` のファイル。`Claim008`〜`Claim010` の三角関数の評価・積分は数学的道具立て「三角関数の評価・有限和・積分」の項なので数えない。冒頭の項目名を数え、参照だけの項目は数えない）。
-`Part020/` の `KStar` の二重定義（`Kstar_eq_KStar` で接続済み）はこの章を移すときに解消する。
-`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+項目 7 の部「数学的道具立て」を、棚卸しの `mathematicalToolGroups` の並びで、形式化したファイルがあるまとまりから一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す
+（英語名は runbook の例「行列指数関数と交換子計算」→ `MatrixExponentialAndCommutators` に倣い、まとまりの名前を英語で表した内容の分かる名前にする）。
+候補は `Part000/`・`Part002/`（冒頭が旧 Typst のパスで書かれたファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）、`Part004/ClaimExpOfDiagonalMatrix`、
+`Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、
+`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 4 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
+1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

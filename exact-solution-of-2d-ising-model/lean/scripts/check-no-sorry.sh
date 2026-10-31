@@ -65,7 +65,6 @@ targets=(
   Ising2D.duality_c2_star_eq_s2_star_c2
   Ising2D.IsingParam.K2star_pos
   Ising2D.IsingParam.c2_mul_s2star_eq_c2star
-  Ising2D.Kstar_eq_KStar
   Ising2D.isoParam_K2star
   Ising2D.commute_V1_epsProj
   Ising2D.commute_V2_epsProj
@@ -1134,10 +1133,7 @@ targets=(
   Ising2D.sinh_half_gammaFn_sq
   Ising2D.gammaFn_eq_two_arsinh
   Ising2D.Sparam_even
-  Ising2D.KStar
-  Ising2D.sinh_two_KStar
-  Ising2D.sinh_two_mul_sinh_two_KStar
-  Ising2D.KStar_pos
+  Ising2D.sinh_two_mul_sinh_two_Kstar
   Ising2D.critical_point_iff_kappa_zero
   Ising2D.isoParam
   Ising2D.AP_isoParam
@@ -1154,7 +1150,8 @@ targets=(
   Ising2D.Kc_pos
   Ising2D.kappaDeriv
   Ising2D.kappaSecond
-  Ising2D.kappaK_eq
+  Ising2D.hasDerivAt_tanh_real
+  Ising2D.hasDerivAt_Kstar
   Ising2D.hasDerivAt_kappaK
   Ising2D.hasDerivAt_kappaDeriv
   Ising2D.kappaK_Kc

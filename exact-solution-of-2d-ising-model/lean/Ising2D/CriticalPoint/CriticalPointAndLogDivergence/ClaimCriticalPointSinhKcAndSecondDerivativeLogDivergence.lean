@@ -32,7 +32,7 @@
 （`κ` の増分の評価の必要十分版は `Ising2D/NecSuf/MeanValueTwoSided.lean`、積分記号下の微分は
 `Ising2D/NecSuf/DiffUnderIntegral.lean` が持つ）。
 -/
-import Ising2D.Part020.Theorem012_SpecificHeatLogDivergence
+import Ising2D.CriticalPoint.CriticalPointAndLogDivergence.TheoremSpecificHeatLogDivergence
 
 namespace Ising2D
 
