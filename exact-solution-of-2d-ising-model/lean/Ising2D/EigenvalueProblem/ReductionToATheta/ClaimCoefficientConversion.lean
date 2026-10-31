@@ -7,7 +7,7 @@
 
 **必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の
 `Ising2D.NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`
-（`Part014/Claim002_NestedCommutator.lean` と同じもの）。
+（`EigenvalueProblem/ReductionToATheta/ClaimNestedCommutator.lean` と同じもの）。
 
 ## 原文との対応
 
@@ -24,7 +24,7 @@
 とくに `s` が純虚数 `2iK_1` から実の `K_1` へ変わることが、原文の
 `(-1)^{n/2}(2K_1)^n → K_1^n` という符号の消滅の正体である。
 -/
-import Ising2D.Part014.Claim002_NestedCommutator
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimNestedCommutator
 
 namespace Ising2D
 

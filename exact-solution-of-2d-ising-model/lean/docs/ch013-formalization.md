@@ -4,7 +4,7 @@
 
 新規ファイル:
 
-- 具体版: `lean/Ising2D/Part013/`
+- 具体版: `lean/Ising2D/Part013/`（指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
 - 必要十分版: `lean/Ising2D/NecSuf/AntiperiodicFourier.lean`
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 013 の作業記録）。
@@ -93,19 +93,19 @@
 
 | 導出した定理 | 元の必要十分版 | ファイル |
 | --- | --- | --- |
-| `Ising2D.antiperiodic_complex_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
-| `Ising2D.antiperiodic_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
+| `Ising2D.antiperiodic_complex_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean` |
+| `Ising2D.antiperiodic_exp_sum_delta_difference_of_necSuf` | `NecSuf.sum_zpow_antiperiodic_delta_difference` | `EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean` |
 | `Ising2D.antiperiodic_complex_exp_sum_dvd_even_of_necSuf` / `antiperiodic_complex_exp_sum_dvd_odd_of_necSuf` / `antiperiodic_complex_exp_sum_not_dvd_of_necSuf` | 必要十分版の偶数・奇数・非整除の場合 | 同上 |
 | `Ising2D.antiperiodic_complex_exp_sum_dvd_of_necSuf` | 必要十分版の偶数・奇数の場合を合わせた本文の `k=lM` の主張 | 同上 |
 | `Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt_of_necSuf` / `antiperiodic_complex_exp_sum_zero_of_necSuf` | 本文の二つの「とくに」 | 同上 |
 | 対応する `Ising2D.antiperiodic_exp_sum_*_of_necSuf` | 直前三行を内部表現 `checkPhase` で書いたもの | 同上 |
-| `Ising2D.antiperiodic_exp_sum_of_necSuf` | `NecSuf.sum_zpow_antiperiodic` | `Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` |
+| `Ising2D.antiperiodic_exp_sum_of_necSuf` | `NecSuf.sum_zpow_antiperiodic` | `EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean` |
 | `Ising2D.checkPhase_M_of_necSuf` | `NecSuf.pow_half_eq_neg_one` | 同上 |
 | `Ising2D.checkZ_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkZ_periodicity` |
 | `Ising2D.checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkY_periodicity` |
 | `Ising2D.acomm_checkZ_checkZ_of_necSuf` / `acomm_checkY_checkY_of_necSuf` | `NecSuf.acomm_antiperiodic_fourier_clifford`（それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化） | `Part013/Claim005_AnticommutatorCheckZYFromNecSuf.lean` |
 | `Ising2D.inverse_dft_check_of_necSuf` / `recover_checkZ_of_necSuf` / `recover_checkY_of_necSuf` | `NecSuf.inverse_dft_antiperiodic` | `Part013/Claim006_RecoverZYFromNecSuf.lean` |
-| (A)〜(D)（`lie_H1Plus_checkZ` ほか 4 本） | **既存の** `NecSuf.CliffordTriple.lie_sum_*` | `Part013/Claim004_CommutatorHCheckZY.lean`（本体がそのまま導出） |
+| (A)〜(D)（`lie_H1Plus_checkZ` ほか 4 本） | **既存の** `NecSuf.CliffordTriple.lie_sum_*` | `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`（本体がそのまま導出） |
 
 橋渡し補題は `Ising2D.isPrimitiveRoot_expPhase_one`（`e^{-2π√-1/N}` は 1 の原始 `N` 乗根）と
 `Ising2D.isPrimitiveRoot_expPhase_neg_one`（`e^{+2π√-1/N}` も同様）。

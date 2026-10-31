@@ -97,7 +97,7 @@
   - **章末のゴールの主張を足した。** $(T_{(V^{(+)})}(\check Z_\mu),T_{(V^{(+)})}(\check Y_\mu))=(\check Z_\mu,\check Y_\mu)A(\tilde\theta_\mu)=(\check Z_\mu,\check Y_\mu)B_1(\tilde\theta_\mu)B_2B_1(\tilde\theta_\mu)$ を主張する claim
     `T_V_plus_check_Z_Y_via_B1_B2_B1` を章の最後に置いた。証明は `T_V_plus_check_Z_Y` と `factorization_of_A_theta_general` の二行である。SageMath（`sagemath/check/T_V_plus_check_Z_Y_via_B1_B2_B1/`、
     $M\in\{2,3,4,5\}$・5 組の結合定数・全 $\mu$ で隣接行の残差 ≤ 8.8e-11。指数評価の ℝ 脱出のため倍精度。否定コントロールは積の順序を $B_2B_1B_1$ にしたもの）と
-    Lean（`lean/Ising2D/Part014/ClaimTVPlusCheckZYViaB1B2B1.lean`。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、
+    Lean（`lean/Ising2D/EigenvalueProblem/ReductionToATheta/ClaimTVPlusCheckZYViaB1B2B1.lean`。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、
     冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号の定義（$\tilde\theta_\mu,\check Z_\mu,\check Y_\mu$）に分けた。章の項目数は 28（割り当て 27 とゴールの主張 1。章立て案は 27）。
   - **後ろの章を指す案内の参照 2 本を外した。** 添字集合の定義 `def_check_index_set` の案内文の「013 章から 017 章までのすべての主張は」を「以降の主張は、とくに断らない限り」に、
     $\mu\in\mathbb Z$ 全体で定める記号の列挙をこの章のもの（$\delta^{(M)}_{(\mu,\nu)},\tilde\theta_\mu,\check Z_\mu,\check Y_\mu$）に直し、後ろの章の

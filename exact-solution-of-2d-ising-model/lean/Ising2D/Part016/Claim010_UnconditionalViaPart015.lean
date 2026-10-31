@@ -29,7 +29,7 @@
 -/
 import Ising2D.Part016.Claim009_VPlusEqCCheckVprime
 import Ising2D.Part015.Definition008_GammaTildeMu
-import Ising2D.Part014.Claim010_TVPlusAction
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 
 namespace Ising2D
 
@@ -164,7 +164,7 @@ theorem VPlus_eq_smul_checkVprime' (hM : M ≠ 0)
 
 /-! ## 014 章の成果を入れて `hT` も落とす
 
-`Ising2D/Part014/` が `origin/main` に入ったので、本章に残っていた最後の仮定
+014 章（`Ising2D/EigenvalueProblem/ReductionToATheta/`）の形式化があるので、本章に残っていた最後の仮定
 `hT`（`T_{V^{(+)}}` が `Ž_μ, Y̌_μ` に `A(θ̃_μ)` で作用する）も
 `Ising2D.TVPlus_checkZ_checkY` で埋まる。残るのは双対関係 `hdual` だけである。
 -/

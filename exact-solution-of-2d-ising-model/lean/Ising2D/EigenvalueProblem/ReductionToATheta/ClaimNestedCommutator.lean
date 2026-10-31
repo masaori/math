@@ -30,15 +30,15 @@
 原文は `n ∈ ℤ_{≥0}` について右辺を `n` の偶奇で場合分けして書いている。
 Lean では偶奇を `n = 2k` / `n = 2k+1` と書き分けた 2 本ずつの定理にする
 （`(-1)^{n/2} = (-1)^k`、`(-1)^{(n-1)/2} = (-1)^k`、`(-1)^{(n+1)/2} = (-1)^{k+1}`）。
-`n` 重の入れ子交換子は既存の `Ising2D.adPow`（`Part008/Claim006_ExpConjugation.lean`、
+`n` 重の入れ子交換子は既存の `Ising2D.adPow`（`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`、
 原文 `<ad_binomial>` の再帰そのもの）で表す。
 
 `e^{-iθ~_μ}` は `Ising2D.checkPhase M 1 μ`、`e^{iθ~_μ}` は `Ising2D.checkPhase M (-1) μ`
-（`Part013/Claim002_AntiperiodicExpSum.lean`）。
+（`EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean`）。
 `H_1^{(+)}` は `Ising2D.H1plus M`（引数 `η` が原文の `∓1`）。
 -/
-import Ising2D.Part008.Claim006_ExpConjugation
-import Ising2D.Part013.Claim004_CommutatorHCheckZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCommutatorHCheckZY
 
 namespace Ising2D
 

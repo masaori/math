@@ -14,10 +14,10 @@
 人手証明は 015 章で `γ_1, γ_2` を `θ ∈ ℝ` の関数として**ラベル付きで定義し直して**いるが、
 式は 008 章のものと文字どおり同一である（本文の `conversion.notes` にもそう書かれている）。
 Lean 側では 008 章の時点で既に `θ ∈ ℝ` 全体の関数として
-`Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat`（`Part008/Definition019_ThetaGamma.lean`）
+`Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat`（`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`）
 が定義され、書き換え `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` も
 `Ising2D.AMat_eq` として証明済みである。**したがって新しい定義は導入せず、
-半整数運動量 `θ~_μ`（`Ising2D.thetaTilde`、`Part013/Claim002_AntiperiodicExpSum.lean`）
+半整数運動量 `θ~_μ`（`Ising2D.thetaTilde`、`EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean`）
 への特殊化だけをここに置く。**
 
 本ファイルではさらに、以降の章で繰り返し使う
@@ -26,7 +26,7 @@ Lean 側では 008 章の時点で既に `θ ∈ ℝ` 全体の関数として
 -/
 import Ising2D.Part008.Claim027_EigenATheta
 import Ising2D.Part012.Claim001_Gamma1LowerBound
-import Ising2D.Part013.Definition003a_CheckIndexSet
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 
 namespace Ising2D
 

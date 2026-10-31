@@ -9,10 +9,10 @@
 
 | 人手証明のラベル | 具体版（複素数） |
 | --- | --- |
-| `exp_sum` | `Ising2D/Part004/Claim008_ExpSum.lean` の `Ising2D.expPhase_sum` |
+| `exp_sum` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean` の `Ising2D.expPhase_sum` |
 
 具体版を本ファイルの必要十分版の特殊化として導出したものは
-`Ising2D/Part004/Claim008_ExpSumFromNecSuf.lean` にある。
+`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSumFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

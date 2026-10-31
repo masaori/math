@@ -38,7 +38,7 @@
   `[ψ̌_μ, ψ̌_ν]_+ = 0`.
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
-import Ising2D.Part013.Definition003a_CheckIndexSet
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.NecSuf.PairedFermion
 
 namespace Ising2D

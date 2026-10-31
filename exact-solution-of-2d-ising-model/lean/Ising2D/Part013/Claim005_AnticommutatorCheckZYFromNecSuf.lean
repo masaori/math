@@ -14,7 +14,7 @@
 `x = y = Z`（あるいは `Y`）に Clifford 関係 `[Z_j, Z_k]₊ = 2δ_{jk} I` を渡すことだけである。
 -/
 import Ising2D.Part013.Claim005_AnticommutatorCheckZY
-import Ising2D.Part013.Claim002_AntiperiodicExpSumFromNecSuf
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSumFromNecSuf
 
 namespace Ising2D
 

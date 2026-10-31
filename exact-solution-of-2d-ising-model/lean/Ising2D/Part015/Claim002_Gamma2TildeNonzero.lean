@@ -12,7 +12,7 @@
 ## この章の最大の価値
 
 整数運動量 `θ_μ = 2πμ/M` では `γ_2(θ_μ) = 0` が起こりうる
-（`Ising2D.gamma2_eq_zero_iff`、`Part008/Definition019_ThetaGamma.lean`。
+（`Ising2D.gamma2_eq_zero_iff`、`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`。
 臨界点 `c_1 = s_1c_2` かつ `θ_μ = 0`）ため、008 章・009 章はそこを例外として
 別扱いしていた。**半整数運動量ではこの例外が起こらない。**
 

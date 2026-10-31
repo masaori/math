@@ -31,9 +31,9 @@ Lean では行ベクトル記法の合成則 `Ising2D.ActsBy.comp`
 未形式化に由来する仮定は無い。
 -/
 import Ising2D.NecSuf.TVActionSandwich
-import Ising2D.Part014.Claim005_TActionsOnCheck
-import Ising2D.Part014.Claim009_FactorizationATheta
-import Ising2D.Part014.Definition001_VPlus
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTActionsOnCheck
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimFactorizationATheta
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 
 namespace Ising2D
 

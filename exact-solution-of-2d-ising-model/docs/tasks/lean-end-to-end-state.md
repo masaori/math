@@ -77,14 +77,26 @@
     `DefinitionSymmetrizedTransferMatrix` は、この章の `def_transfer_matrix_square_root`・`def_symmetrized_transfer_matrix` と
     「N→∞ の極限と最大固有値 c(M)」の章の `Z_equals_trace_of_W`・`W_is_real_symmetric_positive_definite` が 2 対 2 の同数なので、並びで先のこの章へ置いた。
     `Part010/` に残る `Claim011_SectorReplacement`・`Claim012_SectorDecomposition` と `Part004/OddEigenvectors` は (−) セクターの記録なので、
-    `RoutesNotAdopted/MinusSector/` へ移すときに扱う。`Part014/Definition001_VPlus` は「A(θ̃_μ) への帰着」の章の項目が多いので残した。
+    `RoutesNotAdopted/MinusSector/` へ移すときに扱う。旧 `Part014/Definition001_VPlus` は「A(θ̃_μ) への帰着」の章の項目が多いので、この章へは移さなかった。
+  - 部「固有値問題」の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」（済み）: 22 ファイルを `Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した。
+    旧 `Part004/` から `ClaimExpSum`（と `FromNecSuf`）・`DefinitionExpPhase`、旧 `Part006/` の 2 本（`ClaimAnticommutatorZY` と `FromNecSuf`）、
+    旧 `Part008/` から `ClaimExpConjugation`・`ClaimDualityC2StarEqS2StarC2`・`DefinitionThetaGamma`、
+    旧 `Part013/` から `ClaimAntiperiodicExpSum`（と `FromNecSuf`）・`ClaimCommutatorHCheckZY`・`DefinitionHalfIntegerModes`・`DefinitionCheckIndexSet`、
+    旧 `Part014/` の 9 本全部である。`Part006/`・`Part014/` は無くなった。章のフォルダへ移すときにファイル名の番号を外した。
+    `ClaimExpConjugation` は `exp_X_Y_exp_-X` だけを形式化している（`adPow` は主張の式に出る n 重の入れ子交換子の定義で、1 回の `ad_X` を定める `def_ad_X_matrix` や `ad_binomial` の主張の形式化ではなく、`matrix_exp_conjugation` は参照だけ）のでこの章へ置いた。
+    `DefinitionThetaGamma` が形式化する人手の項目のうち棚卸しにあるのは `def_A_theta` だけ（`θ_μ`・`γ_2` の性質は整数運動量の経路のノート）なのでこの章へ置いた。
+    人手の項目を持たない `DefinitionExpPhase` は、import する 2 本（`ClaimExpSum` とまだ動かさない `Part004/Definition009_HatZHatY`）が同数なので、この章へ置いた。
+    整数運動量の経路の記録（`Part004/` の `hat(Z), hat(Y)` の 4 本、`Part007/`、`Part008/` の `Claim001_CommutatorHZY`・`Claim012_TVActions`・`Claim027_EigenATheta`、
+    `Part013/Claim001_WhyMinusOnly`）は数えず、`RoutesNotAdopted/IntegerMomentum/` へ移すときに扱う。
+    `Part008/Definition016_TV` は数学的道具立て「可逆行列・線型写像との対応・共役変換」の `def_T_g`・`linearity_of_T` を形式化しているので残した。
+    `Part013/Claim007_H1H2ViaCheck`（`H1_H2_via_check_Z_Y`）は未割り当てなので残した。
   - 未割り当ての項目だけを形式化していて動かさないファイル: `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）と、
-    その必要十分版の導出。割り当ては構成再編の連続実行を待つ。
+    その必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。割り当ては構成再編の連続実行を待つ。
 
 ## 次の一歩
 
-項目 7 の 3 番目の章、部「固有値問題」の最初の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」（フォルダ `Ising2D/EigenvalueProblem/ReductionToATheta/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_reduction_to_A_theta` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part013/`・`Part014/` の半整数運動量の定義と `T_{V^{(+)}}` の作用の主張、`Part004/Claim008_ExpSum`・`Part006/Claim000_AnticommutatorZY`・
-`Part008/Definition019_ThetaGamma`・`Part008/ClaimDualityC2StarEqS2StarC2` など。整数運動量の経路の記録は数えない）。
+項目 7 の 4 番目の章、部「固有値問題」の「A(θ̃_μ) の対角化と V^{(+)} の指数表示」（フォルダ `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_diagonalization_and_exponential_form` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part013/` の `Claim003b_ConjugateIndex`・`Claim005_AnticommutatorCheckZY`・`Claim006_RecoverZY`（と各 `FromNecSuf`）、`Part015/`・`Part016/` の全部、
+`Part004/Claim014_ZYGenerateAlgebra`（と `FromNecSuf`）、`Part012/Claim001_Gamma1LowerBound` など。整数運動量の経路の記録は数えない）。
 `Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

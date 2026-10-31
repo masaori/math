@@ -11,7 +11,7 @@
 
 ## 形式化の方針
 
-* 既存の `Ising2D.gamma1 : IsingConst → ℝ → ℂ`（`Part008/Definition019_ThetaGamma.lean`）は
+* 既存の `Ising2D.gamma1 : IsingConst → ℝ → ℂ`（`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`）は
   `A(θ)` の成分として使うため ℂ に埋め込んだ形になっている。本章では実数として扱いたいので
   実数版 `gamma1R` を置き、`gamma1_eq_ofReal` で両者が同じ値であることを確認する。
 * 人手証明は `c_1 = cosh 2K_1`, `s_1 = sinh 2K_1`, `c_2^* = cosh 2K_2^*`, `s_2^* = sinh 2K_2^*`
@@ -22,7 +22,7 @@
   双対関係 `c_2 s_2^* = c_2^*` は仮定ではなく定理 `IsingParam.c2_mul_s2star_eq_c2star`
   （人手 `duality_c2_star_eq_s2_star_c2`）として得られる。
   これにより「どの結論がどの前提に依存するか」が形式化の側で可視化される
-  （`Part008/Definition019_ThetaGamma.lean` と同じ方針）。
+  （`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` と同じ方針）。
 * `arccosh` について: `lean/README.md` は「mathlib に無い」と記載しているが、
   本リポジトリが固定している mathlib（`v4.32.1`）には `Real.arcosh` が存在し、
   定義も人手証明 Step 2 の明示式 `log(x + √(x^2-1))` とまったく同じである。
@@ -32,8 +32,8 @@
 
 本ファイルは他章（011 章の `c(M)` や分配関数の挟み撃ち）に依存しない。
 -/
-import Ising2D.Part008.Definition019_ThetaGamma
-import Ising2D.Part008.ClaimDualityC2StarEqS2StarC2
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimDualityC2StarEqS2StarC2
 import Ising2D.NecSuf.Arcosh
 import Ising2D.NecSuf.CoshLowerBound
 

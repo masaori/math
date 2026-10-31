@@ -18,7 +18,7 @@
 とくに反周期性は `Ising2D.NecSuf.pow_half_eq_neg_one`（`ξ^M = -1`）、
 (2) の添字周期性は既存の `Ising2D.NecSuf.transform_periodic`
 （`NecSuf/DiscreteFourier.lean`、重み・周波数が任意）の特殊化である。
-必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
+必要十分版からの導出は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean`。
 
 ## 原文の定義（`M ∈ ℤ_{≥2}`、`μ ∈ ℤ`）
 
@@ -29,12 +29,12 @@
 
 ## 形式化の方針
 
-* 位相因子は `Ising2D.checkPhase`（`Part013/Claim002_AntiperiodicExpSum.lean`）。
+* 位相因子は `Ising2D.checkPhase`（`EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean`）。
 * site 添字は `Fin M` で、原文の `j` は `(j : ℕ) + 1`。
 * 添字 `μ` は `ℤ` のまま扱う（原文が (2) と `periodicity_of_check_fermi` のために
   定義域を `ℤ` にしているのと同じ）。
 -/
-import Ising2D.Part013.Claim002_AntiperiodicExpSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
 import Ising2D.Part004.Claim011_H1H2ViaHat
 
 namespace Ising2D

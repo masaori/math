@@ -68,7 +68,7 @@
 `AMat_of_gamma2_eq_zero`（`A = γ_1 I` まで）と
 `gamma1_sq_eq_one_of_gamma2_eq_zero`（上の 3 関係から `γ_1^2 = 1`）に分けてある。
 -/
-import Ising2D.Part008.Definition019_ThetaGamma
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 
 namespace Ising2D
 

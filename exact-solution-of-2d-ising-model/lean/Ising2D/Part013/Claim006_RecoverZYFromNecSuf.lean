@@ -14,7 +14,7 @@
 **行列であること・積があること・Clifford 関係は使っていない。**
 -/
 import Ising2D.Part013.Claim006_RecoverZY
-import Ising2D.Part013.Claim002_AntiperiodicExpSumFromNecSuf
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSumFromNecSuf
 
 namespace Ising2D
 

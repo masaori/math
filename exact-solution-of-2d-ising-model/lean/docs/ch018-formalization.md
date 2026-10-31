@@ -398,7 +398,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 双対関係 `c_2 s_2^* = c_2^*`（もとの場 `hdual`）は、`IsingParam.K2star` を `Kstar K2`
 （人手 `def_second_dual_coupling_constant`）で定義し、人手 `duality_c2_star_eq_s2_star_c2` を
-`Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化したことで定理 `IsingParam.c2_mul_s2star_eq_c2star`
+`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean` で形式化したことで定理 `IsingParam.c2_mul_s2star_eq_c2star`
 になり、最終定理の仮定から外した。
 
 ### 6.5 検証

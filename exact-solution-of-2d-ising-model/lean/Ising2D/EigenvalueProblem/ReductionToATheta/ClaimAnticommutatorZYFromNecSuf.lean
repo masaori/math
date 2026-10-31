@@ -9,7 +9,7 @@
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.anticomm_Z_Z` 他（`Claim000_AnticommutatorZY.lean`） | クロネッカー積 `siteProd` と Pauli 行列 |
+| **具体版** | `Ising2D.anticomm_Z_Z` 他（`ClaimAnticommutatorZY.lean`） | クロネッカー積 `siteProd` と Pauli 行列 |
 | **必要十分版** | `NecSuf.acomm_jwStr` 他（`NecSuf/SiteLocalAnticomm.lean`） | 単位的・乗法的・多重線型な `P : (ι → A) → B` と線型順序つきのサイト添字 |
 
 本ファイルは、**具体版が必要十分版の特殊化にすぎないこと**を導出として書く。
@@ -26,7 +26,7 @@
 だけで、行列の成分計算・2 次元であること・複素数であることは効いていない。
 -/
 import Ising2D.NecSuf.SiteLocalAnticomm
-import Ising2D.Part006.Claim000_AnticommutatorZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 
 namespace Ising2D
 

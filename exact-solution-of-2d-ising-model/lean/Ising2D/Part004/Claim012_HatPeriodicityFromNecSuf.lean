@@ -17,7 +17,7 @@
 一切効いていない。
 -/
 import Ising2D.NecSuf.DiscreteFourier
-import Ising2D.Part004.Claim008_ExpSumFromNecSuf
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSumFromNecSuf
 import Ising2D.Part004.Claim012_HatPeriodicity
 
 namespace Ising2D

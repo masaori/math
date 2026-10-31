@@ -6,8 +6,8 @@
 `half_integer_checkY_periodicity`
 （`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`）
 
-具体版（直接証明）は `Ising2D/Part013/Claim002_AntiperiodicExpSum.lean` と
-`Ising2D/Part013/Definition003_HalfIntegerModes.lean`、
+具体版（直接証明）は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean` と
+`Ising2D/EigenvalueProblem/ReductionToATheta/DefinitionHalfIntegerModes.lean`、
 必要十分版は `Ising2D/NecSuf/AntiperiodicFourier.lean` と
 `Ising2D/NecSuf/DiscreteFourier.lean`。本ファイルは両者をつなぐ
 （`exact-solution-of-2d-ising-model/README.md` 4 節「必要十分版から具体版が特殊化で
@@ -25,7 +25,7 @@
 とくに (2) は**整数運動量版 `hatZ_hatY_M_periodicity` とまったく同じ必要十分版**の
 別の特殊化である（重みの取り方が違うだけ）。
 -/
-import Ising2D.Part013.Definition003_HalfIntegerModes
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
 import Ising2D.NecSuf.AntiperiodicFourier
 
 namespace Ising2D

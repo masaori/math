@@ -10,7 +10,7 @@
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.expPhase_sum`（`Claim008_ExpSum.lean`） | 複素指数関数 `exp(-2π√-1 k/M)` |
+| **具体版** | `Ising2D.expPhase_sum`（`ClaimExpSum.lean`） | 複素指数関数 `exp(-2π√-1 k/M)` |
 | **必要十分版** | `NecSuf.sum_zpow_primitiveRoot`（`NecSuf/RootOfUnitySum.lean`） | 任意の体 `K` と、その中の 1 の原始 `M` 乗根 `ζ` |
 
 本ファイルは、**具体版が必要十分版の特殊化にすぎないこと**を導出として書く
@@ -25,7 +25,7 @@
 指数関数・円周率の解析的性質は効いていない。
 -/
 import Ising2D.NecSuf.RootOfUnitySum
-import Ising2D.Part004.Claim008_ExpSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 
 namespace Ising2D
 

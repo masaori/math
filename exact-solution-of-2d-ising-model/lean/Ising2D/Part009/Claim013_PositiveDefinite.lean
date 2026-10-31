@@ -37,7 +37,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 その `η = -1` の場合として立てる。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
-import Ising2D.Part006.Claim000_AnticommutatorZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.Part009.Definition001_Trace
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential

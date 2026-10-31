@@ -299,7 +299,7 @@ YX
       notes: [
         "原文（Typst）に対応ブロックは無い。原文が [Z_μ,Z_ν]_+ の μ<ν の場合に行っている" +
           "「食い違うのは 1 因子だけで、そこの符号が全体の符号になる」という計算を、" +
-          "3 式すべてで共通に使えるよう主張として切り出した（lean/Ising2D/Part006 の " +
+          "3 式すべてで共通に使えるよう主張として切り出した（lean/Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean の " +
           "siteProd_anticomm_of_single_site に対応する）。",
         "2026-09-04 の式変形統一で、クロネッカー積の積の規則と各因子の線型性に前置きしていた参照を削った。各適用行の末尾に同じ \\blkref があるため、内容・式変形・根拠は変えていない。",
       ],

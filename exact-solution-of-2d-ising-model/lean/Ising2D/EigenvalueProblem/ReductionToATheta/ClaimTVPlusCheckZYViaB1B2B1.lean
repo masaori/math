@@ -26,7 +26,7 @@
 人手の主張は既存の二つの主張を続けるだけなので、必要十分版は置かない（1 行目の必要十分版は
 `Ising2D.NecSuf.actsBy_TV_sandwich` が持つ）。
 -/
-import Ising2D.Part014.Claim010_TVPlusAction
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 
 namespace Ising2D
 

@@ -21,7 +21,7 @@
 （`s = 0` では `1`）を経由し、最後に `s · sinhc(s) = sinh(s)`（`NecSuf.mul_sinhc`）で
 原文の `sinh(K_1)`, `sinh(2K_2^*)` の形へ戻す。**原文の係数と完全に一致し、誤りは無かった。**
 -/
-import Ising2D.Part014.Claim003_CoefficientConversion
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCoefficientConversion
 
 namespace Ising2D
 

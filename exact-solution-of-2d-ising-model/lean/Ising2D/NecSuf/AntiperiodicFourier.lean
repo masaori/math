@@ -9,12 +9,12 @@
 
 | 人手証明のラベル | 具体版（複素数・複素行列） |
 | --- | --- |
-| `antiperiodic_exp_sum` | `Ising2D/Part013/Claim002_AntiperiodicExpSum.lean` |
+| `antiperiodic_exp_sum` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSum.lean` |
 | `anticommutator_of_check_Z_Y` | `Ising2D/Part013/Claim005_AnticommutatorCheckZY.lean` |
 | `recover_Z_Y_from_check_Z_Y` | `Ising2D/Part013/Claim006_RecoverZY.lean` |
 
 具体版を本ファイルの必要十分版の特殊化として導出したものは
-`Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean` にある。
+`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

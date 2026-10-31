@@ -1243,7 +1243,7 @@ Y_\nu Y_\mu
         "原文が TODO のまま残していた [Z_μ,Y_ν]_+ = 0 と [Y_μ,Y_ν]_+ = 2Iδ^M を、" +
           "原文と同じ「テンソル因子を並べて書く」書式で場合分けごとに証明した。" +
           "[Z_μ,Y_ν]_+ は μ=ν でも 0 になる（σ^y σ^z = -σ^z σ^y で対角も消える）ことを明示した。" +
-          "設計は lean/Ising2D/Part006/Claim000_AnticommutatorZY.lean（anticomm_Z_Z, anticomm_Z_Y, " +
+          "設計は lean/Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean（anticomm_Z_Z, anticomm_Z_Y, " +
           "anticomm_Y_Y）を参考にしたが、人手証明は Lean に依存せず自己完結している。",
         "原文の μ<ν の計算はテンソル因子の位置に I_{(C^2)^{⊗M}}（全体の単位元）を書いていたが、" +
           "テンソル因子に入るのは 2×2 の単位行列 I_{Mat(2,C)} なので、そちらへ直した。",

@@ -14,7 +14,7 @@
 
 余分な項 `-4 e^{…}` がそのまま `4 e^{-iθ_μ} Y_1` になる。
 すなわち**「`(+)` セクターで壊れる」の中身は、`Dz ≠ Dz'` のただ 1 点**である。
-（013 章の `check(Z)` では `Dz = Dz'` になる。`Part013/Claim004_CommutatorHCheckZY.lean` 参照。）
+（013 章の `check(Z)` では `Dz = Dz'` になる。`EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean` 参照。）
 
 ## 原文の主張（`μ ∈ ℳ`）
 

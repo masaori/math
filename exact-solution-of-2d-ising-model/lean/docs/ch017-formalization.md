@@ -96,7 +96,7 @@
 | `CheckFermiSetup.sum_exp_gval` | `∑_ε e^{ǧ(ε)} = ∏_μ 2cosh(γ(θ~_μ)/2)` | `trace_of_check_Vprime` Step 2 |
 | `CheckFermiSetup.trace_Vprime` | **`tr(V̌') = ∏_μ 2cosh(γ/2)`（前因子なし）** | 同 Step 1〜2 |
 | `CheckFermiSetup.trace_Vprime_inv` / `trace_Vprime_pos` | `tr((V̌')^{-1}) = tr(V̌') > 0` | 同 Step 3〜4 |
-| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_Vmat` | `V^{(+)}` は章 014 `Part014/Definition001_VPlus.lean` のものを使う。章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `VPlus_eq_Vmat` で明示した | `def_V_plus` |
+| `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_Vmat` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。章 009 の `Vmat M K1 (-1) s2 K2star` と `rfl` で一致することを `VPlus_eq_Vmat` で明示した | `def_V_plus` |
 | `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` |
 | `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | 明示した候補が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |

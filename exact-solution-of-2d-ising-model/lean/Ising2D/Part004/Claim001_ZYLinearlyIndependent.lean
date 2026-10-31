@@ -37,7 +37,7 @@
 （反交換子の左線型性は `Ising2D.acomm_sum_smul_left`）。
 -/
 import Ising2D.Part004.Claim014_ZYGenerateAlgebra
-import Ising2D.Part006.Claim000_AnticommutatorZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 
 namespace Ising2D
 

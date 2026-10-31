@@ -26,7 +26,7 @@
 `Z, Y` の具体形・指数関数の解析的性質は効いていない」ことが確認できる。
 -/
 import Ising2D.NecSuf.FourierClifford
-import Ising2D.Part004.Claim008_ExpSumFromNecSuf
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSumFromNecSuf
 import Ising2D.Part007.Claim000_AnticommutatorHatZHatY
 
 namespace Ising2D

@@ -50,7 +50,7 @@
 
 を参照すること。証明は `<commutator_of_H_and_Z_Y>` の (1)(3)(4)(6)
 （`Part008/Claim001_CommutatorHZY.lean`）と、`ad X` が 2 次元部分空間を保つ場合の
-閉じた形（`Part008/Claim006_ExpConjugation.lean` の `matExp_conj_two_dim_z` / `..._y`）
+閉じた形（`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean` の `matExp_conj_two_dim_z` / `..._y`）
 だけから通る。必要十分版は `Ising2D/NecSuf/TVAction.lean`。
 
 本ファイルの仮定つき版は、原文の証明の構造（`B_1`, `B_2` の作用 → 合成則 → `B_1B_2B_1 = A`）を
@@ -68,14 +68,14 @@
 
 ## `A(θ)` の定義の所在
 
-`A(θ)` の定義は `Part008/Definition019_ThetaGamma.lean` の `Ising2D.AMat`
+`A(θ)` の定義は `EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` の `Ising2D.AMat`
 （`IsingConst` の 5 実数パラメータと実 `θ`）**ただ 1 つ**である。
 以前は本ファイルにも 5 個の複素パラメータ版 `Ising2D.Amat` があり二重定義になっていたが、
 `AMat` へ一本化して削除した（`lean/README.md` の該当節を参照）。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.Part000.Claim045_ConjugationIsRingHom
-import Ising2D.Part008.Definition019_ThetaGamma
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Mathlib.Algebra.Algebra.Equiv
 import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Analysis.Complex.Trigonometric
@@ -247,7 +247,7 @@ theorem B1_mul_B2_mul_B1_eq_explicit (K1 K2star θ c1 s1 c2 c2star s2star : ℂ)
 
 原文の `c_1, s_1, c_2, c_2^*, s_2^*` はすべて実数、`θ = θ_μ = 2πμ/M` も実数なので、
 `B1_mul_B2_mul_B1_eq_explicit` の複素パラメータへ `IsingConst` の実数を coe すれば
-`AMat`（`Part008/Definition019_ThetaGamma.lean`、`A(θ)` の唯一の定義）に一致する。 -/
+`AMat`（`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`、`A(θ)` の唯一の定義）に一致する。 -/
 theorem B1_mul_B2_mul_B1_eq_AMat (K : IsingConst) (K1 K2star : ℂ) (θ : ℝ)
     (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
     (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))

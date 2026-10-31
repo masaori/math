@@ -29,7 +29,7 @@
 原文が「入れ子交換子の偶奇の場合分け（`002`）→ テイラー係数の抽出（`005`）」の 2 段で
 やっていることを、Lean では **`ad X` が `span{hat(Z)_μ^{(-)}, hat(Y)_μ}` を保つ**という
 1 つの事実に集約し、既に形式化済みの `matExp_conj_two_dim_z` / `..._y`
-（`Part008/Claim006_ExpConjugation.lean`）へ渡す。
+（`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`）へ渡す。
 
 1. `X_1 := (1/2) i K_1 H_1^{(-)}` について、`<commutator_of_H_and_Z_Y>` の (1) と (3)
    （`lie_H1_hatZ_same`, `lie_H1_hatY`）から
@@ -70,7 +70,7 @@ Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引�
 -/
 import Ising2D.NecSuf.TVAction
 import Ising2D.Part008.Claim001_CommutatorHZY
-import Ising2D.Part008.Claim006_ExpConjugation
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
 import Ising2D.Part008.Definition016_TV
 import Ising2D.Part008.Definition030_Fermi
 

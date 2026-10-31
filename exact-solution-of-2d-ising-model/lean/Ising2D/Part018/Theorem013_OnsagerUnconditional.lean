@@ -24,7 +24,7 @@
 | `D.C > 0`、`D.C = (2 sinh 2K_2)^{M/2}` | 同上（`C` は構成で `(2 sinh 2K_2)^{M/2}` に確定する） |
 | `D.gam μ > 0`（`γ(θ̃_μ) > 0`） | 章 017 `Ising2D.gammaFn_thetaTilde_pos`（無条件） |
 | `∑_μ D.gam μ = ∑_{μ=1}^{M} γ(t^{(M)}_μ)`（`δ = 1/2`） | 本ファイルの `Ising2D.sum_checkGam`（章 017 `tagPoint_half_eq_thetaTilde` の系） |
-| `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`Part008/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
+| `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`、`ClaimTraceEpsilonVPlusClosedForm.lean`）。`M ≠ 0` は `2 ≤ M` から出す |
 | `hWpos`（具体的な `W` の成分が正） | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
 | `hWcomm`（`ε` と具体的な `W` の可換性） | `Ising2D.epsilon_commutes_with_W`（人手 `epsilon_commutes_with_W`、`Part011/ClaimEpsilonCommutesWithW.lean`） |

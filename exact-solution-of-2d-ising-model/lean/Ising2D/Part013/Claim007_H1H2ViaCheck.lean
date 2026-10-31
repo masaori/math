@@ -10,7 +10,7 @@
 本質的に依存しており、抽象化する余地がない。本ファイルの結果を使う交換関係の側
 （`commutator_of_H_and_check_Z_Y`）は、既存の必要十分版
 `Ising2D/NecSuf/CommutatorClifford.lean` の系として導く
-（`Ising2D/Part013/Claim004_CommutatorHCheckZY.lean`）。
+（`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`）。
 
 ## 原文の主張
 

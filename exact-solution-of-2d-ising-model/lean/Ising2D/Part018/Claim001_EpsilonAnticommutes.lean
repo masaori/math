@@ -23,7 +23,7 @@
 -/
 import Ising2D.NecSuf.ParityFermion
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
-import Ising2D.Part013.Definition003_HalfIntegerModes
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
 
 namespace Ising2D
 

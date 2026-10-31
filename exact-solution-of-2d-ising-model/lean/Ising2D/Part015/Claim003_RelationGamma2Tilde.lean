@@ -11,7 +11,7 @@
 
 ## 形式化の方針
 
-* (1) は既存の `Ising2D.gamma2_neg_eq_neg_conj`（`Part008/Definition019_ThetaGamma.lean`）
+* (1) は既存の `Ising2D.gamma2_neg_eq_neg_conj`（`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`）
   そのままである（人手証明も「008 章 `relation_of_gamma_2` と同じ計算で、
   `θ` が実数でありさえすれば成り立つ」と書いている）。
 * 人手証明の `|γ_2(θ~_μ)|` は `Ising2D.absGamma2 K θ := √(normSq(γ_2(θ)))` として置く

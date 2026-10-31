@@ -26,7 +26,7 @@
 `V^{-1}` の明示形までしか出していない）。
 -/
 import Ising2D.Part009.Claim017_ConstantC
-import Ising2D.Part014.Definition001_VPlus
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.Part017.Claim007_TraceCheckVprime
 
 namespace Ising2D
@@ -39,7 +39,7 @@ section VPlus
 variable {M : ℕ}
 
 /-- **原文 `def_V_plus` の `V^{(+)}` は、`V_2` を `V2H2Form` で書いた章 014 の補助の一般形
-`Ising2D.VPlus`（`Part014/Definition001_VPlus.lean`。人手の `V_2` の値では `VPlusOfTransfer_eq_VPlus`）
+`Ising2D.VPlus`（`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`。人手の `V_2` の値では `VPlusOfTransfer_eq_VPlus`）
 をそのまま使う。**
 `H_1^{(+)} = Ising2D.H1 M (-1)`（`H1plus_eq_H1`）なので、これは章 009 の `Vmat` に `η = -1` を
 代入したものに等しい（`V1plusHalf M K1 = V1pmHalf M K1 (-1)` が定義から成り立つので `rfl`）。この同一視により、章 009 の正定値性がそのまま使える。 -/

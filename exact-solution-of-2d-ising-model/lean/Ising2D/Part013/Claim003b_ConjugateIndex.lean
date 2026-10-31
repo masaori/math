@@ -19,7 +19,7 @@
 (1)(2) は `μ ∈ ℤ` 全体で成り立つので、Lean でも `μ : ℤ` のまま述べる
 （`𝓜̌` への制限は必要ない）。
 -/
-import Ising2D.Part013.Definition003a_CheckIndexSet
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 
 namespace Ising2D
 

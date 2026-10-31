@@ -4,7 +4,7 @@
 
 新規ファイル:
 
-- 具体版: `lean/Ising2D/Part014/`
+- 具体版: `lean/Ising2D/EigenvalueProblem/ReductionToATheta/`（章立てに合わせて旧 `Part014/` から移した。ファイル名の番号は外した）
 - 必要十分版: `lean/Ising2D/NecSuf/TVActionSandwich.lean`（新規は 1 本だけ。理由は 2 節）
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 014 の作業記録）。
@@ -115,7 +115,7 @@
 （`e^{-iMθ_μ} = +1`、添字集合 `𝓜` の形、`M` 周期性）を使っていない」という観察の、
 Lean での機械的裏づけである。
 
-具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（`Part014/Claim010_TVPlusAction.lean`）で
+具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`）で
 **008 章の結論を本章の必要十分版から導き直した**。本章の結論
 `Ising2D.TVPlus_checkZ_checkY` とこの定理は、`NecSuf.actsBy_TV_sandwich` に渡す
 `ActsBy` が `(Ẑ^{(-)}, Ŷ, B_1(θ_μ))` か `(Ž, Y̌, B_1(θ~_μ))` かだけが違う。

@@ -11,10 +11,10 @@
 * 008 章の対応物 **`<T_V_hatZ_hatY>`**（`008_TV1_hatZ_hatY_part1.ts` の
   `TV1_hatZ_hatY_018_claim_T_V_action`）
 
-**具体版は `Ising2D/Part014/Claim010_TVPlusAction.lean`**（半整数運動量）と
+**具体版は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`**（半整数運動量）と
 `Ising2D/Part008/Claim012_TVActions.lean`（整数運動量）。
 **この 2 つは本ファイルの同じ定理の別の特殊化である**ことを
-`Part014/Claim010_TVPlusAction.lean` の末尾で明示的に示している。
+`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean` の末尾で明示的に示している。
 
 **このファイルには必要十分版だけを置く。必要十分版は Lean の中だけの道具であり、
 人手証明の本文にも参照用ノートにも持ち込まない**

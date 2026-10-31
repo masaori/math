@@ -8,7 +8,7 @@
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`（名前空間 `Ising2D.NecSuf`、
 同じラベル `antiperiodic_exp_sum`）の
 `Ising2D.NecSuf.sum_zpow_antiperiodic_delta_difference`。
-必要十分版からの導出は `Ising2D/Part013/Claim002_AntiperiodicExpSumFromNecSuf.lean`。
+必要十分版からの導出は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAntiperiodicExpSumFromNecSuf.lean`。
 
 ## 原文の主張（`M ∈ ℤ_{≥2}`、`μ ∈ ℤ`）
 
@@ -21,7 +21,7 @@
 ## 形式化の方針
 
 * 位相因子は既存の `Ising2D.expPhase`（`expPhase N k = exp(-2π√-1 k/N)`、
-  `Part004/Claim008_ExpSum.lean`）を `N = 2M` で使う:
+  `EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean`）を `N = 2M` で使う:
 
     `e^{-i j θ~_μ} = exp(-π√-1 j(2μ-1)/M) = expPhase (2M) (j(2μ-1))`
 
@@ -33,7 +33,7 @@
 * 和の添字は `Fin M`（`0,…,M-1`）で、原文の `μ` は `(μ : ℕ) + 1`。
 * 原文は `M ≥ 2` を仮定しているが、本ファイルの主張に必要なのは `M ≠ 0` だけである。
 -/
-import Ising2D.Part004.Claim008_ExpSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Mathlib.Analysis.SpecialFunctions.Complex.Circle
 
 namespace Ising2D

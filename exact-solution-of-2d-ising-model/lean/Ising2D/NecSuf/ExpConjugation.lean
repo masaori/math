@@ -7,7 +7,7 @@
 `structured-latex/content/005_exp_conjugation_proof.mjs` の
 `<matrix_exp_conjugation>` と `<ad_binomial>`）。
 
-**具体版は `Ising2D/Part008/Claim006_ExpConjugation.lean`**
+**具体版は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`**
 （`Mat(2,ℂ)^{⊗M}` = `Ising2D.TensorPow M` の元について人手証明と 1 対 1 に対応する形で述べ、
 本ファイルの系として導出する）。
 

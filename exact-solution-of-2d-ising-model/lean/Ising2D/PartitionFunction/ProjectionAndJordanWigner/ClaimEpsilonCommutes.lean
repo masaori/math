@@ -12,7 +12,7 @@
 * Step 1（`ε σ^x_k = σ^x_k ε`, `ε σ^z_k = -σ^z_k ε`, `ε σ^y_k = -σ^y_k ε`）
   → `epsilon_commute_sigmaX` / `epsilon_anticomm_sigmaZ` / `epsilon_anticomm_sigmaY`。
   「1 サイトだけ反可換ならテンソル積は反交換」は既存の
-  `Ising2D.siteProd_anticomm_of_single_site`（`Part006/Claim000_AnticommutatorZY.lean`）。
+  `Ising2D.siteProd_anticomm_of_single_site`（`EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean`）。
 * Step 2, 3（`V_2`, `V_1` との可換性）→ 右辺の式についての `epsilon_commute_V2PauliForm` /
   `epsilon_commute_V1PauliForm` と、人手の `V_2`, `V_1`（`def_transfer_matrix`）についての
   `epsilon_commute_V2` / `epsilon_commute_V1`。人手の鎖の第 1 行・最終行で
@@ -39,7 +39,7 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonProjector
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionV1PlusSquareRoot
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
-import Ising2D.Part006.Claim000_AnticommutatorZY
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 
 namespace Ising2D
 

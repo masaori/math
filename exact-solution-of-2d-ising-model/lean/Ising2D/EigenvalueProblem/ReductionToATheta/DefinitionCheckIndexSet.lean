@@ -22,7 +22,7 @@
 集合そのものではなく、述語 `Ising2D.CheckIndex M μ ⟺ 1 ≤ μ ≤ M` として持つ
 （原文の `μ ∈ 𝓜̌` に 1 対 1 で対応する）。
 -/
-import Ising2D.Part013.Definition003_HalfIntegerModes
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
 
 namespace Ising2D
 

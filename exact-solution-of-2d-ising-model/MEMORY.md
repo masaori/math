@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 の三番目の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」を移した。22 ファイルを `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移し（名前空間不変。番号を外した名前にした）、`Part006/`・`Part014/` は無くなった。import・コメントのパス・`lean/README.md`・`lean/docs/ch013`・`ch014`・`ch016` の対応表を直した。整数運動量の経路の記録は数えず残した。次は部「固有値問題」の「A(θ̃_μ) の対角化と V^{(+)} の指数表示」の章。
+
 2026-10-31: Lean の通しの証明の項目 7 の二番目の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」を移した。16 ファイルを `lean/Ising2D/PartitionFunction/ProjectionAndJordanWigner/` へ移し（名前空間不変。番号付きの 5 本は番号を外した名前にした）、import・コメントのパス・`lean/README.md`・`lean/docs/ch010-formalization.md`・`ch011-formalization.md` を直した。`DefinitionSymmetrizedTransferMatrix` は項目数が同数なので並びで先のこの章へ置いた（レビューの指摘）。`lake build`・`check-no-sorry.sh`・`check-end-to-end.sh` は通る。新しい worktree で最初の `lake build` が olean の「no such file or directory」で落ちたが、再実行で通った。次は部「固有値問題」の「A(θ̃_μ) への帰着」の章。
 
 2026-10-31: 章立ての組み直しの四番目の項目の九番目（最後）の章「臨界点 K_c と d²f/dK² の対数発散」を組み直し、章ごとの組み直しを全章終えた。10 項を `structured-latex/content/critical_point_and_log_divergence.ts`（部「臨界点」）へ依存順で移し（id・ラベル不変。008 の後半のファイルは空になったので消した）、章末にゴールの主張 `critical_point_sinh_K_c_and_second_derivative_log_divergence`（SageMath と Lean つき）を足した。(R3)(R4) の宣言を 020 に残った道具の前の注記 `remark_real_analysis_facts_R3_R4` へ分け、物理的な比熱の注記は参照用ノートへ退避した。次は γ(θ) の定義を主張から分ける一単位（状態台帳の「次の一歩」）。

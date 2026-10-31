@@ -14,10 +14,10 @@
 `(i/2) K_1` は Lean では `(1/2) * √-1 * K_1` と書く。一般の行列の平方根は一意でないので、
 人手と同じく最初から `exp(X/2)` を定義に採る。
 
-章 014〜018 の `VPlus M s2 K1 K2star`（`Part014/Definition001_VPlus.lean`）は、`V_2` を
+章 014〜018 の `VPlus M s2 K1 K2star`（`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`）は、`V_2` を
 `V2_exponential_representation` の右辺の式 `V2H2Form`（`s2`, `K2star` を独立な引数とする一般化）で
 書いた補助の一般形である。`s2 = sinh 2K_2`, `K2star = K_2^*` で本ファイルの `VPlusOfTransfer` と
-一致する（`Ising2D.VPlusOfTransfer_eq_VPlus`、`Part014/Definition001_VPlus.lean`）。
+一致する（`Ising2D.VPlusOfTransfer_eq_VPlus`、`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`）。
 
 必要十分版は置かない。平方根性の核「可換な `X, X` について `exp X exp X = exp(X+X)`」は mathlib の
 `Matrix.exp_add_of_commute` そのものであり、ほどく構造が無い。

@@ -78,7 +78,7 @@
 | `Ising2D.TVPlus_eq_TCheckVprime'` | `T_{V^{(+)}} = T_{V̌'}`（残る仮定は 014 章の `hT` と双対関係 `hdual` だけ） | `T_V_plus_eq_T_check_Vprime` |
 | `Ising2D.VPlus_eq_smul_checkVprime'` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**。同上） | `V_plus_eq_c_check_Vprime` |
 
-さらに 014 章（`Ising2D/Part014/`）も `origin/main` に入ったため、最後に残っていた仮定
+さらに 014 章（`Ising2D/EigenvalueProblem/ReductionToATheta/`）も `origin/main` に入ったため、最後に残っていた仮定
 `hT` も `Ising2D.TVPlus_checkZ_checkY` で埋めた。
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
@@ -133,7 +133,7 @@
 **残る引数は双対関係 `c_2 s_2^* = c_2^*` の 1 つだけ**である。本章の定理は 008 章以来の
 形のまま、この等式を引数 `hdual` に取る。この等式は人手 `duality_c2_star_eq_s2_star_c2` で証明済みで、
 `IsingParam` の上では定理 `IsingParam.c2_mul_s2star_eq_c2star`
-（人手 `duality_c2_star_eq_s2_star_c2`、`Part008/ClaimDualityC2StarEqS2StarC2.lean`）として得られ、
+（人手 `duality_c2_star_eq_s2_star_c2`、`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）として得られ、
 `IsingParam` を取る章 018 の最終定理には仮定として残らない。
 
 当初あった仮定は、014 章・015 章がマージされたことにより

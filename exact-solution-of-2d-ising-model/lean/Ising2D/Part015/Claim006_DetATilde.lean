@@ -19,7 +19,7 @@
   人手証明 Step 0 は (iii) を `duality_c2_star_eq_s2_star_c2` として引用している。
   本章の定理は (iii) を引数 `hdual` に取る形のまま置く（`Part008/Definition016_TV.lean` と同じ扱い）。
   `IsingParam` の上では (iii) は定理 `IsingParam.c2_mul_s2star_eq_c2star`
-  （`Part008/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
+  （`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
   (i) `c_1^2 - s_1^2 = 1`、(ii) `(c_2^*)^2 - (s_2^*)^2 = 1` は
   `IsingParam.const` の定義（`cosh`/`sinh`）から自動的に従う。
 * `γ_1(θ~_μ) ≥ 1` は既に 012 章の `Ising2D.one_le_gamma1R`（**すべての実数 `θ`** で成立）

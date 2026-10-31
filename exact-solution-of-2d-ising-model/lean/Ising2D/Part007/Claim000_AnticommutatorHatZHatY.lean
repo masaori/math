@@ -24,13 +24,13 @@ Lean では 4 つとも証明する。
 2. `[Z_j, Z_k]₊ = 2 I δ^M_{(j,k)}`（`<anticommutator_of_Z_and_Y>`）で `j = k` の項だけ残す
    → `acomm_sum_smul_clifford`（本ファイル）
 3. 残った `∑_{j=1}^M exp(-√-1·2π j(μ+ν)/M) = M δ^M_{μ+ν,0}` を使う
-   → `Ising2D.expPhase_sum`（`<exp_sum>`、`Ising2D/Part004/Claim008_ExpSum.lean`）
+   → `Ising2D.expPhase_sum`（`<exp_sum>`、`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean`）
 
 符号 `(±)` は `hat(Z)` の定義（`Ising2D/Part004/Definition009_HatZHatY.lean`）と同じく
 引数 `η : ℂ`（原文の `∓1`、`j = 1` の項の係数）で表す。本質的に効くのは `η^2 = 1` だけで、
 1. は「同じ `η`」、2. は「`η` と `-η`」の場合にあたる。
 -/
-import Ising2D.Part004.Claim008_ExpSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpSum
 import Ising2D.Part004.Claim012_HatPeriodicity
 
 namespace Ising2D

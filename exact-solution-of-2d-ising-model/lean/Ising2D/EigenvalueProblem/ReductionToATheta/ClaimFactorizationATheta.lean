@@ -24,8 +24,8 @@ Step 4 でこの等式を `duality_c2_star_eq_s2_star_c2` として明示的に�
 008 章で欠けていた前提がここでは補われている。**
 Lean 側では従来どおり仮定 `hdual` として持つ。
 -/
-import Ising2D.Part013.Claim002_AntiperiodicExpSum
-import Ising2D.Part014.Definition007_B1B2
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
 
 namespace Ising2D
 

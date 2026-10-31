@@ -29,7 +29,7 @@
 -/
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Algebra.Field.GeomSum
-import Ising2D.Part004.DefinitionExpPhase
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionExpPhase
 
 namespace Ising2D
 

@@ -37,16 +37,16 @@
 
 `T_{V_2}` の作用は、まず `V2H2Form`（`V2_exponential_representation` の右辺の式、`s2`, `K2star` は
 独立な引数）による共役について示し（`TConj_V2H2Form_checkZ` ほか）、人手の `V_2`
-（`def_transfer_matrix`）の単元 `V2Units`（`Part014/Definition001_VPlus.lean`）についての主張
+（`def_transfer_matrix`）の単元 `V2Units`（`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`）についての主張
 （`TConj_V2_checkZ` / `TConj_V2_checkY` / `linearity_of_T_V2`）はそこへ
 `V2Units_eq_V2H2FormUnits`（`V2_exponential_representation` による）で書き換えて得る。
 人手の第 3・第 4 式の証明が `V2_exponential_representation` を引いて `V_2 = (2s_2)^{M/2}exp(iK_2^*H_2)`
 と書く段がこの書き換えにあたる。
 -/
 import Ising2D.Part008.Claim012_TVActions
-import Ising2D.Part014.Claim004_ExtractTaylor
-import Ising2D.Part014.Definition007_B1B2
-import Ising2D.Part014.Definition001_VPlus
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExtractTaylor
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 
 namespace Ising2D
 
