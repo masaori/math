@@ -153,6 +153,8 @@ targets=(
   Ising2D.anticomm_Z_Z
   Ising2D.anticomm_Z_Y
   Ising2D.anticomm_Y_Y
+  Ising2D.acomm_Z_Z_clifford
+  Ising2D.acomm_Y_Y_clifford
   Ising2D.matrix_two_decomp
   Ising2D.siteProd_mem
   Ising2D.E_eq_siteProd
@@ -705,6 +707,8 @@ targets=(
   Ising2D.checkPhase_conj
   Ising2D.checkZ_conj
   Ising2D.checkY_conj
+  Ising2D.sum_sum_smul_two_deltaM_smul_one
+  Ising2D.deltaMod_sub_one
   Ising2D.acomm_checkZ_checkZ
   Ising2D.acomm_checkY_checkY
   Ising2D.acomm_checkZ_checkY
@@ -1422,8 +1426,6 @@ targets=(
   Ising2D.Z_eq_inverse_dft
   Ising2D.acomm_sum_smul_clifford
   Ising2D.acomm_sum_smul_zero
-  Ising2D.acomm_Z_Z_clifford
-  Ising2D.acomm_Y_Y_clifford
   Ising2D.expPhase_site_mul
   Ising2D.acomm_hatZ_hatZ_same
   Ising2D.acomm_hatZ_hatZ_opp

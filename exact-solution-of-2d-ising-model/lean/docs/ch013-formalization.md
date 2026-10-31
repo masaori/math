@@ -57,7 +57,9 @@
 | `Ising2D.checkPhase_conj` / `checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}` | 同上 (2) |
 | `Ising2D.checkZ_conj` / `checkY_conj` | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |
-| `Ising2D.acomm_checkZ_checkZ` | `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{μ+ν,1} I` | `anticommutator_of_check_Z_Y` |
+| `Ising2D.sum_sum_smul_two_deltaM_smul_one` | 証明中の行「`1 ≤ j,k ≤ M` では `δ^M_{(j,k)} = 1 ⟺ j = k`」（二重和の `j = k` の項だけが残る） | `anticommutator_of_check_Z_Y` |
+| `Ising2D.deltaMod_sub_one` | 証明中の行 `δ^M_{(μ+ν-1,0)} = δ^M_{(μ+ν,1)}`（`def_delta_M`） | `anticommutator_of_check_Z_Y` |
+| `Ising2D.acomm_checkZ_checkZ` | `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{μ+ν,1} I`（原文の式変形と 1 行ずつ対応する `calc`） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.acomm_checkZ_checkY` | `[check(Z)_μ, check(Y)_ν]₊ = 0` | 同上 |
 | `Ising2D.acomm_checkY_checkY` | `[check(Y)_μ, check(Y)_ν]₊ = 2M δ^M_{μ+ν,1} I` | 同上 |
 | `Ising2D.acomm_checkZ_checkZ_of_mem` / `acomm_checkY_checkY_of_mem` | 上を `μ,ν ∈ 𝓜̌` で `δ_{ν,M+1-μ}` の形にしたもの（原文の主張そのもの） | 同上 |

@@ -23,7 +23,8 @@ Lean では 4 つとも証明する。
 1. 反交換子の中の 2 つの線型結合を二重和へ展開する
    → `Ising2D.acomm_sum_smul`（`Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean`）
 2. `[Z_j, Z_k]₊ = 2 I δ^M_{(j,k)}`（`<anticommutator_of_Z_and_Y>`）で `j = k` の項だけ残す
-   → `acomm_sum_smul_clifford`（本ファイル）
+   → `acomm_sum_smul_clifford`（本ファイル）。渡す Clifford 形 `Ising2D.acomm_Z_Z_clifford`・`acomm_Y_Y_clifford` は
+   `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean` にある
 3. 残った `∑_{j=1}^M exp(-√-1·2π j(μ+ν)/M) = M δ^M_{μ+ν,0}` を使う
    → `Ising2D.expPhase_sum`（`<exp_sum>`、`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean`）
 
@@ -68,24 +69,6 @@ theorem acomm_sum_smul_zero {ι κ : Type*} [Fintype ι] [Fintype κ]
     Finset.sum_eq_zero fun j _ => by rw [h, smul_zero]
 
 end Clifford
-
-/-! ## `Z, Y` の反交換関係を Clifford 形に書き直す -/
-
-/-- `[Z_μ, Z_ν]₊ = 2 δ_{μν} I`（`anticomm_Z_Z` の言い換え）。 -/
-theorem acomm_Z_Z_clifford (μ ν : Fin M) :
-    acomm (Z μ) (Z ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
-  rw [anticomm_Z_Z, deltaM]
-  by_cases h : μ = ν
-  · rw [if_pos h, if_pos h, mul_one]
-  · rw [if_neg h, if_neg h, mul_zero]
-
-/-- `[Y_μ, Y_ν]₊ = 2 δ_{μν} I`（`anticomm_Y_Y` の言い換え）。 -/
-theorem acomm_Y_Y_clifford (μ ν : Fin M) :
-    acomm (Y μ) (Y ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
-  rw [anticomm_Y_Y, deltaM]
-  by_cases h : μ = ν
-  · rw [if_pos h, if_pos h, mul_one]
-  · rw [if_neg h, if_neg h, mul_zero]
 
 /-! ## 位相因子の積 -/
 

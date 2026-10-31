@@ -246,14 +246,24 @@
     `DefinitionFermiPsi` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`.eq_1` は数えていない）。
     `commutator_of_H_and_check_Z_Y` の必要十分版は未作成である（既存の `NecSuf/CommutatorClifford.lean` は退避した別経路の一般化で、新しい具体版の手順と対応しない）。
 
+  - ゴールラインの確認の二つ目（済み、2026-10-31）: 上の定数のうち `ClaimAnticommutatorHatZHatY` の 4 定数を判定した。
+    `acomm_sum_smul_clifford`・`acomm_sum_smul_zero` は経路に依らない汎用補題で、本文 `ClaimAnticommutatorCheckZY.lean`（人手 `anticommutator_of_check_Z_Y`）は
+    人手の 3 行（双線型性・`anticommutator_of_Z_and_Y`・`δ^M_{(j,k)} = 1 ⟺ j = k`）を束ねてこれで済ませていた。第 1〜3 式の証明を人手の式変形と 1 行ずつ対応する `calc` に書き直し
+    （`δ` が `j = k` の項だけを残す行は新しい補題 `sum_sum_smul_two_deltaM_smul_one`）、この 2 補題を使わないようにした。
+    `acomm_Z_Z_clifford`・`acomm_Y_Y_clifford` は `anticommutator_of_Z_and_Y` の言い換えなので、その形式化 `EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean` へ移した（主張・証明は不変）。
+    主張の型は変えていない。レビューで指摘なしになるまで直した。通しの定理から `ClaimAnticommutatorHatZHatY` への依存は 0 になった（同じメタプログラムで確かめた）。
+    残る `RoutesNotAdopted/IntegerMomentum/` への依存は 23 定数（ほかに非公開の補助 `neg_mul_V1pmHalf`）である。前回「31」と書いた数は数え違いで、ファイルごとの内訳どおりに数えると 27 だった。
+    `ClaimAnticommutatorCheckZY.lean` は推移的にはまだ `RoutesNotAdopted/` を import している（`ReductionToATheta/DefinitionHalfIntegerModes.lean` が `ClaimH1H2ViaHatZHatY` を、
+    `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` が `DefinitionHatZHatY` を直接 import する）。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 上の 31 定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
+- 上の残りの `RoutesNotAdopted/IntegerMomentum/` の定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
-  1 回に 1 ファイル分ずつ進める（最初は `ClaimAnticommutatorHatZHatY` の 4 定数）。
+  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数は済み。次は `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`）。
 
 この後に残る確認:
 

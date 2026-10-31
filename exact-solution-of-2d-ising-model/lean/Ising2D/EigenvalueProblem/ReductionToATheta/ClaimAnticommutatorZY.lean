@@ -187,6 +187,29 @@ theorem anticomm_Y_Y (μ ν : Fin M) :
       jw_anticomm μ ν pauliY pauliY pauliY_mul_pauliX pauliY_mul_pauliX fun he => absurd he h
     rw [h0, deltaM, if_neg h, mul_zero, zero_smul]
 
+/-! ## `Z, Y` の反交換関係を Clifford 形に書き直す
+
+`deltaM` を展開して `[Z_μ, Z_ν]₊ = (if μ = ν then 2 else 0) I` の形にしたもの。
+人手証明のどの行にも当たらない Lean 側だけの言い換えで、Clifford 関係を仮定に取る補題
+（必要十分版や、本文から退避した整数運動量の経路の汎用補題）へ `Z, Y` を渡すために置く。
+言い換える元の主張が `anticommutator_of_Z_and_Y` なので、その形式化である本ファイルに置く。 -/
+
+/-- `[Z_μ, Z_ν]₊ = 2 δ_{μν} I`（`anticomm_Z_Z` の言い換え）。 -/
+theorem acomm_Z_Z_clifford (μ ν : Fin M) :
+    acomm (Z μ) (Z ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
+  rw [anticomm_Z_Z, deltaM]
+  by_cases h : μ = ν
+  · rw [if_pos h, if_pos h, mul_one]
+  · rw [if_neg h, if_neg h, mul_zero]
+
+/-- `[Y_μ, Y_ν]₊ = 2 δ_{μν} I`（`anticomm_Y_Y` の言い換え）。 -/
+theorem acomm_Y_Y_clifford (μ ν : Fin M) :
+    acomm (Y μ) (Y ν) = (if μ = ν then (2 : ℂ) else 0) • (1 : TensorPow M) := by
+  rw [anticomm_Y_Y, deltaM]
+  by_cases h : μ = ν
+  · rw [if_pos h, if_pos h, mul_one]
+  · rw [if_neg h, if_neg h, mul_zero]
+
 /-- `[Y_μ, Z_ν]₊ = 0`（`anticomm_Z_Y` の対称版）。 -/
 theorem anticomm_Y_Z (μ ν : Fin M) : acomm (Y μ) (Z ν) = 0 := by
   rw [acomm_comm]

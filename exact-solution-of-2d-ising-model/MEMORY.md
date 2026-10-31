@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明のゴールラインの確認の二つ目を行った。本文の `ClaimAnticommutatorCheckZY.lean`（人手 `anticommutator_of_check_Z_Y`）が整数運動量の経路の記録 `ClaimAnticommutatorHatZHatY` の汎用補題で人手の 3 行を束ねていたので、第 1〜3 式を人手の式変形と 1 行ずつ対応する `calc` に書き直し、Clifford 形 `acomm_Z_Z_clifford`・`acomm_Y_Y_clifford` は `ReductionToATheta/ClaimAnticommutatorZY.lean` へ移した（主張の型は不変）。通しの定理の `RoutesNotAdopted/IntegerMomentum/` への依存は 23 定数に減った。次は `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`（状態台帳の「次の一歩」）。依存の洗い出しは `import Ising2D` した一時ファイルで `getUsedConstantsAsSet` を辿り、宣言モジュールが `Ising2D.RoutesNotAdopted` で始まるものを数える（`lake env lean` で実行。コミットしない）。
+
 2026-10-31: Lean の通しの証明のゴールラインの確認の一つ目を行った。通しの定理が推移的に使う定数のうち `RoutesNotAdopted/` で宣言されたものを Lean のメタプログラムで洗い出し、`EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`（`commutator_of_H_and_check_Z_Y`）が退避した `H1_H2_via_check_Z_Y` を使っていたので、人手の Step 1〜4（サイトごとの交換関係 → 和へまとめる → 境界の二項の等式）どおりに書き直した（(A)〜(D) の主張の型は不変）。これで (A)〜(D) は `CliffordTriple.lie_sum_*` の特殊化ではなくなった（必要十分版は未作成）。残る依存は `RoutesNotAdopted/IntegerMomentum/` の共有補題 31 定数（一覧は状態台帳）。次はそれらの判定と移動。
 
 2026-10-31: 章立ての組み直し（runbook `docs/tasks/paper-organization-runbook.md`）を完了した。完了の確認をやり直し、ゴールラインの全項目が成り立つことを別のエージェントの独立の照合を含めて確かめ、ゴール台帳の「複素行列版イジング論文の構成再編が、公開物を読むだけで進捗まで分かる」を達成にした。作業の順序の外の残り（冒頭の「この論文のゴール」が本文で示していない異方な臨界条件と未定義の「自由エネルギー」を書いていること、数学的道具立ての中の前方参照、臨界点の章末の $\gamma$ の書き方など）は状態台帳の「未確定」に在る。
