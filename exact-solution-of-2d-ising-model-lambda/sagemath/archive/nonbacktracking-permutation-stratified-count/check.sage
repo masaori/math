@@ -9,7 +9,7 @@ L=2 の非後退置換 30,784 個を全列挙し、各置換の像
 浮動小数点は使わない。
 """
 
-load("sagemath/check/moved-orbit-length-sum-stratified/check.sage")
+load("sagemath/archive/moved-orbit-length-sum-stratified/check.sage")
 
 R = PolynomialRing(ZZ, "y")
 y = R.gen()

@@ -2,7 +2,7 @@
 
 旧主張「軌道の長さの総和は反転対と単純通過で数えられる」は参照用ノートへ退避した。
 
-**対象ラベル**: `def_moved_orbit_family`
+**旧対象ラベル**: `def_moved_orbit_family`（本文から退避）
 
 任意の置換 $\varphi\in\operatorname{Perm}(\vec E_L)$ についての等式
 $\sum_{C\in\mathcal C(\varphi)}|C|=|M(\varphi)|=2|D(\varphi)|+|E_1(\varphi)|$
@@ -18,8 +18,8 @@ $\sum_{C\in\mathcal C(\varphi)}|C|=|M(\varphi)|=2|D(\varphi)|+|E_1(\varphi)|$
 （非後退に限らない任意の置換。主張の全称の範囲をこの大きさで尽くす）。
 $L=2$ では非後退置換 $30{,}784$ 個を全列挙する（行列式の和に実際に現れる範囲）。
 
-- 実行: `sage sagemath/check/moved-orbit-length-sum-stratified/check.sage`
-- 状態: PASS（2026-10-30）
+- 実行: `sage sagemath/archive/moved-orbit-length-sum-stratified/check.sage`
+- 状態: PASS（2026-10-31）
 - 結果: $L=1$ は置換 $24$ 個（反転対を含むもの $19$ 個）、$L=2$ は非後退置換
   $30{,}784$ 個（反転対を含むもの $30{,}287$ 個）で、全段が成立した。
 

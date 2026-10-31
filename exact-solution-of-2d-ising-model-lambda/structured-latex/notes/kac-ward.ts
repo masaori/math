@@ -7,6 +7,125 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_moved_orbit_partition_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 動く辺の軌道族による分割" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道による直接比較は採らない。元の定義・主張・証明を保存する。"]),
+      paragraph(["元の定義「置換が動かす向き付き辺の集合」:"]),
+      paragraph([
+      math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " に対し、",
+      math(String.raw`\varphi`), " が動かす向き付き辺の集合を",
+      ]),
+      displayMath(String.raw`M(\varphi):=\{\,\vec e\in\vec E_L\mid
+      \varphi(\vec e)\ne\vec e\,\}`),
+      paragraph([
+      "で定める。", math(String.raw`\vec E_L`), " は有限集合（",
+      ref("def_oriented_edges"), "）なので、", math(String.raw`M(\varphi)`),
+      " も有限集合である。",
+      ]),
+      paragraph(["元の定義「動く辺の相異なる軌道の族」:"]),
+      paragraph([
+      math(String.raw`\vec e,\vec f\in M(\varphi)`), " に対して、",
+      math(String.raw`\vec e\sim_{\varphi}\vec f`), " を ",
+      math(String.raw`\vec f\in O_{\varphi}(\vec e)`),
+      " で定める。同じ軌道集合を重複して数えない軌道族を",
+      ]),
+      displayMath(String.raw`\mathcal C(\varphi):=
+      \{\,O_{\varphi}(\vec e)\mid \vec e\in M(\varphi)\,\}`),
+      paragraph([
+      "で定める。右辺は軌道集合を元とする集合なので、相異なる始点が同じ軌道を与える場合も、",
+      "その軌道集合自身を同値類の代表として一度だけ含める。",
+      ]),
+      paragraph(["元の主張:"]),
+      paragraph([
+      math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " とする。軌道族 ",
+      math(String.raw`\mathcal C(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
+      "）は次を満たす。",
+      ]),
+      list([
+      [math(String.raw`\mathcal C(\varphi)`), " の各元は空でない。"],
+      [
+      math(String.raw`C_1,C_2\in\mathcal C(\varphi)`), " かつ ",
+      math(String.raw`C_1\ne C_2`), " ならば ",
+      math(String.raw`C_1\cap C_2=\emptyset`), " である。",
+      ],
+      [math(String.raw`\bigcup_{C\in\mathcal C(\varphi)}C=M(\varphi)`), " である。"],
+      ]),
+      paragraph([
+      "したがって ", math(String.raw`\sim_{\varphi}`), " は ",
+      math(String.raw`M(\varphi)`), " 上の同値関係であり、",
+      math(String.raw`\mathcal C(\varphi)`), " はその同値類の集合である。",
+      ]),
+      paragraph(["元の証明:"]),
+      paragraph([
+      "まず、", math(String.raw`\vec f\in O_{\varphi}(\vec e)`), " ならば ",
+      math(String.raw`O_{\varphi}(\vec f)=O_{\varphi}(\vec e)`), " であることを示す。",
+      "参照用ノート「不採用経路: 置換の軌道集合」により、ある ",
+      math(String.raw`j\in\mathbb N`), " が存在して ",
+      math(String.raw`\vec f=\varphi^{\circ j}(\vec e)`), " である。任意の ",
+      math(String.raw`k\in\mathbb N`), " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+      \varphi^{\circ k}(\vec f)
+      &=\varphi^{\circ k}\bigl(\varphi^{\circ j}(\vec e)\bigr)
+      &&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\bigr)\\
+      &=\varphi^{\circ(k+j)}(\vec e)
+      &&\bigl(\because\ \blkref{def_permutation_iterate}\text{ の再帰}\bigr)
+      \end{aligned}`),
+      paragraph([
+      "なので ", math(String.raw`O_{\varphi}(\vec f)\subset O_{\varphi}(\vec e)`),
+      " である。", math(String.raw`j`), " は ",
+      math(String.raw`0\le j<r_{\varphi}(\vec e)`), " の代表へ取り直せる。",
+      ref("def_permutation_minimal_return"), " により",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+      \varphi^{\circ(r_{\varphi}(\vec e)-j)}(\vec f)
+      &=\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)
+      &&\bigl(\because\ \vec f=\varphi^{\circ j}(\vec e)\text{ と }\blkref{def_permutation_iterate}\bigr)\\
+      &=\vec e
+      &&\bigl(\because\ \blkref{def_permutation_minimal_return}\bigr)
+      \end{aligned}`),
+      paragraph([
+      "なので、同じ包含を ", math(String.raw`(\vec f,\vec e)`),
+      " に適用して逆包含を得る。よって二つの軌道集合は等しい。",
+      ]),
+      paragraph([
+      "各軌道が空でないこと。", math(String.raw`O_{\varphi}(\vec e)\in\mathcal C(\varphi)`),
+      " とすると、", ref("def_permutation_iterate"), " の ",
+      math(String.raw`\varphi^{\circ0}=\mathrm{id}_{\vec E_L}`), " により ",
+      math(String.raw`\vec e\in O_{\varphi}(\vec e)`), " である。",
+      ]),
+      paragraph([
+      "相異なる二軌道が互いに素であること。二軌道が ",
+      math(String.raw`\vec f`), " を共有すると仮定する。直前に示した等式を二度使うと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+      O_{\varphi}(\vec e_1)
+      &=O_{\varphi}(\vec f)
+      &&\bigl(\because\ \vec f\in O_{\varphi}(\vec e_1)\bigr)\\
+      &=O_{\varphi}(\vec e_2)
+      &&\bigl(\because\ \vec f\in O_{\varphi}(\vec e_2)\bigr)
+      \end{aligned}`),
+      paragraph([
+      "となる。したがって相異なる二軌道は交わらない。",
+      ]),
+      paragraph([
+      "合併の等式を両包含で示す。", math(String.raw`\vec f\in O_{\varphi}(\vec e)`),
+      "、", math(String.raw`\vec e\in M(\varphi)`), " とする。",
+      ref("claim_moved_orbit_closed_nonbacktracking"), " の第一の主張により、軌道の各項は動くので ",
+      math(String.raw`\vec f\in M(\varphi)`), " である。よって左辺は右辺に含まれる。逆に ",
+      math(String.raw`\vec e\in M(\varphi)`), " ならば ",
+      math(String.raw`O_{\varphi}(\vec e)\in\mathcal C(\varphi)`), " かつ ",
+      math(String.raw`\vec e\in O_{\varphi}(\vec e)`),
+      " なので右辺は左辺に含まれる。以上で三条件を得る。反射律は ",
+      math(String.raw`\vec e\in O_{\varphi}(\vec e)`),
+      "、対称律と推移律は軌道集合の等式から従うので、",
+      math(String.raw`\sim_{\varphi}`), " は同値関係である。全過程は有限集合の写像と自然数の加法だけで閉じる。",
+      ]),
+    ],
+  },
+  {
     id: "note_moved_orbit_weight_phase_twist_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解" },
@@ -113,8 +232,8 @@ export default defineNotes([
 \prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\Bigr)`),
                         paragraph([
                           "と分解する。ここで ", math(String.raw`M(\varphi)`), " は ",
-                          ref("def_moved_edge_set"), "、", math(String.raw`\mathcal C(\varphi)`), " は ",
-                          ref("def_moved_orbit_family"), "、", math(String.raw`\lvert C\rvert\in\mathbb N`),
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、", math(String.raw`\mathcal C(\varphi)`), " は ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族", "、", math(String.raw`\lvert C\rvert\in\mathbb N`),
                           " は有限集合 ", math(String.raw`C`), " の元の個数（",
                           ref("def_cardinality_notation"), "）である。両辺は ",
                           math(String.raw`\overline{\mathbb Q}[x]`),
@@ -138,11 +257,11 @@ T^{a,b}_{\varphi}(x)
 &=\widehat{\operatorname{sgn}(\varphi)}\cdot
 \Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
 \prod_{\vec e\in M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
-&&\bigl(\because\ \blkref{def_moved_edge_set}\text{ により }\vec e\notin M(\varphi)\text{ では }\varphi(\vec e)=\vec e\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合}\text{ により }\vec e\notin M(\varphi)\text{ では }\varphi(\vec e)=\vec e\bigr)\\
 &=\widehat{\operatorname{sgn}(\varphi)}\cdot
 \Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
 \prod_{C\in\mathcal C(\varphi)}\prod_{\vec e\in C}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
-&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割}\bigr)\\
 &=\widehat{\operatorname{sgn}(\varphi)}\cdot
 \Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\vec e}(x)\Bigr)\cdot
 \prod_{C\in\mathcal C(\varphi)}\prod_{\vec e\in C}
@@ -155,8 +274,8 @@ T^{a,b}_{\varphi}(x)
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の積の可換則と結合則}\bigr)
 \end{aligned}`),
                         paragraph([
-                          "第二の等号は ", ref("def_moved_edge_set"), " の分割、第四の等号は ",
-                          ref("claim_moved_orbit_partition"), " が与える ",
+                          "第二の等号は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", " の分割、第四の等号は ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " が与える ",
                           math(String.raw`M(\varphi)`), " の軌道族への互いに素な分割に、冒頭の分割積の事実を適用したものである。",
                           "第五の等号では、", math(String.raw`\vec e\in C\subset M(\varphi)`), " なら ",
                           ref("def_kac_ward_polynomial_matrices"), " の恒等行列の成分が零なので ",
@@ -244,7 +363,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                       displayMath(String.raw`\operatorname{sgn}(\varphi)
 =\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}\in\mathbb Z`),
                       paragraph([
-                        "である。軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ", ref("def_moved_orbit_family"),
+                        "である。軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "、有限集合の元の個数 ", math(String.raw`\lvert C\rvert\in\mathbb N`), " は ",
                         ref("def_cardinality_notation"), " で定めた。各軌道は空でなく固定点を含まないので ",
                         math(String.raw`2\le\lvert C\rvert`), " であり、指数 ",
@@ -264,7 +383,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                       paragraph([
                         "で定める。軌道集合の定義により ", math(String.raw`\varphi(C)=C`),
                         " であり、", math(String.raw`\varphi`), " は全単射なので ", math(String.raw`\varphi_C`),
-                        " も全単射である。", ref("claim_moved_orbit_partition"), " と置換の単射性により、",
+                        " も全単射である。", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " と置換の単射性により、",
                       ]),
                       displayMath(String.raw`C=\{\vec e_C,\varphi(\vec e_C),\ldots,
 \varphi^{\circ(m_C-1)}(\vec e_C)\}`),
@@ -285,14 +404,14 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                         "）から、この巡回置換の符号は ", math(String.raw`(-1)^{m_C-1}`), " である。",
                       ]),
                       paragraph([
-                        ref("claim_moved_orbit_partition"), " により相異なる軌道は互いに素である。各軌道上の巡回置換を",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により相異なる軌道は互いに素である。各軌道上の巡回置換を",
                         "軌道外では恒等写像として延長したものの合成は ", math(String.raw`\varphi`),
                         " に等しく、固定辺上では両者とも恒等写像である。符号の乗法性を軌道の有限族へ繰り返し適用すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\varphi)
 &=\prod_{C\in\mathcal C(\varphi)}\operatorname{sgn}(\varphi_C)
-&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と }\blkref{claim_permutation_sign_mul}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割}\text{ と }\blkref{claim_permutation_sign_mul}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}(-1)^{m_C-1}
 &&\bigl(\because\ C\text{ 上の巡回置換は }m_C-1\text{ 個の互換の合成。}\blkref{claim_transposition_sign_on_finite_ordered_set}\bigr)\\
 &=\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}
@@ -321,7 +440,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
                         math(String.raw`\vec e_{\ast}:\mathcal C(\varphi)\to\vec E_L`),
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
                         math(String.raw`\vec e_{\ast}(C)\in C`), " となるように一つ選び（各 ",
-                        math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
+                        math(String.raw`C`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割",
                         " により空でない）、",
                         math(String.raw`\gamma_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)`),
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
@@ -333,7 +452,7 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
 \widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\,\zeta_8^{\,t_{\circ}(\gamma_C)}}\right)`),
                       paragraph([
                         "が成り立つ。置換項は参照用ノート「不採用経路: Kac--Ward 行列式の置換項」",
-                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、軌道族は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "、二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
                         "、循環総回転数は ", ref("def_cyclic_total_turning"),
                         "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
@@ -346,14 +465,14 @@ M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
 
                       paragraph([
                         math(String.raw`C\in\mathcal C(\varphi)`), " とする。",
-                        ref("claim_moved_orbit_partition"), " の被覆により ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " の被覆により ",
                         math(String.raw`\vec e_{\ast}(C)\in C\subset M(\varphi)`), " なので、",
-                        ref("def_moved_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", " により ",
                         math(String.raw`\varphi\bigl(\vec e_{\ast}(C)\bigr)\ne\vec e_{\ast}(C)`),
                         " である。", ref("claim_moved_orbit_closed_nonbacktracking"),
                         " により軌道列 ", math(String.raw`\gamma_C`), " の各項は動く辺なので ",
                         math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)\subset M(\varphi)`),
-                        " であり、", ref("claim_moved_orbit_partition"), " により ",
+                        " であり、", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により ",
                         math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
                         math(String.raw`\sim_{\varphi}`), " の同値類の集合なので、",
                         math(String.raw`\vec e_{\ast}(C)`), " を含む同値類について ",
@@ -400,7 +519,7 @@ T^{a,b}_{\varphi}(x)
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
                         " となるように一つ選び（各 ", math(String.raw`C`), " は ",
-                        ref("claim_moved_orbit_partition"), " により空でない）、",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
                         math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
@@ -412,7 +531,7 @@ T^{a,b}_{\varphi}(x)
 \widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)`),
                       paragraph([
                         "が成り立つ。行列式は ", ref("def_kac_ward_determinants"),
-                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、軌道族は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "、二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
                         "、循環総回転数は ", ref("def_cyclic_total_turning"),
                         "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
@@ -540,7 +659,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                         " と仮定すると置換の単射性（", ref("def_row_permutation"),
                         "）により ", math(String.raw`\varphi(\vec e)=\vec e`), " となり ",
                         math(String.raw`\vec e\in M(\varphi)`), "（",
-                        ref("def_moved_edge_set"), "）に反するので、",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）に反するので、",
                         math(String.raw`\varphi(\vec e)\in M(\varphi)`), " である。また ",
                         math(String.raw`\vec e\in M(\varphi)`), " では ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`), " なので ",
@@ -631,7 +750,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
 \left(-\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}\right)\ \in\ \overline{\mathbb Q}`),
       paragraph([
         "で定める。ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は参照用ノート「不採用経路: 反転対と単純通過を固定した非後退置換」、軌道族 ",
-        math(String.raw`\mathcal C(\varphi)`), " は ", ref("def_moved_orbit_family"),
+        math(String.raw`\mathcal C(\varphi)`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
         "、遷移行列の成分 ", math(String.raw`M^{a,b}_{\vec e,\vec f}`), " は ",
         ref("def_kac_ward_transition_matrices"), " で定めた。全ての和と積は有限集合上にあり、各成分は ",
         math(String.raw`\overline{\mathbb Q}`), " の元なので、値は ",
@@ -656,7 +775,7 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
 \ \subseteq\ E_L`),
       paragraph([
         "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-        ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
+        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、向き付き辺が台の辺と向きの対 ",
         math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
         " で定めた。反転写像（", ref("def_edge_reversal"), "）は ",
         math(String.raw`\iota(e,0)=(e,1)`), " を満たすので、",
@@ -737,13 +856,13 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
                         " となるように一つ選び（各 ", math(String.raw`C`), " は ",
-                        ref("claim_moved_orbit_partition"), " により空でない）、",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi`), " は、動く辺を直ちに引き返さない後続へ写すので、",
                         "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」", " の仮定を満たす。さらに ",
-                        ref("claim_moved_orbit_partition"), " により ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により ",
                         math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
                         math(String.raw`\sim_{\varphi}`), " の同値類の集合なので、",
                         math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)=C`),
@@ -846,7 +965,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
         " と仮定すると置換の単射性（", ref("def_row_permutation"),
         "）により ", math(String.raw`\varphi(\vec e)=\vec e`), " となり ",
         math(String.raw`\vec e\in M(\varphi)`), "（",
-        ref("def_moved_edge_set"), "）に反するので、",
+        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）に反するので、",
         math(String.raw`\varphi(\vec e)\in M(\varphi)`), " である。また ",
         math(String.raw`\vec e\in M(\varphi)`), " では ",
         math(String.raw`\varphi(\vec e)\ne\vec e`), " なので ",
@@ -1203,7 +1322,7 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
 \operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}\,\bigr|`),
                         paragraph([
                           "で定める。動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                          ref("def_moved_edge_set"), "、終点写像 ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、終点写像 ",
                           math(String.raw`\operatorname{tgt}`), " は ",
                           ref("def_oriented_edge_endpoints"),
                           " で定めた。右辺は有限集合 ", math(String.raw`M(\varphi)`),
@@ -1307,7 +1426,7 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経
 \operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}`),
                           paragraph([
                             "で定める（動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                            ref("def_moved_edge_set"), "、終点写像 ", math(String.raw`\operatorname{tgt}`),
+                            "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、終点写像 ", math(String.raw`\operatorname{tgt}`),
                             " は ", ref("def_oriented_edge_endpoints"), "）。この集合の元の個数が接触対の個数 ",
                             math(String.raw`N_{\mathrm{ct}}(\varphi)`),
                             "（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）である。",
@@ -1613,7 +1732,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
 \ \subseteq\ E_L`),
       paragraph([
         "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-        ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
+        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、向き付き辺が台の辺と向きの対 ",
         math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
         " で定めた。有限集合 ", math(String.raw`E_L`),
         " の部分集合である。有限個の向き付き辺を比較すれば所属を判定できる。",
@@ -1637,7 +1756,7 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
 \left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
 \in\overline{\mathbb Q}`),
       paragraph([
-        "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
+        "と定める。軌道族は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族", "、遷移成分は ",
         ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
         "参照用ノート「不採用経路: ファイバーの位相付き寄与」", " の各加数として繰り返し引く。実数体も複素数体も現れない。",
       ]),
@@ -1883,14 +2002,14 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       paragraph(["元の証明:"]),
                         paragraph([
                           "各 ", math(String.raw`C\in\mathcal C(\varphi)`),
-                          "（", ref("def_moved_orbit_family"), "）は ",
-                          ref("claim_moved_orbit_partition"), " により空でないので、基点 ",
+                          "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族", "）は ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により空でないので、基点 ",
                           math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`), " を一つ選び、",
                           math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
                           "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。",
-                          ref("claim_moved_orbit_partition"), " により ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により ",
                           math(String.raw`C\subseteq M(\varphi)`), " なので ",
-                          ref("def_moved_edge_set"), " により ",
+                          "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", " により ",
                           math(String.raw`\varphi\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)\ne\vec e_{\ast}^{\,\varphi}(C)`),
                           " であり、", "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
                           " の仮定を満たす。また ", ref("claim_moved_orbit_closed_nonbacktracking"),
@@ -1997,9 +2116,9 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         "（", ref("def_nonbacktracking_permutations"), "）は ",
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
                         "（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）を満たすとする。各 ",
-                        math(String.raw`C\in\mathcal C(\varphi)`), "（", ref("def_moved_orbit_family"),
+                        math(String.raw`C\in\mathcal C(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "）について ", math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
-                        " を一つ選び（各 ", math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
+                        " を一つ選び（各 ", math(String.raw`C`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割",
                         " により空でない）、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
                         "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
@@ -2034,7 +2153,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         math(String.raw`\gamma^{\varphi}_C`), " は閉じた非後退辺列であり、その ",
                         math(String.raw`r`), " 個の項は相異なる。", "参照用ノート「不採用経路: 置換の軌道集合」",
                         " により各項 ", math(String.raw`\vec\gamma_k`), " は ", math(String.raw`C`),
-                        " の元であり、", ref("claim_moved_orbit_partition"), " により ",
+                        " の元であり、", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " により ",
                         math(String.raw`C\subseteq M(\varphi)`), " なので、各項は ",
                         math(String.raw`M(\varphi)`), " の元である。",
                       ]),
@@ -2058,7 +2177,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                       paragraph([
                         "次に位相積を計算する。各 ", math(String.raw`C\in\mathcal C(\varphi)`),
                         " について、", math(String.raw`\vec e_0\in C\subseteq M(\varphi)`), " なので ",
-                        ref("def_moved_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", " により ",
                         math(String.raw`\varphi(\vec e_0)\ne\vec e_0`), " であり、",
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         " なので ", "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
@@ -2444,7 +2563,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\Theta(\varphi):=
 \sum_{\vec g\in M(\varphi)}\tau\bigl(\vec g,\varphi(\vec g)\bigr)\in\mathbb Z`),
                       paragraph([
-                        "で定める。動く辺の集合は ", ref("def_moved_edge_set"), "、一歩の回転数は ",
+                        "で定める。動く辺の集合は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "、一歩の回転数は ",
                         ref("def_step_turning"), " で定めた。", math(String.raw`\vec g\in M(\varphi)`),
                         " なら非後退置換の定義により ",
                         math(String.raw`\varphi(\vec g)\in\operatorname{Next}(\vec g)`),
@@ -2574,7 +2693,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_moved_orbit_length_sum_stratified_archived",
-    targets: ["def_moved_orbit_family"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 軌道の長さの総和は反転対と単純通過で数えられる" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道長による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2592,8 +2711,8 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 =2\,\lvert D(\varphi)\rvert+\lvert E_1(\varphi)\rvert`),
                       paragraph([
                         "が成り立つ。軌道族 ", math(String.raw`\mathcal C(\varphi)`), " は ",
-                        ref("def_moved_orbit_family"), "、動く辺の集合 ",
-                        math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族", "、動く辺の集合 ",
+                        math(String.raw`M(\varphi)`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ",
                         "参照用ノート「不採用経路: 反転対の辺集合」", "、単純通過の辺集合 ",
                         math(String.raw`E_1(\varphi)`), " は ",
@@ -2641,7 +2760,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 \sum_{C\in\mathcal C(\varphi)}\lvert C\rvert
 &=\lvert M(\varphi)\rvert
-&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ の互いに素な分割。個数の加法性}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割}\text{ の互いに素な分割。個数の加法性}\bigr)\\
 &=\sum_{e\in E_{\mathrm{supp}}(\varphi)}\lvert M_e(\varphi)\rvert
 &&\bigl(\because\ \text{準備の台の辺ごとの互いに素な合併。個数の加法性と }\lvert\{e\}\times M_e(\varphi)\rvert=\lvert M_e(\varphi)\rvert\bigr)\\
 &=\sum_{e\in D(\varphi)}\lvert M_e(\varphi)\rvert
@@ -2673,7 +2792,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       ]),
                       list([
                         [math(String.raw`M(\mathcal T(\varphi))=\{\iota(\vec g)\mid\vec g\in M(\varphi)\}`),
-                          " である（", math(String.raw`M`), " は ", ref("def_moved_edge_set"), "）。"],
+                          " である（", math(String.raw`M`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）。"],
                         [math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " である。"],
                         [math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。"],
                         [math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
@@ -2714,7 +2833,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \vec g\in M(\mathcal T(\varphi))
 &\Longleftrightarrow
 \iota\bigl(\varphi^{-1}(\iota(\vec g))\bigr)\ne\vec g
-&&\bigl(\because\ \blkref{def_moved_edge_set},\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合},\ \text{参照用ノート「不採用経路: 置換の経路反転」}\bigr)\\
 &\Longleftrightarrow
 \varphi^{-1}(\iota(\vec g))\ne\iota(\vec g)
 &&\bigl(\because\ \vec g=\iota(\iota(\vec g))\text{（}\blkref{claim_reversal_is_involution}\text{）と }\iota\text{ の単射性}\bigr)\\
@@ -2723,7 +2842,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 &&\bigl(\because\ \text{両辺への }\varphi\text{ の適用。}\varphi\text{ は単射（}\blkref{def_row_permutation}\text{）}\bigr)\\
 &\Longleftrightarrow
 \iota(\vec g)\in M(\varphi)
-&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合}\bigr)
 \end{aligned}`),
                       paragraph([
                         "であり、", math(String.raw`\iota`), " は対合（", ref("claim_reversal_is_involution"),
@@ -2740,7 +2859,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`\mathcal T(\varphi)(\vec g)=\iota(\vec h)`), " である。もし ",
                         math(String.raw`\varphi(\vec h)=\vec h`), " なら ", math(String.raw`\vec h=\iota(\vec g)`),
                         " となり、代入して ", math(String.raw`\varphi(\iota(\vec g))=\iota(\vec g)`), " が従うが、これは ",
-                        math(String.raw`\iota(\vec g)\in M(\varphi)`), "（", ref("def_moved_edge_set"),
+                        math(String.raw`\iota(\vec g)\in M(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "）に反する。よって ", math(String.raw`\vec h\in M(\varphi)`), " であり、",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi(\vec h)\in\operatorname{Next}(\vec h)`), "、すなわち ",
@@ -3016,7 +3135,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
                         " である。", math(String.raw`\vec e\in M(\varphi)`), " すなわち ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`),
-                        "（", ref("def_moved_edge_set"), "）なので、",
+                        "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）なので、",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " であり、",
                         ref("def_nonbacktracking_successors"), " により ",
@@ -3082,7 +3201,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "仮定の二場合を分ける。第一の場合 ", math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " を取る。",
                       ]),
                       paragraph([
-                        "もし ", math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"), " により ",
+                        "もし ", math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", " により ",
                         math(String.raw`\varphi(\iota(\vec e))=\iota(\vec e)=\varphi(\vec f)`), " である。置換の単射性（",
                         ref("def_row_permutation"), "）から ", math(String.raw`\iota(\vec e)=\vec f`), " となるが、これを仮定の等式へ代入すると ",
                         math(String.raw`\varphi(\vec f)=\vec f`), " となり ", math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
@@ -3244,7 +3363,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\vec f\in M(\varphi)`), " すなわち ",
                         math(String.raw`\varphi(\vec f)\ne\vec f`),
-                        "（", ref("def_moved_edge_set"), "）なので、",
+                        "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）なので、",
                         ref("def_nonbacktracking_permutations"), " により ",
                         math(String.raw`\varphi(\vec f)\in\operatorname{Next}(\vec f)`), " であり、",
                         ref("def_nonbacktracking_successors"), " により ",
@@ -3565,7 +3684,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "である。", math(String.raw`\varphi`), " は ", math(String.raw`C`),
                         " をそれ自身へ全単射で写すので、これは ", math(String.raw`\mathcal T(\varphi)`),
                         " が ", math(String.raw`\iota(C)`), " を逆順に巡回することを示す。",
-                        ref("claim_moved_orbit_partition"), " と ", "参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割", " と ", "参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」",
                         " により、", math(String.raw`C\mapsto\iota(C)`), " は ",
                         math(String.raw`\mathcal C(\varphi)`), " から ",
                         math(String.raw`\mathcal C(\mathcal T(\varphi))`), " への全単射である。",
@@ -3618,7 +3737,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &=\zeta_8^{-2\sum_{\vec h\in M(\varphi)}\tau(\vec h,\varphi(\vec h))}
 \prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec h\in C}M^{a,b}_{\vec h,\varphi(\vec h)}\right)
-&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ と有限積の指数法則}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割}\text{ と有限積の指数法則}\bigr)\\
 &=\zeta_8^{-2\Theta(\varphi)}\,\mathcal W^{a,b}_L(\varphi)
 &&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の一歩回転数の総和」},\ \text{参照用ノート「不採用経路: 非後退置換一つの位相寄与」}\bigr)
 \end{aligned}`),
@@ -3665,7 +3784,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の積の可換性と結合性で }-1\text{ の因子をまとめた}\bigr)\\
 &=(-1)^{\lvert\mathcal C(\varphi)\rvert}
 \prod_{\vec g\in M(\varphi)}M^{a,b}_{\vec g,\varphi(\vec g)}
-&&\bigl(\because\ \blkref{claim_moved_orbit_partition}\text{ の非交和による有限積の分割}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割}\text{ の非交和による有限積の分割}\bigr)\\
 &=(-1)^{\lvert\mathcal C(\varphi)\rvert}
 \prod_{\vec g\in M(\varphi)}\varepsilon_{a,b}\bigl(\varphi(\vec g)\bigr)\,
 \zeta_8^{\,\tau(\vec g,\varphi(\vec g))}
@@ -4122,13 +4241,13 @@ s\,\zeta_8^{\Theta(\varphi)}
                         "したがって反転像による障害 ",
                         math(String.raw`\varphi(\vec f)=\iota(\vec e)`), " または ",
                         math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " が成り立つ。第一の場合、もし ",
-                        math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", ref("def_moved_edge_set"),
+                        math(String.raw`\iota(\vec e)\notin M(\varphi)`), " なら ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         " により次の式鎖を得る。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \varphi(\iota(\vec e))
 &=\iota(\vec e)
-&&\bigl(\because\ \blkref{def_moved_edge_set}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合}\bigr)\\
 &=\varphi(\vec f)
 &&\bigl(\because\ \varphi(\vec f)=\iota(\vec e)\bigr)
 \end{aligned}`),
@@ -4158,7 +4277,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                         "）を取る。任意の ", math(String.raw`\vec f\in M(\varphi)`),
                         " について ", math(String.raw`\iota(\vec f)\notin M(\varphi)`),
                         " が成り立つ（動く辺の集合が反転対を含まない。動く辺の集合 ",
-                        math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
+                        math(String.raw`M(\varphi)`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "、反転写像 ", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
                         "）と仮定する。", math(String.raw`\vec e\in M(\varphi)`), " を取り、",
                         math(String.raw`r:=r_{\varphi}(\vec e)`), "（",
@@ -4182,12 +4301,12 @@ s\,\zeta_8^{\Theta(\varphi)}
                         math(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
                         " を満たし、", math(String.raw`\vec e\in M(\varphi)`), " は ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`), " を意味する（",
-                        ref("def_moved_edge_set"), "）。したがって ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）。したがって ",
                         ref("claim_moved_orbit_closed_nonbacktracking"),
                         " が適用でき、第一の主張により各項は ",
                         math(String.raw`\varphi\bigl((e_k,d_k)\bigr)\ne(e_k,d_k)`),
                         " を満たす。すなわち各項は ", math(String.raw`M(\varphi)`),
-                        " に属する（", ref("def_moved_edge_set"), "）。第三の主張により ",
+                        " に属する（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）。第三の主張により ",
                         math(String.raw`r`), " 個の項は相異なる。",
                       ]),
                       paragraph([
@@ -4246,7 +4365,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
 \lvert\mathcal N_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
                       paragraph([
                         "が成り立つ。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、軌道族は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族",
                         "、ファイバー ", math(String.raw`\mathcal N_L(D,E)`), " は ",
                         "退避したファイバーの定義", " で定めた。両辺は有限和なので ",
                         math(String.raw`\mathbb Z[x]`), " の元である。",
@@ -4305,7 +4424,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                         "）を取る。任意の ", math(String.raw`\vec f\in M(\varphi)`),
                         " について ", math(String.raw`\iota(\vec f)\notin M(\varphi)`),
                         " が成り立つ。これは動く辺の集合が反転対を含まないという仮定である（動く辺の集合 ",
-                        math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
+                        math(String.raw`M(\varphi)`), " は ", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "、反転写像 ", math(String.raw`\iota`), " は ", ref("def_edge_reversal"),
                         "）と仮定する。", math(String.raw`\vec e\in M(\varphi)`),
                         " を取り、軌道列を ",
@@ -4345,7 +4464,7 @@ x^{\,\sum_{C\in\mathcal C(\varphi)}\lvert C\rvert}
                         math(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
                         " を満たし、", math(String.raw`\vec e\in M(\varphi)`), " は ",
                         math(String.raw`\varphi(\vec e)\ne\vec e`), " を意味する（",
-                        ref("def_moved_edge_set"), "）。したがって ",
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）。したがって ",
                         ref("claim_moved_orbit_closed_nonbacktracking"),
                         " が適用でき、第二の主張により ", math(String.raw`\gamma`),
                         " は閉じた非後退辺列である（", ref("def_closed_nonbacktracking_walk"),
@@ -4491,7 +4610,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
       paragraph(["元の証明:"]),
                       paragraph([
                         "準備として三つの事実を置く。第一に、任意の ",
-                        math(String.raw`\vec g\in M(\varphi)`), "（", ref("def_moved_edge_set"),
+                        math(String.raw`\vec g\in M(\varphi)`), "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合",
                         "）について ", math(String.raw`\varphi(\vec g)\in M(\varphi)`),
                         " である。実際、もし ",
                         math(String.raw`\varphi\bigl(\varphi(\vec g)\bigr)=\varphi(\vec g)`),
@@ -5132,7 +5251,7 @@ C\in\mathcal C^s_L(D,E;a,b)\,\Bigr\}
                         " が存在したとして矛盾を導く。", "参照用ノート「不採用経路: 単純通過の辺集合」",
                         " により、二つの向き ", math(String.raw`(e,0),(e,1)`),
                         " のうちちょうど一方だけが ", math(String.raw`M(\varphi)`),
-                        "（", ref("def_moved_edge_set"), "）に属する。属する側を ",
+                        "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の置換が動かす向き付き辺の集合", "）に属する。属する側を ",
                         math(String.raw`\vec g\in M(\varphi)`), " と書く。動く辺の集合を計算する。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -5195,7 +5314,7 @@ M(\varphi)
                         "（", "退避したファイバーの定義", "）について写像 ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}:\mathcal C(\varphi)\to\vec E_L`),
                         " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`),
-                        "（", ref("def_moved_orbit_family"), "）について ",
+                        "（", "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の相異なる軌道の族", "）について ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
                         " となるように一つ選び、",
                         math(String.raw`\gamma^{\varphi}_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}^{\,\varphi}(C)\bigr)`),
@@ -5230,7 +5349,7 @@ M(\varphi)
                         " は、動く辺を直ちに引き返さない後続へ写すので、",
                         "参照用ノート「不採用経路: 動く軌道の遷移成分積の位相とねじれへの分解」",
                         " の仮定を満たす。各 ", math(String.raw`C\in\mathcal C(\varphi)`), " は ",
-                        ref("claim_moved_orbit_partition"),
+                        "参照用ノート「不採用経路: 動く辺の軌道族による分割」の動く辺の軌道族による分割",
                         " により空でないので基点 ",
                         math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
                         " が取れ、", math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
