@@ -3461,21 +3461,21 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl(A\cdot(z\odot v)\bigr)(u)
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(z\odot v)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(z\,v(u')\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,z\bigr)v(u')
-&&(\because\ \text{積の結合則})\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}\bigl(z\,A_{u,u'}\bigr)v(u')
-&&(\because\ \text{積の可換性})\\
+&&\bigl(\because\ \text{積の可換性}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}z\bigl(A_{u,u'}\,v(u')\bigr)
-&&(\because\ \text{積の結合則})\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=z\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')
-&&(\because\ \text{元と有限和の積についての分配則})\\
+&&\bigl(\because\ \text{元と有限和の積についての分配則}\bigr)\\
 &=z\,(A\cdot v)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\bigl(z\odot(A\cdot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
