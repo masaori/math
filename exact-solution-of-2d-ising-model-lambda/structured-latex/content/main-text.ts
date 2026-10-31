@@ -73605,7 +73605,7 @@ c_{\mathrm{mut}}(\gamma,\eta)\bmod 2
                         "二通過で四半辺を使い尽くす。辺の標識が相異なるので、", math(String.raw`v`),
                         " に別の通過はない。従って ", ref("def_vertex_axis_straight_visit_count"), " により",
                       ]),
-                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1.`),
+                      displayMath(String.raw`n_{v,0}(\gamma)=n_{v,1}(\gamma)=1\qquad(\because\ \blkref{def_index_pair_crossing}\text{ と }\blkref{def_vertex_axis_straight_visit_count}).`),
                       paragraph([
                         ref("claim_smoothing_crossing_number_update"), " と ",
                         ref("claim_smoothing_split_crossing_partition"), " を一行ずつ適用する。",
@@ -73627,7 +73627,7 @@ c(\gamma)+1
                         "従って ", ref("def_split_mutual_crossing_number"), " の混合横断と二本の巡回後続写像による混合横断は、同じ添字対を数える。",
                         "従って ", ref("claim_disjoint_walk_mutual_crossing_intersection"), " により",
                       ]),
-                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B).`),
+                      displayMath(String.raw`c_{\times}(\gamma;k,l)\bmod2=I_L(C_A,C_B)\qquad(\because\ \blkref{claim_disjoint_walk_mutual_crossing_intersection}).`),
                       paragraph(["自然数の等式を二で割った余りを取って、上の交差数との等式を代入する。辺長一でも四半辺を方向と辺の標識で区別する。"]),
                     ],
                   },
