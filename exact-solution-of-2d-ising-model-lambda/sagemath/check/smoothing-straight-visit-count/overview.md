@@ -1,8 +1,8 @@
 # 横断の平滑化と直進通過数
 
-**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`, `claim_smoothing_cyclic_turning_invariance`, `claim_smoothing_seam_parity_invariance`, `claim_smoothing_interval_invariance`, `claim_smoothing_splits_closed_walk`, `claim_smoothing_split_turning_sum`, `claim_smoothing_split_seam_parity`, `claim_smoothing_split_crossing_partition`, `claim_smoothing_split_crossing_descent`, `claim_crossing_elimination_by_smoothing`
+**対象ラベル**: `claim_smoothing_straight_visit_count_update`, `claim_smoothing_vertex_crossing_number_update`, `claim_smoothing_other_vertex_crossing_invariance`, `claim_smoothing_crossing_number_update`, `claim_smoothing_cyclic_turning_invariance`, `claim_smoothing_seam_parity_invariance`, `claim_smoothing_interval_invariance`, `claim_smoothing_splits_closed_walk`, `claim_smoothing_split_turning_sum`, `claim_smoothing_split_seam_parity`, `claim_smoothing_split_crossing_partition`, `claim_smoothing_split_crossing_descent`
 - 実行: `sage sagemath/check/smoothing-straight-visit-count/check.sage`
-- 状態: PASS（2026-08-30、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
+- 状態: PASS（2026-10-31、閉じた非後退辺列 24,628 件・横断対 3,584 対・他頂点の横断数不変検査 11,904 件）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
 
 $L=1$（辺 1〜5 本）と $L=2,3$（辺 1〜8 本）の全閉じた非後退辺列の全横断対について、
@@ -64,4 +64,4 @@ $c(\gamma)+1=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)$ を 3,
 横断を平滑化で二本へ分ける操作を繰り返し、平滑化の回数が元の横断数以下で
 横断のない閉じた非後退辺列の空でない族に達すること、族の循環総回転数の総和と
 二つの切断線偶奇の総和の法 2 が元の閉歩道と一致することを検査する
-（`claim_crossing_elimination_by_smoothing`）。
+（旧主張「横断数の整礎帰納は閉歩道を横断のない有限族へ分ける」は参照用ノートに保存）。

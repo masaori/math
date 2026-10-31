@@ -61,7 +61,6 @@ export const ALL_LABELS = [
   "claim_cross_orbit_inversion_pairs_union",
   "claim_cross_orbit_inversions_even",
   "claim_cross_orbit_ordered_card",
-  "claim_crossing_elimination_by_smoothing",
   "claim_crossing_free_contact_elimination_phase",
   "claim_crossing_free_contact_split_children",
   "claim_crossing_free_contact_split_phase",

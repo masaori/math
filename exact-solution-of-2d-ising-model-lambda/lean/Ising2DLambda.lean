@@ -983,8 +983,6 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingPartition
 import Ising2DLambda.KacWard.SmoothingSplitCrossingPartition
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitCrossingDescent
 import Ising2DLambda.KacWard.SmoothingSplitCrossingDescent
-import Ising2DLambda.NecSuf.KacWard.CrossingEliminationBySmoothing
-import Ising2DLambda.KacWard.CrossingEliminationBySmoothing
 import Ising2DLambda.NecSuf.KacWard.CrossingFreeSignCounterexample
 import Ising2DLambda.KacWard.CrossingFreeSignCounterexample
 import Ising2DLambda.NecSuf.KacWard.EdgeSimpleReconnection
