@@ -3958,20 +3958,20 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v\bigr)(u)
 &=\sum_{u'\in \mathcal{J}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u}\,v(u)
 +\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}\bigl(I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\bigr)_{u,u'}\,v(u')
-&&(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける})\\
+&&\bigl(\because\ \text{有限和から }u'=u\text{ の 1 項を分ける}\bigr)\\
 &=1\cdot v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
-&&(\because\ \blkref{def_qbar_identity_matrix})\\
+&&\bigl(\because\ \blkref{def_qbar_identity_matrix}\bigr)\\
 &=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0\cdot v(u')
-&&(\because\ \text{単位元との積})\\
+&&\bigl(\because\ \text{単位元との積}\bigr)\\
 &=v(u)+\sum_{\substack{u'\in \mathcal{J}\\ u'\ne u}}0
-&&(\because\ \text{零元との積})\\
+&&\bigl(\because\ \text{零元との積}\bigr)\\
 &=v(u)+0
-&&(\because\ \text{零元だけの有限和は零元である})\\
+&&\bigl(\because\ \text{零元だけの有限和は零元である}\bigr)\\
 &=v(u)
-&&(\because\ \text{零元を足しても変わらない})
+&&\bigl(\because\ \text{零元を足しても変わらない}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
