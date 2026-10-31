@@ -37,9 +37,9 @@
   `[ψ̌_μ^†, ψ̌_ν]_+ = δ_{ν, M+1-μ} I`,
   `[ψ̌_μ, ψ̌_ν]_+ = 0`.
 -/
-import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvaluesAndTraceOfVprime
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.NecSuf.PairedFermion
+import Ising2D.NecSuf.NumberOperator
 
 namespace Ising2D
 
@@ -110,6 +110,19 @@ theorem conjIdx_involutive (M : ℕ) : Function.Involutive (conjIdx M) := by
 
 theorem conjIdx_injective (M : ℕ) : Function.Injective (conjIdx M) :=
   (conjIdx_involutive M).injective
+
+/-! ## `Mat(2^M, ℂ)` に 2-捩れが無いこと（原文 `check_number_operator_idempotent` (1) で使う） -/
+
+/-- **原文 `check_number_operator_idempotent` (1) の「`2 ≠ 0` なので両辺を 2 で割る」**:
+`Mat(2^M, ℂ)` の `x` について `x + x = 0` なら `x = 0`。
+人手の鎖 `x = ½·2x = ½·0 = 0` のとおりに書く（`x + x = 2x` は人手の直前の鎖の「同じ項の和」）。
+必要十分版 `NecSuf.sq_eq_zero_of_acomm_self`・`NecSuf.num_mul_num` が、環の公理と反交換関係のほかに仮定する唯一の性質である。 -/
+theorem tensorPow_two_torsion_free {M : ℕ} (x : TensorPow M) (h : x + x = 0) : x = 0 :=
+  calc x = (1 / 2 : ℂ) • ((2 : ℂ) • x) := by
+          rw [smul_smul]; norm_num
+    _ = (1 / 2 : ℂ) • (x + x) := by rw [two_smul]
+    _ = (1 / 2 : ℂ) • (0 : TensorPow M) := by rw [h]
+    _ = 0 := smul_zero _
 
 /-! ## 原文 `def_check_fermi` / `anticommutator_of_check_psi` の受け取り -/
 

@@ -34,22 +34,14 @@ import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
 import Ising2D.NecSuf.NumberOperator
 import Ising2D.NecSuf.JointEigenspace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
 
 namespace Ising2D
 
 open Matrix
 
-/-! ## `Mat(2^M, ℂ)` に 2-捩れが無いこと -/
-
-/-- 必要十分版が要求する唯一の非自明な仮定（`x + x = 0 → x = 0`）は
-複素行列では成り立つ。原文 `number_operator_idempotent` (1) の「`2 ≠ 0` なので」。 -/
-theorem tensorPow_two_torsion_free {M : ℕ} (x : TensorPow M) (h : x + x = 0) : x = 0 := by
-  ext i j
-  have h' : x i j + x i j = 0 := by
-    have := congrFun (congrFun h i) j
-    simpa using this
-  have : (2 : ℂ) * x i j = 0 := by rw [two_mul]; exact h'
-  simpa using this
+/-! `Mat(2^M, ℂ)` に 2-捩れが無いこと `tensorPow_two_torsion_free` は本文の
+`EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean`（人手 `check_number_operator_idempotent` (1)）にある。 -/
 
 /-! ## 原文 `def_number_operator` の設定 -/
 

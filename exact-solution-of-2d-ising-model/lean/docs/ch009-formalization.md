@@ -48,7 +48,7 @@
 | `trace_of_idempotent` | `Q^2=Q ⇒ tr(Q) = dim im Q` | `trace_of_idempotent` |
 | `isCompl_range_ker_of_idempotent` | `ℂ^n = im Q ⊕ ker Q` | 同 Step 1 |
 | `trace_one_tensorPow` | `tr(I) = 2^M` | `trace_of_number_operator_product` の `k=0` |
-| `tensorPow_two_torsion_free` | `x+x=0 → x=0`（`Mat(2^M,ℂ)`） | `number_operator_idempotent` (1) の「`2≠0`」 |
+| `tensorPow_two_torsion_free` | `x+x=0 → x=0`（`Mat(2^M,ℂ)`。定義は本文の `EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean` にあり、ここから使う） | `number_operator_idempotent` (1) の「`2≠0`」 |
 | `FermiSetup` | 原文 `def_number_operator` の設定（`𝓘`, 分枝 `t`） | `def_number_operator` |
 | `FermiSetup.nOp` | `n_μ = ψ_μ^† ψ_{-μ}` | `def_number_operator` |
 | `FermiSetup.acomm_cre_cre` / `acomm_ann_ann` / `acomm_cre_ann` | `𝓘` 上の CAR（`δ^M` が Kronecker `δ_{μν}` になる） | `anticommutator_of_psi` の制限 |

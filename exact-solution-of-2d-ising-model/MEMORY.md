@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明のゴールラインの確認の八つ目を行った。整数運動量の経路の記録 `DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`Mat(2^M, ℂ)` で `x + x = 0 → x = 0`）を本文 `EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean`（人手 `check_number_operator_idempotent` (1) の「`2 ≠ 0` なので 2 で割る」）へ移し、証明を人手の鎖 `x = ½·2x = ½·0 = 0` に書き直した。そのファイルと `CheckFermiInput.lean` から `RoutesNotAdopted/` の import を外した。通しの定理が使う退避先の定数は 0 個。退避先を直接 import する本文・必要十分版のファイルは 3 本。次は `DefinitionHalfIntegerModes.lean` の import。
+
 2026-10-31: Lean の通しの証明のゴールラインの確認の七つ目を行った。整数運動量の経路の記録 `DefinitionFermiPsi` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`（`√M` を ℂ に置く補助）を、主張・証明を変えずに本文 `DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean`（人手 `def_check_fermi` の係数の分母）へ移し、そのファイルから `RoutesNotAdopted/` の import を外した。通しの定理が使う退避先の公開の定数は `tensorPow_two_torsion_free` の 1 個。本文が退避先を直接 import するのは 4 本。次は `tensorPow_two_torsion_free`。
 
 2026-10-31: Lean の通しの証明のゴールラインの確認の六つ目を行った。本文の `ReductionToATheta/ClaimTActionsOnCheck.lean` が整数運動量の経路の記録 `ClaimTVActionsOnHatZHatY` の補題で `calc_of_TxT_check_Z_Y` を必要十分版から直接出し、そこから `T_actions_on_check_Z_Y` の 4 式を読み取っていた（人手と逆向き）ので、4 式を人手の式変形どおりの `calc` で示し、2 列に並べて `B_1`・`B_2` を出すようにした（主張の型は不変。人手の `V_2` 版 `actsBy_TConj_V2_check` を追加）。経路に依らない 4 補題と必要十分版からの導出は `ReductionToATheta/ClaimTActionsOnCheckFromNecSuf.lean` へ置いた。通しの定理が使う退避先の公開の定数は 4 個。次は `DefinitionFermiPsi` の `sqrtM` の 3 定数。`extract_taylor` が必要十分版に委ねている件などは状態台帳の「この後に残る確認」に載せた。

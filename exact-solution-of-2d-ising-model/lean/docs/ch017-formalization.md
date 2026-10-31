@@ -73,6 +73,7 @@
 | --- | --- | --- |
 | `checkIdxFinset` / `CheckIdx` / `CheckIdx.card` | `𝓜̌ = {1,…,M}` と `|𝓜̌| = M` | `def_check_index_set` |
 | `conjIdx` / `conjIdx_involutive` | 共役添字 `μ ↦ M+1-μ` が対合であること | `def_check_number_operator` (1) |
+| `tensorPow_two_torsion_free` | `x+x=0 → x=0`（`Mat(2^M,ℂ)`。`x = ½·2x = ½·0 = 0`） | `check_number_operator_idempotent` (1) の「`2≠0` なので両辺を 2 で割る」 |
 | `CheckFermiSetup` | `ψ̌^†, ψ̌` と CAR（章 015 の内容を仮定として受け取る） | `def_check_fermi`, `anticommutator_of_check_psi` |
 | `CheckFermiSetup.nOp` | `ň_μ = ψ̌_μ^† ψ̌_{M+1-μ}` | `def_check_number_operator` |
 | `CheckFermiSetup.nOp_eq_numPaired` | `ň_μ` が必要十分版 `numPaired` の特殊化であることの確認 | 同上 |

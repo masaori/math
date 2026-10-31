@@ -1199,6 +1199,7 @@ targets=(
   Ising2D.NecSuf.mul_exp_eq_of_mul_eq_smul
   Ising2D.CheckIdx.card
   Ising2D.conjIdx_involutive
+  Ising2D.tensorPow_two_torsion_free
   Ising2D.CheckFermiSetup.acomm_cre_ann
   Ising2D.CheckFermiSetup.cre_sq
   Ising2D.CheckFermiSetup.ann_sq
@@ -1577,7 +1578,6 @@ targets=(
   Ising2D.inverse_dft_of_necSuf
   Ising2D.recover_Y_of_necSuf
   Ising2D.recover_Z_of_necSuf
-  Ising2D.tensorPow_two_torsion_free
   Ising2D.FermiSetup.acomm_cre_cre
   Ising2D.FermiSetup.acomm_ann_ann
   Ising2D.FermiSetup.acomm_cre_ann

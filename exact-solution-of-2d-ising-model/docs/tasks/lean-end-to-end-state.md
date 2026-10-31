@@ -315,17 +315,24 @@
     本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 4 本である（`ReductionToATheta/DefinitionHalfIntegerModes`・`EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`）。
     `DefinitionCheckFermi.lean` は `ClaimRecoverZYFromCheckZY` を通して、間接にはまだ `DefinitionHatZHatY`・`ClaimH1H2ViaHatZHatY` を読み込む。直接の 4 本を外せば、間接の読み込みも消える見込みだが、消えたかは外した後に推移的な import で確かめる。
 
+  - ゴールラインの確認の八つ目（済み、2026-10-31）: `DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`Mat(2^M, ℂ)` で `x + x = 0 → x = 0`）を判定した。運動量の取り方に依らない補題で、
+    本文では人手 `check_number_operator_idempotent` (1) の「`2 ≠ 0` なので両辺を 2 で割る」に当たる。本文 `EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean` の `CheckFermiSetup` の直前へ移し、
+    証明を人手の鎖 `x = ½·2x = ½·(x+x) = ½·0 = 0` の `calc` に書き直した（主張の型は同じ）。退避先はそこから使う。
+    `DefinitionCheckNumberOperator.lean`・`EigenvectorOfMaxEigenvalue/CheckFermiInput.lean` から `RoutesNotAdopted/` の import を外し、それまで退避先を通して届いていた
+    `NecSuf.NumberOperator`・`NecSuf.JointEigenspace`・数学的道具立て `DefinitionTrace` を直接 import した（`ClaimTraceCheckNumberOperatorProduct.lean` にも `DefinitionTrace` を足した）。
+    `check-no-sorry.sh` の対象を本文の `ň_μ` の区切りへ移し、`lean/docs/ch017-formalization.md` に行を足した。レビューで指摘 2 件（コメントの記述）を直し、指摘なしになった。
+    通しの定理が推移的に使う定数を Lean のメタプログラムで数え直すと、`RoutesNotAdopted/` のモジュールで宣言された定数は 0 個である（等式補題を含む）。
+    本文の章のファイル（と必要十分版）で `RoutesNotAdopted/` を直接 import するのは残り 3 本である（`ReductionToATheta/DefinitionHalfIntegerModes`（`ClaimH1H2ViaHatZHatY`）・
+    `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY`）・`NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition`））。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 上の残りの `RoutesNotAdopted/IntegerMomentum/` の定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
-  退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
-  退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
-  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数、
-  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数、`ClaimTVActionsOnHatZHatY` の 4 定数、`DefinitionFermiPsi` の 3 定数は済み。次は最後の `DefinitionNumberOperator` の `tensorPow_two_torsion_free`。
-  使っている本文のファイルは `grep` で特定する）。
-  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 4 本）は、ファイルごとに import を外せるかを確かめ、最後に本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
+- 本文の章のファイルと必要十分版が `RoutesNotAdopted/` を import している残りの 3 本（上の八つ目の末尾）について、1 回に 1 ファイルずつ import を外せるかを確かめる。
+  通しの定理は退避先の定数をもう使わないので、外して `lake build` が落ちるなら、落ちた名前ごとに経路に依らない補題か、退避した主張そのものかを判定し、
+  前者なら使う本文の章のファイル（または数学的道具立て）へ移し、後者なら人手の Step どおりに直す。次は `ReductionToATheta/DefinitionHalfIntegerModes.lean` の `ClaimH1H2ViaHatZHatY`。
+  3 本を外した後、本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
 
 この後に残る確認:
 

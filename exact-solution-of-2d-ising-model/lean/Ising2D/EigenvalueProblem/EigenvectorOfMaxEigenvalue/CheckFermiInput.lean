@@ -8,12 +8,11 @@
 章 018 は半整数運動量のフェルミオン `ψ̌_μ^†, ψ̌_μ`（原文 `def_check_fermi`）、
 個数演算子 `ň_μ`（`def_check_number_operator`）、同時固有射影 `Q̌_ε`
 （`check_joint_eigenspace_decomposition`）、`V^{(+)}` の固有値
-（`eigenvalues_of_V_plus`）の上に立つ。これらは**章 014–017 の内容**であり、
-本リポジトリの Lean 側には（本セッション時点で）存在しない
-（`grep -rn "checkPsi\|checkNum\|checkQ" --include=*.lean Ising2D/` が
-章 013 の `checkZ` / `checkY` 以外にヒットしない）。
+（`eigenvalues_of_V_plus`）の上に立つ。これらは**章 014–017 の内容**である。
+本ファイルが章 017 の具体版 `EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean` から
+使うのは、`Mat(2^M, ℂ)` に 2-捩れが無いこと `tensorPow_two_torsion_free` だけである。
 
-そこで**章 014–017 から受け取る入力だけを束ねた構造 `Ising2D.CheckFermi`** を置き、
+本ファイルは**章 014–017 から受け取る入力だけを束ねた構造 `Ising2D.CheckFermi`** を置き、
 章 018 の主張はすべてそこからの帰結として証明する。仮定の内訳は次のとおりで、
 **いずれも章 014–017 の主張そのままである**。
 
@@ -30,7 +29,9 @@
 `V^{(+)}` の固有値は別途 `Ising2D.VPlusData`（`ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` 冒頭）で受け取る。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonAnticommutesWithCheckZY
-import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimJointEigenspaceDecomposition
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
+import Ising2D.NecSuf.JointEigenspace
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 
 namespace Ising2D
