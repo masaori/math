@@ -214,6 +214,7 @@ import Ising2D.Part018.Theorem009_CPlusEqualsLambda
 import Ising2D.Part018.Theorem010_OnsagerExactSolution
 import Ising2D.Part018.Claim011_CheckFermiFromPart016
 import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.Part018.ClaimVPlusRealEntries
 import Ising2D.Part018.Theorem013_OnsagerUnconditional
 import Ising2D.Part020.Theorem012_SpecificHeatLogDivergence
 import Ising2D.NecSuf.JointEigenspaceDecomposition

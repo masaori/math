@@ -1464,6 +1464,8 @@ targets=(
   Ising2D.vPlusDataOf_V
   Ising2D.vPlusDataOf_C
   Ising2D.vPlusDataOf_gam
+  Ising2D.VPlus_hasRealEntries
+  Ising2D.vPlusDataOf_V_eq_map
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input
