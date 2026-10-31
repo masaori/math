@@ -26,6 +26,7 @@
 * 原文 (2)（`V̌'` の可逆性）は 004 章の `Ising2D.matExpUnits` に帰着する。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckPsi
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

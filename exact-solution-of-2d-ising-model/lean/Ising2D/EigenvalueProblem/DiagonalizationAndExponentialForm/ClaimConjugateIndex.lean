@@ -57,13 +57,25 @@ theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
   congr 1
   ring
 
-/-- **(3)**: `check(Z)_{M+1-μ} = check(Z)_{1-μ}`。 -/
-theorem checkZ_conj (hM : M ≠ 0) (μ : ℤ) : checkZ M ((M : ℤ) + 1 - μ) = checkZ M (1 - μ) :=
-  checkZ_congr hM ⟨1, by ring⟩
+/-- **(3)**: `check(Z)_{M+1-μ} = check(Z)_{1-μ}`。
 
-/-- **(3)**: `check(Y)_{M+1-μ} = check(Y)_{1-μ}`。 -/
-theorem checkY_conj (hM : M ≠ 0) (μ : ℤ) : checkY M ((M : ℤ) + 1 - μ) = checkY M (1 - μ) :=
-  checkY_congr hM ⟨1, by ring⟩
+人手の式変形どおり、添字を `(1-μ)+M` と書き直し、`half_integer_checkZ_periodicity`
+（`checkZ_period`）を添字 `1-μ` に当てる。 -/
+theorem checkZ_conj (hM : M ≠ 0) (μ : ℤ) : checkZ M ((M : ℤ) + 1 - μ) = checkZ M (1 - μ) := by
+  calc
+    checkZ M ((M : ℤ) + 1 - μ) = checkZ M ((1 - μ) + (M : ℤ)) := by
+      rw [show (M : ℤ) + 1 - μ = (1 - μ) + (M : ℤ) by ring]
+    _ = checkZ M (1 - μ) := checkZ_period hM (1 - μ)
+
+/-- **(3)**: `check(Y)_{M+1-μ} = check(Y)_{1-μ}`。
+
+人手の式変形どおり、添字を `(1-μ)+M` と書き直し、`half_integer_checkY_periodicity`
+（`checkY_period`）を添字 `1-μ` に当てる。 -/
+theorem checkY_conj (hM : M ≠ 0) (μ : ℤ) : checkY M ((M : ℤ) + 1 - μ) = checkY M (1 - μ) := by
+  calc
+    checkY M ((M : ℤ) + 1 - μ) = checkY M ((1 - μ) + (M : ℤ)) := by
+      rw [show (M : ℤ) + 1 - μ = (1 - μ) + (M : ℤ) by ring]
+    _ = checkY M (1 - μ) := checkY_period hM (1 - μ)
 
 /-- 共役添字での `check(Z)` の展開（`H1_H2_via_check_Z_Y` の証明の 1 行目）:
 `check(Z)_{M+1-μ} = ∑_{k=1}^{M} Z_k e^{ik θ~_μ}`。 -/

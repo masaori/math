@@ -35,7 +35,7 @@
   定義域を `ℤ` にしているのと同じ）。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAntiperiodicExpSum
-import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimH1H2ViaHatZHatY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D
 
@@ -128,31 +128,6 @@ theorem checkY_period (hM : M ≠ 0) (μ : ℤ) : checkY M (μ + (M : ℤ)) = ch
     _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) μ • Y j :=
       Finset.sum_congr rfl fun j _ => by rw [checkPhase_period_for_checkZY hM]
     _ = checkY M μ := rfl
-
-/-- 位相因子の合同不変性: `M ∣ a - b` なら `e^{-i k θ~_a} = e^{-i k θ~_b}`。
-
-奇数周波数の差 `(2a-1) - (2b-1) = 2(a-b)` が `2M` の倍数になることによる。 -/
-theorem checkPhase_congr (hM : M ≠ 0) (k : ℤ) {a b : ℤ} (h : (M : ℤ) ∣ a - b) :
-    checkPhase M k a = checkPhase M k b := by
-  rw [checkPhase, checkPhase]
-  refine expPhase_congr (M := 2 * M) (by omega) ?_
-  obtain ⟨c, hc⟩ := h
-  refine ⟨k * c, ?_⟩
-  rw [show k * (2 * a - 1) - k * (2 * b - 1) = 2 * (k * (a - b)) by ring, hc]
-  push_cast
-  ring
-
-/-- **`half_integer_checkZ_periodicity` の合同形**:
-`M ∣ μ - ν` なら `check(Z)_μ = check(Z)_ν`。 -/
-theorem checkZ_congr (hM : M ≠ 0) {μ ν : ℤ} (h : (M : ℤ) ∣ μ - ν) :
-    checkZ M μ = checkZ M ν :=
-  Finset.sum_congr rfl fun j _ => by rw [checkPhase_congr hM _ h]
-
-/-- **`half_integer_checkY_periodicity` の合同形**:
-`M ∣ μ - ν` なら `check(Y)_μ = check(Y)_ν`。 -/
-theorem checkY_congr (hM : M ≠ 0) {μ ν : ℤ} (h : (M : ℤ) ∣ μ - ν) :
-    checkY M μ = checkY M ν :=
-  Finset.sum_congr rfl fun j _ => by rw [checkPhase_congr hM _ h]
 
 /-- **(3) 共役添字**: `θ~_{1-μ} = -θ~_μ`。 -/
 theorem thetaTilde_one_sub (M : ℕ) (μ : ℤ) : thetaTilde M (1 - μ) = -thetaTilde M μ := by

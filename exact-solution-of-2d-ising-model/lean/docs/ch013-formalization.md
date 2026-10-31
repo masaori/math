@@ -40,9 +40,8 @@
 | `Ising2D.checkZ` | `check(Z)_μ` | `def_half_integer_checkZ` |
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
 | `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
-| `Ising2D.checkZ_period` / `checkZ_congr` | `check(Z)_{μ+M} = check(Z)_μ` とその合同形（`M ∣ μ-ν` 版） | `half_integer_checkZ_periodicity` |
-| `Ising2D.checkY_period` / `checkY_congr` | `check(Y)_{μ+M} = check(Y)_μ` とその合同形 | `half_integer_checkY_periodicity` |
-| `Ising2D.checkPhase_congr` | Z・Y 両方の添字周期性の合同形で使う位相因子の補助定理 | `half_integer_checkZ_periodicity` / `half_integer_checkY_periodicity` |
+| `Ising2D.checkZ_period` | `check(Z)_{μ+M} = check(Z)_μ` | `half_integer_checkZ_periodicity` |
+| `Ising2D.checkY_period` | `check(Y)_{μ+M} = check(Y)_μ` | `half_integer_checkY_periodicity` |
 | `Ising2D.thetaTilde_one_sub` | (3) `θ~_{1-μ} = -θ~_μ` | `def_half_integer_modes` (3) |
 | `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | `def_half_integer_modes` (3) |
 | `Ising2D.CheckIndex` | `μ ∈ 𝓜̌ = {1,…,M}` | `def_check_index_set` |

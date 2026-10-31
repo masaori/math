@@ -325,16 +325,28 @@
     本文の章のファイル（と必要十分版）で `RoutesNotAdopted/` を直接 import するのは残り 3 本である（`ReductionToATheta/DefinitionHalfIntegerModes`（`ClaimH1H2ViaHatZHatY`）・
     `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY`）・`NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition`））。
 
+  - ゴールラインの確認の九つ目（済み、2026-10-31）: `ReductionToATheta/DefinitionHalfIntegerModes.lean` から退避先 `ClaimH1H2ViaHatZHatY` の import を外した。
+    外して落ちた名前は `Z`・`Y`（本文 `DefinitionTransferMatrixSymbols` を直接 import した）と `expPhase_congr` である。`expPhase_congr` を使っていたのは合同形の補題
+    `checkPhase_congr`・`checkZ_congr`・`checkY_congr` だけで、これらに対応する人手の項目は無く、使っていたのは人手 `conjugate_index_of_check_Z_Y` (3) の
+    `checkZ_conj`・`checkY_conj` だけだった。人手 (3) は添字を `(1-μ)+M` と書き直して `half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` を
+    添字 `1-μ` に当てるので、その 2 行どおりの `calc` に直し（主張の型は同じ）、合同形の 3 補題を消した（`check-no-sorry.sh` の対象と `lean/docs/ch013-formalization.md` の行も直した）。
+    間接に読み込んでいた `DefinitionH1H2V1V2` は、使っている本文の 3 本（`DefinitionCheckVprime`・`ClaimTraceCheckVprime`・`ClaimCommutatorHCheckZY`）に直接 import させ、
+    退避先の記録 `ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY` には退避先 `ClaimH1H2ViaHatZHatY` を import させた。レビューは指摘なし。
+    本文の章のファイルと必要十分版で `RoutesNotAdopted/` を直接 import するのは残り 2 本（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY`）・
+    `NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition`））である。`DefinitionH1H2V1V2` は本文の多くが import するので、推移的にはまだ本文が退避先を読み込む。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 本文の章のファイルと必要十分版が `RoutesNotAdopted/` を import している残りの 3 本（上の八つ目の末尾）について、1 回に 1 ファイルずつ import を外せるかを確かめる。
-  通しの定理は退避先の定数をもう使わないので、外して `lake build` が落ちるなら、落ちた名前ごとに経路に依らない補題か、退避した主張そのものかを判定し、
-  前者なら使う本文の章のファイル（または数学的道具立て）へ移し、後者なら人手の Step どおりに直す。次は `ReductionToATheta/DefinitionHalfIntegerModes.lean` の `ClaimH1H2ViaHatZHatY`。
-  3 本を外した後、本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
+- 本文の章のファイルと必要十分版が `RoutesNotAdopted/` を import している残りの 2 本（上の九つ目の末尾）について、1 回に 1 ファイルずつ import を外せるかを確かめる。
+  外して `lake build` が落ちるなら、落ちた名前ごとに経路に依らない補題か、退避した主張そのものかを判定し、
+  前者なら使う本文の章のファイル（または数学的道具立て）へ移し、後者なら人手の Step どおりに直す。次は `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` の `DefinitionHatZHatY`。
+  2 本を外した後、本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
 
 この後に残る確認:
+
+- `checkPhase_conj`（`DiagonalizationAndExponentialForm/ClaimConjugateIndex.lean`、人手 `conjugate_index_of_check_Z_Y` (2)）は `2M` 乗根の周期 `ξ^{2M} = 1` で示している。人手 (2) は (1) `θ~_{M+1-μ} = 2π - θ~_μ`・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0` の 4 行である。人手どおりに直す。
 
 - `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
 - 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。

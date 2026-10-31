@@ -51,6 +51,7 @@ site 添字は `Fin M` で、人手の `j` は `(j : ℕ) + 1`。延長 `Y♭_l`
 人手と同じ自然数の添字 `l` で持つ。モード添字 `μ` は `ℤ` のまま扱う（4 式とも `μ ∈ ℤ` で成り立つ）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 
 namespace Ising2D
 

@@ -692,7 +692,6 @@ targets=(
   Ising2D.checkPhase_antiperiodic
   Ising2D.checkZ_period
   Ising2D.checkY_period
-  Ising2D.checkPhase_congr
   Ising2D.thetaTilde_one_sub
   Ising2D.checkPhase_one_sub
   Ising2D.thetaTilde_ne

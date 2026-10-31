@@ -30,6 +30,7 @@ Lean では `expPhase_nextSite`（`e^{-i(k₁-k₂+1)θ~} = lastSign (-1) k₁`�
 符号 `-1`（= `H_1^{(+)}` の最終項の係数）が出る。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
+import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimH1H2ViaHatZHatY
 
 namespace Ising2D
 

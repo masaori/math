@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明のゴールラインの確認の九つ目を行った。本文 `ReductionToATheta/DefinitionHalfIntegerModes.lean` から整数運動量の経路の記録 `ClaimH1H2ViaHatZHatY` の import を外した。そこから借りていた `expPhase_congr` は、人手に対応項目の無い合同形の補題 `checkZ_congr` などだけが使っていたので、それを使う人手 `conjugate_index_of_check_Z_Y` (3) を人手どおり「添字を `(1-μ)+M` と書き直して周期性を当てる」`calc` に直し、合同形の 3 補題を消した。間接 import に頼っていた 4 本に直接 import を足した。退避先を直接 import する本文・必要十分版のファイルは 2 本。次は `DefinitionH1H2V1V2.lean` の `DefinitionHatZHatY`。
+
 2026-10-31: Lean の通しの証明のゴールラインの確認の八つ目を行った。整数運動量の経路の記録 `DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`Mat(2^M, ℂ)` で `x + x = 0 → x = 0`）を本文 `EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean`（人手 `check_number_operator_idempotent` (1) の「`2 ≠ 0` なので 2 で割る」）へ移し、証明を人手の鎖 `x = ½·2x = ½·0 = 0` に書き直した。そのファイルと `CheckFermiInput.lean` から `RoutesNotAdopted/` の import を外した。通しの定理が使う退避先の定数は 0 個。退避先を直接 import する本文・必要十分版のファイルは 3 本。次は `DefinitionHalfIntegerModes.lean` の import。
 
 2026-10-31: Lean の通しの証明のゴールラインの確認の七つ目を行った。整数運動量の経路の記録 `DefinitionFermiPsi` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`（`√M` を ℂ に置く補助）を、主張・証明を変えずに本文 `DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean`（人手 `def_check_fermi` の係数の分母）へ移し、そのファイルから `RoutesNotAdopted/` の import を外した。通しの定理が使う退避先の公開の定数は `tensorPow_two_torsion_free` の 1 個。本文が退避先を直接 import するのは 4 本。次は `tensorPow_two_torsion_free`。
