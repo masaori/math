@@ -1343,13 +1343,13 @@ N\lambda\le_{\Lambda}N\mu`),
                         displayMath(String.raw`\begin{aligned}
 \operatorname{rat}_{\Lambda}(0\lambda)
 &=\prod_{p\in\operatorname{supp}(0\lambda)}p^{(0\lambda)(p)}
-&&(\because\ \blkref{def_rational_of_log})\\
+&&\bigl(\because\ \blkref{def_rational_of_log}\bigr)\\
 &=\prod_{p\in\varnothing}p^0
-&&(\because\ 0\lambda\text{ は零写像で台が空であること})\\
+&&\bigl(\because\ 0\lambda\text{ は零写像で台が空であること}\bigr)\\
 &=1
-&&(\because\ \mathbb Q\text{ の空積の定義})\\
+&&\bigl(\because\ \mathbb Q\text{ の空積の定義}\bigr)\\
 &=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^0
-&&(\because\ \mathbb Q\text{ の零乗の定義})
+&&\bigl(\because\ \mathbb Q\text{ の零乗の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "となり、基底の場合が従う。",
@@ -1361,13 +1361,13 @@ N\lambda\le_{\Lambda}N\mu`),
                         displayMath(String.raw`\begin{aligned}
 \operatorname{rat}_{\Lambda}((N+1)\lambda)
 &=\operatorname{rat}_{\Lambda}(N\lambda+\lambda)
-&&(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義と }\mathbb{Z}\text{ の分配則})\\
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義と }\mathbb{Z}\text{ の分配則}\bigr)\\
 &=\operatorname{rat}_{\Lambda}(N\lambda)\operatorname{rat}_{\Lambda}(\lambda)
-&&(\because\ \blkref{claim_rational_of_log_additive})\\
+&&\bigl(\because\ \blkref{claim_rational_of_log_additive}\bigr)\\
 &=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}\operatorname{rat}_{\Lambda}(\lambda)
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N+1}
-&&(\because\ \mathbb{Q}\text{ の冪の定義})
+&&\bigl(\because\ \mathbb{Q}\text{ の冪の定義}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。これで補助等式が示せた。",
@@ -1382,14 +1382,14 @@ N\lambda\le_{\Lambda}N\mu`),
                         displayMath(String.raw`\begin{aligned}
 N\lambda\le_{\Lambda}N\mu
 &\iff\operatorname{rat}_{\Lambda}(N\lambda)\le\operatorname{rat}_{\Lambda}(N\mu)
-&&(\because\ \blkref{def_log_order_group_order})\\
+&&\bigl(\because\ \blkref{def_log_order_group_order}\bigr)\\
 &\iff\bigl(\operatorname{rat}_{\Lambda}(\lambda)\bigr)^{N}
   \le\bigl(\operatorname{rat}_{\Lambda}(\mu)\bigr)^{N}
-&&(\because\ \text{上の補助等式を両辺へ})\\
+&&\bigl(\because\ \text{上の補助等式を両辺へ}\bigr)\\
 &\iff\operatorname{rat}_{\Lambda}(\lambda)\le\operatorname{rat}_{\Lambda}(\mu)
-&&(\because\ N\ge1\text{ のとき }\mathbb{Q}_{>0}\text{ 上で }a\mapsto a^{N}\text{ は狭義単調増加})\\
+&&\bigl(\because\ N\ge1\text{ のとき }\mathbb{Q}_{>0}\text{ 上で }a\mapsto a^{N}\text{ は狭義単調増加}\bigr)\\
 &\iff\lambda\le_{\Lambda}\mu
-&&(\because\ \blkref{def_log_order_group_order})
+&&\bigl(\because\ \blkref{def_log_order_group_order}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。三段目の根拠は、",
