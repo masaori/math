@@ -11579,7 +11579,12 @@ W_{\upsilon}(w)&:=[\tau(c_1),\upsilon(\tau(c_1)),\ldots,\tau(c_m),\upsilon(\tau(
 \varepsilon(W_\upsilon(w))&=\alpha_{\mathcal E}\operatorname{sgn}(\mathcal E)&&\bigl(\because\ \blkref{claim_matching_pair_word_orientation_sign}\bigr).
 \end{aligned}`),
                 paragraph(["各 ", math(String.raw`\eta_S(a,b),\eta_T(a,b)`), " は ", math(String.raw`1`), " または ", math(String.raw`-1`), " なので、その有限積も平方が一である。", ref("def_matching_word_sign"), " と ", ref("def_perfect_matching_sign"), " では符号が ", math(String.raw`(-1)^k`), "（", math(String.raw`k\in\mathbb N`), "）の形だから、"]),
-                displayMath(String.raw`\alpha_{\mathcal D}^{2}=1,\qquad \operatorname{sgn}(\mathcal D)^{2}=1\quad\text{in }\mathbb Z`),
+                displayMath(String.raw`\begin{aligned}
+\alpha_{\mathcal D}^{2}&=1
+&&\bigl(\because\ \eta_S(a,b)\in\{-1,1\}\text{ の有限積}\bigr),\\
+\operatorname{sgn}(\mathcal D)^{2}&=1
+&&\bigl(\because\ \blkref{def_perfect_matching_sign}\text{ により符号は }(-1)^k\bigr)
+\end{aligned}\quad\text{in }\mathbb Z`),
                 paragraph(["を得る。", ref("claim_matching_pair_word_sign_map"), " と上の二つの列符号の等号から、整数の積の可換則を一行ずつ適用すると"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{sgn}(\sigma)
