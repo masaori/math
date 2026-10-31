@@ -35,7 +35,6 @@ import blocks_011_max_eigenvalue from './content/011_max_eigenvalue.ts'
 import blocks_012_free_energy from './content/012_free_energy.ts'
 import blocks_013_even_sector_modes from './content/013_even_sector_modes.ts'
 import blocks_017_even_sector_eigenvalues from './content/017_even_sector_eigenvalues.ts'
-import blocks_018_even_sector_closing from './content/018_even_sector_closing.ts'
 import blocks_020_critical_point from './content/020_critical_point.ts'
 import blocks_chapter_organization from './content/chapter_organization.ts'
 import blocks_eigenvalue_problem_diagonalization_and_exponential_form from './content/eigenvalue_problem_diagonalization_and_exponential_form.ts'
@@ -44,6 +43,7 @@ import blocks_eigenvalue_problem_eigenvector_of_max_eigenvalue from './content/e
 import blocks_eigenvalue_problem_reduction_to_A_theta from './content/eigenvalue_problem_reduction_to_A_theta.ts'
 import blocks_partition_function_projection_and_jordan_wigner from './content/partition_function_projection_and_jordan_wigner.ts'
 import blocks_partition_function_transfer_matrix_representation from './content/partition_function_transfer_matrix_representation.ts'
+import blocks_thermodynamic_limit_column_limit_and_closed_form from './content/thermodynamic_limit_column_limit_and_closed_form.ts'
 import blocks_thermodynamic_limit_row_limit_and_max_eigenvalue from './content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts'
 import notes_000_calculation_formulae from './notes/000_calculation_formulae.ts'
 import notes_001_partition_function_2d_ising from './notes/001_partition_function_2d_ising.ts'
@@ -76,7 +76,6 @@ export type AllBlocks = [
   ...typeof blocks_012_free_energy,
   ...typeof blocks_013_even_sector_modes,
   ...typeof blocks_017_even_sector_eigenvalues,
-  ...typeof blocks_018_even_sector_closing,
   ...typeof blocks_020_critical_point,
   ...typeof blocks_chapter_organization,
   ...typeof blocks_eigenvalue_problem_diagonalization_and_exponential_form,
@@ -85,6 +84,7 @@ export type AllBlocks = [
   ...typeof blocks_eigenvalue_problem_reduction_to_A_theta,
   ...typeof blocks_partition_function_projection_and_jordan_wigner,
   ...typeof blocks_partition_function_transfer_matrix_representation,
+  ...typeof blocks_thermodynamic_limit_column_limit_and_closed_form,
   ...typeof blocks_thermodynamic_limit_row_limit_and_max_eigenvalue,
 ]
 

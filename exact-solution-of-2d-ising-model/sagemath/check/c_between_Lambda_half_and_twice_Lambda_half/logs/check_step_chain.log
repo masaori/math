@@ -1,0 +1,10 @@
+=== c_between_Lambda_half_and_twice_Lambda_half ===
+  --- 有限 M での Step 1 / Step 2 ---
+  (1) Step 1: c_+(M) ≤ c(M) の違反件数: 0、Λ^{(1/2)}_M ≤ c(M) の違反件数: 0  ->  PASS
+  (2) Step 2 の等式の各行（と Step 1 の c_+(M) = Λ^{(1/2)}_M）: max residual = 1.006e-14  ->  PASS
+  (2) Step 2 の不等式の各行の違反件数: 0（x の本数 192）  ->  PASS
+  (3) Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M の違反件数: 0  ->  PASS
+  (3') 実際には c(M) = c_+(M)（本文の評価より強い。本文はこれを使わない）: max residual = 1.932e-15  ->  PASS
+  下界の鋭さ: 1.01Λ <= c が全て破れる True、c <= 0.99Λ が全て破れる True
+  否定コントロール: ‖v‖^2 <= 2 が破れる x の本数 192（x の本数 192）、F^(+) を F^(-) に替えた c <= 2c_- が破れる組の数 4
+RESULT: PASS

@@ -1,6 +1,7 @@
 # ---------------------------------------------------------
 # 共通: gamma(theta) と自由エネルギーの表式
-#   structured-latex/content/012_free_energy.ts に対応
+#   structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts（gamma_is_continuous・onsager_free_energy_expression）と
+#   structured-latex/content/012_free_energy.ts（riemann_sum_to_integral）に対応
 #   gamma(theta) = arccosh( cosh 2K1 cosh 2K2* - sinh 2K1 sinh 2K2* cos(theta) )
 # ---------------------------------------------------------
 import os

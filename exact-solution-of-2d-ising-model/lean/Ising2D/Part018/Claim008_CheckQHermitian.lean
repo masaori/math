@@ -1,7 +1,7 @@
 /-
 # `ň_μ, Q̌_ε` はエルミート（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_008_claim_check_Q_is_hermitian`、
 ラベル **`check_number_operator_is_hermitian`**）
 

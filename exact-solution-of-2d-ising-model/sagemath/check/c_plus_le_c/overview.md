@@ -4,7 +4,7 @@
 
 **対象ラベル**: `c_plus_le_c` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/011_max_eigenvalue.ts`（ブロック `maxeig_claim_c_plus_le_c`）
+- ファイル: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（ブロック `maxeig_claim_c_plus_le_c`）
 - 範囲: `c_+(M_col) ≤ c(M_col)`。証明が引く「`R_+` は空でない」（`def_sector_rayleigh_sup` の後半の
   単位ベクトル `x^{(+)}` の構成）も含める
 

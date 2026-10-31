@@ -11,7 +11,7 @@
 * `c_equals_c_plus`
 
 置換行列 `permMat` と成分の絶対値 `absVec` の基本性質は、本文の主張
-（`trace_of_epsilon_V_plus` の Step 3 (b)、`onsager_exact_solution` の Step 3）も使うので
+（`trace_of_epsilon_V_plus` の Step 3 (b)、`c_between_Lambda_half_and_twice_Lambda_half` の Step 2）も使うので
 `Ising2D/NecSuf/PermMatrix.lean` へ移した。
 
 具体版は `Ising2D/Part019/`（`Claim001_EpsilonSignFlipPermutation.lean`,

@@ -1,7 +1,7 @@
 /-
 # Onsager の厳密解から章 014–017 由来の仮定を落とし、分配関数を具体的なものにした版
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**）
 
 `Ising2D.onsager_exact_solution`（`Theorem010_OnsagerExactSolution.lean`）は、
@@ -74,7 +74,7 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
 
 /-! ## 挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` -/
 
-/-- **`Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`**（人手 `onsager_exact_solution` の Step 2・Step 3。
+/-- **`Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`**（人手 `c_between_Lambda_half_and_twice_Lambda_half`。
 章 014–017 由来の仮定をすべて落とした版）。
 
 もとの `Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` は `F`, `D`, `hC`, `hgam` を

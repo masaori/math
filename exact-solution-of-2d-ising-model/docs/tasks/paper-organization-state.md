@@ -2,6 +2,21 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の八番目の章、部「熱力学極限」の二番目の章「$M\to\infty$ の極限と閉形式」を組み直した。
+  棚卸しでこの章に割り当てた 9 項を、`011_max_eigenvalue.ts`（5 項）・`012_free_energy.ts`（2 項）・`018_even_sector_closing.ts`（2 項）から、新しいファイル `content/thermodynamic_limit_column_limit_and_closed_form.ts` の章見出しの下へ
+  棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $N\to\infty$ の極限の章のファイルの後ろに置いた。ブロックの id・ラベルは変えていない。案内文と注記の 4 つ（018 の `closing_remark_overview_c_plus_and_onsager`、011 の `maxeig_remark_overview_c_plus_and_epsilon`、012 の `remark_real_analysis_escape_point`・`remark_remaining_input_even_sector`）も、中身がこの章の項の説明なので一緒に移した。
+  011 には半正定値の Cauchy–Schwarz、012 には `riemann_sum_to_integral`（どちらも数学的道具立て）だけが残り、章見出しをそれぞれ「半正定値双線型形式の Cauchy–Schwarz の不等式」「等間隔点の平均の積分への収束」にした。018 は空になったので消した。
+  - **$\Lambda^{(1/2)}_M\le c(M)\le2\Lambda^{(1/2)}_M$ を独立した主張にした。** `onsager_exact_solution` の証明の Step 2（下からの評価）・Step 3（上からの評価）を、式と根拠を変えずに claim `c_between_Lambda_half_and_twice_Lambda_half` の証明の Step 1・Step 2 へ移し、
+    `onsager_exact_solution` の証明はそれを引く形にした（旧 Step 4 は Step 3）。SageMath（`sagemath/check/c_between_Lambda_half_and_twice_Lambda_half/`。各行は 053 の check_05 と同じ判定。否定コントロールは $\|v\|^2\le2$ と、$\mathcal F^{(+)}$ を $\mathcal F^{(-)}$ に替えた $c\le2c_-$）を足した。
+    Lean は既存の `EvenSectorBridge.rayleighSup_sandwich_LambdaM`・`rayleighSup_sandwich_LambdaM_physical` がこの主張に当たり、注記の Step 番号を直した。
+  - **`c_plus_equals_Lambda_half_integer` の証明の根拠欄でラベルを文字で書いていた 5 か所を `\blkref` に直した。** その結果、どの章にも割り当てていなかった 9 項のうち `check_number_operator_is_hermitian` と、その証明が使う `Z_Y_linearly_independent`（`004_transfer_matrix.ts`）が
+    この章の依存閉包に入ったので、この章へ移した（作業の順序の五番目の「使われているなら、使う章へ置く」に当たる）。どの章にも割り当てていない項は 7 になった。
+  - **章末のゴールの主張を足した。** (1) $c_+(M)=\Lambda^{(1/2)}_M$、(2) $\Lambda^{(1/2)}_M\le c(M)\le2\Lambda^{(1/2)}_M$、(3) 2 重極限の閉形式を主張する claim `c_plus_value_c_sandwich_and_double_limit_of_log_Z` を章の最後に置いた。証明は既存の 3 つの主張を挙げるだけである。
+    SageMath（`sagemath/check/c_plus_value_c_sandwich_and_double_limit_of_log_Z/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組。(1) の相対残差 ≤ 2.2e-15、$M=4096$ で極限値との差 ≤ 1.6e-8）と Lean（`lean/Ising2D/Part018/ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ.lean`。
+    入力は結合定数の組 `P : IsingParam` だけ（同じ回に main へ入った Lean の通しの証明の項目 5 で `EvenSectorClosureInput` が消えたので、その上に合わせた）。`check-no-sorry.sh` の対象に足した）を付けた。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。冒頭の章立ての説明のこの章のゴールの式は主張と一致していたので変えていない。
+  - **章の項目数は 13（章立て案は 9）。** 差の 4 は、独立させた `c_between_Lambda_half_and_twice_Lambda_half`、ゴールの主張、編入した `check_number_operator_is_hermitian`・`Z_Y_linearly_independent` である。
+  - 移した案内文と注記の言い回しを、移した先の事実に合わせて直した（数学の中身は変えていない。「013 章から 018 章」「章 E」「セクター」「半整数運動量」「モード」を部・章の名前と式で指す形にし、実数解析へ移行する箇所の記述を `riemann_sum_to_integral` が 012 に残った並びに合わせた）。
+    棚卸し生成器の前方参照の記録から、もう前方参照ではない `gamma_is_continuous → riemann_sum_to_integral` を外した。Lean・SageMath の注記の正本のファイル名と Step 番号を直した。別のエージェントのレビューを経た（指摘 6 件を直した。実数解析へ移行する箇所と章の道具の記述、$WP^{(+)}=V^{(+)}P^{(+)}$ の使い先、時制、053 の check_05 の Step 番号、上からの評価の否定コントロール）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の七番目の章、部「熱力学極限」の最初の章「$N\to\infty$ の極限と最大固有値 $c(M)$」を組み直した。
   棚卸しでこの章に割り当てた 9 項を、`011_max_eigenvalue.ts`（8 項）と `012_free_energy.ts`（1 項）から、新しいファイル `content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の部見出し「熱力学極限」・章見出しの下へ
   棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の最大固有値に属する固有ベクトルの章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（機械比較で origin のパス以外一致）。
@@ -1236,9 +1251,9 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の八番目の章：部「熱力学極限」の二番目の章「$M\to\infty$ の極限と閉形式」に割り当てた 9 項
-（棚卸し `parts` の三番目の部の二番目の章の `dependencyOrder`。`011_max_eigenvalue.ts` に 5 項、`012_free_energy.ts` に 2 項、`018_even_sector_closing.ts` に 2 項）を、新しいファイルの章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の $N\to\infty$ の極限の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする（$\Lambda^{(1/2)}_M\le c(M)\le2\Lambda^{(1/2)}_M$ を主張するブロックが無いことに注意。下の「未確定」）。
+runbook の「作業の順序」の四番目の項目の九番目の章：部「臨界点」の章「臨界点 $K_c$ と $\frac{d^2f}{dK^2}$ の対数発散」に割り当てた 10 項
+（棚卸し `parts` の四番目の部の章の `dependencyOrder`。`020_critical_point.ts` に 9 項、`008_TV1_hatZ_hatY_part2.ts` に 1 項）を、新しいファイルの部見出し「臨界点」・章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の $M\to\infty$ の極限の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 
@@ -1255,7 +1270,6 @@ runbook の「作業の順序」の四番目の項目の八番目の章：部「
   - 組み直しの途中は、組み直した章が本文の末尾に来るので、公開する本文では部「分配関数」が臨界点の章より後ろにあり、旧い章（004 以降）が
     末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。
     残ったファイルに部見出し「数学的道具立て」を置くのは、全章を組み直した後（作業の順序の六番目まで）に行う。
-  - $M\to\infty$ の章のゴールの式の $\Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M$ を主張するブロックが無い（`onsager_exact_solution` の証明の中にだけある）。
   - 後ろの章を指す案内の参照は、平方根の定義 → 平方根性の主張の 1 本だけが残る（棚卸しの `crossChapterNavigationReferences`。
     平方根性の主張はどの章にも割り当てられない 9 項の一つで、作業の順序の五番目の項目で扱う）。
 - 分類（作業の順序の外）: 逆双曲線余弦の定義と性質、正の実数上の実対数、正の結合定数上の双曲線正接は、イジング模型を参照しない実関数の道具だが、

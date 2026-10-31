@@ -84,7 +84,6 @@ const explicitSemanticPrerequisiteLabelsById = new Map<string, Set<string>>([
 const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["calculation_formulae_definition_set_and_algebra_notation", new Map([["definition_of_cc", "既存の複素数定義への案内"]])],
   ["calc_formulae_006_definition_of_cc", new Map([["abs_basic_properties", "後続利用への案内"], ["matrix_exp_series_converges", "後続利用への案内"]])],
-  ["freeenergy_002_claim_gamma_is_continuous", new Map([["riemann_sum_to_integral", "後続利用への案内"]])],
   ["evenEigen_004_claim_trace_of_check_number_operator_product", new Map([["check_joint_eigenspace_decomposition", "後続対応への案内"]])],
   // 「二乗が V_1^{(+)} に等しいことは〜で示す」という、直後の主張への案内の一文。定義の中身は exp(iK_1H_1^{(+)}/2) で閉じている。
   ["bridge_definition_V1_pm_square_root", new Map([["V1_plus_square_root_property", "後続帰結への案内"]])],

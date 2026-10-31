@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: c_+(M_col) <= c(M_col) の数値検証
-#   structured-latex/content/011_max_eigenvalue.ts に対応
+#   structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts に対応
 #
 #   行・列番号は def_row_configuration_numbering の ord(mu) = 1 + sum_m (1-mu(m))/2 * 2^{M-m}
 #   （ここでは 0 始まりの ord(mu) - 1）。クロネッカー積（先頭因子が最上位）と同じ並びである

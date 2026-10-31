@@ -4,7 +4,7 @@
 
 **対象ラベル**: `onsager_exact_solution` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/018_even_sector_closing.ts`（`check_number_operator_is_hermitian` 以降）と `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）
+- ファイル: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（`check_number_operator_is_hermitian` 以降）と `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）
 - 併せて検証（この章の全ブロック）:
   - `epsilon_anticommutes_with_check_Z_Y`（`ε` は `Z_j, Y_j, Ž_μ, Y̌_μ, ψ̌_μ^†, ψ̌_μ` と反可換、
     したがって `ň_μ, Q̌_ε` とは可換）
@@ -90,7 +90,7 @@ P^{(+)}  := (I + ε)/2
 | 02 | check_02_epsilon_parity.sage | `epsilon_eigenvalue_on_check_Q` (1)〜(4) と `max_eigenvector_in_even_sector` (1)〜(4)。`{0,1}^M` を全列挙し、`η_ε ∈ {±1}`、反転則、`ψ̌_μ^† Q̌_ε ≠ 0`、`η_ε = (−1)^{M+|ε|}`、`ε = (−1)^M Π(I−2ň_μ)`、`εQ̌_max = +Q̌_max` | PASS | 残差 ≤ 1.2e-14、反転則・予測式の違反 0 件、`‖ψ̌_μ^†Q̌_ε‖` の最小 6.58e-1 |
 | 03 | check_03_trace_epsilon_V_plus.sage | `def_D0_open_chain_operator`、`def_G_boundary_operator`、`H1_plus_in_sigma_z_form`、`D0_G_diagonal_action`、`epsilon_D0_G_pairwise_commute`、`epsilon_G_is_involution`、`def_open_chain_spin_energy`、`open_chain_partition_sum`、`open_chain_endpoint_product_sum`、`open_chain_spin_sums_positive`、`trace_of_epsilon_V_plus`、`trace_of_epsilon_V_plus_via_check_eigenvalues` | PASS | Pauli 恒等式の残差 0.0、開鎖和 1.4e-52（200 bit）、トレースの閉じた式の相対差 ≤ 5.2e-15、`tr(εV^{(+)})` の最小 3.30 > 0 |
 | 04 | check_04_hermitian_and_c_plus.sage | `check_number_operator_is_hermitian` (1)〜(4)（`conj(α_μ) = −α_{M+1−μ}` を含む）、`V^{(+)}, W` の実対称性、`W` の成分の正値性、`WP^{(+)} = V^{(+)}P^{(+)}`、**`c_+(M) = Λ^{(1/2)}_M`**、最大固有ベクトルが実で `εq = q` | PASS | 残差 ≤ 5.2e-12、`c_+(M) = Λ^{(1/2)}_M` の相対差 ≤ 1.7e-15 |
-| 05 | check_05_free_energy_limit.sage | `onsager_exact_solution`。(1) Step 2 の `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`、(2) Step 3 の式変形を一行ずつ（`u = |x|`、`v = u + εu`、`εv = v`、`‖v‖² ≤ 4`、`v^⊤Wv ≥ 2u^⊤Wu`、`Λ^{(1/2)}_M ≥ x^⊤Wx/2`）、(3) 挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`、(3') 観測 `c(M) = c_+(M)`、(5) `|(1/(MN))log tr(W^N) − (1/M)log c(M)| ≤ log2/N`、(4) `(1/M)log Λ^{(δ)}_M` の Onsager 積分への収束（`δ = 0, 1/2` の両方） | PASS | Step 3 の等式の残差 ≤ 1.0e-14、不等式の違反 0 件（`x` 192 本）、挟み撃ちの違反 0 件、`c(M) = c_+(M)` の相対差 ≤ 1.9e-15、`M=4096` で Onsager との差 ≤ 1.6e-8（臨界点） |
+| 05 | check_05_free_energy_limit.sage | `onsager_exact_solution` と `c_between_Lambda_half_and_twice_Lambda_half`。(1) `c_between_Lambda_half_and_twice_Lambda_half` の Step 1 の `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`、(2) 同 Step 2 の式変形を一行ずつ（`u = |x|`、`v = u + εu`、`εv = v`、`‖v‖² ≤ 4`、`v^⊤Wv ≥ 2u^⊤Wu`、`Λ^{(1/2)}_M ≥ x^⊤Wx/2`）、(3) 挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`、(3') 観測 `c(M) = c_+(M)`、(5) `|(1/(MN))log tr(W^N) − (1/M)log c(M)| ≤ log2/N`、(4) `(1/M)log Λ^{(δ)}_M` の Onsager 積分への収束（`δ = 0, 1/2` の両方） | PASS | Step 2 の等式の残差 ≤ 1.0e-14、不等式の違反 0 件（`x` 192 本）、挟み撃ちの違反 0 件、`c(M) = c_+(M)` の相対差 ≤ 1.9e-15、`M=4096` で Onsager との差 ≤ 1.6e-8（臨界点） |
 
 ## 結論
 

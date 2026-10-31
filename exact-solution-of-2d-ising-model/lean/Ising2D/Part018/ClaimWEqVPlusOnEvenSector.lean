@@ -1,7 +1,7 @@
 /-
 # `𝓕^{(+)}` の上で `W` と `V^{(+)}` は一致する（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_009_theorem_c_plus_equals_Lambda_half`、ラベル **`c_plus_equals_Lambda_half_integer`**）の
 Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致すること」。
 

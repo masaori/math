@@ -1,7 +1,7 @@
 /-
 # `γ` は `ℝ` 上で連続で周期 `2π` をもつ
 
-人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
+人手証明（正本は `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）:
 - `freeenergy_002_claim_gamma_is_continuous`（ラベル `gamma_is_continuous`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/Arcosh.lean` の

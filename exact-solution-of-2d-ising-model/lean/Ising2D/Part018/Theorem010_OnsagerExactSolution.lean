@@ -1,8 +1,9 @@
 /-
 # 2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
-（`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**）
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
+（`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**。その証明の Step 2 が引く
+`column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half`、ラベル **`c_between_Lambda_half_and_twice_Lambda_half`** も同じファイルにある）
 
 **本プロジェクトの結論である。**
 
@@ -11,12 +12,13 @@
 | 人手証明 | 本ファイル |
 | --- | --- |
 | Step 1（`N_row → ∞`） | `onsager_limit_in_N_row`（章 012 の `Ising2D.limit_of_log_Z_in_N_row`） |
-| Step 2（`c(M) ≥ c_+(M) = Λ^{(1/2)}_M`） | `EvenSectorBridge.LambdaM_le_rayleighSup`（`c_plus_le_c` と `c_plus_equals_Lambda_half_integer`（`EvenSectorBridge.c_plus_equals_lamMax`）） |
-| Step 3（`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`） | `onsager_step3_c_le_two_c_plus`（必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` の特殊化）と `EvenSectorBridge.rayleighSup_le_two_mul_LambdaM` |
-| Step 4（挟み撃ち、`M → ∞`） | `onsager_limit_in_M`（`log` の単調性、`(log 2)/M → 0`、章 012 の `Ising2D.onsager_free_energy_expression` を `δ = 1/2` で適用） |
+| Step 2（`c_between_Lambda_half_and_twice_Lambda_half` を引く `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`） | `EvenSectorBridge.rayleighSup_sandwich_LambdaM`（下の 2 行の組） |
+| `c_between_Lambda_half_and_twice_Lambda_half` Step 1（`c(M) ≥ c_+(M) = Λ^{(1/2)}_M`） | `EvenSectorBridge.LambdaM_le_rayleighSup`（`c_plus_le_c` と `c_plus_equals_Lambda_half_integer`（`EvenSectorBridge.c_plus_equals_lamMax`）） |
+| `c_between_Lambda_half_and_twice_Lambda_half` Step 2（`c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`） | `onsager_step3_c_le_two_c_plus`（必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` の特殊化）と `EvenSectorBridge.rayleighSup_le_two_mul_LambdaM` |
+| Step 3（挟み撃ち、`M → ∞`） | `onsager_limit_in_M`（`log` の単調性、`(log 2)/M → 0`、章 012 の `Ising2D.onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | 主張 | `onsager_exact_solution` |
 
-Step 3 が使う `ε` の性質は `epsilon_is_real_symmetric`（`εᵀ = ε`）、`epsilon_square_and_eigenvalues`
+`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 が使う `ε` の性質は `epsilon_is_real_symmetric`（`εᵀ = ε`）、`epsilon_square_and_eigenvalues`
 （`ε² = I`）、`ε` が置換行列であること（`trace_of_epsilon_V_plus` の Step 3 (b)。Lean では
 `epsilonR M = permMat flipConf`）で、`W` の性質は `epsilon_commutes_with_W`（`εW = Wε`）と
 `W_has_positive_entries`（成分が正。使うのは非負だけ）である。
@@ -27,7 +29,7 @@ Step 3 が使う `ε` の性質は `epsilon_is_real_symmetric`（`εᵀ = ε`）
 `Λ ≤ c(M) ≤ 2Λ` の挟み撃ちで述べる。章 019 の Lean（`Part019/`）は形式化の記録として残してあり、
 本ファイルはそれに依存しない。
 
-必要十分版は Step 3 の不等式だけに置く（`NecSuf/EvenSectorUpperBound.lean`）。Step 1・Step 4 は
+必要十分版は `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の不等式だけに置く（`NecSuf/EvenSectorUpperBound.lean`）。Step 1・Step 3 は
 既存の必要十分版（`NecSuf/LogSqueeze.lean` の `abs_log_div_sub_log_le_of_sandwich`、
 `NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルは
 それらの具体版を接続するだけだからである。
@@ -45,9 +47,9 @@ open scoped Topology
 
 variable {M : ℕ}
 
-/-! ## Step 3 の不等式 `c(M) ≤ 2c_+(M)` -/
+/-! ## `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 の不等式 `c(M) ≤ 2c_+(M)` -/
 
-/-- **人手証明 `onsager_exact_solution` Step 3**: 成分が正で `ε` と可換な実対称半正定値行列 `W` について
+/-- **人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 2**（旧 `onsager_exact_solution` Step 3）: 成分が正で `ε` と可換な実対称半正定値行列 `W` について
 `c(M) ≤ 2c_+(M)`（必要十分版 `NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` を
 `ε = epsilonR M = permMat flipConf` で特殊化したもの）。 -/
 theorem onsager_step3_c_le_two_c_plus {W : Matrix (Conf M) (Conf M) ℝ} (hW : W.IsSymm)
@@ -75,7 +77,7 @@ theorem lamMax_eq_LambdaM (P : IsingParam)
   exact Finset.sum_congr rfl fun μ _ => by
     rw [if_pos (Finset.mem_univ μ)]; ring
 
-/-- **人手証明 Step 2**: `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`
+/-- **人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 1**: `c(M) ≥ c_+(M) = Λ^{(1/2)}_M`
 （`c_plus_le_c` と `c_plus_equals_Lambda_half_integer`）。 -/
 theorem LambdaM_le_rayleighSup (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)
@@ -88,7 +90,7 @@ theorem LambdaM_le_rayleighSup (P : IsingParam)
         rw [B.c_plus_equals_lamMax htr, lamMax_eq_LambdaM P hC hgam]
     _ ≤ rayleighSup B.W := c_plus_le_c B.hWsymm B.hWpsd
 
-/-- **人手証明 Step 3**: `c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`。 -/
+/-- **人手証明 `c_between_Lambda_half_and_twice_Lambda_half` Step 2**: `c(M) ≤ 2c_+(M) = 2Λ^{(1/2)}_M`。 -/
 theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)
     (hpos : ∀ k l, 0 < B.W k l)
@@ -103,7 +105,8 @@ theorem rayleighSup_le_two_mul_LambdaM (P : IsingParam)
     _ = 2 * LambdaM P (1 / 2) M := by
         rw [B.c_plus_equals_lamMax htr, lamMax_eq_LambdaM P hC hgam]
 
-/-- **人手証明 Step 2・Step 3 を合わせた挟み撃ち**: `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`。 -/
+/-- **人手 `c_between_Lambda_half_and_twice_Lambda_half`**（Step 1・Step 2 を合わせた挟み撃ち）: `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`。
+人手 `onsager_exact_solution` の Step 2 はこれを引く。 -/
 theorem rayleighSup_sandwich_LambdaM (P : IsingParam)
     (htr : 0 < ((epsilon M * D.V).trace).re)
     (hpos : ∀ k l, 0 < B.W k l)
@@ -130,7 +133,7 @@ theorem onsager_limit_in_N_row (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : 
   have hpos : 0 < cM m := lt_of_lt_of_le (LambdaM_pos P (1 / 2) m) (hc m hm).1
   exact limit_of_log_Z_in_N_row hm hpos (hZ1 m hm) (hZ2 m hm)
 
-/-- **人手証明 `onsager_exact_solution` Step 4**: `Λ ≤ c(M) ≤ 2Λ` と `log` の単調性から
+/-- **人手証明 `onsager_exact_solution` Step 3**: `Λ ≤ c(M) ≤ 2Λ` と `log` の単調性から
 `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M`。`(log 2)/M → 0` と
 `onsager_free_energy_expression`（`δ = 1/2`）で挟み撃ちにして、`M → ∞` の極限が Onsager の表式になる。 -/
 theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
@@ -166,7 +169,7 @@ theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
 
 * `hZ1`, `hZ2`: 章 011 の `partition_function_sandwich`
   （`N_row ≥ 1` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）
-* `hc`: Step 2・Step 3 の挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`
+* `hc`: Step 2 の挟み撃ち（人手 `c_between_Lambda_half_and_twice_Lambda_half`） `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`
   （`Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` で与えられる）
 
 **実数解析（Riemann 積分）を使うのは `Ising2D.riemann_sum_to_integral` を経由する

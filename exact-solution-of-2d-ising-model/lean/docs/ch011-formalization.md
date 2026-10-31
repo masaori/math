@@ -4,6 +4,8 @@
 `symmetrized_transfer_matrix_on_sectors` の正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`（2026-10-31 の章立ての組み直しで移した）。
 `Z_equals_trace_of_W`・`W_is_real_symmetric_positive_definite`・`def_rayleigh_sup`・`rayleigh_bounds_operator_norm`・`trace_power_upper_bound`・
 `moment_log_convexity`・`trace_power_sandwich`・`partition_function_sandwich` の正本は `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`（同じく移した）。
+`W_has_positive_entries`・`def_sector_rayleigh_sup`・`c_plus_le_c`・`epsilon_commutes_with_W`・`epsilon_is_real_symmetric` の正本は
+`structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（同じく移した）。011 に残るのは `psd_cauchy_schwarz` だけである。
 
 **`(−)` セクターの退避（2026-09-26）**: 人手の本文は `(+)` セクターだけで述べる形になり、
 `c(M) = max(c_+(M), c_-(M))`（`sector_decomposition_of_rayleigh_sup`）は参照用ノート
@@ -81,7 +83,7 @@
 | **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`Part011/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
 | `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` の成分は実数（実行列 `epsilonR` の埋め込み）、`ε^⊤ = ε` とその実行列版（`Part011/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
 | **`Ising2D.epsilon_is_real_symmetric`** | `ε = (epsilonR).map ofReal ∧ ε^⊤ = ε` | **`epsilon_is_real_symmetric`** |
-| `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`onsager_exact_solution` Step 3 が引く） |
+| `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`c_between_Lambda_half_and_twice_Lambda_half` Step 2 が引く） |
 | `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`Part011/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
 | `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |
 | `Ising2D.sector_invariant` / `sector_orthogonal` / `projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` / `sector_quad_le` / `sectorRayleighSup_le` | `W` は `F^{(±)}` を保つ、直交性、実行列の `P^{(±)}`、セクター内の評価 | ノート（同上） |

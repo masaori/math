@@ -1,7 +1,7 @@
 /-
 # 章 016 の `ψ̌` で `Ising2D.CheckFermi` の仮定を埋める
 
-正本: `structured-latex/content/018_even_sector_closing.ts`（`check_number_operator_is_hermitian` (3)）
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（`check_number_operator_is_hermitian` (3)）
 および `content/eigenvalue_problem_diagonalization_and_exponential_form.ts`（`def_check_fermi`, `anticommutator_of_check_psi`）。
 
 ## 経緯（一次情報）

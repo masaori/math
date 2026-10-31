@@ -1,7 +1,7 @@
 /-
 # `Z_m, Y_m` の線型独立性 — 具体版を必要十分版の特殊化として導出する
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.mjs` の
+対応する人手証明（正本は `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts` の
 ブロック `transfer_matrix_002_claim_Z_Y_linearly_independent`、ラベル `Z_Y_linearly_independent`）:
 `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ`
 

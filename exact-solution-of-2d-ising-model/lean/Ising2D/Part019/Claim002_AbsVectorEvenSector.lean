@@ -5,7 +5,7 @@
 `structured-latex/notes/minus_sector_not_adopted.ts` へ退避した
 もと `sector_002_claim_abs_vector_moves_to_even_sector`（ラベル `abs_vector_moves_to_even_sector`）である。
 本ファイルは形式化の記録として残し、ビルドは通し続ける。本文の主張の Lean は本ファイルに依存しない
-（本文の `onsager_exact_solution` Step 3 が使う `uᵀWu ≥ xᵀWx` と `‖u‖ = ‖x‖` は
+（本文の `c_between_Lambda_half_and_twice_Lambda_half` Step 2 が使う `uᵀWu ≥ xᵀWx` と `‖u‖ = ‖x‖` は
 `Ising2D/NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` / `vecNormSq_absVec`）。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）。

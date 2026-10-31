@@ -9,15 +9,15 @@
     "2次元イジングモデル"
   ],
   "mathematicalToolPartTitle": "数学的道具立て",
-  "entryCount": 293,
+  "entryCount": 295,
   "classificationEntryCounts": {
     "数学的道具立て": 114,
-    "2次元イジングモデル": 179
+    "2次元イジングモデル": 181
   },
   "chapterPlacementProgress": {
-    "assignedChapterEntryCount": 170,
-    "placedUnderChapterHeadingEntryCount": 151,
-    "unassignedIsingEntryCount": 9
+    "assignedChapterEntryCount": 174,
+    "placedUnderChapterHeadingEntryCount": 164,
+    "unassignedIsingEntryCount": 7
   },
   "parts": [
     {
@@ -1194,11 +1194,9 @@
           "title": "M\\to\\infty\\text{ の極限と閉形式}",
           "titleFormat": "tex",
           "goalEntryIds": [
-            "maxeig_010a_definition_sector_rayleigh_sup",
-            "closing_009_theorem_c_plus_equals_Lambda_half",
-            "closing_010_theorem_onsager_exact_solution"
+            "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
           ],
-          "entryCount": 9,
+          "entryCount": 13,
           "proposalEntryCount": 9,
           "dependencyOrder": [
             {
@@ -1245,7 +1243,25 @@
             },
             {
               "entryIds": [
+                "transfer_matrix_002_claim_Z_Y_linearly_independent"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "closing_008_claim_check_Q_is_hermitian"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
                 "closing_009_theorem_c_plus_equals_Lambda_half"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
               ],
               "inseparableDependencyUnit": false
             },
@@ -1254,9 +1270,29 @@
                 "closing_010_theorem_onsager_exact_solution"
               ],
               "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
+              ],
+              "inseparableDependencyUnit": false
             }
           ],
-          "placedUnderChapterHeadingEntryIds": []
+          "placedUnderChapterHeadingEntryIds": [
+            "maxeig_004_claim_W_has_positive_entries",
+            "maxeig_010a_definition_sector_rayleigh_sup",
+            "maxeig_claim_c_plus_le_c",
+            "maxeig_010b_claim_epsilon_commutes_with_W",
+            "maxeig_claim_epsilon_is_real_symmetric",
+            "freeenergy_002_claim_gamma_is_continuous",
+            "freeenergy_005_theorem_onsager_expression",
+            "transfer_matrix_002_claim_Z_Y_linearly_independent",
+            "closing_008_claim_check_Q_is_hermitian",
+            "closing_009_theorem_c_plus_equals_Lambda_half",
+            "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
+            "closing_010_theorem_onsager_exact_solution",
+            "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
+          ]
         }
       ]
     },
@@ -1341,14 +1377,12 @@
     }
   ],
   "unassignedIsingEntryIds": [
-    "transfer_matrix_002_claim_Z_Y_linearly_independent",
     "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
     "transfer_matrix_004_definition_eigenspaces_of_epsilon",
     "transfer_matrix_004c_claim_epsilon_action_eigenvalues",
     "evensector_007_claim_H1_H2_via_check_Z_Y",
     "evenEigen_claim_V_plus_inverse_is_positive_definite",
     "evenEigen_claim_V_plus_inverse_positive_and_traces",
-    "closing_008_claim_check_Q_is_hermitian",
     "bridge_claim_V1_pm_square_root_squares_to_V1_pm"
   ],
   "crossChapterNavigationReferences": [
@@ -1565,7 +1599,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 293,
+    "reviewedEntryCount": 295,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -2460,7 +2494,7 @@
     },
     {
       "classification": "2次元イジングモデル",
-      "entryCount": 179,
+      "entryCount": 181,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -3677,40 +3711,54 @@
         {
           "order": 174,
           "entryIds": [
-            "closing_010_theorem_onsager_exact_solution"
+            "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 175,
           "entryIds": [
-            "critical_011_theorem_second_derivative_log_divergence"
+            "closing_010_theorem_onsager_exact_solution"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 176,
           "entryIds": [
-            "critical_012_theorem_specific_heat_log_divergence"
+            "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 177,
           "entryIds": [
-            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+            "critical_011_theorem_second_derivative_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 178,
           "entryIds": [
-            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+            "critical_012_theorem_specific_heat_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 179,
+          "entryIds": [
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 180,
+          "entryIds": [
+            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 181,
           "entryIds": [
             "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
           ],
@@ -3718,22 +3766,6 @@
         }
       ],
       "crossClassificationPrerequisites": [
-        {
-          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
-          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
-        },
-        {
-          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
-          "prerequisiteId": "linear_space_general_001_theorem_tensor_product_basis"
-        },
         {
           "dependentId": "transfer_matrix_004_claim_even_eigenspace_is_complex_subspace",
           "prerequisiteId": "calc_formulae_003_matrix_decomposition"
@@ -3779,70 +3811,6 @@
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
-          "dependentId": "maxeig_004_claim_W_has_positive_entries",
-          "prerequisiteId": "bridge_003_claim_exp_of_diagonal"
-        },
-        {
-          "dependentId": "maxeig_004_claim_W_has_positive_entries",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
-        },
-        {
-          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
-          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
-        },
-        {
-          "dependentId": "maxeig_claim_c_plus_le_c",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
-          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
-        },
-        {
-          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
-          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
-        },
-        {
-          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
-          "prerequisiteId": "linear_space_general_000d_claim_kronecker_transpose"
-        },
-        {
-          "dependentId": "freeenergy_002_claim_gamma_is_continuous",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "freeenergy_005_theorem_onsager_expression",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "freeenergy_005_theorem_onsager_expression",
-          "prerequisiteId": "freeenergy_004_theorem_riemann_sum_to_integral"
-        },
-        {
           "dependentId": "evensector_007_claim_H1_H2_via_check_Z_Y",
           "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
@@ -3869,50 +3837,6 @@
         {
           "dependentId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
           "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "closing_008_claim_check_Q_is_hermitian",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "closing_008_claim_check_Q_is_hermitian",
-          "prerequisiteId": "calculation_formulae_045_theorem_euler_formula_cos_sin"
-        },
-        {
-          "dependentId": "closing_008_claim_check_Q_is_hermitian",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "closing_008_claim_check_Q_is_hermitian",
-          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "closing_008_claim_check_Q_is_hermitian",
-          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
-        },
-        {
-          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
-          "prerequisiteId": "eigenvalues_of_V_012_claim_star_is_norm_preserving"
-        },
-        {
-          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
-          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
-        },
-        {
-          "dependentId": "closing_010_theorem_onsager_exact_solution",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "closing_010_theorem_onsager_exact_solution",
-          "prerequisiteId": "freeenergy_004_theorem_riemann_sum_to_integral"
         },
         {
           "dependentId": "critical_002_definition_kappa",
@@ -5789,6 +5713,142 @@
         {
           "dependentId": "row_limit_and_max_eigenvalue_claim_sandwich_and_limit_in_N_row",
           "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
+        },
+        {
+          "dependentId": "maxeig_004_claim_W_has_positive_entries",
+          "prerequisiteId": "bridge_003_claim_exp_of_diagonal"
+        },
+        {
+          "dependentId": "maxeig_004_claim_W_has_positive_entries",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
+        },
+        {
+          "dependentId": "maxeig_010a_definition_sector_rayleigh_sup",
+          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
+        },
+        {
+          "dependentId": "maxeig_claim_c_plus_le_c",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
+          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+        },
+        {
+          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
+          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
+        },
+        {
+          "dependentId": "maxeig_claim_epsilon_is_real_symmetric",
+          "prerequisiteId": "linear_space_general_000d_claim_kronecker_transpose"
+        },
+        {
+          "dependentId": "freeenergy_002_claim_gamma_is_continuous",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "freeenergy_002_claim_gamma_is_continuous",
+          "prerequisiteId": "freeenergy_004_theorem_riemann_sum_to_integral"
+        },
+        {
+          "dependentId": "freeenergy_005_theorem_onsager_expression",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "freeenergy_005_theorem_onsager_expression",
+          "prerequisiteId": "freeenergy_004_theorem_riemann_sum_to_integral"
+        },
+        {
+          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
+        },
+        {
+          "dependentId": "transfer_matrix_002_claim_Z_Y_linearly_independent",
+          "prerequisiteId": "linear_space_general_001_theorem_tensor_product_basis"
+        },
+        {
+          "dependentId": "closing_008_claim_check_Q_is_hermitian",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "closing_008_claim_check_Q_is_hermitian",
+          "prerequisiteId": "calculation_formulae_045_theorem_euler_formula_cos_sin"
+        },
+        {
+          "dependentId": "closing_008_claim_check_Q_is_hermitian",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "closing_008_claim_check_Q_is_hermitian",
+          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+        },
+        {
+          "dependentId": "closing_008_claim_check_Q_is_hermitian",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
+        },
+        {
+          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
+          "prerequisiteId": "eigenvalues_of_V_012_claim_star_is_norm_preserving"
+        },
+        {
+          "dependentId": "closing_009_theorem_c_plus_equals_Lambda_half",
+          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
+        },
+        {
+          "dependentId": "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "closing_010_theorem_onsager_exact_solution",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "closing_010_theorem_onsager_exact_solution",
+          "prerequisiteId": "freeenergy_004_theorem_riemann_sum_to_integral"
+        },
+        {
+          "dependentId": "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         }
       ]
     }
@@ -11622,85 +11682,6 @@
       }
     },
     {
-      "id": "transfer_matrix_002_claim_Z_Y_linearly_independent",
-      "kind": "claim",
-      "title": "Z_m, Y_m \\text{ は線型独立}",
-      "titleFormat": "tex",
-      "labels": [
-        "Z_Y_linearly_independent"
-      ],
-      "sourceFile": "004_transfer_matrix.ts",
-      "sourceOrdinal": 2,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [
-          "site"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 15099,
-        "inspectedContentSha256": "987d1182dc61c09a2c34e0f751c969d3463e035d11c1533ab5e42809451f3d94",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_jordan_wigner_Y_matrices",
-        "def_jordan_wigner_Z_matrices",
-        "def_site_pauli_matrices",
-        "def_transfer_matrix_symbols",
-        "definition_of_cc",
-        "kronecker_product_rule",
-        "set_and_algebra_notation",
-        "tensor_basis"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "linear_space_general_001_theorem_tensor_product_basis",
-        "transfer_matrix_000_definition_site_pauli_matrices",
-        "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
-        "transfer_matrix_000d_definition_jordan_wigner_Y_matrices",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_jordan_wigner_Y_matrices",
-        "def_jordan_wigner_Z_matrices"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": null,
-      "dependencyPlacement": {
-        "classificationOrder": 44,
-        "dependencyUnitEntryIds": [
-          "transfer_matrix_002_claim_Z_Y_linearly_independent"
-        ]
-      }
-    },
-    {
       "id": "transfer_matrix_005b_claim_end_is_algebra_isomorphism",
       "kind": "claim",
       "title": "\\mathbf{end} \\text{ は単位的 } \\mathbb{C}\\text{-代数の同型}",
@@ -13128,7 +13109,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -13547,83 +13528,6 @@
       }
     },
     {
-      "id": "maxeig_004_claim_W_has_positive_entries",
-      "kind": "claim",
-      "title": "W \\text{ の成分はすべて正}",
-      "titleFormat": "tex",
-      "labels": [
-        "W_has_positive_entries"
-      ],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "sourceOrdinal": 6,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3453,
-        "inspectedContentSha256": "c87391dc7fd108d69168db9bff652be33073f0173cd0b6a7442d9caf8da391e9",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "config_numbering_equals_kronecker_numbering",
-        "cosh_sinh_basic_properties",
-        "def_config_basis_iso",
-        "def_symmetrized_transfer_matrix",
-        "def_transfer_matrix",
-        "def_transfer_matrix_square_root",
-        "exp_of_diagonal_matrix",
-        "sigma_z_diagonal_action"
-      ],
-      "dependsOnEntryIds": [
-        "bridge_001_definition_config_basis",
-        "bridge_002_claim_sigma_z_diagonal_action",
-        "bridge_003_claim_exp_of_diagonal",
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "maxeig_001_definition_transfer_matrix_square_root",
-        "maxeig_001a_definition_symmetrized_transfer_matrix",
-        "partition_function_2d_ising_003_definition_transfer_matrix",
-        "transfer_matrix_claim_config_numbering_equals_kronecker_numbering"
-      ],
-      "semanticPrerequisiteLabels": [],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "config_numbering_equals_kronecker_numbering",
-        "def_config_basis_iso",
-        "def_symmetrized_transfer_matrix"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 43,
-        "dependencyUnitEntryIds": [
-          "maxeig_004_claim_W_has_positive_entries"
-        ]
-      }
-    },
-    {
       "id": "maxeig_005_claim_psd_cauchy_schwarz",
       "kind": "claim",
       "title": "半正定値双線型形式の Cauchy–Schwarz の不等式",
@@ -13687,373 +13591,6 @@
       }
     },
     {
-      "id": "maxeig_010a_definition_sector_rayleigh_sup",
-      "kind": "definition",
-      "title": "c_+(M_{\\mathrm{col}}) := \\sup \\mathcal{R}_+ \\text{（}\\mathcal{F}^{(+)}\\text{ での上限）}",
-      "titleFormat": "tex",
-      "labels": [
-        "def_sector_rayleigh_sup"
-      ],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5710,
-        "inspectedContentSha256": "01d7de3d0e35b51f77f896790e7841f9366db5887a2360c915d7222df7f01aab",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_even_eigenvectors_of_epsilon",
-        "def_kronecker",
-        "def_matrix_norm",
-        "def_rayleigh_sup",
-        "def_symmetrized_transfer_matrix",
-        "definition_of_cc",
-        "epsilon_square_and_eigenvalues",
-        "kronecker_product_rule",
-        "pauli_matrix_products",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "linear_space_general_000_definition_kronecker_product",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "linear_space_general_002b_definition_matrix_norm",
-        "maxeig_001a_definition_symmetrized_transfer_matrix",
-        "maxeig_006_definition_rayleigh_sup",
-        "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
-        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_even_eigenvectors_of_epsilon",
-        "def_rayleigh_sup",
-        "def_symmetrized_transfer_matrix",
-        "epsilon_square_and_eigenvalues"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [
-        "maxeig_009_claim_partition_function_sandwich"
-      ],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 105,
-        "dependencyUnitEntryIds": [
-          "maxeig_010a_definition_sector_rayleigh_sup"
-        ]
-      }
-    },
-    {
-      "id": "maxeig_claim_c_plus_le_c",
-      "kind": "claim",
-      "title": "c_+(M_{\\mathrm{col}}) \\leq c(M_{\\mathrm{col}})",
-      "titleFormat": "tex",
-      "labels": [
-        "c_plus_le_c"
-      ],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [
-          "sector"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2144,
-        "inspectedContentSha256": "ee90e22ea44c4143670b39fcd2d8cb7dd553437f27ffa2ba48d32babe6e9d4dd",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_rayleigh_sup",
-        "def_sector_rayleigh_sup",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "maxeig_006_definition_rayleigh_sup",
-        "maxeig_010a_definition_sector_rayleigh_sup"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_rayleigh_sup"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 108,
-        "dependencyUnitEntryIds": [
-          "maxeig_claim_c_plus_le_c"
-        ]
-      }
-    },
-    {
-      "id": "maxeig_010b_claim_epsilon_commutes_with_W",
-      "kind": "claim",
-      "title": "\\varepsilon W = W\\varepsilon",
-      "titleFormat": "tex",
-      "labels": [
-        "epsilon_commutes_with_W"
-      ],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2591,
-        "inspectedContentSha256": "69ed0dacd83579877b432d6e27bdcde42aa02b490f3f120238534c94da57a224",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_even_eigenvectors_of_epsilon",
-        "def_symmetrized_transfer_matrix",
-        "epsilon_commutes_with_transfer_matrices"
-      ],
-      "dependsOnEntryIds": [
-        "bridge_010_claim_epsilon_commutes",
-        "maxeig_001a_definition_symmetrized_transfer_matrix",
-        "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
-      ],
-      "semanticPrerequisiteLabels": [],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_even_eigenvectors_of_epsilon",
-        "def_symmetrized_transfer_matrix"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [
-        "maxeig_010a_definition_sector_rayleigh_sup"
-      ],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 106,
-        "dependencyUnitEntryIds": [
-          "maxeig_010b_claim_epsilon_commutes_with_W"
-        ]
-      }
-    },
-    {
-      "id": "maxeig_claim_epsilon_is_real_symmetric",
-      "kind": "claim",
-      "title": "\\varepsilon^\\top = \\varepsilon",
-      "titleFormat": "tex",
-      "labels": [
-        "epsilon_is_real_symmetric"
-      ],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "spin"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1618,
-        "inspectedContentSha256": "2b64773785ab024691e851dcc5861147db3efca5f49ad2c1e0a16d28ca50a8a6",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_global_spin_flip_matrix",
-        "def_kronecker",
-        "definition_of_cc",
-        "epsilon_square_and_eigenvalues",
-        "kronecker_transpose",
-        "pauli_matrix_products"
-      ],
-      "dependsOnEntryIds": [
-        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-        "calc_formulae_006_definition_of_cc",
-        "linear_space_general_000_definition_kronecker_product",
-        "linear_space_general_000d_claim_kronecker_transpose",
-        "transfer_matrix_000e_definition_global_spin_flip_matrix",
-        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
-      ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_global_spin_flip_matrix"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 51,
-        "dependencyUnitEntryIds": [
-          "maxeig_claim_epsilon_is_real_symmetric"
-        ]
-      }
-    },
-    {
-      "id": "freeenergy_002_claim_gamma_is_continuous",
-      "kind": "claim",
-      "title": "\\gamma \\text{ は } \\mathbb{R} \\text{ 上で連続}",
-      "titleFormat": "tex",
-      "labels": [
-        "gamma_is_continuous"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "sourceOrdinal": 4,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4524,
-        "inspectedContentSha256": "182979463ec8cd9b126dc80d91ab2b2f3184514139bc85e51a913d08bc7a81a2",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_arccosh",
-        "gamma1_lower_bound_all_theta",
-        "remark_real_analysis_escape_point",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-        "transfer_matrix_000h2_definition_arccosh"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [
-        "riemann_sum_to_integral"
-      ],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
-        "riemann_sum_to_integral"
-      ],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": {
-        "riemann_sum_to_integral": "後続利用への案内"
-      },
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "gamma1_lower_bound_all_theta"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 132,
-        "dependencyUnitEntryIds": [
-          "freeenergy_002_claim_gamma_is_continuous"
-        ]
-      }
-    },
-    {
       "id": "freeenergy_004_theorem_riemann_sum_to_integral",
       "kind": "theorem",
       "title": "等間隔点の平均は積分に収束する",
@@ -14109,82 +13646,6 @@
         "classificationOrder": 63,
         "dependencyUnitEntryIds": [
           "freeenergy_004_theorem_riemann_sum_to_integral"
-        ]
-      }
-    },
-    {
-      "id": "freeenergy_005_theorem_onsager_expression",
-      "kind": "theorem",
-      "title": "Onsager の自由エネルギーの表式",
-      "titleFormat": "text",
-      "labels": [
-        "onsager_free_energy_expression"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "sourceOrdinal": 7,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9176,
-        "inspectedContentSha256": "b6be0fe1ed707a2b64193f30713531a368304bac1cb219527aa21f17399b2670",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_A_theta",
-        "def_Lambda_delta_M",
-        "def_Theta_delta_M",
-        "gamma1_lower_bound_all_theta",
-        "gamma_is_continuous",
-        "riemann_sum_to_integral",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_017_definition_A_theta",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-        "freeenergy_002_claim_gamma_is_continuous",
-        "freeenergy_004_theorem_riemann_sum_to_integral",
-        "freeenergy_definition_Lambda_delta_M",
-        "freeenergy_definition_Theta_delta_M"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_A_theta",
-        "def_Lambda_delta_M",
-        "def_Theta_delta_M",
-        "gamma1_lower_bound_all_theta"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 136,
-        "dependencyUnitEntryIds": [
-          "freeenergy_005_theorem_onsager_expression"
         ]
       }
     },
@@ -14397,284 +13858,6 @@
         "classificationOrder": 89,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_inverse_positive_and_traces"
-        ]
-      }
-    },
-    {
-      "id": "closing_008_claim_check_Q_is_hermitian",
-      "kind": "claim",
-      "title": "\\check{n}_\\mu, \\check{Q}_\\epsilon \\text{ はエルミート}",
-      "titleFormat": "tex",
-      "labels": [
-        "check_number_operator_is_hermitian"
-      ],
-      "sourceFile": "018_even_sector_closing.ts",
-      "sourceOrdinal": 10,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
-        "isingSemanticMatches": [
-          "サイト"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 12819,
-        "inspectedContentSha256": "d3bc50af916076b1f9f9224cc1d2cd4df0e565d7c969472a04162844c38502c6",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "Z_Y_linearly_independent",
-        "check_joint_eigenspace_decomposition",
-        "check_number_operators_commute",
-        "conjugate_index_of_check_Z_Y",
-        "def_check_fermi",
-        "def_check_index_set",
-        "def_hermitian_positive_definite",
-        "definition_of_cc",
-        "euler_formula_cos_sin",
-        "gamma_2_theta_tilde_nonzero",
-        "kronecker_product_rule",
-        "periodicity_of_check_fermi",
-        "relation_of_gamma_2_theta_tilde",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Athetatilde_002_claim_gamma2_nonzero",
-        "Athetatilde_003_claim_relation_of_gamma2",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_045_theorem_euler_formula_cos_sin",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "evenEigen_003_claim_check_number_operators_commute",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenfermi_001_definition_check_fermi",
-        "evenfermi_002_claim_periodicity",
-        "evensector_003a_definition_check_index_set",
-        "evensector_003b_claim_conjugate_index_of_check_Z_Y",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "transfer_matrix_002_claim_Z_Y_linearly_independent"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": null,
-      "dependencyPlacement": {
-        "classificationOrder": 158,
-        "dependencyUnitEntryIds": [
-          "closing_008_claim_check_Q_is_hermitian"
-        ]
-      }
-    },
-    {
-      "id": "closing_009_theorem_c_plus_equals_Lambda_half",
-      "kind": "theorem",
-      "title": "c_+(M_{\\mathrm{col}}) = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}}",
-      "titleFormat": "tex",
-      "labels": [
-        "c_plus_equals_Lambda_half_integer"
-      ],
-      "sourceFile": "018_even_sector_closing.ts",
-      "sourceOrdinal": 11,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [
-          "sector"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11177,
-        "inspectedContentSha256": "f61ce47349458c30e99b80c9e73d6dc8edcc85504cee3e2badf737a97a973d18",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V_plus_is_positive_definite",
-        "W_is_real_symmetric_positive_definite",
-        "check_joint_eigenspace_decomposition",
-        "def_Lambda_delta_M",
-        "def_epsilon_projectors",
-        "def_even_eigenvectors_of_epsilon",
-        "def_exp",
-        "def_sector_rayleigh_sup",
-        "definition_of_cc",
-        "eigenvalues_of_V_plus",
-        "iH_is_real_symmetric",
-        "max_eigenvalue_of_V_plus_simple",
-        "max_eigenvector_in_even_sector",
-        "set_and_algebra_notation",
-        "star_preserves_norm_and_limits",
-        "symmetrized_transfer_matrix_on_sectors"
-      ],
-      "dependsOnEntryIds": [
-        "bridge_008_definition_epsilon_projectors",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "closing_007_theorem_max_eigenvector_in_even_sector",
-        "eigenvalues_of_V_012_claim_star_is_norm_preserving",
-        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenEigen_008_claim_V_plus_is_positive_definite",
-        "evenEigen_010_theorem_eigenvalues_of_V_plus",
-        "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
-        "exp_linear_map_002_definition_exp_of_endomorphism",
-        "freeenergy_definition_Lambda_delta_M",
-        "maxeig_003_claim_W_is_positive_definite",
-        "maxeig_010a_definition_sector_rayleigh_sup",
-        "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
-        "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_Lambda_delta_M"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 173,
-        "dependencyUnitEntryIds": [
-          "closing_009_theorem_c_plus_equals_Lambda_half"
-        ]
-      }
-    },
-    {
-      "id": "closing_010_theorem_onsager_exact_solution",
-      "kind": "theorem",
-      "title": "2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）",
-      "titleFormat": "text",
-      "labels": [
-        "onsager_exact_solution"
-      ],
-      "sourceFile": "018_even_sector_closing.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
-        "isingSemanticMatches": [
-          "Ising"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10392,
-        "inspectedContentSha256": "e4b841f0176a0bfb6bc750bd374bc67eb5a55644b80ac8b18532e8ef89d51092",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "W_has_positive_entries",
-        "c_plus_equals_Lambda_half_integer",
-        "c_plus_le_c",
-        "def_even_eigenvectors_of_epsilon",
-        "def_sector_rayleigh_sup",
-        "epsilon_commutes_with_W",
-        "epsilon_is_real_symmetric",
-        "epsilon_square_and_eigenvalues",
-        "gamma1_lower_bound_all_theta",
-        "limit_of_log_Z_in_N_row",
-        "onsager_free_energy_expression",
-        "partition_function_via_transfer_matrix",
-        "remark_real_analysis_escape_point",
-        "remark_remaining_input_even_sector",
-        "riemann_sum_to_integral",
-        "set_and_algebra_notation",
-        "trace_of_epsilon_V_plus"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "closing_006_theorem_trace_of_epsilon_V_plus",
-        "closing_009_theorem_c_plus_equals_Lambda_half",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-        "freeenergy_003_claim_limit_in_N_row",
-        "freeenergy_004_theorem_riemann_sum_to_integral",
-        "freeenergy_005_theorem_onsager_expression",
-        "maxeig_004_claim_W_has_positive_entries",
-        "maxeig_010a_definition_sector_rayleigh_sup",
-        "maxeig_010b_claim_epsilon_commutes_with_W",
-        "maxeig_claim_c_plus_le_c",
-        "maxeig_claim_epsilon_is_real_symmetric",
-        "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix",
-        "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
-        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "epsilon_commutes_with_W",
-        "def_sector_rayleigh_sup"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "gamma1_lower_bound_all_theta",
-        "partition_function_via_transfer_matrix"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
-      "dependencyPlacement": {
-        "classificationOrder": 174,
-        "dependencyUnitEntryIds": [
-          "closing_010_theorem_onsager_exact_solution"
         ]
       }
     },
@@ -15481,14 +14664,16 @@
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "interimForwardReferenceLabelsToReorganizedChapters": [
+        "onsager_exact_solution"
+      ],
       "staleForwardReferenceReviewLabels": [],
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 175,
+        "classificationOrder": 177,
         "dependencyUnitEntryIds": [
           "critical_011_theorem_second_derivative_log_divergence"
         ]
@@ -15552,14 +14737,16 @@
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "interimForwardReferenceLabelsToReorganizedChapters": [
+        "onsager_exact_solution"
+      ],
       "staleForwardReferenceReviewLabels": [],
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 176,
+        "classificationOrder": 178,
         "dependencyUnitEntryIds": [
           "critical_012_theorem_specific_heat_log_divergence"
         ]
@@ -15640,7 +14827,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [
           "ising"
         ],
@@ -17877,7 +17064,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
+        "incomingReferenceCount": 13,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -19024,7 +18211,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [
           "転送"
         ],
@@ -21245,7 +20432,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 179,
+        "classificationOrder": 181,
         "dependencyUnitEntryIds": [
           "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
         ]
@@ -21474,7 +20661,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -23708,7 +22895,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -24731,7 +23918,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 177,
+        "classificationOrder": 179,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
         ]
@@ -25916,7 +25103,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 178,
+        "classificationOrder": 180,
         "dependencyUnitEntryIds": [
           "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
         ]
@@ -26083,7 +25270,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 10,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -26617,6 +25804,1007 @@
           "row_limit_and_max_eigenvalue_claim_sandwich_and_limit_in_N_row"
         ]
       }
+    },
+    {
+      "id": "maxeig_004_claim_W_has_positive_entries",
+      "kind": "claim",
+      "title": "W \\text{ の成分はすべて正}",
+      "titleFormat": "tex",
+      "labels": [
+        "W_has_positive_entries"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 6,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 3453,
+        "inspectedContentSha256": "c87391dc7fd108d69168db9bff652be33073f0173cd0b6a7442d9caf8da391e9",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "config_numbering_equals_kronecker_numbering",
+        "cosh_sinh_basic_properties",
+        "def_config_basis_iso",
+        "def_symmetrized_transfer_matrix",
+        "def_transfer_matrix",
+        "def_transfer_matrix_square_root",
+        "exp_of_diagonal_matrix",
+        "sigma_z_diagonal_action"
+      ],
+      "dependsOnEntryIds": [
+        "bridge_001_definition_config_basis",
+        "bridge_002_claim_sigma_z_diagonal_action",
+        "bridge_003_claim_exp_of_diagonal",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "maxeig_001_definition_transfer_matrix_square_root",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "partition_function_2d_ising_003_definition_transfer_matrix",
+        "transfer_matrix_claim_config_numbering_equals_kronecker_numbering"
+      ],
+      "semanticPrerequisiteLabels": [],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 43,
+        "dependencyUnitEntryIds": [
+          "maxeig_004_claim_W_has_positive_entries"
+        ]
+      }
+    },
+    {
+      "id": "maxeig_010a_definition_sector_rayleigh_sup",
+      "kind": "definition",
+      "title": "c_+(M_{\\mathrm{col}}) := \\sup \\mathcal{R}_+ \\text{（}\\mathcal{F}^{(+)}\\text{ での上限）}",
+      "titleFormat": "tex",
+      "labels": [
+        "def_sector_rayleigh_sup"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 6,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5710,
+        "inspectedContentSha256": "01d7de3d0e35b51f77f896790e7841f9366db5887a2360c915d7222df7f01aab",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_even_eigenvectors_of_epsilon",
+        "def_kronecker",
+        "def_matrix_norm",
+        "def_rayleigh_sup",
+        "def_symmetrized_transfer_matrix",
+        "definition_of_cc",
+        "epsilon_square_and_eigenvalues",
+        "kronecker_product_rule",
+        "pauli_matrix_products",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_002b_definition_matrix_norm",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "maxeig_006_definition_rayleigh_sup",
+        "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "maxeig_009_claim_partition_function_sandwich"
+      ],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 105,
+        "dependencyUnitEntryIds": [
+          "maxeig_010a_definition_sector_rayleigh_sup"
+        ]
+      }
+    },
+    {
+      "id": "maxeig_claim_c_plus_le_c",
+      "kind": "claim",
+      "title": "c_+(M_{\\mathrm{col}}) \\leq c(M_{\\mathrm{col}})",
+      "titleFormat": "tex",
+      "labels": [
+        "c_plus_le_c"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [
+          "sector"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2144,
+        "inspectedContentSha256": "ee90e22ea44c4143670b39fcd2d8cb7dd553437f27ffa2ba48d32babe6e9d4dd",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_rayleigh_sup",
+        "def_sector_rayleigh_sup",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "maxeig_006_definition_rayleigh_sup",
+        "maxeig_010a_definition_sector_rayleigh_sup"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 108,
+        "dependencyUnitEntryIds": [
+          "maxeig_claim_c_plus_le_c"
+        ]
+      }
+    },
+    {
+      "id": "maxeig_010b_claim_epsilon_commutes_with_W",
+      "kind": "claim",
+      "title": "\\varepsilon W = W\\varepsilon",
+      "titleFormat": "tex",
+      "labels": [
+        "epsilon_commutes_with_W"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2591,
+        "inspectedContentSha256": "69ed0dacd83579877b432d6e27bdcde42aa02b490f3f120238534c94da57a224",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_even_eigenvectors_of_epsilon",
+        "def_symmetrized_transfer_matrix",
+        "epsilon_commutes_with_transfer_matrices"
+      ],
+      "dependsOnEntryIds": [
+        "bridge_010_claim_epsilon_commutes",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
+      ],
+      "semanticPrerequisiteLabels": [],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "maxeig_010a_definition_sector_rayleigh_sup"
+      ],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 106,
+        "dependencyUnitEntryIds": [
+          "maxeig_010b_claim_epsilon_commutes_with_W"
+        ]
+      }
+    },
+    {
+      "id": "maxeig_claim_epsilon_is_real_symmetric",
+      "kind": "claim",
+      "title": "\\varepsilon^\\top = \\varepsilon",
+      "titleFormat": "tex",
+      "labels": [
+        "epsilon_is_real_symmetric"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "spin"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1618,
+        "inspectedContentSha256": "2b64773785ab024691e851dcc5861147db3efca5f49ad2c1e0a16d28ca50a8a6",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_global_spin_flip_matrix",
+        "def_kronecker",
+        "definition_of_cc",
+        "epsilon_square_and_eigenvalues",
+        "kronecker_transpose",
+        "pauli_matrix_products"
+      ],
+      "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_006_definition_of_cc",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000d_claim_kronecker_transpose",
+        "transfer_matrix_000e_definition_global_spin_flip_matrix",
+        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 51,
+        "dependencyUnitEntryIds": [
+          "maxeig_claim_epsilon_is_real_symmetric"
+        ]
+      }
+    },
+    {
+      "id": "freeenergy_002_claim_gamma_is_continuous",
+      "kind": "claim",
+      "title": "\\gamma \\text{ は } \\mathbb{R} \\text{ 上で連続}",
+      "titleFormat": "tex",
+      "labels": [
+        "gamma_is_continuous"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 4,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 4524,
+        "inspectedContentSha256": "182979463ec8cd9b126dc80d91ab2b2f3184514139bc85e51a913d08bc7a81a2",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_arccosh",
+        "gamma1_lower_bound_all_theta",
+        "remark_real_analysis_escape_point",
+        "riemann_sum_to_integral",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_004_theorem_riemann_sum_to_integral",
+        "transfer_matrix_000h2_definition_arccosh"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 132,
+        "dependencyUnitEntryIds": [
+          "freeenergy_002_claim_gamma_is_continuous"
+        ]
+      }
+    },
+    {
+      "id": "freeenergy_005_theorem_onsager_expression",
+      "kind": "theorem",
+      "title": "Onsager の自由エネルギーの表式",
+      "titleFormat": "text",
+      "labels": [
+        "onsager_free_energy_expression"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 7,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 9176,
+        "inspectedContentSha256": "b6be0fe1ed707a2b64193f30713531a368304bac1cb219527aa21f17399b2670",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_A_theta",
+        "def_Lambda_delta_M",
+        "def_Theta_delta_M",
+        "gamma1_lower_bound_all_theta",
+        "gamma_is_continuous",
+        "riemann_sum_to_integral",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_017_definition_A_theta",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_002_claim_gamma_is_continuous",
+        "freeenergy_004_theorem_riemann_sum_to_integral",
+        "freeenergy_definition_Lambda_delta_M",
+        "freeenergy_definition_Theta_delta_M"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 136,
+        "dependencyUnitEntryIds": [
+          "freeenergy_005_theorem_onsager_expression"
+        ]
+      }
+    },
+    {
+      "id": "transfer_matrix_002_claim_Z_Y_linearly_independent",
+      "kind": "claim",
+      "title": "Z_m, Y_m \\text{ は線型独立}",
+      "titleFormat": "tex",
+      "labels": [
+        "Z_Y_linearly_independent"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 2,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [
+          "site"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 15099,
+        "inspectedContentSha256": "987d1182dc61c09a2c34e0f751c969d3463e035d11c1533ab5e42809451f3d94",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_jordan_wigner_Y_matrices",
+        "def_jordan_wigner_Z_matrices",
+        "def_site_pauli_matrices",
+        "def_transfer_matrix_symbols",
+        "definition_of_cc",
+        "kronecker_product_rule",
+        "set_and_algebra_notation",
+        "tensor_basis"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_001_theorem_tensor_product_basis",
+        "transfer_matrix_000_definition_site_pauli_matrices",
+        "transfer_matrix_000c_definition_jordan_wigner_Z_matrices",
+        "transfer_matrix_000d_definition_jordan_wigner_Y_matrices",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 44,
+        "dependencyUnitEntryIds": [
+          "transfer_matrix_002_claim_Z_Y_linearly_independent"
+        ]
+      }
+    },
+    {
+      "id": "closing_008_claim_check_Q_is_hermitian",
+      "kind": "claim",
+      "title": "\\check{n}_\\mu, \\check{Q}_\\epsilon \\text{ はエルミート}",
+      "titleFormat": "tex",
+      "labels": [
+        "check_number_operator_is_hermitian"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 10,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [
+          "サイト"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 12819,
+        "inspectedContentSha256": "d3bc50af916076b1f9f9224cc1d2cd4df0e565d7c969472a04162844c38502c6",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "Z_Y_linearly_independent",
+        "check_joint_eigenspace_decomposition",
+        "check_number_operators_commute",
+        "conjugate_index_of_check_Z_Y",
+        "def_check_fermi",
+        "def_check_index_set",
+        "def_hermitian_positive_definite",
+        "definition_of_cc",
+        "euler_formula_cos_sin",
+        "gamma_2_theta_tilde_nonzero",
+        "kronecker_product_rule",
+        "periodicity_of_check_fermi",
+        "relation_of_gamma_2_theta_tilde",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_002_claim_gamma2_nonzero",
+        "Athetatilde_003_claim_relation_of_gamma2",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_045_theorem_euler_formula_cos_sin",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "evenEigen_003_claim_check_number_operators_commute",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenfermi_001_definition_check_fermi",
+        "evenfermi_002_claim_periodicity",
+        "evensector_003a_definition_check_index_set",
+        "evensector_003b_claim_conjugate_index_of_check_Z_Y",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "transfer_matrix_002_claim_Z_Y_linearly_independent"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 158,
+        "dependencyUnitEntryIds": [
+          "closing_008_claim_check_Q_is_hermitian"
+        ]
+      }
+    },
+    {
+      "id": "closing_009_theorem_c_plus_equals_Lambda_half",
+      "kind": "theorem",
+      "title": "c_+(M_{\\mathrm{col}}) = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}}",
+      "titleFormat": "tex",
+      "labels": [
+        "c_plus_equals_Lambda_half_integer"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 11,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 6,
+        "isingSemanticMatches": [
+          "sector"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 11209,
+        "inspectedContentSha256": "37ab5ac15c77750054d4fe196ba34c48ab2a01d000408685b9388f6b15b187fb",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V_plus_is_positive_definite",
+        "W_is_real_symmetric_positive_definite",
+        "check_joint_eigenspace_decomposition",
+        "check_number_operator_is_hermitian",
+        "def_Lambda_delta_M",
+        "def_epsilon_projectors",
+        "def_even_eigenvectors_of_epsilon",
+        "def_exp",
+        "def_sector_rayleigh_sup",
+        "definition_of_cc",
+        "eigenvalues_of_V_plus",
+        "iH_is_real_symmetric",
+        "max_eigenvalue_of_V_plus_simple",
+        "max_eigenvector_in_even_sector",
+        "set_and_algebra_notation",
+        "star_preserves_norm_and_limits",
+        "symmetrized_transfer_matrix_on_sectors"
+      ],
+      "dependsOnEntryIds": [
+        "bridge_008_definition_epsilon_projectors",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_007_theorem_max_eigenvector_in_even_sector",
+        "closing_008_claim_check_Q_is_hermitian",
+        "eigenvalues_of_V_012_claim_star_is_norm_preserving",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenEigen_008_claim_V_plus_is_positive_definite",
+        "evenEigen_010_theorem_eigenvalues_of_V_plus",
+        "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "freeenergy_definition_Lambda_delta_M",
+        "maxeig_003_claim_W_is_positive_definite",
+        "maxeig_010a_definition_sector_rayleigh_sup",
+        "maxeig_claim_symmetrized_transfer_matrix_on_sectors",
+        "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 173,
+        "dependencyUnitEntryIds": [
+          "closing_009_theorem_c_plus_equals_Lambda_half"
+        ]
+      }
+    },
+    {
+      "id": "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
+      "kind": "claim",
+      "title": "\\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\leq c(M_{\\mathrm{col}}) \\leq 2\\Lambda^{(1/2)}_{M_{\\mathrm{col}}}",
+      "titleFormat": "tex",
+      "labels": [
+        "c_between_Lambda_half_and_twice_Lambda_half"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": null,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [
+          "sector"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 7858,
+        "inspectedContentSha256": "758bb72e0d9ca57a5923b1ca4a7998f0bffca78d7bf44c7c233002301665d8f1",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "W_has_positive_entries",
+        "c_plus_equals_Lambda_half_integer",
+        "c_plus_le_c",
+        "def_Lambda_delta_M",
+        "def_even_eigenvectors_of_epsilon",
+        "def_rayleigh_sup",
+        "def_sector_rayleigh_sup",
+        "epsilon_commutes_with_W",
+        "epsilon_is_real_symmetric",
+        "epsilon_square_and_eigenvalues",
+        "set_and_algebra_notation",
+        "trace_of_epsilon_V_plus"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_006_theorem_trace_of_epsilon_V_plus",
+        "closing_009_theorem_c_plus_equals_Lambda_half",
+        "freeenergy_definition_Lambda_delta_M",
+        "maxeig_004_claim_W_has_positive_entries",
+        "maxeig_006_definition_rayleigh_sup",
+        "maxeig_010a_definition_sector_rayleigh_sup",
+        "maxeig_010b_claim_epsilon_commutes_with_W",
+        "maxeig_claim_c_plus_le_c",
+        "maxeig_claim_epsilon_is_real_symmetric",
+        "transfer_matrix_004_definition_eigenspace_even_of_epsilon",
+        "transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 174,
+        "dependencyUnitEntryIds": [
+          "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
+        ]
+      }
+    },
+    {
+      "id": "closing_010_theorem_onsager_exact_solution",
+      "kind": "theorem",
+      "title": "2 次元 Ising 模型の厳密解（Onsager の自由エネルギー）",
+      "titleFormat": "text",
+      "labels": [
+        "onsager_exact_solution"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 7,
+        "isingSemanticMatches": [
+          "Ising"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 4188,
+        "inspectedContentSha256": "8e4718cb2ec21f42b52eaaaba9c639ae3c1f006a68fce1f0a931e710730e05c2",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "c_between_Lambda_half_and_twice_Lambda_half",
+        "c_plus_equals_Lambda_half_integer",
+        "def_sector_rayleigh_sup",
+        "epsilon_commutes_with_W",
+        "gamma1_lower_bound_all_theta",
+        "limit_of_log_Z_in_N_row",
+        "onsager_free_energy_expression",
+        "partition_function_via_transfer_matrix",
+        "remark_real_analysis_escape_point",
+        "remark_remaining_input_even_sector",
+        "riemann_sum_to_integral",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_009_theorem_c_plus_equals_Lambda_half",
+        "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_003_claim_limit_in_N_row",
+        "freeenergy_004_theorem_riemann_sum_to_integral",
+        "freeenergy_005_theorem_onsager_expression",
+        "maxeig_010a_definition_sector_rayleigh_sup",
+        "maxeig_010b_claim_epsilon_commutes_with_W",
+        "partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "epsilon_commutes_with_W",
+        "def_sector_rayleigh_sup"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 175,
+        "dependencyUnitEntryIds": [
+          "closing_010_theorem_onsager_exact_solution"
+        ]
+      }
+    },
+    {
+      "id": "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit",
+      "kind": "claim",
+      "title": "c_+(M_{\\mathrm{col}}) = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}}\\text{、}\\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\leq c(M_{\\mathrm{col}}) \\leq 2\\Lambda^{(1/2)}_{M_{\\mathrm{col}}}\\text{ と }\\lim_{M_{\\mathrm{col}}\\to\\infty}\\lim_{N_{\\mathrm{row}}\\to\\infty}\\frac{1}{M_{\\mathrm{col}}N_{\\mathrm{row}}}\\log Z\\text{ の閉形式}",
+      "titleFormat": "tex",
+      "labels": [
+        "c_plus_value_c_sandwich_and_double_limit_of_log_Z"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "sourceOrdinal": null,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 0,
+        "isingSemanticMatches": [
+          "ising"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 4238,
+        "inspectedContentSha256": "6d0c1f0f7a950273019d5aa586c9a60f037a6eba00e158b52cf08d33a923a69e",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "c_between_Lambda_half_and_twice_Lambda_half",
+        "c_plus_equals_Lambda_half_integer",
+        "def_Lambda_delta_M",
+        "def_even_eigenvectors_of_epsilon",
+        "def_partition_function_2d_ising",
+        "def_rayleigh_sup",
+        "def_sector_rayleigh_sup",
+        "def_symmetrized_transfer_matrix",
+        "gamma1_lower_bound_all_theta",
+        "onsager_exact_solution",
+        "onsager_free_energy_expression",
+        "remark_real_analysis_escape_point",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "closing_009_theorem_c_plus_equals_Lambda_half",
+        "closing_010_theorem_onsager_exact_solution",
+        "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_005_theorem_onsager_expression",
+        "freeenergy_definition_Lambda_delta_M",
+        "maxeig_001a_definition_symmetrized_transfer_matrix",
+        "maxeig_006_definition_rayleigh_sup",
+        "maxeig_010a_definition_sector_rayleigh_sup",
+        "partition_function_2d_ising_002_definition_partition_function",
+        "transfer_matrix_004_definition_eigenspace_even_of_epsilon"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
+      "dependencyPlacement": {
+        "classificationOrder": 176,
+        "dependencyUnitEntryIds": [
+          "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
+        ]
+      }
     }
   ],
   "dependencySupportNodes": [
@@ -26877,78 +27065,18 @@
     {
       "id": "heading_max_eigenvalue",
       "kind": "heading",
-      "title": "c_+(M_{\\mathrm{col}}) \\text{ と、} W \\text{ と } \\varepsilon \\text{ の性質}",
+      "title": "半正定値双線型形式の Cauchy–Schwarz の不等式",
       "labels": [],
       "sourceFile": "011_max_eigenvalue.ts",
       "dependsOnLabels": []
-    },
-    {
-      "id": "maxeig_remark_overview_c_plus_and_epsilon",
-      "kind": "remark",
-      "title": "c_+(M_{\\mathrm{col}}) \\text{ と、} W \\text{ と } \\varepsilon \\text{ の性質を示す道筋}",
-      "labels": [],
-      "sourceFile": "011_max_eigenvalue.ts",
-      "dependsOnLabels": [
-        "c_plus_le_c",
-        "def_even_eigenvectors_of_epsilon",
-        "def_rayleigh_sup",
-        "def_sector_rayleigh_sup",
-        "epsilon_commutes_with_W",
-        "epsilon_is_real_symmetric",
-        "onsager_exact_solution",
-        "symmetrized_transfer_matrix_on_sectors"
-      ]
     },
     {
       "id": "heading_free_energy",
       "kind": "heading",
-      "title": "自由エネルギーと熱力学極限",
+      "title": "等間隔点の平均の積分への収束",
       "labels": [],
       "sourceFile": "012_free_energy.ts",
       "dependsOnLabels": []
-    },
-    {
-      "id": "freeenergy_000_remark_escape_to_real_analysis",
-      "kind": "remark",
-      "title": "実数解析へ移行するのはこの章のこの箇所だけである",
-      "labels": [
-        "remark_real_analysis_escape_point"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "dependsOnLabels": [
-        "def_exp",
-        "gamma_is_continuous",
-        "limit_of_log_Z_in_N_row",
-        "onsager_exact_solution",
-        "partition_function_sandwich",
-        "remark_real_analysis_escape_chapter_E",
-        "riemann_sum_to_integral"
-      ]
-    },
-    {
-      "id": "freeenergy_006_remark_remaining_input",
-      "kind": "remark",
-      "title": "\\text{厳密解へ残っている入力：} c_+(M_{\\mathrm{col}}) \\text{ の値}",
-      "labels": [
-        "remark_remaining_input_even_sector"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "dependsOnLabels": [
-        "W_has_positive_entries",
-        "anticommutator_of_check_Z_Y",
-        "antiperiodic_exp_sum",
-        "c_plus_equals_Lambda_half_integer",
-        "c_plus_le_c",
-        "commutator_of_H_and_check_Z_Y",
-        "def_H1_plus",
-        "def_half_integer_checkY",
-        "def_half_integer_checkZ",
-        "limit_of_log_Z_in_N_row",
-        "onsager_exact_solution",
-        "onsager_free_energy_expression",
-        "partition_function_sandwich",
-        "partition_function_via_transfer_matrix"
-      ]
     },
     {
       "id": "heading_even_sector_modes",
@@ -26965,35 +27093,6 @@
       "labels": [],
       "sourceFile": "017_even_sector_eigenvalues.ts",
       "dependsOnLabels": []
-    },
-    {
-      "id": "heading_even_sector_closing",
-      "kind": "heading",
-      "title": "c_+(M_{\\mathrm{col}}) \\text{ の決定と Onsager の自由エネルギー}",
-      "labels": [],
-      "sourceFile": "018_even_sector_closing.ts",
-      "dependsOnLabels": []
-    },
-    {
-      "id": "closing_remark_overview_c_plus_and_onsager",
-      "kind": "remark",
-      "title": "c_+(M_{\\mathrm{col}}) \\text{ を } \\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\text{ で決める道筋}",
-      "labels": [],
-      "sourceFile": "018_even_sector_closing.ts",
-      "dependsOnLabels": [
-        "c_plus_equals_Lambda_half_integer",
-        "def_exp",
-        "def_sector_rayleigh_sup",
-        "def_trace",
-        "max_eigenvalue_of_V_plus_simple",
-        "max_eigenvector_in_even_sector",
-        "onsager_exact_solution",
-        "onsager_free_energy_expression",
-        "remark_real_analysis_escape_point",
-        "remark_remaining_input_even_sector",
-        "riemann_sum_to_integral",
-        "symmetrized_transfer_matrix_on_sectors"
-      ]
     },
     {
       "id": "heading_critical_point",
@@ -27236,6 +27335,99 @@
       "sourceFile": "thermodynamic_limit_row_limit_and_max_eigenvalue.ts",
       "dependsOnLabels": [
         "limit_of_log_Z_in_N_row",
+        "partition_function_via_transfer_matrix"
+      ]
+    },
+    {
+      "id": "heading_chapter_column_limit_and_closed_form",
+      "kind": "heading",
+      "title": "M\\to\\infty\\text{ の極限と閉形式}",
+      "labels": [],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "dependsOnLabels": []
+    },
+    {
+      "id": "closing_remark_overview_c_plus_and_onsager",
+      "kind": "remark",
+      "title": "c_+(M_{\\mathrm{col}}) \\text{ を } \\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\text{ で決め、} M_{\\mathrm{col}}\\to\\infty \\text{ の極限を取る道筋}",
+      "labels": [],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "dependsOnLabels": [
+        "c_between_Lambda_half_and_twice_Lambda_half",
+        "c_plus_equals_Lambda_half_integer",
+        "def_exp",
+        "def_sector_rayleigh_sup",
+        "gamma_is_continuous",
+        "max_eigenvalue_of_V_plus_simple",
+        "max_eigenvector_in_even_sector",
+        "onsager_exact_solution",
+        "onsager_free_energy_expression",
+        "remark_real_analysis_escape_point",
+        "remark_remaining_input_even_sector",
+        "riemann_sum_to_integral",
+        "symmetrized_transfer_matrix_on_sectors"
+      ]
+    },
+    {
+      "id": "maxeig_remark_overview_c_plus_and_epsilon",
+      "kind": "remark",
+      "title": "c_+(M_{\\mathrm{col}}) \\text{ と、} W \\text{ と } \\varepsilon \\text{ の性質を示す道筋}",
+      "labels": [],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "dependsOnLabels": [
+        "c_between_Lambda_half_and_twice_Lambda_half",
+        "c_plus_equals_Lambda_half_integer",
+        "c_plus_le_c",
+        "def_even_eigenvectors_of_epsilon",
+        "def_rayleigh_sup",
+        "def_sector_rayleigh_sup",
+        "epsilon_commutes_with_W",
+        "epsilon_is_real_symmetric",
+        "symmetrized_transfer_matrix_on_sectors"
+      ]
+    },
+    {
+      "id": "freeenergy_000_remark_escape_to_real_analysis",
+      "kind": "remark",
+      "title": "実数解析（Riemann 積分）へ移行する箇所",
+      "labels": [
+        "remark_real_analysis_escape_point"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "dependsOnLabels": [
+        "def_exp",
+        "gamma_is_continuous",
+        "limit_of_log_Z_in_N_row",
+        "onsager_exact_solution",
+        "onsager_free_energy_expression",
+        "partition_function_sandwich",
+        "remark_real_analysis_escape_chapter_E",
+        "riemann_sum_to_integral"
+      ]
+    },
+    {
+      "id": "freeenergy_006_remark_remaining_input",
+      "kind": "remark",
+      "title": "\\text{厳密解へ残っている入力：} c_+(M_{\\mathrm{col}}) \\text{ の値}",
+      "labels": [
+        "remark_remaining_input_even_sector"
+      ],
+      "sourceFile": "thermodynamic_limit_column_limit_and_closed_form.ts",
+      "dependsOnLabels": [
+        "W_has_positive_entries",
+        "anticommutator_of_check_Z_Y",
+        "antiperiodic_exp_sum",
+        "c_between_Lambda_half_and_twice_Lambda_half",
+        "c_plus_equals_Lambda_half_integer",
+        "c_plus_le_c",
+        "commutator_of_H_and_check_Z_Y",
+        "def_H1_plus",
+        "def_half_integer_checkY",
+        "def_half_integer_checkZ",
+        "limit_of_log_Z_in_N_row",
+        "onsager_exact_solution",
+        "onsager_free_energy_expression",
+        "partition_function_sandwich",
         "partition_function_via_transfer_matrix"
       ]
     }

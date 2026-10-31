@@ -1,7 +1,7 @@
 /-
 # 章 018 の設定（章 014–017 からの入力を「仮定」として明示する）
 
-正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）と `structured-latex/content/018_even_sector_closing.ts`（`check_number_operator_is_hermitian` 以降）。
+正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`（`epsilon_anticommutes_with_check_Z_Y` から `max_eigenvector_in_even_sector` まで）と `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（`check_number_operator_is_hermitian` 以降）。
 
 ## なぜ仮定を置くのか（一次情報）
 

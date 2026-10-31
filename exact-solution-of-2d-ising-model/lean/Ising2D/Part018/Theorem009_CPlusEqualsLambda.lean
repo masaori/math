@@ -1,12 +1,12 @@
 /-
 # `c_+(M) = Λ^{(1/2)}_M`（具体版）
 
-正本: `structured-latex/content/018_even_sector_closing.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_009_theorem_c_plus_equals_Lambda_half`、
 ラベル **`c_plus_equals_Lambda_half_integer`**）
 
 `c_+(M)` は章 011 `def_sector_rayleigh_sup` の `Ising2D.evenSectorRayleighSup`（`(+)` だけの定義）。
-本定理は章 018 の `onsager_exact_solution` の Step 2・Step 3 が引く（`Theorem010_OnsagerExactSolution.lean`）。
+本定理は `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 が引く（`Theorem010_OnsagerExactSolution.lean`）。
 
 必要十分版は置かない。理由は章 011 の `Definition006_RayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる

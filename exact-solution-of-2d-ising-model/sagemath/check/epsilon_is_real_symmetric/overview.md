@@ -4,7 +4,7 @@
 
 **対象ラベル**: `epsilon_is_real_symmetric` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/011_max_eigenvalue.ts`（ブロック `maxeig_claim_epsilon_is_real_symmetric`）
+- ファイル: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（ブロック `maxeig_claim_epsilon_is_real_symmetric`）
 - 範囲: 全スピン反転行列 `ε = σ^x_1⋯σ^x_{M_col}`（`def_global_spin_flip_matrix`）の成分がすべて実数であることと、
   `ε^⊤ = ε` の証明の四行
 

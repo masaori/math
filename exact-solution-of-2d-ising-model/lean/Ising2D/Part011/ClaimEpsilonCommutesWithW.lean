@@ -1,7 +1,7 @@
 /-
 # `εW = Wε` と、`W` が `𝓕^{(+)}` を保つこと
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`maxeig_010b_claim_epsilon_commutes_with_W`、ラベル **`epsilon_commutes_with_W`**）
 
 ## 人手証明との対応

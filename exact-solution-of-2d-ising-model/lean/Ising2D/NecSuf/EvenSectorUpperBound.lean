@@ -1,13 +1,13 @@
 /-
 # 必要十分版: `c(M) ≤ 2 c_+(M)`（成分が非負の `W` と、対合の置換行列 `ε`）
 
-人手証明のラベル: **`onsager_exact_solution`** の Step 3
-（正本 `structured-latex/content/018_even_sector_closing.ts`）。
+人手証明のラベル: **`c_between_Lambda_half_and_twice_Lambda_half`** の Step 2（旧 `onsager_exact_solution` の Step 3）
+（正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）。
 具体版は `Ising2D.onsager_step3_c_le_two_c_plus`（`Ising2D/Part018/Theorem010_OnsagerExactSolution.lean`）で、
 本ファイルの `rayleighSup_le_two_mul_evenSectorRayleighSup` を `π = flipConf`
 （`epsilonR M = permMat flipConf`）で特殊化したものである。
 
-## 証明の手順（人手 Step 3 と同じ）
+## 証明の手順（人手 `c_between_Lambda_half_and_twice_Lambda_half` の Step 2 と同じ）
 
 `x`（`‖x‖ = 1`）を任意に取り、`u_k := |x_k|`, `v := u + εu` とおく。
 
@@ -52,7 +52,7 @@ theorem bilin_nonneg_of_nonneg {W : Matrix n n ℝ} (hW : ∀ k l, 0 ≤ W k l) 
   refine Finset.sum_nonneg fun i _ => mul_nonneg (ha i) ?_
   exact Finset.sum_nonneg fun j _ => mul_nonneg (hW i j) (hb j)
 
-/-- **人手 `onsager_exact_solution` Step 3 の必要十分版**: `c(M) ≤ 2 c_+(M)`。 -/
+/-- **人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2 の必要十分版**: `c(M) ≤ 2 c_+(M)`。 -/
 theorem rayleighSup_le_two_mul_evenSectorRayleighSup [Nonempty n] {W : Matrix n n ℝ}
     (hW : W.IsSymm) (hpsd : ∀ x : n → ℝ, 0 ≤ x ⬝ᵥ W *ᵥ x) (hWnn : ∀ k l, 0 ≤ W k l)
     {π : n → n} (hπ : Function.Involutive π) (hcomm : permMat π * W = W * permMat π) :

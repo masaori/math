@@ -1,7 +1,7 @@
 /-
-# 実行列 `W` の上の議論の共通の道具（人手の章「N→∞ の極限と最大固有値 c(M)」と 011 の章で使う）
+# 実行列 `W` の上の議論の共通の道具（人手の章「N→∞ の極限と最大固有値 c(M)」「M→∞ の極限と閉形式」と 011 の章で使う）
 
-正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts` と `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`、`structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts` と `structured-latex/content/011_max_eigenvalue.ts`
 
 この章は実行列 `W ∈ Mat(2^M, ℝ)` と実ベクトル空間 `ℝ^{2^M}` の上での議論なので、
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` ではなく実行列

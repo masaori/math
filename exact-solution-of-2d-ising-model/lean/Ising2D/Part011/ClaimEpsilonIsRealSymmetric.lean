@@ -1,7 +1,7 @@
 /-
 # `ε^⊤ = ε`（全スピン反転行列は実対称）と、実行列としての `ε`
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`maxeig_claim_epsilon_is_real_symmetric`、ラベル **`epsilon_is_real_symmetric`**）
 
 人手の主張: `ε` の成分はすべて実数であり、`ε^⊤ = ε`。
@@ -21,7 +21,7 @@
 ことを、実行列 `epsilonR M` を置いて `ε` がその成分の埋め込みであること（`epsilon_eq_ofReal_epsilonR`）
 として述べる。`epsilonR M` は符号反転 `π`（`flipConf`）の置換行列として定義してある。これは人手
 `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`ε` は各基底ベクトルを別の基底ベクトルへ写す置換行列）
-であり、`onsager_exact_solution` の Step 3 が使う（`epsilonR_mulVec_apply`）。
+であり、`c_between_Lambda_half_and_twice_Lambda_half` の Step 2 が使う（`epsilonR_mulVec_apply`）。
 
 以上の内容（`flipConf` から `epsilon_eq_ofReal_epsilonR` まで）は、もと
 `Part019/Claim001_EpsilonSignFlipPermutation.lean`（章 019 ごとノートへ退避）にあった。

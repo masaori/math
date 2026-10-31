@@ -3,7 +3,7 @@
 
 対応する人手証明:
 `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ`
-（構造化TeX: `structured-latex/content/004_transfer_matrix.mjs` の
+（構造化TeX: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts` の
 ブロック `transfer_matrix_002_claim_Z_Y_linearly_independent`、ラベル `Z_Y_linearly_independent`）
 
 原文の主張: `{Z_1, …, Z_M, Y_1, …, Y_M}` は線型独立。

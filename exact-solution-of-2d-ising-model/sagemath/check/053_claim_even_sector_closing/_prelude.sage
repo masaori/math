@@ -256,7 +256,7 @@ def param_label(p):
 
 
 # ---------------------------------------------------------
-# V^{(+)} の最大固有値に属する固有ベクトルの章（eigenvalue_problem_eigenvector_of_max_eigenvalue.ts）と 018 で新しく入るもの
+# V^{(+)} の最大固有値に属する固有ベクトルの章（eigenvalue_problem_eigenvector_of_max_eigenvalue.ts）と M→∞ の極限と閉形式の章（thermodynamic_limit_column_limit_and_closed_form.ts）で新しく入るもの
 #   ε  := σ^x_1 ⋯ σ^x_M                     (def_transfer_matrix_symbols)
 #   D_0 := Σ_{m=1}^{M-1} σ^z_m σ^z_{m+1},  G := σ^z_M σ^z_1
 #   W  := V_1^{1/2} V_2 V_1^{1/2}            (def_symmetrized_transfer_matrix)

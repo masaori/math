@@ -11,7 +11,7 @@
 * `maxeig_002_claim_Z_equals_trace_of_W`（ラベル **`Z_equals_trace_of_W`**）
 * `maxeig_003_claim_W_is_positive_definite`（ラベル **`W_is_real_symmetric_positive_definite`**）
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 
 * `maxeig_004_claim_W_has_positive_entries`（ラベル **`W_has_positive_entries`**）
 

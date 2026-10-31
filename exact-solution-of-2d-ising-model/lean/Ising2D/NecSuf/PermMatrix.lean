@@ -113,7 +113,7 @@ theorem quad_eq_sum (W : Matrix n n ℝ) (x : n → ℝ) :
   rw [Matrix.mulVec, dotProduct, Finset.mul_sum]
   exact Finset.sum_congr rfl fun l _ => by ring
 
-/-- **人手 `onsager_exact_solution` Step 3 の三角不等式の必要十分版**
+/-- **人手 `c_between_Lambda_half_and_twice_Lambda_half` Step 2（旧 `onsager_exact_solution` Step 3） の三角不等式の必要十分版**
 `uᵀWu ≥ |xᵀWx| ≥ xᵀWx`（`u_k := |x_k|`）。
 
 **仮定は `0 ≤ W_{kl}` だけ**（人手証明が引く `W_has_positive_entries` の狭義の正値性は不要）。 -/

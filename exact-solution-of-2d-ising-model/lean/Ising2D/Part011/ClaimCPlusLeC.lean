@@ -1,7 +1,7 @@
 /-
 # `c_+(M) ≤ c(M)`
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`maxeig_claim_c_plus_le_c`、ラベル **`c_plus_le_c`**）
 
 人手の証明: `𝓕^{(+)} ∩ ℝ^{2^M} ⊆ ℝ^{2^M}` なので `𝓡_+ ⊆ 𝓡`。`𝓡_+ ≠ ∅`（`def_sector_rayleigh_sup`）と

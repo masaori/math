@@ -4,7 +4,7 @@
 
 **対象ラベル**: `onsager_free_energy_expression` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/012_free_energy.ts`
+- ファイル: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（`riemann_sum_to_integral` は `structured-latex/content/012_free_energy.ts`）
 - 併せて検証:
   - `def_Lambda_delta_M`（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`。`Λ^{(δ)}_M` の定義。check_02 の `log_Lambda_over_M` はこの定義の対数を M で割ったもの）
   - `limit_of_log_Z_in_N_row`（`structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts`）

@@ -240,6 +240,7 @@ import Ising2D.Part018.ClaimTraceEpsilonVPlusReductionFromNecSuf
 import Ising2D.Part018.ClaimTraceEpsilonVPlusMatrixEntries
 import Ising2D.Part018.ClaimTraceEpsilonVPlusClosedForm
 import Ising2D.Part018.Theorem013_OnsagerUnconditional
+import Ising2D.Part018.ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ
 import Ising2D.Part020.Theorem012_SpecificHeatLogDivergence
 import Ising2D.NecSuf.JointEigenspaceDecomposition
 import Ising2D.Part009.Claim009_DirectSumAndDiagonalization

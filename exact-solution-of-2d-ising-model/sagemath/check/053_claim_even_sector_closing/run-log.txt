@@ -1,7 +1,7 @@
 # 実行日: 2026-07-27
 # コマンド: for f in check_0*.sage; do /usr/local/bin/sage "$f"; done
 # sage: SageMath version 10.6, Release Date: 2025-03-31
-# check_05 のみ 2026-09-26 に再実行（SageMath 10.9 / Linux。各 check_*.sage を preparse して Sage の python で実行。sage 10.9 の `sage file.sage` は __file__ を誤って設定するため）。check_01〜04 は変更していないので上の実行日の出力のまま
+# check_05 のみ 2026-09-26 に再実行（SageMath 10.9 / Linux。各 check_*.sage を preparse して Sage の python で実行。sage 10.9 の `sage file.sage` は __file__ を誤って設定するため）。check_01〜04 は変更していないので上の実行日の出力のまま。check_05 は 2026-10-31 に Step 番号の表示を c_between_Lambda_half_and_twice_Lambda_half の番号に直して再実行した
 
 --- check_01_epsilon_anticommutation.sage ---
 === check_01: ε と Ž, Y̌, ψ̌, ň, Q̌ の交換・反交換関係 ===
@@ -52,10 +52,10 @@
 
 --- check_05_free_energy_limit.sage ---
 === check_05: c(M) の挟み撃ちと Onsager の自由エネルギーへの収束 ===
-  --- 有限 M での Step 2 / Step 3 ---
-  (1) Step 2: c_+(M) ≤ c(M) の違反件数: 0、Λ^{(1/2)}_M ≤ c(M) の違反件数: 0  ->  PASS
-  (2) Step 3 の等式の各行（と Step 2 の c_+(M) = Λ^{(1/2)}_M）: max residual = 1.006e-14  ->  PASS
-  (2) Step 3 の不等式の各行の違反件数: 0（x の本数 192）  ->  PASS
+  --- 有限 M での c_between の Step 1 / Step 2 ---
+  (1) Step 1: c_+(M) ≤ c(M) の違反件数: 0、Λ^{(1/2)}_M ≤ c(M) の違反件数: 0  ->  PASS
+  (2) Step 2 の等式の各行（と Step 1 の c_+(M) = Λ^{(1/2)}_M）: max residual = 1.006e-14  ->  PASS
+  (2) Step 2 の不等式の各行の違反件数: 0（x の本数 192）  ->  PASS
   (3) Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M の違反件数: 0  ->  PASS
   (3') 実際には c(M) = c_+(M)（本文の評価より強い。本文はこれを使わない）: max residual = 1.932e-15  ->  PASS
   --- (1/(M N_row)) log tr(W^{N_row}) の N_row 依存 ---

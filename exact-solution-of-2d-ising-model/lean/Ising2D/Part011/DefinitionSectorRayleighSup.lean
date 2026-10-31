@@ -1,7 +1,7 @@
 /-
 # `c_+(M) := sup 𝓡_+`（偶セクターでの Rayleigh 商の上限）の定義
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`maxeig_010a_definition_sector_rayleigh_sup`、ラベル **`def_sector_rayleigh_sup`**）
 
 人手の定義:

@@ -88,11 +88,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`M\to\infty\text{ の極限と閉形式}` },
         organizationGoalLabel: "chapter_organization_goal_column_limit_and_closed_form",
-        goalLabels: [
-          "def_sector_rayleigh_sup",
-          "c_plus_equals_Lambda_half_integer",
-          "onsager_exact_solution",
-        ],
+        goalLabels: ["c_plus_value_c_sandwich_and_double_limit_of_log_Z"],
         proposalEntryCount: 9,
       },
     ],

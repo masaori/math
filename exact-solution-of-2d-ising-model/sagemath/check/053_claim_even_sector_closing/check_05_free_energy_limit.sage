@@ -1,14 +1,15 @@
 # =========================================================================
 # check_05: onsager_exact_solution
-#   (1) Step 2: c(M) ≥ c_+(M)（c_plus_le_c）と c_+(M) = Λ^{(1/2)}_M
+#   （本文の Step 番号: c(M) の挟み込みは c_between_Lambda_half_and_twice_Lambda_half の Step 1・Step 2、M → ∞ は onsager_exact_solution の Step 3）
+#   (1) c_between_Lambda_half_and_twice_Lambda_half の Step 1: c(M) ≥ c_+(M)（c_plus_le_c）と c_+(M) = Λ^{(1/2)}_M
 #       （c_plus_equals_Lambda_half_integer）から c(M) ≥ Λ^{(1/2)}_M
-#   (2) Step 3: 任意の単位ベクトル x ∈ R^{2^M} から u := |x|、v := u + εu を作り、
+#   (2) c_between_Lambda_half_and_twice_Lambda_half の Step 2: 任意の単位ベクトル x ∈ R^{2^M} から u := |x|、v := u + εu を作り、
 #       本文の式変形を一行ずつ確かめて c(M) ≤ 2Λ^{(1/2)}_M を得る
-#   (3) 挟み撃ち Λ^{(1/2)}_M ≤ c(M) ≤ 2 Λ^{(1/2)}_M（本文 Step 4 の入力）
+#   (3) 挟み撃ち Λ^{(1/2)}_M ≤ c(M) ≤ 2 Λ^{(1/2)}_M（onsager_exact_solution の Step 3 の入力）
 #       (3') 実際には c(M) = c_+(M) が成り立つことも記録する（本文はこれを使わない）
 #   (4) (1/M) log Λ^{(1/2)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫_0^{2π} γ(θ)dθ
 #       （M を大きくして Onsager 積分への収束を見る。δ = 0 でも同じ値へ収束）
-#   (5) (1/(M N_row)) log Z = (1/M) log c(M) + O(1/N_row)（有限 M で直接確認。Step 1）
+#   (5) (1/(M N_row)) log Z = (1/M) log c(M) + O(1/N_row)（有限 M で直接確認。onsager_exact_solution の Step 1）
 #
 #   c(M) は R^{2^M} の単位ベクトル上の Rayleigh 商の上限で、W が実対称なので W の最大固有値に等しい。
 #   c_+(M) は F^{(+)} ∩ R^{2^M} の正規直交実基底 (e_k + e_{k̄})/√2 へ W を制限した実対称行列の
@@ -50,7 +51,7 @@ def to_real(A):
 
 
 def test_vectors(M, Wr):
-    """Step 3 の x の例: 乱数（符号の混じった成分）、W の最大固有ベクトル、F^{(-)} 側の実ベクトル。"""
+    """Step 2 の x の例: 乱数（符号の混じった成分）、W の最大固有ベクトル、F^{(-)} 側の実ベクトル。"""
     d = 2 ** M
     xs = []
     for _ in range(6):
@@ -73,7 +74,7 @@ w_ceq = RDF(0)
 w3_eq = RDF(0)
 w3_ineq = 0
 n3 = 0
-print("  --- 有限 M での Step 2 / Step 3 ---")
+print("  --- 有限 M での c_between の Step 1 / Step 2 ---")
 for M in EIG_M:
     O = SpinOps(M)
     E = to_real(eps_op(O))
@@ -86,13 +87,13 @@ for M in EIG_M:
         Bp = even_sector_basis(M)
         cp = top_eig(Bp.transpose() * Wr * Bp)
         Lhalf = Lambda_delta_M(O, P, RDF(1) / 2)
-        # (1) Step 2
+        # (1) Step 1
         if not (cp <= cM * (1 + REL)):
             w_step2 += 1                       # c_plus_le_c
         w3_eq = max(w3_eq, abs(cp - Lhalf) / Lhalf)   # c_plus_equals_Lambda_half_integer
         if not (Lhalf <= cM * (1 + REL)):
             w_lower += 1
-        # (2) Step 3 の前提: ε^T = ε、ε^2 = I、ε は置換行列、εW = Wε、W^T = W、W の成分が正
+        # (2) Step 2 の前提: ε^T = ε、ε^2 = I、ε は置換行列、εW = Wε、W^T = W、W の成分が正
         w3_eq = max(w3_eq, (E.transpose() - E).norm(1), (E * E - Id).norm(1),
                     (E * Wr - Wr * E).norm(1) / Wr.norm(1), (Wr.transpose() - Wr).norm(1) / Wr.norm(1))
         if not (all(E[i, j] in (0, 1) for i in range(O.d) for j in range(O.d))
@@ -154,11 +155,11 @@ for M in EIG_M:
             w_sand += 1
         w_ceq = max(w_ceq, abs(cM - cp) / cM)
 
-print(f"  (1) Step 2: c_+(M) ≤ c(M) の違反件数: {w_step2}、Λ^{{(1/2)}}_M ≤ c(M) の違反件数: {w_lower}  ->  "
+print(f"  (1) Step 1: c_+(M) ≤ c(M) の違反件数: {w_step2}、Λ^{{(1/2)}}_M ≤ c(M) の違反件数: {w_lower}  ->  "
       f"{'PASS' if w_step2 == 0 and w_lower == 0 else 'FAIL'}")
 ok_all &= (w_step2 == 0 and w_lower == 0)
-ok_all &= report("(2) Step 3 の等式の各行（と Step 2 の c_+(M) = Λ^{(1/2)}_M）", w3_eq, TOL)
-print(f"  (2) Step 3 の不等式の各行の違反件数: {w3_ineq}（x の本数 {n3}）  ->  "
+ok_all &= report("(2) Step 2 の等式の各行（と Step 1 の c_+(M) = Λ^{(1/2)}_M）", w3_eq, TOL)
+print(f"  (2) Step 2 の不等式の各行の違反件数: {w3_ineq}（x の本数 {n3}）  ->  "
       f"{'PASS' if w3_ineq == 0 else 'FAIL'}")
 ok_all &= (w3_ineq == 0)
 print(f"  (3) Λ^{{(1/2)}}_M ≤ c(M) ≤ 2Λ^{{(1/2)}}_M の違反件数: {w_sand}  ->  "
