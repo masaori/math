@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの二番目の項目として、本文の章題・ブロック題 16 件から未定義の物理用語（偶セクター・半整数運動量・フェルミオン）を除き、対象を式で表す題にした。中身・ラベルは不変。次は章の割り当てを棚卸しの生成器に入れる。
+
 2026-10-31: Lean の通しの証明の項目 1 を終えた。`IsingParam.K2star := Kstar K2` とし、人手 `duality_c2_star_eq_s2_star_c2` を `lean/Ising2D/Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して、最終定理の入力 `EvenSectorClosureInput` から双対関係の仮定 `hdual` を外した。次は人手 `partition_function_via_transfer_matrix` の形式化（状態台帳 [docs/tasks/lean-end-to-end-state.md](docs/tasks/lean-end-to-end-state.md)）。
 
 2026-10-31: 代表の指示で、冒頭の章立ての章の最初に「この論文のゴール」（分配関数による自由エネルギーの表示、熱力学極限での閉形式、閉形式からの臨界点の計算）を置いた。

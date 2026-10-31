@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { tex: String.raw`\text{半整数運動量のフェルミオンと } V^{(+)} = c\,\check{V}'` },
+    title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{ と } V^{(+)} = c\,\check{V}'` },
     labels: [],
   },
 
@@ -122,7 +122,7 @@ export default defineBlocks([
     id: "evenfermi_001_definition_check_fermi",
     kind: "definition",
     origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{（半整数運動量のフェルミオン）}` },
+    title: { tex: String.raw`\check\psi_\mu, \check\psi_\mu^\dagger \text{（}\check{Z}_\mu, \check{Y}_\mu\text{ の一次結合）}` },
     labels: ["def_check_fermi"],
     statement: [
       paragraph([

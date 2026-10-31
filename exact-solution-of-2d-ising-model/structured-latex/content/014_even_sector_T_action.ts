@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { text: "偶セクターの転送行列の共役作用" },
+    title: { tex: String.raw`V^{(+)} \text{ による共役作用}` },
     labels: [],
   },
 
@@ -254,7 +254,7 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     id: "evensectorT_definition_T_V_plus",
     kind: "definition",
     origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\text{偶セクターの共役写像 } T_{(V^{(+)})}` },
+    title: { tex: String.raw`T_{(V^{(+)})} := T_{\left(V_1^{(+)}\right)^{1/2}} \circ T_{V_2} \circ T_{\left(V_1^{(+)}\right)^{1/2}}` },
     labels: ["def_T_V_plus"],
     statement: [
       paragraph([

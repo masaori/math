@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { text: "偶セクターの半整数運動量モード" },
+    title: { tex: String.raw`\tilde\theta_\mu \text{ による } Z_j, Y_j \text{ の離散 Fourier 変換}` },
     labels: [],
   },
 
@@ -141,7 +141,7 @@ export default defineBlocks([
     id: "evensector_002_claim_antiperiodic_exp_sum",
     kind: "claim",
     origin: { path: SRC, ordinal: 4 },
-    title: { text: "半整数運動量の指数和" },
+    title: { tex: String.raw`\tilde\theta_\mu \text{ と指数和 } \sum_{\mu=1}^{M_{\mathrm{col}}}\exp(ik\tilde\theta_\mu)` },
     labels: ["antiperiodic_exp_sum"],
     statement: [
       paragraph([
@@ -549,7 +549,7 @@ k
     id: "evensector_003_definition_half_integer_checkZ",
     kind: "definition",
     origin: { path: SRC, ordinal: 5 },
-    title: { tex: String.raw`\check{Z}_\mu \text{（半整数運動量で Fourier 変換した }Z\text{ 行列）}` },
+    title: { tex: String.raw`\check{Z}_\mu \text{（}\tilde\theta_\mu\text{ による }Z_j\text{ の離散 Fourier 変換）}` },
     labels: ["def_half_integer_checkZ"],
     statement: [
       paragraph([
@@ -607,7 +607,7 @@ k
     id: "evensector_003_definition_half_integer_checkY",
     kind: "definition",
     origin: { path: SRC, ordinal: 5 },
-    title: { tex: String.raw`\check{Y}_\mu \text{（半整数運動量で Fourier 変換した }Y\text{ 行列）}` },
+    title: { tex: String.raw`\check{Y}_\mu \text{（}\tilde\theta_\mu\text{ による }Y_j\text{ の離散 Fourier 変換）}` },
     labels: ["def_half_integer_checkY"],
     statement: [
       paragraph([
@@ -665,7 +665,7 @@ k
     id: "evensector_003_claim_half_integer_phase_antiperiodicity",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数位相の反周期性" },
+    title: { tex: String.raw`\tilde\theta_\mu \text{ の反周期性 } \exp(-iM_{\mathrm{col}}\tilde\theta_\mu) = -1` },
     labels: ["half_integer_phase_antiperiodicity"],
     statement: [
       paragraph([
@@ -730,7 +730,7 @@ M_{\mathrm{col}}\tilde\theta_\mu
     id: "evensector_003_claim_half_integer_checkZ_periodicity",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数運動量 Fourier Z 行列の添字周期性" },
+    title: { tex: String.raw`\check{Z}_\mu \text{ の添字周期性 } \check{Z}_{\mu+M_{\mathrm{col}}} = \check{Z}_\mu` },
     labels: ["half_integer_checkZ_periodicity"],
     statement: [
       paragraph([
@@ -811,7 +811,7 @@ M_{\mathrm{col}}\tilde\theta_\mu
     id: "evensector_003_claim_half_integer_checkY_periodicity",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数運動量 Fourier Y 行列の添字周期性" },
+    title: { tex: String.raw`\check{Y}_\mu \text{ の添字周期性 } \check{Y}_{\mu+M_{\mathrm{col}}} = \check{Y}_\mu` },
     labels: ["half_integer_checkY_periodicity"],
     statement: [
       paragraph([
@@ -892,7 +892,7 @@ M_{\mathrm{col}}\tilde\theta_\mu
     id: "evensector_003_definition_half_integer_modes",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
-    title: { text: "半整数位相の共役添字恒等式" },
+    title: { tex: String.raw`\tilde\theta_\mu \text{ の共役添字恒等式 } \tilde\theta_{1-\mu} = -\tilde\theta_\mu` },
     labels: ["def_half_integer_modes"],
     statement: [
       paragraph([
@@ -938,7 +938,7 @@ M_{\mathrm{col}}\tilde\theta_\mu
     id: "evensector_003a_definition_check_index_set",
     kind: "definition",
     origin: { path: SRC, ordinal: 6 },
-    title: { tex: String.raw`\check{\mathcal{M}} \text{（半整数運動量の添字集合）}` },
+    title: { tex: String.raw`\text{添字集合 } \check{\mathcal{M}} := \{1, \dots, M_{\mathrm{col}}\}` },
     labels: ["def_check_index_set"],
     statement: [
       paragraph([

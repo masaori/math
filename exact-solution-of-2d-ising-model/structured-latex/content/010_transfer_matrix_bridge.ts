@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { text: "偶セクターへの射影と転送行列" },
+    title: { tex: String.raw`\varepsilon \text{ の固有値 } +1 \text{ の固有空間への射影と転送行列}` },
     labels: [],
   },
 
@@ -371,7 +371,7 @@ P^{(+)} f
     id: "evensectorT_definition_V_plus",
     kind: "definition",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`\text{偶セクターの転送行列 } V^{(+)}` },
+    title: { tex: String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}` },
     labels: ["def_V_plus"],
     statement: [
       paragraph([

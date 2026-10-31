@@ -1294,7 +1294,7 @@ Z(K_1,K_2)
     id: "maxeig_010a_definition_sector_rayleigh_sup",
     kind: "definition",
     origin: { path: SRC, ordinal: 12 },
-    title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（偶セクターでの上限）}` },
+    title: { tex: String.raw`c_+(M_{\mathrm{col}}) := \sup \mathcal{R}_+ \text{（}\mathcal{F}^{(+)}\text{ での上限）}` },
     labels: ["def_sector_rayleigh_sup"],
     statement: [
       paragraph([

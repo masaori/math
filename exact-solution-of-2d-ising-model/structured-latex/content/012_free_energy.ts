@@ -1012,7 +1012,7 @@ u
     id: "freeenergy_006_remark_remaining_input",
     kind: "remark",
     origin: { path: SRC, ordinal: 8 },
-    title: { text: "厳密解へ残っている入力：偶セクターの固有値" },
+    title: { tex: String.raw`\text{厳密解へ残っている入力：} c_+(M_{\mathrm{col}}) \text{ の値}` },
     labels: ["remark_remaining_input_even_sector"],
     statement: [
       paragraph([

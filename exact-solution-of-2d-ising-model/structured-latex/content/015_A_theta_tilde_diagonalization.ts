@@ -8,7 +8,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: SRC, ordinal: 1 },
-    title: { tex: String.raw`\text{半整数運動量における } A(\tilde\theta) \text{ の対角化}` },
+    title: { tex: String.raw`A(\tilde\theta_\mu) \text{ の対角化}` },
     labels: [],
   },
 
