@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの最初の項目として、$\Theta^{(\delta)}_M$ と $\Lambda^{(\delta)}_M$ を閉形式の定理 `onsager_free_energy_expression` から独立した定義 `def_Theta_delta_M`・`def_Lambda_delta_M` へ分け、定義だけを使う参照を付け替えた。`inventory:organization` は無関係な項目の固定値の照合で落ちたままで、棚卸しは再生成していない（次の次の項目「章の割り当てを棚卸しの生成器に入れる」で作り直す）。次は本文の題から未定義の物理用語を除く。
+
 2026-10-31: 代表の依頼で、論文の冒頭に「章立て」の章（`structured-latex/content/chapter_organization.ts`）を足した。部と章の並び、各章のゴールの式、章の依存関係の図（図式ノード `diagram`）を持つ。文書順の先頭に置くのは `tools/content-modules.ts` の `LEADING_CONTENT_FILES` で宣言した（新しいファイル名に番号を振らないため）。冒頭に章が増えたので、既存の章番号・定理番号は 1 ずつずれた。本文の章の並びはまだ章立てどおりに組み直していないので、この章は組み直し後の構成を示している。`npm run inventory:organization` は HEAD の時点で「行列指数関数による共役の節候補のレビュー済み本文が変わりました: exp_conjugation_proof_008_theorem_exp_ad_series」で落ちる（今回の変更とは無関係。冒頭章の注意・図表は棚卸しの対象外）。
 
 2026-10-31: 代表の依頼で章立て案を [docs/tasks/six-chapter-organization-proposal.md](docs/tasks/six-chapter-organization-proposal.md) に書いた。五段階で切る最初の案は項目数の偏りで退けられ、トレース・固有値問題（5章）・極限（2章）・臨界点の案に書き直した。章の依存関係の図（推移的に辿れる矢印は省いたもの）も追記した。各章のゴールの式は本文の記号どおりの数式で書いた。GitHub で崩れないよう、数式は ```math ブロックと $`…`$ で書く。章題は数学の言葉で書き、本文で未定義の物理用語（運動量・フェルミオン・セクター）を使わない（代表の指示）。分配関数の部は「転送行列による表示」「射影と Jordan–Wigner 表示」の2章（代表の指示）。依存関係の図は部ごとに枠で囲う。部の名前は分配関数・固有値問題・熱力学極限・臨界点。同日に代表が章立てを承認し、構成再編の runbook・状態台帳・ゴール台帳をこの章立てに改めた。承認待ちで、本文と構成再編の runbook はまだ変えていない。

@@ -2,6 +2,8 @@
 # Onsager の自由エネルギーの表式
 
 人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
+- `freeenergy_definition_Theta_delta_M`（ラベル `def_Theta_delta_M`）: `Θ^{(δ)}_M` の定義（集合としては定義せず `tagPoint` の値で代える）
+- `freeenergy_definition_Lambda_delta_M`（ラベル `def_Lambda_delta_M`）: `Λ^{(δ)}_M` の定義（`LambdaM`）
 - `freeenergy_005_theorem_onsager_expression`（ラベル `onsager_free_energy_expression`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は
@@ -27,8 +29,8 @@ namespace Ising2D
 open Filter MeasureTheory
 open scoped Topology
 
-/-- 人手証明の `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{θ ∈ Θ^{(δ)}_M} γ(θ))`。
-`Θ^{(δ)}_M = { 2π(μ-δ)/M | μ = 1,…,M }`（`tagPoint`）。 -/
+/-- 人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{θ ∈ Θ^{(δ)}_M} γ(θ))`。
+`Θ^{(δ)}_M = { 2π(μ-δ)/M | μ = 1,…,M }`（人手証明 `def_Theta_delta_M`。`tagPoint`）。 -/
 noncomputable def LambdaM (P : IsingParam) (δ : ℝ) (M : ℕ) : ℝ :=
   (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2) *
     Real.exp (1 / 2 * ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint δ M μ))

@@ -38,10 +38,10 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/NecSuf/`（必要十分版）
 | `Ising2D.tendsto_modulus_gamma` | `ω(2π/M) → 0`（(R1) の帰結） | 同 Step 4 |
 | `Ising2D.riemann_sum_to_integral` | **`(1/M)Σ g(t^{(M)}_μ) → (1/2π)∫₀^{2π} g`（★実数解析への移行点）** | `riemann_sum_to_integral` |
 | `Ising2D.riemann_sum_to_integral_indep_delta` | 極限は `δ ∈ [0,1)` に依らない | 同 statement 末尾 |
-| `Ising2D.LambdaM` | `Λ^{(δ)}_M = (2 sinh 2K_2)^{M/2}\exp((1/2)Σγ)` | `onsager_free_energy_expression` |
-| `Ising2D.two_sinh_pos` / `LambdaM_pos` | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | 同 proof 冒頭 |
-| `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ` | 同 proof 第 1 式 |
-| `Ising2D.inv_M_log_LambdaM` | `(1/M)log Λ = (1/2)log(2 sinh 2K_2) + (1/2)(1/M)Σγ` | 同 proof 第 2 式 |
+| `Ising2D.LambdaM` | `Λ^{(δ)}_M = (2 sinh 2K_2)^{M/2}\exp((1/2)Σγ)` | `def_Lambda_delta_M` |
+| `Ising2D.two_sinh_pos` / `LambdaM_pos` | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | `onsager_free_energy_expression` の proof 冒頭 |
+| `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ` | `onsager_free_energy_expression` の proof 第 1 式 |
+| `Ising2D.inv_M_log_LambdaM` | `(1/M)log Λ = (1/2)log(2 sinh 2K_2) + (1/2)(1/M)Σγ` | `onsager_free_energy_expression` の proof 第 2 式 |
 | `Ising2D.onsager_free_energy_expression` | **`(1/M)log Λ^{(δ)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π}γ`** | `onsager_free_energy_expression` |
 | `Ising2D.onsager_free_energy_expression_indep_delta` | 右辺が `δ` に依らないこと | 同 statement の「右辺は `δ` に依らない」 |
 

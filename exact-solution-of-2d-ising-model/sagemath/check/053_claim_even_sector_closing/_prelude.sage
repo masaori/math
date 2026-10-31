@@ -181,7 +181,7 @@ def Lambda_check(O, eps, P):
 
 
 def Lambda_half_M(O, P):
-    """onsager_free_energy_expression の Lambda^{(1/2)}_M（delta = 1/2）"""
+    """def_Lambda_delta_M の Lambda^{(1/2)}_M（delta = 1/2）"""
     pref = RDF((2 * P['s2']) ** (RDF(O.M) / 2))
     s = RDF(sum(gamma_tilde(O.M, mu, P) for mu in range(1, O.M + 1)))
     return RDF(pref * exp(s / 2))

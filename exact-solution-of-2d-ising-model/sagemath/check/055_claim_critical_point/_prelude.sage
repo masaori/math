@@ -128,7 +128,7 @@ def f_free(K):
 
 
 def f_free_finite_M(K, M, delta=mp.mpf(1) / 2):
-    """有限 M の (1/M) log Lambda^{(delta)}_M（onsager_free_energy_expression）"""
+    """有限 M の (1/M) log Lambda^{(delta)}_M（def_Lambda_delta_M）"""
     K = F(K)
     M = int(M)
     s = mp.mpf(0)

@@ -53,7 +53,7 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
       ),
       paragraph([
         "であり、その最大値は ",
-        ref("onsager_free_energy_expression"),
+        ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
         " で ",
@@ -2682,7 +2682,7 @@ V^{(+)}\check{Q}_\epsilon
     labels: ["max_eigenvalue_of_V_plus_simple"],
     statement: [
       paragraph([
-        ref("onsager_free_energy_expression"),
+        ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
         " について、次が成り立つ。",
@@ -2731,7 +2731,9 @@ V^{(+)}\check{Q}_\epsilon
     proof: [
       paragraph([
         "(1) ",
-        ref("onsager_free_energy_expression"),
+        ref("def_Theta_delta_M"),
+        " と ",
+        ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\delta = \tfrac12`),
         " の場合の定義は",

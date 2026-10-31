@@ -617,7 +617,7 @@ x^\top W x
     body: [
       NOT_ADOPTED,
       paragraph(["（もと content/019_max_eigenvalue_sector.ts の定理ブロック sector_004_theorem_c_equals_c_plus。labels: c_equals_c_plus。以下は本文にあったときの内容のまま。）"]),
-      paragraph([math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`), "、", math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とする。", ref("def_rayleigh_sup"), " の ", math(String.raw`c(M_{\mathrm{col}})`), "、", "〔sector_decomposition_of_rayleigh_sup〕", " の ", math(String.raw`c_\pm(M_{\mathrm{col}})`), "、", ref("onsager_free_energy_expression"), " の ", math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`), " について"]),
+      paragraph([math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`), "、", math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とする。", ref("def_rayleigh_sup"), " の ", math(String.raw`c(M_{\mathrm{col}})`), "、", "〔sector_decomposition_of_rayleigh_sup〕", " の ", math(String.raw`c_\pm(M_{\mathrm{col}})`), "、", ref("def_Lambda_delta_M"), " の ", math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`), " について"]),
       displayMath(String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 = \left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}
 \exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\right)`),
@@ -631,7 +631,7 @@ c(M_{\mathrm{col}})
 &= c_+(M_{\mathrm{col}})
 &&(\because \text{c\_minus\_le\_c\_plus の } c_-(M_{\mathrm{col}}) \leq c_+(M_{\mathrm{col}}))
 \end{aligned}`),
-      paragraph(["Step 2（値の代入）。", ref("c_plus_equals_Lambda_half_integer"), " より ", math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`), " なので、Step 1 と合わせて ", math(String.raw`c(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`), "。右辺の閉じた表示は ", ref("onsager_free_energy_expression"), " の ", math(String.raw`\delta = \tfrac12`), " の場合である。"]),
+      paragraph(["Step 2（値の代入）。", ref("c_plus_equals_Lambda_half_integer"), " より ", math(String.raw`c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`), " なので、Step 1 と合わせて ", math(String.raw`c(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}`), "。右辺の閉じた表示は ", ref("def_Lambda_delta_M"), " の ", math(String.raw`\delta = \tfrac12`), " の場合である。"]),
       paragraph(["Step 3（達成されること）。", ref("c_plus_equals_Lambda_half_integer"), " の証明 Step 3 で、", math(String.raw`x_0 \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`), "、", math(String.raw`\|x_0\| = 1`), " かつ ", math(String.raw`x_0^\top Wx_0 = c_+(M_{\mathrm{col}})`), " を満たす ", math(String.raw`x_0`), " が構成されている。この ", math(String.raw`x_0`), " は ", math(String.raw`\mathbb{R}^{2^{M_{\mathrm{col}}}}`), " の単位ベクトルでもあるから、Step 1 より ", math(String.raw`x_0^\top Wx_0 = c(M_{\mathrm{col}})`), " であり、", ref("def_rayleigh_sup"), " の上限は ", math(String.raw`x_0`), " で達成される。"]),
     ],
   },

@@ -2,6 +2,16 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の最初の項目を済ませた。
+  $\Theta^{(\delta)}_{M}$ と $\Lambda^{(\delta)}_{M}$ を、閉形式の定理 `onsager_free_energy_expression` の statement から
+  独立した二つの definition ブロック `def_Theta_delta_M`・`def_Lambda_delta_M`（`content/012_free_energy.ts`、定理の直前）へ分けた。
+  定義だけを使う参照（017 の章の概観、`max_eigenvalue_of_V_plus_simple` の statement と証明、
+  `c_plus_equals_Lambda_half_integer` の statement、退避ノート）を新しい定義へ付け替え、極限を使う参照（012 の残る入力の remark、
+  018 の概観と `onsager_exact_solution` の証明）は定理のまま残した。数学の中身は変えていない。Lean（`LambdaM` のコメントと
+  ch012 の対応表）と SageMath（050・053・055 の前置き、045 の overview）の対応を新しいラベルへ揃えた。別のエージェントのレビューを経た。
+  - **棚卸しは再生成していない。** `inventory:organization` は、今回触っていない項目のレビュー済み本文の固定値の照合
+    （例 `exp_conjugation_proof_008_theorem_exp_ad_series`、`evensector_003_definition_half_integer_checkZ`。lambda 版の式変形の統一で本文が変わった）で、
+    変更前の HEAD でも落ちる。生成器の作り直しは次の項目で行い、そのときに二つの新しい定義も棚卸しへ入る。
 - 2026-10-31（人間の指示。ループの tick ではない）: 代表が章立て案
   [six-chapter-organization-proposal.md](six-chapter-organization-proposal.md)（数学的道具立て → 分配関数 → 固有値問題 →
   熱力学極限 → 臨界点の部と 9 章）を承認した。runbook のゴールラインと「作業の順序」をこの章立てに改めた。
@@ -1087,8 +1097,8 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の最初の項目：$\Lambda^{(\delta)}_{M}$ の定義を、閉形式の定理
-（`onsager_free_energy_expression`）から独立した definition ブロックへ分け、参照・Lean・SageMath を揃える。
+runbook の「作業の順序」の二番目の項目：本文の題（章題・ブロック題）から未定義の物理用語（偶セクター・半整数運動量・フェルミオン）を除き、
+対象を式で表す題へ直す。数学の中身は変えない。
 
 ## 未確定
 

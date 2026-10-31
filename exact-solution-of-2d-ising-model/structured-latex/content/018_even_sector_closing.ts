@@ -2569,7 +2569,7 @@ x \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}},\ \|x\| = 1 \,\righ
       ),
       paragraph([
         "と ",
-        ref("onsager_free_energy_expression"),
+        ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
         " について",

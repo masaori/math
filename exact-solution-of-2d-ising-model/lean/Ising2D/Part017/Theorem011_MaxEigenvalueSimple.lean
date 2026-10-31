@@ -23,7 +23,7 @@
 ## 依存
 
 `Ising2D.LambdaM`（`Part012/Theorem005_OnsagerFreeEnergy.lean`、形式化済み）は
-人手証明 `onsager_free_energy_expression` の `Λ^{(δ)}_M` そのものである。
+人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M` そのものである。
 `Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`）が
 `gamma1_lower_bound_all_theta` の `γ(θ) = arccosh(γ_1(θ))` である。
 -/

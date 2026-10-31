@@ -6,6 +6,7 @@
 
 - ファイル: `structured-latex/content/012_free_energy.ts`
 - 併せて検証:
+  - `def_Lambda_delta_M`（`Λ^{(δ)}_M` の定義。check_02 の `log_Lambda_over_M` はこの定義の対数を M で割ったもの）
   - `limit_of_log_Z_in_N_row`
   - `gamma1_lower_bound_all_theta` / `gamma_is_continuous`
   - `riemann_sum_to_integral`（★実数解析への移行点）
