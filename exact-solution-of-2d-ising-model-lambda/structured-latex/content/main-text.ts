@@ -5789,9 +5789,22 @@ g_c(a_{k+1})-g_c(a_k)
                     "となり左辺が ", math(String.raw`0`),
                     " であることに矛盾する。よって ",
                     math(String.raw`\chi^{+}_c(k)=0`),
-                    " である。同様に ", math(String.raw`\chi^{-}_c(k)=1`),
-                    " なら左辺が ", math(String.raw`-1`),
-                    " となり矛盾するので ", math(String.raw`\chi^{-}_c(k)=0`),
+                    " である。もし ", math(String.raw`\chi^{-}_c(k)=1`),
+                    " なら ", math(String.raw`a_k=c+1`), " かつ ",
+                    math(String.raw`a_{k+1}=c`), " なので",
+                  ]),
+                  displayMath(String.raw`\begin{aligned}
+g_c(a_{k+1})-g_c(a_k)
+&=g_c(c)-g_c(c+1)
+&&\bigl(\because\ a_k=c+1,\ a_{k+1}=c\bigr)\\
+&=0-1
+&&\bigl(\because\ c\le c\text{、}c<c+1\text{ と }g_c\text{ の定義}\bigr)\\
+&=-1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
+                  paragraph([
+                    "となり左辺が ", math(String.raw`0`),
+                    " であることに矛盾する。よって ", math(String.raw`\chi^{-}_c(k)=0`),
                     " である。右辺も ", math(String.raw`0`), " である。",
                   ]),
                   paragraph([
@@ -76074,52 +76087,6 @@ d_{E_{\mathrm{supp}}(\varphi)}(v)
                         ref("def_even_edge_subset"), " より ",
                         math(String.raw`\operatorname{Even}_L\bigl(E_{\mathrm{supp}}(\varphi)\bigr)`),
                         " である。全過程は有限集合と自然数の加法だけで閉じ、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_single_traversal_support",
-              labels: [],
-              title: { text: "反転対の辺集合" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_doubled_edge_set",
-                  focus: {
-                    id: "kac_ward_definition_doubled_edge_set",
-                    kind: "definition",
-                    title: { text: "反転対の辺集合" },
-                    labels: ["def_doubled_edge_set"],
-                    habitat: "N",
-                    statement: [
-                      paragraph([
-                        math(String.raw`L\ge1`), " とし、",
-                        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                        " を取る。反転対の辺集合を",
-                      ]),
-                      displayMath(String.raw`D(\varphi):=
-\bigl\{\,e\in E_L\ \bigm|\ (e,0)\in M(\varphi)\ \text{かつ}\ (e,1)\in M(\varphi)\,\bigr\}
-\ \subseteq\ E_L`),
-                      paragraph([
-                        "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                        ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
-                        math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
-                        " で定めた。反転写像（", ref("def_edge_reversal"), "）は ",
-                        math(String.raw`\iota(e,0)=(e,1)`), " を満たすので、",
-                        math(String.raw`e\in D(\varphi)`), " とは、動く辺の集合が台の辺 ",
-                        math(String.raw`e`), " の上の反転対 ",
-                        math(String.raw`\{(e,0),(e,1)\}`),
-                        " を丸ごと含むことである。有限集合 ", math(String.raw`E_L`),
-                        " の部分集合であり、所属の判定は有限個の向き付き辺の比較で決まる。",
-                        "実数体も複素数体も現れない。",
                       ]),
                     ],
                   },

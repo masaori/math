@@ -7,6 +7,35 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_doubled_edge_set_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 反転対の辺集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、反転対による置換の層別は採らない。元の定義を保存する。"]),
+      paragraph([
+        math(String.raw`L\ge1`), " とし、",
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        " を取る。反転対の辺集合を",
+      ]),
+      displayMath(String.raw`D(\varphi):=
+\bigl\{\,e\in E_L\ \bigm|\ (e,0)\in M(\varphi)\ \text{かつ}\ (e,1)\in M(\varphi)\,\bigr\}
+\ \subseteq\ E_L`),
+      paragraph([
+        "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+        ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
+        math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
+        " で定めた。反転写像（", ref("def_edge_reversal"), "）は ",
+        math(String.raw`\iota(e,0)=(e,1)`), " を満たすので、",
+        math(String.raw`e\in D(\varphi)`), " とは、動く辺の集合が台の辺 ",
+        math(String.raw`e`), " の上の反転対 ",
+        math(String.raw`\{(e,0),(e,1)\}`),
+        " を丸ごと含むことである。有限集合 ", math(String.raw`E_L`),
+        " の部分集合であり、所属の判定は有限個の向き付き辺の比較で決まる。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_nonbacktracking_permutation_fiber_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 反転対と単純通過を固定した非後退置換" },
@@ -20,7 +49,7 @@ export default defineNotes([
 \bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\ D(\varphi)=D,\ E_1(\varphi)=E\,\bigr\}`),
       paragraph([
         "で定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-        "、反転対の辺集合は ", ref("def_doubled_edge_set"),
+        "、反転対の辺集合は ", "参照用ノート「不採用経路: 反転対の辺集合」",
         "、単純通過の辺集合は参照用ノート「不採用経路: 単純通過の辺集合」",
         " で定めた。いずれも有限集合の部分集合の等号で判定できるので、",
         math(String.raw`\mathcal N_L(D,E)`), " は有限集合であり、その個数は ",
@@ -138,7 +167,7 @@ x^{\,2\lvert D\rvert+\lvert E\rvert}\cdot
   },
   {
     id: "note_kac_ward_single_traversal_edge_set_even_archived",
-    targets: ["def_doubled_edge_set"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 単純通過の辺集合の偶性" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の辺集合による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -224,7 +253,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
         "と置く。", "動く辺の台の辺集合についての参照用ノート", " により、",
         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " と ",
         math(String.raw`M_e(\varphi)\ne\varnothing`), " は同値である。さらに ",
-        ref("def_doubled_edge_set"), " により ",
+        "参照用ノート「不採用経路: 反転対の辺集合」", " により ",
         math(String.raw`e\in D(\varphi)`), " と ",
         math(String.raw`M_e(\varphi)=I`), " は同値であり、",
         "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
@@ -297,7 +326,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
   },
   {
     id: "note_kac_ward_single_traversal_edge_set_archived",
-    targets: ["def_doubled_edge_set"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 単純通過の辺集合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の辺集合による直接比較は採らない。元の定義を保存する。"]),
@@ -309,13 +338,13 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
       paragraph([
         "で定める。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`),
         " は参照用ノート「不採用経路: 動く辺の台の辺集合」、反転対の辺集合 ",
-        math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"), " で定めた。定義から ",
+        math(String.raw`D(\varphi)`), " は ", "参照用ノート「不採用経路: 反転対の辺集合」", " で定めた。定義から ",
         math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ", math(String.raw`E_1(\varphi)`),
         " と ", math(String.raw`D(\varphi)`), " の互いに素な合併であり、",
         math(String.raw`e\in E_1(\varphi)`), " とは、二つの向き ", math(String.raw`(e,0),(e,1)`),
         " のうちちょうど一方だけが動く辺の集合に属することである",
         "（少なくとも一方が属することは参照用ノート「不採用経路: 動く辺の台の辺集合」、",
-        "両方は属さないことは ", ref("def_doubled_edge_set"),
+        "両方は属さないことは ", "参照用ノート「不採用経路: 反転対の辺集合」",
         " の否定）。実数体も複素数体も現れない。",
       ]),
     ],
@@ -510,12 +539,12 @@ T^{a,b}_{\varphi}(x)
                         math(String.raw`M(\psi)`), " にも属する。従って ", math(String.raw`M(\psi)=M(\varphi)`), " である。",
                       ]),
                       paragraph([
-                        ref("def_doubled_edge_set"), " と ", "参照用ノート「不採用経路: 単純通過の辺集合」",
+                        "参照用ノート「不採用経路: 反転対の辺集合」", " と ", "参照用ノート「不採用経路: 単純通過の辺集合」",
                         " は動く辺の集合だけから定まる。直前に示した ", math(String.raw`M(\psi)=M(\varphi)`),
                         " を代入すると",
                       ]),
                       displayMath(String.raw`\begin{aligned}
-D(\psi)&=D(\varphi)&&\bigl(\because\ \blkref{def_doubled_edge_set}\text{ と }M(\psi)=M(\varphi)\bigr),\\
+D(\psi)&=D(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経路: 反転対の辺集合」}\text{ と }M(\psi)=M(\varphi)\bigr),\\
 E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \text{参照用ノート「不採用経路: 単純通過の辺集合」}\text{ と }M(\psi)=M(\varphi)\bigr).
 \end{aligned}`),
                       paragraph([
@@ -1932,7 +1961,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         ref("def_moved_orbit_family"), "、動く辺の集合 ",
                         math(String.raw`M(\varphi)`), " は ", ref("def_moved_edge_set"),
                         "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ",
-                        ref("def_doubled_edge_set"), "、単純通過の辺集合 ",
+                        "参照用ノート「不採用経路: 反転対の辺集合」", "、単純通過の辺集合 ",
                         math(String.raw`E_1(\varphi)`), " は ",
                         "参照用ノート「不採用経路: 単純通過の辺集合」", "、有限集合の個数 ",
                         math(String.raw`\lvert X\rvert\in\mathbb N`), " は ",
@@ -1961,7 +1990,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       ]),
                       displayMath(String.raw`M(\varphi)=\bigcup_{e\in E_{\mathrm{supp}}(\varphi)}\{e\}\times M_e(\varphi)`),
                       paragraph([
-                        "は互いに素な合併である。さらに ", ref("def_doubled_edge_set"),
+                        "は互いに素な合併である。さらに ", "参照用ノート「不採用経路: 反転対の辺集合」",
                         " により ", math(String.raw`e\in D(\varphi)`), " と ",
                         math(String.raw`M_e(\varphi)=I`), " は同値であり、",
                         "参照用ノート「不採用経路: 単純通過の辺集合」", " により ",
@@ -2015,7 +2044,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         [math(String.raw`\mathcal T(\mathcal T(\varphi))=\varphi`), " である。"],
                         [math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
                           math(String.raw`E_1(\mathcal T(\varphi))=E_1(\varphi)`), " である（",
-                          ref("def_doubled_edge_set"), "、", "参照用ノート「不採用経路: 単純通過の辺集合」", "）。"],
+                          "参照用ノート「不採用経路: 反転対の辺集合」", "、", "参照用ノート「不採用経路: 単純通過の辺集合」", "）。"],
                       ]),
                       paragraph([
                         "とくに、", math(String.raw`D\cap E=\varnothing`), " かつ ",
@@ -2161,7 +2190,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`(e,d)\in M(\mathcal T(\varphi))\Longleftrightarrow(e,1-d)\in M(\varphi)`),
                         " である。したがって、二つの向きが両方 ", math(String.raw`M(\mathcal T(\varphi))`),
                         " に属することと両方 ", math(String.raw`M(\varphi)`), " に属することは同値であり（",
-                        ref("def_doubled_edge_set"), "）、少なくとも一方が属することも同値である（",
+                        "参照用ノート「不採用経路: 反転対の辺集合」", "）、少なくとも一方が属することも同値である（",
                         "「動く辺の台の辺集合」の退避ノート", "）。よって ",
                         math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
                         math(String.raw`E_{\mathrm{supp}}(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)`), " であり、",
@@ -2392,7 +2421,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_standard_contact_obstruction_doubled_edge_archived",
-    targets: ["def_doubled_edge_set"],
+    targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 標準接触対の反転像の障害と反転対" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2410,7 +2439,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "であり、とくに ", math(String.raw`D(\varphi)\ne\varnothing`), " である。ここで台の辺への射影 ",
                         math(String.raw`p(e,d):=e`), " は ", ref("def_oriented_edges"), "、反転対の辺集合 ",
-                        math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"), " で定めた。したがってこの反転像による障害は、",
+                        math(String.raw`D(\varphi)`), " は ", "参照用ノート「不採用経路: 反転対の辺集合」", " で定めた。したがってこの反転像による障害は、",
                         "反転対を含まないファイバーでは起こらない。全て有限集合の元と部分集合の比較だけで判定できる。",
                         "実数体も複素数体も現れない。",
                       ]),
@@ -2424,7 +2453,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         ref("def_row_permutation"), "）から ", math(String.raw`\iota(\vec e)=\vec f`), " となるが、これを仮定の等式へ代入すると ",
                         math(String.raw`\varphi(\vec f)=\vec f`), " となり ", math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
                         math(String.raw`\iota(\vec e)\in M(\varphi)`), " である。", math(String.raw`\vec e\in M(\varphi)`),
-                        " と合わせ、", ref("def_doubled_edge_set"), " により ", math(String.raw`p(\vec e)\in D(\varphi)`), " である。",
+                        " と合わせ、", "参照用ノート「不採用経路: 反転対の辺集合」", " により ", math(String.raw`p(\vec e)\in D(\varphi)`), " である。",
                       ]),
                       paragraph([
                         "第二の場合 ", math(String.raw`\varphi(\vec e)=\iota(\vec f)`), " も ", math(String.raw`\vec e`), " と ",
@@ -2538,7 +2567,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "であり、とくに ", math(String.raw`D(\varphi)\ne\varnothing`),
                         " である。台の辺への射影 ", math(String.raw`p(e,d):=e`), " は ",
                         ref("def_oriented_edges"), "、反転対の辺集合 ", math(String.raw`D(\varphi)`),
-                        " は ", ref("def_doubled_edge_set"), " で定めた。対偶を言い換えると、",
+                        " は ", "参照用ノート「不採用経路: 反転対の辺集合」", " で定めた。対偶を言い換えると、",
                         math(String.raw`L\ge2`), " で ", math(String.raw`D(\varphi)=\varnothing`),
                         " なら、接触対を持つ任意の非後退置換の標準接触対は切り替え可能である。",
                         "全て有限集合の元と部分集合の比較だけで判定でき、実数体も複素数体も現れない。",
@@ -3406,7 +3435,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       displayMath(String.raw`p(\vec e)\in D(\varphi)\quad\text{または}\quad p(\vec f)\in D(\varphi)`),
                       paragraph([
                         "が成り立つ。台の辺への射影 ", math(String.raw`p`), " は ", ref("def_oriented_edges"),
-                        "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"),
+                        "、反転対の辺集合 ", math(String.raw`D(\varphi)`), " は ", "参照用ノート「不採用経路: 反転対の辺集合」",
                         " で定めた。したがって完全に切り替え不能な残余では、接触対を一つ選ぶたびに、",
                         "その二辺の少なくとも一方が反転対として動いている。全て有限集合の元と部分集合の比較だけで閉じる。",
                       ]),
@@ -3475,7 +3504,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                         math(String.raw`\varphi(\vec f)=\vec f`), " となり ",
                         math(String.raw`\vec f\in M(\varphi)`), " に反する。よって ",
                         math(String.raw`\vec e,\iota(\vec e)\in M(\varphi)`), " であり、",
-                        ref("def_doubled_edge_set"), " により ", math(String.raw`p(\vec e)\in D(\varphi)`),
+                        "参照用ノート「不採用経路: 反転対の辺集合」", " により ", math(String.raw`p(\vec e)\in D(\varphi)`),
                         " である。第二の場合も二辺を入れ替えた同じ論法により ",
                         math(String.raw`p(\vec f)\in D(\varphi)`), " を与える。",
                       ]),
@@ -4488,7 +4517,7 @@ M(\varphi)
                         math(String.raw`\{(e,0),(e,1)\}=\{\vec g,\iota(\vec g)\}`),
                         "（", ref("def_edge_reversal"), "）の両方が ",
                         math(String.raw`M(\varphi)`), " に属し、",
-                        ref("def_doubled_edge_set"), " により ",
+                        "参照用ノート「不採用経路: 反転対の辺集合」", " により ",
                         math(String.raw`e\in D(\varphi)`), " である。これは ",
                         math(String.raw`E_1(\varphi)=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)`),
                         "（", "参照用ノート「不採用経路: 単純通過の辺集合」", "）と ",

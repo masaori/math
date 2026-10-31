@@ -725,7 +725,6 @@ export const ALL_LABELS = [
   "def_dispersion_polynomial",
   "def_distance_squared_to_critical_point",
   "def_distance_squared_to_rational",
-  "def_doubled_edge_set",
   "def_dual_edge_map",
   "def_dual_endpoint_mode_vector",
   "def_dual_fourier_matrix_inverse_candidate",
