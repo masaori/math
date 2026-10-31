@@ -18,21 +18,150 @@
 
 ## 章立て
 
-並びは表の上から順である。項目数は 2026-10-31 の main の棚卸し（`docs/organization/flat-inventory.json`、
+並びは上から順である。項目数は 2026-10-31 の main の棚卸し（`docs/organization/flat-inventory.json`、
 数学的道具立て 114 項・2次元イジングモデル 170 項）から数えた。
 
-| 部 | 章 | ゴールの式 | 主な中身（現行のファイル） | 項目数 |
-| --- | --- | --- | --- | --- |
-| — | 数学的道具立て | — | 現行の道具章 | 道具 114 |
-| トレース | 分配関数を転送行列のトレースで表す | $Z=\mathrm{tr}((V_1V_2)^{N_{\mathrm{row}}})$、$V_1=\exp(K_1\sum_m\sigma^z_m\sigma^z_{m+1})$、$V_2=(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(K_2^*\sum_m\sigma^x_m)$ | 001、004 の Pauli 表示と双対結合定数 | 20 |
-| 固有値問題 | 偶セクターへの射影と Jordan–Wigner 表示 | $WP^{(+)}=V^{(+)}P^{(+)}$、$V^{(+)}$ を Jordan–Wigner 行列の二次式 $H_1^{(+)},H_2$ の指数で表す式 | 004 の Jordan–Wigner・全スピン反転・一般生成子、009、010 | 27 |
-| 固有値問題 | 半整数運動量の Fourier 変換と 2×2 行列への帰着 | $T_{V^{(+)}}$ の $(\check Z_\mu,\check Y_\mu)$ への作用が $A(\tilde\theta_\mu)=B_1(\tilde\theta_\mu)B_2B_1(\tilde\theta_\mu)$ で書けること | 006、008、013、014 | 27 |
-| 固有値問題 | 2×2 行列の対角化とフェルミオン | $A(\tilde\theta_\mu)$ の固有値 $e^{\pm\gamma(\tilde\theta_\mu)}$、$V^{(+)}=c\,\check V'$ | 015、016 | 27 |
-| 固有値問題 | 偶セクターの転送行列の固有値 | $V^{(+)}$ の固有値 $(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\frac12\sum_\mu\pm\gamma(\tilde\theta_\mu))$ と最大値 $\Lambda^{(1/2)}_{M_{\mathrm{col}}}$ | 017 | 15 |
-| 固有値問題 | 最大固有ベクトルが偶セクターにあること | $\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}$（$\mathrm{tr}(\varepsilon V^{(+)})$ の正値性から） | 018 の前半、1次元開鎖のスピン和 | 17 |
-| 極限 | 行数の極限：最大固有値だけが残る | $c^{N_{\mathrm{row}}}\le Z\le 2^{M_{\mathrm{col}}}c^{N_{\mathrm{row}}}$ から $\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z\to\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})$ | 011 の $W$・Rayleigh 上限・トレース評価、012 | 9 |
-| 極限 | 列数の極限：Onsager の閉形式 | $c_+=\Lambda^{(1/2)}$、$c_+\le c\le 2c_+$ から自由エネルギー $=\frac12\log(2\sinh 2K_2)+\frac1{4\pi}\int_0^{2\pi}\gamma$ | 011 のセクター上限、012 の Riemann 和と Onsager の表式、018 の厳密解 | 9 |
-| 臨界点 | 臨界点と比熱の対数発散 | $\sinh 2K_1\sinh 2K_2=1$ での比熱の対数発散 | 008 の臨界条件、020 | 10 |
+各章の「ゴールの式」は、その章が最後に示す主張である。記号は本文のものをそのまま使う
+（$M:=M_{\mathrm{col}}$、$N:=N_{\mathrm{row}}$ と略記する。$T_{(V)}(X):=VXV^{-1}$ は共役写像）。
+
+### 数学的道具立て
+
+- 項目数: 道具 114
+- 主な中身: 現行の道具章
+
+### 分配関数を転送行列のトレースで表す（トレースの部）
+
+- 項目数: 20
+- 主な中身: 001、004 の Pauli 表示と双対結合定数
+- ゴールの式:
+
+$$
+Z=\mathrm{tr}\left((V_1V_2)^{N}\right),\qquad
+V_1=\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right),\qquad
+V_2=(2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)
+$$
+
+### 偶セクターへの射影と Jordan–Wigner 表示（固有値問題の部）
+
+- 項目数: 27
+- 主な中身: 004 の Jordan–Wigner・全スピン反転・一般生成子、009、010
+- ゴールの式:
+
+$$
+WP^{(+)}=V^{(+)}P^{(+)},\qquad P^{(+)}=\tfrac12\left(I+\varepsilon\right),\qquad
+\varepsilon=\sigma^x_1\cdots\sigma^x_M,
+$$
+
+$$
+V^{(+)}=\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,(2\sinh 2K_2)^{M/2}\exp\left(iK_2^*H_2\right)\,\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right),
+$$
+
+$$
+H_1^{(+)}=\sum_{m=1}^{M-1}Y_mZ_{m+1}-Y_MZ_1,\qquad
+H_2=\sum_{m=1}^{M}Z_mY_m
+$$
+
+### 半整数運動量の Fourier 変換と 2×2 行列への帰着（固有値問題の部）
+
+- 項目数: 27
+- 主な中身: 006、008、013、014
+- ゴールの式（$\mu\in\check{\mathcal M}$）:
+
+$$
+\left(T_{(V^{(+)})}(\check Z_\mu),\ T_{(V^{(+)})}(\check Y_\mu)\right)=\left(\check Z_\mu,\ \check Y_\mu\right)A(\tilde\theta_\mu),\qquad
+A(\theta)=B_1(\theta)\,B_2\,B_1(\theta),
+$$
+
+$$
+\check Z_\mu=\sum_{j=1}^{M}Z_j\exp(-ij\tilde\theta_\mu),\qquad
+\check Y_\mu=\sum_{j=1}^{M}Y_j\exp(-ij\tilde\theta_\mu),\qquad
+\tilde\theta_\mu=\frac{2\pi\left(\mu-\tfrac12\right)}{M}
+$$
+
+### 2×2 行列の対角化とフェルミオン（固有値問題の部）
+
+- 項目数: 27
+- 主な中身: 015、016
+- ゴールの式（$\mu\in\check{\mathcal M}$、ある $c\in\mathbb C^\times$）:
+
+$$
+\det\left(A(\tilde\theta_\mu)-\lambda_{\pm,\mu}I_2\right)=0,\qquad\lambda_{\pm,\mu}=\exp\left(\pm\gamma(\tilde\theta_\mu)\right),
+$$
+
+$$
+\gamma(\theta)=\mathrm{arccosh}\left(\cosh 2K_1\cosh 2K_2^*-\sinh 2K_1\sinh 2K_2^*\cos\theta\right),
+$$
+
+$$
+V^{(+)}=c\,\exp\left(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M+1-\mu}-\tfrac12I\right)\right)
+$$
+
+### 偶セクターの転送行列の固有値（固有値問題の部）
+
+- 項目数: 15
+- 主な中身: 017
+- ゴールの式（$\epsilon\in\{0,1\}^{\check{\mathcal M}}$）:
+
+$$
+V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,\qquad
+\check\Lambda_\epsilon=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right),
+$$
+
+$$
+\max_\epsilon\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}=\Lambda^{(1/2)}_M=(2\sinh 2K_2)^{M/2}\exp\left(\frac12\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right),\qquad
+\epsilon\neq(1,\dots,1)\Longrightarrow\check\Lambda_\epsilon<\check\Lambda_{(1,\dots,1)}
+$$
+
+### 最大固有ベクトルが偶セクターにあること（固有値問題の部）
+
+- 項目数: 17
+- 主な中身: 018 の前半、1次元開鎖のスピン和
+- ゴールの式（$\mathcal F^{(+)}=\{x\in\mathbb C^{2^M}\mid\varepsilon x=x\}$）:
+
+$$
+\mathrm{tr}\left(\varepsilon V^{(+)}\right)=\left(2\exp(-K_2)\cosh K_1\right)^{M}+\left(2\exp(K_2)\sinh K_1\right)^{M}>0
+\ \Longrightarrow\
+\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}
+$$
+
+### 行数の極限：最大固有値だけが残る（極限の部）
+
+- 項目数: 9
+- 主な中身: 011 の $W$・Rayleigh 上限・トレース評価、012
+- ゴールの式:
+
+$$
+c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\right\},\qquad
+c(M)^{N}\le Z\le 2^{M}c(M)^{N},\qquad
+\lim_{N\to\infty}\frac{1}{MN}\log Z=\frac1M\log c(M)
+$$
+
+### 列数の極限：Onsager の閉形式（極限の部）
+
+- 項目数: 9
+- 主な中身: 011 のセクター上限、012 の Riemann 和と Onsager の表式、018 の厳密解
+- ゴールの式:
+
+$$
+c_+(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathcal F^{(+)}\cap\mathbb R^{2^M},\ \lVert x\rVert=1\right\}=\Lambda^{(1/2)}_M,\qquad
+\Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M,
+$$
+
+$$
+\lim_{M\to\infty}\lim_{N\to\infty}\frac{1}{MN}\log Z
+=\frac12\log\left(2\sinh 2K_2\right)+\frac1{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
+$$
+
+### 臨界点と比熱の対数発散（臨界点の部）
+
+- 項目数: 10
+- 主な中身: 008 の臨界条件、020
+- ゴールの式（$K_1=K_2=K$、$f(K)$ は上の極限の右辺、$0<\lvert K-K_c\rvert\le\frac1{10}$）:
+
+$$
+\sinh 2K_c=1,\qquad
+\left\lvert\frac{d^2f}{dK^2}(K)-\frac{8}{\pi}\log\frac{1}{\lvert K-K_c\rvert}\right\rvert\le 49
+$$
 
 ## 章の依存関係
 
@@ -88,7 +217,7 @@ flowchart TD
 
 ### 振り分けの決め方
 
-各章のゴールの式について、棚卸しの依存ラベルを辿った依存閉包を、表の上の章から順に取った。
+各章のゴールの式について、棚卸しの依存ラベルを辿った依存閉包を、上の章から順に取った。
 まだどの章にも入っていない項を、その章に入れた。したがって各章は、それより前の章と数学的道具立てだけを使う。
 
 ## 組み直すのに要る本文の変更

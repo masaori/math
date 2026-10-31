@@ -1,6 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
-2026-10-31: 代表の依頼で章立て案を [docs/tasks/six-chapter-organization-proposal.md](docs/tasks/six-chapter-organization-proposal.md) に書いた。五段階で切る最初の案は項目数の偏りで退けられ、トレース・固有値問題（5章）・極限（2章）・臨界点の案に書き直した。章の依存関係の図も追記した。承認待ちで、本文と構成再編の runbook はまだ変えていない。
+2026-10-31: 代表の依頼で章立て案を [docs/tasks/six-chapter-organization-proposal.md](docs/tasks/six-chapter-organization-proposal.md) に書いた。五段階で切る最初の案は項目数の偏りで退けられ、トレース・固有値問題（5章）・極限（2章）・臨界点の案に書き直した。章の依存関係の図も追記した。各章のゴールの式は本文の記号どおりの数式で書いた。承認待ちで、本文と構成再編の runbook はまだ変えていない。
 
 2026-10-28: 「比熱の対数発散」の極限へ行末根拠を付けた。次は「物理的な比熱との対応」の式鎖。
 
