@@ -7,10 +7,9 @@
 
 **必要十分版は無い。** 整数運動量版 `H1_H2_via_hatZ_hatY`（`RoutesNotAdopted/IntegerMomentum/ClaimH1H2ViaHatZHatY.lean`）
 と同じ理由で、この等式は `check(Z), check(Y)` の**具体形（半整数運動量の離散フーリエ変換）**に
-本質的に依存しており、抽象化する余地がない。本ファイルの結果を使う交換関係の側
-（`commutator_of_H_and_check_Z_Y`）は、既存の必要十分版
-`Ising2D/NecSuf/CommutatorClifford.lean` の系として導く
-（`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`）。
+本質的に依存しており、抽象化する余地がない。本文の交換関係 `commutator_of_H_and_check_Z_Y`
+（`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean`）は、人手証明どおり
+サイトごとの交換関係から出しており、本ファイルを使わない。
 
 ## 原文の主張
 

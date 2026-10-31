@@ -15,7 +15,7 @@
 
 余分な項 `-4 e^{…}` がそのまま `4 e^{-iθ_μ} Y_1` になる。
 すなわち**「`(+)` セクターで壊れる」の中身は、`Dz ≠ Dz'` のただ 1 点**である。
-（013 章の `check(Z)` では `Dz = Dz'` になる。`EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean` 参照。）
+（013 章の `check(Z)` を `NecSuf.CliffordTriple` に入れると、族が 1 つなので `Dz = Dz'` になる。`lean/docs/ch013-formalization.md` の「必要十分版で判明した本質」参照。）
 
 ## 原文の主張（`μ ∈ ℳ`）
 

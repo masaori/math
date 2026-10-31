@@ -714,6 +714,10 @@ targets=(
   Ising2D.lie_H1Plus_checkY
   Ising2D.lie_H2_checkZ
   Ising2D.lie_H2_checkY
+  Ising2D.lie_H2_Z
+  Ising2D.lie_H2_Y
+  Ising2D.lie_H1Plus_Z
+  Ising2D.lie_H1Plus_Y
   Ising2D.inverse_dft_check
   Ising2D.recover_checkZ
   Ising2D.recover_checkY

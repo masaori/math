@@ -230,11 +230,32 @@
     `H1Plus_eq_check_sum`・`H2_eq_check_sum`（退避した `H1_H2_via_check_Z_Y`）を使って証明している。人手の証明はサイトごとの交換関係（Step 1）から出しており、退避した主張を使わない。
     フォルダの対応の差ではないが、ゴールラインの「通しの証明の各段は人手証明と 1 対 1」に関わるので、次の一歩で確かめる。
 
+  - ゴールラインの確認の一つ目（済み、2026-10-31）: 通しの定理 `Ising2D.onsager_exact_solution_end_to_end` が推移的に使う定数のうち、`Ising2D.RoutesNotAdopted.*` のモジュールで
+    宣言されたものを、Lean のメタプログラム（定数の `getUsedConstants` を辿り、宣言モジュールが `Ising2D.RoutesNotAdopted` で始まるものを列挙）で洗い出した。
+    `ClaimCommutatorHCheckZY.lean`（人手 `commutator_of_H_and_check_Z_Y`）は退避した `H1_H2_via_check_Z_Y` の形式化（`H1Plus_eq_check_sum`・`H2_eq_check_sum`）を使っていたので、
+    人手の Step 1〜4 どおりに書き直した（サイトごとの交換関係 `lie_H2_Z`・`lie_H2_Y`・`lie_H1Plus_Z`・`lie_H1Plus_Y`、反周期的な延長 `Yflat`・`Zflat`、境界の二項の等式）。
+    (A)〜(D) の 4 定理の主張の型は変えていない。`RoutesNotAdopted/` の import は無くなった。レビューで指摘なしになるまで直した。
+    書き直した後、`RoutesNotAdopted/ClaimsUnusedByChapterGoals/` への依存は 0 である。残る依存は `RoutesNotAdopted/IntegerMomentum/` の次の 31 定数（補題・補助定義）で、
+    本文の章のファイルが共有の補題として import して使っている:
+    `ClaimAnticommutatorHatZHatY` の `acomm_Y_Y_clifford`・`acomm_Z_Z_clifford`・`acomm_sum_smul_clifford`・`acomm_sum_smul_zero`、
+    `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、
+    `ClaimConstantCAndEigenvaluesOfV` の `VmatInv`・`VmatInv_mul_Vmat`・`Vmat_eq_smul`・`matExp_neg_mul`・`tauTrace`・`trace_Vmat`・`trace_VmatInv`・`trace_exp_neg_eq_tau`、
+    `ClaimEigenvectorsAndDiagonalizationOfATheta` の `AMat_mulVec_eigen`・`det_AMat`・`det_AMat_eq_one`・`gamma2_mul_gamma2_neg`、
+    `ClaimH1H2ViaHatZHatY` の `H1`（`H1plus` の定義の展開）、
+    `ClaimTVActionsOnHatZHatY` の `B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`、
+    `DefinitionFermiPsi` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`.eq_1` は数えていない）。
+    `commutator_of_H_and_check_Z_Y` の必要十分版は未作成である（既存の `NecSuf/CommutatorClifford.lean` は退避した別経路の一般化で、新しい具体版の手順と対応しない）。
+
 ## 次の一歩
 
-項目 7 のフォルダの移動は終わった。runbook のゴールラインを一つずつ確かめる。最初に次の二つを行う。
+runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 通しの定理 `Ising2D.onsager_exact_solution_end_to_end` が依存する定理のうち、本文から参照用ノートへ退避した主張の形式化（`RoutesNotAdopted/` 配下の定義・定理）に
-  依存しているものを洗い出す。特に `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean` が `H1Plus_eq_check_sum`・`H2_eq_check_sum` を使う点は、
-  人手 `commutator_of_H_and_check_Z_Y` の証明（サイトごとの交換関係から出す）と 1 対 1 でないので、通しの証明の経路に乗っていれば人手の Step どおりの証明へ直す。
+- 上の 31 定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
+  退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
+  退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
+  1 回に 1 ファイル分ずつ進める（最初は `ClaimAnticommutatorHatZHatY` の 4 定数）。
+
+この後に残る確認:
+
+- `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
