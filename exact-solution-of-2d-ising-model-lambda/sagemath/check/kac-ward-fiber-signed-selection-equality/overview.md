@@ -1,6 +1,8 @@
 # SageMath Check: 置換ファイバー位相和と偶部分グラフ選択和の一致
 
-**対象ラベル**: `def_fiber_phase_weight`, `def_signed_selection_sum`
+**対象ラベル**: `def_fiber_phase_weight`, `def_signed_even_subgraph_polynomial`
+
+旧経路の選択和の定義は参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」に保存した。
 
 一辺 $L=2$ の全非後退置換を、反転対の辺集合 $D$ と単純通過の辺集合 $E$ で
 ファイバーに分ける。各ファイバーと四つのスピン構造について、置換側の位相和

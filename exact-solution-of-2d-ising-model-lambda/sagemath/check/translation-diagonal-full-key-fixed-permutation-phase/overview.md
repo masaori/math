@@ -2,7 +2,9 @@
 
 旧主張「選択集合への偶部分グラフの対称差作用」は参照用ノートへ退避した。
 
-**対象ラベル**: `def_signed_selection_sum`,
+**対象ラベル**: `def_signed_even_subgraph_polynomial`,
+
+旧経路の選択和の定義は参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」に保存した。
 `claim_selection_sum_character_evaluation`
 - 住処: 有限集合、有限グラフ、$\mathbb Q(\zeta_8)$、自然数
 - 実行: `sage sagemath/check/translation-diagonal-full-key-fixed-permutation-phase/check.sage`

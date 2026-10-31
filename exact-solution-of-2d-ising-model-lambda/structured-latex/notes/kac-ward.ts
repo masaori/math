@@ -7,6 +7,40 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_signed_selection_sum_definition_archived",
+    targets: ["def_signed_even_subgraph_polynomial"],
+    title: { text: "不採用経路: 共通辺と単純通過辺を固定した符号付き選択和" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、偶部分グラフ対の選択和による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
+        "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
+        math(String.raw`D,E\subseteq E_L`), " が ",
+        math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。符号付き選択和を",
+      ]),
+      displayMath(String.raw`\mathcal U^{a,b}_L(D,E):=
+\sum_{C\in\mathcal C_L(D,E)}
+(-1)^{\begin{aligned}
+&(1+a)\varepsilon_{L,\mathrm h}(D\cup C)+(1+b)\varepsilon_{L,\mathrm v}(D\cup C)
++\varepsilon_{L,\mathrm h}(D\cup C)\varepsilon_{L,\mathrm v}(D\cup C)\\
+&+(1+a)\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))+(1+b)\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))\\
+&+\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))
+\end{aligned}}\ \in\ \mathbb Z`),
+      paragraph([
+        "で定める。選択集合 ", math(String.raw`\mathcal C_L(D,E)`), " は ",
+        ref("def_even_subgraph_pair_fiber"), "、巻き付き偶奇は ",
+        ref("def_torus_winding_parities"), " で定めた。",
+        math(String.raw`C\in\mathcal C_L(D,E)`), " なら ",
+        math(String.raw`D\cup C`), " は偶部分グラフであり、",
+        ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+        math(String.raw`D\cup(E\setminus C)`), " も偶部分グラフである。したがって二つの巻き付き偶奇は定まり、各被加数は ",
+        math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。有限和なので値は ",
+        math(String.raw`\mathbb Z`), " に属し、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_moved_edge_support_set_archived",
     targets: ["claim_reversal_free_moved_support_even"],
     title: { text: "不採用経路: 動く辺の台の辺集合" },
@@ -864,7 +898,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_selection_sum_signed_count_archived",
-    targets: ["def_signed_selection_sum"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "不採用経路: 選択和の符号付き数え上げ表示" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換展開と偶部分グラフ対の直接比較は採らない。元の主張と証明を保存する。"]),
@@ -887,7 +921,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \ \in\ \mathbb Z
 \end{aligned}`),
                       paragraph([
-                        "と書き（", ref("def_signed_selection_sum"),
+                        "と書き（", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」",
                         " の被加数の指数そのものである。巻き付き偶奇は ",
                         ref("def_torus_winding_parities"), "）、有限集合",
                       ]),
@@ -902,7 +936,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 =\bigl\lvert\mathcal C^{+}_L(D,E;a,b)\bigr\rvert
 -\bigl\lvert\mathcal C^{-}_L(D,E;a,b)\bigr\rvert`),
                       paragraph([
-                        "が成り立つ。選択和は ", ref("def_signed_selection_sum"),
+                        "が成り立つ。選択和は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」",
                         " で定めた（旧経路）。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -921,7 +955,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       displayMath(String.raw`\begin{aligned}
 \mathcal U^{a,b}_L(D,E)
 &=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
-&&\bigl(\because\ \blkref{def_signed_selection_sum}\text{ と指数の略記}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」}\text{ と指数の略記}\bigr)\\
 &=\sum_{C\in\mathcal C^{+}_L(D,E;a,b)}1
 +\sum_{C\in\mathcal C^{-}_L(D,E;a,b)}(-1)
 &&\bigl(\because\ \text{上の非交和と二集合の定義}\bigr)\\
@@ -1255,7 +1289,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_selection_even_subgraph_action_character_archived",
-    targets: ["def_signed_selection_sum"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "不採用経路: 選択集合への偶部分グラフの対称差作用" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択集合の文字作用による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -1710,14 +1744,14 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
 &\forall H\in\mathcal H_L(E),\ \chi_E(H)=1
 \end{cases}`),
       paragraph([
-                        "が成り立つ。選択和と符号指数は ", ref("def_signed_selection_sum"), " と ",
+                        "が成り立つ。選択和と符号指数は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」", " と ",
                         "参照用ノート「不採用経路: 選択和の符号付き数え上げ表示」", " で定めた。したがって選択和は有限集合の空性、",
                         "巻き付き偶奇、有限集合の元数だけで決まり、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
       paragraph(["選択集合が空なら、選択和の定義の添字集合が空なので"]),
       displayMath(String.raw`\mathcal U^{a,b}_L(D,E)=0
-\qquad\bigl(\because\ \blkref{def_signed_selection_sum}\text{ の空和}\bigr)`),
+\qquad\bigl(\because\ \text{参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」}\text{ の空和}\bigr)`),
       paragraph([
                         "である。以下、選択集合は空でなく ",
                         math(String.raw`C_0`), " を固定する。", "退避した「偶部分グラフ作用の単純推移性」",
@@ -1727,7 +1761,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
       displayMath(String.raw`\begin{aligned}
 \mathcal U^{a,b}_L(D,E)
 &=\sum_{C\in\mathcal C_L(D,E)}(-1)^{\vartheta^{a,b}_L(D,E;C)}
-&&\bigl(\because\ \blkref{def_signed_selection_sum}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」}\bigr)\\
 &=\sum_{H\in\mathcal H_L(E)}(-1)^{\vartheta^{a,b}_L(D,E;C_0\mathbin\triangle H)}
 &&\bigl(\because\ \text{退避した「偶部分グラフ作用の単純推移性」}\text{ による添字の取り替え}\bigr)\\
 &=(-1)^{\vartheta^{a,b}_L(D,E;C_0)}
@@ -2196,7 +2230,7 @@ d_{E}(v)\bmod2
   },
   {
     id: "note_kac_ward_signed_even_subgraph_square_stratified_archived",
-    targets: ["def_signed_selection_sum"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "不採用経路: 符号付き偶部分グラフ多項式の平方の層別" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択集合による平方の層別は採らない。元の主張と証明を保存する。"]),
@@ -2210,7 +2244,7 @@ d_{E}(v)\bmod2
 \mathcal U^{a,b}_L(D,E)\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}`),
                       paragraph([
                         "が成り立つ。符号付き偶部分グラフ多項式は ", ref("def_signed_even_subgraph_polynomial"),
-                        "、符号付き選択和は ", ref("def_signed_selection_sum"), " で定めた。",
+                        "、符号付き選択和は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」", " で定めた。",
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
@@ -2240,7 +2274,7 @@ d_{E}(v)\bmod2
 &&\bigl(\because\ \blkref{claim_even_subgraph_pair_fiber_bijection}\text{ の逆写像 }C\mapsto(D\cup C,D\cup(E\setminus C))\bigr)\\
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
 \mathcal U^{a,b}_L(D,E)\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ \blkref{def_signed_selection_sum}\text{ と }\mathbb Z[x]\text{ の分配則}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」}\text{ と }\mathbb Z[x]\text{ の分配則}\bigr)
 \end{aligned}`),
                       paragraph([
                         "全ての和は有限集合の上の有限和であり、", math(String.raw`\mathbb Z[x]`),
@@ -3035,7 +3069,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
   },
   {
     id: "note_kac_ward_selection_complement_sign_preserving_involution_archived",
-    targets: ["def_signed_selection_sum"],
+    targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "不採用経路: 選択補集合の符号保存対合" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、選択補集合の軌道による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -4130,7 +4164,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_def_fiber_phase_weight_signed_selection_sum_fiberwise_equality",
-    targets: ["def_fiber_phase_weight", "def_signed_selection_sum"],
+    targets: ["def_fiber_phase_weight", "def_signed_even_subgraph_polynomial"],
     title: { text: "一辺二では置換ファイバー位相和と偶部分グラフ選択和が添字ごとに一致する" },
     body: [
       paragraph([
@@ -4156,7 +4190,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_def_fiber_phase_weight_signed_selection_sum_part_decomposition",
-    targets: ["def_fiber_phase_weight", "def_signed_selection_sum"],
+    targets: ["def_fiber_phase_weight", "def_signed_even_subgraph_polynomial"],
     title: { text: "一辺二では簡約四部分の位相和がすべて有理整数に落ち回転差二部分は相等である" },
     body: [
       paragraph([
@@ -4315,7 +4349,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_selection_sum_affine_character",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "選択集合は偶部分グラフの作用による文字和として扱える" },
     body: [
@@ -4409,7 +4443,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_oriented_edge_conjugation_counterexample",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
       "def_nonbacktracking_permutations",
     ],
     title: { text: "偶部分グラフ上の向き反転共役は置換側の文字作用にならない（一辺二の全数反例）" },
@@ -4435,7 +4469,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_vertex_rewiring_counterexample",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "頂点の入出接続の組み替えも一様な文字作用にならない（一辺二の全数反例）" },
     body: [
@@ -4467,7 +4501,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_global_rewiring_matching",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "置換ごとに偶部分グラフを選ぶ大域的組み替えは完全マッチングを持つ（一辺二の全数観察）" },
     body: [
@@ -4488,7 +4522,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_fiberwise_uniform_matching",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "ファイバーごとに固定した偶部分グラフでは覆えないものが残る（一辺二の全数観察）" },
     body: [
@@ -4519,7 +4553,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_uncovered_fiber_structure",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "単一の偶部分グラフで覆えないファイバーでは軌道分解が必ず変わる（一辺二の全数観察）" },
     body: [
@@ -4539,7 +4573,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_orbit_splitting",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "覆えないファイバーの候補は一軌道の二分裂か二軌道の合併に限られる（一辺二の全数観察）" },
     body: [
@@ -4567,7 +4601,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_local_cut_join",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "軌道の分裂・合併で変わる後続遷移は一つまたは二つの頂点に局在する（一辺二の全数観察）" },
     body: [
@@ -4589,7 +4623,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_swap_rule",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "局所変更の交換形だけでは候補を一意に選べない（一辺二の全数観察）" },
     body: [
@@ -4612,7 +4646,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_candidate_discrimination",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "所属の型と軌道形では候補を区別できない（一辺二の全数観察）" },
     body: [
@@ -4641,7 +4675,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_cut_location",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "二候補の大部分は切断・接合する頂点の位置で区別できる（一辺二の全数観察）" },
     body: [
@@ -4664,7 +4698,7 @@ c_{\oplus}(\omega,k)
   {
     id: "note_kac_ward_claim_selection_even_subgraph_action_character_translation_stabilizer",
     targets: [
-      "def_signed_selection_sum",
+      "def_signed_even_subgraph_polynomial",
     ],
     title: { text: "二候補の選択に平行移動の対称性の障害は無い（一辺二の全数観察）" },
     body: [

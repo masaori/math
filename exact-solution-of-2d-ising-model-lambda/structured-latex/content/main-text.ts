@@ -77338,56 +77338,6 @@ A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
               }],
             },
           },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_signed_selection_sum",
-              labels: [],
-              title: { text: "共通辺と単純通過辺を固定した符号付き選択和" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_signed_selection_sum",
-                  focus: {
-                      id: "kac_ward_definition_signed_selection_sum",
-                      kind: "definition",
-                      title: { text: "共通辺と単純通過辺を固定した符号付き選択和" },
-                      labels: ["def_signed_selection_sum"],
-                      habitat: "Z",
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), "、", math(String.raw`(a,b)\in\mathcal S`),
-                          "（", ref("def_spin_structures"), "）とし、互いに素な辺集合 ",
-                          math(String.raw`D,E\subseteq E_L`), " が ",
-                          math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。符号付き選択和を",
-                        ]),
-                        displayMath(String.raw`\mathcal U^{a,b}_L(D,E):=
-\sum_{C\in\mathcal C_L(D,E)}
-(-1)^{\begin{aligned}
-&(1+a)\varepsilon_{L,\mathrm h}(D\cup C)+(1+b)\varepsilon_{L,\mathrm v}(D\cup C)
-+\varepsilon_{L,\mathrm h}(D\cup C)\varepsilon_{L,\mathrm v}(D\cup C)\\
-&+(1+a)\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))+(1+b)\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))\\
-&+\varepsilon_{L,\mathrm h}(D\cup(E\setminus C))\varepsilon_{L,\mathrm v}(D\cup(E\setminus C))
-\end{aligned}}\ \in\ \mathbb Z`),
-                        paragraph([
-                          "で定める。選択集合 ", math(String.raw`\mathcal C_L(D,E)`), " は ",
-                          ref("def_even_subgraph_pair_fiber"), "、巻き付き偶奇は ",
-                          ref("def_torus_winding_parities"), " で定めた。",
-                          math(String.raw`C\in\mathcal C_L(D,E)`), " なら ",
-                          math(String.raw`D\cup C`), " は偶部分グラフであり、",
-                          ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
-                          math(String.raw`D\cup(E\setminus C)`), " も偶部分グラフである。したがって二つの巻き付き偶奇は定まり、各被加数は ",
-                          math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。有限和なので値は ",
-                          math(String.raw`\mathbb Z`), " に属し、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                  },
-                },
-              }],
-            },
-          },
         ],
       },
     },

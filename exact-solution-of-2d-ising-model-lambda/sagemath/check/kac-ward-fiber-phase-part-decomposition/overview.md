@@ -1,6 +1,8 @@
 # SageMath Check: ファイバー位相和の簡約四部分の内訳
 
-**対象ラベル**: `def_fiber_phase_weight`, `def_signed_selection_sum`
+**対象ラベル**: `def_fiber_phase_weight`, `def_signed_even_subgraph_polynomial`
+
+旧経路の選択和の定義は参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」に保存した。
 
 一辺 $L=2$ の全非後退置換を $(D,E)$ のファイバーに分け、位相反転部分集合
 $\mathcal B_L$ の零和で簡約した後に残る四部分（接触の無い置換、回転差 $-4$、
