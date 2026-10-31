@@ -477,6 +477,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 後段（`ψ` が `V` の固有ベクトル）への一般補題 |
 | `Ising2D.B1mat` / `B2mat` | `B_1(θ)`, `B_2` | `T_V_hatZ_hatY` の証明 |
 | `Ising2D.B1_mul_B2_mul_B1_eq_explicit` | `B_1(θ) B_2 B_1(θ)` の 4 成分の明示計算（5 個の複素パラメータで書いた右辺） | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
+| `Ising2D.duality_c2_star_eq_s2_star_c2`（`Part008/ClaimDualityC2StarEqS2StarC2.lean`） | `K_2 > 0` で `c_2^* = s_2^* c_2`（`s2star_eq_inv_s2`・`c2star_eq_c2_div_s2` を経る人手の三つの鎖）。`IsingParam` の上では `IsingParam.c2_mul_s2star_eq_c2star` として、仮定 `hdual` を埋める | `duality_c2_star_eq_s2_star_c2` |
 | `Ising2D.B1_mul_B2_mul_B1_eq_AMat` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`AMat` 版。上を実パラメータ・実 `θ` へ cast したもの） | 同上 |
 | `Ising2D.TV_hatZ_hatY_of_action` | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**。作用行列は `AMat K θ`） | `T_V_hatZ_hatY` |
 

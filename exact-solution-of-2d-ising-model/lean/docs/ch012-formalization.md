@@ -15,7 +15,9 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/NecSuf/`（必要十分版）
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.IsingParam` | `K_1, K_2, K_2^* ∈ ℝ_{>0}` を束ねた前提 | `def_transfer_matrix_symbols` |
+| `Ising2D.IsingParam` | `K_1, K_2 ∈ ℝ_{>0}` を束ねた前提 | `def_partition_function_2d_ising` の結合定数 |
+| `Ising2D.IsingParam.K2star` / `IsingParam.K2star_pos` | `K_2^* := Kstar K_2 = -(1/2) log(tanh K_2)` と `K_2^* > 0` | `def_second_dual_coupling_constant` |
+| `Ising2D.IsingParam.c2_mul_s2star_eq_c2star` | `c_2 s_2^* = c_2^*` | `duality_c2_star_eq_s2_star_c2` |
 | `Ising2D.IsingParam.const` | `c_1 = cosh 2K_1` 等で `IsingConst` を作る | 同上 |
 | `Ising2D.gamma1R` | `γ_1(θ) = c_1c_2^* - s_1s_2^*\cos θ` の実数版 | `def_A_theta` |
 | `Ising2D.gamma1_eq_ofReal` | 既存の ℂ 版 `gamma1` が `gamma1R` の埋め込みであること | 定義の突き合わせ |

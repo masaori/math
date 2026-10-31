@@ -307,12 +307,16 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
-| `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | **原文が置いている関係**であって形式化の穴ではない（`lean/docs/ch016-formalization.md` 3 章: 「残る仮定は双対関係の 1 つだけ」）。008 章以来 `det A(θ) = 1` に必要 |
 | `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `symmetrized_transfer_matrix_on_sectors` で形式化済み。残るのは `V^{(+)}` の実行列性と、この等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続である |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っている。具体的な `W`（`physicalSymTransferR`）については章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で `εW = Wε` を形式化済みだが、それを `bridge.W` へ渡すには上の `bridge` の接続が要る |
 
 `hZ1` / `hZ2` は章 011 `partition_function_sandwich` の内容であり、章 018 の仮定ではない。
+
+双対関係 `c_2 s_2^* = c_2^*`（もとの場 `hdual`）は、`IsingParam.K2star` を `Kstar K2`
+（人手 `def_second_dual_coupling_constant`）で定義し、人手 `duality_c2_star_eq_s2_star_c2` を
+`Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化したことで定理 `IsingParam.c2_mul_s2star_eq_c2star`
+になり、この束から外した。
 
 ### 6.5 検証
 

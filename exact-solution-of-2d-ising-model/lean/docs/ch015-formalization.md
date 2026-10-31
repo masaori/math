@@ -128,10 +128,11 @@
 
 `det A(θ~_μ) = 1` は `A(θ)` の定義だけからは出ず、双対関係の帰結
 `c_2 s_2^* = c_2^*`（人手証明 Step 0 の (iii)、`duality_c2_star_eq_s2_star_c2`）が要る。
-`Ising2D.IsingParam` は `K_1, K_2, K_2^*` を独立な正数として持つだけなので、この関係は
-仮定 `hdual` として明示してある（`Part008/Definition016_TV.lean` の `hdual` と同じ扱い）。
+本章の定理はこの関係を引数 `hdual` に取る形で置いてある（`Part008/Definition016_TV.lean` の `hdual` と同じ扱い）。
 `det A(θ~_μ) = 1` に依存する `gamma1_gt_1_theta_tilde` 以降（`γ(θ~_μ) > 0`、`λ_± = e^{±γ}`、
-固有値の分離）も同じ仮定を引き継ぐ。**これは形式化に由来する穴ではなく、数学的に必要な仮定である。**
+固有値の分離）も同じ引数を引き継ぐ。この関係は人手 `duality_c2_star_eq_s2_star_c2` で証明済みであり、
+`IsingParam`（`K2star := Kstar K2`）の上では定理 `IsingParam.c2_mul_s2star_eq_c2star`
+（`Part008/ClaimDualityC2StarEqS2StarC2.lean`）で埋まる。
 
 ## 5. 人手証明に見つかった誤り・穴
 

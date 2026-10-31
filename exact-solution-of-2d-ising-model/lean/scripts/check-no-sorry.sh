@@ -54,6 +54,19 @@ targets=(
   Ising2D.V2_apply
   Ising2D.partitionFunction
   Ising2D.Kstar
+  Ising2D.positive_coupling_tanh_lt_one
+  Ising2D.Kstar_pos
+  Ising2D.cosh_two_eq_cosh_sq_add_sinh_sq
+  Ising2D.cosh_two_Kstar_eq_half_inv_tanh_add_tanh
+  Ising2D.exp_two_Kstar_eq_inv_exp_neg
+  Ising2D.sinh_two_Kstar_eq_inv_tanh_sub_tanh_div_two
+  Ising2D.s2star_eq_inv_s2
+  Ising2D.c2star_eq_c2_div_s2
+  Ising2D.duality_c2_star_eq_s2_star_c2
+  Ising2D.IsingParam.K2star_pos
+  Ising2D.IsingParam.c2_mul_s2star_eq_c2star
+  Ising2D.Kstar_eq_KStar
+  Ising2D.isoParam_K2star
   Ising2D.commute_V1_epsProj
   Ising2D.commute_V2_epsProj
   Ising2D.sector_replacement_pow

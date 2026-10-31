@@ -25,9 +25,9 @@
 2026-10-31 時点で、最終定理 `Ising2D.onsager_exact_solution_unconditional`（`Ising2D/Part018/Theorem013_OnsagerUnconditional.lean`）は
 次の仮定を取っている。項目 1〜5 はこれらを一つずつ消す作業である。
 
-1. **双対結合定数を $K_2$ から定める。** いま `IsingParam` は `K2star` を独立な正数として持ち、双対関係
-   `c_2 s_2^* = c_2^*`（`hdual`）を仮定している。`K2star := Kstar K2`（`Part004/DefinitionSecondDualCouplingConstant.lean`）とし、
-   `Part004/ClaimSecondDualCouplingRelation.lean` の双対関係から `hdual` を証明する。
+1. **双対結合定数を $K_2$ から定める。**（2026-10-31 済み）`IsingParam.K2star := Kstar K2`
+   （`Part004/DefinitionSecondDualCouplingConstant.lean`）とし、人手 `duality_c2_star_eq_s2_star_c2` を
+   `Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して `hdual` を定理 `IsingParam.c2_mul_s2star_eq_c2star` にした。
 2. **具体的な分配関数と挟み撃ちをつなぐ。** 最終定理の `Z` はいま「挟み撃ちを満たす任意の関数」である。
    `partitionFunction`（`Part001`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PhysicalSymTransferBridge.lean` の
    具体的な $V_1^{1/2}, V_2, W$ をつなぎ、`hZ1`・`hZ2` を具体的な $c(M)$（具体的な $W$ の Rayleigh 上限）について証明する。

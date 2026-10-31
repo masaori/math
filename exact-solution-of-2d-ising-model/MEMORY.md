@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 1 を終えた。`IsingParam.K2star := Kstar K2` とし、人手 `duality_c2_star_eq_s2_star_c2` を `lean/Ising2D/Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して、最終定理の入力 `EvenSectorClosureInput` から双対関係の仮定 `hdual` を外した。次は人手 `partition_function_via_transfer_matrix` の形式化（状態台帳 [docs/tasks/lean-end-to-end-state.md](docs/tasks/lean-end-to-end-state.md)）。
+
 2026-10-31: 代表の指示で、冒頭の章立ての章の最初に「この論文のゴール」（分配関数による自由エネルギーの表示、熱力学極限での閉形式、閉形式からの臨界点の計算）を置いた。
 
 2026-10-31: 章立ての組み直しの最初の項目として、$\Theta^{(\delta)}_M$ と $\Lambda^{(\delta)}_M$ を閉形式の定理 `onsager_free_energy_expression` から独立した定義 `def_Theta_delta_M`・`def_Lambda_delta_M` へ分け、定義だけを使う参照を付け替えた。`inventory:organization` は無関係な項目の固定値の照合で落ちたままで、棚卸しは再生成していない（次の次の項目「章の割り当てを棚卸しの生成器に入れる」で作り直す）。次は本文の題から未定義の物理用語を除く。

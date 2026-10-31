@@ -13,11 +13,10 @@
 
 ## 原文との対応で明示した前提
 
-原文 `def_transfer_matrix_symbols` は `K_2^*` を `sinh 2K_2 sinh 2K_2^* = 1` で定める。
-既存の `Ising2D.IsingParam` は `K_1, K_2, K_2^*` の正値性しか持たないので、
-この双対関係が要る主張（`critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）では
-`Ising2D.KStar`（`K^* := arsinh(1/sinh 2K)/2`）を明示的に導入し、
-`K_2^* = KStar K_2` を仮定として書く。これは原文の定義そのものである。
+`Ising2D.IsingParam.K2star` は 004 章の `Kstar`（`-(1/2) log(tanh K_2)`）で定まる。
+双対関係が要る主張（`critical_point_iff_kappa_zero`, `isotropic_A_equals_one`）は、
+`sinh 2K sinh 2K^* = 1` を定義から直接読める `Ising2D.KStar`（`K^* := arsinh(1/sinh 2K)/2`）で
+述べてあり、両者が `K > 0` で一致することを `Kstar_eq_KStar` で示して接続する。
 -/
 import Ising2D.Part012.Claim001_Gamma1LowerBound
 import Ising2D.Part020.Claim001_CoshAddHalfAngle
@@ -152,20 +151,32 @@ theorem critical_point_iff_kappa_zero {K1 K2 : ℝ} (_hK1 : 0 < K1) (hK2 : 0 < K
 noncomputable def isoParam (K : ℝ) (hK : 0 < K) : IsingParam where
   K1 := K
   K2 := K
-  K2star := KStar K
   K1_pos := hK
   K2_pos := hK
-  K2star_pos := KStar_pos hK
+
+/-- 004 章の `Kstar`（`-(1/2) log(tanh K)`）と本ファイルの `KStar`（`arsinh(1/sinh 2K)/2`）は
+`K > 0` で一致する。どちらも `sinh 2K^* = 1/sinh 2K` を満たし、`sinh` は単射である。 -/
+theorem Kstar_eq_KStar {K : ℝ} (hK : 0 < K) : Kstar K = KStar K := by
+  have h : Real.sinh (2 * Kstar K) = Real.sinh (2 * KStar K) := by
+    rw [s2star_eq_inv_s2 hK, sinh_two_KStar]
+  have := sinh_injective_real h
+  linarith
+
+/-- 等方な場合の `K_2^*` は `KStar K`。 -/
+theorem isoParam_K2star (K : ℝ) (hK : 0 < K) : (isoParam K hK).K2star = KStar K :=
+  Kstar_eq_KStar hK
 
 /-- **人手証明 `isotropic_A_equals_one`**: 等方な場合 `A = 1`。 -/
 theorem AP_isoParam (K : ℝ) (hK : 0 < K) : AP (isoParam K hK) = 1 := by
-  simp only [AP, isoParam]
+  rw [AP, isoParam_K2star]
   exact sinh_two_mul_sinh_two_KStar hK
 
 /-- 等方な場合の `κ(K) = 2K - 2K^*`。 -/
 noncomputable def kappaK (K : ℝ) : ℝ := 2 * K - 2 * KStar K
 
-theorem kappaP_isoParam (K : ℝ) (hK : 0 < K) : kappaP (isoParam K hK) = kappaK K := rfl
+theorem kappaP_isoParam (K : ℝ) (hK : 0 < K) : kappaP (isoParam K hK) = kappaK K := by
+  rw [kappaP, isoParam_K2star, kappaK]
+  rfl
 
 /-- **人手証明 `isotropic_A_equals_one` の表示**:
 等方な場合 `γ(θ) = 2 arcsinh(√(sinh²(κ/2) + sin²(θ/2)))`。 -/

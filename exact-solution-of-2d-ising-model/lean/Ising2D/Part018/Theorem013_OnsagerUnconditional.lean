@@ -25,6 +25,7 @@
 | `D.C > 0`、`D.C = (2 sinh 2K_2)^{M/2}` | 同上（`C` は構成で `(2 sinh 2K_2)^{M/2}` に確定する） |
 | `D.gam μ > 0`（`γ(θ̃_μ) > 0`） | 章 017 `Ising2D.gammaFn_thetaTilde_pos`（無条件） |
 | `∑_μ D.gam μ = ∑_{μ=1}^{M} γ(t^{(M)}_μ)`（`δ = 1/2`） | 本ファイルの `Ising2D.sum_checkGam`（章 017 `tagPoint_half_eq_thetaTilde` の系） |
+| `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`Part008/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
 
 ## 残った仮定（`Ising2D.EvenSectorClosureInput` に束ねた）
 
@@ -33,7 +34,6 @@
 | 場 | 内容 | なぜ消せないか（一次情報） |
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が `M ≠ 0` を要求する（`CheckFermiSetup.hM`） |
-| `hdual` | 双対関係 `c_2 s_2^* = c_2^*` | 章 016 の結論に残る唯一の仮定（`lean/docs/ch016-formalization.md` 3 章）。008 章以来 `det A(θ) = 1` に必要で、原文が置いている関係である |
 | `bridge` | 章 011 の実行列 `W` と `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 章 011 の射影後の複素行列等式は `symmetrized_transfer_matrix_on_sectors` で形式化済み。章 017 の `V^{(+)}` の実行列表示と組み合わせ、実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続が残る |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っているので、具体的な `W`（`physicalSymTransferR`）についての `W_has_positive_entries` / `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean` で形式化済み）をここへ渡すには、上の `bridge` の接続が要る |
@@ -71,12 +71,10 @@ theorem sum_checkGam (P : IsingParam) (M : ℕ) :
 structure EvenSectorClosureInput (P : IsingParam) (M : ℕ) where
   /-- 章 016・017 が要求する `M ≠ 0` -/
   hM : M ≠ 0
-  /-- 双対関係 `c_2 s_2^* = c_2^*`（章 016 に残る唯一の仮定） -/
-  hdual : P.const.c2 * P.const.s2star = P.const.c2star
   /-- 章 011 の `W` と章 017 の `V^{(+)}` の実行列上の橋渡し -/
-  bridge : EvenSectorBridge M (checkFermiOf P hM) (vPlusDataOf P hM hdual)
+  bridge : EvenSectorBridge M (checkFermiOf P hM) (vPlusDataOf P hM P.c2_mul_s2star_eq_c2star)
   /-- `tr(εV^{(+)}) > 0`（章 018 の `closing_006`。Lean 未形式化） -/
-  htr : 0 < ((epsilon M * (vPlusDataOf P hM hdual).V).trace).re
+  htr : 0 < ((epsilon M * (vPlusDataOf P hM P.c2_mul_s2star_eq_c2star).V).trace).re
   /-- `W` の成分はすべて正（章 011 の `W_has_positive_entries`。Step 3 が使う） -/
   hWpos : ∀ k l, 0 < bridge.W k l
   /-- `ε` は `W` と可換（章 011 の `epsilon_commutes_with_W`。Step 3 が使う） -/
@@ -97,12 +95,11 @@ theorem rayleighSup_sandwich_LambdaM_of_input (P : IsingParam) (In : EvenSectorC
 /-- **`Ising2D.onsager_exact_solution` から章 014–017 由来の仮定を落とした版**。
 
 残る入力は
-* `In m hm`: ファイル冒頭の表の 5 つ（章 011・章 018 の未形式化部分と双対関係）、
+* `In m hm`: ファイル冒頭の表の 4 つ（章 011・章 018 の未形式化部分）、
 * `hcM`: `c(M)` が `W` の Rayleigh 上限であること（`c(M)` の定義そのもの）、
 * `hZ1` / `hZ2`: 章 011 の `partition_function_sandwich`
 
-だけであり、**章 014・015・016・017 に由来する仮定は 1 つも残っていない**
-（双対関係 `hdual` は章 008 以来の原文の前提であって、形式化の穴ではない）。 -/
+だけであり、**章 014・015・016・017 に由来する仮定と双対関係は 1 つも残っていない**。 -/
 theorem onsager_exact_solution_unconditional (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
     (In : ∀ m : ℕ, 2 ≤ m → EvenSectorClosureInput P m)
     (hcM : ∀ (m : ℕ) (hm : 2 ≤ m), cM m = rayleighSup (In m hm).bridge.W)

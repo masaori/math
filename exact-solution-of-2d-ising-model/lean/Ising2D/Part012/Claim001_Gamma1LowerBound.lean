@@ -15,8 +15,12 @@
   `A(θ)` の成分として使うため ℂ に埋め込んだ形になっている。本章では実数として扱いたいので
   実数版 `gamma1R` を置き、`gamma1_eq_ofReal` で両者が同じ値であることを確認する。
 * 人手証明は `c_1 = cosh 2K_1`, `s_1 = sinh 2K_1`, `c_2^* = cosh 2K_2^*`, `s_2^* = sinh 2K_2^*`
-  と `K_1, K_2, K_2^* > 0` を前提に置く。既存の `IsingConst` は 5 個の実数を束ねただけなので、
-  この前提を `IsingParam` として明示的に持たせ、`IsingParam.const` で `IsingConst` へ移す。
+  と `K_1, K_2 > 0` を前提に置き、`K_2^*` は `K_2` から `def_second_dual_coupling_constant` の
+  `K_2^* := -(1/2) log(tanh K_2)`（`Ising2D.Kstar`）で定める。既存の `IsingConst` は 5 個の実数を
+  束ねただけなので、この前提を `IsingParam` として明示的に持たせ、`IsingParam.const` で `IsingConst` へ移す。
+  `K_2^*` は独立な欄ではなく `IsingParam.K2star := Kstar K2` という定義なので、
+  双対関係 `c_2 s_2^* = c_2^*` は仮定ではなく定理 `IsingParam.c2_mul_s2star_eq_c2star`
+  （人手 `duality_c2_star_eq_s2_star_c2`）として得られる。
   これにより「どの結論がどの前提に依存するか」が形式化の側で可視化される
   （`Part008/Definition019_ThetaGamma.lean` と同じ方針）。
 * `arccosh` について: `lean/README.md` は「mathlib に無い」と記載しているが、
@@ -29,19 +33,25 @@
 本ファイルは他章（011 章の `c(M)` や分配関数の挟み撃ち）に依存しない。
 -/
 import Ising2D.Part008.Definition019_ThetaGamma
+import Ising2D.Part008.ClaimDualityC2StarEqS2StarC2
 import Ising2D.NecSuf.Arcosh
 import Ising2D.NecSuf.CoshLowerBound
 
 namespace Ising2D
 
-/-- 人手証明が置いている前提 `K_1, K_2, K_2^* ∈ ℝ_{>0}`（`def_transfer_matrix_symbols`）。 -/
+/-- 人手証明が置いている前提 `K_1, K_2 ∈ ℝ_{>0}`（`def_partition_function_2d_ising` の結合定数）。
+`K_2^*` は `IsingParam.K2star` として `K_2` から定める。 -/
 structure IsingParam where
   K1 : ℝ
   K2 : ℝ
-  K2star : ℝ
   K1_pos : 0 < K1
   K2_pos : 0 < K2
-  K2star_pos : 0 < K2star
+
+/-- **人手 `def_second_dual_coupling_constant`**: `K_2^* := -(1/2) log(tanh K_2)`。 -/
+noncomputable def IsingParam.K2star (P : IsingParam) : ℝ := Kstar P.K2
+
+/-- 人手 `def_second_dual_coupling_constant` の正値性 `K_2^* > 0`。 -/
+theorem IsingParam.K2star_pos (P : IsingParam) : 0 < P.K2star := Kstar_pos P.K2_pos
 
 /-- `IsingParam` から `IsingConst` を作る（原文の `c_1 = cosh 2K_1` 等）。 -/
 noncomputable def IsingParam.const (P : IsingParam) : IsingConst where
@@ -50,6 +60,13 @@ noncomputable def IsingParam.const (P : IsingParam) : IsingConst where
   c2 := Real.cosh (2 * P.K2)
   c2star := Real.cosh (2 * P.K2star)
   s2star := Real.sinh (2 * P.K2star)
+
+/-- **人手 `duality_c2_star_eq_s2_star_c2`** を `IsingParam.const` の記号で述べたもの:
+`c_2 s_2^* = c_2^*`（008 章以降の章が仮定 `hdual` の形で引いていた等式）。 -/
+theorem IsingParam.c2_mul_s2star_eq_c2star (P : IsingParam) :
+    P.const.c2 * P.const.s2star = P.const.c2star := by
+  show Real.cosh (2 * P.K2) * Real.sinh (2 * Kstar P.K2) = Real.cosh (2 * Kstar P.K2)
+  rw [duality_c2_star_eq_s2_star_c2 P.K2_pos, mul_comm]
 
 /-- `γ_1(θ) = c_1c_2^* - s_1s_2^* cos θ` の実数版。 -/
 noncomputable def gamma1R (K : IsingConst) (θ : ℝ) : ℝ :=

@@ -61,8 +61,10 @@
 | `Ising2D.Sparam` / `Sparam_nonneg` / `Sparam_even` | `S(θ) := sinh²(κ/2) + A sin²(θ/2)` | `gamma_kappa_identity` |
 | `Ising2D.sinh_half_gammaFn_sq` | **`sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)`** | `gamma_kappa_identity` (2) |
 | `Ising2D.gammaFn_eq_two_arsinh` | **`γ(θ) = 2 arcsinh √S`** | `gamma_kappa_identity` (3) |
-| `Ising2D.KStar` / `sinh_two_KStar` | `K^* := arsinh(1/sinh 2K)/2` と `sinh 2K^* = 1/sinh 2K` | `def_transfer_matrix_symbols` の双対関係を明示化 |
-| `Ising2D.sinh_two_mul_sinh_two_KStar` / `KStar_pos` | `sinh 2K sinh 2K^* = 1`、`K^* > 0` | 同上 |
+| `Ising2D.KStar` / `sinh_two_KStar` | `K^* := arsinh(1/sinh 2K)/2` と `sinh 2K^* = 1/sinh 2K`。人手には無い Lean 内の別表示 | `Kstar_eq_KStar` で人手 `def_second_dual_coupling_constant` に接続 |
+| `Ising2D.Kstar_eq_KStar` | `K > 0` で 004 章の `Kstar K`（`-(1/2) log(tanh K)`）と `KStar K` が一致する | `def_second_dual_coupling_constant` |
+| `Ising2D.isoParam_K2star` | 等方な場合の `K_2^*` は `KStar K` | 同上 |
+| `Ising2D.sinh_two_mul_sinh_two_KStar` / `KStar_pos` | `sinh 2K sinh 2K^* = 1`、`K^* > 0` | `sinh_two_mul_sinh_two_KStar` は `KStar` 上の `second_dual_coupling_relation` の対応物、`KStar_pos` は `def_second_dual_coupling_constant` の正値性の対応物。どちらも `Kstar_eq_KStar` を経て人手に接続 |
 | `Ising2D.critical_point_iff_kappa_zero` | **`sinh 2K_1 sinh 2K_2 = 1 ⟺ K_1 = K_2^* ⟺ κ = 0`** | `critical_point_iff_kappa_zero` |
 | `Ising2D.isoParam` / `AP_isoParam` | 等方な場合 `K_1=K_2=K` と **`A = 1`** | `isotropic_A_equals_one` (1) |
 | `Ising2D.kappaK` / `kappaP_isoParam` | **`κ(K) = 2K - 2K^*`** | `isotropic_A_equals_one` (2) |
