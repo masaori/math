@@ -5,7 +5,7 @@
 #   exp(K n) = exp(K)^n（n ∈ ZZ）なので、多項式としての一致は任意の K_1, K_2 ∈ ℝ_{>0} での一致と同値。
 #   否定コントロール: N_row ≠ M_col のとき x_1 と x_2 を入れ替えた転送行列のトレースは Z と一致しない。
 # 対象ラベル: partition_function_via_transfer_matrix
-# 対象: structured-latex/content/001_partition_function_2d_ising.ts
+# 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
 #       ブロック partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix
 # 帰属: ZZ 係数の Laurent 多項式。ℝ 脱出なし。
 # ---------------------------------------------------------

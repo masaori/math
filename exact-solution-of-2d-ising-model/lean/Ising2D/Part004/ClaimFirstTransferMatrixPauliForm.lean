@@ -1,7 +1,7 @@
 /-
 # `V_1` のパウリ行列表示
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `transfer_matrix_definition_site_pauli_periodic_extension`
   （ラベル **`def_site_pauli_periodic_extension`**）: `σ^z_{M_col+1} := σ^z_1`

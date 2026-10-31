@@ -2,7 +2,8 @@
  * `content/` と `notes/` のモジュールを読み込む共通処理。
  *
  * ソース形式は **`.ts` に統一**する（書き方の種類を増やさない）。文書順は、`LEADING_CONTENT_FILES` に
- * 宣言したファイルを先頭に置き、残りをファイル名昇順に並べたもの。
+ * 宣言したファイルを先頭に置き、`TRAILING_CONTENT_FILES` に宣言したファイルを末尾に置き、残りをその間に
+ * ファイル名昇順で並べたもの。
  * Node 22.18+ の型ストリップにより、`.ts` はビルドなしでそのまま import できる。
  * `.mjs` が残っていれば「型検査から漏れたファイル」なので、読まずにエラーで落とす。
  */
@@ -33,6 +34,15 @@ const isSourceFile = (fileName: string): boolean =>
 export const LEADING_CONTENT_FILES = ["chapter_organization.ts"] as const;
 
 /**
+ * `content/` のうち、ファイル名昇順に並ぶファイルより後ろに、ここに書いた順で置くファイル。
+ *
+ * 承認済みの章立て（`tools/chapter-plan.ts`）の章を組み直したファイルを、部・章の順に並べる。
+ * 番号を持つ既存の章のファイルには数学的道具立てが散らばっており、組み直した章はそれらを使うので、
+ * 組み直した章はそれらより後ろに置く。
+ */
+export const TRAILING_CONTENT_FILES = ["partition_function_transfer_matrix_representation.ts"] as const;
+
+/**
  * dir 直下のソースファイル名をファイル名昇順（＝文書順）で返す。
  * `.mjs` を見つけたら、型検査の網から漏れている証拠なのでエラーにする。
  */
@@ -50,17 +60,18 @@ export function listSourceFiles(dir: string): string[] {
 }
 
 /**
- * content/ のソースファイル名を文書順で返す。`LEADING_CONTENT_FILES` を宣言の順に先頭へ置き、
- * 残りはファイル名昇順。宣言したファイルが無ければ、宣言が古いのでエラーにする。
+ * content/ のソースファイル名を文書順で返す。`LEADING_CONTENT_FILES` を宣言の順に先頭へ、
+ * `TRAILING_CONTENT_FILES` を宣言の順に末尾へ置き、残りはファイル名昇順。
+ * 宣言したファイルが無ければ、宣言が古いのでエラーにする。
  */
 export function listContentFilesInDocumentOrder(): string[] {
   const files = listSourceFiles(contentDir);
-  const missing = LEADING_CONTENT_FILES.filter((file) => !files.includes(file));
+  const declared: readonly string[] = [...LEADING_CONTENT_FILES, ...TRAILING_CONTENT_FILES];
+  const missing = declared.filter((file) => !files.includes(file));
   if (missing.length > 0) {
-    throw new Error(`LEADING_CONTENT_FILES に書いたファイルが content/ に無い: ${missing.join(", ")}`);
+    throw new Error(`LEADING_CONTENT_FILES・TRAILING_CONTENT_FILES に書いたファイルが content/ に無い: ${missing.join(", ")}`);
   }
-  const leading: readonly string[] = LEADING_CONTENT_FILES;
-  return [...LEADING_CONTENT_FILES, ...files.filter((file) => !leading.includes(file))];
+  return [...LEADING_CONTENT_FILES, ...files.filter((file) => !declared.includes(file)), ...TRAILING_CONTENT_FILES];
 }
 
 async function loadDefaultExport(dir: string, fileName: string): Promise<unknown> {

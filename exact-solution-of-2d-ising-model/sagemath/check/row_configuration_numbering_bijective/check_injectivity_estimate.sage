@@ -3,7 +3,7 @@
 #   ord(μ) - ord(μ') = 2^{M-k} + R,  |R| ≤ Σ_{l>k} |b_l(μ)-b_l(μ')| 2^{M-l} ≤ 2^{M-k} - 1 < 2^{M-k}
 #   （k は μ(k) ≠ μ'(k) となる最小の添字、μ(k) = -1, μ'(k) = 1 の向きに取る）
 # 対象ラベル: row_configuration_numbering_bijective
-# 対象: 001_partition_function_2d_ising.ts の同ブロック「中間目標: 単射性」
+# 対象: partition_function_transfer_matrix_representation.ts の同ブロック「中間目標: 単射性」
 # 帰属: ZZ。全ての組 (μ, μ') について厳密計算。
 # ---------------------------------------------------------
 import os

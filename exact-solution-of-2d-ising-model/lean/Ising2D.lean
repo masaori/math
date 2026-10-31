@@ -86,6 +86,7 @@ import Ising2D.NecSuf.DualCouplingRelation
 import Ising2D.Part004.ClaimSecondDualCouplingRelation
 import Ising2D.Part004.ClaimSecondDualCouplingRelationFromNecSuf
 import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
+import Ising2D.Part004.ClaimPartitionFunctionViaPauliTransferMatrices
 import Ising2D.Part004.ClaimV2InZY
 import Ising2D.Part010.Claim009_EpsilonProjectors
 import Ising2D.Part010.DefinitionV1PlusSquareRoot

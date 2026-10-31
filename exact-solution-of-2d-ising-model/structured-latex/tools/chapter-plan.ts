@@ -35,11 +35,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { text: "転送行列による表示" },
         organizationGoalLabel: "chapter_organization_goal_transfer_matrix_representation",
-        goalLabels: [
-          "partition_function_via_transfer_matrix",
-          "first_transfer_matrix_pauli_form",
-          "second_transfer_matrix_pauli_form",
-        ],
+        goalLabels: ["partition_function_via_pauli_transfer_matrices"],
         proposalEntryCount: 20,
       },
       {

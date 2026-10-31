@@ -1,7 +1,7 @@
 /-
 # 2次元 Ising 模型の分配関数 `Z(K_1, K_2)`
 
-対応する人手証明（正本は `structured-latex/content/001_partition_function_2d_ising.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `partition_function_2d_ising_001_definition_lattice_size`（ラベル `def_lattice_size`）
 * `partition_function_2d_ising_002_definition_partition_function`

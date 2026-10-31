@@ -4,7 +4,7 @@
 
 **対象ラベル**: `partition_function_via_transfer_matrix` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix`）
 - 範囲: `Z(K_1,K_2) = tr((V_1V_2)^{N_row})` と proof の全中間目標
   （(R) 有限和の添字の付け替え・転送行列の積の成分・行列の冪の成分 (*)・トレースの展開・

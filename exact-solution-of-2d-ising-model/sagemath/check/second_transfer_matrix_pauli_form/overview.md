@@ -4,7 +4,7 @@
 
 **対象ラベル**: `second_transfer_matrix_pauli_form` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `transfer_matrix_claim_second_transfer_matrix_pauli_form`）
 - 主張: `def_transfer_matrix` で成分により定めた `V_2`（`(V_2)_{ord(μ),ord(μ')} = exp(K_2 Σ_m μ(m)μ'(m))`）は
   `V_2 = (2 sinh 2K_2)^{M_col/2} exp(K_2^* Σ_{m=1}^{M_col} σ_m^x)`

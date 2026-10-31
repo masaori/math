@@ -1,7 +1,7 @@
 /-
 # スピン配置の番号付けはクロネッカー積の番号付けと一致する
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `transfer_matrix_claim_config_numbering_equals_kronecker_numbering`
   （ラベル **`config_numbering_equals_kronecker_numbering`**）

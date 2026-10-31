@@ -1,7 +1,7 @@
 /-
 # 1 行ぶんのスピン配置の番号付けは全単射
 
-対応する人手証明（正本は `structured-latex/content/001_partition_function_2d_ising.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `partition_function_2d_ising_claim_row_configuration_numbering_bijective`
   （ラベル **`row_configuration_numbering_bijective`**）

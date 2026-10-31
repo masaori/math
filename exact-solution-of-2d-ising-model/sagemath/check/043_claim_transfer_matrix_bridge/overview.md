@@ -4,20 +4,21 @@
 
 **対象ラベル**: `partition_function_via_transfer_matrix` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `partition_function_2d_ising_004_claim_partition_function_via_transfer_matrix`）
 - 併せて検証:
-  - `structured-latex/content/004_transfer_matrix.ts`:
-    `sigma_z_diagonal_action` / `exp_of_diagonal_matrix` / `first_transfer_matrix_pauli_form`、
+  - `structured-latex/content/partition_function_transfer_matrix_representation.ts`:
+    `sigma_z_diagonal_action` / `first_transfer_matrix_pauli_form`、
     `two_by_two_transfer_identity` / `second_transfer_matrix_pauli_form`
+  - `structured-latex/content/004_transfer_matrix.ts`: `exp_of_diagonal_matrix`
   - `structured-latex/content/010_transfer_matrix_bridge.ts`:
     `epsilon_projector_properties` / `epsilon_commutes_with_transfer_matrices` /
     `epsilon_projectors_commute_with_transfer_matrices`（いずれも (+) セクターだけの主張）
 
 ### 何を確定させるための検証か
 
-転送行列 `V_1, V_2` は `def_transfer_matrix`（分配関数の章）で**成分**により一度だけ定義され、
-転送行列の章はそのパウリ行列表示を主張 `first_transfer_matrix_pauli_form` /
+転送行列 `V_1, V_2` は `def_transfer_matrix`（転送行列による表示の章）で**成分**により一度だけ定義され、
+同じ章がそのパウリ行列表示を主張 `first_transfer_matrix_pauli_form` /
 `second_transfer_matrix_pauli_form` として示す。ここでは
 
 1. 成分定義の `V_1, V_2` とパウリ行列表示が**行列として一致すること**

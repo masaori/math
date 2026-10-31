@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの四番目の項目の最初の章「転送行列による表示」を組み直した。21 項を `structured-latex/content/partition_function_transfer_matrix_representation.ts`（部「分配関数」・章「転送行列による表示」）へ依存順で移し（本文不変、001 は削除）、章末にゴールの主張 `partition_function_via_pauli_transfer_matrices`（SageMath・Lean つき）を足した。組み直した章は `tools/content-modules.ts` の `TRAILING_CONTENT_FILES` で本文の末尾に置く。棚卸しの生成器は、旧い章から組み直した章への前方参照を組み直し途中のものとして区別する。次は射影と Jordan–Wigner 表示の章。
+
 2026-10-31: 章立ての組み直しの三番目の項目として、棚卸しの生成器 `structured-latex/tools/build-flat-inventory.ts` に章の割り当てを入れた。章立て案の機械可読版は `tools/chapter-plan.ts`（章の題・ゴールのブロックのラベル・章立て案の項目数）。章の順に各章のゴールのブロックから依存閉包を取り、未割り当てのイジング側の項をその章へ入れる。旧ゴール（二章への節境界）のレビュー済み本文ハッシュ等の固定値は外した（いまの本文で 73 件落ちていた）。依存の抽出が数式中の `\blkref{…}` を拾っていなかったのと、改名前のラベル `def_H1_pm`・`def_V1_pm` を黙って無視していたのを直した。章ごとの数は 21・27・27・29・16・15・9・9・10、どの章からも辿れない項 9（理由は状態台帳）。論文構成の公開ページは章立てを表示する。次は「転送行列による表示」の章から本文を組み直す。
 
 2026-10-31: Lean の通しの証明の項目 3 を三つに割り、最初の一つとして人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」を `lean/Ising2D/Part018/ClaimVPlusRealEntries.lean` で形式化した（`EvenSectorBridge` の欄 `Vr`・`hVr` を `VPlusR`・`vPlusDataOf_V_eq_map` として与える）。次は人手 Step 0 を具体的な `W` と `VPlusR` について実ベクトル上で立てる（状態台帳の「次の一歩」）。

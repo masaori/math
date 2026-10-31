@@ -3,7 +3,7 @@
 #   Z(K_1,K_2) = tr( (V_1 V_2)^{N_row} )
 #   成分定義・パウリ表示のどちらで計算しても同じ値になること。
 #   併せて K_1 と K_2 を取り違えると（M != N_row のとき）合わないことも確認する。
-# 対象: structured-latex partition_function_via_transfer_matrix（001_partition_function_2d_ising.ts）
+# 対象: structured-latex partition_function_via_transfer_matrix（partition_function_transfer_matrix_representation.ts）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'

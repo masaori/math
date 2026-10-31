@@ -4,7 +4,7 @@
 
 **対象ラベル**: `first_transfer_matrix_pauli_form` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `transfer_matrix_claim_first_transfer_matrix_pauli_form`）
 - 主張: `def_transfer_matrix` で成分により定めた `V_1`（`(V_1)_{ord(μ),ord(μ')} = δ_{μ=μ'} exp(K_1 Σ_m μ(m)μ(m+1))`）は
   `V_1 = exp(K_1 Σ_{m=1}^{M_col} σ_m^z σ_{m+1}^z)`（`def_site_pauli_periodic_extension` の `σ_{M_col+1}^z := σ_1^z`）

@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # SageMath: ord の値域 1 ≤ ord(μ) ≤ 2^{M_col}（証明の「値域」の中間目標の式変形）
 # 対象ラベル: row_configuration_numbering_bijective
-# 対象: 001_partition_function_2d_ising.ts の同ブロック「中間目標: 値域」
+# 対象: partition_function_transfer_matrix_representation.ts の同ブロック「中間目標: 値域」
 # 式: 0 ≤ Σ b_m(μ) 2^{M-m} ≤ Σ 2^{M-m} = Σ_{t=0}^{M-1} 2^t = 2^M - 1
 # 帰属: すべて ZZ。厳密計算。
 # ---------------------------------------------------------

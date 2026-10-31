@@ -23,7 +23,6 @@ import blocks_000_calculation_formulae_10_19 from './content/000_calculation_for
 import blocks_000_calculation_formulae_20_29 from './content/000_calculation_formulae_20_29.ts'
 import blocks_000_calculation_formulae_30_44 from './content/000_calculation_formulae_30_44.ts'
 import blocks_000_calculation_formulae_45_46 from './content/000_calculation_formulae_45_46.ts'
-import blocks_001_partition_function_2d_ising from './content/001_partition_function_2d_ising.ts'
 import blocks_002_linear_space_general from './content/002_linear_space_general.ts'
 import blocks_003_exp_linear_map from './content/003_exp_linear_map.ts'
 import blocks_004_transfer_matrix from './content/004_transfer_matrix.ts'
@@ -43,6 +42,7 @@ import blocks_017_even_sector_eigenvalues from './content/017_even_sector_eigenv
 import blocks_018_even_sector_closing from './content/018_even_sector_closing.ts'
 import blocks_020_critical_point from './content/020_critical_point.ts'
 import blocks_chapter_organization from './content/chapter_organization.ts'
+import blocks_partition_function_transfer_matrix_representation from './content/partition_function_transfer_matrix_representation.ts'
 import notes_000_calculation_formulae from './notes/000_calculation_formulae.ts'
 import notes_001_partition_function_2d_ising from './notes/001_partition_function_2d_ising.ts'
 import notes_002_linear_space_general from './notes/002_linear_space_general.ts'
@@ -62,7 +62,6 @@ export type AllBlocks = [
   ...typeof blocks_000_calculation_formulae_20_29,
   ...typeof blocks_000_calculation_formulae_30_44,
   ...typeof blocks_000_calculation_formulae_45_46,
-  ...typeof blocks_001_partition_function_2d_ising,
   ...typeof blocks_002_linear_space_general,
   ...typeof blocks_003_exp_linear_map,
   ...typeof blocks_004_transfer_matrix,
@@ -82,6 +81,7 @@ export type AllBlocks = [
   ...typeof blocks_018_even_sector_closing,
   ...typeof blocks_020_critical_point,
   ...typeof blocks_chapter_organization,
+  ...typeof blocks_partition_function_transfer_matrix_representation,
 ]
 
 /** 全ノート。 */

@@ -3,9 +3,10 @@
 
 対応する人手証明（正本は `structured-latex/content/*.ts`）:
 
-* `structured-latex/content/004_transfer_matrix.ts`
+* `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   * `transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations`
     — `c_i`, `s_i`, `c_i^*`, `s_i^*` の定義
+* `structured-latex/content/004_transfer_matrix.ts`
   * `transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive`
     （ラベル `indexed_hyperbolic_abbreviations_positive`）
     — `c_i`, `s_i`, `c_i^*`, `s_i^*` の正値性

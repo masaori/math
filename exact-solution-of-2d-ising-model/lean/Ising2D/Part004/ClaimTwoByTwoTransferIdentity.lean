@@ -1,7 +1,7 @@
 /-
 # 2×2 の転送行列の恒等式
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `bridge_005_claim_two_by_two_transfer_identity`（ラベル **`two_by_two_transfer_identity`**）
 

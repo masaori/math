@@ -253,6 +253,7 @@ export const ALL_LABELS = [
   "open_chain_spin_sums_positive",
   "operations_on_polar_representation",
   "partition_function_sandwich",
+  "partition_function_via_pauli_transfer_matrices",
   "partition_function_via_transfer_matrix",
   "pauli_matrix_products",
   "periodicity_of_check_fermi",

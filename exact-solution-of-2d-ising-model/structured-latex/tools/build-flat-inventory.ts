@@ -16,7 +16,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mathematicalToolPartTitle, plannedParts } from "./chapter-plan.ts";
-import { loadContentFiles } from "./content-modules.ts";
+import { loadContentFiles, TRAILING_CONTENT_FILES } from "./content-modules.ts";
 
 const classifications = ["数学的道具立て", "2次元イジングモデル"] as const;
 type Classification = typeof classifications[number];
@@ -85,7 +85,6 @@ const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["calculation_formulae_definition_set_and_algebra_notation", new Map([["definition_of_cc", "既存の複素数定義への案内"]])],
   ["calc_formulae_006_definition_of_cc", new Map([["abs_basic_properties", "後続利用への案内"], ["matrix_exp_series_converges", "後続利用への案内"]])],
   ["freeenergy_002_claim_gamma_is_continuous", new Map([["riemann_sum_to_integral", "後続利用への案内"]])],
-  ["evensector_003_definition_half_integer_modes", new Map([["def_check_index_set", "後続表記への案内"], ["periodicity_of_check_fermi", "後続利用への案内"]])],
   ["evensector_003a_definition_check_index_set", new Map([["anticommutator_of_check_Z_Y", "後続利用への案内"], ["periodicity_of_check_fermi", "後続利用への案内"]])],
   ["evenEigen_004_claim_trace_of_check_number_operator_product", new Map([["check_joint_eigenspace_decomposition", "後続対応への案内"]])],
   // 「二乗が V_1^{(+)} に等しいことは〜で示す」という、直後の主張への案内の一文。定義の中身は exp(iK_1H_1^{(+)}/2) で閉じている。
@@ -98,7 +97,6 @@ const forwardPrerequisiteLabelsById = new Map<string, Set<string>>([
   ["exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms", new Set(["def_hermitian_positive_definite", "def_trace"])],
   ["exp_conjugation_proof_003_definition_M_n_C_convergence", new Set(["def_hermitian_positive_definite", "def_trace"])],
   ["transfer_matrix_001_definition_symbols", new Set(["pauli_matrix_products"])],
-  ["transfer_matrix_000_definition_site_pauli_matrices", new Set(["pauli_matrix_products"])],
   // 行列の積の定義は成分が複素数であることを前提にする。複素数の定義は本文では後ろに置かれているが、
   // 依存順では先行する（提示順と依存順が食い違う箇所であり、案内ではなく前提である）。
   ["calc_formulae_003_matrix_decomposition", new Set(["definition_of_cc"])],
@@ -366,6 +364,36 @@ for (const { block } of allBlocks) for (const label of block.labels) {
   for (const label of ["set_and_algebra_notation", "definition_of_cc", "def_H1_plus", "def_H2"]) requireLabel(label, "記号使用から導く意味的前提");
   if (missing.length > 0) throw new Error(`設定表が存在しない項目・ラベルを指しています:\n${missing.join("\n")}`);
 }
+const titleKey = (title: unknown): string => JSON.stringify(title);
+// 本文の各項目が、いまどの章見出し（level 2 の見出し）の下にあるか。level 1 の見出しで章の区切りは切れる。
+const enclosingChapterHeadingKeyById = new Map<string, string | null>();
+{
+  let currentChapterHeadingKey: string | null = null;
+  for (const { block } of allBlocks) {
+    if (block.kind === "heading" && block.level <= 2) currentChapterHeadingKey = block.level === 2 ? titleKey(block.title) : null;
+    enclosingChapterHeadingKeyById.set(block.id, currentChapterHeadingKey);
+  }
+}
+// 章立ての章の見出しの下に組み直し済みの項目か。組み直しの途中では、組み直した章は番号を持つ旧い章のファイルより
+// 後ろに置かれる（`TRAILING_CONTENT_FILES`）ので、まだ組み直していない旧い章の項目が組み直し済みの章の項目を指すと、
+// 本文の並びでは前方参照になる。これは組み直しの途中にだけ起き、両方を組み直せば消える。
+// 判定は、ブロックが `TRAILING_CONTENT_FILES` のファイルにあり、かつ章立ての章の題の見出しの下にあることで行う。
+// 章立ての章の題の見出しが旧い章のファイルにあれば、題の一致だけでは組み直し済みと区別できないので落とす。
+const plannedChapterTitleKeys = new Set(plannedParts.flatMap((part) => part.chapters.map((chapter) => titleKey(chapter.title))));
+const trailingContentFiles: ReadonlySet<string> = new Set(TRAILING_CONTENT_FILES);
+{
+  const misplaced = allBlocks.filter(({ file, block }) => block.kind === "heading" && block.level === 2
+    && plannedChapterTitleKeys.has(titleKey(block.title)) && !trailingContentFiles.has(file));
+  if (misplaced.length > 0) {
+    throw new Error(`章立ての章の題の見出しが、組み直した章のファイル（TRAILING_CONTENT_FILES）の外にあります: ${
+      misplaced.map(({ file, block }) => `${file}: ${block.id}`).join(", ")}`);
+  }
+}
+const fileById = new Map(allBlocks.map(({ file, block }) => [block.id, file]));
+const isUnderPlannedChapterHeading = (id: string): boolean => {
+  const key = enclosingChapterHeadingKeyById.get(id);
+  return trailingContentFiles.has(fileById.get(id)!) && key !== undefined && key !== null && plannedChapterTitleKeys.has(key);
+};
 const incoming = new Map<string, number>();
 for (const { block } of allBlocks) for (const target of collectTargets(block)) incoming.set(target, (incoming.get(target) ?? 0) + 1);
 
@@ -392,10 +420,16 @@ const baseEntries = targetBlocks.map(({ file, block }) => {
   semanticPrerequisiteLabels.push(...(explicitSemanticPrerequisiteLabelsById.get(block.id) ?? []));
   const rawReferenceLabels = [...new Set([...statementReferenceLabels, ...proofReferenceLabels, ...semanticPrerequisiteLabels])].sort();
   const configuredExclusions = nonPrerequisiteReferenceLabelsById.get(block.id) ?? new Set<string>();
-  const forwardStatementReferenceLabels = statementReferenceLabels.filter((label) => {
+  const documentOrderForwardStatementReferenceLabels = statementReferenceLabels.filter((label) => {
     const ownerId = labelOwners.get(label);
     return ownerId !== undefined && blockPositionById.get(ownerId)! > blockPositionById.get(block.id)!;
   });
+  // 数学的道具立ての項は最終的に本文の先頭に来るので、そこからの前方参照は組み直しが終わっても消えない。除外しない。
+  const interimForwardReferenceLabelsToReorganizedChapters = isUnderPlannedChapterHeading(block.id) || classification === "数学的道具立て"
+    ? []
+    : documentOrderForwardStatementReferenceLabels.filter((label) => isUnderPlannedChapterHeading(labelOwners.get(label)!));
+  const forwardStatementReferenceLabels = documentOrderForwardStatementReferenceLabels
+    .filter((label) => !interimForwardReferenceLabelsToReorganizedChapters.includes(label));
   const navigationReview = forwardNavigationReviewById.get(block.id) ?? new Map<string, string>();
   const forwardPrerequisites = forwardPrerequisiteLabelsById.get(block.id) ?? new Set<string>();
   const reviewedLabels = new Set([...navigationReview.keys(), ...forwardPrerequisites]);
@@ -440,6 +474,8 @@ const baseEntries = targetBlocks.map(({ file, block }) => {
     forwardStatementReferenceLabelsNotUsedAsPrerequisites: reviewedForwardNavigationLabels,
     forwardStatementReferenceLabelsUsedAsPrerequisites: [...forwardPrerequisites].sort(),
     forwardStatementReferenceReview,
+    interimForwardReferenceLabelsToReorganizedChapters,
+    staleForwardReferenceReviewLabels: [...reviewedLabels].filter((label) => !forwardStatementReferenceLabels.includes(label)).sort(),
     blockSplitRequiredBeforeFinalOrdering: forwardStatementReferenceLabels.length > 0 && !forwardReviewMatches,
     futureBlockSplitRecommended: futureBlockSplitRecommendedById.has(block.id),
     presentationPredecessorEntryIds: presentationPredecessorEntryIdsById.get(block.id) ?? [],
@@ -471,12 +507,16 @@ const order = new Map<string, { classificationOrder: number; dependencyUnitEntry
 for (const structure of classificationStructures) for (const unit of structure.topologicalOrder) for (const id of unit.entryIds) {
   order.set(id, { classificationOrder: unit.order, dependencyUnitEntryIds: unit.entryIds });
 }
+const staleForwardReferenceReviews = baseEntries.filter((entry) => entry.staleForwardReferenceReviewLabels.length > 0);
+if (staleForwardReferenceReviews.length > 0) {
+  throw new Error(`前方参照として記録した参照が、本文の並びではもう前方参照ではありません（記録を外す）: ${
+    staleForwardReferenceReviews.map(({ id, staleForwardReferenceReviewLabels }) => `${id} -> ${staleForwardReferenceReviewLabels.join(", ")}`).join("; ")}`);
+}
 const unresolvedBlockSplits = baseEntries.filter((entry) => entry.blockSplitRequiredBeforeFinalOrdering);
 if (unresolvedBlockSplits.length > 0) {
   throw new Error(`未レビューの前方参照が残っています: ${unresolvedBlockSplits.map(({ id }) => id).join(", ")}`);
 }
 
-const titleKey = (title: unknown): string => JSON.stringify(title);
 const plannedChapters = plannedParts.flatMap((part) => part.chapters.map((chapter) => ({ part: part.title, ...chapter })));
 for (const chapter of plannedChapters) {
   const ownerId = labelOwners.get(chapter.organizationGoalLabel);
@@ -534,13 +574,6 @@ const crossChapterNavigationReferences = [...chapterKeyById].flatMap(([id, chapt
     return [{ fromEntryId: id, fromChapterKey: chapterKey, label, toEntryId: targetId, toChapterKey: targetChapter ?? null }];
   }));
 
-// 本文の各項目が、いまどの章見出し（level 2 の見出し）の下にあるか。level 1 の見出しで章の区切りは切れる。
-const enclosingChapterHeadingKeyById = new Map<string, string | null>();
-let currentChapterHeadingKey: string | null = null;
-for (const { block } of allBlocks) {
-  if (block.kind === "heading" && block.level <= 2) currentChapterHeadingKey = block.level === 2 ? titleKey(block.title) : null;
-  enclosingChapterHeadingKeyById.set(block.id, currentChapterHeadingKey);
-}
 function orderByDependencyThenPosition(entryIds: ReadonlySet<string>): string[][] {
   const dependencies = entryOrderingDependencies(entryIds);
   const components = stronglyConnectedComponents([...entryIds], dependencies)

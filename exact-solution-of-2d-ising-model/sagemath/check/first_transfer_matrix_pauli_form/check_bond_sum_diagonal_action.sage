@@ -4,7 +4,7 @@
 #   D f_ι(μ) = Σ_{m<M} μ(m)μ(m+1) f + μ(M)μ(1) f = d(μ) f_ι(μ)      （各行）
 #   D は基底 (f_I) に関して対角で、第 ord(μ) 対角成分は d(μ)
 # 対象ラベル: first_transfer_matrix_pauli_form
-# 対象: structured-latex/content/004_transfer_matrix.ts
+# 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
 #       ブロック transfer_matrix_claim_first_transfer_matrix_pauli_form の proof 前半
 # 帰属: σ^z, D, f はすべて ZZ 成分。厳密計算。
 # ---------------------------------------------------------

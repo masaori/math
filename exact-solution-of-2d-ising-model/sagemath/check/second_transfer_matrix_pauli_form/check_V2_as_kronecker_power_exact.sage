@@ -4,7 +4,7 @@
 #     = (A^{⊠M})_{ν(ι(μ)),ν(ι(μ'))} = (A^{⊠M})_{ord(μ),ord(μ')}
 #   A_{ij} = exp(K_2 ς_i ς_j), ς_1 = +1, ς_2 = -1
 # 対象ラベル: second_transfer_matrix_pauli_form
-# 対象: structured-latex/content/004_transfer_matrix.ts
+# 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
 #       ブロック transfer_matrix_claim_second_transfer_matrix_pauli_form の proof 前半
 # 帰属: exp(K_2 n) を x^n（x = exp(K_2) を不定元とする Laurent 多項式環 ZZ[x, x^{-1}]）で表す。
 #       exp(K_2 n) = exp(K_2)^n（n ∈ ZZ）なので、ここでの等号は任意の K_2 について成り立つ等号と同値。

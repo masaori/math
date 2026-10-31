@@ -4,7 +4,7 @@
 
 **対象ラベル**: `config_numbering_equals_kronecker_numbering` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `transfer_matrix_claim_config_numbering_equals_kronecker_numbering`）
 - 範囲: statement `ord(μ) = ν(ι(μ))` と proof の全段
   （各 `m` で `i_m - 1 = (1-μ(m))/2`、`ν(ι(μ)) = 1 + Σ(i_m-1)2^{M-m} = 1 + Σ (1-μ(m))/2 · 2^{M-m} = ord(μ)`）

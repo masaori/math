@@ -3,7 +3,7 @@
 #   |𝔐| = 2^{M_col}、像が {1,…,2^{M_col}} 全体、値の重複なし。
 #   さらに 2 進展開による逆写像 ord_inverse と互いに逆であることも確かめる。
 # 対象ラベル: row_configuration_numbering_bijective
-# 対象: 001_partition_function_2d_ising.ts の同ブロック statement と「中間目標: 全単射性」
+# 対象: partition_function_transfer_matrix_representation.ts の同ブロック statement と「中間目標: 全単射性」
 # 帰属: ZZ。厳密計算。
 # ---------------------------------------------------------
 import os

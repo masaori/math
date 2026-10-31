@@ -1,7 +1,7 @@
 /-
 # 転送行列 `V_1, V_2`（成分による唯一の定義）
 
-対応する人手証明（正本は `structured-latex/content/001_partition_function_2d_ising.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `partition_function_2d_ising_003_definition_transfer_matrix`（ラベル **`def_transfer_matrix`**）
 

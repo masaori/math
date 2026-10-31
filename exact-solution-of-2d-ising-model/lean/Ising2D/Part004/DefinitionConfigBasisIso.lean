@@ -1,7 +1,7 @@
 /-
 # スピン配置から多重添字への写像 `ι`
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `bridge_001_definition_config_basis`（ラベル **`def_config_basis_iso`**）
 

@@ -1,7 +1,7 @@
 /-
 # `σ^z_m` の基底 `f_{ι(μ)}` への作用（対角性）
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `bridge_002_claim_sigma_z_diagonal_action`（ラベル **`sigma_z_diagonal_action`**）
 

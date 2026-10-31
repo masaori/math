@@ -2,6 +2,24 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の最初の章「転送行列による表示」を組み直した。
+  棚卸しでこの章に割り当てた 21 項を、`001_partition_function_2d_ising.ts`（全 7 項）と `004_transfer_matrix.ts`（14 項）から
+  新しいファイル `content/partition_function_transfer_matrix_representation.ts` の部見出し「分配関数」・章見出し「転送行列による表示」の下へ、
+  章の中の依存順で移した。ブロックの本文・id・ラベルは変えていない（旧版と機械比較で一致）。見出しだけが残った 001 のファイルは消した。
+  - **章末のゴールの主張を足した。** 章立てのゴールの式（$Z=\mathrm{tr}((V_1V_2)^N)$ と $V_1,V_2$ のパウリ行列表示）を、代入した一本の等式として
+    主張する claim `partition_function_via_pauli_transfer_matrices` を章の最後に置いた。証明は既存の三主張の代入だけである。
+    SageMath（`sagemath/check/partition_function_via_pauli_transfer_matrices/`、36 組を `AA` で厳密に一致）と Lean
+    （`lean/Ising2D/Part004/ClaimPartitionFunctionViaPauliTransferMatrices.lean`、三つの書き換え）を足した。
+    `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式も同じ一本の式に揃えた。
+    章の項目数は 22（割り当て 21 とゴールの主張 1。章立て案は 20）。
+  - **組み直した章は本文の末尾に置く。** 番号を持つ旧い章のファイルには数学的道具立てが散らばっており、組み直した章はそれを使うので、
+    `tools/content-modules.ts` に `TRAILING_CONTENT_FILES` を足し、組み直した章のファイルを宣言の順に末尾へ置く。章を組み直すたびにここへ足す。
+  - **組み直し途中の前方参照を区別した。** まだ組み直していない旧い章のイジング側の項が、組み直し済みの章の項を statement で指すと、
+    本文の並びでは前方参照になる（いま 18 項）。棚卸しの生成器は、参照元が組み直した章のファイルの章見出しの下に無く、
+    参照先がその下にあり、参照元がイジング側のものだけをこの種類として除外し、各項目の `interimForwardReferenceLabelsToReorganizedChapters` に出す。
+    組み直した章の中・組み直した章どうし・数学的道具立てからの前方参照は従来どおり落ちる。あわせて、もう前方参照でない記録を落とす検査を足し、
+    古い記録 2 件（`evensector_003_definition_half_integer_modes` の案内 2 本、`transfer_matrix_000_definition_site_pauli_matrices` の前提 1 本）を外した。
+  - Lean・SageMath の注記のファイル名を新しいファイルへ直した。別のエージェントのレビューを経た。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の三番目の項目を済ませた。
   章立て案の機械可読版 `structured-latex/tools/chapter-plan.ts`（部・章の題、各章のゴールの式を構成するブロックのラベル、章立て案の項目数）を置き、
   `tools/build-flat-inventory.ts` を書き直した。章の順に、各章のゴールのブロックから依存閉包を取り、まだどの章にも入っていない
@@ -1124,12 +1142,16 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の最初の章：「転送行列による表示」の章に割り当てた 21 項（棚卸し `parts` の最初の章の `dependencyOrder`）を、
-章立ての題の見出しの下へ章内の依存順で移し、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の二番目の章：「$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示」の章に割り当てた 27 項
+（棚卸し `parts` の最初の部の二番目の章の `dependencyOrder`）を、新しいファイルの部「分配関数」の下の章見出しへ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の「転送行列による表示」のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 
 - 章ごとの組み直し（作業の順序の四番目）で扱うこと:
+  - 組み直しの途中は、組み直した章が本文の末尾に来るので、公開する本文では部「分配関数」が臨界点の章より後ろにあり、旧い章（004 以降）が
+    末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。
+    残ったファイルに部見出し「数学的道具立て」を置くのは、全章を組み直した後（作業の順序の六番目まで）に行う。
   - $M\to\infty$ の章のゴールの式の $\Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M$ を主張するブロックが無い（`onsager_exact_solution` の証明の中にだけある）。
   - 後ろの章を指す案内の参照が 3 本ある（棚卸しの `crossChapterNavigationReferences`。$V_1^{(+)}$ の平方根の定義 → 平方根性、
     $\check{\mathcal M}$ の定義 → $\check Z,\check Y$ の反交換関係・$\check\psi$ の周期性）。組み直した本文で前方参照にならない書き方へ直す。

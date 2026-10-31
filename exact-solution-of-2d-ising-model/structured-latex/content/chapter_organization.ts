@@ -119,10 +119,10 @@ export default defineBlocks([
     title: { text: "転送行列による表示" },
     labels: ["chapter_organization_goal_transfer_matrix_representation"],
     statement: [
-      paragraph(["この章のゴールの式は次である。"]),
-      displayMath(String.raw`Z=\mathrm{tr}\left((V_1V_2)^{N}\right),\qquad
-V_1=\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right),\qquad
-V_2=(2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)`),
+      paragraph(["この章のゴールの式は次である（転送行列 ", math(String.raw`V_1, V_2`), " による表示 ",
+        math(String.raw`Z=\mathrm{tr}\left((V_1V_2)^{N}\right)`), " に、", math(String.raw`V_1, V_2`), " の Pauli 行列による表示を代入した式）。"]),
+      displayMath(String.raw`Z=\mathrm{tr}\left(\left(\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right)
+(2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)\right)^{N}\right)`),
     ],
   },
   {

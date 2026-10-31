@@ -1,5 +1,5 @@
 # ---------------------------------------------------------
-# 共通: 分配関数の章の成分定義の転送行列（<def_transfer_matrix>）と、
+# 共通: 転送行列による表示の章の成分定義の転送行列（<def_transfer_matrix>）と、
 #       転送行列の章のパウリ行列表示（<first_transfer_matrix_pauli_form>, <second_transfer_matrix_pauli_form>）
 #
 # 記号（本文に合わせる）:

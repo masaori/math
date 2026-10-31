@@ -4,7 +4,7 @@
 
 **対象ラベル**: `row_configuration_numbering_bijective` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/001_partition_function_2d_ising.ts`
+- ファイル: `structured-latex/content/partition_function_transfer_matrix_representation.ts`
   （ブロック `partition_function_2d_ising_claim_row_configuration_numbering_bijective`）
 - 範囲: statement（`ord : 𝔐 → {1,…,2^{M_col}}` は全単射）と proof の全段
   （準備の等比和・値域・単射性の評価・全単射性）

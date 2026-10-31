@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # SageMath: 証明の準備 Σ_{t=0}^{n-1} 2^t = 2^n - 1 と、その帰納法の各段
 # 対象ラベル: row_configuration_numbering_bijective
-# 対象: structured-latex/content/001_partition_function_2d_ising.ts
+# 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
 #       ブロック partition_function_2d_ising_claim_row_configuration_numbering_bijective の「準備」
 # 帰属: n ∈ Z_{≥0}、各項は ZZ。厳密計算。
 # ---------------------------------------------------------

@@ -1,7 +1,7 @@
 /-
 # 1 行ぶんのスピン配置の全体 `𝔐`
 
-対応する人手証明（正本は `structured-latex/content/001_partition_function_2d_ising.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `partition_function_2d_ising_definition_row_configurations`（ラベル **`def_row_configurations`**）
 

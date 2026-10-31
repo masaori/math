@@ -1,7 +1,7 @@
 /-
 # 第二の双対結合定数 `K_2^*`
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `transfer_matrix_000k_definition_second_dual_coupling_constant`
   （ラベル **`def_second_dual_coupling_constant`**）

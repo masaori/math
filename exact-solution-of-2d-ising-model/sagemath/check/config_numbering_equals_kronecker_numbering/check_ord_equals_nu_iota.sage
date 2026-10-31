@@ -3,7 +3,7 @@
 #   各 m で i_m - 1 = (1-μ(m))/2
 #   ν(ι(μ)) = 1 + Σ (i_m-1) 2^{M-m} = 1 + Σ (1-μ(m))/2 · 2^{M-m} = ord(μ)
 # 対象ラベル: config_numbering_equals_kronecker_numbering
-# 対象: structured-latex/content/004_transfer_matrix.ts
+# 対象: structured-latex/content/partition_function_transfer_matrix_representation.ts
 #       ブロック transfer_matrix_claim_config_numbering_equals_kronecker_numbering
 # 帰属: ZZ / QQ（(1-μ(m))/2 を QQ で計算）。全 μ について厳密計算。
 # ---------------------------------------------------------

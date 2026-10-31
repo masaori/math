@@ -1,7 +1,7 @@
 /-
 # `V_2` のパウリ行列表示
 
-対応する人手証明（正本は `structured-latex/content/004_transfer_matrix.ts`）:
+対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
 * `transfer_matrix_definition_second_transfer_matrix_prefactor`
   （ラベル **`def_second_transfer_matrix_prefactor`**）:
