@@ -87,7 +87,7 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-! ## 巡回する site 添字 -/
+/-! ## site 添字の巡回と端点 -/
 
 /-- 原文の `m ↦ m + 1`（`m = M` のときは `1` へ巻き戻る）。
 Lean の `Fin M` は `0` 始まりなので、`(m : ℕ) + 1` を `M` で割った余りをとる。 -/
@@ -100,6 +100,13 @@ theorem nextSite_val_of_lt {m : Fin M} (h : (m : ℕ) + 1 < M) :
 theorem nextSite_val_of_last {m : Fin M} (h : (m : ℕ) + 1 = M) :
     ((nextSite m : Fin M) : ℕ) = 0 := by
   simp [nextSite, ← h]
+
+/-- 原文の site 添字 `1`（Lean の `Fin M` では `0`）。 -/
+def firstSite (M : ℕ) (hM : M ≠ 0) : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
+
+/-- 原文の site 添字 `M`（Lean の `Fin M` では `M - 1`）。 -/
+def lastSite (M : ℕ) (hM : M ≠ 0) : Fin M :=
+  ⟨M - 1, Nat.sub_lt (Nat.pos_of_ne_zero hM) Nat.one_pos⟩
 
 /-- `H_1^{(+)}` の最終項の係数 `-1` を一般の `η` にしたもの（`(+)` は `η = -1`）。
 Lean の添字は 0 始まりなので、原文の `m = M` は `(m : ℕ) + 1 = M`。 -/

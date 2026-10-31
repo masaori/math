@@ -10,13 +10,12 @@
 
 Lean のサイト添字は 0 始まりなので、人手の `m ∈ {1,…,M_col-1}` は `(m : ℕ) + 1 ≠ M` なる `m : Fin M`、
 人手の `m+1` はその範囲で `nextSite m`（値は `m + 1`。`nextSite_val_of_lt`）である。
-人手のサイト `1` と `M_col` は `Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`。
+人手のサイト `1` と `M_col` は `Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2` の `firstSite`・`lastSite`。
 
 人手は両定義で `M_col ∈ ℤ_{≥2}` を置くが、`D_0` は仮定なしで、`G` はサイト `1` と `M_col` が在ること
 （`M ≠ 0`）だけで定まるので、Lean の仮定はそれだけにする。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon
-import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 
 namespace Ising2D
 

@@ -256,6 +256,18 @@
     `ClaimAnticommutatorCheckZY.lean` は推移的にはまだ `RoutesNotAdopted/` を import している（`ReductionToATheta/DefinitionHalfIntegerModes.lean` が `ClaimH1H2ViaHatZHatY` を、
     `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` が `DefinitionHatZHatY` を直接 import する）。
 
+  - ゴールラインの確認の三つ目（済み、2026-10-31）: `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite` を判定した。人手のサイト添字 `1`・`M_col` を `Fin M` の `0`・`M-1` で表すだけの補助定義で、
+    整数運動量の経路の主張には依らない（使うのは本文の `def_D0_open_chain_operator`・`def_G_boundary_operator` の形式化など）。
+    巡回添字 `nextSite` と同じ `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` の節「site 添字の巡回と端点」へ移した（名前空間・定義は不変）。
+    本文の `EigenvectorOfMaxEigenvalue/DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimOpenChainSpinSums.lean` から `ClaimCommutatorHAndHatZHatY` の import を外した。レビューで指摘なし。
+    同じメタプログラムで数え直すと、通しの定理が使う `RoutesNotAdopted/IntegerMomentum/` の公開の定数は次の 20 個（ほかに非公開の補助 `neg_mul_V1pmHalf`）で、`ClaimH1H2ViaHatZHatY` の `H1` はもう使われていない:
+    `ClaimConstantCAndEigenvaluesOfV` の 8 個（`VmatInv`・`VmatInv_mul_Vmat`・`Vmat_eq_smul`・`matExp_neg_mul`・`tauTrace`・`trace_Vmat`・`trace_VmatInv`・`trace_exp_neg_eq_tau`）、
+    `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 個、`ClaimTVActionsOnHatZHatY` の 4 個、`DefinitionFermiPsi` の 3 個、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`。
+    本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは次の 9 本である: `ReductionToATheta/ClaimTActionsOnCheck`・`ReductionToATheta/DefinitionHalfIntegerModes`・
+    `EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite`・`DiagonalizationAndExponentialForm/DefinitionGamma1Gamma2OfThetaTilde`・
+    `DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi`・`DiagonalizationAndExponentialForm/DefinitionCheckFermi`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・
+    `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY` を import）。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -263,7 +275,9 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 上の残りの `RoutesNotAdopted/IntegerMomentum/` の定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
-  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数は済み。次は `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`）。
+  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数と `ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite` は済み。次は `ClaimConstantCAndEigenvaluesOfV` の 8 定数と非公開の `neg_mul_V1pmHalf`。
+  名前で使っている本文のファイルは `EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean`・`EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean`）。
+  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 9 本）は、ファイルごとに import を外せるかを確かめる。
 
 この後に残る確認:
 

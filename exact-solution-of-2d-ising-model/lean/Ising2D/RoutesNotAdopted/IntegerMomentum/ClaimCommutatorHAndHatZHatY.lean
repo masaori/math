@@ -67,14 +67,8 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-! ## site 添字 `1` と `M` -/
-
-/-- 原文の site 添字 `1`（Lean の `Fin M` では `0`）。 -/
-def firstSite (M : ℕ) (hM : M ≠ 0) : Fin M := ⟨0, Nat.pos_of_ne_zero hM⟩
-
-/-- 原文の site 添字 `M`（Lean の `Fin M` では `M - 1`）。 -/
-def lastSite (M : ℕ) (hM : M ≠ 0) : Fin M :=
-  ⟨M - 1, Nat.sub_lt (Nat.pos_of_ne_zero hM) Nat.one_pos⟩
+/-! site 添字 `1` と `M` の `firstSite`・`lastSite` は
+`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` にある。 -/
 
 /-! ## 補助: `δ^M` と位相因子 -/
 
