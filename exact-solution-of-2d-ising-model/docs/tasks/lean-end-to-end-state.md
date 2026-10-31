@@ -307,6 +307,14 @@
     `DefinitionFermiPsi` の 3 個（`sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`）、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`（ほかに `lastSite.eq_1`・`H1.eq_1` と `sqrtM` の等式補題・simp 補題）。
     本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 5 本である（`ReductionToATheta/DefinitionHalfIntegerModes`・`DiagonalizationAndExponentialForm/DefinitionCheckFermi`・`EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`）。
 
+  - ゴールラインの確認の七つ目（済み、2026-10-31）: `DefinitionFermiPsi` の 3 定数（`sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`）を判定した。`√M`（`M ∈ ℕ`）を ℂ の元として置くだけの、運動量の取り方に依らない補助で、
+    本文では人手 `def_check_fermi` の係数 `-r/(2√M b)`・`1/(2√M)` の分母に使う。定義・主張・証明を変えずに本文 `DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean` の `checkP`・`checkQ` の直前へ移し、退避先はそこから使うようにした。
+    `DefinitionCheckFermi.lean` から `RoutesNotAdopted/` の import を外し、それまで退避先を通して届いていた `gamma1`・`gamma2`（`ReductionToATheta/DefinitionThetaGamma`）と、`ClaimCommutationVPlusCheckPsi.lean` が使う `ActsBy`（数学的道具立て `DefinitionTgAndTV`）を直接 import した。
+    `check-no-sorry.sh` の対象 3 件を本文の `ψ̌` の区切りへ移した（対象の数は 1628 件のまま）。レビューで指摘なし。
+    同じメタプログラムで数え直すと、通しの定理が使う `RoutesNotAdopted/IntegerMomentum/` の公開の定数は `DefinitionNumberOperator` の `tensorPow_two_torsion_free` 1 個である（ほかに `lastSite.eq_1`・`H1.eq_1` の等式補題）。
+    本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 4 本である（`ReductionToATheta/DefinitionHalfIntegerModes`・`EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`）。
+    `DefinitionCheckFermi.lean` は `ClaimRecoverZYFromCheckZY` を通して、間接にはまだ `DefinitionHatZHatY`・`ClaimH1H2ViaHatZHatY` を読み込む。直接の 4 本を外せば、間接の読み込みも消える見込みだが、消えたかは外した後に推移的な import で確かめる。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -315,9 +323,9 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
   1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数、
-  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数、`ClaimTVActionsOnHatZHatY` の 4 定数は済み。次は `DefinitionFermiPsi` の 3 定数 `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`。
+  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数、`ClaimTVActionsOnHatZHatY` の 4 定数、`DefinitionFermiPsi` の 3 定数は済み。次は最後の `DefinitionNumberOperator` の `tensorPow_two_torsion_free`。
   使っている本文のファイルは `grep` で特定する）。
-  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 5 本）は、ファイルごとに import を外せるかを確かめる。
+  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 4 本）は、ファイルごとに import を外せるかを確かめ、最後に本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
 
 この後に残る確認:
 
@@ -332,4 +340,5 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
 - 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
+- `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。

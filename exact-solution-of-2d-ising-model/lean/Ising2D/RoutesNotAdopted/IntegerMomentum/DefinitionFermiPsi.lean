@@ -76,6 +76,7 @@
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorHatZHatY
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimEigenvectorsAndDiagonalizationOfATheta
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Mathlib.Tactic.Module
 
 namespace Ising2D
@@ -113,19 +114,7 @@ theorem acomm_hatZMinus_hatY_lin2 {M : ℕ} (hM : M ≠ 0) (a b c d : ℂ) (μ �
   rw [acomm_lin2, h1, h2, h3, h4, smul_zero, smul_zero, smul_smul, smul_smul]
   module
 
-/-! ## `√M` -/
-
-/-- 原文の `√M`（`M ∈ ℕ`）を ℂ の元として。 -/
-noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
-
-theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
-  simp only [sqrtM, ne_eq, Complex.ofReal_eq_zero]
-  exact Real.sqrt_ne_zero'.2 (by exact_mod_cast Nat.pos_of_ne_zero hM)
-
-@[simp]
-theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) := by
-  have : Real.sqrt M ^ 2 = (M : ℝ) := Real.sq_sqrt (by positivity)
-  simp only [sqrtM, ← Complex.ofReal_pow, this, Complex.ofReal_natCast]
+/-! `√M` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq` は本文の `EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean` にある。 -/
 
 /-! ## `ψ_μ`, `ψ_μ^†` の定義（原文 `def_fermi`） -/
 

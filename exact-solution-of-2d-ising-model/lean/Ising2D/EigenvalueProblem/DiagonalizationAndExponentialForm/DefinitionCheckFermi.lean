@@ -30,7 +30,7 @@
   **015 章がこれを無条件に閉じれば、本章の仮定はそのまま消える。**
   （`γ_2(-θ̃_μ) ≠ 0` は `gamma2_neg_eq_zero_iff` から従うので別に仮定しない。）
 -/
-import Ising2D.RoutesNotAdopted.IntegerMomentum.DefinitionFermiPsi
+import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionThetaGamma
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRecoverZYFromCheckZY
 
@@ -131,6 +131,22 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
     checkR K M ((M : ℤ) + 1 - μ) = checkR K M μ := by
   rw [checkR, checkR, gamma2_thetaTilde_conj K hM, gamma2_neg_eq_neg_conj,
     Complex.normSq_neg, Complex.normSq_conj]
+
+/-! ## `√M`（原文 `def_check_fermi` の係数の分母） -/
+
+/-- 原文 `def_check_fermi` の `√M`（`M ∈ ℕ` の実数の平方根）を ℂ の元として。 -/
+noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
+
+/-- `M ≠ 0` のとき `√M ≠ 0`（`def_check_fermi` の係数の分母が 0 でないこと）。 -/
+theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
+  simp only [sqrtM, ne_eq, Complex.ofReal_eq_zero]
+  exact Real.sqrt_ne_zero'.2 (by exact_mod_cast Nat.pos_of_ne_zero hM)
+
+/-- `(√M)^2 = M`。 -/
+@[simp]
+theorem sqrtM_sq (M : ℕ) : sqrtM M ^ 2 = (M : ℂ) := by
+  have : Real.sqrt M ^ 2 = (M : ℝ) := Real.sq_sqrt (by positivity)
+  simp only [sqrtM, ← Complex.ofReal_pow, this, Complex.ofReal_natCast]
 
 /-! ## `ψ̌_μ^†`, `ψ̌_μ` の定義（原文 `def_check_fermi`） -/
 

@@ -575,7 +575,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv` | 上を `θ_μ`, `√M = Real.sqrt M`, `M ≠ 0` で具体化した版 | 同上 |
 | `Ising2D.acomm_lin2` | 反交換子の双線型性（2 元の線型結合どうし） | `anticommutator_of_psi` の「双線型性より」 |
 | `Ising2D.acomm_hatZMinus_hatY_lin2` | `hat(Z)^{(-)}, hat(Y)` の線型結合どうしの反交換子 | 同上（4 つの反交換関係を代入した形） |
-| `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として | `def_fermi` の正規化因子 |
+| `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として（定義は本文の `EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean` にあり、ここから使う） | `def_fermi` の正規化因子 |
 | `Ising2D.psiDag` / `Ising2D.psi` | `ψ_μ^†`, `ψ_μ`（`P_μ` の第 0 列・第 1 列） | `def_fermi` |
 | `Ising2D.psiDag_eq` / `psi_eq` | 原文の「すなわち」の明示式と一致すること | `def_fermi` の検算 |
 | `Ising2D.t_ne_zero` | `γ_2(θ) ≠ 0` なら `t ≠ 0`（`t^2 = γ_2(θ)γ_2(-θ)`） | `anticommutator_of_psi`（原文は暗黙） |

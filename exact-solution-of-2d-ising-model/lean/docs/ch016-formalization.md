@@ -24,6 +24,7 @@
 | `Ising2D.checkR` | `r_μ := \|γ_2(θ̃_μ)\|` | `def_check_fermi` の係数 |
 | `Ising2D.checkR_sq` | `(r_μ:ℂ)^2 = -(γ_2(θ̃_μ)γ_2(-θ̃_μ))`（**無条件**） | 同（分枝が要らないことの核） |
 | `Ising2D.checkR_conj` | `r_{M+1-μ} = r_μ`（絶対値の計算だけ） | `anticommutator_of_check_psi` Step 1 |
+| `Ising2D.sqrtM` / `sqrtM_ne_zero` / `sqrtM_sq` | `√M`（`M ∈ ℕ`）を ℂ の元として、`M ≠ 0` なら `√M ≠ 0`、`(√M)^2 = M` | `def_check_fermi` の係数の分母 |
 | `Ising2D.checkPsiDag` / `Ising2D.checkPsi` | `ψ̌_μ^†`, `ψ̌_μ` | **`def_check_fermi`** |
 | `Ising2D.checkPsiDag_eq` / `checkPsi_eq` | 原文の「すなわち」の明示式との一致 | 同（検算） |
 | `Ising2D.checkP_mul_checkP_conj` | `p_μ p_{M+1-μ} = -1/(4M)` | `anticommutator_of_check_psi` Step 1 |

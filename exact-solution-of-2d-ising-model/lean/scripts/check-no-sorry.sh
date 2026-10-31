@@ -770,6 +770,9 @@ targets=(
   Ising2D.gamma2_neg_thetaTilde_conj
   Ising2D.checkR_sq
   Ising2D.checkR_conj
+  Ising2D.sqrtM
+  Ising2D.sqrtM_ne_zero
+  Ising2D.sqrtM_sq
   Ising2D.checkPsiDag_eq
   Ising2D.checkPsi_eq
   Ising2D.checkPsi_car
@@ -1489,9 +1492,6 @@ targets=(
   Ising2D.AMat_thetaMu_eq_Pmat_mul_Dmat_mul_inv
   Ising2D.acomm_lin2
   Ising2D.acomm_hatZMinus_hatY_lin2
-  Ising2D.sqrtM
-  Ising2D.sqrtM_ne_zero
-  Ising2D.sqrtM_sq
   Ising2D.psiDag
   Ising2D.psi
   Ising2D.psiDag_eq
