@@ -24,7 +24,13 @@ export default defineBlocks([
       ]),
       list([
         ["数学的道具立て"],
-        ["分配関数：転送行列による表示、射影と Jordan–Wigner 表示"],
+        [
+          "分配関数：転送行列による表示、",
+          math(String.raw`\varepsilon`),
+          " の固有値 ",
+          math(String.raw`+1`),
+          " の固有空間への射影と Jordan–Wigner 表示",
+        ],
         [
           "固有値問題：離散 Fourier 変換による ",
           math(String.raw`2\times2`),
@@ -90,7 +96,7 @@ V_2=(2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)`),
   {
     id: "chapter_organization_remark_goal_projection_and_jordan_wigner",
     kind: "remark",
-    title: { text: "射影と Jordan–Wigner 表示" },
+    title: { tex: String.raw`\varepsilon \text{ の固有値 } +1 \text{ の固有空間への射影と Jordan–Wigner 表示}` },
     labels: ["chapter_organization_goal_projection_and_jordan_wigner"],
     statement: [
       paragraph(["この章のゴールの式は次である。"]),
@@ -263,7 +269,11 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
       paragraph([
         "章どうしの依存を",
         ref("figure_chapter_dependencies"),
-        "に示す。射影と Jordan–Wigner 表示の章のあとで、流れは二つに分かれる。一つは固有値問題の四章であり、もう一つは ",
+        "に示す。",
+        math(String.raw`\varepsilon`),
+        " の固有値 ",
+        math(String.raw`+1`),
+        " の固有空間への射影と Jordan–Wigner 表示の章のあとで、流れは二つに分かれる。一つは固有値問題の四章であり、もう一つは ",
         math(String.raw`N\to\infty`),
         " の極限の章である。二つの流れは ",
         math(String.raw`M\to\infty`),
@@ -293,7 +303,7 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
           },
           {
             id: "projectionAndJordanWigner",
-            title: ["射影と Jordan–Wigner 表示"],
+            title: [math(String.raw`\varepsilon`), " の固有値 ", math(String.raw`+1`), " の固有空間への射影と Jordan–Wigner 表示"],
             group: "partitionFunction",
             column: 0,
             row: 1,

@@ -2,7 +2,7 @@
 
 2026-10-31 の代表の依頼（Slack）による案である。代表が示した次の構成に、数学的道具立てを先に置いて章を並べる。
 
-- 分配関数：転送行列による表示、射影と Jordan–Wigner 表示
+- 分配関数：転送行列による表示、$`\varepsilon`$ の固有値 $`+1`$ の固有空間への射影と Jordan–Wigner 表示
 - 固有値問題：離散 Fourier 変換、対角化と指数表示、$`V^{(+)}`$ の固有値、最大固有値に属する固有ベクトル
 - 熱力学極限：最大固有値、閉形式
 - 臨界点
@@ -49,7 +49,7 @@ V_1=\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right),\qquad
 V_2=(2\sinh 2K_2)^{M/2}\exp\left(K_2^*\sum_{m=1}^{M}\sigma^x_m\right)
 ```
 
-#### 射影と Jordan–Wigner 表示
+#### $`\varepsilon`$ の固有値 $`+1`$ の固有空間への射影と Jordan–Wigner 表示
 
 - 項目数: 27
 - 主な中身: 004 の Jordan–Wigner 行列族・$`\varepsilon`$・$`H_1^{(+)},H_2`$、009、010
@@ -204,7 +204,7 @@ c_+(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathcal F^{(+)}\cap\mathbb R^{2^M},\
 flowchart TD
   subgraph partition["分配関数"]
     trace["転送行列による表示"]
-    proj["射影と Jordan–Wigner 表示"]
+    proj["ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示"]
   end
   subgraph eigenproblem["固有値問題"]
     fourier["離散 Fourier 変換による 2×2 行列 A(θ̃) への帰着"]
@@ -234,7 +234,7 @@ flowchart TD
 図から読めること:
 
 - 後ろの章から前の章への依存は無い。並びのとおりに読めば、前方参照は起きない。
-- 射影と Jordan–Wigner 表示の章のあとで流れが二つに分かれる。固有値問題の四章と、$`N\to\infty`$ の極限の章である。
+- $`\varepsilon`$ の固有値 $`+1`$ の固有空間への射影と Jordan–Wigner 表示の章のあとで流れが二つに分かれる。固有値問題の四章と、$`N\to\infty`$ の極限の章である。
   二つの流れは $`M\to\infty`$ の極限の章で合流する。
 
 ### 振り分けの決め方

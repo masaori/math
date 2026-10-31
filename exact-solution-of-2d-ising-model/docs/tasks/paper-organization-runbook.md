@@ -5,7 +5,7 @@
 2026-10-31 に代表が承認した章立て（[six-chapter-organization-proposal.md](six-chapter-organization-proposal.md)。
 以下「章立て案」）のとおりに、複素行列版の本文 `structured-latex/content/` を組み直す。次がすべて成り立てば完了である。
 
-- 本文の並びが、数学的道具立て → 分配関数（転送行列による表示、射影と Jordan–Wigner 表示）→
+- 本文の並びが、数学的道具立て → 分配関数（転送行列による表示、$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示）→
   固有値問題（離散 Fourier 変換による $2\times2$ 行列への帰着、対角化と $V^{(+)}$ の指数表示、$V^{(+)}$ の固有値、
   $V^{(+)}$ の最大固有値に属する固有ベクトル）→ 熱力学極限（$N\to\infty$ の極限と最大固有値、$M\to\infty$ の極限と閉形式）→
   臨界点、の部・章になっている。本文の部・章の見出しは章立て案の題と一致する。
