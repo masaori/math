@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 4（`tr(εV^{(+)}) > 0`）を四つに割り、最初の一つとして人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`（`iH_1^{(+)} = D_0 + εG`）を `lean/Ising2D/Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean` で形式化した。次は `ε, D_0, G` の可換性・`(εG)^2 = I`・対角作用（状態台帳の「次の一歩」）。
+
 2026-10-31: Lean の通しの証明の項目 3 を終えた。具体的な `W` と `vPlusDataOf` の `V^{(+)}` についての `EvenSectorBridge` を `lean/Ising2D/Part018/PhysicalEvenSectorBridge.lean` の `physicalEvenSectorBridge` で構成し（章 011 側に `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef` を足した）、最終定理 `onsager_exact_solution_unconditional` の入力から `bridge` と `hW` を外した。残る仮定は `htr`（項目 4）と `hWpos`・`hWcomm`（項目 5）。次は項目 4（状態台帳の「次の一歩」）。
 
 2026-10-31: 章立ての組み直しの四番目の項目の二番目の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」を組み直した。27 項を `structured-latex/content/partition_function_projection_and_jordan_wigner.ts` へ依存順で移し（本文不変、010 は削除）、平方根性の主張を定義の直後へ先行して置き、章末にゴールの主張 `symmetrized_transfer_matrix_on_sector_exponential_form`（SageMath・Lean つき）を足した。次は固有値問題の部の最初の章「離散 Fourier 変換による A(θ̃_μ) への帰着」。

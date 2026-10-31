@@ -220,6 +220,8 @@ import Ising2D.Part018.ClaimVPlusRealEntries
 import Ising2D.NecSuf.EvenSectorAgreement
 import Ising2D.Part018.ClaimWEqVPlusOnEvenSector
 import Ising2D.Part018.PhysicalEvenSectorBridge
+import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
+import Ising2D.Part018.ClaimH1PlusInSigmaZForm
 import Ising2D.Part018.Theorem013_OnsagerUnconditional
 import Ising2D.Part020.Theorem012_SpecificHeatLogDivergence
 import Ising2D.NecSuf.JointEigenspaceDecomposition

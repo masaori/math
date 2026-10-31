@@ -20,8 +20,18 @@
 - `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
 - 最終定理 `onsager_exact_solution_unconditional` に残る仮定は `In m hm : EvenSectorClosureInput P m`（`2 ≤ m`）の中身だけである。
   - `hM : m ≠ 0`（`2 ≤ m` から従う。`htr` の型が `vPlusDataOf P hM _` を含むので欄に残っている）
-  - `htr`: `tr(εV^{(+)}) > 0`（項目 4）
+  - `htr`: `tr(εV^{(+)}) > 0`（項目 4。4d で消える）
   - `hWpos`: 具体的な `W` の成分の正値性、`hWcomm`: `ε` と具体的な `W` の可換性（項目 5）
+- 項目 4 は次の四つに割った。
+  - 4a（済み）: 人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`
+    （`iH_1^{(+)} = D_0 + εG`）を `Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`Part018/ClaimH1PlusInSigmaZForm.lean` で形式化した
+    （`openChainD0`・`boundaryG`・`H1_plus_in_sigma_z_form`）。
+  - 4b: 人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`（`ε, D_0, G` の可換性、`(εG)^2 = I`、
+    配置基底の上での `D_0, G` の対角作用）。
+  - 4c: 人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`
+    （1 次元開鎖の二つのスピン和と正値性）。
+  - 4d: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
+    証明し、`EvenSectorClosureInput` から `htr` を外す。
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
   挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
   通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
@@ -31,9 +41,6 @@
 
 ## 次の一歩
 
-項目 4：`htr`（`tr(εV^{(+)}) > 0`、人手 `trace_of_epsilon_V_plus`）を具体版で証明する。
-`Part018/Theorem007_MaxEigenvectorEvenSector.lean` には人手 `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・
-`open_chain_spin_sums_positive`・`def_open_chain_spin_energy`・`H1_plus_in_sigma_z_form` のラベルが既に現れ、
-`def_D0_open_chain_operator`・`def_G_boundary_operator`・`epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・
-`D0_G_diagonal_action` は Lean に現れない。まずこの既存の形式化が `vPlusDataOf` の `V^{(+)}` についての主張かを確かめ、
-足りない人手ブロックを補題の単位で割り直してこの欄に書き、先頭の一つだけを行う。
+項目 4b：人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` を具体版で形式化する。
+`ε σ^z_k = -σ^z_k ε` は `Part010/Claim010_EpsilonCommutes.lean`、`σ^z` の対角作用は `Part004/ClaimSigmaZDiagonalAction.lean`
+（`sigmaZ_mul_sigmaZ_eq_diagonal`）、`ε^2 = I` は `epsilon_sq` にある。大きければ「可換性と `(εG)^2 = I`」と「対角作用」に割り、前者だけを行う。

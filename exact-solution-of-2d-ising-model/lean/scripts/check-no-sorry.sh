@@ -1478,6 +1478,17 @@ targets=(
   Ising2D.physicalSymTransferR_nonneg
   Ising2D.physicalEvenSectorBridge
   Ising2D.physicalEvenSectorBridge_W
+  Ising2D.openChainD0
+  Ising2D.boundaryG
+  Ising2D.nextSite_lastSite
+  Ising2D.pauliX_mul_pauliZ_eq
+  Ising2D.I_smul_Y_mul_Z_next_of_not_last
+  Ising2D.boundaryYXYFamily
+  Ising2D.Y_last_mul_Z_first
+  Ising2D.epsilon_mul_sigmaZ_last_mul_sigmaZ_first
+  Ising2D.neg_I_smul_Y_last_mul_Z_first
+  Ising2D.H1plus_eq_bulk_sub_boundary
+  Ising2D.H1_plus_in_sigma_z_form
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input
