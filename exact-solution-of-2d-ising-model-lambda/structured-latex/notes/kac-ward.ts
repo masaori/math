@@ -7,6 +7,69 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_signed_orbit_term_product_archived",
+    targets: ["claim_kac_ward_term_orbit_weight_factorization"],
+    title: { text: "不採用経路: 閉路軌道ごとの置換項" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換項の軌道別展開による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
+                        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、置換項（",
+                        "参照用ノート「不採用経路: Kac--Ward 行列式の置換項」で定めたもの）について、次が成り立つ。",
+                      ]),
+                      displayMath(String.raw`T^{a,b}_{\varphi}(x)
+=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\prod_{\vec e\in C}
+\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+\in\overline{\mathbb Q}[x]`),
+                      paragraph(["したがって行列式の置換展開は"]),
+                      displayMath(String.raw`D_L^{a,b}(x)
+=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}
+\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\prod_{\vec e\in C}
+\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)`),
+                      paragraph([
+                        "となる。", math(String.raw`\mathcal C(\varphi)`), " の各元は ",
+                        ref("claim_moved_orbit_closed_nonbacktracking"),
+                        " により向き付き辺が相異なる閉じた非後退辺列の台である。全ての和と積は有限であり、",
+                        math(String.raw`\overline{\mathbb Q}[x]`),
+                        " の中で閉じる。実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        "固定辺 ", math(String.raw`\vec e\notin M(\varphi)`), " では ",
+                        math(String.raw`\varphi(\vec e)=\vec e`), " であり、",
+                        ref("def_kac_ward_transition_matrices"), " から ",
+                        math(String.raw`M^{a,b}_{\vec e,\vec e}=0`), "、したがって ",
+                        math(String.raw`K^{a,b}_{\vec e,\vec e}(x)=1`), " である。求めたい置換項から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+T^{a,b}_{\varphi}(x)
+&=\widehat{\operatorname{sgn}(\varphi)}
+\prod_{C\in\mathcal C(\varphi)}\left((-x)^{\lvert C\rvert}
+\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \blkref{claim_kac_ward_term_orbit_weight_factorization}\text{ と固定辺の因子は }1\bigr)\\
+&=\left(\prod_{C\in\mathcal C(\varphi)}(-1)^{\lvert C\rvert-1}\right)
+\prod_{C\in\mathcal C(\varphi)}\left((-x)^{\lvert C\rvert}
+\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \blkref{claim_permutation_sign_moved_orbit_product}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}\left(
+(-1)^{\lvert C\rvert-1}(-x)^{\lvert C\rvert}
+\prod_{\vec e\in C}\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の有限積の分配則}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\prod_{\vec e\in C}
+\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ (-1)^{n-1}(-x)^n=-x^n\ (1\le n=\lvert C\rvert)\text{ と }\overline{\mathbb Q}[x]\text{ の四則}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "最後に ", ref("def_qbar_polynomial_determinant"),
+                        " の有限和へこの等式を各置換について代入すると、行列式の表示を得る。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_permutation_orbit_sequence_archived",
     targets: ["def_permutation_iterate"],
     title: { text: "不採用経路: 軌道列" },

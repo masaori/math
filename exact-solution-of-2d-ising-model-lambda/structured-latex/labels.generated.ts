@@ -172,7 +172,6 @@ export const ALL_LABELS = [
   "claim_kac_ward_determinant_fiber_stratified_phase_sum",
   "claim_kac_ward_determinant_nonbacktracking_phase_sum",
   "claim_kac_ward_determinant_term_nonzero_iff",
-  "claim_kac_ward_signed_orbit_term_product",
   "claim_kac_ward_term_orbit_phase_twist_product",
   "claim_kac_ward_term_orbit_weight_factorization",
   "claim_kw_dual_preserves_unit_interval",
