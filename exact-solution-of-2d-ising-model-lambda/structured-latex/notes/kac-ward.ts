@@ -7,6 +7,28 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_phase_reversing_contact_pair_archived",
+    targets: ["def_switchable_permutation_contact_pair"],
+    title: { text: "不採用経路: 位相反転接触対" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の切り替え可能な接触対 ",
+        math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"),
+        "）が位相反転接触対であるとは、整数の等式",
+      ]),
+      displayMath(String.raw`\tau\bigl(\vec e,\varphi(\vec e)\bigr)
+    +\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+    =\tau\bigl(\vec e,\varphi(\vec f)\bigr)
+    +\tau\bigl(\vec f,\varphi(\vec e)\bigr)`),
+      paragraph([
+        "が成り立つことと定める。一歩の回転数は ", ref("def_step_turning"), " である。",
+        "二辺を交換しても両辺が同時に入れ替わるので、二元部分集合の元の並べ方に依らない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_determinant_permutation_term_archived",
     targets: ["def_kac_ward_polynomial_matrices"],
     title: { text: "不採用経路: Kac--Ward 行列式の置換項" },
@@ -30,7 +52,7 @@ export default defineNotes([
   },
   {
     id: "note_kac_ward_contact_smoothing_phase_reversal_iff_archived",
-    targets: ["def_phase_reversing_contact_pair"],
+    targets: ["def_switchable_permutation_contact_pair"],
     title: { text: "不採用経路: 接触平滑化の位相符号反転条件" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -46,7 +68,7 @@ export default defineNotes([
                       displayMath(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
                       paragraph([
                         "が成り立つことと、", math(String.raw`\{\vec e,\vec f\}`), " が位相反転接触対（",
-                        ref("def_phase_reversing_contact_pair"), "）であることは同値である。",
+                        "参照用ノート「不採用経路: 位相反転接触対」）であることは同値である。",
                         "この条件はスピン構造に依らない。したがって、切り替え可能性だけから符号反転を結論してはならない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -95,7 +117,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         math(String.raw`\zeta_8^{-t_{\mathrm{diff}}}=-1`), " である。置換符号の反転とこの二因子の変化を上の ",
                         math(String.raw`\mathcal W`), " の表示へ代入すると、",
                         math(String.raw`t_{\mathrm{diff}}=0`), " のときだけ位相寄与の符号が反転する。これは ",
-                        ref("def_phase_reversing_contact_pair"), " の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
+                        "参照用ノート「不採用経路: 位相反転接触対」の等式そのものである。全過程は整数と代数的数の有限演算だけで閉じる。",
                       ]),
     ],
   },
@@ -114,7 +136,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
         math(String.raw`S`), " は ", ref("claim_standard_contact_smoothing_involution"),
         "、標準接触対 ", math(String.raw`\operatorname{ct}_{\min}`), " は ",
         ref("def_standard_contact_pair"), "、位相反転接触対は ",
-        ref("def_phase_reversing_contact_pair"), " である。",
+        "参照用ノート「不採用経路: 位相反転接触対」である。",
         "有限集合の部分集合であり、所属は一歩の回転数（", ref("def_step_turning"),
         "）の整数の等式で判定される。実数体も複素数体も現れない。",
       ]),
@@ -177,14 +199,14 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 &=\tau\bigl(\vec e,\varphi(\vec f)\bigr)+\tau\bigl(\vec f,\varphi(\vec e)\bigr)
 &&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
 &=\tau\bigl(\vec e,\varphi(\vec e)\bigr)+\tau\bigl(\vec f,\varphi(\vec f)\bigr)
-&&\bigl(\because\ \{\vec e,\vec f\}\text{ は }\varphi\text{ の位相反転接触対。}\blkref{def_phase_reversing_contact_pair}\text{ の等式の両辺の入れ替え（整数の等式の対称性）}\bigr)\\
+&&\bigl(\because\ \{\vec e,\vec f\}\text{ は }\varphi\text{ の位相反転接触対。参照用ノート「不採用経路: 位相反転接触対」の等式の両辺の入れ替え（整数の等式の対称性）}\bigr)\\
 &=\tau\bigl(\vec e,\psi(\vec f)\bigr)+\tau\bigl(\vec f,\psi(\vec e)\bigr)
 &&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)
 \end{aligned}`),
                       paragraph([
                         "なので、", math(String.raw`\{\vec e,\vec f\}=\operatorname{ct}_{\min}(\psi)`),
                         " は ", math(String.raw`\psi`), " の位相反転接触対（",
-                        ref("def_phase_reversing_contact_pair"), "）であり、",
+                        "参照用ノート「不採用経路: 位相反転接触対」）であり、",
                         math(String.raw`\psi\in\mathcal B_L`), " である。",
                       ]),
                       paragraph([

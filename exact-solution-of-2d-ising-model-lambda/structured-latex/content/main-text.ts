@@ -77262,60 +77262,34 @@ S(S(\varphi))
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_phase_reversing_contact_smoothing",
+              id: "kac_ward_heading_nonbacktracking_permutation_phase_contribution",
               labels: [],
-              title: { text: "位相反転接触対" },
+              title: { text: "非後退置換一つの位相寄与" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_phase_reversing_contact_pair",
-                  beforeFocus: [
-                    {
-                      role: "prerequisiteDefinition",
-                      element: {
-                        id: "kac_ward_definition_nonbacktracking_permutation_phase_contribution",
-                        kind: "definition",
-                        title: { text: "非後退置換一つの位相寄与" },
-                        labels: ["def_nonbacktracking_permutation_phase_contribution"],
-                        habitat: "Qbar",
-                        statement: [
-                          paragraph([
-                            math(String.raw`(a,b)\in\mathcal S`), " と ",
-                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " に対し、",
-                          ]),
-                          displayMath(String.raw`\mathcal W^{a,b}_L(\varphi):=
+                  id: "group_of_kac_ward_definition_nonbacktracking_permutation_phase_contribution",
+                  beforeFocus: [],
+                  focus: {
+                    id: "kac_ward_definition_nonbacktracking_permutation_phase_contribution",
+                    kind: "definition",
+                    title: { text: "非後退置換一つの位相寄与" },
+                    labels: ["def_nonbacktracking_permutation_phase_contribution"],
+                    habitat: "Qbar",
+                    statement: [
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), " と ",
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " に対し、",
+                      ]),
+                      displayMath(String.raw`\mathcal W^{a,b}_L(\varphi):=
 \prod_{C\in\mathcal C(\varphi)}
 \left(-\prod_{\vec g\in C}M^{a,b}_{\vec g,\varphi(\vec g)}\right)
 \in\overline{\mathbb Q}`),
-                          paragraph([
-                            "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
-                            ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
-                            ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                    },
-                  ],
-                  focus: {
-                    id: "kac_ward_definition_phase_reversing_contact_pair",
-                    kind: "definition",
-                    title: { text: "位相反転接触対" },
-                    labels: ["def_phase_reversing_contact_pair"],
-                    habitat: "Z",
-                    statement: [
                       paragraph([
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " の切り替え可能な接触対 ",
-                        math(String.raw`\{\vec e,\vec f\}`), "（", ref("def_switchable_permutation_contact_pair"),
-                        "）が位相反転接触対であるとは、整数の等式",
-                      ]),
-                      displayMath(String.raw`\tau\bigl(\vec e,\varphi(\vec e)\bigr)
-    +\tau\bigl(\vec f,\varphi(\vec f)\bigr)
-    =\tau\bigl(\vec e,\varphi(\vec f)\bigr)
-    +\tau\bigl(\vec f,\varphi(\vec e)\bigr)`),
-                      paragraph([
-                        "が成り立つことと定める。一歩の回転数は ", ref("def_step_turning"), " である。",
-                        "二辺を交換しても両辺が同時に入れ替わるので、二元部分集合の元の並べ方に依らない。",
+                        "と定める。軌道族は ", ref("def_moved_orbit_family"), "、遷移成分は ",
+                        ref("def_kac_ward_transition_matrices"), " である。有限積だけで定まり、",
+                        ref("def_fiber_phase_weight"), " の各加数として繰り返し引く。実数体も複素数体も現れない。",
                       ]),
                     ],
                   },
