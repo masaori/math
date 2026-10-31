@@ -74828,6 +74828,7 @@ D_L^{a,b}(x)
                     kind: "claim",
                     title: { text: "分配多項式は四つの行列式の定数項一の平方根の和の半分である" },
                     labels: ["claim_determinant_square_root_torus_formula"],
+                    standing: "mainTheorem",
                     habitat: "Qbar",
                     verification: ["sagemath/check/determinant-square-root-torus-formula"],
                     statement: [
@@ -74839,11 +74840,10 @@ D_L^{a,b}(x)
                       displayMath(String.raw`\begin{aligned}
 Z_L
 &=\frac12\sum_{(a,b)\in\mathcal S}Q_L^{a,b}
-&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\bigr)\\
+&&\bigl(\because\ \blkref{claim_finite_torus_polynomial}\text{ の }\mathbb Z[x]\text{ の等式を }\overline{\mathbb Q}[x]\text{ へ送る}\bigr)\\
 &=\frac12\sum_{(a,b)\in\mathcal S}S_L^{a,b}
 &&\bigl(\because\ \blkref{claim_determinant_polynomial_square_root_exists}\bigr).
 \end{aligned}`),
-                      paragraph(["最初の等号は ", math(String.raw`\mathbb Z[x]`), " の等式を ", math(String.raw`\overline{\mathbb Q}[x]`), " に送ったものである。"]),
                     ],
                   },
                 },
