@@ -11,7 +11,7 @@ $M$・$D$・$E_1$ を保ち、四つのスピン構造すべてで位相寄与
 $\mathcal W^{a,b}_L$ の符号を反転することを検査する。
 
 - 実行: `sage sagemath/check/phase-reversing-standard-smoothing-involution/check.sage`
-- 状態: PASS（2026-09-02）
+- 状態: PASS（2026-10-31 再実行）
 - 結果: 一辺 $L=2$ の非後退置換 $30{,}784$ 個中、$\mathcal A_L$ は $11{,}980$ 個、
   $\mathcal B_L$ は $4{,}748$ 個だった。$\mathcal B_L$ の全数で符号反転対合・不動点なし・
   ファイバー保存を検査した（符号反転の検査 $18{,}992$ 件）。

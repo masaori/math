@@ -3207,21 +3207,21 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl((AB)\cdot v\bigr)(u)
 &=\sum_{u''\in \mathcal{J}}(AB)_{u,u''}\,v(u'')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\sum_{u''\in \mathcal{J}}\Bigl(\sum_{u'\in \mathcal{J}}A_{u,u'}\,B_{u',u''}\Bigr)v(u'')
-&&(\because\ \blkref{def_qbar_matrix_product})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_product}\bigr)\\
 &=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,B_{u',u''}\bigr)v(u'')
-&&(\because\ \text{有限和と元の積についての分配則})\\
+&&\bigl(\because\ \text{有限和と元の積についての分配則}\bigr)\\
 &=\sum_{u''\in \mathcal{J}}\ \sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
-&&(\because\ \text{積の結合則})\\
+&&\bigl(\because\ \text{積の結合則}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}\ \sum_{u''\in \mathcal{J}}A_{u,u'}\bigl(B_{u',u''}\,v(u'')\bigr)
-&&(\because\ \text{有限和の順序の入れ替え})\\
+&&\bigl(\because\ \text{有限和の順序の入れ替え}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\sum_{u''\in \mathcal{J}}B_{u',u''}\,v(u'')
-&&(\because\ \text{元と有限和の積についての分配則})\\
+&&\bigl(\because\ \text{元と有限和の積についての分配則}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(B\cdot v)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\bigl(A\cdot(B\cdot v)\bigr)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
