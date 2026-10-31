@@ -41,9 +41,10 @@
       `Part018/ClaimTraceEpsilonVPlusReduction.lean` で形式化した（`trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`）。
       `exp(K_1εG)` の偶奇分解は必要十分版 `NecSuf/ExpOfInvolution.lean` を置き、系の導出を
       `Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` に置いた。
-    - 成分の読み取りの形式化: Step 3。(a) `exp(K_1D_0)` は配置基底で対角で `exp(K_1E(s))`（`openChainD0_mulVec_basisVec_eq_energy` と
-      `exp_of_diagonal_matrix`）、`G` は対角で `s(M_col)s(1)`、(b) `εf_{ι(s)} = f_{ι(-s)}`、(c) `(V_2)_{ι(s),ι(s')} = exp(K_2∑_m s(m)s'(m))`
-      とその二つの特別な場合。
+    - 成分の読み取りの形式化（済み）: Step 3 (a)(b)(c) を `Part018/ClaimTraceEpsilonVPlusMatrixEntries.lean` で形式化した。
+      (a) `exp(K_1D_0)` の対角性 `matExp_smul_openChainD0`（成分 `matExp_smul_openChainD0_apply`）、`G` の対角性 `boundaryG_eq_diagonal`（成分 `boundaryG_apply`）、
+      (b) `εf_{ι(s)} = f_{ι(-s)}` は `epsilon_mulVec_basisVec_configBasisIso`（`-s` は `negSpinConf`）、Step 4 が使う行の形は `epsilon_mul_apply_configBasisIso`、
+      (c) `V2_apply_configBasisIso`・`V2_apply_configBasisIso_self`・`V2_apply_configBasisIso_neg_self`。
     - 二つのスピン和の代入と正値性の形式化: Step 4（トレースを二つのスピン和で書き、4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum` を代入して閉じた式にする）と
       Step 5（正値性）。`K1 = P.K1`、`vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` で `vPlusDataOf` の `V^{(+)}` へ移し、
       `EvenSectorClosureInput` から `htr` を外す。
@@ -56,7 +57,10 @@
 
 ## 次の一歩
 
-項目 4d のうち「成分の読み取りの形式化」：人手 `trace_of_epsilon_V_plus` の Step 3（成分の読み取り (a)(b)(c)）を具体版で形式化する。
-材料は 4b の `openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`、4c の `openChainD0_mulVec_basisVec_eq_energy`、
-`exp_of_diagonal_matrix` の具体版（`Part004/ClaimExpOfDiagonalMatrix.lean`）、`def_config_basis_iso`・`config_numbering_equals_kronecker_numbering`・
-`def_transfer_matrix` の形式化（`Part004/DefinitionConfigBasisIso.lean`・`Part001`）である。
+項目 4d のうち「二つのスピン和の代入と正値性の形式化」：人手 `trace_of_epsilon_V_plus` の Step 4（トレースを二つのスピン和で書き、
+4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum` を代入して閉じた式にする）と Step 5（正値性）を形式化し、
+`vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` で `vPlusDataOf` の `V^{(+)}` へ移して `EvenSectorClosureInput` から `htr` を外す。
+材料は Step 1・2 の `trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`、Step 3 の `matExp_smul_openChainD0_mul_apply`・`boundaryG_mul_apply`
+（(a) の対角性を左から掛けた積の行で使う形）・`epsilon_mul_apply_configBasisIso`（(b) を行の形で使う `(εA)_{ι(s),J} = A_{ι(-s),J}`）・
+`V2_apply_configBasisIso_self`・`V2_apply_configBasisIso_neg_self` である。
+大きければ Step 4 と Step 5（`htr` の除去を含む）に割り、先頭だけを行う。

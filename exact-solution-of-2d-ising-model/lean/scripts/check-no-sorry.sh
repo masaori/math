@@ -1541,6 +1541,22 @@ targets=(
   Ising2D.NecSuf.pow_two_mul_add_one_of_sq_eq_one
   Ising2D.NecSuf.exp_series_sum_of_sq_eq_one
   Ising2D.matExp_smul_of_sq_eq_one_of_necSuf
+  Ising2D.negSpinConf
+  Ising2D.eq_diagonal_of_mulVec_basisVec
+  Ising2D.openChainD0_eq_diagonal
+  Ising2D.matExp_smul_openChainD0
+  Ising2D.matExp_smul_openChainD0_apply
+  Ising2D.boundaryG_eq_diagonal
+  Ising2D.boundaryG_apply
+  Ising2D.configBasisIso_negSpinConf
+  Ising2D.epsilon_mulVec_basisVec_configBasisIso
+  Ising2D.sum_spin_mul_self
+  Ising2D.V2_apply_configBasisIso_self
+  Ising2D.V2_apply_configBasisIso_neg_self
+  Ising2D.matExp_smul_openChainD0_mul_apply
+  Ising2D.boundaryG_mul_apply
+  Ising2D.epsilon_apply_configBasisIso
+  Ising2D.epsilon_mul_apply_configBasisIso
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input
