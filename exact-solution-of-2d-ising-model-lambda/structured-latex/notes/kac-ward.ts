@@ -7,6 +7,68 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_determinant_term_nonzero_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 置換展開の項の非零条件" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換項の非零条件による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                        paragraph([
+                          "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
+                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について ",
+                          math(String.raw`T^{a,b}_{\varphi}(x)\ne0`), " であることと",
+                        ]),
+                        displayMath(String.raw`\forall\vec e\in\vec E_L,\quad
+\varphi(\vec e)\ne\vec e\Longrightarrow
+M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
+                        paragraph([
+                          "は同値である。さらに遷移行列の定義から、右辺は任意の ",
+                          math(String.raw`\vec e\in\vec E_L`), " について ",
+                          math(String.raw`\varphi(\vec e)\ne\vec e\Longrightarrow\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
+                          " と同値である。",
+                        ]),
+      paragraph(["元の証明:"]),
+
+                        paragraph([
+                          math(String.raw`\varphi(\vec e)=\vec e`), " なら因子 ",
+                          math(String.raw`K^{a,b}_{\vec e,\vec e}(x)`), " の定数項は ", math(String.raw`1`),
+                          " なので非零である。", math(String.raw`\varphi(\vec e)\ne\vec e`), " なら",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+&=0-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}
+&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ と }\varphi(\vec e)\ne\vec e\bigr)\\
+&=-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の四則}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`\overline{\mathbb Q}[x]`), " は零因子を持たず、",
+                          math(String.raw`x\ne0`), " であり、定数多項式への埋め込みは零を反映する。よってこの因子は ",
+                          math(String.raw`M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`), " と同値で非零である。",
+                          "有限積と非零な符号因子を合わせると",
+                        ]),
+                        displayMath(String.raw`T^{a,b}_{\varphi}(x)\ne0
+\Longleftrightarrow
+\forall\vec e\in\vec E_L,\quad
+\varphi(\vec e)\ne\vec e\Rightarrow
+M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
+                        paragraph([
+                          "を得る。", ref("def_kac_ward_transition_matrices"), " により後続辺でなければ成分は零である。",
+                          "後続辺なら同じ定義により成分はねじれ符号と回転位相の積 ",
+                          math(String.raw`\varepsilon_{a,b}(\varphi(\vec e))\cdot\rho(\vec e,\varphi(\vec e))`),
+                          " であり、", ref("def_spin_structures"), " により前者は ",
+                          math(String.raw`\{-1,1\}`), " に属して非零、", ref("def_rotation_phase"),
+                          " により後者は ", math(String.raw`1,\zeta_8,\zeta_8^{-1}`),
+                          " のいずれかで（", math(String.raw`\zeta_8^4=-1\ne0`), " より ",
+                          math(String.raw`\zeta_8\ne0`), "）非零、体 ",
+                          math(String.raw`\overline{\mathbb Q}`),
+                          " は零因子を持たないので成分は非零である。したがって二条件は同値である。",
+                          "全過程は有限集合と代数的数係数多項式だけで閉じる。",
+                        ]),
+    ],
+  },
+  {
     id: "note_kac_ward_permutation_sign_moved_orbit_product_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 置換符号の動く軌道ごとの分解" },
@@ -209,7 +271,7 @@ T^{a,b}_{\varphi}(x)
                         " は、ある ", math(String.raw`\vec f\in\vec E_L`), " について ",
                         math(String.raw`\varphi(\vec f)\ne\vec f`), " かつ ",
                         math(String.raw`\varphi(\vec f)\notin\operatorname{Next}(\vec f)`),
-                        " を満たすので、", ref("claim_kac_ward_determinant_term_nonzero_iff"),
+                        " を満たすので、", "参照用ノート「不採用経路: 置換展開の項の非零条件」",
                         " の同値の対偶により ", math(String.raw`T^{a,b}_{\varphi}(x)=0`),
                         " である。求めたい行列式から始める。",
                       ]),
@@ -222,7 +284,7 @@ D^{a,b}_L(x)
 &&\bigl(\because\ \text{冒頭の互いに素な覆いで有限和が分かれる}\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
 +\sum_{\varphi\in\operatorname{Perm}(\vec E_L)\setminus\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}0
-&&\bigl(\because\ \text{冒頭のとおり }\blkref{claim_kac_ward_determinant_term_nonzero_iff}\text{ の対偶}\bigr)\\
+&&\bigl(\because\ \text{冒頭のとおり }\text{参照用ノート「不採用経路: 置換展開の項の非零条件」}\text{ の対偶}\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
 &&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の四則}\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}\

@@ -63340,7 +63340,8 @@ u(\pi_4(3)):=(-1,0)`),
                         " と仮定する。方向単位ベクトルの四つの値を読むと、任意の ",
                         math(String.raw`q\in\mathbb Z/4\mathbb Z`), " について",
                       ]),
-                      displayMath(String.raw`-u(q)=u(q+2)`),
+                      displayMath(String.raw`-u(q)=u(q+2)
+\qquad\bigl(\because\ \blkref{def_direction_unit_vector}\text{ の四方向の値を順に比較}\bigr)`),
                       paragraph([
                         "である（", math(String.raw`q=\pi_4(0),\pi_4(1),\pi_4(2),\pi_4(3)`),
                         " の順に、", math(String.raw`-(0,1)=(0,-1)`), "、",
@@ -74876,92 +74877,6 @@ const chapter_kac_ward_permutation_expansion = defineSection({
         labels: [],
         title: { text: "非零な置換項と動く辺の軌道" },
         children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_determinant_nonzero_terms",
-              labels: [],
-              title: { text: "行列式の非零な置換項" },
-              children: [
-                {
-                  role: "primary",
-                  element: {
-                    kind: "elementGroup",
-                    id: "group_of_kac_ward_claim_determinant_term_nonzero_iff",
-                    beforeFocus: [],
-                    focus: {
-                      id: "kac_ward_claim_determinant_term_nonzero_iff",
-                      kind: "claim",
-                      title: { text: "置換展開の項が非零であるための遷移成分条件" },
-                      labels: ["claim_kac_ward_determinant_term_nonzero_iff"],
-                      habitat: "Qbar",
-                      verification: ["sagemath/check/kac-ward-determinant-term-nonzero"],
-                      lean: [
-                        "Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_iff",
-                        "Ising2DLambda.NecSuf.KacWard.determinantEntryProduct_ne_zero_iff",
-                        "Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([
-                          "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
-                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について ",
-                          math(String.raw`T^{a,b}_{\varphi}(x)\ne0`), " であることと",
-                        ]),
-                        displayMath(String.raw`\forall\vec e\in\vec E_L,\quad
-\varphi(\vec e)\ne\vec e\Longrightarrow
-M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
-                        paragraph([
-                          "は同値である。さらに遷移行列の定義から、右辺は任意の ",
-                          math(String.raw`\vec e\in\vec E_L`), " について ",
-                          math(String.raw`\varphi(\vec e)\ne\vec e\Longrightarrow\varphi(\vec e)\in\operatorname{Next}(\vec e)`),
-                          " と同値である。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`\varphi(\vec e)=\vec e`), " なら因子 ",
-                          math(String.raw`K^{a,b}_{\vec e,\vec e}(x)`), " の定数項は ", math(String.raw`1`),
-                          " なので非零である。", math(String.raw`\varphi(\vec e)\ne\vec e`), " なら",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-K^{a,b}_{\vec e,\varphi(\vec e)}(x)
-&=0-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}
-&&\bigl(\because\ \blkref{def_kac_ward_polynomial_matrices}\text{ と }\varphi(\vec e)\ne\vec e\bigr)\\
-&=-x\,\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}
-&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の四則}\bigr)
-\end{aligned}`),
-                        paragraph([
-                          math(String.raw`\overline{\mathbb Q}[x]`), " は零因子を持たず、",
-                          math(String.raw`x\ne0`), " であり、定数多項式への埋め込みは零を反映する。よってこの因子は ",
-                          math(String.raw`M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`), " と同値で非零である。",
-                          "有限積と非零な符号因子を合わせると",
-                        ]),
-                        displayMath(String.raw`T^{a,b}_{\varphi}(x)\ne0
-\Longleftrightarrow
-\forall\vec e\in\vec E_L,\quad
-\varphi(\vec e)\ne\vec e\Rightarrow
-M^{a,b}_{\vec e,\varphi(\vec e)}\ne0`),
-                        paragraph([
-                          "を得る。", ref("def_kac_ward_transition_matrices"), " により後続辺でなければ成分は零である。",
-                          "後続辺なら同じ定義により成分はねじれ符号と回転位相の積 ",
-                          math(String.raw`\varepsilon_{a,b}(\varphi(\vec e))\cdot\rho(\vec e,\varphi(\vec e))`),
-                          " であり、", ref("def_spin_structures"), " により前者は ",
-                          math(String.raw`\{-1,1\}`), " に属して非零、", ref("def_rotation_phase"),
-                          " により後者は ", math(String.raw`1,\zeta_8,\zeta_8^{-1}`),
-                          " のいずれかで（", math(String.raw`\zeta_8^4=-1\ne0`), " より ",
-                          math(String.raw`\zeta_8\ne0`), "）非零、体 ",
-                          math(String.raw`\overline{\mathbb Q}`),
-                          " は零因子を持たないので成分は非零である。したがって二条件は同値である。",
-                          "全過程は有限集合と代数的数係数多項式だけで閉じる。",
-                        ]),
-                      ],
-                    },
-                  },
-                },
-              ],
-            },
-          },
           {
             role: "subsection",
             element: {
