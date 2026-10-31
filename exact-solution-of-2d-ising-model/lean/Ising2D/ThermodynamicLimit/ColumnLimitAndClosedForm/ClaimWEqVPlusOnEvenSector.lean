@@ -5,7 +5,7 @@
 （`closing_009_theorem_c_plus_equals_Lambda_half`、ラベル **`c_plus_equals_Lambda_half_integer`**）の
 Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致すること」。
 
-`Ising2D.EvenSectorBridge`（`Theorem009_CPlusEqualsLambda.lean`）の欄 `hWV` を、
+`Ising2D.EvenSectorBridge`（`TheoremCPlusEqualsLambda.lean`）の欄 `hWV` を、
 具体的な `W = physicalSymTransferR M K_1 K_2`（章 011）と `vPlusDataOf` の `V^{(+)}` の実行列表示 `VPlusR`
 （`ClaimVPlusRealEntries.lean`）について与える。
 
@@ -29,7 +29,7 @@ Step 1 でそれを実ベクトルへ `ℝ ⊂ ℂ` の包含を明示せずに�
 | --- | --- |
 | 実行列 `ε` と複素行列 `ε`（章 011 `epsilon_is_real_symmetric`） | `epsilon_eq_ofReal_epsilonR` から `epsilon_eq_map_epsilonR` |
 | `map Complex.ofRealHom` と `ℝ → ℂ` の埋め込みによる `map` の一致 | `map_ofRealHom_eq_map_coe`（`Complex.ofRealHom_eq_coe`） |
-| `map Complex.ofRealHom` と `cvec` の両立 | `cvec_mulVec_ofRealHom`（`map_ofRealHom_eq_map_coe` と `Theorem009_CPlusEqualsLambda.lean` の `cvec_mulVec` から） |
+| `map Complex.ofRealHom` と `cvec` の両立 | `cvec_mulVec_ofRealHom`（`map_ofRealHom_eq_map_coe` と `TheoremCPlusEqualsLambda.lean` の `cvec_mulVec` から） |
 | `V^{(+)} = VPlusOfTransfer` を `VPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値へ（`def_V_plus`） | `VPlusOfTransfer_eq_VPlus`（`P.K2star := Kstar P.K2` は定義） |
 | `V^{(+)}` は実行列 `VPlusR` の埋め込み（Step 2「`V^{(+)}` の成分は実である」） | `eq_map_reMat`, `VPlus_hasRealEntries` |
 | `cvec` の単射性 | `cvec_injective` |
@@ -39,10 +39,10 @@ Step 1 でそれを実ベクトルへ `ℝ ⊂ ℂ` の包含を明示せずに�
 `epsProjPlus_mulVec_of_even_of_necSuf`・`W_mulVec_eq_VPlus_mulVec_of_even_of_necSuf` に書く
 （行列 `A` を線型写像 `x ↦ A x` へ送り、`Conf M → ℂ` 上の線型写像の環の加群として作用させる）。
 -/
-import Ising2D.Part018.Theorem009_CPlusEqualsLambda
-import Ising2D.Part018.ClaimVPlusRealEntries
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremCPlusEqualsLambda
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimVPlusRealEntries
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
-import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 import Ising2D.NecSuf.EvenSectorAgreement
 
 namespace Ising2D

@@ -1,7 +1,7 @@
 /-
 # 具体的な `W = V_1^{1/2} V_2 V_1^{1/2}` の成分はすべて正
 
-正本: `structured-latex/content/011_max_eigenvalue.ts`
+正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`maxeig_004_claim_W_has_positive_entries`、ラベル **`W_has_positive_entries`**）
 
 ## 人手証明との対応

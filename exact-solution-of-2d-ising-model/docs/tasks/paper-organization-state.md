@@ -56,7 +56,7 @@
   - **`c_plus_equals_Lambda_half_integer` の証明の根拠欄でラベルを文字で書いていた 5 か所を `\blkref` に直した。** その結果、どの章にも割り当てていなかった 9 項のうち `check_number_operator_is_hermitian` と、その証明が使う `Z_Y_linearly_independent`（`004_transfer_matrix.ts`）が
     この章の依存閉包に入ったので、この章へ移した（作業の順序の五番目の「使われているなら、使う章へ置く」に当たる）。どの章にも割り当てていない項は 7 になった。
   - **章末のゴールの主張を足した。** (1) $c_+(M)=\Lambda^{(1/2)}_M$、(2) $\Lambda^{(1/2)}_M\le c(M)\le2\Lambda^{(1/2)}_M$、(3) 2 重極限の閉形式を主張する claim `c_plus_value_c_sandwich_and_double_limit_of_log_Z` を章の最後に置いた。証明は既存の 3 つの主張を挙げるだけである。
-    SageMath（`sagemath/check/c_plus_value_c_sandwich_and_double_limit_of_log_Z/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組。(1) の相対残差 ≤ 2.2e-15、$M=4096$ で極限値との差 ≤ 1.6e-8）と Lean（`lean/Ising2D/Part018/ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ.lean`。
+    SageMath（`sagemath/check/c_plus_value_c_sandwich_and_double_limit_of_log_Z/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組。(1) の相対残差 ≤ 2.2e-15、$M=4096$ で極限値との差 ≤ 1.6e-8）と Lean（`lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ.lean`。
     入力は結合定数の組 `P : IsingParam` だけ（同じ回に main へ入った Lean の通しの証明の項目 5 で `EvenSectorClosureInput` が消えたので、その上に合わせた）。`check-no-sorry.sh` の対象に足した）を付けた。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにした。冒頭の章立ての説明のこの章のゴールの式は主張と一致していたので変えていない。
   - **章の項目数は 13（章立て案は 9）。** 差の 4 は、独立させた `c_between_Lambda_half_and_twice_Lambda_half`、ゴールの主張、編入した `check_number_operator_is_hermitian`・`Z_Y_linearly_independent` である。
   - 移した案内文と注記の言い回しを、移した先の事実に合わせて直した（数学の中身は変えていない。「013 章から 018 章」「章 E」「セクター」「半整数運動量」「モード」を部・章の名前と式で指す形にし、実数解析へ移行する箇所の記述を `riemann_sum_to_integral` が 012 に残った並びに合わせた）。

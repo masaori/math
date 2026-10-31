@@ -6,16 +6,16 @@
 
 - runbook の「作業の順序」の 1 と 2 は済んでいる。
   - 1: `IsingParam.K2star := Kstar K2` で、双対関係は定理 `IsingParam.c2_mul_s2star_eq_c2star` になり、最終定理の仮定に `hdual` は無い。
-  - 2: 最終定理 `Ising2D.onsager_exact_solution_unconditional`（`Part018/Theorem013_OnsagerUnconditional.lean`）の
+  - 2: 最終定理 `Ising2D.onsager_exact_solution_unconditional`（`ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerUnconditional.lean`）の
     `Z` は具体的な `partitionFunction N m P.K1 P.K2`、`c(M)` は `rayleighSup (physicalSymTransferR m P.K1 P.K2)` である。
     挟み撃ちは `partition_function_sandwich_physical`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）で与えた。
     人手 `partition_function_sandwich`・`limit_of_log_Z_in_N_row` に合わせ、`limit_of_log_Z_in_N_row`・`onsager_exact_solution`・
     `onsager_exact_solution_isoParam` の挟み撃ちの仮定は `1 ≤ N` の範囲だけで受け取る。
 - 項目 3 は済んでいる。具体的な `W = physicalSymTransferR M P.K1 P.K2` と `vPlusDataOf` の `V^{(+)}` についての
-  `EvenSectorBridge` を `physicalEvenSectorBridge`（`Part018/PhysicalEvenSectorBridge.lean`）で構成した。
+  `EvenSectorBridge` を `physicalEvenSectorBridge`（`ThermodynamicLimit/ColumnLimitAndClosedForm/PhysicalEvenSectorBridge.lean`）で構成した。
   欄は `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`
   （`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
-  （`Part018/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`Part018/ClaimWEqVPlusOnEvenSector.lean`）である。
+  （`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimWEqVPlusOnEvenSector.lean`）である。
   最終定理の入力から `bridge` と `hW` を外した。
 - 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
   当時の入力の構造 `EvenSectorClosureInput` から `htr` と、その型のために置いていた `hM` を外した（`M ≠ 0` は `2 ≤ M` から出す）。次の四つに割って進めた。
@@ -44,17 +44,17 @@
     - 二つのスピン和の代入と正値性の形式化（済み）: Step 4・Step 5 と主張を `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した
       （`trace_epsilon_VPlusOfTransfer_split`・`trace_epsilon_VPlusOfTransfer_eq_spin_sums`・`trace_epsilon_VPlusOfTransfer_closed_form`・
       `trace_epsilon_VPlusOfTransfer_pos`・`trace_of_epsilon_V_plus`、`vPlusDataOf` へ移した `trace_epsilon_vPlusDataOf_pos`）。必要十分版は置かない。
-- 項目 5 は済んでいる。`hWcomm` は `epsilon_commutes_with_W P.K1 P.K2_pos`（`Part011/ClaimEpsilonCommutesWithW.lean`）で埋めた。
+- 項目 5 は済んでいる。`hWcomm` は `epsilon_commutes_with_W P.K1 P.K2_pos`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）で埋めた。
   `hWpos` は人手 `W_has_positive_entries` の Step 1〜3 を具体的な `V_1^{1/2}`・`V_2` について
-  `Part011/ClaimPhysicalWHasPositiveEntries.lean` で形式化して埋めた（`W_has_positive_entries_physical`、
-  `ι` の全射性で全成分へ広げた `physicalSymTransferR_pos`）。Step 3 の必要十分版 `NecSuf/SandwichByDiagonal.lean`（添字は有限、係数は結合律・可換律を仮定しない半環）を置き、具体版をその特殊化として `Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean` で導出した。
+  `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean` で形式化して埋めた（`W_has_positive_entries_physical`、
+  `ι` の全射性で全成分へ広げた `physicalSymTransferR_pos`）。Step 3 の必要十分版 `NecSuf/SandwichByDiagonal.lean`（添字は有限、係数は結合律・可換律を仮定しない半環）を置き、具体版をその特殊化として `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean` で導出した。
   欄が無くなったので `EvenSectorClosureInput` を消し、挟み撃ちを `rayleighSup_sandwich_LambdaM_physical` に改名した。
   **最終定理 `onsager_exact_solution_unconditional` の入力は結合定数の組 `P : IsingParam` だけである。**
-- 項目 6 は済んでいる。通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`Part018/TheoremOnsagerExactSolutionEndToEnd.lean`）は
+- 項目 6 は済んでいる。通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolutionEndToEnd.lean`）は
   `check-end-to-end.sh` が固定する型をそのまま持ち、`onsager_exact_solution_unconditional ⟨K1, K2, hK1, hK2⟩` から
   `f M := (1/M) log c(M)` として得る。閉形式の被積分関数は `gammaFn_eq_arcosh_Kstar`（`gammaFn_eq` と `IsingParam.K2star := Kstar K2`）で書き直した。
   `c(M) > 0` は人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から出すよう、Step 1 を
-  `onsager_limit_in_N_row_physical`（`Part018/Theorem013_OnsagerUnconditional.lean`。`rayleighSup_pos` と
+  `onsager_limit_in_N_row_physical`（`ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerUnconditional.lean`。`rayleighSup_pos` と
   `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`）にし、`onsager_exact_solution_unconditional` の第 1 成分をそれで与えた。
   `onsager_limit_in_M` は人手 `onsager_exact_solution` の Step 3（挟み撃ち）と同じく `Λ ≤ c(M)` から正値性を出す。必要十分版は置かない（新しい計算を含まない）。
 - `lake build`、`check-no-sorry.sh`、`check-end-to-end.sh` はすべて通る（通しの定理は `sorryAx` に依存しない）。
@@ -131,14 +131,27 @@
     `TraceBound` は `trace_power_sandwich` の Step 3 の補題で、import 元も `DefinitionRayleighSup` だけなのでこの章へ置いた。
     `Part011/Basic.lean` は人手の項目を持たない補助のファイルで、import 元は数学的道具立て「トレース・共役転置・正定値性」の `Claim005_PsdCauchySchwarz` と
     `NecSuf/PermMatrix`（置き場に数えない）なので、数学的道具立てへ移すときに扱う。`Part011/` と `Part018/` に残る項目付きのファイルは「M→∞ の極限と閉形式」の章の項目が多い。ただし `Part011/Claim005_PsdCauchySchwarz.lean`（`psd_cauchy_schwarz`）は数学的道具立て「トレース・共役転置・正定値性」、`Part011/Claim010_SectorDecomposition.lean`（参照用ノートへ退避した `sector_decomposition_of_rayleigh_sup`）は `RoutesNotAdopted/MinusSector/` の置き場なので、次の章では移さない。
+  - 部「熱力学極限」の章「M→∞ の極限と閉形式」（済み）: 19 ファイルを `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` へ移した。
+    旧 `Part011/` から `ClaimCPlusLeC`・`ClaimEpsilonCommutesWithW`・`ClaimEpsilonIsRealSymmetric`・`ClaimPhysicalWHasPositiveEntries`（と `FromNecSuf`）・`DefinitionSectorRayleighSup`、
+    旧 `Part012/` から `ClaimGammaContinuous`（旧 `Claim002_GammaContinuous`）、旧 `Part004/` から `ClaimZYLinearlyIndependent`（旧 `Claim001_ZYLinearlyIndependent`。と `FromNecSuf`）、
+    旧 `Part018/` の 10 本全部（`ClaimCheckQHermitian`（旧 `Claim008_CheckQHermitian`）・`ClaimCheckFermiFromDiagonalizationAndExponentialForm`（旧 `Claim011_CheckFermiFromPart016`）・
+    `ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ`・`ClaimVPlusRealEntries`・`ClaimWEqVPlusOnEvenSector`・`PhysicalEvenSectorBridge`・`TheoremCPlusEqualsLambda`（旧 `Theorem009_CPlusEqualsLambda`）・
+    `TheoremOnsagerExactSolution`（旧 `Theorem010_OnsagerExactSolution`）・`TheoremOnsagerUnconditional`（旧 `Theorem013_OnsagerUnconditional`）・`TheoremOnsagerExactSolutionEndToEnd`）である。`Part018/` は無くなった。
+    `ClaimZYLinearlyIndependent` は `Z_Y_linearly_independent` だけを形式化しており、その項は棚卸しでこの章に割り当てられているのでこの章へ置いた。
+    `ClaimCheckFermiFromDiagonalizationAndExponentialForm` は前の章で判断したとおり `check_number_operator_is_hermitian` (3) だけを新しく証明しているのでこの章へ置いた。
+    この章の `even_eigenspace_is_complex_subspace` は `PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean`、`onsager_free_energy_expression` は
+    `EigenvalueProblem/EigenvaluesOfVPlus/TheoremOnsagerFreeEnergy.lean` にあり、どちらも前の章で多数決により置いた。
+    `Part011/` に残るのは `Basic`（補助）・`Claim005_PsdCauchySchwarz`（数学的道具立て）・`Claim010_SectorDecomposition`（(−) セクターの記録）、
+    `Part012/` に残るのは `Theorem004_RiemannSumToIntegral`（`riemann_sum_to_integral`）である。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の 8 番目の章、部「熱力学極限」の「M→∞ の極限と閉形式」（フォルダ `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_column_limit_and_closed_form` の 14 項（`W_has_positive_entries` から
-`c_plus_value_c_sandwich_and_double_limit_of_log_Z` まで）を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part011/` の残り・`Part012/Claim002_GammaContinuous`・`Part018/` の残りなど。冒頭の項目名を数え、参照だけの項目は数えない）。
+項目 7 の 9 番目の章、部「臨界点」の「臨界点 K_c と d²f/dK² の対数発散」（フォルダ `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/`。
+章の英語名は、論文側のファイル名 `critical_point_and_log_divergence.ts` と棚卸しの `chapterKey` の `chapter_organization_goal_` の後ろの語）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_critical_point_and_log_divergence` の項を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part020/` のファイル。`Claim008`〜`Claim010` の三角関数の評価・積分は数学的道具立て「三角関数の評価・有限和・積分」の項なので数えない。冒頭の項目名を数え、参照だけの項目は数えない）。
+`Part020/` の `KStar` の二重定義（`Kstar_eq_KStar` で接続済み）はこの章を移すときに解消する。
 `Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

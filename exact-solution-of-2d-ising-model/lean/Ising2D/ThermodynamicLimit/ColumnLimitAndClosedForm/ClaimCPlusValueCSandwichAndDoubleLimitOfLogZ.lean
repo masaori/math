@@ -30,7 +30,7 @@
 （(2) の上からの評価の必要十分版は `Ising2D/NecSuf/EvenSectorUpperBound.lean`、(3) の挟み撃ちと
 Riemann 和は `Ising2D/NecSuf/LogSqueeze.lean`・`Ising2D/NecSuf/RiemannSum.lean` が持つ）。
 -/
-import Ising2D.Part018.Theorem013_OnsagerUnconditional
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerUnconditional
 
 namespace Ising2D
 

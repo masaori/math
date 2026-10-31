@@ -1,8 +1,8 @@
 /-
 # 必要十分版: 対合の置換行列と「成分の絶対値を取る」操作
 
-人手の本文で使う箇所（具体版は `Ising2D/Part011/ClaimEpsilonIsRealSymmetric.lean` と
-`Ising2D/Part018/Theorem010_OnsagerExactSolution.lean`）:
+人手の本文で使う箇所（具体版は `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean` と
+`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）:
 
 * **`trace_of_epsilon_V_plus`** の証明 Step 3 の (b)（`ε` は置換行列）
   — `permMat`, `permMat_mulVec`, `permMat_isSymm`, `permMat_mul_self`

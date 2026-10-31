@@ -6,7 +6,7 @@
 ラベル **`c_plus_equals_Lambda_half_integer`**）
 
 `c_+(M)` は章 011 `def_sector_rayleigh_sup` の `Ising2D.evenSectorRayleighSup`（`(+)` だけの定義）。
-本定理は `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 が引く（`Theorem010_OnsagerExactSolution.lean`）。
+本定理は `c_between_Lambda_half_and_twice_Lambda_half` の Step 1・Step 2 が引く（`TheoremOnsagerExactSolution.lean`）。
 
 必要十分版は置かない。理由は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる
@@ -28,7 +28,7 @@
 `W *ᵥ x = Vr *ᵥ x` へ変換する接続は未形式化なので、本ファイルでは `hWV` を仮定として受け取る。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.TheoremMaxEigenvectorInEvenSector
-import Ising2D.Part011.DefinitionSectorRayleighSup
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
 
 namespace Ising2D
 

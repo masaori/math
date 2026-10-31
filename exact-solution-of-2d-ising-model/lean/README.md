@@ -99,7 +99,7 @@ EOF
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/Part002/Lemma001_ScalarIdentityCommutes.lean` |
   | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/Part002/Lemma003_CentralizerIsScalar.lean` |
   | `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` |
-  | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | `Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean` |
+  | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` |
   | `<def_hatZ_pm>`・`<def_hatY>`・`<exp_sum>` に共通する複素位相因子 | `Ising2D/EigenvalueProblem/ReductionToATheta/DefinitionExpPhase.lean` |
   | `parts/004_転送行列/008_claim_指数関数の和とクロネッカーのデルタの関係.typ` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimExpSum.lean` |
   | `parts/004_転送行列/009_definition_Zhat_Yhatの定義.typ` | `Ising2D/Part004/Definition009_HatZHatY.lean` |
@@ -136,7 +136,7 @@ EOF
   残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。本文の主張の Lean はこれらに依存しない。
   本文の主張も使う部分（`V_1` の `𝓕^{(+)}` への制限の補題、実行列 `epsilonR` と `ε` の成分表示、
   置換行列 `permMat` と成分の絶対値 `absVec`）は、`PartitionFunction/ProjectionAndJordanWigner/ClaimV1RestrictionToEigenspaces.lean`,
-  `Part011/ClaimEpsilonIsRealSymmetric.lean`, `NecSuf/PermMatrix.lean` へ移した。
+  `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`, `NecSuf/PermMatrix.lean` へ移した。
   境界項の符号を引数に持つ一般形（`H1 M η`, `V1pm`, `V1pmHalf`, `V1pmUnits`, `V1pmHalfUnits`,
   `V1pmFromDefinition`, `epsProj M η`）は、これらの記録と整数運動量の経路のために補助として残し、
   本文のラベルに対応する (+) の定義・主張（`H1plus`, `V1plus`, `V1plusHalf`, `epsProjPlus` ほか）は
@@ -188,7 +188,7 @@ EOF
 | `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.NecSuf.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
 | `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.NecSuf.one_eq_sum_single`（任意の半環・任意の有限添字型） |
 | `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.NecSuf.acomm_lincomb_clifford` / `NecSuf.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
-| `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.ZY_linearIndependent_of_necSuf`、`Part004/Claim001_ZYLinearlyIndependentFromNecSuf.lean`） | `Ising2D.NecSuf.linearIndependent_of_clifford_necSuf`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`NecSuf/CliffordIndependence.lean`） |
+| `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.ZY_linearIndependent_of_necSuf`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependentFromNecSuf.lean`） | `Ising2D.NecSuf.linearIndependent_of_clifford_necSuf`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`NecSuf/CliffordIndependence.lean`） |
 | `exp_sum` | `Ising2D.expPhase_sum`（複素指数関数。必要十分版からの導出は `Ising2D.expPhase_sum_of_necSuf`、`EigenvalueProblem/ReductionToATheta/ClaimExpSumFromNecSuf.lean`） | `Ising2D.NecSuf.sum_zpow_primitiveRoot`（任意の体と 1 の原始 `M` 乗根。`NecSuf/RootOfUnitySum.lean`） |
 | `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY` / `acomm_hatZPlus_hatZMinus`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_hatZ_hatZ_same_of_necSuf` / `acomm_hatY_hatY_of_necSuf` / `acomm_hatZPlus_hatZMinus_of_necSuf`、`Part007/Claim000_AnticommutatorHatZHatYFromNecSuf.lean`） | `Ising2D.NecSuf.acomm_fourier_clifford` / `acomm_fourier_clifford_flip` / `acomm_fourier_clifford_weights`（体上の任意の環、Clifford 関係と 1 の原始 `M` 乗根だけ。`NecSuf/FourierClifford.lean`） |
 | `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`） | `Ising2D.NecSuf.exp_adCLM_apply` / `NecSuf.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`NecSuf/ExpConjugation.lean`） |
@@ -610,7 +610,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 ## 章 009〜020 の形式化（2026-07-27）— 章ごとの正本は `lean/docs/`
 
 **分配関数の定義から Onsager の厳密解までの経路が、Lean 側で通った。**
-結論は `Ising2D.onsager_exact_solution`（`Ising2D/Part018/`）である。
+結論は `Ising2D.onsager_exact_solution`（`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）である。
 
 章ごとの詳細——形式化した定理の一覧、具体版と必要十分版の対応表、必要十分版で判明した本質、
 形式化できなかった主張とその理由——は、**各章のドキュメントが正本**である。
@@ -620,14 +620,14 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | --- | --- | --- | --- |
 | 009 | 転送行列 `V` の固有値（個数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`） | `Part009/` | [ch009](docs/ch009-formalization.md) |
 | 010 | 偶セクターへの射影 `P^{(+)}`、`(V_1^{(+)})^{1/2}`, `V^{(+)}`、`ε` との可換性（`(−)` セクターとの分解は形式化の記録） | `Part010/` | [ch010](docs/ch010-formalization.md) |
-| 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち、`c_+ ≤ c`、`ε^⊤ = ε`、`εW = Wε`） | `Part011/`（Rayleigh 商の上限 `c(M)` の定義と分配関数の挟み撃ちは `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`） | [ch011](docs/ch011-formalization.md) |
-| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/`（`N_row → ∞` の極限は `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`、`Λ^{(δ)}_M` の定義と Onsager の表式は `EigenvalueProblem/EigenvaluesOfVPlus/`） | [ch012](docs/ch012-formalization.md) |
+| 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち、`c_+ ≤ c`、`ε^⊤ = ε`、`εW = Wε`） | `Part011/`（Rayleigh 商の上限 `c(M)` の定義と分配関数の挟み撃ちは `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・`W` の成分の正値性は `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch011](docs/ch011-formalization.md) |
+| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/`（`N_row → ∞` の極限は `ThermodynamicLimit/RowLimitAndMaxEigenvalue/`、`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`、`Λ^{(δ)}_M` の定義と Onsager の表式は `EigenvalueProblem/EigenvaluesOfVPlus/`、`γ` の連続性は `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch012](docs/ch012-formalization.md) |
 | 013 | 偶セクターの半整数運動量モード | `Part013/`（半整数運動量の定義・反周期指数和・`[H, check(Z/Y)]` は `EigenvalueProblem/ReductionToATheta/`、共役添字・`check(Z/Y)` の反交換関係・`Z, Y` の復元は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch013](docs/ch013-formalization.md) |
 | 014 | 偶セクターでの `T` の作用 | `EigenvalueProblem/ReductionToATheta/` | [ch014](docs/ch014-formalization.md) |
 | 015 | `A(θ~)` の対角化 | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch015](docs/ch015-formalization.md) |
 | 016 | 偶セクターのフェルミオン（`V^{(+)} = c V̌'`） | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch016](docs/ch016-formalization.md) |
 | 017 | 偶セクターの固有値 | `EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
-| 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/`（`Q̌_ε` のエルミート性と章「M→∞ の極限と閉形式」に当たるファイルは `Part018/`） | [ch018](docs/ch018-formalization.md) |
+| 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/`（`Q̌_ε` のエルミート性と章「M→∞ の極限と閉形式」に当たるファイルは `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch018](docs/ch018-formalization.md) |
 | 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
 | 020 | 臨界点での比熱の対数発散 | `Part020/` | [ch020](docs/ch020-formalization.md) |
 
@@ -676,7 +676,7 @@ Step 2。結論は正しい）、根拠の欠落（章 011 の `c_±(M)` の `su
 | `parts/002_線型空間の一般論/000_theorem_...`（`<tensor_basis>`） | 「各元が基底」「添字 `m` の二重使用」 | `Ising2D/Part002/Theorem000_TensorBasis.lean` 冒頭に修正版を明記 |
 | `parts/004_転送行列/000_definition_...`（`<def_transfer_matrix_symbols>`） | `ε = (√-1)^M Z_1 Y_1 + ⋯ + Z_M Y_M` の `+` は**積の誤り**（`M = 2` で反例） | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` 冒頭に記載。`Z_mul_Y_same`（`Z_m Y_m = -√-1 σ^x_m`）と `xString_succ_eq` が積であることの根拠 |
 | `parts/006_ZとYの反交換関係/000_claim_...`（`<anticommutator_of_Z_and_Y>`） | `[Z_μ, Y_ν]₊`, `[Y_μ, Y_ν]₊` の証明が TODO のまま | Lean 側で 3 式とも証明済み（`Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean`） |
-| `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
+| `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | 形式化時点で証明が「TODO: 証明略」のままだった（その後、別経路の人手証明が追記されている）。また線型独立性は**族**の性質なのに集合 `{Z_1,…,Y_M}` で述べている | Lean 側で証明済み（`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean`）。族の形（`ZY_linearIndependent`）と集合の形（`ZYSet_linearIndepOn`）の両方を用意 |
 | `parts/007_hatZとhatYの反交換関係/000_claim_...`（`<anticommutator_of_hat_Z_and_hat_Y>`） | `[hat(Z), hat(Y)]₊` と `[hat(Y), hat(Y)]₊` を「同様」として省略（原文自身が省略と明記） | Lean 側で 4 式とも証明済み（`Ising2D/Part007/Claim000_AnticommutatorHatZHatY.lean`） |
 | `transfer_matrix_001_definition_symbols` と `transfer_matrix_011d_claim_V2_exponential_representation`（`V_2` の 2 つの表式） | （形式化時点）一方は `exp(K_2^*(σ^x_1+⋯+σ^x_M))`、他方は `exp(√-1 K_2^* H_2)` と書かれているが、一致の根拠（`√-1 Z_m Y_m = σ^x_m`）が明示されていなかった | **解消済み**。現在の本文は `V2_in_Z_Y` の Step 2 の直後にこの等式を置き、Step 3 で `second_transfer_matrix_pauli_form` から `V_2` の Jordan--Wigner 表示を導く。Lean は `I_smul_H2_eq_sum_sigmaX`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean`）と `V2_in_Z_Y`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean`） |
 | `TV1_hatZ_hatY_017_definition_A_theta`（`def_A_theta`）と `TV1_hatZ_hatY_018_claim_T_V_action`（`T_V_hatZ_hatY`） | `A(θ)` の非対角成分に `c_2` が現れるが、`B_1 B_2 B_1` を計算すると同じ位置に出るのは `c_2^*` である。一致には双対関係から従う等式 `c_2^* = s_2^* c_2` が要るのに、原文はどこにも書いていない | `Ising2D/Part008/Definition016_TV.lean` 冒頭に記載。`B1_mul_B2_mul_B1_eq_explicit` / `B1_mul_B2_mul_B1_eq_AMat` の仮定 `hdual` として明示 |

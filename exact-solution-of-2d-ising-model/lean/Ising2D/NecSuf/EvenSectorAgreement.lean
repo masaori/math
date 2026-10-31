@@ -1,7 +1,7 @@
 /-
 # `𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致すること（必要十分版）
 
-具体版: `Ising2D/Part018/ClaimWEqVPlusOnEvenSector.lean`
+具体版: `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimWEqVPlusOnEvenSector.lean`
 （人手 `c_plus_equals_Lambda_half_integer` の Step 0）。
 
 ## 具体版との手順の対応

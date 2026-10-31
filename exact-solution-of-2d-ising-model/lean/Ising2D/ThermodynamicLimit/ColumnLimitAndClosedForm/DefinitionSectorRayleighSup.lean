@@ -32,7 +32,7 @@
 `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じ）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.DefinitionRayleighSup
-import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
 set_option linter.unusedSectionVars false
 

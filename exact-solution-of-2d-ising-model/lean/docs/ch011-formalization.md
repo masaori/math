@@ -36,6 +36,8 @@
 
 章「N→∞ の極限と最大固有値 c(M)」に当たる `c(M)` の定義・`‖Wx‖ ≤ c(M)‖x‖`・`xᵀAx ≤ ‖x‖² tr A`・`trace_power_sandwich`・分配関数の挟み撃ち（一般の行列の版と具体的な `Z`・`W` の版）のファイルは
 `lean/Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/` にある（`DefinitionRayleighSup`・`ClaimOperatorBound`・`TraceBound`・`ClaimTracePowerSandwich`・`ClaimPartitionFunctionSandwich`・`PhysicalPartitionFunctionSandwich`）。
+章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・具体的な `W` の成分の正値性のファイルは
+`lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` にある（`DefinitionSectorRayleighSup`・`ClaimCPlusLeC`・`ClaimEpsilonIsRealSymmetric`・`ClaimEpsilonCommutesWithW`・`ClaimPhysicalWHasPositiveEntries`・`ClaimPhysicalWHasPositiveEntriesFromNecSuf`）。
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
@@ -71,7 +73,7 @@
 | `Ising2D.physicalV1halfC_apply_configBasisIso` / `physicalV1halfR_apply_configBasisIso` / `physicalV1halfR_offDiag` / `physicalV1halfR_apply_configBasisIso_self_pos` | 具体的な `V₁^{1/2} = exp(½K₁D)` の成分は `μ = μ'` で `exp(½K₁∑_m μ(m)μ(m+1)) > 0`、それ以外で `0` | `W_has_positive_entries` Step 1 |
 | `Ising2D.V2_apply_configBasisIso`（章 001） / `physicalV2R_apply_configBasisIso` / `physicalV2R_apply_configBasisIso_pos` | 具体的な `V₂` の成分は `exp(K₂∑_m μ(m)μ'(m)) > 0` | `W_has_positive_entries` Step 2 |
 | `Ising2D.physicalSymTransferR_apply_configBasisIso` | 具体的な `W` の成分は `(V₁^{1/2})_{ι(μ),ι(μ)}(V₂)_{ι(μ),ι(μ')}(V₁^{1/2})_{ι(μ'),ι(μ')}`（人手の式変形の各行） | `W_has_positive_entries` Step 3 |
-| **`Ising2D.W_has_positive_entries_physical`** / `physicalSymTransferR_pos` | 具体的な `W` の成分はすべて正（後者は `ι` の全射性で任意の行・列番号へ広げた形） | **`W_has_positive_entries`**（`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
+| **`Ising2D.W_has_positive_entries_physical`** / `physicalSymTransferR_pos` | 具体的な `W` の成分はすべて正（後者は `ι` の全射性で任意の行・列番号へ広げた形） | **`W_has_positive_entries`**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
 | **`Ising2D.partition_function_sandwich`** | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.partitionFunction_eq_trace_real` | 具体的な `Z(K_1,K_2)` は実行列 `(V₁^{1/2}V₁^{1/2}V₂)^{N_row}` のトレース | `partition_function_via_transfer_matrix` を実行列で読む |
@@ -80,14 +82,14 @@
 | `Ising2D.V2_posDef` / `V2_transpose` / `physicalV2R_isSymm` / `physicalV2R_posDef` | 具体的な `V₂ = (2s_2)^{M/2}exp(iK_2^*H_2)` は正定値・実対称（正定値性は (1)・(3) を先に `V₂` へ使い、(2) は `symTransfer_posDef` で使う） | 同 Step 2–3 |
 | `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 具体的な `W = V₁^{1/2}V₂V₁^{1/2}` は実対称・正定値（`symTransfer_isSymm`・`symTransfer_posDef` を具体的な `B`, `V₂` に適用） | `W_is_real_symmetric_positive_definite` Step 3 |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`ThermodynamicLimit/RowLimitAndMaxEigenvalue/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |
-| `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`Part011/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |
+| `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |
 | `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡` と上に有界、単位ベクトルで `xᵀWx ≤ c_+` | 同上 |
 | `Ising2D.evenUnit` / `epsilonR_mulVec_evenUnit` / `vecNormSq_evenUnit` / `evenSectorSet_epsilonR_nonempty` | 単位ベクトル `x^{(+)}`（各成分 `2^{-M/2}`）で `𝓡_+ ≠ ∅` | 同上 |
-| **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`Part011/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
-| `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` の成分は実数（実行列 `epsilonR` の埋め込み）、`ε^⊤ = ε` とその実行列版（`Part011/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
+| **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
+| `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` の成分は実数（実行列 `epsilonR` の埋め込み）、`ε^⊤ = ε` とその実行列版（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
 | **`Ising2D.epsilon_is_real_symmetric`** | `ε = (epsilonR).map ofReal ∧ ε^⊤ = ε` | **`epsilon_is_real_symmetric`** |
 | `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`c_between_Lambda_half_and_twice_Lambda_half` Step 2 が引く） |
-| `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`Part011/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
+| `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
 | `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |
 | `Ising2D.sector_invariant` / `sector_orthogonal` / `projPlus` / `projMinus` / `proj_add_eq_one` / `projPlus_mulVec_eigen` / `projMinus_mulVec_eigen` / `sector_quad_le` / `sectorRayleighSup_le` | `W` は `F^{(±)}` を保つ、直交性、実行列の `P^{(±)}`、セクター内の評価 | ノート（同上） |
 | `Ising2D.sector_decomposition_of_rayleigh_sup` | `c(M) = max(c₊(M), c₋(M))` | ノート `sector_decomposition_of_rayleigh_sup` (3) |
@@ -123,7 +125,7 @@
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
-| `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
+| `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
 | `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |

@@ -12,9 +12,9 @@
 
 追加ファイル（3 本）:
 
-- `lean/Ising2D/Part018/Claim011_CheckFermiFromPart016.lean`
-- `lean/Ising2D/Part018/Claim012_VPlusDataFromPart017.lean`
-- `lean/Ising2D/Part018/Theorem013_OnsagerUnconditional.lean`
+- `lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckFermiFromDiagonalizationAndExponentialForm.lean`
+- `lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusDataFromEigenvaluesOfVPlus.lean`
+- `lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerUnconditional.lean`
 
 結論の定理: `Ising2D.onsager_exact_solution_unconditional`（既存の
 `Ising2D.onsager_exact_solution` は消さずに残してある）。
@@ -62,7 +62,7 @@
 
 対処: 係数側の等式 `conj(p_μ) = -p_{M+1-μ}`（`Ising2D.star_checkP`）と
 `conj(q) = q`（`Ising2D.star_checkQ`）を証明し、章 018 で既に無条件に証明済みの
-`Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`（`Part018/Claim008_CheckQHermitian.lean`）
+`Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`）
 と組み合わせて `Ising2D.checkPsiDag_conjTranspose` を得た。
 使った一次情報は章 008 の `Ising2D.gamma2_neg_eq_neg_conj`
 （`Part008/Definition019_ThetaGamma.lean:119`）と章 016 の `Ising2D.checkR_conj` /
@@ -70,7 +70,7 @@
 
 ## 3. 消せなかった仮定と、その理由（一次情報）
 
-`Ising2D.EvenSectorClosureInput`（`Theorem013_OnsagerUnconditional.lean`）に束ねた。
+`Ising2D.EvenSectorClosureInput`（`TheoremOnsagerUnconditional.lean`）に束ねた。
 **どれも章 014–017 由来ではない。**
 
 | 場 | 内容 | 理由 |

@@ -34,8 +34,8 @@
 `NecSuf/RiemannSum.lean` の `tendsto_riemann_sum`）を章 012 が既に系として使っており、本ファイルは
 それらの具体版を接続するだけだからである。
 -/
-import Ising2D.Part018.Theorem009_CPlusEqualsLambda
-import Ising2D.Part011.ClaimCPlusLeC
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremCPlusEqualsLambda
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCPlusLeC
 import Ising2D.NecSuf.EvenSectorUpperBound
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimLimitInNRow
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremOnsagerFreeEnergy

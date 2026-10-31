@@ -17,7 +17,7 @@
 | (2) `Ž_μ^* = Ž_{M+1-μ}`, `Y̌_μ^* = Y̌_{M+1-μ}` | `Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose` |
 | (3) `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` | `CheckFermi.hstar`（章 016 からの入力） |
 | (4) `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` |
-| `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | `Ising2D.EvenSectorBridge.quad_Qproj`（`Theorem009_...` にある） |
+| `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | `Ising2D.EvenSectorBridge.quad_Qproj`（`TheoremCPlusEqualsLambda.lean` にある） |
 
 **(1)(2) は無条件である。**
 -/

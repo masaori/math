@@ -30,7 +30,7 @@
 明示的に使っており、これらは有限の代数計算では代用できない。
 
 **一次情報（Lean）**: `Ising2D.gamma_is_continuous`
-（`lean/Ising2D/Part012/Claim002_GammaContinuous.lean`）の依存を辿ると、
+（`lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimGammaContinuous.lean`）の依存を辿ると、
 mathlib の `Real.continuousOn_arcosh`（内部で `Real.continuousOn_log` と
 `Real.continuous_sqrt` を使う）と `Real.continuous_cos` が現れる。
 `Ising2D.riemann_sum_to_integral`（(R1)(R2) に対応）とは独立の依存である。

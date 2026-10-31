@@ -2,9 +2,9 @@
 # 非対角成分が 0 の行列で両側から挟んだ行列の成分（必要十分版）
 
 人手 `W_has_positive_entries`（`structured-latex/content/011_max_eigenvalue.ts`）の Step 3 の必要十分版。
-具体版: `Ising2D/Part011/ClaimPhysicalWHasPositiveEntries.lean`
+具体版: `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`
 （`physicalSymTransferR_apply_configBasisIso`・`W_has_positive_entries_physical`）。
-具体版をこのファイルの系として導出するのは `Ising2D/Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
+具体版をこのファイルの系として導出するのは `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |

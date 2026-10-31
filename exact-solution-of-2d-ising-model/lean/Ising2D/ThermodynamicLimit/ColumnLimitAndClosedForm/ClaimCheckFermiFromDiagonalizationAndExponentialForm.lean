@@ -17,10 +17,10 @@
 
 `hstar`（`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`）だけは章 016 側に対応する定理が無かったので、
 章 018 で無条件に証明済みの `Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`
-（`Part018/Claim008_CheckQHermitian.lean`）と章 008 の `Ising2D.gamma2_neg_eq_neg_conj` から
+（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`）と章 008 の `Ising2D.gamma2_neg_eq_neg_conj` から
 本ファイルで証明する（`checkPsiDag_conjTranspose`）。これが**噛み合わせのための橋渡し補題**である。
 -/
-import Ising2D.Part018.Claim008_CheckQHermitian
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckQHermitian
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimCheckFermiResultsUnconditional
 
 namespace Ising2D

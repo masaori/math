@@ -13,7 +13,7 @@
 
 必要十分版はない（`sSup` の単調性は ℝ の完備性そのもの）。
 -/
-import Ising2D.Part011.DefinitionSectorRayleighSup
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
 
 set_option linter.unusedSectionVars false
 

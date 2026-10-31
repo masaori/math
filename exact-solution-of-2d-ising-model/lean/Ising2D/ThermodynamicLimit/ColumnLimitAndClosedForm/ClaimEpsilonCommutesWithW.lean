@@ -23,7 +23,7 @@
 `epsilon_commutes_with_transfer_matrices`（Pauli 行列の具体的な反交換関係）が担う。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
-import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
 namespace Ising2D
 

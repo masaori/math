@@ -32,7 +32,7 @@
 章 018 側の `Ising2D.CheckFermi.nOp_mul_Qproj`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）から
 直接導く（章 017 の `Xop_mul_Qproj` と同じ計算）。射影の添字型を移す必要が無くなるためである。
 -/
-import Ising2D.Part018.Claim011_CheckFermiFromPart016
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckFermiFromDiagonalizationAndExponentialForm
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.TheoremMaxEigenvalueSimple
 

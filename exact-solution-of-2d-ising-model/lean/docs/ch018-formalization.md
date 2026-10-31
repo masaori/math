@@ -20,7 +20,7 @@
 | --- | --- | --- | --- |
 | `Ising2D.CheckFermi` | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean` | `ψ̌` の正準反交換関係（`anticommutator_of_check_psi`）、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（`check_number_operator_is_hermitian` (3)） | 016 |
 | `Ising2D.VPlusData` | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` | `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、`Λ̌_ε = C·exp(∑_μ γ(θ̃_μ)(ε_μ − 1/2))`、`C > 0`、`γ(θ̃_μ) > 0`（`eigenvalues_of_V_plus`, `gamma_theta_tilde_mu_positive`） | 015・017 |
-| `Ising2D.EvenSectorBridge` | `Part018/Theorem009_CPlusEqualsLambda.lean` | 章 011 の実行列 `W` と章 017 の複素行列 `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 011・017 |
+| `Ising2D.EvenSectorBridge` | `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremCPlusEqualsLambda.lean` | 章 011 の実行列 `W` と章 017 の複素行列 `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 011・017 |
 
 **`ε` が `Ž, Y̌` と反可換であること（`epsilon_anticommutes_with_check_Z_Y` (1)(2)）は
 仮定していない。** 章 004・010・013 の形式化済みの定理から**無条件に**従う。
@@ -36,7 +36,7 @@
 
 ## 1. 形式化した定理の一覧
 
-### 1.1 具体版（章「V^{(+)} の最大固有値に属する固有ベクトル」の分は `lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/`、残りは `lean/Ising2D/Part018/`）
+### 1.1 具体版（章「V^{(+)} の最大固有値に属する固有ベクトル」の分は `lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/`、残りは章「M→∞ の極限と閉形式」の `lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`（章 014–017 からの入力と、その直接の帰結）
 
@@ -95,7 +95,7 @@
 | **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`** | **Step 2（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | Step 3 |
 
-#### `Part018/Claim008_CheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
+#### `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -103,7 +103,7 @@
 | **`Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`** | **`Ž_μ^* = Ž_{M+1−μ}`, `Y̌_μ^* = Y̌_{M+1−μ}`** | **(2)（無条件）** |
 | `Ising2D.Z_conjTranspose` / `Y_conjTranspose` | `Z_j^* = Z_j`, `Y_j^* = Y_j` | (1)（章 009 で証明済み） |
 | `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` | `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | (4)（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`） |
-| `EvenSectorBridge.quad_Qproj` | `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | (4) の帰結（`Theorem009_...`） |
+| `EvenSectorBridge.quad_Qproj` | `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | (4) の帰結（`TheoremCPlusEqualsLambda.lean`） |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/TheoremMaxEigenvectorInEvenSector.lean`（ラベル `max_eigenvector_in_even_sector`）
 
@@ -115,7 +115,7 @@
 | **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
 | **`VPlusData.mem_evenSector_of_mem_range_univ`** | **最大固有ベクトルは偶セクター `𝓕^{(+)}` に属する** | **定理本体** |
 
-#### `Part018/Theorem009_CPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
+#### `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremCPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -131,7 +131,7 @@
 | **`EvenSectorBridge.c_plus_equals_lamMax`** | **`c_+(M) = Λ̌_max`** | **定理本体（Step 3）** |
 | `EvenSectorBridge.exists_maximizer` | 上限が偶セクターの実単位ベクトル `x_0` で**達成される** | 最後の一文 |
 
-#### `Part018/Theorem010_OnsagerExactSolution.lean`（ラベル `onsager_exact_solution`、**本プロジェクトの結論**）
+#### `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`（ラベル `onsager_exact_solution`、**本プロジェクトの結論**）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -346,13 +346,13 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 | ファイル | 内容 |
 | --- | --- |
-| `Part018/Claim011_CheckFermiFromPart016.lean` | `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）と、その `hstar` を埋める橋渡し補題 `Ising2D.checkPsiDag_conjTranspose` |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCheckFermiFromDiagonalizationAndExponentialForm.lean` | `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）と、その `hstar` を埋める橋渡し補題 `Ising2D.checkPsiDag_conjTranspose` |
 | `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusDataFromEigenvaluesOfVPlus.lean` | `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）と、章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（添字型 `Fin M`）を噛み合わせる `Ising2D.finCheckIdxEquiv` / `checkFermiSetupOf_Vprime` |
-| `Part018/ClaimVPlusRealEntries.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」（`Ising2D.VPlus_hasRealEntries`）と、`vPlusDataOf` の `V^{(+)}` の実行列表示 `Ising2D.VPlusR`・`Ising2D.vPlusDataOf_V_eq_map`（`EvenSectorBridge` の欄 `Vr`・`hVr`） |
-| `Part018/ClaimWEqVPlusOnEvenSector.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する」。`P^{(+)}x = x`（`Ising2D.epsProjPlus_mulVec_of_even`）、複素ベクトル上の `Wx = V^{(+)}x`（`Ising2D.W_mulVec_eq_VPlus_mulVec_of_even`）、具体的な `W` と `VPlusR` についての実ベクトル版 `Ising2D.hWV_physical`（`EvenSectorBridge` の欄 `hWV`）。必要十分版は `NecSuf/EvenSectorAgreement.lean` の `Ising2D.NecSuf.invProj_smul_of_fixed`（加群・`2` の可逆性だけ）と `Ising2D.NecSuf.smul_eq_of_mul_proj_eq`（半群の作用だけ）で、具体版はその特殊化（`*_of_necSuf`） |
-| `Part018/PhysicalEvenSectorBridge.lean` | 具体的な `W = physicalSymTransferR M K_1 K_2` と `vPlusDataOf` の `V^{(+)}` についての `Ising2D.EvenSectorBridge`（`Ising2D.physicalEvenSectorBridge`）。欄 `hWsymm`・`hWpsd` は章 011 `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`（`x = 0` を足した `Ising2D.physicalSymTransferR_nonneg`）、`Vr`・`hVr` は Step 2、`hWV` は Step 0 |
-| `Part018/Theorem013_OnsagerUnconditional.lean` | 仮定を取らない挟み撃ち `Ising2D.rayleighSup_sandwich_LambdaM_physical`、Step 1 `Ising2D.onsager_limit_in_N_row_physical`（`c(M) > 0` は人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から `rayleighSup_pos` で出す）と、`Ising2D.onsager_exact_solution_unconditional`（入力は結合定数の組だけ） |
-| `Part018/TheoremOnsagerExactSolutionEndToEnd.lean` | 通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`scripts/check-end-to-end.sh` が固定する型。入力は `K_1, K_2` とその正値性だけ）と、被積分関数を `gammaFn` を経ずに書いた `Ising2D.gammaFn_eq_arcosh_Kstar` |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimVPlusRealEntries.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」（`Ising2D.VPlus_hasRealEntries`）と、`vPlusDataOf` の `V^{(+)}` の実行列表示 `Ising2D.VPlusR`・`Ising2D.vPlusDataOf_V_eq_map`（`EvenSectorBridge` の欄 `Vr`・`hVr`） |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimWEqVPlusOnEvenSector.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する」。`P^{(+)}x = x`（`Ising2D.epsProjPlus_mulVec_of_even`）、複素ベクトル上の `Wx = V^{(+)}x`（`Ising2D.W_mulVec_eq_VPlus_mulVec_of_even`）、具体的な `W` と `VPlusR` についての実ベクトル版 `Ising2D.hWV_physical`（`EvenSectorBridge` の欄 `hWV`）。必要十分版は `NecSuf/EvenSectorAgreement.lean` の `Ising2D.NecSuf.invProj_smul_of_fixed`（加群・`2` の可逆性だけ）と `Ising2D.NecSuf.smul_eq_of_mul_proj_eq`（半群の作用だけ）で、具体版はその特殊化（`*_of_necSuf`） |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/PhysicalEvenSectorBridge.lean` | 具体的な `W = physicalSymTransferR M K_1 K_2` と `vPlusDataOf` の `V^{(+)}` についての `Ising2D.EvenSectorBridge`（`Ising2D.physicalEvenSectorBridge`）。欄 `hWsymm`・`hWpsd` は章 011 `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`（`x = 0` を足した `Ising2D.physicalSymTransferR_nonneg`）、`Vr`・`hVr` は Step 2、`hWV` は Step 0 |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerUnconditional.lean` | 仮定を取らない挟み撃ち `Ising2D.rayleighSup_sandwich_LambdaM_physical`、Step 1 `Ising2D.onsager_limit_in_N_row_physical`（`c(M) > 0` は人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から `rayleighSup_pos` で出す）と、`Ising2D.onsager_exact_solution_unconditional`（入力は結合定数の組だけ） |
+| `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolutionEndToEnd.lean` | 通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`scripts/check-end-to-end.sh` が固定する型。入力は `K_1, K_2` とその正値性だけ）と、被積分関数を `gammaFn` を経ずに書いた `Ising2D.gammaFn_eq_arcosh_Kstar` |
 
 ### 6.2 消えた仮定（何で埋めたか）
 
@@ -365,8 +365,8 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `VPlusData.C`, `hC`（`C = (2 sinh 2K_2)^{M/2} > 0`） | 017 | 同上（`constant_c_value_even_sector` が `c` の値を確定させる） |
 | `VPlusData.gam`, `hgam`（`γ(θ̃_μ) > 0`） | 015・017 | `Ising2D.gammaFn_thetaTilde_pos`（`EigenvalueProblem/DiagonalizationAndExponentialForm/TheoremMaxEigenvalueSimple.lean`。**無条件**） |
 | `rayleighSup_sandwich_LambdaM` の `hC` / `hgam`（章 012 の記法との一致） | 012・017 | `rfl` と `Ising2D.sum_checkGam`（`tagPoint_half_eq_thetaTilde` の系） |
-| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
-| `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`） |
+| `hWpos`（具体的な `W` の成分が正） | 011 | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
+| `hWcomm`（`ε` と具体的な `W` の可換性） | 011 | `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | 018 | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）。`M ≠ 0` は `2 ≤ M` から出す |
 
 ### 6.3 噛み合わせが必要だった箇所（一次情報）
@@ -386,8 +386,8 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 残った仮定は無い。もとの場 `htr`（`tr(εV^{(+)}) > 0`）は `trace_epsilon_vPlusDataOf_pos` で埋め、
 その型のために置いていた `hM`（`M ≠ 0`）は `2 ≤ M` から出す。`hWpos`（具体的な `W` の成分が正）は
-`Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`Part011/ClaimPhysicalWHasPositiveEntries.lean`）、
-`hWcomm`（`ε` と具体的な `W` の可換性）は `Ising2D.epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で埋め、
+`Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`）、
+`hWcomm`（`ε` と具体的な `W` の可換性）は `Ising2D.epsilon_commutes_with_W`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）で埋め、
 欄を束ねていた構造 `EvenSectorClosureInput` を消した。
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は

@@ -1,13 +1,13 @@
 /-
 # 具体的な `W` の成分の正値性を必要十分版の特殊化として導く
 
-人手 `W_has_positive_entries`（`structured-latex/content/011_max_eigenvalue.ts`）。
-具体版 `Ising2D/Part011/ClaimPhysicalWHasPositiveEntries.lean` の Step 3 の二つの主張が、
+人手 `W_has_positive_entries`（`structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）。
+具体版 `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean` の Step 3 の二つの主張が、
 必要十分版 `Ising2D/NecSuf/SandwichByDiagonal.lean` の `B := V_1^{1/2}`・`V := V_2`・係数 `ℝ` での特殊化として得られることを示す。
 特殊化に渡す仮定は、具体版の Step 1（`physicalV1halfR_offDiag`・`physicalV1halfR_apply_configBasisIso_self_pos`）と
 Step 2（`physicalV2R_apply_configBasisIso_pos`）である。
 -/
-import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimPhysicalWHasPositiveEntries
 import Ising2D.NecSuf.SandwichByDiagonal
 
 namespace Ising2D

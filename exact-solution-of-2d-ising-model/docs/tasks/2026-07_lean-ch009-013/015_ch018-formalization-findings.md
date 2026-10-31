@@ -72,7 +72,7 @@ tr(εV^{(+)}) = (2e^{-K_2} cosh K_1)^M + (2e^{K_2} sinh K_1)^M > 0
 
 一方、**章 019 の `Ising2D.c_minus_le_c_plus` は `c_-(M) ≤ c_+(M)` を無条件に与える**ので、
 `c_-(M)` の値を知らなくても `c(M) = c_+(M)` が言える（`Ising2D.c_equals_c_plus`）。
-そこで Lean 側（`Part018/Theorem010_OnsagerExactSolution.lean` の
+そこで Lean 側（`ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean` の
 `EvenSectorBridge.rayleighSup_eq_LambdaM`）は挟み撃ちを経由せず、直接
 
 ```

@@ -21,7 +21,7 @@
 `eigenvalues_of_V` の `Λ_max` との同定は本章の主張ではない）。
 `γ` は `Ising2D.gammaFn`（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimGamma1LowerBound.lean`）。
 -/
-import Ising2D.Part012.Claim002_GammaContinuous
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimGammaContinuous
 import Ising2D.Part012.Theorem004_RiemannSumToIntegral
 import Ising2D.NecSuf.LogSqueeze
 

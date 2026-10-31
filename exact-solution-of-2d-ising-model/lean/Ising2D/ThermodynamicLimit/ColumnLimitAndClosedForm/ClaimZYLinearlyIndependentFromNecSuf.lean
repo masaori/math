@@ -9,7 +9,7 @@
 
 | | 定理 | 何を仮定しているか |
 | --- | --- | --- |
-| **具体版** | `Ising2D.ZY_linearIndependent`（`Claim001_ZYLinearlyIndependent.lean`） | `TensorPow M`（`2^M × 2^M` の複素行列）の `Z_m, Y_m` |
+| **具体版** | `Ising2D.ZY_linearIndependent`（`ClaimZYLinearlyIndependent.lean`） | `TensorPow M`（`2^M × 2^M` の複素行列）の `Z_m, Y_m` |
 | **必要十分版** | `NecSuf.linearIndependent_of_clifford_necSuf`（`NecSuf/CliffordIndependence.lean`） | 任意の可換環 `S` 上の任意の環 `A` の族が Clifford 関係を満たすこと＋スカラーの忠実性＋`2` の非零因子性 |
 
 本ファイルは、**具体版が必要十分版の特殊化にすぎないこと**を実際の導出として書く
@@ -24,7 +24,7 @@
 行列であること・テンソル冪であること・`Z, Y` の具体形は効いていない」ことが確認できる。
 -/
 import Ising2D.NecSuf.CliffordIndependence
-import Ising2D.Part004.Claim001_ZYLinearlyIndependent
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimZYLinearlyIndependent
 
 namespace Ising2D
 

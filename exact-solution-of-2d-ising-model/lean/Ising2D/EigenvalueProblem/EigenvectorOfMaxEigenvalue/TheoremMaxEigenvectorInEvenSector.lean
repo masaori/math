@@ -19,7 +19,7 @@
 したがって本ファイルの定理は **`0 < (tr(εV^{(+)})).re` を仮定として受け取る**。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
-import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
 namespace Ising2D
 

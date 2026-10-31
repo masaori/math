@@ -33,7 +33,7 @@
 -/
 import Ising2D.Part020.Claim006_KappaOfK
 import Ising2D.Part020.Theorem011_SecondDerivativeLogDivergence
-import Ising2D.Part018.Theorem010_OnsagerExactSolution
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerExactSolution
 
 namespace Ising2D
 

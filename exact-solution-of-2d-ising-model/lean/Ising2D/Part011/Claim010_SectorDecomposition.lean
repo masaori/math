@@ -9,12 +9,12 @@
 本文で置き換わった主張は次のとおり。
 
 * `c_+(M)` の定義（`def_sector_rayleigh_sup`、`(+)` だけ）→ `Ising2D.evenSectorRayleighSup`
-  （`Part011/DefinitionSectorRayleighSup.lean`）。本ファイルの符号引数つきの一般形 `sectorRayleighSup W ε s`
+  （`ThermodynamicLimit/ColumnLimitAndClosedForm/DefinitionSectorRayleighSup.lean`）。本ファイルの符号引数つきの一般形 `sectorRayleighSup W ε s`
   は `s = 1` でそれと一致する（`sectorRayleighSup_one_eq`）。
-* 最終定理が使う片側 `c_+(M) ≤ c(M)` → `Ising2D.c_plus_le_c`（`Part011/ClaimCPlusLeC.lean`）
-* `ε^⊤ = ε` → `Ising2D.epsilon_is_real_symmetric`（`Part011/ClaimEpsilonIsRealSymmetric.lean`）
+* 最終定理が使う片側 `c_+(M) ≤ c(M)` → `Ising2D.c_plus_le_c`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusLeC.lean`）
+* `ε^⊤ = ε` → `Ising2D.epsilon_is_real_symmetric`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`）
 * `εW = Wε` と `W` が `𝓕^{(+)}` を保つこと → `Ising2D.epsilon_commutes_with_W`
-  （`Part011/ClaimEpsilonCommutesWithW.lean`）
+  （`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`）
 * `W P^{(+)} = V^{(+)} P^{(+)}` → `Ising2D.symmetrized_transfer_matrix_on_sectors`
   （`PartitionFunction/ProjectionAndJordanWigner/PhysicalSymTransferBridge.lean`）
 
@@ -26,7 +26,7 @@
 `ε.IsSymm`, `ε * ε = 1`, `ε * W = W * ε` しか仮定していない）ので、
 これ以上ほどく余地がない（`sSup` は ℝ の完備性そのもの）。
 -/
-import Ising2D.Part011.DefinitionSectorRayleighSup
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.ClaimTracePowerSandwich
 
 set_option linter.unusedSectionVars false

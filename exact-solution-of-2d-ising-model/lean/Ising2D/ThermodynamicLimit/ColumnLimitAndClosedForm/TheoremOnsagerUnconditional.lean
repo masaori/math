@@ -4,14 +4,14 @@
 正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**）
 
-`Ising2D.onsager_exact_solution`（`Theorem010_OnsagerExactSolution.lean`）は、
+`Ising2D.onsager_exact_solution`（`TheoremOnsagerExactSolution.lean`）は、
 挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` を仮定 `hc` として受け取る。その `hc` を与える
 `Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` は、章 018 の形式化時点では
 `Ising2D.CheckFermi`（章 016）と `Ising2D.VPlusData`（章 015・017）を
 **構成できないまま仮定として**受け取っていた。
 
 章 014–017 が main に入ったので、それらは `Ising2D.checkFermiOf`
-（`Claim011_CheckFermiFromPart016.lean`）と `Ising2D.vPlusDataOf`
+（`ClaimCheckFermiFromDiagonalizationAndExponentialForm.lean`）と `Ising2D.vPlusDataOf`
 （`ClaimVPlusDataFromEigenvaluesOfVPlus.lean`）で**実際に構成できる**。本ファイルはその
 構成を差し込み、仮定を一つも取らない版（`Ising2D.onsager_exact_solution_unconditional`）を立てる。既存の条件つき版は残してある。
 
@@ -26,8 +26,8 @@
 | `∑_μ D.gam μ = ∑_{μ=1}^{M} γ(t^{(M)}_μ)`（`δ = 1/2`） | 本ファイルの `Ising2D.sum_checkGam`（章 017 `tagPoint_half_eq_thetaTilde` の系） |
 | `hdual`（双対関係 `c_2 s_2^* = c_2^*`） | `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、`IsingParam.c2_mul_s2star_eq_c2star`（人手 `duality_c2_star_eq_s2_star_c2`、`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`）で証明 |
 | `htr`（`tr(εV^{(+)}) > 0`）と `hM`（`M ≠ 0`） | `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`、`ClaimTraceEpsilonVPlusClosedForm.lean`）。`M ≠ 0` は `2 ≤ M` から出す |
-| `hWpos`（具体的な `W` の成分が正） | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
-| `hWcomm`（`ε` と具体的な `W` の可換性） | `Ising2D.epsilon_commutes_with_W`（人手 `epsilon_commutes_with_W`、`Part011/ClaimEpsilonCommutesWithW.lean`） |
+| `hWpos`（具体的な `W` の成分が正） | `Ising2D.physicalSymTransferR_pos`（人手 `W_has_positive_entries`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimPhysicalWHasPositiveEntries.lean`） |
+| `hWcomm`（`ε` と具体的な `W` の可換性） | `Ising2D.epsilon_commutes_with_W`（人手 `epsilon_commutes_with_W`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） |
 | `bridge`（章 011 の実行列 `W` と `V^{(+)}` の橋渡し）と `hW`（`bridge.W` が具体的な `W` であること） | `Ising2D.physicalEvenSectorBridge`（`PhysicalEvenSectorBridge.lean`）。具体的な `W` について、章 011 の `W_is_real_symmetric_positive_definite` と、`c_plus_equals_Lambda_half_integer` の Step 0・Step 2 の実行列表示を組み合わせて構成する |
 
 ## 残った仮定
@@ -48,12 +48,12 @@ Step 1 で `log c(M)` を定めるための `c(M) > 0` は、人手 `limit_of_lo
 `Ising2D.physicalEvenSectorBridge` から得る。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
-import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
-import Ising2D.Part011.ClaimEpsilonCommutesWithW
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimPhysicalWHasPositiveEntries
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonCommutesWithW
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
-import Ising2D.Part018.PhysicalEvenSectorBridge
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.PhysicalEvenSectorBridge
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
-import Ising2D.Part018.Theorem010_OnsagerExactSolution
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.TheoremOnsagerExactSolution
 
 namespace Ising2D
 

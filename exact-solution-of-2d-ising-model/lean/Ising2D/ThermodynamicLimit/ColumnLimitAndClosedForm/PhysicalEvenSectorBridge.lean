@@ -4,7 +4,7 @@
 正本: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`
 （`closing_009_theorem_c_plus_equals_Lambda_half`、ラベル **`c_plus_equals_Lambda_half_integer`**）
 
-`Ising2D.EvenSectorBridge`（`Theorem009_CPlusEqualsLambda.lean`）は、人手 `c_plus_equals_Lambda_half_integer` が
+`Ising2D.EvenSectorBridge`（`TheoremCPlusEqualsLambda.lean`）は、人手 `c_plus_equals_Lambda_half_integer` が
 Step 1・Step 2 で使う `W` と `V^{(+)}` の事実を束ねた構造である。本ファイルは、その各欄を
 具体的な `W = physicalSymTransferR M K_1 K_2`（章 011 の `V_1^{1/2} V_2 V_1^{1/2}`）と
 `vPlusDataOf` の `V^{(+)}` について与え、構造 `Ising2D.physicalEvenSectorBridge` を立てる。
@@ -33,7 +33,7 @@ Step 1・Step 2 で使う `W` と `V^{(+)}` の事実を束ねた構造である
 （各欄の必要十分な内容は `NecSuf/EvenSectorAgreement.lean` と `Ising2D/NecSuf/RayleighMoments.lean` にある）。
 -/
 import Ising2D.ThermodynamicLimit.RowLimitAndMaxEigenvalue.PhysicalPartitionFunctionSandwich
-import Ising2D.Part018.ClaimWEqVPlusOnEvenSector
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimWEqVPlusOnEvenSector
 
 namespace Ising2D
 

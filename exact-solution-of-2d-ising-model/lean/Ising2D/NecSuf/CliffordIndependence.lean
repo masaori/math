@@ -9,11 +9,11 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `Z_Y_linearly_independent` | `Ising2D/Part004/Claim001_ZYLinearlyIndependent.lean` |
+| `Z_Y_linearly_independent` | `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` |
 | （使う反交換関係）`anticommutator_of_Z_and_Y` | `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean` |
 
 具体版を本ファイルの必要十分版の特殊化として導出したものは
-`Ising2D/Part004/Claim001_ZYLinearlyIndependentFromNecSuf.lean` にある。
+`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependentFromNecSuf.lean` にある。
 
 ## 必要十分版が何を明らかにするか
 

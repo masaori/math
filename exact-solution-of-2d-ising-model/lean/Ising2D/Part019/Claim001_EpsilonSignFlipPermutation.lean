@@ -8,7 +8,7 @@
 
 本文の主張も使う部分（`π`（`flipConf`）、実行列 `epsilonR`、`ε` の成分表示 `epsilon_apply`、
 `epsilon_eq_ofReal_epsilonR`、`epsilonR_isSymm`、`epsilonR_mul_self`、`epsilonR_mulVec_apply`）は
-`Ising2D/Part011/ClaimEpsilonIsRealSymmetric.lean` へ移した。本ファイルに残したのは
+`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean` へ移した。本ファイルに残したのは
 「`π` は不動点をもたない」と奇セクターの単位ベクトル `x_0` など、`(−)` セクターにだけ効く部分である。
 
 必要十分版は `Ising2D/NecSuf/PermSector.lean`（同じラベル）。
@@ -35,7 +35,7 @@
 `ε` の成分が `0` と `1` しかない（人手証明 (1)）ので、この橋渡しは値の落ちない同一視である。
 -/
 import Ising2D.NecSuf.PermSector
-import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 
 set_option linter.unusedSectionVars false
 

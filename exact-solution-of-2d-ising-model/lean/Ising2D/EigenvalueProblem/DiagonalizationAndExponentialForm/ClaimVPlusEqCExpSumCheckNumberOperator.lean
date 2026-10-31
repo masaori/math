@@ -25,7 +25,7 @@
 人手の主張は既存の主張に定義を代入するだけなので、必要十分版は置かない（1 行目の必要十分版は
 `Ising2D.exists_smul_of_TConj_eq` が持つ）。
 -/
-import Ising2D.Part018.Claim011_CheckFermiFromPart016
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimCheckFermiFromDiagonalizationAndExponentialForm
 
 namespace Ising2D
 

@@ -1,7 +1,7 @@
 # 章 012「自由エネルギーと熱力学極限」の形式化
 
 人手証明の正本: `structured-latex/content/012_free_energy.ts`（6 ブロック。章立ての組み直しで、`gamma1_lower_bound_all_theta` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ、`def_Theta_delta_M`・`def_Lambda_delta_M` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ、`limit_of_log_Z_in_N_row` は `structured-latex/content/thermodynamic_limit_row_limit_and_max_eigenvalue.ts` へ、`gamma_is_continuous`・`onsager_free_energy_expression` と注記 2 つは `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts` へ移った。012 に残るのは `riemann_sum_to_integral` だけである）
-Lean: `Ising2D/Part012/`（具体版。`limit_of_log_Z_in_N_row` は `Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimLimitInNRow.lean`）、`Ising2D/NecSuf/`（必要十分版）
+Lean: `Ising2D/Part012/`（具体版。`limit_of_log_Z_in_N_row` は `Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/ClaimLimitInNRow.lean`、`gamma_is_continuous` は `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimGammaContinuous.lean`）、`Ising2D/NecSuf/`（必要十分版）
 
 **この文書は `lean/README.md` へ統合されるまでの暫定の置き場である**（統合は呼び出し元が行う）。
 形式化の過程で見つかった原文の問題は

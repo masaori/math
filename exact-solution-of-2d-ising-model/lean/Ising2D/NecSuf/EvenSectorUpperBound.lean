@@ -3,7 +3,7 @@
 
 人手証明のラベル: **`c_between_Lambda_half_and_twice_Lambda_half`** の Step 2（旧 `onsager_exact_solution` の Step 3）
 （正本 `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）。
-具体版は `Ising2D.onsager_step3_c_le_two_c_plus`（`Ising2D/Part018/Theorem010_OnsagerExactSolution.lean`）で、
+具体版は `Ising2D.onsager_step3_c_le_two_c_plus`（`Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremOnsagerExactSolution.lean`）で、
 本ファイルの `rayleighSup_le_two_mul_evenSectorRayleighSup` を `π = flipConf`
 （`epsilonR M = permMat flipConf`）で特殊化したものである。
 
@@ -28,7 +28,7 @@
 * `π` が不動点をもたないことは使っていない。
 -/
 import Ising2D.NecSuf.PermMatrix
-import Ising2D.Part011.DefinitionSectorRayleighSup
+import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.DefinitionSectorRayleighSup
 import Ising2D.Part011.Claim005_PsdCauchySchwarz
 
 set_option linter.unusedSectionVars false

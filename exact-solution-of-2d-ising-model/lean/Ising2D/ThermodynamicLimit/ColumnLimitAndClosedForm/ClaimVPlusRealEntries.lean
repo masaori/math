@@ -5,7 +5,7 @@
 （`closing_009_theorem_c_plus_equals_Lambda_half`、ラベル **`c_plus_equals_Lambda_half_integer`**）の
 Step 2 の段落「`V^{(+)}` の成分は実である」。
 
-`Ising2D.EvenSectorBridge`（`Theorem009_CPlusEqualsLambda.lean`）の欄 `Vr`・`hVr`
+`Ising2D.EvenSectorBridge`（`TheoremCPlusEqualsLambda.lean`）の欄 `Vr`・`hVr`
 （`V^{(+)}` の実行列としての表示）を、`Ising2D.vPlusDataOf` の `V^{(+)}` について与える。
 
 ## 人手証明との対応

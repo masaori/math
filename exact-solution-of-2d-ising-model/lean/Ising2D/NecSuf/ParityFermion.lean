@@ -2,7 +2,7 @@
 # パリティ演算子とフェルミオン（**必要十分版**）
 
 対応する人手証明のラベル（正本は `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`。
-具体版は `Ising2D/Part018/`）:
+具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` と `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）:
 
 - `epsilon_anticommutes_with_check_Z_Y` (4) → `Ising2D.NecSuf.commute_parity_num` /
   `NecSuf.commute_parity_projOn`
