@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form",
   "D0_G_diagonal_action",
   "H1_plus_in_sigma_z_form",
   "T_V_plus_check_Z_Y",

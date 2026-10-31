@@ -1040,6 +1040,7 @@ targets=(
   Ising2D.TVPlus_checkZ_checkY
   Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1
   Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator
+  Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form
   Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.TV_hatZ_hatY_via_sandwich

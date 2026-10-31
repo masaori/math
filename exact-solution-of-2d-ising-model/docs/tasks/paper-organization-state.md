@@ -2,6 +2,14 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の二つ目を直した。$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示の章の章末に、章立て案のゴールの式を主張するブロックを置いた。
+  - **章末の主張を置いた。** claim `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form` は、$\mu\in\check{\mathcal M}$ について (1) $\det\check P_\mu\neq0$ と $A(\tilde\theta_\mu)=\check P_\mu\,\mathrm{diag}(\lambda_{+,\mu},\lambda_{-,\mu})\check P_\mu^{-1}$、(2) $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$、(3) $\theta\in\mathbb R$ について $\gamma(\theta)=\mathrm{arccosh}(\cosh2K_1\cosh2K_2^*-\sinh2K_1\sinh2K_2^*\cos\theta)$、
+    (4) $(\check\psi_\mu^\dagger,\check\psi_\mu)=(\check Z_\mu,\check Y_\mu)\check P_\mu$ と $\check n_\mu=\check\psi_\mu^\dagger\check\psi_{M+1-\mu}$（定義の再掲）、(5) $V^{(+)}=c\exp(\sum_\mu\gamma(\tilde\theta_\mu)(\check n_\mu-\frac12I))$ を主張する。
+    証明は `diagonalization_check_P_D`・`lambda_eq_exp_gamma_theta_tilde`・`def_gamma_theta` から `def_indexed_hyperbolic_abbreviations` までの展開の鎖・`def_check_fermi`・`def_check_number_operator`・`V_plus_eq_c_exp_sum_gamma_check_number_operator` を挙げるだけである。
+    それまでの章末の主張 `V_plus_eq_c_exp_sum_gamma_check_number_operator` は、次の $V^{(+)}$ の固有値の章が引くので、そのまま残した。
+  - `tools/chapter-plan.ts` のこの章の `goalLabels` を新しい主張一つにし、説明ページのこの章のゴールの式を章立て案の並びにした（$V^{(+)}$ の指数表示だけをゴールの式とし、ほかを「ここに現れる記号」としていた書き方をやめた）。章の項目数は 32（章立て案は 27。この回の前は 31 で、増えた 1 項は新しい主張）。どの章にも割り当てていない項は 0 のまま。
+  - SageMath は `sagemath/check/A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form/`（24 組。(3) の左辺は $B_1(\theta)B_2B_1(\theta)$ の (1,1) 成分から作る。(4) は定義どおりの確認）を足した。Lean は `ClaimATildeDiagonalizationLambdaExpGammaAndVPlusExponentialForm.lean` を足して `check-no-sorry.sh` の対象にした。
+  - 別のエージェントのレビューを経た（指摘 3 件を直した。SageMath の (3) が両辺を同じ式から作っていたこと、statement の実数の量に $\mathbb R$ に住む理由が無かったこと、(1) の証明が $\check D_\mu$ の定義の展開を鎖で書いていなかったこと）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の一つ目を直した。$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示の章の章末に、章立て案のゴールの式を主張するブロックを置いた。
   - **章末の主張を置いた。** claim `W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form` は (1) $WP^{(+)}=V^{(+)}P^{(+)}$、(2) $\mathcal F^{(+)}=\{x\mid\varepsilon x=x\}=\mathrm{im}\,P^{(+)}$、(3) $V^{(+)}$ の $H_1^{(+)},H_2$ による指数表示を主張し、statement で $\varepsilon$・$P^{(+)}$・$H_1^{(+)}$・$H_2$ の式を定義の参照つきで書く。証明は `symmetrized_transfer_matrix_on_sectors`・`epsilon_projector_properties` (2)・`V_plus_exponential_form` を挙げるだけである。
   - **$V^{(+)}$ の指数表示を主張にした。** それまでの章末の主張 `symmetrized_transfer_matrix_on_sector_exponential_form`（$WP^{(+)}$ の指数表示）の証明の 2〜5 行目を、右の $P^{(+)}$ を除いて根拠を変えずに運び、claim `V_plus_exponential_form` とした。旧主張は本文のどこからも使われなくなったので、参照用ノート `notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts` へ退避し、理由を書いた。
@@ -1300,11 +1308,10 @@
 
 ## 次の一歩
 
-完了の確認で見つかった差の残り二つを、上から一つずつ行う。どれも、章内の既存の主張を挙げるだけで証明できる主張を章末に足すか、既存のブロックを移す作業で、数学の中身の新しい証明はしない。二つが済んだら、作業の順序の七番目（完了の確認）をやり直す。
-（一つ目の射影の章の章末の主張は 2026-10-31 に済んだ。上の「現在地」の先頭を見よ。）
+完了の確認で見つかった差の残り一つを行う。済んだら、作業の順序の七番目（完了の確認）をやり直す。
+（一つ目の射影の章と、二つ目の対角化の章の章末の主張は 2026-10-31 に済んだ。上の「現在地」の先頭二つを見よ。）
 
-1. **$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示の章の章末の主張に、$A(\tilde\theta_\mu)$ の対角化と $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$ を加える。** 同じ章の `Athetatilde_005`・`Athetatilde_009` を挙げる。SageMath・Lean・`goalLabels`・説明ページを同じ回で揃える。
-2. **離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせる。** `T_V_plus_is_conjugation` と、それが使う $V^{(+)}$ の可逆性の依存閉包が、離散 Fourier 変換の章より前の章と数学的道具立てだけで閉じるなら、それらを離散 Fourier 変換の章へ移し、章末の主張を共役で述べる。閉じないなら、説明ページと章立て案の注記に、$T_{(V^{(+)})}$ は合成で定め、共役との一致は次の章で示すと書く。
+1. **離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせる。** `T_V_plus_is_conjugation` と、それが使う $V^{(+)}$ の可逆性の依存閉包が、離散 Fourier 変換の章より前の章と数学的道具立てだけで閉じるなら、それらを離散 Fourier 変換の章へ移し、章末の主張を共役で述べる。閉じないなら、説明ページと章立て案の注記に、$T_{(V^{(+)})}$ は合成で定め、共役との一致は次の章で示すと書く。
 
 ## 未確定
 
