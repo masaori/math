@@ -168,17 +168,21 @@
     このまとまりの `pauli_matrix_products` に当たる定理は `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`、
     `tensor_anticommutation_from_single_site` と同じ主張の `siteProd_anticomm_of_single_site` は `EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean` にある。
     どちらのファイルも冒頭が宣言する人手の項目は章の項目だけなので、runbook の数え方（冒頭の宣言で数える）で今の置き場のままにした。
+  - 部「数学的道具立て」のまとまり「数ベクトル・行列の長さと収束」: 形式化したファイルは無い（`def_matrix_norm` は `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` が説明で触れるだけで、ほかの 5 項目はどのファイルにも出ない）。
+  - 部「数学的道具立て」のまとまり「行列指数関数と交換子計算」（済み）: 旧 `Part004/ClaimExpOfDiagonalMatrix`（`exp_of_diagonal_matrix` だけを形式化）を
+    `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` へ移した（必要十分版は `NecSuf/ExpDiagonal.lean` のまま）。
+    このまとまりの `ad_binomial`・`matrix_exp_conjugation` は `EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`・`ClaimNestedCommutator.lean` が参照するだけで（前の章で判断したとおり、`ClaimExpConjugation` が形式化するのは章の `exp_X_Y_exp_-X`）、
+    `theorem_exp_product`・`def_exp` は章のファイルが根拠として引くだけである。ほかの項目を形式化したファイルは旧フォルダに無い。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の部「数学的道具立て」の続きを、棚卸しの `mathematicalToolGroups` の並びで一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
-次は「数ベクトル・行列の長さと収束」「行列指数関数と交換子計算」に形式化したファイルがあるかを調べることである（冒頭の `<ラベル>` では旧フォルダに見つからない。
-`Part004/ClaimExpOfDiagonalMatrix` など冒頭が旧 Typst のパスだけのファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）。無ければ「可逆行列・線型写像との対応・共役変換」の
-`Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism`）へ進む。
-残りの候補は `Part004/ClaimExpOfDiagonalMatrix`、`Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、
+項目 7 の部「数学的道具立て」の続きとして、「可逆行列・線型写像との対応・共役変換」の `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism`）を
+`Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。同じまとまりの `def_T_g`・`linearity_of_T` を形式化する `Part008/Definition016_TV` は、
+`def_T_V`（章の項目）と混在するので、runbook の多数決の規則で置き場を決めてから同じ回で扱う。
+残りの候補は `Part008/Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、
 `Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
 1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

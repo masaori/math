@@ -33,7 +33,7 @@
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
-import Ising2D.Part004.ClaimExpOfDiagonalMatrix
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 

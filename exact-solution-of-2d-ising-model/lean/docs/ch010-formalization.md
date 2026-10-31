@@ -125,7 +125,7 @@
   そのノルム由来の位相は行列の既定の位相と定義的に一致しないため、
   「`diagonal` が連続な環準同型だから `exp` と可換」という筋は**そのままでは通らない**
   （`Application type mismatch: … PseudoMetricSpace.toUniformSpace.toTopologicalSpace …`）。
-  この事情は `Ising2D/Part004/ClaimExpOfDiagonalMatrix.lean` のコメントに記録した。
+  この事情は `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` のコメントに記録した。
   なお `second_transfer_matrix_pauli_form` の「1 因子の `exp` をサイト演算子の `exp` にする」段
   （`Ising2D.exp_smul_sigmaX`）は、`Matrix.Norms.Operator` を証明の中だけで有効にし、
   級数 `NormedSpace.exp_series_hasSum_exp'` を連続線型写像で移して極限の一意性で閉じている

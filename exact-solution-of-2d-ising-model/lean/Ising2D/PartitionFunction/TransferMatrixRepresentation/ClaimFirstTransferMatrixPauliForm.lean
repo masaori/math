@@ -44,7 +44,7 @@
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
-import Ising2D.Part004.ClaimExpOfDiagonalMatrix
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
 
 namespace Ising2D
 

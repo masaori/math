@@ -505,10 +505,13 @@ targets=(
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
+  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean）---
   Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
   Ising2D.matrixExp_diagonal_apply
+  Ising2D.matExp_diagonal
+  # --- 各章（旧 Part000 の続き）---
   Ising2D.V1PauliForm_eq_diagonal
   Ising2D.V1PauliForm_apply_configBasisIso
   Ising2D.first_transfer_matrix_pauli_form

@@ -14,9 +14,9 @@
 本ファイルでは
 * `matrixExp_diagonal`（人手証明と 1 対 1 対応する具体版。原文の成分表示は
   `matrixExp_diagonal_apply`）
-* `matrixExp_diagonal_of_necSuf`（同じ主張を**必要十分版の系として**、
-  連続な環準同型 `Matrix.diagonalRingHom` と `Pi.evalRingHom` への特殊化から導いたもの）
-の 2 本を置く。
+* `exp_pi_apply`（`matrixExp_diagonal` の成分ごとの段。**必要十分版の系として**、
+  連続な環準同型 `Pi.evalRingHom` への特殊化から導いたもの）
+を置く。`diagonal` と `exp` の可換性の段に必要十分版をそのまま適用できない理由は、下の記録に書いた。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.ExpDiagonal

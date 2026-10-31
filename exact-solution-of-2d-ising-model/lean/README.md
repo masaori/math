@@ -97,6 +97,7 @@ EOF
   | 実数の平方根・指数関数・双曲線関数 | `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/` |
   | クロネッカー積と多因子基底 | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/` |
   | 有限行列・Pauli行列・交換子 | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` |
+  | 行列指数関数と交換子計算 | `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/` |
 
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
@@ -396,7 +397,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
 | `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
 | `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
-| `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `Part004/ClaimExpOfDiagonalMatrix.lean` |
+| `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` |
 | `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
 | `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean` |
 | `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelation.lean`（必要十分版からの導出は同 `FromNecSuf`） |

@@ -2,7 +2,7 @@
 # 必要十分版: 対角行列の指数関数
 
 対応する人手証明のラベル: **`exp_of_diagonal_matrix`**
-（具体版は `Ising2D/Part004/ClaimExpOfDiagonalMatrix.lean`）
+（具体版は `Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean`）
 
 ## この主張に本質的に効いている構造は何か
 
