@@ -4,6 +4,8 @@
 
 2026-10-31: 章立ての組み直しの四番目の項目の三番目の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」を組み直した。27 項を `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`（部「固有値問題」の最初の章）へ依存順で移し（本文不変）、章末にゴールの主張 `T_V_plus_check_Z_Y_via_B1_B2_B1`（SageMath・Lean つき）を足した。013・014 の章の案内文を新しい章の中へ移し、添字集合の定義から後ろの章を指す案内の文を外した。次は「A(θ̃_μ) の対角化と V^{(+)} の指数表示」の章。この VM の SageMath は `~/micromamba/envs/sage/bin/sage`、Lean は `~/.elan/bin`（非対話シェルの PATH に無い）。
 
+2026-10-31: Lean の通しの証明の項目 4c として、人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`（1 次元開鎖の二つのスピン和と正値性）を `lean/Ising2D/Part018/ClaimOpenChainSpinSums.lean` で形式化した（全単射 `Φ(s) = (s(1); t)` による変数変換と積の展開）。値は可換半環で足りるので必要十分版 `NecSuf/OpenChainSpinSum.lean` と系の導出 `Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` も置いた。次は項目 4d（`tr(εV^{(+)}) > 0` の本体。状態台帳の「次の一歩」）。
+
 2026-10-31: Lean の通しの証明の項目 4b として、人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`（`ε, D_0, G` の可換性、`(εG)^2 = I`、配置基底の上での `D_0, G` の対角作用）を `lean/Ising2D/Part018/ClaimEpsilonD0GCommuteAndDiagonalAction.lean` で形式化した。次は項目 4c（1 次元開鎖のスピン和。状態台帳の「次の一歩」）。
 
 2026-10-31: Lean の通しの証明の項目 4（`tr(εV^{(+)}) > 0`）を四つに割り、最初の一つとして人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`（`iH_1^{(+)} = D_0 + εG`）を `lean/Ising2D/Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean` で形式化した。次は `ε, D_0, G` の可換性・`(εG)^2 = I`・対角作用（状態台帳の「次の一歩」）。

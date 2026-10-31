@@ -1502,6 +1502,29 @@ targets=(
   Ising2D.sigmaZ_mul_sigmaZ_mulVec_basisVec_spin
   Ising2D.openChainD0_mulVec_basisVec
   Ising2D.boundaryG_mulVec_basisVec
+  Ising2D.sum_spinVal
+  Ising2D.spinVal_mul_self
+  Ising2D.openChainEnergy_mem_int
+  Ising2D.openChainChange_injective
+  Ising2D.card_openChainBond
+  Ising2D.card_openChainChange_target
+  Ising2D.openChainChange_bijective
+  Ising2D.openChainEnergy_eq_sum_bondSpin
+  Ising2D.exp_openChainEnergy
+  Ising2D.open_chain_partition_sum
+  Ising2D.nextSite_val_of_bond
+  Ising2D.prevSite_val_of_ne_zero
+  Ising2D.prod_openChainBondSpin
+  Ising2D.open_chain_endpoint_product_sum
+  Ising2D.open_chain_partition_sum_pos
+  Ising2D.open_chain_endpoint_product_sum_pos
+  Ising2D.openChainD0_mulVec_basisVec_eq_energy
+  Ising2D.NecSuf.sum_spinVal_addCommMonoid
+  Ising2D.NecSuf.open_chain_weighted_sum
+  Ising2D.NecSuf.prod_mul_nextSite_eq_first_mul_last
+  Ising2D.prod_openChainBondSpin_of_necSuf
+  Ising2D.open_chain_partition_sum_of_necSuf
+  Ising2D.open_chain_endpoint_product_sum_of_necSuf
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input

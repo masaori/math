@@ -153,6 +153,25 @@
 | `Ising2D.Y_last_mul_Z_first` / `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` / `neg_I_smul_Y_last_mul_Z_first` | `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^y_{M_col}`、`εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^y_{M_col}`、`-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | 境界項の計算 |
 | **`Ising2D.H1_plus_in_sigma_z_form`** | **`iH_1^{(+)} = D_0 + εG`**（`M_col ≥ 2`） | **主張本体** |
 
+#### `ClaimEpsilonD0GCommuteAndDiagonalAction.lean`（ラベル `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.epsilon_mul_openChainD0` / `epsilon_mul_boundaryG` / `openChainD0_mul_boundaryG` | `εD_0 = D_0ε`、`εG = Gε`、`D_0G = GD_0` | `epsilon_D0_G_pairwise_commute` |
+| `Ising2D.epsilon_mul_boundaryG_sq` | `(εG)^2 = I` | `epsilon_G_is_involution` |
+| `Ising2D.openChainD0_mulVec_basisVec` / `boundaryG_mulVec_basisVec` | `D_0f_{ι(s)} = (∑_m s(m)s(m+1))f_{ι(s)}`、`Gf_{ι(s)} = s(M_col)s(1)f_{ι(s)}` | `D0_G_diagonal_action` |
+
+#### `ClaimOpenChainSpinSums.lean`（ラベル `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.openChainEnergy` / `openChainEnergy_mem_int` | `E(s) = ∑_{m=1}^{M_col-1}s(m)s(m+1) ∈ ℤ` | `def_open_chain_spin_energy` |
+| `Ising2D.openChainChange` / `openChainChange_injective` / `openChainChange_bijective` | `Φ(s) = (s(1); t_1,…,t_{M_col-1})` は全単射 | 二つのスピン和の Step 1 |
+| `Ising2D.prod_openChainBondSpin` | `∏_m t_m = s(1)s(M_col)` | `open_chain_endpoint_product_sum` の Step 2 |
+| **`Ising2D.open_chain_partition_sum`** | **`∑_s exp(KE(s)) = 2(2cosh K)^{M_col-1}`** | **主張本体** |
+| **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`** | **主張本体** |
+| `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
+
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/ParityFermion.lean`、名前空間 `Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
@@ -167,6 +186,8 @@
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
 | **`NecSuf.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
+| **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(s(m)s(m+1)) = 2(g(1)+g(-1))^{M_col-1}`** | **重みの値は可換半環だけ（`M_col ≠ 0`）** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
+| `NecSuf.prod_mul_nextSite_eq_first_mul_last`（同） | 中間のサイトで `x(m)x(m) = 1` なら `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)` | 可換モノイド（`M_col ≥ 2`。両端の `x·x = 1` は不要） | `open_chain_endpoint_product_sum` の Step 2 |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -183,6 +204,8 @@
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `Definition006_RayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `onsager_exact_solution` Step 3 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_smul_family` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
+| `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
+| `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
 | `onsager_exact_solution`（Step 1・2・4） | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 011・018 の結果に接続するだけ |
 
 ### 必要十分版で判明した本質（本文には持ち込まない）
@@ -211,6 +234,15 @@
   `V^{(+)}` が転送行列であることも、`Λ̌_ε` が固有値であることも、半整数運動量であることも
   効いていない（`NecSuf.sum_powerset_signed_exp` は `g : ι → ℝ` を任意にとる）。
 
+- **1 次元開鎖の二つのスピン和に効いているのは、変数変換 `Φ(s) = (s(1); s(m)s(m+1))` の全単射と、
+  重みの値の側の可換半環の構造（有限積の有限和への展開）だけである。** 重みの値については実数・指数関数・`cosh`・`sinh` は効いておらず、
+  二つの和は重み `g(t) = exp(Kt)` と `g(t) = t·exp(Kt)` の特殊化にすぎない（`NecSuf.open_chain_weighted_sum`）。
+  スピンの側（`𝔐`）は人手の定義のまま固定した。そこで効くのは、`{-1,1}` が乗法で閉じることと `s·s = 1`（`Φ` の単射性）、
+  元の個数 `2` だけで、`ℝ` の加法・順序は効いていない。
+  `M_col ≥ 2` は端点因子の書き替えで両端を別々に括り出すところだけで効き、`x(m)x(m) = 1` は中間のサイトでしか効かない。
+  人手の端点因子の書き替えの一段「`ℝ` の乗法の可換性と結合性」は、Lean では `∏_m s(m)` と `∏_m s(m+1)` への分解・
+  添字のずらし・両端の括り出しの段に割れる。
+
 - **`γ(θ̃_μ) > 0`（半整数運動量に固有の性質）が効くのは 1 箇所だけである。**
   `∏_μ 2 sinh(γ_μ/2) ≠ 0`（したがって `tr(εV^{(+)})` の符号が `η_{(1,…,1)}` で決まる）と、
   `Λ̌_ε ≤ Λ̌_{(1,…,1)}` の 2 つに使う。整数運動量なら `γ = 0` のモードが出て両方が壊れる。
@@ -219,9 +251,7 @@
 
 | 人手証明（ブロック） | 状況 | 理由 |
 | --- | --- | --- |
-| `closing_claim_D0_G_diagonal_action`・`closing_claim_epsilon_D0_G_pairwise_commute`・`closing_claim_epsilon_G_is_involution`（`D_0,G` の対角作用、可換性、`(εG)^2=I`） | **未形式化** | `tr(εV^{(+)})` の直接計算の枝。配置基底での `σ^z` 表示を要し、章 018 の主鎖（`ε` の固有値 → `c_+(M) = Λ̌_max` → Onsager）とは独立 |
-| `closing_005_definition_open_chain_spin_energy`・`closing_005_claim_open_chain_partition_sum`・`closing_005_claim_open_chain_endpoint_product_sum`・`closing_005_claim_open_chain_spin_sums_positive`（1次元開鎖の記法、二つのスピン和、正値性） | **未形式化** | 同上。原文自身が「この計算には `Ž, Y̌, ψ̌` も半整数運動量も現れない」と述べる独立の組合せ論的計算 |
-| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記の未形式化のブロックと、`D_0,G` の定義・`H1_plus_in_sigma_z_form`（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean` の表）に依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
+| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 依存先の `D_0,G` の定義・`H1_plus_in_sigma_z_form`・可換性と対角作用・二つのスピン和は形式化した（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`・`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`・`ClaimOpenChainSpinSums.lean` の表）。この定理本体の形式化は通しの証明の項目 4d で行う。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
@@ -317,7 +347,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`）。最終定理では `2 ≤ m` から従うが、`htr` の型が `vPlusDataOf P hM _` を含むので欄に置いている |
-| `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
+| `htr` | `tr(εV^{(+)}) > 0` | 依存先の `closing_004`（`D_0, G` の可換性・対角作用）と `closing_005`（1 次元開鎖のスピン和）は形式化した。`closing_006`（`trace_of_epsilon_V_plus` 本体）だけが未形式化で、通しの証明の項目 4d で行う（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | 具体的な `W`（`physicalSymTransferR`）の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | 未着手（runbook の項目 5）。`hWcomm` は章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）と同じ型。`hWpos` は具体的な `W` についての `W_has_positive_entries` の定理がまだ無い |
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は

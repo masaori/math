@@ -225,6 +225,9 @@ import Ising2D.Part018.PhysicalEvenSectorBridge
 import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
 import Ising2D.Part018.ClaimH1PlusInSigmaZForm
 import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
+import Ising2D.Part018.ClaimOpenChainSpinSums
+import Ising2D.NecSuf.OpenChainSpinSum
+import Ising2D.Part018.ClaimOpenChainSpinSumsFromNecSuf
 import Ising2D.Part018.Theorem013_OnsagerUnconditional
 import Ising2D.Part020.Theorem012_SpecificHeatLogDivergence
 import Ising2D.NecSuf.JointEigenspaceDecomposition

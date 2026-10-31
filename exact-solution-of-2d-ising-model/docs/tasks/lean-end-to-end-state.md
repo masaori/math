@@ -29,8 +29,12 @@
   - 4b（済み）: 人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` を
     `Part018/ClaimEpsilonD0GCommuteAndDiagonalAction.lean` で形式化した（`epsilon_mul_openChainD0`・`epsilon_mul_boundaryG`・
     `openChainD0_mul_boundaryG`・`epsilon_mul_boundaryG_sq`・`openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`）。
-  - 4c: 人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`
-    （1 次元開鎖の二つのスピン和と正値性）。
+  - 4c（済み）: 人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive` を
+    `Part018/ClaimOpenChainSpinSums.lean` で形式化した（`openChainEnergy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・
+    `open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos`）。`openChainEnergy` は `openChainD0_mulVec_basisVec` の係数と定義で一致する。
+    両端のスピンは `s (lastSite M _) * s (firstSite M _)` の順で書いた（`boundaryG_mulVec_basisVec` の係数と同じ）。
+    値は可換半環で足りるので、必要十分版 `NecSuf/OpenChainSpinSum.lean` を置き、具体版を `Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で系として導出した。
+    4d で使う `D_0f_{ι(s)} = E(s)f_{ι(s)}` は `openChainD0_mulVec_basisVec_eq_energy`。二つの和は `ℝ` の `Real.exp` で書いてあるので、4d で `ℂ` へ移す。
   - 4d: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
     証明し、`EvenSectorClosureInput` から `htr` を外す。
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
@@ -42,7 +46,7 @@
 
 ## 次の一歩
 
-項目 4c：人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`
-（1 次元開鎖の二つのスピン和と正値性）を具体版で形式化する。スピン配置は `SpinConf M`（`Part001/DefinitionRowConfigurations.lean`）、
-開鎖のエネルギーの和の範囲は `openChainD0` と同じ `(m : ℕ) + 1 ≠ M` なる `m : Fin M` と `nextSite m` で書き、
-4b の `openChainD0_mulVec_basisVec` の係数と定義から一致させる。大きければ「定義と端点因子のない和」と「端点因子つきの和と正値性」に割る。
+項目 4d：人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
+証明し、`EvenSectorClosureInput` から `htr` を外す。使う材料は 4a の `H1_plus_in_sigma_z_form`、4b の可換性・`(εG)^2 = I`・
+`openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`、4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・正値性である。
+大きければ人手の Step の単位（`(V_1^{(+)})^{1/2}` の `D_0, εG` による分解、対角和への帰着、二つのスピン和の代入、正値性、`htr` の除去）に割り、先頭だけを行う。
