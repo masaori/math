@@ -142,10 +142,12 @@ export default defineBlocks([
     labels: ["chapter_organization_goal_projection_and_jordan_wigner"],
     statement: [
       paragraph(["この章のゴールの式は次である。"]),
-      displayMath(String.raw`WP^{(+)}=\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,(2\sinh 2K_2)^{M/2}\exp\left(iK_2^*H_2\right)\,\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right)P^{(+)}`),
-      paragraph(["ここに現れる記号は次の行列である。"]),
-      displayMath(String.raw`P^{(+)}=\tfrac12\left(I+\varepsilon\right),\qquad
-\varepsilon=\sigma^x_1\cdots\sigma^x_M,`),
+      displayMath(String.raw`WP^{(+)}=V^{(+)}P^{(+)},\qquad
+P^{(+)}=\tfrac12\left(I+\varepsilon\right),\qquad
+\varepsilon=\sigma^x_1\cdots\sigma^x_M,\qquad
+\mathcal F^{(+)}=\left\{x\in\mathbb C^{2^M}\ \middle|\ \varepsilon x=x\right\}=\mathrm{im}\,P^{(+)},`),
+      displayMath(String.raw`V^{(+)}=\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,(2\sinh 2K_2)^{M/2}\exp\left(iK_2^*H_2\right)\,\exp\left(\tfrac{i}{2}K_1H_1^{(+)}\right),`),
+      paragraph(["ここに現れる行列 ", math(String.raw`H_1^{(+)},H_2`), " は次である。"]),
       displayMath(String.raw`H_1^{(+)}=\sum_{m=1}^{M-1}Y_mZ_{m+1}-Y_MZ_1,\qquad
 H_2=\sum_{m=1}^{M}Z_mY_m`),
     ],

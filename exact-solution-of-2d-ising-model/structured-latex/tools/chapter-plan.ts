@@ -41,7 +41,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`\varepsilon \text{ の固有値 } +1 \text{ の固有空間への射影と Jordan–Wigner 表示}` },
         organizationGoalLabel: "chapter_organization_goal_projection_and_jordan_wigner",
-        goalLabels: ["symmetrized_transfer_matrix_on_sector_exponential_form"],
+        goalLabels: ["W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form"],
         proposalEntryCount: 27,
       },
     ],

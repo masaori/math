@@ -1,5 +1,10 @@
 # SageMath Check: symmetrized_transfer_matrix_on_sector_exponential_form
 
+> **退避（2026-10-31）**: 対象の主張は、章の組み直しで章末の主張が $WP^{(+)}=V^{(+)}P^{(+)}$ と $V^{(+)}$ の指数表示を
+> 別々に挙げる形になり、本文のどこからも使われなくなったので、参照用ノート
+> `structured-latex/notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts` へ退避した。それに合わせてこの検査を
+> `sagemath/check/` からここへ移した。検算の記録として残す（下の記述は退避前のまま）。共通定義を読む相対パスと実行方法の場所だけを直した。
+
 ## 対象
 
 **対象ラベル**: `symmetrized_transfer_matrix_on_sector_exponential_form` （structured-latex 側の安定識別子）
@@ -31,7 +36,7 @@
 ## 実行方法
 
 ```bash
-cd sagemath/check/symmetrized_transfer_matrix_on_sector_exponential_form
+cd sagemath/_old/symmetrized-transfer-matrix-on-sector-exponential-form
 sage check_substitution_chain.sage
 ```
 

@@ -1,10 +1,12 @@
 /-
 # `W P^{(+)}` の `H_1^{(+)}`, `H_2` による指数表示
 
-対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
-
-* `projection_and_jordan_wigner_claim_symmetrized_transfer_matrix_on_sector_exponential_form`
-  （ラベル **`symmetrized_transfer_matrix_on_sector_exponential_form`**）
+対応する人手の主張は本文から参照用ノート
+`structured-latex/notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts` へ退避してある
+（もとのブロック `projection_and_jordan_wigner_claim_symmetrized_transfer_matrix_on_sector_exponential_form`、
+ラベル **`symmetrized_transfer_matrix_on_sector_exponential_form`**）。章末の主張が `W P^{(+)} = V^{(+)} P^{(+)}` と
+`V^{(+)}` の指数表示（`ClaimVPlusExponentialForm.lean`）を別々に挙げる形になり、本文のどこからも使われなくなったためである。
+このファイルは形式化の記録として残す（ビルドは通し続ける）。
 
 主張: `M_col ≥ 2`、`K_1, K_2 > 0` のとき
 `W P^{(+)} = exp((i/2)K_1H_1^{(+)}) (2 sinh 2K_2)^{M_col/2} exp(iK_2^*H_2) exp((i/2)K_1H_1^{(+)}) P^{(+)}`。

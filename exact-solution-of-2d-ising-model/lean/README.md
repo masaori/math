@@ -150,6 +150,12 @@ EOF
   `Part004/ClaimEpsilonActionEigenvalues.lean` とその必要十分版の導出、
   `Part013/Claim007_H1H2ViaCheck.lean`, `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
   形式化の記録として残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。
+- **`W P^{(+)}` の `H_1^{(+)}`, `H_2` による指数表示の主張（`symmetrized_transfer_matrix_on_sector_exponential_form`）は
+  本文から参照用ノートへ退避してある（2026-10-31）。** 射影の章の章末の主張
+  （`W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form`）が `W P^{(+)} = V^{(+)} P^{(+)}` と
+  `V^{(+)}` の指数表示（`V_plus_exponential_form`）を別々に挙げるようになり、使われなくなったためである。ノートは
+  `structured-latex/notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts`、Lean は
+  `PartitionFunction/ProjectionAndJordanWigner/ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean` に記録として残す。
 - 各 Lean ファイルの冒頭コメントに、対応する `.typ` ファイル名と Typst のラベル（`<...>`）を書く。
 - 原文のステートメントをそのまま形式化できない場合（記号の重複・「元」と「族」の混同など）は、
   **冒頭コメントに原文の問題点と、形式化した修正版ステートメントを明記する**
@@ -388,6 +394,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean` |
 | `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean` |
 | `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
+| `V_plus_exponential_form` | `Ising2D.V_plus_exponential_form`（`VPlusOfTransfer` の指数表示） | `PartitionFunction/ProjectionAndJordanWigner/ClaimVPlusExponentialForm.lean` |
+| `W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form`（射影の章の章末の主張） | `Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form` | `PartitionFunction/ProjectionAndJordanWigner/ClaimWPPlusEqVPlusPPlusImageAndVPlusExponentialForm.lean` |
 
 ### 下流で `V_2` をどう扱っているか
 

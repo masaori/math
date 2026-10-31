@@ -2,6 +2,11 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の一つ目を直した。$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示の章の章末に、章立て案のゴールの式を主張するブロックを置いた。
+  - **章末の主張を置いた。** claim `W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form` は (1) $WP^{(+)}=V^{(+)}P^{(+)}$、(2) $\mathcal F^{(+)}=\{x\mid\varepsilon x=x\}=\mathrm{im}\,P^{(+)}$、(3) $V^{(+)}$ の $H_1^{(+)},H_2$ による指数表示を主張し、statement で $\varepsilon$・$P^{(+)}$・$H_1^{(+)}$・$H_2$ の式を定義の参照つきで書く。証明は `symmetrized_transfer_matrix_on_sectors`・`epsilon_projector_properties` (2)・`V_plus_exponential_form` を挙げるだけである。
+  - **$V^{(+)}$ の指数表示を主張にした。** それまでの章末の主張 `symmetrized_transfer_matrix_on_sector_exponential_form`（$WP^{(+)}$ の指数表示）の証明の 2〜5 行目を、右の $P^{(+)}$ を除いて根拠を変えずに運び、claim `V_plus_exponential_form` とした。旧主張は本文のどこからも使われなくなったので、参照用ノート `notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts` へ退避し、理由を書いた。
+  - `tools/chapter-plan.ts` のこの章の `goalLabels` を新しい主張にし、説明ページのこの章のゴールの式を章立て案の式にした。章の項目数は 29（章立て案は 27。この回の前は 28 で、増えた 1 項は $V^{(+)}$ の指数表示を章末の主張から分けた `V_plus_exponential_form` である）。どの章にも割り当てていない項は 0 のまま。
+  - SageMath は `sagemath/check/V_plus_exponential_form/`（鎖の 4 行。$V_2$ は成分定義から作る）と `sagemath/check/W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form/`（(2) は QQ で厳密）を足し、旧主張の検査を `sagemath/_old/symmetrized-transfer-matrix-on-sector-exponential-form/` へ移した。Lean は `ClaimVPlusExponentialForm.lean` と `ClaimWPPlusEqVPlusPPlusImageAndVPlusExponentialForm.lean` を足して `check-no-sorry.sh` の対象にし、旧主張の Lean は形式化の記録として残した。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の七番目の項目（完了の確認）を行った。ゴールラインのうち、各章が章立て案の「ゴールの式」を主張するブロックで終わる、という項目が 3 章で成り立っていなかったので、ゴール台帳は未達のままにし、差を下の「次の一歩」に三つの単位として書いた。
   - **成り立っていた項目。** 文書順（`tools/content-modules.ts`）で、冒頭の章立ての説明ページのあと、部「数学的道具立て」（道具の章 11）・「分配関数」（2 章）・「固有値問題」（4 章）・「熱力学極限」（2 章）・「臨界点」（1 章）が並び、9 章の見出しは章立て案の題と一致する。
     全ブロックの `ref` と `\blkref` を文書順で調べ、後ろの章のブロックを指す参照は 0 だった。同じ章の後ろを指す参照は、章冒頭の案内文と、主張の本文で後ろの主張を名指しする案内（`check_joint_eigenspace_decomposition`・`max_eigenvalue_of_V_plus_simple`・`trace_of_epsilon_V_plus`・`max_eigenvector_in_even_sector`）だけで、証明の根拠には使っていない。
@@ -1295,11 +1300,11 @@
 
 ## 次の一歩
 
-完了の確認で見つかった差を、次の三つの単位として上から一つずつ行う。どれも、章内の既存の主張を挙げるだけで証明できる主張を章末に足すか、既存のブロックを移す作業で、数学の中身の新しい証明はしない。三つが済んだら、作業の順序の七番目（完了の確認）をやり直す。
+完了の確認で見つかった差の残り二つを、上から一つずつ行う。どれも、章内の既存の主張を挙げるだけで証明できる主張を章末に足すか、既存のブロックを移す作業で、数学の中身の新しい証明はしない。二つが済んだら、作業の順序の七番目（完了の確認）をやり直す。
+（一つ目の射影の章の章末の主張は 2026-10-31 に済んだ。上の「現在地」の先頭を見よ。）
 
-1. **$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示の章の章末に、章立て案のゴールの式を主張するブロックを置く。** $WP^{(+)}=V^{(+)}P^{(+)}$（`maxeig_claim_symmetrized_transfer_matrix_on_sectors`）、$\mathrm{im}\,P^{(+)}=\mathcal F^{(+)}$（`bridge_009`）、$V^{(+)}$ の指数表示（`def_V_plus` と `V2_exponential_representation`）を挙げて証明する。SageMath・Lean の対応、`tools/chapter-plan.ts` の `goalLabels`、説明ページのゴールの式を同じ回で揃える。
-2. **$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示の章の章末の主張に、$A(\tilde\theta_\mu)$ の対角化と $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$ を加える。** 同じ章の `Athetatilde_005`・`Athetatilde_009` を挙げる。SageMath・Lean・`goalLabels`・説明ページを同じ回で揃える。
-3. **離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせる。** `T_V_plus_is_conjugation` と、それが使う $V^{(+)}$ の可逆性の依存閉包が、離散 Fourier 変換の章より前の章と数学的道具立てだけで閉じるなら、それらを離散 Fourier 変換の章へ移し、章末の主張を共役で述べる。閉じないなら、説明ページと章立て案の注記に、$T_{(V^{(+)})}$ は合成で定め、共役との一致は次の章で示すと書く。
+1. **$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示の章の章末の主張に、$A(\tilde\theta_\mu)$ の対角化と $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$ を加える。** 同じ章の `Athetatilde_005`・`Athetatilde_009` を挙げる。SageMath・Lean・`goalLabels`・説明ページを同じ回で揃える。
+2. **離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせる。** `T_V_plus_is_conjugation` と、それが使う $V^{(+)}$ の可逆性の依存閉包が、離散 Fourier 変換の章より前の章と数学的道具立てだけで閉じるなら、それらを離散 Fourier 変換の章へ移し、章末の主張を共役で述べる。閉じないなら、説明ページと章立て案の注記に、$T_{(V^{(+)})}$ は合成で定め、共役との一致は次の章で示すと書く。
 
 ## 未確定
 

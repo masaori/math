@@ -18,7 +18,7 @@
 import os
 _dir = os.getcwd()   # このディレクトリで実行する（overview.md の「実行方法」）
 # 044 の共通定義は __file__ のディレクトリを基準に 043 と _shared を読み込むので、__file__ をその位置にして読み込む。
-__file__ = os.path.join(_dir, "../044_claim_max_eigenvalue/_prelude.sage")
+__file__ = os.path.join(_dir, "../../check/044_claim_max_eigenvalue/_prelude.sage")
 load(__file__)
 
 TOL = 1e-9

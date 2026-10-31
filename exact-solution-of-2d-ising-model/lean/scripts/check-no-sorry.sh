@@ -682,6 +682,8 @@ targets=(
   Ising2D.physicalSymTransferC_eq_map
   Ising2D.NecSuf.sandwich_mul_proj_eq
   Ising2D.symmetrized_transfer_matrix_on_sectors
+  Ising2D.V_plus_exponential_form
+  Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form
   Ising2D.H1plus_eq_H1
   Ising2D.V1plus_exponential_representation
   Ising2D.V1plus_eq_V1pm

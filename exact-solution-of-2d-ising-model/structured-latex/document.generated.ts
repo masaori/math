@@ -55,6 +55,7 @@ import notes_claims_unused_by_chapter_goals_not_adopted from './notes/claims_unu
 import notes_critical_point_physical_specific_heat_not_adopted from './notes/critical_point_physical_specific_heat_not_adopted.ts'
 import notes_integer_momentum_route_not_adopted from './notes/integer_momentum_route_not_adopted.ts'
 import notes_minus_sector_not_adopted from './notes/minus_sector_not_adopted.ts'
+import notes_symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted from './notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts'
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
@@ -100,6 +101,7 @@ export type AllNotes = [
   ...typeof notes_critical_point_physical_specific_heat_not_adopted,
   ...typeof notes_integer_momentum_route_not_adopted,
   ...typeof notes_minus_sector_not_adopted,
+  ...typeof notes_symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted,
 ]
 
 type AllBlockIds = BlockIdsOf<AllBlocks>

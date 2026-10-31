@@ -3015,11 +3015,10 @@ WP
     },
   },
   {
-    id: "projection_and_jordan_wigner_claim_symmetrized_transfer_matrix_on_sector_exponential_form",
+    id: "projection_and_jordan_wigner_claim_V_plus_exponential_form",
     kind: "claim",
-    standing: "mainTheorem",
-    title: { tex: String.raw`W P^{(+)} \text{ の } H_1^{(+)},\ H_2 \text{ による指数表示}` },
-    labels: ["symmetrized_transfer_matrix_on_sector_exponential_form"],
+    title: { tex: String.raw`V^{(+)} \text{ の } H_1^{(+)},\ H_2 \text{ による指数表示}` },
+    labels: ["V_plus_exponential_form"],
     statement: [
       paragraph([
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
@@ -3028,13 +3027,9 @@ WP
         " とし、虚数単位 ",
         math(String.raw`i\in\mathbb{C}`),
         " を用いる。",
-        ref("def_symmetrized_transfer_matrix"),
+        ref("def_V_plus"),
         " の ",
-        math(String.raw`W`),
-        "、",
-        ref("def_epsilon_projectors"),
-        " の ",
-        math(String.raw`P^{(+)}`),
+        math(String.raw`V^{(+)}`),
         "、",
         ref("def_H1_plus"),
         " の ",
@@ -3052,10 +3047,10 @@ WP
         " について、",
       ]),
       displayMath(
-        String.raw`W P^{(+)}
+        String.raw`V^{(+)}
 = \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
   (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\left(i K_2^* H_2\right)
-  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) P^{(+)}`,
+  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)`,
       ),
       paragraph([
         "が成り立つ。ここに現れる ",
@@ -3074,20 +3069,18 @@ WP
       ]),
       displayMath(
         String.raw`\begin{aligned}
-W P^{(+)}
-&= V^{(+)} P^{(+)}
-&&(\because\ \blkref{symmetrized_transfer_matrix_on_sectors}) \\
-&= \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2} P^{(+)}
+V^{(+)}
+&= \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}
 &&(\because\ \blkref{def_V_plus}) \\
-&= \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) V_2 \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) P^{(+)}
+&= \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) V_2 \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 &&(\because\ \blkref{def_V1_plus_square_root}) \\
 &= \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
   (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(i K_2^* H_2\right)
-  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) P^{(+)}
+  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 &&(\because\ \blkref{V2_exponential_representation}) \\
 &= \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
   (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\left(i K_2^* H_2\right)
-  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right) P^{(+)}
+  \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})
 \end{aligned}`,
       ),
@@ -3095,7 +3088,103 @@ W P^{(+)}
     conversion: {
       status: "added",
       notes: [
-        "2026-10-31: 章立ての組み直しで、ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示の章のゴールの式を一つの主張として立てた。既存の主張と定義を代入するだけで、新しい証明は無い。",
+        "2026-10-31: 章立ての組み直しで、章立て案のこの章のゴールの式が V^{(+)} そのものの指数表示を含むので、それを主張として立てた。式変形は、それまでこの章の最後にあった W P^{(+)} の指数表示の主張（参照用ノートへ退避）の証明の 2〜5 行目を、右から P^{(+)} を掛けない形でそのまま運んだもので、根拠は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "projection_and_jordan_wigner_claim_W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form",
+    kind: "claim",
+    standing: "mainTheorem",
+    title: {
+      tex: String.raw`W P^{(+)} = V^{(+)} P^{(+)}\text{、}\mathcal{F}^{(+)} = \mathrm{im}\,P^{(+)}\text{ と }V^{(+)}\text{ の指数表示}`,
+    },
+    labels: ["W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とし、虚数単位 ",
+        math(String.raw`i\in\mathbb{C}`),
+        " を用いる。",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon=\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
+        "、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(+)}=\tfrac12\left(I+\varepsilon\right)`),
+        "（",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "）、",
+        ref("def_symmetrized_transfer_matrix"),
+        " の ",
+        math(String.raw`W`),
+        "、",
+        ref("def_V_plus"),
+        " の ",
+        math(String.raw`V^{(+)}`),
+        "、",
+        ref("def_H1_plus"),
+        " の ",
+        math(String.raw`H_1^{(+)}=\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}-Y_{M_{\mathrm{col}}}Z_1`),
+        "、",
+        ref("def_H2"),
+        " の ",
+        math(String.raw`H_2=\sum_{m=1}^{M_{\mathrm{col}}}Z_mY_m`),
+        "（いずれも ",
+        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " の元）、",
+        ref("def_even_eigenvectors_of_epsilon"),
+        " の ",
+        math(String.raw`\mathcal{F}^{(+)}=\left\{x\in\mathbb{C}^{2^{M_{\mathrm{col}}}}\;\middle|\;\varepsilon x=x\right\}`),
+        " と ",
+        ref("def_second_dual_coupling_constant"),
+        " の ",
+        math(String.raw`K_2^*\in\mathbb{R}_{>0}`),
+        " について、次の三つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\text{(1)}\quad W P^{(+)} = V^{(+)} P^{(+)}`)],
+        [
+          math(String.raw`\text{(2)}\quad \mathcal{F}^{(+)} = \mathrm{im}\,P^{(+)} := \left\{P^{(+)}x \;\middle|\; x\in\mathbb{C}^{2^{M_{\mathrm{col}}}}\right\}`),
+        ],
+        [
+          math(String.raw`\text{(3)}\quad V^{(+)} = \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\left(i K_2^* H_2\right)\exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)`),
+        ],
+      ]),
+      paragraph([
+        "(3) に現れる ",
+        math(String.raw`\exp`),
+        " は、",
+        ref("def_exp"),
+        " で成分級数として定めた行列の指数関数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "(1) ",
+        ref("symmetrized_transfer_matrix_on_sectors"),
+        " そのものである。",
+      ]),
+      paragraph([
+        "(2) ",
+        ref("epsilon_projector_properties"),
+        " の (2) の ",
+        math(String.raw`\mathrm{im}\,P^{(+)}=\mathcal{F}^{(+)}`),
+        " の両辺を入れ替えたものである。",
+      ]),
+      paragraph([
+        "(3) ",
+        ref("V_plus_exponential_form"),
+        " そのものである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-10-31: 章立ての組み直しで、章立て案のこの章のゴールの式（W P^{(+)} = V^{(+)} P^{(+)}、F^{(+)} = im P^{(+)}、V^{(+)} の指数表示）を一つの主張として立てた。既存の三つの主張を挙げるだけで、新しい証明は無い。",
       ],
     },
   },
