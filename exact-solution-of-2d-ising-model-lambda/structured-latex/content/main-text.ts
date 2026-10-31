@@ -363,15 +363,10 @@ const chapter_tools = defineSection({
                         ]),
                       ],
                       proof: [
-                        paragraph([
-                          "準備として ",
-                          math(String.raw`ab'=a'b`),
-                          " である（仮定 ",
-                          math(String.raw`a/b=a'/b'`),
-                          " の両辺に ",
-                          math(String.raw`bb'\ne0`),
-                          " を掛けた。両辺は 1 以上の整数の積なので 1 以上の整数）。",
-                        ]),
+                        paragraph(["準備の等式を作る。"]),
+                        displayMath(String.raw`ab'=a'b
+\qquad\bigl(\because\ \frac{a}{b}=\frac{a'}{b'}\text{ の両辺に }bb'\ne0\text{ を掛ける}\bigr)`),
+                        paragraph(["両辺は 1 以上の整数の積なので、1 以上の整数である。"]),
                         displayMath(String.raw`\begin{aligned}
 v_p(a)-v_p(b)
 &=v_p(a)+v_p(b')-v_p(b)-v_p(b')
