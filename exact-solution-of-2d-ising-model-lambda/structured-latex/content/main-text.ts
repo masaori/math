@@ -4272,9 +4272,9 @@ A^{k+1}\cdot v
                     displayMath(String.raw`\begin{aligned}
 (1\odot w)(u)
 &=1\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=w(u)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の単位元との積}\bigr)
 \end{aligned}`),
                     paragraph([
                       "であり、",
@@ -4292,13 +4292,13 @@ A^{k+1}\cdot v
                     displayMath(String.raw`\begin{aligned}
 \bigl((y\,z)\odot w\bigr)(u)
 &=(y\,z)\,w(u)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=y\,\bigl(z\,w(u)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=y\,\bigl((z\odot w)(u)\bigr)
-&&(\because\ \blkref{def_qbar_vector_smul})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)\\
 &=\bigl(y\odot(z\odot w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_smul})
+&&\bigl(\because\ \blkref{def_qbar_vector_smul}\bigr)
 \end{aligned}`),
                     paragraph([
                       "であり、",
@@ -4324,13 +4324,13 @@ A^{k+1}\cdot v
                     displayMath(String.raw`\begin{aligned}
 A^{0}\cdot v
 &=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_power}\bigr)\\
 &=v
-&&(\because\ \blkref{claim_qbar_identity_action})\\
+&&\bigl(\because\ \blkref{claim_qbar_identity_action}\bigr)\\
 &=1\odot v
-&&(\because\ \text{準備の第 1 の等式})\\
+&&\bigl(\because\ \text{準備の第 1 の等式}\bigr)\\
 &=z^{0}\odot v
-&&(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+&&\bigl(\because\ z^{0}=1\ \text{の約束。}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                     paragraph([
                       math(String.raw`k`),
@@ -4343,19 +4343,19 @@ A^{0}\cdot v
                     displayMath(String.raw`\begin{aligned}
 A^{k+1}\cdot v
 &=\bigl(A\,A^{k}\bigr)\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_power}\bigr)\\
 &=A\cdot\bigl(A^{k}\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_product})\\
+&&\bigl(\because\ \blkref{claim_qbar_action_product}\bigr)\\
 &=A\cdot\bigl(z^{k}\odot v\bigr)
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=z^{k}\odot\bigl(A\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_smul})\\
+&&\bigl(\because\ \blkref{claim_qbar_action_smul}\bigr)\\
 &=z^{k}\odot\bigl(z\odot v\bigr)
-&&(\because\ \text{仮定}\ A\cdot v=z\odot v)\\
+&&\bigl(\because\ \text{仮定}\ A\cdot v=z\odot v\bigr)\\
 &=\bigl(z^{k}z\bigr)\odot v
-&&(\because\ \text{準備の第 2 の等式})\\
+&&\bigl(\because\ \text{準備の第 2 の等式}\bigr)\\
 &=z^{k+1}\odot v
-&&(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set})
+&&\bigl(\because\ z^{k+1}=z^{k}z\ \text{の約束。}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                     paragraph([
                       "よって任意の ",
@@ -76992,238 +76992,6 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \blkref{def_single_traversal_edge_set}\
                       paragraph([
                         "有限集合上の二つの写像が全ての入力で一致するので ",
                         math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_standard_contact_pair",
-              labels: [],
-              title: { text: "標準接触対とその平滑化での不変性" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_standard_contact_smoothing_involution",
-                  beforeFocus: [
-                    {
-                      role: "prerequisiteDefinition",
-                      element: {
-                        id: "kac_ward_definition_standard_contact_pair",
-                        kind: "definition",
-                        title: { text: "標準接触対" },
-                        labels: ["def_standard_contact_pair"],
-                        habitat: "N",
-                        statement: [
-                          paragraph([
-                            math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                            " に対し、接触対の集合 ", math(String.raw`\operatorname{Ct}(\varphi)`), " を",
-                          ]),
-                          displayMath(String.raw`\operatorname{Ct}(\varphi):=\bigl\{\,\{\vec e,\vec f\}\ \bigm|\
-\vec e,\vec f\in M(\varphi),\ \vec e\ne\vec f,\
-\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}`),
-                          paragraph([
-                            "で定める（動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                            ref("def_moved_edge_set"), "、終点写像 ", math(String.raw`\operatorname{tgt}`),
-                            " は ", ref("def_oriented_edge_endpoints"), "）。この集合の元の個数が接触対の個数 ",
-                            math(String.raw`N_{\mathrm{ct}}(\varphi)`),
-                            "（", ref("def_permutation_contact_pair_count"), "）である。",
-                          ]),
-                          paragraph([
-                            "向き付き辺の集合 ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
-                            "（", ref("def_oriented_edges"), "）の上の関係 ",
-                            math(String.raw`\le_{\vec E}`), " を、",
-                            math(String.raw`(e,d)\le_{\vec E}(e',d')`), " を「",
-                            math(String.raw`e<e'`), "、または ", math(String.raw`e=e'`), " かつ ",
-                            math(String.raw`d\le d'`), "」で定める。ここで ",
-                            math(String.raw`e,e'\in E_L\subseteq\mathbb N`), " と ",
-                            math(String.raw`d,d'\in\{0,1\}\subseteq\mathbb N`),
-                            " の比較はいずれも ", math(String.raw`\mathbb N`),
-                            " の大小である。これは線型順序を持つ集合の有限直積の辞書式順序なので、",
-                            math(String.raw`\le_{\vec E}`), " は ", math(String.raw`\vec E_L`),
-                            " の線型順序である。",
-                          ]),
-                          paragraph([
-                            math(String.raw`\vec E_L`), " の二元部分集合 ", math(String.raw`P`),
-                            " について、", math(String.raw`\le_{\vec E}`), " に関する小さいほうの元を ",
-                            math(String.raw`\min P`), "、大きいほうの元を ", math(String.raw`\max P`),
-                            " と書く。二元部分集合の間の関係 ", math(String.raw`\preceq`), " を、",
-                            math(String.raw`P\preceq P'`), " を「",
-                            math(String.raw`\min P<_{\vec E}\min P'`), "、または ",
-                            math(String.raw`\min P=\min P'`), " かつ ",
-                            math(String.raw`\max P\le_{\vec E}\max P'`),
-                            "」で定める。これも線型順序を持つ集合の対の辞書式順序なので線型順序である。",
-                          ]),
-                          paragraph([
-                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " のとき、標準接触対 ",
-                            math(String.raw`\operatorname{ct}_{\min}(\varphi)`), " を、線型順序を持つ空でない有限集合 ",
-                            math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
-                            " のただ一つの最小元と定める。線型順序を持つ空でない有限集合の最小元は存在してただ一つなので、",
-                            "この値は定まる。切り替え可能性（", ref("def_switchable_permutation_contact_pair"),
-                            "）は要求しない。全て有限集合の元の比較であり、実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                      },
-                    },
-                    {
-                      role: "supportingClaim",
-                      element: {
-                        id: "kac_ward_claim_contact_pair_set_smoothing_invariant",
-                        kind: "claim",
-                        title: { text: "接触対の集合と標準接触対は平滑化で不変である" },
-                        labels: ["claim_contact_pair_set_smoothing_invariant"],
-                        habitat: "N",
-                        verification: ["sagemath/check/standard-contact-smoothing-involution"],
-                        statement: [
-                          paragraph([
-                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                            "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
-                            math(String.raw`\{\vec e,\vec f\}`),
-                            "（", ref("def_switchable_permutation_contact_pair"), "）を取り、",
-                            math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
-                            "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき",
-                          ]),
-                          displayMath(String.raw`\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi),\qquad
-N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
-\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)`),
-                          paragraph([
-                            "が成り立つ（", math(String.raw`\operatorname{Ct}`), "・",
-                            math(String.raw`\operatorname{ct}_{\min}`), " は ",
-                            ref("def_standard_contact_pair"), "。三つめの等式では両辺とも定義される）。",
-                            "全て有限集合の等式であり、実数体も複素数体も現れない。",
-                          ]),
-                        ],
-                        proof: [
-                          paragraph([
-                            ref("claim_switchable_contact_smoothing_preserves_fiber"), " により ",
-                            math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " かつ ",
-                            math(String.raw`M(\psi)=M(\varphi)`), " である。終点写像は置換に依らない。よって",
-                          ]),
-                          displayMath(String.raw`\begin{aligned}
-\operatorname{Ct}(\psi)
-&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\psi),\ \vec g\ne\vec h,\
-\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
-&&\bigl(\because\ \blkref{def_standard_contact_pair}\bigr)\\
-&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\varphi),\ \vec g\ne\vec h,\
-\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
-&&\bigl(\because\ \blkref{claim_switchable_contact_smoothing_preserves_fiber}\bigr)\\
-&=\operatorname{Ct}(\varphi)
-&&\bigl(\because\ \blkref{def_standard_contact_pair}\bigr).
-\end{aligned}`),
-                          displayMath(String.raw`\begin{aligned}
-N_{\mathrm{ct}}(\psi)
-&=|\operatorname{Ct}(\psi)|
-&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr)\\
-&=|\operatorname{Ct}(\varphi)|
-&&\bigl(\because\ \operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)\bigr)\\
-&=N_{\mathrm{ct}}(\varphi)
-&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr).
-\end{aligned}`),
-                          paragraph([
-                            "仮定の対について ", math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
-                            "（", ref("def_switchable_permutation_contact_pair"),
-                            " の第一の条件と ", math(String.raw`\vec e,\vec f\in M(\varphi)`),
-                            "、", math(String.raw`\vec e\ne\vec f`), "）なので ",
-                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
-                            " であり、両辺の標準接触対が定義される。同じ線型順序を持つ空でない有限集合 ",
-                            math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
-                            " のただ一つの最小元なので",
-                          ]),
-                          displayMath(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)
-\quad(\because\ \blkref{def_standard_contact_pair}\text{ と }\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)).`),
-                        ],
-                      },
-                    },
-                  ],
-                  focus: {
-                    id: "kac_ward_claim_standard_contact_smoothing_involution",
-                    kind: "claim",
-                    title: { text: "標準接触対での平滑化は不動点の無いファイバー保存対合である" },
-                    labels: ["claim_standard_contact_smoothing_involution"],
-                    habitat: "N",
-                    verification: ["sagemath/check/standard-contact-smoothing-involution"],
-                    statement: [
-                      paragraph([
-                        "集合 ", math(String.raw`\mathcal A_L`), " を",
-                      ]),
-                      displayMath(String.raw`\mathcal A_L:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\
-N_{\mathrm{ct}}(\varphi)\ge1,\ \operatorname{ct}_{\min}(\varphi)\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
-                      paragraph([
-                        "と定め、写像 ", math(String.raw`S:\mathcal A_L\to\operatorname{Perm}(\vec E_L)`), " を ",
-                        math(String.raw`S(\varphi):=\operatorname{Sm}_{\operatorname{ct}_{\min}(\varphi)}(\varphi)`),
-                        "（", ref("def_permutation_contact_smoothing"), "。添字は ",
-                        ref("def_standard_contact_pair"), " の標準接触対）と定める。このとき任意の ",
-                        math(String.raw`\varphi\in\mathcal A_L`), " について次が成り立つ。",
-                      ]),
-                      list([
-                        [math(String.raw`S(\varphi)\in\mathcal A_L`), " であり、",
-                          math(String.raw`S(S(\varphi))=\varphi`), " である。"],
-                        [math(String.raw`S(\varphi)\ne\varphi`), " である。"],
-                        ["任意の添字 ", math(String.raw`(D,E)`),
-                          "（", ref("def_nonbacktracking_permutation_fiber"), "）について、",
-                          math(String.raw`\varphi\in\mathcal N_L(D,E)`), " ならば ",
-                          math(String.raw`S(\varphi)\in\mathcal N_L(D,E)`), " である。"],
-                      ]),
-                      paragraph([
-                        "全て有限集合の写像と元の比較であり、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        math(String.raw`\varphi\in\mathcal A_L`), " を取り、",
-                        math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
-                        math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
-                        " と置く。", math(String.raw`\mathcal A_L`), " の定義により ",
-                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\varphi`),
-                        " の切り替え可能な接触対なので、以下の各主張の仮定を満たす。",
-                      ]),
-                      paragraph([
-                        "第一の主張。", ref("claim_contact_smoothing_same_pair_involution"), " により ",
-                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
-                        " の切り替え可能な接触対でもあり、",
-                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
-                        ref("claim_contact_pair_set_smoothing_invariant"), " により ",
-                        math(String.raw`N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi)\ge1`), " かつ ",
-                        math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)=\{\vec e,\vec f\}`),
-                        " なので、", math(String.raw`\operatorname{ct}_{\min}(\psi)`), " は ",
-                        math(String.raw`\psi`), " の切り替え可能な接触対であり、",
-                        math(String.raw`\psi\in\mathcal A_L`), " である。さらに",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-S(S(\varphi))
-&=\operatorname{Sm}_{\operatorname{ct}_{\min}(\psi)}(\psi)
-&&\bigl(\because\ S\text{ の定義と }\psi=S(\varphi)\bigr)\\
-&=\operatorname{Sm}_{\vec e,\vec f}(\psi)
-&&\bigl(\because\ \blkref{claim_contact_pair_set_smoothing_invariant}\bigr)\\
-&=\varphi
-&&\bigl(\because\ \blkref{claim_contact_smoothing_same_pair_involution}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "である。",
-                      ]),
-                      paragraph([
-                        "第二の主張。", math(String.raw`\vec e\ne\vec f`), " と ",
-                        math(String.raw`\varphi`), " の単射性を使うと",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\psi(\vec e)
-&=\varphi(\vec f)
-&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
-&\ne\varphi(\vec e)
-&&\bigl(\because\ \vec e\ne\vec f\text{ と }\varphi\text{ の単射性}\bigr).
-\end{aligned}`),
-                      paragraph(["入力 ", math(String.raw`\vec e`), " で値が異なるので ", math(String.raw`S(\varphi)=\psi\ne\varphi`), " である。"]),
-                      paragraph([
-                        "第三の主張は、切り替え可能な接触対 ", math(String.raw`\{\vec e,\vec f\}`),
-                        " での平滑化についての ",
-                        ref("claim_switchable_contact_smoothing_preserves_fiber"),
-                        " をそのまま適用したものである。",
                       ]),
                     ],
                   },

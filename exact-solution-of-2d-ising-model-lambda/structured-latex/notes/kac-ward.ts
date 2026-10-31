@@ -7,6 +7,203 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_standard_contact_smoothing_archived",
+    targets: ["def_nonbacktracking_permutations"],
+    title: { text: "不採用経路: 標準接触対の平滑化" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準接触対による置換項の相殺は採らない。元の定義と二つの主張・証明を保存する。"]),
+      paragraph(["元の定義「標準接触対」:"]),
+
+                          paragraph([
+                            math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                            " に対し、接触対の集合 ", math(String.raw`\operatorname{Ct}(\varphi)`), " を",
+                          ]),
+                          displayMath(String.raw`\operatorname{Ct}(\varphi):=\bigl\{\,\{\vec e,\vec f\}\ \bigm|\
+\vec e,\vec f\in M(\varphi),\ \vec e\ne\vec f,\
+\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}`),
+                          paragraph([
+                            "で定める（動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+                            ref("def_moved_edge_set"), "、終点写像 ", math(String.raw`\operatorname{tgt}`),
+                            " は ", ref("def_oriented_edge_endpoints"), "）。この集合の元の個数が接触対の個数 ",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)`),
+                            "（", ref("def_permutation_contact_pair_count"), "）である。",
+                          ]),
+                          paragraph([
+                            "向き付き辺の集合 ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
+                            "（", ref("def_oriented_edges"), "）の上の関係 ",
+                            math(String.raw`\le_{\vec E}`), " を、",
+                            math(String.raw`(e,d)\le_{\vec E}(e',d')`), " を「",
+                            math(String.raw`e<e'`), "、または ", math(String.raw`e=e'`), " かつ ",
+                            math(String.raw`d\le d'`), "」で定める。ここで ",
+                            math(String.raw`e,e'\in E_L\subseteq\mathbb N`), " と ",
+                            math(String.raw`d,d'\in\{0,1\}\subseteq\mathbb N`),
+                            " の比較はいずれも ", math(String.raw`\mathbb N`),
+                            " の大小である。これは線型順序を持つ集合の有限直積の辞書式順序なので、",
+                            math(String.raw`\le_{\vec E}`), " は ", math(String.raw`\vec E_L`),
+                            " の線型順序である。",
+                          ]),
+                          paragraph([
+                            math(String.raw`\vec E_L`), " の二元部分集合 ", math(String.raw`P`),
+                            " について、", math(String.raw`\le_{\vec E}`), " に関する小さいほうの元を ",
+                            math(String.raw`\min P`), "、大きいほうの元を ", math(String.raw`\max P`),
+                            " と書く。二元部分集合の間の関係 ", math(String.raw`\preceq`), " を、",
+                            math(String.raw`P\preceq P'`), " を「",
+                            math(String.raw`\min P<_{\vec E}\min P'`), "、または ",
+                            math(String.raw`\min P=\min P'`), " かつ ",
+                            math(String.raw`\max P\le_{\vec E}\max P'`),
+                            "」で定める。これも線型順序を持つ集合の対の辞書式順序なので線型順序である。",
+                          ]),
+                          paragraph([
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " のとき、標準接触対 ",
+                            math(String.raw`\operatorname{ct}_{\min}(\varphi)`), " を、線型順序を持つ空でない有限集合 ",
+                            math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
+                            " のただ一つの最小元と定める。線型順序を持つ空でない有限集合の最小元は存在してただ一つなので、",
+                            "この値は定まる。切り替え可能性（", ref("def_switchable_permutation_contact_pair"),
+                            "）は要求しない。全て有限集合の元の比較であり、実数体も複素数体も現れない。",
+                          ]),
+
+      paragraph(["元の主張「接触対の集合と標準接触対は平滑化で不変である」:"]),
+
+                          paragraph([
+                            math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                            "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
+                            math(String.raw`\{\vec e,\vec f\}`),
+                            "（", ref("def_switchable_permutation_contact_pair"), "）を取り、",
+                            math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                            "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき",
+                          ]),
+                          displayMath(String.raw`\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi),\qquad
+N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
+\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)`),
+                          paragraph([
+                            "が成り立つ（", math(String.raw`\operatorname{Ct}`), "・",
+                            math(String.raw`\operatorname{ct}_{\min}`), " は ",
+                            "参照用ノート「不採用経路: 標準接触対の平滑化」", "。三つめの等式では両辺とも定義される）。",
+                            "全て有限集合の等式であり、実数体も複素数体も現れない。",
+                          ]),
+
+      paragraph(["元の証明:"]),
+
+                          paragraph([
+                            ref("claim_switchable_contact_smoothing_preserves_fiber"), " により ",
+                            math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " かつ ",
+                            math(String.raw`M(\psi)=M(\varphi)`), " である。終点写像は置換に依らない。よって",
+                          ]),
+                          displayMath(String.raw`\begin{aligned}
+\operatorname{Ct}(\psi)
+&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\psi),\ \vec g\ne\vec h,\
+\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr)\\
+&=\bigl\{\{\vec g,\vec h\}\bigm|\vec g,\vec h\in M(\varphi),\ \vec g\ne\vec h,\
+\operatorname{tgt}(\vec g)=\operatorname{tgt}(\vec h)\bigr\}
+&&\bigl(\because\ \blkref{claim_switchable_contact_smoothing_preserves_fiber}\bigr)\\
+&=\operatorname{Ct}(\varphi)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr).
+\end{aligned}`),
+                          displayMath(String.raw`\begin{aligned}
+N_{\mathrm{ct}}(\psi)
+&=|\operatorname{Ct}(\psi)|
+&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr)\\
+&=|\operatorname{Ct}(\varphi)|
+&&\bigl(\because\ \operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)\bigr)\\
+&=N_{\mathrm{ct}}(\varphi)
+&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr).
+\end{aligned}`),
+                          paragraph([
+                            "仮定の対について ", math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
+                            "（", ref("def_switchable_permutation_contact_pair"),
+                            " の第一の条件と ", math(String.raw`\vec e,\vec f\in M(\varphi)`),
+                            "、", math(String.raw`\vec e\ne\vec f`), "）なので ",
+                            math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
+                            " であり、両辺の標準接触対が定義される。同じ線型順序を持つ空でない有限集合 ",
+                            math(String.raw`(\operatorname{Ct}(\varphi),\preceq)`),
+                            " のただ一つの最小元なので",
+                          ]),
+                          displayMath(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)
+\quad(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」}\text{ と }\operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)).`),
+
+      paragraph(["元の主張「標準接触対での平滑化は不動点の無いファイバー保存対合である」:"]),
+
+                      paragraph([
+                        "集合 ", math(String.raw`\mathcal A_L`), " を",
+                      ]),
+                      displayMath(String.raw`\mathcal A_L:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\
+N_{\mathrm{ct}}(\varphi)\ge1,\ \operatorname{ct}_{\min}(\varphi)\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
+                      paragraph([
+                        "と定め、写像 ", math(String.raw`S:\mathcal A_L\to\operatorname{Perm}(\vec E_L)`), " を ",
+                        math(String.raw`S(\varphi):=\operatorname{Sm}_{\operatorname{ct}_{\min}(\varphi)}(\varphi)`),
+                        "（", ref("def_permutation_contact_smoothing"), "。添字は ",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " の標準接触対）と定める。このとき任意の ",
+                        math(String.raw`\varphi\in\mathcal A_L`), " について次が成り立つ。",
+                      ]),
+                      list([
+                        [math(String.raw`S(\varphi)\in\mathcal A_L`), " であり、",
+                          math(String.raw`S(S(\varphi))=\varphi`), " である。"],
+                        [math(String.raw`S(\varphi)\ne\varphi`), " である。"],
+                        ["任意の添字 ", math(String.raw`(D,E)`),
+                          "（", ref("def_nonbacktracking_permutation_fiber"), "）について、",
+                          math(String.raw`\varphi\in\mathcal N_L(D,E)`), " ならば ",
+                          math(String.raw`S(\varphi)\in\mathcal N_L(D,E)`), " である。"],
+                      ]),
+                      paragraph([
+                        "全て有限集合の写像と元の比較であり、実数体も複素数体も現れない。",
+                      ]),
+
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        math(String.raw`\varphi\in\mathcal A_L`), " を取り、",
+                        math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
+                        math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                        " と置く。", math(String.raw`\mathcal A_L`), " の定義により ",
+                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\varphi`),
+                        " の切り替え可能な接触対なので、以下の各主張の仮定を満たす。",
+                      ]),
+                      paragraph([
+                        "第一の主張。", ref("claim_contact_smoothing_same_pair_involution"), " により ",
+                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
+                        " の切り替え可能な接触対でもあり、",
+                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
+                        math(String.raw`N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi)\ge1`), " かつ ",
+                        math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)=\{\vec e,\vec f\}`),
+                        " なので、", math(String.raw`\operatorname{ct}_{\min}(\psi)`), " は ",
+                        math(String.raw`\psi`), " の切り替え可能な接触対であり、",
+                        math(String.raw`\psi\in\mathcal A_L`), " である。さらに",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+S(S(\varphi))
+&=\operatorname{Sm}_{\operatorname{ct}_{\min}(\psi)}(\psi)
+&&\bigl(\because\ S\text{ の定義と }\psi=S(\varphi)\bigr)\\
+&=\operatorname{Sm}_{\vec e,\vec f}(\psi)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr)\\
+&=\varphi
+&&\bigl(\because\ \blkref{claim_contact_smoothing_same_pair_involution}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "である。",
+                      ]),
+                      paragraph([
+                        "第二の主張。", math(String.raw`\vec e\ne\vec f`), " と ",
+                        math(String.raw`\varphi`), " の単射性を使うと",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\psi(\vec e)
+&=\varphi(\vec f)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&\ne\varphi(\vec e)
+&&\bigl(\because\ \vec e\ne\vec f\text{ と }\varphi\text{ の単射性}\bigr).
+\end{aligned}`),
+                      paragraph(["入力 ", math(String.raw`\vec e`), " で値が異なるので ", math(String.raw`S(\varphi)=\psi\ne\varphi`), " である。"]),
+                      paragraph([
+                        "第三の主張は、切り替え可能な接触対 ", math(String.raw`\{\vec e,\vec f\}`),
+                        " での平滑化についての ",
+                        ref("claim_switchable_contact_smoothing_preserves_fiber"),
+                        " をそのまま適用したものである。",
+                      ]),
+                        ],
+  },
+  {
     id: "note_kac_ward_even_subgraph_pair_fiber_archived",
     targets: ["def_even_edge_subset"],
     title: { text: "不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対" },
@@ -289,9 +486,9 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 \operatorname{ct}_{\min}(\varphi)\text{ は }\varphi\text{ の位相反転接触対}\,\bigr\}`),
       paragraph([
         "と定める。", math(String.raw`\mathcal A_L`), " と写像 ",
-        math(String.raw`S`), " は ", ref("claim_standard_contact_smoothing_involution"),
+        math(String.raw`S`), " は ", "参照用ノート「不採用経路: 標準接触対の平滑化」",
         "、標準接触対 ", math(String.raw`\operatorname{ct}_{\min}`), " は ",
-        ref("def_standard_contact_pair"), "、位相反転接触対は ",
+        "参照用ノート「不採用経路: 標準接触対の平滑化」", "、位相反転接触対は ",
         "参照用ノート「不採用経路: 位相反転接触対」である。",
         "有限集合の部分集合であり、所属は一歩の回転数（", ref("def_step_turning"),
         "）の整数の等式で判定される。実数体も複素数体も現れない。",
@@ -335,18 +532,18 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         " と置く。参照用ノート「不採用経路: 標準対が位相反転する置換の集合」により ",
                         math(String.raw`\varphi\in\mathcal A_L`), " であり、",
                         math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\varphi`),
-                        " の切り替え可能な接触対（", ref("claim_standard_contact_smoothing_involution"),
+                        " の切り替え可能な接触対（", "参照用ノート「不採用経路: 標準接触対の平滑化」",
                         " の ", math(String.raw`\mathcal A_L`), " の定義）かつ位相反転接触対である。",
                       ]),
                       paragraph([
-                        "第一の主張。", ref("claim_standard_contact_smoothing_involution"), " により ",
+                        "第一の主張。", "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\psi\in\mathcal A_L`), "、",
                         math(String.raw`S(S(\varphi))=\varphi`), "、",
                         math(String.raw`\psi\ne\varphi`), " である。残るは ",
                         math(String.raw`\psi\in\mathcal B_L`), "、すなわち ",
                         math(String.raw`\operatorname{ct}_{\min}(\psi)`), " が ",
                         math(String.raw`\psi`), " の位相反転接触対であることである。",
-                        ref("claim_contact_pair_set_smoothing_invariant"), " により ",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)=\{\vec e,\vec f\}`),
                         " である。そして",
                       ]),
@@ -366,7 +563,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
                         math(String.raw`\psi\in\mathcal B_L`), " である。",
                       ]),
                       paragraph([
-                        "第二の主張は、", ref("claim_standard_contact_smoothing_involution"),
+                        "第二の主張は、", "参照用ノート「不採用経路: 標準接触対の平滑化」",
                         " の第三の主張をそのまま適用したものである。",
                       ]),
                       paragraph([
@@ -468,9 +665,9 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
         "と定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
         "、", math(String.raw`\mathcal A_L`), " は ",
-        ref("claim_standard_contact_smoothing_involution"),
+        "参照用ノート「不採用経路: 標準接触対の平滑化」",
         " で定めた。すなわち ", math(String.raw`\mathcal R_L`),
-        " は、接触対を持つが標準接触対（", ref("def_standard_contact_pair"),
+        " は、接触対を持つが標準接触対（", "参照用ノート「不採用経路: 標準接触対の平滑化」",
         "）が切り替え可能でない置換の全体である。所属は有限集合の元の比較で判定でき、実数体も複素数体も現れない。",
       ]),
     ],
@@ -737,7 +934,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
   },
   {
     id: "note_kac_ward_non_phase_reversing_standard_smoothing_archived",
-    targets: ["claim_standard_contact_smoothing_involution"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 標準対平滑化の非位相反転部分集合への制限" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の定義・主張・証明を保存する。"]),
@@ -754,8 +951,8 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \end{aligned}\right\}`),
                           paragraph([
                             "と定める。", math(String.raw`\mathcal A_L`), " と標準接触対は ",
-                            ref("claim_standard_contact_smoothing_involution"), " と ",
-                            ref("def_standard_contact_pair"), "、一歩の回転数は ",
+                            "参照用ノート「不採用経路: 標準接触対の平滑化」", " と ",
+                            "参照用ノート「不採用経路: 標準接触対の平滑化」", "、一歩の回転数は ",
                             ref("def_step_turning"), " で定めた。所属は有限集合の元と整数の等式だけで判定される。",
                             ref("claim_reconnection_turning_difference"), " により、",
                             math(String.raw`\mathcal A_L`), " は ",
@@ -795,8 +992,8 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
                         math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`), " と置く。",
-                        ref("claim_standard_contact_smoothing_involution"), " により ", math(String.raw`\psi\in\mathcal A_L`),
-                        " であり、", ref("claim_contact_pair_set_smoothing_invariant"), " により ",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ", math(String.raw`\psi\in\mathcal A_L`),
+                        " であり、", "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\operatorname{ct}_{\min}(\psi)=\{\vec e,\vec f\}`), " である。標準対の回転差は",
                       ]),
                       displayMath(String.raw`\begin{aligned}
@@ -829,7 +1026,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \end{aligned}`),
                       paragraph([
                         "である。対合性・不動点なし・ファイバー保存は ",
-                        ref("claim_standard_contact_smoothing_involution"), " から従い、第一の主張から二集合を交換する。",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " から従い、第一の主張から二集合を交換する。",
                         "よって ", math(String.raw`S`), " は ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(-4)}`), " から ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}`),
@@ -1513,7 +1710,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）と、接触対 ",
                         math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
-                        "（", ref("def_standard_contact_pair"), "）を取る。このとき ",
+                        "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）を取る。このとき ",
                         math(String.raw`\{\vec e,\vec f\}`), " が切り替え可能な接触対（",
                         ref("def_switchable_permutation_contact_pair"), "）であることと、四つの不等式",
                       ]),
@@ -1529,7 +1726,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
       paragraph(["元の証明:"]),
 
                       paragraph([
-                        ref("def_standard_contact_pair"), " により ",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\vec e,\vec f\in M(\varphi)`), "、",
                         math(String.raw`\vec e\ne\vec f`), "、",
                         math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
@@ -1583,7 +1780,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）が接触対を持ち、標準接触対 ",
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`),
-                        "（", ref("def_standard_contact_pair"), "）が、反転像による障害",
+                        "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）が、反転像による障害",
                       ]),
                       displayMath(String.raw`\varphi(\vec f)=\iota(\vec e)\quad\text{または}\quad
 \varphi(\vec e)=\iota(\vec f)`),
@@ -1712,7 +1909,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）が接触対を持つとする。標準接触対 ",
                         math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`),
-                        "（", ref("def_standard_contact_pair"), "）が切り替え可能な接触対（",
+                        "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）が切り替え可能な接触対（",
                         ref("def_switchable_permutation_contact_pair"), "）でないならば、",
                       ]),
                       displayMath(String.raw`p(\vec e)\in D(\varphi)\quad\text{または}\quad p(\vec f)\in D(\varphi)`),
@@ -1760,7 +1957,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "次に、第三の等式 ", math(String.raw`\varphi(\vec f)=\vec e`),
                         " が起こらないことを示す。起こったと仮定する。",
-                        ref("def_standard_contact_pair"), " により ",
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\vec f\in M(\varphi)`), " すなわち ",
                         math(String.raw`\varphi(\vec f)\ne\vec f`),
                         "（", ref("def_moved_edge_set"), "）なので、",
@@ -1770,7 +1967,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`),
                         " である。仮定の等式と接触 ",
                         math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
-                        "（", ref("def_standard_contact_pair"), "）を代入すると ",
+                        "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）を代入すると ",
                         math(String.raw`\operatorname{src}(\vec e)=\operatorname{tgt}(\vec f)=\operatorname{tgt}(\vec e)`),
                         " となり、前段の始点と終点の相異に反する。よって ",
                         math(String.raw`\varphi(\vec f)\ne\vec e`), " である。",
@@ -1926,7 +2123,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " でなければ接触対を持つ。さらに ",
                         math(String.raw`D(\varphi)=\varnothing`), " なので、",
                         "退避した主張「切り替え不能な標準接触対は反転対の辺を強制する」の対偶により標準接触対は切り替え可能であり、",
-                        math(String.raw`\varphi\in\mathcal A_L`), "（", ref("claim_standard_contact_smoothing_involution"),
+                        math(String.raw`\varphi\in\mathcal A_L`), "（", "参照用ノート「不採用経路: 標準接触対の平滑化」",
                         "）である。", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義", " により ",
                         math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
                         " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
@@ -2575,7 +2772,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                         paragraph([
                           "と定める。残余の集合 ", math(String.raw`\mathcal R_L`), " は ",
                           "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」", "、接触対の集合は ",
-                          ref("def_standard_contact_pair"), "、切り替え可能性は ",
+                          "参照用ノート「不採用経路: 標準接触対の平滑化」", "、切り替え可能性は ",
                           ref("def_switchable_permutation_contact_pair"), " で定めた。所属は有限集合上の全称命題として判定でき、",
                           "実数体も複素数体も現れない。",
                         ]),
@@ -2617,7 +2814,7 @@ s\,\zeta_8^{\Theta(\varphi)}
                       ]),
                       paragraph([
                         "もし ", math(String.raw`\varphi(\vec f)=\vec e`), " なら、接触対の定義（",
-                        ref("def_standard_contact_pair"), "）により ", math(String.raw`\vec f\in M(\varphi)`),
+                        "参照用ノート「不採用経路: 標準接触対の平滑化」", "）により ", math(String.raw`\vec f\in M(\varphi)`),
                         " である。したがって ", ref("def_nonbacktracking_permutations"), " と ",
                         ref("def_nonbacktracking_successors"), " により ",
                         math(String.raw`\operatorname{src}(\varphi(\vec f))=\operatorname{tgt}(\vec f)`), " である。",
@@ -2630,7 +2827,7 @@ s\,\zeta_8^{\Theta(\varphi)}
 &=\operatorname{tgt}(\vec f)
 &&\bigl(\because\ \blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}(\vec e)
-&&\bigl(\because\ \blkref{def_standard_contact_pair}\text{ の接触の等式}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」の接触の等式}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となり、前段の端点相異に反する。よって ", math(String.raw`\varphi(\vec f)\ne\vec e`),
@@ -2981,7 +3178,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）を取る。接触対 ",
                         math(String.raw`P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
-                        "（", ref("def_standard_contact_pair"), "）に対し、二元部分集合",
+                        "（", "参照用ノート「不採用経路: 標準接触対の平滑化」", "）に対し、二元部分集合",
                       ]),
                       displayMath(String.raw`\Psi_{\varphi}(P):=\bigl\{\,\iota\bigl(\varphi(\vec e)\bigr),\
 \iota\bigl(\varphi(\vec f)\bigr)\,\bigr\}`),
@@ -3037,7 +3234,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       ]),
                       paragraph([
                         "第一の主張を示す。", math(String.raw`P=\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
-                        " を取る。", ref("def_standard_contact_pair"), " により ",
+                        " を取る。", "参照用ノート「不採用経路: 標準接触対の平滑化」", " により ",
                         math(String.raw`\vec e,\vec f\in M(\varphi)`), "、",
                         math(String.raw`\vec e\ne\vec f`), "、",
                         math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
@@ -3058,7 +3255,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
 &=\operatorname{tgt}(\vec e)
 &&\bigl(\because\ \vec e\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}(\vec f)
-&&\bigl(\because\ \text{接触の仮定。}\blkref{def_standard_contact_pair}\bigr)\\
+&&\bigl(\because\ \text{接触の仮定。参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr)\\
 &=\operatorname{src}\bigl(\varphi(\vec f)\bigr)
 &&\bigl(\because\ \vec f\in M(\varphi)\text{ と }\blkref{def_nonbacktracking_permutations},\ \blkref{def_nonbacktracking_successors}\bigr)\\
 &=\operatorname{tgt}\bigl(\iota(\varphi(\vec f))\bigr)
@@ -3217,7 +3414,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                             "と定め、その元の個数を ",
                             math(String.raw`N_{\mathrm{sw}}(\varphi):=\lvert\operatorname{Ct}_{\mathrm{sw}}(\varphi)\rvert\in\mathbb N`),
                             " と書く（接触対の集合 ", math(String.raw`\operatorname{Ct}(\varphi)`), " は ",
-                            ref("def_standard_contact_pair"), "、切り替え可能な接触対は ",
+                            "参照用ノート「不採用経路: 標準接触対の平滑化」", "、切り替え可能な接触対は ",
                             ref("def_switchable_permutation_contact_pair"),
                             "。ここで二重の縦棒は有限集合の元の個数を表す）。さらに三つの有限集合を",
                           ]),
@@ -3244,7 +3441,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
                             " は互いに素で、その合併は ",
                             math(String.raw`\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                             " 全体である。この分類は接触対の集合と各対の切り替え可能性だけで定まり、",
-                            "接触対の間の順序（", ref("def_standard_contact_pair"), " の ",
+                            "接触対の間の順序（", "参照用ノート「不採用経路: 標準接触対の平滑化」", " の ",
                             math(String.raw`\preceq`),
                             "）を用いない。所属は有限集合の元の比較と自然数の比較で判定でき、実数体も複素数体も現れない。",
                           ]),
