@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 代表の依頼で、数学的道具立て・厳密解への五段階・臨界点の章立て案を [docs/tasks/six-chapter-organization-proposal.md](docs/tasks/six-chapter-organization-proposal.md) に書いた。承認待ちで、本文と構成再編の runbook はまだ変えていない。
+
 2026-10-28: 「比熱の対数発散」の極限へ行末根拠を付けた。次は「物理的な比熱との対応」の式鎖。
 
 2026-10-28: 「比熱の対数発散」の距離による表示を行末根拠付きの式鎖にし、対数の上界を成立する 1.5519 に直した。次は同じ証明の極限。
