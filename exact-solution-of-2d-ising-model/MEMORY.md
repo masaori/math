@@ -1,6 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
-2026-10-31: 章立ての組み直しの完了の確認で見つかった差の二つ目を直した。対角化の章の章末に章立て案のゴールの式を主張する `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form`（A(θ̃_μ) の対角化、λ_{±,μ}=exp(±γ(θ̃_μ))、γ(θ) の明示形、ψ̌_μ・ň_μ の定義の再掲、V^{(+)} の指数表示）を置き、SageMath・Lean・`goalLabels`・説明ページを揃えた。旧章末の `V_plus_eq_c_exp_sum_gamma_check_number_operator` は次の章が引くので残した。次は離散 Fourier 変換の章の T_{(V^{(+)})} を共役の約束と合わせること（状態台帳の「次の一歩」）。
+2026-10-31: 章立ての組み直しの完了の確認で見つかった差の二つ目を直した。対角化の章の章末に章立て案のゴールの式を主張する `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form`（A(θ̃_μ) の対角化、λ_{±,μ}=exp(±γ(θ̃_μ))、γ(θ) の明示形、ψ̌_μ・ň_μ の定義の再掲、V^{(+)} の指数表示）を置き、SageMath・Lean・`goalLabels`・説明ページを揃えた。旧章末の `V_plus_eq_c_exp_sum_gamma_check_number_operator` は次の章が引くので残した。次は離散 Fourier 変換の章の T_{(V^{(+)})} を共役の約束と合わせること（状態台帳の「次の一歩」）。公開は `publish.ts --repo math`（`masaori/math` ではない。`masaori/math` に出すと別の成果物ができ、`/math/<path>/` は更新されない）で、`--path` は `complex-matrix-ising-paper` と `complex-matrix-ising-paper-organization`。
 
 2026-10-31: 章立ての組み直しの完了の確認で見つかった差の一つ目を直した。射影の章の章末に章立て案のゴールの式を主張する `W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form`（WP^{(+)}=V^{(+)}P^{(+)}、F^{(+)}=im P^{(+)}、V^{(+)} の指数表示）を置き、V^{(+)} の指数表示を新しい主張 `V_plus_exponential_form` にした。旧章末の `symmetrized_transfer_matrix_on_sector_exponential_form` は使われなくなったので `structured-latex/notes/symmetrized_transfer_matrix_on_sector_exponential_form_not_adopted.ts` へ退避（SageMath は `sagemath/_old/` へ、Lean は記録として残す）。次は対角化の章の章末の主張（状態台帳の「次の一歩」）。worktree の Lean は `.lake/packages` を `cp -al` で持ち込めば論文側だけのビルドで済む（約 3 分で該当章まで）。
 
