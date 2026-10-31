@@ -852,7 +852,6 @@ export const ALL_LABELS = [
   "def_periodic_free_energy_density_le_one",
   "def_periodic_lift_closure_cycle",
   "def_periodic_plane_lift",
-  "def_permutation_contact_pair_count",
   "def_permutation_contact_smoothing",
   "def_permutation_iterate",
   "def_permutation_minimal_return",

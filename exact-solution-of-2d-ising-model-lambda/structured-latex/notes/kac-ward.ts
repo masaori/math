@@ -7,6 +7,33 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_permutation_contact_pair_count_archived",
+    targets: ["def_oriented_edge_endpoints"],
+    title: { text: "不採用経路: 置換の接触対の個数" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触対による直接比較は採らない。元の定義を保存する。"]),
+                        paragraph([
+                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                          " に対し、置換の接触対の個数 ",
+                          math(String.raw`N_{\mathrm{ct}}(\varphi)\in\mathbb N`), " を",
+                        ]),
+                        displayMath(String.raw`N_{\mathrm{ct}}(\varphi):=\bigl|\,\bigl\{\,\{\vec e,\vec f\}\ \bigm|\
+\vec e,\vec f\in M(\varphi),\ \vec e\ne\vec f,\
+\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}\,\bigr|`),
+                        paragraph([
+                          "で定める。動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+                          ref("def_moved_edge_set"), "、終点写像 ",
+                          math(String.raw`\operatorname{tgt}`), " は ",
+                          ref("def_oriented_edge_endpoints"),
+                          " で定めた。右辺は有限集合 ", math(String.raw`M(\varphi)`),
+                          " の二元部分集合のなす有限集合の部分集合の元の個数なので、値は自然数として定まる。",
+                          "閉歩道の接触対の個数 ", math(String.raw`n_{\mathrm{ct}}`),
+                          "（", ref("def_contact_pair_count"),
+                          "）は一本の辺列の添字対を数えるのに対し、こちらは置換が動かす辺の全体から終点の一致する対を数える。実数体も複素数体も現れない。",
+                        ]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_smoothing_same_pair_involution_archived",
     targets: ["def_permutation_contact_smoothing"],
     title: { text: "不採用経路: 同じ接触対での平滑化の対合性" },
@@ -102,7 +129,7 @@ export default defineNotes([
                             ref("def_moved_edge_set"), "、終点写像 ", math(String.raw`\operatorname{tgt}`),
                             " は ", ref("def_oriented_edge_endpoints"), "）。この集合の元の個数が接触対の個数 ",
                             math(String.raw`N_{\mathrm{ct}}(\varphi)`),
-                            "（", ref("def_permutation_contact_pair_count"), "）である。",
+                            "（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）である。",
                           ]),
                           paragraph([
                             "向き付き辺の集合 ", math(String.raw`\vec E_L=E_L\times\{0,1\}`),
@@ -179,11 +206,11 @@ N_{\mathrm{ct}}(\psi)=N_{\mathrm{ct}}(\varphi),\qquad
                           displayMath(String.raw`\begin{aligned}
 N_{\mathrm{ct}}(\psi)
 &=|\operatorname{Ct}(\psi)|
-&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の接触対の個数」}\bigr)\\
 &=|\operatorname{Ct}(\varphi)|
 &&\bigl(\because\ \operatorname{Ct}(\psi)=\operatorname{Ct}(\varphi)\bigr)\\
 &=N_{\mathrm{ct}}(\varphi)
-&&\bigl(\because\ \blkref{def_permutation_contact_pair_count}\bigr).
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 置換の接触対の個数」}\bigr).
 \end{aligned}`),
                           paragraph([
                             "仮定の対について ", math(String.raw`\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)`),
@@ -739,7 +766,7 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
 N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
       paragraph([
         "と定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+        "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
         "、", math(String.raw`\mathcal A_L`), " は ",
         "参照用ノート「不採用経路: 標準接触対の平滑化」",
         " で定めた。すなわち ", math(String.raw`\mathcal R_L`),
@@ -778,7 +805,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
   },
   {
     id: "note_kac_ward_contact_free_permutation_phase_product_archived",
-    targets: ["def_permutation_contact_pair_count"],
+    targets: ["def_oriented_edge_endpoints"],
     title: { text: "不採用経路: 接触の無い置換の位相積" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換軌道の位相積による比較は採らない。元の主張と証明を保存する。"]),
@@ -788,7 +815,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         "（", ref("def_nonbacktracking_permutations"), "）は ",
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
-                        "（", ref("def_permutation_contact_pair_count"), "）を満たすとする。各 ",
+                        "（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）を満たすとする。各 ",
                         math(String.raw`C\in\mathcal C(\varphi)`), "（", ref("def_moved_orbit_family"),
                         "）について ", math(String.raw`\vec e_{\ast}^{\,\varphi}(C)\in C`),
                         " を一つ選び（各 ", math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
@@ -839,7 +866,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
                         " は相異なる ", math(String.raw`M(\varphi)`),
                         " の元なので、二元部分集合 ",
                         math(String.raw`\{\vec\gamma_j,\vec\gamma_k\}`), " は ",
-                        ref("def_permutation_contact_pair_count"),
+                        "参照用ノート「不採用経路: 置換の接触対の個数」",
                         " の右辺の集合の元であり、その個数について ",
                         math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`),
                         " が従う。これは仮定 ", math(String.raw`N_{\mathrm{ct}}(\varphi)=0`),
@@ -875,7 +902,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
   },
   {
     id: "note_kac_ward_contact_free_fiber_phase_signed_count_archived",
-    targets: ["def_permutation_contact_pair_count"],
+    targets: ["def_oriented_edge_endpoints"],
     title: { text: "不採用経路: 接触の無い部分の位相和の符号付き数え上げ" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換のファイバー位相和による比較は採らない。元の主張と証明を保存する。"]),
@@ -906,7 +933,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \in\mathbb Z`),
                       paragraph([
                         "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
-                        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                        "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
                         " で定めた。右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
                       ]),
@@ -2189,7 +2216,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
                         "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
-                        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                        "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         " で定めた。全て有限集合上の有限和であり、実数体も複素数体も現れない。",
                       ]),
@@ -2262,7 +2289,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "が成り立つ。ファイバーの位相付き寄与は ", ref("def_fiber_phase_weight"),
                         "、置換一つの位相寄与は ", "参照用ノート「不採用経路: 非後退置換一つの位相寄与」",
-                        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+                        "、接触対の個数は ", "参照用ノート「不採用経路: 置換の接触対の個数」",
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         "、標準対が切り替え不能な置換の集合は ", "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
                         " で定めた。元の主張は有限集合上の有限和だけを用い、実数体も複素数体も現れない。",
@@ -3270,7 +3297,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                           " への全単射であり、その逆写像は ",
                           math(String.raw`\Psi_{\mathcal T(\varphi)}`), " である。"],
                         [math(String.raw`N_{\mathrm{ct}}(\mathcal T(\varphi))=N_{\mathrm{ct}}(\varphi)`),
-                          " である（", ref("def_permutation_contact_pair_count"), "）。"],
+                          " である（", "参照用ノート「不採用経路: 置換の接触対の個数」", "）。"],
                         [math(String.raw`P`), " が ", math(String.raw`\varphi`),
                           " の切り替え可能な接触対（", ref("def_switchable_permutation_contact_pair"),
                           "）であることと、", math(String.raw`\Psi_{\varphi}(P)`), " が ",
@@ -3374,7 +3401,7 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                         math(String.raw`\operatorname{Ct}(\varphi)`), " と ",
                         math(String.raw`\operatorname{Ct}(\mathcal T(\varphi))`),
                         " の間に全単射があるので元の個数が等しいこと（",
-                        ref("def_permutation_contact_pair_count"), "）そのものである。",
+                        "参照用ノート「不採用経路: 置換の接触対の個数」", "）そのものである。",
                       ]),
                       paragraph([
                         "第三の主張を示す。", "参照用ノート「接触対の切り替え可能性の局所判定」",
@@ -3501,7 +3528,7 @@ P\text{ は }\varphi\text{ の切り替え可能な接触対}\,\bigr\}`),
 \end{aligned}`),
                           paragraph([
                             "と定める（接触対の個数 ", math(String.raw`N_{\mathrm{ct}}`), " は ",
-                            ref("def_permutation_contact_pair_count"), "）。",
+                            "参照用ノート「不採用経路: 置換の接触対の個数」", "）。",
                             math(String.raw`\operatorname{Ct}_{\mathrm{sw}}(\varphi)\subseteq\operatorname{Ct}(\varphi)`),
                             " なので ", math(String.raw`N_{\mathrm{sw}}(\varphi)\le N_{\mathrm{ct}}(\varphi)`),
                             " であり、とくに ", math(String.raw`N_{\mathrm{sw}}(\varphi)\ge1`), " なら ",
@@ -3617,7 +3644,7 @@ N_{\mathrm{sw}}(\mathcal T(\varphi))
                         math(String.raw`N_{\mathrm{ct}}`), " と ", math(String.raw`N_{\mathrm{sw}}`),
                         " についての自然数の等式・不等式だけで書かれている（",
                         "上記の定義", "、",
-                        ref("def_permutation_contact_pair_count"), "）。",
+                        "参照用ノート「不採用経路: 置換の接触対の個数」", "）。",
                         "参照用ノート「不採用経路: 経路反転による非後退置換ファイバーの保存」", " により ",
                         math(String.raw`\mathcal T(\varphi)\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
                         " であり、", "参照用ノート「不採用経路: 経路反転と接触対の対応」",

@@ -4564,13 +4564,13 @@ A^{k+1}\cdot v
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (wz)^{n}&=w^{n}z^{n}
-&&(\because\ \blkref{claim_qbar_mul_pow})\\
+&&\bigl(\because\ \blkref{claim_qbar_mul_pow}\bigr)\\
 &=1\cdot z^{n}
-&&(\because\ w^{n}=1)\\
+&&\bigl(\because\ w^{n}=1\bigr)\\
 &=1\cdot 1
-&&(\because\ z^{n}=1)\\
+&&\bigl(\because\ z^{n}=1\bigr)\\
 &=1
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "よって ",
@@ -76707,61 +76707,6 @@ const chapter_kac_ward_direct_comparison = defineSection({
       role: "subsection",
       element: {
         kind: "section",
-        id: "kac_ward_direct_comparison_heading_group_fiber_phase",
-        labels: [],
-        title: { text: "ファイバーの位相寄与と二次符号" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_contact_free_permutation_phase_product",
-              labels: [],
-              title: { text: "置換の接触対の個数" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_permutation_contact_pair_count",
-                  focus: {
-                      id: "kac_ward_definition_permutation_contact_pair_count",
-                      kind: "definition",
-                      title: { text: "置換の接触対の個数" },
-                      labels: ["def_permutation_contact_pair_count"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                          " に対し、置換の接触対の個数 ",
-                          math(String.raw`N_{\mathrm{ct}}(\varphi)\in\mathbb N`), " を",
-                        ]),
-                        displayMath(String.raw`N_{\mathrm{ct}}(\varphi):=\bigl|\,\bigl\{\,\{\vec e,\vec f\}\ \bigm|\
-\vec e,\vec f\in M(\varphi),\ \vec e\ne\vec f,\
-\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)\,\bigr\}\,\bigr|`),
-                        paragraph([
-                          "で定める。動かす向き付き辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                          ref("def_moved_edge_set"), "、終点写像 ",
-                          math(String.raw`\operatorname{tgt}`), " は ",
-                          ref("def_oriented_edge_endpoints"),
-                          " で定めた。右辺は有限集合 ", math(String.raw`M(\varphi)`),
-                          " の二元部分集合のなす有限集合の部分集合の元の個数なので、値は自然数として定まる。",
-                          "閉歩道の接触対の個数 ", math(String.raw`n_{\mathrm{ct}}`),
-                          "（", ref("def_contact_pair_count"),
-                          "）は一本の辺列の添字対を数えるのに対し、こちらは置換が動かす辺の全体から終点の一致する対を数える。実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                  },
-                },
-              }],
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
         id: "kac_ward_direct_comparison_heading_group_contact_smoothing",
         labels: [],
         title: { text: "接触の平滑化" },
@@ -76800,8 +76745,8 @@ const chapter_kac_ward_direct_comparison = defineSection({
                             [math(String.raw`\varphi(\vec f)\ne\vec e`), " かつ ", math(String.raw`\varphi(\vec e)\ne\vec f`) ],
                           ]),
                           paragraph([
-                            "の全てが成り立つことと定める。第一の条件は ", ref("def_permutation_contact_pair_count"),
-                            " が数える接触、第二の条件は二つの後続を交換しても非後退接続であること、",
+                            "の全てが成り立つことと定める。第一の条件は動く二辺の終点が一致すること、",
+                            "第二の条件は二つの後続を交換しても非後退接続であること、",
                             "第三の条件は交換後も二辺が動くことを表す。全て有限集合の元の比較で判定できる。",
                             "実数体も複素数体も現れない。",
                           ]),
