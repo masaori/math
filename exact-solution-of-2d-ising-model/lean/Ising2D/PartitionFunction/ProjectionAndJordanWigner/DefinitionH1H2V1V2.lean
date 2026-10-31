@@ -314,7 +314,8 @@ theorem V2FromJordanWigner_eq_V2H2Form (M : ℕ) (s2 : ℝ) (K2star : ℂ) :
     V2FromJordanWigner M s2 K2star = V2H2Form M s2 K2star := by
   rfl
 
-/-- 補助: 一般形で `(V1pmHalf)^2 = V1pm`（`(+)` の人手の主張は章 010 の
+/-- 補助: 一般形で `(V1pmHalf)^2 = V1pm`（`(+)` の人手の主張 `V1_plus_square_root_property` は
+最大固有値に属する固有ベクトルの章のファイル `eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` にあり、Lean は
 `Ising2D.V1_plus_square_root_property`）。 -/
 theorem V1pmHalf_sq (K1 η : ℂ) :
     V1pmHalf M K1 η * V1pmHalf M K1 η = V1pm M K1 η := by

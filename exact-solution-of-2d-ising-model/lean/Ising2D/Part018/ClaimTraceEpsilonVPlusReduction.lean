@@ -56,8 +56,7 @@ theorem trace_epsilon_VPlusOfTransfer (K1 : ℂ) (K2 : ℝ) :
     -- 巡回性を `A = B`, `B' = εV_2B` に適用
     _ = (epsilon M * V2 M K2 * V1plusHalf M K1 * V1plusHalf M K1).trace := by
         rw [trace_cyclic]
-    -- `BB = V_1^{(+)}`（人手はこの行で `theorem_exp_product` を直接引く。Lean はその適用を済ませた
-    -- `V1_plus_square_root_property`（`def_V1_plus_square_root` の平方根性）を引く）
+    -- `BB = V_1^{(+)}`（人手と同じく `V1_plus_square_root_property`（`def_V1_plus_square_root` の平方根性）を引く）
     _ = (epsilon M * V2 M K2 * V1plus M K1).trace := by
         rw [mul_assoc (epsilon M * V2 M K2), V1_plus_square_root_property]
     -- 巡回性

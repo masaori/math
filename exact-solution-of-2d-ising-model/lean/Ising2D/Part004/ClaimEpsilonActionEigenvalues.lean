@@ -1,7 +1,7 @@
 /-
 # 全スピン反転行列の作用の固有値候補
 
-対応する人手本文は `structured-latex/content/004_transfer_matrix.ts` の
+対応する人手本文は `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（2026-10-31 に本文から参照用ノートへ退避した。この Lean は形式化の記録として残す）の
 `transfer_matrix_004c_claim_epsilon_action_eigenvalues`
 （ラベル **`epsilon_action_eigenvalues_are_signs`**）。
 

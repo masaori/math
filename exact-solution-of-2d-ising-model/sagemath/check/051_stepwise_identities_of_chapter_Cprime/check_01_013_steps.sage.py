@@ -4,7 +4,7 @@
 from sage.all_cmdline import *   # import sage library
 
 _sage_const_1 = Integer(1); _sage_const_2 = Integer(2); _sage_const_0 = Integer(0); _sage_const_3 = Integer(3); _sage_const_4 = Integer(4)# =========================================================================
-# check_01: 013 章（structured-latex/content/013_even_sector_modes.ts と、そこから移した eigenvalue_problem_reduction_to_A_theta.ts・eigenvalue_problem_diagonalization_and_exponential_form.ts）の
+# check_01: 013 章（もと structured-latex/content/013_even_sector_modes.ts。2026-10-31 に削除。そこから移した eigenvalue_problem_reduction_to_A_theta.ts・eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  「1 ステップ 1 定理」への分割で本文へ明示的に現れるようになった中間式を、

@@ -6,7 +6,8 @@
 * `bridge_definition_V1_pm_square_root`（ラベル **`def_V1_plus_square_root`**）
   — `(V_1^{(+)})^{1/2} := exp((i/2) K_1 H_1^{(+)})`（`Ising2D.V1plusHalf`）
 * `bridge_claim_V1_pm_square_root_squares_to_V1_pm`（ラベル **`V1_plus_square_root_property`**）
-  — `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}`（`Ising2D.V1_plus_square_root_property`）
+  — `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}`（`Ising2D.V1_plus_square_root_property`。この主張の正本は
+  `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）
 * `evensectorT_definition_V_plus`（ラベル **`def_V_plus`**）
   — `V^{(+)} := (V_1^{(+)})^{1/2} V_2 (V_1^{(+)})^{1/2}`（`Ising2D.VPlusOfTransfer`。
   `V_2` は `def_transfer_matrix` の `V_2`）

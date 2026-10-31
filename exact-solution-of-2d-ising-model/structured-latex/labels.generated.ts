@@ -7,7 +7,6 @@
 
 export const ALL_LABELS = [
   "D0_G_diagonal_action",
-  "H1_H2_via_check_Z_Y",
   "H1_plus_in_sigma_z_form",
   "T_V_plus_check_Z_Y",
   "T_V_plus_check_Z_Y_via_B1_B2_B1",
@@ -27,8 +26,6 @@ export const ALL_LABELS = [
   "V_plus_eq_c_check_Vprime",
   "V_plus_eq_c_exp_sum_gamma_check_number_operator",
   "V_plus_factors_invertible",
-  "V_plus_inverse_is_positive_definite",
-  "V_plus_inverse_positive_and_trace_positivity",
   "V_plus_is_invertible",
   "V_plus_is_positive_definite",
   "W_has_positive_entries",
@@ -123,7 +120,6 @@ export const ALL_LABELS = [
   "def_cosh_sinh",
   "def_critical_sinh_product_A",
   "def_delta_M",
-  "def_eigenspaces_of_epsilon",
   "def_end_iso",
   "def_epsilon_projectors",
   "def_even_eigenvectors_of_epsilon",
@@ -185,7 +181,6 @@ export const ALL_LABELS = [
   "end_preserves_matrix_exponential",
   "epsilon_D0_G_pairwise_commute",
   "epsilon_G_is_involution",
-  "epsilon_action_eigenvalues_are_signs",
   "epsilon_anticommutes_with_check_Z_Y",
   "epsilon_commutes_with_W",
   "epsilon_commutes_with_transfer_matrices",

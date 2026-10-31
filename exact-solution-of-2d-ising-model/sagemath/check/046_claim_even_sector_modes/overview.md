@@ -2,15 +2,18 @@
 
 ## 対象
 
-**対象ラベル**: `H1_H2_via_check_Z_Y` （structured-latex 側の安定識別子）
+**対象ラベル**: `commutator_of_H_and_check_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/013_even_sector_modes.ts`, `eigenvalue_problem_reduction_to_A_theta.ts`, `eigenvalue_problem_diagonalization_and_exponential_form.ts`
+- ファイル: `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`, `eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証:
   - `antiperiodic_exp_sum` / `def_half_integer_checkZ` / `def_half_integer_checkY` /
     `half_integer_phase_antiperiodicity` / `half_integer_checkZ_periodicity` /
     `def_half_integer_modes`
   - `commutator_of_H_and_check_Z_Y`（(A)〜(D)）
   - `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y`
+- 以前の対象ラベル `H1_H2_via_check_Z_Y`（`H_1^{(+)}, H_2` を `checkZ, checkY` で表す主張）は、どの章のゴールの主張からも
+  使われないので、2026-10-31 に本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した。
+  対象ラベルを、この検査が確かめる交換関係 (A)〜(D) の主張に改めた。check_03 の `H_1^{(+)}, H_2` の表示の検算は記録として残す。
 
 ### 何を確定させるための検証か
 

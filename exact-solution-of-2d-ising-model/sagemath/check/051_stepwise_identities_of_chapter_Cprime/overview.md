@@ -4,8 +4,7 @@
 
 **対象ラベル**: `commutator_of_H_and_check_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/013_even_sector_modes.ts`,
-  `eigenvalue_problem_reduction_to_A_theta.ts`,
+- ファイル: `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`,
   `eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `antiperiodic_exp_sum` /
@@ -15,8 +14,12 @@
     `def_half_integer_modes` /
     `commutator_of_H_and_check_Z_Y` /
     `anticommutator_of_check_Z_Y` / `recover_Z_Y_from_check_Z_Y` / `H1_H2_via_check_Z_Y`
-  - 014 章の証明が引く前提: `def_H1_plus`（004 章）/ `def_V1_plus_square_root` / `V1_plus_square_root_property` /
+    （`H1_H2_via_check_Z_Y` は 2026-10-31 に本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`
+    へ退避した。check_01 のその段の検算は記録として残す）
+  - 014 章の証明が引く前提: `def_H1_plus`（004 章）/ `def_V1_plus_square_root` /
     `def_V_plus`（いずれも 010 章。(−) セクターの退避で 014 章の重複定義が削除され、010 章が唯一の定義になった）
+  - 014 章の証明は引かないが check_03 で併せて検証する主張: `V1_plus_square_root_property`
+    （`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`。`trace_of_epsilon_V_plus` の証明が引く）
   - 014 章: `V1_plus_half_invertible` / `V2_invertible` /
     `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` /
     `nesting_of_commutator_of_H_and_check_Z` /

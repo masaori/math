@@ -85,8 +85,6 @@ const forwardNavigationReviewById = new Map<string, Map<string, string>>([
   ["calculation_formulae_definition_set_and_algebra_notation", new Map([["definition_of_cc", "既存の複素数定義への案内"]])],
   ["calc_formulae_006_definition_of_cc", new Map([["abs_basic_properties", "後続利用への案内"], ["matrix_exp_series_converges", "後続利用への案内"]])],
   ["evenEigen_004_claim_trace_of_check_number_operator_product", new Map([["check_joint_eigenspace_decomposition", "後続対応への案内"]])],
-  // 「二乗が V_1^{(+)} に等しいことは〜で示す」という、直後の主張への案内の一文。定義の中身は exp(iK_1H_1^{(+)}/2) で閉じている。
-  ["bridge_definition_V1_pm_square_root", new Map([["V1_plus_square_root_property", "後続帰結への案内"]])],
   ["evenEigen_006_claim_eigenvalues_of_check_Vprime", new Map([["max_eigenvalue_of_V_plus_simple", "後続帰結への案内"]])],
   ["closing_002_claim_epsilon_eigenvalue_on_check_Q", new Map([["max_eigenvector_in_even_sector", "後続利用への案内"], ["trace_of_epsilon_V_plus", "後続の符号決定への案内"]])],
 ]);
@@ -188,11 +186,8 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   ["transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive", ["transfer_matrix_000m_definition_indexed_hyperbolic_abbreviations"]],
   ["transfer_matrix_001_definition_symbols", ["transfer_matrix_000n_claim_indexed_hyperbolic_abbreviations_positive"]],
   ["transfer_matrix_004_definition_eigenspace_even_of_epsilon", ["transfer_matrix_003a_claim_V2_in_Z_Y"]],
-  ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace", ["transfer_matrix_004_definition_eigenspace_even_of_epsilon"]],
-  ["transfer_matrix_004_definition_eigenspaces_of_epsilon", ["transfer_matrix_004_claim_even_eigenspace_is_complex_subspace"]],
-  ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", ["transfer_matrix_004_definition_eigenspaces_of_epsilon"]],
-  ["transfer_matrix_004c_claim_epsilon_action_eigenvalues", ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"]],
-  ["bridge_009_claim_epsilon_projector_properties", ["transfer_matrix_004c_claim_epsilon_action_eigenvalues"]],
+  ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues", ["transfer_matrix_004_definition_eigenspace_even_of_epsilon"]],
+  ["bridge_009_claim_epsilon_projector_properties", ["transfer_matrix_004b_claim_epsilon_square_and_eigenvalues"]],
   ["evensector_003_definition_half_integer_checkY", ["evensector_003_definition_half_integer_checkZ"]],
   ["evensector_003_claim_half_integer_phase_antiperiodicity", ["evensector_003_definition_half_integer_checkY"]],
   ["evensector_003_claim_half_integer_checkZ_periodicity", ["evensector_003_claim_half_integer_phase_antiperiodicity"]],
@@ -216,7 +211,6 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   // 整数運動量の経路を本文から外したことで意味的前提を失った項は、外す前の章内依存順で直前にあった
   // 残存項を提示上の直前項に置き、レビュー済みの読む順序を保つ。
   ["evensectorT_007_definition_B1_B2", ["freeenergy_002_claim_gamma_is_continuous"]],
-  ["evensector_007_claim_H1_H2_via_check_Z_Y", ["maxeig_010b_claim_epsilon_commutes_with_W"]],
   // 双曲線関数を数の指数関数から定義し直したことで、双曲線関数の節とそれに依存する項は行列の指数関数の
   // 後ろへ移った。移らない項は、移る前の章内依存順で直前にあった残存項を提示上の直前項に置き、
   // レビュー済みの読む順序を保つ。平方根の証明から切り出した主張は本文どおり平方根の直前に置く。
@@ -234,7 +228,6 @@ const presentationPredecessorEntryIdsById = new Map<string, string[]>([
   // 指数表示の節を分断しないよう、V_2 の指数表示の後に置く。
   ["bridge_definition_V1_pm_square_root", ["transfer_matrix_011d_claim_V2_exponential_representation"]],
   ["maxeig_001_definition_transfer_matrix_square_root", ["critical_002a_definition_critical_sinh_product_A"]],
-  ["evensectorT_claim_V1_plus_half_invertible", ["evenEigen_claim_V_plus_inverse_positive_and_traces"]],
   ["evensectorT_claim_V2_invertible", ["evensectorT_claim_V1_plus_half_invertible"]],
   ["evensectorT_claim_V_plus_factors_invertible", ["evensectorT_claim_V2_invertible"]],
   ["evensectorT_006_claim_linearity_of_T", ["evensectorT_claim_V_plus_factors_invertible"]],

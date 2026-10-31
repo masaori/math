@@ -4,7 +4,7 @@
 
 **対象ラベル**: `eigenvalues_of_V_plus` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、`eigenvalue_problem_diagonalization_and_exponential_form.ts`（`def_check_number_operator`）、`017_even_sector_eigenvalues.ts`（`V_plus_inverse_is_positive_definite`、`V_plus_inverse_positive_and_trace_positivity`）
+- ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、`eigenvalue_problem_diagonalization_and_exponential_form.ts`（`def_check_number_operator`）
 - 併せて検証（この章の全ブロック）:
   - `def_check_number_operator`（数演算子 `ň_μ := ψ̌_μ^† ψ̌_{1−μ}`）
   - `check_number_operator_idempotent`（`ň_μ² = ň_μ`）
@@ -15,9 +15,12 @@
   - `trace_of_check_Vprime`（`tr(V̌') = tr((V̌')^{−1}) = Π_μ 2cosh(γ(θ~_μ)/2) > 0`）
   - `V_plus_is_positive_definite`（`V^{(+)}` は正定値）
   - `V_plus_is_invertible`（明示した候補が `V^{(+)}` の右逆かつ左逆）
-  - `V_plus_inverse_is_positive_definite`（`(V^{(+)})^{-1}` の正定値性）
+  - `V_plus_inverse_is_positive_definite`（`(V^{(+)})^{-1}` の正定値性。下の注を見よ）
   - `trace_V_plus_is_positive`（`tr(V^{(+)})` の正値性）
-  - `V_plus_inverse_positive_and_trace_positivity`（`tr((V^{(+)})^{-1})` の正値性）
+  - `V_plus_inverse_positive_and_trace_positivity`（`tr((V^{(+)})^{-1})` の正値性。下の注を見よ）
+- 注: `V_plus_inverse_is_positive_definite` と `V_plus_inverse_positive_and_trace_positivity` は、どの章のゴールの主張からも
+  使われないので、2026-10-31 に本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`
+  へ退避した。それらの検算（check_05 の一部と check_V_plus_inverse_positive_definite）は記録として残す。
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）

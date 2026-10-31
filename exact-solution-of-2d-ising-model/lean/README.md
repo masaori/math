@@ -138,6 +138,14 @@ EOF
   本文のラベルに対応する (+) の定義・主張（`H1plus`, `V1plus`, `V1plusHalf`, `epsProjPlus` ほか）は
   その `η` を固定した場合と定義から一致する（`H1plus_eq_H1`, `V1plus_eq_V1pm`, `V1plusHalf_eq_V1pmHalf`,
   `epsProjPlus_eq_epsProj`）。
+- **どの章のゴールの主張からも使われない 5 主張は本文から参照用ノートへ退避してある（2026-10-31）。**
+  `def_eigenspaces_of_epsilon`, `epsilon_action_eigenvalues_are_signs`,
+  `H1_H2_via_check_Z_Y`, `V_plus_inverse_is_positive_definite`, `V_plus_inverse_positive_and_trace_positivity` は
+  `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` にある。
+  これらに対応する Lean（`PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean` の `evenEigenspace_carrier`、
+  `Part004/ClaimEpsilonActionEigenvalues.lean` とその必要十分版の導出、
+  `Part013/Claim007_H1H2ViaCheck.lean`, `Part017/Claim008_VPlusPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
+  形式化の記録として残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。
 - 各 Lean ファイルの冒頭コメントに、対応する `.typ` ファイル名と Typst のラベル（`<...>`）を書く。
 - 原文のステートメントをそのまま形式化できない場合（記号の重複・「元」と「族」の混同など）は、
   **冒頭コメントに原文の問題点と、形式化した修正版ステートメントを明記する**

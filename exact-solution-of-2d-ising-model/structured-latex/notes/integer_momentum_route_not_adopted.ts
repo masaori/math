@@ -96,7 +96,7 @@ j_{\mathbb R}:=\iota_{\mathbb Z\to\mathbb R}(j_{\mathbb Z}),\qquad
   },
   {
     id: "note_evensector_007_claim_H1_H2_via_check_Z_Y_integer_route_transfer_matrix_012_claim_H1_H2_via_hatZ_hatY",
-    targets: ["H1_H2_via_check_Z_Y"],
+    targets: ["def_H1_plus", "def_H2"],
     title: { tex: String.raw`H_1^{(\pm)}, H_2 \text{ を } \hat{Z}, \hat{Y} \text{ で表す}` },
     origin: { path: "_old/typst/parts/004_転送行列/011_claim_H1_H2をZhat_Yhatで表す.typ", ordinal: 12 },
     body: [

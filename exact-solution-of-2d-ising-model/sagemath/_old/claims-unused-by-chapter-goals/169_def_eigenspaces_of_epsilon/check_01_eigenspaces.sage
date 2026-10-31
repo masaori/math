@@ -3,7 +3,7 @@
 #   あわせて eps = sigma^x_1 ... sigma^x_M の積表示と dim F^{(+)} = 2^{M-1} を観測する。
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
-load(os.path.join(_dir, "../../_shared/operators.sage"))
+load(os.path.join(_dir, "../../../_shared/operators.sage"))
 import numpy as np
 rep = CheckReport("def_eigenspaces_of_epsilon")
 rng = np.random.default_rng(int(20260926))

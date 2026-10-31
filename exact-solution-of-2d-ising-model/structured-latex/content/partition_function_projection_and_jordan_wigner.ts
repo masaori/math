@@ -2516,71 +2516,13 @@ P^{(+)} f
 := \exp\!\left(\tfrac{i}{2} K_1 H_1^{(+)}\right)
 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
-      paragraph([
-        "と定める。二乗が ",
-        ref("def_V1_plus"),
-        " の ",
-        math(String.raw`V_1^{(+)}`),
-        " に等しいことは ",
-        ref("V1_plus_square_root_property"),
-        " で示す。",
-      ]),
+      paragraph(["と定める。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "もとの可換性の主張で未定義のまま使われていた (V_1^{(\pm)})^{1/2} を、1 ブロック 1 定義に従って独立させた。二乗が V_1^{(\pm)} に等しいことは後続の平方根の主張で証明する。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ行列の重複定義（exp((i/2)K_1H_1^{(+)}) の形）を削除してこのブロックを唯一の定義とし、式をその形にそろえた。ラベルを <def_V1_pm_square_root> から <def_V1_plus_square_root> に改めた。",
-      ],
-    },
-  },
-  {
-    id: "bridge_claim_V1_pm_square_root_squares_to_V1_pm",
-    kind: "claim",
-    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
-    title: { tex: String.raw`\left(V_1^{(+)}\right)^{1/2} \text{ の平方根性}` },
-    labels: ["V1_plus_square_root_property"],
-    statement: [
-      paragraph([
-        ref("def_V1_plus_square_root"),
-        " の ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " と ",
-        ref("def_V1_plus"),
-        " の ",
-        math(String.raw`V_1^{(+)}`),
-        " について、",
-      ]),
-      displayMath(String.raw`\left(\left(V_1^{(+)}\right)^{1/2}\right)^2=V_1^{(+)}`),
-      paragraph(["が成り立つ。"]),
-    ],
-    proof: [
-      paragraph([
-        math(String.raw`X := \tfrac{i}{2}K_1H_1^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " とおく。",
-        math(String.raw`X`),
-        " は自分自身と可換である。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\left(V_1^{(+)}\right)^{1/2}\right)^2
-&=\exp\!\left(X\right)\exp\!\left(X\right)
-&&\left(\because\ \blkref{def_V1_plus_square_root}\ \text{と}\ X\ \text{の定義}\right)\\
-&=\exp\!\left(X+X\right)
-&&\left(\because\ \blkref{theorem_exp_product}\ \text{を可換な}\ X,\ X\ \text{に適用}\right)\\
-&=\exp\!\left(iK_1H_1^{(+)}\right)
-&&\left(\because\ X\ \text{の定義と同類項}\ \tfrac{i}{2}K_1H_1^{(+)}\ \text{の加法}\right)\\
-&=V_1^{(+)}
-&&\left(\because\ \blkref{V1_plus_exponential_representation}\right).
-\end{aligned}`,
-      ),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "平方根として用いる半指数行列の定義と、その二乗が V_1^{(\pm)} になる主張を 1 ブロック 1 主張に従って分離した。",
-        "式変形の書き方の統一（2026-09-03）: 計算前の参照一覧を削り、既に各式変形行の行末にある \\blkref だけを残した。内容・式変形・根拠・参照は不変である。",
-        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。偶セクターの章にあった同じ主張の重複ブロック（旧ラベル <V1_plus_square_root_property>）と統合し、ラベルを <V1_plus_square_root_property> に一本化した（旧ラベル <V1_pm_square_root_squares_to_V1_pm> は廃止）。",
       ],
     },
   },

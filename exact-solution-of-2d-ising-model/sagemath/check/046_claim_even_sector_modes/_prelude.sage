@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 半整数運動量モード checkZ, checkY
-#   structured-latex/content/013_even_sector_modes.ts と eigenvalue_problem_reduction_to_A_theta.ts に対応
+#   structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts に対応
 #   theta~_mu = 2 pi (mu - 1/2) / M
 #   checkZ_mu = sum_j Z_j e^{-i j theta~_mu},  checkY_mu = sum_j Y_j e^{-i j theta~_mu}
 # ---------------------------------------------------------

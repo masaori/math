@@ -32,8 +32,6 @@ import blocks_008_TV1_hatZ_hatY_part1 from './content/008_TV1_hatZ_hatY_part1.ts
 import blocks_009_eigenvalues_of_V from './content/009_eigenvalues_of_V.ts'
 import blocks_011_max_eigenvalue from './content/011_max_eigenvalue.ts'
 import blocks_012_free_energy from './content/012_free_energy.ts'
-import blocks_013_even_sector_modes from './content/013_even_sector_modes.ts'
-import blocks_017_even_sector_eigenvalues from './content/017_even_sector_eigenvalues.ts'
 import blocks_020_critical_point from './content/020_critical_point.ts'
 import blocks_chapter_organization from './content/chapter_organization.ts'
 import blocks_critical_point_and_log_divergence from './content/critical_point_and_log_divergence.ts'
@@ -53,6 +51,7 @@ import notes_005_exp_conjugation_lie_route from './notes/005_exp_conjugation_lie
 import notes_008_TV1_hatZ_hatY from './notes/008_TV1_hatZ_hatY.ts'
 import notes_008_group_theory_general from './notes/008_group_theory_general.ts'
 import notes_009_clifford_algebra from './notes/009_clifford_algebra.ts'
+import notes_claims_unused_by_chapter_goals_not_adopted from './notes/claims_unused_by_chapter_goals_not_adopted.ts'
 import notes_critical_point_physical_specific_heat_not_adopted from './notes/critical_point_physical_specific_heat_not_adopted.ts'
 import notes_integer_momentum_route_not_adopted from './notes/integer_momentum_route_not_adopted.ts'
 import notes_minus_sector_not_adopted from './notes/minus_sector_not_adopted.ts'
@@ -74,8 +73,6 @@ export type AllBlocks = [
   ...typeof blocks_009_eigenvalues_of_V,
   ...typeof blocks_011_max_eigenvalue,
   ...typeof blocks_012_free_energy,
-  ...typeof blocks_013_even_sector_modes,
-  ...typeof blocks_017_even_sector_eigenvalues,
   ...typeof blocks_020_critical_point,
   ...typeof blocks_chapter_organization,
   ...typeof blocks_critical_point_and_log_divergence,
@@ -99,6 +96,7 @@ export type AllNotes = [
   ...typeof notes_008_TV1_hatZ_hatY,
   ...typeof notes_008_group_theory_general,
   ...typeof notes_009_clifford_algebra,
+  ...typeof notes_claims_unused_by_chapter_goals_not_adopted,
   ...typeof notes_critical_point_physical_specific_heat_not_adopted,
   ...typeof notes_integer_momentum_route_not_adopted,
   ...typeof notes_minus_sector_not_adopted,

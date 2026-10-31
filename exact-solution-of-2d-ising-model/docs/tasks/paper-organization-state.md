@@ -2,6 +2,13 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の五番目の項目を行った。どの章のゴールの主張からも辿れなかった 7 項を一つずつ確かめ、どの章にも割り当てていない項を 0 にした。
+  - **本文のどこからも使われていない 5 項を、参照用ノート `notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した。** `def_eigenspaces_of_epsilon`（$\mathcal F^{(+)}$ の部分線型空間性の言い直し）、`epsilon_action_eigenvalues_are_signs`（$\varepsilon$ の固有値が $\pm1$）、
+    `H1_H2_via_check_Z_Y`（$H_1^{(+)},H_2$ の $\check Z,\check Y$ による表示）、`V_plus_inverse_is_positive_definite`・`V_plus_inverse_positive_and_trace_positivity`（$(V^{(+)})^{-1}$ の正定値性とトレースの正値性）である。中身はそのまま運び、項ごとの不採用の理由をノートの冒頭に書いた。
+    空になった `013_even_sector_modes.ts`・`017_even_sector_eigenvalues.ts` は消した。SageMath の検査のうち退避した主張を対象にする 2 つは `sagemath/_old/claims-unused-by-chapter-goals/` へ移し、046 の対象ラベルを交換関係の主張に改めた。Lean は形式化の記録として残し、README に退避した主張の一覧を書いた。
+  - **使われていた 2 項は、使う章へ置いた。** `V1_plus_square_root_property` は `trace_of_epsilon_V_plus` の証明の行 $BB=V_1^{(+)}$ が根拠を「theorem_exp_product より」と書いて使っていたので、根拠をこの主張の `\blkref` に直し、主張を最大固有値に属する固有ベクトルの章のその定理の直前へ移した（同じ鎖の Step 1 の文字で書いたラベルも `\blkref` に直した）。定義 `def_V1_plus_square_root` の後ろの章への案内文は消し、後ろの章を指す案内の参照は 0 になった。
+    `even_eigenspace_is_complex_subspace` は `c_between_Lambda_half_and_twice_Lambda_half` の証明が $\hat v=v/\|v\|\in\mathcal F^{(+)}$ に根拠なしで使っていたので、根拠に引き、主張を $M\to\infty$ の極限の章のその主張の直前へ移した。
+  - 章の項目数は、最大固有値に属する固有ベクトルの章が 17、$M\to\infty$ の極限の章が 14 になった（ほかは変わらない）。別のエージェントのレビューを経た（指摘 2 件を直した。`even_eigenspace_is_complex_subspace` の暗黙の使用と、Lean・SageMath の注記の章の書き間違い）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: `未確定` にあった「$\gamma(\theta)$ の定義を主張から分ける」一単位を行った。
   `gamma1_lower_bound_all_theta` の statement の中で定めていた $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$（$\theta\in\mathbb R$）を、新しい定義ブロック `def_gamma_theta`（`Athetatilde_001b_definition_gamma_theta`）へ分けた。
   置き場は対角化の章のファイルの `def_gamma1_gamma2_of_theta` の直後で、$\gamma_1$ の出典はそのブロックにした。$\gamma(\tilde\theta_\mu)$ はこの $\gamma$ の $\theta=\tilde\theta_\mu$ での値とし、記号 $\gamma$（1 変数）の定義をここに一本化した。
@@ -1272,8 +1279,8 @@
 
 ## 次の一歩
 
-作業の順序の五番目: どの章のゴールの式からも辿れない 7 項を一つずつ確かめる。本文のどこからも使われていなければ参照用ノートへ退避して採用しなかった理由を書き、使われているなら使う章へ置く。
-7 項は棚卸し（`docs/organization/flat-inventory.json`）のどの章にも割り当てられていない項として列挙できる。一回に扱うのは 7 項すべてでよいが、移す先の章が複数に分かれて大きすぎれば、項ごとに割り直す。
+作業の順序の六番目: 冒頭の章立ての説明ページ（`content/chapter_organization.ts`）を、組み直した本文と照合する。部・章の題、各章のゴールの式、依存関係の図が本文と一致するかを確かめ、ずれていれば説明ページの側を本文に合わせる。
+下の「未確定」の、図に $V^{(+)}$ の固有値の章 → $N\to\infty$ の極限の章の矢印が無い件をこの回で扱う。どの章にも割り当てていない項は 0 になったので、番号を持つファイルに残る数学的道具立てに部見出し「数学的道具立て」を置く件も、大きすぎなければこの回で扱い、大きければ割り直す。
 
 ## 未確定
 
@@ -1287,10 +1294,9 @@
 - **逆双曲線余弦の 2 項（`def_arccosh`・`arccosh_properties`）の分類。** 依存先は実対数・平方根・双曲線関数・集合の記法だけで、イジング模型を参照しないが、
   旧 `004_transfer_matrix.ts` に在ったため2次元イジングモデルに分類され、いまは対角化の章のファイルに在る。分類規則に照らせば数学的道具立てである（下の分類の項と同じ問題）。
 - 章ごとの組み直し（作業の順序の四番目）は全章を終えた。残りの扱い:
-  - 番号を持つファイルには、数学的道具立てと、どの章にも割り当てていない 7 項（`004_transfer_matrix.ts`・`013_even_sector_modes.ts`・`017_even_sector_eigenvalues.ts` など）が残る。
-    残ったファイルに部見出し「数学的道具立て」を置き、旧い章見出しを道具の中身に合わせるのは、未割り当ての 7 項を片付けた後（作業の順序の六番目まで）に行う。
-  - 後ろの章を指す案内の参照は、平方根の定義 → 平方根性の主張の 1 本だけが残る（棚卸しの `crossChapterNavigationReferences`。
-    平方根性の主張はどの章にも割り当てられない 9 項の一つで、作業の順序の五番目の項目で扱う）。
+  - 番号を持つファイルには、数学的道具立てだけが残る（どの章にも割り当てていない項は作業の順序の五番目で 0 にした）。
+    残ったファイルに部見出し「数学的道具立て」を置き、旧い章見出しを道具の中身に合わせるのは、作業の順序の六番目で行う。
+  - 後ろの章を指す案内の参照は 0 になった（作業の順序の五番目の項目で、平方根の定義から平方根性の主張への案内文を消した）。
 - 分類（作業の順序の外）: 逆双曲線余弦の定義と性質、正の実数上の実対数、正の結合定数上の双曲線正接は、イジング模型を参照しない実関数の道具だが、
   `004_transfer_matrix.ts` に在るので2次元イジングモデルに分類され、転送行列の章・対角化の章に入っている。分類規則に照らせば数学的道具立てである。
 - 旧生成器が「未レビュー」として記録していた項（道具: `calc_formulae_000c0_claim_positive_real_square_injective`、`exp_linear_map_005`〜`012` の数の指数関数の 8 項。

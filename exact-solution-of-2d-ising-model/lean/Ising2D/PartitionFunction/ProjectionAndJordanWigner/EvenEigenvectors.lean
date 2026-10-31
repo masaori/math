@@ -7,10 +7,10 @@
 
 本文と同じく、抽象線型写像を経由せず、具体的な複素行列 `epsilon M` の
 数ベクトルへの作用だけで定義する。続いて本文ラベル
-`even_eigenspace_is_complex_subspace`（正本は `structured-latex/content/004_transfer_matrix.ts`）の零・和・複素スカラー倍に関する三つの計算を
+`even_eigenspace_is_complex_subspace`（正本は `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）の零・和・複素スカラー倍に関する三つの計算を
 同じ順で形式化し、その集合を台集合とする複素部分加群を構成する。
 
-本文ラベル `def_eigenspaces_of_epsilon`（正本は `structured-latex/content/004_transfer_matrix.ts`。`𝓕^{(+)}` は `ℂ^{2^M}` の `ℂ`-部分線型空間である、という
+本文ラベル `def_eigenspaces_of_epsilon`（`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（2026-10-31 に本文から参照用ノートへ退避した。この Lean は形式化の記録として残す）。`𝓕^{(+)}` は `ℂ^{2^M}` の `ℂ`-部分線型空間である、という
 `even_eigenspace_is_complex_subspace` の統合結果。`(+)` だけ）の Lean は、同じ `evenEigenspace` である
 （`evenEigenspace_carrier`）。
 -/

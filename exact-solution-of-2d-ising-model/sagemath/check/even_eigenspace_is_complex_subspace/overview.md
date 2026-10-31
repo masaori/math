@@ -4,7 +4,7 @@
 
 **対象ラベル**: `even_eigenspace_is_complex_subspace` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/004_transfer_matrix.ts`
+- ファイル: `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`（2026-10-31 に `004_transfer_matrix.ts` から、この主張を使う $M\to\infty$ の極限の章へ移した）
 - 範囲: `F^{(+)}` が零ベクトルを含み、複素数ベクトルの和と複素スカラー倍について閉じること
 
 ## チェック一覧

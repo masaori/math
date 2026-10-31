@@ -9,7 +9,8 @@
 `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）
 
 `H_1^{(+)}`（`def_H1_plus`）は章 004 の `Ising2D.H1plus`、`(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`）と
-その平方根性（`V1_plus_square_root_property`）、`V^{(+)}`（`def_V_plus`）は章 010 の
+その平方根性（`V1_plus_square_root_property`。人手の正本は最大固有値に属する固有ベクトルの章のファイル
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`）、`V^{(+)}`（`def_V_plus`）は章 010 の
 `Ising2D.V1plusHalf` / `Ising2D.V1_plus_square_root_property` / `Ising2D.VPlusOfTransfer`
 （`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`）である。人手の本文はこれらの定義を章 010 の 1 か所に
 まとめ、章 014 の重複定義を削除した。

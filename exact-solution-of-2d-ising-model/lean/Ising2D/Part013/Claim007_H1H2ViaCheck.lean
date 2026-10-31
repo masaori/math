@@ -2,7 +2,7 @@
 # `H_1^{(+)}, H_2` を `check(Z), check(Y)` で表す（**具体版**）
 
 対応する人手証明のラベル: `H1_H2_via_check_Z_Y`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（2026-10-31 に本文から参照用ノートへ退避した。この Lean は形式化の記録として残す）の
 `evensector_007_claim_H1_H2_via_check_Z_Y`）
 
 **必要十分版は無い。** 整数運動量版 `H1_H2_via_hatZ_hatY`（`Part004/Claim011_H1H2ViaHat.lean`）

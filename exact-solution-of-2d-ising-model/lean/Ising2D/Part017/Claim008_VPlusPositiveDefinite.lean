@@ -4,7 +4,7 @@
 対応する人手証明（`V_plus_is_positive_definite`、`V_plus_is_invertible`、`trace_V_plus_is_positive` は
 `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
 `V_plus_inverse_is_positive_definite`、`V_plus_inverse_positive_and_trace_positivity` は
-`structured-latex/content/017_even_sector_eigenvalues.ts`）。
+`structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts`（2026-10-31 に本文から参照用ノートへ退避した。この Lean は形式化の記録として残す））。
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、

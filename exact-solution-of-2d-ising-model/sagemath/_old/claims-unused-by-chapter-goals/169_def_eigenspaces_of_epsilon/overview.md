@@ -1,5 +1,9 @@
 # SageMath Check: 169_def_eigenspaces_of_epsilon
 
+> **退避（2026-10-31）**: 対象の主張は、どの章のゴールの主張からも使われないので、本文から参照用ノート
+> `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避した。それに合わせてこの検査を
+> `sagemath/check/` からここへ移した。検算の記録として残す（下の記述は退避前のまま）。共有ライブラリを読む相対パスだけを直した。
+
 ## 対象
 
 **対象ラベル**: `def_eigenspaces_of_epsilon` （structured-latex 側の安定識別子）

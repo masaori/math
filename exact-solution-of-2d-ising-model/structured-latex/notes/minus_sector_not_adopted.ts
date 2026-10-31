@@ -355,7 +355,7 @@ x^\top Wx
 &=x_+^\top Wx_+ + x_-^\top Wx_-
   \quad (\because \text{零は加法単位元})
 \end{aligned}`),
-      paragraph([math(String.raw`c_\pm := c_\pm(M_{\mathrm{col}})`), " と略記する。任意の ", math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`), " について、", math(String.raw`y=0`), " なら ", math(String.raw`y^\top Wy=c_\pm\|y\|^2=0`), " である。", math(String.raw`y\neq0`), " なら ", ref("matrix_norm_triangle_inequality"), " (1) より ", math(String.raw`\|y\|>0`), " であり、", math(String.raw`\widehat y:=y/\|y\|`), " と定める。", ref("def_eigenspaces_of_epsilon"), " と ", ref("matrix_norm_triangle_inequality"), " (2) より、"]),
+      paragraph([math(String.raw`c_\pm := c_\pm(M_{\mathrm{col}})`), " と略記する。任意の ", math(String.raw`y\in\mathcal F^{(\pm)}\cap\mathbb R^{2^{M_{\mathrm{col}}}}`), " について、", math(String.raw`y=0`), " なら ", math(String.raw`y^\top Wy=c_\pm\|y\|^2=0`), " である。", math(String.raw`y\neq0`), " なら ", ref("matrix_norm_triangle_inequality"), " (1) より ", math(String.raw`\|y\|>0`), " であり、", math(String.raw`\widehat y:=y/\|y\|`), " と定める。", "〔def_eigenspaces_of_epsilon〕", " と ", ref("matrix_norm_triangle_inequality"), " (2) より、"]),
       displayMath(String.raw`\begin{aligned}
 \varepsilon\widehat y
 &=\varepsilon\left(\frac{1}{\|y\|}y\right)
@@ -363,7 +363,7 @@ x^\top Wx
 &=\frac{1}{\|y\|}\,\varepsilon y
   \quad (\because \text{行列の作用は実数倍を保つ})\\
 &=\frac{1}{\|y\|}(\pm y)
-  \quad (\because y\in\mathcal F^{(\pm)}\ \text{と}\ \blkref{def_eigenspaces_of_epsilon})\\
+  \quad (\because y\in\mathcal F^{(\pm)}\ \text{と}\ \text{〔def\_eigenspaces\_of\_epsilon〕})\\
 &=\pm\widehat y
   \quad (\because \widehat y\ \text{の定義}),\\[1mm]
 \|\widehat y\|
@@ -469,7 +469,7 @@ c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 \qquad (k \in \{1,\dots,2^{M_{\mathrm{col}}}\})`), "。とくに ", math(String.raw`\varepsilon`), " の成分は ", math(String.raw`\varepsilon_{l,k} = \begin{cases}1 & (l = \pi(k)) \\ 0 & (l \neq \pi(k))\end{cases}`), " であり、**", math(String.raw`\varepsilon`), " は成分がすべて ", math(String.raw`0`), " または ", math(String.raw`1`), " の置換行列**である（各行・各列にちょうど 1 個の ", math(String.raw`1`), " がある）。"], [math(String.raw`\text{(2)}\quad \pi(\pi(k)) = k, \qquad \pi(k) \neq k
 \qquad (k \in \{1,\dots,2^{M_{\mathrm{col}}}\})`), "（", math(String.raw`\pi`), " は不動点をもたない対合）。"], [math(String.raw`\text{(3)}\quad \left(\varepsilon x\right)_k = x_{\pi(k)}
 \qquad \left(x \in \mathbb{C}^{2^{M_{\mathrm{col}}}},\ k \in \{1,\dots,2^{M_{\mathrm{col}}}\}\right)`)], [math(String.raw`\text{(4)}\quad x_0 := \frac{1}{\sqrt{2}}\left(e_1 - e_{\pi(1)}\right)
-\ \in\ \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}, \qquad \|x_0\| = 1`), "（", ref("def_eigenspaces_of_epsilon"), " の ", math(String.raw`\mathcal{F}^{(-)}`), "）。**とくに ", math(String.raw`\mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`), " は単位ベクトルを含む。**"]]),
+\ \in\ \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}, \qquad \|x_0\| = 1`), "（", "〔def_eigenspaces_of_epsilon〕", " の ", math(String.raw`\mathcal{F}^{(-)}`), "）。**とくに ", math(String.raw`\mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`), " は単位ベクトルを含む。**"]]),
       paragraph(["証明."]),
       paragraph(["(1) ", ref("trace_of_epsilon_V_plus"), " の証明 Step 3 の (b) で ", math(String.raw`\varepsilon f_{\iota(s)} = f_{\iota(-s)}`), "（", math(String.raw`s \in \mathfrak{M}`), "）が示されている。", math(String.raw`e_k = f_{\iota(s_k)}`), " と ", math(String.raw`\pi`), " の定義より ", math(String.raw`f_{\iota(-s_k)} = e_{\pi(k)}`), " なので ", math(String.raw`\varepsilon e_k = e_{\pi(k)}`), " である。"]),
       paragraph([math(String.raw`\varepsilon`), " の第 ", math(String.raw`k`), " 列は ", math(String.raw`\varepsilon e_k`), " そのものだから、成分は ", math(String.raw`\varepsilon_{l,k} = \delta_{l,\pi(k)}`), "（", math(String.raw`l = \pi(k)`), " のとき ", math(String.raw`1`), "、そうでなければ ", math(String.raw`0`), "）である。よって各列にちょうど 1 個の ", math(String.raw`1`), " がある。", math(String.raw`s \mapsto -s`), " は ", math(String.raw`\mathfrak{M}`), " からそれ自身への全単射（(2) で示す ", math(String.raw`\pi\circ\pi = \mathrm{id}`), " が逆写像を与える）なので ", math(String.raw`\pi`), " も全単射であり、各行にもちょうど 1 個の ", math(String.raw`1`), " がある。"]),
@@ -500,7 +500,7 @@ c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 &= -\,x_0
 && (\because x_0 \text{ の定義と実数の符号の分配})
 \end{aligned}`),
-      paragraph(["なので ", ref("def_eigenspaces_of_epsilon"), " より ", math(String.raw`x_0 \in \mathcal{F}^{(-)}`), "。"]),
+      paragraph(["なので ", "〔def_eigenspaces_of_epsilon〕", " より ", math(String.raw`x_0 \in \mathcal{F}^{(-)}`), "。"]),
     ],
   },
   {
@@ -512,13 +512,13 @@ c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
     body: [
       NOT_ADOPTED,
       paragraph(["（もと content/019_max_eigenvalue_sector.ts の主張ブロック sector_002_claim_abs_vector_moves_to_even_sector。labels: abs_vector_moves_to_even_sector。以下は本文にあったときの内容のまま。）"]),
-      paragraph([math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`), "、", math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とし、", ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`), " を考える（", ref("W_is_real_symmetric_positive_definite"), " より ", math(String.raw`W`), " は実行列とみなせる）。", math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`), "（", ref("def_eigenspaces_of_epsilon"), "）に対し、"]),
+      paragraph([math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`), "、", math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とし、", ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`), " を考える（", ref("W_is_real_symmetric_positive_definite"), " より ", math(String.raw`W`), " は実行列とみなせる）。", math(String.raw`x \in \mathcal{F}^{(-)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`), "（", "〔def_eigenspaces_of_epsilon〕", "）に対し、"]),
       displayMath(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}, \qquad
 u_k := \left|x_k\right| \quad \left(k \in \{1,\dots,2^{M_{\mathrm{col}}}\}\right)`),
       paragraph(["と定める。このとき次が成り立つ。"]),
       list([[math(String.raw`\text{(1)}\quad \varepsilon\,u = u`), "、すなわち ", math(String.raw`u \in \mathcal{F}^{(+)}\cap\mathbb{R}^{2^{M_{\mathrm{col}}}}`)], [math(String.raw`\text{(2)}\quad \|u\| = \|x\|`)], [math(String.raw`\text{(3)}\quad u^\top W u \ \geq\ \left|x^\top Wx\right| \ \geq\ x^\top W x`)]]),
       paragraph(["証明."]),
-      paragraph(["(1) ", math(String.raw`x \in \mathcal{F}^{(-)}`), " なので ", ref("def_eigenspaces_of_epsilon"), " より ", math(String.raw`\varepsilon x = -x`), " である。", "〔epsilon_is_sign_flip_permutation〕", " (3) をこの等式の第 ", math(String.raw`k`), " 成分に適用すると"]),
+      paragraph(["(1) ", math(String.raw`x \in \mathcal{F}^{(-)}`), " なので ", "〔def_eigenspaces_of_epsilon〕", " より ", math(String.raw`\varepsilon x = -x`), " である。", "〔epsilon_is_sign_flip_permutation〕", " (3) をこの等式の第 ", math(String.raw`k`), " 成分に適用すると"]),
       displayMath(String.raw`\begin{aligned}
 x_{\pi(k)}
 &= \left(\varepsilon x\right)_k
@@ -543,7 +543,7 @@ x_{\pi(k)}
 &= u_k
 && (\because u \text{ の定義})
 \end{aligned}`),
-      paragraph(["すべての ", math(String.raw`k`), " で成分が一致するので ", math(String.raw`\varepsilon u = u`), " であり、", ref("def_eigenspaces_of_epsilon"), " より ", math(String.raw`u \in \mathcal{F}^{(+)}`), "。成分 ", math(String.raw`|x_k|`), " は実数なので ", math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`), "。"]),
+      paragraph(["すべての ", math(String.raw`k`), " で成分が一致するので ", math(String.raw`\varepsilon u = u`), " であり、", "〔def_eigenspaces_of_epsilon〕", " より ", math(String.raw`u \in \mathcal{F}^{(+)}`), "。成分 ", math(String.raw`|x_k|`), " は実数なので ", math(String.raw`u \in \mathbb{R}^{2^{M_{\mathrm{col}}}}`), "。"]),
       paragraph(["(2) ノルムの定義から成分ごとに計算する。"]),
       displayMath(String.raw`\begin{aligned}
 \|u\|^2

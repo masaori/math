@@ -9,7 +9,8 @@ _sage_const_8 = Integer(8); _sage_const_40 = Integer(40); _sage_const_1 = Intege
 #
 #  対象ラベル:
 #    （014 章の証明が引く前提として）def_H1_plus（004 章）/ def_V1_plus_square_root /
-#    V1_plus_square_root_property / def_V_plus（いずれも 010 章）
+#    def_V_plus（いずれも 010 章）。V1_plus_square_root_property（014 章の証明は引かない。いまは
+#    eigenvalue_problem_eigenvector_of_max_eigenvalue.ts）の鎖も併せて検証する
 #    V1_plus_half_invertible / V2_invertible
 #    V_plus_factors_invertible / def_T_V_plus
 #    T_V_plus_is_conjugation

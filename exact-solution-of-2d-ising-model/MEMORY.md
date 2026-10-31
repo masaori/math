@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの五番目の項目（どの章のゴールからも辿れない 7 項）を済ませた。本文で使われていない 5 項を `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避し（013・017 のファイルは空になり削除）、根拠なしに使われていた `V1_plus_square_root_property`（tr(εV^{(+)}) の証明）と `even_eigenspace_is_complex_subspace`（Λ^{(1/2)} ≤ c ≤ 2Λ^{(1/2)} の証明）を引く形に直して使う章へ移した。どの章にも割り当てていない項と後ろの章を指す案内の参照はどちらも 0。次は六番目の項目（冒頭の章立ての説明ページを本文と照合）。
+
 2026-10-31: Lean の通しの証明の項目 7 の四番目の章「A(θ̃_μ) の対角化と V^{(+)} の指数表示」を移した。26 ファイルを `lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/` へ移し（名前空間不変。番号を外した名前にした）、`Part015/`・`Part016/` は無くなった。import・コメントのパス・`lean/README.md`・`lean/docs/` の対応表を直した。`Part017/Definition001_CheckNumberOperator` は次の章の項目が多いので残した。次は部「固有値問題」の「V^{(+)} の固有値」の章。
 
 2026-10-31: 章立ての組み直しの「γ(θ) の定義を主張から分ける」一単位を行った。γ(θ) := arccosh(γ_1(θ))（θ∈ℝ）を新しい定義 `def_gamma_theta`（対角化の章のファイル、`def_gamma1_gamma2_of_theta` の直後）に分け、γ(θ~_μ) はその値として定義を一本化した。旧 `def_gamma_theta_tilde_mu` は γ(θ~_μ) > 0 の主張だけになったので、ラベルを `gamma_theta_tilde_mu_positive` に改めた。`gamma1_lower_bound_all_theta` は γ_1 の出典を `def_gamma1_gamma2_of_theta` に直すためその直後へ移した。Lean の `NecSuf.arcosh_pos_of_one_lt` は人手と同じ背理法の鎖で証明し直した。次は作業の順序の五番目（どの章にも割り当てていない 7 項の確認）。

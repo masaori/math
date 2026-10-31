@@ -2,7 +2,7 @@
 # (V^{(+)})^{-1} の全固有値正値性を独立に検査する
 #
 # 対象ラベル: V_plus_inverse_is_positive_definite
-# 対象: structured-latex/content/017_even_sector_eigenvalues.ts
+# 対象: structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts（2026-10-31 に本文 017_even_sector_eigenvalues.ts から退避）
 # 帰属: CDF 上で数値評価する。有限複素行列の正定値性に対する数値検査であり、
 #       実数への脱出は固有値計算の浮動小数点近似だけである。
 # =========================================================================
