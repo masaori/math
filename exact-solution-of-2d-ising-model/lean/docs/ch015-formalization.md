@@ -4,10 +4,8 @@
 
 この章は **008 章後半（`A(θ)` の固有ベクトル・対角化・`det A`）の半整数運動量版**である。
 `A(θ)` は `θ ∈ ℝ` について述べられた 2×2 の主張なので、
-**008 章で形式化済みの定理の多くは `θ := θ~_μ` を代入するだけで使える**。
-実際、固有ベクトル・対角化・行列式は既存の
-`Ising2D.AMat_mulVec_eigen` / `AMat_mul_Pmat` / `AMat_eq_Pmat_mul_Dmat_mul_inv` /
-`det_AMat_eq_one`（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）の特殊化として得られ、再証明していない。
+整数運動量の経路の記録（`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）にも同じ形の定理があるが、
+本章の固有ベクトル・対角化・行列式はそれを使わず、人手証明の Step どおりに証明している。
 
 **本章に固有で、かつ本章の最大の価値は `γ_2(θ~_μ) ≠ 0` を無条件に閉じたこと**である
 （`Ising2D.gamma2_thetaTilde_ne_zero`）。これにより整数運動量にあった臨界点の例外処理
@@ -32,21 +30,28 @@
 | `Ising2D.sq_I_absGamma2` | (5) `(i|γ_2|)^2 = γ_2(θ~)γ_2(-θ~)` | 同 (5) |
 | `Ising2D.absGamma2_thetaTilde_pos` | `|γ_2(θ~_μ)| > 0` | 同 (2)(4) の狭義部分 |
 | `Ising2D.lambdaPlusR` / `lambdaMinusR` | `λ_{±,μ} = γ_1(θ~_μ) ± |γ_2(θ~_μ)| ∈ ℝ` | `eigenvector_of_A_theta_tilde` |
-| `Ising2D.charPoly_factor_thetaTilde` | 特性多項式 `= (λ-λ_+)(λ-λ_-)` | 同 Step 1 |
-| `Ising2D.AMat_mulVec_eigen_pos` / `..._neg` | `v_± = (∓|γ_2|, γ_2(-θ~))` が固有ベクトル | 同 Step 2 |
+| `Ising2D.gamma2_mul_conj_eq_absGamma2_sq` / `gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` | `a ā = r^2`、`ab = -r^2`（根拠に引く形） | 同 Step 1・Step 2 の根拠 |
+| `Ising2D.factor_identity_thetaTilde` | 準備の因数分解の恒等式 | 同 Step 1 |
+| `Ising2D.charPoly_factor_thetaTilde` | `det(A(θ) - λI) = (λ-λ_+)(λ-λ_-)` | 同 Step 1 |
+| `Ising2D.det_AMat_sub_smul_eq_zero_iff` | 固有値は `λ_±` に限る | 同 Step 1 |
+| `Ising2D.AMat_mulVec_eigen_pos` / `..._neg` | `v_± = (∓|γ_2|, γ_2(-θ~))` が固有ベクトル（成分ごとの鎖） | 同 Step 2 |
+| `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg` | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
 | `Ising2D.lambdaPlusR_ne_lambdaMinusR` | `λ_+ ≠ λ_-`（固有値の分離） | 同 Step 1 末尾 |
-| `Ising2D.checkT` | 008 章の `Pmat` へ渡す分岐 `t := i|γ_2|`（`t^2 = γ_2γ_2(-θ~)`） | 形式化の都合（分岐の確定） |
-| `Ising2D.checkPmat` / `checkDmat` | 人手証明の `P̌_μ`, `Ď_μ` | `diagonalization_check_P_D` |
-| `Ising2D.checkPmat_eq_Pmat` / `checkDmat_eq_Dmat` | 008 章の `P_μ`, `D_μ` の特殊化であること | 同上 |
+| `Ising2D.checkPmat` / `checkDmat` / `checkC` | 人手証明の `P̌_μ`, `Ď_μ`, 任意定数 `c` | `diagonalization_check_P_D` |
+| `Ising2D.sqrtM_cast_ne_zero` | `√M ≠ 0` | 同 Step 1 |
+| `Ising2D.checkC_mul_b` / `checkPmat_col_pos` / `checkPmat_col_neg` | `cb = 1/(2√M)`、`P̌` の列が `v_{±,μ}` | 同 Step 2 |
 | `Ising2D.det_checkPmat` | `det P̌_μ = -|γ_2|/(2M γ_2(-θ~_μ))` | 同 Step 3 |
 | `Ising2D.det_checkPmat_ne_zero` | `det P̌_μ ≠ 0`（可逆性） | 同 Step 3 |
 | `Ising2D.AMat_mul_checkPmat` | `A P̌ = P̌ Ď` | 同 Step 2 |
-| **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** |
+| **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** Step 4 |
+| `Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
+| `Ising2D.det_AMat_eq_gamma1_sq_add` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)` | `det_A_theta_tilde` Step 1 |
+| `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form` / `gamma2_mul_gamma2_neg_cos_form` | `exp(iθ)exp(-iθ) = 1` と `γ_2γ_2(-θ)` の実部表示 | 同 Step 2 |
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
 | `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
-| `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式 |
+| `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式（Step 3〜5） |
 | `Ising2D.gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 = 1 + |γ_2(θ~_μ)|^2` | 同 最終式 |
-| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式 |
+| `Ising2D.lambda_mul_lambda_thetaTilde` | `λ_+λ_- = 1` | 同 第 3 式（Step 6） |
 | `Ising2D.one_lt_gamma1R_sq_thetaTilde` | `γ_1(θ~_μ)^2 > 1` | `gamma1_gt_1_theta_tilde` Step 2 |
 | **`Ising2D.one_lt_gamma1R_thetaTilde`** | **`γ_1(θ~_μ) > 1`（狭義）** | **`gamma1_gt_1_theta_tilde`** |
 | `Ising2D.one_le_gamma1R_thetaTilde` | `γ_1(θ~_μ) ≥ 1` | 同上（併記） |
@@ -119,7 +124,7 @@
    `absGamma2_thetaTilde_pos`）で述べてある。この方針は 008 章
    （`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）と同じである。
 2. **`eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元で尽きること）を独立の定理にしていない。**
-   固有値が `λ_±` の 2 つに限ることは `charPoly_factor_thetaTilde`（特性多項式の因数分解）で、
+   固有値が `λ_±` の 2 つに限ることは `det_AMat_sub_smul_eq_zero_iff`（特性多項式の因数分解）で、
    固有ベクトルが `v_±` のスカラー倍で尽きることは対角化
    `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`（`P̌` が可逆）でそれぞれ言えており、
    後段が使うのはこの 2 つである。

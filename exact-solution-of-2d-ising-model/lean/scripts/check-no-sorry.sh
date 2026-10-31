@@ -858,17 +858,32 @@ targets=(
   Ising2D.sq_absGamma2
   Ising2D.sq_I_absGamma2
   Ising2D.absGamma2_thetaTilde_pos
+  Ising2D.gamma2_mul_conj_eq_absGamma2_sq
+  Ising2D.gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq
+  Ising2D.factor_identity_thetaTilde
   Ising2D.charPoly_factor_thetaTilde
+  Ising2D.det_AMat_sub_smul_eq_zero_iff
   Ising2D.AMat_mulVec_eigen_pos
   Ising2D.AMat_mulVec_eigen_neg
+  Ising2D.eigenvector_pos_ne_zero
+  Ising2D.eigenvector_neg_ne_zero
+  Ising2D.AMat_mulVec_smul_eigen_pos
+  Ising2D.AMat_mulVec_smul_eigen_neg
   Ising2D.lambdaPlusR_ne_lambdaMinusR
-  Ising2D.checkPmat_eq_Pmat
-  Ising2D.checkDmat_eq_Dmat
-  Ising2D.checkT_sq
+  Ising2D.sqrtM_cast_ne_zero
+  Ising2D.checkC_mul_b
+  Ising2D.checkPmat_col_pos
+  Ising2D.checkPmat_col_neg
   Ising2D.det_checkPmat
   Ising2D.det_checkPmat_ne_zero
   Ising2D.AMat_mul_checkPmat
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
+  Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf
+  Ising2D.det_AMat_eq_gamma1_sq_add
+  Ising2D.exp_I_mul_exp_neg_I_mul
+  Ising2D.gamma2_mul_gamma2_neg_sin_form
+  Ising2D.gamma2_mul_gamma2_neg_cos_form
+  Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde
   Ising2D.det_AMat_thetaTilde_eq_one
   Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf
   Ising2D.gamma1R_sq_thetaTilde

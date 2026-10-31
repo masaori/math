@@ -283,6 +283,20 @@
     `matExp_units_conj`（`Representation.lean`）すなわち mathlib の `Matrix.exp_units_conj` に委ねていることが分かった。人手は行列ノルムの劣乗法性・`US^kU^{-1} = (USU^{-1})^k`・`def_exp` から導いている。
     この 8 定数の外の既存の補題なので、下の「この後に残る確認」に載せた。それまでこの 2 ファイルは、この 1 行について人手証明と 1 対 1 になっていない。
 
+  - ゴールラインの確認の五つ目（済み、2026-10-31）: `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数（`AMat_mulVec_eigen`・`det_AMat`・`det_AMat_eq_one`・`gamma2_mul_gamma2_neg`）を判定した。
+    どれも整数運動量の `A(θ_μ)` の固有ベクトル・行列式の補題（任意の実数 `θ` の形）で、本文の `DiagonalizationAndExponentialForm/ClaimEigenATildeDiag.lean`・`ClaimDetATilde.lean`・`ClaimCommutationVPlusCheckPsi.lean` が `θ := θ~_μ` を代入して借りていた。
+    人手 `eigenvector_of_A_theta_tilde`（Step 1 の準備の恒等式と `det(A(θ)-λI)` の鎖 `charPoly_factor_thetaTilde`、Step 2 の成分ごとの鎖 `AMat_mulVec_eigen_pos`・`_neg`、`v_± ≠ 0`・`c` 倍）、
+    `diagonalization_check_P_D`（Step 2 の `cb = 1/(2√M)` と列ごとの `A P̌ = P̌ Ď`、Step 3 の `det P̌` の鎖、Step 4 の右乗の鎖）、
+    `det_A_theta_tilde`（Step 1 の `det_AMat_eq_gamma1_sq_add`、Step 2 の `exp(iθ)exp(-iθ) = 1` と実部表示、Step 3〜5 の展開と (iii) による `c_2` の消去、Step 6 と最後の `γ_1^2 = 1 + r^2`）を人手の式変形どおりに書き直した。
+    `ClaimCommutationVPlusCheckPsi.lean` は `AMat_mulVec_eigen` の代わりに `eigenvector_of_A_theta_tilde` Step 2 の形式化を使うようにした。
+    主張の型は、`charPoly_factor_thetaTilde` を人手 Step 1 の形（多項式の等式から `det(A(θ)-λI)` の等式）にした以外は変えていない。整数運動量の `Pmat` を経由していた `checkT`・`checkT_sq`・`checkPmat_eq_Pmat`・`checkDmat_eq_Dmat` は消した。
+    `ClaimCommutationVPlusCheckPsi.lean`・`DefinitionGamma1Gamma2OfThetaTilde.lean`（使っていなかった）から `RoutesNotAdopted/` の import を外した。本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 6 本である
+    （`ReductionToATheta/ClaimTActionsOnCheck`・`ReductionToATheta/DefinitionHalfIntegerModes`・`DiagonalizationAndExponentialForm/DefinitionCheckFermi`・`EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`）。
+    レビューで指摘なしになるまで直した。同じメタプログラムで数え直すと、通しの定理が使う `RoutesNotAdopted/IntegerMomentum/` の公開の定数は次の 8 個である:
+    `ClaimTVActionsOnHatZHatY` の 4 個（`B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`）、`DefinitionFermiPsi` の 3 個（`sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`）、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`
+    （ほかに `lastSite.eq_1`・`H1.eq_1` の等式補題と `sqrtM` の等式補題・simp 補題が退避先のモジュールに数えられる）。
+    レビューで分かった、今回の差分より前からある差は下の「この後に残る確認」に載せた。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -290,13 +304,19 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 上の残りの `RoutesNotAdopted/IntegerMomentum/` の定数について、それぞれが本文の人手の項目のどの Step に当たるか（整数運動量の経路の主張を本文の証明が借りているのか、経路に依らない補題が置き場だけ
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
-  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数は済み。
-  次は `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数 `AMat_mulVec_eigen`・`det_AMat`・`det_AMat_eq_one`・`gamma2_mul_gamma2_neg`。使っている本文のファイルは `grep` で特定する）。
-  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 8 本）は、ファイルごとに import を外せるかを確かめる。
+  1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数、
+  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数は済み。次は `ClaimTVActionsOnHatZHatY` の 4 定数 `B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`。
+  使っている本文のファイルは `grep` で特定する。`ReductionToATheta/ClaimTActionsOnCheck.lean` がこのファイルを import している）。
+  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 6 本）は、ファイルごとに import を外せるかを確かめる。
 
 この後に残る確認:
 
 - `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
   `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
+- `commutation_V_plus_check_psi`（`DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi.lean`）: 人手 Step 2 は `diagonalization_check_P_D` の `A = P̌ Ď P̌^{-1}` と `P̌^{-1}P̌ = I` を経由するが、
+  Lean は `P̌` の列が固有ベクトルであること（`AMat_mulVec_eigen_pos`・`_neg`）を `ActsBy.eigen` へ直接渡している。人手の Step 1（行ベクトルへの線型性の持ち上げ）と Step 2 の鎖どおりに直す。
+  対角化の定理は `P : IsingParam` と `M ≠ 0` を取るので、呼び出し側（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）の引数 `K : IsingConst`・`hga` との合わせ方を先に確かめる。
+- `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
+- 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
