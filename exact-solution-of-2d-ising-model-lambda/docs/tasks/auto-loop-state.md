@@ -6,6 +6,8 @@
 
 ## 現在地
 
+- **2026-10-31（連続実行）、旧経路の「非後退置換の置換項の位相表示」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
+
 - **2026-10-31（連続実行）、旧経路の「行列式の非後退置換の位相表示の和」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
 
 - **2026-10-31（連続実行）、旧経路の「反転対を含まない非後退置換の台の偶数性」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
@@ -13,8 +15,6 @@
 - **2026-10-31（連続実行）、旧経路の「ファイバーの位相付き寄与」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
 
 - **2026-10-31（連続実行）、旧経路の「反転対の辺集合」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
-
-- **2026-10-31（連続実行）、旧経路の「反転対と単純通過を固定した非後退置換」を参照用ノートへ退避した。** 次も置換展開の章の残りを一論法ずつ退避する。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -26,7 +26,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| Kac--Ward 行列式の置換展開 | 新経路が引かない残りのブロックの退避 | 一論法ずつ作業中 | 直接比較の章は本文から除去済み。残りは章「Kac--Ward 行列式の置換展開」のブロックで、章の外から `ref()` でも `\blkref{}` でも引かれていない（2026-10-31 の研究管理の実測）: 定義 5 件（`def_permutation_minimal_return`・`def_permutation_iterate`・`def_nonbacktracking_permutations`・`def_moved_orbit_family`・`def_moved_edge_set`）と主張 9 件。「行列式の非後退置換の位相表示の和」は退避済み。「行列式の位相和の層別」と「反転対と単純通過を固定した非後退置換」と「反転対の辺集合」と「ファイバーの位相付き寄与」は退避済み。論法ごとに割って参照用ノートへ退避し、Pfaffian 経路で平方恒等式が閉じたことを不採用理由として残し、対応する SageMath・Lean も片付ける。章が空になったら章ごと本文から外す。退避が済むまで閉包の外の Lean を直さない。 |
+| Kac--Ward 行列式の置換展開 | 新経路が引かない残りのブロックの退避 | 一論法ずつ作業中 | 直接比較の章は本文から除去済み。残りは章「Kac--Ward 行列式の置換展開」のブロックで、章の外から `ref()` でも `\blkref{}` でも引かれていない（2026-10-31 の研究管理の実測）: 定義 5 件（`def_permutation_minimal_return`・`def_permutation_iterate`・`def_nonbacktracking_permutations`・`def_moved_orbit_family`・`def_moved_edge_set`）と主張 7 件。「行列式の非後退置換の位相表示の和」と「非後退置換の置換項の位相表示」は退避済み。「行列式の位相和の層別」と「反転対と単純通過を固定した非後退置換」と「反転対の辺集合」と「ファイバーの位相付き寄与」は退避済み。論法ごとに割って参照用ノートへ退避し、Pfaffian 経路で平方恒等式が閉じたことを不採用理由として残し、対応する SageMath・Lean も片付ける。章が空になったら章ごと本文から外す。退避が済むまで閉包の外の Lean を直さない。 |
 | Kac--Ward 系の章 | 閉包の外の採用経路側ブロックの切り分け | 未着手 | runbook「閉包の外の採用経路側ブロックは、Lean の前に切り分ける」。到達点四つ（`theorem_periodic_density_onsager_integral`・`claim_onsager_hyperbolic_integral_form`・`claim_dispersion_minimum_self_dual_point`・`claim_determinant_square_root_torus_formula`）からの閉包（2026-10-31 の実測 667 ラベル）の外にあるもの: 離散 Whitney 系の章 18（主張 `claim_crossing_elimination_by_smoothing`・`claim_contact_elimination_by_splitting`・`claim_crossing_free_sign_counterexample`・`claim_closed_walk_plane_displacement`・`claim_direction_gate_crossing_turning`・`claim_ordered_crossing_pairs_double`・`claim_isolated_smoothing_crossing_number_update`・`claim_smoothing_seam_parity_invariance`・`claim_smoothing_interval_invariance`・`claim_reversal_rotation_phase_product`・`claim_cell_complex_one_cell_increment`・`claim_periodic_lift_closure_is_simple_cycle`・`claim_period_translates_of_iterated_staircase_disjoint`・`claim_periodic_plane_lift_parallel_period_increase` と定義 4 件）、反対称化の章 3（`claim_reversal_matrix_square`・`claim_tagged_matching_term_degree`・`claim_local_pairing_matching_complement_recovery`）、Kac--Ward の章 3（`claim_transition_entries_in_mu8`・`claim_kac_ward_determinant_constant_term_one`・`claim_arf_fourier_sign_projection`）、有限 Fourier 分解の章 2（`claim_twisted_modes_are_double_roots`・`claim_untwisted_mode_zero_condition`）、実数体への脱出の章 2（`claim_rational_log_order_group_sequence_lower_set_downward_closed`・`claim_twisted_mode_product_sum_reindex`）。横断消去と接触点分割の二つの帰納法は、章「閉歩道の位相と Pfaffian による有限トーラス公式」の「横断消去の帰納法は位相と切断線偶奇と交差形式を保つ」と接触点分割の帰納法が同じ内容を自前で証明しているので、重複かどうかを先に読む。一件ずつ、引用漏れなら参照を足す／重複・不使用なら退避／独立した到達点なら残して理由を書く、のどれかに決める。一論法ごとに行を割ってから着手する。 |
 | 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外の残り | 一論法ずつ作業中 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: 臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 **直す対象の正本は `lean/concrete-necsuf-delegations.txt`（委譲検査の既知の例外。2026-10-29 時点で 24 件）である。** 上の列挙に無いものも含む: ブロック対角行列の行列式の具体版五件（`blockDiagonal_*`。主張が必要十分版の置換の符号で述べられている）、`qbarPolynomial_det_*` など道具の章の多項式行列式の五件、標識付き対称差と活動点の七件（`taggedDifference_*`・`taggedActive*`。必要十分版の `taggedPairAt` を使う）、`localPairingMatching`・`localPairingMatching_mate`（必要十分版の `splicePairings` を使う）、`matchingPairOrientationProduct`・`matchingPairSecondOrientationProduct`、`movedOrbitWeight_phase_twist`（ねじれ符号の定義を参照）。2026-10-26・27 の研究管理が足した行は台帳から消えたが、これらは例外の台帳に残っており、委譲は解消していない。この行を消してよいのは例外の台帳が空になったときだけである（2026-10-28 の研究管理）。 |
 | Onsager 閉形式への接続 | Kac--Ward 章の定義の Lean 対応を揃える | 未着手 | Lean に定義があるのに `lean:` を宣言していない定義ブロック（向き付き辺の集合、向き付き辺の方向番号、四つの Kac--Ward 多項式行列 など）へ宣言を足す。Lean に無い定義（閉じた非後退辺列、一歩の回転数、向き付き辺の行変位と列変位、閉歩道の向き付き切断線横断数、非後退辺列の平面持ち上げ など）を、実際の閉歩道から構成する形で定義する。離散 Whitney 系の Lean は点列 `base` を仮定で受ける形なので、この定義群が無いと具体版が本文の対象について述べていない（2026-10-04 の研究管理の判定。2026-10-05 の実測では、Kac--Ward 章の定義 109 件のうち 76 件、主張 176 件のうち 57 件に `lean:` が無い。2026-10-04 以降に置いた節の定義・主張は全て Lean 付き）。 2026-10-30 の研究管理の数え直しでは、到達点の定理の依存の閉包の中で `lean:` が無い定義は Kac--Ward 章の外にもある: 分配多項式の章の `def_edge_numbering`・`def_residue_maps`、Fisher 零点の章の `def_edge_subset_incidence_count`・`def_even_edge_subset`・`def_edge_subset_spin_sum`・`def_high_temperature_polynomial`、Kac--Ward 章の `def_torus_quadratic_sign`・`def_signed_even_subgraph_polynomial`、道具の章の `def_integer_sequence_level_crossing_counts`。これらも同じ行で扱う。記法だけの定義（`def_cardinality_notation`・`def_residue_addition_notation`）は Lean の対応物が無くてよいかを読んで判断する。 |
@@ -58,13 +58,13 @@
 
 ## レビュー記録
 
+- 2026-10-31: 前回退避した「行列式の非後退置換の位相表示の和」の主張・証明と保存先を照合し、修正不要だった。
+
 - 2026-10-31: 前回退避した「反転対を含まない非後退置換の台の偶数性」の主張・証明と有限検算の保存先を照合し、修正不要だった。
 
 - 2026-10-31: 前回退避した「ファイバーの位相付き寄与」の定義と参照用ノートを照合し、修正不要だった。
 
 - 2026-10-31: 前回退避した「反転対の辺集合」の元の定義と保存先を照合し、修正不要だった。
-
-- 2026-10-31: 前回退避した「非後退置換ファイバー」の定義と保存先を照合し、修正不要だった。
 
 - 2026-10-31: 前回退避した「行列式の位相和の層別」の主張・証明と保存先を照合し、修正不要だった。
 
@@ -86,6 +86,8 @@
 
 ## 前進の記録
 
+- 2026-10-31: 先頭の旧経路退避を「非後退置換の置換項の位相表示」の一論法に割り、主張と証明を参照用ノートへ退避し、SageMath と Lean の専用証明を保管した。
+
 - 2026-10-31: 先頭の旧経路退避を「行列式の非後退置換の位相表示の和」の一論法に割り、主張と証明を参照用ノートへ退避し、SageMath と Lean の専用証明を保管した。
 
 - 2026-10-31: 先頭の旧経路退避を「反転対を含まない非後退置換の台の偶数性」の一論法に割り、主張と証明を参照用ノートへ退避し、SageMath と Lean の専用証明を保管した。
@@ -93,5 +95,3 @@
 - 2026-10-31: 先頭の旧経路退避を「ファイバーの位相付き寄与」の定義に割り、参照用ノートへ退避し、関連する有限検算七件を保管した。
 
 - 2026-10-31: 先頭の旧経路退避を「反転対の辺集合」の定義に割り、参照用ノートへ退避し、関連する有限検算を保管した。
-
-- 2026-10-31: 先頭の旧経路退避を「反転対と単純通過を固定した非後退置換」の定義に割り、参照用ノートへ退避した。

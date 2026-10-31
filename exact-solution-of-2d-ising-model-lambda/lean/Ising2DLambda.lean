@@ -1009,8 +1009,6 @@ import Ising2DLambda.NecSuf.KacWard.SignedOrbitTerm
 import Ising2DLambda.KacWard.SignedOrbitTerm
 import Ising2DLambda.NecSuf.KacWard.MovedOrbitWeightPhaseTwist
 import Ising2DLambda.KacWard.MovedOrbitWeightPhaseTwist
-import Ising2DLambda.NecSuf.KacWard.TermOrbitPhaseTwist
-import Ising2DLambda.KacWard.TermOrbitPhaseTwist
 import Ising2DLambda.NecSuf.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.SignedEvenSubgraphSectorSum
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven

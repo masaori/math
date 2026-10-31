@@ -7,6 +7,89 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_term_orbit_phase_twist_product_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "不採用経路: 非後退置換の置換項の位相表示" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、非後退置換の置換項の直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+
+                      paragraph([
+                        math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"),
+                        "）とする。", math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+                        " は、任意の ", math(String.raw`\vec f\in\vec E_L`), " について",
+                      ]),
+                      displayMath(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow
+\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
+                      paragraph([
+                        "を満たすとする（", ref("def_nonbacktracking_successors"), "）。写像 ",
+                        math(String.raw`\vec e_{\ast}:\mathcal C(\varphi)\to\vec E_L`),
+                        " を、各 ", math(String.raw`C\in\mathcal C(\varphi)`), " について ",
+                        math(String.raw`\vec e_{\ast}(C)\in C`), " となるように一つ選び（各 ",
+                        math(String.raw`C`), " は ", ref("claim_moved_orbit_partition"),
+                        " により空でない）、",
+                        math(String.raw`\gamma_C:=\gamma_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)`),
+                        "（", "参照用ノート「不採用経路: 軌道列」", "）と置く。このとき ",
+                        math(String.raw`\overline{\mathbb Q}[x]`), " の等式",
+                      ]),
+                      displayMath(String.raw`T^{a,b}_{\varphi}(x)
+=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\,\zeta_8^{\,t_{\circ}(\gamma_C)}}\right)`),
+                      paragraph([
+                        "が成り立つ。置換項は参照用ノート「不採用経路: Kac--Ward 行列式の置換項」",
+                        "、軌道族は ", ref("def_moved_orbit_family"),
+                        "、二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
+                        "、循環総回転数は ", ref("def_cyclic_total_turning"),
+                        "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
+                        "、定数多項式への埋め込みは ", ref("def_qbar_constant_embedding"),
+                        " である。左辺は写像 ", math(String.raw`\vec e_{\ast}`),
+                        " に依存しないので、この等式が任意の選び方について成り立つことから、",
+                        "右辺の値も ", math(String.raw`\vec e_{\ast}`), " の選び方に依存しない。",
+                      ]),
+      paragraph(["元の証明:"]),
+
+                      paragraph([
+                        math(String.raw`C\in\mathcal C(\varphi)`), " とする。",
+                        ref("claim_moved_orbit_partition"), " の被覆により ",
+                        math(String.raw`\vec e_{\ast}(C)\in C\subset M(\varphi)`), " なので、",
+                        ref("def_moved_edge_set"), " により ",
+                        math(String.raw`\varphi\bigl(\vec e_{\ast}(C)\bigr)\ne\vec e_{\ast}(C)`),
+                        " である。", ref("claim_moved_orbit_closed_nonbacktracking"),
+                        " により軌道列 ", math(String.raw`\gamma_C`), " の各項は動く辺なので ",
+                        math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)\subset M(\varphi)`),
+                        " であり、", ref("claim_moved_orbit_partition"), " により ",
+                        math(String.raw`\mathcal C(\varphi)`), " は同値関係 ",
+                        math(String.raw`\sim_{\varphi}`), " の同値類の集合なので、",
+                        math(String.raw`\vec e_{\ast}(C)`), " を含む同値類について ",
+                        math(String.raw`O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)=C`),
+                        " である。求めたい置換項から始める。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+T^{a,b}_{\varphi}(x)
+&=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\prod_{\vec e\in C}
+\widehat{M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 閉路軌道ごとの置換項」}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{\prod_{\vec e\in C}M^{a,b}_{\vec e,\varphi(\vec e)}}\right)
+&&\bigl(\because\ \blkref{def_qbar_constant_embedding}\text{ の乗法性 }\widehat{a\,b}=\widehat{a}\,\widehat{b}\text{ と }\widehat{1}=1\text{ を有限積へ繰り返す}\bigr)\\
+&=\prod_{C\in\mathcal C(\varphi)}\left(
+-x^{\lvert C\rvert}\cdot
+\widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\,\zeta_8^{\,t_{\circ}(\gamma_C)}}\right)
+&&\bigl(\because\ \blkref{claim_moved_orbit_weight_phase_twist}\text{ を基点 }\vec e_{\ast}(C)\text{ へ適用。}O_{\varphi}\bigl(\vec e_{\ast}(C)\bigr)=C\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "左辺は写像 ", math(String.raw`\vec e_{\ast}`),
+                        " に依存しないので、任意の二つの選び方について右辺の値は左辺に等しく、",
+                        "互いに等しい。全ての和と積は有限であり ",
+                        math(String.raw`\overline{\mathbb Q}[x]`),
+                        " の中で閉じる。実数体も複素数体も現れない。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_determinant_nonbacktracking_phase_sum_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "不採用経路: 行列式の非後退置換の位相表示の和" },
@@ -39,7 +122,7 @@ export default defineNotes([
                         "、循環総回転数は ", ref("def_cyclic_total_turning"),
                         "、原始 8 乗根 ", math(String.raw`\zeta_8`), " は ", ref("def_rotation_phase"),
                         "、定数多項式への埋め込みは ", ref("def_qbar_constant_embedding"),
-                        " である。各和の項は ", ref("claim_kac_ward_term_orbit_phase_twist_product"),
+                        " である。各和の項は ", "参照用ノート「不採用経路: 非後退置換の置換項の位相表示」",
                         " により写像 ", math(String.raw`\vec e_{\ast}^{\,\varphi}`),
                         " の選び方に依存しないので、右辺の値も選び方に依存しない。",
                       ]),
@@ -78,7 +161,7 @@ D^{a,b}_L(x)
 \prod_{C\in\mathcal C(\varphi)}\left(
 -x^{\lvert C\rvert}\cdot
 \widehat{(-1)^{a\,h(\gamma^{\varphi}_C)+b\,v(\gamma^{\varphi}_C)}\,\zeta_8^{\,t_{\circ}(\gamma^{\varphi}_C)}}\right)
-&&\bigl(\because\ \blkref{claim_kac_ward_term_orbit_phase_twist_product}\text{ を各 }\varphi\text{ と }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 非後退置換の置換項の位相表示」}\text{ を各 }\varphi\text{ と }\vec e_{\ast}^{\,\varphi}\text{ へ適用}\bigr)
 \end{aligned}`),
                       paragraph([
                         "全ての和と積は有限集合の上の有限和・有限積であり ",
