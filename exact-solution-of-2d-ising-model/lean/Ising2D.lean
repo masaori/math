@@ -121,6 +121,8 @@ import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 import Ising2D.Part011.DefinitionSectorRayleighSup
 import Ising2D.Part011.ClaimCPlusLeC
 import Ising2D.Part011.ClaimEpsilonCommutesWithW
+import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
+import Ising2D.Part011.ClaimPhysicalWHasPositiveEntriesFromNecSuf
 import Ising2D.Part011.ClaimSymmetrizedTransferMatrixOnSectorExponentialForm
 import Ising2D.NecSuf.EvenSectorUpperBound
 import Ising2D.NecSuf.NumberOperator
@@ -230,6 +232,7 @@ import Ising2D.Part018.ClaimH1PlusInSigmaZForm
 import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Ising2D.Part018.ClaimOpenChainSpinSums
 import Ising2D.NecSuf.OpenChainSpinSum
+import Ising2D.NecSuf.SandwichByDiagonal
 import Ising2D.Part018.ClaimOpenChainSpinSumsFromNecSuf
 import Ising2D.Part018.ClaimTraceEpsilonVPlusReduction
 import Ising2D.NecSuf.ExpOfInvolution

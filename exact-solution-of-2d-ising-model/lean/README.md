@@ -328,7 +328,8 @@ Lean も同じ構成にしてある。
 `V1plusHalf_sq`（`Part014`）は `V1_plus_square_root_property`（`Part010`）へ一本化、
 `physicalSymTransferR_map_mul_epsProj_eq_Vsym → symmetrized_transfer_matrix_on_sectors`（`(+)` だけ）、
 `EvenSectorBridge.rayleighSup_eq_LambdaM → EvenSectorBridge.rayleighSup_sandwich_LambdaM`（挟み撃ち）、
-`rayleighSup_eq_LambdaM_of_input → rayleighSup_sandwich_LambdaM_of_input`。
+`rayleighSup_eq_LambdaM_of_input → rayleighSup_sandwich_LambdaM_of_input`
+（2026-10-31 に入力の構造 `EvenSectorClosureInput` を消し、`rayleighSup_sandwich_LambdaM_physical` へ改名）。
 
 ### 行列の添字
 

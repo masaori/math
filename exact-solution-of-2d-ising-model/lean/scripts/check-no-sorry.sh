@@ -1568,8 +1568,20 @@ targets=(
   Ising2D.trace_of_epsilon_V_plus
   Ising2D.trace_epsilon_vPlusDataOf_pos
   Ising2D.sum_checkGam
-  Ising2D.EvenSectorClosureInput
-  Ising2D.rayleighSup_sandwich_LambdaM_of_input
+  Ising2D.physicalV1halfR_apply_configBasisIso
+  Ising2D.physicalV1halfC_apply_configBasisIso
+  Ising2D.physicalV1halfR_apply_configBasisIso_self_pos
+  Ising2D.physicalV2R_apply_configBasisIso
+  Ising2D.physicalV1halfR_offDiag
+  Ising2D.physicalV2R_apply_configBasisIso_pos
+  Ising2D.physicalSymTransferR_apply_configBasisIso
+  Ising2D.W_has_positive_entries_physical
+  Ising2D.physicalSymTransferR_pos
+  Ising2D.NecSuf.sandwich_apply_of_offDiag_zero
+  Ising2D.NecSuf.sandwich_apply_pos
+  Ising2D.physicalSymTransferR_apply_configBasisIso_of_necSuf
+  Ising2D.W_has_positive_entries_physical_of_necSuf
+  Ising2D.rayleighSup_sandwich_LambdaM_physical
   Ising2D.onsager_exact_solution_unconditional
   # --- 020 章（比熱の対数発散：章の到達点）---
   Ising2D.gammaFn_isoParam_eq_gammaK

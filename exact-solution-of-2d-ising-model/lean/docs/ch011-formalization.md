@@ -62,7 +62,11 @@
 | `Ising2D.mulVec_eq_zero_iff_of_isUnit` | 可逆行列の `mulVec` は単射 | 同上「可逆性」 |
 | `Ising2D.diagExp` ほか（`diagExp_isSymm`, `diagExp_mul_self`, `diagExp_isUnit`, `diagExp_posDef`） | 正の対角行列としての `V₁^{1/2}` と `V₁^{1/2}V₁^{1/2} = V₁` | `def_transfer_matrix_square_root`, `W_has_positive_entries` Step 1 |
 | `Ising2D.matExp_isSymm` / `Ising2D.matExp_posDef` | 実対称行列の `exp` は実対称正定値 | `exp_hermitian_is_positive_definite` の実行列版（章 009 への接続点） |
-| **`Ising2D.symTransfer_entry_pos`** | `W` の成分はすべて正 | **`W_has_positive_entries`** |
+| **`Ising2D.symTransfer_entry_pos`** | `W` の成分はすべて正（`V₁^{1/2}` を一般の正の対角行列 `diagonal d`、`V₂` を成分が正の一般の行列として） | **`W_has_positive_entries`** |
+| `Ising2D.physicalV1halfC_apply_configBasisIso` / `physicalV1halfR_apply_configBasisIso` / `physicalV1halfR_offDiag` / `physicalV1halfR_apply_configBasisIso_self_pos` | 具体的な `V₁^{1/2} = exp(½K₁D)` の成分は `μ = μ'` で `exp(½K₁∑_m μ(m)μ(m+1)) > 0`、それ以外で `0` | `W_has_positive_entries` Step 1 |
+| `Ising2D.V2_apply_configBasisIso`（章 001） / `physicalV2R_apply_configBasisIso` / `physicalV2R_apply_configBasisIso_pos` | 具体的な `V₂` の成分は `exp(K₂∑_m μ(m)μ'(m)) > 0` | `W_has_positive_entries` Step 2 |
+| `Ising2D.physicalSymTransferR_apply_configBasisIso` | 具体的な `W` の成分は `(V₁^{1/2})_{ι(μ),ι(μ)}(V₂)_{ι(μ),ι(μ')}(V₁^{1/2})_{ι(μ'),ι(μ')}`（人手の式変形の各行） | `W_has_positive_entries` Step 3 |
+| **`Ising2D.W_has_positive_entries_physical`** / `physicalSymTransferR_pos` | 具体的な `W` の成分はすべて正（後者は `ι` の全射性で任意の行・列番号へ広げた形） | **`W_has_positive_entries`**（`Part011/ClaimPhysicalWHasPositiveEntries.lean`） |
 | **`Ising2D.partition_function_sandwich`** | `c(M)^{N_row} ≤ Z ≤ (dim) c(M)^{N_row}` | **`partition_function_sandwich`** |
 | `Ising2D.physicalV1halfC_mul_self` / `physicalV1halfR_mul_self_map` | `V₁^{1/2}V₁^{1/2} = V₁`（`½K₁D` は自分自身と可換） | `def_transfer_matrix_square_root` |
 | `Ising2D.partitionFunction_eq_trace_real` | 具体的な `Z(K_1,K_2)` は実行列 `(V₁^{1/2}V₁^{1/2}V₂)^{N_row}` のトレース | `partition_function_via_transfer_matrix` を実行列で読む |
@@ -114,7 +118,7 @@
 | `symmetrized_transfer_matrix_on_sectors` | `Ising2D.symmetrized_transfer_matrix_on_sectors` | `Ising2D.NecSuf.sandwich_mul_proj_eq` | **はい**（`B,C,V,P` を物理的転送行列の各因子へ特殊化） |
 | `Z_equals_trace_of_W` | `Ising2D.trace_symTransfer_pow` | なし（下記） | — |
 | `W_is_real_symmetric_positive_definite` | `Ising2D.symTransfer_isSymm` / `symTransfer_posDef` | なし（下記） | — |
-| `W_has_positive_entries` | `Ising2D.symTransfer_entry_pos` | なし（下記） | — |
+| `W_has_positive_entries` | `Ising2D.W_has_positive_entries_physical` / `physicalSymTransferR_apply_configBasisIso`（具体的な `W`）。`Ising2D.symTransfer_entry_pos` は一般の対角行列で挟んだ形で、人手の Step 3 の式変形は通らない | `Ising2D.NecSuf.sandwich_apply_pos` / `NecSuf.sandwich_apply_of_offDiag_zero`（`NecSuf/SandwichByDiagonal.lean`。添字は有限、係数は結合律・可換律を仮定しない半環。正値性には前順序と `PosMulStrictMono` だけ） | **はい**（`Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean`） |
 | `partition_function_sandwich` | `Ising2D.partition_function_sandwich` | なし（`trace_power_sandwich` の言い換え） | — |
 | `def_sector_rayleigh_sup` / `c_plus_le_c` | `Ising2D.evenSectorRayleighSup` / `Ising2D.c_plus_le_c` | なし（`sSup` とその単調性は ℝ の完備性そのもの） | — |
 | `epsilon_is_real_symmetric` | `Ising2D.epsilon_is_real_symmetric` | なし（`ε` の具体的な成分の計算。置換行列の一般的な性質は `NecSuf/PermMatrix.lean`） | — |
@@ -146,14 +150,19 @@
   `BP=CP` と `C,V` が `P` と可換であることだけを使い、`P` の冪等性も、行列・複素数・
   転送行列であることも使わない。具体版はこの一般定理へ物理的な四因子を特殊化して得られる。
 
-- **`W` の対称性・正定値性・成分の正値性、および `Z = tr(W^n)` は、
+- **`W` の対称性・正定値性、および `Z = tr(W^n)` は、
   抽象化しても失われる構造がない。**
   `Z = tr(W^n)` に効いているのは結合法則と跡の巡回性 `tr(AB) = tr(BA)` だけで、
   Lean 側の `Ising2D.trace_symTransfer_pow` は `B * B = V₁` 以外の仮定を一切置いていない
   （`V₂` も任意の行列でよい）。正定値性は「合同変換 `B*AB` が正定値性を保つ」ことに尽き、
   Lean 側は `B` が対称かつ**可逆**であることしか使っていない（`B` が `exp` であることは不要）。
-  成分の正値性は「正の対角行列で挟むと成分の正値性が保たれる」だけである。
   いずれも既に最小の仮定で述べてあるため、別ファイルの必要十分版は置いていない。
+
+- **`W_has_positive_entries` の Step 3（`NecSuf/SandwichByDiagonal.lean`）に効いているのは、添字が有限であること、
+  係数の `0` が乗法で吸収されること、挟む行列 `B` の非対角成分が `0` であることだけである。**
+  乗法の結合律・可換律・単位元、分配律、添字の等号の判定可能性、実数であること、指数関数は効いていない。
+  正値性の段では、上に加えて `mul_pos` の順序の条件（正の元どうしの積が正）だけが効く。
+  実数・指数関数の正値性は、`B` の対角成分と `V₂` の成分が正であることを示す Step 1・Step 2 にだけ効く。
 
 - （ノートへ退避したセクター分解について）**セクター分解に効いているのは「対称な対合 `ε`（`ε² = 1`）で `W` と可換なもの」だけ**である。
   `ε` が `σ^x` の積であることも、`W` が転送行列であることも効いていない。
@@ -170,7 +179,7 @@
 | --- | --- | --- |
 | `Z(K_1,K_2) = tr((V₁V₂)^{N_row})` | `partition_function_via_transfer_matrix`（章 001。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ`。具体的な `Z` と `V₁^{1/2}`, `V₂` については `partition_function_sandwich_physical` がすべての引数を証明して埋める |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
-| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2` |
+| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。具体的な `V₂` については `physicalV2R_isSymm` / `physicalV2R_posDef`（章 009 の `posDef_exp_of_isHermitian` と章 004 の `V2_exponential_representation` から）で証明済み |
 | `ε` が実対称・`ε² = 1`・`εW = Wε`（一般の `W` について） | `epsilon_is_real_symmetric`・`epsilon_square_and_eigenvalues`・`epsilon_commutes_with_W` | 物理的な `W`（`physicalSymTransferR`）と `ε`（`epsilonR`）については `epsilon_commutes_with_W` / `epsilonR_isSymm` / `epsilonR_mul_self` で証明済み。一般の `W` について述べる定理（章 018 の `EvenSectorBridge` など）は `εW = Wε` を引数で受け取る |
 

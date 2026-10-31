@@ -17,11 +17,8 @@
   （`Part011/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
   （`Part018/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`Part018/ClaimWEqVPlusOnEvenSector.lean`）である。
   最終定理の入力から `bridge` と `hW` を外した。
-- `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
-- 最終定理 `onsager_exact_solution_unconditional` に残る仮定は `In m hm : EvenSectorClosureInput P m`（`2 ≤ m`）の中身だけである。
-  - `hWpos`: 具体的な `W` の成分の正値性、`hWcomm`: `ε` と具体的な `W` の可換性（項目 5）
 - 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`Part018/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
-  `EvenSectorClosureInput` から `htr` と、その型のために置いていた `hM` を外した（`M ≠ 0` は `2 ≤ M` から出す）。次の四つに割って進めた。
+  当時の入力の構造 `EvenSectorClosureInput` から `htr` と、その型のために置いていた `hM` を外した（`M ≠ 0` は `2 ≤ M` から出す）。次の四つに割って進めた。
   - 4a（済み）: 人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`
     （`iH_1^{(+)} = D_0 + εG`）を `Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`Part018/ClaimH1PlusInSigmaZForm.lean` で形式化した
     （`openChainD0`・`boundaryG`・`H1_plus_in_sigma_z_form`）。
@@ -47,6 +44,13 @@
     - 二つのスピン和の代入と正値性の形式化（済み）: Step 4・Step 5 と主張を `Part018/ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した
       （`trace_epsilon_VPlusOfTransfer_split`・`trace_epsilon_VPlusOfTransfer_eq_spin_sums`・`trace_epsilon_VPlusOfTransfer_closed_form`・
       `trace_epsilon_VPlusOfTransfer_pos`・`trace_of_epsilon_V_plus`、`vPlusDataOf` へ移した `trace_epsilon_vPlusDataOf_pos`）。必要十分版は置かない。
+- 項目 5 は済んでいる。`hWcomm` は `epsilon_commutes_with_W P.K1 P.K2_pos`（`Part011/ClaimEpsilonCommutesWithW.lean`）で埋めた。
+  `hWpos` は人手 `W_has_positive_entries` の Step 1〜3 を具体的な `V_1^{1/2}`・`V_2` について
+  `Part011/ClaimPhysicalWHasPositiveEntries.lean` で形式化して埋めた（`W_has_positive_entries_physical`、
+  `ι` の全射性で全成分へ広げた `physicalSymTransferR_pos`）。Step 3 の必要十分版 `NecSuf/SandwichByDiagonal.lean`（添字は有限、係数は結合律・可換律を仮定しない半環）を置き、具体版をその特殊化として `Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean` で導出した。
+  欄が無くなったので `EvenSectorClosureInput` を消し、挟み撃ちを `rayleighSup_sandwich_LambdaM_physical` に改名した。
+  **最終定理 `onsager_exact_solution_unconditional` の入力は結合定数の組 `P : IsingParam` だけである。**
+- `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理 `onsager_exact_solution_end_to_end` が無い」で落ちる。
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
   挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
   通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
@@ -56,8 +60,9 @@
 
 ## 次の一歩
 
-項目 5：`EvenSectorClosureInput` の `hWcomm`・`hWpos` を外す。
-`hWcomm` は `Part011/ClaimEpsilonCommutesWithW.lean` の `epsilon_commutes_with_W P.K1 P.K2_pos` と同じ型なので、それで埋める。
-`hWpos`（具体的な `W = physicalSymTransferR M P.K1 P.K2` の成分がすべて正）は人手 `W_has_positive_entries`（`structured-latex/content/011_max_eigenvalue.ts`）を
-具体的な `V_1^{1/2}`・`V_2` について 1 対 1 で形式化して埋める。大きければ「`hWcomm` の除去」と「`W_has_positive_entries` の形式化と `hWpos` の除去」に割り、先頭だけを行う。
-欄が無くなったら `EvenSectorClosureInput` を消し、最終定理の入力から `In` を外す（項目 6 の通しの定理の準備）。
+項目 6：通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`check-end-to-end.sh` が固定する型。入力は `K1 K2 : ℝ`、`0 < K1`、`0 < K2`）を立てる。
+`P : IsingParam` を `K1 K2` と正値性から作り、`onsager_exact_solution_unconditional P` を使う。`f M := 1/M · log c(M)` とし、
+閉形式の被積分関数 `gammaFn P θ` をスクリプトの `Real.arcosh (cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ)`（`K_2^* = Kstar K2`）へ書き直す
+（`gammaFn` の定義と `IsingParam.K2star := Kstar K2` から）。上の「項目 6 で直すこと」（`c(M) > 0` を `rayleighSup_pos` から出す）も同じ回で行う。
+`check-no-sorry.sh` の `targets` に通しの定理を足し、`check-end-to-end.sh` を通し、`docs/ゴール台帳.md` を更新する。
+大きければ「`gammaFn` の書き直し」「`c(M) > 0` の出し方の修正」「通しの定理」に割り、先頭だけを行う。

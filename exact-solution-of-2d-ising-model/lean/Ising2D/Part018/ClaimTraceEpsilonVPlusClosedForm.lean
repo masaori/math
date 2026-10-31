@@ -21,7 +21,7 @@
 `V^{(+)}` は人手 `def_V_plus` の `(V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`、Lean の `VPlusOfTransfer M K_1 K_2` である。
 最終定理の入力が持つ `vPlusDataOf` の `V^{(+)}` は、`V_2` を `V2_exponential_representation` で書き換えた形
 `VPlus M (sinh 2K_2) K_1 K_2^*` なので、`VPlusOfTransfer_eq_VPlus` で人手の形へ戻して
-`trace_epsilon_vPlusDataOf_pos` を得る。これを使って `EvenSectorClosureInput` から欄 `htr` を外す。
+`trace_epsilon_vPlusDataOf_pos` を得る。これで最終定理 `onsager_exact_solution_unconditional` の入力から `htr` を外した。
 
 人手 Step 5 は、閉じた式ではなく Step 4 の最後の式鎖の 1 行目（二つのスピン和で書いた形）から正値性を出す。
 Lean も同じく `trace_epsilon_VPlusOfTransfer_eq_spin_sums` と `open_chain_spin_sums_positive`
