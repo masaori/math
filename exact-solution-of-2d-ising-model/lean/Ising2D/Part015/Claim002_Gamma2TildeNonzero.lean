@@ -2,7 +2,7 @@
 # `γ_2(θ~_μ) ≠ 0`（例外なし）（**具体版**）
 
 対応する人手証明のラベル: `gamma_2_theta_tilde_nonzero`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_002_claim_gamma2_nonzero`）
 
 **必要十分版**: `Ising2D/NecSuf/OddModePhase.lean`

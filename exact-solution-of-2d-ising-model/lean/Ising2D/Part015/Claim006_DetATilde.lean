@@ -2,7 +2,7 @@
 # `det A(θ~_μ) = 1` と `γ_1(θ~_μ) > 1`（**具体版**）
 
 対応する人手証明のラベル: `det_A_theta_tilde`, `gamma1_gt_1_theta_tilde`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_006_claim_det_A`, `Athetatilde_007_claim_gamma1_gt_1`）
 
 **必要十分版**: `Ising2D/NecSuf/GammaDetIdentity.lean`（`Ising2D.NecSuf.gamma_det_identity`。

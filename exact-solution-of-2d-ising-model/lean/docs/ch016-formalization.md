@@ -1,6 +1,6 @@
 # 016 章「偶セクターのフェルミオンと `V^{(+)} = c V̌'`」の Lean 形式化
 
-対象の人手証明: `structured-latex/content/016_even_sector_fermions.ts`（9 主張）
+対象の人手証明: もと `structured-latex/content/016_even_sector_fermions.ts` の 9 主張。章立ての組み直しで、すべて `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ移った
 
 新規ファイル:
 

@@ -4,7 +4,7 @@
 from sage.all_cmdline import *   # import sage library
 
 _sage_const_8 = Integer(8); _sage_const_40 = Integer(40); _sage_const_1 = Integer(1); _sage_const_0 = Integer(0); _sage_const_2 = Integer(2); _sage_const_0p3 = RealNumber('0.3'); _sage_const_0p7 = RealNumber('0.7'); _sage_const_1p1 = RealNumber('1.1'); _sage_const_0p2 = RealNumber('0.2'); _sage_const_60 = Integer(60)# =========================================================================
-# check_03: 014 章（structured-latex/content/014_even_sector_T_action.ts と、そこから移した eigenvalue_problem_reduction_to_A_theta.ts）の
+# check_03: 014 章（もと structured-latex/content/014_even_sector_T_action.ts、いまは eigenvalue_problem_reduction_to_A_theta.ts と eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  対象ラベル:

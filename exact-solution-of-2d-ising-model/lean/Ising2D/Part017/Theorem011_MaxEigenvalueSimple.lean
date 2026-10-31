@@ -3,7 +3,7 @@
 
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `max_eigenvalue_of_V_plus_simple`（`evenEigen_011_theorem_...`）。
-あわせて章 015 の `def_gamma_theta_tilde_mu`（`γ(θ~_μ) > 0`）をここで証明する。
+あわせて章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`（`γ(θ~_μ) > 0`）をここで証明する。
 
 **必要十分版**は `Ising2D/NecSuf/SimpleEigenvalue.lean`:
 - (2) の狭義最大性 → `NecSuf.sum_weight_lt_of_ne_univ`
@@ -35,7 +35,7 @@ namespace Ising2D
 open Matrix
 open scoped ComplexOrder
 
-/-! ## `γ(θ~_μ) > 0`（章 015 `def_gamma_theta_tilde_mu`） -/
+/-! ## `γ(θ~_μ) > 0`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`） -/
 
 section GammaPos
 
@@ -71,7 +71,7 @@ theorem one_lt_gamma1R_thetaTilde_checkIndex (P : IsingParam) (hM : M ≠ 0) {μ
   simp only [gamma1R, IsingParam.const]
   nlinarith [hcs, hone, hpos]
 
-/-- **章 015 `def_gamma_theta_tilde_mu`**: `γ(θ~_μ) > 0`（`μ ∈ 𝓜̌`）。
+/-- **章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`**: `γ(θ~_μ) > 0`（`μ ∈ 𝓜̌`）。
 
 章 009 の `γ(θ_μ) ≥ 0` との違いがここにあり、単純性の根拠である。 -/
 theorem gammaFn_thetaTilde_pos (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}

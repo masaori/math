@@ -4,7 +4,7 @@
 from sage.all_cmdline import *   # import sage library
 
 _sage_const_2 = Integer(2); _sage_const_6 = Integer(6); _sage_const_7 = Integer(7); _sage_const_8 = Integer(8); _sage_const_1 = Integer(1); _sage_const_0 = Integer(0); _sage_const_4 = Integer(4); _sage_const_1en12 = RealNumber('1e-12'); _sage_const_1en2 = RealNumber('1e-2'); _sage_const_1en6 = RealNumber('1e-6')# =========================================================================
-# check_02: 015 章（structured-latex/content/015_A_theta_tilde_diagonalization.ts）の
+# check_02: 015 章（もと structured-latex/content/015_A_theta_tilde_diagonalization.ts、いまは eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  この章は分割前は `\because` が 1 件も無く、とくに

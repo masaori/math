@@ -1,6 +1,6 @@
 # 章 015「半整数運動量における `A(θ~)` の対角化」の Lean 形式化
 
-対象: `structured-latex/content/015_A_theta_tilde_diagonalization.ts`（9 主張）。
+対象: もと `structured-latex/content/015_A_theta_tilde_diagonalization.ts` の 9 主張。章立ての組み直しで、すべて `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ移った。
 
 この章は **008 章後半（`A(θ)` の固有ベクトル・対角化・`det A`）の半整数運動量版**である。
 `A(θ)` は `θ ∈ ℝ` について述べられた 2×2 の主張なので、

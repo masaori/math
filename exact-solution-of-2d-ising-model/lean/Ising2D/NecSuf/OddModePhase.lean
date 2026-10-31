@@ -2,7 +2,7 @@
 # 「奇数倍の位相では `sin θ = 0` から `cos θ = -1` が従う」（**必要十分版**）
 
 対応する人手証明のラベル: `gamma_2_theta_tilde_nonzero`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_002_claim_gamma2_nonzero`）
 
 具体版: `Ising2D/Part015/Claim002_Gamma2TildeNonzero.lean`

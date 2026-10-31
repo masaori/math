@@ -2,7 +2,7 @@
 # `V̌'` の定義
 
 対応する人手証明のラベル: `def_check_Vprime`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_005_definition_check_Vprime`）
 
 ## 形式化の方針

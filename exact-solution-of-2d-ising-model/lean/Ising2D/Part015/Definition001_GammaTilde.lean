@@ -2,7 +2,7 @@
 # `γ_1(θ), γ_2(θ)` と `A(θ~_μ)` の書き換え（**具体版**）
 
 対応する人手証明のラベル: `def_gamma1_gamma2_of_theta`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_001_definition_gamma1_gamma2`）
 
 **必要十分版は無い。** この主張は「`A(θ)` の 4 成分が `γ_1, γ_2` で書ける」という

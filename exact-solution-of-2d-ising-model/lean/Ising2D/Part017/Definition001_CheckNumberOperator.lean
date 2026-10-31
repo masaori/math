@@ -1,7 +1,7 @@
 /-
 # 半整数運動量の数演算子 `ň_μ`（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`def_check_number_operator` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`、ほかは `structured-latex/content/017_even_sector_eigenvalues.ts`）:
 - `def_check_number_operator`（`evenEigen_001_definition_check_number_operator`）
 - `check_number_operator_idempotent`（`evenEigen_002_claim_...`）
 - `check_number_operators_commute`（`evenEigen_003_claim_...`）

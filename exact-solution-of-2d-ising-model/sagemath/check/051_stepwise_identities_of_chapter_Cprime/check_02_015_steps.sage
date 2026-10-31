@@ -1,5 +1,5 @@
 # =========================================================================
-# check_02: 015 章（structured-latex/content/015_A_theta_tilde_diagonalization.ts）の
+# check_02: 015 章（もと structured-latex/content/015_A_theta_tilde_diagonalization.ts、いまは eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  この章は分割前は `\because` が 1 件も無く、とくに

@@ -11,7 +11,7 @@
 `evensector_003_claim_half_integer_phase_antiperiodicity`,
 `evensector_003_claim_half_integer_checkZ_periodicity`,
 `evensector_003_claim_half_integer_checkY_periodicity` と、
-`structured-latex/content/013_even_sector_modes.ts` の
+`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_003_definition_half_integer_modes`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`。

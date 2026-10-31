@@ -2,6 +2,25 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の四番目の章「$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示」を組み直した。
+  棚卸しでこの章に割り当てた 29 項を、`004_transfer_matrix.ts`（3 項）・`012_free_energy.ts`（1 項）・`013_even_sector_modes.ts`（4 項）・`014_even_sector_T_action.ts`（2 項）・
+  `015_A_theta_tilde_diagonalization.ts`（9 項）・`016_even_sector_fermions.ts`（9 項）・`017_even_sector_eigenvalues.ts`（1 項）から、新しいファイル
+  `content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の章見出しの下へ章の中の依存順で移し、`TRAILING_CONTENT_FILES` の離散 Fourier 変換の章のファイルの後ろに置いた。
+  ブロックの id・ラベルは変えていない。本文は旧版と機械比較で一致し、違うのは下に書いた言い回しの直しだけである。見出しだけになった 014・015・016 を消した。
+  - **章末のゴールの主張を足した。** ある $c\in\mathbb C^\times$ について $V^{(+)}=c\exp(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)(\check n_\mu-\tfrac12I))$ を主張する claim
+    `V_plus_eq_c_exp_sum_gamma_check_number_operator` を章の最後に置いた。証明は `V_plus_eq_c_check_Vprime` に $\check V'$・$\check X$・$\check n_\mu$ の定義を代入する 4 行である。
+    SageMath（`sagemath/check/V_plus_eq_c_exp_sum_gamma_check_number_operator/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で隣接行の相対残差 ≤ 6.8e-13。指数評価の ℝ 脱出のため倍精度。
+    否定コントロールは $\check n_\mu$ の対を $\mu$ にしたもの）と Lean（`lean/Ising2D/Part016/ClaimVPlusEqCExpSumCheckNumberOperator.lean`。双対関係は定理で与え、仮定は $M\ne0$ だけ。
+    `check-no-sorry.sh` の対象に足した）を足した。
+  - `tools/chapter-plan.ts` のこの章の `goalLabels` を、この主張と `gamma1_lower_bound_all_theta`（ゴールの式の一般の $\theta$ での $\gamma(\theta)$ を定める）の二つにした。
+    後者を外すと、この項は $V^{(+)}$ の固有値の章へ移る。冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号（$\check P_\mu$ による対角化、$\gamma(\theta)$、$\check\psi_\mu$、$\check n_\mu$）に分けた。
+    章の項目数は 30（割り当て 29 とゴールの主張 1。章立て案は 27）。$V^{(+)}$ の固有値の章は 16 項（章立て案 15）。
+  - **015 と 016 の章の案内文（「この章の目的」）を新しい章の中へ移した。** 015 のものは $\gamma_1,\gamma_2$ の定義の直前に、016 のものは $\check\psi_\mu$ の定義の直前に置いた。
+    題を式で指すものにし、「この章」を「以下」に直し、「半整数運動量」「フェルミオン」の語と、$\check\psi$ の導入へ進まないとする段落（組み直した章では事実に合わない）を外した。
+  - **レビューの指摘で本文の言い回しを直した（数学の中身は変えていない）。** 無くなった章番号「013 章から 017 章」を指す 2 文、証明の Step の題の「フェルミオン」2 件、
+    「負の運動量側」1 件、題「数演算子 $\check n_\mu$」と 017 の題「数演算子の同時固有空間分解」・案内文の「数演算子の添字」を、式で指す言い方に直した。
+    ゴールの主張の $\gamma(\tilde\theta_\mu)\in\mathbb R$ に、`def_arccosh` が実対数で定めるためという ℝ の理由を添えた。
+  - Lean・SageMath の注記、`lean/docs/ch012`〜`ch017` の正本のファイル名を直した。別のエージェントのレビューを経た。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の三番目の章「離散 Fourier 変換による $2\times2$ 行列 $A(\tilde\theta_\mu)$ への帰着」を組み直した。
   棚卸しでこの章に割り当てた 27 項を、`004_transfer_matrix.ts`（2 項）・`006_Z_Y_anticommutation.ts`（1 項）・`008_TV1_hatZ_hatY_part1.ts`（3 項）・`013_even_sector_modes.ts`（8 項）・
   `014_even_sector_T_action.ts`（13 項）から、新しいファイル `content/eigenvalue_problem_reduction_to_A_theta.ts` の部見出し「固有値問題」・章見出しの下へ章の中の依存順で移し、
@@ -1175,12 +1194,18 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の四番目の章：「$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示」の章に割り当てた 29 項
-（棚卸し `parts` の二番目の部の二番目の章の `dependencyOrder`）を、新しいファイルの章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の離散 Fourier 変換の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の五番目の章：「$V^{(+)}$ の固有値」の章に割り当てた 16 項
+（棚卸し `parts` の二番目の部の三番目の章の `dependencyOrder`）を、新しいファイルの章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の対角化と指数表示の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 
+- **$\gamma(\theta)$（$\theta\in\mathbb R$）の定義を主張から分ける（2026-10-31 のレビューの指摘。章ごとの組み直しの後、作業の順序の五番目の前に行う）。**
+  いまは `gamma1_lower_bound_all_theta` の statement の中で $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$ を定めており、「1 ブロック 1 主張」に反する。
+  $\theta=\tilde\theta_\mu$ の $\gamma$ も `def_gamma_theta_tilde_mu` で別に定めているので、記号 $\gamma$ の定義が二重である。$\Lambda^{(\delta)}_M$ の定義の分離と同じ型の作業で、
+  独立した definition ブロックに分け、`def_gamma_theta_tilde_mu` との関係をそこで一本化し、`chapter-plan.ts` の対角化の章の `goalLabels` をその定義に付け替える。
+- **逆双曲線余弦の 2 項（`def_arccosh`・`arccosh_properties`）の分類。** 依存先は実対数・平方根・双曲線関数・集合の記法だけで、イジング模型を参照しないが、
+  旧 `004_transfer_matrix.ts` に在ったため2次元イジングモデルに分類され、いまは対角化の章のファイルに在る。分類規則に照らせば数学的道具立てである（下の分類の項と同じ問題）。
 - 章ごとの組み直し（作業の順序の四番目）で扱うこと:
   - 組み直しの途中は、組み直した章が本文の末尾に来るので、公開する本文では部「分配関数」が臨界点の章より後ろにあり、旧い章（004 以降）が
     末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。

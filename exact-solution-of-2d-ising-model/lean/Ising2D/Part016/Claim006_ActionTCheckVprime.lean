@@ -2,7 +2,7 @@
 # `T_{(V̌')}` の `ψ̌` への作用
 
 対応する人手証明のラベル: `action_of_T_check_Vprime_on_check_psi`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_006_claim_action_T_check_Vprime`）
 
 **必要十分版**は 2 本ある（いずれも同じラベル）:

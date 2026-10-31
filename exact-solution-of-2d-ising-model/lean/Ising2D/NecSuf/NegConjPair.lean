@@ -2,7 +2,7 @@
 # `w = -conj z` である複素数の対（**必要十分版**）
 
 対応する人手証明のラベル: `relation_of_gamma_2_theta_tilde`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_003_claim_relation_of_gamma2`）
 
 具体版: `Ising2D/Part015/Claim003_RelationGamma2Tilde.lean`。

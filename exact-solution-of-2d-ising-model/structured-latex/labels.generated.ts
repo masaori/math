@@ -24,6 +24,7 @@ export const ALL_LABELS = [
   "V2_in_Z_Y",
   "V2_invertible",
   "V_plus_eq_c_check_Vprime",
+  "V_plus_eq_c_exp_sum_gamma_check_number_operator",
   "V_plus_factors_invertible",
   "V_plus_inverse_is_positive_definite",
   "V_plus_inverse_positive_and_trace_positivity",

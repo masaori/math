@@ -2,7 +2,7 @@
 # `A(θ~_μ)` の固有値・固有ベクトルと対角化 `A = P̌ Ď P̌⁻¹`（**具体版**）
 
 対応する人手証明のラベル: `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
 **必要十分版**: `Ising2D/NecSuf/TwoByTwoSkew.lean`

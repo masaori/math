@@ -2,7 +2,7 @@
 # `det A = 1` の正体は可換環の多項式恒等式である（**必要十分版**）
 
 対応する人手証明のラベル: `det_A_theta_tilde`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_006_claim_det_A`。008 章の `det_A_theta` も同じ計算）
 
 具体版: `Ising2D/Part015/Claim006_DetATilde.lean`

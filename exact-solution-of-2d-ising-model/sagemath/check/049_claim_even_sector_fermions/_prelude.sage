@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 半整数運動量のフェルミオン psi^_mu, psi^_mu^dagger と V^' の道具立て
-#   structured-latex/content/016_even_sector_fermions.ts に対応
+#   structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts に対応
 #
 #   theta~_mu   = 2 pi (mu - 1/2) / M
 #   checkZ_mu   = sum_{j=1}^{M} Z_j e^{-i j theta~_mu}

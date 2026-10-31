@@ -2,7 +2,7 @@
 # `γ(θ~_μ) := arccosh(γ_1(θ~_μ))` と `λ_{±,μ} = e^{±γ(θ~_μ)}`（**具体版**）
 
 対応する人手証明のラベル: `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_008_definition_gamma_theta_tilde`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
 **必要十分版**: `Ising2D/NecSuf/ArcoshExp.lean`

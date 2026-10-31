@@ -2,7 +2,7 @@
 # `T_{(V^{(+)})} = T_{(V̌')}`
 
 対応する人手証明のラベル: `T_V_plus_eq_T_check_Vprime`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_008_claim_T_eq`）
 
 ## 形式化の方針

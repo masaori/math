@@ -3,7 +3,7 @@
 
 対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
 `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）、および
-`def_check_number_operator` (2) の `X̌`, `V̌'`。
+`def_check_number_operator` (2) の `X̌`, `V̌'`（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）。
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean` の
 `NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
@@ -17,7 +17,7 @@
 
 ## `γ(θ~_μ)` の扱い
 
-原文の `γ(θ~_μ) = arccosh(γ_1(θ~_μ))`（章 015 `def_gamma_theta_tilde_mu`）は
+原文の `γ(θ~_μ) = arccosh(γ_1(θ~_μ))`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`）は
 `Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`、形式化済み）で書ける。
 本ファイルでは章 009 と同じく**実数の族 `g : CheckIdx M → ℝ` として受け取り**、
 `γ(θ~_μ) > 0` が要るところ（章 017 の単純性）でだけ狭義正値性を仮定に加える

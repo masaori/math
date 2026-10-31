@@ -2,7 +2,7 @@
 # `𝓜̌` の内側で共役添字を取る（**具体版**）
 
 対応する人手証明のラベル: `conjugate_index_of_check_Z_Y`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_003b_claim_conjugate_index_of_check_Z_Y`）
 
 **必要十分版は無い。** (1)(3) は `θ~` の定義と添字の周期性（既存の必要十分版

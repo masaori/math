@@ -4,7 +4,7 @@
 
 **対象ラベル**: `eigenvalues_of_V_plus` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/017_even_sector_eigenvalues.ts`
+- ファイル: `structured-latex/content/017_even_sector_eigenvalues.ts`, `eigenvalue_problem_diagonalization_and_exponential_form.ts`（`def_check_number_operator`）
 - 併せて検証（この章の全ブロック）:
   - `def_check_number_operator`（数演算子 `ň_μ := ψ̌_μ^† ψ̌_{1−μ}`）
   - `check_number_operator_idempotent`（`ň_μ² = ň_μ`）

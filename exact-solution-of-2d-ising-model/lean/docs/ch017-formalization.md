@@ -1,6 +1,6 @@
 # 章 017「定数 `c` の決定と `V^{(+)}` の固有値」の形式化
 
-対象の人手証明: `structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張）
+対象の人手証明: `structured-latex/content/017_even_sector_eigenvalues.ts`（11 主張。章立ての組み直しで、`def_check_number_operator` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ移った）
 
 - 具体版: `Ising2D/Part017/`
 - 必要十分版: `Ising2D/NecSuf/PairedFermion.lean`, `Ising2D/NecSuf/ConstantC.lean`,

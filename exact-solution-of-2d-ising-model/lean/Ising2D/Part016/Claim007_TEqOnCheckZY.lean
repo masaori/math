@@ -2,7 +2,7 @@
 # `T_{(V^{(+)})}` と `T_{(V̌')}` は `Ž, Y̌` 上で一致する
 
 対応する人手証明のラベル: `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_007_claim_T_eq_on_check_Z_Y`）
 
 ## 形式化の方針

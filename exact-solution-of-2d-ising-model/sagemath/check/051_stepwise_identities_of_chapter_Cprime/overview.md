@@ -5,8 +5,8 @@
 **対象ラベル**: `commutator_of_H_and_check_Z_Y` （structured-latex 側の安定識別子）
 
 - ファイル: `structured-latex/content/013_even_sector_modes.ts`,
-  `014_even_sector_T_action.ts`, `015_A_theta_tilde_diagonalization.ts`,
-  `016_even_sector_fermions.ts`, `eigenvalue_problem_reduction_to_A_theta.ts`
+  `eigenvalue_problem_reduction_to_A_theta.ts`,
+  `eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証（章 C′ の全ブロック）:
   - 013 章: `antiperiodic_exp_sum` /
     `def_half_integer_checkZ` / `def_half_integer_checkY` /

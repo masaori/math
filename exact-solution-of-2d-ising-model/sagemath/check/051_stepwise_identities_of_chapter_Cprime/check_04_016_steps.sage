@@ -1,5 +1,5 @@
 # =========================================================================
-# check_04: 016 章（structured-latex/content/016_even_sector_fermions.ts）の
+# check_04: 016 章（もと structured-latex/content/016_even_sector_fermions.ts、いまは eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  対象ラベル:

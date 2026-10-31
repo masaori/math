@@ -2,7 +2,7 @@
 # `g^2 = 1 + r^2` から `e^{±arcosh g} = g ± r` を出す（**必要十分版**）
 
 対応する人手証明のラベル: `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_008_definition_gamma_theta_tilde`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
 具体版: `Ising2D/Part015/Definition008_GammaTildeMu.lean`。

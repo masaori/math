@@ -1,7 +1,7 @@
 /-
 # 半整数運動量のフェルミオン `ψ̌_μ`, `ψ̌_μ^†` の定義と、`γ_1, γ_2` の周期性
 
-対応する人手証明（正本は `structured-latex/content/016_even_sector_fermions.ts`）:
+対応する人手証明（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）:
 
 * `evenfermi_001_definition_check_fermi`（ラベル `def_check_fermi`）
 * `evenfermi_002_claim_periodicity`（ラベル `periodicity_of_check_fermi`）

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `T_V_plus_check_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`, `014_even_sector_T_action.ts`
+- ファイル: `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`, `eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証:
   - `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` /
     `V1_plus_half_invertible` / `V2_invertible` / `V_plus_factors_invertible` /

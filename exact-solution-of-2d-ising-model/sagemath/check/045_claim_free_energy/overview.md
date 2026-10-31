@@ -8,7 +8,7 @@
 - 併せて検証:
   - `def_Lambda_delta_M`（`Λ^{(δ)}_M` の定義。check_02 の `log_Lambda_over_M` はこの定義の対数を M で割ったもの）
   - `limit_of_log_Z_in_N_row`
-  - `gamma1_lower_bound_all_theta` / `gamma_is_continuous`
+  - `gamma1_lower_bound_all_theta`（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`） / `gamma_is_continuous`
   - `riemann_sum_to_integral`（★実数解析への移行点）
   - `remark_remaining_input_even_sector`（残っている入力の所在）
 

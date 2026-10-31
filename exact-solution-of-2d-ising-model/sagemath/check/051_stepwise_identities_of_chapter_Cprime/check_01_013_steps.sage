@@ -1,5 +1,5 @@
 # =========================================================================
-# check_01: 013 章（structured-latex/content/013_even_sector_modes.ts と、そこから移した eigenvalue_problem_reduction_to_A_theta.ts）の
+# check_01: 013 章（structured-latex/content/013_even_sector_modes.ts と、そこから移した eigenvalue_problem_reduction_to_A_theta.ts・eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  「1 ステップ 1 定理」への分割で本文へ明示的に現れるようになった中間式を、

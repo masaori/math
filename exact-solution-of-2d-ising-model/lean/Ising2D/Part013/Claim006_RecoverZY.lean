@@ -2,7 +2,7 @@
 # `check(Z), check(Y)` から `Z_j, Y_j` を復元する（**具体版**）
 
 対応する人手証明のラベル: `recover_Z_Y_from_check_Z_Y`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_006_claim_recover_Z_Y`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean` の

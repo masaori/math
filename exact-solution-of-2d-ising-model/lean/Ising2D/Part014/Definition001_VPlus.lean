@@ -6,7 +6,7 @@
 （`V1_plus_half_invertible` / `V2_invertible` / `def_T_V_plus` は
 `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`、
 `V_plus_factors_invertible` / `T_V_plus_is_conjugation` は
-`structured-latex/content/014_even_sector_T_action.ts`）
+`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）
 
 `H_1^{(+)}`（`def_H1_plus`）は章 004 の `Ising2D.H1plus`、`(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`）と
 その平方根性（`V1_plus_square_root_property`）、`V^{(+)}`（`def_V_plus`）は章 010 の

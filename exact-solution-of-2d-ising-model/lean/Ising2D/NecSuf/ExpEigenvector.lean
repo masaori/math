@@ -6,7 +6,7 @@
 （`exact-solution-of-2d-ising-model/README.md` 4 節）。
 
 対応する人手証明のラベル: `action_of_T_check_Vprime_on_check_psi`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_006_claim_action_T_check_Vprime` の Step 3〜5。具体版は
 `Ising2D/Part016/Claim006_ActionTCheckVprime.lean`）。
 

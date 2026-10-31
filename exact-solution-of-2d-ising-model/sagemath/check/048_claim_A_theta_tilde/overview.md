@@ -4,7 +4,7 @@
 
 **対象ラベル**: `diagonalization_check_P_D` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/015_A_theta_tilde_diagonalization.ts`
+- ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証（この章の全ブロック）:
   - `def_gamma1_gamma2_of_theta`（`γ_1(θ), γ_2(θ)` と `A(θ)` の成分表示）
   - `gamma_2_theta_tilde_nonzero`（**半整数運動量では `γ_2(θ~_μ) ≠ 0` が常に成り立つ**）

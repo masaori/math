@@ -2,7 +2,7 @@
 # `V^{(+)} = c V̌'`（定数倍を除いて一致）— **本章の結論**
 
 対応する人手証明のラベル: `V_plus_eq_c_check_Vprime`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_009_claim_V_plus_eq_c_Vprime`）
 
 ## 形式化の方針

@@ -1,6 +1,6 @@
 # 章 012「自由エネルギーと熱力学極限」の形式化
 
-人手証明の正本: `structured-latex/content/012_free_energy.ts`（7 ブロック）
+人手証明の正本: `structured-latex/content/012_free_energy.ts`（7 ブロック。章立ての組み直しで、`gamma1_lower_bound_all_theta` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ移った）
 Lean: `Ising2D/Part012/`（具体版）、`Ising2D/NecSuf/`（必要十分版）
 
 **この文書は `lean/README.md` へ統合されるまでの暫定の置き場である**（統合は呼び出し元が行う）。

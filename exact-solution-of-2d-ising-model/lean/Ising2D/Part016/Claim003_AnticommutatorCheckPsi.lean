@@ -2,7 +2,7 @@
 # `ψ̌` の反交換関係（半整数運動量の CAR）
 
 対応する人手証明のラベル: `anticommutator_of_check_psi`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_003_claim_anticommutator`）
 
 **必要十分版**は 008 章のものがそのまま使える: `Ising2D/NecSuf/Fermion.lean` の

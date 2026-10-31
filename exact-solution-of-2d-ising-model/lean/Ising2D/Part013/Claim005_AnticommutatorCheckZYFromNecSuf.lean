@@ -2,7 +2,7 @@
 # `check(Z), check(Y)` の反交換関係を**必要十分版から導出**する
 
 対応する人手証明のラベル: `anticommutator_of_check_Z_Y`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evensector_005_claim_anticommutator_check_Z_Y`）
 
 具体版（直接証明）は `Ising2D/Part013/Claim005_AnticommutatorCheckZY.lean`、

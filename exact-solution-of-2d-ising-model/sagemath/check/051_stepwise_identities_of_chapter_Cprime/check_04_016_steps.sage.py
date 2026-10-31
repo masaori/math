@@ -4,7 +4,7 @@
 from sage.all_cmdline import *   # import sage library
 
 _sage_const_1 = Integer(1); _sage_const_2 = Integer(2); _sage_const_0 = Integer(0); _sage_const_4 = Integer(4); _sage_const_3 = Integer(3); _sage_const_1en8 = RealNumber('1e-8'); _sage_const_1en7 = RealNumber('1e-7')# =========================================================================
-# check_04: 016 章（structured-latex/content/016_even_sector_fermions.ts）の
+# check_04: 016 章（もと structured-latex/content/016_even_sector_fermions.ts、いまは eigenvalue_problem_diagonalization_and_exponential_form.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  対象ラベル:

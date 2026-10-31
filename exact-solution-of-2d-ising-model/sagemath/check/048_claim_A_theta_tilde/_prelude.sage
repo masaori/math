@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 半整数運動量 theta~_mu = 2 pi (mu - 1/2) / M における A(theta~_mu)
-#   structured-latex/content/015_A_theta_tilde_diagonalization.ts に対応
+#   structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts に対応
 #
 #   gamma_1(th) = c_1 c_2^* - s_1 s_2^* cos th
 #   gamma_2(th) = i e^{i th} s_2^* (c_1 cos th - i sin th - s_1 c_2)

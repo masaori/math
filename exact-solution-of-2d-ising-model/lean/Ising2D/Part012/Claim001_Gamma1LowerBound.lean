@@ -1,7 +1,7 @@
 /-
 # `γ_1(θ) ≥ cosh(2K_1 - 2K_2^*) ≥ 1`（すべての実数 `θ`）と `γ(θ) := arccosh(γ_1(θ))`
 
-人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
+人手証明（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）:
 - `freeenergy_001_claim_gamma1_lower_bound_all_theta`（ラベル `gamma1_lower_bound_all_theta`）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/CoshLowerBound.lean`

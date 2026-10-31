@@ -4,7 +4,7 @@
 
 **対象ラベル**: `H1_H2_via_check_Z_Y` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/013_even_sector_modes.ts`, `eigenvalue_problem_reduction_to_A_theta.ts`
+- ファイル: `structured-latex/content/013_even_sector_modes.ts`, `eigenvalue_problem_reduction_to_A_theta.ts`, `eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証:
   - `antiperiodic_exp_sum` / `def_half_integer_checkZ` / `def_half_integer_checkY` /
     `half_integer_phase_antiperiodicity` / `half_integer_checkZ_periodicity` /

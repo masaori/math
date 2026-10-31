@@ -2,7 +2,7 @@
 # `V^{(+)}` と `ψ̌` の交換関係
 
 対応する人手証明のラベル: `commutation_V_plus_check_psi`
-（`structured-latex/content/016_even_sector_fermions.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `evenfermi_004_claim_commutation_V_plus_psi`）
 
 ## 014 章・015 章への依存（**仮定として受け取る**）

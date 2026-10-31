@@ -2,7 +2,7 @@
 # `!![g, a; -b, g]` 型の 2×2 行列の固有値・固有ベクトル・対角化（**必要十分版**）
 
 対応する人手証明のラベル: `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D`
-（`structured-latex/content/015_A_theta_tilde_diagonalization.ts` の
+（`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
 具体版: `Ising2D/Part015/Claim004_EigenATildeDiag.lean`

@@ -4,7 +4,7 @@
 
 **対象ラベル**: `V_plus_eq_c_check_Vprime` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/016_even_sector_fermions.ts`
+- ファイル: `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`
 - 併せて検証（この章の全ブロック）:
   - `def_check_fermi`（半整数運動量のフェルミオン `ψ̌_μ, ψ̌_μ^†`）
   - `periodicity_of_check_fermi`（`M` 周期性と共役添字 `1−μ`）

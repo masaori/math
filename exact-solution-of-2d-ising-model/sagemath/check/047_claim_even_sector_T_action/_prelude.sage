@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 偶セクター（半整数運動量）での T の作用を検証するための道具立て
-#   structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts と 014_even_sector_T_action.ts に対応
+#   structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts と eigenvalue_problem_diagonalization_and_exponential_form.ts に対応
 #
 #   theta~_mu = 2 pi (mu - 1/2) / M
 #   checkZ_mu = sum_{j=1}^{M} Z_j e^{-i j theta~_mu}
