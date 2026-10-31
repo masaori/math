@@ -5087,13 +5087,13 @@ w^{m}S_{n,m}&=w^{m}\sum_{z\in\mu_{n}}z^{m}
                         ]),
                         displayMath(String.raw`\begin{aligned}
 z\,z^{0}&=z\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)\\
 &=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=1\cdot z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=z^{0}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`z\,z^{k}=z^{k}z`),
@@ -5101,13 +5101,13 @@ z\,z^{0}&=z\cdot 1
                         ]),
                         displayMath(String.raw`\begin{aligned}
 z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z\bigr)\\
 &=\bigl(z\,z^{k}\bigr)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=\bigl(z^{k}z\bigr)z
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=z^{k+1}z
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{k+1}=z^{k}z\bigr)
 \end{aligned}`),
                         paragraph([
                           "以下、主張を ",
@@ -5121,13 +5121,13 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (z-1)\,G_{0}(z)&=(z-1)\cdot 0
-&&(\because\ G_{0}(z)\ \text{は空和である})\\
+&&\bigl(\because\ G_{0}(z)\ \text{は空和である}\bigr)\\
 &=0
-&&(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元})\\
+&&\bigl(\because\ 0\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の零元}\bigr)\\
 &=1-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の逆元}\bigr)\\
 &=z^{0}-1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{0}=1\bigr)
 \end{aligned}`),
                         paragraph([
                           "一歩（",
@@ -5140,21 +5140,21 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (z-1)\,G_{n+1}(z)&=(z-1)\bigl(G_{n}(z)+z^{n}\bigr)
-&&(\because\ G_{n+1}(z)\ \text{の定義})\\
+&&\bigl(\because\ G_{n+1}(z)\ \text{の定義}\bigr)\\
 &=(z-1)\,G_{n}(z)+(z-1)z^{n}
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=(z^{n}-1)+(z-1)z^{n}
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=(z^{n}-1)+\bigl(z\,z^{n}-1\cdot z^{n}\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の分配則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の分配則}\bigr)\\
 &=(z^{n}-1)+\bigl(z\,z^{n}-z^{n}\bigr)
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=(z^{n}-1)+\bigl(z^{n}z-z^{n}\bigr)
-&&(\because\ \text{準備の}\ z\,z^{n}=z^{n}z)\\
+&&\bigl(\because\ \text{準備の}\ z\,z^{n}=z^{n}z\bigr)\\
 &=(z^{n}-1)+\bigl(z^{n+1}-z^{n}\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ z^{n+1}=z^{n}z\bigr)\\
 &=z^{n+1}-1
-&&(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する})
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の加法の結合則と可換則により}\ z^{n}\ \text{が相殺する}\bigr)
 \end{aligned}`),
                         paragraph([
                           "出発点と一歩により、すべての ",
