@@ -368,8 +368,6 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  Ising2D.TV_hatZ_hatY_of_action
-  "Ising2D.TV_hatZ_hatY_of_action'"
   # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
@@ -1558,6 +1556,8 @@ targets=(
   Ising2D.ad_V2H2Form_hatZMinus
   Ising2D.ad_V2H2Form_hatY
   Ising2D.actsBy_TConj_V2H2Form
+  Ising2D.TV_hatZ_hatY_of_action
+  "Ising2D.TV_hatZ_hatY_of_action'"
   Ising2D.TV_hatZ_hatY
   Ising2D.TV_psiDag
   Ising2D.TV_psi

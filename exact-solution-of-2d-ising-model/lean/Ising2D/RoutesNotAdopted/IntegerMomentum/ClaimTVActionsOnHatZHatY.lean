@@ -16,14 +16,14 @@
 **必要十分版は `Ising2D/NecSuf/TVAction.lean`**（名前空間 `Ising2D.NecSuf`）。
 本ファイルの主要定理はそこからの特殊化として導出する。何が本質的かは必要十分版の冒頭に書いた。
 
-## このファイルで解消した「未証明の穴」
+## 仮定つき版と無条件版
 
-`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の `TV_hatZ_hatY_of_action` /
-`TV_hatZ_hatY_of_action'`、および `RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の
-`TV_psiDag_of_action` / `TV_psi_of_action` は、`ActsBy`（原文の行ベクトル記法）を
-**明示的な仮定**として持っていた。本ファイルでその仮定を証明して除去し、
+本ファイルの `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` と
+`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` の `TV_psiDag_of_action` / `TV_psi_of_action` は、
+`ActsBy`（原文の行ベクトル記法）を**明示的な仮定**に取る。本ファイルはその仮定を
+`actsBy_TConj_V1pmHalf`・`actsBy_TConj_V2H2Form` で証明し、
 `TV_hatZ_hatY`（原文 `<T_V_hatZ_hatY>`）と
-`TV_psiDag` / `TV_psi`（原文 `<commutation_V_psi>`）を**無条件の定理**にする。
+`TV_psiDag` / `TV_psi`（原文 `<commutation_V_psi>`）を**無条件の定理**として与える。
 
 ## 証明の骨格（原文との対応）
 
@@ -181,13 +181,49 @@ theorem actsBy_TConj_V2H2Form (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star :
   rw [Complex.I_sq]
   ring
 
+/-! ## `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（仮定つき） -/
+
+/-- **原文 `T_V_hatZ_hatY`（仮定つきの形）**。
+
+`hT1`, `hT2` は原文 `ホロノミック量子場_p142下段_1` の内容で、ここでは仮定として受け取る。
+仮定から先（合成則による `B_1 B_2 B_1` の計算と `B_1 B_2 B_1 = A(θ)`）をここで証明する。
+仮定は下の `actsBy_TConj_V1pmHalf`・`actsBy_TConj_V2H2Form` で埋まり、無条件版が `TV_hatZ_hatY` である。 -/
+theorem TV_hatZ_hatY_of_action (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ) (θ : ℝ)
+    (T1 T2 : TensorPow M →ₗ[ℂ] TensorPow M)
+    (hT1 : ActsBy T1 (hatZMinus M μ) (hatY M μ) (B1mat K1 (θ : ℂ)))
+    (hT2 : ActsBy T2 (hatZMinus M μ) (hatY M μ) (B2mat K2star))
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (T1 ∘ₗ T2 ∘ₗ T1) (hatZMinus M μ) (hatY M μ) (AMat K θ) := by
+  have h := (hT1.comp hT2).comp hT1
+  rw [← mul_assoc] at h
+  rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star θ hc1 hs1 hc2star hs2star hdual] at h
+
+/-- 上を `T_{(V)} = T_{g_1} ∘ T_{g_2} ∘ T_{g_1}` の形で述べたもの。 -/
+theorem TV_hatZ_hatY_of_action' (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ) (θ : ℝ)
+    (g1 g2 : (TensorPow M)ˣ)
+    (hT1 : ActsBy (TConj g1).toLinearMap (hatZMinus M μ) (hatY M μ) (B1mat K1 (θ : ℂ)))
+    (hT2 : ActsBy (TConj g2).toLinearMap (hatZMinus M μ) (hatY M μ) (B2mat K2star))
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (TV g1 g2).toLinearMap (hatZMinus M μ) (hatY M μ) (AMat K θ) := by
+  have h := TV_hatZ_hatY_of_action K μ K1 K2star θ
+    (TConj g1).toLinearMap (TConj g2).toLinearMap hT1 hT2 hc1 hs1 hc2star hs2star hdual
+  exact h
+
 /-! ## `T_{(V)}` の作用（原文 `<T_V_hatZ_hatY>`、無条件版） -/
 
 /-- **原文 `<T_V_hatZ_hatY>`（無条件版）**:
 
   `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(θ_μ)`
 
-`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` の `TV_hatZ_hatY_of_action'` が持っていた
+上の `TV_hatZ_hatY_of_action'` の
 `ActsBy` の仮定 `hT1`, `hT2` を、`actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` で埋めた形。
 
 残る仮定は「`IsingConst` の成分が `K_1, K_2^*` の双曲線関数であること」と

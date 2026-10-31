@@ -176,7 +176,7 @@
     旧 `Part008/Definition016_TV` を `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/` へ番号を外した名前（`ClaimConjugationIsRingHom`・`ClaimConjugationIsRingHomFromNecSuf`・`DefinitionTgAndTV`）で移した。`Part000/` は無くなった。
     `DefinitionTgAndTV` が形式化する人手の項目は、このまとまりの `def_T_g`（`TConj`）・`linearity_of_T`（`TConj_linear`）の 2 項と、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した
     整数運動量の経路の `def_T_V`（`TV`）・`T_V_hatZ_hatY`（仮定つき版 `TV_hatZ_hatY_of_action`）の 2 項である（`ホロノミック量子場_p142下段_1` は仮定に取るだけ、`def_A_theta` は `DefinitionThetaGamma` の定義を使うだけで数えない）。
-    整数運動量の 2 項を数えなければ数学的道具立てだけ、`RoutesNotAdopted/IntegerMomentum/` の置き場として数えれば 2 対 2 の同数で、どちらでも数学的道具立てを先とする規則でこのまとまりへ置いた。
+    整数運動量の 2 項を数えなければ数学的道具立てだけ、`RoutesNotAdopted/IntegerMomentum/` の置き場として数えれば 2 対 2 の同数で、どちらでも数学的道具立てを先とする規則でこのまとまりへ置いた。のちに仮定つき版 `TV_hatZ_hatY_of_action` を `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` へ移したので（ゴールラインの確認の十個目）、いまの `DefinitionTgAndTV` は 2 対 1 で数学的道具立ての項目が多い。
     このまとまりのほかの項目（`def_ad_X_matrix`・`def_end_iso`・`end_is_algebra_isomorphism`・`end_preserves_matrix_exponential`・`end_acts_on_kronecker_products`・`def_invertible_elements_of_R`）を冒頭で宣言するファイルは旧フォルダに無い
     （`def_ad_X_matrix` は `EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean` が参照として触れるだけ）。
 
@@ -335,14 +335,23 @@
     本文の章のファイルと必要十分版で `RoutesNotAdopted/` を直接 import するのは残り 2 本（`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`（`DefinitionHatZHatY`）・
     `NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition`））である。`DefinitionH1H2V1V2` は本文の多くが import するので、推移的にはまだ本文が退避先を読み込む。
 
+  - ゴールラインの確認の十個目（済み、2026-10-31）: `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` から退避先 `DefinitionHatZHatY` の import を外し、
+    本文 `DefinitionTransferMatrixSymbols`（`Z`・`Y` の定義）を直接 import した。外して落ちたのは 3 本である。
+    数学的道具立て `DefinitionTgAndTV.lean` は、整数運動量の `hat(Z)^{(-)}, hat(Y)` を主張に持つ仮定つき版 `TV_hatZ_hatY_of_action`・`TV_hatZ_hatY_of_action'` だけが退避先の量を使っていたので、
+    この 2 定理を主張・証明を変えずに退避先 `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`（無条件版 `TV_hatZ_hatY` の直前）へ移した。
+    本文 `EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean` には `siteProd_smul_family` の置き場 `ReductionToATheta/ClaimAnticommutatorZY` を、
+    退避先 `ClaimH1H2ViaHatZHatY.lean` には `DefinitionHatZHatY` を直接 import させた。`check-no-sorry.sh` の対象 2 件を整数運動量の経路の区切りへ移し、`lean/README.md` の行に置き場を書いた。
+    レビューの指摘 4 件（コメントの時制・記述の過不足、状態台帳の置き場の数え）を直し、指摘なしになった。
+    import のグラフを辿ると、`RoutesNotAdopted/` を推移的に読み込む本文・必要十分版のファイルは `NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition` を直接 import）の 1 本だけである。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 本文の章のファイルと必要十分版が `RoutesNotAdopted/` を import している残りの 2 本（上の九つ目の末尾）について、1 回に 1 ファイルずつ import を外せるかを確かめる。
+- 必要十分版 `NecSuf/PermSector.lean` から退避先 `MinusSector/ClaimRayleighSupSectorDecomposition` の import を外せるかを確かめる。
   外して `lake build` が落ちるなら、落ちた名前ごとに経路に依らない補題か、退避した主張そのものかを判定し、
-  前者なら使う本文の章のファイル（または数学的道具立て）へ移し、後者なら人手の Step どおりに直す。次は `PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2.lean` の `DefinitionHatZHatY`。
-  2 本を外した後、本文の章のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを確かめる。
+  前者なら使う側のファイルへ移し、後者なら必要十分版の側を退避先の記録へ移すか人手の Step どおりに直す。
+  外した後、`RoutesNotAdopted/` 以外のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを import のグラフで確かめる。
 
 この後に残る確認:
 

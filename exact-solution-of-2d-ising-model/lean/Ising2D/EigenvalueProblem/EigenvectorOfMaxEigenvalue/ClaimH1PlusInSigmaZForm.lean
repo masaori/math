@@ -26,6 +26,7 @@ Lean では `siteProd_mul`（サイトごとの積）で、各サイトの因子
 必要十分版は置かない（同じ型の主張 `V1_in_Z_Y_epsilon` と同じ判断）。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 
 namespace Ising2D
 
