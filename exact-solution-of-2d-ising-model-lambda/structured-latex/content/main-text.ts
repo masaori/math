@@ -4438,13 +4438,13 @@ A^{k+1}\cdot v
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (wz)^{0}&=1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1\bigr)\\
 &=1\cdot 1
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})\\
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)\\
 &=w^{0}\cdot 1
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1\bigr)\\
 &=w^{0}z^{0}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{0}:=1\bigr)
 \end{aligned}`),
                         paragraph([
                           "一歩。",
@@ -4455,23 +4455,23 @@ A^{k+1}\cdot v
                         ]),
                         displayMath(String.raw`\begin{aligned}
 (wz)^{n+1}&=(wz)^{n}(wz)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y\bigr)\\
 &=\bigl(w^{n}z^{n}\bigr)(wz)
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=w^{n}\bigl(z^{n}(wz)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=w^{n}\bigl((z^{n}w)z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=w^{n}\bigl((wz^{n})z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ z^{n}\ \text{と}\ w\ \text{に当てる})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則を}\ z^{n}\ \text{と}\ w\ \text{に当てる}\bigr)\\
 &=w^{n}\bigl(w(z^{n}z)\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=\bigl(w^{n}w\bigr)\bigl(z^{n}z\bigr)
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=w^{n+1}\bigl(z^{n}z\bigr)
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y\bigr)\\
 &=w^{n+1}z^{n+1}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y)
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の}\ y^{j+1}:=y^{j}y\bigr)
 \end{aligned}`),
                         paragraph([
                           "したがってすべての ",
@@ -76897,101 +76897,6 @@ E_1(\psi)&=E_1(\varphi)&&\bigl(\because\ \blkref{def_single_traversal_edge_set}\
                       paragraph([
                         "最後のファイバーへの帰属は ", ref("def_nonbacktracking_permutation_fiber"),
                         " の二つの等式へこれらを代入したものである。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_contact_smoothing_involution",
-              labels: [],
-              title: { text: "同じ接触対での平滑化の対合性" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_contact_smoothing_same_pair_involution",
-                  beforeFocus: [],
-                  focus: {
-                    id: "kac_ward_claim_contact_smoothing_same_pair_involution",
-                    kind: "claim",
-                    title: { text: "同じ接触対は平滑化後も切り替え可能であり同じ対での平滑化は対合である" },
-                    labels: ["claim_contact_smoothing_same_pair_involution"],
-                    habitat: "N",
-                    verification: ["sagemath/check/contact-smoothing-same-pair-involution"],
-                    statement: [
-                      paragraph([
-                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
-                        "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
-                        math(String.raw`\{\vec e,\vec f\}`),
-                        "（", ref("def_switchable_permutation_contact_pair"), "）を取り、",
-                        math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
-                        "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき ",
-                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
-                        " の切り替え可能な接触対でもあり、",
-                      ]),
-                      displayMath(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`),
-                      paragraph([
-                        "が成り立つ。全て有限集合の元の比較と有限写像の等式であり、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        ref("claim_switchable_contact_smoothing_preserves_fiber"), " により ",
-                        math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " かつ ",
-                        math(String.raw`M(\psi)=M(\varphi)`), " である。まず ",
-                        math(String.raw`\{\vec e,\vec f\}`), " が ", math(String.raw`\psi`),
-                        " の切り替え可能な接触対であることを、", ref("def_switchable_permutation_contact_pair"),
-                        " の三条件を順に確かめて示す。",
-                      ]),
-                      paragraph([
-                        "第一の条件。", math(String.raw`\vec e,\vec f`), " は相異なる ",
-                        math(String.raw`M(\varphi)=M(\psi)`), " の元であり、終点の等式 ",
-                        math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
-                        " は置換に依らない向き付き辺だけの条件なので、", math(String.raw`\varphi`),
-                        " についての仮定がそのまま ", math(String.raw`\psi`), " についても成り立つ。",
-                      ]),
-                      paragraph([
-                        "第二の条件。", math(String.raw`\vec e\in M(\varphi)`), " なので ",
-                        math(String.raw`\varphi(\vec e)\ne\vec e`), " であり、",
-                        ref("def_nonbacktracking_permutations"), " により ",
-                        math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " である。",
-                        ref("def_permutation_contact_smoothing"), " により ",
-                        math(String.raw`\psi(\vec f)=\varphi(\vec e)`), " なので ",
-                        math(String.raw`\psi(\vec f)\in\operatorname{Next}(\vec e)`), " を得る。同様に ",
-                        math(String.raw`\vec f\in M(\varphi)`), " から ",
-                        math(String.raw`\psi(\vec e)=\varphi(\vec f)\in\operatorname{Next}(\vec f)`), " を得る。",
-                      ]),
-                      paragraph([
-                        "第三の条件。", math(String.raw`\psi(\vec f)=\varphi(\vec e)\ne\vec e`),
-                        "（", math(String.raw`\because\ \vec e\in M(\varphi)`), "）かつ ",
-                        math(String.raw`\psi(\vec e)=\varphi(\vec f)\ne\vec f`),
-                        "（", math(String.raw`\because\ \vec f\in M(\varphi)`), "）である。以上で ",
-                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
-                        " の切り替え可能な接触対であり、とくに ",
-                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)`), " が定義される。",
-                      ]),
-                      paragraph([
-                        "最後に対合の等式を示す。", ref("def_permutation_contact_smoothing"),
-                        " の場合分けを二回適用すると、任意の ", math(String.raw`\vec g\in\vec E_L`), " について",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\operatorname{Sm}_{\vec e,\vec f}(\psi)(\vec g)
-&=\begin{cases}\psi(\vec f),&\vec g=\vec e,\\\psi(\vec e),&\vec g=\vec f,\\\psi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
-&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
-&=\begin{cases}\varphi(\vec e),&\vec g=\vec e,\\\varphi(\vec f),&\vec g=\vec f,\\\varphi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
-&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\text{ の }\psi\text{ の定義を代入}\bigr)\\
-&=\varphi(\vec g)
-&&\bigl(\because\ \text{三つの場合の各値}\bigr).
-\end{aligned}`),
-                      paragraph([
-                        "有限集合上の二つの写像が全ての入力で一致するので ",
-                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
                       ]),
                     ],
                   },

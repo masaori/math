@@ -46,7 +46,6 @@ export const ALL_LABELS = [
   "claim_const_embedding_prod",
   "claim_constant_plus_breaks_no_bond",
   "claim_contact_elimination_by_splitting",
-  "claim_contact_smoothing_same_pair_involution",
   "claim_contact_split_pair_descent",
   "claim_contact_split_seam_parity",
   "claim_contact_split_turning_update",

@@ -7,6 +7,82 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_contact_smoothing_same_pair_involution_archived",
+    targets: ["def_permutation_contact_smoothing"],
+    title: { text: "不採用経路: 同じ接触対での平滑化の対合性" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、接触平滑化による置換項の相殺は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張「同じ接触対は平滑化後も切り替え可能であり同じ対での平滑化は対合である」:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`),
+                        "（", ref("def_nonbacktracking_permutations"), "）と、その切り替え可能な接触対 ",
+                        math(String.raw`\{\vec e,\vec f\}`),
+                        "（", ref("def_switchable_permutation_contact_pair"), "）を取り、",
+                        math(String.raw`\psi:=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                        "（", ref("def_permutation_contact_smoothing"), "）と置く。このとき ",
+                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
+                        " の切り替え可能な接触対でもあり、",
+                      ]),
+                      displayMath(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`),
+                      paragraph([
+                        "が成り立つ。全て有限集合の元の比較と有限写像の等式であり、実数体も複素数体も現れない。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        ref("claim_switchable_contact_smoothing_preserves_fiber"), " により ",
+                        math(String.raw`\psi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)`), " かつ ",
+                        math(String.raw`M(\psi)=M(\varphi)`), " である。まず ",
+                        math(String.raw`\{\vec e,\vec f\}`), " が ", math(String.raw`\psi`),
+                        " の切り替え可能な接触対であることを、", ref("def_switchable_permutation_contact_pair"),
+                        " の三条件を順に確かめて示す。",
+                      ]),
+                      paragraph([
+                        "第一の条件。", math(String.raw`\vec e,\vec f`), " は相異なる ",
+                        math(String.raw`M(\varphi)=M(\psi)`), " の元であり、終点の等式 ",
+                        math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{tgt}(\vec f)`),
+                        " は置換に依らない向き付き辺だけの条件なので、", math(String.raw`\varphi`),
+                        " についての仮定がそのまま ", math(String.raw`\psi`), " についても成り立つ。",
+                      ]),
+                      paragraph([
+                        "第二の条件。", math(String.raw`\vec e\in M(\varphi)`), " なので ",
+                        math(String.raw`\varphi(\vec e)\ne\vec e`), " であり、",
+                        ref("def_nonbacktracking_permutations"), " により ",
+                        math(String.raw`\varphi(\vec e)\in\operatorname{Next}(\vec e)`), " である。",
+                        ref("def_permutation_contact_smoothing"), " により ",
+                        math(String.raw`\psi(\vec f)=\varphi(\vec e)`), " なので ",
+                        math(String.raw`\psi(\vec f)\in\operatorname{Next}(\vec e)`), " を得る。同様に ",
+                        math(String.raw`\vec f\in M(\varphi)`), " から ",
+                        math(String.raw`\psi(\vec e)=\varphi(\vec f)\in\operatorname{Next}(\vec f)`), " を得る。",
+                      ]),
+                      paragraph([
+                        "第三の条件。", math(String.raw`\psi(\vec f)=\varphi(\vec e)\ne\vec e`),
+                        "（", math(String.raw`\because\ \vec e\in M(\varphi)`), "）かつ ",
+                        math(String.raw`\psi(\vec e)=\varphi(\vec f)\ne\vec f`),
+                        "（", math(String.raw`\because\ \vec f\in M(\varphi)`), "）である。以上で ",
+                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
+                        " の切り替え可能な接触対であり、とくに ",
+                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)`), " が定義される。",
+                      ]),
+                      paragraph([
+                        "最後に対合の等式を示す。", ref("def_permutation_contact_smoothing"),
+                        " の場合分けを二回適用すると、任意の ", math(String.raw`\vec g\in\vec E_L`), " について",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{Sm}_{\vec e,\vec f}(\psi)(\vec g)
+&=\begin{cases}\psi(\vec f),&\vec g=\vec e,\\\psi(\vec e),&\vec g=\vec f,\\\psi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&=\begin{cases}\varphi(\vec e),&\vec g=\vec e,\\\varphi(\vec f),&\vec g=\vec f,\\\varphi(\vec g),&\vec g\notin\{\vec e,\vec f\}\end{cases}
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\text{ の }\psi\text{ の定義を代入}\bigr)\\
+&=\varphi(\vec g)
+&&\bigl(\because\ \text{三つの場合の各値}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "有限集合上の二つの写像が全ての入力で一致するので ",
+                        math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_standard_contact_smoothing_archived",
     targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 標準接触対の平滑化" },
@@ -160,7 +236,7 @@ N_{\mathrm{ct}}(\varphi)\ge1,\ \operatorname{ct}_{\min}(\varphi)\text{ は }\var
                         " の切り替え可能な接触対なので、以下の各主張の仮定を満たす。",
                       ]),
                       paragraph([
-                        "第一の主張。", ref("claim_contact_smoothing_same_pair_involution"), " により ",
+                        "第一の主張。", "参照用ノート「不採用経路: 同じ接触対での平滑化の対合性」", " により ",
                         math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\psi`),
                         " の切り替え可能な接触対でもあり、",
                         math(String.raw`\operatorname{Sm}_{\vec e,\vec f}(\psi)=\varphi`), " である。",
@@ -178,7 +254,7 @@ S(S(\varphi))
 &=\operatorname{Sm}_{\vec e,\vec f}(\psi)
 &&\bigl(\because\ \text{参照用ノート「不採用経路: 標準接触対の平滑化」}\bigr)\\
 &=\varphi
-&&\bigl(\because\ \blkref{claim_contact_smoothing_same_pair_involution}\bigr)
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 同じ接触対での平滑化の対合性」}\bigr)
 \end{aligned}`),
                       paragraph([
                         "である。",
@@ -4492,7 +4568,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_contact_smoothing_same_pair_involution_lexicographic_choice_counterexample",
-    targets: ["claim_contact_smoothing_same_pair_involution"],
+    targets: ["def_permutation_contact_smoothing"],
     title: { text: "辞書式最小の切り替え可能接触対は平滑化で保たれない" },
     body: [
       paragraph([
