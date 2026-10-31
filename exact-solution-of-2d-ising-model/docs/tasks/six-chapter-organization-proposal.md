@@ -34,6 +34,58 @@
 | 極限 | 列数の極限：Onsager の閉形式 | $c_+=\Lambda^{(1/2)}$、$c_+\le c\le 2c_+$ から自由エネルギー $=\frac12\log(2\sinh 2K_2)+\frac1{4\pi}\int_0^{2\pi}\gamma$ | 011 のセクター上限、012 の Riemann 和と Onsager の表式、018 の厳密解 | 9 |
 | 臨界点 | 臨界点と比熱の対数発散 | $\sinh 2K_1\sinh 2K_2=1$ での比熱の対数発散 | 008 の臨界条件、020 | 10 |
 
+## 章の依存関係
+
+矢印は「矢印の元の章を、矢印の先の章が使う」を表す。矢印に添えた数は、先の章の項目が元の章の項目を
+直接参照している件数である（棚卸しの依存ラベルから数えた。$\Lambda^{(\delta)}$ の定義は分離を済ませた前提）。
+数学的道具立てはすべての章が使うので、図から省いた。
+
+```mermaid
+flowchart TD
+  trace["分配関数を転送行列のトレースで表す"]
+  sector["偶セクターへの射影と Jordan–Wigner 表示"]
+  fourier["半整数運動量の Fourier 変換と 2×2 行列への帰着"]
+  diag["2×2 行列の対角化とフェルミオン"]
+  eig["偶セクターの転送行列の固有値"]
+  evenvec["最大固有ベクトルが偶セクターにあること"]
+  rowlim["行数の極限：最大固有値だけが残る"]
+  collim["列数の極限：Onsager の閉形式"]
+  crit["臨界点と比熱の対数発散"]
+
+  trace -->|25| sector
+  trace -->|5| diag
+  trace -->|7| evenvec
+  trace -->|3| rowlim
+  trace -->|4| collim
+  sector -->|22| fourier
+  sector -->|9| diag
+  sector -->|13| eig
+  sector -->|14| evenvec
+  sector -->|8| rowlim
+  sector -->|13| collim
+  sector -->|6| crit
+  fourier -->|45| diag
+  fourier -->|5| eig
+  fourier -->|2| evenvec
+  fourier -->|1| collim
+  fourier -->|1| crit
+  diag -->|13| eig
+  diag -->|2| evenvec
+  eig -->|10| evenvec
+  eig -->|7| collim
+  eig -->|1| crit
+  evenvec -->|5| collim
+  rowlim -->|4| collim
+  collim -->|2| crit
+```
+
+図から読めること:
+
+- 後ろの章から前の章への矢印は無い。並びのとおりに読めば、前方参照は起きない。
+- 行数の極限の章は、トレースの章と偶セクターへの射影の章だけを使う。固有値問題の後半の四章とは独立で、
+  二つの流れは列数の極限の章で合流する。
+- 最も太い依存は、Fourier 変換の章から対角化の章への 45 件である。
+
 ### 振り分けの決め方
 
 各章のゴールの式について、棚卸しの依存ラベルを辿った依存閉包を、表の上の章から順に取った。
