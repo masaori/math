@@ -4817,11 +4817,11 @@ w^{k+1}&=w^{k}\,w
                         ]),
                         displayMath(String.raw`\begin{aligned}
 w^{n-1}\,w&=w^{(n-1)+1}
-&&(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y)\\
+&&\bigl(\because\ \blkref{def_root_of_unity_set}\ \text{の約束}\ y^{j+1}=y^{j}y\bigr)\\
 &=w^{n}
-&&(\because\ n\ge1\ \text{より}\ (n-1)+1=n)\\
+&&\bigl(\because\ n\ge1\ \text{より}\ (n-1)+1=n\bigr)\\
 &=1
-&&(\because\ w\in\mu_{n}\ \text{と}\ \blkref{def_root_of_unity_set})
+&&\bigl(\because\ w\in\mu_{n}\ \text{と}\ \blkref{def_root_of_unity_set}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`z\in\mu_{n}`),
@@ -4829,32 +4829,32 @@ w^{n-1}\,w&=w^{(n-1)+1}
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z)\bigr)&=\theta^{(n)}_{w^{n-1}}(wz)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&&\bigl(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ}\bigr)\\
 &=w^{n-1}(wz)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&&\bigl(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ}\bigr)\\
 &=(w^{n-1}w)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=1\cdot z
-&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&&\bigl(\because\ \text{準備の等式}\ w^{n-1}w=1\bigr)\\
 &=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "第 2 の往復は次のとおりである。",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 \theta^{(n)}_{w}\bigl(\theta^{(n)}_{w^{n-1}}(z)\bigr)&=\theta^{(n)}_{w}(w^{n-1}z)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ})\\
+&&\bigl(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w^{n-1}}\ \text{へ}\bigr)\\
 &=w(w^{n-1}z)
-&&(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ})\\
+&&\bigl(\because\ \blkref{def_root_of_unity_mul_map}\ \text{を}\ \theta^{(n)}_{w}\ \text{へ}\bigr)\\
 &=(w\,w^{n-1})z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の結合則}\bigr)\\
 &=(w^{n-1}w)z
-&&(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則})\\
+&&\bigl(\because\ \overline{\mathbb{Q}}\ \text{の積の可換則}\bigr)\\
 &=1\cdot z
-&&(\because\ \text{準備の等式}\ w^{n-1}w=1)\\
+&&\bigl(\because\ \text{準備の等式}\ w^{n-1}w=1\bigr)\\
 &=z
-&&(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元})
+&&\bigl(\because\ 1\ \text{は}\ \overline{\mathbb{Q}}\ \text{の積の単位元}\bigr)
 \end{aligned}`),
                         paragraph([
                           "単射性。",
@@ -4867,11 +4867,11 @@ w^{n-1}\,w&=w^{(n-1)+1}
                         ]),
                         displayMath(String.raw`\begin{aligned}
 z_1&=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_1)\bigr)
-&&(\because\ \text{第 1 の往復を}\ z_1\ \text{へ})\\
+&&\bigl(\because\ \text{第 1 の往復を}\ z_1\ \text{へ}\bigr)\\
 &=\theta^{(n)}_{w^{n-1}}\bigl(\theta^{(n)}_{w}(z_2)\bigr)
-&&(\because\ \theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2))\\
+&&\bigl(\because\ \theta^{(n)}_{w}(z_1)=\theta^{(n)}_{w}(z_2)\bigr)\\
 &=z_2
-&&(\because\ \text{第 1 の往復を}\ z_2\ \text{へ})
+&&\bigl(\because\ \text{第 1 の往復を}\ z_2\ \text{へ}\bigr)
 \end{aligned}`),
                         paragraph([
                           "全射性。",
