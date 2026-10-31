@@ -9,7 +9,7 @@ $E_1(\varphi)=E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)$ について、
 二通りの総和の一致 $d_{E_1(\varphi)}(v)+2a=2b$）と結論
 （$E_1(\varphi)$ のすべての頂点の端点の個数が偶数）を突き合わせた。
 
-- 実行: `sage sagemath/check/single-traversal-support-even/check.sage`
+- 実行: `sage sagemath/archive/single-traversal-support-even/check.sage`
 - 状態: PASS（2026-09-01）
 - 結果: 非後退置換 $30{,}784$ 件（うち反転対を含むもの $30{,}287$ 件、
   含まないもの $497$ 件）の全件・全頂点で、次がすべて成り立った。
