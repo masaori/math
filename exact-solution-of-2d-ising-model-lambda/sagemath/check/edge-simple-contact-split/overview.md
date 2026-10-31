@@ -3,7 +3,7 @@
 **対象ラベル**: `claim_edge_simple_contact_split`
 
 追加の対象ラベル: `claim_contact_split_seam_parity`, `claim_contact_split_turning_update`,
-`claim_contact_split_pair_descent`, `claim_contact_elimination_by_splitting`
+`claim_contact_split_pair_descent`
 
 - 実行: `sage sagemath/check/edge-simple-contact-split/check.sage`
 - 状態: PASS（2026-08-30）
@@ -25,4 +25,4 @@ $\{-4,0,4\}$ に収まりつつ零でない接触点が実在すること（回�
 さらに、台の辺が相異なる各閉歩道を、接触対が残る限り先頭の接触点で二分する。
 反復が接触対数以下の回数で止まること、得た空でない有限族の各成員で接触対数が零であること、
 台の辺集合が互いに交わらず元の集合を覆うこと、二つの切断線偶奇の総和が保存されること
-（`claim_contact_elimination_by_splitting`）を検査する。
+（旧主張「接触点分割の旧帰納法」は参照用ノートに保存）を検査する。

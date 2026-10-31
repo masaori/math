@@ -164,7 +164,7 @@ for walk in edge_simple_walks:
             assert contact_pair_count(walk_a) + contact_pair_count(walk_b) \
                 < contact_pair_count(walk)
             pair_descent_checks += 1
-    # claim_contact_elimination_by_splitting: 接触対が残る限り最初の接触点で
+    # 旧主張「接触点分割の旧帰納法」: 接触対が残る限り最初の接触点で
     # 二分する。狭義減少により停止し、台の辺集合の分割と切断線偶奇を保つ。
     stack = [walk]
     family = []

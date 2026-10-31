@@ -2252,9 +2252,6 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.exclusive_split_witness_descent_necSuf
   Ising2DLambda.KacWard.contact_split_pair_descent
   Ising2DLambda.KacWard.contact_split_pair_descent_from_necSuf
-  Ising2DLambda.NecSuf.KacWard.contact_elimination_by_splitting_necSuf
-  Ising2DLambda.KacWard.contact_elimination_by_splitting
-  Ising2DLambda.KacWard.contact_elimination_by_splitting_from_necSuf
   Ising2DLambda.NecSuf.KacWard.determinantEntryProduct_ne_zero_iff
   Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_iff
   Ising2DLambda.KacWard.kacWardDeterminantEntryProduct_ne_zero_from_necSuf
