@@ -3,14 +3,22 @@
 
 対応する人手証明のラベル:
 
-* **`<extract_taylor_coefficient_of_Z_Y>`**
+* **`T_actions_on_check_Z_Y`**・**`calc_of_TxT_check_Z_Y`**
+  （`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`。本文の主張）
+* 本文から退避した整数運動量の経路の **`<extract_taylor_coefficient_of_Z_Y>`**
   （`structured-latex/content/008_TV1_hatZ_hatY_part1.ts` の
   `TV1_hatZ_hatY_005_claim_extract_taylor_coefficient`）
 * **`<ホロノミック量子場_p142下段_1>`**（同 `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`）
 * **`<T_V_hatZ_hatY>`**（同 `TV1_hatZ_hatY_018_claim_T_V_action`）
 
-**具体版は `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`**（`Mat(2,ℂ)^{⊗M}` の
-`hat(Z)_μ^{(-)}, hat(Y)_μ` について人手証明と 1 対 1 に対応する形で述べ、本ファイルの系として導出する）。
+**具体版は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimTActionsOnCheck.lean`**（`Mat(2,ℂ)^{⊗M}` の
+`check(Z)_μ, check(Y)_μ` について人手証明 `T_actions_on_check_Z_Y`・`calc_of_TxT_check_Z_Y` と 1 対 1 に対応する形で述べる）。
+具体版が本ファイルの特殊化として得られることは `EigenvalueProblem/ReductionToATheta/ClaimTActionsOnCheckFromNecSuf.lean` に書いた。
+本文の具体版の行との対応: `exp_X_Y_exp_-X` と `extract_taylor_coefficient_of_check_Z_Y` の 2 行は
+`exp_conj_two_dim_z` / `exp_conj_two_dim_y`（`NecSuf/ExpConjugation.lean`）、4 式を 2 列に並べて
+`B_1(θ~_μ)`, `B_2` と突き合わせる行は `exp_conj_two_dim_actsBy`、`V_2` の前因子を打ち消す 2 行は `conj_smul_eq`。
+本文から退避した整数運動量の経路の記録 `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` も
+`hat(Z)_μ^{(-)}, hat(Y)_μ` について本ファイルの系として導出している。
 
 **このファイルには必要十分版だけを置く。必要十分版は Lean の中だけの道具であり、
 人手証明の本文にも参照用ノートにも持ち込まない**

@@ -819,11 +819,20 @@ targets=(
   Ising2D.extract_taylor_H2_checkY
   Ising2D.TConj_V1plusHalf_checkZ
   Ising2D.TConj_V1plusHalf_checkY
+  Ising2D.smul_conj_smul_inv_eq
   Ising2D.TConj_V2H2Form_checkZ
   Ising2D.TConj_V2H2Form_checkY
   Ising2D.linearity_of_T_on_check
   Ising2D.actsBy_TConj_V1plusHalf
   Ising2D.actsBy_TConj_V2H2Form_check
+  Ising2D.actsBy_TConj_V2_check
+  Ising2D.B1mat_eq_twoDimConjMat
+  Ising2D.B2mat_eq_twoDimConjMat
+  Ising2D.actsBy_TConj_matExpUnits
+  Ising2D.actsBy_TConj_smulUnits
+  Ising2D.actsBy_TConj_V1plusHalf_fromNecSuf
+  Ising2D.actsBy_TConj_V2H2Form_check_fromNecSuf
+  Ising2D.actsBy_TConj_V2_check_fromNecSuf
   Ising2D.factorization_of_A_theta_general
   Ising2D.factorization_of_A_thetaTilde
   Ising2D.NecSuf.actsBy_sandwich
@@ -834,7 +843,6 @@ targets=(
   Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form
   Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum
   Ising2D.TVPlus_checkZ_checkY_components
-  Ising2D.TV_hatZ_hatY_via_sandwich
   Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd
   Ising2D.NecSuf.mul_of_eq_neg_conj
   Ising2D.NecSuf.sq_absOf_eq_neg_mul
@@ -1544,10 +1552,6 @@ targets=(
   "Ising2D.lie_H2_hatZPlus'"
   Ising2D.expPhase_eq_exp_neg_thetaMu
   Ising2D.expPhase_neg_eq_exp_thetaMu
-  Ising2D.B1mat_eq_twoDimConjMat
-  Ising2D.B2mat_eq_twoDimConjMat
-  Ising2D.actsBy_TConj_matExpUnits
-  Ising2D.actsBy_TConj_smulUnits
   Ising2D.ad_V1pmHalf_hatZMinus
   Ising2D.ad_V1pmHalf_hatY
   Ising2D.actsBy_TConj_V1pmHalf
@@ -1558,6 +1562,7 @@ targets=(
   Ising2D.TV_psiDag
   Ising2D.TV_psi
   Ising2D.TV_psiDag_psi
+  Ising2D.TV_hatZ_hatY_via_sandwich
   Ising2D.hatZ_eq_weighted_zetaM
   Ising2D.hatY_eq_weighted_zetaM
   Ising2D.deltaMod_eq_ite_neg

@@ -74,26 +74,4 @@ theorem TVPlus_checkZ_checkY_components (hM : M ≠ 0) (K : IsingConst) (μ : �
           + AMat K (thetaTilde M μ) 1 1 • checkY M μ :=
   TVPlus_checkZ_checkY hM K μ K1 K2star hs2 hc1 hs1 hc2star hs2star hdual
 
-/-! ## 整数運動量版と半整数運動量版は同じ必要十分版の別の特殊化であること
-
-008 章の結論 `<T_V_hatZ_hatY>`（既存の `Ising2D.TV_hatZ_hatY`）も、
-本章の結論と**まったく同じ必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化**として得られる。
-渡すものが `(hat(Z)^{(-)}_μ, hat(Y)_μ, B_1(θ_μ))` か
-`(check(Z)_μ, check(Y)_μ, B_1(θ~_μ))` かの違いしかない。 -/
-
-/-- **整数運動量版（008 章 `<T_V_hatZ_hatY>`）を同じ必要十分版から導いたもの**。
-既存の `Ising2D.TV_hatZ_hatY` と同じ主張である（`NecSuf.actsBy_TV_sandwich` 経由の別証明）。 -/
-theorem TV_hatZ_hatY_via_sandwich (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
-    {s2 : ℝ} (hs2 : 0 < s2)
-    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
-    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
-    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
-    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
-    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
-    ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
-      (hatZMinus M μ) (hatY M μ) (AMat K (thetaMu M μ)) := by
-  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1pmHalf hM K1 μ)
-    (actsBy_TConj_V2H2Form hM hs2 K2star μ)
-  rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star (thetaMu M μ) hc1 hs1 hc2star hs2star hdual] at h
-
 end Ising2D

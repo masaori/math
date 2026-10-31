@@ -297,6 +297,16 @@
     （ほかに `lastSite.eq_1`・`H1.eq_1` の等式補題と `sqrtM` の等式補題・simp 補題が退避先のモジュールに数えられる）。
     レビューで分かった、今回の差分より前からある差は下の「この後に残る確認」に載せた。
 
+  - ゴールラインの確認の六つ目（済み、2026-10-31）: `ClaimTVActionsOnHatZHatY` の 4 定数（`B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`）を判定した。
+    4 つとも運動量の取り方に依らない補題で、本文の `ReductionToATheta/ClaimTActionsOnCheck.lean` は、人手 `calc_of_TxT_check_Z_Y` の 2 式をこれらで必要十分版から直接出し、そこから `T_actions_on_check_Z_Y` の 4 式を読み取っていた（人手と逆の向き）。
+    人手どおり、4 式を `def_T_g` → `def_V1_plus_square_root`（`V_2` は `V2_exponential_representation` と `V_2^{-1}` の表示、前因子を打ち消す 2 行 `smul_conj_smul_inv_eq`）→ `exp(X)^{-1} = exp(-X)` → `exp_X_Y_exp_-X` → `extract_taylor_coefficient_of_check_Z_Y` の `calc` で示し、
+    `calc_of_TxT_check_Z_Y` はその 4 式を 2 列に並べて `def_B1_theta_B2` の成分と突き合わせるようにした。人手の `V_2` で述べた `actsBy_TConj_V2_check` を足した。主張の型は変えていない。
+    4 定数と、必要十分版 `NecSuf.exp_conj_two_dim_actsBy` の特殊化としての導出（`actsBy_TConj_V1plusHalf_fromNecSuf`・`actsBy_TConj_V2H2Form_check_fromNecSuf`）は新しいファイル `ReductionToATheta/ClaimTActionsOnCheckFromNecSuf.lean` へ置き、退避先はそこから使う。
+    本文 `ReductionToATheta/ClaimTVPlusAction.lean` の末尾にあった整数運動量版の比較定理 `TV_hatZ_hatY_via_sandwich` は退避先 `ClaimTVActionsOnHatZHatY.lean` へ移した。`ClaimTActionsOnCheck.lean` から `RoutesNotAdopted/` の import を外した。
+    レビューで指摘なしになるまで直した。同じメタプログラムで数え直すと、通しの定理が使う `RoutesNotAdopted/IntegerMomentum/` の公開の定数は次の 4 個である:
+    `DefinitionFermiPsi` の 3 個（`sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`）、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`（ほかに `lastSite.eq_1`・`H1.eq_1` と `sqrtM` の等式補題・simp 補題）。
+    本文の章のファイルで `RoutesNotAdopted/` を直接 import するのは残り 5 本である（`ReductionToATheta/DefinitionHalfIntegerModes`・`DiagonalizationAndExponentialForm/DefinitionCheckFermi`・`EigenvaluesOfVPlus/DefinitionCheckNumberOperator`・`EigenvectorOfMaxEigenvalue/CheckFermiInput`・`PartitionFunction/ProjectionAndJordanWigner/DefinitionH1H2V1V2`）。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -305,11 +315,14 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
   退避先にあるのか）を判定する。経路に依らない補題なら、使う本文の章のファイル（または数学的道具立て）へ移し、本文の章のファイルから `RoutesNotAdopted/` への import を無くす。
   退避した主張そのもの（例えば整数運動量の `V` の定数 `C` の評価）を本文の証明が使っているなら、`commutator_of_H_and_check_Z_Y` と同じく人手の Step どおりに直す。
   1 回に 1 ファイル分ずつ進める（`ClaimAnticommutatorHatZHatY` の 4 定数、`ClaimCommutatorHAndHatZHatY` の `firstSite`・`lastSite`、`ClaimConstantCAndEigenvaluesOfV` の 8 定数、
-  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数は済み。次は `ClaimTVActionsOnHatZHatY` の 4 定数 `B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`。
-  使っている本文のファイルは `grep` で特定する。`ReductionToATheta/ClaimTActionsOnCheck.lean` がこのファイルを import している）。
-  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 6 本）は、ファイルごとに import を外せるかを確かめる。
+  `ClaimEigenvectorsAndDiagonalizationOfATheta` の 4 定数、`ClaimTVActionsOnHatZHatY` の 4 定数は済み。次は `DefinitionFermiPsi` の 3 定数 `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`。
+  使っている本文のファイルは `grep` で特定する）。
+  定数を使わなくなった後も、本文の章のファイルが `RoutesNotAdopted/` を import している箇所（上の 5 本）は、ファイルごとに import を外せるかを確かめる。
 
 この後に残る確認:
+
+- `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
+- 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。
 
 - `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
   `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。

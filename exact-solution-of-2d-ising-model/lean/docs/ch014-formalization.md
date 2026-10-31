@@ -41,20 +41,22 @@
 | `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY` | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
 | `Ising2D.extract_taylor_H2_checkZ` / `..._checkY` | (h2.z)(h2.y) の級数和 | 同上 |
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp` | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
-| `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式 | `T_actions_on_check_Z_Y` |
+| `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式（`def_T_g` → `def_V1_plus_square_root` → `exp(X)^{-1}=exp(-X)` → `exp_X_Y_exp_-X` → (h1.z)(h1.y) の `calc`） | `T_actions_on_check_Z_Y` |
+| `Ising2D.smul_conj_smul_inv_eq` | 第 3・第 4 式の証明の、前因子 `(2s_2)^{M/2}` を打ち消す 2 行（スカラーを左端へ移す・`c c^{-1} = 1`） | 同上 |
 | `Ising2D.TConj_V2H2Form_checkZ` / `..._checkY` | 原文 第 3・第 4 式を `V2H2Form` の単元（一般形）で述べたもの（前因子 `(2s_2)^{M/2}` の相殺つき） | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V2_checkZ` / `..._checkY` | 原文 第 3・第 4 式（人手の `V_2` の単元 `V2Units` について） | 同上 |
 | `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性 | `linearity_of_T` |
 | `Ising2D.linearity_of_T_V1plusHalf` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
 | `Ising2D.linearity_of_T_V2` / `linearity_of_T_V2H2Form` | `T_g` の ℂ 線型性の `V_2`（人手の `V_2`／一般形 `V2H2Form`）への特殊化 | `linearity_of_T_V2` |
 | `Ising2D.B1mat_zero_zero` ほか 8 本 | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |
-| `Ising2D.actsBy_TConj_V1plusHalf` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)` | `calc_of_TxT_check_Z_Y` 第 1 式 |
-| `Ising2D.actsBy_TConj_V2H2Form_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2` | 同 第 2 式 |
+| `Ising2D.actsBy_TConj_V1plusHalf` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)`（上の第 1・第 2 式を 2 列に並べ、`def_B1_theta_B2` の成分と突き合わせる） | `calc_of_TxT_check_Z_Y` 第 1 式 |
+| `Ising2D.actsBy_TConj_V2H2Form_check` / `actsBy_TConj_V2_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2`（同じく第 3・第 4 式から。`V_2` を `V2H2Form`／人手の `V_2` で書いた 2 本） | 同 第 2 式 |
+| `Ising2D.actsBy_TConj_V1plusHalf_fromNecSuf` / `actsBy_TConj_V2H2Form_check_fromNecSuf` / `actsBy_TConj_V2_check_fromNecSuf` | 上の 2 式を必要十分版 `NecSuf.exp_conj_two_dim_actsBy`・`NecSuf.conj_smul_eq` の特殊化として得たもの（`ClaimTActionsOnCheckFromNecSuf.lean`） | 同 第 1・第 2 式 |
+| `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` / `actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` | 特殊化に使う、運動量の取り方に依らない補題（同じファイル。整数運動量の経路の記録もこれを使う） | 同上 |
 | `Ising2D.factorization_of_A_theta_general` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
 | `Ising2D.factorization_of_A_thetaTilde` | 上の `θ = θ~_μ` への特殊化 | 同上（「とくに」） |
 | **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)` | **`T_V_plus_check_Z_Y`** |
 | `Ising2D.TVPlus_checkZ_checkY_components` | 上を 2 本の等式（成分の形）で書いた版 | 同上 |
-| `Ising2D.TV_hatZ_hatY_via_sandwich` | **整数運動量版（008 章）を同じ必要十分版から導いた別証明** | `<T_V_hatZ_hatY>`（008 章） |
 
 ### 必要十分版
 
@@ -115,7 +117,7 @@
 （`e^{-iMθ_μ} = +1`、添字集合 `𝓜` の形、`M` 周期性）を使っていない」という観察の、
 Lean での機械的裏づけである。
 
-具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`）で
+具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（本文から退避した整数運動量の経路の記録 `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`）で
 **008 章の結論を本章の必要十分版から導き直した**。本章の結論
 `Ising2D.TVPlus_checkZ_checkY` とこの定理は、`NecSuf.actsBy_TV_sandwich` に渡す
 `ActsBy` が `(Ẑ^{(-)}, Ŷ, B_1(θ_μ))` か `(Ž, Y̌, B_1(θ~_μ))` かだけが違う。

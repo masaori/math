@@ -8,7 +8,7 @@
 **必要十分版**は `Ising2D/NecSuf/TVAction.lean` の `Ising2D.NecSuf.twoDimConjMat`
 （`!![cosh s, β sinhc s; α sinhc s, cosh s]`）。原文の `B_1(θ), B_2` が
 その特殊化であることは `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat`
-（`RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`）で既に証明されている。
+（`EigenvalueProblem/ReductionToATheta/ClaimTActionsOnCheckFromNecSuf.lean`）で証明している。
 
 ## 原文の定義と Lean の既存定義
 

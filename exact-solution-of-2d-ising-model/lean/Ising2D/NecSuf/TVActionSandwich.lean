@@ -14,7 +14,7 @@
 **具体版は `Ising2D/EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`**（半整数運動量）と
 `Ising2D/RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`（整数運動量）。
 **この 2 つは本ファイルの同じ定理の別の特殊化である**ことを
-`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean` の末尾で明示的に示している。
+`RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` の末尾（`TV_hatZ_hatY_via_sandwich`）で明示的に示している。
 
 **このファイルには必要十分版だけを置く。必要十分版は Lean の中だけの道具であり、
 人手証明の本文にも参照用ノートにも持ち込まない**

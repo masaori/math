@@ -46,7 +46,9 @@
 3. `exp(X) z exp(-X) = cosh(s) z + α sinhc(s) y` に代入して係数を突き合わせると、
    `α sinhc(K_1) = i e^{-iθ_μ} sinh(K_1)` 等となり、**原文 `005` / `012` の
    `cosh K_1`, `±i e^{∓iθ_μ} sinh K_1`, `cosh 2K_2^*`, `±i sinh 2K_2^*` と完全に一致する**
-   （`B1mat_eq_twoDimConjMat`, `B2mat_eq_twoDimConjMat` が突き合わせそのもの。
+   （`B1mat_eq_twoDimConjMat`, `B2mat_eq_twoDimConjMat` が突き合わせそのもの。この 2 本と
+   `actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits` は経路に依らないので
+   `EigenvalueProblem/ReductionToATheta/ClaimTActionsOnCheckFromNecSuf.lean` に置き、本ファイルはそれを使う。
    原文の誤りは見つからなかった）。
 4. `V_2` のスカラー因子 `(2s_2)^{M/2}` は共役で打ち消える（`NecSuf.conj_smul_eq`）。
    原文が「スカラーは共役で打ち消し合う」と書いている一行がこれである。
@@ -70,6 +72,8 @@ Lean の記法では `hat(Z)^{(-)} = hatZ M 1 μ`、`H_1^{(-)} = H1 M 1`（引�
 同様に `c_1 = cosh 2K_1` 等の `IsingConst` の成分と `K_1, K_2^*` の関係も仮定として持つ。
 -/
 import Ising2D.NecSuf.TVAction
+import Ising2D.NecSuf.TVActionSandwich
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTActionsOnCheckFromNecSuf
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.DefinitionTgAndTV
@@ -98,71 +102,6 @@ theorem expPhase_neg_eq_exp_thetaMu (M : ℕ) (μ : ℤ) :
   congr 1
   push_cast
   ring
-
-/-! ## `B_1(θ)`, `B_2` が必要十分版の作用行列であること -/
-
-/-- **原文 `005` (h1.z)(h1.y) の係数の突き合わせ**:
-`α = i K_1 e^{-iθ}`, `β = -i K_1 e^{iθ}`, `s = K_1` のとき、必要十分版の作用行列
-`twoDimConjMat α β s` は原文の `B_1(θ)` に一致する。
-
-要点は `K_1 · sinhc(K_1) = sinh(K_1)`（`NecSuf.mul_sinhc`）だけである。 -/
-theorem B1mat_eq_twoDimConjMat (K1 θ : ℂ) :
-    B1mat K1 θ = twoDimConjMat
-      (Complex.I * K1 * Complex.exp (-θ * Complex.I))
-      (-Complex.I * K1 * Complex.exp (θ * Complex.I)) K1 := by
-  have h := NecSuf.mul_sinhc K1
-  -- 非対角成分だけが `sinhc` を含む。`K_1 sinhc(K_1) = sinh(K_1)` で `sinh` へ直す。
-  have e01 : -Complex.I * K1 * Complex.exp (θ * Complex.I) * sinhc K1
-      = -Complex.I * Complex.exp (θ * Complex.I) * Complex.sinh K1 := by
-    linear_combination (-Complex.I * Complex.exp (θ * Complex.I)) * h
-  have e10 : Complex.I * K1 * Complex.exp (-θ * Complex.I) * sinhc K1
-      = Complex.I * Complex.exp (-θ * Complex.I) * Complex.sinh K1 := by
-    linear_combination (Complex.I * Complex.exp (-θ * Complex.I)) * h
-  simp only [B1mat, twoDimConjMat, e01, e10]
-
-/-- **原文 `005` (h2.z−)(h2.y) の係数の突き合わせ**:
-`α = -2i K_2^*`, `β = 2i K_2^*`, `s = 2K_2^*` のとき、必要十分版の作用行列は原文の `B_2` に一致する。 -/
-theorem B2mat_eq_twoDimConjMat (K2star : ℂ) :
-    B2mat K2star = twoDimConjMat
-      (-(2 * Complex.I * K2star)) (2 * Complex.I * K2star) (2 * K2star) := by
-  have h := NecSuf.mul_sinhc (2 * K2star)
-  have e01 : 2 * Complex.I * K2star * sinhc (2 * K2star)
-      = Complex.I * Complex.sinh (2 * K2star) := by
-    linear_combination Complex.I * h
-  have e10 : -(2 * Complex.I * K2star) * sinhc (2 * K2star)
-      = -Complex.I * Complex.sinh (2 * K2star) := by
-    linear_combination (-Complex.I) * h
-  simp only [B2mat, twoDimConjMat, e01, e10]
-
-/-! ## exp 共役が `ActsBy` で作用すること（必要十分版の特殊化） -/
-
-/-- **必要十分版 `NecSuf.exp_conj_two_dim_actsBy` の具体版**: `ad X` が `span{z, y}` を保つとき、
-共役 `T_{exp X}` は `(z, y)` に `twoDimConjMat α β s` で作用する。 -/
-theorem actsBy_TConj_matExpUnits {X z y : TensorPow M} {α β s : ℂ}
-    (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) :
-    ActsBy (TConj (matExpUnits X)).toLinearMap z y (twoDimConjMat α β s) := by
-  constructor
-  · show matExp X * z * matExp (-X) = _
-    rw [matExp_conj_two_dim_z hz hy hs]
-    rfl
-  · show matExp X * y * matExp (-X) = _
-    rw [matExp_conj_two_dim_y hz hy hs, add_comm]
-    rfl
-
-/-- **原文「`(2s_2)^{M/2}` のスカラーは共役で打ち消し合う」の具体版**
-（必要十分版は `NecSuf.conj_smul_eq`）。 -/
-theorem actsBy_TConj_smulUnits {c : ℂ} (hc : c ≠ 0) {u : (TensorPow M)ˣ}
-    {z y : TensorPow M} {B : Matrix (Fin 2) (Fin 2) ℂ}
-    (h : ActsBy (TConj u).toLinearMap z y B) :
-    ActsBy (TConj (smulUnits c hc u)).toLinearMap z y B := by
-  obtain ⟨h1, h2⟩ := h
-  constructor
-  · show (c • (u : TensorPow M)) * z * (c⁻¹ • ((u⁻¹ : (TensorPow M)ˣ) : TensorPow M)) = _
-    rw [NecSuf.conj_smul_eq hc]
-    exact h1
-  · show (c • (u : TensorPow M)) * y * (c⁻¹ • ((u⁻¹ : (TensorPow M)ˣ) : TensorPow M)) = _
-    rw [NecSuf.conj_smul_eq hc]
-    exact h2
 
 /-! ## `T_{(V_1^{(-)})^{1/2}}` の作用（原文 `012` の第 1・第 2 式） -/
 
@@ -317,5 +256,27 @@ theorem TV_psiDag_psi (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 
         = (gamma1 K (thetaMu M μ) + Complex.I * t) • psi K M μ t :=
   TV_psiDag_psi_of_action K hM μ t ht hg _
     (TV_hatZ_hatY hM K μ K1 K2star hs2 hc1 hs1 hc2star hs2star hdual)
+
+/-! ## 整数運動量版と半整数運動量版は同じ必要十分版の別の特殊化であること
+
+008 章の結論 `<T_V_hatZ_hatY>`（既存の `Ising2D.TV_hatZ_hatY`）も、
+本文の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」の結論 `TVPlus_checkZ_checkY`（`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`）と**まったく同じ必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化**として得られる。
+渡すものが `(hat(Z)^{(-)}_μ, hat(Y)_μ, B_1(θ_μ))` か
+`(check(Z)_μ, check(Y)_μ, B_1(θ~_μ))` かの違いしかない。 -/
+
+/-- **整数運動量版（008 章 `<T_V_hatZ_hatY>`）を同じ必要十分版から導いたもの**。
+既存の `Ising2D.TV_hatZ_hatY` と同じ主張である（`NecSuf.actsBy_TV_sandwich` 経由の別証明）。 -/
+theorem TV_hatZ_hatY_via_sandwich (hM : M ≠ 0) (K : IsingConst) (μ : ℤ) (K1 K2star : ℂ)
+    {s2 : ℝ} (hs2 : 0 < s2)
+    (hc1 : (K.c1 : ℂ) = Complex.cosh (2 * K1))
+    (hs1 : (K.s1 : ℂ) = Complex.sinh (2 * K1))
+    (hc2star : (K.c2star : ℂ) = Complex.cosh (2 * K2star))
+    (hs2star : (K.s2star : ℂ) = Complex.sinh (2 * K2star))
+    (hdual : (K.s2star : ℂ) * (K.c2 : ℂ) = (K.c2star : ℂ)) :
+    ActsBy (TV (V1pmHalfUnits M K1 1) (V2H2FormUnits M hs2 K2star)).toLinearMap
+      (hatZMinus M μ) (hatY M μ) (AMat K (thetaMu M μ)) := by
+  have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1pmHalf hM K1 μ)
+    (actsBy_TConj_V2H2Form hM hs2 K2star μ)
+  rwa [B1_mul_B2_mul_B1_eq_AMat K K1 K2star (thetaMu M μ) hc1 hs1 hc2star hs2star hdual] at h
 
 end Ising2D
