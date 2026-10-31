@@ -273,6 +273,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `Part018/Claim011_CheckFermiFromPart016.lean` | `Ising2D.checkFermiOf`（`CheckFermi` のインスタンス）と、その `hstar` を埋める橋渡し補題 `Ising2D.checkPsiDag_conjTranspose` |
 | `Part018/Claim012_VPlusDataFromPart017.lean` | `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）と、章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（添字型 `Fin M`）を噛み合わせる `Ising2D.finCheckIdxEquiv` / `checkFermiSetupOf_Vprime` |
 | `Part018/ClaimVPlusRealEntries.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」（`Ising2D.VPlus_hasRealEntries`）と、`vPlusDataOf` の `V^{(+)}` の実行列表示 `Ising2D.VPlusR`・`Ising2D.vPlusDataOf_V_eq_map`（`EvenSectorBridge` の欄 `Vr`・`hVr`） |
+| `Part018/ClaimWEqVPlusOnEvenSector.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する」。`P^{(+)}x = x`（`Ising2D.epsProjPlus_mulVec_of_even`）、複素ベクトル上の `Wx = V^{(+)}x`（`Ising2D.W_mulVec_eq_VPlus_mulVec_of_even`）、具体的な `W` と `VPlusR` についての実ベクトル版 `Ising2D.hWV_physical`（`EvenSectorBridge` の欄 `hWV`）。必要十分版は `NecSuf/EvenSectorAgreement.lean` の `Ising2D.NecSuf.invProj_smul_of_fixed`（加群・`2` の可逆性だけ）と `Ising2D.NecSuf.smul_eq_of_mul_proj_eq`（半群の作用だけ）で、具体版はその特殊化（`*_of_necSuf`） |
 | `Part018/Theorem013_OnsagerUnconditional.lean` | 残る仮定だけを束ねた `Ising2D.EvenSectorClosureInput` と、`Ising2D.onsager_exact_solution_unconditional` |
 
 ### 6.2 消えた仮定（何で埋めたか）
@@ -308,7 +309,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
-| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `symmetrized_transfer_matrix_on_sectors`、`V^{(+)}` の実行列表示は `vPlusDataOf_V_eq_map`（`ClaimVPlusRealEntries.lean`）で形式化済み。残るのは等式を実ベクトル上の `EvenSectorBridge.hWV` へ変換する接続と、`bridge` の構成である |
+| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `symmetrized_transfer_matrix_on_sectors`、`V^{(+)}` の実行列表示は `vPlusDataOf_V_eq_map`（`ClaimVPlusRealEntries.lean`）で形式化済み。実ベクトル上の `EvenSectorBridge.hWV` は具体的な `W` について `hWV_physical`（`ClaimWEqVPlusOnEvenSector.lean`）で形式化済み。残るのは `bridge` の構成である |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っている。具体的な `W`（`physicalSymTransferR`）については章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で `εW = Wε` を形式化済みだが、それを `bridge.W` へ渡すには上の `bridge` の接続が要る |
 

@@ -1466,6 +1466,13 @@ targets=(
   Ising2D.vPlusDataOf_gam
   Ising2D.VPlus_hasRealEntries
   Ising2D.vPlusDataOf_V_eq_map
+  Ising2D.epsProjPlus_mulVec_of_even
+  Ising2D.W_mulVec_eq_VPlus_mulVec_of_even
+  Ising2D.hWV_physical
+  Ising2D.epsProjPlus_mulVec_of_even_of_necSuf
+  Ising2D.W_mulVec_eq_VPlus_mulVec_of_even_of_necSuf
+  Ising2D.NecSuf.invProj_smul_of_fixed
+  Ising2D.NecSuf.smul_eq_of_mul_proj_eq
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input
