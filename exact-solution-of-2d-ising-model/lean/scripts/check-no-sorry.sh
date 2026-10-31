@@ -1526,6 +1526,20 @@ targets=(
   Ising2D.prod_openChainBondSpin_of_necSuf
   Ising2D.open_chain_partition_sum_of_necSuf
   Ising2D.open_chain_endpoint_product_sum_of_necSuf
+  Ising2D.trace_epsilon_VPlusOfTransfer
+  Ising2D.I_mul_smul_H1plus
+  Ising2D.commute_openChainD0_epsilon_mul_boundaryG
+  Ising2D.V1plus_eq_exp_openChainD0_mul_exp
+  Ising2D.pow_two_mul_of_sq_eq_one
+  Ising2D.pow_two_mul_add_one_of_sq_eq_one
+  Ising2D.matExp_hasSum
+  Ising2D.matExp_smul_of_sq_eq_one
+  Ising2D.exp_epsilon_mul_boundaryG
+  Ising2D.epsilon_mul_V1plus
+  Ising2D.NecSuf.pow_two_mul_of_sq_eq_one
+  Ising2D.NecSuf.pow_two_mul_add_one_of_sq_eq_one
+  Ising2D.NecSuf.exp_series_sum_of_sq_eq_one
+  Ising2D.matExp_smul_of_sq_eq_one_of_necSuf
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input

@@ -172,6 +172,16 @@
 | **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`** | **主張本体** |
 | `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
 
+#### `ClaimTraceEpsilonVPlusReduction.lean`（ラベル `trace_of_epsilon_V_plus` の Step 1・Step 2）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| **`Ising2D.trace_epsilon_VPlusOfTransfer`** | **`tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`** | **Step 1** |
+| `Ising2D.I_mul_smul_H1plus` / `commute_openChainD0_epsilon_mul_boundaryG` | `iK_1H_1^{(+)} = K_1D_0 + K_1εG`、`D_0` と `εG` は可換 | Step 2 |
+| `Ising2D.V1plus_eq_exp_openChainD0_mul_exp` | `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)` | Step 2（`theorem_exp_product`） |
+| `Ising2D.matExp_hasSum` / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
+| **`Ising2D.epsilon_mul_V1plus`** | **`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`** | **Step 2** |
+
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/ParityFermion.lean`、名前空間 `Ising2D.NecSuf`）
 
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
@@ -188,6 +198,7 @@
 | **`NecSuf.sum_powerset_signed_exp`** | **`∑_{T ⊆ s} (−1)^{|s|−|T|} exp(∑_{i∈s} g_i(1_{i∈T} − 1/2)) = ∏_{i∈s} 2 sinh(g_i/2)`** | **ℝ の `exp`/`sinh` だけ** | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 |
 | **`NecSuf.open_chain_weighted_sum`**（`NecSuf/OpenChainSpinSum.lean`） | **`∑_{s∈𝔐} ∏_{m=1}^{M_col-1} g(s(m)s(m+1)) = 2(g(1)+g(-1))^{M_col-1}`** | **重みの値は可換半環だけ（`M_col ≠ 0`）** | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` |
 | `NecSuf.prod_mul_nextSite_eq_first_mul_last`（同） | 中間のサイトで `x(m)x(m) = 1` なら `∏_{m=1}^{M_col-1} x(m)x(m+1) = x(1)x(M_col)` | 可換モノイド（`M_col ≥ 2`。両端の `x·x = 1` は不要） | `open_chain_endpoint_product_sum` の Step 2 |
+| **`NecSuf.exp_series_sum_of_sq_eq_one`**（`NecSuf/ExpOfInvolution.lean`） | **`A^2 = 1` で `∑_k (k!)^{-1}(tA)^k` の部分和の極限が `E` なら `E = cosh(t)·1 + sinh(t)·A`** | **`ℂ`-代数の半環、`ContinuousAdd`・`ContinuousSMul ℂ`・`T2`（ノルム・完備性・可換性・`t ∈ ℝ` は不要）** | `trace_of_epsilon_V_plus` Step 2 |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
@@ -206,6 +217,7 @@
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_smul_family` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
 | `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
+| `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |
 | `onsager_exact_solution`（Step 1・2・4） | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 011・018 の結果に接続するだけ |
 
 ### 必要十分版で判明した本質（本文には持ち込まない）
@@ -251,7 +263,7 @@
 
 | 人手証明（ブロック） | 状況 | 理由 |
 | --- | --- | --- |
-| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 依存先の `D_0,G` の定義・`H1_plus_in_sigma_z_form`・可換性と対角作用・二つのスピン和は形式化した（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`・`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`・`ClaimOpenChainSpinSums.lean` の表）。この定理本体の形式化は通しの証明の項目 4d で行う。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
+| `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 依存先の `D_0,G` の定義・`H1_plus_in_sigma_z_form`・可換性と対角作用・二つのスピン和は形式化した（「形式化した定理の一覧」の `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`・`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`・`ClaimOpenChainSpinSums.lean` の表）。この定理本体のうち Step 1・Step 2 は `ClaimTraceEpsilonVPlusReduction.lean` で形式化した。Step 3〜5 の形式化は通しの証明の項目 4d で行う。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
@@ -347,7 +359,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
 | `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`）。最終定理では `2 ≤ m` から従うが、`htr` の型が `vPlusDataOf P hM _` を含むので欄に置いている |
-| `htr` | `tr(εV^{(+)}) > 0` | 依存先の `closing_004`（`D_0, G` の可換性・対角作用）と `closing_005`（1 次元開鎖のスピン和）は形式化した。`closing_006`（`trace_of_epsilon_V_plus` 本体）だけが未形式化で、通しの証明の項目 4d で行う（上記 3 の表と同じ） |
+| `htr` | `tr(εV^{(+)}) > 0` | 依存先の `closing_004`（`D_0, G` の可換性・対角作用）と `closing_005`（1 次元開鎖のスピン和）は形式化した。`closing_006`（`trace_of_epsilon_V_plus` 本体）は Step 1・Step 2 まで形式化し、Step 3〜5 が未形式化で、通しの証明の項目 4d で行う（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | 具体的な `W`（`physicalSymTransferR`）の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | 未着手（runbook の項目 5）。`hWcomm` は章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）と同じ型。`hWpos` は具体的な `W` についての `W_has_positive_entries` の定理がまだ無い |
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は

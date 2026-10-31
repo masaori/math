@@ -36,7 +36,17 @@
     値は可換半環で足りるので、必要十分版 `NecSuf/OpenChainSpinSum.lean` を置き、具体版を `Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で系として導出した。
     4d で使う `D_0f_{ι(s)} = E(s)f_{ι(s)}` は `openChainD0_mulVec_basisVec_eq_energy`。二つの和は `ℝ` の `Real.exp` で書いてあるので、4d で `ℂ` へ移す。
   - 4d: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
-    証明し、`EvenSectorClosureInput` から `htr` を外す。
+    証明し、`EvenSectorClosureInput` から `htr` を外す。人手の Step の単位で次の三つに割った。
+    - Step 1・Step 2 の形式化（済み）: Step 1（`tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`）と Step 2（`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`）を
+      `Part018/ClaimTraceEpsilonVPlusReduction.lean` で形式化した（`trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`）。
+      `exp(K_1εG)` の偶奇分解は必要十分版 `NecSuf/ExpOfInvolution.lean` を置き、系の導出を
+      `Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` に置いた。
+    - 成分の読み取りの形式化: Step 3。(a) `exp(K_1D_0)` は配置基底で対角で `exp(K_1E(s))`（`openChainD0_mulVec_basisVec_eq_energy` と
+      `exp_of_diagonal_matrix`）、`G` は対角で `s(M_col)s(1)`、(b) `εf_{ι(s)} = f_{ι(-s)}`、(c) `(V_2)_{ι(s),ι(s')} = exp(K_2∑_m s(m)s'(m))`
+      とその二つの特別な場合。
+    - 二つのスピン和の代入と正値性の形式化: Step 4（トレースを二つのスピン和で書き、4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum` を代入して閉じた式にする）と
+      Step 5（正値性）。`K1 = P.K1`、`vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` で `vPlusDataOf` の `V^{(+)}` へ移し、
+      `EvenSectorClosureInput` から `htr` を外す。
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
   挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
   通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
@@ -46,7 +56,7 @@
 
 ## 次の一歩
 
-項目 4d：人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
-証明し、`EvenSectorClosureInput` から `htr` を外す。使う材料は 4a の `H1_plus_in_sigma_z_form`、4b の可換性・`(εG)^2 = I`・
-`openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`、4c の `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・正値性である。
-大きければ人手の Step の単位（`(V_1^{(+)})^{1/2}` の `D_0, εG` による分解、対角和への帰着、二つのスピン和の代入、正値性、`htr` の除去）に割り、先頭だけを行う。
+項目 4d のうち「成分の読み取りの形式化」：人手 `trace_of_epsilon_V_plus` の Step 3（成分の読み取り (a)(b)(c)）を具体版で形式化する。
+材料は 4b の `openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`、4c の `openChainD0_mulVec_basisVec_eq_energy`、
+`exp_of_diagonal_matrix` の具体版（`Part004/ClaimExpOfDiagonalMatrix.lean`）、`def_config_basis_iso`・`config_numbering_equals_kronecker_numbering`・
+`def_transfer_matrix` の形式化（`Part004/DefinitionConfigBasisIso.lean`・`Part001`）である。
