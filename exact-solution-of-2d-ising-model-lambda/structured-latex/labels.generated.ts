@@ -986,7 +986,6 @@ export const ALL_LABELS = [
   "def_twist_parity",
   "def_twisted_fourier_matrix",
   "def_unit_interval_rationals",
-  "def_unswitchable_standard_pair_subset",
   "def_vertex_axis_straight_visit_count",
   "def_vertexwise_crossing_number",
   "def_vertical_edge_traversal_count",

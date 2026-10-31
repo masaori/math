@@ -77552,57 +77552,6 @@ M^{a,b}_{\vec e,\psi(\vec e)}M^{a,b}_{\vec f,\psi(\vec f)}
       role: "subsection",
       element: {
         kind: "section",
-        id: "kac_ward_direct_comparison_heading_group_switchability",
-        labels: [],
-        title: { text: "接触対の切り替え可能性" },
-        children: [
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_doubled_edge_fiber_phase_reduction",
-              labels: [],
-              title: { text: "標準対が切り替え不能な置換の集合" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_definition_unswitchable_standard_pair_subset",
-                  beforeFocus: [],
-                  focus: {
-                      id: "kac_ward_definition_unswitchable_standard_pair_subset",
-                      kind: "definition",
-                      title: { text: "標準対が切り替え不能な置換の集合" },
-                      labels: ["def_unswitchable_standard_pair_subset"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          "有限集合 ", math(String.raw`\mathcal R_L`), " を",
-                        ]),
-                        displayMath(String.raw`\mathcal R_L:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\
-N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
-                        paragraph([
-                          "と定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
-                          "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
-                          "、", math(String.raw`\mathcal A_L`), " は ",
-                          ref("claim_standard_contact_smoothing_involution"),
-                          " で定めた。すなわち ", math(String.raw`\mathcal R_L`),
-                          " は、接触対を持つが標準接触対（", ref("def_standard_contact_pair"),
-                          "）が切り替え可能でない置換の全体である。所属は有限集合の元の比較で判定でき、実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                  },
-                },
-              }],
-            },
-          },
-        ],
-      },
-    },
-    {
-      role: "subsection",
-      element: {
-        kind: "section",
         id: "kac_ward_direct_comparison_heading_group_signed_counts",
         labels: [],
         title: { text: "位相和の符号付き数え上げ" },

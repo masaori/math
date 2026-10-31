@@ -7,6 +7,27 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_unswitchable_standard_pair_subset_archived",
+    targets: ["def_nonbacktracking_permutations"],
+    title: { text: "不採用経路: 標準対が切り替え不能な置換の集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、標準接触対の切り替え可能性による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph(["有限集合 ", math(String.raw`\mathcal R_L`), " を"]),
+      displayMath(String.raw`\mathcal R_L:=\bigl\{\,\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)\ \bigm|\
+N_{\mathrm{ct}}(\varphi)\ge1,\ \varphi\notin\mathcal A_L\,\bigr\}`),
+      paragraph([
+        "と定める。非後退置換の集合は ", ref("def_nonbacktracking_permutations"),
+        "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
+        "、", math(String.raw`\mathcal A_L`), " は ",
+        ref("claim_standard_contact_smoothing_involution"),
+        " で定めた。すなわち ", math(String.raw`\mathcal R_L`),
+        " は、接触対を持つが標準接触対（", ref("def_standard_contact_pair"),
+        "）が切り替え可能でない置換の全体である。所属は有限集合の元の比較で判定でき、実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_permutation_path_reversal_archived",
     targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 置換の経路反転" },
@@ -234,7 +255,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         "が成り立つ。ファイバーは ", ref("def_nonbacktracking_permutation_fiber"),
                         "、標準対が切り替え不能な置換の集合 ", math(String.raw`\mathcal R_L`), " は ",
-                        ref("def_unswitchable_standard_pair_subset"),
+                        "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
                         "、位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         " で定めた。元の主張の右辺は二つの有限集合の元の個数の差なので整数であり、実数体も複素数体も現れない。",
                       ]),
@@ -440,7 +461,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`N_{\mathrm{ct}}(\varphi)=0`), " でなければ ",
                         math(String.raw`\varphi\in\mathcal A_L`), " と ",
                         math(String.raw`\varphi\in\mathcal R_L`),
-                        "（", ref("def_unswitchable_standard_pair_subset"), "）のちょうど一方が成り立つ。さらに ",
+                        "（", "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」", "）のちょうど一方が成り立つ。さらに ",
                         "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義", " により ",
                         math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`), "、",
                         math(String.raw`\mathcal A_L^{(-4)}`), "、", math(String.raw`\mathcal A_L^{(4)}`),
@@ -1490,7 +1511,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_doubled_edge_fiber_phase_reduction_archived",
-    targets: ["def_unswitchable_standard_pair_subset"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "不採用経路: 反転対を持つファイバーの位相寄与の簡約" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の位相寄与による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -1522,7 +1543,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "、置換一つの位相寄与は ", ref("def_nonbacktracking_permutation_phase_contribution"),
                         "、接触対の個数は ", ref("def_permutation_contact_pair_count"),
                         "、回転差が正負四である二集合は ", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
-                        "、標準対が切り替え不能な置換の集合は ", ref("def_unswitchable_standard_pair_subset"),
+                        "、標準対が切り替え不能な置換の集合は ", "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
                         " で定めた。元の主張は有限集合上の有限和だけを用い、実数体も複素数体も現れない。",
                       ]),
       paragraph(["元の証明:"]),
@@ -1539,7 +1560,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         math(String.raw`N_{\mathrm{ct}}(\varphi)\ge1`), " であり、",
                         math(String.raw`\varphi\in\mathcal A_L`), " と ",
                         math(String.raw`\varphi\in\mathcal R_L`),
-                        "（", ref("def_unswitchable_standard_pair_subset"),
+                        "（", "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」",
                         "）のちょうど一方が成り立つ。", "参照用ノート「不採用経路: 標準対平滑化の非位相反転部分集合への制限」の定義",
                         " により ", math(String.raw`\mathcal A_L`), " は ", math(String.raw`\mathcal B_L`),
                         " と ", math(String.raw`\mathcal A_L^{(-4)}`), " と ",
@@ -2105,7 +2126,7 @@ s\,\zeta_8^{\Theta(\varphi)}
 \text{任意の }\{\vec e,\vec f\}\in\operatorname{Ct}(\varphi)\text{ は切り替え可能でない}\,\bigr\}`),
                         paragraph([
                           "と定める。残余の集合 ", math(String.raw`\mathcal R_L`), " は ",
-                          ref("def_unswitchable_standard_pair_subset"), "、接触対の集合は ",
+                          "参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」", "、接触対の集合は ",
                           ref("def_standard_contact_pair"), "、切り替え可能性は ",
                           ref("def_switchable_permutation_contact_pair"), " で定めた。所属は有限集合上の全称命題として判定でき、",
                           "実数体も複素数体も現れない。",
@@ -3741,7 +3762,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_doubled_edge_fiber_phase_reduction_unlocked_residual_noncancellation",
-    targets: ["def_unswitchable_standard_pair_subset"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "切り替え可能接触を持つ残余は符号反転対合で相殺できない" },
     body: [
       paragraph([
@@ -3847,7 +3868,7 @@ c_{\oplus}(\omega,k)
   },
   {
     id: "note_kac_ward_claim_path_reversal_contact_pair_preservation_standard_classification_counterexample",
-    targets: ["def_unswitchable_standard_pair_subset"],
+    targets: ["def_nonbacktracking_permutations"],
     title: { text: "標準接触対に依存する分類は経路反転で保たれない" },
     body: [
       paragraph([

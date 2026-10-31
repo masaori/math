@@ -1,7 +1,7 @@
 """経路反転が標準接触対に依存する分類を保たないことを厳密検査する。
 
 対象: claim_path_reversal_contact_pair_preservation と
-def_standard_turning_difference_subsets、def_unswitchable_standard_pair_subset。
+def_standard_turning_difference_subsets、参照用ノート「不採用経路: 標準対が切り替え不能な置換の集合」。
 
 一辺 L=2 の全非後退置換について、接触の無い部分、位相反転部分 B_L、
 回転差 -4, 4 の部分、残余 R_L の間で経路反転が作る遷移を数える。
@@ -9,7 +9,7 @@ def_standard_turning_difference_subsets、def_unswitchable_standard_pair_subset�
 実際に移る置換があることを有限集合と整数の等号だけで確認する。
 """
 
-load("sagemath/check/path-reversal-contact-pair-preservation/check.sage")
+load("sagemath/archive/path-reversal-contact-pair-preservation/check.sage")
 
 
 def standard_pair_delta(phi):
