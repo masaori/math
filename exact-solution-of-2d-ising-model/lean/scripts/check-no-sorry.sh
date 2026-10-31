@@ -1585,6 +1585,9 @@ targets=(
   Ising2D.W_has_positive_entries_physical_of_necSuf
   Ising2D.rayleighSup_sandwich_LambdaM_physical
   Ising2D.onsager_exact_solution_unconditional
+  Ising2D.onsager_limit_in_N_row_physical
+  Ising2D.gammaFn_eq_arcosh_Kstar
+  Ising2D.onsager_exact_solution_end_to_end
   # --- 020 章（比熱の対数発散：章の到達点）---
   Ising2D.gammaFn_isoParam_eq_gammaK
   Ising2D.integral_gammaFn_isoParam

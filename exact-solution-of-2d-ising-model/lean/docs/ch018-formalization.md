@@ -351,7 +351,8 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `Part018/ClaimVPlusRealEntries.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」（`Ising2D.VPlus_hasRealEntries`）と、`vPlusDataOf` の `V^{(+)}` の実行列表示 `Ising2D.VPlusR`・`Ising2D.vPlusDataOf_V_eq_map`（`EvenSectorBridge` の欄 `Vr`・`hVr`） |
 | `Part018/ClaimWEqVPlusOnEvenSector.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する」。`P^{(+)}x = x`（`Ising2D.epsProjPlus_mulVec_of_even`）、複素ベクトル上の `Wx = V^{(+)}x`（`Ising2D.W_mulVec_eq_VPlus_mulVec_of_even`）、具体的な `W` と `VPlusR` についての実ベクトル版 `Ising2D.hWV_physical`（`EvenSectorBridge` の欄 `hWV`）。必要十分版は `NecSuf/EvenSectorAgreement.lean` の `Ising2D.NecSuf.invProj_smul_of_fixed`（加群・`2` の可逆性だけ）と `Ising2D.NecSuf.smul_eq_of_mul_proj_eq`（半群の作用だけ）で、具体版はその特殊化（`*_of_necSuf`） |
 | `Part018/PhysicalEvenSectorBridge.lean` | 具体的な `W = physicalSymTransferR M K_1 K_2` と `vPlusDataOf` の `V^{(+)}` についての `Ising2D.EvenSectorBridge`（`Ising2D.physicalEvenSectorBridge`）。欄 `hWsymm`・`hWpsd` は章 011 `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`（`x = 0` を足した `Ising2D.physicalSymTransferR_nonneg`）、`Vr`・`hVr` は Step 2、`hWV` は Step 0 |
-| `Part018/Theorem013_OnsagerUnconditional.lean` | 仮定を取らない挟み撃ち `Ising2D.rayleighSup_sandwich_LambdaM_physical` と、`Ising2D.onsager_exact_solution_unconditional`（入力は結合定数の組だけ） |
+| `Part018/Theorem013_OnsagerUnconditional.lean` | 仮定を取らない挟み撃ち `Ising2D.rayleighSup_sandwich_LambdaM_physical`、Step 1 `Ising2D.onsager_limit_in_N_row_physical`（`c(M) > 0` は人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から `rayleighSup_pos` で出す）と、`Ising2D.onsager_exact_solution_unconditional`（入力は結合定数の組だけ） |
+| `Part018/TheoremOnsagerExactSolutionEndToEnd.lean` | 通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`scripts/check-end-to-end.sh` が固定する型。入力は `K_1, K_2` とその正値性だけ）と、被積分関数を `gammaFn` を経ずに書いた `Ising2D.gammaFn_eq_arcosh_Kstar` |
 
 ### 6.2 消えた仮定（何で埋めたか）
 
@@ -406,6 +407,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 $ cd exact-solution-of-2d-ising-model/lean
 $ export PATH="$HOME/.elan/bin:$PATH" && lake build   # Build completed successfully
 $ ./scripts/check-no-sorry.sh                          # exit 0
+$ ./scripts/check-end-to-end.sh                        # OK（sorryAx に依存しない）
 ```
 
 `scripts/check-no-sorry.sh` の `targets` 配列の末尾に、本接続で追加した 28 個の

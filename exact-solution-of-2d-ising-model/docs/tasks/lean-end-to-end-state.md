@@ -50,19 +50,21 @@
   `ι` の全射性で全成分へ広げた `physicalSymTransferR_pos`）。Step 3 の必要十分版 `NecSuf/SandwichByDiagonal.lean`（添字は有限、係数は結合律・可換律を仮定しない半環）を置き、具体版をその特殊化として `Part011/ClaimPhysicalWHasPositiveEntriesFromNecSuf.lean` で導出した。
   欄が無くなったので `EvenSectorClosureInput` を消し、挟み撃ちを `rayleighSup_sandwich_LambdaM_physical` に改名した。
   **最終定理 `onsager_exact_solution_unconditional` の入力は結合定数の組 `P : IsingParam` だけである。**
-- `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理 `onsager_exact_solution_end_to_end` が無い」で落ちる。
-- 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
-  挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
-  通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
-  人手と 1 対 1 にする。
+- 項目 6 は済んでいる。通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`Part018/TheoremOnsagerExactSolutionEndToEnd.lean`）は
+  `check-end-to-end.sh` が固定する型をそのまま持ち、`onsager_exact_solution_unconditional ⟨K1, K2, hK1, hK2⟩` から
+  `f M := (1/M) log c(M)` として得る。閉形式の被積分関数は `gammaFn_eq_arcosh_Kstar`（`gammaFn_eq` と `IsingParam.K2star := Kstar K2`）で書き直した。
+  `c(M) > 0` は人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から出すよう、Step 1 を
+  `onsager_limit_in_N_row_physical`（`Part018/Theorem013_OnsagerUnconditional.lean`。`rayleighSup_pos` と
+  `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`）にし、`onsager_exact_solution_unconditional` の第 1 成分をそれで与えた。
+  `onsager_limit_in_M` は人手 `onsager_exact_solution` の Step 3（挟み撃ち）と同じく `Λ ≤ c(M)` から正値性を出す。必要十分版は置かない（新しい計算を含まない）。
+- `lake build`、`check-no-sorry.sh`、`check-end-to-end.sh` はすべて通る（通しの定理は `sorryAx` に依存しない）。
 - Part020 に人手の定義と別表示の `KStar`（`arsinh(1/sinh 2K)/2`）が残っている。`Kstar_eq_KStar` で
   人手の `Kstar` へ接続したが、二重定義の解消は項目 7 の章ごとの移動のときに行う。
 
 ## 次の一歩
 
-項目 6：通しの定理 `Ising2D.onsager_exact_solution_end_to_end`（`check-end-to-end.sh` が固定する型。入力は `K1 K2 : ℝ`、`0 < K1`、`0 < K2`）を立てる。
-`P : IsingParam` を `K1 K2` と正値性から作り、`onsager_exact_solution_unconditional P` を使う。`f M := 1/M · log c(M)` とし、
-閉形式の被積分関数 `gammaFn P θ` をスクリプトの `Real.arcosh (cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ)`（`K_2^* = Kstar K2`）へ書き直す
-（`gammaFn` の定義と `IsingParam.K2star := Kstar K2` から）。上の「項目 6 で直すこと」（`c(M) > 0` を `rayleighSup_pos` から出す）も同じ回で行う。
-`check-no-sorry.sh` の `targets` に通しの定理を足し、`check-end-to-end.sh` を通し、`docs/ゴール台帳.md` を更新する。
-大きければ「`gammaFn` の書き直し」「`c(M) > 0` の出し方の修正」「通しの定理」に割り、先頭だけを行う。
+項目 7：フォルダを章立てに合わせて組み直す。章の割り当ては `docs/organization/flat-inventory.json` の各項目の `chapterKey`（章の一覧は `parts[].chapters[]`）に
+すでにある（2026-10-31 時点で 170 項が章に割り当て済み、9 項が未割り当て）。最初の章は部「分配関数」の「転送行列による表示」とする。
+その章の項目のラベルを形式化している Lean ファイル（冒頭の `正本:` と人手ラベルのコメントで引く）を、章の名前を英語で表した番号の無いフォルダへ移し、
+`Ising2D.lean` の import、`check-no-sorry.sh`、`lean/README.md`・`lean/docs/` の対応表、ファイル冒頭の `正本:` のパスを同じ回で直す。名前空間は変えない。
+数学的道具立ての部の項目（`chapterKey` が無い）と、章に割り当てられていない項目を形式化したファイルの置き場は、最初の章を移すときに決めて runbook の項目 7 に書き足す。

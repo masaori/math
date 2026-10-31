@@ -42,6 +42,8 @@
 `rayleighSup (physicalSymTransferR M K_1 K_2)`（人手 `def_rayleigh_sup`）である。
 `N_row ≥ 1` での挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}` は、章 011 の
 `Ising2D.partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
+Step 1 で `log c(M)` を定めるための `c(M) > 0` は、人手 `limit_of_log_Z_in_N_row` と同じく `def_rayleigh_sup` から
+（`W` の正定値性と `rayleighSup_pos` で）出す（`onsager_limit_in_N_row_physical`）。挟み撃ち `Λ ≤ c(M)` からは出さない。
 `c_+(M)` を経る挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M` も、同じ具体的な `W` についての橋渡し
 `Ising2D.physicalEvenSectorBridge` から得る。
 -/
@@ -88,6 +90,26 @@ theorem rayleighSup_sandwich_LambdaM_physical (P : IsingParam) (hM2 : 2 ≤ M) :
   (physicalEvenSectorBridge P hM2 hM).rayleighSup_sandwich_LambdaM P (trace_epsilon_vPlusDataOf_pos P hM2 hM)
     (physicalSymTransferR_pos P.K1 P.K2) (epsilon_commutes_with_W P.K1 P.K2_pos) rfl (sum_checkGam P M)
 
+/-! ## Step 1: `N_row → ∞` の極限（`c(M) > 0` は `def_rayleigh_sup` から） -/
+
+/-- **人手 `limit_of_log_Z_in_N_row` を具体的な `Z` と `c(M)` に適用したもの**（人手 `onsager_exact_solution` の Step 1）:
+
+  `lim_{N_row→∞} (1/(M N_row)) log Z(K_1,K_2) = (1/M) log c(M)`
+
+人手 `limit_of_log_Z_in_N_row` の証明冒頭の「`def_rayleigh_sup` より `c > 0`」は、
+`W = physicalSymTransferR M K_1 K_2` が実対称（`physicalSymTransferR_isSymm`）かつ正定値
+（`physicalSymTransferR_posDef`）であることから `rayleighSup_pos` で出す。
+挟み込み `c^{N_row} ≤ Z ≤ 2^M c^{N_row}` は `partition_function_sandwich_physical`
+（人手 `partition_function_sandwich`）が与える。 -/
+theorem onsager_limit_in_N_row_physical (P : IsingParam) {m : ℕ} (hm : 2 ≤ m) :
+    Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (partitionFunction N m P.K1 P.K2))
+      atTop (𝓝 (1 / (m : ℝ) * Real.log (rayleighSup (physicalSymTransferR m P.K1 P.K2)))) :=
+  limit_of_log_Z_in_N_row hm
+    (rayleighSup_pos (physicalSymTransferR_isSymm P.K1 P.K2_pos)
+      (physicalSymTransferR_posDef P.K1 P.K2_pos))
+    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).1)
+    (fun _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).2)
+
 /-! ## Onsager の厳密解 -/
 
 /-- **`Ising2D.onsager_exact_solution` から章 014–017 由来の仮定を落とし、分配関数を具体的なものにした版**。
@@ -105,10 +127,8 @@ theorem onsager_exact_solution_unconditional (P : IsingParam) :
           atTop
           (𝓝 (1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))
             + 1 / (4 * Real.pi) * ∫ θ in (0 : ℝ)..(2 * Real.pi), gammaFn P θ)) :=
-  onsager_exact_solution P (Z := fun m N => partitionFunction N m P.K1 P.K2)
-    (cM := fun m => rayleighSup (physicalSymTransferR m P.K1 P.K2))
-    (fun m hm => rayleighSup_sandwich_LambdaM_physical P hm)
-    (fun m _ _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).1)
-    (fun m _ _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).2)
+  ⟨fun _ hm => onsager_limit_in_N_row_physical P hm,
+    onsager_limit_in_M P (cM := fun m => rayleighSup (physicalSymTransferR m P.K1 P.K2))
+      (fun _ hm => rayleighSup_sandwich_LambdaM_physical P hm)⟩
 
 end Ising2D
