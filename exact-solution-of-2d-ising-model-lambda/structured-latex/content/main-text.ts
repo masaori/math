@@ -85057,20 +85057,31 @@ P_{n+1}\cdot a+Q_{n+1}\cdot b^{(n+1)+1}
                       proof: [
                         paragraph([
                           math(String.raw`u_{w,w'}:=\widehat{(w'-w)^{-1}}`), "、", math(String.raw`a:=t-\widehat{w}`),
-                          "、", math(String.raw`b:=t-\widehat{w'}`), " と置くと、", ref("claim_qbar_distinct_linear_factors_bezout"),
-                          " により", math(String.raw`u_{w,w'}\cdot a+(-u_{w,w'})\cdot b=u_{w,w'}\cdot a-u_{w,w'}\cdot b=1`),
-                          "（体の分配則で符号を移しただけであり、", ref("claim_qbar_distinct_linear_factors_bezout"),
-                          " が与える等式そのものである）。",
+                          "、", math(String.raw`b:=t-\widehat{w'}`), " と置く。すると",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+u_{w,w'}\cdot a+(-u_{w,w'})\cdot b
+&=u_{w,w'}\cdot a-u_{w,w'}\cdot b
+&&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の分配則と加法逆元}\bigr)\\
+&=1
+&&\bigl(\because\ \blkref{claim_qbar_distinct_linear_factors_bezout}\bigr).
+\end{aligned}`),
                         paragraph([
                           "この等式に ", ref("claim_qbar_bezout_power_propagation"), " を ", math(String.raw`n:=m`),
                           " で適用すると、ある ", math(String.raw`P_{1},Q_{1}\in\overline{\mathbb{Q}}[t]`), " が存在して",
                         ]),
-                        displayMath(String.raw`P_{1}\cdot a+Q_{1}\cdot b^{m+1}=1`),
+                        displayMath(String.raw`P_{1}\cdot a+Q_{1}\cdot b^{m+1}=1
+\qquad\bigl(\because\ \blkref{claim_qbar_bezout_power_propagation}\text{ を }n:=m\text{ で適用}\bigr)`),
                         paragraph([
                           "が成り立つ。この等式は ", math(String.raw`\overline{\mathbb{Q}}[t]`), " の加法の可換則により",
                         ]),
-                        displayMath(String.raw`Q_{1}\cdot b^{m+1}+P_{1}\cdot a=1`),
+                        displayMath(String.raw`\begin{aligned}
+Q_{1}\cdot b^{m+1}+P_{1}\cdot a
+&=P_{1}\cdot a+Q_{1}\cdot b^{m+1}
+&&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の加法の可換則}\bigr)\\
+&=1
+&&\bigl(\because\ \text{直前の等式}\bigr).
+\end{aligned}`),
                         paragraph([
                           "とも書ける。これは、", math(String.raw`a':=b^{m+1}`), "、", math(String.raw`b':=a`), "、",
                           math(String.raw`p':=Q_{1}`), "、", math(String.raw`q':=P_{1}`), " と置いたときの",
@@ -85078,10 +85089,20 @@ P_{n+1}\cdot a+Q_{n+1}\cdot b^{(n+1)+1}
                           ref("claim_qbar_bezout_power_propagation"), " を ", math(String.raw`n:=k`), " で適用できる。",
                           "ある ", math(String.raw`P_{2},Q_{2}\in\overline{\mathbb{Q}}[t]`), " が存在して",
                         ]),
-                        displayMath(String.raw`P_{2}\cdot b^{m+1}+Q_{2}\cdot a^{k+1}=1`),
+                        displayMath(String.raw`P_{2}\cdot b^{m+1}+Q_{2}\cdot a^{k+1}=1
+\qquad\bigl(\because\ \blkref{claim_qbar_bezout_power_propagation}\text{ を }n:=k\text{ で適用}\bigr)`),
                         paragraph([
-                          "が成り立つ。加法の可換則で ", math(String.raw`Q_{2}\cdot a^{k+1}+P_{2}\cdot b^{m+1}=1`),
-                          " と書き直し、", math(String.raw`P:=Q_{2}`), "、", math(String.raw`Q:=P_{2}`), " と置けば主張の等式を得る。",
+                          "が成り立つ。加法の可換則で",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+Q_{2}\cdot a^{k+1}+P_{2}\cdot b^{m+1}
+&=P_{2}\cdot b^{m+1}+Q_{2}\cdot a^{k+1}
+&&\bigl(\because\ \overline{\mathbb Q}[t]\text{ の加法の可換則}\bigr)\\
+&=1
+&&\bigl(\because\ \text{直前の等式}\bigr).
+\end{aligned}`),
+                        paragraph([
+                          math(String.raw`P:=Q_{2}`), "、", math(String.raw`Q:=P_{2}`), " と置けば主張の等式を得る。",
                           "この議論に現れるのは代数的数の四則と ", ref("claim_qbar_bezout_power_propagation"), " の二度の適用だけであり、",
                           "実数体も複素数体も現れない。",
                         ]),
