@@ -117,4 +117,8 @@ theorem configBasisIso_eq_iff {M : ℕ} (μ μ' : SpinConf M) :
 （クロネッカー積の成分の定義から、これがちょうど `e_{i_1} ⊠ ⋯ ⊠ e_{i_M}` にあたる）。 -/
 noncomputable def basisVec {M : ℕ} (I : Conf M) : Conf M → ℂ := Pi.single I 1
 
+/-- 行の配置の数（行列の行数）は `2^{M_col}`。 -/
+theorem card_conf (M : ℕ) : (Fintype.card (Conf M) : ℝ) = 2 ^ M := by
+  simp [Conf]
+
 end Ising2D

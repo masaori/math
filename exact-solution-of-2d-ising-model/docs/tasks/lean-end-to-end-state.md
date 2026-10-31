@@ -4,32 +4,26 @@
 
 ## 現在地
 
-- 2026-10-31: runbook の「作業の順序」の 1 を終えた。`IsingParam` から独立な欄 `K2star` を外して
-  `IsingParam.K2star := Kstar K2`（人手 `def_second_dual_coupling_constant`）とし、人手
-  `duality_c2_star_eq_s2_star_c2` を `Part008/ClaimDualityC2StarEqS2StarC2.lean` で具体版として形式化した。
-  双対関係は定理 `IsingParam.c2_mul_s2star_eq_c2star` になり、`EvenSectorClosureInput` から `hdual` を外した。
-  `lake build`（3027 ジョブ）と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
+- runbook の「作業の順序」の 1 は済んでいる。`IsingParam.K2star := Kstar K2` で、双対関係は定理
+  `IsingParam.c2_mul_s2star_eq_c2star` になり、最終定理の仮定に `hdual` は無い。
+- 項目 2 のうち、具体的な `Z` についての挟み撃ちまでは済んでいる。人手 `partition_function_via_transfer_matrix` は
+  `Part001/ClaimPartitionFunctionViaTransferMatrix.lean`、人手 `partition_function_sandwich` を具体的な
+  `partitionFunction` と `c(M) := rayleighSup (physicalSymTransferR M K1 K2)` について述べた
+  `partition_function_sandwich_physical`（`1 ≤ Nrow`、`0 < K2`）は `Part011/PhysicalPartitionFunctionSandwich.lean` にある。
+- `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
 - 最終定理 `Ising2D.onsager_exact_solution_unconditional` に残る仮定:
-  - `Z` が具体的な分配関数でなく、挟み撃ちを満たす任意の関数（`hZ1`, `hZ2`）
+  - `Z` が具体的な分配関数でなく、挟み撃ちを満たす任意の関数（`hZ1`, `hZ2`）。しかも全ての `N`（`N = 0` を含む）で要求する
   - `W` と `V^{(+)}` の橋渡し `bridge`
   - `tr(εV^{(+)}) > 0`（`htr`）
   - `W` の成分の正値性 `hWpos` と `ε` との可換性 `hWcomm`（具体的な `W` では形式化済みだが未接続）
 - Part020 に人手の定義と別表示の `KStar`（`arsinh(1/sinh 2K)/2`）が残っている。`Kstar_eq_KStar` で
   人手の `Kstar` へ接続したが、二重定義の解消は項目 7 の章ごとの移動のときに行う。
 
-## 項目 2 の割り直し
-
-調べた結果、人手 `partition_function_via_transfer_matrix`（001 章、`Z = tr((V_1V_2)^{N_row})`）が Lean に無い。
-`partition_function_sandwich`（`Part011/Claim009_PartitionFunctionSandwich.lean`）はこれを仮定 `hZ` で受け取り、
-`N ≥ 1` を要求する。次の順に割る。
-
-1. 人手 `partition_function_via_transfer_matrix` を具体版で形式化する（`partitionFunction N M K1 K2` と
-   `Part001` の `V1`, `V2` の積の冪のトレース）。
-2. 実行列 `physicalV1halfR`, `physicalV2R`（`PhysicalSymTransferBridge.lean`）について
-   `partition_function_sandwich` の前提（`B*B = V_1`、対称、可逆、`V_2` の正定値）を示し、`N ≥ 1` の挟み撃ちを
-   具体的な `Z` と `c(M) := rayleighSup physicalSymTransferR` について得る。`N = 0` は `Z = 1` で別に示す。
-3. 最終定理の `Z` と `hZ1`, `hZ2` を、上の具体的なものに置き換える（`hcM` の `W` は項目 3 の接続で具体的な `W` にする）。
-
 ## 次の一歩
 
-項目 2 の割り直しの 1：人手 `partition_function_via_transfer_matrix` を具体版で形式化する。
+項目 2 の残り：最終定理の `Z` と `hZ1`, `hZ2` を、具体的な `partitionFunction N m K1 K2` と
+`partition_function_sandwich_physical` に置き換える。`onsager_exact_solution`（`Part018/Theorem010_OnsagerExactSolution.lean`）は
+`hZ1`, `hZ2` を全ての `N` で要求するが、人手は `N_row ≥ 1` である。`limit_of_log_Z_in_N_row` が `N ≥ 1` だけで足りるかを
+読み、足りるならそちらの仮定を `1 ≤ N` に弱めて人手に合わせる（`N = 0` の主張を人手に無いまま足さない）。
+`hcM` の `W` は項目 3 の接続で具体的な `W` にするので、この段では `cM m := rayleighSup (physicalSymTransferR m K1 K2)` と置いて
+`bridge.W` との一致を仮定に残してよい。

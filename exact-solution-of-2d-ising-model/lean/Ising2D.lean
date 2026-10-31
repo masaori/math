@@ -113,6 +113,7 @@ import Ising2D.Part011.Claim008_TracePowerSandwich
 import Ising2D.Part011.Definition001_SymmetrizedTransferMatrix
 import Ising2D.Part011.PhysicalSymTransferBridge
 import Ising2D.Part011.Claim009_PartitionFunctionSandwich
+import Ising2D.Part011.PhysicalPartitionFunctionSandwich
 import Ising2D.Part011.Claim010_SectorDecomposition
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 import Ising2D.Part011.DefinitionSectorRayleighSup

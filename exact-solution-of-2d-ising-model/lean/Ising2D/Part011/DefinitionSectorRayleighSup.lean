@@ -89,9 +89,7 @@ theorem epsilonR_mulVec_evenUnit : epsilonR M *ᵥ evenUnit M = evenUnit M := by
 theorem vecNormSq_evenUnit : vecNormSq (evenUnit M) = 1 := by
   rw [vecNormSq_eq_sum]
   simp only [evenUnit, Finset.sum_const, Finset.card_univ, nsmul_eq_mul]
-  have hcard : (Fintype.card (Conf M) : ℝ) = 2 ^ M := by
-    simp [Conf]
-  rw [hcard, ← pow_mul, mul_comm M 2, pow_mul, inv_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2),
+  rw [card_conf, ← pow_mul, mul_comm M 2, pow_mul, inv_pow, Real.sq_sqrt (by norm_num : (0 : ℝ) ≤ 2),
     inv_pow, mul_inv_cancel₀ (pow_ne_zero _ (by norm_num))]
 
 /-- **人手 `def_sector_rayleigh_sup` の「`𝓡_+ ≠ ∅`」**: `(x^{(+)})ᵀWx^{(+)} ∈ 𝓡_+`。 -/

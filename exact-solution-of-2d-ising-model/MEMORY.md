@@ -2,6 +2,8 @@
 
 2026-10-31: 章立ての組み直しの二番目の項目として、本文の章題・ブロック題 16 件から未定義の物理用語（偶セクター・半整数運動量・フェルミオン）を除き、対象を式で表す題にした。中身・ラベルは不変。次は章の割り当てを棚卸しの生成器に入れる。
 
+2026-10-31: Lean の通しの証明の項目 2 のうち、具体的な分配関数についての挟み撃ちを `lean/Ising2D/Part011/PhysicalPartitionFunctionSandwich.lean` の `partition_function_sandwich_physical` で立てた（`V_1^{1/2}`・`V_2` の実対称性・可逆性・正定値性を人手 `W_is_real_symmetric_positive_definite` の経路で証明）。人手 `partition_function_via_transfer_matrix` は既に `Part001` で形式化済みだった。次は最終定理の `Z` を具体的な `partitionFunction` に置き換える（状態台帳の「次の一歩」）。
+
 2026-10-31: Lean の通しの証明の項目 1 を終えた。`IsingParam.K2star := Kstar K2` とし、人手 `duality_c2_star_eq_s2_star_c2` を `lean/Ising2D/Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して、最終定理の入力 `EvenSectorClosureInput` から双対関係の仮定 `hdual` を外した。次は人手 `partition_function_via_transfer_matrix` の形式化（状態台帳 [docs/tasks/lean-end-to-end-state.md](docs/tasks/lean-end-to-end-state.md)）。
 
 2026-10-31: 代表の指示で、冒頭の章立ての章の最初に「この論文のゴール」を置いた。ゴールは自由エネルギーの閉形式を解析して臨界点を厳密に得ることで、分配関数による自由エネルギーの表示・熱力学極限での閉形式・閉形式からの臨界点の計算はそのための手順（代表の指示）。

@@ -741,6 +741,21 @@ targets=(
   Ising2D.matExp_isSymm
   Ising2D.matExp_posDef
   Ising2D.partition_function_sandwich
+  Ising2D.physicalV1halfC_mul_self
+  Ising2D.physicalV1halfR_mul_self_map
+  Ising2D.sigmaZ_mul_sigmaZ_transpose
+  Ising2D.halfK1D_transpose
+  Ising2D.physicalV1halfC_transpose
+  Ising2D.physicalV1halfC_isUnit
+  Ising2D.physicalV1halfR_isSymm
+  Ising2D.physicalV1halfR_isUnit
+  Ising2D.card_conf
+  Ising2D.partitionFunction_eq_trace_real
+  Ising2D.V2_posDef
+  Ising2D.V2_transpose
+  Ising2D.physicalV2R_isSymm
+  Ising2D.physicalV2R_posDef
+  Ising2D.partition_function_sandwich_physical
   Ising2D.sectorSet
   Ising2D.sectorRayleighSup
   Ising2D.sector_invariant
