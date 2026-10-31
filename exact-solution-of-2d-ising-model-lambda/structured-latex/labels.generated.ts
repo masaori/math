@@ -341,7 +341,6 @@ export const ALL_LABELS = [
   "claim_periodic_plane_lift_points_distinct",
   "claim_periodic_plane_lift_transverse_bounded",
   "claim_permutation_power_return",
-  "claim_permutation_sign_moved_orbit_product",
   "claim_permutation_sign_mul",
   "claim_permutation_sign_orbit_product",
   "claim_pfaffian_signed_even_subgraph",
