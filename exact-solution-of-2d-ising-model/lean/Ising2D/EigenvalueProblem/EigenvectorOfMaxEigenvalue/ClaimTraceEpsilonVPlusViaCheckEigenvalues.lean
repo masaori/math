@@ -20,7 +20,7 @@
 章 015 の `gamma1_gt_1_theta_tilde` の帰結）も仮定に含める。
 **`γ(θ̃_μ) > 0` が半整数運動量に固有の要点であり、これがあるので `sinh` の積が `0` にならない。**
 -/
-import Ising2D.Part018.Claim002_EpsilonEigenvalueOnQ
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonEigenvalueOnCheckQ
 
 namespace Ising2D
 

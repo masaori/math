@@ -3,8 +3,8 @@
 
 対応する人手証明のラベル: **`trace_of_epsilon_V_plus`** の Step 2 の
 `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`
-（具体版は `Ising2D/Part018/ClaimTraceEpsilonVPlusReduction.lean` の `matExp_smul_of_sq_eq_one`、
-系としての導出は `Ising2D/Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean`）
+（具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` の `matExp_smul_of_sq_eq_one`、
+系としての導出は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean`）
 
 ## 証明手順（具体版と同じ）
 

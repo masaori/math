@@ -27,7 +27,7 @@
 ただし、章 017 の `V^{(+)}` の実行列表示と組み合わせ、この複素行列等式を実ベクトル上の
 `W *ᵥ x = Vr *ᵥ x` へ変換する接続は未形式化なので、本ファイルでは `hWV` を仮定として受け取る。
 -/
-import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.TheoremMaxEigenvectorInEvenSector
 import Ising2D.Part011.DefinitionSectorRayleighSup
 
 namespace Ising2D

@@ -18,8 +18,8 @@
 
 | 構造 | 場所 | 受け取る内容（すべて原文の主張そのまま） | 出典の章 |
 | --- | --- | --- | --- |
-| `Ising2D.CheckFermi` | `Part018/Setup.lean` | `ψ̌` の正準反交換関係（`anticommutator_of_check_psi`）、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（`check_number_operator_is_hermitian` (3)） | 016 |
-| `Ising2D.VPlusData` | `Part018/Claim003_TraceEpsilonVPlus.lean` | `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、`Λ̌_ε = C·exp(∑_μ γ(θ̃_μ)(ε_μ − 1/2))`、`C > 0`、`γ(θ̃_μ) > 0`（`eigenvalues_of_V_plus`, `gamma_theta_tilde_mu_positive`） | 015・017 |
+| `Ising2D.CheckFermi` | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean` | `ψ̌` の正準反交換関係（`anticommutator_of_check_psi`）、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（`check_number_operator_is_hermitian` (3)） | 016 |
+| `Ising2D.VPlusData` | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` | `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、`Λ̌_ε = C·exp(∑_μ γ(θ̃_μ)(ε_μ − 1/2))`、`C > 0`、`γ(θ̃_μ) > 0`（`eigenvalues_of_V_plus`, `gamma_theta_tilde_mu_positive`） | 015・017 |
 | `Ising2D.EvenSectorBridge` | `Part018/Theorem009_CPlusEqualsLambda.lean` | 章 011 の実行列 `W` と章 017 の複素行列 `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 011・017 |
 
 **`ε` が `Ž, Y̌` と反可換であること（`epsilon_anticommutes_with_check_Z_Y` (1)(2)）は
@@ -36,9 +36,9 @@
 
 ## 1. 形式化した定理の一覧
 
-### 1.1 具体版（`lean/Ising2D/Part018/`）
+### 1.1 具体版（章「V^{(+)} の最大固有値に属する固有ベクトル」の分は `lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/`、残りは `lean/Ising2D/Part018/`）
 
-#### `Setup.lean`（章 014–017 からの入力と、その直接の帰結）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`（章 014–017 からの入力と、その直接の帰結）
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
@@ -55,7 +55,7 @@
 | **`CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`** | **`ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε`** | **同 (4)** |
 | `CheckFermi.ann_conjTranspose` / `nOp_conjTranspose` / `Qproj_conjTranspose` | `ψ̌^* = ψ̌^†`, `ň^* = ň`, `Q̌^* = Q̌` | `check_number_operator_is_hermitian` (3)(4) |
 
-#### `Claim001_EpsilonAnticommutes.lean`（ラベル `epsilon_anticommutes_with_check_Z_Y`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonAnticommutesWithCheckZY.lean`（ラベル `epsilon_anticommutes_with_check_Z_Y`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -66,7 +66,7 @@
 
 **(1)(2) は無条件**（章 004・010・013 の形式化済みの定理だけを使う）。
 
-#### `Claim002_EpsilonEigenvalueOnQ.lean`（ラベル `epsilon_eigenvalue_on_check_Q`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean`（ラベル `epsilon_eigenvalue_on_check_Q`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -81,7 +81,7 @@
 | `CheckFermi.parityFactor_mul_Qproj` / `parityProd_mul_Qproj` / `eq_of_mul_Qproj_eq` | 各因子が `Q̌_ε` にスカラー倍として働く／`Q̌_ε` 全体で行列が決まる | (4) |
 | **`CheckFermi.epsilon_eq_parityProd`** | **`ε = η_{(1,…,1)}(−1)^M ∏_μ(I − 2ň_μ)`** | **(4)** |
 
-#### `Claim003_TraceEpsilonVPlus.lean`（ラベル `trace_of_epsilon_V_plus_via_check_eigenvalues`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（ラベル `trace_of_epsilon_V_plus_via_check_eigenvalues`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -95,17 +95,17 @@
 | **`VPlusData.trace_epsilon_mul_V`** | **`tr(εV^{(+)}) = η_{(1,…,1)}·C·∏_μ 2 sinh(γ(θ̃_μ)/2)`** | **Step 2（定理本体）** |
 | **`VPlusData.eta_univ_eq_one_of_trace_pos`** | **`tr(εV^{(+)}) > 0 ⇒ η_{(1,…,1)} = +1`** | Step 3 |
 
-#### `Claim008_CheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
+#### `Part018/Claim008_CheckQHermitian.lean`（ラベル `check_number_operator_is_hermitian`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.expPhase_conj` / `checkPhase_conj_star` | `conj(e^{−2πik/M}) = e^{2πik/M}` と半整数位相の共役 | (2) の計算 |
 | **`Ising2D.checkZ_conjTranspose` / `checkY_conjTranspose`** | **`Ž_μ^* = Ž_{M+1−μ}`, `Y̌_μ^* = Y̌_{M+1−μ}`** | **(2)（無条件）** |
 | `Ising2D.Z_conjTranspose` / `Y_conjTranspose` | `Z_j^* = Z_j`, `Y_j^* = Y_j` | (1)（章 009 で証明済み） |
-| `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` | `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | (4)（`Setup.lean`） |
+| `CheckFermi.nOp_conjTranspose` / `Qproj_conjTranspose` | `ň_μ^* = ň_μ`, `Q̌_ε^* = Q̌_ε` | (4)（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`） |
 | `EvenSectorBridge.quad_Qproj` | `x^* Q̌_ε x = ‖Q̌_ε x‖² ≥ 0` | (4) の帰結（`Theorem009_...`） |
 
-#### `Theorem007_MaxEigenvectorEvenSector.lean`（ラベル `max_eigenvector_in_even_sector`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/TheoremMaxEigenvectorInEvenSector.lean`（ラベル `max_eigenvector_in_even_sector`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -115,7 +115,7 @@
 | **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
 | **`VPlusData.mem_evenSector_of_mem_range_univ`** | **最大固有ベクトルは偶セクター `𝓕^{(+)}` に属する** | **定理本体** |
 
-#### `Theorem009_CPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
+#### `Part018/Theorem009_CPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -131,7 +131,7 @@
 | **`EvenSectorBridge.c_plus_equals_lamMax`** | **`c_+(M) = Λ̌_max`** | **定理本体（Step 3）** |
 | `EvenSectorBridge.exists_maximizer` | 上限が偶セクターの実単位ベクトル `x_0` で**達成される** | 最後の一文 |
 
-#### `Theorem010_OnsagerExactSolution.lean`（ラベル `onsager_exact_solution`、**本プロジェクトの結論**）
+#### `Part018/Theorem010_OnsagerExactSolution.lean`（ラベル `onsager_exact_solution`、**本プロジェクトの結論**）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -144,7 +144,7 @@
 | `Ising2D.onsager_limit_in_M` | 挟み撃ち `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M` から、`M → ∞` の極限が Onsager の表式になる | Step 3（`log` の単調性、`(log 2)/M → 0`、章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
 
-#### `DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`（ラベル `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`（ラベル `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -153,7 +153,7 @@
 | `Ising2D.Y_last_mul_Z_first` / `epsilon_mul_sigmaZ_last_mul_sigmaZ_first` / `neg_I_smul_Y_last_mul_Z_first` | `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^y_{M_col}`、`εσ^z_{M_col}σ^z_1 = -σ^y_1σ^x_2⋯σ^y_{M_col}`、`-iY_{M_col}Z_1 = εσ^z_{M_col}σ^z_1` | 境界項の計算 |
 | **`Ising2D.H1_plus_in_sigma_z_form`** | **`iH_1^{(+)} = D_0 + εG`**（`M_col ≥ 2`） | **主張本体** |
 
-#### `ClaimEpsilonD0GCommuteAndDiagonalAction.lean`（ラベル `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonD0GCommuteAndDiagonalAction.lean`（ラベル `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -161,7 +161,7 @@
 | `Ising2D.epsilon_mul_boundaryG_sq` | `(εG)^2 = I` | `epsilon_G_is_involution` |
 | `Ising2D.openChainD0_mulVec_basisVec` / `boundaryG_mulVec_basisVec` | `D_0f_{ι(s)} = (∑_m s(m)s(m+1))f_{ι(s)}`、`Gf_{ι(s)} = s(M_col)s(1)f_{ι(s)}` | `D0_G_diagonal_action` |
 
-#### `ClaimOpenChainSpinSums.lean`（ラベル `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSums.lean`（ラベル `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -172,7 +172,7 @@
 | **`Ising2D.open_chain_endpoint_product_sum`** | **`∑_s s(M_col)s(1)exp(KE(s)) = 2(2sinh K)^{M_col-1}`** | **主張本体** |
 | `Ising2D.open_chain_partition_sum_pos` / `open_chain_endpoint_product_sum_pos` | 二つのスピン和は正（`K > 0`） | `open_chain_spin_sums_positive` |
 
-#### `ClaimTraceEpsilonVPlusReduction.lean`（ラベル `trace_of_epsilon_V_plus` の Step 1・Step 2）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean`（ラベル `trace_of_epsilon_V_plus` の Step 1・Step 2）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -182,7 +182,7 @@
 | `Ising2D.matExp_hasSum` / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
 | **`Ising2D.epsilon_mul_V1plus`** | **`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`** | **Step 2** |
 
-#### `ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の Step 3）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の Step 3）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -195,7 +195,7 @@
 | `Ising2D.matExp_smul_openChainD0_mul_apply` / `boundaryG_mul_apply` | `(exp(K_1D_0)X)_{ι(s),J} = exp(K_1E(s))X_{ι(s),J}`、`(GX)_{ι(s),J} = s(M_col)s(1)X_{ι(s),J}` | Step 4 が (a) として使う形 |
 | `Ising2D.sum_spin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `V2_apply_configBasisIso`） |
 
-#### `ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
@@ -237,13 +237,13 @@
 | 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `NecSuf.noncommProd_mul_of_mul_eq_smul` | **系** |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |
 | `check_number_operator_is_hermitian` (4) | `CheckFermi.Qproj_conjTranspose` | `NecSuf.star_projOn` | **系** |
-| `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `Claim002`（反転則）と `Claim003`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
+| `max_eigenvector_in_even_sector` | `VPlusData.eta_univ_eq_one` ほか | **置かない** | `ClaimEpsilonEigenvalueOnCheckQ.lean`（反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、新しい抽象構造が現れない |
 | `c_plus_equals_Lambda_half_integer` | `EvenSectorBridge.c_plus_equals_lamMax` | **置かない** | `sSup` は ℝ の完備性そのものでほどく余地がない（章 011 の `Definition006_RayleighSup.lean` と同じ理由）。新しく現れる道具は実／複素の橋渡しだけ |
 | `c_between_Lambda_half_and_twice_Lambda_half` Step 2 | `Ising2D.onsager_step3_c_le_two_c_plus` | `Ising2D.NecSuf.rayleighSup_le_two_mul_evenSectorRayleighSup` | **系**。効くのは `ε` が対合の置換行列であること、`W` の実対称半正定値性・`εW = Wε`・成分の**非負性**（人手は正を引くが使うのは非負だけ）。`π` が不動点をもたないことは使わない |
 | `H1_plus_in_sigma_z_form` | `Ising2D.H1_plus_in_sigma_z_form` | **置かない** | 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の等式で、主張に固有なのは各サイトの Pauli 行列の積だけ。一般的な部分は `siteProd_mul`・`siteProd_smul_family` に分離済み（`V1_in_Z_Y_epsilon` と同じ判断） |
 | `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` | `Ising2D.epsilon_mul_openChainD0` ほか | **置かない** | 具体的な `ε, σ^z_m` の反可換性・`(σ^z)^2 = I`・対角作用だけを使い、取り払える構造が残らない |
-| `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
-| `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |
+| `open_chain_partition_sum`・`open_chain_endpoint_product_sum` | `Ising2D.open_chain_partition_sum` / `open_chain_endpoint_product_sum` / `prod_openChainBondSpin` | `NecSuf.open_chain_weighted_sum` / `NecSuf.prod_mul_nextSite_eq_first_mul_last` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` の `*_of_necSuf`） |
+| `trace_of_epsilon_V_plus` Step 2 の `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG` | `Ising2D.matExp_smul_of_sq_eq_one` | `NecSuf.exp_series_sum_of_sq_eq_one` | **系**（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` の `matExp_smul_of_sq_eq_one_of_necSuf`）。Step 1 と Step 2 の残りは具体的な `ε, B, V_1^{(+)}, D_0, G` の可換性とトレースの巡回性だけで、取り払える構造が残らないので置かない |
 | `trace_of_epsilon_V_plus` Step 3 | `Ising2D.matExp_smul_openChainD0` ほか | **置かない** | 一般化できるのは行列の列の読み取り（任意の半環で成り立つ自明な事実）と `{±1}` の符号反転の組合せだけで、必要十分版にしても何が本質的かについて情報を与えない |
 | `onsager_exact_solution`（Step 1・2・4） | `Ising2D.onsager_exact_solution` | **置かない** | 既存の必要十分版（`NecSuf/LogSqueeze.lean`, `NecSuf/RiemannSum.lean`）を章 012 が既に系として使っており、本章はその具体版を章 011・018 の結果に接続するだけ |
 
@@ -265,7 +265,7 @@
 
   すなわち**1 次元性が本当に要るのは `η_ε` の「存在」だけ**であり、反転則そのものは
   1 次元性なしで出る。存在の部分は台が行列環であることが本質的なので、
-  具体版（`Part018/Claim002_EpsilonEigenvalueOnQ.lean`）にしか置いていない。
+  具体版（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean`）にしか置いていない。
 
 - **`tr(εV^{(+)})` の積への分解（人手証明 Step 2）に効いているのは、
   有限集合の冪集合にわたる和の積への変形（`Finset.prod_add`）と

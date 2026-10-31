@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 の六番目の章「V^{(+)} の最大固有値に属する固有ベクトル」を移した。15 ファイル（旧 `Part018/` の `Claim001`〜`Claim003`・`Theorem007`・開鎖とトレースの 10 本・`Setup`）を `lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` へ移し（名前空間不変。番号を外した名前にし、`Setup` は `CheckFermiInput` とした）、import・コメントのパス・`lean/README.md`・`lean/docs/ch018-formalization.md` を直した。判定の根拠は状態台帳。次は部「熱力学極限」の「N→∞ の極限と最大固有値 c(M)」の章。
+
 2026-10-31: Lean の通しの証明の項目 7 の五番目の章「V^{(+)} の固有値」を移した。12 ファイル（旧 `Part017/` の 9 本全部、`Part009/Claim016_SignFlip`、`Part012/Theorem005_OnsagerFreeEnergy`、`Part018/Claim012_VPlusDataFromPart017`）を `lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/` へ移し（名前空間不変。番号を外した名前にした）、`Part017/` は無くなった。import・コメントのパス・`lean/README.md`（前の章の行の抜けも補った）・`lean/docs/` の対応表を直した。判定の根拠は状態台帳。次は「V^{(+)} の最大固有値に属する固有ベクトル」の章。
 
 2026-10-31: 章立ての組み直しの五番目の項目（どの章のゴールからも辿れない 7 項）を済ませた。本文で使われていない 5 項を `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避し（013・017 のファイルは空になり削除）、根拠なしに使われていた `V1_plus_square_root_property`（tr(εV^{(+)}) の証明）と `even_eigenspace_is_complex_subspace`（Λ^{(1/2)} ≤ c ≤ 2Λ^{(1/2)} の証明）を引く形に直して使う章へ移した。どの章にも割り当てていない項と後ろの章を指す案内の参照はどちらも 0。次は六番目の項目（冒頭の章立ての説明ページを本文と照合）。

@@ -25,7 +25,7 @@ Lean では `siteProd_mul`（サイトごとの積）で、各サイトの因子
 具体的な複素行列 `Y_m, Z_m, ε, σ^z_m` の間の等式であり、主張に固有なのは各サイトの Pauli 行列の積だけなので、
 必要十分版は置かない（同じ型の主張 `V1_in_Z_Y_epsilon` と同じ判断）。
 -/
-import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
 
 namespace Ising2D
 

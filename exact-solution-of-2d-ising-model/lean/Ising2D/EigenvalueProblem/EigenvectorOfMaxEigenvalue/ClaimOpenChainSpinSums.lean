@@ -43,13 +43,13 @@
 - `open_chain_partition_sum_pos` の証明は `K > 0` を使わない（`cosh K > 0` は任意の `K` で成り立つ）。
 値は実数である必要がなく、可換半環（端点因子の書き替えは可換モノイドと `s(m)s(m) = 1`）で足りるので、
 必要十分版を `Ising2D/NecSuf/OpenChainSpinSum.lean` に置き、具体版をその系として
-`Ising2D/Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
+`Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
 -/
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.Part008.Claim001_CommutatorHZY
-import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv
 
 namespace Ising2D

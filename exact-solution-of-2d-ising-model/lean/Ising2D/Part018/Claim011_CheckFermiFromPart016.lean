@@ -7,7 +7,7 @@
 ## 経緯（一次情報）
 
 章 018 の形式化に着手した時点で `Ising2D/Part016/` は存在せず、`Ising2D.CheckFermi`
-（`Part018/Setup.lean`）は `ψ̌_μ^†, ψ̌_μ` の正準反交換関係と `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` を
+（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）は `ψ̌_μ^†, ψ̌_μ` の正準反交換関係と `(ψ̌_μ^†)^* = ψ̌_{M+1-μ}` を
 **仮定として**受け取っていた（`lean/docs/ch018-formalization.md` の 0 章の表）。
 
 その後 `Ising2D/Part016/` が main に入り、`Ising2D.checkPsi_car'`
@@ -72,7 +72,7 @@ theorem checkPsiDag_conjTranspose (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 /-- **章 016 から `Ising2D.CheckFermi` を構成する**（仮定は `M ≠ 0` だけ）。
 
 `cre j` は `ψ̌_{j+1}^†`、`ann j` は `ψ̌_{M+1-(j+1)}` である
-（`Part018/Setup.lean` の `CheckFermi` の添字づけと同じ）。 -/
+（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean` の `CheckFermi` の添字づけと同じ）。 -/
 noncomputable def checkFermiOf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) : CheckFermi M where
   cre j := checkPsiDag P.const M (checkIdx M j)
   ann j := checkPsi P.const M ((M : ℤ) + 1 - checkIdx M j)

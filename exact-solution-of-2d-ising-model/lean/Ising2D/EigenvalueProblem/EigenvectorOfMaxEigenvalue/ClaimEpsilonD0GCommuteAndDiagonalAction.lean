@@ -27,7 +27,7 @@
 `pauliZ_mul_pauliZ`・`siteProd_mul` に加えて、環の公理と有限和・スカラー倍の線型性だけである。
 取り払える構造が残らないので、必要十分版は置かない。
 -/
-import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.DefinitionOpenChainAndBoundaryOperators
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 

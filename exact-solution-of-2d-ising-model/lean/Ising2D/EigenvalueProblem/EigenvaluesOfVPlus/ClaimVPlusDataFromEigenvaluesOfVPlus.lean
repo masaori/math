@@ -7,7 +7,7 @@
 
 ## 経緯（一次情報）
 
-`Ising2D.VPlusData`（`Part018/Claim003_TraceEpsilonVPlus.lean`）は
+`Ising2D.VPlusData`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`）は
 
   `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`,  `Λ̌_ε = C exp(∑_μ γ_μ(ε_μ - 1/2))`,  `C > 0`,  `γ_μ > 0`
 
@@ -29,11 +29,11 @@
 章 017 の `constant_c_value_even_sector` を使えるようにする。
 
 `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` そのものは章 017 の `Q̌_ε` を経由せず、
-章 018 側の `Ising2D.CheckFermi.nOp_mul_Qproj`（`Part018/Setup.lean`）から
+章 018 側の `Ising2D.CheckFermi.nOp_mul_Qproj`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）から
 直接導く（章 017 の `Xop_mul_Qproj` と同じ計算）。射影の添字型を移す必要が無くなるためである。
 -/
 import Ising2D.Part018.Claim011_CheckFermiFromPart016
-import Ising2D.Part018.Claim003_TraceEpsilonVPlus
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.TheoremMaxEigenvalueSimple
 
 namespace Ising2D

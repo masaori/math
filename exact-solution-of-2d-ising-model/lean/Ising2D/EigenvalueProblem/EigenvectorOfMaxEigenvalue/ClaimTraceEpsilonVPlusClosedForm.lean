@@ -37,8 +37,8 @@ Lean ではこの二つを別々の行にした。
 順序体での正の数の積と和の正値性だけで、必要十分版にしても何が本質的かについて情報を与えない
 （`ClaimTraceEpsilonVPlusMatrixEntries.lean` と同じ扱い。二つのスピン和の一般形は `NecSuf/OpenChainSpinSum.lean` が既に持つ）。
 -/
-import Ising2D.Part018.ClaimTraceEpsilonVPlusMatrixEntries
-import Ising2D.Part018.ClaimTraceEpsilonVPlusReduction
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusMatrixEntries
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusReduction
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 
 namespace Ising2D

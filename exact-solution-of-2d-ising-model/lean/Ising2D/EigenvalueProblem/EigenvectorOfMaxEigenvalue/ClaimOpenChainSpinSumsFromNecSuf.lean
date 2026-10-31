@@ -1,7 +1,7 @@
 /-
 # 1 次元開鎖の二つのスピン和を必要十分版の系として導出する
 
-具体版（人手と 1 対 1）: `Ising2D/Part018/ClaimOpenChainSpinSums.lean`。
+具体版（人手と 1 対 1）: `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSums.lean`。
 必要十分版: `Ising2D/NecSuf/OpenChainSpinSum.lean`。
 
 | 人手 | 具体版 | 必要十分版からの導出 | 特殊化 |

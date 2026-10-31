@@ -85,6 +85,7 @@ EOF
   | 固有値問題 | 離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着 | `Ising2D/EigenvalueProblem/ReductionToATheta/` |
   | 固有値問題 | A(θ̃_μ) の対角化と V^{(+)} の指数表示 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/` |
   | 固有値問題 | V^{(+)} の固有値 | `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/` |
+  | 固有値問題 | V^{(+)} の最大固有値に属する固有ベクトル | `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` |
 
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
@@ -625,7 +626,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 015 | `A(θ~)` の対角化 | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch015](docs/ch015-formalization.md) |
 | 016 | 偶セクターのフェルミオン（`V^{(+)} = c V̌'`） | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch016](docs/ch016-formalization.md) |
 | 017 | 偶セクターの固有値 | `EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
-| 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `Part018/` | [ch018](docs/ch018-formalization.md) |
+| 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/`（`Q̌_ε` のエルミート性と章「M→∞ の極限と閉形式」に当たるファイルは `Part018/`） | [ch018](docs/ch018-formalization.md) |
 | 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
 | 020 | 臨界点での比熱の対数発散 | `Part020/` | [ch020](docs/ch020-formalization.md) |
 

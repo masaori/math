@@ -52,7 +52,7 @@ import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
 import Ising2D.Part011.ClaimEpsilonCommutesWithW
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.Part018.PhysicalEvenSectorBridge
-import Ising2D.Part018.ClaimTraceEpsilonVPlusClosedForm
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusClosedForm
 import Ising2D.Part018.Theorem010_OnsagerExactSolution
 
 namespace Ising2D

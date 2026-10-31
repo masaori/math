@@ -39,7 +39,7 @@
 
 `ε Q̌_ε = η_ε Q̌_ε` の**存在**は `im Q̌_ε` が 1 次元であることを使うので、
 台が行列環であることが本質的である。したがって存在の部分は具体版
-（`Ising2D/Part018/Claim002_EpsilonEigenvalueOnQ.lean`）にしか置かない。
+（`Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonEigenvalueOnCheckQ.lean`）にしか置かない。
 本ファイルにはスカラーの一意性（`NecSuf.smul_left_cancel_of_ne_zero`）だけを置く。
 -/
 import Ising2D.NecSuf.JointEigenspace

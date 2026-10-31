@@ -65,7 +65,7 @@
   - **章末のゴールの主張を足した。** (1) $\mathrm{tr}(\varepsilon V^{(+)})=(2\exp(-K_2)\cosh K_1)^M+(2\exp(K_2)\sinh K_1)^M\in\mathbb R_{>0}$、(2) $\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}$ を主張する claim
     `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` を章の最後に置いた。(2) の証明は $\mathrm{tr}>0\Rightarrow\eta_{(1,\dots,1)}=+1\Rightarrow\varepsilon\check Q_{(1,\dots,1)}=\check Q_{(1,\dots,1)}$ と、
     `max_eigenvector_in_even_sector` (4) の証明と同じ $\varepsilon y=y$ の計算である。SageMath（`sagemath/check/max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で各行の残差 ≤ 7.2e-15。
-    指数評価の ℝ 脱出のため倍精度。否定コントロールは右辺を差にしたものと $\epsilon=(0,1,\dots,1)$ の $\check Q_\epsilon$）と Lean（`lean/Ising2D/Part018/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`。
+    指数評価の ℝ 脱出のため倍精度。否定コントロールは右辺を差にしたものと $\epsilon=(0,1,\dots,1)$ の $\check Q_\epsilon$）と Lean（`lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`。
     (1) の等式は Lean の通しの証明の項目 4 の残りで形式化中なので、正値性を仮定に取り (2) を示す。`check-no-sorry.sh` の対象に足した）を足した。
     `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章に記号（$\varepsilon,\check Q_{(1,\dots,1)},\mathcal F^{(+)}$）を足した。章の項目数は 16（割り当て 15 とゴールの主張 1。章立て案は 17）。
   - **018 の章の案内文を二つに分けた。** (i)〜(v) の筋を新しい章の冒頭へ移し（id `closing_000_remark_overview` のまま。題を「$\mathrm{im}\,\check Q_{(1,\dots,1)}\subseteq\mathcal F^{(+)}$ を示す道筋」にし、

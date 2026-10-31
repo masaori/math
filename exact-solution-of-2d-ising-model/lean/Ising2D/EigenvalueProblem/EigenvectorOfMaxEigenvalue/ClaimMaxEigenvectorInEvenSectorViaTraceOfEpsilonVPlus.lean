@@ -28,13 +28,13 @@
 (1) の等式 `tr(εV^{(+)}) = (2e^{−K_2} cosh K_1)^M + (2e^{K_2} sinh K_1)^M`（人手 `trace_of_epsilon_V_plus`）は、
 Lean の通しの証明の項目 4 の残り（`tr(εV^{(+)}) > 0` の本体）で形式化中であり、まだ Lean の定理が無い。
 したがって本ファイルは (1) の正値性を仮定 `htr` として受け取り、(2) の含意だけを証明する
-（`Theorem007_MaxEigenvectorEvenSector.lean` と同じ扱い）。
+（`TheoremMaxEigenvectorInEvenSector.lean` と同じ扱い）。
 
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
 （各行の必要十分版は `Ising2D/NecSuf/ParityFermion.lean` が持つ）。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
-import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.TheoremMaxEigenvectorInEvenSector
 
 namespace Ising2D
 

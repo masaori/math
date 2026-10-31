@@ -7,7 +7,7 @@
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
 `Ising2D.NecSuf.star_projOn`。(4) 後半はその**系**である
-（`Ising2D.CheckFermi.Qproj_conjTranspose`、`Part018/Setup.lean`）。
+（`Ising2D.CheckFermi.Qproj_conjTranspose`、`EigenvalueProblem/EigenvectorOfMaxEigenvalue/CheckFermiInput.lean`）。
 
 ## 人手証明との対応
 
@@ -21,7 +21,7 @@
 
 **(1)(2) は無条件である。**
 -/
-import Ising2D.Part018.Setup
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimConjugateIndex
 
 namespace Ising2D

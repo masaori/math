@@ -17,31 +17,31 @@
   （`Part011/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
   （`Part018/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`Part018/ClaimWEqVPlusOnEvenSector.lean`）である。
   最終定理の入力から `bridge` と `hW` を外した。
-- 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`Part018/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
+- 項目 4 は済んでいる。`tr(εV^{(+)}) > 0` は `trace_epsilon_vPlusDataOf_pos`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`）で証明し、
   当時の入力の構造 `EvenSectorClosureInput` から `htr` と、その型のために置いていた `hM` を外した（`M ≠ 0` は `2 ≤ M` から出す）。次の四つに割って進めた。
   - 4a（済み）: 人手 `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`
-    （`iH_1^{(+)} = D_0 + εG`）を `Part018/DefinitionOpenChainAndBoundaryOperators.lean`・`Part018/ClaimH1PlusInSigmaZForm.lean` で形式化した
+    （`iH_1^{(+)} = D_0 + εG`）を `EigenvalueProblem/EigenvectorOfMaxEigenvalue/DefinitionOpenChainAndBoundaryOperators.lean`・`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean` で形式化した
     （`openChainD0`・`boundaryG`・`H1_plus_in_sigma_z_form`）。
   - 4b（済み）: 人手 `epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・`D0_G_diagonal_action` を
-    `Part018/ClaimEpsilonD0GCommuteAndDiagonalAction.lean` で形式化した（`epsilon_mul_openChainD0`・`epsilon_mul_boundaryG`・
+    `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonD0GCommuteAndDiagonalAction.lean` で形式化した（`epsilon_mul_openChainD0`・`epsilon_mul_boundaryG`・
     `openChainD0_mul_boundaryG`・`epsilon_mul_boundaryG_sq`・`openChainD0_mulVec_basisVec`・`boundaryG_mulVec_basisVec`）。
   - 4c（済み）: 人手 `def_open_chain_spin_energy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・`open_chain_spin_sums_positive` を
-    `Part018/ClaimOpenChainSpinSums.lean` で形式化した（`openChainEnergy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・
+    `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSums.lean` で形式化した（`openChainEnergy`・`open_chain_partition_sum`・`open_chain_endpoint_product_sum`・
     `open_chain_partition_sum_pos`・`open_chain_endpoint_product_sum_pos`）。`openChainEnergy` は `openChainD0_mulVec_basisVec` の係数と定義で一致する。
     両端のスピンは `s (lastSite M _) * s (firstSite M _)` の順で書いた（`boundaryG_mulVec_basisVec` の係数と同じ）。
-    値は可換半環で足りるので、必要十分版 `NecSuf/OpenChainSpinSum.lean` を置き、具体版を `Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で系として導出した。
+    値は可換半環で足りるので、必要十分版 `NecSuf/OpenChainSpinSum.lean` を置き、具体版を `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean` で系として導出した。
     4d で使う `D_0f_{ι(s)} = E(s)f_{ι(s)}` は `openChainD0_mulVec_basisVec_eq_energy`。二つの和は `ℝ` の `Real.exp` で書いてあるので、4d で `ℂ` へ移す。
   - 4d（済み）: 人手 `trace_of_epsilon_V_plus` の Step 1〜5 を `vPlusDataOf` の `V^{(+)}`（`VPlusOfTransfer_eq_VPlus` で人手の `V_2` の形へ戻す）について
     証明し、`EvenSectorClosureInput` から `htr` を外す。人手の Step の単位で次の三つに割った。
     - Step 1・Step 2 の形式化（済み）: Step 1（`tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`）と Step 2（`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`）を
-      `Part018/ClaimTraceEpsilonVPlusReduction.lean` で形式化した（`trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`）。
+      `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` で形式化した（`trace_epsilon_VPlusOfTransfer`・`epsilon_mul_V1plus`）。
       `exp(K_1εG)` の偶奇分解は必要十分版 `NecSuf/ExpOfInvolution.lean` を置き、系の導出を
-      `Part018/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` に置いた。
-    - 成分の読み取りの形式化（済み）: Step 3 (a)(b)(c) を `Part018/ClaimTraceEpsilonVPlusMatrixEntries.lean` で形式化した。
+      `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean` に置いた。
+    - 成分の読み取りの形式化（済み）: Step 3 (a)(b)(c) を `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean` で形式化した。
       (a) `exp(K_1D_0)` の対角性 `matExp_smul_openChainD0`（成分 `matExp_smul_openChainD0_apply`）、`G` の対角性 `boundaryG_eq_diagonal`（成分 `boundaryG_apply`）、
       (b) `εf_{ι(s)} = f_{ι(-s)}` は `epsilon_mulVec_basisVec_configBasisIso`（`-s` は `negSpinConf`）、Step 4 が使う行の形は `epsilon_mul_apply_configBasisIso`、
       (c) `V2_apply_configBasisIso`・`V2_apply_configBasisIso_self`・`V2_apply_configBasisIso_neg_self`。
-    - 二つのスピン和の代入と正値性の形式化（済み）: Step 4・Step 5 と主張を `Part018/ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した
+    - 二つのスピン和の代入と正値性の形式化（済み）: Step 4・Step 5 と主張を `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean` で形式化した
       （`trace_epsilon_VPlusOfTransfer_split`・`trace_epsilon_VPlusOfTransfer_eq_spin_sums`・`trace_epsilon_VPlusOfTransfer_closed_form`・
       `trace_epsilon_VPlusOfTransfer_pos`・`trace_of_epsilon_V_plus`、`vPlusDataOf` へ移した `trace_epsilon_vPlusDataOf_pos`）。必要十分版は置かない。
 - 項目 5 は済んでいる。`hWcomm` は `epsilon_commutes_with_W P.K1 P.K2_pos`（`Part011/ClaimEpsilonCommutesWithW.lean`）で埋めた。
@@ -112,15 +112,25 @@
     新しく証明しているのでこの章へ置いた（`constant_c_value_even_sector`・`gamma_theta_tilde_mu_positive` は既存の定理を使うだけで数えない）。
     `ClaimVPlusPositiveDefinite` の `V_plus_inverse_*` の 2 項は参照用ノートへ退避された主張なので数えない。
     `Part009/Claim013_PositiveDefinite` は数学的道具立て「トレース・共役転置・正定値性」の 3 項とこの章の `iH_is_real_symmetric` 1 項なので残した。
+  - 部「固有値問題」の章「V^{(+)} の最大固有値に属する固有ベクトル」（済み）: 15 ファイルを `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` へ移した。
+    旧 `Part018/` から `ClaimEpsilonAnticommutesWithCheckZY`（旧 `Claim001_EpsilonAnticommutes`）・`ClaimEpsilonEigenvalueOnCheckQ`（旧 `Claim002_EpsilonEigenvalueOnQ`）・
+    `ClaimTraceEpsilonVPlusViaCheckEigenvalues`（旧 `Claim003_TraceEpsilonVPlus`）・`TheoremMaxEigenvectorInEvenSector`（旧 `Theorem007_MaxEigenvectorEvenSector`）・
+    `ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus`・`DefinitionOpenChainAndBoundaryOperators`・`ClaimH1PlusInSigmaZForm`・`ClaimEpsilonD0GCommuteAndDiagonalAction`・
+    `ClaimOpenChainSpinSums`（と `FromNecSuf`）・`ClaimTraceEpsilonVPlusReduction`（と `FromNecSuf`）・`ClaimTraceEpsilonVPlusMatrixEntries`・`ClaimTraceEpsilonVPlusClosedForm`、
+    補助のファイル `CheckFermiInput`（旧 `Setup`）である。
+    `Setup` は runbook が人手の項目を持たない補助のファイルの例に挙げているので、import 元の多数決で置いた（import 元はこの章の `ClaimEpsilonEigenvalueOnCheckQ` と
+    「M→∞ の極限と閉形式」の章の `Part018/Claim008_CheckQHermitian` の 1 対 1 で、並びで先のこの章）。
+    この章の `V1_plus_square_root_property` は `PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean` にあり、そのファイルは前の章の
+    `def_V1_plus_square_root`・`def_V_plus` が 2 対 1 で多いので残した。`Part011/ClaimEpsilonIsRealSymmetric.lean` は `trace_of_epsilon_V_plus` の Step 3 (b) に説明で触れるだけで、
+    形式化しているのは `epsilon_is_real_symmetric`（「M→∞ の極限と閉形式」の章）なので動かさなかった。`Part018/` に残ったファイルは「M→∞ の極限と閉形式」の章の項目だけを形式化している。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の 6 番目の章、部「固有値問題」の「V^{(+)} の最大固有値に属する固有ベクトル」（フォルダ `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_eigenvector_of_max_eigenvalue` の項目（`epsilon_anticommutes_with_check_Z_Y` から
-`max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` までの 16 項）を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part018/` の `Claim001`〜`Claim003`・`Theorem007`・`Setup`・`DefinitionOpenChainAndBoundaryOperators`・`ClaimH1PlusInSigmaZForm`・
-`ClaimEpsilonD0GCommuteAndDiagonalAction`・`ClaimOpenChainSpinSums`（と `FromNecSuf`）・`ClaimTraceEpsilonVPlus*`・`ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus` など。
-冒頭の項目名を数え、参照だけの項目は数えない）。`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+項目 7 の 7 番目の章、部「熱力学極限」の「N→∞ の極限と最大固有値 c(M)」（フォルダ `Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_row_limit_and_max_eigenvalue` の 10 項（`Z_equals_trace_of_W` から
+`row_limit_and_max_eigenvalue_claim_sandwich_and_limit_in_N_row` のラベルまで）を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part011/`・`Part012/Claim003_LimitInNRow`・`Part018/` の挟み撃ちと `N` の極限のファイルなど。冒頭の項目名を数え、参照だけの項目は数えない）。
+`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

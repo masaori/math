@@ -15,7 +15,7 @@
 | (1) `ε Z_j = -Z_j ε`, `ε Y_j = -Y_j ε` | `Ising2D.epsilon_anticomm_Z` / `epsilon_anticomm_Y`（章 010 で証明済み。再掲） |
 | (2) `ε Ž_μ = -Ž_μ ε`, `ε Y̌_μ = -Y̌_μ ε` | `Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY` |
 | (3) `ε ψ̌_μ^† = -ψ̌_μ^† ε` | `Ising2D.epsilon_anticomm_of_isCheckMode` |
-| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（`Setup.lean`） |
+| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（`CheckFermiInput.lean`） |
 
 **(1)(2)(3) は無条件である**（章 004・010・013 の形式化済みの定理だけを使う）。
 (3) だけは「`ψ̌` が `Ž, Y̌` の 1 次結合であること」（原文 `def_check_fermi`、章 016）を

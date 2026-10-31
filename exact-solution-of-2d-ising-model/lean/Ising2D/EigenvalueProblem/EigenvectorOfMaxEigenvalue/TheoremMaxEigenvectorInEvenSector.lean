@@ -6,7 +6,7 @@
 ラベル **`max_eigenvector_in_even_sector`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）。本ファイルの内容は
-`Claim002`（符号の反転則）と `Claim003`（トレースの符号）の組み合わせであり、
+`ClaimEpsilonEigenvalueOnCheckQ.lean`（符号の反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、
 新しい抽象構造は現れない。
 
 ## 仮定として残っているもの（一次情報）
@@ -18,7 +18,7 @@
 （理由は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`）。
 したがって本ファイルの定理は **`0 < (tr(εV^{(+)})).re` を仮定として受け取る**。
 -/
-import Ising2D.Part018.Claim003_TraceEpsilonVPlus
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 
 namespace Ising2D

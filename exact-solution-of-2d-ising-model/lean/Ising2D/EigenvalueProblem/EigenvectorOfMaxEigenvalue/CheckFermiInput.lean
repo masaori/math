@@ -25,11 +25,11 @@
 
 **`ε` が `Ž, Y̌` と反可換であること（原文 (1)(2)）は仮定していない。**
 それは章 004・010・013 の形式化済みの定理から**無条件に**従う
-（`Ising2D/Part018/Claim001_EpsilonAnticommutes.lean`）。
+（`Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonAnticommutesWithCheckZY.lean`）。
 
-`V^{(+)}` の固有値は別途 `Ising2D.VPlusData`（`Claim003_...` 冒頭）で受け取る。
+`V^{(+)}` の固有値は別途 `Ising2D.VPlusData`（`ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean` 冒頭）で受け取る。
 -/
-import Ising2D.Part018.Claim001_EpsilonAnticommutes
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonAnticommutesWithCheckZY
 import Ising2D.Part009.Claim008_JointEigenspace
 import Ising2D.Part009.Claim013_PositiveDefinite
 

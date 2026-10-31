@@ -23,7 +23,7 @@
 (1)（`η_ε` の存在）だけ**である。(2) の Step 1・Step 2 は必要十分版
 （環の計算だけ）で閉じており、1 次元性を使わない。
 -/
-import Ising2D.Part018.Setup
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
 
 namespace Ising2D
 

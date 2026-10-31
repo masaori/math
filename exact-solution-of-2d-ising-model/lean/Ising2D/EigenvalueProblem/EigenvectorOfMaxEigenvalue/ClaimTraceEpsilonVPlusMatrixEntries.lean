@@ -31,8 +31,8 @@
 一般化できるのは、行列の列の読み取り（任意の半環・任意の有限添字の行列で成り立つ自明な事実）と、
 `{±1}` の符号反転の組合せだけである。必要十分版にしても何が本質的かについて情報を与えないので、置かない。
 -/
-import Ising2D.Part018.ClaimOpenChainSpinSums
-import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Ising2D.Part004.ClaimExpOfDiagonalMatrix
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix

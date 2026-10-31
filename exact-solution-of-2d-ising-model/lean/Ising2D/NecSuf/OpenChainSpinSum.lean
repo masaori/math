@@ -1,9 +1,9 @@
 /-
 # 1 次元開鎖のスピン和（必要十分版）
 
-具体版: `Ising2D/Part018/ClaimOpenChainSpinSums.lean`（人手 `open_chain_partition_sum`・
+具体版: `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSums.lean`（人手 `open_chain_partition_sum`・
 `open_chain_endpoint_product_sum` と 1 対 1）。具体版をこのファイルの系として導出するのは
-`Ising2D/Part018/ClaimOpenChainSpinSumsFromNecSuf.lean`。
+`Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimOpenChainSpinSumsFromNecSuf.lean`。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
@@ -28,7 +28,7 @@
 - **正値性（`open_chain_spin_sums_positive`）。** `2(2cosh K)^{M_col-1} > 0` は `K` の符号によらず、
   `K > 0` が効くのは `2(2sinh K)^{M_col-1} > 0` の側だけである（具体版のコメントにも書いた）。
 -/
-import Ising2D.Part018.ClaimOpenChainSpinSums
+import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimOpenChainSpinSums
 
 namespace Ising2D.NecSuf
 
