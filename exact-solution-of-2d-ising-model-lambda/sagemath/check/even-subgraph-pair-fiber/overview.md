@@ -1,6 +1,8 @@
 # SageMath Check: 反転対と単純通過を固定した偶部分グラフ対の全単射
 
-**対象ラベル**: `claim_even_subgraph_pair_fiber_bijection`
+**対象ラベル**: `def_even_edge_subset`
+
+旧主張は参照用ノートへ退避した。
 
 一辺 $L=2$ の周期正方格子で、互いに素な辺集合 $D,E\subseteq E_L$ のうち
 $E$ が偶部分グラフであるものを全列挙する。各 $(D,E)$ について、
@@ -12,7 +14,7 @@ $E$ が偶部分グラフであるものを全列挙する。各 $(D,E)$ につ�
 $C\mapsto(D\cup C,D\cup(E\setminus C))$ が往復し、個数が一致することを検査する。
 
 - 実行: `sage sagemath/check/even-subgraph-pair-fiber/check.sage`
-- 状態: PASS（2026-09-01）
+- 状態: PASS（2026-10-31、退避後に再実行）
 - 結果: 条件を満たす互いに素な $(D,E)$ は $881$ 組、両側で数えた元はともに
   合計 $1{,}024$ 個であり、すべての組で写像と逆写像の往復および個数の一致を確認した。
 

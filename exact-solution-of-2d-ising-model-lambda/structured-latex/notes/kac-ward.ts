@@ -7,6 +7,81 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_even_subgraph_pair_fiber_archived",
+    targets: ["def_even_edge_subset"],
+    title: { text: "不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、偶部分グラフ対による直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+                        paragraph([
+                          math(String.raw`L\ge1`), " とし、互いに素な辺集合 ", math(String.raw`D,E\subseteq E_L`),
+                          " を取る。共通辺が ", math(String.raw`D`), "、一方だけに属する辺が ", math(String.raw`E`),
+                          " である偶部分グラフの順序対と、その第 1 成分へ入れる単純通過辺の選び方を",
+                        ]),
+                        displayMath(String.raw`\mathcal P_L(D,E):=\bigl\{(A,B)\mid \operatorname{Even}_L(A),\operatorname{Even}_L(B),\ A\cap B=D,\ A\mathbin\triangle B=E\bigr\}`),
+                        displayMath(String.raw`\mathcal C_L(D,E):=\bigl\{C\subseteq E\mid \operatorname{Even}_L(D\cup C)\bigr\}`),
+                        paragraph([
+                          "で定める。ここで ", math(String.raw`A,B\subseteq E_L`), " であり、",
+                          math(String.raw`A\mathbin\triangle B:=(A\setminus B)\cup(B\setminus A)`),
+                          " である。偶部分グラフの述語は ", ref("def_even_edge_subset"),
+                          " で定めた。いずれも有限集合なので所属と個数は決定できる。実数体も複素数体も現れない。",
+                        ]),
+    ],
+  },
+  {
+    id: "note_kac_ward_even_subgraph_pair_fiber_bijection_archived",
+    targets: ["def_even_edge_subset"],
+    title: { text: "不採用経路: 偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、偶部分グラフ対の選び方による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        math(String.raw`L\ge1`), " とし、互いに素な ", math(String.raw`D,E\subseteq E_L`),
+                        " が ", math(String.raw`\operatorname{Even}_L(E)`), " を満たすとする。このとき",
+                      ]),
+                      displayMath(String.raw`\Theta:\mathcal P_L(D,E)\longrightarrow\mathcal C_L(D,E),\qquad\Theta(A,B):=A\setminus D`),
+                      paragraph(["は全単射であり、したがって"]),
+                      displayMath(String.raw`|\mathcal P_L(D,E)|=|\mathcal C_L(D,E)|`),
+                      paragraph(["である。二つの有限集合は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", " で定めた。"]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " に対し ", math(String.raw`C:=A\setminus D`),
+                        " と置く。", math(String.raw`A\cap B=D`), " と ", math(String.raw`A\mathbin\triangle B=E`),
+                        " から ", math(String.raw`C\subseteq E`), " かつ ", math(String.raw`A=D\cup C`),
+                        " であり、", math(String.raw`\operatorname{Even}_L(A)`), " だから ",
+                        math(String.raw`C\in\mathcal C_L(D,E)`), " である。よって ", math(String.raw`\Theta`), " は定義できる。",
+                      ]),
+                      paragraph(["逆に ", math(String.raw`C\in\mathcal C_L(D,E)`), " に対し"]),
+                      displayMath(String.raw`A_C:=D\cup C,\qquad B_C:=D\cup(E\setminus C)`),
+                      paragraph([
+                        "と置く。定義から ", math(String.raw`\operatorname{Even}_L(A_C)`), " である。互いに素な ",
+                        math(String.raw`D,E`), " と ", math(String.raw`C\subseteq E`), " により ",
+                        math(String.raw`B_C=A_C\mathbin\triangle E`), " である。頂点 ", math(String.raw`v\in V_L`),
+                        " ごとに、対称差では共通辺の端点寄与が二度現れて法 2 で消えるので",
+                      ]),
+                      displayMath(String.raw`d_{B_C}(v)\bmod2=\bigl(d_{A_C}(v)+d_E(v)\bigr)\bmod2=0\quad\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ \blkref{def_even_edge_subset}\bigr)`),
+                      paragraph([
+                        "となり ", math(String.raw`\operatorname{Even}_L(B_C)`), " である。また辺ごとの所属を ",
+                        math(String.raw`D,C,E\setminus C`), " の三場合に分けると",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+A_C\cap B_C&=D&&\bigl(\because\ D\cap E=\varnothing,\ C\subseteq E\bigr)\\
+A_C\mathbin\triangle B_C&=E&&\bigl(\because\ E=C\sqcup(E\setminus C)\bigr)
+\end{aligned}`),
+                      paragraph(["なので ", math(String.raw`(A_C,B_C)\in\mathcal P_L(D,E)`), " である。"]),
+                      displayMath(String.raw`\begin{aligned}
+\Theta(A_C,B_C)&=A_C\setminus D&&\bigl(\because\ \Theta\text{ の定義}\bigr)\\
+&=(D\cup C)\setminus D&&\bigl(\because\ A_C\text{ の定義}\bigr)\\
+&=C&&\bigl(\because\ D\cap C=\varnothing\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "であり、逆に ", math(String.raw`(A,B)\in\mathcal P_L(D,E)`), " から得た ",
+                        math(String.raw`C=A\setminus D`), " については ", math(String.raw`A_C=A`), " かつ ",
+                        math(String.raw`B_C=B`), " である。よって二つの構成は互いに逆であり、全単射と個数の等式を得る。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_signed_selection_sum_definition_archived",
     targets: ["def_signed_even_subgraph_polynomial"],
     title: { text: "不採用経路: 共通辺と単純通過辺を固定した符号付き選択和" },
@@ -29,11 +104,11 @@ export default defineNotes([
 \end{aligned}}\ \in\ \mathbb Z`),
       paragraph([
         "で定める。選択集合 ", math(String.raw`\mathcal C_L(D,E)`), " は ",
-        ref("def_even_subgraph_pair_fiber"), "、巻き付き偶奇は ",
+        "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "、巻き付き偶奇は ",
         ref("def_torus_winding_parities"), " で定めた。",
         math(String.raw`C\in\mathcal C_L(D,E)`), " なら ",
         math(String.raw`D\cup C`), " は偶部分グラフであり、",
-        ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+        "参照用ノート「不採用経路: 偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる」", " の逆写像により ",
         math(String.raw`D\cup(E\setminus C)`), " も偶部分グラフである。したがって二つの巻き付き偶奇は定まり、各被加数は ",
         math(String.raw`\{-1,1\}\subset\mathbb Z`), " に属する。有限和なので値は ",
         math(String.raw`\mathbb Z`), " に属し、実数体も複素数体も現れない。",
@@ -910,7 +985,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`\operatorname{Even}_L(E)`),
                         "（", ref("def_even_edge_subset"), "）を満たすとする。選択 ",
                         math(String.raw`C\in\mathcal C_L(D,E)`),
-                        "（", ref("def_even_subgraph_pair_fiber"), "）の符号指数を",
+                        "（", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "）の符号指数を",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 \vartheta^{a,b}_L(D,E;C)
@@ -1300,7 +1375,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`D,E\subseteq E_L`), " は ", math(String.raw`\operatorname{Even}_L(E)`),
                         "（", ref("def_even_edge_subset"), "）を満たすとする。任意の選択 ",
                         math(String.raw`C\in\mathcal C_L(D,E)`),
-                        "（", ref("def_even_subgraph_pair_fiber"), "）と、",
+                        "（", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "）と、",
                         math(String.raw`\operatorname{Even}_L(H)`), " を満たす任意の部分集合 ",
                         math(String.raw`H\subseteq E`), " について、",
                       ]),
@@ -1380,13 +1455,13 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       paragraph([
                         "を得る。第一の主張を示す。", math(String.raw`C\in\mathcal C_L(D,E)`), " より ",
                         math(String.raw`\operatorname{Even}_L(A)`),
-                        "（", ref("def_even_subgraph_pair_fiber"), "）なので、偶性の保存により ",
+                        "（", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "）なので、偶性の保存により ",
                         math(String.raw`\operatorname{Even}_L(A\mathbin\triangle H)`),
                         " である。準備の等式 ",
                         math(String.raw`D\cup(C\mathbin\triangle H)=A\mathbin\triangle H`), " と ",
                         math(String.raw`C\mathbin\triangle H\subseteq E`), " から ",
                         math(String.raw`C\mathbin\triangle H\in\mathcal C_L(D,E)`),
-                        "（", ref("def_even_subgraph_pair_fiber"), "）である。",
+                        "（", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "）である。",
                       ]),
                       paragraph(["第二の主張を示す。求めたい値から始める。"]),
                       displayMath(String.raw`\begin{aligned}
@@ -1572,7 +1647,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   \qquad \tau_{C_0}(H):=C_0\mathbin\triangle H`),
                       paragraph([
                         "は全単射である。したがって、選択集合が非空なら対称差作用は単純推移的である。",
-                        "選択集合は ", ref("def_even_subgraph_pair_fiber"), "、作用する有限集合は ",
+                        "選択集合は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", "、作用する有限集合は ",
                         "上の定義", " で定めた。全て有限集合の演算と ",
                         math(String.raw`\mathbb N`), " の偶奇だけで閉じる。",
                       ]),
@@ -2144,7 +2219,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
   },
   {
     id: "note_kac_ward_even_subgraph_pair_stratified_count_archived",
-    targets: ["def_even_subgraph_pair_fiber"],
+    targets: ["def_even_edge_subset"],
     title: { text: "不採用経路: 偶部分グラフ順序対の母関数の層別" },
     body: [
       paragraph(["Pfaffian 経路で平方恒等式を閉じたため、偶部分グラフ順序対の母関数による直接比較は採らない。元の主張と証明を保存する。"]),
@@ -2156,7 +2231,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         "が成り立つ。偶部分グラフの述語 ", math(String.raw`\operatorname{Even}_L`), " は ",
                         ref("def_even_edge_subset"), "、選択集合 ", math(String.raw`\mathcal C_L(D,E)`),
                         " と対称差 ", math(String.raw`A\mathbin\triangle B`), " は ",
-                        ref("def_even_subgraph_pair_fiber"), " で定めた。",
+                        "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」", " で定めた。",
                         math(String.raw`\lvert A\rvert\in\mathbb N`),
                         " は有限集合の元の個数である。両辺の和はいずれも有限集合の上の有限和である。",
                       ]),
@@ -2184,7 +2259,7 @@ d_{E}(v)\bmod2
                         " は右辺の和の添字集合（互いに素で第 2 成分が偶部分グラフである辺集合の順序対の全体）に属する。",
                       ]),
                       paragraph([
-                        "さらにこの ", math(String.raw`(A,B)`), " は ", ref("def_even_subgraph_pair_fiber"),
+                        "さらにこの ", math(String.raw`(A,B)`), " は ", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」",
                         " の四条件 ", math(String.raw`\operatorname{Even}_L(A)`), "、",
                         math(String.raw`\operatorname{Even}_L(B)`), "、", math(String.raw`A\cap B=D`), "、",
                         math(String.raw`A\mathbin\triangle B=E`), " をすべて満たすので ",
@@ -2208,7 +2283,7 @@ d_{E}(v)\bmod2
 &=\lvert A\mathbin\triangle B\rvert+2\,\lvert A\cap B\rvert
 &&\bigl(\because\ A\mathbin\triangle B=(A\setminus B)\cup(B\setminus A)\text{ は互いに素な分割。}\mathbb N\text{ の四則}\bigr)\\
 &=\lvert E\rvert+2\,\lvert D\rvert
-&&\bigl(\because\ (A,B)\in\mathcal P_L(D,E)\text{ の条件 }A\cap B=D,\ A\mathbin\triangle B=E.\ \blkref{def_even_subgraph_pair_fiber}\bigr)
+&&\bigl(\because\ (A,B)\in\mathcal P_L(D,E)\text{ の条件 }A\cap B=D,\ A\mathbin\triangle B=E.\ \text{退避した偶部分グラフ対の定義}\bigr)
 \end{aligned}`),
                       paragraph(["求めたい左辺から始める。"]),
                       displayMath(String.raw`\begin{aligned}
@@ -2220,7 +2295,7 @@ d_{E}(v)\bmod2
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\lvert\mathcal P_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
 &&\bigl(\because\ \text{内側の項は }(A,B)\text{ に依らない。}\mathbb{Z}[x]\text{ の分配則}\bigr)\\
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}\lvert\mathcal C_L(D,E)\rvert\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ \text{各添字は }D\cap E=\varnothing\text{ と }\operatorname{Even}_L(E)\text{ を満たすので }\blkref{claim_even_subgraph_pair_fiber_bijection}\bigr)
+&&\bigl(\because\ \text{各添字は }D\cap E=\varnothing\text{ と }\operatorname{Even}_L(E)\text{ を満たすので }\text{退避した偶部分グラフ対の全単射}\bigr)
 \end{aligned}`),
                       paragraph([
                         "全ての和は有限集合の上の有限和であり ", math(String.raw`\mathbb{Z}[x]`),
@@ -2271,7 +2346,7 @@ d_{E}(v)\bmod2
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
 \ \sum_{C\in\mathcal C_L(D,E)}
 (-1)^{\vartheta_{a,b}(D\cup C)+\vartheta_{a,b}(D\cup(E\setminus C))}x^{\,2\lvert D\rvert+\lvert E\rvert}
-&&\bigl(\because\ \blkref{claim_even_subgraph_pair_fiber_bijection}\text{ の逆写像 }C\mapsto(D\cup C,D\cup(E\setminus C))\bigr)\\
+&&\bigl(\because\ \text{退避した偶部分グラフ対の全単射}\text{ の逆写像 }C\mapsto(D\cup C,D\cup(E\setminus C))\bigr)\\
 &=\sum_{\substack{D\subseteq E_L,\ E\subseteq E_L\\ D\cap E=\varnothing,\ \operatorname{Even}_L(E)}}
 \mathcal U^{a,b}_L(D,E)\cdot x^{\,2\lvert D\rvert+\lvert E\rvert}
 &&\bigl(\because\ \text{参照用ノート「不採用経路: 共通辺と単純通過辺を固定した符号付き選択和」}\text{ と }\mathbb Z[x]\text{ の分配則}\bigr)
@@ -3093,9 +3168,9 @@ r&=[L-1-\delta_i]_L&&\bigl(\because\ [r+\delta_i]_L=L-1\text{ の合同式の移
                       ]),
       paragraph(["元の証明:"]),
                       paragraph([
-                        math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。", ref("def_even_subgraph_pair_fiber"),
+                        math(String.raw`C\in\mathcal C_L(D,E)`), " を取る。", "参照用ノート「不採用経路: 共通辺と単純通過辺を固定した偶部分グラフ対」",
                         " により ", math(String.raw`C\subseteq E`), " かつ ", math(String.raw`\operatorname{Even}_L(D\cup C)`),
-                        " である。さらに ", ref("claim_even_subgraph_pair_fiber_bijection"), " の逆写像により ",
+                        " である。さらに ", "参照用ノート「不採用経路: 偶部分グラフ対は一方へ入れる単純通過辺の選び方で数えられる」", " の逆写像により ",
                         math(String.raw`\operatorname{Even}_L\bigl(D\cup(E\setminus C)\bigr)`), " である。したがって ",
                         math(String.raw`E\setminus C\in\mathcal C_L(D,E)`), " であり、", math(String.raw`\kappa_{D,E}`),
                         " は選択集合から自分自身への写像として定まる。",
