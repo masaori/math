@@ -811,7 +811,6 @@ export const ALL_LABELS = [
   "def_mode_block_matrix",
   "def_mode_small_matrix",
   "def_moved_edge_set",
-  "def_moved_edge_support_set",
   "def_moved_orbit_family",
   "def_multiplicity",
   "def_negative_direction_gate_crossing_count",

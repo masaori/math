@@ -76072,34 +76072,7 @@ D^{a,b}_L(x)
                 element: {
                   kind: "elementGroup",
                   id: "group_of_kac_ward_claim_reversal_free_moved_support_even",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
-                      id: "kac_ward_definition_moved_edge_support_set",
-                      kind: "definition",
-                      title: { text: "動く辺の台の辺集合" },
-                      labels: ["def_moved_edge_support_set"],
-                      habitat: "N",
-                      statement: [
-                        paragraph([
-                          math(String.raw`L\ge1`), " とし、",
-                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
-                          " を取る。動く辺の台の辺集合を",
-                        ]),
-                        displayMath(String.raw`E_{\mathrm{supp}}(\varphi):=
-\bigl\{\,e\in E_L\ \bigm|\ (e,0)\in M(\varphi)\ \text{または}\ (e,1)\in M(\varphi)\,\bigr\}
-\ \subseteq\ E_L`),
-                        paragraph([
-                          "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
-                          ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
-                          math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
-                          " で定めた。有限集合 ", math(String.raw`E_L`),
-                          " の部分集合であり、所属の判定は有限個の向き付き辺の比較で決まる。",
-                          "実数体も複素数体も現れない。",
-                        ]),
-                      ],
-                    },
-                  }],
+                  beforeFocus: [],
                   focus: {
                     id: "kac_ward_claim_reversal_free_moved_support_even",
                     kind: "claim",
@@ -76125,7 +76098,7 @@ D^{a,b}_L(x)
                       displayMath(String.raw`\operatorname{Even}_L\bigl(E_{\mathrm{supp}}(\varphi)\bigr)`),
                       paragraph([
                         "である。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ",
-                        ref("def_moved_edge_support_set"), "、偶部分グラフの述語 ",
+                        "参照用ノート「不採用経路: 動く辺の台の辺集合」", "、偶部分グラフの述語 ",
                         math(String.raw`\operatorname{Even}_L`), " は ", ref("def_even_edge_subset"),
                         " で定めた。",
                       ]),
@@ -76141,7 +76114,7 @@ D^{a,b}_L(x)
                       paragraph([
                         "まず、台の各辺の上にある動く向き付き辺が一意であることを示す。",
                         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " を取る。",
-                        ref("def_moved_edge_support_set"), " により ",
+                        "参照用ノート「不採用経路: 動く辺の台の辺集合」", " により ",
                         math(String.raw`(e,0)\in M(\varphi)`), " または ",
                         math(String.raw`(e,1)\in M(\varphi)`),
                         " である。両方が成り立つと仮定すると、", ref("def_edge_reversal"),
@@ -76156,7 +76129,7 @@ D^{a,b}_L(x)
                         math(String.raw`p:M(\varphi)\to E_{\mathrm{supp}}(\varphi)`), " を ",
                         math(String.raw`p(e,d):=e`), " で定める（",
                         math(String.raw`(e,d)\in M(\varphi)`), " ならば ",
-                        ref("def_moved_edge_support_set"), " により ",
+                        "参照用ノート「不採用経路: 動く辺の台の辺集合」", " により ",
                         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`),
                         " なので、値は終域に属する）。任意の ",
                         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " について ",
@@ -76321,7 +76294,7 @@ E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)
 \ \subseteq\ E_L`),
                           paragraph([
                             "で定める。台の辺集合 ", math(String.raw`E_{\mathrm{supp}}(\varphi)`),
-                            " は ", ref("def_moved_edge_support_set"), "、反転対の辺集合 ",
+                            " は ", "参照用ノート「不採用経路: 動く辺の台の辺集合」", "、反転対の辺集合 ",
                             math(String.raw`D(\varphi)`), " は ", ref("def_doubled_edge_set"),
                             " で定めた。定義から ",
                             math(String.raw`E_{\mathrm{supp}}(\varphi)`), " は ",
@@ -76330,7 +76303,7 @@ E_{\mathrm{supp}}(\varphi)\setminus D(\varphi)
                             math(String.raw`e\in E_1(\varphi)`), " とは、二つの向き ",
                             math(String.raw`(e,0),(e,1)`),
                             " のうちちょうど一方だけが動く辺の集合に属することである",
-                            "（少なくとも一方が属することは ", ref("def_moved_edge_support_set"),
+                            "（少なくとも一方が属することは ", "参照用ノート「不採用経路: 動く辺の台の辺集合」",
                             "、両方は属さないことは ", ref("def_doubled_edge_set"),
                             " の否定）。実数体も複素数体も現れない。",
                           ]),
@@ -76424,7 +76397,7 @@ S_{\mathrm{src}}:=\{\,\vec e\in M(\varphi)\mid\operatorname{src}(\vec e)=v\,\}`)
                       ]),
                       displayMath(String.raw`M_e(\varphi):=\{\,d\in I\ \mid\ (e,d)\in M(\varphi)\,\}\qquad(I=\{0,1\})`),
                       paragraph([
-                        "と置く。", ref("def_moved_edge_support_set"), " により、",
+                        "と置く。", "参照用ノート「不採用経路: 動く辺の台の辺集合」", " により、",
                         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " と ",
                         math(String.raw`M_e(\varphi)\ne\varnothing`), " は同値である。さらに ",
                         ref("def_doubled_edge_set"), " により ",

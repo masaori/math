@@ -7,6 +7,31 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_moved_edge_support_set_archived",
+    targets: ["claim_reversal_free_moved_support_even"],
+    title: { text: "不採用経路: 動く辺の台の辺集合" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の台を用いる直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`L\ge1`), " とし、",
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`),
+        " を取る。動く辺の台の辺集合を",
+      ]),
+      displayMath(String.raw`E_{\mathrm{supp}}(\varphi):=
+\bigl\{\,e\in E_L\ \bigm|\ (e,0)\in M(\varphi)\ \text{または}\ (e,1)\in M(\varphi)\,\bigr\}
+\ \subseteq\ E_L`),
+      paragraph([
+        "で定める。動く辺の集合 ", math(String.raw`M(\varphi)`), " は ",
+        ref("def_moved_edge_set"), "、向き付き辺が台の辺と向きの対 ",
+        math(String.raw`(e,d)`), " であることは ", ref("def_oriented_edges"),
+        " で定めた。有限集合 ", math(String.raw`E_L`),
+        " の部分集合である。有限個の向き付き辺を比較すれば所属を判定できる。",
+        "実数体も複素数体も現れない。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_nonbacktracking_permutation_phase_contribution_archived",
     targets: ["def_fiber_phase_weight"],
     title: { text: "不採用経路: 非後退置換一つの位相寄与" },
@@ -997,7 +1022,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                       paragraph([
                         "と置く（向き付き辺が台の辺と向きの対 ", math(String.raw`(e,d)`),
                         " であることは ", ref("def_oriented_edges"), "）。",
-                        ref("def_moved_edge_support_set"), " により、",
+                        "「動く辺の台の辺集合」の退避ノート", " により、",
                         math(String.raw`e\in E_{\mathrm{supp}}(\varphi)`), " と ",
                         math(String.raw`M_e(\varphi)\ne\varnothing`), " は同値である。任意の ",
                         math(String.raw`(e,d)\in M(\varphi)`), " は ",
@@ -1210,7 +1235,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         " である。したがって、二つの向きが両方 ", math(String.raw`M(\mathcal T(\varphi))`),
                         " に属することと両方 ", math(String.raw`M(\varphi)`), " に属することは同値であり（",
                         ref("def_doubled_edge_set"), "）、少なくとも一方が属することも同値である（",
-                        ref("def_moved_edge_support_set"), "）。よって ",
+                        "「動く辺の台の辺集合」の退避ノート", "）。よって ",
                         math(String.raw`D(\mathcal T(\varphi))=D(\varphi)`), " かつ ",
                         math(String.raw`E_{\mathrm{supp}}(\mathcal T(\varphi))=E_{\mathrm{supp}}(\varphi)`), " であり、",
                         ref("def_single_traversal_edge_set"), " により ",
