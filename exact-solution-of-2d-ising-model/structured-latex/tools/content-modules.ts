@@ -45,6 +45,7 @@ export const TRAILING_CONTENT_FILES = [
   "partition_function_projection_and_jordan_wigner.ts",
   "eigenvalue_problem_reduction_to_A_theta.ts",
   "eigenvalue_problem_diagonalization_and_exponential_form.ts",
+  "eigenvalue_problem_eigenvalues_of_V_plus.ts",
 ] as const;
 
 /**

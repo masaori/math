@@ -1,7 +1,7 @@
 /-
 # 数演算子の同時固有空間分解（各空間は 1 次元）（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `check_joint_eigenspace_decomposition`（`evenEigen_005_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。

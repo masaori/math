@@ -23,6 +23,7 @@ export const ALL_LABELS = [
   "V2_exponential_representation",
   "V2_in_Z_Y",
   "V2_invertible",
+  "V_plus_eigenvalues_with_c_value_and_strict_maximum",
   "V_plus_eq_c_check_Vprime",
   "V_plus_eq_c_exp_sum_gamma_check_number_operator",
   "V_plus_factors_invertible",

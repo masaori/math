@@ -1,6 +1,6 @@
 # 章 009「転送行列 `V` の固有値」の形式化
 
-対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック）
+対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック。章立ての組み直しで、`iH_is_real_symmetric`・`sign_flip_conjugation` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った）
 
 - 具体版: `Ising2D/Part009/`
 - 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`

@@ -65,12 +65,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`V^{(+)}\text{ の固有値}` },
         organizationGoalLabel: "chapter_organization_goal_eigenvalues_of_V_plus",
-        goalLabels: [
-          "constant_c_value_even_sector",
-          "check_joint_eigenspace_decomposition",
-          "eigenvalues_of_V_plus",
-          "max_eigenvalue_of_V_plus_simple",
-        ],
+        goalLabels: ["V_plus_eigenvalues_with_c_value_and_strict_maximum"],
         proposalEntryCount: 15,
       },
       {

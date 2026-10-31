@@ -1,7 +1,7 @@
 /-
 # 符号反転共役 `U`（具体版）
 
-対応する人手証明（`structured-latex/content/009_eigenvalues_of_V.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `sign_flip_conjugation`（`eigenvalues_of_V_016_claim_sign_flip_conjugation`）
 
 原文の `U := E F`（`E = ∏_{m 奇数} σ^x_m`, `F = ∏_m σ^z_m`）を、サイトごとの

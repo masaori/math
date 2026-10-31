@@ -11,7 +11,7 @@ _sage_const_0 = Integer(0); _sage_const_1 = Integer(1); _sage_const_2 = Integer(
 #   (1) V^{(+)} Q^_eps = Lambda^_eps Q^_eps
 #   (2) V^{(+)} の 2^M 個の固有値全体（重複度こみ）が { Lambda^_eps } と相対誤差 1e-8 以下で一致
 #   (3) Lambda^_max = Lambda^_{(1,...,1)} = Lambda^{(1/2)}_M
-#       （012 章 def_Lambda_delta_M の Lambda^{(delta)}_M で delta = 1/2）
+#       （def_Lambda_delta_M の Lambda^{(delta)}_M で delta = 1/2）
 #   (4) 最大固有値は**単純**：eps != (1,...,1) なら Lambda^_eps < Lambda^_max が狭義に成り立つ
 #       （gamma(theta~_mu) > 0 が全 mu で成り立つため）
 #   (5) 対照: 整数運動量 delta = 0 の Lambda^{(0)}_M は V^{(+)} の最大固有値と一致しない

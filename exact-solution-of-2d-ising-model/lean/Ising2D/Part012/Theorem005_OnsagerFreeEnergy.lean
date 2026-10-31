@@ -1,7 +1,8 @@
 /-
 # Onsager の自由エネルギーの表式
 
-人手証明（正本は `structured-latex/content/012_free_energy.ts`）:
+人手証明（`def_Theta_delta_M`・`def_Lambda_delta_M` の正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
+`onsager_free_energy_expression` の正本は `structured-latex/content/012_free_energy.ts`）:
 - `freeenergy_definition_Theta_delta_M`（ラベル `def_Theta_delta_M`）: `Θ^{(δ)}_M` の定義（集合としては定義せず `tagPoint` の値で代える）
 - `freeenergy_definition_Lambda_delta_M`（ラベル `def_Lambda_delta_M`）: `Λ^{(δ)}_M` の定義（`LambdaM`）
 - `freeenergy_005_theorem_onsager_expression`（ラベル `onsager_free_energy_expression`）

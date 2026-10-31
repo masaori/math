@@ -1,7 +1,7 @@
 /-
 # `V̌'` の固有値（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）、および
 `def_check_number_operator` (2) の `X̌`, `V̌'`（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）。
 

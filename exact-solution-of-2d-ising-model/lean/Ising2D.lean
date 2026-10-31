@@ -171,6 +171,7 @@ import Ising2D.Part014.Claim009_FactorizationATheta
 import Ising2D.Part014.Claim010_TVPlusAction
 import Ising2D.Part014.ClaimTVPlusCheckZYViaB1B2B1
 import Ising2D.Part016.ClaimVPlusEqCExpSumCheckNumberOperator
+import Ising2D.Part017.ClaimVPlusEigenvaluesWithCValueAndStrictMaximum
 import Ising2D.NecSuf.PairedFermion
 import Ising2D.NecSuf.ConstantC
 import Ising2D.NecSuf.SimpleEigenvalue

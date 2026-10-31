@@ -11,10 +11,10 @@ _sage_const_0 = Integer(0); _sage_const_2 = Integer(2); _sage_const_8 = Integer(
 #  (c) V^{(+)} はエルミートかつ固有値がすべて正（＝正定値）、tr(V^{(+)}) > 0
 #      (V^{(+)})^{-1} も同様
 #  (d) U := E F について U S_1^{(+)} U^{-1} = -S_1^{(+)}、U S_2 U^{-1} = -S_2
-#      （sign_flip_conjugation の (+) 側。009 章の証明は (-) 側でも同じ U を使う）
+#      （sign_flip_conjugation。S_1^{(+)} について述べる）
 #  (e) tau := tr(exp(S_1^{(+)}) exp(S_2)) について tr(exp(-S_1^{(+)}) exp(-S_2)) = tau
 #  (f) tr(V^{(+)}) / tr((V^{(+)})^{-1}) = (2 s_2)^M
-#  (g) c := tr(V^{(+)}) / tr(V^') = (2 sinh 2K_2)^{M/2}（本章の結論）
+#  (g) c := tr(V^{(+)}) / tr(V^') = (2 sinh 2K_2)^{M/2}（constant_c_value_even_sector の結論）
 # =========================================================================
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'

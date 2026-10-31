@@ -1038,6 +1038,7 @@ targets=(
   Ising2D.TVPlus_checkZ_checkY
   Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1
   Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator
+  Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.TV_hatZ_hatY_via_sandwich
   Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd

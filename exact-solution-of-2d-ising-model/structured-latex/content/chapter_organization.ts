@@ -207,14 +207,17 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
       paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`\epsilon\in\{0,1\}^{\check{\mathcal M}}`),
-        "）。",
+        "。前の章の ",
+        math(String.raw`c`),
+        " の値を一つ目の式で決める）。",
       ]),
-      displayMath(String.raw`c=(2\sinh 2K_2)^{M/2},\qquad
-\check Q_\epsilon=\prod_{\mu=1}^{M}\left(\epsilon_\mu\check n_\mu+(1-\epsilon_\mu)\left(I-\check n_\mu\right)\right),\qquad
+      displayMath(String.raw`V^{(+)}=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)\left(\check n_\mu-\tfrac12I\right)\right),\qquad
 V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
-      displayMath(String.raw`\check\Lambda_\epsilon=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right),`),
       displayMath(String.raw`\max_\epsilon\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}=\Lambda^{(1/2)}_M=(2\sinh 2K_2)^{M/2}\exp\left(\frac12\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\right),\qquad
 \epsilon\neq(1,\dots,1)\Longrightarrow\check\Lambda_\epsilon<\check\Lambda_{(1,\dots,1)}`),
+      paragraph(["ここに現れる記号は次である。"]),
+      displayMath(String.raw`\check Q_\epsilon=\prod_{\mu=1}^{M}\left(\epsilon_\mu\check n_\mu+(1-\epsilon_\mu)\left(I-\check n_\mu\right)\right),\qquad
+\check\Lambda_\epsilon=(2\sinh 2K_2)^{M/2}\exp\left(\sum_{\mu=1}^{M}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)`),
     ],
   },
   {

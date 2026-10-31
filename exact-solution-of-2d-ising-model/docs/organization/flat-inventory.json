@@ -9,14 +9,14 @@
     "2次元イジングモデル"
   ],
   "mathematicalToolPartTitle": "数学的道具立て",
-  "entryCount": 290,
+  "entryCount": 291,
   "classificationEntryCounts": {
     "数学的道具立て": 114,
-    "2次元イジングモデル": 176
+    "2次元イジングモデル": 177
   },
   "chapterPlacementProgress": {
-    "assignedChapterEntryCount": 167,
-    "placedUnderChapterHeadingEntryCount": 108,
+    "assignedChapterEntryCount": 168,
+    "placedUnderChapterHeadingEntryCount": 125,
     "unassignedIsingEntryCount": 9
   },
   "parts": [
@@ -846,12 +846,9 @@
           "title": "V^{(+)}\\text{ の固有値}",
           "titleFormat": "tex",
           "goalEntryIds": [
-            "evenEigen_009_claim_constant_c_value_even_sector",
-            "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-            "evenEigen_010_theorem_eigenvalues_of_V_plus",
-            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
           ],
-          "entryCount": 16,
+          "entryCount": 17,
           "proposalEntryCount": 15,
           "dependencyOrder": [
             {
@@ -949,9 +946,33 @@
                 "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
               ],
               "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+              ],
+              "inseparableDependencyUnit": false
             }
           ],
-          "placedUnderChapterHeadingEntryIds": []
+          "placedUnderChapterHeadingEntryIds": [
+            "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+            "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+            "freeenergy_definition_Theta_delta_M",
+            "freeenergy_definition_Lambda_delta_M",
+            "evenEigen_002_claim_check_number_operator_idempotent",
+            "evenEigen_003_claim_check_number_operators_commute",
+            "evenEigen_004_claim_trace_of_check_number_operator_product",
+            "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+            "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+            "evenEigen_007_claim_trace_of_check_Vprime",
+            "evenEigen_008_claim_V_plus_is_positive_definite",
+            "evenEigen_claim_V_plus_is_invertible",
+            "evenEigen_claim_trace_V_plus_is_positive",
+            "evenEigen_009_claim_constant_c_value_even_sector",
+            "evenEigen_010_theorem_eigenvalues_of_V_plus",
+            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+          ]
         },
         {
           "key": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
@@ -1507,7 +1528,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 290,
+    "reviewedEntryCount": 291,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -2402,7 +2423,7 @@
     },
     {
       "classification": "2次元イジングモデル",
-      "entryCount": 176,
+      "entryCount": 177,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -3633,6 +3654,13 @@
         {
           "order": 176,
           "entryIds": [
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 177,
+          "entryIds": [
             "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
           ],
           "inseparableDependencyUnit": false
@@ -3698,50 +3726,6 @@
         {
           "dependentId": "TV1_hatZ_hatY_044_claim_critical_condition",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-          "prerequisiteId": "linear_space_general_000d_claim_kronecker_transpose"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
         },
         {
           "dependentId": "maxeig_002_claim_Z_equals_trace_of_W",
@@ -3872,14 +3856,6 @@
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
-          "dependentId": "freeenergy_definition_Theta_delta_M",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "freeenergy_definition_Lambda_delta_M",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
           "dependentId": "freeenergy_005_theorem_onsager_expression",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
@@ -3892,114 +3868,6 @@
           "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
         },
         {
-          "dependentId": "evenEigen_002_claim_check_number_operator_idempotent",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
-          "prerequisiteId": "eigenvalues_of_V_001_definition_trace"
-        },
-        {
-          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
-          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
-        },
-        {
-          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
-          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-          "prerequisiteId": "eigenvalues_of_V_003_claim_trace_of_idempotent"
-        },
-        {
-          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "exp_linear_map_000a_claim_real_exp_series_converges"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "exp_linear_map_001_theorem_exp_series_pointwise_converges"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
-        },
-        {
-          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-          "prerequisiteId": "linear_space_general_003b_claim_matrix_multiplication_continuity"
-        },
-        {
-          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
-          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
-        },
-        {
-          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
-          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
-          "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
-          "dependentId": "evenEigen_claim_V_plus_is_invertible",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_claim_V_plus_is_invertible",
-          "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
-        },
-        {
-          "dependentId": "evenEigen_claim_V_plus_is_invertible",
-          "prerequisiteId": "exp_linear_map_004_theorem_exp_zero_is_identity"
-        },
-        {
-          "dependentId": "evenEigen_claim_V_plus_is_invertible",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
           "dependentId": "evenEigen_claim_V_plus_inverse_is_positive_definite",
           "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
         },
@@ -4016,60 +3884,12 @@
           "prerequisiteId": "exp_linear_map_004_theorem_exp_zero_is_identity"
         },
         {
-          "dependentId": "evenEigen_claim_trace_V_plus_is_positive",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_claim_trace_V_plus_is_positive",
-          "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
-        },
-        {
           "dependentId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
           "dependentId": "evenEigen_claim_V_plus_inverse_positive_and_traces",
           "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "calculation_formulae_025_claim_complex_numbers_form_a_field"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
-        },
-        {
-          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
-          "prerequisiteId": "linear_space_general_003_claim_matrix_norm_submultiplicativity"
-        },
-        {
-          "dependentId": "evenEigen_010_theorem_eigenvalues_of_V_plus",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
-          "dependentId": "evenEigen_010_theorem_eigenvalues_of_V_plus",
-          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
-        },
-        {
-          "dependentId": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
           "dependentId": "closing_001_claim_epsilon_anticommutes",
@@ -5670,11 +5490,227 @@
         {
           "dependentId": "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "linear_space_general_000_definition_kronecker_product"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+          "prerequisiteId": "linear_space_general_000d_claim_kronecker_transpose"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+          "prerequisiteId": "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+          "prerequisiteId": "linear_space_general_000b_claim_kronecker_product_rule"
+        },
+        {
+          "dependentId": "freeenergy_definition_Theta_delta_M",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "freeenergy_definition_Lambda_delta_M",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_002_claim_check_number_operator_idempotent",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
+          "prerequisiteId": "eigenvalues_of_V_001_definition_trace"
+        },
+        {
+          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
+          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
+        },
+        {
+          "dependentId": "evenEigen_004_claim_trace_of_check_number_operator_product",
+          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+        },
+        {
+          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+          "prerequisiteId": "eigenvalues_of_V_003_claim_trace_of_idempotent"
+        },
+        {
+          "dependentId": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "exp_linear_map_000a_claim_real_exp_series_converges"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "exp_linear_map_001_theorem_exp_series_pointwise_converges"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "linear_space_general_002b_definition_matrix_norm"
+        },
+        {
+          "dependentId": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+          "prerequisiteId": "linear_space_general_003b_claim_matrix_multiplication_continuity"
+        },
+        {
+          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_007_claim_trace_of_check_Vprime",
+          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
+        },
+        {
+          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
+          "prerequisiteId": "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+        },
+        {
+          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
+          "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+        },
+        {
+          "dependentId": "evenEigen_008_claim_V_plus_is_positive_definite",
+          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+        },
+        {
+          "dependentId": "evenEigen_claim_V_plus_is_invertible",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_claim_V_plus_is_invertible",
+          "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
+        },
+        {
+          "dependentId": "evenEigen_claim_V_plus_is_invertible",
+          "prerequisiteId": "exp_linear_map_004_theorem_exp_zero_is_identity"
+        },
+        {
+          "dependentId": "evenEigen_claim_V_plus_is_invertible",
+          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+        },
+        {
+          "dependentId": "evenEigen_claim_trace_V_plus_is_positive",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_claim_trace_V_plus_is_positive",
+          "prerequisiteId": "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "calculation_formulae_025_claim_complex_numbers_form_a_field"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "eigenvalues_of_V_002_claim_trace_properties"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "exp_linear_map_002_definition_exp_of_endomorphism"
+        },
+        {
+          "dependentId": "evenEigen_009_claim_constant_c_value_even_sector",
+          "prerequisiteId": "linear_space_general_003_claim_matrix_norm_submultiplicativity"
+        },
+        {
+          "dependentId": "evenEigen_010_theorem_eigenvalues_of_V_plus",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "evenEigen_010_theorem_eigenvalues_of_V_plus",
+          "prerequisiteId": "linear_space_general_002_claim_scalar_identity_commutes"
+        },
+        {
+          "dependentId": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         }
       ]
     }
   ],
-  "dependencySupportNodeCount": 51,
+  "dependencySupportNodeCount": 52,
   "unnamedEntryIds": [
     "calculation_formulae_032_claim_arg_of_product",
     "calculation_formulae_033_claim_arg_of_quotient",
@@ -13428,170 +13464,6 @@
       }
     },
     {
-      "id": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-      "kind": "claim",
-      "title": "i K_1 H_1^{(+)} \\text{ と } i K_2^* H_2 \\text{ は実対称}",
-      "titleFormat": "tex",
-      "labels": [
-        "iH_is_real_symmetric"
-      ],
-      "sourceFile": "009_eigenvalues_of_V.ts",
-      "sourceOrdinal": 16,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10205,
-        "inspectedContentSha256": "5478c9a18fd8ddda73a1384b59260c5cf0094566ee2d4c3e447cfabb14d09202",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_H1_plus",
-        "def_H2",
-        "def_hermitian_positive_definite",
-        "def_kronecker",
-        "def_transfer_matrix_symbols",
-        "definition_of_cc",
-        "kronecker_product_rule",
-        "kronecker_transpose",
-        "pauli_matrix_products",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "linear_space_general_000_definition_kronecker_product",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "linear_space_general_000d_claim_kronecker_transpose",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011a_definition_H1_pm",
-        "transfer_matrix_011b_definition_H2"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc",
-        "def_H1_plus",
-        "def_H2"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_transfer_matrix_symbols"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [
-        "transfer_matrix_011d_claim_V2_exponential_representation"
-      ],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 75,
-        "dependencyUnitEntryIds": [
-          "eigenvalues_of_V_014_claim_iH_is_real_symmetric"
-        ]
-      }
-    },
-    {
-      "id": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-      "kind": "claim",
-      "title": "\\text{符号反転共役 } U",
-      "titleFormat": "tex",
-      "labels": [
-        "sign_flip_conjugation"
-      ],
-      "sourceFile": "009_eigenvalues_of_V.ts",
-      "sourceOrdinal": 18,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [
-          "サイト"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 11805,
-        "inspectedContentSha256": "ba538d64e6437cc45ccdd9e33c9ea4f37bb186cdb2880b1926d5857d61edce77",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_H1_plus",
-        "def_H2",
-        "def_transfer_matrix_symbols",
-        "definition_of_cc",
-        "iH_is_real_symmetric",
-        "kronecker_product_rule",
-        "pauli_matrix_products",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-        "linear_space_general_000b_claim_kronecker_product_rule",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011a_definition_H1_pm",
-        "transfer_matrix_011b_definition_H2"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc",
-        "def_H1_plus",
-        "def_H2"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 76,
-        "dependencyUnitEntryIds": [
-          "eigenvalues_of_V_016_claim_sign_flip_conjugation"
-        ]
-      }
-    },
-    {
       "id": "maxeig_002_claim_Z_equals_trace_of_W",
       "kind": "claim",
       "title": "Z = \\mathrm{tr}(W^{N_{\\mathrm{row}}})",
@@ -14779,135 +14651,6 @@
       }
     },
     {
-      "id": "freeenergy_definition_Theta_delta_M",
-      "kind": "definition",
-      "title": "\\Theta^{(\\delta)}_{M_{\\mathrm{col}}}",
-      "titleFormat": "tex",
-      "labels": [
-        "def_Theta_delta_M"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "sourceOrdinal": 7,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1138,
-        "inspectedContentSha256": "b1a05296474dcb2790280f3a90b96657df783a2f14b8a23456c001fd9a294631",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 1,
-        "dependencyUnitEntryIds": [
-          "freeenergy_definition_Theta_delta_M"
-        ]
-      }
-    },
-    {
-      "id": "freeenergy_definition_Lambda_delta_M",
-      "kind": "definition",
-      "title": "\\Lambda^{(\\delta)}_{M_{\\mathrm{col}}}",
-      "titleFormat": "tex",
-      "labels": [
-        "def_Lambda_delta_M"
-      ],
-      "sourceFile": "012_free_energy.ts",
-      "sourceOrdinal": 7,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1819,
-        "inspectedContentSha256": "925835c49980ca8c53dcbf8c17a5d0cad86f3baac3aecb30fe8ba4a5185cf03b",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "def_Theta_delta_M",
-        "def_transfer_matrix",
-        "gamma1_lower_bound_all_theta",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-        "freeenergy_definition_Theta_delta_M",
-        "partition_function_2d_ising_003_definition_transfer_matrix"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_transfer_matrix",
-        "gamma1_lower_bound_all_theta"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 134,
-        "dependencyUnitEntryIds": [
-          "freeenergy_definition_Lambda_delta_M"
-        ]
-      }
-    },
-    {
       "id": "freeenergy_005_theorem_onsager_expression",
       "kind": "theorem",
       "title": "Onsager の自由エネルギーの表式",
@@ -14967,6 +14710,8 @@
       "forwardStatementReferenceReview": null,
       "interimForwardReferenceLabelsToReorganizedChapters": [
         "def_A_theta",
+        "def_Lambda_delta_M",
+        "def_Theta_delta_M",
         "gamma1_lower_bound_all_theta"
       ],
       "staleForwardReferenceReviewLabels": [],
@@ -15062,602 +14807,6 @@
       }
     },
     {
-      "id": "evenEigen_002_claim_check_number_operator_idempotent",
-      "kind": "claim",
-      "title": "\\check{n}_\\mu^2 = \\check{n}_\\mu",
-      "titleFormat": "tex",
-      "labels": [
-        "check_number_operator_idempotent"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 4,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6083,
-        "inspectedContentSha256": "131b01158cb4f16dfb566b5d77fbb146949ad4c237ab3ea9bd7242d0e6b6156f",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "anticommutator_of_check_psi",
-        "def_check_index_set",
-        "def_check_number_operator",
-        "definition_of_cc"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "evenEigen_001_definition_check_number_operator",
-        "evenfermi_003_claim_anticommutator",
-        "evensector_003a_definition_check_index_set"
-      ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc",
-        "anticommutator_of_check_psi",
-        "def_check_number_operator"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_check_index_set"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 151,
-        "dependencyUnitEntryIds": [
-          "evenEigen_002_claim_check_number_operator_idempotent"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_003_claim_check_number_operators_commute",
-      "kind": "claim",
-      "title": "\\check{n}_\\mu \\check{n}_\\nu = \\check{n}_\\nu \\check{n}_\\mu",
-      "titleFormat": "tex",
-      "labels": [
-        "check_number_operators_commute"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 5,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6924,
-        "inspectedContentSha256": "310a3965d91a553003370c9769bff30fcab175565c45a4956f21d5217dd2ba2d",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "anticommutator_of_check_psi",
-        "def_check_index_set",
-        "def_check_number_operator"
-      ],
-      "dependsOnEntryIds": [
-        "evenEigen_001_definition_check_number_operator",
-        "evenfermi_003_claim_anticommutator",
-        "evensector_003a_definition_check_index_set"
-      ],
-      "semanticPrerequisiteLabels": [],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 152,
-        "dependencyUnitEntryIds": [
-          "evenEigen_003_claim_check_number_operators_commute"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_004_claim_trace_of_check_number_operator_product",
-      "kind": "claim",
-      "title": "\\mathrm{tr}\\!\\left(R_{\\mu_1}^{(e_1)}\\cdots R_{\\mu_k}^{(e_k)}\\right) = 2^{M_{\\mathrm{col}}-k}\n\\quad \\left(R_\\mu^{(1)} = \\check{n}_\\mu,\\ R_\\mu^{(0)} = I - \\check{n}_\\mu\\right)",
-      "titleFormat": "tex",
-      "labels": [
-        "trace_of_check_number_operator_product"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 6,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9649,
-        "inspectedContentSha256": "d028e0ca25606f70d4b208e17ec9afb870a47f07ec64330e5169782b64b6fdc5",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "check_number_operator_idempotent",
-        "check_number_operators_commute",
-        "def_check_number_operator",
-        "def_trace",
-        "definition_of_cc",
-        "scalar_identity_commutes",
-        "set_and_algebra_notation",
-        "trace_basic_properties"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_001_definition_trace",
-        "eigenvalues_of_V_002_claim_trace_properties",
-        "evenEigen_001_definition_check_number_operator",
-        "evenEigen_002_claim_check_number_operator_idempotent",
-        "evenEigen_003_claim_check_number_operators_commute",
-        "linear_space_general_002_claim_scalar_identity_commutes"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [
-        "check_joint_eigenspace_decomposition"
-      ],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
-        "check_joint_eigenspace_decomposition"
-      ],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": {
-        "check_joint_eigenspace_decomposition": "後続対応への案内"
-      },
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_check_number_operator"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 153,
-        "dependencyUnitEntryIds": [
-          "evenEigen_004_claim_trace_of_check_number_operator_product"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-      "kind": "claim",
-      "title": "\\check{n}_\\mu \\text{ の同時固有空間分解（各空間は 1 次元）}",
-      "titleFormat": "tex",
-      "labels": [
-        "check_joint_eigenspace_decomposition"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 7,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 12,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 16639,
-        "inspectedContentSha256": "b6f83b0f2455c90d2f1a57f6872a2dbd39966406f9afee3b7f6e8cc324966e65",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "check_number_operator_idempotent",
-        "check_number_operators_commute",
-        "definition_of_cc",
-        "scalar_identity_commutes",
-        "trace_of_check_number_operator_product",
-        "trace_of_idempotent"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "eigenvalues_of_V_003_claim_trace_of_idempotent",
-        "evenEigen_002_claim_check_number_operator_idempotent",
-        "evenEigen_003_claim_check_number_operators_commute",
-        "evenEigen_004_claim_trace_of_check_number_operator_product",
-        "linear_space_general_002_claim_scalar_identity_commutes"
-      ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 154,
-        "dependencyUnitEntryIds": [
-          "evenEigen_005_claim_check_joint_eigenspace_decomposition"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-      "kind": "claim",
-      "title": "\\check{V}' \\text{ の固有値}",
-      "titleFormat": "tex",
-      "labels": [
-        "eigenvalues_of_check_Vprime"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 8,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "具体的な行列計算への展開またはブロック分割を要する",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 13642,
-        "inspectedContentSha256": "e3a878a9b996a209bb5f1962df26010ff3eca0f47c58b41e70da0b24129614cb",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "check_joint_eigenspace_decomposition",
-        "def_check_number_operator",
-        "def_exp",
-        "def_gamma_theta_tilde_mu",
-        "def_matrix_norm",
-        "definition_of_cc",
-        "exp_converges",
-        "matrix_multiplication_continuity",
-        "periodicity_of_check_fermi",
-        "real_exp_series_converges",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "evenEigen_001_definition_check_number_operator",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenfermi_002_claim_periodicity",
-        "exp_linear_map_000a_claim_real_exp_series_converges",
-        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
-        "exp_linear_map_002_definition_exp_of_endomorphism",
-        "linear_space_general_002b_definition_matrix_norm",
-        "linear_space_general_003b_claim_matrix_multiplication_continuity"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [
-        "max_eigenvalue_of_V_plus_simple"
-      ],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
-        "max_eigenvalue_of_V_plus_simple"
-      ],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": {
-        "max_eigenvalue_of_V_plus_simple": "後続帰結への案内"
-      },
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_gamma_theta_tilde_mu",
-        "periodicity_of_check_fermi"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 158,
-        "dependencyUnitEntryIds": [
-          "evenEigen_006_claim_eigenvalues_of_check_Vprime"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_007_claim_trace_of_check_Vprime",
-      "kind": "claim",
-      "title": "\\mathrm{tr}\\!\\left(\\check{V}'\\right)\n= \\mathrm{tr}\\!\\left(\\left(\\check{V}'\\right)^{-1}\\right) > 0",
-      "titleFormat": "tex",
-      "labels": [
-        "trace_of_check_Vprime"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 9,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5691,
-        "inspectedContentSha256": "8bf234ba7e6fa3a8f1c55211763593cf924d984ea7a3c6424266884534de28f9",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "check_joint_eigenspace_decomposition",
-        "cosh_sinh_basic_properties",
-        "def_check_Vprime",
-        "def_gamma_theta_tilde_mu",
-        "eigenvalues_of_check_Vprime",
-        "set_and_algebra_notation",
-        "trace_basic_properties"
-      ],
-      "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_002_claim_trace_properties",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-        "evenfermi_005_definition_check_Vprime"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_check_Vprime"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 159,
-        "dependencyUnitEntryIds": [
-          "evenEigen_007_claim_trace_of_check_Vprime"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_008_claim_V_plus_is_positive_definite",
-      "kind": "claim",
-      "title": "V^{(+)} \\text{ は正定値}",
-      "titleFormat": "tex",
-      "labels": [
-        "V_plus_is_positive_definite"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 10,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4201,
-        "inspectedContentSha256": "1dbcc785e56a238f6ef5f66f46f7585d8132cad0c5630ca6e4db9796c5f8d2c4",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V2_exponential_representation",
-        "def_H1_plus",
-        "def_H2",
-        "def_V1_plus_square_root",
-        "def_V_plus",
-        "def_hermitian_positive_definite",
-        "def_transfer_matrix_symbols",
-        "exp_hermitian_is_positive_definite",
-        "iH_is_real_symmetric",
-        "scalar_identity_commutes",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "bridge_definition_V1_pm_square_root",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
-        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
-        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-        "evensectorT_definition_V_plus",
-        "linear_space_general_002_claim_scalar_identity_commutes",
-        "transfer_matrix_001_definition_symbols",
-        "transfer_matrix_011a_definition_H1_pm",
-        "transfer_matrix_011b_definition_H2",
-        "transfer_matrix_011d_claim_V2_exponential_representation"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "def_H1_plus",
-        "def_H2"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_V_plus",
-        "def_transfer_matrix_symbols"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 85,
-        "dependencyUnitEntryIds": [
-          "evenEigen_008_claim_V_plus_is_positive_definite"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_claim_V_plus_is_invertible",
-      "kind": "claim",
-      "title": "V^{(+)} \\text{ は可逆であり、左右逆は明示できる}",
-      "titleFormat": "tex",
-      "labels": [
-        "V_plus_is_invertible"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 10,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 2,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5237,
-        "inspectedContentSha256": "66a716f3fd56b5177c38fc7197739d75ab9010a258bfef3c9ca95551e732e95f",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V_plus_is_positive_definite",
-        "definition_of_cc",
-        "scalar_identity_commutes",
-        "theorem_exp_product",
-        "theorem_exp_zero"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "evenEigen_008_claim_V_plus_is_positive_definite",
-        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
-        "exp_linear_map_004_theorem_exp_zero_is_identity",
-        "linear_space_general_002_claim_scalar_identity_commutes"
-      ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 87,
-        "dependencyUnitEntryIds": [
-          "evenEigen_claim_V_plus_is_invertible"
-        ]
-      }
-    },
-    {
       "id": "evenEigen_claim_V_plus_inverse_is_positive_definite",
       "kind": "claim",
       "title": "\\left(V^{(+)}\\right)^{-1}\\text{ は正定値}",
@@ -15711,7 +14860,9 @@
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "interimForwardReferenceLabelsToReorganizedChapters": [
+        "V_plus_is_invertible"
+      ],
       "staleForwardReferenceReviewLabels": [],
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
@@ -15721,69 +14872,6 @@
         "classificationOrder": 88,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_inverse_is_positive_definite"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_claim_trace_V_plus_is_positive",
-      "kind": "claim",
-      "title": "\\mathrm{tr}\\!\\left(V^{(+)}\\right)\\text{ は正}",
-      "titleFormat": "tex",
-      "labels": [
-        "trace_V_plus_is_positive"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 10,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 478,
-        "inspectedContentSha256": "e02ed47f8435891a859218fd452aebc1d91aae9d3c4bb6899a8b77768287be9e",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V_plus_is_positive_definite",
-        "exp_hermitian_is_positive_definite",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
-        "evenEigen_008_claim_V_plus_is_positive_definite"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 86,
-        "dependencyUnitEntryIds": [
-          "evenEigen_claim_trace_V_plus_is_positive"
         ]
       }
     },
@@ -15847,253 +14935,6 @@
         "classificationOrder": 89,
         "dependencyUnitEntryIds": [
           "evenEigen_claim_V_plus_inverse_positive_and_traces"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_009_claim_constant_c_value_even_sector",
-      "kind": "claim",
-      "title": "c = (2\\sinh 2K_2)^{M_{\\mathrm{col}}/2}",
-      "titleFormat": "tex",
-      "labels": [
-        "constant_c_value_even_sector"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 11,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 1,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9619,
-        "inspectedContentSha256": "d5be427ae50342ea8a26cb0cc2ec47c56a01fd77618848252b76eb480d6d75fc",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V_plus_eq_c_check_Vprime",
-        "V_plus_is_invertible",
-        "V_plus_is_positive_definite",
-        "complex_numbers_form_a_field",
-        "def_H1_plus",
-        "def_H2",
-        "def_exp",
-        "definition_of_cc",
-        "iH_is_real_symmetric",
-        "matrix_norm_submultiplicativity",
-        "set_and_algebra_notation",
-        "sign_flip_conjugation",
-        "trace_V_plus_is_positive",
-        "trace_basic_properties",
-        "trace_of_check_Vprime"
-      ],
-      "dependsOnEntryIds": [
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_025_claim_complex_numbers_form_a_field",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "eigenvalues_of_V_002_claim_trace_properties",
-        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
-        "eigenvalues_of_V_016_claim_sign_flip_conjugation",
-        "evenEigen_007_claim_trace_of_check_Vprime",
-        "evenEigen_008_claim_V_plus_is_positive_definite",
-        "evenEigen_claim_V_plus_is_invertible",
-        "evenEigen_claim_trace_V_plus_is_positive",
-        "evenfermi_009_claim_V_plus_eq_c_Vprime",
-        "exp_linear_map_002_definition_exp_of_endomorphism",
-        "linear_space_general_003_claim_matrix_norm_submultiplicativity",
-        "transfer_matrix_011a_definition_H1_pm",
-        "transfer_matrix_011b_definition_H2"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc",
-        "def_H1_plus",
-        "def_H2"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "V_plus_eq_c_check_Vprime"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 167,
-        "dependencyUnitEntryIds": [
-          "evenEigen_009_claim_constant_c_value_even_sector"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_010_theorem_eigenvalues_of_V_plus",
-      "kind": "theorem",
-      "title": "V^{(+)} \\text{ の固有値}",
-      "titleFormat": "tex",
-      "labels": [
-        "eigenvalues_of_V_plus"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 12,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 3,
-        "isingSemanticMatches": [
-          "sector"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6402,
-        "inspectedContentSha256": "7bbf0b96ce33cfc50b41d86cb2109f026f8407fb9a687d14aaba4f6dde28392c",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "check_joint_eigenspace_decomposition",
-        "constant_c_value_even_sector",
-        "def_gamma_theta_tilde_mu",
-        "eigenvalues_of_check_Vprime",
-        "scalar_identity_commutes",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-        "evenEigen_009_claim_constant_c_value_even_sector",
-        "linear_space_general_002_claim_scalar_identity_commutes"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 168,
-        "dependencyUnitEntryIds": [
-          "evenEigen_010_theorem_eigenvalues_of_V_plus"
-        ]
-      }
-    },
-    {
-      "id": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
-      "kind": "theorem",
-      "title": "\\check\\Lambda_{\\max} = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\text{ であり単純固有値}",
-      "titleFormat": "tex",
-      "labels": [
-        "max_eigenvalue_of_V_plus_simple"
-      ],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "sourceOrdinal": 13,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [
-          "運動量"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10831,
-        "inspectedContentSha256": "de479958b978a4271a0d364f471fa233f4194ab5539a5cc5586af14d08f3531a",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "antiperiodic_exp_sum",
-        "check_joint_eigenspace_decomposition",
-        "def_Lambda_delta_M",
-        "def_Theta_delta_M",
-        "def_gamma1_gamma2_of_theta",
-        "def_gamma_theta_tilde_mu",
-        "definition_of_cc",
-        "eigenvalues_of_V_plus",
-        "eigenvalues_of_check_Vprime",
-        "gamma1_lower_bound_all_theta",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "Athetatilde_001_definition_gamma1_gamma2",
-        "Athetatilde_008_definition_gamma_theta_tilde",
-        "calc_formulae_006_definition_of_cc",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
-        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
-        "evenEigen_010_theorem_eigenvalues_of_V_plus",
-        "evensector_002_claim_antiperiodic_exp_sum",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-        "freeenergy_definition_Lambda_delta_M",
-        "freeenergy_definition_Theta_delta_M"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation",
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [
-        "def_gamma_theta_tilde_mu"
-      ],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
-      "dependencyPlacement": {
-        "classificationOrder": 170,
-        "dependencyUnitEntryIds": [
-          "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
         ]
       }
     },
@@ -16165,6 +15006,7 @@
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
       "interimForwardReferenceLabelsToReorganizedChapters": [
+        "check_joint_eigenspace_decomposition",
         "def_check_index_set",
         "def_check_number_operator",
         "def_transfer_matrix_symbols"
@@ -17386,7 +16228,9 @@
       "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
       "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
       "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "interimForwardReferenceLabelsToReorganizedChapters": [
+        "def_Lambda_delta_M"
+      ],
       "staleForwardReferenceReviewLabels": [],
       "blockSplitRequiredBeforeFinalOrdering": false,
       "futureBlockSplitRecommended": false,
@@ -21558,7 +20402,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -22887,7 +21731,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 40,
+        "incomingReferenceCount": 41,
         "isingSemanticMatches": [
           "運動量"
         ],
@@ -24062,7 +22906,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 176,
+        "classificationOrder": 177,
         "dependencyUnitEntryIds": [
           "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
         ]
@@ -24082,7 +22926,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -25315,7 +24159,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 10,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -25764,7 +24608,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 8,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -26158,7 +25002,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -26228,7 +25072,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -26287,6 +25131,1270 @@
         "classificationOrder": 166,
         "dependencyUnitEntryIds": [
           "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators"
+        ]
+      }
+    },
+    {
+      "id": "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+      "kind": "claim",
+      "title": "i K_1 H_1^{(+)} \\text{ と } i K_2^* H_2 \\text{ は実対称}",
+      "titleFormat": "tex",
+      "labels": [
+        "iH_is_real_symmetric"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 16,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 7,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 10205,
+        "inspectedContentSha256": "5478c9a18fd8ddda73a1384b59260c5cf0094566ee2d4c3e447cfabb14d09202",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_H1_plus",
+        "def_H2",
+        "def_hermitian_positive_definite",
+        "def_kronecker",
+        "def_transfer_matrix_symbols",
+        "definition_of_cc",
+        "kronecker_product_rule",
+        "kronecker_transpose",
+        "pauli_matrix_products",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "linear_space_general_000d_claim_kronecker_transpose",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc",
+        "def_H1_plus",
+        "def_H2"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "transfer_matrix_011d_claim_V2_exponential_representation"
+      ],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 75,
+        "dependencyUnitEntryIds": [
+          "eigenvalues_of_V_014_claim_iH_is_real_symmetric"
+        ]
+      }
+    },
+    {
+      "id": "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+      "kind": "claim",
+      "title": "\\text{符号反転共役 } U",
+      "titleFormat": "tex",
+      "labels": [
+        "sign_flip_conjugation"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 18,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "サイト"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 11805,
+        "inspectedContentSha256": "ba538d64e6437cc45ccdd9e33c9ea4f37bb186cdb2880b1926d5857d61edce77",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_H1_plus",
+        "def_H2",
+        "def_transfer_matrix_symbols",
+        "definition_of_cc",
+        "iH_is_real_symmetric",
+        "kronecker_product_rule",
+        "pauli_matrix_products",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "linear_space_general_000b_claim_kronecker_product_rule",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc",
+        "def_H1_plus",
+        "def_H2"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 76,
+        "dependencyUnitEntryIds": [
+          "eigenvalues_of_V_016_claim_sign_flip_conjugation"
+        ]
+      }
+    },
+    {
+      "id": "freeenergy_definition_Theta_delta_M",
+      "kind": "definition",
+      "title": "\\Theta^{(\\delta)}_{M_{\\mathrm{col}}}",
+      "titleFormat": "tex",
+      "labels": [
+        "def_Theta_delta_M"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 7,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1138,
+        "inspectedContentSha256": "b1a05296474dcb2790280f3a90b96657df783a2f14b8a23456c001fd9a294631",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 1,
+        "dependencyUnitEntryIds": [
+          "freeenergy_definition_Theta_delta_M"
+        ]
+      }
+    },
+    {
+      "id": "freeenergy_definition_Lambda_delta_M",
+      "kind": "definition",
+      "title": "\\Lambda^{(\\delta)}_{M_{\\mathrm{col}}}",
+      "titleFormat": "tex",
+      "labels": [
+        "def_Lambda_delta_M"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 7,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1819,
+        "inspectedContentSha256": "925835c49980ca8c53dcbf8c17a5d0cad86f3baac3aecb30fe8ba4a5185cf03b",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "def_Theta_delta_M",
+        "def_transfer_matrix",
+        "gamma1_lower_bound_all_theta",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_definition_Theta_delta_M",
+        "partition_function_2d_ising_003_definition_transfer_matrix"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 134,
+        "dependencyUnitEntryIds": [
+          "freeenergy_definition_Lambda_delta_M"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_002_claim_check_number_operator_idempotent",
+      "kind": "claim",
+      "title": "\\check{n}_\\mu^2 = \\check{n}_\\mu",
+      "titleFormat": "tex",
+      "labels": [
+        "check_number_operator_idempotent"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 4,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 6111,
+        "inspectedContentSha256": "ce20549b0acb2769344e8119ef2632741979efcef0ef0413497a7dc0e4dfde74",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "anticommutator_of_check_psi",
+        "def_check_index_set",
+        "def_check_number_operator",
+        "definition_of_cc"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "evenEigen_001_definition_check_number_operator",
+        "evenfermi_003_claim_anticommutator",
+        "evensector_003a_definition_check_index_set"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc",
+        "anticommutator_of_check_psi",
+        "def_check_number_operator"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 151,
+        "dependencyUnitEntryIds": [
+          "evenEigen_002_claim_check_number_operator_idempotent"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_003_claim_check_number_operators_commute",
+      "kind": "claim",
+      "title": "\\check{n}_\\mu \\check{n}_\\nu = \\check{n}_\\nu \\check{n}_\\mu",
+      "titleFormat": "tex",
+      "labels": [
+        "check_number_operators_commute"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 5,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 4,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 7125,
+        "inspectedContentSha256": "5dba80f5ce7e5dff699cd90b116dcdc970c71d7364f4e1523c76b5e78c7c8e0a",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "anticommutator_of_check_psi",
+        "def_check_index_set",
+        "def_check_number_operator"
+      ],
+      "dependsOnEntryIds": [
+        "evenEigen_001_definition_check_number_operator",
+        "evenfermi_003_claim_anticommutator",
+        "evensector_003a_definition_check_index_set"
+      ],
+      "semanticPrerequisiteLabels": [],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 152,
+        "dependencyUnitEntryIds": [
+          "evenEigen_003_claim_check_number_operators_commute"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_004_claim_trace_of_check_number_operator_product",
+      "kind": "claim",
+      "title": "\\mathrm{tr}\\!\\left(R_{\\mu_1}^{(e_1)}\\cdots R_{\\mu_k}^{(e_k)}\\right) = 2^{M_{\\mathrm{col}}-k}\n\\quad \\left(R_\\mu^{(1)} = \\check{n}_\\mu,\\ R_\\mu^{(0)} = I - \\check{n}_\\mu\\right)",
+      "titleFormat": "tex",
+      "labels": [
+        "trace_of_check_number_operator_product"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 6,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 9685,
+        "inspectedContentSha256": "db926a496feb234f2ccbdd1f6afb41d40a839da916056829a60883d489ef0093",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "check_number_operator_idempotent",
+        "check_number_operators_commute",
+        "def_check_number_operator",
+        "def_trace",
+        "definition_of_cc",
+        "scalar_identity_commutes",
+        "set_and_algebra_notation",
+        "trace_basic_properties"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_001_definition_trace",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "evenEigen_001_definition_check_number_operator",
+        "evenEigen_002_claim_check_number_operator_idempotent",
+        "evenEigen_003_claim_check_number_operators_commute",
+        "linear_space_general_002_claim_scalar_identity_commutes"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [
+        "check_joint_eigenspace_decomposition"
+      ],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
+        "check_joint_eigenspace_decomposition"
+      ],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": {
+        "check_joint_eigenspace_decomposition": "後続対応への案内"
+      },
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 153,
+        "dependencyUnitEntryIds": [
+          "evenEigen_004_claim_trace_of_check_number_operator_product"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+      "kind": "claim",
+      "title": "\\check{n}_\\mu \\text{ の同時固有空間分解（各空間は 1 次元）}",
+      "titleFormat": "tex",
+      "labels": [
+        "check_joint_eigenspace_decomposition"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 7,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 13,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 16763,
+        "inspectedContentSha256": "d306f9dd0588294556b938bbae0225db9544f9d901ab7fa5c2f10990a277094e",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "check_number_operator_idempotent",
+        "check_number_operators_commute",
+        "definition_of_cc",
+        "scalar_identity_commutes",
+        "trace_of_check_number_operator_product",
+        "trace_of_idempotent"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "eigenvalues_of_V_003_claim_trace_of_idempotent",
+        "evenEigen_002_claim_check_number_operator_idempotent",
+        "evenEigen_003_claim_check_number_operators_commute",
+        "evenEigen_004_claim_trace_of_check_number_operator_product",
+        "linear_space_general_002_claim_scalar_identity_commutes"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 154,
+        "dependencyUnitEntryIds": [
+          "evenEigen_005_claim_check_joint_eigenspace_decomposition"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+      "kind": "claim",
+      "title": "\\check{V}' \\text{ の固有値}",
+      "titleFormat": "tex",
+      "labels": [
+        "eigenvalues_of_check_Vprime"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 8,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 3,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "具体的な行列計算への展開またはブロック分割を要する",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 13642,
+        "inspectedContentSha256": "e3a878a9b996a209bb5f1962df26010ff3eca0f47c58b41e70da0b24129614cb",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "check_joint_eigenspace_decomposition",
+        "def_check_number_operator",
+        "def_exp",
+        "def_gamma_theta_tilde_mu",
+        "def_matrix_norm",
+        "definition_of_cc",
+        "exp_converges",
+        "matrix_multiplication_continuity",
+        "periodicity_of_check_fermi",
+        "real_exp_series_converges",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_008_definition_gamma_theta_tilde",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "evenEigen_001_definition_check_number_operator",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenfermi_002_claim_periodicity",
+        "exp_linear_map_000a_claim_real_exp_series_converges",
+        "exp_linear_map_001_theorem_exp_series_pointwise_converges",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "linear_space_general_002b_definition_matrix_norm",
+        "linear_space_general_003b_claim_matrix_multiplication_continuity"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [
+        "max_eigenvalue_of_V_plus_simple"
+      ],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [
+        "max_eigenvalue_of_V_plus_simple"
+      ],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": {
+        "max_eigenvalue_of_V_plus_simple": "後続帰結への案内"
+      },
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 158,
+        "dependencyUnitEntryIds": [
+          "evenEigen_006_claim_eigenvalues_of_check_Vprime"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_007_claim_trace_of_check_Vprime",
+      "kind": "claim",
+      "title": "\\mathrm{tr}\\!\\left(\\check{V}'\\right)\n= \\mathrm{tr}\\!\\left(\\left(\\check{V}'\\right)^{-1}\\right) > 0",
+      "titleFormat": "tex",
+      "labels": [
+        "trace_of_check_Vprime"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 9,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5691,
+        "inspectedContentSha256": "8bf234ba7e6fa3a8f1c55211763593cf924d984ea7a3c6424266884534de28f9",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "check_joint_eigenspace_decomposition",
+        "cosh_sinh_basic_properties",
+        "def_check_Vprime",
+        "def_gamma_theta_tilde_mu",
+        "eigenvalues_of_check_Vprime",
+        "set_and_algebra_notation",
+        "trace_basic_properties"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_008_definition_gamma_theta_tilde",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+        "evenfermi_005_definition_check_Vprime"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 159,
+        "dependencyUnitEntryIds": [
+          "evenEigen_007_claim_trace_of_check_Vprime"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_008_claim_V_plus_is_positive_definite",
+      "kind": "claim",
+      "title": "V^{(+)} \\text{ は正定値}",
+      "titleFormat": "tex",
+      "labels": [
+        "V_plus_is_positive_definite"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 10,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 4,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 4201,
+        "inspectedContentSha256": "1dbcc785e56a238f6ef5f66f46f7585d8132cad0c5630ca6e4db9796c5f8d2c4",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V2_exponential_representation",
+        "def_H1_plus",
+        "def_H2",
+        "def_V1_plus_square_root",
+        "def_V_plus",
+        "def_hermitian_positive_definite",
+        "def_transfer_matrix_symbols",
+        "exp_hermitian_is_positive_definite",
+        "iH_is_real_symmetric",
+        "scalar_identity_commutes",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "bridge_definition_V1_pm_square_root",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_011_definition_hermitian_positive_definite",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "evensectorT_definition_V_plus",
+        "linear_space_general_002_claim_scalar_identity_commutes",
+        "transfer_matrix_001_definition_symbols",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2",
+        "transfer_matrix_011d_claim_V2_exponential_representation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "def_H1_plus",
+        "def_H2"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 85,
+        "dependencyUnitEntryIds": [
+          "evenEigen_008_claim_V_plus_is_positive_definite"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_claim_V_plus_is_invertible",
+      "kind": "claim",
+      "title": "V^{(+)} \\text{ は可逆であり、左右逆は明示できる}",
+      "titleFormat": "tex",
+      "labels": [
+        "V_plus_is_invertible"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 10,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 5237,
+        "inspectedContentSha256": "66a716f3fd56b5177c38fc7197739d75ab9010a258bfef3c9ca95551e732e95f",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V_plus_is_positive_definite",
+        "definition_of_cc",
+        "scalar_identity_commutes",
+        "theorem_exp_product",
+        "theorem_exp_zero"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "evenEigen_008_claim_V_plus_is_positive_definite",
+        "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
+        "exp_linear_map_004_theorem_exp_zero_is_identity",
+        "linear_space_general_002_claim_scalar_identity_commutes"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 87,
+        "dependencyUnitEntryIds": [
+          "evenEigen_claim_V_plus_is_invertible"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_claim_trace_V_plus_is_positive",
+      "kind": "claim",
+      "title": "\\mathrm{tr}\\!\\left(V^{(+)}\\right)\\text{ は正}",
+      "titleFormat": "tex",
+      "labels": [
+        "trace_V_plus_is_positive"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 10,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 478,
+        "inspectedContentSha256": "e02ed47f8435891a859218fd452aebc1d91aae9d3c4bb6899a8b77768287be9e",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V_plus_is_positive_definite",
+        "exp_hermitian_is_positive_definite",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+        "evenEigen_008_claim_V_plus_is_positive_definite"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 86,
+        "dependencyUnitEntryIds": [
+          "evenEigen_claim_trace_V_plus_is_positive"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_009_claim_constant_c_value_even_sector",
+      "kind": "claim",
+      "title": "c = (2\\sinh 2K_2)^{M_{\\mathrm{col}}/2}",
+      "titleFormat": "tex",
+      "labels": [
+        "constant_c_value_even_sector"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 11,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 9619,
+        "inspectedContentSha256": "d5be427ae50342ea8a26cb0cc2ec47c56a01fd77618848252b76eb480d6d75fc",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V_plus_eq_c_check_Vprime",
+        "V_plus_is_invertible",
+        "V_plus_is_positive_definite",
+        "complex_numbers_form_a_field",
+        "def_H1_plus",
+        "def_H2",
+        "def_exp",
+        "definition_of_cc",
+        "iH_is_real_symmetric",
+        "matrix_norm_submultiplicativity",
+        "set_and_algebra_notation",
+        "sign_flip_conjugation",
+        "trace_V_plus_is_positive",
+        "trace_basic_properties",
+        "trace_of_check_Vprime"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_025_claim_complex_numbers_form_a_field",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "eigenvalues_of_V_002_claim_trace_properties",
+        "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
+        "eigenvalues_of_V_016_claim_sign_flip_conjugation",
+        "evenEigen_007_claim_trace_of_check_Vprime",
+        "evenEigen_008_claim_V_plus_is_positive_definite",
+        "evenEigen_claim_V_plus_is_invertible",
+        "evenEigen_claim_trace_V_plus_is_positive",
+        "evenfermi_009_claim_V_plus_eq_c_Vprime",
+        "exp_linear_map_002_definition_exp_of_endomorphism",
+        "linear_space_general_003_claim_matrix_norm_submultiplicativity",
+        "transfer_matrix_011a_definition_H1_pm",
+        "transfer_matrix_011b_definition_H2"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc",
+        "def_H1_plus",
+        "def_H2"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 167,
+        "dependencyUnitEntryIds": [
+          "evenEigen_009_claim_constant_c_value_even_sector"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_010_theorem_eigenvalues_of_V_plus",
+      "kind": "theorem",
+      "title": "V^{(+)} \\text{ の固有値}",
+      "titleFormat": "tex",
+      "labels": [
+        "eigenvalues_of_V_plus"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 12,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 4,
+        "isingSemanticMatches": [
+          "sector"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 6402,
+        "inspectedContentSha256": "7bbf0b96ce33cfc50b41d86cb2109f026f8407fb9a687d14aaba4f6dde28392c",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "check_joint_eigenspace_decomposition",
+        "constant_c_value_even_sector",
+        "def_gamma_theta_tilde_mu",
+        "eigenvalues_of_check_Vprime",
+        "scalar_identity_commutes",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_008_definition_gamma_theta_tilde",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+        "evenEigen_009_claim_constant_c_value_even_sector",
+        "linear_space_general_002_claim_scalar_identity_commutes"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 168,
+        "dependencyUnitEntryIds": [
+          "evenEigen_010_theorem_eigenvalues_of_V_plus"
+        ]
+      }
+    },
+    {
+      "id": "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+      "kind": "theorem",
+      "title": "\\check\\Lambda_{\\max} = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}} \\text{ であり単純固有値}",
+      "titleFormat": "tex",
+      "labels": [
+        "max_eigenvalue_of_V_plus_simple"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": 13,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 5,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 10823,
+        "inspectedContentSha256": "07d05da47c4fc5b6c51f6bb6b20163f139a56b71a6f2cd3ee7bbb7231e68e1bd",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "antiperiodic_exp_sum",
+        "check_joint_eigenspace_decomposition",
+        "def_Lambda_delta_M",
+        "def_Theta_delta_M",
+        "def_gamma1_gamma2_of_theta",
+        "def_gamma_theta_tilde_mu",
+        "definition_of_cc",
+        "eigenvalues_of_V_plus",
+        "eigenvalues_of_check_Vprime",
+        "gamma1_lower_bound_all_theta",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_001_definition_gamma1_gamma2",
+        "Athetatilde_008_definition_gamma_theta_tilde",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenEigen_006_claim_eigenvalues_of_check_Vprime",
+        "evenEigen_010_theorem_eigenvalues_of_V_plus",
+        "evensector_002_claim_antiperiodic_exp_sum",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "freeenergy_definition_Lambda_delta_M",
+        "freeenergy_definition_Theta_delta_M"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 170,
+        "dependencyUnitEntryIds": [
+          "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
+        ]
+      }
+    },
+    {
+      "id": "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum",
+      "kind": "claim",
+      "title": "V^{(+)}\\check{Q}_\\epsilon = \\check\\Lambda_\\epsilon\\check{Q}_\\epsilon \\text{ と } \\max_\\epsilon \\check\\Lambda_\\epsilon = \\check\\Lambda_{(1,\\dots,1)} = \\Lambda^{(1/2)}_{M_{\\mathrm{col}}}",
+      "titleFormat": "tex",
+      "labels": [
+        "V_plus_eigenvalues_with_c_value_and_strict_maximum"
+      ],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "sourceOrdinal": null,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 0,
+        "isingSemanticMatches": [
+          "sector"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 7187,
+        "inspectedContentSha256": "652e6d82caa5e47dd70adb907ace9189db104b5e4fe2ca9cf956f665e47161e9",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V_plus_eq_c_exp_sum_gamma_check_number_operator",
+        "check_joint_eigenspace_decomposition",
+        "constant_c_value_even_sector",
+        "def_Lambda_delta_M",
+        "def_V_plus",
+        "def_arccosh",
+        "def_check_Vprime",
+        "def_check_index_set",
+        "def_check_number_operator",
+        "def_gamma_theta_tilde_mu",
+        "definition_of_cc",
+        "eigenvalues_of_V_plus",
+        "max_eigenvalue_of_V_plus_simple",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_008_definition_gamma_theta_tilde",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators",
+        "evenEigen_001_definition_check_number_operator",
+        "evenEigen_005_claim_check_joint_eigenspace_decomposition",
+        "evenEigen_009_claim_constant_c_value_even_sector",
+        "evenEigen_010_theorem_eigenvalues_of_V_plus",
+        "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple",
+        "evenfermi_005_definition_check_Vprime",
+        "evensectorT_definition_V_plus",
+        "evensector_003a_definition_check_index_set",
+        "freeenergy_definition_Lambda_delta_M",
+        "transfer_matrix_000h2_definition_arccosh"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
+      "dependencyPlacement": {
+        "classificationOrder": 176,
+        "dependencyUnitEntryIds": [
+          "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
         ]
       }
     }
@@ -26639,31 +26747,6 @@
       "dependsOnLabels": []
     },
     {
-      "id": "evenEigen_000_remark_overview",
-      "kind": "remark",
-      "title": "この章の目的",
-      "labels": [],
-      "sourceFile": "017_even_sector_eigenvalues.ts",
-      "dependsOnLabels": [
-        "V_plus_eq_c_check_Vprime",
-        "anticommutator_of_check_psi",
-        "conjugate_index_of_check_Z_Y",
-        "def_Lambda_delta_M",
-        "def_check_index_set",
-        "def_exp",
-        "def_gamma_theta_tilde_mu",
-        "def_hermitian_positive_definite",
-        "def_trace",
-        "exp_hermitian_is_positive_definite",
-        "gamma_2_theta_tilde_nonzero",
-        "iH_is_real_symmetric",
-        "sign_flip_conjugation",
-        "star_preserves_norm_and_limits",
-        "trace_basic_properties",
-        "trace_of_idempotent"
-      ]
-    },
-    {
       "id": "heading_even_sector_closing",
       "kind": "heading",
       "title": "c_+(M_{\\mathrm{col}}) \\text{ の決定と Onsager の自由エネルギー}",
@@ -26854,6 +26937,39 @@
         "diagonalization_check_P_D",
         "gamma_2_theta_tilde_nonzero",
         "relation_of_gamma_2_theta_tilde"
+      ]
+    },
+    {
+      "id": "heading_chapter_eigenvalues_of_V_plus",
+      "kind": "heading",
+      "title": "V^{(+)}\\text{ の固有値}",
+      "labels": [],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "dependsOnLabels": []
+    },
+    {
+      "id": "evenEigen_000_remark_overview",
+      "kind": "remark",
+      "title": "c \\text{ の値と } V^{(+)} \\text{ の固有値を求める道筋}",
+      "labels": [],
+      "sourceFile": "eigenvalue_problem_eigenvalues_of_V_plus.ts",
+      "dependsOnLabels": [
+        "V_plus_eq_c_check_Vprime",
+        "anticommutator_of_check_psi",
+        "conjugate_index_of_check_Z_Y",
+        "def_Lambda_delta_M",
+        "def_check_index_set",
+        "def_exp",
+        "def_gamma_theta_tilde_mu",
+        "def_hermitian_positive_definite",
+        "def_trace",
+        "exp_hermitian_is_positive_definite",
+        "gamma_2_theta_tilde_nonzero",
+        "iH_is_real_symmetric",
+        "sign_flip_conjugation",
+        "star_preserves_norm_and_limits",
+        "trace_basic_properties",
+        "trace_of_idempotent"
       ]
     }
   ]

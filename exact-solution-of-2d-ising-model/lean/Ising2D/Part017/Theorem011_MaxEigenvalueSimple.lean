@@ -1,7 +1,7 @@
 /-
 # `Λ̌_max = Λ^{(1/2)}_M` であり単純固有値（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `max_eigenvalue_of_V_plus_simple`（`evenEigen_011_theorem_...`）。
 あわせて章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`（`γ(θ~_μ) > 0`）をここで証明する。
 

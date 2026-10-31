@@ -1,7 +1,7 @@
 /-
 # 定数 `c` の決定（偶セクター）（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `constant_c_value_even_sector`（`evenEigen_009_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/ConstantC.lean` の `NecSuf.const_eq_of_trace_ratio`

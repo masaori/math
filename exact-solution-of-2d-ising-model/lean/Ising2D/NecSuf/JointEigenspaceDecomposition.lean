@@ -4,7 +4,7 @@
 対応する人手証明のラベル:
 - `joint_eigenspace_decomposition` (5)（`structured-latex/content/009_eigenvalues_of_V.ts`、
   `eigenvalues_of_V_008_claim_joint_eigenspace_decomposition`）
-- `check_joint_eigenspace_decomposition` (5)（`structured-latex/content/017_even_sector_eigenvalues.ts`、
+- `check_joint_eigenspace_decomposition` (5)（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
   `evenEigen_005_claim_check_joint_eigenspace_decomposition`）
 - `eigenvalues_of_Vprime` / `eigenvalues_of_V` の「`V'`（`V`）は対角化可能」
   （`eigenvalues_of_V_009_claim_eigenvalues_of_Vprime`,

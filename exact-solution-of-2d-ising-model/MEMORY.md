@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの四番目の項目の五番目の章「V^{(+)} の固有値」を組み直した。16 項を `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ依存順で移し（id・ラベル不変。017 には未割り当ての 2 項だけが残る）、章末にゴールの主張 `V_plus_eigenvalues_with_c_value_and_strict_maximum`（SageMath と Lean 付き）を置いた。worktree の Lean は、メインの作業ツリーの `lean/.lake/packages` を `cp -al`（ハードリンク）で持ち込めば mathlib を作り直さずに論文側だけビルドできる。次は「V^{(+)} の最大固有値に属する固有ベクトル」の章（018 の 15 項）。
+
 2026-10-31: 章立ての組み直しの四番目の項目の四番目の章「A(θ̃_μ) の対角化と V^{(+)} の指数表示」を組み直した。29 項を `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ依存順で移し（id・ラベル不変、014・015・016 は削除）、章末にゴールの主張 `V_plus_eq_c_exp_sum_gamma_check_number_operator`（SageMath と Lean 付き）を置いた。レビューで、γ(θ) の定義が主張の中にある問題と arccosh の分類の問題を状態台帳の「未確定」に足した。次は「V^{(+)} の固有値」の章。
 
 2026-10-31: 章立ての組み直しの四番目の項目の三番目の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」を組み直した。27 項を `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`（部「固有値問題」の最初の章）へ依存順で移し（本文不変）、章末にゴールの主張 `T_V_plus_check_Z_Y_via_B1_B2_B1`（SageMath・Lean つき）を足した。013・014 の章の案内文を新しい章の中へ移し、添字集合の定義から後ろの章を指す案内の文を外した。次は「A(θ̃_μ) の対角化と V^{(+)} の指数表示」の章。この VM の SageMath は `~/micromamba/envs/sage/bin/sage`、Lean は `~/.elan/bin`（非対話シェルの PATH に無い）。

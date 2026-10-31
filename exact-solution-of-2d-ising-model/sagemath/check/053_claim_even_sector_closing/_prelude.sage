@@ -1,6 +1,7 @@
 # ---------------------------------------------------------
 # 共通: 偶セクターの数演算子・同時固有空間分解・定数 c・V^{(+)} の固有値
-#   structured-latex/content/017_even_sector_eigenvalues.ts と、数演算子の定義を移した eigenvalue_problem_diagonalization_and_exponential_form.ts に対応
+#   structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts（V^{(+)} の固有値の章）と、ň_μ の定義を移した eigenvalue_problem_diagonalization_and_exponential_form.ts、
+#   (V^{(+)})^{-1} の正定値性とトレース正値性の 2 項が残る 017_even_sector_eigenvalues.ts に対応
 #
 #   （016 章までの道具は 049_claim_even_sector_fermions/_prelude.sage と同じものを
 #     ここに再掲する。別ディレクトリの prelude を load すると __file__ の解決が

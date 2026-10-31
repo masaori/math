@@ -5,7 +5,7 @@
 - `def_hermitian_positive_definite`（`eigenvalues_of_V_011_definition_...`）
 - `star_preserves_norm_and_limits`（`eigenvalues_of_V_012_claim_...`）
 - `exp_hermitian_is_positive_definite`（`eigenvalues_of_V_013_claim_...`）
-- `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`）
+- `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）
 - `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
 
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の

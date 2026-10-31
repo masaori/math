@@ -1,7 +1,7 @@
 /-
 # 同時固有空間分解の直和形と `V̌'`・`V^{(+)}` の対角化可能性（具体版）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 - `check_joint_eigenspace_decomposition` (5)（`evenEigen_005_claim_...`）
 - `eigenvalues_of_check_Vprime`（`evenEigen_006_claim_...`）の「`V̌'` は対角化可能」
 - `eigenvalues_of_V_plus`（`evenEigen_010_theorem_...`）の「`V^{(+)}` は対角化可能」

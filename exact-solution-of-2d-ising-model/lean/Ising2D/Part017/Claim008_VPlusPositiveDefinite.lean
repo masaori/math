@@ -1,10 +1,10 @@
 /-
 # `V^{(+)}` は正定値（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
-`V_plus_is_positive_definite`、`V_plus_is_invertible`、
-`V_plus_inverse_is_positive_definite`、`trace_V_plus_is_positive`、
-`V_plus_inverse_positive_and_trace_positivity`。
+対応する人手証明（`V_plus_is_positive_definite`、`V_plus_is_invertible`、`trace_V_plus_is_positive` は
+`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
+`V_plus_inverse_is_positive_definite`、`V_plus_inverse_positive_and_trace_positivity` は
+`structured-latex/content/017_even_sector_eigenvalues.ts`）。
 
 **必要十分版は置かない。** この主張は `S_1^{(+)}, S_2` というこの模型の具体的な対象についての
 主張であり、取り払える一般構造が無い。使っている一般論（エルミート行列の `exp` が正定値、

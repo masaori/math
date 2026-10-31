@@ -1,7 +1,7 @@
 /-
 # 数演算子の積のトレース `tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M-k}`（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `trace_of_check_number_operator_product`（`evenEigen_004_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/PairedFermion.lean` の

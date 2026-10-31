@@ -2,6 +2,20 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の五番目の章「$V^{(+)}$ の固有値」を組み直した。
+  棚卸しでこの章に割り当てた 16 項を、`009_eigenvalues_of_V.ts`（2 項）・`012_free_energy.ts`（2 項）・`017_even_sector_eigenvalues.ts`（12 項）から、新しいファイル
+  `content/eigenvalue_problem_eigenvalues_of_V_plus.ts` の章見出しの下へ章の中の依存順で移し、`TRAILING_CONTENT_FILES` の対角化と指数表示の章のファイルの後ろに置いた。
+  ブロックの id・ラベルは変えていない。本文は旧版と同じで、違うのは下に書いた言い回しの直しだけである。017 には章見出しと、どの章にも割り当てていない 2 項（$(V^{(+)})^{-1}$ の正定値性とトレース正値性）だけが残る。
+  - **章末のゴールの主張を足した。** (1) $V^{(+)}=(2\sinh2K_2)^{M/2}\exp(\sum_{\mu\in\check{\mathcal M}}\gamma(\tilde\theta_\mu)(\check n_\mu-\tfrac12I))$、(2) $V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon$、
+    (3) $\Lambda^{(1/2)}_M=\check\Lambda_{(1,\dots,1)}=(2\sinh2K_2)^{M/2}\exp(\tfrac12\sum_\mu\gamma(\tilde\theta_\mu))$、(4) $\epsilon\ne(1,\dots,1)\Rightarrow\check\Lambda_\epsilon<\check\Lambda_{(1,\dots,1)}$ と $\max_\epsilon\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}$ を主張する claim
+    `V_plus_eigenvalues_with_c_value_and_strict_maximum` を章の最後に置いた。証明は `constant_c_value_even_sector`・`eigenvalues_of_V_plus`・`max_eigenvalue_of_V_plus_simple` に $\check V'$・$\check X$・$\check n_\mu$・$\check\Lambda_\epsilon$ の定義を代入するだけである。
+    SageMath（`sagemath/check/V_plus_eigenvalues_with_c_value_and_strict_maximum/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で各行の相対残差 ≤ 1.8e-11。$\Lambda^{(1/2)}_M$ は集合 $\Theta^{(1/2)}_M$ から定義どおりに作る。指数評価と実対数の ℝ 脱出のため倍精度。
+    否定コントロールは前因子を $(2\sinh2K_2)^M$ にしたものと $\delta=0$ の $\Lambda^{(0)}_M$）と Lean（`lean/Ising2D/Part017/ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`。仮定は $M\ne0$ だけ。
+    `check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号（$\check Q_\epsilon,\check\Lambda_\epsilon$）に分け、
+    前の章の $c$ の値を一つ目の式で決めると書いた。章の項目数は 17（割り当て 16 とゴールの主張 1。章立て案は 15）。
+  - **017 の章の案内文（「この章の目的」）を章の冒頭へ移した。** 題を「$c$ の値と $V^{(+)}$ の固有値を求める道筋」にし、「この章」を「以下」に、「半整数運動量で」を「$\tilde\theta_\mu$（$\mu\in\check{\mathcal M}$）について」に直した。
+  - **移した本文の「数演算子」を $\check n_\mu$ で指す言い方に直し、`max_eigenvalue_of_V_plus_simple` の「（半整数運動量）」を外した**（数学の中身は変えていない）。
+  - Lean・SageMath の注記、`lean/docs/ch009`・`ch012`・`ch017` の正本のファイル名を直した。別のエージェントのレビューを経た（指摘 4 件を直した。根拠欄の $\check n$ の添字をその行で開く添字に合わせ、ゴールの主張に $\check\Lambda_\epsilon,\Lambda^{(1/2)}_M$ が ℝ に住む理由を添え、SageMath の注記の章番号をラベルに直した）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の四番目の章「$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示」を組み直した。
   棚卸しでこの章に割り当てた 29 項を、`004_transfer_matrix.ts`（3 項）・`012_free_energy.ts`（1 項）・`013_even_sector_modes.ts`（4 項）・`014_even_sector_T_action.ts`（2 項）・
   `015_A_theta_tilde_diagonalization.ts`（9 項）・`016_even_sector_fermions.ts`（9 項）・`017_even_sector_eigenvalues.ts`（1 項）から、新しいファイル
@@ -1194,9 +1208,9 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の五番目の章：「$V^{(+)}$ の固有値」の章に割り当てた 16 項
-（棚卸し `parts` の二番目の部の三番目の章の `dependencyOrder`）を、新しいファイルの章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の対角化と指数表示の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の六番目の章：「$V^{(+)}$ の最大固有値に属する固有ベクトル」の章に割り当てた 15 項
+（棚卸し `parts` の二番目の部の四番目の章の `dependencyOrder`。すべて `018_even_sector_closing.ts` にある）を、新しいファイルの章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の $V^{(+)}$ の固有値の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 

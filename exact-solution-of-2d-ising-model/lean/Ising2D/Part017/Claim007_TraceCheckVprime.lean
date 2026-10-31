@@ -1,7 +1,7 @@
 /-
 # `tr(V̌') = tr((V̌')^{-1}) > 0`（**具体版**）
 
-対応する人手証明（`structured-latex/content/017_even_sector_eigenvalues.ts`）:
+対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `trace_of_check_Vprime`（`evenEigen_007_claim_...`）。
 
 **必要十分版は置かない。** 使っている一般論はトレースの線型性（既に

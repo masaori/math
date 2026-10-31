@@ -1,7 +1,7 @@
 /-
 # 章 016・017 の結果で `Ising2D.VPlusData` の仮定を埋める
 
-正本: `structured-latex/content/017_even_sector_eigenvalues.ts`
+正本: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 （`constant_c_value_even_sector`, `eigenvalues_of_V_plus`）と
 `content/015_...`（`def_gamma_theta_tilde_mu` の `γ(θ̃_μ) > 0`）。
 
