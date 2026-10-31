@@ -18,7 +18,7 @@ import { err, ok, type Result } from '../result.ts'
 import { standingOf } from '../structured-text/block.ts'
 import type { Block, Note } from '../structured-text/block.ts'
 import { localeRuntimeSchema, type Locale } from '../structured-text/locale.ts'
-import type { Node } from '../structured-text/node.ts'
+import type { DiagramLabelNode, Node } from '../structured-text/node.ts'
 import { createRuntimeSchema, type RuntimeSchema, type ValidationIssue } from '../structured-text/validate.ts'
 import type { RevisionSnapshot, SegmentSnapshot } from './resolve.ts'
 
@@ -227,6 +227,18 @@ export type StructuralNode =
   | { type: 'cite'; keys: readonly string[] }
   | { type: 'paragraph'; children: readonly StructuralNode[] }
   | { type: 'list'; items: readonly (readonly StructuralNode[])[] }
+  | {
+      type: 'diagram'
+      groups: readonly { id: string; math: readonly string[] }[]
+      boxes: readonly {
+        id: string
+        group: string | null
+        column: number
+        row: number
+        math: readonly string[]
+      }[]
+      edges: readonly { from: string; to: string }[]
+    }
 
 /**
  * 翻訳で変わる文字列を除いたノード骨格。
@@ -265,6 +277,24 @@ export const structuralNodesOf = <L extends string>(nodes: readonly Node<L>[]): 
       case 'list': {
         const items = node.items.map((item) => structuralNodesOf(item))
         if (items.some((item) => item.length > 0)) structural.push({ type: 'list', items })
+        break
+      }
+      case 'diagram': {
+        // 図式は箱・枠・矢印・位置と題の数式が骨格であり、題の地の文だけが翻訳で変わる。
+        const mathOf = (title: readonly DiagramLabelNode[]): string[] =>
+          title.flatMap((part) => (part.type === 'math' ? [part.tex] : []))
+        structural.push({
+          type: 'diagram',
+          groups: node.groups.map((group) => ({ id: group.id, math: mathOf(group.title) })),
+          boxes: node.boxes.map((box) => ({
+            id: box.id,
+            group: box.group ?? null,
+            column: box.column,
+            row: box.row,
+            math: mathOf(box.title),
+          })),
+          edges: node.edges.map((edge) => ({ from: edge.from, to: edge.to })),
+        })
         break
       }
     }

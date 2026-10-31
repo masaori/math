@@ -419,6 +419,9 @@ function renderNode(node: Node, blockId: string): string {
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${escapeText(node.value)}`;
+    case "diagram":
+      // 図式ノードは入力言語の語彙にあるが、この出力器はまだ描かない（黙って落とさない）。
+      throw new Error(`図式ノードは、この出力器がまだ対応していない: ${blockId}`);
     case "image":
       // 画像ノードは入力言語の語彙にあるが、この出力器はまだ資産解決器を持たない。
       // 素通しすると図が無音で消えるので、明示的に落とす。

@@ -259,3 +259,84 @@ test('エラーは 1 件目で止めずに全件返す', () => {
   assert.equal(result.success, false)
   assert.equal(result.success === false && result.error.length, 2)
 })
+
+const diagramFigure = (diagramNode: unknown) => ({
+  id: 'f1',
+  kind: 'figure',
+  labels: ['fig:chapters'],
+  content: [diagramNode],
+})
+
+const validDiagram = {
+  type: 'diagram',
+  groups: [{ id: 'part', title: [{ type: 'text', value: '部' }] }],
+  boxes: [
+    { id: 'a', title: [{ type: 'math', tex: 'V^{(+)}' }], group: 'part', column: 0, row: 0 },
+    { id: 'b', title: [{ type: 'text', value: '次の章' }], group: 'part', column: 0.5, row: 1 },
+  ],
+  edges: [{ from: 'a', to: 'b' }],
+}
+
+test('図式ノードを受け入れる（列は小数でもよい）', () => {
+  const result = schema.validateBlock(diagramFigure(validDiagram), 'fixture')
+  assert.equal(result.success, true)
+})
+
+test('図式の行は整数（矢印の向きに沿った順位）', () => {
+  const result = schema.validateBlock(
+    diagramFigure({
+      ...validDiagram,
+      boxes: [validDiagram.boxes[0], { ...validDiagram.boxes[1], row: 1.5 }],
+    }),
+    'fixture',
+  )
+  assert.equal(result.success, false)
+})
+
+test('図式の題には地の文と行中数式しか書けない', () => {
+  const result = schema.validateBlock(
+    diagramFigure({
+      ...validDiagram,
+      groups: [{ id: 'part', title: [{ type: 'ref', target: 'lab:a' }] }],
+    }),
+    'fixture',
+  )
+  assert.equal(result.success, false)
+})
+
+test('図式の中の参照と一意性の違反を、位置つきで全件返す', () => {
+  const result = schema.validateBlock(
+    diagramFigure({
+      type: 'diagram',
+      groups: [{ id: 'part', title: [{ type: 'text', value: '部' }] }],
+      boxes: [
+        { id: 'a', title: [{ type: 'text', value: 'a' }], group: 'missing', column: 0, row: 0 },
+        { id: 'a', title: [{ type: 'text', value: 'a2' }], column: 0, row: 0 },
+        { id: 'b', title: [{ type: 'text', value: 'b' }], group: 'part', column: 1, row: 1 },
+      ],
+      edges: [
+        { from: 'b', to: 'nowhere' },
+        { from: 'b', to: 'a' },
+      ],
+    }),
+    'fixture',
+  )
+  assert.equal(result.success, false)
+  const messages = result.success === false ? result.error.map((issue) => `${issue.path} ${issue.message}`) : []
+  assert.ok(messages.some((message) => /箱の id が重複している: a/.test(message)))
+  assert.ok(messages.some((message) => /所属先の枠が宣言されていない: missing/.test(message)))
+  assert.ok(messages.some((message) => /同じ位置/.test(message)))
+  assert.ok(messages.some((message) => /content\.0\.edges\.0\.to .*矢印の先の箱が宣言されていない/.test(message)))
+  assert.ok(messages.some((message) => /上の行から下の行へ/.test(message)))
+})
+
+test('箱を 1 つも持たない枠は拒否する', () => {
+  const result = schema.validateBlock(
+    diagramFigure({
+      ...validDiagram,
+      groups: [...validDiagram.groups, { id: 'empty', title: [{ type: 'text', value: '空' }] }],
+    }),
+    'fixture',
+  )
+  assert.equal(result.success, false)
+})

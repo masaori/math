@@ -217,6 +217,12 @@ function collectStrings(nodes: readonly Node[], out: string[]): void {
     if (node.type === "math" || node.type === "displayMath") out.push(node.tex);
     if (node.type === "paragraph") collectStrings(node.children, out);
     if (node.type === "list") node.items.forEach((item) => collectStrings(item, out));
+    // 図式の箱・枠の題の数式も KaTeX と LaTeX へ渡るので、本文の数式と同じ規約で検査する。
+    if (node.type === "diagram") {
+      for (const title of [...node.groups, ...node.boxes].map((item) => item.title)) {
+        collectStrings(title, out);
+      }
+    }
   }
 }
 

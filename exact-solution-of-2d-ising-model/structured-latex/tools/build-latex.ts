@@ -15,9 +15,12 @@
  *   - `math` → `$...$`、`displayMath` → `\[...\]`（KaTeX 向けの LaTeX 文字列をそのまま渡す）
  *   - `list` → `itemize`、`todo` → 目立つ未完マーカー
  *
- * **入力言語のうち、この出力器がまだ対応していない語彙**（図表ブロック `figure` と画像ノード
- * `image`。いずれもこのプロジェクトの content には 1 件も無い）は、黙って落とさず**明示的に
- * エラーにする**。網羅性の穴を無音にすると、後から図表を書いたときに出力から消えるため。
+ *   - 図表ブロック `figure` → `figure` 環境（位置を固定する `[H]`）。番号は章ごとに振り直す（「図 1.1」）
+ *   - 図式ノード `diagram` → TikZ の絵（座標はシステムの共有の幾何が決める。HTML 側と同じ座標）
+ *
+ * **入力言語のうち、この出力器がまだ対応していない語彙**（画像ノード `image`、引用ノード `cite`。
+ * いずれもこのプロジェクトの content には 1 件も無い）は、黙って落とさず**明示的に
+ * エラーにする**。網羅性の穴を無音にすると、後から書いたときに出力から消えるため。
  *
  * 使い方:
  *   node tools/build-latex.ts            .tex を生成する
@@ -28,7 +31,21 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import {
+  describeDiagramLayoutError,
+  layoutDiagram,
+} from "../../../structured-latex/renderers/diagram/layout.ts";
+import {
+  DIAGRAM_TIKZ_PREAMBLE,
+  renderDiagramTikz,
+} from "../../../structured-latex/renderers/latex/diagram.ts";
+import type {
+  FigureBlock,
+  HeadingBlock,
+  Node,
+  TheoremLikeBlock,
+  TheoremLikeKind,
+} from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 
@@ -45,6 +62,14 @@ const buildDir = join(structuredLatexDir, "build");
 const texPath = join(buildDir, "document.tex");
 const pdfPath = join(buildDir, "document.pdf");
 const withPdf = process.argv.includes("--pdf");
+
+/**
+ * 図式の絵の大きさの上限（pt）。幅は版面の幅（A4、左右の余白 25mm → 160mm ≒ 455pt）から少し内側、
+ * 高さは版面の高さ（297mm − 50mm ≒ 702pt）からキャプションの数行分を除いた値に取る。
+ * これを超える図式は、座標と文字を同じ倍率で縮めて収める（はみ出すとキャプションが紙の外へ出る）。
+ */
+const DIAGRAM_MAX_WIDTH_PT = 440;
+const DIAGRAM_MAX_HEIGHT_PT = 600;
 
 /** amsthm の環境名と見出し語。定理型 kind と 1 対 1 に対応させる。 */
 const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: string }> = {
@@ -99,10 +124,8 @@ for (const { blocks } of contentFiles) {
       continue;
     }
     if (block.kind === "figure") {
-      throw new Error(
-        `図表ブロックは、この出力器がまだ対応していない: ${block.id}\n` +
-          "  対応するまで content/ に figure を置かないこと（黙って出力から落とさないため）。",
-      );
+      body.push(renderFigure(block));
+      continue;
     }
     body.push(renderTheoremLike(block));
   }
@@ -231,6 +254,10 @@ function renderDocument(inner: string): string {
 \\usepackage{amsthm}
 \\usepackage[margin=25mm]{geometry}
 \\usepackage{graphicx}
+\\usepackage{float}
+\\usepackage{tikz}
+% 図式の箱の題を、行の長さを揃えて折り返す定義（システムの renderers/latex/diagram.ts が持つ）。
+${DIAGRAM_TIKZ_PREAMBLE}
 \\usepackage{xeCJK}
 \\setCJKmainfont{${cjkMainFont}}
 \\setCJKsansfont{${cjkSansFont}}
@@ -276,6 +303,11 @@ function renderDocument(inner: string): string {
 \\crefname{structurednote}{ノート}{ノート}
 \\crefname{section}{節}{節}
 
+% 図表は定理型とは別の番号を持ち、章（\\section）ごとに振り直す（HTML 側 build-html.ts と同じ規則）。
+\\renewcommand{\\figurename}{図}
+\\numberwithin{figure}{section}
+\\crefname{figure}{図}{図}
+
 \\title{2次元 Ising 模型の厳密解}
 \\date{}
 
@@ -315,6 +347,17 @@ function renderTheoremLike(block: TheoremLikeBlock): string {
     parts.push(`\\begin{proof}\n${renderNodes(block.proof, block.id)}\n\\end{proof}`);
   }
   return parts.join("\n\n");
+}
+
+function renderFigure(block: FigureBlock): string {
+  const content = renderNodes(block.content, block.id);
+  // キャプションは \caption の引数なので段落の区切り（空行）を入れられない。行内として連結する。
+  const caption = (block.caption ?? []).map((node) => renderInline(node, block.id)).join(" ");
+  const anchors = [
+    `\\label{blk:${block.id}}`,
+    ...block.labels.map((label) => `\\label{lab:${label}}`),
+  ].join("");
+  return `\\begin{figure}[H]\n\\centering\n${content}\n\\caption{${caption}}${anchors}\n\\end{figure}`;
 }
 
 function renderTitle(
@@ -391,6 +434,19 @@ function renderNode(node: Node, blockId: string): string {
         `画像ノードは、この出力器がまだ対応していない: ${blockId} の ${node.assetKey}\n` +
           "  対応するまで content/ に image を置かないこと。",
       );
+    case "diagram": {
+      // 座標はシステムの共有の幾何が決める（HTML 側と同じ座標）。描けない配置は生成を止める。
+      const layout = layoutDiagram(node);
+      if (!layout.success) {
+        throw new Error(`図式を描けない: ${blockId}: ${describeDiagramLayoutError(layout.error)}`);
+      }
+      return renderDiagramTikz(
+        layout.data,
+        (title) =>
+          title.map((part) => (part.type === "text" ? escapeText(part.value) : `$${part.tex}$`)).join(""),
+        { maxWidthPt: DIAGRAM_MAX_WIDTH_PT, maxHeightPt: DIAGRAM_MAX_HEIGHT_PT },
+      );
+    }
   }
 }
 

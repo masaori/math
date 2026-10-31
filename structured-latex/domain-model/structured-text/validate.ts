@@ -16,6 +16,7 @@ import { z } from 'zod'
 import { err, ok, type Result } from '../result.ts'
 import { HEADING_LEVELS, STANDING_BEARING_KINDS, THEOREM_LIKE_KINDS, THEOREM_STANDINGS } from './block.ts'
 import type { Block, Note, StandingBearingKind, TheoremLikeKind } from './block.ts'
+import { diagramIssuesOf } from './diagram.ts'
 import type { DocumentStructure } from './document-structure.ts'
 
 export type ValidationIssue = { path: string; message: string }
@@ -25,6 +26,16 @@ const issuesOf = (error: z.ZodError, prefix: string): ValidationIssue[] =>
     path: [prefix, ...issue.path.map(String)].filter((part) => part !== '').join('.'),
     message: issue.message,
   }))
+
+/** 図式の題に書けるノード（地の文と行中数式だけ）。 */
+const diagramLabelSchema = z
+  .array(
+    z.discriminatedUnion('type', [
+      z.object({ type: z.literal('text'), value: z.string() }).strict(),
+      z.object({ type: z.literal('math'), tex: z.string() }).strict(),
+    ]),
+  )
+  .min(1)
 
 /** ノード。語彙が閉じていることを実行時にも表明する。 */
 const nodeSchema: z.ZodType<unknown> = z.lazy(() =>
@@ -50,7 +61,31 @@ const nodeSchema: z.ZodType<unknown> = z.lazy(() =>
       .strict(),
     z.object({ type: z.literal('paragraph'), children: z.array(nodeSchema) }).strict(),
     z.object({ type: z.literal('list'), items: z.array(z.array(nodeSchema)) }).strict(),
-  ]),
+    z
+      .object({
+        type: z.literal('diagram'),
+        groups: z.array(z.object({ id: z.string().min(1), title: diagramLabelSchema }).strict()),
+        boxes: z.array(
+          z
+            .object({
+              id: z.string().min(1),
+              title: diagramLabelSchema,
+              group: z.string().min(1).optional(),
+              column: z.number().finite().nonnegative(),
+              row: z.number().int().nonnegative(),
+            })
+            .strict(),
+        ),
+        edges: z.array(z.object({ from: z.string().min(1), to: z.string().min(1) }).strict()),
+      })
+      .strict(),
+  ]).superRefine((node, context) => {
+    // 図式の中で閉じる参照と一意性（形が正しいことは上で確かめ済み）。
+    if (node.type !== 'diagram') return
+    for (const issue of diagramIssuesOf(node)) {
+      context.addIssue({ code: z.ZodIssueCode.custom, path: [...issue.path], message: issue.message })
+    }
+  }),
 )
 
 /** `text` か `tex` の少なくとも一方が必須（I4）。型側の union と同じ形にしてある。 */

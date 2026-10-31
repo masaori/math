@@ -50,6 +50,7 @@ export {
 export {
   NODE_TYPES,
   cite,
+  diagram,
   displayMath,
   image,
   list,
@@ -58,6 +59,12 @@ export {
   text,
   todo,
   type CiteNode,
+  type DiagramBox,
+  type DiagramEdge,
+  type DiagramGroup,
+  type DiagramLabelInput,
+  type DiagramLabelNode,
+  type DiagramNode,
   type DisplayMathNode,
   type ImageNode,
   type InlineInput,
@@ -70,6 +77,8 @@ export {
   type TextNode,
   type TodoNode,
 } from './structured-text/node.ts'
+
+export { diagramIssuesOf, type DiagramIssue } from './structured-text/diagram.ts'
 
 export {
   createStructuredTextSchema,

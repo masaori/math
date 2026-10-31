@@ -6,6 +6,8 @@
  *   - `domain-model/` は**何にも依存しない**。他のディレクトリも、Node の組み込みモジュールも
  *     import しない（純粋であること。I/O を持つと出力器やツールへ依存が漏れる）。
  *   - `codegen/` と `examples/` は `domain-model/` にだけ依存してよい。
+ *   - `renderers/`（出力器のモジュール）も `domain-model/` と自分の中にだけ依存してよい。
+ *     図式の幾何（`renderers/diagram/`）を HTML と LaTeX の出力器が共有するのは、自分の中の依存である。
  *   - 逆方向・循環は禁止。
  */
 
@@ -75,8 +77,8 @@ for (const file of listFiles(join(systemDir, 'domain-model'))) {
   }
 }
 
-/** codegen / examples: domain-model へだけ依存してよい（互いには依存しない）。 */
-for (const layer of ['codegen', 'examples'] as const) {
+/** codegen / examples / renderers: domain-model へだけ依存してよい（互いには依存しない）。 */
+for (const layer of ['codegen', 'examples', 'renderers'] as const) {
   const layerDir = join(systemDir, layer)
   for (const file of listFiles(layerDir)) {
     for (const specifier of importsOf(file)) {

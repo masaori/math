@@ -292,6 +292,12 @@ type ImageNode       = { type: 'image'; assetKey: string; alt: string }
 type RefNode<L>      = { type: 'ref'; target: L; label?: string }
 type ParagraphNode<L>= { type: 'paragraph'; children: readonly Node<L>[] }
 type ListNode<L>     = { type: 'list'; items: readonly (readonly Node<L>[])[] }
+type DiagramNode     = {                                       // 箱・枠・矢印の図式（§7.5）
+  type: 'diagram'
+  groups: readonly { id: string; title: readonly (TextNode | MathNode)[] }[]
+  boxes:  readonly { id: string; title: readonly (TextNode | MathNode)[]; group?: string; column: number; row: number }[]
+  edges:  readonly { from: string; to: string }[]
+}
 ```
 
 ```typescript
@@ -788,6 +794,43 @@ LaTeX を書き味として使いたい要求は、正本の表現ではなく**
 **資産（画像ファイル）の受け入れと配信は M2 の範囲外である。** `assetKey` から実体への解決は
 M5（Web 生成）と M7（ホスティング）で決める。正本側の契約は上記で閉じており、後から
 資産の entity を足しても入力言語は変わらない。
+
+### 7.6 図式
+
+章の依存関係のような「箱・枠・矢印」の図を、画像ファイルではなく**構造**として正本に持つ。
+語彙に `diagram` ノードを 1 つ足した（図表ブロック `figure` の `content` に置き、キャプションと番号は
+図表ブロックが持つ）。
+
+```typescript
+type DiagramNode = {
+  type: 'diagram'
+  groups: readonly { id; title: readonly (TextNode | MathNode)[] }[]          // 枠
+  boxes:  readonly { id; title; group?: string; column: number; row: number }[] // 箱と格子位置
+  edges:  readonly { from: string; to: string }[]                              // 矢印
+}
+```
+
+根拠:
+
+1. **図式はノードである。** 図式自体は「図 3 を見よ」と指されず番号も持たない（§5.3 の判定）。
+   指され、数えられるのは包んでいる図表ブロックである。
+2. **箱の位置は著者が格子（列・行）で決める。自動レイアウトはしない。** 自動レイアウトは入力の
+   小さな変化で配置が大きく動き、矢印がねじれても著者が直す手段を持たない。位置を著者が持てば、
+   ねじれは著者が位置を変えて解く。列は小数を許し（列の間に置くため）、行は整数で、
+   **矢印は上の行から下の行へ向かう**（行は矢印の向きに沿った順位である）。
+3. **座標は正本に持たない。** 座標・寸法・線の太さは体裁であり（§7.2）、正本が持つのは
+   箱・枠・矢印と格子位置だけである。座標は出力器が共有する 1 か所
+   （`renderers/diagram/layout.ts`）が計算し、HTML（SVG）と LaTeX（TikZ）はそれを描くだけにする。
+   出力形式ごとに座標を計算すると、同じ図式が出力ごとに違う形になる。
+4. **題は地の文と行中数式だけ。** 参照・引用・箇条を許すと、解決済み文書が図式の内側まで
+   参照を解決しなければならなくなるが、箱の名前から別のブロックを指す実例は無い。
+5. **代替文 `alt` は持たない。** 箱の題と矢印の両端を並べれば中身が尽きるので、
+   テキストしか出せない文脈へ構造から劣化できる（§7.4 判定 2）。
+
+検査の分担: 箱の所属先の枠・矢印の両端が宣言された id であることは型で落とす（`diagram` 構築子の
+`const` 型引数）。id の重複・同じ位置の重複・上向きの矢印・箱の無い枠は実行時検証
+（`diagramIssuesOf`）が落とす。途中の箱に当たらずに矢印を引けない配置、枠どうしの重なり、
+矢印が箱や枠の題に重なることは、幾何の計算が誤りとして返す（描けないものを黙って描かない。§7.4 判定 3）。
 
 ---
 

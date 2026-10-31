@@ -38,7 +38,10 @@ structured-latex/
 │   ├── structured-text-index/  #   ラベルのユニオン型・文書集約モジュール
 │   ├── entity-definitions/     #   ER 定義
 │   └── config/                 #   storage 宣言
-├── renderers/html/        # 静的HTML出力で共有する既定UI
+├── renderers/             # 出力器のモジュール。domain-model にだけ依存する
+│   ├── diagram/           #   図式の幾何（箱・枠・矢印の座標）。HTML と LaTeX が共有する
+│   ├── html/              #   静的HTML出力で共有する既定UI
+│   └── latex/             #   LaTeX 出力で共有する部品（図式の TikZ）
 ├── examples/              # 利用例（生成器と型検査の実証対象）
 ├── tools/                 # 負テスト・依存方向の検査
 ├── tsconfig.base.json     # 共有コンパイラ設定（システム自身・各プロジェクトが継承）
@@ -52,6 +55,30 @@ structured-latex/
 章ナビゲーションは、画面が広いときは見出しどおりのサイドツリー、スマートフォン幅のときは
 ハンバーガーで開閉する目次パネルになる。**どちらも入れ子を含む全階層の見出しを出す**
 （モバイルだけ最上位に間引くと、節へ直接移動できない）。
+
+## 図式
+
+章の依存関係のような箱・枠・矢印の図は、図表ブロック `figure` の `content` に図式ノード
+`diagram(...)` を置いて書く。箱の位置は著者が格子（列 `column`・行 `row`）で決め、
+矢印は上の行から下の行へ向かう。自動レイアウトはしないので、矢印のねじれは位置を変えて解く。
+
+```typescript
+diagram({
+  groups: [{ id: 'partition', title: ['分配関数'] }],
+  boxes: [
+    { id: 'trace', title: ['転送行列による表示'], group: 'partition', column: 0, row: 0 },
+    { id: 'projection', title: ['射影と ', math('V^{(+)}')], group: 'partition', column: 0, row: 1 },
+  ],
+  edges: [{ from: 'trace', to: 'projection' }],
+})
+```
+
+- 未宣言の枠・箱への参照は型で落ちる。id・位置の重複、上向きの矢印は実行時検証で落ちる。
+- 座標は `renderers/diagram/layout.ts` の `layoutDiagram` だけが計算する。矢印は直交折れ線で、
+  途中の行の箱にも枠の題にも重ならない。重ならずに引けない配置は誤りとして返す。
+- HTML は `renderers/html/diagram.ts`（SVG の線と、その上に重ねた HTML の題。幅に合わせて縮む）、
+  LaTeX は `renderers/latex/diagram.ts`（TikZ。版面の幅に収まるよう座標と文字を同じ倍率で縮める）で描く。
+  題の地の文・数式の描き方は利用側が関数で渡す。
 
 ## 主定理とサブ定理
 

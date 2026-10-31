@@ -497,6 +497,9 @@ function renderNode(node: Node, blockId: string): string {
     case "todo":
       todoCount += 1;
       return `\\par\\noindent\\textbf{[TODO]}\\ ${renderProse(node.value, blockId)}`;
+    case "diagram":
+      // 図式ノードは入力言語の語彙にあるが、この出力器はまだ描かない（黙って落とさない）。
+      throw new Error(`図式ノードは、この出力器がまだ対応していない: ${blockId}`);
     case "image":
       // 図版はシステムの語彙には在るが、本論文はまだ 1 件も使っていない
       // （資産の解決規則を決めていない）。黙って消さず、使い始めたら落ちるようにしておく。

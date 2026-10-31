@@ -90,6 +90,7 @@ export const runtimeSchema = createRuntimeSchema<
 // --- ノードの構築子（システムから再エクスポート。ここでは定義しない） ---------
 
 export {
+  diagram,
   displayMath,
   image,
   list,
@@ -142,7 +143,7 @@ export type TheoremLikeBlock = SystemTheoremLikeBlock<Label, ConversionMeta>;
 /** 章見出しブロック（文書構造のみを持つ）。 */
 export type HeadingBlock = SystemHeadingBlock<Label>;
 
-/** 図表ブロック（このプロジェクトの content には現れないが、語彙としては存在する）。 */
+/** 図表ブロック（キャプションと番号を持つ図。本体は図式ノードなど）。 */
 export type FigureBlock = SystemFigureBlock<Label>;
 
 /**

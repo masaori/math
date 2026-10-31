@@ -15,6 +15,7 @@ import type {
 } from '../structured-text/block.ts'
 import type {
   CiteNode,
+  DiagramNode,
   DisplayMathNode,
   ImageNode,
   MathNode,
@@ -73,6 +74,8 @@ export type ResolvedNode =
   | UnresolvedRef
   | { type: 'paragraph'; children: readonly ResolvedNode[] }
   | { type: 'list'; items: readonly (readonly ResolvedNode[])[] }
+  // 図式の題は地の文と行中数式だけで、解決するもの（参照）を含まないので L1 の形のまま素通しする。
+  | DiagramNode
 
 /**
  * 解決済みブロックが共通して持つ**由来の情報**。

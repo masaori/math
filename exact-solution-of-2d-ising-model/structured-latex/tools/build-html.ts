@@ -14,6 +14,8 @@
  *
  * 採番は LaTeX 側と一致させる。定義・主張・定理・注意・ノートは通し番号を共有し、
  * `\section`（見出し level 2）ごとに振り直す。したがって番号は「章番号.通し番号」になる。
+ * 図表は定理型とは別の通し番号を持ち（システムの既定の採番方針 `DEFAULT_NUMBERING_POLICY` と同じく
+ * カウンタを分ける）、同じく章ごとに振り直す（「図 1.1」）。
  *
  * 使い方: node tools/build-html.ts [出力先.html]
  */
@@ -28,13 +30,24 @@ import {
   CHAPTER_NAVIGATION_SCRIPT,
   renderChapterNavigation,
 } from "../../../structured-latex/renderers/html/chapter-navigation.ts";
+import { DIAGRAM_CSS, renderDiagramHtml } from "../../../structured-latex/renderers/html/diagram.ts";
+import {
+  describeDiagramLayoutError,
+  layoutDiagram,
+} from "../../../structured-latex/renderers/diagram/layout.ts";
 import {
   THEOREM_STANDING_CSS,
   renderMainTheoremLead,
   renderStandingAwareBlock,
 } from "../../../structured-latex/renderers/html/theorem-standing.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
-import type { HeadingBlock, Node, TheoremLikeBlock, TheoremLikeKind } from "../schema.ts";
+import type {
+  FigureBlock,
+  HeadingBlock,
+  Node,
+  TheoremLikeBlock,
+  TheoremLikeKind,
+} from "../schema.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 const require = createRequire(import.meta.url);
@@ -43,12 +56,13 @@ const katexDist = dirname(require.resolve("katex/dist/katex.min.css"));
 const outPath = process.argv[2] ?? join(structuredLatexDir, "build", "document.html");
 
 /** 定理型 kind → 見出し語。LaTeX 側の crefname と一致させる（参照文字列が変わらないように）。 */
-const HEADINGS: Record<TheoremLikeKind, string> = {
+const HEADINGS: Record<TheoremLikeKind | "figure", string> = {
   definition: "定義",
   claim: "主張",
   theorem: "定理",
   remark: "注意",
   note: "ノート",
+  figure: "図",
 };
 
 const escapeHtml = (s: string): string =>
@@ -58,11 +72,13 @@ const contentFiles = await loadContentFiles();
 
 // --- 採番（LaTeX と同じ規則）-------------------------------------------------
 
-type Numbered = { kind: TheoremLikeKind; number: string; blockId: string };
+type Numbered = { kind: TheoremLikeKind | "figure"; number: string; blockId: string };
 const byLabel = new Map<string, Numbered>();
 const sectionOfLabel = new Map<string, string>(); // 見出しラベル → 章番号
+const figureNumberOf = new Map<string, string>(); // 図表ブロック id → 番号
 let sectionNumber = 0;
 let counter = 0;
+let figureCounter = 0;
 
 for (const { blocks } of contentFiles) {
   for (const block of blocks) {
@@ -70,11 +86,18 @@ for (const { blocks } of contentFiles) {
       if (block.level === 2) {
         sectionNumber += 1;
         counter = 0;
+        figureCounter = 0;
       }
       for (const label of block.labels) sectionOfLabel.set(label, String(sectionNumber));
       continue;
     }
-    if (block.kind === "figure") continue;
+    if (block.kind === "figure") {
+      figureCounter += 1;
+      const number = `${sectionNumber}.${figureCounter}`;
+      figureNumberOf.set(block.id, number);
+      for (const label of block.labels) byLabel.set(label, { kind: "figure", number, blockId: block.id });
+      continue;
+    }
     counter += 1;
     const number = `${sectionNumber}.${counter}`;
     for (const label of block.labels) {
@@ -153,7 +176,8 @@ for (const { blocks } of contentFiles) {
       continue;
     }
     if (block.kind === "figure") {
-      throw new Error(`図表ブロックは、この出力器がまだ対応していない: ${block.id}`);
+      body.push(renderFigure(block));
+      continue;
     }
     body.push(renderTheoremLike(block));
   }
@@ -203,6 +227,20 @@ function renderTheoremLike(block: TheoremLikeBlock): string {
   });
 }
 
+function renderFigure(block: FigureBlock): string {
+  const number = figureNumberOf.get(block.id) ?? "";
+  const caption = renderNodes(block.caption ?? [], block.id)
+    // キャプションは「図 1.1　本文」の 1 行にする（段落の p を剥がして番号の後ろへ続ける）。
+    .replace(/^<p>/, "")
+    .replace(/<\/p>$/, "");
+  return (
+    `<figure class="block figure" id="blk-${block.id}">` +
+    `${renderNodes(block.content, block.id)}` +
+    `<figcaption><span class="figure-number">${HEADINGS.figure} ${number}</span>　${caption}</figcaption>` +
+    `</figure>`
+  );
+}
+
 function renderTitle(title: { text?: string; tex?: string } | null | undefined, blockId: string): string {
   if (title === null || title === undefined) return "";
   if (title.tex !== undefined) return renderMath(title.tex, false, blockId);
@@ -239,6 +277,18 @@ function renderNode(node: Node, blockId: string): string {
       return `<p class="todo"><strong>[TODO]</strong> ${escapeHtml(node.value)}</p>`;
     case "image":
       throw new Error(`画像ノードは、この出力器がまだ対応していない: ${blockId}`);
+    case "diagram": {
+      // 座標はシステムの共有の幾何が決める（LaTeX 側と同じ座標）。描けない配置は生成を止める。
+      const layout = layoutDiagram(node);
+      if (!layout.success) {
+        throw new Error(`図式を描けない: ${blockId}: ${describeDiagramLayoutError(layout.error)}`);
+      }
+      return renderDiagramHtml(layout.data, (title) =>
+        title
+          .map((part) => (part.type === "text" ? escapeHtml(part.value) : renderMath(part.tex, false, blockId)))
+          .join(""),
+      );
+    }
   }
 }
 
@@ -304,9 +354,13 @@ a { color:inherit; text-decoration:underline; text-decoration-color:var(--line);
 .display { overflow-x:auto; overflow-y:hidden; padding:4px 0; }
 .todo { color:#b26a00; }
 .matherror { color:#c00; font-family:ui-monospace,monospace; font-size:.85em; }
+figure.block { margin:26px 0; }
+figure.block figcaption { margin-top:8px; font-size:.92rem; line-height:1.7; }
+.figure-number { font-weight:600; }
 footer { margin-top:64px; border-top:1px solid var(--line); padding-top:14px; color:var(--muted); font-size:.8rem; }
 ${CHAPTER_NAVIGATION_CSS}
 ${THEOREM_STANDING_CSS}
+${DIAGRAM_CSS}
 </style></head><body>
 ${mobileHtml}
 <div class="page-layout">

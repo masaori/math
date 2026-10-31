@@ -69,6 +69,7 @@ function renderNode(node: Node, blockId: string): string {
     case "ref": usedRefs.push(node.target); return node.label === undefined ? `\\cref{lab:${node.target}}` : `\\hyperref[lab:${node.target}]{${escapeText(node.label)}}`;
     case "todo": return `\\textbf{[TODO] ${escapeText(node.value)}}`;
     case "cite": throw new Error(`cite は未対応: ${blockId}`);
+    case "diagram": throw new Error(`diagram は未対応: ${blockId}`);
     case "image": throw new Error(`image は未対応: ${blockId}`);
   }
 }

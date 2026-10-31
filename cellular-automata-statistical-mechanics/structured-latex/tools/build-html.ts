@@ -194,6 +194,9 @@ function renderNode(node: Node, blockId: string): string {
       throw new Error(`引用ノードは、この出力器がまだ対応していない: ${blockId}`);
     case "todo":
       return `<p class="todo"><strong>[TODO]</strong> ${escapeHtml(node.value)}</p>`;
+    case "diagram":
+      // 図式ノードは入力言語の語彙にあるが、この出力器はまだ描かない（黙って落とさない）。
+      throw new Error(`図式ノードは、この出力器がまだ対応していない: ${blockId}`);
     case "image":
       throw new Error(`画像ノードは、この出力器がまだ対応していない: ${blockId}`);
   }

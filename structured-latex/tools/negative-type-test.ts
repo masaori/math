@@ -79,6 +79,30 @@ const theorem = (options: {
     statement: [${options.statement ?? ''}],${options.extra ?? ''}
   },`
 
+/** 図式ノードを 1 つ持つ図表ブロック（差し込み用）。 */
+const diagramFigureModule = (options: { group: string; edgeTo: string }): string =>
+  `import { diagram } from '../../../domain-model/index.ts'
+import { defineBlocks } from './schema.ts'
+
+export default defineBlocks([
+  {
+    id: 'figure_diagram',
+    kind: 'figure',
+    labels: [],
+    content: [
+      diagram({
+        groups: [{ id: 'partition', title: ['分配関数'] }],
+        boxes: [
+          { id: 'a', title: ['a'], group: ${JSON.stringify(options.group)}, column: 0, row: 0 },
+          { id: 'b', title: ['b'], column: 0, row: 1 },
+        ],
+        edges: [{ from: 'a', to: ${JSON.stringify(options.edgeTo)} }],
+      }),
+    ],
+  },
+])
+`
+
 type Case = {
   name: string
   /** `broken` が true のときだけ誤りを含むファイル群を返す。 */
@@ -378,6 +402,20 @@ export default defineBlocks([
     content: [],${broken ? '\n    statement: [],' : ''}
   },`,
       ),
+    }),
+  },
+  {
+    name: '図式の箱が宣言していない枠に属する',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': diagramFigureModule({ group: broken ? 'partiton' : 'partition', edgeTo: 'b' }),
+    }),
+  },
+  {
+    name: '図式の矢印が宣言していない箱を指す',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': diagramFigureModule({ group: 'partition', edgeTo: broken ? 'c' : 'b' }),
     }),
   },
   {
