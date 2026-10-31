@@ -43,6 +43,7 @@ export const LEADING_CONTENT_FILES = ["chapter_organization.ts"] as const;
 export const TRAILING_CONTENT_FILES = [
   "partition_function_transfer_matrix_representation.ts",
   "partition_function_projection_and_jordan_wigner.ts",
+  "eigenvalue_problem_reduction_to_A_theta.ts",
 ] as const;
 
 /**

@@ -3,7 +3,7 @@
 
 対応する人手本文:
 `structured-latex/content/004_transfer_matrix.ts` の `<def_hatZ_pm>` と `<def_hatY>`、
-および `<exp_sum>` に共通して現れる位相因子
+および `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の `<exp_sum>` に共通して現れる位相因子
 
   `exp(-√-1 · 2π k / M)` (`k ∈ ℤ`).
 

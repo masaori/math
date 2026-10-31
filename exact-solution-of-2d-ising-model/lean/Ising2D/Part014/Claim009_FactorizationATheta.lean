@@ -2,7 +2,7 @@
 # 具体版: `A(θ) = B_1(θ) B_2 B_1(θ)`（`θ ∈ ℝ` 一般）
 
 対応する人手証明のラベル: **`factorization_of_A_theta_general`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_009_claim_factorization_A_theta`）
 
 ## Lean 側の既存の証明との関係

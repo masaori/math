@@ -2,7 +2,7 @@
 # 具体版: `exp(X) A exp(-X)` の級数展開（`Mat(2,ℂ)^{⊗M}` 上）
 
 対応する人手証明のラベル: **`<exp_X_Y_exp_-X>`**
-（`structured-latex/content/008_TV1_hatZ_hatY_part1.mjs` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `TV1_hatZ_hatY_006_claim_exp_conjugation`。級数展開の本体は 005 章
 `structured-latex/content/005_exp_conjugation_proof.mjs` の
 `<matrix_exp_conjugation>`、`ad_X^n` の定義は `<ad_binomial>` / `<def_ad_X_matrix>`）。

@@ -10,6 +10,7 @@ export const ALL_LABELS = [
   "H1_H2_via_check_Z_Y",
   "H1_plus_in_sigma_z_form",
   "T_V_plus_check_Z_Y",
+  "T_V_plus_check_Z_Y_via_B1_B2_B1",
   "T_V_plus_eq_T_check_Vprime",
   "T_V_plus_eq_T_check_Vprime_on_check_Z_Y",
   "T_V_plus_is_conjugation",

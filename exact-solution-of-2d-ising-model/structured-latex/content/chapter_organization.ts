@@ -160,11 +160,12 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
         math(String.raw`\mu\in\check{\mathcal M}=\{1,\dots,M\}`),
         "）。",
       ]),
+      displayMath(String.raw`\left(T_{(V^{(+)})}(\check Z_\mu),\ T_{(V^{(+)})}(\check Y_\mu)\right)=\left(\check Z_\mu,\ \check Y_\mu\right)A(\tilde\theta_\mu)
+=\left(\check Z_\mu,\ \check Y_\mu\right)B_1(\tilde\theta_\mu)\,B_2\,B_1(\tilde\theta_\mu)`),
+      paragraph(["ここに現れる記号は次である。"]),
       displayMath(String.raw`\tilde\theta_\mu=\frac{2\pi\left(\mu-\tfrac12\right)}{M},\qquad
 \check Z_\mu=\sum_{j=1}^{M}Z_j\exp(-ij\tilde\theta_\mu),\qquad
-\check Y_\mu=\sum_{j=1}^{M}Y_j\exp(-ij\tilde\theta_\mu),`),
-      displayMath(String.raw`\left(T_{(V^{(+)})}(\check Z_\mu),\ T_{(V^{(+)})}(\check Y_\mu)\right)=\left(\check Z_\mu,\ \check Y_\mu\right)A(\tilde\theta_\mu),\qquad
-A(\theta)=B_1(\theta)\,B_2\,B_1(\theta)`),
+\check Y_\mu=\sum_{j=1}^{M}Y_j\exp(-ij\tilde\theta_\mu)`),
     ],
   },
   {

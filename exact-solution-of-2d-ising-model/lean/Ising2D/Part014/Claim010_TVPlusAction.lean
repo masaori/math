@@ -2,7 +2,7 @@
 # 具体版: `T_{(V^{(+)})}` の `check(Z), check(Y)` への作用（**章 014 の結論**）
 
 対応する人手証明のラベル: **`T_V_plus_check_Z_Y`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_010_claim_T_V_plus_action`）
 
 **必要十分版**は `Ising2D/NecSuf/TVActionSandwich.lean` の

@@ -1,7 +1,7 @@
 /-
 # `K_2` と `K_2^*` の双対関係 `c_2^* = s_2^* c_2`
 
-対応する人手証明（正本は `structured-latex/content/008_TV1_hatZ_hatY_part1.ts`）:
+対応する人手証明（正本は `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`）:
 
 * `TV1_hatZ_hatY_016a_claim_duality_c2_star`（ラベル **`duality_c2_star_eq_s2_star_c2`**）
 

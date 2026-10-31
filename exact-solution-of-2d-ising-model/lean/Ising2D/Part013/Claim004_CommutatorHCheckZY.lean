@@ -2,7 +2,7 @@
 # `H_1^{(+)}, H_2` と `check(Z)_μ, check(Y)_μ` の交換関係（**具体版**）
 
 対応する人手証明のラベル: `commutator_of_H_and_check_Z_Y`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensector_004_claim_commutator_H_check_Z_Y`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/CommutatorClifford.lean`

@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル:
 
-* **`T_V_plus_check_Z_Y`**（`structured-latex/content/014_even_sector_T_action.ts` の
+* **`T_V_plus_check_Z_Y`**（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
   `evensectorT_010_claim_T_V_plus_action`）
 * **`calc_of_TxT_check_Z_Y`**（同 `evensectorT_008_claim_product_action`）
 * **`linearity_of_T_on_check_Z_Y`**（同 `evensectorT_006_claim_linearity_of_T`）

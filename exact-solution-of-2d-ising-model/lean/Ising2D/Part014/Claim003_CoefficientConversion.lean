@@ -2,7 +2,7 @@
 # 具体版: `check(Z), check(Y)` についての cosh / sinh の展開係数への変換
 
 対応する人手証明のラベル: **`cosh_sinh_coefficient_conversion_for_check`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_003_claim_coefficient_conversion`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の

@@ -2,7 +2,7 @@
 # 具体版: `check(Z), check(Y)` についてのテイラー係数の抽出
 
 対応する人手証明のラベル: **`extract_taylor_coefficient_of_check_Z_Y`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_004_claim_extract_taylor`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の

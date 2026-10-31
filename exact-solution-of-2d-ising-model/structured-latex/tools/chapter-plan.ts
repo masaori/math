@@ -52,14 +52,7 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`\text{離散 Fourier 変換による }2\times2\text{ 行列 }A(\tilde\theta_\mu)\text{ への帰着}` },
         organizationGoalLabel: "chapter_organization_goal_reduction_to_A_theta",
-        goalLabels: [
-          "antiperiodic_exp_sum",
-          "def_check_index_set",
-          "def_half_integer_checkZ",
-          "def_half_integer_checkY",
-          "T_V_plus_check_Z_Y",
-          "factorization_of_A_theta_general",
-        ],
+        goalLabels: ["T_V_plus_check_Z_Y_via_B1_B2_B1"],
         proposalEntryCount: 27,
       },
       {

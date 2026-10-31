@@ -8,7 +8,7 @@
 * **`linearity_of_T_V2`**（`evensectorT_006a_claim_linearity_of_T_V2`）
 * **`calc_of_TxT_check_Z_Y`**（`evensectorT_008_claim_product_action`）
 
-（いずれも `structured-latex/content/014_even_sector_T_action.ts`）
+（いずれも `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/TVAction.lean`
 （`Ising2D.NecSuf.twoDimConjMat`, `exp_conj_two_dim_actsBy`, `conj_smul_eq`）。

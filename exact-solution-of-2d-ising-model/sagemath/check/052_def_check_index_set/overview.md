@@ -4,7 +4,7 @@
 
 **対象ラベル**: `def_check_index_set` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/013_even_sector_modes.ts`
+- ファイル: `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`
 - 併せて検証:
   - `conjugate_index_of_check_Z_Y`（`θ~_{M+1-μ} = 2π - θ~_μ`、`Ž_{M+1-μ} = Ž_{1-μ}`）
 

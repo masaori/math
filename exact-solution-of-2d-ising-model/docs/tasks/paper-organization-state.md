@@ -2,6 +2,22 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の三番目の章「離散 Fourier 変換による $2\times2$ 行列 $A(\tilde\theta_\mu)$ への帰着」を組み直した。
+  棚卸しでこの章に割り当てた 27 項を、`004_transfer_matrix.ts`（2 項）・`006_Z_Y_anticommutation.ts`（1 項）・`008_TV1_hatZ_hatY_part1.ts`（3 項）・`013_even_sector_modes.ts`（8 項）・
+  `014_even_sector_T_action.ts`（13 項）から、新しいファイル `content/eigenvalue_problem_reduction_to_A_theta.ts` の部見出し「固有値問題」・章見出しの下へ章の中の依存順で移し、
+  `TRAILING_CONTENT_FILES` の射影の章のファイルの後ろに置いた。ブロックの本文・id・ラベルは変えていない（旧版と機械比較で一致。下の添字集合の定義を除く）。
+  - **章末のゴールの主張を足した。** $(T_{(V^{(+)})}(\check Z_\mu),T_{(V^{(+)})}(\check Y_\mu))=(\check Z_\mu,\check Y_\mu)A(\tilde\theta_\mu)=(\check Z_\mu,\check Y_\mu)B_1(\tilde\theta_\mu)B_2B_1(\tilde\theta_\mu)$ を主張する claim
+    `T_V_plus_check_Z_Y_via_B1_B2_B1` を章の最後に置いた。証明は `T_V_plus_check_Z_Y` と `factorization_of_A_theta_general` の二行である。SageMath（`sagemath/check/T_V_plus_check_Z_Y_via_B1_B2_B1/`、
+    $M\in\{2,3,4,5\}$・5 組の結合定数・全 $\mu$ で隣接行の残差 ≤ 8.8e-11。指数評価の ℝ 脱出のため倍精度。否定コントロールは積の順序を $B_2B_1B_1$ にしたもの）と
+    Lean（`lean/Ising2D/Part014/ClaimTVPlusCheckZYViaB1B2B1.lean`。`check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、
+    冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号の定義（$\tilde\theta_\mu,\check Z_\mu,\check Y_\mu$）に分けた。章の項目数は 28（割り当て 27 とゴールの主張 1。章立て案は 27）。
+  - **後ろの章を指す案内の参照 2 本を外した。** 添字集合の定義 `def_check_index_set` の案内文の「013 章から 017 章までのすべての主張は」を「以降の主張は、とくに断らない限り」に、
+    $\mu\in\mathbb Z$ 全体で定める記号の列挙をこの章のもの（$\delta^{(M)}_{(\mu,\nu)},\tilde\theta_\mu,\check Z_\mu,\check Y_\mu$）に直し、後ろの章の
+    `anticommutator_of_check_Z_Y`・`periodicity_of_check_fermi` を指す文を外した。数学の主張は変えていない。生成器の案内の記録からも外した。
+  - **013 と 014 の章の案内文（「この章の目的」）を新しい章の中へ移した。** 013 のものは $\check Z,\check Y$ を導入する理由として `antiperiodic_exp_sum` の直前に、
+    014 のものは $T_{(V^{(+)})}$ の作用を求める道筋として交換関係の主張の直後に置いた。題を式で指すものにし、「この章」を「以下」に、「偶セクター」「半整数運動量モード」「Fourier モード」を言い換え、
+    013 の列挙から後ろの章の主張を外した。旧い 013 と 014 には章見出しと、後ろの章に割り当てた項だけが残る。
+  - Lean・SageMath の注記、`lean/docs/ch013`・`ch014` の正本のファイル名を直した。別のエージェントのレビューを経た（指摘 5 件を直して再レビューで指摘なし）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の二番目の章「$\varepsilon$ の固有値 $+1$ の固有空間への射影と Jordan–Wigner 表示」を組み直した。
   棚卸しでこの章に割り当てた 27 項を、`004_transfer_matrix.ts`（18 項）・`010_transfer_matrix_bridge.ts`（6 項）・`011_max_eigenvalue.ts`（3 項）から
   新しいファイル `content/partition_function_projection_and_jordan_wigner.ts` の章見出しの下へ、章の中の依存順で移し、`TRAILING_CONTENT_FILES` の「転送行列による表示」のファイルの後ろに置いた。
@@ -1159,9 +1175,9 @@
 
 ## 次の一歩
 
-runbook の「作業の順序」の四番目の項目の三番目の章：「離散 Fourier 変換による $2\times2$ 行列 $A(\tilde\theta_\mu)$ への帰着」の章に割り当てた 27 項
-（棚卸し `parts` の二番目の部の最初の章の `dependencyOrder`）を、新しいファイルの部「固有値問題」の見出しと章見出しの下へ章内の依存順で移し、
-`TRAILING_CONTENT_FILES` の射影の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
+runbook の「作業の順序」の四番目の項目の四番目の章：「$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示」の章に割り当てた 29 項
+（棚卸し `parts` の二番目の部の二番目の章の `dependencyOrder`）を、新しいファイルの章見出しの下へ章内の依存順で移し、
+`TRAILING_CONTENT_FILES` の離散 Fourier 変換の章のファイルの後ろに置き、章の最後をゴールの式を主張するブロックにする。
 
 ## 未確定
 
@@ -1170,8 +1186,8 @@ runbook の「作業の順序」の四番目の項目の三番目の章：「離
     末尾の章の項を先に使う。全章を組み直せば、番号を持つファイルに数学的道具立てだけが残り、並びは章立てどおりになる。
     残ったファイルに部見出し「数学的道具立て」を置くのは、全章を組み直した後（作業の順序の六番目まで）に行う。
   - $M\to\infty$ の章のゴールの式の $\Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M$ を主張するブロックが無い（`onsager_exact_solution` の証明の中にだけある）。
-  - 後ろの章を指す案内の参照が 2 本ある（棚卸しの `crossChapterNavigationReferences`。
-    $\check{\mathcal M}$ の定義 → $\check Z,\check Y$ の反交換関係・$\check\psi$ の周期性）。組み直した本文で前方参照にならない書き方へ直す。
+  - 後ろの章を指す案内の参照は、平方根の定義 → 平方根性の主張の 1 本だけが残る（棚卸しの `crossChapterNavigationReferences`。
+    平方根性の主張はどの章にも割り当てられない 9 項の一つで、作業の順序の五番目の項目で扱う）。
 - 分類（作業の順序の外）: 逆双曲線余弦の定義と性質、正の実数上の実対数、正の結合定数上の双曲線正接は、イジング模型を参照しない実関数の道具だが、
   `004_transfer_matrix.ts` に在るので2次元イジングモデルに分類され、転送行列の章・対角化の章に入っている。分類規則に照らせば数学的道具立てである。
 - 旧生成器が「未レビュー」として記録していた項（道具: `calc_formulae_000c0_claim_positive_real_square_injective`、`exp_linear_map_005`〜`012` の数の指数関数の 8 項。

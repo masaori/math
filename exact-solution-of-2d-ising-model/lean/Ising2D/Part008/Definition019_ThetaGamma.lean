@@ -3,7 +3,8 @@
 
 対応する人手証明（正本は `structured-latex/content/`）:
 - `008_TV1_hatZ_hatY_part1.mjs`
-  - `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）
+  - `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`。章立ての組み直しで
+    `eigenvalue_problem_reduction_to_A_theta.ts` へ移った）
   - `TV1_hatZ_hatY_019_definition_theta_mu`（ラベル `def_theta_mu`）
   - `TV1_hatZ_hatY_020_definition_gamma1_gamma2`（ラベル無し）
 - `008_TV1_hatZ_hatY_part2.mjs`

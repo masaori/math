@@ -169,6 +169,7 @@ import Ising2D.Part014.Definition007_B1B2
 import Ising2D.Part014.Claim005_TActionsOnCheck
 import Ising2D.Part014.Claim009_FactorizationATheta
 import Ising2D.Part014.Claim010_TVPlusAction
+import Ising2D.Part014.ClaimTVPlusCheckZYViaB1B2B1
 import Ising2D.NecSuf.PairedFermion
 import Ising2D.NecSuf.ConstantC
 import Ising2D.NecSuf.SimpleEigenvalue

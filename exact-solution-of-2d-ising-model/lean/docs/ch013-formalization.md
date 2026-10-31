@@ -1,6 +1,6 @@
 # 章 013「偶セクターの半整数運動量モード」の Lean 形式化
 
-対象: `structured-latex/content/013_even_sector_modes.ts`（8 ブロック）
+対象: もと `structured-latex/content/013_even_sector_modes.ts` の 8 ブロック。章立ての組み直しで、指数和・$\check Z,\check Y$ の定義と周期性・添字集合・交換関係は `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ移った
 
 新規ファイル:
 

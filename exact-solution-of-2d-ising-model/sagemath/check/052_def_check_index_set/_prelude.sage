@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # 共通: 半整数運動量の添字集合 𝓜̌ = {1,...,M} とその性質
-#   structured-latex/content/013_even_sector_modes.ts に対応
+#   structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts に対応
 #     def_check_index_set          （𝓜̌ の定義と (1)〜(5)）
 #     conjugate_index_of_check_Z_Y （θ~_{M+1-μ} = 2π - θ~_μ、Ž_{M+1-μ} = Ž_{1-μ}）
 #

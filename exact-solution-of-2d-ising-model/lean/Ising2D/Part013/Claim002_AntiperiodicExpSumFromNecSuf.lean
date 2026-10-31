@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `antiperiodic_exp_sum`,
 `half_integer_phase_antiperiodicity`, `half_integer_checkZ_periodicity`,
 `half_integer_checkY_periodicity`
-（`structured-latex/content/013_even_sector_modes.ts`）
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`）
 
 具体版（直接証明）は `Ising2D/Part013/Claim002_AntiperiodicExpSum.lean` と
 `Ising2D/Part013/Definition003_HalfIntegerModes.lean`、

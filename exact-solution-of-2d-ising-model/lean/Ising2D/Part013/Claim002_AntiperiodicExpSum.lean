@@ -2,7 +2,7 @@
 # 半整数運動量の指数和（**具体版**）
 
 対応する人手証明のラベル: `antiperiodic_exp_sum`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensector_002_claim_antiperiodic_exp_sum`）
 
 **必要十分版**は `Ising2D/NecSuf/AntiperiodicFourier.lean`（名前空間 `Ising2D.NecSuf`、

@@ -2,7 +2,7 @@
 # 具体版: `check(Z), check(Y)` についての `n` 重交換子
 
 対応する人手証明のラベル: **`nesting_of_commutator_of_H_and_check_Z`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_002_claim_nesting_commutator`）
 
 **必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の

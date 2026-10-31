@@ -1036,6 +1036,7 @@ targets=(
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
   Ising2D.TVPlus_checkZ_checkY
+  Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.TV_hatZ_hatY_via_sandwich
   Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd

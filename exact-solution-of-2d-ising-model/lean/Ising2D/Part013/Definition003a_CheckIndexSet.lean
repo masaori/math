@@ -2,7 +2,7 @@
 # `𝓜̌`（半整数運動量の添字集合）の定義（**具体版**）
 
 対応する人手証明のラベル: `def_check_index_set`
-（`structured-latex/content/013_even_sector_modes.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensector_003a_definition_check_index_set`）
 
 **必要十分版は無い。** この主張は整数の不等式と `θ~_μ = 2π(μ-1/2)/M` という実数の値だけを

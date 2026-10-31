@@ -2,7 +2,7 @@
 # 具体版: `B_1(θ), B_2` の定義（`θ ∈ ℝ` 一般）
 
 対応する人手証明のラベル: **`def_B1_theta_B2`**
-（`structured-latex/content/014_even_sector_T_action.ts` の
+（`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_007_definition_B1_B2`）
 
 **必要十分版**は `Ising2D/NecSuf/TVAction.lean` の `Ising2D.NecSuf.twoDimConjMat`

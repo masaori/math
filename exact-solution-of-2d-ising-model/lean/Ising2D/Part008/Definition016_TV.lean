@@ -10,7 +10,8 @@
     — `T` の ℂ-線型性
   * `TV1_hatZ_hatY_016_definition_T_V`（ラベル `def_T_V`）
     — `T_{(V)}(X) := T_{(V_1^{(±)})^{1/2}}(T_{V_2}(T_{(V_1^{(±)})^{1/2}}(X)))`
-  * `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）— `A(θ)`
+  * `TV1_hatZ_hatY_017_definition_A_theta`（ラベル `def_A_theta`）— `A(θ)`。
+    章立ての組み直しで `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ移った
   * `TV1_hatZ_hatY_018_claim_T_V_action`（ラベル `T_V_hatZ_hatY`）
     — `(T_{(V)}(hat(Z)_μ^{(-)}), T_{(V)}(hat(Y)_μ)) = (hat(Z)_μ^{(-)}, hat(Y)_μ) A(2πμ/M)`
   * `TV1_hatZ_hatY_012_claim_TV1_TV2_actions`（ラベル `ホロノミック量子場_p142下段_1`）
