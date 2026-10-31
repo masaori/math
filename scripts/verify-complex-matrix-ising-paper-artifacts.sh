@@ -7,7 +7,7 @@
 #
 # 判定は公開 HTML に埋め込まれた版（生成時の commit）で行う。未コミットの状態で
 # 公開されている場合、および版が origin/main に含まれない場合は失敗とする。
-# 公開ページには再編の現在地（確定した節の件数）が載っていることも併せて検証する。
+# 公開ページには再編の現在地（章へ割り当てた件数）が載っていることも併せて検証する。
 set -uo pipefail
 
 BASE_URL="https://hexcomp-artifacts.web.app/math"
@@ -47,9 +47,9 @@ if [ -s "$org" ]; then
   if ! grep -q '再編の現在地' "$org"; then
     fail "構成ページに再編の現在地が無い"
   elif ! grep -qE '全[0-9]+件のうち<strong>[0-9]+件</strong>' "$org"; then
-    fail "構成ページの現在地に確定件数が入っていない"
+    fail "構成ページの現在地に割り当て件数が入っていない"
   else
-    echo "== 現在地: $(grep -o '全[0-9]*件のうち<strong>[0-9]*件</strong>を、[0-9]*個の節' "$org" | sed 's/<[^>]*>//g')"
+    echo "== 現在地: $(grep -o '全[0-9]*件のうち<strong>[0-9]*件</strong>を、[^。]*' "$org" | sed 's/<[^>]*>//g')"
   fi
 fi
 
