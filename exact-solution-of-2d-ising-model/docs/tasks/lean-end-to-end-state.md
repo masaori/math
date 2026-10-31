@@ -11,22 +11,17 @@
     挟み撃ちは `partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）で与えた。
     人手 `partition_function_sandwich`・`limit_of_log_Z_in_N_row` に合わせ、`limit_of_log_Z_in_N_row`・`onsager_exact_solution`・
     `onsager_exact_solution_isoParam` の挟み撃ちの仮定は `1 ≤ N` の範囲だけで受け取る。
-- 項目 3 は次の三つに割った。
-  - 3a（済み）: `V^{(+)}` の実行列表示。人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」を
-    `Part018/ClaimVPlusRealEntries.lean` の `VPlus_hasRealEntries` で形式化し、`EvenSectorBridge` の欄 `Vr`・`hVr` を
-    `VPlusR P M`・`vPlusDataOf_V_eq_map` として与えた。
-  - 3b（済み）: 人手 Step 0（`x ∈ 𝓕^{(+)}` なら `P^{(+)}x = x`、`Wx = V^{(+)}x`）を `Part018/ClaimWEqVPlusOnEvenSector.lean` で形式化した。
-    実ベクトル上の `hWV_physical P hM x hx : physicalSymTransferR M P.K1 P.K2 *ᵥ x = VPlusR P M *ᵥ x`（`2 ≤ M`、`epsilonR M *ᵥ x = x`）が
-    `EvenSectorBridge` の欄 `hWV` になる。必要十分版は `NecSuf/EvenSectorAgreement.lean`（加群と `2` の可逆性、半群の作用だけ）。
-  - 3c: `W` の実対称性（`symTransfer_isSymm`・`physicalV1halfR_isSymm`・`physicalV2R_isSymm`）と半正定値性
-    （`symTransfer_posDef`、`x = 0` は自明）から、具体的な `W` についての `EvenSectorBridge` を構成し、
-    最終定理の `In.bridge` と `hW` を外す（`EvenSectorClosureInput` から `bridge` を除き、`hWpos`・`hWcomm` の対象を
-    `physicalSymTransferR` に替える）。
-- `lake build`（3032 ジョブ）と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
-- 最終定理に残る仮定:
-  - `In m hm : EvenSectorClosureInput P m` の中身: `W` と `V^{(+)}` の橋渡し `bridge`、`tr(εV^{(+)}) > 0`（`htr`）、
-    `W` の成分の正値性 `hWpos` と `ε` との可換性 `hWcomm`
-  - `hW`: `bridge.W = physicalSymTransferR m P.K1 P.K2`（項目 3 で `bridge` を具体的な `W` について作れば消える）
+- 項目 3 は済んでいる。具体的な `W = physicalSymTransferR M P.K1 P.K2` と `vPlusDataOf` の `V^{(+)}` についての
+  `EvenSectorBridge` を `physicalEvenSectorBridge`（`Part018/PhysicalEvenSectorBridge.lean`）で構成した。
+  欄は `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`
+  （`Part011/PhysicalPartitionFunctionSandwich.lean`）、Step 2 の `VPlusR`・`vPlusDataOf_V_eq_map`
+  （`Part018/ClaimVPlusRealEntries.lean`）、Step 0 の `hWV_physical`（`Part018/ClaimWEqVPlusOnEvenSector.lean`）である。
+  最終定理の入力から `bridge` と `hW` を外した。
+- `lake build` と `check-no-sorry.sh` は通り、`check-end-to-end.sh` は「通しの定理が無い」で落ちる。
+- 最終定理 `onsager_exact_solution_unconditional` に残る仮定は `In m hm : EvenSectorClosureInput P m`（`2 ≤ m`）の中身だけである。
+  - `hM : m ≠ 0`（`2 ≤ m` から従う。`htr` の型が `vPlusDataOf P hM _` を含むので欄に残っている）
+  - `htr`: `tr(εV^{(+)}) > 0`（項目 4）
+  - `hWpos`: 具体的な `W` の成分の正値性、`hWcomm`: `ε` と具体的な `W` の可換性（項目 5）
 - 項目 6 で直すこと: `onsager_limit_in_N_row`（`Part018/Theorem010_OnsagerExactSolution.lean`）は `c(M) > 0` を
   挟み撃ち `Λ ≤ c(M)` から出しているが、人手 `limit_of_log_Z_in_N_row` は `def_rayleigh_sup` から出す。
   通しの定理では `rayleighSup_pos`（`Part011/Definition006_RayleighSup.lean`）と `physicalSymTransferR` の正定値性から出し、
@@ -36,6 +31,9 @@
 
 ## 次の一歩
 
-項目 3c：`W = physicalSymTransferR M P.K1 P.K2` の実対称性・半正定値性と、`VPlusR`・`vPlusDataOf_V_eq_map`・`hWV_physical` から、
-具体的な `W` についての `EvenSectorBridge` を構成し、最終定理 `onsager_exact_solution_unconditional` の `In.bridge` と `hW` を外す
-（上の 3c の欄）。大きければ「`EvenSectorBridge` の構成」と「最終定理の入力の付け替え」の二つに割り、前者だけを行う。
+項目 4：`htr`（`tr(εV^{(+)}) > 0`、人手 `trace_of_epsilon_V_plus`）を具体版で証明する。
+`Part018/Theorem007_MaxEigenvectorEvenSector.lean` には人手 `open_chain_partition_sum`・`open_chain_endpoint_product_sum`・
+`open_chain_spin_sums_positive`・`def_open_chain_spin_energy`・`H1_plus_in_sigma_z_form` のラベルが既に現れ、
+`def_D0_open_chain_operator`・`def_G_boundary_operator`・`epsilon_D0_G_pairwise_commute`・`epsilon_G_is_involution`・
+`D0_G_diagonal_action` は Lean に現れない。まずこの既存の形式化が `vPlusDataOf` の `V^{(+)}` についての主張かを確かめ、
+足りない人手ブロックを補題の単位で割り直してこの欄に書き、先頭の一つだけを行う。

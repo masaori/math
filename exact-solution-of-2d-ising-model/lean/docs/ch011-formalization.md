@@ -67,6 +67,7 @@
 | `Ising2D.sigmaZ_mul_sigmaZ_transpose` / `halfK1D_transpose` | `σ^z_mσ^z_{m+1}` と `½K₁D` は転置不変（Lean は `sigma_z_diagonal_action` の対角表示から示す） | `W_is_real_symmetric_positive_definite` Step 1 |
 | `Ising2D.physicalV1halfC_transpose` / `physicalV1halfC_isUnit` / `physicalV1halfR_isSymm` / `physicalV1halfR_isUnit` | 具体的な `V₁^{1/2} = exp(½K₁D)` は実対称・可逆 | 同 Step 2 と、Step 3 が使う「`B` は可逆」 |
 | `Ising2D.V2_posDef` / `V2_transpose` / `physicalV2R_isSymm` / `physicalV2R_posDef` | 具体的な `V₂ = (2s_2)^{M/2}exp(iK_2^*H_2)` は正定値・実対称（正定値性は (1)・(3) を先に `V₂` へ使い、(2) は `symTransfer_posDef` で使う） | 同 Step 2–3 |
+| `Ising2D.physicalSymTransferR_isSymm` / `physicalSymTransferR_posDef` | 具体的な `W = V₁^{1/2}V₂V₁^{1/2}` は実対称・正定値（`symTransfer_isSymm`・`symTransfer_posDef` を具体的な `B`, `V₂` に適用） | `W_is_real_symmetric_positive_definite` Step 3 |
 | **`Ising2D.partition_function_sandwich_physical`** | 具体的な `Z(K_1,K_2)` と具体的な `W` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`Part011/PhysicalPartitionFunctionSandwich.lean`） | **`partition_function_sandwich`** |
 | `Ising2D.evenSectorSet` / `Ising2D.evenSectorRayleighSup` | `𝓡_+` と `c_+(M)`（`Part011/DefinitionSectorRayleighSup.lean`） | `def_sector_rayleigh_sup` |
 | `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡` と上に有界、単位ベクトルで `xᵀWx ≤ c_+` | 同上 |

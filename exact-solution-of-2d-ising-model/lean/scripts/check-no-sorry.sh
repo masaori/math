@@ -1473,6 +1473,11 @@ targets=(
   Ising2D.W_mulVec_eq_VPlus_mulVec_of_even_of_necSuf
   Ising2D.NecSuf.invProj_smul_of_fixed
   Ising2D.NecSuf.smul_eq_of_mul_proj_eq
+  Ising2D.physicalSymTransferR_isSymm
+  Ising2D.physicalSymTransferR_posDef
+  Ising2D.physicalSymTransferR_nonneg
+  Ising2D.physicalEvenSectorBridge
+  Ising2D.physicalEvenSectorBridge_W
   Ising2D.sum_checkGam
   Ising2D.EvenSectorClosureInput
   Ising2D.rayleighSup_sandwich_LambdaM_of_input

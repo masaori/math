@@ -35,6 +35,8 @@
 | Step 3: `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）と `(2s_2)^{M_col/2} > 0` | `V2_posDef`（下の注意） |
 | Step 2–3: `A` は転置不変なので `V_2^⊤ = V_2` | `V2_transpose`、実行列で `physicalV2R_isSymm` |
 | `V_2` の正定値性を実ベクトルで読む | `physicalV2R_posDef` |
+| Step 3 の結論「`W = BV_2B` は実対称」（具体的な `B = V_1^{1/2}`, `V_2` について） | `physicalSymTransferR_isSymm` |
+| Step 3 の結論「`W = BV_2B` は正定値」（同上、実ベクトルで） | `physicalSymTransferR_posDef` |
 | `partition_function_sandwich` | `partition_function_sandwich_physical` |
 
 **`V_2` の正定値性の適用順についての注意。** 人手 Step 3 は `W = (2s_2)^{M_col/2}B^*AB` と変形し、
@@ -171,6 +173,22 @@ theorem physicalV2R_posDef {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : 
       Complex.ofRealHom_eq_coe, Complex.ofReal_sum, Complex.ofReal_mul]
   rw [hval] at hpos
   exact Complex.zero_lt_real.mp hpos
+
+/-! ## 具体的な `W` は実対称かつ正定値 -/
+
+/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の「`W` は実対称」を具体的な `W` について**:
+`B = V_1^{1/2}`（Step 2、`physicalV1halfR_isSymm`）と `V_2`（`physicalV2R_isSymm`）が実対称なので
+`W = BV_2B` も実対称（`symTransfer_isSymm`）。 -/
+theorem physicalSymTransferR_isSymm (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
+    (physicalSymTransferR M K1 K2).IsSymm :=
+  symTransfer_isSymm (physicalV1halfR_isSymm K1) (physicalV2R_isSymm hK2)
+
+/-- **人手 `W_is_real_symmetric_positive_definite` Step 3 の「`W` は正定値」を具体的な `W` について**:
+`B = V_1^{1/2}` は実対称かつ可逆（`physicalV1halfR_isSymm`・`physicalV1halfR_isUnit`）、`V_2` は正定値
+（`physicalV2R_posDef`）なので、合同変換 `W = BV_2B` も正定値（`symTransfer_posDef`）。 -/
+theorem physicalSymTransferR_posDef (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) (x : Conf M → ℝ) (hx : x ≠ 0) :
+    0 < x ⬝ᵥ physicalSymTransferR M K1 K2 *ᵥ x :=
+  symTransfer_posDef (physicalV1halfR_isSymm K1) (physicalV1halfR_isUnit K1) (physicalV2R_posDef hK2) x hx
 
 /-! ## 挟み撃ち -/
 

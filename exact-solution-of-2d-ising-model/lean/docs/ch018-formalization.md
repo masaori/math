@@ -212,9 +212,6 @@
 | `closing_definition_D0_open_chain_operator`・`closing_definition_G_boundary_operator`・`closing_004_claim_H1_plus_in_sigma_z_form`・`closing_claim_D0_G_diagonal_action`・`closing_claim_epsilon_D0_G_pairwise_commute`・`closing_claim_epsilon_G_is_involution`（`D_0,G` の定義から `iH_1^{(+)} = D_0 + εG`、対角作用、可換性、`(εG)^2=I` まで） | **未形式化** | `tr(εV^{(+)})` の直接計算の枝。配置基底での `σ^z` 表示を要し、章 018 の主鎖（`ε` の固有値 → `c_+(M) = Λ̌_max` → Onsager）とは独立 |
 | `closing_005_definition_open_chain_spin_energy`・`closing_005_claim_open_chain_partition_sum`・`closing_005_claim_open_chain_endpoint_product_sum`・`closing_005_claim_open_chain_spin_sums_positive`（1次元開鎖の記法、二つのスピン和、正値性） | **未形式化** | 同上。原文自身が「この計算には `Ž, Y̌, ψ̌` も半整数運動量も現れない」と述べる独立の組合せ論的計算 |
 | `closing_006_theorem_trace_of_epsilon_V_plus`（`tr(εV^{(+)}) = (2e^{−K_2}\cosh K_1)^M + (2e^{K_2}\sinh K_1)^M > 0`） | **仮定として受け取る** | 上記10ブロックに依存する。`Ising2D.VPlusData.eta_univ_eq_one` 以降は `0 < (tr(εV^{(+)})).re` を仮定に置いた。**人手証明で証明済みであり循環参照はない**（この定理は `epsilon_eigenvalue_on_check_Q` にも `max_eigenvector_in_even_sector` にも依存しない） |
-| `def_check_fermi` / `anticommutator_of_check_psi`（章 016） | **`CheckFermi` の仮定** | 本章の形式化時点で Lean 側に `Part016` が無かった |
-| `eigenvalues_of_V_plus`（章 017） | **`VPlusData` の仮定** | 本章の形式化時点で Lean 側に `Part017` が無かった |
-| `W P^{(+)} = V^{(+)} P^{(+)}`（章 011 の `symmetrized_transfer_matrix_on_sectors`） | **`EvenSectorBridge` の仮定** | 行列等式自体は章 011 の `symmetrized_transfer_matrix_on_sectors` で形式化済み。章 018 の抽象入力 `EvenSectorBridge` と物理パラメータを結ぶ同期は本章の既存構成に残る |
 | `closing_000_remark_overview` | 形式化対象外 | `remark`（本章の位置づけの説明）であり、数学的主張は他ブロックに含まれる |
 
 詳細と一次情報は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md` に記録した。
@@ -274,6 +271,7 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `Part018/Claim012_VPlusDataFromPart017.lean` | `Ising2D.vPlusDataOf`（`VPlusData` のインスタンス）と、章 017 の `CheckFermiSetup`（添字型 `CheckIdx M`）と章 018 の `CheckFermi`（添字型 `Fin M`）を噛み合わせる `Ising2D.finCheckIdxEquiv` / `checkFermiSetupOf_Vprime` |
 | `Part018/ClaimVPlusRealEntries.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 2 の「`V^{(+)}` の成分は実である」（`Ising2D.VPlus_hasRealEntries`）と、`vPlusDataOf` の `V^{(+)}` の実行列表示 `Ising2D.VPlusR`・`Ising2D.vPlusDataOf_V_eq_map`（`EvenSectorBridge` の欄 `Vr`・`hVr`） |
 | `Part018/ClaimWEqVPlusOnEvenSector.lean` | 人手 `c_plus_equals_Lambda_half_integer` Step 0「`𝓕^{(+)}` の上で `W` と `V^{(+)}` が一致する」。`P^{(+)}x = x`（`Ising2D.epsProjPlus_mulVec_of_even`）、複素ベクトル上の `Wx = V^{(+)}x`（`Ising2D.W_mulVec_eq_VPlus_mulVec_of_even`）、具体的な `W` と `VPlusR` についての実ベクトル版 `Ising2D.hWV_physical`（`EvenSectorBridge` の欄 `hWV`）。必要十分版は `NecSuf/EvenSectorAgreement.lean` の `Ising2D.NecSuf.invProj_smul_of_fixed`（加群・`2` の可逆性だけ）と `Ising2D.NecSuf.smul_eq_of_mul_proj_eq`（半群の作用だけ）で、具体版はその特殊化（`*_of_necSuf`） |
+| `Part018/PhysicalEvenSectorBridge.lean` | 具体的な `W = physicalSymTransferR M K_1 K_2` と `vPlusDataOf` の `V^{(+)}` についての `Ising2D.EvenSectorBridge`（`Ising2D.physicalEvenSectorBridge`）。欄 `hWsymm`・`hWpsd` は章 011 `W_is_real_symmetric_positive_definite` の具体版 `physicalSymTransferR_isSymm`・`physicalSymTransferR_posDef`（`x = 0` を足した `Ising2D.physicalSymTransferR_nonneg`）、`Vr`・`hVr` は Step 2、`hWV` は Step 0 |
 | `Part018/Theorem013_OnsagerUnconditional.lean` | 残る仮定だけを束ねた `Ising2D.EvenSectorClosureInput` と、`Ising2D.onsager_exact_solution_unconditional` |
 
 ### 6.2 消えた仮定（何で埋めたか）
@@ -308,16 +306,15 @@ OK: 主要定理はいずれも sorryAx に依存していない
 
 | 場 | 内容 | 消せない理由 |
 | --- | --- | --- |
-| `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`） |
-| `bridge` | `W P^{(+)} = V^{(+)} P^{(+)}` と `V^{(+)}` が実行列であること | 前半の複素行列等式は章 011 の `symmetrized_transfer_matrix_on_sectors`、`V^{(+)}` の実行列表示は `vPlusDataOf_V_eq_map`（`ClaimVPlusRealEntries.lean`）で形式化済み。実ベクトル上の `EvenSectorBridge.hWV` は具体的な `W` について `hWV_physical`（`ClaimWEqVPlusOnEvenSector.lean`）で形式化済み。残るのは `bridge` の構成である |
+| `hM` | `M ≠ 0` | 章 016・017 の主張自体が要求する（`CheckFermiSetup.hM`、`checkPsi_car'` の `hM`）。最終定理では `2 ≤ m` から従うが、`htr` の型が `vPlusDataOf P hM _` を含むので欄に置いている |
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
-| `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っている。具体的な `W`（`physicalSymTransferR`）については章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で `εW = Wε` を形式化済みだが、それを `bridge.W` へ渡すには上の `bridge` の接続が要る |
+| `hWpos`, `hWcomm` | 具体的な `W`（`physicalSymTransferR`）の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | 未着手（runbook の項目 5）。`hWcomm` は章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）と同じ型。`hWpos` は具体的な `W` についての `W_has_positive_entries` の定理がまだ無い |
 
 `onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は
 `rayleighSup (physicalSymTransferR M K_1 K_2)` で、挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`N_row ≥ 1`）は
 章 011 の `partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
-`EvenSectorClosureInput` の外に残る仮定は `hW`（`bridge.W = physicalSymTransferR M K_1 K_2`）だけで、
-`bridge` を具体的な `W` について構成すれば消える。
+`W` と `V^{(+)}` の橋渡し（もとの場 `bridge` と、`bridge.W` が具体的な `W` であるという仮定 `hW`）は、
+`Ising2D.physicalEvenSectorBridge`（`PhysicalEvenSectorBridge.lean`）で具体的な `W` について構成し、仮定から外した。
 
 双対関係 `c_2 s_2^* = c_2^*`（もとの場 `hdual`）は、`IsingParam.K2star` を `Kstar K2`
 （人手 `def_second_dual_coupling_constant`）で定義し、人手 `duality_c2_star_eq_s2_star_c2` を
