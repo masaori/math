@@ -101,12 +101,26 @@
     `Part017/Definition001_CheckNumberOperator` は `def_check_number_operator`（この章）1 つと `check_number_operator_idempotent`・`check_number_operators_commute`（「V^{(+)} の固有値」の章）2 つを形式化しているので残した。
     `Part018/Claim011_CheckFermiFromPart016` は `check_number_operator_is_hermitian` (3)（「M→∞ の極限と閉形式」の章）だけを新しく証明し、`def_check_fermi`・`anticommutator_of_check_psi` は既存の定理を使うだけなので残した。
     人手の `def_arccosh`・`arccosh_properties` は mathlib の `Real.arcosh` を使い（必要十分版 `NecSuf/Arcosh.lean`）、`V_plus_factors_invertible`・`T_V_plus_is_conjugation` は `ReductionToATheta/DefinitionVPlus.lean` にある（前の章で多数決により置いた）。
-  - 未割り当ての項目だけを形式化していて動かさないファイル: `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）と、
-    その必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。割り当ては構成再編の連続実行を待つ。
+  - 部「固有値問題」の章「V^{(+)} の固有値」（済み）: 12 ファイルを `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/` へ移した。
+    旧 `Part017/` の 9 本全部（`ClaimTraceCheckNumberOperatorProduct`・`ClaimCheckJointEigenspace`・`ClaimDirectSumAndDiagonalization`・`ClaimTraceCheckVprime`・
+    `ClaimVPlusPositiveDefinite`・`ClaimConstantCEvenSector`・`ClaimVPlusEigenvaluesWithCValueAndStrictMaximum`・`DefinitionCheckNumberOperator`・`TheoremEigenvaluesVPlus`）、
+    旧 `Part009/Claim016_SignFlip`（`ClaimSignFlipConjugation`。`sign_flip_conjugation` だけを形式化）、旧 `Part012/Theorem005_OnsagerFreeEnergy`（`TheoremOnsagerFreeEnergy`）、
+    旧 `Part018/Claim012_VPlusDataFromPart017`（`ClaimVPlusDataFromEigenvaluesOfVPlus`）である。`Part017/` は無くなった。
+    `TheoremOnsagerFreeEnergy` が形式化するのは `def_Lambda_delta_M`（この章）と `onsager_free_energy_expression`（「M→∞ の極限と閉形式」の章）の 1 対 1 で
+    （`def_Theta_delta_M` に当たる `tagPoint` は `Part012/Theorem004_RiemannSumToIntegral.lean` にある）、並びで先のこの章へ置いた。
+    `ClaimVPlusDataFromEigenvaluesOfVPlus` は、添字が `Fin M` の `eigenvalues_of_check_Vprime`（`checkVprime_mul_Qproj`）と `eigenvalues_of_V_plus` の固有関係（`vPlusDataOf`）を
+    新しく証明しているのでこの章へ置いた（`constant_c_value_even_sector`・`gamma_theta_tilde_mu_positive` は既存の定理を使うだけで数えない）。
+    `ClaimVPlusPositiveDefinite` の `V_plus_inverse_*` の 2 項は参照用ノートへ退避された主張なので数えない。
+    `Part009/Claim013_PositiveDefinite` は数学的道具立て「トレース・共役転置・正定値性」の 3 項とこの章の `iH_is_real_symmetric` 1 項なので残した。
+  - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
+    `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
+    runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の 5 番目の章、部「固有値問題」の「V^{(+)} の固有値」（フォルダ `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/`）を移す。
-棚卸しの `chapterKey` が `chapter_organization_goal_eigenvalues_of_V_plus` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
-（候補は `Part017/` に残る全部。`Part017/Definition001_CheckNumberOperator` はこの章の項目 2 つを形式化している。冒頭の項目名を数え、参照だけの項目は数えない）。
-`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+項目 7 の 6 番目の章、部「固有値問題」の「V^{(+)} の最大固有値に属する固有ベクトル」（フォルダ `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_eigenvector_of_max_eigenvalue` の項目（`epsilon_anticommutes_with_check_Z_Y` から
+`max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` までの 16 項）を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補は `Part018/` の `Claim001`〜`Claim003`・`Theorem007`・`Setup`・`DefinitionOpenChainAndBoundaryOperators`・`ClaimH1PlusInSigmaZForm`・
+`ClaimEpsilonD0GCommuteAndDiagonalAction`・`ClaimOpenChainSpinSums`（と `FromNecSuf`）・`ClaimTraceEpsilonVPlus*`・`ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus` など。
+冒頭の項目名を数え、参照だけの項目は数えない）。`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

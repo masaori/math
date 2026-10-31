@@ -12,7 +12,7 @@
 
 章 014–017 が main に入ったので、それらは `Ising2D.checkFermiOf`
 （`Claim011_CheckFermiFromPart016.lean`）と `Ising2D.vPlusDataOf`
-（`Claim012_VPlusDataFromPart017.lean`）で**実際に構成できる**。本ファイルはその
+（`ClaimVPlusDataFromEigenvaluesOfVPlus.lean`）で**実際に構成できる**。本ファイルはその
 構成を差し込み、仮定を一つも取らない版（`Ising2D.onsager_exact_solution_unconditional`）を立てる。既存の条件つき版は残してある。
 
 ## 消えた仮定
@@ -50,7 +50,7 @@ Step 1 で `log c(M)` を定めるための `c(M) > 0` は、人手 `limit_of_lo
 import Ising2D.Part011.PhysicalPartitionFunctionSandwich
 import Ising2D.Part011.ClaimPhysicalWHasPositiveEntries
 import Ising2D.Part011.ClaimEpsilonCommutesWithW
-import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.Part018.PhysicalEvenSectorBridge
 import Ising2D.Part018.ClaimTraceEpsilonVPlusClosedForm
 import Ising2D.Part018.Theorem010_OnsagerExactSolution

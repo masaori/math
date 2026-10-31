@@ -3,7 +3,7 @@
 
 正本: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 （`constant_c_value_even_sector`, `eigenvalues_of_V_plus`）と
-`content/015_...`（`gamma_theta_tilde_mu_positive` の `γ(θ̃_μ) > 0`）。
+`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`（`gamma_theta_tilde_mu_positive` の `γ(θ̃_μ) > 0`）。
 
 ## 経緯（一次情報）
 

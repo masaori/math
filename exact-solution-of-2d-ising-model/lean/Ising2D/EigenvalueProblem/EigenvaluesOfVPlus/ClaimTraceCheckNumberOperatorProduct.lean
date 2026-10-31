@@ -22,7 +22,7 @@
 Lean では非可換環に `Finset.prod` が無いので、可換性の証明を引数に取る
 `Finset.noncommProd` を使う（章 009 の `NecSuf.projOn` と同じ扱い）。
 -/
-import Ising2D.Part017.Definition001_CheckNumberOperator
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.DefinitionCheckNumberOperator
 
 namespace Ising2D
 

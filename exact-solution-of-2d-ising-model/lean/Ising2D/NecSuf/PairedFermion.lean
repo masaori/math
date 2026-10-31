@@ -1,7 +1,7 @@
 /-
 # 共役添字の対合で対をなすフェルミオン（**必要十分版**）
 
-対応する人手証明のラベル（具体版は `Ising2D/Part017/`）:
+対応する人手証明のラベル（具体版は `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/`）:
 
 - `def_check_number_operator`（`Ising2D.NecSuf.numPaired`）
 - `check_number_operator_idempotent` / `check_number_operators_commute`

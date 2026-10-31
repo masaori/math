@@ -83,6 +83,8 @@ EOF
   | 分配関数 | 転送行列による表示 | `Ising2D/PartitionFunction/TransferMatrixRepresentation/` |
   | 分配関数 | ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示 | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/` |
   | 固有値問題 | 離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着 | `Ising2D/EigenvalueProblem/ReductionToATheta/` |
+  | 固有値問題 | A(θ̃_μ) の対角化と V^{(+)} の指数表示 | `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/` |
+  | 固有値問題 | V^{(+)} の固有値 | `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/` |
 
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
@@ -144,7 +146,7 @@ EOF
   `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` にある。
   これらに対応する Lean（`PartitionFunction/ProjectionAndJordanWigner/EvenEigenvectors.lean` の `evenEigenspace_carrier`、
   `Part004/ClaimEpsilonActionEigenvalues.lean` とその必要十分版の導出、
-  `Part013/Claim007_H1H2ViaCheck.lean`, `Part017/Claim008_VPlusPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
+  `Part013/Claim007_H1H2ViaCheck.lean`, `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusPositiveDefinite.lean` の `(V^{(+)})^{-1}` の 2 定理）は
   形式化の記録として残してあり（ビルドは通し続ける）、対応先は本文ではなくそのノートである。
 - 各 Lean ファイルの冒頭コメントに、対応する `.typ` ファイル名と Typst のラベル（`<...>`）を書く。
 - 原文のステートメントをそのまま形式化できない場合（記号の重複・「元」と「族」の混同など）は、
@@ -617,12 +619,12 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 009 | 転送行列 `V` の固有値（個数演算子・同時固有空間分解・`c = (2 sinh 2K_2)^{M/2}`） | `Part009/` | [ch009](docs/ch009-formalization.md) |
 | 010 | 偶セクターへの射影 `P^{(+)}`、`(V_1^{(+)})^{1/2}`, `V^{(+)}`、`ε` との可換性（`(−)` セクターとの分解は形式化の記録） | `Part010/` | [ch010](docs/ch010-formalization.md) |
 | 011 | 最大固有値（Rayleigh 商の上限による分配関数の挟み撃ち、`c_+ ≤ c`、`ε^⊤ = ε`、`εW = Wε`） | `Part011/` | [ch011](docs/ch011-formalization.md) |
-| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/`（`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch012](docs/ch012-formalization.md) |
+| 012 | 自由エネルギーと熱力学極限（Onsager の表式） | `Part012/`（`γ_1` の下界と `γ(θ)` の定義は `EigenvalueProblem/DiagonalizationAndExponentialForm/`、`Λ^{(δ)}_M` の定義と Onsager の表式は `EigenvalueProblem/EigenvaluesOfVPlus/`） | [ch012](docs/ch012-formalization.md) |
 | 013 | 偶セクターの半整数運動量モード | `Part013/`（半整数運動量の定義・反周期指数和・`[H, check(Z/Y)]` は `EigenvalueProblem/ReductionToATheta/`、共役添字・`check(Z/Y)` の反交換関係・`Z, Y` の復元は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch013](docs/ch013-formalization.md) |
 | 014 | 偶セクターでの `T` の作用 | `EigenvalueProblem/ReductionToATheta/` | [ch014](docs/ch014-formalization.md) |
 | 015 | `A(θ~)` の対角化 | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch015](docs/ch015-formalization.md) |
 | 016 | 偶セクターのフェルミオン（`V^{(+)} = c V̌'`） | `EigenvalueProblem/DiagonalizationAndExponentialForm/` | [ch016](docs/ch016-formalization.md) |
-| 017 | 偶セクターの固有値 | `Part017/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
+| 017 | 偶セクターの固有値 | `EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
 | 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `Part018/` | [ch018](docs/ch018-formalization.md) |
 | 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
 | 020 | 臨界点での比熱の対数発散 | `Part020/` | [ch020](docs/ch020-formalization.md) |

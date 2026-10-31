@@ -2,7 +2,7 @@
 
 対象の人手証明: もと `structured-latex/content/017_even_sector_eigenvalues.ts` の 11 主張。章立ての組み直しで、`def_check_number_operator` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ、`V_plus_inverse_is_positive_definite`・`V_plus_inverse_positive_and_trace_positivity` を除く残りは `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った
 
-- 具体版: `Ising2D/Part017/`
+- 具体版: `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`）
 - 必要十分版: `Ising2D/NecSuf/PairedFermion.lean`, `Ising2D/NecSuf/ConstantC.lean`,
   `Ising2D/NecSuf/SimpleEigenvalue.lean`
   （加えて、章 009 の `Ising2D/NecSuf/NumberOperator.lean` と
@@ -188,8 +188,8 @@
 | --- | --- | --- |
 | `anticommutator_of_check_psi`（章 015）と `V_plus_eq_c_check_Vprime`（章 016） | **仮定として受け取った** | 章 014・015・016 は並行して形式化中。前者は `CheckFermiSetup` の場 `hcc` / `haa` / `hca` として、後者は `constant_c_value_even_sector` などの仮定 `hVeq : VPlus … = c • F.Vprime g` として明示した |
 | `γ(θ~_μ)` と `g : CheckIdx M → ℝ` の同定 | **仮定として受け取った（ただし本章内で埋められる）** | 章 009 と同じく `g` を実数の族として受け取っている。`g i = gammaFn P (thetaTilde M i.1)` を仮定すると `Λ̌_max = Λ^{(1/2)}_M` と狭義最大性が出る（`checkBigLambda_univ_eq_LambdaM`, `checkBigLambda_lt_max_of_gammaFn`）。`γ(θ~_μ) > 0` そのものは**無条件に証明済み**（`gammaFn_thetaTilde_pos`） |
-| `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus` の「対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`Ising2D.exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus`（`Part017/Claim006_DirectSumAndDiagonalization.lean`）。章 009 とまったく同じ必要十分版 `Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化である |
-| `check_joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.isInternal_range_Qproj`（`Part017/Claim006_DirectSumAndDiagonalization.lean`）。`Submodule` の言葉での前半・後半は `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`。必要十分版は章 009 と共通（`NecSuf/JointEigenspaceDecomposition.lean`） |
+| `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus` の「対角化可能」 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`Ising2D.exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus`（`EigenvalueProblem/EigenvaluesOfVPlus/ClaimDirectSumAndDiagonalization.lean`）。章 009 とまったく同じ必要十分版 `Ising2D.NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` の特殊化である |
+| `check_joint_eigenspace_decomposition` (5) の `DirectSum.IsInternal` 形 | **形式化した（2026-07-30）** | `Ising2D.CheckFermiSetup.isInternal_range_Qproj`（`EigenvalueProblem/EigenvaluesOfVPlus/ClaimDirectSumAndDiagonalization.lean`）。`Submodule` の言葉での前半・後半は `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj`。必要十分版は章 009 と共通（`NecSuf/JointEigenspaceDecomposition.lean`） |
 
 ---
 

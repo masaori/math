@@ -13,9 +13,9 @@
 
 半整数運動量では `tr(Q̌_ε) = 1` なので、直和成分はすべて 1 次元であり、
 固有ベクトルからなる基底は「各 `ε` にちょうど 1 本」という形になる
-（`Claim005_CheckJointEigenspace.lean` の `trace_Qproj` 参照）。
+（`ClaimCheckJointEigenspace.lean` の `trace_Qproj` 参照）。
 -/
-import Ising2D.Part017.Theorem010_EigenvaluesVPlus
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremEigenvaluesVPlus
 import Ising2D.NecSuf.JointEigenspaceDecomposition
 
 namespace Ising2D

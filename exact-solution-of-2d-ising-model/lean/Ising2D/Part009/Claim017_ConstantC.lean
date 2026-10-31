@@ -23,7 +23,7 @@
 -/
 import Ising2D.Part009.Claim009_EigenvaluesVprime
 import Ising2D.Part009.Claim013_PositiveDefinite
-import Ising2D.Part009.Claim016_SignFlip
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimSignFlipConjugation
 
 namespace Ising2D
 

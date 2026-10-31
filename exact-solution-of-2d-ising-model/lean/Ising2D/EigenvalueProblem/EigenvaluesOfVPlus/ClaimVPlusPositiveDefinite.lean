@@ -27,7 +27,7 @@
 -/
 import Ising2D.Part009.Claim017_ConstantC
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
-import Ising2D.Part017.Claim007_TraceCheckVprime
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
 
 namespace Ising2D
 

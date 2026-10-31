@@ -16,7 +16,7 @@
 具体版:
 - 章 009: `Ising2D/Part009/Claim008_JointEigenspace.lean`,
   `Ising2D/Part009/Claim009_EigenvaluesVprime.lean`
-- 章 017: `Ising2D/Part017/Claim005_CheckJointEigenspace.lean`,
+- 章 017: `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimCheckJointEigenspace.lean`,
   `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimEigenvaluesCheckVprime.lean`
 
 **章 009 と章 017 は同じ構造なので、本ファイルの必要十分版 1 本を両章の特殊化として使う。**

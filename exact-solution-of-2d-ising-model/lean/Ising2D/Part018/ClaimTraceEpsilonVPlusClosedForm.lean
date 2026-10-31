@@ -39,7 +39,7 @@ Lean ではこの二つを別々の行にした。
 -/
 import Ising2D.Part018.ClaimTraceEpsilonVPlusMatrixEntries
 import Ising2D.Part018.ClaimTraceEpsilonVPlusReduction
-import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 
 namespace Ising2D
 

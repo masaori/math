@@ -16,7 +16,7 @@
 - `γ(θ~_μ) > 0` が狭義なので大小比較も狭義に（`checkBigLambda_lt_max`）
 なる。狭義性は `TheoremMaxEigenvalueSimple.lean` の単純性の根拠である。
 -/
-import Ising2D.Part017.Claim009_ConstantCEvenSector
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimConstantCEvenSector
 import Ising2D.NecSuf.SimpleEigenvalue
 
 namespace Ising2D

@@ -2,7 +2,7 @@
 # 定数 `c` の決定（**必要十分版**）
 
 対応する人手証明のラベル（具体版は
-`Ising2D/Part017/Claim009_ConstantCEvenSector.lean`、および
+`Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimConstantCEvenSector.lean`、および
 章 009 の `Ising2D/Part009/Claim017_ConstantC.lean` の `constant_c_value`）:
 `constant_c_value_even_sector`。
 

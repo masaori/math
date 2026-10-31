@@ -18,7 +18,7 @@
 計算そのものは章 009 とまったく同じ（同じ必要十分版の特殊化）で、
 違うのは `Fintype.card (CheckIdx M) = M` という 1 行だけである。
 -/
-import Ising2D.Part017.Claim004_TraceCheckNumberOperatorProduct
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperatorProduct
 
 namespace Ising2D
 

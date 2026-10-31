@@ -34,7 +34,7 @@
 （各行の必要十分版は `Ising2D.NecSuf.const_eq_of_trace_ratio`・`Ising2D.NecSuf.sum_weight_lt_of_ne_univ`
 が持つ）。
 -/
-import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 
 namespace Ising2D
 

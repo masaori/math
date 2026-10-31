@@ -23,7 +23,7 @@
 `γ(θ~_μ) > 0` が要るところ（章 017 の単純性）でだけ狭義正値性を仮定に加える
 （`TheoremMaxEigenvalueSimple.lean` で `gammaFn` との同定と狭義正値性を証明する）。
 -/
-import Ising2D.Part017.Claim005_CheckJointEigenspace
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimCheckJointEigenspace
 import Ising2D.NecSuf.SimpleEigenvalue
 
 namespace Ising2D

@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル: `limit_of_log_Z_in_N_row`, `onsager_free_energy_expression`
 具体版: `Ising2D/Part012/Claim003_LimitInNRow.lean`,
-`Ising2D/Part012/Theorem005_OnsagerFreeEnergy.lean`
+`Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/TheoremOnsagerFreeEnergy.lean`
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）
 

@@ -11,7 +11,7 @@
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspaceDecomposition.lean`。
 本ファイルの主張はすべて必要十分版の特殊化として導出する
-（章 017 の `Ising2D/Part017/Claim006_DirectSumAndDiagonalization.lean` も同じ必要十分版の特殊化）。
+（章 017 の `Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimDirectSumAndDiagonalization.lean` も同じ必要十分版の特殊化）。
 
 ## 既存の (5) との関係
 

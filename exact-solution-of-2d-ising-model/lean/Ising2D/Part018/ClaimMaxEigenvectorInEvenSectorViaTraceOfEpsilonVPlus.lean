@@ -33,7 +33,7 @@ Lean の通しの証明の項目 4 の残り（`tr(εV^{(+)}) > 0` の本体）�
 人手の主張は既存の主張を並べるだけなので、必要十分版は置かない
 （各行の必要十分版は `Ising2D/NecSuf/ParityFermion.lean` が持つ）。
 -/
-import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 import Ising2D.Part018.Theorem007_MaxEigenvectorEvenSector
 
 namespace Ising2D

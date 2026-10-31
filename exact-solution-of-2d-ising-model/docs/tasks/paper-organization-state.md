@@ -81,7 +81,7 @@
     (3) $\Lambda^{(1/2)}_M=\check\Lambda_{(1,\dots,1)}=(2\sinh2K_2)^{M/2}\exp(\tfrac12\sum_\mu\gamma(\tilde\theta_\mu))$、(4) $\epsilon\ne(1,\dots,1)\Rightarrow\check\Lambda_\epsilon<\check\Lambda_{(1,\dots,1)}$ と $\max_\epsilon\check\Lambda_\epsilon=\check\Lambda_{(1,\dots,1)}$ を主張する claim
     `V_plus_eigenvalues_with_c_value_and_strict_maximum` を章の最後に置いた。証明は `constant_c_value_even_sector`・`eigenvalues_of_V_plus`・`max_eigenvalue_of_V_plus_simple` に $\check V'$・$\check X$・$\check n_\mu$・$\check\Lambda_\epsilon$ の定義を代入するだけである。
     SageMath（`sagemath/check/V_plus_eigenvalues_with_c_value_and_strict_maximum/`、$M\in\{2,3,4,5\}$・臨界点上を含む 6 組で各行の相対残差 ≤ 1.8e-11。$\Lambda^{(1/2)}_M$ は集合 $\Theta^{(1/2)}_M$ から定義どおりに作る。指数評価と実対数の ℝ 脱出のため倍精度。
-    否定コントロールは前因子を $(2\sinh2K_2)^M$ にしたものと $\delta=0$ の $\Lambda^{(0)}_M$）と Lean（`lean/Ising2D/Part017/ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`。仮定は $M\ne0$ だけ。
+    否定コントロールは前因子を $(2\sinh2K_2)^M$ にしたものと $\delta=0$ の $\Lambda^{(0)}_M$）と Lean（`lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`。仮定は $M\ne0$ だけ。
     `check-no-sorry.sh` の対象に足した）を足した。`tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式を、主張の式と記号（$\check Q_\epsilon,\check\Lambda_\epsilon$）に分け、
     前の章の $c$ の値を一つ目の式で決めると書いた。章の項目数は 17（割り当て 16 とゴールの主張 1。章立て案は 15）。
   - **017 の章の案内文（「この章の目的」）を章の冒頭へ移した。** 題を「$c$ の値と $V^{(+)}$ の固有値を求める道筋」にし、「この章」を「以下」に、「半整数運動量で」を「$\tilde\theta_\mu$（$\mu\in\check{\mathcal M}$）について」に直した。

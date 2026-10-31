@@ -34,8 +34,8 @@ Lean の `VPlus` は `(V_1^{(+)})^{1/2} · (2s_2)^{M_col/2}exp(S_2) · (V_1^{(+)
 
 具体的な `V^{(+)}` の成分についての主張で、`EvenSectorBridge` の欄を埋めるためだけに立てるので、必要十分版は置かない。
 -/
-import Ising2D.Part017.Claim008_VPlusPositiveDefinite
-import Ising2D.Part018.Claim012_VPlusDataFromPart017
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusDataFromEigenvaluesOfVPlus
 
 namespace Ising2D
 

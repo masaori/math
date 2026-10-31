@@ -26,7 +26,7 @@
 符号反転共役 `Ising2D.Uflip_conj_S1`（章 009 `sign_flip_conjugation`）は
 `η` について複号同順の形で証明されているので、`η = -1` を代入するだけでよい。
 -/
-import Ising2D.Part017.Claim008_VPlusPositiveDefinite
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimVPlusPositiveDefinite
 import Ising2D.NecSuf.ConstantC
 
 namespace Ising2D
