@@ -19,7 +19,7 @@
 （`sinh_two_mul_sinh_two_Kstar`）。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimGamma1LowerBound
-import Ising2D.Part020.Claim001_CoshAddHalfAngle
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 
 namespace Ising2D
 

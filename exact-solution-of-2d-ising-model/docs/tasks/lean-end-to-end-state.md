@@ -153,16 +153,21 @@
     人手 `kappa_of_K_basic` (1) の証明どおり `(tanh)' = 1/cosh²`（`hasDerivAt_tanh_real`）と `dK^*/dK = -1/sinh 2K`（`hasDerivAt_Kstar`）から `κ'` を出し、
     (2) は `critical_point_iff_kappa_zero` の (1) ⟺ (3) と `sinh` の単射性で示すようにした。`check-no-sorry.sh` の対象も入れ替えた。
     人手 (1) の `κ' > 0` と (2) の `κ(K)=0 ⟺ sinh² 2K = 1` は独立した定理として置いていない（以前からの差。後退ではない）。
+  - 部「数学的道具立て」のまとまり「実数の平方根・指数関数・双曲線関数」（済み）: 旧 `Part020/Claim001_CoshAddHalfAngle` を
+    `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（`cosh_addition_and_half_angle` だけを形式化）。
+    棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」の項目（`set_and_algebra_notation`・`definition_of_cc`・`def_complex_conjugate` など）を形式化したファイルは無かった。
+    このまとまりのほかの項目（`def_cosh_sinh`・`cosh_sinh_basic_properties`・平方根の 4 項目）を形式化したファイルも無い。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
 
 ## 次の一歩
 
-項目 7 の部「数学的道具立て」を、棚卸しの `mathematicalToolGroups` の並びで、形式化したファイルがあるまとまりから一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す
-（英語名は runbook の例「行列指数関数と交換子計算」→ `MatrixExponentialAndCommutators` に倣い、まとまりの名前を英語で表した内容の分かる名前にする）。
-候補は `Part000/`・`Part002/`（冒頭が旧 Typst のパスで書かれたファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）、`Part004/ClaimExpOfDiagonalMatrix`、
+項目 7 の部「数学的道具立て」の続きを、棚卸しの `mathematicalToolGroups` の並びで一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
+次は、形式化したファイルがある次のまとまりである（「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」に形式化したファイルがあるかを先に調べ、無ければ
+「クロネッカー積と多因子基底」の `Part002/Theorem000_TensorBasis`（と `FromNecSuf`）へ進む）。
+残りの候補は `Part000/`・`Part002/`（冒頭が旧 Typst のパスで書かれたファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）、`Part004/ClaimExpOfDiagonalMatrix`、
 `Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、
-`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 4 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
-1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。
+`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
+1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

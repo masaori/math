@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」の、形式化したファイルがある最初のまとまり「実数の平方根・指数関数・双曲線関数」を移した。旧 `Part020/Claim001_CoshAddHalfAngle`（`cosh, sinh` の加法定理と半角公式）を `lean/Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（名前空間不変）。棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」には形式化したファイルが無い。次は形式化したファイルのある次のまとまり。
+
 2026-10-31: Lean の通しの証明の項目 7 の九番目（最後）の章「臨界点 K_c と d²f/dK² の対数発散」を移した。6 ファイル（旧 `Part020/` の `κ`・`A` と臨界条件、`κ(K)` の基本性質、`γ` の `κ` 微分、`G''` と `f''` の対数発散、章末のゴールの主張）を `lean/Ising2D/CriticalPoint/CriticalPointAndLogDivergence/` へ移した（名前空間不変。番号を外した名前にした）。人手の定義と別表示だった `KStar`（`arsinh(1/sinh 2K)/2`）を消して `Kstar`（`-(1/2)log(tanh K)`）に一本化し、`κ'` は人手どおり `dK^*/dK = -1/sinh 2K`（`hasDerivAt_Kstar`）から、`κ(K)=0 ⟺ K=K_c` は `critical_point_iff_kappa_zero` から出すようにした。`Part020/` に残る 4 本は数学的道具立ての項。次は数学的道具立てのまとまりを一つずつ移す。
 
 2026-10-31: 章立ての組み直しの完了の確認で見つかった差の二つ目を直した。対角化の章の章末に章立て案のゴールの式を主張する `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form`（A(θ̃_μ) の対角化、λ_{±,μ}=exp(±γ(θ̃_μ))、γ(θ) の明示形、ψ̌_μ・ň_μ の定義の再掲、V^{(+)} の指数表示）を置き、SageMath・Lean・`goalLabels`・説明ページを揃えた。旧章末の `V_plus_eq_c_exp_sum_gamma_check_number_operator` は次の章が引くので残した。次は離散 Fourier 変換の章の T_{(V^{(+)})} を共役の約束と合わせること（状態台帳の「次の一歩」）。公開は `publish.ts --repo math`（`masaori/math` ではない。`masaori/math` に出すと別の成果物ができ、`/math/<path>/` は更新されない）で、`--path` は `complex-matrix-ising-paper` と `complex-matrix-ising-paper-organization`。

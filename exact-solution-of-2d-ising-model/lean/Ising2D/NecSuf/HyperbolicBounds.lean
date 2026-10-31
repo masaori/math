@@ -4,7 +4,7 @@
 対応する人手証明のラベル: `cosh_addition_and_half_angle`, `closed_form_log_integral`
 （正本は `structured-latex/content/020_critical_point.ts`）
 
-具体版: `Ising2D/Part020/Claim001_CoshAddHalfAngle.lean`,
+具体版: `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`,
 `Ising2D/Part020/Claim009_ClosedFormLogIntegral.lean`
 
 ## この主張に本質的に効いている構造は何か（具体版が過剰な構造を要求していないかの検査）

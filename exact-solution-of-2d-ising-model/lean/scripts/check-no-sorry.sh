@@ -1108,6 +1108,7 @@ targets=(
   Ising2D.NecSuf.integral_inv_pow_three_half_le
   Ising2D.NecSuf.inv_sqrt_diff_bound
   Ising2D.NecSuf.hasDerivAt_integral_of_continuousOn
+  # --- 数学的道具立て「実数の平方根・指数関数・双曲線関数」（MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/）---
   Ising2D.cosh_add_formula
   Ising2D.cosh_sub_formula
   Ising2D.sinh_add_formula
@@ -1123,6 +1124,7 @@ targets=(
   Ising2D.self_le_sinh_of_nonneg
   Ising2D.sinh_le_mul_cosh_of_nonneg
   Ising2D.cosh_addition_and_half_angle_five
+  # --- 020 章（臨界点での比熱の対数発散。CriticalPoint/CriticalPointAndLogDivergence/ ほか）---
   Ising2D.kappaP
   Ising2D.AP
   Ising2D.AP_pos

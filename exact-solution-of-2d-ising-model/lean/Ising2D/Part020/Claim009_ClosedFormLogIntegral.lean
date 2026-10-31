@@ -12,7 +12,7 @@
 **本ファイルの主張はすべて必要十分版の特殊化として導出してある。**
 -/
 import Ising2D.NecSuf.LogDivergentIntegral
-import Ising2D.Part020.Claim001_CoshAddHalfAngle
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 
 namespace Ising2D
 

@@ -90,6 +90,12 @@ EOF
   | 熱力学極限 | M→∞ の極限と閉形式 | `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` |
   | 臨界点 | 臨界点 K_c と d²f/dK² の対数発散 | `Ising2D/CriticalPoint/CriticalPointAndLogDivergence/` |
 
+- 部「数学的道具立て」の項目を形式化したファイルは、棚卸しのまとまりごとに `Ising2D/MathematicalTools/<まとまりの英語名>/` へ置く。移し終えたまとまりは次のとおりである。
+
+  | まとまり | フォルダ |
+  | --- | --- |
+  | 実数の平方根・指数関数・双曲線関数 | `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/` |
+
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
 
@@ -639,7 +645,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | 017 | 偶セクターの固有値 | `EigenvalueProblem/EigenvaluesOfVPlus/`（`V̌'` の固有値と `Λ̌_max` の単純性は `EigenvalueProblem/DiagonalizationAndExponentialForm/`） | [ch017](docs/ch017-formalization.md) |
 | 018 | 偶セクターの完結（**`onsager_exact_solution`**） | `EigenvalueProblem/EigenvectorOfMaxEigenvalue/`（`Q̌_ε` のエルミート性と章「M→∞ の極限と閉形式」に当たるファイルは `ThermodynamicLimit/ColumnLimitAndClosedForm/`） | [ch018](docs/ch018-formalization.md) |
 | 019 | 最大固有値の所在（`c(M) = c_+(M)`。**章ごと参照用ノートへ退避済み。Lean は形式化の記録**） | `Part019/` | [ch019](docs/ch019-formalization.md) |
-| 020 | 臨界点での比熱の対数発散 | `CriticalPoint/CriticalPointAndLogDivergence/`（`cosh, sinh` の加法定理と、正弦およびそれを含む積分の評価は数学的道具立ての項なので `Part020/`） | [ch020](docs/ch020-formalization.md) |
+| 020 | 臨界点での比熱の対数発散 | `CriticalPoint/CriticalPointAndLogDivergence/`（`cosh, sinh` の加法定理は数学的道具立て「実数の平方根・指数関数・双曲線関数」の項なので `MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/`、正弦およびそれを含む積分の評価は数学的道具立ての項なので `Part020/`） | [ch020](docs/ch020-formalization.md) |
 
 ### 2 本立てが出した最大の答え
 

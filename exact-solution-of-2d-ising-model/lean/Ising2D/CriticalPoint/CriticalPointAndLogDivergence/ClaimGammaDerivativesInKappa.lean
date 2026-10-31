@@ -30,7 +30,7 @@
 Leibniz 則（`Ising2D/NecSuf/DiffUnderIntegral.lean`）を必要十分版として分離し、
 ここは具体版のみとした。
 -/
-import Ising2D.Part020.Claim001_CoshAddHalfAngle
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAdditionAndHalfAngle
 import Mathlib.Analysis.SpecialFunctions.Sqrt
 
 namespace Ising2D
