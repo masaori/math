@@ -7,6 +7,87 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_phase_reversing_standard_smoothing_involution_archived",
+    targets: ["def_phase_reversing_standard_subset"],
+    title: { text: "不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換の接触平滑化による直接比較は採らない。元の主張と証明を保存する。"]),
+      paragraph(["元の主張:"]),
+                      paragraph([
+                        "任意の ", math(String.raw`\varphi\in\mathcal B_L`),
+                        "（", ref("def_phase_reversing_standard_subset"), "）について次が成り立つ。",
+                      ]),
+                      list([
+                        [math(String.raw`S(\varphi)\in\mathcal B_L`), " であり、",
+                          math(String.raw`S(S(\varphi))=\varphi`), " であり、",
+                          math(String.raw`S(\varphi)\ne\varphi`), " である。"],
+                        ["任意の添字 ", math(String.raw`(D,E)`),
+                          "（", ref("def_nonbacktracking_permutation_fiber"), "）について、",
+                          math(String.raw`\varphi\in\mathcal N_L(D,E)`), " ならば ",
+                          math(String.raw`S(\varphi)\in\mathcal N_L(D,E)`), " である。"],
+                        ["任意の ", math(String.raw`(a,b)\in\mathcal S`),
+                          "（", ref("def_spin_structures"), "）について、",
+                          math(String.raw`\mathcal W^{a,b}_L(S(\varphi))=-\mathcal W^{a,b}_L(\varphi)`),
+                          "（", ref("def_nonbacktracking_permutation_phase_contribution"), "）である。"],
+                      ]),
+                      paragraph([
+                        "すなわち標準対平滑化 ", math(String.raw`S`), " は ",
+                        math(String.raw`\mathcal B_L`),
+                        " の上の、各ファイバーを保ち、位相寄与の符号を反転する、不動点の無い対合である。",
+                      ]),
+      paragraph(["元の証明:"]),
+                      paragraph([
+                        math(String.raw`\varphi\in\mathcal B_L`), " を取り、",
+                        math(String.raw`\{\vec e,\vec f\}:=\operatorname{ct}_{\min}(\varphi)`), "、",
+                        math(String.raw`\psi:=S(\varphi)=\operatorname{Sm}_{\vec e,\vec f}(\varphi)`),
+                        " と置く。", ref("def_phase_reversing_standard_subset"), " により ",
+                        math(String.raw`\varphi\in\mathcal A_L`), " であり、",
+                        math(String.raw`\{\vec e,\vec f\}`), " は ", math(String.raw`\varphi`),
+                        " の切り替え可能な接触対（", ref("claim_standard_contact_smoothing_involution"),
+                        " の ", math(String.raw`\mathcal A_L`), " の定義）かつ位相反転接触対である。",
+                      ]),
+                      paragraph([
+                        "第一の主張。", ref("claim_standard_contact_smoothing_involution"), " により ",
+                        math(String.raw`\psi\in\mathcal A_L`), "、",
+                        math(String.raw`S(S(\varphi))=\varphi`), "、",
+                        math(String.raw`\psi\ne\varphi`), " である。残るは ",
+                        math(String.raw`\psi\in\mathcal B_L`), "、すなわち ",
+                        math(String.raw`\operatorname{ct}_{\min}(\psi)`), " が ",
+                        math(String.raw`\psi`), " の位相反転接触対であることである。",
+                        ref("claim_contact_pair_set_smoothing_invariant"), " により ",
+                        math(String.raw`\operatorname{ct}_{\min}(\psi)=\operatorname{ct}_{\min}(\varphi)=\{\vec e,\vec f\}`),
+                        " である。そして",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\tau\bigl(\vec e,\psi(\vec e)\bigr)+\tau\bigl(\vec f,\psi(\vec f)\bigr)
+&=\tau\bigl(\vec e,\varphi(\vec f)\bigr)+\tau\bigl(\vec f,\varphi(\vec e)\bigr)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)\\
+&=\tau\bigl(\vec e,\varphi(\vec e)\bigr)+\tau\bigl(\vec f,\varphi(\vec f)\bigr)
+&&\bigl(\because\ \{\vec e,\vec f\}\text{ は }\varphi\text{ の位相反転接触対。}\blkref{def_phase_reversing_contact_pair}\text{ の等式の両辺の入れ替え（整数の等式の対称性）}\bigr)\\
+&=\tau\bigl(\vec e,\psi(\vec f)\bigr)+\tau\bigl(\vec f,\psi(\vec e)\bigr)
+&&\bigl(\because\ \blkref{def_permutation_contact_smoothing}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "なので、", math(String.raw`\{\vec e,\vec f\}=\operatorname{ct}_{\min}(\psi)`),
+                        " は ", math(String.raw`\psi`), " の位相反転接触対（",
+                        ref("def_phase_reversing_contact_pair"), "）であり、",
+                        math(String.raw`\psi\in\mathcal B_L`), " である。",
+                      ]),
+                      paragraph([
+                        "第二の主張は、", ref("claim_standard_contact_smoothing_involution"),
+                        " の第三の主張をそのまま適用したものである。",
+                      ]),
+                      paragraph([
+                        "第三の主張。", math(String.raw`\{\vec e,\vec f\}`), " は ",
+                        math(String.raw`\varphi`), " の切り替え可能な接触対であり、かつ位相反転接触対なので、",
+                        ref("claim_contact_smoothing_phase_reversal_iff"), " の同値の十分の向きにより、任意の ",
+                        math(String.raw`(a,b)\in\mathcal S`), " について ",
+                        math(String.raw`\mathcal W^{a,b}_L(\psi)=-\mathcal W^{a,b}_L(\varphi)`),
+                        " である。全過程は有限集合の元の比較と代数的数の有限演算だけで閉じる。",
+                      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_phase_contribution_sign_value_archived",
     targets: ["def_nonbacktracking_permutation_phase_contribution"],
     title: { text: "不採用経路: 位相寄与は 1 か −1 である" },
@@ -544,7 +625,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
                         math(String.raw`\mathcal B_L`), " との共通部分、回転差が負四の部分、回転差が四の部分、残余との共通部分の互いに素な合併である。",
                       ]),
                       paragraph([
-                        ref("claim_phase_reversing_standard_smoothing_involution"), " により ",
+                        "参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」", " により ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal B_L`),
                         " の位相寄与の和は零である。この非交和で ",
                         ref("def_fiber_phase_weight"), " の有限和を分け、零和を除くと",
@@ -559,7 +640,7 @@ N_{\mathrm{ct}}(\varphi)=0,\ \mathcal W^{a,b}_L(\varphi)=-1\,\bigr\}
 \mathcal W^{a,b}_L(\varphi)
 +\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal R_L}
 \mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \text{上の非交和と }\blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&&\bigl(\because\ \text{上の非交和と }\text{参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」}\bigr)\\
 &=\sum_{\substack{\varphi\in\mathcal N_L(D,E)\\N_{\mathrm{ct}}(\varphi)=0}}
 \mathcal W^{a,b}_L(\varphi)
 +2\sum_{\varphi\in\mathcal N_L(D,E)\cap\mathcal A_L^{(4)}}
@@ -1563,7 +1644,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         " の互いに素な合併である。",
                       ]),
                       paragraph([
-                        ref("claim_phase_reversing_standard_smoothing_involution"), " により、標準対平滑化 ",
+                        "参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」", " により、標準対平滑化 ",
                         math(String.raw`S`), " は ", math(String.raw`\mathcal B_L`),
                         " 上の不動点の無い対合であり、各ファイバーを保ち、位相寄与の符号を反転する。ゆえに ",
                         math(String.raw`\mathcal N_L(\varnothing,E)\cap\mathcal B_L`),
@@ -1573,7 +1654,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       displayMath(String.raw`\begin{aligned}
 \mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L(S(\varphi))
 &=\mathcal W^{a,b}_L(\varphi)-\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」}\bigr)\\
 &=0
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
 \end{aligned}`),
@@ -1645,7 +1726,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                         " の互いに素な合併である。",
                       ]),
                       paragraph([
-                        ref("claim_phase_reversing_standard_smoothing_involution"), " により、標準対平滑化 ",
+                        "参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」", " により、標準対平滑化 ",
                         math(String.raw`S`), " は ", math(String.raw`\mathcal B_L`),
                         " 上の不動点の無い対合であり、元の証明では各ファイバーを保ち、位相寄与の符号を反転する。ゆえに ",
                         math(String.raw`\mathcal N_L(D,E)\cap\mathcal B_L`),
@@ -1655,7 +1736,7 @@ E\setminus(C\mathbin\triangle H)=(E\setminus C)\mathbin\triangle H`),
                       displayMath(String.raw`\begin{aligned}
 \mathcal W^{a,b}_L(\varphi)+\mathcal W^{a,b}_L(S(\varphi))
 &=\mathcal W^{a,b}_L(\varphi)-\mathcal W^{a,b}_L(\varphi)
-&&\bigl(\because\ \blkref{claim_phase_reversing_standard_smoothing_involution}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: 標準対平滑化は位相反転部分集合の上で符号反転対合である」}\bigr)\\
 &=0
 &&\bigl(\because\ \overline{\mathbb Q}\text{ の四則}\bigr)
 \end{aligned}`),
