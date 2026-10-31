@@ -1,4 +1,4 @@
-import { defineBlocks, list, math, paragraph } from "../schema.ts";
+import { defineBlocks, list, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -64,6 +64,44 @@ export default defineBlocks([
       ]),
       paragraph([
         "演算と単位元には、それが属する環を必ず添字で書く。乗法の交換法則は仮定しない。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_definition_ring_homomorphism",
+    kind: "definition",
+    title: { text: "環の準同型" },
+    labels: ["def_ring_homomorphism"],
+    statement: [
+      paragraph([
+        math(String.raw`(R,+_R,\cdot_R,0_R,1_R)`),
+        " と ",
+        math(String.raw`(S,+_S,\cdot_S,0_S,1_S)`),
+        " を単位元をもつ環（",
+        ref("def_unital_ring"),
+        "）とする。写像 ",
+        math(String.raw`\varphi:R\to S`),
+        " が次をすべて満たすとき、",
+        math(String.raw`\varphi`),
+        " を ",
+        math(String.raw`R`),
+        " から ",
+        math(String.raw`S`),
+        " への環の準同型と呼ぶ。以下、",
+        math(String.raw`x,y`),
+        " は ",
+        math(String.raw`R`),
+        " の任意の元を表す。",
+      ]),
+      list([
+        [math(String.raw`\varphi(x+_R y)=\varphi(x)+_S\varphi(y)`), "（加法を保つ）"],
+        [math(String.raw`\varphi(x\cdot_R y)=\varphi(x)\cdot_S\varphi(y)`), "（乗法を保つ）"],
+        [math(String.raw`\varphi(1_R)=1_S`), "（乗法の単位元を保つ）"],
+      ]),
+      paragraph([
+        "加法の単位元を保つこと ",
+        math(String.raw`\varphi(0_R)=0_S`),
+        " は条件に含めない。乗法の単位元を保つことは、加法と乗法を保つことからは従わないので条件に含める。",
       ]),
     ],
   },
