@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "def_complex_vector_space",
   "def_ring_homomorphism",
   "def_unital_ring",
 ] as const
