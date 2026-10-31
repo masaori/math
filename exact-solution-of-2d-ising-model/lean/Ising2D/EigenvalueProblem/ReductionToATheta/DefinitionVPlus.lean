@@ -3,10 +3,7 @@
 
 対応する人手証明のラベル: **`V1_plus_half_invertible` / `V2_invertible` /
 `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation`**
-（`V1_plus_half_invertible` / `V2_invertible` / `def_T_V_plus` は
-`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`、
-`V_plus_factors_invertible` / `T_V_plus_is_conjugation` は
-`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）
+（正本はいずれも `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts`）
 
 `H_1^{(+)}`（`def_H1_plus`）は章 004 の `Ising2D.H1plus`、`(V_1^{(+)})^{1/2}`（`def_V1_plus_square_root`）と
 その平方根性（`V1_plus_square_root_property`。人手の正本は最大固有値に属する固有ベクトルの章のファイル

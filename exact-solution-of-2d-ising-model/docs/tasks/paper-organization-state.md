@@ -2,6 +2,12 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の三つ目（最後）を直した。離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせた。
+  - **依存が前の章で閉じることを確かめて移した。** `T_V_plus_is_conjugation`（合成で定めた $T_{(V^{(+)})}$ が $V^{(+)}$ による共役に一致）と `V_plus_factors_invertible`（$V^{(+)}$ の可逆性）が本文の参照（`ref` と `\blkref`）で直接引くのは、`V1_plus_half_invertible`・`V2_invertible`・`def_T_V_plus`（同じ章）、`def_V_plus`（射影の章）、`def_invertible_elements_of_R`・`conjugation_is_ring_homomorphism`（数学的道具立て）だけで、その先の依存（`def_V1_plus_square_root`・`V2_exponential_representation`・`matrix_exp_conjugation` など）も同じ章より前で閉じていた。二つを対角化の章から離散 Fourier 変換の章の `def_T_V_plus` の直後へ丸ごと移した（id・ラベル・本文は不変。`T_V_plus_is_conjugation` の `conversion.notes` のうち、退避済みの旧 008 章のブロックを本文に在るように書いていた二項目だけ直した）。
+  - **章末の主張を共役で述べた。** `T_V_plus_check_Z_Y_via_B1_B2_B1` を、$(V^{(+)}\check Z_\mu(V^{(+)})^{-1},V^{(+)}\check Y_\mu(V^{(+)})^{-1})=(T_{(V^{(+)})}(\check Z_\mu),T_{(V^{(+)})}(\check Y_\mu))=(\check Z_\mu,\check Y_\mu)A(\tilde\theta_\mu)=(\check Z_\mu,\check Y_\mu)B_1B_2B_1$ を主張とし、証明は途中に $(T_{V^{(+)}}(\check Z_\mu),T_{V^{(+)}}(\check Y_\mu))$ を挟む 4 行の一続きの式変形にした（各行の根拠は順に `def_T_g` と `V_plus_factors_invertible`、`T_V_plus_is_conjugation`、`T_V_plus_check_Z_Y`、`factorization_of_A_theta_general`）。章の冒頭の案内文に到達点を書き足した。
+  - 説明ページの記号の約束を「$T_{(V^{(+)})}$ は合成として定め、共役との一致を離散 Fourier 変換の章で示す」に直し、この章のゴールの式を本文の主張に揃えた。章の項目数は、離散 Fourier 変換の章が 30、対角化の章が 30 になった。どの章にも割り当てていない項は 0 のまま。
+  - SageMath は `sagemath/check/T_V_plus_check_Z_Y_via_B1_B2_B1/check_conjugation_chain.sage`（1・2 行目。逆行列を作らず $L_0V^{(+)}=V^{(+)}X$ で判定）を足し、3・4 行目を確かめる `check_substitution_chain.sage` と `overview.md` の行の呼び名を人手証明の行に合わせ、047・051 の検査のファイル名の注記を直した。Lean は `ClaimTVPlusCheckZYViaB1B2B1.lean` の主張に共役の 2 本を足して見出しと人手証明との対応表を直し、`DefinitionVPlus.lean` と `lean/docs/ch014-formalization.md` のファイル名の注記を直した。
+  - 別のエージェントのレビューを経た（五回で指摘 20 件を直した。二主張を束ねていたこと、案内文の到達点、移したブロックの注記、SageMath・Lean のファイル名と行の呼び名、Lean の見出し、行列の等式の所在、案内文の文の順序と用いるものの列挙、状態台帳の依存の列挙、SageMath のコメントの判定方法）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: 完了の確認で見つかった差の二つ目を直した。$A(\tilde\theta_\mu)$ の対角化と $V^{(+)}$ の指数表示の章の章末に、章立て案のゴールの式を主張するブロックを置いた。
   - **章末の主張を置いた。** claim `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form` は、$\mu\in\check{\mathcal M}$ について (1) $\det\check P_\mu\neq0$ と $A(\tilde\theta_\mu)=\check P_\mu\,\mathrm{diag}(\lambda_{+,\mu},\lambda_{-,\mu})\check P_\mu^{-1}$、(2) $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$、(3) $\theta\in\mathbb R$ について $\gamma(\theta)=\mathrm{arccosh}(\cosh2K_1\cosh2K_2^*-\sinh2K_1\sinh2K_2^*\cos\theta)$、
     (4) $(\check\psi_\mu^\dagger,\check\psi_\mu)=(\check Z_\mu,\check Y_\mu)\check P_\mu$ と $\check n_\mu=\check\psi_\mu^\dagger\check\psi_{M+1-\mu}$（定義の再掲）、(5) $V^{(+)}=c\exp(\sum_\mu\gamma(\tilde\theta_\mu)(\check n_\mu-\frac12I))$ を主張する。
@@ -1308,10 +1314,7 @@
 
 ## 次の一歩
 
-完了の確認で見つかった差の残り一つを行う。済んだら、作業の順序の七番目（完了の確認）をやり直す。
-（一つ目の射影の章と、二つ目の対角化の章の章末の主張は 2026-10-31 に済んだ。上の「現在地」の先頭二つを見よ。）
-
-1. **離散 Fourier 変換の章のゴールの $T_{(V^{(+)})}$ を、章立て案の約束 $T_{(V)}(X)=VXV^{-1}$ と合わせる。** `T_V_plus_is_conjugation` と、それが使う $V^{(+)}$ の可逆性の依存閉包が、離散 Fourier 変換の章より前の章と数学的道具立てだけで閉じるなら、それらを離散 Fourier 変換の章へ移し、章末の主張を共役で述べる。閉じないなら、説明ページと章立て案の注記に、$T_{(V^{(+)})}$ は合成で定め、共役との一致は次の章で示すと書く。
+runbook の作業の順序の七番目（完了の確認）をやり直す。完了の確認で見つかった差の三つ（射影の章・対角化の章・離散 Fourier 変換の章の章末の主張）は 2026-10-31 にすべて直した（上の「現在地」の先頭三つを見よ）。
 
 ## 未確定
 

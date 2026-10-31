@@ -110,9 +110,13 @@ export default defineBlocks([
         math(String.raw`M:=M_{\mathrm{col}}`),
         "、",
         math(String.raw`N:=N_{\mathrm{row}}`),
-        " と略記し、",
-        math(String.raw`T_{(V)}(X):=VXV^{-1}`),
-        " は共役写像を表す。",
+        " と略記する。",
+        math(String.raw`T_{(V^{(+)})}`),
+        " は本文では三つの因子による共役の合成として定め、",
+        math(String.raw`V^{(+)}`),
+        " による共役 ",
+        math(String.raw`X\mapsto V^{(+)}X\left(V^{(+)}\right)^{-1}`),
+        " と一致することを離散 Fourier 変換の章で示す。",
       ]),
     ],
   },
@@ -172,7 +176,8 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
         math(String.raw`\mu\in\check{\mathcal M}=\{1,\dots,M\}`),
         "）。",
       ]),
-      displayMath(String.raw`\left(T_{(V^{(+)})}(\check Z_\mu),\ T_{(V^{(+)})}(\check Y_\mu)\right)=\left(\check Z_\mu,\ \check Y_\mu\right)A(\tilde\theta_\mu)
+      displayMath(String.raw`\left(V^{(+)}\check Z_\mu\left(V^{(+)}\right)^{-1},\ V^{(+)}\check Y_\mu\left(V^{(+)}\right)^{-1}\right)
+=\left(T_{(V^{(+)})}(\check Z_\mu),\ T_{(V^{(+)})}(\check Y_\mu)\right)=\left(\check Z_\mu,\ \check Y_\mu\right)A(\tilde\theta_\mu)
 =\left(\check Z_\mu,\ \check Y_\mu\right)B_1(\tilde\theta_\mu)\,B_2\,B_1(\tilde\theta_\mu)`),
       paragraph(["ここに現れる記号は次である。"]),
       displayMath(String.raw`\tilde\theta_\mu=\frac{2\pi\left(\mu-\tfrac12\right)}{M},\qquad

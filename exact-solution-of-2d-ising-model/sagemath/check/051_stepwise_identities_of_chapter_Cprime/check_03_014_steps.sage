@@ -1,5 +1,5 @@
 # =========================================================================
-# check_03: 014 章（もと structured-latex/content/014_even_sector_T_action.ts、いまは eigenvalue_problem_reduction_to_A_theta.ts と eigenvalue_problem_diagonalization_and_exponential_form.ts）の
+# check_03: 014 章（もと structured-latex/content/014_even_sector_T_action.ts、いまは eigenvalue_problem_reduction_to_A_theta.ts）の
 #           **各段の等式そのもの**を、ラベル単位で検証する。
 #
 #  対象ラベル:

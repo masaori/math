@@ -420,7 +420,7 @@
           "goalEntryIds": [
             "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
           ],
-          "entryCount": 28,
+          "entryCount": 30,
           "proposalEntryCount": 27,
           "dependencyOrder": [
             {
@@ -527,6 +527,18 @@
             },
             {
               "entryIds": [
+                "evensectorT_claim_V_plus_factors_invertible"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "evensectorT_claim_T_V_plus_is_conjugation"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
                 "evensectorT_002_claim_nesting_commutator"
               ],
               "inseparableDependencyUnit": false
@@ -610,6 +622,8 @@
             "evensectorT_claim_V1_plus_half_invertible",
             "evensectorT_claim_V2_invertible",
             "evensectorT_definition_T_V_plus",
+            "evensectorT_claim_V_plus_factors_invertible",
+            "evensectorT_claim_T_V_plus_is_conjugation",
             "evensectorT_002_claim_nesting_commutator",
             "evensectorT_003_claim_coefficient_conversion",
             "evensectorT_004_claim_extract_taylor",
@@ -630,7 +644,7 @@
           "goalEntryIds": [
             "diagonalization_and_exponential_form_claim_A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form"
           ],
-          "entryCount": 32,
+          "entryCount": 30,
           "proposalEntryCount": 27,
           "dependencyOrder": [
             {
@@ -672,18 +686,6 @@
             {
               "entryIds": [
                 "evensector_006_claim_recover_Z_Y"
-              ],
-              "inseparableDependencyUnit": false
-            },
-            {
-              "entryIds": [
-                "evensectorT_claim_V_plus_factors_invertible"
-              ],
-              "inseparableDependencyUnit": false
-            },
-            {
-              "entryIds": [
-                "evensectorT_claim_T_V_plus_is_conjugation"
               ],
               "inseparableDependencyUnit": false
             },
@@ -834,8 +836,6 @@
             "evensector_003b_claim_conjugate_index_of_check_Z_Y",
             "evensector_005_claim_anticommutator_check_Z_Y",
             "evensector_006_claim_recover_Z_Y",
-            "evensectorT_claim_V_plus_factors_invertible",
-            "evensectorT_claim_T_V_plus_is_conjugation",
             "Athetatilde_001_definition_gamma1_gamma2",
             "freeenergy_001_claim_gamma1_lower_bound_all_theta",
             "Athetatilde_001b_definition_gamma_theta",
@@ -4595,6 +4595,22 @@
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
+          "dependentId": "evensectorT_claim_V_plus_factors_invertible",
+          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
+        },
+        {
+          "dependentId": "evensectorT_claim_V_plus_factors_invertible",
+          "prerequisiteId": "calc_formulae_006_definition_of_cc"
+        },
+        {
+          "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
+          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
+        },
+        {
+          "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
+          "prerequisiteId": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
+        },
+        {
           "dependentId": "evensectorT_002_claim_nesting_commutator",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
@@ -4704,6 +4720,14 @@
         },
         {
           "dependentId": "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1",
+          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
+        },
+        {
+          "dependentId": "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1",
+          "prerequisiteId": "TV1_hatZ_hatY_011_definition_T_g"
+        },
+        {
+          "dependentId": "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1",
           "prerequisiteId": "calc_formulae_006_definition_of_cc"
         },
         {
@@ -4801,22 +4825,6 @@
         {
           "dependentId": "evensector_006_claim_recover_Z_Y",
           "prerequisiteId": "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices"
-        },
-        {
-          "dependentId": "evensectorT_claim_V_plus_factors_invertible",
-          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
-        },
-        {
-          "dependentId": "evensectorT_claim_V_plus_factors_invertible",
-          "prerequisiteId": "calc_formulae_006_definition_of_cc"
-        },
-        {
-          "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
-          "prerequisiteId": "TV1_hatZ_hatY_009_definition_invertible_elements"
-        },
-        {
-          "dependentId": "evensectorT_claim_T_V_plus_is_conjugation",
-          "prerequisiteId": "calculation_formulae_046_claim_conjugation_is_ring_homomorphism"
         },
         {
           "dependentId": "Athetatilde_001_definition_gamma1_gamma2",
@@ -12656,7 +12664,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 8,
+        "incomingReferenceCount": 9,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -12724,7 +12732,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": true,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -16745,7 +16753,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 14,
+        "incomingReferenceCount": 15,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -18507,6 +18515,142 @@
       }
     },
     {
+      "id": "evensectorT_claim_V_plus_factors_invertible",
+      "kind": "claim",
+      "title": "V^{(+)} \\text{ の可逆性}",
+      "titleFormat": "tex",
+      "labels": [
+        "V_plus_factors_invertible"
+      ],
+      "sourceFile": "eigenvalue_problem_reduction_to_A_theta.ts",
+      "sourceOrdinal": 3,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 6,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 1461,
+        "inspectedContentSha256": "0f10242ee6a690c1bb410c783c2ed6bf7cd46bab51f026e8d17e56ca8cb0ed00",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V1_plus_half_invertible",
+        "V2_invertible",
+        "def_V_plus",
+        "def_invertible_elements_of_R",
+        "definition_of_cc"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "calc_formulae_006_definition_of_cc",
+        "evensectorT_claim_V1_plus_half_invertible",
+        "evensectorT_claim_V2_invertible",
+        "evensectorT_definition_V_plus"
+      ],
+      "semanticPrerequisiteLabels": [
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [
+        "evensectorT_claim_V2_invertible"
+      ],
+      "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
+      "dependencyPlacement": {
+        "classificationOrder": 88,
+        "dependencyUnitEntryIds": [
+          "evensectorT_claim_V_plus_factors_invertible"
+        ]
+      }
+    },
+    {
+      "id": "evensectorT_claim_T_V_plus_is_conjugation",
+      "kind": "claim",
+      "title": "T_{(V^{(+)})} = T_{V^{(+)}}",
+      "titleFormat": "tex",
+      "labels": [
+        "T_V_plus_is_conjugation"
+      ],
+      "sourceFile": "eigenvalue_problem_reduction_to_A_theta.ts",
+      "sourceOrdinal": 3,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 6,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2414,
+        "inspectedContentSha256": "6bbc391d5273ecd949664f80148248c5bf6c9be78cea52534b860073cf9f9d50",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "V1_plus_half_invertible",
+        "V2_invertible",
+        "conjugation_is_ring_homomorphism",
+        "def_T_V_plus",
+        "def_V_plus",
+        "def_invertible_elements_of_R"
+      ],
+      "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
+        "evensectorT_claim_V1_plus_half_invertible",
+        "evensectorT_claim_V2_invertible",
+        "evensectorT_definition_T_V_plus",
+        "evensectorT_definition_V_plus"
+      ],
+      "semanticPrerequisiteLabels": [],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
+      "dependencyPlacement": {
+        "classificationOrder": 92,
+        "dependencyUnitEntryIds": [
+          "evensectorT_claim_T_V_plus_is_conjugation"
+        ]
+      }
+    },
+    {
       "id": "evensectorT_002_claim_nesting_commutator",
       "kind": "claim",
       "title": "\\check{Z}, \\check{Y} \\text{ についての } n \\text{ 重交換子}",
@@ -19256,7 +19400,7 @@
     {
       "id": "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1",
       "kind": "claim",
-      "title": "T_{(V^{(+)})} \\text{ の } \\check{Z}_\\mu, \\check{Y}_\\mu \\text{ への作用の } 2\\times2 \\text{ 行列 } A(\\tilde\\theta_\\mu) = B_1(\\tilde\\theta_\\mu) B_2 B_1(\\tilde\\theta_\\mu) \\text{ による表示}",
+      "title": "V^{(+)} \\text{ による } \\check{Z}_\\mu, \\check{Y}_\\mu \\text{ の共役の、} 2\\times2 \\text{ 行列 } A(\\tilde\\theta_\\mu) \\text{ による表示}",
       "titleFormat": "tex",
       "labels": [
         "T_V_plus_check_Z_Y_via_B1_B2_B1"
@@ -19267,7 +19411,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 0,
+        "incomingReferenceCount": 1,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -19276,8 +19420,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2872,
-        "inspectedContentSha256": "5f39c3ba800f511fb09b04b996dec156feb49022e046f30198cc34c861c10a20",
+        "inspectedCharacterCount": 3814,
+        "inspectedContentSha256": "fa6544bb57d4fa05771cc77fa127581c3071f84db3e0aecb691b356ac4fe5b14",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -19288,19 +19432,26 @@
       },
       "dependsOnLabels": [
         "T_V_plus_check_Z_Y",
+        "T_V_plus_is_conjugation",
+        "V_plus_factors_invertible",
         "antiperiodic_exp_sum",
         "calc_of_TxT_check_Z_Y",
         "def_A_theta",
         "def_B1_theta_B2",
         "def_T_V_plus",
+        "def_T_g",
+        "def_V_plus",
         "def_check_index_set",
         "def_half_integer_checkY",
         "def_half_integer_checkZ",
+        "def_invertible_elements_of_R",
         "definition_of_cc",
         "factorization_of_A_theta_general",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "TV1_hatZ_hatY_009_definition_invertible_elements",
+        "TV1_hatZ_hatY_011_definition_T_g",
         "TV1_hatZ_hatY_017_definition_A_theta",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
@@ -19308,7 +19459,10 @@
         "evensectorT_008_claim_product_action",
         "evensectorT_009_claim_factorization_A_theta",
         "evensectorT_010_claim_T_V_plus_action",
+        "evensectorT_claim_T_V_plus_is_conjugation",
+        "evensectorT_claim_V_plus_factors_invertible",
         "evensectorT_definition_T_V_plus",
+        "evensectorT_definition_V_plus",
         "evensector_002_claim_antiperiodic_exp_sum",
         "evensector_003_definition_half_integer_checkY",
         "evensector_003_definition_half_integer_checkZ",
@@ -19825,142 +19979,6 @@
         "classificationOrder": 109,
         "dependencyUnitEntryIds": [
           "evensector_006_claim_recover_Z_Y"
-        ]
-      }
-    },
-    {
-      "id": "evensectorT_claim_V_plus_factors_invertible",
-      "kind": "claim",
-      "title": "V^{(+)} \\text{ の可逆性}",
-      "titleFormat": "tex",
-      "labels": [
-        "V_plus_factors_invertible"
-      ],
-      "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
-      "sourceOrdinal": 3,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1461,
-        "inspectedContentSha256": "0f10242ee6a690c1bb410c783c2ed6bf7cd46bab51f026e8d17e56ca8cb0ed00",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V1_plus_half_invertible",
-        "V2_invertible",
-        "def_V_plus",
-        "def_invertible_elements_of_R",
-        "definition_of_cc"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_009_definition_invertible_elements",
-        "calc_formulae_006_definition_of_cc",
-        "evensectorT_claim_V1_plus_half_invertible",
-        "evensectorT_claim_V2_invertible",
-        "evensectorT_definition_V_plus"
-      ],
-      "semanticPrerequisiteLabels": [
-        "definition_of_cc"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [
-        "evensectorT_claim_V2_invertible"
-      ],
-      "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
-      "dependencyPlacement": {
-        "classificationOrder": 88,
-        "dependencyUnitEntryIds": [
-          "evensectorT_claim_V_plus_factors_invertible"
-        ]
-      }
-    },
-    {
-      "id": "evensectorT_claim_T_V_plus_is_conjugation",
-      "kind": "claim",
-      "title": "T_{(V^{(+)})} = T_{V^{(+)}}",
-      "titleFormat": "tex",
-      "labels": [
-        "T_V_plus_is_conjugation"
-      ],
-      "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
-      "sourceOrdinal": 3,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
-        "isingSemanticMatches": [],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2414,
-        "inspectedContentSha256": "6bbc391d5273ecd949664f80148248c5bf6c9be78cea52534b860073cf9f9d50",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "V1_plus_half_invertible",
-        "V2_invertible",
-        "conjugation_is_ring_homomorphism",
-        "def_T_V_plus",
-        "def_V_plus",
-        "def_invertible_elements_of_R"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_009_definition_invertible_elements",
-        "calculation_formulae_046_claim_conjugation_is_ring_homomorphism",
-        "evensectorT_claim_V1_plus_half_invertible",
-        "evensectorT_claim_V2_invertible",
-        "evensectorT_definition_T_V_plus",
-        "evensectorT_definition_V_plus"
-      ],
-      "semanticPrerequisiteLabels": [],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
-      "dependencyPlacement": {
-        "classificationOrder": 92,
-        "dependencyUnitEntryIds": [
-          "evensectorT_claim_T_V_plus_is_conjugation"
         ]
       }
     },
@@ -27154,7 +27172,10 @@
       "sourceFile": "eigenvalue_problem_reduction_to_A_theta.ts",
       "dependsOnLabels": [
         "T_V_plus_check_Z_Y",
+        "T_V_plus_check_Z_Y_via_B1_B2_B1",
+        "T_V_plus_is_conjugation",
         "T_actions_on_check_Z_Y",
+        "V_plus_factors_invertible",
         "commutator_of_H_and_check_Z_Y",
         "def_A_theta",
         "def_H1_plus",

@@ -3425,7 +3425,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I &&
 A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\left(\tilde\theta_\mu\right)`,
       ),
       paragraph([
-        "まで到達する。ここで ",
+        "を得る。ここで ",
         math(String.raw`V^{(+)} = \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}`),
         " は ",
         ref("def_V_plus"),
@@ -3462,9 +3462,51 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         ref("T_actions_on_check_Z_Y"),
         "）、それらを合成する（",
         ref("T_V_plus_check_Z_Y"),
-        "）。用いるのは (A)〜(D)、交換子の双線型性、",
+        "）。ここまでに用いるのは (A)〜(D)、交換子の双線型性、",
         math(String.raw`\exp(i\theta)\exp(-i\theta) = 1`),
         " と行列の計算だけである。",
+        "最後に ",
+        math(String.raw`V^{(+)}`),
+        " が可逆であること（",
+        ref("V_plus_factors_invertible"),
+        "）と、合成で定めた ",
+        math(String.raw`T_{(V^{(+)})}`),
+        " が ",
+        math(String.raw`V^{(+)}`),
+        " による共役 ",
+        math(String.raw`X\mapsto V^{(+)}X\left(V^{(+)}\right)^{-1}`),
+        " に一致すること（",
+        ref("T_V_plus_is_conjugation"),
+        "）を使って、",
+        math(String.raw`V^{(+)}\check{Z}_\mu\left(V^{(+)}\right)^{-1}, V^{(+)}\check{Y}_\mu\left(V^{(+)}\right)^{-1}`),
+        " の表示として述べる（",
+        ref("T_V_plus_check_Z_Y_via_B1_B2_B1"),
+        "）。",
+        "この最後の段で用いるのは、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " と ",
+        math(String.raw`V_2`),
+        " の可逆性（",
+        ref("V1_plus_half_invertible"),
+        "、",
+        ref("V2_invertible"),
+        "）、可逆な行列の積が可逆であること（",
+        ref("def_invertible_elements_of_R"),
+        " (ii)）、共役の合成則（",
+        ref("conjugation_is_ring_homomorphism"),
+        "）、",
+        ref("def_V_plus"),
+        "・",
+        ref("def_T_V_plus"),
+        "・",
+        ref("def_T_g"),
+        " の定義である。",
+        math(String.raw`A(\tilde\theta_\mu)`),
+        " の分解 ",
+        math(String.raw`A(\tilde\theta_\mu) = B_1(\tilde\theta_\mu) B_2 B_1(\tilde\theta_\mu)`),
+        " は ",
+        ref("factorization_of_A_theta_general"),
+        " による。",
       ]),
       paragraph([
         "**添字の量化について。** ",
@@ -3614,6 +3656,132 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
       ),
     ],
     conversion: { status: "added" },
+  },
+  {
+    id: "evensectorT_claim_V_plus_factors_invertible",
+    kind: "claim",
+    origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
+    title: { tex: String.raw`V^{(+)} \text{ の可逆性}` },
+    labels: ["V_plus_factors_invertible"],
+    statement: [
+      paragraph([
+        ref("def_V_plus"),
+        " で定めた ",
+        math(String.raw`V^{(+)}`),
+        " は可逆である。すなわち、",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`R^\times`),
+        " の元である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("V1_plus_half_invertible"),
+        " と ",
+        ref("V2_invertible"),
+        " により、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " と ",
+        math(String.raw`V_2`),
+        " は可逆である。",
+      ]),
+      paragraph([
+        ref("def_invertible_elements_of_R"),
+        " (ii) より",
+      ]),
+      displayMath(
+        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\in R^\times,
+\qquad R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
+      ),
+      paragraph([
+        ref("V1_plus_half_invertible"),
+        " と ",
+        ref("def_invertible_elements_of_R"),
+        " (ii) より",
+      ]),
+      displayMath(
+        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}
+\in R^\times`,
+      ),
+      paragraph([ref("def_V_plus"), " より"]),
+      displayMath(String.raw`V^{(+)}\in R^\times`),
+    ],
+    conversion: { status: "added" },
+  },
+  {
+    id: "evensectorT_claim_T_V_plus_is_conjugation",
+    kind: "claim",
+    origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
+    title: { tex: String.raw`T_{(V^{(+)})} = T_{V^{(+)}}` },
+    labels: ["T_V_plus_is_conjugation"],
+    statement: [
+      paragraph([
+        ref("def_T_V_plus"),
+        " で合成として定めた ",
+        math(String.raw`T_{(V^{(+)})}`),
+        " は、",
+        ref("def_V_plus"),
+        " の ",
+        math(String.raw`V^{(+)}`),
+        " による共役そのものに一致する。",
+      ]),
+      displayMath(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
+    ],
+    proof: [
+      paragraph([
+        ref("V1_plus_half_invertible"),
+        " と ",
+        ref("V2_invertible"),
+        " により、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " と ",
+        math(String.raw`V_2`),
+        " は可逆である。また ",
+        ref("def_invertible_elements_of_R"),
+        " (ii) より、",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}V_2`),
+        " も可逆である。したがって、",
+        ref("conjugation_is_ring_homomorphism"),
+        " の合成則 ",
+        math(String.raw`T_g \circ T_h = T_{gh}`),
+        " を、まず ",
+        math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}`),
+        "、",
+        math(String.raw`h = V_2`),
+        " に、次に ",
+        math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}V_2`),
+        "、",
+        math(String.raw`h = \left(V_1^{(+)}\right)^{1/2}`),
+        " に適用できる。よって、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{(V^{(+)})}
+&=T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
+&&\bigl(\because\ \blkref{def_T_V_plus}\bigr)\\
+&= T_{\left(V_1^{(+)}\right)^{1/2}V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
+&= T_{\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}}
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
+&= T_{V^{(+)}}
+&&\bigl(\because\ \blkref{def_V_plus}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "ここで合成則は最初に左の 2 つへ、次にその結果と残りの 1 つへ適用した。合成の順序は ",
+        math(String.raw`T_{(V^{(+)})}(X) = T_{\left(V_1^{(+)}\right)^{1/2}}\left(T_{V_2}\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)`),
+        " の定義どおりである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "旧 008 章のうち参照用ノート notes/integer_momentum_route_not_adopted.ts に退避した def_T_V は、T_{(V)} を (V_1^{(±)})^{1/2}, V_2 の共役の合成として定義し、同じノートの why_008_applies_only_to_minus_sector のとおりその V は実質 (-) 専用である。混同しないよう、本文では V^{(+)}（射影の章の def_V_plus）による T_{(V^{(+)})} を def_T_V_plus として、def_T_V を参照せずに定義している。",
+        "旧 008 章は (V_1^{(±)})^{1/2} を「exp(iK_1H_1^{(±)}) の 1/2 乗」と書いたうえで proof の中で exp((1/2)iK_1H_1^{(±)}) と読み替えていた（参照用ノート notes/integer_momentum_route_not_adopted.ts の note_evensectorT_005_claim_T_actions_integer_route_TV1_hatZ_hatY_012_claim_TV1_TV2_actions へ退避した TV1_hatZ_hatY_012_claim_TV1_TV2_actions の proof）。本文では最初から exp((i/2)K_1H_1^{(+)}) を定義 def_V1_plus_square_root とし、それが V_1^{(+)} の平方根であることを V1_plus_square_root_property（最大固有値に属する固有ベクトルの章）で示した（読み替えを暗黙にしない）。",
+        "T_{(V^{(+)})} = T_{V^{(+)}}（合成が積による共役に一致すること）は数値でも確認済み（sagemath/check/047_claim_even_sector_T_action/check_04, 「合成=共役」列）。",
+      ],
+    },
   },
   {
     id: "evensectorT_002_claim_nesting_commutator",
@@ -5611,7 +5779,7 @@ T_{(V^{(+)})}(\check{Y}_\mu)
     id: "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1",
     kind: "claim",
     standing: "mainTheorem",
-    title: { tex: String.raw`T_{(V^{(+)})} \text{ の } \check{Z}_\mu, \check{Y}_\mu \text{ への作用の } 2\times2 \text{ 行列 } A(\tilde\theta_\mu) = B_1(\tilde\theta_\mu) B_2 B_1(\tilde\theta_\mu) \text{ による表示}` },
+    title: { tex: String.raw`V^{(+)} \text{ による } \check{Z}_\mu, \check{Y}_\mu \text{ の共役の、} 2\times2 \text{ 行列 } A(\tilde\theta_\mu) \text{ による表示}` },
     labels: ["T_V_plus_check_Z_Y_via_B1_B2_B1"],
     statement: [
       paragraph([
@@ -5619,6 +5787,22 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         "（",
         ref("def_check_index_set"),
         "）とする。",
+        ref("def_V_plus"),
+        " の ",
+        math(String.raw`V^{(+)}`),
+        "（",
+        ref("V_plus_factors_invertible"),
+        " により ",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`R^\times`),
+        " の元。",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "）、",
+        ref("def_T_V_plus"),
+        " の ",
+        math(String.raw`T_{(V^{(+)})}`),
+        "、",
         ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu = \frac{2\pi\left(\mu - \tfrac12\right)}{M_{\mathrm{col}}} \in \mathbb{R}`),
@@ -5631,12 +5815,8 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         " の ",
         math(String.raw`\check{Y}_\mu`),
         "（いずれも ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`R`),
         " の元）、",
-        ref("def_T_V_plus"),
-        " の ",
-        math(String.raw`T_{(V^{(+)})}`),
-        "、",
         ref("def_A_theta"),
         " の ",
         math(String.raw`A(\theta)`),
@@ -5649,9 +5829,12 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         " の元）について、",
       ]),
       displayMath(
-        String.raw`\left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right)
-= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) A\!\left(\tilde\theta_\mu\right)
-= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) B_1\!\left(\tilde\theta_\mu\right) B_2\, B_1\!\left(\tilde\theta_\mu\right)`,
+        String.raw`\begin{aligned}
+\left(V^{(+)}\check{Z}_\mu\left(V^{(+)}\right)^{-1},\; V^{(+)}\check{Y}_\mu\left(V^{(+)}\right)^{-1}\right)
+&= \left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right) \\
+&= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) A\!\left(\tilde\theta_\mu\right) \\
+&= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) B_1\!\left(\tilde\theta_\mu\right) B_2\, B_1\!\left(\tilde\theta_\mu\right)
+\end{aligned}`,
       ),
       paragraph([
         "が成り立つ。行ベクトルと ",
@@ -5660,13 +5843,21 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         ref("calc_of_TxT_check_Z_Y"),
         " の ",
         math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p & q \\ r & s\end{pmatrix} = (pA + rB,\ qA + sB)`),
+        " である。最後の等号の根拠である行列の等式 ",
+        math(String.raw`A(\theta) = B_1(\theta) B_2 B_1(\theta)\ (\theta \in \mathbb{R})`),
+        " は ",
+        ref("factorization_of_A_theta_general"),
         " である。",
       ]),
     ],
     proof: [
       displayMath(
         String.raw`\begin{aligned}
-\left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right)
+\left(V^{(+)}\check{Z}_\mu\left(V^{(+)}\right)^{-1},\; V^{(+)}\check{Y}_\mu\left(V^{(+)}\right)^{-1}\right)
+&= \left(T_{V^{(+)}}(\check{Z}_\mu),\; T_{V^{(+)}}(\check{Y}_\mu)\right)
+&&(\because\ \blkref{def_T_g}\ \text{を}\ g = V^{(+)}\ \text{として。}\ V^{(+)} \in R^\times\ \text{は}\ \blkref{V_plus_factors_invertible}) \\
+&= \left(T_{(V^{(+)})}(\check{Z}_\mu),\; T_{(V^{(+)})}(\check{Y}_\mu)\right)
+&&(\because\ \blkref{T_V_plus_is_conjugation}) \\
 &= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) A\!\left(\tilde\theta_\mu\right)
 &&(\because\ \blkref{T_V_plus_check_Z_Y}) \\
 &= \left(\check{Z}_\mu,\; \check{Y}_\mu\right) B_1\!\left(\tilde\theta_\mu\right) B_2\, B_1\!\left(\tilde\theta_\mu\right)
@@ -5677,7 +5868,8 @@ T_{(V^{(+)})}(\check{Y}_\mu)
     conversion: {
       status: "added",
       notes: [
-        "2026-10-31: 章立ての組み直しで、離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着の章のゴールの式を一つの主張として立てた。既存の二つの主張を順に当てるだけで、新しい証明は無い。",
+        "2026-10-31: 章立ての組み直しで、離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着の章のゴールの式を一つの主張として立てた。既存の主張を順に当てるだけで、新しい証明は無い。",
+        "2026-10-31: 章立て案の約束 T_{(V)}(X)=VXV^{-1} と合わせるため、V^{(+)} による共役から始まる式変形にした（T_V_plus_is_conjugation と V_plus_factors_invertible を対角化の章からこの章へ移して引く）。",
       ],
     },
   },

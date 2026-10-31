@@ -1,17 +1,17 @@
 # ---------------------------------------------------------
-# SageMath: 主張 (T_{(V^{(+)})}(checkZ_mu), T_{(V^{(+)})}(checkY_mu))
+# SageMath: 主張の式変形の後ろの 2 行 (T_{(V^{(+)})}(checkZ_mu), T_{(V^{(+)})}(checkY_mu))
 #               = (checkZ_mu, checkY_mu) A(theta~_mu)
 #               = (checkZ_mu, checkY_mu) B_1(theta~_mu) B_2 B_1(theta~_mu)
-#   の証明の式変形 2 行を、各行の値を独立に作って隣どうしを比べる。
-#   0 行目: (V^{(+)} checkZ (V^{(+)})^{-1}, V^{(+)} checkY (V^{(+)})^{-1})   （def_T_V_plus の共役の合成）
-#   1 行目: (checkZ, checkY) A(theta~_mu)                                    (T_V_plus_check_Z_Y)
-#   2 行目: (checkZ, checkY) B_1(theta~_mu) B_2 B_1(theta~_mu)              (factorization_of_A_theta_general)
-#   否定コントロール: 2 行目で積の順序を B_2 B_1 B_1 に替えた右辺は、少なくとも一つの mu で 0 行目と一致しない。
+#   の証明の式変形（人手証明の 3・4 行目）を、各値を独立に作って隣どうしを比べる。プログラムの中の名前と人手証明の行の対応:
+#   line0: (T_{(V^{(+)})}(checkZ), T_{(V^{(+)})}(checkY))（2 行目の右辺＝3 行目の左辺。def_T_V_plus の三つの共役の合成として作る）
+#   line1: (checkZ, checkY) A(theta~_mu)                    （3 行目の右辺。T_V_plus_check_Z_Y）
+#   line2: (checkZ, checkY) B_1(theta~_mu) B_2 B_1(theta~_mu)（4 行目の右辺。factorization_of_A_theta_general）
+#   否定コントロール: line2 で積の順序を B_2 B_1 B_1 に替えた右辺は、少なくとも一つの mu で line0 と一致しない。
 #   （M_col が奇数のとき mu = (M_col+1)/2 では theta~_mu = pi で、B_1(pi) と B_2 が可換になり一致する。
 #    そこで mu についての残差の最大値で判定する。）
 # 対象ラベル: T_V_plus_check_Z_Y_via_B1_B2_B1
 # 対象: structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts
-#       ブロック reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1
+#       ブロック reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1 の証明の 3・4 行目
 # 帰属: V^{(+)} は行列の指数関数で作り、K_1, K_2^* が実数で H_1^{(+)}, H_2 の固有値が一般に無理数なので
 #       成分が超越数になり厳密計算できない（ℝ 脱出: 指数評価）。倍精度複素数 CDF で計算し、
 #       作用素ノルムの残差が 047 と同じ TOL = 1e-8 以下なら一致とみなす。否定コントロールは残差が 1e-3 を超えることを要求する。

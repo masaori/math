@@ -1,6 +1,6 @@
 # 章 014「偶セクターでの `T` の作用」の Lean 形式化
 
-対象: もと `structured-latex/content/014_even_sector_T_action.ts` の定義・主張 19 本。章立ての組み直しで、`V_plus_factors_invertible`・`T_V_plus_is_conjugation` 以外は `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ、`V_plus_factors_invertible`・`T_V_plus_is_conjugation` は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` へ移った
+対象: もと `structured-latex/content/014_even_sector_T_action.ts` の定義・主張 19 本。章立ての組み直しで、すべて `structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` へ移った
 
 新規ファイル:
 
