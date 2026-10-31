@@ -1,7 +1,8 @@
 # SageMath Check: 動く辺の軌道列の閉路性
 
-**対象ラベル**: `claim_permutation_power_return`, `def_permutation_minimal_return`,
-`claim_moved_orbit_closed_nonbacktracking`
+**対象ラベル**: `claim_permutation_power_return`, `def_permutation_minimal_return`
+
+退避した「動く辺の軌道列の閉路性」の有限検算も、このファイルに保管する。
 
 一辺二の周期正方格子の向き付き辺のうち先頭六本の全置換 $6!$ 個を取り、残りを固定した
 （前 tick の非零置換項の検査と同じ標本）。全置換・全辺で回帰の存在

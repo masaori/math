@@ -50623,11 +50623,10 @@ Z^{\mathrm{op}}_{a,b}(q)Z^{\mathrm{op}}_{a,c}(q)
                         displayMath(String.raw`b^{\mathrm{op}}_{a+c,b}(\rho_{\sigma,\tau})
 =b^{\mathrm{op}}_{a,b}(\sigma)
 +b^{\mathrm{op}}_{c,b}(\tau)
-+s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)`),
++s^{\leftrightarrow}_{a,c;b}(\sigma,\tau)
+\qquad\bigl(\because\ \blkref{def_open_rectangle_edges}\text{ と }\blkref{def_open_rectangle_broken_bond_count}\bigr)`),
                         paragraph([
-                          "である（破れボンド数は ",
-                          ref("def_open_rectangle_broken_bond_count"),
-                          "）。よって全単射とこの分解から、",
+                          "よって全単射とこの分解から、",
                         ]),
                         displayMath(String.raw`\begin{aligned}
 Z^{\mathrm{op}}_{a+c,b}(q)
@@ -74891,13 +74890,13 @@ const chapter_kac_ward_permutation_expansion = defineSection({
               kind: "section",
               id: "kac_ward_heading_moved_orbit_closed_walk",
               labels: [],
-              title: { text: "動く辺の軌道の閉路性" },
+              title: { text: "置換の反復と最小回帰時刻" },
               children: [
                 {
                   role: "primary",
                   element: {
                     kind: "elementGroup",
-                    id: "group_of_kac_ward_claim_moved_orbit_closed_nonbacktracking",
+                    id: "group_of_kac_ward_definition_permutation_minimal_return",
                     beforeFocus: [
                       {
                         role: "prerequisiteDefinition",
@@ -74975,135 +74974,31 @@ const chapter_kac_ward_permutation_expansion = defineSection({
                           ],
                         },
                       },
-                      {
-                        role: "prerequisiteDefinition",
-                        element: {
-                          id: "kac_ward_definition_permutation_minimal_return",
-                          kind: "definition",
-                          title: { text: "最小回帰時刻" },
-                          labels: ["def_permutation_minimal_return"],
-                          habitat: "N",
-                          lean: ["Ising2DLambda.KacWard.minimalReturnTime"],
-                          statement: [
-                            paragraph([
-                              math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
-                              math(String.raw`\vec e\in\vec E_L`), " に対し、最小回帰時刻 ",
-                              math(String.raw`r_{\varphi}(\vec e)\in\mathbb N`), " を",
-                            ]),
-                            displayMath(String.raw`r_{\varphi}(\vec e):=
-\min\{\,k\in\mathbb N\mid 1\le k,\ \varphi^{\circ k}(\vec e)=\vec e\,\}`),
-                            paragraph([
-                              "で定める。この集合は ", ref("claim_permutation_power_return"),
-                              " により空でなく、自然数の空でない部分集合は最小元を持つので、",
-                              "この定義は well-defined である。定義から ",
-                              math(String.raw`1\le r_{\varphi}(\vec e)`), " かつ ",
-                              math(String.raw`\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)=\vec e`),
-                              " であり、", math(String.raw`1\le k<r_{\varphi}(\vec e)`),
-                              " なる ", math(String.raw`k\in\mathbb N`), " については ",
-                              math(String.raw`\varphi^{\circ k}(\vec e)\ne\vec e`), " である。",
-                            ]),
-                          ],
-                        },
-                      },
                     ],
                     focus: {
-                      id: "kac_ward_claim_moved_orbit_closed_nonbacktracking",
-                      kind: "claim",
-                      title: { text: "動く辺の軌道列は向き付き辺が相異なる閉じた非後退辺列である" },
-                      labels: ["claim_moved_orbit_closed_nonbacktracking"],
+                      id: "kac_ward_definition_permutation_minimal_return",
+                      kind: "definition",
+                      title: { text: "最小回帰時刻" },
+                      labels: ["def_permutation_minimal_return"],
                       habitat: "N",
-                      verification: ["sagemath/check/permutation-orbit-closed-walk"],
-                      lean: [
-                        "Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking",
-                        "Ising2DLambda.NecSuf.KacWard.moved_iterate_ne",
-                        "Ising2DLambda.NecSuf.KacWard.orbit_relation_chain",
-                        "Ising2DLambda.NecSuf.KacWard.orbit_iterates_distinct",
-                        "Ising2DLambda.KacWard.movedOrbit_closed_nonbacktracking_from_necSuf",
-                      ],
+                      lean: ["Ising2DLambda.KacWard.minimalReturnTime"],
                       statement: [
                         paragraph([
-                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " が、任意の ",
-                          math(String.raw`\vec f\in\vec E_L`), " について",
+                          math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " と ",
+                          math(String.raw`\vec e\in\vec E_L`), " に対し、最小回帰時刻 ",
+                          math(String.raw`r_{\varphi}(\vec e)\in\mathbb N`), " を",
                         ]),
-                        displayMath(String.raw`\varphi(\vec f)\ne\vec f\Longrightarrow
-\varphi(\vec f)\in\operatorname{Next}(\vec f)`),
+                        displayMath(String.raw`r_{\varphi}(\vec e):=
+\min\{\,k\in\mathbb N\mid 1\le k,\ \varphi^{\circ k}(\vec e)=\vec e\,\}`),
                         paragraph([
-                          "を満たすとし（", ref("def_nonbacktracking_successors"), "）、",
-                          math(String.raw`\vec e\in\vec E_L`), " は ",
-                          math(String.raw`\varphi(\vec e)\ne\vec e`), " を満たすとする。",
-                          math(String.raw`r:=r_{\varphi}(\vec e)`), " と置く。このとき軌道列 ",
-                          math(String.raw`\gamma_{\varphi}(\vec e)`), "（",
-                          "参照用ノート「不採用経路: 軌道列」", "）について次が成り立つ。",
-                          "第一に、各項 ", math(String.raw`\varphi^{\circ(k-1)}(\vec e)`),
-                          "（", math(String.raw`1\le k\le r`), "）は ",
-                          math(String.raw`\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)\ne\varphi^{\circ(k-1)}(\vec e)`),
-                          " を満たす。第二に、", math(String.raw`\gamma_{\varphi}(\vec e)`),
-                          " は閉じた非後退辺列である（", ref("def_closed_nonbacktracking_walk"),
-                          "）。第三に、", math(String.raw`r`), " 個の項は相異なる。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          "第一の主張。", math(String.raw`k\in\mathbb N`), "、",
-                          math(String.raw`1\le k\le r`), " とし、",
-                          math(String.raw`\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)=\varphi^{\circ(k-1)}(\vec e)`),
-                          " と仮定する。", ref("def_permutation_iterate"), " により左辺は ",
-                          math(String.raw`\varphi^{\circ(k-1)}\bigl(\varphi(\vec e)\bigr)`),
-                          " に等しい（再帰をほどくと ",
-                          math(String.raw`\varphi\circ\varphi^{\circ(k-1)}=\varphi^{\circ(k-1)}\circ\varphi`),
-                          "）。よって ",
-                          math(String.raw`\varphi^{\circ(k-1)}\bigl(\varphi(\vec e)\bigr)=\varphi^{\circ(k-1)}(\vec e)`),
-                          " であり、置換 ", math(String.raw`\varphi^{\circ(k-1)}`),
-                          " の単射性（", ref("def_row_permutation"), "）により ",
-                          math(String.raw`\varphi(\vec e)=\vec e`),
-                          " となる。これは仮定 ", math(String.raw`\varphi(\vec e)\ne\vec e`),
-                          " に矛盾する。",
-                        ]),
-                        paragraph([
-                          "第二の主張。まず隣接する二項の接続を見る。",
-                          math(String.raw`k\in\mathbb N`), "、",
-                          math(String.raw`1\le k\le r-1`), " について、第 ", math(String.raw`k`),
-                          " 項 ", math(String.raw`\varphi^{\circ(k-1)}(\vec e)`),
-                          " は第一の主張により ",
-                          math(String.raw`\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)\ne\varphi^{\circ(k-1)}(\vec e)`),
-                          " を満たすので、", math(String.raw`\varphi`), " への仮定により",
-                        ]),
-                        displayMath(String.raw`\varphi^{\circ k}(\vec e)
-=\varphi\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)
-\in\operatorname{Next}\bigl(\varphi^{\circ(k-1)}(\vec e)\bigr)
-\qquad\bigl(\because\ \blkref{def_permutation_iterate}\text{ と }\varphi\text{ への仮定}\bigr)`),
-                        paragraph([
-                          "であり、", math(String.raw`\gamma_{\varphi}(\vec e)`),
-                          " は非後退辺列である（", ref("def_nonbacktracking_edge_sequence"),
-                          "）。次に閉性を見る。終項 ",
-                          math(String.raw`\varphi^{\circ(r-1)}(\vec e)`),
-                          " も第一の主張により動くので、", math(String.raw`\varphi`), " への仮定により",
-                        ]),
-                        displayMath(String.raw`\vec e
-=\varphi^{\circ r}(\vec e)
-=\varphi\bigl(\varphi^{\circ(r-1)}(\vec e)\bigr)
-\in\operatorname{Next}\bigl(\varphi^{\circ(r-1)}(\vec e)\bigr)
-\qquad\bigl(\because\ \blkref{def_permutation_minimal_return}\text{ と }\blkref{def_permutation_iterate}\text{ と }\varphi\text{ への仮定}\bigr)`),
-                        paragraph([
-                          "である。第 1 項は ",
-                          math(String.raw`\varphi^{\circ 0}(\vec e)=\vec e`),
-                          " なので、", math(String.raw`\gamma_{\varphi}(\vec e)`),
-                          " は閉じている（", ref("def_closed_nonbacktracking_walk"), "）。",
-                        ]),
-                        paragraph([
-                          "第三の主張。", math(String.raw`j,l\in\mathbb N`), "、",
-                          math(String.raw`0\le j<l\le r-1`), " とし、",
-                          math(String.raw`\varphi^{\circ j}(\vec e)=\varphi^{\circ l}(\vec e)`),
-                          " と仮定する。", ref("def_permutation_iterate"), " の再帰を ",
-                          math(String.raw`l-j`), " 回ほどくと ",
-                          math(String.raw`\varphi^{\circ l}(\vec e)=\varphi^{\circ j}\bigl(\varphi^{\circ(l-j)}(\vec e)\bigr)`),
-                          " なので、置換 ", math(String.raw`\varphi^{\circ j}`),
-                          " の単射性（", ref("def_row_permutation"), "）により ",
-                          math(String.raw`\varphi^{\circ(l-j)}(\vec e)=\vec e`),
-                          " を得る。ところが ", math(String.raw`1\le l-j\le r-1<r`),
-                          " なので、これは ", ref("def_permutation_minimal_return"),
-                          " の最小性に矛盾する。よって ", math(String.raw`r`),
-                          " 個の項は相異なる。全過程は有限集合の写像の反復と自然数の比較だけで閉じる。",
+                          "で定める。この集合は ", ref("claim_permutation_power_return"),
+                          " により空でなく、自然数の空でない部分集合は最小元を持つので、",
+                          "この定義は well-defined である。定義から ",
+                          math(String.raw`1\le r_{\varphi}(\vec e)`), " かつ ",
+                          math(String.raw`\varphi^{\circ r_{\varphi}(\vec e)}(\vec e)=\vec e`),
+                          " であり、", math(String.raw`1\le k<r_{\varphi}(\vec e)`),
+                          " なる ", math(String.raw`k\in\mathbb N`), " については ",
+                          math(String.raw`\varphi^{\circ k}(\vec e)\ne\vec e`), " である。",
                         ]),
                       ],
                     },
