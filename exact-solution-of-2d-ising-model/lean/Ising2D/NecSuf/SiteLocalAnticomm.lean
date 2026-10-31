@@ -32,7 +32,7 @@
 逆にこれは、具体版が `σ^x, σ^y, σ^z` の成分計算に依存していないことの検査になっている
 （具体版が使うのは `A σ^x = -σ^x A` 型の関係式だけである）。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Mathlib.Algebra.BigOperators.Fin
 
 namespace Ising2D.NecSuf

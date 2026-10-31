@@ -36,7 +36,7 @@ Lean では `Fin M` 上の `deltaM μ ν = if μ = ν then 1 else 0` として�
    `μ < ν`, `μ = ν`, `μ > ν` の 3 通りで「食い違うサイト `j`」がそれぞれ
    `μ`, `μ`, `ν` になる。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 
 namespace Ising2D

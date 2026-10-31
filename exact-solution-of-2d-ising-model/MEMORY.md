@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「有限行列・Pauli行列・交換子」を移した。旧 `Part000/Claim046_CommutatorViaAnticommutators`・`Part002/Lemma001_ScalarIdentityCommutes`・`Part002/Lemma003_CentralizerIsScalar` を `lean/Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` へ番号を外した名前で移した（名前空間・中身は不変）。`Part002/` は無くなった。次は「数ベクトル・行列の長さと収束」以降のまとまりに形式化したファイルがあるかを調べ、無ければ「可逆行列・線型写像との対応・共役変換」の `Part000/Claim045_ConjugationIsRingHom`。
+
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」のまとまり「クロネッカー積と多因子基底」を移した。旧 `Part002/Theorem000_TensorBasis`（と `FromNecSuf`。`tensor_basis`）を `lean/Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean`（と `TheoremTensorBasisFromNecSuf.lean`）へ移した（名前空間不変）。本文 `content/002_linear_space_general.ts` とノートの中の Lean のパスも直した。「角度・極座標・複素数の積と商」「絶対値・偏角・複素平方根」には形式化したファイルが無い。次は「有限行列・Pauli行列・交換子」。
 
 2026-10-31: Lean の通しの証明の項目 7 で、部「数学的道具立て」の、形式化したファイルがある最初のまとまり「実数の平方根・指数関数・双曲線関数」を移した。旧 `Part020/Claim001_CoshAddHalfAngle`（`cosh, sinh` の加法定理と半角公式）を `lean/Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean` へ移した（名前空間不変）。棚卸しの先頭のまとまり「集合記号と複素数の直交座標計算」には形式化したファイルが無い。次は形式化したファイルのある次のまとまり。

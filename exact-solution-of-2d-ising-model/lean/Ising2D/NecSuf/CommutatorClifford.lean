@@ -31,7 +31,7 @@
 **必要十分版は Lean の中だけに置く**（`exact-solution-of-2d-ising-model/README.md` 4 節）。
 人手証明の本文にも参照用ノートにも持ち込まない。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 
 namespace Ising2D.NecSuf
 

@@ -96,6 +96,7 @@ EOF
   | --- | --- |
   | 実数の平方根・指数関数・双曲線関数 | `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/` |
   | クロネッカー積と多因子基底 | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/` |
+  | 有限行列・Pauli行列・交換子 | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` |
 
 - まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
   章のフォルダへ移したファイルは番号を外した名前にしてある。下の表は旧 Typst のファイルとの対応で、Lean の側はいまの置き場を書く。
@@ -103,10 +104,10 @@ EOF
   | 人手証明（Typst） | Lean |
   | --- | --- |
   | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/Part000/Claim045_ConjugationIsRingHom.lean` |
-  | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/Part000/Claim046_CommutatorViaAnticommutators.lean` |
+  | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` |
   | `parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` |
-  | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/Part002/Lemma001_ScalarIdentityCommutes.lean` |
-  | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/Part002/Lemma003_CentralizerIsScalar.lean` |
+  | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaScalarIdentityCommutes.lean` |
+  | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaCentralizerIsScalar.lean` |
   | `parts/004_転送行列/000_definition_転送行列の記号の定義.typ` | `Ising2D/PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` |
   | `parts/004_転送行列/001_claim_Z_mとY_mは線型独立.typ` | `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependent.lean` |
   | `<def_hatZ_pm>`・`<def_hatY>`・`<exp_sum>` に共通する複素位相因子 | `Ising2D/EigenvalueProblem/ReductionToATheta/DefinitionExpPhase.lean` |

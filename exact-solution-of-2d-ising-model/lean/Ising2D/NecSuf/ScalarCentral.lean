@@ -10,8 +10,8 @@
 
 | 人手証明のラベル | 具体版（複素行列） |
 | --- | --- |
-| `<scalar_identity_commutes>` | `Ising2D/Part002/Lemma001_ScalarIdentityCommutes.lean` |
-| `<centralizer_is_scalar>` | `Ising2D/Part002/Lemma003_CentralizerIsScalar.lean` |
+| `<scalar_identity_commutes>` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaScalarIdentityCommutes.lean` |
+| `<centralizer_is_scalar>` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaCentralizerIsScalar.lean` |
 
 ## 必要十分版が何を明らかにするか
 

@@ -16,7 +16,7 @@
 クリフォード群には依存しない。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimTVPlusEqTCheckVprime
-import Ising2D.Part002.Lemma003_CentralizerIsScalar
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.LemmaCentralizerIsScalar
 
 namespace Ising2D
 

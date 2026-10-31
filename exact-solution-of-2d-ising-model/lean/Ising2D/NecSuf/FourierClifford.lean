@@ -32,7 +32,7 @@
 `Z, Y` の具体形（Jordan–Wigner 文字列）、指数関数・円周率の解析的性質。
 -/
 import Ising2D.NecSuf.RootOfUnitySum
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 
 namespace Ising2D.NecSuf
 

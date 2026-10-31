@@ -93,22 +93,23 @@ targets=(
   Ising2D.matrix_eq_sum_E
   Ising2D.kroneckerTensorPowBasis
   Ising2D.kroneckerTensorPowBasis_apply
-  # --- 全章の土台（Representation.lean）と旧 Part000・Part002 ---
-  Ising2D.tensorPowAlgEquiv
-  Ising2D.toFinPowAlgEquiv
-  Ising2D.E_mul_E
-  Ising2D.one_eq_sum_E
+  # --- 数学的道具立て「有限行列・Pauli行列・交換子」（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/。必要十分版は NecSuf/ScalarCentral.lean）---
   Ising2D.scalar_identity_commutes
   Ising2D.scalar_identity_commutes_fin
   Ising2D.NecSuf.smul_one_commute
   Ising2D.NecSuf.smul_one_sub_comm
   Ising2D.NecSuf.centralizer_is_scalar_semiring
   Ising2D.NecSuf.centralizer_is_scalar_commSemiring
-  Ising2D.NecSuf.single_mul_single_eq_ite
-  Ising2D.NecSuf.one_eq_sum_single
   Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm
   Ising2D.centralizer_is_scalar
   Ising2D.centralizer_is_scalar_abstract
+  # --- 全章の土台（Representation.lean。行列単位は NecSuf/MatrixUnits.lean）と旧 Part000 ---
+  Ising2D.tensorPowAlgEquiv
+  Ising2D.toFinPowAlgEquiv
+  Ising2D.E_mul_E
+  Ising2D.one_eq_sum_E
+  Ising2D.NecSuf.single_mul_single_eq_ite
+  Ising2D.NecSuf.one_eq_sum_single
   Ising2D.matExp_units_conj
   Ising2D.Y_mul_Z_next_of_not_last
   Ising2D.epsilon_mul_Y_mul_Z_next_of_last

@@ -161,6 +161,13 @@
   - 部「数学的道具立て」のまとまり「クロネッカー積と多因子基底」（済み）: 旧 `Part002/Theorem000_TensorBasis`（と `FromNecSuf`）を
     `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean`（と `TheoremTensorBasisFromNecSuf.lean`）へ移した（`tensor_basis` だけを形式化）。
     このまとまりのほかの項目（`def_kronecker`・`kronecker_product_rule`・`kronecker_multilinear`・`kronecker_transpose`）を形式化したファイルは旧フォルダに無い（`Representation.lean` は全章の土台なので動かさない）。
+  - 部「数学的道具立て」のまとまり「有限行列・Pauli行列・交換子」（済み）: 旧 `Part000/Claim046_CommutatorViaAnticommutators`（`commutator_via_anticommutators`）・
+    `Part002/Lemma001_ScalarIdentityCommutes`（`scalar_identity_commutes`）・`Part002/Lemma003_CentralizerIsScalar`（`centralizer_is_scalar`）を
+    `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/` へ番号を外した名前（`ClaimCommutatorViaAnticommutators`・`LemmaScalarIdentityCommutes`・`LemmaCentralizerIsScalar`）で移した。
+    3 本とも形式化している人手の項目はこのまとまりの 1 項目だけである。`Part002/` は無くなった。
+    このまとまりの `pauli_matrix_products` に当たる定理は `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`、
+    `tensor_anticommutation_from_single_site` と同じ主張の `siteProd_anticomm_of_single_site` は `EigenvalueProblem/ReductionToATheta/ClaimAnticommutatorZY.lean` にある。
+    どちらのファイルも冒頭が宣言する人手の項目は章の項目だけなので、runbook の数え方（冒頭の宣言で数える）で今の置き場のままにした。
   - 本文から参照用ノート `structured-latex/notes/claims_unused_by_chapter_goals_not_adopted.ts` へ退避された主張だけを形式化しているファイル:
     `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）とその必要十分版の導出、`Part013/Claim007_H1H2ViaCheck.lean`（`H1_H2_via_check_Z_Y`）。
     runbook の置き場の規則に退避した主張の置き場が無いので動かしていない。旧番号のフォルダを無くす前に、置き場を runbook に足してから移す。
@@ -168,11 +175,10 @@
 ## 次の一歩
 
 項目 7 の部「数学的道具立て」の続きを、棚卸しの `mathematicalToolGroups` の並びで一つずつ `Ising2D/MathematicalTools/<まとまりの英語名>/` へ移す。
-次はまとまり「有限行列・Pauli行列・交換子」である。旧フォルダでこのまとまりの項目を形式化しているのは
-`Part000/Claim046_CommutatorViaAnticommutators`（`commutator_via_anticommutators`）・`Part002/Lemma001_ScalarIdentityCommutes`（`scalar_identity_commutes`）・
-`Part002/Lemma003_CentralizerIsScalar`（`centralizer_is_scalar`）の 3 本である。それぞれが形式化しているほかの項目を数え、runbook の多数決の規則で置き場を確かめてから移す。
-残りの候補は `Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`）、`Part004/ClaimExpOfDiagonalMatrix`、
-`Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、
-`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
+次は「数ベクトル・行列の長さと収束」「行列指数関数と交換子計算」に形式化したファイルがあるかを調べることである（冒頭の `<ラベル>` では旧フォルダに見つからない。
+`Part004/ClaimExpOfDiagonalMatrix` など冒頭が旧 Typst のパスだけのファイルは、旧ラベルと同じラベルの項目へ読み替えて数える）。無ければ「可逆行列・線型写像との対応・共役変換」の
+`Part000/Claim045_ConjugationIsRingHom`（と `FromNecSuf`。`conjugation_is_ring_homomorphism`）へ進む。
+残りの候補は `Part004/ClaimExpOfDiagonalMatrix`、`Part008/Definition016_TV`・`Definition030_Fermi`、`Part009/Definition001_Trace`・`Claim013_PositiveDefinite`、
+`Part011/Claim005_PsdCauchySchwarz`（と補助の `Part011/Basic`）、`Part012/Theorem004_RiemannSumToIntegral`、`Part020/` に残る 3 本である。各ファイルの置き場は runbook の多数決の規則で決める（章の項目と混在するファイルもある）。
 1 回に 1 まとまりずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、コメントのパス（本文・ノートの中のパスを含む）、`lean/README.md`（数学的道具立てのまとまりの表）・`lean/docs/` の対応表を同じ回で直す。
 数学的道具立てを移し終えたら、`RoutesNotAdopted/IntegerMomentum/`・`RoutesNotAdopted/MinusSector/`、参照用ノートへ退避した主張だけのファイル（置き場を runbook に足してから）の順に進める。

@@ -20,7 +20,7 @@ Lean では 4 つとも証明する。
 原文の計算は次の 3 段に分かれる。
 
 1. 反交換子の中の 2 つの線型結合を二重和へ展開する
-   → `Ising2D.acomm_sum_smul`（`Ising2D/Part000/Claim046_...`）
+   → `Ising2D.acomm_sum_smul`（`Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean`）
 2. `[Z_j, Z_k]₊ = 2 I δ^M_{(j,k)}`（`<anticommutator_of_Z_and_Y>`）で `j = k` の項だけ残す
    → `acomm_sum_smul_clifford`（本ファイル）
 3. 残った `∑_{j=1}^M exp(-√-1·2π j(μ+ν)/M) = M δ^M_{μ+ν,0}` を使う

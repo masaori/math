@@ -28,7 +28,7 @@
 `Z, Y` の具体形（Jordan–Wigner 文字列）、台の可換性、有限次元性、係数環が体であること。
 係数は任意の可換環でよく、台は任意の環でよい。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Mathlib.LinearAlgebra.LinearIndependent.Defs
 
 namespace Ising2D.NecSuf

@@ -41,7 +41,7 @@
 `d : ι → A` が生成演算子（原文の `ψ̌^†`）、`e : ι → A` が消滅演算子（原文の `ψ̌`）、
 `σ : ι → ι` が対になる添字の対合（原文の `μ ↦ M+1-μ`）である。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Mathlib.Algebra.Algebra.Basic
 import Mathlib.Tactic.NoncommRing
 

@@ -32,7 +32,7 @@
 第 1 係数の符号だけが反転する形になるのは、原文 `def_fermi` の
 `±i√(γ_2(θ_μ)γ_2(-θ_μ))` の複号がそこにしか現れないからである。
 -/
-import Ising2D.Part000.Claim046_CommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Mathlib.Algebra.Algebra.Basic
 import Mathlib.Tactic.Module
 
