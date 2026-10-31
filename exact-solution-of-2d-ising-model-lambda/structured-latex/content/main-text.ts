@@ -4154,11 +4154,11 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 A^{0}\cdot v
 &=I^{\overline{\mathbb{Q}}}_{\mathcal{J}}\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_power}\bigr)\\
 &=v
-&&(\because\ \blkref{claim_qbar_identity_action})\\
+&&\bigl(\because\ \blkref{claim_qbar_identity_action}\bigr)\\
 &=\mathrm{it}^{[0]}_{A}(v)
-&&(\because\ \blkref{def_qbar_action_iterate})
+&&\bigl(\because\ \blkref{def_qbar_action_iterate}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`k`),
@@ -4171,13 +4171,13 @@ A^{0}\cdot v
                         displayMath(String.raw`\begin{aligned}
 A^{k+1}\cdot v
 &=\bigl(A\,A^{k}\bigr)\cdot v
-&&(\because\ \blkref{def_qbar_matrix_power})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_power}\bigr)\\
 &=A\cdot\bigl(A^{k}\cdot v\bigr)
-&&(\because\ \blkref{claim_qbar_action_product})\\
+&&\bigl(\because\ \blkref{claim_qbar_action_product}\bigr)\\
 &=A\cdot\bigl(\mathrm{it}^{[k]}_{A}(v)\bigr)
-&&(\because\ \text{帰納法の仮定})\\
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
 &=\mathrm{it}^{[k+1]}_{A}(v)
-&&(\because\ \blkref{def_qbar_action_iterate})
+&&\bigl(\because\ \blkref{def_qbar_action_iterate}\bigr)
 \end{aligned}`),
                         paragraph([
                           "よって任意の ",
