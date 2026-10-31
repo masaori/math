@@ -1,9 +1,9 @@
 /-
 # `g^2 = 1 + r^2` から `e^{±arcosh g} = g ± r` を出す（**必要十分版**）
 
-対応する人手証明のラベル: `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde`
+対応する人手証明のラベル: `gamma_theta_tilde_mu_positive`, `lambda_eq_exp_gamma_theta_tilde`
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
-`Athetatilde_008_definition_gamma_theta_tilde`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
+`Athetatilde_008_claim_gamma_theta_tilde_positive`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
 具体版: `Ising2D/Part015/Definition008_GammaTildeMu.lean`。
 
@@ -67,10 +67,19 @@ theorem exp_neg_arcosh_of_sq {g r : ℝ} (hg : 1 ≤ g) (hr : 0 ≤ r) (h : g ^ 
   rw [hc, hs] at hsum
   exact hsum.symm
 
-/-- **必要十分版**: `1 < g` なら `arcosh g > 0`（人手証明 `def_gamma_theta_tilde_mu` の末尾）。
+/-- **必要十分版**: `1 < g` なら `arcosh g > 0`（人手証明 `gamma_theta_tilde_mu_positive`）。
 
-mathlib に `Real.arcosh_pos` があるのでその言い換えにすぎない
-（人手証明は「`γ = 0` なら `γ_1 = cosh 0 = 1` で矛盾」と述べており、内容も同じ）。 -/
-theorem arcosh_pos_of_one_lt {g : ℝ} (hg : 1 < g) : 0 < Real.arcosh g := Real.arcosh_pos hg
+人手証明と同じ手順: `arcosh g ≥ 0`（`def_gamma_theta`）で、`arcosh g = 0` と仮定すると
+`g = cosh(arcosh g) = cosh 0 = 1` となり `1 < g` に矛盾する。
+使うのは `cosh ∘ arcosh = id`（`[1,∞)` 上）・`arcosh ≥ 0`・`cosh 0 = 1` だけである。 -/
+theorem arcosh_pos_of_one_lt {g : ℝ} (hg : 1 < g) : 0 < Real.arcosh g := by
+  rcases lt_or_eq_of_le (Real.arcosh_nonneg hg.le) with h | h
+  · exact h
+  · exfalso
+    have hchain : g = 1 := by
+      calc g = Real.cosh (Real.arcosh g) := (Real.cosh_arcosh hg.le).symm
+        _ = Real.cosh 0 := by rw [← h]
+        _ = 1 := Real.cosh_zero
+    linarith
 
 end Ising2D.NecSuf

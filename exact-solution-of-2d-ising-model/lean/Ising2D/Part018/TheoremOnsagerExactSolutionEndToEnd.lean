@@ -15,7 +15,7 @@
 | 結合定数 `K_1, K_2 ∈ ℝ_{>0}`（`def_partition_function_2d_ising`） | `IsingParam` の組 `⟨K1, K2, hK1, hK2⟩` |
 | 主張の内側の極限の値 `(1/M) log c(M)` | 存在を主張する `f`（`c(M)` は具体的な `W` の Rayleigh 上限、人手 `def_rayleigh_sup`） |
 | Step 1〜Step 3 | `Ising2D.onsager_exact_solution_unconditional`（`Theorem013_OnsagerUnconditional.lean`） |
-| `γ(θ) = arccosh(cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ)`（人手 `gamma1_lower_bound_all_theta`） | `gammaFn_eq` と `IsingParam.K2star := Kstar K2` で、閉形式の被積分関数を `gammaFn` を経ない形へ書き直す |
+| `γ(θ) = arccosh(cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ)`（人手 `def_gamma_theta`） | `gammaFn_eq` と `IsingParam.K2star := Kstar K2` で、閉形式の被積分関数を `gammaFn` を経ない形へ書き直す |
 
 必要十分版は置かない。本ファイルは証明済みの具体版を結合定数の組へ当てはめ、被積分関数を定義どおりに
 書き直すだけで、新しい計算を含まないからである。

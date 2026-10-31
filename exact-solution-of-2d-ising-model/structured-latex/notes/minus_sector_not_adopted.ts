@@ -621,7 +621,7 @@ x^\top W x
       displayMath(String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}}) = \Lambda^{(1/2)}_{M_{\mathrm{col}}}
 = \left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}
 \exp\!\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\right)`),
-      paragraph(["が成り立つ（", math(String.raw`\tilde\theta_\mu`), " は ", ref("antiperiodic_exp_sum"), " の半整数運動量、", math(String.raw`\gamma`), " は ", ref("def_gamma_theta_tilde_mu"), "）。**上限 ", math(String.raw`c(M_{\mathrm{col}})`), " は達成され、しかもそれを達成する単位ベクトルは偶セクター ", math(String.raw`\mathcal{F}^{(+)}`), " の中に取れる。**"]),
+      paragraph(["が成り立つ（", math(String.raw`\tilde\theta_\mu`), " は ", ref("antiperiodic_exp_sum"), " の半整数運動量、", math(String.raw`\gamma`), " は ", ref("def_gamma_theta"), "）。**上限 ", math(String.raw`c(M_{\mathrm{col}})`), " は達成され、しかもそれを達成する単位ベクトルは偶セクター ", math(String.raw`\mathcal{F}^{(+)}`), " の中に取れる。**"]),
       paragraph(["証明."]),
       paragraph(["Step 1（", math(String.raw`c(M_{\mathrm{col}}) = c_+(M_{\mathrm{col}})`), "）。", "〔sector_decomposition_of_rayleigh_sup〕", " (3) と ", "〔c_minus_le_c_plus〕", " より"]),
       displayMath(String.raw`\begin{aligned}

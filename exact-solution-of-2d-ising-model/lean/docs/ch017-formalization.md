@@ -110,7 +110,7 @@
 | `checkBigLambda_pos` / `checkBigLambda_le_max` / `checkBigLambda_min_le` | 正値性・最大・最小 | 同 (2) |
 | `checkBigLambda_max_mul_min` | `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2` | 同 |
 | `cos_thetaTilde_lt_one` / `one_lt_gamma1R_thetaTilde_checkIndex` | `cos θ~_μ < 1`, `γ_1(θ~_μ) > 1` | 章 015 `gamma1_gt_1_theta_tilde` |
-| `gammaFn_thetaTilde_pos` | **`γ(θ~_μ) > 0`** | 章 015 `def_gamma_theta_tilde_mu` |
+| `gammaFn_thetaTilde_pos` | **`γ(θ~_μ) > 0`** | 章 015 `gamma_theta_tilde_mu_positive` |
 | `checkIdxFinset_injOn` / `sum_checkIdx` | `𝓜̌` 上の和を `{0,…,M-1}` 上の和へ付け替える（`μ = k+1`） | `max_eigenvalue_of_V_plus_simple` (1) の `Θ^{(1/2)}_M` の元数え |
 | `tagPoint_half_eq_thetaTilde` | `t^{(M)}_μ|_{δ=1/2} = θ~_μ` | 同 (1) |
 | `checkBigLambda_univ_eq_LambdaM` | **`Λ̌_max = Λ^{(1/2)}_M`** | `max_eigenvalue_of_V_plus_simple` (1) |

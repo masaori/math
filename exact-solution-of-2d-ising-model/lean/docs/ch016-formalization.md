@@ -143,7 +143,7 @@
 | --- | --- | --- |
 | `hga : ∀ μ ∈ 𝓜̌, γ_2(θ̃_μ) ≠ 0` | 015 章 `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero_of_checkIndex` |
 | `hlamPlus` / `hlamMinus : γ_1(θ̃_μ) ± r_μ = e^{±γ(θ̃_μ)}` | 015 章 `lambda_eq_exp_gamma_theta_tilde` | `gamma1_add_checkR_eq_exp` / `gamma1_sub_checkR_eq_exp` |
-| `g : ℤ → ℂ`（重み `γ(θ̃_μ)`）と `hgconj : γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 015 章 `def_gamma_theta_tilde_mu` | `gammaTildeC` / `gammaTildeC_conj` |
+| `g : ℤ → ℂ`（重み `γ(θ̃_μ)`）と `hgconj : γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | `def_gamma_theta` の `θ = θ̃_μ` での値 | `gammaTildeC` / `gammaTildeC_conj` |
 | `hT : ∀ j, ActsBy T_{V^{(+)}} (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y` | `TVPlus_actsBy_checkZY` |
 
 原文 `def_check_fermi` が `P̌_μ`（015 章 `diagonalization_check_P_D`）の列として

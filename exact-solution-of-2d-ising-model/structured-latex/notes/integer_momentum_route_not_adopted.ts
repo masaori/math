@@ -3702,8 +3702,8 @@ s_1^2 c_2^2 (s_2^*)^2
     ],
   },
   {
-    id: "note_Athetatilde_008_definition_gamma_theta_tilde_integer_route_TV1_hatZ_hatY_034a_definition_gamma_theta_mu",
-    targets: ["def_gamma_theta_tilde_mu"],
+    id: "note_Athetatilde_001b_definition_gamma_theta_integer_route_TV1_hatZ_hatY_034a_definition_gamma_theta_mu",
+    targets: ["def_gamma_theta"],
     title: { tex: String.raw`\gamma(\theta_\mu) \text{ の定義}` },
     origin: { path: "_old/typst/parts/008_T_V1_hatZとhatZ_hatYの関係/033_definition_gamma_theta_mu.typ", ordinal: 34 },
     body: [

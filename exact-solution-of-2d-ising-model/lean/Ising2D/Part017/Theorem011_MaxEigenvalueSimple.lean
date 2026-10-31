@@ -3,7 +3,7 @@
 
 対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `max_eigenvalue_of_V_plus_simple`（`evenEigen_011_theorem_...`）。
-あわせて章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`（`γ(θ~_μ) > 0`）をここで証明する。
+あわせて章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `gamma_theta_tilde_mu_positive`（`γ(θ~_μ) > 0`）をここで証明する。
 
 **必要十分版**は `Ising2D/NecSuf/SimpleEigenvalue.lean`:
 - (2) の狭義最大性 → `NecSuf.sum_weight_lt_of_ne_univ`
@@ -17,7 +17,7 @@
   `cos θ~_μ < 1`（`0 < θ~_μ < 2π` による）  かつ  `sinh 2K_1 · sinh 2K_2^* > 0`
 
 から `γ_1(θ~_μ) > cosh(2K_1 - 2K_2^*) ≥ 1` が**すべての `μ ∈ 𝓜̌`、
-すべての `K_1, K_2 > 0`（臨界点を含む）で**成り立ち、`Real.arcosh_pos` により
+すべての `K_1, K_2 > 0`（臨界点を含む）で**成り立ち、`NecSuf.arcosh_pos_of_one_lt`（人手 `gamma_theta_tilde_mu_positive` と同じ背理法の鎖）により
 `γ(θ~_μ) > 0` が従う。これが本章の最終結論を可能にしている。
 
 ## 依存
@@ -25,17 +25,18 @@
 `Ising2D.LambdaM`（`Part012/Theorem005_OnsagerFreeEnergy.lean`、形式化済み）は
 人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M` そのものである。
 `Ising2D.gammaFn`（`Part012/Claim001_Gamma1LowerBound.lean`）が
-`gamma1_lower_bound_all_theta` の `γ(θ) = arccosh(γ_1(θ))` である。
+`def_gamma_theta` の `γ(θ) = arccosh(γ_1(θ))` である。
 -/
 import Ising2D.Part017.Theorem010_EigenvaluesVPlus
 import Ising2D.Part012.Theorem005_OnsagerFreeEnergy
+import Ising2D.NecSuf.ArcoshExp
 
 namespace Ising2D
 
 open Matrix
 open scoped ComplexOrder
 
-/-! ## `γ(θ~_μ) > 0`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`） -/
+/-! ## `γ(θ~_μ) > 0`（章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `gamma_theta_tilde_mu_positive`） -/
 
 section GammaPos
 
@@ -71,12 +72,12 @@ theorem one_lt_gamma1R_thetaTilde_checkIndex (P : IsingParam) (hM : M ≠ 0) {μ
   simp only [gamma1R, IsingParam.const]
   nlinarith [hcs, hone, hpos]
 
-/-- **章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `def_gamma_theta_tilde_mu`**: `γ(θ~_μ) > 0`（`μ ∈ 𝓜̌`）。
+/-- **章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `gamma_theta_tilde_mu_positive`**: `γ(θ~_μ) > 0`（`μ ∈ 𝓜̌`）。
 
 章 009 の `γ(θ_μ) ≥ 0` との違いがここにあり、単純性の根拠である。 -/
 theorem gammaFn_thetaTilde_pos (P : IsingParam) (hM : M ≠ 0) {μ : ℤ}
     (hμ : CheckIndex M μ) : 0 < gammaFn P (thetaTilde M μ) :=
-  Real.arcosh_pos (one_lt_gamma1R_thetaTilde_checkIndex P hM hμ)
+  NecSuf.arcosh_pos_of_one_lt (one_lt_gamma1R_thetaTilde_checkIndex P hM hμ)
 
 end GammaPos
 

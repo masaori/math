@@ -3,6 +3,7 @@
 
 人手証明（正本は `structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts`）:
 - `freeenergy_001_claim_gamma1_lower_bound_all_theta`（ラベル `gamma1_lower_bound_all_theta`）
+- `Athetatilde_001b_definition_gamma_theta`（ラベル `def_gamma_theta`。`gammaFn` 以下）
 
 **具体版**（人手証明と同じ抽象度）。必要十分版は `Ising2D/NecSuf/CoshLowerBound.lean`
 （`Ising2D.NecSuf.cosh_sub_le_cosh_mul_cosh_sub` / `one_le_cosh_mul_cosh_sub`）と
@@ -107,7 +108,7 @@ theorem gamma1_lower_bound_all_theta (P : IsingParam) (θ : ℝ) :
     Real.cosh (2 * P.K1 - 2 * P.K2star) ≤ gamma1R P.const θ ∧ 1 ≤ gamma1R P.const θ :=
   ⟨gamma1R_ge_cosh_sub P θ, one_le_gamma1R P θ⟩
 
-/-- 原文 `γ(θ) := arccosh(γ_1(θ))`（`def_gamma_theta_mu` の実数 `θ` への拡張）。 -/
+/-- **人手 `def_gamma_theta`**: `γ(θ) := arccosh(γ_1(θ))`（`θ ∈ ℝ`）。 -/
 noncomputable def gammaFn (P : IsingParam) (θ : ℝ) : ℝ :=
   Real.arcosh (gamma1R P.const θ)
 
@@ -116,11 +117,11 @@ theorem gammaFn_eq (P : IsingParam) (θ : ℝ) :
     gammaFn P θ = Real.arcosh (Real.cosh (2 * P.K1) * Real.cosh (2 * P.K2star)
       - Real.sinh (2 * P.K1) * Real.sinh (2 * P.K2star) * Real.cos θ) := rfl
 
-/-- `γ(θ) ∈ ℝ_{≥0}`（人手証明 `gamma1_lower_bound_all_theta` の結論の後半）。 -/
+/-- `γ(θ) ∈ ℝ_{≥0}`（人手 `def_gamma_theta`。well-defined 性は `gamma1_lower_bound_all_theta` の `γ_1(θ) ≥ 1`）。 -/
 theorem gammaFn_nonneg (P : IsingParam) (θ : ℝ) : 0 ≤ gammaFn P θ :=
   Real.arcosh_nonneg (one_le_gamma1R P θ)
 
-/-- `γ` が実際に `γ_1` の `arccosh` であること（`cosh γ(θ) = γ_1(θ)`）。 -/
+/-- `cosh γ(θ) = γ_1(θ)`（人手 `def_gamma_theta` の末尾。`arccosh_properties` (2)）。 -/
 theorem cosh_gammaFn (P : IsingParam) (θ : ℝ) :
     Real.cosh (gammaFn P θ) = gamma1R P.const θ :=
   Real.cosh_arcosh (one_le_gamma1R P θ)

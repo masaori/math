@@ -24,9 +24,9 @@ Lean: `Ising2D/Part012/`（具体版）、`Ising2D/NecSuf/`（必要十分版）
 | `Ising2D.gamma1R_ge_cosh_sub` | `γ_1(θ) ≥ cosh(2K_1-2K_2^*)`（`∀θ ∈ ℝ`） | `gamma1_lower_bound_all_theta` 第 1 式 |
 | `Ising2D.one_le_gamma1R` | `γ_1(θ) ≥ 1`（`∀θ ∈ ℝ`） | 同 第 2 式 |
 | `Ising2D.gamma1_lower_bound_all_theta` | 上 2 つを並べた形 | `gamma1_lower_bound_all_theta` |
-| `Ising2D.gammaFn` | `γ(θ) := arcosh(γ_1(θ))` | `def_gamma_theta_mu` の実数 `θ` への拡張 |
+| `Ising2D.gammaFn` | `γ(θ) := arcosh(γ_1(θ))` | `def_gamma_theta` |
 | `Ising2D.gammaFn_eq` | `γ` の明示形（`cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ` の `arcosh`） | `onsager_free_energy_expression` の `γ` |
-| `Ising2D.gammaFn_nonneg` | `γ(θ) ∈ ℝ_{≥0}` | `gamma1_lower_bound_all_theta` 結論の後半 |
+| `Ising2D.gammaFn_nonneg` | `γ(θ) ∈ ℝ_{≥0}` | `def_gamma_theta` |
 | `Ising2D.cosh_gammaFn` | `cosh γ(θ) = γ_1(θ)` | 同上（`arccosh` が逆写像であること） |
 | `Ising2D.continuous_gamma1R` | `γ_1` は連続 | `gamma_is_continuous` Step 1 前半 |
 | `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 同 Step 1 後半 |

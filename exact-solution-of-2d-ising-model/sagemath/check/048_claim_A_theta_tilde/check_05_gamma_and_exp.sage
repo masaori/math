@@ -1,11 +1,13 @@
 # ---------------------------------------------------------
 # SageMath: gamma(theta~_mu) = arccosh(gamma_1(theta~_mu)) と lambda_pm = e^{pm gamma}
-# 対象: structured-latex def_gamma_theta_tilde_mu, lambda_eq_exp_gamma_theta_tilde
-#   (1) cosh(gamma(theta~)) = gamma_1(theta~)
+# 対象: structured-latex def_gamma_theta（theta = theta~_mu での値）, gamma_theta_tilde_mu_positive,
+#       lambda_eq_exp_gamma_theta_tilde
+#   (1) cosh(gamma(theta~)) = gamma_1(theta~)（def_gamma_theta。gamma_theta_tilde_mu_positive の証明の鎖の 1 行目）
 #   (2) sinh(gamma(theta~)) = |gamma_2(theta~)|
 #   (3) lambda_+ = e^{+gamma(theta~)}, lambda_- = e^{-gamma(theta~)}
-#   (4) gamma(theta~) > 0（半整数運動量では gamma_1 > 1 なので厳密に正）
+#   (4) gamma(theta~) > 0（半整数運動量では gamma_1 > 1 なので厳密に正。gamma_theta_tilde_mu_positive）
 #       対比: 整数運動量では臨界点で gamma(theta_M) = 0 になりうる
+#   (5) cosh 0 = (exp 0 + exp(-0))/2 = (exp 0 + exp 0)/2 = (1+1)/2 = 1（gamma_theta_tilde_mu_positive の証明の鎖の 3〜6 行目。厳密計算）
 # ---------------------------------------------------------
 import os
 _dir = os.path.dirname(os.path.abspath(__file__)) if '__file__' in dir() else '.'
@@ -34,6 +36,18 @@ for (K1, K2) in K_CASES:
     print(f"  {case_label(K1, K2)}: cosh {w['cosh']:.1e}, sinh {w['sinh']:.1e}, "
           f"lambda_+ {w['lp']:.1e}, lambda_- {w['lm']:.1e}, min gamma(theta~) = {float(gmin):.3e} "
           f"-> {'PASS' if ok else 'FAIL'}")
+
+print("=== cosh 0 = 1 の鎖（厳密） ===")
+z = SR(0)
+steps = [
+    ("cosh 0 = (exp 0 + exp(-0))/2", bool(cosh(z) == (exp(z) + exp(-z)) / 2)),
+    ("(exp 0 + exp(-0))/2 = (exp 0 + exp 0)/2", bool((exp(z) + exp(-z)) / 2 == (exp(z) + exp(z)) / 2)),
+    ("(exp 0 + exp 0)/2 = (1 + 1)/2", bool((exp(z) + exp(z)) / 2 == (1 + 1) / QQ(2))),
+    ("(1 + 1)/2 = 1", bool((1 + 1) / QQ(2) == 1)),
+]
+for name, ok_s in steps:
+    all_ok = ok_s and all_ok
+    print(f"  {name}: {'PASS' if ok_s else 'FAIL'}")
 
 print("=== 対比: 整数運動量 theta_M = 2pi での gamma（臨界点では 0 になる） ===")
 for (K1, K2) in K_CASES:

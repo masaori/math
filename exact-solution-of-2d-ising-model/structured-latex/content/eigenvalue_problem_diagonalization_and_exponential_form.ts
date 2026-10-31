@@ -616,93 +616,6 @@ P_{m-1}Y_m
     },
   },
   {
-    id: "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-    kind: "claim",
-    origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 3 },
-    title: { tex: String.raw`\gamma_1(\theta) \geq \cosh(2K_1 - 2K_2^*) \geq 1 \quad (\forall\theta\in\mathbb{R})` },
-    labels: ["gamma1_lower_bound_all_theta"],
-    statement: [
-      paragraph([
-        ref("def_A_theta"),
-        " の ",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
-        " を**すべての実数** ",
-        math(String.raw`\theta`),
-        " について考える。このとき",
-      ]),
-      displayMath(
-        String.raw`\gamma_1(\theta) \geq \cosh\left(2K_1 - 2K_2^*\right) \geq 1
-\qquad (\forall \theta \in \mathbb{R})`,
-      ),
-      paragraph([
-        "とくに ",
-        math(String.raw`\gamma(\theta) := \mathrm{arccosh}\left(\gamma_1(\theta)\right) \in \mathbb{R}_{\geq 0}`),
-        " が**すべての実数** ",
-        math(String.raw`\theta`),
-        " について定まる。",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        "準備として、",
-        ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`K_1, K_2^* > 0`),
-        " なので ",
-        math(String.raw`s_1 = \sinh 2K_1 > 0`),
-        "、",
-        math(String.raw`s_2^* = \sinh 2K_2^* > 0`),
-        "、したがって ",
-        math(String.raw`s_1s_2^* > 0`),
-        " である。このとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_1(\theta)
-&= c_1c_2^* - s_1s_2^*\cos\theta
-&&(\because\ \gamma_1(\theta)\ \text{の定義})\\
-&\geq c_1c_2^* - s_1s_2^*\cdot 1
-&&(\because\ \cos\theta\leq 1\ \text{と}\ s_1s_2^*>0\text{。負号つきの項なので向きが変わる})\\
-&= c_1c_2^* - s_1s_2^*
-&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
-&= \cosh\left(2K_1-2K_2^*\right)
-&&(\because\ \text{加法定理}\ \cosh(x-y)=\cosh x\cosh y-\sinh x\sinh y\ \text{を}\ x=2K_1,\ y=2K_2^*\ \text{に適用})\\
-&\geq 1
-&&(\because\ \cosh\ \text{は実数で}\ 1\ \text{以上})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_A_theta"),
-        "、",
-        ref("def_transfer_matrix_symbols"),
-        "、",
-        ref("cosh_sinh_basic_properties"),
-        "）。",
-        math(String.raw`\mathrm{arccosh}`),
-        " は ",
-        math(String.raw`[1,\infty)`),
-        " 上で定義された（",
-        math(String.raw`\cosh|_{[0,\infty)}`),
-        " の逆写像としての）実数値関数なので ",
-        math(String.raw`\gamma(\theta)`),
-        " が定まり、値は ",
-        math(String.raw`\mathbb{R}_{\geq 0}`),
-        " に属する。",
-      ]),
-    ],
-    conversion: {
-      status: "added",
-      notes: [
-        "2026-08-18: 式変形の書き方を統一した。加法定理の適用と cosθ≤1 による評価が" +
-          "散文で継がれた 2 つの表示に分かれていたのを、γ_1(θ) から 1 までの一続きの鎖にし、" +
-          "根拠を行末の (∵ …) へ揃えた。引いていた根拠（加法定理・K_1,K_2^*>0・cosh≥1）は" +
-          "すべて行末と直後の参照に残した。段は増えており、減った段は無い。",
-        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
-      ],
-    },
-  },
-  {
     id: "evensector_003_definition_half_integer_modes",
     kind: "claim",
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
@@ -1469,6 +1382,152 @@ A(\theta)_{2,1}
         "008 章の TV1_hatZ_hatY_020_definition_gamma1_gamma2 が同じ 2 つの量を θ_μ（整数運動量）に限って導入しているが、" +
           "そのブロックにはラベルが無く参照できない。半整数運動量 θ~_μ でも同じ式を使うので、ここで θ ∈ R の関数として" +
           "ラベル付きで定義し直した（式は 008 章のものと文字どおり同一。A(θ) 自体は def_A_theta を再定義していない）。",
+      ],
+    },
+  },
+  {
+    id: "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+    kind: "claim",
+    origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 3 },
+    title: { tex: String.raw`\gamma_1(\theta) \geq \cosh(2K_1 - 2K_2^*) \geq 1 \quad (\forall\theta\in\mathbb{R})` },
+    labels: ["gamma1_lower_bound_all_theta"],
+    statement: [
+      paragraph([
+        ref("def_gamma1_gamma2_of_theta"),
+        " の ",
+        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
+        " を**すべての実数** ",
+        math(String.raw`\theta`),
+        " について考える。このとき",
+      ]),
+      displayMath(
+        String.raw`\gamma_1(\theta) \geq \cosh\left(2K_1 - 2K_2^*\right) \geq 1
+\qquad (\forall \theta \in \mathbb{R})`,
+      ),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        ref("def_transfer_matrix_symbols"),
+        " より ",
+        math(String.raw`K_1, K_2^* > 0`),
+        " なので ",
+        math(String.raw`s_1 = \sinh 2K_1 > 0`),
+        "、",
+        math(String.raw`s_2^* = \sinh 2K_2^* > 0`),
+        "、したがって ",
+        math(String.raw`s_1s_2^* > 0`),
+        " である。このとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_1(\theta)
+&= c_1c_2^* - s_1s_2^*\cos\theta
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
+&\geq c_1c_2^* - s_1s_2^*\cdot 1
+&&(\because\ \cos\theta\leq 1\ \text{と}\ s_1s_2^*>0\text{。負号つきの項なので向きが変わる})\\
+&= c_1c_2^* - s_1s_2^*
+&&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
+&= \cosh\left(2K_1-2K_2^*\right)
+&&(\because\ \text{加法定理}\ \cosh(x-y)=\cosh x\cosh y-\sinh x\sinh y\ \text{を}\ x=2K_1,\ y=2K_2^*\ \text{に適用})\\
+&\geq 1
+&&(\because\ \cosh\ \text{は実数で}\ 1\ \text{以上})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（引いたブロックは ",
+        ref("def_gamma1_gamma2_of_theta"),
+        "、",
+        ref("def_transfer_matrix_symbols"),
+        "、",
+        ref("cosh_sinh_basic_properties"),
+        "）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-08-18: 式変形の書き方を統一した。加法定理の適用と cosθ≤1 による評価が" +
+          "散文で継がれた 2 つの表示に分かれていたのを、γ_1(θ) から 1 までの一続きの鎖にし、" +
+          "根拠を行末の (∵ …) へ揃えた。引いていた根拠（加法定理・K_1,K_2^*>0・cosh≥1）は" +
+          "すべて行末と直後の参照に残した。段は増えており、減った段は無い。",
+        "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-10-31: statement の中で定めていた γ(θ) := arccosh(γ_1(θ))（θ∈ℝ）と、証明の末尾のその well-defined 性の文を、" +
+          "独立した定義 def_gamma_theta へ移した（1 ブロック 1 主張）。不等式の主張と証明は変えていない。" +
+          "γ_1 の出典を、γ_1 を定めていない def_A_theta から def_gamma1_gamma2_of_theta に直し、そのためにこのブロックを def_gamma1_gamma2_of_theta の直後へ移した。",
+      ],
+    },
+  },
+  {
+    id: "Athetatilde_001b_definition_gamma_theta",
+    kind: "definition",
+    origin: { path: "structured-latex/content/012_free_energy.ts", ordinal: 3 },
+    title: { tex: String.raw`\gamma(\theta)\ (\theta \in \mathbb{R}) \text{ の定義}` },
+    labels: ["def_gamma_theta"],
+    statement: [
+      paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の記号のもと ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とし、",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について ",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の ",
+        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta \in \mathbb{R}`),
+        " を考える。",
+        ref("gamma1_lower_bound_all_theta"),
+        " より ",
+        math(String.raw`\gamma_1(\theta) \geq 1`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\gamma(\theta) := \mathrm{arccosh}\left(\gamma_1(\theta)\right) \in \mathbb{R}_{\geq 0}`,
+      ),
+      paragraph([
+        "と定める。ここで ",
+        math(String.raw`\mathrm{arccosh}(y)`),
+        "（",
+        math(String.raw`y \geq 1`),
+        "）は ",
+        math(String.raw`\cosh t = y`),
+        " を満たす唯一の ",
+        math(String.raw`t \in \mathbb{R}_{\geq 0}`),
+        " である（",
+        ref("def_arccosh"),
+        "、",
+        ref("arccosh_properties"),
+        " (1)–(3)）。とくに ",
+        math(String.raw`\cosh\gamma(\theta) = \gamma_1(\theta)`),
+        " である（",
+        ref("arccosh_properties"),
+        " (2)）。",
+      ]),
+      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）について ",
+        math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
+        "（",
+        ref("antiperiodic_exp_sum"),
+        "）であり、",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        " はこの ",
+        math(String.raw`\gamma`),
+        " の ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        " での値を表す。",
+      ]),
+    ],
+    proof: [],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-10-31: gamma1_lower_bound_all_theta の statement の中で定めていた γ(θ) := arccosh(γ_1(θ))（θ∈ℝ）と、" +
+          "旧ラベル def_gamma_theta_tilde_mu の γ(θ~_μ) := arccosh(γ_1(θ~_μ)) を、この一つの定義へまとめた（1 ブロック 1 主張）。" +
+          "そのブロックには γ(θ~_μ) > 0 の主張だけを残し、ラベルを gamma_theta_tilde_mu_positive に改めた。式は両者のものと文字どおり同一である。",
       ],
     },
   },
@@ -2793,11 +2852,11 @@ t^2
     },
   },
   {
-    id: "Athetatilde_008_definition_gamma_theta_tilde",
-    kind: "definition",
+    id: "Athetatilde_008_claim_gamma_theta_tilde_positive",
+    kind: "claim",
     origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 10 },
-    title: { tex: String.raw`\gamma(\tilde\theta_\mu) \text{ の定義}` },
-    labels: ["def_gamma_theta_tilde_mu"],
+    title: { tex: String.raw`\gamma(\tilde\theta_\mu) > 0` },
+    labels: ["gamma_theta_tilde_mu_positive"],
     statement: [
       paragraph([
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
@@ -2805,53 +2864,65 @@ t^2
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
-        " について、",
-        ref("gamma1_gt_1_theta_tilde"),
+        " とする。",
+        ref("def_gamma_theta"),
         " の ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu) \geq 1`),
-        " により well-defined であり、",
+        math(String.raw`\gamma`),
+        " の ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        " での値 ",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(String.raw`\gamma(\tilde\theta_\mu) > 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_gamma_theta"),
+        " より ",
+        math(String.raw`\gamma(\tilde\theta_\mu) \geq 0`),
+        " である。",
+        math(String.raw`\gamma(\tilde\theta_\mu) = 0`),
+        " と仮定すると",
       ]),
       displayMath(
-        String.raw`\gamma(\tilde\theta_\mu) := \mathrm{arccosh}\left(\gamma_1(\tilde\theta_\mu)\right) \in \mathbb{R}_{\geq 0}`,
+        String.raw`\begin{aligned}
+\gamma_1(\tilde\theta_\mu)
+&= \cosh\gamma(\tilde\theta_\mu)
+&&(\because\ \blkref{def_gamma_theta}\ (\cosh\gamma(\theta) = \gamma_1(\theta))\ \text{を}\ \theta = \tilde\theta_\mu\ \text{に適用})\\
+&= \cosh 0
+&&(\because\ \text{仮定}\ \gamma(\tilde\theta_\mu) = 0)\\
+&= \frac{\exp 0 + \exp(-0)}{2}
+&&(\because\ \blkref{def_cosh_sinh})\\
+&= \frac{\exp 0 + \exp 0}{2}
+&&(\because\ -0 = 0)\\
+&= \frac{1 + 1}{2}
+&&(\because\ \blkref{scalar_exp_zero})\\
+&= 1
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`,
       ),
       paragraph([
-        "と定める。ここで ",
-        math(String.raw`\mathrm{arccosh}(y)`),
-        "（",
-        math(String.raw`y \geq 1`),
-        "）は ",
-        math(String.raw`\cosh t = y`),
-        " を満たす唯一の ",
-        math(String.raw`t \in \mathbb{R}_{\geq 0}`),
-        " である（",
-        ref("def_arccosh"),
-        "、",
-        ref("arccosh_properties"),
-        " (1)–(3)）。",
-      ]),
-      paragraph([
-        "さらに ",
+        "となり、",
         ref("gamma1_gt_1_theta_tilde"),
         " の ",
         math(String.raw`\gamma_1(\tilde\theta_\mu) > 1`),
-        " より",
-      ]),
-      displayMath(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-      paragraph([
-        "である（",
-        math(String.raw`\gamma(\tilde\theta_\mu) = 0`),
-        " なら ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu) = \cosh 0 = 1`),
-        " となり矛盾する）。",
+        " に矛盾する。よって ",
+        math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
+        " である。",
       ]),
     ],
-    proof: [],
     conversion: {
       status: "added",
       notes: [
         "def_gamma_theta_mu（008 章）と同じ arccosh の使い方に揃えたうえで、半整数運動量に固有の帰結" +
           "「γ(θ~_μ) > 0（狭義）」を statement に含めた。C′-15（最大固有値の一意性）で使う。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-10-31: γ(θ~_μ) := arccosh(γ_1(θ~_μ)) の定義を def_gamma_theta（θ∈ℝ の γ(θ) の定義）へまとめ、" +
+          "このブロックには γ(θ~_μ) > 0 の主張だけを残した（1 ブロック 1 主張）。中身に合わせ、ラベルを def_gamma_theta_tilde_mu から gamma_theta_tilde_mu_positive へ、" +
+          "id を Athetatilde_008_definition_gamma_theta_tilde から Athetatilde_008_claim_gamma_theta_tilde_positive へ改めた。" +
+          "statement の括弧書きにあった背理法を、式変形の形で証明へ移した。中身は変えていない。",
       ],
     },
   },
@@ -2888,14 +2959,16 @@ t^2
         "、",
         math(String.raw`\gamma := \gamma(\tilde\theta_\mu) > 0`),
         " と略記する（",
-        ref("def_gamma_theta_tilde_mu"),
+        ref("def_gamma_theta"),
+        "、",
+        ref("gamma_theta_tilde_mu_positive"),
         "）。",
       ]),
       paragraph([
         "Step 1（",
         math(String.raw`\sinh\gamma = r`),
         "）。",
-        ref("def_gamma_theta_tilde_mu"),
+        ref("def_gamma_theta"),
         " より ",
         math(String.raw`\cosh\gamma = g_1`),
         " であり、",
@@ -2914,7 +2987,7 @@ t^2
 &= \left(\cosh\gamma\right)^2 - 1
    \quad (\because \text{cosh\_sinh\_basic\_properties}\ (\cosh^2 - \sinh^2 = 1)) \\
 &= g_1^2 - 1
-   \quad (\because \text{def\_gamma\_theta\_tilde\_mu}\ (\cosh\gamma = g_1)) \\
+   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
 &= \left(1 + r^2\right) - 1
    \quad (\because \text{det\_A\_theta\_tilde}\ (g_1^2 = 1 + r^2)) \\
 &= r^2
@@ -2946,7 +3019,7 @@ t^2
 &= \cosh\gamma + \sinh\gamma
    \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
 &= g_1 + \sinh\gamma
-   \quad (\because \text{def\_gamma\_theta\_tilde\_mu}\ (\cosh\gamma = g_1)) \\
+   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
 &= g_1 + r
    \quad (\because \text{Step 1}) \\
 &= \lambda_{+,\mu}
@@ -2955,7 +3028,7 @@ t^2
 &= \cosh\gamma - \sinh\gamma
    \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
 &= g_1 - \sinh\gamma
-   \quad (\because \text{def\_gamma\_theta\_tilde\_mu}\ (\cosh\gamma = g_1)) \\
+   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
 &= g_1 - r
    \quad (\because \text{Step 1}) \\
 &= \lambda_{-,\mu}
@@ -3416,7 +3489,7 @@ t^2
         " (2) より ",
         math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
         " なので ",
-        ref("def_gamma_theta_tilde_mu"),
+        ref("def_gamma_theta"),
         " の ",
         math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \mathrm{arccosh}\!\left(\gamma_1(\tilde\theta_{M_{\mathrm{col}}+1-\mu})\right)`),
         " が定義されており、これは ",
@@ -3881,7 +3954,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\c
         "、",
         math(String.raw`\gamma(\tilde\theta_\mu)`),
         " は ",
-        ref("def_gamma_theta_tilde_mu"),
+        ref("def_gamma_theta"),
         "）。",
       ]),
     ],
@@ -5303,7 +5376,7 @@ V^{(+)}
         " の ",
         math(String.raw`V^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "、",
-        ref("def_gamma_theta_tilde_mu"),
+        ref("def_gamma_theta"),
         " の ",
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
         "（",

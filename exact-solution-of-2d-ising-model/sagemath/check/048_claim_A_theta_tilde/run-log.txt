@@ -119,23 +119,29 @@ RESULT: PASS
   K1=0.3, K2=5 (s1*s2=7011.614161): det 1.2e-12, gamma_1^2+gamma_2gamma_2(-) 1.2e-12, lambda_+lambda_- 1.2e-12, gamma_1^2-1-|gamma_2|^2 1.2e-12, min(gamma_1 - 1) = 1.854e-01 -> PASS
 RESULT: PASS
 ##### check_05_gamma_and_exp.sage
+# 2026-10-31 に再実行（Linux、SageMath を micromamba の環境から。(5) cosh 0 = 1 の鎖の各行の厳密判定を足した版）
 === gamma(theta~) = arccosh(gamma_1) と lambda_pm = e^{pm gamma} ===
-  K1=0.4, K2=0.4838591726 (s1*s2=1): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 6.7e-16, min gamma(theta~) = 3.448e-01 -> PASS
-  K1=0.4406867935, K2=0.4406867935 (s1*s2=1): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 8.9e-16, min gamma(theta~) = 3.877e-01 -> PASS
-  K1=0.2, K2=0.811324092 (s1*s2=1): cosh 0.0e-14, sinh 1.7e-15, lambda_+ 1.8e-15, lambda_- 1.8e-15, min gamma(theta~) = 1.601e-01 -> PASS
-  K1=1.2, K2=0.09096805134 (s1*s2=1): cosh 2.1e-14, sinh 2.1e-14, lambda_+ 2.8e-14, lambda_- 1.8e-14, min gamma(theta~) = 1.855e+00 -> PASS
+  K1=0.4, K2=0.4838591726 (s1*s2=1): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 9.7e-16, min gamma(theta~) = 3.448e-01 -> PASS
+  K1=0.4406867935, K2=0.4406867935 (s1*s2=1): cosh 4.4e-16, sinh 1.1e-15, lambda_+ 1.1e-15, lambda_- 1.1e-15, min gamma(theta~) = 3.877e-01 -> PASS
+  K1=0.2, K2=0.811324092 (s1*s2=1): cosh 0.0e-14, sinh 1.8e-15, lambda_+ 1.8e-15, lambda_- 1.8e-15, min gamma(theta~) = 1.601e-01 -> PASS
+  K1=1.2, K2=0.09096805134 (s1*s2=1): cosh 2.1e-14, sinh 2.1e-14, lambda_+ 2.8e-14, lambda_- 1.7e-14, min gamma(theta~) = 1.855e+00 -> PASS
   K1=0.4, K2=0.4838591731 (s1*s2=1.000000001): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 8.9e-16, lambda_- 6.7e-16, min gamma(theta~) = 3.448e-01 -> PASS
-  K1=0.4, K2=0.4838591721 (s1*s2=0.9999999987): cosh 4.4e-16, sinh 4.4e-16, lambda_+ 8.9e-16, lambda_- 6.9e-16, min gamma(theta~) = 3.448e-01 -> PASS
-  K1=0.4, K2=0.4839075585 (s1*s2=1.000129431): cosh 4.4e-16, sinh 8.9e-16, lambda_+ 1.8e-15, lambda_- 5.8e-16, min gamma(theta~) = 3.448e-01 -> PASS
+  K1=0.4, K2=0.4838591721 (s1*s2=0.9999999987): cosh 4.4e-16, sinh 4.4e-16, lambda_+ 4.4e-16, lambda_- 6.9e-16, min gamma(theta~) = 3.448e-01 -> PASS
+  K1=0.4, K2=0.4839075585 (s1*s2=1.000129431): cosh 4.4e-16, sinh 5.6e-16, lambda_+ 8.9e-16, lambda_- 5.6e-16, min gamma(theta~) = 3.448e-01 -> PASS
   K1=0.4, K2=0.4838107867 (s1*s2=0.9998705786): cosh 2.2e-16, sinh 1.3e-15, lambda_+ 1.1e-15, lambda_- 1.1e-15, min gamma(theta~) = 3.448e-01 -> PASS
-  K1=0.4406867935, K2=0.4406872342 (s1*s2=1.000001246): cosh 4.4e-16, sinh 6.7e-16, lambda_+ 8.9e-16, lambda_- 5.6e-16, min gamma(theta~) = 3.877e-01 -> PASS
-  K1=0.4406867935, K2=0.4406863528 (s1*s2=0.9999987535): cosh 4.4e-16, sinh 1.0e-15, lambda_+ 8.9e-16, lambda_- 1.2e-15, min gamma(theta~) = 3.877e-01 -> PASS
-  K1=0.4, K2=0.8 (s1*s2=2.10975611): cosh 2.2e-16, sinh 4.4e-16, lambda_+ 4.4e-16, lambda_- 3.3e-16, min gamma(theta~) = 4.558e-01 -> PASS
+  K1=0.4406867935, K2=0.4406872342 (s1*s2=1.000001246): cosh 4.4e-16, sinh 7.2e-16, lambda_+ 8.9e-16, lambda_- 6.7e-16, min gamma(theta~) = 3.877e-01 -> PASS
+  K1=0.4406867935, K2=0.4406863528 (s1*s2=0.9999987535): cosh 4.4e-16, sinh 7.8e-16, lambda_+ 8.9e-16, lambda_- 7.8e-16, min gamma(theta~) = 3.877e-01 -> PASS
+  K1=0.4, K2=0.8 (s1*s2=2.10975611): cosh 2.2e-16, sinh 3.3e-16, lambda_+ 4.4e-16, lambda_- 3.3e-16, min gamma(theta~) = 4.558e-01 -> PASS
   K1=0.7, K2=0.3 (s1*s2=1.212380372): cosh 1.8e-15, sinh 1.8e-15, lambda_+ 3.6e-15, lambda_- 1.8e-15, min gamma(theta~) = 6.818e-01 -> PASS
   K1=0.25, K2=1.1 (s1*s2=2.32257658): cosh 0.0e-14, sinh 1.1e-15, lambda_+ 1.1e-15, lambda_- 1.1e-15, min gamma(theta~) = 3.075e-01 -> PASS
   K1=1.2, K2=0.3 (s1*s2=3.48009441): cosh 3.6e-15, sinh 5.3e-15, lambda_+ 7.1e-15, lambda_- 4.0e-15, min gamma(theta~) = 1.529e+00 -> PASS
-  K1=0.05, K2=0.1 (s1*s2=0.02016717304): cosh 1.8e-15, sinh 2.7e-15, lambda_+ 3.6e-15, lambda_- 1.7e-15, min gamma(theta~) = 2.214e+00 -> PASS
+  K1=0.05, K2=0.1 (s1*s2=0.02016717304): cosh 1.8e-15, sinh 2.7e-15, lambda_+ 3.6e-15, lambda_- 1.6e-15, min gamma(theta~) = 2.214e+00 -> PASS
   K1=0.3, K2=5 (s1*s2=7011.614161): cosh 0.0e-14, sinh 9.4e-13, lambda_+ 9.4e-13, lambda_- 9.4e-13, min gamma(theta~) = 5.999e-01 -> PASS
+=== cosh 0 = 1 の鎖（厳密） ===
+  cosh 0 = (exp 0 + exp(-0))/2: PASS
+  (exp 0 + exp(-0))/2 = (exp 0 + exp 0)/2: PASS
+  (exp 0 + exp 0)/2 = (1 + 1)/2: PASS
+  (1 + 1)/2 = 1: PASS
 === 対比: 整数運動量 theta_M = 2pi での gamma（臨界点では 0 になる） ===
   K1=0.4, K2=0.4838591726 (s1*s2=1): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 0.000e+00
   K1=0.4406867935, K2=0.4406867935 (s1*s2=1): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 0.000e+00
@@ -145,8 +151,8 @@ RESULT: PASS
   K1=0.4, K2=0.4838591721 (s1*s2=0.9999999987): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 0.000e+00
   K1=0.4, K2=0.4839075585 (s1*s2=1.000129431): gamma_1(2pi) = 1.000000003693, gamma(2pi) = 8.594e-05
   K1=0.4, K2=0.4838107867 (s1*s2=0.9998705786): gamma_1(2pi) = 1.000000003694, gamma(2pi) = 8.595e-05
-  K1=0.4406867935, K2=0.4406872342 (s1*s2=1.000001246): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 8.813e-07
-  K1=0.4406867935, K2=0.4406863528 (s1*s2=0.9999987535): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 8.811e-07
+  K1=0.4406867935, K2=0.4406872342 (s1*s2=1.000001246): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 8.811e-07
+  K1=0.4406867935, K2=0.4406863528 (s1*s2=0.9999987535): gamma_1(2pi) = 1.000000000000, gamma(2pi) = 8.813e-07
   K1=0.4, K2=0.8 (s1*s2=2.10975611): gamma_1(2pi) = 1.077251892963, gamma(2pi) = 3.906e-01
   K1=0.7, K2=0.3 (s1*s2=1.212380372): gamma_1(2pi) = 1.013916885639, gamma(2pi) = 1.666e-01
   K1=0.25, K2=1.1 (s1*s2=2.32257658): gamma_1(2pi) = 1.038745229406, gamma(2pi) = 2.775e-01

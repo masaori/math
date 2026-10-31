@@ -257,7 +257,7 @@ print(f"  gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = {float(min_abs
       f"-> {'0 から離れている' if min_abs_g2 > _sage_const_1en2  else '判定不能'}")
 print(f"  gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = {float(min_g1_minus_1):.3e} "
       f"-> {'狭義に正' if min_g1_minus_1 > _sage_const_1en6  else '判定不能'}")
-print(f"  def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = {float(min_gamma):.3e} "
+print(f"  gamma_theta_tilde_mu_positive:   min gamma(theta~_mu) = {float(min_gamma):.3e} "
       f"-> {'狭義に正' if min_gamma > _sage_const_1en6  else '判定不能'}")
 ok_all &= (min_abs_g2 > _sage_const_1en2 ) and (min_g1_minus_1 > _sage_const_1en6 ) and (min_gamma > _sage_const_1en6 )
 print(f"  段数（区別された等式の種類）: {len(S.worst)}")

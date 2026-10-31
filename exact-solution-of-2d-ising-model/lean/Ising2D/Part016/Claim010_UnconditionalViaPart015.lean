@@ -54,7 +54,7 @@ theorem checkPsi_eq_checkPmat_col (K : IsingConst) (M : ℕ) (μ : ℤ) :
       = checkPmat K M μ 0 1 • checkZ M μ + checkPmat K M μ 1 1 • checkY M μ := by
   simp [checkPsi, checkP, checkQ, checkPmat, sqrtM, checkR_eq_absGamma2, neg_div]
 
-/-! ## 重み `γ(θ̃_μ)`（015 章 `def_gamma_theta_tilde_mu`）を `ℤ → ℂ` の形で -/
+/-! ## 重み `γ(θ̃_μ)`（`def_gamma_theta` の `θ = θ̃_μ` での値）を `ℤ → ℂ` の形で -/
 
 variable (P : IsingParam)
 

@@ -9,14 +9,14 @@
     "2次元イジングモデル"
   ],
   "mathematicalToolPartTitle": "数学的道具立て",
-  "entryCount": 296,
+  "entryCount": 297,
   "classificationEntryCounts": {
     "数学的道具立て": 114,
-    "2次元イジングモデル": 182
+    "2次元イジングモデル": 183
   },
   "chapterPlacementProgress": {
-    "assignedChapterEntryCount": 175,
-    "placedUnderChapterHeadingEntryCount": 175,
+    "assignedChapterEntryCount": 176,
+    "placedUnderChapterHeadingEntryCount": 176,
     "unassignedIsingEntryCount": 7
   },
   "parts": [
@@ -622,9 +622,9 @@
           "titleFormat": "tex",
           "goalEntryIds": [
             "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators",
-            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+            "Athetatilde_001b_definition_gamma_theta"
           ],
-          "entryCount": 30,
+          "entryCount": 31,
           "proposalEntryCount": 27,
           "dependencyOrder": [
             {
@@ -642,12 +642,6 @@
             {
               "entryIds": [
                 "transfer_matrix_015_claim_Z_Y_generate_algebra"
-              ],
-              "inseparableDependencyUnit": false
-            },
-            {
-              "entryIds": [
-                "freeenergy_001_claim_gamma1_lower_bound_all_theta"
               ],
               "inseparableDependencyUnit": false
             },
@@ -695,6 +689,18 @@
             },
             {
               "entryIds": [
+                "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
+                "Athetatilde_001b_definition_gamma_theta"
+              ],
+              "inseparableDependencyUnit": false
+            },
+            {
+              "entryIds": [
                 "Athetatilde_002_claim_gamma2_nonzero"
               ],
               "inseparableDependencyUnit": false
@@ -731,7 +737,7 @@
             },
             {
               "entryIds": [
-                "Athetatilde_008_definition_gamma_theta_tilde"
+                "Athetatilde_008_claim_gamma_theta_tilde_positive"
               ],
               "inseparableDependencyUnit": false
             },
@@ -812,7 +818,6 @@
             "transfer_matrix_000h2_definition_arccosh",
             "transfer_matrix_000h3_claim_arccosh_properties",
             "transfer_matrix_015_claim_Z_Y_generate_algebra",
-            "freeenergy_001_claim_gamma1_lower_bound_all_theta",
             "evensector_003_definition_half_integer_modes",
             "evensector_003b_claim_conjugate_index_of_check_Z_Y",
             "evensector_005_claim_anticommutator_check_Z_Y",
@@ -820,13 +825,15 @@
             "evensectorT_claim_V_plus_factors_invertible",
             "evensectorT_claim_T_V_plus_is_conjugation",
             "Athetatilde_001_definition_gamma1_gamma2",
+            "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+            "Athetatilde_001b_definition_gamma_theta",
             "Athetatilde_002_claim_gamma2_nonzero",
             "Athetatilde_003_claim_relation_of_gamma2",
             "Athetatilde_004_claim_eigenvector",
             "Athetatilde_005_claim_diagonalization",
             "Athetatilde_006_claim_det_A",
             "Athetatilde_007_claim_gamma1_gt_1",
-            "Athetatilde_008_definition_gamma_theta_tilde",
+            "Athetatilde_008_claim_gamma_theta_tilde_positive",
             "Athetatilde_009_claim_lambda_eq_exp_gamma",
             "evenfermi_001_definition_check_fermi",
             "evenfermi_002_claim_periodicity",
@@ -1616,7 +1623,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 296,
+    "reviewedEntryCount": 297,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -2511,7 +2518,7 @@
     },
     {
       "classification": "2次元イジングモデル",
-      "entryCount": 182,
+      "entryCount": 183,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -3385,28 +3392,28 @@
         {
           "order": 125,
           "entryIds": [
-            "Athetatilde_008_definition_gamma_theta_tilde"
+            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 126,
           "entryIds": [
-            "Athetatilde_009_claim_lambda_eq_exp_gamma"
+            "Athetatilde_001b_definition_gamma_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 127,
           "entryIds": [
-            "evenfermi_002_claim_periodicity"
+            "Athetatilde_008_claim_gamma_theta_tilde_positive"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 128,
           "entryIds": [
-            "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+            "Athetatilde_009_claim_lambda_eq_exp_gamma"
           ],
           "inseparableDependencyUnit": false
         },
@@ -3434,355 +3441,362 @@
         {
           "order": 132,
           "entryIds": [
-            "freeenergy_002_claim_gamma_is_continuous"
+            "evenfermi_002_claim_periodicity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 133,
           "entryIds": [
-            "evensectorT_007_definition_B1_B2"
+            "freeenergy_002_claim_gamma_is_continuous"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 134,
           "entryIds": [
-            "evensectorT_009_claim_factorization_A_theta"
+            "evensectorT_007_definition_B1_B2"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 135,
           "entryIds": [
-            "freeenergy_definition_Lambda_delta_M"
+            "evensectorT_009_claim_factorization_A_theta"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 136,
           "entryIds": [
-            "freeenergy_005_theorem_onsager_expression"
+            "freeenergy_definition_Lambda_delta_M"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 137,
           "entryIds": [
-            "TV1_hatZ_hatY_044_claim_critical_condition"
+            "freeenergy_005_theorem_onsager_expression"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 138,
           "entryIds": [
-            "critical_004_claim_critical_point_iff_kappa_zero"
+            "TV1_hatZ_hatY_044_claim_critical_condition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 139,
           "entryIds": [
-            "critical_006_claim_kappa_of_K_basic"
+            "critical_004_claim_critical_point_iff_kappa_zero"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 140,
           "entryIds": [
-            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
+            "critical_006_claim_kappa_of_K_basic"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 141,
           "entryIds": [
-            "evensector_004_claim_commutator_H_check_Z_Y"
+            "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 142,
           "entryIds": [
-            "evensector_005_claim_anticommutator_check_Z_Y"
+            "evensector_004_claim_commutator_H_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 143,
           "entryIds": [
-            "evensectorT_002_claim_nesting_commutator"
+            "evensector_005_claim_anticommutator_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 144,
           "entryIds": [
-            "evensectorT_003_claim_coefficient_conversion"
+            "evensectorT_002_claim_nesting_commutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 145,
           "entryIds": [
-            "evensectorT_004_claim_extract_taylor"
+            "evensectorT_003_claim_coefficient_conversion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 146,
           "entryIds": [
-            "evensectorT_005_claim_T_actions"
+            "evensectorT_004_claim_extract_taylor"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 147,
           "entryIds": [
-            "evensectorT_008_claim_product_action"
+            "evensectorT_005_claim_T_actions"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 148,
           "entryIds": [
-            "evenfermi_001_definition_check_fermi"
+            "evensectorT_008_claim_product_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 149,
           "entryIds": [
-            "evenfermi_003_claim_anticommutator"
+            "evenfermi_001_definition_check_fermi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 150,
           "entryIds": [
-            "evenfermi_005_definition_check_Vprime"
+            "evenfermi_003_claim_anticommutator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 151,
           "entryIds": [
-            "evenEigen_001_definition_check_number_operator"
+            "evenfermi_005_definition_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 152,
           "entryIds": [
-            "evenEigen_002_claim_check_number_operator_idempotent"
+            "evenEigen_001_definition_check_number_operator"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 153,
           "entryIds": [
-            "evenEigen_003_claim_check_number_operators_commute"
+            "evenEigen_002_claim_check_number_operator_idempotent"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 154,
           "entryIds": [
-            "evenEigen_004_claim_trace_of_check_number_operator_product"
+            "evenEigen_003_claim_check_number_operators_commute"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 155,
           "entryIds": [
-            "evenEigen_005_claim_check_joint_eigenspace_decomposition"
+            "evenEigen_004_claim_trace_of_check_number_operator_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 156,
           "entryIds": [
-            "closing_001_claim_epsilon_anticommutes"
+            "evenEigen_005_claim_check_joint_eigenspace_decomposition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 157,
           "entryIds": [
-            "closing_002_claim_epsilon_eigenvalue_on_check_Q"
+            "closing_001_claim_epsilon_anticommutes"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 158,
           "entryIds": [
-            "closing_008_claim_check_Q_is_hermitian"
+            "closing_002_claim_epsilon_eigenvalue_on_check_Q"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 159,
           "entryIds": [
-            "evenEigen_006_claim_eigenvalues_of_check_Vprime"
+            "closing_008_claim_check_Q_is_hermitian"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 160,
           "entryIds": [
-            "evenEigen_007_claim_trace_of_check_Vprime"
+            "evenEigen_006_claim_eigenvalues_of_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 161,
           "entryIds": [
-            "evenfermi_006_claim_action_T_check_Vprime"
+            "evenEigen_007_claim_trace_of_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 162,
           "entryIds": [
-            "evensectorT_010_claim_T_V_plus_action"
+            "evenfermi_006_claim_action_T_check_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 163,
           "entryIds": [
-            "evenfermi_004_claim_commutation_V_plus_psi"
+            "evensectorT_010_claim_T_V_plus_action"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 164,
           "entryIds": [
-            "evenfermi_007_claim_T_eq_on_check_Z_Y"
+            "evenfermi_004_claim_commutation_V_plus_psi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 165,
           "entryIds": [
-            "evenfermi_008_claim_T_eq"
+            "evenfermi_007_claim_T_eq_on_check_Z_Y"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 166,
           "entryIds": [
-            "evenfermi_009_claim_V_plus_eq_c_Vprime"
+            "evenfermi_008_claim_T_eq"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 167,
           "entryIds": [
-            "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators"
+            "evenfermi_009_claim_V_plus_eq_c_Vprime"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 168,
           "entryIds": [
-            "evenEigen_009_claim_constant_c_value_even_sector"
+            "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 169,
           "entryIds": [
-            "evenEigen_010_theorem_eigenvalues_of_V_plus"
+            "evenEigen_009_claim_constant_c_value_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 170,
           "entryIds": [
-            "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
+            "evenEigen_010_theorem_eigenvalues_of_V_plus"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 171,
           "entryIds": [
-            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
+            "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 172,
           "entryIds": [
-            "closing_007_theorem_max_eigenvector_in_even_sector"
+            "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 173,
           "entryIds": [
-            "closing_009_theorem_c_plus_equals_Lambda_half"
+            "closing_007_theorem_max_eigenvector_in_even_sector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 174,
           "entryIds": [
-            "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
+            "closing_009_theorem_c_plus_equals_Lambda_half"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 175,
           "entryIds": [
-            "closing_010_theorem_onsager_exact_solution"
+            "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 176,
           "entryIds": [
-            "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
+            "closing_010_theorem_onsager_exact_solution"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 177,
           "entryIds": [
-            "critical_011_theorem_second_derivative_log_divergence"
+            "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 178,
           "entryIds": [
-            "critical_012_theorem_specific_heat_log_divergence"
+            "critical_011_theorem_second_derivative_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 179,
           "entryIds": [
-            "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
+            "critical_012_theorem_specific_heat_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 180,
           "entryIds": [
-            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
+            "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 181,
           "entryIds": [
-            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+            "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 182,
+          "entryIds": [
+            "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 183,
           "entryIds": [
             "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
           ],
@@ -4819,14 +4833,6 @@
           "prerequisiteId": "linear_space_general_001_theorem_tensor_product_basis"
         },
         {
-          "dependentId": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
-        },
-        {
-          "dependentId": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
-        },
-        {
           "dependentId": "evensector_003_definition_half_integer_modes",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
@@ -4888,6 +4894,18 @@
         },
         {
           "dependentId": "Athetatilde_001_definition_gamma1_gamma2",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+          "prerequisiteId": "calc_formulae_000b_claim_cosh_sinh_basic_properties"
+        },
+        {
+          "dependentId": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+          "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "Athetatilde_001b_definition_gamma_theta",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
@@ -4999,8 +5017,16 @@
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
         },
         {
-          "dependentId": "Athetatilde_008_definition_gamma_theta_tilde",
+          "dependentId": "Athetatilde_008_claim_gamma_theta_tilde_positive",
+          "prerequisiteId": "calc_formulae_definition_cosh_sinh"
+        },
+        {
+          "dependentId": "Athetatilde_008_claim_gamma_theta_tilde_positive",
           "prerequisiteId": "calculation_formulae_definition_set_and_algebra_notation"
+        },
+        {
+          "dependentId": "Athetatilde_008_claim_gamma_theta_tilde_positive",
+          "prerequisiteId": "exp_linear_map_009_claim_scalar_exp_zero"
         },
         {
           "dependentId": "Athetatilde_009_claim_lambda_eq_exp_gamma",
@@ -11126,7 +11152,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -11390,7 +11416,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 13,
+        "incomingReferenceCount": 14,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -16143,7 +16169,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 41,
+        "incomingReferenceCount": 42,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -17961,7 +17987,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 140,
+        "classificationOrder": 141,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_001_claim_anticommutation_relations_Z_and_Y"
         ]
@@ -18125,7 +18151,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 9,
+        "incomingReferenceCount": 6,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -18184,7 +18210,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 18,
+        "incomingReferenceCount": 19,
         "isingSemanticMatches": [
           "格子"
         ],
@@ -18589,7 +18615,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 41,
+        "incomingReferenceCount": 42,
         "isingSemanticMatches": [
           "運動量"
         ],
@@ -18723,7 +18749,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 141,
+        "classificationOrder": 142,
         "dependencyUnitEntryIds": [
           "evensector_004_claim_commutator_H_check_Z_Y"
         ]
@@ -19017,7 +19043,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 143,
+        "classificationOrder": 144,
         "dependencyUnitEntryIds": [
           "evensectorT_002_claim_nesting_commutator"
         ]
@@ -19091,7 +19117,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 144,
+        "classificationOrder": 145,
         "dependencyUnitEntryIds": [
           "evensectorT_003_claim_coefficient_conversion"
         ]
@@ -19164,7 +19190,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 145,
+        "classificationOrder": 146,
         "dependencyUnitEntryIds": [
           "evensectorT_004_claim_extract_taylor"
         ]
@@ -19247,7 +19273,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 146,
+        "classificationOrder": 147,
         "dependencyUnitEntryIds": [
           "evensectorT_005_claim_T_actions"
         ]
@@ -19457,7 +19483,7 @@
       ],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 133,
+        "classificationOrder": 134,
         "dependencyUnitEntryIds": [
           "evensectorT_007_definition_B1_B2"
         ]
@@ -19518,7 +19544,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 147,
+        "classificationOrder": 148,
         "dependencyUnitEntryIds": [
           "evensectorT_008_claim_product_action"
         ]
@@ -19602,7 +19628,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 134,
+        "classificationOrder": 135,
         "dependencyUnitEntryIds": [
           "evensectorT_009_claim_factorization_A_theta"
         ]
@@ -19682,7 +19708,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 162,
+        "classificationOrder": 163,
         "dependencyUnitEntryIds": [
           "evensectorT_010_claim_T_V_plus_action"
         ]
@@ -19764,7 +19790,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_reduction_to_A_theta",
       "dependencyPlacement": {
-        "classificationOrder": 182,
+        "classificationOrder": 183,
         "dependencyUnitEntryIds": [
           "reduction_to_A_theta_claim_T_V_plus_check_Z_Y_via_B1_B2_B1"
         ]
@@ -19980,73 +20006,6 @@
       }
     },
     {
-      "id": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
-      "kind": "claim",
-      "title": "\\gamma_1(\\theta) \\geq \\cosh(2K_1 - 2K_2^*) \\geq 1 \\quad (\\forall\\theta\\in\\mathbb{R})",
-      "titleFormat": "tex",
-      "labels": [
-        "gamma1_lower_bound_all_theta"
-      ],
-      "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
-      "sourceOrdinal": 3,
-      "classification": "2次元イジングモデル",
-      "classificationEvidence": {
-        "mathematicalToolCandidateFile": false,
-        "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 8,
-        "isingSemanticMatches": [
-          "transfer"
-        ],
-        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
-        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
-      },
-      "explanationGranularityReview": {
-        "status": "自動検査で主題に適合",
-        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
-        "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 2641,
-        "inspectedContentSha256": "a192661212bee101cce8ed9db51eff2db9fb103f14a9e71e20fbabfb2bbf30ff",
-        "forwardNavigationMixedIntoStatement": false,
-        "inspectedFields": [
-          "title",
-          "statement",
-          "proof"
-        ],
-        "manualReview": null
-      },
-      "dependsOnLabels": [
-        "cosh_sinh_basic_properties",
-        "def_A_theta",
-        "def_transfer_matrix_symbols",
-        "set_and_algebra_notation"
-      ],
-      "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_017_definition_A_theta",
-        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
-        "calculation_formulae_definition_set_and_algebra_notation",
-        "transfer_matrix_001_definition_symbols"
-      ],
-      "semanticPrerequisiteLabels": [
-        "set_and_algebra_notation"
-      ],
-      "referenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
-      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
-      "forwardStatementReferenceReview": null,
-      "interimForwardReferenceLabelsToReorganizedChapters": [],
-      "staleForwardReferenceReviewLabels": [],
-      "blockSplitRequiredBeforeFinalOrdering": false,
-      "futureBlockSplitRecommended": false,
-      "presentationPredecessorEntryIds": [],
-      "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
-      "dependencyPlacement": {
-        "classificationOrder": 128,
-        "dependencyUnitEntryIds": [
-          "freeenergy_001_claim_gamma1_lower_bound_all_theta"
-        ]
-      }
-    },
-    {
       "id": "evensector_003_definition_half_integer_modes",
       "kind": "claim",
       "title": "\\tilde\\theta_\\mu \\text{ の共役添字恒等式 } \\tilde\\theta_{1-\\mu} = -\\tilde\\theta_\\mu",
@@ -20252,7 +20211,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 142,
+        "classificationOrder": 143,
         "dependencyUnitEntryIds": [
           "evensector_005_claim_anticommutator_check_Z_Y"
         ]
@@ -20480,7 +20439,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 7,
+        "incomingReferenceCount": 11,
         "isingSemanticMatches": [
           "transfer"
         ],
@@ -20531,6 +20490,148 @@
         "classificationOrder": 118,
         "dependencyUnitEntryIds": [
           "Athetatilde_001_definition_gamma1_gamma2"
+        ]
+      }
+    },
+    {
+      "id": "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+      "kind": "claim",
+      "title": "\\gamma_1(\\theta) \\geq \\cosh(2K_1 - 2K_2^*) \\geq 1 \\quad (\\forall\\theta\\in\\mathbb{R})",
+      "titleFormat": "tex",
+      "labels": [
+        "gamma1_lower_bound_all_theta"
+      ],
+      "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
+      "sourceOrdinal": 3,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 2,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2055,
+        "inspectedContentSha256": "fc3541209796826b8c08da118c04c64cc4ce8011575d14984da146798838ae73",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cosh_sinh_basic_properties",
+        "def_gamma1_gamma2_of_theta",
+        "def_transfer_matrix_symbols",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_001_definition_gamma1_gamma2",
+        "calc_formulae_000b_claim_cosh_sinh_basic_properties",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
+      "dependencyPlacement": {
+        "classificationOrder": 125,
+        "dependencyUnitEntryIds": [
+          "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+        ]
+      }
+    },
+    {
+      "id": "Athetatilde_001b_definition_gamma_theta",
+      "kind": "definition",
+      "title": "\\gamma(\\theta)\\ (\\theta \\in \\mathbb{R}) \\text{ の定義}",
+      "titleFormat": "tex",
+      "labels": [
+        "def_gamma_theta"
+      ],
+      "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
+      "sourceOrdinal": 3,
+      "classification": "2次元イジングモデル",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": false,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 16,
+        "isingSemanticMatches": [
+          "transfer"
+        ],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 2198,
+        "inspectedContentSha256": "022c2962308902b37c7030b48c5445c011322a054a770373cf3a179cd2bb6cf9",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "antiperiodic_exp_sum",
+        "arccosh_properties",
+        "def_arccosh",
+        "def_check_index_set",
+        "def_gamma1_gamma2_of_theta",
+        "def_transfer_matrix_symbols",
+        "gamma1_lower_bound_all_theta",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "Athetatilde_001_definition_gamma1_gamma2",
+        "calculation_formulae_definition_set_and_algebra_notation",
+        "evensector_002_claim_antiperiodic_exp_sum",
+        "evensector_003a_definition_check_index_set",
+        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
+        "transfer_matrix_000h2_definition_arccosh",
+        "transfer_matrix_000h3_claim_arccosh_properties",
+        "transfer_matrix_001_definition_symbols"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
+      "dependencyPlacement": {
+        "classificationOrder": 126,
+        "dependencyUnitEntryIds": [
+          "Athetatilde_001b_definition_gamma_theta"
         ]
       }
     },
@@ -21004,12 +21105,12 @@
       }
     },
     {
-      "id": "Athetatilde_008_definition_gamma_theta_tilde",
-      "kind": "definition",
-      "title": "\\gamma(\\tilde\\theta_\\mu) \\text{ の定義}",
+      "id": "Athetatilde_008_claim_gamma_theta_tilde_positive",
+      "kind": "claim",
+      "title": "\\gamma(\\tilde\\theta_\\mu) > 0",
       "titleFormat": "tex",
       "labels": [
-        "def_gamma_theta_tilde_mu"
+        "gamma_theta_tilde_mu_positive"
       ],
       "sourceFile": "eigenvalue_problem_diagonalization_and_exponential_form.ts",
       "sourceOrdinal": 10,
@@ -21017,7 +21118,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": false,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 11,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "対象の意味または導入目的がスピン・格子・転送行列などイジング模型の構成に依存する。"
@@ -21026,8 +21127,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1907,
-        "inspectedContentSha256": "937045a01a8f1fd5087ddc5a8be070accb36c8fb923875335edb1bdd2eeea5f7",
+        "inspectedCharacterCount": 2191,
+        "inspectedContentSha256": "9b8c4d8006aa9314995de1bfca51a1943916299a82deea2e45250020942cdc2c",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21037,18 +21138,20 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "arccosh_properties",
-        "def_arccosh",
         "def_check_index_set",
+        "def_cosh_sinh",
+        "def_gamma_theta",
         "gamma1_gt_1_theta_tilde",
+        "scalar_exp_zero",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "Athetatilde_007_claim_gamma1_gt_1",
+        "calc_formulae_definition_cosh_sinh",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evensector_003a_definition_check_index_set",
-        "transfer_matrix_000h2_definition_arccosh",
-        "transfer_matrix_000h3_claim_arccosh_properties"
+        "exp_linear_map_009_claim_scalar_exp_zero"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation"
@@ -21064,9 +21167,9 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 125,
+        "classificationOrder": 127,
         "dependencyUnitEntryIds": [
-          "Athetatilde_008_definition_gamma_theta_tilde"
+          "Athetatilde_008_claim_gamma_theta_tilde_positive"
         ]
       }
     },
@@ -21093,8 +21196,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4819,
-        "inspectedContentSha256": "fffef6de5a287dc5759fad674efa0c45c683c068a3ca5216cc81e55cbdbe13f4",
+        "inspectedCharacterCount": 4846,
+        "inspectedContentSha256": "da1a91c22e58757a24f91a03162b10c42ba78b7f5fef033c65c7b02d347e8969",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21106,16 +21209,18 @@
       "dependsOnLabels": [
         "cosh_sinh_basic_properties",
         "def_check_index_set",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "det_A_theta_tilde",
         "eigenvector_of_A_theta_tilde",
+        "gamma_theta_tilde_mu_positive",
         "set_and_algebra_notation",
         "sqrt_nonnegative_existence_uniqueness"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "Athetatilde_004_claim_eigenvector",
         "Athetatilde_006_claim_det_A",
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
         "calculation_formulae_definition_set_and_algebra_notation",
@@ -21135,7 +21240,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 126,
+        "classificationOrder": 128,
         "dependencyUnitEntryIds": [
           "Athetatilde_009_claim_lambda_eq_exp_gamma"
         ]
@@ -21207,7 +21312,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 148,
+        "classificationOrder": 149,
         "dependencyUnitEntryIds": [
           "evenfermi_001_definition_check_fermi"
         ]
@@ -21236,8 +21341,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9944,
-        "inspectedContentSha256": "b2dc03bbe1737eadf5d0f049f6d90cf262992f06e0aefb784117e62bc142dc96",
+        "inspectedCharacterCount": 9935,
+        "inspectedContentSha256": "f322ca00b764cd72dd833cc55bcb8ebee3bcf0f847cdd11249d2138a4a629e26",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21251,7 +21356,7 @@
         "conjugate_index_of_check_Z_Y",
         "def_check_index_set",
         "def_gamma1_gamma2_of_theta",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "diagonalization_check_P_D",
         "euler_formula_cos_sin",
         "half_integer_checkY_periodicity",
@@ -21260,8 +21365,8 @@
       ],
       "dependsOnEntryIds": [
         "Athetatilde_001_definition_gamma1_gamma2",
+        "Athetatilde_001b_definition_gamma_theta",
         "Athetatilde_005_claim_diagonalization",
-        "Athetatilde_008_definition_gamma_theta_tilde",
         "calculation_formulae_045_theorem_euler_formula_cos_sin",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evensector_002_claim_antiperiodic_exp_sum",
@@ -21284,7 +21389,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 127,
+        "classificationOrder": 132,
         "dependencyUnitEntryIds": [
           "evenfermi_002_claim_periodicity"
         ]
@@ -21362,7 +21467,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 149,
+        "classificationOrder": 150,
         "dependencyUnitEntryIds": [
           "evenfermi_003_claim_anticommutator"
         ]
@@ -21391,8 +21496,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7557,
-        "inspectedContentSha256": "8033b67f0b4a450d90edda690f86a6502bde1e9d3a00693d1ad5e0d423c865d9",
+        "inspectedCharacterCount": 7548,
+        "inspectedContentSha256": "756b8fbafa4ccd5a815ae4a9bcff56a7b999a353dcf02d0ac6f9bb452b8886c1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21409,7 +21514,7 @@
         "def_T_V_plus",
         "def_check_fermi",
         "def_check_index_set",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "definition_of_cc",
         "diagonalization_check_P_D",
         "lambda_eq_exp_gamma_theta_tilde",
@@ -21417,8 +21522,8 @@
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "Athetatilde_005_claim_diagonalization",
-        "Athetatilde_008_definition_gamma_theta_tilde",
         "Athetatilde_009_claim_lambda_eq_exp_gamma",
         "TV1_hatZ_hatY_015_claim_linearity_of_T",
         "calc_formulae_006_definition_of_cc",
@@ -21446,7 +21551,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 163,
+        "classificationOrder": 164,
         "dependencyUnitEntryIds": [
           "evenfermi_004_claim_commutation_V_plus_psi"
         ]
@@ -21518,7 +21623,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 150,
+        "classificationOrder": 151,
         "dependencyUnitEntryIds": [
           "evenfermi_005_definition_check_Vprime"
         ]
@@ -21596,7 +21701,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 161,
+        "classificationOrder": 162,
         "dependencyUnitEntryIds": [
           "evenfermi_006_claim_action_T_check_Vprime"
         ]
@@ -21678,7 +21783,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 164,
+        "classificationOrder": 165,
         "dependencyUnitEntryIds": [
           "evenfermi_007_claim_T_eq_on_check_Z_Y"
         ]
@@ -21756,7 +21861,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 165,
+        "classificationOrder": 166,
         "dependencyUnitEntryIds": [
           "evenfermi_008_claim_T_eq"
         ]
@@ -21840,7 +21945,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 166,
+        "classificationOrder": 167,
         "dependencyUnitEntryIds": [
           "evenfermi_009_claim_V_plus_eq_c_Vprime"
         ]
@@ -21910,7 +22015,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 151,
+        "classificationOrder": 152,
         "dependencyUnitEntryIds": [
           "evenEigen_001_definition_check_number_operator"
         ]
@@ -21939,8 +22044,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 3163,
-        "inspectedContentSha256": "7d2b284ab5b0dc7af3f4a67f1129ab136e8583c449f4741868d9f9fc85346e49",
+        "inspectedCharacterCount": 3154,
+        "inspectedContentSha256": "b20c4004d3b41237c5db0d37b35052975b38a250de15e556f018d5f4462df111",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -21956,12 +22061,12 @@
         "def_check_Vprime",
         "def_check_index_set",
         "def_check_number_operator",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "definition_of_cc",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_001b_definition_gamma_theta",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evenEigen_001_definition_check_number_operator",
@@ -21986,7 +22091,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_diagonalization_and_exponential_form",
       "dependencyPlacement": {
-        "classificationOrder": 167,
+        "classificationOrder": 168,
         "dependencyUnitEntryIds": [
           "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators"
         ]
@@ -22238,8 +22343,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1819,
-        "inspectedContentSha256": "925835c49980ca8c53dcbf8c17a5d0cad86f3baac3aecb30fe8ba4a5185cf03b",
+        "inspectedCharacterCount": 1806,
+        "inspectedContentSha256": "57db1768189ccea51ac8f742d184254a31ed2d569598fe4b9471d60f33b72ec1",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22250,13 +22355,13 @@
       },
       "dependsOnLabels": [
         "def_Theta_delta_M",
+        "def_gamma_theta",
         "def_transfer_matrix",
-        "gamma1_lower_bound_all_theta",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_definition_Theta_delta_M",
         "partition_function_2d_ising_003_definition_transfer_matrix"
       ],
@@ -22274,7 +22379,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 135,
+        "classificationOrder": 136,
         "dependencyUnitEntryIds": [
           "freeenergy_definition_Lambda_delta_M"
         ]
@@ -22341,7 +22446,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 152,
+        "classificationOrder": 153,
         "dependencyUnitEntryIds": [
           "evenEigen_002_claim_check_number_operator_idempotent"
         ]
@@ -22402,7 +22507,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 153,
+        "classificationOrder": 154,
         "dependencyUnitEntryIds": [
           "evenEigen_003_claim_check_number_operators_commute"
         ]
@@ -22482,7 +22587,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 154,
+        "classificationOrder": 155,
         "dependencyUnitEntryIds": [
           "evenEigen_004_claim_trace_of_check_number_operator_product"
         ]
@@ -22551,7 +22656,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 155,
+        "classificationOrder": 156,
         "dependencyUnitEntryIds": [
           "evenEigen_005_claim_check_joint_eigenspace_decomposition"
         ]
@@ -22580,8 +22685,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 13642,
-        "inspectedContentSha256": "e3a878a9b996a209bb5f1962df26010ff3eca0f47c58b41e70da0b24129614cb",
+        "inspectedCharacterCount": 13638,
+        "inspectedContentSha256": "6aed40bdd004afc8fbe92a57db14a80dc874b36b6ec81e9e742539d386dabb32",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22594,17 +22699,19 @@
         "check_joint_eigenspace_decomposition",
         "def_check_number_operator",
         "def_exp",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "def_matrix_norm",
         "definition_of_cc",
         "exp_converges",
+        "gamma_theta_tilde_mu_positive",
         "matrix_multiplication_continuity",
         "periodicity_of_check_fermi",
         "real_exp_series_converges",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_001b_definition_gamma_theta",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evenEigen_001_definition_check_number_operator",
@@ -22637,7 +22744,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 159,
+        "classificationOrder": 160,
         "dependencyUnitEntryIds": [
           "evenEigen_006_claim_eigenvalues_of_check_Vprime"
         ]
@@ -22666,8 +22773,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5691,
-        "inspectedContentSha256": "8bf234ba7e6fa3a8f1c55211763593cf924d984ea7a3c6424266884534de28f9",
+        "inspectedCharacterCount": 5696,
+        "inspectedContentSha256": "10f1a58c8d23534ac37900fcb9e0191ee436f08a4aacf9b595ced5ab329e0010",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -22680,13 +22787,13 @@
         "check_joint_eigenspace_decomposition",
         "cosh_sinh_basic_properties",
         "def_check_Vprime",
-        "def_gamma_theta_tilde_mu",
         "eigenvalues_of_check_Vprime",
+        "gamma_theta_tilde_mu_positive",
         "set_and_algebra_notation",
         "trace_basic_properties"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation",
         "eigenvalues_of_V_002_claim_trace_properties",
@@ -22708,7 +22815,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 160,
+        "classificationOrder": 161,
         "dependencyUnitEntryIds": [
           "evenEigen_007_claim_trace_of_check_Vprime"
         ]
@@ -23011,7 +23118,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 168,
+        "classificationOrder": 169,
         "dependencyUnitEntryIds": [
           "evenEigen_009_claim_constant_c_value_even_sector"
         ]
@@ -23042,8 +23149,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 6402,
-        "inspectedContentSha256": "7bbf0b96ce33cfc50b41d86cb2109f026f8407fb9a687d14aaba4f6dde28392c",
+        "inspectedCharacterCount": 6407,
+        "inspectedContentSha256": "7979c277f9413058d3eed1c4657950e810e64deb29cb91de516fb3d947b3bde5",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -23055,13 +23162,13 @@
       "dependsOnLabels": [
         "check_joint_eigenspace_decomposition",
         "constant_c_value_even_sector",
-        "def_gamma_theta_tilde_mu",
         "eigenvalues_of_check_Vprime",
+        "gamma_theta_tilde_mu_positive",
         "scalar_identity_commutes",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evenEigen_005_claim_check_joint_eigenspace_decomposition",
         "evenEigen_006_claim_eigenvalues_of_check_Vprime",
@@ -23082,7 +23189,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 169,
+        "classificationOrder": 170,
         "dependencyUnitEntryIds": [
           "evenEigen_010_theorem_eigenvalues_of_V_plus"
         ]
@@ -23111,8 +23218,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10823,
-        "inspectedContentSha256": "07d05da47c4fc5b6c51f6bb6b20163f139a56b71a6f2cd3ee7bbb7231e68e1bd",
+        "inspectedCharacterCount": 10589,
+        "inspectedContentSha256": "0a6f35b611fd3c43a8eb9e7ef1c8ba7df54bb60ab2611df303c5fd0471bf0ac6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -23127,23 +23234,23 @@
         "def_Lambda_delta_M",
         "def_Theta_delta_M",
         "def_gamma1_gamma2_of_theta",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "definition_of_cc",
         "eigenvalues_of_V_plus",
         "eigenvalues_of_check_Vprime",
-        "gamma1_lower_bound_all_theta",
+        "gamma_theta_tilde_mu_positive",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
         "Athetatilde_001_definition_gamma1_gamma2",
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_001b_definition_gamma_theta",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "evenEigen_005_claim_check_joint_eigenspace_decomposition",
         "evenEigen_006_claim_eigenvalues_of_check_Vprime",
         "evenEigen_010_theorem_eigenvalues_of_V_plus",
         "evensector_002_claim_antiperiodic_exp_sum",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_definition_Lambda_delta_M",
         "freeenergy_definition_Theta_delta_M"
       ],
@@ -23162,7 +23269,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 171,
+        "classificationOrder": 172,
         "dependencyUnitEntryIds": [
           "evenEigen_011_theorem_max_eigenvalue_of_V_plus_simple"
         ]
@@ -23193,8 +23300,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7187,
-        "inspectedContentSha256": "652e6d82caa5e47dd70adb907ace9189db104b5e4fe2ca9cf956f665e47161e9",
+        "inspectedCharacterCount": 7178,
+        "inspectedContentSha256": "d6d62e5149d1b634b5b2eb4ad65c6906257ce1b7f2fc162ff56ff341f8c541c7",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -23213,14 +23320,14 @@
         "def_check_Vprime",
         "def_check_index_set",
         "def_check_number_operator",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "definition_of_cc",
         "eigenvalues_of_V_plus",
         "max_eigenvalue_of_V_plus_simple",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_001b_definition_gamma_theta",
         "calc_formulae_006_definition_of_cc",
         "calculation_formulae_definition_set_and_algebra_notation",
         "diagonalization_and_exponential_form_claim_V_plus_eq_c_exp_check_number_operators",
@@ -23250,7 +23357,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvalues_of_V_plus",
       "dependencyPlacement": {
-        "classificationOrder": 180,
+        "classificationOrder": 181,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_plus_claim_c_value_eigenvalues_and_strict_maximum"
         ]
@@ -23330,7 +23437,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 156,
+        "classificationOrder": 157,
         "dependencyUnitEntryIds": [
           "closing_001_claim_epsilon_anticommutes"
         ]
@@ -23410,7 +23517,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 157,
+        "classificationOrder": 158,
         "dependencyUnitEntryIds": [
           "closing_002_claim_epsilon_eigenvalue_on_check_Q"
         ]
@@ -23439,8 +23546,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7101,
-        "inspectedContentSha256": "3f1fd51b79eb5f0b806d81a0a52c9060e87c0d1e198bfdc46729ae6dc642e417",
+        "inspectedCharacterCount": 7102,
+        "inspectedContentSha256": "074c69142b3e4d4c69a507f9dc8bd2883960d4c099c42b90d3306ce53263bed3",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -23452,15 +23559,17 @@
       "dependsOnLabels": [
         "check_joint_eigenspace_decomposition",
         "cosh_sinh_basic_properties",
-        "def_gamma_theta_tilde_mu",
+        "def_gamma_theta",
         "eigenvalues_of_V_plus",
         "epsilon_eigenvalue_on_check_Q",
+        "gamma_theta_tilde_mu_positive",
         "set_and_algebra_notation",
         "theorem_exp_product",
         "trace_of_check_Vprime"
       ],
       "dependsOnEntryIds": [
-        "Athetatilde_008_definition_gamma_theta_tilde",
+        "Athetatilde_001b_definition_gamma_theta",
+        "Athetatilde_008_claim_gamma_theta_tilde_positive",
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "calculation_formulae_definition_set_and_algebra_notation",
         "closing_002_claim_epsilon_eigenvalue_on_check_Q",
@@ -23483,7 +23592,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 170,
+        "classificationOrder": 171,
         "dependencyUnitEntryIds": [
           "closing_003_claim_trace_epsilon_V_plus_via_eigenvalues"
         ]
@@ -24349,7 +24458,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 172,
+        "classificationOrder": 173,
         "dependencyUnitEntryIds": [
           "closing_007_theorem_max_eigenvector_in_even_sector"
         ]
@@ -24435,7 +24544,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_eigenvector_of_max_eigenvalue",
       "dependencyPlacement": {
-        "classificationOrder": 181,
+        "classificationOrder": 182,
         "dependencyUnitEntryIds": [
           "eigenvector_of_max_eigenvalue_claim_trace_positive_implies_even_eigenvector"
         ]
@@ -25516,8 +25625,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4524,
-        "inspectedContentSha256": "182979463ec8cd9b126dc80d91ab2b2f3184514139bc85e51a913d08bc7a81a2",
+        "inspectedCharacterCount": 4511,
+        "inspectedContentSha256": "37b12b8569637d0868ca7b61d701792f7d6b83421c2a00f8f16a39ccccaa8a9a",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -25528,12 +25637,14 @@
       },
       "dependsOnLabels": [
         "def_arccosh",
+        "def_gamma_theta",
         "gamma1_lower_bound_all_theta",
         "remark_real_analysis_escape_point",
         "riemann_sum_to_integral",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
         "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_004_theorem_riemann_sum_to_integral",
@@ -25553,7 +25664,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 132,
+        "classificationOrder": 133,
         "dependencyUnitEntryIds": [
           "freeenergy_002_claim_gamma_is_continuous"
         ]
@@ -25582,8 +25693,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 9176,
-        "inspectedContentSha256": "b6be0fe1ed707a2b64193f30713531a368304bac1cb219527aa21f17399b2670",
+        "inspectedCharacterCount": 9178,
+        "inspectedContentSha256": "63f19a00c886eb8edda972df9add5bc5fb1f46e982e482780c20229ce6afabc4",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -25593,18 +25704,18 @@
         "manualReview": null
       },
       "dependsOnLabels": [
-        "def_A_theta",
         "def_Lambda_delta_M",
         "def_Theta_delta_M",
-        "gamma1_lower_bound_all_theta",
+        "def_gamma1_gamma2_of_theta",
+        "def_gamma_theta",
         "gamma_is_continuous",
         "riemann_sum_to_integral",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_017_definition_A_theta",
+        "Athetatilde_001_definition_gamma1_gamma2",
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_002_claim_gamma_is_continuous",
         "freeenergy_004_theorem_riemann_sum_to_integral",
         "freeenergy_definition_Lambda_delta_M",
@@ -25624,7 +25735,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 136,
+        "classificationOrder": 137,
         "dependencyUnitEntryIds": [
           "freeenergy_005_theorem_onsager_expression"
         ]
@@ -25788,7 +25899,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 158,
+        "classificationOrder": 159,
         "dependencyUnitEntryIds": [
           "closing_008_claim_check_Q_is_hermitian"
         ]
@@ -25882,7 +25993,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 173,
+        "classificationOrder": 174,
         "dependencyUnitEntryIds": [
           "closing_009_theorem_c_plus_equals_Lambda_half"
         ]
@@ -25965,7 +26076,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 174,
+        "classificationOrder": 175,
         "dependencyUnitEntryIds": [
           "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half"
         ]
@@ -25996,8 +26107,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4188,
-        "inspectedContentSha256": "8e4718cb2ec21f42b52eaaaba9c639ae3c1f006a68fce1f0a931e710730e05c2",
+        "inspectedCharacterCount": 4175,
+        "inspectedContentSha256": "d968e685b92de87f2ebf9ad635c036988dac20d47f5bd2a3de9fa75426198e09",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -26009,9 +26120,9 @@
       "dependsOnLabels": [
         "c_between_Lambda_half_and_twice_Lambda_half",
         "c_plus_equals_Lambda_half_integer",
+        "def_gamma_theta",
         "def_sector_rayleigh_sup",
         "epsilon_commutes_with_W",
-        "gamma1_lower_bound_all_theta",
         "limit_of_log_Z_in_N_row",
         "onsager_free_energy_expression",
         "partition_function_via_transfer_matrix",
@@ -26021,10 +26132,10 @@
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
         "closing_009_theorem_c_plus_equals_Lambda_half",
         "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_003_claim_limit_in_N_row",
         "freeenergy_004_theorem_riemann_sum_to_integral",
         "freeenergy_005_theorem_onsager_expression",
@@ -26048,7 +26159,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 175,
+        "classificationOrder": 176,
         "dependencyUnitEntryIds": [
           "closing_010_theorem_onsager_exact_solution"
         ]
@@ -26079,8 +26190,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4238,
-        "inspectedContentSha256": "6d0c1f0f7a950273019d5aa586c9a60f037a6eba00e158b52cf08d33a923a69e",
+        "inspectedCharacterCount": 4225,
+        "inspectedContentSha256": "2681cc4449d59324094756bf28632c48bea45f06745d34dc1f37cc3ee5724603",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -26094,22 +26205,22 @@
         "c_plus_equals_Lambda_half_integer",
         "def_Lambda_delta_M",
         "def_even_eigenvectors_of_epsilon",
+        "def_gamma_theta",
         "def_partition_function_2d_ising",
         "def_rayleigh_sup",
         "def_sector_rayleigh_sup",
         "def_symmetrized_transfer_matrix",
-        "gamma1_lower_bound_all_theta",
         "onsager_exact_solution",
         "onsager_free_energy_expression",
         "remark_real_analysis_escape_point",
         "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
         "closing_009_theorem_c_plus_equals_Lambda_half",
         "closing_010_theorem_onsager_exact_solution",
         "column_limit_claim_c_between_Lambda_half_and_twice_Lambda_half",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "freeenergy_005_theorem_onsager_expression",
         "freeenergy_definition_Lambda_delta_M",
         "maxeig_001a_definition_symmetrized_transfer_matrix",
@@ -26132,7 +26243,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_column_limit_and_closed_form",
       "dependencyPlacement": {
-        "classificationOrder": 176,
+        "classificationOrder": 177,
         "dependencyUnitEntryIds": [
           "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit"
         ]
@@ -26197,7 +26308,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 137,
+        "classificationOrder": 138,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_044_claim_critical_condition"
         ]
@@ -26354,8 +26465,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5781,
-        "inspectedContentSha256": "9facb94d89e923a71a8f6c31434e40c8034bbe7dd47acbe97a628504dd191f36",
+        "inspectedCharacterCount": 5957,
+        "inspectedContentSha256": "09fd6a79497224042f9ea5513a3ab6c1031a210907654852ef9eddf005b1a351",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -26367,22 +26478,22 @@
       "dependsOnLabels": [
         "cosh_addition_and_half_angle",
         "cosh_sinh_basic_properties",
-        "def_A_theta",
         "def_critical_sinh_product_A",
+        "def_gamma1_gamma2_of_theta",
+        "def_gamma_theta",
         "def_kappa",
-        "gamma1_lower_bound_all_theta",
         "set_and_algebra_notation",
         "sqrt_nonnegative_existence_uniqueness"
       ],
       "dependsOnEntryIds": [
-        "TV1_hatZ_hatY_017_definition_A_theta",
+        "Athetatilde_001_definition_gamma1_gamma2",
+        "Athetatilde_001b_definition_gamma_theta",
         "calc_formulae_000b_claim_cosh_sinh_basic_properties",
         "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
         "calculation_formulae_definition_set_and_algebra_notation",
         "critical_001_claim_cosh_addition_and_half_angle",
         "critical_002_definition_kappa",
-        "critical_002a_definition_critical_sinh_product_A",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta"
+        "critical_002a_definition_critical_sinh_product_A"
       ],
       "semanticPrerequisiteLabels": [
         "set_and_algebra_notation"
@@ -26467,7 +26578,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 138,
+        "classificationOrder": 139,
         "dependencyUnitEntryIds": [
           "critical_004_claim_critical_point_iff_kappa_zero"
         ]
@@ -26605,7 +26716,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 139,
+        "classificationOrder": 140,
         "dependencyUnitEntryIds": [
           "critical_006_claim_kappa_of_K_basic"
         ]
@@ -26749,7 +26860,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 177,
+        "classificationOrder": 178,
         "dependencyUnitEntryIds": [
           "critical_011_theorem_second_derivative_log_divergence"
         ]
@@ -26820,7 +26931,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 178,
+        "classificationOrder": 179,
         "dependencyUnitEntryIds": [
           "critical_012_theorem_specific_heat_log_divergence"
         ]
@@ -26851,8 +26962,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 5483,
-        "inspectedContentSha256": "eda38e1db3cad8bd2b4211938074bcda231459b6ae5a8afd38939f8c3169456a",
+        "inspectedCharacterCount": 5470,
+        "inspectedContentSha256": "02988527d9bde6ffb8f7fc4a3a776605441c2c21a81c037524e149ab93cb7d74",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -26864,8 +26975,8 @@
       "dependsOnLabels": [
         "c_plus_value_c_sandwich_and_double_limit_of_log_Z",
         "cosh_addition_and_half_angle",
+        "def_gamma_theta",
         "def_partition_function_2d_ising",
-        "gamma1_lower_bound_all_theta",
         "gamma_derivatives_in_kappa",
         "isotropic_A_equals_one",
         "kappa_of_K_basic",
@@ -26874,6 +26985,7 @@
         "specific_heat_log_divergence"
       ],
       "dependsOnEntryIds": [
+        "Athetatilde_001b_definition_gamma_theta",
         "calculation_formulae_definition_set_and_algebra_notation",
         "column_limit_and_closed_form_claim_c_plus_sandwich_and_double_limit",
         "critical_001_claim_cosh_addition_and_half_angle",
@@ -26882,7 +26994,6 @@
         "critical_007_claim_gamma_derivatives_in_kappa",
         "critical_011_theorem_second_derivative_log_divergence",
         "critical_012_theorem_specific_heat_log_divergence",
-        "freeenergy_001_claim_gamma1_lower_bound_all_theta",
         "partition_function_2d_ising_002_definition_partition_function"
       ],
       "semanticPrerequisiteLabels": [
@@ -26899,7 +27010,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": "chapter_organization_goal_critical_point_and_log_divergence",
       "dependencyPlacement": {
-        "classificationOrder": 179,
+        "classificationOrder": 180,
         "dependencyUnitEntryIds": [
           "critical_point_claim_sinh_K_c_and_second_derivative_log_divergence"
         ]
@@ -27354,11 +27465,11 @@
         "def_Lambda_delta_M",
         "def_check_index_set",
         "def_exp",
-        "def_gamma_theta_tilde_mu",
         "def_hermitian_positive_definite",
         "def_trace",
         "exp_hermitian_is_positive_definite",
         "gamma_2_theta_tilde_nonzero",
+        "gamma_theta_tilde_mu_positive",
         "iH_is_real_symmetric",
         "sign_flip_conjugation",
         "star_preserves_norm_and_limits",

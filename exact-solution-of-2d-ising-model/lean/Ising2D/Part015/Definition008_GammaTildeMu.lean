@@ -1,9 +1,10 @@
 /-
-# `γ(θ~_μ) := arccosh(γ_1(θ~_μ))` と `λ_{±,μ} = e^{±γ(θ~_μ)}`（**具体版**）
+# `γ(θ~_μ) > 0` と `λ_{±,μ} = e^{±γ(θ~_μ)}`（**具体版**）
 
-対応する人手証明のラベル: `def_gamma_theta_tilde_mu`, `lambda_eq_exp_gamma_theta_tilde`
+対応する人手証明のラベル: `def_gamma_theta`（`θ = θ~_μ` での値）, `gamma_theta_tilde_mu_positive`（`γ(θ~_μ) > 0`）,
+`lambda_eq_exp_gamma_theta_tilde`
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
-`Athetatilde_008_definition_gamma_theta_tilde`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
+`Athetatilde_008_claim_gamma_theta_tilde_positive`, `Athetatilde_009_claim_lambda_eq_exp_gamma`）
 
 **必要十分版**: `Ising2D/NecSuf/ArcoshExp.lean`
 （`Ising2D.NecSuf.sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` /
@@ -14,8 +15,8 @@
 * `arccosh` は mathlib の `Real.arcosh` を使う（`lean/README.md` の
   「mathlib に `Real.arccosh` は無い」は**誤り**である。詳細は
   `Ising2D/NecSuf/Arcosh.lean` 冒頭。綴りは `arcosh`）。
-* `γ(θ) := arccosh(γ_1(θ))` は 012 章で既に `Ising2D.gammaFn`（実数 `θ` 全体）として
-  定義済みなので、**半整数運動量への特殊化 `gammaTilde` を置くだけ**でよい。
+* `γ(θ) := arccosh(γ_1(θ))` は人手 `def_gamma_theta`（実数 `θ` 全体）で、Lean では
+  `Ising2D.gammaFn` として定義済みなので、**`θ = θ~_μ` での値 `gammaTilde` を置くだけ**でよい。
   well-defined 性（人手証明が `γ_1 ≥ 1` を要求している点）は 012 章の
   `Ising2D.one_le_gamma1R`（すべての実数 `θ` で成立）が与える。
 * 本章に固有なのは **`γ(θ~_μ) > 0`（狭義）** である。これは
@@ -29,10 +30,10 @@ namespace Ising2D
 
 variable (P : IsingParam)
 
-/-- **人手証明 `def_gamma_theta_tilde_mu`**: `γ(θ~_μ) := arccosh(γ_1(θ~_μ))`。 -/
+/-- **人手 `def_gamma_theta` の `θ = θ~_μ` での値**: `γ(θ~_μ) = arccosh(γ_1(θ~_μ))`。 -/
 noncomputable def gammaTilde (M : ℕ) (μ : ℤ) : ℝ := gammaFn P (thetaTilde M μ)
 
-/-- `cosh γ(θ~_μ) = γ_1(θ~_μ)`（`arccosh` の定義性質）。 -/
+/-- `cosh γ(θ~_μ) = γ_1(θ~_μ)`（人手 `def_gamma_theta` の `cosh γ(θ) = γ_1(θ)`）。 -/
 theorem cosh_gammaTilde (M : ℕ) (μ : ℤ) :
     Real.cosh (gammaTilde P M μ) = gamma1R P.const (thetaTilde M μ) :=
   cosh_gammaFn P (thetaTilde M μ)
@@ -41,7 +42,8 @@ theorem cosh_gammaTilde (M : ℕ) (μ : ℤ) :
 theorem gammaTilde_nonneg (M : ℕ) (μ : ℤ) : 0 ≤ gammaTilde P M μ :=
   gammaFn_nonneg P (thetaTilde M μ)
 
-/-- **人手証明 `def_gamma_theta_tilde_mu` の後半**: `γ(θ~_μ) > 0`（**狭義**）。 -/
+/-- **人手証明 `gamma_theta_tilde_mu_positive`**: `γ(θ~_μ) > 0`（**狭義**）。
+証明の手順（背理法の鎖 `γ_1 = cosh γ = cosh 0 = 1`）は必要十分版 `NecSuf.arcosh_pos_of_one_lt` にある。 -/
 theorem gammaTilde_pos (hdual : P.const.c2 * P.const.s2star = P.const.c2star)
     {M : ℕ} (hM : M ≠ 0) (μ : ℤ) : 0 < gammaTilde P M μ :=
   NecSuf.arcosh_pos_of_one_lt (one_lt_gamma1R_thetaTilde P hdual hM μ)

@@ -12,7 +12,8 @@
   - `eigenvector_of_A_theta_tilde`（固有値 `λ_{±,μ}` と固有ベクトル）
   - `det_A_theta_tilde`（`det A(θ~) = 1`、`γ_1² + γ_2γ_2(−) = 1`、`λ_+λ_- = 1`）
   - `gamma1_gt_1_theta_tilde`（`γ_1(θ~_μ) > 1`）
-  - `def_gamma_theta_tilde_mu` / `lambda_eq_exp_gamma_theta_tilde`（`γ = arccosh γ_1 > 0`、`λ_± = e^{±γ}`）
+  - `def_gamma_theta`（`γ(θ) := arccosh γ_1(θ)` の `θ = θ~_μ` での値。`cosh γ = γ_1`）
+  - `gamma_theta_tilde_mu_positive`（`γ(θ~_μ) > 0`。証明の鎖 `γ_1 = cosh γ = cosh 0 = … = 1` の各行は check_05 の (1)(5)）/ `lambda_eq_exp_gamma_theta_tilde`（`λ_± = e^{±γ}`）
 
 ### 何を確定させるための検証か
 
@@ -56,7 +57,7 @@ A(θ)   = [[γ_1(θ), γ_2(θ)], [−γ_2(−θ), γ_1(θ)]]
 | 02 | check_02_relation_of_gamma2.sage | `γ_2(−θ~) = −conj(γ_2(θ~))`、積 `= −|γ_2|²`、`arg = π`、`sqrt(−積) = |γ_2|`、`sqrt(積) = i|γ_2|` | PASS | 残差 ≤ 4e-15 |
 | 03 | check_03_eigen_and_diagonalization.sage | 特性方程式、固有ベクトル `A v_± = λ_± v_±`、Sage の固有値集合との一致、`det P̌_μ` の明示式、`A = P̌ Ď P̌^{-1}` | PASS | 残差 ≤ 2e-12、`min|det P̌| = 6.25e-2` |
 | 04 | check_04_det_and_gamma1.sage | `det A(θ~) = 1`、`γ_1² + γ_2γ_2(−) = 1`、`λ_+λ_- = 1`、`γ_1² − 1 = |γ_2|²`、`min(γ_1 − 1) > 0` | PASS | 残差 ≤ 1.4e-12、`min(γ_1 − 1) ≥ 1.3e-2` |
-| 05 | check_05_gamma_and_exp.sage | `cosh γ = γ_1`、`sinh γ = |γ_2|`、`λ_± = e^{±γ}`、`min γ(θ~_μ) > 0`。対比として整数運動量 `θ = 2π` の `γ` も表示 | PASS | 残差 ≤ 1e-12、`min γ(θ~_μ) ≥ 3.0e-1` |
+| 05 | check_05_gamma_and_exp.sage | `cosh γ = γ_1`、`sinh γ = |γ_2|`、`λ_± = e^{±γ}`、`min γ(θ~_μ) > 0`、`cosh 0 = 1` の鎖の各行（厳密）。対比として整数運動量 `θ = 2π` の `γ` も表示 | PASS | 残差 ≤ 1e-12、`min γ(θ~_μ) ≥ 3.0e-1` |
 
 ## 備考
 

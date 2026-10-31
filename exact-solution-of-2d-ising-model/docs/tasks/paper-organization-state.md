@@ -2,6 +2,15 @@
 
 ## 現在地
 
+- 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: `未確定` にあった「$\gamma(\theta)$ の定義を主張から分ける」一単位を行った。
+  `gamma1_lower_bound_all_theta` の statement の中で定めていた $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$（$\theta\in\mathbb R$）を、新しい定義ブロック `def_gamma_theta`（`Athetatilde_001b_definition_gamma_theta`）へ分けた。
+  置き場は対角化の章のファイルの `def_gamma1_gamma2_of_theta` の直後で、$\gamma_1$ の出典はそのブロックにした。$\gamma(\tilde\theta_\mu)$ はこの $\gamma$ の $\theta=\tilde\theta_\mu$ での値とし、記号 $\gamma$（1 変数）の定義をここに一本化した。
+  - **$\gamma(\tilde\theta_\mu)$ のブロックは $\gamma(\tilde\theta_\mu)>0$ の主張だけにした。** 中身に合わせ、ラベルを `def_gamma_theta_tilde_mu` から `gamma_theta_tilde_mu_positive` へ、id を `Athetatilde_008_claim_gamma_theta_tilde_positive` へ改めた。statement の括弧書きにあった背理法を、根拠つきの式変形の鎖として証明へ移した。
+  - **参照を付け替えた。** $\gamma$ の定義を使う箇所（対角化・$V^{(+)}$ の固有値・最大固有値の固有ベクトル・$M\to\infty$ の極限・臨界点の各章）は `def_gamma_theta` へ、不等式や正値性を使う箇所は元のラベルのままにした。
+  - **$\gamma_1$ の出典を直した。** `gamma1_lower_bound_all_theta` は $\gamma_1$ を定めていない `def_A_theta` を出典にしていたので、`def_gamma1_gamma2_of_theta` の直後へ移して出典をそれにした。臨界点の章の `gamma_kappa_identity` などの 3 か所も同じに直した。
+  - `tools/chapter-plan.ts` の対角化の章の `goalLabels` を `def_gamma_theta` に付け替えた。この章の項目数は 31（増えたのは新しい定義の 1 項）。どの章にも割り当てていない項は 7 のまま。
+  - SageMath は 048 の check_05 に背理法の鎖の各行の厳密判定を足して再実行し、改名した名前を出力する 051 の check_02 も再実行した。Lean は注記を付け替え、必要十分版 `NecSuf.arcosh_pos_of_one_lt` を mathlib の `Real.arcosh_pos` への委任から人手と同じ手順の証明に書き直し、`check-no-sorry.sh` の対象に足した。
+    参照用ノートの 2 か所も `def_gamma_theta` へ直した。別のエージェントのレビューを経た（指摘 8 件を直した。Lean の import 漏れ、鎖の 1 行への複数の根拠、事実に反する一文、ラベル名と中身の食い違い、$\gamma_1$ の出典、Lean とノートの付け替え漏れ、`gamma_kappa_identity` の鎖でラベルを文字で書いていた根拠）。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の四番目の項目の九番目の章、部「臨界点」の章「臨界点 $K_c$ と $\frac{d^2f}{dK^2}$ の対数発散」を組み直した。これで四番目の項目（章ごとの組み直し）は全章を終えた。
   棚卸しでこの章に割り当てた 10 項を、`008_TV1_hatZ_hatY_part2.ts`（1 項）と `020_critical_point.ts`（9 項）から、新しいファイル `content/critical_point_and_log_divergence.ts` の部見出し「臨界点」・章見出しの下へ
   棚卸しの `dependencyOrder` の順で移し、`TRAILING_CONTENT_FILES` の $M\to\infty$ の極限の章のファイルの後ろに置いた。ブロックの id・ラベル・本文は変えていない（下の注記の直しを除く）。空になった 008 の後半のファイルは消した。
@@ -1263,18 +1272,16 @@
 
 ## 次の一歩
 
-`未確定` の「$\gamma(\theta)$ の定義を主張から分ける」（作業の順序の五番目の前に行うと決めた一単位）：`gamma1_lower_bound_all_theta` の statement の中で定めている $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$（$\theta\in\mathbb R$）を独立した definition ブロックに分け、
-`def_gamma_theta_tilde_mu` との関係をそこで一本化し、参照を付け替え、`chapter-plan.ts` の対角化の章の `goalLabels` をその定義に付け替える。Lean・SageMath の対応も同じ回で揃える。その次が作業の順序の五番目（どの章のゴールの式からも辿れない 7 項の確認）である。
+作業の順序の五番目: どの章のゴールの式からも辿れない 7 項を一つずつ確かめる。本文のどこからも使われていなければ参照用ノートへ退避して採用しなかった理由を書き、使われているなら使う章へ置く。
+7 項は棚卸し（`docs/organization/flat-inventory.json`）のどの章にも割り当てられていない項として列挙できる。一回に扱うのは 7 項すべてでよいが、移す先の章が複数に分かれて大きすぎれば、項ごとに割り直す。
 
 ## 未確定
 
 - **章の依存関係の図（冒頭の章立ての説明ページ）に、$V^{(+)}$ の固有値の章 → $N\to\infty$ の極限の章の矢印が無い（2026-10-31 のレビューの指摘。作業の順序の六番目で扱う）。**
   $N\to\infty$ の極限の章の `W_is_real_symmetric_positive_definite` の証明が、$V^{(+)}$ の固有値の章の `iH_is_real_symmetric` を引いている。前方参照ではないが、図（`content/chapter_organization.ts` の edges と章立て案の図）は
   この章の入り口を射影の章からの矢印だけにしており、「射影の章のあとで流れが二つに分かれる」という説明も本文と合わない。図と説明を本文に合わせるか、`iH_is_real_symmetric` の Step 1・Step 3 の内容の置き場を見直すかを、作業の順序の六番目で決める。
-- **$\gamma(\theta)$（$\theta\in\mathbb R$）の定義を主張から分ける（2026-10-31 のレビューの指摘。章ごとの組み直しの後、作業の順序の五番目の前に行う）。**
-  いまは `gamma1_lower_bound_all_theta` の statement の中で $\gamma(\theta):=\mathrm{arccosh}(\gamma_1(\theta))$ を定めており、「1 ブロック 1 主張」に反する。
-  $\theta=\tilde\theta_\mu$ の $\gamma$ も `def_gamma_theta_tilde_mu` で別に定めているので、記号 $\gamma$ の定義が二重である。$\Lambda^{(\delta)}_M$ の定義の分離と同じ型の作業で、
-  独立した definition ブロックに分け、`def_gamma_theta_tilde_mu` との関係をそこで一本化し、`chapter-plan.ts` の対角化の章の `goalLabels` をその定義に付け替える。
+- **記号 $\gamma$ が 1 変数と 2 変数で重なっている（2026-10-31 のレビューの指摘。既存の問題）。** 1 変数の $\gamma(\theta)$ は `def_gamma_theta` だけが定めるが、臨界点の章の `gamma_derivatives_in_kappa` が
+  2 変数の $\gamma(\theta,\kappa):=2\,\mathrm{arcsinh}(\sqrt{S(\theta,\kappa)})$ を同じ文字で定めている。「1 つの記号は 1 つの意味に固定する」に照らし、2 変数の側を別の文字にするかを、作業の順序の外の一単位で扱う。
 - **`second_derivative_log_divergence` の証明が、積分区間の分割の根拠に (R3)（積分の線型性と単調性）を挙げている（2026-10-31 のレビューの指摘。数学の中身を変えない組み直しの範囲外）。**
   区間の加法性は (R3) の文面に含まれないので、(R3) の文面に区間の加法性を足すか、別の事実として宣言するかを、式変形の書き方の統一か作業の順序の外の一単位で扱う。
 - **逆双曲線余弦の 2 項（`def_arccosh`・`arccosh_properties`）の分類。** 依存先は実対数・平方根・双曲線関数・集合の記法だけで、イジング模型を参照しないが、

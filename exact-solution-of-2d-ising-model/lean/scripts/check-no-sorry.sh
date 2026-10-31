@@ -1052,6 +1052,7 @@ targets=(
   Ising2D.NecSuf.sinh_arcosh_of_sq
   Ising2D.NecSuf.exp_arcosh_of_sq
   Ising2D.NecSuf.exp_neg_arcosh_of_sq
+  Ising2D.NecSuf.arcosh_pos_of_one_lt
   Ising2D.AMat_thetaTilde_eq
   Ising2D.thetaTilde_mul_M
   Ising2D.gamma2_thetaTilde_ne_zero

@@ -1,7 +1,7 @@
 # ---------------------------------------------------------
 # SageMath: 主張 critical_point_sinh_K_c_and_second_derivative_log_divergence の各部分を確かめる。
 #   f(K) := (1/2) log(2 sinh 2K) + (1/(4pi)) int_0^{2pi} gamma(theta) d theta（K_1 = K_2 = K。
-#   gamma は gamma1_lower_bound_all_theta の arccosh 表示）。
+#   gamma は def_gamma_theta の arccosh 表示）。
 #   (1) K_c := (1/2) log(1 + sqrt 2) について sinh 2K_c = 1 と K_c > 0 を、
 #       x := exp(2K_c) = 1 + sqrt 2 として代数的数体 QQbar で厳密に確かめる
 #       （sinh 2K_c = (x - 1/x)/2）。sinh 2K = 1 の解が R_{>0} にただ一つであることは

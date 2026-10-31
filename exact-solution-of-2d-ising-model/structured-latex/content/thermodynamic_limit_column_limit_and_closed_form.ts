@@ -757,7 +757,7 @@ c_+(M_{\mathrm{col}})
     labels: ["gamma_is_continuous"],
     statement: [
       paragraph([
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         " の ",
         math(String.raw`\gamma : \mathbb{R} \to \mathbb{R}_{\geq 0}`),
         " は連続であり、周期 ",
@@ -932,9 +932,9 @@ u
       ),
       paragraph([
         "であり（",
-        ref("def_A_theta"),
+        ref("def_gamma1_gamma2_of_theta"),
         "、",
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         "）、これが Onsager の自由エネルギーの表式である。",
       ]),
     ],
@@ -2503,7 +2503,7 @@ v^\top Wv
       ),
       paragraph([
         "であり（",
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         "）、これが Onsager の自由エネルギーの表式である。",
       ]),
       paragraph([
@@ -2650,7 +2650,7 @@ v^\top Wv
         " と列数 ",
         math(String.raw`M_{\mathrm{col}}`),
         " に依る）、",
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         " の ",
         math(String.raw`\gamma(\theta) = \mathrm{arccosh}\!\left(\cosh 2K_1\cosh 2K_2^* - \sinh 2K_1\sinh 2K_2^*\cos\theta\right) \in \mathbb{R}`),
         "（",

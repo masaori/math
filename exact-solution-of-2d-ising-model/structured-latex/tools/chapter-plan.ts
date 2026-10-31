@@ -58,8 +58,8 @@ export const plannedParts: readonly PlannedPart[] = [
       {
         title: { tex: String.raw`A(\tilde\theta_\mu)\text{ の対角化と }V^{(+)}\text{ の指数表示}` },
         organizationGoalLabel: "chapter_organization_goal_diagonalization_and_exponential_form",
-        // ゴールの式は一般の実数 θ での γ(θ) を定めるので、それを定める主張も挙げる。
-        goalLabels: ["V_plus_eq_c_exp_sum_gamma_check_number_operator", "gamma1_lower_bound_all_theta"],
+        // ゴールの式は一般の実数 θ での γ(θ) を定めるので、その定義も挙げる。
+        goalLabels: ["V_plus_eq_c_exp_sum_gamma_check_number_operator", "def_gamma_theta"],
         proposalEntryCount: 27,
       },
       {

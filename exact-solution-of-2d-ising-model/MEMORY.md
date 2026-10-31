@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの「γ(θ) の定義を主張から分ける」一単位を行った。γ(θ) := arccosh(γ_1(θ))（θ∈ℝ）を新しい定義 `def_gamma_theta`（対角化の章のファイル、`def_gamma1_gamma2_of_theta` の直後）に分け、γ(θ~_μ) はその値として定義を一本化した。旧 `def_gamma_theta_tilde_mu` は γ(θ~_μ) > 0 の主張だけになったので、ラベルを `gamma_theta_tilde_mu_positive` に改めた。`gamma1_lower_bound_all_theta` は γ_1 の出典を `def_gamma1_gamma2_of_theta` に直すためその直後へ移した。Lean の `NecSuf.arcosh_pos_of_one_lt` は人手と同じ背理法の鎖で証明し直した。次は作業の順序の五番目（どの章にも割り当てていない 7 項の確認）。
+
 2026-10-31: Lean の通しの証明の項目 7 の三番目の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」を移した。22 ファイルを `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移し（名前空間不変。番号を外した名前にした）、`Part006/`・`Part014/` は無くなった。import・コメントのパス・`lean/README.md`・`lean/docs/ch013`・`ch014`・`ch016` の対応表を直した。整数運動量の経路の記録は数えず残した。次は部「固有値問題」の「A(θ̃_μ) の対角化と V^{(+)} の指数表示」の章。
 
 2026-10-31: Lean の通しの証明の項目 7 の二番目の章「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」を移した。16 ファイルを `lean/Ising2D/PartitionFunction/ProjectionAndJordanWigner/` へ移し（名前空間不変。番号付きの 5 本は番号を外した名前にした）、import・コメントのパス・`lean/README.md`・`lean/docs/ch010-formalization.md`・`ch011-formalization.md` を直した。`DefinitionSymmetrizedTransferMatrix` は項目数が同数なので並びで先のこの章へ置いた（レビューの指摘）。`lake build`・`check-no-sorry.sh`・`check-end-to-end.sh` は通る。新しい worktree で最初の `lake build` が olean の「no such file or directory」で落ちたが、再実行で通った。次は部「固有値問題」の「A(θ̃_μ) への帰着」の章。

@@ -16,7 +16,7 @@
   `Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(∑_μ γ(θ̃_μ)(ε_μ - 1/2))`
 
 を主張する（章 017、Lean 未形式化）。これを構造 `Ising2D.VPlusData` として受け取る。
-`C = (2 sinh 2K_2)^{M/2} > 0` と `γ(θ̃_μ) > 0`（原文 `def_gamma_theta_tilde_mu`、
+`C = (2 sinh 2K_2)^{M/2} > 0` と `γ(θ̃_μ) > 0`（原文 `gamma_theta_tilde_mu_positive`、
 章 015 の `gamma1_gt_1_theta_tilde` の帰結）も仮定に含める。
 **`γ(θ̃_μ) > 0` が半整数運動量に固有の要点であり、これがあるので `sinh` の積が `0` にならない。**
 -/

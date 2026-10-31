@@ -78,6 +78,6 @@
   gamma_2_nonzero Step0 (4) s_2^* > 0: min = 4.210e-01  ->  PASS
   gamma_2_theta_tilde_nonzero: min |gamma_2(theta~_mu)| = 3.517e-01 -> 0 から離れている
   gamma1_gt_1_theta_tilde:    min (gamma_1 - 1) = 6.004e-02 -> 狭義に正
-  def_gamma_theta_tilde_mu:   min gamma(theta~_mu) = 3.448e-01 -> 狭義に正
+  gamma_theta_tilde_mu_positive:   min gamma(theta~_mu) = 3.448e-01 -> 狭義に正
   段数（区別された等式の種類）: 71
 check_02: PASS

@@ -40,7 +40,7 @@ def rrel(a, b):
 
 
 def gamma_of_theta(t, P):
-    """gamma1_lower_bound_all_theta の gamma(theta) = arccosh(gamma_1(theta))。
+    """def_gamma_theta の gamma(theta) = arccosh(gamma_1(theta))。
     gamma_1(theta) >= 1 は同じ主張が保証する。臨界点上の theta = 0（否定コントロールの delta = 0 でだけ現れる）では
     倍精度の丸めで gamma_1 が 1 をわずかに下回るので、1 で下から押さえてから arccosh を取る。"""
     x = RDF(g1(t, P))

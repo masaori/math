@@ -384,10 +384,14 @@ A &= s_1 s_2^*
         ref("def_critical_sinh_product_A"),
         " の ",
         math(String.raw`A`),
-        " と ",
-        ref("gamma1_lower_bound_all_theta"),
+        "、",
+        ref("def_gamma1_gamma2_of_theta"),
         " の ",
-        math(String.raw`\gamma_1, \gamma`),
+        math(String.raw`\gamma_1`),
+        " と ",
+        ref("def_gamma_theta"),
+        " の ",
+        math(String.raw`\gamma`),
         " について、**すべての実数** ",
         math(String.raw`\theta`),
         " で次の 3 つが成り立つ。",
@@ -424,7 +428,7 @@ A &= s_1 s_2^*
         "Step 1（",
         math(String.raw`\gamma_1`),
         " の書き換え）。",
-        ref("def_A_theta"),
+        ref("def_gamma1_gamma2_of_theta"),
         " の ",
         math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
         " から出発する。",
@@ -433,18 +437,18 @@ A &= s_1 s_2^*
         String.raw`\begin{aligned}
 \gamma_1(\theta)
 &= c_1c_2^* - s_1s_2^*\cos\theta
-   &&(\because \text{def\_A\_theta}) \\
+   &&(\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
-   &&(\because \text{cosh\_addition\_and\_half\_angle (1) を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
+   &&(\because \blkref{cosh_addition_and_half_angle}\text{ (1) を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
 &= \cosh\kappa + A\left(1-\cos\theta\right)
-   &&(\because \text{def\_kappa\_and\_A}) \\
+   &&(\because \blkref{def_kappa}\text{ と }\blkref{def_critical_sinh_product_A}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
    &&(\because \text{倍角公式 } \cos 2t = 1 - 2\sin^2 t \text{ を } t = \tfrac{\theta}{2} \text{ に適用})
 \end{aligned}`,
       ),
       paragraph([
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         " より ",
         math(String.raw`\gamma(\theta) = \mathrm{arccosh}(\gamma_1(\theta)) \in \mathbb{R}_{\geq 0}`),
         " が定まり ",
@@ -2112,7 +2116,7 @@ G''(\kappa)
         "と書く（",
         math(String.raw`\gamma(\theta)`),
         " は ",
-        ref("gamma1_lower_bound_all_theta"),
+        ref("def_gamma_theta"),
         " のもの。",
         math(String.raw`\log`),
         " は正の実数上の実対数で、",

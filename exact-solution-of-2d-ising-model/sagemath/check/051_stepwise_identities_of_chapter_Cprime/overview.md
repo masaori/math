@@ -27,7 +27,7 @@
   - 015 章: `def_gamma1_gamma2_of_theta` / `gamma_2_theta_tilde_nonzero` /
     `relation_of_gamma_2_theta_tilde` / `eigenvector_of_A_theta_tilde` /
     `diagonalization_check_P_D` / `det_A_theta_tilde` / `gamma1_gt_1_theta_tilde` /
-    `def_gamma_theta_tilde_mu` / `lambda_eq_exp_gamma_theta_tilde`
+    `gamma_theta_tilde_mu_positive` / `lambda_eq_exp_gamma_theta_tilde`
   - 016 章: `def_check_fermi` / `periodicity_of_check_fermi` / `anticommutator_of_check_psi` /
     `commutation_V_plus_check_psi` / `def_check_Vprime` /
     `action_of_T_check_Vprime_on_check_psi` /
@@ -198,7 +198,7 @@ sage check_04_016_steps.sage
 
 - `gamma_2_theta_tilde_nonzero`: `min |γ_2(θ~_μ)| = 3.5e-1`（0 から離れている）
 - `gamma1_gt_1_theta_tilde`: `min (γ_1(θ~_μ) − 1) = 6.0e-2 > 0`（狭義）
-- `def_gamma_theta_tilde_mu`: `min γ(θ~_μ) = 3.4e-1 > 0`（狭義）
+- `gamma_theta_tilde_mu_positive`: `min γ(θ~_μ) = 3.4e-1 > 0`（狭義）
 
 ### 数値的な注意（証明の内容とは無関係）
 

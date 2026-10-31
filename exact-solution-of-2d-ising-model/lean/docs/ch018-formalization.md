@@ -19,7 +19,7 @@
 | 構造 | 場所 | 受け取る内容（すべて原文の主張そのまま） | 出典の章 |
 | --- | --- | --- | --- |
 | `Ising2D.CheckFermi` | `Part018/Setup.lean` | `ψ̌` の正準反交換関係（`anticommutator_of_check_psi`）、`(ψ̌_μ^†)^* = ψ̌_{M+1-μ}`（`check_number_operator_is_hermitian` (3)） | 016 |
-| `Ising2D.VPlusData` | `Part018/Claim003_TraceEpsilonVPlus.lean` | `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、`Λ̌_ε = C·exp(∑_μ γ(θ̃_μ)(ε_μ − 1/2))`、`C > 0`、`γ(θ̃_μ) > 0`（`eigenvalues_of_V_plus`, `def_gamma_theta_tilde_mu`） | 015・017 |
+| `Ising2D.VPlusData` | `Part018/Claim003_TraceEpsilonVPlus.lean` | `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`、`Λ̌_ε = C·exp(∑_μ γ(θ̃_μ)(ε_μ − 1/2))`、`C > 0`、`γ(θ̃_μ) > 0`（`eigenvalues_of_V_plus`, `gamma_theta_tilde_mu_positive`） | 015・017 |
 | `Ising2D.EvenSectorBridge` | `Part018/Theorem009_CPlusEqualsLambda.lean` | 章 011 の実行列 `W` と章 017 の複素行列 `V^{(+)}` の橋渡し（`W P^{(+)} = V^{(+)} P^{(+)}`、`V^{(+)}` が実行列であること） | 011・017 |
 
 **`ε` が `Ž, Y̌` と反可換であること（`epsilon_anticommutes_with_check_Z_Y` (1)(2)）は
