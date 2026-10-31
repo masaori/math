@@ -2298,8 +2298,6 @@ targets=(
   Ising2DLambda.KacWard.kacWardSignedPermutationTerm_orbit_product_from_necSuf
   Ising2DLambda.NecSuf.KacWard.weightedSum_eq_sum_label_fibers_necSuf
   Ising2DLambda.KacWard.signedEvenSubgraphPolynomial_eq_sectorSum
-  Ising2DLambda.NecSuf.KacWard.supportIncidence_even_necSuf
-  Ising2DLambda.KacWard.reversalFreeMovedSupport_even
   Ising2DLambda.Tools.integerSequence_levelCrossing
   Ising2DLambda.NecSuf.Tools.adjacent_difference_sum_necSuf
   Ising2DLambda.Tools.integerSequence_levelCrossing_from_necSuf
