@@ -19,7 +19,7 @@ export default defineBlocks([
     title: { text: "この論文のゴール" },
     labels: ["chapter_organization_goal_of_this_paper"],
     statement: [
-      paragraph(["この論文のゴールは、次の三つである。"]),
+      paragraph(["この論文のゴールは、自由エネルギーの閉形式を解析し、臨界点を厳密に得ることである。そのための手順は次の三つである。"]),
       list([
         [
           "2次元 Ising 模型の分配関数 ",
