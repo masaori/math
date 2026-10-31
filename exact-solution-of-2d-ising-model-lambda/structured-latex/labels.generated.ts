@@ -790,7 +790,6 @@ export const ALL_LABELS = [
   "def_inversion_pairs",
   "def_isolated_crossing_smoothing",
   "def_iterated_transverse_staircase",
-  "def_kac_ward_determinant_permutation_term",
   "def_kac_ward_determinants",
   "def_kac_ward_polynomial_matrices",
   "def_kac_ward_transition_matrices",

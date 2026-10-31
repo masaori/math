@@ -7,6 +7,28 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_determinant_permutation_term_archived",
+    targets: ["def_kac_ward_polynomial_matrices"],
+    title: { text: "不採用経路: Kac--Ward 行列式の置換項" },
+    body: [
+      paragraph(["Pfaffian 経路で平方恒等式を閉じたため、置換項の直接比較は採らない。元の定義を保存する。"]),
+      paragraph(["元の定義:"]),
+      paragraph([
+        math(String.raw`(a,b)\in\mathcal S`), " と ",
+        math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " に対し、",
+        ref("def_qbar_polynomial_determinant"), " の対応する項を",
+      ]),
+      displayMath(String.raw`T^{a,b}_{\varphi}(x):=
+\widehat{\operatorname{sgn}(\varphi)}
+\prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
+\in\overline{\mathbb Q}[x]`),
+      paragraph([
+        "と定める。行列は ", ref("def_kac_ward_polynomial_matrices"),
+        "、符号の定数多項式は ", ref("def_qbar_constant_embedding"), " で定めた。",
+      ]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_smoothing_phase_reversal_iff_archived",
     targets: ["def_phase_reversing_contact_pair"],
     title: { text: "不採用経路: 接触平滑化の位相符号反転条件" },

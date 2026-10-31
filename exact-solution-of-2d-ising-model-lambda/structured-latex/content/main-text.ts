@@ -3378,17 +3378,17 @@ z^{n}
                         displayMath(String.raw`\begin{aligned}
 \bigl(A\cdot(v\oplus w)\bigr)(u)
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\,(v\oplus w)(u')
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\bigl(v(u')+w(u')\bigr)
-&&(\because\ \blkref{def_qbar_vector_add})\\
+&&\bigl(\because\ \blkref{def_qbar_vector_add}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}\bigl(A_{u,u'}\,v(u')+A_{u,u'}\,w(u')\bigr)
-&&(\because\ \text{元と 2 元の和の積についての分配則})\\
+&&\bigl(\because\ \text{元と 2 元の和の積についての分配則}\bigr)\\
 &=\sum_{u'\in \mathcal{J}}A_{u,u'}\,v(u')+\sum_{u'\in \mathcal{J}}A_{u,u'}\,w(u')
-&&(\because\ \text{有限和の項ごとの分割})\\
+&&\bigl(\because\ \text{有限和の項ごとの分割}\bigr)\\
 &=(A\cdot v)(u)+(A\cdot w)(u)
-&&(\because\ \blkref{def_qbar_matrix_action})\\
+&&\bigl(\because\ \blkref{def_qbar_matrix_action}\bigr)\\
 &=\bigl((A\cdot v)\oplus(A\cdot w)\bigr)(u)
-&&(\because\ \blkref{def_qbar_vector_add})
+&&\bigl(\because\ \blkref{def_qbar_vector_add}\bigr)
 \end{aligned}`),
                         paragraph([
                           math(String.raw`u\in \mathcal{J}`),
@@ -74883,31 +74883,7 @@ const chapter_kac_ward_permutation_expansion = defineSection({
                   element: {
                     kind: "elementGroup",
                     id: "group_of_kac_ward_claim_determinant_term_nonzero_iff",
-                    beforeFocus: [{
-                      role: "prerequisiteDefinition",
-                      element: {
-                        id: "kac_ward_definition_determinant_permutation_term",
-                        kind: "definition",
-                        title: { text: "Kac--Ward 行列式の置換項" },
-                        labels: ["def_kac_ward_determinant_permutation_term"],
-                        habitat: "Qbar",
-                        statement: [
-                          paragraph([
-                            math(String.raw`(a,b)\in\mathcal S`), " と ",
-                            math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " に対し、",
-                            ref("def_qbar_polynomial_determinant"), " の対応する項を",
-                          ]),
-                          displayMath(String.raw`T^{a,b}_{\varphi}(x):=
-\widehat{\operatorname{sgn}(\varphi)}
-\prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
-\in\overline{\mathbb Q}[x]`),
-                          paragraph([
-                            "と定める。行列は ", ref("def_kac_ward_polynomial_matrices"),
-                            "、符号の定数多項式は ", ref("def_qbar_constant_embedding"), " で定めた。",
-                          ]),
-                        ],
-                      },
-                    }],
+                    beforeFocus: [],
                     focus: {
                       id: "kac_ward_claim_determinant_term_nonzero_iff",
                       kind: "claim",
@@ -75464,7 +75440,7 @@ O_{\varphi}(\vec e_1)
                         paragraph([
                           "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
                           math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、置換項（",
-                          ref("def_kac_ward_determinant_permutation_term"), "）は",
+                          "参照用ノート「不採用経路: Kac--Ward 行列式の置換項」）は",
                         ]),
                         displayMath(String.raw`T^{a,b}_{\varphi}(x)
 =\widehat{\operatorname{sgn}(\varphi)}\cdot
@@ -75491,7 +75467,7 @@ O_{\varphi}(\vec e_1)
 T^{a,b}_{\varphi}(x)
 &=\widehat{\operatorname{sgn}(\varphi)}
 \prod_{\vec e\in\vec E_L}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
-&&\bigl(\because\ \blkref{def_kac_ward_determinant_permutation_term}\bigr)\\
+&&\bigl(\because\ \text{参照用ノート「不採用経路: Kac--Ward 行列式の置換項」の定義}\bigr)\\
 &=\widehat{\operatorname{sgn}(\varphi)}\cdot
 \Bigl(\prod_{\vec e\in\vec E_L\setminus M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)\Bigr)\cdot
 \prod_{\vec e\in M(\varphi)}K^{a,b}_{\vec e,\varphi(\vec e)}(x)
@@ -75657,7 +75633,7 @@ T^{a,b}_{\varphi}(x)
                       paragraph([
                         "任意の ", math(String.raw`(a,b)\in\mathcal S`), " と ",
                         math(String.raw`\varphi\in\operatorname{Perm}(\vec E_L)`), " について、置換項（",
-                        ref("def_kac_ward_determinant_permutation_term"), "）は",
+                        "参照用ノート「不採用経路: Kac--Ward 行列式の置換項」）は",
                       ]),
                       displayMath(String.raw`T^{a,b}_{\varphi}(x)
 =\prod_{C\in\mathcal C(\varphi)}\left(
@@ -75884,7 +75860,7 @@ T^{a,b}_{\varphi}(x)
 -x^{\lvert C\rvert}\cdot
 \widehat{(-1)^{a\,h(\gamma_C)+b\,v(\gamma_C)}\,\zeta_8^{\,t_{\circ}(\gamma_C)}}\right)`),
                       paragraph([
-                        "が成り立つ。置換項は ", ref("def_kac_ward_determinant_permutation_term"),
+                        "が成り立つ。置換項は参照用ノート「不採用経路: Kac--Ward 行列式の置換項」",
                         "、軌道族は ", ref("def_moved_orbit_family"),
                         "、二つの切断線偶奇は ", ref("def_edge_sequence_seam_parities"),
                         "、循環総回転数は ", ref("def_cyclic_total_turning"),
@@ -76047,7 +76023,7 @@ T^{a,b}_{\varphi}(x)
                       displayMath(String.raw`\begin{aligned}
 D^{a,b}_L(x)
 &=\sum_{\varphi\in\operatorname{Perm}(\vec E_L)}T^{a,b}_{\varphi}(x)
-&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\text{ と }\blkref{def_kac_ward_determinant_permutation_term}\bigr)\\
+&&\bigl(\because\ \blkref{def_qbar_polynomial_determinant}\text{ と参照用ノート「不採用経路: Kac--Ward 行列式の置換項」の定義}\bigr)\\
 &=\sum_{\varphi\in\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
 +\sum_{\varphi\in\operatorname{Perm}(\vec E_L)\setminus\operatorname{Perm}_{\mathrm{nb}}(\vec E_L)}T^{a,b}_{\varphi}(x)
 &&\bigl(\because\ \text{冒頭の互いに素な覆いで有限和が分かれる}\bigr)\\
