@@ -19,13 +19,14 @@
 本文のラベルに対応する `(+)` の定義・主張はその特殊化と定義から一致する。
 
 `V_1, V_2` は 001 章 `def_transfer_matrix` の成分定義（`Ising2D.V1`, `Ising2D.V2`、
-`Part001/DefinitionTransferMatrix.lean`）ただ 1 つであり、そのパウリ行列表示は 004 章の主張
+`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）ただ 1 つであり、そのパウリ行列表示は 004 章の主張
 （`first_transfer_matrix_pauli_form` / `second_transfer_matrix_pauli_form`）である。
 以前この章にあった成分定義とパウリ表示の突き合わせ（旧 `V1_component_equals_pauli` /
 `V2_component_equals_pauli`）、その前提（`def_config_basis_iso`, `sigma_z_diagonal_action`,
 `exp_of_diagonal_matrix`, `two_by_two_transfer_identity`）、分配関数の定義と表式は、人手の本文に
-合わせて `Part001/`・`Part004/` へ移した。一覧は `lean/README.md` の
-「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示（章 001・004）」節にある。
+合わせて部「分配関数」の章「転送行列による表示」（`PartitionFunction/TransferMatrixRepresentation/`）へ置いてある
+（`exp_of_diagonal_matrix` だけは部「数学的道具立て」の項目で、まだ `Part004/` にある）。一覧は `lean/README.md` の
+「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節にある。
 
 ---
 
@@ -89,10 +90,11 @@
 | ノート `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
 
 必要十分版を置かなかった主張とその理由: 本章の主張は上の表のとおり必要十分版を持つか、その系である。
-004 章へ移した主張（`first_transfer_matrix_pauli_form`, `second_transfer_matrix_pauli_form`,
-`two_by_two_transfer_identity`, `def_config_basis_iso`, `V1_in_Z_Y_epsilon`, `V2_in_Z_Y`）で
+この章から移した主張のうち、`first_transfer_matrix_pauli_form`, `second_transfer_matrix_pauli_form`,
+`two_by_two_transfer_identity`, `def_config_basis_iso` は `PartitionFunction/TransferMatrixRepresentation/` に、
+`V1_in_Z_Y_epsilon`, `V2_in_Z_Y` は `Part004/` にある。これらで
 必要十分版を置かなかった理由は、各 Lean ファイルの冒頭コメントと `lean/README.md` の
-「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示（章 001・004）」節に書いた。
+「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節に書いた。
 
 ---
 

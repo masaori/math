@@ -14,7 +14,7 @@
 * Lean の列の添字 `m : Fin M` は人手の `m - 1` なので、人手の指数 `M_col - m` は
   Lean では `M - 1 - m` である。
 -/
-import Ising2D.Part001.DefinitionRowConfigurations
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurations
 import Mathlib.Tactic.Linarith
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Tactic.NormNum

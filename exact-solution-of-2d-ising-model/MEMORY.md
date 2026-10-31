@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 7（フォルダを章立てに合わせる）の最初の章「転送行列による表示」を移した。14 ファイルを `lean/Ising2D/PartitionFunction/TransferMatrixRepresentation/` へ移し（名前空間不変）、import・コメントのパス・`lean/README.md`・`lean/docs/ch010-formalization.md` を直した。置き場の規則（章は `Ising2D/<部>/<章>/`、項目の章は棚卸しの `chapterKey`、混在ファイルは形式化している項目の多数決、数学的道具立ては `MathematicalTools/`、退避した経路は `RoutesNotAdopted/`）を runbook の項目 7 に書いた。`lake build`・`check-no-sorry.sh`・`check-end-to-end.sh` は通る。次は「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」の章。
+
 2026-10-31: Lean の通しの証明の項目 6 を終えた。通しの定理 `onsager_exact_solution_end_to_end`（`lean/Ising2D/Part018/TheoremOnsagerExactSolutionEndToEnd.lean`）を立て、`lean/scripts/check-end-to-end.sh` が通る（`sorryAx` 非依存）。Step 1 の `c(M) > 0` は人手どおり `def_rayleigh_sup` から（`onsager_limit_in_N_row_physical`）。ゴール台帳の「Lean で通しに証明」は、フォルダの組み直し（項目 7）が残るので未達のまま。次は項目 7 の最初の章「転送行列による表示」（状態台帳の「次の一歩」）。
 
 2026-10-31: 章立ての組み直しの四番目の項目の八番目の章「M→∞ の極限と閉形式」を組み直した。9 項と案内文・注記 4 つを `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts` へ依存順で移し（id・ラベル不変。018 は空になったので消した）、`onsager_exact_solution` の Step 2・3 を独立した主張 `c_between_Lambda_half_and_twice_Lambda_half` にし、章末にゴールの主張 `c_plus_value_c_sandwich_and_double_limit_of_log_Z`（SageMath と Lean 付き）を置いた。`c_plus_equals_Lambda_half_integer` の根拠欄を `\blkref` に直したので、未割り当てだった `check_number_operator_is_hermitian`・`Z_Y_linearly_independent` もこの章に入った（未割り当ては 7 項）。SageMath の 053 の .sage は `sage file.sage` では prelude を見つけないので、`__file__` をそのディレクトリに置いた小さな .sage から load する。次は臨界点の章（020 の 9 項と 008 の 1 項）。

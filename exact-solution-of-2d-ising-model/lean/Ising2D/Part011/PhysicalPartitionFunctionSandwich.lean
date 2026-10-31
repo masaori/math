@@ -52,7 +52,7 @@
 同じ具体的な行列についての主張を具体化しただけなので、必要十分版は置かない
 （抽象的な内容は `partition_function_sandwich` と `Ising2D/NecSuf/RayleighMoments.lean` に尽きている）。
 -/
-import Ising2D.Part001.ClaimPartitionFunctionViaTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
 import Ising2D.Part004.ClaimV2InZY
 import Ising2D.Part009.Claim013_PositiveDefinite
 import Ising2D.Part011.PhysicalSymTransferBridge

@@ -13,7 +13,7 @@
 Lean 側の表現 `Ising2D.TensorPow M = Matrix (Conf M) (Conf M) ℂ`（`Ising2D/Basic.lean`）は
 **添字型が `Conf M = Fin M → Fin 2` そのもの**であり、人手の多重添字の集合 `𝓘 = {1,2}^{M_col}` は
 `Conf M` である（人手の `def_kronecker` が「`𝓘` の元 `I` を行番号・列番号 `ν(I)` と同一視して使う」と
-定めていることの Lean 側の表現）。したがって `ι` は `𝔐 = SpinConf M`（`Part001/DefinitionRowConfigurations.lean`）
+定めていることの Lean 側の表現）。したがって `ι` は `𝔐 = SpinConf M`（`PartitionFunction/TransferMatrixRepresentation/DefinitionRowConfigurations.lean`）
 から `Conf M` への写像 `Ising2D.configBasisIso` として与える（成分ごとの写像 `SpinVal → Fin 2` の直積）。
 `ι` が全単射であること（成分ごとに逆写像 `spinOfIdx` をもつこと）も合わせて `Equiv` として持つ。
 
@@ -23,7 +23,7 @@ Lean 側の表現 `Ising2D.TensorPow M = Matrix (Conf M) (Conf M) ℂ`（`Ising2
 であり、逆向きの読み替え（多重添字からスピン値へ）を `Ising2D.sgn` と書く。
 -/
 import Ising2D.Basic
-import Ising2D.Part001.DefinitionRowConfigurations
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurations
 import Mathlib.Tactic.Linarith
 
 namespace Ising2D

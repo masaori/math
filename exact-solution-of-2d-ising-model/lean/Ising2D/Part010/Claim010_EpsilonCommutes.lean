@@ -37,8 +37,8 @@
 -/
 import Ising2D.Part010.Claim009_EpsilonProjectors
 import Ising2D.Part010.DefinitionV1PlusSquareRoot
-import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
-import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
 import Ising2D.Part006.Claim000_AnticommutatorZY
 
 namespace Ising2D

@@ -30,7 +30,7 @@ Jordan--Wigner 表示を突き合わせることだからである。証明が�
 既に `siteProd_mul` と `siteProd_smul_family` が表す「サイトごとの積」と
 「各サイトについての複素線型性」に分離されている。
 -/
-import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
 
 namespace Ising2D
 

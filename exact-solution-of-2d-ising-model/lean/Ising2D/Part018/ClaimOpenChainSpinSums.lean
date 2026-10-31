@@ -9,7 +9,7 @@
 | 同 `E(s) ∈ ℤ` | `openChainEnergy_mem_int` |
 | `open_chain_partition_sum` の Step 1 の `t_m := s(m)s(m+1)` と `Φ(s) = (s(1); t_1,…,t_{M_col-1})` | `openChainBondSpin`・`openChainChange` |
 | 同 Step 1 の「`s(m+1) = s(m)t_m` で順に一意に定まる」 | `openChainChange_injective` |
-| 同 Step 1 の「両側の集合はともに `2^{M_col}` 個の元をもつ」 | `card_spinConf`（`Part001/ClaimRowConfigurationNumberingBijective.lean`）・`card_openChainChange_target` |
+| 同 Step 1 の「両側の集合はともに `2^{M_col}` 個の元をもつ」 | `card_spinConf`（`PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean`）・`card_openChainChange_target` |
 | 同 Step 1 の「`Φ` は全単射」 | `openChainChange_bijective` |
 | 同 Step 2 の `E(s) = ∑_m t_m` と `exp(KE(s)) = ∏_m exp(Kt_m)`（`theorem_exp_product`） | `openChainEnergy_eq_sum_bondSpin`・`exp_openChainEnergy` |
 | 同 Step 2 の式変形と `open_chain_partition_sum` | `open_chain_partition_sum` |
@@ -45,9 +45,9 @@
 必要十分版を `Ising2D/NecSuf/OpenChainSpinSum.lean` に置き、具体版をその系として
 `Ising2D/Part018/ClaimOpenChainSpinSumsFromNecSuf.lean` で導出した。
 -/
-import Ising2D.Part001.ClaimRowConfigurationNumberingBijective
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimRowConfigurationNumberingBijective
 import Ising2D.Part004.Definition010_H1H2V1V2
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.Part008.Claim001_CommutatorHZY
 import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Deriv

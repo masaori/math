@@ -74,7 +74,15 @@ EOF
 
 ## 人手証明との対応の付け方
 
-- Lean のファイルパスは `parts/` のディレクトリ番号・ファイル番号に合わせる。
+- **フォルダは承認された章立て（部と章の名前）に合わせて組み直している途中である。** 置き場の規則の正本は
+  `docs/tasks/lean-end-to-end-runbook.md` の「作業の順序」の最後の項目「フォルダを章立てに合わせて組み直す」である。
+  章のフォルダは `Ising2D/<部>/<章>/`（番号を付けない英語名）で、移し終えた章は次のとおりである。
+
+  | 部 | 章 | フォルダ |
+  | --- | --- | --- |
+  | 分配関数 | 転送行列による表示 | `Ising2D/PartitionFunction/TransferMatrixRepresentation/` |
+
+- まだ移していないファイルは旧 Typst の章番号のフォルダ（`Part000`〜`Part020`）にあり、そのパスは `parts/` のディレクトリ番号・ファイル番号に合わせてある。
 
   | 人手証明（Typst） | Lean |
   | --- | --- |
@@ -284,7 +292,10 @@ EOF
 テンソル冪の基底（`<tensor_basis>`）も `Basis.piTensorProduct` 経由で
 `Ising2D.tensorPowBasis` として用意してあるため、必要な結果は移送できる。
 
-## 転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示（章 001・004）
+## 転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示
+
+形式化は部「分配関数」の章「転送行列による表示」のフォルダ `Ising2D/PartitionFunction/TransferMatrixRepresentation/` にある
+（`exp_of_diagonal_matrix` だけは部「数学的道具立て」の項目で、まだ `Part004/` にある）。
 
 人手の本文は `V_1, V_2` を 001 章 `def_transfer_matrix` の成分定義ただ 1 つで定め、パウリ行列による表示は
 004 章の主張 `first_transfer_matrix_pauli_form` / `second_transfer_matrix_pauli_form` である。
@@ -345,21 +356,21 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 
 | 人手のラベル | Lean | ファイル |
 | --- | --- | --- |
-| `def_row_configurations` | `Ising2D.SpinVal` / `SpinConf` | `Part001/DefinitionRowConfigurations.lean` |
-| `def_row_configuration_numbering` | `Ising2D.spinBit` / `rowConfigOrd` | `Part001/DefinitionRowConfigurationNumbering.lean` |
-| `row_configuration_numbering_bijective` | `Ising2D.row_configuration_numbering_bijective`（途中は `geom_sum_two` / `rowConfigOrd_mem_Icc` / `rowConfigOrd_sub_pos_of_first_diff` / `rowConfigOrd_injective`） | `Part001/ClaimRowConfigurationNumberingBijective.lean` |
-| `def_transfer_matrix` | **`Ising2D.V1` / `Ising2D.V2`**（定義式は `V1_apply_configBasisIso` / `V2_apply_configBasisIso`） | `Part001/DefinitionTransferMatrix.lean` |
-| `def_lattice_size` / `def_partition_function_2d_ising` | `Ising2D.partitionFunction` | `Part001/DefinitionPartitionFunction.lean` |
-| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`） | `Part001/ClaimPartitionFunctionViaTransferMatrix.lean` |
-| `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `Part004/DefinitionConfigBasisIso.lean` |
-| `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `Part004/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
-| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `Part004/ClaimSigmaZDiagonalAction.lean` |
+| `def_row_configurations` | `Ising2D.SpinVal` / `SpinConf` | `PartitionFunction/TransferMatrixRepresentation/DefinitionRowConfigurations.lean` |
+| `def_row_configuration_numbering` | `Ising2D.spinBit` / `rowConfigOrd` | `PartitionFunction/TransferMatrixRepresentation/DefinitionRowConfigurationNumbering.lean` |
+| `row_configuration_numbering_bijective` | `Ising2D.row_configuration_numbering_bijective`（途中は `geom_sum_two` / `rowConfigOrd_mem_Icc` / `rowConfigOrd_sub_pos_of_first_diff` / `rowConfigOrd_injective`） | `PartitionFunction/TransferMatrixRepresentation/ClaimRowConfigurationNumberingBijective.lean` |
+| `def_transfer_matrix` | **`Ising2D.V1` / `Ising2D.V2`**（定義式は `V1_apply_configBasisIso` / `V2_apply_configBasisIso`） | `PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` |
+| `def_lattice_size` / `def_partition_function_2d_ising` | `Ising2D.partitionFunction` | `PartitionFunction/TransferMatrixRepresentation/DefinitionPartitionFunction.lean` |
+| `partition_function_via_transfer_matrix` | `Ising2D.partition_function_via_transfer_matrix`（`N_row ≥ 1`。途中は `V1_mul_V2_apply` / `rowsToLattice`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean` |
+| `def_config_basis_iso` | `Ising2D.configBasisIso` / `sgn` / `basisVec` | `PartitionFunction/TransferMatrixRepresentation/DefinitionConfigBasisIso.lean` |
+| `config_numbering_equals_kronecker_numbering` | `Ising2D.config_numbering_equals_kronecker_numbering`（`ν` は `kroneckerNumbering`） | `PartitionFunction/TransferMatrixRepresentation/ClaimConfigNumberingEqualsKroneckerNumbering.lean` |
+| `sigma_z_diagonal_action` | `Ising2D.sigmaZ_eq_diagonal` / `sigmaZ_mulVec_basisVec` ほか | `PartitionFunction/TransferMatrixRepresentation/ClaimSigmaZDiagonalAction.lean` |
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `Part004/ClaimExpOfDiagonalMatrix.lean` |
-| `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `Part004/ClaimFirstTransferMatrixPauliForm.lean` |
-| `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `Part004/DefinitionSecondDualCouplingConstant.lean` |
+| `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
+| `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean` |
 | `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `Part004/ClaimSecondDualCouplingRelation.lean`（必要十分版からの導出は同 `FromNecSuf`） |
-| `two_by_two_transfer_identity` | `Ising2D.two_by_two_transfer_identity` | `Part004/ClaimTwoByTwoTransferIdentity.lean` |
-| `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `Part004/ClaimSecondTransferMatrixPauliForm.lean` |
+| `two_by_two_transfer_identity` | `Ising2D.two_by_two_transfer_identity` | `PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` |
+| `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean` |
 | `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `Part004/ClaimV1InZYEpsilon.lean` |
 | `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `Part004/ClaimV2InZY.lean` |
 
@@ -391,7 +402,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
   極限の一意性の 3 段で書いた。人手の「成分ごとの極限」は、有限次元の行列空間の位相での極限として扱っている。
 * `two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」は、人手が級数を偶数項と奇数項に
   分けるのに対し、Lean は `σ^x` を対角化して `exp_of_diagonal_matrix` を使う（以前からの差。
-  `Part004/ClaimTwoByTwoTransferIdentity.lean` 冒頭に記録）。
+  `PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` 冒頭に記録）。
 * `partition_function_via_transfer_matrix` の中間目標「行列の冪の成分」(*) と「トレースの展開」は、
   必要十分版 `NecSuf.trace_pow_succ`（任意の可換半環上の行列）の系として得ている。
 * 人手が仮定する `K_1, K_2 > 0` のうち、`V1`, `V2`, `partitionFunction` の定義、

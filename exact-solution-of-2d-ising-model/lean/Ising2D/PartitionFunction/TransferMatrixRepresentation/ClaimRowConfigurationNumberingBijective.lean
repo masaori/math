@@ -25,7 +25,7 @@ Lean の `M - 1 - m`（`m : Fin M` は人手の `m - 1`）である。
 
 必要十分版は置かない。整数の 2 進展開の一意性という具体的な主張であり、取り払える構造が無い。
 -/
-import Ising2D.Part001.DefinitionRowConfigurationNumbering
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurationNumbering
 import Mathlib.Algebra.BigOperators.Intervals
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
 import Mathlib.Order.Interval.Finset.Nat

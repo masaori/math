@@ -18,7 +18,7 @@
   連続な環準同型 `Matrix.diagonalRingHom` と `Pi.evalRingHom` への特殊化から導いたもの）
 の 2 本を置く。
 -/
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.ExpDiagonal
 import Ising2D.Representation
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential

@@ -20,9 +20,9 @@
 `V1PauliForm M K1` と `V2PauliForm M (sinh 2K_2) K_2^*` は、それぞれ右辺の式に付けた名前である。
 人手の仮定 `K_1 > 0` は、この 3 行のどれも使わないので置かない。
 -/
-import Ising2D.Part001.ClaimPartitionFunctionViaTransferMatrix
-import Ising2D.Part004.ClaimFirstTransferMatrixPauliForm
-import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimFirstTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
 
 namespace Ising2D
 

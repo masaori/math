@@ -60,11 +60,20 @@
 - `lake build`、`check-no-sorry.sh`、`check-end-to-end.sh` はすべて通る（通しの定理は `sorryAx` に依存しない）。
 - Part020 に人手の定義と別表示の `KStar`（`arsinh(1/sinh 2K)/2`）が残っている。`Kstar_eq_KStar` で
   人手の `Kstar` へ接続したが、二重定義の解消は項目 7 の章ごとの移動のときに行う。
+- 項目 7 は章ごとに進めている。置き場の規則は runbook の項目 7 に書いた。
+  - 部「分配関数」の章「転送行列による表示」（済み）: 14 ファイルを `Ising2D/PartitionFunction/TransferMatrixRepresentation/` へ移した
+    （旧 `Part001/` の 6 本は全部、旧 `Part004/` から `DefinitionConfigBasisIso`・`ClaimConfigNumberingEqualsKroneckerNumbering`・`ClaimSigmaZDiagonalAction`・
+    `ClaimFirstTransferMatrixPauliForm`・`DefinitionSecondDualCouplingConstant`・`ClaimTwoByTwoTransferIdentity`・`ClaimSecondTransferMatrixPauliForm`・
+    `ClaimPartitionFunctionViaPauliTransferMatrices`）。`Part001/` は無くなった。
+    この章の項目のうち `def_site_pauli_matrices` は `Part004/Definition000_TransferMatrixSymbols.lean`（多数決で次の章）の中にあり、
+    `def_real_logarithm_positive`・`def_first_dual_coupling_constant` は形式化されていない。
+  - 未割り当ての項目だけを形式化していて動かさないファイル: `Part004/ClaimEpsilonActionEigenvalues.lean`（`epsilon_action_eigenvalues_are_signs`）と、
+    その必要十分版の導出。割り当ては構成再編の連続実行を待つ。
 
 ## 次の一歩
 
-項目 7：フォルダを章立てに合わせて組み直す。章の割り当ては `docs/organization/flat-inventory.json` の各項目の `chapterKey`（章の一覧は `parts[].chapters[]`）に
-すでにある（2026-10-31 時点で 170 項が章に割り当て済み、9 項が未割り当て）。最初の章は部「分配関数」の「転送行列による表示」とする。
-その章の項目のラベルを形式化している Lean ファイル（冒頭の `正本:` と人手ラベルのコメントで引く）を、章の名前を英語で表した番号の無いフォルダへ移し、
-`Ising2D.lean` の import、`check-no-sorry.sh`、`lean/README.md`・`lean/docs/` の対応表、ファイル冒頭の `正本:` のパスを同じ回で直す。名前空間は変えない。
-数学的道具立ての部の項目（`chapterKey` が無い）と、章に割り当てられていない項目を形式化したファイルの置き場は、最初の章を移すときに決めて runbook の項目 7 に書き足す。
+項目 7 の 2 番目の章、部「分配関数」の「ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示」（フォルダ `Ising2D/PartitionFunction/ProjectionAndJordanWigner/`）を移す。
+棚卸しの `chapterKey` が `chapter_organization_goal_projection_and_jordan_wigner` の項目を形式化したファイルを、runbook の置き場の規則で選ぶ
+（候補: `Part004/Definition000_TransferMatrixSymbols.lean`・`Definition010_H1H2V1V2.lean`・`ClaimV1InZYEpsilon.lean`・`ClaimV2InZY.lean`・
+`ClaimV1RestrictionToEigenspaces.lean`・`ClaimSecondDualCouplingRelation.lean`（と `FromNecSuf`）・`Part010/DefinitionV1PlusSquareRoot.lean` など）。
+`Ising2D.lean` の import、コメントのパス、`lean/README.md`・`lean/docs/` の対応表を同じ回で直す。

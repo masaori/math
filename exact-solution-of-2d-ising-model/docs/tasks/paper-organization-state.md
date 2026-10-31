@@ -118,7 +118,7 @@
   - **章末のゴールの主張を足した。** 章立てのゴールの式（$Z=\mathrm{tr}((V_1V_2)^N)$ と $V_1,V_2$ のパウリ行列表示）を、代入した一本の等式として
     主張する claim `partition_function_via_pauli_transfer_matrices` を章の最後に置いた。証明は既存の三主張の代入だけである。
     SageMath（`sagemath/check/partition_function_via_pauli_transfer_matrices/`、36 組を `AA` で厳密に一致）と Lean
-    （`lean/Ising2D/Part004/ClaimPartitionFunctionViaPauliTransferMatrices.lean`、三つの書き換え）を足した。
+    （`lean/Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaPauliTransferMatrices.lean`、三つの書き換え）を足した。
     `tools/chapter-plan.ts` のこの章の `goalLabels` をこのラベル一つにし、冒頭の章立ての説明のこの章のゴールの式も同じ一本の式に揃えた。
     章の項目数は 22（割り当て 21 とゴールの主張 1。章立て案は 20）。
   - **組み直した章は本文の末尾に置く。** 番号を持つ旧い章のファイルには数学的道具立てが散らばっており、組み直した章はそれを使うので、

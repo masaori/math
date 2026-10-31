@@ -23,7 +23,7 @@
 * `V2_exponential_representation` の 2 行（`V2_in_Z_Y` と `def_H2`）→ `V2_exponential_representation`
   （第 2 行は `V2FromJordanWigner_eq_V2H2Form`）。
 -/
-import Ising2D.Part004.ClaimSecondTransferMatrixPauliForm
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSecondTransferMatrixPauliForm
 
 namespace Ising2D
 

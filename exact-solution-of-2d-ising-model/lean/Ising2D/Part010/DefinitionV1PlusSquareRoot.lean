@@ -22,7 +22,7 @@
 必要十分版は置かない。平方根性の核「可換な `X, X` について `exp X exp X = exp(X+X)`」は mathlib の
 `Matrix.exp_add_of_commute` そのものであり、ほどく構造が無い。
 -/
-import Ising2D.Part001.DefinitionTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 
 namespace Ising2D
 

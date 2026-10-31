@@ -28,7 +28,7 @@
 取り払える構造が残らないので、必要十分版は置かない。
 -/
 import Ising2D.Part018.DefinitionOpenChainAndBoundaryOperators
-import Ising2D.Part004.ClaimSigmaZDiagonalAction
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.Part010.Claim010_EpsilonCommutes
 
 namespace Ising2D

@@ -28,7 +28,7 @@
   各段（`def_transfer_matrix`・分配則・`theorem_exp_product`・`A` の成分・クロネッカー積の成分）は
   `V2_apply_configBasisIso_eq_siteProd` の中で一行ずつ対応する。行番号 `ord(μ)` と `ν(ι(μ))` の
   読み替え（`config_numbering_equals_kronecker_numbering`）は、Lean では行列の添字が `ι(μ)` そのもの
-  であることにあたる（`Part001/DefinitionTransferMatrix.lean` 冒頭）。すべての行・列番号が
+  であることにあたる（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` 冒頭）。すべての行・列番号が
   `(ord(μ), ord(μ'))` の形に書けること（`row_configuration_numbering_bijective` の全射性）は
   `ι` の全射性にあたる。
 * 中間目標「1 因子の `exp` をサイト演算子の `exp` にする」→ `exp_smul_sigmaX`。
@@ -48,8 +48,8 @@
 突き合わせであり、一般的な部分（連続な環準同型と指数関数の可換性）は `Ising2D/NecSuf/ExpDiagonal.lean`
 が扱っている。
 -/
-import Ising2D.Part001.DefinitionTransferMatrix
-import Ising2D.Part004.ClaimTwoByTwoTransferIdentity
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimTwoByTwoTransferIdentity
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 import Mathlib.Topology.Algebra.Module.FiniteDimension
 

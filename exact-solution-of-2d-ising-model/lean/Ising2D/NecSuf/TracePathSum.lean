@@ -3,7 +3,7 @@
 
 対応する人手証明のラベル: **`partition_function_via_transfer_matrix`**
 （転送行列による表示の章 `structured-latex/content/partition_function_transfer_matrix_representation.ts` の中間目標「行列の冪の成分」と
-「トレースの展開」。具体版は `Ising2D/Part001/ClaimPartitionFunctionViaTransferMatrix.lean`）
+「トレースの展開」。具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean`）
 
 ## この主張に本質的に効いている構造は何か
 

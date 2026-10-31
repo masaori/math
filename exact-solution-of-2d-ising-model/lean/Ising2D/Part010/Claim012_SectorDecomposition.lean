@@ -17,7 +17,7 @@
 
 * Step 1（`tr X = tr(P^{(+)}X) + tr(P^{(-)}X)`）→ `trace_eq_sector_sum`。
   `P^{(+)} + P^{(-)} = I`（`epsProj_add_epsProj_neg`）とトレースの線型性だけ。
-  これを `partition_function_via_transfer_matrix`（`Part001/ClaimPartitionFunctionViaTransferMatrix.lean`）の
+  これを `partition_function_via_transfer_matrix`（`PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaTransferMatrix.lean`）の
   `X = (V_1V_2)^{N_row}` に適用する段は `partition_function_sector_decomposition` の中。
 * Step 2（各セクターで `V_1 → V_1^{(±)}`）→ `sector_replacement_pow`
   （`Part010/Claim011_SectorReplacement.lean`）。
@@ -36,7 +36,7 @@
 以下ではこの格子幅条件を下流へ渡し、`RestrictsOnSector` を仮定として受け取らない。
 -/
 import Ising2D.Part010.Claim011_SectorReplacement
-import Ising2D.Part001.ClaimPartitionFunctionViaTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimPartitionFunctionViaTransferMatrix
 
 namespace Ising2D
 

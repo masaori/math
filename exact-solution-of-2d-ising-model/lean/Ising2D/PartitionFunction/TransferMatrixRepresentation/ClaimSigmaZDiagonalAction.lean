@@ -20,7 +20,7 @@ Lean では添字型 `Conf M` がスピン配置そのものなので、
 複素数であることも効いていない。
 -/
 import Ising2D.Part004.Definition000_TransferMatrixSymbols
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.NecSuf.SiteDiagonal
 
 namespace Ising2D

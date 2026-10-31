@@ -14,7 +14,7 @@
 Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は添字型が `Conf M`（= `𝓘`）そのものであり、
 この同一視を**添字型の選択として**実現している。したがって人手の成分 `A_{ν(I),ν(J)}` は
 Lean の `A I J` であり、本主張により人手の成分 `A_{ord(μ),ord(μ')}` は Lean の
-`A (ι μ) (ι μ')` である。`def_transfer_matrix` の `V_1, V_2`（`Part001/DefinitionTransferMatrix.lean`）
+`A (ι μ) (ι μ')` である。`def_transfer_matrix` の `V_1, V_2`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）
 をこの添字で定義しているのは、この主張による。
 
 `ν` 自体は `def_kronecker`（002 章）の定義であり、Lean では添字型 `Conf M` を使うため他の箇所では
@@ -25,8 +25,8 @@ Lean の `A I J` であり、本主張により人手の成分 `A_{ord(μ),ord(�
 
 人手証明は `i_m - 1 = (1-μ(m))/2`（`idxOfSpin_val_eq_spinBit`）を各項へ代入する一段である。
 -/
-import Ising2D.Part001.DefinitionRowConfigurationNumbering
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurationNumbering
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 
 namespace Ising2D
 

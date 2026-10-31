@@ -31,8 +31,8 @@
 （`N_row = 0` では `tr(I) = 2^{M_col}` と `Z = 1`（空積の和）が一致しないので、この仮定は必要）。
 `K_1, K_2 > 0` は証明で使わないので仮定に置かない。
 -/
-import Ising2D.Part001.DefinitionTransferMatrix
-import Ising2D.Part001.DefinitionPartitionFunction
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionPartitionFunction
 import Ising2D.NecSuf.TracePathSum
 
 namespace Ising2D

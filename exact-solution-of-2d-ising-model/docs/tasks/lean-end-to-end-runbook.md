@@ -26,10 +26,10 @@
 次の仮定を取っている。項目 1〜5 はこれらを一つずつ消す作業である。
 
 1. **双対結合定数を $K_2$ から定める。**（2026-10-31 済み）`IsingParam.K2star := Kstar K2`
-   （`Part004/DefinitionSecondDualCouplingConstant.lean`）とし、人手 `duality_c2_star_eq_s2_star_c2` を
+   （`PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean`）とし、人手 `duality_c2_star_eq_s2_star_c2` を
    `Part008/ClaimDualityC2StarEqS2StarC2.lean` で形式化して `hdual` を定理 `IsingParam.c2_mul_s2star_eq_c2star` にした。
 2. **具体的な分配関数と挟み撃ちをつなぐ。** 最終定理の `Z` はいま「挟み撃ちを満たす任意の関数」である。
-   `partitionFunction`（`Part001`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PhysicalSymTransferBridge.lean` の
+   `partitionFunction`（`PartitionFunction/TransferMatrixRepresentation`）の転送行列表示と、`Part011` の `partition_function_sandwich`・`PhysicalSymTransferBridge.lean` の
    具体的な $V_1^{1/2}, V_2, W$ をつなぎ、`hZ1`・`hZ2` を具体的な $c(M)$（具体的な $W$ の Rayleigh 上限）について証明する。
 3. **$W$ と $V^{(+)}$ の橋渡しを構成する。** `EvenSectorBridge`（`Part018/Theorem009_CPlusEqualsLambda.lean`）を、具体的な $W$ と
    `vPlusDataOf` の $V^{(+)}$ について作る（$V^{(+)}$ の実行列表示と、$\mathcal F^{(+)}$ 上で $W x = V^{(+)} x$）。
@@ -47,6 +47,28 @@
    章の割り当てがまだ棚卸しに無ければ、この項目は待ちにして状態台帳に書き、ほかの項目へ進む。
    1 回に 1 章ずつ移し、`Ising2D.lean` の import、`check-no-sorry.sh`、README・`lean/docs/` の対応表、ファイル冒頭の
    `正本:` のパスを同じ回で直す。
+   置き場は次のとおりに決める（2026-10-31、最初の章を移したときに決めた）。
+   - 章のフォルダは `Ising2D/<部>/<章>/` とする。部と章の英語名は、論文側の章のファイル名
+     （`structured-latex/content/<部>_<章>.ts`）と同じ語を UpperCamelCase にしたものにする。
+     部は `PartitionFunction`・`EigenvalueProblem`・`ThermodynamicLimit`・`CriticalPoint`、
+     章は例えば `PartitionFunction/TransferMatrixRepresentation`（転送行列による表示）・
+     `PartitionFunction/ProjectionAndJordanWigner`（ε の固有値 +1 の固有空間への射影と Jordan–Wigner 表示）である。
+   - 項目の所属章の正本は、棚卸しの各項目の `chapterKey`（章の一覧は `parts[].chapters[]` の `key`）とする。
+     `chapterKey` が無く `mathematicalToolGroups` に載る項目は部「数学的道具立て」、どちらにも無い項目は未割り当てとみなす。
+   - 数えるのは、そのファイルが定義・定理として形式化している人手の項目だけである。冒頭で参照先として名前を出しただけの項目
+     （「〜は別のファイルにある」の行など）は数えない。冒頭が旧 Typst のパスや `<label>` だけで書かれたファイルは、
+     その旧ラベルと同じラベルを持つ項目へ読み替えて数える。
+   - 1 つのファイルが複数の置き場の項目を形式化しているときは、最も多くが属する置き場へ置く。未割り当ての項目は数に入れない。
+     同数のときは、部「数学的道具立て」を最初とし、続けて部・章の並び（`parts[].chapters[]` の順）で先の置き場へ置く。
+     ファイルは分割しない。
+   - 部「数学的道具立て」の項目（棚卸しの `mathematicalToolGroups`）を形式化したファイルは
+     `Ising2D/MathematicalTools/<まとまりの英語名>/` へ置く（例: 「行列指数関数と交換子計算」は `MatrixExponentialAndCommutators`）。
+   - 未割り当ての項目だけを形式化したファイルは、割り当てが出るまで動かさず、状態台帳に書く。
+   - 本文から退避した経路の形式化（整数運動量の経路、全スピン反転行列の固有値 −1 の側）は
+     `Ising2D/RoutesNotAdopted/IntegerMomentum/`・`Ising2D/RoutesNotAdopted/MinusSector/` へ置く。
+   - 人手の項目を持たない補助のファイル（`Part011/Basic.lean`・`Part018/Setup.lean` など）は、それを import するファイルが
+     最も多い置き場（数学的道具立てを含む）へ置く。同数のときは上と同じ並びで先の置き場へ置く。`Ising2D/Basic.lean`・`Ising2D/Representation.lean` は全章の土台なので動かさない。
+   - 必要十分版は `Ising2D/NecSuf/` から動かさない。`*FromNecSuf.lean` は対応する具体版と同じ章へ置く。
 
 ## 一回の作業の大きさ
 

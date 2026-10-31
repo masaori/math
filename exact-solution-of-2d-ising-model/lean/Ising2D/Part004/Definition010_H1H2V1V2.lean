@@ -249,7 +249,7 @@ theorem indexedHyperbolicAbbreviations_pos
 ここで定義する名前の整理:
 
 * `V1plus M K1` は人手 `def_V1_plus` の `V_1^{(+)}`。人手 `def_transfer_matrix` の `V_1` とは
-  別の行列であり、`V_1` は `Ising2D.V1`（`Part001/DefinitionTransferMatrix.lean`）である。
+  別の行列であり、`V_1` は `Ising2D.V1`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）である。
   平方根 `(V_1^{(+)})^{1/2}`（人手 `def_V1_plus_square_root`、章 010）は
   `Ising2D.V1plusHalf`（`Part010/DefinitionV1PlusSquareRoot.lean`）。
 * `V1pm M K1 η` / `V1pmHalf M K1 η` / `V1pmFromDefinition M K1 η` は符号引数つきの補助の一般形。

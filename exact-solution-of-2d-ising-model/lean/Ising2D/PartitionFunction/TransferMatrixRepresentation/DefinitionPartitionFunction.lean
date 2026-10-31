@@ -23,7 +23,7 @@
 * `K_1` は同じ行の隣り合うサイト（列方向の隣接）、`K_2` は隣り合う行の同じ列のサイトを結ぶ。
 * 人手の `K_1, K_2 ∈ ℝ_{>0}` は `K1 K2 : ℝ`。定義に正値性は要らないので仮定に置かない。
 -/
-import Ising2D.Part001.DefinitionRowConfigurations
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionRowConfigurations
 import Ising2D.Part004.Definition010_H1H2V1V2
 
 namespace Ising2D

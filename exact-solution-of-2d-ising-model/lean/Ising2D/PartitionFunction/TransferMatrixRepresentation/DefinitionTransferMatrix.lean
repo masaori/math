@@ -11,8 +11,8 @@
   `(V_2)_{ord(μ), ord(μ')} := exp(K_2 ∑_{m=1}^{M_col} μ(m) μ'(m))`
 
 **`V_1, V_2` の Lean での定義はここにある `Ising2D.V1`, `Ising2D.V2` ただ 1 つである。**
-パウリ行列による表示は定義ではなく主張であり、`Part004/ClaimFirstTransferMatrixPauliForm.lean`
-（`first_transfer_matrix_pauli_form`）と `Part004/ClaimSecondTransferMatrixPauliForm.lean`
+パウリ行列による表示は定義ではなく主張であり、`PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean`
+（`first_transfer_matrix_pauli_form`）と `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean`
 （`second_transfer_matrix_pauli_form`）にある。`V1pm`（人手の `V_1^{(±)}`）は別の行列である。
 
 ## 行列の添字
@@ -33,7 +33,7 @@ Lean の `TensorPow M = Matrix (Conf M) (Conf M) ℂ` は `Mat(2^{M_col}, ℂ)` 
 * 人手の `K_1, K_2 ∈ ℝ_{>0}` は `K1 K2 : ℝ`。定義に正値性は要らないので仮定に置かない。
 * 成分の値は人手どおり実数 `exp(…) ∈ ℝ_{>0}` を `ℂ` へ埋め込んだもの。
 -/
-import Ising2D.Part004.DefinitionConfigBasisIso
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.Part004.Definition010_H1H2V1V2
 
 namespace Ising2D

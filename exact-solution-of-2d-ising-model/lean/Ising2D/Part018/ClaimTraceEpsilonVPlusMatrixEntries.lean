@@ -12,7 +12,7 @@
 | 同 `G` は対角行列で `G_{ι(s),ι(s)} = s(M_col)s(1)` | `boundaryG_eq_diagonal`（成分は `boundaryG_apply`、左から掛けた積の行 `ι(s)` は `boundaryG_mul_apply`） |
 | Step 3 (b) `εf_{ι(s)} = f_{ι(-s)}` | `epsilon_mulVec_basisVec_configBasisIso` |
 | Step 4 が (b) として使う「`ε` は行番号 `ι(s)` を `ι(-s)` に移す置換行列」: `ε_{ι(s),J} = δ_{J,ι(-s)}`、`(εA)_{ι(s),J} = A_{ι(-s),J}` | `epsilon_apply_configBasisIso`・`epsilon_mul_apply_configBasisIso` |
-| Step 3 (c) `(V_2)_{ι(s),ι(s')} = exp(K_2∑_m s(m)s'(m))` | `V2_apply_configBasisIso`（`Part001/DefinitionTransferMatrix.lean`） |
+| Step 3 (c) `(V_2)_{ι(s),ι(s')} = exp(K_2∑_m s(m)s'(m))` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`） |
 | 同 `(V_2)_{ι(s),ι(s)} = exp(M_colK_2)` | `V2_apply_configBasisIso_self` |
 | 同 `(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)` | `V2_apply_configBasisIso_neg_self` |
 
@@ -35,7 +35,7 @@ import Ising2D.Part018.ClaimOpenChainSpinSums
 import Ising2D.Part018.ClaimEpsilonD0GCommuteAndDiagonalAction
 import Ising2D.Part004.ClaimExpOfDiagonalMatrix
 import Ising2D.Part011.ClaimEpsilonIsRealSymmetric
-import Ising2D.Part001.DefinitionTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
 
 namespace Ising2D
 

@@ -28,7 +28,7 @@
 * 中間目標「成分の一致」
   * `(exp(K_1D))_{ord(μ),ord(μ')} = (exp(K_1D))_{ν(ι(μ)),ν(ι(μ'))}`
     （`config_numbering_equals_kronecker_numbering`）→ Lean では行列の添字が `ι(μ)` そのもの
-    （`Part001/DefinitionTransferMatrix.lean` 冒頭の「行列の添字」）なので、この段は添字の読み方である。
+    （`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean` 冒頭の「行列の添字」）なので、この段は添字の読み方である。
   * `exp_of_diagonal_matrix` を対角行列 `K_1D` へ → `matrixExp_diagonal_apply`。
   * `ord(μ) = ord(μ') ⟺ μ = μ'`（`row_configuration_numbering_bijective` の単射性）
     → Lean の添字では `ι(μ) = ι(μ') ⟺ μ = μ'`（`configBasisIso_eq_iff`）。
@@ -42,8 +42,8 @@
 `Ising2D/NecSuf/SiteDiagonal.lean`）の合成であり、本ファイル固有の内容は
 具体的な行列 `V_1` の成分定義とパウリ行列表示の突き合わせだからである。
 -/
-import Ising2D.Part001.DefinitionTransferMatrix
-import Ising2D.Part004.ClaimSigmaZDiagonalAction
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionTransferMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.ClaimSigmaZDiagonalAction
 import Ising2D.Part004.ClaimExpOfDiagonalMatrix
 
 namespace Ising2D

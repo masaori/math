@@ -13,7 +13,7 @@
 | --- | --- |
 | Step 1: `(V_1^{1/2})_{ι(μ),ι(μ')}` は `μ = μ'` で `exp(½K_1∑_m μ(m)μ(m+1))`、それ以外で `0` | `physicalV1halfC_apply_configBasisIso`（`V_1^{1/2} = exp(½K_1D)` の成分。`sigma_z_diagonal_action` で `½K_1D` を対角行列に書き、`exp_of_diagonal_matrix` で成分を読む `V1PauliForm_apply_configBasisIso` を結合定数 `K_1/2` で引く）・`physicalV1halfR_apply_configBasisIso`（その実成分。前者から導く） |
 | Step 1 の `exp(…) > 0` | `physicalV1halfR_apply_configBasisIso_self_pos` |
-| Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`Part001/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
+| Step 2: `(V_2)_{ι(μ),ι(μ')} = exp(K_2∑_m μ(m)μ'(m)) > 0` | `V2_apply_configBasisIso`（`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`、`def_transfer_matrix` の `V_2` の成分）・`physicalV2R_apply_configBasisIso`（その実成分。前者から導く）・`physicalV2R_apply_configBasisIso_pos` |
 | Step 3 の 1〜4 行目（`W` の定義、行列の積の定義、`j ≠ ι(μ)` の項が `0`、`k ≠ ι(μ')` の項が `0`） | `physicalSymTransferR_apply_configBasisIso` の式変形の各行。3・4 行目の「Step 1 の対角性」は `physicalV1halfR_offDiag`（Step 1 の補題の `μ ≠ μ'` の場合） |
 | Step 3 の「3 つの因子はいずれも正」と主張 | `W_has_positive_entries_physical` |
 

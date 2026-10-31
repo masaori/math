@@ -164,7 +164,7 @@ section Exponential
 `V_1 = exp(K_1 (σ^z_1 σ^z_2 + ⋯))`（`first_transfer_matrix_pauli_form`）,
 `V_2 = (2 sinh 2K_2)^{M/2} exp(K_2^* (σ^x_1 + ⋯))`（`second_transfer_matrix_pauli_form`）
 と、`V_1^{(±)}` などの表式は指数関数を含む（`V_1, V_2` の定義そのものは成分による。
-`Part001/DefinitionTransferMatrix.lean`）。
+`PartitionFunction/TransferMatrixRepresentation/DefinitionTransferMatrix.lean`）。
 
 `TensorPow M = Matrix (Conf M) (Conf M) ℂ` では mathlib の
 `Mathlib.Analysis.Normed.Algebra.MatrixExponential` がそのまま適用できる。
