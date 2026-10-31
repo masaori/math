@@ -9,7 +9,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: "_old/typst/main.typ", ordinal: 10 },
-    title: { tex: String.raw`\text{共役写像 } T_g \text{ と行列 } A(\theta)` },
+    title: { tex: String.raw`\sinh,\cosh\text{ のテイラー展開、可逆行列と共役写像 } T_g` },
     labels: [],
   },
   {

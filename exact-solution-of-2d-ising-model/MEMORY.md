@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: 章立ての組み直しの六番目の項目（冒頭の章立ての説明ページと本文の照合）を済ませた。ゴールの式と題は一致。依存図の矢印「射影の章 → N→∞ の極限の章」を、推移簡約の結果どおり「V^{(+)} の固有値の章 → N→∞ の極限の章」に替え（`W_is_real_symmetric_positive_definite` が `iH_is_real_symmetric` を引くため）、説明文を直した。番号付きファイルの先頭に部見出し「数学的道具立て」を置き、旧部見出し「対角化の計算 (ホロノミック量子場 付録B)」を消し、道具の章見出し 3 つ（004・006・008）を中身に合わせて改題した。次は七番目（完了の確認）。
+
 2026-10-31: Lean の通しの証明の項目 7 の六番目の章「V^{(+)} の最大固有値に属する固有ベクトル」を移した。15 ファイル（旧 `Part018/` の `Claim001`〜`Claim003`・`Theorem007`・開鎖とトレースの 10 本・`Setup`）を `lean/Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` へ移し（名前空間不変。番号を外した名前にし、`Setup` は `CheckFermiInput` とした）、import・コメントのパス・`lean/README.md`・`lean/docs/ch018-formalization.md` を直した。判定の根拠は状態台帳。次は部「熱力学極限」の「N→∞ の極限と最大固有値 c(M)」の章。
 
 2026-10-31: Lean の通しの証明の項目 7 の五番目の章「V^{(+)} の固有値」を移した。12 ファイル（旧 `Part017/` の 9 本全部、`Part009/Claim016_SignFlip`、`Part012/Theorem005_OnsagerFreeEnergy`、`Part018/Claim012_VPlusDataFromPart017`）を `lean/Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/` へ移し（名前空間不変。番号を外した名前にした）、`Part017/` は無くなった。import・コメントのパス・`lean/README.md`（前の章の行の抜けも補った）・`lean/docs/` の対応表を直した。判定の根拠は状態台帳。次は「V^{(+)} の最大固有値に属する固有ベクトル」の章。

@@ -82,8 +82,8 @@ const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: stri
 
 /**
  * 見出しの深さ → LaTeX の節コマンド。
- * content の最上位（level 1）は「部」に相当する 1 件だけで、章はすべて level 2 である
- * （原本 Typst の `=` / `==` に対応）。そこで level 1 を `\part`、level 2 を `\section` へ写す。
+ * content の level 1 は部（数学的道具立て・分配関数・固有値問題・熱力学極限・臨界点）で、
+ * 章はすべて level 2 である。そこで level 1 を `\part`、level 2 を `\section` へ写す。
  * こうすると定理番号が「章番号.通し番号」になり、章より前に置かれたブロックが
  * 0.x 番になる不自然さも消える。
  */

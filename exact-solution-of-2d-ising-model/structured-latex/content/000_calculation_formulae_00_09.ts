@@ -2,6 +2,13 @@ import { defineBlocks, paragraph, math, displayMath, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
+    id: "heading_mathematical_tools",
+    kind: "heading",
+    level: 1,
+    title: { text: "数学的道具立て" },
+    labels: [],
+  },
+  {
     id: "heading_calculation_formulae",
     kind: "heading",
     level: 2,

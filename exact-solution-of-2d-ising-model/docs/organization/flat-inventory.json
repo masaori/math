@@ -26758,6 +26758,14 @@
       "dependsOnLabels": []
     },
     {
+      "id": "heading_mathematical_tools",
+      "kind": "heading",
+      "title": "数学的道具立て",
+      "labels": [],
+      "sourceFile": "000_calculation_formulae_00_09.ts",
+      "dependsOnLabels": []
+    },
+    {
       "id": "heading_calculation_formulae",
       "kind": "heading",
       "title": "計算公式",
@@ -26782,17 +26790,9 @@
       "dependsOnLabels": []
     },
     {
-      "id": "heading_diagonalization_appendix_B",
-      "kind": "heading",
-      "title": "対角化の計算 (ホロノミック量子場 付録B)",
-      "labels": [],
-      "sourceFile": "004_transfer_matrix.ts",
-      "dependsOnLabels": []
-    },
-    {
       "id": "heading_transfer_matrix",
       "kind": "heading",
-      "title": "転送行列",
+      "title": "行列と線型写像の対応と、対角行列の指数関数",
       "labels": [],
       "sourceFile": "004_transfer_matrix.ts",
       "dependsOnLabels": []
@@ -26808,7 +26808,7 @@
     {
       "id": "heading_Z_Y_anticommutation",
       "kind": "heading",
-      "title": "Z\\text{と}Y\\text{の反交換関係}",
+      "title": "Pauli 行列の積と、クロネッカー積の反交換",
       "labels": [],
       "sourceFile": "006_Z_Y_anticommutation.ts",
       "dependsOnLabels": []
@@ -26816,7 +26816,7 @@
     {
       "id": "heading_TV1_hatZ_hatY",
       "kind": "heading",
-      "title": "\\text{共役写像 } T_g \\text{ と行列 } A(\\theta)",
+      "title": "\\sinh,\\cosh\\text{ のテイラー展開、可逆行列と共役写像 } T_g",
       "labels": [],
       "sourceFile": "008_TV1_hatZ_hatY_part1.ts",
       "dependsOnLabels": []

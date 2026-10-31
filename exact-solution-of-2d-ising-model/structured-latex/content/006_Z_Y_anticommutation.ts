@@ -6,7 +6,7 @@ export default defineBlocks([
     kind: "heading",
     level: 2,
     origin: { path: "_old/typst/main.typ", ordinal: 8 },
-    title: { tex: String.raw`Z\text{と}Y\text{の反交換関係}` },
+    title: { text: "Pauli 行列の積と、クロネッカー積の反交換" },
     labels: [],
   },
   {

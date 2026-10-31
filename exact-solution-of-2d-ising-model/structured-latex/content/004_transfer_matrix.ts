@@ -2,19 +2,11 @@ import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema
 
 export default defineBlocks([
   {
-    id: "heading_diagonalization_appendix_B",
-    kind: "heading",
-    level: 1,
-    origin: { path: "_old/typst/main.typ", ordinal: 5 },
-    title: { text: "対角化の計算 (ホロノミック量子場 付録B)" },
-    labels: [],
-  },
-  {
     id: "heading_transfer_matrix",
     kind: "heading",
     level: 2,
     origin: { path: "_old/typst/main.typ", ordinal: 6 },
-    title: { text: "転送行列" },
+    title: { text: "行列と線型写像の対応と、対角行列の指数関数" },
     labels: [],
   },
 
