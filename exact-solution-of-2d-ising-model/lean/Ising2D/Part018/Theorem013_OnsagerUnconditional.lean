@@ -1,5 +1,5 @@
 /-
-# Onsager の厳密解から章 014–017 由来の仮定を落とした版
+# Onsager の厳密解から章 014–017 由来の仮定を落とし、分配関数を具体的なものにした版
 
 正本: `structured-latex/content/018_even_sector_closing.ts`
 （`closing_010_theorem_onsager_exact_solution`、ラベル **`onsager_exact_solution`**）
@@ -29,7 +29,7 @@
 
 ## 残った仮定（`Ising2D.EvenSectorClosureInput` に束ねた）
 
-いずれも**章 018 の外側が Lean 未形式化**であることによる。数学的な穴ではない。
+いずれも**接続する Lean の補題がまだ無い**ことによる。数学的な穴ではない。
 
 | 場 | 内容 | なぜ消せないか（一次情報） |
 | --- | --- | --- |
@@ -38,9 +38,17 @@
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化 |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っているので、具体的な `W`（`physicalSymTransferR`）についての `W_has_positive_entries` / `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean` で形式化済み）をここへ渡すには、上の `bridge` の接続が要る |
 
-`hZ1` / `hZ2`（`c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）は章 011
-`Ising2D.partition_function_sandwich` の内容であり、章 018 の仮定ではないのでそのまま残す。
+## 分配関数と `c(M)` は具体的なもの
+
+`Z` は具体的な分配関数 `Ising2D.partitionFunction N_row M K_1 K_2`（人手 `def_partition_function_2d_ising`）、
+`c(M)` は具体的な対称化転送行列 `W = V_1^{1/2} V_2 V_1^{1/2}` の Rayleigh 上限
+`rayleighSup (physicalSymTransferR M K_1 K_2)`（人手 `def_rayleigh_sup`）である。
+`N_row ≥ 1` での挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}` は、章 011 の
+`Ising2D.partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
+`bridge.W` はまだ抽象的な実行列なので、それが具体的な `W` に一致すること（`hW`）を仮定に残す。
+この仮定は `bridge` を具体的な `W` について構成したとき（runbook の項目 3）に消える。
 -/
+import Ising2D.Part011.PhysicalPartitionFunctionSandwich
 import Ising2D.Part018.Claim012_VPlusDataFromPart017
 import Ising2D.Part018.Theorem010_OnsagerExactSolution
 
@@ -92,26 +100,33 @@ theorem rayleighSup_sandwich_LambdaM_of_input (P : IsingParam) (In : EvenSectorC
 
 /-! ## Onsager の厳密解 -/
 
-/-- **`Ising2D.onsager_exact_solution` から章 014–017 由来の仮定を落とした版**。
+/-- **`Ising2D.onsager_exact_solution` から章 014–017 由来の仮定を落とし、分配関数を具体的なものにした版**。
 
+  `lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z(K_1,K_2) = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`
+
+`Z` は `partitionFunction N_row M K_1 K_2`、`c(M)` は `rayleighSup (physicalSymTransferR M K_1 K_2)` である。
 残る入力は
 * `In m hm`: ファイル冒頭の表の 4 つ（章 011・章 018 の未形式化部分）、
-* `hcM`: `c(M)` が `W` の Rayleigh 上限であること（`c(M)` の定義そのもの）、
-* `hZ1` / `hZ2`: 章 011 の `partition_function_sandwich`
+* `hW`: `bridge.W` が具体的な `W = V_1^{1/2} V_2 V_1^{1/2}` であること
 
-だけであり、**章 014・015・016・017 に由来する仮定と双対関係は 1 つも残っていない**。 -/
-theorem onsager_exact_solution_unconditional (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
+だけであり、**章 014・015・016・017 に由来する仮定、双対関係、分配関数の挟み撃ちは 1 つも残っていない**。 -/
+theorem onsager_exact_solution_unconditional (P : IsingParam)
     (In : ∀ m : ℕ, 2 ≤ m → EvenSectorClosureInput P m)
-    (hcM : ∀ (m : ℕ) (hm : 2 ≤ m), cM m = rayleighSup (In m hm).bridge.W)
-    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, cM m ^ N ≤ Z m N)
-    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, Z m N ≤ 2 ^ m * cM m ^ N) :
+    (hW : ∀ (m : ℕ) (hm : 2 ≤ m), (In m hm).bridge.W = physicalSymTransferR m P.K1 P.K2) :
     (∀ m : ℕ, 2 ≤ m →
-        Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (Z m N)) atTop
-          (𝓝 (1 / (m : ℝ) * Real.log (cM m))))
-      ∧ Tendsto (fun m : ℕ => 1 / (m : ℝ) * Real.log (cM m)) atTop
+        Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (partitionFunction N m P.K1 P.K2))
+          atTop (𝓝 (1 / (m : ℝ) * Real.log (rayleighSup (physicalSymTransferR m P.K1 P.K2)))))
+      ∧ Tendsto (fun m : ℕ => 1 / (m : ℝ) * Real.log (rayleighSup (physicalSymTransferR m P.K1 P.K2)))
+          atTop
           (𝓝 (1 / 2 * Real.log (2 * Real.sinh (2 * P.K2))
             + 1 / (4 * Real.pi) * ∫ θ in (0 : ℝ)..(2 * Real.pi), gammaFn P θ)) :=
-  onsager_exact_solution P
-    (fun m hm => by rw [hcM m hm]; exact rayleighSup_sandwich_LambdaM_of_input P (In m hm)) hZ1 hZ2
+  onsager_exact_solution P (Z := fun m N => partitionFunction N m P.K1 P.K2)
+    (cM := fun m => rayleighSup (physicalSymTransferR m P.K1 P.K2))
+    (fun m hm => by
+      have h := rayleighSup_sandwich_LambdaM_of_input P (In m hm)
+      rw [hW m hm] at h
+      exact h)
+    (fun m _ _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).1)
+    (fun m _ _ hN => (partition_function_sandwich_physical (M := m) P.K1 P.K2_pos hN).2)
 
 end Ising2D

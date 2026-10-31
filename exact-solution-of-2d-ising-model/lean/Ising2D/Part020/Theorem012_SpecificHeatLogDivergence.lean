@@ -73,8 +73,8 @@ Onsager の厳密解の自由エネルギーは、等方な場合ちょうど `f
 theorem onsager_exact_solution_isoParam (K : ℝ) (hK : 0 < K) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
     (hc : ∀ m : ℕ, 2 ≤ m → LambdaM (isoParam K hK) (1 / 2) m ≤ cM m
       ∧ cM m ≤ 2 * LambdaM (isoParam K hK) (1 / 2) m)
-    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, cM m ^ N ≤ Z m N)
-    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, Z m N ≤ 2 ^ m * cM m ^ N) :
+    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → cM m ^ N ≤ Z m N)
+    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → Z m N ≤ 2 ^ m * cM m ^ N) :
     (∀ m : ℕ, 2 ≤ m →
         Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (Z m N)) atTop
           (𝓝 (1 / (m : ℝ) * Real.log (cM m))))

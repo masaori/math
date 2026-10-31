@@ -122,8 +122,8 @@ end EvenSectorBridge
 `M` を固定したときの `N_row → ∞` の極限は `(1/M) log c(M)`。 -/
 theorem onsager_limit_in_N_row (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
     (hc : ∀ m : ℕ, 2 ≤ m → LambdaM P (1 / 2) m ≤ cM m ∧ cM m ≤ 2 * LambdaM P (1 / 2) m)
-    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, cM m ^ N ≤ Z m N)
-    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, Z m N ≤ 2 ^ m * cM m ^ N)
+    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → cM m ^ N ≤ Z m N)
+    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → Z m N ≤ 2 ^ m * cM m ^ N)
     {m : ℕ} (hm : 2 ≤ m) :
     Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (Z m N)) atTop
       (𝓝 (1 / (m : ℝ) * Real.log (cM m))) := by
@@ -165,7 +165,7 @@ theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
 **仮定は次の 3 つだけである。**
 
 * `hZ1`, `hZ2`: 章 011 の `partition_function_sandwich`
-  （`c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）
+  （`N_row ≥ 1` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`）
 * `hc`: Step 2・Step 3 の挟み撃ち `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`
   （`Ising2D.EvenSectorBridge.rayleighSup_sandwich_LambdaM` で与えられる）
 
@@ -173,8 +173,8 @@ theorem onsager_limit_in_M (P : IsingParam) {cM : ℕ → ℝ}
 最後の等号だけである**（人手証明の最終段落と同じ）。 -/
 theorem onsager_exact_solution (P : IsingParam) {Z : ℕ → ℕ → ℝ} {cM : ℕ → ℝ}
     (hc : ∀ m : ℕ, 2 ≤ m → LambdaM P (1 / 2) m ≤ cM m ∧ cM m ≤ 2 * LambdaM P (1 / 2) m)
-    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, cM m ^ N ≤ Z m N)
-    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, Z m N ≤ 2 ^ m * cM m ^ N) :
+    (hZ1 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → cM m ^ N ≤ Z m N)
+    (hZ2 : ∀ m : ℕ, 2 ≤ m → ∀ N, 1 ≤ N → Z m N ≤ 2 ^ m * cM m ^ N) :
     (∀ m : ℕ, 2 ≤ m →
         Tendsto (fun N : ℕ => 1 / ((m : ℝ) * N) * Real.log (Z m N)) atTop
           (𝓝 (1 / (m : ℝ) * Real.log (cM m))))

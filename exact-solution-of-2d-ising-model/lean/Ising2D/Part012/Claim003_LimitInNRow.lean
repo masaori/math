@@ -10,13 +10,13 @@
 
 ## 他章への依存（仮定として受け取っている部分）
 
-本章の主張は 011 章の次の 2 つを入力として使う。**別セッションが並行して 011 章を
-形式化しているため、import による結合はせず、仮定として受け取る**:
+本章の主張は 011 章の次の入力を、具体的な `Z` と `c(M)` に依らない仮定として受け取る。
+具体的な分配関数と `c(M)` への適用は `Part018/Theorem013_OnsagerUnconditional.lean` で行う:
 
 * `def_partition_function_2d_ising`: 分配関数 `Z(K_1,K_2) > 0`
   → 仮定 `h1` から従う（`c^N > 0 ≤ Z`）ので明示的な仮定にしていない
-* `partition_function_sandwich`: `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`
-  → 仮定 `h1`, `h2`
+* `partition_function_sandwich`: `N_row ≥ 1` について `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`
+  → 仮定 `h1`, `h2`（人手と同じく `1 ≤ N` の範囲でだけ受け取る）
 * `def_rayleigh_sup`: `c(M) > 0`
   → 仮定 `hc`
 
@@ -39,7 +39,7 @@ open scoped Topology
 `|(1/(MN)) log Z - (1/M) log c| ≤ (log 2)/N`。 -/
 theorem abs_log_Z_sub_log_c_le
     {M : ℕ} (hM : 2 ≤ M) {c : ℝ} (hc : 0 < c) {Z : ℕ → ℝ}
-    (h1 : ∀ N, c ^ N ≤ Z N) (h2 : ∀ N, Z N ≤ 2 ^ M * c ^ N)
+    (h1 : ∀ N, 1 ≤ N → c ^ N ≤ Z N) (h2 : ∀ N, 1 ≤ N → Z N ≤ 2 ^ M * c ^ N)
     {N : ℕ} (hN : 0 < N) :
     |1 / ((M : ℝ) * N) * Real.log (Z N) - 1 / (M : ℝ) * Real.log c|
       ≤ Real.log 2 / N := by
@@ -49,7 +49,7 @@ theorem abs_log_Z_sub_log_c_le
   have hNR : (0 : ℝ) < N := by exact_mod_cast hN
   have hB : (1 : ℝ) ≤ 2 ^ M := one_le_pow₀ (by norm_num)
   have hkey := NecSuf.abs_log_div_sub_log_le_of_sandwich (c := c) (B := (2 : ℝ) ^ M)
-    (Z := Z N) hN hc hB (h1 N) (h2 N)
+    (Z := Z N) hN hc hB (h1 N hN) (h2 N hN)
   have hlogB : Real.log ((2 : ℝ) ^ M) = (M : ℝ) * Real.log 2 := by
     rw [Real.log_pow]
   rw [hlogB] at hkey
@@ -67,7 +67,7 @@ theorem abs_log_Z_sub_log_c_le
 `(1/(M N_row)) log Z → (1/M) log c(M)`。 -/
 theorem limit_of_log_Z_in_N_row
     {M : ℕ} (hM : 2 ≤ M) {c : ℝ} (hc : 0 < c) {Z : ℕ → ℝ}
-    (h1 : ∀ N, c ^ N ≤ Z N) (h2 : ∀ N, Z N ≤ 2 ^ M * c ^ N) :
+    (h1 : ∀ N, 1 ≤ N → c ^ N ≤ Z N) (h2 : ∀ N, 1 ≤ N → Z N ≤ 2 ^ M * c ^ N) :
     Tendsto (fun N : ℕ => 1 / ((M : ℝ) * N) * Real.log (Z N)) atTop
       (𝓝 (1 / (M : ℝ) * Real.log c)) := by
   rw [tendsto_iff_dist_tendsto_zero]

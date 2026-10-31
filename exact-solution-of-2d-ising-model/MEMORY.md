@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-10-31: Lean の通しの証明の項目 2 を終えた。最終定理 `onsager_exact_solution_unconditional` の `Z` を具体的な `partitionFunction`、`c(M)` を具体的な `W` の Rayleigh 上限にし、仮定 `hZ1`・`hZ2`・`hcM` を外した（代わりに `bridge.W` が具体的な `W` に一致する仮定 `hW` が残り、項目 3 で消える）。人手に合わせて挟み撃ちの仮定を `N_row ≥ 1` だけで受け取るようにした。次は項目 3（`EvenSectorBridge` を具体的な `W` について構成する）。
+
 2026-10-31: 章立ての組み直しの二番目の項目として、本文の章題・ブロック題 16 件から未定義の物理用語（偶セクター・半整数運動量・フェルミオン）を除き、対象を式で表す題にした。中身・ラベルは不変。次は章の割り当てを棚卸しの生成器に入れる。
 
 2026-10-31: Lean の通しの証明の項目 2 のうち、具体的な分配関数についての挟み撃ちを `lean/Ising2D/Part011/PhysicalPartitionFunctionSandwich.lean` の `partition_function_sandwich_physical` で立てた（`V_1^{1/2}`・`V_2` の実対称性・可逆性・正定値性を人手 `W_is_real_symmetric_positive_definite` の経路で証明）。人手 `partition_function_via_transfer_matrix` は既に `Part001` で形式化済みだった。次は最終定理の `Z` を具体的な `partitionFunction` に置き換える（状態台帳の「次の一歩」）。

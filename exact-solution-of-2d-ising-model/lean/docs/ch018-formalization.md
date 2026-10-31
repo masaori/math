@@ -311,7 +311,11 @@ OK: 主要定理はいずれも sorryAx に依存していない
 | `htr` | `tr(εV^{(+)}) > 0` | 章 018 自身の `closing_004` / `closing_005` / `closing_006`（配置基底での 1 次元開鎖のスピン和）が未形式化。本章の主鎖とは独立の枝である（上記 3 の表と同じ） |
 | `hWpos`, `hWcomm` | `W` の成分が正・`ε` と可換（`onsager_exact_solution` の Step 3 が使う） | `bridge.W` は抽象的な実行列として受け取っている。具体的な `W`（`physicalSymTransferR`）については章 011 の `epsilon_commutes_with_W`（`Part011/ClaimEpsilonCommutesWithW.lean`）で `εW = Wε` を形式化済みだが、それを `bridge.W` へ渡すには上の `bridge` の接続が要る |
 
-`hZ1` / `hZ2` は章 011 `partition_function_sandwich` の内容であり、章 018 の仮定ではない。
+`onsager_exact_solution_unconditional` の `Z` は具体的な `partitionFunction N_row M K_1 K_2`、`c(M)` は
+`rayleighSup (physicalSymTransferR M K_1 K_2)` で、挟み撃ち `c(M)^{N_row} ≤ Z ≤ 2^M c(M)^{N_row}`（`N_row ≥ 1`）は
+章 011 の `partition_function_sandwich_physical`（`Part011/PhysicalPartitionFunctionSandwich.lean`）が与える。
+`EvenSectorClosureInput` の外に残る仮定は `hW`（`bridge.W = physicalSymTransferR M K_1 K_2`）だけで、
+`bridge` を具体的な `W` について構成すれば消える。
 
 双対関係 `c_2 s_2^* = c_2^*`（もとの場 `hdual`）は、`IsingParam.K2star` を `Kstar K2`
 （人手 `def_second_dual_coupling_constant`）で定義し、人手 `duality_c2_star_eq_s2_star_c2` を
