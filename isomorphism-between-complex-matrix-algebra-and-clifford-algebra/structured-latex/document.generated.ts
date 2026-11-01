@@ -18,13 +18,13 @@ import type {
   NoteIdsOf,
 } from '../../structured-latex/domain-model/index.ts'
 import type { AnyLocaleLabel, Label, TranslationOnlyLabel } from './labels.generated.ts'
-import blocks_mathematical_toolkit from './content/mathematical-toolkit.ts'
+import blocks_main_text from './content/main-text.ts'
 
 
 
 /** 文書順（キー昇順 × 配列順）に連結した全ブロック。 */
 export type AllBlocks = [
-  ...typeof blocks_mathematical_toolkit,
+  ...typeof blocks_main_text,
 ]
 
 /** 全ノート。 */

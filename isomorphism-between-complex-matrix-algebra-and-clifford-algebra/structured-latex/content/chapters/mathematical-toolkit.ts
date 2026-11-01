@@ -1,4 +1,4 @@
-import { defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
+import { defineBlocks, displayMath, list, math, paragraph, ref } from "../../schema.ts";
 
 export default defineBlocks([
   {
