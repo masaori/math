@@ -7,6 +7,18 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_smoothing_interval_invariance_archived",
+    targets: ["claim_smoothing_splits_closed_walk"],
+    title: { text: "参照用: 平滑化後の添字区間不変" },
+    body: [
+      paragraph(["旧主張は、平滑化後の後続写像が二つの添字区間を渡らないというものである。平滑化後の後続写像と添字区間は本文に残した（", ref("def_smoothed_successor_map"), "、", ref("def_smoothing_index_blocks"), "）。"]),
+      displayMath(String.raw`\nu(r)\in A\iff r\in A,\qquad A=\{r\in I_m:k<r\le l\}.`),
+      paragraph(["旧証明は四場合である。k<r<l なら ν(r)=σ(r)=r+1∈A、r=l なら ν(l)=σ(k)=k+1∈A である（", ref("def_closed_walk_passes"), "、", ref("def_smoothed_successor_map"), "）。"]),
+      paragraph(["r=k なら ν(k)=σ(l) は l<m のとき l+1∈B、l=m のとき 1∈B である。r∈B かつ r≠k なら ν(r)=σ(r) であり、r=m のとき 1∈B、それ以外は r<k または l<r なので r+1∈B である。A と B が分割だから ν(r)∈A と r∈B は両立せず、逆向きも得る。"]),
+      paragraph(["採用経路の次の主張は、二本の辺列を明示し、その内部と終辺の接続を直接確かめる（", ref("claim_smoothing_splits_closed_walk"), "）。旧主張は本文から引用されず、この直接証明にも必要ないため退避した。有限検算は既存の検算に残し、Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_smoothing_seam_parity_archived",
     targets: ["claim_smoothing_split_seam_parity"],
     title: { text: "参照用: 平滑化後の出辺族の切断線偶奇" },

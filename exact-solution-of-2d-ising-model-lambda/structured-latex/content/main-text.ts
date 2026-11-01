@@ -60829,14 +60829,14 @@ t_{\mathrm{sm}}(\gamma;k,l)
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_smoothing_index_split",
+              id: "kac_ward_heading_smoothing_closed_walk_split",
               labels: [],
-              title: { text: "平滑化と添字集合の分割" },
+              title: { text: "平滑化後の二つの閉歩道" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_smoothing_interval_invariance",
+                  id: "group_of_kac_ward_claim_smoothing_splits_closed_walk",
                   beforeFocus: [
                     {
                       role: "prerequisiteDefinition",
@@ -60894,137 +60894,7 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
                         ],
                       },
                     },
-                  ],
-                  focus: {
-                    id: "kac_ward_claim_smoothing_interval_invariance",
-                    kind: "claim",
-                    title: { text: "平滑化後の添字後続写像は二つの添字区間を渡らない" },
-                    labels: ["claim_smoothing_interval_invariance"],
-                    habitat: "N",
-                    verification: ["sagemath/check/smoothing-straight-visit-count"],
-                    lean: [
-                      "Ising2DLambda.KacWard.smoothing_interval_invariance",
-                      "Ising2DLambda.NecSuf.KacWard.swap_redirect_invariant_necSuf",
-                      "Ising2DLambda.KacWard.smoothing_interval_invariance_from_necSuf",
-                    ],
-                    statement: [
-                      paragraph([
-                        "任意の閉じた非後退辺列 ", math(String.raw`\gamma`),
-                        " と横断する添字 ", math(String.raw`k<l`),
-                        " について、任意の ", math(String.raw`r\in I_m`), " で",
-                      ]),
-                      displayMath(String.raw`\nu(r)\in A\iff r\in A`),
-                      paragraph([
-                        "が成り立つ（", math(String.raw`\nu`), " は ",
-                        ref("def_smoothed_successor_map"), "、分割 ",
-                        math(String.raw`\{A,B\}`), " は ", ref("def_smoothing_index_blocks"),
-                        "）。", math(String.raw`\{A,B\}`), " は ", math(String.raw`I_m`),
-                        " の分割なので、同じ主張を ", math(String.raw`B`),
-                        " に置き換えた同値も成り立つ。すなわち平滑化後の添字後続写像は ",
-                        math(String.raw`A`), " の元を ", math(String.raw`A`), " の元へ、",
-                        math(String.raw`B`), " の元を ", math(String.raw`B`), " の元へ送る。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "まず ", math(String.raw`r\in A`), " ならば ",
-                        math(String.raw`\nu(r)\in A`), " を、",
-                        math(String.raw`r=l`), " と ", math(String.raw`r\ne l`),
-                        " の二場合で示す。",
-                      ]),
-                      list([
-                        [
-                          math(String.raw`r=l`), " の場合。",
-                          math(String.raw`k<l\le m`), " から ", math(String.raw`k\le m-1`),
-                          " なので ", math(String.raw`\sigma(k)=k+1`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_closed_walk_passes}\text{ の }\sigma\text{ の定義}\bigr)`),
-                          "。よって ", math(String.raw`\nu(l)=\sigma(k)=k+1`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)`),
-                          " であり、", math(String.raw`k<k+1`), " と ",
-                          math(String.raw`k+1\le l`), "（", math(String.raw`\because\ k<l`),
-                          "、自然数の順序）から ", math(String.raw`\nu(l)\in A`), "。",
-                        ],
-                        [
-                          math(String.raw`r\in A`), " かつ ", math(String.raw`r\ne l`),
-                          " の場合。", math(String.raw`k<r<l`), " であり、",
-                          math(String.raw`r>k`), " から ", math(String.raw`r\ne k`),
-                          " なので ", math(String.raw`\nu(r)=\sigma(r)`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)`),
-                          "。", math(String.raw`r<l\le m`), " から ",
-                          math(String.raw`r\le m-1`), " なので ",
-                          math(String.raw`\sigma(r)=r+1`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_closed_walk_passes}\bigr)`),
-                          " であり、", math(String.raw`k<r+1\le l`),
-                          "（自然数の順序）から ", math(String.raw`\nu(r)\in A`), "。",
-                        ],
-                      ]),
-                      paragraph([
-                        "次に ", math(String.raw`r\in B`), " ならば ",
-                        math(String.raw`\nu(r)\in B`), " を、",
-                        math(String.raw`r=k`), " と ", math(String.raw`r\ne k`),
-                        " の場合で示す。",
-                      ]),
-                      list([
-                        [
-                          math(String.raw`r=k`), " の場合。",
-                          math(String.raw`\nu(k)=\sigma(l)`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)`),
-                          "。", math(String.raw`l=m`), " ならば ",
-                          math(String.raw`\sigma(m)=1`), " であり ",
-                          math(String.raw`1\le k`), "（", math(String.raw`k\in I_m`),
-                          "）から ", math(String.raw`\sigma(l)\in B`), "。",
-                          math(String.raw`l\le m-1`), " ならば ",
-                          math(String.raw`\sigma(l)=l+1`), " であり ",
-                          math(String.raw`l<l+1`), " から ", math(String.raw`\sigma(l)\in B`),
-                          "。どちらの場合も ", math(String.raw`\nu(k)\in B`), "。",
-                        ],
-                        [
-                          math(String.raw`r\in B`), " かつ ", math(String.raw`r\ne k`),
-                          " の場合。", math(String.raw`l\in A`), " から ",
-                          math(String.raw`r\ne l`), " なので ",
-                          math(String.raw`\nu(r)=\sigma(r)`),
-                          math(String.raw`\ \bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)`),
-                          "。", math(String.raw`r=m`), " ならば ",
-                          math(String.raw`\sigma(m)=1\le k`), " から ",
-                          math(String.raw`\sigma(r)\in B`), "。",
-                          math(String.raw`r\le m-1`), " ならば ",
-                          math(String.raw`\sigma(r)=r+1`), " であり、",
-                          math(String.raw`r<k`), " のとき ", math(String.raw`r+1\le k`),
-                          "、", math(String.raw`l<r`), " のとき ",
-                          math(String.raw`l<r+1`), "（いずれも自然数の順序）から ",
-                          math(String.raw`\sigma(r)\in B`), "。どちらの場合も ",
-                          math(String.raw`\nu(r)\in B`), "。",
-                        ],
-                      ]),
-                      paragraph([
-                        "以上で ", math(String.raw`\nu(r)\in A\ (r\in A)`), " と ",
-                        math(String.raw`\nu(r)\in B\ (r\in B)`), " が示された。",
-                        math(String.raw`\{A,B\}`), " は分割なので、",
-                        math(String.raw`\nu(r)\in A`), " かつ ", math(String.raw`r\in B`),
-                        " とすると ", math(String.raw`\nu(r)\in B`),
-                        " となって矛盾する。したがって ",
-                        math(String.raw`\nu(r)\in A`), " ならば ", math(String.raw`r\in A`),
-                        " であり、同値が成り立つ。全過程は自然数の順序と場合分けだけで閉じる。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_smoothing_closed_walk_split",
-              labels: [],
-              title: { text: "平滑化後の二つの閉歩道" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_smoothing_splits_closed_walk",
-                  beforeFocus: [{
+                  {
                     role: "prerequisiteDefinition",
                     element: {
                       id: "kac_ward_definition_smoothed_split_edge_sequences",
@@ -61095,7 +60965,17 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
 &&\bigl(\because\ k<l\le m\text{ と }\blkref{def_closed_walk_passes}\bigr),
 \end{aligned}`),
                       paragraph(["なので、", math(String.raw`\gamma_A`), " は閉じる。"]),
-                      paragraph(["次に ", math(String.raw`\gamma_B`), " を考える。", math(String.raw`l<r<m`), " または ", math(String.raw`1\le r<k`), " なら、上と同じ三段の鎖で ", math(String.raw`\vec f_r=\vec e_{r+1}`), " である。", math(String.raw`l<m`), " のときはさらに"]),
+                      paragraph(["次に ", math(String.raw`\gamma_B`), " を考える。", math(String.raw`l<r<m`), " または ", math(String.raw`1\le r<k`), " ならば"]),
+                      displayMath(String.raw`\begin{aligned}
+\vec f_r
+&=\vec e_{\nu(r)}
+&&\bigl(\because\ \blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{\sigma(r)}
+&&\bigl(\because\ r\ne k,l\text{ と }\blkref{def_smoothed_successor_map}\bigr)\\
+&=\vec e_{r+1}
+&&\bigl(\because\ r<m\text{ と }\blkref{def_closed_walk_passes}\bigr).
+\end{aligned}`),
+                      paragraph([math(String.raw`l<m`), " のときはさらに"]),
                       displayMath(String.raw`\begin{aligned}
 \vec f_m
 &=\vec e_{\nu(m)}

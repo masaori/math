@@ -6,6 +6,8 @@
 
 ## 現在地
 
+- **2026-11-01（連続実行）、平滑化後の添字区間不変を参照用ノートへ退避した。** 二本の閉歩道は接続を直接確かめる。次は「反転辺対の回転位相の積は一である」を切り分ける。
+
 - **2026-11-01（連続実行）、平滑化後の出辺族の切断線偶奇を参照用ノートへ退避した。** 採用経路は二本の閉歩道の偶奇を直接数える。次は平滑化後の添字区間不変を切り分ける。
 
 - **2026-11-01（連続実行）、孤立した横断の平滑化の主張を参照用ノートへ退避した。** 採用経路は一般の平滑化の更新式を使う。次は切断線偶奇不変の主張を切り分ける。
@@ -13,8 +15,6 @@
 - **2026-11-01（連続実行）、順序つき横断対の二倍則を参照用ノートへ退避した。** 後続は順序なし対を直接数える。次は孤立した横断の平滑化の主張を切り分ける。
 
 - **2026-11-01（連続実行）、方向番号の門の横断数による別証明を参照用ノートへ退避した。** 循環総回転数が 4 の倍数であることは既存の主張が示す。標準整数代表の定義は対角ゲージに必要なので本文に残した。次は順序付き横断対の主張を切り分ける。
-
-- **2026-11-01（連続実行）、閉歩道の平面変位を持ち上げ終点の証明へ接続した。** 平面変位の等式は終点の等式に直接使われる。次は方向番号と横断・回転数の主張を切り分ける。
 
 行列式の乗法性とスカラー倍を支える道具の五節、完全マッチングと対合の対応・符号の独立性・Pfaffian の平方展開・不動点項の消去・不変部分集合上の反転・反転と反復の対応・軌道の台と長さの保存・台の不変性・始点変更による台の一致・奇数軌道の最小元による選択不変性・選んだ軌道の反転による対合・その非自明性・反転の符号保存・反対称成分の積の符号反転・奇数軌道を持つ置換の符号付き和の相殺・交互の二色付けからの完全マッチングの構成の十六節、端末行列の行列式一致への根拠の接続、および対角相似とスカラー倍による行列式の保存が完了（内訳は MEMORY と保管庫）。有限写像の反復の加法則、有限置換の反復の単射性と正の最小周期と最小周期未満の反復回数の一意性、軌道の巡回表示と長さの一致、偶数軌道の最小元を起点とする二色付け、ゲージ重みの非零性も四層で完了。
 
@@ -26,8 +26,7 @@
 
 | 章 | セクション | 状態 | 備考 |
 |---|---|---|---|
-| 離散 Whitney 系の章 | 平滑化後の添字区間不変の主張を切り分ける | 未着手 | `claim_smoothing_interval_invariance` の引用と採用経路での用途を調べる。 |
-| Kac--Ward 系の章 | 閉包の外の採用経路側ブロックの切り分け | 一論法ずつ作業中 | runbook「閉包の外の採用経路側ブロックは、Lean の前に切り分ける」。到達点四つ（`theorem_periodic_density_onsager_integral`・`claim_onsager_hyperbolic_integral_form`・`claim_dispersion_minimum_self_dual_point`・`claim_determinant_square_root_torus_formula`）からの閉包（2026-10-31 の実測 667 ラベル）の外にあるもの: 離散 Whitney 系の章 6（主張 `claim_smoothing_interval_invariance`・`claim_reversal_rotation_phase_product`・`claim_cell_complex_one_cell_increment`・`claim_periodic_lift_closure_is_simple_cycle`・`claim_period_translates_of_iterated_staircase_disjoint`・`claim_periodic_plane_lift_parallel_period_increase`）、反対称化の章 3（`claim_reversal_matrix_square`・`claim_tagged_matching_term_degree`・`claim_local_pairing_matching_complement_recovery`）、Kac--Ward の章 3（`claim_transition_entries_in_mu8`・`claim_kac_ward_determinant_constant_term_one`・`claim_arf_fourier_sign_projection`）、有限 Fourier 分解の章 2（`claim_twisted_modes_are_double_roots`・`claim_untwisted_mode_zero_condition`）、実数体への脱出の章 2（`claim_rational_log_order_group_sequence_lower_set_downward_closed`・`claim_twisted_mode_product_sum_reindex`）。一件ずつ、引用漏れなら参照を足す／重複・不使用なら退避／独立した到達点なら残して理由を書く、のどれかに決める。一論法ごとに行を割ってから着手する。`claim_closed_walk_plane_displacement` は持ち上げ終点の主張が直接引用する。方向番号の門の横断数の別証明は未使用のため退避し、標準整数代表は対角ゲージで使うので本文に残した。`claim_crossing_free_sign_counterexample` は、横断数零だけでは単純閉路の符号公式を使えない独立した反例であり、直後の接触点分割の主張が辺の重複を除く理由を示すので本文に残す。Lean は列挙した有限値の計算までで、閉歩道の定義からの導出は未了。 |
+| Kac--Ward 系の章 | 閉包の外の採用経路側ブロックの切り分け | 一論法ずつ作業中 | runbook「閉包の外の採用経路側ブロックは、Lean の前に切り分ける」。到達点四つ（`theorem_periodic_density_onsager_integral`・`claim_onsager_hyperbolic_integral_form`・`claim_dispersion_minimum_self_dual_point`・`claim_determinant_square_root_torus_formula`）からの閉包（2026-10-31 の実測 667 ラベル）の外にあるもの: 離散 Whitney 系の章 5（主張 `claim_reversal_rotation_phase_product`・`claim_cell_complex_one_cell_increment`・`claim_periodic_lift_closure_is_simple_cycle`・`claim_period_translates_of_iterated_staircase_disjoint`・`claim_periodic_plane_lift_parallel_period_increase`）、反対称化の章 3（`claim_reversal_matrix_square`・`claim_tagged_matching_term_degree`・`claim_local_pairing_matching_complement_recovery`）、Kac--Ward の章 3（`claim_transition_entries_in_mu8`・`claim_kac_ward_determinant_constant_term_one`・`claim_arf_fourier_sign_projection`）、有限 Fourier 分解の章 2（`claim_twisted_modes_are_double_roots`・`claim_untwisted_mode_zero_condition`）、実数体への脱出の章 2（`claim_rational_log_order_group_sequence_lower_set_downward_closed`・`claim_twisted_mode_product_sum_reindex`）。一件ずつ、引用漏れなら参照を足す／重複・不使用なら退避／独立した到達点なら残して理由を書く、のどれかに決める。一論法ごとに行を割ってから着手する。`claim_closed_walk_plane_displacement` は持ち上げ終点の主張が直接引用する。方向番号の門の横断数の別証明は未使用のため退避し、標準整数代表は対角ゲージで使うので本文に残した。`claim_crossing_free_sign_counterexample` は、横断数零だけでは単純閉路の符号公式を使えない独立した反例であり、直後の接触点分割の主張が辺の重複を除く理由を示すので本文に残す。Lean は列挙した有限値の計算までで、閉歩道の定義からの導出は未了。 |
 | 全章 | Lean 具体版の必要十分版への委譲を外す: 平方恒等式の経路以外の残り | 一論法ずつ作業中 | `lean:` に登録された具体版のうち、証明の中で必要十分版の定理を呼ぶもの: 臨界指数の `criticalPoint_exists_positiveRational_squareDiff_lt`・`leadingDistance_pinching_implies_predicate`。平方恒等式の節 6 と離散 Whitney 系の Lean 配線が引くものから先に直す。 **主張が必要十分版の定義で述べられているものも同じ扱いにする**: 道具の章の $\overline{\mathbb Q}$ 係数多項式行列式の具体版（約 40 ファイル）は置換の符号を必要十分版の `NecSuf.AlgebraicEigenvalue.sign` で述べている。具体版の符号の定義を置き（整数行列の具体版の `permSign` と同じ形）、必要十分版の符号との一致は導出版へ寄せる（2026-10-27 の研究管理）。「直接比較経路の退避」で参照用ノートへ移すブロックの Lean は、退避で片付けるので直さない（依存で確かめてから判断する）。一つの論法ごとに行を割ってから着手する。 **直す対象の正本は `lean/concrete-necsuf-delegations.txt`（委譲検査の既知の例外。現在 23 件）である。** 上の列挙に無いものも含む: ブロック対角行列の行列式の具体版五件（`blockDiagonal_*`。主張が必要十分版の置換の符号で述べられている）、`qbarPolynomial_det_*` など道具の章の多項式行列式の五件、標識付き対称差と活動点の七件（`taggedDifference_*`・`taggedActive*`。必要十分版の `taggedPairAt` を使う）、`localPairingMatching`・`localPairingMatching_mate`（必要十分版の `splicePairings` を使う）、`matchingPairOrientationProduct`・`matchingPairSecondOrientationProduct`。2026-10-26・27 の研究管理が足した行は台帳から消えたが、これらは例外の台帳に残っており、委譲は解消していない。この行を消してよいのは例外の台帳が空になったときだけである（2026-10-28 の研究管理）。 |
 | Onsager 閉形式への接続 | Kac--Ward 章の定義の Lean 対応を揃える | 未着手 | Lean に定義があるのに `lean:` を宣言していない定義ブロック（向き付き辺の集合、向き付き辺の方向番号、四つの Kac--Ward 多項式行列 など）へ宣言を足す。Lean に無い定義（閉じた非後退辺列、一歩の回転数、向き付き辺の行変位と列変位、閉歩道の向き付き切断線横断数、非後退辺列の平面持ち上げ など）を、実際の閉歩道から構成する形で定義する。横断数零の反例も Lean は有限値の計算だけで閉歩道の定義からの導出が無いため、この行で対応を作る。離散 Whitney 系の Lean は点列 `base` を仮定で受ける形なので、この定義群が無いと具体版が本文の対象について述べていない（2026-10-04 の研究管理の判定。2026-10-05 の実測では、Kac--Ward 章の定義 109 件のうち 76 件、主張 176 件のうち 57 件に `lean:` が無い。2026-10-04 以降に置いた節の定義・主張は全て Lean 付き）。 2026-10-30 の研究管理の数え直しでは、到達点の定理の依存の閉包の中で `lean:` が無い定義は Kac--Ward 章の外にもある: 分配多項式の章の `def_edge_numbering`・`def_residue_maps`、Fisher 零点の章の `def_edge_subset_incidence_count`・`def_even_edge_subset`・`def_edge_subset_spin_sum`・`def_high_temperature_polynomial`、Kac--Ward 章の `def_torus_quadratic_sign`・`def_signed_even_subgraph_polynomial`、道具の章の `def_integer_sequence_level_crossing_counts`。これらも同じ行で扱う。記法だけの定義（`def_cardinality_notation`・`def_residue_addition_notation`）は Lean の対応物が無くてよいかを読んで判断する。 |
 | Onsager 閉形式への接続 | 一歩は方向番号を回転数だけ進める | 記述・SageMath 済。Lean 二版は未着手 | 本文ブロックに `lean:` が無い。既存の Lean に対応物があれば宣言を足し、無ければ具体版・必要十分版を書く。実際の閉歩道・持ち上げについて述べる形にする。 |
@@ -58,6 +57,7 @@
 
 ## レビュー記録
 
+- 2026-11-01: 前回退避した平滑化後の出辺族の切断線偶奇を、二本の閉歩道の偶奇の直接計算と照合し、修正不要だった。
 - 2026-11-01: 前回退避した孤立した横断の平滑化を本文の一般更新式と照合し、修正不要だった。
 
 - 2026-11-01: 前回退避した順序つき横断対の主張と参照用ノートを照合し、修正不要だった。
@@ -66,13 +66,12 @@
 
 - 2026-11-01: 閉歩道の平面変位と持ち上げ終点の引用を照合し、修正不要だった。
 
-- 2026-11-01: 前回残した横断数零の反例の本文と検算を照合し、修正不要だった。
-
 
 
 
 ## 式変形の書き方の統一
 
+- 2026-11-01（連続実行の書式統一）: 「横断の平滑化は二本の閉じた非後退辺列に分ける」の第二の辺列の内部接続を行末根拠付きの式鎖にした。
 - 2026-11-01（連続実行の書式統一）: 「有限な辺連結セル集合の補集合も辺連結なら Euler 数は 1 である」の面数と Euler の等式に行末根拠を明示した。
 
 - 2026-11-01（連続実行の書式統一）: 「平滑化後の横断数は二軸の直進通過数によって更新される」の頂点別分解を行末根拠付きの式鎖にした。
@@ -81,14 +80,13 @@
 
 - 2026-11-01（連続実行の書式統一）: 「閉歩道の変位の総和は巻き付き数の L 倍である」の行・列の式鎖で有限和の分割と分配則を別の行へ分けた。
 
-- 2026-11-01（連続実行の書式統一）: 「閉歩道の変位の総和は巻き付き数の L 倍である」の列成分の式鎖と行末根拠を明示した。
-
 
 
 
 
 ## 前進の記録
 
+- 2026-11-01: 平滑化後の添字区間不変は後続に引用されず、二本の辺列の直接構成で不要なため参照用ノートへ退避した。
 - 2026-11-01: 平滑化後の出辺族の切断線偶奇は後続から引用されず、二本の閉歩道の偶奇を直接数える経路で使わないため参照用ノートへ退避した。
 
 - 2026-11-01: 孤立した横断の平滑化は採用経路で引用されず、一般の更新式の特殊例なので本文から退避した。
@@ -96,5 +94,3 @@
 - 2026-11-01: 順序つき横断対の二倍則は後続から引用されず、誤った偶奇の説明を含むため参照用ノートへ退避した。
 
 - 2026-11-01: 先頭の閉包外ブロック切り分けを方向番号の門の横断数の一論法に割り、未使用の別証明を参照用ノートへ退避した。次の順序付き横断対も一論法の行として切り分けた。
-
-- 2026-11-01: 先頭の閉包外ブロック切り分けを「閉歩道の平面変位」の一論法に割り、持ち上げ終点の証明へ引用を接続した。

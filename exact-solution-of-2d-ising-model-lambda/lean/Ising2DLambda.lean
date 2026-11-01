@@ -967,8 +967,6 @@ import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
 import Ising2DLambda.KacWard.SmoothingCrossingNumberUpdate
 import Ising2DLambda.NecSuf.KacWard.SmoothingTurningInvariance
 import Ising2DLambda.KacWard.SmoothingTurningInvariance
-import Ising2DLambda.NecSuf.KacWard.SmoothingIndexInterval
-import Ising2DLambda.KacWard.SmoothingIndexInterval
 import Ising2DLambda.NecSuf.KacWard.SmoothingClosedWalkSplit
 import Ising2DLambda.KacWard.SmoothingClosedWalkSplit
 import Ising2DLambda.NecSuf.KacWard.SmoothingSplitTurningSum

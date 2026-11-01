@@ -2211,9 +2211,6 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.two_point_preserved_sum_necSuf
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance_from_necSuf
-  Ising2DLambda.NecSuf.KacWard.swap_redirect_invariant_necSuf
-  Ising2DLambda.KacWard.smoothing_interval_invariance
-  Ising2DLambda.KacWard.smoothing_interval_invariance_from_necSuf
   Ising2DLambda.NecSuf.KacWard.smoothing_split_closed_connections_necSuf
   Ising2DLambda.KacWard.smoothing_split_closed_connections
   Ising2DLambda.KacWard.smoothing_split_closed_connections_from_necSuf
