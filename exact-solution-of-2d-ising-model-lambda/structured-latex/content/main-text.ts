@@ -71196,7 +71196,7 @@ q_{\vec e,\vec f}
                     ],
                     proof: [
                       paragraph([ref("claim_tagged_matching_matching_recovery"), " より ", math(String.raw`\mathcal D_\tau=D`), " である。従って両者の昇順対集合も等しい。任意の ", math(String.raw`r=(\vec e,\vec f)\in E_D`), " を取る。", ref("claim_local_pairing_matching_label_support"), " の定義から、"]),
-                      displayMath(String.raw`r\in T_P\iff p(\vec e)\in P.`),
+                      displayMath(String.raw`r\in T_P\iff p(\vec e)\in P\qquad\bigl(\because\ \blkref{claim_local_pairing_matching_label_support}\bigr).`),
                       paragraph(["まず ", math(String.raw`r\in T`), " とする。", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec e,\vec f`), " は同じ始点を持つ。もし ", math(String.raw`p(\vec e)\notin P`), " なら、", ref("def_tagged_matching_complement_edges"), " により同じ台の長い標識の対 ", math(String.raw`q\in E_D\setminus T`), " がある。", ref("claim_tagged_matching_nonzero_support"), " より ", math(String.raw`q`), " はその台の二つの向き付き辺を含み、", math(String.raw`\vec e`), " も含む。異なる二対が ", math(String.raw`\vec e`), " を共有するのは完全マッチングに反するので ", math(String.raw`r=q`), " となるが、", math(String.raw`r\in T`), " と ", math(String.raw`q\notin T`), " に矛盾する。ゆえに ", math(String.raw`p(\vec e)\in P`), "、従って ", math(String.raw`r\in T_P`), " である。"]),
                       paragraph(["逆に ", math(String.raw`r\in T_P`), " とする。もし ", math(String.raw`r\notin T`), " なら ", math(String.raw`r\in E_D\setminus T`), " であり、", ref("claim_tagged_matching_nonzero_support"), " により ", math(String.raw`\vec f=\iota(\vec e)`), " である。", ref("def_edge_reversal"), " より両者の台は ", math(String.raw`p(\vec e)`), " であり、", ref("def_tagged_matching_complement_edges"), " により ", math(String.raw`p(\vec e)\notin P`), " となる。これは ", math(String.raw`r\in T_P`), " に矛盾する。従って ", math(String.raw`r\in T`), " である。"]),
                       paragraph(["二つの包含から ", math(String.raw`T_P=T`), " を得る。共通の ", math(String.raw`E_D`), " から同じ集合を除けば長い標識の集合も等しい。辺長一で同じ二元対に二種類の寄与があっても、短い標識への所属は ", math(String.raw`T`), " で判定しており、二元対の形から推測していない。"]),
@@ -73398,7 +73398,7 @@ M_{D,T}(x)
 &=1
 &&\bigl(\because\ \mathbb Z\text{ の乗法単位元}\bigr).
 \end{aligned}`),
-                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
+                      paragraph([ref("claim_tagged_matching_local_pairs"), " により非零項の短い対は頂点ごとの対合を与える。逆に ", ref("claim_local_pairing_matching_construction"), " と ", ref("claim_local_pairing_matching_term_nonzero"), " は各対合族から非零項を作り、", ref("claim_local_pairing_matching_complement_recovery"), " によりその補辺は固定した ", math(String.raw`P`), " に等しい。", ref("claim_tagged_matching_label_recovery"), " は元の項を回復する。各交差は同じ頂点の四方向を全て使う二本の直進通過なので、その個数は ", math(String.raw`\sum_v c_v(\kappa_v)=t_P(\boldsymbol\kappa)=t(D,T)`), " である。"]),
                     ],
                   },
                 },
