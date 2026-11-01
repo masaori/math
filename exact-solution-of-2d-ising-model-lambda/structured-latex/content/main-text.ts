@@ -60976,7 +60976,8 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
                         math(String.raw`C^{\mathrm{sm}}`),
                         " の各対は三つの集合のちょうど一つに属する。互いに素な有限集合の分割により",
                       ]),
-                      displayMath(String.raw`|C^{\mathrm{sm}}|=|C_{AA}|+|C_{BB}|+|C_{\times}|.`),
+                      displayMath(String.raw`|C^{\mathrm{sm}}|=|C_{AA}|+|C_{BB}|+|C_{\times}|
+\qquad\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ による互いに素な有限集合への分割}\bigr).`),
                       paragraph([
                         "第二に、二本の閉歩道の横断の判定を平滑化後の出辺族の言葉に直す。",
                         ref("claim_smoothing_splits_closed_walk"), " により、",
@@ -60995,7 +60996,8 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
                         math(String.raw`p_A(i)<p_A(j)`), " である。位置対と ",
                         math(String.raw`C_{AA}`), " の対は一対一に対応するから",
                       ]),
-                      displayMath(String.raw`c(\gamma_A)=|C_{AA}|.`),
+                      displayMath(String.raw`c(\gamma_A)=|C_{AA}|
+\qquad\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ と }\blkref{def_closed_walk_crossing_number}\text{ による位置対の全単射}\bigr).`),
                       paragraph([
                         "同様に ", ref("claim_smoothing_splits_closed_walk"), " により、",
                         math(String.raw`\gamma_B`), " の位置 ", math(String.raw`i`),
@@ -61017,7 +61019,8 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
                         " の ", math(String.raw`r<s`), " は各二元集合の代表を一つ選ぶ）、",
                         math(String.raw`p_B`), " は順序なし二元集合の間の全単射を与えるから",
                       ]),
-                      displayMath(String.raw`c(\gamma_B)=|C_{BB}|.`),
+                      displayMath(String.raw`c(\gamma_B)=|C_{BB}|
+\qquad\bigl(\because\ \blkref{claim_smoothing_splits_closed_walk}\text{ と }\blkref{claim_transverse_crossing_symmetric}\text{ による順序なし対の全単射}\bigr).`),
                       paragraph([
                         "第三に、", math(String.raw`C_{\times}`), " の対 ",
                         math(String.raw`(r,s)`), " を、", math(String.raw`A`),
@@ -61027,10 +61030,11 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s),\
                         ref("claim_transverse_crossing_symmetric"), "）、これは ",
                         math(String.raw`C_{\times}`), " から ",
                         ref("def_split_mutual_crossing_number"), " の添字対の集合への全単射である（",
-                        math(String.raw`r<s`), " の代表と順序なし二元集合の一対一対応）。よって ",
-                        math(String.raw`c_{\times}(\gamma;k,l)=|C_{\times}|`),
-                        " である。三つの準備を合わせて",
+                        math(String.raw`r<s`), " の代表と順序なし二元集合の一対一対応）。よって",
                       ]),
+                      displayMath(String.raw`c_{\times}(\gamma;k,l)=|C_{\times}|
+\qquad\bigl(\because\ \blkref{def_split_mutual_crossing_number}\text{ と }\blkref{claim_transverse_crossing_symmetric}\text{ による全単射}\bigr).`),
+                      paragraph(["三つの準備を合わせて"]),
                       displayMath(String.raw`\begin{aligned}
 c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
 &=|C_{AA}|+|C_{BB}|+|C_{\times}|
