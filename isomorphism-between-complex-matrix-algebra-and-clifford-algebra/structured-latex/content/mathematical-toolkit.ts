@@ -1,4 +1,4 @@
-import { defineBlocks, list, math, paragraph, ref } from "../schema.ts";
+import { defineBlocks, displayMath, list, math, paragraph, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -348,6 +348,96 @@ export default defineBlocks([
         " を線型空間とみなさず、値の側の演算を ",
         math(String.raw`\mathbb{C}`),
         " の加法と乗法で直接書く。",
+      ]),
+    ],
+  },
+  {
+    id: "mathematical_toolkit_claim_pointwise_sum_of_linear_forms",
+    kind: "claim",
+    title: { text: "線型形式の各点ごとの和は線型形式である" },
+    labels: ["claim_pointwise_sum_of_linear_forms_is_linear_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`f:V\to\mathbb{C}`),
+        " と ",
+        math(String.raw`g:V\to\mathbb{C}`),
+        " を ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）とする。写像 ",
+        math(String.raw`s_{f,g}:V\to\mathbb{C}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`s_{f,g}(x):=f(x)+_{\mathbb{C}}g(x)\qquad(x\in V)`),
+      paragraph([
+        "このとき ",
+        math(String.raw`s_{f,g}`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y`),
+        " を ",
+        math(String.raw`V`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。線型形式の定義（",
+        ref("def_linear_form"),
+        "）の二つの条件を順に示す。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s_{f,g}(x+_V y)
+&=f(x+_V y)+_{\mathbb{C}}g(x+_V y)
+&&\left(\because\ s_{f,g}\ \text{の定義}\right)\\
+&=\bigl(f(x)+_{\mathbb{C}}f(y)\bigr)+_{\mathbb{C}}g(x+_V y)
+&&\left(\because\ f\ \text{は加法を保つ。}\blkref{def_linear_form}\right)\\
+&=\bigl(f(x)+_{\mathbb{C}}f(y)\bigr)+_{\mathbb{C}}\bigl(g(x)+_{\mathbb{C}}g(y)\bigr)
+&&\left(\because\ g\ \text{は加法を保つ。}\blkref{def_linear_form}\right)\\
+&=f(x)+_{\mathbb{C}}\Bigl(f(y)+_{\mathbb{C}}\bigl(g(x)+_{\mathbb{C}}g(y)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=f(x)+_{\mathbb{C}}\Bigl(\bigl(f(y)+_{\mathbb{C}}g(x)\bigr)+_{\mathbb{C}}g(y)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=f(x)+_{\mathbb{C}}\Bigl(\bigl(g(x)+_{\mathbb{C}}f(y)\bigr)+_{\mathbb{C}}g(y)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=f(x)+_{\mathbb{C}}\Bigl(g(x)+_{\mathbb{C}}\bigl(f(y)+_{\mathbb{C}}g(y)\bigr)\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\bigl(f(x)+_{\mathbb{C}}g(x)\bigr)+_{\mathbb{C}}\bigl(f(y)+_{\mathbb{C}}g(y)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=s_{f,g}(x)+_{\mathbb{C}}s_{f,g}(y)
+&&\left(\because\ s_{f,g}\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+s_{f,g}(\lambda\cdot_V x)
+&=f(\lambda\cdot_V x)+_{\mathbb{C}}g(\lambda\cdot_V x)
+&&\left(\because\ s_{f,g}\ \text{の定義}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}g(\lambda\cdot_V x)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}g(x)\bigr)
+&&\left(\because\ g\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(f(x)+_{\mathbb{C}}g(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}s_{f,g}(x)
+&&\left(\because\ s_{f,g}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`s_{f,g}`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式である（",
+        ref("def_linear_form"),
+        "）。",
       ]),
     ],
   },
