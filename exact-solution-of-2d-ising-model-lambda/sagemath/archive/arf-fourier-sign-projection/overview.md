@@ -2,6 +2,8 @@
 
 ## 対象
 
+本文から退避した主張の検算を保管する。
+
 **対象ラベル**: `claim_arf_fourier_sign_projection`
 
 ## 検査内容
@@ -13,5 +15,5 @@
 2026-08-29: PASS。浮動小数点、実数体、複素数体は使っていない。
 
 ```bash
-sage sagemath/check/arf-fourier-sign-projection/check.sage
+sage sagemath/archive/arf-fourier-sign-projection/check.sage
 ```

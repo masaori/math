@@ -14,7 +14,6 @@ export const ALL_LABELS = [
   "claim_alternating_cycle_matching_sign",
   "claim_alternating_neighbor_matchings",
   "claim_antiperiodic_mode_exists",
-  "claim_arf_fourier_sign_projection",
   "claim_attainable_dual_image_trivial_sector",
   "claim_block_diagonal_determinant_fiber_reindex",
   "claim_block_diagonal_determinant_product",

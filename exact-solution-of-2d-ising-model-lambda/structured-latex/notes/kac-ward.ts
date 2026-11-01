@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_arf_fourier_sign_projection_archived",
+    targets: ["def_torus_quadratic_sign"],
+    title: { text: "参照用: Arf 符号による四つの巻き付きセクターの射影" },
+    body: [
+      paragraph(["旧主張。トーラスの巻き付き二次符号（", ref("def_torus_quadratic_sign"), "）と Arf 符号 ", math(String.raw`\eta_{a,b}:=(-1)^{(1-a)(1-b)}\in\{-1,1\}`), " について、各偶奇 ", math(String.raw`(h,v)\in\{0,1\}^2`), " で次の恒等式が成り立つ。"]),
+      displayMath(String.raw`\frac12\sum_{(a,b)\in\mathcal S}\eta_{a,b}\chi_{a,b}(h,v)=1.`),
+      paragraph(["四つの偶奇を代入した和は順に ", math(String.raw`(-1+1+1+1)/2`), "、", math(String.raw`(1-1+1+1)/2`), "、", math(String.raw`(1+1-1+1)/2`), "、", math(String.raw`(1+1+1-1)/2`), " で、いずれも一になる。有限検算と Lean 二版は保管した。"]),
+      paragraph(["採用した有限トーラス公式は四つの符号付き偶部分グラフ多項式をすべて正符号で足す。Arf 符号を掛けないので旧主張を引用せず、本文から退避した。二次符号の定義は閉歩道の位相と平方恒等式で使うため本文に残した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_determinant_constant_term_one_archived",
     targets: ["def_kac_ward_determinants"],
     title: { text: "参照用: 四つの Kac--Ward 行列式の定数項" },
