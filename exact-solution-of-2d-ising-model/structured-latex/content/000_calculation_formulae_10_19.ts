@@ -68,14 +68,52 @@ export default defineBlocks([
     title: { text: "非零実数対の単位円への正規化" },
     labels: ["radial_normalization_exists_unique"],
     statement: [
-      paragraph([ref("def_unit_circle"), " と ", ref("definition_of_sqrt_r_positive"), " を用いる。任意の ", math(String.raw`(x,y)\in\mathbf R^2\setminus\{(0,0)\}`), " に対し、"]),
-      displayMath(String.raw`rx_c=x,\quad ry_c=y,\quad r\in\mathbf R_{>0},\quad(x_c,y_c)\in C_{\mathrm{unit}}`),
-      paragraph(["を満たす ", math(String.raw`r,(x_c,y_c)`), " が一意に存在する。"]),
+      paragraph([ref("def_unit_circle"), " と ", ref("definition_of_sqrt_r_positive"), " を用いる。任意の ", math(String.raw`(x,y)\in\mathbb R^2\setminus\{(0,0)\}`), " に対し、"]),
+      displayMath(String.raw`rx_c=x,\quad ry_c=y,\quad r\in\mathbb R_{>0},\quad(x_c,y_c)\in C_{\mathrm{unit}}`),
+      paragraph(["を満たす ", math(String.raw`r\in\mathbb R_{>0}`), " と ", math(String.raw`(x_c,y_c)\in\mathbb R^2`), " が一意に存在する。"]),
     ],
     proof: [
-      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。実数の平方は非負で、非零実数の平方は正だから ", math(String.raw`x^2+y^2>0`), "。よって"]),
-      displayMath(String.raw`r:=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}>0,\qquad x_c:=\frac{x}{r},\qquad y_c:=\frac{y}{r}`),
-      paragraph(["と定められる。このとき ", math(String.raw`rx_c=x`), " と ", math(String.raw`ry_c=y`), " は ", math(String.raw`x_c,y_c`), " の定義の両辺に ", math(String.raw`r`), " を掛けて得られ、"]),
+      paragraph([math(String.raw`(x,y)\ne(0,0)`), " なので ", math(String.raw`x\ne0`), " または ", math(String.raw`y\ne0`), " である。", math(String.raw`x\ne0`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+x^2+y^2
+&\ge x^2
+ &&\left(\because\ y^2\ge0\ (\text{実数の平方は非負})\right)\\
+&>0
+ &&\left(\because\ x\ne0\ (\text{非零実数の平方は正})\right)
+\end{aligned}`),
+      paragraph([math(String.raw`y\ne0`), " のときも ", math(String.raw`x`), " と ", math(String.raw`y`), " を入れ替えた同じ二行で ", math(String.raw`x^2+y^2>0`), " である。よって"]),
+      displayMath(String.raw`r:=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}\in\mathbb R_{\ge0}`),
+      paragraph(["と定める。"]),
+      displayMath(String.raw`\begin{aligned}
+r^2
+&=x^2+y^2
+ &&\left(\because\ r\text{ の定義と正の平方根の平方。}\blkref{definition_of_sqrt_r_positive}\right)\\
+&>0
+ &&\left(\because\ \text{上の場合分けの結論}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+&r\ne0
+ &&\left(\because\ 0^2=0\ne r^2\right)\\
+&r>0
+ &&\left(\because\ r\ge0\ (\blkref{definition_of_sqrt_r_positive})\text{ かつ }r\ne0\right)
+\end{aligned}`),
+      paragraph(["であるから、"]),
+      displayMath(String.raw`x_c:=\frac{x}{r}\in\mathbb R,\qquad y_c:=\frac{y}{r}\in\mathbb R`),
+      paragraph(["と定められる。このとき"]),
+      displayMath(String.raw`\begin{aligned}
+rx_c
+&=r\cdot\frac{x}{r}
+ &&\left(\because\ x_c\text{ の定義}\right)\\
+&=x
+ &&\left(\because\ r>0\text{ なので約分できる}\right)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+ry_c
+&=r\cdot\frac{y}{r}
+ &&\left(\because\ y_c\text{ の定義}\right)\\
+&=y
+ &&\left(\because\ r>0\text{ なので約分できる}\right)
+\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 x_c^2+y_c^2
 &=\left(\frac{x}{r}\right)^2+\left(\frac{y}{r}\right)^2
@@ -83,11 +121,11 @@ x_c^2+y_c^2
 &=\frac{x^2+y^2}{r^2}
  &&\left(\because\ \mathbb R\text{ の四則}\right)\\
 &=\frac{x^2+y^2}{x^2+y^2}
- &&\left(\because\ r\text{ の定義と正の平方根の平方（}\text{定義: }\sqrt{\ }^{(\mathbb R_{\ge0})}\text{）}\right)\\
+ &&\left(\because\ r\text{ の定義と正の平方根の平方。}\blkref{definition_of_sqrt_r_positive}\right)\\
 &=1
  &&\left(\because\ x^2+y^2>0\text{ なので約分できる}\right)
 \end{aligned}`),
-      paragraph(["だから存在する。別の ", math(String.raw`r'>0,(x_c',y_c')\in C_{\mathrm{unit}}`), " が条件を満たすなら"]),
+      paragraph(["であり、", ref("def_unit_circle"), " より ", math(String.raw`(x_c,y_c)\in C_{\mathrm{unit}}`), " だから存在する。別の ", math(String.raw`r'\in\mathbb R_{>0}`), " と ", math(String.raw`(x_c',y_c')\in C_{\mathrm{unit}}`), " が条件を満たすなら"]),
       displayMath(String.raw`\begin{aligned}
 x^2+y^2
 &=(r'x_c')^2+(r'y_c')^2
@@ -95,9 +133,16 @@ x^2+y^2
 &=(r')^2\bigl((x_c')^2+(y_c')^2\bigr)
  &&\left(\because\ \mathbb R\text{ の四則}\right)\\
 &=(r')^2
- &&\left(\because\ (x_c',y_c')\in C_{\mathrm{unit}}\text{ の定義式 }(x_c')^2+(y_c')^2=1\right)
+ &&\left(\because\ (x_c',y_c')\in C_{\mathrm{unit}}\text{ の定義式 }(x_c')^2+(y_c')^2=1\text{。}\blkref{def_unit_circle}\right)
 \end{aligned}`),
-      paragraph(["である。正の平方根の一意性より ", math(String.raw`r'=r`), "。したがって"]),
+      paragraph(["である。したがって"]),
+      displayMath(String.raw`\begin{aligned}
+r'
+&=\sqrt{x^2+y^2}^{(\mathbb R_{\ge0})}
+ &&\left(\because\ r'\ge0\text{ かつ }(r')^2=x^2+y^2\text{ を満たすものはただ一つ。}\blkref{sqrt_nonnegative_existence_uniqueness}\text{、}\blkref{definition_of_sqrt_r_positive}\right)\\
+&=r
+ &&\left(\because\ r\text{ の定義}\right)
+\end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 x_c'
 &=\frac{x}{r'}
