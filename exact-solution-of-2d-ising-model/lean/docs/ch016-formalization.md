@@ -4,12 +4,12 @@
 
 新規ファイル:
 
-- 具体版 `lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`（016 章の分は 10 ファイル。うち
-  `ClaimCheckFermiResultsUnconditional.lean` は 015 章の成果を入れて仮定を落とす後段）
-- 必要十分版 `lean/Ising2D/NecSuf/FermionLadder.lean`, `lean/Ising2D/NecSuf/ExpEigenvector.lean`
+- 具体版 `lean/Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/`（016 章の分。うち
+  `ClaimCheckFermiResultsUnconditional.lean` は 015 章の成果を入れて仮定を落とす後段、
+  `ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean` は必要十分版からの導出）
+- 必要十分版 `lean/Ising2D/NecSuf/FermionLadder.lean`, `lean/Ising2D/NecSuf/ExpEigenvector.lean`, `lean/Ising2D/NecSuf/RowVectorRightInverse.lean`
 
-`lean/Ising2D.lean` と `lean/scripts/check-no-sorry.sh` へは末尾追記のみ。
-既存の `.lean` ファイルは 1 つも編集していない。
+上の各ファイルは `lean/Ising2D.lean` から import し、主要定理は `lean/scripts/check-no-sorry.sh` の検査対象に入れている。
 
 ## 1. 形式化した定理の一覧
 
@@ -49,9 +49,12 @@
 | `Ising2D.lie_checkX_checkPsiDag` | `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†` | 同 Step 2 |
 | `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 Step 2' |
 | `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi` | `T_{(V̌')}(ψ̌_μ^†) = e^{+γ}ψ̌_μ^†`, `T_{(V̌')}(ψ̌_μ) = e^{-γ}ψ̌_μ` | **`action_of_T_check_Vprime_on_check_psi`** |
-| `Ising2D.checkPsiDag_sub_checkPsi` / `checkPsiDag_add_checkPsi` | `ψ̌^† ∓ ψ̌` が `Ž, Y̌` のスカラー倍 | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 |
-| `Ising2D.checkZ_eq_smul` / `checkY_eq_smul` | `Ž_μ, Y̌_μ` をフェルミオンで書く（`P̌_μ^{-1}` の代用） | 同 Step 1 |
-| `Ising2D.eq_on_checkZY_of_eq_on_checkPsi` | フェルミオン上の一致を `Ž, Y̌` へ移す | 同 Step 2・Step 3 |
+| `Ising2D.rowMul_one` | `(A_0, B_0) I = (A_0, B_0)` | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の 1 行目 |
+| `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` | `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}`（`P̌_μP̌_μ^{-1} = I`・結合法則・`ψ̌` の定義の 3 行の鎖） | 同 Step 1 |
+| `Ising2D.checkZ_eq_checkPmat_inv_col` / `checkY_eq_checkPmat_inv_col` | `Ž_μ = q_{11}ψ̌_μ^† + q_{21}ψ̌_μ`、`Y̌_μ = q_{12}ψ̌_μ^† + q_{22}ψ̌_μ` | 同 Step 1 の「すなわち」 |
+| `Ising2D.eq_on_checkZY_of_eq_on_checkPsi` | フェルミオン上の一致を線型性で `Ž, Y̌` へ移す（5 行の鎖を 2 本） | 同 Step 3 |
+| `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` | Step 1 の鎖を必要十分版 `NecSuf.eq_rowMul2_of_rowMul2_eq` の特殊化として導いたもの | 同 Step 1 |
+| `Ising2D.eq_on_checkZY_of_eq_on_checkPsi_of_necSuf` | 上を必要十分版 `NecSuf.linear_eq_on_of_rowMul2_eq` の特殊化として導いたもの | 同 Step 1・Step 3 |
 | `Ising2D.TVPlus_eq_TCheckVprime_on_checkZY` | 原文の statement そのもの | **`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`** |
 | `Ising2D.TConj_eq_of_eq_on_checkZY` | `Ž, Y̌` 上で一致する共役は全体で一致 | **`T_V_plus_eq_T_check_Vprime`** |
 | `Ising2D.TVPlus_eq_TCheckVprime` | 上を `V^{(+)}` の形で述べた版 | 同 |
@@ -99,8 +102,15 @@
 | `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
 | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
 | `commutation_V_plus_check_psi` | `Ising2D.rowApply_checkPsi_row` ほか（`ClaimCommutationVPlusCheckPsi.lean`） | 置かない。結合律 `rowMul_rowMul` と Step 1 の `rowApply_rowMul` は具体版の時点で任意の `ℂ` 加群について述べてあり、Step 2 の残りは具体的な `P̌_μ`・`Ď_μ` による対角化の代入だけで、抽象度を上げて取り除ける構造が無い |
+| `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1・Step 3 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` / `eq_on_checkZY_of_eq_on_checkPsi`（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`。必要十分版からの導出は `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` / `eq_on_checkZY_of_eq_on_checkPsi_of_necSuf`、`ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean`） | `Ising2D.NecSuf.eq_rowMul2_of_rowMul2_eq` / `NecSuf.linear_eq_on_of_rowMul2_eq`（係数は可換半環、台はその上の任意の加群。`NecSuf/RowVectorRightInverse.lean`、新規） |
 
 必要十分版から得られた知見（本文には持ち込まない）:
+
+- **`T_V_plus_eq_T_check_Vprime_on_check_Z_Y` の Step 1 は、`P̌_μ` の可逆性を右逆行列の等式 `P̌_μ H = I` の形でだけ使う。**
+  可換半環の上の正方行列ではこれは可逆性と同値なので、可逆性より弱い条件で足りるわけではない。
+  行列式の値そのもの・係数が体であること・`ℂ` であることは効いていない。
+  行ベクトルと行列の積を左スカラー倍で書いたため、結合律に係数の乗法の可換則を使う。引き算は使わないので、係数は可換半環でよい。
+  Step 3 で写像について効いているのは線型性だけで、共役であることも可逆であることも効いていない。
 
 - **008 章の必要十分版 CAR（`NecSuf.car_of_coeffs`）は半整数運動量でも一字一句そのまま使えた。**
   必要十分版が要求するのは「反交換子がスカラー倍の `1` になること」と「係数についてのスカラー恒等式 2 本」
@@ -156,9 +166,8 @@
 原文が「すなわち」として与えている**明示式**を定義に採った。
 この 2 通りの定義が一致することは `checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col`
 （015 章の `checkPmat` と直接突き合わせる）で確認済みである。
-同じ理由で、原文 `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の `P̌_μ^{-1}` は
-`ψ̌^† ∓ ψ̌` の直接計算（`checkZ_eq_smul` / `checkY_eq_smul`）で置き換えた。
-`det P̌_μ ≠ 0` に相当するのは `checkP_ne_zero` / `checkQ_ne_zero` である。
+原文 `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 は、人手どおり `P̌_μ^{-1}`
+（`det_checkPmat_ne_zero` による `P̌_μP̌_μ^{-1} = I`）を経て `Ž_μ, Y̌_μ` を `ψ̌_μ^†, ψ̌_μ` で書く。
 
 **実数解析（極限・積分・連続性）を新たに使った箇所は無い。**
 `exp` の収束は 008 章の `NecSuf/ExpConjugation.lean`（mathlib の

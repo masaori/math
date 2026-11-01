@@ -800,7 +800,15 @@ targets=(
   Ising2D.lie_checkX_checkPsi
   Ising2D.TCheckVprime_checkPsiDag
   Ising2D.TCheckVprime_checkPsi
+  Ising2D.rowMul_one
+  Ising2D.checkZY_row_eq_rowMul_checkPmat_inv
+  Ising2D.checkZ_eq_checkPmat_inv_col
+  Ising2D.checkY_eq_checkPmat_inv_col
   Ising2D.eq_on_checkZY_of_eq_on_checkPsi
+  Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf
+  Ising2D.eq_on_checkZY_of_eq_on_checkPsi_of_necSuf
+  Ising2D.NecSuf.eq_rowMul2_of_rowMul2_eq
+  Ising2D.NecSuf.linear_eq_on_of_rowMul2_eq
   Ising2D.TVPlus_eq_TCheckVprime_on_checkZY
   Ising2D.TConj_eq_of_eq_on_checkZY
   Ising2D.TVPlus_eq_TCheckVprime

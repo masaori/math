@@ -399,12 +399,17 @@
     （mathlib の `Matrix.exists_mulVec_eq_zero_iff` は分数体への持ち上げを経る一般論なので使わない）。
     必要十分版 `NecSuf/TwoByTwoKernelAndDeterminant.lean`（可換環。「⇒」に零因子が無いこと、「⇐」に `1 ≠ 0`）と導出 `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf` を置いた。
     レビューの指摘（mathlib の一般論への委任、古いコメント、必要十分版の欠如、検査一覧の漏れ、`Nontrivial` の理由、対応表の行）を直した。
+  - ゴールラインの確認の十九個目（済み、2026-11-01）: 人手 `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`DiagonalizationAndExponentialForm/ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）の Lean を、
+    `ψ̌^† ∓ ψ̌` の直接計算で `Ž, Y̌` を書き直す形から、人手 Step 1 の 3 行の鎖 `(Ž, Y̌) = (Ž, Y̌)(P̌P̌^{-1}) = ((Ž, Y̌)P̌)P̌^{-1} = (ψ̌^†, ψ̌)P̌^{-1}`
+    （`checkZY_row_eq_rowMul_checkPmat_inv`。`det_checkPmat_ne_zero` と `rowMul_one`・`rowMul_rowMul`）と「すなわち」の 2 式、Step 2 の 2 つの鎖、Step 3 の 5 行の鎖 2 本どおりに直した。
+    主張 `TVPlus_eq_TCheckVprime_on_checkZY` の型は不変。旧補題 `checkZ_eq_smul`・`checkY_eq_smul`・`checkPsiDag_sub_checkPsi`・`checkPsiDag_add_checkPsi`・`checkP_ne_zero`・`checkQ_ne_zero` は消した。
+    必要十分版 `NecSuf/RowVectorRightInverse.lean`（係数は可換半環、可逆性は `G H = I` の形でだけ使う）と導出 `ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean` を置いた。
+    レビューの指摘（必要十分版の欠如、人手 proof 冒頭の線型性の段落の扱い、根拠コメント、`rowMul_one` の置き場、必要十分版の知見の言い過ぎ、`ch016-formalization.md` の古い記述、Step 1 の導出の欠け）を直した。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`DiagonalizationAndExponentialForm/ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）: 人手 Step 1 は `P̌_μ^{-1}` で `Ž_μ, Y̌_μ` をフェルミオンで書き直すが、Lean は `ψ̌^† ∓ ψ̌` の直接計算（`checkZ_eq_smul`・`checkY_eq_smul`）で置き換えている。人手どおりに直す。
 - 人手 `eigenvector_of_A_theta_tilde` は「固有値」を本文で定義せず、Step 1 の「固有値 ⟺ `det(A(θ) - λI) = 0`」を証明なしに使っている。
   本文に固有値の定義と 2×2 の成分計算による同値の証明を足し（Lean の `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` と同じ手順）、SageMath の検算を付ける。
   本文を触るので、構成再編・SageMath 検算の連続実行と rebase で衝突しないよう、その回の先頭で fetch してから行う。

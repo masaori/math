@@ -60,6 +60,11 @@ theorem rowMul_rowMul (p : A × A) (G H : Matrix (Fin 2) (Fin 2) ℂ) :
   simp only [rowMul, Matrix.mul_apply, Fin.sum_univ_two, Prod.mk.injEq]
   constructor <;> module
 
+/-- 行ベクトルと単位行列の積: `(A_0, B_0) I = (A_0, B_0)`（行ベクトルと `2×2` 行列の積の定義）。
+`T_V_plus_eq_T_check_Vprime_on_check_Z_Y` の Step 1 が使う。 -/
+theorem rowMul_one (p : A × A) : rowMul p (1 : Matrix (Fin 2) (Fin 2) ℂ) = p := by
+  simp [rowMul]
+
 /-- **人手 Step 1**: `T((A_0, B_0) G) = (T(A_0), T(B_0)) G`（`T` の線型性を 2 列へ同時適用）。 -/
 theorem rowApply_rowMul (T : A →ₗ[ℂ] A) (p : A × A) (G : Matrix (Fin 2) (Fin 2) ℂ) :
     rowApply T (rowMul p G) = rowMul (rowApply T p) G := by
