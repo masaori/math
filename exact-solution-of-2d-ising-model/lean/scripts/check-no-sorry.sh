@@ -926,8 +926,18 @@ targets=(
   Ising2D.NecSuf.mul_of_eq_neg_conj
   Ising2D.NecSuf.sq_absOf_eq_neg_mul
   Ising2D.NecSuf.sq_I_mul_absOf_eq_mul
+  Ising2D.NecSuf.skew2_factor_identity
+  Ising2D.NecSuf.skew2_charPoly
   Ising2D.NecSuf.skew2_charPoly_factor
-  Ising2D.NecSuf.skew2_mulVec
+  Ising2D.NecSuf.skew2_det_eq_zero_iff
+  Ising2D.NecSuf.skew2_eigenvalue_iff
+  Ising2D.NecSuf.skew2_eigenvalues_ne
+  Ising2D.NecSuf.det_of_cols
+  Ising2D.NecSuf.det_of_cols_ne_zero
+  Ising2D.NecSuf.skew2_mulVec_pos
+  Ising2D.NecSuf.skew2_mulVec_neg
+  Ising2D.NecSuf.mulVec_smul_of_mulVec_eq
+  Ising2D.NecSuf.skew2_mul_of_cols
   Ising2D.NecSuf.eq_conj_of_mul_eq
   Ising2D.NecSuf.gamma_det_identity
   Ising2D.NecSuf.sinh_arcosh_of_sq
@@ -984,6 +994,19 @@ targets=(
   Ising2D.det_checkPmat_ne_zero
   Ising2D.AMat_mul_checkPmat
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
+  Ising2D.lambdaPlusR_ofReal
+  Ising2D.lambdaMinusR_ofReal
+  Ising2D.charPoly_factor_thetaTilde_of_necSuf
+  Ising2D.eigenvalue_AMat_iff_of_necSuf
+  Ising2D.lambdaPlusR_ne_lambdaMinusR_of_necSuf
+  Ising2D.det_checkPmat_of_necSuf
+  Ising2D.det_checkPmat_ne_zero_of_necSuf
+  Ising2D.det_AMat_sub_smul_eq_zero_iff_of_necSuf
+  Ising2D.AMat_mulVec_eigen_pos_of_necSuf
+  Ising2D.AMat_mulVec_eigen_neg_of_necSuf
+  Ising2D.AMat_mulVec_smul_eigen_pos_of_necSuf
+  Ising2D.AMat_mulVec_smul_eigen_neg_of_necSuf
+  Ising2D.AMat_mul_checkPmat_of_necSuf
   Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf
   Ising2D.det_AMat_eq_gamma1_sq_add
   Ising2D.exp_I_mul_exp_neg_I_mul

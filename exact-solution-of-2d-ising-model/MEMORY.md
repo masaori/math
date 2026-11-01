@@ -1,6 +1,9 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
 2026-11-01: 全証明の SageMath 検算の連続実行の六回目として、`sqrt_squared_is_original`（複素数の平方根の2乗は元に戻る）の検算 `sagemath/check/sqrt_squared_is_original/` を足した（未検算 115 → 114 件）。π の有理数倍の角度で cos・sin を 1 の冪根から作り、全て厳密。レビューで、最終行の「φ_cartesian ∘ φ_polar = id」を `isomorphism_of_phi_cartesian` の主張が述べていないと分かり、新しい主張 `phi_cartesian_after_phi_polar_is_identity` に切り出して検算を付けた。`isomorphism_of_phi_cartesian` の単射性が未証明であることを状態台帳に記録した。計算の誤りは無かった。次は `kronecker_transpose`。
+
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十一個目を行った。必要十分版 `NecSuf/TwoByTwoSkew.lean`（`A(θ̃_μ)` の固有値・固有ベクトル・対角化）を具体版の段と 1 つずつ対応する形に書き直し、具体版を特殊化として導く 12 本を `ClaimEigenATildeDiagFromNecSuf.lean` に置いた。`λ_+ ≠ λ_-` と `det P̌ ≠ 0` に効くのは `2s ≠ 0` だけ（標数 2 で崩れる）、人手 Step 2 の第 2 成分は `b = -ā` なしで閉じると分かった（本文を簡潔にするかは状態台帳の次の一歩）。次は `commutator_of_H_and_check_Z_Y` の必要十分版。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の五回目として、「（極座標表現）の乗法群」を扱った（未検算 116 → 115 件）。五回のレビューで、1 ブロック 1 主張に従い well-defined 性（積の定義の前へ移した）・モノイド・半径零の類の判定・逆元の存在・右逆元の一意性・群の七ブロックに分け、各ブロックに `sagemath/check/<ラベル>/` を付けた（共通の準備は `sagemath/_shared/polar_representation.sage`）。下流の φ_polar(z^{-1}) の二箇所は右からの積しか示していないので、一意性を片側の形で述べてそちらを引くようにした。計算の誤りは無かった。次は `sqrt_squared_is_original`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十個目を行った。人手 `eigenvector_of_A_theta_tilde` Step 1 が未定義の「固有値」と無証明の「固有値 ⟺ det(A(θ) - λI) = 0」を使っていたので、数学的道具立てに固有ベクトル・固有値・2×2 行列の行列式の定義と主張 `nonzero_kernel_iff_det_zero_two_by_two`（2×2 の成分計算）を足し、Step 1 を同値の鎖にした。Lean は `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` に人手の行ごとに置き、`eigenvalue_AMat_iff` を同じ鎖の `calc` にした。SageMath の検算を `sagemath/check/nonzero_kernel_iff_det_zero_two_by_two/` に置いた。rebase 先の「（極座標表現）の乗法群」の分割で足された内容名の id が棚卸しの分類規則に無く棚卸しの生成が落ちていたので、まとまり「角度・極座標・複素数の積と商」の規則に `^calculation_formulae_claim_.*polar` を足した。次は `NecSuf/TwoByTwoSkew.lean` から具体版を導く定理の欠け。

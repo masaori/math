@@ -415,12 +415,16 @@
     statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」を `isEigenvector_smul_eigen_pos`・`_neg` として立てた。必要十分版 `NecSuf/TwoByTwoKernelAndDeterminant.lean` の「⇒」を具体版と同じ手順（`v_i ≠ 0` の `i` を取る）にした。
     SageMath `sagemath/check/nonzero_kernel_iff_det_zero_two_by_two/`（厳密計算のみ）。棚卸しの分類規則 `tools/build-flat-inventory.ts` に `^finite_matrix_` を足した。
     レビューの指摘（一ステップ一定理に反する 5 行、状態台帳、行列式の Lean 側の定義の置き方の説明、添字の対応、`n = 0`、statement の固有ベクトルの主張）を直した。
+  - ゴールラインの確認の二十一個目（済み、2026-11-01）: 必要十分版 `NecSuf/TwoByTwoSkew.lean`（人手 `eigenvector_of_A_theta_tilde`・`diagonalization_check_P_D`）を、具体版 `ClaimEigenATildeDiag.lean` の段と 1 つずつ対応する形に書き直し、
+    具体版をその特殊化として導く定理 12 本を `DiagonalizationAndExponentialForm/ClaimEigenATildeDiagFromNecSuf.lean` に置いた（README の必要十分版の要件 4）。仮定は `s^2 = -(ab)` から具体版と同じ `ab = -s^2` にした。
+    対応のない旧補題 `skew2_mul_col`・`skew2_det_col` は消し、`skew2_mulVec` を `skew2_mulVec_pos`・`skew2_mulVec_neg` に分け、因数分解の恒等式・固有値の同値の鎖・`λ_+ ≠ λ_-`・`c` 倍・列からの `AP = PD`・`det P` の段を足した。
+    知見: `λ_+ ≠ λ_-` と `det P ≠ 0` に効くのは `2s ≠ 0`（具体版は `r > 0`。`ZMod 2` で崩れる）、人手 Step 2 の第 1 成分の `b = -ā` と `aā = r^2` は合成 `ab = -r^2` だけが効き、第 2 成分は仮定なしで閉じる。
+    二回のレビューの指摘（必須 9 件・任意 6 件）を直した。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
@@ -428,3 +432,4 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。
   `nonzero_kernel_iff_det_zero_two_by_two` と同じ 2×2 の成分計算で「`Bv = 0` なら `v` は `(B_{12}, -B_{11})` などのスカラー倍」と示せる。後段が Step 3 を使わないなら本文から外すか、使うなら本文と Lean を足す。本文を触るので回の先頭で fetch する。
 - 本文に単位行列 `I`・行列の差・行列のスカラー倍と `Iv = v` を定義するブロックが無い（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が名前だけで根拠に挙げている）。数学的道具立てに足すかを判断する。
+- 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分は、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復をしている。`b` のまま `(-b)(∓r) + g_1 b = (g_1 ± r) b` と書けば `b = -ā` が要らない（必要十分版 `skew2_mulVec_pos` の知見）。本文を簡潔にするかを判断する（本文を触るので回の先頭で fetch する）。

@@ -48,7 +48,7 @@
 | `Ising2D.det_checkPmat_ne_zero` | `det P̌_μ ≠ 0`（可逆性） | 同 Step 3 |
 | `Ising2D.AMat_mul_checkPmat` | `A P̌ = P̌ Ď` | 同 Step 2 |
 | **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** Step 4 |
-| `Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
+| `Ising2D.charPoly_factor_thetaTilde_of_necSuf` / `det_AMat_sub_smul_eq_zero_iff_of_necSuf` / `eigenvalue_AMat_iff_of_necSuf` / `lambdaPlusR_ne_lambdaMinusR_of_necSuf` / `det_checkPmat_of_necSuf` / `det_checkPmat_ne_zero_of_necSuf` / `AMat_mulVec_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mulVec_smul_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mul_checkPmat_of_necSuf` / `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`） | `_of_necSuf` を除いた名前の具体版と同じ主張を、必要十分版 `NecSuf/TwoByTwoSkew.lean` の系として導出した版 | `eigenvector_of_A_theta_tilde` Step 1・Step 2、`diagonalization_check_P_D` Step 2〜4 |
 | `Ising2D.det_AMat_eq_gamma1_sq_add` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)` | `det_A_theta_tilde` Step 1 |
 | `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form` / `gamma2_mul_gamma2_neg_cos_form` | `exp(iθ)exp(-iθ) = 1` と `γ_2γ_2(-θ)` の実部表示 | 同 Step 2 |
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
@@ -75,7 +75,7 @@
 | --- | --- | --- |
 | `OddModePhase.lean` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `N·θ = mπ`（`m` 奇数）かつ `sin θ = 0` なら `cos θ = -1` |
 | `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
-| `TwoByTwoSkew.lean` | `NecSuf.skew2_charPoly` / `skew2_charPoly_factor` / `skew2_mulVec` / `skew2_mul_col` / `skew2_det_col` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**） |
+| `TwoByTwoSkew.lean` | `NecSuf.skew2_factor_identity` / `skew2_charPoly` / `skew2_charPoly_factor` / `skew2_det_eq_zero_iff` / `skew2_eigenvalue_iff` / `skew2_eigenvalues_ne` / `skew2_mulVec_pos` / `skew2_mulVec_neg` / `mulVec_smul_of_mulVec_eq` / `skew2_mul_of_cols` / `det_of_cols` / `det_of_cols_ne_zero` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**。固有値が `g ± s` に限る段と `det P ≠ 0` の段は零因子が無いこと、`λ_+ ≠ λ_-` と `det P ≠ 0` は `2s ≠ 0`）。具体版の Step と 1 つずつ対応する |
 | `TwoByTwoKernelAndDeterminant.lean` | `NecSuf.det_mul_vec_zero_of_mulVec` / `det_mul_vec_one_of_mulVec` / `det_eq_zero_of_mulVec_eq_zero` / `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` / `exists_ne_zero_mulVec_eq_zero_iff_det` | 2×2 行列が 0 でないベクトルを 0 へ送る ⟺ `det = 0`（「⇒」は**零因子の無い可換環**、「⇐」は 0 でない可換環） |
 | `GammaDetIdentity.lean` | `NecSuf.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
 | `ArcoshExp.lean` | `NecSuf.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
@@ -86,7 +86,7 @@
 | --- | --- | --- | --- |
 | `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（必要十分版へ `N := M`, `m := 2μ-1` を代入） |
 | `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `NecSuf.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも必要十分版に `gamma2_neg_eq_neg_conj` を渡しただけ |
-| `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `AMat_mulVec_eigen_pos/neg`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_mulVec`, `NecSuf.skew2_charPoly_factor`, `NecSuf.eq_conj_of_mul_eq` | 対角化は `eq_conj_of_mul_eq` の系として導出 |
+| `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `charPoly_factor_thetaTilde`, `det_AMat_sub_smul_eq_zero_iff`, `eigenvalue_AMat_iff`, `lambdaPlusR_ne_lambdaMinusR`, `AMat_mulVec_eigen_pos/neg`, `AMat_mulVec_smul_eigen_pos/neg`, `AMat_mul_checkPmat`, `det_checkPmat(_ne_zero)`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_charPoly`, `skew2_charPoly_factor`, `skew2_det_eq_zero_iff`, `skew2_eigenvalue_iff`, `skew2_eigenvalues_ne`, `skew2_mulVec_pos/neg`, `mulVec_smul_of_mulVec_eq`, `skew2_mul_of_cols`, `det_of_cols(_ne_zero)`, `eq_conj_of_mul_eq` | 各具体版の `*_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`。`γ_2` の関係は `a b = -|γ_2|^2` だけを仮定として渡し、`b = -ā` と `a ā = r^2` は渡さない） |
 | `nonzero_kernel_iff_det_zero_two_by_two`（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖の最後の段） | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` | `NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det` | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`（係数 `R := ℂ`） |
 | `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |
 | `gamma1_gt_1_theta_tilde` | `one_lt_gamma1R_thetaTilde` | `NecSuf.one_lt_of_sq_gt_one` | 具体版は必要十分版の系 |
@@ -105,10 +105,15 @@
   `z ≠ 0` が効くのは狭義の不等号（`|γ_2| > 0`）だけで、等式は `z = 0` でも成り立つ。
   さらに、人手証明が `arg^{[0,2π)}` 分岐の複素平方根 `def_sqrt_cc` を経由して (3)(4)(5) を出す部分は、
   **「2 乗が何になるか」だけを述べれば分岐の議論が完全に消える**（本形式化はそうしている）。
-- **`A(θ~_μ)` の固有値・固有ベクトル・対角化に効いているのは
-  「行列が `!![g,a;-b,g]` の形（対角成分が等しい）」と「`s^2 = -(ab)` を満たす `s` が取れる」の 2 つだけ**で、
-  係数は**任意の可換環**でよい。複素数であることも `γ_1` が実数であることも効いていない。
-  人手証明が `√(-γ_2γ_2(-θ~))` として導入する量は、必要十分版では「2 乗が `-(ab)` の元」に退化し、
+- **`A(θ~_μ)` の固有値・固有ベクトル・対角化に効いているのは、
+  「行列が `!![g,a;-b,g]` の形（対角成分が等しい）」「`ab = -s^2` を満たす `s` が取れる」「`2s ≠ 0`」の 3 つと、
+  固有値が `g ± s` に限る段と `det P ≠ 0` の段での「係数に零因子が無いこと」だけ**で、係数は**任意の可換環**でよい。
+  複素数であることも `γ_1` が実数であることも効いていない。`λ_+ ≠ λ_-` に具体版は `r > 0`（実数の順序）を使うが、
+  効いているのは `2r ≠ 0` だけで、標数 2 の環では `g + s = g - s` となって対角化が崩れる。
+  人手証明 Step 2 の第 1 成分が経る `b = -ā` と `a ā = r^2` の 2 段は、その合成 `ab = -r^2` だけが効いている。
+  第 2 成分は仮定なしに環の計算だけで閉じ、人手の第 2 成分の `-b = ā` の代入は `ā` を括り出して `b` へ戻す往復で、
+  固有ベクトルであることに効いていない。
+  人手証明が `√(-γ_2γ_2(-θ~))` として導入する量は、必要十分版では「`ab = -s^2` を満たす元 `s`」に退化し、
   分岐の選択は `s ↦ -s`（＝ `P` の 2 列と `D` の 2 成分の同時入れ替え）にすぎない。
 - **`det A = 1` は可換環の多項式恒等式である。** 効いているのは
   `u^2+v^2 = 1`, `c_1^2-s_1^2 = 1`, `(c_2^*)^2-(s_2^*)^2 = 1`, `c_2s_2^* = c_2^*` の 4 本だけで、

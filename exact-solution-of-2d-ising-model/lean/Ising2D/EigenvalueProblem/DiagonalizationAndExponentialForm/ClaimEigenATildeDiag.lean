@@ -5,8 +5,8 @@
 （`structured-latex/content/eigenvalue_problem_diagonalization_and_exponential_form.ts` の
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
-**必要十分版**: `Ising2D/NecSuf/TwoByTwoSkew.lean`
-（`Ising2D.NecSuf.skew2_mulVec` / `skew2_charPoly_factor` / `eq_conj_of_mul_eq`）。
+**必要十分版**: `Ising2D/NecSuf/TwoByTwoSkew.lean`。各段との対応はそのファイルの冒頭に書き、
+具体版をその特殊化として導く定理（`*_of_necSuf`）は `ClaimEigenATildeDiagFromNecSuf.lean` に置く。
 
 ## 人手証明との対応
 
@@ -18,31 +18,34 @@
 `gamma2_mul_gamma2_neg_eq_neg_absSq` の `r^2` の置き方を変えた言い換え）、
 `abs_basic_properties` の `a ā = r^2` は `gamma2_mul_conj_eq_absGamma2_sq` である。
 
-* `eigenvector_of_A_theta_tilde` Step 1: 準備の因数分解の恒等式 `factor_identity_thetaTilde` と、
-  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`、零因子が無いことによる
-  `det_AMat_sub_smul_eq_zero_iff`、固有値が `λ_{±,μ}` に限るという statement の主張
+各箇条の［］内は、同じ段の必要十分版（`Ising2D.NecSuf.` を省く）である。
+
+* `eigenvector_of_A_theta_tilde` Step 1: 準備の因数分解の恒等式 `factor_identity_thetaTilde`［`skew2_factor_identity`］と、
+  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`［`skew2_charPoly`・`skew2_charPoly_factor`］、零因子が無いことによる
+  `det_AMat_sub_smul_eq_zero_iff`［`skew2_det_eq_zero_iff`］、固有値が `λ_{±,μ}` に限るという statement の主張
   `eigenvalue_AMat_iff`（固有値の定義 `def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖。最後の段は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
-  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`））、
-  `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR`。
+  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`））［`skew2_eigenvalue_iff`］、
+  `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR`［`skew2_eigenvalues_ne`］。
 * `eigenvector_of_A_theta_tilde` の statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」:
   `isEigenvector_smul_eigen_pos`・`isEigenvector_smul_eigen_neg`。
 * `eigenvector_of_A_theta_tilde` Step 2: 成分ごとの鎖 `AMat_mulVec_eigen_pos`・`AMat_mulVec_eigen_neg`
-  （第 1 成分は `b = -ā` と `a ā = r^2`、第 2 成分は `-b = ā` による）、`v_± ≠ 0` の
-  `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`、`c ∈ ℂ^×` 倍の鎖
-  `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`。
+  （第 1 成分は `b = -ā` と `a ā = r^2`、第 2 成分は `-b = ā` による）［`skew2_mulVec_pos`・`skew2_mulVec_neg`。
+  第 1 成分は合成 `ab = -s^2` の 1 段、第 2 成分は仮定なし］、`v_± ≠ 0` の
+  `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`［置かない］、`c ∈ ℂ^×` 倍の鎖
+  `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`［`mulVec_smul_of_mulVec_eq`］。
 * `diagonalization_check_P_D` Step 2: 第 2 成分の約分 `checkC_mul_b`、列が `v_{±,μ}` に一致すること
-  `checkPmat_col_pos`・`checkPmat_col_neg`、列ごとに見た `A P̌ = P̌ Ď` の `AMat_mul_checkPmat`。
-* `diagonalization_check_P_D` Step 3: `det P̌` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero`。
+  `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、列ごとに見た `A P̌ = P̌ Ď` の
+  `AMat_mul_checkPmat`［`skew2_mul_of_cols`］。
+* `diagonalization_check_P_D` Step 3: `det P̌` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`］。
 * `diagonalization_check_P_D` Step 4: 右から `P̌⁻¹` を掛ける鎖
-  `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`。
+  `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`［`eq_conj_of_mul_eq`］。
 * 人手証明 Step 3（固有空間が 1 次元であること）は後段で使われないので形式化していない。
 
 人手証明と同じく `γ_2 = 0` の場合分けは無い。`gamma_2_theta_tilde_nonzero`
 （`Ising2D.gamma2_thetaTilde_ne_zero`）が無条件だからである。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
-import Ising2D.NecSuf.TwoByTwoSkew
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
 
 namespace Ising2D
@@ -398,13 +401,5 @@ theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv
         (Matrix.mul_assoc _ _ _).symm                                 -- 積の結合則
     _ = (checkPmat P.const M μ * checkDmat P.const M μ) * (checkPmat P.const M μ)⁻¹ := by
         rw [AMat_mul_checkPmat P hM μ]                                 -- Step 2
-
-/-- **必要十分版からの導出**（同じ主張）: Step 4 は `NecSuf.eq_conj_of_mul_eq` の特殊化である。 -/
-theorem AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf
-    (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
-    AMat P.const (thetaTilde M μ)
-      = checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹ :=
-  NecSuf.eq_conj_of_mul_eq (AMat_mul_checkPmat P hM μ)
-    (isUnit_iff_ne_zero.2 (det_checkPmat_ne_zero P hM μ))
 
 end Ising2D
