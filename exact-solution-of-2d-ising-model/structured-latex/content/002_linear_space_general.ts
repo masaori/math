@@ -1458,6 +1458,16 @@ W
         " の列の収束も同様に ",
         math(String.raw`\|w_N - w\| \to 0`),
         " で定める。",
+        math(String.raw`K`),
+        " の列 ",
+        math(String.raw`(a_N)_{N \in \mathbb{Z}_{\ge 0}}`),
+        " と ",
+        math(String.raw`a \in K`),
+        " についても、",
+        math(String.raw`a_N \to a`),
+        " を実数列の収束 ",
+        math(String.raw`|a_N - a| \to 0`),
+        " で定める。",
       ]),
     ],
     conversion: {
@@ -1469,6 +1479,7 @@ W
           "初出の直前に置いた。採用したのは Frobenius ノルム（成分の平方和の平方根）で、" +
           "これは 005 章の M(n;C) の内積・ノルムの定義（原文では TODO）が意図する" +
           "Hilbert--Schmidt 内積 ⟨A,B⟩ = tr(A^* B) から定まるノルムと同一である。",
+          "K の列の収束 a_N → a :⇔ |a_N − a| → 0 は、数の exp が指数級数の部分和の極限であること（labels: scalar_exp_is_limit_of_partial_sums）の主張の収束の意味を定めるために、K^d の列の収束と並べて足した。",
       ],
     },
   },

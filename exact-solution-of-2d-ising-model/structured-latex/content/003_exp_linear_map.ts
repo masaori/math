@@ -1589,11 +1589,19 @@ S_NT_N
       paragraph([
         "が ",
         math(String.raw`K`),
-        " において成り立つ（",
+        " において（",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K`),
+        " の列の収束の意味で）成り立つ。ここで ",
         math(String.raw`x^0 := 1`),
         "、",
+        math(String.raw`x^{m+1} := x^m\,x`),
+        "（",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        "）、",
         math(String.raw`0! := 1`),
-        "）。",
+        " とする。",
       ]),
     ],
     proof: [
@@ -1604,9 +1612,22 @@ S_NT_N
         math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
         " に関する帰納法で示す。",
         math(String.raw`m = 0`),
-        " では ",
-        math(String.raw`[x]_K^{\,0} = I = [1]_K = [x^0]_K`),
-        "（1 行 1 列の単位行列の成分は 1）。",
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[x]_K^{\,0}
+&= I
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+&= \left[I_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= [1]_K
+   \quad (\because \text{単位行列の対角成分は } 1) \\
+&= [x^0]_K
+   \quad (\because \text{主張の約束 } x^0 := 1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`m`),
         " で成り立つと仮定すると",
       ]),
@@ -1614,7 +1635,7 @@ S_NT_N
         String.raw`\begin{aligned}
 \left([x]_K^{\,m+1}\right)_{11}
 &= \left([x]_K^{\,m}[x]_K\right)_{11}
-   \quad (\because \text{行列の冪の定義。}\blkref{def_exp}) \\
+   \quad (\because \text{行列の冪の定義 } A^{m+1} := A^m A\text{。}\blkref{def_exp}) \\
 &= \sum_{j=1}^{1}\left([x]_K^{\,m}\right)_{1j}\left([x]_K\right)_{j1}
    \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
 &= \left([x]_K^{\,m}\right)_{11}\left([x]_K\right)_{11}
@@ -1624,16 +1645,19 @@ S_NT_N
 &= x^m\,x
    \quad (\because \blkref{def_one_by_one_matrix}) \\
 &= x^{m+1}
-   \quad (\because \text{冪の定義})
+   \quad (\because \text{主張の約束 } x^{m+1} := x^m\,x)
 \end{aligned}`,
       ),
-      paragraph([
-        "したがって ",
-        math(String.raw`[x]_K^{\,m+1} = [x^{m+1}]_K`),
-        "（1 行 1 列の行列は成分だけで決まる。",
-        ref("def_one_by_one_matrix"),
-        "）。",
-      ]),
+      paragraph(["であるから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[x]_K^{\,m+1}
+&= \left[\left([x]_K^{\,m+1}\right)_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= [x^{m+1}]_K
+   \quad (\because \text{上の鎖})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（部分和の成分）。",
         ref("matrix_exp_series_converges"),
@@ -1654,26 +1678,26 @@ S_NT_N
       ),
       paragraph([
         "Step 3（極限）。",
-        ref("exp_converges"),
-        " (1b) を ",
-        math(String.raw`n = 1`),
-        "、",
-        math(String.raw`A = [x]_K`),
-        "、",
-        math(String.raw`i = j = 1`),
-        " に適用すると ",
-        math(String.raw`\left(S_N([x]_K)\right)_{11} \to \left(\exp([x]_K)\right)_{11}`),
-        " である（",
-        math(String.raw`\sum_{m=0}^{\infty}\frac{1}{m!}[x]_K^{\,m} = \exp([x]_K)`),
-        " は ",
-        ref("def_exp"),
-        " (1)）。左辺は Step 2 により ",
-        math(String.raw`\sum_{m=0}^{N}\frac{x^m}{m!}`),
-        "、右辺は ",
-        ref("def_scalar_exp"),
-        " により ",
-        math(String.raw`\exp(x)`),
-        " である。",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|\sum_{m=0}^{N}\frac{x^m}{m!} - \exp(x)\right|
+&= \left|\left(S_N([x]_K)\right)_{11} - \exp(x)\right|
+   \quad (\because \text{Step 2}) \\
+&= \left|\left(S_N([x]_K)\right)_{11} - \left(\exp([x]_K)\right)_{11}\right|
+   \quad (\because \blkref{def_scalar_exp}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \blkref{exp_converges}\text{ (1b) を } n = 1,\ A = [x]_K,\ i = j = 1 \text{ に適用。}\textstyle\sum_{m=0}^{\infty}\frac{1}{m!}[x]_K^{\,m} = \exp([x]_K)\text{ は }\blkref{def_exp}\text{ (1)})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、これは ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K`),
+        " の列の収束の定義そのものである。",
       ]),
     ],
     conversion: { status: "added", notes: ["数の exp を行列の exp から定義したことに伴い、指数級数との関係を主張として置いた。"] },
@@ -1699,20 +1723,57 @@ S_NT_N
       paragraph([
         "準備。1 行 1 列の行列 ",
         math(String.raw`A, B \in \mathrm{Mat}(1,K)`),
-        " について、",
-        ref("mat_mult"),
-        " の和は ",
-        math(String.raw`j = 1`),
-        " の 1 項だけなので ",
-        math(String.raw`(AB)_{11} = A_{11}B_{11}`),
-        " である。とくに ",
-        math(String.raw`([x]_K[y]_K)_{11} = xy = yx = ([y]_K[x]_K)_{11}`),
-        " より ",
-        math(String.raw`[x]_K[y]_K = [y]_K[x]_K`),
-        "。また行列の和は成分ごとなので ",
-        math(String.raw`[x]_K + [y]_K = [x+y]_K`),
-        "。",
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(AB)_{11}
+&= \sum_{j=1}^{1} A_{1j}B_{j1}
+   \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
+&= A_{11}B_{11}
+   \quad (\because \text{和は } j=1 \text{ の 1 項だけ})
+\end{aligned}`,
+      ),
+      paragraph(["である。これを使うと"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left([x]_K[y]_K\right)_{11}
+&= \left([x]_K\right)_{11}\left([y]_K\right)_{11}
+   \quad (\because \text{準備の } (AB)_{11} = A_{11}B_{11}) \\
+&= xy
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= yx
+   \quad (\because K \text{ の積の可換性}) \\
+&= \left([y]_K\right)_{11}\left([x]_K\right)_{11}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= \left([y]_K[x]_K\right)_{11}
+   \quad (\because \text{準備の } (AB)_{11} = A_{11}B_{11})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[x]_K[y]_K
+&= \left[\left([x]_K[y]_K\right)_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= \left[\left([y]_K[x]_K\right)_{11}\right]_K
+   \quad (\because \text{上の鎖}) \\
+&= [y]_K[x]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+[x]_K + [y]_K
+&= \left[\left([x]_K + [y]_K\right)_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= \left[\left([x]_K\right)_{11} + \left([y]_K\right)_{11}\right]_K
+   \quad (\because \text{行列の和は成分ごと}) \\
+&= [x+y]_K
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph(["である。以上を使って"]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(x)\exp(y)
@@ -1752,36 +1813,122 @@ S_NT_N
     ],
     proof: [
       paragraph([
-        "すべての ",
-        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        "準備。",
+        math(String.raw`O \in \mathrm{Mat}(1,K)`),
+        " を零行列とすると ",
+        math(String.raw`O = [0]_K`),
+        "（",
+        ref("def_one_by_one_matrix"),
+        "）である。",
+        math(String.raw`m \in \mathbb{Z}_{\ge 1}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{m=0}^{N}\frac{0^m}{m!}
-&= \frac{0^0}{0!} + \sum_{m=1}^{N}\frac{0^m}{m!}
-   \quad (\because \text{第 0 項を分ける}) \\
-&= \frac{1}{1} + \sum_{m=1}^{N}\frac{0}{m!}
-   \quad (\because 0^0 = 1,\ 0! = 1,\ m \ge 1 \text{ で } 0^m = 0) \\
-&= 1
-   \quad (\because K \text{ の四則演算})
+\left([0]_K^{\,m}\right)_{11}
+&= \left([0]_K^{\,m-1}[0]_K\right)_{11}
+   \quad (\because \text{行列の冪の定義 } A^{m} := A^{m-1} A\text{。}\blkref{def_exp}) \\
+&= \sum_{j=1}^{1}\left([0]_K^{\,m-1}\right)_{1j}\left([0]_K\right)_{j1}
+   \quad (\because \text{行列の積の成分。}\blkref{mat_mult}) \\
+&= \left([0]_K^{\,m-1}\right)_{11}\left([0]_K\right)_{11}
+   \quad (\because \text{和は } j=1 \text{ の 1 項だけ}) \\
+&= \left([0]_K^{\,m-1}\right)_{11}\cdot 0
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= 0
+   \quad (\because K \text{ の元に } 0 \text{ を掛けると } 0)
+\end{aligned}`,
+      ),
+      paragraph(["であるから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+[0]_K^{\,m}
+&= \left[\left([0]_K^{\,m}\right)_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= [0]_K
+   \quad (\because \text{上の鎖}) \\
+&= O
+   \quad (\because \text{上の } O = [0]_K)
 \end{aligned}`,
       ),
       paragraph([
-        "であり、定数列の極限は 1 である。一方 ",
-        ref("scalar_exp_is_limit_of_partial_sums"),
-        " を ",
-        math(String.raw`x = 0`),
-        " に適用すると同じ列は ",
-        math(String.raw`\exp(0)`),
-        " に収束する。",
-        math(String.raw`K`),
-        " の列の極限の一意性より ",
-        math(String.raw`\exp(0) = 1`),
-        "。",
+        "である。",
+        ref("matrix_exp_series_converges"),
+        " の部分和について、すべての ",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " で",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_N([0]_K)
+&= \sum_{m=0}^{N}\frac{1}{m!}[0]_K^{\,m}
+   \quad (\because \blkref{matrix_exp_series_converges}\text{ の } S_N) \\
+&= \frac{1}{0!}[0]_K^{\,0} + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
+   \quad (\because \text{第 0 項を分ける}) \\
+&= \frac{1}{0!}I + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
+   \quad (\because \text{行列の冪の定義 } A^0 := I\text{。}\blkref{def_exp}) \\
+&= I + \sum_{m=1}^{N}\frac{1}{m!}[0]_K^{\,m}
+   \quad (\because 0! = 1) \\
+&= I + \sum_{m=1}^{N}\frac{1}{m!}O
+   \quad (\because \text{上の } [0]_K^{\,m} = O\ (m \ge 1)) \\
+&= I + \sum_{m=1}^{N}O
+   \quad (\because \text{零行列のスカラー倍は零行列}) \\
+&= I + O
+   \quad (\because \text{零行列どうしの和は零行列}) \\
+&= I
+   \quad (\because \text{零行列は行列の加法の単位元}) \\
+&= \left[I_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= [1]_K
+   \quad (\because \text{単位行列の対角成分は } 1)
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|S_N([0]_K) - [1]_K\right\|
+&= \left\|[1]_K - [1]_K\right\|
+   \quad (\because \text{上の鎖}) \\
+&= \|O\|
+   \quad (\because \text{行列の差は成分ごと}) \\
+&= 0
+   \quad (\because \blkref{matrix_norm_triangle_inequality}\text{ (1)})
+\end{aligned}`,
+      ),
+      paragraph([
+        "がすべての ",
+        math(String.raw`N`),
+        " で成り立ち、値が 0 の定数の実数列は 0 に収束するので、",
+        ref("def_matrix_norm"),
+        " の意味で ",
+        math(String.raw`S_N([0]_K) \to [1]_K`),
+        " である。一方 ",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`S_N([0]_K) \to \exp([0]_K)`),
+        " である。",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) の極限の一意性より ",
+        math(String.raw`\exp([0]_K) = [1]_K`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(0)
+&= \bigl(\exp([0]_K)\bigr)_{11}
+   \quad (\because \blkref{def_scalar_exp}) \\
+&= \left([1]_K\right)_{11}
+   \quad (\because \exp([0]_K) = [1]_K) \\
+&= 1
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
     ],
-    conversion: { status: "added", notes: ["数の exp を行列の exp から定義したことに伴い置いた。"] },
+    conversion: {
+      status: "added",
+      notes: [
+        "数の exp を行列の exp から定義したことに伴い置いた。数の列の極限の一意性はラベルを持つブロックが無いので、行列の部分和 S_N([0]_K) が定数列 [1]_K であることと、行列の極限の一意性（labels: matrix_norm_triangle_inequality (4)）から示した。",
+      ],
+    },
   },
   {
     id: "exp_linear_map_010_claim_real_exp_positive",
