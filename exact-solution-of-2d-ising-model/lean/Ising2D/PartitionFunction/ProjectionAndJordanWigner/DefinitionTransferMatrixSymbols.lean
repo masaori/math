@@ -259,22 +259,43 @@ theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
 theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
   rw [pauliY_mul_pauliZ, smul_smul, neg_mul, Complex.I_mul_I, neg_neg, one_smul]
 
-/-- `σ^z σ^y = -√-1 σ^x`（`ε` の表式の検証に使う）。 -/
+/-- `σ^z σ^y = -i σ^x`。人手 `V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と `V2_in_Z_Y` の Step 0 の鎖
+（`partition_function_projection_and_jordan_wigner.ts`。2 本は同じ鎖）の各段と 1 対 1 に対応する。 -/
 theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
   calc
-    -- 本文: 二つの Pauli 行列を成分表示へ展開する。
-    pauliZ * pauliY =
-        !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
-    -- 本文: `2×2` 行列積を成分ごとに計算する。
-    _ = !![0, -Complex.I; -Complex.I, 0] := by
+    -- `pauli_matrix_products`（Pauli 行列）
+    pauliZ * pauliY = !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- `mat_mult`
+    _ = !![1 * 0 + 0 * Complex.I, 1 * (-Complex.I) + 0 * 0;
+          0 * 0 + (-1) * Complex.I, 0 * (-Complex.I) + (-1) * 0] := by
       ext i j
-      fin_cases i <;> fin_cases j <;>
-        simp [Matrix.mul_apply, Fin.sum_univ_two]
-    -- 本文: 各成分から共通因子 `-i` を取り出す。
+      fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
+    -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
+    _ = !![1 * 0 + 0, 1 * (-Complex.I) + 0; 0 + (-1) * Complex.I, 0 + (-1) * 0] := by
+      simp only [zero_mul]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    _ = !![1 * 0, 1 * (-Complex.I); (-1) * Complex.I, (-1) * 0] := by
+      simp only [zero_add, add_zero]
+    -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
+    _ = !![0, 1 * (-Complex.I); (-1) * Complex.I, 0] := by simp only [mul_zero]
+    -- `complex_times_zero_is_zero`（右辺の `(-i)·0` へ。2 か所へ同時に適用）
+    _ = !![(-Complex.I) * 0, 1 * (-Complex.I); (-1) * Complex.I, (-Complex.I) * 0] := by
+      rw [mul_zero (-Complex.I)]
+    -- 積の可換律（`complex_numbers_form_a_field`）
+    _ = !![(-Complex.I) * 0, (-Complex.I) * 1; (-1) * Complex.I, (-Complex.I) * 0] := by
+      rw [mul_comm (-Complex.I) 1]
+    -- `multiply_by_minus_one`（`-z := (-1)·z`）
+    _ = !![(-Complex.I) * 0, (-Complex.I) * 1; -Complex.I, (-Complex.I) * 0] := by
+      rw [neg_one_mul Complex.I]
+    -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
+    _ = !![(-Complex.I) * 0, (-Complex.I) * 1; (-Complex.I) * 1, (-Complex.I) * 0] := by
+      rw [mul_one (-Complex.I)]
+    -- `def_matrix_scalar_multiple`
     _ = (-Complex.I) • !![0, 1; 1, 0] := by
       ext i j
-      fin_cases i <;> fin_cases j <;> simp
-    -- 本文: 残った行列を `σˣ` の定義へ戻す。
+      rw [matrix_smul_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products`（Pauli 行列）
     _ = (-Complex.I) • pauliX := rfl
 
 end PauliRelations

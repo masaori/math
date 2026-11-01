@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十七個目を行った。`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` には名前だけの根拠の 4 種が無いことを確かめ、`partition_function_projection_and_jordan_wigner.ts` の `V1_in_Z_Y_epsilon`・`V2_in_Z_Y` の Step 0 の 4 本の鎖を、1 段に 1 つの事実を使いすべての根拠をラベルで引く鎖にした。Lean の `pauliY_mul_pauliX_eq`・`pauliX_mul_pauliY_eq`・`pauliZ_mul_pauliY` を人手と 1 対 1 の `calc` にし、SageMath に 2 本の検算を足した（全 PASS）。次は台帳の「次の一歩」（`eigenvalue_problem_reduction_to_A_theta.ts`）。
+
 2026-11-01: 全証明の SageMath 検算の連続実行として、`exp_hermitian_is_positive_definite`（エルミート行列の exp は正定値）を扱った。四つの主張を束ねていたブロックを 1 ブロック 1 主張の 9 ブロック（合同変換・単位行列・正の実数倍・トレース・`exp(-A)exp(A) = I`・exp のエルミート性ほか）に分け、補助の 4 主張と定義 `def_conjugate_bilinear_value`（`x^*Ay` を成分の和で定め、`def_hermitian_positive_definite` の同一視を置き換えた）を足して、13 主張に同名の検算を付けた（共通の準備 `sagemath/_shared/hermitian_forms_by_definition.sage`、exp はボールで囲む）。下流の「(1)〜(4)」の参照を付け替え、合同変換の仮定を左逆行列 `B'B = I` にした（未検算 99 → 98 件、証明を持つブロック 239 → 251 件）。計算の誤りは無かった。Lean の具体版が人手と一対一でないことを状態台帳に記録した。次は `psd_cauchy_schwarz`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十六個目を行った。`004_transfer_matrix.ts` の名前だけの根拠「行列（数ベクトル）の和とスカラー倍は成分ごと」5 か所（`exp_of_diagonal_matrix`・`end_agrees_with_matrix_vector_product`）を、新しく足した定義 `def_finite_sum_of_matrices`・主張 `finite_sum_of_matrices_entrywise`（`002_linear_space_general.ts`）の段と `def_matrix_scalar_multiple` の段の 2 段に割った。SageMath に `sagemath/check/finite_sum_of_matrices_entrywise/` と 2 つの検算の新しい行を足した（全 PASS）。有限和の添字の付け方（`Σ_{p=0}^{N}`・`𝓘` の上の和）が本文で定まっていないことを状態台帳に残した。次は台帳の「次の一歩」（`008_TV1_hatZ_hatY_part1.ts`）。

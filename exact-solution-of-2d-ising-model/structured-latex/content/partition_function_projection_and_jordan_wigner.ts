@@ -938,45 +938,83 @@ c_i^*&>0
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \text{Pauli 行列の定義}) \\
+&&(\because \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
-&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
-&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-&&(\because \mathbb{C} \text{ の四則}) \\
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
+&&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0 & i\cdot1\end{pmatrix}
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ 0 & i\cdot1\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot1\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot\bigl((-1)\cdot(-1)\bigr)\end{pmatrix}
+&&(\because \mathbb{C}\ \text{で}\ (-1)\cdot(-1)=1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & \bigl(i\cdot(-1)\bigr)\cdot(-1)\end{pmatrix}
+&&(\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & \bigl((-1)\cdot i\bigr)\cdot(-1)\end{pmatrix}
+&&(\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & (-i)\cdot(-1)\end{pmatrix}
+&&(\because \blkref{multiply_by_minus_one}) \\
 &= -i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義}) \\
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^z
-&&(\because \text{Pauli 行列の定義})
+&&(\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^y
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \text{Pauli 行列の定義}) \\
+&&(\because \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}0\cdot0+1\cdot i & 0\cdot(-i)+1\cdot0 \\ 1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0\end{pmatrix}
-&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
-&= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-&&(\because \mathbb{C} \text{ の四則}) \\
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}0+1\cdot i & 0+1\cdot0 \\ 1\cdot0+0 & 1\cdot(-i)+0\end{pmatrix}
+&&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot i & 1\cdot0 \\ 1\cdot0 & 1\cdot(-i)\end{pmatrix}
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}1\cdot i & 0 \\ 0 & 1\cdot(-i)\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}1\cdot i & 0 \\ 0 & -i\end{pmatrix}
+&&(\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}1\cdot i & 0 \\ 0 & (-1)\cdot i\end{pmatrix}
+&&(\because \blkref{multiply_by_minus_one}) \\
+&= \begin{pmatrix}i\cdot1 & 0 \\ 0 & i\cdot(-1)\end{pmatrix}
+&&(\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}i\cdot1 & i\cdot0 \\ i\cdot0 & i\cdot(-1)\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
 &= i\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義}) \\
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= i\,\sigma^z
-&&(\because \text{Pauli 行列の定義})
+&&(\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \text{Pauli 行列の定義}) \\
+&&(\because \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
-&&(\because 2\times2 \text{ 行列の積の成分計算}) \\
-&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-&&(\because \mathbb{C} \text{ の四則}) \\
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
+&&(\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+&&(\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+&&(\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ -i & (-i)\cdot0\end{pmatrix}
+&&(\because \blkref{multiply_by_minus_one}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-i)\cdot1 & (-i)\cdot0\end{pmatrix}
+&&(\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義}) \\
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^x
-&&(\because \text{Pauli 行列の定義})
+&&(\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       paragraph([
@@ -1242,6 +1280,7 @@ V_1
           "\\quad (\\because …) で置かれていた根拠 5 行を、aligned の行末の根拠列へ揃えた。" +
           "内容・式変形・根拠・参照は変えていない。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
+        "2026-11-01: Step 0 の 3 本の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律・結合律、multiply_by_minus_one、(-1)·(-1) = 1）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
       ],
     },
   },
@@ -1298,15 +1337,27 @@ V_1
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&& (\because \text{Pauli 行列の定義}) \\
+&& (\because \blkref{pauli_matrix_products}) \\
 &= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
-&& (\because 2\times2 \text{ 行列の積の成分計算}) \\
-&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-&& (\because \mathbb{C} \text{ の四則}) \\
+&& (\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
+&& (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+&& (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
+&& (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+&& (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+&& (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ -i & (-i)\cdot0\end{pmatrix}
+&& (\because \blkref{multiply_by_minus_one}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-i)\cdot1 & (-i)\cdot0\end{pmatrix}
+&& (\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
 &= -i\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&& (\because \text{行列のスカラー倍の定義}) \\
+&& (\because \blkref{def_matrix_scalar_multiple}) \\
 &= -i\,\sigma^x
-&& (\because \text{Pauli 行列の定義})
+&& (\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       paragraph([
@@ -1437,6 +1488,7 @@ V_2
         "旧ブロックは独立した V1 と V2 の二等式を一つの主張へ束ねていたため、一ブロック一主張の規約に従って V2 の等式を分離した。",
         "抽象テンソル積を使わず、具体的なクロネッカー積と二次 Pauli 行列の成分計算だけで証明した。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。パウリ行列の指数表示を引く箇所の参照先を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
+        "2026-11-01: Step 0 の鎖で、2 つの事実を 1 段に束ねていた「行列のスカラー倍の定義」の段を、def_matrix_scalar_multiple を引く段と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律、multiply_by_minus_one）を 1 段に 1 つずつ使う段に割った。「ℂ の四則」で複数の事実を束ねていた段も同じく割り、「2×2 行列の積の成分計算」「Pauli 行列の定義」を mat_mult・pauli_matrix_products へのラベル参照に替えた。主張は変えていない。",
       ],
     },
   },

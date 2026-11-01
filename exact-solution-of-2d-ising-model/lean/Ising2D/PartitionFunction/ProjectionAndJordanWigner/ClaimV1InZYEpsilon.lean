@@ -47,17 +47,84 @@ private theorem siteProd_smul_family_for_jordanWigner (c : Fin M → ℂ)
 
 /-! ## 単一サイトの Pauli 行列の積 -/
 
-/-- 人手証明 Step 0 の `σʸσˣ = -iσᶻ`。 -/
+/-- 人手証明 Step 0 の `σʸσˣ = -iσᶻ`。人手の鎖の各段と 1 対 1 に対応する。 -/
 theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- `pauli_matrix_products`（Pauli 行列）
+    pauliY * pauliX = !![0, -Complex.I; Complex.I, 0] * !![0, 1; 1, 0] := rfl
+    -- `mat_mult`
+    _ = !![0 * 0 + (-Complex.I) * 1, 0 * 1 + (-Complex.I) * 0;
+          Complex.I * 0 + 0 * 1, Complex.I * 1 + 0 * 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
+    -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
+    _ = !![0 + (-Complex.I) * 1, 0 + (-Complex.I) * 0;
+          Complex.I * 0 + 0, Complex.I * 1 + 0] := by simp only [zero_mul]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0; Complex.I * 0, Complex.I * 1] := by
+      simp only [zero_add, add_zero]
+    -- `complex_times_zero_is_zero`
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0; 0, Complex.I * 1] := by rw [mul_zero Complex.I]
+    -- `complex_times_zero_is_zero`（右辺の `(-i)·0` へ）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0; (-Complex.I) * 0, Complex.I * 1] := by
+      rw [mul_zero (-Complex.I)]
+    -- ℂ で `(-1)·(-1) = 1`（`definition_of_cc` の積。Lean では `(-1)·z = -z` と `-(-1) = 1` の 2 補題で閉じる）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0;
+          (-Complex.I) * 0, Complex.I * ((-1) * (-1))] := by
+      rw [neg_one_mul, neg_neg]
+    -- 積の結合律（`complex_numbers_form_a_field`）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0;
+          (-Complex.I) * 0, (Complex.I * (-1)) * (-1)] := by
+      rw [mul_assoc Complex.I]
+    -- 積の可換律（`complex_numbers_form_a_field`）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0;
+          (-Complex.I) * 0, ((-1) * Complex.I) * (-1)] := by
+      rw [mul_comm Complex.I (-1)]
+    -- `multiply_by_minus_one`（`-z := (-1)·z`）
+    _ = !![(-Complex.I) * 1, (-Complex.I) * 0; (-Complex.I) * 0, (-Complex.I) * (-1)] := by
+      rw [neg_one_mul Complex.I]
+    -- `def_matrix_scalar_multiple`
+    _ = (-Complex.I) • !![1, 0; 0, -1] := by
+      ext i j
+      rw [matrix_smul_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products`（Pauli 行列）
+    _ = (-Complex.I) • pauliZ := rfl
 
-/-- 人手証明 Step 0 の `σˣσʸ = iσᶻ`。 -/
+/-- 人手証明 Step 0 の `σˣσʸ = iσᶻ`。人手の鎖の各段と 1 対 1 に対応する。 -/
 theorem pauliX_mul_pauliY_eq : pauliX * pauliY = Complex.I • pauliZ := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- `pauli_matrix_products`（Pauli 行列）
+    pauliX * pauliY = !![0, 1; 1, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- `mat_mult`
+    _ = !![0 * 0 + 1 * Complex.I, 0 * (-Complex.I) + 1 * 0;
+          1 * 0 + 0 * Complex.I, 1 * (-Complex.I) + 0 * 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
+    -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
+    _ = !![0 + 1 * Complex.I, 0 + 1 * 0; 1 * 0 + 0, 1 * (-Complex.I) + 0] := by
+      simp only [zero_mul]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    _ = !![1 * Complex.I, 1 * 0; 1 * 0, 1 * (-Complex.I)] := by simp only [zero_add, add_zero]
+    -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
+    _ = !![1 * Complex.I, 0; 0, 1 * (-Complex.I)] := by rw [mul_zero (1 : ℂ)]
+    -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
+    _ = !![1 * Complex.I, 0; 0, -Complex.I] := by rw [one_mul (-Complex.I)]
+    -- `multiply_by_minus_one`（`-z := (-1)·z`）
+    _ = !![1 * Complex.I, 0; 0, (-1) * Complex.I] := by rw [neg_one_mul Complex.I]
+    -- 積の可換律（`complex_numbers_form_a_field`。2 か所へ同時に適用）
+    _ = !![Complex.I * 1, 0; 0, Complex.I * (-1)] := by
+      rw [mul_comm Complex.I 1, mul_comm Complex.I (-1)]
+    -- `complex_times_zero_is_zero`（右辺の `i·0` へ。2 か所へ同時に適用）
+    _ = !![Complex.I * 1, Complex.I * 0; Complex.I * 0, Complex.I * (-1)] := by
+      rw [mul_zero Complex.I]
+    -- `def_matrix_scalar_multiple`
+    _ = Complex.I • !![1, 0; 0, -1] := by
+      ext i j
+      rw [matrix_smul_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products`（Pauli 行列）
+    _ = Complex.I • pauliZ := rfl
 
 /-! ## 非境界項と周期境界項 -/
 
