@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_determinant_constant_term_one_archived",
+    targets: ["def_kac_ward_determinants"],
+    title: { text: "参照用: 四つの Kac--Ward 行列式の定数項" },
+    body: [
+      paragraph(["旧主張。四つの Kac--Ward 行列式（", ref("def_kac_ward_determinants"), "）の定数項はそれぞれ一である。"]),
+      displayMath(String.raw`\mathrm{ac}_0(D_L^{a,b})=1\qquad((a,b)\in\mathcal S).`),
+      paragraph(["旧証明では評価写像を行列式の置換展開へ適用する。", math(String.raw`x=0`), " では Kac--Ward 多項式行列が単位行列になるため、恒等置換の項だけが一として残る。有限計算と Lean 二版は保管した。"]),
+      paragraph(["後続の多項式平方根の存在証明は、符号付き偶部分グラフ多項式の定数項が一であり、その平方が行列式になることを直接使う。この主張を引用しないため、本文から退避した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_transition_entries_in_mu8_archived",
     targets: ["def_kac_ward_transition_matrices"],
     title: { text: "参照用: 遷移行列の成分の八乗根性" },

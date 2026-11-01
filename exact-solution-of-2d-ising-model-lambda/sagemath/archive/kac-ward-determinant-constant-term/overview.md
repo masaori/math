@@ -2,6 +2,8 @@
 
 ## 対象
 
+本文から退避した主張の検算を保管する。
+
 **対象ラベル**: `claim_kac_ward_determinant_constant_term_one`
 
 四つの遷移行列から `K^{a,b}(x)=I-xM^{a,b}` と `D_L^{a,b}(x)=det K^{a,b}(x)` を構成する。
@@ -17,5 +19,5 @@
 2026-08-29: PASS。`QQbar[x]` の厳密計算だけを用い、浮動小数点は使っていない。
 
 ```bash
-sage sagemath/check/kac-ward-determinant-constant-term/check.sage
+sage sagemath/archive/kac-ward-determinant-constant-term/check.sage
 ```

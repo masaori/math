@@ -2,6 +2,8 @@
 
 ## 対象
 
+本文から退避した主張の検算を保管する。
+
 **対象ラベル**: `claim_transition_entries_in_mu8`
 
 本文の四つの Kac--Ward 遷移行列 `M^{a,b}` の成分（`def_kac_ward_transition_matrices`）を、
@@ -17,5 +19,5 @@
 2026-08-29: PASS。`QQbar` と整数の厳密計算だけを用い、浮動小数点は使っていない。
 
 ```bash
-sage sagemath/check/kac-ward-transition-matrices/check.sage
+sage sagemath/archive/kac-ward-transition-matrices/check.sage
 ```

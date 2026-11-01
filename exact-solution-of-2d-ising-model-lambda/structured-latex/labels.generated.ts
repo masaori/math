@@ -163,7 +163,6 @@ export const ALL_LABELS = [
   "claim_inversion_count_orbit_decomposition",
   "claim_iterated_staircase_parallel_width_bound",
   "claim_iterated_transverse_staircase_lower_bound",
-  "claim_kac_ward_determinant_constant_term_one",
   "claim_kw_dual_preserves_unit_interval",
   "claim_kw_dual_transform_domain",
   "claim_kw_dual_transform_involution",
