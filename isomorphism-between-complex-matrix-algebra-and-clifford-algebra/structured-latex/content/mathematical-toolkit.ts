@@ -525,4 +525,72 @@ m_{\mu,f}(\lambda\cdot_V x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_zero_map_is_linear_form",
+    kind: "claim",
+    title: { text: "零写像は線型形式である" },
+    labels: ["claim_zero_map_is_linear_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とする。写像 ",
+        math(String.raw`z_V:V\to\mathbb{C}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`z_V(x):=0_{\mathbb{C}}\qquad(x\in V)`),
+      paragraph([
+        "このとき ",
+        math(String.raw`z_V`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y`),
+        " を ",
+        math(String.raw`V`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。線型形式の定義（",
+        ref("def_linear_form"),
+        "）の二つの条件を順に示す。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z_V(x+_V y)
+&=0_{\mathbb{C}}
+&&\left(\because\ z_V\ \text{の定義}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=z_V(x)+_{\mathbb{C}}z_V(y)
+&&\left(\because\ z_V\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+z_V(\lambda\cdot_V x)
+&=0_{\mathbb{C}}
+&&\left(\because\ z_V\ \text{の定義}\right)\\
+&=\lambda\cdot_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の任意の元と}\ 0_{\mathbb{C}}\ \text{の積は}\ 0_{\mathbb{C}}\right)\\
+&=\lambda\cdot_{\mathbb{C}}z_V(x)
+&&\left(\because\ z_V\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`z_V`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式である（",
+        ref("def_linear_form"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
