@@ -1,15 +1,15 @@
 /-
 # 2×2 行列が 0 でないベクトルを 0 へ送ることと行列式が 0 であることの同値（必要十分版）
 
-具体版: `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimEigenATildeDiag.lean` の
-`exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `eigenvector_of_A_theta_tilde` Step 1 の
-「`λ` が固有値であることは `det(A(θ) - λI) = 0` と同値」）。具体版をこのファイルの系として導くのは、
+具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
+`exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`。
+`eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であることは `det(A(θ) - λI) = 0` と同値」の最後の段で引く）。具体版をこのファイルの系として導くのは、
 同じファイルの `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`。
 
 | 具体版の段 | 必要十分版 |
 | --- | --- |
 | 「⇒」: `det B · v_1 = B_{22}(Bv)_1 - B_{12}(Bv)_2`、`det B · v_2 = B_{11}(Bv)_2 - B_{21}(Bv)_1` | `det_mul_vec_zero_of_mulVec`・`det_mul_vec_one_of_mulVec` |
-| 「⇒」: `v ≠ 0` の成分と零因子が無いことから `det B = 0` | `det_eq_zero_of_mulVec_eq_zero` |
+| 「⇒」: `v_i ≠ 0` となる `i` を取り、`det B · v_i = 0` と零因子が無いことから `det B = 0` | `det_eq_zero_of_mulVec_eq_zero` |
 | 「⇐」: 1 行目が 0 でなければ `v = (B_{12}, -B_{11})`、1 行目が 0 で 2 行目が 0 でなければ `v = (B_{22}, -B_{21})`、`B = 0` なら `v = (1, 0)` | `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` |
 
 ## 何が効いているか / 効いていないか
@@ -54,12 +54,10 @@ theorem det_eq_zero_of_mulVec_eq_zero [NoZeroDivisors R] (B : Matrix (Fin 2) (Fi
     rw [det_mul_vec_zero_of_mulVec, hBv]; simp
   have h1 : B.det * v 1 = 0 := by
     rw [det_mul_vec_one_of_mulVec, hBv]; simp
-  by_contra hdet
-  apply hv
-  ext i
+  obtain ⟨i, hi⟩ := Function.ne_iff.mp hv
   fin_cases i
-  · exact (mul_eq_zero.mp h0).resolve_left hdet
-  · exact (mul_eq_zero.mp h1).resolve_left hdet
+  · exact (mul_eq_zero.mp h0).resolve_right hi
+  · exact (mul_eq_zero.mp h1).resolve_right hi
 
 /-- 「⇐」: `det B = 0` なら、`B` が 0 へ送る 0 でないベクトルがある。 -/
 theorem exists_ne_zero_mulVec_eq_zero_of_det_eq_zero [Nontrivial R]

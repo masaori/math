@@ -184,4 +184,372 @@ T_B(I)
       ],
     },
   },
+  {
+    id: "finite_matrix_definition_eigenvector",
+    kind: "definition",
+    title: { text: "固有ベクトル" },
+    labels: ["def_eigenvector"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`\lambda \in \mathbb{C}`),
+        " とする。",
+        math(String.raw`v \in \mathbb{C}^n`),
+        " が",
+      ]),
+      displayMath(String.raw`v \neq 0 \quad\text{かつ}\quad Av = \lambda v`),
+      paragraph([
+        "を満たすとき、",
+        math(String.raw`v`),
+        " を ",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`\lambda`),
+        " に属する固有ベクトルと呼ぶ。",
+        math(String.raw`0`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " の零ベクトル、",
+        math(String.raw`Av`),
+        " は ",
+        ref("mat_mult"),
+        " の行列とベクトルの積、",
+        math(String.raw`\lambda v`),
+        " は成分ごとのスカラー倍である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde の statement と Step 2 が「固有ベクトル」を定義せずに使っていたので足した。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_definition_eigenvalue",
+    kind: "definition",
+    title: { text: "固有値" },
+    labels: ["def_eigenvalue"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。",
+        math(String.raw`\lambda \in \mathbb{C}`),
+        " について、",
+        math(String.raw`A`),
+        " の ",
+        math(String.raw`\lambda`),
+        " に属する固有ベクトル（",
+        ref("def_eigenvector"),
+        "）が存在するとき、すなわち",
+      ]),
+      displayMath(String.raw`\exists\, v \in \mathbb{C}^n,\quad v \neq 0 \ \text{かつ}\ Av = \lambda v`),
+      paragraph([
+        "が成り立つとき、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`A`),
+        " の固有値と呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde の Step 1 が「固有値」を定義せずに「固有値 ⟺ det(A(θ) − λI) = 0」を使っていたので足した。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_definition_determinant_two_by_two",
+    kind: "definition",
+    title: { tex: String.raw`2 \times 2 \text{ 行列の行列式}` },
+    labels: ["def_det_two_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、その行列式 ",
+        math(String.raw`\det B \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`\det B := B_{11}B_{22} - B_{12}B_{21}`),
+      paragraph([
+        "で定める。この論文で行列式を使うのは ",
+        math(String.raw`2 \times 2`),
+        " 行列に対してだけである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde と diagonalization_check_P_D が「2×2 行列の行列式の定義」を本文に置かずに引いていたので足した。一般の n×n の行列式（Leibniz の定義）は使わない。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_nonzero_kernel_iff_determinant_zero_two_by_two",
+    kind: "claim",
+    title: { tex: String.raw`2 \times 2 \text{ 行列が } 0 \text{ でないベクトルを } 0 \text{ へ送ることと行列式が } 0 \text{ であることの同値}` },
+    labels: ["nonzero_kernel_iff_det_zero_two_by_two"],
+    statement: [
+      paragraph([
+        math(String.raw`B \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+      ]),
+      displayMath(String.raw`\left(\exists\, v \in \mathbb{C}^2,\quad v \neq 0 \ \text{かつ}\ Bv = 0\right)
+\iff \det B = 0`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`Bv`),
+        " は ",
+        ref("mat_mult"),
+        "、",
+        math(String.raw`\det B`),
+        " は ",
+        ref("def_det_two_by_two"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "（⇒）",
+        math(String.raw`v = (v_1, v_2)^{\mathsf T} \in \mathbb{C}^2`),
+        " が ",
+        math(String.raw`v \neq 0`),
+        " かつ ",
+        math(String.raw`Bv = 0`),
+        " を満たすとする。",
+        ref("mat_mult"),
+        " より ",
+        math(String.raw`(Bv)_1 = B_{11}v_1 + B_{12}v_2`),
+        "、",
+        math(String.raw`(Bv)_2 = B_{21}v_1 + B_{22}v_2`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\det B \cdot v_1
+&= \left(B_{11}B_{22} - B_{12}B_{21}\right)v_1
+   &&\bigl(\because \blkref{def_det_two_by_two}\bigr) \\
+&= B_{11}B_{22}v_1 - B_{12}B_{21}v_1
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= B_{22}B_{11}v_1 - B_{12}B_{21}v_1
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= B_{22}B_{11}v_1 - B_{12}B_{21}v_1 + \left(B_{22}B_{12}v_2 - B_{22}B_{12}v_2\right)
+   &&\bigl(\because x - x = 0\ (x := B_{22}B_{12}v_2)\bigr) \\
+&= B_{22}B_{11}v_1 - B_{12}B_{21}v_1 + \left(B_{22}B_{12}v_2 - B_{12}B_{22}v_2\right)
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= B_{22}B_{11}v_1 + B_{22}B_{12}v_2 - B_{12}B_{21}v_1 - B_{12}B_{22}v_2
+   &&\bigl(\because \mathbb{C}\text{ の加法の交換則と結合則}\bigr) \\
+&= B_{22}\left(B_{11}v_1 + B_{12}v_2\right) - B_{12}\left(B_{21}v_1 + B_{22}v_2\right)
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= B_{22}(Bv)_1 - B_{12}(Bv)_2
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= B_{22}\cdot 0 - B_{12}\cdot 0
+   &&\bigl(\because Bv = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\det B \cdot v_2
+&= \left(B_{11}B_{22} - B_{12}B_{21}\right)v_2
+   &&\bigl(\because \blkref{def_det_two_by_two}\bigr) \\
+&= B_{11}B_{22}v_2 - B_{12}B_{21}v_2
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= B_{11}B_{22}v_2 - B_{21}B_{12}v_2
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= B_{11}B_{22}v_2 - B_{21}B_{12}v_2 + \left(B_{11}B_{21}v_1 - B_{11}B_{21}v_1\right)
+   &&\bigl(\because x - x = 0\ (x := B_{11}B_{21}v_1)\bigr) \\
+&= B_{11}B_{22}v_2 - B_{21}B_{12}v_2 + \left(B_{11}B_{21}v_1 - B_{21}B_{11}v_1\right)
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= B_{11}B_{21}v_1 + B_{11}B_{22}v_2 - B_{21}B_{11}v_1 - B_{21}B_{12}v_2
+   &&\bigl(\because \mathbb{C}\text{ の加法の交換則と結合則}\bigr) \\
+&= B_{11}\left(B_{21}v_1 + B_{22}v_2\right) - B_{21}\left(B_{11}v_1 + B_{12}v_2\right)
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= B_{11}(Bv)_2 - B_{21}(Bv)_1
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= B_{11}\cdot 0 - B_{21}\cdot 0
+   &&\bigl(\because Bv = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`v \neq 0`),
+        " なので、",
+        math(String.raw`v_i \neq 0`),
+        " となる ",
+        math(String.raw`i \in \{1, 2\}`),
+        " がある。上の 2 本の鎖のうちその ",
+        math(String.raw`i`),
+        " の鎖から ",
+        math(String.raw`\det B \cdot v_i = 0`),
+        " である。",
+        math(String.raw`\mathbb{C}`),
+        " は体（",
+        ref("complex_numbers_form_a_field"),
+        "）ゆえ零因子を持たないので、",
+        math(String.raw`\det B = 0`),
+        " または ",
+        math(String.raw`v_i = 0`),
+        " であり、後者は ",
+        math(String.raw`v_i \neq 0`),
+        " に反する。よって ",
+        math(String.raw`\det B = 0`),
+        " である。",
+      ]),
+      paragraph([
+        "（⇐）",
+        math(String.raw`\det B = 0`),
+        " とする。",
+        math(String.raw`B`),
+        " の 1 行目 ",
+        math(String.raw`(B_{11}, B_{12})`),
+        " と 2 行目 ",
+        math(String.raw`(B_{21}, B_{22})`),
+        " が零であるかどうかで、次の 3 つの場合に分ける。3 つの場合は互いに重ならず、すべての ",
+        math(String.raw`B`),
+        " を尽くす。",
+      ]),
+      paragraph([
+        "1 行目が零でない場合（",
+        math(String.raw`(B_{11}, B_{12}) \neq (0, 0)`),
+        "）。",
+        math(String.raw`v := (B_{12},\ -B_{11})^{\mathsf T}`),
+        " と置く。",
+        math(String.raw`B_{12} \neq 0`),
+        " または ",
+        math(String.raw`-B_{11} \neq 0`),
+        " なので ",
+        math(String.raw`v \neq 0`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_1
+&= B_{11}B_{12} + B_{12}\left(-B_{11}\right)
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= B_{11}B_{12} - B_{12}B_{11}
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
+&= B_{11}B_{12} - B_{11}B_{12}
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= 0
+   &&\bigl(\because x - x = 0\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_2
+&= B_{21}B_{12} + B_{22}\left(-B_{11}\right)
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= B_{21}B_{12} - B_{22}B_{11}
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
+&= B_{12}B_{21} - B_{11}B_{22}
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= -\left(B_{11}B_{22} - B_{12}B_{21}\right)
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
+&= -\det B
+   &&\bigl(\because \blkref{def_det_two_by_two}\bigr) \\
+&= -0
+   &&\bigl(\because \det B = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "1 行目が零で 2 行目が零でない場合（",
+        math(String.raw`B_{11} = B_{12} = 0`),
+        " かつ ",
+        math(String.raw`(B_{21}, B_{22}) \neq (0, 0)`),
+        "）。",
+        math(String.raw`v := (B_{22},\ -B_{21})^{\mathsf T}`),
+        " と置く。",
+        math(String.raw`B_{22} \neq 0`),
+        " または ",
+        math(String.raw`-B_{21} \neq 0`),
+        " なので ",
+        math(String.raw`v \neq 0`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_1
+&= B_{11}B_{22} + B_{12}\left(-B_{21}\right)
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= 0\cdot B_{22} + 0\cdot\left(-B_{21}\right)
+   &&\bigl(\because B_{11} = B_{12} = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_2
+&= B_{21}B_{22} + B_{22}\left(-B_{21}\right)
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= B_{21}B_{22} - B_{22}B_{21}
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr) \\
+&= B_{21}B_{22} - B_{21}B_{22}
+   &&\bigl(\because \mathbb{C}\text{ の乗法の可換則}\bigr) \\
+&= 0
+   &&\bigl(\because x - x = 0\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "1 行目も 2 行目も零の場合（",
+        math(String.raw`B_{11} = B_{12} = B_{21} = B_{22} = 0`),
+        "）。",
+        math(String.raw`v := (1,\ 0)^{\mathsf T}`),
+        " と置く。",
+        math(String.raw`1 \neq 0`),
+        " なので ",
+        math(String.raw`v \neq 0`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_1
+&= B_{11}\cdot 1 + B_{12}\cdot 0
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= 0\cdot 1 + 0\cdot 0
+   &&\bigl(\because B_{11} = B_{12} = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(Bv)_2
+&= B_{21}\cdot 1 + B_{22}\cdot 0
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= 0\cdot 1 + 0\cdot 0
+   &&\bigl(\because B_{21} = B_{22} = 0\bigr) \\
+&= 0
+   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "どの場合も ",
+        math(String.raw`v \neq 0`),
+        " かつ ",
+        math(String.raw`Bv = 0`),
+        " となる ",
+        math(String.raw`v \in \mathbb{C}^2`),
+        " がある。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde の Step 1 が「λ が固有値であることは det(A(θ) − λI) = 0 と同値」を証明なしに使っていたので、その中身として足した。一般の n×n の行列式の理論（余因子展開・乗法性）は使わず、2×2 の成分計算だけで示す。",
+        "数値検証: sagemath/check/nonzero_kernel_iff_det_zero_two_by_two/。",
+      ],
+    },
+  },
 ]);

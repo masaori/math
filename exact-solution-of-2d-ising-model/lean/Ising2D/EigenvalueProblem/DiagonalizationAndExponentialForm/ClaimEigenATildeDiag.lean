@@ -6,8 +6,7 @@
 `Athetatilde_004_claim_eigenvector`, `Athetatilde_005_claim_diagonalization`）
 
 **必要十分版**: `Ising2D/NecSuf/TwoByTwoSkew.lean`
-（`Ising2D.NecSuf.skew2_mulVec` / `skew2_charPoly_factor` / `eq_conj_of_mul_eq`）と
-`Ising2D/NecSuf/TwoByTwoKernelAndDeterminant.lean`（`Ising2D.NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det`）。
+（`Ising2D.NecSuf.skew2_mulVec` / `skew2_charPoly_factor` / `eq_conj_of_mul_eq`）。
 
 ## 人手証明との対応
 
@@ -22,9 +21,12 @@
 * `eigenvector_of_A_theta_tilde` Step 1: 準備の因数分解の恒等式 `factor_identity_thetaTilde` と、
   `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`、零因子が無いことによる
   `det_AMat_sub_smul_eq_zero_iff`、固有値が `λ_{±,μ}` に限るという statement の主張
-  `eigenvalue_AMat_iff`（「固有値 ⟺ `det(A(θ) - λI) = 0`」の同値は 2×2 の成分計算
-  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`）、
+  `eigenvalue_AMat_iff`（固有値の定義 `def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖。最後の段は
+  `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
+  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`））、
   `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR`。
+* `eigenvector_of_A_theta_tilde` の statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」:
+  `isEigenvector_smul_eigen_pos`・`isEigenvector_smul_eigen_neg`。
 * `eigenvector_of_A_theta_tilde` Step 2: 成分ごとの鎖 `AMat_mulVec_eigen_pos`・`AMat_mulVec_eigen_neg`
   （第 1 成分は `b = -ā` と `a ā = r^2`、第 2 成分は `-b = ā` による）、`v_± ≠ 0` の
   `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`、`c ∈ ℂ^×` 倍の鎖
@@ -41,7 +43,7 @@
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
 import Ising2D.NecSuf.TwoByTwoSkew
-import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
 
 namespace Ising2D
 
@@ -122,90 +124,27 @@ theorem det_AMat_sub_smul_eq_zero_iff (lam : ℂ) :
       ↔ lam = ((lambdaPlusR K θ : ℝ) : ℂ) ∨ lam = ((lambdaMinusR K θ : ℝ) : ℂ) := by
   rw [charPoly_factor_thetaTilde, mul_eq_zero, sub_eq_zero, sub_eq_zero]
 
-/-- 人手証明 Step 1 の「`λ` が固有値であることは `det(A(θ) - λI) = 0` と同値」を、
-`B := A(θ) - λI` として 2×2 の複素行列について成分で示したもの:
-`B` が 0 でないベクトルを 0 へ送ることと `det B = 0` は同値である。
-
-* 「⇒」: `det B · v_1 = B_{22}(Bv)_1 - B_{12}(Bv)_2`、`det B · v_2 = B_{11}(Bv)_2 - B_{21}(Bv)_1` と
-  `Bv = 0` から `det B · v_i = 0`。`v ≠ 0` の成分 `v_i ≠ 0` と、`ℂ` が零因子を持たないことから `det B = 0`。
-* 「⇐」: 1 行目が 0 でなければ `v = (B_{12}, -B_{11})`、1 行目が 0 で 2 行目が 0 でなければ
-  `v = (B_{22}, -B_{21})`、`B = 0` なら `v = (1, 0)` が、0 でなく `Bv = 0` を満たす。
-
-必要十分版は `Ising2D.NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det`（`NecSuf/TwoByTwoKernelAndDeterminant.lean`）。 -/
-theorem exists_ne_zero_mulVec_eq_zero_iff_det_fin_two (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    (∃ v : Fin 2 → ℂ, v ≠ 0 ∧ B *ᵥ v = 0) ↔ B.det = 0 := by
-  constructor
-  · rintro ⟨v, hv, hBv⟩
-    have h0 : B.det * v 0 = 0 :=
-      calc B.det * v 0
-          = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 0 := by rw [Matrix.det_fin_two]  -- 2×2 の行列式の定義
-        _ = B 1 1 * (B 0 0 * v 0 + B 0 1 * v 1) - B 0 1 * (B 1 0 * v 0 + B 1 1 * v 1) := by
-            ring                                                                 -- 分配則と可換則
-        _ = B 1 1 * (B *ᵥ v) 0 - B 0 1 * (B *ᵥ v) 1 := by
-            simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]                   -- 行列とベクトルの積の定義
-        _ = 0 := by rw [hBv]; simp                                              -- `Bv = 0`
-    have h1 : B.det * v 1 = 0 :=
-      calc B.det * v 1
-          = (B 0 0 * B 1 1 - B 0 1 * B 1 0) * v 1 := by rw [Matrix.det_fin_two]  -- 2×2 の行列式の定義
-        _ = B 0 0 * (B 1 0 * v 0 + B 1 1 * v 1) - B 1 0 * (B 0 0 * v 0 + B 0 1 * v 1) := by
-            ring                                                                 -- 分配則と可換則
-        _ = B 0 0 * (B *ᵥ v) 1 - B 1 0 * (B *ᵥ v) 0 := by
-            simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]                   -- 行列とベクトルの積の定義
-        _ = 0 := by rw [hBv]; simp                                              -- `Bv = 0`
-    -- `v ≠ 0` の成分と、`ℂ` が零因子を持たないこと
-    by_contra hdet
-    apply hv
-    ext i
-    fin_cases i
-    · exact (mul_eq_zero.mp h0).resolve_left hdet
-    · exact (mul_eq_zero.mp h1).resolve_left hdet
-  · intro hdet
-    rw [Matrix.det_fin_two] at hdet
-    by_cases hrow0 : B 0 0 = 0 ∧ B 0 1 = 0
-    · by_cases hrow1 : B 1 0 = 0 ∧ B 1 1 = 0
-      · -- `B = 0`: `v = (1, 0)`
-        refine ⟨![1, 0], fun h => one_ne_zero (congrFun h 0), ?_⟩
-        ext i; fin_cases i <;>
-          simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, hrow0.1, hrow0.2, hrow1.1, hrow1.2]
-      · -- 1 行目が 0、2 行目が 0 でない: `v = (B_{22}, -B_{21})`
-        refine ⟨![B 1 1, -B 1 0], fun h => hrow1 ⟨?_, ?_⟩, ?_⟩
-        · simpa using congrFun h 1
-        · simpa using congrFun h 0
-        ext i; fin_cases i
-        · -- 第 1 成分: `B_{11}B_{22} - B_{12}B_{21} = 0`（1 行目が 0）
-          simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, hrow0.1, hrow0.2]
-        · -- 第 2 成分: `B_{21}B_{22} - B_{22}B_{21} = 0`（乗法の可換則）
-          simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]; ring
-    · -- 1 行目が 0 でない: `v = (B_{12}, -B_{11})`
-      refine ⟨![B 0 1, -B 0 0], fun h => hrow0 ⟨?_, ?_⟩, ?_⟩
-      · simpa using congrFun h 1
-      · simpa using congrFun h 0
-      ext i; fin_cases i
-      · -- 第 1 成分: `B_{11}B_{12} - B_{12}B_{11} = 0`（乗法の可換則）
-        simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]; ring
-      · -- 第 2 成分: `B_{21}B_{12} - B_{22}B_{11} = -det B = 0`
-        simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]
-        linear_combination (-1 : ℂ) * hdet
-
-/-- `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` を必要十分版
-`NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det`（係数 `R := ℂ`）の特殊化として得る。 -/
-theorem exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf (B : Matrix (Fin 2) (Fin 2) ℂ) :
-    (∃ v : Fin 2 → ℂ, v ≠ 0 ∧ B *ᵥ v = 0) ↔ B.det = 0 :=
-  NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det B
-
 /-- **人手証明 Step 1 の主張**（statement の「`A(θ~_μ)` の固有値は `λ_{±,μ}` の 2 つ」）:
-`λ ∈ ℂ` が `A(θ)` の固有値（`A(θ)v = λv` となる `v ≠ 0` がある）であるのは `λ = λ_{±,μ}` のときに限る。
+`λ ∈ ℂ` が `A(θ)` の固有値（`def_eigenvalue`）であるのは `λ = λ_{±,μ}` のときに限る。
 
-人手証明の鎖「`λ` が固有値 ⟺ `det(A(θ) - λI) = 0` ⟺ `λ = λ_{±,μ}`」をそのまま辿る。
-1 つ目の同値は `A(θ)v = λv ⟺ (A(θ) - λI)v = 0` と `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`、
-2 つ目の同値は `det_AMat_sub_smul_eq_zero_iff`。 -/
+人手証明 Step 1 の同値の鎖を 1 行ずつ辿り、最後に `det_AMat_sub_smul_eq_zero_iff` で `λ = λ_{±,μ}` へ着く。 -/
 theorem eigenvalue_AMat_iff (lam : ℂ) :
-    (∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v = lam • v)
-      ↔ lam = ((lambdaPlusR K θ : ℝ) : ℂ) ∨ lam = ((lambdaMinusR K θ : ℝ) : ℂ) := by
-  rw [← det_AMat_sub_smul_eq_zero_iff, ← exists_ne_zero_mulVec_eq_zero_iff_det_fin_two]
-  -- `A v = λ v` ⟺ `(A - λI) v = 0`（行列とベクトルの積の分配則と `I v = v`）
-  refine exists_congr fun v => and_congr_right fun _ => ?_
-  rw [Matrix.sub_mulVec, Matrix.smul_mulVec, Matrix.one_mulVec, sub_eq_zero]
+    IsEigenvalue (AMat K θ) lam
+      ↔ lam = ((lambdaPlusR K θ : ℝ) : ℂ) ∨ lam = ((lambdaMinusR K θ : ℝ) : ℂ) :=
+  calc IsEigenvalue (AMat K θ) lam
+      ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v = lam • v := Iff.rfl  -- `def_eigenvalue`
+    _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - lam • v = 0 := by
+        simp only [sub_eq_zero]                                         -- 移項
+    _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - lam • ((1 : Matrix (Fin 2) (Fin 2) ℂ) *ᵥ v) = 0 := by
+        simp only [Matrix.one_mulVec]                                   -- 単位行列の性質 `Iv = v`
+    _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) *ᵥ v = 0 := by
+        simp only [Matrix.smul_mulVec]                                  -- スカラー倍の括り出し `λ(Iv) = (λI)v`
+    _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) *ᵥ v = 0 := by
+        simp only [Matrix.sub_mulVec]                                   -- 行列とベクトルの積の分配則
+    _ ↔ (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)).det = 0 :=
+        exists_ne_zero_mulVec_eq_zero_iff_det_fin_two _                 -- `nonzero_kernel_iff_det_zero_two_by_two`
+    _ ↔ lam = ((lambdaPlusR K θ : ℝ) : ℂ) ∨ lam = ((lambdaMinusR K θ : ℝ) : ℂ) :=
+        det_AMat_sub_smul_eq_zero_iff K θ lam                           -- 準備の因数分解と零因子が無いこと
 
 /-- **人手証明 Step 2**: `v_{+,μ} = (-r, b)` は固有値 `λ_{+,μ} = g_1 + r` の固有ベクトル。 -/
 theorem AMat_mulVec_eigen_pos :
@@ -308,6 +247,21 @@ theorem AMat_mulVec_smul_eigen_neg (c : ℂ) :
         rw [AMat_mulVec_eigen_neg]                     -- `A(θ)v = λv` の代入
     _ = ((lambdaMinusR K θ : ℝ) : ℂ) • (c • ![((absGamma2 K θ : ℝ) : ℂ), gamma2 K (-θ)]) :=
         smul_comm _ _ _                                -- 積の可換性とスカラー倍の結合
+
+/-- **人手証明の statement**: `c ∈ ℂ^×` について `c v_{+,μ}` は `A(θ~_μ)` の `λ_{+,μ}` に属する固有ベクトル
+（`def_eigenvector`）。`c v_{+,μ} ≠ 0` は `c ≠ 0` と `eigenvector_pos_ne_zero`、`A(c v_+) = λ_+ (c v_+)` は
+`AMat_mulVec_smul_eigen_pos` による。 -/
+theorem isEigenvector_smul_eigen_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) {c : ℂ} (hc : c ≠ 0) :
+    IsEigenvector (AMat P.const (thetaTilde M μ)) ((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ)
+      (c • ![-((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ), gamma2 P.const (-thetaTilde M μ)]) :=
+  ⟨smul_ne_zero hc (eigenvector_pos_ne_zero P hM μ), AMat_mulVec_smul_eigen_pos _ _ c⟩
+
+/-- **人手証明の statement**: `c ∈ ℂ^×` について `c v_{-,μ}` は `A(θ~_μ)` の `λ_{-,μ}` に属する固有ベクトル
+（`def_eigenvector`）。 -/
+theorem isEigenvector_smul_eigen_neg (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) {c : ℂ} (hc : c ≠ 0) :
+    IsEigenvector (AMat P.const (thetaTilde M μ)) ((lambdaMinusR P.const (thetaTilde M μ) : ℝ) : ℂ)
+      (c • ![((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ), gamma2 P.const (-thetaTilde M μ)]) :=
+  ⟨smul_ne_zero hc (eigenvector_neg_ne_zero P hM μ), AMat_mulVec_smul_eigen_neg _ _ c⟩
 
 /-- **人手証明 Step 1 の末尾**: `λ_{+,μ} ≠ λ_{-,μ}`（`|γ_2| > 0` による）。 -/
 theorem lambdaPlusR_ne_lambdaMinusR (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :

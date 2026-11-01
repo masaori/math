@@ -406,15 +406,25 @@
     必要十分版 `NecSuf/RowVectorRightInverse.lean`（係数は可換半環、可逆性は `G H = I` の形でだけ使う）と導出 `ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean` を置いた。
     レビューの指摘（必要十分版の欠如、人手 proof 冒頭の線型性の段落の扱い、根拠コメント、`rowMul_one` の置き場、必要十分版の知見の言い過ぎ、`ch016-formalization.md` の古い記述、Step 1 の導出の欠け）を直した。
 
+  - ゴールラインの確認の二十個目（済み、2026-11-01）: 人手 `eigenvector_of_A_theta_tilde` Step 1 が「固有値」を定義せず「固有値 ⟺ `det(A(θ) - λI) = 0`」を証明なしに使っていたので、
+    数学的道具立て（`structured-latex/content/000_calculation_formulae_45_46.ts`、棚卸しのまとまり「有限行列・Pauli行列・交換子」）に
+    `def_eigenvector`・`def_eigenvalue`・`def_det_two_by_two` と主張 `nonzero_kernel_iff_det_zero_two_by_two`（2×2 の成分計算。「⇒」2 本の鎖と `v_i ≠ 0` の `i`、「⇐」3 つの場合）を足し、
+    Step 1 を定義から `det(A(θ) - λI) = 0` までの同値の鎖にした。本文の「2×2 行列の行列式の定義」の 4 か所を `def_det_two_by_two` へのラベル参照にした。
+    Lean は `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` に `IsEigenvector`・`IsEigenvalue`・`det_two_by_two_def` と人手の行ごとの鎖を置き、
+    `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` と導出をここへ移した（`ClaimEigenATildeDiag.lean` から）。`eigenvalue_AMat_iff` の型を `IsEigenvalue (AMat K θ) lam ↔ …`（定義を展開すれば以前と同じ式）にし、人手の同値の鎖どおりの `calc` にした。
+    statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」を `isEigenvector_smul_eigen_pos`・`_neg` として立てた。必要十分版 `NecSuf/TwoByTwoKernelAndDeterminant.lean` の「⇒」を具体版と同じ手順（`v_i ≠ 0` の `i` を取る）にした。
+    SageMath `sagemath/check/nonzero_kernel_iff_det_zero_two_by_two/`（厳密計算のみ）。棚卸しの分類規則 `tools/build-flat-inventory.ts` に `^finite_matrix_` を足した。
+    レビューの指摘（一ステップ一定理に反する 5 行、状態台帳、行列式の Lean 側の定義の置き方の説明、添字の対応、`n = 0`、statement の固有ベクトルの主張）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 人手 `eigenvector_of_A_theta_tilde` は「固有値」を本文で定義せず、Step 1 の「固有値 ⟺ `det(A(θ) - λI) = 0`」を証明なしに使っている。
-  本文に固有値の定義と 2×2 の成分計算による同値の証明を足し（Lean の `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` と同じ手順）、SageMath の検算を付ける。
-  本文を触るので、構成再編・SageMath 検算の連続実行と rebase で衝突しないよう、その回の先頭で fetch してから行う。
 - 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。
+- 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。
+  `nonzero_kernel_iff_det_zero_two_by_two` と同じ 2×2 の成分計算で「`Bv = 0` なら `v` は `(B_{12}, -B_{11})` などのスカラー倍」と示せる。後段が Step 3 を使わないなら本文から外すか、使うなら本文と Lean を足す。本文を触るので回の先頭で fetch する。
+- 本文に単位行列 `I`・行列の差・行列のスカラー倍と `Iv = v` を定義するブロックが無い（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が名前だけで根拠に挙げている）。数学的道具立てに足すかを判断する。

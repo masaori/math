@@ -1881,7 +1881,9 @@ s_1c_2
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " について、",
         math(String.raw`A(\tilde\theta_\mu)`),
-        " の固有値は",
+        " の固有値（",
+        ref("def_eigenvalue"),
+        "）は",
       ]),
       displayMath(
         String.raw`\lambda_{\pm,\mu}
@@ -1893,7 +1895,9 @@ s_1c_2
         ref("relation_of_gamma_2_theta_tilde"),
         " (4) により根号は正の実数、したがって ",
         math(String.raw`\lambda_{+,\mu} \neq \lambda_{-,\mu}`),
-        "）、対応する固有ベクトルは ",
+        "）、対応する固有ベクトル（",
+        ref("def_eigenvector"),
+        "）は ",
         math(String.raw`c \in \mathbb{C}^\times`),
         " として",
       ]),
@@ -1945,12 +1949,27 @@ s_1c_2
         ref("def_gamma1_gamma2_of_theta"),
         " より ",
         math(String.raw`A(\theta) = \begin{pmatrix} g_1 & a \\ -b & g_1\end{pmatrix}`),
-        " なので、",
+        " である。",
         math(String.raw`\lambda \in \mathbb{C}`),
-        " が固有値であることは ",
-        math(String.raw`\det(A(\theta) - \lambda I) = 0`),
-        " と同値であり、",
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\lambda \text{ は } A(\theta) \text{ の固有値} \\
+&\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v = \lambda v
+   &&\bigl(\because \blkref{def_eigenvalue}\bigr) \\
+&\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - \lambda v = 0
+   &&\bigl(\because \text{移項}\bigr) \\
+&\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - \lambda (Iv) = 0
+   &&\bigl(\because \text{単位行列の性質 } Iv = v\bigr) \\
+&\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - (\lambda I)v = 0
+   &&\bigl(\because \text{スカラー倍の括り出し } \lambda(Iv) = (\lambda I)v\bigr) \\
+&\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ \left(A(\theta) - \lambda I\right)v = 0
+   &&\bigl(\because \text{行列とベクトルの積の分配則}\bigr) \\
+&\iff \det\left(A(\theta) - \lambda I\right) = 0
+   &&\bigl(\because \blkref{nonzero_kernel_iff_det_zero_two_by_two}\text{ を } B := A(\theta) - \lambda I \text{ に適用}\bigr)
+\end{aligned}`,
+      ),
       paragraph([
         "準備として、因数分解の恒等式を確かめる。",
       ]),
@@ -1974,7 +1993,7 @@ s_1c_2
 &= \det\begin{pmatrix} g_1-\lambda & a \\ -b & g_1-\lambda\end{pmatrix}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)
-   \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
+   \quad (\because \blkref{def_det_two_by_two}) \\
 &= (g_1-\lambda)(g_1-\lambda) + ab
    \quad (\because \mathbb{C} \text{ の四則}\ (-a\cdot(-b) = ab)) \\
 &= g_1^2-g_1\lambda-\lambda g_1+\lambda^2+ab
@@ -2125,6 +2144,9 @@ A(\theta)(cv)
         "2026-08-19 の式変形統一で、Step 1 の「右辺を展開すれば左辺に一致する」と散文に畳まれていた因数分解を、" +
           "準備の恒等式と行列式の一続きの鎖へ開き、固有ベクトル成分の二本の鎖の根拠なしの行に行末根拠を補った。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-01: Step 1 が「固有値」を定義せずに「固有値 ⟺ det(A(θ) − λI) = 0」を証明なしに使っていたので、" +
+          "def_eigenvalue・def_eigenvector・def_det_two_by_two を数学的道具立てに置き、同値を nonzero_kernel_iff_det_zero_two_by_two（2×2 の成分計算）から引く同値の鎖にした。" +
+          "Lean の eigenvalue_AMat_iff と同じ手順である。",
       ],
     },
   },
@@ -2243,15 +2265,15 @@ A(\tilde\theta_\mu)\,\check{P}_\mu
         "Step 3（",
         math(String.raw`\det\check{P}_\mu`),
         "）。",
-        math(String.raw`2\times 2`),
-        " 行列の行列式の定義より",
+        ref("def_det_two_by_two"),
+        " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \det\check{P}_\mu
 &= \frac{-r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
  - \frac{+r}{2\sqrt{M_{\mathrm{col}}}\,b}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}}
-   \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
+   \quad (\because \blkref{def_det_two_by_two}) \\
 &= \frac{-r}{4M_{\mathrm{col}}\,b} - \frac{+r}{4M_{\mathrm{col}}\,b}
    \quad \left(\because \left(2\sqrt{M_{\mathrm{col}}}\right)^2 = 4M_{\mathrm{col}}\right) \\
 &= \frac{-r}{4M_{\mathrm{col}}\,b} + \frac{-r}{4M_{\mathrm{col}}\,b}
@@ -2390,7 +2412,7 @@ A(\tilde\theta_\mu)
    \end{pmatrix}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \gamma_1(\theta)\gamma_1(\theta) - \gamma_2(\theta)\bigl(-\gamma_2(-\theta)\bigr)
-   \quad (\because 2\times 2 \text{ 行列の行列式の定義}) \\
+   \quad (\because \blkref{def_det_two_by_two}) \\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
    \quad (\because \mathbb{C} \text{ の積と加法逆元})
 \end{aligned}`,

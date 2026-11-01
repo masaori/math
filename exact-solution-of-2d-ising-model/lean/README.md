@@ -108,6 +108,7 @@ EOF
   | --- | --- |
   | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
   | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` |
+  | `<def_eigenvector>`・`<def_eigenvalue>`・`<def_det_two_by_two>`・`<nonzero_kernel_iff_det_zero_two_by_two>`（Typst の原本なし。2026-11-01 に本文へ足した） | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` |
   | `parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` |
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaScalarIdentityCommutes.lean` |
   | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaCentralizerIsScalar.lean` |
