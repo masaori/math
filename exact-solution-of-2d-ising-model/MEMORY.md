@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行の十一回目として、`003_exp_linear_map.ts` の cosh・sinh の掛け算（ラベルが無かったので `cosh_sinh_product` を付けた）の検算 `sagemath/check/cosh_sinh_product/` を足した（未検算 107 → 106 件）。exp の性質を使わない行は独立な不定元で、積の法則の行は形式冪級数で厳密に、主張はボールで確かめた。レビューの指摘で、複数の操作を束ねた行を一ステップ一定理の 9 行の鎖に分けた。計算の誤りは無かった。次は `exp_of_diagonal_matrix`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行として、`complex_exp_of_real_argument`（実数の exp と複素数の exp は実数上で一致する）の検算 `sagemath/check/complex_exp_of_real_argument/` を足した（未検算 108 → 107 件）。ℂ は本文どおり実数の対で持ち（`sagemath/_shared/complex_as_real_pairs.sage`）、等号の行は全て厳密、極限の値だけをボールで確かめた。人手証明の散文の推論を冪・部分和の帰納法と収束の鎖に直し、ラベル無しの「ℂ の列の極限の一意性」を 1 行 1 列の行列の極限の一意性経由にした。ℂ の減法と行列の差が本文で未定義であることを状態台帳に記録した。計算の誤りは無かった。次は `calc_formulae_000_cosh_sinh_product`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十四個目を行った。`lean/README.md` と `lean/docs/` が書く `.lean` のパスと `Ising2D.` の名前の実在を確かめる `lean/scripts/check-docs-references.sh` を置いた。実在しないパスは 0 件、名前は README の `Ising2D.NecSufTensorPow`（正しくは `AbstractTensorPow`）の 1 件で、同じ表の実在しない人手ラベル `gamma_2_periodicity` とあわせて直した。表に出ない Lean のファイル 21 個と、いまの `labels` に無い人手ラベル 87 件を状態台帳の「次の一歩」に足した。次はその先頭（表に出ないファイルを章の記録へ足す）。

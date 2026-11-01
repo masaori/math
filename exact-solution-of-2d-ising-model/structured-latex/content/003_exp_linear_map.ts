@@ -2480,7 +2480,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
     kind: "theorem",
     origin: { path: "_old/typst/parts/000_計算公式/000_theorem_cosh_sinhの掛け算.typ", ordinal: 1 },
     title: { tex: "\\cosh,\\sinh\\text{の掛け算}" },
-    labels: [],
+    labels: ["cosh_sinh_product"],
     statement: [
       paragraph([ref("def_cosh_sinh"), " の記号を用いる。"]),
       displayMath("\\forall a,b\\in\\mathbb{R}"),
@@ -2490,22 +2490,72 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 \end{aligned}`),
     ],
     proof: [
+      paragraph([
+        math(String.raw`a,b\in\mathbb R`), " なので ", math(String.raw`-a,\ -b,\ a+b,\ a-b\in\mathbb R`),
+        " であり、以下に現れる exp はすべて ", ref("def_scalar_exp"), " の実数の exp である。",
+      ]),
       paragraph(["1 つめの等式。"]),
       displayMath(String.raw`\begin{aligned}
 \cosh(a)\sinh(b)
 &=
 \frac{\exp(a)+\exp(-a)}{2}
+\cdot
 \frac{\exp(b)-\exp(-b)}{2}
-&&(\because\ \cosh,\ \sinh\ \text{の定義})
+&&(\because\ \cosh,\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})
 \\
 &=
 \frac{1}{4}
-\left(
-\left(\exp(a)\exp(b)-\exp(-a)\exp(-b)\right)
--
-\left(\exp(a)\exp(-b)-\exp(-a)\exp(b)\right)
-\right)
+\bigl(\exp(a)+\exp(-a)\bigr)
+\bigl(\exp(b)-\exp(-b)\bigr)
+&&(\because\ \text{分数の積})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a)\exp(b)
+-\exp(a)\exp(-b)
++\exp(-a)\exp(b)
+-\exp(-a)\exp(-b)
+\bigr)
 &&(\because\ \text{分配則})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a+b)
+-\exp(a+(-b))
++\exp((-a)+b)
+-\exp((-a)+(-b))
+\bigr)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a+b)
+-\exp(a-b)
++\exp(-(a-b))
+-\exp(-(a+b))
+\bigr)
+&&(\because\ a+(-b)=a-b,\ (-a)+b=-(a-b),\ (-a)+(-b)=-(a+b))
+\\
+&=
+\frac{1}{4}
+\Bigl(
+\bigl(\exp(a+b)-\exp(-(a+b))\bigr)
+-
+\bigl(\exp(a-b)-\exp(-(a-b))\bigr)
+\Bigr)
+&&(\because\ \text{項の並べ替えとくくり})
+\\
+&=
+\frac{1}{2}\cdot\frac{1}{2}
+\Bigl(
+\bigl(\exp(a+b)-\exp(-(a+b))\bigr)
+-
+\bigl(\exp(a-b)-\exp(-(a-b))\bigr)
+\Bigr)
+&&(\because\ \tfrac14=\tfrac12\cdot\tfrac12)
 \\
 &=
 \frac{1}{2}
@@ -2514,31 +2564,77 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 -
 \frac{\exp(a-b)-\exp(-(a-b))}{2}
 \right)
-&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+&&(\because\ \text{分配則})
 \\
 &=
 \frac{1}{2}
 \left(
 \sinh(a+b)-\sinh(a-b)
 \right)
-&&(\because\ \sinh\ \text{の定義})
+&&(\because\ \sinh\ \text{の定義を 2 箇所へ。}\blkref{def_cosh_sinh})
 \end{aligned}`),
       paragraph(["2 つめの等式。"]),
       displayMath(String.raw`\begin{aligned}
 \cosh(a)\cosh(b)
 &=
 \frac{\exp(a)+\exp(-a)}{2}
+\cdot
 \frac{\exp(b)+\exp(-b)}{2}
-&&(\because\ \cosh\ \text{の定義})
+&&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})
 \\
 &=
 \frac{1}{4}
-\left(
-\left(\exp(a)\exp(b)+\exp(-a)\exp(-b)\right)
-+
-\left(\exp(a)\exp(-b)+\exp(-a)\exp(b)\right)
-\right)
+\bigl(\exp(a)+\exp(-a)\bigr)
+\bigl(\exp(b)+\exp(-b)\bigr)
+&&(\because\ \text{分数の積})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a)\exp(b)
++\exp(a)\exp(-b)
++\exp(-a)\exp(b)
++\exp(-a)\exp(-b)
+\bigr)
 &&(\because\ \text{分配則})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a+b)
++\exp(a+(-b))
++\exp((-a)+b)
++\exp((-a)+(-b))
+\bigr)
+&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+\\
+&=
+\frac{1}{4}
+\bigl(
+\exp(a+b)
++\exp(a-b)
++\exp(-(a-b))
++\exp(-(a+b))
+\bigr)
+&&(\because\ a+(-b)=a-b,\ (-a)+b=-(a-b),\ (-a)+(-b)=-(a+b))
+\\
+&=
+\frac{1}{4}
+\Bigl(
+\bigl(\exp(a+b)+\exp(-(a+b))\bigr)
++
+\bigl(\exp(a-b)+\exp(-(a-b))\bigr)
+\Bigr)
+&&(\because\ \text{項の並べ替えとくくり})
+\\
+&=
+\frac{1}{2}\cdot\frac{1}{2}
+\Bigl(
+\bigl(\exp(a+b)+\exp(-(a+b))\bigr)
++
+\bigl(\exp(a-b)+\exp(-(a-b))\bigr)
+\Bigr)
+&&(\because\ \tfrac14=\tfrac12\cdot\tfrac12)
 \\
 &=
 \frac{1}{2}
@@ -2547,14 +2643,14 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 +
 \frac{\exp(a-b)+\exp(-(a-b))}{2}
 \right)
-&&(\because\ \exp(s)\exp(t)=\exp(s+t)\ \text{を 4 箇所へ。}\blkref{scalar_exp_product})
+&&(\because\ \text{分配則})
 \\
 &=
 \frac{1}{2}
 \left(
 \cosh(a+b)+\cosh(a-b)
 \right)
-&&(\because\ \cosh\ \text{の定義})
+&&(\because\ \cosh\ \text{の定義を 2 箇所へ。}\blkref{def_cosh_sinh})
 \end{aligned}`),
     ],
   },

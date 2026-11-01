@@ -89,6 +89,7 @@ export const ALL_LABELS = [
   "cosh_addition_and_half_angle",
   "cosh_sinh_basic_properties",
   "cosh_sinh_coefficient_conversion_for_check",
+  "cosh_sinh_product",
   "critical_condition_c1_eq_s1_c2",
   "critical_point_iff_kappa_zero",
   "critical_point_sinh_K_c_and_second_derivative_log_divergence",
