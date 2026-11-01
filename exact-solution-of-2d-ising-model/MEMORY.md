@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`trace_of_idempotent`（冪等行列のトレースは像の次元）の検算 `sagemath/check/trace_of_idempotent/` を足した。証明の分配則・結合則・零の行の根拠が欠け、Step 2・3 が未定義の「表現行列」「基底変換行列」を使っていたので、`Q^2 = QQ` の準備、基底を列に並べた `P` と対角の `D` による `QP = PD` の成分の鎖、`trace_basic_properties` (4) を引く鎖に直し、主張 `mat_mult_vector_difference`（`A(u−w) = Au − Aw`）を足して検算を付けた（未検算 101 → 100 件）。計算の誤りは無かった。次元・基底の定義が本文に無いことと、Lean の具体版が mathlib に委ねていることを状態台帳に記録した。次は `star_preserves_norm_and_limits`。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十二個目を行った。`scalar_identity_commutes` の証明を、スカラー倍の左右・単位行列の左右・差が零の主張へのラベル参照の 6 段にし、Lean の具体版を `ℂ`・`Fin n` で人手と 1 対 1 の鎖に書き直した。行列同士の積の 4 主張の具体版・必要十分版を置き、人手に `complex_times_zero_is_zero` を足して右の単位元の証明から要らない交換律の段を外した。次は台帳の「次の一歩」（`003_exp_linear_map.ts` の「行列の差は成分ごと」をラベル参照へ）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十一個目を行った。人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分を `b` のまま括り出す 6 行の鎖にし（`b = -ā` を使わない）、Lean の具体版・必要十分版の `calc` と SageMath の段（check_02、72 段 PASS）を揃えた。次は台帳の「次の一歩」（本文の他の証明の「単位行列の性質」などをラベル参照に替える）。

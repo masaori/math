@@ -359,6 +359,60 @@ T_B(I)
     },
   },
   {
+    id: "finite_matrix_claim_vector_product_distributes_over_vector_difference",
+    kind: "claim",
+    title: { text: "行列と数ベクトルの差の積の分配則" },
+    labels: ["mat_mult_vector_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`u, w \in \mathbb{C}^n`),
+        " について",
+      ]),
+      displayMath(String.raw`A(u - w) = Au - Aw`),
+      paragraph([
+        "が成り立つ。差は ",
+        ref("def_matrix_difference"),
+        "、行列と数ベクトルの積は ",
+        ref("mat_mult"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A(u - w)\bigr)_i
+&= \sum_{j=1}^{n} A_{ij}\,(u - w)_j
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= \sum_{j=1}^{n} A_{ij}\,(u_j - w_j)
+   &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
+&= \sum_{j=1}^{n} \left(A_{ij}\,u_j - A_{ij}\,w_j\right)
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= \sum_{j=1}^{n} A_{ij}\,u_j - \sum_{j=1}^{n} A_{ij}\,w_j
+   &&\bigl(\because \text{有限和の差は項ごとの差の和}\bigr) \\
+&= (Au)_i - (Aw)_i
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= (Au - Aw)_i
+   &&\bigl(\because \blkref{def_matrix_difference}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって全ての成分が一致し、主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: trace_of_idempotent Step 1 の Q(x − Qx) = Qx − Q(Qx) が「行列の積の分配則」を証明なしに根拠にしていたので、行列の差についての matrix_difference_mul_vector と対をなす、数ベクトルの差についての分配則として足した。",
+      ],
+    },
+  },
+  {
     id: "finite_matrix_definition_eigenvector",
     kind: "definition",
     title: { text: "固有ベクトル" },

@@ -252,6 +252,7 @@ export const ALL_LABELS = [
   "mat_conj",
   "mat_mult",
   "mat_mult_associative",
+  "mat_mult_vector_difference",
   "matrix_completeness",
   "matrix_difference_mul_vector",
   "matrix_difference_zero_iff_equal",

@@ -110,13 +110,13 @@ targets=(
   Ising2D.mul_smul_matrix_of_necSuf
   Ising2D.NecSuf.one_mul_matrix_apply
   Ising2D.NecSuf.mul_one_matrix_apply
-  Ising2D.NecSuf.smul_mul_matrix_apply'
-  Ising2D.NecSuf.mul_smul_matrix_apply'
+  "Ising2D.NecSuf.smul_mul_matrix_apply'"
+  "Ising2D.NecSuf.mul_smul_matrix_apply'"
   Ising2D.NecSuf.mul_comm_of_mul_smul_matrix
   Ising2D.NecSuf.one_mul_matrix
   Ising2D.NecSuf.mul_one_matrix
-  Ising2D.NecSuf.smul_mul_matrix'
-  Ising2D.NecSuf.mul_smul_matrix'
+  "Ising2D.NecSuf.smul_mul_matrix'"
+  "Ising2D.NecSuf.mul_smul_matrix'"
   Ising2D.NecSuf.smul_one_commute
   Ising2D.NecSuf.smul_one_sub_comm
   Ising2D.NecSuf.centralizer_is_scalar_semiring

@@ -164,7 +164,12 @@ export default defineBlocks([
     title: { text: "冪等行列のトレースは像の次元" },
     labels: ["trace_of_idempotent"],
     statement: [
-      paragraph(["トレースとその相似変換不変性、行列の積は ", ref("def_trace"), "、", ref("trace_basic_properties"), "、", ref("mat_mult"), " を使う。"]),
+      paragraph([
+        "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の冪 ",
+        math(String.raw`Q^2`), " は ", ref("def_exp"), " (1)、数ベクトルの和は ", ref("def_matrix_sum"),
+        "、差は ", ref("def_matrix_difference"), "、零ベクトル ", math(String.raw`0`), " は ", ref("def_zero_matrix"),
+        " のものとする。",
+      ]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
@@ -180,29 +185,84 @@ export default defineBlocks([
         math(String.raw`\mathrm{im}\,Q := \{Qx \mid x \in \mathbb{C}^n\}`),
         "、",
         math(String.raw`\ker Q := \{x \in \mathbb{C}^n \mid Qx = 0\}`),
-        " である。",
+        " である。右辺の自然数 ",
+        math(String.raw`\dim_{\mathbb{C}} \mathrm{im}\,Q`),
+        " は、",
+        math(String.raw`1_{\mathbb{C}}`),
+        " をその個数だけ足した ",
+        math(String.raw`\mathbb{C}`),
+        " の元として読む（",
+        math(String.raw`1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記。零個の和は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        "）。",
       ]),
     ],
     proof: [
       paragraph([
+        "準備（",
+        math(String.raw`Q^2`),
+        " は積 ",
+        math(String.raw`QQ`),
+        " に等しい）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Q^2
+&= Q^1 Q
+&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 1\ \text{に。}\blkref{def_exp}\ (1))\\
+&= (Q^0 Q) Q
+&&(\because\ A^{m+1} := A^m A\ \text{を}\ m = 0\ \text{に。}\blkref{def_exp}\ (1))\\
+&= (I Q) Q
+&&(\because\ A^0 := I\ \text{。}\blkref{def_exp}\ (1))\\
+&= Q Q
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})
+\end{aligned}`),
+      paragraph([
+        "よって仮定 ",
+        math(String.raw`Q^2 = Q`),
+        " から ",
+        math(String.raw`QQ = Q`),
+        " である。",
+      ]),
+      paragraph([
         "Step 1（直和分解）。任意の ",
         math(String.raw`x \in \mathbb{C}^n`),
-        " について ",
+        " を取る。",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(Qx + (x - Qx)\bigr)_k
+&= (Qx)_k + (x - Qx)_k
+&&(\because\ \blkref{def_matrix_sum})\\
+&= (Qx)_k + \bigl(x_k - (Qx)_k\bigr)
+&&(\because\ \blkref{def_matrix_difference})\\
+&= x_k
+&&(\because\ \mathbb{C}\ \text{の加法の結合律・交換律・加法逆元・零元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`),
+      paragraph([
+        "なので、行列の等号は成分ごとであることから ",
         math(String.raw`x = Qx + (x - Qx)`),
-        " と書け、",
+        " であり、",
         math(String.raw`Qx \in \mathrm{im}\,Q`),
-        " である。",
+        "（",
+        math(String.raw`\mathrm{im}\,Q`),
+        " の定め方）である。",
         math(String.raw`x - Qx \in \ker Q`),
         " は次の計算による。",
       ]),
       displayMath(String.raw`\begin{aligned}
 Q(x - Qx)
-&= Qx - Q^2x
-&&(\because\ \text{行列の積の分配則})\\
+&= Qx - Q(Qx)
+&&(\because\ \blkref{mat_mult_vector_difference})\\
+&= Qx - (QQ)x
+&&(\because\ \blkref{mat_mult_associative})\\
 &= Qx - Qx
-&&(\because\ Q^2 = Q)\\
+&&(\because\ \text{準備の}\ QQ = Q)\\
 &= 0
-&&(\because\ \text{同じ項の差は零元（加法逆元）})
+&&(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Qx\ \text{に})
 \end{aligned}`),
       paragraph([
         "よって ",
@@ -219,10 +279,10 @@ Q(x - Qx)
 y
 &= Qx
 &&(\because\ x\ \text{の取り方})\\
-&= Q^2 x
-&&(\because\ Q = Q^2)\\
+&= (QQ)x
+&&(\because\ \text{準備の}\ QQ = Q)\\
 &= Q(Qx)
-&&(\because\ \text{行列の積の結合則})\\
+&&(\because\ \blkref{mat_mult_associative})\\
 &= Qy
 &&(\because\ Qx = y)\\
 &= 0
@@ -234,10 +294,12 @@ y
         " であり、和は直和である。",
       ]),
       paragraph([
-        "Step 2（",
-        math(String.raw`Q`),
-        " の適合基底での形）。",
-        math(String.raw`r := \dim_{\mathbb{C}}\mathrm{im}\,Q`),
+        "Step 2（基底を並べた行列 ",
+        math(String.raw`P`),
+        " について ",
+        math(String.raw`QP = PD`),
+        "）。",
+        math(String.raw`r := \dim_{\mathbb{C}}\mathrm{im}\,Q \in \mathbb{Z}_{\geq 0}`),
         " とおき、",
         math(String.raw`\mathrm{im}\,Q`),
         " の基底 ",
@@ -251,7 +313,7 @@ y
         " は ",
         math(String.raw`\mathbb{C}^n`),
         " の基底）。",
-        math(String.raw`j \leq r`),
+        math(String.raw`j \in \{1,\dots,r\}`),
         " のとき ",
         math(String.raw`v_j = Qx_j`),
         " なる ",
@@ -262,49 +324,106 @@ y
 Qv_j
 &= Q(Qx_j)
 &&(\because\ v_j = Qx_j)\\
-&= Q^2x_j
-&&(\because\ \text{行列の積の結合則})\\
+&= (QQ)x_j
+&&(\because\ \blkref{mat_mult_associative})\\
 &= Qx_j
-&&(\because\ Q^2 = Q)\\
+&&(\because\ \text{準備の}\ QQ = Q)\\
 &= v_j
 &&(\because\ v_j = Qx_j)
 \end{aligned}`),
       paragraph([
         "であり、",
-        math(String.raw`j > r`),
+        math(String.raw`j \in \{r+1,\dots,n\}`),
         " のとき ",
         math(String.raw`Qv_j = 0`),
         "（",
         math(String.raw`v_j \in \ker Q`),
-        "）。よってこの基底に関する ",
-        math(String.raw`Q`),
-        " の表現行列 ",
-        math(String.raw`D`),
-        " は対角行列で、対角成分は ",
-        math(String.raw`1`),
-        " が ",
-        math(String.raw`r`),
-        " 個、",
-        math(String.raw`0`),
-        " が ",
-        math(String.raw`n - r`),
-        " 個である。",
+        "）である。",
+        math(String.raw`P := \left[\,v_1\ \cdots\ v_n\,\right] \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_columnwise"),
+        " の列に並べた行列）とおき、",
+        math(String.raw`D \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`D_{kl} :=
+\begin{cases}
+  1_{\mathbb{C}} & (k = l \leq r) \\
+  0_{\mathbb{C}} & (\text{それ以外})
+\end{cases}
+\qquad (k, l \in \{1,\dots,n\})`),
+      paragraph([
+        "で定める。",
+        math(String.raw`i, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(PD)_{il}
+&= \sum_{k=1}^{n} P_{ik}\,D_{kl}
+&&(\because\ \blkref{mat_mult})\\
+&= P_{il}\,D_{ll} + \sum_{k \neq l} P_{ik}\,D_{kl}
+&&(\because\ k = l\ \text{の項を分ける。加法の結合律・交換律。}\blkref{complex_numbers_form_a_field})\\
+&= P_{il}\,D_{ll} + \sum_{k \neq l} P_{ik}\,0_{\mathbb{C}}
+&&(\because\ k \neq l\ \text{では}\ D\ \text{の定め方から}\ D_{kl} = 0_{\mathbb{C}})\\
+&= P_{il}\,D_{ll} + \sum_{k \neq l} 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})\\
+&= P_{il}\,D_{ll}
+&&(\because\ 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field})\\
+&= (v_l)_i\,D_{ll}
+&&(\because\ P\ \text{の定め方})\\
+&= \begin{cases}
+     (v_l)_i\,1_{\mathbb{C}} & (l \leq r) \\
+     (v_l)_i\,0_{\mathbb{C}} & (l > r)
+   \end{cases}
+&&(\because\ D\ \text{の定め方})\\
+&= \begin{cases}
+     (v_l)_i & (l \leq r) \\
+     0_{\mathbb{C}} & (l > r)
+   \end{cases}
+&&(\because\ 1_{\mathbb{C}}\ \text{は積の単位元（}\blkref{complex_numbers_form_a_field}\text{）と}\ \blkref{complex_times_zero_is_zero})\\
+&= (Qv_l)_i
+&&(\because\ l \leq r\ \text{では上の}\ Qv_l = v_l\text{、}l > r\ \text{では}\ Qv_l = 0\ \text{と}\ \blkref{def_zero_matrix})\\
+&= \bigl(\left[\,Qv_1\ \cdots\ Qv_n\,\right]\bigr)_{il}
+&&(\because\ \blkref{mat_columnwise}\ \text{の、列に並べた行列の成分の定め方})\\
+&= (QP)_{il}
+&&(\because\ \blkref{mat_columnwise})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`QP = PD`),
+        " である。",
       ]),
       paragraph([
-        "Step 3。基底変換行列を ",
-        math(String.raw`P`),
-        "（可逆）とすると ",
-        math(String.raw`D = P^{-1} Q P`),
-        " であり、",
+        "Step 3（トレースの計算）。",
+        math(String.raw`v_1,\dots,v_n`),
+        " は ",
+        math(String.raw`\mathbb{C}^n`),
+        " の基底なので、",
+        math(String.raw`P'P = PP' = I`),
+        " を満たす ",
+        math(String.raw`P' \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が取れる。",
       ]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}(Q)
-&= \mathrm{tr}(P^{-1}QP)
-&&(\because\ \text{トレースの基本性質 (4)：相似変換でトレースは不変。}\blkref{trace_basic_properties})\\
+&= \mathrm{tr}\bigl(P'(QP)\bigr)
+&&(\because\ \blkref{trace_basic_properties}\ (4)\ \text{を}\ P \to P',\ P' \to P,\ A \to Q\ \text{に。}PP' = I)\\
+&= \mathrm{tr}\bigl(P'(PD)\bigr)
+&&(\because\ \text{Step 2 の}\ QP = PD)\\
+&= \mathrm{tr}\bigl((P'P)D\bigr)
+&&(\because\ \blkref{mat_mult_associative})\\
+&= \mathrm{tr}(ID)
+&&(\because\ P'P = I)\\
 &= \mathrm{tr}(D)
-&&(\because\ D = P^{-1}QP)\\
-&= r
-&&(\because\ D\ \text{の対角成分は}\ 1\ \text{が}\ r\ \text{個、}\ 0\ \text{が}\ n-r\ \text{個})
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sum_{k=1}^{n} D_{kk}
+&&(\because\ \blkref{def_trace})\\
+&= \sum_{k=1}^{r} 1_{\mathbb{C}} + \sum_{k=r+1}^{n} 0_{\mathbb{C}}
+&&(\because\ D\ \text{の定め方})\\
+&= \sum_{k=1}^{r} 1_{\mathbb{C}}
+&&(\because\ 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field})\\
+&= \dim_{\mathbb{C}} \mathrm{im}\,Q
+&&(\because\ r\ \text{の定め方と、主張の右辺の読み方})
 \end{aligned}`),
     ],
     conversion: {
@@ -312,6 +431,7 @@ Qv_j
       notes: [
         "2026-08-17 の式変形統一で、Step 1 の二つの計算（x−Qx∈ker Q、交わりが零）、Step 2 の Qv_j=v_j、Step 3 のトレースの計算を、一続きの等号と行末の根拠へ揃えた。内容は変えていない。",
         "2026-09-02: Step 3 の鎖の直後に置いていた参照一覧を削り、相似変換でトレースが不変であることを使う行末の blkref へ移した。内容・式変形・根拠・参照は不変である。",
+        "2026-11-01: SageMath の検算（sagemath/check/trace_of_idempotent/）を付けるときに直した。Q^2 = QQ を def_exp (1) の冪から導く準備を足し、Step 1 の分配則・結合則・零の行を mat_mult_vector_difference・mat_mult_associative・matrix_difference_zero_iff_equal で引き、x = Qx + (x − Qx) を成分の鎖にした。Step 2・3 は未定義の「表現行列」「基底変換行列」をやめ、基底を列に並べた P と対角の D を定めて QP = PD を成分の鎖で示し、tr(Q) を trace_basic_properties (4) から tr(D) へ運ぶ鎖にした。主張の右辺の自然数を ℂ の元として読む読み方を書いた。",
       ],
     },
   },
