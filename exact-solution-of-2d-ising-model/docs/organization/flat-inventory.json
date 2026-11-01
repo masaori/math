@@ -26819,7 +26819,7 @@
     {
       "id": "chapter_organization_heading",
       "kind": "heading",
-      "title": "章立て",
+      "title": "この論文について",
       "labels": [
         "chapter_organization"
       ],
@@ -26827,8 +26827,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_of_this_paper",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_of_this_paper",
+      "kind": "overview",
       "title": "この論文のゴール",
       "labels": [
         "chapter_organization_goal_of_this_paper"
@@ -26837,8 +26837,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_parts_and_chapters",
-      "kind": "remark",
+      "id": "chapter_organization_overview_parts_and_chapters",
+      "kind": "overview",
       "title": "部と章の並び",
       "labels": [
         "chapter_organization_parts_and_chapters"
@@ -26855,8 +26855,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_transfer_matrix_representation",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_transfer_matrix_representation",
+      "kind": "overview",
       "title": "転送行列による表示",
       "labels": [
         "chapter_organization_goal_transfer_matrix_representation"
@@ -26865,8 +26865,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_projection_and_jordan_wigner",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_projection_and_jordan_wigner",
+      "kind": "overview",
       "title": "\\varepsilon \\text{ の固有値 } +1 \\text{ の固有空間への射影と Jordan–Wigner 表示}",
       "labels": [
         "chapter_organization_goal_projection_and_jordan_wigner"
@@ -26883,8 +26883,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_reduction_to_A_theta",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_reduction_to_A_theta",
+      "kind": "overview",
       "title": "\\text{離散 Fourier 変換による }2\\times2\\text{ 行列 }A(\\tilde\\theta_\\mu)\\text{ への帰着}",
       "labels": [
         "chapter_organization_goal_reduction_to_A_theta"
@@ -26893,8 +26893,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_diagonalization_and_exponential_form",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_diagonalization_and_exponential_form",
+      "kind": "overview",
       "title": "A(\\tilde\\theta_\\mu)\\text{ の対角化と }V^{(+)}\\text{ の指数表示}",
       "labels": [
         "chapter_organization_goal_diagonalization_and_exponential_form"
@@ -26903,8 +26903,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_eigenvalues_of_V_plus",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_eigenvalues_of_V_plus",
+      "kind": "overview",
       "title": "V^{(+)}\\text{ の固有値}",
       "labels": [
         "chapter_organization_goal_eigenvalues_of_V_plus"
@@ -26913,8 +26913,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_eigenvector_of_max_eigenvalue",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_eigenvector_of_max_eigenvalue",
+      "kind": "overview",
       "title": "V^{(+)}\\text{ の最大固有値に属する固有ベクトル}",
       "labels": [
         "chapter_organization_goal_eigenvector_of_max_eigenvalue"
@@ -26931,8 +26931,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_row_limit_and_max_eigenvalue",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_row_limit_and_max_eigenvalue",
+      "kind": "overview",
       "title": "N\\to\\infty\\text{ の極限と最大固有値 }c(M)",
       "labels": [
         "chapter_organization_goal_row_limit_and_max_eigenvalue"
@@ -26941,8 +26941,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_column_limit_and_closed_form",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_column_limit_and_closed_form",
+      "kind": "overview",
       "title": "M\\to\\infty\\text{ の極限と閉形式}",
       "labels": [
         "chapter_organization_goal_column_limit_and_closed_form"
@@ -26959,8 +26959,8 @@
       "dependsOnLabels": []
     },
     {
-      "id": "chapter_organization_remark_goal_critical_point_and_log_divergence",
-      "kind": "remark",
+      "id": "chapter_organization_overview_goal_critical_point_and_log_divergence",
+      "kind": "overview",
       "title": "\\text{臨界点 }K_c\\text{ と }\\frac{d^2f}{dK^2}\\text{ の対数発散}",
       "labels": [
         "chapter_organization_goal_critical_point_and_log_divergence"

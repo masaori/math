@@ -1,7 +1,8 @@
 import { defineBlocks, diagram, displayMath, list, math, paragraph } from "../schema.ts";
 
 /**
- * 論文の冒頭に置く章立ての説明。部と章の並び（冒頭に章の依存関係の図を置く）と、各章のゴールの式を示す。
+ * 論文の冒頭に置く章「この論文について」。論文のゴールと、部と章の並び（冒頭に章の依存関係の図を置く）と、
+ * 各章のゴールの式（何を示す式かの一文を添える）を示す。
  * 証明を持たない案内なので、主張・定義・注意は置かず、概要（`overview`）だけで書く。
  * 文書順の最初に来ることは `tools/content-modules.ts` の `LEADING_CONTENT_FILES` が決める。
  */
@@ -10,7 +11,7 @@ export default defineBlocks([
     id: "chapter_organization_heading",
     kind: "heading",
     level: 2,
-    title: { text: "章立て" },
+    title: { text: "この論文について" },
     labels: ["chapter_organization"],
   },
   {
@@ -19,7 +20,19 @@ export default defineBlocks([
     title: { text: "この論文のゴール" },
     labels: ["chapter_organization_goal_of_this_paper"],
     statement: [
-      paragraph(["この論文のゴールは、自由エネルギーの閉形式を解析し、臨界点を厳密に得ることである。そのための手順は次の三つである。"]),
+      paragraph([
+        "この論文のゴールは、二次元格子イジング模型の自由エネルギーの閉形式を解析し臨界点を厳密に得るというオンサーガーが1944年に示した方法を、数学的に一切の飛躍なく厳密に示すことである。",
+      ]),
+      paragraph([
+        "原著も含めほとんどの論文・解説書・教科書は、計算の過程や証明に何らかの物理的直感を前提とした飛躍があり、理論物理の世界においては基本的な結果であるにもかかわらず、数学者にとっては理解しづらいものになってしまっていた。",
+      ]),
+      paragraph([
+        "この論文では、計算対象を物理用語を使わず数学的対象として正確に定義し、計算の過程もできる限り飛ばさずに記述するよう努めた。そのため、興味関心と気骨さえあれば、高校生でも理解することが可能な内容になっている。代わりに長大な論文になってしまっていることをご容赦いただきたい。",
+      ]),
+      paragraph([
+        "また、全ての計算過程は、SageMathによる数値計算による検証と、Leanによる形式検証により、その精度を担保している。計算ミスは限りなく0に近いと自負しているので、安心して重要な部分だけを読み飛ばしていただきたい。",
+      ]),
+      paragraph(["オンサーガーの方法の手順は次の三つである。"]),
       list([
         [
           "2次元 Ising 模型の分配関数 ",
@@ -260,6 +273,15 @@ export default defineBlocks([
     title: { text: "転送行列による表示" },
     labels: ["chapter_organization_goal_transfer_matrix_representation"],
     statement: [
+      paragraph([
+        "分配関数 ",
+        math(String.raw`Z`),
+        " が、Pauli 行列から作った ",
+        math(String.raw`2^M\times2^M`),
+        " 複素行列の積の ",
+        math(String.raw`N`),
+        " 乗のトレースで書けることを示す式である。",
+      ]),
       paragraph(["この章のゴールの式は次である（転送行列 ", math(String.raw`V_1, V_2`), " による表示 ",
         math(String.raw`Z=\mathrm{tr}\left((V_1V_2)^{N}\right)`), " に、", math(String.raw`V_1, V_2`), " の Pauli 行列による表示を代入した式）。"]),
       displayMath(String.raw`Z=\mathrm{tr}\left(\left(\exp\left(K_1\sum_{m=1}^{M}\sigma^z_m\sigma^z_{m+1}\right)
@@ -272,6 +294,18 @@ export default defineBlocks([
     title: { tex: String.raw`\varepsilon \text{ の固有値 } +1 \text{ の固有空間への射影と Jordan–Wigner 表示}` },
     labels: ["chapter_organization_goal_projection_and_jordan_wigner"],
     statement: [
+      paragraph([
+        math(String.raw`\varepsilon`),
+        " の固有値 ",
+        math(String.raw`+1`),
+        " の固有空間の上では、",
+        math(String.raw`W`),
+        " が行列 ",
+        math(String.raw`H_1^{(+)},H_2`),
+        " の指数関数の積 ",
+        math(String.raw`V^{(+)}`),
+        " と一致することを示す式である。",
+      ]),
       paragraph(["この章のゴールの式は次である。"]),
       displayMath(String.raw`WP^{(+)}=V^{(+)}P^{(+)},\qquad
 P^{(+)}=\tfrac12\left(I+\varepsilon\right),\qquad
@@ -299,6 +333,20 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     labels: ["chapter_organization_goal_reduction_to_A_theta"],
     statement: [
       paragraph([
+        math(String.raw`V^{(+)}`),
+        " による共役が、離散 Fourier 変換した行列の組 ",
+        math(String.raw`(\check Z_\mu,\check Y_\mu)`),
+        " を ",
+        math(String.raw`2\times2`),
+        " 行列 ",
+        math(String.raw`A(\tilde\theta_\mu)`),
+        " で写すことを示し、問題を ",
+        math(String.raw`M`),
+        " 個の ",
+        math(String.raw`2\times2`),
+        " 行列に帰着する式である。",
+      ]),
+      paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`\mu\in\check{\mathcal M}=\{1,\dots,M\}`),
         "）。",
@@ -320,6 +368,16 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     },
     labels: ["chapter_organization_goal_diagonalization_and_exponential_form"],
     statement: [
+      paragraph([
+        math(String.raw`A(\tilde\theta_\mu)`),
+        " の固有値が ",
+        math(String.raw`\exp(\pm\gamma(\tilde\theta_\mu))`),
+        " であることから、",
+        math(String.raw`V^{(+)}`),
+        " を定数倍を除いて行列 ",
+        math(String.raw`\check n_\mu`),
+        " と単位行列の一次結合の指数関数で書けることを示す式である。",
+      ]),
       paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`\mu\in\check{\mathcal M}`),
@@ -344,6 +402,17 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     labels: ["chapter_organization_goal_eigenvalues_of_V_plus"],
     statement: [
       paragraph([
+        "定数 ",
+        math(String.raw`c`),
+        " を決めて ",
+        math(String.raw`V^{(+)}`),
+        " の固有値をすべて求め、最大の固有値は ",
+        math(String.raw`\epsilon=(1,\dots,1)`),
+        " のときの ",
+        math(String.raw`\Lambda^{(1/2)}_M`),
+        " だけであることを示す式である。",
+      ]),
+      paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`\epsilon\in\{0,1\}^{\check{\mathcal M}}`),
         "。前の章の ",
@@ -365,6 +434,16 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
     title: { tex: String.raw`V^{(+)}\text{ の最大固有値に属する固有ベクトル}` },
     labels: ["chapter_organization_goal_eigenvector_of_max_eigenvalue"],
     statement: [
+      paragraph([
+        math(String.raw`\mathrm{tr}(\varepsilon V^{(+)})>0`),
+        " から、最大の固有値に属する固有ベクトルが ",
+        math(String.raw`\varepsilon`),
+        " の固有値 ",
+        math(String.raw`+1`),
+        " の固有空間 ",
+        math(String.raw`\mathcal F^{(+)}`),
+        " に入ることを示す式である。",
+      ]),
       paragraph(["この章のゴールの式は次である。"]),
       displayMath(String.raw`\mathrm{tr}\left(\varepsilon V^{(+)}\right)=\left(2\exp(-K_2)\cosh K_1\right)^{M}+\left(2\exp(K_2)\sinh K_1\right)^{M}>0
 \ \Longrightarrow\
@@ -388,6 +467,20 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
     title: { tex: String.raw`N\to\infty\text{ の極限と最大固有値 }c(M)` },
     labels: ["chapter_organization_goal_row_limit_and_max_eigenvalue"],
     statement: [
+      paragraph([
+        math(String.raw`Z`),
+        " を ",
+        math(String.raw`W`),
+        " の二次形式の上限 ",
+        math(String.raw`c(M)`),
+        " で上下から挟み、",
+        math(String.raw`N\to\infty`),
+        " で ",
+        math(String.raw`\frac{1}{MN}\log Z`),
+        " が ",
+        math(String.raw`\frac1M\log c(M)`),
+        " に収束することを示す式である。",
+      ]),
       paragraph(["この章のゴールの式は次である。"]),
       displayMath(String.raw`W=V_1^{1/2}V_2V_1^{1/2},\qquad
 c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\right\},`),
@@ -401,6 +494,18 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
     title: { tex: String.raw`M\to\infty\text{ の極限と閉形式}` },
     labels: ["chapter_organization_goal_column_limit_and_closed_form"],
     statement: [
+      paragraph([
+        math(String.raw`c(M)`),
+        " を ",
+        math(String.raw`\Lambda^{(1/2)}_M`),
+        " とその ",
+        math(String.raw`2`),
+        " 倍で挟み、",
+        math(String.raw`M\to\infty`),
+        " で ",
+        math(String.raw`\frac{1}{MN}\log Z`),
+        " の極限が積分で書いた閉形式になることを示す式である。",
+      ]),
       paragraph(["この章のゴールの式は次である。"]),
       displayMath(String.raw`c_+(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathcal F^{(+)}\cap\mathbb R^{2^M},\ \lVert x\rVert=1\right\}=\Lambda^{(1/2)}_M,\qquad
 \Lambda^{(1/2)}_M\le c(M)\le 2\Lambda^{(1/2)}_M,`),
@@ -423,6 +528,19 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
     },
     labels: ["chapter_organization_goal_critical_point_and_log_divergence"],
     statement: [
+      paragraph([
+        "閉形式 ",
+        math(String.raw`f(K)`),
+        " の二階導関数が、",
+        math(String.raw`\sinh 2K_c=1`),
+        " で定まる ",
+        math(String.raw`K_c`),
+        " に近づくと ",
+        math(String.raw`\frac{8}{\pi}\log\frac{1}{\lvert K-K_c\rvert}`),
+        " との差を ",
+        math(String.raw`49`),
+        " 以内に保って発散することを示す式である。",
+      ]),
       paragraph([
         "この章のゴールの式は次である（",
         math(String.raw`K_1=K_2=K`),
