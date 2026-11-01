@@ -1,5 +1,5 @@
 # 対象ラベル: end_agrees_with_matrix_vector_product
-# 主張の式変形（左辺と 11 本の等号）と主張そのものを確かめる。
+# 主張の式変形（左辺と 12 本の等号）と主張そのものを確かめる。
 #   ((end A)(f))_{ν(L)}
 #   = ((end(Σ A_{ν(I),ν(J)} E_{I,J}))(f))_{ν(L)}
 #   = ((Σ A_{ν(I),ν(J)} Θ_{I,J})(f))_{ν(L)}
@@ -8,6 +8,7 @@
 #   = (Σ A_{ν(I),ν(J)} Σ_K f_{ν(K)} Θ_{I,J}(f_K))_{ν(L)}
 #   = (Σ A_{ν(I),ν(J)} Σ_K f_{ν(K)} δ_{J,K} f_I)_{ν(L)}
 #   = (Σ A_{ν(I),ν(J)} f_{ν(J)} f_I)_{ν(L)}
+#   = Σ (A_{ν(I),ν(J)} f_{ν(J)} f_I)_{ν(L)}
 #   = Σ A_{ν(I),ν(J)} f_{ν(J)} (f_I)_{ν(L)}
 #   = Σ A_{ν(I),ν(J)} f_{ν(J)} δ_{I,L}
 #   = Σ_J A_{ν(L),ν(J)} f_{ν(J)}
@@ -18,6 +19,7 @@
 # 帰属: 成分は QQ(i) 上の多項式環の独立な不定元。M = 1, 2, 3。全て厳密。
 load("../../_shared/one_by_one_matrix.sage")
 load("../../_shared/end_by_definition.sage")
+load("../../_shared/matrix_operations_by_definition.sage")
 
 
 def delta(a, b):
@@ -52,13 +54,18 @@ for M in [1, 2, 3]:
     v7 = sum((a(I, J) * sum((f[nu(K) - 1] * delta(J, K) * fb[I] for K in idx), zero) for I in idx for J in idx), zero)
     v8 = sum((a(I, J) * f[nu(J) - 1] * fb[I] for I in idx for J in idx), zero)
     assert v1 == v2 == v3 == v4 == v5 == v6 == v7 == v8, M
+    terms8 = [body_scalar(a(I, J) * f[nu(J) - 1], column_matrix(R, fb[I])) for I in idx for J in idx]
+    v8_def = body_finite_sum(terms8)
+    assert v8_def.column(0) == v8, M
     for L in idx:
         k = nu(L)
+        s8b = sum(T[k - 1, 0] for T in terms8)
+        assert v8_def[k - 1, 0] == s8b, (M, L)
         s9 = sum(a(I, J) * f[nu(J) - 1] * fb[I][k - 1] for I in idx for J in idx)
         s10 = sum(a(I, J) * f[nu(J) - 1] * delta(I, L) for I in idx for J in idx)
         s11 = sum(a(L, J) * f[nu(J) - 1] for J in idx)
         s12 = sum(A[k - 1, l - 1] * f[l - 1] for l in range(1, n + 1))
-        assert v8[k - 1] == s9 == s10 == s11 == s12, (M, L)
+        assert v8[k - 1] == s8b == s9 == s10 == s11 == s12, (M, L)
     # 主張: すべての k で ((end A)(f))_k = Σ_l A_kl f_l。Sage の行列と数ベクトルの積とも一致する
     assert v1 == A * f
     assert all(v1[k - 1] == sum(A[k - 1, l - 1] * f[l - 1] for l in range(1, n + 1)) for k in range(1, n + 1))
@@ -67,7 +74,7 @@ for M in [1, 2, 3]:
         for J in idx:
             for K in idx:
                 assert E.apply(EbR[(I, J)], fb[K]) == (fb[I] if K == J else zero)
-print("M = 1, 2, 3 で、主張の式変形（左辺と 11 本の等号）と主張 (end(A)(f))_k = Σ_l A_kl f_l が QQ(i) 上の不定元で厳密に成り立つ")
+print("M = 1, 2, 3 で、主張の式変形（左辺と 12 本の等号）と主張 (end(A)(f))_k = Σ_l A_kl f_l が QQ(i) 上の不定元で厳密に成り立つ")
 
 # 対照: 主張の右辺を転置した行列の積 Σ_l A_lk f_l に替えると、M = 2 で一致しない（検算が添字の向きを見分けること）
 R = PolynomialRing(GAUSSIAN, [f"a{p}_{q}" for p in range(1, 5) for q in range(1, 5)] + [f"x{p}" for p in range(1, 5)])

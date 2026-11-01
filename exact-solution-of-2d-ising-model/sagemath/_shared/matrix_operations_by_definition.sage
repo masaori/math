@@ -48,3 +48,12 @@ def body_sum(A, B):
     assert A.nrows() == B.nrows() and A.ncols() == B.ncols()
     R = A.base_ring()
     return matrix(R, A.nrows(), A.ncols(), lambda i, j: A[i, j] + B[i, j])
+
+
+def body_finite_sum(terms):
+    """def_finite_sum_of_matrices の有限和を、def_matrix_sum の和で左から順に足して組む。"""
+    assert len(terms) >= 1
+    total = terms[0]
+    for T in terms[1:]:
+        total = body_sum(total, T)
+    return total

@@ -515,6 +515,11 @@
     `def_matrix_sum`・`def_matrix_scalar_multiple` へのラベル参照の段の 2 段に割った。このブロックに Lean の具体版は無い。
     SageMath `sagemath/check/140_frobenius_inner_product_axioms/check_02_linearity_chains.sage`（`QQ[i]` の厳密計算、4 本の鎖の全行、左辺は `tr(A^*B)` で計算、252 段と否定コントロール 11 件、全段 PASS）を足した。
     レビューの必須の指摘は無く、任意の指摘（検算の (0) の段と定義の段が同じ式どうしの比較だったこと、否定コントロールが一度も実行されなくても通ること）を直した。
+  - ゴールラインの確認の三十六個目（済み、2026-11-01）: 「名前だけの根拠をラベル参照に替える」のうち `004_transfer_matrix.ts` の 5 か所（`exp_of_diagonal_matrix` の部分和の成分の 2 本、`end_agrees_with_matrix_vector_product` の基底による展開の 2 本と主張の鎖の 1 行）を直した。
+    係数はどれも `ℂ` である。本文に行列の有限和を定めるブロックが無かったので、定義 `def_finite_sum_of_matrices`（`Mat(m,n,ℂ)`、添字 `1..r`、左から足す）と主張 `finite_sum_of_matrices_entrywise`（有限和の成分は成分の有限和。帰納法の鎖）を `002_linear_space_general.ts` に足した。
+    各箇所の「行列（数ベクトル）の和とスカラー倍は成分ごと」を、`finite_sum_of_matrices_entrywise` の段と `def_matrix_scalar_multiple` を各項へ同時に適用する段の 2 段に割った。数ベクトルの和とスカラー倍は、`end_agrees_with_matrix_vector_product` の証明の冒頭で `2^M` 行 1 列の行列としての定義のものと宣言した（`trace_of_idempotent` と同じ形）。
+    この 2 ブロックに Lean の具体版の鎖は無い（`ClaimExpOfDiagonalMatrix.lean` は主張の形だけを持ち、部分和の段を持たない）。SageMath は `sagemath/check/finite_sum_of_matrices_entrywise/` を足し、`exp_of_diagonal_matrix`・`end_agrees_with_matrix_vector_product` の検算に新しい行を足した（全 PASS）。
+    レビューの必須の指摘（有限和の未定義、数ベクトルの和の定義の宣言）を直し、再レビューで必須の指摘は無くなった。
 
 ## 次の一歩
 
@@ -523,9 +528,11 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
-  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。`005_exp_conjugation_proof.ts` は三十五個目で 4 か所とも替えた。次は `004_transfer_matrix.ts` の「行列の和とスカラー倍は成分ごと」3 か所と「数ベクトルの和とスカラー倍は成分ごと」2 か所（係数が `ℂ` か、数ベクトルの和・スカラー倍を定めるブロックが本文にあるかを先に確かめる）。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。`005_exp_conjugation_proof.ts` は三十五個目で 4 か所とも替えた。`004_transfer_matrix.ts` は三十六個目で 5 か所とも替えた（行列の有限和は `finite_sum_of_matrices_entrywise` を引く）。次は `008_TV1_hatZ_hatY_part1.ts`（係数が `ℂ` か、有限和なら `finite_sum_of_matrices_entrywise` で足りるかを先に確かめる）。
   `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
   `003_exp_linear_map.ts` の残り 4 か所（係数が `K` か `ℝ` の行列の差）も同じである。`def_matrix_difference`（と `def_zero_matrix`）を `K = ℝ` または `ℂ` について述べ直せば、この 5 か所を参照に替えられる。
+- 有限和の添字の付け方が本文で定まっていない。複素数の有限和 `def_finite_sum_of_complex_numbers`（添字 `1..m`）と行列の有限和 `def_finite_sum_of_matrices`（添字 `1..r`）は、添字が `1` から始まる場合しか定めない。
+  本文は `Σ_{p=0}^{N}`（`exp_of_diagonal_matrix` など）と、多重添字の集合 `𝓘`・`𝓘×𝓘` の上の和（`end_agrees_with_matrix_vector_product` の基底による展開と主張の鎖、ほか `ℂ` の和を `𝓘` で取る既存の箇所）を使っており、`𝓘` の上で「左から足す」順序（`ν` で並べる等）を定めていない。複素数と行列の両方の有限和について、有限集合の添字の付け方を定める 1 件として扱う。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
   行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。

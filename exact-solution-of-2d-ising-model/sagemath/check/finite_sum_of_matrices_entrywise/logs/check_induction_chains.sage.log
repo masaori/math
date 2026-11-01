@@ -1,0 +1,3 @@
+checked 180 induction chains (r = 1..5) and the statement for r = 1..6 over 9 shapes
+対照: 添字を入れ替えた右辺は一致しない
+RESULT: PASS

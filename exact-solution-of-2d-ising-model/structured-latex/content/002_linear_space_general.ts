@@ -147,6 +147,112 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_definition_finite_sum_of_matrices",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列の有限和" },
+    labels: ["def_finite_sum_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）について、有限和 ",
+        math(String.raw`\sum_{j=1}^{r} X_j \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を ",
+        math(String.raw`r`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{1} X_j := X_1,
+\qquad
+\sum_{j=1}^{r+1} X_j := \Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}`),
+      paragraph([
+        "と定める（左から順に足す）。和は ",
+        ref("def_matrix_sum"),
+        " の行列の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。行列の有限和は本文全体（指数級数の部分和、基底による展開など）で使われていたが、定めるブロックが無かった。" +
+          "複素数の有限和（def_finite_sum_of_complex_numbers）と同じ形で定めた。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_matrices_entrywise",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列の有限和の成分は成分の有限和" },
+    labels: ["finite_sum_of_matrices_entrywise"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、右辺の複素数の有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " による。このとき、",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{j=1}^{r} X_j\Bigr)_{ik} = \sum_{j=1}^{r} (X_j)_{ik}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定し、",
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{1} X_j\Bigr)_{ik}
+&= (X_1)_{ik}
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \sum_{j=1}^{1} (X_j)_{ik}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)_{ik}
+&= \Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)_{ik}
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)_{ik} + (X_{r+1})_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} (X_j)_{ik}\Bigr) + (X_{r+1})_{ik}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{j=1}^{r+1} (X_j)_{ik}
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。対角行列の指数関数（exp_of_diagonal_matrix）と線型写像表示の値（end_agrees_with_matrix_vector_product）の証明が、" +
+          "行列の有限和の成分を「行列の和とスカラー倍は成分ごと」と名前だけで根拠にしていたので、引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

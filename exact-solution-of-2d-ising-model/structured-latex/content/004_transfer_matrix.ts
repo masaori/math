@@ -320,8 +320,12 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
       displayMath(
         String.raw`\begin{aligned}
 (S_N)_{kk}
+&= \left(\sum_{p=0}^{N}\frac{1}{p!}D^p\right)_{kk}
+   \quad (\because S_N\ \text{の定義}) \\
+&= \sum_{p=0}^{N}\left(\frac{1}{p!}D^p\right)_{kk}
+   \quad (\because \blkref{finite_sum_of_matrices_entrywise}) \\
 &= \sum_{p=0}^{N}\frac{1}{p!}(D^p)_{kk}
-   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+   \quad (\because \blkref{def_matrix_scalar_multiple}\ \text{を各項へ同時に適用}) \\
 &= \sum_{p=0}^{N}\frac{d_k^{\,p}}{p!}
    \quad (\because \text{上の対角行列の冪を各項へ適用})
 \end{aligned}`,
@@ -330,8 +334,12 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
       displayMath(
         String.raw`\begin{aligned}
 (S_N)_{kl}
+&= \left(\sum_{p=0}^{N}\frac{1}{p!}D^p\right)_{kl}
+   \quad (\because S_N\ \text{の定義}) \\
+&= \sum_{p=0}^{N}\left(\frac{1}{p!}D^p\right)_{kl}
+   \quad (\because \blkref{finite_sum_of_matrices_entrywise}) \\
 &= \sum_{p=0}^{N}\frac{1}{p!}(D^p)_{kl}
-   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+   \quad (\because \blkref{def_matrix_scalar_multiple}\ \text{を各項へ同時に適用}) \\
 &= \sum_{p=0}^{N}\frac{1}{p!}\cdot 0
    \quad (\because \text{上の対角行列の冪より } D^p \text{ は対角行列}) \\
 &= 0
@@ -866,6 +874,18 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
         " である（",
         ref("def_end_iso"),
         " の標準基底と行列単位の定義）。",
+        math(String.raw`\mathcal{F}=\mathbb{C}^{2^M}`),
+        " の数ベクトルの和とスカラー倍は、",
+        ref("mat_mult"),
+        " の約束どおり数ベクトルを ",
+        math(String.raw`2^M`),
+        " 行 1 列の行列として、",
+        ref("def_finite_sum_of_matrices"),
+        "・",
+        ref("def_matrix_sum"),
+        "・",
+        ref("def_matrix_scalar_multiple"),
+        " のものとする。",
       ]),
       paragraph([
         "準備: 基底の成分。",
@@ -909,8 +929,10 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       displayMath(
         String.raw`\begin{aligned}
 \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}E_{I,J}\right)_{\nu(K),\nu(L)}
+&= \sum_{I,J\in\mathcal{I}}\left(A_{\nu(I),\nu(J)}E_{I,J}\right)_{\nu(K),\nu(L)}
+&&(\because\ \blkref{finite_sum_of_matrices_entrywise})\\
 &= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}(E_{I,J})_{\nu(K),\nu(L)}
-&&(\because\ \text{行列の和とスカラー倍は成分ごと})\\
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各項へ同時に適用})\\
 &= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\,\delta_{I,K}\,\delta_{J,L}
 &&(\because\ \text{上の}\ (E_{I,J})_{\nu(K),\nu(L)}=\delta_{I,K}\delta_{J,L})\\
 &= A_{\nu(K),\nu(L)}
@@ -933,8 +955,10 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
       displayMath(
         String.raw`\begin{aligned}
 \left(\sum_{K\in\mathcal{I}}v_{\nu(K)}f_K\right)_{\nu(L)}
+&= \sum_{K\in\mathcal{I}}\left(v_{\nu(K)}f_K\right)_{\nu(L)}
+&&(\because\ \blkref{finite_sum_of_matrices_entrywise})\\
 &= \sum_{K\in\mathcal{I}}v_{\nu(K)}(f_K)_{\nu(L)}
-&&(\because\ \text{数ベクトルの和とスカラー倍は成分ごと})\\
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各項へ同時に適用})\\
 &= \sum_{K\in\mathcal{I}}v_{\nu(K)}\,\delta_{K,L}
 &&(\because\ \text{上の}\ (f_K)_{\nu(L)}=\delta_{K,L})\\
 &= v_{\nu(L)}
@@ -972,10 +996,12 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
 &&(\because\ \Theta_{I,J}\ \text{の}\ \mathbb{C}\text{-線型性。}\blkref{def_end_iso})\\
 &= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\sum_{K\in\mathcal{I}}v_{\nu(K)}\,\delta_{J,K}f_I\right)_{\nu(L)}
 &&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義。}\blkref{def_end_iso}\text{）})\\
-&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}f_I\right)_{\nu(L)}
+&= \left(\sum_{I,J\in\mathcal{I}}\left(A_{\nu(I),\nu(J)}v_{\nu(J)}\right)f_I\right)_{\nu(L)}
 &&(\because\ \delta_{J,K}\ \text{は}\ K=J\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
-&= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}(f_I)_{\nu(L)}
-&&(\because\ \text{数ベクトルの和とスカラー倍は成分ごと})\\
+&= \sum_{I,J\in\mathcal{I}}\left(\left(A_{\nu(I),\nu(J)}v_{\nu(J)}\right)f_I\right)_{\nu(L)}
+&&(\because\ \blkref{finite_sum_of_matrices_entrywise})\\
+&= \sum_{I,J\in\mathcal{I}}\left(A_{\nu(I),\nu(J)}v_{\nu(J)}\right)(f_I)_{\nu(L)}
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各項へ同時に適用})\\
 &= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}\,\delta_{I,L}
 &&(\because\ \text{上の}\ (f_I)_{\nu(L)}=\delta_{I,L})\\
 &= \sum_{J\in\mathcal{I}}A_{\nu(L),\nu(J)}v_{\nu(J)}

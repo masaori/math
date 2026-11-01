@@ -2,10 +2,16 @@
 # 中間目標「対角行列の冪」（帰納法の基底と帰納の段の各行）と「指数級数の部分和の成分」の鎖を確かめる。
 #   基底:  (D^0)_kl = I_kl = 0（k ≠ l）、(D^0)_kk = I_kk = 1 = d_k^0
 #   帰納:  (D^{p+1})_kk = (D^p D)_kk = (D^p)_kk D_kk = d_k^p D_kk = d_k^p d_k = d_k^{p+1}、D^{p+1} は対角
-#   部分和: (S_N)_kk = Σ_p (1/p!)(D^p)_kk = Σ_p d_k^p/p!、(S_N)_kl = Σ_p (1/p!)(D^p)_kl = Σ_p (1/p!)·0 = 0
+#   部分和: (S_N)_kk = (Σ_p (1/p!)D^p)_kk = Σ_p ((1/p!)D^p)_kk = Σ_p (1/p!)(D^p)_kk = Σ_p d_k^p/p!、
+#           (S_N)_kl = (Σ_p (1/p!)D^p)_kl = Σ_p ((1/p!)D^p)_kl = Σ_p (1/p!)(D^p)_kl = Σ_p (1/p!)·0 = 0
+#   第一行の S_N は Sage の行列の和で作り（独立な経路）、その成分を、第二行の左辺（本文 def_finite_sum_of_matrices のとおり
+#   def_matrix_sum の 2 項の和を左から順に足して作った有限和）の成分と比べる。第三行は finite_sum_of_matrices_entrywise の右辺で、
+#   各項 ((1/p!)D^p)_kl は本文 def_matrix_scalar_multiple のとおり成分ごとにスカラー倍した行列から読む。第四行はその成分を書き出したもの。
 # 対角成分は QQ(i) 上の多項式環の不定元。冪は本文 def_exp の D^{p+1} := D^p D を右から掛けて作り、
 # 数の冪は d^{p+1} := d^p d を右から掛けて作る（Sage の ^ とは独立な経路）。
 load("../../_shared/one_by_one_matrix.sage")
+load("../../_shared/matrix_operations_by_definition.sage")
+
 
 PMAX = 10
 for n in range(1, 5):
@@ -41,15 +47,19 @@ for n in range(1, 5):
     # 部分和の成分（N = 0..PMAX）
     for N in range(PMAX + 1):
         SN = matrix_partial_sum(Dm, N)
+        terms = [body_scalar(QQ(1) / factorial(p), matrix_power_by_definition(Dm, p)) for p in range(N + 1)]
+        sum_by_definition = body_finite_sum(terms)
         for k in range(1, n + 1):
             for l in range(1, n + 1):
+                line_def = entry(sum_by_definition, k, l)
+                line_sum = sum(entry(T, k, l) for T in terms)
                 line1 = sum(QQ(1) / factorial(p) * entry(matrix_power_by_definition(Dm, p), k, l) for p in range(N + 1))
                 if k == l:
                     line2 = sum(scalar_power_by_definition(d[k - 1], p) / factorial(p) for p in range(N + 1))
-                    assert entry(SN, k, k) == line1 == line2, (n, N, k)
+                    assert entry(SN, k, k) == line_def == line_sum == line1 == line2, (n, N, k)
                 else:
                     line2 = sum(QQ(1) / factorial(p) * 0 for p in range(N + 1))
-                    assert entry(SN, k, l) == line1 == line2 == 0, (n, N, k, l)
+                    assert entry(SN, k, l) == line_def == line_sum == line1 == line2 == 0, (n, N, k, l)
 print(f"n = 1..4、p = 0..{PMAX - 1}、N = 0..{PMAX} で、冪の帰納法の各行と部分和の成分の鎖が QQ(i)[d] で厳密に成り立つ")
 
 # 対照: 非対角の行列 N = [[0,1],[0,0]] では (S_N)_12 = 1（N ≥ 1）で 0 でない

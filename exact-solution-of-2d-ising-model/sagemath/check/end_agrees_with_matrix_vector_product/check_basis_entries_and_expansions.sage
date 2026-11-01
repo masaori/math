@@ -3,11 +3,15 @@
 #   (f_K)_{ν(L)} = (e_{k_1}⊠…⊠e_{k_M})_{ν(L)} = Π_m (e_{k_m})_{l_m} = Π_m δ_{k_m,l_m} = δ_{K,L}
 #   (E_{I,J})_{ν(K),ν(L)} = (E_{i_1j_1}⊠…)_{ν(K),ν(L)} = Π_m (E_{i_mj_m})_{k_ml_m} = Π_m δ_{i_m,k_m}δ_{j_m,l_m}
 #                         = (Π_m δ_{i_m,k_m})(Π_m δ_{j_m,l_m}) = δ_{I,K} δ_{J,L}
-#   (Σ_{I,J} A_{ν(I),ν(J)} E_{I,J})_{ν(K),ν(L)} = Σ A_{ν(I),ν(J)} (E_{I,J})_{ν(K),ν(L)} = Σ A δ_{I,K}δ_{J,L} = A_{ν(K),ν(L)}
-#   (Σ_K f_{ν(K)} f_K)_{ν(L)} = Σ_K f_{ν(K)} (f_K)_{ν(L)} = Σ_K f_{ν(K)} δ_{K,L} = f_{ν(L)}
+#   (Σ_{I,J} A_{ν(I),ν(J)} E_{I,J})_{ν(K),ν(L)} = Σ (A_{ν(I),ν(J)} E_{I,J})_{ν(K),ν(L)} = Σ A_{ν(I),ν(J)} (E_{I,J})_{ν(K),ν(L)}
+#                                               = Σ A δ_{I,K}δ_{J,L} = A_{ν(K),ν(L)}
+#   (Σ_K f_{ν(K)} f_K)_{ν(L)} = Σ_K (f_{ν(K)} f_K)_{ν(L)} = Σ_K f_{ν(K)} (f_K)_{ν(L)} = Σ_K f_{ν(K)} δ_{K,L} = f_{ν(L)}
+# 第一行の有限和は本文 def_matrix_sum の 2 項の和を左から順に足して作り、第二行の各項は本文 def_matrix_scalar_multiple の
+# とおり成分ごとにスカラー倍した行列（数ベクトルは 1 列の行列）から読む。Sage の行列の sum とは別の経路である。
 # 帰属: 成分は QQ(i) 上の多項式環の独立な不定元（A の 4^M 個、f の 2^M 個）。M = 1, 2, 3。全て厳密。
 load("../../_shared/one_by_one_matrix.sage")
 load("../../_shared/end_by_definition.sage")
+load("../../_shared/matrix_operations_by_definition.sage")
 
 
 def delta(a, b):
@@ -55,17 +59,25 @@ for M in [1, 2, 3]:
     EbR = E_basis(R, M)
     fbR = f_basis(R, M)
     expansion_A = sum(A[nu(I) - 1, nu(J) - 1] * EbR[(I, J)] for I in idx for J in idx)
+    terms_A = [body_scalar(A[nu(I) - 1, nu(J) - 1], EbR[(I, J)]) for I in idx for J in idx]
+    expansion_A_def = body_finite_sum(terms_A)
     for K in idx:
         for L in idx:
-            line1 = expansion_A[nu(K) - 1, nu(L) - 1]
+            line1 = expansion_A_def[nu(K) - 1, nu(L) - 1]
+            line1b = sum(T[nu(K) - 1, nu(L) - 1] for T in terms_A)
             line2 = sum(A[nu(I) - 1, nu(J) - 1] * EbR[(I, J)][nu(K) - 1, nu(L) - 1] for I in idx for J in idx)
             line3 = sum(A[nu(I) - 1, nu(J) - 1] * delta(I, K) * delta(J, L) for I in idx for J in idx)
             line4 = A[nu(K) - 1, nu(L) - 1]
-            assert line1 == line2 == line3 == line4
+            assert expansion_A[nu(K) - 1, nu(L) - 1] == line1 == line1b == line2 == line3 == line4
     assert expansion_A == A
     expansion_f = sum(f[nu(K) - 1] * fbR[K] for K in idx)
+    terms_f = [body_scalar(f[nu(K) - 1], column_matrix(R, fbR[K])) for K in idx]
+    expansion_f_def = body_finite_sum(terms_f)
     for L in idx:
-        line1 = expansion_f[nu(L) - 1]
+        line1 = expansion_f_def[nu(L) - 1, 0]
+        assert line1 == expansion_f[nu(L) - 1]
+        line1b = sum(T[nu(L) - 1, 0] for T in terms_f)
+        assert line1 == line1b
         line2 = sum(f[nu(K) - 1] * fbR[K][nu(L) - 1] for K in idx)
         line3 = sum(f[nu(K) - 1] * delta(K, L) for K in idx)
         line4 = f[nu(L) - 1]

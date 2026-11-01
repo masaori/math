@@ -1,6 +1,9 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`exp_hermitian_is_positive_definite`（エルミート行列の exp は正定値）を扱った。四つの主張を束ねていたブロックを 1 ブロック 1 主張の 9 ブロック（合同変換・単位行列・正の実数倍・トレース・`exp(-A)exp(A) = I`・exp のエルミート性ほか）に分け、補助の 4 主張と定義 `def_conjugate_bilinear_value`（`x^*Ay` を成分の和で定め、`def_hermitian_positive_definite` の同一視を置き換えた）を足して、13 主張に同名の検算を付けた（共通の準備 `sagemath/_shared/hermitian_forms_by_definition.sage`、exp はボールで囲む）。下流の「(1)〜(4)」の参照を付け替え、合同変換の仮定を左逆行列 `B'B = I` にした（未検算 99 → 98 件、証明を持つブロック 239 → 251 件）。計算の誤りは無かった。Lean の具体版が人手と一対一でないことを状態台帳に記録した。次は `psd_cauchy_schwarz`。
+
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十六個目を行った。`004_transfer_matrix.ts` の名前だけの根拠「行列（数ベクトル）の和とスカラー倍は成分ごと」5 か所（`exp_of_diagonal_matrix`・`end_agrees_with_matrix_vector_product`）を、新しく足した定義 `def_finite_sum_of_matrices`・主張 `finite_sum_of_matrices_entrywise`（`002_linear_space_general.ts`）の段と `def_matrix_scalar_multiple` の段の 2 段に割った。SageMath に `sagemath/check/finite_sum_of_matrices_entrywise/` と 2 つの検算の新しい行を足した（全 PASS）。有限和の添字の付け方（`Σ_{p=0}^{N}`・`𝓘` の上の和）が本文で定まっていないことを状態台帳に残した。次は台帳の「次の一歩」（`008_TV1_hatZ_hatY_part1.ts`）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十五個目を行った。`005_exp_conjugation_proof.ts` の `frobenius_inner_product_axioms` (2) の 4 本の鎖の 1 段目「(0) と行列の和の定義」「(0) とスカラー倍の定義」を、(0) の段と `def_matrix_sum`・`def_matrix_scalar_multiple` へのラベル参照の段の 2 段に割った（係数は `ℂ`）。SageMath `140_frobenius_inner_product_axioms/check_02_linearity_chains.sage`（`QQ[i]` の厳密計算、252 段）を足した。Lean の具体版はこのブロックに無い。次は `004_transfer_matrix.ts`。この VM では `140` の check_01 が `_shared/operators.sage` の読み込みパスを解決できずに落ちる（変更前から。ログは更新していない）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十四個目を行った。`003_exp_linear_map.ts` の名前だけの根拠「行列の差は成分ごと」5 か所のうち、係数が `ℂ` の 1 か所（`complex_exp_of_real_argument` の 1 行 1 列の複素行列の差の鎖）を `def_matrix_difference` へのラベル参照に替え、SageMath の検算に定義の成分の式の確認を足した。残る 4 か所は係数が `K` か `ℝ` で、`def_matrix_difference` が `ℂ` しか覆わないので替えていない（状態台帳の「次の一歩」に記録）。Lean の具体版はこのブロックに無い。次は `005_exp_conjugation_proof.ts`。
