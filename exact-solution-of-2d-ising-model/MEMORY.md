@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十八個目を行った。人手 `two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」の Lean（`exp_smul_pauliX`）を、`σ^x` の対角化から人手どおりの指数級数の偶奇分解へ書き換え、必要十分版 `NecSuf/ExpOfInvolution.lean` の系を `ClaimTwoByTwoTransferIdentityFromNecSuf.lean` に置いた。次は状態台帳の「次の一歩」の先頭（`eigenvector_of_A_theta_tilde` Step 3 の固有空間が 1 次元であることの扱い）。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の別の回が、同じ単位 `end_preserves_matrix_exponential` を並行して扱っていた。先に main へ入った版を残し、こちらの版は取り下げた。こちらのレビューで見つかった記号の衝突（数ベクトル `f` の成分 `f_l` が `def_end_iso` の基底の数ベクトル `f_K` と同じ形）だけを、main の版の `end_preserves_matrix_exponential` で `(f)_l` に直した。次は状態台帳どおり `def_invertible_elements_of_R`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十七個目を行った。`lean/scripts/check-docs-references.sh` に、`lean/README.md` と `lean/docs/` の表の人手証明の列のラベルが本文の `labels`・`id` にあるか、参照用ノートへ退避した記録があってそのノートが表の行か表の前の文で名指されていることの検査を足した。不合格の 93 か所は改名ではなくすべて退避か Lean の名前で、16 の表の前に退避先のノートを名指す一文を置き、Lean の名前に `Ising2D.` を付けて直した。次は状態台帳の「次の一歩」の先頭（`exp_smul_pauliX` を人手どおりの偶奇分解で直せるか）。

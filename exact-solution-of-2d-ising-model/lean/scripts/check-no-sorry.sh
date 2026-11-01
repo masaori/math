@@ -441,8 +441,13 @@ targets=(
   Ising2D.first_transfer_matrix_pauli_form
   Ising2D.sigmaZ_nextSite_of_last
   Ising2D.sum_sigmaZ_sigmaZ_mulVec_basisVec_spin
+  Ising2D.pauliX_sq
+  Ising2D.pauliX_pow_two_mul
+  Ising2D.pauliX_pow_two_mul_add_one
+  Ising2D.exp_smul_pauliX_hasSum
   Ising2D.exp_smul_pauliX
   Ising2D.exp_smul_pauliX_eq_cosh_add_sinh
+  Ising2D.exp_smul_pauliX_eq_cosh_add_sinh_of_necSuf
   Ising2D.exp_neg_Kstar
   Ising2D.exp_Kstar
   Ising2D.sqrt_two_s2_mul_cosh_Kstar

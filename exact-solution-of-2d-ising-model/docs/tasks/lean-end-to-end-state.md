@@ -456,11 +456,14 @@
     退避は、該当する 16 の表の前に退避先のノートを名指す一文を置いて直した。Lean の名前 4 つには `Ising2D.` を付けた。README の記号の対応表の見出しを「人手の記号」にし、「現在形式化済みの命題」の表を途中で切っていた引用ブロックを表の後ろへ移した。
     二回のレビューの指摘（必須 3 件・任意 5 件）を直した。見出しの語で拾えない人手ラベルの列（ch010 の状態確認の表の「主張」、ch013 の「対象」、README の原文の問題の表の「箇所」）は検査の外のまま（中身は実在か退避済み）。
 
+  - ゴールラインの確認の二十八個目（済み、2026-11-01）: 人手 `two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」の Lean を、`σ^x` の対角化（`Matrix.exp_units_conj`・`matrixExp_diagonal`）から、人手どおり指数級数を偶数項・奇数項に分ける証明へ書き換えた
+    （`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` の `pauliX_sq`・`pauliX_pow_two_mul`・`pauliX_pow_two_mul_add_one`・`exp_smul_pauliX_hasSum`・`exp_smul_pauliX_eq_cosh_add_sinh`・`exp_smul_pauliX`）。対角化に使っていた `hadU` などは消した。
+    既存の必要十分版 `NecSuf.exp_series_sum_of_sq_eq_one` の系を `ClaimTwoByTwoTransferIdentityFromNecSuf.lean` に置き、README の 2 本立ての表、`docs/ch010-formalization.md`・`docs/ch018-formalization.md`、`check-no-sorry.sh` の対象を直した。主張の型は変えていない。レビューの指摘のうち必須 1 件・任意 1 件を直した。任意のもう 1 件（`exp_smul_pauliX_hasSum` が `matExp_hasSum` と同じ中身）は、`matExp_hasSum` が `TensorPow M` 専用で `Mat(2,ℂ)` に使えないので残した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。
 - 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。
   `nonzero_kernel_iff_det_zero_two_by_two` と同じ 2×2 の成分計算で「`Bv = 0` なら `v` は `(B_{12}, -B_{11})` などのスカラー倍」と示せる。後段が Step 3 を使わないなら本文から外すか、使うなら本文と Lean を足す。本文を触るので回の先頭で fetch する。
 - 本文に単位行列 `I`・行列の差・行列のスカラー倍と `Iv = v` を定義するブロックが無い（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が名前だけで根拠に挙げている）。数学的道具立てに足すかを判断する。

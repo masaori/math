@@ -4,9 +4,15 @@
 対応する人手証明のラベル: **`trace_of_epsilon_V_plus`** の Step 2 の
 `exp(K_1εG) = cosh(K_1)I + sinh(K_1)εG`
 （具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReduction.lean` の `matExp_smul_of_sq_eq_one`、
-系としての導出は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean`）
+系としての導出は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusReductionFromNecSuf.lean`）と、
+**`two_by_two_transfer_identity`** の中間目標「`exp(tσ^x)` の閉じた形」`exp(tσ^x) = cosh(t)I + sinh(t)σ^x`
+（具体版は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` の `exp_smul_pauliX_eq_cosh_add_sinh`、
+系としての導出は `Ising2D/PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentityFromNecSuf.lean`）
 
 ## 証明手順（具体版と同じ）
+
+具体版 `matExp_smul_of_sq_eq_one`・`exp_smul_pauliX_eq_cosh_add_sinh` の偶数次の項・奇数次の項・足し直しの 3 段が、
+それぞれ下の手順 1・手順 2・手順 3 に当たる。
 
 1. 偶数次の項: `A^{2n} = 1` なので `((2n)!)^{-1}(tA)^{2n} = (t^{2n}/(2n)!)·1`。その和は `cosh(t)·1`。
 2. 奇数次の項: `A^{2n+1} = A` なので `((2n+1)!)^{-1}(tA)^{2n+1} = (t^{2n+1}/(2n+1)!)·A`。その和は `sinh(t)·A`。
@@ -19,8 +25,8 @@
   （`ContinuousAdd 𝔸`）、極限の一意性（`T2Space 𝔸`）。
 - **効いていない**: 行列であること、`𝔸` の可換性、ノルムと完備性（指数級数の部分和が `E` に収束することは
   仮定 `hE` として受け取り、収束の理由は使わない。`hE` は人手の `def_exp` と同じく部分和の極限であり、
-  項の順序によらない和は要求しない）、`t` が実数であること（`t ∈ ℂ` で通る）、`A` が `εG` という具体的な
-  積であること。
+  項の順序によらない和は要求しない）、`t` が実数であること（`t ∈ ℂ` で通る）、`A` が `εG` や `σ^x` という具体的な
+  行列であること。
 - 引き算も使わないので `𝔸` は半環でよい。
 -/
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series

@@ -102,7 +102,9 @@
 `two_by_two_transfer_identity`, `def_config_basis_iso` は `PartitionFunction/TransferMatrixRepresentation/` に、
 `V1_in_Z_Y_epsilon`, `V2_in_Z_Y` は `PartitionFunction/ProjectionAndJordanWigner/` にある。これらで
 必要十分版を置かなかった理由は、各 Lean ファイルの冒頭コメントと `lean/README.md` の
-「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節に書いた。
+「転送行列 `V_1, V_2` の唯一の定義とパウリ行列表示」節に書いた。ただし `two_by_two_transfer_identity` の中間目標
+「`exp(tσ^x)` の閉じた形」だけは、必要十分版 `NecSuf/ExpOfInvolution.lean` の系として
+`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentityFromNecSuf.lean` で導いている。
 
 ---
 

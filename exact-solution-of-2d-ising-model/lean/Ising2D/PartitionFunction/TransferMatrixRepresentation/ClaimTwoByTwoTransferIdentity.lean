@@ -11,13 +11,18 @@
 
 ## 人手証明の中間目標との対応
 
-* 中間目標「`exp(tσ^x)` の閉じた形」（`exp(t σ^x) = cosh t · I + sinh t · σ^x`）→ `exp_smul_pauliX`。
-  原文は指数関数の級数を偶数項・奇数項に分けて `cosh`, `sinh` のテイラー級数と
-  突き合わせているが、Lean では `σ^x` を対角化して
-  `exp(t σ^x) = U exp(diag(t,-t)) U⁻¹` から計算する（`Matrix.exp_units_conj` と
-  `Ising2D.matrixExp_diagonal`）。得られる行列は原文と同じ
-  `!![cosh t, sinh t; sinh t, cosh t]` であり、`cosh`, `sinh` の定義
-  `(e^t ± e^{-t})/2` を経由するので級数の分割は要らない。
+* 中間目標「`exp(tσ^x)` の閉じた形」:
+  * `(σ^x)^2 = I`（`pauli_matrix_products`）→ `pauliX_sq`、
+    `(σ^x)^{2p} = I` → `pauliX_pow_two_mul`、`(σ^x)^{2p+1} = σ^x` → `pauliX_pow_two_mul_add_one`。
+  * `def_exp` の級数 `exp(tσ^x) = ∑_k (k!)^{-1}(tσ^x)^k` → `exp_smul_pauliX_hasSum`。
+  * 級数を偶数項と奇数項に分けて `(σ^x)^{2p} = I`, `(σ^x)^{2p+1} = σ^x` を適用し、
+    `cosh`, `sinh` のテイラー展開を代入する式変形
+    `exp(tσ^x) = (∑_p t^{2p}/(2p)!) I + (∑_p t^{2p+1}/(2p+1)!) σ^x = cosh(t) I + sinh(t) σ^x`
+    → `exp_smul_pauliX_eq_cosh_add_sinh`。偶数項の和が `cosh(t) I`、奇数項の和が `sinh(t) σ^x` であることを
+    `Complex.hasSum_cosh`・`Complex.hasSum_sinh` で示し、`HasSum.even_add_odd` で足し直す。
+    最後に、`def_exp` の部分和の極限が一つに決まることで `exp(tσ^x)` と足し直した和を等しいとする。
+  * `I, σ^x` の成分を書き下した形 `!![cosh t, sinh t; sinh t, cosh t]` → `exp_smul_pauliX`。
+  人手は `t ∈ ℝ` で述べるが、上の手順は `t ∈ ℂ` でそのまま通るので、Lean は `t : ℂ` で述べる。
 * 中間目標「`cosh K_2^*, sinh K_2^*` を `K_2` で書く」→ `exp_Kstar` / `exp_neg_Kstar`。
 * 中間目標「前因子」（`(2s_2)^{1/2} = 2(sinh K_2 cosh K_2)^{1/2}`）→ `sqrt_two_s2_eq`、
   中間目標「結論」→ `sqrt_two_s2_mul_cosh_Kstar` / `sqrt_two_s2_mul_sinh_Kstar`。
@@ -29,14 +34,19 @@
 その式をそのまま置いており、`exp_neg_Kstar : e^{-K_2^*} = √(tanh K_2)` が
 双対関係を使う唯一の場所である。
 
-必要十分版は置いていない（`Real.tanh`, `Real.sinh` の具体的な恒等式そのものであり、
-取り払える構造が無い）。
+`exp(tσ^x)` の偶奇分解が使うのは `(σ^x)^2 = I` と、スカラー倍・和と極限の交換だけなので、
+必要十分版 `NecSuf/ExpOfInvolution.lean` の `NecSuf.exp_series_sum_of_sq_eq_one` を使い、
+`exp_smul_pauliX_eq_cosh_add_sinh` をその系として `ClaimTwoByTwoTransferIdentityFromNecSuf.lean` で導く。
+残りの段（`cosh K_2^*, sinh K_2^*` を `K_2` で書く・前因子・結論）は `Real.tanh`, `Real.sinh` の
+具体的な恒等式そのものであり、取り払える構造が無いので必要十分版を置かない。
 -/
-import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfDiagonalMatrix
+import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionSecondDualCouplingConstant
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+import Mathlib.Analysis.SpecialFunctions.Trigonometric.Series
+import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
 namespace Ising2D
 
@@ -44,66 +54,59 @@ open NormedSpace
 
 /-! ## `exp(t σ^x)` の閉じた形 -/
 
-/-- `σ^x` を対角化する行列 `U = !![1,1;1,-1]`（単元として）。 -/
-noncomputable def hadU : (Matrix (Fin 2) (Fin 2) ℂ)ˣ where
-  val := !![1, 1; 1, -1]
-  inv := !![1/2, 1/2; 1/2, -1/2]
-  val_inv := by
-    ext i j
-    fin_cases i <;> fin_cases j <;>
-      simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply] <;> norm_num
-  inv_val := by
-    ext i j
-    fin_cases i <;> fin_cases j <;>
-      simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply] <;> norm_num
+/-- 人手の `(σ^x)^2 = I`（`pauli_matrix_products`）。 -/
+theorem pauliX_sq : pauliX ^ 2 = 1 := by
+  rw [sq, pauliX_mul_pauliX]
 
-theorem hadU_val : (hadU : Matrix (Fin 2) (Fin 2) ℂ) = !![1, 1; 1, -1] := rfl
+/-- 人手の `(σ^x)^{2p} = ((σ^x)^2)^p = I^p = I`（必要十分版の `NecSuf.pow_two_mul_of_sq_eq_one` に当たる）。 -/
+theorem pauliX_pow_two_mul (p : ℕ) : pauliX ^ (2 * p) = 1 := by
+  rw [pow_mul, pauliX_sq, one_pow]
 
-theorem hadU_inv_val : ((hadU⁻¹ : (Matrix (Fin 2) (Fin 2) ℂ)ˣ) : Matrix (Fin 2) (Fin 2) ℂ)
-    = !![1/2, 1/2; 1/2, -1/2] := rfl
+/-- 人手の `(σ^x)^{2p+1} = (σ^x)^{2p}σ^x = Iσ^x = σ^x`（必要十分版の `NecSuf.pow_two_mul_add_one_of_sq_eq_one` に当たる）。 -/
+theorem pauliX_pow_two_mul_add_one (p : ℕ) : pauliX ^ (2 * p + 1) = pauliX := by
+  rw [pow_succ, pauliX_pow_two_mul p, one_mul]
 
-/-- `diag(t, -t)` の明示形。 -/
-theorem diagonal_two (t : ℂ) :
-    (Matrix.diagonal ![t, -t] : Matrix (Fin 2) (Fin 2) ℂ) = !![t, 0; 0, -t] := by
-  ext i j
-  fin_cases i <;> fin_cases j <;> simp [Matrix.diagonal_apply]
+/-- 人手 `def_exp`: `exp(tσ^x) = ∑_k (k!)^{-1}(tσ^x)^k`（級数の和として）。
+収束は `def_matrix_norm` の行列ノルムで述べられているので、`matExp_hasSum` と同じノルムを入れて引く。 -/
+theorem exp_smul_pauliX_hasSum (t : ℂ) :
+    HasSum (fun k : ℕ => ((k.factorial : ℂ))⁻¹ • (t • pauliX) ^ k) (exp (t • pauliX)) := by
+  letI : NormedRing (Matrix (Fin 2) (Fin 2) ℂ) := Matrix.frobeniusNormedRing
+  letI : NormedAlgebra ℂ (Matrix (Fin 2) (Fin 2) ℂ) := Matrix.frobeniusNormedAlgebra
+  exact exp_series_hasSum_exp' (𝕂 := ℂ) (t • pauliX)
 
-/-- 上と同じ形（指数関数を取ったあとの対角行列）。 -/
-theorem diagonal_two' (t : ℂ) :
-    (Matrix.diagonal (fun I => Complex.exp ((![t, -t] : Fin 2 → ℂ) I))
-      : Matrix (Fin 2) (Fin 2) ℂ)
-      = !![Complex.exp t, 0; 0, Complex.exp (-t)] := by
-  ext i j
-  fin_cases i <;> fin_cases j <;> simp [Matrix.diagonal_apply]
+/-- **人手の中間目標「`exp(tσ^x)` の閉じた形」: `exp(t σ^x) = cosh(t) I + sinh(t) σ^x`。**
 
-/-- `t σ^x = U diag(t, -t) U⁻¹`（`σ^x` の固有値は `±1`）。 -/
-theorem smul_pauliX_eq_conj (t : ℂ) :
-    t • pauliX = (hadU : Matrix (Fin 2) (Fin 2) ℂ) * Matrix.diagonal ![t, -t] *
-      ((hadU⁻¹ : (Matrix (Fin 2) (Fin 2) ℂ)ˣ) : Matrix (Fin 2) (Fin 2) ℂ) := by
-  rw [hadU_val, hadU_inv_val, diagonal_two]
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, Matrix.mul_apply, Fin.sum_univ_two, Matrix.vecMul, dotProduct] <;> ring
-
-/-- **人手の中間目標「`exp(tσ^x)` の閉じた形」: `exp(t σ^x) = cosh(t) I + sinh(t) σ^x`**（成分で書いた形）。 -/
-theorem exp_smul_pauliX (t : ℂ) :
-    exp (t • pauliX) =
-      !![Complex.cosh t, Complex.sinh t; Complex.sinh t, Complex.cosh t] := by
-  rw [smul_pauliX_eq_conj, Matrix.exp_units_conj, matrixExp_diagonal, hadU_val, hadU_inv_val,
-    diagonal_two']
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [Matrix.mul_apply, Fin.sum_univ_two, Matrix.vecMul, dotProduct,
-      Complex.cosh, Complex.sinh] <;> ring
-
-/-- 原文の書き方（`cosh(t) I + sinh(t) σ^x`）そのもの。 -/
+人手の式変形どおり、指数級数を偶数次の項 `t^{2p}/(2p)! · I` と奇数次の項 `t^{2p+1}/(2p+1)! · σ^x` に分け、
+それぞれの和が `cosh t`・`sinh t` であることを代入する。偶数次の項・奇数次の項・足し直しと極限の一意性の 3 段は、
+必要十分版 `NecSuf.exp_series_sum_of_sq_eq_one` の手順 1・手順 2・手順 3 に当たる。 -/
 theorem exp_smul_pauliX_eq_cosh_add_sinh (t : ℂ) :
     exp (t • pauliX) = Complex.cosh t • (1 : Matrix (Fin 2) (Fin 2) ℂ)
       + Complex.sinh t • pauliX := by
-  rw [exp_smul_pauliX]
+  -- 偶数次の項: `((2p)!)^{-1}(tσ^x)^{2p} = (t^{2p}/(2p)!) I`
+  have heven : HasSum (fun p : ℕ => (((2 * p).factorial : ℂ))⁻¹ • (t • pauliX) ^ (2 * p))
+      (Complex.cosh t • (1 : Matrix (Fin 2) (Fin 2) ℂ)) := by
+    refine ((Complex.hasSum_cosh t).smul_const (1 : Matrix (Fin 2) (Fin 2) ℂ)).congr_fun
+      fun p => ?_
+    rw [smul_pow, pauliX_pow_two_mul p, smul_smul, div_eq_inv_mul]
+  -- 奇数次の項: `((2p+1)!)^{-1}(tσ^x)^{2p+1} = (t^{2p+1}/(2p+1)!) σ^x`
+  have hodd : HasSum (fun p : ℕ => (((2 * p + 1).factorial : ℂ))⁻¹ • (t • pauliX) ^ (2 * p + 1))
+      (Complex.sinh t • pauliX) := by
+    refine ((Complex.hasSum_sinh t).smul_const pauliX).congr_fun fun p => ?_
+    rw [smul_pow, pauliX_pow_two_mul_add_one p, smul_smul, div_eq_inv_mul]
+  -- 偶数次と奇数次を足し直す
+  have hall := HasSum.even_add_odd
+    (f := fun k : ℕ => ((k.factorial : ℂ))⁻¹ • (t • pauliX) ^ k) heven hodd
+  -- 部分和の極限は一つに決まる
+  exact tendsto_nhds_unique (exp_smul_pauliX_hasSum t).tendsto_sum_nat hall.tendsto_sum_nat
+
+/-- 人手の「`I, σ^x` の成分を書き下す」段: `exp(t σ^x) = !![cosh t, sinh t; sinh t, cosh t]`。 -/
+theorem exp_smul_pauliX (t : ℂ) :
+    exp (t • pauliX) =
+      !![Complex.cosh t, Complex.sinh t; Complex.sinh t, Complex.cosh t] := by
+  rw [exp_smul_pauliX_eq_cosh_add_sinh]
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [pauliX, Matrix.one_apply] <;> ring
+    simp [pauliX]
 
 /-! ## `cosh K_2^*, sinh K_2^*` を `K_2` で書く -/
 
