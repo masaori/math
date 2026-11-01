@@ -173,7 +173,15 @@ const chapter_tools = defineSection({
                         paragraph([
                           "である。両辺どうしを掛け、同じ素数の冪をまとめると",
                         ]),
-                        displayMath(String.raw`mn=\prod_{p\in S}p^{\,v_p(m)+v_p(n)}`),
+                        displayMath(String.raw`\begin{aligned}
+mn
+&=\left(\prod_{p\in S}p^{\,v_p(m)}\right)\left(\prod_{p\in S}p^{\,v_p(n)}\right)
+&&\bigl(\because\ \text{直前の有限積表示}\bigr)\\
+&=\prod_{p\in S}\left(p^{\,v_p(m)}p^{\,v_p(n)}\right)
+&&\bigl(\because\ \text{同じ有限集合上の積の乗法}\bigr)\\
+&=\prod_{p\in S}p^{\,v_p(m)+v_p(n)}
+&&\bigl(\because\ \text{自然数冪の指数法則}\bigr)
+\end{aligned}`),
                         paragraph([
                           "を得る。右辺は ",
                           math(String.raw`mn`),
@@ -68916,15 +68924,13 @@ const chapter_kac_ward_antisymmetrization = defineSection({
               kind: "section",
               id: "kac_ward_heading_reversal_matrix",
               labels: [],
-              title: { text: "反転置換行列の二乗と行列式" },
+              title: { text: "反転置換行列と行列式" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_reversal_matrix_square",
-                  beforeFocus: [{
-                    role: "prerequisiteDefinition",
-                    element: {
+                  id: "group_of_reversal_matrix_definition",
+                  focus: {
                       id: "kac_ward_definition_reversal_matrix",
                       kind: "definition",
                       title: { text: "向き付き辺の反転置換行列" },
@@ -68945,71 +68951,6 @@ const chapter_kac_ward_antisymmetrization = defineSection({
                           ref("claim_reversal_is_involution"), "）から反転は自身を逆写像に持つ置換である。",
                           "成分は整数の零と一であり、実数体も複素数体も現れない。"]),
                       ],
-                    },
-                  }],
-                  focus: {
-                    id: "kac_ward_claim_reversal_matrix_square",
-                    kind: "claim",
-                    title: { text: "反転置換行列の二乗は単位行列である" },
-                    labels: ["claim_reversal_matrix_square"],
-                    habitat: "Z",
-                    verification: ["sagemath/check/reversal-matrix-square"],
-                    lean: [
-                      "Ising2DLambda.KacWard.reversalMatrix_mul_self",
-                      "Ising2DLambda.NecSuf.KacWard.involutionMatrix_mul_self_necSuf",
-                      "Ising2DLambda.KacWard.reversalMatrix_mul_self_from_necSuf",
-                    ],
-                    statement: [
-                      paragraph([math(String.raw`L\in\mathbb N,\ L\ge1`), " に対し、反転置換行列（",
-                        ref("def_reversal_matrix"), "）は"]),
-                      displayMath(String.raw`J_L^2=I^{\mathbb Z}_{\vec E_L}`),
-                      paragraph(["を満たす。積は ", ref("def_integer_matrix_product"),
-                        "、右辺は ", ref("def_integer_identity_matrix"), " による。"]),
-                    ],
-                    proof: [
-                      paragraph([math(String.raw`\vec e,\vec f\in\vec E_L`), " を固定する。まず ",
-                        math(String.raw`\vec g\in\vec E_L`), " が ", math(String.raw`\vec g\ne\iota(\vec e)`),
-                        " を満たす場合、"]),
-                      displayMath(String.raw`\begin{aligned}
-(J_L)_{\vec e,\vec g}(J_L)_{\vec g,\vec f}
-&=0\cdot(J_L)_{\vec g,\vec f}
-&&\bigl(\because\ \blkref{def_reversal_matrix},\ \vec g\ne\iota(\vec e)\bigr)\\
-&=0
-&&\bigl(\because\ \mathbb Z\text{ の零元との積}\bigr)
-\end{aligned}`),
-                      paragraph(["である。", math(String.raw`\iota(\vec e)\in\vec E_L`),
-                        "（", ref("def_edge_reversal"), "）なので、積の有限和ではこの添字の項だけが残る。"]),
-                      displayMath(String.raw`\begin{aligned}
-(J_L^2)_{\vec e,\vec f}
-&=\sum_{\vec g\in\vec E_L}(J_L)_{\vec e,\vec g}(J_L)_{\vec g,\vec f}
-&&\bigl(\because\ \blkref{def_integer_matrix_product}\bigr)\\
-&=(J_L)_{\vec e,\iota(\vec e)}(J_L)_{\iota(\vec e),\vec f}
-&&\bigl(\because\ \text{上で示した零項を有限和から除く}\bigr)\\
-&=1\cdot(J_L)_{\iota(\vec e),\vec f}
-&&\bigl(\because\ \blkref{def_reversal_matrix}\bigr)\\
-&=(J_L)_{\iota(\vec e),\vec f}
-&&\bigl(\because\ \mathbb Z\text{ の単位元との積}\bigr)\\
-&=\begin{cases}
-  1&\vec f=\iota(\iota(\vec e)),\\
-  0&\vec f\ne\iota(\iota(\vec e))
-\end{cases}
-&&\bigl(\because\ \blkref{def_reversal_matrix}\bigr)\\
-&=\begin{cases}
-  1&\vec f=\vec e,\\
-  0&\vec f\ne\vec e
-\end{cases}
-&&\bigl(\because\ \blkref{claim_reversal_is_involution}\bigr)\\
-&=\begin{cases}
-  1&\vec e=\vec f,\\
-  0&\vec e\ne\vec f
-\end{cases}
-&&\bigl(\because\ \text{等号の対称性}\bigr)\\
-&=(I^{\mathbb Z}_{\vec E_L})_{\vec e,\vec f}
-&&\bigl(\because\ \blkref{def_integer_identity_matrix}\bigr)
-\end{aligned}`),
-                      paragraph(["すべての成分が等しいので、", ref("def_integer_matrix"),
-                        " により行列の等号を得る。有限集合上の整数の和と積だけを使い、実数体も複素数体も現れない。"]),
-                    ],
                   },
                 },
               }, {

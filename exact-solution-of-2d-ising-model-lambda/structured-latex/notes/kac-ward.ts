@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_reversal_matrix_square_archived",
+    targets: ["def_reversal_matrix"],
+    title: { text: "参照用: 反転置換行列の二乗" },
+    body: [
+      paragraph(["旧主張。向き付き辺の反転置換行列（", ref("def_reversal_matrix"), "）は整数行列として二乗すると単位行列になる。"]),
+      displayMath(String.raw`J_L^2=I^{\mathbb Z}_{\vec E_L}.`),
+      paragraph(["旧証明では積の各成分を有限和に展開し、反転辺以外の添字の項が零になることを使う。残る一項は反転写像の対合性（", ref("claim_reversal_is_involution"), "）から単位行列の対応する成分に等しい。"]),
+      paragraph(["後続の本文はこの等式を引用せず、反転行列の行列式と反対称化もこの等式を使わない。有限検算と Lean 二版は保管し、定義は後続が使うため本文に残した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_periodic_plane_lift_parallel_increase_archived",
     targets: ["def_winding_parallel_coordinate"],
     title: { text: "参照用: 周期並進による平行座標の増分" },

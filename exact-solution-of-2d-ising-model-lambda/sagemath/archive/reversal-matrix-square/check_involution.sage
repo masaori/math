@@ -1,6 +1,6 @@
 # 対象ラベル: claim_reversal_matrix_square
 # 式ペア: [f=iota(iota(e))]=[f=e]
-load('sagemath/check/reversal-matrix-square/_prelude.sage')
+load('sagemath/archive/reversal-matrix-square/_prelude.sage')
 
 count = ZZ(0)
 for L, oriented, J, I, square in matrix_cases:
