@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行の五回目として、「（極座標表現）の乗法群」を扱った（未検算 116 → 115 件）。五回のレビューで、1 ブロック 1 主張に従い well-defined 性（積の定義の前へ移した）・モノイド・半径零の類の判定・逆元の存在・右逆元の一意性・群の七ブロックに分け、各ブロックに `sagemath/check/<ラベル>/` を付けた（共通の準備は `sagemath/_shared/polar_representation.sage`）。下流の φ_polar(z^{-1}) の二箇所は右からの積しか示していないので、一意性を片側の形で述べてそちらを引くようにした。計算の誤りは無かった。次は `sqrt_squared_is_original`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の四回目として、`arctan_argument_in_unit_interval`（arctan の引数は arcsin の定義域に入る）の検算 `sagemath/check/arctan_argument_in_unit_interval/` を足した（未検算 117 → 116 件）。`QQ[x]` と `AA` で全て厳密。レビューで人手証明を直した（平方根を取る前に中身の非負を示す順、背理法の鎖、一行一操作）。実数の絶対値が本文で未定義であることを状態台帳に記録した。次は `multiplicative_group_of_polar_representation`。
 2026-11-01: 全証明の SageMath 検算の連続実行の三回目として、`arcsin_is_bijection` の検算 `sagemath/check/arcsin_is_bijection/` を足した（未検算 118 → 117 件）。弧の長さは内接・外接の折れ線で区間に挟んだ。レビューの指摘で `def_arcsin`（第二の式を `y'<0` に、終域を ℝ に）・`arcsin_is_bijection`（四項に書き下し、負の側・全射・連続を本文で証明）・`def_sin` を直した。次は `arctan_argument_in_unit_interval`。
 

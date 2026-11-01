@@ -785,7 +785,7 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
       paragraph([
         "第二に、",
         math(String.raw`\phi_{\mathrm{polar}}`),
-        " は逆元を逆元へ写す。",
+        " による逆元の像を求める。",
         math(String.raw`r_2\neq0`),
         " すなわち ",
         math(String.raw`z_2\neq 0`),
@@ -803,7 +803,7 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{polar}}(1_{\mathbb{C}})
 &&(\because\ z_2^{-1}\ \text{が}\ z_2\ \text{の逆元であること})\\
 &= [(1,0)]_{\sim}
-&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと})
+&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと。}[(1,0)]_{\sim}\ \text{は}\ \blkref{monoid_of_polar_representation}\ \text{の単位元})
 \end{aligned}`,
       ),
       paragraph([
@@ -811,11 +811,13 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{polar}}(z_2^{-1})`),
         " は ",
         math(String.raw`\phi_{\mathrm{polar}}(z_2)=[(r_2,\theta_2)]_{\sim}`),
-        " の逆元であり、",
-        ref("multiplicative_group_of_polar_representation"),
-        " の逆元の形（",
+        " に右から掛けて ",
+        math(String.raw`[(1,0)]_{\sim}`),
+        " になる元であり、",
         math(String.raw`r_2\neq0`),
-        " の場合）により",
+        " と ",
+        ref("right_inverse_in_polar_representation_is_unique"),
+        " により",
       ]),
       displayMath(
         String.raw`\phi_{\mathrm{polar}}(z_2^{-1})=[(1/r_2,-\theta_2)]_{\sim}`,
@@ -1465,7 +1467,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
       paragraph([
         "第二に、",
         math(String.raw`\phi_{\mathrm{polar}}`),
-        " は逆元を逆元へ写す。",
+        " による逆元の像を求める。",
         math(String.raw`r\neq0`),
         " すなわち ",
         math(String.raw`z\neq 0`),
@@ -1483,7 +1485,7 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
 &= \phi_{\mathrm{polar}}(1_{\mathbb{C}})
 &&(\because\ z^{-1}\ \text{が}\ z\ \text{の逆元であること})\\
 &= [(1,0)]_{\sim}
-&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと})
+&&(\because\ \text{モノイド準同型の逆写像は単位元を単位元へ写すこと。}[(1,0)]_{\sim}\ \text{は}\ \blkref{monoid_of_polar_representation}\ \text{の単位元})
 \end{aligned}`,
       ),
       paragraph([
@@ -1491,11 +1493,13 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{polar}}(z^{-1})`),
         " は ",
         math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
-        " の逆元であり、",
-        ref("multiplicative_group_of_polar_representation"),
-        " の逆元の形（",
+        " に右から掛けて ",
+        math(String.raw`[(1,0)]_{\sim}`),
+        " になる元であり、",
         math(String.raw`r\neq0`),
-        " の場合）により",
+        " と ",
+        ref("right_inverse_in_polar_representation_is_unique"),
+        " により",
       ]),
       displayMath(
         String.raw`\phi_{\mathrm{polar}}(z^{-1})=[(1/r,-\theta)]_{\sim}`,

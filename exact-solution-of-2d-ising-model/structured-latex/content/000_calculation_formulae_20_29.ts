@@ -5,6 +5,149 @@ import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema
 // notes/000_calculation_formulae.ts（targets: polar_equivalence_class）へ移設した。
 export default defineBlocks([
   {
+    id: "calculation_formulae_claim_polar_multiplication_well_defined",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 23 },
+    title: {
+      text: "極座標表現の積は代表元の取り方によらない",
+    },
+    labels: ["polar_multiplication_well_defined"],
+    statement: [
+      paragraph([
+        math(String.raw`\sim`),
+        " を ",
+        ref("polar_equivalence_class"),
+        " の同値関係とする。",
+        math(String.raw`(r,\theta),(\tilde r,\tilde\theta),(r',\theta'),(\tilde r',\tilde\theta')\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " が",
+      ]),
+      displayMath(String.raw`(r,\theta)\sim(\tilde r,\tilde\theta) \quad\text{かつ}\quad (r',\theta')\sim(\tilde r',\tilde\theta')`),
+      paragraph(["を満たすならば"]),
+      displayMath(String.raw`(rr',\theta+\theta')\sim(\tilde r\tilde r',\tilde\theta+\tilde\theta')`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        "以下、",
+        ref("polar_equivalence_class"),
+        " の同値関係 ",
+        math(String.raw`\sim`),
+        " と ",
+        ref("angle_equivalence_class"),
+        " の同値関係 ",
+        math(String.raw`\sim_{\mathrm{angle}}`),
+        " を用いる。",
+        math(String.raw`\mathbb{R}`),
+        " は ",
+        ref("polar_equivalence_class"),
+        " の台集合から受け継いだもので、この証明が使うのは ",
+        math(String.raw`\mathbb{R}`),
+        " の四則だけである（極限・完備性は使わない）。",
+        ref("polar_equivalence_class"),
+        " の定義（",
+        math(String.raw`(s,\varphi),(s',\varphi')\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        " に対して）",
+      ]),
+      displayMath(
+        String.raw`(s,\varphi)\sim(s',\varphi')\overset{\mathrm{def}}{\Longleftrightarrow}
+s=s'=0\ \lor\ \left(s=s'\land\varphi\sim_{\mathrm{angle}}\varphi'\right)`,
+      ),
+      paragraph(["に従って、次の 2 つの場合に分ける。"]),
+      paragraph([
+        "場合 (a): ",
+        math(String.raw`r=\tilde r=0`),
+        " または ",
+        math(String.raw`r'=\tilde r'=0`),
+        " のとき。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+rr'
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= \tilde r\tilde r'
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        math(String.raw`(rr',\theta+\theta')`),
+        " と ",
+        math(String.raw`(\tilde r\tilde r',\tilde\theta+\tilde\theta')`),
+        " は第 1 成分がともに ",
+        math(String.raw`0`),
+        " であり、",
+        ref("polar_equivalence_class"),
+        " の第 1 の選言により ",
+        math(String.raw`(rr',\theta+\theta')\sim(\tilde r\tilde r',\tilde\theta+\tilde\theta')`),
+        "。",
+      ]),
+      paragraph([
+        "場合 (b): 場合 (a) でないとき。このとき ",
+        math(String.raw`(r,\theta)\sim(\tilde r,\tilde\theta)`),
+        " の定義における第 1 の選言 ",
+        math(String.raw`r=\tilde r=0`),
+        " は偽であるから第 2 の選言が成り立ち、",
+        math(String.raw`r=\tilde r`),
+        " かつ ",
+        math(String.raw`\theta\sim_{\mathrm{angle}}\tilde\theta`),
+        "。同様に ",
+        math(String.raw`r'=\tilde r'`),
+        " かつ ",
+        math(String.raw`\theta'\sim_{\mathrm{angle}}\tilde\theta'`),
+        "。",
+      ]),
+      paragraph([
+        ref("angle_equivalence_class"),
+        " より ",
+        math(String.raw`n,n'\in\mathbb{Z}`),
+        " が存在して ",
+        math(String.raw`\theta-\tilde\theta=2n\pi`),
+        "、",
+        math(String.raw`\theta'-\tilde\theta'=2n'\pi`),
+        " であるから、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(\theta+\theta')-(\tilde\theta+\tilde\theta')
+&= (\theta-\tilde\theta)+(\theta'-\tilde\theta')
+&&(\because\ \mathbb{R}\ \text{の和と差の整理})\\
+&= 2n\pi+(\theta'-\tilde\theta')
+&&(\because\ \theta-\tilde\theta=2n\pi)\\
+&= 2n\pi+2n'\pi
+&&(\because\ \theta'-\tilde\theta'=2n'\pi)\\
+&= 2(n+n')\pi
+&&(\because\ \mathbb{R}\ \text{の分配則})
+\end{aligned}`),
+      paragraph([
+        "であり ",
+        math(String.raw`n+n'\in\mathbb{Z}`),
+        " であるから ",
+        math(String.raw`\theta+\theta'\sim_{\mathrm{angle}}\tilde\theta+\tilde\theta'`),
+        "（",
+        ref("angle_equivalence_class"),
+        "）。また",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+rr'
+&= \tilde rr'
+&&(\because\ r=\tilde r)\\
+&= \tilde r\tilde r'
+&&(\because\ r'=\tilde r')
+\end{aligned}`),
+      paragraph([
+        "であるから、第 2 の選言により ",
+        math(String.raw`(rr',\theta+\theta')\sim(\tilde r\tilde r',\tilde\theta+\tilde\theta')`),
+        "。いずれの場合も主張の同値が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 「（極座標表現）の乗法群」の証明の冒頭に「準備」として置いていた well-defined 性を、" +
+          "積を使う全ての箇所の前提であり 1 ブロック 1 主張の規律に当たるため、独立した主張として切り出し、極座標表現の演算の定義の前に置いた。" +
+          "別の代表元の記号を (r_1,θ_1) から (r̃,θ̃) に改めた（結合律の段の (r_1,θ_1) と意味が衝突していたため）。計算は変えていない。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_022_definition_operations_on_polar_representation",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/021_definition_極座標表現の演算.typ", ordinal: 22 },
@@ -26,6 +169,11 @@ export default defineBlocks([
       displayMath(
         String.raw`\left([(r,\theta)]_{\sim},[(r',\theta')]_{\sim}\right)\mapsto[(rr',\theta+\theta')]_{\sim}`,
       ),
+      paragraph([
+        "右辺が同値類の代表元の取り方によらないことは ",
+        ref("polar_multiplication_well_defined"),
+        " による。",
+      ]),
       paragraph(["この構造を「極座標表現」と呼ぶ。"]),
     ],
     conversion: {
@@ -33,152 +181,47 @@ export default defineBlocks([
     },
   },
   {
-    id: "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    id: "calculation_formulae_claim_monoid_of_polar_representation",
     kind: "claim",
-    origin: { path: "_old/typst/parts/000_計算公式/022_claim_極座標表現の乗法群.typ", ordinal: 23 },
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 23 },
     title: {
-      text: "（極座標表現）の乗法群",
+      text: "極座標表現は積についてモノイドをなす",
     },
-    labels: ["multiplicative_group_of_polar_representation"],
+    labels: ["monoid_of_polar_representation"],
     statement: [
-      paragraph(["（極座標表現）は二項演算 ", math(String.raw`\cdot`), " についてモノイドをなす。"]),
-      displayMath(
-        String.raw`(\text{極座標表現})^{\times} := (\text{極座標表現})\setminus\{[(0,0)]_{\sim}\}`,
-      ),
-      paragraph(["は二項演算 ", math(String.raw`\cdot`), " について群をなす。"]),
       paragraph([
-        math(String.raw`[(r,\theta)]_{\sim}`),
+        "（極座標表現）",
+        math(String.raw`=(\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
         "（",
-        math(String.raw`r\ne 0`),
-        "）の逆元は",
-      ]),
-      displayMath(String.raw`\left([(r,\theta)]_{\sim}\right)^{-1}=[(1/r,-\theta)]_{\sim}`),
-    ],
-    proof: [
-      paragraph([
-        "以下、",
-        ref("polar_equivalence_class"),
-        " の同値関係 ",
         math(String.raw`\sim`),
-        "、",
-        ref("angle_equivalence_class"),
-        " の同値関係 ",
-        math(String.raw`\sim_{\mathrm{angle}}`),
-        "、および ",
+        " は ",
+        ref("polar_equivalence_class"),
+        " の同値関係）は、",
         ref("operations_on_polar_representation"),
         " の二項演算 ",
         math(String.raw`\cdot`),
-        " を用いる。また ",
-        math(String.raw`(\text{極座標表現}) = (\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
-        " である。証明は独立した中間目標へ分かれるので、以下ではそれぞれに名前を付けて示す。",
-      ]),
-      paragraph([
-        "準備（二項演算が well-defined であること）。",
-        ref("operations_on_polar_representation"),
-        " は同値類の代表元を用いて ",
-        math(String.raw`[(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}:=[(rr',\theta+\theta')]_{\sim}`),
-        " と定めているので、右辺が代表元の取り方によらないことを確かめる必要がある。すなわち ",
-        math(String.raw`(r,\theta),(r_1,\theta_1),(r',\theta'),(r_1',\theta_1')\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
-        " が",
-      ]),
-      displayMath(String.raw`(r,\theta)\sim(r_1,\theta_1) \quad\text{かつ}\quad (r',\theta')\sim(r_1',\theta_1')`),
-      paragraph([
-        "を満たすとき ",
-        math(String.raw`(rr',\theta+\theta')\sim(r_1r_1',\theta_1+\theta_1')`),
-        " を示す。",
-        ref("polar_equivalence_class"),
-        " の定義",
-      ]),
-      displayMath(
-        String.raw`(r,\theta)\sim(r',\theta')\overset{\mathrm{def}}{\Longleftrightarrow}
-r=r'=0\ \lor\ \left(r=r'\land\theta\sim_{\mathrm{angle}}\theta'\right)`,
-      ),
-      paragraph(["に従って、次の 2 つの場合に分ける。"]),
-      paragraph([
-        "場合 (a): ",
-        math(String.raw`r=r_1=0`),
-        " または ",
-        math(String.raw`r'=r_1'=0`),
-        " のとき。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-rr'
-&= 0
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)\\
-&= r_1r_1'
-&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{を因子にもつ積は}\ 0)
-\end{aligned}`),
-      paragraph([
-        "であるから、",
-        math(String.raw`(rr',\theta+\theta')`),
-        " と ",
-        math(String.raw`(r_1r_1',\theta_1+\theta_1')`),
-        " は第 1 成分がともに ",
-        math(String.raw`0`),
-        " であり、",
-        ref("polar_equivalence_class"),
-        " の第 1 の選言により ",
-        math(String.raw`(rr',\theta+\theta')\sim(r_1r_1',\theta_1+\theta_1')`),
-        "。",
-      ]),
-      paragraph([
-        "場合 (b): 場合 (a) でないとき。このとき ",
-        math(String.raw`(r,\theta)\sim(r_1,\theta_1)`),
-        " の定義における第 1 の選言 ",
-        math(String.raw`r=r_1=0`),
-        " は偽であるから第 2 の選言が成り立ち、",
-        math(String.raw`r=r_1`),
-        " かつ ",
-        math(String.raw`\theta\sim_{\mathrm{angle}}\theta_1`),
-        "。同様に ",
-        math(String.raw`r'=r_1'`),
-        " かつ ",
-        math(String.raw`\theta'\sim_{\mathrm{angle}}\theta_1'`),
-        "。",
-      ]),
-      paragraph([
-        ref("angle_equivalence_class"),
-        " より ",
-        math(String.raw`n,n'\in\mathbb{Z}`),
-        " が存在して ",
-        math(String.raw`\theta-\theta_1=2n\pi`),
-        "、",
-        math(String.raw`\theta'-\theta_1'=2n'\pi`),
-        " であるから、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-(\theta+\theta')-(\theta_1+\theta_1')
-&= (\theta-\theta_1)+(\theta'-\theta_1')
-&&(\because\ \mathbb{R}\ \text{の和と差の整理})\\
-&= 2n\pi+(\theta'-\theta_1')
-&&(\because\ \theta-\theta_1=2n\pi)\\
-&= 2n\pi+2n'\pi
-&&(\because\ \theta'-\theta_1'=2n'\pi)\\
-&= 2(n+n')\pi
-&&(\because\ \mathbb{R}\ \text{の分配則})
-\end{aligned}`),
-      paragraph([
-        "であり ",
-        math(String.raw`n+n'\in\mathbb{Z}`),
-        " であるから ",
-        math(String.raw`\theta+\theta'\sim_{\mathrm{angle}}\theta_1+\theta_1'`),
-        "（",
-        ref("angle_equivalence_class"),
-        "）。また",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-rr'
-&= r_1r'
-&&(\because\ r=r_1)\\
-&= r_1r_1'
-&&(\because\ r'=r_1')
-\end{aligned}`),
-      paragraph([
-        "であるから、第 2 の選言により ",
-        math(String.raw`(rr',\theta+\theta')\sim(r_1r_1',\theta_1+\theta_1')`),
-        "。以上より ",
+        " についてモノイドをなす。すなわち ",
         math(String.raw`\cdot`),
-        " は well-defined である。",
+        " は結合律を満たし、",
+      ]),
+      displayMath(String.raw`e:=[(1,0)]_{\sim}`),
+      paragraph(["は ", math(String.raw`\cdot`), " の単位元である。"]),
+    ],
+    proof: [
+      paragraph([
+        "二項演算 ",
+        math(String.raw`\cdot`),
+        " は ",
+        ref("operations_on_polar_representation"),
+        " で定め、",
+        ref("polar_multiplication_well_defined"),
+        " により代表元の取り方によらない。",
+        math(String.raw`\mathbb{R}`),
+        " は ",
+        ref("polar_equivalence_class"),
+        " の台集合から受け継いだもので、この証明が使うのは ",
+        math(String.raw`\mathbb{R}`),
+        " の積と和の結合律・単位元と、非負の数の積が非負であることだけである。",
       ]),
       paragraph([
         "結合律。",
@@ -188,22 +231,20 @@ rr'
       displayMath(String.raw`\begin{aligned}
 \left([(r_1,\theta_1)]_{\sim}\cdot[(r_2,\theta_2)]_{\sim}\right)\cdot[(r_3,\theta_3)]_{\sim}
 &= [(r_1r_2,\theta_1+\theta_2)]_{\sim}\cdot[(r_3,\theta_3)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [((r_1r_2)r_3,\ (\theta_1+\theta_2)+\theta_3)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r_1(r_2r_3),\ (\theta_1+\theta_2)+\theta_3)]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の積の結合律})\\
 &= [(r_1(r_2r_3),\ \theta_1+(\theta_2+\theta_3))]_{\sim}
 &&(\because\ \mathbb{R}\ \text{の和の結合律})\\
 &= [(r_1,\theta_1)]_{\sim}\cdot[(r_2r_3,\theta_2+\theta_3)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r_1,\theta_1)]_{\sim}\cdot\left([(r_2,\theta_2)]_{\sim}\cdot[(r_3,\theta_3)]_{\sim}\right)
-&&(\because\ \text{極座標表現の積の定義})
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})
 \end{aligned}`),
       paragraph([
-        "が成り立つ（積の定義は ",
-        ref("operations_on_polar_representation"),
-        "）。",
+        "が成り立つ。",
         math(String.raw`r_1,r_2,r_3\in\mathbb{R}_{\ge 0}`),
         " の積は ",
         math(String.raw`\mathbb{R}_{\ge 0}`),
@@ -213,15 +254,19 @@ rr'
       ]),
       paragraph([
         "単位元。",
-        math(String.raw`e:=[(1,0)]_{\sim}\in(\text{極座標表現})`),
-        " とおくと、",
+        math(String.raw`e=[(1,0)]_{\sim}\in(\text{極座標表現})`),
+        "（",
+        math(String.raw`1\in\mathbb{R}_{\ge 0}`),
+        "）であり、",
         math(String.raw`[(r,\theta)]_{\sim}\in(\text{極座標表現})`),
         " に対して",
       ]),
       displayMath(String.raw`\begin{aligned}
 [(r,\theta)]_{\sim}\cdot e
+&= [(r,\theta)]_{\sim}\cdot[(1,0)]_{\sim}
+&&(\because\ e\ \text{の定め方})\\
 &= [(r\cdot 1,\ \theta+0)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義と}\ e\ \text{の定め方})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r,\ \theta+0)]_{\sim}
 &&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
 &= [(r,\theta)]_{\sim}
@@ -230,33 +275,57 @@ rr'
       paragraph(["であり、また"]),
       displayMath(String.raw`\begin{aligned}
 e\cdot[(r,\theta)]_{\sim}
+&= [(1,0)]_{\sim}\cdot[(r,\theta)]_{\sim}
+&&(\because\ e\ \text{の定め方})\\
 &= [(1\cdot r,\ 0+\theta)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義と}\ e\ \text{の定め方})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &= [(r,\ 0+\theta)]_{\sim}
 &&(\because\ 1\ \text{は}\ \mathbb{R}\ \text{の積の単位元})\\
 &= [(r,\theta)]_{\sim}
 &&(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元})
 \end{aligned}`),
       paragraph([
-        "である。したがって ",
-        math(String.raw`e`),
-        " は ",
-        math(String.raw`\cdot`),
-        " の単位元である。",
-      ]),
-      paragraph([
-        "モノイドであること。結合律と単位元の 2 つより、",
+        "である。結合律と単位元の 2 つより、",
         math(String.raw`(\text{極座標表現})`),
         " は ",
         math(String.raw`\cdot`),
         " について単位元 ",
-        math(String.raw`e=[(1,0)]_{\sim}`),
+        math(String.raw`e`),
         " をもつ結合的な二項演算をもつ、すなわちモノイドをなす。",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 「（極座標表現）の乗法群」の証明の「結合律」「単位元」「モノイドであること」の段を、" +
+          "1 ブロック 1 主張の規律に従って独立した主張として切り出した。計算は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_polar_zero_class_criterion",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 23 },
+    title: {
+      text: "極座標表現の元が半径零の類に等しいことの判定",
+    },
+    labels: ["polar_zero_class_criterion"],
+    statement: [
       paragraph([
-        "零元との一致の判定。",
-        math(String.raw`[(r,\theta)]_{\sim}=[(0,0)]_{\sim}\iff r=0`),
-        " を、両向きに分けて示す。",
+        math(String.raw`\sim`),
+        " を ",
+        ref("polar_equivalence_class"),
+        " の同値関係とする。",
+      ]),
+      paragraph([math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`), " に対して"]),
+      displayMath(String.raw`[(r,\theta)]_{\sim}=[(0,0)]_{\sim}\iff r=0`),
+    ],
+    proof: [
+      paragraph([
+        ref("polar_equivalence_class"),
+        " の同値関係 ",
+        math(String.raw`\sim`),
+        " を用いる。両向きに分けて示す。",
       ]),
       paragraph([
         "（",
@@ -269,7 +338,9 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`(0,0)`),
         " は第 1 成分がともに ",
         math(String.raw`0`),
-        " であるから第 1 の選言により ",
+        " であるから、",
+        ref("polar_equivalence_class"),
+        " の第 1 の選言により ",
         math(String.raw`(0,\theta)\sim(0,0)`),
         "、すなわち ",
         math(String.raw`[(r,\theta)]_{\sim}=[(0,0)]_{\sim}`),
@@ -282,7 +353,9 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`[(r,\theta)]_{\sim}=[(0,0)]_{\sim}`),
         " すなわち ",
         math(String.raw`(r,\theta)\sim(0,0)`),
-        " のとき、第 1 の選言が成り立つならば ",
+        " のとき、",
+        ref("polar_equivalence_class"),
+        " の第 1 の選言が成り立つならば ",
         math(String.raw`r=0`),
         "、第 2 の選言が成り立つならば ",
         math(String.raw`r=0`),
@@ -292,10 +365,252 @@ e\cdot[(r,\theta)]_{\sim}
         math(String.raw`r=0`),
         "。",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 「（極座標表現）の乗法群」の証明の「零元との一致の判定」の段を、群の主張と逆元の主張の両方が引くため、" +
+          "1 ブロック 1 主張の規律に従って独立した主張として切り出した。「零元」は定義の無い語なので使わない。計算は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_inverse_in_polar_representation",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 23 },
+    title: {
+      text: "極座標表現の半径が正の元は両側の逆元をもつ",
+    },
+    labels: ["inverse_in_polar_representation"],
+    statement: [
       paragraph([
-        "積で閉じ、単位元を含むこと。",
+        math(String.raw`\sim`),
+        " を ",
+        ref("polar_equivalence_class"),
+        " の同値関係、",
+        math(String.raw`\cdot`),
+        " を ",
+        ref("operations_on_polar_representation"),
+        " の二項演算とし、",
+        math(String.raw`(\text{極座標表現})=(\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
+        " とする。",
+      ]),
+      paragraph([
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        "、",
+        math(String.raw`r\ne 0`),
+        " とし、",
+        math(String.raw`e=[(1,0)]_{\sim}`),
+        " を ",
+        ref("monoid_of_polar_representation"),
+        " の単位元とする。",
+        math(String.raw`c:=[(1/r,-\theta)]_{\sim}\in(\text{極座標表現})`),
+        " は",
+      ]),
+      displayMath(String.raw`[(r,\theta)]_{\sim}\cdot c=c\cdot[(r,\theta)]_{\sim}=e`),
+      paragraph(["を満たす。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("operations_on_polar_representation"),
+        " の二項演算 ",
+        math(String.raw`\cdot`),
+        " と、",
+        ref("monoid_of_polar_representation"),
+        " の単位元 ",
+        math(String.raw`e`),
+        " を用いる。",
+        math(String.raw`\mathbb{R}`),
+        " は ",
+        ref("polar_equivalence_class"),
+        " の台集合から受け継いだもので、この証明が使うのは ",
+        math(String.raw`\mathbb{R}`),
+        " の四則と順序だけである（極限・完備性は使わない）。",
+      ]),
+      paragraph([
+        math(String.raw`r\in\mathbb{R}_{\ge 0}`),
+        " かつ ",
+        math(String.raw`r\ne 0`),
+        " より ",
+        math(String.raw`r>0`),
+        " であるから ",
+        math(String.raw`1/r\in\mathbb{R}_{>0}\subset\mathbb{R}_{\ge 0}`),
+        " が定まり、",
+        math(String.raw`c=[(1/r,-\theta)]_{\sim}\in(\text{極座標表現})`),
+        "。このとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[(r,\theta)]_{\sim}\cdot[(1/r,-\theta)]_{\sim}
+&= [(r\cdot(1/r),\ \theta+(-\theta))]_{\sim}
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
+&= [(1,\ \theta+(-\theta))]_{\sim}
+&&(\because\ r>0\ \text{より}\ r\cdot(1/r)=1)\\
+&= [(1,0)]_{\sim}
+&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
+&= e
+&&(\because\ e\ \text{の定め方。}\blkref{monoid_of_polar_representation})
+\end{aligned}`),
+      paragraph(["であり、また"]),
+      displayMath(String.raw`\begin{aligned}
+[(1/r,-\theta)]_{\sim}\cdot[(r,\theta)]_{\sim}
+&= [((1/r)\cdot r,\ (-\theta)+\theta)]_{\sim}
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
+&= [(1,\ (-\theta)+\theta)]_{\sim}
+&&(\because\ r>0\ \text{より}\ (1/r)\cdot r=1)\\
+&= [(1,0)]_{\sim}
+&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
+&= e
+&&(\because\ e\ \text{の定め方。}\blkref{monoid_of_polar_representation})
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 「（極座標表現）の乗法群」の主張のうち逆元の形と、証明の「逆元の存在」の段を、" +
+          "1 ブロック 1 主張の規律に従って独立した主張として切り出した。一意性は right_inverse_in_polar_representation_is_unique に分けた。計算は変えていない。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 23 },
+    title: {
+      text: "極座標表現の半径が正の元に右から掛けて単位元になる元はただ一つ",
+    },
+    labels: ["right_inverse_in_polar_representation_is_unique"],
+    statement: [
+      paragraph([
+        math(String.raw`\sim`),
+        " を ",
+        ref("polar_equivalence_class"),
+        " の同値関係、",
+        math(String.raw`\cdot`),
+        " を ",
+        ref("operations_on_polar_representation"),
+        " の二項演算とし、",
+        math(String.raw`(\text{極座標表現})=(\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
+        " とする。",
+      ]),
+      paragraph([
+        math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
+        "、",
+        math(String.raw`r\ne 0`),
+        " とし、",
+        math(String.raw`e=[(1,0)]_{\sim}`),
+        " を ",
+        ref("monoid_of_polar_representation"),
+        " の単位元とする。",
+        math(String.raw`b\in(\text{極座標表現})`),
+        " が",
+      ]),
+      displayMath(String.raw`[(r,\theta)]_{\sim}\cdot b=e`),
+      paragraph(["を満たすならば"]),
+      displayMath(String.raw`b=[(1/r,-\theta)]_{\sim}`),
+      paragraph(["である。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("operations_on_polar_representation"),
+        " の二項演算 ",
+        math(String.raw`\cdot`),
+        " と、",
+        ref("monoid_of_polar_representation"),
+        " の単位元 ",
+        math(String.raw`e`),
+        " と結合律を用いる。",
+        math(String.raw`a:=[(r,\theta)]_{\sim}`),
+        "、",
+        math(String.raw`c:=[(1/r,-\theta)]_{\sim}`),
+        " とおくと、",
+        ref("inverse_in_polar_representation"),
+        " より ",
+        math(String.raw`c\in(\text{極座標表現})`),
+        " かつ ",
+        math(String.raw`c\cdot a=e`),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`b\in(\text{極座標表現})`),
+        " が ",
+        math(String.raw`a\cdot b=e`),
+        " を満たすとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b
+&= e\cdot b
+&&(\because\ e\ \text{は}\ \cdot\ \text{の単位元。}\blkref{monoid_of_polar_representation})\\
+&= (c\cdot a)\cdot b
+&&(\because\ c\cdot a=e\text{。}\blkref{inverse_in_polar_representation})\\
+&= c\cdot(a\cdot b)
+&&(\because\ \cdot\ \text{の結合律。}\blkref{monoid_of_polar_representation})\\
+&= c\cdot e
+&&(\because\ a\cdot b=e)\\
+&= c
+&&(\because\ e\ \text{は}\ \cdot\ \text{の単位元。}\blkref{monoid_of_polar_representation})
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 「（極座標表現）の乗法群」の証明の「逆元の一意性」の段を、1 ブロック 1 主張の規律に従って独立した主張として切り出した。" +
+          "下流（φ_polar(z^{-1}) の計算）は φ_polar(z^{-1}) が (極座標表現)^× に入ることも左からの積が e になることも示さずに逆元の形を引くので、" +
+          "(極座標表現) 全体の元について、右から掛けた積 a·b = e だけを条件として述べる。" +
+          "旧版は一般の集合 S について両側の逆元の一意性を述べていたが、人手証明を具体に固定する規律に従い、極座標表現の元と · で述べた。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_023_claim_multiplicative_group_of_polar_representation",
+    kind: "claim",
+    origin: { path: "_old/typst/parts/000_計算公式/022_claim_極座標表現の乗法群.typ", ordinal: 23 },
+    title: {
+      text: "（極座標表現）の乗法群",
+    },
+    labels: ["multiplicative_group_of_polar_representation"],
+    statement: [
+      paragraph([
+        math(String.raw`\sim`),
+        " を ",
+        ref("polar_equivalence_class"),
+        " の同値関係、",
+        math(String.raw`\cdot`),
+        " を ",
+        ref("operations_on_polar_representation"),
+        " の二項演算とし、",
+        math(String.raw`(\text{極座標表現})=(\mathbb{R}_{\ge 0}\times\mathbb{R})/\sim`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`(\text{極座標表現})^{\times} := (\text{極座標表現})\setminus\{[(0,0)]_{\sim}\}`,
+      ),
+      paragraph(["は二項演算 ", math(String.raw`\cdot`), " について群をなす。"]),
+    ],
+    proof: [
+      paragraph([
+        ref("operations_on_polar_representation"),
+        " の二項演算 ",
+        math(String.raw`\cdot`),
+        " と、",
+        ref("monoid_of_polar_representation"),
+        " の単位元 ",
+        math(String.raw`e=[(1,0)]_{\sim}`),
+        " を用いる。",
+        math(String.raw`\mathbb{R}`),
+        " は ",
+        ref("polar_equivalence_class"),
+        " の台集合から受け継いだもので、この証明が使うのは ",
+        math(String.raw`\mathbb{R}`),
+        " の四則と順序だけである（極限・完備性は使わない）。",
+      ]),
+      paragraph([
+        "積で閉じること。",
         math(String.raw`[(r,\theta)]_{\sim},[(r',\theta')]_{\sim}\in(\text{極座標表現})^{\times}`),
-        " とすると、零元との一致の判定より ",
+        " とすると、",
+        ref("polar_zero_class_criterion"),
+        " より ",
         math(String.raw`r\ne 0`),
         " かつ ",
         math(String.raw`r'\ne 0`),
@@ -316,102 +631,65 @@ e\cdot[(r,\theta)]_{\sim}
       displayMath(String.raw`\begin{aligned}
 [(r,\theta)]_{\sim}\cdot[(r',\theta')]_{\sim}
 &= [(rr',\theta+\theta')]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
+&&(\because\ \text{極座標表現の積の定義。}\blkref{operations_on_polar_representation})\\
 &\ne [(0,0)]_{\sim}
-&&(\because\ rr'\ne 0\ \text{と零元との一致の判定})
+&&(\because\ rr'\ne 0\ \text{と}\ \blkref{polar_zero_class_criterion})
 \end{aligned}`),
       paragraph([
         "すなわち積は ",
         math(String.raw`(\text{極座標表現})^{\times}`),
-        " に属する。また ",
+        " に属する。",
+      ]),
+      paragraph([
+        "単位元を含むこと。",
         math(String.raw`1\ne 0`),
-        " より零元との一致の判定から ",
+        " と ",
+        ref("polar_zero_class_criterion"),
+        " より ",
         math(String.raw`e=[(1,0)]_{\sim}\ne[(0,0)]_{\sim}`),
-        " であり ",
+        " であり、",
         math(String.raw`e\in(\text{極座標表現})^{\times}`),
         "。",
       ]),
       paragraph([
-        "逆元の存在。",
+        "逆元をもつこと。",
         math(String.raw`[(r,\theta)]_{\sim}\in(\text{極座標表現})^{\times}`),
-        " とすると、直前の議論より ",
+        " とすると、",
+        ref("polar_zero_class_criterion"),
+        " より ",
+        math(String.raw`r\ne 0`),
+        " であり、",
+        math(String.raw`r\in\mathbb{R}_{\ge 0}`),
+        " と合わせて ",
         math(String.raw`r>0`),
-        " であるから ",
-        math(String.raw`1/r\in\mathbb{R}_{>0}\subset\mathbb{R}_{\ge 0}`),
-        " が定まり ",
-        math(String.raw`[(1/r,-\theta)]_{\sim}\in(\text{極座標表現})^{\times}`),
-        "（",
-        math(String.raw`1/r\ne 0`),
-        " と零元との一致の判定）。このとき",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-[(r,\theta)]_{\sim}\cdot[(1/r,-\theta)]_{\sim}
-&= [(r\cdot(1/r),\ \theta+(-\theta))]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
-&= [(1,\ \theta+(-\theta))]_{\sim}
-&&(\because\ r>0\ \text{より}\ r\cdot(1/r)=1)\\
-&= [(1,0)]_{\sim}
-&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
-&= e
-&&(\because\ e\ \text{の定め方})
-\end{aligned}`),
-      paragraph(["であり、また"]),
-      displayMath(String.raw`\begin{aligned}
-[(1/r,-\theta)]_{\sim}\cdot[(r,\theta)]_{\sim}
-&= [((1/r)\cdot r,\ (-\theta)+\theta)]_{\sim}
-&&(\because\ \text{極座標表現の積の定義})\\
-&= [(1,\ (-\theta)+\theta)]_{\sim}
-&&(\because\ r>0\ \text{より}\ (1/r)\cdot r=1)\\
-&= [(1,0)]_{\sim}
-&&(\because\ -\theta\ \text{は}\ \theta\ \text{の}\ \mathbb{R}\ \text{における加法の逆元})\\
-&= e
-&&(\because\ e\ \text{の定め方})
-\end{aligned}`),
-      paragraph(["である。"]),
-      paragraph([
-        "逆元の一意性。単位元 ",
-        math(String.raw`e`),
-        " をもつ結合的な二項演算をもつ集合 ",
-        math(String.raw`S`),
-        " において、",
-        math(String.raw`a\in S`),
-        " に対し ",
-        math(String.raw`b,b'\in S`),
-        " がともに ",
-        math(String.raw`ab=ba=e`),
-        "、",
-        math(String.raw`ab'=b'a=e`),
-        " を満たすとすると、",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-b
-&= b\,e
-&&(\because\ e\ \text{は単位元})\\
-&= b\,(a b')
-&&(\because\ ab'=e)\\
-&= (b a)\,b'
-&&(\because\ \text{結合律})\\
-&= e\,b'
-&&(\because\ ba=e)\\
-&= b'
-&&(\because\ e\ \text{は単位元})
-\end{aligned}`),
-      paragraph([
-        "であるから逆元は一意である。よって逆元の存在で作った ",
+        " である。",
+        ref("inverse_in_polar_representation"),
+        " より ",
         math(String.raw`[(1/r,-\theta)]_{\sim}`),
-        " が ",
-        math(String.raw`[(r,\theta)]_{\sim}`),
-        " の唯一の逆元であり、",
+        " は ",
+        math(String.raw`[(r,\theta)]_{\sim}\cdot[(1/r,-\theta)]_{\sim}=[(1/r,-\theta)]_{\sim}\cdot[(r,\theta)]_{\sim}=e`),
+        " を満たす。",
+        math(String.raw`r>0`),
+        " より ",
+        math(String.raw`1/r\ne 0`),
+        " なので、",
+        ref("polar_zero_class_criterion"),
+        " より ",
+        math(String.raw`[(1/r,-\theta)]_{\sim}\in(\text{極座標表現})^{\times}`),
+        "。",
       ]),
-      displayMath(String.raw`\left([(r,\theta)]_{\sim}\right)^{-1}=[(1/r,-\theta)]_{\sim}`),
       paragraph([
-        "結論。積で閉じることより ",
+        "結論。",
         math(String.raw`(\text{極座標表現})^{\times}`),
         " は ",
         math(String.raw`\cdot`),
-        " について閉じており、結合律を満たし、単位元 ",
+        " について閉じており、",
+        ref("monoid_of_polar_representation"),
+        " より結合律を満たし、単位元 ",
         math(String.raw`e`),
-        " を含み、逆元の存在より各元が逆元をもつ。したがって ",
+        " を含み、各元が ",
+        math(String.raw`(\text{極座標表現})^{\times}`),
+        " の中に逆元をもつ。したがって ",
         math(String.raw`(\text{極座標表現})^{\times}`),
         " は ",
         math(String.raw`\cdot`),
@@ -435,6 +713,13 @@ b
           "あわせて Step の番号を内容の分かる名前へ改め、" +
           "証明の中の相互参照（「Step 4 より」等）も名前で指すようにした" +
           "（リポジトリの規約「文書・定理を番号や記号で管理しない」）。",
+        "2026-11-01: SageMath の検算のレビューで、1 ブロック 1 主張の規律に従い、" +
+          "主張の「（極座標表現）はモノイドをなす」と逆元の形、証明の well-defined 性・結合律・単位元・[(0,0)] との一致の判定・逆元の存在と一意性の段を、" +
+          "polar_multiplication_well_defined・monoid_of_polar_representation・polar_zero_class_criterion・" +
+          "inverse_in_polar_representation（存在）・right_inverse_in_polar_representation_is_unique（一意性）へ切り出した。" +
+          "下流の逆元の形の参照は一意性の主張へ付け替えた。計算は変えていない。" +
+          "付け替えの後、この主張を引く本文は無いが、元の論文の主張そのものであり、切り出した主張がそろって (極座標表現)^× の群の構造を与えることを" +
+          "述べる結論の位置にあるので残す（どこからも使われない主張を退避するかは、検算の作業とは別に章立ての棚卸しで判断する）。",
       ],
     },
   },
