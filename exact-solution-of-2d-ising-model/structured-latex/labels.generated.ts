@@ -80,6 +80,7 @@ export const ALL_LABELS = [
   "commutator_via_anticommutators",
   "complex_exp_of_real_argument",
   "complex_numbers_form_a_field",
+  "complex_times_zero_is_zero",
   "complex_zero_times_is_zero",
   "condition_of_commutativity_of_sqrt_and_product",
   "config_numbering_equals_kronecker_numbering",

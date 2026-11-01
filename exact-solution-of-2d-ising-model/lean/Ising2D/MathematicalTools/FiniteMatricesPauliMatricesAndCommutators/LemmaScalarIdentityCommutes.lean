@@ -1,65 +1,48 @@
 /-
-# スカラー倍の恒等行列は全行列と可換
+# スカラー倍の単位行列は全行列と可換（**具体版**）
 
-対応する人手証明:
-`parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ`
-(`<scalar_identity_commutes>`)
+対応する人手証明: `structured-latex/content/002_linear_space_general.ts` の
+`linear_space_general_002_claim_scalar_identity_commutes`（`<scalar_identity_commutes>`）。
 
-原文: 体 `K`、`n ∈ ℤ_{≥1}`、`c ∈ K`、`A ∈ Mat(n, K)` について `[c · I, A] = 0`。
+人手の主張: `n ∈ ℤ_{≥1}`、`c ∈ ℂ`、`A ∈ Mat(n,ℂ)` について `[c · I_{Mat(n,ℂ)}, A] = O`。
 
-## 2 本立て（`exact-solution-of-2d-ising-model/README.md` 4 節）
+## 人手証明との対応
 
-* **具体版**（このファイル）: 原文と 1 対 1 に対応する形、すなわち体 `K` 上の
-  `n × n` 行列 `Mat(n, K) = Matrix (Fin n) (Fin n) K` について述べる
-  （`scalar_identity_commutes_fin`）。
-* **必要十分版**: `Ising2D/NecSuf/ScalarCentral.lean` の
-  `Ising2D.NecSuf.smul_one_commute` / `Ising2D.NecSuf.smul_one_sub_comm`
-  （任意の `S`-代数）。**具体版はすべてこの必要十分版の特殊化として導出する**（下記）。
+`scalar_identity_commutes` の `calc` の各行が、人手の鎖の各行に当たる。
 
-必要十分版が示しているのは、この主張に効いているのが**スカラー作用と積の両立則だけ**であり、
-行列であること・係数が体であること・次数 `n ≥ 1` は一切効いていない、ということである。
+| 人手の行の根拠 | Lean |
+| --- | --- |
+| 交換子の定義（`commutator_via_anticommutators`） | `matComm_def` |
+| `scalar_multiple_factors_out_of_left_factor` | `smul_mul_matrix` |
+| `scalar_multiple_factors_out_of_right_factor` | `mul_smul_matrix` |
+| `identity_matrix_is_left_unit_of_mat_mult` | `identity_matrix_mul` |
+| `identity_matrix_is_right_unit_of_mat_mult` | `mul_identity_matrix` |
+| `matrix_difference_zero_iff_equal` の `⟸` | `matrix_sub_eq_zero_iff` |
+
+仮定 `1 ≤ n` は証明では使わない（`n = 0` でも成分が無いだけで成り立つ）。人手の主張との対応のために引数として残す。
+
+**必要十分版**: `Ising2D/NecSuf/ScalarCentral.lean` の `Ising2D.NecSuf.smul_one_sub_comm`。
+具体版をその系として導くのは `LemmaScalarIdentityCommutesFromNecSuf.lean`。
 -/
-import Mathlib.Data.Matrix.Basic
-import Ising2D.NecSuf.ScalarCentral
-import Ising2D.Representation
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 
 namespace Ising2D
 
-section General
-
-variable {n : Type*} [Fintype n] [DecidableEq n]
-variable {K : Type*} [CommRing K]
-
-/-- **`<scalar_identity_commutes>` の形式化**: `[c · I, A] = (c • I) A - A (c • I) = 0`。
-
-必要十分版 `Ising2D.NecSuf.smul_one_sub_comm` を `R := Matrix n n K` へ特殊化したもの。 -/
-theorem scalar_identity_commutes (c : K) (A : Matrix n n K) :
-    (c • (1 : Matrix n n K)) * A - A * (c • (1 : Matrix n n K)) = 0 :=
-  NecSuf.smul_one_sub_comm c A
-
-/-- 同じ内容を mathlib の `Commute` で述べたもの（必要十分版 `NecSuf.smul_one_commute` の特殊化）。 -/
-theorem scalar_identity_commute (c : K) (A : Matrix n n K) :
-    Commute (c • (1 : Matrix n n K)) A :=
-  NecSuf.smul_one_commute c A
-
-end General
-
-/-! ## 原文と 1 対 1 に対応する形
-
-原文は「体 `K`、`n ∈ ℤ_{≥1}`、`A ∈ Mat(n, K)`」と述べているので、その通りの形でも立てる。
-`Mat(n, K)` は `Matrix (Fin n) (Fin n) K` である。
-
-仮定 `1 ≤ n` は**証明では使わない**。必要十分版から分かるとおり `n = 0`（自明な零環）でも
-主張は成り立つので、原文の `n ≥ 1` はこの主張にとって本質的な仮定ではない。
-原文との対応を明示するために引数としては残してある。 -/
-theorem scalar_identity_commutes_fin {K : Type*} [Field K] {n : ℕ} (_hn : 1 ≤ n)
-    (c : K) (A : Matrix (Fin n) (Fin n) K) :
-    (c • (1 : Matrix (Fin n) (Fin n) K)) * A - A * (c • (1 : Matrix (Fin n) (Fin n) K)) = 0 :=
-  scalar_identity_commutes c A
-
-/-- `TensorPow M`（= `Mat(2, ℂ)^{⊗M}` の推奨表現）での系。 -/
-theorem scalar_identity_commutes_tensorPow {M : ℕ} (c : ℂ) (A : TensorPow M) :
-    (c • (1 : TensorPow M)) * A - A * (c • (1 : TensorPow M)) = 0 :=
-  scalar_identity_commutes c A
+/-- **`<scalar_identity_commutes>`**: `[c · I_{Mat(n,ℂ)}, A] = O`。 -/
+theorem scalar_identity_commutes {n : ℕ} (_hn : 1 ≤ n) (c : ℂ) (A : Matrix (Fin n) (Fin n) ℂ) :
+    matComm (c • (1 : Matrix (Fin n) (Fin n) ℂ)) A = 0 :=
+  calc matComm (c • (1 : Matrix (Fin n) (Fin n) ℂ)) A
+      = (c • (1 : Matrix (Fin n) (Fin n) ℂ)) * A - A * (c • (1 : Matrix (Fin n) (Fin n) ℂ)) :=
+        matComm_def _ _                                                    -- 交換子の定義
+    _ = c • ((1 : Matrix (Fin n) (Fin n) ℂ) * A) - A * (c • (1 : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [smul_mul_matrix]                                               -- `scalar_multiple_factors_out_of_left_factor`
+    _ = c • ((1 : Matrix (Fin n) (Fin n) ℂ) * A) - c • (A * (1 : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [mul_smul_matrix]                                               -- `scalar_multiple_factors_out_of_right_factor`
+    _ = c • A - c • (A * (1 : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [identity_matrix_mul]                                           -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = c • A - c • A := by
+        rw [mul_identity_matrix]                                           -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = 0 := (matrix_sub_eq_zero_iff _ _).mpr rfl                          -- `matrix_difference_zero_iff_equal` の `⟸`
 
 end Ising2D

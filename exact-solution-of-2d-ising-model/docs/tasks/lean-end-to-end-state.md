@@ -487,13 +487,21 @@
     主張の型は変えていない。レビューの指摘（必須 3 件: 状態台帳・MEMORY.md・必要十分版のコメントの段数と経緯。任意 3 件: 符号と可換則の 1 行への束ね、下の符号の `g_1 + (-r) = g_1 - r`、文書の経緯の含み）を直した。
     `check-no-sorry.sh` が、前の回で足した `'` を含む 2 つの名前（`NecSuf.smul_mulVec_eq'`・`NecSuf.sub_mulVec_eq'`）を引用符なしで配列に置いていたため、bash の引用が崩れて終了コード 1 で落ちていた（OK の行は出る）。2 つを `"…"` で囲んで直し、1794 件すべてが `sorryAx` に依存しないことを確かめた。
 
+  - ゴールラインの確認の三十二個目（済み、2026-11-01）: 「名前だけの根拠をラベル参照に替える」を本文のファイルごとに割り、先頭の `002_linear_space_general.ts` の `scalar_identity_commutes` を直した。
+    証明の「スカラー倍は行列の積の外へ出せる」「単位行列の性質 IA=A, AI=A」「同じ元の差は零行列」を、`scalar_multiple_factors_out_of_left_factor`・`..._right_factor`・`identity_matrix_is_left_unit_of_mat_mult`・`..._right_unit_...`・`matrix_difference_zero_iff_equal` への参照の 6 段の鎖にし（二つの主張を同時に使っていた二段を四段に割った）、主張の `0` を零行列 `O`、`I` を `I_{Mat(n,ℂ)}` にした。
+    Lean の具体版 `scalar_identity_commutes` を、体 `K` 上の必要十分版の特殊化から、`ℂ`・`Fin n` の `matComm` について人手の 6 段と 1 対 1 の `calc` に書き直した（旧 `scalar_identity_commutes_fin`・`scalar_identity_commute` は消し、必要十分版からの導出と `TensorPow M` の系は `LemmaScalarIdentityCommutesFromNecSuf.lean`）。
+    行列同士の積の 4 主張の具体版 `ClaimIdentityAndScalarMultipleInMatrixProduct.lean`、必要十分版 `NecSuf/MatrixProductIdentityAndScalar.lean`（右の因子のスカラー倍だけ可換則が効き、外せないことを `mul_comm_of_mul_smul_matrix` で確かめた）と導出を置いた。
+    レビューの必須の指摘（必要十分版で右の単位元に可換則が効かないのに、人手は交換律の段を踏んでいた）を受け、人手に `complex_times_zero_is_zero`（`z·0_C = 0_C`）を足して `identity_matrix_is_right_unit_of_mat_mult` の 2 段を 1 段にした。SageMath は `139_scalar_identity_commutes/check_02_steps.sage`・`complex_times_zero_is_zero/` を足し、右の単位元の鎖の検算を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 本文のほかの証明（`002_linear_space_general.ts`・`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
+- 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目で済んだ）。次は `003_exp_linear_map.ts` の「行列の差は成分ごと」5 か所。
+  `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
   行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。

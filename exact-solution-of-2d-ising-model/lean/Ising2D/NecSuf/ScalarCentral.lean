@@ -15,9 +15,9 @@
 
 ## 必要十分版が何を明らかにするか
 
-* `<scalar_identity_commutes>`（`[c · I, A] = 0`）に効いているのは
-  **スカラー作用と積の両立則だけ**である（`Algebra.smul_mul_assoc` と
-  `Algebra.mul_smul_comm`）。行列であること・係数が体であること・次数 `n` は一切効かない。
+* `<scalar_identity_commutes>`（`[c · I, A] = O`）に効いているのは
+  **スカラー作用と積の両立則**（`Algebra.smul_mul_assoc` と `Algebra.mul_smul_comm`）と、
+  `1` が積の左右の単位元であること（`one_mul`・`mul_one`）、同じ元の差が `0` であること（`sub_self`）だけである。行列であること・係数が体であること・次数 `n` は一切効かない。
   さらに、可換性そのものは**引き算を持たない半環でも成り立つ**（引き算を使うのは
   「差が `0`」という**述べ方**のためだけ）。
 * `<centralizer_is_scalar>`（全元と可換なら定数倍の単位元）に効いているのは
@@ -49,11 +49,18 @@ theorem smul_one_commute {R : Type*} [Semiring R] [Algebra S R] (c : S) (a : R) 
 
 /-- **`<scalar_identity_commutes>` の必要十分版（環・差の形）**。
 
-原文の `[c · I, A] = 0` と同じ「差が `0`」の形。引き算を使うのはこの述べ方のためだけで、
-中身は `smul_one_commute` である。 -/
+人手の `[c · I, A] = O` と同じ「差が `0`」の形。具体版 `Ising2D.scalar_identity_commutes` の鎖と同じ段
+（左の因子のスカラー倍 → 右の因子のスカラー倍 → 左の単位元 → 右の単位元 → 同じ元の差）を辿る。
+具体版の 1 段目（交換子の定義 `matComm_def`）は、主張を `x y - y x` の形で述べることに吸収した。
+引き算を使うのはこの述べ方のためだけである。 -/
 theorem smul_one_sub_comm {R : Type*} [Ring R] [Algebra S R] (c : S) (a : R) :
     (c • (1 : R)) * a - a * (c • (1 : R)) = 0 :=
-  sub_eq_zero_of_eq (smul_one_commute c a).eq
+  calc (c • (1 : R)) * a - a * (c • (1 : R))
+      = c • (1 * a) - a * (c • (1 : R)) := by rw [Algebra.smul_mul_assoc]  -- 左の因子のスカラー倍を外へ
+    _ = c • (1 * a) - c • (a * 1) := by rw [Algebra.mul_smul_comm]         -- 右の因子のスカラー倍を外へ
+    _ = c • a - c • (a * 1) := by rw [one_mul]                             -- `1` は左の単位元
+    _ = c • a - c • a := by rw [mul_one]                                   -- `1` は右の単位元
+    _ = 0 := sub_self _                                                    -- 同じ元の差は `0`
 
 end ScalarCommutes
 

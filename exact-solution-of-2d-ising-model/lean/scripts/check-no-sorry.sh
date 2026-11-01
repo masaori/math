@@ -93,7 +93,30 @@ targets=(
   Ising2D.kroneckerTensorPowBasis_apply
   # --- 数学的道具立て「有限行列・Pauli行列・交換子」（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/。必要十分版は NecSuf/ScalarCentral.lean）---
   Ising2D.scalar_identity_commutes
-  Ising2D.scalar_identity_commutes_fin
+  Ising2D.scalar_identity_commutes_of_necSuf
+  Ising2D.scalar_identity_commutes_tensorPow
+  Ising2D.matrix_mul_apply_sum
+  Ising2D.identity_matrix_mul_apply
+  Ising2D.identity_matrix_mul
+  Ising2D.mul_identity_matrix_apply
+  Ising2D.mul_identity_matrix
+  Ising2D.smul_mul_matrix_apply
+  Ising2D.smul_mul_matrix
+  Ising2D.mul_smul_matrix_apply
+  Ising2D.mul_smul_matrix
+  Ising2D.identity_matrix_mul_of_necSuf
+  Ising2D.mul_identity_matrix_of_necSuf
+  Ising2D.smul_mul_matrix_of_necSuf
+  Ising2D.mul_smul_matrix_of_necSuf
+  Ising2D.NecSuf.one_mul_matrix_apply
+  Ising2D.NecSuf.mul_one_matrix_apply
+  Ising2D.NecSuf.smul_mul_matrix_apply'
+  Ising2D.NecSuf.mul_smul_matrix_apply'
+  Ising2D.NecSuf.mul_comm_of_mul_smul_matrix
+  Ising2D.NecSuf.one_mul_matrix
+  Ising2D.NecSuf.mul_one_matrix
+  Ising2D.NecSuf.smul_mul_matrix'
+  Ising2D.NecSuf.mul_smul_matrix'
   Ising2D.NecSuf.smul_one_commute
   Ising2D.NecSuf.smul_one_sub_comm
   Ising2D.NecSuf.centralizer_is_scalar_semiring

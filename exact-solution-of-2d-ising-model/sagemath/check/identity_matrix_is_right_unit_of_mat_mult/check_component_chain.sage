@@ -1,5 +1,5 @@
 # 対象ラベル: identity_matrix_is_right_unit_of_mat_mult
-# 証明の (i,k) 成分の八行の鎖の九つの項を、各行に書かれた式どおりに組み、隣り合う項が等しいことを確かめる。
+# 証明の (i,k) 成分の七行の鎖の八つの項を、各行に書かれた式どおりに組み、隣り合う項が等しいことを確かめる。
 # j = k の項を分けた和は、分けた項と残りの添字の和を別々に組む。帰属: QQ 上の多項式環（A の成分は不定元）。
 load("_prelude.sage")
 
@@ -20,7 +20,6 @@ for m in DIMS:
                     A[i, k] * d(k, k) + sum(A[i, j] * d(j, k) for j in others),
                     A[i, k] * P(1) + sum(A[i, j] * P(0) for j in others),
                     A[i, k] + sum(A[i, j] * P(0) for j in others),
-                    A[i, k] + sum(P(0) * A[i, j] for j in others),
                     A[i, k] + sum(P(0) for j in others),
                     A[i, k],
                 ]

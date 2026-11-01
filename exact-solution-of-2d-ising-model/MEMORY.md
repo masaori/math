@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十二個目を行った。`scalar_identity_commutes` の証明を、スカラー倍の左右・単位行列の左右・差が零の主張へのラベル参照の 6 段にし、Lean の具体版を `ℂ`・`Fin n` で人手と 1 対 1 の鎖に書き直した。行列同士の積の 4 主張の具体版・必要十分版を置き、人手に `complex_times_zero_is_zero` を足して右の単位元の証明から要らない交換律の段を外した。次は台帳の「次の一歩」（`003_exp_linear_map.ts` の「行列の差は成分ごと」をラベル参照へ）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十一個目を行った。人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分を `b` のまま括り出す 6 行の鎖にし（`b = -ā` を使わない）、Lean の具体版・必要十分版の `calc` と SageMath の段（check_02、72 段 PASS）を揃えた。次は台帳の「次の一歩」（本文の他の証明の「単位行列の性質」などをラベル参照に替える）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十個目を行った。本文に行列の差・零行列の定義と、`A − B = O ⟺ A = B`・`Av − Bv = (A − B)v` の主張を数学的道具立てへ足し、`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖と `det(A(θ) − λI)` の先頭の行を、それらと SageMath 検算の連続実行が先に足した単位行列・スカラー倍のブロックへのラベル参照にした。Lean の具体版・必要十分版・導出と SageMath の検算を付け、`eigenvalue_AMat_iff` と `skew2_eigenvalue_iff` の鎖から mathlib の `one_mulVec` などを外した。次は台帳の「次の一歩」（Step 2 の第 2 成分の往復の簡潔化）。

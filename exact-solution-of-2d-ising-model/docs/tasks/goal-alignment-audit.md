@@ -196,7 +196,7 @@ README 6 節に従えばノートへ移す対象である。
 
 | ブロック id | ラベル | 抽象度 |
 | --- | --- | --- |
-| `linear_space_general_002_claim_scalar_identity_commutes` | `scalar_identity_commutes` | 「体 `K`」「`Mat(n,K)`」— 体を一般のまま置いている |
+| `linear_space_general_002_claim_scalar_identity_commutes` | `scalar_identity_commutes` | 解消済み（2026-11-01 時点で人手は `c ∈ ℂ`・`Mat(n,ℂ)`、Lean の具体版も `ℂ`・`Fin n`） |
 | `linear_space_general_002b_definition_matrix_norm` | `def_matrix_norm` | `K := R` または `C` |
 | `linear_space_general_002c_claim_matrix_norm_triangle_inequality` | `matrix_norm_triangle_inequality` | 同上 |
 | `linear_space_general_003_claim_matrix_norm_submultiplicativity` | `matrix_norm_submultiplicativity` | 同上 |

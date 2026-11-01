@@ -1428,6 +1428,59 @@ b
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。0 を掛けると 0 になることは体の公理に含まれず、本文のどのブロックも述べていなかった。" +
           "単位行列との積（identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult）の証明が使うので、定義から計算する形で足した。",
+        "2026-11-01: 右から 0 を掛ける形は complex_times_zero_is_zero へ移した。この主張を引くのは identity_matrix_is_left_unit_of_mat_mult である。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_complex_times_zero_is_zero",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
+    title: { text: "複素数に 0 を右から掛けると 0 になる" },
+    labels: ["complex_times_zero_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " とする。積は ",
+        ref("definition_of_cc"),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`z\,0_{\mathbb{C}} = 0_{\mathbb{C}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (a, b)`),
+        "（",
+        math(String.raw`a, b \in \mathbb{R}`),
+        "）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+z\,0_{\mathbb{C}}
+&= (a, b)\,(0, 0)
+&&\bigl(\because\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0) = (0,0)\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (a\cdot 0 - b\cdot 0,\ a\cdot 0 + b\cdot 0)
+&&\bigl(\because\ \text{複素数の積の定義 }\blkref{definition_of_cc}\bigr)\\
+&= (0 - 0,\ 0 + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 4 箇所へ適用}\bigr)\\
+&= (0,\ 0 + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - 0 = 0\bigr)\\
+&= (0,\ 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。identity_matrix_is_right_unit_of_mat_mult の証明が、右から 0 を掛けた項 A_{ij}0_C を" +
+          "積の交換律で 0_C A_{ij} にしてから complex_zero_times_is_zero を使っていた。Lean の必要十分版で、この主張に乗法の可換則が効いていないことが分かったので、" +
+          "右から掛ける形を定義から計算する主張として足し、その証明が直接引けるようにした。",
       ],
     },
   },

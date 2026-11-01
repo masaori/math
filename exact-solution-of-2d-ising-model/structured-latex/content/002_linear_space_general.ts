@@ -306,10 +306,8 @@ export default defineBlocks([
 &&\bigl(\because\ \delta\ \text{の値 }\blkref{def_kronecker_delta}\bigr)\\
 &= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} A_{ij}\,0_{\mathbb{C}}
 &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
-&= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} 0_{\mathbb{C}}\,A_{ij}
-&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
 &= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} 0_{\mathbb{C}}
-&&\bigl(\because\ 0_{\mathbb{C}} z = 0_{\mathbb{C}}\ \blkref{complex_zero_times_is_zero}\ \text{を各項へ適用}\bigr)\\
+&&\bigl(\because\ z\,0_{\mathbb{C}} = 0_{\mathbb{C}}\ \blkref{complex_times_zero_is_zero}\ \text{を各項へ適用}\bigr)\\
 &= A_{ik}
 &&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元で、これを項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`),
@@ -320,6 +318,8 @@ export default defineBlocks([
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。単位行列を右から掛けても行列が変わらないことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
           "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+        "2026-11-01: 右から 0 を掛けた項を、積の交換律で左から掛ける形にしてから complex_zero_times_is_zero を使う 2 段を、" +
+          "complex_times_zero_is_zero を引く 1 段にした（この主張に乗法の可換則は効いていない）。",
       ],
     },
   },
@@ -1595,21 +1595,38 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
         math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
         " について、",
       ]),
-      displayMath(String.raw`[c \cdot I,\, A] = 0`),
-      paragraph(["行列積は ", ref("mat_mult"), "、交換子は ", ref("commutator_via_anticommutators"), " の定義を用い、成分の複素数の演算は ", ref("complex_numbers_form_a_field"), " に従う。"]),
+      displayMath(String.raw`[c \cdot I_{\mathrm{Mat}(n,\mathbb{C})},\, A] = O`),
+      paragraph([
+        "行列積は ", ref("mat_mult"),
+        "、交換子は ", ref("commutator_via_anticommutators"),
+        "、単位行列 ", math(String.raw`I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"),
+        "、スカラー倍は ", ref("def_matrix_scalar_multiple"),
+        "、差は ", ref("def_matrix_difference"),
+        "、零行列 ", math(String.raw`O \in \mathrm{Mat}(n,\mathbb{C})`), " は ", ref("def_zero_matrix"),
+        " の定義を用いる。",
+      ]),
     ],
     proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " と書く。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 [c \cdot I,\, A]
 &= (c \cdot I)A - A(c \cdot I)
-&&(\because \text{交換子の定義}) \\
+&&\bigl(\because\ \text{交換子の定義 }\blkref{commutator_via_anticommutators}\bigr) \\
+&= c(IA) - A(c \cdot I)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr) \\
 &= c(IA) - c(AI)
-&&(\because \text{スカラー倍は行列の積の外へ出せる}) \\
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr) \\
+&= cA - c(AI)
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr) \\
 &= cA - cA
-&&(\because \text{単位行列の性質}\ IA=A,\ AI=A) \\
-&= 0
-&&(\because \text{同じ元の差は零行列})
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr) \\
+&= O
+&&\bigl(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ cA = cA\ \text{へ適用}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -1623,6 +1640,9 @@ I\neq K \text{ ならば } i_k\neq k_k \text{ となる } k \text{ があって�
           "段は増えており、減った段は無い。主張と証明の中身は変えていない。",
         "2026-09-01 の式変形統一で、四段の根拠を行中の \\quad (\\because …) から" +
           "他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・根拠は変えていない。",
+        "2026-11-01: 根拠を名前だけで書いていた段（「スカラー倍は行列の積の外へ出せる」「単位行列の性質 IA=A, AI=A」「同じ元の差は零行列」）を、" +
+          "左右の因子それぞれの主張と単位元の左右それぞれの主張への参照に替え、二つの主張を同時に使っていた二段を四段に割った。" +
+          "右辺の 0 を def_zero_matrix の零行列 O に、I を def_identity_matrix の I_{Mat(n,C)} にした。",
       ],
     },
   },
