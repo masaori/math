@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十一個目を行った。人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分を `b` のまま括り出す 6 行の鎖にし（`b = -ā` を使わない）、Lean の具体版・必要十分版の `calc` と SageMath の段（check_02、72 段 PASS）を揃えた。次は台帳の「次の一歩」（本文の他の証明の「単位行列の性質」などをラベル参照に替える）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十個目を行った。本文に行列の差・零行列の定義と、`A − B = O ⟺ A = B`・`Av − Bv = (A − B)v` の主張を数学的道具立てへ足し、`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖と `det(A(θ) − λI)` の先頭の行を、それらと SageMath 検算の連続実行が先に足した単位行列・スカラー倍のブロックへのラベル参照にした。Lean の具体版・必要十分版・導出と SageMath の検算を付け、`eigenvalue_AMat_iff` と `skew2_eigenvalue_iff` の鎖から mathlib の `one_mulVec` などを外した。次は台帳の「次の一歩」（Step 2 の第 2 成分の往復の簡潔化）。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`trace_basic_properties`（トレースの基本性質）の検算 `sagemath/check/trace_basic_properties/` を足した（未検算 102 → 101 件。並行して入った行列の差の単位を含めた数え）。人手証明の散文を根拠付きの鎖に直し、行列の和の定義 `def_matrix_sum` を足し、(3) の右辺を `Σ_{k=1}^{n} 1_C` に、(4) の仮定を `P'P = I` に改めた。計算の誤りは無かった。次は `trace_of_idempotent`。

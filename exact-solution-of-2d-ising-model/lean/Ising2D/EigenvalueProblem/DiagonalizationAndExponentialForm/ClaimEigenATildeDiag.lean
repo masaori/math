@@ -36,8 +36,8 @@
 * `eigenvector_of_A_theta_tilde` の statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」:
   `isEigenvector_smul_eigen_pos`・`isEigenvector_smul_eigen_neg`。
 * `eigenvector_of_A_theta_tilde` Step 2: 成分ごとの鎖 `AMat_mulVec_eigen_pos`・`AMat_mulVec_eigen_neg`
-  （第 1 成分は `b = -ā` と `a ā = r^2`、第 2 成分は `-b = ā` による）［`skew2_mulVec_pos`・`skew2_mulVec_neg`。
-  第 1 成分は合成 `ab = -s^2` の 1 段、第 2 成分は仮定なし］、`v_± ≠ 0` の
+  （第 1 成分は `b = -ā` と `a ā = r^2` による。第 2 成分は人手どおり `b` のまま括り出し、`b = -ā` を使わない）
+  ［`skew2_mulVec_pos`・`skew2_mulVec_neg`。第 1 成分は合成 `ab = -s^2` の 1 段、第 2 成分は仮定なし］、`v_± ≠ 0` の
   `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`［置かない］、`c ∈ ℂ^×` 倍の鎖
   `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`［`mulVec_smul_of_mulVec_eq`］。
 * `diagonalization_check_P_D` Step 1: `√M ≠ 0` は `def_check_fermi` と同じ `√M`（`sqrtM`）についての
@@ -209,16 +209,16 @@ theorem AMat_mulVec_eigen_pos :
       _ = -(g₁ * r) - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]          -- `a ā = r^2`
       _ = (g₁ + r) * (-r) := by ring                                          -- 分配則
       _ = ((g₁ + r) • ![-r, b]) 0 := by simp                                   -- `(v_+)_1 = -r`
-  · -- 第 2 成分
+  · -- 第 2 成分（`b = -ā` を使わない）
     calc (AMat K θ *ᵥ ![-r, b]) 1
         = (-b) * (-r) + g₁ * b := by
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
-      _ = (starRingEnd ℂ) a * (-r) + g₁ * (-(starRingEnd ℂ) a) := by
-          rw [hb, neg_neg]                                       -- `-b = ā` を 2 箇所へ同時適用
-      _ = (-r - g₁) * (starRingEnd ℂ) a := by ring                -- `ā` を括り出す
-      _ = (g₁ + r) * (-(starRingEnd ℂ) a) := by ring              -- `-r - g_1 = -(g_1 + r)`
-      _ = ((g₁ + r) • ![-r, b]) 1 := by simp [hb]                  -- `(v_+)_2 = b = -ā`
+      _ = b * r + g₁ * b := by rw [neg_mul_neg]                   -- ℂ の四則 `(-b)(-r) = b r`
+      _ = r * b + g₁ * b := by rw [mul_comm b r]                  -- ℂ の乗法の可換則
+      _ = (r + g₁) * b := by rw [add_mul]                          -- 分配則で `b` を括り出す
+      _ = (g₁ + r) * b := by rw [add_comm r g₁]                    -- ℂ の加法の交換則
+      _ = ((g₁ + r) • ![-r, b]) 1 := by simp                       -- `λ_+ = g_1 + r`、`(v_+)_2 = b`
 
 /-- **人手証明 Step 2**: `v_{-,μ} = (+r, b)` は固有値 `λ_{-,μ} = g_1 - r` の固有ベクトル。 -/
 theorem AMat_mulVec_eigen_neg :
@@ -242,16 +242,16 @@ theorem AMat_mulVec_eigen_neg :
       _ = g₁ * r - r ^ 2 := by rw [mul_neg, haa, ← sub_eq_add_neg]             -- `a ā = r^2`
       _ = (g₁ - r) * r := by ring                                             -- 分配則
       _ = ((g₁ - r) • ![r, b]) 0 := by simp                                    -- `(v_-)_1 = +r`
-  · -- 第 2 成分
+  · -- 第 2 成分（`b = -ā` を使わない）
     calc (AMat K θ *ᵥ ![r, b]) 1
         = (-b) * r + g₁ * b := by
           -- `def_gamma1_gamma2_of_theta` と行列とベクトルの積の定義
           rw [AMat_eq]; simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two, ← hg₁, ← ha, ← hb₀]
-      _ = (starRingEnd ℂ) a * r + g₁ * (-(starRingEnd ℂ) a) := by
-          rw [hb, neg_neg]                                       -- `-b = ā` を 2 箇所へ同時適用
-      _ = (r - g₁) * (starRingEnd ℂ) a := by ring                 -- `ā` を括り出す
-      _ = (g₁ - r) * (-(starRingEnd ℂ) a) := by ring              -- `r - g_1 = -(g_1 - r)`
-      _ = ((g₁ - r) • ![r, b]) 1 := by simp [hb]                   -- `(v_-)_2 = b = -ā`
+      _ = b * (-r) + g₁ * b := by rw [neg_mul_comm]               -- ℂ の四則 `(-b) r = b (-r)`
+      _ = (-r) * b + g₁ * b := by rw [mul_comm b (-r)]            -- ℂ の乗法の可換則
+      _ = (-r + g₁) * b := by rw [add_mul]                         -- 分配則で `b` を括り出す
+      _ = (g₁ - r) * b := by rw [add_comm, ← sub_eq_add_neg]       -- ℂ の加法の交換則（`g_1 + (-r) = g_1 - r`）
+      _ = ((g₁ - r) • ![r, b]) 1 := by simp                        -- `λ_- = g_1 - r`、`(v_-)_2 = b`
 
 /-- **人手証明 Step 2**: `b ≠ 0` より `v_{+,μ} = (-r, b) ≠ 0`。 -/
 theorem eigenvector_pos_ne_zero (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :

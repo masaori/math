@@ -57,10 +57,9 @@
 * 第 1 成分の鎖で具体版は `b = -ā`（`relation_of_gamma_2_theta_tilde` (1)）と `a ā = r^2`（`abs_basic_properties`）の 2 段を経るが、
   効いているのはその合成 `a b = -r^2` だけである（`skew2_mulVec_pos` の第 1 成分は `a b = -s^2` の 1 段）。
   共役も絶対値も効いていない。
-* 第 2 成分の鎖で具体版は `-b = ā` を 2 箇所へ代入するが、**ここでは仮定を何も使わずに環の計算だけで閉じる**
-  （`(-b)(∓s) + g b = (g ± s) b`）。人手証明の第 2 成分は `-b = ā` を代入して `ā` を括り出し、
-  最後の行で `(v_±)_2 = b = -ā` によって `b` へ戻す往復をしている。`b` のまま括り出せばこの代入は要らず、
-  `b = -ā` は固有ベクトルであることに効いていない。
+* 第 2 成分の鎖は**仮定を何も使わずに環の計算だけで閉じる**（`(-b)(∓s) + g b = (g ± s) b`）。
+  `b = -ā` は固有ベクトルであることの第 2 成分に効いていない。人手証明・具体版の第 2 成分も
+  同じ 6 行（`b` のまま括り出す）である。
 
 対角化 `A = P D P⁻¹` については、可逆性（`det P` が単元であること）が別途要る。
 人手証明 `diagonalization_check_P_D` は Step 3 で `det P̌_μ ≠ 0` を確かめており、
@@ -209,7 +208,10 @@ theorem skew2_mulVec_pos (g a b s : R) (hab : a * b = -s ^ 2) :
     calc (!![g, a; -b, g] *ᵥ ![-s, b]) 1
         = (-b) * (-s) + g * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
-      _ = (g + s) * b := by ring                                      -- 分配則（仮定は使わない）
+      _ = b * s + g * b := by rw [neg_mul_neg]                        -- 環の四則 `(-b)(-s) = b s`（仮定は使わない）
+      _ = s * b + g * b := by rw [mul_comm b s]                       -- 乗法の可換則
+      _ = (s + g) * b := by rw [add_mul]                              -- 分配則で `b` を括り出す
+      _ = (g + s) * b := by rw [add_comm s g]                         -- 加法の交換則
       _ = ((g + s) • ![-s, b]) 1 := by simp                           -- 第 2 成分は `b`
 
 /-- **Step 2**（具体版 `AMat_mulVec_eigen_neg`）: `a b = -s^2` なら `(s, b)` は固有値 `g - s` の固有ベクトル。
@@ -229,7 +231,10 @@ theorem skew2_mulVec_neg (g a b s : R) (hab : a * b = -s ^ 2) :
     calc (!![g, a; -b, g] *ᵥ ![s, b]) 1
         = (-b) * s + g * b := by
           simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two]       -- 行列とベクトルの積の定義
-      _ = (g - s) * b := by ring                                      -- 分配則（仮定は使わない）
+      _ = b * (-s) + g * b := by rw [neg_mul_comm]                    -- 環の四則 `(-b) s = b (-s)`（仮定は使わない）
+      _ = (-s) * b + g * b := by rw [mul_comm b (-s)]                 -- 乗法の可換則
+      _ = (-s + g) * b := by rw [add_mul]                             -- 分配則で `b` を括り出す
+      _ = (g - s) * b := by rw [add_comm, ← sub_eq_add_neg]           -- 加法の交換則（`g + (-s) = g - s`）
       _ = ((g - s) • ![s, b]) 1 := by simp                            -- 第 2 成分は `b`
 
 /-- **Step 2 の `c` 倍**（具体版 `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`）:

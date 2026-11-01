@@ -480,11 +480,17 @@
     三回のレビューの指摘（必須 7 件: 差と零行列の束ね、一ステップ一定理の 2 か所、必要十分版の型クラスの理由、段の数え方、行列式の行の検算の欠如、rebase 後に単位行列の成分とデルタの値を Lean の具体版・必要十分版で 1 段にしていたこと 2 件。任意 8 件）を直した。
     棚卸しの再生成 `npm run inventory:organization` は、SageMath 検算の連続実行が足した `transfer_matrix_claim_end_agrees_with_matrix_vector_product` が数学的道具立ての前提になる分類の検査で落ちる（この回の変更より前から）。
 
+  - ゴールラインの確認の三十一個目（済み、2026-11-01）: 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分を、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復から、
+    `b` のまま括り出す 6 行の鎖（`(-b)(∓r) + g_1 b` → `b(±r) + g_1 b`（四則）→ `(±r)b + g_1 b`（乗法の可換則）→ `(±r + g_1)b`（分配則）→ `(g_1 ± r)b`（加法の交換則）→ `λ_± (v_±)_2`）にした。
+    第 2 成分は `b = -ā` を使わない（必要十分版 `skew2_mulVec_pos/neg` の知見）。Lean の具体版 `AMat_mulVec_eigen_pos/neg` と必要十分版 `skew2_mulVec_pos/neg` の第 2 成分を同じ 6 行の `calc` にし、
+    `ClaimEigenATildeDiag.lean`・`NecSuf/TwoByTwoSkew.lean` の冒頭と `lean/docs/ch015-formalization.md` の古い記述を直した。SageMath `051_stepwise_identities_of_chapter_Cprime/check_02` の第 2 成分の段を 6 段に替えて再実行した（72 段、全段 PASS）。
+    主張の型は変えていない。レビューの指摘（必須 3 件: 状態台帳・MEMORY.md・必要十分版のコメントの段数と経緯。任意 3 件: 符号と可換則の 1 行への束ね、下の符号の `g_1 + (-r) = g_1 - r`、文書の経緯の含み）を直した。
+    `check-no-sorry.sh` が、前の回で足した `'` を含む 2 つの名前（`NecSuf.smul_mulVec_eq'`・`NecSuf.sub_mulVec_eq'`）を引用符なしで配列に置いていたため、bash の引用が崩れて終了コード 1 で落ちていた（OK の行は出る）。2 つを `"…"` で囲んで直し、1794 件すべてが `sorryAx` に依存しないことを確かめた。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分は、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復をしている。`b` のまま `(-b)(∓r) + g_1 b = (g_1 ± r) b` と書けば `b = -ā` が要らない（必要十分版 `skew2_mulVec_pos` の知見）。本文を簡潔にするかを判断する（本文を触るので回の先頭で fetch する）。
 - 本文のほかの証明（`002_linear_space_general.ts`・`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。

@@ -148,16 +148,18 @@ for M in STEP_M + [6, 7, 8]:
                 S.add("eigenvector (v 1-3) a conj(a) = r^2", f2, f3)
                 S.add("eigenvector (v 1-4) = (g_1 +/- r)(-/+ r)", f3, f4)
                 S.add("eigenvector (v 1-5) = lambda (v)_1", f4, lam * vp[0])
-                # 第 2 成分の 5 段
+                # 第 2 成分の 6 段（b = -conj(a) を使わない）
                 gA = (-b) * (-sgn * r) + gg1 * b
-                gB = CDF(a).conjugate() * (-sgn * r) + gg1 * (-CDF(a).conjugate())
-                gC = (-sgn * r - gg1) * CDF(a).conjugate()
-                gD = (gg1 + sgn * r) * (-CDF(a).conjugate())
+                gA2 = b * (sgn * r) + gg1 * b
+                gB = (sgn * r) * b + gg1 * b
+                gC = (sgn * r + gg1) * b
+                gD = (gg1 + sgn * r) * b
                 S.add("eigenvector (v 2-1) (A v)_2 = (-b)(-/+ r) + g_1 b", (Amat * vp)[1], gA)
-                S.add("eigenvector (v 2-2) -b = conj(a) を 2 箇所へ同時適用", gA, gB)
-                S.add("eigenvector (v 2-3) 整理", gB, gC)
-                S.add("eigenvector (v 2-4) -/+r - g_1 = -(g_1 +/- r)", gC, gD)
-                S.add("eigenvector (v 2-5) = lambda (v)_2", gD, lam * vp[1])
+                S.add("eigenvector (v 2-2) (-b)(-/+ r) = b(+/- r)", gA, gA2)
+                S.add("eigenvector (v 2-3) 乗法の可換則", gA2, gB)
+                S.add("eigenvector (v 2-4) b を括り出す", gB, gC)
+                S.add("eigenvector (v 2-5) 加法の交換則", gC, gD)
+                S.add("eigenvector (v 2-6) = lambda (v)_2", gD, lam * vp[1])
                 S.add("eigenvector (固有ベクトル) A v = lambda v",
                       Amat * vp, lam * vp)
 

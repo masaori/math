@@ -1005,8 +1005,8 @@ targets=(
   Ising2D.NecSuf.smul_mulVec_apply
   Ising2D.NecSuf.sub_mulVec_apply
   Ising2D.NecSuf.one_mulVec_eq
-  Ising2D.NecSuf.smul_mulVec_eq'
-  Ising2D.NecSuf.sub_mulVec_eq'
+  "Ising2D.NecSuf.smul_mulVec_eq'"
+  "Ising2D.NecSuf.sub_mulVec_eq'"
   Ising2D.NecSuf.mul_assoc_of_smul_mulVec
   Ising2D.eigenvalue_AMat_iff
   Ising2D.isEigenvector_smul_eigen_pos

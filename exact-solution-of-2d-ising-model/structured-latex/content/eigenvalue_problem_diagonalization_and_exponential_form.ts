@@ -2107,31 +2107,25 @@ s_1c_2
 \end{aligned}`,
       ),
       paragraph([ref("def_gamma1_gamma2_of_theta"), "、", ref("relation_of_gamma_2_theta_tilde"), "、", ref("abs_basic_properties"), " が各行の根拠である。"]),
-      paragraph([
-        "第 2 成分は ",
-        ref("relation_of_gamma_2_theta_tilde"),
-        " (1) の ",
-        math(String.raw`b = -\bar a`),
-        "、すなわち ",
-        math(String.raw`-b = \bar a`),
-        " より",
-      ]),
+      paragraph(["第 2 成分は"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(A(\theta)v_\pm\right)_2
 &= (-b)(\mp r) + g_1 b
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}\text{ と行列とベクトルの積の定義}) \\
-&= \bar a\left(\mp r\right) + g_1\left(-\bar a\right)
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (-b = \bar a) \text{ を 2 箇所へ同時適用}) \\
-&= \left(\mp r - g_1\right)\bar a
-   \quad (\because \text{分配則で } \bar a \text{ を括り出す}) \\
-&= \left(g_1 \pm r\right)\left(-\bar a\right)
-   \quad (\because \mp r - g_1 = -(g_1 \pm r)) \\
+&= b(\pm r) + g_1 b
+   \quad (\because \mathbb{C}\text{ の四則}\ ((-b)(\mp r) = b(\pm r))) \\
+&= (\pm r)\,b + g_1 b
+   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
+&= \left(\pm r + g_1\right)b
+   \quad (\because \text{分配則で } b \text{ を括り出す}) \\
+&= \left(g_1 \pm r\right)b
+   \quad (\because \mathbb{C}\text{ の加法の交換則（下の符号では } g_1 + (-r) = g_1 - r \text{ と書く）}) \\
 &= \lambda_{\pm,\mu}\,\left(v_\pm\right)_2
-   \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b = -\bar a)
+   \quad (\because \lambda_{\pm,\mu} = g_1 \pm r,\ \left(v_\pm\right)_2 = b)
 \end{aligned}`,
       ),
-      paragraph([ref("def_gamma1_gamma2_of_theta"), " と ", ref("relation_of_gamma_2_theta_tilde"), " が各行の根拠である。"]),
+      paragraph(["第 1 行の根拠は ", ref("def_gamma1_gamma2_of_theta"), " である。"]),
       paragraph([
         "よって ",
         math(String.raw`A(\theta)v_\pm = \lambda_{\pm,\mu}v_\pm`),
@@ -2205,6 +2199,8 @@ A(\theta)(cv)
           "λ_{±,μ} の値と A(θ̃_μ)v_{±,μ} = λ_{±,μ}v_{±,μ} だけで、Step 3 は本文のどこからも使われず、" +
           "「階数」「固有空間」「次元」を本文で定義しないまま使っていたため。",
         "2026-11-01: c ∈ ℂ^× 倍が固有ベクトルであることのうち cv ≠ 0 の段が無かったので足した（Lean の isEigenvector_smul_eigen_pos/neg の smul_ne_zero と同じ手順）。",
+        "2026-11-01: Step 2 の第 2 成分は b = -ā を代入して ā を括り出し、最後に (v_±)_2 = b = -ā で b へ戻す往復をしていた。" +
+          "b のまま括り出す鎖にし、b = -ā を使わない形にした（Lean の必要十分版 skew2_mulVec_pos/neg の第 2 成分が仮定なしで閉じることの反映）。",
       ],
     },
   },
