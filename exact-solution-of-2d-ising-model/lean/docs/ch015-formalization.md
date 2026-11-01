@@ -42,7 +42,7 @@
 | `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg` | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
 | `Ising2D.lambdaPlusR_ne_lambdaMinusR` | `λ_+ ≠ λ_-`（固有値の分離） | 同 Step 1 末尾 |
 | `Ising2D.checkPmat` / `checkDmat` / `checkC` | 人手証明の `P̌_μ`, `Ď_μ`, 任意定数 `c` | `diagonalization_check_P_D` |
-| `Ising2D.sqrtM_cast_ne_zero` | `√M ≠ 0` | 同 Step 1 |
+| `Ising2D.sqrtM_ne_zero`（`DefinitionCheckFermi.lean`。`def_check_fermi` と同じ `√M`） | `√M ≠ 0` | 同 Step 1 |
 | `Ising2D.checkC_mul_b` / `checkPmat_col_pos` / `checkPmat_col_neg` | `cb = 1/(2√M)`、`P̌` の列が `v_{±,μ}` | 同 Step 2 |
 | `Ising2D.det_checkPmat` | `det P̌_μ = -|γ_2|/(2M γ_2(-θ~_μ))` | 同 Step 3 |
 | `Ising2D.det_checkPmat_ne_zero` | `det P̌_μ ≠ 0`（可逆性） | 同 Step 3 |

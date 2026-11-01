@@ -994,7 +994,6 @@ targets=(
   Ising2D.AMat_mulVec_smul_eigen_pos
   Ising2D.AMat_mulVec_smul_eigen_neg
   Ising2D.lambdaPlusR_ne_lambdaMinusR
-  Ising2D.sqrtM_cast_ne_zero
   Ising2D.checkC_mul_b
   Ising2D.checkPmat_col_pos
   Ising2D.checkPmat_col_neg

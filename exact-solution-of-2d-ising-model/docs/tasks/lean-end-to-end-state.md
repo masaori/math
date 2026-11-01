@@ -427,11 +427,15 @@
     知見: 境界の符号 `-1` という値は効かず、周期境界 `η = 1` と整数運動量 `p(M) = 1` でも同じ 4 式が出る。
     レビューの指摘で、(C)(D) が `M = 0` でも成り立つので具体版 `lie_H2_checkZ`・`lie_H2_checkY` から `M ≠ 0` を外し、使われなくなった `M ≠ 0` を `H_2` 側の入れ子交換子・係数変換・Taylor 係数の抽出・`T_{V_2}` の作用の定理から連鎖的に外した。
 
+  - ゴールラインの確認の二十三個目（済み、2026-11-01）: `ClaimEigenATildeDiag.lean` の `P̌_μ`（`checkPmat`）と `c`（`checkC`）を `((Real.sqrt M : ℝ) : ℂ)` から `DefinitionCheckFermi.lean` の `sqrtM M` で書き直し、
+    `sqrtM_ne_zero` と同じ主張だった `sqrtM_cast_ne_zero` を消した（本文の `P̌` と `def_check_fermi` の `ψ̌` は同じ `√M_col` を使う）。`DefinitionCheckFermi` の import は `ClaimEigenATildeDiag` と同じ三つなので循環しない。
+    `det_checkPmat`・`det_checkPmat_of_necSuf` の `(√M)^2 = M` は `sqrtM_sq` を引く。主張の値は定義を展開すれば変わらない。`check-no-sorry.sh` の targets と `lean/docs/ch015-formalization.md` の対応表を直し、
+    `DefinitionCheckFermi.lean` 冒頭の「`P̌_μ` は並行して形式化中」の古い記述を直した。レビューの指摘（必須 3 件・任意 2 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。
 - 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。

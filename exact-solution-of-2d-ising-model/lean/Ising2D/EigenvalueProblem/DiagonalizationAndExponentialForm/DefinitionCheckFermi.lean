@@ -8,17 +8,16 @@
 
 ## 形式化の方針
 
-* 原文の定義は行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) := (Ž_μ, Y̌_μ) P̌_μ` だが、
-  **`P̌_μ`（`diagonalization_check_P_D`）は 015 章の内容であり、本セッションと並行して
-  形式化中である**。そこで本ファイルは、原文が「すなわち」として与えている**明示式**
+* 原文の定義は行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) := (Ž_μ, Y̌_μ) P̌_μ` である。本ファイルは、
+  原文が「すなわち」として与えている**明示式**
 
       ψ̌_μ^† := (-r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ
       ψ̌_μ   := (+r/(2√M b)) Ž_μ + (1/(2√M)) Y̌_μ
       （a := γ_2(θ̃_μ), b := γ_2(-θ̃_μ), r := |a|）
 
   を定義として採用する。この式は 013 章（`Ž, Y̌`）と 008 章（`γ_1, γ_2`）だけで書けるので、
-  本章の内容は 015 章の完成を待たずに閉じられる。
-  015 章が `P̌_μ` を用意したら、その列と本定義が一致することを別途 1 行で確認すればよい。
+  `P̌_μ`（`checkPmat`、`ClaimEigenATildeDiag.lean`）を import せずに定義できる。
+  行ベクトル記法との一致は `ClaimCommutationVPlusCheckPsi.lean` の `checkPsi_row_eq_rowMul_checkPmat` で確かめる。
 * `r := |γ_2(θ̃_μ)|` は `Real.sqrt (Complex.normSq (γ_2(θ̃_μ)))` で表す。
   **008 章の `ψ` と違い、平方根の分枝を選ぶ仮定（`hbr`）が要らない**のはこのためである
   （原文 `anticommutator_of_check_psi` の Step 1 の指摘そのもの）。
@@ -137,7 +136,8 @@ theorem checkR_conj (K : IsingConst) (hM : M ≠ 0) (μ : ℤ) :
 /-- 原文 `def_check_fermi` の `√M`（`M ∈ ℕ` の実数の平方根）を ℂ の元として。 -/
 noncomputable def sqrtM (M : ℕ) : ℂ := (Real.sqrt M : ℂ)
 
-/-- `M ≠ 0` のとき `√M ≠ 0`（`def_check_fermi` の係数の分母が 0 でないこと）。 -/
+/-- `M ≠ 0` のとき `√M ≠ 0`（`def_check_fermi` の係数の分母が 0 でないこと。
+`diagonalization_check_P_D` Step 1 の `√M > 0` もこれを引く）。 -/
 theorem sqrtM_ne_zero {M : ℕ} (hM : M ≠ 0) : sqrtM M ≠ 0 := by
   simp only [sqrtM, ne_eq, Complex.ofReal_eq_zero]
   exact Real.sqrt_ne_zero'.2 (by exact_mod_cast Nat.pos_of_ne_zero hM)

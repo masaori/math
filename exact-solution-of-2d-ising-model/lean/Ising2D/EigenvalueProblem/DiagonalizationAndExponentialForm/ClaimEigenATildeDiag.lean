@@ -34,6 +34,8 @@
   第 1 成分は合成 `ab = -s^2` の 1 段、第 2 成分は仮定なし］、`v_± ≠ 0` の
   `eigenvector_pos_ne_zero`・`eigenvector_neg_ne_zero`［置かない］、`c ∈ ℂ^×` 倍の鎖
   `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg`［`mulVec_smul_of_mulVec_eq`］。
+* `diagonalization_check_P_D` Step 1: `√M ≠ 0` は `def_check_fermi` と同じ `√M`（`sqrtM`）についての
+  `sqrtM_ne_zero`（`DefinitionCheckFermi.lean`）を引く［置かない］。`P̌_μ`・`c` もこの `sqrtM` で書く。
 * `diagonalization_check_P_D` Step 2: 第 2 成分の約分 `checkC_mul_b`、列が `v_{±,μ}` に一致すること
   `checkPmat_col_pos`・`checkPmat_col_neg`［置かない。`c` の具体形の確認］、列ごとに見た `A P̌ = P̌ Ď` の
   `AMat_mul_checkPmat`［`skew2_mul_of_cols`］。
@@ -46,6 +48,7 @@
 （`Ising2D.gamma2_thetaTilde_ne_zero`）が無条件だからである。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
 
 namespace Ising2D
@@ -279,10 +282,10 @@ theorem lambdaPlusR_ne_lambdaMinusR (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (�
 /-- **人手証明の `P̌_μ`**（正規化 `c = 1/(2√M γ_2(-θ~_μ))` を代入した明示形）。 -/
 noncomputable def checkPmat (K : IsingConst) (M : ℕ) (μ : ℤ) : Matrix (Fin 2) (Fin 2) ℂ :=
   !![-((absGamma2 K (thetaTilde M μ) : ℝ) : ℂ) /
-        (2 * ((Real.sqrt M : ℝ) : ℂ) * gamma2 K (-thetaTilde M μ)),
+        (2 * sqrtM M * gamma2 K (-thetaTilde M μ)),
       ((absGamma2 K (thetaTilde M μ) : ℝ) : ℂ) /
-        (2 * ((Real.sqrt M : ℝ) : ℂ) * gamma2 K (-thetaTilde M μ));
-    1 / (2 * ((Real.sqrt M : ℝ) : ℂ)), 1 / (2 * ((Real.sqrt M : ℝ) : ℂ))]
+        (2 * sqrtM M * gamma2 K (-thetaTilde M μ));
+    1 / (2 * sqrtM M), 1 / (2 * sqrtM M)]
 
 /-- **人手証明の `Ď_μ = diag(λ_{+,μ}, λ_{-,μ})`**。 -/
 noncomputable def checkDmat (K : IsingConst) (M : ℕ) (μ : ℤ) : Matrix (Fin 2) (Fin 2) ℂ :=
@@ -291,22 +294,17 @@ noncomputable def checkDmat (K : IsingConst) (M : ℕ) (μ : ℤ) : Matrix (Fin 
 
 /-- 人手証明の任意定数の選択 `c := 1/(2√M b)`。 -/
 noncomputable def checkC (K : IsingConst) (M : ℕ) (μ : ℤ) : ℂ :=
-  1 / (2 * ((Real.sqrt M : ℝ) : ℂ) * gamma2 K (-thetaTilde M μ))
-
-/-- **人手証明 Step 1**: `√M ≠ 0`（`M ≠ 0` による）。 -/
-theorem sqrtM_cast_ne_zero {M : ℕ} (hM : M ≠ 0) : ((Real.sqrt M : ℝ) : ℂ) ≠ 0 := by
-  simp only [ne_eq, Complex.ofReal_eq_zero]
-  exact Real.sqrt_ne_zero'.2 (by exact_mod_cast Nat.pos_of_ne_zero hM)
+  1 / (2 * sqrtM M * gamma2 K (-thetaTilde M μ))
 
 /-- **人手証明 Step 2 の第 2 成分**: `c b = 1/(2√M)`。 -/
 theorem checkC_mul_b (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
-    checkC P.const M μ * gamma2 P.const (-thetaTilde M μ) = 1 / (2 * ((Real.sqrt M : ℝ) : ℂ)) := by
+    checkC P.const M μ * gamma2 P.const (-thetaTilde M μ) = 1 / (2 * sqrtM M) := by
   have hb := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hs := sqrtM_cast_ne_zero hM
+  have hs := sqrtM_ne_zero hM
   calc checkC P.const M μ * gamma2 P.const (-thetaTilde M μ)
-      = 1 / (2 * ((Real.sqrt M : ℝ) : ℂ) * gamma2 P.const (-thetaTilde M μ))
+      = 1 / (2 * sqrtM M * gamma2 P.const (-thetaTilde M μ))
           * gamma2 P.const (-thetaTilde M μ) := rfl                    -- `c` の定義
-    _ = 1 / (2 * ((Real.sqrt M : ℝ) : ℂ)) := by field_simp            -- `b ≠ 0` と ℂ の四則
+    _ = 1 / (2 * sqrtM M) := by field_simp            -- `b ≠ 0` と ℂ の四則
 
 /-- **人手証明 Step 2**: `P̌_μ` の第 1 列は `v_{+,μ} = c(-r, b)` である。 -/
 theorem checkPmat_col_pos (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
@@ -360,13 +358,12 @@ theorem det_checkPmat (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : ℤ) :
           (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) := by
   set r : ℂ := ((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ)
   set b := gamma2 P.const (-thetaTilde M μ)
-  set s : ℂ := ((Real.sqrt M : ℝ) : ℂ)
-  have hMpos : (0 : ℝ) < (M : ℝ) := by exact_mod_cast Nat.pos_of_ne_zero hM
-  have hs : s ≠ 0 := sqrtM_cast_ne_zero hM
+  set s : ℂ := sqrtM M
+  have hs : s ≠ 0 := sqrtM_ne_zero hM
   have hb : b ≠ 0 := gamma2_neg_thetaTilde_ne_zero P hM μ
   have hM' : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.2 hM
   have hsq : (2 * s) ^ 2 = 4 * (M : ℂ) := by
-    rw [mul_pow, ← Complex.ofReal_pow, Real.sq_sqrt hMpos.le]; push_cast; ring
+    rw [mul_pow, sqrtM_sq]; ring
   calc (checkPmat P.const M μ).det
       = (-r / (2 * s * b)) * (1 / (2 * s)) - (r / (2 * s * b)) * (1 / (2 * s)) :=
         Matrix.det_fin_two_of _ _ _ _                                  -- 行列式の定義

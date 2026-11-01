@@ -96,10 +96,9 @@ theorem det_checkPmat_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0) (μ : 
       = -((absGamma2 P.const (thetaTilde M μ) : ℝ) : ℂ) /
           (2 * (M : ℂ) * gamma2 P.const (-thetaTilde M μ)) := by
   have hb := gamma2_neg_thetaTilde_ne_zero P hM μ
-  have hs := sqrtM_cast_ne_zero hM
+  have hs := sqrtM_ne_zero hM
   have hM' : (M : ℂ) ≠ 0 := Nat.cast_ne_zero.2 hM
-  have hsq : ((Real.sqrt M : ℝ) : ℂ) ^ 2 = (M : ℂ) := by
-    rw [← Complex.ofReal_pow, Real.sq_sqrt (Nat.cast_nonneg M)]; push_cast; rfl
+  have hsq : sqrtM M ^ 2 = (M : ℂ) := sqrtM_sq M
   rw [NecSuf.det_of_cols _ _ _ (checkPmat_col_pos P hM μ) (checkPmat_col_neg P hM μ), checkC]
   field_simp
   rw [hsq]
@@ -113,7 +112,7 @@ theorem det_checkPmat_ne_zero_of_necSuf (P : IsingParam) {M : ℕ} (hM : M ≠ 0
     simp only [ne_eq, Complex.ofReal_eq_zero]
     exact ne_of_gt (absGamma2_thetaTilde_pos P hM μ)
   have hc : checkC P.const M μ ≠ 0 :=
-    one_div_ne_zero (mul_ne_zero (mul_ne_zero two_ne_zero (sqrtM_cast_ne_zero hM)) hb)
+    one_div_ne_zero (mul_ne_zero (mul_ne_zero two_ne_zero (sqrtM_ne_zero hM)) hb)
   exact NecSuf.det_of_cols_ne_zero _ _ _ (checkPmat_col_pos P hM μ) (checkPmat_col_neg P hM μ)
     (mul_ne_zero two_ne_zero hr) hc hb
 
