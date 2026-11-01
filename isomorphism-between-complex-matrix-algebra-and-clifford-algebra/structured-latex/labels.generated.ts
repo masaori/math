@@ -17,6 +17,7 @@ export const ALL_LABELS = [
   "def_linear_independence",
   "def_linear_map",
   "def_ring_homomorphism",
+  "def_spanning_family",
   "def_unital_ring",
 ] as const
 
