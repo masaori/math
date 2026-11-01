@@ -445,12 +445,15 @@
     `check-docs-references.sh` に検査 3「`Ising2D/` の全ファイルが、経緯の段落の外の表の行か見出しにファイル名で出る（そのファイル名で 1 つのファイルに決まるときだけ数え、コードブロックの中は数えない）」を足した。
     mathlib のパスの検査は `.lake/packages/mathlib/Mathlib` が在るときだけ行うようにした（取得途中の作業ツリーで偽の不合格になっていた）。レビューの指摘（必須 2 件・任意 6 件）を直した。
 
+  - ゴールラインの確認の二十六個目（済み、2026-11-01）: 章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`）に (1) を立て、仮定 `htr` を外した。
+    (1) は人手 `def_V_plus` の `VPlusOfTransfer M K_1 K_2` について `trace_of_epsilon_V_plus` そのものとし、(2) は `vPlusDataOf_V` と `VPlusOfTransfer_eq_VPlus` でつないだ。
+    (2) は人手どおり `im Q̌_{(1,…,1)}` の元（`Q̌ *ᵥ x`）について述べ、冪等性 `Qproj_mul_self` の一行、`η_{(1,…,1)} = +1`、`εQ̌ = Q̌`、`εy = y` の式変形を証明の中で一つずつ書いた（以前は `Q̌ y = y` を満たす `y` について述べ、冪等性の行が無かった）。
+    `TheoremMaxEigenvectorInEvenSector.lean` 冒頭の「直接計算は形式化していない」の古い記述と ch018 の行を直した。レビューの指摘（必須 4 件・任意 4 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 人手 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`）の Lean は、章末の主張の (1)（`tr(εV^{(+)})` の閉じた形）を立てず、(2) を `tr(εV^{(+)})` の実部が正という仮定 `htr` の下で示している。
-  冒頭のコメントは「(1) はまだ Lean の定理が無い」と書くが、項目 4 で `trace_epsilon_vPlusDataOf_pos`（`ClaimTraceEpsilonVPlusClosedForm.lean`）ができたので古い。(1) を立てて `htr` を外し、コメントと ch018 の行を直す。
 - 対応表の人手ラベルの列に、いまの本文・ノートの `labels` に無い名前が 87 件ある（多くは参照用ノートへ退避した整数運動量の経路のラベルで、ノートの本文に「labels: …」の文字としてだけ残る）。
   退避したものは退避先のノートが分かる書き方へ、改名されたものはいまのラベルへ直し、ラベルの実在を `check-docs-references.sh` の検査に加える。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。

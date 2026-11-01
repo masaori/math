@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十六個目を行った。章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の Lean に (1)（`tr(εV^{(+)})` の閉じた形と正値性、`trace_of_epsilon_V_plus` そのもの）を立てて仮定 `htr` を外し、(2) を人手どおり `im Q̌_{(1,…,1)}` の元について冪等性の行から示す形に直した。次は状態台帳の「次の一歩」の先頭（対応表の人手ラベルの列のうち、いまの `labels` に無い 87 件の整理）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十五個目を行った。`lean/README.md` と `lean/docs/` の表の行か見出しにファイル名で出ない Lean のファイル 86 個を表へ載せ（67 個は既存の行にファイル名を書き足し、19 個は行を足した）、`lean/scripts/check-docs-references.sh` に「`Ising2D/` の全ファイルが表か見出しに出る」検査を足した。章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の Lean が (1) を立てず (2) を仮定付きで示していることを状態台帳の「次の一歩」の先頭に足した。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`end_preserves_matrix_exponential`（行列表示と線型写像表示は指数関数を保つ）の検算 `sagemath/check/end_preserves_matrix_exponential/` を足した。証明が exp 級数の各点収束（行列と数ベクトルの積の収束）を `end` の作用の収束として断りなく使っていたので、二つの積の一致を主張 `end_agrees_with_matrix_vector_product` として足し、検算 `sagemath/check/end_agrees_with_matrix_vector_product/` を付けた（未検算 105 → 104 件、証明を持つブロック 222 → 223 件）。`end` を定義どおりに作る共通の準備 `sagemath/_shared/end_by_definition.sage` を置いた。計算の誤りは無かった。`def_end_iso` の記法 `Af` が `mat_mult` の積の記号を定義し直していることを状態台帳に記録した。次は `def_invertible_elements_of_R`。

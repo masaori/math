@@ -9,14 +9,12 @@
 `ClaimEpsilonEigenvalueOnCheckQ.lean`（符号の反転則）と `ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean`（トレースの符号）の組み合わせであり、
 新しい抽象構造は現れない。
 
-## 仮定として残っているもの（一次情報）
+## `tr(εV^{(+)}) > 0` の扱い
 
-人手証明 (1) は `trace_of_epsilon_V_plus`（`tr(εV^{(+)}) > 0` の**直接計算**）を使う。
-その直接計算は「1次元開鎖の二つのスピン和」（原文 `def_open_chain_spin_energy`、`open_chain_partition_sum`、
-`open_chain_endpoint_product_sum`、`open_chain_spin_sums_positive` と
-`H1_plus_in_sigma_z_form`）を要し、本セッションでは形式化していない
-（理由は `docs/tasks/2026-07_lean-ch009-013/015_ch018-formalization-findings.md`）。
-したがって本ファイルの定理は **`0 < (tr(εV^{(+)})).re` を仮定として受け取る**。
+人手証明 (1) は `trace_of_epsilon_V_plus`（`tr(εV^{(+)}) > 0` の直接計算）を使う。
+本ファイルの定理は任意の `VPlusData` について述べるので、`0 < (tr(εV^{(+)})).re` を仮定 `htr` として受け取る。
+具体的な `V^{(+)}`（`vPlusDataOf`）では、`htr` を `trace_epsilon_vPlusDataOf_pos`
+（`ClaimTraceEpsilonVPlusClosedForm.lean`、人手 `trace_of_epsilon_V_plus`）で埋める。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimTraceEpsilonVPlusViaCheckEigenvalues
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric

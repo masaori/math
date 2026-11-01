@@ -109,7 +109,7 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| **`VPlusData.eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`** | **(1)**（`tr(εV^{(+)}) > 0` を仮定として受け取る。下記 3 を参照） |
+| **`VPlusData.eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`** | **(1)**（`tr(εV^{(+)}) > 0` を仮定として受け取る。具体的な `V^{(+)}` では `trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）で埋める） |
 | **`VPlusData.eta_eq_sign`** | **`η_ε = (−1)^{M−|ε|}`** | **(2)** |
 | **`VPlusData.epsilon_eq_parityProd_of_trace_pos`** | **`ε = (−1)^M ∏_μ(I − 2ň_μ)`** | **(3)** |
 | **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
@@ -119,7 +119,7 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` | `tr(εV^{(+)})` の実部が正ならば `η_{(1,…,1)} = +1` かつ `im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`tr(εV^{(+)})` の実部が正であることを仮定として受け取る。(1) の閉じた形の等式は、この定理には無い） | 章末の主張の (2) |
+| `Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` | (1) `tr(εV^{(+)}) = (2e^{−K_2}cosh K_1)^M + (2e^{K_2}sinh K_1)^M` かつ実部が正（`V^{(+)}` は人手 `def_V_plus` の `VPlusOfTransfer`。`trace_of_epsilon_V_plus` そのもの）、(2) `Q̌_{(1,…,1)}` の像の元 `y` は `εy = y`（仮定は `IsingParam` の `K_1, K_2 > 0` と `2 ≤ M`） | 章末の主張の (1)・(2) |
 
 #### `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremCPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
 
