@@ -701,6 +701,7 @@ targets=(
   Ising2D.dvd_add_sub_one_iff
   Ising2D.deltaMod_add_one_eq
   Ising2D.thetaTilde_conj
+  "Ising2D.checkPhase_conj'"
   Ising2D.checkPhase_conj
   Ising2D.checkZ_conj
   Ising2D.checkY_conj

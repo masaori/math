@@ -351,16 +351,20 @@
     整数運動量の経路の必要十分版（`NecSuf/DiscreteFourier.lean` など）が `NecSuf/` に残っているのと同じ扱いである。理由を `PermSector` の冒頭の「必要十分版がなぜ本文と退避先の定義の上に乗っているか」の節に書いた（レビューの指摘 4 件を直した）。
     import のグラフでは、`RoutesNotAdopted/` 以外で `RoutesNotAdopted/` を推移的に読み込むファイルは `NecSuf/PermSector` だけで、それを import するのはライブラリの入口 `Ising2D.lean` を除けば `RoutesNotAdopted/MinusSector/` のファイルだけである。
     本文（`NecSuf/` と `RoutesNotAdopted/` 以外）の Lean は、推移的にも退避先を読み込まない。
+  - ゴールラインの確認の十二個目（済み、2026-11-01）: 人手 `conjugate_index_of_check_Z_Y` (2) の Lean（`DiagonalizationAndExponentialForm/ClaimConjugateIndex.lean`）を人手どおりに直した。
+    以前は `2M` 乗根の周期 `ξ^{2M} = 1` で示していたので、人手の 4 行（(1) `θ~_{M+1-μ} = 2π - θ~_μ` → 指数法則 `theorem_exp_product` (`n = 1`) → Euler の公式 `euler_formula_cos_sin` → `cos(2πj) = 1, sin(2πj) = 0`）と
+    1 行ずつ対応する `calc` を `checkPhase_conj'`（右辺 `e^{ijθ~_μ} = checkPhase M (-j) μ`）に置き、両端は `checkPhase_eq_exp` で開いた。
+    使う側の `checkPhase_conj`（右辺を `2M` 乗根の位相因子で書いた形）はその系にした。主張の型は 2 つとも変えていない。`check-no-sorry.sh` に `checkPhase_conj'` を足し、`lean/docs/ch013-formalization.md` の行を分けた。
+    レビューは必須の指摘なし。任意の指摘 2 件（Euler の公式の行の向き、人手の `j` と Lean の `k`）はコメントに書いた。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `checkPhase_conj`（`DiagonalizationAndExponentialForm/ClaimConjugateIndex.lean`、人手 `conjugate_index_of_check_Z_Y` (2)）は `2M` 乗根の周期 `ξ^{2M} = 1` で示している。人手 (2) は (1) `θ~_{M+1-μ} = 2π - θ~_μ`・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0` の 4 行である。人手どおりに直す。
+- `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
 
 この後に残る確認:
 
-- `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
 - 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。
 
 - `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり

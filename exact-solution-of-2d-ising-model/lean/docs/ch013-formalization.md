@@ -53,7 +53,8 @@
 | `Ising2D.dvd_add_sub_one_iff` | (5) `μ+ν ≡ 1 (mod M) ⟺ ν = M+1-μ` | 同上 (5) |
 | `Ising2D.deltaMod_add_one_eq` | (5) のデルタ版 | 同上 (5) |
 | `Ising2D.thetaTilde_conj` | (1) `θ~_{M+1-μ} = 2π - θ~_μ` | `conjugate_index_of_check_Z_Y` |
-| `Ising2D.checkPhase_conj` / `checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}` | 同上 (2) |
+| `Ising2D.checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}`（人手の 4 行: (1)・指数法則・Euler の公式・`cos(2πj)=1, sin(2πj)=0`） | 同上 (2) |
+| `Ising2D.checkPhase_conj` | (2) の右辺を `2M` 乗根の位相因子で書いた形 | 同上 (2) |
 | `Ising2D.checkZ_conj` / `checkY_conj` | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |
 | `Ising2D.sum_sum_smul_two_deltaM_smul_one` | 証明中の行「`1 ≤ j,k ≤ M` では `δ^M_{(j,k)} = 1 ⟺ j = k`」（二重和の `j = k` の項だけが残る） | `anticommutator_of_check_Z_Y` |

@@ -7,8 +7,8 @@
 
 **必要十分版は無い。** (1)(3) は `θ~` の定義と添字の周期性（既存の必要十分版
 `Ising2D.NecSuf.transform_periodic` の特殊化）から出る書き換えで、
-新たに取り払える構造が無い。(2) は「`2M` 乗根の周期 `ξ^{2M} = 1`」だけで、
-これは `NecSuf.sum_zpow_antiperiodic` で既に使っている性質そのものである。
+新たに取り払える構造が無い。(2) は (1)・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0`
+の 4 行で、使っているのは複素指数関数のこれらの性質だけであり、取り払える構造が無い。
 
 ## 原文の主張（`μ ∈ 𝓜̌`）
 
@@ -34,26 +34,56 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
   field_simp
   ring
 
-/-- **(2)**: `e^{-ij θ~_{M+1-μ}} = e^{ij θ~_μ}`。
+/-- **(2)**: `e^{-ij θ~_{M+1-μ}} = e^{ij θ~_μ}`（`j ∈ ℤ`）。
 
-`(M+1-μ)` の奇数周波数は `2(M+1-μ) - 1 = 2M - (2μ-1)` で、
-`2M` の分は `2M` 乗根の周期で消える。 -/
-theorem checkPhase_conj (hM : M ≠ 0) (k μ : ℤ) :
-    checkPhase M k ((M : ℤ) + 1 - μ) = expPhase (2 * M) (-(k * (2 * μ - 1))) := by
-  have hone : expPhase (2 * M) (k * (2 * (M : ℤ))) = 1 := by
-    rw [expPhase_zpow]
-    have h1 : expPhase (2 * M) (2 * (M : ℤ)) = 1 := by
-      have h2M : ((2 * M : ℕ) : ℤ) = 2 * (M : ℤ) := by push_cast; ring
-      exact (expPhase_eq_one_iff (by omega) _).2 (by rw [h2M])
-    rw [h1, one_zpow]
-  rw [checkPhase,
-    show k * (2 * ((M : ℤ) + 1 - μ) - 1) = k * (2 * (M : ℤ)) + -(k * (2 * μ - 1)) by ring,
-    expPhase_add, hone, one_mul]
-
-/-- (2) の言い換え（原文の右辺の形）: `e^{-ij θ~_{M+1-μ}} = e^{-i(-j) θ~_μ}`。 -/
+人手の整数 `j` は Lean の `k` である。右辺の `e^{ij θ~_μ}` は `e^{-i(-j) θ~_μ} = checkPhase M (-j) μ` である。
+人手の式変形の 4 行（(1)、指数法則 `theorem_exp_product` (`n = 1`)、
+Euler の公式 `euler_formula_cos_sin`、`cos(2πj) = 1, sin(2πj) = 0`）に 1 行ずつ対応させ、
+両端を `checkPhase_eq_exp`（`checkPhase` が `e^{-ik θ~_μ}` そのものであること）で開く。 -/
 theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
     checkPhase M k ((M : ℤ) + 1 - μ) = checkPhase M (-k) μ := by
-  rw [checkPhase_conj hM, checkPhase]
+  calc checkPhase M k ((M : ℤ) + 1 - μ)
+      -- (∵ checkPhase は e^{-ik θ~_{M+1-μ}} そのもの)
+      = Complex.exp (-(Complex.I * (k : ℂ) * (thetaTilde M ((M : ℤ) + 1 - μ) : ℂ))) :=
+        checkPhase_eq_exp hM k _
+      -- (∵ 直前の (1))
+    _ = Complex.exp (-(Complex.I * (k : ℂ) * ((2 * Real.pi - thetaTilde M μ : ℝ) : ℂ))) := by
+        rw [thetaTilde_conj hM μ]
+      -- (∵ theorem_exp_product (n = 1))
+    _ = Complex.exp (-(2 * (Real.pi : ℂ) * Complex.I * (k : ℂ)))
+          * Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
+        rw [← Complex.exp_add]
+        congr 1
+        push_cast
+        ring
+      -- (∵ euler_formula_cos_sin。exp(φi) = cos φ + i sin φ を φ = -2πj に当て、cos(-x) = cos x, sin(-x) = -sin x で書き直す)
+    _ = (Complex.cos (2 * (Real.pi : ℂ) * (k : ℂ)) - Complex.I * Complex.sin (2 * (Real.pi : ℂ) * (k : ℂ)))
+          * Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
+        rw [show -(2 * (Real.pi : ℂ) * Complex.I * (k : ℂ)) = (-(2 * (Real.pi : ℂ) * (k : ℂ))) * Complex.I by ring,
+          Complex.exp_mul_I, Complex.cos_neg, Complex.sin_neg]
+        ring
+      -- (∵ j ∈ ℤ より cos(2πj) = 1, sin(2πj) = 0)
+    _ = Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
+        have hcos : Complex.cos (2 * (Real.pi : ℂ) * (k : ℂ)) = 1 := by
+          rw [show 2 * (Real.pi : ℂ) * (k : ℂ) = (k : ℂ) * (2 * (Real.pi : ℂ)) by ring]
+          exact Complex.cos_int_mul_two_pi k
+        have hsin : Complex.sin (2 * (Real.pi : ℂ) * (k : ℂ)) = 0 := by
+          rw [show 2 * (Real.pi : ℂ) * (k : ℂ) = ((2 * k : ℤ) : ℂ) * (Real.pi : ℂ) by push_cast; ring]
+          exact Complex.sin_int_mul_pi (2 * k)
+        rw [hcos, hsin]
+        ring
+      -- (∵ checkPhase は e^{-i(-k) θ~_μ} そのもの)
+    _ = checkPhase M (-k) μ := by
+        rw [checkPhase_eq_exp hM]
+        congr 1
+        push_cast
+        ring
+
+/-- (2) を `2M` 乗根の位相因子で書いた形: `e^{-ij θ~_{M+1-μ}} = exp(2π√-1 · j(2μ-1)/(2M))`。
+`(2)` の右辺 `checkPhase M (-j) μ` を `checkPhase` の定義で開いたものである。 -/
+theorem checkPhase_conj (hM : M ≠ 0) (k μ : ℤ) :
+    checkPhase M k ((M : ℤ) + 1 - μ) = expPhase (2 * M) (-(k * (2 * μ - 1))) := by
+  rw [checkPhase_conj' hM, checkPhase]
   congr 1
   ring
 
