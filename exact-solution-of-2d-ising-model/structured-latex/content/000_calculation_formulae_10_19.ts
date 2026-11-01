@@ -334,65 +334,107 @@ f(0)
     origin: { path: "structured-latex/content/000_calculation_formulae_10_19.ts", ordinal: 15 },
     title: { text: "arctan の引数は arcsin の定義域に入る" },
     labels: ["arctan_argument_in_unit_interval"],
-    statement: [paragraph([ref("definition_of_sqrt_r_positive"), " を用いる。任意の ", math(String.raw`x\in\mathbb R`), " について"]), displayMath(String.raw`-1\le\frac{x}{\sqrt{1+x^2}^{(\mathbb R_{\ge0})}}\le1`), paragraph(["が成り立つ。"])],
-    proof: [
+    statement: [
       paragraph([
-        "準備として ",
-        math(String.raw`s:=\sqrt{1+x^2}^{(\mathbb R_{\ge0})}`),
-        " と書く。非負平方根の定義（",
-        ref("definition_of_sqrt_r_positive"),
-        "）から ",
-        math(String.raw`s\ge0`),
-        " かつ次が成り立つ。",
+        ref("definition_of_sqrt_r_positive"), " を用いる。任意の ", math(String.raw`x\in\mathbb R`),
+        "（", math(String.raw`\mathbb R`), " を使うのは、この主張を使う arctan の定義域が実数全体であるため）について、",
+        math(String.raw`1+x^2\in\mathbb R_{\ge0}`), " であって平方根 ", math(String.raw`\sqrt{1+x^2}^{(\mathbb R_{\ge0})}`), " が定まり、",
       ]),
+      displayMath(String.raw`-1\le\frac{x}{\sqrt{1+x^2}^{(\mathbb R_{\ge0})}}\le1`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph(["まず平方根の中身が平方根の定義域に入ることを示す。"]),
       displayMath(String.raw`\begin{aligned}
-s^2
-&= 1+x^2
-&&(\because\ \text{非負平方根の定義。}\blkref{definition_of_sqrt_r_positive})\\
+1+x^2
 &\ge 1
 &&(\because\ x^2\ge0\ \text{と両辺への}\ 1\ \text{の加法})\\
 &> 0
 &&(\because\ 0<1)
 \end{aligned}`),
       paragraph([
-        "従って次の二つの不等式が成り立つ。",
+        "よって ", math(String.raw`1+x^2\in\mathbb R_{\ge0}`), " で、",
+        math(String.raw`s:=\sqrt{1+x^2}^{(\mathbb R_{\ge0})}\in\mathbb R`), " が定まり、非負平方根の定義（",
+        ref("definition_of_sqrt_r_positive"), "）から ", math(String.raw`s\ge0`), " かつ ",
+        math(String.raw`s^2=1+x^2`), " である。次に ", math(String.raw`s>0`), " を示す。",
       ]),
       displayMath(String.raw`\begin{aligned}
-s
-&>0
-&&(\because\ s\ge0\ \text{かつ}\ s^2>0)\\
+s^2
+&= 1+x^2
+&&(\because\ \text{非負平方根の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&> 0
+&&(\because\ \text{上の鎖})\\
+&= 0^2
+\end{aligned}`),
+      paragraph([
+        "なので ", math(String.raw`s\ne0`), "（", math(String.raw`s=0`), " なら ",
+        math(String.raw`s^2=0^2`), " となる）であり、", math(String.raw`s\ge0`), " と合わせて ",
+        math(String.raw`s>0`), " である。次に ", math(String.raw`|x|^2\le s^2`), " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 |x|^2
 &=x^2
-&&(\because\ \text{絶対値の二乗})\\
+&&(\because\ \text{実数の絶対値の二乗})\\
 &\le 1+x^2
 &&(\because\ 0\le1\ \text{と両辺への}\ x^2\ \text{の加法})\\
 &=s^2
 &&(\because\ \text{非負平方根の定義。}\blkref{definition_of_sqrt_r_positive})
 \end{aligned}`),
       paragraph([
-        math(String.raw`|x|\ge0`), "、", math(String.raw`s\ge0`),
-        " なので、最後の二行と非負数上での二乗の単調性から ", math(String.raw`|x|\le s`),
-        " を得る。以上を使って、",
+        "これから ", math(String.raw`|x|\le s`), " が従う。仮に ", math(String.raw`s<|x|`),
+        " とすると、", math(String.raw`|x|>s\ge0`), " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s^2
+&= s\cdot s\\
+&\le s\cdot|x|
+&&(\because\ s\ge0\ \text{と}\ s<|x|\ \text{の両辺に}\ s\ \text{を掛ける})\\
+&< |x|\cdot|x|
+&&(\because\ |x|>0\ \text{と}\ s<|x|\ \text{の両辺に}\ |x|\ \text{を掛ける})\\
+&= |x|^2
+\end{aligned}`),
+      paragraph([
+        "となり、", math(String.raw`|x|^2\le s^2`), " に反する。よって ", math(String.raw`|x|\le s`),
+        " である。以上を使って、",
       ]),
       displayMath(String.raw`\begin{aligned}
 \left|\frac{x}{s}\right|
+&= \frac{|x|}{|s|}
+&&(\because\ s\ne0\ \text{と実数の絶対値の商})\\
 &= \frac{|x|}{s}
-&&(\because\ s>0\ \text{と絶対値の商})\\
+&&(\because\ s>0\ \text{なので}\ |s|=s)\\
 &\le \frac{s}{s}
-&&(\because\ |x|\le s\ \text{と正の分母}\ s\ \text{で割る単調性})\\
+&&(\because\ |x|\le s\ \text{の両辺を正の数}\ s\ \text{で割る})\\
 &= 1
-&&(\because\ s>0\ \text{による約分})
+&&(\because\ s\ne0\ \text{による約分})
 \end{aligned}`),
-      paragraph([
-        math(String.raw`\left|x/s\right|\le1`),
-        " は主張の二つの不等式 ",
-        math(String.raw`-1\le x/s\le1`),
-        " と同値である（絶対値の定義）。",
-      ]),
+      paragraph(["これを使って主張の二つの不等式を得る。"]),
+      displayMath(String.raw`\begin{aligned}
+\frac{x}{s}
+&\le \left|\frac{x}{s}\right|
+&&(\because\ \text{実数の絶対値の定義}\ |q|=\max(q,-q))\\
+&\le 1
+&&(\because\ \text{上の鎖})\\
+-\frac{x}{s}
+&\le \left|\frac{x}{s}\right|
+&&(\because\ \text{実数の絶対値の定義}\ |q|=\max(q,-q))\\
+&\le 1
+&&(\because\ \text{上の鎖})
+\end{aligned}`),
+      paragraph(["二つ目の不等式から次を得る。"]),
+      displayMath(String.raw`\begin{aligned}
+-1
+&\le -\left(-\frac{x}{s}\right)
+&&(\because\ -\frac{x}{s}\le1\ \text{の両辺に}\ -1\ \text{を掛けると向きが反転する})\\
+&= \frac{x}{s}
+&&(\because\ \text{加法の逆元の逆元はもとの元})
+\end{aligned}`),
+      paragraph(["一つ目の不等式と合わせて ", math(String.raw`-1\le x/s\le1`), " である。"]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-01、SageMath の検算を付けるときのレビューで直した: 平方根を取る前に 1+x^2 ≥ 1 > 0 を 1+x^2 起点の鎖で示し（以前は s を定めた後に s^2 起点で導いていた）、主張にも平方根が定まることを書いた。s>0 の推論、|x|≤s を背理法の鎖で示す段、絶対値の商と |s|=s の二行への分割、最後の同値を必要な向きの二つの鎖にした。x∈ℝ の理由を書いた。",
         "式変形の書き方の統一（2026-09-03）。散文で述べていた証明を、分母の正値性の鎖と" +
           "絶対値の商の鎖の 2 本＋行末の (∵ …) へ書き換えた。非負平方根の定義への参照は" +
           "実際に使う行の行末 blkref へ置いた。根拠（分母の正値性・x²≤1+x² と単調性・" +

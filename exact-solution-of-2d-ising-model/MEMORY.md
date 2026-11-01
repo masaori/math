@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行の四回目として、`arctan_argument_in_unit_interval`（arctan の引数は arcsin の定義域に入る）の検算 `sagemath/check/arctan_argument_in_unit_interval/` を足した（未検算 117 → 116 件）。`QQ[x]` と `AA` で全て厳密。レビューで人手証明を直した（平方根を取る前に中身の非負を示す順、背理法の鎖、一行一操作）。実数の絶対値が本文で未定義であることを状態台帳に記録した。次は `multiplicative_group_of_polar_representation`。
 2026-11-01: 全証明の SageMath 検算の連続実行の三回目として、`arcsin_is_bijection` の検算 `sagemath/check/arcsin_is_bijection/` を足した（未検算 118 → 117 件）。弧の長さは内接・外接の折れ線で区間に挟んだ。レビューの指摘で `def_arcsin`（第二の式を `y'<0` に、終域を ℝ に）・`arcsin_is_bijection`（四項に書き下し、負の側・全射・連続を本文で証明）・`def_sin` を直した。次は `arctan_argument_in_unit_interval`。
 
 2026-11-01: 全証明の SageMath 検算の連続実行の二回目として、`radial_normalization_exists_unique`（非零実数対の単位円への正規化）の検算 `sagemath/check/radial_normalization_exists_unique/` を足した（未検算 119 → 118 件）。一般の点は有理関数体上の環、正負・大小は `AA` で厳密に確かめた。レビューで人手証明の根拠の書き方（地の文の推論・ラベル参照の欠け・`\mathbf R`）を直した。計算の誤りは無かった。次は `arcsin_is_bijection`。

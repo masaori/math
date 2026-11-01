@@ -1,0 +1,2 @@
+|x|^2 = x^2 <= 1+x^2 = s^2 and |x| <= s for 10 points; contradiction chain checked on 5 pairs 0 <= b < a
+RESULT: PASS
