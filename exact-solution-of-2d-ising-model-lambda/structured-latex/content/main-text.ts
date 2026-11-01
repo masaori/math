@@ -64074,14 +64074,14 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
             role: "subsection",
             element: {
               kind: "section",
-              id: "kac_ward_heading_cell_complex_counts",
+              id: "kac_ward_heading_hole_free_cell_set_euler_number",
               labels: [],
-              title: { text: "セル集合の複体量と一セル追加の増分" },
+              title: { text: "辺連結なセル集合と補集合から決まる Euler 数" },
               children: [{
                 role: "primary",
                 element: {
                   kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_cell_complex_one_cell_increment",
+                  id: "group_of_kac_ward_claim_hole_free_cell_set_euler_number_one",
                   beforeFocus: [
                     {
                       role: "prerequisiteDefinition",
@@ -64168,130 +64168,6 @@ c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                       },
                     },
                   ],
-                  focus: {
-                    id: "kac_ward_claim_cell_complex_one_cell_increment",
-                    kind: "claim",
-                    title: { text: "一セルを追加したときの Euler 数の増分" },
-                    labels: ["claim_cell_complex_one_cell_increment"],
-                    habitat: "Z",
-                    lean: [
-                      "Ising2DLambda.KacWard.cellEulerNumber_insert",
-                      "Ising2DLambda.NecSuf.KacWard.cellComplex_oneCellIncrement_necSuf",
-                      "Ising2DLambda.KacWard.cellEulerNumber_insert_from_necSuf",
-                    ],
-                    verification: ["sagemath/check/cell-complex-one-cell-increment"],
-                    statement: [
-                      paragraph([
-                        "任意の有限集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
-                        "（セルの集合）と、", math(String.raw`S`), " に属さない任意のセル ",
-                        math(String.raw`x=(r,c)\in(\mathbb Z\times\mathbb Z)\setminus S`),
-                        " について、共有される頂点と辺の個数を",
-                      ]),
-                      displayMath(String.raw`v_x(S):=\bigl|\mathcal V_{\square}(S)\cap\mathcal V_{\square}(\{x\})\bigr|,\qquad
-e_x(S):=\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|`),
-                      paragraph([
-                        "と置く（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"),
-                        "、", ref("def_cardinality_notation"), "）。このとき",
-                      ]),
-                      displayMath(String.raw`\chi_{\square}(S\cup\{x\})=\chi_{\square}(S)+1+e_x(S)-v_x(S)`),
-                      paragraph([
-                        "が成り立つ（", ref("def_cell_euler_number"),
-                        "）。内側セル複体の Euler 数を一セルずつの追加で計算するとき、この等式を繰り返し引く。",
-                      ]),
-                    ],
-                    proof: [
-                      paragraph([
-                        "まず、セル ", math(String.raw`x=(r,c)`), " だけの集合の頂点集合は四点 ",
-                        math(String.raw`(r,c),(r,c+1),(r+1,c),(r+1,c+1)`),
-                        " からなる（", ref("def_cell_vertex_set"),
-                        "）。二点が一致するには第一成分どうしと第二成分どうしがともに一致する必要があるが、四点の成分の組は二つずつ異なる（第一成分は ",
-                        math(String.raw`r`), " か ", math(String.raw`r+1`), "、第二成分は ",
-                        math(String.raw`c`), " か ", math(String.raw`c+1`),
-                        " で、隣り合う二整数は相異なる）。ゆえに",
-                      ]),
-                      displayMath(String.raw`\bigl|\mathcal V_{\square}(\{x\})\bigr|=4`),
-                      paragraph([
-                        "である。次に、", math(String.raw`x`),
-                        " の四辺は二元集合として二つずつ相異なる（", ref("def_cell_edge_set"),
-                        "）。実際、上辺 ", math(String.raw`\{(r,c),(r,c+1)\}`),
-                        " と下辺 ", math(String.raw`\{(r+1,c),(r+1,c+1)\}`),
-                        " は共有点を持たず、左辺 ", math(String.raw`\{(r,c),(r+1,c)\}`),
-                        " と右辺 ", math(String.raw`\{(r,c+1),(r+1,c+1)\}`),
-                        " も共有点を持たない。残る四組（上辺と左辺・上辺と右辺・下辺と左辺・下辺と右辺）はいずれも共有点を一つだけ持つので、二元集合として一致しない。ゆえに",
-                      ]),
-                      displayMath(String.raw`\bigl|\mathcal E_{\square}(\{x\})\bigr|=4`),
-                      paragraph([
-                        "である。また、頂点集合と辺集合はどちらも「ある元のセルが存在する」という条件で定まるので、セル集合の合併で分配する。すなわち",
-                      ]),
-                      displayMath(String.raw`\mathcal V_{\square}(S\cup\{x\})=\mathcal V_{\square}(S)\cup\mathcal V_{\square}(\{x\}),\qquad
-\mathcal E_{\square}(S\cup\{x\})=\mathcal E_{\square}(S)\cup\mathcal E_{\square}(\{x\})`),
-                      paragraph([
-                        "が成り立つ（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"),
-                        " の条件「ある ", math(String.raw`(r',c')\in S\cup\{x\}`),
-                        " が存在する」は「", math(String.raw`S`), " に存在する」と「",
-                        math(String.raw`\{x\}`),
-                        " に存在する」の少なくとも一方と同値だからである）。この三つの準備から、まず頂点の個数は",
-                      ]),
-                      displayMath(String.raw`\begin{aligned}
-\bigl|\mathcal V_{\square}(S\cup\{x\})\bigr|
-&=\bigl|\mathcal V_{\square}(S)\cup\mathcal V_{\square}(\{x\})\bigr|
-&&\bigl(\because\ \text{直前の合併の等式}\bigr)\\
-&=\bigl|\mathcal V_{\square}(S)\bigr|+\bigl|\mathcal V_{\square}(\{x\})\bigr|-\bigl|\mathcal V_{\square}(S)\cap\mathcal V_{\square}(\{x\})\bigr|
-&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
-&=\bigl|\mathcal V_{\square}(S)\bigr|+4-v_x(S)
-&&\bigl(\because\ \bigl|\mathcal V_{\square}(\{x\})\bigr|=4\text{ と }v_x(S)\text{ の定義}\bigr)
-\end{aligned}`),
-                      paragraph(["となり、同様に辺の個数は"]),
-                      displayMath(String.raw`\begin{aligned}
-\bigl|\mathcal E_{\square}(S\cup\{x\})\bigr|
-&=\bigl|\mathcal E_{\square}(S)\cup\mathcal E_{\square}(\{x\})\bigr|
-&&\bigl(\because\ \text{直前の合併の等式}\bigr)\\
-&=\bigl|\mathcal E_{\square}(S)\bigr|+\bigl|\mathcal E_{\square}(\{x\})\bigr|-\bigl|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})\bigr|
-&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
-&=\bigl|\mathcal E_{\square}(S)\bigr|+4-e_x(S)
-&&\bigl(\because\ \bigl|\mathcal E_{\square}(\{x\})\bigr|=4\text{ と }e_x(S)\text{ の定義}\bigr)
-\end{aligned}`),
-                      paragraph(["となり、セルの個数は"]),
-                      displayMath(String.raw`\begin{aligned}
-\bigl|S\cup\{x\}\bigr|
-&=|S|+\bigl|\{x\}\bigr|-\bigl|S\cap\{x\}\bigr|
-&&\bigl(\because\ \text{有限集合の包除 }|A\cup B|=|A|+|B|-|A\cap B|\bigr)\\
-&=|S|+1
-&&\bigl(\because\ \bigl|\{x\}\bigr|=1\text{ と、}x\notin S\text{ なので }S\cap\{x\}=\varnothing\bigr)
-\end{aligned}`),
-                      paragraph(["となる。以上を合わせて"]),
-                      displayMath(String.raw`\begin{aligned}
-\chi_{\square}(S\cup\{x\})
-&=\bigl|\mathcal V_{\square}(S\cup\{x\})\bigr|-\bigl|\mathcal E_{\square}(S\cup\{x\})\bigr|+\bigl|S\cup\{x\}\bigr|
-&&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)\\
-&=\Bigl(\bigl|\mathcal V_{\square}(S)\bigr|+4-v_x(S)\Bigr)-\Bigl(\bigl|\mathcal E_{\square}(S)\bigr|+4-e_x(S)\Bigr)+\bigl(|S|+1\bigr)
-&&\bigl(\because\ \text{直前の三つの個数の等式}\bigr)\\
-&=\Bigl(\bigl|\mathcal V_{\square}(S)\bigr|-\bigl|\mathcal E_{\square}(S)\bigr|+|S|\Bigr)+1+e_x(S)-v_x(S)
-&&\bigl(\because\ \mathbb Z\text{ の四則}\bigr)\\
-&=\chi_{\square}(S)+1+e_x(S)-v_x(S)
-&&\bigl(\because\ \blkref{def_cell_euler_number}\bigr)
-\end{aligned}`),
-                      paragraph([
-                        "となる。全過程は有限集合の数え上げと整数の四則だけで閉じ、実数体も複素数体も現れない。",
-                      ]),
-                    ],
-                  },
-                },
-              }],
-            },
-          },
-          {
-            role: "subsection",
-            element: {
-              kind: "section",
-              id: "kac_ward_heading_hole_free_cell_set_euler_number",
-              labels: [],
-              title: { text: "辺連結なセル集合と補集合から決まる Euler 数" },
-              children: [{
-                role: "primary",
-                element: {
-                  kind: "elementGroup",
-                  id: "group_of_kac_ward_claim_hole_free_cell_set_euler_number_one",
                   focus: {
                     id: "kac_ward_claim_hole_free_cell_set_euler_number_one",
                     kind: "claim",
@@ -66061,10 +65937,16 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                         "元の周期持ち上げの逆向きの一歩である。各境界の二つの表示は、周期延長した持ち上げが ",
                         math(String.raw`\widetilde P_{k+m}(\gamma)=\widetilde P_{k}(\gamma)+B_{\gamma}`),
                         " を満たすことから同じ点を与え、",
-                        math(String.raw`C^{\gamma,k_0,u,c}_0=\widetilde P_{k_0}(\gamma)=C^{\gamma,k_0,u,c}_N`),
-                        " なので閉じた単位格子路である（", ref("def_first_hit_connecting_staircase"), "、",
-                        ref("def_periodic_plane_lift"), "、", ref("def_periodic_lift_closure_cycle"), "）。",
+                        "次の式鎖が成り立つ。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+C^{\gamma,k_0,u,c}_0
+&=\widetilde P_{k_0}(\gamma)
+&&\bigl(\because\ \blkref{def_periodic_lift_closure_cycle}\bigr)\\
+&=C^{\gamma,k_0,u,c}_N
+&&\bigl(\because\ \blkref{def_first_hit_connecting_staircase},\ \blkref{def_periodic_plane_lift},\ \blkref{def_periodic_lift_closure_cycle}\bigr)
+\end{aligned}`),
+                      paragraph(["したがって閉じた単位格子路である。"]),
                       paragraph([
                         "頂点の相異なりを示す。各接続階段の内部では頂点が相異なり、接続階段は元の持ち上げと始点でのみ、",
                         "移動後の持ち上げと終点でのみ交わる（",

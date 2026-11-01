@@ -7,6 +7,18 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_cell_complex_one_cell_increment_archived",
+    targets: ["def_cell_euler_number"],
+    title: { text: "参照用: 一セル追加による Euler 数の増分" },
+    body: [
+      paragraph(["旧主張。有限セル集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`), " と ", math(String.raw`x\notin S`), " に対し、共有頂点数と共有辺数を次で定める。頂点・辺・Euler 数の定義は本文に残す（", ref("def_cell_vertex_set"), "、", ref("def_cell_edge_set"), "、", ref("def_cell_euler_number"), "）。"]),
+      displayMath(String.raw`v_x(S)=|\mathcal V_{\square}(S)\cap\mathcal V_{\square}(\{x\})|,\qquad e_x(S)=|\mathcal E_{\square}(S)\cap\mathcal E_{\square}(\{x\})|.`),
+      displayMath(String.raw`\chi_{\square}(S\cup\{x\})=\chi_{\square}(S)+1+e_x(S)-v_x(S).`),
+      paragraph(["旧証明では単一セルの頂点と辺が各四つであること、頂点集合と辺集合がセル集合の合併を保つこと、有限集合の包除を使う。これらにより追加後の頂点数は追加前の頂点数に ", math(String.raw`4-v_x(S)`), " を、辺数は ", math(String.raw`4-e_x(S)`), " を、セル数は一を加えた数になる。Euler 数の定義へ代入すると上式を得る。"]),
+      paragraph(["後続の本文はこの増分等式を引用せず、辺連結なセル集合の Euler 数を面数と有限連結平面グラフの Euler 等式から直接求めるため、増分等式を退避した。有限検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_rotation_phase_product_archived",
     targets: ["claim_reversal_direction_shift"],
     title: { text: "参照用: 反転辺対の回転位相の積" },
