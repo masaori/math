@@ -136,6 +136,17 @@ private theorem matchingPairTermData (τ υ : FixedPointFreeInvolution J)
     rw [matchingPairEntryProduct τ υ A]
     rw [matchingPairOrientationProduct τ υ A hA.2]
     rw [matchingPairSecondOrientationProduct τ υ A hA.2]
+    have hτFactor : (∏ i ∈ Sτ, concreteOrientationFactor τ.val i) =
+        (∏ i ∈ Sτ, orientationFactor τ.val i) := by
+      apply Finset.prod_congr rfl
+      intro i _
+      rfl
+    have hυFactor : (∏ i ∈ Sυ, concreteOrientationFactor υ.val i) =
+        (∏ i ∈ Sυ, orientationFactor υ.val i) := by
+      apply Finset.prod_congr rfl
+      intro i _
+      rfl
+    rw [hτFactor, hυFactor]
     rw [← hατ, ← hαυ]
     rw [selectedAscendingPairs_eq_matchingOrientedPairs τ Sτ (by
       intro i

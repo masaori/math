@@ -11382,7 +11382,12 @@ G(F(\mathcal D_\tau,\mathcal D_\upsilon))
 A_{i,m(i)}&=-A_{m(i),i}&&\bigl(\because\ \text{仮定した反対称性}\bigr)\\
 &=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}&&\bigl(\because\ \epsilon_m(i)=-1,\ q_m(i)=(m(i),i)\bigr).
 \end{aligned}`),
-                paragraph(["正向きの場合も ", math(String.raw`\epsilon_m(i)=1`), " の代入で同じ等号となる。したがって"]),
+                displayMath(String.raw`\begin{aligned}
+A_{i,m(i)}&=A_{q_m(i)_1,q_m(i)_2}
+&&\bigl(\because\ q_m(i)=(i,m(i))\bigr)\\
+&=\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}
+&&\bigl(\because\ \epsilon_m(i)=1\bigr).
+\end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \prod_{i\in S}A_{i,m(i)}
 &=\prod_{i\in S}\bigl(\epsilon_m(i)A_{q_m(i)_1,q_m(i)_2}\bigr)
