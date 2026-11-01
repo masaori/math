@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_periodic_plane_lift_parallel_increase_archived",
+    targets: ["def_winding_parallel_coordinate"],
+    title: { text: "参照用: 周期並進による平行座標の増分" },
+    body: [
+      paragraph(["旧主張。非零巻き付きの閉じた非後退辺列について、周期延長した持ち上げ（", ref("def_periodic_plane_lift"), "）の平行座標（", ref("def_winding_parallel_coordinate"), "）は、一周期ごとに正の整数だけ増える。"]),
+      displayMath(String.raw`\pi_{\gamma}(\widetilde P_{k+m}(\gamma))=\pi_{\gamma}(\widetilde P_k(\gamma))+L(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2),\qquad L(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2)\ge1.`),
+      paragraph(["旧証明では、整数の除法で ", math(String.raw`k=qm+r`), " と書き、", math(String.raw`k+m=(q+1)m+r`), " を周期持ち上げの定義へ代入する。平行座標の定義と整数の分配法則で増分を得る。非零巻き付きから二つの平方の和が一以上となり、", math(String.raw`L\ge1`), " から増分の正値性が従う。"]),
+      paragraph(["この主張は後続の本文から引用されず、周期数の差から回転数を得る旧経路の部品である。採用した一側閉包と有限トーラス公式はこの増分を使わないため、本文から退避した。平行座標の定義は後続で使うため残した。有限検算と Lean の対応物は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_period_translates_of_iterated_staircase_disjoint_archived",
     targets: ["def_iterated_transverse_staircase"],
     title: { text: "参照用: 反復横断階段と非零周期並進の分離" },
