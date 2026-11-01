@@ -145,7 +145,7 @@ theorem smul_conj_smul_inv_eq {s2 : ℝ} (hs2 : 0 < s2) (X A : TensorPow M) :
 
 /-- **原文 第 3 式**（`V_2` を `V2_exponential_representation` の右辺 `V2H2Form` で書いた形）:
 `T_{V_2}(check(Z)_μ) = cosh(2K_2^*) check(Z)_μ - i sinh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2H2Form_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem TConj_V2H2Form_checkZ {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
     TConj (V2H2FormUnits M hs2 K2star) (checkZ M μ)
       = Complex.cosh (2 * K2star) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ := by
@@ -167,11 +167,11 @@ theorem TConj_V2H2Form_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.z)
     _ = Complex.cosh (2 * K2star) • checkZ M μ
           + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ :=
-        extract_taylor_H2_checkZ hM K2star μ
+        extract_taylor_H2_checkZ K2star μ
 
 /-- **原文 第 4 式**（`V_2` を `V2H2Form` で書いた形）:
 `T_{V_2}(check(Y)_μ) = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2H2Form_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem TConj_V2H2Form_checkY {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
     TConj (V2H2FormUnits M hs2 K2star) (checkY M μ)
       = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
         + Complex.cosh (2 * K2star) • checkY M μ := by
@@ -193,11 +193,11 @@ theorem TConj_V2H2Form_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.y)
     _ = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
           + Complex.cosh (2 * K2star) • checkY M μ :=
-        extract_taylor_H2_checkY hM K2star μ
+        extract_taylor_H2_checkY K2star μ
 
 /-- **原文 第 3 式**（`V_2` は `def_transfer_matrix` の `V_2`、`K_2^*` はその双対結合定数）:
 `T_{V_2}(check(Z)_μ) = cosh(2K_2^*) check(Z)_μ - i sinh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2_checkZ (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
+theorem TConj_V2_checkZ {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
     TConj (V2Units M hK2) (checkZ M μ)
       = Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkY M μ := by
@@ -222,11 +222,11 @@ theorem TConj_V2_checkZ (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.z)
     _ = Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkZ M μ
           + (-Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkY M μ :=
-        extract_taylor_H2_checkZ hM _ μ
+        extract_taylor_H2_checkZ _ μ
 
 /-- **原文 第 4 式**（`V_2` は `def_transfer_matrix` の `V_2`）:
 `T_{V_2}(check(Y)_μ) = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
-theorem TConj_V2_checkY (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
+theorem TConj_V2_checkY {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
     TConj (V2Units M hK2) (checkY M μ)
       = (Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkZ M μ
         + Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkY M μ := by
@@ -251,7 +251,7 @@ theorem TConj_V2_checkY (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
       -- `extract_taylor_coefficient_of_check_Z_Y` (h2.y)
     _ = (Complex.I * Complex.sinh (2 * ((Kstar K2 : ℝ) : ℂ))) • checkZ M μ
           + Complex.cosh (2 * ((Kstar K2 : ℝ) : ℂ)) • checkY M μ :=
-        extract_taylor_H2_checkY hM _ μ
+        extract_taylor_H2_checkY _ μ
 
 /-! ## 原文 `calc_of_TxT_check_Z_Y`（4 式を 2 列に並べる） -/
 
@@ -273,25 +273,25 @@ theorem actsBy_TConj_V1plusHalf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 /-- **原文 `calc_of_TxT_check_Z_Y` の第 2 式**:
 `(T_{V_2}(check(Z)_μ), T_{V_2}(check(Y)_μ)) = (check(Z)_μ, check(Y)_μ) B_2`
 （`V_2` は `V2H2Form`。人手の `V_2` 版は `actsBy_TConj_V2_check`）。 -/
-theorem actsBy_TConj_V2H2Form_check (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
+theorem actsBy_TConj_V2H2Form_check {s2 : ℝ} (hs2 : 0 < s2) (K2star : ℂ) (μ : ℤ) :
     ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat K2star) := by
   constructor
   · change TConj (V2H2FormUnits M hs2 K2star) (checkZ M μ) = _
-    rw [TConj_V2H2Form_checkZ hM hs2 K2star μ, B2mat_zero_zero, B2mat_one_zero]
+    rw [TConj_V2H2Form_checkZ hs2 K2star μ, B2mat_zero_zero, B2mat_one_zero]
   · change TConj (V2H2FormUnits M hs2 K2star) (checkY M μ) = _
-    rw [TConj_V2H2Form_checkY hM hs2 K2star μ, B2mat_zero_one, B2mat_one_one]
+    rw [TConj_V2H2Form_checkY hs2 K2star μ, B2mat_zero_one, B2mat_one_one]
 
 /-- **原文 `calc_of_TxT_check_Z_Y` の第 2 式**（`V_2` は `def_transfer_matrix` の `V_2`）:
 `(T_{V_2}(check(Z)_μ), T_{V_2}(check(Y)_μ)) = (check(Z)_μ, check(Y)_μ) B_2`。 -/
-theorem actsBy_TConj_V2_check (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
+theorem actsBy_TConj_V2_check {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
     ActsBy (TConj (V2Units M hK2)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat ((Kstar K2 : ℝ) : ℂ)) := by
   constructor
   · change TConj (V2Units M hK2) (checkZ M μ) = _
-    rw [TConj_V2_checkZ hM hK2 μ, B2mat_zero_zero, B2mat_one_zero]
+    rw [TConj_V2_checkZ hK2 μ, B2mat_zero_zero, B2mat_one_zero]
   · change TConj (V2Units M hK2) (checkY M μ) = _
-    rw [TConj_V2_checkY hM hK2 μ, B2mat_zero_one, B2mat_one_one]
+    rw [TConj_V2_checkY hK2 μ, B2mat_zero_one, B2mat_one_one]
 
 /-! ## 共役写像の一般線型性と半指数行列への特殊化 -/
 

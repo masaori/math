@@ -56,30 +56,30 @@ theorem hasSum_extract_taylor_H1Plus_checkY_of_necSuf (hM : M ≠ 0) (K1 : ℂ) 
   rwa [hcoef, add_comm] at h
 
 /-- **人手 (h2.z)** を必要十分版の特殊化として得たもの。 -/
-theorem hasSum_extract_taylor_H2_checkZ_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem hasSum_extract_taylor_H2_checkZ_of_necSuf (K2star : ℂ) (μ : ℤ) :
     HasSum (fun n : ℕ => ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkZ M μ))
       (Complex.cosh (2 * K2star) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ) := by
   have h := NecSuf.hasSum_two_dim_series
     (f := fun n => adPow ((Complex.I * K2star) • H2 M) n (checkZ M μ))
     (s := 2 * K2star) (α := -(2 * Complex.I * K2star))
-    (conversion_H2_checkZ_even hM K2star μ)
-    (fun k => by rw [conversion_H2_checkZ_odd hM K2star μ k]; congr 1; ring)
+    (conversion_H2_checkZ_even K2star μ)
+    (fun k => by rw [conversion_H2_checkZ_odd K2star μ k]; congr 1; ring)
   have hcoef : (-(2 * Complex.I * K2star)) * NecSuf.sinhc (2 * K2star)
       = -Complex.I * Complex.sinh (2 * K2star) := by
     linear_combination (-Complex.I) * NecSuf.mul_sinhc (2 * K2star)
   rwa [hcoef] at h
 
 /-- **人手 (h2.y)** を必要十分版の特殊化として得たもの。 -/
-theorem hasSum_extract_taylor_H2_checkY_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem hasSum_extract_taylor_H2_checkY_of_necSuf (K2star : ℂ) (μ : ℤ) :
     HasSum (fun n : ℕ => ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkY M μ))
       ((Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
         + Complex.cosh (2 * K2star) • checkY M μ) := by
   have h := NecSuf.hasSum_two_dim_series
     (f := fun n => adPow ((Complex.I * K2star) • H2 M) n (checkY M μ))
     (s := 2 * K2star) (α := 2 * Complex.I * K2star)
-    (conversion_H2_checkY_even hM K2star μ)
-    (fun k => by rw [conversion_H2_checkY_odd hM K2star μ k]; congr 1; ring)
+    (conversion_H2_checkY_even K2star μ)
+    (fun k => by rw [conversion_H2_checkY_odd K2star μ k]; congr 1; ring)
   have hcoef : (2 * Complex.I * K2star) * NecSuf.sinhc (2 * K2star)
       = Complex.I * Complex.sinh (2 * K2star) := by
     linear_combination Complex.I * NecSuf.mul_sinhc (2 * K2star)

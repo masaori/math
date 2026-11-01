@@ -222,7 +222,7 @@ theorem nesting_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ)
 /-! ## 人手 (h2.z): `E_n := [K_2^*H_2, …, [K_2^*H_2, check(Z)_μ]…]` -/
 
 /-- 人手 (h2.z) の帰納段階 1（`n = 2k` 偶数 → `n+1` 奇数）。 -/
-theorem nesting_H2_checkZ_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ)
+theorem nesting_H2_checkZ_step_even_to_odd (K2star : ℂ) (μ : ℤ) (k : ℕ)
     (ih : adPow (K2star • H2 M) (2 * k) (checkZ M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkZ M μ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkZ M μ)
@@ -237,7 +237,7 @@ theorem nesting_H2_checkZ_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : �
         comm_smul_smul _ _ _ _
     -- (C)
     _ = (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • ((-2 : ℂ) • checkY M μ) := by
-        rw [lie_H2_checkZ hM μ]
+        rw [lie_H2_checkZ μ]
     -- スカラー倍の交換と結合。`K_2^*(-2) = (-1)(2K_2^*)`
     _ = ((-1 : ℂ) ^ k * (-1) * ((2 * K2star) ^ (2 * k) * (2 * K2star))) • checkY M μ := by
         rw [smul_smul]
@@ -248,7 +248,7 @@ theorem nesting_H2_checkZ_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : �
         rw [← pow_succ, ← pow_succ]
 
 /-- 人手 (h2.z) の帰納段階 2（`n = 2k+1` 奇数 → `n+1` 偶数）。 -/
-theorem nesting_H2_checkZ_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ)
+theorem nesting_H2_checkZ_step_odd_to_even (K2star : ℂ) (μ : ℤ) (k : ℕ)
     (ih : adPow (K2star • H2 M) (2 * k + 1) (checkZ M μ)
       = ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ) :
     adPow (K2star • H2 M) (2 * (k + 1)) (checkZ M μ)
@@ -263,7 +263,7 @@ theorem nesting_H2_checkZ_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : �
         comm_smul_smul _ _ _ _
     -- (D)
     _ = (K2star * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1))) • ((2 : ℂ) • checkZ M μ) := by
-        rw [lie_H2_checkY hM μ]
+        rw [lie_H2_checkY μ]
     -- スカラー倍の交換と結合
     _ = ((-1 : ℂ) ^ (k + 1) * ((2 * K2star) ^ (2 * k + 1) * (2 * K2star))) • checkZ M μ := by
         rw [smul_smul]
@@ -274,7 +274,7 @@ theorem nesting_H2_checkZ_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : �
         rw [← pow_succ, show 2 * k + 1 + 1 = 2 * (k + 1) by ring]
 
 /-- **人手 (h2.z) の偶数側**: `n = 2k` のとき `(-1)^k (2K_2^*)^{2k} check(Z)_μ`。 -/
-theorem nesting_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkZ_even (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k) (checkZ M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkZ M μ := by
   induction k with
@@ -287,19 +287,19 @@ theorem nesting_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ
       _ = ((-1 : ℂ) ^ 0 * (2 * K2star) ^ (2 * 0)) • checkZ M μ := by
           rw [pow_zero, Nat.mul_zero, pow_zero, mul_one, one_smul]
   | succ k ih =>
-    exact nesting_H2_checkZ_step_odd_to_even hM K2star μ k
-      (nesting_H2_checkZ_step_even_to_odd hM K2star μ k ih)
+    exact nesting_H2_checkZ_step_odd_to_even K2star μ k
+      (nesting_H2_checkZ_step_even_to_odd K2star μ k ih)
 
 /-- **人手 (h2.z) の奇数側**: `n = 2k+1` のとき `(-1)^{k+1} (2K_2^*)^{2k+1} check(Y)_μ`。 -/
-theorem nesting_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkZ_odd (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkZ M μ)
       = ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ :=
-  nesting_H2_checkZ_step_even_to_odd hM K2star μ k (nesting_H2_checkZ_even hM K2star μ k)
+  nesting_H2_checkZ_step_even_to_odd K2star μ k (nesting_H2_checkZ_even K2star μ k)
 
 /-! ## 人手 (h2.y): `F_n := [K_2^*H_2, …, [K_2^*H_2, check(Y)_μ]…]` -/
 
 /-- 人手 (h2.y) の帰納段階 1（`n = 2k` 偶数 → `n+1` 奇数）。 -/
-theorem nesting_H2_checkY_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ)
+theorem nesting_H2_checkY_step_even_to_odd (K2star : ℂ) (μ : ℤ) (k : ℕ)
     (ih : adPow (K2star • H2 M) (2 * k) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkY M μ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkY M μ)
@@ -314,7 +314,7 @@ theorem nesting_H2_checkY_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : �
         comm_smul_smul _ _ _ _
     -- (D)
     _ = (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • ((2 : ℂ) • checkZ M μ) := by
-        rw [lie_H2_checkY hM μ]
+        rw [lie_H2_checkY μ]
     -- スカラー倍の交換と結合
     _ = ((-1 : ℂ) ^ k * ((2 * K2star) ^ (2 * k) * (2 * K2star))) • checkZ M μ := by
         rw [smul_smul]
@@ -325,7 +325,7 @@ theorem nesting_H2_checkY_step_even_to_odd (hM : M ≠ 0) (K2star : ℂ) (μ : �
         rw [← pow_succ]
 
 /-- 人手 (h2.y) の帰納段階 2（`n = 2k+1` 奇数 → `n+1` 偶数）。 -/
-theorem nesting_H2_checkY_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ)
+theorem nesting_H2_checkY_step_odd_to_even (K2star : ℂ) (μ : ℤ) (k : ℕ)
     (ih : adPow (K2star • H2 M) (2 * k + 1) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ) :
     adPow (K2star • H2 M) (2 * (k + 1)) (checkY M μ)
@@ -340,7 +340,7 @@ theorem nesting_H2_checkY_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : �
         comm_smul_smul _ _ _ _
     -- (C)
     _ = (K2star * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1))) • ((-2 : ℂ) • checkY M μ) := by
-        rw [lie_H2_checkZ hM μ]
+        rw [lie_H2_checkZ μ]
     -- スカラー倍の交換と結合。`K_2^*(-2) = (-1)(2K_2^*)`
     _ = ((-1 : ℂ) ^ k * (-1) * ((2 * K2star) ^ (2 * k + 1) * (2 * K2star))) • checkY M μ := by
         rw [smul_smul]
@@ -351,7 +351,7 @@ theorem nesting_H2_checkY_step_odd_to_even (hM : M ≠ 0) (K2star : ℂ) (μ : �
         rw [← pow_succ, ← pow_succ, show 2 * k + 1 + 1 = 2 * (k + 1) by ring]
 
 /-- **人手 (h2.y) の偶数側**: `n = 2k` のとき `(-1)^k (2K_2^*)^{2k} check(Y)_μ`。 -/
-theorem nesting_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkY_even (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkY M μ := by
   induction k with
@@ -364,13 +364,13 @@ theorem nesting_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ
       _ = ((-1 : ℂ) ^ 0 * (2 * K2star) ^ (2 * 0)) • checkY M μ := by
           rw [pow_zero, Nat.mul_zero, pow_zero, mul_one, one_smul]
   | succ k ih =>
-    exact nesting_H2_checkY_step_odd_to_even hM K2star μ k
-      (nesting_H2_checkY_step_even_to_odd hM K2star μ k ih)
+    exact nesting_H2_checkY_step_odd_to_even K2star μ k
+      (nesting_H2_checkY_step_even_to_odd K2star μ k ih)
 
 /-- **人手 (h2.y) の奇数側**: `n = 2k+1` のとき `(-1)^k (2K_2^*)^{2k+1} check(Z)_μ`。 -/
-theorem nesting_H2_checkY_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkY_odd (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ :=
-  nesting_H2_checkY_step_even_to_odd hM K2star μ k (nesting_H2_checkY_even hM K2star μ k)
+  nesting_H2_checkY_step_even_to_odd K2star μ k (nesting_H2_checkY_even K2star μ k)
 
 end Ising2D

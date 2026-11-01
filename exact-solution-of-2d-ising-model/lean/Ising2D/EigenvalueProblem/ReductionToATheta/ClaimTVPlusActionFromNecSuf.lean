@@ -31,7 +31,7 @@ theorem TVPlus_checkZ_checkY_of_necSuf (hM : M ≠ 0) (K : IsingConst) (μ : ℤ
     ActsBy (TVPlus M hs2 K1 K2star).toLinearMap (checkZ M μ) (checkY M μ)
       (AMat K (thetaTilde M μ)) := by
   have h := NecSuf.actsBy_TV_sandwich (actsBy_TConj_V1plusHalf hM K1 μ)
-    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ)
+    (actsBy_TConj_V2H2Form_check hs2 K2star μ)
   rwa [factorization_of_A_thetaTilde (M := M) K K1 K2star μ hc1 hs1 hc2star hs2star hdual] at h
 
 end Ising2D

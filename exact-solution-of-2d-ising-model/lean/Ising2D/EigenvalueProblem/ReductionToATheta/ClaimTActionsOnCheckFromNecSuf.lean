@@ -144,21 +144,21 @@ theorem actsBy_TConj_V1plusHalf_fromNecSuf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) 
 
 /-- **`calc_of_TxT_check_Z_Y` の第 2 式を必要十分版の特殊化として得たもの**
 （主張は `actsBy_TConj_V2H2Form_check` と同じ）。 -/
-theorem actsBy_TConj_V2H2Form_check_fromNecSuf (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2)
+theorem actsBy_TConj_V2H2Form_check_fromNecSuf {s2 : ℝ} (hs2 : 0 < s2)
     (K2star : ℂ) (μ : ℤ) :
     ActsBy (TConj (V2H2FormUnits M hs2 K2star)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat K2star) := by
   rw [B2mat_eq_twoDimConjMat]
   refine actsBy_TConj_smulUnits _ ?_
-  exact actsBy_TConj_matExpUnits (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ)
+  exact actsBy_TConj_matExpUnits (ad_V2H2Form_checkZ K2star μ) (ad_V2H2Form_checkY K2star μ)
     (sK2_sq K2star)
 
 /-- **`calc_of_TxT_check_Z_Y` の第 2 式（人手の `V_2`）を必要十分版の特殊化として得たもの**
 （主張は `actsBy_TConj_V2_check` と同じ）。 -/
-theorem actsBy_TConj_V2_check_fromNecSuf (hM : M ≠ 0) {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
+theorem actsBy_TConj_V2_check_fromNecSuf {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
     ActsBy (TConj (V2Units M hK2)).toLinearMap (checkZ M μ) (checkY M μ)
       (B2mat ((Kstar K2 : ℝ) : ℂ)) := by
   rw [V2Units_eq_V2H2FormUnits]
-  exact actsBy_TConj_V2H2Form_check_fromNecSuf hM _ _ μ
+  exact actsBy_TConj_V2H2Form_check_fromNecSuf _ _ μ
 
 end Ising2D

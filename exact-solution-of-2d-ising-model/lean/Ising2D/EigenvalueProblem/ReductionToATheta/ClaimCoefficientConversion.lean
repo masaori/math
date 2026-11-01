@@ -283,7 +283,7 @@ theorem conversion_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : �
 /-! ## 人手 (h2.z)・(h2.y): `α = i`、`X = K_2^* H_2`（`2` の冪は現れない） -/
 
 /-- **人手 (h2.z) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Z)_μ`。 -/
-theorem conversion_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkZ_even (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
       = ((2 * K2star) ^ (2 * k)) • checkZ M μ := by
   calc adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
@@ -293,7 +293,7 @@ theorem conversion_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : 
         adPow_smul_left _ _ _ _
     -- `nesting_of_commutator_of_H_and_check_Z` (h2.z)
     _ = Complex.I ^ (2 * k) • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkZ M μ) := by
-        rw [nesting_H2_checkZ_even hM K2star μ k]
+        rw [nesting_H2_checkZ_even K2star μ k]
     -- 補題 2
     _ = ((-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • checkZ M μ := by
         rw [I_pow_even, smul_smul]
@@ -305,7 +305,7 @@ theorem conversion_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : 
         rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
 /-- **人手 (h2.z) 奇数側**: `n = 2k+1` のとき `-i (2K_2^*)^{2k+1} check(Y)_μ`。 -/
-theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkZ_odd (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
       = (-Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
   calc adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
@@ -316,7 +316,7 @@ theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : �
     -- `nesting_of_commutator_of_H_and_check_Z` (h2.z)
     _ = Complex.I ^ (2 * k + 1)
           • (((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ) := by
-        rw [nesting_H2_checkZ_odd hM K2star μ k]
+        rw [nesting_H2_checkZ_odd K2star μ k]
     -- 補題 2
     _ = (Complex.I * (-1 : ℂ) ^ k * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)))
           • checkY M μ := by
@@ -329,7 +329,7 @@ theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : �
         rw [pow_succ, pow_mul, neg_one_sq, one_pow, one_mul, mul_neg_one]
 
 /-- **人手 (h2.y) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Y)_μ`。 -/
-theorem conversion_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkY_even (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
       = ((2 * K2star) ^ (2 * k)) • checkY M μ := by
   calc adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
@@ -339,7 +339,7 @@ theorem conversion_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : 
         adPow_smul_left _ _ _ _
     -- `nesting_of_commutator_of_H_and_check_Z` (h2.y)
     _ = Complex.I ^ (2 * k) • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkY M μ) := by
-        rw [nesting_H2_checkY_even hM K2star μ k]
+        rw [nesting_H2_checkY_even K2star μ k]
     -- 補題 2
     _ = ((-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • checkY M μ := by
         rw [I_pow_even, smul_smul]
@@ -351,7 +351,7 @@ theorem conversion_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : 
         rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
 /-- **人手 (h2.y) 奇数側**: `n = 2k+1` のとき `i (2K_2^*)^{2k+1} check(Z)_μ`。 -/
-theorem conversion_H2_checkY_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkY_odd (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
       = (Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
   calc adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
@@ -362,7 +362,7 @@ theorem conversion_H2_checkY_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : �
     -- `nesting_of_commutator_of_H_and_check_Z` (h2.y)
     _ = Complex.I ^ (2 * k + 1)
           • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ) := by
-        rw [nesting_H2_checkY_odd hM K2star μ k]
+        rw [nesting_H2_checkY_odd K2star μ k]
     -- 補題 2
     _ = (Complex.I * (-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)))
           • checkZ M μ := by

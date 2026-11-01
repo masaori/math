@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十二個目を行った。人手 `commutator_of_H_and_check_Z_Y` の必要十分版 `NecSuf/CommutatorSiteSum.lean` を具体版と同じ手順で置き、具体版 4 式を特殊化として導く `ClaimCommutatorHCheckZYFromNecSuf.lean` を置いた。境界の符号 `-1` という値は効かず、(A) には `η = p(M)`、(B) には `p(M)η = 1` だけが効く。(C)(D) は `M = 0` でも成り立つので、`H_2` 側の定理の連鎖から使われない `M ≠ 0` を外した。次は状態台帳の「次の一歩」の先頭（`sqrtM_cast_ne_zero` の整理）。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の八回目として、数の exp の三つの主張（部分和の極限・指数法則・`exp(0)=1`）の検算 `sagemath/check/scalar_exp_is_limit_of_partial_sums/`・`scalar_exp_product/`・`scalar_exp_zero/` を足した（未検算 113 → 110 件）。冪・部分和・指数法則の鎖は `QQ`・`QQ(i)` 上の多項式環と形式冪級数で厳密に、極限の値だけをボールで確かめた。三回のレビューで人手証明を直した（散文中の式変形を (∵) 付きの鎖に、数の冪 `x^{m+1}` を主張の約束に、`exp(0)=1` を行列の部分和が定数列 `[1]` であることと行列の極限の一意性から示す形に、`def_matrix_norm` に `K` の列の収束を追加）。`mat_mult` が `Mat(m,n,ℂ)` にしか定義されていないこと、`K` の列の極限の一意性にラベルが無いことを状態台帳に記録した。計算の誤りは無かった。次は `real_exp_positive`。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`kronecker_transpose`（クロネッカー積の転置）の検算 `sagemath/check/kronecker_transpose/` を足した（未検算 114 → 113 件）。因子の成分を `QQ` 上の多項式環の不定元に置き、`M = 1,…,4` で厳密に確かめた。主張の中で定めていた転置と未定義だった 2 次の行列の転置を、新しい定義 `def_matrix_transpose` へ切り出した。計算の誤りは無かった。あわせて、main の `nonzero_kernel_iff_det_zero_two_by_two` が入れた `⇒ ⇐` で `build:pdf` が落ちていたので、`tools/build-latex.ts` の和文で組む文字に U+21D0・U+21D2 を足した。次は `scalar_exp_is_limit_of_partial_sums`。

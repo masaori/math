@@ -95,9 +95,9 @@ theorem TVPlus_apply_checkZ (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star 
   have h1y : T1 (checkY M μ) = B1mat K1 θ 0 1 • checkZ M μ + B1mat K1 θ 1 1 • checkY M μ :=
     (actsBy_TConj_V1plusHalf hM K1 μ).2
   have h2z : T2 (checkZ M μ) = B2mat K2star 0 0 • checkZ M μ + B2mat K2star 1 0 • checkY M μ :=
-    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ).1
+    (actsBy_TConj_V2H2Form_check hs2 K2star μ).1
   have h2y : T2 (checkY M μ) = B2mat K2star 0 1 • checkZ M μ + B2mat K2star 1 1 • checkY M μ :=
-    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ).2
+    (actsBy_TConj_V2H2Form_check hs2 K2star μ).2
   calc TVPlus M hs2 K1 K2star (checkZ M μ)
       -- `def_T_V_plus`
       = T1 (T2 (T1 (checkZ M μ))) := TVPlus_apply hs2 K1 K2star _
@@ -144,9 +144,9 @@ theorem TVPlus_apply_checkY (hM : M ≠ 0) {s2 : ℝ} (hs2 : 0 < s2) (K1 K2star 
   have h1y : T1 (checkY M μ) = B1mat K1 θ 0 1 • checkZ M μ + B1mat K1 θ 1 1 • checkY M μ :=
     (actsBy_TConj_V1plusHalf hM K1 μ).2
   have h2z : T2 (checkZ M μ) = B2mat K2star 0 0 • checkZ M μ + B2mat K2star 1 0 • checkY M μ :=
-    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ).1
+    (actsBy_TConj_V2H2Form_check hs2 K2star μ).1
   have h2y : T2 (checkY M μ) = B2mat K2star 0 1 • checkZ M μ + B2mat K2star 1 1 • checkY M μ :=
-    (actsBy_TConj_V2H2Form_check hM hs2 K2star μ).2
+    (actsBy_TConj_V2H2Form_check hs2 K2star μ).2
   calc TVPlus M hs2 K1 K2star (checkY M μ)
       -- `def_T_V_plus`
       = T1 (T2 (T1 (checkY M μ))) := TVPlus_apply hs2 K1 K2star _

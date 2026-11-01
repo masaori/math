@@ -41,15 +41,15 @@ private theorem comm_H1Plus_checkY (hM : M ≠ 0) (μ : ℤ) :
   rw [← Ring.lie_def, lie_H1Plus_checkY hM μ]
 
 /-- (C) を `[h, z] = 2p y` の形で（`p = -1`）。 -/
-private theorem comm_H2_checkZ (hM : M ≠ 0) (μ : ℤ) :
+private theorem comm_H2_checkZ (μ : ℤ) :
     H2 M * checkZ M μ - checkZ M μ * H2 M = (2 * (-1 : ℂ)) • checkY M μ := by
-  rw [← Ring.lie_def, lie_H2_checkZ hM μ]
+  rw [← Ring.lie_def, lie_H2_checkZ μ]
   norm_num
 
 /-- (D) を `[h, y] = -2q z` の形で（`q = -1`）。 -/
-private theorem comm_H2_checkY (hM : M ≠ 0) (μ : ℤ) :
+private theorem comm_H2_checkY (μ : ℤ) :
     H2 M * checkY M μ - checkY M μ * H2 M = (-2 * (-1 : ℂ)) • checkZ M μ := by
-  rw [← Ring.lie_def, lie_H2_checkY hM μ]
+  rw [← Ring.lie_def, lie_H2_checkY μ]
   norm_num
 
 private theorem neg_one_mul_neg_one : (-1 : ℂ) * (-1) = 1 := by norm_num
@@ -89,36 +89,36 @@ theorem nesting_H1Plus_checkY_odd_of_necSuf (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ)
     (checkPhase_mul_neg M μ) K1 k
 
 /-- 人手 (h2.z) の偶数側を必要十分版の特殊化として得たもの。 -/
-theorem nesting_H2_checkZ_even_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkZ_even_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k) (checkZ M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkZ M μ := by
   rw [adPow_eq_iterComm]
-  exact NecSuf.nested_z_even (comm_H2_checkZ hM μ) (comm_H2_checkY hM μ)
+  exact NecSuf.nested_z_even (comm_H2_checkZ μ) (comm_H2_checkY μ)
     neg_one_mul_neg_one K2star k
 
 /-- 人手 (h2.z) の奇数側を必要十分版の特殊化として得たもの。 -/
-theorem nesting_H2_checkZ_odd_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkZ_odd_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkZ M μ)
       = ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
-  rw [adPow_eq_iterComm, NecSuf.nested_z_odd (comm_H2_checkZ hM μ) (comm_H2_checkY hM μ)
+  rw [adPow_eq_iterComm, NecSuf.nested_z_odd (comm_H2_checkZ μ) (comm_H2_checkY μ)
     neg_one_mul_neg_one K2star k]
   -- `p = -1` を代入した `(-1)^k (2K_2^*)^{2k+1} (-1)` を具体版の `(-1)^{k+1} (2K_2^*)^{2k+1}` へ並べ直す
   congr 1
   ring
 
 /-- 人手 (h2.y) の偶数側を必要十分版の特殊化として得たもの。 -/
-theorem nesting_H2_checkY_even_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkY_even_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkY M μ := by
   rw [adPow_eq_iterComm]
-  exact NecSuf.nested_y_even (comm_H2_checkZ hM μ) (comm_H2_checkY hM μ)
+  exact NecSuf.nested_y_even (comm_H2_checkZ μ) (comm_H2_checkY μ)
     neg_one_mul_neg_one K2star k
 
 /-- 人手 (h2.y) の奇数側を必要十分版の特殊化として得たもの。 -/
-theorem nesting_H2_checkY_odd_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem nesting_H2_checkY_odd_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (K2star • H2 M) (2 * k + 1) (checkY M μ)
       = ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
-  rw [adPow_eq_iterComm, NecSuf.nested_y_odd (comm_H2_checkZ hM μ) (comm_H2_checkY hM μ)
+  rw [adPow_eq_iterComm, NecSuf.nested_y_odd (comm_H2_checkZ μ) (comm_H2_checkY μ)
     neg_one_mul_neg_one K2star k]
   -- `q = -1` を代入した `(-1)^{k+1} (2K_2^*)^{2k+1} (-1)` を具体版の `(-1)^k (2K_2^*)^{2k+1}` へ並べ直す
   congr 1

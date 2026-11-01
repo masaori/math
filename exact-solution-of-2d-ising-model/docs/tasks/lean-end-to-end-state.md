@@ -244,7 +244,7 @@
     `ClaimH1H2ViaHatZHatY` の `H1`（`H1plus` の定義の展開）、
     `ClaimTVActionsOnHatZHatY` の `B1mat_eq_twoDimConjMat`・`B2mat_eq_twoDimConjMat`・`actsBy_TConj_matExpUnits`・`actsBy_TConj_smulUnits`、
     `DefinitionFermiPsi` の `sqrtM`・`sqrtM_ne_zero`・`sqrtM_sq`、`DefinitionNumberOperator` の `tensorPow_two_torsion_free`（`.eq_1` は数えていない）。
-    `commutator_of_H_and_check_Z_Y` の必要十分版は未作成である（既存の `NecSuf/CommutatorClifford.lean` は退避した別経路の一般化で、新しい具体版の手順と対応しない）。
+    `commutator_of_H_and_check_Z_Y` の必要十分版は未作成である（既存の `NecSuf/CommutatorClifford.lean` は退避した別経路の一般化で、新しい具体版の手順と対応しない）。二十二個目で `NecSuf/CommutatorSiteSum.lean` として作った。
 
   - ゴールラインの確認の二つ目（済み、2026-10-31）: 上の定数のうち `ClaimAnticommutatorHatZHatY` の 4 定数を判定した。
     `acomm_sum_smul_clifford`・`acomm_sum_smul_zero` は経路に依らない汎用補題で、本文 `ClaimAnticommutatorCheckZY.lean`（人手 `anticommutator_of_check_Z_Y`）は
@@ -421,11 +421,16 @@
     知見: `λ_+ ≠ λ_-` と `det P ≠ 0` に効くのは `2s ≠ 0`（具体版は `r > 0`。`ZMod 2` で崩れる）、人手 Step 2 の第 1 成分の `b = -ā` と `aā = r^2` は合成 `ab = -r^2` だけが効き、第 2 成分は仮定なしで閉じる。
     二回のレビューの指摘（必須 9 件・任意 6 件）を直した。
 
+  - ゴールラインの確認の二十二個目（済み、2026-11-01）: 人手 `commutator_of_H_and_check_Z_Y` の必要十分版 `NecSuf/CommutatorSiteSum.lean` を、具体版 `ClaimCommutatorHCheckZY.lean` と同じ手順
+    （サイトごとの交換関係 8 式 → 和へまとめる 4 式 → (C)(D) → 境界の二項と (A)(B)）で置き、具体版 4 式をその特殊化として導く `ClaimCommutatorHCheckZYFromNecSuf.lean` を置いた。
+    仮定は `R`-代数の族 `z, y` の反交換関係 5 つ、位相 `p` の加法性と `p(0) = 1`、境界の符号 `η` について (A) は `η = p(M)`、(B) は `p(M)η = 1`。
+    知見: 境界の符号 `-1` という値は効かず、周期境界 `η = 1` と整数運動量 `p(M) = 1` でも同じ 4 式が出る。
+    レビューの指摘で、(C)(D) が `M = 0` でも成り立つので具体版 `lie_H2_checkZ`・`lie_H2_checkY` から `M ≠ 0` を外し、使われなくなった `M ≠ 0` を `H_2` 側の入れ子交換子・係数変換・Taylor 係数の抽出・`T_{V_2}` の作用の定理から連鎖的に外した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。

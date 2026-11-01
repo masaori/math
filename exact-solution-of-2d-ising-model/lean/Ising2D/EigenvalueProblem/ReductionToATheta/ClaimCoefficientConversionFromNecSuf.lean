@@ -93,40 +93,40 @@ theorem conversion_H1Plus_checkY_odd_of_necSuf (hM : M ≠ 0) (K1 : ℂ) (μ : �
       + (Complex.I * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) * neg_one_pow_mul_succ k
 
 /-- 人手 (h2.z) 偶数側を必要十分版の特殊化から得たもの。 -/
-theorem conversion_H2_checkZ_even_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkZ_even_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
       = ((2 * K2star) ^ (2 * k)) • checkZ M μ := by
-  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkZ_even_of_necSuf hM K2star μ k,
+  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkZ_even_of_necSuf K2star μ k,
     smul_smul]
   congr 1
   rw [I_pow_even]
   linear_combination (2 * K2star) ^ (2 * k) * neg_one_pow_mul_self k
 
 /-- 人手 (h2.z) 奇数側を必要十分版の特殊化から得たもの。 -/
-theorem conversion_H2_checkZ_odd_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkZ_odd_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
       = (-Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
-  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkZ_odd_of_necSuf hM K2star μ k,
+  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkZ_odd_of_necSuf K2star μ k,
     smul_smul]
   congr 1
   rw [I_pow_odd]
   linear_combination (Complex.I * (2 * K2star) ^ (2 * k + 1)) * neg_one_pow_mul_succ k
 
 /-- 人手 (h2.y) 偶数側を必要十分版の特殊化から得たもの。 -/
-theorem conversion_H2_checkY_even_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkY_even_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
       = ((2 * K2star) ^ (2 * k)) • checkY M μ := by
-  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkY_even_of_necSuf hM K2star μ k,
+  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkY_even_of_necSuf K2star μ k,
     smul_smul]
   congr 1
   rw [I_pow_even]
   linear_combination (2 * K2star) ^ (2 * k) * neg_one_pow_mul_self k
 
 /-- 人手 (h2.y) 奇数側を必要十分版の特殊化から得たもの。 -/
-theorem conversion_H2_checkY_odd_of_necSuf (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
+theorem conversion_H2_checkY_odd_of_necSuf (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
       = (Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
-  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkY_odd_of_necSuf hM K2star μ k,
+  rw [← smul_smul, adPow_smul_left_of_necSuf, nesting_H2_checkY_odd_of_necSuf K2star μ k,
     smul_smul]
   congr 1
   rw [I_pow_odd]
@@ -162,20 +162,20 @@ theorem sK1_sq (M : ℕ) (K1 : ℂ) (μ : ℤ) :
     (K1 ^ 2 * checkPhase M 1 μ * checkPhase M (-1) μ) * Complex.I_sq - (K1 ^ 2) * hp
 
 /-- 人手 (C) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2H2Form_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_checkZ (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * checkZ M μ -
         checkZ M μ * ((Complex.I * K2star) • H2 M)
       = (-(2 * Complex.I * K2star)) • checkY M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkZ hM μ, smul_smul]
+  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkZ μ, smul_smul]
   congr 1
   ring
 
 /-- 人手 (D) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2H2Form_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem ad_V2H2Form_checkY (K2star : ℂ) (μ : ℤ) :
     ((Complex.I * K2star) • H2 M) * checkY M μ -
         checkY M μ * ((Complex.I * K2star) • H2 M)
       = (2 * Complex.I * K2star) • checkZ M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkY hM μ, smul_smul]
+  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkY μ, smul_smul]
   congr 1
   ring
 

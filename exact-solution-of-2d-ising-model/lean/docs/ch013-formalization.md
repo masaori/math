@@ -5,7 +5,7 @@
 新規ファイル:
 
 - 具体版: `lean/Ising2D/RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY.lean`（参照用ノートへ退避した `H1_H2_via_check_Z_Y` の形式化の記録。旧 `Part013/Claim007_H1H2ViaCheck.lean`。`why_008_applies_only_to_minus_sector` のファイルは整数運動量の経路の記録なので `lean/Ising2D/RoutesNotAdopted/IntegerMomentum/` へ移した。指数和・半整数運動量の定義と周期性・添字集合・交換関係のファイルは、章立てに合わせて `lean/Ising2D/EigenvalueProblem/ReductionToATheta/` へ移した）
-- 必要十分版: `lean/Ising2D/NecSuf/AntiperiodicFourier.lean`
+- 必要十分版: `lean/Ising2D/NecSuf/AntiperiodicFourier.lean`、`lean/Ising2D/NecSuf/CommutatorSiteSum.lean`（`commutator_of_H_and_check_Z_Y`）
 
 `lean/README.md` への統合は呼び出し元が行う（本ファイルは章 013 の作業記録）。
 
@@ -95,6 +95,18 @@
 | `NecSuf.acomm_antiperiodic_fourier_clifford` | 奇数周波数フーリエ和どうしの反交換子 | `anticommutator_of_check_Z_Y` |
 | `NecSuf.inverse_dft_antiperiodic` | 反周期的離散フーリエ逆変換（任意の体・任意の加群） | `recover_Z_Y_from_check_Z_Y` |
 
+### 必要十分版（`Ising2D/NecSuf/CommutatorSiteSum.lean`、名前空間 `Ising2D.NecSuf`）
+
+| Lean の名前 | 内容 | 人手証明のラベル |
+| --- | --- | --- |
+| `NecSuf.SiteZY` | 反交換関係 5 つを満たす `R`-代数の族 `z, y : Fin M → A` | `commutator_of_H_and_check_Z_Y`（具体版が使う `anticommutator_of_Z_and_Y` の帰結） |
+| `NecSuf.SiteZY.lie_zy_z_of_ne` / `lie_zy_y_of_ne` / `lie_yz_z_of_ne` / `lie_yz_y_of_ne` | Step 1 の、相異なる添字の項が消える 4 式 | `commutator_of_H_and_check_Z_Y` |
+| `NecSuf.SiteZY.lie_zy_z_self` / `lie_zy_y_self` / `lie_yz_z_right` / `lie_yz_y_left` | Step 1 の、同じ添字を含む項の 4 式 | 同上 |
+| `NecSuf.SiteZY.lie_h2_z` / `lie_h2_y` / `lie_h1_z` / `lie_h1_y` | Step 1 の和へまとめた 4 式（延長 `yflat`・`zflat` の境界の符号は `η`） | 同上 |
+| `NecSuf.SiteZY.lie_h2_checkZ` / `lie_h2_checkY` | (C)(D) | 同上 Step 2 |
+| `NecSuf.SiteZY.phase_smul_yflat_boundary` / `lie_h1_checkZ` | Step 3 の境界の二項（`η = p(M)`）と (A) | 同上 Step 3 |
+| `NecSuf.SiteZY.phase_smul_zflat_boundary` / `lie_h1_checkY` | Step 4 の境界の二項（`p(M)η = 1`）と (B) | 同上 Step 4 |
+
 ### 必要十分版 → 具体版の導出
 
 | 導出した定理 | 元の必要十分版 | ファイル |
@@ -111,7 +123,7 @@
 | `Ising2D.checkY_period_of_necSuf` | **既存の** `NecSuf.transform_periodic` | `half_integer_checkY_periodicity` |
 | `Ising2D.acomm_checkZ_checkZ_of_necSuf` / `acomm_checkY_checkY_of_necSuf` | `NecSuf.acomm_antiperiodic_fourier_clifford`（それ自体が既存の `NecSuf.acomm_fourier_clifford_weights` の特殊化） | `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckZYFromNecSuf.lean` |
 | `Ising2D.inverse_dft_check_of_necSuf` / `recover_checkZ_of_necSuf` / `recover_checkY_of_necSuf` | `NecSuf.inverse_dft_antiperiodic` | `EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimRecoverZYFromCheckZYFromNecSuf.lean` |
-| (A)〜(D)（`lie_H1Plus_checkZ` ほか 4 本） | **未作成**（3 節）。 `NecSuf.CliffordTriple.lie_sum_*` は `H` を `check(Z), check(Y)` の和で表してから計算する別の経路（`H1_H2_via_check_Z_Y` を使う。参照用ノートへ退避済み）の一般化で、具体版の手順（サイトごとの交換関係から和へまとめる）と対応しない | `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZY.lean` |
+| `Ising2D.lie_H1Plus_checkZ_of_necSuf` / `lie_H1Plus_checkY_of_necSuf` / `lie_H2_checkZ_of_necSuf` / `lie_H2_checkY_of_necSuf`（(A)〜(D)） | `NecSuf.SiteZY.lie_h1_checkZ` / `lie_h1_checkY` / `lie_h2_checkZ` / `lie_h2_checkY`（`NecSuf/CommutatorSiteSum.lean`。具体版と同じ手順で、サイトごとの交換関係 `SiteZY.lie_zy_z_of_ne` ほか 8 式から和へまとめる。仮定は `R`-代数の族 `z, y` の反交換関係 5 つ、位相の加法性と `p(0) = 1`、境界の符号 `η` について (A) は `η = p(M)`、(B) は `p(M)η = 1`） | `EigenvalueProblem/ReductionToATheta/ClaimCommutatorHCheckZYFromNecSuf.lean` |
 
 橋渡し補題は `Ising2D.isPrimitiveRoot_expPhase_one`（`e^{-2π√-1/N}` は 1 の原始 `N` 乗根）と
 `Ising2D.isPrimitiveRoot_expPhase_neg_one`（`e^{+2π√-1/N}` も同様）。
@@ -180,6 +192,13 @@
    効いているのは「`ξ` が 1 の原始 `2M` 乗根」と「対象が係数体上の加群」だけで、
    行列であること・積があること・Clifford 関係は使っていない。
 
+8. **(A)〜(D) を具体版と同じ手順（サイトごとの交換関係から和へまとめる）で一般化すると、境界の符号 `-1` という値は効いていない**
+   （`NecSuf/CommutatorSiteSum.lean`）。`H_1` の境界項の符号を `η`、位相 `e^{-ikθ~_μ}` を `p(k)` と書くと、
+   (A) に効くのは `η = p(M)`（境界の符号が位相の一周と一致する）、(B) に効くのは `p(M)η = 1` だけである。
+   人手の `H_1^{(+)}` と半整数運動量は `η = p(M) = -1` でこれを満たし、周期境界 `η = 1` と整数運動量 `p(M) = 1` も同じ 4 式を満たす。
+   `Z, Y` について効いているのは反交換関係 5 つ（`j ≠ k` で `z_jz_k = -z_kz_j`・`y_jy_k = -y_ky_j`、任意の `j, k` で `z_jy_k = -y_kz_j`、`z_j^2 = y_j^2 = 1`）だけで、
+   Jordan–Wigner 文字列の具体形・行列であること・係数が複素数であることは効いていない（係数は任意の可換環）。
+
 ---
 
 ## 3. 形式化しなかった／できなかったもの
@@ -191,7 +210,6 @@
 | `H1_H2_via_check_Z_Y` の必要十分版 | 整数運動量版 `H1_H2_via_hatZ_hatY` と同じ理由で、この等式は `check(Z), check(Y)` の具体形（半整数運動量の離散フーリエ変換）に本質的に依存しており、取り払える構造が無い。既存の `lean/README.md` も整数運動量版について同じ判断を記録している |
 | `def_check_index_set` / `conjugate_index_of_check_Z_Y` の必要十分版 | 整数の不等式と `θ~_μ` の実数値だけを扱っており、環・体・加群のいずれも登場しない。抽象化しても得られる知見が「`𝓜̌` に絞ると合同式が等式に落ちる」という主張そのものにしかならない |
 | 原文が `μ ∈ 𝓜̌` に絞っている主張のうち (A)〜(D) と反交換関係の合同式版 | Lean では `μ ∈ ℤ` 全体で証明した（絞る必要が無いことが分かった）。`𝓜̌` に絞った形も併記してある（`*_of_mem`） |
-| `commutator_of_H_and_check_Z_Y` の必要十分版（**未作成**） | 具体版が使う性質は、結合的な ℂ 代数であること、`Z, Y` の反交換関係（`j ≠ k` で `Z_jZ_k = -Z_kZ_j`・`Y_jY_k = -Y_kY_j`、任意の `j, k` で `Z_jY_k = -Y_kZ_j`、`Z_j^2 = Y_j^2 = 1`）、位相の 2 性質（積で周波数が足されることと反周期性）だけなので、同じ手順の必要十分版は書ける見込みである。既存の `NecSuf/CommutatorClifford.lean` は退避した別経路の一般化で、これに当たらない |
 | `periodicity_of_check_fermi`（`def_check_index_set` から参照） | 014 章以降のブロックであり、本章（013）の担当範囲外 |
 
 実数解析（極限・積分・連続性）は本章では不要だった。使った実数の事実は

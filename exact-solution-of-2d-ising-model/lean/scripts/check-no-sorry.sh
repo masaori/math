@@ -724,6 +724,14 @@ targets=(
   Ising2D.lie_H1Plus_checkY
   Ising2D.lie_H2_checkZ
   Ising2D.lie_H2_checkY
+  Ising2D.NecSuf.SiteZY.lie_h2_checkZ
+  Ising2D.NecSuf.SiteZY.lie_h2_checkY
+  Ising2D.NecSuf.SiteZY.lie_h1_checkZ
+  Ising2D.NecSuf.SiteZY.lie_h1_checkY
+  Ising2D.lie_H2_checkZ_of_necSuf
+  Ising2D.lie_H2_checkY_of_necSuf
+  Ising2D.lie_H1Plus_checkZ_of_necSuf
+  Ising2D.lie_H1Plus_checkY_of_necSuf
   Ising2D.lie_H2_Z
   Ising2D.lie_H2_Y
   Ising2D.lie_H1Plus_Z

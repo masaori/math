@@ -21,18 +21,17 @@
   人手の境界項 `[-Y_M Z_1, Z_1]`・`[-Y_M Z_1, Y_M]` は、交換子の第 1 引数の線型性で
   `lie_YZ_Z_right`・`lie_YZ_Y_left` の `a = M, b = 1` に帰着させている（人手の鎖の第 1 行と同じ）。
   反周期的な延長 `Y♭_l`・`Z♭_l` は `Yflat`・`Zflat`。
-* Step 2（(C)(D)）: `lie_H2_checkZ`・`lie_H2_checkY`。
+* Step 2（(C)(D)）: `lie_H2_checkZ`・`lie_H2_checkY`（`M = 0` でも成り立つので `M ≠ 0` を取らない）。
 * Step 3（(A)）: 境界の二項の等式 `checkPhase_smul_Yflat_boundary` と `lie_H1Plus_checkZ`。
 * Step 4（(B)）: 境界の二項の等式 `checkPhase_smul_Zflat_boundary` と `lie_H1Plus_checkY`。
 
 人手 `anticommutator_of_Z_and_Y` は `anticomm_Z_Z`・`anticomm_Z_Y`・`anticomm_Y_Y`・`Z_mul_self`・`Y_mul_self`
 （`ClaimAnticommutatorZY.lean`）。
 
-**必要十分版は未作成である。** `NecSuf/CommutatorClifford.lean` は `H` を `check(Z), check(Y)` の和で表してから
-計算する別の経路（参照用ノートへ退避した `H1_H2_via_check_Z_Y` を使う）の一般化で、
-この証明の手順（サイトごとの交換関係から和へまとめる）とは対応しない。この証明が使う性質は、
-結合的な ℂ 代数であること、`anticommutator_of_Z_and_Y` から従う反交換関係、位相 `checkPhase` の
-2 性質（`checkPhase_add_left` と反周期性 `checkPhase_antiperiodic`）だけなので、同じ手順の必要十分版は書ける見込みである。
+必要十分版は `NecSuf/CommutatorSiteSum.lean`（同じ手順を、`R`-代数の族 `z, y` の反交換関係 5 つと
+位相の加法性・`p(0) = 1`・境界の符号と位相の一周の関係だけで書いたもの）。この 4 式をその特殊化として導く系は
+`ClaimCommutatorHCheckZYFromNecSuf.lean`。`NecSuf/CommutatorClifford.lean` は `H` を `check(Z), check(Y)` の和で表してから
+計算する別の経路（参照用ノートへ退避した `H1_H2_via_check_Z_Y` を使う）の一般化で、この証明とは対応しない。
 
 ## 人手の行と Lean の行がまとまっている箇所
 
@@ -334,9 +333,8 @@ theorem lie_H1Plus_Y (k : Fin M) : ⁅H1plus M, Y k⁆ = (-2 : ℂ) • Zflat M 
 /-! ## Step 2: (C)(D) -/
 
 /-- **原文 (C) の形式化**: `[H_2, check(Z)_μ] = -2 check(Y)_μ`。 -/
-theorem lie_H2_checkZ (hM : M ≠ 0) (ν : ℤ) :
+theorem lie_H2_checkZ (ν : ℤ) :
     ⁅H2 M, checkZ M ν⁆ = (-2 : ℂ) • checkY M ν := by
-  have _ := hM
   calc ⁅H2 M, checkZ M ν⁆
       = ⁅H2 M, ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) ν • Z j⁆ := rfl
     _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) ν • ⁅H2 M, Z j⁆ := lie_sum_smul_right' _ _ _
@@ -348,9 +346,8 @@ theorem lie_H2_checkZ (hM : M ≠ 0) (ν : ℤ) :
     _ = (-2 : ℂ) • checkY M ν := rfl
 
 /-- **原文 (D) の形式化**: `[H_2, check(Y)_μ] = 2 check(Z)_μ`。 -/
-theorem lie_H2_checkY (hM : M ≠ 0) (ν : ℤ) :
+theorem lie_H2_checkY (ν : ℤ) :
     ⁅H2 M, checkY M ν⁆ = (2 : ℂ) • checkZ M ν := by
-  have _ := hM
   calc ⁅H2 M, checkY M ν⁆
       = ⁅H2 M, ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) ν • Y j⁆ := rfl
     _ = ∑ j : Fin M, checkPhase M (((j : ℕ) : ℤ) + 1) ν • ⁅H2 M, Y j⁆ := lie_sum_smul_right' _ _ _

@@ -110,7 +110,7 @@ theorem extract_taylor_H1Plus_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
 
 /-- **人手 (h2.z)** の級数の収束と和: `∑_n (1/n!) ad_{X_2'}^n(check(Z)_μ)
 = cosh(2K_2^*) check(Z)_μ - i sinh(2K_2^*) check(Y)_μ`。 -/
-theorem hasSum_extract_taylor_H2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem hasSum_extract_taylor_H2_checkZ (K2star : ℂ) (μ : ℤ) :
     HasSum (fun n : ℕ => ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkZ M μ))
       (Complex.cosh (2 * K2star) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ) := by
@@ -119,29 +119,29 @@ theorem hasSum_extract_taylor_H2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ)
         adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ))
       (Complex.cosh (2 * K2star) • checkZ M μ) := by
     refine ((Complex.hasSum_cosh (2 * K2star)).smul_const (checkZ M μ)).congr_fun fun k => ?_
-    rw [conversion_H2_checkZ_even hM K2star μ k, smul_smul, div_eq_inv_mul]
+    rw [conversion_H2_checkZ_even K2star μ k, smul_smul, div_eq_inv_mul]
   -- 奇数項: 4 行目の sinh → 3 行目（`-i` と `check(Y)_μ` を外へ）→ 1 行目の奇数側 `-i (2K_2^*)^{2k+1} check(Y)_μ`
   have hodd : HasSum (fun k : ℕ => (((2 * k + 1) ! : ℂ))⁻¹ •
         adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ))
       ((-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ) := by
     refine (((Complex.hasSum_sinh (2 * K2star)).mul_left (-Complex.I)).smul_const
       (checkY M μ)).congr_fun fun k => ?_
-    rw [conversion_H2_checkZ_odd hM K2star μ k, smul_smul]
+    rw [conversion_H2_checkZ_odd K2star μ k, smul_smul]
     congr 1
     ring
   -- 2 行目: 偶数項と奇数項を足し直す
   exact HasSum.even_add_odd heven hodd
 
 /-- **人手 (h2.z)**（和の値）。 -/
-theorem extract_taylor_H2_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem extract_taylor_H2_checkZ (K2star : ℂ) (μ : ℤ) :
     ∑' n : ℕ, ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkZ M μ)
       = Complex.cosh (2 * K2star) • checkZ M μ
         + (-Complex.I * Complex.sinh (2 * K2star)) • checkY M μ :=
-  (hasSum_extract_taylor_H2_checkZ hM K2star μ).tsum_eq
+  (hasSum_extract_taylor_H2_checkZ K2star μ).tsum_eq
 
 /-- **人手 (h2.y)** の級数の収束と和: `∑_n (1/n!) ad_{X_2'}^n(check(Y)_μ)
 = i sinh(2K_2^*) check(Z)_μ + cosh(2K_2^*) check(Y)_μ`。 -/
-theorem hasSum_extract_taylor_H2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem hasSum_extract_taylor_H2_checkY (K2star : ℂ) (μ : ℤ) :
     HasSum (fun n : ℕ => ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkY M μ))
       ((Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
         + Complex.cosh (2 * K2star) • checkY M μ) := by
@@ -150,14 +150,14 @@ theorem hasSum_extract_taylor_H2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ)
         adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ))
       (Complex.cosh (2 * K2star) • checkY M μ) := by
     refine ((Complex.hasSum_cosh (2 * K2star)).smul_const (checkY M μ)).congr_fun fun k => ?_
-    rw [conversion_H2_checkY_even hM K2star μ k, smul_smul, div_eq_inv_mul]
+    rw [conversion_H2_checkY_even K2star μ k, smul_smul, div_eq_inv_mul]
   -- 奇数項: 4 行目の sinh → 3 行目（`i` と `check(Z)_μ` を外へ）→ 1 行目の奇数側 `i (2K_2^*)^{2k+1} check(Z)_μ`
   have hodd : HasSum (fun k : ℕ => (((2 * k + 1) ! : ℂ))⁻¹ •
         adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ))
       ((Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ) := by
     refine (((Complex.hasSum_sinh (2 * K2star)).mul_left Complex.I).smul_const
       (checkZ M μ)).congr_fun fun k => ?_
-    rw [conversion_H2_checkY_odd hM K2star μ k, smul_smul]
+    rw [conversion_H2_checkY_odd K2star μ k, smul_smul]
     congr 1
     ring
   -- 2 行目: 偶数項と奇数項を足し直す。最後の行（行列加法の可換則）で並びを statement に合わせる
@@ -165,10 +165,10 @@ theorem hasSum_extract_taylor_H2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ)
   exact HasSum.even_add_odd heven hodd
 
 /-- **人手 (h2.y)**（和の値）。 -/
-theorem extract_taylor_H2_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
+theorem extract_taylor_H2_checkY (K2star : ℂ) (μ : ℤ) :
     ∑' n : ℕ, ((n ! : ℂ))⁻¹ • adPow ((Complex.I * K2star) • H2 M) n (checkY M μ)
       = (Complex.I * Complex.sinh (2 * K2star)) • checkZ M μ
         + Complex.cosh (2 * K2star) • checkY M μ :=
-  (hasSum_extract_taylor_H2_checkY hM K2star μ).tsum_eq
+  (hasSum_extract_taylor_H2_checkY K2star μ).tsum_eq
 
 end Ising2D
