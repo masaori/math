@@ -44,6 +44,14 @@
 * 人手の「分配則」の行では、`2` と `e^{∓iθ~_μ}` を 1 つのスカラーにまとめる。
   人手の最後の 2 行（`1 ≤ l ≤ M` で延長を外す行と `def_half_integer_checkY`・`def_half_integer_checkZ` の行）は 1 行にまとめる。
 
+## 単位行列と差の段
+
+* Step 1 の `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・
+  `matrix_difference_zero_iff_equal` の `⟸` の段は、`identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`
+  （`ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf.lean`）・`matrix_sub_eq_zero_iff_tensorPow`
+  （`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`）で閉じる。具体版は添字が `Fin m` の行列について述べてあり、
+  Lean の `TensorPow M` は添字を `Conf M` に取るので、同じ手順の必要十分版を `Conf M` へ特殊化した系を使う。
+
 ## 添字の扱い
 
 site 添字は `Fin M` で、人手の `j` は `(j : ℕ) + 1`。延長 `Y♭_l`（`l = 0, …, M`）・`Z♭_l`（`l = 1, …, M+1`）は
@@ -51,6 +59,8 @@ site 添字は `Fin M` で、人手の `j` は `(j : ℕ) + 1`。延長 `Y♭_l`
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimAnticommutatorCheckZY
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 
 namespace Ising2D
 
@@ -94,7 +104,7 @@ theorem lie_ZY_Z_of_ne {a j : Fin M} (h : a ≠ j) : ⁅Z a * Y a, Z j⁆ = 0 :=
     _ = -((-(Z j * Z a)) * Y a) - Z j * (Z a * Y a) := by rw [Z_mul_Z_of_ne h]
     _ = (Z j * Z a) * Y a - Z j * (Z a * Y a) := by rw [neg_mul, neg_neg]
     _ = Z j * (Z a * Y a) - Z j * (Z a * Y a) := by rw [mul_assoc]
-    _ = 0 := sub_self _
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl  -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-- `a ≠ j` なら `[Z_a Y_a, Y_j] = 0`。 -/
 theorem lie_ZY_Y_of_ne {a j : Fin M} (h : a ≠ j) : ⁅Z a * Y a, Y j⁆ = 0 := by
@@ -106,7 +116,7 @@ theorem lie_ZY_Y_of_ne {a j : Fin M} (h : a ≠ j) : ⁅Z a * Y a, Y j⁆ = 0 :=
     _ = -((-(Y j * Z a)) * Y a) - Y j * (Z a * Y a) := by rw [Z_mul_Y_anticomm]
     _ = (Y j * Z a) * Y a - Y j * (Z a * Y a) := by rw [neg_mul, neg_neg]
     _ = Y j * (Z a * Y a) - Y j * (Z a * Y a) := by rw [mul_assoc]
-    _ = 0 := sub_self _
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl  -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-- `b ≠ j` なら `[Y_a Z_b, Z_j] = 0`。 -/
 theorem lie_YZ_Z_of_ne (a : Fin M) {b j : Fin M} (h : b ≠ j) : ⁅Y a * Z b, Z j⁆ = 0 := by
@@ -118,7 +128,7 @@ theorem lie_YZ_Z_of_ne (a : Fin M) {b j : Fin M} (h : b ≠ j) : ⁅Y a * Z b, Z
     _ = -((-(Z j * Y a)) * Z b) - Z j * (Y a * Z b) := by rw [Y_mul_Z_anticomm]
     _ = (Z j * Y a) * Z b - Z j * (Y a * Z b) := by rw [neg_mul, neg_neg]
     _ = Z j * (Y a * Z b) - Z j * (Y a * Z b) := by rw [mul_assoc]
-    _ = 0 := sub_self _
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl  -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-- `a ≠ j` なら `[Y_a Z_b, Y_j] = 0`。 -/
 theorem lie_YZ_Y_of_ne {a j : Fin M} (b : Fin M) (h : a ≠ j) : ⁅Y a * Z b, Y j⁆ = 0 := by
@@ -130,7 +140,7 @@ theorem lie_YZ_Y_of_ne {a j : Fin M} (b : Fin M) (h : a ≠ j) : ⁅Y a * Z b, Y
     _ = -((-(Y j * Y a)) * Z b) - Y j * (Y a * Z b) := by rw [Y_mul_Y_of_ne h]
     _ = (Y j * Y a) * Z b - Y j * (Y a * Z b) := by rw [neg_mul, neg_neg]
     _ = Y j * (Y a * Z b) - Y j * (Y a * Z b) := by rw [mul_assoc]
-    _ = 0 := sub_self _
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl  -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-! ## Step 1: 同じ添字を含む項 -/
 
@@ -142,7 +152,7 @@ theorem lie_ZY_Z_self (j : Fin M) : ⁅Z j * Y j, Z j⁆ = (-2 : ℂ) • Y j :=
     _ = Z j * (-(Z j * Y j)) - (Z j * Z j) * Y j := by rw [Y_mul_Z_anticomm]
     _ = -((Z j * Z j) * Y j) - (Z j * Z j) * Y j := by rw [mul_neg, mul_assoc]
     _ = -(1 * Y j) - 1 * Y j := by rw [Z_mul_self]
-    _ = -Y j - Y j := by rw [one_mul]
+    _ = -Y j - Y j := by rw [identity_matrix_mul_tensorPow]  -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = (-2 : ℂ) • Y j := by rw [neg_smul, two_smul, neg_add]; abel
 
 /-- `[Z_j Y_j, Y_j] = 2 Z_j`。 -/
@@ -151,11 +161,11 @@ theorem lie_ZY_Y_self (j : Fin M) : ⁅Z j * Y j, Y j⁆ = (2 : ℂ) • Z j := 
       = (Z j * Y j) * Y j - Y j * (Z j * Y j) := Ring.lie_def _ _
     _ = Z j * (Y j * Y j) - (Y j * Z j) * Y j := by rw [mul_assoc, mul_assoc]
     _ = Z j * 1 - (Y j * Z j) * Y j := by rw [Y_mul_self]
-    _ = Z j - (Y j * Z j) * Y j := by rw [mul_one]
+    _ = Z j - (Y j * Z j) * Y j := by rw [mul_identity_matrix_tensorPow]  -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = Z j - (-(Z j * Y j)) * Y j := by rw [Y_mul_Z_anticomm]
     _ = Z j + Z j * (Y j * Y j) := by rw [neg_mul, sub_neg_eq_add, mul_assoc]
     _ = Z j + Z j * 1 := by rw [Y_mul_self]
-    _ = Z j + Z j := by rw [mul_one]
+    _ = Z j + Z j := by rw [mul_identity_matrix_tensorPow]  -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = (2 : ℂ) • Z j := (two_smul ℂ _).symm
 
 /-- `[Y_a Z_b, Z_b] = 2 Y_a`（人手の `[Y_m Z_{m+1}, Z_{m+1}] = 2Y_m` と、境界項 `[Y_M Z_1, Z_1]` の内側）。 -/
@@ -164,11 +174,11 @@ theorem lie_YZ_Z_right (a b : Fin M) : ⁅Y a * Z b, Z b⁆ = (2 : ℂ) • Y a 
       = (Y a * Z b) * Z b - Z b * (Y a * Z b) := Ring.lie_def _ _
     _ = Y a * (Z b * Z b) - (Z b * Y a) * Z b := by rw [mul_assoc, mul_assoc]
     _ = Y a * 1 - (Z b * Y a) * Z b := by rw [Z_mul_self]
-    _ = Y a - (Z b * Y a) * Z b := by rw [mul_one]
+    _ = Y a - (Z b * Y a) * Z b := by rw [mul_identity_matrix_tensorPow]  -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = Y a - (-(Y a * Z b)) * Z b := by rw [Z_mul_Y_anticomm]
     _ = Y a + Y a * (Z b * Z b) := by rw [neg_mul, sub_neg_eq_add, mul_assoc]
     _ = Y a + Y a * 1 := by rw [Z_mul_self]
-    _ = Y a + Y a := by rw [mul_one]
+    _ = Y a + Y a := by rw [mul_identity_matrix_tensorPow]  -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = (2 : ℂ) • Y a := (two_smul ℂ _).symm
 
 /-- `[Y_a Z_b, Y_a] = -2 Z_b`（人手の `[Y_m Z_{m+1}, Y_m] = -2Z_{m+1}` と、境界項 `[Y_M Z_1, Y_M]` の内側）。 -/
@@ -179,7 +189,7 @@ theorem lie_YZ_Y_left (a b : Fin M) : ⁅Y a * Z b, Y a⁆ = (-2 : ℂ) • Z b 
     _ = Y a * (-(Y a * Z b)) - (Y a * Y a) * Z b := by rw [Z_mul_Y_anticomm]
     _ = -((Y a * Y a) * Z b) - (Y a * Y a) * Z b := by rw [mul_neg, mul_assoc]
     _ = -(1 * Z b) - 1 * Z b := by rw [Y_mul_self]
-    _ = -Z b - Z b := by rw [one_mul]
+    _ = -Z b - Z b := by rw [identity_matrix_mul_tensorPow]  -- `identity_matrix_is_left_unit_of_mat_mult`
     _ = (-2 : ℂ) • Z b := by rw [neg_smul, two_smul, neg_add]; abel
 
 /-! ## Step 1: 反周期的な延長 `Y♭_l`, `Z♭_l` -/

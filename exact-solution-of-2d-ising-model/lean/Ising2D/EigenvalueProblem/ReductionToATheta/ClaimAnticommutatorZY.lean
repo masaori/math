@@ -38,6 +38,7 @@ Lean では `Fin M` 上の `deltaM μ ν = if μ = ν then 1 else 0` として�
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutatorViaAnticommutators
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 
 namespace Ising2D
 
@@ -100,7 +101,7 @@ theorem jw_sq (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) (hA : A * A = 1) :
     rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
     · rw [jwFamily_of_lt h, pauliX_mul_pauliX]
     · rw [Fin.val_injective h, jwFamily_self, hA]
-    · rw [jwFamily_of_gt h, mul_one]
+    · rw [jwFamily_of_gt h, identity_matrix_mul]  -- `II = I`（`identity_matrix_is_left_unit_of_mat_mult` を `A = I` に）
   rw [h, siteProd_one]
 
 /-- **Jordan–Wigner 文字列どうしの反交換**（原文の計算の一般形）。
@@ -124,7 +125,8 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
       rcases lt_trichotomy (i : ℕ) (μ : ℕ) with h1 | h1 | h1
       · rw [jwFamily_of_lt h1, jwFamily_of_lt (by omega : (i : ℕ) < (ν : ℕ))]
       · exact absurd (Fin.val_injective h1) hi
-      · rw [jwFamily_of_gt h1, one_mul, mul_one]
+      · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
+        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
   · -- `μ = ν`: 食い違うのはサイト `μ`（`A` と `B`）
     have he : μ = ν := Fin.val_injective h
     refine siteProd_anticomm_of_single_site _ _ μ ?_ ?_
@@ -135,7 +137,8 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
       rcases lt_trichotomy (i : ℕ) (μ : ℕ) with h1 | h1 | h1
       · rw [jwFamily_of_lt h1, jwFamily_of_lt h1]
       · exact absurd (Fin.val_injective h1) hi
-      · rw [jwFamily_of_gt h1, one_mul, mul_one]
+      · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
+        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
   · -- `μ > ν`: 食い違うのはサイト `ν`（`B` と `σ^x`）
     refine siteProd_anticomm_of_single_site _ _ ν ?_ ?_
     · rw [jwFamily_of_lt h, jwFamily_self]
@@ -144,7 +147,8 @@ theorem jw_anticomm (μ ν : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ)
       rcases lt_trichotomy (i : ℕ) (ν : ℕ) with h1 | h1 | h1
       · rw [jwFamily_of_lt h1, jwFamily_of_lt (by omega : (i : ℕ) < (μ : ℕ))]
       · exact absurd (Fin.val_injective h1) hi
-      · rw [jwFamily_of_gt h1, one_mul, mul_one]
+      · -- `Iσ = σ`・`σI = σ`（`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`）
+        rw [jwFamily_of_gt h1, identity_matrix_mul, mul_identity_matrix]
 
 /-! ## 原文の 3 つの反交換関係 -/
 

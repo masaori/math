@@ -597,7 +597,7 @@ Z_\mu Y_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^y)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       displayMath(
@@ -614,7 +614,7 @@ Y_\mu Z_\mu
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^z)}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -706,13 +706,13 @@ Z_\mu Y_\nu
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ I\ \text{は積の単位元}) \\
+&&(\because\ I\sigma^x = \sigma^x,\ I\sigma^y = \sigma^y.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を各因子へ同時適用}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^z\sigma^x)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       displayMath(
@@ -743,13 +743,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes\overbrace{(II)}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ I\ \text{は積の単位元}) \\
+&&(\because\ \sigma^x I = \sigma^x,\ \sigma^y I = \sigma^y.\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を各因子へ同時適用}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^z)}^{\mu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\nu-1)\text{th}}
 \boxtimes\overbrace{\sigma^y}^{\nu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -872,13 +872,13 @@ Z_\mu Y_\nu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ I\ \text{は積の単位元}) \\
+&&(\because\ \sigma^x I = \sigma^x,\ \sigma^z I = \sigma^z.\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を各因子へ同時適用}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^x\sigma^y)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       displayMath(
@@ -909,13 +909,13 @@ Y_\nu Z_\mu
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes\overbrace{(II)}^{(\mu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{(II)}^{M_{\mathrm{col}}\text{th}}
-&&(\because\ I\ \text{は積の単位元}) \\
+&&(\because\ I\sigma^x = \sigma^x,\ I\sigma^z = \sigma^z.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を各因子へ同時適用}) \\
 &= I\boxtimes\cdots\boxtimes I
 \boxtimes\overbrace{(\sigma^y\sigma^x)}^{\nu\text{th}}
 \boxtimes\overbrace{\sigma^x}^{(\nu+1)\text{th}}\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{(\mu-1)\text{th}}
 \boxtimes\overbrace{\sigma^z}^{\mu\text{th}}
 \boxtimes I\boxtimes\cdots\boxtimes I
-&&(\because\ II = I.\ \text{単位行列どうしの積})
+&&(\because\ II = I.\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{として各因子へ同時適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -1256,6 +1256,8 @@ Y_\nu Y_\mu
           "<kronecker_multilinear> の参照に直した。μ>ν の場合に符号 -1 を外へ出す箇所は" +
           "根拠を書いていなかったので、同じく <kronecker_multilinear> を明示した" +
           "（README のゴール設定 2 節に従う）。",
+        "2026-11-01: 名前だけの根拠「II = I. 単位行列どうしの積」（6 か所）と「I は積の単位元」（4 か所）を、" +
+          "identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult を各因子へ同時適用する参照に替えた。式は変えていない。",
       ],
     },
   },
@@ -2837,8 +2839,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Z_j\left(Z_aY_a\right) - Z_j\left(Z_aY_a\right)
    &&(\because \text{行列の積の結合法則}) \\
-&= 0
-   &&(\because \text{同じ行列の差は零行列})
+&= O
+   &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Z_j\left(Z_aY_a\right)\ \text{へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -2863,8 +2865,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Y_j\left(Z_aY_a\right) - Y_j\left(Z_aY_a\right)
    &&(\because \text{行列の積の結合法則}) \\
-&= 0
-   &&(\because \text{同じ行列の差は零行列})
+&= O
+   &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Y_j\left(Z_aY_a\right)\ \text{へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -2889,8 +2891,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Z_j\left(Y_aZ_b\right) - Z_j\left(Y_aZ_b\right)
    &&(\because \text{行列の積の結合法則}) \\
-&= 0
-   &&(\because \text{同じ行列の差は零行列})
+&= O
+   &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Z_j\left(Y_aZ_b\right)\ \text{へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -2915,8 +2917,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because -(-1) = 1 \text{ の符号の消去}) \\
 &= Y_j\left(Y_aZ_b\right) - Y_j\left(Y_aZ_b\right)
    &&(\because \text{行列の積の結合法則}) \\
-&= 0
-   &&(\because \text{同じ行列の差は零行列})
+&= O
+   &&(\because \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ \text{を}\ A = B = Y_j\left(Y_aZ_b\right)\ \text{へ適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -2938,7 +2940,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -I\,Y_j - I\,Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_jZ_j = I)) \\
 &= -Y_j - Y_j
-   &&(\because \text{単位行列の性質 } I\,Y_j = Y_j) \\
+   &&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (I\,Y_j = Y_j)) \\
 &= -2Y_j
    &&(\because \text{同類項をまとめる})
 \end{aligned}`,
@@ -2954,7 +2956,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Z_j\,I - \left(Y_jZ_j\right)Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
 &= Z_j - \left(Y_jZ_j\right)Y_j
-   &&(\because \text{単位行列の性質 } Z_j\,I = Z_j) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Z_j\,I = Z_j)) \\
 &= Z_j - \left(-Z_jY_j\right)Y_j
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jZ_j = -Z_jY_j)) \\
 &= Z_j + Z_j\left(Y_jY_j\right)
@@ -2962,7 +2964,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Z_j + Z_j\,I
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_jY_j = I)) \\
 &= Z_j + Z_j
-   &&(\because \text{単位行列の性質 } Z_j\,I = Z_j) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Z_j\,I = Z_j)) \\
 &= 2Z_j
    &&(\because \text{同類項をまとめる})
 \end{aligned}`,
@@ -2982,7 +2984,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Y_m\,I - \left(Z_{m+1}Y_m\right)Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
 &= Y_m - \left(Z_{m+1}Y_m\right)Z_{m+1}
-   &&(\because \text{単位行列の性質 } Y_m\,I = Y_m) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Y_m\,I = Y_m)) \\
 &= Y_m - \left(-Y_mZ_{m+1}\right)Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Y_m = -Y_mZ_{m+1})) \\
 &= Y_m + Y_m\left(Z_{m+1}Z_{m+1}\right)
@@ -2990,7 +2992,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= Y_m + Y_m\,I
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_{m+1}Z_{m+1} = I)) \\
 &= Y_m + Y_m
-   &&(\because \text{単位行列の性質 } Y_m\,I = Y_m) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Y_m\,I = Y_m)) \\
 &= 2Y_m
    &&(\because \text{同類項をまとめる})
 \end{aligned}`,
@@ -3010,7 +3012,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -I\,Z_{m+1} - I\,Z_{m+1}
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_mY_m = I)) \\
 &= -Z_{m+1} - Z_{m+1}
-   &&(\because \text{単位行列の性質 } I\,Z_{m+1} = Z_{m+1}) \\
+   &&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (I\,Z_{m+1} = Z_{m+1})) \\
 &= -2Z_{m+1}
    &&(\because \text{同類項をまとめる})
 \end{aligned}`,
@@ -3030,7 +3032,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(Y_{M_{\mathrm{col}}}\,I - \left(Z_1Y_{M_{\mathrm{col}}}\right)Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
 &= -\left(Y_{M_{\mathrm{col}}} - \left(Z_1Y_{M_{\mathrm{col}}}\right)Z_1\right)
-   &&(\because \text{単位行列の性質 } Y_{M_{\mathrm{col}}}\,I = Y_{M_{\mathrm{col}}}) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Y_{M_{\mathrm{col}}}\,I = Y_{M_{\mathrm{col}}})) \\
 &= -\left(Y_{M_{\mathrm{col}}} - \left(-Y_{M_{\mathrm{col}}}Z_1\right)Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Y_{M_{\mathrm{col}}} = -Y_{M_{\mathrm{col}}}Z_1)) \\
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\left(Z_1Z_1\right)\right)
@@ -3038,7 +3040,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\,I\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Z_1Z_1 = I)) \\
 &= -\left(Y_{M_{\mathrm{col}}} + Y_{M_{\mathrm{col}}}\right)
-   &&(\because \text{単位行列の性質 } Y_{M_{\mathrm{col}}}\,I = Y_{M_{\mathrm{col}}}) \\
+   &&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (Y_{M_{\mathrm{col}}}\,I = Y_{M_{\mathrm{col}}})) \\
 &= -2Y_{M_{\mathrm{col}}}
    &&(\because \text{同類項をまとめる}) \\
 &= 2\left(-Y_{M_{\mathrm{col}}}\right)
@@ -3064,7 +3066,7 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= -\left(-I\,Z_1 - I\,Z_1\right)
    &&(\because \blkref{anticommutator_of_Z_and_Y}\ (Y_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}} = I)) \\
 &= -\left(-Z_1 - Z_1\right)
-   &&(\because \text{単位行列の性質 } I\,Z_1 = Z_1) \\
+   &&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (I\,Z_1 = Z_1)) \\
 &= -\left(-2Z_1\right)
    &&(\because \text{同類項をまとめる}) \\
 &= 2Z_1
@@ -3089,8 +3091,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}}\left[Z_aY_a,\ Z_j\right]
    &&(\because a = j \text{ の項を有限和から分ける}) \\
-&= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} 0
-   &&(\because \text{上で示した } \left[Z_aY_a, Z_j\right] = 0\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} O
+   &&(\because \text{上で示した } \left[Z_aY_a, Z_j\right] = O\ (a \neq j) \text{ を各項へ同時適用}) \\
 &= \left[Z_jY_j,\ Z_j\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= -2Y_j
@@ -3107,8 +3109,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
 &= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}}\left[Z_aY_a,\ Y_j\right]
    &&(\because a = j \text{ の項を有限和から分ける}) \\
-&= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} 0
-   &&(\because \text{上で示した } \left[Z_aY_a, Y_j\right] = 0\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} O
+   &&(\because \text{上で示した } \left[Z_aY_a, Y_j\right] = O\ (a \neq j) \text{ を各項へ同時適用}) \\
 &= \left[Z_jY_j,\ Y_j\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= 2Z_j
@@ -3131,14 +3133,14 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - \left[Y_{M_{\mathrm{col}}}Z_1,\ Z_j\right]
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - 0
-   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = M_{\mathrm{col}},\ b = 1 \neq j \text{ に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - O
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = M_{\mathrm{col}},\ b = 1 \neq j \text{ に適用}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right]
    &&(\because \text{零行列を引いても変わらない}) \\
 &= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j-1}}\left[Y_mZ_{m+1},\ Z_j\right]
    &&(\because 1 \leq j-1 \leq M_{\mathrm{col}}-1 \text{ なので } m = j-1 \text{ の項を有限和から分ける}) \\
-&= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j-1}} 0
-   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = m,\ b = m+1 \neq j \text{ として各項へ同時適用}) \\
+&= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j-1}} O
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = m,\ b = m+1 \neq j \text{ として各項へ同時適用}) \\
 &= \left[Y_{j-1}Z_j,\ Z_j\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= 2Y_{j-1}
@@ -3158,8 +3160,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_1\right] + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1} 0 + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
-   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = 0\ (b \neq j) \text{ を } a = m,\ b = m+1 \geq 2,\ j = 1 \text{ として各項へ同時適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}-1} O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
+   &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = m,\ b = m+1 \geq 2,\ j = 1 \text{ として各項へ同時適用}) \\
 &= \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= 2\,Y_0^{\flat}
@@ -3184,14 +3186,14 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - \left[Y_{M_{\mathrm{col}}}Z_1,\ Y_j\right]
    &&(\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - 0
-   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = M_{\mathrm{col}} \neq j,\ b = 1 \text{ に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - O
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = M_{\mathrm{col}} \neq j,\ b = 1 \text{ に適用}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right]
    &&(\because \text{零行列を引いても変わらない}) \\
 &= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j}}\left[Y_mZ_{m+1},\ Y_j\right]
    &&(\because 1 \leq j \leq M_{\mathrm{col}}-1 \text{ なので } m = j \text{ の項を有限和から分ける}) \\
-&= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j}} 0
-   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = m \neq j,\ b = m+1 \text{ として各項へ同時適用}) \\
+&= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j}} O
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = m \neq j,\ b = m+1 \text{ として各項へ同時適用}) \\
 &= \left[Y_jZ_{j+1},\ Y_j\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= -2Z_{j+1}
@@ -3211,8 +3213,8 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \blkref{def_H1_plus}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_{M_{\mathrm{col}}}\right] + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1} 0 + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
-   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = 0\ (a \neq j) \text{ を } a = m \leq M_{\mathrm{col}}-1,\ b = m+1,\ j = M_{\mathrm{col}} \text{ として各項へ同時適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}-1} O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
+   &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = m \leq M_{\mathrm{col}}-1,\ b = m+1,\ j = M_{\mathrm{col}} \text{ として各項へ同時適用}) \\
 &= \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
    &&(\because \text{零行列の和は零行列}) \\
 &= -2\,Z_{M_{\mathrm{col}}+1}^{\flat}
@@ -3403,6 +3405,9 @@ Z_jZ_j &= I,\quad Y_jY_j = I
         "2026-08-19 の式変形統一で、境界項二本の鎖にあった「直前の displayMath と同じ計算」の一行を、(Y_M, Z_1) に対する交換子の定義・結合法則・anticommutator_of_Z_and_Y・単位行列・同類項の一操作ずつの行へ開いた。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-01: Step 1 の名前だけの根拠「単位行列の性質」（9 か所）を identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult へ、" +
+          "「同じ行列の差は零行列」（4 か所）を matrix_difference_zero_iff_equal の ⟸ へのラベル参照に替え、零行列の記号を def_zero_matrix の O に揃えた。" +
+          "「零行列の和は零行列」「零行列を引いても変わらない」は引ける主張が本文に無いので残した。",
       ],
     },
   },

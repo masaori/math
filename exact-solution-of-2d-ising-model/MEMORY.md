@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十八個目を行った。`eigenvalue_problem_reduction_to_A_theta.ts` の `anticommutator_of_Z_and_Y`・`commutator_of_H_and_check_Z_Y` の名前だけの根拠 23 か所（単位行列どうしの積・単位行列の性質・同じ行列の差は零行列）を `identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・`matrix_difference_zero_iff_equal` へのラベル参照に替え、行列の零を `O` に揃えた。Lean は `ClaimAnticommutatorZY.lean` の 2×2 の段を具体版の補題に、`ClaimCommutatorHCheckZY.lean` の段を必要十分版の `Conf M` への系（新しく足した `identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`・`matrix_sub_eq_zero_iff_tensorPow`）にした。次は同じファイルの「零行列の和は零行列」「零行列を引いても変わらない」（引く主張を足す）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十七個目を行った。`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` には名前だけの根拠の 4 種が無いことを確かめ、`partition_function_projection_and_jordan_wigner.ts` の `V1_in_Z_Y_epsilon`・`V2_in_Z_Y` の Step 0 の 4 本の鎖を、1 段に 1 つの事実を使いすべての根拠をラベルで引く鎖にした。Lean の `pauliY_mul_pauliX_eq`・`pauliX_mul_pauliY_eq`・`pauliZ_mul_pauliY` を人手と 1 対 1 の `calc` にし、SageMath に 2 本の検算を足した（全 PASS）。次は台帳の「次の一歩」（`eigenvalue_problem_reduction_to_A_theta.ts`）。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`psd_cauchy_schwarz`（対称・半正定値な実数の行列の Cauchy–Schwarz）の検算 `sagemath/check/psd_cauchy_schwarz/` を足した（未検算 97 件）。未定義だった `x^⊤Py` を `def_real_bilinear_value`、対称性を `def_real_symmetric_matrix` として `011_max_eigenvalue.ts` に足し、証明を成分の鎖と根拠付きの場合分けに直した。計算の誤りは無かった。下流の熱力学極限の章との型・読み方の食い違いと、Lean の具体版が 1 対 1 でないことは状態台帳に記録した。次は `riemann_sum_to_integral`。
