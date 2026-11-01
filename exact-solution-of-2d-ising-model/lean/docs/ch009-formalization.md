@@ -3,7 +3,7 @@
 対象の人手証明: `structured-latex/content/009_eigenvalues_of_V.ts`（19 ブロック。章立ての組み直しで、`iH_is_real_symmetric`・`sign_flip_conjugation` は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts` へ移った）
 
 - 具体版: `Ising2D/RoutesNotAdopted/IntegerMomentum/`（この章は整数運動量の経路として参照用ノートへ退避済みで、Lean は形式化の記録。`def_trace`・`trace_basic_properties`・`trace_of_idempotent` の `DefinitionTrace.lean` と、`def_hermitian_positive_definite`・`star_preserves_norm_and_limits`・`exp_hermitian_is_positive_definite`・`iH_is_real_symmetric` の `ClaimPositiveDefinite.lean` は、数学的道具立て「トレース・共役転置・正定値性」の項が多いので `Ising2D/MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/` にある）
-- 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`
+- 必要十分版: `Ising2D/NecSuf/NumberOperator.lean`, `Ising2D/NecSuf/JointEigenspace.lean`, `Ising2D/NecSuf/ConjugationOfExpSeries.lean`（`constant_c_value_even_sector` Step 2 の共役と指数関数の交換。導出は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimSignFlipConjugationFromNecSuf.lean`）
 
 `lake build` 成功・`scripts/check-no-sorry.sh` exit 0（`sorry` / `admit` ゼロ）。
 
@@ -37,6 +37,7 @@
 | `NecSuf.idem_of_ortho_of_sum_eq_one` | **冪等性 (1) 後半は仮定に要らず、(1) 前半と (2) から従う** | 同 (1) |
 | `NecSuf.eigen_of_mem_range_proj` / `collectedBasis_eigen` | `f Q_ε = c_ε Q_ε` なら `im Q_ε` の元は固有値 `c_ε` の固有ベクトル。各成分の基底を集めたものは固有ベクトルからなる基底 | `eigenvalues_of_Vprime` Step 4 |
 | `NecSuf.toMatrix_collectedBasis_eq_diagonal` | その基底に関する表現行列は対角行列 | 同 Step 4 |
+| `NecSuf.conj_pow_of_inv` / `conj_partialSum_of_inv` / `conj_series_limit_of_inv` | `uv = vu = 1` の下で `us^kv = (usv)^k`、部分和の共役、`x ↦ uxv` の連続性と極限の一意性から `u e v = e'` | `constant_c_value_even_sector` Step 2 |
 | `NecSuf.isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 上記の行列版（**対角化可能性**: `P P' = P' P = 1` かつ `P' A P = diagonal Λ`） | 同 Step 4 の結論 |
 
 ### 具体版（`Ising2D`, `Ising2D.FermiSetup`）
@@ -86,7 +87,8 @@
 | `Uflip_conj_sigmaX/Y/Z` | `U σ^a_k U^{-1}` の符号 | 同 Step 1 |
 | `Uflip_conj_Z` / `Uflip_conj_Y` | `U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = Y_m` | 同（原文には無い中間段階） |
 | `Uflip_conj_H1plus` / `Uflip_conj_H2` / `Uflip_conj_S1plus` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S`（`H = H_1^{(+)}, H_2`。`Uflip_conj_H1` / `Uflip_conj_S1` は補助の一般形） | `sign_flip_conjugation` |
-| `Uflip_conj_matExp` | `U exp(S) U^{-1} = exp(USU^{-1})` | `constant_c_value` Step 2 |
+| `Uflip_conj_pow` / `Uflip_conj_expPartialSum` | `US^kU^{-1} = (USU^{-1})^k`、部分和の共役 `U s_n(S) U^{-1} = s_n(USU^{-1})` | `constant_c_value` Step 2 |
+| `Uflip_conj_matExp` | `U exp(S) U^{-1} = exp(USU^{-1})`（部分和の共役・ノルム評価による極限との交換・極限の一意性） | `constant_c_value` Step 2 |
 | `VmatInv` / `Vmat_mul_VmatInv` / `VmatInv_mul_Vmat` | `V^{-1}` の明示形 | `V_is_positive_definite` Step 4 |
 | `tauTrace` / `trace_Vmat` / `trace_VmatInv` | `τ`, `tr(V) = (2s_2)^{M/2}τ`, `tr(V^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value` Step 1 |
 | `trace_exp_neg_eq_tau` | `tr(exp(-S_1)exp(-S_2)) = τ` | 同 Step 2 |

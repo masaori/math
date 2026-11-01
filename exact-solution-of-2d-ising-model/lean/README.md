@@ -210,6 +210,7 @@ EOF
 | `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.ZY_linearIndependent_of_necSuf`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependentFromNecSuf.lean`） | `Ising2D.NecSuf.linearIndependent_of_clifford_necSuf`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`NecSuf/CliffordIndependence.lean`） |
 | `exp_sum` | `Ising2D.expPhase_sum`（複素指数関数。必要十分版からの導出は `Ising2D.expPhase_sum_of_necSuf`、`EigenvalueProblem/ReductionToATheta/ClaimExpSumFromNecSuf.lean`） | `Ising2D.NecSuf.sum_zpow_primitiveRoot`（任意の体と 1 の原始 `M` 乗根。`NecSuf/RootOfUnitySum.lean`） |
 | `anticommutator_of_hat_Z_and_hat_Y` | `Ising2D.acomm_hatZ_hatZ_same` / `acomm_hatZ_hatZ_opp` / `acomm_hatY_hatY` / `acomm_hatZPlus_hatZMinus`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_hatZ_hatZ_same_of_necSuf` / `acomm_hatY_hatY_of_necSuf` / `acomm_hatZPlus_hatZMinus_of_necSuf`、`RoutesNotAdopted/IntegerMomentum/ClaimAnticommutatorHatZHatYFromNecSuf.lean`） | `Ising2D.NecSuf.acomm_fourier_clifford` / `acomm_fourier_clifford_flip` / `acomm_fourier_clifford_weights`（体上の任意の環、Clifford 関係と 1 の原始 `M` 乗根だけ。`NecSuf/FourierClifford.lean`） |
+| `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(USU^{-1})` | `Ising2D.Uflip_conj_pow` / `Uflip_conj_expPartialSum` / `Uflip_conj_matExp`（`Mat(2,ℂ)^{⊗M}`、`EigenvalueProblem/EigenvaluesOfVPlus/ClaimSignFlipConjugation.lean`。必要十分版からの導出は `*_of_necSuf`、`ClaimSignFlipConjugationFromNecSuf.lean`） | `Ising2D.NecSuf.conj_pow_of_inv` / `conj_partialSum_of_inv` / `conj_series_limit_of_inv`（台は半環、`u` の両側の逆、`x ↦ uxv` の連続性と T2 だけ。`NecSuf/ConjugationOfExpSeries.lean`） |
 | `<exp_X_Y_exp_-X>` | `Ising2D.hasSum_matExp_conj` / `matExp_conj_eq_tsum`（`Mat(2,ℂ)^{⊗M}`、`EigenvalueProblem/ReductionToATheta/ClaimExpConjugation.lean`） | `Ising2D.NecSuf.exp_adCLM_apply` / `NecSuf.hasSum_exp_conj`（ℂ 上の完備ノルム環なら何でもよい、`NecSuf/ExpConjugation.lean`） |
 | `<exp_X_Y_exp_-X>` の 2 次元不変部分空間版（`<extract_taylor_coefficient_of_Z_Y>` の cosh/sinh の根拠） | `Ising2D.matExp_conj_two_dim_z` / `matExp_conj_two_dim_y` | `Ising2D.NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
 | `<commutator_of_H_and_Z_Y>` | `Ising2D.lie_H1_hatZ_same` / `lie_H1_hatY` / `lie_H1_hatZ_opp` / `lie_H2_hatZMinus` / `lie_H2_hatY` / `lie_H2_hatZPlus`（`Mat(2,ℂ)^{⊗M}`、`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean`） | `Ising2D.NecSuf.CliffordTriple.lie_sum_yz_z` ほか 6 本（台は任意の環、係数は任意の可換半環、族の添字型も任意。`NecSuf/CommutatorClifford.lean`） |
@@ -459,7 +460,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.scalar_identity_commutes` | `[c·I, A] = 0` | `<scalar_identity_commutes>` |
 | `Ising2D.centralizer_is_scalar` | 全元と可換な元はスカラー | `<centralizer_is_scalar>` |
 | `Ising2D.centralizer_is_scalar_abstract` | 同上（抽象テンソル冪側） | 同上（移送の例） |
-| `Ising2D.matExp_units_conj` | `exp(U A U⁻¹) = U (exp A) U⁻¹` | `parts/003_線型写像のexp` 系 |
+| `Ising2D.matExp_hasSum` | `exp(X) = ∑_k (k!)^{-1}X^k`（Frobenius ノルムでの級数の和） | `def_exp` |
 | `Ising2D.Conjugation.T_mul` | 共役写像は乗法的 | `<conjugation_is_ring_homomorphism>` (1) |
 | `Ising2D.Conjugation.T_one` | 共役写像は単位的 | `<conjugation_is_ring_homomorphism>` (2) |
 | `Ising2D.Conjugation.T_comp` | `T_A ∘ T_B = T_{AB}` | `<conjugation_is_ring_homomorphism>` (3) |

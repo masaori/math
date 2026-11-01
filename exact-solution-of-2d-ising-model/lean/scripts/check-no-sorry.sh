@@ -108,7 +108,7 @@ targets=(
   Ising2D.one_eq_sum_E
   Ising2D.NecSuf.single_mul_single_eq_ite
   Ising2D.NecSuf.one_eq_sum_single
-  Ising2D.matExp_units_conj
+  Ising2D.matExp_hasSum
   Ising2D.Y_mul_Z_next_of_not_last
   Ising2D.epsilon_mul_Y_mul_Z_next_of_last
   Ising2D.sum_sigmaZ_sigmaZ_eq_jordanWigner
@@ -666,7 +666,15 @@ targets=(
   Ising2D.Uflip_conj_H2
   Ising2D.Uflip_conj_S1
   Ising2D.Uflip_conj_S2
+  Ising2D.Uflip_conj_pow
+  Ising2D.Uflip_conj_expPartialSum
   Ising2D.Uflip_conj_matExp
+  Ising2D.NecSuf.conj_pow_of_inv
+  Ising2D.NecSuf.conj_partialSum_of_inv
+  Ising2D.NecSuf.conj_series_limit_of_inv
+  Ising2D.Uflip_conj_pow_of_necSuf
+  Ising2D.Uflip_conj_expPartialSum_of_necSuf
+  Ising2D.Uflip_conj_matExp_of_necSuf
   Ising2D.NecSuf.pow_half_eq_neg_one
   Ising2D.NecSuf.sq_isPrimitiveRoot
   Ising2D.NecSuf.zpow_mul_natCast
@@ -1410,7 +1418,6 @@ targets=(
   Ising2D.V1plus_eq_exp_openChainD0_mul_exp
   Ising2D.pow_two_mul_of_sq_eq_one
   Ising2D.pow_two_mul_add_one_of_sq_eq_one
-  Ising2D.matExp_hasSum
   Ising2D.matExp_smul_of_sq_eq_one
   Ising2D.exp_epsilon_mul_boundaryG
   Ising2D.epsilon_mul_V1plus

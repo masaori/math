@@ -103,15 +103,6 @@ theorem pow_two_mul_add_one_of_sq_eq_one {A : TensorPow M} (hA : A ^ 2 = 1) (n :
     A ^ (2 * n + 1) = A := by
   rw [pow_succ, pow_two_mul_of_sq_eq_one hA n, one_mul]
 
-/-- 人手 `def_exp`: `exp(X) = ∑_k (k!)^{-1}X^k`（級数の和として）。
-収束は `def_matrix_norm` の行列ノルム（成分の絶対値の二乗和の平方根）で述べられているので、
-ここでも同じノルムを入れて引く。 -/
-theorem matExp_hasSum (X : TensorPow M) :
-    HasSum (fun k : ℕ => ((k.factorial : ℂ))⁻¹ • X ^ k) (matExp X) := by
-  letI : NormedRing (TensorPow M) := Matrix.frobeniusNormedRing
-  letI : NormedAlgebra ℂ (TensorPow M) := Matrix.frobeniusNormedAlgebra
-  exact NormedSpace.exp_series_hasSum_exp' (𝕂 := ℂ) X
-
 /-- **人手 Step 2 の偶奇分解**: `A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A`（`t ∈ ℝ`）。
 
 人手の式変形どおり、指数級数を偶数次の項 `t^{2n}/(2n)! · I` と奇数次の項 `t^{2n+1}/(2n+1)! · A` に分け、

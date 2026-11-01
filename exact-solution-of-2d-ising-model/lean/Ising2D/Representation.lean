@@ -176,14 +176,14 @@ section Exponential
 /-- 推奨表現では行列指数関数がそのまま定義できる。 -/
 noncomputable def matExp {M : ℕ} (A : TensorPow M) : TensorPow M := NormedSpace.exp A
 
-/-- 共役と指数関数の交換 `T_U(exp A) = exp(T_U A)`。
-`parts/000_計算公式/045_claim_共役写像は環準同型.typ` の共役写像 `T_U` と
-`parts/003_線型写像のexp` 以降で必要になる関係で、mathlib の `Matrix.exp_units_conj`
-に直結する。 -/
-theorem matExp_units_conj {M : ℕ} (U : (TensorPow M)ˣ) (A : TensorPow M) :
-    matExp ((U : TensorPow M) * A * ((U⁻¹ : (TensorPow M)ˣ) : TensorPow M)) =
-      (U : TensorPow M) * matExp A * ((U⁻¹ : (TensorPow M)ˣ) : TensorPow M) :=
-  Matrix.exp_units_conj U A
+/-- 人手 `def_exp`: `exp(X) = ∑_k (k!)^{-1}X^k`（級数の和として）。
+収束は `def_matrix_norm` の行列ノルム（成分の絶対値の二乗和の平方根）で述べられているので、
+ここでも同じノルムを入れて引く。 -/
+theorem matExp_hasSum {M : ℕ} (X : TensorPow M) :
+    HasSum (fun k : ℕ => ((k.factorial : ℂ))⁻¹ • X ^ k) (matExp X) := by
+  letI : NormedRing (TensorPow M) := Matrix.frobeniusNormedRing
+  letI : NormedAlgebra ℂ (TensorPow M) := Matrix.frobeniusNormedAlgebra
+  exact NormedSpace.exp_series_hasSum_exp' (𝕂 := ℂ) X
 
 end Exponential
 

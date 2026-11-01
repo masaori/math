@@ -179,7 +179,7 @@
 | **`Ising2D.trace_epsilon_VPlusOfTransfer`** | **`tr(εV^{(+)}) = tr(εV_1^{(+)}V_2)`** | **Step 1** |
 | `Ising2D.I_mul_smul_H1plus` / `commute_openChainD0_epsilon_mul_boundaryG` | `iK_1H_1^{(+)} = K_1D_0 + K_1εG`、`D_0` と `εG` は可換 | Step 2 |
 | `Ising2D.V1plus_eq_exp_openChainD0_mul_exp` | `V_1^{(+)} = exp(K_1D_0)exp(K_1εG)` | Step 2（`theorem_exp_product`） |
-| `Ising2D.matExp_hasSum` / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
+| `Ising2D.matExp_hasSum`（`Representation.lean`） / `matExp_smul_of_sq_eq_one` / `exp_epsilon_mul_boundaryG` | `exp(X) = ∑_k (k!)^{-1}X^k`、`A^2 = I` なら `exp(tA) = cosh(t)I + sinh(t)A` | Step 2（`def_exp` の級数の偶奇分解） |
 | **`Ising2D.epsilon_mul_V1plus`** | **`εV_1^{(+)} = exp(K_1D_0)(cosh(K_1)ε + sinh(K_1)G)`** | **Step 2** |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusMatrixEntries.lean`（ラベル `trace_of_epsilon_V_plus` の Step 3）

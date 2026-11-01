@@ -229,25 +229,97 @@ theorem Uflip_conj_S1plus (K1 : ℂ) :
 
 /-! ## 指数関数への作用（人手本文 `constant_c_value_even_sector` Step 2） -/
 
-/-- `U` を単元として取り出したもの。 -/
-noncomputable def UflipUnits (M : ℕ) : (TensorPow M)ˣ where
-  val := Uflip M
-  inv := UflipInv M
-  val_inv := Uflip_mul_inv
-  inv_val := UflipInv_mul
+/-
+人手 `constant_c_value_even_sector` Step 2 の 3 段（`Uflip_conj_pow`・`Uflip_conj_expPartialSum`・`Uflip_conj_matExp`）は、
+必要十分版 `NecSuf/ConjugationOfExpSeries.lean` の `NecSuf.conj_pow_of_inv`・`NecSuf.conj_partialSum_of_inv`・
+`NecSuf.conj_series_limit_of_inv` と同じ手順であり、具体版をその特殊化として導いたものは
+`ClaimSignFlipConjugationFromNecSuf.lean` にある。
+-/
 
-@[simp]
-theorem UflipUnits_val : ((UflipUnits M : (TensorPow M)ˣ) : TensorPow M) = Uflip M := rfl
+/-- 人手本文 `constant_c_value_even_sector` Step 2 の `U S^k U^{-1} = (U S U^{-1})^k`
+（`k` についての帰納法。`k = 0` は `UU^{-1} = I`、帰納段階は `U^{-1}U = I`（`Uflip_conj_mul`））。
+必要十分版は `NecSuf.conj_pow_of_inv`。 -/
+theorem Uflip_conj_pow (S : TensorPow M) (k : ℕ) :
+    Uflip M * S ^ k * UflipInv M = (Uflip M * S * UflipInv M) ^ k := by
+  induction k with
+  | zero =>
+    calc Uflip M * S ^ 0 * UflipInv M
+        = Uflip M * UflipInv M := by rw [pow_zero, mul_one]
+      _ = 1 := Uflip_mul_inv
+      _ = (Uflip M * S * UflipInv M) ^ 0 := (pow_zero _).symm
+  | succ k ih =>
+    calc Uflip M * S ^ (k + 1) * UflipInv M
+        = Uflip M * (S ^ k * S) * UflipInv M := by rw [pow_succ]
+      _ = (Uflip M * S ^ k * UflipInv M) * (Uflip M * S * UflipInv M) := Uflip_conj_mul _ _
+      _ = (Uflip M * S * UflipInv M) ^ k * (Uflip M * S * UflipInv M) := by rw [ih]
+      _ = (Uflip M * S * UflipInv M) ^ (k + 1) := (pow_succ _ _).symm
 
-@[simp]
-theorem UflipUnits_inv : (((UflipUnits M)⁻¹ : (TensorPow M)ˣ) : TensorPow M) = UflipInv M := rfl
+/-- 人手本文 `constant_c_value_even_sector` Step 2 の「共役は行列の積・和・スカラー倍を保ち」を
+`def_exp` の部分和 `∑_{k<n} (k!)^{-1} S^k` に当てたもの（和を保つのは分配法則 `Uflip_conj_sum`）。
+必要十分版は `NecSuf.conj_partialSum_of_inv`。 -/
+theorem Uflip_conj_expPartialSum (S : TensorPow M) (n : ℕ) :
+    Uflip M * (∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M
+      = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k := by
+  calc Uflip M * (∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M
+      = ∑ k ∈ Finset.range n, Uflip M * (((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M :=
+        Uflip_conj_sum _ _
+    _ = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S ^ k * UflipInv M) := by
+        simp only [Uflip_conj_smul]
+    _ = ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k := by
+        simp only [Uflip_conj_pow]
 
-/-- **人手本文 `constant_c_value_even_sector` Step 2** の `U exp(S) U^{-1} = exp(U S U^{-1})`。 -/
-theorem Uflip_conj_matExp (A : TensorPow M) :
-    Uflip M * matExp A * UflipInv M = matExp (Uflip M * A * UflipInv M) := by
-  have h := matExp_units_conj (UflipUnits M) A
-  rw [UflipUnits_val, UflipUnits_inv] at h
-  exact h.symm
+/-- **人手本文 `constant_c_value_even_sector` Step 2** の `U exp(S) U^{-1} = exp(U S U^{-1})`。
+
+人手どおり、`def_exp`（`matExp_hasSum`）の部分和 `s_n(S) := ∑_{k<n} (k!)^{-1} S^k` について
+1. `U s_n(S) U^{-1} = s_n(USU^{-1})`（`Uflip_conj_expPartialSum`）、
+2. `‖UXU^{-1} - UWU^{-1}‖ = ‖U(X-W)U^{-1}‖ ≤ ‖U‖‖U^{-1}‖‖X-W‖`（`matrix_norm_submultiplicativity`）から
+   `s_n(S) → exp(S)` のとき `U s_n(S) U^{-1} → U exp(S) U^{-1}`、
+3. `s_n(USU^{-1}) → exp(USU^{-1})` と極限の一意性（`def_exp` が引く `matrix_norm_triangle_inequality` (4)）
+の順に示す。ノルムは mathlib の Frobenius ノルム（成分の絶対値の二乗和の `1/2` 乗）で、
+`def_matrix_norm` の行列ノルム（二乗和の平方根）と値が一致する。劣乗法性 `Matrix.frobenius_norm_mul` は、
+値が一致するこのノルムでの人手 `matrix_norm_submultiplicativity` と同じ主張である。
+必要十分版は `NecSuf.conj_series_limit_of_inv`（連続性を仮定として受け取る）。 -/
+theorem Uflip_conj_matExp (S : TensorPow M) :
+    Uflip M * matExp S * UflipInv M = matExp (Uflip M * S * UflipInv M) := by
+  letI : NormedAddCommGroup (TensorPow M) := Matrix.frobeniusNormedAddCommGroup
+  -- 2 の評価 `‖UXU^{-1} - UWU^{-1}‖ ≤ ‖U‖‖U^{-1}‖‖X-W‖`
+  have hle : ∀ X W : TensorPow M,
+      ‖Uflip M * X * UflipInv M - Uflip M * W * UflipInv M‖
+        ≤ ‖Uflip M‖ * ‖UflipInv M‖ * ‖X - W‖ := by
+    intro X W
+    calc ‖Uflip M * X * UflipInv M - Uflip M * W * UflipInv M‖
+        = ‖Uflip M * (X - W) * UflipInv M‖ := by rw [mul_sub, sub_mul]
+      _ ≤ ‖Uflip M * (X - W)‖ * ‖UflipInv M‖ := Matrix.frobenius_norm_mul _ _
+      _ ≤ ‖Uflip M‖ * ‖X - W‖ * ‖UflipInv M‖ := by
+          gcongr
+          exact Matrix.frobenius_norm_mul _ _
+      _ = ‖Uflip M‖ * ‖UflipInv M‖ * ‖X - W‖ := by ring
+  -- `def_exp`: 部分和 `s_n(S) → exp(S)`
+  have hS : Filter.Tendsto (fun n => ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k)
+      Filter.atTop (nhds (matExp S)) := (matExp_hasSum S).tendsto_sum_nat
+  -- 2: `U s_n(S) U^{-1} → U exp(S) U^{-1}`
+  have hconj : Filter.Tendsto
+      (fun n => Uflip M * (∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) * UflipInv M)
+      Filter.atTop (nhds (Uflip M * matExp S * UflipInv M)) := by
+    have hS0 := tendsto_iff_norm_sub_tendsto_zero.1 hS
+    refine tendsto_iff_norm_sub_tendsto_zero.2 ?_
+    have h0 : Filter.Tendsto
+        (fun n => ‖Uflip M‖ * ‖UflipInv M‖
+          * ‖(∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • S ^ k) - matExp S‖)
+        Filter.atTop (nhds 0) := by
+      simpa using hS0.const_mul (‖Uflip M‖ * ‖UflipInv M‖)
+    exact squeeze_zero (fun _ => norm_nonneg _) (fun n => hle _ _) h0
+  -- 1 で `U s_n(S) U^{-1}` を `s_n(USU^{-1})` に書き換える
+  have hconj' : Filter.Tendsto
+      (fun n => ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k)
+      Filter.atTop (nhds (Uflip M * matExp S * UflipInv M)) := by
+    simpa only [Uflip_conj_expPartialSum] using hconj
+  -- 3: `s_n(USU^{-1}) → exp(USU^{-1})` と極限の一意性
+  have hUSU : Filter.Tendsto
+      (fun n => ∑ k ∈ Finset.range n, ((k.factorial : ℂ))⁻¹ • (Uflip M * S * UflipInv M) ^ k)
+      Filter.atTop (nhds (matExp (Uflip M * S * UflipInv M))) :=
+    (matExp_hasSum (Uflip M * S * UflipInv M)).tendsto_sum_nat
+  exact tendsto_nhds_unique hconj' hUSU
 
 end SignFlip
 

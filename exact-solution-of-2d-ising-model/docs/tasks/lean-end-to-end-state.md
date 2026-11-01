@@ -378,20 +378,25 @@
     補題 1 の `NecSuf/IteratedCommutatorSmul.lean`（スカラーはモノイド）を新しく置き、導出を `ClaimNestedCommutatorFromNecSuf.lean`・`ClaimCoefficientConversionFromNecSuf.lean` に置いた。
     `adCLM_pow_*` 経路の導出は外した（`adCLM_pow_*` は `exp_conj_two_dim_*` の中で使われ続ける）。`check-no-sorry.sh`・`lean/docs/ch014-formalization.md` を直した。レビューの指摘（必須 3 件・任意 4 件）を直した。
 
+  - ゴールラインの確認の十六個目（済み、2026-11-01）: 人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(USU^{-1})`（`EigenvaluesOfVPlus/ClaimSignFlipConjugation.lean` の `Uflip_conj_matExp`）を、`Matrix.exp_units_conj` に委ねる形から人手どおりに直した。
+    `US^kU^{-1} = (USU^{-1})^k`（`Uflip_conj_pow`）→ 部分和の共役（`Uflip_conj_expPartialSum`）→ `‖U(X-W)U^{-1}‖ ≤ ‖U‖‖U^{-1}‖‖X-W‖`（`matrix_norm_submultiplicativity`。値が一致する Frobenius ノルムの `Matrix.frobenius_norm_mul`）による極限との交換 → 極限の一意性、の順の証明である。主張の型は変えていない。
+    `def_exp` の `matExp_hasSum` を `ClaimTraceEpsilonVPlusReduction.lean` から `Representation.lean` へ移し、使われなくなった `matExp_units_conj` と `UflipUnits` を消した。
+    必要十分版 `NecSuf/ConjugationOfExpSeries.lean`（台は半環、`u` の両側の逆、`x ↦ uxv` の連続性と T2 だけ）と導出 `ClaimSignFlipConjugationFromNecSuf.lean` を置いた。
+    人手 Step 2 の「共役は行列の積とスカラー倍を保ち」に、部分和の共役が使う「和」を足した。レビューの指摘（必須 3 件・任意 6 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
-  `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
-
-この後に残る確認:
-
 - `commutation_V_plus_check_psi`（`DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi.lean`）: 人手 Step 2 は `diagonalization_check_P_D` の `A = P̌ Ď P̌^{-1}` と `P̌^{-1}P̌ = I` を経由するが、
   Lean は `P̌` の列が固有ベクトルであること（`AMat_mulVec_eigen_pos`・`_neg`）を `ActsBy.eigen` へ直接渡している。人手の Step 1（行ベクトルへの線型性の持ち上げ）と Step 2 の鎖どおりに直す。
   対角化の定理は `P : IsingParam` と `M ≠ 0` を取るので、呼び出し側（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）の引数 `K : IsingConst`・`hga` との合わせ方を先に確かめる。
+
+この後に残る確認:
+
 - `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
 - 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。
 - `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
+- `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。
