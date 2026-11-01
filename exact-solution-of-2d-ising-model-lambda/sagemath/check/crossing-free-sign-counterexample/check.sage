@@ -46,6 +46,9 @@ def crossing(k, l):
 
 
 assert len(set(walk)) == len(walk)
+assert len({edge[:3] for edge in walk}) == 5
+assert walk[2][:3] == walk[5][:3]
+assert walk[2] == reversal(walk[5])
 for k in range(len(walk)):
     successor = walk[(k + 1) % len(walk)]
     assert endpoints(walk[k])[1] == endpoints(successor)[0]
@@ -77,5 +80,6 @@ assert phase_sign == 1
 assert simple_loop_candidate == -1
 assert phase_sign != simple_loop_candidate
 
-print("PASS: edge-distinct closed nonbacktracking walk has crossing number 0, "
+print("PASS: oriented edges are distinct but one underlying edge repeats; "
+      "closed nonbacktracking walk has crossing number 0, "
       "seam parity (0,0), rotation number 0, and phase sign 1 != -1 over ZZ")

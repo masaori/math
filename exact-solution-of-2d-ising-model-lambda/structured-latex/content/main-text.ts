@@ -61926,15 +61926,10 @@ c(\gamma_A)+c(\gamma_B)+2
                   focus: {
                     id: "kac_ward_claim_crossing_free_sign_counterexample",
                     kind: "claim",
-                    title: { text: "横断のない辺重複なし閉歩道にも単純閉路の符号公式への反例がある" },
+                    title: { text: "横断のない閉歩道にも単純閉路の符号公式への反例がある" },
                     labels: ["claim_crossing_free_sign_counterexample"],
                     habitat: "Qbar",
                     verification: ["sagemath/check/crossing-free-sign-counterexample"],
-                    lean: [
-                      "Ising2DLambda.KacWard.crossingFreeSignCounterexample",
-                      "Ising2DLambda.NecSuf.KacWard.crossingFreeSignCounterexample_necSuf",
-                      "Ising2DLambda.KacWard.crossingFreeSignCounterexample_from_necSuf",
-                    ],
                     statement: [
                       paragraph([
                         math(String.raw`L=2`), " とする。向き付き辺を ",
@@ -61947,7 +61942,7 @@ n_{\mathrm h}(0,0,+),n_{\mathrm h}(0,1,+),n_{\mathrm v}(0,0,+),
 n_{\mathrm h}(1,0,+),n_{\mathrm h}(1,1,+),n_{\mathrm v}(0,0,-)
 \bigr)`),
                       paragraph([
-                        "は辺の重複を持たない閉じた非後退辺列であり、横断数は ",
+                        "は向き付き辺の重複を持たない閉じた非後退辺列であり、台の番号付き辺には重複がある。横断数は ",
                         math(String.raw`c(\gamma_{\mathrm c})=0`), "、切断線偶奇は ",
                         math(String.raw`(h(\gamma_{\mathrm c}),v(\gamma_{\mathrm c}))=(0,0)`),
                         "、回転数は ", math(String.raw`\operatorname{rot}(\gamma_{\mathrm c})=0`), " である。したがって",
@@ -61964,7 +61959,8 @@ n_{\mathrm h}(1,0,+),n_{\mathrm h}(1,1,+),n_{\mathrm v}(0,0,-)
                         math(String.raw`(0,0),(0,1),(0,0),(1,0),(1,1),(1,0)`),
                         " であり、最後の辺の終点は ", math(String.raw`(0,0)`),
                         " である。隣り合う辺は同じ番号付き辺の反転対ではないので、",
-                        ref("def_closed_nonbacktracking_walk"), " により閉じた非後退辺列である。六つの番号付き辺は相異なる。",
+                        ref("def_closed_nonbacktracking_walk"), " により閉じた非後退辺列である。六つの向き付き辺は相異なるが、第三項と第六項は同じ番号付き辺 ",
+                        math(String.raw`n_{\mathrm v}(0,0)`), " の反転対である。",
                       ]),
                       paragraph([
                         "同じ頂点を二度通る二箇所では、いずれの通過も少なくとも一方が曲がる。したがって ",
@@ -62356,9 +62352,10 @@ S_{\times}:=S\setminus(S_A\cup S_B)`),
                   " の両方に属することはない（属せば ", math(String.raw`a\in A\cap B`),
                   " となり矛盾する）。したがって ", math(String.raw`S`),
                   " は互いに交わらない ", math(String.raw`S_A,S_B,S_{\times}`),
-                  " の合併であり、互いに交わらない有限集合の合併の元の個数は個数の和なので ",
-                  math(String.raw`|S|=|S_A|+|S_B|+|S_{\times}|`), " である。",
+                  " の合併である。互いに交わらない有限集合の合併の元の個数は個数の和なので、",
                 ]),
+                displayMath(String.raw`|S|=|S_A|+|S_B|+|S_{\times}|
+\qquad\bigl(\because\ S=S_A\sqcup S_B\sqcup S_{\times}\text{ と有限集合の個数の加法性}\bigr)`),
                 paragraph([
                   math(String.raw`\gamma_A`), " の項の並びは ",
                   math(String.raw`(\vec e_{k+1},\ldots,\vec e_l)`), " なので、",
