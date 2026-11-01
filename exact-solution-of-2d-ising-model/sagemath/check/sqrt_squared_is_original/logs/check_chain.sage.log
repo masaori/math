@@ -1,0 +1,2 @@
+rows 4->5, 5->6, 6->7 as polynomial identities; all ten rows built separately on 47 (z, representative) pairs
+RESULT: PASS

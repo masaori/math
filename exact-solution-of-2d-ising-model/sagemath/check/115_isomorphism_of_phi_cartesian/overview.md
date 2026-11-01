@@ -8,7 +8,7 @@
 
 - 範囲: φ_cartesian が積を保つこと（モノイド準同型）と全単射性
 
-極座標表現の積 [(r,θ)]·[(r′,θ′)] = [(rr′,θ+θ′)] を φ_cartesian で送ったものと、送ってから掛けたものを比べる。全単射性は φ_polar が逆写像であることで確認する。
+極座標表現の積 [(r,θ)]·[(r′,θ′)] = [(rr′,θ+θ′)] を φ_cartesian で送ったものと、送ってから掛けたものを比べる。φ_cartesian∘φ_polar = id の数値の確認もここに残っているが、その主張は phi_cartesian_after_phi_polar_is_identity へ切り出してあり、証明の行の検算は `sagemath/check/phi_cartesian_after_phi_polar_is_identity/` が担う。単射性は本文で未証明であり、ここでも確かめていない。
 
 ## チェック一覧
 

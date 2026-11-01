@@ -268,6 +268,7 @@ export const ALL_LABELS = [
   "partition_function_via_transfer_matrix",
   "pauli_matrix_products",
   "periodicity_of_check_fermi",
+  "phi_cartesian_after_phi_polar_is_identity",
   "polar_equivalence_class",
   "polar_multiplication_well_defined",
   "polar_zero_class_criterion",

@@ -1,0 +1,2 @@
+sqrt(z)*sqrt(z) == z exactly on 47 (z, representative) pairs over 12 values of z
+RESULT: PASS

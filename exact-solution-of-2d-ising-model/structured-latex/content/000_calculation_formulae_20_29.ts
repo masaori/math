@@ -1453,6 +1453,225 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
+    kind: "claim",
+    origin: {
+      path: "_old/typst/parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ",
+      ordinal: 29,
+    },
+    title: {
+      tex: "\\phi_{\\mathrm{cartesian}}\\circ\\phi_{\\mathrm{polar}}=\\mathrm{id}_{\\mathbb{C}}",
+    },
+    labels: ["phi_cartesian_after_phi_polar_is_identity"],
+    statement: [
+      paragraph([ref("def_phi_polar"), " と ", ref("def_phi_cartesian"), " の写像を用いる。", ref("def_phi_cartesian"), " は正弦・余弦が主値区間でしか定まっていないため未完であり（", math(String.raw`x<0`), " の場合は主値区間の外の角を使う）、この主張もそれが整うまで未完である。"]),
+      paragraph([
+        math(String.raw`(x,y)\in\mathbb{C}`),
+        " について、",
+        math(String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)=(x,y)`),
+        "。すなわち ",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_phi_polar"),
+        " の場合分けに沿って場合ごとに示す。",
+        "場合分けなので全体を 1 つの式変形にはできないが、各場合の中の計算はそれぞれ一続きにする。",
+      ]),
+      paragraph([
+        math(String.raw`x>0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \arctan\ \text{の}\ \cos,\sin\text{。}\blkref{cos_arctan_sin_arctan})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x>0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x>0\ \text{と平方根の一意性から}\ x=\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\text{。}\blkref{definition_of_sqrt_r_positive}\ \blkref{sqrt_nonnegative_existence_uniqueness})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab}\text{。}\blkref{sqrt_nonnegative_existence_uniqueness})\\
+&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
+&= (x,\ y)
+&&(\because\ x>0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x<0`),
+        " の場合。",
+        math(String.raw`y\geq 0`),
+        " と ",
+        math(String.raw`y<0`),
+        " で ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の値は違うが、いずれも同じ式に着く。まず ",
+        math(String.raw`y\geq 0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)+\pi\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y\geq0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)+\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)+\pi\bigr)\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \cos(\theta+\pi)=-\cos\theta,\ \sin(\theta+\pi)=-\sin\theta)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`y<0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)-\pi\bigr)\bigr]_{\sim}\Bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y<0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)-\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)-\pi\bigr)\Bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
+&&(\because\ \cos(\theta-\pi)=-\cos\theta,\ \sin(\theta-\pi)=-\sin\theta)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。いずれの場合も同じ式に着いたので、そこから続けると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \arctan\ \text{の}\ \cos,\sin\text{。}\blkref{cos_arctan_sin_arctan})\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x<0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
+&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x<0\ \text{のとき}\ x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\text{。}\blkref{negative_number_to_sqrt})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{分子の負号と分母の負号が相殺する})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ (-x)^2=x^2)\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab}\text{。}\blkref{sqrt_nonnegative_existence_uniqueness})\\
+&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
+\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
+&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
+&\quad= (x,\ y)
+&&(\because\ x<0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y>0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\bigl([(y,\ \pi/2)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y>0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \bigl(y\cos(\pi/2),\ y\sin(\pi/2)\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= (y\cdot 0,\ y\cdot 1)
+&&(\because\ \cos(\pi/2)=0,\ \sin(\pi/2)=1)\\
+&= (0,\ y)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ 1\ \text{は積の単位元})\\
+&= (x,\ y)
+&&(\because\ x=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y<0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\bigl([(-y,\ -\pi/2)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y<0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= \bigl((-y)\cos(-\pi/2),\ (-y)\sin(-\pi/2)\bigr)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= \bigl((-y)\cdot 0,\ (-y)\cdot(-1)\bigr)
+&&(\because\ \cos(-\pi/2)=0,\ \sin(-\pi/2)=-1)\\
+&= (0,\ y)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ \text{負号を 2 度施すともとに戻る})\\
+&= (x,\ y)
+&&(\because\ x=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`x=0`),
+        " かつ ",
+        math(String.raw`y=0`),
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
+&= \phi_{\mathrm{cartesian}}\bigl(\phi_{\mathrm{polar}}(x,y)\bigr)
+&&(\because\ \text{写像の合成の定義})\\
+&= \phi_{\mathrm{cartesian}}\bigl([(0,\ 0)]_{\sim}\bigr)
+&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y=0\ \text{の場合。}\blkref{def_phi_polar})\\
+&= (0\cdot\cos 0,\ 0\cdot\sin 0)
+&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義。}\blkref{def_phi_cartesian})\\
+&= (0,\ 0)
+&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
+&= (x,\ y)
+&&(\because\ x=0\ \text{かつ}\ y=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "以上で ",
+        math(String.raw`\phi_{\mathrm{polar}}`),
+        " の定義のすべての場合について ",
+        math(String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)=(x,y)`),
+        " が示され、",
+        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "converted",
+      notes: [
+        "2026-11-01、1 ブロック 1 主張に従い、isomorphism_of_phi_cartesian の証明の後半（合成が恒等写像であることの場合分けの計算）を" +
+          "この主張として切り出した。同時に、各場合の末尾の参照の一覧を各行の \\blkref に移し、各場合の最初の行を写像の合成の定義と φ_polar の定義の二行に分けた。計算は変えていない。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
     kind: "claim",
     origin: {
@@ -1514,237 +1733,20 @@ b
         "）。",
       ]),
       paragraph([
-        "全単射性。合成 ",
-        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}`),
-        " が ",
-        math(String.raw`\mathbb{C}`),
-        " の恒等写像であることを、",
-        ref("def_phi_polar"),
-        " の場合分けに沿って場合ごとに示す。",
-        "場合分けなので全体を 1 つの式変形にはできないが、各場合の中の計算はそれぞれ一続きにする。",
-      ]),
-      paragraph([
-        math(String.raw`x>0`),
-        " の場合。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)\bigr)\bigr]_{\sim}\Bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x>0\ \text{の場合})\\
-&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ \arctan\ \text{の}\ \cos,\sin)\\
-&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x>0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
-&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x>0\ \text{と平方根の一意性から}\ x=\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}})\\
-&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab})\\
-&= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
-&= (x,\ y)
-&&(\because\ x>0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "、",
-        ref("cos_arctan_sin_arctan"),
-        "、",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "、",
-        ref("definition_of_sqrt_r_positive"),
-        "）。",
-      ]),
-      paragraph([
-        math(String.raw`x<0`),
-        " の場合。",
-        math(String.raw`y\geq 0`),
-        " と ",
-        math(String.raw`y<0`),
-        " で ",
-        math(String.raw`\phi_{\mathrm{polar}}`),
-        " の値は違うが、いずれも同じ式に着く。まず ",
-        math(String.raw`y\geq 0`),
-        " のとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)+\pi\bigr)\bigr]_{\sim}\Bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y\geq0\ \text{の場合})\\
-&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)+\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)+\pi\bigr)\Bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
-&&(\because\ \cos(\theta+\pi)=-\cos\theta,\ \sin(\theta+\pi)=-\sin\theta)
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        math(String.raw`y<0`),
-        " のとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\Bigl(\bigl[\bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}},\ \arctan(y/x)-\pi\bigr)\bigr]_{\sim}\Bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x<0,\ y<0\ \text{の場合})\\
-&= \Bigl(\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos\bigl(\arctan(y/x)-\pi\bigr),\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin\bigl(\arctan(y/x)-\pi\bigr)\Bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= \Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)
-&&(\because\ \cos(\theta-\pi)=-\cos\theta,\ \sin(\theta-\pi)=-\sin\theta)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である。いずれの場合も同じ式に着いたので、そこから続けると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-&\Bigl(-\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\cos(\arctan(y/x)),\ -\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\sin(\arctan(y/x))\Bigr)\\
-&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
--\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,(y/x)}{\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ \arctan\ \text{の}\ \cos,\sin)\\
-&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
--\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{x\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x<0\ \text{なので分母と分子に}\ x\ \text{を掛けられる})\\
-&\quad= \left(-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
--\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x<0\ \text{のとき}\ x=-\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}})\\
-&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{(-x)^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ \text{分子の負号と分母の負号が相殺する})\\
-&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2}^{\,\mathbb{R}_{\geq 0}}\sqrt{1+(y/x)^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ (-x)^2=x^2)\\
-&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2\bigl(1+(y/x)^2\bigr)}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ \text{平方根の一意性から}\ \sqrt{a}\sqrt{b}=\sqrt{ab})\\
-&\quad= \left(\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,x}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}},\
-\frac{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\,y}{\sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}}\right)
-&&(\because\ x^2\bigl(1+(y/x)^2\bigr)=x^2+y^2)\\
-&\quad= (x,\ y)
-&&(\because\ x<0\ \text{なので}\ \sqrt{x^2+y^2}^{\,\mathbb{R}_{\geq 0}}\ne0\ \text{で約分できる})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "、",
-        ref("cos_arctan_sin_arctan"),
-        "、",
-        ref("negative_number_to_sqrt"),
-        "、",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "）。",
-      ]),
-      paragraph([
-        math(String.raw`x=0`),
-        " かつ ",
-        math(String.raw`y>0`),
-        " の場合。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\bigl([(y,\ \pi/2)]_{\sim}\bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y>0\ \text{の場合})\\
-&= \bigl(y\cos(\pi/2),\ y\sin(\pi/2)\bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= (y\cdot 0,\ y\cdot 1)
-&&(\because\ \cos(\pi/2)=0,\ \sin(\pi/2)=1)\\
-&= (0,\ y)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ 1\ \text{は積の単位元})\\
-&= (x,\ y)
-&&(\because\ x=0)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "）。",
-      ]),
-      paragraph([
-        math(String.raw`x=0`),
-        " かつ ",
-        math(String.raw`y<0`),
-        " の場合。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\bigl([(-y,\ -\pi/2)]_{\sim}\bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y<0\ \text{の場合})\\
-&= \bigl((-y)\cos(-\pi/2),\ (-y)\sin(-\pi/2)\bigr)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= \bigl((-y)\cdot 0,\ (-y)\cdot(-1)\bigr)
-&&(\because\ \cos(-\pi/2)=0,\ \sin(-\pi/2)=-1)\\
-&= (0,\ y)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0,\ \text{負号を 2 度施すともとに戻る})\\
-&= (x,\ y)
-&&(\because\ x=0)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "）。",
-      ]),
-      paragraph([
-        math(String.raw`x=0`),
-        " かつ ",
-        math(String.raw`y=0`),
-        " の場合。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)
-&= \phi_{\mathrm{cartesian}}\bigl([(0,\ 0)]_{\sim}\bigr)
-&&(\because\ \phi_{\mathrm{polar}}\ \text{の定義の}\ x=0,\ y=0\ \text{の場合})\\
-&= (0\cdot\cos 0,\ 0\cdot\sin 0)
-&&(\because\ \phi_{\mathrm{cartesian}}\ \text{の定義})\\
-&= (0,\ 0)
-&&(\because\ 0\ \text{を因子にもつ積は}\ 0)\\
-&= (x,\ y)
-&&(\because\ x=0\ \text{かつ}\ y=0)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_phi_polar"),
-        "、",
-        ref("def_phi_cartesian"),
-        "）。",
-      ]),
-      paragraph([
-        "以上で ",
-        math(String.raw`\phi_{\mathrm{polar}}`),
-        " の定義のすべての場合について ",
-        math(String.raw`(\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}})(x,y)=(x,y)`),
-        " が示され、",
+        "全単射性。",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        " により ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " である。",
+        " であるから、",
+        math(String.raw`\phi_{\mathrm{cartesian}}`),
+        " は全射である。単射性の導出は原文に無く、この証明は未完である。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "原文の part 2 は phi_cartesian ∘ phi_polar = id_CC を示すところまでで、全単射（特に単射性）の明示的な導出は原文にない。ここでは原文の計算を全ステップ忠実に再現した。",
+        "2026-11-01、合成が恒等写像であることの場合分けの計算を phi_cartesian_after_phi_polar_is_identity へ切り出し、全単射性の段落はそれを引く形にした。",
       ],
     },
   },

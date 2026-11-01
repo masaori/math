@@ -581,7 +581,9 @@ x^2+y^2
         math(String.raw`\phi_{\mathrm{cartesian}}`),
         " は全単射なモノイド準同型であり、かつ ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " なので、",
+        "（",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        "）なので、",
         math(String.raw`\phi_{\mathrm{polar}}`),
         " は ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
@@ -768,7 +770,9 @@ s_{[0,2\pi)}\!\left([\theta_1+\theta_2]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{cartesian}}`),
         " は全単射なモノイド準同型であり、かつ ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " なので、",
+        "（",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        "）なので、",
         math(String.raw`\phi_{\mathrm{polar}}`),
         " は ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
@@ -1164,7 +1168,9 @@ s_{[0,2\pi)}\!\left([\theta_1-\theta_2]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{cartesian}}`),
         " は全単射なモノイド準同型であり、かつ ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " なので、",
+        "（",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        "）なので、",
         math(String.raw`\phi_{\mathrm{polar}}`),
         " は ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
@@ -1450,7 +1456,9 @@ s_{[0,2\pi)}\!\left([\theta+\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{cartesian}}`),
         " は全単射なモノイド準同型であり、かつ ",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " なので、",
+        "（",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        "）なので、",
         math(String.raw`\phi_{\mathrm{polar}}`),
         " は ",
         math(String.raw`\phi_{\mathrm{cartesian}}`),
@@ -1970,7 +1978,9 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         math(String.raw`\phi_{\mathrm{cartesian}}`),
         " は全単射なモノイド準同型であり、",
         math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " なので ",
+        "（",
+        ref("phi_cartesian_after_phi_polar_is_identity"),
+        "）なので ",
         math(String.raw`\phi_{\mathrm{polar}}`),
         " はその逆写像である。全単射なモノイド準同型の逆写像はモノイド準同型なので",
       ]),
@@ -2305,15 +2315,11 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
     title: { text: "sqrt の2乗は元に戻る" },
     labels: ["sqrt_squared_is_original"],
     statement: [
-      paragraph([ref("sqrt_expansion_via_polar"), "、", ref("operations_on_polar_representation"), "、", ref("definition_of_sqrt_r_positive"), " を用いる。"]),
+      paragraph([ref("sqrt_expansion_via_polar"), "、", ref("operations_on_polar_representation"), "、", ref("definition_of_sqrt_r_positive"), " を用いる。", ref("def_sqrt_cc"), " と ", ref("def_phi_cartesian"), " は正弦・余弦が主値区間でしか定まっていないため未完であり、この主張もそれらが整うまで未完である。"]),
       paragraph([math(String.raw`z \in \mathbb{C}`), " について、", math(String.raw`\sqrt{z}\sqrt{z}=z`)]),
     ],
     proof: [
       paragraph([
-        "証明の中で使うものを 3 つ先に置く。",
-      ]),
-      paragraph([
-        "第一に、",
         math(String.raw`(r,\theta)\in\mathbb{R}_{\ge 0}\times\mathbb{R}`),
         " を ",
         math(String.raw`\phi_{\mathrm{polar}}(z)=[(r,\theta)]_{\sim}`),
@@ -2332,26 +2338,6 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
         " に対してただ一つ存在する）。",
       ]),
       paragraph([
-        "第二に、",
-        ref("isomorphism_of_phi_cartesian"),
-        " より ",
-        math(String.raw`\phi_{\mathrm{cartesian}}`),
-        " はモノイド準同型であり、",
-        math(String.raw`\phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}`),
-        " である。",
-      ]),
-      paragraph([
-        "第三に、",
-        ref("polar_equivalence_class"),
-        " の同値関係 ",
-        math(String.raw`\sim`),
-        " は第 2 成分の ",
-        math(String.raw`2\pi`),
-        " の整数倍の差を同一視するので、",
-        math(String.raw`[(r,\theta-2n\pi)]_{\sim}=[(r,\theta)]_{\sim}`),
-        " である。",
-      ]),
-      paragraph([
         "求めたい値から始める。",
       ]),
       displayMath(String.raw`\begin{aligned}
@@ -2366,14 +2352,16 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
 &&(\because\ \text{極座標表現の演算。}\blkref{operations_on_polar_representation})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}-n\pi\right)+\left(\tfrac{\theta}{2}-n\pi\right)\right)\right]_{\sim}\right)
 &&(\because\ \text{非負実数の}\ \sqrt{\cdot}\ \text{の定義。}\blkref{definition_of_sqrt_r_positive})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \left(\tfrac{\theta}{2}+\tfrac{\theta}{2}\right)-\left(n\pi+n\pi\right)\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{の和の交換律と結合律})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta-2n\pi\right)\right]_{\sim}\right)
-&&(\because\ \text{実数の和の計算})\\
+&&(\because\ \tfrac{\theta}{2}+\tfrac{\theta}{2}=\theta,\ n\pi+n\pi=2n\pi)\\
 &= \phi_{\mathrm{cartesian}}\!\left(\left[\left(r,\ \theta\right)\right]_{\sim}\right)
-&&(\because\ \text{極座標表現の同値関係。}\blkref{polar_equivalence_class})\\
+&&(\because\ (r,\theta-2n\pi)\sim(r,\theta)\ \text{である。}(\theta-2n\pi)-\theta=2(-n)\pi,\ -n\in\mathbb{Z}\ \blkref{angle_equivalence_class}\ \blkref{polar_equivalence_class})\\
 &= \phi_{\mathrm{cartesian}}\!\left(\phi_{\mathrm{polar}}(z)\right)
 &&(\because\ r,\theta\ \text{の取り方。}\blkref{def_phi_polar}\ \blkref{polar_equivalence_class})\\
 &= z
-&&(\because\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}\ \blkref{isomorphism_of_phi_cartesian})
+&&(\because\ \phi_{\mathrm{cartesian}}\circ\phi_{\mathrm{polar}}=\mathrm{id}_{\mathbb{C}}\ \blkref{phi_cartesian_after_phi_polar_is_identity})
 \end{aligned}`),
     ],
     conversion: {
@@ -2392,6 +2380,11 @@ s_{[0,2\pi)}\!\left([-\theta]_{\sim_{\mathrm{angle}}}\right)
           "式の直後にラベル参照を並べる形にした（同じファイルの他の証明と同じ扱い）。" +
           "2026-09-03 の式変形統一で、現在は利用できる \\blkref を各適用行へ置き、" +
           "証明末尾の参照一覧を削除した。式変形・根拠・内容は変えていない。",
+        "2026-11-01、SageMath の検算（sagemath/check/sqrt_squared_is_original/）のレビューで直した。" +
+          "最終行の根拠を、φ_cartesian ∘ φ_polar = id を述べる主張 phi_cartesian_after_phi_polar_is_identity に替えた" +
+          "（isomorphism_of_phi_cartesian の主張はこれを述べていない）。準備の二つ目と三つ目は、各行の根拠と重なるうえ" +
+          "同値関係の言い換えが不正確だったので削除し、同値の行の根拠に角度の差と angle_equivalence_class を書いた。" +
+          "実数の和の行を二行に分けた。上流の定義が未完であることを主張に書いた。計算の誤りは無かった。",
       ],
     },
   },

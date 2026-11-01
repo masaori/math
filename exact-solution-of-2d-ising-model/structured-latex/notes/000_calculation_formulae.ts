@@ -59,7 +59,7 @@ export default defineNotes([
   },
   {
     id: "note_calculation_formulae_029_supplementary_computation",
-    targets: ["isomorphism_of_phi_cartesian"],
+    targets: ["phi_cartesian_after_phi_polar_is_identity"],
     title: { text: "原文 note の補足計算（x<0 のときの sin(arctan(y/x)) と符号の根拠、具体例）" },
     origin: { path: "parts/000_計算公式/028_claim_phi_cartesianの同型性_モノイド準同型と全単射.typ", ordinal: 3 },
     body: [
