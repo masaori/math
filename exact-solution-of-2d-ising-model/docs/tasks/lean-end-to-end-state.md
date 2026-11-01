@@ -393,15 +393,21 @@
     仮定を埋めた主張 `TVPlus_checkPsiDag_checkPsi`（`ClaimCheckFermiResultsUnconditional.lean`）を足した。必要十分版は置かない（理由は `lean/docs/ch016-formalization.md` の 2 節）。
     `checkPsiDag_eq_checkPmat_col`・`checkPsi_eq_checkPmat_col`・`checkR_eq_absGamma2` を `ClaimCheckFermiResultsUnconditional.lean` から交換関係のファイルへ移した。レビューの指摘（必須 2 件・任意 5 件）を直した。
 
+  - ゴールラインの確認の十八個目（済み、2026-11-01）: 人手 `eigenvector_of_A_theta_tilde` の statement「`A(θ̃_μ)` の固有値は `λ_{±,μ}` の 2 つ」を
+    `eigenvalue_AMat_iff`（`DiagonalizationAndExponentialForm/ClaimEigenATildeDiag.lean`。固有値は `A(θ)v = λv` となる `v ≠ 0` があること）として立てた。
+    Step 1 の鎖「固有値 ⟺ `det(A(θ) - λI) = 0` ⟺ `λ = λ_{±,μ}`」の 1 つ目の同値は、2×2 の複素行列の成分計算 `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` で示した
+    （mathlib の `Matrix.exists_mulVec_eq_zero_iff` は分数体への持ち上げを経る一般論なので使わない）。
+    必要十分版 `NecSuf/TwoByTwoKernelAndDeterminant.lean`（可換環。「⇒」に零因子が無いこと、「⇐」に `1 ≠ 0`）と導出 `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf` を置いた。
+    レビューの指摘（mathlib の一般論への委任、古いコメント、必要十分版の欠如、検査一覧の漏れ、`Nontrivial` の理由、対応表の行）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
-
-この後に残る確認:
-
 - `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`DiagonalizationAndExponentialForm/ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）: 人手 Step 1 は `P̌_μ^{-1}` で `Ž_μ, Y̌_μ` をフェルミオンで書き直すが、Lean は `ψ̌^† ∓ ψ̌` の直接計算（`checkZ_eq_smul`・`checkY_eq_smul`）で置き換えている。人手どおりに直す。
+- 人手 `eigenvector_of_A_theta_tilde` は「固有値」を本文で定義せず、Step 1 の「固有値 ⟺ `det(A(θ) - λI) = 0`」を証明なしに使っている。
+  本文に固有値の定義と 2×2 の成分計算による同値の証明を足し（Lean の `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` と同じ手順）、SageMath の検算を付ける。
+  本文を触るので、構成再編・SageMath 検算の連続実行と rebase で衝突しないよう、その回の先頭で fetch してから行う。
 - 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。

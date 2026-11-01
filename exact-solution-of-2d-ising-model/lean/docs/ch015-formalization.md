@@ -33,7 +33,10 @@
 | `Ising2D.gamma2_mul_conj_eq_absGamma2_sq` / `gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` | `a ā = r^2`、`ab = -r^2`（根拠に引く形） | 同 Step 1・Step 2 の根拠 |
 | `Ising2D.factor_identity_thetaTilde` | 準備の因数分解の恒等式 | 同 Step 1 |
 | `Ising2D.charPoly_factor_thetaTilde` | `det(A(θ) - λI) = (λ-λ_+)(λ-λ_-)` | 同 Step 1 |
-| `Ising2D.det_AMat_sub_smul_eq_zero_iff` | 固有値は `λ_±` に限る | 同 Step 1 |
+| `Ising2D.det_AMat_sub_smul_eq_zero_iff` | `det(A(θ) - λI) = 0` となる `λ` は `λ_±` に限る | 同 Step 1 |
+| `Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` | 2×2 の複素行列 `B` について、`Bv = 0` となる `v ≠ 0` がある ⟺ `det B = 0`（成分計算） | 同 Step 1 の「固有値 ⟺ `det(A(θ) - λI) = 0`」 |
+| `Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
+| `Ising2D.eigenvalue_AMat_iff` | 固有値は `λ_±` に限る（「固有値 ⟺ `det(A(θ) - λI) = 0`」を経る） | 同 Step 1・statement |
 | `Ising2D.AMat_mulVec_eigen_pos` / `..._neg` | `v_± = (∓|γ_2|, γ_2(-θ~))` が固有ベクトル（成分ごとの鎖） | 同 Step 2 |
 | `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg` | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
 | `Ising2D.lambdaPlusR_ne_lambdaMinusR` | `λ_+ ≠ λ_-`（固有値の分離） | 同 Step 1 末尾 |
@@ -72,6 +75,7 @@
 | `OddModePhase.lean` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `N·θ = mπ`（`m` 奇数）かつ `sin θ = 0` なら `cos θ = -1` |
 | `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
 | `TwoByTwoSkew.lean` | `NecSuf.skew2_charPoly` / `skew2_charPoly_factor` / `skew2_mulVec` / `skew2_mul_col` / `skew2_det_col` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**） |
+| `TwoByTwoKernelAndDeterminant.lean` | `NecSuf.det_mul_vec_zero_of_mulVec` / `det_mul_vec_one_of_mulVec` / `det_eq_zero_of_mulVec_eq_zero` / `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` / `exists_ne_zero_mulVec_eq_zero_iff_det` | 2×2 行列が 0 でないベクトルを 0 へ送る ⟺ `det = 0`（「⇒」は**零因子の無い可換環**、「⇐」は 0 でない可換環） |
 | `GammaDetIdentity.lean` | `NecSuf.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
 | `ArcoshExp.lean` | `NecSuf.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
 
@@ -82,6 +86,7 @@
 | `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero` | `NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd` | `cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（必要十分版へ `N := M`, `m := 2μ-1` を代入） |
 | `relation_of_gamma_2_theta_tilde` | `gamma2_mul_gamma2_neg_eq_neg_absSq`, `sq_absGamma2`, `sq_I_absGamma2` | `NecSuf.mul_of_eq_neg_conj`, `sq_absOf_eq_neg_mul`, `sq_I_mul_absOf_eq_mul` | 具体版はいずれも必要十分版に `gamma2_neg_eq_neg_conj` を渡しただけ |
 | `eigenvector_of_A_theta_tilde`, `diagonalization_check_P_D` | `AMat_mulVec_eigen_pos/neg`, `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv` | `NecSuf.skew2_mulVec`, `NecSuf.skew2_charPoly_factor`, `NecSuf.eq_conj_of_mul_eq` | 対角化は `eq_conj_of_mul_eq` の系として導出 |
+| `eigenvector_of_A_theta_tilde` Step 1 の「固有値 ⟺ `det(A(θ) - λI) = 0`」 | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two` | `NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det` | `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf`（係数 `R := ℂ`） |
 | `det_A_theta_tilde` | `det_AMat_thetaTilde_eq_one` | `NecSuf.gamma_det_identity` | `det_AMat_thetaTilde_eq_one_of_necSuf`（同じ主張を必要十分版の系として再証明） |
 | `gamma1_gt_1_theta_tilde` | `one_lt_gamma1R_thetaTilde` | `NecSuf.one_lt_of_sq_gt_one` | 具体版は必要十分版の系 |
 | `gamma_theta_tilde_mu_positive`, `lambda_eq_exp_gamma_theta_tilde` | `gammaTilde_pos`, `sinh_gammaTilde`, `lambdaPlusR_eq_exp`, `lambdaMinusR_eq_exp` | `NecSuf.arcosh_pos_of_one_lt`, `sinh_arcosh_of_sq`, `exp_arcosh_of_sq`, `exp_neg_arcosh_of_sq` | 具体版はいずれも必要十分版の系 |
@@ -124,7 +129,7 @@
    `absGamma2_thetaTilde_pos`）で述べてある。この方針は 008 章
    （`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）と同じである。
 2. **`eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元で尽きること）を独立の定理にしていない。**
-   固有値が `λ_±` の 2 つに限ることは `det_AMat_sub_smul_eq_zero_iff`（特性多項式の因数分解）で、
+   固有値が `λ_±` の 2 つに限ることは `eigenvalue_AMat_iff`（特性多項式の因数分解 `det_AMat_sub_smul_eq_zero_iff` を経る）で、
    固有ベクトルが `v_±` のスカラー倍で尽きることは対角化
    `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`（`P̌` が可逆）でそれぞれ言えており、
    後段が使うのはこの 2 つである。

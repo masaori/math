@@ -201,6 +201,7 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.TheoremMaxEig
 import Ising2D.NecSuf.OddModePhase
 import Ising2D.NecSuf.NegConjPair
 import Ising2D.NecSuf.TwoByTwoSkew
+import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
 import Ising2D.NecSuf.GammaDetIdentity
 import Ising2D.NecSuf.ArcoshExp
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionGamma1Gamma2OfThetaTilde

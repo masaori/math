@@ -942,6 +942,14 @@ targets=(
   Ising2D.factor_identity_thetaTilde
   Ising2D.charPoly_factor_thetaTilde
   Ising2D.det_AMat_sub_smul_eq_zero_iff
+  Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two
+  Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf
+  Ising2D.eigenvalue_AMat_iff
+  Ising2D.NecSuf.det_mul_vec_zero_of_mulVec
+  Ising2D.NecSuf.det_mul_vec_one_of_mulVec
+  Ising2D.NecSuf.det_eq_zero_of_mulVec_eq_zero
+  Ising2D.NecSuf.exists_ne_zero_mulVec_eq_zero_of_det_eq_zero
+  Ising2D.NecSuf.exists_ne_zero_mulVec_eq_zero_iff_det
   Ising2D.AMat_mulVec_eigen_pos
   Ising2D.AMat_mulVec_eigen_neg
   Ising2D.eigenvector_pos_ne_zero
