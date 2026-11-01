@@ -297,6 +297,7 @@ export const ALL_LABELS = [
   "scalar_exp_product",
   "scalar_exp_zero",
   "scalar_identity_commutes",
+  "scalar_limit_is_unique",
   "second_derivative_log_divergence",
   "second_dual_coupling_relation",
   "second_transfer_matrix_pauli_form",

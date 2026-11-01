@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 221 件のうち、SageMath の検算が無いもの 106 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 222 件のうち、SageMath の検算が無いもの 105 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -36,9 +36,14 @@
 
 - `cosh_sinh_product`（cosh・sinh の掛け算。ラベルが無かったので付けた）: `sagemath/check/cosh_sinh_product/`。exp の性質を使わない行は exp の 8 つの値を `QQ` 上の独立な不定元に置いて、積の法則の行と鎖の両端は `QQ[a,b]` の形式冪級数（全次数 14 まで）で厳密に、主張は本文の exp を囲むボールで確かめた。レビューの指摘で人手証明を直した（一行に積の法則・指数の整理・並べ替え・`1/4=(1/2)(1/2)` を束ねていたのを、一ステップ一定理の 9 行の鎖に分け、`def_cosh_sinh` への `blkref` と、現れる exp が実数の exp であることを足した）。計算の誤りは無かった。
 
+- `exp_of_diagonal_matrix`（対角行列の指数関数）と、そのために足した `scalar_limit_is_unique`（数の列の極限は一意）: `sagemath/check/exp_of_diagonal_matrix/`・`sagemath/check/scalar_limit_is_unique/`。
+  積・冪の帰納法・部分和の鎖は `QQ(i)` 上の多項式環の不定元で厳密に、絶対値とノルムは `AA` で、`exp(D)` と `exp(d_k)` の値だけを本文の部分和を囲む複素数のボールで確かめた。
+  人手証明を直した（冪の帰納法と極限から成分を決める段を (∵) 付きの鎖に、対角成分の極限の根拠を `real_exp_series_converges` の複素数への流用から `scalar_exp_is_limit_of_partial_sums` と新しい `scalar_limit_is_unique` へ、
+  部分和の記号を `E_K` から `S_N` へ（体 `K`・行列単位 `E_{I,J}` との衝突）、主張に `k, l` の範囲・`inclusion_rr_to_cc`・ℝ への脱出を明記、積の中間目標の文字を主張の `D` と分けて `P, Q` に）。五回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
+
 ## 次の一歩
 
-`004_transfer_matrix.ts` の `exp_of_diagonal_matrix`（`--list` の先頭）から、文書順に検算を足す。
+`004_transfer_matrix.ts` の `end_preserves_matrix_exponential`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -86,3 +91,6 @@
 - 2026-11-01、`complex_exp_of_real_argument` のレビューで見つかった（未定義の演算）: ℂ の減法 `z - w` を定めるブロックが本文に無い。`multiply_by_minus_one` は記号 `-z := (-1_C)z` を定めるだけで、
   それが加法の逆元であることは `complex_numbers_form_a_field` の証明の中にしか書かれていない。行列の差 `A - B` と「行列の差は成分ごと」も本文に定義が無い。
   どちらも本文全体で使われている。直すには、`multiply_by_minus_one` の後に `z - w := z + (-w)` を、行列の和の定義の近くに `A - B := A + (-1)B` と成分の式を置き、依存先から引く。この単位では直さなかった。
+- 2026-11-01、`exp_of_diagonal_matrix` の検算で見つかった（重複と、Lean との対応の欠け）: `real_exp_strictly_increasing` と `complex_exp_of_real_argument` は、数の列の極限の一意性を 1 行 1 列の行列を通してそれぞれの証明の中で示し直している。
+  同じ事実を述べる `scalar_limit_is_unique` を足したので、二つの証明はそれを引く形に縮められる。この単位では直さなかった。
+  また Lean の具体版 `lean/Ising2D/MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` は mathlib の `Matrix.exp_diagonal` に委ねていて、人手証明（対角行列の積・冪の帰納法・部分和・極限の一意性）と 1 対 1 に対応していない。Lean の連続実行の状態台帳へ渡す。

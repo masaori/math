@@ -154,131 +154,276 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
     title: { text: "対角行列の指数関数" },
     labels: ["exp_of_diagonal_matrix"],
     statement: [
-      paragraph(["行列の成分積は ", ref("mat_mult"), "、複素成分の演算は ", ref("complex_numbers_form_a_field"), "、実数係数の包含は ", ref("inclusion_rr_to_cc"), "、非負平方根は ", ref("definition_of_sqrt_r_positive"), " による。"]),
+      paragraph(["行列の積は ", ref("mat_mult"), "、複素成分の演算は ", ref("complex_numbers_form_a_field"), "、指数級数の部分和の実数の係数 ", math(String.raw`1/p!`), "（", math(String.raw`p \in \mathbb{Z}_{\ge 0}`), "）の複素数への包含は ", ref("inclusion_rr_to_cc"), " による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         " とし、",
         math(String.raw`D \in \mathrm{Mat}(n,\mathbb{C})`),
-        " が対角行列（",
+        " が対角行列（すべての ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
         math(String.raw`k \neq l \Rightarrow D_{kl} = 0`),
-        "）で対角成分を ",
+        "）で、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について対角成分を ",
         math(String.raw`d_k := D_{kk}`),
-        " とすると、",
+        " とすると、すべての ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
       ]),
       displayMath(
         String.raw`\exp(D)_{kl} = \begin{cases} \exp(d_k) & (k = l) \\ 0 & (k \neq l)\end{cases}`,
       ),
-      paragraph(["すなわち ", math(String.raw`\exp(D)`), " も対角行列で、対角成分は ", math(String.raw`\exp(d_k)`), " である。"]),
+      paragraph([
+        "すなわち ",
+        math(String.raw`\exp(D)`),
+        " も対角行列で、対角成分は ",
+        math(String.raw`\exp(d_k)`),
+        " である。左辺の ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " (1) の行列の exp、右辺の ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の複素数の exp であり、どちらも極限で定まる量である。また証明の中の絶対値の値は ",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " に入り（",
+        ref("def_abs_arg"),
+        "）、",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束は実数列の収束である。これらの理由（極限）で、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している。",
+      ]),
     ],
     proof: [
       paragraph([
-        "中間目標: 対角行列の積と冪。対角行列 ",
-        math(String.raw`D, D'`),
-        " の積の成分を計算する。",
+        "証明の中では、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " は主張のとおりとし、",
+        math(String.raw`p, N \in \mathbb{Z}_{\ge 0}`),
+        " とし、数の冪を ",
+        math(String.raw`d_k^{\,0} := 1`),
+        "、",
+        math(String.raw`d_k^{\,p+1} := d_k^{\,p}\,d_k`),
+        " で、行列の冪を ",
+        ref("def_exp"),
+        " の ",
+        math(String.raw`D^0 := I`),
+        "、",
+        math(String.raw`D^{p+1} := D^p D`),
+        " で表す。部分和を",
+      ]),
+      displayMath(String.raw`S_N := \sum_{p=0}^{N}\frac{1}{p!}D^p \in \mathrm{Mat}(n,\mathbb{C})`),
+      paragraph(["とおく。"]),
+      paragraph([
+        "中間目標: 対角行列の積。",
+        math(String.raw`P, Q \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を対角行列とする。",
         math(String.raw`k \neq l`),
-        " の場合:",
+        " のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(DD')_{kl}
-&= \sum_{j=1}^{n} D_{kj}D'_{jl}
-   \quad (\because \text{行列積の成分の定義}) \\
-&= D_{kk}D'_{kl}
-   \quad (\because j \neq k \text{ の項は } D_{kj} = 0) \\
+(PQ)_{kl}
+&= \sum_{j=1}^{n} P_{kj}Q_{jl}
+   \quad (\because \blkref{mat_mult}) \\
+&= P_{kk}Q_{kl}
+   \quad (\because j \neq k \text{ の項は } P_{kj} = 0) \\
 &= 0
-   \quad (\because k \neq l \text{ より } D'_{kl} = 0).
+   \quad (\because k \neq l \text{ より } Q_{kl} = 0)
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`k = l`), " の場合:"]),
+      paragraph(["であり、"]),
       displayMath(
         String.raw`\begin{aligned}
-(DD')_{kk}
-&= \sum_{j=1}^{n} D_{kj}D'_{jk}
-   \quad (\because \text{行列積の成分の定義}) \\
-&= D_{kk}D'_{kk}
-   \quad (\because j \neq k \text{ の項は } D_{kj} = 0).
+(PQ)_{kk}
+&= \sum_{j=1}^{n} P_{kj}Q_{jk}
+   \quad (\because \blkref{mat_mult}) \\
+&= P_{kk}Q_{kk}
+   \quad (\because j \neq k \text{ の項は } P_{kj} = 0)
 \end{aligned}`,
       ),
+      paragraph(["である。すなわち対角行列どうしの積は対角行列で、対角成分は対角成分どうしの積である。"]),
       paragraph([
-        "よって対角行列どうしの積は対角行列で、対角成分は成分ごとの積である。ゆえに ",
-        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
-        " について帰納法により ",
+        "中間目標: 対角行列の冪。「",
         math(String.raw`D^p`),
         " は対角行列で ",
         math(String.raw`(D^p)_{kk} = d_k^{\,p}`),
-        "（",
+        "」を ",
+        math(String.raw`p`),
+        " に関する帰納法で示す。",
         math(String.raw`p = 0`),
-        " のときは ",
-        math(String.raw`D^0 = I`),
-        " で ",
-        math(String.raw`d_k^0 = 1`),
-        "）。",
-      ]),
-      paragraph([
-        "中間目標: 指数級数の部分和。",
-        ref("def_exp"),
-        " の部分和 ",
-        math(String.raw`E_K := \sum_{p=0}^{K}\frac{1}{p!}D^p`),
-        " は、有限個の対角行列の線型結合なので対角行列で、成分は次のとおりである。",
+        " では、",
+        math(String.raw`k \neq l`),
+        " のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(E_K)_{kk}
-&= \sum_{p=0}^{K}\frac{1}{p!}(D^p)_{kk}
-   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
-&= \sum_{p=0}^{K}\frac{d_k^{\,p}}{p!}
-   \quad (\because \text{対角行列の冪の成分 } (D^p)_{kk} = d_k^{\,p}), \\
-(E_K)_{kl}
-&= \sum_{p=0}^{K}\frac{1}{p!}(D^p)_{kl}
-   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+(D^0)_{kl}
+&= I_{kl}
+   \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
 &= 0
-   \quad (\because \text{対角行列の冪は対角行列なので } k \neq l \text{ では } (D^p)_{kl} = 0).
+   \quad (\because \text{単位行列の非対角成分})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(D^0)_{kk}
+&= I_{kk}
+   \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
+&= 1
+   \quad (\because \text{単位行列の対角成分}) \\
+&= d_k^{\,0}
+   \quad (\because d_k^{\,0} := 1)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`p`),
+        " で成り立つと仮定する。",
+        math(String.raw`k \neq l`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(D^{p+1})_{kl}
+&= (D^p D)_{kl}
+   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_exp}) \\
+&= 0
+   \quad (\because D^p \text{ は対角行列（帰納法の仮定）で、上の対角行列の積を } P := D^p,\ Q := D \text{ として適用})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(D^{p+1})_{kk}
+&= (D^p D)_{kk}
+   \quad (\because D^{p+1} := D^p D\text{。}\blkref{def_exp}) \\
+&= (D^p)_{kk}\,D_{kk}
+   \quad (\because D^p \text{ は対角行列（帰納法の仮定）で、上の対角行列の積を } P := D^p,\ Q := D \text{ として適用}) \\
+&= d_k^{\,p}\,D_{kk}
+   \quad (\because \text{帰納法の仮定}) \\
+&= d_k^{\,p}\,d_k
+   \quad (\because d_k := D_{kk}) \\
+&= d_k^{\,p+1}
+   \quad (\because d_k^{\,p+1} := d_k^{\,p}\,d_k)
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+      paragraph([
+        "中間目標: 指数級数の部分和の成分。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N)_{kk}
+&= \sum_{p=0}^{N}\frac{1}{p!}(D^p)_{kk}
+   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+&= \sum_{p=0}^{N}\frac{d_k^{\,p}}{p!}
+   \quad (\because \text{上の対角行列の冪を各項へ適用})
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`k \neq l`), " のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N)_{kl}
+&= \sum_{p=0}^{N}\frac{1}{p!}(D^p)_{kl}
+   \quad (\because \text{行列の和とスカラー倍は成分ごと}) \\
+&= \sum_{p=0}^{N}\frac{1}{p!}\cdot 0
+   \quad (\because \text{上の対角行列の冪より } D^p \text{ は対角行列}) \\
+&= 0
 \end{aligned}`,
       ),
       paragraph([
         "中間目標: 極限。",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`\exp(D) = \sum_{p=0}^{\infty}\frac{1}{p!}D^p`),
+        " だから、",
         ref("exp_converges"),
-        " より ",
-        math(String.raw`E_K \to \exp(D)`),
-        "（",
-        ref("def_matrix_norm"),
-        " のノルムについて）。任意の ",
+        " (1b) を ",
+        math(String.raw`A = D`),
+        " に適用すると、すべての ",
         math(String.raw`(k,l)`),
+        " について ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束の意味で",
+      ]),
+      displayMath(String.raw`(S_N)_{kl} \to \exp(D)_{kl} \quad (N \to \infty)`),
+      paragraph([
+        "である。",
+        math(String.raw`k \neq l`),
+        " のとき、",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left|(E_K)_{kl} - \exp(D)_{kl}\right|
-&= \left|\bigl(E_K - \exp(D)\bigr)_{kl}\right|
-   \quad (\because \text{行列の差は成分ごと}) \\
-&\leq \|E_K - \exp(D)\|
-   \quad (\because \|A\| = \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}\text{ の非負実数の有限和の 1 項}) \\
-&\to 0
-   \quad (\because E_K \to \exp(D)).
+\left|(S_N)_{kl} - 0\right|
+&= |0 - 0|
+   \quad (\because \text{上の部分和の成分 } (S_N)_{kl} = 0) \\
+&= |0|
+   \quad (\because 0 - 0 = 0) \\
+&= 0
+   \quad (\because \blkref{abs_basic_properties}\text{ (3)}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \text{各項が } 0 \text{ の実数列})
 \end{aligned}`,
       ),
       paragraph([
-        "すなわち成分ごとに収束する。",
-        math(String.raw`k \neq l`),
-        " では左側が常に ",
-        math(String.raw`0`),
-        " なので ",
-        math(String.raw`\exp(D)_{kl} = 0`),
-        "。",
-        math(String.raw`k = l`),
-        " では ",
-        ref("real_exp_series_converges"),
-        "（複素数の場合も同じ級数）より ",
-        math(String.raw`\sum_{p=0}^{K} d_k^{\,p}/p! \to \exp(d_k)`),
-        " なので ",
-        math(String.raw`\exp(D)_{kk} = \exp(d_k)`),
-        "。",
+        "であり、これは ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束の意味で ",
+        math(String.raw`(S_N)_{kl} \to 0`),
+        " である。よって",
       ]),
+      displayMath(
+        String.raw`\exp(D)_{kl} = 0
+   \quad (\because \blkref{scalar_limit_is_unique}\text{ を、体を } \mathbb{C}\text{、列を } \bigl((S_N)_{kl}\bigr)_{N}\text{、}a := \exp(D)_{kl}\text{、}a' := 0 \text{ として。上の二つの収束})`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`k = l`),
+        " のとき、",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left|(S_N)_{kk} - \exp(d_k)\right|
+&= \left|\sum_{p=0}^{N}\frac{d_k^{\,p}}{p!} - \exp(d_k)\right|
+   \quad (\because \text{上の部分和の成分}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \blkref{scalar_exp_is_limit_of_partial_sums}\text{ を、体を } \mathbb{C}\text{、}x := d_k \text{ として})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、これは ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束の意味で ",
+        math(String.raw`(S_N)_{kk} \to \exp(d_k)`),
+        " である。よって",
+      ]),
+      displayMath(
+        String.raw`\exp(D)_{kk} = \exp(d_k)
+   \quad (\because \blkref{scalar_limit_is_unique}\text{ を、体を } \mathbb{C}\text{、列を } \bigl((S_N)_{kk}\bigr)_{N}\text{、}a := \exp(D)_{kk}\text{、}a' := \exp(d_k) \text{ として。上の二つの収束})`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移した。Step 1〜3 の番号を中間目標の名前（対角行列の積と冪・指数級数の部分和・極限）へ変えた。",
+        "2026-11-01: SageMath の検算（sagemath/check/exp_of_diagonal_matrix/）を付けるにあたり、証明を書き直した。冪の帰納法（基底と帰納の段）と、極限から成分を決める段を、根拠付きの鎖にした。対角成分の極限の根拠を、実数の級数の収束（labels: real_exp_series_converges）を複素数へ流用する書き方から、数の exp が部分和の極限であること（labels: scalar_exp_is_limit_of_partial_sums）と数の列の極限の一意性（labels: scalar_limit_is_unique。このとき足した）へ替えた。部分和の記号を E_K から S_N へ替えた（行列単位 E_{I,J} との衝突と、体 K との衝突を避けるため）。両辺の exp が極限で定まり、ℝ へ脱出していることを主張に書いた。",
       ],
     },
   },

@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`exp_of_diagonal_matrix`（対角行列の指数関数）の検算 `sagemath/check/exp_of_diagonal_matrix/` を足した。証明の最後の「成分の列の極限を二通りに求めて一致させる」段にラベル付きの根拠が無かったので、主張 `scalar_limit_is_unique`（数の列の極限は一意）を `003_exp_linear_map.ts` に足し、検算 `sagemath/check/scalar_limit_is_unique/` を付けた（未検算 106 → 105 件、証明を持つブロック 221 → 222 件）。冪の帰納法と極限の段を鎖に直し、部分和を `S_N` に改名した。計算の誤りは無かった。Lean の具体版が mathlib に委ねていて人手証明と対応しないことを状態台帳に記録した。次は `end_preserves_matrix_exponential`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の十一回目として、`003_exp_linear_map.ts` の cosh・sinh の掛け算（ラベルが無かったので `cosh_sinh_product` を付けた）の検算 `sagemath/check/cosh_sinh_product/` を足した（未検算 107 → 106 件）。exp の性質を使わない行は独立な不定元で、積の法則の行は形式冪級数で厳密に、主張はボールで確かめた。レビューの指摘で、複数の操作を束ねた行を一ステップ一定理の 9 行の鎖に分けた。計算の誤りは無かった。次は `exp_of_diagonal_matrix`。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`complex_exp_of_real_argument`（実数の exp と複素数の exp は実数上で一致する）の検算 `sagemath/check/complex_exp_of_real_argument/` を足した（未検算 108 → 107 件）。ℂ は本文どおり実数の対で持ち（`sagemath/_shared/complex_as_real_pairs.sage`）、等号の行は全て厳密、極限の値だけをボールで確かめた。人手証明の散文の推論を冪・部分和の帰納法と収束の鎖に直し、ラベル無しの「ℂ の列の極限の一意性」を 1 行 1 列の行列の極限の一意性経由にした。ℂ の減法と行列の差が本文で未定義であることを状態台帳に記録した。計算の誤りは無かった。次は `calc_formulae_000_cosh_sinh_product`。

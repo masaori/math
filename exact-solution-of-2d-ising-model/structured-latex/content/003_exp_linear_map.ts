@@ -1520,6 +1520,131 @@ S_NT_N
     },
   },
   {
+    id: "exp_linear_map_claim_scalar_limit_is_unique",
+    kind: "claim",
+    origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 5 },
+    title: { text: "数の列の極限は一意" },
+    labels: ["scalar_limit_is_unique"],
+    statement: [
+      paragraph([
+        math(String.raw`K := \mathbb{R}`),
+        " または ",
+        math(String.raw`K := \mathbb{C}`),
+        " とし、",
+        math(String.raw`(a_N)_{N \in \mathbb{Z}_{\ge 0}}`),
+        " を ",
+        math(String.raw`K`),
+        " の列、",
+        math(String.raw`a, a' \in K`),
+        " とする。",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K`),
+        " の列の収束の意味で ",
+        math(String.raw`a_N \to a`),
+        " かつ ",
+        math(String.raw`a_N \to a'`),
+        " ならば、",
+        math(String.raw`a = a'`),
+        " である。絶対値の値は ",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " に入り（",
+        math(String.raw`K = \mathbb{C}`),
+        " では ",
+        ref("def_abs_arg"),
+        " の絶対値で、",
+        ref("abs_basic_properties"),
+        " (1) により実数の平方根、",
+        math(String.raw`K = \mathbb{R}`),
+        " では実数の絶対値）、収束は実数列の収束なので（理由: 極限）、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`u, v \in K`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[u]_K - [v]_K
+&= \left[\left([u]_K - [v]_K\right)_{11}\right]_K
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= \left[\left([u]_K\right)_{11} - \left([v]_K\right)_{11}\right]_K
+   \quad (\because \text{行列の差は成分ごと}) \\
+&= [u - v]_K
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`w \in K`),
+        " について（ノルムの値は ",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " に入る。理由: 実数の平方根）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[w]_K\right\|
+&= \sqrt{\sum_{i=1}^{1}\sum_{j=1}^{1}\left|\left([w]_K\right)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_matrix_norm}\text{ を } n = 1 \text{ で}) \\
+&= \sqrt{\left|\left([w]_K\right)_{11}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \text{和は } i = j = 1 \text{ の 1 項だけ}) \\
+&= \sqrt{|w|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= |w|
+   \quad (\because |w| \in \mathbb{R}_{\ge 0} \text{ かつ } |w|^2 = |w|^2 \text{ なので、}\blkref{definition_of_sqrt_r_positive}\text{ の値の一意性。}\blkref{sqrt_nonnegative_existence_uniqueness})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`b \in \{a, a'\}`),
+        " とすると、",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[a_N]_K - [b]_K\right\|
+&= \left\|[a_N - b]_K\right\|
+   \quad (\because \text{上の } [u]_K - [v]_K = [u - v]_K) \\
+&= \left|a_N - b\right|
+   \quad (\because \text{上の } \|[w]_K\| = |w|) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \text{仮定 } a_N \to b\text{。}\blkref{def_matrix_norm}\text{ の } K \text{ の列の収束})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。すなわち ",
+        ref("def_matrix_norm"),
+        " の意味で ",
+        math(String.raw`[a_N]_K \to [a]_K`),
+        " かつ ",
+        math(String.raw`[a_N]_K \to [a']_K`),
+        " である。よって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a
+&= \left([a]_K\right)_{11}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= \left([a']_K\right)_{11}
+   \quad (\because [a]_K = [a']_K\text{。}\blkref{matrix_norm_triangle_inequality}\text{ (4) を } n = 1 \text{ で、上の二つの収束へ}) \\
+&= a'
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "対角行列の exp の成分（labels: exp_of_diagonal_matrix）が、成分の列の極限を二通りに求めて一致させるために、ラベル付きの根拠として置いた。行列の極限の一意性（labels: matrix_norm_triangle_inequality (4)）へ 1 行 1 列の行列（labels: def_one_by_one_matrix）を通して帰着させる。",
+      ],
+    },
+  },
+  {
     id: "exp_linear_map_006_definition_scalar_exp",
     kind: "definition",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 6 },
