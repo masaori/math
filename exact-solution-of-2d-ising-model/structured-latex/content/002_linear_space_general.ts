@@ -601,6 +601,48 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_definition_matrix_transpose",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列の転置" },
+    labels: ["def_matrix_transpose"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。",
+        math(String.raw`B`),
+        " の転置 ",
+        math(String.raw`B^\top \in \mathrm{Mat}(n,m,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`\left(B^\top\right)_{pq} := B_{qp}
+\qquad (p \in \{1,\dots,n\},\ q \in \{1,\dots,m\})`),
+      paragraph([
+        "で定める。右辺は ",
+        math(String.raw`B`),
+        " の ",
+        math(String.raw`(q,p)`),
+        " 成分であり、",
+        math(String.raw`q \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`p \in \{1,\dots,n\}`),
+        " だから定まっている。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。クロネッカー積の転置の主張（kronecker_transpose）が" +
+          "主張の中で 2^M 次の行列の転置を定め、証明では 2 次の行列の転置の定義を根拠にしていたが、" +
+          "転置を定めるブロックが本文に無かった。1 ブロック 1 主張に従い、定義をこのブロックへ切り出した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_000d_claim_kronecker_transpose",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
@@ -612,12 +654,8 @@ export default defineBlocks([
         " の記号のもと、",
         math(String.raw`A_1,\dots,A_M \in \mathrm{Mat}(2,\mathbb{C})`),
         " について、",
-        math(String.raw`2^M`),
-        " 次の複素行列の転置 ",
-        math(String.raw`\left(B^\top\right)_{pq} := B_{qp}`),
-        "（",
-        math(String.raw`p,q\in\{1,\dots,2^M\}`),
-        "）に関して",
+        ref("def_matrix_transpose"),
+        " の転置に関して",
       ]),
       displayMath(
         String.raw`\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top
@@ -636,13 +674,13 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 \left(\left(A_1\boxtimes\cdots\boxtimes A_M\right)^\top\right)_{\nu(I),\nu(J)}
 &= \left(A_1\boxtimes\cdots\boxtimes A_M\right)_{\nu(J),\nu(I)}
-&&(\because \text{転置の定義}) \\
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2^M) \\
 &= \prod_{k=1}^{M}(A_k)_{j_ki_k}
-&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方}) \\
+&&(\because \blkref{def_kronecker} \text{ を } A_1,\dots,A_M \text{ に適用}) \\
 &= \prod_{k=1}^{M}\left(A_k^\top\right)_{i_kj_k}
-&&(\because 2 \text{ 次の行列の転置の定義}) \\
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2 \text{ を各 } k \text{ に適用}) \\
 &= \left(A_1^\top\boxtimes\cdots\boxtimes A_M^\top\right)_{\nu(I),\nu(J)}
-&&(\because \blkref{def_kronecker} \text{ のクロネッカー積の成分の定め方})
+&&(\because \blkref{def_kronecker} \text{ を } A_1^\top,\dots,A_M^\top \text{（} \blkref{def_matrix_transpose} \text{ により } \mathrm{Mat}(2,\mathbb{C}) \text{ の元）に適用})
 \end{aligned}`,
       ),
       paragraph([
@@ -670,6 +708,9 @@ export default defineBlocks([
           "式変形の段は 1 つも増減しておらず、主張と証明の中身は変えていない。",
         "2026-09-01 の式変形統一で、四段の根拠を行中の \\quad (\\because …) から" +
           "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+        "2026-11-01: 主張の中で定めていた 2^M 次の行列の転置と、証明が根拠にしていた 2 次の行列の転置を、" +
+          "新しい定義 def_matrix_transpose（m 行 n 列の行列の転置）へ切り出し、第一行と第三行の根拠をそれへの参照にした。第二行と第四行の根拠に、定義をどの行列へ適用したかを書いた。" +
+          "式変形の段と主張の中身は変えていない。",
       ],
     },
   },

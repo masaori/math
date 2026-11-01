@@ -9,9 +9,9 @@
     "2次元イジングモデル"
   ],
   "mathematicalToolPartTitle": "数学的道具立て",
-  "entryCount": 303,
+  "entryCount": 305,
   "classificationEntryCounts": {
-    "数学的道具立て": 123,
+    "数学的道具立て": 125,
     "2次元イジングモデル": 180
   },
   "chapterPlacementProgress": {
@@ -1489,6 +1489,7 @@
         "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_028_definition_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_claim_polar_multiplication_well_defined",
         "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
@@ -1530,8 +1531,8 @@
         "linear_space_general_000_definition_kronecker_product",
         "linear_space_general_000b_claim_kronecker_product_rule",
         "linear_space_general_000c_claim_kronecker_multilinear",
-        "linear_space_general_000d_claim_kronecker_transpose",
-        "linear_space_general_001_theorem_tensor_product_basis"
+        "linear_space_general_001_theorem_tensor_product_basis",
+        "linear_space_general_000d_claim_kronecker_transpose"
       ]
     },
     {
@@ -1550,6 +1551,7 @@
         "finite_matrix_definition_eigenvalue",
         "linear_space_general_002_claim_scalar_identity_commutes",
         "linear_space_general_004_lemma_centralizer_is_scalar",
+        "linear_space_general_definition_matrix_transpose",
         "Z_Y_anticommutation_000a_claim_pauli_matrix_products",
         "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
       ]
@@ -1643,7 +1645,7 @@
     }
   ],
   "explanationGranularityReview": {
-    "reviewedEntryCount": 303,
+    "reviewedEntryCount": 305,
     "criterion": "高度な抽象理論を導入せず、複素数と有限行列の具体的な計算を依存先から順に追えること",
     "flaggedEntryIds": [
       "calc_formulae_012_definition_arc_length",
@@ -1726,13 +1728,13 @@
     ]
   },
   "mathematicalToolSemanticContaminationReview": {
-    "inspectedEntryCount": 123,
+    "inspectedEntryCount": 125,
     "contaminatedEntryIds": []
   },
   "classificationStructures": [
     {
       "classification": "数学的道具立て",
-      "entryCount": 123,
+      "entryCount": 125,
       "dependencyDirection": "prerequisite から dependent へ",
       "topologicalOrder": [
         {
@@ -2025,245 +2027,245 @@
         {
           "order": 42,
           "entryIds": [
-            "calculation_formulae_claim_polar_multiplication_well_defined"
+            "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 43,
           "entryIds": [
-            "calculation_formulae_022_definition_operations_on_polar_representation"
+            "calculation_formulae_claim_polar_multiplication_well_defined"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 44,
           "entryIds": [
-            "calculation_formulae_029_claim_isomorphism_of_phi_cartesian"
+            "calculation_formulae_022_definition_operations_on_polar_representation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 45,
           "entryIds": [
-            "calculation_formulae_032_claim_arg_of_product"
+            "calculation_formulae_029_claim_isomorphism_of_phi_cartesian"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 46,
           "entryIds": [
-            "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi"
+            "calculation_formulae_032_claim_arg_of_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 47,
           "entryIds": [
-            "calculation_formulae_035_claim_arg_of_square"
+            "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 48,
           "entryIds": [
-            "calculation_formulae_040_claim_sqrt_commutativity_condition"
+            "calculation_formulae_035_claim_arg_of_square"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 49,
           "entryIds": [
-            "calculation_formulae_041_claim_sqrt_squared_is_original"
+            "calculation_formulae_040_claim_sqrt_commutativity_condition"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 50,
           "entryIds": [
-            "calculation_formulae_042_claim_square_of_sqrt"
+            "calculation_formulae_041_claim_sqrt_squared_is_original"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 51,
           "entryIds": [
-            "calculation_formulae_claim_monoid_of_polar_representation"
+            "calculation_formulae_042_claim_square_of_sqrt"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 52,
           "entryIds": [
-            "calculation_formulae_claim_inverse_in_polar_representation"
+            "calculation_formulae_claim_monoid_of_polar_representation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 53,
           "entryIds": [
-            "calculation_formulae_claim_polar_zero_class_criterion"
+            "calculation_formulae_claim_inverse_in_polar_representation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 54,
           "entryIds": [
-            "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
+            "calculation_formulae_claim_polar_zero_class_criterion"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 55,
           "entryIds": [
-            "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique"
+            "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 56,
           "entryIds": [
-            "calculation_formulae_033_claim_arg_of_quotient"
+            "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 57,
           "entryIds": [
-            "calculation_formulae_036_claim_arg_of_reciprocal"
+            "calculation_formulae_033_claim_arg_of_quotient"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 58,
           "entryIds": [
-            "calculation_formulae_043_claim_sqrt_of_reciprocal"
+            "calculation_formulae_036_claim_arg_of_reciprocal"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 59,
           "entryIds": [
-            "calculation_formulae_044_claim_reciprocal_of_sqrt"
+            "calculation_formulae_043_claim_sqrt_of_reciprocal"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 60,
           "entryIds": [
-            "eigenvalues_of_V_001_definition_trace"
+            "calculation_formulae_044_claim_reciprocal_of_sqrt"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 61,
           "entryIds": [
-            "eigenvalues_of_V_002_claim_trace_properties"
+            "eigenvalues_of_V_001_definition_trace"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 62,
           "entryIds": [
-            "eigenvalues_of_V_003_claim_trace_of_idempotent"
+            "eigenvalues_of_V_002_claim_trace_properties"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 63,
           "entryIds": [
-            "exp_conjugation_definition_complex_conjugate_and_real_part"
+            "eigenvalues_of_V_003_claim_trace_of_idempotent"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 64,
           "entryIds": [
-            "eigenvalues_of_V_011_definition_hermitian_positive_definite"
+            "exp_conjugation_definition_complex_conjugate_and_real_part"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 65,
           "entryIds": [
-            "exp_conjugation_proof_004_theorem_ad_binomial"
+            "eigenvalues_of_V_011_definition_hermitian_positive_definite"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 66,
           "entryIds": [
-            "exp_linear_map_000a_claim_real_exp_series_converges"
+            "exp_conjugation_proof_004_theorem_ad_binomial"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 67,
           "entryIds": [
-            "exp_linear_map_005_definition_one_by_one_matrix"
+            "exp_linear_map_000a_claim_real_exp_series_converges"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 68,
           "entryIds": [
-            "finite_matrix_definition_determinant_two_by_two"
+            "exp_linear_map_005_definition_one_by_one_matrix"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 69,
           "entryIds": [
-            "finite_matrix_claim_nonzero_kernel_iff_determinant_zero_two_by_two"
+            "finite_matrix_definition_determinant_two_by_two"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 70,
           "entryIds": [
-            "finite_matrix_definition_eigenvector"
+            "finite_matrix_claim_nonzero_kernel_iff_determinant_zero_two_by_two"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 71,
           "entryIds": [
-            "finite_matrix_definition_eigenvalue"
+            "finite_matrix_definition_eigenvector"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 72,
           "entryIds": [
-            "freeenergy_004_theorem_riemann_sum_to_integral"
+            "finite_matrix_definition_eigenvalue"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 73,
           "entryIds": [
-            "linear_space_general_000_definition_kronecker_product"
+            "freeenergy_004_theorem_riemann_sum_to_integral"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 74,
           "entryIds": [
-            "linear_space_general_000b_claim_kronecker_product_rule"
+            "linear_space_general_000_definition_kronecker_product"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 75,
           "entryIds": [
-            "linear_space_general_000c_claim_kronecker_multilinear"
+            "linear_space_general_000b_claim_kronecker_product_rule"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 76,
           "entryIds": [
-            "linear_space_general_000d_claim_kronecker_transpose"
+            "linear_space_general_000c_claim_kronecker_multilinear"
           ],
           "inseparableDependencyUnit": false
         },
@@ -2522,75 +2524,89 @@
         {
           "order": 113,
           "entryIds": [
-            "maxeig_005_claim_psd_cauchy_schwarz"
+            "linear_space_general_definition_matrix_transpose"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 114,
           "entryIds": [
-            "transfer_matrix_005_definition_end_isomorphism"
+            "linear_space_general_000d_claim_kronecker_transpose"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 115,
           "entryIds": [
-            "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
+            "maxeig_005_claim_psd_cauchy_schwarz"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 116,
           "entryIds": [
-            "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
+            "transfer_matrix_005_definition_end_isomorphism"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 117,
           "entryIds": [
-            "transfer_matrix_claim_end_acts_on_kronecker_products"
+            "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 118,
           "entryIds": [
-            "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
+            "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 119,
           "entryIds": [
-            "TV1_hatZ_hatY_009_definition_invertible_elements"
+            "transfer_matrix_claim_end_acts_on_kronecker_products"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 120,
           "entryIds": [
-            "TV1_hatZ_hatY_011_definition_T_g"
+            "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 121,
           "entryIds": [
-            "TV1_hatZ_hatY_015_claim_linearity_of_T"
+            "TV1_hatZ_hatY_009_definition_invertible_elements"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 122,
           "entryIds": [
-            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+            "TV1_hatZ_hatY_011_definition_T_g"
           ],
           "inseparableDependencyUnit": false
         },
         {
           "order": 123,
+          "entryIds": [
+            "TV1_hatZ_hatY_015_claim_linearity_of_T"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 124,
+          "entryIds": [
+            "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
+          ],
+          "inseparableDependencyUnit": false
+        },
+        {
+          "order": 125,
           "entryIds": [
             "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
           ],
@@ -6315,7 +6331,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 38,
+        "incomingReferenceCount": 39,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7502,7 +7518,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 6,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -7848,7 +7864,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 42,
+        "classificationOrder": 43,
         "dependencyUnitEntryIds": [
           "calculation_formulae_claim_polar_multiplication_well_defined"
         ]
@@ -7911,7 +7927,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 43,
+        "classificationOrder": 44,
         "dependencyUnitEntryIds": [
           "calculation_formulae_022_definition_operations_on_polar_representation"
         ]
@@ -7976,7 +7992,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 51,
+        "classificationOrder": 52,
         "dependencyUnitEntryIds": [
           "calculation_formulae_claim_monoid_of_polar_representation"
         ]
@@ -8037,7 +8053,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 53,
+        "classificationOrder": 54,
         "dependencyUnitEntryIds": [
           "calculation_formulae_claim_polar_zero_class_criterion"
         ]
@@ -8102,7 +8118,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 52,
+        "classificationOrder": 53,
         "dependencyUnitEntryIds": [
           "calculation_formulae_claim_inverse_in_polar_representation"
         ]
@@ -8169,7 +8185,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 55,
+        "classificationOrder": 56,
         "dependencyUnitEntryIds": [
           "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique"
         ]
@@ -8240,7 +8256,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 54,
+        "classificationOrder": 55,
         "dependencyUnitEntryIds": [
           "calculation_formulae_023_claim_multiplicative_group_of_polar_representation"
         ]
@@ -8464,7 +8480,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 5,
+        "incomingReferenceCount": 7,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -8521,6 +8537,80 @@
       }
     },
     {
+      "id": "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
+      "kind": "claim",
+      "title": "\\phi_{\\mathrm{cartesian}}\\circ\\phi_{\\mathrm{polar}}=\\mathrm{id}_{\\mathbb{C}}",
+      "titleFormat": "tex",
+      "labels": [
+        "phi_cartesian_after_phi_polar_is_identity"
+      ],
+      "sourceFile": "000_calculation_formulae_20_29.ts",
+      "sourceOrdinal": 29,
+      "classification": "数学的道具立て",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": true,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 7,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 12264,
+        "inspectedContentSha256": "0ff887d9fe37618f10ae367f01e7c6b08e4899a52bba17a9b41926fd970a3efc",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "cos_arctan_sin_arctan",
+        "def_phi_cartesian",
+        "def_phi_polar",
+        "definition_of_cc",
+        "definition_of_sqrt_r_positive",
+        "negative_number_to_sqrt",
+        "set_and_algebra_notation",
+        "sqrt_nonnegative_existence_uniqueness"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
+        "calc_formulae_001_sqrt_nonnegative_real",
+        "calc_formulae_002_negative_number_to_sqrt",
+        "calc_formulae_006_definition_of_cc",
+        "calc_formulae_015_claim_cos_arctan_sin_arctan",
+        "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": null,
+      "dependencyPlacement": {
+        "classificationOrder": 42,
+        "dependencyUnitEntryIds": [
+          "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity"
+        ]
+      }
+    },
+    {
       "id": "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
       "kind": "claim",
       "title": "\\phi_{\\mathrm{cartesian}}\\text{の同型性}",
@@ -8543,8 +8633,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 14238,
-        "inspectedContentSha256": "aae6d06271cd77cac45e78e72bb077fdc036c5988f52cab3223337fb568d0ff5",
+        "inspectedCharacterCount": 2792,
+        "inspectedContentSha256": "c55fea62df12f06e1d362ce7a40e330dd893742f58fae01f7a8a6a1bedd5e8fa",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8554,25 +8644,17 @@
         "manualReview": "LLMによる検証: 全実数上の三角関数、加法定理、周期性、π移動公式が未整備であり、積保存の証明は未完である。一方向の合成が恒等であることだけでは単射性は導けず、全単射の証明も未完である。極座標側の加法を定義していないため、体として同型という原稿TODOは現状の目標にできない。積保存と全単射の主張分割、定義・補題追加後に内部依存と閉包を再判定する。"
       },
       "dependsOnLabels": [
-        "cos_arctan_sin_arctan",
         "def_phi_cartesian",
-        "def_phi_polar",
         "definition_of_cc",
-        "definition_of_sqrt_r_positive",
-        "negative_number_to_sqrt",
         "operations_on_polar_representation",
-        "set_and_algebra_notation",
-        "sqrt_nonnegative_existence_uniqueness"
+        "phi_cartesian_after_phi_polar_is_identity",
+        "set_and_algebra_notation"
       ],
       "dependsOnEntryIds": [
-        "calc_formulae_000c_claim_sqrt_nonnegative_existence_uniqueness",
-        "calc_formulae_001_sqrt_nonnegative_real",
-        "calc_formulae_002_negative_number_to_sqrt",
         "calc_formulae_006_definition_of_cc",
-        "calc_formulae_015_claim_cos_arctan_sin_arctan",
         "calculation_formulae_022_definition_operations_on_polar_representation",
-        "calculation_formulae_027_definition_phi_polar",
         "calculation_formulae_028_definition_phi_cartesian",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8590,7 +8672,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 44,
+        "classificationOrder": 45,
         "dependencyUnitEntryIds": [
           "calculation_formulae_029_claim_isomorphism_of_phi_cartesian"
         ]
@@ -8830,8 +8912,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 7267,
-        "inspectedContentSha256": "8829d38e305c87923b41d5169b2d691ca57da503641f3dba603be84a64f8d3ef",
+        "inspectedCharacterCount": 7363,
+        "inspectedContentSha256": "6669ffe9ab874cac00856ffc5e307b2e29ef81d02f8ad1d1d3b61468c794e5a6",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8849,6 +8931,7 @@
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
         "operations_on_polar_representation",
+        "phi_cartesian_after_phi_polar_is_identity",
         "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
@@ -8862,6 +8945,7 @@
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_031b_claim_abs_basic_properties",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -8879,7 +8963,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 45,
+        "classificationOrder": 46,
         "dependencyUnitEntryIds": [
           "calculation_formulae_032_claim_arg_of_product"
         ]
@@ -8910,8 +8994,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 10234,
-        "inspectedContentSha256": "3167c6bfd19e8e9d9497af0ee7308992d4527a931ece5c4a1440a4884cf7b0d6",
+        "inspectedCharacterCount": 10330,
+        "inspectedContentSha256": "e7b2acb4f60646e28939d38b565680a6eac8af628106069b982e9d73ea5d927b",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -8931,6 +9015,7 @@
         "monoid_of_polar_representation",
         "multiplicative_group_of_cc",
         "operations_on_polar_representation",
+        "phi_cartesian_after_phi_polar_is_identity",
         "right_inverse_in_polar_representation_is_unique",
         "section_of_angle_representation",
         "set_and_algebra_notation"
@@ -8947,6 +9032,7 @@
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_claim_monoid_of_polar_representation",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
@@ -8965,7 +9051,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 56,
+        "classificationOrder": 57,
         "dependencyUnitEntryIds": [
           "calculation_formulae_033_claim_arg_of_quotient"
         ]
@@ -9037,7 +9123,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 46,
+        "classificationOrder": 47,
         "dependencyUnitEntryIds": [
           "calculation_formulae_034_claim_range_of_args_when_product_arg_is_pi"
         ]
@@ -9066,8 +9152,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 10734,
-        "inspectedContentSha256": "5c4e01ef25641e782fc11f048ba69c2bb63eda0b0c91758a3ca1f44a1bdc3a2d",
+        "inspectedCharacterCount": 10830,
+        "inspectedContentSha256": "682540a38bd87235fcccc3d40a35f5a41311db6d32616d8b74707c04a7b42273",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9084,6 +9170,7 @@
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
         "operations_on_polar_representation",
+        "phi_cartesian_after_phi_polar_is_identity",
         "section_of_angle_representation",
         "set_and_algebra_notation"
       ],
@@ -9096,6 +9183,7 @@
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
         "calculation_formulae_030_definition_first_and_second_projections",
         "calculation_formulae_031_definition_abs_arg",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -9113,7 +9201,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 47,
+        "classificationOrder": 48,
         "dependencyUnitEntryIds": [
           "calculation_formulae_035_claim_arg_of_square"
         ]
@@ -9144,8 +9232,8 @@
         "abstractVocabularyMatches": [
           "群の一般論"
         ],
-        "inspectedCharacterCount": 9237,
-        "inspectedContentSha256": "df5127bd8a07f9d2a125070a8bee9ca19f5233fa59b5ed3b7ba7a69aeae0fa08",
+        "inspectedCharacterCount": 9333,
+        "inspectedContentSha256": "d3f9ecf025d6155746a443b655cd372e693f08f6c2f5d9cc79ce4a0cee90c04d",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9164,6 +9252,7 @@
         "isomorphism_of_phi_cartesian",
         "monoid_of_polar_representation",
         "multiplicative_group_of_cc",
+        "phi_cartesian_after_phi_polar_is_identity",
         "right_inverse_in_polar_representation_is_unique",
         "section_of_angle_representation",
         "set_and_algebra_notation"
@@ -9179,6 +9268,7 @@
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_031b_claim_abs_basic_properties",
         "calculation_formulae_claim_monoid_of_polar_representation",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_claim_right_inverse_in_polar_representation_is_unique",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
@@ -9197,7 +9287,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 57,
+        "classificationOrder": 58,
         "dependencyUnitEntryIds": [
           "calculation_formulae_036_claim_arg_of_reciprocal"
         ]
@@ -9217,7 +9307,7 @@
       "classificationEvidence": {
         "mathematicalToolCandidateFile": true,
         "mathematicalToolCandidateEntry": false,
-        "incomingReferenceCount": 4,
+        "incomingReferenceCount": 5,
         "isingSemanticMatches": [],
         "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
         "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
@@ -9380,8 +9470,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 19849,
-        "inspectedContentSha256": "e3b8c3cbe29792cf8a0a8c1d2d125e646a2afb0332ff50f0ae5b98948e0eab02",
+        "inspectedCharacterCount": 19945,
+        "inspectedContentSha256": "19c2cf557c5ea0af4ce773cb24f7673556420efaa598e7b9bb175a64e5698c17",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9401,6 +9491,7 @@
         "first_and_second_projections",
         "isomorphism_of_phi_cartesian",
         "operations_on_polar_representation",
+        "phi_cartesian_after_phi_polar_is_identity",
         "section_of_angle_representation",
         "set_and_algebra_notation",
         "sqrt_expansion_via_polar"
@@ -9418,6 +9509,7 @@
         "calculation_formulae_031_definition_abs_arg",
         "calculation_formulae_038_definition_sqrt_of_complex_number",
         "calculation_formulae_039_claim_sqrt_expansion_via_polar",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -9435,7 +9527,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 48,
+        "classificationOrder": 49,
         "dependencyUnitEntryIds": [
           "calculation_formulae_040_claim_sqrt_commutativity_condition"
         ]
@@ -9464,8 +9556,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 4346,
-        "inspectedContentSha256": "00655d83f9cc055406052def05c1812ab4bc06a485f66b79f65c634fba0b65c7",
+        "inspectedCharacterCount": 4063,
+        "inspectedContentSha256": "a305b66200638a5172d506a08c34064a38917559413847f225fde562ae7dda6f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -9475,12 +9567,16 @@
         "manualReview": "LLMによる検証: 未完の平方根定義・極座標展開と同型性を入力にするため証明完成とは扱わない。展開式を二箇所へ同時適用する段と実数の和の計算の省略、各適用行の参照が未解決である。"
       },
       "dependsOnLabels": [
+        "angle_equivalence_class",
         "angle_section_existence_uniqueness",
+        "def_phi_cartesian",
         "def_phi_polar",
+        "def_sqrt_cc",
         "definition_of_cc",
         "definition_of_sqrt_r_positive",
         "isomorphism_of_phi_cartesian",
         "operations_on_polar_representation",
+        "phi_cartesian_after_phi_polar_is_identity",
         "polar_equivalence_class",
         "set_and_algebra_notation",
         "sqrt_expansion_via_polar"
@@ -9488,12 +9584,16 @@
       "dependsOnEntryIds": [
         "calc_formulae_001_sqrt_nonnegative_real",
         "calc_formulae_006_definition_of_cc",
+        "calc_formulae_016_definition_angle_equivalence_class",
         "calc_formulae_016b_claim_angle_section_existence_uniqueness",
         "calc_formulae_019_definition_polar_equivalence_class",
         "calculation_formulae_022_definition_operations_on_polar_representation",
         "calculation_formulae_027_definition_phi_polar",
+        "calculation_formulae_028_definition_phi_cartesian",
         "calculation_formulae_029_claim_isomorphism_of_phi_cartesian",
+        "calculation_formulae_038_definition_sqrt_of_complex_number",
         "calculation_formulae_039_claim_sqrt_expansion_via_polar",
+        "calculation_formulae_claim_phi_cartesian_after_phi_polar_is_identity",
         "calculation_formulae_definition_set_and_algebra_notation"
       ],
       "semanticPrerequisiteLabels": [
@@ -9511,7 +9611,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 49,
+        "classificationOrder": 50,
         "dependencyUnitEntryIds": [
           "calculation_formulae_041_claim_sqrt_squared_is_original"
         ]
@@ -9579,7 +9679,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 50,
+        "classificationOrder": 51,
         "dependencyUnitEntryIds": [
           "calculation_formulae_042_claim_square_of_sqrt"
         ]
@@ -9675,7 +9775,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 58,
+        "classificationOrder": 59,
         "dependencyUnitEntryIds": [
           "calculation_formulae_043_claim_sqrt_of_reciprocal"
         ]
@@ -9742,7 +9842,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 59,
+        "classificationOrder": 60,
         "dependencyUnitEntryIds": [
           "calculation_formulae_044_claim_reciprocal_of_sqrt"
         ]
@@ -9997,7 +10097,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 70,
+        "classificationOrder": 71,
         "dependencyUnitEntryIds": [
           "finite_matrix_definition_eigenvector"
         ]
@@ -10061,7 +10161,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 71,
+        "classificationOrder": 72,
         "dependencyUnitEntryIds": [
           "finite_matrix_definition_eigenvalue"
         ]
@@ -10120,7 +10220,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 68,
+        "classificationOrder": 69,
         "dependencyUnitEntryIds": [
           "finite_matrix_definition_determinant_two_by_two"
         ]
@@ -10185,7 +10285,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 69,
+        "classificationOrder": 70,
         "dependencyUnitEntryIds": [
           "finite_matrix_claim_nonzero_kernel_iff_determinant_zero_two_by_two"
         ]
@@ -10250,7 +10350,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 73,
+        "classificationOrder": 74,
         "dependencyUnitEntryIds": [
           "linear_space_general_000_definition_kronecker_product"
         ]
@@ -10318,7 +10418,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 74,
+        "classificationOrder": 75,
         "dependencyUnitEntryIds": [
           "linear_space_general_000b_claim_kronecker_product_rule"
         ]
@@ -10384,9 +10484,73 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 75,
+        "classificationOrder": 76,
         "dependencyUnitEntryIds": [
           "linear_space_general_000c_claim_kronecker_multilinear"
+        ]
+      }
+    },
+    {
+      "id": "linear_space_general_definition_matrix_transpose",
+      "kind": "definition",
+      "title": "行列の転置",
+      "titleFormat": "text",
+      "labels": [
+        "def_matrix_transpose"
+      ],
+      "sourceFile": "002_linear_space_general.ts",
+      "sourceOrdinal": 1,
+      "classification": "数学的道具立て",
+      "classificationEvidence": {
+        "mathematicalToolCandidateFile": true,
+        "mathematicalToolCandidateEntry": false,
+        "incomingReferenceCount": 1,
+        "isingSemanticMatches": [],
+        "rule": "項目ごとの意味レビューで一般的な複素数・行列計算と確認され、内容にイジング固有語彙がなければ数学的道具立て、それ以外は2次元イジングモデル",
+        "rationale": "イジング模型を仮定せず、複素数・有限行列の具体的な定義または計算として再利用できる。"
+      },
+      "explanationGranularityReview": {
+        "status": "自動検査で主題に適合",
+        "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
+        "abstractVocabularyMatches": [],
+        "inspectedCharacterCount": 965,
+        "inspectedContentSha256": "54c95beab5577b85cd108e622c593a8ca9cb9f7d98e6a5166f0363ee969f377f",
+        "forwardNavigationMixedIntoStatement": false,
+        "inspectedFields": [
+          "title",
+          "statement",
+          "proof"
+        ],
+        "manualReview": null
+      },
+      "dependsOnLabels": [
+        "definition_of_cc",
+        "mat_mult",
+        "set_and_algebra_notation"
+      ],
+      "dependsOnEntryIds": [
+        "calc_formulae_003_matrix_decomposition",
+        "calc_formulae_006_definition_of_cc",
+        "calculation_formulae_definition_set_and_algebra_notation"
+      ],
+      "semanticPrerequisiteLabels": [
+        "set_and_algebra_notation",
+        "definition_of_cc"
+      ],
+      "referenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsNotUsedAsPrerequisites": [],
+      "forwardStatementReferenceLabelsUsedAsPrerequisites": [],
+      "forwardStatementReferenceReview": null,
+      "interimForwardReferenceLabelsToReorganizedChapters": [],
+      "staleForwardReferenceReviewLabels": [],
+      "blockSplitRequiredBeforeFinalOrdering": false,
+      "futureBlockSplitRecommended": false,
+      "presentationPredecessorEntryIds": [],
+      "chapterKey": null,
+      "dependencyPlacement": {
+        "classificationOrder": 113,
+        "dependencyUnitEntryIds": [
+          "linear_space_general_definition_matrix_transpose"
         ]
       }
     },
@@ -10413,8 +10577,8 @@
         "status": "具体的な行列計算への展開またはブロック分割を要する",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 1913,
-        "inspectedContentSha256": "c0014341f8b8968f27acf4793018d15312e7313acad2dccadd439617703c4cd4",
+        "inspectedCharacterCount": 1978,
+        "inspectedContentSha256": "d61183ba09b8c9a3f5fb0d4c2ce4d0ced1d93203ee737c2917f39d757516d583",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -10425,11 +10589,13 @@
       },
       "dependsOnLabels": [
         "def_kronecker",
+        "def_matrix_transpose",
         "definition_of_cc"
       ],
       "dependsOnEntryIds": [
         "calc_formulae_006_definition_of_cc",
-        "linear_space_general_000_definition_kronecker_product"
+        "linear_space_general_000_definition_kronecker_product",
+        "linear_space_general_definition_matrix_transpose"
       ],
       "semanticPrerequisiteLabels": [
         "definition_of_cc"
@@ -10445,7 +10611,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 76,
+        "classificationOrder": 114,
         "dependencyUnitEntryIds": [
           "linear_space_general_000d_claim_kronecker_transpose"
         ]
@@ -11132,7 +11298,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 66,
+        "classificationOrder": 67,
         "dependencyUnitEntryIds": [
           "exp_linear_map_000a_claim_real_exp_series_converges"
         ]
@@ -11586,7 +11752,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 67,
+        "classificationOrder": 68,
         "dependencyUnitEntryIds": [
           "exp_linear_map_005_definition_one_by_one_matrix"
         ]
@@ -12317,7 +12483,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 114,
+        "classificationOrder": 116,
         "dependencyUnitEntryIds": [
           "transfer_matrix_005_definition_end_isomorphism"
         ]
@@ -12462,7 +12628,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 115,
+        "classificationOrder": 117,
         "dependencyUnitEntryIds": [
           "transfer_matrix_005b_claim_end_is_algebra_isomorphism"
         ]
@@ -12528,7 +12694,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 117,
+        "classificationOrder": 119,
         "dependencyUnitEntryIds": [
           "transfer_matrix_claim_end_acts_on_kronecker_products"
         ]
@@ -12600,7 +12766,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 116,
+        "classificationOrder": 118,
         "dependencyUnitEntryIds": [
           "transfer_matrix_005c_claim_end_preserves_matrix_exponential"
         ]
@@ -12659,7 +12825,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 63,
+        "classificationOrder": 64,
         "dependencyUnitEntryIds": [
           "exp_conjugation_definition_complex_conjugate_and_real_part"
         ]
@@ -12887,7 +13053,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 65,
+        "classificationOrder": 66,
         "dependencyUnitEntryIds": [
           "exp_conjugation_proof_004_theorem_ad_binomial"
         ]
@@ -13203,7 +13369,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 122,
+        "classificationOrder": 124,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000a_claim_pauli_matrix_products"
         ]
@@ -13271,7 +13437,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 123,
+        "classificationOrder": 125,
         "dependencyUnitEntryIds": [
           "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site"
         ]
@@ -13332,7 +13498,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 118,
+        "classificationOrder": 120,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_004_claim_sinh_cosh_taylor"
         ]
@@ -13400,7 +13566,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 119,
+        "classificationOrder": 121,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_009_definition_invertible_elements"
         ]
@@ -13461,7 +13627,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 120,
+        "classificationOrder": 122,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_011_definition_T_g"
         ]
@@ -13527,7 +13693,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 121,
+        "classificationOrder": 123,
         "dependencyUnitEntryIds": [
           "TV1_hatZ_hatY_015_claim_linearity_of_T"
         ]
@@ -13589,7 +13755,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 60,
+        "classificationOrder": 61,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_001_definition_trace"
         ]
@@ -13655,7 +13821,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 61,
+        "classificationOrder": 62,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_002_claim_trace_properties"
         ]
@@ -13723,7 +13889,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 62,
+        "classificationOrder": 63,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_003_claim_trace_of_idempotent"
         ]
@@ -13791,7 +13957,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 64,
+        "classificationOrder": 65,
         "dependencyUnitEntryIds": [
           "eigenvalues_of_V_011_definition_hermitian_positive_definite"
         ]
@@ -14022,7 +14188,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 113,
+        "classificationOrder": 115,
         "dependencyUnitEntryIds": [
           "maxeig_005_claim_psd_cauchy_schwarz"
         ]
@@ -14081,7 +14247,7 @@
       "presentationPredecessorEntryIds": [],
       "chapterKey": null,
       "dependencyPlacement": {
-        "classificationOrder": 72,
+        "classificationOrder": 73,
         "dependencyUnitEntryIds": [
           "freeenergy_004_theorem_riemann_sum_to_integral"
         ]

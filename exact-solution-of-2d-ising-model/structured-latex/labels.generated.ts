@@ -147,6 +147,7 @@ export const ALL_LABELS = [
   "def_kronecker",
   "def_lattice_size",
   "def_matrix_norm",
+  "def_matrix_transpose",
   "def_one_by_one_matrix",
   "def_open_chain_spin_energy",
   "def_partition_function_2d_ising",

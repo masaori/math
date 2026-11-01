@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`kronecker_transpose`（クロネッカー積の転置）の検算 `sagemath/check/kronecker_transpose/` を足した（未検算 114 → 113 件）。因子の成分を `QQ` 上の多項式環の不定元に置き、`M = 1,…,4` で厳密に確かめた。主張の中で定めていた転置と未定義だった 2 次の行列の転置を、新しい定義 `def_matrix_transpose` へ切り出した。計算の誤りは無かった。あわせて、main の `nonzero_kernel_iff_det_zero_two_by_two` が入れた `⇒ ⇐` で `build:pdf` が落ちていたので、`tools/build-latex.ts` の和文で組む文字に U+21D0・U+21D2 を足した。次は `scalar_exp_is_limit_of_partial_sums`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の六回目として、`sqrt_squared_is_original`（複素数の平方根の2乗は元に戻る）の検算 `sagemath/check/sqrt_squared_is_original/` を足した（未検算 115 → 114 件）。π の有理数倍の角度で cos・sin を 1 の冪根から作り、全て厳密。レビューで、最終行の「φ_cartesian ∘ φ_polar = id」を `isomorphism_of_phi_cartesian` の主張が述べていないと分かり、新しい主張 `phi_cartesian_after_phi_polar_is_identity` に切り出して検算を付けた。`isomorphism_of_phi_cartesian` の単射性が未証明であることを状態台帳に記録した。計算の誤りは無かった。次は `kronecker_transpose`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十一個目を行った。必要十分版 `NecSuf/TwoByTwoSkew.lean`（`A(θ̃_μ)` の固有値・固有ベクトル・対角化）を具体版の段と 1 つずつ対応する形に書き直し、具体版を特殊化として導く 12 本を `ClaimEigenATildeDiagFromNecSuf.lean` に置いた。`λ_+ ≠ λ_-` と `det P̌ ≠ 0` に効くのは `2s ≠ 0` だけ（標数 2 で崩れる）、人手 Step 2 の第 2 成分は `b = -ā` なしで閉じると分かった（本文を簡潔にするかは状態台帳の次の一歩）。次は `commutator_of_H_and_check_Z_Y` の必要十分版。
