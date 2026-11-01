@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 251 件のうち、SageMath の検算が無いもの 98 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 252 件のうち、SageMath の検算が無いもの 97 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -79,9 +79,13 @@
   13 個の主張それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/hermitian_forms_by_definition.sage`）。鎖は不定元で厳密に、exp の値は本文の部分和に尾の上界を半径として足した 256 ビットのボールで囲み、Sage の `ComplexBallField` の `exp` と比べた。
   下流（`eigenvalue_problem_eigenvalues_of_V_plus.ts`・`thermodynamic_limit_row_limit_and_max_eigenvalue.ts`・ノート二つ）の「(1)〜(4)」の参照を新しいラベルにし、`B' := exp(-½S)` で左逆行列を与えた。計算の誤りは無かった。
 
+- `psd_cauchy_schwarz`（対称・半正定値な実数の行列の Cauchy–Schwarz）: `sagemath/check/psd_cauchy_schwarz/`。準備と展開の鎖は対称な不定元の `P` と不定元の `x, y, t` で、場合分けの等号は有理関数で、不等号の行と主張は階数の落ちるものを含む `QQ` の `P = C^T C` で、全行を厳密に確かめた（浮動小数点なし）。
+  人手証明を直した（未定義だった `x^⊤Py` を新しい定義 `def_real_bilinear_value`（`Σ_kΣ_l x_k P_kl y_l`）で、対称性を `def_real_symmetric_matrix`（`P_kl = P_lk`）で定めた、「転置・行列積の分配法則」の一行を成分の和の展開・項の並べ替え・`t`・`t^2` を外へ出す段に、
+  `x^⊤Py = y^⊤Px` を準備の成分の鎖に、`a ≥ 0` から `a > 0` か `a = 0` に分かれることを書いた、(i) の結論を主張の左辺から始まる鎖に）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`011_max_eigenvalue.ts` の `psd_cauchy_schwarz`（`--list` の先頭）から、文書順に検算を足す。
+`012_free_energy.ts` の `riemann_sum_to_integral`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -163,3 +167,8 @@
   `x^*Ax`・`x^⊤Px` を行列の積として結合律で組み替えている。それらのブロックの検算を足すときに、`conjugate_bilinear_value_of_congruence` と同じ形の成分の鎖へ直す。
   Lean の `ClaimPositiveDefinite.lean` の `posDef_exp_of_isHermitian` は mathlib の `Matrix.PosDef.conjTranspose_mul_self` で示していて、書き換えた人手証明（`exp(S) = T^*(IT)`、合同変換の主張の `A = I`）と一対一でない。
   足した `congruence_preserves_positive_definite`・`identity_matrix_is_positive_definite`・`trace_of_positive_definite_is_positive`・`exp_of_negative_is_left_inverse`・`exp_of_hermitian_is_hermitian` と補助の 4 主張に対応する Lean の具体版は無い。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-01、`psd_cauchy_schwarz` のレビューで見つかった（下流の型の食い違いと読み方の食い違い）: 主張は `P ∈ Mat(n,ℝ)`・`x, y ∈ ℝ^n` を要求するが、
+  `thermodynamic_limit_row_limit_and_max_eigenvalue.ts` は `P = W ∈ Mat(2^M,ℂ)`（成分が実数の値をとるだけ）や行列の積の値 `W^a x` をそのまま当てはめている。成分が実数の `Mat(n,ℂ)` から `Mat(n,ℝ)` への写像も、`ℂ^n` から `ℝ^n` への写像も本文に無い（`def_rayleigh_sup` の「実行列とみなせる」も同一視）。
+  また `def_real_bilinear_value` は `x^⊤Py` を一つの記号として定めたが、下流は転置と行列の積として読んでいる（`(W^bx)^⊤W(W^ax) = x^⊤W^{a+b+1}x` を `(W^b)^⊤ = W^b` で導く段、`‖v‖² = v^⊤v`、879 行付近の「行列の積の成分表示」）。直すには、`(Bu)^⊤Pv = u^⊤(B^⊤P)v` のような `def_real_bilinear_value` と `mat_mult`・`def_matrix_transpose` を結ぶ主張が要る。
+  `P = I` で当てはめる二箇所は、`I` が実数の行列として対称・半正定値であることと `y^⊤Ix = Σ y_k x_k` を示していない。これらのブロックの検算を足すときに扱う。
+  Lean の具体版 `ClaimPsdCauchySchwarz.lean` は必要十分版からの一行の導出（`simpa`）で、直した人手証明（準備・展開・二つの場合）と 1 対 1 に対応しない。Lean の連続実行の状態台帳へ渡す。
