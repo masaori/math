@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 231 件のうち、SageMath の検算が無いもの 103 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 233 件のうち、SageMath の検算が無いもの 101 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -54,9 +54,14 @@
   `complex_zero_times_is_zero`（`000_calculation_formulae_20_29.ts`、`complex_numbers_form_a_field` の直後）を足し、それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/matrix_operations_by_definition.sage`）。
   人手証明を直した（(iv) が `scalar_identity_commutes`（交換子が 0）を根拠に引いていたのを、スカラー倍の性質を一つずつ引く 6 行の鎖に、(ii) の結合律を 2 回使う行を 2 行に、(i) の `II = I` に根拠を、各行に足したラベルへの `blkref`）。計算の誤りは無かった。
 
+- `trace_basic_properties`（トレースの基本性質）: `sagemath/check/trace_basic_properties/`。(1)(2) は `QQ` 上の不定元で、(3) は ℂ を実数の対で持って、(4) は `QQ(i)` 上の不定元と具体の可逆行列で、四本の鎖の全行を厳密に確かめ、両端を Sage の `trace` と比べた。
+  人手証明を直した（(1)(3) の散文を根拠付きの鎖に、(2) の「順序交換と積の可換性」を二行に、各行へ `blkref`、ℂ の演算の性質に `complex_numbers_form_a_field`、
+  行列の和の定義が本文に無かったので `def_matrix_sum` を `002_linear_space_general.ts` に足した、単位行列を `I_{Mat(n,C)}` に、(3) の右辺を `Σ_{k=1}^{n} 1_C` に、
+  (4) の仮定を「`P` が可逆」から「`P'P = I`」に、左辺を `tr(P(AP'))` に）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`009_eigenvalues_of_V.ts` の `trace_basic_properties`（`--list` の先頭）から、文書順に検算を足す。
+`009_eigenvalues_of_V.ts` の `trace_of_idempotent`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -116,3 +121,11 @@
   また `mat_conj`（`000_calculation_formulae_00_09.ts`）は行列のスカラー倍とその性質を使うが、定義は文書順で後ろの `002_linear_space_general.ts` にある。直すには、定義と性質を `mat_mult` の直後へ移すか、引く側を後ろへ移す。
   有限和の操作（分配律を項の数だけ繰り返す、和の順序の入れ替え、一つの項を分ける、空和）を述べるブロックも無く、足した主張の証明はこれらを体の公理を挙げた一行で使っている。
   `def_invertible_elements_of_R` は定義と逆元の一意性と (i)〜(iv) を一つのブロックに束ねている（下流が「(ii)」「(iv)」で引くので、分けるときは引く側も直す）。この単位では直さなかった。
+- 2026-11-01、`trace_basic_properties` のレビューで見つかった（未定義の写像と根拠の取り違え）: 整数 `n` を ℂ の元として扱う写像（ℤ → ℝ）が本文に無い
+  （`set_and_algebra_notation` は `𝐙` と `𝐑` を別の集合として置くだけ）。`trace_basic_properties` (3) は右辺を `Σ_{k=1}^{n} 1_C` に改めて避けたが、
+  `eigenvalue_problem_eigenvalues_of_V_plus.ts` の `tr(I) = 2^{M_col}`（1298 行付近）はこの写像に頼っており、次の行の根拠「ℂ の四則」は ℤ の指数の計算である。
+  `trace_of_idempotent` の Step 3 は「`P`（可逆）」と `P^{-1}` を未定義のまま使い、(4) を `P → P^{-1}`、`P' → P` と当てはめる形（`PP^{-1} = I` が要る）を根拠に書いていない。
+  それぞれのブロックの検算を足すときに扱う。
+  同じレビューで、Lean の具体版 `DefinitionTrace.lean` が人手証明と一対一でなくなったことが見つかった: `trace_one_eq_card` は `tr(I) = (card n : ℂ)`（人手は `Σ_{k=1}^{n} 1_C`）、
+  `trace_conj` は `(P * A * Q).trace`（Lean では `(PA)Q`、人手は `P(AP')`）で、証明の手順も人手の 5 行と対応しない。Lean の連続実行の状態台帳へ渡す。
+  (4) を括弧なしで引く下流（`trace_of_idempotent` の `tr(P^{-1}QP)`、`eigenvalue_problem_eigenvalues_of_V_plus.ts` の 2803 行付近）も、検算を足すときに括弧を書く。

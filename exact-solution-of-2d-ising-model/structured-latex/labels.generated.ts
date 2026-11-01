@@ -153,6 +153,7 @@ export const ALL_LABELS = [
   "def_matrix_difference",
   "def_matrix_norm",
   "def_matrix_scalar_multiple",
+  "def_matrix_sum",
   "def_matrix_transpose",
   "def_one_by_one_matrix",
   "def_open_chain_spin_energy",

@@ -1,7 +1,8 @@
-# 本文の定め方どおりに成分から組む行列の積・単位行列・スカラー倍。
+# 本文の定め方どおりに成分から組む行列の積・単位行列・スカラー倍・和。
 # 積は mat_mult の (AB)_{ik} = Σ_j A_{ij} B_{jk}、単位行列は def_identity_matrix と def_kronecker_delta の
-# I_{ij} = δ_{ij}、スカラー倍は def_matrix_scalar_multiple の (aA)_{ij} = a A_{ij}。
-# Sage の行列積 `*`・identity_matrix・スカラー倍 `a*A`・inverse は、これらとは独立な経路として比べる側にだけ使う。
+# I_{ij} = δ_{ij}、スカラー倍は def_matrix_scalar_multiple の (aA)_{ij} = a A_{ij}、和は def_matrix_sum の
+# (A+B)_{ij} = A_{ij} + B_{ij}。
+# Sage の行列積 `*`・identity_matrix・スカラー倍 `a*A`・行列の和 `+`・inverse は、これらとは独立な経路として比べる側にだけ使う。
 
 
 def body_product(A, B):
@@ -40,3 +41,10 @@ def generic_ring(shapes, scalars=()):
         mats.append(matrix(P, m, n, g[pos:pos + m*n]))
         pos += m*n
     return P, sc, mats
+
+
+def body_sum(A, B):
+    """def_matrix_sum の和を成分から組む。"""
+    assert A.nrows() == B.nrows() and A.ncols() == B.ncols()
+    R = A.base_ring()
+    return matrix(R, A.nrows(), A.ncols(), lambda i, j: A[i, j] + B[i, j])

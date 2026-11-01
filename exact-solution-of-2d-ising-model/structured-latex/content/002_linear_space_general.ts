@@ -114,6 +114,39 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_definition_matrix_sum",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列の和" },
+    labels: ["def_matrix_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。和 ",
+        math(String.raw`A + B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(A + B)_{ij} := A_{ij} + B_{ij}
+\qquad (i \in \{1,\dots,m\},\ j \in \{1,\dots,n\})`),
+      paragraph([
+        "で定める。右辺は ",
+        ref("definition_of_cc"),
+        " の複素数の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。行列の和は本文全体で使われていたが、定めるブロックが無かった。" +
+          "トレースの基本性質（trace_basic_properties）の検算で、線型性の行の根拠として欠けが見つかり、足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

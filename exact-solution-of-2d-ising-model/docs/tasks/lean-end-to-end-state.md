@@ -487,9 +487,10 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分は、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復をしている。`b` のまま `(-b)(∓r) + g_1 b = (g_1 ± r) b` と書けば `b = -ā` が要らない（必要十分版 `skew2_mulVec_pos` の知見）。本文を簡潔にするかを判断する（本文を触るので回の先頭で fetch する）。
 - 本文のほかの証明（`002_linear_space_general.ts`・`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
-  行列の和を定義するブロックはまだ無いので、要るなら足す（1 ブロック 1 定義）。各ブロックの Lean の対応も確かめる。
+  行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
   行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。
 - 単位行列の記号が本文で `I`・`I_{\mathrm{Mat}(k,\mathbb{C})}`（`def_identity_matrix`）・`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`（9 か所）・`I_{(\mathbb{C}^2)^{\otimes M}}`（2 か所）と分かれている。`def_identity_matrix` は `I_{\mathrm{Mat}(k,\mathbb{C})}` しか覆わない。記号を揃えるか定義に挙げるかを判断する。
 - `def_eigenvector`（`000_calculation_formulae_45_46.ts`）が引く `def_matrix_scalar_multiple` は `002_linear_space_general.ts` にあり、生成物のファイルの並びでは後に来る（検査は落とさない）。出版物で定義より前に参照が出るかを確かめ、出るなら置き場を直す。
+- 2026-11-01、SageMath の検算の連続実行が人手 `trace_basic_properties` を直した（(3) の右辺を `Σ_{k=1}^{n} 1_C` に、(4) を「`P'P = I` なら `tr(P(AP')) = tr(A)`」に、各鎖を一ステップ一定理に）。`DefinitionTrace.lean` の `trace_one_eq_card`（`(card n : ℂ)`）と `trace_conj`（`(P * A * Q).trace` は `(PA)Q`、手順も人手の 5 行と対応しない）を人手と一対一に直す。

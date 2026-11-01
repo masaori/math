@@ -40,7 +40,11 @@ export default defineBlocks([
     title: { text: "トレースの基本性質" },
     labels: ["trace_basic_properties"],
     statement: [
-      paragraph(["トレースと行列の積は ", ref("def_trace"), "、", ref("mat_mult"), " のものとする。"]),
+      paragraph([
+        "トレースは ", ref("def_trace"), "、行列の積は ", ref("mat_mult"), "、行列の和は ", ref("def_matrix_sum"),
+        "、行列のスカラー倍は ", ref("def_matrix_scalar_multiple"), "、単位行列は ", ref("def_identity_matrix"),
+        "、複素数の演算の性質は ", ref("complex_numbers_form_a_field"), " のものとする。",
+      ]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
@@ -52,72 +56,91 @@ export default defineBlocks([
       list([
         [math(String.raw`\text{(1)}\quad \mathrm{tr}(\alpha A + \beta B) = \alpha\,\mathrm{tr}(A) + \beta\,\mathrm{tr}(B)`), "（線型性）"],
         [math(String.raw`\text{(2)}\quad \mathrm{tr}(AB) = \mathrm{tr}(BA)`), "（巡回性）"],
-        [math(String.raw`\text{(3)}\quad \mathrm{tr}(I_n) = n`)],
         [
-          math(String.raw`\text{(4)}\quad P \in \mathrm{Mat}(n,\mathbb{C}) \text{ が可逆なら } \mathrm{tr}(P A P^{-1}) = \mathrm{tr}(A)`),
+          math(String.raw`\text{(3)}\quad \mathrm{tr}\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr) = \sum_{k=1}^{n} 1_{\mathbb{C}}`),
+          "（",
+          math(String.raw`1_{\mathbb{C}}`),
+          " を ",
+          math(String.raw`n`),
+          " 個足した和。",
+          math(String.raw`1_{\mathbb{C}}`),
+          " は ",
+          ref("inclusion_rr_to_cc"),
+          " の略記）",
+        ],
+        [
+          math(String.raw`\text{(4)}\quad P, P' \in \mathrm{Mat}(n,\mathbb{C})`),
+          " が ",
+          math(String.raw`P'P = I_{\mathrm{Mat}(n,\mathbb{C})}`),
+          " を満たすなら ",
+          math(String.raw`\mathrm{tr}\bigl(P(AP')\bigr) = \mathrm{tr}(A)`),
+          "（相似変換で不変）",
         ],
       ]),
     ],
     proof: [
-      paragraph([
-        "(1) 行列の和とスカラー倍は成分ごとに定義されるので ",
-        math(String.raw`(\alpha A + \beta B)_{kk} = \alpha A_{kk} + \beta B_{kk}`),
-        " であり、有限和の線型性から従う。",
-      ]),
-      paragraph([
-        "(2) 行列の積の定義 ",
-        math(String.raw`(AB)_{kl} = \sum_{j=1}^{n} A_{kj}B_{jl}`),
-        " より、",
-      ]),
+      paragraph(["(1)"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}(\alpha A + \beta B)
+&= \sum_{k=1}^{n} (\alpha A + \beta B)_{kk}
+&&(\because \blkref{def_trace}) \\
+&= \sum_{k=1}^{n} \bigl((\alpha A)_{kk} + (\beta B)_{kk}\bigr)
+&&(\because \blkref{def_matrix_sum}) \\
+&= \sum_{k=1}^{n} \bigl(\alpha A_{kk} + \beta B_{kk}\bigr)
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \sum_{k=1}^{n} \alpha A_{kk} + \sum_{k=1}^{n} \beta B_{kk}
+&&(\because \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の並べ替え。}\blkref{complex_numbers_form_a_field}) \\
+&= \alpha \sum_{k=1}^{n} A_{kk} + \beta \sum_{k=1}^{n} B_{kk}
+&&(\because \mathbb{C}\ \text{の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&= \alpha\,\mathrm{tr}(A) + \beta\,\mathrm{tr}(B)
+&&(\because \blkref{def_trace})
+\end{aligned}`,
+      ),
+      paragraph(["(2)"]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}(AB)
 &= \sum_{k=1}^{n} (AB)_{kk}
-&&(\because \text{トレースの定義}) \\
+&&(\because \blkref{def_trace}) \\
 &= \sum_{k=1}^{n}\sum_{j=1}^{n} A_{kj}B_{jk}
-&&(\because \text{積の定義}) \\
+&&(\because \blkref{mat_mult}) \\
+&= \sum_{k=1}^{n}\sum_{j=1}^{n} B_{jk}A_{kj}
+&&(\because \mathbb{C}\ \text{の積の交換法則。}\blkref{complex_numbers_form_a_field}) \\
 &= \sum_{j=1}^{n}\sum_{k=1}^{n} B_{jk}A_{kj}
-&&(\because \text{有限和の順序交換と } \mathbb{C} \text{ の積の可換性}) \\
+&&(\because \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の順序交換。}\blkref{complex_numbers_form_a_field}) \\
 &= \sum_{j=1}^{n} (BA)_{jj}
-&&(\because \text{積の定義}) \\
+&&(\because \blkref{mat_mult}) \\
 &= \mathrm{tr}(BA)
-&&(\because \text{トレースの定義})
+&&(\because \blkref{def_trace})
 \end{aligned}`,
       ),
-      paragraph([
-        "有限個の項の和なので、順序交換は ",
-        math(String.raw`\mathbb{C}`),
-        " の加法の結合法則・交換法則からの有限帰納法で正当化される（収束の議論を要しない）。",
-      ]),
-      paragraph([
-        "(3) ",
-        math(String.raw`(I_n)_{kk} = 1`),
-        " が ",
-        math(String.raw`n`),
-        " 個あるので ",
-        math(String.raw`\mathrm{tr}(I_n) = n`),
-        "。",
-      ]),
-      paragraph([
-        "(4) (2) を ",
-        math(String.raw`A \to PA`),
-        "、",
-        math(String.raw`B \to P^{-1}`),
-        " に適用して",
-      ]),
+      paragraph(["(3)"]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{tr}(PAP^{-1})
-&= \mathrm{tr}\bigl((PA)P^{-1}\bigr)
-&&(\because \text{行列の積の結合法則}) \\
-&= \mathrm{tr}\bigl(P^{-1}(PA)\bigr)
-&&(\because \text{(2) 巡回性}) \\
-&= \mathrm{tr}\bigl((P^{-1}P)A\bigr)
-&&(\because \text{行列の積の結合法則}) \\
-&= \mathrm{tr}(I_n A)
-&&(\because \text{逆行列の定義 } P^{-1}P = I_n) \\
+\mathrm{tr}\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)
+&= \sum_{k=1}^{n} \bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{kk}
+&&(\because \blkref{def_trace}) \\
+&= \sum_{k=1}^{n} \delta_{kk}
+&&(\because \blkref{def_identity_matrix}) \\
+&= \sum_{k=1}^{n} 1_{\mathbb{C}}
+&&(\because \blkref{def_kronecker_delta}\ \text{の}\ i = j\ \text{の場合})
+\end{aligned}`,
+      ),
+      paragraph(["(4)"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\bigl(P(AP')\bigr)
+&= \mathrm{tr}\bigl((PA)P'\bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \mathrm{tr}\bigl(P'(PA)\bigr)
+&&(\because \text{(2) を } A \to PA,\ B \to P' \text{ に適用}) \\
+&= \mathrm{tr}\bigl((P'P)A\bigr)
+&&(\because \blkref{mat_mult_associative}) \\
+&= \mathrm{tr}\bigl(I_{\mathrm{Mat}(n,\mathbb{C})} A\bigr)
+&&(\because P'P = I_{\mathrm{Mat}(n,\mathbb{C})}) \\
 &= \mathrm{tr}(A)
-&&(\because \text{単位行列との積})
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
     ],
@@ -126,6 +149,10 @@ export default defineBlocks([
       notes: [
         "本文はこれまでトレースを定義せずに使っていなかった（008 章までに tr は現れない）。本章で初めて必要になるため、定義と必要な性質だけをここで書き下した。",
         "2026-08-31 の式変形統一で、二本の鎖に行中の \\quad(\\because …) で置かれていた根拠 10 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・参照は変えていない。",
+        "2026-11-01: SageMath の検算（sagemath/check/trace_basic_properties/）を付けるにあたり、(1)(3) の散文を根拠付きの鎖に、(2) の「順序交換と積の可換性」を二行に分け、各行へ blkref を足した。" +
+          "行列の和の定義が本文に無かったので def_matrix_sum を足した。単位行列の記号を def_identity_matrix の I_{Mat(n,C)} に揃えた。" +
+          "(3) の右辺 n は整数 n を ℂ の元として扱う写像が本文に無いので、1_C の n 個の和 Σ_{k=1}^{n} 1_C と書いた。" +
+          "(4) の「P が可逆」は Mat(2^M,C) 以外の可逆性の定義が本文に無く、証明が使うのは P^{-1}P = I だけなので、仮定を P'P = I に改め、括弧を省く約束が本文に無いので左辺を tr(P(AP')) と書いた。",
       ],
     },
   },

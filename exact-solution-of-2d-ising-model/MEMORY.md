@@ -2,6 +2,8 @@
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十個目を行った。本文に行列の差・零行列の定義と、`A − B = O ⟺ A = B`・`Av − Bv = (A − B)v` の主張を数学的道具立てへ足し、`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖と `det(A(θ) − λI)` の先頭の行を、それらと SageMath 検算の連続実行が先に足した単位行列・スカラー倍のブロックへのラベル参照にした。Lean の具体版・必要十分版・導出と SageMath の検算を付け、`eigenvalue_AMat_iff` と `skew2_eigenvalue_iff` の鎖から mathlib の `one_mulVec` などを外した。次は台帳の「次の一歩」（Step 2 の第 2 成分の往復の簡潔化）。
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`trace_basic_properties`（トレースの基本性質）の検算 `sagemath/check/trace_basic_properties/` を足した（未検算 102 → 101 件。並行して入った行列の差の単位を含めた数え）。人手証明の散文を根拠付きの鎖に直し、行列の和の定義 `def_matrix_sum` を足し、(3) の右辺を `Σ_{k=1}^{n} 1_C` に、(4) の仮定を `P'P = I` に改めた。計算の誤りは無かった。次は `trace_of_idempotent`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行として、`def_invertible_elements_of_R`（`Mat(2^M,ℂ)` の可逆元）の検算 `sagemath/check/def_invertible_elements_of_R/` を足した。証明が根拠にしていた単位行列・行列のスカラー倍・積の結合律・単位行列との積・スカラー倍の性質・`0_C z = 0_C` を述べるブロックが本文に無かったので、定義 3 つと主張 8 つ（`002_linear_space_general.ts` の冒頭と `complex_numbers_form_a_field` の直後）を足し、主張ごとに同名の検算を付けた（未検算 104 → 103 件、証明を持つブロック 223 → 231 件）。(iv) の根拠の取り違え（交換子が 0 であることを引いていた）を直した。計算の誤りは無かった。次は `trace_basic_properties`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十九個目を行った。人手 `eigenvector_of_A_theta_tilde` の Step 3（固有ベクトルは `v_{±,μ}` の定数倍に限ること）は本文のどこからも使われず、階数・固有空間・次元を未定義のまま使っていたので、参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避した。statement を「`c v_{±,μ}` は固有ベクトル」にし、Step 2 に `cv ≠ 0` の段を足した。Lean の主張は変えていない。次は台帳の「次の一歩」（単位行列などを定義するブロックの要否）。
