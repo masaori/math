@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行の九回目として、`real_exp_positive`（実数の exp は正）と `real_exp_strictly_increasing`（狭義単調増加）の検算 `sagemath/check/real_exp_positive/`・`real_exp_strictly_increasing/` を足した（未検算 110 → 108 件）。等号の行は `QQ[x]` の形式冪級数で厳密に、ノルムは `AA` で、不等号と主張は本文の exp を囲むボールで確かめた。レビューで人手証明の地の文の推論を鎖に直し、`E(a) = exp(a)` を 1 行 1 列の行列の極限の一意性経由にした。計算の誤りは無かった。次は `complex_exp_of_real_argument`。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十三個目を行った。`ClaimEigenATildeDiag.lean` の `P̌_μ`・`c` を `DefinitionCheckFermi.lean` の `sqrtM` で書き直し、重複していた `sqrtM_cast_ne_zero` を消した（`sqrtM_ne_zero` と同じ主張）。次は状態台帳の「次の一歩」の先頭（`lean/README.md` と `lean/docs/` の対応表のパスの機械的な確認）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十二個目を行った。人手 `commutator_of_H_and_check_Z_Y` の必要十分版 `NecSuf/CommutatorSiteSum.lean` を具体版と同じ手順で置き、具体版 4 式を特殊化として導く `ClaimCommutatorHCheckZYFromNecSuf.lean` を置いた。境界の符号 `-1` という値は効かず、(A) には `η = p(M)`、(B) には `p(M)η = 1` だけが効く。(C)(D) は `M = 0` でも成り立つので、`H_2` 側の定理の連鎖から使われない `M ≠ 0` を外した。次は状態台帳の「次の一歩」の先頭（`sqrtM_cast_ne_zero` の整理）。

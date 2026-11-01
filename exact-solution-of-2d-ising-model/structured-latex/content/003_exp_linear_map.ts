@@ -1945,7 +1945,15 @@ S_N([0]_K)
       ]),
     ],
     proof: [
-      paragraph(["Step 1（0 でない）。"]),
+      paragraph([
+        "Step 1（0 でない）。",
+        math(String.raw`-x \in \mathbb{R}`),
+        " であり、",
+        ref("def_scalar_exp"),
+        " より ",
+        math(String.raw`\exp(x), \exp(-x) \in \mathbb{R}`),
+        " である。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(x)\exp(-x)
@@ -1958,13 +1966,37 @@ S_N([0]_K)
 \end{aligned}`,
       ),
       paragraph([
-        "もし ",
+        "である。",
         math(String.raw`\exp(x) = 0`),
-        " なら左辺は 0 となり矛盾するので、",
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&= \exp(x)\exp(-x)
+   \quad (\because \text{上の鎖}) \\
+&= 0 \cdot \exp(-x)
+   \quad (\because \text{仮定 } \exp(x) = 0) \\
+&= 0
+   \quad (\because \mathbb{R} \text{ の元に } 0 \text{ を掛けると } 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`1 \neq 0`),
+        " に反する。よって ",
         math(String.raw`\exp(x) \neq 0`),
         "。",
       ]),
-      paragraph(["Step 2（非負）。"]),
+      paragraph([
+        "Step 2（非負）。",
+        math(String.raw`\frac{x}{2} \in \mathbb{R}`),
+        " であり、",
+        ref("def_scalar_exp"),
+        " より ",
+        math(String.raw`\exp\!\left(\frac{x}{2}\right) \in \mathbb{R}`),
+        " である。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(x)
@@ -1979,7 +2011,11 @@ S_N([0]_K)
 \end{aligned}`,
       ),
       paragraph([
-        "Step 1 と Step 2 より ",
+        "Step 2 の ",
+        math(String.raw`\exp(x) \ge 0`),
+        " と Step 1 の ",
+        math(String.raw`\exp(x) \neq 0`),
+        " より ",
         math(String.raw`\exp(x) > 0`),
         "。",
       ]),
@@ -2009,21 +2045,104 @@ S_N([0]_K)
         " なら ",
         math(String.raw`\exp(a) > 1`),
         "）。",
+        math(String.raw`a \in \mathbb{R}`),
+        "、",
+        math(String.raw`a > 0`),
+        " とする。",
         ref("real_exp_series_converges"),
         " の ",
         math(String.raw`E_N(a) = \sum_{m=0}^{N}\frac{a^m}{m!}`),
         " と ",
         math(String.raw`E(a) = \lim_{N\to\infty}E_N(a)`),
-        " を使う。",
-        ref("scalar_exp_is_limit_of_partial_sums"),
-        " より同じ列 ",
-        math(String.raw`E_N(a)`),
-        " は ",
-        math(String.raw`\exp(a)`),
-        " に収束するので、実数列の極限の一意性より ",
-        math(String.raw`E(a) = \exp(a)`),
-        "。よって",
+        " を使う（",
+        math(String.raw`a \in \mathbb{R}_{\ge 0}`),
+        " なので適用できる）。",
+        math(String.raw`u \in \mathbb{R}`),
+        " について",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[u]_{\mathbb{R}}\right\|
+&= \sqrt{\sum_{i=1}^{1}\sum_{j=1}^{1}\left|\left([u]_{\mathbb{R}}\right)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_matrix_norm}\text{ を } n = 1 \text{ で}) \\
+&= \sqrt{\left|\left([u]_{\mathbb{R}}\right)_{11}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \text{和は } i = j = 1 \text{ の 1 項だけ}) \\
+&= \sqrt{|u|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= |u|
+   \quad (\because |u| \in \mathbb{R}_{\ge 0} \text{ かつ } |u|^2 = |u|^2 \text{ なので、}\blkref{definition_of_sqrt_r_positive}\text{ の値の一意性。}\blkref{sqrt_nonnegative_existence_uniqueness})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`u, v \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[u]_{\mathbb{R}} - [v]_{\mathbb{R}}
+&= \left[\left([u]_{\mathbb{R}} - [v]_{\mathbb{R}}\right)_{11}\right]_{\mathbb{R}}
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= \left[\left([u]_{\mathbb{R}}\right)_{11} - \left([v]_{\mathbb{R}}\right)_{11}\right]_{\mathbb{R}}
+   \quad (\because \text{行列の差は成分ごと}) \\
+&= [u - v]_{\mathbb{R}}
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[E_N(a)]_{\mathbb{R}} - [E(a)]_{\mathbb{R}}\right\|
+&= \left\|[E_N(a) - E(a)]_{\mathbb{R}}\right\|
+   \quad (\because \text{上の } [u]_{\mathbb{R}} - [v]_{\mathbb{R}} = [u - v]_{\mathbb{R}}) \\
+&= \left|E_N(a) - E(a)\right|
+   \quad (\because \text{上の } \|[u]_{\mathbb{R}}\| = |u|) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because E(a) \text{ は } (E_N(a))_N \text{ の極限。}\blkref{real_exp_series_converges}\text{ (1)})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[E_N(a)]_{\mathbb{R}} - [\exp(a)]_{\mathbb{R}}\right\|
+&= \left\|[E_N(a) - \exp(a)]_{\mathbb{R}}\right\|
+   \quad (\because \text{上の } [u]_{\mathbb{R}} - [v]_{\mathbb{R}} = [u - v]_{\mathbb{R}}) \\
+&= \left|E_N(a) - \exp(a)\right|
+   \quad (\because \text{上の } \|[u]_{\mathbb{R}}\| = |u|) \\
+&= \left|\sum_{m=0}^{N}\frac{a^m}{m!} - \exp(a)\right|
+   \quad (\because \blkref{real_exp_series_converges}\text{ の } E_N(a) \text{ の定義。冪 } a^m \text{ の約束は }\blkref{scalar_exp_is_limit_of_partial_sums}\text{ と同じ}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \blkref{scalar_exp_is_limit_of_partial_sums}\text{ を } K = \mathbb{R},\ x = a \text{ で})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("def_matrix_norm"),
+        " の意味で ",
+        math(String.raw`[E_N(a)]_{\mathbb{R}} \to [E(a)]_{\mathbb{R}}`),
+        " かつ ",
+        math(String.raw`[E_N(a)]_{\mathbb{R}} \to [\exp(a)]_{\mathbb{R}}`),
+        " だから、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) の極限の一意性より ",
+        math(String.raw`[E(a)]_{\mathbb{R}} = [\exp(a)]_{\mathbb{R}}`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E(a)
+&= \left([E(a)]_{\mathbb{R}}\right)_{11}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= \left([\exp(a)]_{\mathbb{R}}\right)_{11}
+   \quad (\because [E(a)]_{\mathbb{R}} = [\exp(a)]_{\mathbb{R}}) \\
+&= \exp(a)
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph(["である。よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(a)
@@ -2037,7 +2156,19 @@ S_N([0]_K)
    \quad (\because a > 0)
 \end{aligned}`,
       ),
-      paragraph(["Step 2。"]),
+      paragraph([
+        "Step 2。",
+        math(String.raw`x < y`),
+        " より ",
+        math(String.raw`y - x \in \mathbb{R}`),
+        " は ",
+        math(String.raw`y - x > 0`),
+        " を満たすので、Step 1 を ",
+        math(String.raw`a := y - x`),
+        " に適用して ",
+        math(String.raw`\exp(y - x) > 1`),
+        " である。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(y)
@@ -2046,7 +2177,7 @@ S_N([0]_K)
 &= \exp(x)\exp(y-x)
    \quad (\because \blkref{scalar_exp_product}) \\
 &> \exp(x)\cdot 1
-   \quad (\because \exp(x) > 0\ \blkref{real_exp_positive}\text{ と、}y - x > 0\text{ への Step 1}) \\
+   \quad (\because \exp(y-x) > 1 \text{ の両辺に } \exp(x) > 0\ \blkref{real_exp_positive}\text{ を掛ける}) \\
 &= \exp(x)
    \quad (\because 1 \text{ は乗法の単位元})
 \end{aligned}`,
