@@ -1124,4 +1124,52 @@ z_V(\lambda\cdot_V x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_zero_scalar_multiple_is_zero_vector",
+    kind: "claim",
+    title: { text: "零のスカラー倍は零ベクトルである" },
+    labels: ["claim_zero_scalar_multiple_is_zero_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とする。このとき、",
+        math(String.raw`V`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`0_{\mathbb{C}}\cdot_V x=0_V`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x`),
+        " を ",
+        math(String.raw`V`),
+        " の任意の元とする。加法の逆元の存在（",
+        ref("def_complex_vector_space"),
+        "）により、",
+        math(String.raw`(0_{\mathbb{C}}\cdot_V x)+_V y'=0_V`),
+        " を満たす ",
+        math(String.raw`y'\in V`),
+        " を一つ選ぶ。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{C}}\cdot_V x
+&=(0_{\mathbb{C}}\cdot_V x)+_V 0_V
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=(0_{\mathbb{C}}\cdot_V x)+_V\bigl((0_{\mathbb{C}}\cdot_V x)+_V y'\bigr)
+&&\left(\because\ y'\ \text{の選び方}\right)\\
+&=\bigl((0_{\mathbb{C}}\cdot_V x)+_V(0_{\mathbb{C}}\cdot_V x)\bigr)+_V y'
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl((0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}})\cdot_V x\bigr)+_V y'
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=(0_{\mathbb{C}}\cdot_V x)+_V y'
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=0_V
+&&\left(\because\ y'\ \text{の選び方}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
