@@ -311,7 +311,7 @@ export const createRuntimeSchema = <
       if (member.role === 'subgroup') validateGroup(member.element, `${path}.element`)
       else if (member.role === 'prerequisiteDefinition') validateBlockAt(member.element, `${path}.element`, ['definition'])
       else if (member.role === 'supportingClaim') validateBlockAt(member.element, `${path}.element`, ['theorem', 'claim'])
-      else if (member.role === 'explanation') validateBlockAt(member.element, `${path}.element`, ['remark', 'note'])
+      else if (member.role === 'explanation') validateBlockAt(member.element, `${path}.element`, ['remark', 'note', 'overview'])
       else if (member.role === 'figure') validateBlockAt(member.element, `${path}.element`, ['figure'])
       else issues.push({ path: `${path}.role`, message: '未知のグループ内役割' })
     }
@@ -340,7 +340,7 @@ export const createRuntimeSchema = <
       exactKeys(member, ['role', 'element'], path)
       if (member.role === 'subsection') validateSection(member.element, `${path}.element`)
       else if (member.role === 'primary' || member.role === 'supporting') validateGroup(member.element, `${path}.element`)
-      else if (member.role === 'exposition') validateBlockAt(member.element, `${path}.element`, ['remark', 'note', 'figure'])
+      else if (member.role === 'exposition') validateBlockAt(member.element, `${path}.element`, ['remark', 'note', 'overview', 'figure'])
       else issues.push({ path: `${path}.role`, message: '未知の節内役割' })
     }
     const validateSection = (candidate: unknown, path: string): void => {

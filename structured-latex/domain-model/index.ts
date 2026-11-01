@@ -130,7 +130,12 @@ export type {
 } from './structured-text/uniqueness.ts'
 
 // --- L3: 解決済み文書 --------------------------------------------------------
-export { DEFAULT_NUMBERING_POLICY, type CounterKey, type NumberingPolicy } from './resolved/numbering.ts'
+export {
+  DEFAULT_NUMBERING_POLICY,
+  type CounterKey,
+  type HeadingStartNumber,
+  type NumberingPolicy,
+} from './resolved/numbering.ts'
 
 export {
   resolve,

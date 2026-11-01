@@ -14,6 +14,7 @@
  *
  * 採番は LaTeX 側と一致させる。定義・主張・定理・注意・ノートは通し番号を共有し、
  * `\section`（見出し level 2）ごとに振り直す。したがって番号は「章番号.通し番号」になる。
+ * 章番号の振り出しは `tools/chapter-numbering.ts` の宣言に従う（LaTeX 側も同じ宣言を読む）。
  * 図表は定理型とは別の通し番号を持ち（システムの既定の採番方針 `DEFAULT_NUMBERING_POLICY` と同じく
  * カウンタを分ける）、同じく章ごとに振り直す（「図 1.1」）。
  *
@@ -41,6 +42,7 @@ import {
   renderStandingAwareBlock,
 } from "../../../structured-latex/renderers/html/theorem-standing.ts";
 import { standingOf } from "../../../structured-latex/domain-model/index.ts";
+import { chapterNumberAt } from "../../../structured-latex/renderers/chapter-numbering.ts";
 import type {
   FigureBlock,
   HeadingBlock,
@@ -48,6 +50,7 @@ import type {
   TheoremLikeBlock,
   TheoremLikeKind,
 } from "../schema.ts";
+import { CHAPTER_NUMBERING } from "./chapter-numbering.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 
 const require = createRequire(import.meta.url);
@@ -62,6 +65,7 @@ const HEADINGS: Record<TheoremLikeKind | "figure", string> = {
   theorem: "定理",
   remark: "注意",
   note: "ノート",
+  overview: "概要",
   figure: "図",
 };
 
@@ -76,6 +80,7 @@ type Numbered = { kind: TheoremLikeKind | "figure"; number: string; blockId: str
 const byLabel = new Map<string, Numbered>();
 const sectionOfLabel = new Map<string, string>(); // 見出しラベル → 章番号
 const figureNumberOf = new Map<string, string>(); // 図表ブロック id → 番号
+let chaptersSeen = 0;
 let sectionNumber = 0;
 let counter = 0;
 let figureCounter = 0;
@@ -84,7 +89,8 @@ for (const { blocks } of contentFiles) {
   for (const block of blocks) {
     if (block.kind === "heading") {
       if (block.level === 2) {
-        sectionNumber += 1;
+        sectionNumber = chapterNumberAt(CHAPTER_NUMBERING, chaptersSeen);
+        chaptersSeen += 1;
         counter = 0;
         figureCounter = 0;
       }
@@ -184,8 +190,8 @@ for (const { blocks } of contentFiles) {
 }
 
 function renderHeading(block: HeadingBlock): string {
+  const number = block.level === 2 ? String(chapterNumberAt(CHAPTER_NUMBERING, sectionSeen)) : "";
   if (block.level === 2) sectionSeen += 1;
-  const number = block.level === 2 ? String(sectionSeen) : "";
   const anchor = block.labels[0] ?? block.id;
   const title = renderTitle(block.title, block.id);
   toc.push({ level: block.level, id: `sec-${anchor}`, title, number });
@@ -343,7 +349,7 @@ h2 { font-size:1.3rem; border-bottom:1px solid var(--line); padding-bottom:6px; 
 h3 { font-size:1.1rem; } h4,h5,h6 { font-size:1rem; }
 .block { margin:22px 0; }
 .block .head { font-weight:600; }
-.definition .head, .claim .head, .theorem .head, .remark .head, .note .head { color:var(--fg); }
+.definition .head, .claim .head, .theorem .head, .remark .head, .note .head, .overview .head { color:var(--fg); }
 .statement { margin-top:2px; }
 .proof { margin:10px 0 0; padding-left:14px; border-left:2px solid var(--line); }
 .proofhead { font-style:italic; color:var(--muted); }

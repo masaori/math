@@ -2,7 +2,7 @@ import { defineBlocks, diagram, displayMath, list, math, paragraph } from "../sc
 
 /**
  * 論文の冒頭に置く章立ての説明。部と章の並び（冒頭に章の依存関係の図を置く）と、各章のゴールの式を示す。
- * 証明を持たない案内なので、主張・定義は置かず、注意だけで書く。
+ * 証明を持たない案内なので、主張・定義・注意は置かず、概要（`overview`）だけで書く。
  * 文書順の最初に来ることは `tools/content-modules.ts` の `LEADING_CONTENT_FILES` が決める。
  */
 export default defineBlocks([
@@ -14,8 +14,8 @@ export default defineBlocks([
     labels: ["chapter_organization"],
   },
   {
-    id: "chapter_organization_remark_goal_of_this_paper",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_of_this_paper",
+    kind: "overview",
     title: { text: "この論文のゴール" },
     labels: ["chapter_organization_goal_of_this_paper"],
     statement: [
@@ -46,8 +46,8 @@ export default defineBlocks([
     ],
   },
   {
-    id: "chapter_organization_remark_parts_and_chapters",
-    kind: "remark",
+    id: "chapter_organization_overview_parts_and_chapters",
+    kind: "overview",
     title: { text: "部と章の並び" },
     labels: ["chapter_organization_parts_and_chapters"],
     statement: [
@@ -255,8 +255,8 @@ export default defineBlocks([
     labels: [],
   },
   {
-    id: "chapter_organization_remark_goal_transfer_matrix_representation",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_transfer_matrix_representation",
+    kind: "overview",
     title: { text: "転送行列による表示" },
     labels: ["chapter_organization_goal_transfer_matrix_representation"],
     statement: [
@@ -267,8 +267,8 @@ export default defineBlocks([
     ],
   },
   {
-    id: "chapter_organization_remark_goal_projection_and_jordan_wigner",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_projection_and_jordan_wigner",
+    kind: "overview",
     title: { tex: String.raw`\varepsilon \text{ の固有値 } +1 \text{ の固有空間への射影と Jordan–Wigner 表示}` },
     labels: ["chapter_organization_goal_projection_and_jordan_wigner"],
     statement: [
@@ -291,8 +291,8 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     labels: [],
   },
   {
-    id: "chapter_organization_remark_goal_reduction_to_A_theta",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_reduction_to_A_theta",
+    kind: "overview",
     title: {
       tex: String.raw`\text{離散 Fourier 変換による }2\times2\text{ 行列 }A(\tilde\theta_\mu)\text{ への帰着}`,
     },
@@ -313,8 +313,8 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     ],
   },
   {
-    id: "chapter_organization_remark_goal_diagonalization_and_exponential_form",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_diagonalization_and_exponential_form",
+    kind: "overview",
     title: {
       tex: String.raw`A(\tilde\theta_\mu)\text{ の対角化と }V^{(+)}\text{ の指数表示}`,
     },
@@ -338,8 +338,8 @@ H_2=\sum_{m=1}^{M}Z_mY_m`),
     ],
   },
   {
-    id: "chapter_organization_remark_goal_eigenvalues_of_V_plus",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_eigenvalues_of_V_plus",
+    kind: "overview",
     title: { tex: String.raw`V^{(+)}\text{ の固有値}` },
     labels: ["chapter_organization_goal_eigenvalues_of_V_plus"],
     statement: [
@@ -360,8 +360,8 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
     ],
   },
   {
-    id: "chapter_organization_remark_goal_eigenvector_of_max_eigenvalue",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_eigenvector_of_max_eigenvalue",
+    kind: "overview",
     title: { tex: String.raw`V^{(+)}\text{ の最大固有値に属する固有ベクトル}` },
     labels: ["chapter_organization_goal_eigenvector_of_max_eigenvalue"],
     statement: [
@@ -383,8 +383,8 @@ V^{(+)}\check Q_\epsilon=\check\Lambda_\epsilon\check Q_\epsilon,`),
     labels: [],
   },
   {
-    id: "chapter_organization_remark_goal_row_limit_and_max_eigenvalue",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_row_limit_and_max_eigenvalue",
+    kind: "overview",
     title: { tex: String.raw`N\to\infty\text{ の極限と最大固有値 }c(M)` },
     labels: ["chapter_organization_goal_row_limit_and_max_eigenvalue"],
     statement: [
@@ -396,8 +396,8 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
     ],
   },
   {
-    id: "chapter_organization_remark_goal_column_limit_and_closed_form",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_column_limit_and_closed_form",
+    kind: "overview",
     title: { tex: String.raw`M\to\infty\text{ の極限と閉形式}` },
     labels: ["chapter_organization_goal_column_limit_and_closed_form"],
     statement: [
@@ -416,8 +416,8 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
     labels: [],
   },
   {
-    id: "chapter_organization_remark_goal_critical_point_and_log_divergence",
-    kind: "remark",
+    id: "chapter_organization_overview_goal_critical_point_and_log_divergence",
+    kind: "overview",
     title: {
       tex: String.raw`\text{臨界点 }K_c\text{ と }\frac{d^2f}{dK^2}\text{ の対数発散}`,
     },

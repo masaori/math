@@ -17,7 +17,14 @@ export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 
 export const HEADING_LEVELS = [1, 2, 3, 4, 5, 6] as const satisfies readonly HeadingLevel[]
 
-export type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note'
+/**
+ * 本文を持つブロックの種別。
+ *
+ * `overview`（概要）は、文書や章が何を目標にし、どう組み立てられているかを示す案内である。
+ * 何かを主張も定義もせず、本文の論証を補う注意（`remark`）とも役割が違う。
+ * 論文のゴール・章立て・各章のゴールの式の一覧を、注意として書かずに済ませるために置いた。
+ */
+export type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note' | 'overview'
 
 export const THEOREM_LIKE_KINDS = [
   'theorem',
@@ -25,6 +32,7 @@ export const THEOREM_LIKE_KINDS = [
   'claim',
   'remark',
   'note',
+  'overview',
 ] as const satisfies readonly TheoremLikeKind[]
 
 /**
@@ -43,7 +51,7 @@ export const THEOREM_STANDINGS = [
 
 /**
  * 身分を宣言できる種別。**主張型（定理・主張）だけ**である。
- * 定義・注意・ノートは何かを主張して証明する対象ではないので、到達点にも道具にもならない。
+ * 定義・注意・ノート・概要は何かを主張して証明する対象ではないので、到達点にも道具にもならない。
  */
 export type StandingBearingKind = Extract<TheoremLikeKind, 'theorem' | 'claim'>
 
@@ -119,7 +127,7 @@ export type StandingBearingBlock<L extends string = string, M = unknown> = Theor
   standing?: TheoremStanding
 }
 
-/** 定義・注意・ノート。身分は宣言できない（コンパイル時に拒否）。 */
+/** 定義・注意・ノート・概要。身分は宣言できない（コンパイル時に拒否）。 */
 export type UnrankedTheoremLikeBlock<L extends string = string, M = unknown> = TheoremLikeCommon<
   L,
   M

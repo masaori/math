@@ -50,6 +50,7 @@ const HEADINGS: Record<TheoremLikeKind, string> = {
   theorem: "定理",
   remark: "注意",
   note: "ノート",
+  overview: "概要",
 };
 
 const escapeHtml = (s: string): string =>
@@ -293,7 +294,7 @@ h2 { font-size:1.3rem; border-bottom:1px solid var(--line); padding-bottom:6px; 
 h3 { font-size:1.1rem; } h4,h5,h6 { font-size:1rem; }
 .block { margin:22px 0; }
 .block .head { font-weight:600; }
-.definition .head, .claim .head, .theorem .head, .remark .head, .note .head { color:var(--fg); }
+.definition .head, .claim .head, .theorem .head, .remark .head, .note .head, .overview .head { color:var(--fg); }
 .statement { margin-top:2px; }
 .proof { margin:10px 0 0; padding-left:14px; border-left:2px solid var(--line); }
 .proofhead { font-style:italic; color:var(--muted); }

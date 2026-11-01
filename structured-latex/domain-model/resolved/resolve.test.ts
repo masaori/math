@@ -75,6 +75,46 @@ test('採番: 見出しの階層と、見出しごとにリセットされる定
   })
 })
 
+test('採番: 振り出しを 0 にした深さは 0 から番号が振られ、定理番号の前置も 0 になる', () => {
+  const result = resolve(
+    snapshot([
+      {
+        key: '001',
+        blocks: [
+          heading('h0', 1, 'sec:0'),
+          claim('c1', ['c:1']),
+          heading('h01', 2, 'sec:0.1'),
+          heading('h02', 2, 'sec:0.2'),
+          heading('h1', 1, 'sec:1'),
+          claim('c2', ['c:2']),
+          heading('h11', 2, 'sec:1.1'),
+        ],
+      },
+    ]),
+    {
+      ...options,
+      numbering: {
+        ...DEFAULT_NUMBERING_POLICY,
+        headingStartNumbers: { ...DEFAULT_NUMBERING_POLICY.headingStartNumbers, 1: 0 },
+      },
+    },
+  )
+  assert.equal(result.success, true)
+  if (!result.success) return
+  const displays = Object.fromEntries(
+    result.data.blocks.map((block) => [block.blockId, block.number?.display ?? null]),
+  )
+  assert.deepEqual(displays, {
+    h0: '0',
+    c1: '0.1',
+    h01: '0.1',
+    h02: '0.2',
+    h1: '1',
+    c2: '1.1',
+    h11: '1.1',
+  })
+})
+
 test('採番: 見出しより前のブロックは前置なしの通し番号になる', () => {
   const result = resolve(
     snapshot([{ key: '001', blocks: [claim('c1', []), heading('h1', 1, 'sec:1'), claim('c2', [])] }]),

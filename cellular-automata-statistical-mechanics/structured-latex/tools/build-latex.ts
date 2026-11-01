@@ -81,6 +81,7 @@ const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: stri
   theorem: { env: "theorem", heading: "定理" },
   remark: { env: "remark", heading: "注意" },
   note: { env: "structurednote", heading: "ノート" },
+  overview: { env: "overview", heading: "概要" },
 };
 
 /**
@@ -297,12 +298,14 @@ function renderDocument(roadmap: string, inner: string): string {
 \\newtheorem{theorem}[definition]{定理}
 \\newtheorem{remark}[definition]{注意}
 \\newtheorem{structurednote}[definition]{ノート}
+\\newtheorem{overview}[definition]{概要}
 
 \\crefname{definition}{定義}{定義}
 \\crefname{claim}{主張}{主張}
 \\crefname{theorem}{定理}{定理}
 \\crefname{remark}{注意}{注意}
 \\crefname{structurednote}{ノート}{ノート}
+\\crefname{overview}{概要}{概要}
 \\crefname{section}{節}{節}
 
 % 数式の中からブロックを番号で引くための命令。

@@ -46,6 +46,8 @@ import type {
   TheoremLikeBlock,
   TheoremLikeKind,
 } from "../schema.ts";
+import { latexChapterCounterSetup } from "../../../structured-latex/renderers/chapter-numbering.ts";
+import { CHAPTER_NUMBERING } from "./chapter-numbering.ts";
 import { loadContentFiles, structuredLatexDir } from "./content-modules.ts";
 import { escapeText } from "./latex-escape.ts";
 
@@ -78,6 +80,7 @@ const THEOREM_ENVIRONMENTS: Record<TheoremLikeKind, { env: string; heading: stri
   theorem: { env: "theorem", heading: "定理" },
   remark: { env: "remark", heading: "注意" },
   note: { env: "structurednote", heading: "ノート" },
+  overview: { env: "overview", heading: "概要" },
 };
 
 /**
@@ -295,12 +298,14 @@ ${DIAGRAM_TIKZ_PREAMBLE}
 \\newtheorem{theorem}[definition]{定理}
 \\newtheorem{remark}[definition]{注意}
 \\newtheorem{structurednote}[definition]{ノート}
+\\newtheorem{overview}[definition]{概要}
 
 \\crefname{definition}{定義}{定義}
 \\crefname{claim}{主張}{主張}
 \\crefname{theorem}{定理}{定理}
 \\crefname{remark}{注意}{注意}
 \\crefname{structurednote}{ノート}{ノート}
+\\crefname{overview}{概要}{概要}
 \\crefname{section}{節}{節}
 
 % 図表は定理型とは別の番号を持ち、章（\\section）ごとに振り直す（HTML 側 build-html.ts と同じ規則）。
@@ -315,6 +320,9 @@ ${DIAGRAM_TIKZ_PREAMBLE}
 \\maketitle
 \\tableofcontents
 \\clearpage
+
+% 章番号の振り出し（tools/chapter-numbering.ts。HTML 側と同じ宣言）
+${latexChapterCounterSetup(CHAPTER_NUMBERING, "section")}
 
 ${inner}
 

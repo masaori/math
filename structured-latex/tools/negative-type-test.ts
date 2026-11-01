@@ -364,6 +364,22 @@ export default defineBlocks([
     }),
   },
   {
+    name: '概要が身分 standing を宣言する',
+    expect: 'TS2322',
+    files: (broken) => ({
+      'fixture.ts': blocksModule(
+        `  {
+    id: 'standing_on_overview',
+    kind: '${broken ? 'overview' : 'claim'}',
+    labels: [],
+    habitat: 'countable',
+    standing: 'mainTheorem',
+    statement: [],
+  },`,
+      ),
+    }),
+  },
+  {
     name: '身分 standing が語彙に無い値',
     expect: 'TS2322',
     files: (broken) => ({

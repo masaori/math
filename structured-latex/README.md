@@ -88,7 +88,7 @@ diagram({
 { id: '…', kind: 'theorem', standing: 'mainTheorem', labels: […], statement: […] }
 ```
 
-- 宣言できるのは `theorem` / `claim` だけである。定義・注意・ノート・見出し・図表に書くと、
+- 宣言できるのは `theorem` / `claim` だけである。定義・注意・ノート・概要・見出し・図表に書くと、
   型検査と実行時検証の両方で落ちる。
 - **宣言が無ければサブ定理**として扱う。主定理は印を付けたものだけである。
 - 身分は意味であって体裁ではない（[docs/domain-model.md](docs/domain-model.md) §7.2）。

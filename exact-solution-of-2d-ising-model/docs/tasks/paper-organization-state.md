@@ -37,7 +37,7 @@
   - **成り立っていなかった項目（別のエージェントの独立の照合で見つかった）。** 6 章の章末の主張は章立て案のゴールの式と同じ内容だが、次の 3 章は違う。説明ページのゴールの式は、どれも本文の側に合わせてある。
     - $\varepsilon$ の固有値 $+1$ の固有空間への射影の章: 章末の `symmetrized_transfer_matrix_on_sector_exponential_form` は $WP^{(+)}$ の指数表示だけで、章立て案の $WP^{(+)}=V^{(+)}P^{(+)}$・$V^{(+)}$ の指数表示・$\mathcal F^{(+)}=\mathrm{im}\,P^{(+)}$ を主張していない。
     - 対角化の章: 章末の `V_plus_eq_c_exp_sum_gamma_check_number_operator` は $V^{(+)}$ の指数表示だけで、章立て案の $A(\tilde\theta_\mu)=\check P_\mu\,\mathrm{diag}(\lambda_{+,\mu},\lambda_{-,\mu})\check P_\mu^{-1}$ と $\lambda_{\pm,\mu}=\exp(\pm\gamma(\tilde\theta_\mu))$ を主張していない（同じ章の `Athetatilde_005`・`Athetatilde_009` に在る）。
-    - 離散 Fourier 変換の章: 章立て案は $T_{(V)}(X):=VXV^{-1}$ と約束するが、本文の `def_T_V_plus` は $T_{(V^{(+)})}$ を三つの共役の合成で定め、$V^{(+)}$ による共役との一致（`T_V_plus_is_conjugation`）は次の対角化の章に在る。章立て案の記号で読むと、この章のゴールが次の章の結果に頼る。説明ページの記号の約束（`chapter_organization_remark_parts_and_chapters`）も本文の定義と合わない。
+    - 離散 Fourier 変換の章: 章立て案は $T_{(V)}(X):=VXV^{-1}$ と約束するが、本文の `def_T_V_plus` は $T_{(V^{(+)})}$ を三つの共役の合成で定め、$V^{(+)}$ による共役との一致（`T_V_plus_is_conjugation`）は次の対角化の章に在る。章立て案の記号で読むと、この章のゴールが次の章の結果に頼る。説明ページの記号の約束（`chapter_organization_overview_parts_and_chapters`）も本文の定義と合わない。
 - 2026-10-31（連続実行「複素行列版イジング: 章立ての組み直し」）: runbook の「作業の順序」の六番目の項目を行った。冒頭の章立ての説明ページ（`content/chapter_organization.ts`）を、組み直した本文と照合した。
   - **部・章の題と各章のゴールの式は、本文と一致していた。** 9 章すべてで、説明ページのゴールの式・記号・条件が、`tools/chapter-plan.ts` の `goalLabels` のブロックの statement と一致し、各章のファイルの最後のブロックがその章のゴールのブロックであることを確かめた。
   - **依存関係の図を本文に合わせた。** 棚卸しの `chapterKey` と `dependsOnEntryIds` から章間の直接依存を集めて推移簡約すると、$N\to\infty$ の極限の章の `W_is_real_symmetric_positive_definite` が $V^{(+)}$ の固有値の章の `iH_is_real_symmetric` を引くので、射影の章 → $N\to\infty$ の極限の章の矢印は冗長になり、$V^{(+)}$ の固有値の章 → $N\to\infty$ の極限の章が残る。図の矢印をこの 9 本に替え、「流れが二つに分かれる」位置の説明を $V^{(+)}$ の固有値の章のあとに直した。
@@ -1326,7 +1326,7 @@ runbook の作業の順序はすべて終えた。ゴールラインはすべて
 
 ## 未確定
 
-- **冒頭の「この論文のゴール」（`chapter_organization_remark_goal_of_this_paper`）に、本文が示していない記述が二つある（2026-10-31 の完了の確認のレビューの指摘。代表の指示で書いた文なので、組み直しでは変えていない）。**
+- **冒頭の「この論文のゴール」（`chapter_organization_overview_goal_of_this_paper`）に、本文が示していない記述が二つある（2026-10-31 の完了の確認のレビューの指摘。代表の指示で書いた文なので、組み直しでは変えていない）。**
   「臨界点は $\sinh 2K_1\sinh 2K_2=1$ で与えられる」は、本文が示すのが式の同値（`TV1_hatZ_hatY_044_claim_critical_condition`）と等方な場合の $\sinh 2K_c=1$ だけで、異方な場合にそれが臨界点であることは示していない。
   $\log Z$ を「自由エネルギー」と呼んでいるが、本文に自由エネルギーの定義は無い（題に「自由エネルギー」を含むブロックが `freeenergy_005_theorem_onsager_expression`・`closing_010_theorem_onsager_exact_solution` の 2 件ある）。
 - **数学的道具立ての部の中で、後ろの章のブロックを根拠にしている箇所がある（ゴールラインの外）。** `exp_conjugation_proof_003_definition_M_n_C_convergence`・`exp_conjugation_proof_003b_claim_frobenius_inner_product_axioms` が後ろの「トレース・エルミート行列・正定値性」の `def_trace`・`def_hermitian_positive_definite` を、`exp_linear_map_003_theorem_exp_product_formula_commuting_matrices` が後ろの `ad_binomial` を使う。`calc_formulae_006_definition_of_cc` が後ろの `matrix_exp_series_converges` を指す。

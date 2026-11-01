@@ -171,7 +171,16 @@ export const resolveTolerantly = <L extends string, M>(
 
   // --- 採番（1 パス目）------------------------------------------------------
   const { numbering } = options
-  const headingCounters = [0, 0, 0, 0, 0, 0]
+  // 各深さで、同じ親の下に見出しが何個現れたか。番号は振り出し + (個数 - 1) になる。
+  // 個数で持つのは、振り出しが 0 のとき番号 0 と「まだ現れていない」を区別するため。
+  const headingCounts = [0, 0, 0, 0, 0, 0]
+  const headingPath = (depth: number): number[] =>
+    headingCounts
+      .slice(0, depth)
+      // 祖先の見出しがまだ現れていない深さは 0 とする（振り出しが 1 の文書の従来の表示と同じ）。
+      .map((count, index) =>
+        count === 0 ? 0 : numbering.headingStartNumbers[(index + 1) as HeadingLevel] + count - 1,
+      )
   const runningCounters = new Map<string, number>()
   const numberByBlockId = new Map<string, BlockNumber | null>()
   const outline: OutlineEntry[] = []
@@ -181,13 +190,13 @@ export const resolveTolerantly = <L extends string, M>(
   for (const block of blocks) {
     if (block.kind === 'heading') {
       const level: HeadingLevel = block.level
-      headingCounters[level - 1] = (headingCounters[level - 1] ?? 0) + 1
-      for (let deeper = level; deeper < headingCounters.length; deeper += 1) {
-        headingCounters[deeper] = 0
+      headingCounts[level - 1] = (headingCounts[level - 1] ?? 0) + 1
+      for (let deeper = level; deeper < headingCounts.length; deeper += 1) {
+        headingCounts[deeper] = 0
       }
       const number: BlockNumber | null =
         level <= numbering.numberedHeadingDepth
-          ? { path: headingCounters.slice(0, level), display: displayOf(headingCounters.slice(0, level)) }
+          ? { path: headingPath(level), display: displayOf(headingPath(level)) }
           : null
       numberByBlockId.set(block.id, number)
       outline.push({
@@ -203,9 +212,9 @@ export const resolveTolerantly = <L extends string, M>(
     // 見出しがまだ現れていない区間では前置を付けない（「0.1」のような番号を作らない）。
     const resetAt = numbering.resetAt
     const prefix =
-      resetAt === null || (headingCounters[resetAt - 1] ?? 0) === 0
+      resetAt === null || (headingCounts[resetAt - 1] ?? 0) === 0
         ? []
-        : headingCounters.slice(0, resetAt)
+        : headingPath(resetAt)
     const counterKey = numbering.counters[block.kind]
     const runningKey = `${counterKey}|${prefix.join(',')}`
     const next = (runningCounters.get(runningKey) ?? 0) + 1

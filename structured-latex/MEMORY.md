@@ -30,6 +30,8 @@
 
 ## 完了済み
 
+- 2026-11-01: 代表の依頼で、ブロック種別に概要 `overview`（文書や章のゴールと組み立てを示す案内。主張も定義もしない）を足し、各論文の出力器（HTML の見出し語、LaTeX の `\newtheorem{overview}`・`\crefname`）を全部対応させた。あわせて章番号の振り出しを宣言できるようにした。解決器の採番方針は深さごとの振り出し `headingStartNumbers`（0 か 1）を持ち、各論文の出力器向けには `renderers/chapter-numbering.ts`（HTML の章番号と LaTeX のカウンタの初期値を同じ宣言から作る）を置いた。最初の利用者は複素行列版イジングの論文（第 0 章から）。
+
 - 2026-10-31: 図式ノード `diagram`（枠・箱・矢印。箱の位置は著者が格子で与える）を語彙に足した。
   幾何は `renderers/diagram/layout.ts` の 1 か所で計算し、HTML（`renderers/html/diagram.ts`、SVG と重ねた HTML の題）と
   LaTeX（`renderers/latex/diagram.ts`、TikZ）が共有する。依存方向の検査に `renderers/` を加えた。

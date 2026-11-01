@@ -28,7 +28,7 @@
 | 定理型が見出し専用の `level` を持つ | I4 | `TheoremLikeBlock` の `level?: never` | TS2322 |
 | 図表が定理型のフィールドを持つ | I4 | `FigureBlock` の `statement?: never` ほか | TS2322 |
 | 図式の箱が宣言していない枠に属する・矢印が宣言していない箱を指す | — | `diagram` 構築子の `const` 型引数（枠の id・箱の id のユニオンを推論し、参照側を `NoInfer` で束縛） | TS2322 |
-| 主張型でないブロック（定義・注意・ノート・見出し・図表）が身分 `standing` を宣言する | I4 | 定理型を「身分を宣言できる主張型」と「それ以外（`standing?: never`）」の共用体に割った | TS2322 |
+| 主張型でないブロック（定義・注意・ノート・概要・見出し・図表）が身分 `standing` を宣言する | I4 | 定理型を「身分を宣言できる主張型」と「それ以外（`standing?: never`）」の共用体に割った | TS2322 |
 | 身分 `standing` が語彙外の値 | I4 | `TheoremStanding = 'mainTheorem' \| 'subTheorem'` | TS2322 |
 | 要素グループの中心が定理・主張・定義以外 | I4 | `ElementGroup.focus: FocalBlock` | TS2322 |
 | 節内役割と要素種別が対応しない | I4 | `SectionMember` の判別共用体 | TS2322 |

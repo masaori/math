@@ -65,7 +65,7 @@
 | # | 事実 | 一次情報 |
 |---|---|---|
 | F1 | 文書順の正準表現は**ブロック配列の並び**。文書全体の順序は「`content/*.ts` をファイル名昇順に並べ、各ファイル内は配列順」で復元される | `exact-solution-of-2d-ising-model/structured-latex/README.md`（"Document order"）、`tools/content-modules.ts`（`listSourceFiles` が `sort()`） |
-| F2 | ブロックは 2 種。**見出し**（`level` 1..6・`title` 必須・本文を持たない）と**定理型**（`theorem`/`definition`/`claim`/`remark`/`note`・`statement` 必須・`proof` 任意）。見出しに本文を書くこと、定理型に `level` を書くことは型で拒否される | `structured-latex/schema.ts`（`HeadingBlock` / `TheoremLikeBlock` の `never` フィールド） |
+| F2 | ブロックは 2 種。**見出し**（`level` 1..6・`title` 必須・本文を持たない）と**定理型**（`theorem`/`definition`/`claim`/`remark`/`note`/`overview`・`statement` 必須・`proof` 任意）。見出しに本文を書くこと、定理型に `level` を書くことは型で拒否される | `structured-latex/schema.ts`（`HeadingBlock` / `TheoremLikeBlock` の `never` フィールド） |
 | F3 | ノードは 7 種（`text`/`math`/`displayMath`/`paragraph`/`list`/`ref`/`todo`）。**数式は KaTeX 向けの LaTeX 文字列**として保持する | `structured-latex/schema.ts`、同 `README.md`（"Mathematical expressions are stored as LaTeX strings intended for KaTeX"） |
 | F4 | 相互参照のキーは**ラベル**であって、ファイルパスでもブロック id でもない。ラベルは文書全体で一意。`ref()` の宛先は生成されたラベルのユニオン型に縛られ、存在しないラベルは**コンパイル時**に落ちる | `structured-latex/schema.ts`（`RefNode.target: Label`）、`labels.generated.ts`、`tools/generate-index.ts` |
 | F5 | **ノートは文書本体ではない。** 最終成果物の生成は `content/` だけを読み、`notes/` を読まない。ブロックに `notes` フィールドは書けない | `structured-latex/schema.ts`（`notes?: never`）、`tools/build-latex.ts`（`loadNoteFiles` を呼ばない）、`tools/verify-no-notes-in-output.ts` |
@@ -96,7 +96,7 @@ F8 は「スキーマをそのまま共有すると足りない」ことの一�
 |---|---|---|
 | **文書** Document | 1 本の論文・書籍。正本の単位であり、ラベル一意性・参照解決の効力範囲 | `structured-latex/` ディレクトリ 1 つ |
 | **セグメント** Segment | 文書順のキーを持つブロック列。**部分アップロードの単位** | `content/<ファイル名>.ts` の default export 1 本 |
-| **ブロック** Block | 見出し、または定理型（定義・主張・定理・注意・ノート） | `ConvertedBlock` |
+| **ブロック** Block | 見出し、または定理型（定義・主張・定理・注意・ノート・概要） | `ConvertedBlock` |
 | **ノード** Node | ブロック本文を構成する要素（地の文・数式・段落・箇条・参照・TODO） | `Node` |
 | **ラベル** Label | 相互参照の宛先となる安定識別子。文書全体で一意 | `labels` / `Label` |
 | **参照** Reference | あるブロックから別のブロックのラベルへの指示 | `RefNode` |
@@ -303,7 +303,8 @@ type DiagramNode     = {                                       // 箱・枠・�
 ```typescript
 // domain-model/structured-text/block.ts
 type HeadingLevel    = 1 | 2 | 3 | 4 | 5 | 6
-type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note'
+type TheoremLikeKind = 'theorem' | 'definition' | 'claim' | 'remark' | 'note' | 'overview'
+// overview（概要）: 文書や章のゴールと組み立てを示す案内。主張も定義もせず、論証を補う注意とも役割が違う
 type BlockKind       = TheoremLikeKind | 'heading' | 'figure'
 
 /** text か tex の少なくとも一方が必須（I4 を型で表す）。空の {} はコンパイル時に落ちる。 */
@@ -329,8 +330,8 @@ type StandingBearingBlock<L, M> = TheoremLikeCommon<L, M> & {
 }
 
 type UnrankedTheoremLikeBlock<L, M> = TheoremLikeCommon<L, M> & {
-  kind: 'definition' | 'remark' | 'note'
-  standing?: never                    // 定義・注意・ノートは到達点にも道具にもならない
+  kind: 'definition' | 'remark' | 'note' | 'overview'
+  standing?: never                    // 定義・注意・ノート・概要は到達点にも道具にもならない
 }
 
 type TheoremLikeBlock<L, M> = StandingBearingBlock<L, M> | UnrankedTheoremLikeBlock<L, M>

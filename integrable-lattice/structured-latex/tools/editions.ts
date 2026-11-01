@@ -69,6 +69,7 @@ const JAPANESE_THEOREMS: Record<TheoremLikeKind, { env: string; heading: string 
   theorem: { env: "theorem", heading: "定理" },
   remark: { env: "remark", heading: "注意" },
   note: { env: "structurednote", heading: "ノート" },
+  overview: { env: "overview", heading: "概要" },
 };
 
 const japanese: Edition = {
@@ -144,12 +145,14 @@ const japanese: Edition = {
 \\newtheorem{theorem}[definition]{定理}
 \\newtheorem{remark}[definition]{注意}
 \\newtheorem{structurednote}[definition]{ノート}
+\\newtheorem{overview}[definition]{概要}
 
 \\crefname{definition}{定義}{定義}
 \\crefname{claim}{主張}{主張}
 \\crefname{theorem}{定理}{定理}
 \\crefname{remark}{注意}{注意}
 \\crefname{structurednote}{ノート}{ノート}
+\\crefname{overview}{概要}{概要}
 \\crefname{section}{節}{節}
 
 \\title{$\\mathbb{R}/\\Lambda$ 双対 — 整数スペクトル曲線の二素点と $\\Lambda$ 側の決定可能性}
@@ -174,6 +177,7 @@ const ENGLISH_THEOREMS: Record<TheoremLikeKind, { env: string; heading: string }
   theorem: { env: "theorem", heading: "Theorem" },
   remark: { env: "remark", heading: "Remark" },
   note: { env: "structurednote", heading: "Note" },
+  overview: { env: "overview", heading: "Overview" },
 };
 
 const english: Edition = {
@@ -260,12 +264,14 @@ const english: Edition = {
 \\newtheorem{theorem}[definition]{${ENGLISH_THEOREMS.theorem.heading}}
 \\newtheorem{remark}[definition]{${ENGLISH_THEOREMS.remark.heading}}
 \\newtheorem{structurednote}[definition]{${ENGLISH_THEOREMS.note.heading}}
+\\newtheorem{overview}[definition]{${ENGLISH_THEOREMS.overview.heading}}
 
 \\crefname{definition}{Definition}{Definitions}
 \\crefname{claim}{Claim}{Claims}
 \\crefname{theorem}{Theorem}{Theorems}
 \\crefname{remark}{Remark}{Remarks}
 \\crefname{structurednote}{Note}{Notes}
+\\crefname{overview}{Overview}{Overviews}
 \\crefname{section}{Section}{Sections}
 
 \\title{${escape(englishFrontmatter.title)}}

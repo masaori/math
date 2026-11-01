@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 代表の依頼で、章番号を第 0 章から振るようにした。冒頭の「章立て」が第 0 章、「計算公式」が第 1 章になり、定理番号も「0.1」から始まる。振り出しは `structured-latex/tools/chapter-numbering.ts` の宣言 1 つで、HTML と PDF（`\setcounter{section}{-1}`）の両方がそれを読む。あわせて、章立ての章の論文のゴール・部と章の並び・各章のゴールの式の 11 ブロックを、注意（`remark`）からシステムに足した概要（`overview`）へ替え、id の種別部分も `_overview_` に直した（ラベルは不変）。
+
 2026-11-01: 代表の指示で、冒頭の章立ての章の依存関係の図を「部と章の並び」の注意の冒頭へ移した（導入の一文 → 図 → 流れの説明 → 部と章の箇条）。図は注意の本文の図式ノードになり、末尾の見出し「章の依存関係」・その注意・図表ブロック（ラベル `chapter_organization_dependencies`・`figure_chapter_dependencies`）は無くなった。PDF でも注意の見出しより上に図が出ないよう、図の前に一文を置いている。
 2026-11-01: Lean の通しの証明のゴールラインの確認の十四個目を行った。章の結論 `TVPlus_checkZ_checkY`（人手 `T_V_plus_check_Z_Y`）を、必要十分版 `NecSuf.actsBy_TV_sandwich` の直接呼び出しから、人手の (z)・(y) の 6 行の鎖と最後の 2 行どおりの `calc` に直した（主張の型は不変）。旧証明は `TVPlus_checkZ_checkY_of_necSuf`（`ClaimTVPlusActionFromNecSuf.lean`）へ移した。linearity の 3 本から未使用の仮定を外した。次は `cosh_sinh_coefficient_conversion_for_check` の具体版を人手どおりか確かめる。
 2026-11-01: 可算二次元イジングの連続実行の書式統一として、「H₂ と反周期 Fourier 成分の交換関係」の準備の三行へ行末根拠を付けた。主張・計算の内容は変えていない。

@@ -113,6 +113,7 @@ function document(body: string): string {
 \theoremstyle{remark}
 \newtheorem{remark}[definition]{注意}
 \newtheorem{structurednote}[definition]{ノート}
+\newtheorem{overview}[definition]{概要}
 \crefname{definition}{定義}{定義}
 \crefname{claim}{主張}{主張}
 \crefname{theorem}{定理}{定理}

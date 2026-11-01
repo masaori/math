@@ -22,7 +22,7 @@ export type DefinitionBlock<L extends string = string, M = unknown> = TheoremLik
 }
 export type AssertionBlock<L extends string = string, M = unknown> = StandingBearingBlock<L, M>
 export type RemarkBlock<L extends string = string, M = unknown> = TheoremLikeBlock<L, M> & {
-  kind: 'remark' | 'note'
+  kind: 'remark' | 'note' | 'overview'
   standing?: never
 }
 
