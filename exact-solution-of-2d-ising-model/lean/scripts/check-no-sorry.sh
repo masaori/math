@@ -1022,6 +1022,19 @@ targets=(
   Ising2D.identity_matrix_mulVec_of_necSuf
   Ising2D.smul_mulVec_eq_of_necSuf
   Ising2D.sub_mulVec_eq_of_necSuf
+  Ising2D.neg_I_mul_I
+  Ising2D.I_mul_neg_I
+  Ising2D.twoByTwo_one_eq_kroneckerDelta
+  Ising2D.twoByTwo_kroneckerDelta_eq_identity
+  Ising2D.pauliX_mul_pauliX
+  Ising2D.pauliY_mul_pauliY
+  Ising2D.pauliZ_mul_pauliZ
+  Ising2D.pauliX_mul_pauliZ_entries
+  Ising2D.pauliX_mul_pauliY_entries
+  Ising2D.pauliZ_mul_pauliY_entries
+  Ising2D.pauliZ_mul_pauliX
+  Ising2D.pauliY_mul_pauliX
+  Ising2D.pauliY_mul_pauliZ_anticomm
   Ising2D.NecSuf.sub_eq_zero_iff_matrix
   Ising2D.NecSuf.sub_eq_zero_iff_vec
   Ising2D.NecSuf.one_mulVec_apply

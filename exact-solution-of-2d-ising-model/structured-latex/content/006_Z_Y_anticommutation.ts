@@ -1,4 +1,4 @@
-import { defineBlocks, paragraph, math, displayMath, list } from "../schema.ts";
+import { defineBlocks, paragraph, math, displayMath, list, ref } from "../schema.ts";
 
 export default defineBlocks([
   {
@@ -52,7 +52,7 @@ I:=I_{\mathrm{Mat}(2,\mathbb{C})}=\begin{pmatrix}1&0\\0&1\end{pmatrix}
 &= -(-1)
 &&(\because i\cdot i=-1) \\
 &= 1
-&&(\because \mathbb{R} \text{ の符号の計算})
+&&(\because \mathbb{C} \text{ の符号の計算})
 \end{aligned}`,
       ),
       paragraph(["続けて逆順の積を計算する。"]),
@@ -65,71 +65,16 @@ i\cdot(-i)
 &&(\because \text{直前の鎖})
 \end{aligned}`,
       ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^x\sigma^x
-&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^x \text{ の定義}) \\
-&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
-&= I
-&&(\because I \text{ の定義})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^y\sigma^y
-&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-&&(\because \sigma^y \text{ の定義}) \\
-&= \begin{pmatrix}(-i)\cdot i&0\\0&i\cdot(-i)\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
-&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-&&(\because \text{上の準備}) \\
-&= I
-&&(\because I \text{ の定義})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^z\sigma^z
-&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \sigma^z \text{ の定義}) \\
-&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-1)\cdot(-1)=1) \\
-&= I
-&&(\because I \text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph(["次に反可換性の 3 式について、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^z\sigma^x
-&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^z,\ \sigma^x \text{ の定義}) \\
-&= \begin{pmatrix}0&1\\-1&0\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult})
-\end{aligned}`,
-      ),
+      paragraph([
+        "反可換性の 3 式の右辺に現れる積も計算しておく。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
 &&(\because \sigma^x,\ \sigma^z \text{ の定義}) \\
 &= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
-&= -\begin{pmatrix}0&1\\-1&0\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
-&= -\,\sigma^z\sigma^x
-&&(\because \text{上で計算した}\ \sigma^z\sigma^x)
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^y\sigma^x
-&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-&&(\because \sigma^y,\ \sigma^x \text{ の定義}) \\
-&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult})
+&&(\because \blkref{mat_mult})
 \end{aligned}`,
       ),
       displayMath(
@@ -138,20 +83,7 @@ i\cdot(-i)
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \sigma^x,\ \sigma^y \text{ の定義}) \\
 &= \begin{pmatrix}i&0\\0&-i\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}) \\
-&= -\begin{pmatrix}-i&0\\0&i\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
-&= -\,\sigma^y\sigma^x
-&&(\because \text{上で計算した}\ \sigma^y\sigma^x)
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma^y\sigma^z
-&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-&&(\because \sigma^y,\ \sigma^z \text{ の定義}) \\
-&= \begin{pmatrix}0&i\\i&0\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-i)\cdot(-1)=i)
+&&(\because \blkref{mat_mult})
 \end{aligned}`,
       ),
       displayMath(
@@ -159,12 +91,116 @@ i\cdot(-i)
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
 &&(\because \sigma^z,\ \sigma^y \text{ の定義}) \\
+&= \begin{pmatrix}0&-i\\(-1)\cdot i&0\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
 &= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-&&(\because \text{行列の積の定義。}\blkref{mat_mult}\text{ と }(-1)\cdot i=-i) \\
-&= -\begin{pmatrix}0&i\\i&0\end{pmatrix}
-&&(\because \text{行列のスカラー倍の定義と} \mathbb{C} \text{ の符号の計算}) \\
-&= -\,\sigma^y\sigma^z
-&&(\because \text{上で計算した}\ \sigma^y\sigma^z)
+&&(\because \blkref{multiply_by_minus_one})
+\end{aligned}`,
+      ),
+      paragraph([
+        "まず ",
+        math(String.raw`\sigma^x\sigma^x = I`),
+        "、",
+        math(String.raw`\sigma^y\sigma^y = I`),
+        "、",
+        math(String.raw`\sigma^z\sigma^z = I`),
+        " の 3 式を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x\sigma^x
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \sigma^x \text{ の定義}) \\
+&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= I
+&&(\because \blkref{def_identity_matrix})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y\sigma^y
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \sigma^y \text{ の定義}) \\
+&= \begin{pmatrix}(-i)\cdot i&0\\0&i\cdot(-i)\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
+&&(\because \text{上の準備}) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= I
+&&(\because \blkref{def_identity_matrix})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z\sigma^z
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \sigma^z \text{ の定義}) \\
+&= \begin{pmatrix}1&0\\0&(-1)\cdot(-1)\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } (-1)\cdot(-1)=1) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= I
+&&(\because \blkref{def_identity_matrix})
+\end{aligned}`,
+      ),
+      paragraph(["次に反可換性の 3 式を、それぞれ左辺から計算する。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z\sigma^x
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \sigma^z,\ \sigma^x \text{ の定義}) \\
+&= \begin{pmatrix}0&1\\-1&0\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}-0&1\\-1&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } 0=-0\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= \begin{pmatrix}-0&-(-1)\\-1&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } 1=-(-1)\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= -\begin{pmatrix}0&-1\\1&0\end{pmatrix}
+&&(\because \blkref{def_matrix_negation}) \\
+&= -\,\sigma^x\sigma^z
+&&(\because \text{上で計算した}\ \sigma^x\sigma^z)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y\sigma^x
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \sigma^y,\ \sigma^x \text{ の定義}) \\
+&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}-i&-0\\-0&i\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } 0=-0\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= \begin{pmatrix}-i&-0\\-0&-(-i)\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } i=-(-i)\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= -\begin{pmatrix}i&0\\0&-i\end{pmatrix}
+&&(\because \blkref{def_matrix_negation}) \\
+&= -\,\sigma^x\sigma^y
+&&(\because \text{上で計算した}\ \sigma^x\sigma^y)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y\sigma^z
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \sigma^y,\ \sigma^z \text{ の定義}) \\
+&= \begin{pmatrix}0&(-i)\cdot(-1)\\i&0\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}0&i\\i&0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } (-i)\cdot(-1)=i) \\
+&= \begin{pmatrix}-0&i\\i&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } 0=-0\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= \begin{pmatrix}-0&-(-i)\\-(-i)&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } i=-(-i)\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= -\begin{pmatrix}0&-i\\-i&0\end{pmatrix}
+&&(\because \blkref{def_matrix_negation}) \\
+&= -\,\sigma^z\sigma^y
+&&(\because \text{上で計算した}\ \sigma^z\sigma^y)
 \end{aligned}`,
       ),
       paragraph([
@@ -178,8 +214,14 @@ i\cdot(-i)
         math(String.raw`I`),
         " は ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " のすべての元と可換である（",
-        math(String.raw`IA = AI = A`),
+        " のすべての元 ",
+        math(String.raw`A`),
+        " と可換である（",
+        ref("identity_matrix_is_left_unit_of_mat_mult"),
+        " と ",
+        ref("identity_matrix_is_right_unit_of_mat_mult"),
+        " より ",
+        math(String.raw`IA = A = AI`),
         "）。",
       ]),
     ],
@@ -189,6 +231,10 @@ i\cdot(-i)
         "原文（Typst）に対応ブロックは無い。原文の [Z_μ,Z_ν]_+ の証明は σ^x σ^z = -σ^z σ^x を" +
           "無根拠に使っており、[Z_μ,Y_ν]_+ / [Y_μ,Y_ν]_+ ではさらに σ^y σ^x, σ^y σ^z の" +
           "反可換性と σ^y σ^y = I が要る。参照先を作るため、単一サイトの積公式を独立の主張として切り出した。",
+        "2026-11-01: 根拠を名前だけで書いていた段（「I の定義」「行列のスカラー倍の定義と ℂ の符号の計算」）を、def_kronecker_delta・def_identity_matrix と、" +
+          "新しく足した def_matrix_negation へのラベル参照にした。反可換性の 3 式は、右辺の積を先に計算し、主張の左辺から始まる鎖にした" +
+          "（以前は σ^x σ^z = -σ^z σ^x のように主張と逆向きの式を示していた）。符号の段は 0 = -0 と 1 = -(-1)（または i = -(-i)）の 2 段に割り、" +
+          "行列の積の段と成分の積の段（(-1)·(-1) = 1 など）を分けた。右辺の積の計算は冒頭の準備へ移した。",
       ],
     },
   },

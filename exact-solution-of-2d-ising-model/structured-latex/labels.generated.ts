@@ -152,6 +152,7 @@ export const ALL_LABELS = [
   "def_kronecker_delta",
   "def_lattice_size",
   "def_matrix_difference",
+  "def_matrix_negation",
   "def_matrix_norm",
   "def_matrix_scalar_multiple",
   "def_matrix_sum",

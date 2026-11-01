@@ -247,6 +247,37 @@ T_B(I)
     },
   },
   {
+    id: "finite_matrix_definition_negation",
+    kind: "definition",
+    title: { text: "行列の符号反転" },
+    labels: ["def_matrix_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " について、",
+        math(String.raw`-A \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(-A)_{ik} := -A_{ik}
+\qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`-A_{ik} \in \mathbb{C}`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " による。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 本文の証明が行列の符号反転 -A を定義のブロックを置かずに使っていた（pauli_matrix_products の反可換性の 3 式など）。pauli_matrix_products が引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "finite_matrix_claim_difference_is_zero_iff_equal",
     kind: "claim",
     title: { text: "行列の差が零行列であることと等しいことの同値" },

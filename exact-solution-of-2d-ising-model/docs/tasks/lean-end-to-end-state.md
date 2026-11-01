@@ -493,14 +493,24 @@
     行列同士の積の 4 主張の具体版 `ClaimIdentityAndScalarMultipleInMatrixProduct.lean`、必要十分版 `NecSuf/MatrixProductIdentityAndScalar.lean`（右の因子のスカラー倍だけ可換則が効き、外せないことを `mul_comm_of_mul_smul_matrix` で確かめた）と導出を置いた。
     レビューの必須の指摘（必要十分版で右の単位元に可換則が効かないのに、人手は交換律の段を踏んでいた）を受け、人手に `complex_times_zero_is_zero`（`z·0_C = 0_C`）を足して `identity_matrix_is_right_unit_of_mat_mult` の 2 段を 1 段にした。SageMath は `139_scalar_identity_commutes/check_02_steps.sage`・`complex_times_zero_is_zero/` を足し、右の単位元の鎖の検算を直した。
 
+  - ゴールラインの確認の三十三個目（済み、2026-11-01）: 「名前だけの根拠をラベル参照に替える」のうち `006_Z_Y_anticommutation.ts` の `pauli_matrix_products` を直した（台帳の順では次は `003_exp_linear_map.ts` だったが、同じ項目の 1 ファイルを先に済ませた）。
+    本文に行列の符号反転を定める定義が無かったので、数学的道具立て（`000_calculation_formulae_45_46.ts`）に `def_matrix_negation`（`(-A)_{ik} := -A_{ik}`、右辺は `multiply_by_minus_one`）を足した。
+    証明の「I の定義」「行列のスカラー倍の定義と ℂ の符号の計算」を `def_kronecker_delta`・`def_identity_matrix`・`def_matrix_negation` へのラベル参照にし、反可換性の 3 式を主張の左辺から始まる鎖にした（以前は `σ^xσ^z = -σ^zσ^x` のように主張と逆向きの式を示していた）。
+    右辺の積 3 つは冒頭の準備へ移し、行列の積の段と成分の積の段（`(-1)·(-1) = 1` など）、`0 = -0` と `1 = -(-1)` の段を分けた。
+    Lean は `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` の 6 定理（`pauliX_mul_pauliX` など。型は不変）を `fin_cases`・`simp` の一括処理から人手の各段と 1 対 1 の `calc` にし、
+    準備の `neg_I_mul_I`・`I_mul_neg_I`・`pauliX_mul_pauliZ_entries`・`pauliX_mul_pauliY_entries`・`pauliZ_mul_pauliY_entries` と共通の段 `twoByTwo_one_eq_kroneckerDelta`・`twoByTwo_kroneckerDelta_eq_identity` を置いた。
+    `def_matrix_negation` の成分の接点 `matrix_neg_apply` は `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` に置いた。必要十分版は置かない（2×2 の成分計算だけで、抽象化して見えるものが無い）。
+    SageMath `sagemath/check/160_pauli_matrix_products/check_02_stepwise_chains.sage`（`QQ[i]` の厳密計算、各鎖の全行）を足した。二回のレビューの指摘（必須 4 件: `def_matrix_negation` の参照先、`σ^a` の帰属、成分の積を行列の積の段へ束ねた 3 行、`ℝ` の符号の計算。任意 4 件）を直した。
+    `check-no-sorry.sh` が、三十二個目で足した `'` を含む 4 つの名前（`NecSuf.smul_mul_matrix_apply'` など）を引用符なしで置いていたため、`lake env lean` が落ちて終了コード 1 になっていた。`"…"` で囲んで直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
+- 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
-  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目で済んだ）。次は `003_exp_linear_map.ts` の「行列の差は成分ごと」5 か所。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。次は `003_exp_linear_map.ts` の「行列の差は成分ごと」5 か所。
   `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。

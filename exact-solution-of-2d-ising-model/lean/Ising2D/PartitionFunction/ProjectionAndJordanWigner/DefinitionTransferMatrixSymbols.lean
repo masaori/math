@@ -6,6 +6,12 @@
 （Pauli 行列そのものの成分表示は
 `parts/004_転送行列/014_claim_Z_YはMat2C^Mを環として生成する.typ` の証明冒頭にある）
 
+Pauli 行列の積の 6 式（`pauliX_mul_pauliX`・`pauliY_mul_pauliY`・`pauliZ_mul_pauliZ`・`pauliZ_mul_pauliX`・
+`pauliY_mul_pauliX`・`pauliY_mul_pauliZ_anticomm`）は、人手 `pauli_matrix_products`
+（`structured-latex/content/006_Z_Y_anticommutation.ts`）の証明の鎖と 1 段ずつ対応する。準備の鎖は
+`neg_I_mul_I`・`I_mul_neg_I`・`pauliX_mul_pauliZ_entries`・`pauliX_mul_pauliY_entries`・`pauliZ_mul_pauliY_entries`、
+`σ^xσ^x = I`・`σ^yσ^y = I`・`σ^zσ^z = I` の 3 つの鎖に共通の最後の 2 段は `twoByTwo_one_eq_kroneckerDelta`・`twoByTwo_kroneckerDelta_eq_identity` である。
+
 本ファイルでは、原文の記号のうち
 
 * `σ^x_k, σ^y_k, σ^z_k`（第 `k` 因子だけが Pauli 行列で残りが単位行列のテンソル積）
@@ -40,6 +46,7 @@ Lean では `Z 0 = sigmaZ 0` にあたり、`xString` の値が `1` になるこ
 `epsilon_eq_i_pow_smul_zyPrefixProduct` で形式化する。
 -/
 import Ising2D.Representation
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 
 namespace Ising2D
 
@@ -58,44 +65,189 @@ def pauliZ : Matrix (Fin 2) (Fin 2) ℂ := !![1, 0; 0, -1]
 
 section PauliRelations
 
-/-- `σ^x σ^x = I`（原文 Step 1 の成分計算）。 -/
+/-! 以下は人手 `pauli_matrix_products`（`structured-latex/content/006_Z_Y_anticommutation.ts`）の証明を 1 段ずつ辿る。
+`calc` の各段の根拠は人手の行末の根拠と同じである。行列の積の段（`mat_mult`）だけは成分の計算を `simp` に任せる。 -/
+
+/-- 人手の準備の鎖 `(-i)·i = -(i·i) = -(-1) = 1`。 -/
+theorem neg_I_mul_I : (-Complex.I) * Complex.I = 1 := by
+  calc
+    -- ℂ の乗法と符号の計算
+    (-Complex.I) * Complex.I = -(Complex.I * Complex.I) := neg_mul _ _
+    -- `i·i = -1`
+    _ = -(-1) := by rw [Complex.I_mul_I]
+    -- ℂ の符号の計算
+    _ = 1 := neg_neg 1
+
+/-- 人手の準備の鎖 `i·(-i) = (-i)·i = 1`。 -/
+theorem I_mul_neg_I : Complex.I * (-Complex.I) = 1 := by
+  calc
+    -- ℂ の乗法の可換律
+    Complex.I * (-Complex.I) = (-Complex.I) * Complex.I := mul_comm _ _
+    -- 直前の鎖
+    _ = 1 := neg_I_mul_I
+
+/-- 人手の `σ^xσ^x = I`・`σ^yσ^y = I`・`σ^zσ^z = I` の 3 つの鎖に共通の段 `(1 0; 0 1) = (δ_{11} δ_{12}; δ_{21} δ_{22})`（`def_kronecker_delta`）。 -/
+theorem twoByTwo_one_eq_kroneckerDelta :
+    !![(1 : ℂ), 0; 0, 1] =
+      !![kroneckerDelta (0 : Fin 2) 0, kroneckerDelta (0 : Fin 2) 1;
+        kroneckerDelta (1 : Fin 2) 0, kroneckerDelta (1 : Fin 2) 1] := by
+  rw [kroneckerDelta_self, kroneckerDelta_self, kroneckerDelta_of_ne (by decide),
+    kroneckerDelta_of_ne (by decide)]
+
+/-- 人手の `σ^xσ^x = I`・`σ^yσ^y = I`・`σ^zσ^z = I` の 3 つの鎖に共通の段 `(δ_{11} δ_{12}; δ_{21} δ_{22}) = I`（`def_identity_matrix`）。 -/
+theorem twoByTwo_kroneckerDelta_eq_identity :
+    !![kroneckerDelta (0 : Fin 2) 0, kroneckerDelta (0 : Fin 2) 1;
+        kroneckerDelta (1 : Fin 2) 0, kroneckerDelta (1 : Fin 2) 1] =
+      (1 : Matrix (Fin 2) (Fin 2) ℂ) := by
+  ext i j
+  rw [identity_matrix_apply]
+  fin_cases i <;> fin_cases j <;> rfl
+
+/-- `σ^x σ^x = I`（人手 `pauli_matrix_products`）。 -/
 @[simp]
 theorem pauliX_mul_pauliX : pauliX * pauliX = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- σ^x の定義
+    pauliX * pauliX = !![0, 1; 1, 0] * !![0, 1; 1, 0] := rfl
+    -- `mat_mult`
+    _ = !![1, 0; 0, 1] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- `def_kronecker_delta`
+    _ = _ := twoByTwo_one_eq_kroneckerDelta
+    -- `def_identity_matrix`
+    _ = 1 := twoByTwo_kroneckerDelta_eq_identity
 
-/-- `σ^y σ^y = I`。 -/
+/-- `σ^y σ^y = I`（人手 `pauli_matrix_products`）。 -/
 @[simp]
 theorem pauliY_mul_pauliY : pauliY * pauliY = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliY, Matrix.mul_apply, Fin.sum_univ_two, Complex.I_mul_I]
+  calc
+    -- σ^y の定義
+    pauliY * pauliY = !![0, -Complex.I; Complex.I, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- `mat_mult`
+    _ = !![(-Complex.I) * Complex.I, 0; 0, Complex.I * (-Complex.I)] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- 上の準備
+    _ = !![1, 0; 0, 1] := by rw [neg_I_mul_I, I_mul_neg_I]
+    -- `def_kronecker_delta`
+    _ = _ := twoByTwo_one_eq_kroneckerDelta
+    -- `def_identity_matrix`
+    _ = 1 := twoByTwo_kroneckerDelta_eq_identity
 
-/-- `σ^z σ^z = I`。 -/
+/-- `σ^z σ^z = I`（人手 `pauli_matrix_products`）。 -/
 @[simp]
 theorem pauliZ_mul_pauliZ : pauliZ * pauliZ = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- σ^z の定義
+    pauliZ * pauliZ = !![1, 0; 0, -1] * !![1, 0; 0, -1] := rfl
+    -- `mat_mult`
+    _ = !![1, 0; 0, (-1) * (-1)] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- ℂ で `(-1)·(-1) = 1`
+    _ = !![1, 0; 0, 1] := by rw [mul_neg_one, neg_neg]
+    -- `def_kronecker_delta`
+    _ = _ := twoByTwo_one_eq_kroneckerDelta
+    -- `def_identity_matrix`
+    _ = 1 := twoByTwo_kroneckerDelta_eq_identity
 
-/-- `σ^z` と `σ^x` は反可換。 -/
+/-- 人手の反可換性の準備 `σ^x σ^z = (0 -1; 1 0)`。 -/
+theorem pauliX_mul_pauliZ_entries : pauliX * pauliZ = !![0, -1; 1, 0] := by
+  calc
+    -- σ^x, σ^z の定義
+    pauliX * pauliZ = !![0, 1; 1, 0] * !![1, 0; 0, -1] := rfl
+    -- `mat_mult`
+    _ = !![0, -1; 1, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+
+/-- 人手の反可換性の準備 `σ^x σ^y = (i 0; 0 -i)`。 -/
+theorem pauliX_mul_pauliY_entries : pauliX * pauliY = !![Complex.I, 0; 0, -Complex.I] := by
+  calc
+    -- σ^x, σ^y の定義
+    pauliX * pauliY = !![0, 1; 1, 0] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- `mat_mult`
+    _ = !![Complex.I, 0; 0, -Complex.I] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+
+/-- 人手の反可換性の準備 `σ^z σ^y = (0 -i; -i 0)`。 -/
+theorem pauliZ_mul_pauliY_entries : pauliZ * pauliY = !![0, -Complex.I; -Complex.I, 0] := by
+  calc
+    -- σ^z, σ^y の定義
+    pauliZ * pauliY = !![1, 0; 0, -1] * !![0, -Complex.I; Complex.I, 0] := rfl
+    -- `mat_mult`
+    _ = !![0, -Complex.I; (-1) * Complex.I, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- `multiply_by_minus_one`（`-z := (-1)·z`）
+    _ = !![0, -Complex.I; -Complex.I, 0] := by rw [neg_one_mul]
+
+/-- `σ^z σ^x = -σ^x σ^z`（人手 `pauli_matrix_products`）。 -/
 theorem pauliZ_mul_pauliX : pauliZ * pauliX = -(pauliX * pauliZ) := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- σ^z, σ^x の定義
+    pauliZ * pauliX = !![1, 0; 0, -1] * !![0, 1; 1, 0] := rfl
+    -- `mat_mult`
+    _ = !![0, 1; -1, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- ℂ で `0 = -0`（`-z` は `multiply_by_minus_one` の記号）
+    _ = !![-0, 1; -1, -0] := by rw [neg_zero]
+    -- ℂ で `1 = -(-1)`
+    _ = !![-0, -(-1); -1, -0] := by rw [neg_neg]
+    -- `def_matrix_negation`
+    _ = -!![0, -1; 1, 0] := by
+      ext i j
+      rw [matrix_neg_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- 上で計算した σ^x σ^z
+    _ = -(pauliX * pauliZ) := by rw [pauliX_mul_pauliZ_entries]
 
-/-- `σ^y` と `σ^x` は反可換。 -/
+/-- `σ^y σ^x = -σ^x σ^y`（人手 `pauli_matrix_products`）。 -/
 theorem pauliY_mul_pauliX : pauliY * pauliX = -(pauliX * pauliY) := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- σ^y, σ^x の定義
+    pauliY * pauliX = !![0, -Complex.I; Complex.I, 0] * !![0, 1; 1, 0] := rfl
+    -- `mat_mult`
+    _ = !![-Complex.I, 0; 0, Complex.I] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- ℂ で `0 = -0`
+    _ = !![-Complex.I, -0; -0, Complex.I] := by rw [neg_zero]
+    -- ℂ で `i = -(-i)`
+    _ = !![-Complex.I, -0; -0, -(-Complex.I)] := by rw [neg_neg]
+    -- `def_matrix_negation`
+    _ = -!![Complex.I, 0; 0, -Complex.I] := by
+      ext i j
+      rw [matrix_neg_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- 上で計算した σ^x σ^y
+    _ = -(pauliX * pauliY) := by rw [pauliX_mul_pauliY_entries]
 
-/-- `σ^y` と `σ^z` は反可換。 -/
+/-- `σ^y σ^z = -σ^z σ^y`（人手 `pauli_matrix_products`）。 -/
 theorem pauliY_mul_pauliZ_anticomm : pauliY * pauliZ = -(pauliZ * pauliY) := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- σ^y, σ^z の定義
+    pauliY * pauliZ = !![0, -Complex.I; Complex.I, 0] * !![1, 0; 0, -1] := rfl
+    -- `mat_mult`
+    _ = !![0, (-Complex.I) * (-1); Complex.I, 0] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [Matrix.mul_apply, Fin.sum_univ_two]
+    -- ℂ で `(-i)·(-1) = i`
+    _ = !![0, Complex.I; Complex.I, 0] := by rw [mul_neg_one, neg_neg]
+    -- ℂ で `0 = -0`
+    _ = !![-0, Complex.I; Complex.I, -0] := by rw [neg_zero]
+    -- ℂ で `i = -(-i)`
+    _ = !![-0, -(-Complex.I); -(-Complex.I), -0] := by rw [neg_neg]
+    -- `def_matrix_negation`
+    _ = -!![0, -Complex.I; -Complex.I, 0] := by
+      ext i j
+      rw [matrix_neg_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- 上で計算した σ^z σ^y
+    _ = -(pauliZ * pauliY) := by rw [pauliZ_mul_pauliY_entries]
 
 /-- 原文 Step 1 の `σ^y σ^z = √-1 σ^x`。 -/
 theorem pauliY_mul_pauliZ : pauliY * pauliZ = Complex.I • pauliX := by
