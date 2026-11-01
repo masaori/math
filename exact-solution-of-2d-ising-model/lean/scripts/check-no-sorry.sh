@@ -984,6 +984,30 @@ targets=(
   Ising2D.mulVec_rows_zero
   Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two
   Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf
+  Ising2D.kroneckerDelta_self
+  Ising2D.kroneckerDelta_of_ne
+  Ising2D.matrix_sub_eq_zero_iff
+  Ising2D.vec_sub_eq_zero_iff
+  Ising2D.identity_matrix_mulVec_apply
+  Ising2D.identity_matrix_mulVec
+  Ising2D.smul_mulVec_eq_apply
+  Ising2D.smul_mulVec_eq
+  Ising2D.sub_mulVec_eq_apply
+  Ising2D.sub_mulVec_eq
+  Ising2D.matrix_sub_eq_zero_iff_of_necSuf
+  Ising2D.vec_sub_eq_zero_iff_of_necSuf
+  Ising2D.identity_matrix_mulVec_of_necSuf
+  Ising2D.smul_mulVec_eq_of_necSuf
+  Ising2D.sub_mulVec_eq_of_necSuf
+  Ising2D.NecSuf.sub_eq_zero_iff_matrix
+  Ising2D.NecSuf.sub_eq_zero_iff_vec
+  Ising2D.NecSuf.one_mulVec_apply
+  Ising2D.NecSuf.smul_mulVec_apply
+  Ising2D.NecSuf.sub_mulVec_apply
+  Ising2D.NecSuf.one_mulVec_eq
+  Ising2D.NecSuf.smul_mulVec_eq'
+  Ising2D.NecSuf.sub_mulVec_eq'
+  Ising2D.NecSuf.mul_assoc_of_smul_mulVec
   Ising2D.eigenvalue_AMat_iff
   Ising2D.isEigenvector_smul_eigen_pos
   Ising2D.isEigenvector_smul_eigen_neg

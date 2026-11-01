@@ -21,11 +21,17 @@
 各箇条の［］内は、同じ段の必要十分版（`Ising2D.NecSuf.` を省く）である。
 
 * `eigenvector_of_A_theta_tilde` Step 1: 準備の因数分解の恒等式 `factor_identity_thetaTilde`［`skew2_factor_identity`］と、
-  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`［`skew2_charPoly`・`skew2_charPoly_factor`］、零因子が無いことによる
+  `det(A(θ) - λI)` の鎖 `charPoly_factor_thetaTilde`（先頭の 7 行は `def_matrix_difference`・`def_matrix_scalar_multiple`・
+  `def_identity_matrix`・`def_kronecker_delta`（`kroneckerDelta_self`・`kroneckerDelta_of_ne`）の成分と、`x·1 = x`・`x·0 = 0`・`y - 0 = y`。成分の式は
+  `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の
+  `matrix_sub_apply`・`matrix_smul_apply`・`identity_matrix_apply`）［`skew2_charPoly`・`skew2_charPoly_factor`］、零因子が無いことによる
   `det_AMat_sub_smul_eq_zero_iff`［`skew2_det_eq_zero_iff`］、固有値が `λ_{±,μ}` に限るという statement の主張
   `eigenvalue_AMat_iff`（固有値の定義 `def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖。最後の段は
   `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` の
-  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`））［`skew2_eigenvalue_iff`］、
+  `exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（人手 `nonzero_kernel_iff_det_zero_two_by_two`）、2〜5 段は同じフォルダの
+  `ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の `vec_sub_eq_zero_iff`（`matrix_difference_zero_iff_equal`）・
+  `identity_matrix_mulVec`（`identity_matrix_is_left_unit_of_mat_mult`）・`smul_mulVec_eq`（`scalar_multiple_factors_out_of_left_factor`）・
+  `sub_mulVec_eq`（`matrix_difference_mul_vector`））［`skew2_eigenvalue_iff`］、
   `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR`［`skew2_eigenvalues_ne`］。
 * `eigenvector_of_A_theta_tilde` の statement の「`c v_{±,μ}`（`c ∈ ℂ^×`）は固有ベクトル」:
   `isEigenvector_smul_eigen_pos`・`isEigenvector_smul_eigen_neg`。
@@ -51,6 +57,7 @@
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimRelationGamma2Tilde
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNonzeroKernelIffDetZeroTwoByTwo
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
 
 namespace Ising2D
 
@@ -108,12 +115,39 @@ theorem charPoly_factor_thetaTilde (lam : ℂ) :
   have hab : a * b = -r ^ 2 := gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq K θ
   rw [lambdaPlusR_ofReal, lambdaMinusR_ofReal]
   calc (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)).det
-      = (!![g₁ - lam, a; -b, g₁ - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
-        -- `def_gamma1_gamma2_of_theta`
-        rw [AMat_eq]
-        congr 1
-        ext i j
-        fin_cases i <;> fin_cases j <;> simp <;> rfl
+      = (!![AMat K θ 0 0 - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 0,
+            AMat K θ 0 1 - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 0 1;
+            AMat K θ 1 0 - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 0,
+            AMat K θ 1 1 - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) 1 1] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        rw [Matrix.eta_fin_two (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ))]
+        simp only [matrix_sub_apply]                                      -- `def_matrix_difference`
+    _ = (!![AMat K θ 0 0 - lam * (1 : Matrix (Fin 2) (Fin 2) ℂ) 0 0,
+            AMat K θ 0 1 - lam * (1 : Matrix (Fin 2) (Fin 2) ℂ) 0 1;
+            AMat K θ 1 0 - lam * (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 0,
+            AMat K θ 1 1 - lam * (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 1] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        simp only [matrix_smul_apply]                                     -- `def_matrix_scalar_multiple`
+    _ = (!![AMat K θ 0 0 - lam * kroneckerDelta 0 0, AMat K θ 0 1 - lam * kroneckerDelta 0 1;
+            AMat K θ 1 0 - lam * kroneckerDelta 1 0, AMat K θ 1 1 - lam * kroneckerDelta 1 1] :
+            Matrix (Fin 2) (Fin 2) ℂ).det := by
+        simp only [identity_matrix_apply]; rfl                            -- `def_identity_matrix`
+    _ = (!![AMat K θ 0 0 - lam * 1, AMat K θ 0 1 - lam * 0;
+            AMat K θ 1 0 - lam * 0, AMat K θ 1 1 - lam * 1] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        have h00 : kroneckerDelta (0 : Fin 2) 0 = 1 := kroneckerDelta_self 0
+        have h11 : kroneckerDelta (1 : Fin 2) 1 = 1 := kroneckerDelta_self 1
+        have h01 : kroneckerDelta (0 : Fin 2) 1 = 0 := kroneckerDelta_of_ne (by decide)
+        have h10 : kroneckerDelta (1 : Fin 2) 0 = 0 := kroneckerDelta_of_ne (by decide)
+        rw [h00, h11, h01, h10]                                           -- `def_kronecker_delta`
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 - lam * 0;
+            AMat K θ 1 0 - lam * 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        simp only [mul_one]                                               -- `x·1 = x`
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1 - 0;
+            AMat K θ 1 0 - 0, AMat K θ 1 1 - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        simp only [mul_zero]                                              -- `x·0 = 0`
+    _ = (!![AMat K θ 0 0 - lam, AMat K θ 0 1; AMat K θ 1 0, AMat K θ 1 1 - lam] :
+            Matrix (Fin 2) (Fin 2) ℂ).det := by
+        simp only [sub_zero]                                              -- `y - 0 = y`
+    _ = (!![g₁ - lam, a; -b, g₁ - lam] : Matrix (Fin 2) (Fin 2) ℂ).det := by
+        rw [AMat_eq]; rfl                                                 -- `def_gamma1_gamma2_of_theta`
     _ = (g₁ - lam) * (g₁ - lam) - a * (-b) := Matrix.det_fin_two_of _ _ _ _  -- 行列式の定義
     _ = (g₁ - lam) * (g₁ - lam) + a * b := by ring                           -- ℂ の四則
     _ = g₁ ^ 2 - g₁ * lam - lam * g₁ + lam ^ 2 + a * b := by ring              -- 分配則
@@ -141,13 +175,13 @@ theorem eigenvalue_AMat_iff (lam : ℂ) :
   calc IsEigenvalue (AMat K θ) lam
       ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v = lam • v := Iff.rfl  -- `def_eigenvalue`
     _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - lam • v = 0 := by
-        simp only [sub_eq_zero]                                         -- 移項
+        simp only [vec_sub_eq_zero_iff]                                 -- `matrix_difference_zero_iff_equal`
     _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - lam • ((1 : Matrix (Fin 2) (Fin 2) ℂ) *ᵥ v) = 0 := by
-        simp only [Matrix.one_mulVec]                                   -- 単位行列の性質 `Iv = v`
+        simp only [identity_matrix_mulVec]                              -- `identity_matrix_is_left_unit_of_mat_mult`
     _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ AMat K θ *ᵥ v - (lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) *ᵥ v = 0 := by
-        simp only [Matrix.smul_mulVec]                                  -- スカラー倍の括り出し `λ(Iv) = (λI)v`
+        simp only [← smul_mulVec_eq]                                    -- `scalar_multiple_factors_out_of_left_factor`
     _ ↔ ∃ v : Fin 2 → ℂ, v ≠ 0 ∧ (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)) *ᵥ v = 0 := by
-        simp only [Matrix.sub_mulVec]                                   -- 行列とベクトルの積の分配則
+        simp only [sub_mulVec_eq]                                       -- `matrix_difference_mul_vector`
     _ ↔ (AMat K θ - lam • (1 : Matrix (Fin 2) (Fin 2) ℂ)).det = 0 :=
         exists_ne_zero_mulVec_eq_zero_iff_det_fin_two _                 -- `nonzero_kernel_iff_det_zero_two_by_two`
     _ ↔ lam = ((lambdaPlusR K θ : ℝ) : ℂ) ∨ lam = ((lambdaMinusR K θ : ℝ) : ℂ) :=

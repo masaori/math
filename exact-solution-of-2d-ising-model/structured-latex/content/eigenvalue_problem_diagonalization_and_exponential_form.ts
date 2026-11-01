@@ -1954,6 +1954,10 @@ s_1c_2
         " より ",
         math(String.raw`A(\theta) = \begin{pmatrix} g_1 & a \\ -b & g_1\end{pmatrix}`),
         " である。",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）とおき、",
         math(String.raw`\lambda \in \mathbb{C}`),
         " について",
       ]),
@@ -1963,13 +1967,13 @@ s_1c_2
 &\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v = \lambda v
    &&\bigl(\because \blkref{def_eigenvalue}\bigr) \\
 &\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - \lambda v = 0
-   &&\bigl(\because \text{移項}\bigr) \\
+   &&\bigl(\because \blkref{matrix_difference_zero_iff_equal}\text{ を } 2 \text{ 行 } 1 \text{ 列の行列 } A(\theta)v,\ \lambda v \text{ に適用}\bigr) \\
 &\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - \lambda (Iv) = 0
-   &&\bigl(\because \text{単位行列の性質 } Iv = v\bigr) \\
+   &&\bigl(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を } 2 \text{ 行 } 1 \text{ 列の行列 } v \text{ に適用}\bigr) \\
 &\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ A(\theta)v - (\lambda I)v = 0
-   &&\bigl(\because \text{スカラー倍の括り出し } \lambda(Iv) = (\lambda I)v\bigr) \\
+   &&\bigl(\because \blkref{scalar_multiple_factors_out_of_left_factor}\text{ を } a := \lambda,\ A := I,\ B := v \text{ に適用し、右辺から左辺へ}\bigr) \\
 &\iff \exists\, v \in \mathbb{C}^2,\ v \neq 0 \ \text{かつ}\ \left(A(\theta) - \lambda I\right)v = 0
-   &&\bigl(\because \text{行列とベクトルの積の分配則}\bigr) \\
+   &&\bigl(\because \blkref{matrix_difference_mul_vector}\bigr) \\
 &\iff \det\left(A(\theta) - \lambda I\right) = 0
    &&\bigl(\because \blkref{nonzero_kernel_iff_det_zero_two_by_two}\text{ を } B := A(\theta) - \lambda I \text{ に適用}\bigr)
 \end{aligned}`,
@@ -1994,6 +1998,41 @@ s_1c_2
       displayMath(
         String.raw`\begin{aligned}
 \det\left(A(\theta) - \lambda I\right)
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - (\lambda I)_{11} & A(\theta)_{12} - (\lambda I)_{12} \\
+     A(\theta)_{21} - (\lambda I)_{21} & A(\theta)_{22} - (\lambda I)_{22}
+   \end{pmatrix}
+   \quad (\because \blkref{def_matrix_difference}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda I_{11} & A(\theta)_{12} - \lambda I_{12} \\
+     A(\theta)_{21} - \lambda I_{21} & A(\theta)_{22} - \lambda I_{22}
+   \end{pmatrix}
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda \delta_{11} & A(\theta)_{12} - \lambda \delta_{12} \\
+     A(\theta)_{21} - \lambda \delta_{21} & A(\theta)_{22} - \lambda \delta_{22}
+   \end{pmatrix}
+   \quad (\because \blkref{def_identity_matrix}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda \cdot 1 & A(\theta)_{12} - \lambda \cdot 0 \\
+     A(\theta)_{21} - \lambda \cdot 0 & A(\theta)_{22} - \lambda \cdot 1
+   \end{pmatrix}
+   \quad (\because \blkref{def_kronecker_delta}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} - \lambda \cdot 0 \\
+     A(\theta)_{21} - \lambda \cdot 0 & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because x \cdot 1 = x\text{ を 2 成分へ同時適用}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} - 0 \\
+     A(\theta)_{21} - 0 & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because x \cdot 0 = 0\text{ を 2 成分へ同時適用}) \\
+&= \det\begin{pmatrix}
+     A(\theta)_{11} - \lambda & A(\theta)_{12} \\
+     A(\theta)_{21} & A(\theta)_{22} - \lambda
+   \end{pmatrix}
+   \quad (\because y - 0 = y\text{ を 2 成分へ同時適用}) \\
 &= \det\begin{pmatrix} g_1-\lambda & a \\ -b & g_1-\lambda\end{pmatrix}
    \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= (g_1-\lambda)(g_1-\lambda) - a\cdot(-b)

@@ -117,6 +117,7 @@ cd exact-solution-of-2d-ising-model/lean
   | `parts/000_計算公式/045_claim_共役写像は環準同型.typ` | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` |
   | `parts/000_計算公式/046_claim_交換子と反交換子の関係.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimCommutatorViaAnticommutators.lean` |
   | `<def_eigenvector>`・`<def_eigenvalue>`・`<def_det_two_by_two>`・`<nonzero_kernel_iff_det_zero_two_by_two>`（Typst の原本なし。2026-11-01 に本文へ足した） | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean` |
+  | `<def_matrix_difference>`・`<def_zero_matrix>`・`<matrix_difference_zero_iff_equal>`・`<matrix_difference_mul_vector>`（Typst の原本なし。2026-11-01 に本文へ足した）と、`002_linear_space_general.ts` の `<def_kronecker_delta>`・`<def_identity_matrix>`・`<def_matrix_scalar_multiple>`・`<identity_matrix_is_left_unit_of_mat_mult>`・`<scalar_multiple_factors_out_of_left_factor>` の右の因子が数ベクトルの場合 | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean`（必要十分版からの導出は同じフォルダの `ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`） |
   | `parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ` | `Ising2D/MathematicalTools/KroneckerProductAndMultiFactorBasis/TheoremTensorBasis.lean` |
   | `parts/002_線型空間の一般論/001_lemma_スカラー倍の恒等行列は全行列と可換.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaScalarIdentityCommutes.lean` |
   | `parts/002_線型空間の一般論/003_lemma_全行列と可換な行列はスカラー.typ` | `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/LemmaCentralizerIsScalar.lean` |
@@ -213,6 +214,10 @@ cd exact-solution-of-2d-ising-model/lean
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
+| `<matrix_difference_zero_iff_equal>` | `Ising2D.matrix_sub_eq_zero_iff` / `vec_sub_eq_zero_iff`（`Mat(m,p,ℂ)` と `ℂ^m`。必要十分版からの導出は `Ising2D.matrix_sub_eq_zero_iff_of_necSuf` / `vec_sub_eq_zero_iff_of_necSuf`） | `Ising2D.NecSuf.sub_eq_zero_iff_matrix` / `sub_eq_zero_iff_vec`（係数は加法群。`NecSuf/MatrixVectorIdentityScalarDifference.lean`） |
+| `<identity_matrix_is_left_unit_of_mat_mult>`（右の因子が数ベクトルの場合） | `Ising2D.identity_matrix_mulVec`（必要十分版からの導出は `Ising2D.identity_matrix_mulVec_of_necSuf`） | `Ising2D.NecSuf.one_mulVec_eq`（係数は `NonAssocSemiring`、添字は等号を判定できる任意の有限型） |
+| `<scalar_multiple_factors_out_of_left_factor>`（右の因子が数ベクトルの場合） | `Ising2D.smul_mulVec_eq`（必要十分版からの導出は `Ising2D.smul_mulVec_eq_of_necSuf`） | `Ising2D.NecSuf.smul_mulVec_eq'`（係数は `NonUnitalSemiring`。乗法の可換則は効かず、結合則は外せない `Ising2D.NecSuf.mul_assoc_of_smul_mulVec`） |
+| `<matrix_difference_mul_vector>` | `Ising2D.sub_mulVec_eq`（必要十分版からの導出は `Ising2D.sub_mulVec_eq_of_necSuf`） | `Ising2D.NecSuf.sub_mulVec_eq'`（係数は `NonUnitalNonAssocRing`） |
 | `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.NecSuf.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数。`NecSuf/ScalarCentral.lean`） |
 | `<centralizer_is_scalar>` | `Ising2D.centralizer_is_scalar`（`Mat(2,ℂ)^{⊗M}`） | `Ising2D.NecSuf.centralizer_is_scalar_semiring`（係数は任意の半環） |
 | `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.NecSuf.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい。`NecSuf/MatrixUnits.lean`） |

@@ -21,7 +21,8 @@
   零因子が無いことによる `det_AMat_sub_smul_eq_zero_iff` ↔ `skew2_det_eq_zero_iff`、
   固有値の定義から `λ = g ± s` までの同値の鎖 `eigenvalue_AMat_iff` ↔ `skew2_eigenvalue_iff`
   （鎖のうち「0 でないベクトルを 0 へ送る ⟺ 行列式 0」の段は `NecSuf/TwoByTwoKernelAndDeterminant.lean` の
-  `exists_ne_zero_mulVec_eq_zero_iff_det`）、末尾の `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR` ↔ `skew2_eigenvalues_ne`。
+  `exists_ne_zero_mulVec_eq_zero_iff_det`、2〜5 段は `NecSuf/MatrixVectorIdentityScalarDifference.lean` の
+  `sub_eq_zero_iff_vec`・`one_mulVec_eq`・`smul_mulVec_eq'`・`sub_mulVec_eq'`）、末尾の `λ_+ ≠ λ_-` の `lambdaPlusR_ne_lambdaMinusR` ↔ `skew2_eigenvalues_ne`。
 * `eigenvector_of_A_theta_tilde` Step 2: 成分ごとの鎖 `AMat_mulVec_eigen_pos`・`AMat_mulVec_eigen_neg` ↔
   `skew2_mulVec_pos`・`skew2_mulVec_neg`、`c` 倍の鎖 `AMat_mulVec_smul_eigen_pos`・`AMat_mulVec_smul_eigen_neg` ↔
   `mulVec_smul_of_mulVec_eq`。
@@ -70,6 +71,7 @@ import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import Mathlib.Tactic.LinearCombination
 import Mathlib.Tactic.FinCases
 import Ising2D.NecSuf.TwoByTwoKernelAndDeterminant
+import Ising2D.NecSuf.MatrixVectorIdentityScalarDifference
 
 namespace Ising2D.NecSuf
 
@@ -93,11 +95,45 @@ theorem skew2_charPoly (g a b lam : R) :
     (!![g, a; -b, g] - lam • (1 : Matrix (Fin 2) (Fin 2) R)).det
       = lam ^ 2 - 2 * g * lam + (g ^ 2 + a * b) :=
   calc (!![g, a; -b, g] - lam • (1 : Matrix (Fin 2) (Fin 2) R)).det
-      = (!![g - lam, a; -b, g - lam] : Matrix (Fin 2) (Fin 2) R).det := by
-        -- 行列の差とスカラー倍の成分
-        congr 1
-        ext i j
-        fin_cases i <;> fin_cases j <;> simp
+      = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - (lam • (1 : Matrix (Fin 2) (Fin 2) R)) 0 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - (lam • (1 : Matrix (Fin 2) (Fin 2) R)) 0 1;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - (lam • (1 : Matrix (Fin 2) (Fin 2) R)) 1 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - (lam • (1 : Matrix (Fin 2) (Fin 2) R)) 1 1] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        rw [Matrix.eta_fin_two (!![g, a; -b, g] - lam • (1 : Matrix (Fin 2) (Fin 2) R))]
+        simp only [Matrix.sub_apply]                                       -- 差の定義
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam * (1 : Matrix (Fin 2) (Fin 2) R) 0 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - lam * (1 : Matrix (Fin 2) (Fin 2) R) 0 1;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - lam * (1 : Matrix (Fin 2) (Fin 2) R) 1 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam * (1 : Matrix (Fin 2) (Fin 2) R) 1 1] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        simp only [Matrix.smul_apply, smul_eq_mul]                         -- スカラー倍の定義
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam * (if (0 : Fin 2) = 0 then 1 else 0),
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - lam * (if (0 : Fin 2) = 1 then 1 else 0);
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - lam * (if (1 : Fin 2) = 0 then 1 else 0),
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam * (if (1 : Fin 2) = 1 then 1 else 0)] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        simp only [Matrix.one_apply]                                       -- 単位行列の成分 `δ_{ij}`
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam * 1,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - lam * 0;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - lam * 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam * 1] : Matrix (Fin 2) (Fin 2) R).det := by
+        rw [if_pos rfl, if_pos rfl, if_neg (by decide), if_neg (by decide)]  -- `δ` の値
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - lam * 0;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - lam * 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] : Matrix (Fin 2) (Fin 2) R).det := by
+        simp only [mul_one]                                                -- `x·1 = x`
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1 - 0;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0 - 0,
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] : Matrix (Fin 2) (Fin 2) R).det := by
+        simp only [mul_zero]                                               -- `x·0 = 0`
+    _ = (!![(!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 0 - lam, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 0 1;
+            (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 0, (!![g, a; -b, g] : Matrix (Fin 2) (Fin 2) R) 1 1 - lam] :
+            Matrix (Fin 2) (Fin 2) R).det := by
+        simp only [sub_zero]                                               -- `y - 0 = y`
+    _ = (!![g - lam, a; -b, g - lam] : Matrix (Fin 2) (Fin 2) R).det := rfl  -- `!![g, a; -b, g]` の成分
     _ = (g - lam) * (g - lam) - a * (-b) := Matrix.det_fin_two_of _ _ _ _  -- 行列式の定義
     _ = (g - lam) * (g - lam) + a * b := by ring                           -- 環の四則
     _ = g ^ 2 - g * lam - lam * g + lam ^ 2 + a * b := by ring              -- 分配則
@@ -134,13 +170,13 @@ theorem skew2_eigenvalue_iff [NoZeroDivisors R] [Nontrivial R] (g a b s lam : R)
     (∃ v : Fin 2 → R, v ≠ 0 ∧ !![g, a; -b, g] *ᵥ v = lam • v) ↔ lam = g + s ∨ lam = g - s :=
   calc (∃ v : Fin 2 → R, v ≠ 0 ∧ !![g, a; -b, g] *ᵥ v = lam • v)
       ↔ ∃ v : Fin 2 → R, v ≠ 0 ∧ !![g, a; -b, g] *ᵥ v - lam • v = 0 := by
-        simp only [sub_eq_zero]                                         -- 移項
+        simp only [sub_eq_zero_iff_vec]                                 -- `A - B = O ⟺ A = B`（数ベクトル）
     _ ↔ ∃ v : Fin 2 → R, v ≠ 0 ∧ !![g, a; -b, g] *ᵥ v - lam • ((1 : Matrix (Fin 2) (Fin 2) R) *ᵥ v) = 0 := by
-        simp only [Matrix.one_mulVec]                                   -- 単位行列の性質 `Iv = v`
+        simp only [one_mulVec_eq]                                       -- `Iv = v`
     _ ↔ ∃ v : Fin 2 → R, v ≠ 0 ∧ !![g, a; -b, g] *ᵥ v - (lam • (1 : Matrix (Fin 2) (Fin 2) R)) *ᵥ v = 0 := by
-        simp only [Matrix.smul_mulVec]                                  -- スカラー倍の括り出し `λ(Iv) = (λI)v`
+        simp only [← smul_mulVec_eq']                                   -- `λ(Iv) = (λI)v`
     _ ↔ ∃ v : Fin 2 → R, v ≠ 0 ∧ (!![g, a; -b, g] - lam • (1 : Matrix (Fin 2) (Fin 2) R)) *ᵥ v = 0 := by
-        simp only [Matrix.sub_mulVec]                                   -- 行列とベクトルの積の分配則
+        simp only [sub_mulVec_eq']                                      -- `Av - Bv = (A - B)v`
     _ ↔ (!![g, a; -b, g] - lam • (1 : Matrix (Fin 2) (Fin 2) R)).det = 0 :=
         exists_ne_zero_mulVec_eq_zero_iff_det _                         -- 0 でないベクトルを 0 へ送る ⟺ 行列式 0
     _ ↔ lam = g + s ∨ lam = g - s :=

@@ -465,9 +465,31 @@
     statement は「`c ∈ ℂ^×` について `v_{±,μ} := c(...)` は `λ_{±,μ}` に属する固有ベクトル」にし、レビューの指摘で Step 2 に欠けていた `cv ≠ 0` の段を足した（Lean の `isEigenvector_smul_eigen_pos/neg` の `smul_ne_zero` と同じ手順）。
     Lean の主張は変えていない（Step 3 はもとから形式化していなかった）。`ClaimEigenATildeDiag.lean` の冒頭と `docs/ch015-formalization.md` の「形式化できなかった主張」の節を直した。
 
+  - ゴールラインの確認の三十個目（済み、2026-11-01）: 人手 `eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が「移項」「単位行列の性質 `Iv = v`」「スカラー倍の括り出し」「行列とベクトルの積の分配則」を
+    定義のブロック無しに根拠にしていたので、数学的道具立て（`000_calculation_formulae_45_46.ts`、棚卸しのまとまり「有限行列・Pauli行列・交換子」）に
+    定義 `def_matrix_difference`・`def_zero_matrix` と主張 `matrix_difference_zero_iff_equal`・`matrix_difference_mul_vector`（どれも成分ごとの鎖）を足した。
+    単位行列・スカラー倍は、同じ日に全証明の SageMath 検算の連続実行が `002_linear_space_general.ts` に足した `def_kronecker_delta`・`def_identity_matrix`・`def_matrix_scalar_multiple`・
+    `identity_matrix_is_left_unit_of_mat_mult`・`scalar_multiple_factors_out_of_left_factor` を使う（rebase で同じラベルが衝突したので、こちらで書いた同じ内容の定義と主張は取り下げた）。
+    Step 1 の 2〜5 段をこれらへのラベル参照にし、`I := I_{Mat(2,ℂ)}` を置いた。`det(A(θ) - λI)` の鎖の先頭の行（差・スカラー倍・単位行列の成分を同時に使っていた）を、
+    差・スカラー倍・単位行列・クロネッカーのデルタの 4 行、`x·1 = x`・`x·0 = 0`・`y - 0 = y` の 3 行、`def_gamma1_gamma2_of_theta` の行に割った。`def_eigenvector` の零ベクトルとスカラー倍をラベル参照にした。
+    Lean は具体版 `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean`（成分の式との接点 `kroneckerDelta`・`identity_matrix_apply`・`matrix_smul_apply`・`matrix_sub_apply`・`matrix_zero_apply` と、
+    人手の鎖どおりの `matrix_sub_eq_zero_iff`・`vec_sub_eq_zero_iff`・`sub_mulVec_eq`、右の因子が数ベクトルの場合の `identity_matrix_mulVec`・`smul_mulVec_eq`）、
+    必要十分版 `NecSuf/MatrixVectorIdentityScalarDifference.lean`（差が零 ⟺ 等しいは加法群、`Iv = v` は `1·x = x`・`0·x = 0`、`(λB)v = λ(Bv)` は左分配則と結合則で可換則は効かず結合則は外せない `mul_assoc_of_smul_mulVec`、`Av - Bv = (A - B)v` は右分配則）と導出 `...FromNecSuf.lean` を置いた。
+    `eigenvalue_AMat_iff`・`charPoly_factor_thetaTilde` と必要十分版 `skew2_eigenvalue_iff`・`skew2_charPoly` の該当段を、mathlib の `Matrix.one_mulVec`・`smul_mulVec`・`sub_mulVec` と `simp` の一括処理から、これらの定理と定義ごとの行へ替えた。主張の型は変えていない。
+    SageMath に `matrix_difference_zero_iff_equal`・`matrix_difference_mul_vector` の検算と、`det(A(θ) - λI)` の鎖の成分の行の検算 `eigenvector_of_A_theta_tilde_determinant_entries`（厳密計算のみ）を足した。
+    三回のレビューの指摘（必須 7 件: 差と零行列の束ね、一ステップ一定理の 2 か所、必要十分版の型クラスの理由、段の数え方、行列式の行の検算の欠如、rebase 後に単位行列の成分とデルタの値を Lean の具体版・必要十分版で 1 段にしていたこと 2 件。任意 8 件）を直した。
+    棚卸しの再生成 `npm run inventory:organization` は、SageMath 検算の連続実行が足した `transfer_matrix_claim_end_agrees_with_matrix_vector_product` が数学的道具立ての前提になる分類の検査で落ちる（この回の変更より前から）。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 本文に単位行列 `I`・行列の差・行列のスカラー倍と `Iv = v` を定義するブロックが無い（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が名前だけで根拠に挙げている）。数学的道具立てに足すかを判断する。
 - 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分は、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復をしている。`b` のまま `(-b)(∓r) + g_1 b = (g_1 ± r) b` と書けば `b = -ā` が要らない（必要十分版 `skew2_mulVec_pos` の知見）。本文を簡潔にするかを判断する（本文を触るので回の先頭で fetch する）。
+- 本文のほかの証明（`002_linear_space_general.ts`・`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`006_Z_Y_anticommutation.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
+  「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
+  行列の和を定義するブロックはまだ無いので、要るなら足す（1 ブロック 1 定義）。各ブロックの Lean の対応も確かめる。
+- 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
+  また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
+  行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。
+- 単位行列の記号が本文で `I`・`I_{\mathrm{Mat}(k,\mathbb{C})}`（`def_identity_matrix`）・`I_{(\mathrm{Mat}(2,\mathbb{C}))^{\otimes M}}`（9 か所）・`I_{(\mathbb{C}^2)^{\otimes M}}`（2 か所）と分かれている。`def_identity_matrix` は `I_{\mathrm{Mat}(k,\mathbb{C})}` しか覆わない。記号を揃えるか定義に挙げるかを判断する。
+- `def_eigenvector`（`000_calculation_formulae_45_46.ts`）が引く `def_matrix_scalar_multiple` は `002_linear_space_general.ts` にあり、生成物のファイルの並びでは後に来る（検査は落とさない）。出版物で定義より前に参照が出るかを確かめ、出るなら置き場を直す。

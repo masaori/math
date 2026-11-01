@@ -32,11 +32,12 @@
 | `Ising2D.lambdaPlusR` / `lambdaMinusR` | `λ_{±,μ} = γ_1(θ~_μ) ± |γ_2(θ~_μ)| ∈ ℝ` | `eigenvector_of_A_theta_tilde` |
 | `Ising2D.gamma2_mul_conj_eq_absGamma2_sq` / `gamma2_mul_gamma2_neg_eq_neg_absGamma2_sq` | `a ā = r^2`、`ab = -r^2`（根拠に引く形） | 同 Step 1・Step 2 の根拠 |
 | `Ising2D.factor_identity_thetaTilde` | 準備の因数分解の恒等式 | 同 Step 1 |
-| `Ising2D.charPoly_factor_thetaTilde` | `det(A(θ) - λI) = (λ-λ_+)(λ-λ_-)` | 同 Step 1 |
+| `Ising2D.charPoly_factor_thetaTilde` | `det(A(θ) - λI) = (λ-λ_+)(λ-λ_-)`（先頭の 7 行は差・スカラー倍・単位行列・クロネッカーのデルタの定義の成分 `matrix_sub_apply`・`matrix_smul_apply`・`identity_matrix_apply`・`kroneckerDelta_self`・`kroneckerDelta_of_ne` と、`x·1 = x`・`x·0 = 0`・`y - 0 = y`） | 同 Step 1 |
 | `Ising2D.det_AMat_sub_smul_eq_zero_iff` | `det(A(θ) - λI) = 0` となる `λ` は `λ_±` に限る | 同 Step 1 |
 | `Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two`（`MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimNonzeroKernelIffDetZeroTwoByTwo.lean`。同じファイルに `IsEigenvector`・`IsEigenvalue`・`det_two_by_two_def` と鎖の補題を置く） | 2×2 の複素行列 `B` について、`Bv = 0` となる `v ≠ 0` がある ⟺ `det B = 0`（成分計算） | `nonzero_kernel_iff_det_zero_two_by_two`（`def_eigenvector`・`def_eigenvalue`・`def_det_two_by_two`）。`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖の最後の段で引く |
 | `Ising2D.exists_ne_zero_mulVec_eq_zero_iff_det_fin_two_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
-| `Ising2D.eigenvalue_AMat_iff` | `IsEigenvalue (A(θ)) λ ⟺ λ = λ_±`（`def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖を経る） | 同 Step 1・statement |
+| `Ising2D.eigenvalue_AMat_iff` | `IsEigenvalue (A(θ)) λ ⟺ λ = λ_±`（`def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖を経る。2〜5 段目は `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean` の `Ising2D.vec_sub_eq_zero_iff`・`identity_matrix_mulVec`・`smul_mulVec_eq`・`sub_mulVec_eq`） | 同 Step 1・statement |
+| `Ising2D.vec_sub_eq_zero_iff` / `identity_matrix_mulVec` / `smul_mulVec_eq` / `sub_mulVec_eq`（`ClaimIdentityScalarMultipleAndDifferenceOnVectors.lean`。必要十分版からの導出は `ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`） | `u - w = 0 ⟺ u = w`、`Iv = v`、`(λB)v = λ(Bv)`、`Av - Bv = (A - B)v`（成分ごとの鎖） | `matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・`scalar_multiple_factors_out_of_left_factor`（右の因子が数ベクトルの場合）・`matrix_difference_mul_vector`。同 Step 1 の同値の鎖の 2〜5 段で引く |
 | `Ising2D.AMat_mulVec_eigen_pos` / `..._neg` | `v_± = (∓|γ_2|, γ_2(-θ~))` が固有ベクトル（成分ごとの鎖） | 同 Step 2 |
 | `Ising2D.isEigenvector_smul_eigen_pos` / `..._neg` | `c ≠ 0` なら `c v_±` は `λ_±` に属する固有ベクトル（`def_eigenvector`） | 同 statement |
 | `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg`（`ClaimEigenATildeDiag.lean`） | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
@@ -77,6 +78,7 @@
 | `NegConjPair.lean` | `NecSuf.mul_of_eq_neg_conj` / `ne_zero_of_eq_neg_conj` / `sq_absOf_eq_neg_mul` / `sq_I_mul_absOf_eq_mul` / `absOf_pos` | `w = -conj z` だけから出る 4 つの帰結 |
 | `TwoByTwoSkew.lean` | `NecSuf.skew2_factor_identity` / `skew2_charPoly` / `skew2_charPoly_factor` / `skew2_det_eq_zero_iff` / `skew2_eigenvalue_iff` / `skew2_eigenvalues_ne` / `skew2_mulVec_pos` / `skew2_mulVec_neg` / `mulVec_smul_of_mulVec_eq` / `skew2_mul_of_cols` / `det_of_cols` / `det_of_cols_ne_zero` / `eq_conj_of_mul_eq` | `!![g,a;-b,g]` の固有値・固有ベクトル・対角化（**任意の可換環**。固有値が `g ± s` に限る段と `det P ≠ 0` の段は零因子が無いこと、`λ_+ ≠ λ_-` と `det P ≠ 0` は `2s ≠ 0`）。具体版の Step と 1 つずつ対応する |
 | `TwoByTwoKernelAndDeterminant.lean` | `NecSuf.det_mul_vec_zero_of_mulVec` / `det_mul_vec_one_of_mulVec` / `det_eq_zero_of_mulVec_eq_zero` / `exists_ne_zero_mulVec_eq_zero_of_det_eq_zero` / `exists_ne_zero_mulVec_eq_zero_iff_det` | 2×2 行列が 0 でないベクトルを 0 へ送る ⟺ `det = 0`（「⇒」は**零因子の無い可換環**、「⇐」は 0 でない可換環） |
+| `MatrixVectorIdentityScalarDifference.lean` | `NecSuf.sub_eq_zero_iff_matrix` / `sub_eq_zero_iff_vec` / `one_mulVec_apply` / `smul_mulVec_apply` / `sub_mulVec_apply` / `one_mulVec_eq` / `smul_mulVec_eq'` / `sub_mulVec_eq'` / `mul_assoc_of_smul_mulVec` | `A - B = O ⟺ A = B` は**加法群**、`Iv = v` は `NonAssocSemiring`、`(λB)v = λ(Bv)` は左分配則と乗法の結合則（**可換則は効かない**）、`Av - Bv = (A - B)v` は右分配則。`skew2_eigenvalue_iff` の鎖の 2〜5 段で引く |
 | `GammaDetIdentity.lean` | `NecSuf.gamma_det_identity` | `det A = 1` の中身は**可換環の多項式恒等式** |
 | `ArcoshExp.lean` | `NecSuf.one_lt_of_sq_gt_one` / `sinh_arcosh_of_sq` / `exp_arcosh_of_sq` / `exp_neg_arcosh_of_sq` / `arcosh_pos_of_one_lt` | `g^2 = 1+r^2` から `e^{±arcosh g} = g ± r` |
 

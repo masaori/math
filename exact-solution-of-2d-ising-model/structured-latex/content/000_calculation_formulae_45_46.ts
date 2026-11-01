@@ -185,6 +185,180 @@ T_B(I)
     },
   },
   {
+    id: "finite_matrix_definition_difference",
+    kind: "definition",
+    title: { text: "行列の差" },
+    labels: ["def_matrix_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " について、差 ",
+        math(String.raw`A - B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`(A - B)_{ik} := A_{ik} - B_{ik}
+\qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
+      paragraph([
+        "で定める。右辺は ",
+        ref("definition_of_cc"),
+        " の複素数の差である。数ベクトルの差も ",
+        ref("mat_mult"),
+        " のとおり ",
+        math(String.raw`m`),
+        " 行 1 列の行列の差としてこの式で定まる。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 本文の多くの証明が「行列の差は成分ごと」を定義のブロックを置かずに根拠にしていた。eigenvector_of_A_theta_tilde Step 1 の同値の鎖を定義から引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_definition_zero_matrix",
+    kind: "definition",
+    title: { text: "零行列" },
+    labels: ["def_zero_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        " について、",
+        math(String.raw`O \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " を、成分ごとに",
+      ]),
+      displayMath(String.raw`O_{ik} := 0
+\qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
+      paragraph([
+        "で定め、零行列と呼ぶ。",
+        math(String.raw`p = 1`),
+        " のとき（数ベクトルのとき）は ",
+        math(String.raw`0`),
+        " と書いて零ベクトルと呼ぶ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 本文の証明が「零行列」「零ベクトル」を定義のブロックを置かずに使っていた。matrix_difference_zero_iff_equal と def_eigenvector が引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_difference_is_zero_iff_equal",
+    kind: "claim",
+    title: { text: "行列の差が零行列であることと等しいことの同値" },
+    labels: ["matrix_difference_zero_iff_equal"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`A - B = O \iff A = B`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`A - B`),
+        " は ",
+        ref("def_matrix_difference"),
+        "、",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "行列が等しいことは、同じ大きさのもとですべての成分が等しいことである。",
+        math(String.raw`i`),
+        " は ",
+        math(String.raw`\{1,\dots,m\}`),
+        "、",
+        math(String.raw`k`),
+        " は ",
+        math(String.raw`\{1,\dots,p\}`),
+        " を動く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&A - B = O \\
+&\iff \forall i, k,\ (A - B)_{ik} = O_{ik}
+   &&\bigl(\because \text{行列の等号は成分ごと}\bigr) \\
+&\iff \forall i, k,\ A_{ik} - B_{ik} = O_{ik}
+   &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
+&\iff \forall i, k,\ A_{ik} - B_{ik} = 0
+   &&\bigl(\because \blkref{def_zero_matrix}\bigr) \\
+&\iff \forall i, k,\ A_{ik} = B_{ik}
+   &&\bigl(\because \text{移項}\bigr) \\
+&\iff A = B
+   &&\bigl(\because \text{行列の等号は成分ごと}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde Step 1 の「Av = λv ⟺ Av − λv = 0」が「移項」とだけ書いて行列（数ベクトル）の差の定義を経ていなかったので、成分ごとの移項に帰着する主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "finite_matrix_claim_difference_distributes_over_vector_product",
+    kind: "claim",
+    title: { text: "行列の差と数ベクトルの積の分配則" },
+    labels: ["matrix_difference_mul_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`v \in \mathbb{C}^n`),
+        " について",
+      ]),
+      displayMath(String.raw`Av - Bv = (A - B) v`),
+      paragraph([
+        "が成り立つ。差は ",
+        ref("def_matrix_difference"),
+        "、行列と数ベクトルの積は ",
+        ref("mat_mult"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(Av - Bv)_i
+&= (Av)_i - (Bv)_i
+   &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
+&= \sum_{j=1}^{n} A_{ij}\,v_j - \sum_{j=1}^{n} B_{ij}\,v_j
+   &&\bigl(\because \blkref{mat_mult}\bigr) \\
+&= \sum_{j=1}^{n} \left(A_{ij}\,v_j - B_{ij}\,v_j\right)
+   &&\bigl(\because \text{有限和の差は項ごとの差の和}\bigr) \\
+&= \sum_{j=1}^{n} \left(A_{ij} - B_{ij}\right) v_j
+   &&\bigl(\because \text{分配則}\bigr) \\
+&= \sum_{j=1}^{n} (A - B)_{ij}\,v_j
+   &&\bigl(\because \blkref{def_matrix_difference}\bigr) \\
+&= ((A - B) v)_i
+   &&\bigl(\because \blkref{mat_mult}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって全ての成分が一致し、主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: eigenvector_of_A_theta_tilde Step 1 が「行列とベクトルの積の分配則」を証明なしに根拠にしていたので足した。",
+      ],
+    },
+  },
+  {
     id: "finite_matrix_definition_eigenvector",
     kind: "definition",
     title: { text: "固有ベクトル" },
@@ -212,13 +386,17 @@ T_B(I)
         math(String.raw`0`),
         " は ",
         math(String.raw`\mathbb{C}^n`),
-        " の零ベクトル、",
+        " の零ベクトル（",
+        ref("def_zero_matrix"),
+        "）、",
         math(String.raw`Av`),
         " は ",
         ref("mat_mult"),
         " の行列とベクトルの積、",
         math(String.raw`\lambda v`),
-        " は成分ごとのスカラー倍である。",
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍である。",
       ]),
     ],
     conversion: {
