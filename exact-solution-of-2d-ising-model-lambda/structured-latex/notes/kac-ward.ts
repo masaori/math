@@ -7,6 +7,35 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_direction_gate_crossing_turning_archived",
+    targets: ["def_direction_standard_representative"],
+    title: { text: "参照用: 方向番号の門の横断数による循環総回転数" },
+    body: [
+      paragraph(["この論法は閉歩道の循環総回転数が 4 の倍数であることの別証明だが、到達点への依存で使われないため本文から外した。方向番号の標準整数代表は対角ゲージの指数で使うので本文に残す。"]),
+      paragraph(["元の定義。閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " で ", math(String.raw`\vec e_{m+1}:=\vec e_1`), " と置く。方向番号の門 ", math(String.raw`3\mid0`), " の正横断数と負横断数を次で定める。方向番号は ", ref("def_oriented_edge_direction"), "、標準代表は ", ref("def_direction_standard_representative"), " による。"]),
+      displayMath(String.raw`g_+(\gamma):=\bigl|\{k\in\{1,\ldots,m\}\mid r_4(\operatorname{dir}(\vec e_k))=3,\ r_4(\operatorname{dir}(\vec e_{k+1}))=0\}\bigr|,`),
+      displayMath(String.raw`g_-(\gamma):=\bigl|\{k\in\{1,\ldots,m\}\mid r_4(\operatorname{dir}(\vec e_k))=0,\ r_4(\operatorname{dir}(\vec e_{k+1}))=3\}\bigr|.`),
+      paragraph(["元の主張。任意の閉じた非後退辺列について、整数の等式 ", math(String.raw`t_{\circ}(\gamma)=4(g_+(\gamma)-g_-(\gamma))`), " が成り立つ。循環総回転数は ", ref("def_cyclic_total_turning"), " による。"]),
+      paragraph(["元の証明。", math(String.raw`d_k:=r_4(\operatorname{dir}(\vec e_k))\in\{0,1,2,3\}`), " と置く。閉路性から ", math(String.raw`d_{m+1}=d_1`), " である。非後退接続では反転方向への差 2 は現れない（", ref("def_nonbacktracking_successors"), "）。一歩の回転数の三場合（", ref("def_step_turning"), "）を標準整数代表で読むと次を得る。"]),
+      displayMath(String.raw`\tau(\vec e_k,\vec e_{k+1})=\begin{cases}d_{k+1}-d_k+4,&(d_k,d_{k+1})=(3,0),\\d_{k+1}-d_k-4,&(d_k,d_{k+1})=(0,3),\\d_{k+1}-d_k,&\text{それ以外}.\end{cases}`),
+      paragraph(["第一の場合は ", math(String.raw`-3+4=1`), "、第二の場合は ", math(String.raw`3-4=-1`), " であり、それ以外の許される組では差は ", math(String.raw`0,1,-1`), " のいずれかである。有限和を取る。"]),
+      displayMath(String.raw`\begin{aligned}
+t_{\circ}(\gamma)
+&=\sum_{k=1}^{m}\tau(\vec e_k,\vec e_{k+1})
+&&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)\\
+&=\sum_{k=1}^{m}(d_{k+1}-d_k)+4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ \text{直前の場合分け}\bigr)\\
+&=d_{m+1}-d_1+4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ \mathbb Z\text{ の有限和の望遠和}\bigr)\\
+&=4g_+(\gamma)-4g_-(\gamma)
+&&\bigl(\because\ d_{m+1}=d_1\bigr)\\
+&=4(g_+(\gamma)-g_-(\gamma))
+&&\bigl(\because\ \mathbb Z\text{ の分配法則}\bigr).
+\end{aligned}`),
+      paragraph(["この論法は有限集合の個数と整数の有限和だけを使う。有限検算と Lean 二版は、それぞれ SageMath と Lean の保管庫へ移した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_contact_elimination_by_splitting_archived",
     targets: ["claim_crossing_free_contact_elimination_phase"],
     title: { text: "参照用: 接触点分割の旧帰納法" },
