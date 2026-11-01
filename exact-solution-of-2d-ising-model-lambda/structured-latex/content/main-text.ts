@@ -71357,8 +71357,8 @@ q_{\vec e,\vec f}
                     habitat: "N",
                     verification: ["sagemath/check/tagged-difference-two-step-orbit"],
                     lean: [
-                      "Ising2DLambda.KacWard.taggedActiveTwoStep_apply",
-                      "Ising2DLambda.KacWard.taggedActiveTwoStep_periodic",
+                      "Ising2DLambda.KacWard.taggedConcreteTwoStep_apply",
+                      "Ising2DLambda.KacWard.taggedConcreteTwoStep_periodic",
                       "Ising2DLambda.NecSuf.KacWard.activeTwoStep_apply",
                       "Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic",
                     ],
@@ -71444,7 +71444,12 @@ q_{\vec e,\vec f}
                     proof: [
                       paragraph([ref("claim_tagged_difference_active_mates"), " と ", ref("claim_perfect_matching_involution"), " により、活動点上の ", math(String.raw`m_D,m_{\mathcal D_0}`), " は不動点のない二つの対合である。", ref("claim_tagged_difference_two_step_orbit"), " の二歩はこの二対合の合成であり、", ref("claim_tagged_difference_orbit_separation"), " により二つの二歩軌道は交わらない。"]),
                       paragraph([ref("claim_matching_pair_permutation"), " により ", math(String.raw`\sigma`), " は置換である。", ref("claim_matching_pair_even_orbit"), " により軌道長は偶数である。", ref("claim_finite_permutation_orbit_enumeration"), " により最小正周期未満の反復回数と軌道上の点は一対一に対応し、", ref("claim_matching_pair_reconstructed_orbit"), " によりその軌道は二歩軌道の合併と一致する。従って列 ", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる点をちょうど一度ずつ並べる。"]),
-                      paragraph([ref("def_finite_permutation_minimal_period"), " の帰還等式から ", math(String.raw`c(n)=m=c(0)`), " である。", ref("def_matching_pair_successor"), " により、第一色にいる点の次は短い相手、第二色にいる点の次は長い相手である。", ref("claim_matching_pair_successor_color"), " により後続のたびに色が反転するから、閉路の対は長短交互である。偶数長なので最後から最初への対も交替を保つ。各相手は不動点を持たないので最小の閉路長は二である。辺長一でも標識付きの二対は異なる。"]),
+                      paragraph(["周期の帰還と列の定義から次を得る。"]),
+                      displayMath(String.raw`\begin{aligned}
+c(n)&=c(0)&& (\because\ \blkref{def_finite_permutation_minimal_period}\text{ の帰還と列の定義})\\
+&=m&& (\because\ \text{上の }c(0)\text{ の定義})
+\end{aligned}`),
+                      paragraph([ref("def_matching_pair_successor"), " により、第一色にいる点の次は短い相手、第二色にいる点の次は長い相手である。", ref("claim_matching_pair_successor_color"), " により後続のたびに色が反転するから、閉路の対は長短交互である。偶数長なので最後から最初への対も交替を保つ。各相手は不動点を持たないので最小の閉路長は二である。辺長一でも標識付きの二対は異なる。"]),
                     ],
                   },
                 },

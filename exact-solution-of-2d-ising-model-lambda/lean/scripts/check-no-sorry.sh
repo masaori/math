@@ -66,8 +66,8 @@ targets=(
   Ising2DLambda.KacWard.twistedMode_ratio_root_from_necSuf
   Ising2DLambda.KacWard.verticalTwistedModes_eq_coset
   Ising2DLambda.KacWard.verticalTwistedModes_eq_coset_from_necSuf
-  Ising2DLambda.KacWard.taggedActiveTwoStep_apply
-  Ising2DLambda.KacWard.taggedActiveTwoStep_periodic
+  Ising2DLambda.KacWard.taggedConcreteTwoStep_apply
+  Ising2DLambda.KacWard.taggedConcreteTwoStep_periodic
   Ising2DLambda.NecSuf.KacWard.activeTwoStep_apply
   Ising2DLambda.NecSuf.KacWard.activeTwoStep_periodic
   Ising2DLambda.KacWard.taggedMatching_recovers_labels
