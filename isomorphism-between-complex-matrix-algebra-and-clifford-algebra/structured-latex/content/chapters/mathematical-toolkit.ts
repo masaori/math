@@ -1333,4 +1333,143 @@ L^{\lambda}_m+_V L^{\mu}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_scalar_multiple_of_linear_combination",
+    kind: "claim",
+    title: { text: "線型結合のスカラー倍は、係数のスカラー倍による線型結合である" },
+    labels: ["claim_scalar_multiple_of_linear_combination"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられているとし、",
+        math(String.raw`\mu\in\mathbb{C}`),
+        " とする。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\mu\cdot_V\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)=\sum_{k=1}^{n}(\mu\cdot_{\mathbb{C}}\lambda_k)\cdot_V b_k`),
+    ],
+    proof: [
+      paragraph([
+        "係数 ",
+        math(String.raw`\lambda_1,\dots,\lambda_n`),
+        " と ",
+        math(String.raw`\mu\cdot_{\mathbb{C}}\lambda_1,\dots,\mu\cdot_{\mathbb{C}}\lambda_n`),
+        " のそれぞれと族 ",
+        math(String.raw`b`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`L_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）を、順に ",
+        math(String.raw`L^{\lambda}_m`),
+        "、",
+        math(String.raw`L^{\mu\lambda}_m`),
+        " と書く。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L^{\lambda}_0:=0_V`),
+          "、",
+          math(String.raw`L^{\lambda}_m:=L^{\lambda}_{m-1}+_V(\lambda_m\cdot_V b_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`L^{\mu\lambda}_0:=0_V`),
+          "、",
+          math(String.raw`L^{\mu\lambda}_m:=L^{\mu\lambda}_{m-1}+_V\bigl((\mu\cdot_{\mathbb{C}}\lambda_m)\cdot_V b_m\bigr)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "主張の左辺は ",
+        math(String.raw`\mu\cdot_V L^{\lambda}_n`),
+        "、右辺は ",
+        math(String.raw`L^{\mu\lambda}_n`),
+        " である。すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`\mu\cdot_V L^{\lambda}_m=L^{\mu\lambda}_m`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m=n`),
+        " の場合が主張である。",
+      ]),
+      paragraph([math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+\mu\cdot_V L^{\lambda}_0
+&=\mu\cdot_V 0_V
+&&\left(\because\ L^{\lambda}_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\mu\cdot_V(0_{\mathbb{C}}\cdot_V 0_V)
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=(\mu\cdot_{\mathbb{C}}0_{\mathbb{C}})\cdot_V 0_V
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_V 0_V
+&&\left(\because\ \mu\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=0_V
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=L^{\mu\lambda}_0
+&&\left(\because\ L^{\mu\lambda}_0\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`\mu\cdot_V L^{\lambda}_{m-1}=L^{\mu\lambda}_{m-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu\cdot_V L^{\lambda}_m
+&=\mu\cdot_V\bigl(L^{\lambda}_{m-1}+_V(\lambda_m\cdot_V b_m)\bigr)
+&&\left(\because\ L^{\lambda}_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\bigl(\mu\cdot_V L^{\lambda}_{m-1}\bigr)+_V\bigl(\mu\cdot_V(\lambda_m\cdot_V b_m)\bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\mu\lambda}_{m-1}+_V\bigl(\mu\cdot_V(\lambda_m\cdot_V b_m)\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L^{\mu\lambda}_{m-1}+_V\bigl((\mu\cdot_{\mathbb{C}}\lambda_m)\cdot_V b_m\bigr)
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\mu\lambda}_m
+&&\left(\because\ L^{\mu\lambda}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`\mu\cdot_V L^{\lambda}_m=L^{\mu\lambda}_m`),
+        " が示された。",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`m=0`),
+        " の場合だけで足りる。",
+      ]),
+    ],
+  },
 ]);
