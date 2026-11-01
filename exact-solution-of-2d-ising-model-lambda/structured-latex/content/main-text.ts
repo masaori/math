@@ -17899,11 +17899,8 @@ S^{[(e-1)\,m]}(\tau')
                           math(String.raw`O(\tau)\subset O(\tau')`),
                           " が従う。",
                         ]),
-                        paragraph([
-                          "以上の 2 つの包含から ",
-                          math(String.raw`O(\tau')=O(\tau)`),
-                          " である。",
-                        ]),
+                        displayMath(String.raw`O(\tau')=O(\tau)
+\qquad(\because\ O(\tau')\subset O(\tau)\text{ と }O(\tau)\subset O(\tau')\text{ を示した})`),
                         paragraph([
                           "この証明は ",
                           math(String.raw`S`),
@@ -77517,119 +77514,6 @@ const chapter_real_escape = defineSection({
             element: {
               kind: "elementGroup",
               id: "group_of_thermodynamic_limit_def_open_square_density_lower_set",
-              beforeFocus: [
-                {
-                  role: "supportingClaim",
-                  element:
-                    {
-                      id: "thermodynamic_limit_claim_rational_log_order_group_sequence_lower_set_downward_closed",
-                      kind: "claim",
-                      title: { text: "列が定める下組は下に閉じている" },
-                      labels: ["claim_rational_log_order_group_sequence_lower_set_downward_closed"],
-                      habitat: "Lambda",
-                      verification: ["sagemath/check/rational-log-order-group-sequence-lower-set"],
-                      lean: [
-                        "Ising2DLambda.ThermodynamicLimit.mem_rationalLogOrderSequenceLowerSet_of_le",
-                        "Ising2DLambda.NecSuf.ThermodynamicLimit.mem_lowerSetOfSequence_of_le_necSuf",
-                        "Ising2DLambda.ThermodynamicLimit.mem_rationalLogOrderSequenceLowerSet_of_le_from_necSuf",
-                      ],
-                      statement: [
-                        paragraph([
-                          math(String.raw`(\lambda_L)_{L\ge1}`),
-                          " を ",
-                          math(String.raw`\Lambda_{\mathbb{Q}}`),
-                          " の元の列、",
-                          math(String.raw`A:=A\bigl((\lambda_L)_{L\ge1}\bigr)`),
-                          " をその下組（",
-                          ref("def_rational_log_order_group_sequence_lower_set"),
-                          "）とする。任意の ",
-                          math(String.raw`\mu,\mu'\in\Lambda_{\mathbb{Q}}`),
-                          " について",
-                        ]),
-                        displayMath(String.raw`\mu\in A\ \text{ かつ }\ \mu'\le_{\Lambda_{\mathbb{Q}}}\mu
-\quad\Longrightarrow\quad
-\mu'\in A`),
-                        paragraph([
-                          "が成り立つ。すなわち下組は ",
-                          math(String.raw`\le_{\Lambda_{\mathbb{Q}}}`),
-                          "（",
-                          ref("def_rational_log_order_group_order"),
-                          "）について下に閉じている。証明は、",
-                          math(String.raw`\mu`),
-                          " の所属を与える ",
-                          math(String.raw`\varepsilon`),
-                          " と ",
-                          math(String.raw`N`),
-                          " をそのまま ",
-                          math(String.raw`\mu'`),
-                          " の所属の証人にする。実数体は現れない。",
-                        ]),
-                      ],
-                      proof: [
-                        paragraph([
-                          math(String.raw`\mu\in A`),
-                          " なので、",
-                          ref("def_rational_log_order_group_sequence_lower_set"),
-                          " により、",
-                          math(String.raw`0\le_{\Lambda_{\mathbb{Q}}}\varepsilon`),
-                          "、",
-                          math(String.raw`\varepsilon\ne0`),
-                          " を満たす ",
-                          math(String.raw`\varepsilon\in\Lambda_{\mathbb{Q}}`),
-                          " と、",
-                          math(String.raw`N\ge1`),
-                          " を満たす ",
-                          math(String.raw`N\in\mathbb{N}`),
-                          " で、",
-                          math(String.raw`N\le L`),
-                          " を満たすすべての ",
-                          math(String.raw`L\in\mathbb{N}`),
-                          " について ",
-                          math(String.raw`\mu+\varepsilon\le_{\Lambda_{\mathbb{Q}}}\lambda_L`),
-                          " となるものが取れる。この ",
-                          math(String.raw`\varepsilon`),
-                          " と ",
-                          math(String.raw`N`),
-                          " を固定する。",
-                          math(String.raw`\mu'\in A`),
-                          " を示すには、同じ ",
-                          math(String.raw`\varepsilon`),
-                          " と ",
-                          math(String.raw`N`),
-                          " について、",
-                          math(String.raw`N\le L`),
-                          " を満たす任意の ",
-                          math(String.raw`L\in\mathbb{N}`),
-                          " で ",
-                          math(String.raw`\mu'+\varepsilon\le_{\Lambda_{\mathbb{Q}}}\lambda_L`),
-                          " を示せばよい。",
-                          math(String.raw`N\le L`),
-                          " を満たす ",
-                          math(String.raw`L`),
-                          " を任意に取ると、一続きである。",
-                        ]),
-                        displayMath(String.raw`\begin{aligned}
-\mu'+\varepsilon
-&\le_{\Lambda_{\mathbb{Q}}}\mu+\varepsilon
-&&(\because\ \blkref{claim_rational_log_order_group_add_monotone}\text{ を }\lambda:=\mu'\text{、}\mu:=\mu\text{、}\nu:=\varepsilon\text{ で読む。仮定 }\mu'\le_{\Lambda_{\mathbb{Q}}}\mu)\\
-&\le_{\Lambda_{\mathbb{Q}}}\lambda_L
-&&(\because\ \mu\text{ の所属の証人 }\varepsilon,N\text{ の性質。}N\le L)
-\end{aligned}`),
-                        paragraph([
-                          "順序の推移律は ",
-                          ref("claim_rational_log_order_group_linear_order"),
-                          " による。使ったのは、下組の定義、加法単調性、推移律だけである。",
-                          math(String.raw`\varepsilon`),
-                          " の正値性と ",
-                          math(String.raw`N\ge1`),
-                          " は ",
-                          math(String.raw`\mu`),
-                          " の証人のものをそのまま引き継ぐ。実数体は現れない。",
-                        ]),
-                      ],
-                    },
-                },
-              ],
               focus:
                 {
                   id: "thermodynamic_limit_def_open_square_density_lower_set",

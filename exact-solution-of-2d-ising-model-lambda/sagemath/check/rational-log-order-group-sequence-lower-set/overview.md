@@ -2,7 +2,9 @@
 
 ## 対象
 
-**対象ラベル**: `def_rational_log_order_group_sequence_lower_set`, `claim_rational_log_order_group_sequence_lower_set_downward_closed`
+**対象ラベル**: `def_rational_log_order_group_sequence_lower_set`
+
+下閉性の主張は本文から参照用ノートへ退避した。下閉性の有限例の検算はここに残す。
 
 - 実行日: 2026-08-17
 - 状態: PASS（125 ベクトル、$\mu'\le\mu$ を満たすもの 77 件、満たさないもの 48 件、非所属の証人候補 265 組、$L$ は 40 まで。4 秒）

@@ -463,7 +463,6 @@ export const ALL_LABELS = [
   "claim_rational_log_order_group_realization_smul",
   "claim_rational_log_order_group_scalar_compare_nonneg",
   "claim_rational_log_order_group_scalar_compare_nonpos",
-  "claim_rational_log_order_group_sequence_lower_set_downward_closed",
   "claim_rational_log_order_iff",
   "claim_rational_log_surjective",
   "claim_rational_of_log_additive",
