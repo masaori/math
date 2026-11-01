@@ -15,6 +15,11 @@ import type { Label } from "../schema.ts";
 // - H_1^{(+)}, H_2 を Ž, Y̌ で書く式: V^{(+)} の指数表示は共役写像の作用の比較で導き、
 //   H_1^{(+)}, H_2 そのものを Ž, Y̌ で書き直す必要がない。
 // - (V^{(+)})^{-1} の正定値性と tr((V^{(+)})^{-1}) の正値性: V^{(+)} の固有値と最大固有値の決定に使わない。
+//
+// 2026-11-01 に、eigenvector_of_A_theta_tilde の statement のうち「固有ベクトルは v_{±,μ} の ℂ^× 倍に限る」の側と
+// その証明（Step 3）を足した。理由: 後段（diagonalization_check_P_D ほか）が使うのは λ_{±,μ} の値と
+// A(θ̃_μ)v_{±,μ} = λ_{±,μ}v_{±,μ} だけで、「限る」の側はどこからも使われない。加えて Step 3 は「階数」「固有空間」
+// 「次元」を本文で定義しないまま使っていた（Lean でも形式化していない）。
 
 const NOT_ADOPTED = paragraph<Label>([
   "【本文不採用。理由: 本文のどの章のゴールの主張の証明もこの主張を引かず、本文のどこからも使われないため。】",
@@ -550,6 +555,68 @@ C_-B_-
         " (4) より ",
         math(String.raw`\mathrm{tr}((V^{(+)})^{-1})>0`),
         " である。",
+      ]),
+    ],
+  },
+  {
+    id: "note_Athetatilde_004_claim_eigenvector_eigenspace_is_one_dimensional_unused_by_chapter_goals",
+    targets: ["eigenvector_of_A_theta_tilde"],
+    title: {
+      tex: String.raw`A(\tilde\theta_\mu)\text{ の固有ベクトルは }v_{\pm,\mu}\text{ の }\mathbb{C}^\times\text{ 倍に限る}`,
+    },
+    origin: { path: "structured-latex/content/015_A_theta_tilde_diagonalization.ts", ordinal: 6 },
+    body: [
+      NOT_ADOPTED,
+      paragraph(["（もと content/eigenvalue_problem_diagonalization_and_exponential_form.ts の主張ブロック Athetatilde_004_claim_eigenvector（labels: eigenvector_of_A_theta_tilde）の statement の「対応する固有ベクトルは c ∈ ℂ^× として v_{±,μ} である」の「限る」の側と、その Step 3。以下は本文にあったときの内容のまま。記号は ", ref("eigenvector_of_A_theta_tilde"), " の証明の冒頭の略記による。）"]),
+      paragraph([
+        "Step 3（固有空間がこれで尽きること）。",
+        math(String.raw`\lambda_{+,\mu} \neq \lambda_{-,\mu}`),
+        " なので ",
+        math(String.raw`A(\theta) - \lambda_{\pm,\mu}I \neq 0`),
+        " であり（差を取ると ",
+        math(String.raw`(\lambda_{-,\mu}-\lambda_{+,\mu})I \neq 0`),
+        "）、その行列式は ",
+        math(String.raw`0`),
+        " なので階数は ",
+        math(String.raw`1`),
+        "、したがって各固有空間は ",
+        math(String.raw`1`),
+        " 次元である。ゆえに固有ベクトルは ",
+        math(String.raw`v_{\pm,\mu}`),
+        " の ",
+        math(String.raw`\mathbb{C}^\times`),
+        " 倍に限る。",
+      ]),
+      paragraph([
+        "（退避時の注記: この Step は「階数」「固有空間」「次元」を本文で定義せずに使い、「",
+        math(String.raw`B \neq 0`),
+        " かつ ",
+        math(String.raw`\det B = 0`),
+        " なら ",
+        math(String.raw`Bv = 0`),
+        " の解は 1 次元」を証明なしに使っている。本文へ戻すなら、2×2 の成分計算で「",
+        math(String.raw`Bv = 0`),
+        " なら、",
+        math(String.raw`B`),
+        " の第 1 行が 0 でなければ ",
+        math(String.raw`v`),
+        " は ",
+        math(String.raw`(B_{12}, -B_{11})^{\mathsf{T}}`),
+        " のスカラー倍、第 1 行が 0 なら（",
+        math(String.raw`B \neq 0`),
+        " より第 2 行は 0 でなく）",
+        math(String.raw`(B_{22}, -B_{21})^{\mathsf{T}}`),
+        " のスカラー倍」と示してから引く。また「差を取ると ",
+        math(String.raw`(\lambda_{-,\mu}-\lambda_{+,\mu})I \neq 0`),
+        "」から言えるのは ",
+        math(String.raw`A(\theta) - \lambda_{+,\mu}I`),
+        " と ",
+        math(String.raw`A(\theta) - \lambda_{-,\mu}I`),
+        " が同時には 0 にならないことだけで、それぞれが 0 でないことは非対角成分 ",
+        math(String.raw`a = \gamma_2(\tilde\theta_\mu) \neq 0`),
+        "（",
+        ref("gamma_2_theta_tilde_nonzero"),
+        "）から言う必要がある。）",
       ]),
     ],
   },

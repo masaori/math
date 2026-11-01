@@ -125,7 +125,7 @@
 
 ## 3. 形式化できなかった主張とその理由
 
-**無い。** 章 015 の 9 主張はすべて形式化した。ただし次の 2 点は形式化の形が人手証明と異なる。
+**無い。** 章 015 の 9 主張はすべて形式化した。ただし 1 点目は形式化の形が人手証明と異なる。2 点目は人手証明の本文から退避した側なので、形式化の対象に無い。
 
 1. **`relation_of_gamma_2_theta_tilde` (3)（`arg^{[0,2π)}(γ_2γ_2(-θ~)) = π`）に直接の対応物を置いていない。**
    これは人手証明が (4)(5) を `def_sqrt_cc`（偏角 `[0,2π)` の一価な複素平方根）から導くための
@@ -134,11 +134,10 @@
    「積が負の実数である」という (3) の内容自体は (2)（`gamma2_mul_gamma2_neg_eq_neg_absSq` と
    `absGamma2_thetaTilde_pos`）で述べてある。この方針は 008 章
    （`RoutesNotAdopted/IntegerMomentum/ClaimEigenvectorsAndDiagonalizationOfATheta.lean`）と同じである。
-2. **`eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元で尽きること）を独立の定理にしていない。**
-   固有値が `λ_±` の 2 つに限ることは `eigenvalue_AMat_iff`（特性多項式の因数分解 `det_AMat_sub_smul_eq_zero_iff` を経る）で、
-   固有ベクトルが `v_±` のスカラー倍で尽きることは対角化
-   `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`（`P̌` が可逆）でそれぞれ言えており、
-   後段が使うのはこの 2 つである。
+2. **`eigenvector_of_A_theta_tilde` の「固有ベクトルは `v_±` のスカラー倍に限る」の側（もとの Step 3）は、本文から退避したので形式化の対象に無い。**
+   後段が使うのは固有値 `λ_±`（`eigenvalue_AMat_iff`。特性多項式の因数分解 `det_AMat_sub_smul_eq_zero_iff` を経る）と
+   `A v_± = λ_± v_±`（`AMat_mulVec_eigen_pos/neg`）だけで、「限る」の側はどこからも使われないので、
+   人手証明でも本文から参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避されている（2026-11-01）。
 
 ## 4. `det A = 1` に必要な仮定について（008 章と同じ）
 

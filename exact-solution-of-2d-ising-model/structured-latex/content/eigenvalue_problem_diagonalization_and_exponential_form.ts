@@ -1895,19 +1895,23 @@ s_1c_2
         ref("relation_of_gamma_2_theta_tilde"),
         " (4) により根号は正の実数、したがって ",
         math(String.raw`\lambda_{+,\mu} \neq \lambda_{-,\mu}`),
-        "）、対応する固有ベクトル（",
-        ref("def_eigenvector"),
-        "）は ",
+        "）、",
         math(String.raw`c \in \mathbb{C}^\times`),
-        " として",
+        " について",
       ]),
       displayMath(
         String.raw`v_{\pm,\mu}
-= c\begin{pmatrix} \pm i\,\sqrt{\gamma_2(\tilde\theta_\mu)\gamma_2(-\tilde\theta_\mu)} \\ \gamma_2(-\tilde\theta_\mu) \end{pmatrix}
+:= c\begin{pmatrix} \pm i\,\sqrt{\gamma_2(\tilde\theta_\mu)\gamma_2(-\tilde\theta_\mu)} \\ \gamma_2(-\tilde\theta_\mu) \end{pmatrix}
 = c\begin{pmatrix} \mp\left|\gamma_2(\tilde\theta_\mu)\right| \\ \gamma_2(-\tilde\theta_\mu) \end{pmatrix}`,
       ),
       paragraph([
-        "である。",
+        "は ",
+        math(String.raw`A(\tilde\theta_\mu)`),
+        " の ",
+        math(String.raw`\lambda_{\pm,\mu}`),
+        " に属する固有ベクトル（",
+        ref("def_eigenvector"),
+        "）である。",
         ref("gamma_2_theta_tilde_nonzero"),
         " により ",
         math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
@@ -2114,23 +2118,33 @@ A(\theta)(cv)
 \end{aligned}`,
       ),
       paragraph([
-        "Step 3（固有空間がこれで尽きること）。",
-        math(String.raw`\lambda_{+,\mu} \neq \lambda_{-,\mu}`),
+        "また ",
+        math(String.raw`v \neq 0`),
         " なので ",
-        math(String.raw`A(\theta) - \lambda_{\pm,\mu}I \neq 0`),
-        " であり（差を取ると ",
-        math(String.raw`(\lambda_{-,\mu}-\lambda_{+,\mu})I \neq 0`),
-        "）、その行列式は ",
-        math(String.raw`0`),
-        " なので階数は ",
-        math(String.raw`1`),
-        "、したがって各固有空間は ",
-        math(String.raw`1`),
-        " 次元である。ゆえに固有ベクトルは ",
-        math(String.raw`v_{\pm,\mu}`),
-        " の ",
-        math(String.raw`\mathbb{C}^\times`),
-        " 倍に限る。",
+        math(String.raw`v_k \neq 0`),
+        " となる成分 ",
+        math(String.raw`k \in \{1, 2\}`),
+        " があり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(cv)_k
+&= c\,v_k
+   \quad (\because \text{ベクトルのスカラー倍は成分ごとの積}) \\
+&\neq 0
+   \quad (\because c \neq 0,\ v_k \neq 0 \text{ と、}\mathbb{C}\text{ は体ゆえ零因子を持たないこと（}\blkref{complex_numbers_form_a_field}\text{）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから ",
+        math(String.raw`cv \neq 0`),
+        "。よって ",
+        math(String.raw`cv`),
+        " も ",
+        math(String.raw`\lambda`),
+        " に属する固有ベクトル（",
+        ref("def_eigenvector"),
+        "）である。",
       ]),
     ],
     conversion: {
@@ -2147,6 +2161,11 @@ A(\theta)(cv)
         "2026-11-01: Step 1 が「固有値」を定義せずに「固有値 ⟺ det(A(θ) − λI) = 0」を証明なしに使っていたので、" +
           "def_eigenvalue・def_eigenvector・def_det_two_by_two を数学的道具立てに置き、同値を nonzero_kernel_iff_det_zero_two_by_two（2×2 の成分計算）から引く同値の鎖にした。" +
           "Lean の eigenvalue_AMat_iff と同じ手順である。",
+        "2026-11-01: Step 3（固有空間が 1 次元で、固有ベクトルは v_{±,μ} の ℂ^× 倍に限ること）と statement の「限る」の側を、" +
+          "参照用ノート claims_unused_by_chapter_goals_not_adopted へ退避した。後段（diagonalization_check_P_D ほか）が使うのは " +
+          "λ_{±,μ} の値と A(θ̃_μ)v_{±,μ} = λ_{±,μ}v_{±,μ} だけで、Step 3 は本文のどこからも使われず、" +
+          "「階数」「固有空間」「次元」を本文で定義しないまま使っていたため。",
+        "2026-11-01: c ∈ ℂ^× 倍が固有ベクトルであることのうち cv ≠ 0 の段が無かったので足した（Lean の isEigenvector_smul_eigen_pos/neg の smul_ne_zero と同じ手順）。",
       ],
     },
   },

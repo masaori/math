@@ -42,7 +42,8 @@
 * `diagonalization_check_P_D` Step 3: `det P̌` の鎖 `det_checkPmat` と `det_checkPmat_ne_zero`［`det_of_cols`・`det_of_cols_ne_zero`］。
 * `diagonalization_check_P_D` Step 4: 右から `P̌⁻¹` を掛ける鎖
   `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`［`eq_conj_of_mul_eq`］。
-* 人手証明 Step 3（固有空間が 1 次元であること）は後段で使われないので形式化していない。
+* 人手証明にあった Step 3（固有空間が 1 次元で、固有ベクトルは `v_{±,μ}` の `ℂ^×` 倍に限ること）は後段で使われないので、
+  本文から参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避されている。形式化していない。
 
 人手証明と同じく `γ_2 = 0` の場合分けは無い。`gamma_2_theta_tilde_nonzero`
 （`Ising2D.gamma2_thetaTilde_ne_zero`）が無条件だからである。

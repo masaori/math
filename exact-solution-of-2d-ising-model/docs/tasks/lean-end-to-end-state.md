@@ -459,12 +459,15 @@
   - ゴールラインの確認の二十八個目（済み、2026-11-01）: 人手 `two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」の Lean を、`σ^x` の対角化（`Matrix.exp_units_conj`・`matrixExp_diagonal`）から、人手どおり指数級数を偶数項・奇数項に分ける証明へ書き換えた
     （`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` の `pauliX_sq`・`pauliX_pow_two_mul`・`pauliX_pow_two_mul_add_one`・`exp_smul_pauliX_hasSum`・`exp_smul_pauliX_eq_cosh_add_sinh`・`exp_smul_pauliX`）。対角化に使っていた `hadU` などは消した。
     既存の必要十分版 `NecSuf.exp_series_sum_of_sq_eq_one` の系を `ClaimTwoByTwoTransferIdentityFromNecSuf.lean` に置き、README の 2 本立ての表、`docs/ch010-formalization.md`・`docs/ch018-formalization.md`、`check-no-sorry.sh` の対象を直した。主張の型は変えていない。レビューの指摘のうち必須 1 件・任意 1 件を直した。任意のもう 1 件（`exp_smul_pauliX_hasSum` が `matExp_hasSum` と同じ中身）は、`matExp_hasSum` が `TensorPow M` 専用で `Mat(2,ℂ)` に使えないので残した。
+  - ゴールラインの確認の二十九個目（済み、2026-11-01）: 人手 `eigenvector_of_A_theta_tilde` の Step 3（固有空間が 1 次元で、固有ベクトルは `v_{±,μ}` の `ℂ^×` 倍に限ること）と statement の「限る」の側を、
+    参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避した。後段（`diagonalization_check_P_D`・`det A = 1` の Step 6・`e^{±γ} = λ_±`・指数表示）が使うのは `λ_{±,μ}` の値と `A v_± = λ_± v_±` だけで、
+    Step 3 は本文のどこからも使われず、「階数」「固有空間」「次元」を本文で定義しないまま使っていたため（README の「どこからも使われない主張は削る」の前例と同じ判断）。
+    statement は「`c ∈ ℂ^×` について `v_{±,μ} := c(...)` は `λ_{±,μ}` に属する固有ベクトル」にし、レビューの指摘で Step 2 に欠けていた `cv ≠ 0` の段を足した（Lean の `isEigenvector_smul_eigen_pos/neg` の `smul_ne_zero` と同じ手順）。
+    Lean の主張は変えていない（Step 3 はもとから形式化していなかった）。`ClaimEigenATildeDiag.lean` の冒頭と `docs/ch015-formalization.md` の「形式化できなかった主張」の節を直した。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。
-  `nonzero_kernel_iff_det_zero_two_by_two` と同じ 2×2 の成分計算で「`Bv = 0` なら `v` は `(B_{12}, -B_{11})` などのスカラー倍」と示せる。後段が Step 3 を使わないなら本文から外すか、使うなら本文と Lean を足す。本文を触るので回の先頭で fetch する。
 - 本文に単位行列 `I`・行列の差・行列のスカラー倍と `Iv = v` を定義するブロックが無い（`eigenvector_of_A_theta_tilde` Step 1 の同値の鎖が名前だけで根拠に挙げている）。数学的道具立てに足すかを判断する。
 - 人手 `eigenvector_of_A_theta_tilde` Step 2 の第 2 成分は、`-b = ā` を代入して `ā` を括り出し最後に `b` へ戻す往復をしている。`b` のまま `(-b)(∓r) + g_1 b = (g_1 ± r) b` と書けば `b = -ā` が要らない（必要十分版 `skew2_mulVec_pos` の知見）。本文を簡潔にするかを判断する（本文を触るので回の先頭で fetch する）。
