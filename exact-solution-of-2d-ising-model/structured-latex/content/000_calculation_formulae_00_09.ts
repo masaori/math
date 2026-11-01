@@ -638,7 +638,9 @@ y^2>x\ \land\ x>0
       paragraph([
         "で定める。右辺は ",
         math(String.raw`n`),
-        " 個の複素数の有限和である。数ベクトル ",
+        " 個の複素数の有限和（",
+        ref("def_finite_sum_of_complex_numbers"),
+        "）である。数ベクトル ",
         math(String.raw`a \in \mathbb{C}^n`),
         " は ",
         math(String.raw`n`),
@@ -838,6 +840,68 @@ T_B(\alpha A)
       paragraph([math("z\\in\\mathbb{C}"), " について、"]),
       displayMath("-z:=(-1_{\\mathbb{C}})\\cdot z"),
     ],
+  },
+  {
+    id: "calc_formulae_008b_definition_complex_difference",
+    kind: "definition",
+    title: { text: "複素数の差" },
+    labels: ["def_complex_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について、差 ",
+        math(String.raw`z - w \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`z - w := z + (-w)`),
+      paragraph([
+        "で定める。右辺の ",
+        math(String.raw`-w`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        "、和は ",
+        ref("definition_of_cc"),
+        " の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。ℂ の差は本文全体で使われていたが、定めるブロックが無く、行列の差の定義（def_matrix_difference）も「複素数の差」を根拠にしていた。star_preserves_norm_and_limits の検算で、複素共役が差を保つことを示すのに要るので足した。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_008c_definition_finite_sum_of_complex_numbers",
+    kind: "definition",
+    title: { text: "複素数の有限和" },
+    labels: ["def_finite_sum_of_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        " について、有限和 ",
+        math(String.raw`\sum_{j=1}^{m} z_j \in \mathbb{C}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{1} z_j := z_1,
+\qquad
+\sum_{j=1}^{m+1} z_j := \Bigl(\sum_{j=1}^{m} z_j\Bigr) + z_{m+1}`),
+      paragraph([
+        "と定める（左から順に足す）。和は ",
+        ref("definition_of_cc"),
+        " の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。行列の積（mat_mult）をはじめ本文全体が有限和を使っていたが、定めるブロックが無かった。complex_conjugate_of_sum の帰納法の各行が引けるよう足した。",
+      ],
+    },
   },
   {
     id: "calc_formulae_009_sqrt_minus_one",

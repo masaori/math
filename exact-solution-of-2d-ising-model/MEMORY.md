@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`star_preserves_norm_and_limits`（共役転置の積・線型性・ノルム・極限）の検算 `sagemath/check/star_preserves_norm_and_limits/` を足した。証明が根拠にしていた「複素共役は和・積・差・絶対値を保つ」を主張 `complex_conjugate_of_sum`・`complex_conjugate_of_product`・`complex_conjugate_of_difference`・`abs_of_complex_conjugate` として足し（それぞれに同名の検算）、ℂ の差と有限和の定義 `def_complex_difference`・`def_finite_sum_of_complex_numbers` を足した。「同様」としていた線型性を成分の鎖に、(3) の線型性の引用を差の成分の鎖に直した（未検算 100 → 99 件、証明を持つブロック 235 → 239 件）。計算の誤りは無かった。次は `exp_hermitian_is_positive_definite`。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十三個目を行った。`pauli_matrix_products`（Pauli 行列の積の 6 式）の証明の名前だけの根拠を `def_kronecker_delta`・`def_identity_matrix` と新しく足した行列の符号反転の定義 `def_matrix_negation` へのラベル参照にし、反可換性の 3 式を主張の左辺から始まる鎖にした。Lean の 6 定理を人手と 1 対 1 の `calc` に書き直し、SageMath の各行の検算（check_02）を足した。`check-no-sorry.sh` の `'` を含む名前の引用の崩れを直した。次は台帳の「次の一歩」（`003_exp_linear_map.ts` の「行列の差は成分ごと」をラベル参照へ）。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`trace_of_idempotent`（冪等行列のトレースは像の次元）の検算 `sagemath/check/trace_of_idempotent/` を足した。証明の分配則・結合則・零の行の根拠が欠け、Step 2・3 が未定義の「表現行列」「基底変換行列」を使っていたので、`Q^2 = QQ` の準備、基底を列に並べた `P` と対角の `D` による `QP = PD` の成分の鎖、`trace_basic_properties` (4) を引く鎖に直し、主張 `mat_mult_vector_difference`（`A(u−w) = Au − Aw`）を足して検算を付けた（未検算 101 → 100 件）。計算の誤りは無かった。次元・基底の定義が本文に無いことと、Lean の具体版が mathlib に委ねていることを状態台帳に記録した。次は `star_preserves_norm_and_limits`。

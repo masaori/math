@@ -202,7 +202,7 @@ T_B(I)
 \qquad (i \in \{1,\dots,m\},\ k \in \{1,\dots,p\})`),
       paragraph([
         "で定める。右辺は ",
-        ref("definition_of_cc"),
+        ref("def_complex_difference"),
         " の複素数の差である。数ベクトルの差も ",
         ref("mat_mult"),
         " のとおり ",

@@ -23,6 +23,247 @@ export default defineBlocks([
     conversion: { status: "added", notes: ["行列の定義に混在していた複素数だけの演算を先に分離した。"] },
   },
   {
+    id: "exp_conjugation_claim_complex_conjugate_of_sum",
+    kind: "claim",
+    title: { text: "複素共役は有限和を保つ" },
+    labels: ["complex_conjugate_of_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(String.raw`\overline{\textstyle\sum_{j=1}^{m} z_j} = \textstyle\sum_{j=1}^{m} \overline{z_j}`),
+      paragraph([
+        "が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " の有限和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備（二つの和）。",
+        math(String.raw`z = (x,y),\ w = (u,v) \in \mathbb{C}`),
+        "（",
+        math(String.raw`x,y,u,v \in \mathbb{R}`),
+        "。",
+        ref("definition_of_cc"),
+        " が ",
+        math(String.raw`\mathbb{C}`),
+        " の台集合を ",
+        math(String.raw`\mathbf{R}^2`),
+        " と定めるので成分は実数である）について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{z + w}
+&= \overline{(x+u,\ y+v)}
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= \bigl(x+u,\ -(y+v)\bigr)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \bigl(x+u,\ (-y)+(-v)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ -(y+v) = (-y)+(-v))\\
+&= (x,-y) + (u,-v)
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= \overline{z} + \overline{w}
+&&(\because\ \blkref{def_complex_conjugate})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\textstyle\sum_{j=1}^{1} z_j}
+&= \overline{z_1}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= \textstyle\sum_{j=1}^{1} \overline{z_j}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つとすると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\textstyle\sum_{j=1}^{m+1} z_j}
+&= \overline{\bigl(\textstyle\sum_{j=1}^{m} z_j\bigr) + z_{m+1}}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= \overline{\textstyle\sum_{j=1}^{m} z_j} + \overline{z_{m+1}}
+&&(\because\ \text{準備の二つの和})\\
+&= \bigl(\textstyle\sum_{j=1}^{m} \overline{z_j}\bigr) + \overline{z_{m+1}}
+&&(\because\ \text{帰納法の仮定})\\
+&= \textstyle\sum_{j=1}^{m+1} \overline{z_j}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は和を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、有限和の形で独立の主張にした。",
+      ],
+    },
+  },
+  {
+    id: "exp_conjugation_claim_complex_conjugate_of_product",
+    kind: "claim",
+    title: { text: "複素共役は積を保つ" },
+    labels: ["complex_conjugate_of_product"],
+    statement: [
+      paragraph([
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について ",
+        math(String.raw`\overline{z\,w} = \overline{z}\,\overline{w}`),
+        " が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (x,y),\ w = (u,v)`),
+        "（",
+        math(String.raw`x,y,u,v \in \mathbb{R}`),
+        "。",
+        ref("definition_of_cc"),
+        " が ",
+        math(String.raw`\mathbb{C}`),
+        " の台集合を ",
+        math(String.raw`\mathbf{R}^2`),
+        " と定めるので成分は実数である）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{z\,w}
+&= \overline{(xu - yv,\ xv + yu)}
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \bigl(xu - yv,\ -(xv + yu)\bigr)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \bigl(xu - (-y)(-v),\ -(xv + yu)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ (-y)(-v) = yv)\\
+&= \bigl(xu - (-y)(-v),\ x(-v) + (-y)u\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ x(-v) + (-y)u = -(xv + yu))\\
+&= (x,-y)\,(u,-v)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \overline{z}\,\overline{w}
+&&(\because\ \blkref{def_complex_conjugate})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits の証明は「複素共役は積を保つ」を frobenius_inner_product_axioms の証明冒頭から引いていた。証明の中の計算は主張として引けないので、独立の主張にした。",
+      ],
+    },
+  },
+  {
+    id: "exp_conjugation_claim_complex_conjugate_of_difference",
+    kind: "claim",
+    title: { text: "複素共役は差を保つ" },
+    labels: ["complex_conjugate_of_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について ",
+        math(String.raw`\overline{z - w} = \overline{z} - \overline{w}`),
+        " が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、差は ",
+        ref("def_complex_difference"),
+        " の差である。",
+      ]),
+    ],
+    proof: [
+      paragraph(["準備（",  math(String.raw`-1_{\mathbb{C}}`), " の共役）。"]),
+      displayMath(String.raw`\begin{aligned}
+\overline{-1_{\mathbb{C}}}
+&= \overline{(-1,\ 0)}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1)\\
+&= (-1,\ -0)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (-1,\ 0)
+&&(\because\ \mathbb{R}\ \text{で}\ -0 = 0)\\
+&= -1_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r = -1)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\overline{z - w}
+&= \overline{z + (-w)}
+&&(\because\ \blkref{def_complex_difference})\\
+&= \overline{z} + \overline{-w}
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{の}\ m = 2)\\
+&= \overline{z} + \overline{(-1_{\mathbb{C}})\,w}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \overline{z} + \overline{-1_{\mathbb{C}}}\;\overline{w}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= \overline{z} + (-1_{\mathbb{C}})\,\overline{w}
+&&(\because\ \text{準備の}\ \overline{-1_{\mathbb{C}}} = -1_{\mathbb{C}})\\
+&= \overline{z} + \bigl(-\overline{w}\bigr)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \overline{z} - \overline{w}
+&&(\because\ \blkref{def_complex_difference})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits (3) の (A_N − A)^* = A_N^* − A^* を成分で示すのに要るので足した。",
+      ],
+    },
+  },
+  {
+    id: "exp_conjugation_claim_abs_of_complex_conjugate",
+    kind: "claim",
+    title: { text: "複素共役の絶対値" },
+    labels: ["abs_of_complex_conjugate"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " について ",
+        math(String.raw`|\overline{z}| = |z|`),
+        " が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、絶対値は ",
+        ref("def_abs_arg"),
+        " の絶対値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (x,y)`),
+        "（",
+        math(String.raw`x,y \in \mathbb{R}`),
+        "。",
+        ref("definition_of_cc"),
+        " が ",
+        math(String.raw`\mathbb{C}`),
+        " の台集合を ",
+        math(String.raw`\mathbf{R}^2`),
+        " と定めるので成分は実数である）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|\overline{z}|
+&= |(x,-y)|
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \sqrt{x^2 + (-y)^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{abs_basic_properties}\ (1))\\
+&= \sqrt{x^2 + y^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{で}\ (-y)^2 = y^2)\\
+&= |z|
+&&(\because\ \blkref{abs_basic_properties}\ (1))
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。star_preserves_norm_and_limits (2) は |\\overline{A_{lk}}| = |A_{lk}| を「この代入の展開は未記載」として使っていたので、独立の主張にした。",
+      ],
+    },
+  },
+  {
     id: "exp_conjugation_proof_003_definition_M_n_C_convergence",
     kind: "definition",
     origin: {

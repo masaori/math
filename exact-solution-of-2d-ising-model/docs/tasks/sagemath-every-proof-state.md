@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 234 件のうち、SageMath の検算が無いもの 100 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 239 件のうち、SageMath の検算が無いもの 99 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -66,9 +66,14 @@
   未定義の「表現行列」「基底変換行列」をやめて基底を列に並べた `P` と対角の `D` を定め `QP = PD` を成分の鎖で示した、Step 3 を `trace_basic_properties` (4) を `P → P'`、`P' → P`（`PP' = I`）で引く鎖に、
   主張の右辺の自然数を `1_C` の和として読むことを書いた）。計算の誤りは無かった。
 
+- `star_preserves_norm_and_limits`（共役転置の積・線型性・ノルム・極限）と、そのために足した主張 `complex_conjugate_of_sum`（複素共役は有限和を保つ）・`complex_conjugate_of_product`（積を保つ）・`complex_conjugate_of_difference`（差を保つ）・`abs_of_complex_conjugate`（`|z̄| = |z|`）（`005_exp_conjugation_proof.ts`、`def_complex_conjugate` の直後）:
+  `sagemath/check/<ラベル>/`。ℂ を実数の対で持ち（`_shared/complex_as_real_pairs.sage` に `cc_conj` を足した）、行列は対を成分に持つ表として本文の定め方どおりに組んで、成分の鎖は `QQ` 上の不定元で、根号を取る行は `AA` で厳密に確かめた。両端は `QQ(i)` 係数へ送った Sage の共役転置・`conjugate_transpose`・QQbar の `abs` と比べた。
+  人手証明を直した（共役が和・積を保つことを `frobenius_inner_product_axioms` の証明冒頭から引いていたのを独立の主張に、「未記載の展開」の `|z̄| = |z|` を主張に、「第 2 式も同様」の線型性を成分の 8 行の鎖に、(3) の「(1) の線型性」を `A_N^* − A^* = (A_N − A)^*` の成分の鎖に、(2)(3) で ℝ を使う理由を主張に）。
+  ℂ の差と有限和を定めるブロックが本文に無かったので、定義 `def_complex_difference`（`z − w := z + (−w)`）と `def_finite_sum_of_complex_numbers`（左から順に足す有限和）を `000_calculation_formulae_00_09.ts` の `multiply_by_minus_one` の後に足し、`def_matrix_difference` と `mat_mult` から引いた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`009_eigenvalues_of_V.ts` の `star_preserves_norm_and_limits`（`--list` の先頭）から、文書順に検算を足す。
+`009_eigenvalues_of_V.ts` の `exp_hermitian_is_positive_definite`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -142,3 +147,7 @@
   `dim_C im Q̌_ε = 1` がこれに依存する。また自然数を ℂ の元として読む写像も無く、`trace_of_idempotent` の主張は「`1_C` をその個数だけ足した和として読む」と書いて避けた。
   下流の `dim im Q̌_ε = tr(Q̌_ε) = 1` から `dim = 1` を読むには、その和が `1_C` に等しい個数は 1 だけであること（ℕ から ℂ への単射性）が要る。この単位では直さなかった。
   Lean の具体版 `DefinitionTrace.lean` の `trace_of_idempotent` は mathlib の `IsIdempotentElem.isProj_range`・`LinearMap.IsProj.trace` に委ねていて、直した人手証明（準備・Step 1〜3 の鎖）と一対一でない。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-01、`star_preserves_norm_and_limits` の検算で見つかった（定義域の欠けと重複）: `star_preserves_norm_and_limits` (1) と共役転置（`def_hermitian_positive_definite`）は正方行列 `Mat(n,ℂ)` についてだけ述べているが、
+  次の `exp_hermitian_is_positive_definite` の証明は「積の共役転置を `n × 1` 行列 `x` へ適用」と、`x^*` を n 行 1 列の行列の共役転置として使う（`def_hermitian_positive_definite` の「`n×1` 行列とみなす」「`1×1` 行列を ℂ と同一視する」も同一視をしない規律に反する）。そのブロックの検算を足すときに、共役転置を `Mat(m,p,ℂ)` に広げるか、`x^*Ax := Σ conj(x_k) A_kl x_l` を定義して扱う。
+  `frobenius_inner_product_axioms` の証明冒頭は、足した `complex_conjugate_of_sum`・`complex_conjugate_of_product` と同じ計算を証明の中で示し直しており、それらを引く形に縮められる。この単位では直さなかった。
+  Lean の `ClaimPositiveDefinite.lean` は `star_preserves_norm_and_limits` の (2)(3) を形式化せず mathlib の `Matrix.exp_conjTranspose` を使っていて、書き直した人手証明（(1) の第 2 式、(3) の準備の鎖）と足した 4 つの主張・2 つの定義に対応する Lean は無い。Lean の連続実行の状態台帳へ渡す。

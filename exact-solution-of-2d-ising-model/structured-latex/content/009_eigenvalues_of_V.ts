@@ -504,95 +504,183 @@ Qv_j
     title: { tex: String.raw`\|A^*\| = \|A\| \text{ と極限の共役転置}` },
     labels: ["star_preserves_norm_and_limits"],
     statement: [
-      paragraph(["共役転置は ", ref("def_hermitian_positive_definite"), "、複素共役は ", ref("def_complex_conjugate"), "、行列積は ", ref("mat_mult"), "、複素数の積の可換性は ", ref("complex_numbers_form_a_field"), " を用いる。共役の和・積保存は ", ref("frobenius_inner_product_axioms"), " の証明冒頭の成分計算による。絶対値の成分表示は ", ref("abs_basic_properties"), " による。"]),
+      paragraph(["共役転置は ", ref("def_hermitian_positive_definite"), "、複素共役は ", ref("def_complex_conjugate"), "、行列積は ", ref("mat_mult"), "、行列の和・スカラー倍・差は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "・", ref("def_matrix_difference"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " のものとする。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
         "、",
         math(String.raw`A, B \in \mathrm{Mat}(n,\mathbb{C})`),
-        "、", math(String.raw`\alpha,\beta\in\mathbb C`), " および ", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " を同じ行列空間の列とする。このとき、",
+        "、", math(String.raw`\alpha,\beta\in\mathbb C`), " および ", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " を ", math(String.raw`\mathrm{Mat}(n,\mathbb{C})`), " の列とする。このとき、",
       ]),
       list([
         [math(String.raw`\text{(1)}\quad (AB)^* = B^* A^*, \qquad (\alpha A + \beta B)^* = \overline{\alpha}A^* + \overline{\beta}B^*`)],
         [
           math(String.raw`\text{(2)}\quad \|A^*\| = \|A\|`),
-          "（ノルムは ",
+          "（両辺は ",
           ref("def_matrix_norm"),
-          " のもの）",
+          " のとおり非負実数の有限和の非負の平方根であり、平方根を取るところで ",
+          math(String.raw`\mathbb{R}`),
+          " を使う）",
         ],
         [
           math(String.raw`\text{(3)}\quad A_N \to A \ \Longrightarrow\ A_N^* \to A^*`),
+          "（",
+          math(String.raw`N \to \infty`),
+          " の極限は ",
+          math(String.raw`\mathbb{R}`),
+          " の数列 ",
+          math(String.raw`\|A_N - A\|`),
+          " の極限であり、ここで ",
+          math(String.raw`\mathbb{R}`),
+          " へ脱出する）",
         ],
       ]),
     ],
     proof: [
       paragraph([
-        "(1) 成分計算による。任意の成分 ",
-        math(String.raw`(k,l)`),
+        "(1) の第 1 式。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 ((AB)^*)_{kl}
 &= \overline{(AB)_{lk}}
-   \quad (\because \text{共役転置の定義}) \\
-&= \overline{\textstyle\sum_j A_{lj}B_{jk}}
-   \quad (\because \text{行列積の定義}) \\
-&= \textstyle\sum_j \overline{A_{lj}B_{jk}}
-   \quad (\because \text{複素共役は和を保つ、}\blkref{frobenius_inner_product_axioms}\text{ の証明冒頭}) \\
-&= \textstyle\sum_j \overline{A_{lj}}\,\overline{B_{jk}}
-   \quad (\because \text{複素共役は積を保つ、}\blkref{frobenius_inner_product_axioms}\text{ の証明冒頭}) \\
-&= \textstyle\sum_j \overline{B_{jk}}\,\overline{A_{lj}}
-   \quad (\because \mathbb{C}\text{ の積の可換性}) \\
-&= \textstyle\sum_j (B^*)_{kj}(A^*)_{jl}
-   \quad (\because \text{共役転置の定義}) \\
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{\textstyle\sum_{j=1}^{n} A_{lj}B_{jk}}
+&&(\because\ \blkref{mat_mult})\\
+&= \textstyle\sum_{j=1}^{n} \overline{A_{lj}B_{jk}}
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{の}\ m = n)\\
+&= \textstyle\sum_{j=1}^{n} \overline{A_{lj}}\;\overline{B_{jk}}
+&&(\because\ \blkref{complex_conjugate_of_product}\ \text{を各項へ})\\
+&= \textstyle\sum_{j=1}^{n} \overline{B_{jk}}\;\overline{A_{lj}}
+&&(\because\ \text{積の可換性。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ})\\
+&= \textstyle\sum_{j=1}^{n} (B^*)_{kj}(A^*)_{jl}
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
 &= (B^*A^*)_{kl}
-   \quad (\because \text{行列積の定義})
+&&(\because\ \blkref{mat_mult})
 \end{aligned}`,
       ),
       paragraph([
-        "第 2 式も同様。",
+        "すべての成分が等しいので ",
+        math(String.raw`(AB)^* = B^*A^*`),
+        " である。",
       ]),
       paragraph([
-        "(2) 任意の ",
+        "(1) の第 2 式。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+((\alpha A + \beta B)^*)_{kl}
+&= \overline{(\alpha A + \beta B)_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{(\alpha A)_{lk} + (\beta B)_{lk}}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= \overline{\alpha A_{lk} + \beta B_{lk}}
+&&(\because\ \blkref{def_matrix_scalar_multiple})\\
+&= \overline{\alpha A_{lk}} + \overline{\beta B_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{の}\ m = 2)\\
+&= \overline{\alpha}\;\overline{A_{lk}} + \overline{\beta}\;\overline{B_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_product}\ \text{を各項へ})\\
+&= \overline{\alpha}\,(A^*)_{kl} + \overline{\beta}\,(B^*)_{kl}
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
+&= (\overline{\alpha}A^*)_{kl} + (\overline{\beta}B^*)_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple})\\
+&= (\overline{\alpha}A^* + \overline{\beta}B^*)_{kl}
+&&(\because\ \blkref{def_matrix_sum})
+\end{aligned}`,
+      ),
+      paragraph([
+        "すべての成分が等しいので ",
+        math(String.raw`(\alpha A + \beta B)^* = \overline{\alpha}A^* + \overline{\beta}B^*`),
+        " である。",
+      ]),
+      paragraph([
+        "(2) ",
         math(String.raw`A\in\mathrm{Mat}(n,\mathbb{C})`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \|A^*\|
-&= \sqrt{\textstyle\sum_{k,l}|(A^*)_{kl}|^2}
-   \quad (\because \text{行列ノルムの定義、}\blkref{def_matrix_norm}) \\
-&= \sqrt{\textstyle\sum_{k,l}|\overline{A_{lk}}|^2}
-   \quad (\because \text{共役転置の定義}) \\
-&= \sqrt{\textstyle\sum_{k,l}|A_{lk}|^2}
-   \quad (\because \text{共役の成分定義と絶対値の成分表示より（この代入の展開は未記載）、}\blkref{def_complex_conjugate},\blkref{abs_basic_properties}) \\
-&= \sqrt{\textstyle\sum_{k,l}|A_{kl}|^2}
-   \quad (\because (k,l)\mapsto(l,k)\text{ は添字集合の全単射}) \\
+&= \sqrt{\textstyle\sum_{k=1}^{n}\sum_{l=1}^{n}|(A^*)_{kl}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{def_matrix_norm})\\
+&= \sqrt{\textstyle\sum_{k=1}^{n}\sum_{l=1}^{n}|\overline{A_{lk}}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
+&= \sqrt{\textstyle\sum_{k=1}^{n}\sum_{l=1}^{n}|A_{lk}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \blkref{abs_of_complex_conjugate}\ \text{を各項へ})\\
+&= \sqrt{\textstyle\sum_{l=1}^{n}\sum_{k=1}^{n}|A_{lk}|^2}^{\,(\mathbb{R}_{\ge 0})}
+&&(\because\ \mathbb{R}\ \text{の有限和の順序の入れ替え})\\
 &= \|A\|
-   \quad (\because \text{行列ノルムの定義、}\blkref{def_matrix_norm})
+&&(\because\ \blkref{def_matrix_norm}\ \text{の}\ i = l,\ j = k)
 \end{aligned}`,
       ),
       paragraph([
-        "(3) ",
+        "(3) 準備として、",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(A_N^* - A^*)_{kl}
+&= (A_N^*)_{kl} - (A^*)_{kl}
+&&(\because\ \blkref{def_matrix_difference})\\
+&= \overline{(A_N)_{lk}} - \overline{A_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
+&= \overline{(A_N)_{lk} - A_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_difference})\\
+&= \overline{(A_N - A)_{lk}}
+&&(\because\ \blkref{def_matrix_difference})\\
+&= ((A_N - A)^*)_{kl}
+&&(\because\ \blkref{def_hermitian_positive_definite})
+\end{aligned}`,
+      ),
+      paragraph([
+        "なので ",
+        math(String.raw`A_N^* - A^* = (A_N - A)^*`),
+        " である。",
         math(String.raw`A_N\to A`),
-        " と仮定する。このとき",
+        "、すなわち ",
+        math(String.raw`\|A_N - A\| \to 0`),
+        "（",
+        ref("def_matrix_norm"),
+        "）と仮定する。各 ",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \|A_N^*-A^*\|
 &= \|(A_N-A)^*\|
-   \quad (\because \text{(1) の共役転置の線型性}) \\
+&&(\because\ \text{準備の}\ A_N^* - A^* = (A_N - A)^*)\\
 &= \|A_N-A\|
-   \quad (\because \text{(2)}) \\
-&\longrightarrow 0
-   \quad (\because A_N\to A\ \text{の仮定})
+&&(\because\ \text{(2) の}\ A\ \text{に}\ A_N - A\ \text{を入れたもの})
 \end{aligned}`,
       ),
+      paragraph([
+        "なので、",
+        math(String.raw`\mathbb{R}`),
+        " の数列 ",
+        math(String.raw`(\|A_N^*-A^*\|)_{N}`),
+        " と ",
+        math(String.raw`(\|A_N-A\|)_{N}`),
+        " はすべての項が等しく、仮定より ",
+        math(String.raw`\|A_N^*-A^*\| \to 0`),
+        " である。",
+        ref("def_matrix_norm"),
+        " の収束の定義より ",
+        math(String.raw`A_N^* \to A^*`),
+        " である。",
+      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-05 の式変形統一で、複素共役が和・積・絶対値を保つことと行列ノルムの定義への後置き参照を、実際に適用する各等号の行末へ移した。内容・式変形・根拠・参照は変えていない。",
+        "2026-11-01: SageMath の検算（sagemath/check/star_preserves_norm_and_limits/）を付けるときに直した。複素共役が和・積・差・絶対値を保つことを、frobenius_inner_product_axioms の証明冒頭や「未記載の展開」からでなく、新しい主張 complex_conjugate_of_sum・complex_conjugate_of_product・complex_conjugate_of_difference・abs_of_complex_conjugate から引いた。「第 2 式も同様」としていた (1) の第 2 式を成分の鎖に書き下した。(2) の添字の付け替えを有限和の順序の入れ替えにした。(3) の「(1) の共役転置の線型性」を、def_matrix_difference と complex_conjugate_of_difference による成分の鎖 A_N^* − A^* = (A_N − A)^* にし、極限の段で ℝ へ脱出することを主張に書いた。",
       ],
     },
   },

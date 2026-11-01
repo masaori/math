@@ -1,7 +1,7 @@
 # 本文 definition_of_cc の ℂ を、実数の対 (a, b) とその和・積の定義式どおりに持つ。
 # Sage の複素数（CC・QQ(i)）は使わず、対の成分の環 R（QQ、QQ 上の多項式環、AA など）だけを使う。
 # 本文の inclusion_rr_to_cc の r_C = (r, 0)（1_C・-1_C はその略記の r = 1, -1）と、multiply_by_minus_one の
-# -z := (-1_C) z もここに置く。ℂ の差 z - w := z + (-w) は本文に定義が無く、証明が使う形をここで置いたもの。
+# -z := (-1_C) z、def_complex_difference の差 z - w := z + (-w)、def_complex_conjugate の複素共役 (x,y) ↦ (x,-y) もここに置く。
 
 
 def cc_add(z, w):
@@ -25,8 +25,13 @@ def cc_neg(z, R):
 
 
 def cc_sub(z, w, R):
-    """ℂ の差 z - w := z + (-w)。"""
+    """def_complex_difference の差 z - w := z + (-w)。"""
     return cc_add(z, cc_neg(w, R))
+
+
+def cc_conj(z):
+    """def_complex_conjugate の複素共役 (x, y) ↦ (x, -y)。"""
+    return (z[0], -z[1])
 
 
 def cc_power(z, m, R):
