@@ -41,14 +41,14 @@
 | `Ising2D.rowApply_checkPsi_row` | `(T(ψ̌_μ^†),T(ψ̌_μ)) = (λ_{+,μ}ψ̌_μ^†, λ_{-,μ}ψ̌_μ)`（`A = P̌ĎP̌^{-1}` と `P̌^{-1}P̌ = I` を経る鎖） | 同 Step 2 |
 | `Ising2D.TVPlus_checkPsiDag_of_action` / `TVPlus_checkPsi_of_action` | `T(ψ̌_μ^†) = λ_{+,μ}ψ̌_μ^†` ほか（Step 2 の等式の各列） | **`commutation_V_plus_check_psi`** |
 | `Ising2D.TVPlus_checkPsiDag_psi_of_action` | 上を `e^{±γ(θ̃_μ)}` の形で述べた版 | 同 |
-| `Ising2D.checkIdx` / `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff` | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
+| `Ising2D.checkIdx` / `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff`（`DefinitionCheckVprime.lean`） | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
 | `Ising2D.checkX` / `Ising2D.checkVprime` | `X̌`, `V̌' = exp(X̌)` | **`def_check_Vprime`** |
 | `Ising2D.checkVprimeUnits` / `isUnit_checkVprime` | `V̌'` の可逆性と `(V̌')^{-1} = exp(-X̌)` | 同 (2) |
 | `Ising2D.checkX_eq_carHam` | `X̌` は必要十分版 `NecSuf.carHam` そのもの | 橋渡し |
 | `Ising2D.matExp_conj_eigen` | `[X,a] = c a ⟹ exp(X) a exp(-X) = e^c a` | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 |
 | `Ising2D.lie_checkX_checkPsiDag` | `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†` | 同 Step 2 |
 | `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 Step 2' |
-| `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi` | `T_{(V̌')}(ψ̌_μ^†) = e^{+γ}ψ̌_μ^†`, `T_{(V̌')}(ψ̌_μ) = e^{-γ}ψ̌_μ` | **`action_of_T_check_Vprime_on_check_psi`** |
+| `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi`（`ClaimActionTCheckVprime.lean`） | `T_{(V̌')}(ψ̌_μ^†) = e^{+γ}ψ̌_μ^†`, `T_{(V̌')}(ψ̌_μ) = e^{-γ}ψ̌_μ` | **`action_of_T_check_Vprime_on_check_psi`** |
 | `Ising2D.rowMul_one` | `(A_0, B_0) I = (A_0, B_0)` | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の 1 行目 |
 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` | `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}`（`P̌_μP̌_μ^{-1} = I`・結合法則・`ψ̌` の定義の 3 行の鎖） | 同 Step 1 |
 | `Ising2D.checkZ_eq_checkPmat_inv_col` / `checkY_eq_checkPmat_inv_col` | `Ž_μ = q_{11}ψ̌_μ^† + q_{21}ψ̌_μ`、`Y̌_μ = q_{12}ψ̌_μ^† + q_{22}ψ̌_μ` | 同 Step 1 の「すなわち」 |
@@ -56,9 +56,9 @@
 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` | Step 1 の鎖を必要十分版 `NecSuf.eq_rowMul2_of_rowMul2_eq` の特殊化として導いたもの | 同 Step 1 |
 | `Ising2D.eq_on_checkZY_of_eq_on_checkPsi_of_necSuf` | 上を必要十分版 `NecSuf.linear_eq_on_of_rowMul2_eq` の特殊化として導いたもの | 同 Step 1・Step 3 |
 | `Ising2D.TVPlus_eq_TCheckVprime_on_checkZY` | 原文の statement そのもの | **`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`** |
-| `Ising2D.TConj_eq_of_eq_on_checkZY` | `Ž, Y̌` 上で一致する共役は全体で一致 | **`T_V_plus_eq_T_check_Vprime`** |
+| `Ising2D.TConj_eq_of_eq_on_checkZY`（`ClaimTVPlusEqTCheckVprime.lean`） | `Ž, Y̌` 上で一致する共役は全体で一致 | **`T_V_plus_eq_T_check_Vprime`** |
 | `Ising2D.TVPlus_eq_TCheckVprime` | 上を `V^{(+)}` の形で述べた版 | 同 |
-| `Ising2D.TConj_one_apply` | `T_1 = id` | 補助（原文は暗黙） |
+| `Ising2D.TConj_one_apply`（`ClaimVPlusEqCCheckVprime.lean`） | `T_1 = id` | 補助（原文は暗黙） |
 | `Ising2D.commute_of_TConj_eq` | `W := v^{-1}u` はすべての元と可換 | `V_plus_eq_c_check_Vprime` Step 1・2 |
 | `Ising2D.exists_smul_of_TConj_eq` | 共役が一致する 2 つの可逆元は `0` でないスカラー倍を除いて等しい | **`V_plus_eq_c_check_Vprime`** |
 | `Ising2D.VPlus_eq_smul_checkVprime` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**） | 同 |
@@ -93,6 +93,13 @@
 | `Ising2D.TVPlus_actsBy_checkZY` | 仮定 `hT` が（双対関係の下で）無条件に成り立つこと | 014 章 `T_V_plus_check_Z_Y` |
 | `Ising2D.TVPlus_checkPsiDag_checkPsi` | `T_{(V^{(+)})}(ψ̌_μ^†) = e^{+γ(θ̃_μ)}ψ̌_μ^†`、`T_{(V^{(+)})}(ψ̌_μ) = e^{-γ(θ̃_μ)}ψ̌_μ`（仮定なし） | `commutation_V_plus_check_psi` |
 | `Ising2D.VPlus_eq_smul_checkVprime_of_dual` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論の完全な無条件版**。仮定は双対関係だけ） | `V_plus_eq_c_check_Vprime` |
+
+### 章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の章末の主張
+
+| Lean の名前 | 内容 | 対応する人手証明のラベル |
+| --- | --- | --- |
+| `Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator`（`ClaimVPlusEqCExpSumCheckNumberOperator.lean`） | ある `c ≠ 0` で `V^{(+)} = c exp(Σ_μ γ(θ~_μ)(ň_μ - ½I))`（`VPlus_eq_smul_checkVprime_of_dual` に `V̌'`・`X̌`・`ň_μ` の定義を代入したもの） | `V_plus_eq_c_exp_sum_gamma_check_number_operator` |
+| `Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form`（`ClaimATildeDiagonalizationLambdaExpGammaAndVPlusExponentialForm.lean`） | 章末の主張の (1)〜(5): `A(θ~_μ) = P̌_μ diag(λ_{+,μ}, λ_{-,μ}) P̌_μ^{-1}`、`λ_{±,μ} = e^{±γ(θ~_μ)}`、`γ(θ)` の arccosh 表示、`(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ)P̌_μ` と `ň_μ`、`V^{(+)}` の指数表示（既存の主張を並べたもの） | `A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form` |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 

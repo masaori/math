@@ -57,12 +57,12 @@
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `NecSuf.annPaired` / `numPaired` | `a'_i := a_{σ i}`、`n_i := c_i a_{σ i}` | `def_check_number_operator` |
+| `NecSuf.annPaired` / `numPaired`（`PairedFermion.lean`） | `a'_i := a_{σ i}`、`n_i := c_i a_{σ i}` | `def_check_number_operator` |
 | `NecSuf.acomm_cre_ann_comp` | `δ_{ν,σ μ}` 型の CAR は付け替えで Kronecker の `δ_{μν}` になる（`σ` の単射性だけ） | `check_number_operator_idempotent` (2)、`check_number_operators_commute` Step 1 |
 | `NecSuf.two_pow_smul_tau_noncommProd` | `2^{|s|} τ(∏_{i∈s} n_i) = τ(1)` | `trace_of_check_number_operator_product` |
-| `NecSuf.const_eq_of_trace_ratio` | `T = cp = aτ`, `T' = c⁻¹p = a⁻¹τ`, `a,p>0`, `T>0` ⇒ `c = a` | `constant_c_value_even_sector` |
+| `NecSuf.const_eq_of_trace_ratio`（`ConstantC.lean`） | `T = cp = aτ`, `T' = c⁻¹p = a⁻¹τ`, `a,p>0`, `T>0` ⇒ `c = a` | `constant_c_value_even_sector` |
 | `NecSuf.sum_weight_lt_of_ne_univ` | 重みが狭義正なら `∑ w_i(χ_T(i)-1/2)` は `T = univ` でのみ最大 | `max_eigenvalue_of_V_plus_simple` (2) |
-| `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le` | 重みが非負のときの最大・最小（非狭義） | `eigenvalues_of_V_plus` (2) |
+| `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le`（`SimpleEigenvalue.lean`） | 重みが非負のときの最大・最小（非狭義） | `eigenvalues_of_V_plus` (2) |
 | `NecSuf.eq_proj_of_eigen` | 単位の分解 `∑ Q_ε = 1` と `Q_ε V = Λ_ε Q_ε` と `Λ_ε ≠ Λ_{ε_0}` だけから固有空間を同定 | `max_eigenvalue_of_V_plus_simple` (3) |
 | `NecSuf.mul_pow_eq_of_mul_eq_smul` / `mul_exp_eq_of_mul_eq_smul` | `Q X = gQ ⇒ Q exp(X) = e^g Q`（章 009 の左右反転版） | `eigenvalues_of_check_Vprime` Step 2/3 |
 | `NecSuf.isInternal_range_proj` / `isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 内部直和分解と対角化可能性（**章 009 と共通の必要十分版**。`NecSuf/JointEigenspaceDecomposition.lean`） | `check_joint_eigenspace_decomposition` (5)、`eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） |
@@ -80,9 +80,9 @@
 | `CheckFermiSetup.acomm_cre_ann` | `[ψ̌_μ^†, ψ̌_{M+1-ν}]_+ = δ_{μν} I`（**合同式の書き換え不要**） | `anticommutator_of_check_psi` の制限 |
 | `CheckFermiSetup.cre_sq` / `ann_sq` / `ann_mul_cre` / `nOp_mul_self` | (1)(2)(3) | `check_number_operator_idempotent` |
 | `CheckFermiSetup.commute_cre_nOp` / `commute_ann_nOp` / `commute_nOp_nOp` | (1)(2) | `check_number_operators_commute` |
-| `CheckFermiSetup.nOpProd` / `trace_nOpProd` | `tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M-k}` | `trace_of_check_number_operator_product` |
+| `CheckFermiSetup.nOpProd` / `trace_nOpProd`（`ClaimTraceCheckNumberOperatorProduct.lean`） | `tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M-k}` | `trace_of_check_number_operator_product` |
 | `CheckFermiSetup.trace_nOp` / `trace_nOpProd_univ` | `tr(ň_μ) = 2^{M-1}`, `tr(ň_1⋯ň_M) = 1` | 同上「とくに」 |
-| `CheckFermiSetup.Qproj` / `Qproj'` | `Q̌_ε`（`Finset` 版 / `ε : 𝓜̌ → Bool` 版） | `check_joint_eigenspace_decomposition` |
+| `CheckFermiSetup.Qproj` / `Qproj'`（`ClaimCheckJointEigenspace.lean`） | `Q̌_ε`（`Finset` 版 / `ε : 𝓜̌ → Bool` 版） | `check_joint_eigenspace_decomposition` |
 | `CheckFermiSetup.Qproj_mul_self` / `Qproj_mul_Qproj_of_ne` | (1) | 同 (1) |
 | `CheckFermiSetup.sum_Qproj` | `∑_ε Q̌_ε = I` | 同 (2) |
 | `CheckFermiSetup.nOp_mul_Qproj` | `ň_ν Q̌_ε = ε_ν Q̌_ε` | 同 (3) |
@@ -90,25 +90,25 @@
 | `CheckFermiSetup.finrank_range_Qproj` | **`dim im Q̌_ε = 1`** | 同 (4) 後半 |
 | `CheckFermiSetup.sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` | 直和分解（張ること・直和性） | 同 (5) |
 | `CheckFermiSetup.Xop` / `Vprime` / `gval` | `X̌`, `V̌' = exp(X̌)`, `ǧ(ε)` | `def_check_number_operator` (2), `def_check_Vprime` |
-| `CheckFermiSetup.Xop_mul_Qproj` / `Qproj_mul_Xop` | `X̌ Q̌_ε = ǧ(ε) Q̌_ε`（左右両方） | `eigenvalues_of_check_Vprime` Step 1 |
+| `CheckFermiSetup.Xop_mul_Qproj` / `Qproj_mul_Xop`（`ClaimEigenvaluesCheckVprime.lean`） | `X̌ Q̌_ε = ǧ(ε) Q̌_ε`（左右両方） | `eigenvalues_of_check_Vprime` Step 1 |
 | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime` | `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`（左右両方） | 同 Step 3 |
 | `CheckFermiSetup.Vprime_mulVec_of_mem_range` | `im Q̌_ε` の元は固有ベクトル | 同 Step 4 |
-| `CheckFermiSetup.VprimeUnits` / `Vprime_mul_Vprime_neg` | `(V̌')^{-1} = exp(-X̌)` | `def_check_Vprime` (2) |
+| `CheckFermiSetup.VprimeUnits` / `Vprime_mul_Vprime_neg`（`ClaimTraceCheckVprime.lean`） | `(V̌')^{-1} = exp(-X̌)` | `def_check_Vprime` (2) |
 | `CheckFermiSetup.sum_exp_gval` | `∑_ε e^{ǧ(ε)} = ∏_μ 2cosh(γ(θ~_μ)/2)` | `trace_of_check_Vprime` Step 2 |
 | `CheckFermiSetup.trace_Vprime` | **`tr(V̌') = ∏_μ 2cosh(γ/2)`（前因子なし）** | 同 Step 1〜2 |
 | `CheckFermiSetup.trace_Vprime_inv` / `trace_Vprime_pos` | `tr((V̌')^{-1}) = tr(V̌') > 0` | 同 Step 3〜4 |
 | `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_smul` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。`V^{(+)} = (2s_2)^{M/2}exp(S_1^{(+)}/2)exp(S_2)exp(S_1^{(+)}/2)` | `def_V_plus`、`V_plus_is_positive_definite` Step 1 |
 | `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` Step 2〜3 |
-| `matExp_mul_matExp_neg_eq_one` / `matExp_neg_mul_matExp_eq_one` / `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2` | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
+| `matExp_mul_matExp_neg_eq_one` / `matExp_neg_mul_matExp_eq_one` / `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2`（`ClaimVPlusPositiveDefinite.lean`） | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |
 | `VPlusInv` / `rpow_neg_half_M_eq_inv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`、`a^{-1} = (2s_2)^{-M/2}`、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
 | `trace_VPlus_pos` | `tr(V^{(+)})` の正値性 | `trace_V_plus_is_positive` |
 | `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
-| `tauPlus` / `matExp_half_mul_matExp_half` / `trace_VPlus` | `τ := tr(exp(S_1^{(+)})exp(S_2))`、`exp(X/2)^2 = exp(X)`、`tr(V^{(+)}) = (2s_2)^{M/2}τ` | `constant_c_value_even_sector` Step 1 |
+| `tauPlus` / `matExp_half_mul_matExp_half` / `trace_VPlus`（`ClaimConstantCEvenSector.lean`） | `τ := tr(exp(S_1^{(+)})exp(S_2))`、`exp(X/2)^2 = exp(X)`、`tr(V^{(+)}) = (2s_2)^{M/2}τ` | `constant_c_value_even_sector` Step 1 |
 | `trace_expNegS1plus_expNegS2_eq_tauPlus` / `trace_VPlusInv` | `tr(exp(-S_1^{(+)})exp(-S_2)) = τ`、`tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |
 | `VPlusInv_eq` | `V^{(+)} = cV̌' ⇒ (V^{(+)})^{-1} = c⁻¹(V̌')^{-1}` | 同 Step 3（逆元の一意性） |
 | `constant_c_value_even_sector` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value_even_sector` |
-| `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus` | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |
+| `checkBigLambda` / `VPlus_mul_Qproj` / `Qproj_mul_VPlus`（`TheoremEigenvaluesVPlus.lean`） | `Λ̌_ε` と `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε` | `eigenvalues_of_V_plus` (1) |
 | `VPlus_mulVec_of_mem_range` | `im Q̌_ε` の元は `V^{(+)}` の固有ベクトル | 同 (1) |
 | `checkBigLambda_pos` / `checkBigLambda_le_max` / `checkBigLambda_min_le` | 正値性・最大・最小 | 同 (2) |
 | `checkBigLambda_max_mul_min` | `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2` | 同 |
@@ -124,6 +124,7 @@
 | `CheckFermiSetup.iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | 同 (5) を `Submodule` の言葉で分けて述べた版 | 同 (5) |
 | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime` | **`V̌'` は対角化可能** | `eigenvalues_of_check_Vprime` |
 | `exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | **`V^{(+)}` は対角化可能（固有値は `Λ̌_ε`）** | `eigenvalues_of_V_plus` |
+| `Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum`（`ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`） | 章末の主張: `V^{(+)} = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ň_μ - ½I))`、`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、`Λ^{(1/2)}_M = Λ̌_{(1,…,1)} = (2 sinh 2K_2)^{M/2} exp(½Σ_μ γ(θ~_μ))`、`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_{(1,…,1)}`（既存の主張を並べたもの） | `V_plus_eigenvalues_with_c_value_and_strict_maximum` |
 
 ---
 

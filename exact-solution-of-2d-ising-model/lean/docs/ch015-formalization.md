@@ -17,13 +17,13 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.AMat_thetaTilde_eq` | `A(θ~_μ) = !![γ_1, γ_2(θ~); -γ_2(-θ~), γ_1]` | `def_gamma1_gamma2_of_theta` |
+| `Ising2D.AMat_thetaTilde_eq`（`DefinitionGamma1Gamma2OfThetaTilde.lean`） | `A(θ~_μ) = !![γ_1, γ_2(θ~); -γ_2(-θ~), γ_1]` | `def_gamma1_gamma2_of_theta` |
 | `Ising2D.thetaTilde_mul_M` | `M·θ~_μ = (2μ-1)π`（**奇数**倍。015 章の要） | 同上（Step 2 の前提） |
-| `Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero` | `sin θ~_μ = 0 ⟹ cos θ~_μ = -1` | `gamma_2_theta_tilde_nonzero` Step 2+3 |
+| `Ising2D.cos_thetaTilde_eq_neg_one_of_sin_eq_zero`（`ClaimGamma2TildeNonzero.lean`） | `sin θ~_μ = 0 ⟹ cos θ~_μ = -1` | `gamma_2_theta_tilde_nonzero` Step 2+3 |
 | **`Ising2D.gamma2_thetaTilde_ne_zero`** | **`γ_2(θ~_μ) ≠ 0`（無条件・全 `μ ∈ ℤ`）** | **`gamma_2_theta_tilde_nonzero`** |
 | `Ising2D.gamma2_neg_thetaTilde_ne_zero` | `γ_2(-θ~_μ) ≠ 0` | 同上（statement 末尾） |
 | `Ising2D.gamma2_thetaTilde_ne_zero_checkIndex` | 同上の `μ ∈ 𝓜̌` 版（人手証明と 1 対 1） | 同上 |
-| `Ising2D.absGamma2` | `|γ_2(θ)| := √(normSq γ_2(θ))` | `relation_of_gamma_2_theta_tilde` |
+| `Ising2D.absGamma2`（`ClaimRelationGamma2Tilde.lean`） | `|γ_2(θ)| := √(normSq γ_2(θ))` | `relation_of_gamma_2_theta_tilde` |
 | `Ising2D.gamma2_neg_thetaTilde_eq` | (1) `γ_2(-θ~) = -conj γ_2(θ~)` | 同 (1) |
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_absSq` | (2) `γ_2(θ~)γ_2(-θ~) = -|γ_2|^2` | 同 (2) |
 | `Ising2D.sq_absGamma2` | (4) `(|γ_2|)^2 = -γ_2(θ~)γ_2(-θ~)` | 同 (4) |
@@ -39,7 +39,7 @@
 | `Ising2D.eigenvalue_AMat_iff` | `IsEigenvalue (A(θ)) λ ⟺ λ = λ_±`（`def_eigenvalue` から `det(A(θ) - λI) = 0` までの同値の鎖を経る） | 同 Step 1・statement |
 | `Ising2D.AMat_mulVec_eigen_pos` / `..._neg` | `v_± = (∓|γ_2|, γ_2(-θ~))` が固有ベクトル（成分ごとの鎖） | 同 Step 2 |
 | `Ising2D.isEigenvector_smul_eigen_pos` / `..._neg` | `c ≠ 0` なら `c v_±` は `λ_±` に属する固有ベクトル（`def_eigenvector`） | 同 statement |
-| `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg` | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
+| `Ising2D.eigenvector_pos_ne_zero` / `eigenvector_neg_ne_zero` / `AMat_mulVec_smul_eigen_pos` / `..._neg`（`ClaimEigenATildeDiag.lean`） | `v_± ≠ 0` と `c` 倍の固有ベクトル | 同 Step 2 |
 | `Ising2D.lambdaPlusR_ne_lambdaMinusR` | `λ_+ ≠ λ_-`（固有値の分離） | 同 Step 1 末尾 |
 | `Ising2D.checkPmat` / `checkDmat` / `checkC` | 人手証明の `P̌_μ`, `Ď_μ`, 任意定数 `c` | `diagonalization_check_P_D` |
 | `Ising2D.sqrtM_ne_zero`（`DefinitionCheckFermi.lean`。`def_check_fermi` と同じ `√M`） | `√M ≠ 0` | 同 Step 1 |
@@ -50,7 +50,7 @@
 | **`Ising2D.AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv`** | **`A(θ~_μ) = P̌_μ Ď_μ P̌_μ⁻¹`（場合分けなし）** | **`diagonalization_check_P_D`** Step 4 |
 | `Ising2D.charPoly_factor_thetaTilde_of_necSuf` / `det_AMat_sub_smul_eq_zero_iff_of_necSuf` / `eigenvalue_AMat_iff_of_necSuf` / `lambdaPlusR_ne_lambdaMinusR_of_necSuf` / `det_checkPmat_of_necSuf` / `det_checkPmat_ne_zero_of_necSuf` / `AMat_mulVec_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mulVec_smul_eigen_pos_of_necSuf` / `..._neg_of_necSuf` / `AMat_mul_checkPmat_of_necSuf` / `AMat_thetaTilde_eq_checkPmat_mul_checkDmat_mul_inv_of_necSuf`（`ClaimEigenATildeDiagFromNecSuf.lean`） | `_of_necSuf` を除いた名前の具体版と同じ主張を、必要十分版 `NecSuf/TwoByTwoSkew.lean` の系として導出した版 | `eigenvector_of_A_theta_tilde` Step 1・Step 2、`diagonalization_check_P_D` Step 2〜4 |
 | `Ising2D.det_AMat_eq_gamma1_sq_add` | `det A(θ) = γ_1^2 + γ_2(θ)γ_2(-θ)` | `det_A_theta_tilde` Step 1 |
-| `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form` / `gamma2_mul_gamma2_neg_cos_form` | `exp(iθ)exp(-iθ) = 1` と `γ_2γ_2(-θ)` の実部表示 | 同 Step 2 |
+| `Ising2D.exp_I_mul_exp_neg_I_mul` / `gamma2_mul_gamma2_neg_sin_form` / `gamma2_mul_gamma2_neg_cos_form`（`ClaimDetATilde.lean`） | `exp(iθ)exp(-iθ) = 1` と `γ_2γ_2(-θ)` の実部表示 | 同 Step 2 |
 | `Ising2D.det_AMat_thetaTilde_eq_one` | `det A(θ~_μ) = 1` | `det_A_theta_tilde` |
 | `Ising2D.det_AMat_thetaTilde_eq_one_of_necSuf` | 同上を必要十分版の系として導出した版 | 同上 |
 | `Ising2D.gamma1_sq_add_gamma2_mul_thetaTilde` | `γ_1^2 + γ_2γ_2(-θ~) = 1` | 同 第 2 式（Step 3〜5） |
@@ -60,7 +60,7 @@
 | **`Ising2D.one_lt_gamma1R_thetaTilde`** | **`γ_1(θ~_μ) > 1`（狭義）** | **`gamma1_gt_1_theta_tilde`** |
 | `Ising2D.one_le_gamma1R_thetaTilde` | `γ_1(θ~_μ) ≥ 1` | 同上（併記） |
 | `Ising2D.gammaTilde` | `γ(θ~_μ) = arccosh(γ_1(θ~_μ))` | `def_gamma_theta` の `θ = θ~_μ` での値 |
-| `Ising2D.cosh_gammaTilde` / `gammaTilde_nonneg` | `cosh γ = γ_1`、`γ ≥ 0` | 同上 |
+| `Ising2D.cosh_gammaTilde` / `gammaTilde_nonneg`（`DefinitionGammaTildeMu.lean`） | `cosh γ = γ_1`、`γ ≥ 0` | 同上 |
 | **`Ising2D.gammaTilde_pos`** | **`γ(θ~_μ) > 0`（狭義）** | 同上（後半） |
 | `Ising2D.sinh_gammaTilde` | `sinh γ(θ~_μ) = |γ_2(θ~_μ)|` | `lambda_eq_exp_gamma_theta_tilde` Step 1 |
 | `Ising2D.lambdaPlusR_eq_exp` / `lambdaMinusR_eq_exp` | `λ_{±,μ} = e^{±γ(θ~_μ)}` | 同 Step 2 |

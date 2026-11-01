@@ -59,25 +59,26 @@
 | `Ising2D.epsilon_commute_V2` / `epsilon_commute_V2PauliForm` / `epsilon_commute_V2H2Form` | **`ε V_2 = V_2 ε`**（前者が `def_transfer_matrix` の `V_2`、後の 2 本が右辺の式） | 同 Step 2 |
 | `Ising2D.epsilon_commute_H1plus` | `ε H_1^{(+)} = H_1^{(+)} ε`（`epsilon_commute_H1` は一般形） | 同 Step 4 |
 | `Ising2D.epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf` | **`ε V_1^{(+)} = V_1^{(+)}ε`, `ε (V_1^{(+)})^{1/2} = ⋯`**（`epsilon_commute_V1pm` / `..._V1pmHalf` は一般形） | 同 Step 4 |
-| `Ising2D.commute_epsProjPlus_of_commute_epsilon` / `commute_V1_epsProjPlus` / `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus` | `P^{(+)}` と `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` の可換性（`commute_*_epsProj` は一般形） | `epsilon_projectors_commute_with_transfer_matrices` |
+| `Ising2D.commute_epsProjPlus_of_commute_epsilon` / `commute_V1_epsProjPlus` / `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`（`ClaimEpsilonCommutes.lean`） | `P^{(+)}` と `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` の可換性（`commute_*_epsProj` は一般形） | `epsilon_projectors_commute_with_transfer_matrices` |
 | `Ising2D.epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg` | `P^{(+)}P^{(-)} = 0`, `P^{(+)} + P^{(-)} = I` | ノート（旧 `epsilon_projector_properties` (1)(2)） |
-| `Ising2D.RestrictsOnSector` / `V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector` | 符号つきのセクターごとの制限 | ノート（`sector_replacement_of_V1` の前提） |
+| `Ising2D.RestrictsOnSector` / `V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector`（`ClaimSectorReplacementOfV1.lean`） | 符号つきのセクターごとの制限 | ノート（`sector_replacement_of_V1` の前提） |
 | `Ising2D.sector_replacement_of_V1` | `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` | ノート `sector_replacement_of_V1` |
 | `Ising2D.sector_replacement_pow` | `(V_1V_2)^n P^{(±)} = (V_1^{(±)}V_2)^n P^{(±)}` | ノート `sector_replacement_pow` |
 | `Ising2D.Vsym` / `Vsym_neg_one_eq_VPlusOfTransfer` | `V^{(±)} = (V_1^{(±)})^{1/2} V_2 (V_1^{(±)})^{1/2}`（`ηsign = -1` で本文の `VPlusOfTransfer`） | ノート `partition_function_sector_decomposition` の主張中の定義 |
-| `Ising2D.trace_eq_sector_sum` / `trace_epsProj_sym_pow` / `trace_epsProj_sym_pow_eq_plain` | Step 1・Step 3・Step 2 と 3 の合成 | ノート `partition_function_sector_decomposition` |
+| `Ising2D.trace_eq_sector_sum` / `trace_epsProj_sym_pow` / `trace_epsProj_sym_pow_eq_plain`（`ClaimPartitionFunctionSectorDecomposition.lean`） | Step 1・Step 3・Step 2 と 3 の合成 | ノート `partition_function_sector_decomposition` |
 | `Ising2D.partition_function_sector_decomposition` | `Z = tr(P^{(+)}(V^{(+)})^{N_row}) + tr(P^{(-)}(V^{(-)})^{N_row})` | ノート `partition_function_sector_decomposition` |
+| `Ising2D.symmetrized_transfer_matrix_on_sector_exponential_form`（`ClaimSymmetrizedTransferMatrixOnSectorExponentialForm.lean`） | `M ≥ 2`、`K_2 > 0`（`K_1` は任意の実数）で `W P^{(+)} = exp((i/2)K_1H_1^{(+)}) (2 sinh 2K_2)^{M/2} exp(iK_2^*H_2) exp((i/2)K_1H_1^{(+)}) P^{(+)}` | ノート `symmetrized_transfer_matrix_on_sector_exponential_form` |
 
 必要十分版（`Ising2D/NecSuf/`）:
 
 | Lean の名前 | 内容 |
 | --- | --- |
-| `Ising2D.NecSuf.prod_entry_eq_zero_of_ne` / `prod_entry_eq_ite` | 因子が全部「対角」なら積も対角 |
-| `Ising2D.NecSuf.map_exp_of_continuous` | 連続な環準同型は `exp` と可換 |
+| `Ising2D.NecSuf.prod_entry_eq_zero_of_ne` / `prod_entry_eq_ite`（`SiteDiagonal.lean`） | 因子が全部「対角」なら積も対角 |
+| `Ising2D.NecSuf.map_exp_of_continuous`（`ExpDiagonal.lean`） | 連続な環準同型は `exp` と可換 |
 | `Ising2D.NecSuf.invProj` / `invProj_sq` / `invProj_mul_invProj_neg` / `invProj_add_invProj_neg` / `commute_invProj` | 対合から作る射影子とその性質 |
 | `Ising2D.NecSuf.pow_mul_proj` | 冪等元上での因子の置き換え |
 | `Ising2D.NecSuf.mul_pow_conj_left` | `B (BVB)^n = (BBV)^n B` |
-| `Ising2D.NecSuf.cycSucc` / `openW` / `openW_snoc` | 巡回後者と「開いた道」の重み |
+| `Ising2D.NecSuf.cycSucc` / `openW` / `openW_snoc`（`TracePathSum.lean`） | 巡回後者と「開いた道」の重み |
 | `Ising2D.NecSuf.pow_succ_apply_eq_sum` | `(A^{n+1})_{ij}` は道の重みの総和 |
 | `Ising2D.NecSuf.trace_pow_succ` | `tr(A^{n+1})` は閉じた道の重みの総和 |
 

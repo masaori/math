@@ -16,7 +16,7 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.IsingParam` | `K_1, K_2 ∈ ℝ_{>0}` を束ねた前提 | `def_partition_function_2d_ising` の結合定数 |
-| `Ising2D.IsingParam.K2star` / `IsingParam.K2star_pos` | `K_2^* := Kstar K_2 = -(1/2) log(tanh K_2)` と `K_2^* > 0` | `def_second_dual_coupling_constant` |
+| `Ising2D.IsingParam.K2star` / `IsingParam.K2star_pos`（`ClaimGamma1LowerBound.lean`） | `K_2^* := Kstar K_2 = -(1/2) log(tanh K_2)` と `K_2^* > 0` | `def_second_dual_coupling_constant` |
 | `Ising2D.IsingParam.c2_mul_s2star_eq_c2star` | `c_2 s_2^* = c_2^*` | `duality_c2_star_eq_s2_star_c2` |
 | `Ising2D.IsingParam.const` | `c_1 = cosh 2K_1` 等で `IsingConst` を作る | 同上 |
 | `Ising2D.gamma1R` | `γ_1(θ) = c_1c_2^* - s_1s_2^*\cos θ` の実数版 | `def_A_theta` |
@@ -28,20 +28,20 @@ Lean: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/Th
 | `Ising2D.gammaFn_eq` | `γ` の明示形（`cosh 2K_1 cosh 2K_2^* - sinh 2K_1 sinh 2K_2^* cos θ` の `arcosh`） | `onsager_free_energy_expression` の `γ` |
 | `Ising2D.gammaFn_nonneg` | `γ(θ) ∈ ℝ_{≥0}` | `def_gamma_theta` |
 | `Ising2D.cosh_gammaFn` | `cosh γ(θ) = γ_1(θ)` | 同上（`arccosh` が逆写像であること） |
-| `Ising2D.continuous_gamma1R` | `γ_1` は連続 | `gamma_is_continuous` Step 1 前半 |
+| `Ising2D.continuous_gamma1R`（`ClaimGammaContinuous.lean`） | `γ_1` は連続 | `gamma_is_continuous` Step 1 前半 |
 | `Ising2D.gamma1R_periodic` | `γ_1(θ+2π) = γ_1(θ)` | 同 Step 1 後半 |
 | `Ising2D.gamma_is_continuous` | **`γ` は `ℝ` 上連続** | `gamma_is_continuous` 前半 |
 | `Ising2D.gammaFn_periodic` | `γ(θ+2π) = γ(θ)` | 同 後半 |
-| `Ising2D.abs_log_Z_sub_log_c_le` | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の誤差評価 |
+| `Ising2D.abs_log_Z_sub_log_c_le`（`ClaimLimitInNRow.lean`） | `\|(1/(MN))log Z - (1/M)log c\| ≤ (log 2)/N` | `limit_of_log_Z_in_N_row` の誤差評価 |
 | `Ising2D.limit_of_log_Z_in_N_row` | **`(1/(M N_row))log Z → (1/M)log c(M)`** | `limit_of_log_Z_in_N_row` |
 | `Ising2D.tagPoint` | `t^{(M)}_μ = 2π(μ-δ)/M` | `riemann_sum_to_integral` |
-| `Ising2D.sum_Icc_one_eq_sum_range` / `sum_Icc_eq_sum_range_tag` | 添字の付け替え `μ = k+1` | 同上（記法の橋渡し） |
+| `Ising2D.sum_Icc_one_eq_sum_range` / `sum_Icc_eq_sum_range_tag`（`TheoremRiemannSumToIntegral.lean`） | 添字の付け替え `μ = k+1` | 同上（記法の橋渡し） |
 | `Ising2D.riemann_sum_to_integral_error` | **`\|(1/M)Σγ(t_μ) - (1/2π)∫₀^{2π}γ\| ≤ ω(2π/M)`** | `riemann_sum_to_integral` statement の評価 |
 | `Ising2D.tendsto_modulus_gamma` | `ω(2π/M) → 0`（(R1) の帰結） | 同 Step 4 |
 | `Ising2D.riemann_sum_to_integral` | **`(1/M)Σ g(t^{(M)}_μ) → (1/2π)∫₀^{2π} g`（★実数解析への移行点）** | `riemann_sum_to_integral` |
 | `Ising2D.riemann_sum_to_integral_indep_delta` | 極限は `δ ∈ [0,1)` に依らない | 同 statement 末尾 |
 | `Ising2D.LambdaM` | `Λ^{(δ)}_M = (2 sinh 2K_2)^{M/2}\exp((1/2)Σγ)` | `def_Lambda_delta_M` |
-| `Ising2D.two_sinh_pos` / `LambdaM_pos` | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | `onsager_free_energy_expression` の proof 冒頭 |
+| `Ising2D.two_sinh_pos` / `LambdaM_pos`（`TheoremOnsagerFreeEnergy.lean`） | `2 sinh 2K_2 > 0`、`Λ^{(δ)}_M > 0` | `onsager_free_energy_expression` の proof 冒頭 |
 | `Ising2D.log_LambdaM` | `log Λ = (M/2)log(2 sinh 2K_2) + (1/2)Σγ` | `onsager_free_energy_expression` の proof 第 1 式 |
 | `Ising2D.inv_M_log_LambdaM` | `(1/M)log Λ = (1/2)log(2 sinh 2K_2) + (1/2)(1/M)Σγ` | `onsager_free_energy_expression` の proof 第 2 式 |
 | `Ising2D.onsager_free_energy_expression` | **`(1/M)log Λ^{(δ)}_M → (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π}γ`** | `onsager_free_energy_expression` |

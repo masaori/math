@@ -27,7 +27,7 @@
 | `Ising2D.TVPlus` | `T_{(V^{(+)})}` を ℂ-代数自己同型として（一般形） | `def_T_V_plus` |
 | `Ising2D.TV_V1plusHalfUnits_V2Units` | 人手の `V_2` で作った `T_{(V^{(+)})}` は `TVPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値 | `def_T_V_plus` |
 | `Ising2D.TVPlus_eq_TConj` / `TVPlus_apply_eq_conj` | `T_{(V^{(+)})} = T_{V^{(+)}}` | `T_V_plus_is_conjugation` |
-| `Ising2D.checkPhase_mul_neg` | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質） | `nesting_of_commutator_of_H_and_check_Z` の proof |
+| `Ising2D.checkPhase_mul_neg`（`ClaimNestedCommutator.lean`） | `e^{-iθ~_μ} e^{iθ~_μ} = 1`（帰納段階で使う唯一の位相の性質） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.comm_smul_smul` | 交換子の双線型性 `[αX, βW] = αβ[X, W]`（人手の証明の冒頭の 4 行の鎖） | `nesting_of_commutator_of_H_and_check_Z` の proof |
 | `Ising2D.nesting_H1Plus_checkZ_step_even_to_odd` / `..._step_odd_to_even` ほか 8 本 | 4 式それぞれの帰納段階 1（`n` 偶数 → `n+1` 奇数）・帰納段階 2（`n` 奇数 → `n+1` 偶数）の鎖（`C_{n+1} = [K_1H_1^{(+)}, C_n]` と帰納法の仮定 → 双線型性 → (A)〜(D) → スカラーの整理） | 同上 |
 | `Ising2D.nesting_H1Plus_checkZ_even` / `..._odd` | (h1.z) の偶数側・奇数側（偶数側は基底段階の `calc` と、帰納段階 1・2 を続けて当てる `k` の帰納法） | `nesting_of_commutator_of_H_and_check_Z` (h1.z) |
@@ -35,16 +35,16 @@
 | `Ising2D.nesting_H2_checkZ_even` / `..._odd` | (h2.z) の偶数側・奇数側 | 同上 (h2.z) |
 | `Ising2D.nesting_H2_checkY_even` / `..._odd` | (h2.y) の偶数側・奇数側 | 同上 (h2.y) |
 | `Ising2D.adPow_eq_iterComm` / `Ising2D.nesting_*_of_necSuf` 8 本（`ClaimNestedCommutatorFromNecSuf.lean`） | 同じ 8 本を、必要十分版 `NecSuf.nested_*`（`NecSuf/NestedCommutatorTwoDim.lean`。`[h,z] = 2p y`・`[h,y] = -2q z`・`pq = 1`）に `(h, p, q) = (H_1^{(+)}, e^{-iθ~}, e^{iθ~})`・`(H_2, -1, -1)` を渡して導いたもの | 同上 |
-| `Ising2D.ad_smul_left` / `ad_smul_right` / `adPow_smul_left` | 補題 1 `ad_{αX}^n = α^n ad_X^n`（`ad_{αX} = α ad_X`、`ad_X` の ℂ 線型性、`n` の帰納法） | `cosh_sinh_coefficient_conversion_for_check` の補題 1 |
+| `Ising2D.ad_smul_left` / `ad_smul_right` / `adPow_smul_left`（`ClaimCoefficientConversion.lean`） | 補題 1 `ad_{αX}^n = α^n ad_X^n`（`ad_{αX} = α ad_X`、`ad_X` の ℂ 線型性、`n` の帰納法） | `cosh_sinh_coefficient_conversion_for_check` の補題 1 |
 | `Ising2D.I_pow_even` / `I_pow_odd` | 補題 2 `i^{2k} = (-1)^k`、`i^{2k+1} = i(-1)^k` | 同上の補題 2 |
 | `Ising2D.conversion_H1Plus_checkZ_even` / `..._odd` ほか 8 本 | (h1.z)(h1.y)(h2.z)(h2.y)。人手の鎖（補題 1 → `nesting_*` の代入 → `(i/2)^n = i^n2^{-n}`・`(2K_1)^n = 2^nK_1^n`・`2^{-n}2^n = 1` → 補題 2 → 符号の整理）どおりの `calc` | `cosh_sinh_coefficient_conversion_for_check` |
 | `Ising2D.adPow_smul_left_of_necSuf` / `conversion_*_of_necSuf` 8 本（`ClaimCoefficientConversionFromNecSuf.lean`） | 同じ 8 本を、具体版と同じ手順のまま補題 1 を `NecSuf.iterComm_smul_left` の特殊化、代入する入れ子交換子を `nesting_*_of_necSuf` に差し替えて導いたもの | 同上 |
 | `Ising2D.ad_V1plusHalf_checkZ` / `ad_V1plusHalf_checkY` / `ad_V2H2Form_checkZ` / `ad_V2H2Form_checkY` / `sK1_sq` / `sK2_sq`（同） | スカラー倍した生成子 `(i/2)K_1H_1^{(+)}`・`iK_2^*H_2` の 2 次元不変性（`αβ = K_1^2`, `(2K_2^*)^2`）。`T_actions_on_check_Z_Y` を必要十分版から導く `ClaimTActionsOnCheckFromNecSuf.lean` が使う | `T_actions_on_check_Z_Y` |
-| `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY` | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
+| `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY`（`ClaimExtractTaylor.lean`） | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
 | `Ising2D.extract_taylor_H2_checkZ` / `..._checkY` | (h2.z)(h2.y) の級数和 | 同上 |
 | `Ising2D.hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本 | 4 式の級数の収束と和。人手の 4 行（係数変換 → 偶奇分割 → 定数の括り出し → `cosh`・`sinh` のテイラー級数）どおり（`Complex.hasSum_cosh`・`Complex.hasSum_sinh`・`HasSum.even_add_odd`） | 同上 |
 | `Ising2D.hasSum_extract_taylor_H1Plus_checkZ_of_necSuf` ほか 4 本（`ClaimExtractTaylorFromNecSuf.lean`） | 同じ 4 式を必要十分版 `NecSuf.hasSum_two_dim_series` の特殊化として導いたもの | 同上 |
-| `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp` | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
+| `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp`（`ClaimTActionsOnCheck.lean`） | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式（`def_T_g` → `def_V1_plus_square_root` → `exp(X)^{-1}=exp(-X)` → `exp_X_Y_exp_-X` → (h1.z)(h1.y) の `calc`） | `T_actions_on_check_Z_Y` |
 | `Ising2D.smul_conj_smul_inv_eq` | 第 3・第 4 式の証明の、前因子 `(2s_2)^{M/2}` を打ち消す 2 行（スカラーを左端へ移す・`c c^{-1} = 1`） | 同上 |
 | `Ising2D.TConj_V2H2Form_checkZ` / `..._checkY` | 原文 第 3・第 4 式を `V2H2Form` の単元（一般形）で述べたもの（前因子 `(2s_2)^{M/2}` の相殺つき） | `T_actions_on_check_Z_Y` |
@@ -52,25 +52,27 @@
 | `Ising2D.linearity_of_T_on_check` | `T_g` の ℂ 線型性 | `linearity_of_T` |
 | `Ising2D.linearity_of_T_V1plusHalf` | `T_g` の ℂ 線型性の半指数行列への特殊化 | `linearity_of_T_on_check_Z_Y` |
 | `Ising2D.linearity_of_T_V2` / `linearity_of_T_V2H2Form` | `T_g` の ℂ 線型性の `V_2`（人手の `V_2`／一般形 `V2H2Form`）への特殊化 | `linearity_of_T_V2` |
-| `Ising2D.B1mat_zero_zero` ほか 8 本 | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |
+| `Ising2D.B1mat_zero_zero` ほか 8 本（`DefinitionB1B2.lean`） | `B_1(θ), B_2` の 4 成分が原文の行列と一致すること | `def_B1_theta_B2` |
 | `Ising2D.actsBy_TConj_V1plusHalf` | `(T Ž, T Y̌) = (Ž, Y̌) B_1(θ~_μ)`（上の第 1・第 2 式を 2 列に並べ、`def_B1_theta_B2` の成分と突き合わせる） | `calc_of_TxT_check_Z_Y` 第 1 式 |
 | `Ising2D.actsBy_TConj_V2H2Form_check` / `actsBy_TConj_V2_check` | `(T Ž, T Y̌) = (Ž, Y̌) B_2`（同じく第 3・第 4 式から。`V_2` を `V2H2Form`／人手の `V_2` で書いた 2 本） | 同 第 2 式 |
 | `Ising2D.actsBy_TConj_V1plusHalf_fromNecSuf` / `actsBy_TConj_V2H2Form_check_fromNecSuf` / `actsBy_TConj_V2_check_fromNecSuf` | 上の 2 式を必要十分版 `NecSuf.exp_conj_two_dim_actsBy`・`NecSuf.conj_smul_eq` の特殊化として得たもの（`ClaimTActionsOnCheckFromNecSuf.lean`） | 同 第 1・第 2 式 |
 | `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` / `actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` | 特殊化に使う、運動量の取り方に依らない補題（同じファイル。整数運動量の経路の記録もこれを使う） | 同上 |
-| `Ising2D.factorization_of_A_theta_general` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
+| `Ising2D.factorization_of_A_theta_general`（`ClaimFactorizationATheta.lean`） | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
 | `Ising2D.factorization_of_A_thetaTilde` | 上の `θ = θ~_μ` への特殊化 | 同上（「とくに」） |
 | `Ising2D.TVPlus_apply_checkZ` / `TVPlus_apply_checkY` | 原文の (z)・(y) の鎖（`def_T_V_plus` → `T_actions_on_check_Z_Y` → `linearity_of_T_V2` → `calc_of_TxT_check_Z_Y`（`B_2`）→ `linearity_of_T_on_check_Z_Y` → `calc_of_TxT_check_Z_Y`（`B_1(θ~)`）の 6 行の `calc`） | `T_V_plus_check_Z_Y` |
-| `Ising2D.B1mat_col_zero` / `B1mat_col_one` / `mulVec_mulVec_col` | (z)・(y) の列ベクトルが `B_1(θ~)` の第 1・第 2 列であること、`B_1(B_2(B_1 の第 j 列))` が `B_1B_2B_1` の第 j 列であること | `def_B1_theta_B2`（最後の鎖の 1 行目） |
+| `Ising2D.B1mat_col_zero` / `B1mat_col_one` / `mulVec_mulVec_col`（`ClaimTVPlusAction.lean`） | (z)・(y) の列ベクトルが `B_1(θ~)` の第 1・第 2 列であること、`B_1(B_2(B_1 の第 j 列))` が `B_1B_2B_1` の第 j 列であること | `def_B1_theta_B2`（最後の鎖の 1 行目） |
 | **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`（(z)・(y) の鎖を 2 列に並べ、`factorization_of_A_thetaTilde` を当てる） | **`T_V_plus_check_Z_Y`** |
 | `Ising2D.TVPlus_checkZ_checkY_of_necSuf` | 上を必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化として得たもの（`ClaimTVPlusActionFromNecSuf.lean`） | 同上 |
 | `Ising2D.TVPlus_checkZ_checkY_components` | 上を 2 本の等式（成分の形）で書いた版 | 同上 |
+| `Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1`（`ClaimTVPlusCheckZYViaB1B2B1.lean`） | 章「離散 Fourier 変換による 2×2 行列 A(θ~_μ) への帰着」の章末の主張: `V^{(+)} X (V^{(+)})^{-1} = T_{(V^{(+)})}(X)`（`X = Ž_μ, Y̌_μ`）と、`(Ž_μ, Y̌_μ)` への作用行列が `A(θ~_μ)` かつ `B_1(θ~_μ) B_2 B_1(θ~_μ)` であること（既存の主張を並べたもの） | `T_V_plus_check_Z_Y_via_B1_B2_B1` |
 
 ### 必要十分版
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.NecSuf.actsBy_sandwich` | `T_1` が `B_1`、`T_2` が `B_2` で作用するなら `T_1∘T_2∘T_1` は `B_1B_2B_1` で作用する（ℂ 上の任意の加群・任意の ℂ 線型写像） | `T_V_plus_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `linearity_of_T_V2` |
+| `Ising2D.NecSuf.actsBy_sandwich`（`TVActionSandwich.lean`） | `T_1` が `B_1`、`T_2` が `B_2` で作用するなら `T_1∘T_2∘T_1` は `B_1B_2B_1` で作用する（ℂ 上の任意の加群・任意の ℂ 線型写像） | `T_V_plus_check_Z_Y` / `calc_of_TxT_check_Z_Y` / `linearity_of_T_on_check_Z_Y` / `linearity_of_T_V2` |
 | `Ising2D.NecSuf.actsBy_TV_sandwich` | 上を `T_{(V)} = T_{g_1}∘T_{g_2}∘T_{g_1}` の形で述べた版（任意の ℂ-代数の単元） | 同上 |
+| `Ising2D.NecSuf.iterComm` / `iterComm_smul_left_one` / `iterComm_smul_right_one` / `iterComm_smul_left`（`IteratedCommutatorSmul.lean`） | `ad_{αx} = α ad_x`、`ad_x` の線型性、`ad_{αx}^n = α^n ad_x^n`（台は積を持つ加法群で、スカラーの作用が引き算と分配し、積と `(αx)w = α(xw)`・`x(αw) = α(xw)` で両立すればよい。スカラーは任意のモノイド） | `cosh_sinh_coefficient_conversion_for_check` の補題 1 |
 
 ---
 

@@ -115,6 +115,12 @@
 | **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
 | **`VPlusData.mem_evenSector_of_mem_range_univ`** | **最大固有ベクトルは偶セクター `𝓕^{(+)}` に属する** | **定理本体** |
 
+#### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`（ラベル `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` | `tr(εV^{(+)})` の実部が正ならば `η_{(1,…,1)} = +1` かつ `im Q̌_{(1,…,1)} ⊆ 𝓕^{(+)}`（`tr(εV^{(+)})` の実部が正であることを仮定として受け取る。(1) の閉じた形の等式は、この定理には無い） | 章末の主張の (2) |
+
 #### `ThermodynamicLimit/ColumnLimitAndClosedForm/TheoremCPlusEqualsLambda.lean`（ラベル `c_plus_equals_Lambda_half_integer`）
 
 | Lean の名前 | 内容 | 人手証明 |
@@ -143,6 +149,13 @@
 | `Ising2D.onsager_limit_in_N_row` | `N_row → ∞` の極限は `(1/M) log c(M)` | Step 1（章 012 の `limit_of_log_Z_in_N_row`） |
 | `Ising2D.onsager_limit_in_M` | 挟み撃ち `(1/M)log Λ ≤ (1/M)log c(M) ≤ (1/M)log Λ + (log 2)/M` から、`M → ∞` の極限が Onsager の表式になる | Step 3（`log` の単調性、`(log 2)/M → 0`、章 012 の `onsager_free_energy_expression` を `δ = 1/2` で適用） |
 | **`Ising2D.onsager_exact_solution`** | **`lim_{M→∞} lim_{N_row→∞} (1/(M N_row)) log Z = (1/2)log(2 sinh 2K_2) + (1/4π)∫₀^{2π} γ(θ)dθ`** | **定理本体** |
+
+#### `ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusValueCSandwichAndDoubleLimitOfLogZ.lean`（ラベル `c_plus_value_c_sandwich_and_double_limit_of_log_Z`）
+
+| Lean の名前 | 内容 | 人手証明 |
+| --- | --- | --- |
+| `Ising2D.c_plus_eq_LambdaM_half_physical` | 具体的な `W` について、`M ≥ 2` で `c_+(M) = Λ^{(1/2)}_M` | 章末の主張の (1)（`c_plus_equals_Lambda_half_integer`） |
+| `Ising2D.c_plus_value_c_sandwich_and_double_limit_of_log_Z` | (1) `c_+(M) = Λ^{(1/2)}_M`、(2) `Λ^{(1/2)}_M ≤ c(M) ≤ 2Λ^{(1/2)}_M`、(3) 2 重極限が Onsager の表式（仮定は `K_1, K_2 > 0` だけ） | 章末の主張 |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/DefinitionOpenChainAndBoundaryOperators.lean`・`ClaimH1PlusInSigmaZForm.lean`（ラベル `def_D0_open_chain_operator`・`def_G_boundary_operator`・`H1_plus_in_sigma_z_form`）
 

@@ -211,9 +211,9 @@ cd exact-solution-of-2d-ising-model/lean
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
-| `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.NecSuf.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数） |
+| `<scalar_identity_commutes>` | `Ising2D.scalar_identity_commutes_fin`（体 `K` 上の `Mat(n, K)`） | `Ising2D.NecSuf.smul_one_commute` / `smul_one_sub_comm`（任意の `S`-代数。`NecSuf/ScalarCentral.lean`） |
 | `<centralizer_is_scalar>` | `Ising2D.centralizer_is_scalar`（`Mat(2,ℂ)^{⊗M}`） | `Ising2D.NecSuf.centralizer_is_scalar_semiring`（係数は任意の半環） |
-| `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.NecSuf.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい） |
+| `<centralizer_is_scalar>` Step 2 の `E_{IJ}E_{KL} = δ_{JK}E_{IL}` | `Ising2D.E_mul_E` | `Ising2D.NecSuf.single_mul_single_eq_ite`（任意の半環・添字は 4 つとも別の型でよい。`NecSuf/MatrixUnits.lean`） |
 | `<centralizer_is_scalar>` Step 2 の `I = Σ_P E_{PP}` | `Ising2D.one_eq_sum_E` | `Ising2D.NecSuf.one_eq_sum_single`（任意の半環・任意の有限添字型） |
 | `<anticommutator_of_psi>` | `Ising2D.acomm_psiDag_psiDag` / `acomm_psiDag_psi` / `acomm_psi_psi`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.acomm_psi_relations_of_car`） | `Ising2D.NecSuf.acomm_lincomb_clifford` / `NecSuf.car_of_coeffs`（係数は任意の可換環、台は任意の環） |
 | `Z_Y_linearly_independent` | `Ising2D.ZY_linearIndependent`（`Mat(2,ℂ)^{⊗M}`。必要十分版からの導出は `Ising2D.ZY_linearIndependent_of_necSuf`、`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimZYLinearlyIndependentFromNecSuf.lean`） | `Ising2D.NecSuf.linearIndependent_of_clifford_necSuf`（係数は任意の可換環、台は任意の環。仮定は Clifford 関係＋スカラーの忠実性＋`2` の非零因子性だけ。`NecSuf/CliffordIndependence.lean`） |
@@ -412,9 +412,12 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `exp_of_diagonal_matrix` | `Ising2D.matrixExp_diagonal` / `matrixExp_diagonal_apply` | `MathematicalTools/MatrixExponentialAndCommutators/ClaimExpOfDiagonalMatrix.lean` |
 | `def_site_pauli_periodic_extension` / `first_transfer_matrix_pauli_form` | `Ising2D.sigmaZ_nextSite_of_last` / **`Ising2D.first_transfer_matrix_pauli_form`**（`V1 M K1 = V1PauliForm M K1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimFirstTransferMatrixPauliForm.lean` |
 | `def_second_dual_coupling_constant` | `Ising2D.Kstar` | `PartitionFunction/TransferMatrixRepresentation/DefinitionSecondDualCouplingConstant.lean` |
-| `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelation.lean`（必要十分版からの導出は同 `FromNecSuf`） |
+| `second_dual_coupling_relation` | `Ising2D.second_dual_coupling_relation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelation.lean`（必要十分版は `NecSuf/DualCouplingRelation.lean` の `Ising2D.NecSuf.dualCouplingProduct_eq_one`、そこからの導出は `PartitionFunction/ProjectionAndJordanWigner/ClaimSecondDualCouplingRelationFromNecSuf.lean` の `Ising2D.second_dual_coupling_relation_of_necSuf`） |
 | `two_by_two_transfer_identity` | `Ising2D.two_by_two_transfer_identity` | `PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean` |
+| `epsilon_square_identity` | `Ising2D.epsilon_mul_self`（`εε = I`） | `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`（必要十分版は `NecSuf/EpsilonSquare.lean` の `Ising2D.NecSuf.prefix_terminal_mul_self`、そこからの導出は `PartitionFunction/ProjectionAndJordanWigner/ClaimEpsilonSquareFromNecSuf.lean` の `Ising2D.epsilon_mul_self_of_necSuf`） |
+| `global_spin_flip_jordan_wigner_representation` | `Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString`（第二の有限帰納法）/ `Ising2D.epsilon_eq_i_pow_smul_zyPrefixProduct`（`ε = (√-1)^M Z_1Y_1⋯Z_MY_M`） | `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`（第二の有限帰納法の必要十分版は `NecSuf/ScalarPrefixProduct.lean` の `Ising2D.NecSuf.prefix_eq_pow_smul_of_local_smul`、そこからの導出は `PartitionFunction/ProjectionAndJordanWigner/ClaimGlobalSpinFlipJordanWignerRepresentationFromNecSuf.lean` の `Ising2D.zyPrefixProduct_eq_neg_i_pow_smul_xString_of_necSuf`） |
 | `def_second_transfer_matrix_prefactor` / `second_transfer_matrix_pauli_form` | `Ising2D.secondTransferPrefactor` / **`Ising2D.second_transfer_matrix_pauli_form`**（`V2 M K2 = V2PauliForm M (sinh 2K_2) K_2^*`、`K_2 > 0`） | `PartitionFunction/TransferMatrixRepresentation/ClaimSecondTransferMatrixPauliForm.lean` |
+| `partition_function_via_pauli_transfer_matrices` | `Ising2D.partition_function_via_pauli_transfer_matrices`（`Z = tr((V1PauliForm · V2PauliForm)^{N_row})`、`K_2 > 0`、`N_row ≥ 1`） | `PartitionFunction/TransferMatrixRepresentation/ClaimPartitionFunctionViaPauliTransferMatrices.lean` |
 | `V1_in_Z_Y_epsilon` | `Ising2D.V1_in_Z_Y_epsilon` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean` |
 | `V2_in_Z_Y` / `V2_exponential_representation` | `Ising2D.V2_in_Z_Y` / `Ising2D.V2_exponential_representation` | `PartitionFunction/ProjectionAndJordanWigner/ClaimV2InZY.lean` |
 | `V_plus_exponential_form` | `Ising2D.V_plus_exponential_form`（`VPlusOfTransfer` の指数表示） | `PartitionFunction/ProjectionAndJordanWigner/ClaimVPlusExponentialForm.lean` |
@@ -600,7 +603,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.TV_psiDag_psi_of_action` | 上を `λ_{±,μ} = γ_1 ∓ i t` の明示形で述べた版 | 同上 |
 | `Ising2D.NecSuf.acomm_lincomb` / `NecSuf.acomm_lincomb_clifford` | 反交換関係を満たす 4 元の線型結合の反交換子 `= ((pp'+qq')D)·1`（**必要十分版**、任意の ℂ-代数） | `anticommutator_of_psi` |
 | `Ising2D.NecSuf.car_of_coeffs` | 必要十分版 CAR（仮定は反交換関係＋係数のスカラー恒等式 2 本だけ） | 同上 |
-| `Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf` | `acomm_hatZMinus_hatY_lin2` が必要十分版の特殊化であることの確認 | 同上 |
+| `Ising2D.acomm_hatZMinus_hatY_lin2_of_necSuf`（`ClaimAnticommutatorPsiFromNecSuf.lean`） | `acomm_hatZMinus_hatY_lin2` が必要十分版の特殊化であることの確認 | 同上 |
 | `Ising2D.acomm_psi_relations_of_car` | `ψ` の反交換関係 3 式を**必要十分版の系として**導出した版（具体版と同じ主張） | 同上 |
 | `Ising2D.acomm_psiDag_psiDag_of_opposite_branch` | **逆分枝 `t_ν = -t_μ` では `[ψ_μ^†, ψ_ν^†]₊ = I`**（同一分枝の仮定が必要なことの証明） | 同上 |
 | `Ising2D.acomm_psiDag_psi_of_opposite_branch` | **逆分枝では `[ψ_μ^†, ψ_ν]₊ = 0`**（原文第 2 式が破れる） | 同上 |
@@ -624,7 +627,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.actsBy_TConj_V1pmHalf` / `actsBy_TConj_V2H2Form` | **`T_{(V_1^{(-)})^{1/2}}`, `T_{V_2}` の作用行列が `B_1(θ_μ)`, `B_2` であること（証明済み。以前は仮定）** | `<ホロノミック量子場_p142下段_1>` |
 | `Ising2D.TV_hatZ_hatY` | **原文 `T_V_hatZ_hatY` の無条件版**（`ActsBy` の仮定なし。残るのは `IsingConst` と `K_1,K_2^*` の関係と双対関係 `hdual` だけ） | `<T_V_hatZ_hatY>` |
 | `Ising2D.TV_psiDag` / `TV_psi` / `TV_psiDag_psi` | **原文 `commutation_V_psi` の無条件版**（`ActsBy` の仮定なし） | `<commutation_V_psi>` |
-| `Ising2D.expPhase_congr` / `hatZ_congr` / `hatY_congr` | 添字が `M` を法として合同なら位相因子・`hat(Z)`・`hat(Y)` は等しい（`M` 周期性の一般形） | `<commutator_of_H_and_Z_Y>` の場合分けの代用 |
+| `Ising2D.expPhase_congr` / `hatZ_congr` / `hatY_congr`（`ClaimH1H2ViaHatZHatY.lean`） | 添字が `M` を法として合同なら位相因子・`hat(Z)`・`hat(Y)` は等しい（`M` 周期性の一般形） | `<commutator_of_H_and_Z_Y>` の場合分けの代用 |
 | `Ising2D.dvd_succ_sub_iff_eq_nextSite` | `M ∣ (k_1 - k_2 + 1) ⟺ k_2 = nextSite k_1`（原文の 2 通りの場合分けの一意性） | `<H1_H2_via_hatZ_hatY>` |
 | `Ising2D.firstSign_nextSite` | `hat(Z)^{(±)}` の `j = 1` の係数と `H_1^{(±)}` の `m = M` の係数が同じ `η` で対応すること | 同上 |
 | `Ising2D.H1_eq_hat_sum` / `H2_eq_hat_sum` | `H_1^{(±)} = (1/M)∑_j e^{-i2πj/M} hat(Y)_j hat(Z)^{(±)}_{-j}`、`H_2 = (1/M)∑_j hat(Z)^{(-)}_{-j} hat(Y)_j` | `<H1_H2_via_hatZ_hatY>` |

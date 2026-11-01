@@ -438,12 +438,19 @@
     同じ表の人手ラベル `gamma_2_periodicity`（本文にもノートにも無い）を、`gamma2_add_int_mul_two_pi` は `periodicity_of_check_fermi` の (1) の `γ_2` 側、`gamma2_thetaMu_of_dvd` は整数運動量の経路だけが使う退避ノートの `gamma2_theta_M_periodicity` の一般形、の 2 行に分けて直した。
     README の「ビルド」節にスクリプトの使い方を足した。二回のレビューの指摘（必須 2 件・任意 7 件）を直した。
 
+  - ゴールラインの確認の二十五個目（済み、2026-11-01）: `lean/README.md` と `lean/docs/` の表の行か見出しにファイル名で出ない `Ising2D/` の Lean のファイルが 86 個あった
+    （前回の 21 個は「ファイル名も宣言した名前もどこにも出ない」で数えた数。今回は表の行か見出しにファイル名で出ることを基準にした）。
+    67 個は、そのファイルで宣言した名前が既に載っている表の行の Lean の名前の列にファイル名を書き足した。
+    19 個は行を足した（章末の主張 7 本、`FromNecSuf` と必要十分版 6 本、`RealMatrixBilinearFormAndNorm.lean`（ch011 の表の下の段落を表の行にした）、`IteratedCommutatorSmul.lean`、`ScalarCentral.lean`・`MatrixUnits.lean`、退避した `symmetrized_transfer_matrix_on_sector_exponential_form`）。
+    `check-docs-references.sh` に検査 3「`Ising2D/` の全ファイルが、経緯の段落の外の表の行か見出しにファイル名で出る（そのファイル名で 1 つのファイルに決まるときだけ数え、コードブロックの中は数えない）」を足した。
+    mathlib のパスの検査は `.lake/packages/mathlib/Mathlib` が在るときだけ行うようにした（取得途中の作業ツリーで偽の不合格になっていた）。レビューの指摘（必須 2 件・任意 6 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `lean/README.md` と `lean/docs/` の対応表に、ファイル名も宣言した名前も 1 つも出ない Lean のファイルが 21 個ある（2026-11-01 に数えた。束ねた主張のファイル、`*FromNecSuf.lean`、`NecSuf/` の一部。例: `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`、`NecSuf/DualCouplingRelation.lean`）。
-  各ファイルを対応する章の記録（`lean/docs/`）の表へ足し、「全ファイルが表に出る」を `check-docs-references.sh` の検査に加える。
+- 人手 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus`（`EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimMaxEigenvectorInEvenSectorViaTraceOfEpsilonVPlus.lean`）の Lean は、章末の主張の (1)（`tr(εV^{(+)})` の閉じた形）を立てず、(2) を `tr(εV^{(+)})` の実部が正という仮定 `htr` の下で示している。
+  冒頭のコメントは「(1) はまだ Lean の定理が無い」と書くが、項目 4 で `trace_epsilon_vPlusDataOf_pos`（`ClaimTraceEpsilonVPlusClosedForm.lean`）ができたので古い。(1) を立てて `htr` を外し、コメントと ch018 の行を直す。
 - 対応表の人手ラベルの列に、いまの本文・ノートの `labels` に無い名前が 87 件ある（多くは参照用ノートへ退避した整数運動量の経路のラベルで、ノートの本文に「labels: …」の文字としてだけ残る）。
   退避したものは退避先のノートが分かる書き方へ、改名されたものはいまのラベルへ直し、ラベルの実在を `check-docs-references.sh` の検査に加える。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。

@@ -17,7 +17,7 @@
 
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.lie_H2_hatZMinus_eq` | `[H_2, hat(Z)^{(-)}_μ] = -2 hat(Y)_μ`（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の再掲） | `why_008_applies_only_to_minus_sector` |
+| `Ising2D.lie_H2_hatZMinus_eq`（`ClaimWhyIntegerMomentumOnlyMinusSector.lean`） | `[H_2, hat(Z)^{(-)}_μ] = -2 hat(Y)_μ`（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の再掲） | `why_008_applies_only_to_minus_sector` |
 | `Ising2D.lie_H2_hatZPlus_eq` | `[H_2, hat(Z)^{(+)}_μ] = -2 hat(Y)_μ + 4 e^{-iθ_μ} Y_1`（同上） | 同上 |
 | `Ising2D.lie_H2_hatZPlus_ne_lie_H2_hatZMinus` | `[H_2, hat(Z)^{(+)}_μ] ≠ -2 hat(Y)_μ`（**本章で新規**） | 同上 |
 | `Ising2D.lie_H2_hatZPlus_ne_hatZMinus` | 2 つの交換子が一致しないこと | 同上 |
@@ -35,9 +35,9 @@
 | `Ising2D.antiperiodic_complex_exp_sum_not_dvd` | 本文と同じ `Complex.exp` で、`M ∤ k` のとき和は `0` | 同上 |
 | `Ising2D.antiperiodic_complex_exp_sum_nonzero_of_abs_lt` | 本文と同じ `Complex.exp` で、`|k|<M, k\ne0` のとき和は `0` | 同上（「とくに」） |
 | `Ising2D.antiperiodic_complex_exp_sum_zero` | 本文と同じ `Complex.exp` で、`k=0` のとき和は `M` | 同上（「とくに」） |
-| `Ising2D.antiperiodic_exp_sum_dvd` / `antiperiodic_exp_sum_not_dvd` / `antiperiodic_exp_sum_nonzero_of_abs_lt` / `antiperiodic_exp_sum_zero` | 直前四主張を内部表現 `checkPhase` で書いたもの | 同上（補助） |
+| `Ising2D.antiperiodic_exp_sum_dvd` / `antiperiodic_exp_sum_not_dvd` / `antiperiodic_exp_sum_nonzero_of_abs_lt` / `antiperiodic_exp_sum_zero`（`ClaimAntiperiodicExpSum.lean`） | 直前四主張を内部表現 `checkPhase` で書いたもの | 同上（補助） |
 | `Ising2D.sum_checkPhase` | 上を周波数そのままで書いた形（以降の計算で使う） | 同上 |
-| `Ising2D.checkZ` | `check(Z)_μ` | `def_half_integer_checkZ` |
+| `Ising2D.checkZ`（`DefinitionHalfIntegerModes.lean`） | `check(Z)_μ` | `def_half_integer_checkZ` |
 | `Ising2D.checkY` | `check(Y)_μ` | `def_half_integer_checkY` |
 | `Ising2D.checkPhase_antiperiodic` | `e^{-iMθ~_μ} = -1` | `half_integer_phase_antiperiodicity` |
 | `Ising2D.checkZ_period` | `check(Z)_{μ+M} = check(Z)_μ` | `half_integer_checkZ_periodicity` |
@@ -46,7 +46,7 @@
 | `Ising2D.checkPhase_one_sub` | (3) の位相因子版 | `def_half_integer_modes` (3) |
 | `Ising2D.CheckIndex` | `μ ∈ 𝓜̌ = {1,…,M}` | `def_check_index_set` |
 | `Ising2D.thetaTilde_ne` | (1) `μ ≠ ν ⟹ θ~_μ ≠ θ~_ν` | 同上 (1) |
-| `Ising2D.thetaTilde_pos` / `thetaTilde_lt_two_pi` | (1) `0 < θ~_μ < 2π` | 同上 (1) |
+| `Ising2D.thetaTilde_pos` / `thetaTilde_lt_two_pi`（`DefinitionCheckIndexSet.lean`） | (1) `0 < θ~_μ < 2π` | 同上 (1) |
 | `Ising2D.checkIndex_conj` | (2) `μ ∈ 𝓜̌ ⟹ M+1-μ ∈ 𝓜̌` | 同上 (2) |
 | `Ising2D.conj_index_sub` | (3) `(M+1-μ)-(1-μ) = M` | 同上 (3) |
 | `Ising2D.conj_index_self_iff` / `thetaTilde_of_self_conj` | (4) 自己共役点と `θ~_μ = π` | 同上 (4) |
@@ -55,18 +55,18 @@
 | `Ising2D.thetaTilde_conj` | (1) `θ~_{M+1-μ} = 2π - θ~_μ` | `conjugate_index_of_check_Z_Y` |
 | `Ising2D.checkPhase_conj'` | (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}`（人手の 4 行: (1)・指数法則・Euler の公式・`cos(2πj)=1, sin(2πj)=0`） | 同上 (2) |
 | `Ising2D.checkPhase_conj` | (2) の右辺を `2M` 乗根の位相因子で書いた形 | 同上 (2) |
-| `Ising2D.checkZ_conj` / `checkY_conj` | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
+| `Ising2D.checkZ_conj` / `checkY_conj`（`ClaimConjugateIndex.lean`） | (3) `check(Z)_{M+1-μ} = check(Z)_{1-μ}` | 同上 (3) |
 | `Ising2D.checkZ_conj_eq` / `checkY_conj_eq` | (3) の展開形（`H_1, H_2` の証明で使う） | 同上 |
 | `Ising2D.sum_sum_smul_two_deltaM_smul_one` | 証明中の行「`1 ≤ j,k ≤ M` では `δ^M_{(j,k)} = 1 ⟺ j = k`」（二重和の `j = k` の項だけが残る） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.deltaMod_sub_one` | 証明中の行 `δ^M_{(μ+ν-1,0)} = δ^M_{(μ+ν,1)}`（`def_delta_M`） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.acomm_checkZ_checkZ` | `[check(Z)_μ, check(Z)_ν]₊ = 2M δ^M_{μ+ν,1} I`（原文の式変形と 1 行ずつ対応する `calc`） | `anticommutator_of_check_Z_Y` |
 | `Ising2D.acomm_checkZ_checkY` | `[check(Z)_μ, check(Y)_ν]₊ = 0` | 同上 |
 | `Ising2D.acomm_checkY_checkY` | `[check(Y)_μ, check(Y)_ν]₊ = 2M δ^M_{μ+ν,1} I` | 同上 |
-| `Ising2D.acomm_checkZ_checkZ_of_mem` / `acomm_checkY_checkY_of_mem` | 上を `μ,ν ∈ 𝓜̌` で `δ_{ν,M+1-μ}` の形にしたもの（原文の主張そのもの） | 同上 |
+| `Ising2D.acomm_checkZ_checkZ_of_mem` / `acomm_checkY_checkY_of_mem`（`ClaimAnticommutatorCheckZY.lean`） | 上を `μ,ν ∈ 𝓜̌` で `δ_{ν,M+1-μ}` の形にしたもの（原文の主張そのもの） | 同上 |
 | `Ising2D.expPhase_nextSite` | 境界の符号 `-1` が反周期性から出ること | `H1_H2_via_check_Z_Y`（参照用ノートへ退避。`RoutesNotAdopted/ClaimsUnusedByChapterGoals/ClaimH1H2ViaCheckZY.lean`） |
 | `Ising2D.H2_eq_check_sum` | `H_2 = (1/M) ∑_μ check(Z)_{M+1-μ} check(Y)_μ` | 同上 |
 | `Ising2D.H1Plus_eq_check_sum` | `H_1^{(+)} = (1/M) ∑_μ check(Y)_μ check(Z)_{M+1-μ} e^{-iθ~_μ}` | 同上 |
-| `Ising2D.lie_ZY_Z_of_ne` / `lie_ZY_Y_of_ne` / `lie_YZ_Z_of_ne` / `lie_YZ_Y_of_ne` | Step 1 の、相異なる添字の項が消える 4 式 | `commutator_of_H_and_check_Z_Y` |
+| `Ising2D.lie_ZY_Z_of_ne` / `lie_ZY_Y_of_ne` / `lie_YZ_Z_of_ne` / `lie_YZ_Y_of_ne`（`ClaimCommutatorHCheckZY.lean`） | Step 1 の、相異なる添字の項が消える 4 式 | `commutator_of_H_and_check_Z_Y` |
 | `Ising2D.lie_ZY_Z_self` / `lie_ZY_Y_self` / `lie_YZ_Z_right` / `lie_YZ_Y_left` | Step 1 の、同じ添字を含む項の 4 式（境界項はこの後ろ 2 本へ線型性で帰着） | 同上 |
 | `Ising2D.Yflat` / `Zflat` | Step 1 の反周期的な延長 `Y♭_l`・`Z♭_l` | 同上 |
 | `Ising2D.lie_H2_Z` / `lie_H2_Y` / `lie_H1Plus_Z` / `lie_H1Plus_Y` | Step 1 の、和へまとめた 4 式 | 同上 |
@@ -76,7 +76,7 @@
 | `Ising2D.lie_H2_checkZ` | (C) `[H_2, check(Z)_μ] = -2 check(Y)_μ` | 同上 |
 | `Ising2D.lie_H2_checkY` | (D) `[H_2, check(Y)_μ] = 2 check(Z)_μ` | 同上 |
 | `Ising2D.inverse_dft_check` | 反周期的離散フーリエ逆変換（任意の族に対する形） | `recover_Z_Y_from_check_Z_Y` |
-| `Ising2D.recover_checkZ` / `recover_checkY` | `∑_μ check(Z)_μ e^{ijθ~_μ} = M Z_j` ほか | 同上 |
+| `Ising2D.recover_checkZ` / `recover_checkY`（`ClaimRecoverZYFromCheckZY.lean`） | `∑_μ check(Z)_μ e^{ijθ~_μ} = M Z_j` ほか | 同上 |
 | `Ising2D.Z_eq_inverse_dft_check` / `Y_eq_inverse_dft_check` | `Z_j = (1/M) ∑_μ …` ほか | 同上 |
 | `Ising2D.checkZYSet` / `checkZ_checkY_generate_algebra` | `check(Z), check(Y)` が `Mat(2^M,ℂ)` を生成する | 同上（「とくに」） |
 

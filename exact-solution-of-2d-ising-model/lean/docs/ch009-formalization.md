@@ -20,11 +20,11 @@
 | `NecSuf.ann_mul_cre` | `a_i c_i = 1 - n_i` | 同 (2) |
 | `NecSuf.num_mul_num` | `n_i^2 = n_i` | 同 (3) |
 | `NecSuf.commute_mul_of_anticommute` | 反可換 2 元の積との可換性 | `number_operators_commute` Step 2 |
-| `NecSuf.commute_cre_num` / `commute_ann_num` | `c_i`, `a_i` は `n_j` (`i≠j`) と可換 | `number_operators_commute` (1) |
+| `NecSuf.commute_cre_num` / `commute_ann_num`（`NumberOperator.lean`） | `c_i`, `a_i` は `n_j` (`i≠j`) と可換 | `number_operators_commute` (1) |
 | `NecSuf.commute_num_num` | `n_i n_j = n_j n_i` | 同 (2) |
 | `NecSuf.commute_num_of_commute` | `c_i, a_i` が `P` と可換なら `n_i` も | 補助（原文は暗黙） |
 | `NecSuf.tau_num_mul_add_self` | `τ(n_i P) + τ(n_i P) = τ(P)` | `trace_of_number_operator_product` の帰納段階 |
-| `NecSuf.projFactor` / `projOn` | `R_μ^{(ε_μ)}` と `Q_ε = ∏ R` | `joint_eigenspace_decomposition` |
+| `NecSuf.projFactor` / `projOn`（`JointEigenspace.lean`） | `R_μ^{(ε_μ)}` と `Q_ε = ∏ R` | `joint_eigenspace_decomposition` |
 | `NecSuf.projOn_mul_self` | `Q_ε^2 = Q_ε` | 同 (1) 後半 |
 | `NecSuf.projOn_mul_projOn_of_ne` | `ε≠ε' ⇒ Q_ε Q_{ε'} = 0` | 同 (1) 前半 |
 | `NecSuf.sum_projOn` | `∑_ε Q_ε = 1` | 同 (2) |
@@ -45,12 +45,12 @@
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
 | `trace_eq_sum_diag` | `tr(A) = ∑_k A_{kk}`（mathlib `Matrix.trace` と一致） | `def_trace` |
-| `trace_linear` / `trace_cyclic` / `trace_one_eq_card` / `trace_conj` | 線型性・巡回性・`tr(I)=n`・共役不変 | `trace_basic_properties` (1)(2)(3)(4) |
+| `trace_linear` / `trace_cyclic` / `trace_one_eq_card` / `trace_conj`（`DefinitionTrace.lean`） | 線型性・巡回性・`tr(I)=n`・共役不変 | `trace_basic_properties` (1)(2)(3)(4) |
 | `trace_of_idempotent` | `Q^2=Q ⇒ tr(Q) = dim im Q` | `trace_of_idempotent` |
 | `isCompl_range_ker_of_idempotent` | `ℂ^n = im Q ⊕ ker Q` | 同 Step 1 |
 | `trace_one_tensorPow` | `tr(I) = 2^M` | `trace_of_number_operator_product` の `k=0` |
 | `tensorPow_two_torsion_free` | `x+x=0 → x=0`（`Mat(2^M,ℂ)`。定義は本文の `EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean` にあり、ここから使う） | `number_operator_idempotent` (1) の「`2≠0`」 |
-| `FermiSetup` | 原文 `def_number_operator` の設定（`𝓘`, 分枝 `t`） | `def_number_operator` |
+| `FermiSetup`（`DefinitionNumberOperator.lean`） | 原文 `def_number_operator` の設定（`𝓘`, 分枝 `t`） | `def_number_operator` |
 | `FermiSetup.nOp` | `n_μ = ψ_μ^† ψ_{-μ}` | `def_number_operator` |
 | `FermiSetup.acomm_cre_cre` / `acomm_ann_ann` / `acomm_cre_ann` | `𝓘` 上の CAR（`δ^M` が Kronecker `δ_{μν}` になる） | `anticommutator_of_psi` の制限 |
 | `FermiSetup.cre_sq` / `ann_sq` | `(ψ^†)^2 = 0`, `(ψ)^2 = 0` | `number_operator_idempotent` (1) |
@@ -58,7 +58,7 @@
 | `FermiSetup.nOp_mul_self` | `n_μ^2 = n_μ` | 同 (3) |
 | `FermiSetup.commute_cre_nOp` / `commute_ann_nOp` | `ψ_μ^†, ψ_{-μ}` は `n_ν` と可換 | `number_operators_commute` (1) |
 | `FermiSetup.commute_nOp_nOp` | `n_μ n_ν = n_ν n_μ` | 同 (2) |
-| `FermiSetup.Qproj` / `Qproj'` | `Q_ε`（`Finset` 版 / `ε : 𝓘 → Bool` 版） | `joint_eigenspace_decomposition` |
+| `FermiSetup.Qproj` / `Qproj'`（`ClaimJointEigenspaceDecomposition.lean`） | `Q_ε`（`Finset` 版 / `ε : 𝓘 → Bool` 版） | `joint_eigenspace_decomposition` |
 | `FermiSetup.Qproj_mul_self` / `Qproj_mul_Qproj_of_ne` | (1) | 同 (1) |
 | `FermiSetup.sum_Qproj` | `∑_ε Q_ε = I` | 同 (2) |
 | `FermiSetup.nOp_mul_Qproj` | `n_ν Q_ε = ε_ν Q_ε` | 同 (3) |
@@ -66,7 +66,7 @@
 | `FermiSetup.finrank_range_Qproj` | `dim im Q_ε = 2^{M-m}` | 同 (4) 後半 |
 | `FermiSetup.card_I_le` | `m ≤ M` | 同（`2^{M-m}` が書けることの根拠） |
 | `FermiSetup.sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` | 直和分解（張ること・直和性） | 同 (5) Step 5 |
-| `FermiSetup.Xop` / `Vprime` / `gval` | `X`, `V' = exp(X)`, `g(ε)` | `def_number_operator`, `def_Vprime` |
+| `FermiSetup.Xop` / `Vprime` / `gval`（`ClaimEigenvaluesAndTraceOfVprime.lean`） | `X`, `V' = exp(X)`, `g(ε)` | `def_number_operator`, `def_Vprime` |
 | `FermiSetup.Xop_mul_Qproj` | `X Q_ε = g(ε) Q_ε` | `eigenvalues_of_Vprime` Step 1 |
 | `FermiSetup.Vprime_mul_Qproj` | `V' Q_ε = e^{g(ε)} Q_ε` | 同 Step 3 |
 | `FermiSetup.Vprime_mulVec_of_mem_range` | `im Q_ε` の元は固有ベクトル | 同 Step 4 |
@@ -77,7 +77,7 @@
 | `FermiSetup.trace_Vprime_pos` | `tr(V') > 0` | 同 Step 5 |
 | `pauliX/Y/Z_transpose`, `..._conjTranspose` | Pauli 行列の転置・共役転置 | `iH_is_real_symmetric` Step 3 |
 | `siteProd_transpose` / `siteProd_conjTranspose` | クロネッカー積の転置は因子ごとの転置 | `kronecker_transpose` |
-| `Z_transpose` / `Z_conjTranspose` / `Y_transpose` / `Y_conjTranspose` | `Z^⊤=Z`, `Y^⊤=-Y`, `Z^*=Z`, `Y^*=Y` | 同（原文には無い中間段階） |
+| `Z_transpose` / `Z_conjTranspose` / `Y_transpose` / `Y_conjTranspose`（`ClaimPositiveDefinite.lean`） | `Z^⊤=Z`, `Y^⊤=-Y`, `Z^*=Z`, `Y^*=Y` | 同（原文には無い中間段階） |
 | `S1plus_isHermitian` / `S1plus_transpose` / `S2_isHermitian` / `S2_transpose` | `S_1^{(+)}, S_2` は実対称（人手の本文は `(+)` だけ。`S1_isHermitian` / `S1_transpose` は境界項の係数を `η` にした補助の一般形で、`S1plus_*` はその `η = -1`） | `iH_is_real_symmetric` |
 | `entries_real_of_isHermitian_of_transpose` | 「実対称」＝「エルミート＋転置不変」 | `def_hermitian_positive_definite` の最後の注意 |
 | `posDef_smul_of_pos` | 正定値の正実数倍は正定値 | `exp_hermitian_is_positive_definite` (3) |
@@ -89,7 +89,7 @@
 | `Uflip_conj_H1plus` / `Uflip_conj_H2` / `Uflip_conj_S1plus` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S`（`H = H_1^{(+)}, H_2`。`Uflip_conj_H1` / `Uflip_conj_S1` は補助の一般形） | `sign_flip_conjugation` |
 | `Uflip_conj_pow` / `Uflip_conj_expPartialSum` | `US^kU^{-1} = (USU^{-1})^k`、部分和の共役 `U s_n(S) U^{-1} = s_n(USU^{-1})` | `constant_c_value` Step 2 |
 | `Uflip_conj_matExp` | `U exp(S) U^{-1} = exp(USU^{-1})`（部分和の共役・ノルム評価による極限との交換・極限の一意性） | `constant_c_value` Step 2 |
-| `VmatInv` / `Vmat_mul_VmatInv` / `VmatInv_mul_Vmat` | `V^{-1}` の明示形 | `V_is_positive_definite` Step 4 |
+| `VmatInv` / `Vmat_mul_VmatInv` / `VmatInv_mul_Vmat`（`ClaimConstantCAndEigenvaluesOfV.lean`） | `V^{-1}` の明示形 | `V_is_positive_definite` Step 4 |
 | `tauTrace` / `trace_Vmat` / `trace_VmatInv` | `τ`, `tr(V) = (2s_2)^{M/2}τ`, `tr(V^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value` Step 1 |
 | `trace_exp_neg_eq_tau` | `tr(exp(-S_1)exp(-S_2)) = τ` | 同 Step 2 |
 | `constant_c_value` | **`c = (2 sinh 2K_2)^{M/2}`** | `constant_c_value` |
