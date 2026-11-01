@@ -662,6 +662,8 @@ y^2>x\ \land\ x>0
     labels: ["mat_columnwise"],
     statement: [
       paragraph([
+        math(String.raw`m,n,p \in \mathbb{Z}_{\geq 1}`),
+        "、",
         math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
         "、",
         math(String.raw`b_1,\dots,b_p \in \mathbb{C}^n`),
