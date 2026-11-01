@@ -1172,4 +1172,165 @@ z_V(\lambda\cdot_V x)
 \end{aligned}`),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_sum_of_linear_combinations_of_same_family",
+    kind: "claim",
+    title: { text: "同じ族の二つの線型結合の和は、係数ごとの和による線型結合である" },
+    labels: ["claim_sum_of_linear_combinations_of_same_family"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " と ",
+        math(String.raw`\mu_k`),
+        " が一つずつ与えられているとする。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)+_V\left(\sum_{k=1}^{n}\mu_k\cdot_V b_k\right)=\sum_{k=1}^{n}(\lambda_k+_{\mathbb{C}}\mu_k)\cdot_V b_k`),
+    ],
+    proof: [
+      paragraph([
+        "係数 ",
+        math(String.raw`\lambda_1,\dots,\lambda_n`),
+        "、",
+        math(String.raw`\mu_1,\dots,\mu_n`),
+        "、",
+        math(String.raw`\lambda_1+_{\mathbb{C}}\mu_1,\dots,\lambda_n+_{\mathbb{C}}\mu_n`),
+        " のそれぞれと族 ",
+        math(String.raw`b`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`L_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）を、順に ",
+        math(String.raw`L^{\lambda}_m`),
+        "、",
+        math(String.raw`L^{\mu}_m`),
+        "、",
+        math(String.raw`L^{\lambda+\mu}_m`),
+        " と書く。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L^{\lambda}_0:=0_V`),
+          "、",
+          math(String.raw`L^{\lambda}_m:=L^{\lambda}_{m-1}+_V(\lambda_m\cdot_V b_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`L^{\mu}_0:=0_V`),
+          "、",
+          math(String.raw`L^{\mu}_m:=L^{\mu}_{m-1}+_V(\mu_m\cdot_V b_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`L^{\lambda+\mu}_0:=0_V`),
+          "、",
+          math(String.raw`L^{\lambda+\mu}_m:=L^{\lambda+\mu}_{m-1}+_V\bigl((\lambda_m+_{\mathbb{C}}\mu_m)\cdot_V b_m\bigr)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "主張の左辺は ",
+        math(String.raw`L^{\lambda}_n+_V L^{\mu}_n`),
+        "、右辺は ",
+        math(String.raw`L^{\lambda+\mu}_n`),
+        " である。すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L^{\lambda}_m+_V L^{\mu}_m=L^{\lambda+\mu}_m`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m=n`),
+        " の場合が主張である。",
+      ]),
+      paragraph([math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+L^{\lambda}_0+_V L^{\mu}_0
+&=0_V+_V 0_V
+&&\left(\because\ L^{\lambda}_0,\ L^{\mu}_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_V
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda+\mu}_0
+&&\left(\because\ L^{\lambda+\mu}_0\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`L^{\lambda}_{m-1}+_V L^{\mu}_{m-1}=L^{\lambda+\mu}_{m-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。式を短くするため、",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`c:=\lambda_m\cdot_V b_m`),
+        " と ",
+        math(String.raw`d:=\mu_m\cdot_V b_m`),
+        " を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L^{\lambda}_m+_V L^{\mu}_m
+&=\bigl(L^{\lambda}_{m-1}+_V c\bigr)+_V\bigl(L^{\mu}_{m-1}+_V d\bigr)
+&&\left(\because\ L^{\lambda}_m,\ L^{\mu}_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=L^{\lambda}_{m-1}+_V\Bigl(c+_V\bigl(L^{\mu}_{m-1}+_V d\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda}_{m-1}+_V\Bigl(\bigl(c+_V L^{\mu}_{m-1}\bigr)+_V d\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda}_{m-1}+_V\Bigl(\bigl(L^{\mu}_{m-1}+_V c\bigr)+_V d\Bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda}_{m-1}+_V\Bigl(L^{\mu}_{m-1}+_V\bigl(c+_V d\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(L^{\lambda}_{m-1}+_V L^{\mu}_{m-1}\bigr)+_V\bigl(c+_V d\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda+\mu}_{m-1}+_V\bigl(c+_V d\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=L^{\lambda+\mu}_{m-1}+_V\bigl((\lambda_m\cdot_V b_m)+_V(\mu_m\cdot_V b_m)\bigr)
+&&\left(\because\ c,\ d\ \text{の置き方}\right)\\
+&=L^{\lambda+\mu}_{m-1}+_V\bigl((\lambda_m+_{\mathbb{C}}\mu_m)\cdot_V b_m\bigr)
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=L^{\lambda+\mu}_m
+&&\left(\because\ L^{\lambda+\mu}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L^{\lambda}_m+_V L^{\mu}_m=L^{\lambda+\mu}_m`),
+        " が示された。",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`m=0`),
+        " の場合だけで足りる。",
+      ]),
+    ],
+  },
 ]);
