@@ -199,7 +199,7 @@ y_c'
         [
           paragraph([
             "i) ",
-            math("\\arcsin:\\{y\\in\\mathbb{R}\\mid -1\\le y\\le 1\\}\\to\\{\\theta\\in\\mathbb{R}\\mid -\\pi/2\\le\\theta\\le\\pi/2\\}"),
+            math("\\arcsin:\\{y\\in\\mathbb{R}\\mid -1\\le y\\le 1\\}\\to\\mathbb{R}"),
             " を以下のように定める。",
           ]),
           paragraph([
@@ -210,7 +210,7 @@ y_c'
           ]),
           displayMath("\\arcsin(y):=l(AP)"),
           paragraph(["と定める。"]),
-          paragraph([math("y'\\in\\mathbb{R},\\ -1\\le y'\\le 0"), " について、"]),
+          paragraph([math("y'\\in\\mathbb{R},\\ -1\\le y'<0"), " について、"]),
           displayMath("\\arcsin(y'):=-\\arcsin(-y')"),
           paragraph(["と定める。"]),
         ],
@@ -224,10 +224,99 @@ y_c'
     id: "calc_formulae_014b_claim_arcsin_bijection",
     kind: "claim",
     origin: { path: "structured-latex/content/000_calculation_formulae_10_19.ts", ordinal: 15 },
-    title: { text: "arcsin の単調性・連続性・全射性" },
+    title: { text: "arcsin の値域・狭義単調増加・全単射・連続" },
     labels: ["arcsin_is_bijection"],
-    statement: [paragraph([ref("def_arcsin"), " は ", math(String.raw`[-1,1]`), " から ", math(String.raw`[-\pi/2,\pi/2]`), " への狭義単調増加な連続全射であり、したがって全単射である。"])],
-    proof: [paragraph(["円弧長による定義に対する齋藤微積分 命題 2.1.5 を適用する。狭義単調増加性から単射、値域の記述から全射を得る。"])],
+    statement: [
+      paragraph([ref("def_arcsin"), " の ", math(String.raw`\arcsin:[-1,1]\to\mathbb R`), " について次が成り立つ（", math(String.raw`\mathbb R`), " を使うのは、弧の長さ ", math(String.raw`l(AP)`), " と ", math(String.raw`\pi`), " が実数だからである）。"]),
+      list([
+        [paragraph(["値域: 任意の ", math(String.raw`y\in[-1,1]`), " について ", math(String.raw`-\pi/2\le\arcsin(y)\le\pi/2`), "。"])],
+        [paragraph(["狭義単調増加: ", math(String.raw`y_1,y_2\in[-1,1]`), "、", math(String.raw`y_1<y_2`), " ならば ", math(String.raw`\arcsin(y_1)<\arcsin(y_2)`), "。"])],
+        [paragraph(["全単射: 任意の ", math(String.raw`\theta\in[-\pi/2,\pi/2]`), " について、", math(String.raw`\arcsin(y)=\theta`), " を満たす ", math(String.raw`y\in[-1,1]`), " がただ一つ存在する。"])],
+        [paragraph(["連続: 任意の ", math(String.raw`y_0\in[-1,1]`), " と ", math(String.raw`\varepsilon\in\mathbb R_{>0}`), " に対し、", math(String.raw`\delta\in\mathbb R_{>0}`), " が存在して、", math(String.raw`|y-y_0|<\delta`), " を満たす任意の ", math(String.raw`y\in[-1,1]`), " について ", math(String.raw`|\arcsin(y)-\arcsin(y_0)|<\varepsilon`), "。"])],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。", math(String.raw`f:[0,1]\to\mathbb R`), " を ", ref("def_arcsin"), " の第一の式 ", math(String.raw`f(y):=l(AP)`), " とおく。",
+        "齋藤微積分 命題 2.1.5 を ", math("f"), " に適用すると、", math("f"), " は狭義単調増加で、", math(String.raw`f([0,1])=[0,\pi/2]`), " である（外部文献に委ねるのはこの二点だけである）。",
+        "像が ", math(String.raw`[0,\pi/2]`), " なので ", math(String.raw`f(0)\ge0`), " であり、", math(String.raw`f(y_\ast)=0`), " を満たす ", math(String.raw`y_\ast\in[0,1]`), " がある。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f(0)
+&\le f(y_\ast)
+&&(\because\ 0\le y_\ast\ \text{と}\ f\ \text{の単調増加})\\
+&= 0
+&&(\because\ y_\ast\ \text{の取り方})
+\end{aligned}`),
+      paragraph(["と ", math(String.raw`f(0)\ge0`), " より ", math(String.raw`f(0)=0`), " である。"]),
+      paragraph([
+        "値域。", math(String.raw`0\le y\le1`), " なら ", math(String.raw`\arcsin(y)=f(y)\in[0,\pi/2]`), "（", ref("def_arcsin"), " の第一の式）。",
+        math(String.raw`-1\le y'<0`), " なら ", math(String.raw`0<-y'\le1`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(y')
+&= -f(-y')
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式と第一の式})\\
+&< -f(0)
+&&(\because\ 0<-y'\ \text{と}\ f\ \text{の狭義単調増加})\\
+&= 0
+&&(\because\ f(0)=0)
+\end{aligned}`),
+      paragraph([
+        "かつ ", math(String.raw`\arcsin(y')=-f(-y')\ge-\pi/2`), "（", math(String.raw`f(-y')\le\pi/2`), "）。よって ", math(String.raw`\arcsin(y')\in[-\pi/2,0)`), " で、値域の主張を得る。",
+      ]),
+      paragraph([
+        "狭義単調増加。", math(String.raw`y_1<y_2`), " とする。", math(String.raw`0\le y_1`), " なら ", math(String.raw`\arcsin(y_1)=f(y_1)<f(y_2)=\arcsin(y_2)`), "（", math("f"), " の狭義単調増加）。",
+        math(String.raw`y_1<0\le y_2`), " なら値域の段落より ", math(String.raw`\arcsin(y_1)<0\le\arcsin(y_2)`), "。",
+        math(String.raw`y_1<y_2<0`), " なら ", math(String.raw`0<-y_2<-y_1\le1`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(y_1)
+&= -f(-y_1)
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式と第一の式})\\
+&< -f(-y_2)
+&&(\because\ -y_2<-y_1\ \text{と}\ f\ \text{の狭義単調増加})\\
+&= \arcsin(y_2)
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式と第一の式})
+\end{aligned}`),
+      paragraph([
+        "全単射。存在: ", math(String.raw`\theta\in[0,\pi/2]`), " なら ", math(String.raw`f([0,1])=[0,\pi/2]`), " より ", math(String.raw`f(y)=\theta`), " となる ", math(String.raw`y\in[0,1]`), " があり、", math(String.raw`\arcsin(y)=f(y)=\theta`), "。",
+        math(String.raw`\theta\in[-\pi/2,0)`), " なら ", math(String.raw`-\theta\in(0,\pi/2]`), " なので ", math(String.raw`f(y_\theta)=-\theta`), " となる ", math(String.raw`y_\theta\in[0,1]`), " があり、",
+        math(String.raw`f(0)=0\ne-\theta`), " より ", math(String.raw`y_\theta\in(0,1]`), "、すなわち ", math(String.raw`y':=-y_\theta\in[-1,0)`), " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(y')
+&= -f(-y')
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式と第一の式})\\
+&= -f(y_\theta)
+&&(\because\ -y'=y_\theta)\\
+&= \theta
+&&(\because\ y_\theta\ \text{の取り方})
+\end{aligned}`),
+      paragraph([
+        "一意性: ", math(String.raw`y_1\ne y_2`), " なら、小さい方を ", math(String.raw`y_1`), " とすれば狭義単調増加の段落より ", math(String.raw`\arcsin(y_1)<\arcsin(y_2)`), " なので、値は異なる。",
+      ]),
+      paragraph([
+        "連続。", math(String.raw`\theta_0:=\arcsin(y_0)`), "、", math(String.raw`\theta_-:=\max(\theta_0-\varepsilon/2,-\pi/2)`), "、", math(String.raw`\theta_+:=\min(\theta_0+\varepsilon/2,\pi/2)`), " とおく。",
+        "値域の段落より ", math(String.raw`\theta_0\in[-\pi/2,\pi/2]`), " なので、", math(String.raw`\max`), "・", math(String.raw`\min`), " の定義より ", math(String.raw`-\pi/2\le\theta_-\le\theta_0\le\theta_+\le\pi/2`), " である。よって、全単射の段落より ", math(String.raw`\arcsin(y_\pm)=\theta_\pm`), " となる ", math(String.raw`y_\pm\in[-1,1]`), " がある。",
+        "この不等式と狭義単調増加の段落（の対偶）より ", math(String.raw`y_-\le y_0\le y_+`), " である。",
+        math(String.raw`\delta`), " を、", math(String.raw`y_-<y_0`), " なら ", math(String.raw`y_0-y_-`), "、", math(String.raw`y_0<y_+`), " なら ", math(String.raw`y_+-y_0`), "、および ", math("1"), " のうちの最小値とおくと ", math(String.raw`\delta>0`), " である。",
+        math(String.raw`|y-y_0|<\delta`), " とする。下側: ", math(String.raw`y_-<y_0`), " なら ", math(String.raw`y>y_0-\delta\ge y_-`), " なので ", math(String.raw`\arcsin(y)>\theta_-`), "（狭義単調増加）。",
+        math(String.raw`y_-=y_0`), " なら ", math(String.raw`\theta_-=\theta_0`), " なので ", math(String.raw`\theta_-=-\pi/2`), "（", math(String.raw`\theta_0-\varepsilon/2<\theta_0`), "）であり、値域の段落より ", math(String.raw`\arcsin(y)\ge\theta_-`), "。",
+        "上側: ", math(String.raw`y_0<y_+`), " なら ", math(String.raw`y<y_0+\delta\le y_+`), " なので ", math(String.raw`\arcsin(y)<\theta_+`), "（狭義単調増加）。",
+        math(String.raw`y_+=y_0`), " なら ", math(String.raw`\theta_+=\theta_0`), " なので ", math(String.raw`\theta_+=\pi/2`), "（", math(String.raw`\theta_0<\theta_0+\varepsilon/2`), "）であり、値域の段落より ", math(String.raw`\arcsin(y)\le\theta_+`), "。",
+        "よって ", math(String.raw`\theta_0-\varepsilon/2\le\theta_-\le\arcsin(y)\le\theta_+\le\theta_0+\varepsilon/2`), " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+|\arcsin(y)-\arcsin(y_0)|
+&= |\arcsin(y)-\theta_0|
+&&(\because\ \theta_0\ \text{の定義})\\
+&\le \varepsilon/2
+&&(\because\ \theta_0-\varepsilon/2\le\arcsin(y)\le\theta_0+\varepsilon/2)\\
+&< \varepsilon
+&&(\because\ \varepsilon>0)
+\end{aligned}`),
+    ],
     conversion: { status: "added", notes: ["sin の定義に混在していた外部主張を独立させた。"] },
   },
   {
@@ -236,7 +325,7 @@ y_c'
     origin: { path: "structured-latex/content/000_calculation_formulae_10_19.ts", ordinal: 15 },
     title: { text: "sin の定義" },
     labels: ["def_sin"],
-    statement: [paragraph([ref("arcsin_is_bijection"), " により ", ref("def_arcsin"), " の逆関数が存在する。この逆関数を ", math(String.raw`\sin:[-\pi/2,\pi/2]\to[-1,1]`), " と定める。"])],
+    statement: [paragraph([ref("arcsin_is_bijection"), " の全単射の項により、各 ", math(String.raw`\theta\in[-\pi/2,\pi/2]`), " について ", math(String.raw`\arcsin(y)=\theta`), " を満たす ", math(String.raw`y\in[-1,1]`), " がただ一つ存在する。その ", math("y"), " を ", math(String.raw`\sin(\theta)`), " と書き、", math(String.raw`\sin:[-\pi/2,\pi/2]\to[-1,1]`), " を ", ref("def_arcsin"), " の逆関数と呼ぶ。"])],
     conversion: { status: "added" },
   },
   {

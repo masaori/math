@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行の三回目として、`arcsin_is_bijection` の検算 `sagemath/check/arcsin_is_bijection/` を足した（未検算 118 → 117 件）。弧の長さは内接・外接の折れ線で区間に挟んだ。レビューの指摘で `def_arcsin`（第二の式を `y'<0` に、終域を ℝ に）・`arcsin_is_bijection`（四項に書き下し、負の側・全射・連続を本文で証明）・`def_sin` を直した。次は `arctan_argument_in_unit_interval`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の二回目として、`radial_normalization_exists_unique`（非零実数対の単位円への正規化）の検算 `sagemath/check/radial_normalization_exists_unique/` を足した（未検算 119 → 118 件）。一般の点は有理関数体上の環、正負・大小は `AA` で厳密に確かめた。レビューで人手証明の根拠の書き方（地の文の推論・ラベル参照の欠け・`\mathbf R`）を直した。計算の誤りは無かった。次は `arcsin_is_bijection`。
 2026-11-01: 全証明の SageMath 検算の連続実行の一回目として、`mat_columnwise`（行列の積は列ごとに作用する）の検算 `sagemath/check/mat_columnwise/` を足した（未検算 120 → 119 件）。主張に `m,n,p` の帰属を足した。レビューで、`mat_mult` などの「数ベクトルを n 行 1 列の行列とみなす」同一視に約 60 箇所が依存していると分かり、状態台帳に記録した（この回では直していない）。次は `radial_normalization_exists_unique`。
 2026-11-01: 代表の指示「全証明に SageMath をつけてほしい」を受け、ゴール台帳に「複素行列版イジング論文の全ての証明に、SageMath の検算が付いている」を立てた。判定は `sagemath/tools/verify-every-proof-has-check.ts`（証明を持つ 214 件のうち未検算 120 件）、手順は `docs/tasks/sagemath-every-proof-runbook.md`、進み具合は同 `sagemath-every-proof-state.md`。連続実行「複素行列版イジング: 全証明の SageMath 検算」が進める。ゴールの文の末尾は代表の答えどおり「安心して重要な部分だけを飛ばし読みしていただきたい」にした。
