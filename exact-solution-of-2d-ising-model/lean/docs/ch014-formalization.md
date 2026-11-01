@@ -40,6 +40,8 @@
 | `Ising2D.conversion_H1Plus_checkZ_even` / `..._odd` ほか 8 本 | (h1.z)(h1.y)(h2.z)(h2.y) のスカラー付け替え後の形 | `cosh_sinh_coefficient_conversion_for_check` |
 | `Ising2D.extract_taylor_H1Plus_checkZ` / `..._checkY` | (h1.z)(h1.y) の級数和 `cosh K_1 Ž + i e^{-iθ~} sinh K_1 Y̌` ほか | `extract_taylor_coefficient_of_check_Z_Y` |
 | `Ising2D.extract_taylor_H2_checkZ` / `..._checkY` | (h2.z)(h2.y) の級数和 | 同上 |
+| `Ising2D.hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本 | 4 式の級数の収束と和。人手の 4 行（係数変換 → 偶奇分割 → 定数の括り出し → `cosh`・`sinh` のテイラー級数）どおり（`Complex.hasSum_cosh`・`Complex.hasSum_sinh`・`HasSum.even_add_odd`） | 同上 |
+| `Ising2D.hasSum_extract_taylor_H1Plus_checkZ_of_necSuf` ほか 4 本（`ClaimExtractTaylorFromNecSuf.lean`） | 同じ 4 式を必要十分版 `NecSuf.hasSum_two_dim_series` の特殊化として導いたもの | 同上 |
 | `Ising2D.checkPhase_one_eq_exp` / `checkPhase_neg_one_eq_exp` | `e^{∓iθ~_μ}` の指数表示との橋渡し | `T_actions_on_check_Z_Y` |
 | `Ising2D.TConj_V1plusHalf_checkZ` / `..._checkY` | 原文 第 1・第 2 式（`def_T_g` → `def_V1_plus_square_root` → `exp(X)^{-1}=exp(-X)` → `exp_X_Y_exp_-X` → (h1.z)(h1.y) の `calc`） | `T_actions_on_check_Z_Y` |
 | `Ising2D.smul_conj_smul_inv_eq` | 第 3・第 4 式の証明の、前因子 `(2s_2)^{M/2}` を打ち消す 2 行（スカラーを左端へ移す・`c c^{-1} = 1`） | 同上 |
@@ -80,18 +82,20 @@
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
-### 新規の必要十分版が 1 本で済んだ理由
+### 本章で新しく足した必要十分版
 
-**本章の主要主張はすべて既存の必要十分版の特殊化で閉じた。** 新しく足したのは、
-原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
-4 段で往復している部分を 1 本にまとめた `NecSuf.actsBy_sandwich` だけである。
+新しく足した必要十分版は 2 本である。1 本は、原文が `T_actions → linearity → calc_of_TxT → linearity → calc_of_TxT` と
+4 段で往復している部分を 1 本にまとめた `NecSuf.actsBy_sandwich` である。
+もう 1 本は `extract_taylor_coefficient_of_check_Z_Y` の `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）である。
+既存の `NecSuf.exp_conj_two_dim_z` / `_y` は指数共役と級数の和の 2 つの主張を束ねており、この主張だけの必要十分版にならないため、級数の和の部分を切り出した。
+ほかの主要主張は既存の必要十分版の特殊化で閉じた。
 
 | 人手証明のラベル（章 014） | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `def_H1_plus` / `def_V1_plus_square_root` / `V1_plus_square_root_property` / `def_V_plus` / `V_plus_factors_invertible` / `def_T_V_plus` / `T_V_plus_is_conjugation` | `Ising2D.H1plus` / `V1plusHalf` / `V1_plus_square_root_property` / `VPlus` / `TVPlus` / `TVPlus_eq_TConj` / `VPlusOfTransfer_eq_VPlus` / `TV_V1plusHalfUnits_V2Units` / `isUnit_V2` | 既存の `Ising2D.TConj` / `TV` / `TV_eq_TConj`（任意の環 + ℂ-代数。`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`） |
 | `nesting_of_commutator_of_H_and_check_Z` | `Ising2D.nesting_H1Plus_checkZ_even` ほか 8 本 | 既存の `NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y` |
 | `cosh_sinh_coefficient_conversion_for_check` | `Ising2D.conversion_H1Plus_checkZ_even` ほか 8 本 | 同上（`(α, β, s)` を付け替えただけ） |
-| `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本 | 既存の `NecSuf.exp_conj_two_dim_z` / `exp_conj_two_dim_y` |
+| `extract_taylor_coefficient_of_check_Z_Y` | `Ising2D.extract_taylor_H1Plus_checkZ` ほか 4 本（`hasSum_extract_taylor_*` が人手の 4 行どおり） | `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群。導出は `Ising2D.hasSum_extract_taylor_*_of_necSuf`） |
 | `T_actions_on_check_Z_Y` / `calc_of_TxT_check_Z_Y` | `Ising2D.actsBy_TConj_V1plusHalf` / `actsBy_TConj_V2H2Form_check` ほか | 既存の `NecSuf.twoDimConjMat` / `exp_conj_two_dim_actsBy` / `conj_smul_eq` |
 | `linearity_of_T` | `Ising2D.linearity_of_T_on_check` | 既存の `Ising2D.TConj_linear`（任意の環 + ℂ-代数） |
 | `linearity_of_T_on_check_Z_Y` | `Ising2D.linearity_of_T_V1plusHalf` | 既存の `Ising2D.TConj_linear` の半指数行列への特殊化 |

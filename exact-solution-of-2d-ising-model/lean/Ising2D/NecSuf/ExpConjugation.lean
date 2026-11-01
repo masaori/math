@@ -198,6 +198,53 @@ theorem exp_conj_eq_tsum (x a : 𝔸) :
 
 end Ad
 
+/-! ## 偶数項・奇数項の係数が決まった級数の和（`extract_taylor_coefficient_of_check_Z_Y` の必要十分版） -/
+
+section TaylorTwoDim
+
+/-
+具体版 `Ising2D.hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本
+（`EigenvalueProblem/ReductionToATheta/ClaimExtractTaylor.lean`）と同じ手順で述べる。
+1 行目（係数変換）は仮定 `heven`・`hodd` として受け取り、2 行目（偶奇の分割）を `HasSum.even_add_odd`、
+3 行目（`n` に依らない因子を外へ出す）を `HasSum.smul_const`・`HasSum.mul_left`、
+4 行目（テイラー級数）を `Complex.hasSum_cosh`・`hasSum_sinhc` で行う。
+
+**何が効いているか / 効いていないか**
+
+* 効いているのは、`V` が ℂ 加群で、和が連続（`ContinuousAdd V`、2 行目で偶数項と奇数項を足し直すため）、
+  スカラー倍が連続（`ContinuousSMul ℂ V`、3 行目で `cosh`・`sinhc` の級数に `z`・`y` を掛けるため）であることだけである。
+* 係数体は ℂ に固定してある。4 行目で使う `Complex.hasSum_cosh` と `sinhc`（`ℂ → ℂ` として定義）が ℂ 上の級数だからである。
+* 行列であること・積・ノルム・完備性・指数関数は効いていない。`f n` が入れ子交換子であることも効いていない
+  （それは 1 行目の係数変換の側で使われ、ここでは仮定 `heven`・`hodd` に入っている）。
+* 具体版は `sinh` を使い、`i e^{-iθ~}` を外へ出す。ここでは `s = 0` でも成り立つよう `sinhc` を使い、
+  `α`（具体版では `i K_1 e^{-iθ~}`）を外へ出す。違いはこの 2 点だけで、
+  具体版への戻し方は `EigenvalueProblem/ReductionToATheta/ClaimExtractTaylorFromNecSuf.lean` にある。
+-/
+
+variable {V : Type*} [AddCommMonoid V] [Module ℂ V] [TopologicalSpace V]
+  [ContinuousAdd V] [ContinuousSMul ℂ V]
+
+/-- 偶数項が `s^{2k} z`、奇数項が `s^{2k} α y` の級数 `∑_n (n!)^{-1} f(n)` は
+`cosh(s) z + α sinhc(s) y` に収束する。 -/
+theorem hasSum_two_dim_series {f : ℕ → V} {z y : V} {α s : ℂ}
+    (heven : ∀ k : ℕ, f (2 * k) = (s ^ (2 * k)) • z)
+    (hodd : ∀ k : ℕ, f (2 * k + 1) = (s ^ (2 * k) * α) • y) :
+    HasSum (fun n : ℕ => (((n ! : ℕ) : ℂ))⁻¹ • f n) (Complex.cosh s • z + (α * sinhc s) • y) := by
+  -- 偶数項: 4 行目の cosh の級数 → 3 行目（`z` を外へ）→ 1 行目の偶数側 `s^{2k} z`
+  have hev : HasSum (fun k : ℕ => ((((2 * k)! : ℕ) : ℂ))⁻¹ • f (2 * k)) (Complex.cosh s • z) := by
+    refine ((Complex.hasSum_cosh s).smul_const z).congr_fun fun k => ?_
+    rw [heven k, smul_smul, div_eq_inv_mul]
+  -- 奇数項: 4 行目の sinhc の級数 → 3 行目（`α` と `y` を外へ）→ 1 行目の奇数側 `s^{2k} α y`
+  have hod : HasSum (fun k : ℕ => ((((2 * k + 1)! : ℕ) : ℂ))⁻¹ • f (2 * k + 1))
+      ((α * sinhc s) • y) := by
+    refine (((hasSum_sinhc s).mul_left α).smul_const y).congr_fun fun k => ?_
+    rw [hodd k, smul_smul, div_eq_mul_inv]
+    ring_nf
+  -- 2 行目: 偶数項と奇数項を足し直す
+  exact HasSum.even_add_odd (f := fun n : ℕ => (((n ! : ℕ) : ℂ))⁻¹ • f n) hev hod
+
+end TaylorTwoDim
+
 /-! ## 2 次元不変部分空間での閉じた形 -/
 
 section TwoDim
@@ -253,40 +300,16 @@ theorem adCLM_pow_odd_y (hz : adCLM x z = α • y) (hy : adCLM x y = β • z) 
 `exp(x) z exp(-x) = cosh(s) z + α sinhc(s) y`。`s = 0` の場合も含めて成り立つ。 -/
 theorem exp_conj_two_dim_z (hz : adCLM x z = α • y) (hy : adCLM x y = β • z)
     (hs : s ^ 2 = α * β) :
-    exp x * z * exp (-x) = Complex.cosh s • z + (α * sinhc s) • y := by
-  refine (hasSum_exp_conj x z).unique (HasSum.even_add_odd ?_ ?_)
-  · have heq : ∀ k : ℕ, ((((2 * k)! : ℕ) : ℂ))⁻¹ • ((adCLM x ^ (2 * k)) z)
-        = (s ^ (2 * k) / (((2 * k)! : ℕ) : ℂ)) • z := by
-      intro k
-      rw [(adCLM_pow_even hz hy hs k).1, smul_smul, div_eq_mul_inv, mul_comm]
-    simpa only [heq] using (Complex.hasSum_cosh s).smul_const z
-  · have heq : ∀ k : ℕ, ((((2 * k + 1)! : ℕ) : ℂ))⁻¹ • ((adCLM x ^ (2 * k + 1)) z)
-        = (α * (s ^ (2 * k) / (((2 * k + 1)! : ℕ) : ℂ))) • y := by
-      intro k
-      rw [adCLM_pow_odd_z hz hy hs k, smul_smul]
-      congr 1
-      rw [div_eq_mul_inv]
-      ring
-    simpa only [heq] using ((hasSum_sinhc s).mul_left α).smul_const y
+    exp x * z * exp (-x) = Complex.cosh s • z + (α * sinhc s) • y :=
+  (hasSum_exp_conj x z).unique
+    (hasSum_two_dim_series (fun k => (adCLM_pow_even hz hy hs k).1) (adCLM_pow_odd_z hz hy hs))
 
 /-- 同上（`y` 始点）: `exp(x) y exp(-x) = cosh(s) y + β sinhc(s) z`。 -/
 theorem exp_conj_two_dim_y (hz : adCLM x z = α • y) (hy : adCLM x y = β • z)
     (hs : s ^ 2 = α * β) :
-    exp x * y * exp (-x) = Complex.cosh s • y + (β * sinhc s) • z := by
-  refine (hasSum_exp_conj x y).unique (HasSum.even_add_odd ?_ ?_)
-  · have heq : ∀ k : ℕ, ((((2 * k)! : ℕ) : ℂ))⁻¹ • ((adCLM x ^ (2 * k)) y)
-        = (s ^ (2 * k) / (((2 * k)! : ℕ) : ℂ)) • y := by
-      intro k
-      rw [(adCLM_pow_even hz hy hs k).2, smul_smul, div_eq_mul_inv, mul_comm]
-    simpa only [heq] using (Complex.hasSum_cosh s).smul_const y
-  · have heq : ∀ k : ℕ, ((((2 * k + 1)! : ℕ) : ℂ))⁻¹ • ((adCLM x ^ (2 * k + 1)) y)
-        = (β * (s ^ (2 * k) / (((2 * k + 1)! : ℕ) : ℂ))) • z := by
-      intro k
-      rw [adCLM_pow_odd_y hz hy hs k, smul_smul]
-      congr 1
-      rw [div_eq_mul_inv]
-      ring
-    simpa only [heq] using ((hasSum_sinhc s).mul_left β).smul_const z
+    exp x * y * exp (-x) = Complex.cosh s • y + (β * sinhc s) • z :=
+  (hasSum_exp_conj x y).unique
+    (hasSum_two_dim_series (fun k => (adCLM_pow_even hz hy hs k).2) (adCLM_pow_odd_y hz hy hs))
 
 end TwoDim
 

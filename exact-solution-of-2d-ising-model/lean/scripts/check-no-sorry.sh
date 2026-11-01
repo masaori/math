@@ -818,6 +818,15 @@ targets=(
   Ising2D.extract_taylor_H1Plus_checkY
   Ising2D.extract_taylor_H2_checkZ
   Ising2D.extract_taylor_H2_checkY
+  Ising2D.hasSum_extract_taylor_H1Plus_checkZ
+  Ising2D.hasSum_extract_taylor_H1Plus_checkY
+  Ising2D.hasSum_extract_taylor_H2_checkZ
+  Ising2D.hasSum_extract_taylor_H2_checkY
+  Ising2D.hasSum_extract_taylor_H1Plus_checkZ_of_necSuf
+  Ising2D.hasSum_extract_taylor_H1Plus_checkY_of_necSuf
+  Ising2D.hasSum_extract_taylor_H2_checkZ_of_necSuf
+  Ising2D.hasSum_extract_taylor_H2_checkY_of_necSuf
+  Ising2D.NecSuf.hasSum_two_dim_series
   Ising2D.TConj_V1plusHalf_checkZ
   Ising2D.TConj_V1plusHalf_checkY
   Ising2D.smul_conj_smul_inv_eq

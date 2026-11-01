@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の十三個目を行った。人手 `extract_taylor_coefficient_of_check_Z_Y` の 4 式の Lean を、指数共役へ戻して必要十分版に委ねる形から、人手の 4 行（係数変換・偶奇分割・定数の括り出し・cosh/sinh のテイラー級数）どおりの `HasSum` 版に直した（`∑'` 版の型は不変）。必要十分版は級数の和の部分を `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）として切り出し、導出を `ClaimExtractTaylorFromNecSuf.lean` に置いた。次は `TVPlus_checkZ_checkY` の手順の確認。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の十二個目を行った。人手 `conjugate_index_of_check_Z_Y` (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}` の Lean を、`2M` 乗根の周期で示す形から、人手の 4 行（(1)・指数法則・Euler の公式・`cos(2πj)=1, sin(2πj)=0`）と 1 行ずつ対応する `calc`（`checkPhase_conj'`）に直し、`checkPhase_conj` をその系にした（主張の型は不変）。次は `extract_taylor_coefficient_of_check_Z_Y` を人手どおりに直す。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の十一個目を行った。必要十分版 `NecSuf/PermSector.lean` が退避先 `MinusSector/ClaimRayleighSupSectorDecomposition` から使う名前（符号つきの `c_±(M)`、その有界性、分解 `c(M) = max(c_+, c_-)`）は退避した主張そのものなので import は外せず、必要十分版は `NecSuf/` から動かさない規約により残した。理由を冒頭に書いた。本文の Lean は推移的にも退避先を読み込まない。次は `checkPhase_conj` を人手どおりに直す。

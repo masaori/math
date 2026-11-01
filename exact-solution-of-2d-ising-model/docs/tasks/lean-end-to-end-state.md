@@ -356,16 +356,22 @@
     1 行ずつ対応する `calc` を `checkPhase_conj'`（右辺 `e^{ijθ~_μ} = checkPhase M (-j) μ`）に置き、両端は `checkPhase_eq_exp` で開いた。
     使う側の `checkPhase_conj`（右辺を `2M` 乗根の位相因子で書いた形）はその系にした。主張の型は 2 つとも変えていない。`check-no-sorry.sh` に `checkPhase_conj'` を足し、`lean/docs/ch013-formalization.md` の行を分けた。
     レビューは必須の指摘なし。任意の指摘 2 件（Euler の公式の行の向き、人手の `j` と Lean の `k`）はコメントに書いた。
+  - ゴールラインの確認の十三個目（済み、2026-11-01）: 人手 `extract_taylor_coefficient_of_check_Z_Y` の 4 式の Lean（`ReductionToATheta/ClaimExtractTaylor.lean`）を人手どおりに直した。
+    4 式それぞれの `HasSum` 版（`hasSum_extract_taylor_H1Plus_checkZ` ほか 4 本）を、人手の 4 行（`conversion_*_even`・`_odd` → `HasSum.even_add_odd` → `smul_const`・`mul_left` → `Complex.hasSum_cosh`・`Complex.hasSum_sinh`）どおりに置き、
+    `∑'` 版 4 本はその和の値にした。`∑'` 版の名前と型は変えていない（呼び出し側 `ClaimTActionsOnCheck.lean` はそのまま）。
+    既存の `NecSuf.exp_conj_two_dim_z/y` は指数共役と級数の和を束ねていたので、級数の和の部分を位相 ℂ 加群上の必要十分版 `NecSuf.hasSum_two_dim_series` として切り出し、`exp_conj_two_dim_z/y` はそれを使う形にした。
+    具体版をその特殊化として導く `hasSum_extract_taylor_*_of_necSuf` 4 本を `ReductionToATheta/ClaimExtractTaylorFromNecSuf.lean` に置いた。`check-no-sorry.sh`・`lean/docs/ch014-formalization.md` を直した。
+    レビューの指摘 9 件を直し、指摘が無くなった。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
+- 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。
 
 この後に残る確認:
 
-- 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。
+- `cosh_sinh_coefficient_conversion_for_check` の具体版 `conversion_*_even`・`_odd` 8 本（`ReductionToATheta/ClaimCoefficientConversion.lean`）は、スカラー倍した生成子について 2 次元不変性を直接示して必要十分版 `NecSuf.adCLM_pow_*` へ渡している。人手は補題 1（`ad_{αX}^n = α^n ad_X^n`）と補題 2（`i^n` の偶奇）を `nesting_of_commutator_of_H_and_check_Z` の 4 式へ代入している。人手どおりかを確かめ、違えば直す。同じ委ね方の `nesting_*`（`ClaimNestedCommutator.lean`）も確かめる。
 
 - `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
   `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
