@@ -2208,65 +2208,257 @@ E(a)
     proof: [
       paragraph([
         "準備。",
-        ref("definition_of_cc"),
-        " の演算より、",
-        math(String.raw`a, b \in \mathbb{R}`),
-        " について ",
-        math(String.raw`a_{\mathbb{C}} + b_{\mathbb{C}} = (a+b,0) = (a+b)_{\mathbb{C}}`),
-        "、",
-        math(String.raw`a_{\mathbb{C}}\,b_{\mathbb{C}} = (ab - 0\cdot 0,\ a\cdot 0 + 0\cdot b) = (ab)_{\mathbb{C}}`),
-        " である。これを項ごとに使うと、すべての ",
-        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\sum_{m=0}^{N}\frac{\left(x_{\mathbb{C}}\right)^m}{m!}
-= \left(\sum_{m=0}^{N}\frac{x^m}{m!}\right)_{\mathbb{C}}
-\quad (\because \text{上の和と積の保存を有限個の項へ適用})`,
-      ),
-      paragraph([
-        "である。また ",
         math(String.raw`a, b \in \mathbb{R}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left|a_{\mathbb{C}} - b_{\mathbb{C}}\right|
-&= \left|(a-b)_{\mathbb{C}}\right|
-   \quad (\because \text{上の和の保存と } (-1)_{\mathbb{C}}\,b_{\mathbb{C}} = (-b)_{\mathbb{C}}) \\
-&= \sqrt{(a-b)^2+0^2}^{(\mathbb{R}_{\ge 0})}
-   \quad (\because \blkref{abs_basic_properties}\text{ (1)}) \\
-&= |a-b|
-   \quad (\because \text{実数の平方の非負平方根は絶対値})
+a_{\mathbb{C}} + b_{\mathbb{C}}
+&= (a,0) + (b,0)
+   \quad (\because \blkref{inclusion_rr_to_cc}) \\
+&= (a+b,\ 0+0)
+   \quad (\because \blkref{definition_of_cc}\text{ の和}) \\
+&= (a+b,\ 0)
+   \quad (\because 0+0 = 0) \\
+&= (a+b)_{\mathbb{C}}
+   \quad (\because \blkref{inclusion_rr_to_cc})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+a_{\mathbb{C}}\,b_{\mathbb{C}}
+&= (a,0)\,(b,0)
+   \quad (\because \blkref{inclusion_rr_to_cc}) \\
+&= (ab - 0\cdot 0,\ a\cdot 0 + 0\cdot b)
+   \quad (\because \blkref{definition_of_cc}\text{ の積}) \\
+&= (ab,\ 0)
+   \quad (\because 0\cdot 0 = a\cdot 0 = 0\cdot b = 0) \\
+&= (ab)_{\mathbb{C}}
+   \quad (\because \blkref{inclusion_rr_to_cc})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+a_{\mathbb{C}} - b_{\mathbb{C}}
+&= a_{\mathbb{C}} + \left(-b_{\mathbb{C}}\right)
+   \quad (\because \mathbb{C}\text{ の差は加法の逆元を足すこと}) \\
+&= a_{\mathbb{C}} + (-1)_{\mathbb{C}}\, b_{\mathbb{C}}
+   \quad (\because \blkref{multiply_by_minus_one}\text{。}-1_{\mathbb{C}} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の略記 } r_{\mathbb{C}} \text{ の } r = -1) \\
+&= a_{\mathbb{C}} + \left((-1)\,b\right)_{\mathbb{C}}
+   \quad (\because \text{上の積の鎖}) \\
+&= \left(a + (-1)\,b\right)_{\mathbb{C}}
+   \quad (\because \text{上の和の鎖}) \\
+&= (a-b)_{\mathbb{C}}
+   \quad (\because \text{実数の四則})
 \end{aligned}`,
       ),
       paragraph([
-        "なので、実数列 ",
-        math(String.raw`E_N := \sum_{m=0}^{N}\frac{x^m}{m!}`),
-        " が ",
-        math(String.raw`\exp(x)`),
-        " に収束すること（",
-        ref("scalar_exp_is_limit_of_partial_sums"),
+        "次に、",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`\left(x_{\mathbb{C}}\right)^m = \left(x^m\right)_{\mathbb{C}}`),
         " を ",
-        math(String.raw`K = \mathbb{R}`),
-        " で適用）から、",
-        math(String.raw`(E_N)_{\mathbb{C}}`),
+        math(String.raw`m`),
+        " に関する帰納法で示す（冪の約束 ",
+        math(String.raw`x^0 := 1`),
+        "、",
+        math(String.raw`x^{m+1} := x^m\,x`),
         " は ",
-        math(String.raw`(\exp(x))_{\mathbb{C}}`),
-        " に収束する。一方、上の等式より ",
-        math(String.raw`(E_N)_{\mathbb{C}}`),
-        " は ",
-        math(String.raw`x_{\mathbb{C}}`),
-        " の指数級数の部分和でもあるから、",
         ref("scalar_exp_is_limit_of_partial_sums"),
-        " を ",
+        " のもので、左辺は ",
         math(String.raw`K = \mathbb{C}`),
-        " で適用すると ",
-        math(String.raw`\exp(x_{\mathbb{C}})`),
-        " に収束する。",
-        math(String.raw`\mathbb{C}`),
-        " の列の極限の一意性より主張が従う。",
+        "、右辺の内側は ",
+        math(String.raw`K = \mathbb{R}`),
+        " の冪である）。",
+        math(String.raw`m = 0`),
+        " では",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(x_{\mathbb{C}}\right)^0
+&= 1_{\mathbb{C}}
+   \quad (\because \text{冪の約束 } x^0 := 1 \text{ を } K = \mathbb{C} \text{ で。}\blkref{scalar_exp_is_limit_of_partial_sums}) \\
+&= \left(x^0\right)_{\mathbb{C}}
+   \quad (\because 1_{\mathbb{C}} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の略記 } r_{\mathbb{C}} \text{ の } r = 1\text{ と、冪の約束 } x^0 := 1 \text{ を } K = \mathbb{R} \text{ で。}\blkref{scalar_exp_is_limit_of_partial_sums})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(x_{\mathbb{C}}\right)^{m+1}
+&= \left(x_{\mathbb{C}}\right)^m x_{\mathbb{C}}
+   \quad (\because \text{冪の約束 } x^{m+1} := x^m\,x \text{ を } K = \mathbb{C} \text{ で。}\blkref{scalar_exp_is_limit_of_partial_sums}) \\
+&= \left(x^m\right)_{\mathbb{C}}\, x_{\mathbb{C}}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \left(x^m\,x\right)_{\mathbb{C}}
+   \quad (\because \text{上の積の鎖}) \\
+&= \left(x^{m+1}\right)_{\mathbb{C}}
+   \quad (\because \text{冪の約束 } x^{m+1} := x^m\,x \text{ を } K = \mathbb{R} \text{ で。}\blkref{scalar_exp_is_limit_of_partial_sums})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{\left(x_{\mathbb{C}}\right)^m}{m!}
+&= \left(\frac{1}{m!}\right)_{\mathbb{C}}\left(x_{\mathbb{C}}\right)^m
+   \quad (\because K = \mathbb{C} \text{ の } x^m/m! \text{ は実数係数 } 1/m! \text{ を }\blkref{inclusion_rr_to_cc}\text{ で掛けたもの。}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の Step 2、}\blkref{def_exp}) \\
+&= \left(\frac{1}{m!}\right)_{\mathbb{C}}\left(x^m\right)_{\mathbb{C}}
+   \quad (\because \text{上の } \left(x_{\mathbb{C}}\right)^m = \left(x^m\right)_{\mathbb{C}}) \\
+&= \left(\frac{1}{m!}\,x^m\right)_{\mathbb{C}}
+   \quad (\because \text{上の積の鎖}) \\
+&= \left(\frac{x^m}{m!}\right)_{\mathbb{C}}
+   \quad (\because \text{実数の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`E_N := \sum_{m=0}^{N}\frac{x^m}{m!} \in \mathbb{R}`),
+        " とおき、",
+        math(String.raw`\sum_{m=0}^{N}\frac{\left(x_{\mathbb{C}}\right)^m}{m!} = \left(E_N\right)_{\mathbb{C}}`),
+        " を ",
+        math(String.raw`N`),
+        " に関する帰納法で示す。",
+        math(String.raw`N = 0`),
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{m=0}^{0}\frac{\left(x_{\mathbb{C}}\right)^m}{m!}
+&= \frac{\left(x_{\mathbb{C}}\right)^0}{0!}
+   \quad (\because \text{和は } m = 0 \text{ の 1 項だけ}) \\
+&= \left(\frac{x^0}{0!}\right)_{\mathbb{C}}
+   \quad (\because \text{上の項の鎖}) \\
+&= \left(E_0\right)_{\mathbb{C}}
+   \quad (\because E_0 \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`N`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{m=0}^{N+1}\frac{\left(x_{\mathbb{C}}\right)^m}{m!}
+&= \sum_{m=0}^{N}\frac{\left(x_{\mathbb{C}}\right)^m}{m!} + \frac{\left(x_{\mathbb{C}}\right)^{N+1}}{(N+1)!}
+   \quad (\because \text{有限和の最後の項を分ける}) \\
+&= \left(E_N\right)_{\mathbb{C}} + \frac{\left(x_{\mathbb{C}}\right)^{N+1}}{(N+1)!}
+   \quad (\because \text{帰納法の仮定}) \\
+&= \left(E_N\right)_{\mathbb{C}} + \left(\frac{x^{N+1}}{(N+1)!}\right)_{\mathbb{C}}
+   \quad (\because \text{上の項の鎖}) \\
+&= \left(E_N + \frac{x^{N+1}}{(N+1)!}\right)_{\mathbb{C}}
+   \quad (\because \text{上の和の鎖}) \\
+&= \left(E_{N+1}\right)_{\mathbb{C}}
+   \quad (\because E_{N+1} \text{ の定義と、有限和の最後の項を分ける})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。また ",
+        math(String.raw`u, v, w \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+[u]_{\mathbb{C}} - [v]_{\mathbb{C}}
+&= \left[\left([u]_{\mathbb{C}} - [v]_{\mathbb{C}}\right)_{11}\right]_{\mathbb{C}}
+   \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
+&= \left[\left([u]_{\mathbb{C}}\right)_{11} - \left([v]_{\mathbb{C}}\right)_{11}\right]_{\mathbb{C}}
+   \quad (\because \text{行列の差は成分ごと}) \\
+&= [u - v]_{\mathbb{C}}
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|[w]_{\mathbb{C}}\right\|
+&= \sqrt{\sum_{i=1}^{1}\sum_{j=1}^{1}\left|\left([w]_{\mathbb{C}}\right)_{ij}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_matrix_norm}\text{ を } n = 1 \text{ で}) \\
+&= \sqrt{\left|\left([w]_{\mathbb{C}}\right)_{11}\right|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \text{和は } i = j = 1 \text{ の 1 項だけ}) \\
+&= \sqrt{|w|^2}^{\,(\mathbb{R}_{\ge 0})}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= |w|
+   \quad (\because |w| \in \mathbb{R}_{\ge 0} \text{ かつ } |w|^2 = |w|^2 \text{ なので、}\blkref{definition_of_sqrt_r_positive}\text{ の値の一意性。}\blkref{sqrt_nonnegative_existence_uniqueness})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。以下の ",
+        math(String.raw`\exp(x) \in \mathbb{R}`),
+        " と ",
+        math(String.raw`\exp(x_{\mathbb{C}}) \in \mathbb{C}`),
+        " は極限で定まる量であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している（理由: 極限。",
+        ref("def_exp"),
+        "）。部分和 ",
+        math(String.raw`E_N`),
+        " は有限和である。以上を使うと、",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|\left[\left(E_N\right)_{\mathbb{C}}\right]_{\mathbb{C}} - \left[\left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}\right\|
+&= \left\|\left[\left(E_N\right)_{\mathbb{C}} - \left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}\right\|
+   \quad (\because \text{上の } [u]_{\mathbb{C}} - [v]_{\mathbb{C}} = [u - v]_{\mathbb{C}}) \\
+&= \left|\left(E_N\right)_{\mathbb{C}} - \left(\exp(x)\right)_{\mathbb{C}}\right|
+   \quad (\because \text{上の } \|[w]_{\mathbb{C}}\| = |w|) \\
+&= \left|\left(E_N - \exp(x)\right)_{\mathbb{C}}\right|
+   \quad (\because \text{上の差の鎖}) \\
+&= \left|E_N - \exp(x)\right|
+   \quad (\because \blkref{abs_basic_properties}\text{ (6)}) \\
+&= \left|\sum_{m=0}^{N}\frac{x^m}{m!} - \exp(x)\right|
+   \quad (\because E_N \text{ の定義}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \blkref{scalar_exp_is_limit_of_partial_sums}\text{ を } K = \mathbb{R} \text{ で。}\blkref{def_matrix_norm}\text{ の } K \text{ の列の収束})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\left\|\left[\left(E_N\right)_{\mathbb{C}}\right]_{\mathbb{C}} - \left[\exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}}\right\|
+&= \left\|\left[\left(E_N\right)_{\mathbb{C}} - \exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}}\right\|
+   \quad (\because \text{上の } [u]_{\mathbb{C}} - [v]_{\mathbb{C}} = [u - v]_{\mathbb{C}}) \\
+&= \left|\left(E_N\right)_{\mathbb{C}} - \exp\!\left(x_{\mathbb{C}}\right)\right|
+   \quad (\because \text{上の } \|[w]_{\mathbb{C}}\| = |w|) \\
+&= \left|\sum_{m=0}^{N}\frac{\left(x_{\mathbb{C}}\right)^m}{m!} - \exp\!\left(x_{\mathbb{C}}\right)\right|
+   \quad (\because \text{上の部分和の鎖}) \\
+&\to 0 \quad (N \to \infty)
+   \quad (\because \blkref{scalar_exp_is_limit_of_partial_sums}\text{ を } K = \mathbb{C} \text{ で。}\blkref{def_matrix_norm}\text{ の } K \text{ の列の収束})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("def_matrix_norm"),
+        " の意味で ",
+        math(String.raw`\left[\left(E_N\right)_{\mathbb{C}}\right]_{\mathbb{C}} \to \left[\left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}`),
+        " かつ ",
+        math(String.raw`\left[\left(E_N\right)_{\mathbb{C}}\right]_{\mathbb{C}} \to \left[\exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}}`),
+        " だから、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) の極限の一意性より ",
+        math(String.raw`\left[\exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}} = \left[\left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp\!\left(x_{\mathbb{C}}\right)
+&= \left(\left[\exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}}\right)_{11}
+   \quad (\because \blkref{def_one_by_one_matrix}) \\
+&= \left(\left[\left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}\right)_{11}
+   \quad (\because \left[\exp\!\left(x_{\mathbb{C}}\right)\right]_{\mathbb{C}} = \left[\left(\exp(x)\right)_{\mathbb{C}}\right]_{\mathbb{C}}) \\
+&= \left(\exp(x)\right)_{\mathbb{C}}
+   \quad (\because \blkref{def_one_by_one_matrix})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。"] },
   },
