@@ -296,7 +296,7 @@ theorem TV_psiDag_psi (hM : M ≠ 0) (μ : ℤ) (t : ℂ) (K1 K2star : ℂ) {s2 
 /-! ## 整数運動量版と半整数運動量版は同じ必要十分版の別の特殊化であること
 
 008 章の結論 `<T_V_hatZ_hatY>`（既存の `Ising2D.TV_hatZ_hatY`）も、
-本文の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」の結論 `TVPlus_checkZ_checkY`（`EigenvalueProblem/ReductionToATheta/ClaimTVPlusAction.lean`）と**まったく同じ必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化**として得られる。
+本文の章「離散 Fourier 変換による 2×2 行列 A(θ̃_μ) への帰着」の結論 `TVPlus_checkZ_checkY` を必要十分版から導いた `TVPlus_checkZ_checkY_of_necSuf`（`EigenvalueProblem/ReductionToATheta/ClaimTVPlusActionFromNecSuf.lean`）と**まったく同じ必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化**として得られる。
 渡すものが `(hat(Z)^{(-)}_μ, hat(Y)_μ, B_1(θ_μ))` か
 `(check(Z)_μ, check(Y)_μ, B_1(θ~_μ))` かの違いしかない。 -/
 

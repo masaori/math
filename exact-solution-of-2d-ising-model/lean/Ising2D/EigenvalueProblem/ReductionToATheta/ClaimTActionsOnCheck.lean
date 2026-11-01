@@ -312,17 +312,19 @@ theorem linearity_of_T_on_check_from_general (g : (TensorPow M)ˣ)
     TConj g (a • X + b • W) = a • TConj g X + b • TConj g W :=
   TConj_linear g a b X W
 
-/-- **本文 `linearity_of_T_on_check_Z_Y`**: `g = (V_1^{(+)})^{1/2}` への特殊化。 -/
-theorem linearity_of_T_V1plusHalf (_hM : 2 ≤ M) (K1 : ℂ) (a b : ℂ) (μ : ℤ)
-    (_hμ : CheckIndex M μ) :
+/-- **本文 `linearity_of_T_on_check_Z_Y`**: `g = (V_1^{(+)})^{1/2}` への特殊化。
+人手は `μ ∈ M̌` について述べるが、証明（`linearity_of_T` の代入）は `μ` の範囲を使わないので、
+`T_V_plus_check_Z_Y`（`TVPlus_checkZ_checkY`）と同じく任意の `μ : ℤ` について述べる。 -/
+theorem linearity_of_T_V1plusHalf (K1 : ℂ) (a b : ℂ) (μ : ℤ) :
     TConj (V1plusHalfUnits M K1) (a • checkZ M μ + b • checkY M μ)
       = a • TConj (V1plusHalfUnits M K1) (checkZ M μ)
         + b • TConj (V1plusHalfUnits M K1) (checkY M μ) :=
   linearity_of_T_on_check _ a b _ _
 
-/-- **本文 `linearity_of_T_V2`**: `g = V_2`（`def_transfer_matrix` の `V_2`、`V2_invertible` による単元）への特殊化。 -/
-theorem linearity_of_T_V2 (_hM : 2 ≤ M) {K2 : ℝ} (hK2 : 0 < K2)
-    (a b : ℂ) (μ : ℤ) (_hμ : CheckIndex M μ) :
+/-- **本文 `linearity_of_T_V2`**: `g = V_2`（`def_transfer_matrix` の `V_2`、`V2_invertible` による単元）への特殊化。
+`μ` の範囲は `linearity_of_T_V1plusHalf` と同じ理由で置かない。 -/
+theorem linearity_of_T_V2 {K2 : ℝ} (hK2 : 0 < K2)
+    (a b : ℂ) (μ : ℤ) :
     TConj (V2Units M hK2) (a • checkZ M μ + b • checkY M μ)
       = a • TConj (V2Units M hK2) (checkZ M μ)
         + b • TConj (V2Units M hK2) (checkY M μ) :=
@@ -330,8 +332,8 @@ theorem linearity_of_T_V2 (_hM : 2 ≤ M) {K2 : ℝ} (hK2 : 0 < K2)
 
 /-- 本文 `linearity_of_T_V2` を、`V_2` の代わりに `V2H2Form`（`s2`, `K2star` は独立な引数）で述べた一般化。
 人手の `V_2` についての主張は `linearity_of_T_V2`。 -/
-theorem linearity_of_T_V2H2Form (_hM : 2 ≤ M) {s2 : ℝ} (hs2 : 0 < s2)
-    (K2star : ℂ) (a b : ℂ) (μ : ℤ) (_hμ : CheckIndex M μ) :
+theorem linearity_of_T_V2H2Form {s2 : ℝ} (hs2 : 0 < s2)
+    (K2star : ℂ) (a b : ℂ) (μ : ℤ) :
     TConj (V2H2FormUnits M hs2 K2star) (a • checkZ M μ + b • checkY M μ)
       = a • TConj (V2H2FormUnits M hs2 K2star) (checkZ M μ)
         + b • TConj (V2H2FormUnits M hs2 K2star) (checkY M μ) :=

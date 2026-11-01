@@ -847,7 +847,13 @@ targets=(
   Ising2D.factorization_of_A_thetaTilde
   Ising2D.NecSuf.actsBy_sandwich
   Ising2D.NecSuf.actsBy_TV_sandwich
+  Ising2D.B1mat_col_zero
+  Ising2D.B1mat_col_one
+  Ising2D.TVPlus_apply_checkZ
+  Ising2D.TVPlus_apply_checkY
+  Ising2D.mulVec_mulVec_col
   Ising2D.TVPlus_checkZ_checkY
+  Ising2D.TVPlus_checkZ_checkY_of_necSuf
   Ising2D.T_V_plus_check_Z_Y_via_B1_B2_B1
   Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator
   Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form

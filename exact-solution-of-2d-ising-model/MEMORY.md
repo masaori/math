@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の十四個目を行った。章の結論 `TVPlus_checkZ_checkY`（人手 `T_V_plus_check_Z_Y`）を、必要十分版 `NecSuf.actsBy_TV_sandwich` の直接呼び出しから、人手の (z)・(y) の 6 行の鎖と最後の 2 行どおりの `calc` に直した（主張の型は不変）。旧証明は `TVPlus_checkZ_checkY_of_necSuf`（`ClaimTVPlusActionFromNecSuf.lean`）へ移した。linearity の 3 本から未使用の仮定を外した。次は `cosh_sinh_coefficient_conversion_for_check` の具体版を人手どおりか確かめる。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の十三個目を行った。人手 `extract_taylor_coefficient_of_check_Z_Y` の 4 式の Lean を、指数共役へ戻して必要十分版に委ねる形から、人手の 4 行（係数変換・偶奇分割・定数の括り出し・cosh/sinh のテイラー級数）どおりの `HasSum` 版に直した（`∑'` 版の型は不変）。必要十分版は級数の和の部分を `NecSuf.hasSum_two_dim_series`（位相 ℂ 加群）として切り出し、導出を `ClaimExtractTaylorFromNecSuf.lean` に置いた。次は `TVPlus_checkZ_checkY` の手順の確認。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の十二個目を行った。人手 `conjugate_index_of_check_Z_Y` (2) `e^{-ijθ~_{M+1-μ}} = e^{ijθ~_μ}` の Lean を、`2M` 乗根の周期で示す形から、人手の 4 行（(1)・指数法則・Euler の公式・`cos(2πj)=1, sin(2πj)=0`）と 1 行ずつ対応する `calc`（`checkPhase_conj'`）に直し、`checkPhase_conj` をその系にした（主張の型は不変）。次は `extract_taylor_coefficient_of_check_Z_Y` を人手どおりに直す。

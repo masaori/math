@@ -57,7 +57,10 @@
 | `Ising2D.B1mat_eq_twoDimConjMat` / `B2mat_eq_twoDimConjMat` / `actsBy_TConj_matExpUnits` / `actsBy_TConj_smulUnits` | 特殊化に使う、運動量の取り方に依らない補題（同じファイル。整数運動量の経路の記録もこれを使う） | 同上 |
 | `Ising2D.factorization_of_A_theta_general` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`θ ∈ ℝ` 一般） | `factorization_of_A_theta_general` |
 | `Ising2D.factorization_of_A_thetaTilde` | 上の `θ = θ~_μ` への特殊化 | 同上（「とくに」） |
-| **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)` | **`T_V_plus_check_Z_Y`** |
+| `Ising2D.TVPlus_apply_checkZ` / `TVPlus_apply_checkY` | 原文の (z)・(y) の鎖（`def_T_V_plus` → `T_actions_on_check_Z_Y` → `linearity_of_T_V2` → `calc_of_TxT_check_Z_Y`（`B_2`）→ `linearity_of_T_on_check_Z_Y` → `calc_of_TxT_check_Z_Y`（`B_1(θ~)`）の 6 行の `calc`） | `T_V_plus_check_Z_Y` |
+| `Ising2D.B1mat_col_zero` / `B1mat_col_one` / `mulVec_mulVec_col` | (z)・(y) の列ベクトルが `B_1(θ~)` の第 1・第 2 列であること、`B_1(B_2(B_1 の第 j 列))` が `B_1B_2B_1` の第 j 列であること | `def_B1_theta_B2`（最後の鎖の 1 行目） |
+| **`Ising2D.TVPlus_checkZ_checkY`** | **章の結論** `(T_{(V^{(+)})}(Ž_μ), T_{(V^{(+)})}(Y̌_μ)) = (Ž_μ, Y̌_μ) A(θ~_μ)`（(z)・(y) の鎖を 2 列に並べ、`factorization_of_A_thetaTilde` を当てる） | **`T_V_plus_check_Z_Y`** |
+| `Ising2D.TVPlus_checkZ_checkY_of_necSuf` | 上を必要十分版 `NecSuf.actsBy_TV_sandwich` の特殊化として得たもの（`ClaimTVPlusActionFromNecSuf.lean`） | 同上 |
 | `Ising2D.TVPlus_checkZ_checkY_components` | 上を 2 本の等式（成分の形）で書いた版 | 同上 |
 
 ### 必要十分版
@@ -102,7 +105,7 @@
 | `linearity_of_T_V2` | `Ising2D.linearity_of_T_V2` | 既存の `Ising2D.TConj_linear` の `V_2` への特殊化 |
 | `def_B1_theta_B2` | 既存の `Ising2D.B1mat` / `B2mat`（最初から `θ : ℂ` 一般） | 既存の `NecSuf.twoDimConjMat` |
 | `factorization_of_A_theta_general` | 既存の `Ising2D.B1_mul_B2_mul_B1_eq_AMat`（最初から `θ : ℝ` 一般） | （2×2 行列の計算そのもので、取り払える構造が無い） |
-| **`T_V_plus_check_Z_Y`** | **`Ising2D.TVPlus_checkZ_checkY`** | **`NecSuf.actsBy_sandwich` / `actsBy_TV_sandwich`（新規）** |
+| **`T_V_plus_check_Z_Y`** | **`Ising2D.TVPlus_checkZ_checkY`**（人手の 6 行の鎖どおり） | **`NecSuf.actsBy_sandwich` / `actsBy_TV_sandwich`（新規。導出は `Ising2D.TVPlus_checkZ_checkY_of_necSuf`）** |
 
 ### 必要十分版で判明した本質（README 4 節が求めている答え）
 
@@ -122,8 +125,8 @@
 Lean での機械的裏づけである。
 
 具体的な確認として、`Ising2D.TV_hatZ_hatY_via_sandwich`（本文から退避した整数運動量の経路の記録 `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`）で
-**008 章の結論を本章の必要十分版から導き直した**。本章の結論
-`Ising2D.TVPlus_checkZ_checkY` とこの定理は、`NecSuf.actsBy_TV_sandwich` に渡す
+**008 章の結論を本章の必要十分版から導き直した**。本章の結論を必要十分版から導いた
+`Ising2D.TVPlus_checkZ_checkY_of_necSuf`（`ClaimTVPlusActionFromNecSuf.lean`）とこの定理は、`NecSuf.actsBy_TV_sandwich` に渡す
 `ActsBy` が `(Ẑ^{(-)}, Ŷ, B_1(θ_μ))` か `(Ž, Y̌, B_1(θ~_μ))` かだけが違う。
 
 さらに、必要十分版から次の 3 点が分かった。
