@@ -25,6 +25,7 @@
 -/
 import Ising2D.NecSuf.TVAction
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTActionsOnCheck
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCoefficientConversionFromNecSuf
 
 namespace Ising2D
 

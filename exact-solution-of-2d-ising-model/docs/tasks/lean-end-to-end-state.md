@@ -369,16 +369,24 @@
     `linearity_of_T_V1plusHalf`・`linearity_of_T_V2`・`linearity_of_T_V2H2Form` から未使用の仮定（`2 ≤ M`・`CheckIndex M μ`）を外した（強める向き。呼び出し元は無かった）。
     具体版と必要十分版の両方の冒頭に行の対応表を書き、`check-no-sorry.sh`・`lean/docs/ch014-formalization.md`・整数運動量の経路の記録のコメントを直した。レビューの指摘 4 件と軽い指摘 1 件を直した。
 
+  - ゴールラインの確認の十五個目（済み、2026-11-01）: 人手 `nesting_of_commutator_of_H_and_check_Z`（`ReductionToATheta/ClaimNestedCommutator.lean`）と
+    `cosh_sinh_coefficient_conversion_for_check`（`ReductionToATheta/ClaimCoefficientConversion.lean`）の Lean を人手どおりに直した。
+    以前はどちらも、`ad X` が `span{check(Z), check(Y)}` を保つことを直接示して必要十分版 `NecSuf.adCLM_pow_*` へ渡していた（変換の方はスカラー倍した生成子を渡し、人手の補題 1・補題 2 を通らなかった）。
+    入れ子交換子は、人手の帰納法の基底段階・帰納段階 1・帰納段階 2 を 4 式それぞれの `calc`（`nesting_*_step_even_to_odd`・`_step_odd_to_even`）に置き、交換子の双線型性を人手の 4 行どおり `comm_smul_smul` に置いた。
+    変換は、補題 1（`ad_smul_left`・`ad_smul_right`・`adPow_smul_left`）と補題 2（`I_pow_even`・`I_pow_odd`）を置き、4 式を人手の鎖（補題 1 → 入れ子交換子の代入 → `(i/2)^n = i^n2^{-n}` → … → 補題 2 → 符号の整理）どおりの `calc` にした。
+    16 本の主張の型は変えていない。必要十分版は、具体版と同じ帰納段階をたどる `NecSuf/NestedCommutatorTwoDim.lean`（`[h,z] = 2py`・`[h,y] = -2qz`・`pq = 1`、スカラーは可換環、台は引き算と積だけ）と、
+    補題 1 の `NecSuf/IteratedCommutatorSmul.lean`（スカラーはモノイド）を新しく置き、導出を `ClaimNestedCommutatorFromNecSuf.lean`・`ClaimCoefficientConversionFromNecSuf.lean` に置いた。
+    `adCLM_pow_*` 経路の導出は外した（`adCLM_pow_*` は `exp_conj_two_dim_*` の中で使われ続ける）。`check-no-sorry.sh`・`lean/docs/ch014-formalization.md` を直した。レビューの指摘（必須 3 件・任意 4 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `cosh_sinh_coefficient_conversion_for_check` の具体版 `conversion_*_even`・`_odd` 8 本（`ReductionToATheta/ClaimCoefficientConversion.lean`）は、スカラー倍した生成子について 2 次元不変性を直接示して必要十分版 `NecSuf.adCLM_pow_*` へ渡している。人手は補題 1（`ad_{αX}^n = α^n ad_X^n`）と補題 2（`i^n` の偶奇）を `nesting_of_commutator_of_H_and_check_Z` の 4 式へ代入している。人手どおりかを確かめ、違えば直す。同じ委ね方の `nesting_*`（`ClaimNestedCommutator.lean`）も確かめる。
+- `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
+  `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
 
 この後に残る確認:
 
-- `Uflip_conj_matExp`（人手 `constant_c_value_even_sector` Step 2 の `U exp(S) U^{-1} = exp(U S U^{-1})`）を、`Matrix.exp_units_conj` に委ねず、人手どおり
-  `def_exp` の部分和・`US^kU^{-1} = (USU^{-1})^k`・共役と極限の交換（`matrix_norm_submultiplicativity`）から証明する。同じ委ね方をしている `matExp_units_conj`（`Representation.lean`）の使われ方も確かめる。
 - `commutation_V_plus_check_psi`（`DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi.lean`）: 人手 Step 2 は `diagonalization_check_P_D` の `A = P̌ Ď P̌^{-1}` と `P̌^{-1}P̌ = I` を経由するが、
   Lean は `P̌` の列が固有ベクトルであること（`AMat_mulVec_eigen_pos`・`_neg`）を `ActsBy.eigen` へ直接渡している。人手の Step 1（行ベクトルへの線型性の持ち上げ）と Step 2 の鎖どおりに直す。
   対角化の定理は `P : IsingParam` と `M ≠ 0` を取るので、呼び出し側（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）の引数 `K : IsingConst`・`hga` との合わせ方を先に確かめる。

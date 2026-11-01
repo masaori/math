@@ -798,6 +798,15 @@ targets=(
   Ising2D.VPlus
   Ising2D.isUnit_VPlus
   Ising2D.TVPlus_eq_TConj
+  Ising2D.comm_smul_smul
+  Ising2D.nesting_H1Plus_checkZ_step_even_to_odd
+  Ising2D.nesting_H1Plus_checkZ_step_odd_to_even
+  Ising2D.nesting_H1Plus_checkY_step_even_to_odd
+  Ising2D.nesting_H1Plus_checkY_step_odd_to_even
+  Ising2D.nesting_H2_checkZ_step_even_to_odd
+  Ising2D.nesting_H2_checkZ_step_odd_to_even
+  Ising2D.nesting_H2_checkY_step_even_to_odd
+  Ising2D.nesting_H2_checkY_step_odd_to_even
   Ising2D.nesting_H1Plus_checkZ_even
   Ising2D.nesting_H1Plus_checkZ_odd
   Ising2D.nesting_H1Plus_checkY_even
@@ -806,6 +815,11 @@ targets=(
   Ising2D.nesting_H2_checkZ_odd
   Ising2D.nesting_H2_checkY_even
   Ising2D.nesting_H2_checkY_odd
+  Ising2D.ad_smul_left
+  Ising2D.ad_smul_right
+  Ising2D.adPow_smul_left
+  Ising2D.I_pow_even
+  Ising2D.I_pow_odd
   Ising2D.conversion_H1Plus_checkZ_even
   Ising2D.conversion_H1Plus_checkZ_odd
   Ising2D.conversion_H1Plus_checkY_even
@@ -814,6 +828,36 @@ targets=(
   Ising2D.conversion_H2_checkZ_odd
   Ising2D.conversion_H2_checkY_even
   Ising2D.conversion_H2_checkY_odd
+  Ising2D.nesting_H1Plus_checkZ_even_of_necSuf
+  Ising2D.nesting_H1Plus_checkZ_odd_of_necSuf
+  Ising2D.nesting_H1Plus_checkY_even_of_necSuf
+  Ising2D.nesting_H1Plus_checkY_odd_of_necSuf
+  Ising2D.nesting_H2_checkZ_even_of_necSuf
+  Ising2D.nesting_H2_checkZ_odd_of_necSuf
+  Ising2D.nesting_H2_checkY_even_of_necSuf
+  Ising2D.nesting_H2_checkY_odd_of_necSuf
+  Ising2D.NecSuf.iterComm_smul_left_one
+  Ising2D.NecSuf.iterComm_smul_right_one
+  Ising2D.NecSuf.iterComm_smul_left
+  Ising2D.NecSuf.comm_smul_smul_necSuf
+  Ising2D.NecSuf.nested_z_step_even_to_odd
+  Ising2D.NecSuf.nested_z_step_odd_to_even
+  Ising2D.NecSuf.nested_z_even
+  Ising2D.NecSuf.nested_z_odd
+  Ising2D.NecSuf.nested_y_step_even_to_odd
+  Ising2D.NecSuf.nested_y_step_odd_to_even
+  Ising2D.NecSuf.nested_y_even
+  Ising2D.NecSuf.nested_y_odd
+  Ising2D.adPow_eq_iterComm
+  Ising2D.adPow_smul_left_of_necSuf
+  Ising2D.conversion_H1Plus_checkZ_even_of_necSuf
+  Ising2D.conversion_H1Plus_checkZ_odd_of_necSuf
+  Ising2D.conversion_H1Plus_checkY_even_of_necSuf
+  Ising2D.conversion_H1Plus_checkY_odd_of_necSuf
+  Ising2D.conversion_H2_checkZ_even_of_necSuf
+  Ising2D.conversion_H2_checkZ_odd_of_necSuf
+  Ising2D.conversion_H2_checkY_even_of_necSuf
+  Ising2D.conversion_H2_checkY_odd_of_necSuf
   Ising2D.extract_taylor_H1Plus_checkZ
   Ising2D.extract_taylor_H1Plus_checkY
   Ising2D.extract_taylor_H2_checkZ

@@ -64,6 +64,8 @@ import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimAnticommutatorPsiFromNecSuf
 import Ising2D.NecSuf.CommutatorClifford
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimCommutatorHAndHatZHatY
 import Ising2D.NecSuf.ExpConjugation
+import Ising2D.NecSuf.IteratedCommutatorSmul
+import Ising2D.NecSuf.NestedCommutatorTwoDim
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExpConjugation
 import Ising2D.NecSuf.TVAction
 import Ising2D.RoutesNotAdopted.IntegerMomentum.ClaimTVActionsOnHatZHatY
@@ -168,7 +170,9 @@ import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimVPlusEqC
 import Ising2D.NecSuf.TVActionSandwich
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimNestedCommutator
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimNestedCommutatorFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCoefficientConversion
+import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimCoefficientConversionFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExtractTaylor
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExtractTaylorFromNecSuf
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2

@@ -5,24 +5,29 @@
 （`structured-latex/content/eigenvalue_problem_reduction_to_A_theta.ts` の
 `evensectorT_003_claim_coefficient_conversion`）
 
-**必要十分版**は既存の `Ising2D/NecSuf/ExpConjugation.lean` の
-`Ising2D.NecSuf.adCLM_pow_even` / `adCLM_pow_odd_z` / `adCLM_pow_odd_y`
-（`EigenvalueProblem/ReductionToATheta/ClaimNestedCommutator.lean` と同じもの）。
+人手証明と 1 対 1 に対応する。必要十分版は補題 1 について `Ising2D/NecSuf/IteratedCommutatorSmul.lean` の
+`Ising2D.NecSuf.iterComm_smul_left`、代入する `nesting_of_commutator_of_H_and_check_Z` について
+`Ising2D/NecSuf/NestedCommutatorTwoDim.lean` の `nested_z_even` / `nested_z_odd` / `nested_y_even` / `nested_y_odd` である。
+具体版をそれらの特殊化として得る定理は `EigenvalueProblem/ReductionToATheta/ClaimCoefficientConversionFromNecSuf.lean` にある。
 
-## 原文との対応
+## 人手証明との対応
 
-原文はこの主張を「補題 1（生成子のスカラー倍 `ad_{αX}^n = α^n ad_X^n`）＋
-補題 2（`i^n` の偶奇）を `nesting_of_commutator_of_H_and_check_Z` の 4 式へ代入する」
-という形で導いている。Lean では、スカラー倍した生成子
+人手は補題 1（生成子のスカラー倍 `ad_{αX}^n = α^n ad_X^n`）と補題 2（`i^n` の偶奇）を用意し、
+4 式それぞれで「補題 1 → `nesting_of_commutator_of_H_and_check_Z` の代入 → スカラーの整理 → 補題 2 → 符号の整理」
+の鎖を書く。
 
-  `X_1' := (i/2) K_1 H_1^{(+)}`,  `X_2' := i K_2^* H_2`
+| 人手 | Lean |
+| --- | --- |
+| 補題 1 の `ad_{αX}(W) = α ad_X(W)` の 3 行 | `ad_smul_left`（必要十分版 `NecSuf.iterComm_smul_left_one`） |
+| 補題 1 の「`ad_X` は ℂ 線型で、合成の各段からスカラーを前へ出せる」 | `ad_smul_right` と `adPow_smul_left` の帰納法（必要十分版 `NecSuf.iterComm_smul_right_one`・`NecSuf.iterComm_smul_left`） |
+| 補題 2 の偶数・奇数の 2 行ずつ | `I_pow_even`・`I_pow_odd` |
+| (h1.z)(h1.y)(h2.z)(h2.y) の鎖 | `conversion_*_even`・`conversion_*_odd` の `calc` |
 
-について `ad X'` が `span{check(Z)_μ, check(Y)_μ}` を保つことを直接示し
-（係数は `(α, β)` が `(i K_1 e^{-iθ~}, -i K_1 e^{iθ~})` と `(-2i K_2^*, 2i K_2^*)`、
-したがって `s` は `K_1` と `2K_2^*`）、同じ必要十分版へ渡す。
-**原文の補題 1・補題 2 は、この `(α, β, s)` の付け替えに吸収される。**
-とくに `s` が純虚数 `2iK_1` から実の `K_1` へ変わることが、原文の
-`(-1)^{n/2}(2K_1)^n → K_1^n` という符号の消滅の正体である。
+右辺は `n` の偶奇で場合分けされているので、`n = 2k` と `n = 2k+1` を別の定理にする
+（`(-1)^{n/2} = (-1)^k`、`(-1)^{(n-1)/2} = (-1)^k`、`(-1)^{(n+1)/2} = (-1)^{k+1}`）。
+`calc` の最初の行は、人手が `[\tfrac{i}{2}K_1H_1^{(+)}, …]` と書く生成子を `α = i/2`、`X = K_1H_1^{(+)}` に
+分ける書き直し（`((1/2)·i·K_1)H = (i/2)(K_1H)`）で、人手では記法の読み方に当たる。
+人手の `2^{-n}` は `(2^n)^{-1}` と書く。
 -/
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimNestedCommutator
 
@@ -30,146 +35,343 @@ namespace Ising2D
 
 variable {M : ℕ}
 
-/-! ## `ad((i/2)K_1H_1^{(+)})` が `span{check(Z)_μ, check(Y)_μ}` を保つこと -/
+/-! ## 補題 1（生成子のスカラー倍） -/
 
-/-- 原文 (A) を `(i/2)K_1` 倍したもの。 -/
-theorem ad_V1plusHalf_checkZ (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkZ M μ -
-        checkZ M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
-      = (Complex.I * K1 * checkPhase M 1 μ) • checkY M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkZ hM μ,
-    smul_smul]
-  congr 1
-  ring
+/-- 人手の補題 1 の `ad_{αX}(W) = α ad_X(W)`（交換子の第 1 引数についての ℂ 線型性）。 -/
+theorem ad_smul_left (α : ℂ) (X W : TensorPow M) :
+    (α • X) * W - W * (α • X) = α • (X * W - W * X) := by
+  -- 両辺は `ad` の定義（`ad_X(W) = XW - WX`）で開いた形で書いてある
+  calc (α • X) * W - W * (α • X)
+      -- 交換子の第 1 引数についての ℂ 線型性（スカラー倍を積の外へ出す）
+      = α • (X * W) - α • (W * X) := by rw [smul_mul_assoc, mul_smul_comm]
+    -- 分配則
+    _ = α • (X * W - W * X) := (smul_sub _ _ _).symm
 
-/-- 原文 (B) を `(i/2)K_1` 倍したもの。 -/
-theorem ad_V1plusHalf_checkY (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) :
-    (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) * checkY M μ -
-        checkY M μ * (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M)
-      = (-Complex.I * K1 * checkPhase M (-1) μ) • checkZ M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H1Plus_checkY hM μ,
-    smul_smul]
-  congr 1
-  ring
+/-- 人手の補題 1 の「`ad_X` は ℂ 線型」: `ad_X(αW) = α ad_X(W)`。 -/
+theorem ad_smul_right (α : ℂ) (X W : TensorPow M) :
+    X * (α • W) - (α • W) * X = α • (X * W - W * X) := by
+  calc X * (α • W) - (α • W) * X
+      -- スカラー倍を積の外へ出す
+      = α • (X * W) - α • (W * X) := by rw [mul_smul_comm, smul_mul_assoc]
+    -- 分配則
+    _ = α • (X * W - W * X) := (smul_sub _ _ _).symm
 
-/-- `αβ = K_1^2`（`i·(-i) = 1` と `e^{-iθ~}e^{iθ~} = 1`）。原文の `s = K_1` の根拠。 -/
-theorem sK1_sq (M : ℕ) (K1 : ℂ) (μ : ℤ) :
-    K1 ^ 2 = (Complex.I * K1 * checkPhase M 1 μ) * (-Complex.I * K1 * checkPhase M (-1) μ) := by
-  have hp := checkPhase_mul_neg M μ
-  linear_combination
-    (K1 ^ 2 * checkPhase M 1 μ * checkPhase M (-1) μ) * Complex.I_sq - (K1 ^ 2) * hp
+/-- **人手の補題 1**: `ad_{αX}^n(W) = α^n ad_X^n(W)`。
+`n = 0` は両辺とも `W`（`α^0 = 1`）。`n` から `n+1` へは `ad_{αX} = α ad_X` と、
+`ad_X` の合成の各段からスカラーを前へ出せることを当てる。 -/
+theorem adPow_smul_left (α : ℂ) (X W : TensorPow M) :
+    ∀ n : ℕ, adPow (α • X) n W = α ^ n • adPow X n W
+  | 0 => by rw [adPow_zero, adPow_zero, pow_zero, one_smul]
+  | n + 1 => by
+    calc adPow (α • X) (n + 1) W
+        -- `ad` の定義
+        = (α • X) * adPow (α • X) n W - adPow (α • X) n W * (α • X) := adPow_succ _ _ _
+      -- `ad_{αX} = α ad_X`
+      _ = α • (X * adPow (α • X) n W - adPow (α • X) n W * X) := ad_smul_left _ _ _
+      -- 帰納法の仮定
+      _ = α • (X * (α ^ n • adPow X n W) - (α ^ n • adPow X n W) * X) := by
+          rw [adPow_smul_left α X W n]
+      -- `ad_X` は ℂ 線型
+      _ = α • (α ^ n • (X * adPow X n W - adPow X n W * X)) := by rw [ad_smul_right]
+      -- スカラーの積 `α·α^n = α^{n+1}` と `ad` の定義
+      _ = α ^ (n + 1) • adPow X (n + 1) W := by rw [smul_smul, ← pow_succ', adPow_succ]
 
-/-! ## `ad(i K_2^* H_2)` が `span{check(Z)_μ, check(Y)_μ}` を保つこと -/
+/-! ## 補題 2（虚数単位の冪） -/
 
-/-- 原文 (C) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2H2Form_checkZ (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
-    ((Complex.I * K2star) • H2 M) * checkZ M μ -
-        checkZ M μ * ((Complex.I * K2star) • H2 M)
-      = (-(2 * Complex.I * K2star)) • checkY M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkZ hM μ, smul_smul]
-  congr 1
-  ring
+/-- **人手の補題 2 の偶数側**: `i^{2k} = (-1)^k`。 -/
+theorem I_pow_even (k : ℕ) : Complex.I ^ (2 * k) = (-1 : ℂ) ^ k := by
+  calc Complex.I ^ (2 * k)
+      -- `n = 2(n/2)`
+      = (Complex.I ^ 2) ^ k := pow_mul _ _ _
+    -- `i^2 = -1`
+    _ = (-1 : ℂ) ^ k := by rw [Complex.I_sq]
 
-/-- 原文 (D) を `i K_2^*` 倍したもの。 -/
-theorem ad_V2H2Form_checkY (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) :
-    ((Complex.I * K2star) • H2 M) * checkY M μ -
-        checkY M μ * ((Complex.I * K2star) • H2 M)
-      = (2 * Complex.I * K2star) • checkZ M μ := by
-  rw [smul_mul_assoc, mul_smul_comm, ← smul_sub, ← Ring.lie_def, lie_H2_checkY hM μ, smul_smul]
-  congr 1
-  ring
+/-- **人手の補題 2 の奇数側**: `i^{2k+1} = i (-1)^k`。 -/
+theorem I_pow_odd (k : ℕ) : Complex.I ^ (2 * k + 1) = Complex.I * (-1 : ℂ) ^ k := by
+  calc Complex.I ^ (2 * k + 1)
+      -- `n = 1 + 2((n-1)/2)`
+      = Complex.I * (Complex.I ^ 2) ^ k := by rw [pow_succ', pow_mul]
+    -- `i^2 = -1`
+    _ = Complex.I * (-1 : ℂ) ^ k := by rw [Complex.I_sq]
 
-/-- `αβ = (2K_2^*)^2`。原文の `s = 2K_2^*` の根拠。 -/
-theorem sK2_sq (K2star : ℂ) :
-    (2 * K2star) ^ 2 = (-(2 * Complex.I * K2star)) * (2 * Complex.I * K2star) := by
-  linear_combination (4 * K2star ^ 2) * Complex.I_sq
+/-! ## 人手 (h1.z)・(h1.y): `α = i/2`、`X = K_1 H_1^{(+)}` -/
 
-/-! ## 原文 (h1.z)(h1.y): `X_1' = (i/2)K_1H_1^{(+)}` についての `n` 重交換子 -/
+/-- `(i/2)^n = i^n 2^{-n}`。 -/
+theorem half_I_pow (n : ℕ) :
+    ((1 / 2 : ℂ) * Complex.I) ^ n = Complex.I ^ n * ((2 : ℂ) ^ n)⁻¹ := by
+  rw [mul_pow, one_div, inv_pow, mul_comm]
 
-open scoped Matrix.Norms.Operator in
-private theorem adPow_even_aux {X z y : TensorPow M} {α β s : ℂ}
-    (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
-    adPow X (2 * k) z = (s ^ (2 * k)) • z ∧ adPow X (2 * k) y = (s ^ (2 * k)) • y := by
-  simpa only [adPow_eq_adCLM] using NecSuf.adCLM_pow_even (x := X) (z := z) (y := y) hz hy hs k
+/-- `2^{-n} 2^n = 1`。 -/
+theorem two_pow_inv_mul (n : ℕ) : ((2 : ℂ) ^ n)⁻¹ * (2 : ℂ) ^ n = 1 :=
+  inv_mul_cancel₀ (pow_ne_zero n two_ne_zero)
 
-open scoped Matrix.Norms.Operator in
-private theorem adPow_odd_z_aux {X z y : TensorPow M} {α β s : ℂ}
-    (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
-    adPow X (2 * k + 1) z = (s ^ (2 * k) * α) • y := by
-  simpa only [adPow_eq_adCLM] using
-    NecSuf.adCLM_pow_odd_z (x := X) (z := z) (y := y) hz hy hs k
-
-open scoped Matrix.Norms.Operator in
-private theorem adPow_odd_y_aux {X z y : TensorPow M} {α β s : ℂ}
-    (hz : X * z - z * X = α • y) (hy : X * y - y * X = β • z) (hs : s ^ 2 = α * β) (k : ℕ) :
-    adPow X (2 * k + 1) y = (s ^ (2 * k) * β) • z := by
-  simpa only [adPow_eq_adCLM] using
-    NecSuf.adCLM_pow_odd_y (x := X) (z := z) (y := y) hz hy hs k
-
-/-- **原文 (h1.z) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Z)_μ`（符号が消える）。 -/
+/-- **人手 (h1.z) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Z)_μ`（符号が消える）。 -/
 theorem conversion_H1Plus_checkZ_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkZ M μ)
-      = (K1 ^ (2 * k)) • checkZ M μ :=
-  (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
-    (sK1_sq M K1 μ) k).1
+      = (K1 ^ (2 * k)) • checkZ M μ := by
+  calc adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkZ M μ)
+      = adPow (((1 / 2 : ℂ) * Complex.I) • (K1 • H1plus M)) (2 * k) (checkZ M μ) := by
+        rw [smul_smul]
+    -- 補題 1
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k) • adPow (K1 • H1plus M) (2 * k) (checkZ M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h1.z)
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkZ M μ) := by
+        rw [nesting_H1Plus_checkZ_even hM K1 μ k]
+    -- `(i/2)^n = i^n 2^{-n}`
+    _ = (Complex.I ^ (2 * k) * ((2 : ℂ) ^ (2 * k))⁻¹)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkZ M μ) := by
+        rw [half_I_pow]
+    -- `(2K_1)^n = 2^n K_1^n`
+    _ = (Complex.I ^ (2 * k) * ((2 : ℂ) ^ (2 * k))⁻¹)
+          • (((-1 : ℂ) ^ k * ((2 : ℂ) ^ (2 * k) * K1 ^ (2 * k))) • checkZ M μ) := by
+        rw [mul_pow]
+    -- ℂ の分配律・交換律
+    _ = (Complex.I ^ (2 * k) * (((2 : ℂ) ^ (2 * k))⁻¹ * (2 : ℂ) ^ (2 * k))
+          * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkZ M μ := by
+        rw [smul_smul]
+        congr 1
+        ring
+    -- `2^{-n} 2^n = 1`
+    _ = (Complex.I ^ (2 * k) * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkZ M μ := by
+        rw [two_pow_inv_mul, mul_one]
+    -- 補題 2
+    _ = ((-1 : ℂ) ^ k * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkZ M μ := by
+        rw [I_pow_even]
+    -- `n/2 + n/2 = n`
+    _ = ((-1 : ℂ) ^ (2 * k) * K1 ^ (2 * k)) • checkZ M μ := by
+        rw [← pow_add, ← two_mul]
+    -- `n` 偶数なら `(-1)^n = 1`
+    _ = (K1 ^ (2 * k)) • checkZ M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
-/-- **原文 (h1.z) 奇数側**: `n = 2k+1` のとき `i K_1^{2k+1} e^{-iθ~_μ} check(Y)_μ`。 -/
+/-- **人手 (h1.z) 奇数側**: `n = 2k+1` のとき `i K_1^{2k+1} e^{-iθ~_μ} check(Y)_μ`。 -/
 theorem conversion_H1Plus_checkZ_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkZ M μ)
       = (Complex.I * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
-  rw [adPow_odd_z_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
-    (sK1_sq M K1 μ) k]
-  congr 1
-  rw [pow_succ]
-  ring
+  calc adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkZ M μ)
+      = adPow (((1 / 2 : ℂ) * Complex.I) • (K1 • H1plus M)) (2 * k + 1) (checkZ M μ) := by
+        rw [smul_smul]
+    -- 補題 1
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k + 1)
+          • adPow (K1 • H1plus M) (2 * k + 1) (checkZ M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h1.z)
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k + 1)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ) := by
+        rw [nesting_H1Plus_checkZ_odd hM K1 μ k]
+    -- `(i/2)^n = i^n 2^{-n}`
+    _ = (Complex.I ^ (2 * k + 1) * ((2 : ℂ) ^ (2 * k + 1))⁻¹)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ) := by
+        rw [half_I_pow]
+    -- `(2K_1)^n = 2^n K_1^n`
+    _ = (Complex.I ^ (2 * k + 1) * ((2 : ℂ) ^ (2 * k + 1))⁻¹)
+          • (((-1 : ℂ) ^ k * ((2 : ℂ) ^ (2 * k + 1) * K1 ^ (2 * k + 1)) * checkPhase M 1 μ)
+            • checkY M μ) := by
+        rw [mul_pow]
+    -- ℂ の分配律・交換律
+    _ = (Complex.I ^ (2 * k + 1) * (((2 : ℂ) ^ (2 * k + 1))⁻¹ * (2 : ℂ) ^ (2 * k + 1))
+          * (-1 : ℂ) ^ k * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
+        rw [smul_smul]
+        congr 1
+        ring
+    -- `2^{-n} 2^n = 1`
+    _ = (Complex.I ^ (2 * k + 1) * (-1 : ℂ) ^ k * K1 ^ (2 * k + 1) * checkPhase M 1 μ)
+          • checkY M μ := by
+        rw [two_pow_inv_mul, mul_one]
+    -- 補題 2
+    _ = (Complex.I * (-1 : ℂ) ^ k * (-1 : ℂ) ^ k * K1 ^ (2 * k + 1) * checkPhase M 1 μ)
+          • checkY M μ := by
+        rw [I_pow_odd]
+    -- `(n-1)/2 + (n-1)/2 = n-1`
+    _ = (Complex.I * (-1 : ℂ) ^ (2 * k) * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
+        rw [mul_assoc Complex.I, ← pow_add, ← two_mul]
+    -- `n` 奇数なら `(-1)^{n-1} = 1`
+    _ = (Complex.I * K1 ^ (2 * k + 1) * checkPhase M 1 μ) • checkY M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, mul_one]
 
-/-- **原文 (h1.y) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Y)_μ`。 -/
+/-- **人手 (h1.y) 偶数側**: `n = 2k` のとき `K_1^{2k} check(Y)_μ`。 -/
 theorem conversion_H1Plus_checkY_even (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkY M μ)
-      = (K1 ^ (2 * k)) • checkY M μ :=
-  (adPow_even_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
-    (sK1_sq M K1 μ) k).2
+      = (K1 ^ (2 * k)) • checkY M μ := by
+  calc adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k) (checkY M μ)
+      = adPow (((1 / 2 : ℂ) * Complex.I) • (K1 • H1plus M)) (2 * k) (checkY M μ) := by
+        rw [smul_smul]
+    -- 補題 1
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k) • adPow (K1 • H1plus M) (2 * k) (checkY M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h1.y)
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkY M μ) := by
+        rw [nesting_H1Plus_checkY_even hM K1 μ k]
+    -- `(i/2)^n = i^n 2^{-n}`
+    _ = (Complex.I ^ (2 * k) * ((2 : ℂ) ^ (2 * k))⁻¹)
+          • (((-1 : ℂ) ^ k * (2 * K1) ^ (2 * k)) • checkY M μ) := by
+        rw [half_I_pow]
+    -- `(2K_1)^n = 2^n K_1^n`
+    _ = (Complex.I ^ (2 * k) * ((2 : ℂ) ^ (2 * k))⁻¹)
+          • (((-1 : ℂ) ^ k * ((2 : ℂ) ^ (2 * k) * K1 ^ (2 * k))) • checkY M μ) := by
+        rw [mul_pow]
+    -- ℂ の分配律・交換律
+    _ = (Complex.I ^ (2 * k) * (((2 : ℂ) ^ (2 * k))⁻¹ * (2 : ℂ) ^ (2 * k))
+          * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkY M μ := by
+        rw [smul_smul]
+        congr 1
+        ring
+    -- `2^{-n} 2^n = 1`
+    _ = (Complex.I ^ (2 * k) * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkY M μ := by
+        rw [two_pow_inv_mul, mul_one]
+    -- 補題 2
+    _ = ((-1 : ℂ) ^ k * (-1 : ℂ) ^ k * K1 ^ (2 * k)) • checkY M μ := by
+        rw [I_pow_even]
+    -- `n/2 + n/2 = n`
+    _ = ((-1 : ℂ) ^ (2 * k) * K1 ^ (2 * k)) • checkY M μ := by
+        rw [← pow_add, ← two_mul]
+    -- `n` 偶数なら `(-1)^n = 1`
+    _ = (K1 ^ (2 * k)) • checkY M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
-/-- **原文 (h1.y) 奇数側**: `n = 2k+1` のとき `-i K_1^{2k+1} e^{iθ~_μ} check(Z)_μ`。 -/
+/-- **人手 (h1.y) 奇数側**: `n = 2k+1` のとき `-i K_1^{2k+1} e^{iθ~_μ} check(Z)_μ`。 -/
 theorem conversion_H1Plus_checkY_odd (hM : M ≠ 0) (K1 : ℂ) (μ : ℤ) (k : ℕ) :
     adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkY M μ)
       = (-Complex.I * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
-  rw [adPow_odd_y_aux (ad_V1plusHalf_checkZ hM K1 μ) (ad_V1plusHalf_checkY hM K1 μ)
-    (sK1_sq M K1 μ) k]
-  congr 1
-  rw [pow_succ]
-  ring
+  calc adPow (((1 / 2 : ℂ) * Complex.I * K1) • H1plus M) (2 * k + 1) (checkY M μ)
+      = adPow (((1 / 2 : ℂ) * Complex.I) • (K1 • H1plus M)) (2 * k + 1) (checkY M μ) := by
+        rw [smul_smul]
+    -- 補題 1
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k + 1)
+          • adPow (K1 • H1plus M) (2 * k + 1) (checkY M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h1.y)
+    _ = ((1 / 2 : ℂ) * Complex.I) ^ (2 * k + 1)
+          • (((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * k + 1) * checkPhase M (-1) μ)
+            • checkZ M μ) := by
+        rw [nesting_H1Plus_checkY_odd hM K1 μ k]
+    -- `(i/2)^n = i^n 2^{-n}`
+    _ = (Complex.I ^ (2 * k + 1) * ((2 : ℂ) ^ (2 * k + 1))⁻¹)
+          • (((-1 : ℂ) ^ (k + 1) * (2 * K1) ^ (2 * k + 1) * checkPhase M (-1) μ)
+            • checkZ M μ) := by
+        rw [half_I_pow]
+    -- `(2K_1)^n = 2^n K_1^n`
+    _ = (Complex.I ^ (2 * k + 1) * ((2 : ℂ) ^ (2 * k + 1))⁻¹)
+          • (((-1 : ℂ) ^ (k + 1) * ((2 : ℂ) ^ (2 * k + 1) * K1 ^ (2 * k + 1))
+              * checkPhase M (-1) μ) • checkZ M μ) := by
+        rw [mul_pow]
+    -- ℂ の分配律・交換律
+    _ = (Complex.I ^ (2 * k + 1) * (((2 : ℂ) ^ (2 * k + 1))⁻¹ * (2 : ℂ) ^ (2 * k + 1))
+          * (-1 : ℂ) ^ (k + 1) * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [smul_smul]
+        congr 1
+        ring
+    -- `2^{-n} 2^n = 1`
+    _ = (Complex.I ^ (2 * k + 1) * (-1 : ℂ) ^ (k + 1) * K1 ^ (2 * k + 1) * checkPhase M (-1) μ)
+          • checkZ M μ := by
+        rw [two_pow_inv_mul, mul_one]
+    -- 補題 2
+    _ = (Complex.I * (-1 : ℂ) ^ k * (-1 : ℂ) ^ (k + 1) * K1 ^ (2 * k + 1)
+          * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [I_pow_odd]
+    -- `(n-1)/2 + (n+1)/2 = n`
+    _ = (Complex.I * (-1 : ℂ) ^ (2 * k + 1) * K1 ^ (2 * k + 1) * checkPhase M (-1) μ)
+          • checkZ M μ := by
+        rw [mul_assoc Complex.I, ← pow_add, show k + (k + 1) = 2 * k + 1 by ring]
+    -- `n` 奇数なら `(-1)^n = -1`
+    _ = (-Complex.I * K1 ^ (2 * k + 1) * checkPhase M (-1) μ) • checkZ M μ := by
+        rw [pow_succ, pow_mul, neg_one_sq, one_pow, one_mul, mul_neg_one]
 
-/-! ## 原文 (h2.z)(h2.y): `X_2' = i K_2^* H_2` についての `n` 重交換子 -/
+/-! ## 人手 (h2.z)・(h2.y): `α = i`、`X = K_2^* H_2`（`2` の冪は現れない） -/
 
-/-- **原文 (h2.z) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Z)_μ`。 -/
+/-- **人手 (h2.z) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Z)_μ`。 -/
 theorem conversion_H2_checkZ_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
-      = ((2 * K2star) ^ (2 * k)) • checkZ M μ :=
-  (adPow_even_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k).1
+      = ((2 * K2star) ^ (2 * k)) • checkZ M μ := by
+  calc adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkZ M μ)
+      = adPow (Complex.I • (K2star • H2 M)) (2 * k) (checkZ M μ) := by rw [smul_smul]
+    -- 補題 1
+    _ = Complex.I ^ (2 * k) • adPow (K2star • H2 M) (2 * k) (checkZ M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h2.z)
+    _ = Complex.I ^ (2 * k) • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkZ M μ) := by
+        rw [nesting_H2_checkZ_even hM K2star μ k]
+    -- 補題 2
+    _ = ((-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • checkZ M μ := by
+        rw [I_pow_even, smul_smul]
+    -- `n/2 + n/2 = n`
+    _ = ((-1 : ℂ) ^ (2 * k) * (2 * K2star) ^ (2 * k)) • checkZ M μ := by
+        rw [← mul_assoc, ← pow_add, ← two_mul]
+    -- `n` 偶数なら `(-1)^n = 1`
+    _ = ((2 * K2star) ^ (2 * k)) • checkZ M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
-/-- **原文 (h2.z) 奇数側**: `n = 2k+1` のとき `-i (2K_2^*)^{2k+1} check(Y)_μ`。 -/
+/-- **人手 (h2.z) 奇数側**: `n = 2k+1` のとき `-i (2K_2^*)^{2k+1} check(Y)_μ`。 -/
 theorem conversion_H2_checkZ_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
       = (-Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
-  rw [adPow_odd_z_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k]
-  congr 1
-  rw [pow_succ]
-  ring
+  calc adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkZ M μ)
+      = adPow (Complex.I • (K2star • H2 M)) (2 * k + 1) (checkZ M μ) := by rw [smul_smul]
+    -- 補題 1
+    _ = Complex.I ^ (2 * k + 1) • adPow (K2star • H2 M) (2 * k + 1) (checkZ M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h2.z)
+    _ = Complex.I ^ (2 * k + 1)
+          • (((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ) := by
+        rw [nesting_H2_checkZ_odd hM K2star μ k]
+    -- 補題 2
+    _ = (Complex.I * (-1 : ℂ) ^ k * ((-1 : ℂ) ^ (k + 1) * (2 * K2star) ^ (2 * k + 1)))
+          • checkY M μ := by
+        rw [I_pow_odd, smul_smul]
+    -- `(n-1)/2 + (n+1)/2 = n`
+    _ = (Complex.I * (-1 : ℂ) ^ (2 * k + 1) * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
+        rw [← mul_assoc, mul_assoc Complex.I, ← pow_add, show k + (k + 1) = 2 * k + 1 by ring]
+    -- `n` 奇数なら `(-1)^n = -1`
+    _ = (-Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkY M μ := by
+        rw [pow_succ, pow_mul, neg_one_sq, one_pow, one_mul, mul_neg_one]
 
-/-- **原文 (h2.y) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Y)_μ`。 -/
+/-- **人手 (h2.y) 偶数側**: `n = 2k` のとき `(2K_2^*)^{2k} check(Y)_μ`。 -/
 theorem conversion_H2_checkY_even (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
-      = ((2 * K2star) ^ (2 * k)) • checkY M μ :=
-  (adPow_even_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k).2
+      = ((2 * K2star) ^ (2 * k)) • checkY M μ := by
+  calc adPow ((Complex.I * K2star) • H2 M) (2 * k) (checkY M μ)
+      = adPow (Complex.I • (K2star • H2 M)) (2 * k) (checkY M μ) := by rw [smul_smul]
+    -- 補題 1
+    _ = Complex.I ^ (2 * k) • adPow (K2star • H2 M) (2 * k) (checkY M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h2.y)
+    _ = Complex.I ^ (2 * k) • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k)) • checkY M μ) := by
+        rw [nesting_H2_checkY_even hM K2star μ k]
+    -- 補題 2
+    _ = ((-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k))) • checkY M μ := by
+        rw [I_pow_even, smul_smul]
+    -- `n/2 + n/2 = n`
+    _ = ((-1 : ℂ) ^ (2 * k) * (2 * K2star) ^ (2 * k)) • checkY M μ := by
+        rw [← mul_assoc, ← pow_add, ← two_mul]
+    -- `n` 偶数なら `(-1)^n = 1`
+    _ = ((2 * K2star) ^ (2 * k)) • checkY M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, one_mul]
 
-/-- **原文 (h2.y) 奇数側**: `n = 2k+1` のとき `i (2K_2^*)^{2k+1} check(Z)_μ`。 -/
+/-- **人手 (h2.y) 奇数側**: `n = 2k+1` のとき `i (2K_2^*)^{2k+1} check(Z)_μ`。 -/
 theorem conversion_H2_checkY_odd (hM : M ≠ 0) (K2star : ℂ) (μ : ℤ) (k : ℕ) :
     adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
       = (Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
-  rw [adPow_odd_y_aux (ad_V2H2Form_checkZ hM K2star μ) (ad_V2H2Form_checkY hM K2star μ) (sK2_sq K2star) k]
-  congr 1
-  rw [pow_succ]
-  ring
+  calc adPow ((Complex.I * K2star) • H2 M) (2 * k + 1) (checkY M μ)
+      = adPow (Complex.I • (K2star • H2 M)) (2 * k + 1) (checkY M μ) := by rw [smul_smul]
+    -- 補題 1
+    _ = Complex.I ^ (2 * k + 1) • adPow (K2star • H2 M) (2 * k + 1) (checkY M μ) :=
+        adPow_smul_left _ _ _ _
+    -- `nesting_of_commutator_of_H_and_check_Z` (h2.y)
+    _ = Complex.I ^ (2 * k + 1)
+          • (((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ) := by
+        rw [nesting_H2_checkY_odd hM K2star μ k]
+    -- 補題 2
+    _ = (Complex.I * (-1 : ℂ) ^ k * ((-1 : ℂ) ^ k * (2 * K2star) ^ (2 * k + 1)))
+          • checkZ M μ := by
+        rw [I_pow_odd, smul_smul]
+    -- `(n-1)/2 + (n-1)/2 = n-1`
+    _ = (Complex.I * (-1 : ℂ) ^ (2 * k) * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
+        rw [← mul_assoc, mul_assoc Complex.I, ← pow_add, ← two_mul]
+    -- `n` 奇数なら `(-1)^{n-1} = 1`
+    _ = (Complex.I * (2 * K2star) ^ (2 * k + 1)) • checkZ M μ := by
+        rw [pow_mul, neg_one_sq, one_pow, mul_one]
 
 end Ising2D
