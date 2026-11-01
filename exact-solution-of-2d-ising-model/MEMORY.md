@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十四個目を行った。`lean/README.md` と `lean/docs/` が書く `.lean` のパスと `Ising2D.` の名前の実在を確かめる `lean/scripts/check-docs-references.sh` を置いた。実在しないパスは 0 件、名前は README の `Ising2D.NecSufTensorPow`（正しくは `AbstractTensorPow`）の 1 件で、同じ表の実在しない人手ラベル `gamma_2_periodicity` とあわせて直した。表に出ない Lean のファイル 21 個と、いまの `labels` に無い人手ラベル 87 件を状態台帳の「次の一歩」に足した。次はその先頭（表に出ないファイルを章の記録へ足す）。
+
 2026-11-01: 全証明の SageMath 検算の連続実行の九回目として、`real_exp_positive`（実数の exp は正）と `real_exp_strictly_increasing`（狭義単調増加）の検算 `sagemath/check/real_exp_positive/`・`real_exp_strictly_increasing/` を足した（未検算 110 → 108 件）。等号の行は `QQ[x]` の形式冪級数で厳密に、ノルムは `AA` で、不等号と主張は本文の exp を囲むボールで確かめた。レビューで人手証明の地の文の推論を鎖に直し、`E(a) = exp(a)` を 1 行 1 列の行列の極限の一意性経由にした。計算の誤りは無かった。次は `complex_exp_of_real_argument`。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十三個目を行った。`ClaimEigenATildeDiag.lean` の `P̌_μ`・`c` を `DefinitionCheckFermi.lean` の `sqrtM` で書き直し、重複していた `sqrtM_cast_ne_zero` を消した（`sqrtM_ne_zero` と同じ主張）。次は状態台帳の「次の一歩」の先頭（`lean/README.md` と `lean/docs/` の対応表のパスの機械的な確認）。

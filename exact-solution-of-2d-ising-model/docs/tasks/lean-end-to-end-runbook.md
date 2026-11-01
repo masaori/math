@@ -89,7 +89,7 @@
 - 状態台帳の「次の一歩」だけを行い、別のエージェントにレビューさせる。レビューは、人手証明との 1 対 1 対応、
   mathlib の一般論への丸投げが無いこと（README 4 節）、主張を弱めていないことを見る。
 - `lake build`、`bash scripts/check-no-sorry.sh`、`bash scripts/check-end-to-end.sh`（項目 6 より前は失敗してよい。失敗の理由が
-  「定理が無い」であることだけを確かめる）を通す。人手証明の正本や SageMath を変えたら、論文側の `npm run check` と
+  「定理が無い」であることだけを確かめる）、`bash scripts/check-docs-references.sh`（README と `lean/docs/` が書くパスと名前の実在）を通す。人手証明の正本や SageMath を変えたら、論文側の `npm run check` と
   `node sagemath/tools/verify-check-linkage.ts` も通す。
 - 状態台帳と `MEMORY.md` を更新してコミットし、push 前に `git fetch origin && git rebase origin/main` を行い、
   成果コミットの origin/main への包含を `git merge-base --is-ancestor` で確かめてから終える。

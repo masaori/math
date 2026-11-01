@@ -432,11 +432,20 @@
     `det_checkPmat`・`det_checkPmat_of_necSuf` の `(√M)^2 = M` は `sqrtM_sq` を引く。主張の値は定義を展開すれば変わらない。`check-no-sorry.sh` の targets と `lean/docs/ch015-formalization.md` の対応表を直し、
     `DefinitionCheckFermi.lean` 冒頭の「`P̌_μ` は並行して形式化中」の古い記述を直した。レビューの指摘（必須 3 件・任意 2 件）を直した。
 
+  - ゴールラインの確認の二十四個目（済み、2026-11-01）: `lean/README.md` と `lean/docs/` が書く `.lean` のパスと `Ising2D.` の名前の実在を機械的に確かめる `lean/scripts/check-docs-references.sh` を置いた
+    （パスは lean/・Ising2D/・mathlib 起点と実在ファイルの末尾で読み、名前は宣言・構造体の欄・コンストラクタ・名前空間・モジュールの完全な名前で照合する。削除・改名の経緯を書いた段落は除く）。
+    実在しないパスは 0 件だった。実在しない名前は 1 件で、README の表の抽象テンソル冪の実装名 `Ising2D.NecSufTensorPow`（「抽象版」の改名で巻き込まれた誤り）を実在する `Ising2D.AbstractTensorPow` に直した。
+    同じ表の人手ラベル `gamma_2_periodicity`（本文にもノートにも無い）を、`gamma2_add_int_mul_two_pi` は `periodicity_of_check_fermi` の (1) の `γ_2` 側、`gamma2_thetaMu_of_dvd` は整数運動量の経路だけが使う退避ノートの `gamma2_theta_M_periodicity` の一般形、の 2 行に分けて直した。
+    README の「ビルド」節にスクリプトの使い方を足した。二回のレビューの指摘（必須 2 件・任意 7 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `lean/README.md` と `lean/docs/` の対応表が新しい配置と一致しているかを、全ファイルのパスについて機械的に確かめる（存在しないパスが書かれていないか）。
+- `lean/README.md` と `lean/docs/` の対応表に、ファイル名も宣言した名前も 1 つも出ない Lean のファイルが 21 個ある（2026-11-01 に数えた。束ねた主張のファイル、`*FromNecSuf.lean`、`NecSuf/` の一部。例: `EigenvalueProblem/EigenvaluesOfVPlus/ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`、`NecSuf/DualCouplingRelation.lean`）。
+  各ファイルを対応する章の記録（`lean/docs/`）の表へ足し、「全ファイルが表に出る」を `check-docs-references.sh` の検査に加える。
+- 対応表の人手ラベルの列に、いまの本文・ノートの `labels` に無い名前が 87 件ある（多くは参照用ノートへ退避した整数運動量の経路のラベルで、ノートの本文に「labels: …」の文字としてだけ残る）。
+  退避したものは退避先のノートが分かる書き方へ、改名されたものはいまのラベルへ直し、ラベルの実在を `check-docs-references.sh` の検査に加える。
 - `exp_smul_pauliX`（`PartitionFunction/TransferMatrixRepresentation/ClaimTwoByTwoTransferIdentity.lean`、人手 `two_by_two_transfer_identity` の「`exp(tσ^x)` の閉じた形」）: 人手は指数級数を偶数項・奇数項に分けて `cosh`・`sinh` の級数と突き合わせるが、Lean は `σ^x` を対角化して `Matrix.exp_units_conj` と `matrixExp_diagonal` で計算している。`(σ^x)^2 = I` なので、人手どおりに `NecSuf/ExpOfInvolution.lean` と同じ偶奇分解で直せるかを確かめる。
 - 人手 `eigenvector_of_A_theta_tilde` Step 3（固有空間が 1 次元）は「階数」「固有空間」「次元」を定義せずに使い、「`B ≠ 0` かつ `det B = 0` なら核は 1 次元」を証明なしに使っている（Lean も未形式化）。
   `nonzero_kernel_iff_det_zero_two_by_two` と同じ 2×2 の成分計算で「`Bv = 0` なら `v` は `(B_{12}, -B_{11})` などのスカラー倍」と示せる。後段が Step 3 を使わないなら本文から外すか、使うなら本文と Lean を足す。本文を触るので回の先頭で fetch する。

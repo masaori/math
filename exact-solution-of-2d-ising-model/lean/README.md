@@ -72,6 +72,14 @@ import Ising2D
 EOF
 ```
 
+この README と `docs/` の対応表が、いまの Lean のファイルと宣言を指していることは次で確かめる。
+ファイルを動かす・改名する、定理を消す・改名したら、同じ回で通す。
+
+```bash
+cd exact-solution-of-2d-ising-model/lean
+./scripts/check-docs-references.sh   # 書かれた .lean のパスと Ising2D. の名前がすべて実在すれば終了コード 0
+```
+
 ## 人手証明との対応の付け方
 
 - **フォルダは承認された章立て（部と章の名前）に合わせて組み直している途中である。** 置き場の規則の正本は
@@ -298,7 +306,7 @@ EOF
 
 | | 定義 | 実装 |
 | --- | --- | --- |
-| 抽象テンソル冪 | `⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ` | `Ising2D.NecSufTensorPow` |
+| 抽象テンソル冪 | `⨂[ℂ] (_ : Fin M), Matrix (Fin 2) (Fin 2) ℂ` | `Ising2D.AbstractTensorPow` |
 | 行列表現（Kronecker） | `Matrix (Fin M → Fin 2) (Fin M → Fin 2) ℂ` | `Ising2D.TensorPow` |
 
 **両者が ℂ-代数として同型であることは `Ising2D.tensorPowAlgEquiv` で証明済み**
@@ -562,7 +570,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.gamma2_neg_eq_neg_conj` | `γ_2(-θ) = -conj(γ_2(θ))` | `relation_of_gamma_2` |
 | `Ising2D.gamma2_mul_gamma2_neg_eq_neg_normSq` | `γ_2(θ)γ_2(-θ) = -|γ_2(θ)|^2` | 同上 |
 | `Ising2D.gamma2_neg_eq_zero_iff` | `γ_2(-θ) = 0 ⟺ γ_2(θ) = 0` | 同上の系 |
-| `Ising2D.gamma2_add_int_mul_two_pi` / `gamma2_thetaMu_of_dvd` | `γ_2` の `2π` 周期性と `M ∣ μ+ν ⇒ γ_2(θ_ν) = γ_2(-θ_μ)` | `gamma_2_periodicity`（後段で必須） |
+| `Ising2D.gamma2_add_int_mul_two_pi` | `γ_2` の `2π` 周期性（後段で必須。`DefinitionCheckFermi.lean` が使う） | `periodicity_of_check_fermi` の (1) の `γ_2` 側 |
+| `Ising2D.gamma2_thetaMu_of_dvd` | `M ∣ μ+ν ⇒ γ_2(θ_ν) = γ_2(-θ_μ)`（整数運動量の経路の `DefinitionFermiPsi.lean` だけが使う） | 参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した `gamma2_theta_M_periodicity`（`γ_2(θ_M) = γ_2(θ_{-M})`）の一般形 |
 | `Ising2D.gamma2_eq_zero_iff` | `γ_2(θ) = 0 ⟺ s_2^* = 0 ∨ (sin θ = 0 ∧ c_1cos θ = s_1c_2)` | `gamma_2_theta_is_0`（**原文は `s_2^* = 0` を落としている**） |
 | `Ising2D.sin_thetaMu_eq_zero_iff` | `sin θ_μ = 0 ⟺ M ∣ 2μ` | 同上（**原文の「⟺ μ = ±M」は不足**） |
 | `Ising2D.charPoly_expand` / `charPoly_root` / `charPoly_factor` | 特性多項式 `λ^2 - 2γ_1λ + (γ_1^2 + γ_2γ_2(-θ))` とその根 `γ_1 ± s` | `eigenvector_of_A_theta` 前半 |
