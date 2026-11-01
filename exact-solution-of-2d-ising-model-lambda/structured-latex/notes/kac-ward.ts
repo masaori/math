@@ -7,6 +7,19 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_period_translates_of_iterated_staircase_disjoint_archived",
+    targets: ["def_iterated_transverse_staircase"],
+    title: { text: "参照用: 反復横断階段と非零周期並進の分離" },
+    body: [
+      paragraph(["旧主張は、非零巻き付き数を持つ閉じた非後退辺列の反復横断階段について、任意の二つの頂点と任意の非零整数 ", math(String.raw`z\in\mathbb Z\setminus\{0\}`), " に対し次の不等式が成り立つというものである（", ref("def_iterated_transverse_staircase"), "）。"]),
+      displayMath(String.raw`D^{\gamma,Q,t}_s\ne D^{\gamma,Q,t}_{s'}+z\cdot(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)).`),
+      paragraph(["旧証明では、平行座標の幅の上界（", ref("claim_iterated_staircase_parallel_width_bound"), "）から階段内の二頂点の平行座標差の絶対値を ", math(String.raw`|A|`), " 以下に抑える。ただし ", math(String.raw`A=w_{\mathrm h}(\gamma)w_{\mathrm v}(\gamma)`), " である。"]),
+      displayMath(String.raw`|\pi_\gamma(D^{\gamma,Q,t}_s)-\pi_\gamma(D^{\gamma,Q,t}_{s'})|\le |A|.`),
+      paragraph(["周期並進一回の平行座標増分 ", math(String.raw`B=L(w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2)`), " は、巻き付き数が非零で ", math(String.raw`L\ge1`), " なので ", math(String.raw`B\ge w_{\mathrm v}(\gamma)^2+w_{\mathrm h}(\gamma)^2>|A|`), " を満たす。二点が等しいと仮定して平行座標を取ると、左辺が ", math(String.raw`|z|B\ge B>|A|`), " となり、幅の上界に反する。"]),
+      paragraph(["この非零周期並進との分離は後続の本文から引用されない。一側閉包は二つの反復横断階段の交点を別の分離の主張（", ref("claim_parallel_separated_staircases_disjoint"), "）で排除するため、旧主張を参照用へ退避した。有限検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_periodic_lift_closure_simple_cycle_archived",
     targets: ["def_periodic_lift_closure_cycle"],
     title: { text: "参照用: 接続階段の周期並進による単純閉路" },

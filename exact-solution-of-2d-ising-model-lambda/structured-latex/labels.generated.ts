@@ -318,7 +318,6 @@ export const ALL_LABELS = [
   "claim_perfect_matching_enumeration_complete",
   "claim_perfect_matching_involution",
   "claim_perfect_matching_sign_enumeration_independent",
-  "claim_period_translates_of_iterated_staircase_disjoint",
   "claim_periodic_density_lower_set_eq_open_square_le_one",
   "claim_periodic_density_lower_set_subset_open_square_le_one",
   "claim_periodic_open_boundary_comparison_density_le_one",
