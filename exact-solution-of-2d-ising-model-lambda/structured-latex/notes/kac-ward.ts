@@ -7,6 +7,21 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_reversal_rotation_phase_product_archived",
+    targets: ["claim_reversal_direction_shift"],
+    title: { text: "参照用: 反転辺対の回転位相の積" },
+    body: [
+      paragraph(["旧主張は、任意の向き付き辺 ", math(String.raw`\vec e\in\vec E_L`), " と後続辺 ", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " に対し、反転後の逆順も非後退接続となり、回転位相の積が一になるというものである。反転・後続・位相は ", ref("def_edge_reversal"), "、", ref("def_nonbacktracking_successors"), "、", ref("def_rotation_phase"), " による。"]),
+      displayMath(String.raw`\iota(\vec e)\in\operatorname{Next}(\iota(\vec f)),\qquad \rho(\iota(\vec f),\iota(\vec e))\rho(\vec e,\vec f)=1\quad\text{in }\overline{\mathbb Q}.`),
+      paragraph(["旧証明では ", math(String.raw`\vec f\in\operatorname{Next}(\vec e)`), " から ", math(String.raw`\operatorname{tgt}(\vec e)=\operatorname{src}(\vec f)`), " と ", math(String.raw`\vec f\ne\iota(\vec e)`), " を得る。始点・終点の反転と反転の対合性（", ref("claim_reversal_is_involution"), "）を使うと、逆順も非後退接続である。"]),
+      displayMath(String.raw`\begin{aligned}\operatorname{tgt}(\iota(\vec f))&=\operatorname{src}(\vec f)=\operatorname{tgt}(\vec e)=\operatorname{src}(\iota(\vec e)),\\\iota(\vec e)&\ne\iota(\iota(\vec f)).\end{aligned}`),
+      paragraph(["方向差 ", math(String.raw`\theta:=\operatorname{dir}(\vec f)-\operatorname{dir}(\vec e)\in\{0,1,-1\}\subset\mathbb Z/4\mathbb Z`), " を置く。", ref("claim_reversal_direction_shift"), " を二辺へ適用した旧証明の式鎖は次である。"]),
+      displayMath(String.raw`\begin{aligned}\operatorname{dir}(\iota(\vec e))-\operatorname{dir}(\iota(\vec f))&=(\operatorname{dir}(\vec e)+2)-(\operatorname{dir}(\vec f)+2)\\&=\operatorname{dir}(\vec e)-\operatorname{dir}(\vec f)=-\theta.\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}\theta=0&:\ 1\cdot1=1,\\\theta=1&:\ \zeta_8^{-1}\zeta_8=1,\\\theta=-1&:\ \zeta_8\zeta_8^{-1}=1.\end{aligned}`),
+      paragraph(["最後の二等式は ", math(String.raw`\zeta_8^4=-1`), " から ", math(String.raw`\zeta_8\ne0`), " が従うので成立する。後続の本文はこの主張を引用せず、逆歩道の位相積の主張も置いていない。採用経路の到達点の依存に入らないため退避した。有限検算は保管した。Lean の回転数の形式証明が必要十分版の回転の型と位相の定義を使うため、Lean のファイルは有効な依存として残した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_smoothing_interval_invariance_archived",
     targets: ["claim_smoothing_splits_closed_walk"],
     title: { text: "参照用: 平滑化後の添字区間不変" },

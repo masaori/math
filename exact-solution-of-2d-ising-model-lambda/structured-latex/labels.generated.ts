@@ -498,7 +498,6 @@ export const ALL_LABELS = [
   "claim_reversal_is_involution",
   "claim_reversal_matrix_determinant_one",
   "claim_reversal_matrix_square",
-  "claim_reversal_rotation_phase_product",
   "claim_reversed_parallel_staircase_turning_zero",
   "claim_rightward_seam_mode_phase",
   "claim_root_factor_quotient_value_ne_zero",
