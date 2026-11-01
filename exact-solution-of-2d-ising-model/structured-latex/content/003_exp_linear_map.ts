@@ -2496,7 +2496,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
 &= \left[\left([u]_{\mathbb{C}} - [v]_{\mathbb{C}}\right)_{11}\right]_{\mathbb{C}}
    \quad (\because \text{1 行 1 列の行列は成分だけで決まる。}\blkref{def_one_by_one_matrix}) \\
 &= \left[\left([u]_{\mathbb{C}}\right)_{11} - \left([v]_{\mathbb{C}}\right)_{11}\right]_{\mathbb{C}}
-   \quad (\because \text{行列の差は成分ごと}) \\
+   \quad (\because \blkref{def_matrix_difference}\text{ を } m = p = 1,\ i = k = 1 \text{ で}) \\
 &= [u - v]_{\mathbb{C}}
    \quad (\because \blkref{def_one_by_one_matrix})
 \end{aligned}`,
@@ -2585,7 +2585,7 @@ a_{\mathbb{C}} - b_{\mathbb{C}}
       ),
       paragraph(["である。"]),
     ],
-    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。"] },
+    conversion: { status: "added", notes: ["実数の exp と複素数の exp を別々の写像として定義したので、両者の関係を主張として置いた。", "2026-11-01: 1 行 1 列の複素行列の差の鎖で名前だけの根拠だった「行列の差は成分ごと」を、行列の差の定義 def_matrix_difference へのラベル参照に替えた。式と段は変えていない。"] },
   },
   {
     id: "calc_formulae_definition_cosh_sinh",

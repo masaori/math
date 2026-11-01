@@ -503,6 +503,13 @@
     SageMath `sagemath/check/160_pauli_matrix_products/check_02_stepwise_chains.sage`（`QQ[i]` の厳密計算、各鎖の全行）を足した。二回のレビューの指摘（必須 4 件: `def_matrix_negation` の参照先、`σ^a` の帰属、成分の積を行列の積の段へ束ねた 3 行、`ℝ` の符号の計算。任意 4 件）を直した。
     `check-no-sorry.sh` が、三十二個目で足した `'` を含む 4 つの名前（`NecSuf.smul_mul_matrix_apply'` など）を引用符なしで置いていたため、`lake env lean` が落ちて終了コード 1 になっていた。`"…"` で囲んで直した。
 
+  - ゴールラインの確認の三十四個目（済み、2026-11-01）: 「名前だけの根拠をラベル参照に替える」のうち `003_exp_linear_map.ts` の「行列の差は成分ごと」5 か所を扱った。
+    係数が `ℂ` に固定されているのは `complex_exp_of_real_argument` の 1 行 1 列の複素行列の差の鎖の 1 か所だけで、その 2 段目の根拠を `def_matrix_difference`（`m = p = 1`、`i = k = 1`）へのラベル参照に替えた（式と段は不変）。
+    残る 4 か所は係数が `K`（`ℝ` または `ℂ`）か `ℝ` の行列である（`matrix_exp_series_converges` の後の成分の収束の Step 2 の 2 か所は `Mat(n,K)`、1 行 1 列の行列の差の鎖 2 か所は `[u]_K` と `[u]_ℝ`、`S_N([0]_K)` の鎖は `[1]_K - [1]_K = O`）。
+    `def_matrix_difference` は `Mat(m,p,ℂ)` しか覆わないので替えなかった（`matrix_completeness` Step 3 と同じ扱い）。
+    このブロックに Lean の具体版は無い（`complex_exp_of_real_argument`・`def_one_by_one_matrix` は形式化されていない）。
+    SageMath `sagemath/check/complex_exp_of_real_argument/check_one_by_one_complex.sage` に、定義の成分の式と Sage の行列の差の一致の確認を足し、対応表の「本文に定義が無く」を定義を引く記述に直した。レビューの指摘は無かった。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -510,8 +517,9 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
-  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。次は `003_exp_linear_map.ts` の「行列の差は成分ごと」5 か所。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。次は `005_exp_conjugation_proof.ts` の「行列の和の定義」「スカラー倍の定義」4 か所（`def_matrix_sum`・`def_matrix_scalar_multiple` を引く。係数が `ℂ` かを先に確かめる）。
   `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
+  `003_exp_linear_map.ts` の残り 4 か所（係数が `K` か `ℝ` の行列の差）も同じである。`def_matrix_difference`（と `def_zero_matrix`）を `K = ℝ` または `ℂ` について述べ直せば、この 5 か所を参照に替えられる。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
   行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。

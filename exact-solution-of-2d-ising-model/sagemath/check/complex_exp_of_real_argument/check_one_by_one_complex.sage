@@ -2,7 +2,7 @@
 # 1 行 1 列の複素行列の二つの事実を確かめる。
 #   [u]_C - [v]_C = [([u]_C - [v]_C)_11]_C = [([u]_C)_11 - ([v]_C)_11]_C = [u - v]_C
 #   ‖[w]_C‖ = √(Σ_{i,j=1}^{1} |([w]_C)_ij|^2) = √(|([w]_C)_11|^2) = √(|w|^2) = |w|
-# 第一の事実は QQ(i)[u, v] の不定元で（行列の差は成分ごと、ℂ の差は体の差）。
+# 第一の事実は QQ(i)[u, v] の不定元で（行列の差は def_matrix_difference の成分の式、ℂ の差は体の差）。
 # 第二の事実は具体の w ∈ QQ(i) で、|w| を abs_basic_properties (1) の √(x^2+y^2) として AA で厳密に取る。
 load("../../_shared/one_by_one_matrix.sage")
 load("../../_shared/complex_as_real_pairs.sage")
@@ -11,6 +11,8 @@ R = PolynomialRing(GAUSSIAN, 'u,v')
 u, v = R.gens()
 U, V = one_by_one(R, u), one_by_one(R, v)
 diff = U - V
+# def_matrix_difference を m = p = 1 で: (A - B)_11 := A_11 - B_11。Sage の行列の差がこの式と一致することを先に確かめる。
+assert entry11(diff) == entry11(U) - entry11(V)
 chain = [diff, one_by_one(R, entry11(diff)), one_by_one(R, entry11(U) - entry11(V)), one_by_one(R, u - v)]
 assert all(c == chain[0] for c in chain)
 print("[u]_C - [v]_C = [([u]-[v])_11]_C = [([u])_11 - ([v])_11]_C = [u - v]_C が QQ(i)[u,v] で成り立つ")
