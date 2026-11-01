@@ -2,6 +2,8 @@
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十五個目を行った。`lean/README.md` と `lean/docs/` の表の行か見出しにファイル名で出ない Lean のファイル 86 個を表へ載せ（67 個は既存の行にファイル名を書き足し、19 個は行を足した）、`lean/scripts/check-docs-references.sh` に「`Ising2D/` の全ファイルが表か見出しに出る」検査を足した。章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の Lean が (1) を立てず (2) を仮定付きで示していることを状態台帳の「次の一歩」の先頭に足した。
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`end_preserves_matrix_exponential`（行列表示と線型写像表示は指数関数を保つ）の検算 `sagemath/check/end_preserves_matrix_exponential/` を足した。証明が exp 級数の各点収束（行列と数ベクトルの積の収束）を `end` の作用の収束として断りなく使っていたので、二つの積の一致を主張 `end_agrees_with_matrix_vector_product` として足し、検算 `sagemath/check/end_agrees_with_matrix_vector_product/` を付けた（未検算 105 → 104 件、証明を持つブロック 222 → 223 件）。`end` を定義どおりに作る共通の準備 `sagemath/_shared/end_by_definition.sage` を置いた。計算の誤りは無かった。`def_end_iso` の記法 `Af` が `mat_mult` の積の記号を定義し直していることを状態台帳に記録した。次は `def_invertible_elements_of_R`。
+
 2026-11-01: 全証明の SageMath 検算の連続実行として、`exp_of_diagonal_matrix`（対角行列の指数関数）の検算 `sagemath/check/exp_of_diagonal_matrix/` を足した。証明の最後の「成分の列の極限を二通りに求めて一致させる」段にラベル付きの根拠が無かったので、主張 `scalar_limit_is_unique`（数の列の極限は一意）を `003_exp_linear_map.ts` に足し、検算 `sagemath/check/scalar_limit_is_unique/` を付けた（未検算 106 → 105 件、証明を持つブロック 221 → 222 件）。冪の帰納法と極限の段を鎖に直し、部分和を `S_N` に改名した。計算の誤りは無かった。Lean の具体版が mathlib に委ねていて人手証明と対応しないことを状態台帳に記録した。次は `end_preserves_matrix_exponential`。
 
 2026-11-01: 全証明の SageMath 検算の連続実行の十一回目として、`003_exp_linear_map.ts` の cosh・sinh の掛け算（ラベルが無かったので `cosh_sinh_product` を付けた）の検算 `sagemath/check/cosh_sinh_product/` を足した（未検算 107 → 106 件）。exp の性質を使わない行は独立な不定元で、積の法則の行は形式冪級数で厳密に、主張はボールで確かめた。レビューの指摘で、複数の操作を束ねた行を一ステップ一定理の 9 行の鎖に分けた。計算の誤りは無かった。次は `exp_of_diagonal_matrix`。

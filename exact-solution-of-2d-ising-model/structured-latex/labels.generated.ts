@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "eigenvector_of_A_theta_tilde",
   "elementary_sine_bounds",
   "end_acts_on_kronecker_products",
+  "end_agrees_with_matrix_vector_product",
   "end_is_algebra_isomorphism",
   "end_preserves_matrix_exponential",
   "epsilon_D0_G_pairwise_commute",

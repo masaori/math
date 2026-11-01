@@ -780,6 +780,219 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
     },
   },
   {
+    id: "transfer_matrix_claim_end_agrees_with_matrix_vector_product",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
+    title: { text: "線型写像表示の値は行列と数ベクトルの積に等しい" },
+    labels: ["end_agrees_with_matrix_vector_product"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        "、",
+        math(String.raw`v\in\mathcal{F}=\mathbb{C}^{2^M}`),
+        " とする。",
+        ref("def_end_iso"),
+        " の写像について、すべての ",
+        math(String.raw`k\in\{1,\dots,2^M\}`),
+        " で",
+      ]),
+      displayMath(
+        String.raw`\left(\left(\mathbf{end}(A)\right)(v)\right)_k = \sum_{l=1}^{2^M} A_{kl}\,v_l`,
+      ),
+      paragraph([
+        "が成り立つ。右辺は ",
+        ref("mat_mult"),
+        " が定める行列と数ベクトルの積の第 ",
+        math(String.raw`k`),
+        " 成分である。したがって ",
+        ref("def_end_iso"),
+        " の作用の記法 ",
+        math(String.raw`Av := (\mathbf{end}(A))(v)`),
+        " と ",
+        ref("mat_mult"),
+        " の積 ",
+        math(String.raw`Av`),
+        " は同じ数ベクトルを表す。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "記号は ",
+        ref("def_end_iso"),
+        " と ",
+        ref("def_kronecker"),
+        " のものとし、",
+        math(String.raw`\nu:\mathcal{I}\to\{1,\dots,2^M\}`),
+        " は ",
+        ref("def_kronecker"),
+        " の全単射とする。",
+        math(String.raw`i,j\in\{1,2\}`),
+        " について ",
+        math(String.raw`\delta_{i,j}:=1`),
+        "（",
+        math(String.raw`i=j`),
+        "）、",
+        math(String.raw`0`),
+        "（",
+        math(String.raw`i\neq j`),
+        "）、",
+        math(String.raw`I,J\in\mathcal{I}`),
+        " について ",
+        math(String.raw`\delta_{I,J}:=1`),
+        "（",
+        math(String.raw`I=J`),
+        "）、",
+        math(String.raw`0`),
+        "（",
+        math(String.raw`I\neq J`),
+        "）とおく。",
+        math(String.raw`I=J \iff \forall m,\ i_m=j_m`),
+        " より ",
+        math(String.raw`\delta_{I,J}=\prod_{m=1}^{M}\delta_{i_m,j_m}`),
+        " である。",
+        math(String.raw`e_i`),
+        " の第 ",
+        math(String.raw`j`),
+        " 成分は ",
+        math(String.raw`(e_i)_j=\delta_{i,j}`),
+        "、",
+        math(String.raw`E_{ij}`),
+        " の ",
+        math(String.raw`(k,l)`),
+        " 成分は ",
+        math(String.raw`(E_{ij})_{kl}=\delta_{i,k}\delta_{j,l}`),
+        " である（",
+        ref("def_end_iso"),
+        " の標準基底と行列単位の定義）。",
+      ]),
+      paragraph([
+        "準備: 基底の成分。",
+        math(String.raw`I=(i_1,\dots,i_M),\ J=(j_1,\dots,j_M),\ K=(k_1,\dots,k_M),\ L=(l_1,\dots,l_M)\in\mathcal{I}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(f_K)_{\nu(L)}
+&= \left(e_{k_1}\boxtimes\cdots\boxtimes e_{k_M}\right)_{\nu(L)}
+&&(\because\ f_K\ \text{の定義。}\blkref{def_end_iso})\\
+&= \prod_{m=1}^{M}(e_{k_m})_{l_m}
+&&(\because\ \blkref{def_kronecker}\ (1))\\
+&= \prod_{m=1}^{M}\delta_{k_m,l_m}
+&&(\because\ (e_i)_j=\delta_{i,j}\ \text{を各因子へ同時に適用})\\
+&= \delta_{K,L}
+&&(\because\ \delta_{K,L}=\prod_{m=1}^{M}\delta_{k_m,l_m})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(E_{I,J})_{\nu(K),\nu(L)}
+&= \left(E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M}\right)_{\nu(K),\nu(L)}
+&&(\because\ E_{I,J}\ \text{の定義。}\blkref{def_end_iso})\\
+&= \prod_{m=1}^{M}(E_{i_mj_m})_{k_ml_m}
+&&(\because\ \blkref{def_kronecker}\ (2))\\
+&= \prod_{m=1}^{M}\delta_{i_m,k_m}\delta_{j_m,l_m}
+&&(\because\ (E_{ij})_{kl}=\delta_{i,k}\delta_{j,l}\ \text{を各因子へ同時に適用})\\
+&= \left(\prod_{m=1}^{M}\delta_{i_m,k_m}\right)\left(\prod_{m=1}^{M}\delta_{j_m,l_m}\right)
+&&(\because\ \text{複素数の積の交換法則と結合法則})\\
+&= \delta_{I,K}\,\delta_{J,L}
+&&(\because\ \delta_{I,K}=\prod_{m=1}^{M}\delta_{i_m,k_m},\ \delta_{J,L}=\prod_{m=1}^{M}\delta_{j_m,l_m})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。準備: 基底による展開。",
+        math(String.raw`K,L\in\mathcal{I}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}E_{I,J}\right)_{\nu(K),\nu(L)}
+&= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}(E_{I,J})_{\nu(K),\nu(L)}
+&&(\because\ \text{行列の和とスカラー倍は成分ごと})\\
+&= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\,\delta_{I,K}\,\delta_{J,L}
+&&(\because\ \text{上の}\ (E_{I,J})_{\nu(K),\nu(L)}=\delta_{I,K}\delta_{J,L})\\
+&= A_{\nu(K),\nu(L)}
+&&(\because\ \delta_{I,K}\delta_{J,L}\ \text{は}\ (I,J)=(K,L)\ \text{のときだけ}\ 1\ \text{で他は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\nu`),
+        " は全単射だから ",
+        math(String.raw`(\nu(K),\nu(L))`),
+        " は ",
+        math(String.raw`\{1,\dots,2^M\}^2`),
+        " の元をすべて動く。ゆえに ",
+        math(String.raw`A=\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}E_{I,J}`),
+        " である。同様に ",
+        math(String.raw`L\in\mathcal{I}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sum_{K\in\mathcal{I}}v_{\nu(K)}f_K\right)_{\nu(L)}
+&= \sum_{K\in\mathcal{I}}v_{\nu(K)}(f_K)_{\nu(L)}
+&&(\because\ \text{数ベクトルの和とスカラー倍は成分ごと})\\
+&= \sum_{K\in\mathcal{I}}v_{\nu(K)}\,\delta_{K,L}
+&&(\because\ \text{上の}\ (f_K)_{\nu(L)}=\delta_{K,L})\\
+&= v_{\nu(L)}
+&&(\because\ \delta_{K,L}\ \text{は}\ K=L\ \text{のときだけ}\ 1\ \text{で他は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`\nu`),
+        " は全単射だから ",
+        math(String.raw`v=\sum_{K\in\mathcal{I}}v_{\nu(K)}f_K`),
+        " である。",
+      ]),
+      paragraph([
+        "主張の式変形。",
+        math(String.raw`\nu`),
+        " は全単射なので、",
+        math(String.raw`k=\nu(L)`),
+        "（",
+        math(String.raw`L\in\mathcal{I}`),
+        "）の形のものについて示せば十分である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\left(\mathbf{end}(A)\right)(v)\right)_{\nu(L)}
+&= \left(\left(\mathbf{end}\!\left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}E_{I,J}\right)\right)(v)\right)_{\nu(L)}
+&&(\because\ \text{上の基底による展開})\\
+&= \left(\left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\Theta_{I,J}\right)(v)\right)_{\nu(L)}
+&&(\because\ \mathbf{end}\ \text{は}\ \mathbf{end}(E_{I,J})=\Theta_{I,J}\ \text{を線型に拡張したもの。}\blkref{def_end_iso})\\
+&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\Theta_{I,J}(v)\right)_{\nu(L)}
+&&(\because\ \text{線型写像の和とスカラー倍の値の定義})\\
+&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\Theta_{I,J}\!\left(\sum_{K\in\mathcal{I}}v_{\nu(K)}f_K\right)\right)_{\nu(L)}
+&&(\because\ \text{上の基底による展開})\\
+&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\sum_{K\in\mathcal{I}}v_{\nu(K)}\Theta_{I,J}(f_K)\right)_{\nu(L)}
+&&(\because\ \Theta_{I,J}\ \text{の}\ \mathbb{C}\text{-線型性。}\blkref{def_end_iso})\\
+&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}\sum_{K\in\mathcal{I}}v_{\nu(K)}\,\delta_{J,K}f_I\right)_{\nu(L)}
+&&(\because\ \Theta_{I,J}(f_K)=\delta_{J,K}f_I\ \text{（}\Theta_{I,J}\ \text{の定義。}\blkref{def_end_iso}\text{）})\\
+&= \left(\sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}f_I\right)_{\nu(L)}
+&&(\because\ \delta_{J,K}\ \text{は}\ K=J\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
+&= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}(f_I)_{\nu(L)}
+&&(\because\ \text{数ベクトルの和とスカラー倍は成分ごと})\\
+&= \sum_{I,J\in\mathcal{I}}A_{\nu(I),\nu(J)}v_{\nu(J)}\,\delta_{I,L}
+&&(\because\ \text{上の}\ (f_I)_{\nu(L)}=\delta_{I,L})\\
+&= \sum_{J\in\mathcal{I}}A_{\nu(L),\nu(J)}v_{\nu(J)}
+&&(\because\ \delta_{I,L}\ \text{は}\ I=L\ \text{のときだけ}\ 1\ \text{で他は}\ 0)\\
+&= \sum_{l=1}^{2^M}A_{\nu(L),l}\,v_l
+&&(\because\ \nu\ \text{は全単射なので和の添字を}\ l=\nu(J)\ \text{と付け替える})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: SageMath の検算（sagemath/check/end_preserves_matrix_exponential/）を付けるにあたり足した。行列表示と線型写像表示は指数関数を保つこと（labels: end_preserves_matrix_exponential）の証明は、exp 級数の各点収束（labels: exp_converges (1a)。行列と数ベクトルの積は mat_mult のもの）を、end の作用の記法 Av := (end(A))(v) で書いた数ベクトルの収束として使っていた。二つの積が一致することを示すブロックが無かったので、ここで成分計算から示した。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_005c_claim_end_preserves_matrix_exponential",
     kind: "claim",
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 5 },
@@ -815,91 +1028,145 @@ I_{\mathrm{Mat}(2^M,\mathbb{C})}
     ],
     proof: [
       paragraph([
-        "Step 1: すべての ",
+        "記号は主張のとおりとし、",
+        math(String.raw`A`),
+        " の冪は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`A^0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
+        "、",
+        math(String.raw`A^{n+1}:=A^nA`),
+        " とする。この証明の中では、",
+        ref("mat_mult"),
+        " が定める行列 ",
+        math(String.raw`B\in\mathrm{Mat}(2^M,\mathbb{C})`),
+        " と数ベクトル ",
+        math(String.raw`f`),
+        " の積を、",
+        ref("def_end_iso"),
+        " の作用の記法と区別して ",
+        math(String.raw`B\bullet f\in\mathcal{F}`),
+        "（",
+        math(String.raw`(B\bullet f)_k := \sum_{l=1}^{2^M}B_{kl}f_l`),
+        "）と書く。",
+        math(String.raw`N\in\mathbb{Z}_{\geq 0}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`S_N:=\sum_{n=0}^{N}\frac{1}{n!}A^n\in\mathrm{Mat}(2^M,\mathbb{C}),\qquad S:=\exp(A)\in\mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "とおく。係数 ",
+        math(String.raw`1/n!\in\mathbb{R}`),
+        " は実数で、",
+        ref("inclusion_rr_to_cc"),
+        " で複素数として使う。",
+        math(String.raw`\mathcal{F}`),
+        " の列 ",
+        math(String.raw`(w_N)_{N\in\mathbb{Z}_{\geq 0}}`),
+        " が ",
+        math(String.raw`w\in\mathcal{F}`),
+        " へ ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K^d`),
+        " の列の意味で収束するとき（",
+        math(String.raw`K:=\mathbb{C}`),
+        "、",
+        math(String.raw`d:=2^M`),
+        "）、その極限は ",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) により一意なので ",
+        math(String.raw`w=\lim_{N\to\infty}w_N`),
+        " と書く。この極限はノルムの値（",
+        math(String.raw`\mathbb{R}_{\geq 0}`),
+        "）で定まるので、ここで極限のために ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している。",
+      ]),
+      paragraph([
+        "中間目標: 冪の保存。すべての ",
         math(String.raw`n\in\mathbb{Z}_{\geq 0}`),
         " について ",
         math(String.raw`\mathbf{end}(A^n)=\mathbf{end}(A)^n`),
-        "。",
-        ref("end_is_algebra_isomorphism"),
-        " の単位元保存より、",
+        " であることを ",
+        math(String.raw`n`),
+        " に関する帰納法で示す。",
+        math(String.raw`n=0`),
+        " では",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathbf{end}(A^0)
 &= \mathbf{end}\!\left(I_{\mathrm{Mat}(2^M,\mathbb{C})}\right)
-&&\left(\because\ A^0=I_{\mathrm{Mat}(2^M,\mathbb{C})}\ \text{という行列の零乗の定義}\right)\\
+&&\left(\because\ A^0:=I_{\mathrm{Mat}(2^M,\mathbb{C})}\text{。}\blkref{def_exp}\ (1)\right)\\
 &= \mathrm{id}_{\mathcal{F}}
-&&\left(\because\ \mathbf{end}\ \text{の単位元保存}\right)\\
+&&\left(\because\ \blkref{end_is_algebra_isomorphism}\ (3)\right)\\
 &= \mathbf{end}(A)^0
-&&\left(\because\ \text{線型写像の零乗の定義}\right).
+&&\left(\because\ \mathbf{end}(A)^0:=\mathrm{id}_{\mathcal{F}}\ \text{（主張の約束）}\right)
 \end{aligned}`,
       ),
       paragraph([
+        "である。",
         math(String.raw`n`),
-        " で成り立つと仮定する。",
-        ref("end_is_algebra_isomorphism"),
-        " の乗法性より",
+        " で成り立つと仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathbf{end}(A^{n+1})
 &= \mathbf{end}(A^nA)
-&&\left(\because\ \text{行列の冪の定義}\right)\\
+&&\left(\because\ A^{n+1}:=A^nA\text{。}\blkref{def_exp}\ (1)\right)\\
 &= \mathbf{end}(A^n)\circ\mathbf{end}(A)
-&&\left(\because\ \mathbf{end}\ \text{の乗法性}\right)\\
+&&\left(\because\ \blkref{end_is_algebra_isomorphism}\ (2)\right)\\
 &= \mathbf{end}(A)^n\circ\mathbf{end}(A)
 &&\left(\because\ \text{帰納法の仮定}\right)\\
 &= \mathbf{end}(A)^{n+1}
-&&\left(\because\ \text{線型写像の冪の定義}\right).
+&&\left(\because\ \mathbf{end}(A)^{n+1}:=\mathbf{end}(A)^n\circ\mathbf{end}(A)\ \text{（主張の約束）}\right)
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2: ",
-        math(String.raw`S_N:=\sum_{n=0}^{N}\frac{1}{n!}A^n`),
-        "、",
-        math(String.raw`S:=\exp(A)`),
-        " とおく。",
-        ref("def_exp"),
-        " と ",
-        ref("exp_converges"),
-        " の数ベクトルへの作用の各点収束より、",
-      ]),
-      displayMath(String.raw`S_Nf\longrightarrow Sf\qquad\left(\mathcal{F}\ \text{のノルムに関する収束}\right)`),
-      paragraph([
-        "が成り立つ。",
-        ref("def_end_iso"),
-        " の作用の記法と ",
-        ref("end_is_algebra_isomorphism"),
-        " の線型性、および Step 1 より、各 ",
+        "である。中間目標: 部分和の書き換え。各 ",
         math(String.raw`N\in\mathbb{Z}_{\geq 0}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-S_Nf
+S_N\bullet f
 &= \left(\mathbf{end}(S_N)\right)(f)
-&&\left(\because\ \text{行列の作用の記法}\right)\\
+&&\left(\because\ \blkref{end_agrees_with_matrix_vector_product}\right)\\
 &= \left(\mathbf{end}\!\left(\sum_{n=0}^{N}\frac{1}{n!}A^n\right)\right)(f)
 &&\left(\because\ S_N\ \text{の定義}\right)\\
 &= \left(\sum_{n=0}^{N}\frac{1}{n!}\mathbf{end}(A^n)\right)(f)
-&&\left(\because\ \mathbf{end}\ \text{の}\ \mathbb{C}\text{-線型性}\right)\\
+&&\left(\because\ \mathbf{end}\ \text{の}\ \mathbb{C}\text{-線型性。}\blkref{end_is_algebra_isomorphism}\ (1)\right)\\
 &= \left(\sum_{n=0}^{N}\frac{1}{n!}\mathbf{end}(A)^n\right)(f)
-&&\left(\because\ \text{Step 1 を各}\ n\in\{0,\dots,N\}\ \text{へ適用}\right)\\
+&&\left(\because\ \text{上の冪の保存を各}\ n\in\{0,\dots,N\}\ \text{へ適用}\right)\\
 &= \sum_{n=0}^{N}\frac{1}{n!}\left(\mathbf{end}(A)^n\right)(f)
-&&\left(\because\ \text{線型写像の有限和とスカラー倍の値の定義}\right).
+&&\left(\because\ \text{線型写像の有限和とスカラー倍の値の定義}\right)
 \end{aligned}`,
       ),
-      paragraph([
-        "また ",
-        math(String.raw`Sf=\left(\mathbf{end}(\exp(A))\right)(f)`),
-        " である。Step 2 の収束でこの部分和表示を用いれば、主張の極限等式を得る。",
-      ]),
+      paragraph(["である。主張の式変形。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\mathbf{end}(\exp(A))\right)(f)
+&= \left(\mathbf{end}(S)\right)(f)
+&&\left(\because\ S:=\exp(A)\right)\\
+&= S\bullet f
+&&\left(\because\ \blkref{end_agrees_with_matrix_vector_product}\right)\\
+&= \left(\sum_{m=0}^{\infty}\frac{1}{m!}A^m\right)\bullet f
+&&\left(\because\ S=\exp(A)=\sum_{m=0}^{\infty}\frac{1}{m!}A^m\text{。}\blkref{def_exp}\ (1)\right)\\
+&= \lim_{N\to\infty}S_N\bullet f
+&&\left(\because\ \blkref{exp_converges}\ (1a)\ \text{を、行列の次数を}\ 2^M\text{、}K:=\mathbb{C}\text{、}v:=f\ \text{として適用。}\mathbb{R}\ \text{への脱出（極限）}\right)\\
+&= \lim_{N\to\infty}\sum_{n=0}^{N}\frac{1}{n!}\left(\mathbf{end}(A)^{n}\right)(f)
+&&\left(\because\ \text{上の部分和の書き換えにより、二つの列は各}\ N\ \text{で等しい}\right)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
         "代数同型の有限積に関する主張と、級数極限を使う指数関数保存を依存境界で分離した。",
         "End(F) 上の指数関数は現行本文で定義していないため、数ベクトルごとの具体的な部分和の極限として記述した。",
+        "2026-11-01: SageMath の検算（sagemath/check/end_preserves_matrix_exponential/）を付けるにあたり、証明を書き直した。exp 級数の各点収束（labels: exp_converges (1a)）は mat_mult の積の収束なのに、それを end の作用の記法 Af := (end(A))(f) の収束として断りなく使っていたので、二つの積の一致を新しい主張（labels: end_agrees_with_matrix_vector_product）として示して引き、mat_mult の積をこの証明の中では B•f と書いて区別した。冪の保存の各行に def_exp (1) と end_is_algebra_isomorphism の (1)〜(3) への参照を付け、最後の散文の推論を根拠付きの鎖にした（exp(A) を級数に書く行を def_exp (1) から足し、数ベクトルの列の極限の記法・一意性と ℝ への脱出を証明の冒頭に書いた）。Step 1・Step 2 を中間目標の名前（冪の保存・部分和の書き換え）にした。",
       ],
     },
   },
