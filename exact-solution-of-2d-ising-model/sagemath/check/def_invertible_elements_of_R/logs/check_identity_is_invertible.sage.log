@@ -1,0 +1,4 @@
+n = 2: II = I、I^(-1) = I
+n = 4: II = I、I^(-1) = I
+n = 8: II = I、I^(-1) = I
+RESULT: PASS

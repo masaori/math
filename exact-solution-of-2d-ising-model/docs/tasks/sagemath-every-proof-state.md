@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 223 件のうち、SageMath の検算が無いもの 104 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 231 件のうち、SageMath の検算が無いもの 103 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -47,9 +47,16 @@
   人手証明の欠けを直した: 証明は exp 級数の各点収束（`exp_converges` (1a)。`mat_mult` の積の収束）を `end` の作用の記法 `Af := (end(A))(f)` の収束として断りなく使っていた。二つの積の一致を新しい主張 `end_agrees_with_matrix_vector_product` として成分計算で示し、証明の中では `mat_mult` の積を `B•f` と書いて区別した。
   あわせて、冪の保存の各行に `def_exp` (1)・`end_is_algebra_isomorphism` (1)〜(3) を引き、最後の散文を `exp(A)` の級数表示・`exp_converges` (1a)・ℝ への脱出を根拠に持つ鎖にした。計算の誤りは無かった。
 
+- `def_invertible_elements_of_R`（`Mat(2^M,ℂ)` の可逆元。逆元の一意性と (i)〜(iv)）: `sagemath/check/def_invertible_elements_of_R/`。一般の等式の行は `QQ` 上の不定元で、仮定 `gh = hg = I` の代入の行は `QQ(i)` の具体の可逆行列で、(iv) は `QQ(c)` で厳密に確かめ、結論は Sage の `inverse`・`solve_left`・`solve_right` と比べた。
+  証明が根拠にしていた単位行列・行列のスカラー倍・行列の積の結合律・単位行列との積・スカラー倍の性質と、`0_C z = 0_C` を述べるブロックが本文に無かったので、
+  定義 `def_kronecker_delta`・`def_identity_matrix`・`def_matrix_scalar_multiple` と、主張 `mat_mult_associative`・`identity_matrix_is_left_unit_of_mat_mult`・`identity_matrix_is_right_unit_of_mat_mult`・
+  `scalar_multiple_factors_out_of_left_factor`・`scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_is_associative`・`scalar_multiple_by_one`（`002_linear_space_general.ts` の冒頭）、
+  `complex_zero_times_is_zero`（`000_calculation_formulae_20_29.ts`、`complex_numbers_form_a_field` の直後）を足し、それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/matrix_operations_by_definition.sage`）。
+  人手証明を直した（(iv) が `scalar_identity_commutes`（交換子が 0）を根拠に引いていたのを、スカラー倍の性質を一つずつ引く 6 行の鎖に、(ii) の結合律を 2 回使う行を 2 行に、(i) の `II = I` に根拠を、各行に足したラベルへの `blkref`）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`008_TV1_hatZ_hatY_part1.ts` の `def_invertible_elements_of_R`（`--list` の先頭）から、文書順に検算を足す。
+`009_eigenvalues_of_V.ts` の `trace_basic_properties`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -103,3 +110,9 @@
 - 2026-11-01、`end_preserves_matrix_exponential` のレビューで見つかった（記号の衝突と記法の欠け）: `def_end_iso` は「`Af` は以後つねに `(end(A))(f)` を意味する」と書き、`mat_mult` がすでに定めた積 `Af` の記号を定義し直している。
   二つが一致することは `end_agrees_with_matrix_vector_product` で示したが、`def_end_iso` の記法の文はそれを引いていない（主張が定義より後ろにあるため）。直すには、記法の文を `end_agrees_with_matrix_vector_product` の後へ移すか、記法を置かずに `(end(A))(f)` と書く。
   また `def_matrix_norm` は `lim` の記法を行列の列についてだけ定め、`K^d` の列は「同様に」としか書いていない。`mat_mult` は数ベクトルを「n 行 1 列の行列とみなし」ており、同一視をしない規律に反する。この単位では直さなかった（`end_preserves_matrix_exponential` の証明の冒頭で、`K^d` の列の極限の記法と一意性を書いて補った）。
+- 2026-11-01、`def_invertible_elements_of_R` のレビューで見つかった（根拠の欠けと順序）: 単位行列・行列のスカラー倍・結合律・スカラー倍の性質のブロックを `002_linear_space_general.ts` の冒頭に足したが、
+  ほかのブロックはまだそれを引いていない（`scalar_identity_commutes` の「スカラー倍は行列の積の外へ出せる」「単位行列の性質」、
+  `eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`・`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の散文の「結合法則」、`004_transfer_matrix.ts` がその場で定める `δ_{I,J}`）。
+  また `mat_conj`（`000_calculation_formulae_00_09.ts`）は行列のスカラー倍とその性質を使うが、定義は文書順で後ろの `002_linear_space_general.ts` にある。直すには、定義と性質を `mat_mult` の直後へ移すか、引く側を後ろへ移す。
+  有限和の操作（分配律を項の数だけ繰り返す、和の順序の入れ替え、一つの項を分ける、空和）を述べるブロックも無く、足した主張の証明はこれらを体の公理を挙げた一行で使っている。
+  `def_invertible_elements_of_R` は定義と逆元の一意性と (i)〜(iv) を一つのブロックに束ねている（下流が「(ii)」「(iv)」で引くので、分けるときは引く側も直す）。この単位では直さなかった。

@@ -1,0 +1,4 @@
+n = 2: IA = AI = A, (AB)C = A(BC) を不定元で確かめた
+n = 4: IA = AI = A, (AB)C = A(BC) を不定元で確かめた
+n = 8: IA = AI = A, (AB)C = A(BC) を不定元で確かめた
+RESULT: PASS

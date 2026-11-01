@@ -1381,6 +1381,57 @@ b
     },
   },
   {
+    id: "calculation_formulae_claim_complex_zero_times_is_zero",
+    kind: "claim",
+    origin: { path: "structured-latex/content/000_calculation_formulae_20_29.ts", ordinal: 25 },
+    title: { text: "複素数に 0 を左から掛けると 0 になる" },
+    labels: ["complex_zero_times_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " とする。積は ",
+        ref("definition_of_cc"),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`0_{\mathbb{C}}\,z = 0_{\mathbb{C}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (a, b)`),
+        "（",
+        math(String.raw`a, b \in \mathbb{R}`),
+        "）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+0_{\mathbb{C}}\,z
+&= (0, 0)\,(a, b)
+&&\bigl(\because\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0) = (0,0)\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (0\cdot a - 0\cdot b,\ 0\cdot b + 0\cdot a)
+&&\bigl(\because\ \text{複素数の積の定義 }\blkref{definition_of_cc}\bigr)\\
+&= (0 - 0,\ 0 + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 4 箇所へ適用}\bigr)\\
+&= (0,\ 0 + 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - 0 = 0\bigr)\\
+&= (0,\ 0)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。0 を掛けると 0 になることは体の公理に含まれず、本文のどのブロックも述べていなかった。" +
+          "単位行列との積（identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult）の証明が使うので、定義から計算する形で足した。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_027_definition_phi_polar",
     kind: "definition",
     origin: {

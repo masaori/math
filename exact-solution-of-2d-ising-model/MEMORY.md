@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: 全証明の SageMath 検算の連続実行として、`def_invertible_elements_of_R`（`Mat(2^M,ℂ)` の可逆元）の検算 `sagemath/check/def_invertible_elements_of_R/` を足した。証明が根拠にしていた単位行列・行列のスカラー倍・積の結合律・単位行列との積・スカラー倍の性質・`0_C z = 0_C` を述べるブロックが本文に無かったので、定義 3 つと主張 8 つ（`002_linear_space_general.ts` の冒頭と `complex_numbers_form_a_field` の直後）を足し、主張ごとに同名の検算を付けた（未検算 104 → 103 件、証明を持つブロック 223 → 231 件）。(iv) の根拠の取り違え（交換子が 0 であることを引いていた）を直した。計算の誤りは無かった。次は `trace_basic_properties`。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十九個目を行った。人手 `eigenvector_of_A_theta_tilde` の Step 3（固有ベクトルは `v_{±,μ}` の定数倍に限ること）は本文のどこからも使われず、階数・固有空間・次元を未定義のまま使っていたので、参照用ノート `claims_unused_by_chapter_goals_not_adopted` へ退避した。statement を「`c v_{±,μ}` は固有ベクトル」にし、Step 2 に `cv ≠ 0` の段を足した。Lean の主張は変えていない。次は台帳の「次の一歩」（単位行列などを定義するブロックの要否）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十八個目を行った。人手 `two_by_two_transfer_identity` の中間目標「`exp(tσ^x)` の閉じた形」の Lean（`exp_smul_pauliX`）を、`σ^x` の対角化から人手どおりの指数級数の偶奇分解へ書き換え、必要十分版 `NecSuf/ExpOfInvolution.lean` の系を `ClaimTwoByTwoTransferIdentityFromNecSuf.lean` に置いた。次は状態台帳の「次の一歩」の先頭（`eigenvector_of_A_theta_tilde` Step 3 の固有空間が 1 次元であることの扱い）。

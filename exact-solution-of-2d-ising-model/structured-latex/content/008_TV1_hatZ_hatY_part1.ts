@@ -49,13 +49,17 @@ export default defineBlocks([
         math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
         " とする。行列の積は ",
         ref("mat_mult"),
+        "、行列のスカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
         "、複素係数の演算は ",
         ref("complex_numbers_form_a_field"),
         " による。",
       ]),
       paragraph([
         math(String.raw`R := \mathrm{Mat}(2^M,\mathbb{C})`),
-        " と書き、その単位元を ",
+        " と書き、",
+        ref("def_identity_matrix"),
+        " の単位行列を ",
         math(String.raw`I := I_{\mathrm{Mat}(2^M,\mathbb{C})}`),
         " と書く。",
         math(String.raw`g \in R`),
@@ -122,24 +126,34 @@ export default defineBlocks([
         String.raw`\begin{aligned}
 h_1
 &= h_1 I
-&&(\because\ \text{単位行列との積})\\
+&&(\because\ \text{単位行列を右から掛けても変わらない }\blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= h_1 (g h_2)
 &&(\because\ g h_2 = I\ \text{の代入})\\
 &= (h_1 g) h_2
-&&(\because\ \text{行列の積の結合律})\\
+&&(\because\ \text{行列の積の結合律 }\blkref{mat_mult_associative})\\
 &= I h_2
 &&(\because\ h_1 g = I\ \text{の代入})\\
 &= h_2
-&&(\because\ \text{単位行列との積})
+&&(\because\ \text{単位行列を左から掛けても変わらない }\blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
       paragraph(["であるから、逆元はただ 1 つである。"]),
       paragraph([
         "(i) ",
         math(String.raw`I\,I = I`),
-        " より ",
+        "（",
+        ref("identity_matrix_is_left_unit_of_mat_mult"),
+        " を ",
+        math(String.raw`A = I`),
+        " に適用）より、",
+        math(String.raw`h = I`),
+        " が ",
         math(String.raw`I`),
-        " は可逆で ",
+        " に対する逆元の条件 ",
+        math(String.raw`I\,h = h\,I = I`),
+        " を満たす。よって ",
+        math(String.raw`I \in R^\times`),
+        " であり、逆元の一意性より ",
         math(String.raw`I^{-1} = I`),
         "。",
       ]),
@@ -153,12 +167,14 @@ h_1
 (g_1g_2)h
 &= (g_1g_2)(g_2^{-1}g_1^{-1})
 &&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入})\\
-&= g_1(g_2g_2^{-1})g_1^{-1}
-&&(\because\ \text{行列の積の結合律})\\
-&= g_1 I g_1^{-1}
+&= \bigl((g_1g_2)g_2^{-1}\bigr)g_1^{-1}
+&&(\because\ \text{行列の積の結合律 }\blkref{mat_mult_associative})\\
+&= \bigl(g_1(g_2g_2^{-1})\bigr)g_1^{-1}
+&&(\because\ \text{行列の積の結合律 }\blkref{mat_mult_associative})\\
+&= (g_1 I) g_1^{-1}
 &&(\because\ g_2 g_2^{-1} = I)\\
 &= g_1g_1^{-1}
-&&(\because\ \text{単位行列との積})\\
+&&(\because\ \text{単位行列を右から掛けても変わらない }\blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= I
 &&(\because\ g_1 g_1^{-1} = I)
 \end{aligned}`,
@@ -168,12 +184,14 @@ h_1
 h(g_1g_2)
 &= (g_2^{-1}g_1^{-1})(g_1g_2)
 &&(\because\ h = g_2^{-1}g_1^{-1}\ \text{の代入})\\
-&= g_2^{-1}(g_1^{-1}g_1)g_2
-&&(\because\ \text{行列の積の結合律})\\
-&= g_2^{-1} I g_2
+&= \bigl((g_2^{-1}g_1^{-1})g_1\bigr)g_2
+&&(\because\ \text{行列の積の結合律 }\blkref{mat_mult_associative})\\
+&= \bigl(g_2^{-1}(g_1^{-1}g_1)\bigr)g_2
+&&(\because\ \text{行列の積の結合律 }\blkref{mat_mult_associative})\\
+&= (g_2^{-1} I) g_2
 &&(\because\ g_1^{-1} g_1 = I)\\
 &= g_2^{-1}g_2
-&&(\because\ \text{単位行列との積})\\
+&&(\because\ \text{単位行列を右から掛けても変わらない }\blkref{identity_matrix_is_right_unit_of_mat_mult})\\
 &= I
 &&(\because\ g_2^{-1} g_2 = I)
 \end{aligned}`,
@@ -198,29 +216,53 @@ h(g_1g_2)
         math(String.raw`(g^{-1})^{-1} = g`),
         "。",
       ]),
-      paragraph(["(iv) 次の 2 つの一続きの変形による。"]),
+      paragraph([
+        "(iv) ",
+        math(String.raw`c \neq 0`),
+        " より、",
+        ref("complex_numbers_form_a_field"),
+        " の乗法の逆元 ",
+        math(String.raw`c^{-1} \in \mathbb{C}`),
+        " があり、",
+        math(String.raw`c\,c^{-1} = c^{-1}c = 1`),
+        " である。次の 2 つの一続きの変形による。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 (cI)(c^{-1}I)
-&= (cc^{-1})I
-&&(\because\ \text{スカラー倍の単位行列は積と可換（スカラー倍と単位行列の積の整理）})\\
+&= c\bigl(I(c^{-1}I)\bigr)
+&&(\because\ (aA)B = a(AB)\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
+&= c\bigl(c^{-1}(I\,I)\bigr)
+&&(\because\ A(aB) = a(AB)\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= (c\,c^{-1})(I\,I)
+&&(\because\ a(bA) = (ab)A\ \blkref{scalar_multiple_is_associative})\\
+&= (c\,c^{-1})I
+&&(\because\ \text{単位行列を左から掛けても変わらない }\blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{に適用})\\
+&= 1\,I
+&&(\because\ c\,c^{-1} = 1)\\
 &= I
-&&(\because\ c\,c^{-1} = 1\ \text{と単位行列のスカラー }1\text{ 倍})
+&&(\because\ 1A = A\ \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 (c^{-1}I)(cI)
+&= c^{-1}\bigl(I(cI)\bigr)
+&&(\because\ (aA)B = a(AB)\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
+&= c^{-1}\bigl(c(I\,I)\bigr)
+&&(\because\ A(aB) = a(AB)\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= (c^{-1}c)(I\,I)
+&&(\because\ a(bA) = (ab)A\ \blkref{scalar_multiple_is_associative})\\
 &= (c^{-1}c)I
-&&(\because\ \text{スカラー倍の単位行列は積と可換（スカラー倍と単位行列の積の整理）})\\
+&&(\because\ \text{単位行列を左から掛けても変わらない }\blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ A = I\ \text{に適用})\\
+&= 1\,I
+&&(\because\ c^{-1}c = 1)\\
 &= I
-&&(\because\ c^{-1}c = 1\ \text{と単位行列のスカラー }1\text{ 倍})
+&&(\because\ 1A = A\ \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       paragraph([
-        "（スカラー倍と単位行列の積の整理は ",
-        ref("scalar_identity_commutes"),
-        " による。）であるから ",
+        "であるから ",
         math(String.raw`cI \in R^\times`),
         " であり、逆元の一意性より ",
         math(String.raw`(cI)^{-1} = c^{-1}I`),
@@ -232,6 +274,9 @@ h(g_1g_2)
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。I_{(Mat(2,C))^{⊗M}} を 2^M 次の単位行列 I_{Mat(2^M,C)} へ、Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "原文（parts/008/008）は「環 R の乗法群 R^×」という一般の環についての定義だった。README 2 節「環・体などの一般論に持ち上げた証明は使わない」・3 節 2「脇道の一般論なら具体的な形に落として本文に書く」に従い、Mat(2,C)^{⊗M} の可逆元についての具体的な定義へ書き換え、以降の証明で実際に使う性質（逆元の一意性、単位元・積・逆元・スカラー倍についての可逆性）だけを主張として立てた。一般の環についての元の記述は notes/008_group_theory_general.ts へ移した。",
+        "2026-11-01: SageMath の検算（sagemath/check/def_invertible_elements_of_R/）に合わせて根拠を直した。単位行列との積・行列の積の結合律・スカラー倍の性質を述べるブロックが本文に無かったので、" +
+          "def_kronecker_delta・def_identity_matrix・def_matrix_scalar_multiple・mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult・scalar_multiple_factors_out_of_left_factor・scalar_multiple_factors_out_of_right_factor・scalar_multiple_is_associative・scalar_multiple_by_one（と complex_zero_times_is_zero） を足し、各行から引いた。" +
+          "(ii) の鎖は結合律を 2 回使うので 2 行に分けた。(i) の I I = I に根拠を付けた。(iv) は旧証明が scalar_identity_commutes（[cI, A] = 0）を引いていたが、鎖は交換子を使わないので、スカラー倍の性質を一つずつ引く 6 行の鎖に書き直した。",
       ],
     },
   },

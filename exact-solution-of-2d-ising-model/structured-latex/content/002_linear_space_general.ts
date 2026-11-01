@@ -10,6 +10,509 @@ export default defineBlocks([
     labels: [],
   },
   {
+    id: "linear_space_general_definition_kronecker_delta",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "クロネッカーのデルタ" },
+    labels: ["def_kronecker_delta"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " とする。",
+        math(String.raw`i, j \in \{1,\dots,n\}`),
+        " について、",
+        math(String.raw`\delta_{ij} \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`\delta_{ij} := \begin{cases} 1_{\mathbb{C}} & (i = j) \\ 0_{\mathbb{C}} & (i \neq j) \end{cases}`),
+      paragraph([
+        "で定める。",
+        math(String.raw`1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1)`),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。記号 δ_{ij}は本文全体で使われていたが、定めるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_identity_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "単位行列" },
+    labels: ["def_identity_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " とする。単位行列 ",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{C})} \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）を、",
+        ref("def_kronecker_delta"),
+        " の ",
+        math(String.raw`\delta_{ij}`),
+        " を使って成分ごとに",
+      ]),
+      displayMath(String.raw`\left(I_{\mathrm{Mat}(n,\mathbb{C})}\right)_{ij} := \delta_{ij}
+\qquad (i, j \in \{1,\dots,n\})`),
+      paragraph(["で定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。単位行列は本文全体で使われていたが、定めるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_matrix_scalar_multiple",
+    kind: "definition",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列のスカラー倍" },
+    labels: ["def_matrix_scalar_multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。",
+        math(String.raw`A`),
+        " のスカラー倍 ",
+        math(String.raw`aA \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        math(String.raw`a \cdot A`),
+        " とも書く）を、成分ごとに",
+      ]),
+      displayMath(String.raw`(aA)_{ij} := a\,A_{ij}
+\qquad (i \in \{1,\dots,m\},\ j \in \{1,\dots,n\})`),
+      paragraph([
+        "で定める。右辺は ",
+        ref("definition_of_cc"),
+        " の複素数の積である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。行列のスカラー倍は本文全体で使われていたが、定めるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_mat_mult_associative",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "行列の積の結合律" },
+    labels: ["mat_mult_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p, q \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(p,q,\mathbb{C})`),
+        " とする。積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(AB)C = A(BC)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,q,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,q\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((AB)C\bigr)_{ik}
+&= \sum_{l=1}^{p} (AB)_{il}\,C_{lk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{l=1}^{p} \Bigl(\sum_{j=1}^{n} A_{ij}\,B_{jl}\Bigr) C_{lk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\ \text{を}\ (AB)_{il}\ \text{へ適用}\bigr)\\
+&= \sum_{l=1}^{p} \sum_{j=1}^{n} (A_{ij}\,B_{jl})\,C_{lk}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{l=1}^{p} \sum_{j=1}^{n} A_{ij}\,(B_{jl}\,C_{lk})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} \sum_{l=1}^{p} A_{ij}\,(B_{jl}\,C_{lk})
+&&\bigl(\because\ \text{有限個の項の和の順序の入れ替え（}\mathbb{C}\ \text{の加法の結合律・交換律 }\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij} \Bigl(\sum_{l=1}^{p} B_{jl}\,C_{lk}\Bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,(BC)_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\ \text{を}\ (BC)_{jk}\ \text{へ適用}\bigr)\\
+&= \bigl(A(BC)\bigr)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。行列の積の結合律は本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_identity_matrix_is_left_unit_of_mat_mult",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "単位行列を左から掛けても変わらない" },
+    labels: ["identity_matrix_is_left_unit_of_mat_mult"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。単位行列は ",
+        ref("def_identity_matrix"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`I_{\mathrm{Mat}(m,\mathbb{C})}\,A = A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(I_{\mathrm{Mat}(m,\mathbb{C})}\,A\bigr)_{ik}
+&= \sum_{j=1}^{m} \bigl(I_{\mathrm{Mat}(m,\mathbb{C})}\bigr)_{ij}\,A_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{m} \delta_{ij}\,A_{jk}
+&&\bigl(\because\ \text{単位行列の定義 }\blkref{def_identity_matrix}\bigr)\\
+&= \delta_{ii}\,A_{ik} + \sum_{\substack{1 \leq j \leq m \\ j \neq i}} \delta_{ij}\,A_{jk}
+&&\bigl(\because\ j = i\ \text{の項を分ける（}\mathbb{C}\ \text{の加法の結合律・交換律 }\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
+&= 1_{\mathbb{C}}\,A_{ik} + \sum_{\substack{1 \leq j \leq m \\ j \neq i}} 0_{\mathbb{C}}\,A_{jk}
+&&\bigl(\because\ \delta\ \text{の値 }\blkref{def_kronecker_delta}\bigr)\\
+&= A_{ik} + \sum_{\substack{1 \leq j \leq m \\ j \neq i}} 0_{\mathbb{C}}\,A_{jk}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= A_{ik} + \sum_{\substack{1 \leq j \leq m \\ j \neq i}} 0_{\mathbb{C}}
+&&\bigl(\because\ 0_{\mathbb{C}} z = 0_{\mathbb{C}}\ \blkref{complex_zero_times_is_zero}\ \text{を各項へ適用}\bigr)\\
+&= A_{ik}
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元で、これを項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。単位行列を左から掛けても行列が変わらないことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_identity_matrix_is_right_unit_of_mat_mult",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "単位行列を右から掛けても変わらない" },
+    labels: ["identity_matrix_is_right_unit_of_mat_mult"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。単位行列は ",
+        ref("def_identity_matrix"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A\,I_{\mathrm{Mat}(n,\mathbb{C})} = A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\,I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{ik}
+&= \sum_{j=1}^{n} A_{ij}\,\bigl(I_{\mathrm{Mat}(n,\mathbb{C})}\bigr)_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,\delta_{jk}
+&&\bigl(\because\ \text{単位行列の定義 }\blkref{def_identity_matrix}\bigr)\\
+&= A_{ik}\,\delta_{kk} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} A_{ij}\,\delta_{jk}
+&&\bigl(\because\ j = k\ \text{の項を分ける（}\mathbb{C}\ \text{の加法の結合律・交換律 }\blkref{complex_numbers_form_a_field}\text{）}\bigr)\\
+&= A_{ik}\,1_{\mathbb{C}} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} A_{ij}\,0_{\mathbb{C}}
+&&\bigl(\because\ \delta\ \text{の値 }\blkref{def_kronecker_delta}\bigr)\\
+&= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} A_{ij}\,0_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} 0_{\mathbb{C}}\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= A_{ik} + \sum_{\substack{1 \leq j \leq n \\ j \neq k}} 0_{\mathbb{C}}
+&&\bigl(\because\ 0_{\mathbb{C}} z = 0_{\mathbb{C}}\ \blkref{complex_zero_times_is_zero}\ \text{を各項へ適用}\bigr)\\
+&= A_{ik}
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元で、これを項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。単位行列を右から掛けても行列が変わらないことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_multiple_factors_out_of_left_factor",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "左の因子のスカラー倍は行列の積の外へ出せる" },
+    labels: ["scalar_multiple_factors_out_of_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(aA)B = a(AB)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((aA)B\bigr)_{ik}
+&= \sum_{j=1}^{n} (aA)_{ij}\,B_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} (a\,A_{ij})\,B_{jk}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= \sum_{j=1}^{n} a\,(A_{ij}\,B_{jk})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= a \sum_{j=1}^{n} A_{ij}\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= a\,(AB)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \bigl(a(AB)\bigr)_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。左の因子のスカラー倍を行列の積の外へ出すことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_multiple_factors_out_of_right_factor",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "右の因子のスカラー倍は行列の積の外へ出せる" },
+    labels: ["scalar_multiple_factors_out_of_right_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A(aB) = a(AB)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A(aB)\bigr)_{ik}
+&= \sum_{j=1}^{n} A_{ij}\,(aB)_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,(a\,B_{jk})
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= \sum_{j=1}^{n} (A_{ij}\,a)\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} (a\,A_{ij})\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} a\,(A_{ij}\,B_{jk})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= a \sum_{j=1}^{n} A_{ij}\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= a\,(AB)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \bigl(a(AB)\bigr)_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。右の因子のスカラー倍を行列の積の外へ出すことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_multiple_is_associative",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "スカラー倍を続けて施すことは積のスカラー倍に等しい" },
+    labels: ["scalar_multiple_is_associative"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a, b \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`a(bA) = (ab)A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a(bA)\bigr)_{ij}
+&= a\,(bA)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= a\,(b\,A_{ij})
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= (ab)\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl((ab)A\bigr)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。スカラー倍を続けて施すことが積のスカラー倍に等しいことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_multiple_by_one",
+    kind: "claim",
+    origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
+    title: { text: "1 倍しても行列は変わらない" },
+    labels: ["scalar_multiple_by_one"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`1_{\mathbb{C}}\,A = A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(1_{\mathbb{C}}\,A\bigr)_{ij}
+&= 1_{\mathbb{C}}\,A_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= A_{ij}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。1 倍しても行列が変わらないことは本文全体で根拠として使われていたが、述べるブロックが無かった。" +
+          "可逆元の定義（def_invertible_elements_of_R）の検算のレビューで欠けが見つかり、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_000_definition_kronecker_product",
     kind: "definition",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
