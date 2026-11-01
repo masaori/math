@@ -384,17 +384,24 @@
     必要十分版 `NecSuf/ConjugationOfExpSeries.lean`（台は半環、`u` の両側の逆、`x ↦ uxv` の連続性と T2 だけ）と導出 `ClaimSignFlipConjugationFromNecSuf.lean` を置いた。
     人手 Step 2 の「共役は行列の積とスカラー倍を保ち」に、部分和の共役が使う「和」を足した。レビューの指摘（必須 3 件・任意 6 件）を直した。
 
+  - ゴールラインの確認の十七個目（済み、2026-11-01）: 人手 `commutation_V_plus_check_psi`（`DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi.lean`）の Lean を人手どおりに直した。
+    以前は `P̌` の列が固有ベクトルであることを `ActsBy.eigen` へ直接渡していた。いまは、行ベクトルと `2×2` 行列の積 `rowMul`・行ベクトルへの作用 `rowApply`
+    （`DefinitionTgAndTV.lean`）の上で、proof 冒頭の結合律 `rowMul_rowMul`、Step 1 の `rowApply_rowMul`、Step 2 の 9 行の鎖 `rowApply_checkPsi_row`
+    （`A = P̌ĎP̌^{-1}` と `P̌^{-1}P̌ = I` を経る）、列の比較と `λ_{±,μ} = e^{±γ}` の代入、の順に示す。
+    対角化の定理が `P : IsingParam` を取るので、`TVPlus_eq_TCheckVprime_on_checkZY`・`TVPlus_eq_TCheckVprime`・`VPlus_eq_smul_checkVprime` も `K : IsingConst` と `hga` の組から `P` へ替え、
+    仮定 `hlamPlus`/`hlamMinus` を `λ_{±,μ} = e^{±g}` の形にした（埋める定理は `lambdaPlusR_eq_exp_gammaTildeC`・`lambdaMinusR_eq_exp_gammaTildeC`）。
+    仮定を埋めた主張 `TVPlus_checkPsiDag_checkPsi`（`ClaimCheckFermiResultsUnconditional.lean`）を足した。必要十分版は置かない（理由は `lean/docs/ch016-formalization.md` の 2 節）。
+    `checkPsiDag_eq_checkPmat_col`・`checkPsi_eq_checkPmat_col`・`checkR_eq_absGamma2` を `ClaimCheckFermiResultsUnconditional.lean` から交換関係のファイルへ移した。レビューの指摘（必須 2 件・任意 5 件）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- `commutation_V_plus_check_psi`（`DiagonalizationAndExponentialForm/ClaimCommutationVPlusCheckPsi.lean`）: 人手 Step 2 は `diagonalization_check_P_D` の `A = P̌ Ď P̌^{-1}` と `P̌^{-1}P̌ = I` を経由するが、
-  Lean は `P̌` の列が固有ベクトルであること（`AMat_mulVec_eigen_pos`・`_neg`）を `ActsBy.eigen` へ直接渡している。人手の Step 1（行ベクトルへの線型性の持ち上げ）と Step 2 の鎖どおりに直す。
-  対角化の定理は `P : IsingParam` と `M ≠ 0` を取るので、呼び出し側（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）の引数 `K : IsingConst`・`hga` との合わせ方を先に確かめる。
+- `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
 
 この後に残る確認:
 
-- `eigenvector_of_A_theta_tilde` Step 1 の「`λ` が固有値であること ⟺ `det(A(θ)-λI) = 0`」は形式化していない（`det_AMat_sub_smul_eq_zero_iff` は行列式が 0 になる `λ` を述べるだけ。人手もこの同値を前提として使っている）。要るかを判断する。
+- `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`DiagonalizationAndExponentialForm/ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`）: 人手 Step 1 は `P̌_μ^{-1}` で `Ž_μ, Y̌_μ` をフェルミオンで書き直すが、Lean は `ψ̌^† ∓ ψ̌` の直接計算（`checkZ_eq_smul`・`checkY_eq_smul`）で置き換えている。人手どおりに直す。
 - 必要十分版 `NecSuf/TwoByTwoSkew.lean` の `skew2_mulVec`・`skew2_charPoly_factor` から具体版を導く定理（README の必要十分版の要件 4）が無い。導出を置くか、具体版の Step 2 が `b = -ā` と `a ā = r^2` の 2 段を経由することとの対応をコメントに書く。
 - `commutator_of_H_and_check_Z_Y` の必要十分版を、具体版と同じ手順（サイトごとの交換関係から和へまとめる）で `NecSuf/` に置く。
 - `ClaimEigenATildeDiag.lean` の `sqrtM_cast_ne_zero` は `sqrtM_ne_zero` を展開した形と同じ主張である。`DefinitionCheckFermi` の `sqrtM` へまとめられるかを確かめる（ファイルの import の向きを先に見る）。

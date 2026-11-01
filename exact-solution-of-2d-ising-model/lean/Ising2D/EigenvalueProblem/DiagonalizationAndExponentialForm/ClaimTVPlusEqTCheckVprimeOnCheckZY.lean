@@ -81,29 +81,34 @@ theorem eq_on_checkZY_of_eq_on_checkPsi (K : IsingConst) (M : ℕ) (hM : M ≠ 0
 /-- **原文 `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` そのもの**。
 
 `T_{(V^{(+)})}` の側は 014 章の作用（`hT`）と 015 章の固有値の同定（`hlam`）を仮定として受け取る。
+結合定数は人手の statement の `K_1, K_2 ∈ ℝ_{>0}` を `P : IsingParam` で受け取る（`commutation_V_plus_check_psi` が
+対角化 `diagonalization_check_P_D` を引くため）。
 `T_{(V̌')}` の側は `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi`（本章、証明済み）。 -/
-theorem TVPlus_eq_TCheckVprime_on_checkZY (K : IsingConst) (g : ℤ → ℂ) (hM : M ≠ 0)
-    (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0)
+theorem TVPlus_eq_TCheckVprime_on_checkZY (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     {TPlus : TensorPow M →ₗ[ℂ] TensorPow M}
     (hT : ∀ j : Fin M, ActsBy TPlus (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat K (thetaTilde M (checkIdx M j))))
-    (hlamPlus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      + ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
-    (hlamMinus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      - ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j)))
+      (AMat P.const (thetaTilde M (checkIdx M j))))
+    (hlamPlus : ∀ j : Fin M,
+      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+    (hlamMinus : ∀ j : Fin M,
+      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j)))
     (j : Fin M) :
     TPlus (checkZ M (checkIdx M j))
-        = TConj (checkVprimeUnits K M g) (checkZ M (checkIdx M j))
+        = TConj (checkVprimeUnits P.const M g) (checkZ M (checkIdx M j))
       ∧ TPlus (checkY M (checkIdx M j))
-        = TConj (checkVprimeUnits K M g) (checkY M (checkIdx M j)) := by
-  have hgaj := hga _ (checkIndex_checkIdx M j)
-  have hplus := TVPlus_checkPsiDag_psi_of_action K M hM hgaj (hlamPlus j) (hlamMinus j) (hT j)
+        = TConj (checkVprimeUnits P.const M g) (checkY M (checkIdx M j)) := by
+  -- `gamma_2_theta_tilde_nonzero`
+  have hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 P.const (thetaTilde M μ) ≠ 0 :=
+    fun μ _ => gamma2_thetaTilde_ne_zero P hM μ
+  have hplus := TVPlus_checkPsiDag_psi_of_action P M hM (checkIdx M j)
+    (hlamPlus j) (hlamMinus j) (hT j)
   refine eq_on_checkZY_of_eq_on_checkPsi (T₁ := TPlus)
-    (T₂ := (TConj (checkVprimeUnits K M g)).toLinearMap) K M hM hgaj ?_ ?_
+    (T₂ := (TConj (checkVprimeUnits P.const M g)).toLinearMap) P.const M hM
+    (hga _ (checkIndex_checkIdx M j)) ?_ ?_
   · rw [hplus.1]
-    exact (TCheckVprime_checkPsiDag K g hM hga j).symm
+    exact (TCheckVprime_checkPsiDag P.const g hM hga j).symm
   · rw [hplus.2]
-    exact (TCheckVprime_checkPsi K g hM hga hgconj j).symm
+    exact (TCheckVprime_checkPsi P.const g hM hga hgconj j).symm
 
 end Ising2D

@@ -523,7 +523,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.TV_linear` / `TV_mul` / `TV_one` | `T_{(V)}` の ℂ-線型性・乗法性・単位性 | `linearity_of_T` |
 | `Ising2D.ActsBy` | 行ベクトル記法 `(T z, T y) = (z, y) B` | `T_V_hatZ_hatY` の記法 |
 | `Ising2D.ActsBy.comp` | 合成則 `Q P`（原文の `B_1 B_2 B_1` の根拠） | `T_V_hatZ_hatY` の証明 |
-| `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 後段（`ψ` が `V` の固有ベクトル）への一般補題 |
+| `Ising2D.ActsBy.eigen` | **固有ベクトルの移送**（`B v = λ v ⇒ T(v_0 z + v_1 y) = λ(⋯)`） | 整数運動量の経路（`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean`）が使う一般補題 |
+| `Ising2D.rowMul` / `rowApply` / `actsBy_iff_rowApply_eq_rowMul` | 行ベクトルと `2×2` 行列の積 `(z,y)G`、行ベクトルへの作用 `(Tz,Ty)`、`ActsBy` との同値 | `calc_of_TxT_check_Z_Y` の記法（`commutation_V_plus_check_psi` の結合律と Step 1 が使う） |
 | `Ising2D.B1mat` / `B2mat` | `B_1(θ)`, `B_2` | `T_V_hatZ_hatY` の証明 |
 | `Ising2D.B1_mul_B2_mul_B1_eq_explicit` | `B_1(θ) B_2 B_1(θ)` の 4 成分の明示計算（5 個の複素パラメータで書いた右辺） | 同上（**双対関係 `c_2^* = s_2^* c_2` が必要**） |
 | `Ising2D.duality_c2_star_eq_s2_star_c2`（`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`） | `K_2 > 0` で `c_2^* = s_2^* c_2`（`s2star_eq_inv_s2`・`c2star_eq_c2_div_s2` を経る人手の三つの鎖）。`IsingParam` の上では `IsingParam.c2_mul_s2star_eq_c2star` として、仮定 `hdual` を埋める | `duality_c2_star_eq_s2_star_c2` |

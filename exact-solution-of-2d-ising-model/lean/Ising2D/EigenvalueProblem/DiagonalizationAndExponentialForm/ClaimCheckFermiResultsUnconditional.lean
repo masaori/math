@@ -24,7 +24,7 @@
 
 `Ising2D/EigenvalueProblem/DiagonalizationAndExponentialForm/DefinitionCheckFermi.lean` は、015 章の完成を待たずに閉じるため
 原文が「すなわち」として与える明示式を `ψ̌^†, ψ̌` の定義に採った。
-本ファイルの `checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` が、
+`ClaimCommutationVPlusCheckPsi.lean` の `checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` が、
 **その定義が原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` と一致すること**を示す。
 -/
 import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.ClaimVPlusEqCCheckVprime
@@ -34,25 +34,6 @@ import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimTVPlusAction
 namespace Ising2D
 
 variable {M : ℕ}
-
-/-! ## `r_μ` は 015 章の `|γ_2(θ̃_μ)|` そのもの -/
-
-theorem checkR_eq_absGamma2 (K : IsingConst) (M : ℕ) (μ : ℤ) :
-    checkR K M μ = absGamma2 K (thetaTilde M μ) := rfl
-
-/-! ## 原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` との一致 -/
-
-/-- **原文 `def_check_fermi` の行ベクトル記法との一致**（`P̌_μ` の第 0 列が `ψ̌_μ^†`）。 -/
-theorem checkPsiDag_eq_checkPmat_col (K : IsingConst) (M : ℕ) (μ : ℤ) :
-    checkPsiDag K M μ
-      = checkPmat K M μ 0 0 • checkZ M μ + checkPmat K M μ 1 0 • checkY M μ := by
-  simp [checkPsiDag, checkP, checkQ, checkPmat, sqrtM, checkR_eq_absGamma2]
-
-/-- **原文 `def_check_fermi` の行ベクトル記法との一致**（`P̌_μ` の第 1 列が `ψ̌_μ`）。 -/
-theorem checkPsi_eq_checkPmat_col (K : IsingConst) (M : ℕ) (μ : ℤ) :
-    checkPsi K M μ
-      = checkPmat K M μ 0 1 • checkZ M μ + checkPmat K M μ 1 1 • checkY M μ := by
-  simp [checkPsi, checkP, checkQ, checkPmat, sqrtM, checkR_eq_absGamma2, neg_div]
 
 /-! ## 重み `γ(θ̃_μ)`（`def_gamma_theta` の `θ = θ̃_μ` での値）を `ℤ → ℂ` の形で -/
 
@@ -88,27 +69,19 @@ theorem gamma2_thetaTilde_ne_zero_of_checkIndex (hM : M ≠ 0) :
     ∀ μ : ℤ, CheckIndex M μ → gamma2 P.const (thetaTilde M μ) ≠ 0 :=
   fun _ hμ => gamma2_thetaTilde_ne_zero_checkIndex P hM hμ
 
-/-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamPlus` は無条件に成り立つ。 -/
-theorem gamma1_add_checkR_eq_exp
+/-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamPlus`（`λ_{+,μ} = e^{+γ(θ̃_μ)}`）は無条件に成り立つ。 -/
+theorem lambdaPlusR_eq_exp_gammaTildeC
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
-    gamma1 P.const (thetaTilde M μ) + ((checkR P.const M μ : ℝ) : ℂ)
-      = Complex.exp (gammaTildeC P M μ) := by
-  have h : lambdaPlusR P.const (thetaTilde M μ) = Real.exp (gammaTilde P M μ) :=
-    lambdaPlusR_eq_exp P hdual M μ
-  have hc := congrArg (fun r : ℝ => ((r : ℝ) : ℂ)) h
-  simpa [lambdaPlusR_ofReal, gammaTildeC, Complex.ofReal_exp, checkR_eq_absGamma2]
-    using hc
+    ((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ) = Complex.exp (gammaTildeC P M μ) := by
+  rw [lambdaPlusR_eq_exp P hdual M μ, Complex.ofReal_exp]
+  rfl
 
-/-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamMinus` は無条件に成り立つ。 -/
-theorem gamma1_sub_checkR_eq_exp
+/-- 015 章 `lambda_eq_exp_gamma_theta_tilde`: 本章の仮定 `hlamMinus`（`λ_{-,μ} = e^{-γ(θ̃_μ)}`）は無条件に成り立つ。 -/
+theorem lambdaMinusR_eq_exp_gammaTildeC
     (hdual : P.const.c2 * P.const.s2star = P.const.c2star) (M : ℕ) (μ : ℤ) :
-    gamma1 P.const (thetaTilde M μ) - ((checkR P.const M μ : ℝ) : ℂ)
-      = Complex.exp (-gammaTildeC P M μ) := by
-  have h : lambdaMinusR P.const (thetaTilde M μ) = Real.exp (-gammaTilde P M μ) :=
-    lambdaMinusR_eq_exp P hdual M μ
-  have hc := congrArg (fun r : ℝ => ((r : ℝ) : ℂ)) h
-  simpa [lambdaMinusR_ofReal, gammaTildeC, Complex.ofReal_exp, checkR_eq_absGamma2]
-    using hc
+    ((lambdaMinusR P.const (thetaTilde M μ) : ℝ) : ℂ) = Complex.exp (-gammaTildeC P M μ) := by
+  rw [lambdaMinusR_eq_exp P hdual M μ, Complex.ofReal_exp, Complex.ofReal_neg]
+  rfl
 
 /-! ## 015 章の仮定を落とした版の主張 -/
 
@@ -142,11 +115,10 @@ theorem TVPlus_eq_TCheckVprime' (hM : M ≠ 0)
       (AMat P.const (thetaTilde M (checkIdx M j)))) :
     ∀ x : TensorPow M,
       TConj uPlus x = TConj (checkVprimeUnits P.const M (gammaTildeC P M)) x :=
-  TVPlus_eq_TCheckVprime P.const (gammaTildeC P M) hM
-    (gamma2_thetaTilde_ne_zero_of_checkIndex P hM)
+  TVPlus_eq_TCheckVprime P (gammaTildeC P M) hM
     (fun μ _ => gammaTildeC_conj P hM μ) uPlus hT
-    (fun j => gamma1_add_checkR_eq_exp P hdual M (checkIdx M j))
-    (fun j => gamma1_sub_checkR_eq_exp P hdual M (checkIdx M j))
+    (fun j => lambdaPlusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
+    (fun j => lambdaMinusR_eq_exp_gammaTildeC P hdual M (checkIdx M j))
 
 /-- **`V_plus_eq_c_check_Vprime`（015 章の仮定なし。残るのは 014 章の `hT` だけ）**。
 
@@ -190,6 +162,20 @@ theorem TVPlus_actsBy_checkZY (P : IsingParam) {M : ℕ} (hM : M ≠ 0)
     (by simp [IsingParam.const, Complex.ofReal_sinh])
     hdualC
   rwa [TVPlus_eq_TConj] at h
+
+/-- **人手 `commutation_V_plus_check_psi`（仮定なし）**:
+`T_{(V^{(+)})}(ψ̌_μ^†) = e^{+γ(θ̃_μ)} ψ̌_μ^†`、`T_{(V^{(+)})}(ψ̌_μ) = e^{-γ(θ̃_μ)} ψ̌_μ`。
+`hT` を `TVPlus_actsBy_checkZY`、`λ_{±,μ}` の指数表示を `lambdaPlusR_eq_exp_gammaTildeC`・`lambdaMinusR_eq_exp_gammaTildeC`、
+双対関係を `IsingParam.c2_mul_s2star_eq_c2star` で埋める。 -/
+theorem TVPlus_checkPsiDag_checkPsi (hM : M ≠ 0) (μ : ℤ) :
+    TConj (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ)) (checkPsiDag P.const M μ)
+        = Complex.exp (gammaTildeC P M μ) • checkPsiDag P.const M μ
+      ∧ TConj (VPlusUnits M (sinh_two_K2_pos P) (P.K1 : ℂ) (P.K2star : ℂ)) (checkPsi P.const M μ)
+        = Complex.exp (-gammaTildeC P M μ) • checkPsi P.const M μ :=
+  TVPlus_checkPsiDag_psi_of_action P M hM μ
+    (lambdaPlusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star M μ)
+    (lambdaMinusR_eq_exp_gammaTildeC P P.c2_mul_s2star_eq_c2star M μ)
+    (TVPlus_actsBy_checkZY P hM P.c2_mul_s2star_eq_c2star μ)
 
 /-- **本章の結論の完全な無条件版**（残る仮定は双対関係 `hdual` だけ）:
 `∃ c ≠ 0, V^{(+)} = c V̌'`。 -/

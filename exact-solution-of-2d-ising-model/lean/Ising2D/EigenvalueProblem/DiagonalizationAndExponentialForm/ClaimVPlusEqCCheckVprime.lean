@@ -72,19 +72,18 @@ theorem exists_smul_of_TConj_eq (u v : (TensorPow M)ˣ)
 
 /-- **原文 `V_plus_eq_c_check_Vprime` そのもの（本章の結論）**:
 ある `c ∈ ℂ^×` について `V^{(+)} = c V̌'`。 -/
-theorem VPlus_eq_smul_checkVprime (K : IsingConst) (g : ℤ → ℂ) (hM : M ≠ 0)
-    (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0)
+theorem VPlus_eq_smul_checkVprime (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
       (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat K (thetaTilde M (checkIdx M j))))
-    (hlamPlus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      + ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
-    (hlamMinus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      - ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
-    ∃ c : ℂ, c ≠ 0 ∧ (uPlus : TensorPow M) = c • checkVprime K M g :=
-  exists_smul_of_TConj_eq uPlus (checkVprimeUnits K M g)
-    (TVPlus_eq_TCheckVprime K g hM hga hgconj uPlus hT hlamPlus hlamMinus)
+      (AMat P.const (thetaTilde M (checkIdx M j))))
+    (hlamPlus : ∀ j : Fin M,
+      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+    (hlamMinus : ∀ j : Fin M,
+      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
+    ∃ c : ℂ, c ≠ 0 ∧ (uPlus : TensorPow M) = c • checkVprime P.const M g :=
+  exists_smul_of_TConj_eq uPlus (checkVprimeUnits P.const M g)
+    (TVPlus_eq_TCheckVprime P g hM hgconj uPlus hT hlamPlus hlamMinus)
 
 end Ising2D

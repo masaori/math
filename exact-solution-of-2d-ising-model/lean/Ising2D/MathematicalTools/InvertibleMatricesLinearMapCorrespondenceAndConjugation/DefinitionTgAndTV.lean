@@ -31,16 +31,16 @@
   この記法のもとで合成則は `ActsBy T z y P → ActsBy S z y Q → ActsBy (S ∘ₗ T) z y (Q * P)`
   となる（`ActsBy.comp`）。原文が `T_{(V)} = T_{V_1^{1/2}} ∘ T_{V_2} ∘ T_{V_1^{1/2}}` の
   作用を `B_1 B_2 B_1` と計算しているのはこの合成則そのものである。
-* 固有ベクトルの移送（`ActsBy.eigen`）: `B` の固有ベクトル `v` に対し
-  `v_0 z + v_1 y` が `T` の固有ベクトルになる。後段（`ψ` が `V` の固有ベクトルであること）で
-  使うための一般補題として、`ℂ` 上の任意の加群で述べる。
+* 行ベクトルと `2×2` 行列の積 `(z, y) G` を `rowMul`、行ベクトルへの作用 `(T z, T y)` を `rowApply` とする
+  （`calc_of_TxT_check_Z_Y` の定め方。`ActsBy T z y B` は `rowApply T (z, y) = rowMul (z, y) B` と同値で、
+  それが `actsBy_iff_rowApply_eq_rowMul`）。`commutation_V_plus_check_psi` の結合律と Step 1 がこの 2 つの上で述べられる。
 
 ## `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用の置き場
 
 `hat(Z)^{(-)}, hat(Y)` は整数運動量の経路の量なので、その作用の主張（仮定つきの
 `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` と無条件版 `TV_hatZ_hatY`）は
 `RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean` に置く。本ファイルは運動量の取り方に依らない
-`T_g`・`T_{(V)}`・`ActsBy`（合成則 `ActsBy.comp`・固有ベクトルの移送 `ActsBy.eigen` を含む）と、
+`T_g`・`T_{(V)}`・`ActsBy`（合成則 `ActsBy.comp`・整数運動量の経路が使う固有ベクトルの移送 `ActsBy.eigen` を含む）・`rowMul`・`rowApply` と、
 行列 `B1mat`・`B2mat` の定義と等式 `B_1(θ) B_2 B_1(θ) = A(θ)` を持つ。
 
 ## 形式化の過程で見つかった原文の問題
@@ -158,7 +158,7 @@ theorem ActsBy.comp {S T : A →ₗ[ℂ] A} {z y : A} {P Q : Matrix (Fin 2) (Fin
     rw [hT.2, map_add, map_smul, map_smul, hS.1, hS.2]
     match_scalars <;> simp [Matrix.mul_apply, Fin.sum_univ_two] <;> ring
 
-/-- **固有ベクトルの移送**（後段で `ψ` が `V` の固有ベクトルであることを導くための一般補題）。
+/-- **固有ベクトルの移送**（整数運動量の経路 `RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` が使う）。
 
 `(T z, T y) = (z, y) B` のとき、`B` の固有ベクトル `v`（固有値 `lam`）に対して
 `v_0 z + v_1 y` は `T` の固有値 `lam` の固有ベクトルである。 -/
@@ -175,6 +175,20 @@ theorem ActsBy.eigen {T : A →ₗ[ℂ] A} {z y : A} {B : Matrix (Fin 2) (Fin 2)
   match_scalars
   · linear_combination h0
   · linear_combination h1
+
+/-- 人手の行ベクトルと `2×2` 行列の積 `(z, y) G`（`calc_of_TxT_check_Z_Y` の定め方）。
+第 `l` 列は `G_{0l} z + G_{1l} y`。 -/
+def rowMul (p : A × A) (G : Matrix (Fin 2) (Fin 2) ℂ) : A × A :=
+  (G 0 0 • p.1 + G 1 0 • p.2, G 0 1 • p.1 + G 1 1 • p.2)
+
+/-- 人手の行ベクトルへの作用 `(T z, T y)`（成分ごとに `T` を施す）。 -/
+def rowApply (T : A →ₗ[ℂ] A) (p : A × A) : A × A := (T p.1, T p.2)
+
+/-- `ActsBy T z y B` は行ベクトルの等式 `(T z, T y) = (z, y) B` そのものである。 -/
+theorem actsBy_iff_rowApply_eq_rowMul {T : A →ₗ[ℂ] A} {z y : A}
+    {B : Matrix (Fin 2) (Fin 2) ℂ} :
+    ActsBy T z y B ↔ rowApply T (z, y) = rowMul (z, y) B := by
+  simp only [ActsBy, rowApply, rowMul, Prod.mk.injEq]
 
 end ActsBy
 

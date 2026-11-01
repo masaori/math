@@ -60,20 +60,19 @@ theorem TConj_toLinearMap_eq_of_eq_on_checkZY (hM : M ≠ 0) (u v : (TensorPow M
 
 `T_{(V^{(+)})}` を可逆元 `uPlus` による共役として与え、014 章・015 章の内容を
 `hT` / `hlamPlus` / `hlamMinus` として受け取る。 -/
-theorem TVPlus_eq_TCheckVprime (K : IsingConst) (g : ℤ → ℂ) (hM : M ≠ 0)
-    (hga : ∀ μ : ℤ, CheckIndex M μ → gamma2 K (thetaTilde M μ) ≠ 0)
+theorem TVPlus_eq_TCheckVprime (P : IsingParam) (g : ℤ → ℂ) (hM : M ≠ 0)
     (hgconj : ∀ μ : ℤ, CheckIndex M μ → g ((M : ℤ) + 1 - μ) = g μ)
     (uPlus : (TensorPow M)ˣ)
     (hT : ∀ j : Fin M, ActsBy (TConj uPlus).toLinearMap
       (checkZ M (checkIdx M j)) (checkY M (checkIdx M j))
-      (AMat K (thetaTilde M (checkIdx M j))))
-    (hlamPlus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      + ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
-    (hlamMinus : ∀ j : Fin M, gamma1 K (thetaTilde M (checkIdx M j))
-      - ((checkR K M (checkIdx M j) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
-    ∀ x : TensorPow M, TConj uPlus x = TConj (checkVprimeUnits K M g) x :=
-  TConj_eq_of_eq_on_checkZY hM uPlus (checkVprimeUnits K M g)
-    (fun j => (TVPlus_eq_TCheckVprime_on_checkZY K g hM hga hgconj hT hlamPlus hlamMinus j).1)
-    (fun j => (TVPlus_eq_TCheckVprime_on_checkZY K g hM hga hgconj hT hlamPlus hlamMinus j).2)
+      (AMat P.const (thetaTilde M (checkIdx M j))))
+    (hlamPlus : ∀ j : Fin M,
+      ((lambdaPlusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (g (checkIdx M j)))
+    (hlamMinus : ∀ j : Fin M,
+      ((lambdaMinusR P.const (thetaTilde M (checkIdx M j)) : ℝ) : ℂ) = Complex.exp (-g (checkIdx M j))) :
+    ∀ x : TensorPow M, TConj uPlus x = TConj (checkVprimeUnits P.const M g) x :=
+  TConj_eq_of_eq_on_checkZY hM uPlus (checkVprimeUnits P.const M g)
+    (fun j => (TVPlus_eq_TCheckVprime_on_checkZY P g hM hgconj hT hlamPlus hlamMinus j).1)
+    (fun j => (TVPlus_eq_TCheckVprime_on_checkZY P g hM hgconj hT hlamPlus hlamMinus j).2)
 
 end Ising2D

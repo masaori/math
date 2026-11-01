@@ -785,8 +785,11 @@ targets=(
   Ising2D.acomm_checkPsiDag_checkPsiDag
   Ising2D.acomm_checkPsiDag_checkPsi
   Ising2D.acomm_checkPsi_checkPsi
-  Ising2D.AMat_mulVec_checkPsiDag_coeff
-  Ising2D.AMat_mulVec_checkPsi_coeff
+  Ising2D.rowMul_rowMul
+  Ising2D.rowApply_rowMul
+  Ising2D.actsBy_iff_rowApply_eq_rowMul
+  Ising2D.checkPsi_row_eq_rowMul_checkPmat
+  Ising2D.rowApply_checkPsi_row
   Ising2D.TVPlus_checkPsiDag_of_action
   Ising2D.TVPlus_checkPsi_of_action
   Ising2D.TVPlus_checkPsiDag_psi_of_action
@@ -1132,8 +1135,9 @@ targets=(
   Ising2D.gammaTilde_conj
   Ising2D.gammaTildeC_conj
   Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex
-  Ising2D.gamma1_add_checkR_eq_exp
-  Ising2D.gamma1_sub_checkR_eq_exp
+  Ising2D.lambdaPlusR_eq_exp_gammaTildeC
+  Ising2D.lambdaMinusR_eq_exp_gammaTildeC
+  Ising2D.TVPlus_checkPsiDag_checkPsi
   "Ising2D.checkPsi_car'"
   Ising2D.TCheckVprime_checkPsi_pair
   "Ising2D.TVPlus_eq_TCheckVprime'"

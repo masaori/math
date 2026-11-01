@@ -33,9 +33,13 @@
 | `Ising2D.acomm_checkPsiDag_checkPsiDag` | `[ψ̌_μ^†, ψ̌_ν^†]₊ = 0` | 同 第 1 式 |
 | `Ising2D.acomm_checkPsiDag_checkPsi` | `[ψ̌_μ^†, ψ̌_ν]₊ = δ_{ν,M+1-μ} I` | 同 第 2 式 |
 | `Ising2D.acomm_checkPsi_checkPsi` | `[ψ̌_μ, ψ̌_ν]₊ = 0` | 同 第 3 式 |
-| `Ising2D.AMat_mulVec_checkPsiDag_coeff` | `A(θ̃_μ)(p_μ,q)ᵀ = (γ_1+r_μ)(p_μ,q)ᵀ` | `commutation_V_plus_check_psi` の中身 |
-| `Ising2D.AMat_mulVec_checkPsi_coeff` | `A(θ̃_μ)(-p_μ,q)ᵀ = (γ_1-r_μ)(-p_μ,q)ᵀ` | 同 |
-| `Ising2D.TVPlus_checkPsiDag_of_action` / `TVPlus_checkPsi_of_action` | `T(ψ̌_μ^†) = (γ_1+r_μ)ψ̌_μ^†` ほか | **`commutation_V_plus_check_psi`** |
+| `Ising2D.checkR_eq_absGamma2` | 本章の `r_μ` は 015 章の `\|γ_2(θ̃_μ)\|` そのもの（定義的に一致） | `def_check_fermi` の係数 |
+| `Ising2D.checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` | 本章の `ψ̌^†, ψ̌` の定義が原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` と一致する | `def_check_fermi`（015 章 `diagonalization_check_P_D` との突き合わせ） |
+| `Ising2D.rowMul_rowMul` | 行ベクトルと `2×2` 行列の積の結合律 `((A_0,B_0)G)H = (A_0,B_0)(GH)` | `commutation_V_plus_check_psi` の proof 冒頭 |
+| `Ising2D.rowApply_rowMul` | `T((A_0,B_0)G) = (T(A_0),T(B_0))G` | 同 Step 1 |
+| `Ising2D.checkPsi_row_eq_rowMul_checkPmat` | `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` | `def_check_fermi` |
+| `Ising2D.rowApply_checkPsi_row` | `(T(ψ̌_μ^†),T(ψ̌_μ)) = (λ_{+,μ}ψ̌_μ^†, λ_{-,μ}ψ̌_μ)`（`A = P̌ĎP̌^{-1}` と `P̌^{-1}P̌ = I` を経る鎖） | 同 Step 2 |
+| `Ising2D.TVPlus_checkPsiDag_of_action` / `TVPlus_checkPsi_of_action` | `T(ψ̌_μ^†) = λ_{+,μ}ψ̌_μ^†` ほか（Step 2 の等式の各列） | **`commutation_V_plus_check_psi`** |
 | `Ising2D.TVPlus_checkPsiDag_psi_of_action` | 上を `e^{±γ(θ̃_μ)}` の形で述べた版 | 同 |
 | `Ising2D.checkIdx` / `checkIndex_checkIdx` / `checkIdx_rev` / `checkIdx_eq_rev_iff` | `𝓜̌ = {1,…,M}` を `Fin M` で走らせる。対の添字は `Fin.rev`（対合） | `def_check_Vprime` (1) |
 | `Ising2D.checkX` / `Ising2D.checkVprime` | `X̌`, `V̌' = exp(X̌)` | **`def_check_Vprime`** |
@@ -68,12 +72,10 @@
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
-| `Ising2D.checkR_eq_absGamma2` | 本章の `r_μ` は 015 章の `\|γ_2(θ̃_μ)\|` そのもの（定義的に一致） | `def_check_fermi` の係数 |
-| `Ising2D.checkPsiDag_eq_checkPmat_col` / `checkPsi_eq_checkPmat_col` | 本章の `ψ̌^†, ψ̌` の定義が原文の行ベクトル記法 `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` と一致する | `def_check_fermi`（015 章 `diagonalization_check_P_D` との突き合わせ） |
 | `Ising2D.gamma1R_thetaTilde_conj` | `γ_1` の共役添字不変性（実数版） | `periodicity_of_check_fermi` (3) |
 | `Ising2D.gammaTilde_conj` / `gammaTildeC_conj` | `γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | 同 (3) の `γ` 版 |
 | `Ising2D.gamma2_thetaTilde_ne_zero_of_checkIndex` | 仮定 `hga` が無条件に成り立つこと | 015 章 `gamma_2_theta_tilde_nonzero` |
-| `Ising2D.gamma1_add_checkR_eq_exp` / `gamma1_sub_checkR_eq_exp` | 仮定 `hlamPlus` / `hlamMinus` が（双対関係の下で）無条件に成り立つこと | 015 章 `lambda_eq_exp_gamma_theta_tilde` |
+| `Ising2D.lambdaPlusR_eq_exp_gammaTildeC` / `lambdaMinusR_eq_exp_gammaTildeC` | 仮定 `hlamPlus` / `hlamMinus`（`λ_{±,μ} = e^{±γ(θ̃_μ)}`）が（双対関係の下で）無条件に成り立つこと | 015 章 `lambda_eq_exp_gamma_theta_tilde` |
 | `Ising2D.checkPsi_car'` | CAR 3 式（015 章由来の仮定なし） | `anticommutator_of_check_psi` |
 | `Ising2D.TCheckVprime_checkPsi_pair` | `T_{(V̌')}(ψ̌^†) = e^{+γ}ψ̌^†`, `T_{(V̌')}(ψ̌) = e^{-γ}ψ̌`（同上） | `action_of_T_check_Vprime_on_check_psi` |
 | `Ising2D.TVPlus_eq_TCheckVprime'` | `T_{V^{(+)}} = T_{V̌'}`（残る仮定は 014 章の `hT` と双対関係 `hdual` だけ） | `T_V_plus_eq_T_check_Vprime` |
@@ -86,6 +88,7 @@
 | --- | --- | --- |
 | `Ising2D.sinh_two_K2_pos` | `s_2 = sinh 2K_2 > 0`（`K_2 > 0` から） | 補助 |
 | `Ising2D.TVPlus_actsBy_checkZY` | 仮定 `hT` が（双対関係の下で）無条件に成り立つこと | 014 章 `T_V_plus_check_Z_Y` |
+| `Ising2D.TVPlus_checkPsiDag_checkPsi` | `T_{(V^{(+)})}(ψ̌_μ^†) = e^{+γ(θ̃_μ)}ψ̌_μ^†`、`T_{(V^{(+)})}(ψ̌_μ) = e^{-γ(θ̃_μ)}ψ̌_μ`（仮定なし） | `commutation_V_plus_check_psi` |
 | `Ising2D.VPlus_eq_smul_checkVprime_of_dual` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論の完全な無条件版**。仮定は双対関係だけ） | `V_plus_eq_c_check_Vprime` |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
@@ -95,6 +98,7 @@
 | `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
 | `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
 | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
+| `commutation_V_plus_check_psi` | `Ising2D.rowApply_checkPsi_row` ほか（`ClaimCommutationVPlusCheckPsi.lean`） | 置かない。結合律 `rowMul_rowMul` と Step 1 の `rowApply_rowMul` は具体版の時点で任意の `ℂ` 加群について述べてあり、Step 2 の残りは具体的な `P̌_μ`・`Ď_μ` による対角化の代入だけで、抽象度を上げて取り除ける構造が無い |
 
 必要十分版から得られた知見（本文には持ち込まない）:
 
@@ -142,8 +146,8 @@
 
 | 当初の仮定 | 出所 | 解消した定理 |
 | --- | --- | --- |
-| `hga : ∀ μ ∈ 𝓜̌, γ_2(θ̃_μ) ≠ 0` | 015 章 `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero_of_checkIndex` |
-| `hlamPlus` / `hlamMinus : γ_1(θ̃_μ) ± r_μ = e^{±γ(θ̃_μ)}` | 015 章 `lambda_eq_exp_gamma_theta_tilde` | `gamma1_add_checkR_eq_exp` / `gamma1_sub_checkR_eq_exp` |
+| `hga : ∀ μ ∈ 𝓜̌, γ_2(θ̃_μ) ≠ 0`（`checkPsi_car`・`TCheckVprime_checkPsiDag`・`TCheckVprime_checkPsi` が取る） | 015 章 `gamma_2_theta_tilde_nonzero` | `gamma2_thetaTilde_ne_zero_of_checkIndex` |
+| `hlamPlus` / `hlamMinus : λ_{±,μ} = e^{±γ(θ̃_μ)}` | 015 章 `lambda_eq_exp_gamma_theta_tilde` | `lambdaPlusR_eq_exp_gammaTildeC` / `lambdaMinusR_eq_exp_gammaTildeC` |
 | `g : ℤ → ℂ`（重み `γ(θ̃_μ)`）と `hgconj : γ(θ̃_{M+1-μ}) = γ(θ̃_μ)` | `def_gamma_theta` の `θ = θ̃_μ` での値 | `gammaTildeC` / `gammaTildeC_conj` |
 | `hT : ∀ j, ActsBy T_{V^{(+)}} (Ž_μ) (Y̌_μ) (A(θ̃_μ))` | 014 章 `T_V_plus_check_Z_Y` | `TVPlus_actsBy_checkZY` |
 
