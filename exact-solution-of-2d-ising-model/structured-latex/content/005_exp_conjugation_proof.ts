@@ -508,8 +508,10 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \langle A,B+C\rangle
+&= \sum_{i,j}\overline{a_{ij}}\,(B+C)_{ij}
+   \quad (\because \text{(0)}) \\
 &= \sum_{i,j}\overline{a_{ij}}\left(b_{ij}+c_{ij}\right)
-   \quad (\because \text{(0) と行列の和の定義}) \\
+   \quad (\because \blkref{def_matrix_sum}) \\
 &= \sum_{i,j}\left(\overline{a_{ij}}b_{ij}+\overline{a_{ij}}c_{ij}\right)
    \quad (\because \mathbb{C} \text{ の分配律}) \\
 &= \sum_{i,j}\overline{a_{ij}}b_{ij}+\sum_{i,j}\overline{a_{ij}}c_{ij}
@@ -521,8 +523,10 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \langle A,\lambda B\rangle
+&= \sum_{i,j}\overline{a_{ij}}\,(\lambda B)_{ij}
+   \quad (\because \text{(0)}) \\
 &= \sum_{i,j}\overline{a_{ij}}\left(\lambda b_{ij}\right)
-   \quad (\because \text{(0) とスカラー倍の定義}) \\
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
 &= \sum_{i,j}\lambda\left(\overline{a_{ij}}b_{ij}\right)
    \quad (\because \mathbb{C} \text{ の乗法の可換性と結合律}) \\
 &= \lambda\sum_{i,j}\overline{a_{ij}}b_{ij}
@@ -534,8 +538,10 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \langle A+B,C\rangle
+&= \sum_{i,j}\overline{(A+B)_{ij}}\;c_{ij}
+   \quad (\because \text{(0)}) \\
 &= \sum_{i,j}\overline{a_{ij}+b_{ij}}\;c_{ij}
-   \quad (\because \text{(0) と行列の和の定義}) \\
+   \quad (\because \blkref{def_matrix_sum}) \\
 &= \sum_{i,j}\left(\overline{a_{ij}}+\overline{b_{ij}}\right)c_{ij}
    \quad (\because \text{Step 0 の } \overline{z+w}=\overline{z}+\overline{w}) \\
 &= \sum_{i,j}\left(\overline{a_{ij}}c_{ij}+\overline{b_{ij}}c_{ij}\right)
@@ -549,8 +555,10 @@ export default defineBlocks([
       displayMath(
         String.raw`\begin{aligned}
 \langle \lambda A,B\rangle
+&= \sum_{i,j}\overline{(\lambda A)_{ij}}\;b_{ij}
+   \quad (\because \text{(0)}) \\
 &= \sum_{i,j}\overline{\lambda a_{ij}}\;b_{ij}
-   \quad (\because \text{(0) とスカラー倍の定義}) \\
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
 &= \sum_{i,j}\overline{\lambda}\,\overline{a_{ij}}\,b_{ij}
    \quad (\because \text{Step 0 の } \overline{zw}=\overline{z}\,\overline{w}) \\
 &= \overline{\lambda}\sum_{i,j}\overline{a_{ij}}\,b_{ij}

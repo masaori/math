@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の三十五個目を行った。`005_exp_conjugation_proof.ts` の `frobenius_inner_product_axioms` (2) の 4 本の鎖の 1 段目「(0) と行列の和の定義」「(0) とスカラー倍の定義」を、(0) の段と `def_matrix_sum`・`def_matrix_scalar_multiple` へのラベル参照の段の 2 段に割った（係数は `ℂ`）。SageMath `140_frobenius_inner_product_axioms/check_02_linearity_chains.sage`（`QQ[i]` の厳密計算、252 段）を足した。Lean の具体版はこのブロックに無い。次は `004_transfer_matrix.ts`。この VM では `140` の check_01 が `_shared/operators.sage` の読み込みパスを解決できずに落ちる（変更前から。ログは更新していない）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の三十四個目を行った。`003_exp_linear_map.ts` の名前だけの根拠「行列の差は成分ごと」5 か所のうち、係数が `ℂ` の 1 か所（`complex_exp_of_real_argument` の 1 行 1 列の複素行列の差の鎖）を `def_matrix_difference` へのラベル参照に替え、SageMath の検算に定義の成分の式の確認を足した。残る 4 か所は係数が `K` か `ℝ` で、`def_matrix_difference` が `ℂ` しか覆わないので替えていない（状態台帳の「次の一歩」に記録）。Lean の具体版はこのブロックに無い。次は `005_exp_conjugation_proof.ts`。
 
 2026-11-01: 全証明の SageMath 検算の連続実行として、`star_preserves_norm_and_limits`（共役転置の積・線型性・ノルム・極限）の検算 `sagemath/check/star_preserves_norm_and_limits/` を足した。証明が根拠にしていた「複素共役は和・積・差・絶対値を保つ」を主張 `complex_conjugate_of_sum`・`complex_conjugate_of_product`・`complex_conjugate_of_difference`・`abs_of_complex_conjugate` として足し（それぞれに同名の検算）、ℂ の差と有限和の定義 `def_complex_difference`・`def_finite_sum_of_complex_numbers` を足した。「同様」としていた線型性を成分の鎖に、(3) の線型性の引用を差の成分の鎖に直した（未検算 100 → 99 件、証明を持つブロック 235 → 239 件）。計算の誤りは無かった。次は `exp_hermitian_is_positive_definite`。

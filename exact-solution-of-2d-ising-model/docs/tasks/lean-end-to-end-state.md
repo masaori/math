@@ -510,6 +510,12 @@
     このブロックに Lean の具体版は無い（`complex_exp_of_real_argument`・`def_one_by_one_matrix` は形式化されていない）。
     SageMath `sagemath/check/complex_exp_of_real_argument/check_one_by_one_complex.sage` に、定義の成分の式と Sage の行列の差の一致の確認を足し、対応表の「本文に定義が無く」を定義を引く記述に直した。レビューの指摘は無かった。
 
+  - ゴールラインの確認の三十五個目（済み、2026-11-01）: 「名前だけの根拠をラベル参照に替える」のうち `005_exp_conjugation_proof.ts` の `frobenius_inner_product_axioms` (2) の 4 本の鎖を直した。
+    係数はどれも `ℂ`（`M(n;ℂ) = Mat(n,n,ℂ)`）なので、1 段目の根拠「(0) と行列の和の定義」「(0) とスカラー倍の定義」（2 つの根拠の束ね）を、(0) の段（`(B+C)_{ij}`・`(λB)_{ij}`・`(A+B)_{ij}`・`(λA)_{ij}` の形）と
+    `def_matrix_sum`・`def_matrix_scalar_multiple` へのラベル参照の段の 2 段に割った。このブロックに Lean の具体版は無い。
+    SageMath `sagemath/check/140_frobenius_inner_product_axioms/check_02_linearity_chains.sage`（`QQ[i]` の厳密計算、4 本の鎖の全行、左辺は `tr(A^*B)` で計算、252 段と否定コントロール 11 件、全段 PASS）を足した。
+    レビューの必須の指摘は無く、任意の指摘（検算の (0) の段と定義の段が同じ式どうしの比較だったこと、否定コントロールが一度も実行されなくても通ること）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -517,7 +523,7 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
-  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。次は `005_exp_conjugation_proof.ts` の「行列の和の定義」「スカラー倍の定義」4 か所（`def_matrix_sum`・`def_matrix_scalar_multiple` を引く。係数が `ℂ` かを先に確かめる）。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。`005_exp_conjugation_proof.ts` は三十五個目で 4 か所とも替えた。次は `004_transfer_matrix.ts` の「行列の和とスカラー倍は成分ごと」3 か所と「数ベクトルの和とスカラー倍は成分ごと」2 か所（係数が `ℂ` か、数ベクトルの和・スカラー倍を定めるブロックが本文にあるかを先に確かめる）。
   `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
   `003_exp_linear_map.ts` の残り 4 か所（係数が `K` か `ℝ` の行列の差）も同じである。`def_matrix_difference`（と `def_zero_matrix`）を `K = ℝ` または `ℂ` について述べ直せば、この 5 か所を参照に替えられる。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
