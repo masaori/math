@@ -6,6 +6,7 @@
 // これ以外を受け付けない。存在しないラベルへの参照はコンパイル時に落ちる。
 
 export const ALL_LABELS = [
+  "claim_dual_space_is_complex_vector_space",
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_zero_map_is_linear_form",

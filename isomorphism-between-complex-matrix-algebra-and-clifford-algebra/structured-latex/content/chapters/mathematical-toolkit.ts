@@ -696,4 +696,234 @@ z_V(\lambda\cdot_V x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_dual_space_is_complex_vector_space",
+    kind: "claim",
+    title: { text: "双対空間は ℂ-線型空間である" },
+    labels: ["claim_dual_space_is_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        " をその双対空間（",
+        ref("def_dual_space"),
+        "）とする。このとき組 ",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        " は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`f,g,h`),
+        " を ",
+        math(String.raw`V^{*}`),
+        " の任意の元、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元、",
+        math(String.raw`x`),
+        " を ",
+        math(String.raw`V`),
+        " の任意の元とする。",
+        math(String.raw`V^{*}`),
+        " の元は ",
+        math(String.raw`V`),
+        " から ",
+        math(String.raw`\mathbb{C}`),
+        " への写像なので、",
+        math(String.raw`f(x)`),
+        " などの値は ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " を、",
+        math(String.raw`1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})=0_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`\mathbb{C}`),
+        " の元（",
+        math(String.raw`1_{\mathbb{C}}`),
+        " の加法の逆元）とする。",
+      ]),
+      paragraph([
+        "ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。どの条件も ",
+        math(String.raw`V^{*}`),
+        " の二つの元の等式であり、",
+        math(String.raw`V^{*}`),
+        " の元の等しさは、すべての ",
+        math(String.raw`x\in V`),
+        " での値の等しさである（",
+        ref("def_dual_space"),
+        "）。以下の各式変形は任意の ",
+        math(String.raw`x\in V`),
+        " について成り立つので、各条件は ",
+        math(String.raw`V^{*}`),
+        " の等式として成り立つ。",
+      ]),
+      paragraph(["加法の結合法則 ", math(String.raw`(f+_{V^{*}}g)+_{V^{*}}h=f+_{V^{*}}(g+_{V^{*}}h)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((f+_{V^{*}}g)+_{V^{*}}h\bigr)(x)
+&=s_{f+_{V^{*}}g,\,h}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=(f+_{V^{*}}g)(x)+_{\mathbb{C}}h(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=s_{f,g}(x)+_{\mathbb{C}}h(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=\bigl(f(x)+_{\mathbb{C}}g(x)\bigr)+_{\mathbb{C}}h(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=f(x)+_{\mathbb{C}}\bigl(g(x)+_{\mathbb{C}}h(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=f(x)+_{\mathbb{C}}s_{g,h}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=f(x)+_{\mathbb{C}}(g+_{V^{*}}h)(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=s_{f,\,g+_{V^{*}}h}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\bigl(f+_{V^{*}}(g+_{V^{*}}h)\bigr)(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則 ", math(String.raw`f+_{V^{*}}g=g+_{V^{*}}f`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(f+_{V^{*}}g)(x)
+&=s_{f,g}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=f(x)+_{\mathbb{C}}g(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=g(x)+_{\mathbb{C}}f(x)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=s_{g,f}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=(g+_{V^{*}}f)(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元 ", math(String.raw`f+_{V^{*}}0_{V^{*}}=f`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(f+_{V^{*}}0_{V^{*}})(x)
+&=s_{f,\,0_{V^{*}}}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=f(x)+_{\mathbb{C}}0_{V^{*}}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=f(x)+_{\mathbb{C}}z_V(x)
+&&\left(\because\ 0_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=f(x)+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ z_V\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right)\\
+&=f(x)
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元は、",
+        math(String.raw`f`),
+        " に対して ",
+        math(String.raw`f':=(-1_{\mathbb{C}})\cdot_{V^{*}}f\in V^{*}`),
+        " と置けば ",
+        math(String.raw`f+_{V^{*}}f'=0_{V^{*}}`),
+        " を満たす。これは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(f+_{V^{*}}f')(x)
+&=s_{f,f'}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=f(x)+_{\mathbb{C}}f'(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=f(x)+_{\mathbb{C}}m_{-1_{\mathbb{C}},f}(x)
+&&\left(\because\ f'\ \text{と}\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=f(x)+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定め方}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の任意の元と}\ 0_{\mathbb{C}}\ \text{の積は}\ 0_{\mathbb{C}}\right)\\
+&=z_V(x)
+&&\left(\because\ z_V\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right)\\
+&=0_{V^{*}}(x)
+&&\left(\because\ 0_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則 ", math(String.raw`(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V^{*}}f=\lambda\cdot_{V^{*}}(\mu\cdot_{V^{*}}f)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V^{*}}f\bigr)(x)
+&=m_{\lambda\cdot_{\mathbb{C}}\mu,\,f}(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(\mu\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}m_{\mu,f}(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{V^{*}}f)(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=m_{\lambda,\,\mu\cdot_{V^{*}}f}(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{V^{*}}(\mu\cdot_{V^{*}}f)\bigr)(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元 ", math(String.raw`1_{\mathbb{C}}\cdot_{V^{*}}f=f`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(1_{\mathbb{C}}\cdot_{V^{*}}f)(x)
+&=m_{1_{\mathbb{C}},f}(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=f(x)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則 ", math(String.raw`\lambda\cdot_{V^{*}}(f+_{V^{*}}g)=\lambda\cdot_{V^{*}}f+_{V^{*}}\lambda\cdot_{V^{*}}g`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\lambda\cdot_{V^{*}}(f+_{V^{*}}g)\bigr)(x)
+&=m_{\lambda,\,f+_{V^{*}}g}(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(f+_{V^{*}}g)(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\lambda\cdot_{\mathbb{C}}s_{f,g}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(f(x)+_{\mathbb{C}}g(x)\bigr)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}g(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=m_{\lambda,f}(x)+_{\mathbb{C}}m_{\lambda,g}(x)
+&&\left(\because\ m\ \text{の定義を二か所に適用。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=(\lambda\cdot_{V^{*}}f)(x)+_{\mathbb{C}}(\lambda\cdot_{V^{*}}g)(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義を二か所に適用。}\blkref{def_dual_space}\right)\\
+&=s_{\lambda\cdot_{V^{*}}f,\,\lambda\cdot_{V^{*}}g}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{V^{*}}f+_{V^{*}}\lambda\cdot_{V^{*}}g\bigr)(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則 ", math(String.raw`(\lambda+_{\mathbb{C}}\mu)\cdot_{V^{*}}f=\lambda\cdot_{V^{*}}f+_{V^{*}}\mu\cdot_{V^{*}}f`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((\lambda+_{\mathbb{C}}\mu)\cdot_{V^{*}}f\bigr)(x)
+&=m_{\lambda+_{\mathbb{C}}\mu,\,f}(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}\bigl(\mu\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=m_{\lambda,f}(x)+_{\mathbb{C}}m_{\mu,f}(x)
+&&\left(\because\ m\ \text{の定義を二か所に適用。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=(\lambda\cdot_{V^{*}}f)(x)+_{\mathbb{C}}(\mu\cdot_{V^{*}}f)(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義を二か所に適用。}\blkref{def_dual_space}\right)\\
+&=s_{\lambda\cdot_{V^{*}}f,\,\mu\cdot_{V^{*}}f}(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=\bigl(\lambda\cdot_{V^{*}}f+_{V^{*}}\mu\cdot_{V^{*}}f\bigr)(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件が満たされたので、組 ",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
