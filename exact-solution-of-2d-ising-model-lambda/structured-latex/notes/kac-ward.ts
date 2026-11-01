@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_tagged_matching_term_degree_archived",
+    targets: ["claim_tagged_matching_short_pair_count"],
+    title: { text: "参照用: 標識付き完全マッチング項の次数" },
+    body: [
+      paragraph(["旧主張。非零の標識付き完全マッチング項 ", math(String.raw`M_{D,T}(x)`), " は、非零の ", math(String.raw`c_{D,T}\in\overline{\mathbb Q}`), " を用いて次の単項式で書ける。"]),
+      displayMath(String.raw`M_{D,T}(x)=c_{D,T}x^{|P(D,T)|},\qquad\deg M_{D,T}=|P(D,T)|.`),
+      paragraph(["旧証明では、短い標識の対ごとの寄与 ", math(String.raw`xC(q_p)`), " から ", math(String.raw`x^{|T|}`), " を取り出し、長い対の定数寄与とともに係数へまとめる。短い対と補辺の個数の等号（", ref("claim_tagged_matching_short_pair_count"), "）により指数を ", math(String.raw`|P(D,T)|`), " に替える。項の非零性から係数は非零なので次数も一致する。"]),
+      paragraph(["後続の本文はこの次数を引用しない。閉路ごとの項の重みは短い対の個数と補辺の対応を直接使うため、この主張を参照用へ退避した。有限検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_reversal_matrix_square_archived",
     targets: ["def_reversal_matrix"],
     title: { text: "参照用: 反転置換行列の二乗" },
