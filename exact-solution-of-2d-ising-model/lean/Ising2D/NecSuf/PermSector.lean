@@ -28,10 +28,10 @@
    `(ε x)_k = x_{π(k)}` という成分表示ただ 1 つである。
 2. **`W` の成分が非負であること。** 人手証明は `W_has_positive_entries`（**正**）を引くが、
    三角不等式 `|Σ x_k x_l W_{kl}| ≤ Σ |x_k||x_l|W_{kl}` に必要なのは `0 ≤ W_{kl}` だけで、
-   **狭義の正値性は使っていない**（本ファイルの `quad_absVec_ge` の仮定は `0 ≤ W i j`）。
+   **狭義の正値性は使っていない**（`Ising2D/NecSuf/PermMatrix.lean` の `quad_le_quad_absVec` の仮定は `0 ≤ W k l`）。
    `W` が転送行列であることも、指数関数で書けることも効いていない。
 3. **`W` が実対称半正定値であること。** これは `c_±(M)` が上に有界であること
-   （章 011 の `sectorSet_bddAbove`）を出すためだけに使う。
+   （退避先 `ClaimRayleighSupSectorDecomposition.lean` の `sectorSet_bddAbove`）を出すためだけに使う。
 
 逆に、**人手証明 `epsilon_is_sign_flip_permutation` (2) の「`π` は不動点をもたない」は
 `c_-(M) ≤ c_+(M)` には効いていない。** 不動点があってもよい。不動点をもたないことが
@@ -41,15 +41,27 @@
 `sectorSet_neg_nonempty`（不動点をもたない点だけを使う）に分けて明示した。
 
 また、Perron–Frobenius 系の定理・スペクトル定理・行列の対角化可能性は一切使っていない
-（章 011 と同じ方針）。使うのは有限個の実数の和・積・絶対値と三角不等式、
+（本文の Rayleigh 上限 `rayleighSup` の議論と同じ方針）。使うのは有限個の実数の和・積・絶対値と三角不等式、
 および実数の上限（`sSup`）だけである。
 
-## 「必要十分版」がなぜ章 011 の定義の上に乗っているか
+## 「必要十分版」がなぜ本文と退避先の定義の上に乗っているか
 
-章 011 の Lean 形式化（`Ising2D.rayleighSup` / `sectorRayleighSup`）は、すでに
-**任意の実行列 `W : Matrix n n ℝ` と任意の実行列 `ε`** について述べられており、
-Ising 模型の構造を含んでいない。したがって本章の必要十分版は、その上に
+本ファイルが使う定義と主張は、次の 2 か所にある。
+
+* 本文の `Ising2D.rayleighSup`（`Ising2D/ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean`）。
+* 退避先 `Ising2D/RoutesNotAdopted/MinusSector/ClaimRayleighSupSectorDecomposition.lean` の、
+  (−) セクターの定義（符号つきの `𝓡_±`・`c_±(M)`。`sectorSet`・`sectorRayleighSup`）、
+  その補題（`sectorSet_bddAbove`・`sector_smul`）、退避した主張 `sector_decomposition_of_rayleigh_sup`
+  （`c(M) = max(c_+(M), c_-(M))`）。`rayleighSup` も、このファイルの import を通して届く。
+
+どれも**任意の実行列 `W : Matrix n n ℝ` と任意の実行列 `ε`** について述べられており、
+Ising 模型の構造を含んでいない。したがって本ファイルの必要十分版は、その上に
 「`ε` が対合の置換行列である」という仮定だけを追加した形になる。
+
+退避先の定義と主張は (−) セクターの経路そのものなので、本文や `Ising2D/NecSuf/` の別のファイルへは移さない。
+本ファイルは必要十分版の置き場の規約により `Ising2D/NecSuf/` に置き、必要十分版のうち本ファイルだけが退避先を import する。
+ライブラリの入口 `Ising2D.lean` を除けば、本ファイルを import するのは `Ising2D/RoutesNotAdopted/MinusSector/` のファイルだけで、
+本文の Lean は本ファイルに依存しない。
 -/
 import Ising2D.RoutesNotAdopted.MinusSector.ClaimRayleighSupSectorDecomposition
 import Ising2D.NecSuf.PermMatrix

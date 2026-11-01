@@ -343,19 +343,22 @@
     退避先 `ClaimH1H2ViaHatZHatY.lean` には `DefinitionHatZHatY` を直接 import させた。`check-no-sorry.sh` の対象 2 件を整数運動量の経路の区切りへ移し、`lean/README.md` の行に置き場を書いた。
     レビューの指摘 4 件（コメントの時制・記述の過不足、状態台帳の置き場の数え）を直し、指摘なしになった。
     import のグラフを辿ると、`RoutesNotAdopted/` を推移的に読み込む本文・必要十分版のファイルは `NecSuf/PermSector`（`MinusSector/ClaimRayleighSupSectorDecomposition` を直接 import）の 1 本だけである。
+  - ゴールラインの確認の十一個目（済み、2026-11-01）: 必要十分版 `NecSuf/PermSector.lean` から退避先 `MinusSector/ClaimRayleighSupSectorDecomposition` の import は外せないと判定し、残した。
+    退避先から届く名前は、(−) セクターの定義（符号つきの `𝓡_±`・`c_±(M)`。`sectorSet`・`sectorRayleighSup`）、その補題 `sectorSet_bddAbove`・`sector_smul`、
+    退避した主張 `sector_decomposition_of_rayleigh_sup`（`c(M) = max(c_+, c_-)`）と、本文の `rayleighSup` である。
+    `c_-(M)` を含む主張は本文の名前へ置き換えられない。`sector_smul` は (−) セクター固有の `sectorSet_nonempty_of_mem` だけが使う。`rayleighSup` は直接 import すれば足りる。
+    退避先へ `PermSector` を移す案は、runbook の「必要十分版は `Ising2D/NecSuf/` から動かさない」と、`lean/README.md` の (−) セクターの記録の一覧（`NecSuf/PermSector.lean` を含める）に反するので採らない。
+    整数運動量の経路の必要十分版（`NecSuf/DiscreteFourier.lean` など）が `NecSuf/` に残っているのと同じ扱いである。理由を `PermSector` の冒頭の「必要十分版がなぜ本文と退避先の定義の上に乗っているか」の節に書いた（レビューの指摘 4 件を直した）。
+    import のグラフでは、`RoutesNotAdopted/` 以外で `RoutesNotAdopted/` を推移的に読み込むファイルは `NecSuf/PermSector` だけで、それを import するのはライブラリの入口 `Ising2D.lean` を除けば `RoutesNotAdopted/MinusSector/` のファイルだけである。
+    本文（`NecSuf/` と `RoutesNotAdopted/` 以外）の Lean は、推移的にも退避先を読み込まない。
 
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
 
-- 必要十分版 `NecSuf/PermSector.lean` から退避先 `MinusSector/ClaimRayleighSupSectorDecomposition` の import を外せるかを確かめる。
-  外して `lake build` が落ちるなら、落ちた名前ごとに経路に依らない補題か、退避した主張そのものかを判定し、
-  前者なら使う側のファイルへ移し、後者なら必要十分版の側を退避先の記録へ移すか人手の Step どおりに直す。
-  外した後、`RoutesNotAdopted/` 以外のファイルが推移的にも `RoutesNotAdopted/` を読み込まないことを import のグラフで確かめる。
+- `checkPhase_conj`（`DiagonalizationAndExponentialForm/ClaimConjugateIndex.lean`、人手 `conjugate_index_of_check_Z_Y` (2)）は `2M` 乗根の周期 `ξ^{2M} = 1` で示している。人手 (2) は (1) `θ~_{M+1-μ} = 2π - θ~_μ`・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0` の 4 行である。人手どおりに直す。
 
 この後に残る確認:
-
-- `checkPhase_conj`（`DiagonalizationAndExponentialForm/ClaimConjugateIndex.lean`、人手 `conjugate_index_of_check_Z_Y` (2)）は `2M` 乗根の周期 `ξ^{2M} = 1` で示している。人手 (2) は (1) `θ~_{M+1-μ} = 2π - θ~_μ`・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0` の 4 行である。人手どおりに直す。
 
 - `extract_taylor_coefficient_of_check_Z_Y` の 4 式（`ReductionToATheta/ClaimExtractTaylor.lean`）は、`exp_X_Y_exp_-X` を逆に戻してから必要十分版 `NecSuf.exp_conj_two_dim_z/y` に委ねている。人手は `cosh_sinh_coefficient_conversion_for_check` の 4 式を偶数項・奇数項に分け、`cosh`・`sinh` のテイラー級数と突き合わせている。人手どおりに直す。
 - 章の結論 `TVPlus_checkZ_checkY`（`ReductionToATheta/ClaimTVPlusAction.lean`、人手 `T_V_plus_check_Z_Y`）は必要十分版 `NecSuf.actsBy_TV_sandwich` を直接使っている。人手の `calc_of_TxT_check_Z_Y` → 線型性 → もう一度 `calc_of_TxT_check_Z_Y` → `factorization_of_A_theta_general` の順どおりかを確かめる。

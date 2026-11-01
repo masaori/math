@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の十一個目を行った。必要十分版 `NecSuf/PermSector.lean` が退避先 `MinusSector/ClaimRayleighSupSectorDecomposition` から使う名前（符号つきの `c_±(M)`、その有界性、分解 `c(M) = max(c_+, c_-)`）は退避した主張そのものなので import は外せず、必要十分版は `NecSuf/` から動かさない規約により残した。理由を冒頭に書いた。本文の Lean は推移的にも退避先を読み込まない。次は `checkPhase_conj` を人手どおりに直す。
+
 2026-10-31: Lean の通しの証明のゴールラインの確認の十個目を行った。本文 `DefinitionH1H2V1V2.lean`（H_1, H_2, V_1, V_2 の定義）から整数運動量の経路の記録 `DefinitionHatZHatY` の import を外し、`Z`・`Y` の定義のファイルを直接 import した。整数運動量の `hat(Z), hat(Y)` を主張に持つ仮定つき版 `TV_hatZ_hatY_of_action`（と `'`）を数学的道具立て `DefinitionTgAndTV.lean` から退避先 `ClaimTVActionsOnHatZHatY.lean` へ、主張・証明を変えずに移した。間接 import に頼っていた 2 本に直接 import を足した。退避先を推移的に読み込む本文・必要十分版のファイルは `NecSuf/PermSector` の 1 本。次はその import。
 
 2026-10-31: Lean の通しの証明のゴールラインの確認の九つ目を行った。本文 `ReductionToATheta/DefinitionHalfIntegerModes.lean` から整数運動量の経路の記録 `ClaimH1H2ViaHatZHatY` の import を外した。そこから借りていた `expPhase_congr` は、人手に対応項目の無い合同形の補題 `checkZ_congr` などだけが使っていたので、それを使う人手 `conjugate_index_of_check_Z_Y` (3) を人手どおり「添字を `(1-μ)+M` と書き直して周期性を当てる」`calc` に直し、合同形の 3 補題を消した。間接 import に頼っていた 4 本に直接 import を足した。退避先を直接 import する本文・必要十分版のファイルは 2 本。次は `DefinitionH1H2V1V2.lean` の `DefinitionHatZHatY`。
