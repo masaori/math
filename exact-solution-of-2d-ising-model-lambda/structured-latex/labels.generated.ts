@@ -321,7 +321,6 @@ export const ALL_LABELS = [
   "claim_period_translates_of_iterated_staircase_disjoint",
   "claim_periodic_density_lower_set_eq_open_square_le_one",
   "claim_periodic_density_lower_set_subset_open_square_le_one",
-  "claim_periodic_lift_closure_is_simple_cycle",
   "claim_periodic_open_boundary_comparison_density_le_one",
   "claim_periodic_open_boundary_comparison_log_le_one",
   "claim_periodic_open_boundary_comparison_rational",

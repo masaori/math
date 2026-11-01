@@ -44,3 +44,4 @@ for p in sorted(Path("sagemath/check/perfect-matching-sign").glob("check_*.sage"
 ```
 
 2026-10-11 実行: 全26本が PASS。614,665等式、2,618条件確認、2,618経路確認、125集合等式。
+2026-11-01 再実行: `check_enumeration_route.sage` が PASS。四回の隣接交換について 2,618 経路を確認。

@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_periodic_lift_closure_simple_cycle_archived",
+    targets: ["def_periodic_lift_closure_cycle"],
+    title: { text: "参照用: 接続階段の周期並進による単純閉路" },
+    body: [
+      paragraph(["旧主張は、周期数 ", math(String.raw`c\ge1`), " で接続階段、移動後の周期持ち上げ、並進した接続階段の逆向き、元の周期持ち上げの逆向きを合成した有限列（", ref("def_periodic_lift_closure_cycle"), "）が、閉じた単位格子路であり、終点以外の頂点が二つずつ相異なるというものである。"]),
+      displayMath(String.raw`C^{\gamma,k_0,u,c}_0=C^{\gamma,k_0,u,c}_N=\widetilde P_{k_0}(\gamma),\qquad C^{\gamma,k_0,u,c}_0,\ldots,C^{\gamma,k_0,u,c}_{N-1}\text{ は二つずつ相異なる}.`),
+      paragraph(["閉性は四部分の境界で周期延長の等式を使い、各連続差の単位性は接続階段と二つの持ち上げの各一歩から得る。頂点の相異なりは、各部分内の相異なり、接続階段と二つの持ち上げとの交点の限定、接続階段と周期並進の分離、二つの持ち上げの横断幅による分離を、四部分の全ての組へ適用する。"]),
+      paragraph(["この閉包を使った周期数の差による回転数の取り出しは、順向きと逆向きの周期語が相殺するため成立しない。採用した一側閉包の証明は旧主張を引用せず、有限トーラス公式と Onsager 閉形式の到達点にも依存しないため退避した。周期並進ベクトルの定義は後続が使うので本文に残した。有限検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_cell_complex_one_cell_increment_archived",
     targets: ["def_cell_euler_number"],
     title: { text: "参照用: 一セル追加による Euler 数の増分" },
