@@ -441,4 +441,88 @@ s_{f,g}(\lambda\cdot_V x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_pointwise_scalar_multiple_of_linear_form",
+    kind: "claim",
+    title: { text: "線型形式の各点ごとのスカラー倍は線型形式である" },
+    labels: ["claim_pointwise_scalar_multiple_of_linear_form_is_linear_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`f:V\to\mathbb{C}`),
+        " を ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）、",
+        math(String.raw`\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の元とする。写像 ",
+        math(String.raw`m_{\mu,f}:V\to\mathbb{C}`),
+        " を次で定める。",
+      ]),
+      displayMath(String.raw`m_{\mu,f}(x):=\mu\cdot_{\mathbb{C}}f(x)\qquad(x\in V)`),
+      paragraph([
+        "このとき ",
+        math(String.raw`m_{\mu,f}`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y`),
+        " を ",
+        math(String.raw`V`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。線型形式の定義（",
+        ref("def_linear_form"),
+        "）の二つの条件を順に示す。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+m_{\mu,f}(x+_V y)
+&=\mu\cdot_{\mathbb{C}}f(x+_V y)
+&&\left(\because\ m_{\mu,f}\ \text{の定義}\right)\\
+&=\mu\cdot_{\mathbb{C}}\bigl(f(x)+_{\mathbb{C}}f(y)\bigr)
+&&\left(\because\ f\ \text{は加法を保つ。}\blkref{def_linear_form}\right)\\
+&=\bigl(\mu\cdot_{\mathbb{C}}f(x)\bigr)+_{\mathbb{C}}\bigl(\mu\cdot_{\mathbb{C}}f(y)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=m_{\mu,f}(x)+_{\mathbb{C}}m_{\mu,f}(y)
+&&\left(\because\ m_{\mu,f}\ \text{の定義を二か所に適用}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+m_{\mu,f}(\lambda\cdot_V x)
+&=\mu\cdot_{\mathbb{C}}f(\lambda\cdot_V x)
+&&\left(\because\ m_{\mu,f}\ \text{の定義}\right)\\
+&=\mu\cdot_{\mathbb{C}}\bigl(\lambda\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=(\mu\cdot_{\mathbb{C}}\lambda)\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}f(x)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の交換法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}\bigl(\mu\cdot_{\mathbb{C}}f(x)\bigr)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}m_{\mu,f}(x)
+&&\left(\because\ m_{\mu,f}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`m_{\mu,f}`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式である（",
+        ref("def_linear_form"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
