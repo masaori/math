@@ -1,5 +1,7 @@
 # 無ねじれモードの零条件
 
+本文から退避した主張の検算を保管する。
+
 **対象ラベル**: `claim_untwisted_mode_zero_condition`
 
 | 検査 | 内容 | 状態 |
@@ -11,3 +13,5 @@
 | `check.sage` | 全検査 | PASS（2026-10-28） |
 
 有理係数多項式と代数的数だけで計算し、実数への脱出はない。
+
+実行: `sage sagemath/archive/untwisted-mode-zero-condition/check.sage`

@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_untwisted_mode_zero_condition_archived",
+    targets: ["def_dispersion_polynomial"],
+    title: { text: "参照用: 無ねじれモードの零条件" },
+    body: [
+      paragraph(["旧主張。", ref("def_horizontal_twisted_modes"), " と ", ref("def_vertical_twisted_modes"), " により、", math(String.raw`1\in\mathcal U_0\cap\mathcal W_0`), " である。分散因子（", ref("def_dispersion_polynomial"), "）をこのモードで評価すると次が成り立つ。"]),
+      displayMath(String.raw`\Delta(q;1,1)=(1-2q-q^2)^2,\qquad \Delta(q;1,1)=0\Longleftrightarrow q^2+2q-1=0\quad(q\in\overline{\mathbb Q}).`),
+      paragraph(["旧証明は四項和の整理、平方への因数分解、代数的数の零積性からなる。有限検算と Lean 二版は保管した。"]),
+      paragraph(["到達点「分散因子の最小値は自己双対点で零になる」は、実現した分散式の最小値とその零条件を直接証明する。この旧主張を引用しないため本文から退避した。"]),
+    ],
+  },
+  {
     id: "note_arf_fourier_sign_projection_archived",
     targets: ["def_torus_quadratic_sign"],
     title: { text: "参照用: Arf 符号による四つの巻き付きセクターの射影" },

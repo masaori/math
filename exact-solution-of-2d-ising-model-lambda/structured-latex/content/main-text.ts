@@ -73474,10 +73474,13 @@ z^{2L}
                   paragraph([
                     math(String.raw`\overline{\mathbb Q}`),
                     " は体なので零因子がない。", math(String.raw`\xi^L-1\ne0`),
-                    " だから ", math(String.raw`\xi^L+1=0`),
-                    "、従って ", math(String.raw`\xi^L=-1`), " である。",
-                    "実数体・複素数体への脱出はない。",
+                    " である。従って",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+\xi^L+1&=0&&\bigl(\because\ (\xi^L-1)(\xi^L+1)=0,\ \xi^L-1\ne0,\ \overline{\mathbb Q}\text{ の零積性}\bigr)\\
+\xi^L&=-1&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr).
+\end{aligned}`),
+                  paragraph(["実数体・複素数体への脱出はない。"]),
                 ],
               },
             },
@@ -77395,72 +77398,6 @@ Z_L(q)&\le2M_L^{\mathrm{abs}}(q)
 &&\bigl(\because\ \blkref{claim_log_additive}\bigr)\\
 &=\log M_L^{\mathrm{abs}}(q)+\ell_2
 &&\bigl(\because\ \ell_2=\log2\text{ と }\Lambda\text{ の加法の交換律}\bigr).
-\end{aligned}`),
-                ],
-              },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_finite_fourier_claim_untwisted_mode_zero_condition",
-              focus: {
-                id: "finite_fourier_claim_untwisted_mode_zero_condition",
-                kind: "claim",
-                title: { text: "無ねじれモードの零条件は自己双対方程式である" },
-                labels: ["claim_untwisted_mode_zero_condition"],
-                habitat: "Qbar",
-                verification: ["sagemath/check/untwisted-mode-zero-condition"],
-                lean: [
-                  "Ising2DLambda.KacWard.untwistedMode_zero_condition",
-                  "Ising2DLambda.NecSuf.KacWard.untwistedMode_zero_condition",
-                  "Ising2DLambda.KacWard.untwistedMode_zero_condition_from_necSuf",
-                ],
-                statement: [
-                  paragraph([
-                    "辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), " と ",
-                    math(String.raw`q\in\overline{\mathbb Q}`), " を取る。無ねじれスピン構造 ",
-                    math(String.raw`(a,b)=(0,0)`), " のモード値を ", ref("def_dispersion_polynomial"), " により評価する。",
-                  ]),
-                  paragraph(["このとき無ねじれモードの零条件は次と同値である。"]),
-                  displayMath(String.raw`\Delta(q;1,1)=0\ \Longleftrightarrow\ q^2+2q-1=0.`),
-                  paragraph([
-                    "モード集合は ", ref("def_horizontal_twisted_modes"), " と ",
-                    ref("def_vertical_twisted_modes"), "、分散因子は ",
-                    ref("def_dispersion_polynomial"),
-                    " の評価値による。実数体・複素数体は使わない。",
-                  ]),
-                ],
-                proof: [
-                  displayMath(String.raw`\begin{aligned}
-1^L&=1&&\bigl(\because\ L\ge1\text{ と冪の定義}\bigr)\\
-&=(-1)^0&&\bigl(\because\ \overline{\mathbb Q}\text{ の零乗は }1\bigr).
-\end{aligned}`),
-                  paragraph([
-                    "従って ",
-                    math(String.raw`1\in\mathcal U_0`), "（", ref("def_horizontal_twisted_modes"),
-                    "）かつ ", math(String.raw`1\in\mathcal W_0`), "（", ref("def_vertical_twisted_modes"),
-                    "）である。分散因子をこのモードで評価すると",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-\Delta(q;1,1)
-&=(1+q^2)^2-q(1-q^2)(1+1+1+1)
-&&\bigl(\because\ \blkref{def_dispersion_polynomial}\bigr)\\
-&=(1+q^2)^2-4q(1-q^2)
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法}\bigr)\\
-&=(1-2q-q^2)^2
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の分配律}\bigr).
-\end{aligned}`),
-                  paragraph(["体 ", math(String.raw`\overline{\mathbb Q}`), " に零因子は無いので、平方が零であることは底が零であることと同値である。従って"]),
-                  displayMath(String.raw`\begin{aligned}
-\Delta(q;1,1)=0
-&\Longleftrightarrow (1-2q-q^2)^2=0
-&&\bigl(\because\ \text{上の等式}\bigr)\\
-&\Longleftrightarrow 1-2q-q^2=0
-&&\bigl(\because\ \overline{\mathbb Q}\text{ は整域}\bigr)\\
-&\Longleftrightarrow q^2+2q-1=0
-&&\bigl(\because\ \overline{\mathbb Q}\text{ の加法逆元}\bigr).
 \end{aligned}`),
                 ],
               },
