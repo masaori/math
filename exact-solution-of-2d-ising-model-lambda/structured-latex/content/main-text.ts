@@ -1325,11 +1325,19 @@ N\lambda\le_{\Lambda}N\mu`),
                           math(String.raw`N`),
                           " についての帰納法で示す。",
                           math(String.raw`N=0`),
-                          " のときは、",
+                          " のときは、任意の素数 ", math(String.raw`p\in\mathbb N`), " について、",
                           ref("def_log_order_group"),
-                          " の整数倍の定義から各素数で ",
-                          math(String.raw`(0\lambda)(p)=0\cdot\lambda(p)=0`),
-                          " なので ",
+                          " の整数倍の定義から",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+(0\lambda)(p)
+&=0\cdot\lambda(p)
+&&\bigl(\because\ \blkref{def_log_order_group}\text{ の整数倍の定義}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb Z\text{ の零倍}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "なので ",
                           math(String.raw`0\lambda`),
                           " は零写像であり、その台は空である（",
                           ref("def_log_order_group"),
