@@ -70427,7 +70427,11 @@ d_{P(D,T)}(v)
 \vec f&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\blkref{claim_local_pairing_matching_construction}\bigr)\\
 &=\kappa(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の場合分け}\bigr).
 \end{aligned}`),
-                      paragraph(["仮定から ", math(String.raw`p(\vec f)\in P`), " と ", math(String.raw`\operatorname{src}(\vec f)=\operatorname{src}(\vec e)`), " が従う。" ]),
+                      displayMath(String.raw`\begin{aligned}
+p(\vec f)&=p(\kappa(\vec e))\in P&&\bigl(\because\ \vec f=\kappa(\vec e)\text{ と }\kappa(H(P))\subseteq H(P)\bigr)\\
+\operatorname{src}(\vec f)&=\operatorname{src}(\kappa(\vec e))&&\bigl(\because\ \vec f=\kappa(\vec e)\bigr)\\
+&=\operatorname{src}(\vec e)&&\bigl(\because\ \text{始点についての仮定}\bigr).
+\end{aligned}`),
                       paragraph(["もし ", math(String.raw`p(\vec e)\notin P`), " なら、"]),
                       displayMath(String.raw`\begin{aligned}
 \vec f&=\tau(\vec e)&&\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と }\blkref{claim_local_pairing_matching_construction}\bigr)\\

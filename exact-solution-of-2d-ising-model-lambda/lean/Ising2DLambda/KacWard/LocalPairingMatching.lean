@@ -1,5 +1,4 @@
 import Ising2DLambda.KacWard.TaggedMatchingEvenComplement
-import Ising2DLambda.NecSuf.KacWard.LocalPairingMatching
 import Ising2DLambda.NecSuf.KacWard.MatchingRecovery
 import Ising2DLambda.NecSuf.KacWard.TaggedMatchingLabelRecovery
 
@@ -18,12 +17,18 @@ noncomputable def localPairingMatching {L : ℕ} (P : Finset (Edge L))
     PerfectMatching (OrientedEdge L) := by
   classical
   let τ : FixedPointFreeInvolution (OrientedEdge L) :=
-    Ising2DLambda.NecSuf.KacWard.splicePairings
-      (fun h => h.1 ∈ P) κ reversal
-      hlocalSelected hlocalInvolutive hlocalNe
-      (by intro h hh; simpa [reversal] using hh)
-      (by intro h _; exact reversal_involutive h)
-      (by intro h _; exact reversal_ne h)
+    ⟨(fun h => if h.1 ∈ P then κ h else reversal h), by
+      constructor
+      · intro h
+        by_cases hh : h.1 ∈ P
+        · simpa [hh] using hlocalNe h hh
+        · simpa [hh] using reversal_ne h
+      · intro h
+        by_cases hh : h.1 ∈ P
+        · have hnext := hlocalSelected h hh
+          simp [hh, hnext, hlocalInvolutive h hh]
+        · have hnext : (reversal h).1 ∉ P := by simpa [reversal] using hh
+          simp [hh, hnext, reversal_involutive h]⟩
   exact involutionToPerfectMatching τ
 
 /-- The matching mate follows the selected local pair or the edge reversal. -/
@@ -37,22 +42,24 @@ theorem localPairingMatching_mate {L : ℕ} (P : Finset (Edge L))
       if h.1 ∈ P then κ h else reversal h := by
   classical
   unfold localPairingMatching
-  rw [show perfectMatchingMate
-      (involutionToPerfectMatching
-        (Ising2DLambda.NecSuf.KacWard.splicePairings
-          (fun h => h.1 ∈ P) κ reversal hlocalSelected hlocalInvolutive hlocalNe
-          (by intro h hh; simpa [reversal] using hh)
-          (by intro h _; exact reversal_involutive h)
-          (by intro h _; exact reversal_ne h))) h =
-      (Ising2DLambda.NecSuf.KacWard.splicePairings
-        (fun h => h.1 ∈ P) κ reversal hlocalSelected hlocalInvolutive hlocalNe
-        (by intro h hh; simpa [reversal] using hh)
-        (by intro h _; exact reversal_involutive h)
-        (by intro h _; exact reversal_ne h)).val h from
-    congrArg (fun τ : FixedPointFreeInvolution (OrientedEdge L) => τ.val h)
-      (matching_involution_right_inverse _)]
-  simp only [Ising2DLambda.NecSuf.KacWard.splicePairings]
-  split_ifs <;> rfl
+  let τ : FixedPointFreeInvolution (OrientedEdge L) :=
+    ⟨(fun e => if e.1 ∈ P then κ e else reversal e), by
+      constructor
+      · intro e
+        by_cases he : e.1 ∈ P
+        · simpa [he] using hlocalNe e he
+        · simpa [he] using reversal_ne e
+      · intro e
+        by_cases he : e.1 ∈ P
+        · have hnext := hlocalSelected e he
+          simp [he, hnext, hlocalInvolutive e he]
+        · have hnext : (reversal e).1 ∉ P := by simpa [reversal] using he
+          simp [he, hnext, reversal_involutive e]⟩
+  change perfectMatchingMate (involutionToPerfectMatching τ) h = _
+  have hmate := congrArg (fun σ : FixedPointFreeInvolution (OrientedEdge L) => σ.val h)
+    (matching_involution_right_inverse τ)
+  change perfectMatchingMate (involutionToPerfectMatching τ) h = τ.val h at hmate
+  simpa [τ] using hmate
 
 /-- On each selected half-edge the constructed matching recovers the
     originally chosen local involution, including the two endpoints at L=1. -/
@@ -161,10 +168,15 @@ theorem localPairingMatching_pair_support_from_necSuf {L : ℕ}
       p.1 p.2 hp'.1.ne' hp'.2
     rw [localPairingMatching_mate] at h
     exact h.symm
-  exact Ising2DLambda.NecSuf.KacWard.splice_pair_support
-    (fun h => h.1 ∈ P) κ reversal orientedSource
-    hlocalSelected hlocalSource
-    (by intro h hh; simpa [reversal] using hh) p hmate
+  constructor
+  · intro hP
+    have hpair : p.2 = κ p.1 := by simpa [hP] using hmate
+    exact ⟨hpair, hpair ▸ hlocalSelected p.1 hP,
+      hpair ▸ hlocalSource p.1 hP⟩
+  · intro hP
+    have hpair : p.2 = reversal p.1 := by simpa [hP] using hmate
+    refine ⟨hpair, ?_⟩
+    simpa [hpair, reversal] using hP
 
 /-- A pair receives the short label exactly when its first oriented edge lies over P. -/
 noncomputable def localPairingMatchingShortPairs {L : ℕ} (P : Finset (Edge L))
