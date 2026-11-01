@@ -84,8 +84,8 @@
 | `Z_transpose` / `Z_conjTranspose` / `Y_transpose` / `Y_conjTranspose`（`ClaimPositiveDefinite.lean`） | `Z^⊤=Z`, `Y^⊤=-Y`, `Z^*=Z`, `Y^*=Y` | 同（原文には無い中間段階） |
 | `S1plus_isHermitian` / `S1plus_transpose` / `S2_isHermitian` / `S2_transpose` | `S_1^{(+)}, S_2` は実対称（人手の本文は `(+)` だけ。`S1_isHermitian` / `S1_transpose` は境界項の係数を `η` にした補助の一般形で、`S1plus_*` はその `η = -1`） | `iH_is_real_symmetric` |
 | `entries_real_of_isHermitian_of_transpose` | 「実対称」＝「エルミート＋転置不変」 | `def_hermitian_positive_definite` の最後の注意 |
-| `posDef_smul_of_pos` | 正定値の正実数倍は正定値 | `exp_hermitian_is_positive_definite` (3) |
-| `posDef_exp_of_isHermitian` | エルミートの `exp` は正定値 | 同 (1) |
+| `posDef_smul_of_pos` | 正定値の正実数倍は正定値 | `positive_real_multiple_preserves_positive_definite` |
+| `posDef_exp_of_isHermitian` | エルミートの `exp` は正定値 | `exp_hermitian_is_positive_definite` |
 | `Vmat` / `Vmat_posDef` / `trace_Vmat_pos` | `V` の定義・正定値性・`tr(V) > 0` | `V_is_positive_definite` |
 | `Uflip` / `UflipInv` / `Uflip_mul_inv` / `UflipInv_mul` | 符号反転共役 `U = EF` と可逆性 | `sign_flip_conjugation` Step 0 |
 | `Uflip_conj_sigmaX/Y/Z` | `U σ^a_k U^{-1}` の符号 | 同 Step 1 |

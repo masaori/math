@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-01: 証明を持つブロック 239 件のうち、SageMath の検算が無いもの 99 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-01: 証明を持つブロック 251 件のうち、SageMath の検算が無いもの 98 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -71,9 +71,17 @@
   人手証明を直した（共役が和・積を保つことを `frobenius_inner_product_axioms` の証明冒頭から引いていたのを独立の主張に、「未記載の展開」の `|z̄| = |z|` を主張に、「第 2 式も同様」の線型性を成分の 8 行の鎖に、(3) の「(1) の線型性」を `A_N^* − A^* = (A_N − A)^*` の成分の鎖に、(2)(3) で ℝ を使う理由を主張に）。
   ℂ の差と有限和を定めるブロックが本文に無かったので、定義 `def_complex_difference`（`z − w := z + (−w)`）と `def_finite_sum_of_complex_numbers`（左から順に足す有限和）を `000_calculation_formulae_00_09.ts` の `multiply_by_minus_one` の後に足し、`def_matrix_difference` と `mat_mult` から引いた。計算の誤りは無かった。
 
+- `exp_hermitian_is_positive_definite`（エルミート行列の exp は正定値）: 四つの主張を束ねていたブロックを 1 ブロック 1 主張に分け、`real_multiple_of_hermitian_is_hermitian`・`conjugate_bilinear_value_of_congruence`（`x^*(B^*(AB))y = (Bx)^*A(By)`）・
+  `congruence_preserves_positive_definite`（旧 (2)。仮定を「可逆」から左逆行列 `B'B = I` に）・`identity_matrix_is_positive_definite`・`positive_real_multiple_preserves_positive_definite`（旧 (3)）・`trace_of_positive_definite_is_positive`（旧 (4)）・
+  `exp_of_negative_is_left_inverse`・`exp_of_hermitian_is_hermitian`・`exp_hermitian_is_positive_definite`（旧 (1)。`exp(S) = T^*(IT)` を合同変換の主張に `A = I` で当てはめる）の 9 ブロックにした（`009_eigenvalues_of_V.ts`）。
+  補助に `real_inclusion_preserves_finite_sum`・`finite_sum_of_complex_zeros`（`000_calculation_formulae_00_09.ts`）、`complex_conjugate_of_real_inclusion`・`complex_conjugate_times_self`（`005_exp_conjugation_proof.ts`）を足し、
+  `def_hermitian_positive_definite` の「x を n×1 行列とみなす」「1×1 行列を ℂ と同一視する」を、新しい定義 `def_conjugate_bilinear_value`（`x^*Ay := Σ_kΣ_l conj(x_k) A_kl y_l`）と「`z ∈ ℝ_{>0}` は `z = r_C`（`r > 0`）の略記」に置き換えた。
+  13 個の主張それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/hermitian_forms_by_definition.sage`）。鎖は不定元で厳密に、exp の値は本文の部分和に尾の上界を半径として足した 256 ビットのボールで囲み、Sage の `ComplexBallField` の `exp` と比べた。
+  下流（`eigenvalue_problem_eigenvalues_of_V_plus.ts`・`thermodynamic_limit_row_limit_and_max_eigenvalue.ts`・ノート二つ）の「(1)〜(4)」の参照を新しいラベルにし、`B' := exp(-½S)` で左逆行列を与えた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`009_eigenvalues_of_V.ts` の `exp_hermitian_is_positive_definite`（`--list` の先頭）から、文書順に検算を足す。
+`011_max_eigenvalue.ts` の `psd_cauchy_schwarz`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -151,3 +159,7 @@
   次の `exp_hermitian_is_positive_definite` の証明は「積の共役転置を `n × 1` 行列 `x` へ適用」と、`x^*` を n 行 1 列の行列の共役転置として使う（`def_hermitian_positive_definite` の「`n×1` 行列とみなす」「`1×1` 行列を ℂ と同一視する」も同一視をしない規律に反する）。そのブロックの検算を足すときに、共役転置を `Mat(m,p,ℂ)` に広げるか、`x^*Ax := Σ conj(x_k) A_kl x_l` を定義して扱う。
   `frobenius_inner_product_axioms` の証明冒頭は、足した `complex_conjugate_of_sum`・`complex_conjugate_of_product` と同じ計算を証明の中で示し直しており、それらを引く形に縮められる。この単位では直さなかった。
   Lean の `ClaimPositiveDefinite.lean` は `star_preserves_norm_and_limits` の (2)(3) を形式化せず mathlib の `Matrix.exp_conjTranspose` を使っていて、書き直した人手証明（(1) の第 2 式、(3) の準備の鎖）と足した 4 つの主張・2 つの定義に対応する Lean は無い。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-01、`exp_hermitian_is_positive_definite` の検算で見つかった（下流の依存と Lean との対応の欠け）: `x^*Ax` を成分の和で定める `def_conjugate_bilinear_value` を足したが、`psd_cauchy_schwarz`・熱力学極限の二つのファイルは、
+  `x^*Ax`・`x^⊤Px` を行列の積として結合律で組み替えている。それらのブロックの検算を足すときに、`conjugate_bilinear_value_of_congruence` と同じ形の成分の鎖へ直す。
+  Lean の `ClaimPositiveDefinite.lean` の `posDef_exp_of_isHermitian` は mathlib の `Matrix.PosDef.conjTranspose_mul_self` で示していて、書き換えた人手証明（`exp(S) = T^*(IT)`、合同変換の主張の `A = I`）と一対一でない。
+  足した `congruence_preserves_positive_definite`・`identity_matrix_is_positive_definite`・`trace_of_positive_definite_is_positive`・`exp_of_negative_is_left_inverse`・`exp_of_hermitian_is_hermitian` と補助の 4 主張に対応する Lean の具体版は無い。Lean の連続実行の状態台帳へ渡す。

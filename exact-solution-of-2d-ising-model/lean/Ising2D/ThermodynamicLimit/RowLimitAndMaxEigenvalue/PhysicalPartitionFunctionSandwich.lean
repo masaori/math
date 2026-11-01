@@ -31,7 +31,7 @@
 | Step 1: 実係数の有限和 `½K_1D` も転置不変 | `halfK1D_transpose` |
 | Step 2: `B = exp(½K_1D)` は転置不変（実対称行列の指数関数は実対称） | `physicalV1halfC_transpose`、実行列で `physicalV1halfR_isSymm` |
 | Step 3 が使う (2) の仮定「`B` は可逆」（`exp(X)exp(-X) = I`。人手 Step 2 の「`B` はエルミートかつ正定値」は Lean では使わないので形式化しない） | `physicalV1halfC_isUnit`、実行列で `physicalV1halfR_isUnit` |
-| Step 2: `A := exp(S_2)` は正定値（`exp_hermitian_is_positive_definite` (1)） | `V2_posDef` の中 |
+| Step 2: `A := exp(S_2)` は正定値（`exp_hermitian_is_positive_definite`） | `V2_posDef` の中 |
 | Step 3: `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）と `(2s_2)^{M_col/2} > 0` | `V2_posDef`（下の注意） |
 | Step 2–3: `A` は転置不変なので `V_2^⊤ = V_2` | `V2_transpose`、実行列で `physicalV2R_isSymm` |
 | `V_2` の正定値性を実ベクトルで読む | `physicalV2R_posDef` |
@@ -40,9 +40,9 @@
 | `partition_function_sandwich` | `partition_function_sandwich_physical` |
 
 **`V_2` の正定値性の適用順についての注意。** 人手 Step 3 は `W = (2s_2)^{M_col/2}B^*AB` と変形し、
-`exp_hermitian_is_positive_definite` の (2)・(3) をこの順に `B^*AB`・`W` へ適用する。Lean では一般の定理
-`partition_function_sandwich` が `V_2` の正定値性を仮定に取るので、(1)・(3) を先に `A`・`V_2 = (2s_2)^{M_col/2}A`
-へ使い（`V2_posDef`）、(2) は `symTransfer_posDef`（合同変換）の中で使う。使う定理の組は同じで、適用の順序だけが違う。
+`congruence_preserves_positive_definite`・`positive_real_multiple_preserves_positive_definite` をこの順に `B^*AB`・`W` へ適用する。Lean では一般の定理
+`partition_function_sandwich` が `V_2` の正定値性を仮定に取るので、`exp_hermitian_is_positive_definite`・`positive_real_multiple_preserves_positive_definite` を先に `A`・`V_2 = (2s_2)^{M_col/2}A`
+へ使い（`V2_posDef`）、`congruence_preserves_positive_definite` は `symTransfer_posDef`（合同変換）の中で使う。使う定理の組は同じで、適用の順序だけが違う。
 
 ## 仮定について
 
@@ -132,9 +132,9 @@ theorem partitionFunction_eq_trace_real (K1 K2 : ℝ) {Nrow : ℕ} (hN : 1 ≤ N
 
 /-! ## `V_2` -/
 
-/-- **人手 Step 2–3 の `V_2` の部分**: `A := exp(iK_2^*H_2)` は正定値（`exp_hermitian_is_positive_definite` (1)）で、
+/-- **人手 Step 2–3 の `V_2` の部分**: `A := exp(iK_2^*H_2)` は正定値（`exp_hermitian_is_positive_definite`）で、
 `V_2 = (2s_2)^{M_col/2}A`（`V2_exponential_representation`）、`(2s_2)^{M_col/2} > 0` なので
-同 (3) より `V_2` は正定値（適用順についてはファイル冒頭の注意）。 -/
+`positive_real_multiple_preserves_positive_definite` より `V_2` は正定値（適用順についてはファイル冒頭の注意）。 -/
 theorem V2_posDef {K2 : ℝ} (hK2 : 0 < K2) : (V2 M K2).PosDef := by
   rw [V2_exponential_representation hK2, V2H2Form, matExp]
   refine posDef_smul_of_pos (posDef_exp_of_isHermitian (S2_isHermitian ?_)) ?_

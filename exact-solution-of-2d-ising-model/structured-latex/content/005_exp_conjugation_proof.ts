@@ -263,6 +263,104 @@ export default defineBlocks([
       ],
     },
   },
+
+  {
+    id: "exp_conjugation_claim_complex_conjugate_of_real_inclusion",
+    kind: "claim",
+    title: { text: "実数の包含の複素共役は自分自身" },
+    labels: ["complex_conjugate_of_real_inclusion"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\overline{r_{\mathbb{C}}} = r_{\mathbb{C}}`),
+        " が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である（",
+        math(String.raw`1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " はその ",
+        math(String.raw`r = 1, 0`),
+        " である）。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\overline{r_{\mathbb{C}}}
+&= \overline{(r,0)}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (r,-0)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (r,0)
+&&(\because\ \mathbb{R}\ \text{で}\ -0 = 0)\\
+&= r_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の証明が「1/k! ∈ ℝ なので共役を取っても変わらない」と書いていたのを、正定値性の主張を分けるときに独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "exp_conjugation_claim_complex_conjugate_times_self",
+    kind: "claim",
+    title: { text: "複素共役と自分自身の積は絶対値の二乗の包含" },
+    labels: ["complex_conjugate_times_self"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " について ",
+        math(String.raw`\overline{z}\,z = \bigl(|z|^2\bigr)_{\mathbb{C}}`),
+        " が成り立つ。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、絶対値は ",
+        ref("def_abs_arg"),
+        "、積は ",
+        ref("definition_of_cc"),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`z = (x,y)`),
+        "（",
+        math(String.raw`x,y \in \mathbb{R}`),
+        "）と書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{z}\,z
+&= (x,-y)\,(x,y)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \bigl(x x - (-y) y,\ x y + (-y) x\bigr)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= \bigl(x^2 + y^2,\ 0\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \bigl(|z|^2,\ 0\bigr)
+&&(\because\ \blkref{abs_basic_properties}\ (2))\\
+&= \bigl(|z|^2\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。identity_matrix_is_positive_definite の証明が「\\overline{z}z = |z|^2」を使うので、独立の主張にした。",
+      ],
+    },
+  },
   {
     id: "exp_conjugation_proof_003_definition_M_n_C_convergence",
     kind: "definition",

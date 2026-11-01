@@ -178,7 +178,7 @@ theorem matExp_isSymm {S : Matrix n n ℝ} (hS : S.IsSymm) :
 /-- 実対称行列の指数関数は正定値。
 
 人手証明 `W_is_real_symmetric_positive_definite` の Step 2 が引用している
-`exp_hermitian_is_positive_definite` (1) の実行列版。
+`exp_hermitian_is_positive_definite` の実行列版。
 `exp(S) = exp(S/2)exp(S/2)` と `exp(S/2)` の対称性・可逆性だけから従う。 -/
 theorem matExp_posDef {S : Matrix n n ℝ} (hS : S.IsSymm) (x : n → ℝ) (hx : x ≠ 0) :
     0 < x ⬝ᵥ NormedSpace.exp S *ᵥ x := by

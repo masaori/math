@@ -241,7 +241,7 @@ section PosDef
 
 variable {n : Type*} [Fintype n] [DecidableEq n]
 
-/-- **原文 (3)**: 正定値行列の正実数倍は正定値。 -/
+/-- **原文 `positive_real_multiple_preserves_positive_definite`**: 正定値行列の正実数倍は正定値。 -/
 theorem posDef_smul_of_pos {A : Matrix n n ℂ} (hA : A.PosDef) {r : ℝ} (hr : 0 < r) :
     (((r : ℂ)) • A).PosDef := by
   refine Matrix.PosDef.of_dotProduct_mulVec_pos ?_ ?_
@@ -255,10 +255,11 @@ theorem posDef_smul_of_pos {A : Matrix n n ℂ} (hA : A.PosDef) {r : ℝ} (hr : 
     rw [Matrix.smul_mulVec, dotProduct_smul, smul_eq_mul]
     exact mul_pos hr' hpos
 
-/-- **原文 (1)**: エルミート行列の `exp` はエルミートかつ正定値。
+/-- **原文 `exp_hermitian_is_positive_definite`**: エルミート行列の `exp` はエルミートかつ正定値。
 
-原文は `exp(S) = exp(S/2)^* exp(S/2)` と `w^*w = ‖w‖^2 > 0` で示す。
-ここも同じ経路（`exp(S/2)` の可逆性 → `A^* A` が正定値）を辿る。 -/
+原文は `T := exp(S/2)` について `exp(S) = T^*(IT)` と書き、`I` が正定値であること（`identity_matrix_is_positive_definite`）と
+`T' := exp(-S/2)` が `T'T = I` を満たすこと（`exp_of_negative_is_left_inverse`）から `congruence_preserves_positive_definite` で示す。
+ここでは `exp(S/2)` の可逆性 → `A^* A` が正定値（mathlib の `Matrix.PosDef.conjTranspose_mul_self`）で示しており、人手の段とは一対一でない。 -/
 theorem posDef_exp_of_isHermitian {S : Matrix n n ℂ} (hS : S.IsHermitian) :
     (NormedSpace.exp S).PosDef := by
   set X : Matrix n n ℂ := (1 / 2 : ℂ) • S with hX

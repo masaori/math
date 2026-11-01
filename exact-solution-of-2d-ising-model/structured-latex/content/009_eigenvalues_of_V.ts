@@ -437,6 +437,45 @@ Qv_j
   },
 
   {
+    id: "eigenvalues_of_V_definition_conjugate_bilinear_value",
+    kind: "definition",
+    title: { tex: String.raw`\text{数ベクトルと行列から作る数 } x^*Ay` },
+    labels: ["def_conjugate_bilinear_value"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x = (x_1,\dots,x_n),\ y = (y_1,\dots,y_n) \in \mathbb{C}^n`),
+        "、",
+        math(String.raw`A = (A_{kl}) \in \mathrm{Mat}(n,\mathbb{C})`),
+        " に対し、",
+      ]),
+      displayMath(String.raw`x^*Ay := \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,A_{kl}\,y_l \in \mathbb{C}`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\overline{\phantom{z}}`),
+        " は ",
+        ref("def_complex_conjugate"),
+        " の複素共役、積と和は ",
+        ref("definition_of_cc"),
+        " の積と ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " の有限和で、",
+        math(String.raw`\overline{x_k}\,A_{kl}\,y_l := \bigl(\overline{x_k}\,A_{kl}\bigr)\,y_l`),
+        " とする。",
+        math(String.raw`x^*Ay`),
+        " はこの式で定める一つの記号であり、数ベクトルの共役転置と行列の積を組み合わせたものとしては読まない。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。def_hermitian_positive_definite は x^*Ax を「x を n×1 行列とみなし、1×1 行列を ℂ と同一視する」ことで定めていた。同一視をしない規律に合わせ、同じ値を成分の和で定める記号として切り出した。",
+      ],
+    },
+  },
+
+  {
     id: "eigenvalues_of_V_011_definition_hermitian_positive_definite",
     kind: "definition",
     origin: { path: SRC, ordinal: 13 },
@@ -457,16 +496,30 @@ Qv_j
         " は ",
         ref("def_complex_conjugate"),
         " の複素共役）。",
-        math(String.raw`x = (x_1,\dots,x_n) \in \mathbb{C}^n`),
-        " を ",
-        math(String.raw`n\times 1`),
-        " 行列とみなすと ",
+        math(String.raw`x \in \mathbb{C}^n`),
+        " について ",
         math(String.raw`x^* A x \in \mathbb{C}`),
+        " は ",
+        ref("def_conjugate_bilinear_value"),
+        " の ",
+        math(String.raw`y = x`),
+        " の値である。",
+        math(String.raw`z \in \mathbb{C}`),
+        " について「",
+        math(String.raw`z \in \mathbb{R}_{>0}`),
+        "」は、",
+        math(String.raw`z = r_{\mathbb{C}}`),
         "（",
-        math(String.raw`1\times 1`),
-        " 行列を ",
-        math(String.raw`\mathbb{C}`),
-        " と同一視する）である。",
+        ref("inclusion_rr_to_cc"),
+        " の略記）を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " が存在することの略記とする。",
+        math(String.raw`\mathbb{C}^n`),
+        " の ",
+        math(String.raw`0`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零ベクトルである。",
       ]),
       paragraph([
         math(String.raw`A`),
@@ -686,250 +739,958 @@ Qv_j
   },
 
   {
-    id: "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+    id: "eigenvalues_of_V_claim_real_multiple_of_hermitian_is_hermitian",
     kind: "claim",
-    origin: { path: SRC, ordinal: 15 },
-    title: { tex: String.raw`\text{エルミート行列の } \exp \text{ は正定値}` },
-    labels: ["exp_hermitian_is_positive_definite"],
+    title: { text: "エルミート行列の実数倍はエルミート" },
+    labels: ["real_multiple_of_hermitian_is_hermitian"],
     statement: [
-      paragraph(["指数は ", ref("def_exp"), "、指数の積と零での値は ", ref("theorem_exp_product"), " と ", ref("theorem_exp_zero"), "、共役転置と正定値性は ", ref("def_hermitian_positive_definite"), "、行列積は ", ref("mat_mult"), " による。成分の共役と積は ", ref("def_complex_conjugate"), "、", ref("frobenius_inner_product_axioms"), " の証明冒頭、", ref("complex_numbers_form_a_field"), "、絶対値の零との同値は ", ref("abs_basic_properties"), "、ノルムは ", ref("def_matrix_norm"), "、実数の包含は ", ref("inclusion_rr_to_cc"), "、トレースは ", ref("def_trace"), " を用いる。"]),
+      paragraph(["共役転置とエルミート性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), "、", math(String.raw`\alpha_{\mathbb{C}}`), " は ", ref("inclusion_rr_to_cc"), " の略記による。"]),
       paragraph([
         math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
-        " とする。",
+        "、",
+        math(String.raw`\alpha \in \mathbb{R}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`A^* = A`),
+        " を満たすとき、",
       ]),
-      list([
-        [
-          math(String.raw`\text{(1)}\quad S \in \mathrm{Mat}(n,\mathbb{C}) \text{ がエルミートなら } \exp(S) \text{ はエルミートかつ正定値}`),
-        ],
-        [
-          math(String.raw`\text{(2)}\quad A \text{ が正定値、} B \text{ が可逆なら } B^* A B \text{ は正定値}`),
-        ],
-        [
-          math(String.raw`\text{(3)}\quad A \text{ が正定値、} \alpha \in \mathbb{R}_{>0} \text{ なら } \alpha A \text{ は正定値}`),
-        ],
-        [math(String.raw`\text{(4)}\quad A \text{ が正定値なら } \mathrm{tr}(A) \in \mathbb{R}_{>0}`)],
+      displayMath(String.raw`(\alpha_{\mathbb{C}}A)^* = \alpha_{\mathbb{C}}A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`k, l \in \{1,\dots,n\}`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+((\alpha_{\mathbb{C}}A)^*)_{kl}
+&= \overline{(\alpha_{\mathbb{C}}A)_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{\alpha_{\mathbb{C}}A_{lk}}
+&&(\because\ \blkref{def_matrix_scalar_multiple})\\
+&= \overline{\alpha_{\mathbb{C}}}\;\overline{A_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= \alpha_{\mathbb{C}}\,\overline{A_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion})\\
+&= \alpha_{\mathbb{C}}\,(A^*)_{kl}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \alpha_{\mathbb{C}}\,A_{kl}
+&&(\because\ A^* = A)\\
+&= (\alpha_{\mathbb{C}}A)_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple})
+\end{aligned}`),
+      paragraph(["すべての成分が等しいので ", math(String.raw`(\alpha_{\mathbb{C}}A)^* = \alpha_{\mathbb{C}}A`), " である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の (1) の証明の「S/2 もエルミート」と (3) のエルミート性の鎖を、正定値性の主張を分けるときに独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_conjugate_bilinear_value_of_congruence",
+    kind: "claim",
+    title: { tex: String.raw`x^*(B^*(AB))y = (Bx)^*A(By)` },
+    labels: ["conjugate_bilinear_value_of_congruence"],
+    statement: [
+      paragraph(["記号 ", math(String.raw`x^*Ay`), " は ", ref("def_conjugate_bilinear_value"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積と行列と数ベクトルの積は ", ref("mat_mult"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`x, y \in \mathbb{C}^n`),
+        " について",
+      ]),
+      displayMath(String.raw`x^*\bigl(B^*(AB)\bigr)y = (Bx)^*A(By)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "5 つの複素数の積は左から順に掛けたものとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^*\bigl(B^*(AB)\bigr)y
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\bigl(B^*(AB)\bigr)_{kl}\,y_l
+&&(\because\ \blkref{def_conjugate_bilinear_value})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\Bigl(\sum_{j=1}^{n} (B^*)_{kj}\,(AB)_{jl}\Bigr)\,y_l
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\Bigl(\sum_{j=1}^{n} \overline{B_{jk}}\,(AB)_{jl}\Bigr)\,y_l
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\Bigl(\sum_{j=1}^{n} \overline{B_{jk}}\,\Bigl(\sum_{m=1}^{n} A_{jm}B_{ml}\Bigr)\Bigr)\,y_l
+&&(\because\ \blkref{mat_mult}\ \text{を各項へ})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\sum_{j=1}^{n}\sum_{m=1}^{n} \Bigl(\overline{x_k}\,\Bigl(\overline{B_{jk}}\,\bigl(A_{jm}B_{ml}\bigr)\Bigr)\Bigr)\,y_l
+&&(\because\ \text{分配律を項の数だけ繰り返す。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n}\sum_{j=1}^{n}\sum_{m=1}^{n} \overline{x_k}\,\overline{B_{jk}}\,A_{jm}\,B_{ml}\,y_l
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n}\sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\overline{B_{jk}}\,A_{jm}\,B_{ml}\,y_l
+&&(\because\ \text{加法の結合律・交換律による有限和の順序の入れ替え。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n}\sum_{k=1}^{n}\sum_{l=1}^{n} \overline{B_{jk}}\,\overline{x_k}\,A_{jm}\,B_{ml}\,y_l
+&&(\because\ \text{積の可換律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n}\sum_{k=1}^{n}\sum_{l=1}^{n} \Bigl(\bigl(\overline{B_{jk}}\,\overline{x_k}\bigr)A_{jm}\Bigr)\bigl(B_{ml}\,y_l\bigr)
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n} \Bigl(\sum_{k=1}^{n}\overline{B_{jk}}\,\overline{x_k}\Bigr)\,A_{jm}\,\Bigl(\sum_{l=1}^{n}B_{ml}\,y_l\Bigr)
+&&(\because\ \text{分配律を項の数だけ繰り返す。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n} \Bigl(\sum_{k=1}^{n}\overline{B_{jk}\,x_k}\Bigr)\,A_{jm}\,\Bigl(\sum_{l=1}^{n}B_{ml}\,y_l\Bigr)
+&&(\because\ \blkref{complex_conjugate_of_product}\ \text{を各項へ})\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n} \overline{\sum_{k=1}^{n}B_{jk}\,x_k}\,A_{jm}\,\Bigl(\sum_{l=1}^{n}B_{ml}\,y_l\Bigr)
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{の}\ m = n)\\
+&= \sum_{j=1}^{n}\sum_{m=1}^{n} \overline{(Bx)_j}\,A_{jm}\,(By)_m
+&&(\because\ \blkref{mat_mult})\\
+&= (Bx)^*A(By)
+&&(\because\ \blkref{def_conjugate_bilinear_value})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の (1)(2) の証明は x^*(B^*AB)x = (Bx)^*A(Bx) を「積の共役転置を n×1 行列 x へ適用」で得ていた。共役転置は正方行列についてだけ定義されているので、def_conjugate_bilinear_value の成分の和から示す独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_congruence_preserves_positive_definite",
+    kind: "claim",
+    title: { tex: String.raw`\text{左逆行列をもつ } B \text{ による } B^*(AB) \text{ は正定値}` },
+    labels: ["congruence_preserves_positive_definite"],
+    statement: [
+      paragraph(["共役転置・エルミート性・正定値性は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B, B' \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とし、",
+        math(String.raw`A`),
+        " は正定値、",
+        math(String.raw`B'B = I`),
+        " とする。このとき ",
+        math(String.raw`B^*(AB)`),
+        " は正定値である。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) まずエルミート性。部分和を ",
-        math(String.raw`E_K := \sum_{k=0}^{K}\frac{1}{k!}S^k`),
-        " と置く。任意の ",
-        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        "準備として、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`B_{kl} = (a,b)`),
+        "（",
+        math(String.raw`a, b \in \mathbb{R}`),
+        "）と書くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+((B^*)^*)_{kl}
+&= \overline{(B^*)_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{\overline{B_{kl}}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{(a,-b)}
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (a,-(-b))
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (a,b)
+&&(\because\ \mathbb{R}\ \text{で}\ -(-b) = b)\\
+&= B_{kl}
+&&(\because\ B_{kl} = (a,b)\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`(B^*)^* = B`),
+        " である。また ",
+        math(String.raw`k \in \{1,\dots,n\}`),
         " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(S^k)^*
-&= (S^*)^k
-   \quad (\because \text{積の共役転置を } k \text{ 回繰り返す、}\blkref{star_preserves_norm_and_limits}) \\
-&= S^k
-   \quad (\because S \text{ はエルミート、すなわち } S^* = S)
-\end{aligned}`,
-      ),
-      paragraph(["したがって、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-E_K^*
-&= \Bigl(\textstyle\sum_{k=0}^{K}\frac{1}{k!}S^k\Bigr)^*
-   \quad (\because E_K \text{ の定義}) \\
-&= \textstyle\sum_{k=0}^{K}\overline{\left(\frac{1}{k!}\right)}\,(S^k)^*
-   \quad (\because \text{共役転置の線型性を和の各項へ適用、}\blkref{star_preserves_norm_and_limits}) \\
-&= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,(S^k)^*
-   \quad (\because 1/k! \in \mathbb{R} \text{ なので } \overline{1/k!} = 1/k!) \\
-&= \textstyle\sum_{k=0}^{K}\frac{1}{k!}\,S^k
-   \quad (\because \text{上で得た } (S^k)^* = S^k) \\
-&= E_K
-   \quad (\because E_K \text{ の定義})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+(B'0)_k
+&= \sum_{j=1}^{n} B'_{kj}\,0_j
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{j=1}^{n} B'_{kj}\,0_{\mathbb{C}}
+&&(\because\ \blkref{def_zero_matrix}\ \text{を各項へ})\\
+&= \sum_{j=1}^{n} 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero}\ \text{を各項へ})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{finite_sum_of_complex_zeros})\\
+&= 0_k
+&&(\because\ \blkref{def_zero_matrix})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`B'0 = 0`), " である。"]),
+      paragraph(["エルミート性。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(B^*(AB)\bigr)^*
+&= (AB)^*\,(B^*)^*
+&&(\because\ \blkref{star_preserves_norm_and_limits}\ (1)\ \text{の第 1 式})\\
+&= (B^*A^*)\,(B^*)^*
+&&(\because\ \blkref{star_preserves_norm_and_limits}\ (1)\ \text{の第 1 式})\\
+&= (B^*A)\,(B^*)^*
+&&(\because\ A\ \text{は正定値なのでエルミート、}A^* = A)\\
+&= (B^*A)\,B
+&&(\because\ \text{準備の}\ (B^*)^* = B)\\
+&= B^*(AB)
+&&(\because\ \blkref{mat_mult_associative})
+\end{aligned}`),
       paragraph([
-        ref("exp_converges"),
+        "正値性。",
+        math(String.raw`x \in \mathbb{C}^n \setminus \{0\}`),
+        " とする。",
+        math(String.raw`Bx = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x
+&= Ix
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= (B'B)\,x
+&&(\because\ B'B = I)\\
+&= B'(Bx)
+&&(\because\ \blkref{mat_mult_associative})\\
+&= B'0
+&&(\because\ Bx = 0\ \text{の仮定})\\
+&= 0
+&&(\because\ \text{準備の}\ B'0 = 0)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`x \ne 0`),
+        " に反する。よって ",
+        math(String.raw`Bx \ne 0`),
+        " であり、",
+        math(String.raw`A`),
+        " が正定値なので ",
+        math(String.raw`(Bx)^*A(Bx) = r_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " がある（",
+        ref("def_hermitian_positive_definite"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^*\bigl(B^*(AB)\bigr)x
+&= (Bx)^*A(Bx)
+&&(\because\ \blkref{conjugate_bilinear_value_of_congruence}\ \text{の}\ y = x)\\
+&= r_{\mathbb{C}}
+&&(\because\ r\ \text{の取り方})
+\end{aligned}`),
+      paragraph(["したがって ", math(String.raw`x^*\bigl(B^*(AB)\bigr)x \in \mathbb{R}_{>0}`), " であり、", math(String.raw`B^*(AB)`), " は正定値である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: exp_hermitian_is_positive_definite の (2)（A が正定値、B が可逆なら B^*AB は正定値）を、1 ブロック 1 主張に合わせて独立の主張にした。本文の可逆の定義は Mat(2^M, ℂ) についてのもの（def_invertible_elements_of_R）だけで、証明が使うのは Bx = 0 ⇒ x = 0 だけなので、仮定を左逆行列 B' の存在 B'B = I にした。(B^*)^* = B、B'0 = 0、x^*(B^*(AB))x = (Bx)^*A(Bx) を根拠付きで示した。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_identity_matrix_is_positive_definite",
+    kind: "claim",
+    title: { text: "単位行列は正定値" },
+    labels: ["identity_matrix_is_positive_definite"],
+    statement: [
+      paragraph(["共役転置・エルミート性・正定値性は ", ref("def_hermitian_positive_definite"), "、単位行列は ", ref("def_identity_matrix"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " について、",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " は正定値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "エルミート性。",
+        math(String.raw`i, j \in \{1,\dots,n\}`),
+        " について、",
+        ref("def_kronecker_delta"),
         " より ",
-        math(String.raw`E_K \to \exp(S)`),
-        " であり、",
-        ref("star_preserves_norm_and_limits"),
+        math(String.raw`\delta_{ij}`),
+        " は ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " か ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " なので ",
+        ref("complex_conjugate_of_real_inclusion"),
+        " より ",
+        math(String.raw`\overline{\delta_{ij}} = \delta_{ij}`),
+        "、また ",
+        math(String.raw`i = j \iff j = i`),
+        " なので ",
+        math(String.raw`\delta_{ij} = \delta_{ji}`),
+        " である。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(I^*)_{kl}
+&= \overline{I_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{\delta_{lk}}
+&&(\because\ \blkref{def_identity_matrix})\\
+&= \delta_{lk}
+&&(\because\ \overline{\delta_{lk}} = \delta_{lk})\\
+&= \delta_{kl}
+&&(\because\ \delta_{lk} = \delta_{kl})\\
+&= I_{kl}
+&&(\because\ \blkref{def_identity_matrix})
+\end{aligned}`),
+      paragraph([
+        "なので ",
+        math(String.raw`I^* = I`),
+        " である。正値性。",
+        math(String.raw`x = (x_1,\dots,x_n) \in \mathbb{C}^n \setminus \{0\}`),
+        " とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x^*Ix
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,I_{kl}\,x_l
+&&(\because\ \blkref{def_conjugate_bilinear_value})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\bigl(I_{kl}\,x_l\bigr)
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n} \overline{x_k}\,\Bigl(\sum_{l=1}^{n} I_{kl}\,x_l\Bigr)
+&&(\because\ \text{分配律を項の数だけ繰り返す。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n} \overline{x_k}\,(Ix)_k
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{k=1}^{n} \overline{x_k}\,x_k
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sum_{k=1}^{n} \bigl(|x_k|^2\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{complex_conjugate_times_self}\ \text{を各項へ})\\
+&= \Bigl(\sum_{k=1}^{n} |x_k|^2\Bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x \ne 0`),
+        " なので、",
+        ref("def_zero_matrix"),
+        " より ",
+        math(String.raw`x_{k_0} \ne 0_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`k_0 \in \{1,\dots,n\}`),
+        " がある。",
+        ref("abs_basic_properties"),
         " (3) より ",
-        math(String.raw`E_K^* \to \exp(S)^*`),
-        "。上の等式 ",
-        math(String.raw`E_K^* = E_K`),
-        " より、同じ点列 ",
-        math(String.raw`E_K`),
-        " が ",
-        math(String.raw`\exp(S)^*`),
-        " と ",
-        math(String.raw`\exp(S)`),
-        " の両方へ収束するから、",
-        ref("matrix_norm_triangle_inequality"),
-        " (4)（極限の一意性）より ",
-        math(String.raw`\exp(S)^* = \exp(S)`),
-        "。",
-      ]),
-      paragraph([
-        "次に正定値性。",
-        math(String.raw`S/2`),
-        " もエルミートなので、いま示したことから ",
-        math(String.raw`\exp(S/2)^* = \exp(S/2)`),
-        "。また ",
-        math(String.raw`S/2`),
-        " は自分自身と可換なので",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(S/2)\exp(S/2)
-&= \exp(S/2 + S/2)
-   \quad (\because \text{可換な行列の指数の積、}\blkref{theorem_exp_product}) \\
-&= \exp(S)
-   \quad (\because S/2 + S/2 = S)
-\end{aligned}`,
-      ),
-      paragraph(["さらに、"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(S/2)\exp(-S/2)
-&= \exp\bigl(S/2 + (-S/2)\bigr)
-   \quad (\because \text{可換な行列の指数の積}) \\
-&= \exp(0)
-   \quad (\because S/2 + (-S/2) = 0) \\
-&= I
-   \quad (\because \text{零行列の指数、}\blkref{theorem_exp_zero})
-\end{aligned}`,
-      ),
-      paragraph([
-        "従って、",
-        math(String.raw`\exp(S/2)`),
-        " は可逆である。よって ",
-        math(String.raw`x \in \mathbb{C}^n\setminus\{0\}`),
-        " に対し ",
-        math(String.raw`w := \exp(S/2)x \neq 0`),
+        math(String.raw`|x_{k_0}| \ne 0`),
         " であり、",
+        math(String.raw`|x_k| \in \mathbb{R}_{\ge 0}`),
+        "（",
+        ref("def_abs_arg"),
+        "）なので",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^*\exp(S)x
-&= x^*\bigl(\exp(S/2)\exp(S/2)\bigr)x
-   \quad (\because \text{上で得た } \exp(S/2)\exp(S/2) = \exp(S)) \\
-&= x^*\exp(S/2)^*\exp(S/2)x
-   \quad (\because \text{上で示した } \exp(S/2)^* = \exp(S/2)) \\
-&= \left(\exp(S/2)x\right)^*\left(\exp(S/2)x\right)
-   \quad (\because \text{積の共役転置を } n \times 1 \text{ 行列 } x \text{ へ適用、}\blkref{star_preserves_norm_and_limits}) \\
-&= w^* w
-   \quad (\because w \text{ の定義}) \\
-&= \textstyle\sum_{k=1}^{n}\overline{w_k}\,w_k
-   \quad (\because \text{行列積の定義（} 1 \times 1 \text{ 成分）}) \\
-&= \textstyle\sum_{k=1}^{n}|w_k|^2
-   \quad (\because \overline{z}\,z = |z|^2) \\
-&= \|w\|^2
-   \quad (\because \text{ベクトルノルムの定義})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n} |x_k|^2
+&\ge |x_{k_0}|^2
+&&(\because\ k \ne k_0\ \text{の項は実数の二乗で}\ \ge 0)\\
+&> 0
+&&(\because\ \text{非零の実数の二乗は正})
+\end{aligned}`),
+      paragraph(["である。したがって ", math(String.raw`x^*Ix \in \mathbb{R}_{>0}`), " であり、", math(String.raw`I`), " は正定値である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の (1) の証明は w^*w = ‖w‖^2 > 0 を直接計算していた。正定値性の主張を分けるときに、exp(S) = T^*(IT) と書いて congruence_preserves_positive_definite を A = I に当てはめる形にしたので、I が正定値であることを独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_positive_real_multiple_preserves_positive_definite",
+    kind: "claim",
+    title: { text: "正定値行列の正の実数倍は正定値" },
+    labels: ["positive_real_multiple_preserves_positive_definite"],
+    statement: [
+      paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), "、", math(String.raw`\alpha_{\mathbb{C}}`), " は ", ref("inclusion_rr_to_cc"), " の略記による。"]),
       paragraph([
-        math(String.raw`w \neq 0`),
-        " なのでどれかの ",
-        math(String.raw`w_k \neq 0`),
-        " であり、非負項の和が正の項を含むから ",
-        math(String.raw`\|w\|^2 > 0`),
-        "。よって ",
-        math(String.raw`x^*\exp(S)x > 0`),
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が正定値、",
+        math(String.raw`\alpha \in \mathbb{R}_{>0}`),
+        " のとき、",
+        math(String.raw`\alpha_{\mathbb{C}}A`),
+        " は正定値である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "エルミート性。",
+        math(String.raw`A`),
+        " は正定値なのでエルミートであり、",
+        ref("real_multiple_of_hermitian_is_hermitian"),
+        " より ",
+        math(String.raw`(\alpha_{\mathbb{C}}A)^* = \alpha_{\mathbb{C}}A`),
         " である。",
       ]),
       paragraph([
-        "(2) 共役転置について",
+        "正値性。",
+        math(String.raw`x \in \mathbb{C}^n \setminus \{0\}`),
+        " とする。",
+        math(String.raw`A`),
+        " が正定値なので ",
+        math(String.raw`x^*Ax = r_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " がある。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(B^*AB)^*
-&= B^*A^*B^{**}
-   \quad (\because \text{積の共役転置、}\blkref{star_preserves_norm_and_limits}) \\
-&= B^*A^*B
-   \quad (\because B^{**}=B) \\
-&= B^*AB
-   \quad (\because A^*=A)
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+x^*(\alpha_{\mathbb{C}}A)x
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,(\alpha_{\mathbb{C}}A)_{kl}\,x_l
+&&(\because\ \blkref{def_conjugate_bilinear_value})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,\bigl(\alpha_{\mathbb{C}}A_{kl}\bigr)\,x_l
+&&(\because\ \blkref{def_matrix_scalar_multiple}\ \text{を各項へ})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(\bigl(\overline{x_k}\,\alpha_{\mathbb{C}}\bigr)A_{kl}\bigr)\,x_l
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(\bigl(\alpha_{\mathbb{C}}\,\overline{x_k}\bigr)A_{kl}\bigr)\,x_l
+&&(\because\ \text{積の可換律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \bigl(\alpha_{\mathbb{C}}\bigl(\overline{x_k}\,A_{kl}\bigr)\bigr)\,x_l
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{k=1}^{n}\sum_{l=1}^{n} \alpha_{\mathbb{C}}\,\bigl(\overline{x_k}\,A_{kl}\,x_l\bigr)
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \alpha_{\mathbb{C}}\sum_{k=1}^{n}\sum_{l=1}^{n} \overline{x_k}\,A_{kl}\,x_l
+&&(\because\ \text{分配律を項の数だけ繰り返す。}\blkref{complex_numbers_form_a_field})\\
+&= \alpha_{\mathbb{C}}\,\bigl(x^*Ax\bigr)
+&&(\because\ \blkref{def_conjugate_bilinear_value})\\
+&= \alpha_{\mathbb{C}}\,r_{\mathbb{C}}
+&&(\because\ r\ \text{の取り方})\\
+&= (\alpha,0)\,(r,0)
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (\alpha r - 0\cdot 0,\ \alpha\cdot 0 + 0\cdot r)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= (\alpha r,\ 0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= (\alpha r)_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
       paragraph([
-        "従って、エルミートである。",
-        math(String.raw`x \neq 0`),
-        " なら ",
-        math(String.raw`B`),
-        " が可逆なので ",
-        math(String.raw`Bx \neq 0`),
-        " であり、",
+        math(String.raw`\alpha, r \in \mathbb{R}_{>0}`),
+        " なので ",
+        math(String.raw`\alpha r \in \mathbb{R}_{>0}`),
+        "（正の実数の積は正）であり、",
+        math(String.raw`x^*(\alpha_{\mathbb{C}}A)x \in \mathbb{R}_{>0}`),
+        " である。よって ",
+        math(String.raw`\alpha_{\mathbb{C}}A`),
+        " は正定値である。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^*(B^*AB)x
-&= (Bx)^*A(Bx)
-   \quad (\because \text{積の共役転置、}\blkref{star_preserves_norm_and_limits}) \\
-&>0
-   \quad (\because A\ \text{は正定値かつ}\ Bx\ne0)
-\end{aligned}`,
-      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: exp_hermitian_is_positive_definite の (3) を、1 ブロック 1 主張に合わせて独立の主張にした。「共役転置の線型性」「スカラー倍と行列積の結合則」と書いていた行を、real_multiple_of_hermitian_is_hermitian と def_conjugate_bilinear_value の成分の和の鎖にした。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_trace_of_positive_definite_is_positive",
+    kind: "claim",
+    title: { text: "正定値行列のトレースは正" },
+    labels: ["trace_of_positive_definite_is_positive"],
+    statement: [
+      paragraph(["正定値性は ", ref("def_hermitian_positive_definite"), "、トレースは ", ref("def_trace"), " による。"]),
       paragraph([
-        "(3) ",
-        math(String.raw`\alpha\in\mathbb{R}_{>0}`),
-        " なので",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が正定値なら ",
+        math(String.raw`\mathrm{tr}(A) \in \mathbb{R}_{>0}`),
+        " である。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\alpha A)^*
-&= \overline{\alpha}A^*
-   \quad (\because \text{共役転置の線型性}) \\
-&= \alpha A^*
-   \quad (\because \alpha\in\mathbb{R}) \\
-&= \alpha A
-   \quad (\because A^*=A)
-\end{aligned}`,
-      ),
-      paragraph(["よりエルミートである。また ", math(String.raw`x\ne0`), " ならば"]),
-      displayMath(
-        String.raw`\begin{aligned}
-x^*(\alpha A)x
-&= \alpha(x^*Ax)
-   \quad (\because \text{スカラー倍と行列積の結合則}) \\
-&>0
-   \quad (\because \alpha>0\ \text{かつ}\ x^*Ax>0)
-\end{aligned}`,
-      ),
+    ],
+    proof: [
       paragraph([
-        "(4) ",
-        math(String.raw`e_k \in \mathbb{C}^n`),
-        " を第 ",
-        math(String.raw`k`),
-        " 標準基底ベクトルとする。",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`b^{(k)} \in \mathbb{C}^n`),
+        " を ",
+        math(String.raw`b^{(k)}_i := \delta_{ik}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "）で定める。",
+        math(String.raw`b^{(k)}_k = 1_{\mathbb{C}} = (1,0) \ne (0,0) = 0_{\mathbb{C}}`),
+        " なので ",
+        math(String.raw`b^{(k)} \ne 0`),
+        " である。また ",
+        math(String.raw`i, j \in \{1,\dots,n\}`),
+        " について、",
+        math(String.raw`\delta_{ij}`),
+        " は ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " か ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " なので ",
+        ref("complex_conjugate_of_real_inclusion"),
+        " より ",
+        math(String.raw`\overline{\delta_{ij}} = \delta_{ij}`),
+        "、",
+        math(String.raw`i = j \iff j = i`),
+        " なので ",
+        math(String.raw`\delta_{ij} = \delta_{ji}`),
+        " である。単位行列 ",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " は ",
+        ref("def_identity_matrix"),
+        " による。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-A_{kk}
-&= e_k^*Ae_k
-   \quad (\because \text{標準基底ベクトルによる対角成分の表示}) \\
-&>0
-   \quad (\because A\ \text{は正定値かつ}\ e_k\ne0)
-\end{aligned}`,
-      ),
-      paragraph(["したがって"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{tr}(A)
-&= \sum_{k=1}^{n}A_{kk}
-   \quad (\because \text{トレースの定義}) \\
-&>0
-   \quad (\because n\ge1\ \text{かつ各}\ A_{kk}>0)
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+b^{(k)*}Ab^{(k)}
+&= \sum_{i=1}^{n}\sum_{l=1}^{n} \overline{\delta_{ik}}\,A_{il}\,\delta_{lk}
+&&(\because\ \blkref{def_conjugate_bilinear_value}\ \text{と}\ b^{(k)}\ \text{の定義})\\
+&= \sum_{i=1}^{n}\sum_{l=1}^{n} \delta_{ik}\,A_{il}\,\delta_{lk}
+&&(\because\ \overline{\delta_{ik}} = \delta_{ik}\ \text{を各項へ})\\
+&= \sum_{i=1}^{n}\sum_{l=1}^{n} \delta_{ik}\,\bigl(A_{il}\,\delta_{lk}\bigr)
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{i=1}^{n} \delta_{ik}\,\Bigl(\sum_{l=1}^{n} A_{il}\,\delta_{lk}\Bigr)
+&&(\because\ \text{分配律を項の数だけ繰り返す。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{i=1}^{n} \delta_{ik}\,\Bigl(\sum_{l=1}^{n} A_{il}\,I_{lk}\Bigr)
+&&(\because\ \blkref{def_identity_matrix}\ \text{を各項へ})\\
+&= \sum_{i=1}^{n} \delta_{ik}\,(AI)_{ik}
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{i=1}^{n} \delta_{ik}\,A_{ik}
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= \sum_{i=1}^{n} \delta_{ki}\,A_{ik}
+&&(\because\ \delta_{ik} = \delta_{ki}\ \text{を各項へ})\\
+&= \sum_{i=1}^{n} I_{ki}\,A_{ik}
+&&(\because\ \blkref{def_identity_matrix}\ \text{を各項へ})\\
+&= (IA)_{kk}
+&&(\because\ \blkref{mat_mult})\\
+&= A_{kk}
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})
+\end{aligned}`),
       paragraph([
         math(String.raw`A`),
-        " はエルミートなので各 ",
-        math(String.raw`A_{kk}`),
-        " は実数であり、よって ",
-        math(String.raw`\mathrm{tr}(A)\in\mathbb{R}_{>0}`),
+        " が正定値で ",
+        math(String.raw`b^{(k)} \ne 0`),
+        " なので、",
+        math(String.raw`A_{kk} = b^{(k)*}Ab^{(k)} = (r_k)_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r_k \in \mathbb{R}_{>0}`),
+        " がある（",
+        ref("def_hermitian_positive_definite"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(A)
+&= \sum_{k=1}^{n} A_{kk}
+&&(\because\ \blkref{def_trace})\\
+&= \sum_{k=1}^{n} (r_k)_{\mathbb{C}}
+&&(\because\ r_k\ \text{の取り方を各項へ})\\
+&= \Bigl(\sum_{k=1}^{n} r_k\Bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum})
+\end{aligned}`),
+      paragraph([math(String.raw`n \ge 1`), " なので ", math(String.raw`r_1`), " があり、"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n} r_k
+&\ge r_1
+&&(\because\ k \ne 1\ \text{の項は}\ r_k > 0)\\
+&> 0
+&&(\because\ r_1 \in \mathbb{R}_{>0})
+\end{aligned}`),
+      paragraph(["であり、", math(String.raw`\mathrm{tr}(A) \in \mathbb{R}_{>0}`), " である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: exp_hermitian_is_positive_definite の (4) を、1 ブロック 1 主張に合わせて独立の主張にした。「標準基底ベクトルによる対角成分の表示」と書いていた行を、δ の性質と単位行列の左右の単位元への参照による成分の鎖にし、トレースが正の実数の包含であることを real_inclusion_preserves_finite_sum から示した。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_exp_of_negative_is_left_inverse",
+    kind: "claim",
+    title: { tex: String.raw`\exp(-A)\exp(A) = I` },
+    labels: ["exp_of_negative_is_left_inverse"],
+    statement: [
+      paragraph(["指数は ", ref("def_exp"), "、符号反転は ", ref("def_matrix_negation"), "、行列の積は ", ref("mat_mult"), "、単位行列 ", math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`), " は ", ref("def_identity_matrix"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\exp(-A)\exp(A) = I`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " の級数の極限（部分和と ",
+        math(String.raw`\exp`),
+        " の値の差のノルムという ",
+        math(String.raw`\mathbb{R}`),
+        " の数列の極限）であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      paragraph(["準備として、", math(String.raw`k, l \in \{1,\dots,n\}`), " について"]),
+      displayMath(String.raw`\begin{aligned}
+((-A)A)_{kl}
+&= \sum_{j=1}^{n} (-A)_{kj}\,A_{jl}
+&&(\because\ \blkref{mat_mult})\\
+&= \sum_{j=1}^{n} (-A_{kj})\,A_{jl}
+&&(\because\ \blkref{def_matrix_negation}\ \text{を各項へ})\\
+&= \sum_{j=1}^{n} \bigl((-1_{\mathbb{C}})A_{kj}\bigr)\,A_{jl}
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を各項へ})\\
+&= \sum_{j=1}^{n} \bigl(A_{kj}(-1_{\mathbb{C}})\bigr)\,A_{jl}
+&&(\because\ \text{積の可換律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n} A_{kj}\,\bigl((-1_{\mathbb{C}})A_{jl}\bigr)
+&&(\because\ \text{積の結合律を各項へ。}\blkref{complex_numbers_form_a_field})\\
+&= \sum_{j=1}^{n} A_{kj}\,(-A_{jl})
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を各項へ})\\
+&= \sum_{j=1}^{n} A_{kj}\,(-A)_{jl}
+&&(\because\ \blkref{def_matrix_negation}\ \text{を各項へ})\\
+&= (A(-A))_{kl}
+&&(\because\ \blkref{mat_mult})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`(-A)A = A(-A)`), " であり、また"]),
+      displayMath(String.raw`\begin{aligned}
+((-A)+A)_{kl}
+&= (-A)_{kl} + A_{kl}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= (-A_{kl}) + A_{kl}
+&&(\because\ \blkref{def_matrix_negation})\\
+&= (-1_{\mathbb{C}})A_{kl} + A_{kl}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= (-1_{\mathbb{C}})A_{kl} + 1_{\mathbb{C}}A_{kl}
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})\\
+&= \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)A_{kl}
+&&(\because\ \text{分配律。}\blkref{complex_numbers_form_a_field})\\
+&= \bigl((-1,0) + (1,0)\bigr)A_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (-1+1,\ 0+0)\,A_{kl}
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (0,0)\,A_{kl}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 0_{\mathbb{C}}\,A_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_zero_times_is_zero})\\
+&= O_{kl}
+&&(\because\ \blkref{def_zero_matrix})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`(-A)+A = O`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\exp(-A)\exp(A)
+&= \exp\bigl((-A)+A\bigr)
+&&(\because\ \blkref{theorem_exp_product}\ \text{の}\ K = \mathbb{C}\ \text{と準備の}\ (-A)A = A(-A))\\
+&= \exp(O)
+&&(\because\ \text{準備の}\ (-A)+A = O)\\
+&= I
+&&(\because\ \blkref{theorem_exp_zero})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。exp_hermitian_is_positive_definite の (1) の証明は exp(S/2)exp(-S/2) = I（右逆元）から可逆性を述べていたが、Bx = 0 ⇒ x = 0 に要るのは左逆元である。正定値性の主張を分けるときに、左逆元を与える独立の主張にした。下流（V^{(+)} と対称化した転送行列の正定値性）も B' := exp(-½S) をこれで得る。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_exp_of_hermitian_is_hermitian",
+    kind: "claim",
+    title: { text: "エルミート行列の exp はエルミート" },
+    labels: ["exp_of_hermitian_is_hermitian"],
+    statement: [
+      paragraph(["指数と冪は ", ref("def_exp"), "、共役転置は ", ref("def_hermitian_positive_definite"), "、行列の積は ", ref("mat_mult"), "、和とスカラー倍は ", ref("def_matrix_sum"), "・", ref("def_matrix_scalar_multiple"), "、ノルムと行列の列の収束は ", ref("def_matrix_norm"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`S \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`S^* = S`),
+        " を満たすとき、",
+      ]),
+      displayMath(String.raw`\exp(S)^* = \exp(S)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\exp(S)`),
+        " は ",
+        ref("def_exp"),
+        " の部分和の極限（部分和と ",
+        math(String.raw`\exp(S)`),
+        " の差のノルムという ",
+        math(String.raw`\mathbb{R}`),
+        " の数列の極限）であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "単位行列を ",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書く。",
+        ref("identity_matrix_is_positive_definite"),
+        " より ",
+        math(String.raw`I`),
+        " は正定値なのでエルミートであり、",
+        math(String.raw`I^* = I`),
+        " である。",
+      ]),
+      paragraph([
+        "準備として、すべての ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`SS^m = S^mS`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+SS^0
+&= SI
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&= S
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= IS
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= S^0S
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+SS^{m+1}
+&= S(S^mS)
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&= (SS^m)S
+&&(\because\ \blkref{mat_mult_associative})\\
+&= (S^mS)S
+&&(\because\ \text{帰納法の仮定})\\
+&= S^{m+1}S
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+\end{aligned}`),
+      paragraph([
+        "次に、すべての ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`(S^m)^* = S^m`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(S^0)^*
+&= I^*
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)\\
+&= I
+&&(\because\ I^* = I)\\
+&= S^0
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I)
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+(S^{m+1})^*
+&= (S^mS)^*
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)\\
+&= S^*(S^m)^*
+&&(\because\ \blkref{star_preserves_norm_and_limits}\ (1)\ \text{の第 1 式})\\
+&= S(S^m)^*
+&&(\because\ S^* = S)\\
+&= SS^m
+&&(\because\ \text{帰納法の仮定})\\
+&= S^mS
+&&(\because\ \text{準備の}\ SS^m = S^mS)\\
+&= S^{m+1}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^mA)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について部分和を ",
+        math(String.raw`E_N := \sum_{m=0}^{N}\frac{1}{m!}S^m`),
+        "（",
+        ref("def_exp"),
+        " (1) の部分和。係数は ",
+        math(String.raw`(1/m!)_{\mathbb{C}}`),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "）と置く。",
+        ref("def_matrix_sum"),
+        " を項の数についての帰納法で、",
+        ref("def_matrix_scalar_multiple"),
+        " を各項へ当てはめると、",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について ",
+        math(String.raw`(E_N)_{kl} = \sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{kl}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+((E_N)^*)_{kl}
+&= \overline{(E_N)_{lk}}
+&&(\because\ \blkref{def_hermitian_positive_definite})\\
+&= \overline{\textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{lk}}
+&&(\because\ (E_N)_{lk}\ \text{の成分の式})\\
+&= \textstyle\sum_{m=0}^{N}\overline{(1/m!)_{\mathbb{C}}\,(S^m)_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{の}\ m = N+1)\\
+&= \textstyle\sum_{m=0}^{N}\overline{(1/m!)_{\mathbb{C}}}\;\overline{(S^m)_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_product}\ \text{を各項へ})\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,\overline{(S^m)_{lk}}
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を各項へ})\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,((S^m)^*)_{kl}
+&&(\because\ \blkref{def_hermitian_positive_definite}\ \text{を各項へ})\\
+&= \textstyle\sum_{m=0}^{N}(1/m!)_{\mathbb{C}}\,(S^m)_{kl}
+&&(\because\ \text{上で示した}\ (S^m)^* = S^m\ \text{を各項へ})\\
+&= (E_N)_{kl}
+&&(\because\ (E_N)_{kl}\ \text{の成分の式})
+\end{aligned}`),
+      paragraph([
+        "なので、すべての ",
+        math(String.raw`N`),
+        " で ",
+        math(String.raw`E_N^* = E_N`),
+        " である。",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`E_N \to \exp(S)`),
+        " であり、",
+        ref("star_preserves_norm_and_limits"),
+        " (3) より ",
+        math(String.raw`E_N^* \to \exp(S)^*`),
+        " である。",
+        math(String.raw`E_N^* = E_N`),
+        " なので ",
+        math(String.raw`E_N \to \exp(S)^*`),
+        " でもあり、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4)（極限の一意性）より ",
+        math(String.raw`\exp(S)^* = \exp(S)`),
         " である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-01: exp_hermitian_is_positive_definite の (1) のエルミート性の段を、1 ブロック 1 主張に合わせて独立の主張にした。「積の共役転置を k 回繰り返す」を SS^m = S^mS と (S^m)^* = S^m の二つの帰納法に、「共役転置の線型性を和の各項へ」を部分和の成分の鎖にした。部分和の記号は def_exp に合わせて添字を N にした。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_013_claim_exp_hermitian_positive_definite",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 15 },
+    title: { tex: String.raw`\text{エルミート行列の } \exp \text{ は正定値}` },
+    labels: ["exp_hermitian_is_positive_definite"],
+    statement: [
+      paragraph(["指数は ", ref("def_exp"), "、共役転置と正定値性は ", ref("def_hermitian_positive_definite"), "、スカラー倍は ", ref("def_matrix_scalar_multiple"), " による。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`S \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`S^* = S`),
+        " を満たすとき、",
+        math(String.raw`\exp(S)`),
+        " は正定値である（正定値の定義より、とくにエルミートである）。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " の級数の極限であり、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`H := (1/2)_{\mathbb{C}}\,S`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）、",
+        math(String.raw`T := \exp(H)`),
+        "、",
+        math(String.raw`T' := \exp(-H)`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " と置く。",
+        ref("real_multiple_of_hermitian_is_hermitian"),
+        " の ",
+        math(String.raw`\alpha = 1/2`),
+        " より ",
+        math(String.raw`H^* = H`),
+        "、",
+        ref("exp_of_hermitian_is_hermitian"),
+        " を ",
+        math(String.raw`H`),
+        " に当てはめて ",
+        math(String.raw`T^* = T`),
+        "、",
+        ref("exp_of_negative_is_left_inverse"),
+        " を ",
+        math(String.raw`H`),
+        " に当てはめて ",
+        math(String.raw`T'T = I`),
+        " である。また ",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(H+H)_{kl}
+&= H_{kl} + H_{kl}
+&&(\because\ \blkref{def_matrix_sum})\\
+&= (1/2)_{\mathbb{C}}S_{kl} + (1/2)_{\mathbb{C}}S_{kl}
+&&(\because\ \blkref{def_matrix_scalar_multiple})\\
+&= \bigl((1/2)_{\mathbb{C}} + (1/2)_{\mathbb{C}}\bigr)S_{kl}
+&&(\because\ \text{分配律。}\blkref{complex_numbers_form_a_field})\\
+&= \bigl((1/2,0) + (1/2,0)\bigr)S_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (1/2+1/2,\ 0+0)\,S_{kl}
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (1,0)\,S_{kl}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 1_{\mathbb{C}}S_{kl}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= S_{kl}
+&&(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`),
+      paragraph(["なので ", math(String.raw`H+H = S`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\exp(S)
+&= \exp(H+H)
+&&(\because\ H+H = S)\\
+&= \exp(H)\exp(H)
+&&(\because\ \blkref{theorem_exp_product}\ \text{の}\ K = \mathbb{C}\ \text{と}\ HH = HH)\\
+&= TT
+&&(\because\ T\ \text{の定義})\\
+&= T^*T
+&&(\because\ T^* = T)\\
+&= T^*(IT)
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})
+\end{aligned}`),
+      paragraph([
+        ref("identity_matrix_is_positive_definite"),
+        " より ",
+        math(String.raw`I`),
+        " は正定値であり、",
+        math(String.raw`T'T = I`),
+        " なので、",
+        ref("congruence_preserves_positive_definite"),
+        " の ",
+        math(String.raw`A = I`),
+        "、",
+        math(String.raw`B = T`),
+        "、",
+        math(String.raw`B' = T'`),
+        " より ",
+        math(String.raw`T^*(IT)`),
+        " は正定値である。上の鎖より ",
+        math(String.raw`\exp(S) = T^*(IT)`),
+        " なので、",
+        math(String.raw`\exp(S)`),
+        " は正定値である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
         "2026-09-05 の式変形統一で、共役転置・可換な行列指数の積・零行列の指数への後置き参照を、実際に適用する各等号の行末へ移した。内容・式変形・根拠・参照は変えていない。",
+        "2026-11-01: SageMath の検算（sagemath/check/exp_hermitian_is_positive_definite/ ほか）を付けるときに、四つの主張を束ねていたブロックを 1 ブロック 1 主張に分けた。(2) は congruence_preserves_positive_definite、(3) は positive_real_multiple_preserves_positive_definite、(4) は trace_of_positive_definite_is_positive、(1) のエルミート性は exp_of_hermitian_is_hermitian へ移し、このブロックは (1) の正定値性だけを述べる。証明は exp(S) = T^*(IT) と書いて congruence_preserves_positive_definite を A = I に当てはめる形にした。x^*Ax の「n×1 行列へ積の共役転置を適用」と、右逆元からの可逆性を、def_conjugate_bilinear_value の成分の和と左逆元（exp_of_negative_is_left_inverse）に直した。",
       ],
     },
   },

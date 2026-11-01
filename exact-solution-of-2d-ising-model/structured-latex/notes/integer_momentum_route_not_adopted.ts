@@ -5367,7 +5367,7 @@ V\,W
    \quad (\because \exp(O) = I)
 \end{aligned}`),
       paragraph(["これが statement の表示である（", math(String.raw`V_2`), " の記号の定義は ", ref("def_transfer_matrix_symbols"), "、指数の中身が ", math(String.raw`S_2`), " に等しいことは ", ref("iH_is_real_symmetric"), " の Step 1、スカラーを前へ出す操作は ", ref("scalar_identity_commutes"), "）。"]),
-      paragraph(["Step 2（各因子の性質）。", ref("iH_is_real_symmetric"), " より ", math(String.raw`\tfrac12 S_1^{(\pm)}`), " と ", math(String.raw`S_2`), " はエルミートである。", ref("exp_hermitian_is_positive_definite"), " (1) より"]),
+      paragraph(["Step 2（各因子の性質）。", ref("iH_is_real_symmetric"), " より ", math(String.raw`\tfrac12 S_1^{(\pm)}`), " と ", math(String.raw`S_2`), " はエルミートである。", ref("exp_hermitian_is_positive_definite"), " より"]),
       list([[math(String.raw`B := \exp\!\left(\tfrac12 S_1^{(\pm)}\right)`), " はエルミートかつ正定値、とくに可逆"], [math(String.raw`A := \exp(S_2)`), " は正定値"]]),
       paragraph(["Step 3（正定値性）。"]),
       displayMath(String.raw`\begin{aligned}
@@ -5377,7 +5377,7 @@ V\,W
 &= B^* A B
    \quad (\because B \text{ はエルミート: } B^* = B)
 \end{aligned}`),
-      paragraph([ref("exp_hermitian_is_positive_definite"), " (2) より ", math(String.raw`B^*AB`), " は正定値。", math(String.raw`K_2 \in \mathbb{R}_{>0}`), " より ", math(String.raw`s_2 = \sinh 2K_2 > 0`), " なので ", math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`), " であり、同 (3) より ", math(String.raw`V = (2s_2)^{M/2}B^*AB`), " も正定値である。"]),
+      paragraph([ref("congruence_preserves_positive_definite"), " より ", math(String.raw`B^*AB`), " は正定値。", math(String.raw`K_2 \in \mathbb{R}_{>0}`), " より ", math(String.raw`s_2 = \sinh 2K_2 > 0`), " なので ", math(String.raw`(2s_2)^{M/2} \in \mathbb{R}_{>0}`), " であり、", ref("positive_real_multiple_preserves_positive_definite"), " より ", math(String.raw`V = (2s_2)^{M/2}B^*AB`), " も正定値である。"]),
       paragraph(["Step 4（可逆性と ", math(String.raw`V^{-1}`), "）。", math(String.raw`W := (2s_2)^{-M/2}\,\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)
 \exp\!\left(-S_2\right)\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)`), " と置く。"]),
       displayMath(String.raw`\begin{aligned}
@@ -5409,7 +5409,7 @@ W\,V
       displayMath(String.raw`V^{-1} = W = (2s_2)^{-M/2}\,\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)
 \exp\!\left(-S_2\right)\exp\!\left(-\tfrac{1}{2}S_1^{(\pm)}\right)`),
       paragraph(["である。", math(String.raw`-\tfrac12 S_1^{(\pm)}`), " と ", math(String.raw`-S_2`), " もエルミートなので、Step 2〜3 をそのまま適用して ", math(String.raw`V^{-1}`), " も正定値である。"]),
-      paragraph(["Step 5（トレース）。", ref("exp_hermitian_is_positive_definite"), " (4) より ", math(String.raw`\mathrm{tr}(V) > 0`), "、", math(String.raw`\mathrm{tr}(V^{-1}) > 0`), "。"]),
+      paragraph(["Step 5（トレース）。", ref("trace_of_positive_definite_is_positive"), " より ", math(String.raw`\mathrm{tr}(V) > 0`), "、", math(String.raw`\mathrm{tr}(V^{-1}) > 0`), "。"]),
     ],
   },
   {

@@ -903,6 +903,128 @@ T_B(\alpha A)
       ],
     },
   },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_complex_zeros",
+    kind: "claim",
+    title: { text: "複素数の零の有限和は零" },
+    labels: ["finite_sum_of_complex_zeros"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`\sum_{j=1}^{m} 0_{\mathbb{C}} = 0_{\mathbb{C}}`),
+        " が成り立つ。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} 0_{\mathbb{C}}
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} 0_{\mathbb{C}}
+&= \Bigl(\sum_{j=1}^{m} 0_{\mathbb{C}}\Bigr) + 0_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= 0_{\mathbb{C}} + 0_{\mathbb{C}}
+&&(\because\ \text{帰納法の仮定})\\
+&= (0,0) + (0,0)
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (0+0,\ 0+0)
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (0,0)
+&&(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0)\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。congruence_preserves_positive_definite の B'0 = 0 の証明が使うので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_real_inclusion_preserves_finite_sum",
+    kind: "claim",
+    title: { text: "実数の有限和の包含は包含の有限和に等しい" },
+    labels: ["real_inclusion_preserves_finite_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} (r_j)_{\mathbb{C}} = \Bigl(\sum_{j=1}^{m} r_j\Bigr)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、左辺の和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " の有限和、右辺の和は ",
+        math(String.raw`\mathbb{R}`),
+        " の有限和（同じ帰納法で左から足す）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (r_j)_{\mathbb{C}}
+&= (r_1)_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= \Bigl(\sum_{j=1}^{1} r_j\Bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の有限和の定義})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つと仮定する。",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} (r_j)_{\mathbb{C}}
+&= \Bigl(\sum_{j=1}^{m} (r_j)_{\mathbb{C}}\Bigr) + (r_{m+1})_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= \Bigl(\sum_{j=1}^{m} r_j\Bigr)_{\mathbb{C}} + (r_{m+1})_{\mathbb{C}}
+&&(\because\ \text{帰納法の仮定})\\
+&= \Bigl(\sum_{j=1}^{m} r_j,\ 0\Bigr) + (r_{m+1},\ 0)
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{を各項へ})\\
+&= \Bigl(\sum_{j=1}^{m} r_j + r_{m+1},\ 0 + 0\Bigr)
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= \Bigl(\sum_{j=1}^{m+1} r_j,\ 0 + 0\Bigr)
+&&(\because\ \mathbb{R}\ \text{の有限和の定義})\\
+&= \Bigl(\sum_{j=1}^{m+1} r_j,\ 0\Bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0)\\
+&= \Bigl(\sum_{j=1}^{m+1} r_j\Bigr)_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。正定値性の主張（identity_matrix_is_positive_definite、trace_of_positive_definite_is_positive）が、ℂ の元が正の実数の包含であることを示すのに使うので足した。",
+      ],
+    },
+  },
   {
     id: "calc_formulae_009_sqrt_minus_one",
     kind: "definition",

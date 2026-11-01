@@ -77,20 +77,20 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
       rw [Matrix.conjTranspose_smul, (S1plus_isHermitian hK1).eq]
       norm_num
     exact h
-  -- Step 2: `B` はエルミート（`exp_hermitian_is_positive_definite` (1)）
+  -- Step 2: `B` はエルミート（`exp_hermitian_is_positive_definite`）
   have hBherm : B.IsHermitian := by rw [hB, matExp]; exact hS1.exp
   -- Step 2: `B` は可逆
   have hBinj : Function.Injective B.mulVec := by
     rw [hB, matExp]
     exact Matrix.mulVec_injective_of_isUnit (Matrix.isUnit_exp _)
-  -- Step 2: `A` は正定値（`exp_hermitian_is_positive_definite` (1)）
+  -- Step 2: `A` は正定値（`exp_hermitian_is_positive_definite`）
   have hApos : A.PosDef := by
     rw [hA, matExp]
     exact posDef_exp_of_isHermitian (S2_isHermitian hK2)
-  -- Step 3: `B^* A B` は正定値（`exp_hermitian_is_positive_definite` (2)）、`B^* = B`
+  -- Step 3: `B^* A B` は正定値（`congruence_preserves_positive_definite`）、`B^* = B`
   have hBAB : (Bᴴ * A * B).PosDef := hApos.conjTranspose_mul_mul_same hBinj
   rw [hBherm.eq] at hBAB
-  -- Step 3: `(2s_2)^{M/2} > 0` 倍も正定値（`exp_hermitian_is_positive_definite` (3)）
+  -- Step 3: `(2s_2)^{M/2} > 0` 倍も正定値（`positive_real_multiple_preserves_positive_definite`）
   rw [VPlus_eq_smul]
   refine posDef_smul_of_pos hBAB ?_
   have : (0 : ℝ) < 2 * s2 := by linarith
