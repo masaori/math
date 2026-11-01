@@ -7,6 +7,17 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_transition_entries_in_mu8_archived",
+    targets: ["def_kac_ward_transition_matrices"],
+    title: { text: "参照用: 遷移行列の成分の八乗根性" },
+    body: [
+      paragraph(["旧主張。四つの Kac--Ward 遷移行列（", ref("def_kac_ward_transition_matrices"), "）の各成分は零か 1 の八乗根である。"]),
+      displayMath(String.raw`M^{a,b}_{\vec e,\vec f}=0\quad\text{または}\quad (M^{a,b}_{\vec e,\vec f})^8=1.`),
+      paragraph(["非後退接続がなければ成分は零である。接続があれば成分はねじれ符号と回転位相の積である。ねじれ符号の二乗は 1、回転位相は ", math(String.raw`1,\zeta_8,\zeta_8^{-1}`), " のいずれかで ", math(String.raw`\zeta_8^4=-1`), " だから、積の八乗は 1 になる。"]),
+      paragraph(["後続の有限トーラス公式と Onsager 閉形式への接続は、遷移行列の定義と回転位相を直接使い、この八乗根性を引用しない。このため本文から退避した。SageMath 検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_tagged_matching_term_degree_archived",
     targets: ["claim_tagged_matching_short_pair_count"],
     title: { text: "参照用: 標識付き完全マッチング項の次数" },
