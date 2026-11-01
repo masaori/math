@@ -14,6 +14,7 @@ export const ALL_LABELS = [
   "def_dual_space",
   "def_linear_combination",
   "def_linear_form",
+  "def_linear_independence",
   "def_linear_map",
   "def_ring_homomorphism",
   "def_unital_ring",
