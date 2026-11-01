@@ -62772,6 +62772,7 @@ s(j')-s(j)
                         math(String.raw`\sigma`), " は有限集合 ",
                         math(String.raw`\{1,\ldots,m\}`), " の全単射である。各 ",
                         math(String.raw`k`), " について ",
+                        math(String.raw`\vec e_k=(e_k,d_k)`), " と ",
                         math(String.raw`\operatorname{src}(\vec e_k)=(i_k,j_k)`),
                         " と書く。", math(String.raw`1\le k\le m-1`), " では ",
                         ref("def_nonbacktracking_edge_sequence"), " と ",
@@ -62798,10 +62799,23 @@ s(j')-s(j)
 &&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "列の等式も、", math(String.raw`s(j_{\sigma(k)})-s(j_k)`), " と ",
-                        math(String.raw`c_{\mathrm h}`), "、",
-                        math(String.raw`\delta_{\mathrm{col}}`),
-                        " を用いた同じ五行で従う。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                        "列の等式も各行の根拠を明示する。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{m}\delta_{\mathrm{col}}(\vec e_k)
+&=\sum_{k=1}^{m}\Bigl(\bigl(s(j_{\sigma(k)})-s(j_k)\bigr)+L\,c_{\mathrm h}(\vec e_k)(1-2d_k)\Bigr)
+&&\bigl(\because\ \blkref{claim_edge_representative_displacement}\text{ を移項する}\bigr)\\
+&=\sum_{k=1}^{m}\bigl(s(j_{\sigma(k)})-s(j_k)\bigr)+\sum_{k=1}^{m}L\,c_{\mathrm h}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \text{有限和の分割}\bigr)\\
+&=\sum_{k=1}^{m}s(j_{\sigma(k)})-\sum_{k=1}^{m}s(j_k)+L\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \text{有限和の分割と }\mathbb Z\text{ の分配則}\bigr)\\
+&=L\sum_{k=1}^{m}c_{\mathrm h}(\vec e_k)(1-2d_k)
+&&\bigl(\because\ \sigma\text{ は全単射なので添字の置換は有限和を変えない}\bigr)\\
+&=L\,w_{\mathrm h}(\gamma)
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
                         "始点を一つ固定して各歩の変位を積み上げれば閉歩道は平面格子 ",
                         math(String.raw`\mathbb Z\times\mathbb Z`),
                         " の道へ持ち上がり、この主張はその終点の変位が ",
@@ -63373,34 +63387,23 @@ s(i_j)-s(i_k)
                     ],
                     proof: [
                       paragraph([
-                        "第 1 成分の等式を示す。第 2 成分は行を列、",
-                        math(String.raw`c_{\mathrm v}`), " を ", math(String.raw`c_{\mathrm h}`),
-                        "、", math(String.raw`w_{\mathrm v}`), " を ", math(String.raw`w_{\mathrm h}`),
-                        " に置き換えた同じ計算で従う。各項を ",
-                        math(String.raw`\vec e_t=(e_t,d_t)`), " と書き、始点を ",
-                        math(String.raw`\operatorname{src}(\vec e_1)=(i_1,j_1)`),
-                        "、第 ", math(String.raw`m`), " 項の終点を ",
-                        math(String.raw`\operatorname{tgt}(\vec e_m)=(i'_m,j'_m)`),
-                        " と書く（", ref("def_oriented_edge_endpoints"), "）。",
-                        ref("def_closed_nonbacktracking_walk"), " により ",
-                        math(String.raw`\vec e_1\in\operatorname{Next}(\vec e_m)`),
-                        " なので、", ref("def_nonbacktracking_successors"), " により ",
-                        math(String.raw`\operatorname{tgt}(\vec e_m)=\operatorname{src}(\vec e_1)`),
-                        "、とくに第 1 成分は ", math(String.raw`i'_m=i_1`), " である。したがって",
+                        "平面持ち上げの漸化式を ", math(String.raw`m`), " 回足し、",
+                        "行と列の二つの成分をそれぞれ計算する。",
                       ]),
                       displayMath(String.raw`\begin{aligned}
 P_m(\gamma)_{\mathrm{row}}
-&=s(i'_m)+L\sum_{t=1}^{m}c_{\mathrm v}(\vec e_t)(1-2d_t)
-&&\bigl(\because\ \blkref{claim_plane_lift_coordinates}\text{ の }k=m\text{ の場合}\bigr)\\
-&=s(i_1)+L\sum_{t=1}^{m}c_{\mathrm v}(\vec e_t)(1-2d_t)
-&&\bigl(\because\ i'_m=i_1\bigr)\\
-&=s(i_1)+L\,w_{\mathrm v}(\gamma)
-&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=P_0(\gamma)_{\mathrm{row}}+\sum_{k=1}^{m}\delta_{\mathrm{row}}(\vec e_k)
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式を加える}\bigr)\\
 &=P_0(\gamma)_{\mathrm{row}}+L\,w_{\mathrm v}(\gamma)
-&&\bigl(\because\ \blkref{def_plane_lift}\text{ の }P_0(\gamma)=(s(i_1),s(j_1))\bigr)
+&&\bigl(\because\ \blkref{claim_closed_walk_plane_displacement}\bigr),\\
+P_m(\gamma)_{\mathrm{col}}
+&=P_0(\gamma)_{\mathrm{col}}+\sum_{k=1}^{m}\delta_{\mathrm{col}}(\vec e_k)
+&&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式を加える}\bigr)\\
+&=P_0(\gamma)_{\mathrm{col}}+L\,w_{\mathrm h}(\gamma)
+&&\bigl(\because\ \blkref{claim_closed_walk_plane_displacement}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "で、第 1 成分の等式が成り立つ。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                        "二つの成分の等式から、整数の組の等式が従う。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
                         "後続の離散 Whitney の議論では、この等式と一周期の持ち上げ点の相異なりを使い、零巻き付きの場合の平面閉路と、零でない原始的巻き付きの場合の周期 ",
                         math(String.raw`(L\,w_{\mathrm v}(\gamma),\,L\,w_{\mathrm h}(\gamma))`),
                         " を持つ平面路を分けて扱う。",

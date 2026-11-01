@@ -14,5 +14,5 @@
   $\sum_k\delta_{\mathrm{col}}(\vec e_k)=L\,w_{\mathrm h}(\gamma)$ が成り立つ（34,112 本）。
 
 - 実行: `sage sagemath/check/closed-walk-plane-displacement/check.sage`
-- 状態: PASS（2026-08-31）
+- 状態: PASS（2026-11-01）
 - 計算: `ZZ` の加減乗除と有限列挙だけ。浮動小数点は使わない。
