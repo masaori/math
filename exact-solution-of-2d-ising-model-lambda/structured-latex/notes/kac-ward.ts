@@ -7,6 +7,30 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_smoothing_seam_parity_archived",
+    targets: ["claim_smoothing_split_seam_parity"],
+    title: { text: "参照用: 平滑化後の出辺族の切断線偶奇" },
+    body: [
+      paragraph(["旧定義。閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " の横断する添字 ", math(String.raw`k<l`), " を取る。平滑化後の出辺族を ", math(String.raw`(\vec f_r)_{r\in I_m}`), " とし、辺ごとの切断線指示値は ", ref("def_seam_parities"), " による。旧定義の平滑化後の二つの切断線偶奇の組は次であった。"]),
+      displayMath(String.raw`w_{\mathrm{sm}}(\gamma;k,l):=\left(\left(\sum_{r\in I_m}c_{\mathrm h}(\vec f_r)\right)\bmod2,\left(\sum_{r\in I_m}c_{\mathrm v}(\vec f_r)\right)\bmod2\right).`),
+      paragraph(["旧主張は ", math(String.raw`w_{\mathrm{sm}}(\gamma;k,l)=(h(\gamma),v(\gamma))`), " である。証明では ", math(String.raw`c=c_{\mathrm h}`), " または ", math(String.raw`c=c_{\mathrm v}`), " と置き、巡回後続写像 ", math(String.raw`\sigma:I_m\to I_m`), " の全単射性と平滑化で二つの出辺を交換する定義を使う（", ref("def_closed_walk_passes"), "、", ref("def_smoothing_straight_visit_count"), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{r\in I_m}c(\vec f_r)
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec f_r)+c(\vec f_k)+c(\vec f_l)
+&&\bigl(\because\ \text{有限和から二項を分ける}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec e_{\sigma(r)})+c(\vec e_{\sigma(l)})+c(\vec e_{\sigma(k)})
+&&\bigl(\because\ \blkref{def_smoothing_straight_visit_count}\bigr)\\
+&=\sum_{\substack{r\in I_m\\r\ne k,l}}c(\vec e_{\sigma(r)})+c(\vec e_{\sigma(k)})+c(\vec e_{\sigma(l)})
+&&\bigl(\because\ \mathbb N\text{ の加法の可換則}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_{\sigma(r)})
+&&\bigl(\because\ \text{分けた二項を戻す}\bigr)\\
+&=\sum_{r\in I_m}c(\vec e_r)
+&&\bigl(\because\ \sigma\text{ は }I_m\text{ の全単射}\bigr).
+\end{aligned}`),
+      paragraph(["二で割った余りを横・縦それぞれに適用して旧主張を得る。採用経路は平滑化後の出辺族の偶奇を使わず、二本に分けた閉歩道の偶奇の和を直接数える（", ref("claim_smoothing_split_seam_parity"), "）。この主張と定義への本文からの引用はなく、本文から外した。有限検算は既存の検算に残し、Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_isolated_smoothing_crossing_number_update_archived",
     targets: ["claim_smoothing_crossing_number_update"],
     title: { text: "参照用: 孤立した横断の平滑化" },

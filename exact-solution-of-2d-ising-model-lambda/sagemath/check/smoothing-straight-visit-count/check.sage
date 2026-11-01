@@ -182,7 +182,7 @@ for L in range(1, 4):
                 assert after_turning == before_turning
                 turning_invariance_checks += 1
                 # 平滑化後の出辺族は巡回後続族の二点交換なので、二つの
-                # 切断線偶奇を保つ（claim_smoothing_seam_parity_invariance）。
+                # 切断線偶奇を保つ（参照用に退避した主張の検算）。
                 before_seam_parity = (
                     sum(horizontal_seam(L, edge) for edge in walk) % 2,
                     sum(vertical_seam(L, edge) for edge in walk) % 2,
