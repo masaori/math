@@ -10,6 +10,7 @@ export const ALL_LABELS = [
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_zero_map_is_linear_form",
+  "def_basis",
   "def_complex_vector_space",
   "def_dual_space",
   "def_linear_combination",
