@@ -73536,9 +73536,17 @@ y^L
 \end{aligned}`),
                   paragraph([
                     "ゆえに ", math(String.raw`y\in\mu_L`), "（", ref("def_root_of_unity_set"),
-                    "）。また ", math(String.raw`z=\xi y`), " なので ",
-                    math(String.raw`\mathcal U_1\subseteq\{\xi y\mid y\in\mu_L\}`), "。",
+                    "）。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+z
+&=1\cdot z&&\bigl(\because\ \overline{\mathbb Q}\text{ の乗法単位元}\bigr)\\
+&=(\xi\xi^{-1})z&&\bigl(\because\ \xi\ne0\text{ と逆元の定義}\bigr)\\
+&=\xi(\xi^{-1}z)&&\bigl(\because\ \overline{\mathbb Q}\text{ の結合法則}\bigr)\\
+&=\xi y&&\bigl(\because\ y:=\xi^{-1}z\bigr).
+\end{aligned}`),
+                  paragraph([math(String.raw`y\in\mu_L`), " と上の等式から ",
+                    math(String.raw`\mathcal U_1\subseteq\{\xi y\mid y\in\mu_L\}`), "。"]),
                   paragraph([
                     "逆に ", math(String.raw`y\in\mu_L`), " を任意に取る。",
                     math(String.raw`y^L=1`), " である（", ref("def_root_of_unity_set"), "）。",
@@ -73889,6 +73897,14 @@ y^L
                   ]),
                 ],
                 proof: [
+                  paragraph([
+                    ref("claim_twisted_modes_are_double_roots"), " より ",
+                    math(String.raw`\mathcal U_a\cup\mathcal W_b\subseteq\mu_{2L}`),
+                    " である。", ref("claim_root_of_unity_card"), " より ",
+                    math(String.raw`\mu_{2L}`), " は有限集合なので、",
+                    math(String.raw`\mathcal U_a`), " と ", math(String.raw`\mathcal W_b`),
+                    " も有限集合である。",
+                  ]),
                   paragraph(["各集合の元の個数を数える。", ref("claim_twisted_mode_sets_card"), " より ",
                     math(String.raw`|\mathcal U_a|=|\mathcal W_b|=L`), " である。"]),
                   displayMath(String.raw`\begin{aligned}
