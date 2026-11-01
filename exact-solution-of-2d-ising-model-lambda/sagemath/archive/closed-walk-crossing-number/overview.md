@@ -1,8 +1,8 @@
 # 閉歩道の順序つき横断対の個数は横断数の二倍
 
-**対象ラベル**: `claim_ordered_crossing_pairs_double`
-- 実行: `sage sagemath/check/closed-walk-crossing-number/check.sage`
-- 状態: PASS（2026-08-30、閉じた非後退辺列 1,064 件。横断あり 56 件・横断なし 1,008 件）
+**保管した対象ラベル**: `claim_ordered_crossing_pairs_double`
+- 実行: `sage sagemath/archive/closed-walk-crossing-number/check.sage`
+- 状態: PASS（2026-11-01 再実行。閉じた非後退辺列 1,064 件。横断あり 56 件・横断なし 1,008 件）
 - 使用する環: `ZZ` と有限集合だけ。浮動小数点は使わない。
 
 L=1,2,3・辺 1〜5 本の全閉じた非後退辺列について、添字対の横断

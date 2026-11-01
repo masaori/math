@@ -2800,9 +2800,12 @@ Z_{M_{\mathrm{col}}+1}^{\flat} := -Z_1,\quad Z_j^{\flat} := Z_j\ (1\leq j\leq M_
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Z_jZ_k &= -Z_kZ_j,\quad Y_jY_k = -Y_kY_j && (j \neq k), \\
-Z_jY_k &= -Y_kZ_j && (j, k \text{ は任意}), \\
-Z_jZ_j &= I,\quad Y_jY_j = I &&
+Z_jZ_k &= -Z_kZ_j,\quad Y_jY_k = -Y_kY_j
+&&\bigl(\because\ \blkref{anticommutator_of_Z_and_Y},\ j\ne k\bigr), \\
+Z_jY_k &= -Y_kZ_j
+&&\bigl(\because\ \blkref{anticommutator_of_Z_and_Y}\bigr), \\
+Z_jZ_j &= I,\quad Y_jY_j = I
+&&\bigl(\because\ \blkref{anticommutator_of_Z_and_Y},\ \delta^{(M_{\mathrm{col}})}_{(j,j)}=1,\ \mathbb C\text{ の四則}\bigr)
 \end{aligned}`,
       ),
       paragraph([

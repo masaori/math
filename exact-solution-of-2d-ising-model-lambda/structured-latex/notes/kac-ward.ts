@@ -7,6 +7,24 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_ordered_crossing_pairs_double_archived",
+    targets: ["def_closed_walk_crossing_number"],
+    title: { text: "参照用: 順序つき横断対と横断数の二倍則" },
+    body: [
+      paragraph(["元の主張は後続の本文から引用されない。平滑化と頂点別分解は順序なしの添字対を直接数えるため、主張を本文から外した。通過・添字対の横断・横断数の定義は後続で使うため本文に残す。"]),
+      paragraph(["元の主張。任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " について、順序つき横断対の個数は横断数の二倍である。添字対の横断は ", ref("def_index_pair_crossing"), "、横断数は ", ref("def_closed_walk_crossing_number"), " による。"]),
+      displayMath(String.raw`\bigl|\{(k,l)\in I_m\times I_m\mid k\ne l,\ k\text{ と }l\text{ が横断する}\}\bigr|=2c(\gamma).`),
+      paragraph(["元の証明。左辺で数える集合を ", math(String.raw`A`), " とする。", math(String.raw`A_{<}`), " を ", math(String.raw`k<l`), " の部分、", math(String.raw`A_{>}`), " を ", math(String.raw`l<k`), " の部分とする。自然数の三分律により ", math(String.raw`A=A_{<}\sqcup A_{>}`), " である。二つの通過の横断は順序によらない（", ref("claim_transverse_crossing_symmetric"), "）。頂点の等式も対称なので、添字を入れ替える写像は ", math(String.raw`A_{<}`), " と ", math(String.raw`A_{>}`), " を互いに移す。二度入れ替えると恒等写像なので、これは全単射である。"]),
+      displayMath(String.raw`\begin{aligned}
+|A|&=|A_{<}|+|A_{>}|&&\bigl(\because\ A=A_{<}\sqcup A_{>}\bigr)\\
+&=|A_{<}|+|A_{<}|&&\bigl(\because\ (k,l)\mapsto(l,k)\text{ は全単射}\bigr)\\
+&=2|A_{<}|&&\bigl(\because\ \mathbb N\text{ の算術}\bigr)\\
+&=2c(\gamma)&&\bigl(\because\ \blkref{def_closed_walk_crossing_number}\bigr).
+\end{aligned}`),
+      paragraph(["元の結びには、順序つき対と順序なし対の偶奇の解釈が食い違わないとあった。しかし順序つき対の個数は常に偶数であり、横断数の偶奇は任意なので、その結びは誤りである。有限検算とこの主張の Lean 具体版は保管庫へ移し、別の形式証明が使う計数補題は残した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_direction_gate_crossing_turning_archived",
     targets: ["def_direction_standard_representative"],
     title: { text: "参照用: 方向番号の門の横断数による循環総回転数" },

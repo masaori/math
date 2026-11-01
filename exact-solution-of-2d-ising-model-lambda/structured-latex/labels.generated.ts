@@ -309,7 +309,6 @@ export const ALL_LABELS = [
   "claim_orbit_transposition_composite_sign",
   "claim_orbit_transposition_composite_values",
   "claim_orbit_transposition_sign",
-  "claim_ordered_crossing_pairs_double",
   "claim_oriented_orbit_pairs_cross_disjoint",
   "claim_parallel_separated_staircases_disjoint",
   "claim_parallel_staircase_transverse_width_bound",
