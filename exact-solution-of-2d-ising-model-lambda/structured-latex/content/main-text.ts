@@ -82154,6 +82154,7 @@ f^{\mathrm{per}}(q)
                 kind: "claim",
                 title: { text: "分散因子の積分の Onsager 表示への書換え" },
                 labels: ["claim_onsager_hyperbolic_integral_form"],
+                standing: "mainTheorem",
                 habitat: "R",
                 realEscape: "実対数と指数評価。代数的略記を実数の双曲線関数に読み替え、正の因子の実対数を積分から取り出す。",
                 verification: ["sagemath/check/onsager-hyperbolic-integral-form"],
@@ -82190,11 +82191,21 @@ f^{\mathrm{per}}(q)
                 ],
                 proof: [
                   paragraph([
-                    math(String.raw`r=e^{-2K_q}`), " なので ",
-                    math(String.raw`e^{2K_q}=r^{-1}`), "、",
-                    math(String.raw`e^{-2K_q}=r`), " である。",
-                    "双曲線関数の定義から、二つの式鎖を得る。",
+                    "指数と実対数の逆写像の関係から、次の二つの式鎖を得る。",
                   ]),
+                  displayMath(String.raw`\begin{aligned}
+e^{-2K_q}
+&=e^{\log_{\mathbb R}r}
+&&\bigl(\because\ K_q\text{ の定義}\bigr)\\
+&=r
+&&\bigl(\because\ r>0\text{ と指数・実対数の逆写像の関係}\bigr),\\
+e^{2K_q}
+&=(e^{-2K_q})^{-1}
+&&\bigl(\because\ \mathbb R\text{ 上の指数法則}\bigr)\\
+&=r^{-1}
+&&\bigl(\because\ \text{直前の等式}\bigr).
+\end{aligned}`),
+                  paragraph(["双曲線関数の定義から、二つの式鎖を得る。"]),
                   displayMath(String.raw`\begin{aligned}
 \cosh(2K_q)
 &=(e^{2K_q}+e^{-2K_q})/2
