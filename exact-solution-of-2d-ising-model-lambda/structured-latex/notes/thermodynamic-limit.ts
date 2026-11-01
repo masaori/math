@@ -26,5 +26,22 @@ export default defineNotes([
         "後続の到達点は下組の定義と所属の証人を直接使い、この下閉性を引用しない。独立した到達点でもないため本文から退避した。有限検算と Lean 二版は保管した。",
       ]),
     ],
+  },  {
+    id: "note_real_escape_claim_twisted_mode_product_sum_reindex_archived",
+    targets: ["claim_twisted_mode_product_bijection"],
+    title: { text: "参照用: 横・縦モードの有限和の再添字付け" },
+    body: [
+      paragraph([
+        "旧主張。", ref("claim_twisted_mode_product_bijection"),
+        " の全単射 ", math(String.raw`\Theta_{L,a,b}`),
+        " について、任意の写像 ",
+        math(String.raw`F:E_{L,a}\times E_{L,b}\to\mathbb C`),
+        " は次の等式を満たす。",
+      ]),
+      displayMath(String.raw`\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}F(\Theta_{L,a,b}(\varpi,\varsigma))=\sum_{(z,w)\in E_{L,a}\times E_{L,b}}F(z,w).`),
+      paragraph([
+        "有限和の再添字付けは全単射から従う。後続のモード和は全単射を直接引用し、この独立した主張を引用しないため本文から退避した。有限検算は全単射の検証として残した。",
+      ]),
+    ],
   },
 ]);

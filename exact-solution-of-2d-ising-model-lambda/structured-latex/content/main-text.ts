@@ -71706,7 +71706,8 @@ w_{r+1}
                     ],
                     proof: [
                       paragraph([ref("claim_tagged_difference_alternating_cycle"), " より、最小正周期は ", math(String.raw`n=2k`), " であり、", math(String.raw`c(0),\ldots,c(n-1)`), " は相異なる。", ref("claim_matching_pair_successor_color"), " により偶数番目の ", math(String.raw`e_r`), " は第一色、長い対の相手は第二色である。", ref("claim_reference_long_mate_reversal"), " によりその長い相手は ", math(String.raw`\iota(e_r)`), " である。"]),
-                      paragraph([math(String.raw`p(w_r)=p(e_r)`), " は反転が台の辺を保つという ", ref("def_edge_reversal"), " の定義から従う。", math(String.raw`p(w_r)=p(w_s)`), " を仮定する。この等号から ", math(String.raw`p(e_r)=p(e_s)`), " を得る。一つの無向辺の向きは二つだけなので、", math(String.raw`e_r=e_s`), " または ", math(String.raw`e_r=\iota(e_s)`), " である（", ref("def_oriented_edges"), "、", ref("def_edge_reversal"), "）。"]),
+                      displayMath(String.raw`p(w_r)=p(e_r)\qquad(\because\ \blkref{def_edge_reversal}\text{ により反転は台の辺を保つ})`),
+                      paragraph([math(String.raw`p(w_r)=p(w_s)`), " を仮定する。この等号と上の等号から ", math(String.raw`p(e_r)=p(e_s)`), " を得る。一つの無向辺の向きは二つだけなので、", math(String.raw`e_r=e_s`), " または ", math(String.raw`e_r=\iota(e_s)`), " である（", ref("def_oriented_edges"), "、", ref("def_edge_reversal"), "）。"]),
                       paragraph(["後者なら ", math(String.raw`e_r`), " は第一色であると同時に ", math(String.raw`e_s`), " の長い相手として第二色となり矛盾する（", ref("claim_matching_pair_second_coloring_alternates"), "、", ref("claim_reference_long_mate_reversal"), "）。従って ", math(String.raw`e_r=e_s`), " である。", math(String.raw`2r,2s<n`), " だから ", ref("claim_finite_permutation_orbit_enumeration"), " の最小正周期未満の一意性から ", math(String.raw`2r=2s`), "、自然数の乗法の消去により ", math(String.raw`r=s`), " を得る。"]),
                     ],
                   },
@@ -78940,46 +78941,6 @@ e_{L,c,k}^{L}
 &=(z,w)&&\bigl(\because\ \varsigma\text{ の選択}\bigr).
 \end{aligned}`),
                   paragraph(["よって全射である。"]),
-                ],
-              },
-            },
-          },
-          {
-            role: "primary",
-            element: {
-              kind: "elementGroup",
-              id: "group_of_real_escape_claim_twisted_mode_product_sum_reindex",
-              focus: {
-                id: "real_escape_claim_twisted_mode_product_sum_reindex",
-                kind: "claim",
-                title: { text: "横・縦モードの有限和は複素根の組で再添字付けできる" },
-                labels: ["claim_twisted_mode_product_sum_reindex"],
-                habitat: "C",
-                realEscape: "代数的なモードの有限和を複素実現し、複素根の組を添字とする有限和へ移す。",
-                verification: ["sagemath/check/twisted-mode-product-reindex"],
-                statement: [
-                  paragraph([
-                    "任意の辺長 ", math(String.raw`L\in\mathbb N_{\ge1}`), "、スピン構造 ",
-                    math(String.raw`(a,b)\in\mathcal S`), "、写像 ",
-                    math(String.raw`F:E_{L,a}\times E_{L,b}\to\mathbb C`), " について、",
-                  ]),
-                  displayMath(String.raw`\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
-F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
-=\sum_{(z,w)\in E_{L,a}\times E_{L,b}}F(z,w).`),
-                ],
-                proof: [
-                  paragraph([
-                    ref("claim_twisted_mode_product_bijection"),
-                    " により、左辺の添字の各組は右辺の添字のただ一つの組へ対応し、右辺の各組は一度ずつ現れる。従って",
-                  ]),
-                  displayMath(String.raw`\begin{aligned}
-\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}
-F\bigl(\rho_{\overline{\mathbb Q}\to\mathbb C}(\varpi),\rho_{\overline{\mathbb Q}\to\mathbb C}(\varsigma)\bigr)
-&=\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}F\bigl(\Theta_{L,a,b}(\varpi,\varsigma)\bigr)
-&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の写像の定義}\bigr)\\
-&=\sum_{(z,w)\in E_{L,a}\times E_{L,b}}F(z,w)
-&&\bigl(\because\ \blkref{claim_twisted_mode_product_bijection}\text{ の全単射による再添字付け}\bigr).
-\end{aligned}`),
                 ],
               },
             },

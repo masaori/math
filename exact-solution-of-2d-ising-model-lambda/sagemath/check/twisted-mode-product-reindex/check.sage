@@ -1,4 +1,4 @@
-# 対象ラベル: claim_twisted_mode_product_bijection, claim_twisted_mode_product_sum_reindex
+# 対象ラベル: claim_twisted_mode_product_bijection
 # 有限例で直積の像と、複素根の組を添字とする和の一致を厳密検算する。
 for L in range(1, 9):
     primitive = QQbar.zeta(2 * L)
