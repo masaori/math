@@ -7,6 +7,20 @@ import { defineNotes, displayMath, list, math, paragraph, ref } from "../schema.
 
 export default defineNotes([
   {
+    id: "note_kac_ward_isolated_smoothing_crossing_number_update_archived",
+    targets: ["claim_smoothing_crossing_number_update"],
+    title: { text: "参照用: 孤立した横断の平滑化" },
+    body: [
+      paragraph(["旧定義。閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`), " の横断する添字 ", math(String.raw`k<l`), " を取る。通過と巡回後続写像 ", math(String.raw`\sigma`), " は ", ref("def_closed_walk_passes"), " による。共通の通過頂点を ", math(String.raw`v:=\operatorname{tgt}(\vec e_k)=\operatorname{tgt}(\vec e_l)`), " と置く。横断が孤立しているとは、任意の ", math(String.raw`r\in I_m`), " について次が成り立つことをいう。"]),
+      displayMath(String.raw`\operatorname{tgt}(\vec e_r)=v\quad\Longleftrightarrow\quad r=k\ \text{または}\ r=l.`),
+      paragraph(["平滑化後の通過族は、二つの出辺を交換して次で定める。選んだ通過は異なる軸の直進なので、交換後の接続は非後退の回転になる（", ref("def_transverse_crossing"), "）。平滑化後の横断数 ", math(String.raw`c_{\mathrm{sm}}(\gamma;k,l)`), " は、横断する ", math(String.raw`r<s`), " の通過対の個数である。"]),
+      displayMath(String.raw`u_k^{\mathrm{sm}}:=(\vec e_k\to\vec e_{\sigma(l)}),\qquad u_l^{\mathrm{sm}}:=(\vec e_l\to\vec e_{\sigma(k)}),\qquad u_r^{\mathrm{sm}}:=(\vec e_r\to\vec e_{\sigma(r)})\quad(r\ne k,l).`),
+      paragraph(["旧主張と証明。元の横断対の集合を ", math(String.raw`C`), "、平滑化後を ", math(String.raw`C_{\mathrm{sm}}`), " と置く。選んだ二通過は交換後に横断しない。孤立性により同じ頂点に第三の通過は無く、他の頂点の通過は変わらない。したがって横断判定が変わる対は ", math(String.raw`(k,l)`), " だけである。元の横断数は ", ref("def_closed_walk_crossing_number"), " による。"]),
+      displayMath(String.raw`C_{\mathrm{sm}}=C\setminus\{(k,l)\},\qquad c(\gamma)=c_{\mathrm{sm}}(\gamma;k,l)+1.`),
+      paragraph(["この主張は後続から引用されない。採用経路は孤立性を仮定せず、各軸の直進通過数による一般の更新式（", ref("claim_smoothing_crossing_number_update"), "）と横断数の真の減少を使うため、本文から外した。元の有限検算と Lean 二版は保管した。"]),
+    ],
+  },
+  {
     id: "note_kac_ward_ordered_crossing_pairs_double_archived",
     targets: ["def_closed_walk_crossing_number"],
     title: { text: "参照用: 順序つき横断対と横断数の二倍則" },

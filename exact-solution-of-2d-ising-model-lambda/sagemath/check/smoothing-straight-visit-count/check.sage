@@ -101,7 +101,7 @@ for L in range(1, 4):
                 out_edge = {r: walk[(r + 1) % m] for r in range(m)}
                 out_edge[k] = walk[(l + 1) % m]
                 out_edge[l] = walk[(k + 1) % m]
-                # 平滑化後の各接続は非後退のまま（def_isolated_crossing_smoothing の注意）
+                # 平滑化後の各接続は非後退のまま（def_smoothing_straight_visit_count）
                 for r in range(m):
                     assert out_edge[r] != reversal(walk[r])
                 if sum(1 for r in range(m)
