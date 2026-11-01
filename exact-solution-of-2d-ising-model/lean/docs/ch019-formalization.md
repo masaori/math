@@ -44,6 +44,8 @@
 
 #### `ClaimEpsilonIsSignFlipPermutation.lean`（ラベル `epsilon_is_sign_flip_permutation`）
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.flipIdx` / `Ising2D.flipConf` | 1 サイトの符号反転と、配置全体の符号反転 `π` | `π(k) =`（配置 `-s_k` の番号） |
@@ -100,6 +102,8 @@
 
 ### 1.2 必要十分版（`lean/Ising2D/NecSuf/PermSector.lean`、名前空間 `Ising2D.NecSuf`）
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `NecSuf.permMat` | 写像 `π : n → n` の置換行列 `(permMat π)_{ij} = δ_{j,π(i)}` | `epsilon_is_sign_flip_permutation` (1) |
@@ -120,6 +124,8 @@
 | **`NecSuf.rayleighSup_eq_sectorRayleighSup_pos`** | **`c(M) = c_+(M)`** | **`c_equals_c_plus` Step 1** |
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
+
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
@@ -154,6 +160,8 @@
   固有値の存在も既約性も原始性も使わずに、上限（`sSup`）の言葉だけで閉じる。
 
 ## 3. 形式化できなかった主張とその理由
+
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
 | 人手証明 | 状況 | 理由 |
 | --- | --- | --- |

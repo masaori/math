@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-01: Lean の通しの証明のゴールラインの確認の二十七個目を行った。`lean/scripts/check-docs-references.sh` に、`lean/README.md` と `lean/docs/` の表の人手証明の列のラベルが本文の `labels`・`id` にあるか、参照用ノートへ退避した記録があってそのノートが表の行か表の前の文で名指されていることの検査を足した。不合格の 93 か所は改名ではなくすべて退避か Lean の名前で、16 の表の前に退避先のノートを名指す一文を置き、Lean の名前に `Ising2D.` を付けて直した。次は状態台帳の「次の一歩」の先頭（`exp_smul_pauliX` を人手どおりの偶奇分解で直せるか）。
+
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十六個目を行った。章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の Lean に (1)（`tr(εV^{(+)})` の閉じた形と正値性、`trace_of_epsilon_V_plus` そのもの）を立てて仮定 `htr` を外し、(2) を人手どおり `im Q̌_{(1,…,1)}` の元について冪等性の行から示す形に直した。次は状態台帳の「次の一歩」の先頭（対応表の人手ラベルの列のうち、いまの `labels` に無い 87 件の整理）。
 
 2026-11-01: Lean の通しの証明のゴールラインの確認の二十五個目を行った。`lean/README.md` と `lean/docs/` の表の行か見出しにファイル名で出ない Lean のファイル 86 個を表へ載せ（67 個は既存の行にファイル名を書き足し、19 個は行を足した）、`lean/scripts/check-docs-references.sh` に「`Ising2D/` の全ファイルが表か見出しに出る」検査を足した。章末の主張 `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` の Lean が (1) を立てず (2) を仮定付きで示していることを状態台帳の「次の一歩」の先頭に足した。

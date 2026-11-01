@@ -109,7 +109,7 @@
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| **`VPlusData.eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`** | **(1)**（`tr(εV^{(+)}) > 0` を仮定として受け取る。具体的な `V^{(+)}` では `trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）で埋める） |
+| **`VPlusData.eta_univ_eq_one`** | **`η_{(1,…,1)} = +1`** | **(1)**（`tr(εV^{(+)}) > 0` を仮定として受け取る。具体的な `V^{(+)}` では `Ising2D.trace_epsilon_vPlusDataOf_pos`（人手 `trace_of_epsilon_V_plus`）で埋める） |
 | **`VPlusData.eta_eq_sign`** | **`η_ε = (−1)^{M−|ε|}`** | **(2)** |
 | **`VPlusData.epsilon_eq_parityProd_of_trace_pos`** | **`ε = (−1)^M ∏_μ(I − 2ň_μ)`** | **(3)** |
 | **`VPlusData.epsilon_mul_Qproj_univ`** | **`ε Q̌_{(1,…,1)} = Q̌_{(1,…,1)}`** | **(4)** |
@@ -206,7 +206,7 @@
 | **`Ising2D.epsilon_mulVec_basisVec_configBasisIso`** | **`εf_{ι(s)} = f_{ι(-s)}`** | **Step 3 (b)** |
 | `Ising2D.epsilon_apply_configBasisIso` / `epsilon_mul_apply_configBasisIso` | `ε_{ι(s),J} = δ_{J,ι(-s)}`、`(εA)_{ι(s),J} = A_{ι(-s),J}`（行の形。`epsilon_apply` から） | Step 4 が (b) として使う形 |
 | `Ising2D.matExp_smul_openChainD0_mul_apply` / `boundaryG_mul_apply` | `(exp(K_1D_0)X)_{ι(s),J} = exp(K_1E(s))X_{ι(s),J}`、`(GX)_{ι(s),J} = s(M_col)s(1)X_{ι(s),J}` | Step 4 が (a) として使う形 |
-| `Ising2D.sum_spin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `V2_apply_configBasisIso`） |
+| `Ising2D.sum_spin_mul_self` / **`V2_apply_configBasisIso_self`** / **`V2_apply_configBasisIso_neg_self`** | `∑_m s(m)s(m) = M_col`、**`(V_2)_{ι(s),ι(s)} = exp(M_colK_2)`、`(V_2)_{ι(-s),ι(s)} = exp(-M_colK_2)`** | **Step 3 (c)**（一般の成分は `Ising2D.V2_apply_configBasisIso`） |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimTraceEpsilonVPlusClosedForm.lean`（ラベル `trace_of_epsilon_V_plus` の Step 4・Step 5 と主張）
 

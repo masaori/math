@@ -15,6 +15,8 @@
 
 ### 具体版（人手証明と 1 対 1）
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避したどの章のゴールの主張からも使われない主張、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.lie_H2_hatZMinus_eq`（`ClaimWhyIntegerMomentumOnlyMinusSector.lean`） | `[H_2, hat(Z)^{(-)}_μ] = -2 hat(Y)_μ`（`RoutesNotAdopted/IntegerMomentum/ClaimCommutatorHAndHatZHatY.lean` の再掲） | `why_008_applies_only_to_minus_sector` |

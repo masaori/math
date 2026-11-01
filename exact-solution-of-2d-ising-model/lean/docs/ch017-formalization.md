@@ -69,6 +69,8 @@
 
 ### 具体版（`Ising2D`, `Ising2D.CheckFermiSetup`）
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `claims_unused_by_chapter_goals_not_adopted.ts` へ退避したどの章のゴールの主張からも使われない主張のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
 | `checkIdxFinset` / `CheckIdx` / `CheckIdx.card` | `𝓜̌ = {1,…,M}` と `|𝓜̌| = M` | `def_check_index_set` |

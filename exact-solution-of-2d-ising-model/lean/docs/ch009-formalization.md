@@ -13,6 +13,8 @@
 
 ### 必要十分版（`Ising2D.NecSuf`）
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
 | `NecSuf.num` | `n_i := c_i a_i` | `def_number_operator` |
@@ -41,6 +43,8 @@
 | `NecSuf.isInternal_range_matrix_proj` / `exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj` | 上記の行列版（**対角化可能性**: `P P' = P' P = 1` かつ `P' A P = diagonal Λ`） | 同 Step 4 の結論 |
 
 ### 具体版（`Ising2D`, `Ising2D.FermiSetup`）
+
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
 | Lean の名前 | 内容 | 対応する人手証明のラベル |
 | --- | --- | --- |
@@ -106,6 +110,8 @@
 ---
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
+
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
@@ -175,6 +181,8 @@
 ---
 
 ## 3. 形式化できなかった主張とその理由
+
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
 
 | 原文の主張 | 状況 | 理由 |
 | --- | --- | --- |

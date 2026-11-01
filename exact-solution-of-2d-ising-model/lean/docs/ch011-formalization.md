@@ -43,6 +43,8 @@
 章「M→∞ の極限と閉形式」に当たる `c_+(M)` の定義・`c_+ ≤ c`・`ε^⊤ = ε`・`εW = Wε`・具体的な `W` の成分の正値性のファイルは
 `lean/Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/` にある（`DefinitionSectorRayleighSup`・`ClaimCPlusLeC`・`ClaimEpsilonIsRealSymmetric`・`ClaimEpsilonCommutesWithW`・`ClaimPhysicalWHasPositiveEntries`・`ClaimPhysicalWHasPositiveEntriesFromNecSuf`）。
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 人手証明のラベル |
 | --- | --- | --- |
 | `Ising2D.psd_cauchy_schwarz`（`ClaimPsdCauchySchwarz.lean`） | `(yᵀPx)² ≤ (xᵀPx)(yᵀPy)`（`P` 実対称半正定値） | `psd_cauchy_schwarz` |
@@ -119,6 +121,8 @@
 
 ## 2. 2 本立ての対応表と「必要十分版で判明した本質」
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `minus_sector_not_adopted.ts` へ退避した全スピン反転行列の固有値 −1 の側のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
 | `psd_cauchy_schwarz` | `Ising2D.psd_cauchy_schwarz` | `Ising2D.NecSuf.psd_cauchy_schwarz` | **はい**（`matBilin P` を代入） |
@@ -188,7 +192,7 @@
 | --- | --- | --- |
 | `Z(K_1,K_2) = tr((V₁V₂)^{N_row})` | `partition_function_via_transfer_matrix`（章 001。Lean では `Ising2D.partition_function_via_transfer_matrix`） | `partition_function_sandwich` の引数 `hZ`。具体的な `Z` と `V₁^{1/2}`, `V₂` については `partition_function_sandwich_physical` がすべての引数を証明して埋める |
 | `V₁^{1/2}` が正の対角行列 | `sigma_z_diagonal_action` + `exp_of_diagonal_matrix`（章 009） | `Ising2D.diagExp d`（`d : n → ℝ`）として与える。`d μ = (1/2)K₁∑_m μ(m)μ(m+1)` に対応 |
-| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
+| `V₂` の成分がすべて正 | `def_transfer_matrix`（章 001。成分は `Ising2D.physicalV2C_eq_map` で実行列と一致） | `symTransfer_entry_pos` の引数 `hV2`。具体的な `V₂` については `physicalV2R_apply_configBasisIso_pos` で証明済み |
 | `V₂` が実対称正定値 | `iH_is_real_symmetric` + `exp_hermitian_is_positive_definite`（章 009） | `symTransfer_posDef` / `partition_function_sandwich` の引数。具体的な `V₂` については `physicalV2R_isSymm` / `physicalV2R_posDef`（章 009 の `posDef_exp_of_isHermitian` と章 004 の `V2_exponential_representation` から）で証明済み |
 | `ε` が実対称・`ε² = 1`・`εW = Wε`（一般の `W` について） | `epsilon_is_real_symmetric`・`epsilon_square_and_eigenvalues`・`epsilon_commutes_with_W` | 物理的な `W`（`physicalSymTransferR`）と `ε`（`epsilonR`）については `epsilon_commutes_with_W` / `epsilonR_isSymm` / `epsilonR_mul_self` で証明済み。一般の `W` について述べる定理（章 018 の `EvenSectorBridge` など）は `εW = Wε` を引数で受け取る |
 

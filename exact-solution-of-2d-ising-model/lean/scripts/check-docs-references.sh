@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # lean/README.md と lean/docs/*.md が書く `.lean` のパスと `Ising2D.` の名前が、いまの Lean に実在するかと、
-# Ising2D/ の全ファイルが文書の表か見出しに出るかを確かめる。
+# Ising2D/ の全ファイルが文書の表か見出しに出るかと、表の人手証明のラベルが人手証明に実在するかを確かめる。
 # 終了コード 0 なら OK。実在しないものがあれば、その行を列挙して 1 で終わる。
 #
 # 使い方:
@@ -20,7 +20,17 @@
 #      （`Foo.lean` と書けば、`Foo.lean` という名前のファイルが 1 つしか無いときだけ数える）。
 #      コードブロック（``` で囲んだ範囲）の中の行は数えない。表の行は、どの列にファイル名が出ても数えるので、
 #      その行がそのファイルの主張を書いているかまでは確かめない。
-# 検査しないこと: `.lean` 以外のパス、表に書かれた人手証明のラベル。
+#   4. 表の人手証明の列（見出しに「人手」「原文」「ラベル」を含み「記号」を含まない列）に `` ` `` で囲んで書いた、
+#      `_` を含む名前（`<…>` で囲んだものは中身）がすべて、人手証明に実在する。名前とは、英字か漢字・仮名で始まり、
+#      英数字・`_`・`-`・漢字・仮名だけから成るものである（ギリシャ文字・空白・`/`・`^` などを含むものは式やパスとして除く）。
+#      列は `` ` `` の外の `|` だけで区切る。実在とは次のどれかであること。
+#      - 本文（../structured-latex/content/）のブロックの labels か id にある。
+#      - 参照用ノート（../structured-latex/notes/）の文に、退避した記録「labels: …」か「ブロック <id>」として出て、
+#        そのノートのファイル名が、同じ表の行か、表の前の文に出る。表の前の文とは、直前の見出しか直前の表の終わりの
+#        どちらか後のほうから、表の見出し行までの、コードブロックの外の行である。
+#      Lean の名前は `Ising2D.` を付けて書く（`.` を含むので、この検査ではなく検査 2 が見る）。
+# 検査しないこと: `.lean` 以外のパス、表の人手証明の列の外に書かれた人手証明のラベル、`_` を含まないラベル（いまの本文には無い）。
+#   なお、表の最初の行の次が区切り行でないもの（見出しの行を持たない表。GitHub でも表として表示されない）は不合格にする。
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
@@ -175,6 +185,84 @@ for d in docs:
             if not ok:
                 bad.append(f'{d}:{ln}: 実在しない名前 {n}{star}')
 
+# 検査 4: 表の人手証明の列のラベル
+sl = '../structured-latex'
+human_names = set()
+for f in glob.glob(sl + '/content/*.ts'):
+    t = open(f, encoding='utf-8').read()
+    for m in re.finditer(r'\blabels:\s*\[([^\]]*)\]', t):
+        human_names |= set(re.findall(r'"([^"]+)"', m.group(1)))
+    human_names |= set(re.findall(r'\bid:\s*"([^"]+)"', t))
+retired = {}  # 退避した名前 → それを記録した参照用ノートのファイル名
+for f in glob.glob(sl + '/notes/*.ts'):
+    t = open(f, encoding='utf-8').read()
+    found = set(re.findall(r'ブロック\s*([A-Za-z0-9_]+)', t))
+    for m in re.finditer(r'labels:\s*([^。）\n"]+)', t):
+        found |= {x.strip() for x in re.split(r'[,、]', m.group(1)) if x.strip()}
+    for x in found:
+        retired.setdefault(x, set()).add(os.path.basename(f))
+code_span = re.compile(r'`([^`]*)`')
+label_shape = re.compile(r'^[A-Za-z\u3040-\u30ff\u4e00-\u9fff][A-Za-z0-9_\-\u3040-\u30ff\u4e00-\u9fff]*$')
+
+def split_cells(row):
+    # `` ` `` の外の `|` だけで区切る（`|γ_2|^2` のような式の中の `|` で列をずらさない）
+    cells, cur, in_tick = [], '', False
+    for ch in row.strip().strip('|'):
+        if ch == '`':
+            in_tick = not in_tick
+        if ch == '|' and not in_tick:
+            cells.append(cur.strip())
+            cur = ''
+        else:
+            cur += ch
+    cells.append(cur.strip())
+    return cells
+
+def label_names(cell):
+    for raw in code_span.findall(cell):
+        t = raw[1:-1] if raw.startswith('<') and raw.endswith('>') else raw
+        if '_' in t and label_shape.match(t):
+            yield t
+for d in docs:
+    lines = open(d, encoding='utf-8').read().splitlines()
+    cols = None
+    lead = ''  # 表の前の文（直前の見出しか直前の表の終わりから、コードブロックの外の行）
+    in_code = False
+    for ln, line in enumerate(lines, 1):
+        fence = line.lstrip().startswith('```')
+        if fence:
+            in_code = not in_code
+        if fence or in_code or not line.startswith('|'):
+            if cols is not None:
+                lead = ''
+            cols = None
+            if fence or in_code:
+                continue
+            if line.startswith('#'):
+                lead = ''
+            lead += line + '\n'
+            continue
+        cells = split_cells(line)
+        if cols is None:
+            nxt = lines[ln] if ln < len(lines) else ''
+            if not re.match(r'^\|[\s:|-]+\|?\s*$', nxt) or '-' not in nxt:
+                bad.append(f'{d}:{ln}: 表の最初の行の次が区切り行でない（見出し行の無い表。表の途中に引用ブロックなどを挟まない）')
+            cols = [k for k, c in enumerate(cells) if re.search('人手|原文|ラベル', c) and '記号' not in c]
+            continue
+        if set(cells[0]) <= set('-: '):
+            continue
+        for k in cols:
+            if k >= len(cells):
+                continue
+            for t in label_names(cells[k]):
+                if t in human_names:
+                    continue
+                if any(nb in line or nb in lead for nb in retired.get(t, ())):
+                    continue
+                where = '、'.join(sorted(retired.get(t, ())))
+                hint = f'（参照用ノート {where} に退避の記録があるが、そのファイル名が行にも表の前の文にも無い）' if where else ''
+                bad.append(f'{d}:{ln}: 人手証明に実在しないラベル {t}{hint}')
+
 for f in lean_files:
     if f.startswith('Ising2D/') and f not in listed:
         bad.append(f'{f}: どの文書の表の行にも見出しにもファイル名で出ない')
@@ -183,5 +271,5 @@ if bad:
     print('\n'.join(bad))
     print(f'NG: {len(bad)} 件')
     sys.exit(1)
-print('OK: lean/README.md と lean/docs/ が書く .lean のパスと Ising2D. の名前はすべて実在し、Ising2D/ の全ファイルが表か見出しに出る')
+print('OK: lean/README.md と lean/docs/ が書く .lean のパスと Ising2D. の名前と表の人手証明のラベルはすべて実在し、Ising2D/ の全ファイルが表か見出しに出る')
 EOF

@@ -208,6 +208,8 @@ cd exact-solution-of-2d-ising-model/lean
 
 現在 2 本立てになっている主張:
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `<commutator_via_anticommutators>` | `Ising2D.matComm_mul_eq_matAcomm_sub_matAcomm`（`Mat(n, ℂ)`） | `Ising2D.commutator_via_anticommutators`（任意の環） |
@@ -347,7 +349,7 @@ Lean も同じ構成にしてある。
 
 ### 記号の対応
 
-| 人手 | Lean | 備考 |
+| 人手の記号 | Lean | 備考 |
 | --- | --- | --- |
 | 列数 `M_col`（1 行のサイト数） | 束縛変数 `M`（列の添字は `Fin M`） | 束縛変数名は `M` のまま。人手の `m ∈ {1,…,M_col}` が Lean の `(m : ℕ) + 1` |
 | 行数 `N_row` | 束縛変数 `Nrow`（行の添字は `Fin Nrow`） | |
@@ -461,6 +463,8 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 
 ## 現在形式化済みの命題
 
+この表の人手証明のラベルのうち本文に無いものは、参照用ノート `integer_momentum_route_not_adopted.ts` へ退避した整数運動量の経路のものである（退避の記録はノートの各ブロックの冒頭にある）。
+
 | Lean の名前 | 内容 | 対応する人手証明 |
 | --- | --- | --- |
 | `Ising2D.tensorPowBasis` | 基底のテンソル冪はテンソル冪の基底 | `<tensor_basis>` |
@@ -525,7 +529,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.V1pmHalf_sq` | 上の補助の一般形 | （補助） |
 | `Ising2D.matExpUnits` / `smulUnits` | `exp X` と 0 でないスカラー倍の可逆性 | 補助（原文は暗黙に可逆性を使用） |
 | `Ising2D.V1plusUnits` / `V1plusHalfUnits` / `V2H2FormUnits` | `V_1^{(+)}`, `(V_1^{(+)})^{1/2}`, `V2H2Form` を単元 `(TensorPow M)ˣ` として（`V1pmUnits` / `V1pmHalfUnits` は補助の一般形） | 同上（`V2H2Form` には `s_2 > 0` が要る） |
-| `Ising2D.isUnit_V1plus` / `isUnit_V1plusHalf` / `isUnit_V2H2Form` | 上記の `IsUnit` 版 | 同上（`isUnit_V1plusHalf` は `V1_plus_half_invertible`） |
+| `Ising2D.isUnit_V1plus` / `isUnit_V1plusHalf` / `isUnit_V2H2Form` | 上記の `IsUnit` 版 | 同上（`Ising2D.isUnit_V1plusHalf` は `V1_plus_half_invertible`） |
 | `Ising2D.V2Units` / `Ising2D.isUnit_V2` | **`def_transfer_matrix` の `V_2`** の単元と可逆性（`K_2 > 0`。`EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean`） | `V2_invertible` |
 | `Ising2D.H1JordanWigner` / `sum_sigmaZ_sigmaZ_eq_jordanWigner` / `V1PauliForm_eq_jordanWigner` / `V1_in_Z_Y_epsilon` | `V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M-εY_MZ_1))`（最後が `def_transfer_matrix` の `V_1` について） | `V1_in_Z_Y_epsilon` |
 | `Ising2D.TConj` | `T_g : X ↦ g X g⁻¹` を **ℂ-代数自己同型**として | `def_T_g` |
@@ -542,31 +546,6 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.duality_c2_star_eq_s2_star_c2`（`EigenvalueProblem/ReductionToATheta/ClaimDualityC2StarEqS2StarC2.lean`） | `K_2 > 0` で `c_2^* = s_2^* c_2`（`s2star_eq_inv_s2`・`c2star_eq_c2_div_s2` を経る人手の三つの鎖）。`IsingParam` の上では `IsingParam.c2_mul_s2star_eq_c2star` として、仮定 `hdual` を埋める | `duality_c2_star_eq_s2_star_c2` |
 | `Ising2D.B1_mul_B2_mul_B1_eq_AMat` | `B_1(θ) B_2 B_1(θ) = A(θ)`（`AMat` 版。上を実パラメータ・実 `θ` へ cast したもの） | 同上 |
 | `Ising2D.TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'`（`RoutesNotAdopted/IntegerMomentum/ClaimTVActionsOnHatZHatY.lean`） | `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用（**`B_1`, `B_2` の作用を仮定**。作用行列は `AMat K θ`） | `T_V_hatZ_hatY` |
-
-> **`A(θ)` の二重定義（解消済み・2026-07-26）**: 以前は `A(θ)` が `Ising2D.Amat`
-> （`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
-> （`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっており、
-> 名前が大文字小文字違いだけで紛らわしかった。**`AMat` に一本化し `Amat` を削除した。**
-> 現在 `A(θ)` の定義は `Ising2D.AMat` ただ 1 つである。
->
-> 具体的な変更:
->
-> - `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` が `EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` を import するようにした
->   （`Definition019` は mathlib 以外に依存しないので循環しない）。
-> - `Ising2D.Amat` の定義を削除。`B1_mul_B2_mul_B1_eq_Amat` は
->   **`B1_mul_B2_mul_B1_eq_explicit`**（右辺を `Amat` の代わりに同じ内容の `!![…]` リテラルで書いた版。
->   証明は元のまま）と、それを `AMat` へ移す **`B1_mul_B2_mul_B1_eq_AMat`** の 2 本に分けた。
->   重い行列計算（`maxHeartbeats 2000000`）は前者に閉じている。
-> - `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` のステートメントを
->   `(K : IsingConst) … (θ : ℝ)` を取り作用行列が `AMat K θ` になる形へ移した。
-> - これにより不要になった橋渡し補題（`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` 末尾の
->   `Amat_eq_AMat` / `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`）を削除した。
->   `Amat_eq_AMat` の cast の証明（`Complex.ofReal_cos` / `Complex.ofReal_sin` /
->   `Complex.exp_mul_I` による三角関数の cast）は `B1_mul_B2_mul_B1_eq_AMat` の中へ移してある。
-> - `scripts/check-no-sorry.sh` の `targets` から `Ising2D.Amat`,
->   `Ising2D.B1_mul_B2_mul_B1_eq_Amat`, `Ising2D.Amat_eq_AMat`,
->   `Ising2D.B1_mul_B2_mul_B1_eq_AMat'`, `Ising2D.TV_hatZ_hatY_of_action_AMat` を削除し、
->   `Ising2D.B1_mul_B2_mul_B1_eq_explicit`, `Ising2D.B1_mul_B2_mul_B1_eq_AMat` を追加した。
 | `Ising2D.IsingConst` / `Ising2D.thetaMu` | モデル定数 `c_1, s_1, c_2, c_2^*, s_2^*` と `θ_μ := 2πμ/M` | `def_theta_mu`（`008` part1 の `019`） |
 | `Ising2D.gamma1` / `Ising2D.gamma2` / `Ising2D.AMat` | `γ_1(θ)`, `γ_2(θ)`, `A(θ)` | `def_A_theta`、`008` part1 の `020` |
 | `Ising2D.AMat_eq` | `A(θ) = !![γ_1, γ_2(θ); -γ_2(-θ), γ_1]` | 同上（原文の書き換えの検算） |
@@ -642,6 +621,31 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.lie_H2_hatZPlus` | `[H_2, hat(Z)_μ^{(+)}] = -2 hat(Y)_μ + 4e^{-iθ_μ}Y_1`（**原文 (5) の訂正版**） | 同 (5) |
 | `Ising2D.Y_ne_zero` | `Y_m ≠ 0`（`Y_m^2 = I` より） | 上 2 件の反証に使用 |
 | `Ising2D.lie_H1_hatZ_opp_ne_orig` / `lie_H2_hatZPlus_ne_orig` | **原文 (2), (5) が偽であることの証明** | 同上 |
+
+> **`A(θ)` の二重定義（解消済み・2026-07-26）**: 以前は `A(θ)` が `Ising2D.Amat`
+> （`Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean`、5 個の複素パラメータ版）と `Ising2D.AMat`
+> （`EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean`、`IsingConst` と実 `θ` の版）の二重定義になっており、
+> 名前が大文字小文字違いだけで紛らわしかった。**`AMat` に一本化し `Amat` を削除した。**
+> 現在 `A(θ)` の定義は `Ising2D.AMat` ただ 1 つである。
+>
+> 具体的な変更:
+>
+> - `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/DefinitionTgAndTV.lean` が `EigenvalueProblem/ReductionToATheta/DefinitionThetaGamma.lean` を import するようにした
+>   （`Definition019` は mathlib 以外に依存しないので循環しない）。
+> - `Ising2D.Amat` の定義を削除。`B1_mul_B2_mul_B1_eq_Amat` は
+>   **`B1_mul_B2_mul_B1_eq_explicit`**（右辺を `Amat` の代わりに同じ内容の `!![…]` リテラルで書いた版。
+>   証明は元のまま）と、それを `AMat` へ移す **`B1_mul_B2_mul_B1_eq_AMat`** の 2 本に分けた。
+>   重い行列計算（`maxHeartbeats 2000000`）は前者に閉じている。
+> - `TV_hatZ_hatY_of_action` / `TV_hatZ_hatY_of_action'` のステートメントを
+>   `(K : IsingConst) … (θ : ℝ)` を取り作用行列が `AMat K θ` になる形へ移した。
+> - これにより不要になった橋渡し補題（`RoutesNotAdopted/IntegerMomentum/DefinitionFermiPsi.lean` 末尾の
+>   `Amat_eq_AMat` / `B1_mul_B2_mul_B1_eq_AMat'` / `TV_hatZ_hatY_of_action_AMat`）を削除した。
+>   `Amat_eq_AMat` の cast の証明（`Complex.ofReal_cos` / `Complex.ofReal_sin` /
+>   `Complex.exp_mul_I` による三角関数の cast）は `B1_mul_B2_mul_B1_eq_AMat` の中へ移してある。
+> - `scripts/check-no-sorry.sh` の `targets` から `Ising2D.Amat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_Amat`, `Ising2D.Amat_eq_AMat`,
+>   `Ising2D.B1_mul_B2_mul_B1_eq_AMat'`, `Ising2D.TV_hatZ_hatY_of_action_AMat` を削除し、
+>   `Ising2D.B1_mul_B2_mul_B1_eq_explicit`, `Ising2D.B1_mul_B2_mul_B1_eq_AMat` を追加した。
 
 ## 章 009〜020 の形式化（2026-07-27）— 章ごとの正本は `lean/docs/`
 
