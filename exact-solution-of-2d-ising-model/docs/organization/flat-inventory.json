@@ -5885,7 +5885,7 @@
       ]
     }
   ],
-  "dependencySupportNodeCount": 57,
+  "dependencySupportNodeCount": 54,
   "unnamedEntryIds": [
     "calculation_formulae_032_claim_arg_of_product",
     "calculation_formulae_033_claim_arg_of_quotient",
@@ -18248,8 +18248,8 @@
         "status": "自動検査で主題に適合",
         "criterion": "複素数と有限行列の成分・和・積・極限を、依存先から順に高校生が追える粒度で説明する",
         "abstractVocabularyMatches": [],
-        "inspectedCharacterCount": 32076,
-        "inspectedContentSha256": "1576b6a0ca998e22bc0161c96f7dbbc7922de89dd90d458467504afef2cf7bcc",
+        "inspectedCharacterCount": 32310,
+        "inspectedContentSha256": "10c87755a0f88584b0661af127921f91cb684e3bfce0fd3d2bc8f57b557f7d6f",
         "forwardNavigationMixedIntoStatement": false,
         "inspectedFields": [
           "title",
@@ -26964,36 +26964,6 @@
       "title": "\\text{臨界点 }K_c\\text{ と }\\frac{d^2f}{dK^2}\\text{ の対数発散}",
       "labels": [
         "chapter_organization_goal_critical_point_and_log_divergence"
-      ],
-      "sourceFile": "chapter_organization.ts",
-      "dependsOnLabels": []
-    },
-    {
-      "id": "chapter_organization_heading_dependencies",
-      "kind": "heading",
-      "title": "章の依存関係",
-      "labels": [],
-      "sourceFile": "chapter_organization.ts",
-      "dependsOnLabels": []
-    },
-    {
-      "id": "chapter_organization_remark_dependencies",
-      "kind": "remark",
-      "title": "章の依存関係",
-      "labels": [
-        "chapter_organization_dependencies"
-      ],
-      "sourceFile": "chapter_organization.ts",
-      "dependsOnLabels": [
-        "figure_chapter_dependencies"
-      ]
-    },
-    {
-      "id": "chapter_organization_figure_dependencies",
-      "kind": "figure",
-      "title": null,
-      "labels": [
-        "figure_chapter_dependencies"
       ],
       "sourceFile": "chapter_organization.ts",
       "dependsOnLabels": []

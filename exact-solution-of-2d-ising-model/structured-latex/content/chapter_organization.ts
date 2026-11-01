@@ -1,8 +1,8 @@
-import { defineBlocks, diagram, displayMath, list, math, paragraph, ref } from "../schema.ts";
+import { defineBlocks, diagram, displayMath, list, math, paragraph } from "../schema.ts";
 
 /**
- * 論文の冒頭に置く章立ての説明。部と章の並び、各章のゴールの式、章の依存関係の図を示す。
- * 証明を持たない案内なので、主張・定義は置かず、注意と図表だけで書く。
+ * 論文の冒頭に置く章立ての説明。部と章の並び（冒頭に章の依存関係の図を置く）と、各章のゴールの式を示す。
+ * 証明を持たない案内なので、主張・定義は置かず、注意だけで書く。
  * 文書順の最初に来ることは `tools/content-modules.ts` の `LEADING_CONTENT_FILES` が決める。
  */
 export default defineBlocks([
@@ -51,6 +51,133 @@ export default defineBlocks([
     title: { text: "部と章の並び" },
     labels: ["chapter_organization_parts_and_chapters"],
     statement: [
+      paragraph([
+        "数学的道具立てより後の章どうしの依存を次の図に示す。枠は部を、矢印は「矢印の元の章を、矢印の先の章が使う」を表す。ほかの矢印を辿って届く依存の矢印は省いた。数学的道具立てはすべての章が使うので、図には入れていない。",
+      ]),
+      diagram({
+        groups: [
+          { id: "partitionFunction", title: ["分配関数"] },
+          { id: "eigenvalueProblem", title: ["固有値問題"] },
+          { id: "thermodynamicLimit", title: ["熱力学極限"] },
+          { id: "criticalPoint", title: ["臨界点"] },
+        ],
+        boxes: [
+          {
+            id: "transferMatrixRepresentation",
+            title: ["転送行列による表示"],
+            group: "partitionFunction",
+            column: 0,
+            row: 0,
+          },
+          {
+            id: "projectionAndJordanWigner",
+            title: [math(String.raw`\varepsilon`), " の固有値 ", math(String.raw`+1`), " の固有空間への射影と Jordan–Wigner 表示"],
+            group: "partitionFunction",
+            column: 0,
+            row: 1,
+          },
+          {
+            id: "reductionToATheta",
+            title: [
+              "離散 Fourier 変換による ",
+              math(String.raw`2\times2`),
+              " 行列 ",
+              math(String.raw`A(\tilde\theta_\mu)`),
+              " への帰着",
+            ],
+            group: "eigenvalueProblem",
+            column: 0,
+            row: 2,
+          },
+          {
+            id: "diagonalizationAndExponentialForm",
+            title: [
+              math(String.raw`A(\tilde\theta_\mu)`),
+              " の対角化と ",
+              math(String.raw`V^{(+)}`),
+              " の指数表示",
+            ],
+            group: "eigenvalueProblem",
+            column: 0,
+            row: 3,
+          },
+          {
+            id: "eigenvaluesOfVPlus",
+            title: [math(String.raw`V^{(+)}`), " の固有値"],
+            group: "eigenvalueProblem",
+            column: 0,
+            row: 4,
+          },
+          {
+            id: "eigenvectorOfMaxEigenvalue",
+            title: [math(String.raw`V^{(+)}`), " の最大固有値に属する固有ベクトル"],
+            group: "eigenvalueProblem",
+            column: 0,
+            row: 5,
+          },
+          {
+            id: "rowLimitAndMaxEigenvalue",
+            title: [
+              math(String.raw`N\to\infty`),
+              " の極限と最大固有値 ",
+              math(String.raw`c(M)`),
+            ],
+            group: "thermodynamicLimit",
+            column: 1,
+            row: 6,
+          },
+          {
+            id: "columnLimitAndClosedForm",
+            title: [math(String.raw`M\to\infty`), " の極限と閉形式"],
+            group: "thermodynamicLimit",
+            column: 0,
+            row: 7,
+          },
+          {
+            id: "criticalPointAndLogDivergence",
+            title: [
+              "臨界点 ",
+              math(String.raw`K_c`),
+              " と ",
+              math(String.raw`\frac{d^2f}{dK^2}`),
+              " の対数発散",
+            ],
+            group: "criticalPoint",
+            column: 0,
+            row: 8,
+          },
+        ],
+        edges: [
+          { from: "transferMatrixRepresentation", to: "projectionAndJordanWigner" },
+          { from: "projectionAndJordanWigner", to: "reductionToATheta" },
+          { from: "reductionToATheta", to: "diagonalizationAndExponentialForm" },
+          { from: "diagonalizationAndExponentialForm", to: "eigenvaluesOfVPlus" },
+          { from: "eigenvaluesOfVPlus", to: "eigenvectorOfMaxEigenvalue" },
+          { from: "eigenvectorOfMaxEigenvalue", to: "columnLimitAndClosedForm" },
+          { from: "eigenvaluesOfVPlus", to: "rowLimitAndMaxEigenvalue" },
+          { from: "rowLimitAndMaxEigenvalue", to: "columnLimitAndClosedForm" },
+          { from: "columnLimitAndClosedForm", to: "criticalPointAndLogDivergence" },
+        ],
+      }),
+      paragraph([
+        "分配関数の二章と、固有値問題の初めの三章は一列に並ぶ。",
+        math(String.raw`V^{(+)}`),
+        " の固有値の章のあとで、流れは二つに分かれる。一つは ",
+        math(String.raw`V^{(+)}`),
+        " の最大固有値に属する固有ベクトルの章であり、もう一つは ",
+        math(String.raw`N\to\infty`),
+        " の極限の章である（",
+        math(String.raw`W`),
+        " が実対称で正定値であることの証明が、",
+        math(String.raw`V^{(+)}`),
+        " の固有値の章で示す、",
+        math(String.raw`iK_1H_1^{(+)}`),
+        " と ",
+        math(String.raw`iK_2^*H_2`),
+        " が実対称であることを使う）。二つの流れは ",
+        math(String.raw`M\to\infty`),
+        " の極限の章で合流する。",
+      ]),
       paragraph([
         "この論文は、数学的道具立てを先に置き、そのあとに分配関数・固有値問題・熱力学極限・臨界点の四つの部を置く。部と章の並びは次のとおりである。",
       ]),
@@ -307,159 +434,6 @@ c(M)=\sup\left\{x^\top Wx\ \middle|\ x\in\mathbb R^{2^M},\ \lVert x\rVert=1\righ
       ]),
       displayMath(String.raw`\sinh 2K_c=1,\qquad
 \left\lvert\frac{d^2f}{dK^2}(K)-\frac{8}{\pi}\log\frac{1}{\lvert K-K_c\rvert}\right\rvert\le 49`),
-    ],
-  },
-  {
-    id: "chapter_organization_heading_dependencies",
-    kind: "heading",
-    level: 3,
-    title: { text: "章の依存関係" },
-    labels: [],
-  },
-  {
-    id: "chapter_organization_remark_dependencies",
-    kind: "remark",
-    title: { text: "章の依存関係" },
-    labels: ["chapter_organization_dependencies"],
-    statement: [
-      paragraph([
-        "章どうしの依存を",
-        ref("figure_chapter_dependencies"),
-        "に示す。分配関数の二章と、固有値問題の初めの三章は一列に並ぶ。",
-        math(String.raw`V^{(+)}`),
-        " の固有値の章のあとで、流れは二つに分かれる。一つは ",
-        math(String.raw`V^{(+)}`),
-        " の最大固有値に属する固有ベクトルの章であり、もう一つは ",
-        math(String.raw`N\to\infty`),
-        " の極限の章である（",
-        math(String.raw`W`),
-        " が実対称で正定値であることの証明が、",
-        math(String.raw`V^{(+)}`),
-        " の固有値の章で示す、",
-        math(String.raw`iK_1H_1^{(+)}`),
-        " と ",
-        math(String.raw`iK_2^*H_2`),
-        " が実対称であることを使う）。二つの流れは ",
-        math(String.raw`M\to\infty`),
-        " の極限の章で合流する。",
-      ]),
-    ],
-  },
-  {
-    id: "chapter_organization_figure_dependencies",
-    kind: "figure",
-    labels: ["figure_chapter_dependencies"],
-    content: [
-      diagram({
-        groups: [
-          { id: "partitionFunction", title: ["分配関数"] },
-          { id: "eigenvalueProblem", title: ["固有値問題"] },
-          { id: "thermodynamicLimit", title: ["熱力学極限"] },
-          { id: "criticalPoint", title: ["臨界点"] },
-        ],
-        boxes: [
-          {
-            id: "transferMatrixRepresentation",
-            title: ["転送行列による表示"],
-            group: "partitionFunction",
-            column: 0,
-            row: 0,
-          },
-          {
-            id: "projectionAndJordanWigner",
-            title: [math(String.raw`\varepsilon`), " の固有値 ", math(String.raw`+1`), " の固有空間への射影と Jordan–Wigner 表示"],
-            group: "partitionFunction",
-            column: 0,
-            row: 1,
-          },
-          {
-            id: "reductionToATheta",
-            title: [
-              "離散 Fourier 変換による ",
-              math(String.raw`2\times2`),
-              " 行列 ",
-              math(String.raw`A(\tilde\theta_\mu)`),
-              " への帰着",
-            ],
-            group: "eigenvalueProblem",
-            column: 0,
-            row: 2,
-          },
-          {
-            id: "diagonalizationAndExponentialForm",
-            title: [
-              math(String.raw`A(\tilde\theta_\mu)`),
-              " の対角化と ",
-              math(String.raw`V^{(+)}`),
-              " の指数表示",
-            ],
-            group: "eigenvalueProblem",
-            column: 0,
-            row: 3,
-          },
-          {
-            id: "eigenvaluesOfVPlus",
-            title: [math(String.raw`V^{(+)}`), " の固有値"],
-            group: "eigenvalueProblem",
-            column: 0,
-            row: 4,
-          },
-          {
-            id: "eigenvectorOfMaxEigenvalue",
-            title: [math(String.raw`V^{(+)}`), " の最大固有値に属する固有ベクトル"],
-            group: "eigenvalueProblem",
-            column: 0,
-            row: 5,
-          },
-          {
-            id: "rowLimitAndMaxEigenvalue",
-            title: [
-              math(String.raw`N\to\infty`),
-              " の極限と最大固有値 ",
-              math(String.raw`c(M)`),
-            ],
-            group: "thermodynamicLimit",
-            column: 1,
-            row: 6,
-          },
-          {
-            id: "columnLimitAndClosedForm",
-            title: [math(String.raw`M\to\infty`), " の極限と閉形式"],
-            group: "thermodynamicLimit",
-            column: 0,
-            row: 7,
-          },
-          {
-            id: "criticalPointAndLogDivergence",
-            title: [
-              "臨界点 ",
-              math(String.raw`K_c`),
-              " と ",
-              math(String.raw`\frac{d^2f}{dK^2}`),
-              " の対数発散",
-            ],
-            group: "criticalPoint",
-            column: 0,
-            row: 8,
-          },
-        ],
-        edges: [
-          { from: "transferMatrixRepresentation", to: "projectionAndJordanWigner" },
-          { from: "projectionAndJordanWigner", to: "reductionToATheta" },
-          { from: "reductionToATheta", to: "diagonalizationAndExponentialForm" },
-          { from: "diagonalizationAndExponentialForm", to: "eigenvaluesOfVPlus" },
-          { from: "eigenvaluesOfVPlus", to: "eigenvectorOfMaxEigenvalue" },
-          { from: "eigenvectorOfMaxEigenvalue", to: "columnLimitAndClosedForm" },
-          { from: "eigenvaluesOfVPlus", to: "rowLimitAndMaxEigenvalue" },
-          { from: "rowLimitAndMaxEigenvalue", to: "columnLimitAndClosedForm" },
-          { from: "columnLimitAndClosedForm", to: "criticalPointAndLogDivergence" },
-        ],
-      }),
-    ],
-    caption: [
-      paragraph([
-        "章の依存関係。枠は部を、矢印は「矢印の元の章を、矢印の先の章が使う」を表す。ほかの矢印を辿って届く依存の矢印は省いた。数学的道具立てはすべての章が使うので、図には入れていない。",
-      ]),
     ],
   },
 ]);
