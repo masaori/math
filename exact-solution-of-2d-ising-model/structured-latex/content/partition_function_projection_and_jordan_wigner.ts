@@ -3710,76 +3710,220 @@ P^{(+)} f
     },
   },
   {
-    id: "bridge_claim_epsilon_projectors_commute_with_transfer_matrices",
+    id: "bridge_claim_epsilon_projector_commutes_with_epsilon_commuting_matrix",
     kind: "claim",
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
-    title: { tex: String.raw`P^{(+)} \text{ は転送行列と可換}` },
-    labels: ["epsilon_projectors_commute_with_transfer_matrices"],
+    title: { tex: String.raw`\varepsilon \text{ と可換な行列は } P^{(+)} \text{ とも可換}` },
+    labels: ["epsilon_projector_commutes_with_epsilon_commuting_matrix"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
         ref("def_epsilon_projectors"),
         " の ",
         math(String.raw`P^{(+)}`),
-        " は ",
-        math(String.raw`V_1,V_2,V_1^{(+)},(V_1^{(+)})^{1/2}`),
-        "（",
-        ref("def_transfer_matrix"),
-        "・",
-        ref("def_V1_plus"),
-        "・",
-        ref("def_V1_plus_square_root"),
-        "）のすべてと可換である。",
+        " を用いる。",
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " が ",
+        math(String.raw`\varepsilon X = X\varepsilon`),
+        " を満たすならば、",
       ]),
+      displayMath(String.raw`P^{(+)}X = XP^{(+)}`),
+      paragraph(["が成り立つ。"]),
     ],
     proof: [
       paragraph([
-        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " を ",
-        math(String.raw`\varepsilon X = X\varepsilon`),
-        " を満たす行列とする（",
-        ref("epsilon_commutes_with_V1"),
-        "・",
-        ref("epsilon_commutes_with_V2"),
-        "・",
-        ref("epsilon_commutes_with_V1_plus"),
-        "・",
-        ref("epsilon_commutes_with_V1_plus_square_root"),
-        " より ",
-        math(String.raw`V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}`),
-        " がこれにあたる）。次の鎖を得る。",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        " と書く。スカラー ",
+        math(String.raw`\tfrac{1}{2}`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " の包含で実数 ",
+        math(String.raw`\tfrac{1}{2}`),
+        " を写した ",
+        math(String.raw`\mathbb{C}`),
+        " の元である。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 P^{(+)}X
-&= \tfrac12\left(I + \varepsilon\right)X
-   \quad (\because \blkref{def_epsilon_projectors}\ \text{の }P^{(+)}\text{ の定義}) \\
-&= \tfrac12\left(IX + \varepsilon X\right)
-   \quad (\because \text{分配法則}) \\
-&= \tfrac12\left(X + \varepsilon X\right)
-   \quad (\because IX=X) \\
-&= \tfrac12\left(X + X\varepsilon\right)
-   \quad (\because \text{仮定 }\varepsilon X=X\varepsilon) \\
-&= \tfrac12\left(XI + X\varepsilon\right)
-   \quad (\because X=XI) \\
-&= X\cdot\tfrac12\left(I + \varepsilon\right)
-   \quad (\because \text{分配法則とスカラー倍との可換性}) \\
-&= X\,P^{(+)}
-   \quad (\because \blkref{def_epsilon_projectors}\ \text{の }P^{(+)}\text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "よって ",
-        math(String.raw`\varepsilon`),
-        " と可換な行列は ",
-        math(String.raw`P^{(+)}`),
-        " とも可換である。",
-      ]),
+&= \left(\tfrac{1}{2}\left(I + \varepsilon\right)\right)X
+&&(\because\ \blkref{def_epsilon_projectors})\\
+&= \tfrac{1}{2}\left(\left(I + \varepsilon\right)X\right)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
+&= \tfrac{1}{2}\left(IX + \varepsilon X\right)
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor})\\
+&= \tfrac{1}{2}\left(X + \varepsilon X\right)
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \tfrac{1}{2}\left(X + X\varepsilon\right)
+&&(\because\ \text{仮定}\ \varepsilon X = X\varepsilon)\\
+&= \tfrac{1}{2}\left(XI + X\varepsilon\right)
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= \tfrac{1}{2}\left(X\left(I + \varepsilon\right)\right)
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&= X\left(\tfrac{1}{2}\left(I + \varepsilon\right)\right)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= XP^{(+)}
+&&(\because\ \blkref{def_epsilon_projectors})
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
-        "もとの epsilon_commutes_with_transfer_matrices の Step 5 を、1 ブロック 1 主張に従って独立させた。",
-        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-02（全証明の SageMath 検算 epsilon_projectors_commute_with_transfer_matrices）: 旧 epsilon_projectors_commute_with_transfer_matrices（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧ブロックの証明（ε と可換な行列は P^{(+)} とも可換）を一般の主張にし、根拠の書かれていなかった分配法則・単位行列・スカラー倍の出し入れを 002_linear_space_general の主張の参照にした。",
+      ],
+    },
+  },
+  {
+    id: "bridge_claim_epsilon_projector_commutes_with_V1",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`P^{(+)} \text{ は } V_1 \text{ と可換}` },
+    labels: ["epsilon_projector_commutes_with_V1"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(+)}`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`V_1`),
+        "（結合定数 ",
+        math(String.raw`K_1 \in \mathbb{R}_{>0}`),
+        "）",
+        "について ",
+        math(String.raw`P^{(+)}V_1 = V_1P^{(+)}`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+P^{(+)}V_1
+&= V_1P^{(+)}
+&&(\because\ \blkref{epsilon_projector_commutes_with_epsilon_commuting_matrix}\ (X \to V_1),\ \text{その仮定は}\ \blkref{epsilon_commutes_with_V1})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_projectors_commute_with_transfer_matrices）: 旧 epsilon_projectors_commute_with_transfer_matrices（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧ブロックの V1 の部分。",
+      ],
+    },
+  },
+  {
+    id: "bridge_claim_epsilon_projector_commutes_with_V2",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`P^{(+)} \text{ は } V_2 \text{ と可換}` },
+    labels: ["epsilon_projector_commutes_with_V2"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(+)}`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`V_2`),
+        "（結合定数 ",
+        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
+        "）",
+        "について ",
+        math(String.raw`P^{(+)}V_2 = V_2P^{(+)}`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+P^{(+)}V_2
+&= V_2P^{(+)}
+&&(\because\ \blkref{epsilon_projector_commutes_with_epsilon_commuting_matrix}\ (X \to V_2),\ \text{その仮定は}\ \blkref{epsilon_commutes_with_V2})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_projectors_commute_with_transfer_matrices）: 旧 epsilon_projectors_commute_with_transfer_matrices（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧ブロックの V2 の部分。",
+      ],
+    },
+  },
+  {
+    id: "bridge_claim_epsilon_projector_commutes_with_V1_plus",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`P^{(+)} \text{ は } V_1^{(+)} \text{ と可換}` },
+    labels: ["epsilon_projector_commutes_with_V1_plus"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(+)}`),
+        " と ",
+        ref("def_V1_plus"),
+        " の ",
+        math(String.raw`V_1^{(+)}`),
+        "について ",
+        math(String.raw`P^{(+)}V_1^{(+)} = V_1^{(+)}P^{(+)}`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+P^{(+)}V_1^{(+)}
+&= V_1^{(+)}P^{(+)}
+&&(\because\ \blkref{epsilon_projector_commutes_with_epsilon_commuting_matrix}\ (X \to V_1^{(+)}),\ \text{その仮定は}\ \blkref{epsilon_commutes_with_V1_plus})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_projectors_commute_with_transfer_matrices）: 旧 epsilon_projectors_commute_with_transfer_matrices（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧ブロックの V1_plus の部分。",
+      ],
+    },
+  },
+  {
+    id: "bridge_claim_epsilon_projector_commutes_with_V1_plus_square_root",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`P^{(+)} \text{ は } \left(V_1^{(+)}\right)^{1/2} \text{ と可換}` },
+    labels: ["epsilon_projector_commutes_with_V1_plus_square_root"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_epsilon_projectors"),
+        " の ",
+        math(String.raw`P^{(+)}`),
+        " と ",
+        ref("def_V1_plus_square_root"),
+        " の ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        "について ",
+        math(String.raw`P^{(+)}\left(V_1^{(+)}\right)^{1/2} = \left(V_1^{(+)}\right)^{1/2}P^{(+)}`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+P^{(+)}\left(V_1^{(+)}\right)^{1/2}
+&= \left(V_1^{(+)}\right)^{1/2}P^{(+)}
+&&(\because\ \blkref{epsilon_projector_commutes_with_epsilon_commuting_matrix}\ (X \to \left(V_1^{(+)}\right)^{1/2}),\ \text{その仮定は}\ \blkref{epsilon_commutes_with_V1_plus_square_root})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_projectors_commute_with_transfer_matrices）: 旧 epsilon_projectors_commute_with_transfer_matrices（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧ブロックの V1_plus_square_root の部分。",
       ],
     },
   },
@@ -3883,18 +4027,19 @@ P^{(+)}X
 \end{aligned}`),
       paragraph([
         "すべての数ベクトルへの作用が等しいため ", math(String.raw`BP=CP`), " である。",
-        ref("epsilon_projectors_commute_with_transfer_matrices"), " の ",
-        math(String.raw`PC=CP`), " と ", math(String.raw`PV_2=V_2P`), " を用いると、",
+        ref("epsilon_projector_commutes_with_V1_plus_square_root"), " の ",
+        math(String.raw`PC=CP`), " と ", ref("epsilon_projector_commutes_with_V2"), " の ",
+        math(String.raw`PV_2=V_2P`), " を用いると、",
       ]),
       displayMath(String.raw`\begin{aligned}
 WP
 &=BV_2BP &&(\because\ \blkref{def_symmetrized_transfer_matrix})\\
 &=BV_2CP &&(\because\ BP=CP)\\
-&=BV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }CP=PC)\\
-&=BPV_2C &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }V_2P=PV_2)\\
+&=BV_2PC &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root}\text{ の }CP=PC)\\
+&=BPV_2C &&(\because\ \blkref{epsilon_projector_commutes_with_V2}\text{ の }V_2P=PV_2)\\
 &=CPV_2C &&(\because\ BP=CP)\\
-&=CV_2PC &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PV_2=V_2P)\\
-&=CV_2CP &&(\because\ \blkref{epsilon_projectors_commute_with_transfer_matrices}\text{ の }PC=CP)\\
+&=CV_2PC &&(\because\ \blkref{epsilon_projector_commutes_with_V2}\text{ の }PV_2=V_2P)\\
+&=CV_2CP &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root}\text{ の }PC=CP)\\
 &=V^{(+)}P &&(\because\ \blkref{def_V_plus}).
 \end{aligned}`),
     ],

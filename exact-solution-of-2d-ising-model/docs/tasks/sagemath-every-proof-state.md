@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 338 件のうち、SageMath の検算が無いもの 83 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 82 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -149,9 +149,14 @@
   人手証明の欠けを直した（ε・Z_m・Y_m のクロネッカー積表示を根拠なしで使っていた、相異なるサイトの可換性・スカラー倍との可換性・有限和への分配・冪と極限との交換を散文で済ませていた、反可換性を二回使う段を (-1)^2 の一行に束ねていた）。
   下流（`epsilon_projectors_commute_with_transfer_matrices`・`epsilon_commutes_with_W`・`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の 3 か所・Lean のコメントと `lean/docs/ch010-formalization.md`・043 の検算の説明）の参照を新しいラベルに付け替えた。計算の誤りは無かった。Lean の具体版 `ClaimEpsilonCommutes.lean` は分けた主張と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `epsilon_projectors_commute_with_transfer_matrices`（P^{(+)} は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換。四つの主張を束ねていた）: 1 ブロック 1 主張に分け、ラベルを消した。
+  一般の主張 `epsilon_projector_commutes_with_epsilon_commuting_matrix`（εX = Xε なら P^{(+)}X = XP^{(+)}）と、その適用 `epsilon_projector_commutes_with_V1`・`epsilon_projector_commutes_with_V2`・`epsilon_projector_commutes_with_V1_plus`・`epsilon_projector_commutes_with_V1_plus_square_root` の 5 個の主張にし、それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/epsilon_projector_exact.sage`）。
+  一般の主張の 9 行の鎖は `QQ(i)` 上の不定元の行列 X := Y + εYε で厳密に（仮定を外すと第 5→6 行だけが崩れる）、主張は ε と可換な行列の空間の基底で、V_1・V_2 は成分の exp の値を不定元に置いて厳密に、V_1^{(+)} と平方根は exp を本文の部分和と尾の上界のボールで確かめた。
+  人手証明を直した（「分配法則」「IX = X」「X = XI」「分配法則とスカラー倍との可換性」を `002_linear_space_general.ts` の主張の参照の一行一操作に、1/2 が `inclusion_rr_to_cc` の ℂ の元であることを明記）。下流 `symmetrized_transfer_matrix_on_sectors` の 5 か所・不採用のノート `minus_sector_not_adopted.ts` の 2 か所・Lean のコメントと `lean/README.md`・`lean/docs/ch010-formalization.md`・043 の検算の説明を新しいラベルに付け替えた。計算の誤りは無かった。Lean の具体版 `commute_epsProjPlus_of_commute_epsilon` は人手の 9 行の鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`partition_function_projection_and_jordan_wigner.ts` の `epsilon_projectors_commute_with_transfer_matrices`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_projection_and_jordan_wigner.ts` の `symmetrized_transfer_matrix_on_sectors`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 

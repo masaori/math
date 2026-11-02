@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算の連続実行として、`epsilon_projectors_commute_with_transfer_matrices`（P^{(+)} と転送行列の可換性。四つの主張を束ねていた）を 1 ブロック 1 主張に分け、一般の主張 `epsilon_projector_commutes_with_epsilon_commuting_matrix`（ε と可換なら P^{(+)} とも可換）と V_1・V_2・V_1^{(+)}・(V_1^{(+)})^{1/2} への適用の 5 個の主張にし、同名の検算を付けた（未検算 82 件）。一般の主張の鎖の根拠の無い行を行列の演算の主張の参照にした。計算の誤りは無かった。次は `symmetrized_transfer_matrix_on_sectors`。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十二個目として、`check_number_operator_idempotent` (3) と `check_number_operators_commute` Step 2・Step 3 の名前だけの根拠「結合法則」6 か所を `mat_mult_associative` の 1 行 1 回の参照にし、同じ鎖の分配と符号の行も既存の主張の参照に割った（主張は不変）。Lean の具体版（`nOp_mul_self`・`mul_nOp_of_anticommute`・`nOp_mul_nOp_of_ne`）を人手と 1 対 1 の calc にし、必要十分版の特殊化は `*_of_necSuf` に残した。SageMath は `050` の check_23。次は状態台帳の (h)（`check_joint_eigenspace_decomposition` の「分配法則と、単位行列との積」）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十一個目として、`iH_is_real_symmetric` Step 1・Step 2 の「スカラー倍の和の分配」「スカラー倍の交換」「スカラー倍の和の分配と交換」「i·(−i) = 1 と分配則」を 1 行 1 主張のラベル参照にした。主張 `scalar_multiple_distributes_over_matrix_sum`（`c(A+B) = cA+cB`）・`finite_sum_of_scalar_multiples`（`Σ(cX_j) = cΣX_j`）を `002_linear_space_general.ts` に足し、SageMath の検算、Lean の具体版・必要十分版 `NecSuf/SmulMatrixSum.lean`・`TensorPow M` の系、鎖と 1 対 1 の `ClaimIHPauliForm.lean` を置いた。S_1^{(+)} の鎖の境界項と和の項の代入は 2 行に分けた。次は状態台帳の (g)（`check_number_operator_*` の「結合法則」）。

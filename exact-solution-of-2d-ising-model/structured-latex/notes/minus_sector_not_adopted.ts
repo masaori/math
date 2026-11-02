@@ -150,7 +150,7 @@ export default defineNotes([
       paragraph(["（複号同順）"]),
       displayMath(String.raw`n \in \mathbb{Z}_{\geq 0} \text{ について } (V_1V_2)^{n}\,P^{(\pm)} = \left(V_1^{(\pm)}V_2\right)^{n}P^{(\pm)}`),
       paragraph(["証明."]),
-      paragraph([math(String.raw`P := P^{(\pm)}`), " と略記する。", ref("epsilon_projectors_commute_with_transfer_matrices"), " より ", math(String.raw`P`), " は ", math(String.raw`V_1, V_2, V_1^{(\pm)}`), " のすべてと可換であり、", ref("epsilon_projector_properties"), " (2) より ", math(String.raw`P^2 = P`), " である。", math(String.raw`n`), " についての帰納法で示す。"]),
+      paragraph([math(String.raw`P := P^{(\pm)}`), " と略記する。", math(String.raw`V_1, V_2, V_1^{(\pm)}`), " は ε と可換であり（", ref("epsilon_commutes_with_V1"), "・", ref("epsilon_commutes_with_V2"), "・", ref("epsilon_commutes_with_V1_plus"), " と、その ", math(String.raw`(-)`), " 版）、", ref("epsilon_projector_commutes_with_epsilon_commuting_matrix"), " の鎖（", math(String.raw`P^{(-)} = \tfrac12(I-\varepsilon)`), " には ", math(String.raw`I+\varepsilon`), " を ", math(String.raw`I-\varepsilon`), " に替えた同じ鎖）より ", math(String.raw`P`), " はそのすべてと可換であり、", ref("epsilon_projector_properties"), " (2) より ", math(String.raw`P^2 = P`), " である。", math(String.raw`n`), " についての帰納法で示す。"]),
       paragraph([math(String.raw`n = 0`), " のときは両辺とも ", math(String.raw`P`), " で成立。", math(String.raw`(V_1V_2)^{n}P = (V_1^{(\pm)}V_2)^{n}P`), " を仮定する。", "〔sector_replacement_of_V1〕", " と合わせると、"]),
       displayMath(String.raw`\begin{aligned}
 (V_1V_2)^{n+1}P
@@ -242,7 +242,7 @@ BB
 &= B\,\left(V_2 V_1^{(\pm)}\right)^{n-1}V_2\,B
    \quad (\because BB=V_1^{(\pm)})
 \end{aligned}`),
-      paragraph(["（結合法則で括り直し、隣接する ", math(String.raw`B\,B = V_1^{(\pm)}`), " をまとめた。）よって ", ref("trace_basic_properties"), " (2) の巡回性と、", ref("epsilon_projectors_commute_with_transfer_matrices"), " による ", math(String.raw`P^{(\pm)}`), " と ", math(String.raw`B`), " の可換性から"]),
+      paragraph(["（結合法則で括り直し、隣接する ", math(String.raw`B\,B = V_1^{(\pm)}`), " をまとめた。）よって ", ref("trace_basic_properties"), " (2) の巡回性と、", ref("epsilon_projector_commutes_with_epsilon_commuting_matrix"), " の鎖（", math(String.raw`P^{(-)}`), " には ", math(String.raw`I+\varepsilon`), " を ", math(String.raw`I-\varepsilon`), " に替えた同じ鎖）による ", math(String.raw`P^{(\pm)}`), " と ", math(String.raw`B`), " の可換性から"]),
       displayMath(String.raw`\begin{aligned}
 \mathrm{tr}\!\left(P^{(\pm)}\left(V^{(\pm)}\right)^{n}\right)
 &= \mathrm{tr}\!\left(P^{(\pm)}B\left(V_2V_1^{(\pm)}\right)^{n-1}V_2B\right)

@@ -4,8 +4,10 @@
 対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
 * 旧 `bridge_010_claim_epsilon_commutes`（1 ブロック 1 主張に分けた後のラベル **`epsilon_commutes_with_site_sigma_x`**・**`epsilon_anticommutes_with_site_sigma_z`**・**`epsilon_anticommutes_with_site_sigma_y`**・**`epsilon_anticommutes_with_jordan_wigner_Z`**・**`epsilon_anticommutes_with_jordan_wigner_Y`**・**`epsilon_commutes_with_bond_sum`**・**`epsilon_commutes_with_V1`**・**`epsilon_commutes_with_V2`**・**`epsilon_commutes_with_H1_plus`**・**`epsilon_commutes_with_V1_plus`**・**`epsilon_commutes_with_V1_plus_square_root`**）
-* `bridge_claim_epsilon_projectors_commute_with_transfer_matrices`
-  （ラベル **`epsilon_projectors_commute_with_transfer_matrices`**）
+* 旧 `bridge_claim_epsilon_projectors_commute_with_transfer_matrices`（1 ブロック 1 主張に分けた後のラベル
+  **`epsilon_projector_commutes_with_epsilon_commuting_matrix`**・**`epsilon_projector_commutes_with_V1`**・
+  **`epsilon_projector_commutes_with_V2`**・**`epsilon_projector_commutes_with_V1_plus`**・
+  **`epsilon_projector_commutes_with_V1_plus_square_root`**）
 
 ## 原文の Step との対応
 
@@ -22,10 +24,13 @@
   `epsilon_commute_V2H2Form` は `V2H2Form`（`V2_exponential_representation` の右辺の式）についての版。
 * Step 4（`V_1^{(+)}` と `(V_1^{(+)})^{1/2}`）→ `epsilon_commute_H1plus` から
   `epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf`。
-* `epsilon_projectors_commute_with_transfer_matrices`（`P^{(+)}`）→
+* `epsilon_projector_commutes_with_epsilon_commuting_matrix`（`P^{(+)}`）→
   `commute_epsProjPlus_of_commute_epsilon`（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）と、
   その `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` への適用 `commute_V1_epsProjPlus` /
-  `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`。
+  `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`
+  （人手の `epsilon_projector_commutes_with_V1` / `_V2` / `_V1_plus` / `_V1_plus_square_root`）。
+  人手の一般の主張は 9 行の鎖（分配法則・単位行列・スカラー倍の出し入れを 1 行ずつ）だが、
+  Lean の `commute_epsProjPlus_of_commute_epsilon` はまだ鎖と 1 対 1 ではない。
 
 符号引数つきの一般形（`epsilon_commute_H1` / `epsilon_commute_V1pm` / `epsilon_commute_V1pmHalf`、
 `epsProj M η` との可換性）は補助として残す。人手の本文から参照用ノート
@@ -233,27 +238,27 @@ theorem commute_V1pm_epsProj (K1 ηsign η : ℂ) : Commute (V1pm M K1 ηsign) (
 theorem commute_V1pmHalf_epsProj (K1 ηsign η : ℂ) : Commute (V1pmHalf M K1 ηsign) (epsProj M η) :=
   commute_epsProj_of_commute_epsilon η (epsilon_commute_V1pmHalf K1 ηsign).symm
 
-/-- **人手本文 `epsilon_projectors_commute_with_transfer_matrices` の証明の核**:
+/-- **人手 `epsilon_projector_commutes_with_epsilon_commuting_matrix`**:
 `εX = Xε` なら `P^{(+)} X = X P^{(+)}`（必要十分版 `Ising2D.NecSuf.commute_invProj` の系）。 -/
 theorem commute_epsProjPlus_of_commute_epsilon {a : TensorPow M}
     (h : Commute a (epsilon M)) : Commute a (epsProjPlus M) := by
   rw [epsProjPlus_eq_epsProj]
   exact commute_epsProj_of_commute_epsilon 1 h
 
-/-- **人手 `epsilon_projectors_commute_with_transfer_matrices`**: `V_1 P^{(+)} = P^{(+)} V_1`。 -/
+/-- **人手 `epsilon_projector_commutes_with_V1`**: `V_1 P^{(+)} = P^{(+)} V_1`。 -/
 theorem commute_V1_epsProjPlus (K1 : ℝ) : Commute (V1 M K1) (epsProjPlus M) :=
   commute_epsProjPlus_of_commute_epsilon (epsilon_commute_V1 K1).symm
 
-/-- **人手 `epsilon_projectors_commute_with_transfer_matrices`**: `V_2 P^{(+)} = P^{(+)} V_2`
+/-- **人手 `epsilon_projector_commutes_with_V2`**: `V_2 P^{(+)} = P^{(+)} V_2`
 （`K_2 > 0`）。 -/
 theorem commute_V2_epsProjPlus {K2 : ℝ} (hK2 : 0 < K2) : Commute (V2 M K2) (epsProjPlus M) :=
   commute_epsProjPlus_of_commute_epsilon (epsilon_commute_V2 hK2).symm
 
-/-- **人手 `epsilon_projectors_commute_with_transfer_matrices`**: `V_1^{(+)} P^{(+)} = P^{(+)} V_1^{(+)}`。 -/
+/-- **人手 `epsilon_projector_commutes_with_V1_plus`**: `V_1^{(+)} P^{(+)} = P^{(+)} V_1^{(+)}`。 -/
 theorem commute_V1plus_epsProjPlus (K1 : ℂ) : Commute (V1plus M K1) (epsProjPlus M) :=
   commute_epsProjPlus_of_commute_epsilon (epsilon_commute_V1plus K1).symm
 
-/-- **人手 `epsilon_projectors_commute_with_transfer_matrices`**:
+/-- **人手 `epsilon_projector_commutes_with_V1_plus_square_root`**:
 `(V_1^{(+)})^{1/2} P^{(+)} = P^{(+)} (V_1^{(+)})^{1/2}`。 -/
 theorem commute_V1plusHalf_epsProjPlus (K1 : ℂ) : Commute (V1plusHalf M K1) (epsProjPlus M) :=
   commute_epsProjPlus_of_commute_epsilon (epsilon_commute_V1plusHalf K1).symm

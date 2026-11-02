@@ -61,7 +61,7 @@
 | `Ising2D.epsilon_commute_V2` / `epsilon_commute_V2PauliForm` / `epsilon_commute_V2H2Form` | **`ε V_2 = V_2 ε`**（前者が `def_transfer_matrix` の `V_2`、後の 2 本が右辺の式） | `epsilon_commutes_with_V2` |
 | `Ising2D.epsilon_commute_H1plus` | `ε H_1^{(+)} = H_1^{(+)} ε`（`epsilon_commute_H1` は一般形） | `epsilon_commutes_with_H1_plus` |
 | `Ising2D.epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf` | **`ε V_1^{(+)} = V_1^{(+)}ε`, `ε (V_1^{(+)})^{1/2} = ⋯`**（`epsilon_commute_V1pm` / `..._V1pmHalf` は一般形） | `epsilon_commutes_with_V1_plus` / `epsilon_commutes_with_V1_plus_square_root` |
-| `Ising2D.commute_epsProjPlus_of_commute_epsilon` / `commute_V1_epsProjPlus` / `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`（`ClaimEpsilonCommutes.lean`） | `P^{(+)}` と `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` の可換性（`commute_*_epsProj` は一般形） | `epsilon_projectors_commute_with_transfer_matrices` |
+| `Ising2D.commute_epsProjPlus_of_commute_epsilon` / `commute_V1_epsProjPlus` / `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`（`ClaimEpsilonCommutes.lean`） | `P^{(+)}` と `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` の可換性（`commute_*_epsProj` は一般形） | `epsilon_projector_commutes_with_epsilon_commuting_matrix`・`epsilon_projector_commutes_with_V1`・`epsilon_projector_commutes_with_V2`・`epsilon_projector_commutes_with_V1_plus`・`epsilon_projector_commutes_with_V1_plus_square_root` |
 | `Ising2D.epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg` | `P^{(+)}P^{(-)} = 0`, `P^{(+)} + P^{(-)} = I` | ノート（旧 `epsilon_projector_properties` (1)(2)） |
 | `Ising2D.RestrictsOnSector` / `V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector`（`ClaimSectorReplacementOfV1.lean`） | 符号つきのセクターごとの制限 | ノート（`sector_replacement_of_V1` の前提） |
 | `Ising2D.sector_replacement_of_V1` | `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` | ノート `sector_replacement_of_V1` |
@@ -93,7 +93,7 @@
 | 人手証明のラベル | 具体版 | 必要十分版 | 必要十分版で分かったこと |
 | --- | --- | --- | --- |
 | `epsilon_projector_properties` (1)（とノートの `P^{(+)}P^{(-)} = 0`・`P^{(+)} + P^{(-)} = I`） | `Ising2D.epsProjPlus_sq`（一般形 `epsProj_sq` 経由）/ `epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg`（**必要十分版の系として導出済み**） | `Ising2D.NecSuf.invProj_sq` ほか（`NecSuf/Projector.lean`） | 効いているのは **`ε² = I` と `2` が可逆であること**だけ。`ε` が Jordan–Wigner 文字列の積であることも、行列であることも、環が可換であることも効いていない |
-| `epsilon_projectors_commute_with_transfer_matrices` | `Ising2D.commute_epsProjPlus_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(+)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
+| `epsilon_projector_commutes_with_epsilon_commuting_matrix` | `Ising2D.commute_epsProjPlus_of_commute_epsilon`（**必要十分版の系**） | `Ising2D.NecSuf.commute_invProj` | 「`ε` と可換なら `P^{(+)}` とも可換」に効いているのはスカラー作用と加法の両立則だけ |
 | ノート `sector_replacement_pow` | `Ising2D.sector_replacement_pow`（**必要十分版の系**） | `Ising2D.NecSuf.pow_mul_proj` | 効いているのは「`P` が冪等」「`P` が `V_1, V_2, V_1^{(±)}` と可換」「`V_1P = V_1^{(±)}P`」の 3 点だけ。**`P` が `(I±ε)/2` の形であることすら使わない**。すなわち「偶奇セクター」という言葉のうちこの段で使われている情報は冪等元と可換性だけである |
 | ノート `partition_function_sector_decomposition` Step 3 | `Ising2D.trace_epsProj_sym_pow` | `Ising2D.NecSuf.mul_pow_conj_left` | 対称形 `(BV_2B)^n` の解消は**結合法則だけ**（原文の「結合法則で括り直すだけ」が文字どおり正しい）。トレース側で追加に要るのは巡回性と `P` と `B` の可換性のみで、`B` が `exp` であることは効いていない |
 

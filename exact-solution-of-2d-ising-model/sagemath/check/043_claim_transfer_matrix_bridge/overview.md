@@ -13,7 +13,7 @@
   - `structured-latex/content/004_transfer_matrix.ts`: `exp_of_diagonal_matrix`
   - `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`:
     `epsilon_projector_properties` / `epsilon_commutes_with_V1`・`epsilon_commutes_with_V2`・`epsilon_commutes_with_V1_plus`・`epsilon_commutes_with_V1_plus_square_root` /
-    `epsilon_projectors_commute_with_transfer_matrices`（いずれも (+) セクターだけの主張）
+    `epsilon_projector_commutes_with_V1`・`epsilon_projector_commutes_with_V2`・`epsilon_projector_commutes_with_V1_plus`・`epsilon_projector_commutes_with_V1_plus_square_root`（いずれも (+) セクターだけの主張）
 
 ### 何を確定させるための検証か
 
@@ -96,7 +96,7 @@ V_2（成分定義） = (2 sinh 2K_2)^{M_col/2} exp(K_2^* Σ_m σ^x_m)
 ```
 
 check_03（`epsilon_projector_properties` / `epsilon_commutes_with_V1`・`epsilon_commutes_with_V2`・`epsilon_commutes_with_V1_plus`・`epsilon_commutes_with_V1_plus_square_root` /
-`epsilon_projectors_commute_with_transfer_matrices`）:
+`epsilon_projector_commutes_with_V1`・`epsilon_projector_commutes_with_V2`・`epsilon_projector_commutes_with_V1_plus`・`epsilon_projector_commutes_with_V1_plus_square_root`）:
 
 ```
 ε² = I（前提）,  (P^{(+)})² = P^{(+)}
