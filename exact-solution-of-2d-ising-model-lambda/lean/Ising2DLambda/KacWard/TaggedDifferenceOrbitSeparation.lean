@@ -84,20 +84,17 @@ noncomputable def concreteAlternatingSuccessor {L : ℕ}
 theorem taggedActive_orbits_disjoint {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
-    (i : {i : OrientedEdge L // i ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t)}) :
-    Disjoint (finitePermutationOrbit (taggedActiveTwoStep D t) i)
-      (finitePermutationOrbit (taggedActiveTwoStep D t)
-        (taggedActiveShortMate D t i)) := by
-  let τ := shortInvolution D t
-  let υ := longInvolution D t
-  have hstep : matchingPairStep τ υ = taggedActiveTwoStep D t := by
+    (i : {i : OrientedEdge L // i ∈ concreteTaggedActiveVertices D t}) :
+    Disjoint (finitePermutationOrbit (taggedConcreteTwoStep D t) i)
+      (finitePermutationOrbit (taggedConcreteTwoStep D t)
+        (taggedConcreteShortMate D t i)) := by
+  let τ := concreteShortInvolution D t
+  let υ := concreteLongInvolution D t
+  have hstep : matchingPairStep τ υ = taggedConcreteTwoStep D t := by
     apply Equiv.ext
     intro j
     rfl
-  have hmate : τ.val i = taggedActiveShortMate D t i := rfl
+  have hmate : τ.val i = taggedConcreteShortMate D t i := rfl
   simpa only [hstep, hmate] using matchingPairStep_orbits_disjoint τ υ i
 
 end Ising2DLambda.KacWard
