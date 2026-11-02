@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 297 件のうち、SageMath の検算が無いもの 92 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 311 件のうち、SageMath の検算が無いもの 91 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -117,9 +117,14 @@
   人手証明を直した（本文に無い平方根の単調性に頼っていた D2 ≤ D1・D1 ≥ p・D2 ≥ c0 p・分母 ≥ δ を新しい主張から、0 ≤ c0 p ≤ s・被積分関数の連続性・F(θ) = θ²/2 の導関数を準備に、各点評価と B の数値評価を 1 行 1 操作の鎖に、逆数の大小を独立の鎖に）。
   「これが対数発散の源である」の段落は解釈なので注記へ移した。下流 `second_derivative_log_divergence` の B と 0.88 の行に新しいラベルの参照を足した。計算の誤りは無かった。
 
+- `sigma_z_diagonal_action`（σ_m^z の基底 f_{ι(μ)} への作用。固有ベクトルの等式・積の等式・二つの対角性の 4 つの主張を束ねていたブロック）: 1 ブロック 1 主張に分け、`sigma_z_diagonal_action`（`σ_m^z f_{ι(μ)} = μ(m)_C f_{ι(μ)}`）・`sigma_z_product_action`・`site_sigma_z_is_diagonal`・`site_sigma_z_product_is_diagonal` にした（`partition_function_transfer_matrix_representation.ts`）。
+  定義 `def_diagonal_matrix`（`004_transfer_matrix.ts`。`exp_of_diagonal_matrix` の括弧書きを置き換えた）・`def_finite_product_of_complex_numbers` と、主張 `finite_product_with_zero_factor_is_zero`・`finite_product_of_complex_ones`・`finite_sum_with_single_nonzero_term`（`000_calculation_formulae_20_29.ts`）・`real_inclusion_preserves_product`（`000_calculation_formulae_00_09.ts`）・`config_basis_vector_own_component`（`(f_I)_{ν(I)} = 1`）・`site_sigma_z_product_diagonal_entry`（`(σ_m^zσ_{m'}^z)_{kk} = μ(m)_C μ(m')_C`）を足した。10 個の主張に同名の検算を付けた（共通の準備 `sagemath/_shared/site_sigma_z_kronecker.sage`。すべて `ZZ`・`QQ[…]`・`QQ(i)` で厳密）。
+  人手証明を直した: スカラーを `inclusion_rr_to_cc` の `μ(m)_C` と書き、場合分けを (∵) 付きの鎖に、ラベルの無かった根拠（行列と列ベクトルの積・恒等行列の作用・行列作用の線型性・スカラー倍の結合律）をラベル参照に。旧い「基底 (f_I) に関して対角行列」は f_I の成分を経ずに成分の意味の対角性へ渡していたので、クロネッカー積の成分（0 の因子）と積の成分の和から示す形にした。
+  主張を分けたのに合わせ、下流 `first_transfer_matrix_pauli_form` の前半を、`D` の非対角成分・対角成分・`K_1 D` の成分の鎖に書き直し（`D f_{ι(μ)}` の固有ベクトルの鎖は外した）、成分の一致の鎖に `exp((K_1)_C d(μ)_C) = exp((K_1 d(μ))_C) = (exp(K_1 d(μ)))_C` の 2 行を足した。その検算（`check_D_entries_chain.sage`・`check_exp_inclusion_lines.sage`）を足し、旧 `check_bond_sum_diagonal_action.sage` を置き換え、`__file__` を使っていた読み込みを相対パスに直した。`thermodynamic_limit_column_limit_and_closed_form.ts` の Step 1 の参照を新しい主張へ付け替えた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`partition_function_transfer_matrix_representation.ts` の `sigma_z_diagonal_action`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_transfer_matrix_representation.ts` の `def_positive_coupling_tanh`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -222,3 +227,9 @@
   `critical_point_and_log_divergence.ts` の `second_derivative_log_divergence` の `9.8696 ≤ π²`・`π ≤ 3.1416` は、まだ `pi_squared_numerical_bounds` と円周率の数値の評価を引いていない。そのブロックの検算を足すときに扱う。
   Lean の `ClaimElementarySineBounds.lean` と `lean/docs/ch020-formalization.md` は、`c0`・`c0_bounds`・`elementary_sine_bounds_linear` をラベル `elementary_sine_bounds` に対応づけたままで、実際の対応は `def_sine_bound_constant`・`sine_bound_constant_numerical_bounds`・`sine_half_angle_linear_bounds` である。`elementary_sine_bounds_cube` は下側 0 ≤ θ/2 - sin(θ/2) も述べるが、人手の主張は上側だけになった。足した主張（`sine_zero` から `sine_cubic_lower_bound` まで、`pi_squared_numerical_bounds`）に 1 対 1 の Lean は無く、今の Lean は mathlib の `Real.sin_le`・`Real.sin_ge_sub_cube` に委ねている。Lean の連続実行の状態台帳へ渡す。
 - 2026-11-02、`sine_integral_two_sided` の分割で見つかった（Lean との対応）: Lean の具体版 `ClaimSineIntegralTwoSided.lean` は、各点評価を必要十分版の系と `nlinarith` で示しており、直した人手証明（`nonnegative_real_order_from_squares` を引く平方根の大小、差の各点評価の 12 行の鎖、分母の逆数の評価）と 1 対 1 に対応しない。`Bconst_le` も `nlinarith` で、`sine_integral_constant_numerical_bound` の鎖と対応しない。`nonnegative_real_order_from_squares` に対応する Lean は無い（コメントの対応づけだけ新しいラベルへ直した）。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-02、`sigma_z_diagonal_action` のレビューで見つかった（散文の推論と記号の帰属）: `thermodynamic_limit_column_limit_and_closed_form.ts` の Step 1 は「`D` は対角行列で対角成分は `(Σμμ)_C` なので `½K_1D` は対角」を散文で述べている（参照は新しい主張へ付け替えた）。
+  `eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `D0_G_diagonal_action` は、積の等式（`sigma_z_product_action`）を引かずに単サイトの作用を二回使って導き直しており、`mat_mult_associative` の行が無く、根拠の一つが `\blkref` でなく文字列、スカラーが `μ(m)`（`μ(m)_C` でない）。それぞれのブロックの検算を足すときに扱う。
+- 2026-11-02、同じレビューで見つかった（定義の書き分けの欠け）: `def_transfer_matrix` の `V_1`・`V_2` の成分の `exp(K_1 Σ μμ)` が実数の exp の値なのか、その ℂ への包含なのかを書いていない（`V_1` は `Mat(2^{M_col},ℂ)` の元）。`first_transfer_matrix_pauli_form` の鎖は `(exp(K_1 d(μ)))_C` まで書いたが、最後の `δ_{μ=μ'} exp(K_1 Σ μμ)` の行は定義の書き方に従ったままである。`def_transfer_matrix` の検算を足すときに扱う。
+- 2026-11-02、同じ作業で見つかった（検算の実行の方法）: 既存の検算のうち 94 ディレクトリ（`043_claim_transfer_matrix_bridge` ほか、番号付きのものの大半）は `_dir = os.path.dirname(os.path.abspath(__file__))` で準備を読み込んでおり、`bash sagemath/tools/run-all-checks.sh` から走らせると準備が見つからずに落ちる（SageMath は `__file__` を自分のパッケージの位置にする）。`first_transfer_matrix_pauli_form` だけは相対パスの `load("_prelude.sage")` に直した。ほかは手で `cd` して走らせた当時のログが残っている。ゴールラインの「足した検算が `run-all-checks.sh` で全部通る」は足した検算だけが対象なので妨げないが、まとめて相対パスに直すかを決める。
+- 2026-11-02、同じレビューで見つかった（重複）: `complex_exp_of_real_argument` の証明の準備は、`real_inclusion_preserves_product`（この単位で足した）と同じ計算をラベル無しで書いている。そのブロックを直すときに引く形にする。
+

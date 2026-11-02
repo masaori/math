@@ -1,6 +1,4 @@
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
-load(os.path.join(_dir, "../../_shared/row_configurations.sage"))
+load("../../_shared/row_configurations.sage")
 
 
 def bond_sum_D(M_col):

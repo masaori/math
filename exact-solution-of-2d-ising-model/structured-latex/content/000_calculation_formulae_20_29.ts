@@ -1485,6 +1485,265 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_definition_finite_product_of_complex_numbers",
+    kind: "definition",
+    title: { text: "複素数の有限積" },
+    labels: ["def_finite_product_of_complex_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        " について、有限積 ",
+        math(String.raw`\prod_{j=1}^{m} z_j \in \mathbb{C}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{1} z_j := z_1,
+\qquad
+\prod_{j=1}^{m+1} z_j := \Bigl(\prod_{j=1}^{m} z_j\Bigr)\, z_{m+1}`),
+      paragraph([
+        "と定める（左から順に掛ける）。積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。クロネッカー積の成分（def_kronecker）をはじめ本文が有限積を使っていたが、定めるブロックが無かった。" +
+          "site_sigma_z_is_diagonal（σ_m^z は対角行列）の証明で、0 の因子を持つ有限積が 0 であることを引くのに要るので足した。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_finite_product_with_zero_factor_is_zero",
+    kind: "claim",
+    title: { text: "0 の因子を持つ複素数の有限積は 0" },
+    labels: ["finite_product_with_zero_factor_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \{1,\dots,m\}`),
+        " とし、",
+        math(String.raw`z_n = 0_{\mathbb{C}}`),
+        " とする。有限積は ",
+        ref("def_finite_product_of_complex_numbers"),
+        "、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} z_j = 0_{\mathbb{C}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`n = 1`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} z_j
+&= z_1
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= 0_{\mathbb{C}}
+&&(\because\ n = 1\ \text{と}\ z_n = 0_{\mathbb{C}})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`z_1,\dots,z_{m+1} \in \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \{1,\dots,m+1\}`),
+        "、",
+        math(String.raw`z_n = 0_{\mathbb{C}}`),
+        " とする。",
+        math(String.raw`n = m+1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} z_j
+&= \Bigl(\prod_{j=1}^{m} z_j\Bigr)\, z_{m+1}
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= \Bigl(\prod_{j=1}^{m} z_j\Bigr)\, 0_{\mathbb{C}}
+&&(\because\ n = m+1\ \text{と}\ z_n = 0_{\mathbb{C}})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_times_zero_is_zero})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n \in \{1,\dots,m\}`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} z_j
+&= \Bigl(\prod_{j=1}^{m} z_j\Bigr)\, z_{m+1}
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= 0_{\mathbb{C}}\, z_{m+1}
+&&(\because\ \text{帰納法の仮定を}\ z_1,\dots,z_m\ \text{と}\ n\ \text{へ})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_zero_times_is_zero})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。site_sigma_z_is_diagonal（σ_m^z は対角行列）の証明が、クロネッカー積の成分の積の一つの因子が 0 であることから成分が 0 になることを引くので足した。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_finite_product_of_complex_ones",
+    kind: "claim",
+    title: { text: "1 の有限積は 1" },
+    labels: ["finite_product_of_complex_ones"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`\prod_{j=1}^{m} 1_{\mathbb{C}} = 1_{\mathbb{C}}`),
+        " が成り立つ。有限積は ",
+        ref("def_finite_product_of_complex_numbers"),
+        "、",
+        math(String.raw`1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`m`), " についての帰納法で示す。", math(String.raw`m = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} 1_{\mathbb{C}}
+&= 1_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})
+\end{aligned}`),
+      paragraph([math(String.raw`m`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} 1_{\mathbb{C}}
+&= \Bigl(\prod_{j=1}^{m} 1_{\mathbb{C}}\Bigr)\, 1_{\mathbb{C}}
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= 1_{\mathbb{C}}\, 1_{\mathbb{C}}
+&&(\because\ \text{帰納法の仮定})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。config_basis_vector_own_component（f_I の第 ν(I) 成分は 1）の証明が使うので足した。",
+      ],
+    },
+  },
+  {
+    id: "calculation_formulae_claim_finite_sum_with_single_nonzero_term",
+    kind: "claim",
+    title: { text: "一つの項のほかが 0 の有限和はその項に等しい" },
+    labels: ["finite_sum_with_single_nonzero_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \{1,\dots,m\}`),
+        " とし、",
+        math(String.raw`j \neq n`),
+        " のすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について ",
+        math(String.raw`z_j = 0_{\mathbb{C}}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、",
+        math(String.raw`0_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} z_j = z_n`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`n = 1`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} z_j
+&= z_1
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= z_n
+&&(\because\ n = 1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`z_1,\dots,z_{m+1} \in \mathbb{C}`),
+        "、",
+        math(String.raw`n \in \{1,\dots,m+1\}`),
+        " が仮定を満たすとする。",
+        math(String.raw`n = m+1`),
+        " のとき、",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " はどれも ",
+        math(String.raw`j \neq n`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} z_j
+&= \Bigl(\sum_{j=1}^{m} z_j\Bigr) + z_{m+1}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= \Bigl(\sum_{j=1}^{m} 0_{\mathbb{C}}\Bigr) + z_{m+1}
+&&(\because\ j \leq m\ \text{のとき}\ z_j = 0_{\mathbb{C}}\ \text{を各項へ同時に適用})\\
+&= 0_{\mathbb{C}} + z_{m+1}
+&&(\because\ \blkref{finite_sum_of_complex_zeros})\\
+&= z_{m+1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元})\\
+&= z_n
+&&(\because\ n = m+1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n \in \{1,\dots,m\}`),
+        " のとき、",
+        math(String.raw`m+1 \neq n`),
+        " なので ",
+        math(String.raw`z_{m+1} = 0_{\mathbb{C}}`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} z_j
+&= \Bigl(\sum_{j=1}^{m} z_j\Bigr) + z_{m+1}
+&&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
+&= z_n + z_{m+1}
+&&(\because\ \text{帰納法の仮定を}\ z_1,\dots,z_m\ \text{と}\ n\ \text{へ})\\
+&= z_n + 0_{\mathbb{C}}
+&&(\because\ z_{m+1} = 0_{\mathbb{C}})\\
+&= z_n
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。site_sigma_z_product_diagonal_entry（σ_m^zσ_{m'}^z の対角成分）の証明が、行列と基底ベクトルの積の成分の和を一つの項に縮めるのに使うので足した。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_027_definition_phi_polar",
     kind: "definition",
     origin: {

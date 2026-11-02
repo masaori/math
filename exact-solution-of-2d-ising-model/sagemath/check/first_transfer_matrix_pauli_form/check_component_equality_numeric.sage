@@ -6,9 +6,7 @@
 # 帰属: K_1 ∈ ℝ_{>0} を一般に取るので exp の値は ℝ（指数評価による ℝ 脱出）。
 #   許容誤差: 成分の最大絶対値で正規化した相対誤差 1e-12。
 # ---------------------------------------------------------
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
-load(os.path.join(_dir, "_prelude.sage"))
+load("_prelude.sage")
 TOL = 1e-12
 ok_all = True
 for M_col in range(1, 7):

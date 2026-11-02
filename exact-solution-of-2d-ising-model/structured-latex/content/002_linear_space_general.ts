@@ -1559,7 +1559,9 @@ X - O
 \qquad (I = (i_1,\dots,i_M) \in \mathcal{I}_M)`,
       ),
       paragraph([
-        "と定める（右辺は複素数の有限個の積であり、",
+        "と定める（右辺は ",
+        ref("def_finite_product_of_complex_numbers"),
+        " の複素数の有限積であり、",
         math(String.raw`(v_k)_{i_k}\in\mathbb{C}`),
         " は ",
         math(String.raw`v_k`),
@@ -1584,7 +1586,9 @@ X - O
 \qquad (I = (i_1,\dots,i_M),\ J = (j_1,\dots,j_M) \in \mathcal{I}_M)`,
       ),
       paragraph([
-        "と定める。これは ",
+        "と定める（右辺は ",
+        ref("def_finite_product_of_complex_numbers"),
+        " の有限積）。これは ",
         math(String.raw`2^M`),
         " 行 ",
         math(String.raw`2^M`),

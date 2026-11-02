@@ -1053,19 +1053,24 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について、",
       ]),
-      displayMath(String.raw`\sigma_m^z\, f_{\iota(\mu)} = \mu(m)\, f_{\iota(\mu)}`),
+      displayMath(String.raw`\sigma_m^z\, f_{\iota(\mu)} = \mu(m)_{\mathbb{C}}\, f_{\iota(\mu)}`),
       paragraph([
-        "が成り立つ。とくに ",
-        math(String.raw`m, m' \in \{1,\dots,M_{\mathrm{col}}\}`),
-        " について ",
-        math(String.raw`\sigma_m^z\sigma_{m'}^z f_{\iota(\mu)} = \mu(m)\mu(m')f_{\iota(\mu)}`),
-        " であり、これらはすべて基底 ",
-        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
-        " に関して対角行列である。",
+        "が成り立つ。ここで ",
+        math(String.raw`\mu(m)\in\{-1,1\}\subset\mathbb{R}`),
+        "、",
+        math(String.raw`\mu(m)_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(\mu(m))`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍、左辺の積は ",
+        ref("mat_mult"),
+        " の数ベクトルへの作用である。",
       ]),
     ],
     proof: [
       paragraph([
+        "準備。",
         ref("pauli_matrix_products"),
         " の ",
         math(String.raw`\sigma^z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}`),
@@ -1073,7 +1078,13 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
         ref("def_end_iso"),
         " の ",
         math(String.raw`e_1 = (1,0),\ e_2 = (0,1)`),
-        " より、",
+        " について（成分の ",
+        math(String.raw`1, 0, -1`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記の ",
+        math(String.raw`1_{\mathbb{C}}, 0_{\mathbb{C}}, -1_{\mathbb{C}}`),
+        " である）、",
         math(String.raw`\mathbb{C}^2`),
         " の中で",
       ]),
@@ -1092,10 +1103,22 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 \quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
+  1\cdot 1 + 0\cdot 0 \\
+  0\cdot 1 + (-1)\cdot 0
+\end{pmatrix}
+\quad (\because \blkref{mat_mult}) \\
+&=
+\begin{pmatrix}
+  1 + 0 \\
+  0 + 0
+\end{pmatrix}
+\quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_times_zero_is_zero}) \\
+&=
+\begin{pmatrix}
   1 \\
   0
 \end{pmatrix}
-\quad (\because \text{行列と列ベクトルの積}) \\
+\quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元}) \\
 &= e_1
 \quad (\because \blkref{def_end_iso}),
 \end{aligned}`,
@@ -1115,46 +1138,81 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
 \quad (\because \blkref{pauli_matrix_products},\blkref{def_end_iso}) \\
 &=
 \begin{pmatrix}
+  1\cdot 0 + 0\cdot 1 \\
+  0\cdot 0 + (-1)\cdot 1
+\end{pmatrix}
+\quad (\because \blkref{mat_mult}) \\
+&=
+\begin{pmatrix}
+  0 + 0 \\
+  0 + (-1)
+\end{pmatrix}
+\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_zero_times_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+&=
+\begin{pmatrix}
   0 \\
   -1
 \end{pmatrix}
-\quad (\because \text{行列と列ベクトルの積}) \\
+\quad (\because \blkref{complex_numbers_form_a_field}\text{ の加法の単位元}) \\
+&=
+\begin{pmatrix}
+  (-1_{\mathbb{C}})\,0_{\mathbb{C}} \\
+  (-1_{\mathbb{C}})\,1_{\mathbb{C}}
+\end{pmatrix}
+\quad (\because \blkref{complex_times_zero_is_zero},\ \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+&=
+\begin{pmatrix}
+  -(0_{\mathbb{C}}) \\
+  -(1_{\mathbb{C}})
+\end{pmatrix}
+\quad (\because \blkref{multiply_by_minus_one}) \\
 &= -e_2
-\quad (\because \blkref{def_end_iso}).
+\quad (\because \blkref{def_end_iso},\blkref{def_matrix_negation}).
 \end{aligned}`,
       ),
       paragraph([
-        "である。",
         ref("def_config_basis_iso"),
         " の ",
-        math(String.raw`\iota`),
-        " は ",
-        math(String.raw`\mu(m) = +1`),
-        " のとき ",
-        math(String.raw`i_m = 1`),
-        "、",
-        math(String.raw`\mu(m) = -1`),
-        " のとき ",
-        math(String.raw`i_m = 2`),
-        " と定めたから、いずれの場合も ",
-        math(String.raw`\sigma^z e_{i_m} = \mu(m)\,e_{i_m}`),
-        " と一言で書ける。",
-      ]),
-      paragraph([
-        ref("def_site_pauli_matrices"),
-        " の ",
-        math(String.raw`\sigma_m^z = I \boxtimes\cdots\boxtimes \sigma^z \boxtimes\cdots\boxtimes I`),
-        "（第 ",
+        math(String.raw`\iota(\mu) = (i_1,\dots,i_{M_{\mathrm{col}}})`),
+        " の第 ",
         math(String.raw`m`),
-        " 因子だけが ",
-        math(String.raw`\sigma^z`),
-        "）より",
+        " 成分 ",
+        math(String.raw`i_m`),
+        " について、二つの場合に分ける。",
+        math(String.raw`\mu(m) = 1`),
+        " のとき、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z e_{i_m}
+&= \sigma^z e_1
+\quad (\because \blkref{def_config_basis_iso}\text{ より } i_m = 1) \\
+&= e_1
+\quad (\because \text{上の }\sigma^z e_1 = e_1) \\
+&= 1_{\mathbb{C}}\,e_1
+\quad (\because \blkref{scalar_multiple_by_one}) \\
+&= \mu(m)_{\mathbb{C}}\,e_{i_m}
+\quad (\because \mu(m) = 1\text{ より }\mu(m)_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1) = 1_{\mathbb{C}}\ \blkref{inclusion_rr_to_cc},\ i_m = 1).
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`\mu(m) = -1`), " のとき、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z e_{i_m}
+&= \sigma^z e_2
+\quad (\because \blkref{def_config_basis_iso}\text{ より } i_m = 2) \\
+&= -e_2
+\quad (\because \text{上の }\sigma^z e_2 = -e_2) \\
+&= (-1_{\mathbb{C}})\,e_2
+\quad (\because \blkref{negation_is_scalar_multiple_by_minus_one}) \\
+&= \mu(m)_{\mathbb{C}}\,e_{i_m}
+\quad (\because \mu(m) = -1\text{ より }\mu(m)_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = -1_{\mathbb{C}}\ \blkref{inclusion_rr_to_cc},\ i_m = 2).
+\end{aligned}`,
+      ),
       paragraph([
-        ref("kronecker_product_rule"),
-        "（クロネッカー積の積は因子ごとの積）と ",
-        ref("kronecker_multilinear"),
-        " を順に用いると",
+        "どちらの場合も ",
+        math(String.raw`\sigma^z e_{i_m} = \mu(m)_{\mathbb{C}}\,e_{i_m}`),
+        " である。これを使って、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1166,46 +1224,358 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
    \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_m}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)
    \quad (\because \blkref{def_config_basis_iso}) \\
 &= (I e_{i_1})\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes(I e_{i_{M_{\mathrm{col}}}})
-   \quad (\because \blkref{kronecker_product_rule}) \\
+   \quad (\because \blkref{kronecker_product_rule}\ (3)) \\
 &= e_{i_1}\boxtimes\cdots\boxtimes(\sigma^z e_{i_m})\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
-   \quad (\because \text{恒等行列の作用}) \\
-&= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
-   \quad (\because \sigma^z e_{i_m}=\mu(m)e_{i_m}) \\
-&= \mu(m)\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)
-   \quad (\because \blkref{kronecker_multilinear}) \\
-&= \mu(m)\, f_{\iota(\mu)}
+   \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を第 }m\text{ 因子以外へ同時に適用}) \\
+&= e_{i_1}\boxtimes\cdots\boxtimes\left(\mu(m)_{\mathbb{C}}\,e_{i_m}\right)\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}
+   \quad (\because \text{上の }\sigma^z e_{i_m}=\mu(m)_{\mathbb{C}}\,e_{i_m}) \\
+&= \mu(m)_{\mathbb{C}}\,\left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)
+   \quad (\because \blkref{kronecker_multilinear}\text{ の数ベクトルの場合を }c = \mu(m)_{\mathbb{C}}\text{ で}) \\
+&= \mu(m)_{\mathbb{C}}\, f_{\iota(\mu)}
    \quad (\because \blkref{def_config_basis_iso})
 \end{aligned}`,
       ),
-      paragraph(["積については、いま示した作用を 2 回用いると"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sigma_m^z\sigma_{m'}^z f_{\iota(\mu)}
-&= \sigma_m^z\left(\mu(m')f_{\iota(\mu)}\right)
-   \quad (\because \sigma_{m'}^z f_{\iota(\mu)}=\mu(m')f_{\iota(\mu)}) \\
-&= \mu(m')\sigma_m^z f_{\iota(\mu)}
-   \quad (\because \text{行列作用の線型性}) \\
-&= \mu(m')\left(\mu(m)f_{\iota(\mu)}\right)
-   \quad (\because \sigma_m^z f_{\iota(\mu)}=\mu(m)f_{\iota(\mu)}) \\
-&= \left(\mu(m')\mu(m)\right)f_{\iota(\mu)}
-   \quad (\because \text{スカラー倍の結合律}) \\
-&= \mu(m)\mu(m')f_{\iota(\mu)}
-   \quad (\because \text{複素数の乗法の交換律}).
-\end{aligned}`,
-      ),
-      paragraph([
-        "基底 ",
-        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
-        " の各元が固有ベクトルなので、これらの行列は基底 ",
-        math(String.raw`(f_I)`),
-        " に関して対角行列である。",
-      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。A_1⊗⋯⊗A_M 型の積を <def_kronecker> のクロネッカー積 A_1⊠⋯⊠A_M へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移した。",
+        "2026-11-02: SageMath の検算（sagemath/check/sigma_z_diagonal_action/）のレビューで、1 ブロックに 4 つの主張（σ_m^z の固有ベクトルの等式・積の等式・二つの対角性）があったので、" +
+          "この主張を σ_m^z f_{ι(μ)} = μ(m)_C f_{ι(μ)} だけにし、ほかを sigma_z_product_action・site_sigma_z_is_diagonal・site_sigma_z_product_is_diagonal に分けた。" +
+          "スカラーを inclusion_rr_to_cc の μ(m)_C と書き、場合分けを (∵) 付きの鎖に、ラベルの無かった根拠（行列と列ベクトルの積・恒等行列の作用）をラベル参照にした。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_sigma_z_product_action",
+    kind: "claim",
+    title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ の基底 } f_{\iota(\mu)} \text{ への作用}` },
+    labels: ["sigma_z_product_action"],
+    statement: [
+      paragraph([
+        math(String.raw`\mu \in \mathfrak{M}`),
+        "、",
+        math(String.raw`m, m' \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+      ]),
+      displayMath(String.raw`\sigma_m^z\sigma_{m'}^z\, f_{\iota(\mu)} = \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\, f_{\iota(\mu)}`),
+      paragraph([
+        "が成り立つ。記号は ",
+        ref("sigma_z_diagonal_action"),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_m^z\sigma_{m'}^z f_{\iota(\mu)}
+&= \sigma_m^z\left(\sigma_{m'}^z f_{\iota(\mu)}\right)
+   \quad (\because \blkref{mat_mult_associative}) \\
+&= \sigma_m^z\left(\mu(m')_{\mathbb{C}}\,f_{\iota(\mu)}\right)
+   \quad (\because \blkref{sigma_z_diagonal_action}\text{ を }m'\text{ で}) \\
+&= \mu(m')_{\mathbb{C}}\left(\sigma_m^z f_{\iota(\mu)}\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= \mu(m')_{\mathbb{C}}\left(\mu(m)_{\mathbb{C}}\,f_{\iota(\mu)}\right)
+   \quad (\because \blkref{sigma_z_diagonal_action}\text{ を }m\text{ で}) \\
+&= \left(\mu(m')_{\mathbb{C}}\,\mu(m)_{\mathbb{C}}\right)f_{\iota(\mu)}
+   \quad (\because \blkref{scalar_multiple_is_associative}) \\
+&= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\,f_{\iota(\mu)}
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の交換律}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sigma_z_diagonal_action の「とくに」の積の等式を独立の主張にした（1 ブロック 1 主張）。結合律の行を足し、ラベルの無かった根拠（行列作用の線型性・スカラー倍の結合律）をラベル参照にした。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_site_sigma_z_is_diagonal",
+    kind: "claim",
+    title: { tex: String.raw`\sigma_m^z \text{ は対角行列}` },
+    labels: ["site_sigma_z_is_diagonal"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        ref("def_site_pauli_matrices"),
+        " の ",
+        math(String.raw`\sigma_m^z \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は対角行列（",
+        ref("def_diagonal_matrix"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`s, t \in \{1,2\}`),
+        "、",
+        math(String.raw`s \neq t`),
+        " について ",
+        math(String.raw`(I_{\mathrm{Mat}(2,\mathbb{C})})_{st} = \delta_{st} = 0_{\mathbb{C}}`),
+        "（",
+        ref("def_identity_matrix"),
+        "、",
+        ref("def_kronecker_delta"),
+        "）、",
+        math(String.raw`(\sigma^z)_{st} = 0_{\mathbb{C}}`),
+        "（",
+        ref("pauli_matrix_products"),
+        "）である。第 ",
+        math(String.raw`p`),
+        " 因子（",
+        math(String.raw`p \in \{1,\dots,M_{\mathrm{col}}\}`),
+        "）を ",
+        math(String.raw`A_p := \sigma^z`),
+        "（",
+        math(String.raw`p = m`),
+        "）、",
+        math(String.raw`A_p := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        math(String.raw`p \neq m`),
+        "）とおくと、どの ",
+        math(String.raw`p`),
+        " についても ",
+        math(String.raw`s \neq t \Rightarrow (A_p)_{st} = 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        "、",
+        math(String.raw`k \neq l`),
+        " を取る。",
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`\nu`),
+        " は全単射なので ",
+        math(String.raw`k = \nu(K)`),
+        "、",
+        math(String.raw`l = \nu(L)`),
+        " となる ",
+        math(String.raw`K = (k_1,\dots,k_{M_{\mathrm{col}}}),\ L = (l_1,\dots,l_{M_{\mathrm{col}}}) \in \mathcal{I}`),
+        " がある。",
+        math(String.raw`k \neq l`),
+        " より ",
+        math(String.raw`K \neq L`),
+        " なので、",
+        math(String.raw`k_n \neq l_n`),
+        " となる ",
+        math(String.raw`n \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " がある。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma_m^z)_{kl}
+&= \left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)_{\nu(K),\nu(L)}
+   \quad (\because \blkref{def_site_pauli_matrices}) \\
+&= \prod_{p=1}^{M_{\mathrm{col}}}(A_p)_{k_p l_p}
+   \quad (\because \blkref{def_kronecker}\ (2)) \\
+&= 0_{\mathbb{C}}
+   \quad (\because \blkref{finite_product_with_zero_factor_is_zero}\text{ を、準備の }(A_n)_{k_n l_n} = 0_{\mathbb{C}}\ (k_n \neq l_n)\text{ で}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sigma_z_diagonal_action の「これらはすべて基底 (f_I) に関して対角行列である」を、対角行列の定義（def_diagonal_matrix）に沿って成分で述べる独立の主張にした。" +
+          "旧い証明は「基底の各元が固有ベクトルなので」と書いていたが、f_I の成分が δ であることを経ずに成分の意味の対角性へ渡していたので、クロネッカー積の成分から直接示す形にした。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_site_sigma_z_product_is_diagonal",
+    kind: "claim",
+    title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ は対角行列}` },
+    labels: ["site_sigma_z_product_is_diagonal"],
+    statement: [
+      paragraph([
+        math(String.raw`m, m' \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        math(String.raw`\sigma_m^z\sigma_{m'}^z \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の積）は対角行列（",
+        ref("def_diagonal_matrix"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        "、",
+        math(String.raw`k \neq l`),
+        " を取る。",
+        math(String.raw`q \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について、",
+        math(String.raw`q \neq k`),
+        " なら ",
+        math(String.raw`(\sigma_m^z)_{kq} = 0_{\mathbb{C}}`),
+        "（",
+        ref("site_sigma_z_is_diagonal"),
+        "）なので ",
+        math(String.raw`(\sigma_m^z)_{kq}(\sigma_{m'}^z)_{ql} = 0_{\mathbb{C}}\,(\sigma_{m'}^z)_{ql} = 0_{\mathbb{C}}`),
+        "（",
+        ref("complex_zero_times_is_zero"),
+        "）、",
+        math(String.raw`q = k`),
+        " なら ",
+        math(String.raw`(\sigma_{m'}^z)_{ql} = (\sigma_{m'}^z)_{kl} = 0_{\mathbb{C}}`),
+        "（",
+        ref("site_sigma_z_is_diagonal"),
+        " を ",
+        math(String.raw`m'`),
+        " で）なので ",
+        math(String.raw`(\sigma_m^z)_{kq}(\sigma_{m'}^z)_{ql} = (\sigma_m^z)_{kq}\,0_{\mathbb{C}} = 0_{\mathbb{C}}`),
+        "（",
+        ref("complex_times_zero_is_zero"),
+        "）である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma_m^z\sigma_{m'}^z)_{kl}
+&= \sum_{q=1}^{2^{M_{\mathrm{col}}}}(\sigma_m^z)_{kq}(\sigma_{m'}^z)_{ql}
+   \quad (\because \blkref{mat_mult}) \\
+&= \sum_{q=1}^{2^{M_{\mathrm{col}}}} 0_{\mathbb{C}}
+   \quad (\because \text{上の各項が }0_{\mathbb{C}}\text{ であることを各 }q\text{ へ同時に適用}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because \blkref{finite_sum_of_complex_zeros}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sigma_z_diagonal_action の「これらはすべて基底 (f_I) に関して対角行列である」のうち積の側を、対角行列の定義（def_diagonal_matrix）に沿って成分で述べる独立の主張にした。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_config_basis_vector_own_component",
+    kind: "claim",
+    title: { tex: String.raw`f_I \text{ の第 } \nu(I) \text{ 成分は } 1` },
+    labels: ["config_basis_vector_own_component"],
+    statement: [
+      paragraph([
+        ref("def_end_iso"),
+        " を ",
+        math(String.raw`M := M_{\mathrm{col}}`),
+        " として用いたときの ",
+        math(String.raw`f_I \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " と、",
+        ref("def_kronecker"),
+        " の番号付け ",
+        math(String.raw`\nu`),
+        " について、",
+        math(String.raw`I = (i_1,\dots,i_{M_{\mathrm{col}}}) \in \mathcal{I}`),
+        " ならば",
+      ]),
+      displayMath(String.raw`(f_I)_{\nu(I)} = 1_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(f_I)_{\nu(I)}
+&= \left(e_{i_1}\boxtimes\cdots\boxtimes e_{i_{M_{\mathrm{col}}}}\right)_{\nu(I)}
+   \quad (\because \blkref{def_end_iso}) \\
+&= \prod_{k=1}^{M_{\mathrm{col}}} (e_{i_k})_{i_k}
+   \quad (\because \blkref{def_kronecker}\ (1)) \\
+&= \prod_{k=1}^{M_{\mathrm{col}}} 1_{\mathbb{C}}
+   \quad (\because \blkref{def_end_iso}\text{ の }e_1 = (1,0),\ e_2 = (0,1)\text{ より }(e_1)_1 = (e_2)_2 = 1_{\mathbb{C}}\text{ を各因子へ同時に適用}) \\
+&= 1_{\mathbb{C}}
+   \quad (\because \blkref{finite_product_of_complex_ones}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。同じ計算は tensor_basis の証明の Step 1 の中にあったが主張ではなかった。site_sigma_z_product_diagonal_entry の証明が引くので足した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_site_sigma_z_product_diagonal_entry",
+    kind: "claim",
+    title: { tex: String.raw`\sigma_m^z\sigma_{m'}^z \text{ の対角成分}` },
+    labels: ["site_sigma_z_product_diagonal_entry"],
+    statement: [
+      paragraph([
+        math(String.raw`\mu \in \mathfrak{M}`),
+        "、",
+        math(String.raw`m, m' \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        math(String.raw`k := \nu(\iota(\mu)) \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        "（",
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`\nu`),
+        "、",
+        ref("def_config_basis_iso"),
+        " の ",
+        math(String.raw`\iota`),
+        "）とおくと",
+      ]),
+      displayMath(String.raw`(\sigma_m^z\sigma_{m'}^z)_{kk} = \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。記号は ",
+        ref("sigma_z_diagonal_action"),
+        " のものである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        "、",
+        math(String.raw`l \neq k`),
+        " について、",
+        ref("site_sigma_z_product_is_diagonal"),
+        " より ",
+        math(String.raw`(\sigma_m^z\sigma_{m'}^z)_{kl} = 0_{\mathbb{C}}`),
+        " なので、",
+        ref("complex_zero_times_is_zero"),
+        " より ",
+        math(String.raw`(\sigma_m^z\sigma_{m'}^z)_{kl}\,(f_{\iota(\mu)})_l = 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma_m^z\sigma_{m'}^z)_{kk}
+&= (\sigma_m^z\sigma_{m'}^z)_{kk}\,1_{\mathbb{C}}
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}) \\
+&= (\sigma_m^z\sigma_{m'}^z)_{kk}\,(f_{\iota(\mu)})_{k}
+   \quad (\because \blkref{config_basis_vector_own_component}\text{ を }I = \iota(\mu)\text{ で}) \\
+&= \sum_{l=1}^{2^{M_{\mathrm{col}}}} (\sigma_m^z\sigma_{m'}^z)_{kl}\,(f_{\iota(\mu)})_{l}
+   \quad (\because \blkref{finite_sum_with_single_nonzero_term}\text{ を、準備の }l \neq k\text{ の項が }0_{\mathbb{C}}\text{ であることで}) \\
+&= \left(\sigma_m^z\sigma_{m'}^z\, f_{\iota(\mu)}\right)_{k}
+   \quad (\because \blkref{mat_mult}) \\
+&= \left(\mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\, f_{\iota(\mu)}\right)_{k}
+   \quad (\because \blkref{sigma_z_product_action}) \\
+&= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\, (f_{\iota(\mu)})_{k}
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
+&= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}\, 1_{\mathbb{C}}
+   \quad (\because \blkref{config_basis_vector_own_component}\text{ を }I = \iota(\mu)\text{ で}) \\
+&= \mu(m)_{\mathbb{C}}\,\mu(m')_{\mathbb{C}}
+   \quad (\because \blkref{complex_numbers_form_a_field}\text{ の乗法の単位元}).
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。first_transfer_matrix_pauli_form の証明が「D の対角成分は d(μ)」を、固有ベクトルの等式から f_I の成分を経ずに読んでいたので、成分で述べる主張にした。",
       ],
     },
   },
@@ -1244,58 +1614,139 @@ i_m := \begin{cases} 1 & (\mu(m) = +1) \\ 2 & (\mu(m) = -1) \end{cases}
     proof: [
       paragraph([
         math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " とおく。",
+        "（",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和）とおく。",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`m^{+} := m+1`),
+        "（",
+        math(String.raw`m \leq M_{\mathrm{col}}-1`),
+        "）、",
+        math(String.raw`m^{+} := 1`),
+        "（",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        "）とおく。",
+        math(String.raw`m^{+} \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " であり、",
         ref("def_site_pauli_periodic_extension"),
         " より ",
-        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z=\sigma_1^z`),
-        " なので、周期端を分けると ",
-        math(String.raw`D=\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z+\sigma_{M_{\mathrm{col}}}^z\sigma_1^z`),
-        " であり、",
-        ref("sigma_z_diagonal_action"),
-        " を前半の和では ",
-        math(String.raw`1\leq m\leq M_{\mathrm{col}}-1`),
-        " の ",
-        math(String.raw`(m,m+1)`),
-        " に、周期端では ",
-        math(String.raw`(M_{\mathrm{col}},1)`),
-        " に適用できる。",
+        math(String.raw`\sigma_{m+1}^z = \sigma_{m^{+}}^z`),
+        "、",
+        ref("def_transfer_matrix"),
+        " の周期規約 ",
+        math(String.raw`\mu(M_{\mathrm{col}}+1) := \mu(1)`),
+        " より ",
+        math(String.raw`\mu(m+1) = \mu(m^{+})`),
+        " である。",
+        math(String.raw`\mu \in \mathfrak{M}`),
+        " について ",
+        math(String.raw`d(\mu) := \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1) \in \mathbb{R}`),
+        " とおく。",
       ]),
-      paragraph(["中間目標: ", math(String.raw`D`), " の対角成分。", math(String.raw`\mu \in \mathfrak{M}`), " を任意に取る。"]),
+      paragraph([
+        "中間目標: ",
+        math(String.raw`D`),
+        " は対角行列（",
+        ref("def_diagonal_matrix"),
+        "）である。",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        "、",
+        math(String.raw`k \neq l`),
+        " を取る。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
-D\, f_{\iota(\mu)}
-&= \left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z+\sigma_{M_{\mathrm{col}}}^z\sigma_1^z\right)f_{\iota(\mu)}
-   &&(\because D\text{ の定義と }\blkref{def_site_pauli_periodic_extension}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left(\sigma_m^z\sigma_{m+1}^z f_{\iota(\mu)}\right)
-   +\sigma_{M_{\mathrm{col}}}^z\sigma_1^z f_{\iota(\mu)}
-   &&(\because \text{行列の有限和とベクトルの積の分配則}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\Bigl(\mu(m)\mu(m+1)\,f_{\iota(\mu)}\Bigr)
-   +\mu(M_{\mathrm{col}})\mu(1)\,f_{\iota(\mu)}
-   &&(\because \blkref{sigma_z_diagonal_action}\text{ を前半では }(m,m+1)\text{、周期端では }(M_{\mathrm{col}},1)\text{ へ}) \\
-&= \left(\sum_{m=1}^{M_{\mathrm{col}}-1}\mu(m)\mu(m+1)+\mu(M_{\mathrm{col}})\mu(1)\right)f_{\iota(\mu)}
-   &&(\because \text{スカラー倍の有限和の括り出し（分配則）}) \\
-&= \left(\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1)\right) f_{\iota(\mu)}
-   &&(\because \blkref{def_transfer_matrix}\text{ の周期規約 }\mu(M_{\mathrm{col}}+1)=\mu(1))
+D_{kl}
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)_{kl}
+   &&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m^{+}}^z\right)_{kl}
+   &&(\because \sigma_{m+1}^z = \sigma_{m^{+}}^z\text{ を各項へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}} 0_{\mathbb{C}}
+   &&(\because \blkref{site_sigma_z_product_is_diagonal}\text{ を各 }(m, m^{+})\text{ へ同時に適用}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{finite_sum_of_complex_zeros}).
 \end{aligned}`,
       ),
       paragraph([
-        "であるから、",
-        ref("sigma_z_diagonal_action"),
-        " と同じく ",
+        "中間目標: ",
         math(String.raw`D`),
-        " は基底 ",
-        math(String.raw`(f_I)_{I\in\mathcal{I}}`),
-        " に関して対角行列であり、その ",
-        math(String.raw`\iota(\mu)`),
-        " 番目（行・列番号では ",
-        math(String.raw`\nu(\iota(\mu))`),
-        " 番目）の対角成分は ",
-        math(String.raw`d(\mu) := \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1)`),
-        " である。",
+        " の対角成分。",
+        math(String.raw`\mu \in \mathfrak{M}`),
+        " を任意に取り、",
+        math(String.raw`k := \nu(\iota(\mu))`),
+        " とおく。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+D_{kk}
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m+1}^z\right)_{kk}
+   &&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^z\sigma_{m^{+}}^z\right)_{kk}
+   &&(\because \sigma_{m+1}^z = \sigma_{m^{+}}^z\text{ を各項へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\mu(m)_{\mathbb{C}}\,\mu(m^{+})_{\mathbb{C}}
+   &&(\because \blkref{site_sigma_z_product_diagonal_entry}\text{ を各 }(m, m^{+})\text{ へ同時に適用}) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}}\left(\mu(m)\,\mu(m^{+})\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_product}\text{ を各項へ同時に適用}) \\
+&= \left(\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu(m^{+})\right)_{\mathbb{C}}
+   &&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \left(\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\,\mu(m+1)\right)_{\mathbb{C}}
+   &&(\because \mu(m+1) = \mu(m^{+})\text{ を各項へ同時に適用}) \\
+&= d(\mu)_{\mathbb{C}}
+   &&(\because d(\mu)\text{ の定義}).
+\end{aligned}`,
+      ),
+      paragraph([
+        "中間目標: ",
         math(String.raw`K_1 D`),
-        " も対角行列で、対角成分は ",
-        math(String.raw`K_1 d(\mu)`),
+        "（",
+        ref("def_matrix_scalar_multiple"),
+        " の ",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " 倍）も対角行列で、対角成分は ",
+        math(String.raw`(K_1)_{\mathbb{C}}\,d(\mu)_{\mathbb{C}}`),
         " である。",
+        math(String.raw`k \neq l`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(K_1 D)_{kl}
+&= (K_1)_{\mathbb{C}}\,D_{kl}
+   &&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= (K_1)_{\mathbb{C}}\,0_{\mathbb{C}}
+   &&(\because \text{上の }D\text{ が対角行列であること}) \\
+&= 0_{\mathbb{C}}
+   &&(\because \blkref{complex_times_zero_is_zero}),
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`k = \nu(\iota(\mu))`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(K_1 D)_{kk}
+&= (K_1)_{\mathbb{C}}\,D_{kk}
+   &&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= (K_1)_{\mathbb{C}}\,d(\mu)_{\mathbb{C}}
+   &&(\because \text{上の }D\text{ の対角成分}).
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("def_kronecker"),
+        " の ",
+        math(String.raw`\nu`),
+        " と ",
+        ref("config_numbering_equals_kronecker_numbering"),
+        "・",
+        ref("row_configuration_numbering_bijective"),
+        " より、どの ",
+        math(String.raw`k \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " も ",
+        math(String.raw`\nu(\iota(\mu))`),
+        " の形に書ける。",
       ]),
       paragraph([
         "中間目標: 成分の一致。",
@@ -1308,13 +1759,23 @@ D\, f_{\iota(\mu)}
 &= \left(\exp(K_1 D)\right)_{\nu(\iota(\mu)),\nu(\iota(\mu'))}
   &&(\because \blkref{config_numbering_equals_kronecker_numbering}) \\
 &= \begin{cases}
-\exp\!\left(K_1 d(\mu)\right) & (\nu(\iota(\mu)) = \nu(\iota(\mu'))) \\
-0 & (\nu(\iota(\mu)) \neq \nu(\iota(\mu')))
+\exp\!\left((K_1)_{\mathbb{C}}\,d(\mu)_{\mathbb{C}}\right) & (\nu(\iota(\mu)) = \nu(\iota(\mu'))) \\
+0_{\mathbb{C}} & (\nu(\iota(\mu)) \neq \nu(\iota(\mu')))
 \end{cases}
-  &&(\because \blkref{exp_of_diagonal_matrix}\text{ を対角行列 }K_1 D\text{ へ}) \\
+  &&(\because \blkref{exp_of_diagonal_matrix}\text{ を、上の対角行列 }K_1 D\text{ とその対角成分へ}) \\
 &= \begin{cases}
-\exp\!\left(K_1 d(\mu)\right) & (\mathrm{ord}(\mu) = \mathrm{ord}(\mu')) \\
-0 & (\mathrm{ord}(\mu) \neq \mathrm{ord}(\mu'))
+\exp\!\left((K_1\,d(\mu))_{\mathbb{C}}\right) & (\nu(\iota(\mu)) = \nu(\iota(\mu'))) \\
+0_{\mathbb{C}} & (\nu(\iota(\mu)) \neq \nu(\iota(\mu')))
+\end{cases}
+  &&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \begin{cases}
+\left(\exp\!\left(K_1 d(\mu)\right)\right)_{\mathbb{C}} & (\nu(\iota(\mu)) = \nu(\iota(\mu'))) \\
+0_{\mathbb{C}} & (\nu(\iota(\mu)) \neq \nu(\iota(\mu')))
+\end{cases}
+  &&(\because \blkref{complex_exp_of_real_argument}) \\
+&= \begin{cases}
+\left(\exp\!\left(K_1 d(\mu)\right)\right)_{\mathbb{C}} & (\mathrm{ord}(\mu) = \mathrm{ord}(\mu')) \\
+0_{\mathbb{C}} & (\mathrm{ord}(\mu) \neq \mathrm{ord}(\mu'))
 \end{cases}
   &&(\because \blkref{config_numbering_equals_kronecker_numbering}) \\
 &= \delta_{\mu=\mu'}\exp\!\left(K_1\sum_{m=1}^{M_{\mathrm{col}}}\mu(m)\mu(m+1)\right)
@@ -1342,6 +1803,8 @@ D\, f_{\iota(\mu)}
           "証明は旧 <V1_component_equals_pauli> の証明を、成分の番号を ord で指す形に直したものである。",
         "原文の V_1 の定義は exp(√-1 K_1 (σ^z_1σ^z_2 + ⋯ + σ^z_Mσ^z_1)) と虚数単位を含んでいたが、これは誤りなので K_1 に訂正済みである。Y_m Z_{m+1} = -√-1 σ^z_mσ^z_{m+1} なので、虚数単位は Jordan--Wigner 置換から生じる。",
         "M=2,3,4 と複数の K_1 について、成分定義の V_1 とパウリ表示の V_1 が残差 0.00e+00 で一致することを確認した（sagemath/check/043_claim_transfer_matrix_bridge/check_01_V1_bridge.sage）。",
+        "2026-11-02: sigma_z_diagonal_action を 4 つの主張に分けたのに合わせ、「D は基底 (f_I) に関して対角行列で、対角成分は d(μ)」を、site_sigma_z_product_is_diagonal・site_sigma_z_product_diagonal_entry と有限和の成分（finite_sum_of_matrices_entrywise）から成分で示す鎖にした。" +
+          "D f_{ι(μ)} の固有ベクトルの鎖は使われなくなったので外した。K_1 と d(μ) を ℂ へ送る写像（inclusion_rr_to_cc）と、複素数の exp と実数の exp の一致（complex_exp_of_real_argument）を鎖に書いた。",
       ],
     },
   },

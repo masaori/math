@@ -1102,6 +1102,50 @@ T_B\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
       ],
     },
   },
+
+  {
+    id: "calc_formulae_claim_real_inclusion_preserves_product",
+    kind: "claim",
+    title: { text: "実数の積の包含は包含の積に等しい" },
+    labels: ["real_inclusion_preserves_product"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`a_{\mathbb{C}}\, b_{\mathbb{C}} = (ab)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、左辺の積は ",
+        ref("definition_of_cc"),
+        " の積である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+a_{\mathbb{C}}\, b_{\mathbb{C}}
+&= (a, 0)\,(b, 0)
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= (a b - 0\cdot 0,\ a\cdot 0 + 0\cdot b)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= (a b - 0,\ 0 + 0)
+&&(\because\ \mathbb{R}\ \text{で}\ x\cdot 0 = 0\ \text{と}\ 0\cdot x = 0\ \text{（}\mathbb{R}\ \text{は体 }\blkref{set_and_algebra_notation}\text{）を 3 箇所へ適用})\\
+&= (a b,\ 0)
+&&(\because\ \mathbb{R}\ \text{で}\ x - 0 = x\ \text{と}\ 0 + 0 = 0)\\
+&= (ab)_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。first_transfer_matrix_pauli_form の証明の D の対角成分と成分の一致の鎖が、包含と ℂ の積の定義を開いて計算する段を一行で使っていたので、主張にして引けるようにした。",
+      ],
+    },
+  },
   {
     id: "calc_formulae_009_sqrt_minus_one",
     kind: "definition",

@@ -3,18 +3,29 @@
 
 対応する人手証明（正本は `structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
 
-* `bridge_002_claim_sigma_z_diagonal_action`（ラベル **`sigma_z_diagonal_action`**）
+* `bridge_002_claim_sigma_z_diagonal_action`（ラベル **`sigma_z_diagonal_action`**）:
+  `σ^z_m f_{ι(μ)} = μ(m)_ℂ f_{ι(μ)}`
+* `transfer_matrix_claim_sigma_z_product_action`（ラベル `sigma_z_product_action`）:
+  `σ^z_m σ^z_{m'} f_{ι(μ)} = μ(m)_ℂ μ(m')_ℂ f_{ι(μ)}`
+* `transfer_matrix_claim_site_sigma_z_is_diagonal`（ラベル `site_sigma_z_is_diagonal`）:
+  `σ^z_m` は対角行列（`def_diagonal_matrix`）
+* `transfer_matrix_claim_site_sigma_z_product_is_diagonal`（ラベル `site_sigma_z_product_is_diagonal`）:
+  `σ^z_m σ^z_{m'}` は対角行列
 
-原文の主張は `σ^z_m f_{ι(μ)} = μ(m) f_{ι(μ)}`、および
-`σ^z_m σ^z_{m'} f_{ι(μ)} = μ(m) μ(m') f_{ι(μ)}`、
-「これらはすべて基底 `(f_I)` に関して対角行列である」。
+Lean の定理との対応:
 
-Lean では添字型 `Conf M` がスピン配置そのものなので、
-「対角行列である」を `Matrix.diagonal` の形の等式として先に証明し
-（`sigmaZ_eq_diagonal`）、基底ベクトルへの作用（原文の式そのもの）を
-その系として得る（`sigmaZ_mulVec_basisVec`）。
+* `sigmaZ_eq_diagonal` ↔ `site_sigma_z_is_diagonal`（対角成分が `sgn(I m)` であることも含む）
+* `sigmaZ_mulVec_basisVec` ↔ `sigma_z_diagonal_action`
+* `sigmaZ_mul_sigmaZ_eq_diagonal` ↔ `site_sigma_z_product_is_diagonal`（対角成分が `sgn(I m) sgn(I m')` であることも含む。人手では `site_sigma_z_product_diagonal_entry`）
+* `sigmaZ_mul_sigmaZ_mulVec_basisVec` ↔ `sigma_z_product_action`（人手の 6 行と同じ順:
+  `mulVec_mulVec`（結合律）→ 作用 → `mulVec_smul` → 作用 → `smul_smul` → `mul_comm`）
 
-必要十分版: `Ising2D/NecSuf/SiteDiagonal.lean`（同じラベル `sigma_z_diagonal_action`）。
+人手と 1 対 1 でないのは `sigmaZ_eq_diagonal`・`sigmaZ_mulVec_basisVec`・`sigmaZ_mul_sigmaZ_eq_diagonal` の 3 つである。
+人手は、場合分け（`σ^z e_{i_m} = μ(m)_ℂ e_{i_m}`）から固有ベクトルの等式を示し、対角性はクロネッカー積の成分の 0 の因子
+（`σ_m^z`）と、行列の積の成分の和の各項が 0 であること（`σ_m^zσ_{m'}^z`）から別に示す。
+Lean は対角性（`sigmaZ_eq_diagonal`）を先に示して作用をその系とし、積の対角性を `Matrix.diagonal_mul_diagonal` で閉じる。
+
+必要十分版: `Ising2D/NecSuf/SiteDiagonal.lean`（対角性の側、ラベル `site_sigma_z_is_diagonal`）。
 そこで確かめたとおり、効いているのは「サイトごとの積 `siteProd` の成分が因子の成分の積である」
 ことと「Pauli 行列 `σ^z` が対角行列であること」だけで、`σ^z` の具体的な成分も
 複素数であることも効いていない。
@@ -53,7 +64,7 @@ theorem pauliZ_eq_diagonal : pauliZ = Matrix.diagonal sgnC := by
     simp [pauliZ, Matrix.diagonal, sgnC, sgn]
 
 /-- **`σ^z_m` は基底 `(f_I)` に関して対角行列で、`f_I` の固有値は `sgn(I m)`。**
-原文 `sigma_z_diagonal_action` の行列としての言い換え。 -/
+人手の `site_sigma_z_is_diagonal` に当たる。 -/
 theorem sigmaZ_eq_diagonal (m : Fin M) :
     sigmaZ m = Matrix.diagonal (fun I : Conf M => sgnC (I m)) := by
   have h : (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliZ)
@@ -76,7 +87,7 @@ theorem sigmaZ_mulVec_basisVec (m : Fin M) (I : Conf M) :
   · subst h; simp
   · simp [Pi.single_apply, h]
 
-/-- 原文の `σ^z_m σ^z_{m'} f_{ι(μ)} = μ(m) μ(m') f_{ι(μ)}`。 -/
+/-- 人手の `site_sigma_z_product_is_diagonal`（`σ^z_m σ^z_{m'}` は対角行列）に当たる。 -/
 theorem sigmaZ_mul_sigmaZ_eq_diagonal (m m' : Fin M) :
     sigmaZ m * sigmaZ m' = Matrix.diagonal (fun I : Conf M => sgnC (I m) * sgnC (I m')) := by
   rw [sigmaZ_eq_diagonal, sigmaZ_eq_diagonal, Matrix.diagonal_mul_diagonal]
