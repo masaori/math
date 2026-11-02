@@ -2419,6 +2419,229 @@ C \Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr)
     },
   },
   {
+    id: "linear_space_general_claim_sum_over_binary_words_with_one_nonzero_term",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和で、一つの項以外が零行列なら、和はその項に等しい}` },
+    labels: ["sum_over_binary_words_with_one_nonzero_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`B_\epsilon \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とし、",
+        math(String.raw`\epsilon \neq \epsilon'`),
+        " を満たす全ての ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`B_\epsilon = O`),
+        " とする。和は ",
+        ref("def_sum_over_binary_words"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。このとき",
+      ]),
+      displayMath(String.raw`\sum_{\epsilon \in \{0,1\}^{r}} B_\epsilon = B_{\epsilon'}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\{0,1\}^{r}`),
+        " の二つの元は写像なので、",
+        math(String.raw`\epsilon = \epsilon'`),
+        " は全ての ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " で ",
+        math(String.raw`\epsilon_j = \epsilon'_j`),
+        " であることを指し、",
+        math(String.raw`\epsilon \neq \epsilon'`),
+        " はある ",
+        math(String.raw`j`),
+        " で ",
+        math(String.raw`\epsilon_j \neq \epsilon'_j`),
+        " であることを指す。",
+        math(String.raw`r`),
+        " についての帰納法で、全ての ",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        " と、仮定を満たす ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元の全ての族について示す。",
+      ]),
+      paragraph([
+        math(String.raw`r = 1`),
+        " のとき、",
+        math(String.raw`\{0,1\}^{1}`),
+        " の元は ",
+        math(String.raw`(1)`),
+        " と ",
+        math(String.raw`(0)`),
+        " である（",
+        ref("def_sum_over_binary_words"),
+        "）。",
+        math(String.raw`\epsilon' = (1)`),
+        " なら ",
+        math(String.raw`(0)_1 = 0 \neq 1 = (1)_1`),
+        " なので仮定から ",
+        math(String.raw`B_{(0)} = O`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{1}} B_\epsilon
+&= B_{(1)} + B_{(0)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\bigr)\\
+&= B_{(1)} + O
+&&\bigl(\because\ B_{(0)} = O\bigr)\\
+&= B_{(1)}
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (X \to B_{(1)})\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\epsilon' = (0)`),
+        " なら ",
+        math(String.raw`(1)_1 = 1 \neq 0 = (0)_1`),
+        " なので仮定から ",
+        math(String.raw`B_{(1)} = O`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{1}} B_\epsilon
+&= B_{(1)} + B_{(0)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\bigr)\\
+&= O + B_{(0)}
+&&\bigl(\because\ B_{(1)} = O\bigr)\\
+&= B_{(0)}
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\ (X \to B_{(0)})\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で成り立つと仮定する。",
+        math(String.raw`\epsilon' \in \{0,1\}^{r+1}`),
+        " と、仮定を満たす ",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`B_\epsilon`),
+        " を取る。",
+        math(String.raw`\delta \in \{0,1\}^{r}`),
+        " を ",
+        math(String.raw`\delta_j := \epsilon'_j\ (j \in \{1,\dots,r\})`),
+        "、",
+        math(String.raw`e := \epsilon'_{r+1} \in \{0,1\}`),
+        " と置くと、",
+        math(String.raw`(\delta, e)_j = \delta_j = \epsilon'_j\ (j \leq r)`),
+        "、",
+        math(String.raw`(\delta, e)_{r+1} = e = \epsilon'_{r+1}`),
+        " なので ",
+        math(String.raw`(\delta, e) = \epsilon'`),
+        " である（",
+        math(String.raw`(\cdot,\cdot)`),
+        " は ",
+        ref("def_sum_over_binary_words"),
+        " のもの）。",
+        math(String.raw`\delta' \in \{0,1\}^{r}`),
+        " が ",
+        math(String.raw`\delta' \neq \delta`),
+        " なら、ある ",
+        math(String.raw`j \leq r`),
+        " で ",
+        math(String.raw`\delta'_j \neq \delta_j`),
+        " であり、",
+        math(String.raw`e'' \in \{0,1\}`),
+        " のどちらについても ",
+        math(String.raw`(\delta', e'')_j = \delta'_j \neq \delta_j = \epsilon'_j`),
+        " なので ",
+        math(String.raw`(\delta', e'') \neq \epsilon'`),
+        "、仮定から ",
+        math(String.raw`B_{(\delta', e'')} = O`),
+        " である。全ての ",
+        math(String.raw`\delta' \in \{0,1\}^{r}`),
+        " について ",
+        math(String.raw`C_{\delta'} := B_{(\delta',1)} + B_{(\delta',0)} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " と置く。",
+        math(String.raw`\delta' \neq \delta`),
+        " なら",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+C_{\delta'}
+&= B_{(\delta',1)} + B_{(\delta',0)}
+&&\bigl(\because\ C_{\delta'}\ \text{の定義}\bigr)\\
+&= O + O
+&&\bigl(\because\ B_{(\delta',1)} = O,\ B_{(\delta',0)} = O\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (X \to O)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`\delta' \in \{0,1\}^{r}`),
+        " で添字付けられた族 ",
+        math(String.raw`C_{\delta'}`),
+        " は ",
+        math(String.raw`\epsilon' \to \delta`),
+        " について帰納法の仮定の前提を満たす。したがって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{r+1}} B_\epsilon
+&= \sum_{\delta' \in \{0,1\}^{r}} \Bigl(B_{(\delta',1)} + B_{(\delta',0)}\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\bigr)\\
+&= \sum_{\delta' \in \{0,1\}^{r}} C_{\delta'}
+&&\bigl(\because\ C_{\delta'}\ \text{の定義を各項へ同時適用}\bigr)\\
+&= C_\delta
+&&\bigl(\because\ \text{帰納法の仮定}\ (\epsilon' \to \delta,\ B_\epsilon \to C_\epsilon)\bigr)\\
+&= B_{(\delta,1)} + B_{(\delta,0)}
+&&\bigl(\because\ C_\delta\ \text{の定義}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`e = 1`),
+        " なら ",
+        math(String.raw`(\delta,0)_{r+1} = 0 \neq 1 = \epsilon'_{r+1}`),
+        " なので ",
+        math(String.raw`(\delta,0) \neq \epsilon'`),
+        "、仮定から ",
+        math(String.raw`B_{(\delta,0)} = O`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_{(\delta,1)} + B_{(\delta,0)}
+&= B_{(\delta,1)} + O
+&&\bigl(\because\ B_{(\delta,0)} = O\bigr)\\
+&= B_{(\delta,1)}
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (X \to B_{(\delta,1)})\bigr)\\
+&= B_{\epsilon'}
+&&\bigl(\because\ (\delta,1) = (\delta,e) = \epsilon'\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`e = 0`),
+        " なら ",
+        math(String.raw`(\delta,1)_{r+1} = 1 \neq 0 = \epsilon'_{r+1}`),
+        " なので ",
+        math(String.raw`(\delta,1) \neq \epsilon'`),
+        "、仮定から ",
+        math(String.raw`B_{(\delta,1)} = O`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_{(\delta,1)} + B_{(\delta,0)}
+&= O + B_{(\delta,0)}
+&&\bigl(\because\ B_{(\delta,1)} = O\bigr)\\
+&= B_{(\delta,0)}
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\ (X \to B_{(\delta,0)})\bigr)\\
+&= B_{\epsilon'}
+&&\bigl(\because\ (\delta,0) = (\delta,e) = \epsilon'\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 5 の直和の鎖の 1 行目 y_{ε'} = Σ_ε Q̌_{ε'}y_ε が「Step 1 の直交性と冪等性」を名前だけで根拠にしており、" +
+          "ε' 以外の項が零の和がその項に等しいことを引ける主張が無かったので足した。Lean は具体版 Ising2D.binaryWordMatrixSum_eq_of_eq_zero（DefinitionSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_expansion_of_finite_product_of_two_term_sums",
     kind: "claim",
     title: { text: "二項の和の有限積の展開" },

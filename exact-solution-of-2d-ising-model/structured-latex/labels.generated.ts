@@ -473,6 +473,7 @@ export const ALL_LABELS = [
   "star_preserves_norm_and_limits",
   "sum_over_binary_words_distributes_in_left_factor",
   "sum_over_binary_words_distributes_in_right_factor",
+  "sum_over_binary_words_with_one_nonzero_term",
   "symmetrized_transfer_matrix_on_sectors",
   "tensor_anticommutation_from_single_site",
   "tensor_basis",

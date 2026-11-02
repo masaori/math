@@ -2735,24 +2735,77 @@ x
 \end{aligned}`,
       ),
       paragraph([
-        "である。各項 ", math(String.raw`\check{Q}_\epsilon x`), " は ",
+        "である。各 ", math(String.raw`\epsilon`), " について ",
+        math(String.raw`\check{Q}_\epsilon x \in \mathrm{im}\,\check{Q}_\epsilon`),
+        " である（",
+        math(String.raw`\mathrm{im}\,Q := \{Qx \mid x \in \mathbb{C}^n\}`),
+        " は ",
+        ref("trace_of_idempotent"),
+        " の定義。",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ Q \to \check{Q}_\epsilon`),
+        "）。よって任意の ",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " は、各 ",
+        math(String.raw`\epsilon`),
+        " について ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
-        " に属するから和は全体を張る。直和であることを見るために ",
-        math(String.raw`\sum_\epsilon y_\epsilon = O_{2^{M_{\mathrm{col}}},1}`),
-        "（",
+        " の元を一つずつ取った和として書ける。",
+      ]),
+      paragraph([
+        "直和であることを見るために、各 ",
+        math(String.raw`\epsilon`),
+        " について ",
         math(String.raw`y_\epsilon \in \mathrm{im}\,\check{Q}_\epsilon`),
-        "）とする。任意の ", math(String.raw`\epsilon'`), " を固定する。Step 1 より、",
-        math(String.raw`\epsilon\ne\epsilon'`), " なら ",
-        math(String.raw`\check{Q}_{\epsilon'}y_\epsilon=O_{2^{M_{\mathrm{col}}},1}`),
-        " であり、", math(String.raw`y_{\epsilon'}\in\mathrm{im}\,\check{Q}_{\epsilon'}`),
-        " と冪等性から ",
-        math(String.raw`\check{Q}_{\epsilon'}y_{\epsilon'}=y_{\epsilon'}`), " である。したがって",
+        " を取り、",
+        math(String.raw`\sum_\epsilon y_\epsilon = O_{2^{M_{\mathrm{col}}},1}`),
+        " とする。",
+        ref("trace_of_idempotent"),
+        " の ",
+        math(String.raw`\mathrm{im}`),
+        " の定義により、各 ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`y_\epsilon = \check{Q}_\epsilon x_\epsilon`),
+        " を満たす ",
+        math(String.raw`x_\epsilon \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " を取る。任意の ", math(String.raw`\epsilon'`), " を固定する。",
+        math(String.raw`\epsilon\ne\epsilon'`), " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
+\check{Q}_{\epsilon'}y_\epsilon
+&= \check{Q}_{\epsilon'}\left(\check{Q}_\epsilon x_\epsilon\right)
+  \quad (\because x_\epsilon\ \text{の取り方}) \\
+&= \left(\check{Q}_{\epsilon'}\check{Q}_\epsilon\right)x_\epsilon
+  \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{Q}_{\epsilon'},\ B \to \check{Q}_\epsilon,\ C \to x_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= O_{2^{M_{\mathrm{col}}},2^{M_{\mathrm{col}}}}\,x_\epsilon
+  \quad (\because \text{Step 1 で示した (1) の}\ \check{Q}_\epsilon\check{Q}_{\epsilon'} = 0\ (\epsilon \to \epsilon',\ \epsilon' \to \epsilon)) \\
+&= O_{2^{M_{\mathrm{col}}},1}
+  \quad \left(\because\ \blkref{zero_matrix_is_left_zero_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ B \to x_\epsilon)\right)
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_{\epsilon'}y_{\epsilon'}
+&= \check{Q}_{\epsilon'}\left(\check{Q}_{\epsilon'}x_{\epsilon'}\right)
+  \quad (\because x_{\epsilon'}\ \text{の取り方}) \\
+&= \left(\check{Q}_{\epsilon'}\check{Q}_{\epsilon'}\right)x_{\epsilon'}
+  \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A,B \to \check{Q}_{\epsilon'},\ C \to x_{\epsilon'})\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_{\epsilon'}x_{\epsilon'}
+  \quad (\because \text{Step 1 の}\ \epsilon = \epsilon'\ \text{の鎖で示した}\ \check{Q}_\epsilon\check{Q}_\epsilon = \check{Q}_\epsilon\ (\epsilon \to \epsilon')) \\
+&= y_{\epsilon'}
+  \quad (\because x_{\epsilon'}\ \text{の取り方})
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
 y_{\epsilon'}
+&= \check{Q}_{\epsilon'}y_{\epsilon'}
+  \quad (\because \check{Q}_{\epsilon'}y_{\epsilon'}\ \text{の鎖を右辺から左辺へ}) \\
 &= \sum_\epsilon \check{Q}_{\epsilon'}y_\epsilon
-  \quad (\because \text{Step 1 の直交性と冪等性}) \\
+  \quad \left(\because\ \blkref{sum_over_binary_words_with_one_nonzero_term}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}},\ B_\epsilon \to \check{Q}_{\epsilon'}y_\epsilon)\ \text{を右辺から左辺へ。前提}\ \check{Q}_{\epsilon'}y_\epsilon = O_{2^{M_{\mathrm{col}}},1}\ (\epsilon \neq \epsilon')\ \text{は}\ \epsilon \neq \epsilon'\ \text{の}\ \check{Q}_{\epsilon'}y_\epsilon\ \text{の鎖}\right) \\
 &= \check{Q}_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right)
   \quad \left(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ r \to M_{\mathrm{col}},\ C \to \check{Q}_{\epsilon'},\ X_\epsilon \to y_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_{\epsilon'}\,O_{2^{M_{\mathrm{col}}},1}
@@ -2791,6 +2844,7 @@ y_{\epsilon'}
         "2026-11-02: Q̌_ε の有限積を def_finite_product_of_matrices の参照にし、Step 1 の最後の行「零行列は行列積の零元」を zero_matrix_is_right_zero_of_mat_mult に、Step 2 の最後の行「単位行列の有限積は単位行列」を finite_product_of_identity_matrices に替えた（どちらも新しく足した主張）。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_32。",
         "2026-11-02: ∏_{μ≠ν} を使っていた 3 行（Step 1 の ε ≠ ε' の鎖、Step 3 の ň_νQ̌_ε の鎖の最初と最後）を、def_finite_product_of_matrices_omitting_one_index と moving_one_factor_of_finite_product_to_the_end の参照で書き直した（Step 1 は R_ν^{(ε_ν)} と Q̌_{ε'} の因子の可換性を先に示し、Step 3 は因子ごとの可換性の 3 つの場合を先に置いた）。主張の文の「因子は互いに可換なので、積の順序は問わない」は、有限積を左から掛けると定めたので外した。主張の中身は不変。SageMath は 050 の check_35。",
         "2026-11-02: Step 4 の「冪の零乗」を新しく足した def_power_of_complex_number の参照に、Step 5 の「単位行列の作用」を identity_matrix_is_left_unit_of_mat_mult（n → 1）に、「行列の作用の分配法則」2 か所を sum_over_binary_words_distributes_in_left_factor（p → 1）と新しく足した sum_over_binary_words_distributes_in_right_factor に、「零ベクトルへの行列の作用」を zero_matrix_is_right_zero_of_mat_mult（p → 1）に替えた。数ベクトルを 2^{M_col} 行 1 列の行列として扱うこと、数ベクトルの和が def_sum_over_binary_words によること、零ベクトルが O_{2^{M_col},1} であることを Step 5 の冒頭に書いた。主張の中身は不変。SageMath は 050 の check_36。",
+        "2026-11-02: Step 5 の直和の鎖の 1 行目「Step 1 の直交性と冪等性」を、新しく足した sum_over_binary_words_with_one_nonzero_term の参照（右辺から左辺へ）と、その前提 Q̌_{ε'}y_ε = O（ε ≠ ε'）の 4 行の鎖（x_ε の取り方・mat_mult_associative（q → 1）・Step 1 の (1)・zero_matrix_is_left_zero_of_mat_mult（p → 1））、Q̌_{ε'}y_{ε'} = y_{ε'} の 4 行の鎖（mat_mult_associative・Step 1 の Q̌_εQ̌_ε = Q̌_ε）に替えた。散文「各項は像に属するから和は全体を張る」を、Q̌_εx ∈ im Q̌_ε を trace_of_idempotent の im の定義で述べる文にした。y_ε ∈ im Q̌_ε から y_ε = Q̌_εx_ε となる x_ε を取ることを書いた。主張の中身は不変。SageMath は 050 の check_joint_eigenspace_step5_direct_sum_first_line.sage。",
       ],
     },
   },

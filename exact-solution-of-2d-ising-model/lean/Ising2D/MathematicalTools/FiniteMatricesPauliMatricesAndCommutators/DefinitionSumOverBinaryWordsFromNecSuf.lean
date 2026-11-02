@@ -4,7 +4,8 @@
 具体版 `DefinitionSumOverBinaryWords.lean` の定義と主張を、必要十分版 `Ising2D/NecSuf/BinaryWordSum.lean` の
 `α := Mat(m,n,ℂ)`、`f := (· C)` の特殊化として得る。`hf := add_mul_matrix`（人手の `mat_mult_distributes_over_sum_in_left_factor`）を渡す。
 左から掛ける側は `f := (C * ·)`、`hf := mul_add_matrix`（人手の `mat_mult_distributes_over_sum_in_right_factor`）である。
-人手のラベルは `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`・`sum_over_binary_words_distributes_in_right_factor`。
+人手のラベルは `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`・`sum_over_binary_words_distributes_in_right_factor`・
+`sum_over_binary_words_with_one_nonzero_term`（`NecSuf.binWordSum_eq_of_eq_zero`、`α := Mat(m,n,ℂ)`）。
 
 `TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。`TensorPow M` の `{0,1}^r` の上の和は `NecSuf.binWordSum` である。
 -/
@@ -44,5 +45,19 @@ theorem mul_binaryWordMatrixSum_of_necSuf {m n p : ℕ} (r : ℕ) (C : Matrix (F
 theorem mul_binWordSum_tensorPow {M : ℕ} (r : ℕ) (C : TensorPow M) (X : (Fin (r + 1) → Fin 2) → TensorPow M) :
     C * NecSuf.binWordSum r X = NecSuf.binWordSum r (fun ε => C * X ε) :=
   NecSuf.binWordSum_map (C * ·) (fun a b => mul_add_matrix_tensorPow C a b) r X
+
+/-- `sum_over_binary_words_with_one_nonzero_term` を `NecSuf.binWordSum_eq_of_eq_zero`（`α := Mat(m,n,ℂ)`）の特殊化として得る。
+`a + 0 = a`・`0 + a = a` は `Mat(m,n,ℂ)` の加法の構造から入る（具体版の `matrix_add_zero_matrix`・`zero_matrix_add_matrix` に当たる）。 -/
+theorem binaryWordMatrixSum_eq_of_eq_zero_of_necSuf {m n : ℕ} (r : ℕ) (ε' : Fin (r + 1) → Fin 2)
+    (B : (Fin (r + 1) → Fin 2) → Matrix (Fin m) (Fin n) ℂ) (hB : ∀ ε, ε ≠ ε' → B ε = 0) :
+    binaryWordMatrixSum r B = B ε' := by
+  rw [binaryWordMatrixSum_eq_binWordSum]
+  exact NecSuf.binWordSum_eq_of_eq_zero r ε' B hB
+
+/-- `sum_over_binary_words_with_one_nonzero_term` の `TensorPow M` での系。 -/
+theorem binWordSum_eq_of_eq_zero_tensorPow {M : ℕ} (r : ℕ) (ε' : Fin (r + 1) → Fin 2)
+    (B : (Fin (r + 1) → Fin 2) → TensorPow M) (hB : ∀ ε, ε ≠ ε' → B ε = 0) :
+    NecSuf.binWordSum r B = B ε' :=
+  NecSuf.binWordSum_eq_of_eq_zero r ε' B hB
 
 end Ising2D
