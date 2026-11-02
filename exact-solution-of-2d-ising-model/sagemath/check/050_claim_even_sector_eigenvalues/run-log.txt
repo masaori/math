@@ -130,3 +130,6 @@ PASS eigenvalues_of_check_Vprime Step 2・Step 3' の帰納法と Step 4 の鎖:
 
 # 実行コマンド: sage check_26_max_eigenvalue_simple_left_projection_chain.sage
 PASS max_eigenvalue_of_V_plus_simple (3) の左から Q̌_{ε'} を掛ける鎖: 143 段、否定コントロール 2 行
+
+# 実行コマンド: sage check_27_V_plus_inverse_real_inclusion_chains.sage
+PASS V_plus_is_invertible Step 2・Step 3 の実数の係数の包含の行: 168 段、否定コントロール 12 行

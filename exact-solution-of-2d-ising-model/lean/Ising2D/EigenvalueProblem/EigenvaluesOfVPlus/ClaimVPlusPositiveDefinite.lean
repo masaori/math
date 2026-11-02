@@ -111,6 +111,17 @@ theorem rpow_neg_half_M_eq_inv {s2 : ℝ} (hs2 : 0 < s2) :
       = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ))⁻¹ := by
   rw [Real.rpow_neg (by linarith), Complex.ofReal_inv]
 
+/-- **原文 `V_plus_is_invertible` Step 2 の `a^{-1} = (2s_2)^{-M/2} ∈ ℝ`**（`a := (2s_2)^{M/2} ∈ ℝ`、
+正の実数の冪の指数法則）。`ℝ` の中の等式で、包含 `(·)_ℂ` を通す前の形。 -/
+theorem real_rpow_neg_half_M_eq_inv {s2 : ℝ} (hs2 : 0 < s2) :
+    (2 * s2) ^ (-((M : ℝ) / 2)) = ((2 * s2) ^ ((M : ℝ) / 2))⁻¹ :=
+  Real.rpow_neg (by linarith) _
+
+/-- `a := (2s_2)^{M/2} ∈ ℝ_{>0}` は `0` でない（人手 Step 2 の `a ∈ ℝ_{>0}`）。 -/
+theorem real_rpow_two_s2_ne_zero {s2 : ℝ} (hs2 : 0 < s2) :
+    (2 * s2) ^ ((M : ℝ) / 2) ≠ 0 :=
+  (Real.rpow_pos_of_pos (by linarith) _).ne'
+
 /-! ### 原文 `V_plus_is_invertible` Step 1（指数行列どうしの左右逆）
 
 人手の 4 つの鎖は、どれも `theorem_exp_product`（`X` と `-X` は可換）・`X - X = O`・`theorem_exp_zero` の
@@ -163,8 +174,9 @@ theorem expNegS2_mul_expS2 (K2star : ℂ) :
 /-- **原文 `V_plus_is_invertible` Step 2**: `VPlusInv` は `V^{(+)}` の右逆。 -/
 theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
     VPlus M s2 K1 K2star * VPlusInv M K1 s2 K2star = 1 := by
-  set a : ℂ := (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) with ha
-  have hane : a ≠ 0 := rpow_two_s2_ne_zero hs2 M
+  -- 人手 Step 2: `a := (2s_2)^{M/2} ∈ ℝ`、`a ∈ ℝ_{>0}`。スカラー倍の係数は包含 `a_ℂ`・`(a^{-1})_ℂ`。
+  set a : ℝ := (2 * s2) ^ ((M : ℝ) / 2) with ha
+  have hane : a ≠ 0 := real_rpow_two_s2_ne_zero hs2
   set Ep := matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)) with hEp
   set Em := matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) with hEm
   set Ap := matExp ((Complex.I * K2star) • H2 M) with hAp
@@ -172,19 +184,27 @@ theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
   have hEpEm : Ep * Em = 1 := expHalfS1plus_mul_expNegHalfS1plus K1
   have hApAm : Ap * Am = 1 := expS2_mul_expNegS2 K2star
   calc VPlus M s2 K1 K2star * VPlusInv M K1 s2 K2star
-      = (a • (Ep * Ap * Ep)) * (a⁻¹ • (Em * Am * Em)) := by
+      = ((a : ℂ) • (Ep * Ap * Ep)) * (((a⁻¹ : ℝ) : ℂ) • (Em * Am * Em)) := by
         -- `V^{(+)}` と `R^{(+)}` の表示、`(2s_2)^{-M/2} = a^{-1}`
-        rw [VPlus_eq_smul, VPlusInv, rpow_neg_half_M_eq_inv hs2]
-    _ = a • ((Ep * Ap * Ep) * (a⁻¹ • (Em * Am * Em))) := by
+        rw [VPlus_eq_smul, VPlusInv, real_rpow_neg_half_M_eq_inv hs2]
+    _ = (a : ℂ) • ((Ep * Ap * Ep) * (((a⁻¹ : ℝ) : ℂ) • (Em * Am * Em))) := by
         -- `scalar_multiple_factors_out_of_left_factor`
         rw [smul_mul_matrix_tensorPow]
-    _ = a • (a⁻¹ • ((Ep * Ap * Ep) * (Em * Am * Em))) := by
+    _ = (a : ℂ) • (((a⁻¹ : ℝ) : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em))) := by
         -- `scalar_multiple_factors_out_of_right_factor`
         rw [mul_smul_matrix_tensorPow]
-    _ = (a * a⁻¹) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
+    _ = ((a : ℂ) * ((a⁻¹ : ℝ) : ℂ)) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
         -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
         rw [smul_smul]
-    _ = (1 : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by rw [mul_inv_cancel₀ hane]
+    _ = ((a * a⁻¹ : ℝ) : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
+        -- `real_inclusion_preserves_product`（`a → a`、`b → a^{-1}`。Lean の具体版は無く、mathlib の `Complex.ofReal_mul`）
+        rw [Complex.ofReal_mul]
+    _ = ((1 : ℝ) : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
+        -- `ℝ` で `aa^{-1} = 1`
+        rw [mul_inv_cancel₀ hane]
+    _ = (1 : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
+        -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 1`
+        rw [Complex.ofReal_one]
     _ = (Ep * Ap * Ep) * (Em * Am * Em) := by
         -- `scalar_multiple_by_one`（Lean の具体版は無く、mathlib の `one_smul`）
         rw [one_smul]
@@ -213,8 +233,9 @@ theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
 /-- **原文 `V_plus_is_invertible` Step 3**: `VPlusInv` は `V^{(+)}` の左逆。 -/
 theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
     VPlusInv M K1 s2 K2star * VPlus M s2 K1 K2star = 1 := by
-  set a : ℂ := (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) with ha
-  have hane : a ≠ 0 := rpow_two_s2_ne_zero hs2 M
+  -- 人手 Step 2: `a := (2s_2)^{M/2} ∈ ℝ`、`a ∈ ℝ_{>0}`。スカラー倍の係数は包含 `a_ℂ`・`(a^{-1})_ℂ`。
+  set a : ℝ := (2 * s2) ^ ((M : ℝ) / 2) with ha
+  have hane : a ≠ 0 := real_rpow_two_s2_ne_zero hs2
   set Ep := matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)) with hEp
   set Em := matExp (-((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) with hEm
   set Ap := matExp ((Complex.I * K2star) • H2 M) with hAp
@@ -222,19 +243,27 @@ theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
   have hEmEp : Em * Ep = 1 := expNegHalfS1plus_mul_expHalfS1plus K1
   have hAmAp : Am * Ap = 1 := expNegS2_mul_expS2 K2star
   calc VPlusInv M K1 s2 K2star * VPlus M s2 K1 K2star
-      = (a⁻¹ • (Em * Am * Em)) * (a • (Ep * Ap * Ep)) := by
+      = (((a⁻¹ : ℝ) : ℂ) • (Em * Am * Em)) * ((a : ℂ) • (Ep * Ap * Ep)) := by
         -- `R^{(+)}` と `V^{(+)}` の表示、`(2s_2)^{-M/2} = a^{-1}`
-        rw [VPlus_eq_smul, VPlusInv, rpow_neg_half_M_eq_inv hs2]
-    _ = a⁻¹ • ((Em * Am * Em) * (a • (Ep * Ap * Ep))) := by
+        rw [VPlus_eq_smul, VPlusInv, real_rpow_neg_half_M_eq_inv hs2]
+    _ = ((a⁻¹ : ℝ) : ℂ) • ((Em * Am * Em) * ((a : ℂ) • (Ep * Ap * Ep))) := by
         -- `scalar_multiple_factors_out_of_left_factor`
         rw [smul_mul_matrix_tensorPow]
-    _ = a⁻¹ • (a • ((Em * Am * Em) * (Ep * Ap * Ep))) := by
+    _ = ((a⁻¹ : ℝ) : ℂ) • ((a : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep))) := by
         -- `scalar_multiple_factors_out_of_right_factor`
         rw [mul_smul_matrix_tensorPow]
-    _ = (a⁻¹ * a) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
+    _ = (((a⁻¹ : ℝ) : ℂ) * (a : ℂ)) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
         -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
         rw [smul_smul]
-    _ = (1 : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by rw [inv_mul_cancel₀ hane]
+    _ = ((a⁻¹ * a : ℝ) : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
+        -- `real_inclusion_preserves_product`（`a → a^{-1}`、`b → a`。Lean の具体版は無く、mathlib の `Complex.ofReal_mul`）
+        rw [Complex.ofReal_mul]
+    _ = ((1 : ℝ) : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
+        -- `ℝ` で `a^{-1}a = 1`
+        rw [inv_mul_cancel₀ hane]
+    _ = (1 : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
+        -- `1_ℂ` は `inclusion_rr_to_cc` の略記 `r_ℂ` の `r = 1`
+        rw [Complex.ofReal_one]
     _ = (Em * Am * Em) * (Ep * Ap * Ep) := by
         -- `scalar_multiple_by_one`（Lean の具体版は無く、mathlib の `one_smul`）
         rw [one_smul]

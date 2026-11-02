@@ -3081,16 +3081,20 @@ E_K \check{Q}_\epsilon
         " は",
       ]),
       displayMath(
-        String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\,
+        String.raw`V^{(+)} = \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,
 \exp\!\left(\tfrac12 S_1^{(+)}\right)\exp\!\left(S_2\right)
 \exp\!\left(\tfrac12 S_1^{(+)}\right)`,
       ),
       paragraph([
         "と書ける（",
-        math(String.raw`s_2 = \sinh 2K_2`),
+        math(String.raw`s_2 = \sinh 2K_2 \in \mathbb{R}_{>0}`),
         " は ",
         ref("def_transfer_matrix_symbols"),
-        "）。このとき ",
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。このとき ",
         math(String.raw`V^{(+)}`),
         " は正定値（",
         ref("def_hermitian_positive_definite"),
@@ -3123,14 +3127,14 @@ E_K \check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 V_2
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)
-   \quad (\because V_2 \text{ の表示}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp(S_2)
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)
+   \quad (\because \blkref{V2_exponential_representation}\text{。係数の }\mathbb{R}_{>0}\subset\mathbb{C}\text{ は }\blkref{inclusion_rr_to_cc}\text{ の包含}) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\exp(S_2)
    \quad (\because S_2 = iK_2^*H_2)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
+        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
         " はスカラーなので ",
         ref("scalar_identity_commutes"),
         " により前へ出せて statement の表示を得る。",
@@ -3196,13 +3200,14 @@ V_2
         " であり、",
         ref("positive_real_multiple_preserves_positive_definite"),
         " より ",
-        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}B^*AB`),
+        math(String.raw`V^{(+)} = \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}B^*AB`),
         " も正定値である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: 主張・Step 1 の V_2 の鎖・Step 3 の係数を ((2s_2)^{M_col/2})_C（inclusion_rr_to_cc の包含）と書いた。主張は不変。",
         "009 章の V_is_positive_definite の (+) セクター版。009 章の主張は V_eq_Vprime の V（why_008_applies_only_to_minus_sector で確定したとおり実質 (−) 専用）に結びついているので、V^{(+)} について改めて述べた。証明で使う iH_is_real_symmetric と exp_hermitian_is_positive_definite はどちらも複号によらない形で述べられているので、内容は旧複合ブロックの Step 1〜3 と同一である。Lean の対応定理は Ising2D.VPlus_posDef。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05（S_1^{(+)}, S_2 の実対称性の残差 0.0、V^{(+)} のエルミート性の残差 ≤ 2.0e-12、固有値の全体最小 3.2e-4 > 0、M=2,3,4,5・6 組の (K_1,K_2)）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
@@ -3220,15 +3225,23 @@ V_2
     statement: [
       paragraph([
         ref("V_plus_is_positive_definite"),
-        " の表示に対して、次の行列を置く：",
+        " の表示に対して、次の行列を",
       ]),
       displayMath(
-        String.raw`R^{(+)} := (2s_2)^{-M_{\mathrm{col}}/2}\,
+        String.raw`R^{(+)} := \bigl((2s_2)^{-M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)\exp(-S_2)
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)
-\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}).`,
+\in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
-      paragraph(["このとき左右の積はそれぞれ"]),
+      paragraph([
+        "と置く（",
+        math(String.raw`(2s_2)^{-M_{\mathrm{col}}/2} \in \mathbb{R}`),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。このとき左右の積はそれぞれ",
+      ]),
       displayMath(
         String.raw`V^{(+)}R^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})},
 \qquad
@@ -3237,7 +3250,7 @@ R^{(+)}V^{(+)}=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`,
       paragraph(["である。したがって ", math(String.raw`V^{(+)}`), " は可逆であり、"]),
       displayMath(
         String.raw`\left(V^{(+)}\right)^{-1}=R^{(+)}
-=(2s_2)^{-M_{\mathrm{col}}/2}\,
+=\bigl((2s_2)^{-M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}\,
 \exp\!\left(-\tfrac12 S_1^{(+)}\right)\exp(-S_2)
 \exp\!\left(-\tfrac12 S_1^{(+)}\right).`,
       ),
@@ -3292,36 +3305,62 @@ A_-A_+
       ),
       paragraph([
         "Step 2（右側の候補を掛ける）。",
-        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2}`),
+        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}`),
         " と置く。",
-        math(String.raw`s_2>0`),
-        " なので ",
-        math(String.raw`a>0`),
+        math(String.raw`s_2 \in \mathbb{R}_{>0}`),
+        "（",
+        ref("V_plus_is_positive_definite"),
+        "）なので ",
+        math(String.raw`a \in \mathbb{R}_{>0}`),
         " であり、正の実数の冪の指数法則から ",
-        math(String.raw`a^{-1}=(2s_2)^{-M_{\mathrm{col}}/2}`),
+        math(String.raw`a^{-1}=(2s_2)^{-M_{\mathrm{col}}/2} \in \mathbb{R}`),
         " である。",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍は係数を ",
+        math(String.raw`\mathbb{C}`),
+        " に取るので、実数 ",
+        math(String.raw`a`),
+        "・",
+        math(String.raw`a^{-1}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`a_{\mathbb{C}}`),
+        "・",
+        math(String.raw`(a^{-1})_{\mathbb{C}}`),
+        " として掛ける（",
+        ref("V_plus_is_positive_definite"),
+        " の表示の係数 ",
+        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " である）。",
         math(String.raw`V^{(+)}`),
         " と ",
         math(String.raw`R^{(+)}`),
         " の 3 つの因子の積は、左の 2 つを先に掛けたもの ",
-        math(String.raw`V^{(+)}=a\bigl((E_+A_+)E_+\bigr)`),
+        math(String.raw`V^{(+)}=a_{\mathbb{C}}\bigl((E_+A_+)E_+\bigr)`),
         "、",
-        math(String.raw`R^{(+)}=a^{-1}\bigl((E_-A_-)E_-\bigr)`),
+        math(String.raw`R^{(+)}=(a^{-1})_{\mathbb{C}}\bigl((E_-A_-)E_-\bigr)`),
         " と読む。Step 1 を使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}R^{(+)}
-&=(a((E_+A_+)E_+))(a^{-1}((E_-A_-)E_-))
+&=(a_{\mathbb{C}}((E_+A_+)E_+))((a^{-1})_{\mathbb{C}}((E_-A_-)E_-))
 &&(\because\ V^{(+)}\text{ と }R^{(+)}\text{ の表示})\\
-&=a\bigl(((E_+A_+)E_+)(a^{-1}((E_-A_-)E_-))\bigr)
+&=a_{\mathbb{C}}\bigl(((E_+A_+)E_+)((a^{-1})_{\mathbb{C}}((E_-A_-)E_-))\bigr)
 &&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right)\\
-&=a\bigl(a^{-1}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)\bigr)
+&=a_{\mathbb{C}}\bigl((a^{-1})_{\mathbb{C}}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)\bigr)
 &&\left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right)\\
-&=(aa^{-1})\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
+&=\bigl(a_{\mathbb{C}}(a^{-1})_{\mathbb{C}}\bigr)\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
 &&\left(\because\ \blkref{scalar_multiple_is_associative}\right)\\
+&=(aa^{-1})_{\mathbb{C}}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
+&&\left(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to a^{-1})\right)\\
+&=(1)_{\mathbb{C}}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ aa^{-1}=1)\\
 &=1_{\mathbb{C}}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
-&&(\because\ aa^{-1}=1_{\mathbb{C}})\\
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\right)\\
 &=((E_+A_+)E_+)((E_-A_-)E_-)
 &&\left(\because\ \blkref{scalar_multiple_by_one}\right)\\
 &=\bigl(((E_+A_+)E_+)(E_-A_-)\bigr)E_-
@@ -3348,16 +3387,20 @@ V^{(+)}R^{(+)}
       displayMath(
         String.raw`\begin{aligned}
 R^{(+)}V^{(+)}
-&=(a^{-1}((E_-A_-)E_-))(a((E_+A_+)E_+))
+&=((a^{-1})_{\mathbb{C}}((E_-A_-)E_-))(a_{\mathbb{C}}((E_+A_+)E_+))
 &&(\because\ R^{(+)}\text{ と }V^{(+)}\text{ の表示})\\
-&=a^{-1}\bigl(((E_-A_-)E_-)(a((E_+A_+)E_+))\bigr)
+&=(a^{-1})_{\mathbb{C}}\bigl(((E_-A_-)E_-)(a_{\mathbb{C}}((E_+A_+)E_+))\bigr)
 &&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right)\\
-&=a^{-1}\bigl(a\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)\bigr)
+&=(a^{-1})_{\mathbb{C}}\bigl(a_{\mathbb{C}}\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)\bigr)
 &&\left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right)\\
-&=(a^{-1}a)\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
+&=\bigl((a^{-1})_{\mathbb{C}}a_{\mathbb{C}}\bigr)\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
 &&\left(\because\ \blkref{scalar_multiple_is_associative}\right)\\
+&=(a^{-1}a)_{\mathbb{C}}\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
+&&\left(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a^{-1},\ b \to a)\right)\\
+&=(1)_{\mathbb{C}}\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ a^{-1}a=1)\\
 &=1_{\mathbb{C}}\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
-&&(\because\ a^{-1}a=1_{\mathbb{C}})\\
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\right)\\
 &=((E_-A_-)E_-)((E_+A_+)E_+)
 &&\left(\because\ \blkref{scalar_multiple_by_one}\right)\\
 &=\bigl(((E_-A_-)E_-)(E_+A_+)\bigr)E_+
@@ -3391,6 +3434,7 @@ R^{(+)}V^{(+)}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 2 の a を実数として置き、スカラー倍の係数を包含 a_C・(a^{-1})_C で書いた。Step 2・Step 3 の aa^{-1} = 1_C の行を real_inclusion_preserves_product、ℝ の aa^{-1} = 1、略記 1_C = (1)_C の 3 行に分けた（主張の R^{(+)} の係数も ((2s_2)^{-M_col/2})_C と書いた。主張は不変）。数値検証: check_27_V_plus_inverse_real_inclusion_chains.sage。",
         "2026-11-02: Step 2・Step 3 の鎖の積に括弧を全て書き、スカラー倍・結合律・単位行列の段をそれぞれ 1 行 1 主張のラベル参照にした。Lean の Ising2D.VPlus_mul_VPlusInv・Ising2D.VPlusInv_mul_VPlus は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_10_V_plus_inverse_chains.sage（QQ の厳密計算）。",
         "旧 V_plus_is_positive_definite の Step 4 前半を、左右の積をそれぞれ省略せず計算する独立した主張へ分けた。Lean の対応定理は Ising2D.VPlus_mul_VPlusInv と Ising2D.VPlusInv_mul_VPlus。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_07_V_plus_mul_inverse.sage と check_08_inverse_mul_V_plus.sage。候補逆行列を因子の逆順積から構成し、左右の積を別ファイルで I と比較する。",
