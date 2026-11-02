@@ -2144,7 +2144,11 @@ X\,\check{n}_\nu
 \ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
-        "と定める（因子は ",
+        "と定める（有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_\mu \to \epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)`),
+        "）による。因子は ",
         ref("check_number_operators_commute"),
         " により互いに可換なので、積の順序は問わない）。このとき、",
       ]),
@@ -2354,7 +2358,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
   \quad (\because \epsilon_\nu\neq\epsilon'_\nu\text{ と Step 0 の異なる上付き添字の積}) \\
 &= 0
-  \quad (\because \text{零行列は行列積の零元})
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2388,7 +2392,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} I
    \quad (\because \text{Step 0 の和が単位行列であることを各因子へ同時に適用}) \\
 &= I
-   \quad (\because \text{単位行列の有限積は単位行列})
+   \quad \left(\because\ \blkref{finite_product_of_identity_matrices}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}})\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2634,6 +2638,7 @@ y_{\epsilon'}
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_*_factor・identity_matrix_is_*_unit_of_mat_mult・negation_factors_out_of_*_factor の 1 行 1 主張の鎖にした。R_μ^{(0)}R_μ^{(0)} は行列の加法の結合則を本文に持たないので、R_μ^{(1)}R_μ^{(0)} = 0 を先に示し、それと matrix_minus_zero_matrix を引く鎖にした（Step 0 の中で異なる上付き添字の積を冪等性より前に置いた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24。",
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「行列の加法逆元」3 か所（ň − ň = 0）を matrix_difference_zero_iff_equal の ⟸ に、Step 0 の和の「行列の加法（加法逆元と単位元）」を新しい主張 matrix_plus_difference_cancels（A + (B − A) = B）に、冪等性の行 5 か所を、Step 0 の冒頭に置いた ň_μň_μ = ň_μ（check_number_operator_idempotent (3) の ň_μ^2 = ň_μ を def_exp (1) の冪から積へ運ぶ 5 行）の参照にした。本証明の 0 が零行列 O であることを冒頭に書いた（R_μ^{(0)}R_μ^{(0)} の鎖の行内の断り書きを移した）。主張は変えていない。Lean は冒頭の 5 行の calc Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq、nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self の段の付け替え、和の 2 行の calc nOp_add_one_sub_nOp。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_30。",
         "2026-11-02: Step 3 の名前だけの根拠「ε_ν=1 と単位元の積」を scalar_multiple_by_one を右辺から左辺へ引く行と場合の仮定の行に、「ε_ν=0 と零元の積」を zero_scalar_multiple_is_zero_matrix を右辺から左辺へ引く行と場合の仮定の行に、「Q̌_ε の定義とスカラーの分配」を Step 3 の最初の鎖・直前の二つの場合・scalar_multiple_factors_out_of_right_factor・異なる添字の因子の可換性・Q̌_ε の定義の 5 行に割った。主張の中身は変えていない。",
+        "2026-11-02: Q̌_ε の有限積を def_finite_product_of_matrices の参照にし、Step 1 の最後の行「零行列は行列積の零元」を zero_matrix_is_right_zero_of_mat_mult に、Step 2 の最後の行「単位行列の有限積は単位行列」を finite_product_of_identity_matrices に替えた（どちらも新しく足した主張）。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_32。",
       ],
     },
   },

@@ -2059,6 +2059,144 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_claim_zero_matrix_is_right_zero_of_mat_mult",
+    kind: "claim",
+    title: { text: "零行列を右から掛けると零行列" },
+    labels: ["zero_matrix_is_right_zero_of_mat_mult"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。",
+        math(String.raw`O_{n,p} \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        "、",
+        math(String.raw`O_{m,p} \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A\,O_{n,p} = O_{m,p}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A\,O_{n,p}\bigr)_{ik}
+&= \sum_{j=1}^{n} A_{ij}\,\bigl(O_{n,p}\bigr)_{jk}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\ \text{を各項へ}\bigr)\\
+&= \sum_{j=1}^{n} 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to A_{ij})\ \text{を各項へ}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{finite_sum_of_complex_zeros}\ (m \to n)\bigr)\\
+&= \bigl(O_{m,p}\bigr)_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 1 の最後の行が「零行列は行列積の零元」を名前だけで根拠にしていたので足した。Lean は具体版 Ising2D.matrix_mul_zero_matrix（ClaimZeroMatrixIsRightZeroOfMatMult.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_definition_finite_product_of_matrices",
+    kind: "definition",
+    title: { text: "行列の有限積" },
+    labels: ["def_finite_product_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A_1,\dots,A_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）について、有限積 ",
+        math(String.raw`\prod_{j=1}^{r} A_j \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を ",
+        math(String.raw`r`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{1} A_j := A_1,
+\qquad
+\prod_{j=1}^{r+1} A_j := \Bigl(\prod_{j=1}^{r} A_j\Bigr)\, A_{r+1}`),
+      paragraph([
+        "と定める（左から順に掛ける）。積は ",
+        ref("mat_mult"),
+        "（",
+        math(String.raw`m, n, p \to n`),
+        "）の行列の積である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Q̌_ε をはじめ本文が行列の有限積を使っていたが、定めるブロックが無かった。" +
+          "複素数の有限積（def_finite_product_of_complex_numbers）・行列の有限和（def_finite_sum_of_matrices）と同じ形で定めた。Lean は Ising2D.finiteMatrixProduct（DefinitionFiniteProductOfMatrices.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_product_of_identity_matrices",
+    kind: "claim",
+    title: { text: "単位行列の有限積は単位行列" },
+    labels: ["finite_product_of_identity_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        " について",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{r} I_{\mathrm{Mat}(n,\mathbb{C})} = I_{\mathrm{Mat}(n,\mathbb{C})}`),
+      paragraph([
+        "が成り立つ。有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "（",
+        math(String.raw`A_1 = \dots = A_r = I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "）、単位行列は ",
+        ref("def_identity_matrix"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} I_{\mathrm{Mat}(n,\mathbb{C})}
+&= I_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because\ \blkref{def_finite_product_of_matrices})
+\end{aligned}`),
+      paragraph([math(String.raw`r`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{r+1} I_{\mathrm{Mat}(n,\mathbb{C})}
+&= \Bigl(\prod_{j=1}^{r} I_{\mathrm{Mat}(n,\mathbb{C})}\Bigr)\, I_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= I_{\mathrm{Mat}(n,\mathbb{C})}\, I_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because\ \text{帰納法の仮定})\\
+&= I_{\mathrm{Mat}(n,\mathbb{C})}
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to n,\ A \to I_{\mathrm{Mat}(n,\mathbb{C})})\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 2 の最後の行が「単位行列の有限積は単位行列」を名前だけで根拠にしていたので足した。Lean は具体版 Ising2D.finite_product_of_identity_matrices（DefinitionFiniteProductOfMatrices.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_matrix_sum_with_itself_zero_implies_zero",
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },

@@ -1169,6 +1169,15 @@ targets=(
   Ising2D.zero_matrix_mul_tensorPow
   Ising2D.eq_zero_of_add_self_eq_zero_tensorPow
   Ising2D.eq_sub_of_add_eq_tensorPow
+  "Ising2D.NecSuf.mul_zero_matrix'"
+  Ising2D.matrix_mul_zero_matrix
+  Ising2D.matrix_mul_zero_matrix_of_necSuf
+  Ising2D.matrix_mul_zero_matrix_tensorPow
+  "Ising2D.NecSuf.finProdLeft_const_one'"
+  Ising2D.finite_product_of_identity_matrices
+  Ising2D.finiteMatrixProduct_eq_finProdLeft
+  Ising2D.finite_product_of_identity_matrices_of_necSuf
+  Ising2D.finite_product_of_identity_matrices_tensorPow
   "Ising2D.NecSuf.sub_neg_eq_zero_of_add_eq_zero_matrix'"
   "Ising2D.NecSuf.eq_neg_of_add_eq_zero_matrix'"
   Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero

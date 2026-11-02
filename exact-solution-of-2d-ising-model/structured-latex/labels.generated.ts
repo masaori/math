@@ -163,6 +163,7 @@ export const ALL_LABELS = [
   "def_even_eigenvectors_of_epsilon",
   "def_exp",
   "def_finite_product_of_complex_numbers",
+  "def_finite_product_of_matrices",
   "def_finite_sum_of_complex_numbers",
   "def_finite_sum_of_matrices",
   "def_first_dual_coupling_constant",
@@ -274,6 +275,7 @@ export const ALL_LABELS = [
   "extract_taylor_coefficient_of_check_Z_Y",
   "factorization_of_A_theta_general",
   "finite_product_of_complex_ones",
+  "finite_product_of_identity_matrices",
   "finite_product_with_zero_factor_is_zero",
   "finite_sum_of_complex_sums",
   "finite_sum_of_complex_zeros",
@@ -478,6 +480,7 @@ export const ALL_LABELS = [
   "trace_power_upper_bound",
   "two_by_two_transfer_identity",
   "zero_matrix_is_left_zero_of_mat_mult",
+  "zero_matrix_is_right_zero_of_mat_mult",
   "zero_matrix_plus_matrix",
   "zero_scalar_multiple_is_zero_matrix",
 ] as const

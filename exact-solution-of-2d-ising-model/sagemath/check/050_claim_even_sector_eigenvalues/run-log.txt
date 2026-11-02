@@ -142,3 +142,7 @@ PASS check_joint_eigenspace_decomposition Step 0 の冒頭の積の形・差が�
 
 # 実行コマンド: sage check_31_joint_eigenspace_step3_scalar_chains.sage
 PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾と最後の鎖: 568 段、否定コントロール 2 行
+
+# 実行コマンド: sage check_32_joint_eigenspace_step1_step2_zero_and_identity_products.sage
+PASS check_joint_eigenspace_decomposition Step 1 の ε ≠ ε' の鎖と Step 2 の鎖: 933 段、否定コントロール 2 行
+RESULT: PASS
