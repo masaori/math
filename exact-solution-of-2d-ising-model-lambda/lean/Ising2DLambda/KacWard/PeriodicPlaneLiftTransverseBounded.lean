@@ -7,6 +7,7 @@
 周期並進の二つの交差項を整数の分配法則で打ち消す。住処は ℤ だけであり、ℝ / ℂ は現れない。
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftDistinct
+import Ising2DLambda.KacWard.DirectedWindingNumbers
 import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftTransverseBounded
 import Mathlib.Tactic
 
@@ -22,6 +23,18 @@ def windingTransverseCoordinate (wh wv : ℤ) : (ℤ × ℤ) →+ ℤ where
     intro p p'
     dsimp
     ring
+
+/-- `def_winding_transverse_coordinate` を実際の閉じた辺列の巻き付き数に適用する。 -/
+def windingTransverseCoordinateFromWalk {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) : (ℤ × ℤ) →+ ℤ :=
+  windingTransverseCoordinate
+    (horizontalDirectedWindingNumber γ) (verticalDirectedWindingNumber γ)
+
+theorem windingTransverseCoordinateFromWalk_apply {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (p : ℤ × ℤ) :
+    windingTransverseCoordinateFromWalk γ p =
+      horizontalDirectedWindingNumber γ * p.1 -
+        verticalDirectedWindingNumber γ * p.2 := rfl
 
 /-- 巻き付きに直交する座標は、一周期の平面並進ベクトルを零へ送る。 -/
 lemma windingTransverseCoordinate_windingShift

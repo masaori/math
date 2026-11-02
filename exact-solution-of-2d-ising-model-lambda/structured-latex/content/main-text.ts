@@ -62610,7 +62610,12 @@ P_m(\gamma)_{\mathrm{col}}
 &&\bigl(\because\ \blkref{claim_closed_walk_plane_displacement}\bigr)
 \end{aligned}`),
                       paragraph([
-                        "二つの成分の等式から、整数の組の等式が従う。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
+                        "二つの成分の等式から、整数の組として",
+                      ]),
+                      displayMath(String.raw`P_m(\gamma)=P_0(\gamma)+\bigl(Lw_{\mathrm v}(\gamma),Lw_{\mathrm h}(\gamma)\bigr)
+\qquad\bigl(\because\ \mathbb Z\times\mathbb Z\text{ の成分ごとの加法と直前の二成分の等式}\bigr)`),
+                      paragraph([
+                        "を得る。全過程は整数の有限和だけで閉じ、実数体も複素数体も現れない。",
                         "後続の離散 Whitney の議論では、この等式と一周期の持ち上げ点の相異なりを使い、零巻き付きの場合の平面閉路と、零でない原始的巻き付きの場合の周期 ",
                         math(String.raw`(L\,w_{\mathrm v}(\gamma),\,L\,w_{\mathrm h}(\gamma))`),
                         " を持つ平面路を分けて扱う。",
@@ -64519,6 +64524,11 @@ s(i_r)-s(i_{r'})
                       title: { text: "巻き付きベクトルに直交する整数横断座標" },
                       labels: ["def_winding_transverse_coordinate"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.windingTransverseCoordinate",
+                        "Ising2DLambda.KacWard.windingTransverseCoordinateFromWalk",
+                        "Ising2DLambda.KacWard.windingTransverseCoordinateFromWalk_apply",
+                      ],
                       statement: [
                         paragraph([
                           "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
