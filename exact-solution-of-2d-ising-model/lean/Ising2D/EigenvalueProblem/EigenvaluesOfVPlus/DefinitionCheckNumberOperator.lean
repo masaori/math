@@ -51,6 +51,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquationsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionMatrixAnticommutator
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixEqualsNegationIfSumIsZeroFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 
 namespace Ising2D
 
@@ -352,21 +354,81 @@ theorem mul_nOp_of_anticommute (X : TensorPow M) (j : CheckIdx M)
                                                         -- `mat_mult_associative` を右辺から左辺へ
     _ = F.nOp j * X := rfl                              -- `ň_ν` の定義
 
+/-- **原文 `check_number_operators_commute` Step 1** の第 1 式: `[ψ̌_μ^†, ψ̌_ν^†]_+ = O`。 -/
+theorem anticomm_cre_cre_eq_zero (i j : CheckIdx M) : matAnticomm (F.cre i) (F.cre j) = 0 :=
+  F.acomm_cre_cre i j                                   -- `anticommutator_of_check_psi` の第 1 式
+
+/-- `CheckFermiSetup` が反交換関係の右辺 `δ I` を受け取る形 `if c then I else O` を、人手の `δ I`（係数 `δ ∈ ℂ` のスカラー倍）へ読み替える。
+人手の式には現れない、場の形と人手の記法をつなぐ段である。 -/
+theorem ite_one_zero_eq_delta_smul (c : Prop) [Decidable c] :
+    (if c then (1 : TensorPow M) else 0) = (if c then (1 : ℂ) else 0) • (1 : TensorPow M) := by
+  by_cases hc : c
+  · rw [if_pos hc, if_pos hc, one_smul]       -- `scalar_multiple_by_one`（`TensorPow M` の系が無いので mathlib の `one_smul`）
+  · rw [if_neg hc, if_neg hc, zero_smul_tensorPow]
+                                              -- `zero_scalar_multiple_is_zero_matrix`
+
+/-- **原文 `check_number_operators_commute` Step 1** の第 2 式（`μ ≠ ν`）: `[ψ̌_μ^†, ψ̌_{M+1-ν}]_+ = δ I = 0_ℂ I = O`。
+`CheckFermiSetup` は右辺の `δ_{M+1-ν, M+1-μ}` を付け替え後の `δ_{μ,ν}`（`if μ = ν`）で受け取る（`acomm_cre_ann`）。
+付け替え `δ_{M+1-ν, M+1-μ} = δ_{μ,ν}` は人手の直前の `δ` の計算の 1 行目で、`acomm_cre_ann` の中で済んでいる。 -/
+theorem anticomm_cre_ann_eq_zero {i j : CheckIdx M} (hij : i ≠ j) :
+    matAnticomm (F.cre i) (F.ann j) = 0 :=
+  calc matAnticomm (F.cre i) (F.ann j)
+      = (if i = j then (1 : ℂ) else 0) • (1 : TensorPow M) := by
+          rw [← ite_one_zero_eq_delta_smul]; exact F.acomm_cre_ann i j
+                                                        -- `anticommutator_of_check_psi` の第 2 式（`ν → M+1-ν`）
+    _ = (0 : ℂ) • (1 : TensorPow M) := by rw [if_neg hij]
+                                                        -- 直前の `δ` の計算（`μ ≠ ν`）
+    _ = 0 := zero_smul_tensorPow _                      -- `zero_scalar_multiple_is_zero_matrix`（`A → I`）
+
+/-- **原文 `check_number_operators_commute` Step 1** の第 3 式（`μ ≠ ν`）: 人手の 7 行の鎖
+`[ψ̌_{M+1-μ}, ψ̌_ν^†]_+ = ψ̌_{M+1-μ}ψ̌_ν^† + ψ̌_ν^†ψ̌_{M+1-μ} = ψ̌_ν^†ψ̌_{M+1-μ} + ψ̌_{M+1-μ}ψ̌_ν^† = [ψ̌_ν^†, ψ̌_{M+1-μ}]_+
+= δ_{M+1-μ, M+1-ν} I = δ_{M+1-ν, M+1-μ} I = 0_ℂ I = O`。`δ` は付け替え後の `δ_{ν,μ}`・`δ_{μ,ν}`（`if j = i`・`if i = j`）で持つ。 -/
+theorem anticomm_ann_cre_eq_zero {i j : CheckIdx M} (hij : i ≠ j) :
+    matAnticomm (F.ann i) (F.cre j) = 0 :=
+  calc matAnticomm (F.ann i) (F.cre j)
+      = F.ann i * F.cre j + F.cre j * F.ann i := rfl    -- `def_matrix_anticommutator`
+    _ = F.cre j * F.ann i + F.ann i * F.cre j := add_comm_tensorPow _ _
+                                                        -- `matrix_sum_is_commutative`
+    _ = matAnticomm (F.cre j) (F.ann i) := rfl          -- `def_matrix_anticommutator` を右辺から左辺へ
+    _ = (if j = i then (1 : ℂ) else 0) • (1 : TensorPow M) := by
+          rw [← ite_one_zero_eq_delta_smul]; exact F.acomm_cre_ann j i
+                                                        -- `anticommutator_of_check_psi` の第 2 式（`μ → ν`, `ν → M+1-μ`）
+    _ = (if i = j then (1 : ℂ) else 0) • (1 : TensorPow M) := by
+          simp only [eq_comm]
+                                                        -- `def_kronecker_delta`（`i = j` と `j = i` は同値）
+    _ = (0 : ℂ) • (1 : TensorPow M) := by rw [if_neg hij]
+                                                        -- 直前の `δ` の計算（`μ ≠ ν`）
+    _ = 0 := zero_smul_tensorPow _                      -- `zero_scalar_multiple_is_zero_matrix`（`A → I`）
+
+/-- **原文 `check_number_operators_commute` Step 1** の第 4 式: `[ψ̌_{M+1-μ}, ψ̌_{M+1-ν}]_+ = O`。 -/
+theorem anticomm_ann_ann_eq_zero (i j : CheckIdx M) : matAnticomm (F.ann i) (F.ann j) = 0 :=
+  F.acomm_ann_ann i j                                   -- `anticommutator_of_check_psi` の第 3 式
+
+/-- **原文 `check_number_operators_commute` Step 1** の結論: `[X, W]_+ = O` なら `XW = -(WX)`。
+人手の 2 行の鎖 `XW + WX = [X, W]_+ = O` と、`matrix_equals_negation_if_sum_is_zero`（`X → XW`, `Y → WX`）。 -/
+theorem mul_eq_neg_of_anticomm_eq_zero (X W : TensorPow M) (h : matAnticomm X W = 0) :
+    X * W = -(W * X) :=
+  eq_neg_of_add_eq_zero_tensorPow (X * W) (W * X)
+    (calc X * W + W * X
+        = matAnticomm X W := rfl                        -- `def_matrix_anticommutator` を右辺から左辺へ
+      _ = 0 := h)                                       -- 上の 4 式のうち `[X, W]_+` を左辺に持つ式
+                                                        -- 外側: `matrix_equals_negation_if_sum_is_zero`
+
 /-- **原文 `check_number_operators_commute` (1)** 前半: `X = ψ̌_μ^†` で Step 2 の鎖を使う。
-Step 1 の「`XW = -(WX)`」は反交換子が `0` であることから `eq_neg_of_add_eq_zero_left` で出す（人手でも「すなわち」の名前だけの根拠）。 -/
+Step 1 の `Xψ̌_ν^† = -(ψ̌_ν^†X)`・`Xψ̌_{M+1-ν} = -(ψ̌_{M+1-ν}X)` は `mul_eq_neg_of_anticomm_eq_zero` に第 1 式・第 2 式を渡す。 -/
 theorem commute_cre_nOp {i j : CheckIdx M} (hij : i ≠ j) :
     F.cre i * F.nOp j = F.nOp j * F.cre i :=
   F.mul_nOp_of_anticommute (F.cre i) j
-    (eq_neg_of_add_eq_zero_left (F.acomm_cre_cre i j))
-    (eq_neg_of_add_eq_zero_left (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this))
+    (mul_eq_neg_of_anticomm_eq_zero _ _ (F.anticomm_cre_cre_eq_zero i j))
+    (mul_eq_neg_of_anticomm_eq_zero _ _ (F.anticomm_cre_ann_eq_zero hij))
 
-/-- **原文 `check_number_operators_commute` (1)** 後半: `X = ψ̌_{M+1-μ}` で Step 2 の鎖を使う。 -/
+/-- **原文 `check_number_operators_commute` (1)** 後半: `X = ψ̌_{M+1-μ}` で Step 2 の鎖を使う。
+Step 1 の 2 式は `mul_eq_neg_of_anticomm_eq_zero` に第 3 式・第 4 式を渡す。 -/
 theorem commute_ann_nOp {i j : CheckIdx M} (hij : i ≠ j) :
     F.ann i * F.nOp j = F.nOp j * F.ann i :=
   F.mul_nOp_of_anticommute (F.ann i) j
-    (eq_neg_of_add_eq_zero_right
-      (by have := F.acomm_cre_ann j i; rwa [if_neg (Ne.symm hij)] at this))
-    (eq_neg_of_add_eq_zero_left (F.acomm_ann_ann i j))
+    (mul_eq_neg_of_anticomm_eq_zero _ _ (F.anticomm_ann_cre_eq_zero hij))
+    (mul_eq_neg_of_anticomm_eq_zero _ _ (F.anticomm_ann_ann_eq_zero i j))
 
 /-- **原文 `check_number_operators_commute` (2)** の Step 3 の鎖（`μ ≠ ν`）。人手の 7 行と 1 対 1。 -/
 theorem nOp_mul_nOp_of_ne {i j : CheckIdx M} (hij : i ≠ j) :

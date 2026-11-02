@@ -568,6 +568,106 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_zero_scalar_multiple_is_zero_matrix",
+    kind: "claim",
+    title: { text: "行列の 0 倍は零行列" },
+    labels: ["zero_scalar_multiple_is_zero_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`0_{\mathbb{C}}\,A = O`),
+      paragraph([
+        "が成り立つ。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(0_{\mathbb{C}}\,A)_{ik}
+&= 0_{\mathbb{C}}\,A_{ik}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to A_{ik})\bigr)\\
+&= O_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`0_{\mathbb{C}}\,A = O`),
+        " である（行列の等号は成分ごと）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operators_commute の Step 1 の δ_{M+1-ν, M+1-μ} I = O が「δ = 0 を代入する」と「0_ℂ I = O」の 2 段を 1 行で済ませていたので、後者を引けるよう足した。scalar_multiple_of_zero_matrix（aO = O）とは向きが逆である。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_sum_is_commutative",
+    kind: "claim",
+    title: { text: "行列の和の可換則" },
+    labels: ["matrix_sum_is_commutative"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`A + B = B + A`),
+      paragraph([
+        "が成り立つ。和は ",
+        ref("def_matrix_sum"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A + B)_{ik}
+&= A_{ik} + B_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= B_{ik} + A_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (B + A)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`A + B = B + A`),
+        " である（行列の等号は成分ごと）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operators_commute の Step 1 の第 3 式が、反交換子が引数の順序に依らないことを行列の和の交換で示す段を、主張を置かずに使っていたので足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

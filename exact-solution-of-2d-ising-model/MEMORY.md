@@ -2,6 +2,8 @@
 
 2026-11-02: 全証明の SageMath 検算として、`T_V_plus_is_conjugation`（三つの共役の合成は V^{(+)} による共役に等しい）に検算 `sagemath/check/T_V_plus_is_conjugation/` を付けた（未検算 73 件）。因子と逆元を数体で厳密に作り、不定元の X で全行を確かめた。人手証明は、合成則が `mat_conj` の共役についての主張であることを `T'_g` で区別して準備に置き、散文を値の 8 行の鎖にした。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`nesting_of_commutator_of_H_and_check_Z`）。
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十八個目として、`check_number_operators_commute` Step 1 の「すなわち `XW = -(WX)`」を、`XW + WX = [X, W]_+ = O` の鎖と `matrix_equals_negation_if_sum_is_zero` の参照にした。4 式の右辺を零行列 `O` と書き、第 2 式・第 3 式の `δI = O` を新しい主張 `zero_scalar_multiple_is_zero_matrix`（`0_ℂA = O`）の行に、第 3 式の引数の入れ替えを新しい主張 `matrix_sum_is_commutative` の行を含む 7 行に開いた（主張の中身は不変）。Lean は `matrix_equals_negation_if_sum_is_zero` と新しい 2 主張の具体版・必要十分版・`TensorPow M` の系と、Step 1 の人手と 1 対 1 の calc（`anticomm_*_eq_zero`・`mul_eq_neg_of_anticomm_eq_zero`）。SageMath は新しい 2 ディレクトリと `050` の `check_29`。次は `check_joint_eigenspace_decomposition` の残りの名前だけの根拠。
+
 2026-11-02: 全証明の SageMath 検算として、`V1_plus_half_invertible`・`V2_invertible`・`V_plus_factors_invertible`（(V_1^{(+)})^{1/2}・V_2・V^{(+)} の可逆性）に検算を付けた（未検算 74 件）。K_1 = 2 log y・K_2 = log x と選んで exp を固有値の射影の和で厳密に作り、全行を確かめた。人手証明は、逆元から始めて可逆性を前提にしていた鎖を h を両側から掛けて I に着く鎖に、スカラー倍を単位行列との積に読み替えていた行を係数を出す鎖にし、K・a を包含の像で書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`T_V_plus_is_conjugation`）。
 
 2026-11-02: 全証明の SageMath 検算として、`half_integer_phase_antiperiodicity`・`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` に検算を付けた。係数の一致を新しい主張 `half_integer_phase_periodicity` に、負角の Euler 表示を新しい主張 `exp_of_negative_i_real_as_cos_minus_i_sin` に切り出し、5 個に同名の検算を付けた（未検算 77 件）。人手証明は一行一操作の鎖と像の記号に直し、全実数上の cos・sin（未整備）に依ることを主張に書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」。

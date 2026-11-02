@@ -8,7 +8,7 @@
 - 併せて検証（この章の全ブロック）:
   - `def_check_number_operator`（数演算子 `ň_μ := ψ̌_μ^† ψ̌_{1−μ}`）
   - `check_number_operator_idempotent`（`ň_μ² = ň_μ`。(1)(2) の反交換子の鎖は check_28、(3) の鎖は check_23）
-  - `check_number_operators_commute`（`ň_μ ň_ν = ň_ν ň_μ`。Step 2・Step 3 の鎖は check_23）
+  - `check_number_operators_commute`（`ň_μ ň_ν = ň_ν ň_μ`。Step 1 の反交換子の鎖は check_29、Step 2・Step 3 の鎖は check_23）
   - `trace_of_check_number_operator_product`（`tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M−k}`）
   - `check_joint_eigenspace_decomposition`（`Q̌_ε`、**各同時固有空間は 1 次元**、`2^M` 個。Step 0・Step 3 の分配と単位行列の鎖は check_24）
   - `eigenvalues_of_check_Vprime`（`V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`。Step 2・Step 3' の帰納法と Step 4 の鎖は check_25）
@@ -118,6 +118,7 @@ U        := E F,  E = E_1⊠…⊠E_M（E_m = σ^x（m 奇数）, I（m 偶数�
 | 26 | check_26_max_eigenvalue_simple_left_projection_chain.sage | `max_eigenvalue_of_V_plus_simple` (3) の、固有方程式 `V^{(+)}x = Λ̌_max x` に左から `Q̌_{ε'}` を掛ける鎖（5 行: 左の因子のスカラー倍の外出し、`eigenvalues_of_V_plus` (1)、`mat_mult_associative`（`q → 1`）、固有方程式、右の因子のスカラー倍の外出し）を、括弧どおりに一行ずつ `QQ` で厳密に。仮定（(1) の `Q̌_εV^{(+)} = Λ̌_εQ̌_ε` と固有方程式）を満たす模型として Jordan–Wigner のフェルミ演算子から `Q̌_ε` を作り、有理数 `Λ_ε` で `V := Σ_εΛ_εQ̌_ε`、`x := Q̌_{(1,…,1)}y` を取る（`M = 2, 3, 4`、`ε'` を全列挙）。否定コントロールとして、不定元の行列 `Q, V` と不定元 `λ, λ_max, x` では (1) と固有方程式を使う 2 行だけが外れ、スカラー倍と結合律を引く 3 行は成り立つことを確かめる | **PASS** | 厳密等号 143 段（模型と不定元の行列の合計）、否定コントロール 2 行 |
 | 27 | check_27_V_plus_inverse_real_inclusion_chains.sage | `V_plus_is_invertible` の Step 2 の `a := (2s_2)^{M_col/2} ∈ ℝ_{>0}`・`a^{-1} = (2s_2)^{-M_col/2}`（`a` を `√((2s_2)^M)` と `(√(2s_2))^M` の 2 経路で、`a^{-1}` を `a` を使わず `√((2s_2)^{-M})` で計算して比べる）と、Step 2・Step 3 の鎖のうち係数を包含 `a_ℂ`・`(a^{-1})_ℂ` で扱う 2〜8 行目（左右の因子のスカラー倍の外出し、`scalar_multiple_is_associative`、`real_inclusion_preserves_product`、`ℝ` の `aa^{-1} = 1`、`1_ℂ = (1)_ℂ`、`scalar_multiple_by_one`）を一行ずつ。`ℝ` は `AA`、`ℂ` は `QQbar`、包含は `ι(r) = (r, 0)` を実部・虚部で確かめた `QQbar(r)`。係数の `M` は `2..5`、`s_2 ∈ {1/3, 2, 5/7}`（`M` が奇数なら `a` は無理数）、`X, Y` は虚部を持つ `QQbar` の `2^{min(M,3)}` 次の行列（係数の段は行列の大きさに依らない）。否定コントロールは同じ鎖を係数 `a, a` で回し、`ℝ` の `cd = 1` を引く段だけが外れること | **PASS** | 厳密等号 168 段、否定コントロール 12 行 |
 | 28 | check_28_check_number_operator_idempotent_anticommutator_chains.sage | `check_number_operator_idempotent` (1) の 2 本の鎖（`XX + XX = [X, X]_+ = O`、`X ∈ {ψ̌_μ^†, ψ̌_{M+1-μ}}`）と `XX = O`、(2) の鎖（`DP + PD = [D, P]_+ = δI = 1_ℂI = I`）と `PD = I - DP = I - ň_μ` を、Jordan–Wigner の模型（`M = 2, 3, 4`）で `QQ` の厳密等号で一行ずつ。不定元の行列では反交換関係を使う行だけが外れる（否定コントロール）。反交換子の定義を写した 2 行は構成上かならず一致する | **PASS** | 厳密等号 95 段、否定コントロール 3 行 |
+| 29 | check_29_check_number_operators_commute_step1_anticommutator_chains.sage | `check_number_operators_commute` Step 1 の 4 式の全行（第 1 式・第 4 式 `[X, W]_+ = O`、第 2 式 `[ψ̌_μ^†, ψ̌_{M+1-ν}]_+ = δI = 0_ℂI = O`、第 3 式 `[ψ̌_{M+1-μ}, ψ̌_ν^†]_+` から和の交換・反交換子へ戻す・第 2 式・`δ` の対称性・`0_ℂI = O` の 7 行）、直前の `δ_{M+1-ν, M+1-μ} = δ_{μ,ν} = 0`、続く `XW + WX = [X, W]_+ = O` と `matrix_equals_negation_if_sum_is_zero` による `XW = -(WX)` を、Jordan–Wigner の模型（`M = 2, 3, 4`、`μ ≠ ν` の全 20 組）で `QQ` の厳密等号で一行ずつ。不定元の行列では反交換関係を引く仮定の行 5 行と `XW = -(WX)` の計 6 行だけが外れ、ほかの行は一致する（否定コントロール） | **PASS** | 厳密等号 520 個（1 組 26 個）、否定コントロール 6 行 |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論

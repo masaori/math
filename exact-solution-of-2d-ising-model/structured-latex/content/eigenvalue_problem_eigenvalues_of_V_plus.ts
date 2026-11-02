@@ -1713,7 +1713,7 @@ U S_2 U^{-1}
 &= \delta_{\mu,\,\nu}
    \quad (\because M_{\mathrm{col}}+1-\nu = M_{\mathrm{col}}+1-\mu \iff \mu = \nu) \\
 &= 0
-   \quad (\because \mu \neq \nu)
+   \quad \left(\because\ \blkref{def_kronecker_delta}\ (n \to M_{\mathrm{col}},\ i \to \mu,\ j \to \nu)\ \text{の}\ i \neq j\ \text{の場合。}\mu \neq \nu\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -1725,31 +1725,80 @@ U S_2 U^{-1}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-{\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= 0
+{\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+} &= O
    \quad (\because \text{$\check\psi$ の反交換関係の第 1 式。}\blkref{anticommutator_of_check_psi}), \\
 {\left[\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+}
   &= \delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式。}\blkref{anticommutator_of_check_psi}) \\
-  &= 0
-   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}=0), \\
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式 }(\nu \to M_{\mathrm{col}}+1-\nu)\text{。}\blkref{anticommutator_of_check_psi}) \\
+  &= 0_{\mathbb{C}}\,I
+   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}=0) \\
+  &= O
+   \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I)\right), \\
 {\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_\nu^\dagger\right]_+}
+  &= \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\nu^\dagger + \check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}},\ X \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ W \to \check\psi_\nu^\dagger)\right) \\
+  &= \check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} + \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\nu^\dagger
+   \quad \left(\because\ \blkref{matrix_sum_is_commutative}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\nu^\dagger,\ B \to \check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+  &= \left[\check\psi_\nu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\right]_+
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}},\ X \to \check\psi_\nu^\dagger,\ W \to \check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
   &= \delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}\,I
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を添字 } (\nu, M_{\mathrm{col}}+1-\mu) \text{ へ適用し、}
-     \text{反交換子が引数の順序に依らないこと } [\check\psi_{M_{\mathrm{col}}+1-\mu},\check\psi_\nu^\dagger]_+ = \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\nu^\dagger + \check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} = [\check\psi_\nu^\dagger,\check\psi_{M_{\mathrm{col}}+1-\mu}]_+\text{。}\blkref{anticommutator_of_check_psi}) \\
-  &= 0
-   \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}=\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\text{（対の条件の対称性）}), \\
-{\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+} &= 0
+   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式 }(\mu \to \nu,\ \nu \to M_{\mathrm{col}}+1-\mu)\text{。}\blkref{anticommutator_of_check_psi}) \\
+  &= \delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I
+   \quad \left(\because\ \blkref{def_kronecker_delta}\ (n \to M_{\mathrm{col}},\ i \to M_{\mathrm{col}}+1-\mu,\ j \to M_{\mathrm{col}}+1-\nu)\ \text{（}i = j\text{ と }j = i\text{ は同値なので }\delta_{i,j} = \delta_{j,i}\text{）}\right) \\
+  &= 0_{\mathbb{C}}\,I
+   \quad (\because \text{直前の }\delta\text{ の計算 }\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}=0) \\
+  &= O
+   \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I)\right), \\
+{\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+} &= O
    \quad (\because \text{$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi})
 \end{aligned}`,
       ),
       paragraph([
-        "すなわち、",
+        "（右辺の ",
+        math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列。",
+        ref("anticommutator_of_check_psi"),
+        " の右辺の ",
+        math(String.raw`0`),
+        " である。）",
         math(String.raw`X \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
         " と ",
         math(String.raw`W \in \{\check\psi_\nu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\}`),
+        " を取ると、",
+        math(String.raw`[X, W]_+`),
+        " は上の 4 式の左辺のどれかなので",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+XW + WX
+&= [X, W]_+
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}})\ \text{を右辺から左辺へ}\right) \\
+&= O
+   \quad (\because \text{上の 4 式のうち } [X, W]_+ \text{ を左辺に持つ式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        " を ",
+        math(String.raw`m, p \to 2^{M_{\mathrm{col}}}`),
+        "、主張の ",
+        math(String.raw`X`),
+        " をこの Step の ",
+        math(String.raw`XW`),
+        " に、主張の ",
+        math(String.raw`Y`),
+        " を ",
+        math(String.raw`WX`),
+        " に置き換えて引いて、",
+        math(String.raw`X`),
+        " と ",
+        math(String.raw`W`),
         " のどの組み合わせでも ",
         math(String.raw`XW = -(WX)`),
-        " が成り立つ。",
+        " を得る。",
       ]),
       paragraph([
         "Step 2（(1) の証明）。",
@@ -1824,6 +1873,7 @@ X\,\check{n}_\nu
         "009 章の number_operators_commute の半整数運動量版。反交換子の対は ν = M+1−μ であり、添字を 𝓜̌ = {1,…,M} に絞ったので、消えることを確かめる δ は δ_{M+1−ν, M+1−μ} = δ_{μ,ν} = 0（μ ≠ ν）だけで済む。合同式の書き換えは要らない（def_check_index_set (5)）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（M=2,3,4,5、μ ≠ ν の全組、残差 ≤ 1.3e-15）。",
         "2026-11-02: Step 2・Step 3 の「結合法則」を mat_mult_associative の 1 行 1 回の参照にし、Step 1・Step 2 の行列の変数を A, B から X, W に替え（引く主張の変数 A, B との衝突を避けるため）、Step 2 の符号の外出しを negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_double_negation の行に分けた（「(-1)^2 = 1」の行を置き換えた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.mul_nOp_of_anticommute（Step 2 の 10 行）・nOp_mul_nOp_of_ne（Step 3 の 7 行）は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_23。",
+        "2026-11-02: Step 1 の「すなわち XW = -(WX)」（反交換子が零行列であることから出す段の名前だけの根拠）を、def_matrix_anticommutator を右辺から左辺へ引く行と 4 式を引く行の鎖 XW + WX = [X, W]_+ = O と、matrix_equals_negation_if_sum_is_zero（X → XW, Y → WX）の参照にした。4 式の右辺の 0 を anticommutator_of_check_psi の意味どおり零行列 O と書いた。第 2 式・第 3 式の「δ I = O」を δ の代入と新しい zero_scalar_multiple_is_zero_matrix（0_ℂ A = O）の 2 行に分け、第 3 式の「反交換子が引数の順序に依らない」を def_matrix_anticommutator・新しい matrix_sum_is_commutative・def_matrix_anticommutator を右辺から左辺へ・第 2 式・def_kronecker_delta の対称性の行に開いた。δ_{μ,ν} = 0 の行に def_kronecker_delta の参照を付けた。主張は変えていない。Lean は Ising2D.CheckFermiSetup.anticomm_cre_ann_eq_zero・anticomm_ann_cre_eq_zero が同じ行の calc、mul_eq_neg_of_anticomm_eq_zero が 2 行の calc と eq_neg_of_add_eq_zero_tensorPow。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_29。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },

@@ -344,6 +344,7 @@ export const ALL_LABELS = [
   "matrix_norm_triangle_inequality",
   "matrix_norm_vector_bound",
   "matrix_plus_zero_matrix",
+  "matrix_sum_is_commutative",
   "matrix_sum_with_itself_zero_implies_zero",
   "matrix_summand_from_sum_equation",
   "max_eigenvalue_of_V_plus_simple",
@@ -477,6 +478,7 @@ export const ALL_LABELS = [
   "two_by_two_transfer_identity",
   "zero_matrix_is_left_zero_of_mat_mult",
   "zero_matrix_plus_matrix",
+  "zero_scalar_multiple_is_zero_matrix",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

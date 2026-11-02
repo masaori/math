@@ -81,6 +81,7 @@
 | `CheckFermiSetup.nOp_eq_numPaired` | `ň_μ` が必要十分版 `numPaired` の特殊化であることの確認 | 同上 |
 | `CheckFermiSetup.acomm_cre_ann` | `[ψ̌_μ^†, ψ̌_{M+1-ν}]_+ = δ_{μν} I`（**合同式の書き換え不要**） | `anticommutator_of_check_psi` の制限 |
 | `CheckFermiSetup.cre_add_self_eq_zero` / `cre_sq` / `ann_add_self_eq_zero` / `ann_sq` / `cre_ann_add_ann_cre_eq_one` / `ann_mul_cre` / `nOp_sq` / `nOp_mul_self` | (1)(2)(3)。(1) は反交換子の 2 行の鎖と `matrix_sum_with_itself_zero_implies_zero`、(2) は反交換子の鎖と `matrix_summand_from_sum_equation`、(3) は `nOp_sq`（冪を積へ運ぶ 4 行）と `nOp_mul_self`（続く 19 行）で、人手の鎖と 1 対 1（`*_of_necSuf` は必要十分版の特殊化） | `check_number_operator_idempotent` |
+| `CheckFermiSetup.ite_one_zero_eq_delta_smul` / `anticomm_cre_cre_eq_zero` / `anticomm_cre_ann_eq_zero` / `anticomm_ann_cre_eq_zero` / `anticomm_ann_ann_eq_zero` / `mul_eq_neg_of_anticomm_eq_zero` | 場の `if c then I else O` を人手の `δI` へ読み替える段、Step 1 の 4 式（第 2 式は 3 行、第 3 式は 7 行の鎖と 1 対 1 の calc）と、`XW + WX = [X, W]_+ = O` の 2 行の鎖と `matrix_equals_negation_if_sum_is_zero` による `XW = -(WX)` | `check_number_operators_commute` Step 1 |
 | `CheckFermiSetup.mul_nOp_of_anticommute` / `commute_cre_nOp` / `commute_ann_nOp` / `nOp_mul_nOp_of_ne` / `commute_nOp_nOp` | Step 2 の 10 行の鎖、(1)、Step 3 の 7 行の鎖、(2)（`*_of_necSuf` は必要十分版の特殊化） | `check_number_operators_commute` |
 | `CheckFermiSetup.nOpProd` / `trace_nOpProd`（`ClaimTraceCheckNumberOperatorProduct.lean`） | `tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M-k}` | `trace_of_check_number_operator_product` |
 | `CheckFermiSetup.trace_nOp` / `trace_nOpProd_univ` | `tr(ň_μ) = 2^{M-1}`, `tr(ň_1⋯ň_M) = 1` | 同上「とくに」 |
@@ -141,7 +142,7 @@
 | --- | --- | --- |
 | `def_check_number_operator` | `CheckFermiSetup.nOp` | `NecSuf.numPaired`（= `NecSuf.num` に付け替えを噛ませたもの） |
 | `check_number_operator_idempotent` | `CheckFermiSetup.cre_sq` / `ann_sq` / `ann_mul_cre` / `nOp_sq` / `nOp_mul_self` | `NecSuf.sq_eq_zero_of_acomm_self` / `ann_mul_cre` / `num_mul_num`（**章 009 と同一**） |
-| `check_number_operators_commute` | `CheckFermiSetup.mul_nOp_of_anticommute` / `commute_*` / `nOp_mul_nOp_of_ne` | `NecSuf.commute_mul_of_anticommute` / `NecSuf.commute_cre_num` / `commute_ann_num` / `commute_num_num`（**章 009 と同一**） |
+| `check_number_operators_commute` | `CheckFermiSetup.mul_eq_neg_of_anticomm_eq_zero` / `mul_nOp_of_anticommute` / `commute_*` / `nOp_mul_nOp_of_ne` | `NecSuf.commute_mul_of_anticommute` / `NecSuf.commute_cre_num` / `commute_ann_num` / `commute_num_num`（**章 009 と同一**） |
 | `trace_of_check_number_operator_product` | `CheckFermiSetup.trace_nOpProd` | `NecSuf.two_pow_smul_tau_noncommProd` |
 | `check_joint_eigenspace_decomposition` (1)(2)(3)(4) | `CheckFermiSetup.Qproj_*` / `sum_Qproj` / `nOp_mul_Qproj` / `trace_Qproj` | `NecSuf.projOn_*` / `sum_projOn` / `num_mul_projOn` / `two_pow_smul_tau_projOn`（**章 009 と同一**） |
 | `eigenvalues_of_check_Vprime` | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime` | `NecSuf.exp_mul_eq_of_mul_eq_smul`（章 009 と同一）／その左右反転 `NecSuf.mul_exp_eq_of_mul_eq_smul` |
@@ -151,7 +152,7 @@
 | `check_joint_eigenspace_decomposition` (5) | `CheckFermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | `NecSuf.isInternal_range_proj`（**章 009 と同一**） |
 | `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | `NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（**章 009 と同一**） |
 
-具体版はいずれも**必要十分版を特殊化しても得ている**。ただし `check_number_operator_idempotent` の `cre_sq`・`ann_sq`・`ann_mul_cre`・`nOp_sq`・`nOp_mul_self` と `check_number_operators_commute` の `mul_nOp_of_anticommute`・`commute_cre_nOp`・`commute_ann_nOp`・`nOp_mul_nOp_of_ne` は人手の鎖と 1 対 1 の calc で、特殊化として得たものは `*_of_necSuf` の名前で並べて置く。`check_joint_eigenspace_decomposition` の証明の Step 0 の 3 本の鎖は `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` が人手と 1 対 1 の calc である（(1)〜(4) の主張そのものは必要十分版の特殊化だけで、Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い）。
+具体版はいずれも**必要十分版を特殊化しても得ている**。ただし `check_number_operator_idempotent` の `cre_sq`・`ann_sq`・`ann_mul_cre`・`nOp_sq`・`nOp_mul_self` と `check_number_operators_commute` の `mul_eq_neg_of_anticomm_eq_zero`・`mul_nOp_of_anticommute`・`commute_cre_nOp`・`commute_ann_nOp`・`nOp_mul_nOp_of_ne` は人手の鎖と 1 対 1 の calc で、特殊化として得たものは `*_of_necSuf` の名前で並べて置く。`check_joint_eigenspace_decomposition` の証明の Step 0 の 3 本の鎖は `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` が人手と 1 対 1 の calc である（(1)〜(4) の主張そのものは必要十分版の特殊化だけで、Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い）。
 
 ### 必要十分版で判明した本質
 
