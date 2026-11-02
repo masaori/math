@@ -24,7 +24,7 @@ theorem emptyPfaffianDeterminant
     calc
       Matrix.det A = ∑ σ : Equiv.Perm Empty,
           Polynomial.C ((sign (fun i j : Empty => i < j) σ : ℤ) : Qbar) *
-            ∏ i : Empty, A i (σ i) := qbarPolynomial_det_row_expansion A
+            ∏ i : Empty, A i (σ i) := qbarPolynomial_det_row_expansion_from_necSuf A
       _ = 1 := by simp [sign, inversionCount, orderedPairs]
   refine ⟨hpf, hdet, ?_⟩
   rw [hpf, hdet]
@@ -44,7 +44,7 @@ theorem emptyPfaffianDeterminant_from_necSuf
       calc
         Matrix.det A = ∑ σ : Equiv.Perm Empty,
             Polynomial.C ((sign (fun i j : Empty => i < j) σ : ℤ) : Qbar) *
-              ∏ i : Empty, A i (σ i) := qbarPolynomial_det_row_expansion A
+              ∏ i : Empty, A i (σ i) := qbarPolynomial_det_row_expansion_from_necSuf A
         _ = 1 := by simp [sign, inversionCount, orderedPairs])
 
 end Ising2DLambda.AlgebraicEigenvalue

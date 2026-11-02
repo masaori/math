@@ -23,7 +23,7 @@ theorem qbarPolynomial_det_mul_function_expansion_from_necSuf
     Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
   calc
     Matrix.det (A * B) = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, (A * B) i (σ i) :=
-      qbarPolynomial_det_row_expansion (A * B)
+      qbarPolynomial_det_row_expansion_from_necSuf (A * B)
     _ = ∑ f : J → J, (∏ i : J, A i (f i)) *
         (∑ σ : Equiv.Perm J, c σ * ∏ i : J, B (f i) (σ i)) :=
       NecSuf.AlgebraicEigenvalue.matrixProduct_functionExpansion_necSuf A B c

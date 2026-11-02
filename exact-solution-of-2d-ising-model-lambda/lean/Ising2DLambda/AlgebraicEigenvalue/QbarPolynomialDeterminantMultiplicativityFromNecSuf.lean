@@ -27,7 +27,7 @@ theorem qbarPolynomial_bijective_inner_sum_from_necSuf
       NecSuf.AlgebraicEigenvalue.permutation_row_sum_reindex_necSuf B c
         (fun π τ => qbarPolynomial_sign_comp π τ) τ
     _ = c τ * Matrix.det B :=
-      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion B).symm
+      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion_from_necSuf B).symm
 
 /-- 可換環の相殺には具体的な互換による符号反転を渡す。
 順序は符号の定義にだけ必要で、非空性は本文の対象に合わせて残している。 -/
@@ -41,7 +41,7 @@ theorem qbarPolynomial_det_mul_from_necSuf
   calc
     Matrix.det (A * B) =
         ∑ σ : Equiv.Perm J, c σ * ∏ i : J, (A * B) i (σ i) :=
-      qbarPolynomial_det_row_expansion (A * B)
+      qbarPolynomial_det_row_expansion_from_necSuf (A * B)
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i (τ i)) *
         (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       NecSuf.AlgebraicEigenvalue.matrixProduct_permutationSum_mul_necSuf A B c
@@ -49,8 +49,8 @@ theorem qbarPolynomial_det_mul_from_necSuf
         (fun a b hab σ => qbarPolynomial_sign_right_transposition_neg a b hab σ)
     _ = Matrix.det A * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       congrArg (· * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)))
-        (qbarPolynomial_det_row_expansion A).symm
+        (qbarPolynomial_det_row_expansion_from_necSuf A).symm
     _ = Matrix.det A * Matrix.det B :=
-      congrArg (Matrix.det A * ·) (qbarPolynomial_det_row_expansion B).symm
+      congrArg (Matrix.det A * ·) (qbarPolynomial_det_row_expansion_from_necSuf B).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

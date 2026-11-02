@@ -28,7 +28,7 @@ theorem qbarPermutationSign_eq_mathlibSign {J : Type*} [Fintype J] [LinearOrder 
 theorem qbarPolynomial_det_row_expansion {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) :
     Matrix.det A = ∑ σ : Equiv.Perm J,
-      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := by
   classical
   calc
@@ -36,10 +36,25 @@ theorem qbarPolynomial_det_row_expansion {J : Type*} [Fintype J] [LinearOrder J]
     _ = ∑ σ : Equiv.Perm J, ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar) *
         ∏ i : J, A.transpose (σ i) i := Matrix.det_apply' _
     _ = ∑ σ : Equiv.Perm J,
-        Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
           ∏ i : J, A i (σ i) := by
-      simp only [IntegerMatrix.inversionSign_eq_mathlibSign, Matrix.transpose_apply,
+      simp only [qbarPermutationSign_eq_mathlibSign, Matrix.transpose_apply,
         map_intCast]
+
+/-- The row expansion with the necessary-and-sufficient sign convention. -/
+theorem qbarPolynomial_det_row_expansion_from_necSuf
+    {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) :
+    Matrix.det A = ∑ σ : Equiv.Perm J,
+      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := by
+  classical
+  rw [qbarPolynomial_det_row_expansion]
+  apply Finset.sum_congr rfl
+  intro σ _
+  exact congrArg (fun z : ℤ => Polynomial.C (z : Qbar) * ∏ i : J, A i (σ i))
+    ((qbarPermutationSign_eq_mathlibSign σ).trans
+      (IntegerMatrix.inversionSign_eq_mathlibSign σ).symm)
 
 /-- 本文の十等号。非空性は本文の対象に合わせた仮定で、有限和・有限積の展開は
 空添字でも成り立つ。減法、除法、代数閉性、次数は使わない。 -/
@@ -55,7 +70,7 @@ theorem qbarPolynomial_det_mul_function_expansion
     Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
   calc
     Matrix.det (A * B) = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, (A * B) i (σ i) :=
-      qbarPolynomial_det_row_expansion (A * B)
+      qbarPolynomial_det_row_expansion_from_necSuf (A * B)
     _ = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, ∑ j : J, A i j * B j (σ i) := by
       simp only [Matrix.mul_apply]
     _ = ∑ σ : Equiv.Perm J, c σ * ∑ f : J → J, ∏ i : J, A i (f i) * B (f i) (σ i) := by

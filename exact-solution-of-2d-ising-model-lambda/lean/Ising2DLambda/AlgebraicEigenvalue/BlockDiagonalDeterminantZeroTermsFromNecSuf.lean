@@ -14,7 +14,7 @@ theorem blockDiagonal_det_eq_sum_preserving_from_necSuf
   calc
     Matrix.det B = ∑ σ : Equiv.Perm J,
       Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i k : J => i < k) σ : ℤ) : Qbar) *
-        ∏ i : J, B i (σ i) := qbarPolynomial_det_row_expansion B
+        ∏ i : J, B i (σ i) := qbarPolynomial_det_row_expansion_from_necSuf B
     _ = ∑ σ ∈ blockPreservingPermutations block,
       Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i k : J => i < k) σ : ℤ) : Qbar) *
         ∏ i : J, B i (σ i) := by

@@ -20,12 +20,12 @@ theorem qbarPolynomial_det_smul_from_necSuf
     Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
   calc
     Matrix.det (c • A) = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, (c • A) i (σ i) :=
-      qbarPolynomial_det_row_expansion (c • A)
+      qbarPolynomial_det_row_expansion_from_necSuf (c • A)
     _ = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, c * A i (σ i) := rfl
     _ = c ^ Fintype.card J * ∑ σ : Equiv.Perm J, w σ * ∏ i : J, A i (σ i) :=
       NecSuf.AlgebraicEigenvalue.weightedProduct_scale_necSuf c w (fun σ i => A i (σ i))
         (mul_zero _) (fun u v => mul_add _ u v)
     _ = c ^ Fintype.card J * Matrix.det A :=
-      congrArg (c ^ Fintype.card J * ·) (qbarPolynomial_det_row_expansion A).symm
+      congrArg (c ^ Fintype.card J * ·) (qbarPolynomial_det_row_expansion_from_necSuf A).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

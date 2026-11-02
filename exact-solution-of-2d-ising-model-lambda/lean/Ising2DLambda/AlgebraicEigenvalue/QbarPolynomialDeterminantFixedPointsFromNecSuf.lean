@@ -29,7 +29,7 @@ theorem qbarPolynomial_det_eq_sum_fixedPointFree_from_necSuf
       _ = 0 := hdiag j
   calc
     Matrix.det A = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, A i (σ i) :=
-      qbarPolynomial_det_row_expansion A
+      qbarPolynomial_det_row_expansion_from_necSuf A
     _ = ∑ σ ∈ fixedPointFreePermutations J, c σ * ∏ i : J, A i (σ i) := by
       simpa only [fixedPointFreePermutations] using
         NecSuf.AlgebraicEigenvalue.weightedProduct_filter_zero_necSuf univ univ c

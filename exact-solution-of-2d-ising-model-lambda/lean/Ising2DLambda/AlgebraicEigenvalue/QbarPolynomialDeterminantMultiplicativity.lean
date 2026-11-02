@@ -93,7 +93,7 @@ theorem qbarPolynomial_bijective_inner_sum
     _ = c τ * (∑ π : Equiv.Perm J, c π * ∏ j : J, B j (π j)) :=
       (Finset.mul_sum _ _ _).symm
     _ = c τ * Matrix.det B :=
-      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion B).symm
+      congrArg (c τ * ·) (qbarPolynomial_det_row_expansion_from_necSuf B).symm
 
 /-- 非単射項を消し、全単射と置換の明示的な対応から二つの行列式を分離する。
 非空性は既存の本文の展開定理に合わせた仮定であり、この再添字付け自体は空でも成り立つ。 -/
@@ -174,6 +174,6 @@ theorem qbarPolynomial_det_mul
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i ((toFunction τ).val i)) * Matrix.det B := rfl
     _ = (∑ τ : Equiv.Perm J, c τ * ∏ i : J, A i (τ i)) * Matrix.det B := rfl
     _ = Matrix.det A * Matrix.det B :=
-      congrArg (· * Matrix.det B) (qbarPolynomial_det_row_expansion A).symm
+      congrArg (· * Matrix.det B) (qbarPolynomial_det_row_expansion_from_necSuf A).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

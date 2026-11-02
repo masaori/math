@@ -50,7 +50,7 @@ theorem qbarPolynomial_det_eq_sum_fixedPointFree
     exact qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed A hdiag σ j (not_not.mp hj) (c σ)
   calc
     Matrix.det A = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, A i (σ i) :=
-      qbarPolynomial_det_row_expansion A
+      qbarPolynomial_det_row_expansion_from_necSuf A
     _ = (∑ σ ∈ fixedPointFreePermutations J, c σ * ∏ i : J, A i (σ i)) +
         ∑ σ ∈ excluded, c σ * ∏ i : J, A i (σ i) := by
       simpa only [fixedPointFreePermutations, excluded] using
