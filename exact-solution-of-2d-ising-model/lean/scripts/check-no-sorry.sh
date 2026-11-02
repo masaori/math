@@ -1596,6 +1596,12 @@ targets=(
   Ising2D.CheckFermiSetup.commute_cre_nOp
   Ising2D.CheckFermiSetup.commute_ann_nOp
   Ising2D.CheckFermiSetup.commute_nOp_nOp
+  Ising2D.CheckFermiSetup.nOp_mul_self_of_necSuf
+  Ising2D.CheckFermiSetup.mul_nOp_of_anticommute
+  Ising2D.CheckFermiSetup.nOp_mul_nOp_of_ne
+  Ising2D.CheckFermiSetup.commute_cre_nOp_of_necSuf
+  Ising2D.CheckFermiSetup.commute_ann_nOp_of_necSuf
+  Ising2D.CheckFermiSetup.nOp_mul_nOp_of_ne_of_necSuf
   Ising2D.CheckFermiSetup.trace_nOpProd
   Ising2D.CheckFermiSetup.trace_nOp
   Ising2D.CheckFermiSetup.trace_nOpProd_univ

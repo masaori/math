@@ -8,7 +8,10 @@
 
 **必要十分版**は `Ising2D/NecSuf/NumberOperator.lean`（章 009 と共通）と
 `Ising2D/NecSuf/PairedFermion.lean`（対をなす添字の対合）。
-本ファイルの主定理は**すべて必要十分版の特殊化として導出する**。
+`check_number_operator_idempotent` (3) の `nOp_mul_self` と `check_number_operators_commute` の
+`mul_nOp_of_anticommute`・`commute_cre_nOp`・`commute_ann_nOp`・`nOp_mul_nOp_of_ne` は、人手の鎖と 1 対 1 の具体版である。
+同じ主張を必要十分版の特殊化として得たものを `*_of_necSuf` の名前で並べて置く。
+`check_number_operator_idempotent` (1)(2) は必要十分版の特殊化だけで、人手の鎖と 1 対 1 の具体版はまだ無い。
 
 ## 章 009 との関係（本章の要点）
 
@@ -40,6 +43,11 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionCheckIndexSet
 import Ising2D.NecSuf.PairedFermion
 import Ising2D.NecSuf.NumberOperator
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 
 namespace Ising2D
 
@@ -220,21 +228,125 @@ theorem ann_sq (i : CheckIdx M) : F.ann i * F.ann i = 0 :=
 theorem ann_mul_cre (i : CheckIdx M) : F.ann i * F.cre i = 1 - F.nOp i :=
   NecSuf.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
 
-/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`（必要十分版の特殊化）。 -/
+/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`。人手の 17 行の鎖と 1 対 1 に書く。
+最後の 2 行（`ň_μ - 0·0`、「零元との積と減法」）は人手でも名前だけの根拠で、Lean は `mul_zero`・`sub_zero` で閉じる。 -/
 theorem nOp_mul_self (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
+  calc F.nOp i * F.nOp i
+      = (F.cre i * F.ann i) * (F.cre i * F.ann i) := rfl
+                                                        -- `ň_μ` の定義（`def_check_number_operator`）
+    _ = F.cre i * (F.ann i * (F.cre i * F.ann i)) := Matrix.mul_assoc _ _ _
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = F.cre i * ((F.ann i * F.cre i) * F.ann i) := by
+          rw [Matrix.mul_assoc (F.ann i) (F.cre i) (F.ann i)]
+                                                        -- `mat_mult_associative` を右辺から左辺へ
+    _ = F.cre i * ((1 - F.nOp i) * F.ann i) := by rw [F.ann_mul_cre i]
+                                                        -- (2)
+    _ = F.cre i * ((1 + (-F.nOp i)) * F.ann i) := by rw [sub_eq_add_neg_tensorPow]
+                                                        -- `matrix_difference_is_sum_with_negation`
+    _ = F.cre i * (1 * F.ann i + (-F.nOp i) * F.ann i) := by rw [add_mul_matrix_tensorPow]
+                                                        -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = F.cre i * (F.ann i + (-F.nOp i) * F.ann i) := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = F.cre i * (F.ann i + (-(F.nOp i * F.ann i))) := by rw [neg_mul_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = F.cre i * F.ann i + F.cre i * (-(F.nOp i * F.ann i)) := mul_add_matrix_tensorPow _ _ _
+                                                        -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = F.cre i * F.ann i + (-(F.cre i * (F.nOp i * F.ann i))) := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = F.cre i * F.ann i - F.cre i * (F.nOp i * F.ann i) := (sub_eq_add_neg_tensorPow _ _).symm
+                                                        -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ
+    _ = F.nOp i - F.cre i * (F.nOp i * F.ann i) := rfl
+                                                        -- `ň_μ` の定義
+    _ = F.nOp i - F.cre i * ((F.cre i * F.ann i) * F.ann i) := rfl
+                                                        -- `ň_μ` の定義
+    _ = F.nOp i - F.cre i * (F.cre i * (F.ann i * F.ann i)) := by
+          rw [Matrix.mul_assoc (F.cre i) (F.ann i) (F.ann i)]
+                                                        -- `mat_mult_associative`
+    _ = F.nOp i - (F.cre i * F.cre i) * (F.ann i * F.ann i) := by
+          rw [← Matrix.mul_assoc (F.cre i) (F.cre i) (F.ann i * F.ann i)]
+                                                        -- `mat_mult_associative` を右辺から左辺へ
+    _ = F.nOp i - 0 * 0 := by rw [F.cre_sq i, F.ann_sq i]
+                                                        -- (1)
+    _ = F.nOp i := by rw [mul_zero, sub_zero]           -- 零元との積と減法（人手でも名前だけの根拠）
+
+/-- `nOp_mul_self` を必要十分版 `NecSuf.num_mul_num` の特殊化として得る。 -/
+theorem nOp_mul_self_of_necSuf (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
   NecSuf.num_mul_num F.cre F.ann i tensorPow_two_torsion_free
     (F.acomm_cre_cre i i) (F.acomm_ann_ann i i) (F.acomm_cre_ann_self i)
 
 /-! ## 原文 `check_number_operators_commute` -/
 
-/-- **原文 `check_number_operators_commute` (1)** 前半（必要十分版の特殊化）。 -/
+/-- **原文 `check_number_operators_commute` Step 2 の鎖**: `X ψ̌_ν^† = -(ψ̌_ν^† X)` と
+`X ψ̌_{M+1-ν} = -(ψ̌_{M+1-ν} X)`（Step 1）から `X ň_ν = ň_ν X`。人手の 10 行と 1 対 1。
+必要十分版の対応は `NecSuf.commute_mul_of_anticommute`。 -/
+theorem mul_nOp_of_anticommute (X : TensorPow M) (j : CheckIdx M)
+    (hD : X * F.cre j = -(F.cre j * X)) (hP : X * F.ann j = -(F.ann j * X)) :
+    X * F.nOp j = F.nOp j * X :=
+  calc X * F.nOp j
+      = X * (F.cre j * F.ann j) := rfl                  -- `ň_ν` の定義
+    _ = (X * F.cre j) * F.ann j := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative` を右辺から左辺へ
+    _ = (-(F.cre j * X)) * F.ann j := by rw [hD]        -- Step 1 の `Xψ̌_ν^† = -(ψ̌_ν^†X)`
+    _ = -((F.cre j * X) * F.ann j) := neg_mul_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(F.cre j * (X * F.ann j)) := by rw [Matrix.mul_assoc (F.cre j) X (F.ann j)]
+                                                        -- `mat_mult_associative`
+    _ = -(F.cre j * (-(F.ann j * X))) := by rw [hP]     -- Step 1 の `Xψ̌_{M+1-ν} = -(ψ̌_{M+1-ν}X)`
+    _ = -(-(F.cre j * (F.ann j * X))) := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = F.cre j * (F.ann j * X) := neg_neg_tensorPow _  -- `matrix_double_negation`
+    _ = (F.cre j * F.ann j) * X := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative` を右辺から左辺へ
+    _ = F.nOp j * X := rfl                              -- `ň_ν` の定義
+
+/-- **原文 `check_number_operators_commute` (1)** 前半: `X = ψ̌_μ^†` で Step 2 の鎖を使う。
+Step 1 の「`XW = -(WX)`」は反交換子が `0` であることから `eq_neg_of_add_eq_zero_left` で出す（人手でも「すなわち」の名前だけの根拠）。 -/
 theorem commute_cre_nOp {i j : CheckIdx M} (hij : i ≠ j) :
+    F.cre i * F.nOp j = F.nOp j * F.cre i :=
+  F.mul_nOp_of_anticommute (F.cre i) j
+    (eq_neg_of_add_eq_zero_left (F.acomm_cre_cre i j))
+    (eq_neg_of_add_eq_zero_left (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this))
+
+/-- **原文 `check_number_operators_commute` (1)** 後半: `X = ψ̌_{M+1-μ}` で Step 2 の鎖を使う。 -/
+theorem commute_ann_nOp {i j : CheckIdx M} (hij : i ≠ j) :
+    F.ann i * F.nOp j = F.nOp j * F.ann i :=
+  F.mul_nOp_of_anticommute (F.ann i) j
+    (eq_neg_of_add_eq_zero_right
+      (by have := F.acomm_cre_ann j i; rwa [if_neg (Ne.symm hij)] at this))
+    (eq_neg_of_add_eq_zero_left (F.acomm_ann_ann i j))
+
+/-- **原文 `check_number_operators_commute` (2)** の Step 3 の鎖（`μ ≠ ν`）。人手の 7 行と 1 対 1。 -/
+theorem nOp_mul_nOp_of_ne {i j : CheckIdx M} (hij : i ≠ j) :
+    F.nOp i * F.nOp j = F.nOp j * F.nOp i :=
+  calc F.nOp i * F.nOp j
+      = (F.cre i * F.ann i) * F.nOp j := rfl            -- `ň_μ` の定義
+    _ = F.cre i * (F.ann i * F.nOp j) := Matrix.mul_assoc _ _ _
+                                                        -- `mat_mult_associative`
+    _ = F.cre i * (F.nOp j * F.ann i) := by rw [F.commute_ann_nOp hij]
+                                                        -- (1) を `X = ψ̌_{M+1-μ}` に適用
+    _ = (F.cre i * F.nOp j) * F.ann i := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative` を右辺から左辺へ
+    _ = (F.nOp j * F.cre i) * F.ann i := by rw [F.commute_cre_nOp hij]
+                                                        -- (1) を `X = ψ̌_μ^†` に適用
+    _ = F.nOp j * (F.cre i * F.ann i) := Matrix.mul_assoc _ _ _
+                                                        -- `mat_mult_associative`
+    _ = F.nOp j * F.nOp i := rfl                        -- `ň_μ` の定義
+
+/-- **原文 `check_number_operators_commute` (2)**: `ň_μ ň_ν = ň_ν ň_μ`。
+人手は `μ ≠ ν` について述べる。`μ = ν` は両辺が同じ行列なので自明（`Commute.refl`）で、使う側の型のために足している。 -/
+theorem commute_nOp_nOp (i j : CheckIdx M) : Commute (F.nOp i) (F.nOp j) := by
+  by_cases hij : i = j
+  · subst hij; exact Commute.refl _
+  · exact F.nOp_mul_nOp_of_ne hij
+
+/-- `commute_cre_nOp` を必要十分版 `NecSuf.commute_cre_num` の特殊化として得る。 -/
+theorem commute_cre_nOp_of_necSuf {i j : CheckIdx M} (hij : i ≠ j) :
     F.cre i * F.nOp j = F.nOp j * F.cre i :=
   NecSuf.commute_cre_num F.cre F.ann (F.acomm_cre_cre i j)
     (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this)
 
-/-- **原文 `check_number_operators_commute` (1)** 後半（必要十分版の特殊化）。 -/
-theorem commute_ann_nOp {i j : CheckIdx M} (hij : i ≠ j) :
+/-- `commute_ann_nOp` を必要十分版 `NecSuf.commute_ann_num` の特殊化として得る。 -/
+theorem commute_ann_nOp_of_necSuf {i j : CheckIdx M} (hij : i ≠ j) :
     F.ann i * F.nOp j = F.nOp j * F.ann i :=
   NecSuf.commute_ann_num F.cre F.ann
     (by
@@ -243,15 +355,16 @@ theorem commute_ann_nOp {i j : CheckIdx M} (hij : i ≠ j) :
       linear_combination (norm := noncomm_ring) this)
     (F.acomm_ann_ann i j)
 
-/-- **原文 `check_number_operators_commute` (2)**: `ň_μ ň_ν = ň_ν ň_μ`（必要十分版の特殊化）。 -/
-theorem commute_nOp_nOp (i j : CheckIdx M) : Commute (F.nOp i) (F.nOp j) := by
-  by_cases hij : i = j
-  · subst hij; exact Commute.refl _
-  · refine NecSuf.commute_num_num F.cre F.ann (F.acomm_cre_cre i j) ?_ ?_ (F.acomm_ann_ann i j)
-    · have := F.acomm_cre_ann i j; rwa [if_neg hij] at this
-    · have := F.acomm_cre_ann j i
+/-- `nOp_mul_nOp_of_ne` を必要十分版 `NecSuf.commute_num_num` の特殊化として得る。 -/
+theorem nOp_mul_nOp_of_ne_of_necSuf {i j : CheckIdx M} (hij : i ≠ j) :
+    F.nOp i * F.nOp j = F.nOp j * F.nOp i :=
+  NecSuf.commute_num_num F.cre F.ann (F.acomm_cre_cre i j)
+    (by have := F.acomm_cre_ann i j; rwa [if_neg hij] at this)
+    (by
+      have := F.acomm_cre_ann j i
       rw [if_neg (Ne.symm hij)] at this
-      linear_combination (norm := noncomm_ring) this
+      linear_combination (norm := noncomm_ring) this)
+    (F.acomm_ann_ann i j)
 
 end CheckFermiSetup
 

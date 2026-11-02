@@ -1594,25 +1594,38 @@ U S_2 U^{-1}
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^2
-&= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
-   \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+&= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \check{n}_\mu\ \text{の定義。}\blkref{def_check_number_operator}) \\
-&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\mu^\dagger\left(I - \check{n}_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ C \to \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check\psi_\mu^\dagger\left(\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ B \to \check\psi_\mu^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
+&= \check\psi_\mu^\dagger\left(\left(I - \check{n}_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \text{(2)}) \\
-&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
-   - \check\psi_\mu^\dagger\,\check{n}_\mu\,\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{行列の積の分配法則}) \\
-&= \check{n}_\mu
-   - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\text{。}\blkref{def_check_number_operator}) \\
-&= \check{n}_\mu
-   - \left(\check\psi_\mu^\dagger\right)^2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
-   \quad (\because \text{結合法則}) \\
+&= \check\psi_\mu^\dagger\left(\left(I + \left(-\check{n}_\mu\right)\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\right) \\
+&= \check\psi_\mu^\dagger\left(I\check\psi_{M_{\mathrm{col}}+1-\mu} + \left(-\check{n}_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to -\check{n}_\mu,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu} + \left(-\check{n}_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu} + \left(-\left(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} + \check\psi_\mu^\dagger\left(-\left(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ C \to -(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}))\right) \\
+&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} + \left(-\left(\check\psi_\mu^\dagger\left(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} - \check\psi_\mu^\dagger\left(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu},\ B \to \check\psi_\mu^\dagger(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}))\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu - \check\psi_\mu^\dagger\left(\check{n}_\mu\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad (\because \check{n}_\mu\ \text{の定義。}\blkref{def_check_number_operator}) \\
+&= \check{n}_\mu - \check\psi_\mu^\dagger\left(\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad (\because \check{n}_\mu\ \text{の定義。}\blkref{def_check_number_operator}) \\
+&= \check{n}_\mu - \check\psi_\mu^\dagger\left(\check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
+&= \check{n}_\mu - \left(\check\psi_\mu^\dagger\check\psi_\mu^\dagger\right)\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_\mu^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu - 0\cdot 0
-   \quad (\because \text{(1)})
-\\
+   \quad (\because \text{(1)。(1) の左辺の 2 乗は、同じ行列どうしの積 } \check\psi_\mu^\dagger\check\psi_\mu^\dagger,\ \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\ \text{のこと}) \\
 &= \check{n}_\mu
    \quad (\because \text{零元との積と減法})
 \end{aligned}`,
@@ -1623,6 +1636,7 @@ U S_2 U^{-1}
       notes: [
         "009 章の number_operator_idempotent の半整数運動量版。009 章では ψ_{-μ} が定義域に入ること（γ_2(θ_{-μ}) ≠ 0）を確かめる必要があったが、anticommutator_of_check_psi が μ, ν ∈ Z 全体について成り立つのでその手当ては要らない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（残差 ≤ 1.6e-15）。",
+        "2026-11-02: (3) の鎖の「行列の積の結合法則」「結合法則」を mat_mult_associative の 1 行 1 回の参照にし（各 2 行）、括弧を全て書いた。「行列の積の分配法則」の行を matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_left_factor・identity_matrix_is_left_unit_of_mat_mult・negation_factors_out_of_left_factor・mat_mult_distributes_over_sum_in_right_factor・negation_factors_out_of_right_factor の 7 行にした。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_self は同じ 17 行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_23。",
       ],
     },
   },
@@ -1697,7 +1711,7 @@ U S_2 U^{-1}
 {\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_\nu^\dagger\right]_+}
   &= \delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}\,I
    \quad (\because \text{$\check\psi$ の反交換関係の第 2 式を添字 } (\nu, M_{\mathrm{col}}+1-\mu) \text{ へ適用し、}
-     \text{反交換子が引数の順序に依らないこと } [X,W]_+ = XW + WX = [W,X]_+\text{。}\blkref{anticommutator_of_check_psi}) \\
+     \text{反交換子が引数の順序に依らないこと } [\check\psi_{M_{\mathrm{col}}+1-\mu},\check\psi_\nu^\dagger]_+ = \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\nu^\dagger + \check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} = [\check\psi_\nu^\dagger,\check\psi_{M_{\mathrm{col}}+1-\mu}]_+\text{。}\blkref{anticommutator_of_check_psi}) \\
   &= 0
    \quad (\because \text{直前の }\delta\text{ の計算と }\delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\nu}=\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\text{（対の条件の対称性）}), \\
 {\left[\check\psi_{M_{\mathrm{col}}+1-\mu}, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+} &= 0
@@ -1706,16 +1720,16 @@ U S_2 U^{-1}
       ),
       paragraph([
         "すなわち、",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
+        math(String.raw`X \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
         " と ",
-        math(String.raw`B \in \{\check\psi_\nu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\}`),
+        math(String.raw`W \in \{\check\psi_\nu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\}`),
         " のどの組み合わせでも ",
-        math(String.raw`AB = -BA`),
+        math(String.raw`XW = -(WX)`),
         " が成り立つ。",
       ]),
       paragraph([
         "Step 2（(1) の証明）。",
-        math(String.raw`A \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
+        math(String.raw`X \in \{\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\}`),
         " を取ると、",
         math(String.raw`\check{n}_\nu`),
         " の定義（",
@@ -1724,28 +1738,33 @@ U S_2 U^{-1}
       ]),
       displayMath(
         String.raw`\begin{aligned}
-A\,\check{n}_\nu
-&= A\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
+X\,\check{n}_\nu
+&= X\left(\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
    \quad (\because \check{n}_\nu\ \text{の定義}) \\
-&= \left(-\check\psi_\nu^\dagger A\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{Step 1 の } A\check\psi_\nu^\dagger = -\check\psi_\nu^\dagger A) \\
-&= -\check\psi_\nu^\dagger\left(A\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
-   \quad (\because \text{結合法則}) \\
-&= -\check\psi_\nu^\dagger\left(-\check\psi_{M_{\mathrm{col}}+1-\nu}A\right)
-   \quad (\because \text{Step 1 の } A\check\psi_{M_{\mathrm{col}}+1-\nu} = -\check\psi_{M_{\mathrm{col}}+1-\nu}A) \\
-&= \check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,A
-   \quad (\because (-1)^2 = 1) \\
-&= \check{n}_\nu\,A
+&= \left(X\,\check\psi_\nu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to X,\ B \to \check\psi_\nu^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\nu})\ \text{を右辺から左辺へ}\right) \\
+&= \left(-\left(\check\psi_\nu^\dagger X\right)\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
+   \quad (\because \text{Step 1 の } X\check\psi_\nu^\dagger = -(\check\psi_\nu^\dagger X)) \\
+&= -\left(\left(\check\psi_\nu^\dagger X\right)\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\nu^\dagger X,\ B \to \check\psi_{M_{\mathrm{col}}+1-\nu})\right) \\
+&= -\left(\check\psi_\nu^\dagger\left(X\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\nu^\dagger,\ B \to X,\ C \to \check\psi_{M_{\mathrm{col}}+1-\nu})\right) \\
+&= -\left(\check\psi_\nu^\dagger\left(-\left(\check\psi_{M_{\mathrm{col}}+1-\nu}X\right)\right)\right)
+   \quad (\because \text{Step 1 の } X\check\psi_{M_{\mathrm{col}}+1-\nu} = -(\check\psi_{M_{\mathrm{col}}+1-\nu}X)) \\
+&= -\left(-\left(\check\psi_\nu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\nu}X\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\nu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\nu}X)\right) \\
+&= \check\psi_\nu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\nu}X\right)
+   \quad \left(\because\ \blkref{matrix_double_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\nu^\dagger(\check\psi_{M_{\mathrm{col}}+1-\nu}X))\right) \\
+&= \left(\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu}\right)X
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\nu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\nu},\ C \to X)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\nu\,X
    \quad (\because \check{n}_\nu\ \text{の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "符号は ",
-        math(String.raw`(-1)^2 = 1`),
-        " となって消える。",
-        math(String.raw`A = \check\psi_\mu^\dagger`),
+        math(String.raw`X = \check\psi_\mu^\dagger`),
         " と ",
-        math(String.raw`A = \check\psi_{M_{\mathrm{col}}+1-\mu}`),
+        math(String.raw`X = \check\psi_{M_{\mathrm{col}}+1-\mu}`),
         " の両方でこれが成り立つ。",
       ]),
       paragraph([
@@ -1761,15 +1780,15 @@ A\,\check{n}_\nu
 &= \left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\check{n}_\nu
    \quad (\because \check{n}_\mu\ \text{の定義}) \\
 &= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\,\check{n}_\nu\right)
-   \quad (\because \text{結合法則}) \\
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ C \to \check{n}_\nu)\right) \\
 &= \check\psi_\mu^\dagger\left(\check{n}_\nu\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
-   \quad (\because \text{(1) を } A = \check\psi_{M_{\mathrm{col}}+1-\mu} \text{ に適用}) \\
+   \quad (\because \text{(1) を } X = \check\psi_{M_{\mathrm{col}}+1-\mu} \text{ に適用}) \\
 &= \left(\check\psi_\mu^\dagger\,\check{n}_\nu\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{結合法則}) \\
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check{n}_\nu,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{n}_\nu\,\check\psi_\mu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{(1) を } A = \check\psi_\mu^\dagger \text{ に適用}) \\
+   \quad (\because \text{(1) を } X = \check\psi_\mu^\dagger \text{ に適用}) \\
 &= \check{n}_\nu\left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
-   \quad (\because \text{結合法則}) \\
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check\psi_\mu^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
 &= \check{n}_\nu \check{n}_\mu
    \quad (\because \check{n}_\mu\ \text{の定義})
 \end{aligned}`,
@@ -1780,6 +1799,7 @@ A\,\check{n}_\nu
       notes: [
         "009 章の number_operators_commute の半整数運動量版。反交換子の対は ν = M+1−μ であり、添字を 𝓜̌ = {1,…,M} に絞ったので、消えることを確かめる δ は δ_{M+1−ν, M+1−μ} = δ_{μ,ν} = 0（μ ≠ ν）だけで済む。合同式の書き換えは要らない（def_check_index_set (5)）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（M=2,3,4,5、μ ≠ ν の全組、残差 ≤ 1.3e-15）。",
+        "2026-11-02: Step 2・Step 3 の「結合法則」を mat_mult_associative の 1 行 1 回の参照にし、Step 1・Step 2 の行列の変数を A, B から X, W に替え（引く主張の変数 A, B との衝突を避けるため）、Step 2 の符号の外出しを negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_double_negation の行に分けた（「(-1)^2 = 1」の行を置き換えた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.mul_nOp_of_anticommute（Step 2 の 10 行）・nOp_mul_nOp_of_ne（Step 3 の 7 行）は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_23。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },

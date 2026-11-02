@@ -7,8 +7,8 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、`eigenvalue_problem_diagonalization_and_exponential_form.ts`（`def_check_number_operator`）
 - 併せて検証（この章の全ブロック）:
   - `def_check_number_operator`（数演算子 `ň_μ := ψ̌_μ^† ψ̌_{1−μ}`）
-  - `check_number_operator_idempotent`（`ň_μ² = ň_μ`）
-  - `check_number_operators_commute`（`ň_μ ň_ν = ň_ν ň_μ`）
+  - `check_number_operator_idempotent`（`ň_μ² = ň_μ`。(3) の鎖は check_23）
+  - `check_number_operators_commute`（`ň_μ ň_ν = ň_ν ň_μ`。Step 2・Step 3 の鎖は check_23）
   - `trace_of_check_number_operator_product`（`tr(ň_{μ_1}⋯ň_{μ_k}) = 2^{M−k}`）
   - `check_joint_eigenspace_decomposition`（`Q̌_ε`、**各同時固有空間は 1 次元**、`2^M` 個）
   - `eigenvalues_of_check_Vprime`（`V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`）
@@ -112,6 +112,7 @@ U        := E F,  E = E_1⊠…⊠E_M（E_m = σ^x（m 奇数）, I（m 偶数�
 | 20 | check_20_sign_flip_step3_H2_chain.sage | `sign_flip_conjugation` の Step 3 の `H_2` の鎖を一行ずつ。項の鎖 `U(Z_jY_j)U^{-1} = -(Z_jY_j)`（`T_B` の定義・乗法性・`T_B` の定義・Step 2・`negation_factors_out_of_left_factor` の 5 行）と、`UH_2U^{-1}` の 7 行（`def_H2`・`T_B` の定義・`matrix_conjugation_preserves_finite_sum`・`T_B` の定義を各項に・項の鎖・`finite_sum_of_negated_matrices`・`def_H2`）。有限和は `def_finite_sum_of_matrices` のとおり左から足す。否定コントロールとして、項の鎖の 4 行目で `UZ_jU^{-1}` を `+Z_j` と取り違えると、その行も和も右端と一致しないことを確かめる | PASS | `M = 2, 3, 4, 5`、全ての `j`、`QQ(i)` で厳密等号（98 段） |
 | 21 | check_21_sign_flip_step3_H1plus_chain.sage | `sign_flip_conjugation` の Step 3 の `H_1^{(+)}` の鎖を一行ずつ。項の鎖 `U(Y_jZ_k)U^{-1} = -(Y_jZ_k)`（`T_B` の定義・乗法性・`T_B` の定義・Step 2・`negation_factors_out_of_right_factor` の 5 行、全ての `j, k`）と、`UH_1^{(+)}U^{-1}` の 9 行（`def_H1_plus`・`T_B` の定義・`matrix_conjugation_preserves_difference`・`matrix_conjugation_preserves_finite_sum`・`T_B` の定義を各項と引く項に・項の鎖・`finite_sum_of_negated_matrices`・`difference_of_negated_matrices`・`def_H1_plus`）。有限和は `def_finite_sum_of_matrices` のとおり左から足し、差は成分ごとに取る。否定コントロールとして、`(-A)-(-B)` を `-(A+B)` と取り違えると右端と一致しないこと、項の鎖で `UZ_kU^{-1}` を `+Z_k` と取り違えると一致しないことを確かめる | PASS | `M = 2, 3, 4, 5`、全ての `j, k`、`QQ(i)` で厳密等号（306 段） |
 | 22 | check_22_iH_real_symmetric_scalar_chains.sage | `iH_is_real_symmetric` の Step 1 の `H_2` の 3 行（`def_H2`・上で得た `Z_mY_m`・`finite_sum_of_scalar_multiples`）と `S_2` の 8 行（`S_2` の定義・`H_2` の表示・`scalar_multiple_is_associative`・ℂ の積の結合律・交換律・結合律・`i(-i) = 1`・乗法の単位元）、Step 2 の `S_1^{(+)}` の 13 行（`def_H1_plus`・上で得た `Y_mZ_{m+1}` を各項へ・上で得た `Y_{M_col}Z_1`・`finite_sum_of_scalar_multiples`・`scalar_multiple_distributes_over_matrix_difference` を右辺から左辺へ・`scalar_multiple_is_associative`・ℂ の積の 3 行・`i(-i) = 1`・乗法の単位元・`scalar_multiple_distributes_over_matrix_difference`）を一行ずつ。スカラー倍・和・差・有限和は本文の定義どおり成分から組む。ℂ の積の結合律・交換律・単位元の行は、成分を可換な多項式環に置くので構成上かならず一致し、写し間違いは検出できない。否定コントロールとして、境界項の符号を取り違えた `K_1Σσ^zσ^z + K_1G` とは一致しないことを確かめる | **PASS** | 成分は `QQ(i)[K_1, K_2^*]`（不定元）で厳密等号、`M = 2, 3, 4, 5` |
+| 23 | check_23_check_number_operator_associativity_chains.sage | `check_number_operator_idempotent` (3) の 17 行、`check_number_operators_commute` Step 2 の 10 行と Step 3 の 7 行を、括弧どおりに一行ずつ `QQ` で厳密に。仮定（(1)(2)、Step 1 の `AB = -(BA)`）を満たす模型として Jordan–Wigner のフェルミ演算子 `c_μ` を取り `D_μ := c_μ^T`、`P_μ := c_μ`（`M = 2, 3, 4`）。否定コントロールとして、仮定を満たさない不定元の行列では仮定を使う 6 行だけが外れ、結合律・分配律・単位行列・符号の外出し・二重の符号反転・差の書き換えの行は成り立つことを確かめる | **PASS** | `M = 2, 3, 4` で `QQ` の厳密等号 693 段、不定元の行列で 28 段（計 721 段）、否定コントロール 6 行 |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論

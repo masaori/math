@@ -8,6 +8,9 @@
 - `number_operators_commute`（`Ising2D.NecSuf.commute_num_num`）
 - `trace_of_number_operator_product`（`Ising2D.NecSuf.two_mul_tau_num_mul`）
 
+章 017 の `check_number_operator_idempotent`・`check_number_operators_commute` の具体版
+（`Ising2D/EigenvalueProblem/EigenvaluesOfVPlus/DefinitionCheckNumberOperator.lean`）も、同じ必要十分版に対応する。
+
 ## この主張に本質的に効いている構造（＝具体版が過剰な構造を要求していないかの検査）
 
 人手証明は `ψ_μ^†, ψ_{-μ} ∈ Mat(2^M, ℂ)` という具体的な行列について述べているが、
@@ -66,23 +69,42 @@ theorem num_mul_num (c a : ι → A) (i : ι) (htf : ∀ x : A, x + x = 0 → x 
   have ha2 : a i * a i = 0 := sq_eq_zero_of_acomm_self htf haa
   have hac : a i * c i = 1 - c i * a i := ann_mul_cre c a i hca
   show c i * a i * (c i * a i) = c i * a i
-  calc c i * a i * (c i * a i) = c i * (a i * c i) * a i := by noncomm_ring
-    _ = c i * (1 - c i * a i) * a i := by rw [hac]
-    _ = c i * a i - (c i * c i) * (a i * a i) := by noncomm_ring
-    _ = c i * a i := by rw [hc2, ha2]; noncomm_ring
-
-/-- 反可換な 2 元の積との可換性。人手証明 `number_operators_commute` Step 2 の
-「符号は `(-1)^2 = 1` となって消える」。 -/
+  -- 具体版 `Ising2D.CheckFermiSetup.nOp_mul_self`（人手 `check_number_operator_idempotent` (3) の 17 行）と同じ段。
+  -- ただし `num` の定義を開く人手の 1・12・13 行目は、上の `show` で `num` を `c i * a i` と書いたので段として現れない（14 段）。
+  -- 効いているのは環の結合則・分配則・単位元・零元との積（`mul_zero`）・`-` と積の関係（`neg_mul`・`mul_neg`）・
+  -- `sub_eq_add_neg`・`sub_zero` と、仮定 `hac`・`hc2`・`ha2`（後の 2 つは 2-捩れが無いことから出す）だけ。
+  calc c i * a i * (c i * a i)
+      = c i * (a i * (c i * a i)) := mul_assoc _ _ _
+    _ = c i * ((a i * c i) * a i) := by rw [mul_assoc (a i) (c i) (a i)]
+    _ = c i * ((1 - c i * a i) * a i) := by rw [hac]
+    _ = c i * ((1 + (-(c i * a i))) * a i) := by rw [sub_eq_add_neg]
+    _ = c i * (1 * a i + (-(c i * a i)) * a i) := by rw [add_mul]
+    _ = c i * (a i + (-(c i * a i)) * a i) := by rw [one_mul]
+    _ = c i * (a i + (-((c i * a i) * a i))) := by rw [neg_mul]
+    _ = c i * a i + c i * (-((c i * a i) * a i)) := mul_add _ _ _
+    _ = c i * a i + (-(c i * ((c i * a i) * a i))) := by rw [mul_neg]
+    _ = c i * a i - c i * ((c i * a i) * a i) := (sub_eq_add_neg _ _).symm
+    _ = c i * a i - c i * (c i * (a i * a i)) := by rw [mul_assoc (c i) (a i) (a i)]
+    _ = c i * a i - (c i * c i) * (a i * a i) := by rw [← mul_assoc (c i) (c i) (a i * a i)]
+    _ = c i * a i - 0 * 0 := by rw [hc2, ha2]
+    _ = c i * a i := by rw [mul_zero, sub_zero]
+/-- 反可換な 2 元の積との可換性。人手証明 `number_operators_commute` Step 2（参照用ノート側の原文は
+「符号は `(-1)^2 = 1` となって消える」と書く）と、章 017 の `check_number_operators_commute` Step 2 の 10 行。
+段は符号の外出し（`neg_mul`・`mul_neg`）と二重の符号反転（`neg_neg`）に分けて書く。 -/
 theorem commute_mul_of_anticommute {x y z : A}
     (hxy : x * y + y * x = 0) (hxz : x * z + z * x = 0) :
     x * (y * z) = (y * z) * x := by
   have h1 : x * y = -(y * x) := eq_neg_of_add_eq_zero_left hxy
   have h2 : x * z = -(z * x) := eq_neg_of_add_eq_zero_left hxz
-  calc x * (y * z) = (x * y) * z := by noncomm_ring
+  -- 具体版 `Ising2D.CheckFermiSetup.mul_nOp_of_anticommute`（人手 `check_number_operators_commute` Step 2 の 10 行）と同じ段。
+  calc x * (y * z) = (x * y) * z := (mul_assoc _ _ _).symm
     _ = (-(y * x)) * z := by rw [h1]
-    _ = -(y * (x * z)) := by noncomm_ring
+    _ = -((y * x) * z) := neg_mul _ _
+    _ = -(y * (x * z)) := by rw [mul_assoc y x z]
     _ = -(y * (-(z * x))) := by rw [h2]
-    _ = (y * z) * x := by noncomm_ring
+    _ = -(-(y * (z * x))) := by rw [mul_neg]
+    _ = y * (z * x) := neg_neg _
+    _ = (y * z) * x := (mul_assoc _ _ _).symm
 
 /-- 人手証明 `number_operators_commute` (1): `i ≠ j` のとき `c_i` は `n_j` と可換。 -/
 theorem commute_cre_num (c a : ι → A) {i j : ι}
@@ -104,11 +126,12 @@ theorem commute_num_num (c a : ι → A) {i j : ι}
   have h1 : c i * num c a j = num c a j * c i := commute_cre_num c a hcc hca
   have h2 : a i * num c a j = num c a j * a i := commute_ann_num c a hac haa
   show c i * a i * num c a j = num c a j * (c i * a i)
-  calc c i * a i * num c a j = c i * (a i * num c a j) := by noncomm_ring
+  -- 具体版 `Ising2D.CheckFermiSetup.nOp_mul_nOp_of_ne`（人手 `check_number_operators_commute` Step 3 の 7 行）と同じ段。
+  calc c i * a i * num c a j = c i * (a i * num c a j) := mul_assoc _ _ _
     _ = c i * (num c a j * a i) := by rw [h2]
-    _ = (c i * num c a j) * a i := by noncomm_ring
+    _ = (c i * num c a j) * a i := (mul_assoc _ _ _).symm
     _ = (num c a j * c i) * a i := by rw [h1]
-    _ = num c a j * (c i * a i) := by noncomm_ring
+    _ = num c a j * (c i * a i) := mul_assoc _ _ _
 
 /-- `c_i`, `a_i` が `P` と可換なら `n_i` も `P` と可換。 -/
 theorem commute_num_of_commute (c a : ι → A) (i : ι) {P : A}
