@@ -62350,6 +62350,7 @@ u\bigl(\operatorname{dir}(\vec f)\bigr)
                       kind: "definition",
                       title: { text: "非後退辺列の平面持ち上げ" },
                       labels: ["def_plane_lift"],
+                      lean: ["Ising2DLambda.KacWard.planeLift", "Ising2DLambda.KacWard.planeLift_zero", "Ising2DLambda.KacWard.planeLift_succ"],
                       habitat: "Z",
                       statement: [
                         paragraph([
