@@ -1904,4 +1904,164 @@ L^{\lambda}_m+_V L^{\mu}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_linear_form_maps_linear_combination_to_ordered_sum",
+    kind: "claim",
+    title: { text: "線型形式は線型結合を、係数と値の積の ℂ の中の番号順の和へ移す" },
+    labels: ["claim_linear_form_maps_linear_combination_to_ordered_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`f:V\to\mathbb{C}`),
+        " を ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられているとする。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）と ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`f\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}f(b_k)`),
+      paragraph([
+        "右辺は、",
+        math(String.raw`\alpha_k:=\lambda_k\cdot_{\mathbb{C}}f(b_k)\in\mathbb{C}`),
+        "（",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        "）と置いたときの ",
+        math(String.raw`\alpha_1,\dots,\alpha_n`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "係数 ",
+        math(String.raw`\lambda_1,\dots,\lambda_n`),
+        " と族 ",
+        math(String.raw`b`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元を ",
+        math(String.raw`L_m`),
+        "、",
+        math(String.raw`\alpha_k:=\lambda_k\cdot_{\mathbb{C}}f(b_k)`),
+        " について ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和の定義（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）が帰納的に定める ",
+        math(String.raw`\mathbb{C}`),
+        " の元を ",
+        math(String.raw`S_m`),
+        " と書く（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L_0:=0_V`),
+          "、",
+          math(String.raw`L_m:=L_{m-1}+_V(\lambda_m\cdot_V b_m)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`S_0:=0_{\mathbb{C}}`),
+          "、",
+          math(String.raw`S_m:=S_{m-1}+_{\mathbb{C}}\bigl(\lambda_m\cdot_{\mathbb{C}}f(b_m)\bigr)`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "主張の左辺は ",
+        math(String.raw`f(L_n)`),
+        "、右辺は ",
+        math(String.raw`S_n`),
+        " である。すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`f(L_m)=S_m`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m=n`),
+        " の場合が主張である。",
+      ]),
+      paragraph([math(String.raw`m=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+f(L_0)
+&=f(0_V)
+&&\left(\because\ L_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=f(0_{\mathbb{C}}\cdot_V 0_V)
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_{\mathbb{C}}\cdot_{\mathbb{C}}f(0_V)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}z=0_{\mathbb{C}}\right)\\
+&=S_0
+&&\left(\because\ S_0\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`f(L_{m-1})=S_{m-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+f(L_m)
+&=f\bigl(L_{m-1}+_V(\lambda_m\cdot_V b_m)\bigr)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=f(L_{m-1})+_{\mathbb{C}}f(\lambda_m\cdot_V b_m)
+&&\left(\because\ f\ \text{は加法を保つ。}\blkref{def_linear_form}\right)\\
+&=S_{m-1}+_{\mathbb{C}}f(\lambda_m\cdot_V b_m)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=S_{m-1}+_{\mathbb{C}}\bigl(\lambda_m\cdot_{\mathbb{C}}f(b_m)\bigr)
+&&\left(\because\ f\ \text{はスカラー倍を保つ。}\blkref{def_linear_form}\right)\\
+&=S_m
+&&\left(\because\ S_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`f(L_m)=S_m`),
+        " が示された。",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`m=0`),
+        " の場合だけで足りる。",
+      ]),
+    ],
+  },
 ]);
