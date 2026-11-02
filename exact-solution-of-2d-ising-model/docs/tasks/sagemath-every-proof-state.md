@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 352 件のうち、SageMath の検算が無いもの 72 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 353 件のうち、SageMath の検算が無いもの 71 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -180,13 +180,20 @@
   位相 exp(-i(j_R θ̃_μ)_C) を 1 の冪根として円分体 `QQ(ζ_{4M})` に、(K_1)_C・(K_2^*)_C をその上の多項式環の不定元に置き、`M_col = 2..5`・全 μ で、前提 (A)〜(D)、準備（交換子の双線型性・位相の積）の鎖、四つの主張の基底段階と二つの帰納段階の全行（`n = 0..6`）と主張（`n = 0..7`）を厳密に確かめた。位相の積の鎖と円分体の表し方は本文の exp のボールで補助に照合した。
   人手証明を直した: 主張の中で定めていた交換子と n 重の反復を `def_ad_X_matrix` の ad^n への参照に、K_1・K_2^*・θ̃ を `inclusion_rr_to_cc` の像で書き、係数を一つの複素数にまとめるスカラー倍の括弧と (−1) の冪の指数の所属を書いた。証明は、双線型性の名前だけの根拠をスカラー倍の主張へのラベル参照に、`exp(-iθ̃)exp(iθ̃) = 1` を `scalar_exp_product`・`scalar_exp_zero` の鎖に、帰納段階の鎖を冪の約束（`scalar_exp_is_limit_of_partial_sums`）と指数の等式の行まで延ばして n+1 の主張の右辺に着く一続きにし、鎖の後の散文の照合を除いた。計算の誤りは無かった。Lean の `ClaimNestedCommutator.lean` の新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。
 
+- `cosh_sinh_coefficient_conversion_for_check`（Ž・Y̌ についての cosh・sinh の展開係数への変換）と、そのために足した `commutator_of_scalar_multiples`（スカラー倍どうしの交換子 `[αX, βW] = (αβ)[X, W]`）: `sagemath/check/<ラベル>/`（共通の準備を `sagemath/_shared/half_integer_check_operators.sage` へ切り出し、nesting の検算と共有）。
+  主張の六本の鎖を、位相を円分体・(K_1)_C・(K_2^*)_C を不定元に置いて `M_col = 2..5`・全 μ・n = 0..7 で、四つの準備を不定元の行列と実数の対の ℂ で、すべて厳密に確かめた（浮動小数点なし）。
+  人手証明を直した: 主張を nesting の新しい表記（包含の像、スカラー倍の括弧、生成子 `(i/2)((K_1)_C H_1^{(+)})`・`i((K_2^*)_C H_2)`）にそろえた。補題 1 の散文を m の帰納法の鎖に、交換子の線型性を nesting の証明の準備から切り出した新しい主張への参照にした（nesting の 8 か所も引き直し、β を括弧で括ったまま可換律・結合律の行まで運ぶ形にし、nesting の主張に係数の `2` が `2_C := (2_R)_C` であることを書いた）。補題 2 と、根拠なしで使っていた冪の法則（`(i/2)^n = i^n 2^{-n}`・`(2K)^n = 2^nK^n`・`(-1)^a(-1)^b = (-1)^{a+b}`）を、冪の約束だけから帰納法で示す `(i/2)^m(2k)^m = i^m k^m` と `i^{2l}(-1)^l = 1` に置き換えた。計算の誤りは無かった。
+  Lean（`ClaimCoefficientConversion.lean`）は補題 2 を `I_pow_even`・`I_pow_odd` で写しており、人手の新しい準備との対応の注記は Lean の連続実行が見直す。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `cosh_sinh_coefficient_conversion_for_check`（Ž・Y̌ についての cosh・sinh の展開係数への変換。`--list` の先頭）から、文書順に検算を足す。このブロックは `nesting_of_commutator_of_H_and_check_Z` を旧い表記（K_1・exp(-iθ̃) を包含の像なしで）で引いているので、引く行を新しい主張の (K_1)_C・(θ̃)_C の形にそろえる。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `extract_taylor_coefficient_of_check_Z_Y`（Ž・Y̌ についてのテイラー係数の抽出。`--list` の先頭）から、文書順に検算を足す。このブロックは `cosh_sinh_coefficient_conversion_for_check` を旧い表記（生成子 `\tfrac{i}{2}K_1H_1^{(+)}`、係数 `iK_1^n\exp(-i\tilde\theta)`。K_1・θ̃ に包含の像なし）で引いているので、引く行を新しい主張の形（生成子 `(i/2)((K_1)_C H_1^{(+)})`、係数を一つの複素数にまとめたスカラー倍）にそろえる。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`cosh_sinh_coefficient_conversion_for_check` のレビューで見つかった（同一視と一行二操作。今回の差分より前から）: `nesting_of_commutator_of_H_and_check_Z` の証明の「準備（前提の読み方）」は、`commutator_of_H_and_check_Z_Y` の (A)〜(D) の `exp(∓iθ̃_μ)` を `exp(∓i(θ̃)_C)` と、`2exp(…)Y̌` を係数をまとめたスカラー倍と、散文で読み替えている。直すには (A)〜(D) の主張を包含の像と括弧付きのスカラー倍で書き直し、この段落を除く。同じ証明の「ℂ の四則」の行は `-2 = (-1_C)2` の書き換え（`multiply_by_minus_one`）と並べ替えを一行にまとめている。`commutator_of_H_and_check_Z_Y` の検算は付いているので、検算の付いたブロックの見直しで扱う。
 
 - 2026-11-02、`V2_invertible` のレビューで見つかった（暗黙の包含）: `def_V1_plus_square_root`・`V2_exponential_representation` は `K_1, K_2^*, s_2 ∈ ℝ_{>0} ⊂ ℂ` と書き、実数を包含の像を書かずに ℂ の係数として掛けている（係数 `(2s_2)^{M_col/2}` も同じ）。この単位では使う側の証明で `(K_1)_ℂ`・`(K_2^*)_ℂ`・`a_ℂ` と読み替える行を置いた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 

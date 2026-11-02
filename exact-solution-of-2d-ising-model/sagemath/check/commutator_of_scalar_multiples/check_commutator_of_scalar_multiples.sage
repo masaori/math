@@ -1,5 +1,5 @@
-# 対象ラベル: nesting_of_commutator_of_H_and_check_Z
-# 証明の準備「交換子の双線型性」[αX, βW] = (αβ)[X, W] の鎖の全行を、α・β と X・W の成分を独立な不定元にして厳密に確かめる。
+# 対象ラベル: commutator_of_scalar_multiples
+# 主張 [αX, βW] = (αβ)[X, W] の証明の鎖の全行を、α・β と X・W の成分を独立な不定元にして厳密に確かめる。
 # 各行は本文の定め方の積（mat_mult）・スカラー倍（def_matrix_scalar_multiple）・差（def_matrix_difference）で作り、
 # 最後の値を Sage の `*`・`-` で作った (αβ)(XW - WX) とも比べる。
 load("_prelude.sage")

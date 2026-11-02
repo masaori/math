@@ -84,6 +84,7 @@ export const ALL_LABELS = [
   "closed_form_log_integral",
   "commutation_V_plus_check_psi",
   "commutator_of_H_and_check_Z_Y",
+  "commutator_of_scalar_multiples",
   "commutator_via_anticommutators",
   "commuting_matrix_commutes_with_exp",
   "commuting_with_difference",

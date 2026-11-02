@@ -4286,7 +4286,13 @@ T_{(V^{(+)})}(X)
       paragraph([
         "と書く。右辺の係数は ",
         math(String.raw`\mathbb{C}`),
-        " の元である。",
+        " の元であり、係数に現れる ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）を表す。",
         math(String.raw`n`),
         " が偶数なら ",
         math(String.raw`n/2 \in \mathbb{Z}_{\geq 0}`),
@@ -4339,36 +4345,6 @@ T_{(V^{(+)})}(X)
     ],
     proof: [
       paragraph([
-        "準備（交換子の双線型性）。",
-        math(String.raw`\alpha, \beta \in \mathbb{C}`),
-        "、",
-        math(String.raw`X, W \in R`),
-        " について",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-[\alpha X, \beta W]
-&= (\alpha X)(\beta W) - (\beta W)(\alpha X)
-&&\bigl(\because\ \text{交換子の定義。}\blkref{def_ad_X_matrix}\bigr)\\
-&= \alpha\bigl(X(\beta W)\bigr) - (\beta W)(\alpha X)
-&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
-&= \alpha\bigl(\beta(XW)\bigr) - (\beta W)(\alpha X)
-&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
-&= (\alpha\beta)(XW) - (\beta W)(\alpha X)
-&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
-&= (\alpha\beta)(XW) - \beta\bigl(W(\alpha X)\bigr)
-&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
-&= (\alpha\beta)(XW) - \beta\bigl(\alpha(WX)\bigr)
-&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
-&= (\alpha\beta)(XW) - (\beta\alpha)(WX)
-&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
-&= (\alpha\beta)(XW) - (\alpha\beta)(WX)
-&&\bigl(\because\ \mathbb{C}\text{ の積の可換律}\bigr)\\
-&= (\alpha\beta)(XW - WX)
-&&\bigl(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\bigr)\\
-&= (\alpha\beta)[X, W]
-&&\bigl(\because\ \text{交換子の定義。}\blkref{def_ad_X_matrix}\bigr)
-\end{aligned}`),
-      paragraph([
         "準備（前提の読み方）。",
         ref("commutator_of_H_and_check_Z_Y"),
         " の (A)〜(D) の右辺の ",
@@ -4416,11 +4392,11 @@ C_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_1)_{\mathbb{C}} H_1^{(+)},\ \bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Z}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_1^{(+)},\ \check{Z}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu\bigr)
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_1^{(+)},\ \check{Z}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(A)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Y}_\mu
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の積の可換律と結合律}\bigr)\\
@@ -4436,11 +4412,11 @@ C_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_1)_{\mathbb{C}} H_1^{(+)},\ \bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\left[H_1^{(+)},\ \check{Y}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\text{ で}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigl(\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu\bigr)
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\left[H_1^{(+)},\ \check{Y}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\text{ で}\bigr)\\
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(B)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{(n-1)/2}(-1)\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の四則}\bigr)\\
@@ -4473,11 +4449,11 @@ D_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_1)_{\mathbb{C}} H_1^{(+)},\ \bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Y}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_1^{(+)},\ \check{Y}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu\bigr)
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_1^{(+)},\ \check{Y}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(B)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(-2\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{n/2}(-1)\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の四則}\bigr)\\
@@ -4493,11 +4469,11 @@ D_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_1)_{\mathbb{C}} H_1^{(+)},\ \bigl((-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\left[H_1^{(+)},\ \check{Z}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\text{ で}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigl(\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu\bigr)
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\left[H_1^{(+)},\ \check{Z}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_1)_{\mathbb{C}},\ \beta = (-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\text{ で}\bigr)\\
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\bigl(\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(A)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_1)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Y}_\mu
+&= \bigl((K_1)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigl(2\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{(n+1)/2}\bigl(2(K_1)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_1)_{\mathbb{C}}\bigr)\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の積の可換律と結合律}\bigr)\\
@@ -4528,11 +4504,11 @@ E_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_2^*)_{\mathbb{C}} H_2,\ \bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Z}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_2,\ \check{Z}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(-2\bigr)\check{Y}_\mu\bigr)
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_2,\ \check{Z}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(-2\bigr)\check{Y}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(C)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(-2\bigr)\bigr)\check{Y}_\mu
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(-2\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{n/2}(-1)\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の四則}\bigr)\\
@@ -4548,11 +4524,11 @@ E_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_2^*)_{\mathbb{C}} H_2,\ \bigl((-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Y}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_2,\ \check{Y}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(2\bigr)\check{Z}_\mu\bigr)
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_2,\ \check{Y}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(2\bigr)\check{Z}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(D)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2\bigr)\bigr)\check{Z}_\mu
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{(n+1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の積の可換律と結合律}\bigr)\\
@@ -4579,11 +4555,11 @@ F_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_2^*)_{\mathbb{C}} H_2,\ \bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Y}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_2,\ \check{Y}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(2\bigr)\check{Z}_\mu\bigr)
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_2,\ \check{Y}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(2\bigr)\check{Z}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(D)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2\bigr)\bigr)\check{Z}_\mu
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(2\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{n/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の積の可換律と結合律}\bigr)\\
@@ -4599,11 +4575,11 @@ F_{n+1}
 &&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\ \text{の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
 &= \left[(K_2^*)_{\mathbb{C}} H_2,\ \bigl((-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\check{Z}_\mu\right]
 &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\left[H_2,\ \check{Z}_\mu\right]
-&&\bigl(\because\ \text{準備の交換子の双線型性を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(\bigl(-2\bigr)\check{Y}_\mu\bigr)
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\left[H_2,\ \check{Z}_\mu\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\alpha = (K_2^*)_{\mathbb{C}},\ \beta = (-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\text{ で}\bigr)\\
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigr)\bigl(\bigl(-2\bigr)\check{Y}_\mu\bigr)
 &&\bigl(\because\ \blkref{commutator_of_H_and_check_Z_Y}\text{ の }(C)\text{（準備の読み方で）}\bigr)\\
-&= \bigl((K_2^*)_{\mathbb{C}}(-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(-2\bigr)\bigr)\check{Y}_\mu
+&= \bigl((K_2^*)_{\mathbb{C}}\bigl((-1)^{(n-1)/2}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigr)\bigl(-2\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
 &= \bigl((-1)^{(n-1)/2}(-1)\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^{n}\bigl(2(K_2^*)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu
 &&\bigl(\because\ \mathbb{C}\text{ の四則}\bigr)\\
@@ -4622,6 +4598,7 @@ F_{n+1}
         "M=2,3,4,5、μ=1..M、n=0..8、5 組の (K1,K2)（臨界点上・臨界点近傍を含む）で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02（全証明の SageMath 検算）: 主張の中で定めていた交換子と n 重の反復を def_ad_X_matrix の ad^n_X への参照にし、実数のスカラー K_1・K_2^* と θ̃_μ を inclusion_rr_to_cc の像 (K_1)_C・(K_2^*)_C・(θ̃)_C で書き、(−1) の冪の指数が ℤ_{≥0} に属することを書き、係数を一つの複素数にまとめてからスカラー倍で掛ける括弧を明示した（主張の中身は不変）。証明は、双線型性の鎖の名前だけの根拠をスカラー倍の主張へのラベル参照に、exp(-iθ̃)exp(iθ̃) = 1 を scalar_exp_product・scalar_exp_zero の鎖に、(A)〜(D) を commutator_of_H_and_check_Z_Y へのラベル参照に、基底段階に単位元の行を、(A)〜(D) の右辺をスカラー倍として読むことを準備に書き、二つの帰納段階の鎖の末尾に冪の約束と指数の等式の行を足して n+1 の主張の右辺まで一続きにし、鎖の後の散文の照合を除いた。検算は sagemath/check/nesting_of_commutator_of_H_and_check_Z/（円分体と不定元で厳密）。",
+        "2026-11-02（cosh_sinh_coefficient_conversion_for_check の検算）: 証明の冒頭の準備（交換子の双線型性）の鎖を、同じ事実を使う cosh_sinh_coefficient_conversion_for_check と共有するため独立の主張 commutator_of_scalar_multiples に切り出し、帰納段階の 8 か所の根拠をそれへのラベル参照にした（鎖の中身は不変）。",
       ],
     },
   },
@@ -4637,363 +4614,409 @@ F_{n+1}
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
         " とし、",
-        math(String.raw`\tilde\theta := \tilde\theta_\mu`),
-        " と略記する。",
+        math(String.raw`\tilde\theta := \tilde\theta_\mu \in \mathbb{R}`),
+        "（",
+        ref("antiperiodic_exp_sum"),
+        "）と略記し、",
+        math(String.raw`(\tilde\theta)_{\mathbb{C}} \in \mathbb{C}`),
+        " をその ",
+        ref("inclusion_rr_to_cc"),
+        " による像とする。",
+        math(String.raw`R := \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "、",
+        math(String.raw`H_1^{(+)}, H_2, \check{Z}_\mu, \check{Y}_\mu \in R`),
+        "、",
+        math(String.raw`K_1, K_2^* \in \mathbb{R}`),
+        " とその像 ",
+        math(String.raw`(K_1)_{\mathbb{C}}, (K_2^*)_{\mathbb{C}} \in \mathbb{C}`),
+        "、",
+        math(String.raw`n`),
+        " 重交換子の記法 ",
+        math(String.raw`\underbrace{[X,\dots,[X, W]\dots]}_{n} := \mathrm{ad}^{n}_X(W)`),
+        "（",
+        ref("def_ad_X_matrix"),
+        "）は ",
+        ref("nesting_of_commutator_of_H_and_check_Z"),
+        " のものとする。",
+        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
+        " を虚数単位、",
+        math(String.raw`-i := (-1_{\mathbb{C}})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）とし、",
+        math(String.raw`2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
+        " の逆元 ",
+        math(String.raw`2_{\mathbb{C}}^{-1}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        "）で ",
+        math(String.raw`\tfrac{i}{2} := i\,2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        " と書く。冪は ",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " の約束 ",
+        math(String.raw`x^{0} := 1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`x^{m+1} := x^{m}x`),
+        " による。この主張の係数に現れる ",
+        math(String.raw`2`),
+        " は ",
+        math(String.raw`2_{\mathbb{C}}`),
+        " を表す。係数と行列の積はスカラー倍（",
+        ref("def_matrix_scalar_multiple"),
+        "）である。このとき次が成り立つ。",
       ]),
       paragraph(["(h1.z)"]),
       displayMath(
-        String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
+        String.raw`\underbrace{\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
-i K_1^n \exp(-i\tilde\theta)\,\check{Y}_\mu & (n \text{ 奇数}) \\
-K_1^n\,\check{Z}_\mu & (n \text{ 偶数})
+\bigl(i\,(K_1)_{\mathbb{C}}^{\,n} \exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Y}_\mu & (n \text{ 奇数}) \\
+(K_1)_{\mathbb{C}}^{\,n}\,\check{Z}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
       paragraph(["(h1.y)"]),
       displayMath(
-        String.raw`\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
+        String.raw`\underbrace{\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
--i K_1^n \exp(i\tilde\theta)\,\check{Z}_\mu & (n \text{ 奇数}) \\
-K_1^n\,\check{Y}_\mu & (n \text{ 偶数})
+\bigl((-i)\,(K_1)_{\mathbb{C}}^{\,n} \exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)\check{Z}_\mu & (n \text{ 奇数}) \\
+(K_1)_{\mathbb{C}}^{\,n}\,\check{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
       paragraph(["(h2.z)"]),
       displayMath(
-        String.raw`\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Z}_\mu\right]\dots\right]}_{n}
+        String.raw`\underbrace{\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\dots,\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
--i (2K_2^*)^n\,\check{Y}_\mu & (n \text{ 奇数}) \\
-(2K_2^*)^n\,\check{Z}_\mu & (n \text{ 偶数})
+\bigl((-i)\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^n\bigr)\check{Y}_\mu & (n \text{ 奇数}) \\
+\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^n\,\check{Z}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
       paragraph(["(h2.y)"]),
       displayMath(
-        String.raw`\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Y}_\mu\right]\dots\right]}_{n}
+        String.raw`\underbrace{\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\dots,\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
 = \begin{cases}
-i (2K_2^*)^n\,\check{Z}_\mu & (n \text{ 奇数}) \\
-(2K_2^*)^n\,\check{Y}_\mu & (n \text{ 偶数})
+\bigl(i\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^n\bigr)\check{Z}_\mu & (n \text{ 奇数}) \\
+\bigl(2(K_2^*)_{\mathbb{C}}\bigr)^n\,\check{Y}_\mu & (n \text{ 偶数})
 \end{cases}`,
       ),
     ],
     proof: [
       paragraph([
-        "まず 4 式すべてで用いる 2 つの補題を用意する（いずれも ",
-        math(String.raw`\check{Z}, \check{Y}`),
-        " とは無関係に ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の任意の元について成り立つ）。",
-      ]),
-      paragraph([
-        "補題 1（生成子のスカラー倍）：",
+        "準備（生成子のスカラー倍）。",
         math(String.raw`\alpha \in \mathbb{C}`),
         "、",
-        math(String.raw`X, W \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        "、",
-        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
-        " について",
+        math(String.raw`X, W \in R`),
+        " とし、",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " についての帰納法で",
       ]),
-      displayMath(
-        String.raw`\underbrace{[\alpha X,\dots,[\alpha X, W]\dots]}_{n}
-= \alpha^{n}\,\underbrace{[X,\dots,[X, W]\dots]}_{n}`,
-      ),
-      paragraph([
-        "が成り立つ。実際、交換子の第 1 引数についての ",
-        math(String.raw`\mathbb{C}`),
-        " 線型性より、任意の ",
-        math(String.raw`W`),
-        " について次の一続きが成り立つ。",
-      ]),
+      displayMath(String.raw`\mathrm{ad}^{m}_{\alpha X}(W) = \alpha^{m}\,\mathrm{ad}^{m}_{X}(W) \qquad (\star)`),
+      paragraph(["を示す。基底段階（", math(String.raw`m = 0`), "）。"]),
       displayMath(String.raw`\begin{aligned}
-\mathrm{ad}_{\alpha X}(W)
-&=[\alpha X,W]
-&&\bigl(\because\ \mathrm{ad}\text{ の定義}\bigr)\\
-&=\alpha[X,W]
-&&\bigl(\because\ \text{交換子の第 1 引数についての }\mathbb{C}\text{ 線型性}\bigr)\\
-&=\alpha\,\mathrm{ad}_X(W)
-&&\bigl(\because\ \mathrm{ad}\text{ の定義}\bigr)
+\mathrm{ad}^{0}_{\alpha X}(W)
+&= W
+&&\bigl(\because\ \mathrm{ad}^{0}_X(W) = W\text{。}\blkref{def_ad_X_matrix}\bigr)\\
+&= 1_{\mathbb{C}}\,W
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&= \alpha^{0}\,W
+&&\bigl(\because\ \text{冪の約束 }x^{0} := 1_{\mathbb{C}}\text{。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \alpha^{0}\,\mathrm{ad}^{0}_{X}(W)
+&&\bigl(\because\ \mathrm{ad}^{0}_X(W) = W\text{。}\blkref{def_ad_X_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["帰納段階。", math(String.raw`m`), " で (", math(String.raw`\star`), ") を仮定する。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{ad}^{m+1}_{\alpha X}(W)
+&= \left[\alpha X,\ \mathrm{ad}^{m}_{\alpha X}(W)\right]
+&&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\text{ の再帰。}\blkref{def_ad_X_matrix}\bigr)\\
+&= \left[\alpha X,\ \alpha^{m}\,\mathrm{ad}^{m}_{X}(W)\right]
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \bigl(\alpha\,\alpha^{m}\bigr)\left[X,\ \mathrm{ad}^{m}_{X}(W)\right]
+&&\bigl(\because\ \blkref{commutator_of_scalar_multiples}\text{ を }\beta = \alpha^{m},\ W \to \mathrm{ad}^{m}_{X}(W)\text{ で}\bigr)\\
+&= \bigl(\alpha^{m}\,\alpha\bigr)\left[X,\ \mathrm{ad}^{m}_{X}(W)\right]
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \alpha^{m+1}\left[X,\ \mathrm{ad}^{m}_{X}(W)\right]
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \alpha^{m+1}\,\mathrm{ad}^{m+1}_{X}(W)
+&&\bigl(\because\ \mathrm{ad}^{m+1}_X(W) = [X,\mathrm{ad}^{m}_X(W)]\text{ の再帰。}\blkref{def_ad_X_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["準備（", math(String.raw`i\,i`), " と ", math(String.raw`(-1_{\mathbb{C}})(-1_{\mathbb{C}})`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+i\,i
+&= (0_{\mathbb{R}}, 1_{\mathbb{R}})(0_{\mathbb{R}}, 1_{\mathbb{R}})
+&&\bigl(\because\ i\text{ の定義}\bigr)\\
+&= \bigl(0_{\mathbb{R}}0_{\mathbb{R}} - 1_{\mathbb{R}}1_{\mathbb{R}},\ 0_{\mathbb{R}}1_{\mathbb{R}} + 1_{\mathbb{R}}0_{\mathbb{R}}\bigr)
+&&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
+&= (-1_{\mathbb{R}}, 0_{\mathbb{R}})
+&&\bigl(\because\ \mathbb{R}\text{ の四則}\bigr)\\
+&= -1_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}} = (1_{\mathbb{R}}, 0_{\mathbb{R}})\text{ の加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(-1_{\mathbb{C}})(-1_{\mathbb{C}})
+&= (-1_{\mathbb{R}}, 0_{\mathbb{R}})(-1_{\mathbb{R}}, 0_{\mathbb{R}})
+&&\bigl(\because\ 1_{\mathbb{C}} = (1_{\mathbb{R}}, 0_{\mathbb{R}})\text{ の加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl((-1_{\mathbb{R}})(-1_{\mathbb{R}}) - 0_{\mathbb{R}}0_{\mathbb{R}},\ (-1_{\mathbb{R}})0_{\mathbb{R}} + 0_{\mathbb{R}}(-1_{\mathbb{R}})\bigr)
+&&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
+&= (1_{\mathbb{R}}, 0_{\mathbb{R}})
+&&\bigl(\because\ \mathbb{R}\text{ の四則}\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`),
       paragraph([
-        "任意の ",
-        math(String.raw`W`),
-        " で成り立つので、線型写像として ",
-        math(String.raw`\mathrm{ad}_{\alpha X}=\alpha\,\mathrm{ad}_X`),
-        " である。したがって、",
+        "準備（係数の冪その一）。",
+        math(String.raw`k \in \mathbb{C}`),
+        " とし、",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " についての帰納法で",
       ]),
+      displayMath(String.raw`\left(\tfrac{i}{2}\right)^{m}(2k)^{m} = i^{m}k^{m} \qquad (\dagger)`),
+      paragraph(["を示す。基底段階（", math(String.raw`m = 0`), "）。"]),
       displayMath(String.raw`\begin{aligned}
-\mathrm{ad}_{\alpha X}^{\,n}
-&=(\alpha\,\mathrm{ad}_X)^n
-&&\bigl(\because\ \mathrm{ad}_{\alpha X}=\alpha\,\mathrm{ad}_X\bigr)\\
-&=\alpha^n\,\mathrm{ad}_X^{\,n}
-&&\bigl(\because\ \mathrm{ad}_X\text{ は }\mathbb{C}\text{ 線型であり、合成の各段からスカラーを前へ出せる}\bigr)
+\left(\tfrac{i}{2}\right)^{0}(2k)^{0}
+&= 1_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \text{冪の約束 }x^{0} := 1_{\mathbb{C}}\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= i^{0}k^{0}
+&&\bigl(\because\ \text{冪の約束 }x^{0} := 1_{\mathbb{C}}\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)
+\end{aligned}`),
+      paragraph(["帰納段階。", math(String.raw`m`), " で (", math(String.raw`\dagger`), ") を仮定する。"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\tfrac{i}{2}\right)^{m+1}(2k)^{m+1}
+&= \Bigl(\left(\tfrac{i}{2}\right)^{m}\tfrac{i}{2}\Bigr)\bigl((2k)^{m}(2k)\bigr)
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \Bigl(\left(\tfrac{i}{2}\right)^{m}(2k)^{m}\Bigr)\Bigl(\tfrac{i}{2}(2k)\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(i^{m}k^{m}\bigr)\Bigl(\tfrac{i}{2}(2k)\Bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \bigl(i^{m}k^{m}\bigr)\Bigl(\bigl(i\,2_{\mathbb{C}}^{-1}\bigr)(2_{\mathbb{C}}k)\Bigr)
+&&\bigl(\because\ \tfrac{i}{2} := i\,2_{\mathbb{C}}^{-1}\bigr)\\
+&= \bigl(i^{m}k^{m}\bigr)\Bigl(\bigl(i\,(2_{\mathbb{C}}^{-1}2_{\mathbb{C}})\bigr)k\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(i^{m}k^{m}\bigr)\bigl((i\,1_{\mathbb{C}})k\bigr)
+&&\bigl(\because\ 2_{\mathbb{C}}^{-1}\text{ は }2_{\mathbb{C}}\text{ の逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(i^{m}k^{m}\bigr)(ik)
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(i^{m}i\bigr)\bigl(k^{m}k\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= i^{m+1}k^{m+1}
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)
 \end{aligned}`),
       paragraph([
-        math(String.raw`n = 0`),
-        " のときは両辺とも恒等写像で ",
-        math(String.raw`\alpha^0 = 1`),
-        " により成立する。",
+        "準備（係数の冪その二）。",
+        math(String.raw`l \in \mathbb{Z}_{\geq 0}`),
+        " についての帰納法で",
       ]),
+      displayMath(String.raw`i^{2l}(-1_{\mathbb{C}})^{l} = 1_{\mathbb{C}} \qquad (\ddagger)`),
+      paragraph(["を示す。基底段階（", math(String.raw`l = 0`), "）。"]),
+      displayMath(String.raw`\begin{aligned}
+i^{2\cdot 0}(-1_{\mathbb{C}})^{0}
+&= i^{0}(-1_{\mathbb{C}})^{0}
+&&\bigl(\because\ 2\cdot 0 = 0\ (\mathbb{Z})\bigr)\\
+&= 1_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \text{冪の約束 }x^{0} := 1_{\mathbb{C}}\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["帰納段階。", math(String.raw`l`), " で (", math(String.raw`\ddagger`), ") を仮定する。"]),
+      displayMath(String.raw`\begin{aligned}
+i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
+&= i^{(2l+1)+1}(-1_{\mathbb{C}})^{l+1}
+&&\bigl(\because\ 2(l+1) = (2l+1)+1\ (\mathbb{Z})\bigr)\\
+&= \bigl(\bigl(i^{2l}\,i\bigr)i\bigr)\bigl((-1_{\mathbb{C}})^{l}(-1_{\mathbb{C}})\bigr)
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を三か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)\bigl((i\,i)(-1_{\mathbb{C}})\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= 1_{\mathbb{C}}\bigl((i\,i)(-1_{\mathbb{C}})\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= 1_{\mathbb{C}}\bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)
+&&\bigl(\because\ \text{準備の }i\,i = -1_{\mathbb{C}}\bigr)\\
+&= 1_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \text{準備の }(-1_{\mathbb{C}})(-1_{\mathbb{C}}) = 1_{\mathbb{C}}\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
       paragraph([
-        "補題 2（虚数単位の冪）：",
-        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
-        " について",
+        "以下、",
+        math(String.raw`n`),
+        " が奇数のときは ",
+        math(String.raw`l := (n-1)/2 \in \mathbb{Z}_{\geq 0}`),
+        "（このとき ",
+        math(String.raw`n = 2l+1`),
+        "、",
+        math(String.raw`(n+1)/2 = l+1`),
+        "）、偶数のときは ",
+        math(String.raw`l := n/2 \in \mathbb{Z}_{\geq 0}`),
+        "（このとき ",
+        math(String.raw`n = 2l`),
+        "）とし、",
+        math(String.raw`k_1 := (K_1)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`k_2 := (K_2^*)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`e_{\mp} := \exp\bigl(\mp i(\tilde\theta)_{\mathbb{C}}\bigr) \in \mathbb{C}`),
+        " と略記する。",
       ]),
-      displayMath(
-        String.raw`i^{n} = \begin{cases}
-i\,(-1)^{(n-1)/2} & (n \text{ 奇数}) \\
-(-1)^{n/2} & (n \text{ 偶数})
-\end{cases}`,
-      ),
+      paragraph(["(h1.z)、", math(String.raw`n`), " が奇数のとき。"]),
+      displayMath(String.raw`\begin{aligned}
+\underbrace{\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{\frac{i}{2}(k_1 H_1^{(+)})}(\check{Z}_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\mathrm{ad}^{n}_{k_1 H_1^{(+)}}(\check{Z}_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = \tfrac{i}{2},\ X = k_1 H_1^{(+)},\ W = \check{Z}_\mu,\ m = n\text{ で}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l}(2k_1)^{n}e_{-}\bigr)\check{Y}_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.z) の奇数の場合と }(n-1)/2 = l\bigr)\\
+&= \Bigl(\left(\tfrac{i}{2}\right)^{n}\bigl((-1_{\mathbb{C}})^{l}(2k_1)^{n}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(\Bigl(\left(\tfrac{i}{2}\right)^{n}(2k_1)^{n}\Bigr)\bigl((-1_{\mathbb{C}})^{l}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(\bigl(i^{n}k_1^{\,n}\bigr)\bigl((-1_{\mathbb{C}})^{l}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \text{準備の }(\dagger)\text{ を }k = k_1,\ m = n\text{ で}\bigr)\\
+&= \Bigl(\bigl(i^{2l+1}k_1^{\,n}\bigr)\bigl((-1_{\mathbb{C}})^{l}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ n = 2l+1\bigr)\\
+&= \Bigl(\bigl(\bigl(i^{2l}\,i\bigr)k_1^{\,n}\bigr)\bigl((-1_{\mathbb{C}})^{l}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)\bigl(i\,k_1^{\,n}e_{-}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(1_{\mathbb{C}}\bigl(i\,k_1^{\,n}e_{-}\bigr)\bigr)\check{Y}_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= \bigl(i\,k_1^{\,n}e_{-}\bigr)\check{Y}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
       paragraph([
-        "が成り立つ。実際 ",
-        math(String.raw`i^2 = -1`),
-        " を使う。",
+        "(h1.z)・(h1.y)、",
+        math(String.raw`n`),
+        " が偶数のとき。",
+        math(String.raw`W_\mu \in \{\check{Z}_\mu, \check{Y}_\mu\}`),
+        " とする（",
+        math(String.raw`W_\mu = \check{Z}_\mu`),
+        " が (h1.z)、",
+        math(String.raw`W_\mu = \check{Y}_\mu`),
+        " が (h1.y) である）。",
       ]),
       displayMath(String.raw`\begin{aligned}
-i^n
-&=(i^2)^{n/2}
-&&\bigl(\because\ n\text{ が偶数なら }n=2(n/2)\bigr)\\
-&=(-1)^{n/2}
-&&\bigl(\because\ i^2=-1\bigr)
-\end{aligned}
-\qquad(n\text{ が偶数})`),
+\underbrace{\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),W_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{\frac{i}{2}(k_1 H_1^{(+)})}(W_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\mathrm{ad}^{n}_{k_1 H_1^{(+)}}(W_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = \tfrac{i}{2},\ X = k_1 H_1^{(+)},\ W = W_\mu,\ m = n\text{ で}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l}(2k_1)^{n}\bigr)W_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.z)・(h1.y) の偶数の場合と }n/2 = l\bigr)\\
+&= \Bigl(\left(\tfrac{i}{2}\right)^{n}\bigl((-1_{\mathbb{C}})^{l}(2k_1)^{n}\bigr)\Bigr)W_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(\Bigl(\left(\tfrac{i}{2}\right)^{n}(2k_1)^{n}\Bigr)(-1_{\mathbb{C}})^{l}\Bigr)W_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(\bigl(i^{n}k_1^{\,n}\bigr)(-1_{\mathbb{C}})^{l}\Bigr)W_\mu
+&&\bigl(\because\ \text{準備の }(\dagger)\text{ を }k = k_1,\ m = n\text{ で}\bigr)\\
+&= \Bigl(\bigl(i^{2l}k_1^{\,n}\bigr)(-1_{\mathbb{C}})^{l}\Bigr)W_\mu
+&&\bigl(\because\ n = 2l\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)k_1^{\,n}\Bigr)W_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(1_{\mathbb{C}}\,k_1^{\,n}\bigr)W_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= k_1^{\,n}\,W_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["(h1.y)、", math(String.raw`n`), " が奇数のとき。"]),
       displayMath(String.raw`\begin{aligned}
-i^n
-&=i\,(i^2)^{(n-1)/2}
-&&\bigl(\because\ n\text{ が奇数なら }n=1+2((n-1)/2)\bigr)\\
-&=i\,(-1)^{(n-1)/2}
-&&\bigl(\because\ i^2=-1\bigr)
-\end{aligned}
-\qquad(n\text{ が奇数})`),
-      paragraph(["いずれの指数も整数である。"]),
+\underbrace{\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl(k_1 H_1^{(+)}\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{\frac{i}{2}(k_1 H_1^{(+)})}(\check{Y}_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\mathrm{ad}^{n}_{k_1 H_1^{(+)}}(\check{Y}_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = \tfrac{i}{2},\ X = k_1 H_1^{(+)},\ W = \check{Y}_\mu,\ m = n\text{ で}\bigr)\\
+&= \left(\tfrac{i}{2}\right)^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l+1}(2k_1)^{n}e_{+}\bigr)\check{Z}_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.y) の奇数の場合と }(n+1)/2 = l+1\bigr)\\
+&= \Bigl(\left(\tfrac{i}{2}\right)^{n}\bigl((-1_{\mathbb{C}})^{l+1}(2k_1)^{n}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(\Bigl(\left(\tfrac{i}{2}\right)^{n}(2k_1)^{n}\Bigr)\bigl((-1_{\mathbb{C}})^{l+1}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(\bigl(i^{n}k_1^{\,n}\bigr)\bigl((-1_{\mathbb{C}})^{l+1}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \text{準備の }(\dagger)\text{ を }k = k_1,\ m = n\text{ で}\bigr)\\
+&= \Bigl(\bigl(i^{2l+1}k_1^{\,n}\bigr)\bigl((-1_{\mathbb{C}})^{l+1}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ n = 2l+1\bigr)\\
+&= \Bigl(\bigl(\bigl(i^{2l}\,i\bigr)k_1^{\,n}\bigr)\bigl(\bigl((-1_{\mathbb{C}})^{l}(-1_{\mathbb{C}})\bigr)e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)\bigl(\bigl((-1_{\mathbb{C}})\,i\bigr)k_1^{\,n}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(1_{\mathbb{C}}\bigl(\bigl((-1_{\mathbb{C}})\,i\bigr)k_1^{\,n}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= \Bigl(1_{\mathbb{C}}\bigl((-i)\,k_1^{\,n}e_{+}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ -i := (-1_{\mathbb{C}})\,i\text{。}\blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl((-i)\,k_1^{\,n}e_{+}\bigr)\check{Z}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["(h2.z)、", math(String.raw`n`), " が奇数のとき。"]),
+      displayMath(String.raw`\begin{aligned}
+\underbrace{\left[i\bigl(k_2 H_2\bigr),\dots,\left[i\bigl(k_2 H_2\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{i(k_2 H_2)}(\check{Z}_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= i^{n}\,\mathrm{ad}^{n}_{k_2 H_2}(\check{Z}_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = i,\ X = k_2 H_2,\ W = \check{Z}_\mu,\ m = n\text{ で}\bigr)\\
+&= i^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l+1}(2k_2)^{n}\bigr)\check{Y}_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.z) の奇数の場合と }(n+1)/2 = l+1\bigr)\\
+&= \Bigl(i^{n}\bigl((-1_{\mathbb{C}})^{l+1}(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(i^{2l+1}\bigl((-1_{\mathbb{C}})^{l+1}(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ n = 2l+1\bigr)\\
+&= \Bigl(\bigl(i^{2l}\,i\bigr)\bigl(\bigl((-1_{\mathbb{C}})^{l}(-1_{\mathbb{C}})\bigr)(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{ を二か所へ。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)\bigl(\bigl((-1_{\mathbb{C}})\,i\bigr)(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(1_{\mathbb{C}}\bigl(\bigl((-1_{\mathbb{C}})\,i\bigr)(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= \Bigl(1_{\mathbb{C}}\bigl((-i)(2k_2)^{n}\bigr)\Bigr)\check{Y}_\mu
+&&\bigl(\because\ -i := (-1_{\mathbb{C}})\,i\text{。}\blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl((-i)(2k_2)^{n}\bigr)\check{Y}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["(h2.y)、", math(String.raw`n`), " が奇数のとき。"]),
+      displayMath(String.raw`\begin{aligned}
+\underbrace{\left[i\bigl(k_2 H_2\bigr),\dots,\left[i\bigl(k_2 H_2\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{i(k_2 H_2)}(\check{Y}_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= i^{n}\,\mathrm{ad}^{n}_{k_2 H_2}(\check{Y}_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = i,\ X = k_2 H_2,\ W = \check{Y}_\mu,\ m = n\text{ で}\bigr)\\
+&= i^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\check{Z}_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.y) の奇数の場合と }(n-1)/2 = l\bigr)\\
+&= \Bigl(i^{n}\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(i^{2l+1}\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ n = 2l+1\bigr)\\
+&= \Bigl(\bigl(i^{2l}\,i\bigr)\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \text{冪の約束 }x^{m+1} := x^{m}x\text{。}\blkref{scalar_exp_is_limit_of_partial_sums}\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)\bigl(i\,(2k_2)^{n}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律・結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(1_{\mathbb{C}}\bigl(i\,(2k_2)^{n}\bigr)\Bigr)\check{Z}_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= \bigl(i\,(2k_2)^{n}\bigr)\check{Z}_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
       paragraph([
-        "(h1.z) について、補題 1 を ",
-        math(String.raw`\alpha = \tfrac{i}{2}`),
-        "、",
-        math(String.raw`X = K_1 H_1^{(+)}`),
-        "、",
-        math(String.raw`W = \check{Z}_\mu`),
-        " として使い、",
-        ref("nesting_of_commutator_of_H_and_check_Z"),
-        " (h1.z) を代入する。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-&= \left(\tfrac{i}{2}\right)^{n}
-   \underbrace{\left[K_1 H_1^{(+)},\dots,\left[K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{補題 1}) \\
-&= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n-1)/2}(2K_1)^{n} \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_1)^{n}\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.z)}) \\
-&= i^n2^{-n}\begin{cases}
-(-1)^{(n-1)/2}(2K_1)^n\exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_1)^n\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because (i/2)^n=i^n2^{-n}) \\
-&= i^n2^{-n}\begin{cases}
-(-1)^{(n-1)/2}2^nK_1^n\exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}2^nK_1^n\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because (2K_1)^n=2^nK_1^n) \\
-&= \begin{cases}
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \mathbb C\text{ の分配律・交換律}) \\
-&= \begin{cases}
-i^{n}\,(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because 2^{-n}2^{n} = 2^{0} = 1\right) \\
-&= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \text{補題 2}) \\
-&= \begin{cases}
-i\,(-1)^{n-1}\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n}\,K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because \frac{n-1}{2}+\frac{n-1}{2} = n-1,\ \frac{n}{2}+\frac{n}{2} = n\right) \\
-&= \begin{cases}
-i\,K_1^{n}\, \exp(-i\tilde\theta)\check{Y}_\mu & (n\text{ 奇数}) \\
-K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because n \text{ 奇数なら } (-1)^{n-1} = 1,\ n \text{ 偶数なら } (-1)^{n} = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "最後の等号は、",
+        "(h2.z)・(h2.y)、",
         math(String.raw`n`),
-        " が奇数なら ",
-        math(String.raw`n-1`),
-        " が偶数で ",
-        math(String.raw`(-1)^{n-1} = 1`),
-        "、",
-        math(String.raw`n`),
-        " が偶数なら ",
-        math(String.raw`(-1)^{n} = 1`),
-        " による。",
+        " が偶数のとき。",
+        math(String.raw`W_\mu \in \{\check{Z}_\mu, \check{Y}_\mu\}`),
+        " とする（",
+        math(String.raw`W_\mu = \check{Z}_\mu`),
+        " が (h2.z)、",
+        math(String.raw`W_\mu = \check{Y}_\mu`),
+        " が (h2.y) である）。",
       ]),
-      paragraph([
-        "(h1.y) について、補題 1 を ",
-        math(String.raw`\alpha = \tfrac{i}{2}`),
-        "、",
-        math(String.raw`X = K_1 H_1^{(+)}`),
-        "、",
-        math(String.raw`W = \check{Y}_\mu`),
-        " として使い、",
-        ref("nesting_of_commutator_of_H_and_check_Z"),
-        " (h1.y) を代入する。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-&= \left(\tfrac{i}{2}\right)^{n}
-   \underbrace{\left[K_1 H_1^{(+)},\dots,\left[K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{補題 1}) \\
-&= \left(\tfrac{i}{2}\right)^{n}\begin{cases}
-(-1)^{(n+1)/2}(2K_1)^{n} \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_1)^{n}\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h1.y)}) \\
-&= i^n2^{-n}\begin{cases}
-(-1)^{(n+1)/2}(2K_1)^n\exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_1)^n\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because (i/2)^n=i^n2^{-n}) \\
-&= i^n2^{-n}\begin{cases}
-(-1)^{(n+1)/2}2^nK_1^n\exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}2^nK_1^n\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because (2K_1)^n=2^nK_1^n) \\
-&= \begin{cases}
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-i^{n}\,2^{-n}\,2^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \mathbb C\text{ の分配律・交換律}) \\
-&= \begin{cases}
-i^{n}\,(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-i^{n}\,(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because 2^{-n}2^{n} = 2^{0} = 1\right) \\
-&= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(-1)^{n/2}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \text{補題 2}) \\
-&= \begin{cases}
-i\,(-1)^{n}\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n}\,K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because \frac{n-1}{2}+\frac{n+1}{2} = n\right) \\
-&= \begin{cases}
--i\,K_1^{n}\, \exp(i\tilde\theta)\check{Z}_\mu & (n\text{ 奇数}) \\
-K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because n \text{ 奇数なら } (-1)^{n} = -1,\ n \text{ 偶数なら } (-1)^{n} = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "最後の等号は、",
-        math(String.raw`n`),
-        " が奇数なら ",
-        math(String.raw`(-1)^{n} = -1`),
-        "、偶数なら ",
-        math(String.raw`(-1)^{n} = 1`),
-        " による。",
-      ]),
-      paragraph([
-        "(h2.z) について、補題 1 を ",
-        math(String.raw`\alpha = i`),
-        "、",
-        math(String.raw`X = K_2^* H_2`),
-        "、",
-        math(String.raw`W = \check{Z}_\mu`),
-        " として使う。今回は ",
-        math(String.raw`\alpha = i`),
-        " なので ",
-        math(String.raw`2`),
-        " の冪が現れず、",
-        math(String.raw`(2K_2^*)^n`),
-        " はそのまま残る。代入する ",
-        math(String.raw`n`),
-        " 重交換子は ",
-        ref("nesting_of_commutator_of_H_and_check_Z"),
-        " (h2.z) である。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Z}_\mu\right]\dots\right]}_{n}
-&= i^{n}
-   \underbrace{\left[K_2^* H_2,\dots,\left[K_2^* H_2,\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{補題 1}) \\
-&= i^{n}\begin{cases}
-(-1)^{(n+1)/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.z)}) \\
-&= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n+1)/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \text{補題 2}) \\
-&= \begin{cases}
-i\,(-1)^{n}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
-(-1)^{n}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because \frac{n-1}{2}+\frac{n+1}{2} = n,\ \frac{n}{2}+\frac{n}{2} = n\right) \\
-&= \begin{cases}
--i\,(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 奇数}) \\
-(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because n \text{ 奇数なら } (-1)^n = -1,\ n \text{ 偶数なら } (-1)^n = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "(h2.y) について、補題 1 を ",
-        math(String.raw`\alpha = i`),
-        "、",
-        math(String.raw`X = K_2^* H_2`),
-        "、",
-        math(String.raw`W = \check{Y}_\mu`),
-        " として使い、",
-        ref("nesting_of_commutator_of_H_and_check_Z"),
-        " (h2.y) を代入する。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Y}_\mu\right]\dots\right]}_{n}
-&= i^{n}
-   \underbrace{\left[K_2^* H_2,\dots,\left[K_2^* H_2,\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \text{補題 1}) \\
-&= i^{n}\begin{cases}
-(-1)^{(n-1)/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.y)}) \\
-&= \begin{cases}
-i\,(-1)^{(n-1)/2}(-1)^{(n-1)/2}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n/2}(-1)^{n/2}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \text{補題 2}) \\
-&= \begin{cases}
-i\,(-1)^{n-1}(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
-(-1)^{n}(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad \left(\because \frac{n-1}{2}+\frac{n-1}{2} = n-1,\ \frac{n}{2}+\frac{n}{2} = n\right) \\
-&= \begin{cases}
-i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
-(2K_2^*)^{n}\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because n \text{ 奇数なら } (-1)^{n-1} = 1,\ n \text{ 偶数なら } (-1)^n = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "以上 4 式が、",
-        ref("nesting_of_commutator_of_H_and_check_Z"),
-        " の各式に補題 1・補題 2 を適用して得られた。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\underbrace{\left[i\bigl(k_2 H_2\bigr),\dots,\left[i\bigl(k_2 H_2\bigr),W_\mu\right]\dots\right]}_{n}
+&= \mathrm{ad}^{n}_{i(k_2 H_2)}(W_\mu)
+&&\bigl(\because\ n\text{ 重交換子の記法}\bigr)\\
+&= i^{n}\,\mathrm{ad}^{n}_{k_2 H_2}(W_\mu)
+&&\bigl(\because\ \text{準備の }(\star)\text{ を }\alpha = i,\ X = k_2 H_2,\ W = W_\mu,\ m = n\text{ で}\bigr)\\
+&= i^{n}\Bigl(\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)W_\mu\Bigr)
+&&\bigl(\because\ \blkref{nesting_of_commutator_of_H_and_check_Z}\text{ (h2.z)・(h2.y) の偶数の場合と }n/2 = l\bigr)\\
+&= \Bigl(i^{n}\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\Bigr)W_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= \Bigl(i^{2l}\bigl((-1_{\mathbb{C}})^{l}(2k_2)^{n}\bigr)\Bigr)W_\mu
+&&\bigl(\because\ n = 2l\bigr)\\
+&= \Bigl(\bigl(i^{2l}(-1_{\mathbb{C}})^{l}\bigr)(2k_2)^{n}\Bigr)W_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(1_{\mathbb{C}}(2k_2)^{n}\bigr)W_\mu
+&&\bigl(\because\ \text{準備の }(\ddagger)\bigr)\\
+&= (2k_2)^{n}\,W_\mu
+&&\bigl(\because\ \mathbb{C}\text{ の積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
@@ -5001,6 +5024,7 @@ i\,(2K_2^*)^{n}\check{Z}_\mu & (n\text{ 奇数}) \\
         "008 章の cosh_sinh_coefficient_conversion と同一形の計算を半整数運動量について繰り返したもの。用いる補題 1・補題 2 は θ にも Z,Y にも依存しない純代数的な主張なので、そのまま同じものを使える。",
         "M=2,3,4,5、μ=1..M、n=0..8 で数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_01_nested_commutators.sage の scaled 列）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02（全証明の SageMath 検算。sagemath/check/cosh_sinh_coefficient_conversion_for_check/）: 主張を nesting_of_commutator_of_H_and_check_Z の新しい表記にそろえ、K_1・K_2^*・θ̃ を inclusion_rr_to_cc の像で、生成子をスカラー倍 (i/2)((K_1)_C H_1^{(+)})・i((K_2^*)_C H_2) と、係数を一つの複素数にまとめたスカラー倍で書き、i・-i・i/2 と冪の約束を明記した（主張の中身は不変）。証明は、補題 1 の散文（「合成の各段からスカラーを前へ出せる」）を m についての帰納法の鎖に、その中の交換子の線型性を新しい主張 commutator_of_scalar_multiples への参照に、補題 2（i^n の偶奇。偶数冪・積の冪の法則を根拠なしで使っていた）と各鎖の (i/2)^n = i^n 2^{-n}・(2K_1)^n = 2^n K_1^n・(-1)^{a}(-1)^{b} = (-1)^{a+b} の行を、冪の約束だけから帰納法で示す二つの準備 (i/2)^m(2k)^m = i^m k^m と i^{2l}(-1)^l = 1 に置き換え、i i = -1 と (-1)(-1) = 1 を definition_of_cc の積から示した。偶数の場合は (h1.z)・(h1.y)、(h2.z)・(h2.y) をそれぞれ一本の鎖にまとめ、鎖の後の散文の照合を除いた。",
       ],
     },
   },

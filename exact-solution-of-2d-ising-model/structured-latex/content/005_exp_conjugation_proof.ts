@@ -1388,6 +1388,61 @@ h
     },
   },
   {
+    id: "exp_conjugation_proof_claim_commutator_of_scalar_multiples",
+    kind: "claim",
+    title: { text: "スカラー倍どうしの交換子は、係数の積のスカラー倍に等しい" },
+    labels: ["commutator_of_scalar_multiples"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`\alpha, \beta \in \mathbb{C}`),
+        "、",
+        math(String.raw`X, W \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。交換子 ",
+        math(String.raw`[P, Q] := PQ - QP`),
+        " は ",
+        ref("def_ad_X_matrix"),
+        " のもの、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " のものである。このとき",
+      ]),
+      displayMath(String.raw`[\alpha X, \beta W] = (\alpha\beta)[X, W]`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+[\alpha X, \beta W]
+&= (\alpha X)(\beta W) - (\beta W)(\alpha X)
+&&\bigl(\because\ \text{交換子の定義。}\blkref{def_ad_X_matrix}\bigr)\\
+&= \alpha\bigl(X(\beta W)\bigr) - (\beta W)(\alpha X)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&= \alpha\bigl(\beta(XW)\bigr) - (\beta W)(\alpha X)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&= (\alpha\beta)(XW) - (\beta W)(\alpha X)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= (\alpha\beta)(XW) - \beta\bigl(W(\alpha X)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&= (\alpha\beta)(XW) - \beta\bigl(\alpha(WX)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&= (\alpha\beta)(XW) - (\beta\alpha)(WX)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= (\alpha\beta)(XW) - (\alpha\beta)(WX)
+&&\bigl(\because\ \mathbb{C}\text{ の積の可換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (\alpha\beta)(XW - WX)
+&&\bigl(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\bigr)\\
+&= (\alpha\beta)[X, W]
+&&\bigl(\because\ \text{交換子の定義。}\blkref{def_ad_X_matrix}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。nesting_of_commutator_of_H_and_check_Z の証明の冒頭の準備（交換子の双線型性）と同じ事実を cosh_sinh_coefficient_conversion_for_check の証明も使うので、全証明の SageMath 検算の単位で独立の主張に切り出し、二つの証明から引く形にした（鎖の中身は準備のものと同じ）。",
+      ],
+    },
+  },
+  {
     id: "exp_conjugation_proof_010_theorem_matrix_exp_conjugation",
     kind: "theorem",
     standing: "mainTheorem",

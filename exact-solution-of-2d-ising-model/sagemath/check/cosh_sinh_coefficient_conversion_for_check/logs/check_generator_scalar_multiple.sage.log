@@ -1,0 +1,111 @@
+PASS: d=1 基底: 「ad^0_{αX}(W)」=「W」
+PASS: d=1 基底: 「W」=「1_C W」
+PASS: d=1 基底: 「1_C W」=「α^0 W」
+PASS: d=1 基底: 「α^0 W」=「α^0 ad^0_X(W)」
+PASS: d=1: (★) m=0（帰納法の仮定）
+PASS: d=1 m=0 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=1 m=0 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=1 m=0 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=1 m=0 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=1 m=0 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=1 m=0 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=1 m=0: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=1: (★) m=1（帰納法の仮定）
+PASS: d=1 m=1 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=1 m=1 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=1 m=1 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=1 m=1 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=1 m=1 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=1 m=1 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=1 m=1: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=1: (★) m=2（帰納法の仮定）
+PASS: d=1 m=2 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=1 m=2 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=1 m=2 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=1 m=2 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=1 m=2 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=1 m=2 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=1 m=2: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=1: (★) m=3（帰納法の仮定）
+PASS: d=1 m=3 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=1 m=3 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=1 m=3 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=1 m=3 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=1 m=3 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=1 m=3 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=1 m=3: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=1: (★) m=4（帰納法の仮定）
+PASS: d=1 m=4 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=1 m=4 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=1 m=4 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=1 m=4 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=1 m=4 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=1 m=4 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=1 m=4: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=2 基底: 「ad^0_{αX}(W)」=「W」
+PASS: d=2 基底: 「W」=「1_C W」
+PASS: d=2 基底: 「1_C W」=「α^0 W」
+PASS: d=2 基底: 「α^0 W」=「α^0 ad^0_X(W)」
+PASS: d=2: (★) m=0（帰納法の仮定）
+PASS: d=2 m=0 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=2 m=0 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=2 m=0 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=2 m=0 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=2 m=0 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=2 m=0 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=2 m=0: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=2: 対照 ad^2_{αX}(W) ≠ α ad^2_X(W)
+PASS: d=2: (★) m=1（帰納法の仮定）
+PASS: d=2 m=1 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=2 m=1 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=2 m=1 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=2 m=1 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=2 m=1 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=2 m=1 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=2 m=1: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=2: (★) m=2（帰納法の仮定）
+PASS: d=2 m=2 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=2 m=2 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=2 m=2 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=2 m=2 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=2 m=2 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=2 m=2 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=2 m=2: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=2: (★) m=3（帰納法の仮定）
+PASS: d=2 m=3 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=2 m=3 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=2 m=3 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=2 m=3 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=2 m=3 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=2 m=3 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=2 m=3: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=3 基底: 「ad^0_{αX}(W)」=「W」
+PASS: d=3 基底: 「W」=「1_C W」
+PASS: d=3 基底: 「1_C W」=「α^0 W」
+PASS: d=3 基底: 「α^0 W」=「α^0 ad^0_X(W)」
+PASS: d=3: (★) m=0（帰納法の仮定）
+PASS: d=3 m=0 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=3 m=0 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=3 m=0 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=3 m=0 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=3 m=0 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=3 m=0 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=3 m=0: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=3: 対照 ad^2_{αX}(W) ≠ α ad^2_X(W)
+PASS: d=3: (★) m=1（帰納法の仮定）
+PASS: d=3 m=1 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=3 m=1 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=3 m=1 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=3 m=1 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=3 m=1 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=3 m=1 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=3 m=1: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+PASS: d=3: (★) m=2（帰納法の仮定）
+PASS: d=3 m=2 帰納段階: 「ad^{m+1}_{αX}(W)」=「[αX, ad^m_{αX}(W)]」
+PASS: d=3 m=2 帰納段階: 「[αX, ad^m_{αX}(W)]」=「[αX, α^m ad^m_X(W)]」
+PASS: d=3 m=2 帰納段階: 「[αX, α^m ad^m_X(W)]」=「(α α^m)[X, ad^m_X(W)]」
+PASS: d=3 m=2 帰納段階: 「(α α^m)[X, ad^m_X(W)]」=「(α^m α)[X, ad^m_X(W)]」
+PASS: d=3 m=2 帰納段階: 「(α^m α)[X, ad^m_X(W)]」=「α^{m+1}[X, ad^m_X(W)]」
+PASS: d=3 m=2 帰納段階: 「α^{m+1}[X, ad^m_X(W)]」=「α^{m+1} ad^{m+1}_X(W)」
+PASS: d=3 m=2: 鎖の先頭が Sage の ad^{m+1}_{αX}(W) と一致
+RESULT: PASS
