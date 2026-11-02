@@ -205,7 +205,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         " は主張のとおりとし、",
         math(String.raw`p, N \in \mathbb{Z}_{\ge 0}`),
         " とし、数の冪を ",
-        math(String.raw`d_k^{\,0} := 1`),
+        math(String.raw`d_k^{\,0} := 1_{\mathbb{C}}`),
         "、",
         math(String.raw`d_k^{\,p+1} := d_k^{\,p}\,d_k`),
         " で、行列の冪を ",
@@ -214,7 +214,21 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         math(String.raw`D^0 := I`),
         "、",
         math(String.raw`D^{p+1} := D^p D`),
-        " で表す。部分和を",
+        " で表す。",
+        ref("def_exp"),
+        " を ",
+        math(String.raw`K := \mathbb{C}`),
+        " として用いるので、その単位行列 ",
+        math(String.raw`I`),
+        " は ",
+        ref("def_identity_matrix"),
+        " の ",
+        math(String.raw`I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " であり、",
+        math(String.raw`\delta_{kl}`),
+        " は ",
+        ref("def_kronecker_delta"),
+        " のものである。部分和を",
       ]),
       displayMath(String.raw`S_N := \sum_{p=0}^{N}\frac{1}{p!}D^p \in \mathrm{Mat}(n,\mathbb{C})`),
       paragraph(["とおく。"]),
@@ -263,22 +277,26 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
       displayMath(
         String.raw`\begin{aligned}
 (D^0)_{kl}
-&= I_{kl}
+&= \left(I_{\mathrm{Mat}(n,\mathbb{C})}\right)_{kl}
    \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
-&= 0
-   \quad (\because \text{単位行列の非対角成分})
+&= \delta_{kl}
+   \quad (\because \blkref{def_identity_matrix}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because k \neq l\text{。}\blkref{def_kronecker_delta})
 \end{aligned}`,
       ),
       paragraph(["であり、"]),
       displayMath(
         String.raw`\begin{aligned}
 (D^0)_{kk}
-&= I_{kk}
+&= \left(I_{\mathrm{Mat}(n,\mathbb{C})}\right)_{kk}
    \quad (\because D^0 := I\text{。}\blkref{def_exp}) \\
-&= 1
-   \quad (\because \text{単位行列の対角成分}) \\
+&= \delta_{kk}
+   \quad (\because \blkref{def_identity_matrix}) \\
+&= 1_{\mathbb{C}}
+   \quad (\because k = k\text{。}\blkref{def_kronecker_delta}) \\
 &= d_k^{\,0}
-   \quad (\because d_k^{\,0} := 1)
+   \quad (\because d_k^{\,0} := 1_{\mathbb{C}})
 \end{aligned}`,
       ),
       paragraph([
@@ -432,6 +450,7 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移した。Step 1〜3 の番号を中間目標の名前（対角行列の積と冪・指数級数の部分和・極限）へ変えた。",
         "2026-11-01: SageMath の検算（sagemath/check/exp_of_diagonal_matrix/）を付けるにあたり、証明を書き直した。冪の帰納法（基底と帰納の段）と、極限から成分を決める段を、根拠付きの鎖にした。対角成分の極限の根拠を、実数の級数の収束（labels: real_exp_series_converges）を複素数へ流用する書き方から、数の exp が部分和の極限であること（labels: scalar_exp_is_limit_of_partial_sums）と数の列の極限の一意性（labels: scalar_limit_is_unique。このとき足した）へ替えた。部分和の記号を E_K から S_N へ替えた（行列単位 E_{I,J} との衝突と、体 K との衝突を避けるため）。両辺の exp が極限で定まり、ℝ へ脱出していることを主張に書いた。",
+        "2026-11-02: 冪の帰納法の基底の 2 本の鎖で、名前だけの根拠「単位行列の非対角成分」「単位行列の対角成分」を、def_identity_matrix（I_{Mat(n,C)} の成分は δ）と def_kronecker_delta（δ の値）の 2 段に割ってラベル参照に替えた。def_exp の I がこの I_{Mat(n,C)} であることと、d_k^0 := 1_C を証明の冒頭に書いた。",
       ],
     },
   },

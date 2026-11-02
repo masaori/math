@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | 積 `k ≠ l`: `(PQ)_kl = Σ_j P_kj Q_jl = P_kk Q_kl = 0` | `check_diagonal_product.sage` | `n = 1..5`、対角成分を `QQ(i)[d,e]` の独立な不定元に置き、各行を本文どおりに作って Sage の積とも比べる | **PASS** | 厳密等号 |
 | 積 `k = l`: `(PQ)_kk = Σ_j P_kj Q_jk = P_kk Q_kk` | 同上 | 同じ不定元で。対照として上三角行列の積の `(1,2)` 成分は 0 でない | **PASS** | 厳密等号、対照は非零 |
-| 冪の基底: `(D^0)_kl = I_kl = 0`、`(D^0)_kk = I_kk = 1 = d_k^0` | `check_diagonal_power_and_partial_sum.sage` | `n = 1..4`、`QQ(i)[d]` の不定元で。冪は本文の `D^{p+1} := D^p D` を右から掛けて作る | **PASS** | 厳密等号 |
+| 冪の基底: `(D^0)_kl = (I_{Mat(n,C)})_kl = δ_kl = 0_C`、`(D^0)_kk = (I_{Mat(n,C)})_kk = δ_kk = 1_C = d_k^0` | `check_diagonal_power_and_partial_sum.sage` | `n = 1..4`、`QQ(i)[d]` の不定元で。冪は本文の `D^{p+1} := D^p D` を右から掛けて作る。`δ` は `def_kronecker_delta` の場合分け、単位行列は `def_identity_matrix` のとおり成分 `δ_kl` から作り、Sage の `identity_matrix` とも比べる | **PASS** | 厳密等号 |
 | 冪の帰納の段: `(D^{p+1})_kk = (D^p D)_kk = (D^p)_kk D_kk = d_k^p D_kk = d_k^p d_k = d_k^{p+1}`、`D^{p+1}` は対角 | 同上 | `p = 0..9` で 6 つの値を別々に作って比べ、`D^{p+1}` が対角であることも確かめる。数の冪は `d^{p+1} := d^p d` で作る | **PASS** | 厳密等号 |
 | 部分和 `(S_N)_kk = (Σ_p (1/p!)D^p)_kk = Σ_p ((1/p!)D^p)_kk = Σ_p (1/p!)(D^p)_kk = Σ_p d_k^p/p!` | 同上 | `N = 0..10` で。第一行の `S_N` は Sage の行列の和で作り（独立な経路）、その成分を、本文 `def_finite_sum_of_matrices` のとおり `def_matrix_sum` の和を左から順に足した有限和（第二行の左辺）の成分と比べる。第三行は `finite_sum_of_matrices_entrywise` の右辺、第四行の各項は `def_matrix_scalar_multiple` のとおり成分ごとにスカラー倍した行列から読む | **PASS** | 厳密等号 |
 | 部分和 `(S_N)_kl = (Σ_p (1/p!)D^p)_kl = Σ_p ((1/p!)D^p)_kl = Σ_p (1/p!)(D^p)_kl = Σ_p (1/p!)·0 = 0` | 同上 | 同じ範囲で、同じ作り方で。対照として `[[0,1],[0,0]]` の部分和の `(1,2)` 成分は 1 | **PASS** | 厳密等号、対照は非零 |

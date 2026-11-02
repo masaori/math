@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の四十一個目を行った。`004_transfer_matrix.ts` の `exp_of_diagonal_matrix` の冪の帰納法の基底で、名前だけの根拠「単位行列の非対角成分」「単位行列の対角成分」を `def_identity_matrix`・`def_kronecker_delta` へのラベル参照の 2 段に割り、SageMath の基底の鎖に行を足した（全 PASS）。Lean の具体版の鎖は無い。次は `005_exp_conjugation_proof.ts` の「単位行列との積」3 か所ほか（状態台帳の次の一歩）。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、`riemann_sum_to_integral`（等間隔点の平均は積分に収束する）の検算 `sagemath/check/riemann_sum_to_integral/` を足した（未検算 96 件）。π を `AA[p]` の不定元で持ち、大小はボールで符号を決めて厳密に確かめた。人手証明で、連続度 `ω(h)` が実数として定まること（有界性）が示されていなかったので、一様連続性から示す段を足し、区間加法性の前提・距離・主張の評価・収束の段を根拠付きの鎖にした。計算の誤りは無かった。Lean の具体版が `δ ∈ [0,1)` で人手と 1 対 1 でないことは状態台帳に記録した。次は `cosh_addition_and_half_angle`。
 
 2026-11-02: 連続実行「複素行列版イジング: 章立ての組み直し」（2026-10-31 のゴール達成で一時停止していた）を scheduled-tasks でアーカイブした。状態台帳の「次の一歩」が空で、この連続実行の指示が進める単位は残っていない。確認コマンド `bash scripts/verify-complex-matrix-ising-paper-artifacts.sh` は 2026-11-02 に PASS。状態台帳の「未確定」の作業の順序の外の項目を扱うなら、別の指示で定期実行を立てるか、アーカイブを戻して指示を書き換える。

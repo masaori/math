@@ -1,6 +1,8 @@
 # 対象ラベル: exp_of_diagonal_matrix
 # 中間目標「対角行列の冪」（帰納法の基底と帰納の段の各行）と「指数級数の部分和の成分」の鎖を確かめる。
-#   基底:  (D^0)_kl = I_kl = 0（k ≠ l）、(D^0)_kk = I_kk = 1 = d_k^0
+#   基底:  (D^0)_kl = (I_{Mat(n,C)})_kl = δ_kl = 0_C（k ≠ l）、(D^0)_kk = (I_{Mat(n,C)})_kk = δ_kk = 1_C = d_k^0
+#          I_{Mat(n,C)} は本文 def_identity_matrix のとおり成分 δ_kl から作り（Sage の identity_matrix とも比べる）、
+#          δ_kl は本文 def_kronecker_delta のとおり場合分けで作る。
 #   帰納:  (D^{p+1})_kk = (D^p D)_kk = (D^p)_kk D_kk = d_k^p D_kk = d_k^p d_k = d_k^{p+1}、D^{p+1} は対角
 #   部分和: (S_N)_kk = (Σ_p (1/p!)D^p)_kk = Σ_p ((1/p!)D^p)_kk = Σ_p (1/p!)(D^p)_kk = Σ_p d_k^p/p!、
 #           (S_N)_kl = (Σ_p (1/p!)D^p)_kl = Σ_p ((1/p!)D^p)_kl = Σ_p (1/p!)(D^p)_kl = Σ_p (1/p!)·0 = 0
@@ -18,15 +20,19 @@ for n in range(1, 5):
     R = PolynomialRing(GAUSSIAN, [f"d{k}" for k in range(1, n + 1)])
     d = R.gens()
     Dm = diagonal_matrix(R, d)
-    I = identity_matrix(R, n)
+    # def_kronecker_delta と def_identity_matrix のとおりに作る
+    delta = lambda k, l: R(1) if k == l else R(0)
+    I = matrix(R, n, n, lambda i, j: delta(i + 1, j + 1))
+    assert I == identity_matrix(R, n)
     # 基底
     D0 = matrix_power_by_definition(Dm, 0)
     for k in range(1, n + 1):
         for l in range(1, n + 1):
             if k != l:
-                assert entry(D0, k, l) == entry(I, k, l) == 0
+                chain = [entry(D0, k, l), entry(I, k, l), delta(k, l), R(0)]
             else:
-                assert entry(D0, k, k) == entry(I, k, k) == 1 == scalar_power_by_definition(d[k - 1], 0)
+                chain = [entry(D0, k, k), entry(I, k, k), delta(k, k), R(1), scalar_power_by_definition(d[k - 1], 0)]
+            assert all(c == chain[0] for c in chain), (n, k, l)
     # 帰納の段（p = 0..PMAX-1）
     for p in range(PMAX):
         Dp = matrix_power_by_definition(Dm, p)
