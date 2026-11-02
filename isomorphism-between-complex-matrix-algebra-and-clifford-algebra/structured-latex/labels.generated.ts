@@ -22,6 +22,7 @@ export const ALL_LABELS = [
   "def_linear_form",
   "def_linear_independence",
   "def_linear_map",
+  "def_ordered_sum_in_complex_numbers",
   "def_ring_homomorphism",
   "def_spanning_family",
   "def_unital_ring",
