@@ -1170,6 +1170,8 @@ import Ising2DLambda.KacWard.ClosedNonbacktrackingWalk
 import Ising2DLambda.KacWard.StepTurning
 import Ising2DLambda.NecSuf.KacWard.EdgeSequenceTotalTurning
 import Ising2DLambda.KacWard.EdgeSequenceTotalTurning
+import Ising2DLambda.NecSuf.KacWard.CyclicTotalTurning
+import Ising2DLambda.KacWard.CyclicTotalTurning
 import Ising2DLambda.KacWard.DirectedWindingNumbers
 import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix

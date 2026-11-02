@@ -58845,6 +58845,12 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "循環総回転数" },
                           labels: ["def_cyclic_total_turning"],
                           habitat: "Z",
+                          lean: [
+                            "Ising2DLambda.KacWard.cyclicTotalTurning",
+                            "Ising2DLambda.KacWard.cyclicTotalTurning_eq",
+                            "Ising2DLambda.NecSuf.KacWard.cyclicTotalTurning",
+                            "Ising2DLambda.KacWard.cyclicTotalTurning_from_necSuf",
+                          ],
                           statement: [
                             paragraph([
                               "閉じた非後退辺列 ",
@@ -59154,16 +59160,17 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 &=\operatorname{dir}(\vec e_1)+\pi_4(t_{\circ}(\gamma))
 &&\bigl(\because\ \blkref{def_cyclic_total_turning}\bigr)
 \end{aligned}`),
+                        displayMath(String.raw`\begin{aligned}
+0
+&=\pi_4(t_{\circ}(\gamma))
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法群で両辺から }\operatorname{dir}(\vec e_1)\text{ を引く}\bigr)\\
+&=t_{\circ}(\gamma)+4\mathbb Z
+&&\bigl(\because\ \blkref{def_direction_residue_projection}\bigr)
+\end{aligned}`),
                         paragraph([
-                          "となる。両辺に ",
-                          math(String.raw`\operatorname{dir}(\vec e_1)`),
-                          " の加法逆元を左から加えると（",
-                          math(String.raw`\mathbb Z/4\mathbb Z`), " は加法群）、",
-                          math(String.raw`0=\pi_4(t_{\circ}(\gamma))`),
-                          " を得る。したがって ",
-                          math(String.raw`t_{\circ}(\gamma)+4\mathbb Z=0+4\mathbb Z`),
-                          "、すなわち ", math(String.raw`t_{\circ}(\gamma)\in4\mathbb Z`),
-                          " である（剰余類の等号の定義）。全過程は ",
+                          "零剰余類との等号は ",
+                          math(String.raw`t_{\circ}(\gamma)\in4\mathbb Z`),
+                          " と同値である（剰余類の等号の定義）。全過程は ",
                           math(String.raw`\mathbb Z/4\mathbb Z`),
                           " の加法だけで閉じ、実数体も複素数体も現れない。",
                           "この整数 ", math(String.raw`t_{\circ}(\gamma)`),
