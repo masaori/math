@@ -17,12 +17,9 @@ def fixedPointFreePermutations (J : Type*) [Fintype J] [DecidableEq J] :
 theorem qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed
     {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) (hdiag : ∀ i : J, A i i = 0)
-    (σ : Equiv.Perm J) (j : J) (hfixed : σ j = j) :
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
-      (∏ i : J, A i (σ i)) = 0 := by
+    (σ : Equiv.Perm J) (j : J) (hfixed : σ j = j)
+    (c : Polynomial Qbar) : c * (∏ i : J, A i (σ i)) = 0 := by
   classical
-  let c : Polynomial Qbar :=
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
   let R : Polynomial Qbar := ∏ i ∈ (univ : Finset J).erase j, A i (σ i)
   have hProduct : (∏ i : J, A i (σ i)) = 0 := by
     calc
@@ -50,7 +47,7 @@ theorem qbarPolynomial_det_eq_sum_fixedPointFree
     intro σ hσ
     have hNotAll : ¬ ∀ i : J, σ i ≠ i := (Finset.mem_filter.mp hσ).2
     obtain ⟨j, hj⟩ := not_forall.mp hNotAll
-    exact qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed A hdiag σ j (not_not.mp hj)
+    exact qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed A hdiag σ j (not_not.mp hj) (c σ)
   calc
     Matrix.det A = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, A i (σ i) :=
       qbarPolynomial_det_row_expansion A

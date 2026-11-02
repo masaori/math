@@ -66398,7 +66398,10 @@ P_n(\gamma)
                         ref("claim_projected_plane_cycle_lift_translation"), " をこの ", math(String.raw`W`),
                         " に適用すると、任意の ", math(String.raw`j\in\{0,\ldots,N\}`), " について",
                       ]),
-                      displayMath(String.raw`P_j(\Gamma)=P_0(\Gamma)+W_j-W_0`),
+                      displayMath(String.raw`\begin{aligned}
+P_j(\Gamma)&=P_0(\Gamma)+W_j-W_0
+&&\bigl(\because\ \blkref{claim_projected_plane_cycle_lift_translation}\bigr).
+\end{aligned}`),
                       paragraph([
                         "であり、", math(String.raw`w_{\mathrm h}(\Gamma)=w_{\mathrm v}(\Gamma)=0`), " である。さらに任意の ",
                         math(String.raw`j,j'\in\{0,\ldots,N-1\}`), " が ", math(String.raw`j<j'`), " を満たすとき、",
