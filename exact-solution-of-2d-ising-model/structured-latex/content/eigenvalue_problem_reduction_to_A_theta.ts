@@ -5029,6 +5029,499 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
     },
   },
   {
+    id: "evensectorT_claim_exponential_series_of_even_odd_power_terms",
+    kind: "claim",
+    title: { text: "偶数番目と奇数番目が数の冪のスカラー倍である行列の列の指数級数" },
+    labels: ["exponential_series_of_even_odd_power_terms"],
+    statement: [
+      paragraph([
+        math(String.raw`d \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(d,\mathbb{C})`),
+        "、",
+        math(String.raw`x \in \mathbb{R}`),
+        " とその像 ",
+        math(String.raw`x_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）、",
+        math(String.raw`c \in \mathbb{C}`),
+        " とする。数の冪は ",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " の約束 ",
+        math(String.raw`y^{0} := 1`),
+        "、",
+        math(String.raw`y^{m+1} := y^{m}y`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " でも ",
+        math(String.raw`\mathbb{C}`),
+        " でも同じ）、係数と行列の積はスカラー倍（",
+        ref("def_matrix_scalar_multiple"),
+        "）、",
+        math(String.raw`\cosh, \sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        "、行列の列の収束と級数の和は ",
+        ref("def_matrix_norm"),
+        " による。",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " の列 ",
+        math(String.raw`(T_n)_{n \in \mathbb{Z}_{\geq 0}}`),
+        " が",
+      ]),
+      displayMath(
+        String.raw`T_n = \begin{cases}
+(x_{\mathbb{C}})^{n}\,A & (n \text{ 偶数}) \\
+\bigl(c\,(x_{\mathbb{C}})^{n}\bigr)B & (n \text{ 奇数})
+\end{cases}`,
+      ),
+      paragraph([
+        "を満たすとする。このとき級数 ",
+        math(String.raw`\sum_{n=0}^{\infty}\bigl(\tfrac{1}{n!}\bigr)_{\mathbb{C}}\,T_n`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(d,\mathbb{C})`),
+        " において収束し、",
+      ]),
+      displayMath(
+        String.raw`\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\,T_n
+= (\cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`\mathbb{R}`),
+        " への脱出: 実数の ",
+        math(String.raw`\exp`),
+        "（",
+        ref("def_scalar_exp"),
+        "）の値と、部分和の極限）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`S_N := \sum_{n=0}^{N}\bigl(\tfrac{1}{n!}\bigr)_{\mathbb{C}}\,T_n \in \mathrm{Mat}(d,\mathbb{C})`),
+        "（",
+        ref("def_finite_sum_of_matrices"),
+        "）、",
+        math(String.raw`y \in \mathbb{R}`),
+        " について ",
+        math(String.raw`E_N(y) := \sum_{n=0}^{N}\frac{y^n}{n!} \in \mathbb{R}`),
+        "（",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " の部分和）、",
+        math(String.raw`\alpha_N := \frac{E_N(x) + E_N(-x)}{2} \in \mathbb{R}`),
+        "、",
+        math(String.raw`\beta_N := \frac{E_N(x) - E_N(-x)}{2} \in \mathbb{R}`),
+        "、",
+        math(String.raw`L := (\cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B \in \mathrm{Mat}(d,\mathbb{C})`),
+        " とおく。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`a_n := \frac{x^n + (-x)^n}{2\cdot n!} \in \mathbb{R}`),
+        "、",
+        math(String.raw`b_n := \frac{x^n - (-x)^n}{2\cdot n!} \in \mathbb{R}`),
+        " とおく。",
+      ]),
+      paragraph([
+        "準備（冪の像）: ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`(x_{\mathbb{C}})^{n} = (x^{n})_{\mathbb{C}}`),
+        " を ",
+        math(String.raw`n`),
+        " の帰納法で示す。",
+        math(String.raw`n = 0`),
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(x_{\mathbb{C}})^{0}
+&= 1_{\mathbb{C}}
+&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{C}\ \text{の冪の約束}) \\
+&= (1)_{\mathbb{C}}
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1)) \\
+&= (x^{0})_{\mathbb{C}}
+&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{R}\ \text{の冪の約束})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`(x_{\mathbb{C}})^{n} = (x^{n})_{\mathbb{C}}`),
+        " を仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(x_{\mathbb{C}})^{n+1}
+&= (x_{\mathbb{C}})^{n}\,x_{\mathbb{C}}
+&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{C}\ \text{の冪の約束}) \\
+&= (x^{n})_{\mathbb{C}}\,x_{\mathbb{C}}
+&&(\because \text{帰納法の仮定}) \\
+&= (x^{n}x)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= (x^{n+1})_{\mathbb{C}}
+&&(\because \blkref{scalar_exp_is_limit_of_partial_sums}\ \text{の}\ \mathbb{R}\ \text{の冪の約束})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。準備（",
+        math(String.raw`a_n, b_n`),
+        " の値）: ",
+        math(String.raw`n`),
+        " が偶数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_n
+&= \frac{x^n + (-1)^n x^n}{2\cdot n!}
+&&(\because \text{実数の冪}\ (-x)^n = (-1)^n x^n) \\
+&= \frac{x^n + x^n}{2\cdot n!}
+&&(\because n\ \text{偶数より}\ (-1)^n = 1) \\
+&= \frac{x^n}{n!}
+&&(\because \text{実数の四則}),
+\\[4pt]
+b_n
+&= \frac{x^n - (-1)^n x^n}{2\cdot n!}
+&&(\because \text{実数の冪}\ (-x)^n = (-1)^n x^n) \\
+&= \frac{x^n - x^n}{2\cdot n!}
+&&(\because n\ \text{偶数より}\ (-1)^n = 1) \\
+&= 0
+&&(\because \text{実数の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`n`),
+        " が奇数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a_n
+&= \frac{x^n + (-1)^n x^n}{2\cdot n!}
+&&(\because \text{実数の冪}\ (-x)^n = (-1)^n x^n) \\
+&= \frac{x^n + (-1)x^n}{2\cdot n!}
+&&(\because n\ \text{奇数より}\ (-1)^n = -1) \\
+&= 0
+&&(\because \text{実数の四則}),
+\\[4pt]
+b_n
+&= \frac{x^n - (-1)^n x^n}{2\cdot n!}
+&&(\because \text{実数の冪}\ (-x)^n = (-1)^n x^n) \\
+&= \frac{x^n - (-1)x^n}{2\cdot n!}
+&&(\because n\ \text{奇数より}\ (-1)^n = -1) \\
+&= \frac{x^n}{n!}
+&&(\because \text{実数の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。準備（実数の差の像）: ",
+        math(String.raw`y, z \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y_{\mathbb{C}} - z_{\mathbb{C}}
+&= y_{\mathbb{C}} + \bigl(-z_{\mathbb{C}}\bigr)
+&&(\because \blkref{def_complex_difference}) \\
+&= y_{\mathbb{C}} + (-1_{\mathbb{C}})\,z_{\mathbb{C}}
+&&(\because \blkref{multiply_by_minus_one}) \\
+&= y_{\mathbb{C}} + (-1)_{\mathbb{C}}\,z_{\mathbb{C}}
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}}) \\
+&= y_{\mathbb{C}} + \bigl((-1)\,z\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \bigl(y + (-1)\,z\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ \text{を 2 項へ当てた}) \\
+&= (y - z)_{\mathbb{C}}
+&&(\because \text{実数の四則})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+      paragraph([
+        "中間目標: 各項。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\bigl(\tfrac{1}{n!}\bigr)_{\mathbb{C}}\,T_n = (a_n)_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B`),
+        " である。",
+        math(String.raw`n`),
+        " が偶数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\,T_n
+&= \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\bigl((x_{\mathbb{C}})^{n}\,A\bigr)
+&&(\because T_n\ \text{の仮定の偶数の場合}) \\
+&= \Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x_{\mathbb{C}})^{n}\Bigr)A
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= \Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x^{n})_{\mathbb{C}}\Bigr)A
+&&(\because \text{準備の冪の像}) \\
+&= \Bigl(\frac{1}{n!}\,x^{n}\Bigr)_{\mathbb{C}}A
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= (a_n)_{\mathbb{C}}\,A
+&&(\because \text{準備の}\ n\ \text{偶数の}\ a_n = x^n/n!) \\
+&= (a_n)_{\mathbb{C}}\,A + O
+&&(\because \blkref{matrix_plus_zero_matrix}) \\
+&= (a_n)_{\mathbb{C}}\,A + 0_{\mathbb{C}}\,B
+&&(\because \blkref{zero_scalar_multiple_is_zero_matrix}) \\
+&= (a_n)_{\mathbb{C}}\,A + \bigl(c\,0_{\mathbb{C}}\bigr)B
+&&(\because \blkref{complex_times_zero_is_zero}) \\
+&= (a_n)_{\mathbb{C}}\,A + \bigl(c\,(0)_{\mathbb{C}}\bigr)B
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)) \\
+&= (a_n)_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \text{準備の}\ n\ \text{偶数の}\ b_n = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`n`),
+        " が奇数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\,T_n
+&= \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\Bigl(\bigl(c\,(x_{\mathbb{C}})^{n}\bigr)B\Bigr)
+&&(\because T_n\ \text{の仮定の奇数の場合}) \\
+&= \Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\bigl(c\,(x_{\mathbb{C}})^{n}\bigr)\Bigr)B
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= \Bigl(\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}c\Bigr)(x_{\mathbb{C}})^{n}\Bigr)B
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
+&= \Bigl(\Bigl(c\,\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\Bigr)(x_{\mathbb{C}})^{n}\Bigr)B
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= \Bigl(c\,\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x_{\mathbb{C}})^{n}\Bigr)\Bigr)B
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
+&= \Bigl(c\,\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}(x^{n})_{\mathbb{C}}\Bigr)\Bigr)B
+&&(\because \text{準備の冪の像}) \\
+&= \Bigl(c\,\Bigl(\frac{1}{n!}\,x^{n}\Bigr)_{\mathbb{C}}\Bigr)B
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \text{準備の}\ n\ \text{奇数の}\ b_n = x^n/n!) \\
+&= O + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \blkref{zero_matrix_plus_matrix}) \\
+&= 0_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \blkref{zero_scalar_multiple_is_zero_matrix}) \\
+&= (0)_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{の略記}\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0)) \\
+&= (a_n)_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B
+&&(\because \text{準備の}\ n\ \text{奇数の}\ a_n = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。中間目標: 部分和。",
+        math(String.raw`S_N = (\alpha_N)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B`),
+        " である。",
+        math(String.raw`p, q \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N)_{pq}
+&= \sum_{n=0}^{N}\Bigl(\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\,T_n\Bigr)_{pq}
+&&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{n=0}^{N}\Bigl((a_n)_{\mathbb{C}}\,A + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because \text{各項の中間目標}) \\
+&= \sum_{n=0}^{N}\Bigl(\bigl((a_n)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(b_n)_{\mathbb{C}}\bigr)B\Bigr)_{pq}\Bigr)
+&&(\because \blkref{def_matrix_sum}) \\
+&= \sum_{n=0}^{N}\Bigl((a_n)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(b_n)_{\mathbb{C}}\bigr)B_{pq}\Bigr)
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \sum_{n=0}^{N}(a_n)_{\mathbb{C}}\,A_{pq} + \sum_{n=0}^{N}\bigl(c\,(b_n)_{\mathbb{C}}\bigr)B_{pq}
+&&(\because \blkref{finite_sum_of_complex_sums}) \\
+&= \Bigl(\sum_{n=0}^{N}(a_n)_{\mathbb{C}}\Bigr)A_{pq} + \Bigl(c\sum_{n=0}^{N}(b_n)_{\mathbb{C}}\Bigr)B_{pq}
+&&(\because \mathbb{C}\ \text{の有限和の分配則}) \\
+&= \Bigl(\sum_{n=0}^{N}a_n\Bigr)_{\mathbb{C}}A_{pq} + \Bigl(c\Bigl(\sum_{n=0}^{N}b_n\Bigr)_{\mathbb{C}}\Bigr)B_{pq}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ \text{を 2 箇所へ同時適用}) \\
+&= \Bigl(\frac{1}{2}\Bigl(\sum_{n=0}^{N}\frac{x^n}{n!} + \sum_{n=0}^{N}\frac{(-x)^n}{n!}\Bigr)\Bigr)_{\mathbb{C}}A_{pq}
+ + \Bigl(c\Bigl(\frac{1}{2}\Bigl(\sum_{n=0}^{N}\frac{x^n}{n!} - \sum_{n=0}^{N}\frac{(-x)^n}{n!}\Bigr)\Bigr)_{\mathbb{C}}\Bigr)B_{pq}
+&&(\because \text{実数の有限和の分配則}) \\
+&= (\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}
+&&(\because E_N, \alpha_N, \beta_N\ \text{の定義}) \\
+&= \bigl((\alpha_N)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \Bigl((\alpha_N)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because \blkref{def_matrix_sum})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、行列は成分で定まるので中間目標が成り立つ。中間目標: 差。",
+        math(String.raw`S_N - L = (\alpha_N - \cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B`),
+        " である。",
+        math(String.raw`p, q \in \{1,\dots,d\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N - L)_{pq}
+&= (S_N)_{pq} - L_{pq}
+&&(\because \blkref{def_matrix_difference}) \\
+&= \Bigl((\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}\Bigr) - L_{pq}
+&&(\because \text{部分和の中間目標の成分の鎖}) \\
+&= \Bigl((\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}\Bigr)
+ - \Bigl((\cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because L\ \text{の定義}) \\
+&= \Bigl((\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}\Bigr)
+ - \Bigl(\bigl((\cosh x)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}\Bigr)
+&&(\because \blkref{def_matrix_sum}) \\
+&= \Bigl((\alpha_N)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N)_{\mathbb{C}}\bigr)B_{pq}\Bigr)
+ - \Bigl((\cosh x)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B_{pq}\Bigr)
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \bigl((\alpha_N)_{\mathbb{C}} - (\cosh x)_{\mathbb{C}}\bigr)A_{pq}
+ + \Bigl(c\,\bigl((\beta_N)_{\mathbb{C}} - (\sinh x)_{\mathbb{C}}\bigr)\Bigr)B_{pq}
+&&(\because \mathbb{C}\ \text{の四則}) \\
+&= (\alpha_N - \cosh x)_{\mathbb{C}}\,A_{pq} + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B_{pq}
+&&(\because \text{準備の実数の差の像を 2 箇所へ同時適用}) \\
+&= \bigl((\alpha_N - \cosh x)_{\mathbb{C}}\,A\bigr)_{pq} + \Bigl(\bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \Bigl((\alpha_N - \cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr)_{pq}
+&&(\because \blkref{def_matrix_sum})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、行列は成分で定まるので中間目標が成り立つ。中間目標: 実数の評価。",
+        math(String.raw`u_N := \bigl|E_N(x) - \exp(x)\bigr| \in \mathbb{R}_{\geq 0}`),
+        "、",
+        math(String.raw`v_N := \bigl|E_N(-x) - \exp(-x)\bigr| \in \mathbb{R}_{\geq 0}`),
+        " とおく（",
+        math(String.raw`\mathbb{R}`),
+        " の絶対値。",
+        math(String.raw`\exp`),
+        " は実数の ",
+        math(String.raw`\exp`),
+        "（",
+        ref("def_scalar_exp"),
+        "））。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl|\alpha_N - \cosh x\bigr|
+&= \Bigl|\frac{E_N(x) + E_N(-x)}{2} - \cosh x\Bigr|
+&&(\because \alpha_N\ \text{の定義}) \\
+&= \Bigl|\frac{E_N(x) + E_N(-x)}{2} - \frac{\exp(x) + \exp(-x)}{2}\Bigr|
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \Bigl|\frac{\bigl(E_N(x) - \exp(x)\bigr) + \bigl(E_N(-x) - \exp(-x)\bigr)}{2}\Bigr|
+&&(\because \text{実数の四則}) \\
+&= \frac{\bigl|\bigl(E_N(x) - \exp(x)\bigr) + \bigl(E_N(-x) - \exp(-x)\bigr)\bigr|}{2}
+&&(\because \text{実数の絶対値は正の数で割ることと交換する}) \\
+&\leq \frac{u_N + v_N}{2}
+&&(\because \text{実数の絶対値の三角不等式と}\ |{-y}| = |y|),
+\\[4pt]
+\bigl|\beta_N - \sinh x\bigr|
+&= \Bigl|\frac{E_N(x) - E_N(-x)}{2} - \sinh x\Bigr|
+&&(\because \beta_N\ \text{の定義}) \\
+&= \Bigl|\frac{E_N(x) - E_N(-x)}{2} - \frac{\exp(x) - \exp(-x)}{2}\Bigr|
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \Bigl|\frac{\bigl(E_N(x) - \exp(x)\bigr) - \bigl(E_N(-x) - \exp(-x)\bigr)}{2}\Bigr|
+&&(\because \text{実数の四則}) \\
+&= \frac{\bigl|\bigl(E_N(x) - \exp(x)\bigr) - \bigl(E_N(-x) - \exp(-x)\bigr)\bigr|}{2}
+&&(\because \text{実数の絶対値は正の数で割ることと交換する}) \\
+&\leq \frac{u_N + v_N}{2}
+&&(\because \text{実数の絶対値の三角不等式と}\ |{-y}| = |y|)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。中間目標: ノルムの評価。",
+        math(String.raw`\kappa := \|A\| + |c|\,\|B\| \in \mathbb{R}_{\geq 0}`),
+        " とおく（",
+        ref("def_matrix_norm"),
+        "、",
+        ref("def_abs_arg"),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|S_N - L\|
+&= \Bigl\|(\alpha_N - \cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr\|
+&&(\because \text{差の中間目標}) \\
+&\leq \bigl\|(\alpha_N - \cosh x)_{\mathbb{C}}\,A\bigr\| + \Bigl\|\bigl(c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr)B\Bigr\|
+&&(\because \blkref{matrix_norm_triangle_inequality}\ (3)) \\
+&= \bigl|(\alpha_N - \cosh x)_{\mathbb{C}}\bigr|\,\|A\| + \bigl|c\,(\beta_N - \sinh x)_{\mathbb{C}}\bigr|\,\|B\|
+&&(\because \blkref{matrix_norm_triangle_inequality}\ (2)\ \text{を 2 項へ同時適用}) \\
+&= \bigl|(\alpha_N - \cosh x)_{\mathbb{C}}\bigr|\,\|A\| + \Bigl(|c|\,\bigl|(\beta_N - \sinh x)_{\mathbb{C}}\bigr|\Bigr)\|B\|
+&&(\because \blkref{abs_basic_properties}\ (4)) \\
+&= \bigl|\alpha_N - \cosh x\bigr|\,\|A\| + \Bigl(|c|\,\bigl|\beta_N - \sinh x\bigr|\Bigr)\|B\|
+&&(\because \blkref{abs_basic_properties}\ (6)\ \text{を 2 箇所へ同時適用}) \\
+&\leq \frac{u_N + v_N}{2}\,\|A\| + \Bigl(|c|\,\frac{u_N + v_N}{2}\Bigr)\|B\|
+&&(\because \text{実数の評価の中間目標と}\ \|A\| \geq 0,\ |c| \geq 0,\ \|B\| \geq 0) \\
+&= \frac{u_N + v_N}{2}\bigl(\|A\| + |c|\,\|B\|\bigr)
+&&(\because \text{実数の四則}) \\
+&= \frac{u_N + v_N}{2}\,\kappa
+&&(\because \kappa\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " を ",
+        math(String.raw`K = \mathbb{R}`),
+        " で ",
+        math(String.raw`x`),
+        " と ",
+        math(String.raw`-x`),
+        " へ当てると、",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`K`),
+        " の列の収束の意味で ",
+        math(String.raw`u_N \to 0`),
+        "、",
+        math(String.raw`v_N \to 0`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " への脱出: 極限）。",
+        math(String.raw`\varepsilon \in \mathbb{R}_{>0}`),
+        " に対し、",
+        math(String.raw`N \geq N_1`),
+        " で ",
+        math(String.raw`u_N < \varepsilon/(\kappa+1)`),
+        "、",
+        math(String.raw`N \geq N_2`),
+        " で ",
+        math(String.raw`v_N < \varepsilon/(\kappa+1)`),
+        " となる ",
+        math(String.raw`N_1, N_2 \in \mathbb{Z}_{\geq 0}`),
+        " を取ると、",
+        math(String.raw`N \geq \max(N_1, N_2)`),
+        " で",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\|S_N - L\|
+&\leq \frac{u_N + v_N}{2}\,\kappa
+&&(\because \text{ノルムの評価の中間目標}) \\
+&\leq \frac{\varepsilon}{\kappa+1}\,\kappa
+&&(\because \tfrac{u_N + v_N}{2} < \tfrac{\varepsilon}{\kappa+1}\ \text{と}\ \kappa \geq 0) \\
+&< \varepsilon
+&&(\because \kappa < \kappa + 1\ \text{と}\ \varepsilon > 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって ",
+        math(String.raw`\|S_N - L\| \to 0`),
+        "、すなわち ",
+        ref("def_matrix_norm"),
+        " の意味で ",
+        math(String.raw`S_N \to L`),
+        " であり、級数は収束して",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\,T_n
+&= \lim_{N\to\infty} S_N
+&&(\because \blkref{def_matrix_norm}\ \text{の級数の和。極限は}\ \blkref{matrix_norm_triangle_inequality}\ (4)\ \text{により一意}) \\
+&= L
+&&(\because S_N \to L) \\
+&= (\cosh x)_{\mathbb{C}}\,A + \bigl(c\,(\sinh x)_{\mathbb{C}}\bigr)B
+&&(\because L\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算。sagemath/check/exponential_series_of_even_odd_power_terms/）: extract_taylor_coefficient_of_check_Z_Y の証明が、級数を偶数項と奇数項の二つの級数に分けて n に依らない因子を和の外へ出し、証明の無い sinh_cosh_taylor_series を代入していた（無限和の並べ替えと分割の根拠が無かった）ので、その四つの式に共通の計算を部分和の等式と極限で示すこの主張として切り出した。偶奇の場合分けは a_n・b_n の (x^n ± (-x)^n)/(2·n!) にまとめ、極限は bridge の two_by_two_transfer_identity の証明と同じく E_N(±x) と三角不等式で取る。",
+      ],
+    },
+  },
+  {
     id: "evensectorT_004_claim_extract_taylor",
     kind: "claim",
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 6 },
@@ -5037,175 +5530,294 @@ i^{2(l+1)}(-1_{\mathbb{C}})^{l+1}
     statement: [
       paragraph([
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
-        " とし ",
+        " とし、",
+        math(String.raw`R`),
+        "、",
+        math(String.raw`H_1^{(+)}, H_2, \check{Z}_\mu, \check{Y}_\mu \in R`),
+        "、",
+        math(String.raw`K_1, K_2^* \in \mathbb{R}`),
+        " とその像 ",
+        math(String.raw`(K_1)_{\mathbb{C}}, (K_2^*)_{\mathbb{C}}`),
+        "、",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
-        " と略記する。次の 4 つの級数は ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " において収束し（",
-        ref("matrix_exp_conjugation"),
-        " (1)）、それぞれ次に等しい。",
+        " とその像 ",
+        math(String.raw`(\tilde\theta)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`i, -i, \tfrac{i}{2} \in \mathbb{C}`),
+        "、冪の約束、",
+        math(String.raw`n`),
+        " 重交換子の記法は ",
+        ref("cosh_sinh_coefficient_conversion_for_check"),
+        " のものとする。",
+        math(String.raw`2K_2^* \in \mathbb{R}`),
+        " は実数の積、",
+        math(String.raw`(1/n!)_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`1/n! \in \mathbb{R}`),
+        " の ",
+        ref("inclusion_rr_to_cc"),
+        " による像、",
+        math(String.raw`\cosh, \sinh`),
+        " は ",
+        ref("def_cosh_sinh"),
+        "、係数と行列の積はスカラー倍（",
+        ref("def_matrix_scalar_multiple"),
+        "）、級数の和は ",
+        ref("def_matrix_norm"),
+        " による。このとき次の 4 つの級数は ",
+        math(String.raw`R`),
+        " において収束し、それぞれ次に等しい（",
+        math(String.raw`\mathbb{R}`),
+        " への脱出: 実数の ",
+        math(String.raw`\exp`),
+        " の値と、部分和の極限）。",
       ]),
       paragraph(["(h1.z)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
-\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-= \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu`,
+        String.raw`\sum_{n=0}^{\infty} \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}
+\underbrace{\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
+= (\cosh K_1)_{\mathbb{C}}\,\check{Z}_\mu
+ + \Bigl(\bigl(i\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Y}_\mu`,
       ),
       paragraph(["(h1.y)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
-\underbrace{\left[\tfrac{i}{2}K_1 H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1 H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-= -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu`,
+        String.raw`\sum_{n=0}^{\infty} \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}
+\underbrace{\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\dots,\left[\tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
+= \Bigl(\bigl((-i)\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Z}_\mu
+ + (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu`,
       ),
       paragraph(["(h2.z)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
-\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Z}_\mu\right]\dots\right]}_{n}
-= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu`,
+        String.raw`\sum_{n=0}^{\infty} \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}
+\underbrace{\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\dots,\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\check{Z}_\mu\right]\dots\right]}_{n}
+= (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Z}_\mu + \bigl((-i)(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Y}_\mu`,
       ),
       paragraph(["(h2.y)"]),
       displayMath(
-        String.raw`\sum_{n=0}^{\infty} \frac{1}{n!}
-\underbrace{\left[i K_2^* H_2,\dots,\left[i K_2^* H_2,\check{Y}_\mu\right]\dots\right]}_{n}
-= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu`,
+        String.raw`\sum_{n=0}^{\infty} \Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}
+\underbrace{\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\dots,\left[i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr),\check{Y}_\mu\right]\dots\right]}_{n}
+= \bigl(i\,(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Z}_\mu + (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Y}_\mu`,
       ),
     ],
     proof: [
       paragraph([
-        "各級数を ",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " により偶数項・奇数項に分け、",
-        ref("sinh_cosh_taylor_series"),
-        " の ",
-        math(String.raw`\sinh, \cosh`),
-        " のテイラー展開",
-      ]),
-      displayMath(
-        String.raw`\sinh x = \sum_{\substack{n \geq 1 \\ n \text{ 奇数}}} \frac{x^n}{n!}, \qquad
-\cosh x = \sum_{\substack{n \geq 0 \\ n \text{ 偶数}}} \frac{x^n}{n!}`,
-      ),
-      paragraph([
-        "を用いる。(h1.z) について、",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " の (h1.z) を用いる。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\text{左辺})
-&= \frac{1}{0!}\check{Z}_\mu
-   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu & (n\text{ 奇数}) \\
-K_1^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h1.z)}) \\
-&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Z}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,K_1^{n}\,\exp(-i\tilde\theta)\,\check{Y}_\mu\right)
-   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
-&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
-   + i\,\exp(-i\tilde\theta)\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, i \exp(-i\tilde\theta) \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\check{Z}_\mu + i\,\exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
-   \quad (\because \blkref{sinh_cosh_taylor_series})
-\end{aligned}`,
-      ),
-      paragraph([
-        "1 行目で ",
-        math(String.raw`n = 0`),
-        " 項を分けて書いたが、",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " (h1.z) の偶数側は ",
-        math(String.raw`n = 0`),
-        " でも ",
-        math(String.raw`K_1^{0}\check{Z}_\mu = \check{Z}_\mu = \frac{1}{0!}\check{Z}_\mu`),
-        " と一致するので、2 行目では ",
-        math(String.raw`n = 0`),
-        " 項を偶数側の和へ吸収した（以下の 3 式でも同様）。3 行目では ",
-        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
-        " と ",
-        math(String.raw`i \exp(-i\tilde\theta)`),
-        " が ",
+        math(String.raw`G_1 := \tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr)`),
+        "、",
+        math(String.raw`G_2 := i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr)`),
+        "、",
+        math(String.raw`e_{\mp} := \exp\bigl(\mp i(\tilde\theta)_{\mathbb{C}}\bigr) \in \mathbb{C}`),
+        "（",
+        ref("def_scalar_exp"),
+        " の複素数の exp）、",
+        math(String.raw`d := 2^{M_{\mathrm{col}}}`),
+        " とおき、",
         math(String.raw`n`),
-        " に依らないので和の外へ出した。",
-      ]),
-      paragraph([
-        "(h1.y) について、",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " の (h1.y) を用いる。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-(\text{左辺})
-&= \frac{1}{0!}\check{Y}_\mu
-   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
--i\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu & (n\text{ 奇数}) \\
-K_1^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h1.y)}) \\
-&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}K_1^{n}\check{Y}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,K_1^{n}\,\exp(i\tilde\theta)\,\check{Z}_\mu\right)
-   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
-&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}K_1^{n}\right)\check{Y}_\mu
-   - i\,\exp(i\tilde\theta)\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}K_1^{n}\right)\check{Z}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i \exp(i\tilde\theta) \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(K_1)\check{Y}_\mu - i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu
-   \quad (\because \blkref{sinh_cosh_taylor_series}) \\
-&= -i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
-   \quad (\because \text{行列加法の可換則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "(h2.z) について、",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " の (h2.z) を用いる。",
+        " 重交換子を ",
+        math(String.raw`\mathrm{ad}^{n}_{G}(W)`),
+        " と書く（",
+        ref("def_ad_X_matrix"),
+        "）。準備: ",
+        math(String.raw`2K_2^*`),
+        " の像は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\text{左辺})
-&= \frac{1}{0!}\check{Z}_\mu
-   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
--i\,(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 奇数}) \\
-(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h2.z)}) \\
-&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Z}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,(-i)\,(2K_2^*)^{n}\,\check{Y}_\mu\right)
-   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
-&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Z}_\mu
-   - i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Y}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, -i \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
-   \quad (\because \blkref{sinh_cosh_taylor_series})
+2\,(K_2^*)_{\mathbb{C}}
+&= (2_{\mathbb{R}})_{\mathbb{C}}\,(K_2^*)_{\mathbb{C}}
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{の}\ 2 = 2_{\mathbb{C}} := (2_{\mathbb{R}})_{\mathbb{C}}) \\
+&= (2K_2^*)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product})
 \end{aligned}`,
       ),
       paragraph([
-        "(h2.y) について、",
-        ref("cosh_sinh_coefficient_conversion_for_check"),
-        " の (h2.y) を用いる。",
+        "である。(h1.z): ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " が偶数のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\text{左辺})
-&= \frac{1}{0!}\check{Y}_\mu
-   + \sum_{n=1}^{\infty}\frac{1}{n!}\begin{cases}
-i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
-(2K_2^*)^{n}\,\check{Y}_\mu & (n\text{ 偶数})
-\end{cases}
-   \quad (\because \blkref{cosh_sinh_coefficient_conversion_for_check}\text{ (h2.y)}) \\
-&= \sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\left(\frac{1}{n!}(2K_2^*)^{n}\check{Y}_\mu\right)
-   + \sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\left(\frac{1}{n!}\,i\,(2K_2^*)^{n}\,\check{Z}_\mu\right)
-   \quad (\because n = 0 \text{ 項を偶数側の和へ吸収し、偶数項と奇数項に分けた}) \\
-&= \left(\sum_{\substack{n\geq 0\\ n\text{ 偶数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Y}_\mu
-   + i\left(\sum_{\substack{n\geq 1\\ n\text{ 奇数}}}\frac{1}{n!}(2K_2^*)^{n}\right)\check{Z}_\mu
-   \quad (\because \check{Z}_\mu, \check{Y}_\mu, i \text{ が } n \text{ に依らないので和の外へ出した}) \\
-&= \cosh(2K_2^*)\check{Y}_\mu + i\sinh(2K_2^*)\check{Z}_\mu
-   \quad (\because \blkref{sinh_cosh_taylor_series}) \\
-&= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
-   \quad (\because \text{行列加法の可換則})
+\mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)
+&= (K_1)_{\mathbb{C}}^{\,n}\,\check{Z}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h1.z) の偶数の場合})
+\end{aligned}`,
+      ),
+      paragraph(["であり、奇数のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)
+&= \bigl(i\,(K_1)_{\mathbb{C}}^{\,n}\,e_{-}\bigr)\check{Y}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h1.z) の奇数の場合}) \\
+&= \bigl(i\,\bigl((K_1)_{\mathbb{C}}^{\,n}\,e_{-}\bigr)\bigr)\check{Y}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
+&= \bigl(i\,\bigl(e_{-}\,(K_1)_{\mathbb{C}}^{\,n}\bigr)\bigr)\check{Y}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= \bigl((i\,e_{-})\,(K_1)_{\mathbb{C}}^{\,n}\bigr)\check{Y}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})
 \end{aligned}`,
       ),
       paragraph([
-        "以上 4 式がいずれも statement の右辺と一致する。",
+        "である。ゆえに ",
+        math(String.raw`T_n := \mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)`),
+        " は ",
+        ref("exponential_series_of_even_odd_power_terms"),
+        " の仮定を ",
+        math(String.raw`d`),
+        "、",
+        math(String.raw`x = K_1`),
+        "、",
+        math(String.raw`A = \check{Z}_\mu`),
+        "、",
+        math(String.raw`B = \check{Y}_\mu`),
+        "、",
+        math(String.raw`c = i\,e_{-}`),
+        " で満たし、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)
+&= (\cosh K_1)_{\mathbb{C}}\,\check{Z}_\mu + \bigl((i\,e_{-})(\sinh K_1)_{\mathbb{C}}\bigr)\check{Y}_\mu
+&&(\because \blkref{exponential_series_of_even_odd_power_terms})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。(h1.y): 偶数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_1}(\check{Y}_\mu)
+&= (K_1)_{\mathbb{C}}^{\,n}\,\check{Y}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h1.y) の偶数の場合})
+\end{aligned}`,
+      ),
+      paragraph(["であり、奇数のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_1}(\check{Y}_\mu)
+&= \bigl((-i)\,(K_1)_{\mathbb{C}}^{\,n}\,e_{+}\bigr)\check{Z}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h1.y) の奇数の場合}) \\
+&= \bigl((-i)\,\bigl((K_1)_{\mathbb{C}}^{\,n}\,e_{+}\bigr)\bigr)\check{Z}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律}) \\
+&= \bigl((-i)\,\bigl(e_{+}\,(K_1)_{\mathbb{C}}^{\,n}\bigr)\bigr)\check{Z}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の可換律}) \\
+&= \bigl(((-i)\,e_{+})\,(K_1)_{\mathbb{C}}^{\,n}\bigr)\check{Z}_\mu
+&&(\because \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、",
+        ref("exponential_series_of_even_odd_power_terms"),
+        " を ",
+        math(String.raw`d`),
+        "、",
+        math(String.raw`x = K_1`),
+        "、",
+        math(String.raw`A = \check{Y}_\mu`),
+        "、",
+        math(String.raw`B = \check{Z}_\mu`),
+        "、",
+        math(String.raw`c = (-i)\,e_{+}`),
+        " で当てて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_1}(\check{Y}_\mu)
+&= (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu + \bigl(((-i)\,e_{+})(\sinh K_1)_{\mathbb{C}}\bigr)\check{Z}_\mu
+&&(\because \blkref{exponential_series_of_even_odd_power_terms}) \\
+&= \bigl(((-i)\,e_{+})(\sinh K_1)_{\mathbb{C}}\bigr)\check{Z}_\mu + (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu
+&&(\because \blkref{matrix_sum_is_commutative})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。(h2.z): 偶数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_2}(\check{Z}_\mu)
+&= \bigl(2\,(K_2^*)_{\mathbb{C}}\bigr)^{n}\,\check{Z}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h2.z) の偶数の場合}) \\
+&= \bigl((2K_2^*)_{\mathbb{C}}\bigr)^{n}\,\check{Z}_\mu
+&&(\because \text{準備の}\ 2\,(K_2^*)_{\mathbb{C}} = (2K_2^*)_{\mathbb{C}})
+\end{aligned}`,
+      ),
+      paragraph(["であり、奇数のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_2}(\check{Z}_\mu)
+&= \Bigl((-i)\bigl(2\,(K_2^*)_{\mathbb{C}}\bigr)^{n}\Bigr)\check{Y}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h2.z) の奇数の場合}) \\
+&= \Bigl((-i)\bigl((2K_2^*)_{\mathbb{C}}\bigr)^{n}\Bigr)\check{Y}_\mu
+&&(\because \text{準備の}\ 2\,(K_2^*)_{\mathbb{C}} = (2K_2^*)_{\mathbb{C}})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、",
+        ref("exponential_series_of_even_odd_power_terms"),
+        " を ",
+        math(String.raw`d`),
+        "、",
+        math(String.raw`x = 2K_2^*`),
+        "、",
+        math(String.raw`A = \check{Z}_\mu`),
+        "、",
+        math(String.raw`B = \check{Y}_\mu`),
+        "、",
+        math(String.raw`c = -i`),
+        " で当てて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_2}(\check{Z}_\mu)
+&= (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Z}_\mu + \bigl((-i)(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Y}_\mu
+&&(\because \blkref{exponential_series_of_even_odd_power_terms})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。(h2.y): 偶数のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_2}(\check{Y}_\mu)
+&= \bigl(2\,(K_2^*)_{\mathbb{C}}\bigr)^{n}\,\check{Y}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h2.y) の偶数の場合}) \\
+&= \bigl((2K_2^*)_{\mathbb{C}}\bigr)^{n}\,\check{Y}_\mu
+&&(\because \text{準備の}\ 2\,(K_2^*)_{\mathbb{C}} = (2K_2^*)_{\mathbb{C}})
+\end{aligned}`,
+      ),
+      paragraph(["であり、奇数のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{ad}^{n}_{G_2}(\check{Y}_\mu)
+&= \Bigl(i\bigl(2\,(K_2^*)_{\mathbb{C}}\bigr)^{n}\Bigr)\check{Z}_\mu
+&&(\because \blkref{cosh_sinh_coefficient_conversion_for_check}\ \text{(h2.y) の奇数の場合}) \\
+&= \Bigl(i\bigl((2K_2^*)_{\mathbb{C}}\bigr)^{n}\Bigr)\check{Z}_\mu
+&&(\because \text{準備の}\ 2\,(K_2^*)_{\mathbb{C}} = (2K_2^*)_{\mathbb{C}})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であるから、",
+        ref("exponential_series_of_even_odd_power_terms"),
+        " を ",
+        math(String.raw`d`),
+        "、",
+        math(String.raw`x = 2K_2^*`),
+        "、",
+        math(String.raw`A = \check{Y}_\mu`),
+        "、",
+        math(String.raw`B = \check{Z}_\mu`),
+        "、",
+        math(String.raw`c = i`),
+        " で当てて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_2}(\check{Y}_\mu)
+&= (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Y}_\mu + \bigl(i\,(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Z}_\mu
+&&(\because \blkref{exponential_series_of_even_odd_power_terms}) \\
+&= \bigl(i\,(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Z}_\mu + (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Y}_\mu
+&&(\because \blkref{matrix_sum_is_commutative})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -5215,6 +5827,7 @@ i\,(2K_2^*)^{n}\,\check{Z}_\mu & (n\text{ 奇数}) \\
         "4 式の係数変換の適用を各式鎖の直前から実在ラベルで参照し、(h1.y)・(h2.y) の終端の項の交換へ行列加法の可換則を明記した（2026-08-15）。",
         "2026-09-26: sinh, cosh のテイラー展開の適用を sinh_cosh_taylor_series のラベル参照で引くようにした。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02（全証明の SageMath 検算。sagemath/check/extract_taylor_coefficient_of_check_Z_Y/）: 主張を cosh_sinh_coefficient_conversion_for_check の新しい表記（生成子 (i/2)((K_1)_C H_1^{(+)})・i((K_2^*)_C H_2)、K_1・K_2^*・θ̃・1/n!・cosh・sinh の値を inclusion_rr_to_cc の像で、係数を一つの複素数にまとめたスカラー倍）にそろえた（主張の中身は不変）。証明は、級数を偶数項と奇数項の二つの級数に分けて n に依らない因子を和の外へ出し、証明の無い sinh_cosh_taylor_series を代入していた（無限和の分割と並べ替えの根拠が無かった）ので、部分和と極限で示す新しい主張 exponential_series_of_even_odd_power_terms を引く形にし、係数変換の結果をその仮定の形へ並べ替える行と 2(K_2^*)_C = (2K_2^*)_C を足した。収束の根拠も matrix_exp_conjugation (1) からこの新しい主張へ移した。",
       ],
     },
   },

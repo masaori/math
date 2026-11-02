@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 355 件のうち、SageMath の検算が無いもの 71 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 360 件のうち、SageMath の検算が無いもの 70 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -185,13 +185,19 @@
   人手証明を直した: 主張を nesting の新しい表記（包含の像、スカラー倍の括弧、生成子 `(i/2)((K_1)_C H_1^{(+)})`・`i((K_2^*)_C H_2)`）にそろえた。補題 1 の散文を m の帰納法の鎖に、交換子の線型性を nesting の証明の準備から切り出した新しい主張への参照にした（nesting の 8 か所も引き直し、β を括弧で括ったまま可換律・結合律の行まで運ぶ形にし、nesting の主張に係数の `2` が `2_C := (2_R)_C` であることを書いた）。補題 2 と、根拠なしで使っていた冪の法則（`(i/2)^n = i^n 2^{-n}`・`(2K)^n = 2^nK^n`・`(-1)^a(-1)^b = (-1)^{a+b}`）を、冪の約束だけから帰納法で示す `(i/2)^m(2k)^m = i^m k^m` と `i^{2l}(-1)^l = 1` に置き換えた。計算の誤りは無かった。
   Lean（`ClaimCoefficientConversion.lean`）は補題 2 を `I_pow_even`・`I_pow_odd` で写しており、人手の新しい準備との対応の注記は Lean の連続実行が見直す。
 
+- `extract_taylor_coefficient_of_check_Z_Y`（Ž・Y̌ についてのテイラー係数の抽出）と、そのために足した `exponential_series_of_even_odd_power_terms`（偶数番目と奇数番目が数の冪のスカラー倍である行列の列の指数級数）: `sagemath/check/<ラベル>/`。
+  補題の準備と中間目標「各項」「部分和」「差」は実数の対の ℂ と `QQ(i)` 上の不定元で厳密に、実数の評価・ノルムの評価・ε の鎖・主張は本文の exp を囲むボールで確かめた。テイラー係数の抽出は、四つの式の偶数・奇数の場合の鎖を `M_col = 2..5`・全 μ・n = 0..7 で厳密に、主張を部分和 S_60 と右辺の差のノルムで `M_col = 2..4` に確かめた。
+  人手証明を直した: 証明は級数を偶数項と奇数項の二つの級数に分けて因子を和の外へ出し、証明の無い `sinh_cosh_taylor_series` を代入していた（無限和の分割と並べ替えの根拠が無い）。その計算を部分和の等式と極限で示す新しい主張に切り出し、四つの式はその主張を引く形にした。主張を `cosh_sinh_coefficient_conversion_for_check` の新しい表記にそろえた（主張の中身は不変）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `extract_taylor_coefficient_of_check_Z_Y`（Ž・Y̌ についてのテイラー係数の抽出。`--list` の先頭）から、文書順に検算を足す。このブロックは `cosh_sinh_coefficient_conversion_for_check` を旧い表記（生成子 `\tfrac{i}{2}K_1H_1^{(+)}`、係数 `iK_1^n\exp(-i\tilde\theta)`。K_1・θ̃ に包含の像なし）で引いているので、引く行を新しい主張の形（生成子 `(i/2)((K_1)_C H_1^{(+)})`、係数を一つの複素数にまとめたスカラー倍）にそろえる。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `T_actions_on_check_Z_Y`（T の Ž・Y̌ への作用。`--list` の先頭）から、文書順に検算を足す。このブロックは `extract_taylor_coefficient_of_check_Z_Y` を旧い表記（`\frac{1}{n!}`、生成子 `\tfrac{i}{2}K_1H_1^{(+)}`、`\cosh(K_1)`・`i\exp(-i\tilde\theta)\sinh(K_1)` を包含の像なしで行列に掛ける）で引いているので、四本の鎖の級数の行と最後の行を新しい主張の形（`(1/n!)_C`、`(i/2)((K_1)_C H_1^{(+)})`、`(\cosh K_1)_C`、係数をまとめたスカラー倍）にそろえる。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`extract_taylor_coefficient_of_check_Z_Y` の書き換えで生じた（参照されない証明の無い主張）: `sinh_cosh_taylor_series`（`008_TV1_hatZ_hatY_part1.ts`。証明が無い）は、どこからも引かれなくなった。消すか参照用ノートへ移すかは、検算の付いたブロックの見直しで扱う。同じレビューで、新しい主張の証明が 0 から始まる有限和に 1 から始まる有限和の主張（`finite_sum_of_matrices_entrywise` など）を添字の付け替えを書かずに引いていること（`def_matrix_norm` の部分和から続く既存の書き方）、「行列は成分で定まる」に引くラベルが無いこと、`-1_C` を包含の像と読むか `1_C` の加法の逆元と読むかが隣のブロックとそろっていないことも見つかった。
 
 - 2026-11-02、`cosh_sinh_coefficient_conversion_for_check` のレビューで見つかった（同一視と一行二操作。今回の差分より前から）: `nesting_of_commutator_of_H_and_check_Z` の証明の「準備（前提の読み方）」は、`commutator_of_H_and_check_Z_Y` の (A)〜(D) の `exp(∓iθ̃_μ)` を `exp(∓i(θ̃)_C)` と、`2exp(…)Y̌` を係数をまとめたスカラー倍と、散文で読み替えている。直すには (A)〜(D) の主張を包含の像と括弧付きのスカラー倍で書き直し、この段落を除く。同じ証明の「ℂ の四則」の行は `-2 = (-1_C)2` の書き換え（`multiply_by_minus_one`）と並べ替えを一行にまとめている。`commutator_of_H_and_check_Z_Y` の検算は付いているので、検算の付いたブロックの見直しで扱う。
 

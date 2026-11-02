@@ -1,0 +1,1574 @@
+PASS: 準備 2(K_2^*)_C: 「2 (K_2^*)_C」=「(2_R)_C (K_2^*)_C」
+PASS: 準備 2(K_2^*)_C: 「(2_R)_C (K_2^*)_C」=「(2K_2^*)_C」
+PASS: 対照: 2(K_2^*)_C ≠ (K_2^*)_C
+PASS: M=2 mu=1 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.z): 補題の右辺が主張の右辺
+PASS: M=2 mu=1 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=1 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=1 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=2 mu=1 (h1.y): 最後の行が主張の右辺
+PASS: M=2 mu=1 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.z): 補題の右辺が主張の右辺
+PASS: M=2 mu=1 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=1 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=1 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=1 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=1 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=1 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=1 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=2 mu=1 (h2.y): 最後の行が主張の右辺
+PASS: M=2 mu=1: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=2 mu=1: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=2 mu=2 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.z): 補題の右辺が主張の右辺
+PASS: M=2 mu=2 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=2 mu=2 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=2 mu=2 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=2 mu=2 (h1.y): 最後の行が主張の右辺
+PASS: M=2 mu=2 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.z): 補題の右辺が主張の右辺
+PASS: M=2 mu=2 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=2 mu=2 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=2 mu=2 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=2 mu=2 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=2 mu=2 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=2 mu=2 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=2 mu=2 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=2 mu=2 (h2.y): 最後の行が主張の右辺
+PASS: M=2 mu=2: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=2 mu=2: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+M=2: done
+PASS: M=3 mu=1 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=1 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=1 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=1 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=1 (h1.y): 最後の行が主張の右辺
+PASS: M=3 mu=1 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=1 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=1 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=1 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=1 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=1 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=1 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=1 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=1 (h2.y): 最後の行が主張の右辺
+PASS: M=3 mu=1: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=3 mu=1: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=3 mu=2 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=2 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=2 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=2 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=2 (h1.y): 最後の行が主張の右辺
+PASS: M=3 mu=2 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=2 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=2 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=2 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=2 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=2 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=2 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=2 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=2 (h2.y): 最後の行が主張の右辺
+PASS: M=3 mu=2: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=3 mu=3 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=3 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=3 mu=3 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=3 mu=3 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=3 (h1.y): 最後の行が主張の右辺
+PASS: M=3 mu=3 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.z): 補題の右辺が主張の右辺
+PASS: M=3 mu=3 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=3 mu=3 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=3 mu=3 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=3 mu=3 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=3 mu=3 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=3 mu=3 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=3 mu=3 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=3 mu=3 (h2.y): 最後の行が主張の右辺
+PASS: M=3 mu=3: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=3 mu=3: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+M=3: done
+PASS: M=4 mu=1 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=1 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=1 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=1 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=1 (h1.y): 最後の行が主張の右辺
+PASS: M=4 mu=1 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=1 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=1 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=1 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=1 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=1 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=1 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=1 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=1 (h2.y): 最後の行が主張の右辺
+PASS: M=4 mu=1: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=4 mu=1: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=4 mu=2 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=2 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=2 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=2 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=2 (h1.y): 最後の行が主張の右辺
+PASS: M=4 mu=2 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=2 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=2 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=2 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=2 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=2 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=2 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=2 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=2 (h2.y): 最後の行が主張の右辺
+PASS: M=4 mu=2: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=4 mu=2: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=4 mu=3 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=3 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=3 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=3 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=3 (h1.y): 最後の行が主張の右辺
+PASS: M=4 mu=3 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=3 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=3 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=3 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=3 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=3 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=3 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=3 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=3 (h2.y): 最後の行が主張の右辺
+PASS: M=4 mu=3: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=4 mu=3: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=4 mu=4 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=4 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=4 mu=4 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=4 mu=4 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=4 (h1.y): 最後の行が主張の右辺
+PASS: M=4 mu=4 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.z): 補題の右辺が主張の右辺
+PASS: M=4 mu=4 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=4 mu=4 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=4 mu=4 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=4 mu=4 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=4 mu=4 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=4 mu=4 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=4 mu=4 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=4 mu=4 (h2.y): 最後の行が主張の右辺
+PASS: M=4 mu=4: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=4 mu=4: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+M=4: done
+PASS: M=5 mu=1 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=1 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=1 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=1 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=1 (h1.y): 最後の行が主張の右辺
+PASS: M=5 mu=1 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=1 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=1 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=1 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=1 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=1 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=1 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=1 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=1 (h2.y): 最後の行が主張の右辺
+PASS: M=5 mu=1: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=5 mu=1: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=5 mu=2 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=2 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=2 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=2 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=2 (h1.y): 最後の行が主張の右辺
+PASS: M=5 mu=2 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=2 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=2 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=2 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=2 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=2 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=2 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=2 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=2 (h2.y): 最後の行が主張の右辺
+PASS: M=5 mu=2: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=5 mu=2: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=5 mu=3 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=3 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=3 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=3 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=3 (h1.y): 最後の行が主張の右辺
+PASS: M=5 mu=3 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=3 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=3 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=3 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=3 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=3 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=3 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=3 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=3 (h2.y): 最後の行が主張の右辺
+PASS: M=5 mu=3: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=5 mu=4 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=4 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=4 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=4 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=4 (h1.y): 最後の行が主張の右辺
+PASS: M=5 mu=4 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=4 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=4 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=4 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=4 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=4 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=4 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=4 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=4 (h2.y): 最後の行が主張の右辺
+PASS: M=5 mu=4: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=5 mu=4: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+PASS: M=5 mu=5 (h1.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.z) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.z) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.z) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.z) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.z) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.z) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.z) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.z) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=5 (h1.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.y) n=1: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=1: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.y) n=1: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.y) n=3: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=3: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.y) n=3: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.y) n=5: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=5: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.y) n=5: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h1.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h1.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h1.y) n=7: 「変換の奇数の場合」=「(s (k^n e)) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=7: 「(s (k^n e)) B（結合律）」=「(s (e k^n)) B（可換律）」
+PASS: M=5 mu=5 (h1.y) n=7: 「(s (e k^n)) B（可換律）」=「((s e) k^n) B（結合律）」
+PASS: M=5 mu=5 (h1.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h1.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=5 (h1.y): 最後の行が主張の右辺
+PASS: M=5 mu=5 (h2.z) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.z) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.z) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.z) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.z) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.z) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.z) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.z) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.z) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.z) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.z) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.z) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.z) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.z) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.z) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.z) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.z) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.z) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.z) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.z) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.z) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.z) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.z) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.z) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.z): 補題の右辺が主張の右辺
+PASS: M=5 mu=5 (h2.y) n=0: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.y) n=0: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.y) n=0: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.y) n=1: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.y) n=1: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.y) n=1: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.y) n=2: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.y) n=2: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.y) n=2: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.y) n=3: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.y) n=3: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.y) n=3: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.y) n=4: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.y) n=4: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.y) n=4: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.y) n=5: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.y) n=5: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.y) n=5: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.y) n=6: 「ad^n_G(W)」=「変換の偶数の場合」
+PASS: M=5 mu=5 (h2.y) n=6: 「変換の偶数の場合」=「((2K_2^*)_C)^n A」
+PASS: M=5 mu=5 (h2.y) n=6: 補題の仮定の偶数の形 (x_C)^n A
+PASS: M=5 mu=5 (h2.y) n=7: 「ad^n_G(W)」=「変換の奇数の場合」
+PASS: M=5 mu=5 (h2.y) n=7: 「変換の奇数の場合」=「(c ((2K_2^*)_C)^n) B」
+PASS: M=5 mu=5 (h2.y) n=7: 補題の仮定の奇数の形 (c (x_C)^n) B
+PASS: M=5 mu=5 (h2.y): 「補題の右辺」=「和の可換律で並べ替えた式」
+PASS: M=5 mu=5 (h2.y): 最後の行が主張の右辺
+PASS: M=5 mu=5: 対照 (h1.z) n=1 で位相を逆にすると仮定の形にならない
+PASS: M=5 mu=5: 対照 (h2.z) n=1 で c の符号を逆にすると仮定の形にならない
+M=5: done
+RESULT: PASS

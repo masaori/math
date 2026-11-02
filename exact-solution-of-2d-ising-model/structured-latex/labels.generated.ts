@@ -275,6 +275,7 @@ export const ALL_LABELS = [
   "exp_of_negative_is_left_inverse",
   "exp_sum",
   "expansion_of_finite_product_of_two_term_sums",
+  "exponential_series_of_even_odd_power_terms",
   "extract_taylor_coefficient_of_check_Z_Y",
   "factorization_of_A_theta_general",
   "finite_product_of_complex_ones",
