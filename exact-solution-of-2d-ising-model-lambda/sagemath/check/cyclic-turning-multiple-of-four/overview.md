@@ -2,7 +2,7 @@
 
 **対象ラベル**: `claim_step_advances_direction`, `claim_walk_direction_difference`, `claim_cyclic_total_turning_multiple_of_four`
 - 実行: `sage sagemath/check/cyclic-turning-multiple-of-four/check.sage`
-- 状態: PASS（2026-08-30、接続 660 件・辺列 6,776 件・閉歩道 1,064 件）
+- 状態: PASS（2026-11-02、接続 660 件・辺列 6,776 件・閉歩道 1,064 件）
 
 `L = 1,...,5` の全非後退接続について `dir(f) = dir(e) + π₄(τ(e,f))` を、
 `L = 1,2,3`・辺 1〜5 本の全非後退辺列について `dir(e_m) = dir(e_1) + π₄(t(γ))` を、

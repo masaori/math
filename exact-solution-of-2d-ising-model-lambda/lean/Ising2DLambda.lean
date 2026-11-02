@@ -1167,6 +1167,7 @@ import Ising2DLambda.NecSuf.KacWard.ReversalMatrixDeterminant
 import Ising2DLambda.KacWard.ReversalMatrixDeterminantFromNecSuf
 import Ising2DLambda.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.ClosedNonbacktrackingWalk
+import Ising2DLambda.KacWard.StepTurning
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.TerminalMatrixFromNecSuf
 import Ising2DLambda.KacWard.TerminalMatrixDeterminant

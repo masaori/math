@@ -3784,26 +3784,24 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
         math(String.raw`V_2`),
         " は可逆である。",
       ]),
-      paragraph([
-        ref("def_invertible_elements_of_R"),
-        " (ii) より",
-      ]),
       displayMath(
-        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\in R^\times,
+        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\in R^\times
+\quad\bigl(\because\ \blkref{V1_plus_half_invertible},\ \blkref{V2_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\bigr),
 \qquad R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
       paragraph([
-        ref("V1_plus_half_invertible"),
-        " と ",
-        ref("def_invertible_elements_of_R"),
-        " (ii) より",
+        ref("V1_plus_half_invertible"), "、", ref("V2_invertible"), "、",
+        ref("def_invertible_elements_of_R"), " (ii)。",
       ]),
       displayMath(
         String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}
-\in R^\times`,
+\in R^\times
+\quad\bigl(\because\ \text{直前の積と }\blkref{V1_plus_half_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\bigr)`,
       ),
-      paragraph([ref("def_V_plus"), " より"]),
-      displayMath(String.raw`V^{(+)}\in R^\times`),
+      paragraph([ref("V1_plus_half_invertible"), "、", ref("def_invertible_elements_of_R"), " (ii)。"]),
+      displayMath(String.raw`V^{(+)}\in R^\times
+\quad\bigl(\because\ \text{直前の所属と }\blkref{def_V_plus}\bigr)`),
+      paragraph([ref("def_V_plus"), "。"]),
     ],
     conversion: { status: "added" },
   },
