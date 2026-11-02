@@ -1726,6 +1726,10 @@ targets=(
   Ising2D.CheckFermiSetup.Qproj_eq_finProdLeft
   Ising2D.CheckFermiSetup.Qproj_mul_self
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne
+  Ising2D.CheckFermiSetup.projFactor_mul_projFactor_eq_zero_step1
+  Ising2D.CheckFermiSetup.projFactor_comm_factor_step1
+  Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne_step1
+  Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne_of_necSuf
   Ising2D.CheckFermiSetup.sum_Qproj
   Ising2D.CheckFermiSetup.nOp_mul_Qproj
   Ising2D.CheckFermiSetup.trace_Qproj
