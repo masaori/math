@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の四十八個目を行った。`sign_flip_conjugation` Step 1 の `Fσ_k^yF^{-1}` の名前だけの根拠「パウリ行列の積」を、結合律で `σ_k^z(σ_k^yσ_k^z)` に組み替えて `pauli_matrix_products` の向きのまま使う 6 行の鎖にし、`σ_k^zσ_k^x` の鎖を `(p, q) ∈ {(z, x), (y, z)}` に一般化した（Lean の `siteOp_mul_of_anticomm`・`sigmaY_mul_sigmaZ_site`・`sigmaZ_sigmaY_sigmaZ_site`、SageMath check_14）。二重の符号反転の主張は要らなかった。次は `E` による共役の鎖（状態台帳の次の一歩）。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、`sine_integral_two_sided`（正弦を含む積分の両側評価）の B の定義と B ≤ 0.88 を独立のブロックに分け、平方根どうしの大小の根拠として主張 `nonnegative_real_order_from_squares` を足し、3 個の主張に同名の検算を付けた（未検算 92 件）。本文に無い平方根の単調性に頼る段を新しい主張から引く形にし、各点評価を 1 行 1 操作の鎖にした。計算の誤りは無かった。Lean の具体版が直した人手証明と 1 対 1 でないことは状態台帳に記録した。次は `sigma_z_diagonal_action`。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十七個目を行った。`sign_flip_conjugation` Step 1 の `Fσ_k^xF^{-1}`・`Fσ_k^zF^{-1}` の名前だけの根拠「パウリ行列の積」を、`σ_k^zσ_k^x = -(σ_k^xσ_k^z)` の 10 行の準備の鎖と 5 行・2 行の鎖に替え、主張 `negation_is_scalar_multiple_by_minus_one`（`-A = (-1)A`）を足した（SageMath の検算、Lean の具体版・必要十分版・系、`ClaimSignFlipConjugation.lean` の 1 対 1 の `calc` 3 本、SageMath check_13）。次は `Fσ_k^yF^{-1}` と `E` による共役の鎖（状態台帳の次の一歩）。

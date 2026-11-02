@@ -89,7 +89,7 @@
 | `Vmat` / `Vmat_posDef` / `trace_Vmat_pos` | `V` の定義・正定値性・`tr(V) > 0` | `V_is_positive_definite` |
 | `Uflip` / `UflipInv` / `Uflip_mul_inv` / `UflipInv_mul` | 符号反転共役 `U = EF` と可逆性 | `sign_flip_conjugation` Step 0 |
 | `Uflip_conj_sigmaX/Y/Z` | `U σ^a_k U^{-1}` の符号 | 同 Step 1 |
-| `sigmaZ_mul_sigmaX_site` / `sigmaZ_sigmaX_sigmaZ_site` / `sigmaZ_sigmaZ_sigmaZ_site` | `σ_k^zσ_k^x = -(σ_k^xσ_k^z)`、`(σ_k^zσ_k^x)σ_k^z = -σ_k^x`、`(σ_k^zσ_k^z)σ_k^z = σ_k^z`（人手の鎖の行と 1 対 1。`Uflip_conj_sigmaX/Z` はこれらを使わない） | 同 Step 1 の `F` による共役の鎖の 2 行目以降 |
+| `siteOp_mul_of_anticomm` / `sigmaZ_mul_sigmaX_site` / `sigmaY_mul_sigmaZ_site` / `sigmaZ_sigmaX_sigmaZ_site` / `sigmaZ_sigmaY_sigmaZ_site` / `sigmaZ_sigmaZ_sigmaZ_site` | `AB = -(BA)` なら `siteOp k A * siteOp k B = -(siteOp k B * siteOp k A)`（人手の 10 行の鎖。特殊化が `(p, q) = (z, x), (y, z)`）、`(σ_k^zσ_k^x)σ_k^z = -σ_k^x`、`(σ_k^zσ_k^y)σ_k^z = -σ_k^y`、`(σ_k^zσ_k^z)σ_k^z = σ_k^z`（人手の鎖の行と 1 対 1。`Uflip_conj_sigmaX/Y/Z` はこれらを使わない） | 同 Step 1 の `σ_k^pσ_k^q` の鎖と、`F` による共役の鎖の 2 行目以降 |
 | `UflipUnit` / `Uflip_conj_mul` / `Uflip_conj_smul` | `U` を可逆元とする単元、共役は積を保つ（`Conjugation.T_mul` の特殊化）、`(U(cA))U^{-1} = c((UA)U^{-1})` | 同 Step 3 の `conjugation_is_ring_homomorphism` の 3 行、Step 4 の `scalar_multiple_factors_out_of_right_factor`・`..._left_factor` の 2 行 |
 | `Uflip_conj_Z` / `Uflip_conj_Y` | `U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = Y_m` | 同（原文には無い中間段階） |
 | `Uflip_conj_H1plus` / `Uflip_conj_H2` / `Uflip_conj_S1plus` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S`（`H = H_1^{(+)}, H_2`。`Uflip_conj_H1` / `Uflip_conj_S1` は補助の一般形） | `sign_flip_conjugation` |

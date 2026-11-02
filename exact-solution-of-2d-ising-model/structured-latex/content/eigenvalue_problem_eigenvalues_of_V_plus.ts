@@ -527,48 +527,46 @@ U\,S_2\,U^{-1} = -\,S_2`,
       paragraph([
         "まず同じサイト ",
         math(String.raw`k`),
-        " の ",
-        math(String.raw`\sigma_k^z`),
-        " と ",
-        math(String.raw`\sigma_k^x`),
-        " の積の順序を入れ替える。次の鎖の中に限り ",
+        " の二つのパウリ行列の積の順序を入れ替える。次の鎖の中に限り ",
+        math(String.raw`(p, q) \in \{(z, x),\ (y, z)\}`),
+        " とし、",
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " と書く。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma_k^z\sigma_k^x
-&= \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
-   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+\sigma_k^p\sigma_k^q
+&= \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^p}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^q}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
    \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
-&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^x)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
+&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^p\sigma^q)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
    \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
-&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^x)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^p\sigma^q)}^{k\text{th}}\boxtimes\cdots\boxtimes I
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
-&= I\boxtimes\cdots\boxtimes\overbrace{\left(-(\sigma^x\sigma^z)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
-   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^z\sigma^x = -\,\sigma^x\sigma^z\right) \\
-&= I\boxtimes\cdots\boxtimes\overbrace{\left((-1_{\mathbb{C}})(\sigma^x\sigma^z)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&= I\boxtimes\cdots\boxtimes\overbrace{\left(-(\sigma^q\sigma^p)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^p\sigma^q = -\,\sigma^q\sigma^p\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((-1_{\mathbb{C}})(\sigma^q\sigma^p)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
    \quad \left(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\right) \\
-&= (-1_{\mathbb{C}})\left(I\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+&= (-1_{\mathbb{C}})\left(I\boxtimes\cdots\boxtimes\overbrace{(\sigma^q\sigma^p)}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
    \quad \left(\because\ \blkref{kronecker_multilinear}\text{ の第 }k\text{ 因子についての線型性}\right) \\
-&= (-1_{\mathbb{C}})\left((II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)\right)
+&= (-1_{\mathbb{C}})\left((II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^q\sigma^p)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)\right)
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
-&= (-1_{\mathbb{C}})\left(\left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
-   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)\right)
+&= (-1_{\mathbb{C}})\left(\left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^q}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^p}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)\right)
    \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
-&= (-1_{\mathbb{C}})\left(\sigma_k^x\sigma_k^z\right)
+&= (-1_{\mathbb{C}})\left(\sigma_k^q\sigma_k^p\right)
    \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
-&= -\left(\sigma_k^x\sigma_k^z\right)
+&= -\left(\sigma_k^q\sigma_k^p\right)
    \quad \left(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\right)
 \end{aligned}`,
       ),
       paragraph([
-        ref("pauli_matrix_products"),
-        " の ",
-        math(String.raw`\sigma^y\sigma^z = -\sigma^z\sigma^y`),
-        "、",
         math(String.raw`(\sigma^z)^{-1} = \sigma^z`),
-        "、上の鎖および Step 0 の ",
+        "、上の鎖（",
+        math(String.raw`(p, q) = (z, x)`),
+        " と ",
+        math(String.raw`(y, z)`),
+        "）および Step 0 の ",
         math(String.raw`\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
         " より",
       ]),
@@ -578,7 +576,7 @@ F\sigma_k^x F^{-1}
 &= \left(\sigma_k^z\sigma_k^x\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^x\text{ と可換}) \\
 &= \left(-\left(\sigma_k^x\sigma_k^z\right)\right)\sigma_k^z
-   \quad (\because\ \text{上の }\sigma_k^z\sigma_k^x\text{ の鎖}) \\
+   \quad (\because\ \text{上の鎖を }(p, q) = (z, x)\text{ で}) \\
 &= -\left(\left(\sigma_k^x\sigma_k^z\right)\sigma_k^z\right)
    \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right) \\
 &= -\left(\sigma_k^x\left(\sigma_k^z\sigma_k^z\right)\right)
@@ -590,10 +588,18 @@ F\sigma_k^x F^{-1}
 F\sigma_k^y F^{-1}
 &= \left(\sigma_k^z\sigma_k^y\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^y\text{ と可換}) \\
-&= -\sigma_k^y\sigma_k^z\sigma_k^z
-   \quad (\because\ \text{パウリ行列の積}) \\
+&= \sigma_k^z\left(\sigma_k^y\sigma_k^z\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= \sigma_k^z\left(-\left(\sigma_k^z\sigma_k^y\right)\right)
+   \quad (\because\ \text{上の鎖を }(p, q) = (y, z)\text{ で}) \\
+&= -\left(\sigma_k^z\left(\sigma_k^z\sigma_k^y\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right) \\
+&= -\left(\left(\sigma_k^z\sigma_k^z\right)\sigma_k^y\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= -\left(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^y\right)
+   \quad (\because\ \text{Step 0 の }\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で}) \\
 &= -\sigma_k^y
-   \quad (\because\ \text{パウリ行列の積}), \\
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right), \\
 F\sigma_k^z F^{-1}
 &= \left(\sigma_k^z\sigma_k^z\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^z\text{ と可換}) \\
@@ -879,6 +885,9 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 1 の Fσ_k^yF^{-1} の名前だけの根拠「パウリ行列の積」2 行を、mat_mult_associative で (σ_k^zσ_k^y)σ_k^z を σ_k^z(σ_k^yσ_k^z) に組み替え、" +
+          "σ_k^zσ_k^x の鎖を (p, q) ∈ {(z, x), (y, z)} の σ_k^pσ_k^q = −(σ_k^qσ_k^p) に一般化したものを (y, z) で使い、negation_factors_out_of_right_factor・mat_mult_associative・Step 0・identity_matrix_is_left_unit_of_mat_mult の鎖にした（p, q は Step 1 冒頭と E の段落の a, b と別の文字）。" +
+          "pauli_matrix_products の σ^yσ^z = −σ^zσ^y をそのままの向きで使うので、行列の二重の符号反転は要らない。主張は変えていない。Lean の対応は Ising2D.siteOp_mul_of_anticomm・sigmaY_mul_sigmaZ_site・sigmaZ_sigmaY_sigmaZ_site。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_14_sign_flip_step1_F_conjugation_sigma_y_chain.sage。",
         "2026-11-02: Step 0 の σ_m^xσ_m^x = I・σ_m^zσ_m^z = I（名前だけの根拠「パウリ行列の積」、I に添字なし）を、a ∈ {x, z} について def_site_pauli_matrices・kronecker_product_rule (1)・pauli_matrix_products・identity_matrix_is_left_unit_of_mat_mult・kronecker_product_rule (2) の 5 行の鎖にした。Lean の対応は Ising2D.sigmaX_mul_sigmaX_site・Ising2D.sigmaZ_mul_sigmaZ_site（ClaimSignFlipConjugation.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_12_sign_flip_step0_site_square_chains.sage。",
         "2026-11-02: Step 3 の「共役は積を保つ」2 か所を conjugation_is_ring_homomorphism の T_B の定義と乗法性の 3 行に、Step 4 の「S の定義かつ共役はスカラー倍を保つ」2 か所を S の定義・scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor・Step 3・scalar_multiple_of_negated_matrix・S の定義の 6 行に割った。UXU^{-1} を (UX)U^{-1} と読むことを Step 3 に書いた。Lean の対応は Ising2D.Uflip_conj_mul（Conjugation.T_mul の特殊化）・Ising2D.Uflip_conj_S1plus・Ising2D.Uflip_conj_S2。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_11_sign_flip_step3_step4_conjugation_chains.sage。",
         "2026-11-02: Step 3 の符号を積の外へ出す 2 段を negation_factors_out_of_right_factor・negation_factors_out_of_left_factor へのラベル参照にした。Lean の対応は Ising2D.Uflip_conj_H1・Ising2D.Uflip_conj_H2 の mul_neg_matrix_tensorPow・neg_mul_matrix_tensorPow。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_09_sign_flip_step3_chains.sage（QQ(i) の厳密計算）。",

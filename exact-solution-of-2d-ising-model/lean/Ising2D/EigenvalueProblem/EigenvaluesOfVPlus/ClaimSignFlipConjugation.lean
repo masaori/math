@@ -130,47 +130,57 @@ theorem sigmaX_mul_sigmaX_site (m : Fin M) : sigmaX m * sigmaX m = 1 :=
 theorem sigmaZ_mul_sigmaZ_site (m : Fin M) : sigmaZ m * sigmaZ m = 1 :=
   siteOp_mul_self_of_mul_self_eq_one m pauliZ pauliZ_mul_pauliZ
 
-/-! ## 人手 Step 1 の `F` による共役の鎖（`a ∈ {x, z}`）
+/-! ## 人手 Step 1 の `F` による共役の鎖（`a ∈ {x, y, z}`）
 
 人手の鎖の各行と 1 対 1 に対応する。各鎖の 1 行目「`k` 以外のサイトの因子は `σ_k^a` と可換」
 （`Fσ_k^aF^{-1} = (σ_k^zσ_k^a)σ_k^z`）は Lean に `F` を置いていないので立てず、2 行目以降を `(σ_k^zσ_k^a)σ_k^z` から示す。
-`U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
+`U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaY`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
 クロネッカー積として持ち、サイトごとの成分計算で示しており、ここの鎖を使わない。 -/
 
-/-- 人手 Step 1 の `σ_k^zσ_k^x = -(σ_k^xσ_k^z)` の 10 行の鎖。 -/
-theorem sigmaZ_mul_sigmaX_site (k : Fin M) : sigmaZ k * sigmaX k = -(sigmaX k * sigmaZ k) :=
-  calc sigmaZ k * sigmaX k
-      = siteProd M (Function.update 1 k pauliZ) * siteProd M (Function.update 1 k pauliX) := rfl
+/-- 人手 Step 1 の `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`（`(p, q) ∈ {(z, x), (y, z)}`）の 10 行の鎖（組を一つ固定した形）。
+`A = σ^p`、`B = σ^q` で `AB = -(BA)` なら、サイト `k` の `σ_k^p`・`σ_k^q` について `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`。 -/
+theorem siteOp_mul_of_anticomm (k : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) (hAB : A * B = -(B * A)) :
+    siteOp k A * siteOp k B = -(siteOp k B * siteOp k A) :=
+  calc siteOp k A * siteOp k B
+      = siteProd M (Function.update 1 k A) * siteProd M (Function.update 1 k B) := rfl
                                                         -- `def_site_pauli_matrices`
-    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (pauliZ * pauliX)) := by
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (A * B)) := by
         rw [← siteProd_mul, update_one_mul_update_one_same]
                                                         -- `kronecker_product_rule` (1)
-    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (pauliZ * pauliX)) := by
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (A * B)) := by
         rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
-    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (-(pauliX * pauliZ))) := by
-        rw [pauliZ_mul_pauliX]                          -- `pauli_matrix_products` の `σ^zσ^x = -σ^xσ^z`
-    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((-1 : ℂ) • (pauliX * pauliZ))) := by
-        rw [neg_eq_neg_one_smul_matrix (pauliX * pauliZ)]
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (-(B * A))) := by
+        rw [hAB]                                        -- `pauli_matrix_products` の `σ^pσ^q = -σ^qσ^p`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((-1 : ℂ) • (B * A))) := by
+        rw [neg_eq_neg_one_smul_matrix (B * A)]
                                                         -- `negation_is_scalar_multiple_by_minus_one`
-    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (pauliX * pauliZ)) :=
-        (siteProd M).map_update_smul _ k (-1 : ℂ) (pauliX * pauliZ)
+    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (B * A)) :=
+        (siteProd M).map_update_smul _ k (-1 : ℂ) (B * A)
                                                         -- `kronecker_multilinear`（第 `k` 因子についての線型性。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回）
-    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (pauliX * pauliZ)) := by
+    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (B * A)) := by
         rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
-    _ = (-1 : ℂ) • (siteProd M (Function.update 1 k pauliX) * siteProd M (Function.update 1 k pauliZ)) := by
+    _ = (-1 : ℂ) • (siteProd M (Function.update 1 k B) * siteProd M (Function.update 1 k A)) := by
         rw [← siteProd_mul, update_one_mul_update_one_same]
                                                         -- `kronecker_product_rule` (1)
-    _ = (-1 : ℂ) • (sigmaX k * sigmaZ k) := rfl         -- `def_site_pauli_matrices`
-    _ = -(sigmaX k * sigmaZ k) := (neg_eq_neg_one_smul_tensorPow _).symm
+    _ = (-1 : ℂ) • (siteOp k B * siteOp k A) := rfl     -- `def_site_pauli_matrices`
+    _ = -(siteOp k B * siteOp k A) := (neg_eq_neg_one_smul_tensorPow _).symm
                                                         -- `negation_is_scalar_multiple_by_minus_one`
+
+/-- 人手 Step 1 の `σ_k^zσ_k^x = -(σ_k^xσ_k^z)`（`(p, q) = (z, x)`）。 -/
+theorem sigmaZ_mul_sigmaX_site (k : Fin M) : sigmaZ k * sigmaX k = -(sigmaX k * sigmaZ k) :=
+  siteOp_mul_of_anticomm k pauliZ pauliX pauliZ_mul_pauliX
+
+/-- 人手 Step 1 の `σ_k^yσ_k^z = -(σ_k^zσ_k^y)`（`(p, q) = (y, z)`）。 -/
+theorem sigmaY_mul_sigmaZ_site (k : Fin M) : sigmaY k * sigmaZ k = -(sigmaZ k * sigmaY k) :=
+  siteOp_mul_of_anticomm k pauliY pauliZ pauliY_mul_pauliZ_anticomm
 
 /-- 人手 Step 1 の `Fσ_k^xF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^x)σ_k^z = -σ_k^x`。 -/
 theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k = -(sigmaX k) :=
   calc (sigmaZ k * sigmaX k) * sigmaZ k
       = (-(sigmaX k * sigmaZ k)) * sigmaZ k := by rw [sigmaZ_mul_sigmaX_site]
-                                                        -- 上の `σ_k^zσ_k^x` の鎖
+                                                        -- 上の `σ_k^pσ_k^q` の鎖（`(p, q) = (z, x)`）
     _ = -((sigmaX k * sigmaZ k) * sigmaZ k) := neg_mul_matrix_tensorPow _ _
                                                         -- `negation_factors_out_of_left_factor`
     _ = -(sigmaX k * (sigmaZ k * sigmaZ k)) := by rw [Matrix.mul_assoc (sigmaX k) (sigmaZ k) (sigmaZ k)]
@@ -179,6 +189,22 @@ theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k
                                                         -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
     _ = -(sigmaX k) := by rw [mul_identity_matrix_tensorPow]
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
+
+/-- 人手 Step 1 の `Fσ_k^yF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^y)σ_k^z = -σ_k^y`。 -/
+theorem sigmaZ_sigmaY_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaY k) * sigmaZ k = -(sigmaY k) :=
+  calc (sigmaZ k * sigmaY k) * sigmaZ k
+      = sigmaZ k * (sigmaY k * sigmaZ k) := Matrix.mul_assoc (sigmaZ k) (sigmaY k) (sigmaZ k)
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = sigmaZ k * (-(sigmaZ k * sigmaY k)) := by rw [sigmaY_mul_sigmaZ_site]
+                                                        -- 上の `σ_k^pσ_k^q` の鎖（`(p, q) = (y, z)`）
+    _ = -(sigmaZ k * (sigmaZ k * sigmaY k)) := mul_neg_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((sigmaZ k * sigmaZ k) * sigmaY k) := by rw [← Matrix.mul_assoc (sigmaZ k) (sigmaZ k) (sigmaY k)]
+                                                        -- `mat_mult_associative`（mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = -(1 * sigmaY k) := by rw [sigmaZ_mul_sigmaZ_site]
+                                                        -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
+    _ = -(sigmaY k) := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-- 人手 Step 1 の `Fσ_k^zF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^z)σ_k^z = σ_k^z`。 -/
 theorem sigmaZ_sigmaZ_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaZ k) * sigmaZ k = sigmaZ k :=

@@ -24,7 +24,7 @@
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）
-  - `sign_flip_conjugation`（Step 0・Step 1 の F による共役・Step 3・Step 4 の鎖。check_09・check_11・check_12・check_13）
+  - `sign_flip_conjugation`（Step 0・Step 1 の F による共役・Step 3・Step 4 の鎖。check_09・check_11・check_12・check_13・check_14）
 
 ### 何を確定させるための検証か
 
@@ -102,6 +102,7 @@ U        := E F,  E = Π_{m 奇数} σ_m^x,  F = Π_{m=1}^{M} σ_m^z
 | 11 | check_11_sign_flip_step3_step4_conjugation_chains.sage | `sign_flip_conjugation` の Step 3 の「`conjugation_is_ring_homomorphism` の `T_B` の定義 → 乗法性 → `T_B` の定義」の三行（二つの鎖とも）と、Step 4 の二つの六行の鎖（`S` の定義・`scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor`・Step 3・`scalar_multiple_of_negated_matrix`・`S` の定義）を一行ずつ。`QQ(i)` の厳密計算、`M = 2,3,4`、`UXU^{-1}` は本文どおり `(UX)U^{-1}`、`K_1, K_2^*` は正の有理数の代表値、符号反転とスカラー倍は成分ごと。否定コントロール 1 件 | PASS | 150 段、全段で厳密に一致 |
 | 12 | check_12_sign_flip_step0_site_square_chains.sage | `sign_flip_conjugation` の Step 0 の鎖 `σ_m^aσ_m^a = I_{Mat(2^{M_col},ℂ)}`（`a ∈ {x, z}`）の 5 行（`def_site_pauli_matrices`・`kronecker_product_rule` (1)・`pauli_matrix_products`・`identity_matrix_is_left_unit_of_mat_mult`・`kronecker_product_rule` (2)）を一行ずつ。`QQ(i)` の厳密計算、`M = 2,3,4`、全ての `m`、クロネッカー積は `def_kronecker` の成分の式で作り Sage の `tensor_product` と突き合わせる。否定コントロール 1 件 | PASS | 90 段、全段で厳密に一致 |
 | 13 | check_13_sign_flip_step1_F_conjugation_chains.sage | `sign_flip_conjugation` の Step 1 の `σ_k^zσ_k^x = -(σ_k^xσ_k^z)` の 10 行の鎖（`def_site_pauli_matrices`・`kronecker_product_rule` (1)・`identity_matrix_is_left_unit_of_mat_mult`・`pauli_matrix_products`・`negation_is_scalar_multiple_by_minus_one`・`kronecker_multilinear`・その逆向き）と、`Fσ_k^xF^{-1}`（`(σ_k^zσ_k^x)σ_k^z` から 5 行）・`Fσ_k^zF^{-1}`（2 行）の鎖を一行ずつ。1 行目（`k` 以外のサイトの因子は可換）は `F = ∏σ_m^z`・`F^{-1} = F` から組んで比べる。`QQ(i)` の厳密計算、`M = 2,3,4`、全ての `k`、符号反転とスカラー倍は成分ごと。否定コントロール 1 件 | PASS | 171 段、全段で厳密に一致 |
+| 14 | check_14_sign_flip_step1_F_conjugation_sigma_y_chain.sage | `sign_flip_conjugation` の Step 1 の `σ_k^pσ_k^q = -(σ_k^qσ_k^p)` の 10 行の鎖を `(p, q) = (z, x), (y, z)` の両方で、`Fσ_k^yF^{-1}` の鎖（`(σ_k^zσ_k^y)σ_k^z` から `mat_mult_associative`・上の鎖の `(y, z)`・`negation_factors_out_of_right_factor`・`mat_mult_associative`・Step 0・`identity_matrix_is_left_unit_of_mat_mult` の 6 行）を一行ずつ。1 行目（`k` 以外のサイトの因子は可換）は `F = ∏σ_m^z`・`F^{-1} = F` から組んで比べる。`QQ(i)` の厳密計算、`M = 2,3,4`、全ての `k`、符号反転とスカラー倍は成分ごと。否定コントロール 1 件 | PASS | 243 段、全段で厳密に一致 |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論
