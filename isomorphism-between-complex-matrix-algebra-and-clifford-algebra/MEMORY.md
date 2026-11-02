@@ -37,3 +37,4 @@
 - 2026-11-02: 線型形式が線型結合を係数と値の積の ℂ の中の番号順の和へ移すこと（ラベル claim_linear_form_maps_linear_combination_to_ordered_sum）を示した。次は双対基底の存在（座標の写像 β^b_k が β^b_k(b_j)=δ_kj を満たすこと。b_j を係数 δ_kj の線型結合として書き、係数の一意性で読み取る）。
 - 2026-11-02: 「双対基底の存在」を三行に割り、クロネッカーのデルタの定義（ラベル def_kronecker_delta、記号 δ_{i,j}、任意の集合 X の二元について定める）を置いた。次は番号付けた族の第 j 元が係数 δ_{k,j} の線型結合であること（L_m について、m<j なら L_m=0_V、m≥j なら L_m=b_j を m の帰納法で示す。k≠j の項は零のスカラー倍の主張で 0_V、k=j の項はスカラー倍の単位元で b_j）。
 - 2026-11-02: 番号付けた族の第 j 元が係数 δ_{k,j} の線型結合であること（ラベル claim_family_member_is_kronecker_delta_linear_combination）を示した。次は双対基底の定義（V^* の元の番号付けた族 f で f_i(b_j)=δ_{i,j} を満たすもの）。
+- 2026-11-02: 双対基底の定義（ラベル def_dual_basis）を置いた。次は双対基底の存在（座標の写像の族 β^b が b の双対基底であること。claim_family_member_is_kronecker_delta_linear_combination で b_j を係数 δ_{k,j} の線型結合に書き、claim_uniqueness_of_coefficients_of_linear_combination で β^b_k(b_j)=δ_{k,j} を読み取る）。

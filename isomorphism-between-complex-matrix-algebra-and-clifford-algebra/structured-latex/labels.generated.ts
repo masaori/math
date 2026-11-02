@@ -19,6 +19,7 @@ export const ALL_LABELS = [
   "claim_zero_scalar_multiple_is_zero_vector",
   "def_basis",
   "def_complex_vector_space",
+  "def_dual_basis",
   "def_dual_space",
   "def_kronecker_delta",
   "def_linear_combination",
