@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-02: 双対基底が双対空間を線型結合で張ること（ラベル claim_dual_basis_spans_dual_space、等式 g=Σ_k g(b_k)·_{V^*}f_k）を示した。次は二つの線型空間の直和（組の集合と成分ごとの演算）。
 - 2026-11-02: ℂ の中の番号順の和で第 k 項に δ_{k,j} を掛けた和が α_j になること（ラベル claim_ordered_sum_with_kronecker_delta_picks_term、等式 Σ_{ℂ,k} α_k·_ℂδ_{k,j}=α_j）を示した。次は双対基底が双対空間を線型結合で張ること（g∈V^* について h:=Σ_k g(b_k)·f_k と置き、claim_value_of_linear_combination_in_dual_space と双対基底の条件 f_k(b_j)=δ_{k,j} と本主張で h(b_j)=g(b_j) を出し、claim_linear_form_maps_linear_combination_to_ordered_sum と基底が張ることで各点 x で h(x)=g(x) を示す）。
 - 2026-11-02: 研究管理。経路の行列の等式を M=1,2,3 で厳密に確かめた。双対基底の定義・代数の中の番号順の積・a†_S・a_T・P の定義の行を足し、使わない双対基底の一意性の行を消し、a_i P=0 と P a†_i=0 を割って前へ移した。
 - 2026-11-01: 研究管理の初回。本文を `content/chapters/` の章ファイルと、章の並びを持つ `content/main-text.ts` に分けた。台帳に、直和の成分への埋め込み・ℂ の線型空間の構造・有限集合の上の和・可算個の直和の行を足し、複素行列環の章と生成作用素の行列を商代数・テンソル積より先へ移した。
