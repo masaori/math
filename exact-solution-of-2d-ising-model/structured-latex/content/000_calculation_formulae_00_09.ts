@@ -869,6 +869,99 @@ T_B\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
     },
   },
   {
+    id: "calc_formulae_claim_matrix_conjugation_preserves_negation",
+    kind: "claim",
+    title: { text: "行列の共役は符号反転を保つ" },
+    labels: ["matrix_conjugation_preserves_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B \in \operatorname{Mat}(n,\mathbb{C})`),
+        " は正則とし、",
+        math(String.raw`T_B`),
+        " は ",
+        ref("mat_conj"),
+        " の共役写像とする。",
+        math(String.raw`W \in \operatorname{Mat}(n,\mathbb{C})`),
+        " について、符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`T_B(-W) = -\,T_B(W)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "鎖が引く 2 つの主張（符号反転を積の外へ出す 2 つ）は、どちらもその ",
+        math("m, n, p"),
+        " をすべてこの主張の ",
+        math("n"),
+        " として使う。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_B(-W)
+&=\bigl(B(-W)\bigr)B^{-1}
+&&(\because\ \blkref{mat_conj}\ \text{の}\ T_B\ \text{の定義})\\
+&=\bigl(-(BW)\bigr)B^{-1}
+&&(\because\ \blkref{negation_factors_out_of_right_factor})\\
+&=-\bigl((BW)B^{-1}\bigr)
+&&(\because\ \blkref{negation_factors_out_of_left_factor})\\
+&=-\,T_B(W)
+&&(\because\ \blkref{mat_conj}\ \text{の}\ T_B\ \text{の定義})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation Step 3 の H_1^{(+)} の鎖で、差の項 Y_{M_col}Z_1 の共役を扱う段（matrix_conjugation_preserves_difference）に要るので足した。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_matrix_conjugation_preserves_difference",
+    kind: "claim",
+    title: { text: "行列の共役は差を保つ" },
+    labels: ["matrix_conjugation_preserves_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B \in \operatorname{Mat}(n,\mathbb{C})`),
+        " は正則とし、",
+        math(String.raw`T_B`),
+        " は ",
+        ref("mat_conj"),
+        " の共役写像とする。",
+        math(String.raw`X, W \in \operatorname{Mat}(n,\mathbb{C})`),
+        " について、差は ",
+        ref("def_matrix_difference"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`T_B(X - W) = T_B(X) - T_B(W)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+T_B(X - W)
+&= T_B\bigl(X + (-W)\bigr)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (A \to X,\ B \to W)\bigr)\\
+&= T_B(X) + T_B(-W)
+&&\bigl(\because\ \blkref{mat_conj}\ \text{の和を保つこと}\ (A \to X,\ C \to -W)\bigr)\\
+&= T_B(X) + \bigl(-\,T_B(W)\bigr)
+&&\bigl(\because\ \blkref{matrix_conjugation_preserves_negation}\bigr)\\
+&= T_B(X) - T_B(W)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (A \to T_B(X),\ B \to T_B(W))\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation Step 3 の H_1^{(+)} = Σ_{m=1}^{M_col−1} Y_mZ_{m+1} − Y_{M_col}Z_1 の共役を、和の項と差の項に割る段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "calc_formulae_006_definition_of_cc",
     kind: "definition",
     origin: { path: "_old/typst/parts/000_計算公式/006_definition_CCの定義.typ", ordinal: 7 },

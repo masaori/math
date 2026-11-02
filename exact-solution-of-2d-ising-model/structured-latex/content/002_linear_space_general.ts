@@ -1451,6 +1451,96 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_matrix_difference_is_sum_with_negation",
+    kind: "claim",
+    title: { text: "行列の差は符号反転した行列との和に等しい" },
+    labels: ["matrix_difference_is_sum_with_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。差は ",
+        ref("def_matrix_difference"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A - B = A + (-B)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A - B)_{ij}
+&= A_{ij} - B_{ij}
+&&\bigl(\because\ \text{差の定義 }\blkref{def_matrix_difference}\bigr)\\
+&= A_{ij} + (-B_{ij})
+&&\bigl(\because\ \text{複素数の差の定義 }\blkref{def_complex_difference}\bigr)\\
+&= A_{ij} + (-B)_{ij}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= \bigl(A + (-B)\bigr)_{ij}
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_1^{(+)} の鎖は差 Σ Y_mZ_{m+1} − Y_{M_col}Z_1 を含むので、差を和と符号反転へ戻す段（difference_of_negated_matrices・matrix_conjugation_preserves_difference）に要る。" +
+          "行列の差 def_matrix_difference は成分の複素数の差で定まり、和と符号反転とは別に定義されているので、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_difference_of_negated_matrices",
+    kind: "claim",
+    title: { text: "符号反転した行列の差は差の符号反転に等しい" },
+    labels: ["difference_of_negated_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。差は ",
+        ref("def_matrix_difference"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(-A) - (-B) = -(A - B)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+(-A) - (-B)
+&= (-A) + \bigl(-(-B)\bigr)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (A \to -A,\ B \to -B)\bigr)\\
+&= -\bigl(A + (-B)\bigr)
+&&\bigl(\because\ \blkref{negation_distributes_over_matrix_sum}\ (A \to A,\ B \to -B)\bigr)\\
+&= -(A - B)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ \text{を}\ -(\cdot)\ \text{の中へ右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_1^{(+)} の鎖で、Σ(−(Y_mZ_{m+1})) − (−(Y_{M_col}Z_1)) を −H_1^{(+)} にまとめる段を引けるよう足した。" +
+          "行列の等号の 3 行の鎖で、二重の符号反転 −(−B) は B へ戻さずに negation_distributes_over_matrix_sum の右辺として読む。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_difference",
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },
