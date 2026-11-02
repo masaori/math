@@ -4,6 +4,7 @@
 零項の除去・有限和の因数分離を本文と同じ順に辿る。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialNoninjectiveCancellation
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansionFromNecSuf
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -148,7 +149,7 @@ theorem qbarPolynomial_det_mul
       _ = 0 := mul_zero _
   calc
     Matrix.det (A * B) = ∑ f : J → J, P f * I f :=
-      qbarPolynomial_det_mul_function_expansion A B
+      qbarPolynomial_det_mul_function_expansion_from_necSuf A B
     _ = ∑ f ∈ U, P f * I f := by
       symm
       apply Finset.sum_subset (Finset.filter_subset _ _)

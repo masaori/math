@@ -63,14 +63,14 @@ theorem qbarPolynomial_det_mul_function_expansion
     (A B : Matrix J J (Polynomial Qbar)) :
     Matrix.det (A * B) = ∑ f : J → J, (∏ i : J, A i (f i)) *
       (∑ σ : Equiv.Perm J,
-        Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
           ∏ i : J, B (f i) (σ i)) := by
   classical
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar)
   calc
     Matrix.det (A * B) = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, (A * B) i (σ i) :=
-      qbarPolynomial_det_row_expansion_from_necSuf (A * B)
+      qbarPolynomial_det_row_expansion (A * B)
     _ = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, ∑ j : J, A i j * B j (σ i) := by
       simp only [Matrix.mul_apply]
     _ = ∑ σ : Equiv.Perm J, c σ * ∑ f : J → J, ∏ i : J, A i (f i) * B (f i) (σ i) := by

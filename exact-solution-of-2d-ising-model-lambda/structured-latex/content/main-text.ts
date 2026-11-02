@@ -64120,7 +64120,15 @@ I_{a,b}\ne\{C_1,C_3\}`),
                         ref("claim_vertex_incident_edge_traversal_even"), " の右辺は ",
                         math(String.raw`0`), " であり、",
                       ]),
-                      displayMath(String.raw`V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)=0`),
+                      displayMath(String.raw`\begin{aligned}
+V_{a-1,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)+H_{a,b}(\gamma)
+&=2\cdot\left|\left\{k\in\{0,\ldots,m-1\}\ \middle|\ P_k(\gamma)=(a,b)\right\}\right|
+&&\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\bigr)\\
+&=2\cdot0
+&&\bigl(\because\ P_k(\gamma)=(a,b)\text{ を満たす }k\text{ が存在しない}\bigr)\\
+&=0
+&&\bigl(\because\ \mathbb N\text{ の乗法}\bigr).
+\end{aligned}`),
                       paragraph([
                         "である。四つの項はいずれも自然数（", ref("def_vertical_edge_traversal_count"), "、",
                         ref("def_horizontal_edge_traversal_count"),

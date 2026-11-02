@@ -1,9 +1,7 @@
 /-
-行列積の有限和の展開へ、具体的な多項式・転倒数の符号・置換を供給する。
-具体版の行列式展開定理は使わず、行指定の定義橋と必要十分版で導く。
+行列積の具体的な添字写像展開から、必要十分版の符号による表示を導く。
 -/
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFunctionExpansion
-import Ising2DLambda.NecSuf.AlgebraicEigenvalue.MatrixProductFunctionExpansion
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -19,14 +17,15 @@ theorem qbarPolynomial_det_mul_function_expansion_from_necSuf
         Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
           ∏ i : J, B (f i) (σ i)) := by
   classical
-  let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
-  calc
-    Matrix.det (A * B) = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, (A * B) i (σ i) :=
-      qbarPolynomial_det_row_expansion_from_necSuf (A * B)
-    _ = ∑ f : J → J, (∏ i : J, A i (f i)) *
-        (∑ σ : Equiv.Perm J, c σ * ∏ i : J, B (f i) (σ i)) :=
-      NecSuf.AlgebraicEigenvalue.matrixProduct_functionExpansion_necSuf A B c
-        (fun σ i => σ i)
+  rw [qbarPolynomial_det_mul_function_expansion]
+  apply Finset.sum_congr rfl
+  intro f _
+  apply congrArg ((∏ i : J, A i (f i)) * ·)
+  apply Finset.sum_congr rfl
+  intro σ _
+  congr 1
+  exact congrArg (fun z : ℤ => Polynomial.C (z : Qbar))
+    ((qbarPermutationSign_eq_mathlibSign σ).trans
+      (IntegerMatrix.inversionSign_eq_mathlibSign σ).symm)
 
 end Ising2DLambda.AlgebraicEigenvalue

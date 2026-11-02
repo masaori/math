@@ -28,4 +28,4 @@ for check_path in sorted(Path(".").glob("check_*.sage")):
     load(__file__)'
 ```
 
-2026-10-10 実行: 全10本、計2334等式が PASS。
+2026-11-02 実行: 全10本、計2334等式が PASS。
