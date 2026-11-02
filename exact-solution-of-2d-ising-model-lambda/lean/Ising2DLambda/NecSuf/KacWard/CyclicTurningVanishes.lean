@@ -17,8 +17,17 @@
 `fun a n => a + φ n` の定義そのものにあたるため、独立した定理を持たない。
 -/
 import Ising2DLambda.NecSuf.KacWard.TotalTurning
+import Mathlib.Data.ZMod.Basic
 
 namespace Ising2DLambda.NecSuf.KacWard
+
+/-- 整数から任意の剰余類への自然な射影。 -/
+def residueProjection (modulus : ℕ) (n : ℤ) : ZMod modulus := n
+
+theorem residueProjection_add (modulus : ℕ) (a b : ℤ) :
+    residueProjection modulus (a + b) =
+      residueProjection modulus a + residueProjection modulus b := by
+  simp [residueProjection]
 
 /-- 端の値の差は更新量の総和である（`claim_walk_direction_difference` の骨格）。
 人手証明と同じく、列の長さについての帰納法で示す。仮定は `φ` が零を保つことと

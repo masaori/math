@@ -58941,6 +58941,13 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "整数から方向番号の剰余類への射影" },
                           labels: ["def_direction_residue_projection"],
                           habitat: "Z",
+                          lean: [
+                            "Ising2DLambda.KacWard.directionResidueProjection",
+                            "Ising2DLambda.KacWard.directionResidueProjection_add",
+                            "Ising2DLambda.NecSuf.KacWard.residueProjection",
+                            "Ising2DLambda.NecSuf.KacWard.residueProjection_add",
+                            "Ising2DLambda.KacWard.directionResidueProjection_from_necSuf",
+                          ],
                           statement: [
                             paragraph([
                               math(String.raw`\mathbb Z`), " と方向番号の住む ",

@@ -19,6 +19,18 @@ namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
 
+/-- `def_direction_residue_projection`。整数の四を法とする剰余類。 -/
+def directionResidueProjection (n : ℤ) : ZMod 4 := n
+
+theorem directionResidueProjection_add (a b : ℤ) :
+    directionResidueProjection (a + b) =
+      directionResidueProjection a + directionResidueProjection b := by
+  simp [directionResidueProjection]
+
+theorem directionResidueProjection_from_necSuf (n : ℤ) :
+    directionResidueProjection n =
+      Ising2DLambda.NecSuf.KacWard.residueProjection 4 n := rfl
+
 /-- 閉歩道の循環総回転数の剰余類は零である（ℤ/4ℤ に固定した具体版）。
 `turns` は開いた部分の一歩の回転数の列、`closing` は終辺から始辺への一歩、
 `d` は始辺の方向番号にあたる。仮定 `hclosed` が閉性（一周して方向番号が戻ること）である。 -/
