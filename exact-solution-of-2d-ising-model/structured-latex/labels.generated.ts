@@ -297,6 +297,7 @@ export const ALL_LABELS = [
   "mat_mult_distributes_over_sum_in_right_factor",
   "mat_mult_vector_difference",
   "matrix_completeness",
+  "matrix_conjugation_preserves_finite_sum",
   "matrix_difference_mul_vector",
   "matrix_difference_zero_iff_equal",
   "matrix_double_negation",

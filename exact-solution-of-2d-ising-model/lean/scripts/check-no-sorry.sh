@@ -1115,6 +1115,15 @@ targets=(
   Ising2D.add_mul_matrix_of_necSuf
   Ising2D.mul_add_matrix_tensorPow
   Ising2D.add_mul_matrix_tensorPow
+  Ising2D.conj_add_matrix
+  Ising2D.conj_smul_matrix
+  Ising2D.conj_finite_sum_of_matrices
+  Ising2D.conj_add_matrix_of_necSuf
+  Ising2D.conj_smul_matrix_of_necSuf
+  Ising2D.conj_finite_sum_of_matrices_of_necSuf
+  Ising2D.conj_add_tensorPow
+  Ising2D.conj_smul_tensorPow
+  Ising2D.conj_finite_sum_tensorPow
   Ising2D.Uflip_conj_mul
   Ising2D.Uflip_conj_smul
   Ising2D.mul_neg_matrix_of_necSuf
@@ -1170,6 +1179,9 @@ targets=(
   "Ising2D.NecSuf.mul_add_matrix'"
   "Ising2D.NecSuf.add_mul_matrix_apply'"
   "Ising2D.NecSuf.add_mul_matrix'"
+  "Ising2D.NecSuf.conj_add_matrix'"
+  "Ising2D.NecSuf.conj_smul_matrix'"
+  "Ising2D.NecSuf.conj_finite_sum_matrix'"
   "Ising2D.NecSuf.smul_sub_matrix_apply'"
   "Ising2D.NecSuf.smul_sub_matrix'"
   Ising2D.eigenvalue_AMat_iff

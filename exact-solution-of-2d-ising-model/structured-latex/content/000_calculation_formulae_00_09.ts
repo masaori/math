@@ -719,6 +719,8 @@ y^2>x\ \land\ x>0
     labels: ["mat_conj"],
     statement: [
       paragraph([
+        math("n\\in\\mathbb{Z}_{\\geq 1}"),
+        "、",
         math("A,B\\in\\operatorname{Mat}(n,\\mathbb{C})"),
         "、",
         math("B"),
@@ -730,7 +732,11 @@ y^2>x\ \land\ x>0
         math("A"),
         " に対して ",
         math("T_B(A):=BAB^{-1} \\in \\operatorname{Mat}(n,\\mathbb{C})"),
-        " と定める。このとき ",
+        " と定める（",
+        math("BAB^{-1}"),
+        " は ",
+        math("(BA)B^{-1}"),
+        " と読む）。このとき ",
         math("T_B"),
         " は和とスカラー倍を保つ。すなわち",
       ]),
@@ -740,7 +746,13 @@ T_B(\alpha A)=\alpha\,T_B(A)
       paragraph(["が成り立つ。"]),
     ],
     proof: [
-      paragraph(["和を保つことと、スカラー倍を保つことを別々に示す。"]),
+      paragraph([
+        "和を保つことと、スカラー倍を保つことを別々に示す。鎖が引く 4 つの主張（行列の積の分配の 2 つと、スカラー倍を積の外へ出す 2 つ）は、どれもその ",
+        math("m, n, p"),
+        " をすべてこの主張の ",
+        math("n"),
+        " として使う。",
+      ]),
       paragraph([
         "第一に、和を保つこと。",
         math("A,C\\in\\operatorname{Mat}(n,\\mathbb{C})"),
@@ -748,14 +760,14 @@ T_B(\alpha A)=\alpha\,T_B(A)
       ]),
       displayMath(String.raw`\begin{aligned}
 T_B(A+C)
-&=B(A+C)B^{-1}
+&=\bigl(B(A+C)\bigr)B^{-1}
 &&(\because\ T_B\ \text{の定義})\\
 &=(BA+BC)B^{-1}
-&&(\because\ \text{行列の積の左からの分配則})\\
-&=BAB^{-1}+BCB^{-1}
-&&(\because\ \text{行列の積の右からの分配則})\\
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&=(BA)B^{-1}+(BC)B^{-1}
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor})\\
 &=T_B(A)+T_B(C)
-&&(\because\ T_B\ \text{の定義})
+&&(\because\ T_B\ \text{の定義を 2 か所へ同時適用})
 \end{aligned}`),
       paragraph([
         "である。第二に、スカラー倍を保つこと。",
@@ -766,12 +778,12 @@ T_B(A+C)
       ]),
       displayMath(String.raw`\begin{aligned}
 T_B(\alpha A)
-&=B(\alpha A)B^{-1}
+&=\bigl(B(\alpha A)\bigr)B^{-1}
 &&(\because\ T_B\ \text{の定義})\\
 &=\bigl(\alpha(BA)\bigr)B^{-1}
-&&(\because\ \text{スカラー倍と行列の積の交換})\\
-&=\alpha\bigl(BAB^{-1}\bigr)
-&&(\because\ \text{スカラー倍と行列の積の交換})\\
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&=\alpha\bigl((BA)B^{-1}\bigr)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
 &=\alpha\,T_B(A)
 &&(\because\ T_B\ \text{の定義})
 \end{aligned}`),
@@ -784,10 +796,75 @@ T_B(\alpha A)
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-02: 和の鎖の「行列の積の左からの分配則」「右からの分配則」と、スカラー倍の鎖の「スカラー倍と行列の積の交換」2 か所の名前だけの根拠を、" +
+          "mat_mult_distributes_over_sum_in_right_factor・mat_mult_distributes_over_sum_in_left_factor・scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor へのラベル参照にした。" +
+          "BAB^{-1} を (BA)B^{-1} と読むことと n ∈ ℤ_{≥1} を主張に書き、鎖の積に括弧を全て書いた。主張の中身は変えていない。" +
+          "有限和を保つことは、別の主張 matrix_conjugation_preserves_finite_sum として足した。" +
+          "Lean の対応は Ising2D.conj_add_matrix・Ising2D.conj_smul_matrix（同じ行の calc）。数値検証: sagemath/check/122_mat_conj/check_02_chains.sage。",
         "原文（Typst）の証明は等号でつなげてはあったが、各行の根拠が書かれておらず、" +
           "スカラー倍の側では B(αA)B^{-1} = α(BAB^{-1}) が 1 行に詰められていた" +
           "（スカラー倍と行列の積の交換を 2 度使っている）。" +
           "行末の (∵ …) を付け、詰まっていた行を 2 段へ分けた。ステップは減らしていない。",
+      ],
+    },
+  },
+  {
+    id: "calc_formulae_claim_matrix_conjugation_preserves_finite_sum",
+    kind: "claim",
+    title: { text: "行列の共役は有限和を保つ" },
+    labels: ["matrix_conjugation_preserves_finite_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B \in \operatorname{Mat}(n,\mathbb{C})`),
+        " は正則とし、",
+        math(String.raw`T_B`),
+        " は ",
+        ref("mat_conj"),
+        " の共役写像とする。",
+        math(String.raw`X_1,\dots,X_r \in \operatorname{Mat}(n,\mathbb{C})`),
+        " について、有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`T_B\Bigl(\sum_{j=1}^{r} X_j\Bigr) = \sum_{j=1}^{r} T_B(X_j)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math("r"), " についての帰納法で示す。", math("r = 1"), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+T_B\Bigl(\sum_{j=1}^{1} X_j\Bigr)
+&= T_B(X_1)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \sum_{j=1}^{1} T_B(X_j)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 }T_B(X_j)\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math("r"),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \operatorname{Mat}(n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_B\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
+&= T_B\Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= T_B\Bigl(\sum_{j=1}^{r} X_j\Bigr) + T_B(X_{r+1})
+&&\bigl(\because\ \blkref{mat_conj}\ \text{の和を保つこと}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} T_B(X_j)\Bigr) + T_B(X_{r+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{j=1}^{r+1} T_B(X_j)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 }T_B(X_j)\text{）}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation Step 3 の「共役の ℂ 線型性」を H_1^{(+)}・H_2 の有限和へ適用する段を引けるよう足した。" +
+          "Lean の対応は Ising2D.conj_finite_sum_of_matrices（同じ帰納法の calc）。数値検証: sagemath/check/matrix_conjugation_preserves_finite_sum/。",
       ],
     },
   },
