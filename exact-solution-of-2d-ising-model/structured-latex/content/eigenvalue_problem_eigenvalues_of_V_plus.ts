@@ -1173,8 +1173,8 @@ U Y_m U^{-1}
         " の ",
         math(String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`),
         " と ",
-        ref("iH_is_real_symmetric"),
-        " の Step 1 の ",
+        ref("def_H2"),
+        " の ",
         math(String.raw`H_2 = \sum_{m=1}^{M_{\mathrm{col}}}Z_mY_m`),
         " は、どちらも ",
         math(String.raw`Y`),
@@ -1223,13 +1223,48 @@ U\left(Z_j Y_j\right)U^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        "なので、共役の ",
+        "である。",
+        math(String.raw`H_2`),
+        " については、",
+        ref("matrix_conjugation_preserves_finite_sum"),
+        " を ",
+        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`B = U`),
+        "、",
+        math(String.raw`r = M_{\mathrm{col}}`),
+        "、",
+        math(String.raw`X_m = Z_mY_m`),
+        " として使い、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+U H_2 U^{-1}
+&= U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m\Bigr)U^{-1}
+   \quad \left(\because\ \blkref{def_H2}\right) \\
+&= T_U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m\Bigr)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}} T_U\left(Z_mY_m\right)
+   \quad \left(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\right) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}} U\left(Z_mY_m\right)U^{-1}
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）を各項に}\right) \\
+&= \sum_{m=1}^{M_{\mathrm{col}}} \left(-\,(Z_mY_m)\right)
+   \quad (\because\ \text{上の }U(Z_jY_j)U^{-1} = -\,(Z_jY_j)\text{ を各項に }j = m\text{ で}) \\
+&= -\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m
+   \quad \left(\because\ \blkref{finite_sum_of_negated_matrices}\text{ を }r = M_{\mathrm{col}}\text{、}X_m = Z_mY_m\text{ で}\right) \\
+&= -\,H_2
+   \quad \left(\because\ \blkref{def_H2}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`H_1^{(+)}`),
+        " については、共役の ",
         math(String.raw`\mathbb{C}`),
         " 線型性より",
       ]),
       displayMath(
-        String.raw`U H_1^{(+)} U^{-1} = -\,H_1^{(+)}, \qquad
-U H_2 U^{-1} = -\,H_2`,
+        String.raw`U H_1^{(+)} U^{-1} = -\,H_1^{(+)}`,
       ),
       paragraph([
         "Step 4（",
@@ -1288,6 +1323,8 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 3 の「共役の ℂ 線型性より UH_2U^{-1} = −H_2」（名前だけの根拠）を、def_H2・conjugation_is_ring_homomorphism の T_B の定義・matrix_conjugation_preserves_finite_sum（r = M_col、X_m = Z_mY_m）・T_B の定義を各項に・上の U(Z_jY_j)U^{-1} = −(Z_jY_j)・finite_sum_of_negated_matrices・def_H2 の 7 行の鎖にした。Step 3 冒頭の H_2 の出典も iH_is_real_symmetric の Step 1 から def_H2 に替えた。H_1^{(+)} の鎖は差の項を含むので別に扱う。主張は変えていない。" +
+          "Lean の対応は Ising2D.Uflip_conj_ZY（項の鎖）・Ising2D.Uflip_conj_H2（M = r+1 の場合の calc の 7 段。conj_finite_sum_tensorPow・neg_finite_sum_tensorPow）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_20_sign_flip_step3_H2_chain.sage。",
         "2026-11-02: Step 2 の「Step 1 を Z_m の各因子に適用」「符号は因子ごとの符号の積」「m の偶奇ごとに符号を計算」の名前だけの根拠を、P_0 := I・P_{r+1} := P_rσ_{r+1}^x（積 σ_1^x⋯σ_r^x を左から読む）と置いて UP_rU^{-1} を r の偶奇で P_r・−P_r と書く帰納法（conjugation_is_ring_homomorphism の T_B の定義・単位性・乗法性、Step 1 の Uσ_k^xU^{-1} = −σ_k^x、negation_factors_out_of_right_factor・negation_factors_out_of_left_factor・matrix_double_negation）と、" +
           "Z_m = P_{m−1}σ_m^z・Y_m = P_{m−1}σ_m^y から T_B の定義と乗法性で因子ごとの共役に割り、m の偶奇で場合分けして符号を 1 行ずつ外へ出す鎖にした。(−1)^{m−1} のような ℂ の冪は使わない（本文に ℂ の冪の定義が無く、符号の反転だけで足りる）。conjugation_is_ring_homomorphism を B = U で使う宣言を Step 3 から Step 2 へ移した。主張は変えていない。" +
           "Lean の対応は Ising2D.Uflip_conj_xString_zero・Uflip_conj_xString_succ・Uflip_conj_xString_parity・Uflip_conj_xString_of_even・Uflip_conj_xString_of_odd（P_r の帰納法）・Uflip_conj_Z・Uflip_conj_Y（Z_m・Y_m の鎖）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_19_sign_flip_step2_Z_Y_chains.sage。",

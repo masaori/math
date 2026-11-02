@@ -109,3 +109,6 @@ RESULT: PASS
 
 # 実行コマンド: sage check_19_sign_flip_step2_Z_Y_chains.sage
 PASS sign_flip_conjugation Step 2 の P_r の帰納法と Z_m・Y_m の鎖: 436 段
+
+# 実行コマンド: sage check_20_sign_flip_step3_H2_chain.sage
+PASS sign_flip_conjugation Step 3 の H_2 の鎖と項の鎖: 98 段

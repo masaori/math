@@ -734,6 +734,7 @@ targets=(
   Ising2D.Uflip_conj_Z
   Ising2D.Uflip_conj_Y
   Ising2D.Uflip_conj_H1
+  Ising2D.Uflip_conj_ZY
   Ising2D.Uflip_conj_H2
   Ising2D.Uflip_conj_S1
   Ising2D.Uflip_conj_S2

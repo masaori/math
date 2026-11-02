@@ -35,6 +35,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHomFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSumsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
 
 namespace Ising2D
 
@@ -728,12 +730,35 @@ theorem Uflip_conj_H1 (η : ℂ) : Uflip M * H1 M η * UflipInv M = -(H1 M η) :
   -- 人手 Step 3 の `Y_j(-Z_k) = -(Y_jZ_k)`（`negation_factors_out_of_right_factor`）
   rw [mul_neg_matrix_tensorPow, smul_neg]
 
-/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_2 U^{-1} = -H_2`。 -/
+/-- 人手 Step 3 の項の鎖 `U(Z_jY_j)U^{-1} = -(Z_jY_j)` の 5 行と 1 対 1。 -/
+theorem Uflip_conj_ZY (j : Fin M) : Uflip M * (Z j * Y j) * UflipInv M = -(Z j * Y j) :=
+  calc Uflip M * (Z j * Y j) * UflipInv M
+      = Conjugation.T (UflipUnit M) (Z j * Y j) := rfl                      -- `T_B` の定義（`B = U`）
+    _ = Conjugation.T (UflipUnit M) (Z j) * Conjugation.T (UflipUnit M) (Y j) :=
+        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
+    _ = (Uflip M * Z j * UflipInv M) * (Uflip M * Y j * UflipInv M) := rfl   -- `T_B` の定義（`B = U`）
+    _ = (-(Z j)) * Y j := by rw [Uflip_conj_Z, Uflip_conj_Y]                 -- Step 2 の `UZ_jU^{-1} = -Z_j` と `UY_jU^{-1} = +Y_j`
+    _ = -(Z j * Y j) := neg_mul_matrix_tensorPow _ _                         -- `negation_factors_out_of_left_factor`
+
+/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_2 U^{-1} = -H_2`。
+人手は `M_col ≥ 2` で、`M = r + 1` の場合の `calc` の 7 段が人手の `H_2` の鎖の 7 行と 1 対 1 である
+（`matrix_conjugation_preserves_finite_sum`・`finite_sum_of_negated_matrices` の `TensorPow M` の系は、人手の `r ∈ ℤ_{≥1}` を
+`Fin (r + 1)` の上の和として述べる）。`M = 0` は Lean の `ℕ` だけにある場合で、`H_2` は空の和 `0` なので両辺とも `0` である。 -/
 theorem Uflip_conj_H2 : Uflip M * H2 M * UflipInv M = -(H2 M) := by
-  rw [H2, Uflip_conj_sum, ← Finset.sum_neg_distrib]
-  refine Finset.sum_congr rfl fun m _ => ?_
-  -- 人手 Step 3 の `(-Z_j)Y_j = -(Z_jY_j)`（`negation_factors_out_of_left_factor`）
-  rw [Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z, neg_mul_matrix_tensorPow]
+  cases M with
+  | zero => rw [H2, Finset.univ_eq_empty, Finset.sum_empty, mul_zero, zero_mul, neg_zero]
+  | succ r =>
+    calc Uflip (r + 1) * H2 (r + 1) * UflipInv (r + 1)
+        = Uflip (r + 1) * (∑ m : Fin (r + 1), Z m * Y m) * UflipInv (r + 1) := rfl  -- `def_H2`
+      _ = Conjugation.T (UflipUnit (r + 1)) (∑ m : Fin (r + 1), Z m * Y m) := rfl -- `T_B` の定義（`B = U`）
+      _ = ∑ m : Fin (r + 1), Conjugation.T (UflipUnit (r + 1)) (Z m * Y m) :=
+          conj_finite_sum_tensorPow _ r _                                    -- `matrix_conjugation_preserves_finite_sum`
+      _ = ∑ m : Fin (r + 1), Uflip (r + 1) * (Z m * Y m) * UflipInv (r + 1) := rfl -- `T_B` の定義を各項に
+      _ = ∑ m : Fin (r + 1), -(Z m * Y m) :=
+          Finset.sum_congr rfl fun m _ => Uflip_conj_ZY m                    -- 上の項の鎖を各項に
+      _ = -(∑ m : Fin (r + 1), Z m * Y m) :=
+          neg_finite_sum_tensorPow r _                                       -- `finite_sum_of_negated_matrices`
+      _ = -(H2 (r + 1)) := rfl                                               -- `def_H2`
 
 /-- 補助: 一般形で `U (i K_1 H1 M η) U^{-1} = -(i K_1 H1 M η)`。 -/
 theorem Uflip_conj_S1 (K1 η : ℂ) :
