@@ -1722,6 +1722,8 @@ targets=(
   Ising2D.CheckFermiSetup.projFactor_mul_comm_step0
   Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem
   Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_not_mem
+  Ising2D.NecSuf.finProdLeft_eq_noncommProd_image
+  Ising2D.CheckFermiSetup.Qproj_eq_finProdLeft
   Ising2D.CheckFermiSetup.Qproj_mul_self
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne
   Ising2D.CheckFermiSetup.sum_Qproj

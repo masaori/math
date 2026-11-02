@@ -17,6 +17,9 @@ Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`�
 Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、4 通りの上付き添字の組 `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}` の鎖）は、
 `mul_identity_eq_identity_mul_step0`・`nOp_mul_nOp_comm_step0`・`nOp_mul_one_sub_nOp_comm_step0`・`one_sub_nOp_mul_nOp_comm_step0`・
 `one_sub_nOp_mul_one_sub_nOp_comm_step0` に人手の行と 1 対 1 の `calc` で置き、まとめた「Step 0 の可換性」を `projFactor_mul_comm_step0` に置く。
+`Qproj`（`Finset.noncommProd`）が人手の冒頭の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε_μ)}`（`def_finite_product_of_matrices` の左から掛ける積）に
+等しいことは `Qproj_eq_finProdLeft` に置く（人手の `μ = j + 1` は `checkIdxOfFin j`）。人手の定義の因子
+`ε_μň_μ + (1-ε_μ)(I-ň_μ)` が `R_μ^{(ε_μ)}` に等しいことは、人手も Lean もまだ鎖として書いていない。
 Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と `Q̌_εň_ν` の鎖、
 Step 1 の `ε ≠ ε'` の鎖を含む Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
@@ -38,6 +41,7 @@ Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number
 違うのは `Fintype.card (CheckIdx M) = M` という 1 行だけである。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperatorProduct
+import Ising2D.NecSuf.FiniteProductLeftAsNoncommProd
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
@@ -230,6 +234,42 @@ noncomputable def Qproj (T : Finset (CheckIdx M)) : TensorPow M :=
 /-- `ε : 𝓜̌ → Bool` の形（人手証明の記法に合わせた版）。 -/
 noncomputable def Qproj' (ε : CheckIdx M → Bool) : TensorPow M :=
   F.Qproj (Finset.univ.filter fun i => ε i)
+
+/-- 人手の添字 `μ = j + 1 ∈ 𝓜̌ = {1, …, M_col}`（`def_check_index_set`）。Lean の `j : Fin M` を人手の `μ` へ送る。 -/
+def checkIdxOfFin (j : Fin M) : CheckIdx M :=
+  ⟨(j : ℤ) + 1, Finset.mem_image.2 ⟨j, Finset.mem_range.2 j.2, rfl⟩⟩
+
+theorem checkIdxOfFin_injective : Function.Injective (checkIdxOfFin (M := M)) := by
+  intro j k h
+  have h' : (j : ℤ) + 1 = (k : ℤ) + 1 := congrArg Subtype.val h
+  exact Fin.ext (by omega)
+
+theorem checkIdxOfFin_surjective : Function.Surjective (checkIdxOfFin (M := M)) := by
+  rintro ⟨μ, hμ⟩
+  obtain ⟨k, hk, rfl⟩ := Finset.mem_image.1 hμ
+  exact ⟨⟨k, Finset.mem_range.1 hk⟩, rfl⟩
+
+/-- **人手の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε_μ)}`**（証明の冒頭）: `Qproj`（`Finset.noncommProd`）は、
+`def_finite_product_of_matrices`（`r → M_col`）の左から掛ける積 `NecSuf.finProdLeft` に等しい。
+人手の `M_col` が Lean の `r + 1`、人手の因子 `R_μ^{(ε_μ)}`（`μ = j + 1`）が `NecSuf.projFactor F.nOp T (checkIdxOfFin j)` である。
+必要十分版 `NecSuf.finProdLeft_eq_noncommProd_image`（`Ising2D/NecSuf/FiniteProductLeftAsNoncommProd.lean`）の特殊化で、
+`𝓜̌` 全体が `checkIdxOfFin` の像であること（全射）で添字集合を付け替える。
+`M_col = r + 1` の形でだけ述べる（人手の `M_col ≥ 2` から従う）。`F : CheckFermiSetup M` の主張へ戻すときは `M = r + 1` に分ける。 -/
+theorem Qproj_eq_finProdLeft {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset (CheckIdx (r + 1))) :
+    F.Qproj T = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)) :=
+  calc F.Qproj T
+      = (Finset.univ : Finset (CheckIdx (r + 1))).noncommProd (NecSuf.projFactor F.nOp T)
+          (fun i _ j _ _ => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) := rfl
+                                                        -- `Qproj`・`NecSuf.projOn` の定義
+    _ = ((Finset.univ : Finset (Fin (r + 1))).image checkIdxOfFin).noncommProd
+          (NecSuf.projFactor F.nOp T)
+          (fun i _ j _ _ => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) :=
+        Finset.noncommProd_congr (Finset.image_univ_of_surjective checkIdxOfFin_surjective).symm
+          (fun _ _ => rfl) _                            -- `𝓜̌ = {j + 1 | j ∈ Fin M_col}`（全射）
+    _ = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)) :=
+        (NecSuf.finProdLeft_eq_noncommProd_image (NecSuf.projFactor F.nOp T)
+          (fun i j => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) r
+          checkIdxOfFin checkIdxOfFin_injective).symm    -- 必要十分版（単射な添字の写像）
 
 /-- **原文 (1) 後半**: `Q̌_ε^2 = Q̌_ε`。 -/
 theorem Qproj_mul_self (T : Finset (CheckIdx M)) : F.Qproj T * F.Qproj T = F.Qproj T :=
