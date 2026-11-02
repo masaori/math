@@ -124,3 +124,6 @@ PASS check_number_operator_idempotent (3)・check_number_operators_commute Step 
 
 # 実行コマンド: sage check_24_joint_eigenspace_distributivity_chains.sage
 PASS check_joint_eigenspace_decomposition Step 0・Step 3 の分配と単位行列の鎖: 217 段、否定コントロール 3 行
+
+# 実行コマンド: sage check_25_Vprime_eigenvalue_power_chains.sage
+PASS eigenvalues_of_check_Vprime Step 2・Step 3' の帰納法と Step 4 の鎖: 1129 段、否定コントロール 9 行

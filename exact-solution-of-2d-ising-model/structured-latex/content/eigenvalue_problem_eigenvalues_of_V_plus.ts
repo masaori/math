@@ -2635,27 +2635,60 @@ y_{\epsilon'}
       paragraph([
         "Step 2（",
         math(String.raw`\check{X}^k\check{Q}_\epsilon = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
-        "）。",
+        "）。行列の冪は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`A^0 := I`),
+        "、",
+        math(String.raw`A^{m+1} := A^m A`),
+        " による。数の冪は本証明で ",
+        math(String.raw`\check{g}(\epsilon)^0 := 1`),
+        "、",
+        math(String.raw`\check{g}(\epsilon)^{k+1} := \check{g}(\epsilon)^k\,\check{g}(\epsilon)`),
+        "（",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        "）と定める。",
         math(String.raw`k`),
         " に関する帰納法。",
         math(String.raw`k = 0`),
-        " は自明。",
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{X}^0\check{Q}_\epsilon
+&= I\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
+&= \check{Q}_\epsilon
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
+&= 1\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{g}(\epsilon)^0\check{Q}_\epsilon
+   \quad (\because \check{g}(\epsilon)^0 := 1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`\check{X}^k\check{Q}_\epsilon = \check{g}(\epsilon)^k\check{Q}_\epsilon`),
         " を仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{X}^{k+1}\check{Q}_\epsilon
-&= \check{X}\left(\check{X}^k\check{Q}_\epsilon\right)
-   \quad (\because \text{行列の冪の定義と積の結合法則}) \\
-&= \check{X}\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
-   \quad (\because \text{帰納法の仮定}) \\
-&= \check{g}(\epsilon)^k\left(\check{X}\check{Q}_\epsilon\right)
-   \quad (\because \text{スカラー倍と行列の積の交換}) \\
-&= \check{g}(\epsilon)^k\left(\check{g}(\epsilon)\,\check{Q}_\epsilon\right)
+&= \left(\check{X}^k\check{X}\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
+&= \check{X}^k\left(\check{X}\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check{X}^k,\ B \to \check{X},\ C \to \check{Q}_\epsilon)\right) \\
+&= \check{X}^k\left(\check{g}(\epsilon)\,\check{Q}_\epsilon\right)
    \quad (\because \text{Step 1}) \\
+&= \check{g}(\epsilon)\left(\check{X}^k\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \check{g}(\epsilon),\ A \to \check{X}^k,\ B \to \check{Q}_\epsilon)\right) \\
+&= \check{g}(\epsilon)\left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)
+   \quad (\because \text{帰納法の仮定}) \\
+&= \left(\check{g}(\epsilon)\,\check{g}(\epsilon)^k\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \check{g}(\epsilon),\ b \to \check{g}(\epsilon)^k,\ A \to \check{Q}_\epsilon)\right) \\
+&= \left(\check{g}(\epsilon)^k\,\check{g}(\epsilon)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\right) \\
 &= \check{g}(\epsilon)^{k+1}\check{Q}_\epsilon
-   \quad (\because \text{スカラー倍の結合法則})
+   \quad (\because \check{g}(\epsilon)^{k+1} := \check{g}(\epsilon)^k\,\check{g}(\epsilon))
 \end{aligned}`,
       ),
       paragraph([
@@ -2709,24 +2742,43 @@ E_K \check{Q}_\epsilon
       paragraph([
         "Step 3'（右から掛ける形）。Step 1 の ",
         math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
-        " から、", math(String.raw`k`), " に関する帰納法を行う。",
-        math(String.raw`k=0`), " は単位行列の右単位元により成り立つ。",
+        " から、", math(String.raw`k`), " に関する帰納法を行う（冪は Step 2 と同じ）。",
+        math(String.raw`k=0`), " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\check{X}^0
+&= \check{Q}_\epsilon I
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{X})\right) \\
+&= \check{Q}_\epsilon
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
+&= 1\,\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{g}(\epsilon)^0\check{Q}_\epsilon
+   \quad (\because \check{g}(\epsilon)^0 := 1)
+\end{aligned}`,
+      ),
+      paragraph([
         math(String.raw`\check{Q}_\epsilon\check{X}^k=\check{g}(\epsilon)^k\check{Q}_\epsilon`),
         " を仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{X}^{k+1}
+&= \check{Q}_\epsilon\left(\check{X}^k\check{X}\right)
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to k,\ A \to \check{X})\right) \\
 &= \left(\check{Q}_\epsilon\check{X}^k\right)\check{X}
-   \quad (\because \text{行列の冪の定義と積の結合法則}) \\
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \check{X}^k,\ C \to \check{X})\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{g}(\epsilon)^k\check{Q}_\epsilon\right)\check{X}
    \quad (\because \text{帰納法の仮定}) \\
 &= \check{g}(\epsilon)^k\left(\check{Q}_\epsilon\check{X}\right)
-   \quad (\because \text{スカラー倍と行列の積の交換}) \\
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \check{g}(\epsilon)^k,\ A \to \check{Q}_\epsilon,\ B \to \check{X})\right) \\
 &= \check{g}(\epsilon)^k\left(\check{g}(\epsilon)\check{Q}_\epsilon\right)
    \quad (\because \text{Step 1 の右から掛ける形}) \\
+&= \left(\check{g}(\epsilon)^k\,\check{g}(\epsilon)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \check{g}(\epsilon)^k,\ b \to \check{g}(\epsilon),\ A \to \check{Q}_\epsilon)\right) \\
 &= \check{g}(\epsilon)^{k+1}\check{Q}_\epsilon
-   \quad (\because \text{スカラー倍の結合法則})
+   \quad (\because \check{g}(\epsilon)^{k+1} := \check{g}(\epsilon)^k\,\check{g}(\epsilon))
 \end{aligned}`,
       ),
       paragraph([
@@ -2785,10 +2837,18 @@ E_K \check{Q}_\epsilon
 \check{Q}_\epsilon y
 &= \check{Q}_\epsilon\left(\check{Q}_\epsilon x\right)
    \quad (\because y = \check{Q}_\epsilon x \text{ と書いた}) \\
+&= \left(\check{Q}_\epsilon\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{Q}_\epsilon,\ B \to \check{Q}_\epsilon,\ C \to x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(I\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(\check{Q}_\epsilon^0\check{Q}_\epsilon\right)\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check{Q}_\epsilon^1\check{Q}_\epsilon\right)x
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon^2 x
-   \quad (\because \text{行列積の結合法則}) \\
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_\epsilon x
-   \quad (\because \text{check\_joint\_eigenspace\_decomposition (1) の冪等性}) \\
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\right) \\
 &= y
    \quad (\because y = \check{Q}_\epsilon x \text{ と書いた})
 \end{aligned}`,
@@ -2849,6 +2909,7 @@ E_K \check{Q}_\epsilon
         "V̌' Q̌_ε = Q̌_ε V̌' = e^{ǧ(ε)} Q̌_ε の「左から掛ける形」（Step 3'）を明示してある。max_eigenvalue_of_V_plus_simple (3) がこの形を使うため（Lean 側は Ising2D.CheckFermiSetup.Qproj_mul_Vprime / Ising2D.Qproj_mul_VPlus）。根拠は X̌ と Q̌_ε の可換性で、これは check_joint_eigenspace_decomposition (3) の両側版から従う。",
         "「固有値がすべて相異なるわけではない」ことは一次情報で確認した（sagemath/check/050_claim_even_sector_eigenvalues/check_03。M=2..5・6 組の (K1,K2) で、相異なる ε が同じ固有値を与える隣接ペアが 144 件現れる）。本文でも相異なるとは主張していない。",
         "数値検証: 同 check_03（X̌Q̌_ε = ǧ(ε)Q̌_ε、V̌'Q̌_ε = e^{ǧ(ε)}Q̌_ε、Sage の固有値集合との一致。残差 ≤ 8.0e-12）。",
+        "2026-11-02: Step 2・Step 3' の帰納法と Step 4 の名前だけの根拠「行列の冪の定義と積の結合法則」「スカラー倍と行列の積の交換」「スカラー倍の結合法則」「行列積の結合法則」7 か所を、def_exp (1) の冪・mat_mult_associative・scalar_multiple_factors_out_of_*_factor・scalar_multiple_is_associative・ℂ の積の交換律の 1 行 1 主張の鎖にした。def_exp (1) の冪は A^{m+1} := A^m A なので、Step 2 は X̌^{k+1} = X̌^k X̌ から始めて Step 1 を先に使い、帰納法の仮定を後に使う順に組み直した。k = 0 の「自明」「単位行列の右単位元」も def_exp (1)・単位行列の主張・scalar_multiple_by_one の鎖にし、数の冪 ǧ(ε)^k を証明の中で定めた。Step 4 の Q̌_ε^2 は def_exp (1) の冪から Q̌_εQ̌_ε へ運び、冪等性の行を check_joint_eigenspace_decomposition (1) のラベル参照にした。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj・Qproj_mul_Xop_pow・Qproj_mulVec_Qproj_mulVec は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_25。",
       ],
     },
   },

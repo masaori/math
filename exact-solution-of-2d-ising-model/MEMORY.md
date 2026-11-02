@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十四個目として、`eigenvalues_of_check_Vprime` の Step 2・Step 3' の帰納法と Step 4 の名前だけの根拠「行列の冪の定義と積の結合法則」「スカラー倍と行列の積の交換」「スカラー倍の結合法則」「行列積の結合法則」7 か所（と `k = 0` の「自明」）を、`def_exp` (1)・`mat_mult_associative`・`scalar_multiple_factors_out_of_*_factor`・`scalar_multiple_is_associative`・`scalar_multiple_by_one`・単位行列の主張・ℂ の交換律の 1 行 1 主張の鎖にした（主張は不変。冪の定義 `A^{m+1} := A^mA` に合わせて Step 2 の順序を組み直した）。Lean は人手と 1 対 1 の `Xop_pow_mul_Qproj`・`Qproj_mul_Xop_pow`・`Qproj_mulVec_Qproj_mulVec`、SageMath は `050` の `check_25`（1129 段）。次の一歩は状態台帳の (j)。
 2026-11-02: 可算二次元イジングの書式統一として、臨界条件と双対結合の同値の証明に実双曲線正弦の代入と二倍の除去の根拠を付けた。主張は変えていない。
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十三個目として、`check_joint_eigenspace_decomposition` の Step 0・Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、差の書き換え・分配・単位行列・符号の外出しの主張の 1 行 1 主張の参照に割った（主張は不変）。`R^{(0)}R^{(0)} = R^{(0)}` は、本文に行列の加法の結合則が無いので `R^{(1)}R^{(0)} = 0` と `matrix_minus_zero_matrix` を引く鎖にし、Step 0 の中の順序を入れ替えた。Lean は人手と 1 対 1 の `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` と `matrix_sub_zero_matrix_tensorPow`、SageMath は `050` の check_24。次は状態台帳の (i)（`eigenvalues_of_check_Vprime` の結合法則とスカラー倍）。
 

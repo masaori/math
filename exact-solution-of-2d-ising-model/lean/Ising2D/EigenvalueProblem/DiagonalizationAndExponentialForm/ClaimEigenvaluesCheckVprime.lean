@@ -87,6 +87,97 @@ theorem Qproj_mul_Xop (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     exact Commute.smul_left (Commute.one_left _) _
   rw [← hcomm.eq, F.Xop_mul_Qproj g T]
 
+/-- **原文 `eigenvalues_of_check_Vprime` Step 2**: `X̌^k Q̌_ε = ǧ(ε)^k Q̌_ε`。
+人手の帰納法の鎖（`k = 0` の 4 行、`k + 1` の 8 行）と 1 対 1 の calc。行列の冪は `def_exp` (1) の
+`A^0 := I`・`A^{m+1} := A^m A`（mathlib の `pow_zero`・`pow_succ` が同じ形）、数の冪も同じ形で証明の中で定めている。
+同じ主張の必要十分版の特殊化は `NecSuf.pow_mul_eq_of_mul_eq_smul`（`Vprime_mul_Qproj` が使う）。 -/
+theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k : ℕ) :
+    F.Xop g ^ k * F.Qproj T = (((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T := by
+  induction k with
+  | zero =>
+    calc F.Xop g ^ 0 * F.Qproj T
+        = 1 * F.Qproj T := by rw [pow_zero]
+                                                        -- `def_exp` (1) の `A^0 := I`
+      _ = F.Qproj T := identity_matrix_mul_tensorPow _
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+      _ = (1 : ℂ) • F.Qproj T := (one_smul ℂ _).symm
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ（Lean の具体版は無く、mathlib の `one_smul`）
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ 0 • F.Qproj T := by rw [pow_zero]
+                                                        -- `ǧ(ε)^0 := 1`
+  | succ k ih =>
+    calc F.Xop g ^ (k + 1) * F.Qproj T
+        = (F.Xop g ^ k * F.Xop g) * F.Qproj T := by rw [pow_succ]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`
+      _ = F.Xop g ^ k * (F.Xop g * F.Qproj T) := Matrix.mul_assoc _ _ _
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+      _ = F.Xop g ^ k * ((((F.gval g T : ℝ) : ℂ)) • F.Qproj T) := by rw [F.Xop_mul_Qproj g T]
+                                                        -- Step 1
+      _ = (((F.gval g T : ℝ) : ℂ)) • (F.Xop g ^ k * F.Qproj T) := mul_smul_matrix_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_right_factor`
+      _ = (((F.gval g T : ℝ) : ℂ)) • ((((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T) := by rw [ih]
+                                                        -- 帰納法の仮定
+      _ = ((((F.gval g T : ℝ) : ℂ)) * (((F.gval g T : ℝ) : ℂ)) ^ k) • F.Qproj T := smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
+      _ = ((((F.gval g T : ℝ) : ℂ)) ^ k * (((F.gval g T : ℝ) : ℂ))) • F.Qproj T := by
+            rw [mul_comm (((F.gval g T : ℝ) : ℂ))]
+                                                        -- ℂ の積の交換律（`complex_numbers_form_a_field`）
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ (k + 1) • F.Qproj T := by rw [pow_succ]
+                                                        -- `ǧ(ε)^{k+1} := ǧ(ε)^k ǧ(ε)`
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3' の帰納法**: `Q̌_ε X̌^k = ǧ(ε)^k Q̌_ε`。
+人手の鎖（`k = 0` の 4 行、`k + 1` の 7 行）と 1 対 1 の calc。
+同じ主張の必要十分版の特殊化は `NecSuf.mul_exp_eq_of_mul_eq_smul` の中の冪の段（`Qproj_mul_Vprime` が使う）。 -/
+theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k : ℕ) :
+    F.Qproj T * F.Xop g ^ k = (((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T := by
+  induction k with
+  | zero =>
+    calc F.Qproj T * F.Xop g ^ 0
+        = F.Qproj T * 1 := by rw [pow_zero]
+                                                        -- `def_exp` (1) の `A^0 := I`
+      _ = F.Qproj T := mul_identity_matrix_tensorPow _
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+      _ = (1 : ℂ) • F.Qproj T := (one_smul ℂ _).symm
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ（Lean の具体版は無く、mathlib の `one_smul`）
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ 0 • F.Qproj T := by rw [pow_zero]
+                                                        -- `ǧ(ε)^0 := 1`
+  | succ k ih =>
+    calc F.Qproj T * F.Xop g ^ (k + 1)
+        = F.Qproj T * (F.Xop g ^ k * F.Xop g) := by rw [pow_succ]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`
+      _ = (F.Qproj T * F.Xop g ^ k) * F.Xop g := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative` を右辺から左辺へ（mathlib の `Matrix.mul_assoc`）
+      _ = ((((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T) * F.Xop g := by rw [ih]
+                                                        -- 帰納法の仮定
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ k • (F.Qproj T * F.Xop g) := smul_mul_matrix_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_left_factor`
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ k • ((((F.gval g T : ℝ) : ℂ)) • F.Qproj T) := by
+            rw [F.Qproj_mul_Xop g T]
+                                                        -- Step 1 の右から掛ける形
+      _ = ((((F.gval g T : ℝ) : ℂ)) ^ k * (((F.gval g T : ℝ) : ℂ))) • F.Qproj T := smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative`（mathlib の `smul_smul`）
+      _ = (((F.gval g T : ℝ) : ℂ)) ^ (k + 1) • F.Qproj T := by rw [pow_succ]
+                                                        -- `ǧ(ε)^{k+1} := ǧ(ε)^k ǧ(ε)`
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 4 の最初の鎖**: `y = Q̌_ε x` なら `Q̌_ε y = y`。
+人手の 8 行（両端の `y = Q̌_ε x` の書き換えは Lean では `y` を置かずに書くので現れない）と 1 対 1 の calc。 -/
+theorem Qproj_mulVec_Qproj_mulVec (T : Finset (CheckIdx M)) (x : Conf M → ℂ) :
+    (F.Qproj T).mulVec ((F.Qproj T).mulVec x) = (F.Qproj T).mulVec x :=
+  calc (F.Qproj T).mulVec ((F.Qproj T).mulVec x)
+      = (F.Qproj T * F.Qproj T).mulVec x := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`（`q → 1`）を右辺から左辺へ。Lean の数ベクトルは
+                                                        -- 1 列の行列ではなく `Conf M → ℂ` なので、mathlib の `Matrix.mulVec_mulVec`
+    _ = ((1 * F.Qproj T) * F.Qproj T).mulVec x := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
+    _ = ((F.Qproj T ^ 0 * F.Qproj T) * F.Qproj T).mulVec x := by rw [pow_zero]
+                                                        -- `def_exp` (1) の `A^0 := I`
+    _ = (F.Qproj T ^ 1 * F.Qproj T).mulVec x := by rw [← pow_succ]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 0`）
+    _ = (F.Qproj T ^ 2).mulVec x := by rw [← pow_succ]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 1`）
+    _ = (F.Qproj T).mulVec x := by rw [sq, F.Qproj_mul_self T]
+                                                        -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
+                                                        -- （Lean の `Qproj_mul_self` は `Q̌_ε Q̌_ε = Q̌_ε` の形なので mathlib の `sq` で読み替える）
+
 set_option backward.isDefEq.respectTransparency false in
 /-- **原文 `eigenvalues_of_check_Vprime` Step 3**: `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`。 -/
 theorem Vprime_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :

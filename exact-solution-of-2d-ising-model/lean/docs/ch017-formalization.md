@@ -94,6 +94,8 @@
 | `CheckFermiSetup.sum_Qproj_mulVec` / `eq_zero_of_sum_eq_zero` | 直和分解（張ること・直和性） | 同 (5) |
 | `CheckFermiSetup.Xop` / `Vprime` / `gval` | `X̌`, `V̌' = exp(X̌)`, `ǧ(ε)` | `def_check_number_operator` (2), `def_check_Vprime` |
 | `CheckFermiSetup.Xop_mul_Qproj` / `Qproj_mul_Xop`（`ClaimEigenvaluesCheckVprime.lean`） | `X̌ Q̌_ε = ǧ(ε) Q̌_ε`（左右両方） | `eigenvalues_of_check_Vprime` Step 1 |
+| `CheckFermiSetup.Xop_pow_mul_Qproj` / `Qproj_mul_Xop_pow` | `X̌^k Q̌_ε = ǧ(ε)^k Q̌_ε`・`Q̌_ε X̌^k = ǧ(ε)^k Q̌_ε` の帰納法（`k = 0` の 4 行と、`k + 1` の 8 行・7 行）の鎖と 1 対 1 の calc | `eigenvalues_of_check_Vprime` Step 2・Step 3' |
+| `CheckFermiSetup.Qproj_mulVec_Qproj_mulVec` | `Q̌_ε(Q̌_ε x) = Q̌_ε x`（`Q̌_ε^2` を `def_exp` (1) の冪から運ぶ 8 行）の鎖と 1 対 1 の calc | `eigenvalues_of_check_Vprime` Step 4 の最初の鎖 |
 | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime` | `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`（左右両方） | 同 Step 3 |
 | `CheckFermiSetup.Vprime_mulVec_of_mem_range` | `im Q̌_ε` の元は固有ベクトル | 同 Step 4 |
 | `CheckFermiSetup.VprimeUnits` / `Vprime_mul_Vprime_neg`（`ClaimTraceCheckVprime.lean`） | `(V̌')^{-1} = exp(-X̌)` | `def_check_Vprime` (2) |

@@ -1619,6 +1619,9 @@ targets=(
   Ising2D.CheckFermiSetup.eq_zero_of_sum_eq_zero
   Ising2D.CheckFermiSetup.Xop_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Xop
+  Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj
+  Ising2D.CheckFermiSetup.Qproj_mul_Xop_pow
+  Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec
   Ising2D.CheckFermiSetup.Vprime_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Vprime
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
