@@ -59658,6 +59658,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                       kind: "definition",
                       title: { text: "添字対の横断" },
                       labels: ["def_index_pair_crossing"],
+                      lean: [
+                        "Ising2DLambda.KacWard.indexPairCrossing",
+                        "Ising2DLambda.NecSuf.KacWard.indexPairCrossing",
+                        "Ising2DLambda.KacWard.indexPairCrossing_from_necSuf",
+                      ],
                       habitat: "N",
                       statement: [
                         paragraph([
