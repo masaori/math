@@ -58068,6 +58068,7 @@ c_{\mathrm v}(e,d):=
                       title: { text: "トーラスの巻き付き二次符号" },
                       labels: ["def_torus_quadratic_sign"],
                       habitat: "Z",
+                      lean: ["Ising2DLambda.KacWard.torusQuadraticParity", "Ising2DLambda.KacWard.torusQuadraticSign", "Ising2DLambda.KacWard.torusQuadraticParity_from_necSuf", "Ising2DLambda.KacWard.torusQuadraticSign_from_necSuf"],
                       statement: [
                         paragraph([
                           math(String.raw`(a,b)\in\mathcal S`), "（", ref("def_spin_structures"), "）と巻き付き偶奇 ",

@@ -3625,12 +3625,14 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
         ref("def_invertible_elements_of_R"),
         " (iv) より",
       ]),
-      displayMath(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I\in R^\times`),
+      displayMath(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I\in R^\times
+\qquad\bigl(\because\ \blkref{def_invertible_elements_of_R}\text{ (iv)}\bigr)`),
       paragraph([
         ref("V2_exponential_representation"),
         " の指数表示により",
       ]),
-      displayMath(String.raw`V_2=(2s_2)^{M_{\mathrm{col}}/2}I\cdot\exp\!\left(iK_2^*H_2\right)`),
+      displayMath(String.raw`V_2=(2s_2)^{M_{\mathrm{col}}/2}I\cdot\exp\!\left(iK_2^*H_2\right)
+\qquad\bigl(\because\ \blkref{V2_exponential_representation}\bigr)`),
       paragraph([
         ref("def_invertible_elements_of_R"),
         " (ii) をこの積へ適用すると、",
