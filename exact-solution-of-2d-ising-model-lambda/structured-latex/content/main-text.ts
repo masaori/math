@@ -58536,6 +58536,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "非後退辺列" },
                           labels: ["def_nonbacktracking_edge_sequence"],
                           habitat: "N",
+                          lean: ["Ising2DLambda.KacWard.nonbacktrackingEdgeSequence"],
                           statement: [
                             paragraph([
                               math(String.raw`m\in\mathbb N`), "、", math(String.raw`m\ge1`),
@@ -58803,6 +58804,7 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "閉じた非後退辺列" },
                           labels: ["def_closed_nonbacktracking_walk"],
                           habitat: "N",
+                          lean: ["Ising2DLambda.KacWard.closedNonbacktrackingWalk"],
                           statement: [
                             paragraph([
                               "非後退辺列 ",

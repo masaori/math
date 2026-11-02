@@ -438,7 +438,8 @@ A &= s_1 s_2^*
 \gamma_1(\theta)
 &= c_1c_2^* - s_1s_2^*\cos\theta
    &&(\because \blkref{def_gamma1_gamma2_of_theta}) \\
-&= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right) \\
+&= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right)
+   &&(\because \mathbb R\text{ の分配則}) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
    &&(\because \blkref{cosh_addition_formula}\text{ の複号 }-\text{ を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
 &= \cosh\kappa + A\left(1-\cos\theta\right)
@@ -503,7 +504,8 @@ A &= s_1 s_2^*
         ref("sqrt_nonnegative_existence_uniqueness"),
         "）から",
       ]),
-      displayMath(String.raw`\sinh\!\left(\frac{\gamma(\theta)}{2}\right) = \sqrt{S}`),
+      displayMath(String.raw`\sinh\!\left(\frac{\gamma(\theta)}{2}\right) = \sqrt{S}
+\qquad(\because\ \blkref{sqrt_nonnegative_existence_uniqueness}\text{ と直前の非負性・平方の等式})`),
       paragraph([
         ref("sinh_equation_solved_by_arcsinh"),
         " を ",

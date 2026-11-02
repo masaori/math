@@ -1,6 +1,8 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十四個目として、`eigenvalues_of_check_Vprime` の Step 2・Step 3' の帰納法と Step 4 の名前だけの根拠「行列の冪の定義と積の結合法則」「スカラー倍と行列の積の交換」「スカラー倍の結合法則」「行列積の結合法則」7 か所（と `k = 0` の「自明」）を、`def_exp` (1)・`mat_mult_associative`・`scalar_multiple_factors_out_of_*_factor`・`scalar_multiple_is_associative`・`scalar_multiple_by_one`・単位行列の主張・ℂ の交換律の 1 行 1 主張の鎖にした（主張は不変。冪の定義 `A^{m+1} := A^mA` に合わせて Step 2 の順序を組み直した）。Lean は人手と 1 対 1 の `Xop_pow_mul_Qproj`・`Qproj_mul_Xop_pow`・`Qproj_mulVec_Qproj_mulVec`、SageMath は `050` の `check_25`（1129 段）。次の一歩は状態台帳の (j)。
+2026-11-02: 可算二次元イジングの書式統一として、閉形式への接続の証明に分配則と非負平方根の一意性を式の行末で明示した。主張は変えていない。
+
 2026-11-02: 可算二次元イジングの書式統一として、臨界条件と双対結合の同値の証明に実双曲線正弦の代入と二倍の除去の根拠を付けた。主張は変えていない。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、`antiperiodic_exp_sum`（半整数運動量の指数和）に検算 `sagemath/check/antiperiodic_exp_sum/` を付けた（未検算 80 件）。指数の値を 1 の冪根として厳密に持ち、全ての鎖を一行ずつ確かめた。レビューの指摘で、散文の段（主張の左辺と S、非整除の場合）を鎖に、複数の操作を束ねた行を一行一操作に分け、δ の値に def_delta_M を引いた。exp_sum と def_delta_M の記号の省略は状態台帳に記録した。計算の誤りは無かった。次は `half_integer_phase_antiperiodicity`。
