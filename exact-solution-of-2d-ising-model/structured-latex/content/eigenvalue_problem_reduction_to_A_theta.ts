@@ -3843,7 +3843,7 @@ h\left(V_1^{(+)}\right)^{1/2}
     id: "evensectorT_claim_V2_invertible",
     kind: "claim",
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 3 },
-    title: { tex: String.raw`V_2 \text{ の可逆性}` },
+    title: { tex: String.raw`V_2 \text{ の可逆性と逆元}` },
     labels: ["V2_invertible"],
     statement: [
       paragraph([
@@ -3860,21 +3860,51 @@ h\left(V_1^{(+)}\right)^{1/2}
         ref("def_transfer_matrix_symbols"),
         " で定めた ",
         math(String.raw`V_2\in R`),
-        " は可逆である。すなわち ",
-        math(String.raw`V_2\in R^\times`),
-        " である。",
+        " と ",
+        math(String.raw`K_2^*\in\mathbb{R}_{>0}`),
+        "、",
+        ref("def_H2"),
+        " の ",
+        math(String.raw`H_2\in R`),
+        "、",
+        ref("def_second_transfer_matrix_prefactor"),
+        " の ",
+        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2}\in\mathbb{R}_{>0}`),
+        "（",
+        math(String.raw`s_2`),
+        " は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "）",
+        " とその逆数 ",
+        math(String.raw`a^{-1}\in\mathbb{R}`),
+        " を用い、",
+        math(String.raw`(K_2^*)_{\mathbb{C}}, (a^{-1})_{\mathbb{C}}\in\mathbb{C}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " による像、",
+        math(String.raw`Y:=\bigl(i(K_2^*)_{\mathbb{C}}\bigr)H_2\in R`),
+        "（スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`-Y`),
+        " は ",
+        ref("def_matrix_negation"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        "）とする。",
+        math(String.raw`V_2`),
+        " は可逆であり、その逆元は",
       ]),
+      displayMath(String.raw`V_2\in R^\times,\qquad V_2^{-1}=(a^{-1})_{\mathbb{C}}\exp(-Y)`),
+      paragraph(["である。"]),
     ],
     proof: [
       paragraph([
-        math(String.raw`Y:=\bigl(i(K_2^*)_{\mathbb{C}}\bigr)H_2\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        "（",
-        math(String.raw`(K_2^*)_{\mathbb{C}}`),
-        " は ",
-        ref("inclusion_rr_to_cc"),
-        " による ",
-        math(String.raw`K_2^*\in\mathbb{R}_{>0}`),
-        " の像。",
+        "主張の ",
+        math(String.raw`Y`),
+        " を使う（",
         ref("V2_exponential_representation"),
         " が ",
         math(String.raw`\mathbb{R}_{>0}\subset\mathbb{C}`),
@@ -3886,9 +3916,9 @@ h\left(V_1^{(+)}\right)^{1/2}
         math(String.raw`(K_2^*)_{\mathbb{C}}`),
         " と下の ",
         math(String.raw`a_{\mathbb{C}}`),
-        " である）、",
-        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2}`),
-        " と置く。",
+        " である）。主張の ",
+        math(String.raw`a`),
+        " について",
       ]),
       displayMath(String.raw`\begin{aligned}
 a
@@ -3988,10 +4018,19 @@ hV_2
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to Y)\bigr)
 \end{aligned}`),
-      displayMath(String.raw`V_2\in R^\times
-\qquad\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ (M\to M_{\mathrm{col}},\ g\to V_2,\ h\to (a^{-1})_{\mathbb{C}}\exp(-Y))\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+&V_2\in R^\times
+&&\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ \text{の可逆の定義}\ (M\to M_{\mathrm{col}},\ g\to V_2,\ h\to (a^{-1})_{\mathbb{C}}\exp(-Y))\bigr)\\
+&V_2^{-1}=(a^{-1})_{\mathbb{C}}\exp(-Y)
+&&\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ \text{の逆元の一意性と記号}\ g^{-1}\bigr)
+\end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算。T_actions_on_check_Z_Y の検算）: T_{V_2} の計算で V_2^{-1} の形が要るので、証明の中で置いていた a・Y・h を主張へ上げ、逆元が (a^{-1})_C exp(-Y) であることを主張に書いた（証明の二つの鎖は不変）。",
+      ],
+    },
   },
   {
     id: "evensectorT_definition_T_V_plus",
@@ -5832,6 +5871,45 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
     },
   },
   {
+    id: "evensectorT_definition_pair_of_matrices_times_column_of_numbers",
+    kind: "definition",
+    origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 7 },
+    title: { tex: String.raw`\text{行列の組と数の列の積}` },
+    labels: ["def_pair_of_matrices_times_column_of_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B\in\mathrm{Mat}(d,\mathbb{C})`),
+        "、",
+        math(String.raw`a, b\in\mathbb{C}`),
+        " について、行列の組 ",
+        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}`),
+        " と数の列 ",
+        math(String.raw`\begin{pmatrix}a \\ b\end{pmatrix}`),
+        " の積を",
+      ]),
+      displayMath(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} := aA + bB\ \in\ \mathrm{Mat}(d,\mathbb{C})`),
+      paragraph([
+        "と定める（",
+        math(String.raw`aA`),
+        "・",
+        math(String.raw`bB`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍、和は ",
+        ref("def_matrix_sum"),
+        "）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算）: T_actions_on_check_Z_Y の主張の中で定めていた積を、1 ブロック 1 定義に従って切り出した。",
+      ],
+    },
+  },
+  {
     id: "evensectorT_005_claim_T_actions",
     kind: "claim",
     origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 7 },
@@ -5839,171 +5917,291 @@ y_{\mathbb{C}} - z_{\mathbb{C}}
     labels: ["T_actions_on_check_Z_Y"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
-        " について（",
+        "、",
         math(String.raw`\tilde\theta := \tilde\theta_\mu`),
+        "、",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu \in R`),
+        "（",
+        ref("def_half_integer_checkZ"),
+        "・",
+        ref("def_half_integer_checkY"),
         "）、",
+        math(String.raw`K_1, K_2^*`),
+        "・",
+        math(String.raw`2K_2^*`),
+        " とそれらの像、",
+        math(String.raw`(\tilde\theta)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`\cosh, \sinh`),
+        " は ",
+        ref("extract_taylor_coefficient_of_check_Z_Y"),
+        " のものとする。",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}\in R^\times`),
+        "（",
+        ref("def_V1_plus_square_root"),
+        "・",
+        ref("V1_plus_half_invertible"),
+        "）と ",
+        math(String.raw`V_2\in R^\times`),
+        "（",
+        ref("V2_invertible"),
+        "）による共役 ",
+        math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2}: R\to R`),
+        " は ",
+        ref("def_T_g"),
+        "、行列の組と数の列の積は ",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " による。このとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
-&= \cosh(K_1)\check{Z}_\mu + i \exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix} \\
+&= (\cosh K_1)_{\mathbb{C}}\,\check{Z}_\mu + \Bigl(\bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Y}_\mu
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}(\cosh K_1)_{\mathbb{C}} \\ \bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\end{pmatrix} \\
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
-&= -i \exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix} \\
+&= \Bigl(\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Z}_\mu + (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\ (\cosh K_1)_{\mathbb{C}}\end{pmatrix} \\
 T_{V_2}(\check{Z}_\mu)
-&= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}\cosh(2K_2^*) \\ -i\sinh(2K_2^*)\end{pmatrix} \\
+&= (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Z}_\mu + \bigl((-i)(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Y}_\mu
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}(\cosh 2K_2^*)_{\mathbb{C}} \\ (-i)(\sinh 2K_2^*)_{\mathbb{C}}\end{pmatrix} \\
 T_{V_2}(\check{Y}_\mu)
-&= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-  \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
+&= \bigl(i\,(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Z}_\mu + (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Y}_\mu
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}i\,(\sinh 2K_2^*)_{\mathbb{C}} \\ (\cosh 2K_2^*)_{\mathbb{C}}\end{pmatrix}
 \end{aligned}`,
       ),
-      paragraph([
-        "ここで行ベクトルと列ベクトルの積は ",
-        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} := aA + bB`),
-        "（",
-        math(String.raw`A, B \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        "、",
-        math(String.raw`a, b \in \mathbb{C}`),
-        "）とする。",
-      ]),
+      paragraph(["である。"]),
     ],
     proof: [
       paragraph([
-        math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)`),
-        " について、",
-        ref("def_T_g"),
+        math(String.raw`S := \left(V_1^{(+)}\right)^{1/2}`),
         "、",
+        ref("extract_taylor_coefficient_of_check_Z_Y"),
+        " の証明と同じく ",
+        math(String.raw`G_1 := \tfrac{i}{2}\bigl((K_1)_{\mathbb{C}} H_1^{(+)}\bigr)`),
+        "、",
+        math(String.raw`G_2 := i\bigl((K_2^*)_{\mathbb{C}} H_2\bigr)`),
+        "、",
+        math(String.raw`n`),
+        " 重交換子を ",
+        math(String.raw`\mathrm{ad}^{n}_{G}(W)`),
+        "（",
+        ref("def_ad_X_matrix"),
+        "）と書き、",
+        ref("V1_plus_half_invertible"),
+        " の証明と同じく ",
+        math(String.raw`X := \bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\bigr)H_1^{(+)}\in R`),
+        " と置く（",
         ref("def_V1_plus_square_root"),
-        " の定義、",
-        ref("matrix_exp_conjugation"),
-        " (3) の ",
-        math(String.raw`\exp(X)^{-1} = \exp(-X)`),
-        "、",
-        ref("exp_X_Y_exp_-X"),
-        "、",
-        ref("extract_taylor_coefficient_of_check_Z_Y"),
-        " を順に用いる。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)
-&= \left(V_1^{(+)}\right)^{1/2}\,\check{Z}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
-   \quad (\because \blkref{def_T_g}) \\
-&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
-   \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \blkref{def_V1_plus_square_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
-&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Z}_\mu\,
-   \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \blkref{matrix_exp_conjugation}\text{ (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
-&= \sum_{n=0}^{\infty}\frac{1}{n!}
-   \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
-&= \cosh(K_1)\check{Z}_\mu + i\,\exp(-i\tilde\theta)\sinh(K_1)\check{Y}_\mu
-   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h1.z)})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)`),
-        " については、作用させる元が ",
-        math(String.raw`\check{Z}_\mu`),
-        " から ",
-        math(String.raw`\check{Y}_\mu`),
-        " へ変わるだけで共役の展開はまったく同じ手順であり、最後に ",
-        ref("extract_taylor_coefficient_of_check_Z_Y"),
-        " の (h1.y) を使う。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)
-&= \left(V_1^{(+)}\right)^{1/2}\,\check{Y}_\mu\,\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
-   \quad (\because \blkref{def_T_g}) \\
-&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
-   \left(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right)^{-1}
-   \quad \left(\because \blkref{def_V1_plus_square_root}:\ \left(V_1^{(+)}\right)^{1/2} := \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\right) \\
-&= \exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\,\check{Y}_\mu\,
-   \exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-   \quad \left(\because \blkref{matrix_exp_conjugation}\text{ (3)}:\ \exp(X)^{-1} = \exp(-X)\right) \\
-&= \sum_{n=0}^{\infty}\frac{1}{n!}
-   \underbrace{\left[\tfrac{i}{2}K_1H_1^{(+)},\dots,\left[\tfrac{i}{2}K_1H_1^{(+)},\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
-&= -i\,\exp(i\tilde\theta)\sinh(K_1)\check{Z}_\mu + \cosh(K_1)\check{Y}_\mu
-   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h1.y)})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`T_{V_2}`),
-        " については、",
+        " が ",
+        math(String.raw`\mathbb{R}_{>0}\subset\mathbb{C}`),
+        " と書いて掛けている ",
+        math(String.raw`K_1`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " である）。",
+        math(String.raw`a`),
+        "・",
+        math(String.raw`a^{-1}`),
+        "・",
+        math(String.raw`Y`),
+        " は ",
+        ref("V2_invertible"),
+        " の主張のものとする（",
         ref("V2_exponential_representation"),
-        " の ",
-        math(String.raw`V_2 = (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)`),
-        " の前因子 ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{C}\setminus\{0\}`),
-        " が共役で打ち消し合う。実際 ",
-        ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I`),
-        " は任意の元と可換であり、",
-        ref("def_invertible_elements_of_R"),
-        " (ii)(iv) より ",
-        math(String.raw`V_2^{-1} = \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)`),
-        " である（",
-        ref("def_T_g"),
+        " が ",
+        math(String.raw`\mathbb{R}_{>0}\subset\mathbb{C}`),
+        " と書いて掛けている ",
+        math(String.raw`K_2^*`),
+        " と係数 ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
+        " は、それぞれ ",
+        math(String.raw`(K_2^*)_{\mathbb{C}}`),
         " と ",
-        ref("exp_X_Y_exp_-X"),
-        " も以下で使う）。よって",
+        math(String.raw`a_{\mathbb{C}}`),
+        " である）。級数の係数 ",
+        math(String.raw`1/n!\in\mathbb{R}`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍として掛けるので、",
+        ref("inclusion_rr_to_cc"),
+        " による像を ",
+        math(String.raw`(1/n!)_{\mathbb{C}}`),
+        " と書く。準備: 指数の肩は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+X
+&= \bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\bigr)H_1^{(+)}
+&&(\because\ X\ \text{の置き方})\\
+&= \tfrac{i}{2}\bigl((K_1)_{\mathbb{C}}H_1^{(+)}\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a\to\tfrac{i}{2},\ b\to(K_1)_{\mathbb{C}},\ A\to H_1^{(+)})\bigr)\\
+&= G_1
+&&(\because\ G_1\ \text{の置き方}),\\[2mm]
+Y
+&= \bigl(i(K_2^*)_{\mathbb{C}}\bigr)H_2
+&&\bigl(\because\ \blkref{V2_invertible}\ \text{の}\ Y\bigr)\\
+&= i\bigl((K_2^*)_{\mathbb{C}}H_2\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a\to i,\ b\to(K_2^*)_{\mathbb{C}},\ A\to H_2)\bigr)\\
+&= G_2
+&&(\because\ G_2\ \text{の置き方})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`T_S(\check{Z}_\mu)`),
+        "・",
+        math(String.raw`T_S(\check{Y}_\mu)`),
+        " は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{S}(\check{Z}_\mu)
+&= (S\check{Z}_\mu)S^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\ (M\to M_{\mathrm{col}},\ g\to S,\ h\to \check{Z}_\mu)\bigr)\\
+&= \Bigl(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\check{Z}_\mu\Bigr)\Bigl(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\Bigr)^{-1}
+&&\bigl(\because\ \blkref{def_V1_plus_square_root}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \bigl(\exp(X)\check{Z}_\mu\bigr)\bigl(\exp(X)\bigr)^{-1}
+&&\bigl(\because\ X\ \text{の置き方}\ (K_1\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_1)_{\mathbb{C}})\bigr)\\
+&= \bigl(\exp(X)\check{Z}_\mu\bigr)\exp(-X)
+&&\bigl(\because\ \blkref{matrix_exp_conjugation}\ \text{(3)}\ (n\to 2^{M_{\mathrm{col}}},\ X\to X)\bigr)\\
+&= \bigl(\exp(G_1)\check{Z}_\mu\bigr)\exp(-G_1)
+&&(\because\ \text{準備の}\ X = G_1)\\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}\,\mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ (\text{同主張の}\ d,\ X,\ Y\ \text{を}\ 2^{M_{\mathrm{col}}},\ G_1,\ \check{Z}_\mu\ \text{に})\bigr)\\
+&= \sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_1}(\check{Z}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ \text{が引く}\ \blkref{matrix_exp_conjugation}\ \text{の実数係数の包含は}\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (\cosh K_1)_{\mathbb{C}}\,\check{Z}_\mu + \Bigl(\bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{extract_taylor_coefficient_of_check_Z_Y}\ \text{(h1.z)}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}(\cosh K_1)_{\mathbb{C}} \\ \bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\end{pmatrix}
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+T_{S}(\check{Y}_\mu)
+&= (S\check{Y}_\mu)S^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\ (M\to M_{\mathrm{col}},\ g\to S,\ h\to \check{Y}_\mu)\bigr)\\
+&= \Bigl(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\check{Y}_\mu\Bigr)\Bigl(\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\Bigr)^{-1}
+&&\bigl(\because\ \blkref{def_V1_plus_square_root}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \bigl(\exp(X)\check{Y}_\mu\bigr)\bigl(\exp(X)\bigr)^{-1}
+&&\bigl(\because\ X\ \text{の置き方}\ (K_1\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_1)_{\mathbb{C}})\bigr)\\
+&= \bigl(\exp(X)\check{Y}_\mu\bigr)\exp(-X)
+&&\bigl(\because\ \blkref{matrix_exp_conjugation}\ \text{(3)}\ (n\to 2^{M_{\mathrm{col}}},\ X\to X)\bigr)\\
+&= \bigl(\exp(G_1)\check{Y}_\mu\bigr)\exp(-G_1)
+&&(\because\ \text{準備の}\ X = G_1)\\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}\,\mathrm{ad}^{n}_{G_1}(\check{Y}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ (\text{同主張の}\ d,\ X,\ Y\ \text{を}\ 2^{M_{\mathrm{col}}},\ G_1,\ \check{Y}_\mu\ \text{に})\bigr)\\
+&= \sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_1}(\check{Y}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ \text{が引く}\ \blkref{matrix_exp_conjugation}\ \text{の実数係数の包含は}\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= \Bigl(\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}\Bigr)\check{Z}_\mu + (\cosh K_1)_{\mathbb{C}}\,\check{Y}_\mu
+&&\bigl(\because\ \blkref{extract_taylor_coefficient_of_check_Z_Y}\ \text{(h1.y)}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}\bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\ (\cosh K_1)_{\mathbb{C}}\end{pmatrix}
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`T_{V_2}(\check{Z}_\mu)`),
+        "・",
+        math(String.raw`T_{V_2}(\check{Y}_\mu)`),
+        " は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 T_{V_2}(\check{Z}_\mu)
-&= V_2\,\check{Z}_\mu\,V_2^{-1}
-   \quad (\because \blkref{def_T_g}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,
-   \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
-   \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \blkref{scalar_identity_commutes}\text{（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
-&= \exp\!\left(iK_2^*H_2\right)\,\check{Z}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
-&= \sum_{n=0}^{\infty}\frac{1}{n!}
-   \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Z}_\mu\right]\dots\right]}_{n}
-   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
-&= \cosh(2K_2^*)\check{Z}_\mu - i\sinh(2K_2^*)\check{Y}_\mu
-   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h2.z)})
+&= (V_2\check{Z}_\mu)V_2^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\ (M\to M_{\mathrm{col}},\ g\to V_2,\ h\to \check{Z}_\mu)\bigr)\\
+&= (V_2\check{Z}_\mu)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\bigr)\\
+&= \Bigl(\Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\Bigr)\check{Z}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_exponential_representation}\bigr)\\
+&= \Bigl(\Bigl(a_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)\Bigr)\check{Z}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\ \text{の}\ a\ (\text{係数は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ a_{\mathbb{C}})\bigr)\\
+&= \Bigl(\bigl(a_{\mathbb{C}}\exp(Y)\bigr)\check{Z}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\ \text{の}\ Y\ (K_2^*\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_2^*)_{\mathbb{C}})\bigr)\\
+&= \Bigl(a_{\mathbb{C}}\bigl(\exp(Y)\check{Z}_\mu\bigr)\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (a\to a_{\mathbb{C}},\ A\to\exp(Y),\ B\to \check{Z}_\mu)\bigr)\\
+&= a_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (a\to a_{\mathbb{C}},\ A\to\exp(Y)\check{Z}_\mu,\ B\to(a^{-1})_{\mathbb{C}}\exp(-Y))\bigr)\\
+&= a_{\mathbb{C}}\Bigl((a^{-1})_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (a\to (a^{-1})_{\mathbb{C}},\ B\to\exp(-Y))\bigr)\\
+&= \bigl(a_{\mathbb{C}}(a^{-1})_{\mathbb{C}}\bigr)\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a\to a_{\mathbb{C}},\ b\to(a^{-1})_{\mathbb{C}})\bigr)\\
+&= (aa^{-1})_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a\to a,\ b\to a^{-1})\bigr)\\
+&= (1)_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)\Bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ aa^{-1}=1)\\
+&= 1_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\bigr)\\
+&= \bigl(\exp(Y)\check{Z}_\mu\bigr)\exp(-Y)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&= \bigl(\exp(G_2)\check{Z}_\mu\bigr)\exp(-G_2)
+&&(\because\ \text{準備の}\ Y = G_2)\\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}\,\mathrm{ad}^{n}_{G_2}(\check{Z}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ (\text{同主張の}\ d,\ X,\ Y\ \text{を}\ 2^{M_{\mathrm{col}}},\ G_2,\ \check{Z}_\mu\ \text{に})\bigr)\\
+&= \sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_2}(\check{Z}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ \text{が引く}\ \blkref{matrix_exp_conjugation}\ \text{の実数係数の包含は}\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Z}_\mu + \bigl((-i)(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Y}_\mu
+&&\bigl(\because\ \blkref{extract_taylor_coefficient_of_check_Z_Y}\ \text{(h2.z)}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}(\cosh 2K_2^*)_{\mathbb{C}} \\ (-i)(\sinh 2K_2^*)_{\mathbb{C}}\end{pmatrix}
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\bigr)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 T_{V_2}(\check{Y}_\mu)
-&= V_2\,\check{Y}_\mu\,V_2^{-1}
-   \quad (\because \blkref{def_T_g}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,
-   \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \blkref{V2_exponential_representation}\text{ と直前の } V_2^{-1} \text{ の表示}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1}
-   \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because \blkref{scalar_identity_commutes}\text{（スカラー } \left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} \text{ を左端へ移す）}) \\
-&= \exp\!\left(iK_2^*H_2\right)\,\check{Y}_\mu\,\exp\!\left(-iK_2^*H_2\right)
-   \quad (\because (2s_2)^{M_{\mathrm{col}}/2}\left((2s_2)^{M_{\mathrm{col}}/2}\right)^{-1} = 1) \\
-&= \sum_{n=0}^{\infty}\frac{1}{n!}
-   \underbrace{\left[iK_2^*H_2,\dots,\left[iK_2^*H_2,\check{Y}_\mu\right]\dots\right]}_{n}
-   \quad (\because \blkref{exp_X_Y_exp_-X}) \\
-&= i\sinh(2K_2^*)\check{Z}_\mu + \cosh(2K_2^*)\check{Y}_\mu
-   \quad (\because \blkref{extract_taylor_coefficient_of_check_Z_Y}\text{ (h2.y)})
+&= (V_2\check{Y}_\mu)V_2^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\ (M\to M_{\mathrm{col}},\ g\to V_2,\ h\to \check{Y}_\mu)\bigr)\\
+&= (V_2\check{Y}_\mu)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\bigr)\\
+&= \Bigl(\Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\Bigr)\check{Y}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_exponential_representation}\bigr)\\
+&= \Bigl(\Bigl(a_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)\Bigr)\check{Y}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\ \text{の}\ a\ (\text{係数は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ a_{\mathbb{C}})\bigr)\\
+&= \Bigl(\bigl(a_{\mathbb{C}}\exp(Y)\bigr)\check{Y}_\mu\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_invertible}\ \text{の}\ Y\ (K_2^*\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_2^*)_{\mathbb{C}})\bigr)\\
+&= \Bigl(a_{\mathbb{C}}\bigl(\exp(Y)\check{Y}_\mu\bigr)\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (a\to a_{\mathbb{C}},\ A\to\exp(Y),\ B\to \check{Y}_\mu)\bigr)\\
+&= a_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (a\to a_{\mathbb{C}},\ A\to\exp(Y)\check{Y}_\mu,\ B\to(a^{-1})_{\mathbb{C}}\exp(-Y))\bigr)\\
+&= a_{\mathbb{C}}\Bigl((a^{-1})_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (a\to (a^{-1})_{\mathbb{C}},\ B\to\exp(-Y))\bigr)\\
+&= \bigl(a_{\mathbb{C}}(a^{-1})_{\mathbb{C}}\bigr)\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a\to a_{\mathbb{C}},\ b\to(a^{-1})_{\mathbb{C}})\bigr)\\
+&= (aa^{-1})_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a\to a,\ b\to a^{-1})\bigr)\\
+&= (1)_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)\Bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ aa^{-1}=1)\\
+&= 1_{\mathbb{C}}\Bigl(\bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)\Bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\bigr)\\
+&= \bigl(\exp(Y)\check{Y}_\mu\bigr)\exp(-Y)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&= \bigl(\exp(G_2)\check{Y}_\mu\bigr)\exp(-G_2)
+&&(\because\ \text{準備の}\ Y = G_2)\\
+&= \sum_{n=0}^{\infty}\frac{1}{n!}\,\mathrm{ad}^{n}_{G_2}(\check{Y}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ (\text{同主張の}\ d,\ X,\ Y\ \text{を}\ 2^{M_{\mathrm{col}}},\ G_2,\ \check{Y}_\mu\ \text{に})\bigr)\\
+&= \sum_{n=0}^{\infty}\Bigl(\frac{1}{n!}\Bigr)_{\mathbb{C}}\mathrm{ad}^{n}_{G_2}(\check{Y}_\mu)
+&&\bigl(\because\ \blkref{exp_X_Y_exp_-X}\ \text{が引く}\ \blkref{matrix_exp_conjugation}\ \text{の実数係数の包含は}\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= \bigl(i\,(\sinh 2K_2^*)_{\mathbb{C}}\bigr)\check{Z}_\mu + (\cosh 2K_2^*)_{\mathbb{C}}\,\check{Y}_\mu
+&&\bigl(\because\ \blkref{extract_taylor_coefficient_of_check_Z_Y}\ \text{(h2.y)}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\begin{pmatrix}i\,(\sinh 2K_2^*)_{\mathbb{C}} \\ (\cosh 2K_2^*)_{\mathbb{C}}\end{pmatrix}
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "最後に、行ベクトルと列ベクトルの積の定義 ",
-        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} = aA + bB`),
-        " により、上の 4 式はいずれも statement の行列表示に書き換えられる。",
-      ]),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -6011,6 +6209,7 @@ T_{V_2}(\check{Y}_\mu)
         "008 章の ホロノミック量子場_p142下段_1 の半整数運動量版。008 章では H_1 の符号 (±) と hatZ の符号 (-) が食い違ったまま書かれていたが（why_008_applies_only_to_minus_sector により実質 (-) 専用）、ここでは H_1^{(+)} と checkZ, checkY で首尾一貫している。",
         "行列指数関数を明示的に構成した直接計算（交換子の級数展開に依存しない独立経路）で数値確認済み。V_2 の前因子 (2 s_2)^{M/2} を明示的に付けた形で相殺も確認した（sagemath/check/047_claim_even_sector_T_action/check_03_T_actions.sage）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02（全証明の SageMath 検算。sagemath/check/T_actions_on_check_Z_Y/）: 主張を extract_taylor_coefficient_of_check_Z_Y の新しい表記（K_1・K_2^*・θ̃・cosh・sinh の値を inclusion_rr_to_cc の像で、係数を一つの複素数にまとめたスカラー倍）にそろえ、M_col・R・S・V_2 の所属と可逆性の根拠を書いた（主張の中身は不変）。主張の中で定めていた行列の組と数の列の積を def_pair_of_matrices_times_column_of_numbers へ切り出した。証明は、Y̌ の場合を「同じ手順」の散文で済ませていたのを四本の鎖に書き下し、指数の肩の読み替え（X = G_1、Y = G_2。scalar_multiple_is_associative）を準備に置き、V_2^{-1} の形を V2_invertible の主張から引き、前因子が消える段を scalar_identity_commutes の散文から係数を左右の因子から出す行・係数をまとめる行・包含の三行・1_C を外す行の鎖にし、最後の行列表示への書き換えを各鎖の最終行にした。",
       ],
     },
   },

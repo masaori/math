@@ -1,0 +1,937 @@
+PASS: M=2 x=2 y=2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=2 x=2 y=2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=2 x=2 y=2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=2 x=2 y=2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=2 x=2 y=2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=2 y=2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=2 x=2 y=2: done
+PASS: M=2 x=3 y=3/2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=2 x=3 y=3/2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=2 x=3 y=3/2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=2 x=3 y=3/2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=2 x=3 y=3/2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=2 x=3 y=3/2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=2 x=3 y=3/2: done
+PASS: M=3 x=2 y=2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=3 x=2 y=2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=3 x=2 y=2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=3 x=2 y=2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=3 x=2 y=2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=3 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=3 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=3 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=2 y=2 mu=3 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=3 x=2 y=2: done
+PASS: M=3 x=3 y=3/2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=3 x=3 y=3/2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=3 x=3 y=3/2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=3 x=3 y=3/2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=3 x=3 y=3/2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=3 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=3 x=3 y=3/2 mu=3 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=3 x=3 y=3/2: done
+PASS: M=4 x=2 y=2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=4 x=2 y=2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=4 x=2 y=2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=4 x=2 y=2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=4 x=2 y=2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=3 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=3 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=3 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=3 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=4 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=4 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=4 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=2 y=2 mu=4 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=4 x=2 y=2: done
+PASS: M=4 x=3 y=3/2: exp(X)exp(-X) = exp(-X)exp(X) = I
+PASS: M=4 x=3 y=3/2: matrix_exp_conjugation (3) の exp(X)^{-1} = exp(-X)（Sage の inverse と一致）
+PASS: M=4 x=3 y=3/2: V2_invertible の V_2^{-1} = (a^{-1})_C exp(-Y)（Sage の inverse と一致）
+PASS: M=4 x=3 y=3/2: V2_exponential_representation の V_2 = a_C exp(Y)（成分の定義の V_2 と一致）
+PASS: M=4 x=3 y=3/2: 対照 exp(-Y) だけでは V_2 の逆元にならない
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=1 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=1 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=2 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=2 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=3 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=3 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「(SW)S^{-1}」=「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「(exp((i/2)K_1H)W)(exp((i/2)K_1H))^{-1}」=「(exp(X)W)(exp(X))^{-1}」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「(exp(X)W)(exp(X))^{-1}」=「(exp(X)W)exp(-X)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「(exp(X)W)exp(-X)」=「(exp(G_1)W)exp(-G_1)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「(exp(G_1)W)exp(-G_1)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=4 T_S(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Ž): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(V_2W)V_2^{-1}」=「(V_2W)((a^{-1})_C exp(-Y))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(V_2W)((a^{-1})_C exp(-Y))」=「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(((2s_2)^{M/2}exp(iK_2^*H_2))W)(...)」=「((a_C exp(iK_2^*H_2))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「((a_C exp(iK_2^*H_2))W)(...)」=「((a_C exp(Y))W)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「((a_C exp(Y))W)(...)」=「(a_C(exp(Y)W))(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(a_C(exp(Y)W))(...)」=「a_C((exp(Y)W)(...))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「a_C((exp(Y)W)(...))」=「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「a_C((a^{-1})_C((exp(Y)W)exp(-Y)))」=「(a_C(a^{-1})_C)(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(a_C(a^{-1})_C)(...)」=「(aa^{-1})_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(aa^{-1})_C(...)」=「(1)_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(1)_C(...)」=「1_C(...)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「1_C(...)」=「(exp(Y)W)exp(-Y)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(exp(Y)W)exp(-Y)」=「(exp(G_2)W)exp(-G_2)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「(exp(G_2)W)exp(-G_2)」=「右辺（extract_taylor の値）」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 「右辺（extract_taylor の値）」=「(Ž, Y̌)(列)」
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): Sage の積と inverse で作った gWg^{-1} が主張の右辺に等しい
+PASS: M=4 x=3 y=3/2 mu=4 T_V2(Y̌): 対照 sinh の側の係数の符号を逆にした式とは一致しない
+M=4 x=3 y=3/2: done
+RESULT: PASS

@@ -1,0 +1,229 @@
+PASS: M=2: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=2 x=2 y=2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.697e-127）
+PASS: M=2 x=2 y=2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.702e-152）
+PASS: M=2 x=2 y=2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.697e-127）
+PASS: M=2 x=2 y=2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.702e-152）
+PASS: M=2 x=2 y=2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.697e-127）
+PASS: M=2 x=2 y=2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.702e-152）
+PASS: M=2 x=2 y=2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.697e-127）
+PASS: M=2 x=2 y=2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=2 y=2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.702e-152）
+PASS: M=2 x=2 y=2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=2 y=2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=2 x=2 y=2: done
+PASS: M=2: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.092e-148）
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.772e-152）
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.092e-148）
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.772e-152）
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.092e-148）
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.772e-152）
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.092e-148）
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.772e-152）
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=2 x=3 y=3/2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=2 x=3 y=3/2: done
+PASS: M=3: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=3 x=2 y=2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.217e-152）
+PASS: M=3 x=2 y=2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.773e-152）
+PASS: M=3 x=2 y=2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.174e-152）
+PASS: M=3 x=2 y=2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.206e-152）
+PASS: M=3 x=2 y=2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=3 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=3 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=3 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=3 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.189e-152）
+PASS: M=3 x=2 y=2 mu=3 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=3 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=3 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 2.938e-127）
+PASS: M=3 x=2 y=2 mu=3 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=3 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=2 y=2 mu=3 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 7.773e-152）
+PASS: M=3 x=2 y=2 mu=3 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=2 y=2 mu=3 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=3 x=2 y=2: done
+PASS: M=3: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.805e-152）
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.607e-152）
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.853e-152）
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.901e-152）
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.815e-152）
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.892e-148）
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=3 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 6.607e-152）
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=3 x=3 y=3/2 mu=3 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=3 x=3 y=3/2: done
+PASS: M=4: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=4 x=2 y=2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=3 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=3 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=3 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=3 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=3 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=3 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=3 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=3 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=3 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=3 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=3 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=3 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=4 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=4 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=4 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=4 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=4 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=4 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=4 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 4.799e-127）
+PASS: M=4 x=2 y=2 mu=4 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=4 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=2 y=2 mu=4 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.230e-151）
+PASS: M=4 x=2 y=2 mu=4 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=2 y=2 mu=4 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=4 x=2 y=2: done
+PASS: M=4: iH_1^(+)・iH_2 は exp の射影に使った整数行列に等しい
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.044e-151）
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=1 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 9.558e-152）
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=1 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.044e-151）
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=2 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 9.558e-152）
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=2 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.044e-151）
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=3 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 9.558e-152）
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=3 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Ž: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 1.044e-151）
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Ž: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Ž: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 3.089e-148）
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=4 G_1,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Y̌: ‖S_90 - (exp(G)W)exp(-G)‖ < 1e-40（上端 9.558e-152）
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Y̌: 部分和の差は N = 10 から 30 で減る
+PASS: M=4 x=3 y=3/2 mu=4 G_2,Y̌: 対照 (exp(-G)W)exp(G) とは一致しない
+M=4 x=3 y=3/2: done
+RESULT: PASS

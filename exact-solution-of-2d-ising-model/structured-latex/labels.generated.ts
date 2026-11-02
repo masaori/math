@@ -196,6 +196,7 @@ export const ALL_LABELS = [
   "def_matrix_transpose",
   "def_one_by_one_matrix",
   "def_open_chain_spin_energy",
+  "def_pair_of_matrices_times_column_of_numbers",
   "def_partition_function_2d_ising",
   "def_phi_cartesian",
   "def_phi_polar",
