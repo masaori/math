@@ -6617,314 +6617,386 @@ T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
       ]),
     ],
     proof: [
-      paragraph(["以下、記号を"]),
-      displayMath(
-        String.raw`a := \cosh K_1 \in \mathbb{R},\quad b := \sinh K_1 \in \mathbb{R},\quad
-C := \cosh 2K_2^* = c_2^* \in \mathbb{R},\quad S := \sinh 2K_2^* = s_2^* \in \mathbb{R}`,
-      ),
       paragraph([
-        "と略記する（",
-        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^*`),
+        "記号を次のように置く。",
+        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^* \in \mathbb{R}`),
         " は ",
-        ref("def_transfer_matrix_symbols"),
-        " の記号）。",
-        ref("cosh_sinh_basic_properties"),
-        " による倍角公式から従う次の三本の等式",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の数の exp（",
+        math(String.raw`K = \mathbb{C}`),
+        "）である。",
       ]),
       displayMath(String.raw`\begin{aligned}
+&a := (\cosh K_1)_{\mathbb{C}} \in \mathbb{C},\quad
+b := (\sinh K_1)_{\mathbb{C}} \in \mathbb{C},\quad
+C := (\cosh 2K_2^*)_{\mathbb{C}} = (c_2^*)_{\mathbb{C}} \in \mathbb{C},\quad
+S := (\sinh 2K_2^*)_{\mathbb{C}} = (s_2^*)_{\mathbb{C}} \in \mathbb{C},\\
+&e_+ := \exp\bigl(i(\theta)_{\mathbb{C}}\bigr) \in \mathbb{C},\quad
+e_- := \exp\bigl((-i)(\theta)_{\mathbb{C}}\bigr) \in \mathbb{C}
+\end{aligned}`),
+      paragraph([
+        "この記号で ",
+        ref("def_B1_theta_B2"),
+        " は ",
+        math(String.raw`B_1(\theta) = \begin{pmatrix} a & \bigl((-i)e_+\bigr)b \\ (i e_-)b & a\end{pmatrix}`),
+        "、",
+        math(String.raw`B_2 = \begin{pmatrix} C & iS \\ (-i)S & C\end{pmatrix}`),
+        " である（",
+        ref("def_B1_theta_B2"),
+        " の ",
+        math(String.raw`\exp\bigl(-i(\theta)_{\mathbb{C}}\bigr)`),
+        " の指数 ",
+        math(String.raw`-i(\theta)_{\mathbb{C}}`),
+        " は、",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-i = (-1_{\mathbb{C}})\,i`),
+        " を係数とする積 ",
+        math(String.raw`(-i)(\theta)_{\mathbb{C}}`),
+        " である）。",
+        math(String.raw`A(\theta)`),
+        "（",
+        ref("def_A_theta"),
+        "）の成分に現れる実数 ",
+        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^*, \cos\theta, \sin\theta`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " による像として ",
+        math(String.raw`\mathbb{C}`),
+        " の演算にかける。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh, \sinh`),
+        " の値が実数の exp の値（部分和の極限）であり、",
+        math(String.raw`\theta`),
+        " が実数の運動量だからである。",
+      ]),
+      paragraph(["準備として、次の七本の等式を置く。"]),
+      displayMath(String.raw`\begin{aligned}
 a^2 + b^2
-&= \cosh^2 K_1 + \sinh^2 K_1
-&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
-&= \cosh 2K_1
-&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}\bigr)\\
-&= c_1
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)
+&= (\cosh K_1)_{\mathbb{C}}(\cosh K_1)_{\mathbb{C}} + (\sinh K_1)_{\mathbb{C}}(\sinh K_1)_{\mathbb{C}}
+&&(\because\ a, b\ \text{の定義と二乗の記法})\\
+&= \bigl(\cosh K_1 \cosh K_1\bigr)_{\mathbb{C}} + \bigl(\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
+&= \bigl(\cosh K_1 \cosh K_1 + \sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m = 2))\\
+&= \bigl(\cosh (K_1 + K_1)\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{cosh_addition_formula}\ \text{の複号 }+\text{ を }x = y = K_1\text{ で})\\
+&= \bigl(\cosh 2K_1\bigr)_{\mathbb{C}}
+&&(\because\ K_1 + K_1 = 2K_1)\\
+&= (c_1)_{\mathbb{C}}
+&&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 2ab
-&= 2\cosh K_1 \sinh K_1
-&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
-&= \sinh 2K_1
-&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}\bigr)\\
-&= s_1
-&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ の記号の定義}\bigr)
+&= \bigl((2)_{\mathbb{C}}(\cosh K_1)_{\mathbb{C}}\bigr)(\sinh K_1)_{\mathbb{C}}
+&&(\because\ a, b\ \text{の定義と}\ 2 = (2)_{\mathbb{C}}\ (\blkref{inclusion_rr_to_cc}))\\
+&= \bigl(2 \cosh K_1\bigr)_{\mathbb{C}}(\sinh K_1)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(2 \cosh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(2 \sinh K_1 \cosh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の積の交換律})\\
+&= \Bigl(2 \sinh\!\left(\tfrac{2K_1}{2}\right) \cosh\!\left(\tfrac{2K_1}{2}\right)\Bigr)_{\mathbb{C}}
+&&(\because\ K_1 = \tfrac{2K_1}{2})\\
+&= \bigl(\sinh 2K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{sinh_double_angle_formula}\ \text{を }x = 2K_1\text{ で})\\
+&= (s_1)_{\mathbb{C}}
+&&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 a^2 - b^2
-&= \cosh^2 K_1 - \sinh^2 K_1
-&&\bigl(\because\ a, b\text{ の定義}\bigr)\\
-&= 1
-&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\bigr)
+&= (\cosh K_1)_{\mathbb{C}}(\cosh K_1)_{\mathbb{C}} - (\sinh K_1)_{\mathbb{C}}(\sinh K_1)_{\mathbb{C}}
+&&(\because\ a, b\ \text{の定義と二乗の記法})\\
+&= \bigl(\cosh K_1 \cosh K_1\bigr)_{\mathbb{C}} - \bigl(\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
+&= \bigl(\cosh K_1 \cosh K_1\bigr)_{\mathbb{C}} + (-1_{\mathbb{C}})\bigl(\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{def_complex_difference},\ \blkref{multiply_by_minus_one})\\
+&= \bigl(\cosh K_1 \cosh K_1\bigr)_{\mathbb{C}} + (-1)_{\mathbb{C}}\bigl(\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ -1_{\mathbb{C}} = (-1)_{\mathbb{C}}\ (\blkref{inclusion_rr_to_cc}\ \text{の略記}))\\
+&= \bigl(\cosh K_1 \cosh K_1\bigr)_{\mathbb{C}} + \bigl((-1)\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(\cosh K_1 \cosh K_1 + (-1)\sinh K_1 \sinh K_1\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ (m = 2))\\
+&= \bigl((\cosh K_1)^2 - (\sinh K_1)^2\bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の差と二乗の記法})\\
+&= (1)_{\mathbb{C}}
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (2))\\
+&= 1_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の略記})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e_+ e_-
+&= \exp\bigl(i(\theta)_{\mathbb{C}} + (-i)(\theta)_{\mathbb{C}}\bigr)
+&&(\because\ e_\pm\ \text{の定義と}\ \blkref{scalar_exp_product}\ (K = \mathbb{C}))\\
+&= \exp(0_{\mathbb{C}})
+&&(\because\ \mathbb{C}\ \text{の分配則と}\ i + (-i) = 0_{\mathbb{C}})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{C}))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e_+ + e_-
+&= (2)_{\mathbb{C}}\,\frac{e_+ + e_-}{(2)_{\mathbb{C}}}
+&&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= (2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e_+
+&= \frac{e_+ + e_-}{(2)_{\mathbb{C}}} + i\,\frac{e_+ - e_-}{(2)_{\mathbb{C}}\,i}
+&&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}},\ (2)_{\mathbb{C}}\,i \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= (\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式と第 2 式})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e_-
+&= \frac{e_+ + e_-}{(2)_{\mathbb{C}}} - i\,\frac{e_+ - e_-}{(2)_{\mathbb{C}}\,i}
+&&(\because\ (2)_{\mathbb{C}} \neq 0_{\mathbb{C}},\ (2)_{\mathbb{C}}\,i \neq 0_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の四則})\\
+&= (\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{の第 1 式と第 2 式})
+\end{aligned}`),
+      paragraph(["さらに、これらから次の二本の補助的な等式を置く。"]),
+      displayMath(String.raw`\begin{aligned}
+a^2 + b^2 e_+ e_+
+&= a^2 (e_+ e_-) + b^2 e_+ e_+
+&&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
+&= e_+\left(a^2 e_- + b^2 e_+\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= e_+\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) + b^2 e_+\Bigr)
+&&(\because\ e_-\ \text{の上の表示})\\
+&= e_+\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) + b^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr)\Bigr)
+&&(\because\ e_+\ \text{の上の表示})\\
+&= e_+\Bigl(\left(a^2 + b^2\right)(\cos\theta)_{\mathbb{C}} - i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&= e_+\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
+&= e_+\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ a^2 - b^2 = 1_{\mathbb{C}})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+a^2 + b^2 e_- e_-
+&= a^2 (e_+ e_-) + b^2 e_- e_-
+&&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
+&= e_-\left(a^2 e_+ + b^2 e_-\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= e_-\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) + b^2 e_-\Bigr)
+&&(\because\ e_+\ \text{の上の表示})\\
+&= e_-\Bigl(a^2\bigl((\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) + b^2\bigl((\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr)\Bigr)
+&&(\because\ e_-\ \text{の上の表示})\\
+&= e_-\Bigl(\left(a^2 + b^2\right)(\cos\theta)_{\mathbb{C}} + i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&= e_-\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i\left(a^2 - b^2\right)(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
+&= e_-\Bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\Bigr)
+&&(\because\ a^2 - b^2 = 1_{\mathbb{C}})
 \end{aligned}`),
       paragraph([
-        "を後で用いる。また複素指数の指数法則 ",
-        math(String.raw`\exp(z)\exp(w) = \exp(z+w)`),
-        " としては ",
-        ref("theorem_exp_product"),
-        " を ",
-        math(String.raw`n=1`),
-        " に適用したものを使う。この記号で ",
-        math(String.raw`B_1(\theta) = \begin{pmatrix} a & -i \exp(i\theta) b \\ i \exp(-i\theta) b & a\end{pmatrix}`),
-        "、",
-        math(String.raw`B_2 = \begin{pmatrix} C & i S \\ -i S & C\end{pmatrix}`),
-        " である。",
+        "また ",
+        ref("duality_c2_star_eq_s2_star_c2"),
+        " の ",
+        math(String.raw`c_2^* = s_2^* c_2`),
+        " から",
       ]),
+      displayMath(String.raw`\begin{aligned}
+C
+&= (c_2^*)_{\mathbb{C}}
+&&(\because\ C\ \text{の定義})\\
+&= (s_2^* c_2)_{\mathbb{C}}
+&&(\because\ \blkref{duality_c2_star_eq_s2_star_c2})\\
+&= S\,(c_2)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product},\ S\ \text{の定義})
+\end{aligned}`),
       paragraph([
         "Step 1: ",
-        math(String.raw`N := B_2\, B_1(\theta)`),
-        " を成分ごとに計算する（行列の積は ",
+        math(String.raw`N := B_2\, B_1(\theta) \in \mathrm{Mat}(2,\mathbb{C})`),
+        " の成分（行列の積は ",
         ref("mat_mult"),
         "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
 N_{11}
-&= C\cdot a + (iS)\cdot\left(i \exp(-i\theta) b\right)
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&= Ca - S b\, \exp(-i\theta)
-&&\bigl(\because\ i\cdot i=-1\text{ と複素数の四則}\bigr)
+&= C a + (iS)\bigl((i e_-) b\bigr)
+&&(\because\ \blkref{mat_mult})\\
+&= Ca - S b e_-
+&&(\because\ i i = -1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{12}
-&= C\cdot\left(-i \exp(i\theta) b\right) + (iS)\cdot a
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&= i\left(Sa-Cb\,\exp(i\theta)\right)
-&&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
+&= C\bigl(((-i)e_+) b\bigr) + (iS) a
+&&(\because\ \blkref{mat_mult})\\
+&= i\left(Sa - C b e_+\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{21}
-&=(-iS)\cdot a+C\cdot\left(i \exp(-i\theta)b\right)
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=i\left(Cb\,\exp(-i\theta)-Sa\right)
-&&\bigl(\because\ \mathbb C\text{ の分配則と四則}\bigr)
+&= \bigl((-i)S\bigr) a + C\bigl((i e_-) b\bigr)
+&&(\because\ \blkref{mat_mult})\\
+&= i\left(C b e_- - S a\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 N_{22}
-&=(-iS)\cdot\left(-i \exp(i\theta)b\right)+C\cdot a
-&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
-&=Ca-Sb\,\exp(i\theta)
-&&\bigl(\because\ (-i)\cdot(-i)=-1\text{ と複素数の四則}\bigr)
+&= \bigl((-i)S\bigr)\bigl(((-i)e_+) b\bigr) + C a
+&&(\because\ \blkref{mat_mult})\\
+&= Ca - S b e_+
+&&(\because\ (-i)(-i) = -1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})
 \end{aligned}`),
       paragraph([
         "Step 2: ",
-        math(String.raw`P := B_1(\theta)\, N = B_1(\theta)\, B_2\, B_1(\theta)`),
+        math(String.raw`P := B_1(\theta)\, N \in \mathrm{Mat}(2,\mathbb{C})`),
         " の (1,1) 成分。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 P_{11}
-&= a\, N_{11} + \left(-i \exp(i\theta) b\right) N_{21}
-   &&(\because \blkref{mat_mult}) \\
-&= a\left(Ca - S b\, \exp(-i\theta)\right)
-   + \left(-i \exp(i\theta) b\right)\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
-   &&(\because \text{Step 1 の } N_{11}, N_{21}) \\
-&= Ca^2 - S ab\, \exp(-i\theta)
-   + \exp(i\theta) b\left(C b\, \exp(-i\theta) - Sa\right)
-   &&(\because -i\cdot i = 1) \\
-&= Ca^2 - S ab\, \exp(-i\theta) + C b^2 - S ab\, \exp(i\theta)
-   &&(\because \exp(i\theta)\exp(-i\theta) = 1,\ \blkref{theorem_exp_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because\ \mathbb C\text{ の分配則}) \\
-&= C\, c_1 - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
-&= C\, c_1 - S\cdot\frac{s_1}{2}\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
-&= C\, c_1 - S\cdot\frac{s_1}{2}\cdot 2\cos\theta
-   &&(\because \blkref{euler_formula_cos_sin}\text{ より } \exp(i\theta)+\exp(-i\theta) = 2\cos\theta) \\
-&= c_1 c_2^* - s_1 s_2^*\cos\theta
-   &&(\because C := c_2^*,\ S := s_2^*)
-\end{aligned}`,
-      ),
+&= a N_{11} + \bigl(((-i)e_+)b\bigr) N_{21}
+&&(\because\ \blkref{mat_mult})\\
+&= a\left(Ca - S b e_-\right) + \bigl(((-i)e_+)b\bigr)\, i\left(C b e_- - S a\right)
+&&(\because\ \text{Step 1 の } N_{11}, N_{21})\\
+&= a\left(Ca - S b e_-\right) + e_+ b\left(C b e_- - S a\right)
+&&(\because\ (-i) i = 1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})\\
+&= C a^2 - S ab e_- + C b^2 e_+ e_- - S ab e_+
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= C a^2 - S ab e_- + C b^2 - S ab e_+
+&&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
+&= C\left(a^2 + b^2\right) - S ab\left(e_+ + e_-\right)
+&&(\because\ \mathbb{C}\ \text{の分配則})\\
+&= C (c_1)_{\mathbb{C}} - S ab\left(e_+ + e_-\right)
+&&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
+&= C (c_1)_{\mathbb{C}} - S ab\,(2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ e_+ + e_- = (2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}})\\
+&= C (c_1)_{\mathbb{C}} - S\,(2ab)\,(\cos\theta)_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の交換律・結合律})\\
+&= C (c_1)_{\mathbb{C}} - S\,(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ 2ab = (s_1)_{\mathbb{C}})\\
+&= (c_2^*)_{\mathbb{C}} (c_1)_{\mathbb{C}} - (s_2^*)_{\mathbb{C}}(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ C, S\ \text{の定義を 2 箇所へ})\\
+&= (c_1)_{\mathbb{C}}(c_2^*)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の交換律})
+\end{aligned}`),
       paragraph([
-        "（",
-        math(String.raw`\exp(i\theta) + \exp(-i\theta) = 2\cos\theta`),
-        " は ",
-        ref("euler_formula_cos_sin"),
-        " による。）これは ",
+        "これは ",
         ref("def_A_theta"),
         " の ",
         math(String.raw`A(\theta)`),
-        " の (1,1) 成分に一致する。",
+        " の (1,1) 成分である。",
       ]),
       paragraph(["Step 3: ", math(String.raw`P`), " の (2,2) 成分。"]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 P_{22}
-&= \left(i \exp(-i\theta) b\right) N_{12} + a\, N_{22}
-   &&(\because \blkref{mat_mult}) \\
-&= \left(i \exp(-i\theta) b\right)\cdot i\left(Sa - C b\, \exp(i\theta)\right)
-   + a\left(Ca - S b\, \exp(i\theta)\right)
-   &&(\because \text{Step 1 の } N_{12}, N_{22}) \\
-&= -\exp(-i\theta) b\left(Sa - C b\, \exp(i\theta)\right) + Ca^2 - S ab\, \exp(i\theta)
-   &&(\because i\cdot i = -1) \\
-&= -S ab\, \exp(-i\theta) + C b^2 + Ca^2 - S ab\, \exp(i\theta)
-   &&(\because \exp(-i\theta)\exp(i\theta) = 1,\ \blkref{theorem_exp_product}\ (n=1)) \\
-&= C\left(a^2 + b^2\right) - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because\ \mathbb C\text{ の分配則}) \\
-&= Cc_1 - S ab\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}) \\
-&= Cc_1 - S\frac{s_1}{2}\left(\exp(i\theta) + \exp(-i\theta)\right)
-   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ の倍角公式}) \\
-&= Cc_1 - Ss_1\cos\theta
-   &&(\because\ \blkref{euler_formula_cos_sin}) \\
-&= c_1 c_2^* - s_1 s_2^*\cos\theta
-   &&(\because\ C=c_2^*,\ S=s_2^*)
-\end{aligned}`,
-      ),
+&= \bigl((i e_-) b\bigr) N_{12} + a N_{22}
+&&(\because\ \blkref{mat_mult})\\
+&= \bigl((i e_-) b\bigr)\, i\left(Sa - C b e_+\right) + a\left(Ca - S b e_+\right)
+&&(\because\ \text{Step 1 の } N_{12}, N_{22})\\
+&= (-1_{\mathbb{C}})\, e_- b\left(Sa - C b e_+\right) + a\left(Ca - S b e_+\right)
+&&(\because\ i i = -1_{\mathbb{C}}\ \text{と}\ \mathbb{C}\ \text{の積の交換律・結合律})\\
+&= - S ab e_- + C b^2 e_+ e_- + C a^2 - S ab e_+
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= - S ab e_- + C b^2 + C a^2 - S ab e_+
+&&(\because\ e_+ e_- = 1_{\mathbb{C}})\\
+&= C\left(a^2 + b^2\right) - S ab\left(e_+ + e_-\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と和の交換律})\\
+&= C (c_1)_{\mathbb{C}} - S ab\left(e_+ + e_-\right)
+&&(\because\ a^2 + b^2 = (c_1)_{\mathbb{C}})\\
+&= C (c_1)_{\mathbb{C}} - S ab\,(2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ e_+ + e_- = (2)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}})\\
+&= C (c_1)_{\mathbb{C}} - S\,(2ab)\,(\cos\theta)_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の交換律・結合律})\\
+&= C (c_1)_{\mathbb{C}} - S\,(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ 2ab = (s_1)_{\mathbb{C}})\\
+&= (c_2^*)_{\mathbb{C}} (c_1)_{\mathbb{C}} - (s_2^*)_{\mathbb{C}}(s_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ C, S\ \text{の定義を 2 箇所へ})\\
+&= (c_1)_{\mathbb{C}}(c_2^*)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(s_2^*)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}}
+&&(\because\ \mathbb{C}\ \text{の積の交換律})
+\end{aligned}`),
       paragraph([
         "これは ",
         math(String.raw`A(\theta)`),
-        " の (2,2) 成分に一致する（(1,1) 成分と同一の式）。",
+        " の (2,2) 成分である。",
       ]),
-      paragraph([
-        "Step 4: ",
-        math(String.raw`P`),
-        " の (1,2) 成分。準備として、補助的な等式",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-a^2 + b^2 \exp(2i\theta)
-&= \exp(i\theta)\left(a^2 \exp(-i\theta) + b^2 \exp(i\theta)\right)
-   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \exp(i\theta)\left(a^2(\cos\theta - i\sin\theta) + b^2(\cos\theta + i\sin\theta)\right)
-   &&(\because \blkref{euler_formula_cos_sin}\text{ を 2 箇所へ同時適用}) \\
-&= \exp(i\theta)\left(\left(a^2 + b^2\right)\cos\theta - i\left(a^2 - b^2\right)\sin\theta\right)
-   &&(\because\ \mathbb C\text{ の分配則}) \\
-&= \exp(i\theta)\left(c_1\cos\theta - i\left(a^2-b^2\right)\sin\theta\right)
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
-&= \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right)
-   &&(\because a^2-b^2 = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "を置く（",
-        ref("theorem_exp_product"),
-        "、",
-        ref("euler_formula_cos_sin"),
-        "）。また ",
-        math(String.raw`c_2^* = s_2^* c_2`),
-        " は ",
-        ref("duality_c2_star_eq_s2_star_c2"),
-        " による。これらを用いて",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph(["Step 4: ", math(String.raw`P`), " の (1,2) 成分。"]),
+      displayMath(String.raw`\begin{aligned}
 P_{12}
-&= a\, N_{12} + \left(-i \exp(i\theta) b\right) N_{22}
-   &&(\because \blkref{mat_mult}) \\
-&= a\cdot i\left(Sa - C b\, \exp(i\theta)\right)
-   + \left(-i \exp(i\theta) b\right)\left(Ca - S b\, \exp(i\theta)\right)
-   &&(\because \text{Step 1 の } N_{12}, N_{22}) \\
-&= i\left[S a^2 - C ab\, \exp(i\theta)\right]
-   + i\left[-C ab\, \exp(i\theta) + S b^2 \exp(2i\theta)\right]
-   &&(\because \blkref{theorem_exp_product}\ (n=1)\ (\exp(i\theta)\exp(i\theta) = \exp(2i\theta))) \\
-&= i\left[S\left(a^2 + b^2 \exp(2i\theta)\right) - 2C ab\, \exp(i\theta)\right]
-   &&(\because\ \mathbb C\text{ の分配則}) \\
-&= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - 2C ab\, \exp(i\theta)\right]
-   &&(\because \text{準備の補助的な等式}) \\
-&= i\left[S\, \exp(i\theta)\left(c_1\cos\theta - i\sin\theta\right) - C s_1 \exp(i\theta)\right]
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
-&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - c_2^*\, s_1\right]
-   &&(\because C := c_2^*,\ S := s_2^*) \\
-&= i \exp(i\theta)\left[s_2^*\left(c_1\cos\theta - i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   &&(\because \blkref{duality_c2_star_eq_s2_star_c2}:\ c_2^* = s_2^* c_2) \\
-&= i \exp(i\theta) s_2^*\left(c_1\cos\theta - i\sin\theta - s_1 c_2\right)
-   &&(\because\ \mathbb C\text{ の分配則})
-\end{aligned}`,
-      ),
+&= a N_{12} + \bigl(((-i)e_+)b\bigr) N_{22}
+&&(\because\ \blkref{mat_mult})\\
+&= a\, i\left(Sa - C b e_+\right) + \bigl(((-i)e_+)b\bigr)\left(Ca - S b e_+\right)
+&&(\because\ \text{Step 1 の } N_{12}, N_{22})\\
+&= i\left(S a^2 - C ab e_+\right) + i\left(-C ab e_+ + S b^2 e_+ e_+\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= i\left(S\left(a^2 + b^2 e_+ e_+\right) - (2ab)\, C e_+\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (2ab)\, C e_+\Bigr)
+&&(\because\ \text{準備の補助的な等式の 1 本目})\\
+&= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, C e_+\Bigr)
+&&(\because\ 2ab = (s_1)_{\mathbb{C}})\\
+&= i\Bigl(S e_+\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, S (c_2)_{\mathbb{C}} e_+\Bigr)
+&&(\because\ C = S (c_2)_{\mathbb{C}})\\
+&= i e_+ S\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= i e_+ (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&(\because\ S\ \text{の定義})
+\end{aligned}`),
       paragraph([
-        "得られた ",
-        math(String.raw`P_{12}`),
-        " は ",
+        "これは ",
         ref("def_A_theta"),
         " の ",
         math(String.raw`A(\theta)`),
-        " の (1,2) 成分に一致する。",
+        " の (1,2) 成分である。",
       ]),
       paragraph(["Step 5: ", math(String.raw`P`), " の (2,1) 成分。"]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 P_{21}
-&= \left(i \exp(-i\theta) b\right) N_{11} + a\, N_{21}
-   &&(\because \blkref{mat_mult}) \\
-&= \left(i \exp(-i\theta) b\right)\left(Ca - S b\, \exp(-i\theta)\right)
-   + a\cdot i\left(C b\, \exp(-i\theta) - Sa\right)
-   &&(\because \text{Step 1 の } N_{11}, N_{21}) \\
-&= i\left[C ab\, \exp(-i\theta) - S b^2 \exp(-2i\theta)\right]
-   + i\left[C ab\, \exp(-i\theta) - S a^2\right]
-   &&(\because \blkref{theorem_exp_product}\ (n=1)\ (\exp(-i\theta)\exp(-i\theta) = \exp(-2i\theta))) \\
-&= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
-   &&(\because\ \mathbb C\text{ の分配則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "準備として、Step 4 の補助的な等式と同形の等式",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-a^2 + b^2 \exp(-2i\theta)
-&= \exp(-i\theta)\left(a^2 \exp(i\theta) + b^2 \exp(-i\theta)\right)
-   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \exp(-i\theta)\left(a^2(\cos\theta + i\sin\theta) + b^2(\cos\theta - i\sin\theta)\right)
-   &&(\because \blkref{euler_formula_cos_sin}\text{ を 2 箇所へ同時適用}) \\
-&= \exp(-i\theta)\left(\left(a^2 + b^2\right)\cos\theta + i\left(a^2 - b^2\right)\sin\theta\right)
-   &&(\because\ \mathbb C\text{ の分配則}) \\
-&= \exp(-i\theta)\left(c_1\cos\theta + i\left(a^2-b^2\right)\sin\theta\right)
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } a^2+b^2 = c_1) \\
-&= \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right)
-   &&(\because a^2-b^2 = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "を置く（",
-        ref("theorem_exp_product"),
-        "、",
-        ref("euler_formula_cos_sin"),
-        "）。また ",
-        math(String.raw`c_2^* = s_2^* c_2`),
-        " は ",
-        ref("duality_c2_star_eq_s2_star_c2"),
-        " による。これらを用いて、直前の ",
-        math(String.raw`P_{21}`),
-        " の表示から一続きに",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-P_{21}
-&= -i\left[S\left(a^2 + b^2 \exp(-2i\theta)\right) - 2C ab\, \exp(-i\theta)\right]
-   &&(\because \text{直前の } P_{21} \text{ の表示}) \\
-&= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - 2C ab\, \exp(-i\theta)\right]
-   &&(\because \text{準備の補助的な等式}) \\
-&= -i\left[S\, \exp(-i\theta)\left(c_1\cos\theta + i\sin\theta\right) - C s_1 \exp(-i\theta)\right]
-   &&(\because \blkref{cosh_sinh_basic_properties}\text{ の倍角公式 } 2ab = s_1) \\
-&= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - c_2^*\, s_1\right]
-   &&(\because C := c_2^*,\ S := s_2^*) \\
-&= -i \exp(-i\theta)\left[s_2^*\left(c_1\cos\theta + i\sin\theta\right) - s_2^* c_2\, s_1\right]
-   &&(\because \blkref{duality_c2_star_eq_s2_star_c2}:\ c_2^* = s_2^* c_2) \\
-&= -i \exp(-i\theta) s_2^*\left(c_1\cos\theta + i\sin\theta - s_1 c_2\right)
-   &&(\because\ \mathbb C\text{ の分配則})
-\end{aligned}`,
-      ),
+&= \bigl((i e_-) b\bigr) N_{11} + a N_{21}
+&&(\because\ \blkref{mat_mult})\\
+&= \bigl((i e_-) b\bigr)\left(Ca - S b e_-\right) + a\, i\left(C b e_- - S a\right)
+&&(\because\ \text{Step 1 の } N_{11}, N_{21})\\
+&= i\left(C ab e_- - S b^2 e_- e_-\right) + i\left(C ab e_- - S a^2\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= (-i)\left(S\left(a^2 + b^2 e_- e_-\right) - (2ab)\, C e_-\right)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (2ab)\, C e_-\Bigr)
+&&(\because\ \text{準備の補助的な等式の 2 本目})\\
+&= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, C e_-\Bigr)
+&&(\because\ 2ab = (s_1)_{\mathbb{C}})\\
+&= (-i)\Bigl(S e_-\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}}\bigr) - (s_1)_{\mathbb{C}}\, S (c_2)_{\mathbb{C}} e_-\Bigr)
+&&(\because\ C = S (c_2)_{\mathbb{C}})\\
+&= (-i) e_- S\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&(\because\ \mathbb{C}\ \text{の分配則と積の交換律・結合律})\\
+&= (-i) e_- (s_2^*)_{\mathbb{C}}\bigl((c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} + i(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}}\bigr)
+&&(\because\ S\ \text{の定義})
+\end{aligned}`),
       paragraph([
         "これは ",
         ref("def_A_theta"),
         " の ",
         math(String.raw`A(\theta)`),
-        " の (2,1) 成分に一致する。",
+        " の (2,1) 成分である。",
       ]),
       paragraph([
-        "Step 6: Step 2〜5 により ",
-        math(String.raw`P = B_1(\theta) B_2 B_1(\theta)`),
-        " の 4 成分すべてが ",
+        "Step 6: 主張の左辺は ",
+        ref("mat_mult_associative"),
+        " により括弧の付け方によらず ",
+        math(String.raw`B_1(\theta)\bigl(B_2 B_1(\theta)\bigr) = P`),
+        " に等しい。Step 2〜5 で ",
+        math(String.raw`P`),
+        " の 4 成分が ",
         math(String.raw`A(\theta)`),
-        " の対応成分に一致するので ",
+        " の対応する成分に等しいので、",
         math(String.raw`B_1(\theta) B_2 B_1(\theta) = A(\theta)`),
-        "。",
-        math(String.raw`\theta \in \mathbb{R}`),
-        " は任意だったから、",
+        " である。",
         ref("antiperiodic_exp_sum"),
         " の ",
         math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
-        " を代入して後半を得る。",
+        " を ",
+        math(String.raw`\theta`),
+        " に取れば後半を得る。",
       ]),
     ],
     conversion: {
@@ -6933,6 +7005,7 @@ P_{21}
         "008 章の factorization_of_A_theta は μ ∈ calM で量化された主張であり、そのままでは θ~_μ に適用できない。証明の実体（T_V_hatZ_hatY の proof の Step 1〜6）は θ ∈ R について何も μ に固有のことを使っていないので、ここでは θ ∈ R 一般の主張として立て直し、同じ行列計算を書き下した。",
         "θ を [0, 2π) 上で 60 点走査し、5 組の (K1,K2) について残差 1e-14 以下であることを数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_04_T_V_plus_and_factorization.sage の (1)）。",
         "2026-08-19 の式変形統一で、Step 5 の「Step 4 とまったく同じ計算（θ → -θ）」に畳まれていた補助的な等式の導出と P_21 の整理を、Step 4 と同形の一続きの鎖（補助等式 5 段と P_21 の 6 段）へ開いた。内容・参照は変えていない。",
+        "2026-11-02（全証明の SageMath 検算）: a, b, C, S と e_± := exp(±i(θ)_C) を ℂ の元として置き直し、A(θ) の実数の成分を包含の像として読んだ。本文に無かった「cosh_sinh_basic_properties の倍角公式」の参照を cosh_addition_formula・sinh_double_angle_formula と包含の積・和の保存に、行列の theorem_exp_product (n=1) を scalar_exp_product・scalar_exp_zero に付け替え、e_± = cos θ ± i sin θ を euler_formula_cos_sin から導く行を置いた。Step 4・5 の exp(±2iθ) を e_±e_± のまま扱い、Step 6 に積の結合律を引いた。主張の中身は不変。検算は sagemath/check/factorization_of_A_theta_general/。",
       ],
     },
   },

@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算として、`factorization_of_A_theta_general`（A(θ) = B_1(θ)B_2B_1(θ)）に検算 `sagemath/check/factorization_of_A_theta_general/` を付けた（未検算 65 件）。各行の等号がその行の (∵) が引く関係式だけで成り立つことを多項式のイデアルで、全行と主張を具体値の代数的数で厳密に確かめた。人手証明は a, b, C, S, e_± を ℂ の元として置き直し、本文に無かった倍角公式の参照を `cosh_addition_formula`・`sinh_double_angle_formula` と包含の積・和の保存に、`theorem_exp_product`（n=1）を `scalar_exp_product`・`scalar_exp_zero` に付け替えた（主張の中身は不変）。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`arccosh_properties`）。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の七十八個目として、`check_joint_eigenspace_decomposition` の (l5b) を行った。`ClaimCheckJointEigenspace.lean` に人手の添字 `μ = j + 1` を与える `checkIdxOfFin` と、`Qproj`（`Finset.noncommProd`）が人手の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε_μ)}`（`def_finite_product_of_matrices` の左から掛ける積）に等しいこと `Qproj_eq_finProdLeft`（`M_col = r + 1` の形）を置いた。必要十分版は `NecSuf/FiniteProductLeftAsNoncommProd.lean` の `finProdLeft_eq_noncommProd_image`（モノイド・因子の可換性・単射な添字の写像が効く）。人手証明と SageMath は不変。次は (l5c) Step 1 の `ε ≠ ε'` の鎖。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の七十七個目として、`check_joint_eigenspace_decomposition` の (l5) を (l5a)〜(l5h) に割り、(l5a) Step 0 の異なる添字の因子の可換性の鎖を行った。`ClaimCheckJointEigenspace.lean` に `YI = IY` と 4 通りの上付き添字の組の鎖（人手の行と 1 対 1 の calc）と、まとめ `projFactor_mul_comm_step0` を置いた。引く `commuting_with_difference` の具体版 `ClaimCommutingWithDifference.lean`・必要十分版 `NecSuf/CommuteWithMatrixDifference.lean`・導出と `TensorPow M` の系を足した。人手証明と SageMath は不変。次は (l5b)（`Qproj` と `finProdLeft` をつなぐ等式）。

@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 363 件のうち、SageMath の検算が無いもの 66 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 363 件のうち、SageMath の検算が無いもの 65 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -202,13 +202,19 @@
   鎖の始点を `T_actions_on_check_Z_Y` を使わずに共役 (gW)g^{-1} で作り、二本の鎖の全行と主張を `M_col = 2..4`・全 μ で数体の中で厳密に確かめた（浮動小数点なし）。定義の展開の行は成分の配置の写しを見るだけであることを overview に書いた。
   人手証明を直した: 主張の中で定めていた行列の組と 2×2 行列の積を新しい定義 `def_pair_of_matrices_times_two_by_two_matrix`（列ごとの `def_pair_of_matrices_times_column_of_numbers` の組）に切り出し、`def_B1_theta_B2` の成分を `T_actions_on_check_Z_Y` の係数と同じ包含の像の表記にした。主張に M_col・R・θ̃ とその像の出所を書き、証明の地の文を除いた（主張の中身は不変）。積を引いていた `T_V_plus_check_Z_Y_via_B1_B2_B1` と対角化の章の 2 か所の参照を新しい定義へ付け替えた。計算の誤りは無かった。
 
+- `factorization_of_A_theta_general`（A(θ) = B_1(θ)B_2B_1(θ)、θ ∈ ℝ 一般）: `sagemath/check/factorization_of_A_theta_general/`。
+  証明の各行を QQ(i) 上の 13 変数の多項式として写し、各行の等号がその行の (∵) が引く関係式だけのイデアルで成り立ち、関係式を引く行では多項式としては異なることをグレブナー基底で確かめた。主張は基本の関係式 9 本から従い、どの 1 本を抜いても従わない。具体値では K_1 = log y・K_2^* = (1/2) log x・θ = 2πk/n で、c_2 を c_2^* と独立に、e_± と cos・sin を独立に代数的数へ変換し、全行と主張を QQbar で厳密に確かめた（浮動小数点なし）。
+  人手証明を直した: a, b, C, S と e_± := exp(±i(θ)_C) を ℂ の元として置き直し、A(θ) の実数の成分を包含の像として読んだ。本文に無かった「cosh_sinh_basic_properties の倍角公式」の参照を `cosh_addition_formula`・`sinh_double_angle_formula` と `real_inclusion_preserves_product`・`real_inclusion_preserves_finite_sum` の鎖に、行列の `theorem_exp_product`（n=1）を `scalar_exp_product`・`scalar_exp_zero` に付け替え、e_± = cos θ ± i sin θ を `euler_formula_cos_sin` から導く行、C = S(c_2)_C の鎖、Step 6 の `mat_mult_associative` を置いた（主張の中身は不変）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `factorization_of_A_theta_general`（`--list` の先頭）から、文書順に検算を足す。この証明は a := cosh K_1 ∈ ℝ・b := sinh K_1 ∈ ℝ と置いて B_1(θ) を実数の成分で書いており、`def_B1_theta_B2` の成分（`(cosh K_1)_C`・`exp(i(θ)_C)` の包含の像）とそろっていないので、a, b などを ℂ の元として置き直す。`T_V_plus_check_Z_Y` の証明も `T_actions_on_check_Z_Y` を旧い表記（`cosh(K_1)`・`i exp(-iθ̃)sinh(K_1)`）で引き、式変形の間に地の文（「3 行目・5 行目の線型性は…」「同様に」）が残っている。検算は付いているので、検算の付いたブロックの見直しで扱う。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `arccosh_properties`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`factorization_of_A_theta_general` の検算で見つかった（定義域と暗黙の包含。今回の差分より前から）: `def_A_theta` は θ ∈ ℂ と書きながら成分に実数の cos θ・sin θ を使い、c_1, s_1, c_2, c_2^*, s_2^* も包含の像を書かずに ℂ の成分にしている。この単位では使う側の証明で「実数の成分を包含の像として読む」と書いた。直すには `def_A_theta` を θ ∈ ℝ と像の記号で書き直し、引く側（`T_V_plus_check_Z_Y` など）をそろえる。`T_V_plus_check_Z_Y` の証明は `factorization_of_A_theta_general` を旧い表記の B_1(θ̃) のまま引いている。
 
 - 2026-11-02、`calc_of_TxT_check_Z_Y` のレビューで見つかった（1 ブロック 2 定義・2 主張。今回の差分より前から）: `def_B1_theta_B2` は B_1(θ) と B_2 の二つを一つのブロックで定め、`calc_of_TxT_check_Z_Y`・`T_actions_on_check_Z_Y` は複数の式を一つの主張にしている。分けるとラベル参照（本文 20 か所余りと Lean の注記）を付け替えることになるので、検算の付いたブロックの見直しで扱う。対角化の章の行列の組と 2×2 行列の積の結合律の段も、列の比較を散文の一文で済ませ、「行ベクトルへの作用の定め方」にラベルを引いていない。その段は積を `def_pair_of_matrices_times_two_by_two_matrix` のものとだけ定めて `g_{11}A_0 + g_{21}B_0` の形を使っており、`def_pair_of_matrices_times_column_of_numbers` までの展開を引いていない。
 
