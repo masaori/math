@@ -20,15 +20,7 @@ private theorem active_shortMate_successor {L : ℕ} (z : Qbar) (s : SpinStructu
     (he : e ∈ concreteTaggedActiveVertices D t) :
     perfectMatchingMate D e ∈ nonbacktrackingSuccessors (reversal e) := by
   classical
-  have habstract : e ∈ Ising2DLambda.NecSuf.KacWard.activeVertices D
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-      (shortUnderlyingPairs t) := by
-    rw [← concreteTaggedActiveVertices_eq_activeVertices D t]
-    exact he
-  have habstractIncident := (Ising2DLambda.NecSuf.KacWard.mem_activeVertices_iff_incident
-    D ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (shortUnderlyingPairs t) e).mp habstract
-  have hshort := (taggedDifference_active_iff_short z s D t hterm e).mp habstractIncident
+  have hshort := (taggedDifference_active_iff_short z s D t hterm e).mp he
   obtain ⟨p, hp, hcover⟩ := matching_pair_cover D e
   have hp' := (Finset.mem_filter.mp hp).2
   have hmate : perfectMatchingMate D p.1 = p.2 :=

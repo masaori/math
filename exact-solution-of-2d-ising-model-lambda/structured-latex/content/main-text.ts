@@ -71677,7 +71677,14 @@ e_k
                       paragraph(["と定める。このとき ", math(String.raw`w_k=w_0`), " であり、全ての ", math(String.raw`0\le r<k`), " について ", math(String.raw`w_{r+1}\in\operatorname{Next}(w_r)`), " である。最後から最初への接続も ", math(String.raw`r=k-1`), " の場合に含まれる。", math(String.raw`L=1,\ k=1`), " も同じ条件を満たす。実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph([ref("claim_projected_edge_cycle_closure"), " より ", math(String.raw`e_k=e_0`), " なので、反転写像を両辺へ適用して ", math(String.raw`w_k=w_0`), " を得る。", math(String.raw`0\le r<k`), " を固定する。", ref("claim_tagged_difference_alternating_cycle"), " の第一色の ", math(String.raw`c(2r)`), " の短い相手は、", ref("def_matching_pair_successor"), " と ", ref("claim_matching_pair_successor_color"), " により ", math(String.raw`c(2r+1)`), " である。"]),
+                      paragraph([ref("claim_projected_edge_cycle_closure"), " の帰還等式を使う。"]),
+                      displayMath(String.raw`\begin{aligned}
+w_k
+&=\iota(e_k)&&\bigl(\because\ w_r\text{ の定義}\bigr)\\
+&=\iota(e_0)&&\bigl(\because\ \blkref{claim_projected_edge_cycle_closure}\bigr)\\
+&=w_0&&\bigl(\because\ w_r\text{ の定義}\bigr)
+\end{aligned}`),
+                      paragraph([math(String.raw`0\le r<k`), " を固定する。", ref("claim_tagged_difference_alternating_cycle"), " の第一色の ", math(String.raw`c(2r)`), " の短い相手は、", ref("def_matching_pair_successor"), " と ", ref("claim_matching_pair_successor_color"), " により ", math(String.raw`c(2r+1)`), " である。"]),
                       displayMath(String.raw`\begin{aligned}
 w_{r+1}
 &=\iota(c(2r+2))
