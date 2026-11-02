@@ -598,6 +598,15 @@
     SageMath `050_claim_even_sector_eigenvalues/check_15_sign_flip_step1_E_conjugation_chains.sage`（`QQ(i)`、135 段）を足した（全 PASS）。
     レビューの必須の指摘は無く、任意の指摘 3 件（`E` の段落に使う道具の文を足す、`E` の鎖の根拠の位置を `\quad` に揃える、check_15 のコメント）を直した。
 
+  - ゴールラインの確認の五十個目（済み、2026-11-02）: `eigenvalue_problem_eigenvalues_of_V_plus.ts` の `sign_flip_conjugation` の Step 0 の「可逆行列の有限積も可逆」と、Step 1 の `F`・`E` の鎖の 1 行目「`k` 以外のサイトの因子は可換」「`k` が奇数なら第 `k` 因子だけが効く」「`k` が偶数なら `E` の全因子と可換」を扱った（係数は `ℂ`）。
+    `E`・`F` をサイトの行列の積から、クロネッカー積 `E := E_1⊠⋯⊠E_{M_col}`（`E_m` は `m` 奇数で `σ^x`、偶数で `I`）・`F := σ^z⊠⋯⊠σ^z` に定義し直した（同じ行列。check_16 で旧定義との一致も確かめた）。積の定義のままでは、`F = σ_k^zG` への並べ替えと `M_col` 個の積の帰納法が要るため。
+    Step 0 は `E_mE_m = I` の 2 行、`FF = I`・`EE = I` の 4 行、`def_invertible_elements_of_R` の一意性による `F^{-1} = F`・`E^{-1} = E`、(ii) による `U^{-1} = F^{-1}E^{-1} = FE^{-1} = FE` の鎖にした。
+    Step 1 の先頭に、`W ∈ {E, F}` の `Wσ_k^aW^{-1} = I⊠⋯⊠((W_kσ^a)W_k)⊠⋯⊠I`（7 行）、`p ∈ {x, z}` の `I⊠⋯⊠((σ^pσ^a)σ^p)⊠⋯⊠I = (σ_k^pσ_k^a)σ_k^p`（5 行）、`k` 偶数の `σ_k^a` へ戻す鎖（4 行）を置き、`F`・`E` の各鎖の 1 行目をこれらを引く 2〜3 行に替えた。主張は変えていない。
+    Lean は `ClaimSignFlipConjugation.lean` で `Uflip := Eflip * Fflip`、`UflipInv := Fflip * Eflip` とし（`flipFam` は `Uflip_eq_siteProd` で残す）、`eFlipFam_mul_self`・`Fflip_mul_self`・`Eflip_mul_self`・`Uflip_mul_inv`・`UflipInv_mul`（(ii) の証明の 6 行ずつ）、`siteProd_conj_siteOp`・`siteProd_update_conj_eq_siteOp`・`siteProd_update_eFlipFam_conj_of_odd`・`Fflip_conj_siteOp`・`Eflip_conj_siteOp_of_even`・`Eflip_conj_siteOp_of_odd`・`Fflip_conj_sigmaX/Y/Z`・`Eflip_conj_sigmaX/Y/Z_of_even` を置いた（`check-no-sorry.sh` に足した）。人手の `W^{-1} = W` の行は、Lean が `W^{-1}` を置かず `(Wσ_k^a)W` で述べるので立てない。
+    SageMath `check_16_sign_flip_step0_E_F_U_invertibility_chains.sage`（120 段）・`check_17_sign_flip_step1_W_conjugation_chains.sage`（690 段）を足した（`QQ(i)`、全 PASS）。
+    レビューの必須の指摘 2 件（定義の言い換えで Step 1 の 1 行目の説明が誤りになった、`E_mE_m = I` の 1 段目の根拠が無い）を、上の Step 1 の鎖と `E_mE_m` の表示した鎖で直した。任意の指摘のうち 5 件（`E, F` の所属集合、`(σ^z)^{-1}` の名残、`W = F` の `W_mW_m = I` の根拠、「まず」の重なり、Lean の 1 行目の分割と overview・対応表）を直した。
+    残した任意の指摘: `Uflip_conj_sigmaX/Y/Z` は今もサイトごとの因子 `flipFam` の成分計算で示しており、今回の `F`・`E` の鎖の定理を使わない（下の次の一歩）。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -622,7 +631,7 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文に `(-1)·(-1) = 1`（ℂ）を主張として置くブロックが無い。`V1_in_Z_Y_epsilon` の Step 0 の σ^yσ^x の鎖が `definition_of_cc` の積の名前で引いており、Lean は `neg_one_mul`・`neg_neg` の 2 補題で閉じている（三十七個目のレビューの任意の指摘）。主張として足して引くかを判断する。
 - Lean の `TensorPow M` は行列の添字を `Conf M`（`Fin M → Fin 2`）に取り、人手の `Mat(2^{M_col},ℂ)` の添字 `1, …, 2^{M_col}` と型が違う。このため単位行列・差の段では、添字が `Fin m` の具体版ではなく、必要十分版を `Conf M` へ特殊化した系（`identity_matrix_mul_tensorPow` ほか、`scalar_identity_commutes_tensorPow`）を使っている（三十八個目のレビューの任意の指摘）。上の「有限和の添字の付け方」の件と合わせて、人手が多重添字の集合 `𝓘` で行列を添字づけるのか、Lean が `Conf M` と `Fin (2^M)` の間の写像に名前を付けるのかを判断する。
 
-- `eigenvalue_problem_eigenvalues_of_V_plus.ts` に残る名前だけの根拠（四十四個目のレビュー）。`sign_flip_conjugation` Step 0 の `σσ = I` は四十六個目で済んだ。Step 0 の残りの「可逆行列の有限積も可逆」には参照も鎖も無く、Lean の `Uflip_mul_inv`・`UflipInv_mul` はサイトごとの因子 `flipFam` で示していて Step 0 の鎖（`sigmaX_mul_sigmaX_site` ほか）を使わない（`U = EF` を `E`・`F` の積として持たない）。Step 1 の `F` による共役の 3 本の「パウリ行列の積」は四十七個目・四十八個目で済んだ。`E` による共役の鎖の「パウリ行列の積」5 か所は四十九個目で済んだ。次は `F`・`E` の鎖の 1 行目「`k` 以外のサイトの因子は可換」・「`k` が奇数なら第 `k` 因子だけが効く」（`F` の定義・`F^{-1} = F`・可換性を 1 行にまとめており、Lean にも立てていない。四十八個目のレビューの任意の指摘）、
+- `eigenvalue_problem_eigenvalues_of_V_plus.ts` に残る名前だけの根拠（四十四個目のレビュー）。`sign_flip_conjugation` Step 0 の `σσ = I` は四十六個目で済んだ。Step 1 の `F` による共役の 3 本の「パウリ行列の積」は四十七個目・四十八個目で済んだ。`E` による共役の鎖の「パウリ行列の積」5 か所は四十九個目で済んだ。Step 0 の「可逆行列の有限積も可逆」と `F`・`E` の鎖の 1 行目は五十個目で済んだ（`E`・`F` をクロネッカー積で定義し直した）。次は Step 1 の合成の段（`UXU^{-1} = E(FXF^{-1})E^{-1}` の行、`(∵ F による共役の計算)`・`(∵ E による共役の場合分け)` の名前だけの根拠）と、Lean の `Uflip_conj_sigmaX/Y/Z` を `Fflip_conj_sigma*`・`Eflip_conj_sigma*_of_even`・`Eflip_conj_siteOp_of_odd` から人手の合成の行どおりに組み直すこと（今はサイトごとの因子 `flipFam` の成分計算で示しており、人手の経路と 1 対 1 でない。五十個目のレビューの任意の指摘）。続けて
   Step 1 の `E(-σ_k^x)E^{-1} = -σ_k^x`・`-Eσ_k^yE^{-1}` の行（代入と符号の外出しが 1 行）、Step 3 の「共役の ℂ 線型性」（`H_1^{(+)}`・`H_2` の有限和への適用。`linearity_of_T` は 2 項の線型結合しか述べない）、Step 2・Step 3 の単項の `+`。Step 3 の直前の段落「以下、共役が ℂ 線型で積を保つこと（…）を繰り返し使う」は、積を保つことが四十五個目でラベル参照になったので、線型性を扱うときに整理する（四十五個目のレビューの任意の指摘）。`conjugation_is_ring_homomorphism` 自身が `T_B(A) = BAB^{-1}` の括弧の読みを宣言しておらず、証明の 1 段目も括弧を外している（Lean の `Conjugation.T` は `(BA)B^{-1}`。同じレビューの任意の指摘）。
   ほかのブロックの「結合法則」（`Λ̌` の固有値の章の 1016・1027・1148・1179〜1187・2012・2083・2151・3329 行付近）、「単位行列との積」（1547・1563・1576・1666・1724・1833 行付近）、「スカラー倍」（287・299・357・2016〜2020・2087〜2091 行付近）。
   `V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` は実数で、引く主張は係数を `ℂ` に取るが、`a` を `ℂ` の元として使うことを本文に書いていない（記号の帰属）。

@@ -445,18 +445,36 @@ S_1^{(+)}
     title: { tex: String.raw`\text{符号反転共役 } U` },
     labels: ["sign_flip_conjugation"],
     statement: [
-      paragraph([math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`), " とし、"]),
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("pauli_matrix_products"),
+        " の二次の Pauli 行列 ",
+        math(String.raw`\sigma^x, \sigma^z`),
+        " を用いて、",
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}`),
+        " について",
+      ]),
       displayMath(
-        String.raw`E := \prod_{\substack{1 \leq m \leq M_{\mathrm{col}} \\ m\ \text{奇数}}} \sigma_m^x, \qquad
-F := \prod_{m=1}^{M_{\mathrm{col}}} \sigma_m^z, \qquad
-U := E F \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
+        String.raw`E_m := \begin{cases}
+  \sigma^x & (m\ \text{奇数}) \\
+  I_{\mathrm{Mat}(2,\mathbb{C})} & (m\ \text{偶数})
+\end{cases}
+\in \mathrm{Mat}(2,\mathbb{C})`,
       ),
       paragraph([
-        "とおく（積の因子は相異なるサイトに置かれた ",
-        math(String.raw`2`),
-        " 次の行列のクロネッカー積なので、",
-        ref("kronecker_product_rule"),
-        " (1) より互いに可換であり、順序は問わない）。このとき ",
+        "とおき、",
+        ref("def_kronecker"),
+        " のクロネッカー積で",
+      ]),
+      displayMath(
+        String.raw`E := E_1 \boxtimes \cdots \boxtimes E_{M_{\mathrm{col}}}, \qquad
+F := \underbrace{\sigma^z \boxtimes \cdots \boxtimes \sigma^z}_{M_{\mathrm{col}}\ \text{個}}, \qquad
+U := E F
+\qquad \left(E, F, U \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\right)`,
+      ),
+      paragraph([
+        "とおく。このとき ",
         math(String.raw`U`),
         " は可逆で、",
       ]),
@@ -499,33 +517,211 @@ U\,S_2\,U^{-1} = -\,S_2`,
 \end{aligned}`,
       ),
       paragraph([
-        "が成り立つ。したがって ",
-        math(String.raw`\sigma_m^x`),
-        "、",
-        math(String.raw`\sigma_m^z`),
-        " はいずれも自分自身を逆行列にもつ可逆行列であり、可逆行列の有限積である ",
+        "が成り立つ（Step 1 で使う）。",
+      ]),
+      paragraph([
         math(String.raw`E, F, U`),
-        " も可逆である。",
+        " の可逆性を示す。",
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}`),
+        " について、",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+E_mE_m
+&= \sigma^x\sigma^x
+   \quad (\because\ E_m\ \text{の定義、}m\ \text{奇数}) \\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}
+   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^x\sigma^x = I\right)
+   \qquad (m\ \text{奇数}), \\
+E_mE_m
+&= I_{\mathrm{Mat}(2,\mathbb{C})}\,I_{\mathrm{Mat}(2,\mathbb{C})}
+   \quad (\because\ E_m\ \text{の定義、}m\ \text{偶数}) \\
+&= I_{\mathrm{Mat}(2,\mathbb{C})}
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)
+   \qquad (m\ \text{偶数})
+\end{aligned}`,
+      ),
       paragraph([
-        "Step 1（1 因子ごとの共役）。",
-        math(String.raw`j \neq k`),
-        " なら ",
-        math(String.raw`\sigma_j^a`),
+        "である。次の鎖の中に限り ",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+FF
+&= \left(\sigma^z\boxtimes\cdots\boxtimes\sigma^z\right)\left(\sigma^z\boxtimes\cdots\boxtimes\sigma^z\right)
+   \quad (\because\ F\ \text{の定義}) \\
+&= (\sigma^z\sigma^z)\boxtimes\cdots\boxtimes(\sigma^z\sigma^z)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= I\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^z\sigma^z = I\text{ を全ての因子へ同時適用}\right) \\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (2)}\right), \\
+EE
+&= \left(E_1\boxtimes\cdots\boxtimes E_{M_{\mathrm{col}}}\right)\left(E_1\boxtimes\cdots\boxtimes E_{M_{\mathrm{col}}}\right)
+   \quad (\because\ E\ \text{の定義}) \\
+&= (E_1E_1)\boxtimes\cdots\boxtimes(E_{M_{\mathrm{col}}}E_{M_{\mathrm{col}}})
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= I\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }E_mE_m = I\text{ を全ての因子へ同時適用}) \\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (2)}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("def_invertible_elements_of_R"),
+        " を ",
+        math(String.raw`M = M_{\mathrm{col}}`),
+        " で使う。上の 2 本の鎖より、",
+        math(String.raw`g = F`),
+        " には ",
+        math(String.raw`h = F`),
+        " が、",
+        math(String.raw`g = E`),
+        " には ",
+        math(String.raw`h = E`),
+        " が可逆の条件 ",
+        math(String.raw`gh = hg = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        " を満たす。よって ",
+        math(String.raw`E, F`),
+        " は可逆であり、逆元の一意性より ",
+        math(String.raw`F^{-1} = F`),
+        "、",
+        math(String.raw`E^{-1} = E`),
+        " である。同じ定義の (ii) を ",
+        math(String.raw`g_1 = E`),
+        "、",
+        math(String.raw`g_2 = F`),
+        " で使うと、",
+        math(String.raw`U = EF`),
+        " は可逆であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+U^{-1}
+&= (EF)^{-1}
+   \quad (\because\ U\ \text{の定義}) \\
+&= F^{-1}E^{-1}
+   \quad \left(\because\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\right) \\
+&= FE^{-1}
+   \quad (\because\ \text{上の }F^{-1} = F) \\
+&= FE
+   \quad (\because\ \text{上の }E^{-1} = E)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 1（1 因子ごとの共役）。以下、",
+        math(String.raw`WXW^{-1}`),
+        " は ",
+        math(String.raw`(WX)W^{-1}`),
+        " と読む。まず ",
+        math(String.raw`E`),
         " と ",
-        math(String.raw`\sigma_k^b`),
-        " は可換なので、共役 ",
-        math(String.raw`X \mapsto FXF^{-1}`),
-        " において ",
         math(String.raw`F`),
-        " のうち第 ",
+        " による共役をまとめて計算する。次の鎖の中に限り、",
+        math(String.raw`(W, W_1, \dots, W_{M_{\mathrm{col}}})`),
+        " は ",
+        math(String.raw`(F, \sigma^z, \dots, \sigma^z)`),
+        " または ",
+        math(String.raw`(E, E_1, \dots, E_{M_{\mathrm{col}}})`),
+        " のどちらかとし、",
+        math(String.raw`1 \leq k \leq M_{\mathrm{col}}`),
+        "、",
+        math(String.raw`a \in \{x, y, z\}`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。Step 0 より ",
+        math(String.raw`W^{-1} = W`),
+        " である。また ",
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}`),
+        " について ",
+        math(String.raw`W_mW_m = I`),
+        " である（",
+        math(String.raw`W = F`),
+        " なら ",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^z\sigma^z = I`),
+        "、",
+        math(String.raw`W = E`),
+        " なら Step 0 の ",
+        math(String.raw`E_mE_m = I`),
+        "）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W\sigma_k^aW^{-1}
+&= \left(W\sigma_k^a\right)W
+   \quad (\because\ \text{Step 0 の }W^{-1} = W) \\
+&= \left(\left(W_1\boxtimes\cdots\boxtimes W_{M_{\mathrm{col}}}\right)\sigma_k^a\right)
+   \left(W_1\boxtimes\cdots\boxtimes W_{M_{\mathrm{col}}}\right)
+   \quad (\because\ W\ \text{の定義}) \\
+&= \left(\left(W_1\boxtimes\cdots\boxtimes W_{M_{\mathrm{col}}}\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)\right)
+   \left(W_1\boxtimes\cdots\boxtimes W_{M_{\mathrm{col}}}\right)
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
+&= \left((W_1I)\boxtimes\cdots\boxtimes\overbrace{(W_k\sigma^a)}^{k\text{th}}\boxtimes\cdots\boxtimes(W_{M_{\mathrm{col}}}I)\right)
+   \left(W_1\boxtimes\cdots\boxtimes W_{M_{\mathrm{col}}}\right)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= \left((W_1I)W_1\right)\boxtimes\cdots\boxtimes\overbrace{\left((W_k\sigma^a)W_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes\left((W_{M_{\mathrm{col}}}I)W_{M_{\mathrm{col}}}\right)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= (W_1W_1)\boxtimes\cdots\boxtimes\overbrace{\left((W_k\sigma^a)W_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes(W_{M_{\mathrm{col}}}W_{M_{\mathrm{col}}})
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((W_k\sigma^a)W_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W_mW_m = I\text{ を }k\text{ 番目以外の因子へ同時適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "右辺を、サイト ",
         math(String.raw`k`),
-        " 因子の ",
-        math(String.raw`\sigma_k^z`),
-        " だけが効く。",
+        " のパウリ行列の積に戻す。次の鎖の中に限り ",
+        math(String.raw`p \in \{x, z\}`),
+        " とする。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^p\sigma^a)\sigma^p\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&= (II)\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^p\sigma^a)\sigma^p\right)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
+&= \left((II)I\right)\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^p\sigma^a)\sigma^p\right)}^{k\text{th}}\boxtimes\cdots\boxtimes\left((II)I\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
+&= \left((II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^p\sigma^a)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^p}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= \left(\left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^p}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^p}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= \left(\sigma_k^p\sigma_k^a\right)\sigma_k^p
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k`),
+        " が偶数なら ",
+        math(String.raw`E_k = I`),
+        " なので、上の ",
+        math(String.raw`W = E`),
+        " の鎖の右辺は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+I\boxtimes\cdots\boxtimes\overbrace{\left((E_k\sigma^a)E_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((I\sigma^a)I\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ E_k\ \text{の定義、}k\ \text{偶数}) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left(\sigma^aI\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\right) \\
+&= \sigma_k^a
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
       ]),
       paragraph([
-        "まず同じサイト ",
+        "次に、同じサイト ",
         math(String.raw`k`),
         " の二つのパウリ行列の積の順序を入れ替える。次の鎖の中に限り ",
         math(String.raw`(p, q) \in \{(z, x),\ (y, z),\ (y, x)\}`),
@@ -561,8 +757,16 @@ U\,S_2\,U^{-1} = -\,S_2`,
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`(\sigma^z)^{-1} = \sigma^z`),
-        "、上の鎖（",
+        math(String.raw`W\sigma_k^aW^{-1}`),
+        " の鎖（",
+        math(String.raw`W = F`),
+        "）、",
+        math(String.raw`(\sigma_k^p\sigma_k^a)\sigma_k^p`),
+        " の鎖（",
+        math(String.raw`p = z`),
+        "）、",
+        math(String.raw`\sigma_k^p\sigma_k^q`),
+        " の鎖（",
         math(String.raw`(p, q) = (z, x)`),
         " と ",
         math(String.raw`(y, z)`),
@@ -573,10 +777,12 @@ U\,S_2\,U^{-1} = -\,S_2`,
       displayMath(
         String.raw`\begin{aligned}
 F\sigma_k^x F^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^z\sigma^x)\sigma^z\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = F\text{、}a = x\text{ で}) \\
 &= \left(\sigma_k^z\sigma_k^x\right)\sigma_k^z
-   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^x\text{ と可換}) \\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = z\text{、}a = x\text{ で}) \\
 &= \left(-\left(\sigma_k^x\sigma_k^z\right)\right)\sigma_k^z
-   \quad (\because\ \text{上の鎖を }(p, q) = (z, x)\text{ で}) \\
+   \quad (\because\ \text{上の }\sigma_k^p\sigma_k^q\text{ の鎖を }(p, q) = (z, x)\text{ で}) \\
 &= -\left(\left(\sigma_k^x\sigma_k^z\right)\sigma_k^z\right)
    \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right) \\
 &= -\left(\sigma_k^x\left(\sigma_k^z\sigma_k^z\right)\right)
@@ -586,12 +792,14 @@ F\sigma_k^x F^{-1}
 &= -\sigma_k^x
    \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\right), \\
 F\sigma_k^y F^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^z\sigma^y)\sigma^z\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = F\text{、}a = y\text{ で}) \\
 &= \left(\sigma_k^z\sigma_k^y\right)\sigma_k^z
-   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^y\text{ と可換}) \\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = z\text{、}a = y\text{ で}) \\
 &= \sigma_k^z\left(\sigma_k^y\sigma_k^z\right)
    \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
 &= \sigma_k^z\left(-\left(\sigma_k^z\sigma_k^y\right)\right)
-   \quad (\because\ \text{上の鎖を }(p, q) = (y, z)\text{ で}) \\
+   \quad (\because\ \text{上の }\sigma_k^p\sigma_k^q\text{ の鎖を }(p, q) = (y, z)\text{ で}) \\
 &= -\left(\sigma_k^z\left(\sigma_k^z\sigma_k^y\right)\right)
    \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right) \\
 &= -\left(\left(\sigma_k^z\sigma_k^z\right)\sigma_k^y\right)
@@ -601,8 +809,10 @@ F\sigma_k^y F^{-1}
 &= -\sigma_k^y
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right), \\
 F\sigma_k^z F^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^z\sigma^z)\sigma^z\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = F\text{、}a = z\text{ で}) \\
 &= \left(\sigma_k^z\sigma_k^z\right)\sigma_k^z
-   \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^z\text{ と可換}) \\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = z\text{、}a = z\text{ で}) \\
 &= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^z
    \quad (\because\ \text{Step 0 の }\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で}) \\
 &= \sigma_k^z
@@ -610,42 +820,59 @@ F\sigma_k^z F^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`E`),
-        " は奇数番目の因子にだけ ",
-        math(String.raw`\sigma^x`),
-        " をもつ。したがって ", math(String.raw`k`),
-        " が偶数なら全因子が ", math(String.raw`\sigma_k^a`),
-        " と可換であり、", math(String.raw`k`),
-        " が奇数なら第 ", math(String.raw`k`),
-        " 因子だけを計算すればよい。",
-        math(String.raw`(\sigma^x)^{-1} = \sigma^x`),
-        "、上の鎖（",
+        math(String.raw`W\sigma_k^aW^{-1}`),
+        " の鎖（",
+        math(String.raw`W = E`),
+        "）、",
+        math(String.raw`k`),
+        " が偶数のときの鎖、",
+        math(String.raw`(\sigma_k^p\sigma_k^a)\sigma_k^p`),
+        " の鎖（",
+        math(String.raw`p = x`),
+        "）、",
+        math(String.raw`\sigma_k^p\sigma_k^q`),
+        " の鎖（",
         math(String.raw`(p, q) = (y, x)`),
         " と ",
         math(String.raw`(z, x)`),
         "）および Step 0 の ",
         math(String.raw`\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
-        " より",
+        " より、",
+        math(String.raw`k`),
+        " が偶数なら第 1 式が、",
+        math(String.raw`k`),
+        " が奇数なら第 2〜4 式が成り立つ。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E\sigma_k^aE^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((E_k\sigma^a)E_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = E\text{ で})\\
 &= \sigma_k^a
-   \quad (\because\ k\text{ が偶数なら }E\text{ の全因子と可換}),\\
+   \quad (\because\ \text{上の }k\text{ が偶数のときの鎖})
+   \qquad (k\ \text{偶数}),\\
 E\sigma_k^xE^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((E_k\sigma^x)E_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = E\text{、}a = x\text{ で})\\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^x\sigma^x)\sigma^x\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ E_k\ \text{の定義、}k\ \text{奇数})\\
 &= \left(\sigma_k^x\sigma_k^x\right)\sigma_k^x
-   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = x\text{、}a = x\text{ で})\\
 &= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^x
    \quad (\because\ \text{Step 0 の }\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で})\\
 &= \sigma_k^x
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right),\\
 E\sigma_k^yE^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((E_k\sigma^y)E_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = E\text{、}a = y\text{ で})\\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^x\sigma^y)\sigma^x\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ E_k\ \text{の定義、}k\ \text{奇数})\\
 &= \left(\sigma_k^x\sigma_k^y\right)\sigma_k^x
-   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = x\text{、}a = y\text{ で})\\
 &= \sigma_k^x\left(\sigma_k^y\sigma_k^x\right)
    \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
 &= \sigma_k^x\left(-\left(\sigma_k^x\sigma_k^y\right)\right)
-   \quad (\because\ \text{上の鎖を }(p, q) = (y, x)\text{ で})\\
+   \quad (\because\ \text{上の }\sigma_k^p\sigma_k^q\text{ の鎖を }(p, q) = (y, x)\text{ で})\\
 &= -\left(\sigma_k^x\left(\sigma_k^x\sigma_k^y\right)\right)
    \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right)\\
 &= -\left(\left(\sigma_k^x\sigma_k^x\right)\sigma_k^y\right)
@@ -655,12 +882,16 @@ E\sigma_k^yE^{-1}
 &= -\sigma_k^y
    \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right),\\
 E\sigma_k^zE^{-1}
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((E_k\sigma^z)E_k\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ \text{上の }W\sigma_k^aW^{-1}\text{ の鎖を }W = E\text{、}a = z\text{ で})\\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((\sigma^x\sigma^z)\sigma^x\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because\ E_k\ \text{の定義、}k\ \text{奇数})\\
 &= \left(\sigma_k^x\sigma_k^z\right)\sigma_k^x
-   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+   \quad (\because\ \text{上の }(\sigma_k^p\sigma_k^a)\sigma_k^p\text{ の鎖を }p = x\text{、}a = z\text{ で})\\
 &= \sigma_k^x\left(\sigma_k^z\sigma_k^x\right)
    \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
 &= \sigma_k^x\left(-\left(\sigma_k^x\sigma_k^z\right)\right)
-   \quad (\because\ \text{上の鎖を }(p, q) = (z, x)\text{ で})\\
+   \quad (\because\ \text{上の }\sigma_k^p\sigma_k^q\text{ の鎖を }(p, q) = (z, x)\text{ で})\\
 &= -\left(\sigma_k^x\left(\sigma_k^x\sigma_k^z\right)\right)
    \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right)\\
 &= -\left(\left(\sigma_k^x\sigma_k^x\right)\sigma_k^z\right)
@@ -911,6 +1142,11 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: E・F を σ_m^x・σ_m^z の行列の積から、サイトごとの因子 E_m（m 奇数なら σ^x、偶数なら I）・σ^z のクロネッカー積 E := E_1⊠⋯⊠E_{M_col}、F := σ^z⊠⋯⊠σ^z に定義し直した（同じ行列である）。" +
+          "Step 0 の「可逆行列の有限積も可逆」（参照も鎖も無かった）を、E_mE_m = I の 2 行の鎖、FF = I・EE = I の 4 行の鎖（kronecker_product_rule (1)・pauli_matrix_products / E_mE_m = I・kronecker_product_rule (2)）、def_invertible_elements_of_R の逆元の一意性による F^{-1} = F・E^{-1} = E、同じ定義の (ii) による U^{-1} = F^{-1}E^{-1} = FE^{-1} = FE の鎖にした。" +
+          "Step 1 の F・E の鎖の 1 行目「k 以外のサイトの因子は可換」「k が奇数なら第 k 因子だけが効く」「k が偶数なら E の全因子と可換」を、W ∈ {E, F} についての Wσ_k^aW^{-1} = I⊠⋯⊠((W_kσ^a)W_k)⊠⋯⊠I の 7 行の鎖、p ∈ {x, z} についての I⊠⋯⊠((σ^pσ^a)σ^p)⊠⋯⊠I = (σ_k^pσ_k^a)σ_k^p の 5 行の鎖、k 偶数の 4 行の鎖へのラベル参照つきの段に替え、(σ^z)^{-1} = σ^z・(σ^x)^{-1} = σ^x の名残を Step 0 の W^{-1} = W に替えた。主張は変えていない。" +
+          "Lean の対応は Ising2D.eFlipFam_mul_self・Fflip_mul_self・Eflip_mul_self・Uflip_mul_inv・UflipInv_mul（Uflip := Eflip * Fflip、UflipInv := Fflip * Eflip）、siteProd_conj_siteOp・siteProd_update_conj_eq_siteOp・siteProd_update_eFlipFam_conj_of_odd・Fflip_conj_siteOp・Eflip_conj_siteOp_of_even・Eflip_conj_siteOp_of_odd・Fflip_conj_sigmaX/Y/Z・Eflip_conj_sigmaX/Y/Z_of_even。" +
+          "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_16_sign_flip_step0_E_F_U_invertibility_chains.sage・check_17_sign_flip_step1_W_conjugation_chains.sage。",
         "2026-11-02: Step 1 の Eσ_k^aE^{-1}（k 奇数、a ∈ {x, y, z}）の名前だけの根拠「パウリ行列の積」5 行を、1 行目の積を (σ_k^xσ_k^a)σ_k^x と括弧付きで書き、" +
           "a = x は Step 0 の σ_m^xσ_m^x = I と identity_matrix_is_left_unit_of_mat_mult の 2 行、a = y, z は mat_mult_associative で σ_k^x(σ_k^aσ_k^x) に組み替えて σ_k^pσ_k^q の鎖（(p, q) = (y, x) を足した）・negation_factors_out_of_right_factor・mat_mult_associative・Step 0・identity_matrix_is_left_unit_of_mat_mult の 6 行にした。" +
           "pauli_matrix_products の σ^yσ^x = −σ^xσ^y・σ^zσ^x = −σ^xσ^z をそのままの向きで使う。主張は変えていない。Lean の対応は Ising2D.sigmaY_mul_sigmaX_site・sigmaX_sigmaX_sigmaX_site・sigmaX_sigmaY_sigmaX_site・sigmaX_sigmaZ_sigmaX_site。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_15_sign_flip_step1_E_conjugation_chains.sage。",

@@ -686,6 +686,23 @@ targets=(
   Ising2D.NecSuf.two_pow_smul_tau_projOn
   Ising2D.NecSuf.pow_mul_eq_of_mul_eq_smul
   Ising2D.NecSuf.exp_mul_eq_of_mul_eq_smul
+  Ising2D.eFlipFam_mul_self
+  Ising2D.Fflip_mul_self
+  Ising2D.Eflip_mul_self
+  Ising2D.Uflip_eq_siteProd
+  Ising2D.UflipInv_eq_siteProd
+  Ising2D.siteProd_conj_siteOp
+  Ising2D.siteProd_update_conj_eq_siteOp
+  Ising2D.siteProd_update_eFlipFam_conj_of_odd
+  Ising2D.Fflip_conj_siteOp
+  Ising2D.Eflip_conj_siteOp_of_even
+  Ising2D.Eflip_conj_siteOp_of_odd
+  Ising2D.Fflip_conj_sigmaX
+  Ising2D.Fflip_conj_sigmaY
+  Ising2D.Fflip_conj_sigmaZ
+  Ising2D.Eflip_conj_sigmaX_of_even
+  Ising2D.Eflip_conj_sigmaY_of_even
+  Ising2D.Eflip_conj_sigmaZ_of_even
   Ising2D.Uflip_mul_inv
   Ising2D.UflipInv_mul
   Ising2D.Uflip_conj_Z

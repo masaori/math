@@ -4,9 +4,10 @@
 対応する人手証明（`structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）:
 `sign_flip_conjugation`（`eigenvalues_of_V_016_claim_sign_flip_conjugation`）
 
-原文の `U := E F`（`E = ∏_{m 奇数} σ^x_m`, `F = ∏_m σ^z_m`）を、サイトごとの
-`2×2` 行列の族としてまとめて `siteProd` に流し込む形で定義する
-（Lean の添字は 0 始まりなので、原文の「`m` が奇数」は `(i : ℕ)` が偶数にあたる）。
+人手の `E := E_1 ⊠ ⋯ ⊠ E_{M_col}`（`E_m` は `m` が奇数なら `σ^x`、偶数なら `I`）・`F := σ^z ⊠ ⋯ ⊠ σ^z` を
+`siteProd`（クロネッカー積）で `Eflip`・`Fflip` と定義し、`U := E F` を `Uflip := Eflip * Fflip`、
+`U^{-1} = F E` を `UflipInv := Fflip * Eflip` とする
+（Lean の添字は 0 始まりなので、人手の「`m` が奇数」は `(i : ℕ)` が偶数にあたる）。
 
 ## 原文との違い（形式化して分かったこと）
 
@@ -42,48 +43,113 @@ section SignFlip
 
 variable {M : ℕ}
 
-/-! ## `U` とその逆 -/
+/-! ## `E`・`F`・`U` とその逆（人手の主張の定義と Step 0 の可逆性） -/
 
-/-- 原文の `U = E F` のサイト `i` の因子（`(i : ℕ)` が偶数 ⟺ 原文の `m = i+1` が奇数）。 -/
+/-- 人手の `E_m`（`m` が奇数なら `σ^x`、偶数なら `I_{Mat(2,ℂ)}`）。Lean の添字 `i` は 0 始まりなので、
+人手の「`m = i+1` が奇数」は `(i : ℕ)` が偶数にあたる。 -/
+noncomputable def eFlipFam (M : ℕ) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
+  fun i => if Even (i : ℕ) then pauliX else 1
+
+/-- 人手の `E := E_1 ⊠ ⋯ ⊠ E_{M_col}`。 -/
+noncomputable def Eflip (M : ℕ) : TensorPow M := siteProd M (eFlipFam M)
+
+/-- 人手の `F := σ^z ⊠ ⋯ ⊠ σ^z`。 -/
+noncomputable def Fflip (M : ℕ) : TensorPow M := siteProd M (fun _ => pauliZ)
+
+/-- **人手の `U := E F`**。 -/
+noncomputable def Uflip (M : ℕ) : TensorPow M := Eflip M * Fflip M
+
+/-- 人手 Step 0 の `U^{-1} = F^{-1}E^{-1} = FE`。 -/
+noncomputable def UflipInv (M : ℕ) : TensorPow M := Fflip M * Eflip M
+
+/-- 人手 Step 0 の `E_mE_m = I_{Mat(2,ℂ)}`（`m` 奇数は `pauli_matrix_products` の `σ^xσ^x = I`、
+偶数は `identity_matrix_is_left_unit_of_mat_mult`）。 -/
+theorem eFlipFam_mul_self (i : Fin M) : eFlipFam M i * eFlipFam M i = 1 := by
+  unfold eFlipFam
+  by_cases h : Even (i : ℕ)
+  · rw [if_pos h]
+    exact pauliX_mul_pauliX                             -- `pauli_matrix_products` の `σ^xσ^x = I`
+  · rw [if_neg h]
+    exact identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- 人手 Step 0 の `FF = I_{Mat(2^{M_col},ℂ)}` の 4 行の鎖。 -/
+theorem Fflip_mul_self : Fflip M * Fflip M = 1 :=
+  calc Fflip M * Fflip M
+      = siteProd M (fun _ => pauliZ) * siteProd M (fun _ => pauliZ) := rfl
+                                                        -- `F` の定義
+    _ = siteProd M (fun _ => pauliZ * pauliZ) := (siteProd_mul M _ _).symm
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (fun _ => (1 : Matrix (Fin 2) (Fin 2) ℂ)) := by rw [pauliZ_mul_pauliZ]
+                                                        -- `pauli_matrix_products` の `σ^zσ^z = I`（全ての因子へ同時適用）
+    _ = 1 := siteProd_one M                             -- `kronecker_product_rule` (2)
+
+/-- 人手 Step 0 の `EE = I_{Mat(2^{M_col},ℂ)}` の 4 行の鎖。 -/
+theorem Eflip_mul_self : Eflip M * Eflip M = 1 :=
+  calc Eflip M * Eflip M
+      = siteProd M (eFlipFam M) * siteProd M (eFlipFam M) := rfl
+                                                        -- `E` の定義
+    _ = siteProd M (fun i => eFlipFam M i * eFlipFam M i) := (siteProd_mul M _ _).symm
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (fun _ => (1 : Matrix (Fin 2) (Fin 2) ℂ)) := by simp only [eFlipFam_mul_self]
+                                                        -- 上の `E_mE_m = I`（全ての因子へ同時適用）
+    _ = 1 := siteProd_one M                             -- `kronecker_product_rule` (2)
+
+/-- 人手 Step 0 の `U` の可逆性の半分 `(EF)(FE) = I`。`def_invertible_elements_of_R` (ii) の証明の 1 本目の鎖
+（`(g_1g_2)h = I`）を `g_1 = E`、`g_2 = F`、`g_1^{-1} = E`、`g_2^{-1} = F` で書いたもの。
+人手の `F^{-1} = F`・`E^{-1} = E` は、Lean では `UflipInv` を `F E` と定義したうえで、ここで `FF = I`・`EE = I` を直接使う。 -/
+theorem Uflip_mul_inv : Uflip M * UflipInv M = 1 :=
+  calc Uflip M * UflipInv M
+      = (Eflip M * Fflip M) * (Fflip M * Eflip M) := rfl
+                                                        -- `U = EF` と `h = g_2^{-1}g_1^{-1} = FE` の代入
+    _ = ((Eflip M * Fflip M) * Fflip M) * Eflip M := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = (Eflip M * (Fflip M * Fflip M)) * Eflip M := by rw [Matrix.mul_assoc (Eflip M) (Fflip M) (Fflip M)]
+                                                        -- `mat_mult_associative`
+    _ = (Eflip M * 1) * Eflip M := by rw [Fflip_mul_self]
+                                                        -- `g_2g_2^{-1} = I`（`FF = I`）
+    _ = Eflip M * Eflip M := by rw [mul_identity_matrix_tensorPow]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = 1 := Eflip_mul_self                             -- `g_1g_1^{-1} = I`（`EE = I`）
+
+/-- 人手 Step 0 の `U` の可逆性の残り半分 `(FE)(EF) = I`。`def_invertible_elements_of_R` (ii) の証明の 2 本目の鎖
+（`h(g_1g_2) = I`）を `g_1 = E`、`g_2 = F` で書いたもの。 -/
+theorem UflipInv_mul : UflipInv M * Uflip M = 1 :=
+  calc UflipInv M * Uflip M
+      = (Fflip M * Eflip M) * (Eflip M * Fflip M) := rfl
+                                                        -- `h = g_2^{-1}g_1^{-1} = FE` と `U = EF` の代入
+    _ = ((Fflip M * Eflip M) * Eflip M) * Fflip M := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = (Fflip M * (Eflip M * Eflip M)) * Fflip M := by rw [Matrix.mul_assoc (Fflip M) (Eflip M) (Eflip M)]
+                                                        -- `mat_mult_associative`
+    _ = (Fflip M * 1) * Fflip M := by rw [Eflip_mul_self]
+                                                        -- `g_1^{-1}g_1 = I`（`EE = I`）
+    _ = Fflip M * Fflip M := by rw [mul_identity_matrix_tensorPow]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = 1 := Fflip_mul_self                             -- `g_2^{-1}g_2 = I`（`FF = I`）
+
+/-- 人手の `U = EF` のサイト `i` の因子 `E_{i+1}σ^z`（`Uflip_conj_sigmaX` ほかのサイトごとの成分計算が使う）。 -/
 noncomputable def flipFam (M : ℕ) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
-  fun i => (if Even (i : ℕ) then pauliX else 1) * pauliZ
+  fun i => eFlipFam M i * pauliZ
 
-/-- `flipFam` の各サイトの逆。 -/
+/-- `U^{-1} = FE` のサイト `i` の因子 `σ^zE_{i+1}`。 -/
 noncomputable def flipFamInv (M : ℕ) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
-  fun i => pauliZ * (if Even (i : ℕ) then pauliX else 1)
+  fun i => pauliZ * eFlipFam M i
 
-/-- **原文の `U = E F`**。 -/
-noncomputable def Uflip (M : ℕ) : TensorPow M := siteProd M (flipFam M)
+/-- `U = EF` はサイトごとの因子 `E_{i+1}σ^z` のクロネッカー積（`kronecker_product_rule` (1)）。 -/
+theorem Uflip_eq_siteProd : Uflip M = siteProd M (flipFam M) :=
+  (siteProd_mul M _ _).symm
 
-/-- `U^{-1}`。 -/
-noncomputable def UflipInv (M : ℕ) : TensorPow M := siteProd M (flipFamInv M)
+/-- `U^{-1} = FE` はサイトごとの因子 `σ^zE_{i+1}` のクロネッカー積（`kronecker_product_rule` (1)）。 -/
+theorem UflipInv_eq_siteProd : UflipInv M = siteProd M (flipFamInv M) :=
+  (siteProd_mul M _ _).symm
 
 private theorem flipFam_mul_inv (i : Fin M) : flipFam M i * flipFamInv M i = 1 := by
-  unfold flipFam flipFamInv
+  unfold flipFam flipFamInv eFlipFam
   by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
     · ext a b
       fin_cases a <;> fin_cases b <;>
         simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
-
-private theorem flipFamInv_mul (i : Fin M) : flipFamInv M i * flipFam M i = 1 := by
-  unfold flipFam flipFamInv
-  by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
-    · ext a b
-      fin_cases a <;> fin_cases b <;>
-        simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
-
-/-- **原文 Step 0**: `U` は可逆。 -/
-theorem Uflip_mul_inv : Uflip M * UflipInv M = 1 := by
-  rw [Uflip, UflipInv, ← siteProd_mul]
-  have h : (flipFam M * flipFamInv M) = 1 := by
-    funext i; exact flipFam_mul_inv i
-  rw [h, siteProd_one]
-
-theorem UflipInv_mul : UflipInv M * Uflip M = 1 := by
-  rw [Uflip, UflipInv, ← siteProd_mul]
-  have h : (flipFamInv M * flipFam M) = 1 := by
-    funext i; exact flipFamInv_mul i
-  rw [h, siteProd_one]
 
 /-! ## 人手 Step 0 の `σ_m^aσ_m^a = I_{Mat(2^{M_col},ℂ)}`（`a ∈ {x, z}`）
 
@@ -130,10 +196,132 @@ theorem sigmaX_mul_sigmaX_site (m : Fin M) : sigmaX m * sigmaX m = 1 :=
 theorem sigmaZ_mul_sigmaZ_site (m : Fin M) : sigmaZ m * sigmaZ m = 1 :=
   siteOp_mul_self_of_mul_self_eq_one m pauliZ pauliZ_mul_pauliZ
 
+/-! ## 人手 Step 1 の `Wσ_k^aW^{-1}` の鎖（`W ∈ {E, F}`）と、サイトのパウリ行列の積へ戻す鎖
+
+人手の鎖の各行と 1 対 1 に対応する。`w` が人手の `W_1, …, W_{M_col}`（`F` なら全て `σ^z`、`E` なら `E_m`）、
+`siteProd M w` が `W = W_1 ⊠ ⋯ ⊠ W_{M_col}` である。人手の 1 行目「Step 0 の `W^{-1} = W`」は、
+Lean では `W^{-1}` を置かず主張を `(W σ_k^a) W` で述べるので立てない。 -/
+
+/-- 人手 Step 1 の `Wσ_k^aW^{-1} = I ⊠ ⋯ ⊠ ((W_kσ^a)W_k) ⊠ ⋯ ⊠ I` の鎖の 2 行目以降
+（`W_mW_m = I` を仮定に取る。`W = F` では `pauli_matrix_products` の `σ^zσ^z = I`、`W = E` では Step 0 の `E_mE_m = I`）。 -/
+theorem siteProd_conj_siteOp (w : Fin M → Matrix (Fin 2) (Fin 2) ℂ) (hw : ∀ i, w i * w i = 1)
+    (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    (siteProd M w * siteOp k A) * siteProd M w
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((w k * A) * w k)) :=
+  calc (siteProd M w * siteOp k A) * siteProd M w
+      = (siteProd M w * siteOp k A) * siteProd M w := rfl
+                                                        -- `W` の定義（Lean の `W` は初めから `siteProd M w`）
+    _ = (siteProd M w * siteProd M (Function.update 1 k A)) * siteProd M w := rfl
+                                                        -- `def_site_pauli_matrices`
+    _ = siteProd M (Function.update (fun i => w i * 1) k (w k * A)) * siteProd M w := by
+        rw [← siteProd_mul]
+        congr 2
+        funext i
+        by_cases h : i = k
+        · subst h; simp only [Pi.mul_apply, Function.update_self]
+        · simp only [Pi.mul_apply, Function.update_of_ne h, Pi.one_apply]
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (fun i => (w i * 1) * w i) k ((w k * A) * w k)) := by
+        rw [← siteProd_mul]
+        congr 1
+        funext i
+        by_cases h : i = k
+        · subst h; simp only [Pi.mul_apply, Function.update_self]
+        · simp only [Pi.mul_apply, Function.update_of_ne h]
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (fun i => w i * w i) k ((w k * A) * w k)) := by
+        simp only [mul_identity_matrix]                 -- `identity_matrix_is_right_unit_of_mat_mult`（`k` 番目以外へ同時適用）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((w k * A) * w k)) := by
+        simp only [hw]                                  -- 上の `W_mW_m = I`（`k` 番目以外へ同時適用）
+
+/-- 人手 Step 1 の `I ⊠ ⋯ ⊠ ((σ^pσ^a)σ^p) ⊠ ⋯ ⊠ I = (σ_k^pσ_k^a)σ_k^p` の 5 行の鎖（`P = σ^p`）。 -/
+theorem siteProd_update_conj_eq_siteOp (k : Fin M) (P A : Matrix (Fin 2) (Fin 2) ℂ) :
+    siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((P * A) * P))
+      = (siteOp k P * siteOp k A) * siteOp k P :=
+  calc siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((P * A) * P))
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k ((P * A) * P)) := by
+        rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
+    _ = siteProd M (Function.update (fun _ : Fin M => ((1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) * 1) k ((P * A) * P)) := by
+        rw [mul_identity_matrix ((1 : Matrix (Fin 2) (Fin 2) ℂ) * 1)]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`（`k` 番目以外へ同時適用）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (P * A))
+          * siteProd M (Function.update 1 k P) := by
+        rw [← siteProd_mul]
+        congr 1
+        funext i
+        by_cases h : i = k
+        · subst h; simp only [Pi.mul_apply, Function.update_self]
+        · simp only [Pi.mul_apply, Function.update_of_ne h, Pi.one_apply]
+                                                        -- `kronecker_product_rule` (1)
+    _ = (siteProd M (Function.update 1 k P) * siteProd M (Function.update 1 k A))
+          * siteProd M (Function.update 1 k P) := by
+        rw [← siteProd_mul M (Function.update 1 k P) (Function.update 1 k A), update_one_mul_update_one_same]
+                                                        -- `kronecker_product_rule` (1)
+    _ = (siteOp k P * siteOp k A) * siteOp k P := rfl   -- `def_site_pauli_matrices`
+
+/-- 人手 Step 1 の `k` が偶数のときの鎖 `I ⊠ ⋯ ⊠ ((E_kσ^a)E_k) ⊠ ⋯ ⊠ I = σ_k^a` の 4 行
+（Lean の添字は 0 始まりなので、人手の「`k` が偶数」は `(k : ℕ)` が奇数）。 -/
+theorem siteProd_update_eFlipFam_conj_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ))
+    (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k
+        ((eFlipFam M k * A) * eFlipFam M k))
+      = siteOp k A :=
+  calc siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k
+        ((eFlipFam M k * A) * eFlipFam M k))
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((1 * A) * 1)) := by
+        rw [eFlipFam, if_neg hk]                        -- `E_k` の定義（`k` 偶数）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (A * 1)) := by
+        rw [identity_matrix_mul A]                      -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k A) := by
+        rw [mul_identity_matrix A]                      -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = siteOp k A := rfl                               -- `def_site_pauli_matrices`
+
+/-- 人手 Step 1 の `F` の因子について `σ^zσ^z = I`（`pauli_matrix_products`）。 -/
+theorem pauliZ_family_mul_self (i : Fin M) :
+    (fun _ : Fin M => pauliZ) i * (fun _ : Fin M => pauliZ) i = 1 :=
+  pauliZ_mul_pauliZ
+
+/-- 人手 Step 1 の `Fσ_k^aF^{-1}` の鎖の 1・2 行目: `(Fσ_k^a)F = (σ_k^zσ_k^a)σ_k^z`。 -/
+theorem Fflip_conj_siteOp (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    (Fflip M * siteOp k A) * Fflip M = (sigmaZ k * siteOp k A) * sigmaZ k :=
+  calc (Fflip M * siteOp k A) * Fflip M
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((pauliZ * A) * pauliZ)) :=
+        siteProd_conj_siteOp (fun _ => pauliZ) pauliZ_family_mul_self k A
+                                                        -- 上の `Wσ_k^aW^{-1}` の鎖（`W = F`）
+    _ = (sigmaZ k * siteOp k A) * sigmaZ k := siteProd_update_conj_eq_siteOp k pauliZ A
+                                                        -- 上の `(σ_k^pσ_k^a)σ_k^p` の鎖（`p = z`）
+
+/-- 人手 Step 1 の `Eσ_k^aE^{-1}` の鎖（`k` 奇数）の 1〜3 行目: `(Eσ_k^a)E = (σ_k^xσ_k^a)σ_k^x`
+（人手の「`k` が奇数」は `(k : ℕ)` が偶数）。 -/
+theorem Eflip_conj_siteOp_of_even (k : Fin M) (hk : Even (k : ℕ)) (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    (Eflip M * siteOp k A) * Eflip M = (sigmaX k * siteOp k A) * sigmaX k :=
+  calc (Eflip M * siteOp k A) * Eflip M
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k
+          ((eFlipFam M k * A) * eFlipFam M k)) :=
+        siteProd_conj_siteOp (eFlipFam M) eFlipFam_mul_self k A
+                                                        -- 上の `Wσ_k^aW^{-1}` の鎖（`W = E`）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((pauliX * A) * pauliX)) := by
+        rw [eFlipFam, if_pos hk]                        -- `E_k` の定義（`k` 奇数）
+    _ = (sigmaX k * siteOp k A) * sigmaX k := siteProd_update_conj_eq_siteOp k pauliX A
+                                                        -- 上の `(σ_k^pσ_k^a)σ_k^p` の鎖（`p = x`）
+
+/-- 人手 Step 1 の `Eσ_k^aE^{-1} = σ_k^a`（`k` 偶数）の 2 行
+（人手の「`k` が偶数」は `(k : ℕ)` が奇数）。 -/
+theorem Eflip_conj_siteOp_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) (A : Matrix (Fin 2) (Fin 2) ℂ) :
+    (Eflip M * siteOp k A) * Eflip M = siteOp k A :=
+  calc (Eflip M * siteOp k A) * Eflip M
+      = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k
+          ((eFlipFam M k * A) * eFlipFam M k)) :=
+        siteProd_conj_siteOp (eFlipFam M) eFlipFam_mul_self k A
+                                                        -- 上の `Wσ_k^aW^{-1}` の鎖（`W = E`）
+    _ = siteOp k A := siteProd_update_eFlipFam_conj_of_odd k hk A
+                                                        -- 上の `k` が偶数のときの鎖
+
 /-! ## 人手 Step 1 の `F` による共役の鎖（`a ∈ {x, y, z}`）
 
-人手の鎖の各行と 1 対 1 に対応する。各鎖の 1 行目「`k` 以外のサイトの因子は `σ_k^a` と可換」
-（`Fσ_k^aF^{-1} = (σ_k^zσ_k^a)σ_k^z`）は Lean に `F` を置いていないので立てず、2 行目以降を `(σ_k^zσ_k^a)σ_k^z` から示す。
+人手の鎖の各行と 1 対 1 に対応する。1・2 行目は `Fflip_conj_siteOp`、3 行目以降は下の `sigmaZ_sigmaX_sigmaZ_site`・`sigmaZ_sigmaY_sigmaZ_site`・`sigmaZ_sigmaZ_sigmaZ_site` である。
+鎖の全体は `Fflip_conj_sigmaX`・`Fflip_conj_sigmaY`・`Fflip_conj_sigmaZ`。
 `U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaY`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
 クロネッカー積として持ち、サイトごとの成分計算で示しており、ここの鎖を使わない。 -/
 
@@ -180,7 +368,7 @@ theorem sigmaY_mul_sigmaZ_site (k : Fin M) : sigmaY k * sigmaZ k = -(sigmaZ k * 
 theorem sigmaY_mul_sigmaX_site (k : Fin M) : sigmaY k * sigmaX k = -(sigmaX k * sigmaY k) :=
   siteOp_mul_of_anticomm k pauliY pauliX pauliY_mul_pauliX
 
-/-- 人手 Step 1 の `Fσ_k^xF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^x)σ_k^z = -σ_k^x`。 -/
+/-- 人手 Step 1 の `Fσ_k^xF^{-1}` の鎖の 3 行目以降: `(σ_k^zσ_k^x)σ_k^z = -σ_k^x`。 -/
 theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k = -(sigmaX k) :=
   calc (sigmaZ k * sigmaX k) * sigmaZ k
       = (-(sigmaX k * sigmaZ k)) * sigmaZ k := by rw [sigmaZ_mul_sigmaX_site]
@@ -194,7 +382,7 @@ theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k
     _ = -(sigmaX k) := by rw [mul_identity_matrix_tensorPow]
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
 
-/-- 人手 Step 1 の `Fσ_k^yF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^y)σ_k^z = -σ_k^y`。 -/
+/-- 人手 Step 1 の `Fσ_k^yF^{-1}` の鎖の 3 行目以降: `(σ_k^zσ_k^y)σ_k^z = -σ_k^y`。 -/
 theorem sigmaZ_sigmaY_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaY k) * sigmaZ k = -(sigmaY k) :=
   calc (sigmaZ k * sigmaY k) * sigmaZ k
       = sigmaZ k * (sigmaY k * sigmaZ k) := Matrix.mul_assoc (sigmaZ k) (sigmaY k) (sigmaZ k)
@@ -210,7 +398,7 @@ theorem sigmaZ_sigmaY_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaY k) * sigmaZ k
     _ = -(sigmaY k) := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
 
-/-- 人手 Step 1 の `Fσ_k^zF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^z)σ_k^z = σ_k^z`。 -/
+/-- 人手 Step 1 の `Fσ_k^zF^{-1}` の鎖の 3 行目以降: `(σ_k^zσ_k^z)σ_k^z = σ_k^z`。 -/
 theorem sigmaZ_sigmaZ_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaZ k) * sigmaZ k = sigmaZ k :=
   calc (sigmaZ k * sigmaZ k) * sigmaZ k
       = 1 * sigmaZ k := by rw [sigmaZ_mul_sigmaZ_site]  -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
@@ -218,16 +406,16 @@ theorem sigmaZ_sigmaZ_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaZ k) * sigmaZ k
 
 /-! ## 人手 Step 1 の `E` による共役の鎖（`k` が奇数、`a ∈ {x, y, z}`）
 
-人手の鎖の各行と 1 対 1 に対応する。各鎖の 1 行目「`k` が奇数なら第 `k` 因子だけが効く」
-（`Eσ_k^aE^{-1} = (σ_k^xσ_k^a)σ_k^x`）は Lean に `E` を置いていないので立てず、2 行目以降を `(σ_k^xσ_k^a)σ_k^x` から示す。 -/
+人手の鎖の各行と 1 対 1 に対応する。1〜3 行目は `Eflip_conj_siteOp_of_even`、4 行目以降は下の `sigmaX_sigmaX_sigmaX_site`・`sigmaX_sigmaY_sigmaX_site`・`sigmaX_sigmaZ_sigmaX_site` である。
+鎖の全体は `Eflip_conj_sigmaX_of_even`・`Eflip_conj_sigmaY_of_even`・`Eflip_conj_sigmaZ_of_even`。 -/
 
-/-- 人手 Step 1 の `Eσ_k^xE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^x)σ_k^x = σ_k^x`。 -/
+/-- 人手 Step 1 の `Eσ_k^xE^{-1}` の鎖の 4 行目以降: `(σ_k^xσ_k^x)σ_k^x = σ_k^x`。 -/
 theorem sigmaX_sigmaX_sigmaX_site (k : Fin M) : (sigmaX k * sigmaX k) * sigmaX k = sigmaX k :=
   calc (sigmaX k * sigmaX k) * sigmaX k
       = 1 * sigmaX k := by rw [sigmaX_mul_sigmaX_site]  -- Step 0 の `σ_m^xσ_m^x = I`（`m = k`）
     _ = sigmaX k := identity_matrix_mul_tensorPow _     -- `identity_matrix_is_left_unit_of_mat_mult`
 
-/-- 人手 Step 1 の `Eσ_k^yE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^y)σ_k^x = -σ_k^y`。 -/
+/-- 人手 Step 1 の `Eσ_k^yE^{-1}` の鎖の 4 行目以降: `(σ_k^xσ_k^y)σ_k^x = -σ_k^y`。 -/
 theorem sigmaX_sigmaY_sigmaX_site (k : Fin M) : (sigmaX k * sigmaY k) * sigmaX k = -(sigmaY k) :=
   calc (sigmaX k * sigmaY k) * sigmaX k
       = sigmaX k * (sigmaY k * sigmaX k) := Matrix.mul_assoc (sigmaX k) (sigmaY k) (sigmaX k)
@@ -243,7 +431,7 @@ theorem sigmaX_sigmaY_sigmaX_site (k : Fin M) : (sigmaX k * sigmaY k) * sigmaX k
     _ = -(sigmaY k) := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
 
-/-- 人手 Step 1 の `Eσ_k^zE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^z)σ_k^x = -σ_k^z`。 -/
+/-- 人手 Step 1 の `Eσ_k^zE^{-1}` の鎖の 4 行目以降: `(σ_k^xσ_k^z)σ_k^x = -σ_k^z`。 -/
 theorem sigmaX_sigmaZ_sigmaX_site (k : Fin M) : (sigmaX k * sigmaZ k) * sigmaX k = -(sigmaZ k) :=
   calc (sigmaX k * sigmaZ k) * sigmaX k
       = sigmaX k * (sigmaZ k * sigmaX k) := Matrix.mul_assoc (sigmaX k) (sigmaZ k) (sigmaX k)
@@ -258,6 +446,35 @@ theorem sigmaX_sigmaZ_sigmaX_site (k : Fin M) : (sigmaX k * sigmaZ k) * sigmaX k
                                                         -- Step 0 の `σ_m^xσ_m^x = I`（`m = k`）
     _ = -(sigmaZ k) := by rw [identity_matrix_mul_tensorPow]
                                                         -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-! ## 人手 Step 1 の `F`・`E` による共役の鎖の全体 -/
+
+/-- 人手 Step 1 の `Fσ_k^xF^{-1} = -σ_k^x`（`W` の鎖・`(σ_k^pσ_k^a)σ_k^p` の鎖のあとに 3 行目以降を続ける）。 -/
+theorem Fflip_conj_sigmaX (k : Fin M) : (Fflip M * sigmaX k) * Fflip M = -(sigmaX k) :=
+  (Fflip_conj_siteOp k pauliX).trans (sigmaZ_sigmaX_sigmaZ_site k)
+
+/-- 人手 Step 1 の `Fσ_k^yF^{-1} = -σ_k^y`。 -/
+theorem Fflip_conj_sigmaY (k : Fin M) : (Fflip M * sigmaY k) * Fflip M = -(sigmaY k) :=
+  (Fflip_conj_siteOp k pauliY).trans (sigmaZ_sigmaY_sigmaZ_site k)
+
+/-- 人手 Step 1 の `Fσ_k^zF^{-1} = σ_k^z`。 -/
+theorem Fflip_conj_sigmaZ (k : Fin M) : (Fflip M * sigmaZ k) * Fflip M = sigmaZ k :=
+  (Fflip_conj_siteOp k pauliZ).trans (sigmaZ_sigmaZ_sigmaZ_site k)
+
+/-- 人手 Step 1 の `Eσ_k^xE^{-1} = σ_k^x`（人手の `k` 奇数、Lean の `(k : ℕ)` 偶数）。 -/
+theorem Eflip_conj_sigmaX_of_even (k : Fin M) (hk : Even (k : ℕ)) :
+    (Eflip M * sigmaX k) * Eflip M = sigmaX k :=
+  (Eflip_conj_siteOp_of_even k hk pauliX).trans (sigmaX_sigmaX_sigmaX_site k)
+
+/-- 人手 Step 1 の `Eσ_k^yE^{-1} = -σ_k^y`（人手の `k` 奇数）。 -/
+theorem Eflip_conj_sigmaY_of_even (k : Fin M) (hk : Even (k : ℕ)) :
+    (Eflip M * sigmaY k) * Eflip M = -(sigmaY k) :=
+  (Eflip_conj_siteOp_of_even k hk pauliY).trans (sigmaX_sigmaY_sigmaX_site k)
+
+/-- 人手 Step 1 の `Eσ_k^zE^{-1} = -σ_k^z`（人手の `k` 奇数）。 -/
+theorem Eflip_conj_sigmaZ_of_even (k : Fin M) (hk : Even (k : ℕ)) :
+    (Eflip M * sigmaZ k) * Eflip M = -(sigmaZ k) :=
+  (Eflip_conj_siteOp_of_even k hk pauliZ).trans (sigmaX_sigmaZ_sigmaX_site k)
 
 /-! ## 共役写像の性質 -/
 
@@ -294,10 +511,8 @@ theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
 theorem Uflip_conj_siteProd (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
     Uflip M * siteProd M x * UflipInv M
       = siteProd M (fun i => flipFam M i * x i * flipFamInv M i) := by
-  rw [Uflip, UflipInv, ← siteProd_mul, ← siteProd_mul]
-  congr 1
-  all_goals funext i
-  all_goals simp [Pi.mul_apply]
+  rw [Uflip_eq_siteProd, UflipInv_eq_siteProd, ← siteProd_mul, ← siteProd_mul]
+  rfl
 
 theorem Uflip_conj_siteOp (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
     Uflip M * siteOp k A * UflipInv M = siteOp k (flipFam M k * A * flipFamInv M k) := by
@@ -312,7 +527,7 @@ theorem Uflip_conj_siteOp (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
 
 private theorem conj_pauliX (i : Fin M) :
     flipFam M i * pauliX * flipFamInv M i = (-1 : ℂ) • pauliX := by
-  unfold flipFam flipFamInv
+  unfold flipFam flipFamInv eFlipFam
   by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
     · ext a b
       fin_cases a <;> fin_cases b <;>
@@ -321,7 +536,7 @@ private theorem conj_pauliX (i : Fin M) :
 private theorem conj_pauliY (i : Fin M) :
     flipFam M i * pauliY * flipFamInv M i
       = (if Even (i : ℕ) then (1 : ℂ) else -1) • pauliY := by
-  unfold flipFam flipFamInv
+  unfold flipFam flipFamInv eFlipFam
   by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
     · ext a b
       fin_cases a <;> fin_cases b <;>
@@ -330,7 +545,7 @@ private theorem conj_pauliY (i : Fin M) :
 private theorem conj_pauliZ (i : Fin M) :
     flipFam M i * pauliZ * flipFamInv M i
       = (if Even (i : ℕ) then (-1 : ℂ) else 1) • pauliZ := by
-  unfold flipFam flipFamInv
+  unfold flipFam flipFamInv eFlipFam
   by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
     · ext a b
       fin_cases a <;> fin_cases b <;>
