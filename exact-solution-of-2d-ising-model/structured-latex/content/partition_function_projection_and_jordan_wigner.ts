@@ -123,6 +123,636 @@ export default defineBlocks([
     },
   },
   {
+    id: "projection_claim_site_pauli_prefix_product_kronecker_form",
+    kind: "claim",
+    title: { text: "先頭から並べたサイトの Pauli 行列の積のクロネッカー積表示" },
+    labels: ["site_pauli_prefix_product_kronecker_form"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r \in \{1,\dots,M_{\mathrm{col}}\}`),
+        "、",
+        math(String.raw`a_1,\dots,a_r \in \{x,y,z\}`),
+        " とし、",
+        ref("def_site_pauli_matrices"),
+        " の ",
+        math(String.raw`\sigma_k^a \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "、",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z,\ I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "、",
+        ref("def_kronecker"),
+        " のクロネッカー積 ",
+        math(String.raw`\boxtimes`),
+        " を用いる。積 ",
+        math(String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}`),
+        " は左から順に掛けたもの、すなわち ",
+        math(String.raw`P_1 := \sigma_1^{a_1}`),
+        "、",
+        math(String.raw`P_{s+1} := P_s\,\sigma_{s+1}^{a_{s+1}}`),
+        "（",
+        math(String.raw`1 \leq s < r`),
+        "）で定めた ",
+        math(String.raw`P_r`),
+        " とする。このとき",
+      ]),
+      displayMath(
+        String.raw`\sigma_1^{a_1}\sigma_2^{a_2}\cdots\sigma_r^{a_r}
+= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_r}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-r}`,
+      ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`r = M_{\mathrm{col}}`),
+        " のとき ",
+        math(String.raw`I`),
+        " の因子は無い）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`P_s = \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes I\boxtimes\cdots\boxtimes I`),
+        "（",
+        math(String.raw`I`),
+        " は ",
+        math(String.raw`M_{\mathrm{col}}-s`),
+        " 個）を ",
+        math(String.raw`s`),
+        " についての帰納法で示す。",
+        math(String.raw`s = r`),
+        " が主張である。",
+        math(String.raw`s = 1`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_1
+&= \sigma_1^{a_1}
+&&(\because\ P_1\ \text{の定義})\\
+&= \sigma^{a_1}\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \blkref{def_site_pauli_matrices}\ \text{の}\ k = 1)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`s < r`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+P_{s+1}
+&= P_s\,\sigma_{s+1}^{a_{s+1}}
+&&(\because\ P_{s+1}\ \text{の定義})\\
+&= \Bigl(\sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes\overbrace{I}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
+   \Bigl(I\boxtimes\cdots\boxtimes I\boxtimes\overbrace{\sigma^{a_{s+1}}}^{(s+1)\text{th}}\boxtimes I\boxtimes\cdots\boxtimes I\Bigr)
+&&(\because\ \text{帰納法の仮定と}\ \blkref{def_site_pauli_matrices}\ \text{の}\ k = s+1)\\
+&= (\sigma^{a_1}I)\boxtimes\cdots\boxtimes(\sigma^{a_s}I)\boxtimes(I\sigma^{a_{s+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{kronecker_product_rule}\ (1))\\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes(I\sigma^{a_{s+1}})\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を第}\ 1\ \text{から第}\ s\ \text{因子へ同時に適用})\\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_s}\boxtimes\sigma^{a_{s+1}}\boxtimes(II)\boxtimes\cdots\boxtimes(II)
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to \sigma^{a_{s+1}}))\\
+&= \sigma^{a_1}\boxtimes\cdots\boxtimes\sigma^{a_{s+1}}\boxtimes I\boxtimes\cdots\boxtimes I
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (A \to I)\ \text{を第}\ s+2\ \text{以降の因子へ同時に適用})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が ε・Z_m・Y_m のクロネッカー積表示を根拠なしで使っていたので、V1_in_Z_Y_epsilon の証明 Step 1 の帰納法を主張として切り出した。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_global_spin_flip_kronecker_form",
+    kind: "claim",
+    title: { text: "全スピン反転行列のクロネッカー積表示" },
+    labels: ["global_spin_flip_kronecker_form"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        "、",
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x`),
+        "、",
+        ref("def_kronecker"),
+        " のクロネッカー積を用いる。このとき",
+      ]),
+      displayMath(String.raw`\varepsilon = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\varepsilon
+&= \sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x
+&&(\because\ \blkref{def_global_spin_flip_matrix}\ \text{（積はサイト番号の昇順）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = \cdots = a_{M_{\mathrm{col}}} = x))
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明の準備として足した。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_commutes_with_site_sigma_x",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^x \text{ は可換}` },
+    labels: ["epsilon_commutes_with_site_sigma_x"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_site_pauli_matrices"),
+        " の ",
+        math(String.raw`\sigma_k^x`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon\,\sigma_k^{x} = \sigma_k^{x}\,\varepsilon`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        ref("global_spin_flip_kronecker_form"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`x_i := \sigma^x`),
+        "、",
+        ref("def_site_pauli_matrices"),
+        " より ",
+        math(String.raw`\sigma_k^{x}`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`y_k := \sigma^{x}`),
+        "、",
+        math(String.raw`y_i := I`),
+        "（",
+        math(String.raw`i \neq k`),
+        "）である。",
+        math(String.raw`i \neq k`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_ix_i
+&= I\sigma^x
+&&(\because\ x_i, y_i\ \text{の定義})\\
+&= \sigma^x
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sigma^xI
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= x_iy_i
+&&(\because\ x_i, y_i\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`y_kx_k = \sigma^x\sigma^x = x_ky_k`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,\sigma_k^x
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^{x}}^{k\text{th}}\boxtimes\cdots\boxtimes I)
+&&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と}\ \blkref{def_site_pauli_matrices})\\
+&= (I\boxtimes\cdots\boxtimes\overbrace{\sigma^{x}}^{k\text{th}}\boxtimes\cdots\boxtimes I)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \blkref{tensor_commutation_from_all_sites}\ (X \to \varepsilon,\ Y \to \sigma_k^x))\\
+&= \sigma_k^x\,\varepsilon
+&&(\because\ \blkref{def_site_pauli_matrices}\ \text{と}\ \blkref{global_spin_flip_kronecker_form})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 1 の三つの関係を、1 ブロック 1 主張で切り出した。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_anticommutes_with_site_sigma_z",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^z \text{ は反可換}` },
+    labels: ["epsilon_anticommutes_with_site_sigma_z"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_site_pauli_matrices"),
+        " の ",
+        math(String.raw`\sigma_k^z`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon\,\sigma_k^{z} = -\bigl(\sigma_k^{z}\,\varepsilon\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        ref("global_spin_flip_kronecker_form"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`x_i := \sigma^x`),
+        "、",
+        ref("def_site_pauli_matrices"),
+        " より ",
+        math(String.raw`\sigma_k^{z}`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`y_k := \sigma^{z}`),
+        "、",
+        math(String.raw`y_i := I`),
+        "（",
+        math(String.raw`i \neq k`),
+        "）である。",
+        math(String.raw`i \neq k`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_ix_i
+&= I\sigma^x
+&&(\because\ x_i, y_i\ \text{の定義})\\
+&= \sigma^x
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sigma^xI
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= x_iy_i
+&&(\because\ x_i, y_i\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`y_kx_k = \sigma^{z}\sigma^x = -(\sigma^x\sigma^{z}) = -(x_ky_k)`),
+        "（",
+        ref("pauli_matrix_products"),
+        "）である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,\sigma_k^{z} + \sigma_k^{z}\,\varepsilon
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^{z}}^{k\text{th}}\boxtimes\cdots\boxtimes I) + (I\boxtimes\cdots\boxtimes\overbrace{\sigma^{z}}^{k\text{th}}\boxtimes\cdots\boxtimes I)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と}\ \blkref{def_site_pauli_matrices})\\
+&= O
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to \sigma_k^{z},\ j \to k))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        " を ",
+        math(String.raw`X \to \varepsilon\,\sigma_k^{z}`),
+        "、",
+        math(String.raw`Y \to \sigma_k^{z}\,\varepsilon`),
+        " で引いて主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 1 の三つの関係を、1 ブロック 1 主張で切り出した。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_anticommutes_with_site_sigma_y",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ と } \sigma_k^y \text{ は反可換}` },
+    labels: ["epsilon_anticommutes_with_site_sigma_y"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_site_pauli_matrices"),
+        " の ",
+        math(String.raw`\sigma_k^y`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon\,\sigma_k^{y} = -\bigl(\sigma_k^{y}\,\varepsilon\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        ref("global_spin_flip_kronecker_form"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`x_i := \sigma^x`),
+        "、",
+        ref("def_site_pauli_matrices"),
+        " より ",
+        math(String.raw`\sigma_k^{y}`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`y_k := \sigma^{y}`),
+        "、",
+        math(String.raw`y_i := I`),
+        "（",
+        math(String.raw`i \neq k`),
+        "）である。",
+        math(String.raw`i \neq k`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_ix_i
+&= I\sigma^x
+&&(\because\ x_i, y_i\ \text{の定義})\\
+&= \sigma^x
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sigma^xI
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= x_iy_i
+&&(\because\ x_i, y_i\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`y_kx_k = \sigma^{y}\sigma^x = -(\sigma^x\sigma^{y}) = -(x_ky_k)`),
+        "（",
+        ref("pauli_matrix_products"),
+        "）である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,\sigma_k^{y} + \sigma_k^{y}\,\varepsilon
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)(I\boxtimes\cdots\boxtimes\overbrace{\sigma^{y}}^{k\text{th}}\boxtimes\cdots\boxtimes I) + (I\boxtimes\cdots\boxtimes\overbrace{\sigma^{y}}^{k\text{th}}\boxtimes\cdots\boxtimes I)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と}\ \blkref{def_site_pauli_matrices})\\
+&= O
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to \sigma_k^{y},\ j \to k))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        " を ",
+        math(String.raw`X \to \varepsilon\,\sigma_k^{y}`),
+        "、",
+        math(String.raw`Y \to \sigma_k^{y}\,\varepsilon`),
+        " で引いて主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 1 の三つの関係を、1 ブロック 1 主張で切り出した。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_anticommutes_with_jordan_wigner_Z",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ と } Z_m \text{ は反可換}` },
+    labels: ["epsilon_anticommutes_with_jordan_wigner_Z"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の ",
+        math(String.raw`Z_m`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon\,Z_m = -\bigl(Z_m\,\varepsilon\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Z_m
+&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{z}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{z}\text{）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = z))
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("global_spin_flip_kronecker_form"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`x_i := \sigma^x`),
+        "、上の表示より ",
+        math(String.raw`Z_m`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子 ",
+        math(String.raw`y_i`),
+        " は ",
+        math(String.raw`i < m`),
+        " で ",
+        math(String.raw`\sigma^x`),
+        "、",
+        math(String.raw`i = m`),
+        " で ",
+        math(String.raw`\sigma^{z}`),
+        "、",
+        math(String.raw`i > m`),
+        " で ",
+        math(String.raw`I`),
+        " である。",
+        math(String.raw`i < m`),
+        " では ",
+        math(String.raw`y_ix_i = \sigma^x\sigma^x = x_iy_i`),
+        "、",
+        math(String.raw`i > m`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_ix_i
+&= I\sigma^x
+&&(\because\ x_i, y_i\ \text{の定義})\\
+&= \sigma^x
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sigma^xI
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= x_iy_i
+&&(\because\ x_i, y_i\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`y_mx_m = \sigma^{z}\sigma^x = -(\sigma^x\sigma^{z}) = -(x_my_m)`),
+        "（",
+        ref("pauli_matrix_products"),
+        "）である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,Z_m + Z_m\,\varepsilon
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)\bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr) + \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{z}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と上の}\ Z_m\ \text{の表示})\\
+&= O
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to Z_m,\ j \to m))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        " を ",
+        math(String.raw`X \to \varepsilon\,Z_m`),
+        "、",
+        math(String.raw`Y \to Z_m\,\varepsilon`),
+        " で引いて主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 4 の εZ_m = -Z_mε を、1 ブロック 1 主張で切り出した（V1_restriction_to_eigenspaces の証明 Step 1 と同じ内容）。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_anticommutes_with_jordan_wigner_Y",
+    kind: "claim",
+    title: { tex: String.raw`\varepsilon \text{ と } Y_m \text{ は反可換}` },
+    labels: ["epsilon_anticommutes_with_jordan_wigner_Y"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_m`),
+        " について",
+      ]),
+      displayMath(String.raw`\varepsilon\,Y_m = -\bigl(Y_m\,\varepsilon\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Y_m
+&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^{y}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ \text{（}m = 1\ \text{では}\ \sigma_1^{y}\text{）。括弧は左から掛ける形に付け替える。}\blkref{mat_mult_associative})\\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1 = \cdots = a_{m-1} = x,\ a_m = y))
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("global_spin_flip_kronecker_form"),
+        " より ",
+        math(String.raw`\varepsilon`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子は ",
+        math(String.raw`x_i := \sigma^x`),
+        "、上の表示より ",
+        math(String.raw`Y_m`),
+        " の第 ",
+        math(String.raw`i`),
+        " 因子 ",
+        math(String.raw`y_i`),
+        " は ",
+        math(String.raw`i < m`),
+        " で ",
+        math(String.raw`\sigma^x`),
+        "、",
+        math(String.raw`i = m`),
+        " で ",
+        math(String.raw`\sigma^{y}`),
+        "、",
+        math(String.raw`i > m`),
+        " で ",
+        math(String.raw`I`),
+        " である。",
+        math(String.raw`i < m`),
+        " では ",
+        math(String.raw`y_ix_i = \sigma^x\sigma^x = x_iy_i`),
+        "、",
+        math(String.raw`i > m`),
+        " では",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+y_ix_i
+&= I\sigma^x
+&&(\because\ x_i, y_i\ \text{の定義})\\
+&= \sigma^x
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= \sigma^xI
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= x_iy_i
+&&(\because\ x_i, y_i\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`y_mx_m = \sigma^{y}\sigma^x = -(\sigma^x\sigma^{y}) = -(x_my_m)`),
+        "（",
+        ref("pauli_matrix_products"),
+        "）である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon\,Y_m + Y_m\,\varepsilon
+&= (\sigma^x\boxtimes\cdots\boxtimes\sigma^x)\bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr) + \bigl(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\overbrace{\sigma^{y}}^{m\text{th}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m}\bigr)(\sigma^x\boxtimes\cdots\boxtimes\sigma^x)
+&&(\because\ \blkref{global_spin_flip_kronecker_form}\ \text{と上の}\ Y_m\ \text{の表示})\\
+&= O
+&&(\because\ \blkref{tensor_anticommutation_from_single_site}\ (X \to \varepsilon,\ Y \to Y_m,\ j \to m))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        ref("matrix_equals_negation_if_sum_is_zero"),
+        " を ",
+        math(String.raw`X \to \varepsilon\,Y_m`),
+        "、",
+        math(String.raw`Y \to Y_m\,\varepsilon`),
+        " で引いて主張を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明 Step 4 の εY_m = -Y_mε を、1 ブロック 1 主張で切り出した（V1_restriction_to_eigenspaces の証明 Step 1 と同じ内容）。",
+      ],
+    },
+  },
+  {
     id: "transfer_matrix_000f_claim_global_spin_flip_jordan_wigner_representation",
     kind: "claim",
     origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 7 },
@@ -2675,274 +3305,407 @@ P^{(+)} f
     },
   },
   {
-    id: "bridge_010_claim_epsilon_commutes",
+    id: "projection_claim_epsilon_commutes_with_bond_sum",
     kind: "claim",
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
-    title: { tex: String.raw`\varepsilon \text{ は } V_1, V_2, V_1^{(+)}, \left(V_1^{(+)}\right)^{1/2} \text{ と可換}` },
-    labels: ["epsilon_commutes_with_transfer_matrices"],
+    title: { tex: String.raw`\varepsilon \text{ は } \textstyle\sum_m \sigma_m^z\sigma_{m+1}^z \text{ と可換}` },
+    labels: ["epsilon_commutes_with_bond_sum"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
         math(String.raw`\varepsilon`),
-        " は ",
-        ref("def_transfer_matrix"),
+        "、",
+        ref("def_site_pauli_matrices"),
         " の ",
-        math(String.raw`V_1, V_2`),
-        " および ",
-        ref("def_V1_plus"),
+        math(String.raw`\sigma_m^z`),
+        " と ",
+        ref("def_site_pauli_periodic_extension"),
         " の ",
-        math(String.raw`V_1^{(+)}`),
-        "、さらに ",
-        ref("def_V1_plus_square_root"),
-        " の ",
-        math(String.raw`(V_1^{(+)})^{1/2}`),
-        " と可換である。",
+        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z := \sigma_1^z`),
+        " を用いて",
+      ]),
+      displayMath(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+      paragraph([
+        "と置く（有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "）。このとき ",
+        math(String.raw`\varepsilon D = D\varepsilon`),
+        " が成り立つ。",
       ]),
     ],
     proof: [
       paragraph([
-        "Step 1（サイト演算子との関係）。",
-        ref("pauli_matrix_products"),
-        " より ",
-        math(String.raw`\sigma^x\sigma^x = I`),
-        "、",
-        math(String.raw`\sigma^z\sigma^x = -\sigma^x\sigma^z`),
-        "、",
-        math(String.raw`\sigma^y\sigma^x = -\sigma^x\sigma^y`),
-        "。相異なるサイトに置かれた因子どうしは可換（",
-        ref("kronecker_product_rule"),
-        " (1)）なので、",
-        math(String.raw`\varepsilon = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}}^x`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\,\sigma_k^x
-&= \sigma_k^x\,\varepsilon
-   \quad (\because \sigma^x\sigma^x=I\text{ と、相異なるサイトの因子の可換性}) \\
-\varepsilon\,\sigma_k^z
-&= -\,\sigma_k^z\,\varepsilon
-   \quad (\because \sigma^z\sigma^x=-\sigma^x\sigma^z\text{ と、相異なるサイトの因子の可換性}) \\
-\varepsilon\,\sigma_k^y
-&= -\,\sigma_k^y\,\varepsilon
-   \quad (\because \sigma^y\sigma^x=-\sigma^x\sigma^y\text{ と、相異なるサイトの因子の可換性})
-\qquad (k \in \{1,\dots,M_{\mathrm{col}}\})
-\end{aligned}`,
-      ),
-      paragraph([
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " を取る。",
+        ref("epsilon_anticommutes_with_site_sigma_z"),
+        " を ",
+        math(String.raw`k \to m`),
+        " で引いて ",
+        math(String.raw`\varepsilon\sigma_m^z = -(\sigma_m^z\varepsilon)`),
+        "。",
+        math(String.raw`m < M_{\mathrm{col}}`),
+        " なら同じ主張を ",
+        math(String.raw`k \to m+1`),
+        " で、",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        " なら ",
+        ref("def_site_pauli_periodic_extension"),
+        " の ",
+        math(String.raw`\sigma_{M_{\mathrm{col}}+1}^z = \sigma_1^z`),
+        " と ",
+        math(String.raw`k \to 1`),
+        " で引いて ",
+        math(String.raw`\varepsilon\sigma_{m+1}^z = -(\sigma_{m+1}^z\varepsilon)`),
+        "。よって ",
+        ref("product_of_anticommuting_matrices_commutes"),
         "（",
-        math(String.raw`\varepsilon`),
-        " のうち第 ",
-        math(String.raw`k`),
-        " 因子の ",
-        math(String.raw`\sigma^x`),
-        " だけが ",
-        math(String.raw`\sigma_k^a`),
-        " と非可換になりうる。）",
-      ]),
-      paragraph([
-        "Step 2（",
-        math(String.raw`V_2`),
-        " との可換性）。",
-        math(String.raw`R := K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x`),
-        " と置くと、次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon R
-&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\varepsilon\,\sigma_m^x
-   \quad (\because \text{スカラー倍との可換性と、行列積の有限和への分配}) \\
-&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\,\varepsilon
-   \quad (\because \text{Step 1 の }\varepsilon\sigma_k^x=\sigma_k^x\varepsilon\text{ を全項へ同時適用}) \\
-&= R\,\varepsilon
-   \quad (\because \text{行列積の有限和への分配とスカラー倍との可換性})
-\end{aligned}`,
-      ),
-      paragraph([
-        "可換なら冪とも可換（",
-        math(String.raw`\varepsilon R^p = R^p\varepsilon`),
-        " が ",
-        math(String.raw`p`),
-        " についての帰納法で従う）ので、",
-        ref("def_exp"),
-        " の部分和とも可換であり、",
-        ref("matrix_multiplication_continuity"),
-        " による極限との交換から次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\exp(R)
-&= \varepsilon\lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p}{p!}
-   \quad (\because \exp\text{ の定義}) \\
-&= \lim_{n\to\infty}\sum_{p=0}^{n}\frac{\varepsilon R^p}{p!}
-   \quad (\because \text{行列積の連続性と有限和への分配}) \\
-&= \lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p\varepsilon}{p!}
-   \quad (\because \varepsilon R^p=R^p\varepsilon) \\
-&= \left(\lim_{n\to\infty}\sum_{p=0}^{n}\frac{R^p}{p!}\right)\varepsilon
-   \quad (\because \text{有限和への分配と行列積の連続性}) \\
-&= \exp(R)\varepsilon
-   \quad (\because \exp\text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "スカラー ",
-        math(String.raw`(2\sinh 2K_2)^{M_{\mathrm{col}}/2}`),
-        " は ",
-        ref("scalar_identity_commutes"),
-        " より任意の行列と可換なので、次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon V_2
-&= \varepsilon\left((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(R)\right)
-   \quad (\because \blkref{second_transfer_matrix_pauli_form}\text{ と }R\text{ の定義}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\left(\varepsilon\exp(R)\right)
-   \quad (\because \text{スカラー倍との可換性}) \\
-&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\left(\exp(R)\,\varepsilon\right)
-   \quad (\because \text{上の }\varepsilon\exp(R)=\exp(R)\varepsilon) \\
-&= \left((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(R)\right)\varepsilon
-   \quad (\because \text{スカラー倍との可換性}) \\
-&= V_2\,\varepsilon
-   \quad (\because \blkref{second_transfer_matrix_pauli_form}\text{ と }R\text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 3（",
-        math(String.raw`V_1`),
-        " との可換性）。Step 1 より次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\,\sigma_m^z\sigma_{m+1}^z
-&= (-1)^2\,\sigma_m^z\sigma_{m+1}^z\,\varepsilon
-   \quad (\because \sigma^z\text{ が二個なので、Step 1 の反可換性を二回適用}) \\
-&= \sigma_m^z\sigma_{m+1}^z\,\varepsilon
-   \quad (\because (-1)^2=1)
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`D = \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
-        " と置くと、次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon D
-&= \sum_{m=1}^{M_{\mathrm{col}}}\varepsilon\,\sigma_m^z\sigma_{m+1}^z
-   \quad (\because \text{行列積の有限和への分配}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\,\varepsilon
-   \quad (\because \text{上の }\varepsilon\,\sigma_m^z\sigma_{m+1}^z=\sigma_m^z\sigma_{m+1}^z\,\varepsilon\text{ を全項へ同時適用}) \\
-&= D\,\varepsilon
-   \quad (\because \text{行列積の有限和への分配})
-\end{aligned}`,
-      ),
-      paragraph([
-        "よって Step 2 と同じ冪・有限和・極限の議論で ",
-        math(String.raw`\varepsilon\exp(K_1D)=\exp(K_1D)\varepsilon`),
+        math(String.raw`G \to \varepsilon,\ X \to \sigma_m^z,\ Y \to \sigma_{m+1}^z`),
+        "）より ",
+        math(String.raw`\varepsilon(\sigma_m^z\sigma_{m+1}^z) = (\sigma_m^z\sigma_{m+1}^z)\varepsilon`),
         " である。したがって",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon V_1
-&= \varepsilon\exp(K_1D)
-   \quad (\because \blkref{first_transfer_matrix_pauli_form}\text{ と }D\text{ の定義}) \\
-&= \exp(K_1D)\varepsilon
-   \quad (\because \varepsilon\text{ と }\exp(K_1D)\text{ の可換性}) \\
-&= V_1\varepsilon
-   \quad (\because \blkref{first_transfer_matrix_pauli_form}\text{ と }D\text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 4（",
-        math(String.raw`V_1^{(+)}`),
-        " との可換性）。",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^z`),
-        "、",
-        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
-        " について、Step 1 より ",
-        math(String.raw`\varepsilon`),
-        " は ",
-        math(String.raw`\sigma_j^x`),
-        " と可換、",
-        math(String.raw`\sigma_m^z`),
-        "・",
-        math(String.raw`\sigma_m^y`),
-        " とは反可換なので",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon Z_m
-&= -\,Z_m\,\varepsilon
-   \quad (\because \sigma_j^x\text{ との可換性と }\sigma_m^z\text{ との反可換性}) \\
-\varepsilon Y_m
-&= -\,Y_m\,\varepsilon
-   \quad (\because \sigma_j^x\text{ との可換性と }\sigma_m^y\text{ との反可換性})
-\end{aligned}`,
-      ),
-      paragraph([
-        "よって次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\,(Y_mZ_{m'})
-&= (-1)^2 (Y_mZ_{m'})\,\varepsilon
-   \quad (\because \varepsilon\text{ と }Y_m,Z_{m'}\text{ の反可換性を一回ずつ適用}) \\
-&= (Y_mZ_{m'})\,\varepsilon
-   \quad (\because (-1)^2=1)
-\end{aligned}`,
-      ),
-      paragraph([
-        ref("def_H1_plus"),
-        " の ",
-      ]),
-      displayMath(
-        String.raw`H_1^{(+)} = \sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1`,
-      ),
-      paragraph([
-        "は各項が ",
-        math(String.raw`Y\cdot Z`),
-        " の形なので、次の鎖を得る。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon H_1^{(+)}
-&= \varepsilon\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because \blkref{def_H1_plus}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\varepsilon\,(Y_mZ_{m+1}) - \varepsilon\,(Y_{M_{\mathrm{col}}}Z_1)
-   \quad (\because \text{行列積の有限和への分配}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}(Y_mZ_{m+1})\,\varepsilon - (Y_{M_{\mathrm{col}}}Z_1)\,\varepsilon
-   \quad (\because \text{上の }\varepsilon\,(Y_mZ_{m'})=(Y_mZ_{m'})\,\varepsilon\text{ を全項へ同時適用}) \\
-&= \left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)\varepsilon
-   \quad (\because \text{行列積の有限和への分配}) \\
-&= H_1^{(+)}\,\varepsilon
-   \quad (\because \blkref{def_H1_plus})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 2 と同じ議論で ",
-        math(String.raw`\varepsilon`),
-        " は ",
-        math(String.raw`\exp(iK_1H_1^{(+)})`),
-        " とも ",
-        math(String.raw`\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)`),
-        " とも可換である。",
-        ref("V1_plus_exponential_representation"),
-        " より前者は ",
-        math(String.raw`V_1^{(+)}`),
-        "、",
-        ref("def_V1_plus_square_root"),
-        " より後者は ",
-        math(String.raw`(V_1^{(+)})^{1/2}`),
-        " である。",
-      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon D
+&= \varepsilon\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)
+&&(\because\ D\ \text{の定義})\\
+&= \Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z\Bigr)\varepsilon
+&&(\because\ \blkref{commuting_with_finite_sum}\ (G \to \varepsilon,\ X_m \to \sigma_m^z\sigma_{m+1}^z,\ r \to M_{\mathrm{col}}))\\
+&= D\varepsilon
+&&(\because\ D\ \text{の定義})
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
-        "式変形の書き方の統一（2026-08-14）: Step 2 末尾の散文に埋まっていたスカラー因子の付加（εV₂=V₂ε の導出）を、一行一等号と行末根拠の鎖へ開いた。等式・根拠の内容は変えていない。",
-        "2026-09-01 の構成レビューで、後続の未ラベル定義にある H_1^{(\pm)} を先取りしていた箇所を、証明内の局所記号 G^{(\pm)} へ置き換えた。平方根の定義と射影の可換性は独立ブロックへ分けた。",
-        "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。V_1, V_2 の参照先を <def_transfer_matrix> にし、パウリ行列表示を使う行の根拠を <first_transfer_matrix_pauli_form>・<second_transfer_matrix_pauli_form> にした。",
-        "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 3 の前半（ε と D の可換性）。熱力学極限の章の epsilon_commutes_with_W が引く。",
+      ],
+    },
+  },
+  {
+    id: "bridge_010_claim_epsilon_commutes_with_V1",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon \text{ は } V_1 \text{ と可換}` },
+    labels: ["epsilon_commutes_with_V1"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`V_1`),
+        "（結合定数 ",
+        math(String.raw`K_1 \in \mathbb{R}_{>0}`),
+        "）について ",
+        math(String.raw`\varepsilon V_1 = V_1\varepsilon`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
+        "、",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記とする。",
+        ref("epsilon_commutes_with_bond_sum"),
+        " より ",
+        math(String.raw`\varepsilon D = D\varepsilon`),
+        "、これと ",
+        ref("commuting_with_scalar_multiple"),
+        "（",
+        math(String.raw`G \to \varepsilon,\ c \to (K_1)_{\mathbb{C}},\ X \to D`),
+        "）より ",
+        math(String.raw`\varepsilon\bigl((K_1)_{\mathbb{C}}D\bigr) = \bigl((K_1)_{\mathbb{C}}D\bigr)\varepsilon`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon V_1
+&= \varepsilon\exp\bigl((K_1)_{\mathbb{C}}D\bigr)
+&&(\because\ \blkref{first_transfer_matrix_pauli_form})\\
+&= \exp\bigl((K_1)_{\mathbb{C}}D\bigr)\varepsilon
+&&(\because\ \blkref{commuting_matrix_commutes_with_exp}\ (A \to \varepsilon,\ B \to (K_1)_{\mathbb{C}}D))\\
+&= V_1\varepsilon
+&&(\because\ \blkref{first_transfer_matrix_pauli_form})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 3。冪・部分和・極限の散文を commuting_matrix_commutes_with_exp の引用にした。",
+      ],
+    },
+  },
+  {
+    id: "bridge_010_claim_epsilon_commutes_with_V2",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon \text{ は } V_2 \text{ と可換}` },
+    labels: ["epsilon_commutes_with_V2"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_transfer_matrix"),
+        " の ",
+        math(String.raw`V_2`),
+        "（結合定数 ",
+        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
+        "）について ",
+        math(String.raw`\varepsilon V_2 = V_2\varepsilon`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("def_second_dual_coupling_constant"),
+        " の ",
+        math(String.raw`K_2^* \in \mathbb{R}_{>0}`),
+        " について ",
+        math(String.raw`R := (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x`),
+        "、",
+        math(String.raw`\lambda := \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("def_second_transfer_matrix_prefactor"),
+        " の前係数。",
+        math(String.raw`\sinh`),
+        "・平方根は実数の値をとるので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " を使う）",
+        " と置く（",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
+        ref("epsilon_commutes_with_site_sigma_x"),
+        " より各 ",
+        math(String.raw`m`),
+        " について ",
+        math(String.raw`\varepsilon\sigma_m^x = \sigma_m^x\varepsilon`),
+        "、",
+        ref("commuting_with_finite_sum"),
+        "（",
+        math(String.raw`G \to \varepsilon,\ X_m \to \sigma_m^x,\ r \to M_{\mathrm{col}}`),
+        "）より ",
+        math(String.raw`\varepsilon\sum_m\sigma_m^x = \bigl(\sum_m\sigma_m^x\bigr)\varepsilon`),
+        "、",
+        ref("commuting_with_scalar_multiple"),
+        "（",
+        math(String.raw`c \to (K_2^*)_{\mathbb{C}}`),
+        "）より ",
+        math(String.raw`\varepsilon R = R\varepsilon`),
+        "、",
+        ref("commuting_matrix_commutes_with_exp"),
+        "（",
+        math(String.raw`A \to \varepsilon,\ B \to R`),
+        "）より ",
+        math(String.raw`\varepsilon\exp(R) = \exp(R)\varepsilon`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon V_2
+&= \varepsilon\bigl(\lambda\exp(R)\bigr)
+&&(\because\ \blkref{second_transfer_matrix_pauli_form}\ \text{と}\ R, \lambda\ \text{の定義})\\
+&= \bigl(\lambda\exp(R)\bigr)\varepsilon
+&&(\because\ \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ c \to \lambda,\ X \to \exp(R)))\\
+&= V_2\varepsilon
+&&(\because\ \blkref{second_transfer_matrix_pauli_form}\ \text{と}\ R, \lambda\ \text{の定義})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 2。",
+      ],
+    },
+  },
+  {
+    id: "projection_claim_epsilon_commutes_with_H1_plus",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon \text{ は } H_1^{(+)} \text{ と可換}` },
+    labels: ["epsilon_commutes_with_H1_plus"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_H1_plus"),
+        " の ",
+        math(String.raw`H_1^{(+)}`),
+        " について ",
+        math(String.raw`\varepsilon H_1^{(+)} = H_1^{(+)}\varepsilon`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a, b \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について、",
+        ref("epsilon_anticommutes_with_jordan_wigner_Y"),
+        " より ",
+        math(String.raw`\varepsilon Y_a = -(Y_a\varepsilon)`),
+        "、",
+        ref("epsilon_anticommutes_with_jordan_wigner_Z"),
+        " より ",
+        math(String.raw`\varepsilon Z_b = -(Z_b\varepsilon)`),
+        " だから、",
+        ref("product_of_anticommuting_matrices_commutes"),
+        "（",
+        math(String.raw`G \to \varepsilon,\ X \to Y_a,\ Y \to Z_b`),
+        "）より ",
+        math(String.raw`\varepsilon(Y_aZ_b) = (Y_aZ_b)\varepsilon`),
+        " である。",
+        math(String.raw`M_{\mathrm{col}} - 1 \geq 1`),
+        " なので ",
+        ref("commuting_with_finite_sum"),
+        "（",
+        math(String.raw`X_m \to Y_mZ_{m+1},\ r \to M_{\mathrm{col}}-1`),
+        "）より ",
+        math(String.raw`\varepsilon\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} = \bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1}\bigr)\varepsilon`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon H_1^{(+)}
+&= \varepsilon\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\Bigr)
+&&(\because\ \blkref{def_H1_plus})\\
+&= \Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\Bigr)\varepsilon
+&&(\because\ \blkref{commuting_with_difference}\ (G \to \varepsilon,\ X \to \textstyle\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1},\ W \to Y_{M_{\mathrm{col}}}Z_1))\\
+&= H_1^{(+)}\varepsilon
+&&(\because\ \blkref{def_H1_plus})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 4 の前半。",
+      ],
+    },
+  },
+  {
+    id: "bridge_010_claim_epsilon_commutes_with_V1_plus",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon \text{ は } V_1^{(+)} \text{ と可換}` },
+    labels: ["epsilon_commutes_with_V1_plus"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_V1_plus"),
+        " の ",
+        math(String.raw`V_1^{(+)}`),
+        " について ",
+        math(String.raw`\varepsilon V_1^{(+)} = V_1^{(+)}\varepsilon`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c := i\,(K_1)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）と置く。",
+        ref("epsilon_commutes_with_H1_plus"),
+        " と ",
+        ref("commuting_with_scalar_multiple"),
+        "（",
+        math(String.raw`G \to \varepsilon,\ X \to H_1^{(+)}`),
+        "）より ",
+        math(String.raw`\varepsilon\bigl(cH_1^{(+)}\bigr) = \bigl(cH_1^{(+)}\bigr)\varepsilon`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon V_1^{(+)}
+&= \varepsilon\exp\bigl(cH_1^{(+)}\bigr)
+&&(\because\ \blkref{V1_plus_exponential_representation})\\
+&= \exp\bigl(cH_1^{(+)}\bigr)\varepsilon
+&&(\because\ \blkref{commuting_matrix_commutes_with_exp}\ (A \to \varepsilon,\ B \to cH_1^{(+)}))\\
+&= V_1^{(+)}\varepsilon
+&&(\because\ \blkref{V1_plus_exponential_representation})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 4 の後半（V_1^{(+)}）。",
+      ],
+    },
+  },
+  {
+    id: "bridge_010_claim_epsilon_commutes_with_V1_plus_square_root",
+    kind: "claim",
+    origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 12 },
+    title: { tex: String.raw`\varepsilon \text{ は } \left(V_1^{(+)}\right)^{1/2} \text{ と可換}` },
+    labels: ["epsilon_commutes_with_V1_plus_square_root"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " とし、",
+        ref("def_global_spin_flip_matrix"),
+        " の ",
+        math(String.raw`\varepsilon`),
+        " と ",
+        ref("def_V1_plus_square_root"),
+        " の ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
+        " について ",
+        math(String.raw`\varepsilon \left(V_1^{(+)}\right)^{1/2} = \left(V_1^{(+)}\right)^{1/2}\varepsilon`),
+        " が成り立つ。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c := \tfrac{i}{2}\,(K_1)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）と置く。",
+        ref("epsilon_commutes_with_H1_plus"),
+        " と ",
+        ref("commuting_with_scalar_multiple"),
+        "（",
+        math(String.raw`G \to \varepsilon,\ X \to H_1^{(+)}`),
+        "）より ",
+        math(String.raw`\varepsilon\bigl(cH_1^{(+)}\bigr) = \bigl(cH_1^{(+)}\bigr)\varepsilon`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\varepsilon \left(V_1^{(+)}\right)^{1/2}
+&= \varepsilon\exp\bigl(cH_1^{(+)}\bigr)
+&&(\because\ \blkref{def_V1_plus_square_root})\\
+&= \exp\bigl(cH_1^{(+)}\bigr)\varepsilon
+&&(\because\ \blkref{commuting_matrix_commutes_with_exp}\ (A \to \varepsilon,\ B \to cH_1^{(+)}))\\
+&= \left(V_1^{(+)}\right)^{1/2}\varepsilon
+&&(\because\ \blkref{def_V1_plus_square_root})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 旧 epsilon_commutes_with_transfer_matrices（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換）を 1 ブロック 1 主張に分けた。旧 Step 4 の後半（平方根）。",
       ],
     },
   },
@@ -2958,10 +3721,14 @@ P^{(+)} f
         " の ",
         math(String.raw`P^{(+)}`),
         " は ",
-        ref("epsilon_commutes_with_transfer_matrices"),
-        " の ",
         math(String.raw`V_1,V_2,V_1^{(+)},(V_1^{(+)})^{1/2}`),
-        " のすべてと可換である。",
+        "（",
+        ref("def_transfer_matrix"),
+        "・",
+        ref("def_V1_plus"),
+        "・",
+        ref("def_V1_plus_square_root"),
+        "）のすべてと可換である。",
       ]),
     ],
     proof: [
@@ -2970,7 +3737,13 @@ P^{(+)} f
         " を ",
         math(String.raw`\varepsilon X = X\varepsilon`),
         " を満たす行列とする（",
-        ref("epsilon_commutes_with_transfer_matrices"),
+        ref("epsilon_commutes_with_V1"),
+        "・",
+        ref("epsilon_commutes_with_V2"),
+        "・",
+        ref("epsilon_commutes_with_V1_plus"),
+        "・",
+        ref("epsilon_commutes_with_V1_plus_square_root"),
         " より ",
         math(String.raw`V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}`),
         " がこれにあたる）。次の鎖を得る。",

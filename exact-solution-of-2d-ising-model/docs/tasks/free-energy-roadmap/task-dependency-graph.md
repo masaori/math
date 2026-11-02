@@ -100,7 +100,7 @@ $V$ は $V_1^{(\pm)}$ を使って定義されており、$V_1^{(\pm)}$ は $\ma
 |---|---|---|---|
 | B2-1 | `P^{(±)} := (I ± ε)/2` の定義 | `def_epsilon_projectors` | 完了 |
 | B2-2 | `P^{(±)}` の性質と `im P^{(±)} = F^{(±)}` | `epsilon_projector_properties` | 完了 |
-| B2-3 | `ε` が `V_1, V_2, V_1^{(±)}, (V_1^{(±)})^{1/2}` と可換 | `epsilon_commutes_with_transfer_matrices` | 完了 |
+| B2-3 | `ε` が `V_1, V_2, V_1^{(±)}, (V_1^{(±)})^{1/2}` と可換 | `epsilon_commutes_with_V1`・`epsilon_commutes_with_V2`・`epsilon_commutes_with_V1_plus`・`epsilon_commutes_with_V1_plus_square_root` | 完了 |
 | B2-4 | `V_1 P^{(±)} = V_1^{(±)} P^{(±)}` とその冪 | `sector_replacement_of_V1` / `sector_replacement_pow` | 完了 |
 | B2-5 | `Z` の偶奇セクター分解（4 項展開も） | `partition_function_sector_decomposition` | 完了 |
 
@@ -367,7 +367,7 @@ C′-15 で最大固有値の一意性を言うときに、整数運動量側で
 
 | ラベル | 内容 |
 |---|---|
-| `epsilon_anticommutes_with_check_Z_Y` | `ε` は `Z_j, Y_j` と反可換（010 章 `epsilon_commutes_with_transfer_matrices` の Step 1 から直ちに従う）⟹ `Ž_μ, Y̌_μ, ψ̌_μ^†, ψ̌_μ` とも反可換 ⟹ **`ň_μ, Q̌_ε` とは可換** |
+| `epsilon_anticommutes_with_check_Z_Y` | `ε` は `Z_j, Y_j` と反可換（010 章 `epsilon_anticommutes_with_jordan_wigner_Z`・`epsilon_anticommutes_with_jordan_wigner_Y` から直ちに従う）⟹ `Ž_μ, Y̌_μ, ψ̌_μ^†, ψ̌_μ` とも反可換 ⟹ **`ň_μ, Q̌_ε` とは可換** |
 | `epsilon_eigenvalue_on_check_Q` | `im Q̌_ε` は 1 次元なので `εQ̌_ε = η_ε Q̌_ε`（`η_ε = ±1`）。`ψ̌_μ^†` は `ε_μ` を `0→1` に動かし（`ψ̌_μ^†q ≠ 0` は `ψ̌_{M+1−μ}ψ̌_μ^† = I − ň_μ` から）、かつ `ε` と反可換なので**符号が反転**。よって `η_ε = η_{(1,…,1)}(−1)^{M−|ε|}` で、**未知の符号は `η_{(1,…,1)}` ひとつだけ**。あわせて `ε = η_{(1,…,1)}(−1)^M Π_μ(I − 2ň_μ)` |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` | `tr(εV^{(+)}) = η_{(1,…,1)}(2 sinh 2K_2)^{M/2} Π_μ 2 sinh(γ(θ~_μ)/2)`。`γ(θ~_μ) > 0`（半整数運動量に固有）より `η` 以外は正なので、**`η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0`** |
 | `H1_plus_in_sigma_z_form` | `iY_mZ_{m+1} = σ^z_mσ^z_{m+1}`（`m ≤ M−1`）、`−iY_MZ_1 = εσ^z_Mσ^z_1`、ゆえに **`iH_1^{(+)} = D_0 + εG`**（`D_0 = Σ_{m<M}σ^z_mσ^z_{m+1}`、`G = σ^z_Mσ^z_1`）。`(εG)² = I` と可換性も |

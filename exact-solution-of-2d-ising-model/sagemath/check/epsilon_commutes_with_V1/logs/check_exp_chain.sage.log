@@ -1,0 +1,4 @@
+  M_col=1: K_1 = 1/4, 1/2, 1 で ε exp(K_1 D) と exp(K_1 D)ε のボールが重なる
+  M_col=2: K_1 = 1/4, 1/2, 1 で ε exp(K_1 D) と exp(K_1 D)ε のボールが重なる
+  M_col=3: K_1 = 1/4, 1/2, 1 で ε exp(K_1 D) と exp(K_1 D)ε のボールが重なる
+RESULT: PASS

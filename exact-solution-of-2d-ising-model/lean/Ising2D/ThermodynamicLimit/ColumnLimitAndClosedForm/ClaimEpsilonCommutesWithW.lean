@@ -8,7 +8,7 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
-| `ε` は `V_1^{1/2} = exp(½K_1D)` と可換（`epsilon_commutes_with_transfer_matrices` の Step 3 と同じ議論） | `Ising2D.epsilon_commute_V1PauliForm`（結合定数 `K_1/2`） |
+| `ε` は `V_1^{1/2} = exp(½K_1D)` と可換（`epsilon_commutes_with_bond_sum`・`commuting_with_scalar_multiple`・`commuting_matrix_commutes_with_exp`） | `Ising2D.epsilon_commute_V1PauliForm`（結合定数 `K_1/2`） |
 | `ε` は `V_2` と可換（同 Step 2） | `Ising2D.epsilon_commute_V2` |
 | `εW = εBV_2B = BεV_2B = BV_2εB = BV_2Bε = Wε` | `epsilon_commute_physicalSymTransferC` |
 | `ε(Wf) = (εW)f = (Wε)f = W(εf) = Wf` | `epsilonR_mulVec_physicalSymTransferR_of_mem` |
@@ -20,7 +20,7 @@
 （`epsilon_commutes_with_W`）。この最後の段は人手に無い（人手は `ℝ ⊂ ℂ` の包含を明示せずに使う）。
 
 必要十分版は置かない。可換性の鎖は結合律だけで、置き換えた構造は章 010 の
-`epsilon_commutes_with_transfer_matrices`（Pauli 行列の具体的な反交換関係）が担う。
+`epsilon_anticommutes_with_site_sigma_z`・`epsilon_commutes_with_bond_sum`（Pauli 行列の具体的な反交換関係）が担う。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.PhysicalSymTransferBridge
 import Ising2D.ThermodynamicLimit.ColumnLimitAndClosedForm.ClaimEpsilonIsRealSymmetric

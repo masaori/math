@@ -3,7 +3,7 @@
 #   epsilon_projector_properties:
 #     (1) (P^{(+)})^2 = P^{(+)}
 #     (2) im P^{(+)} = F^{(+)}   （⊆: eps P^{(+)} = P^{(+)}、⊇: eps f = f なら P^{(+)} f = f）
-#   epsilon_commutes_with_transfer_matrices:
+#   epsilon_commutes_with_V1 / _V2 / _V1_plus / _V1_plus_square_root（旧 epsilon_commutes_with_transfer_matrices）:
 #     [eps, V_1] = [eps, V_2] = [eps, V_1^{(+)}] = [eps, (V_1^{(+)})^{1/2}] = 0
 #   epsilon_projectors_commute_with_transfer_matrices:
 #     [P^{(+)}, V_1] = [P^{(+)}, V_2] = [P^{(+)}, V_1^{(+)}] = [P^{(+)}, (V_1^{(+)})^{1/2}] = 0

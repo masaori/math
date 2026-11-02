@@ -351,4 +351,58 @@ YX
       ],
     },
   },
+  {
+    id: "Z_Y_anticommutation_claim_tensor_commutation_from_all_sites",
+    kind: "claim",
+    title: { text: "全ての因子で可換ならクロネッカー積は可換" },
+    labels: ["tensor_commutation_from_all_sites"],
+    statement: [
+      paragraph([
+        math(String.raw`M \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`x_1,\dots,x_M,\ y_1,\dots,y_M \in \mathrm{Mat}(2,\mathbb{C})`),
+        " に対して",
+      ]),
+      displayMath(
+        String.raw`X := x_1\boxtimes\cdots\boxtimes x_M,\qquad
+Y := y_1\boxtimes\cdots\boxtimes y_M \ \in \mathrm{Mat}(2^M,\mathbb{C})`,
+      ),
+      paragraph([
+        "とおく（",
+        math(String.raw`\boxtimes`),
+        " は ",
+        ref("def_kronecker"),
+        " のクロネッカー積）。すべての ",
+        math(String.raw`i \in \{1,\dots,M\}`),
+        " について ",
+        math(String.raw`y_ix_i = x_iy_i`),
+        " ならば、",
+      ]),
+      displayMath(String.raw`XY = YX`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+XY
+&= (x_1\boxtimes\cdots\boxtimes x_M)(y_1\boxtimes\cdots\boxtimes y_M)
+&&(\because\ X, Y \text{ の定義}) \\
+&= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
+&&(\because\ \blkref{kronecker_product_rule}\ (1)) \\
+&= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
+&&(\because\ \text{仮定}\ x_iy_i = y_ix_i\ \text{を全ての}\ i\ \text{へ同時に適用}) \\
+&= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M)
+&&(\because\ \blkref{kronecker_product_rule}\ (1)) \\
+&= YX
+&&(\because\ X, Y \text{ の定義})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。tensor_anticommutation_from_single_site の可換の側として、ε と σ_k^x の可換性を引けるよう足した。",
+      ],
+    },
+  },
 ]);

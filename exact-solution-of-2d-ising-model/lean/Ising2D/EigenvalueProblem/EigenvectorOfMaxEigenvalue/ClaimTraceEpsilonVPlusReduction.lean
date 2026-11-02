@@ -15,7 +15,7 @@
 
 `B := (V_1^{(+)})^{1/2}` は `V1plusHalf M K_1`、`V^{(+)} = BV_2B` は `VPlusOfTransfer M K_1 K_2`
 （`def_V_plus`）、`BB = V_1^{(+)}` は `V1_plus_square_root_property`、`εB = Bε`・`εV_1^{(+)} = V_1^{(+)}ε` は
-`epsilon_commute_V1plusHalf`・`epsilon_commute_V1plus`（`epsilon_commutes_with_transfer_matrices`）、
+`epsilon_commute_V1plusHalf`・`epsilon_commute_V1plus`（`epsilon_commutes_with_V1_plus_square_root`・`epsilon_commutes_with_V1_plus`）、
 トレースの巡回性は `trace_cyclic`（`trace_basic_properties` (2)）である。
 人手 Step 1 は `V_2` との可換性を挙げるが、式変形の各行が使うのは `B` と `V_1^{(+)}` との可換性だけなので、
 Lean の主張は `K_2 > 0` を仮定しない。

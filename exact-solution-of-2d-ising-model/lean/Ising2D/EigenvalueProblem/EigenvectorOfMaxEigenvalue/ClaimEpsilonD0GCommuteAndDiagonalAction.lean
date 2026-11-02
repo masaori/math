@@ -17,7 +17,7 @@
 | 同 `D_0f_{ι(s)} = (∑_{m=1}^{M_col-1}s(m)s(m+1))f_{ι(s)}` | `openChainD0_mulVec_basisVec` |
 | 同 `Gf_{ι(s)} = s(M_col)s(1)f_{ι(s)}` | `boundaryG_mulVec_basisVec` |
 
-人手の `ε σ^z_k = -σ^z_k ε`（`epsilon_commutes_with_transfer_matrices` の Step 1）は
+人手の `ε σ^z_k = -σ^z_k ε`（`epsilon_anticommutes_with_site_sigma_z`）は
 `epsilon_anticomm_sigmaZ`、`σ^z_m f_{ι(s)} = s(m) f_{ι(s)}`（`sigma_z_diagonal_action`）は
 `sigmaZ_mulVec_basisVec_spin`、`ε^2 = I` は `epsilon_sq` である。
 「相異なるサイトの因子は可換」（`kronecker_product_rule` (1)）は `siteProd_mul` でサイトごとの積に直して、

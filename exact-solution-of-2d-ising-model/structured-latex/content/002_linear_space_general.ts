@@ -1820,6 +1820,275 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_matrix_equals_negation_if_sum_is_zero",
+    kind: "claim",
+    title: { text: "和が零行列なら一方は他方の符号反転" },
+    labels: ["matrix_equals_negation_if_sum_is_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X, Y \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " が ",
+        math(String.raw`X + Y = O`),
+        " を満たすとする。和は ",
+        ref("def_matrix_sum"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        "、",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`X = -Y`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+X - (-Y)
+&= X + \bigl(-(-Y)\bigr)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (A \to X,\ B \to -Y)\bigr)\\
+&= X + Y
+&&(\because\ \blkref{matrix_double_negation})\\
+&= O
+&&(\because\ \text{仮定}\ X + Y = O)
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        ref("matrix_difference_zero_iff_equal"),
+        " を ",
+        math(String.raw`A \to X`),
+        "、",
+        math(String.raw`B \to -Y`),
+        " で引いて ",
+        math(String.raw`X = -Y`),
+        " を得る。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。tensor_anticommutation_from_single_site の結論 XY + YX = O から XY = -(YX) を引くために足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_product_of_anticommuting_matrices_commutes",
+    kind: "claim",
+    title: { text: "反可換な二つの行列の積は可換" },
+    labels: ["product_of_anticommuting_matrices_commutes"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`G, X, Y \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`GX = -(XG)`),
+        " と ",
+        math(String.raw`GY = -(YG)`),
+        " を満たすとする。積は ",
+        ref("mat_mult"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`G(XY) = (XY)G`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+G(XY)
+&= (GX)Y
+&&(\because\ \blkref{mat_mult_associative})\\
+&= \bigl(-(XG)\bigr)Y
+&&(\because\ \text{仮定}\ GX = -(XG))\\
+&= -\bigl((XG)Y\bigr)
+&&(\because\ \blkref{negation_factors_out_of_left_factor})\\
+&= -\bigl(X(GY)\bigr)
+&&(\because\ \blkref{mat_mult_associative})\\
+&= -\Bigl(X\bigl(-(YG)\bigr)\Bigr)
+&&(\because\ \text{仮定}\ GY = -(YG))\\
+&= -\Bigl(-\bigl(X(YG)\bigr)\Bigr)
+&&(\because\ \blkref{negation_factors_out_of_right_factor})\\
+&= X(YG)
+&&(\because\ \blkref{matrix_double_negation})\\
+&= (XY)G
+&&(\because\ \blkref{mat_mult_associative})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と σ_m^zσ_{m+1}^z、ε と Y_mZ_{m'} の可換性を「反可換性を二回使う」の散文で済ませていたので、一つの主張として切り出した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_commuting_with_scalar_multiple",
+    kind: "claim",
+    title: { text: "可換な行列のスカラー倍とも可換" },
+    labels: ["commuting_with_scalar_multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`G, X \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`GX = XG`),
+        " を満たすとする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`G(cX) = (cX)G`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+G(cX)
+&= c(GX)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= c(XG)
+&&(\because\ \text{仮定}\ GX = XG)\\
+&= (cX)G
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が「スカラー倍との可換性」を根拠なしで使っていたので足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_commuting_with_finite_sum",
+    kind: "claim",
+    title: { text: "可換な行列の有限和とも可換" },
+    labels: ["commuting_with_finite_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`G, X_1, \dots, X_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が、すべての ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`GX_j = X_jG`),
+        " を満たすとする。有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`G\Bigl(\sum_{j=1}^{r} X_j\Bigr) = \Bigl(\sum_{j=1}^{r} X_j\Bigr)G`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r = 1`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+G\Bigl(\sum_{j=1}^{1} X_j\Bigr)
+&= GX_1
+&&(\because\ \blkref{def_finite_sum_of_matrices})\\
+&= X_1G
+&&(\because\ \text{仮定}\ GX_1 = X_1G)\\
+&= \Bigl(\sum_{j=1}^{1} X_j\Bigr)G
+&&(\because\ \blkref{def_finite_sum_of_matrices})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で成り立つとし、",
+        math(String.raw`X_1,\dots,X_{r+1}`),
+        " がすべて ",
+        math(String.raw`G`),
+        " と可換とする。",
+        math(String.raw`X_1,\dots,X_r`),
+        " に帰納法の仮定を当てて",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+G\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
+&= G\Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)
+&&(\because\ \blkref{def_finite_sum_of_matrices})\\
+&= G\Bigl(\sum_{j=1}^{r} X_j\Bigr) + GX_{r+1}
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)G + GX_{r+1}
+&&(\because\ \text{帰納法の仮定})\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)G + X_{r+1}G
+&&(\because\ \text{仮定}\ GX_{r+1} = X_{r+1}G)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)G
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor})\\
+&= \Bigl(\sum_{j=1}^{r+1} X_j\Bigr)G
+&&(\because\ \blkref{def_finite_sum_of_matrices})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が「行列積の有限和への分配」で済ませていた段を、有限和の定義による帰納法として足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_commuting_with_difference",
+    kind: "claim",
+    title: { text: "可換な二つの行列の差とも可換" },
+    labels: ["commuting_with_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`G, X, W \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`GX = XG`),
+        " と ",
+        math(String.raw`GW = WG`),
+        " を満たすとする。差は ",
+        ref("def_matrix_difference"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`G(X - W) = (X - W)G`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+G(X - W)
+&= G\bigl(X + (-W)\bigr)
+&&(\because\ \blkref{matrix_difference_is_sum_with_negation})\\
+&= GX + G(-W)
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&= XG + G(-W)
+&&(\because\ \text{仮定}\ GX = XG)\\
+&= XG + \bigl(-(GW)\bigr)
+&&(\because\ \blkref{negation_factors_out_of_right_factor})\\
+&= XG + \bigl(-(WG)\bigr)
+&&(\because\ \text{仮定}\ GW = WG)\\
+&= XG + (-W)G
+&&(\because\ \blkref{negation_factors_out_of_left_factor})\\
+&= \bigl(X + (-W)\bigr)G
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor})\\
+&= (X - W)G
+&&(\because\ \blkref{matrix_difference_is_sum_with_negation})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。H_1^{(+)} = Σ Y_mZ_{m+1} - Y_{M_col}Z_1 の差の項と ε の可換性を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_000_definition_kronecker_product",
     kind: "definition",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

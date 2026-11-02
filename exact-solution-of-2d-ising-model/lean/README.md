@@ -477,7 +477,7 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 
 人手が `V_2` と書く対象は Lean でも `Ising2D.V2` を使い、人手が主張を引く位置で書き換える。
 
-* 010 章（`epsilon_commutes_with_transfer_matrices`, `epsilon_projectors_commute_with_transfer_matrices`,
+* 010 章（`epsilon_commutes_with_V1`・`epsilon_commutes_with_V2`・`epsilon_commutes_with_V1_plus`・`epsilon_commutes_with_V1_plus_square_root`, `epsilon_projectors_commute_with_transfer_matrices`,
   `def_V_plus`）と 011 章（`physicalSymTransferC`, `symmetrized_transfer_matrix_on_sectors`,
   `epsilon_commutes_with_W`）は `V1`, `V2` そのものについて述べ、
   `first_transfer_matrix_pauli_form` / `second_transfer_matrix_pauli_form` / `V1_in_Z_Y_epsilon` を

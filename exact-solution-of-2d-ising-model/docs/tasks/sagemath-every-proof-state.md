@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 319 件のうち、SageMath の検算が無いもの 84 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 338 件のうち、SageMath の検算が無いもの 83 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -141,11 +141,21 @@
 - `epsilon_projector_properties`（`P^{(+)} = (1/2)(I + ε)` の冪等性と、像が `F^{(+)} = {f | εf = f}` に等しいこと）: `sagemath/check/epsilon_projector_properties/`。ε と `P^{(+)}` を本文の定め方（成分の式のクロネッカー積と積）と Sage 組み込みの二経路で作り、四つの鎖の全行を `QQ` 上の多項式環の不定元のベクトルで、`M_col = 1,…,5` で厳密に確かめた。ε を不定元の行列に、`f` を任意のベクトルに置き換えて、`ε^2 = I` と仮定 `εf = f` をそれぞれ一行だけが使っていることを差の形で確かめた。主張 (2) は `P` の列空間と `ε - I` の核の `QQ` 上の一致で確かめた。
   レビューの指摘で人手証明を直した（分配法則と単位行列を一行に束ねた行、スカラー倍の出し入れ・結合法則を根拠なしで行っていた行、`P(Px) = (P^2)x` で結合法則を引いていなかった行、`(I+ε)+(ε+I) = 2I+2ε` の行を、`002_linear_space_general.ts` の行列の演算の主張を引く一行一操作に分けた。`X^2 := XX` を主張に、スカラーが `inclusion_rr_to_cc` による ℂ の元であることを証明の冒頭に置き、数の積の行に `real_inclusion_preserves_product` を引いた）。計算の誤りは無かった。Lean の具体版 `ClaimEpsilonProjectors.lean` は人手の新しい行の並びとまだ 1 行ずつは対応していない（Lean の連続実行の受け持ち）。
 
+- `epsilon_commutes_with_transfer_matrices`（ε は V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2} と可換。四つの主張と、下流が「Step 1」「Step 3」と番号で引く関係を束ねていた）: 1 ブロック 1 主張に分け、ラベルを消した。
+  一般の主張 `matrix_equals_negation_if_sum_is_zero`・`product_of_anticommuting_matrices_commutes`・`commuting_with_scalar_multiple`・`commuting_with_finite_sum`・`commuting_with_difference`（`002_linear_space_general.ts`）、`commuting_matrix_commutes_with_exp`（`003_exp_linear_map.ts`。可換なら冪・部分和・極限とも可換を、散文 4 回から一つの主張へ）、`tensor_commutation_from_all_sites`（`006_Z_Y_anticommutation.ts`）、
+  `site_pauli_prefix_product_kronecker_form`・`global_spin_flip_kronecker_form`・`epsilon_commutes_with_site_sigma_x`・`epsilon_anticommutes_with_site_sigma_z`・`epsilon_anticommutes_with_site_sigma_y`・`epsilon_anticommutes_with_jordan_wigner_Z`・`epsilon_anticommutes_with_jordan_wigner_Y`（`def_global_spin_flip_matrix` の後）、
+  `epsilon_commutes_with_bond_sum`・`epsilon_commutes_with_V1`・`epsilon_commutes_with_V2`・`epsilon_commutes_with_H1_plus`・`epsilon_commutes_with_V1_plus`・`epsilon_commutes_with_V1_plus_square_root`（旧ブロックの位置）の 20 個の主張を置き、それぞれに同名の検算を付けた（共通の準備 `sagemath/_shared/pauli_sites_exact.sage`）。
+  鎖は `QQ(i)` 上の不定元と具体の Pauli 行列で厳密に、仮定を外した対照でその行だけが崩れることを確かめ、exp を含む行だけを本文の部分和と尾の上界のボールで、V_1・V_2 の主張は成分の式の exp の値を不定元に置いて厳密に確かめた。
+  人手証明の欠けを直した（ε・Z_m・Y_m のクロネッカー積表示を根拠なしで使っていた、相異なるサイトの可換性・スカラー倍との可換性・有限和への分配・冪と極限との交換を散文で済ませていた、反可換性を二回使う段を (-1)^2 の一行に束ねていた）。
+  下流（`epsilon_projectors_commute_with_transfer_matrices`・`epsilon_commutes_with_W`・`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の 3 か所・Lean のコメントと `lean/docs/ch010-formalization.md`・043 の検算の説明）の参照を新しいラベルに付け替えた。計算の誤りは無かった。Lean の具体版 `ClaimEpsilonCommutes.lean` は分けた主張と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`partition_function_projection_and_jordan_wigner.ts` の `epsilon_commutes_with_transfer_matrices`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_projection_and_jordan_wigner.ts` の `epsilon_projectors_commute_with_transfer_matrices`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`epsilon_commutes_with_transfer_matrices` の分割で見つかった（重複）: `V1_in_Z_Y_epsilon` の証明 Step 1 は、新しい主張 `site_pauli_prefix_product_kronecker_form` と同じ帰納法を証明の中で示し直している。`V1_restriction_to_eigenspaces` の証明 Step 1・Step 2 も、`epsilon_anticommutes_with_jordan_wigner_Z`・`_Y`・`product_of_anticommuting_matrices_commutes` と同じ内容を散文と未ラベルの根拠で示している。どちらも既に検算が付いているので、この単位では書き換えず、新しい主張を引く形への置き換えは検算の付いたブロックの見直しで扱う。
 
 - 2026-11-02、`epsilon_projector_properties` のレビューで見つかった（未定義の表記と同一視）: 行列の二乗 `X^2` を定めるブロックが本文に無く、`epsilon_square_and_eigenvalues` の `ε^2` などが定義なしで使っている（このブロックでは主張の中で `X^2 := XX` と書いた）。直すには `002_linear_space_general.ts` に行列の冪の定義を置き、使う側から引く。また (⊇) の鎖は `Mat(n,1,ℂ)` についての主張を `f ∈ ℂ^n` にそのまま当てており、`mat_mult` の「n 行 1 列の行列とみなし」（`mat_columnwise` の項の同一視の課題）に依存する。
 

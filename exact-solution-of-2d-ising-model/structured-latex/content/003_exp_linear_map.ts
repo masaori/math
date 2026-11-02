@@ -1000,6 +1000,274 @@ S := \sum_{m=0}^{\infty}\frac{1}{m!}A^m \in \mathrm{Mat}(n,K)`,
     },
   },
   {
+    id: "exp_linear_map_claim_commuting_matrix_commutes_with_exp",
+    kind: "claim",
+    title: { text: "可換な行列は exp とも可換" },
+    labels: ["commuting_matrix_commutes_with_exp"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が ",
+        math(String.raw`AB = BA`),
+        " を満たすとする。積は ",
+        ref("mat_mult"),
+        "、冪 ",
+        math(String.raw`B^p`),
+        "（",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        "）と ",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " (1) による。このとき",
+      ]),
+      displayMath(String.raw`A\exp(B) = \exp(B)A`),
+      paragraph([
+        "が成り立つ。証明の極限の段だけが ",
+        math(String.raw`\mathbb{R}`),
+        " を使う（",
+        ref("def_matrix_norm"),
+        " の収束が実数列 ",
+        math(String.raw`\|\cdot\|`),
+        " の ",
+        math(String.raw`0`),
+        " への収束だからである）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について部分和を",
+      ]),
+      displayMath(String.raw`S_N := \sum_{p=0}^{N}\left(\tfrac{1}{p!}\right)_{\mathbb{C}} B^p \in \mathrm{Mat}(n,\mathbb{C})`),
+      paragraph([
+        "と置く（",
+        math(String.raw`\left(\tfrac{1}{p!}\right)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、和は ",
+        ref("def_finite_sum_of_matrices"),
+        " を添字 ",
+        math(String.raw`p = j-1`),
+        " で書いたもの）。",
+        ref("def_finite_sum_of_matrices"),
+        " より ",
+        math(String.raw`S_0 = \left(\tfrac{1}{0!}\right)_{\mathbb{C}}B^0`),
+        "、",
+        math(String.raw`S_{N+1} = S_N + \left(\tfrac{1}{(N+1)!}\right)_{\mathbb{C}}B^{N+1}`),
+        " である。",
+        math(String.raw`E := \exp(B)`),
+        " と置くと、",
+        ref("def_exp"),
+        " (1) と ",
+        ref("matrix_exp_series_converges"),
+        " (1) より ",
+        math(String.raw`S_N \to E`),
+        "、すなわち実数列 ",
+        math(String.raw`\|S_N - E\|`),
+        " は ",
+        math(String.raw`0`),
+        " に収束する（",
+        ref("def_matrix_norm"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 1（冪との可換性）。すべての ",
+        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`AB^p = B^pA`),
+        " を ",
+        math(String.raw`p`),
+        " についての帰納法で示す。",
+        math(String.raw`p = 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+AB^0
+&= AI_{\mathrm{Mat}(n,\mathbb{C})}
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^0 := I)\\
+&= A
+&&(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult})\\
+&= I_{\mathrm{Mat}(n,\mathbb{C})}A
+&&(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult})\\
+&= B^0A
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^0 := I)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+AB^{p+1}
+&= A(B^pB)
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^{p+1} := B^pB)\\
+&= (AB^p)B
+&&(\because\ \blkref{mat_mult_associative})\\
+&= (B^pA)B
+&&(\because\ \text{帰納法の仮定}\ AB^p = B^pA)\\
+&= B^p(AB)
+&&(\because\ \blkref{mat_mult_associative})\\
+&= B^p(BA)
+&&(\because\ \text{仮定}\ AB = BA)\\
+&= (B^pB)A
+&&(\because\ \blkref{mat_mult_associative})\\
+&= B^{p+1}A
+&&(\because\ \blkref{def_exp}\ (1)\ \text{の}\ B^{p+1} := B^pB)
+\end{aligned}`),
+      paragraph([
+        "Step 2（部分和との可換性）。すべての ",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`AS_N = S_NA`),
+        " を ",
+        math(String.raw`N`),
+        " についての帰納法で示す。",
+        math(String.raw`c_p := \left(\tfrac{1}{p!}\right)_{\mathbb{C}} \in \mathbb{C}`),
+        " と書く。",
+        math(String.raw`N = 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+AS_0
+&= A(c_0B^0)
+&&(\because\ \text{準備の}\ S_0 = c_0B^0)\\
+&= c_0(AB^0)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= c_0(B^0A)
+&&(\because\ \text{Step 1 の}\ p = 0)\\
+&= (c_0B^0)A
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
+&= S_0A
+&&(\because\ \text{準備の}\ S_0 = c_0B^0)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`N`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+AS_{N+1}
+&= A\left(S_N + c_{N+1}B^{N+1}\right)
+&&(\because\ \text{準備の}\ S_{N+1} = S_N + c_{N+1}B^{N+1})\\
+&= AS_N + A\left(c_{N+1}B^{N+1}\right)
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&= S_NA + A\left(c_{N+1}B^{N+1}\right)
+&&(\because\ \text{帰納法の仮定}\ AS_N = S_NA)\\
+&= S_NA + c_{N+1}\left(AB^{N+1}\right)
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
+&= S_NA + c_{N+1}\left(B^{N+1}A\right)
+&&(\because\ \text{Step 1 の}\ p = N+1)\\
+&= S_NA + \left(c_{N+1}B^{N+1}\right)A
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
+&= \left(S_N + c_{N+1}B^{N+1}\right)A
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor})\\
+&= S_{N+1}A
+&&(\because\ \text{準備の}\ S_{N+1} = S_N + c_{N+1}B^{N+1})
+\end{aligned}`),
+      paragraph([
+        "Step 3（左からの積の極限）。",
+        math(String.raw`AS_N \to AE`),
+        " を示す。各 ",
+        math(String.raw`N`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+AS_N - AE
+&= AS_N + \bigl(-(AE)\bigr)
+&&(\because\ \blkref{matrix_difference_is_sum_with_negation})\\
+&= AS_N + A(-E)
+&&(\because\ \blkref{negation_factors_out_of_right_factor})\\
+&= A\bigl(S_N + (-E)\bigr)
+&&(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor})\\
+&= A(S_N - E)
+&&(\because\ \blkref{matrix_difference_is_sum_with_negation})
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`\eta \in \mathbb{R}_{>0}`),
+        " を任意に取り、",
+        math(String.raw`\eta' := \eta/(\|A\|+1) \in \mathbb{R}_{>0}`),
+        " と置く（",
+        ref("matrix_norm_triangle_inequality"),
+        " (1) より ",
+        math(String.raw`\|A\| + 1 \geq 1 > 0`),
+        "）。準備の ",
+        math(String.raw`\|S_N - E\| \to 0`),
+        " より、",
+        math(String.raw`N_0 \in \mathbb{Z}_{\geq 0}`),
+        " が存在して ",
+        math(String.raw`N \geq N_0`),
+        " ならば ",
+        math(String.raw`\|S_N - E\| < \eta'`),
+        " である。このとき ",
+        math(String.raw`N \geq N_0`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\|AS_N - AE\|
+&= \|A(S_N - E)\|
+&&(\because\ \text{上の鎖})\\
+&\leq \|A\|\,\|S_N - E\|
+&&(\because\ \blkref{matrix_norm_submultiplicativity})\\
+&\leq (\|A\|+1)\,\|S_N - E\|
+&&(\because\ \|S_N - E\| \geq 0\ \text{。}\blkref{matrix_norm_triangle_inequality}\ (1))\\
+&< (\|A\|+1)\,\eta'
+&&(\because\ \|S_N - E\| < \eta'\ \text{と}\ \|A\|+1 > 0)\\
+&= \eta
+&&(\because\ \eta'\ \text{の定義})
+\end{aligned}`),
+      paragraph([
+        "であるから、実数列 ",
+        math(String.raw`\|AS_N - AE\|`),
+        " は ",
+        math(String.raw`0`),
+        " に収束し、",
+        math(String.raw`AS_N \to AE`),
+        " である（",
+        ref("def_matrix_norm"),
+        "）。",
+      ]),
+      paragraph([
+        "Step 4（右からの積の極限と結論）。",
+        ref("matrix_multiplication_continuity"),
+        " を ",
+        math(String.raw`A_N \to S_N`),
+        "、",
+        math(String.raw`A \to E`),
+        "、",
+        math(String.raw`B \to A`),
+        " で引くと ",
+        math(String.raw`S_NA \to EA`),
+        " である。行列の列 ",
+        math(String.raw`C_N := AS_N`),
+        " は、Step 3 より ",
+        math(String.raw`AE`),
+        " に収束し、Step 2 より ",
+        math(String.raw`C_N = S_NA`),
+        " だから ",
+        math(String.raw`EA`),
+        " にも収束する。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+A\exp(B)
+&= AE
+&&(\because\ E\ \text{の定義})\\
+&= EA
+&&(\because\ (C_N)\ \text{の二つの極限に}\ \blkref{matrix_norm_triangle_inequality}\ (4)\ \text{の極限の一意性})\\
+&= \exp(B)A
+&&(\because\ E\ \text{の定義})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。ε と転送行列の可換性の証明が、可換なら冪・部分和・exp とも可換であることを散文で 4 回使っていたので、一つの主張として切り出した。",
+      ],
+    },
+  },
+  {
     id: "exp_linear_map_003_theorem_exp_product_formula_commuting_matrices",
     kind: "theorem",
     standing: "mainTheorem",

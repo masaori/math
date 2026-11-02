@@ -1,0 +1,6 @@
+  M_col=1: 全ての k で εσ_k^y + σ_k^yε = O、εσ_k^y = -(σ_k^yε)
+  M_col=2: 全ての k で εσ_k^y + σ_k^yε = O、εσ_k^y = -(σ_k^yε)
+  M_col=3: 全ての k で εσ_k^y + σ_k^yε = O、εσ_k^y = -(σ_k^yε)
+  M_col=4: 全ての k で εσ_k^y + σ_k^yε = O、εσ_k^y = -(σ_k^yε)
+  M_col=5: 全ての k で εσ_k^y + σ_k^yε = O、εσ_k^y = -(σ_k^yε)
+RESULT: PASS

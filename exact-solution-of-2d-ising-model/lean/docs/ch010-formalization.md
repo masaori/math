@@ -53,14 +53,14 @@
 | `Ising2D.V1plusHalf` / `V1plusHalfUnits` | `(V_1^{(+)})^{1/2} := exp((i/2)K_1H_1^{(+)})`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionV1PlusSquareRoot.lean`） | `def_V1_plus_square_root` |
 | `Ising2D.V1_plus_square_root_property` | `((V_1^{(+)})^{1/2})^2 = V_1^{(+)}` | `V1_plus_square_root_property` |
 | `Ising2D.VPlusOfTransfer` | `V^{(+)} := (V_1^{(+)})^{1/2}V_2(V_1^{(+)})^{1/2}`（`V_2` は `def_transfer_matrix` の `V_2`） | `def_V_plus` |
-| `Ising2D.epsilon_eq_siteProd` | `ε = σ^x ⊠ ⋯ ⊠ σ^x` | `epsilon_commutes_with_transfer_matrices` Step 1 |
-| `Ising2D.epsilon_commute_sigmaX` | `ε σ^x_k = σ^x_k ε` | 同 Step 1 |
-| `Ising2D.epsilon_anticomm_sigmaZ` / `..._sigmaY` | `ε σ^{z,y}_k = -σ^{z,y}_k ε` | 同 Step 1 |
-| `Ising2D.epsilon_anticomm_Z` / `..._Y` | `ε Z_m = -Z_m ε`, `ε Y_m = -Y_m ε` | 同 Step 4 |
-| `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1PauliForm` | **`ε V_1 = V_1 ε`**（前者が `def_transfer_matrix` の `V_1`、後者が右辺の式 `exp(K_1D)`） | 同 Step 3 |
-| `Ising2D.epsilon_commute_V2` / `epsilon_commute_V2PauliForm` / `epsilon_commute_V2H2Form` | **`ε V_2 = V_2 ε`**（前者が `def_transfer_matrix` の `V_2`、後の 2 本が右辺の式） | 同 Step 2 |
-| `Ising2D.epsilon_commute_H1plus` | `ε H_1^{(+)} = H_1^{(+)} ε`（`epsilon_commute_H1` は一般形） | 同 Step 4 |
-| `Ising2D.epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf` | **`ε V_1^{(+)} = V_1^{(+)}ε`, `ε (V_1^{(+)})^{1/2} = ⋯`**（`epsilon_commute_V1pm` / `..._V1pmHalf` は一般形） | 同 Step 4 |
+| `Ising2D.epsilon_eq_siteProd` | `ε = σ^x ⊠ ⋯ ⊠ σ^x` | `global_spin_flip_kronecker_form` |
+| `Ising2D.epsilon_commute_sigmaX` | `ε σ^x_k = σ^x_k ε` | `epsilon_commutes_with_site_sigma_x` |
+| `Ising2D.epsilon_anticomm_sigmaZ` / `..._sigmaY` | `ε σ^{z,y}_k = -σ^{z,y}_k ε` | `epsilon_anticommutes_with_site_sigma_z` / `epsilon_anticommutes_with_site_sigma_y` |
+| `Ising2D.epsilon_anticomm_Z` / `..._Y` | `ε Z_m = -Z_m ε`, `ε Y_m = -Y_m ε` | `epsilon_anticommutes_with_jordan_wigner_Z` / `epsilon_anticommutes_with_jordan_wigner_Y` |
+| `Ising2D.epsilon_commute_V1` / `epsilon_commute_V1PauliForm` | **`ε V_1 = V_1 ε`**（前者が `def_transfer_matrix` の `V_1`、後者が右辺の式 `exp(K_1D)`） | `epsilon_commutes_with_V1` |
+| `Ising2D.epsilon_commute_V2` / `epsilon_commute_V2PauliForm` / `epsilon_commute_V2H2Form` | **`ε V_2 = V_2 ε`**（前者が `def_transfer_matrix` の `V_2`、後の 2 本が右辺の式） | `epsilon_commutes_with_V2` |
+| `Ising2D.epsilon_commute_H1plus` | `ε H_1^{(+)} = H_1^{(+)} ε`（`epsilon_commute_H1` は一般形） | `epsilon_commutes_with_H1_plus` |
+| `Ising2D.epsilon_commute_V1plus` / `epsilon_commute_V1plusHalf` | **`ε V_1^{(+)} = V_1^{(+)}ε`, `ε (V_1^{(+)})^{1/2} = ⋯`**（`epsilon_commute_V1pm` / `..._V1pmHalf` は一般形） | `epsilon_commutes_with_V1_plus` / `epsilon_commutes_with_V1_plus_square_root` |
 | `Ising2D.commute_epsProjPlus_of_commute_epsilon` / `commute_V1_epsProjPlus` / `commute_V2_epsProjPlus` / `commute_V1plus_epsProjPlus` / `commute_V1plusHalf_epsProjPlus`（`ClaimEpsilonCommutes.lean`） | `P^{(+)}` と `V_1, V_2, V_1^{(+)}, (V_1^{(+)})^{1/2}` の可換性（`commute_*_epsProj` は一般形） | `epsilon_projectors_commute_with_transfer_matrices` |
 | `Ising2D.epsProj_mul_epsProj_neg` / `epsProj_add_epsProj_neg` | `P^{(+)}P^{(-)} = 0`, `P^{(+)} + P^{(-)} = I` | ノート（旧 `epsilon_projector_properties` (1)(2)） |
 | `Ising2D.RestrictsOnSector` / `V1_restrictsOnSector_of_opposite_sign` / `V1_restrictsOnEvenSector` / `V1_restrictsOnOddSector`（`ClaimSectorReplacementOfV1.lean`） | 符号つきのセクターごとの制限 | ノート（`sector_replacement_of_V1` の前提） |

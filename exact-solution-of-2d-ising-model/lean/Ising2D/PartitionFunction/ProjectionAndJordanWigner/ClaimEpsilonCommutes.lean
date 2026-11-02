@@ -3,7 +3,7 @@
 
 対応する人手証明（正本は `structured-latex/content/partition_function_projection_and_jordan_wigner.ts`）:
 
-* `bridge_010_claim_epsilon_commutes`（ラベル **`epsilon_commutes_with_transfer_matrices`**）
+* 旧 `bridge_010_claim_epsilon_commutes`（1 ブロック 1 主張に分けた後のラベル **`epsilon_commutes_with_site_sigma_x`**・**`epsilon_anticommutes_with_site_sigma_z`**・**`epsilon_anticommutes_with_site_sigma_y`**・**`epsilon_anticommutes_with_jordan_wigner_Z`**・**`epsilon_anticommutes_with_jordan_wigner_Y`**・**`epsilon_commutes_with_bond_sum`**・**`epsilon_commutes_with_V1`**・**`epsilon_commutes_with_V2`**・**`epsilon_commutes_with_H1_plus`**・**`epsilon_commutes_with_V1_plus`**・**`epsilon_commutes_with_V1_plus_square_root`**）
 * `bridge_claim_epsilon_projectors_commute_with_transfer_matrices`
   （ラベル **`epsilon_projectors_commute_with_transfer_matrices`**）
 

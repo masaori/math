@@ -198,8 +198,12 @@ export default defineBlocks([
     proof: [
       paragraph([
         "(1) ",
-        ref("epsilon_commutes_with_transfer_matrices"),
-        " の Step 1 で",
+        ref("epsilon_commutes_with_site_sigma_x"),
+        "・",
+        ref("epsilon_anticommutes_with_site_sigma_z"),
+        "・",
+        ref("epsilon_anticommutes_with_site_sigma_y"),
+        " で",
       ]),
       displayMath(
         String.raw`\varepsilon\,\sigma_k^x = \sigma_k^x\,\varepsilon, \qquad
@@ -1272,8 +1276,8 @@ Gf_{\iota(s)}
     ],
     proof: [
       paragraph([
-        ref("epsilon_commutes_with_transfer_matrices"),
-        " の Step 1 より、各 ",
+        ref("epsilon_anticommutes_with_site_sigma_z"),
+        " より、各 ",
         math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
         " について ",
         math(String.raw`\varepsilon\sigma_k^z=-\sigma_k^z\varepsilon`),
@@ -1790,7 +1794,11 @@ D_0G
         "Step 1（",
         math(String.raw`\varepsilon`),
         " を外へ出す）。",
-        ref("epsilon_commutes_with_transfer_matrices"),
+        ref("epsilon_commutes_with_V1_plus_square_root"),
+        "・",
+        ref("epsilon_commutes_with_V1_plus"),
+        "・",
+        ref("epsilon_commutes_with_V2"),
         " より ",
         math(String.raw`\varepsilon`),
         " は ",
@@ -1809,7 +1817,7 @@ D_0G
 &= \mathrm{tr}\!\left(\varepsilon\,B\,V_2\,B\right)
    \quad (\because \blkref{def_V_plus}) \\
 &= \mathrm{tr}\!\left(B\,\varepsilon\,V_2\,B\right)
-   \quad (\because \blkref{epsilon_commutes_with_transfer_matrices}\ \text{の}\ 
+   \quad (\because \blkref{epsilon_commutes_with_V1_plus_square_root}\ \text{の}\ 
    \varepsilon B = B\varepsilon) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_2\,B\,B\right)
    \quad (\because \blkref{trace_basic_properties}\ \text{(2) の巡回性を }
@@ -1819,7 +1827,7 @@ D_0G
 &= \mathrm{tr}\!\left(V_1^{(+)}\,\varepsilon\,V_2\right)
    \quad (\because \blkref{trace_basic_properties}\ \text{(2) の巡回性}) \\
 &= \mathrm{tr}\!\left(\varepsilon\,V_1^{(+)}\,V_2\right)
-   \quad (\because \blkref{epsilon_commutes_with_transfer_matrices}\ \text{より}\ 
+   \quad (\because \blkref{epsilon_commutes_with_V1_plus}\ \text{より}\ 
    V_1^{(+)}\varepsilon=\varepsilon V_1^{(+)})
 \end{aligned}`,
       ),
