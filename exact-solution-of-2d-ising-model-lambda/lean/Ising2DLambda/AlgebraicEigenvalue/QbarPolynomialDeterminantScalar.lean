@@ -16,10 +16,18 @@ theorem qbarPolynomial_det_smul
     Matrix.det (c • A) = c ^ Fintype.card J * Matrix.det A := by
   classical
   let w : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar)
+  have hrow (M : Matrix J J (Polynomial Qbar)) :
+      Matrix.det M = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, M i (σ i) := by
+    calc
+      Matrix.det M = Matrix.det M.transpose := (Matrix.det_transpose M).symm
+      _ = ∑ σ : Equiv.Perm J, ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar) *
+          ∏ i : J, M.transpose (σ i) i := Matrix.det_apply' _
+      _ = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, M i (σ i) := by
+        simp only [w, Matrix.transpose_apply]
   calc
     Matrix.det (c • A) = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, (c • A) i (σ i) :=
-      qbarPolynomial_det_row_expansion (c • A)
+      hrow (c • A)
     _ = ∑ σ : Equiv.Perm J, w σ * ∏ i : J, c * A i (σ i) := rfl
     _ = ∑ σ : Equiv.Perm J, w σ * ((∏ _i : J, c) * ∏ i : J, A i (σ i)) := by
       refine Finset.sum_congr rfl ?_
@@ -44,6 +52,6 @@ theorem qbarPolynomial_det_smul
     _ = c ^ Fintype.card J * ∑ σ : Equiv.Perm J, w σ * ∏ i : J, A i (σ i) :=
       (Finset.mul_sum _ _ _).symm
     _ = c ^ Fintype.card J * Matrix.det A :=
-      congrArg (c ^ Fintype.card J * ·) (qbarPolynomial_det_row_expansion A).symm
+      congrArg (c ^ Fintype.card J * ·) (hrow A).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

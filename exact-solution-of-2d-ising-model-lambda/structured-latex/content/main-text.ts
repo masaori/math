@@ -63162,7 +63162,8 @@ C_2:=(a,b),\qquad C_3:=(a,b-1)`),
                         " を満たす一周期の添字は ", math(String.raw`j`), " だけである。したがって ",
                         ref("claim_vertex_incident_edge_traversal_even"), " の右辺は ", math(String.raw`2`), " であり、",
                       ]),
-                      displayMath(String.raw`V_{a-1,b}(\gamma)+H_{a,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)=2`),
+                      displayMath(String.raw`V_{a-1,b}(\gamma)+H_{a,b}(\gamma)+V_{a,b}(\gamma)+H_{a,b-1}(\gamma)=2
+\qquad\bigl(\because\ \blkref{claim_vertex_incident_edge_traversal_even}\text{ と一周期での訪問の一意性}\bigr)`),
                       paragraph([
                         "である。この総和に現れる四辺は、訪問 ", math(String.raw`P_j(\gamma)`),
                         " へ入る辺とそこから出る辺を含む。二辺は非後退性（", ref("def_closed_nonbacktracking_walk"),
