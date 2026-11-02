@@ -1182,6 +1182,9 @@ targets=(
   "Ising2D.NecSuf.finProdLeft_add_eq_binWordSum"
   "Ising2D.NecSuf.commute_finProdLeft"
   "Ising2D.NecSuf.finProdLeft_mul_finProdLeft"
+  "Ising2D.NecSuf.finProdLeft_eq_omitting_mul_two_first"
+  "Ising2D.NecSuf.finProdLeft_eq_omitting_mul_two_second"
+  "Ising2D.NecSuf.finProdLeft_eq_omitting_mul"
   Ising2D.binaryWordMatrixSum_mul
   Ising2D.binaryWordMatrixSum_eq_binWordSum
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
@@ -1195,6 +1198,12 @@ targets=(
   Ising2D.product_of_two_finite_products_of_matrices
   Ising2D.product_of_two_finite_products_of_matrices_of_necSuf
   Ising2D.finProdLeft_mul_finProdLeft_tensorPow
+  Ising2D.moving_one_factor_of_finite_product_to_the_end_two_first
+  Ising2D.moving_one_factor_of_finite_product_to_the_end_two_second
+  Ising2D.moving_one_factor_of_finite_product_to_the_end
+  Ising2D.finiteMatrixProductOmitting_eq_finProdLeftOmitting
+  Ising2D.moving_one_factor_of_finite_product_to_the_end_of_necSuf
+  Ising2D.finProdLeft_eq_omitting_mul_tensorPow
   "Ising2D.NecSuf.sub_neg_eq_zero_of_add_eq_zero_matrix'"
   "Ising2D.NecSuf.eq_neg_of_add_eq_zero_matrix'"
   Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero

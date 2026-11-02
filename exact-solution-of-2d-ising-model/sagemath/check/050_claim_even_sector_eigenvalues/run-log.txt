@@ -154,3 +154,15 @@ RESULT: PASS
 # 実行コマンド: sage check_34_joint_eigenspace_commutation_and_square_chains.sage
 PASS check_joint_eigenspace_decomposition Step 0 の可換性・Step 1 の Q̌^2・Step 3 の左右の鎖: 1916 段、否定コントロール 1 行
 RESULT: PASS
+
+##### 2026-11-02 に check_31・check_32 から本文で置き換わった鎖を外し、check_35 を足した
+# 実行コマンド: sage check_31_joint_eigenspace_step3_scalar_chains.sage
+PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾: 88 段、否定コントロール 2 行
+
+# 実行コマンド: sage check_32_joint_eigenspace_step1_step2_zero_and_identity_products.sage
+PASS check_joint_eigenspace_decomposition Step 2 の鎖: 9 段、否定コントロール 1 行
+RESULT: PASS
+
+# 実行コマンド: sage check_35_joint_eigenspace_moving_one_factor_chains.sage
+PASS check_joint_eigenspace_decomposition Step 1 の ε ≠ ε' の鎖・Step 3 の ň_νQ̌_ε の鎖: 8352 段、否定コントロール 1 行
+RESULT: PASS

@@ -2607,6 +2607,242 @@ X\prod_{j=1}^{r+1} A_j
     },
   },
   {
+    id: "linear_space_general_definition_finite_product_of_matrices_omitting_one_index",
+    kind: "definition",
+    title: { text: "一つの添字を除いた行列の有限積" },
+    labels: ["def_finite_product_of_matrices_omitting_one_index"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\nu \in \{1,\dots,r\}`),
+        "、",
+        math(String.raw`A_1,\dots,A_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。写像 ",
+        math(String.raw`s_{r,\nu} : \{1,\dots,r-1\} \to \{1,\dots,r\}`),
+        " を",
+      ]),
+      displayMath(String.raw`s_{r,\nu}(j) := \begin{cases} j & (j < \nu) \\ j + 1 & (\nu \leq j) \end{cases}`),
+      paragraph([
+        "と定める（",
+        math(String.raw`j < \nu`),
+        " なら ",
+        math(String.raw`j \leq r`),
+        "、",
+        math(String.raw`\nu \leq j \leq r-1`),
+        " なら ",
+        math(String.raw`j+1 \leq r`),
+        " なので、値は ",
+        math(String.raw`\{1,\dots,r\}`),
+        " に入る）。そのうえで",
+      ]),
+      displayMath(String.raw`\prod_{j=1,\ j\neq\nu}^{r} A_j := \prod_{j=1}^{r-1} A_{s_{r,\nu}(j)} \ \in\ \mathrm{Mat}(n,\mathbb{C})`),
+      paragraph([
+        "と定める。右辺の有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "（",
+        math(String.raw`n \to n,\ r \to r-1,\ A_j \to A_{s_{r,\nu}(j)}`),
+        "）による（",
+        math(String.raw`r - 1 \geq 1`),
+        " なので定まる）。",
+        math(String.raw`s_{r,\nu}`),
+        " は ",
+        math(String.raw`\{1,\dots,r\}`),
+        " から ",
+        math(String.raw`\nu`),
+        " を除いた添字を小さい順に並べるので、左辺は ",
+        math(String.raw`A_\nu`),
+        " 以外の因子を添字の小さい順に左から掛けた積である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 1・Step 3 が ∏_{μ≠ν} を、添字が {1,…,r} の形でないのに def_finite_product_of_matrices の積として使っていたので足した。" +
+          "Lean は Ising2D.finiteMatrixProductOmitting（DefinitionFiniteProductOfMatricesOmittingOneIndex.lean）。s_{r,ν} は Fin.succAbove。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_moving_one_factor_of_finite_product_to_the_end",
+    kind: "claim",
+    title: { text: "有限積の一つの因子を末尾へ寄せる" },
+    labels: ["moving_one_factor_of_finite_product_to_the_end"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r \in \mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`\nu \in \{1,\dots,r\}`),
+        "、",
+        math(String.raw`A_1,\dots,A_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が、",
+        math(String.raw`\nu < j \leq r`),
+        " を満たす全ての ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`A_\nu A_j = A_j A_\nu`),
+        " を満たすとする。有限積は ",
+        ref("def_finite_product_of_matrices"),
+        " と ",
+        ref("def_finite_product_of_matrices_omitting_one_index"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{r} A_j = \Bigl(\prod_{j=1,\ j\neq\nu}^{r} A_j\Bigr)A_\nu`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、全ての ",
+        math(String.raw`\nu \in \{1,\dots,r\}`),
+        " と仮定を満たす全ての族 ",
+        math(String.raw`(A_j)`),
+        " について示す。",
+        math(String.raw`r = 2`),
+        "、",
+        math(String.raw`\nu = 1`),
+        " のとき、",
+        math(String.raw`s_{2,1}(1) = 2`),
+        "（",
+        math(String.raw`s_{2,1}`),
+        " の定義の ",
+        math(String.raw`\nu \leq j`),
+        " の場合）なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{2} A_j
+&= \Bigl(\prod_{j=1}^{1} A_j\Bigr)A_2
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= A_1A_2
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= A_2A_1
+&&(\because\ \text{仮定}\ A_\nu A_j = A_jA_\nu\ (\nu \to 1,\ j \to 2))\\
+&= A_{s_{2,1}(1)}A_1
+&&(\because\ s_{2,1}(1) = 2)\\
+&= \Bigl(\prod_{j=1}^{1} A_{s_{2,1}(j)}\Bigr)A_1
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (r \to 1,\ A_j \to A_{s_{2,1}(j)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{j=1,\ j\neq 1}^{2} A_j\Bigr)A_1
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices_omitting_one_index}\ (r \to 2,\ \nu \to 1)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r = 2`),
+        "、",
+        math(String.raw`\nu = 2`),
+        " のとき、",
+        math(String.raw`s_{2,2}(1) = 1`),
+        "（",
+        math(String.raw`s_{2,2}`),
+        " の定義の ",
+        math(String.raw`j < \nu`),
+        " の場合）なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{2} A_j
+&= \Bigl(\prod_{j=1}^{1} A_j\Bigr)A_2
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= A_1A_2
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= A_{s_{2,2}(1)}A_2
+&&(\because\ s_{2,2}(1) = 1)\\
+&= \Bigl(\prod_{j=1}^{1} A_{s_{2,2}(j)}\Bigr)A_2
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (r \to 1,\ A_j \to A_{s_{2,2}(j)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{j=1,\ j\neq 2}^{2} A_j\Bigr)A_2
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices_omitting_one_index}\ (r \to 2,\ \nu \to 2)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r \geq 2`),
+        " で成り立つと仮定し、",
+        math(String.raw`\nu \in \{1,\dots,r+1\}`),
+        " と、",
+        math(String.raw`\nu < j \leq r+1`),
+        " で ",
+        math(String.raw`A_\nu A_j = A_jA_\nu`),
+        " を満たす ",
+        math(String.raw`A_1,\dots,A_{r+1}`),
+        " を取る。",
+        math(String.raw`\nu = r+1`),
+        " のとき、全ての ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " で ",
+        math(String.raw`j < \nu`),
+        " なので ",
+        math(String.raw`s_{r+1,r+1}(j) = j`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{r+1} A_j
+&= \Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= \Bigl(\prod_{j=1}^{r} A_{s_{r+1,r+1}(j)}\Bigr)A_{r+1}
+&&(\because\ s_{r+1,r+1}(j) = j\ (j \in \{1,\dots,r\}))\\
+&= \Bigl(\prod_{j=1,\ j\neq r+1}^{r+1} A_j\Bigr)A_{r+1}
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices_omitting_one_index}\ (r \to r+1,\ \nu \to r+1)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\nu \leq r`),
+        " のとき、",
+        math(String.raw`\nu \in \{1,\dots,r\}`),
+        " と ",
+        math(String.raw`A_1,\dots,A_r`),
+        " は帰納法の仮定の前提（",
+        math(String.raw`\nu < j \leq r`),
+        " で ",
+        math(String.raw`A_\nu A_j = A_jA_\nu`),
+        "）を満たす。また ",
+        math(String.raw`\nu \leq r`),
+        " なので ",
+        math(String.raw`s_{r+1,\nu}(r) = r+1`),
+        "（",
+        math(String.raw`\nu \leq j`),
+        " の場合）であり、",
+        math(String.raw`s_{r+1,\nu}`),
+        " と ",
+        math(String.raw`s_{r,\nu}`),
+        " は同じ式で定まるので ",
+        math(String.raw`j \in \{1,\dots,r-1\}`),
+        " で ",
+        math(String.raw`s_{r+1,\nu}(j) = s_{r,\nu}(j)`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{r+1} A_j
+&= \Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= \Bigl(\Bigl(\prod_{j=1,\ j\neq\nu}^{r} A_j\Bigr)A_\nu\Bigr)A_{r+1}
+&&(\because\ \text{帰納法の仮定}\ (\nu \to \nu,\ A_1,\dots,A_r \to A_1,\dots,A_r))\\
+&= \Bigl(\prod_{j=1,\ j\neq\nu}^{r} A_j\Bigr)\bigl(A_\nu A_{r+1}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1,\ j\neq\nu}^{r} A_j,\ B \to A_\nu,\ C \to A_{r+1})\bigr)\\
+&= \Bigl(\prod_{j=1,\ j\neq\nu}^{r} A_j\Bigr)\bigl(A_{r+1}A_\nu\bigr)
+&&(\because\ \text{仮定}\ A_\nu A_j = A_jA_\nu\ (j \to r+1)\text{。}\nu \leq r < r+1)\\
+&= \Bigl(\Bigl(\prod_{j=1,\ j\neq\nu}^{r} A_j\Bigr)A_{r+1}\Bigr)A_\nu
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1,\ j\neq\nu}^{r} A_j,\ B \to A_{r+1},\ C \to A_\nu)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r-1} A_{s_{r,\nu}(j)}\Bigr)A_{r+1}\Bigr)A_\nu
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices_omitting_one_index}\ (r \to r)\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r-1} A_{s_{r,\nu}(j)}\Bigr)A_{s_{r+1,\nu}(r)}\Bigr)A_\nu
+&&(\because\ s_{r+1,\nu}(r) = r+1)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r-1} A_{s_{r+1,\nu}(j)}\Bigr)A_{s_{r+1,\nu}(r)}\Bigr)A_\nu
+&&(\because\ s_{r+1,\nu}(j) = s_{r,\nu}(j)\ (j \in \{1,\dots,r-1\}))\\
+&= \Bigl(\prod_{j=1}^{r} A_{s_{r+1,\nu}(j)}\Bigr)A_\nu
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (r \to r-1,\ A_j \to A_{s_{r+1,\nu}(j)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{j=1,\ j\neq\nu}^{r+1} A_j\Bigr)A_\nu
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices_omitting_one_index}\ (r \to r+1)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 1・Step 3 が「因子の可換性により添字 ν の因子を末尾へ寄せる」「異なる添字の因子の可換性」を名前だけで根拠にしていたので足した。" +
+          "要るのは ν < j の組の可換性だけである。Lean は具体版 Ising2D.moving_one_factor_of_finite_product_to_the_end（DefinitionFiniteProductOfMatricesOmittingOneIndex.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_matrix_sum_with_itself_zero_implies_zero",
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },

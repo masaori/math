@@ -2148,9 +2148,7 @@ X\,\check{n}_\nu
         ref("def_finite_product_of_matrices"),
         "（",
         math(String.raw`n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_\mu \to \epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)`),
-        "）による。因子は ",
-        ref("check_number_operators_commute"),
-        " により互いに可換なので、積の順序は問わない）。このとき、",
+        "）による）。このとき、",
       ]),
       list([
         [
@@ -2406,22 +2404,55 @@ R_\nu^{(0)}R_\mu^{(0)}
         math(String.raw`\nu \in \check{\mathcal{M}}`),
         " で ",
         math(String.raw`\epsilon_\nu \neq \epsilon'_\nu`),
-        "。因子はすべて可換なので、",
-        math(String.raw`\check{Q}_\epsilon \check{Q}_{\epsilon'}`),
-        " の中で添字 ",
-        math(String.raw`\nu`),
-        " の 2 因子を隣接させられて",
+        "。まず ",
+        math(String.raw`R_\nu^{(\epsilon_\nu)}`),
+        " は ",
+        math(String.raw`\check{Q}_{\epsilon'}`),
+        " のどの因子 ",
+        math(String.raw`R_\mu^{(\epsilon'_\mu)}`),
+        "（",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "）とも可換である。",
+        math(String.raw`\mu \neq \nu`),
+        " なら Step 0 の可換性（",
+        math(String.raw`e' \to \epsilon_\nu,\ e \to \epsilon'_\mu`),
+        "）による。",
+        math(String.raw`\mu = \nu`),
+        " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check{Q}_\epsilon \check{Q}_{\epsilon'}
-&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)
-  R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
-  \quad (\because \text{因子の可換性により添字 }\nu\text{ の二因子を末尾へ寄せる}) \\
-&= \left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\cdot 0
-  \quad (\because \epsilon_\nu\neq\epsilon'_\nu\text{ と Step 0 の異なる上付き添字の積}) \\
+R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
 &= 0
-  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon'_\mu)}\right)\right)
+  \quad (\because (\epsilon_\nu,\epsilon'_\nu) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(1)}R_\mu^{(0)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(0)}R_\mu^{(1)} = 0\ (\mu \to \nu)) \\
+&= R_\nu^{(\epsilon'_\nu)}R_\nu^{(\epsilon_\nu)}
+  \quad (\because (\epsilon_\nu,\epsilon'_\nu) = (1,0)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (0,1)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon \check{Q}_{\epsilon'}
+&= \left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{Q}_{\epsilon'}
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
+&= \left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)\check{Q}_{\epsilon'}
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\text{。前提}\ R_\nu^{(\epsilon_\nu)}R_j^{(\epsilon_j)} = R_j^{(\epsilon_j)}R_\nu^{(\epsilon_\nu)}\ (\nu < j)\ \text{は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon_\nu,\ e \to \epsilon_j)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\check{Q}_{\epsilon'}\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)},\ C \to \check{Q}_{\epsilon'}\right)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)
+  \quad (\because \check{Q}_{\epsilon'}\text{ の定義（冒頭）}) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to R_\nu^{(\epsilon_\nu)},\ A_j \to R_j^{(\epsilon'_j)})\text{。前提は直前の可換性}\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)R_\nu^{(\epsilon'_\nu)}\right)R_\nu^{(\epsilon_\nu)}\right)
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon'_j)})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon'_\nu,\ e \to \epsilon'_j)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\left(R_\nu^{(\epsilon'_\nu)}R_\nu^{(\epsilon_\nu)}\right)\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)},\ B \to R_\nu^{(\epsilon'_\nu)},\ C \to R_\nu^{(\epsilon_\nu)}\right)\right) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\cdot 0\right)
+  \quad (\because (\epsilon'_\nu,\epsilon_\nu) = (0,1)\ \text{なら Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0,\ (1,0)\ \text{なら}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)) \\
+&= \left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\cdot 0
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon'_\mu)}\right)\right) \\
+&= 0
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2469,86 +2500,7 @@ R_\nu^{(0)}R_\mu^{(0)}
       paragraph([
         "Step 3（(3) の証明）。",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
-        " を固定する。因子はすべて可換なので、主張の左辺は",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{n}_\nu \check{Q}_\epsilon
-&=\check{n}_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
-  \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
-&=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
-  \left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
-  \quad (\because \text{異なる添字の因子の可換性})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\epsilon_\nu = 1`),
-        " の場合は",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{n}_\nu R_\nu^{(1)}
-&=\check{n}_\nu\check{n}_\nu
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
-&=\check{n}_\nu
-  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
-&=R_\nu^{(1)}
-  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
-&=1_{\mathbb{C}}\,R_\nu^{(1)}
-  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(1)})\ \text{を右辺から左辺へ}\right) \\
-&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\nu=1)
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\epsilon_\nu = 0`),
-        " の場合は",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{n}_\nu R_\nu^{(0)}
-&=\check{n}_\nu\left(I-\check{n}_\nu\right)
-  \quad (\because R_\nu^{(0)}\text{ の定義（冒頭）}) \\
-&=\check{n}_\nu\left(I+\left(-\check{n}_\nu\right)\right)
-  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\nu)\right) \\
-&=\check{n}_\nu I+\check{n}_\nu\left(-\check{n}_\nu\right)
-  \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to I,\ C \to -\check{n}_\nu)\right) \\
-&=\check{n}_\nu+\check{n}_\nu\left(-\check{n}_\nu\right)
-  \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu)\right) \\
-&=\check{n}_\nu+\left(-\left(\check{n}_\nu\check{n}_\nu\right)\right)
-  \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
-&=\check{n}_\nu-\check{n}_\nu\check{n}_\nu
-  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu\check{n}_\nu)\ \text{を右辺から左辺へ}\right) \\
-&=\check{n}_\nu-\check{n}_\nu
-  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
-&=0
-  \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
-&=0_{\mathbb{C}}\,R_\nu^{(0)}
-  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(0)})\ \text{を右辺から左辺へ}\right) \\
-&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \text{場合の仮定 } \epsilon_\nu=0)
-\end{aligned}`,
-      ),
-      paragraph(["したがって、どちらの場合も"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{n}_\nu\check{Q}_\epsilon
-&=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
-  \left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
-  \quad (\because \text{Step 3 の最初の鎖}) \\
-&=\left(\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)}\right)
-  \left(\epsilon_\nu R_\nu^{(\epsilon_\nu)}\right)
-  \quad (\because \text{直前の二つの場合}) \\
-&=\epsilon_\nu\left(\left(\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
-  \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\nu,\ A \to \textstyle\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)})\right) \\
-&=\epsilon_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
-  \quad (\because \text{異なる添字の因子の可換性}) \\
-&=\epsilon_\nu\check{Q}_\epsilon
-  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
-\end{aligned}`,
-      ),
-      paragraph([
-        "左右どちらから掛けても同じであることを示す。まず ",
+        " を固定する。まず ",
         math(String.raw`\check{n}_\nu`),
         " は ",
         math(String.raw`\check{Q}_\epsilon`),
@@ -2605,18 +2557,99 @@ R_\nu^{(0)}R_\mu^{(0)}
   \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
 \end{aligned}`,
       ),
-      paragraph(["したがって"]),
+      paragraph([
+        "次に ",
+        math(String.raw`\check{n}_\nu R_\nu^{(\epsilon_\nu)}`),
+        " を求める。",
+      ]),
+      paragraph([
+        math(String.raw`\epsilon_\nu = 1`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(1)}
+&=\check{n}_\nu\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu
+  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
+&=R_\nu^{(1)}
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=1_{\mathbb{C}}\,R_\nu^{(1)}
+  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(1)})\ \text{を右辺から左辺へ}\right) \\
+&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \text{場合の仮定 } \epsilon_\nu=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon_\nu = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(0)}
+&=\check{n}_\nu\left(I-\check{n}_\nu\right)
+  \quad (\because R_\nu^{(0)}\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu\left(I+\left(-\check{n}_\nu\right)\right)
+  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\nu)\right) \\
+&=\check{n}_\nu I+\check{n}_\nu\left(-\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to I,\ C \to -\check{n}_\nu)\right) \\
+&=\check{n}_\nu+\check{n}_\nu\left(-\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu)\right) \\
+&=\check{n}_\nu+\left(-\left(\check{n}_\nu\check{n}_\nu\right)\right)
+  \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
+&=\check{n}_\nu-\check{n}_\nu\check{n}_\nu
+  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu\check{n}_\nu)\ \text{を右辺から左辺へ}\right) \\
+&=\check{n}_\nu-\check{n}_\nu
+  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
+&=0
+  \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
+&=0_{\mathbb{C}}\,R_\nu^{(0)}
+  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(0)})\ \text{を右辺から左辺へ}\right) \\
+&=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \quad (\because \text{場合の仮定 } \epsilon_\nu=0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって、どちらの場合も ",
+        math(String.raw`\check{n}_\nu R_\nu^{(\epsilon_\nu)} = \epsilon_\nu R_\nu^{(\epsilon_\nu)}`),
+        " である。主張の左辺から始める：",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu\check{Q}_\epsilon
+&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\text{。前提は最初の三つの場合}\right) \\
+&=\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)\check{n}_\nu
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\text{。前提は Step 0 の可換性}\ (\mu \to j,\ e' \to \epsilon_\nu,\ e \to \epsilon_j)\right) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(R_\nu^{(\epsilon_\nu)}\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{mat_mult_associative}\ \left(m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)},\ C \to \check{n}_\nu\right)\right) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
+  \quad (\because \text{最初の三つの場合のうち}\ \mu = \nu\ \text{の二つ（}\epsilon_\nu = 1\ \text{なら一つ目、}\epsilon_\nu = 0\ \text{なら二つ目）を右辺から左辺へ}) \\
+&=\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\left(\epsilon_\nu R_\nu^{(\epsilon_\nu)}\right)
+  \quad (\because \text{直前の二つの場合}) \\
+&=\epsilon_\nu\left(\left(\prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
+  \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \left(m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\nu,\ A \to \textstyle \prod_{\mu=1,\ \mu\neq\nu}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)}\right)\right) \\
+&=\epsilon_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+  \quad \left(\because\ \blkref{moving_one_factor_of_finite_product_to_the_end}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\right) \\
+&=\epsilon_\nu\check{Q}_\epsilon
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph(["右から掛けた側は"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{n}_\nu
-&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
-&=\check{n}_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
-  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ。前提は直前の三つの場合}\right) \\
+&=\check{n}_\nu \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ。前提は最初の三つの場合}\right) \\
 &=\check{n}_\nu\check{Q}_\epsilon
   \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
 &=\epsilon_\nu\check{Q}_\epsilon
-  \quad (\because \text{直前の結果})
+  \quad (\because \text{直前の鎖})
 \end{aligned}`,
       ),
       paragraph([
@@ -2740,6 +2773,7 @@ y_{\epsilon'}
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「行列の加法逆元」3 か所（ň − ň = 0）を matrix_difference_zero_iff_equal の ⟸ に、Step 0 の和の「行列の加法（加法逆元と単位元）」を新しい主張 matrix_plus_difference_cancels（A + (B − A) = B）に、冪等性の行 5 か所を、Step 0 の冒頭に置いた ň_μň_μ = ň_μ（check_number_operator_idempotent (3) の ň_μ^2 = ň_μ を def_exp (1) の冪から積へ運ぶ 5 行）の参照にした。本証明の 0 が零行列 O であることを冒頭に書いた（R_μ^{(0)}R_μ^{(0)} の鎖の行内の断り書きを移した）。主張は変えていない。Lean は冒頭の 5 行の calc Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq、nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self の段の付け替え、和の 2 行の calc nOp_add_one_sub_nOp。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_30。",
         "2026-11-02: Step 3 の名前だけの根拠「ε_ν=1 と単位元の積」を scalar_multiple_by_one を右辺から左辺へ引く行と場合の仮定の行に、「ε_ν=0 と零元の積」を zero_scalar_multiple_is_zero_matrix を右辺から左辺へ引く行と場合の仮定の行に、「Q̌_ε の定義とスカラーの分配」を Step 3 の最初の鎖・直前の二つの場合・scalar_multiple_factors_out_of_right_factor・異なる添字の因子の可換性・Q̌_ε の定義の 5 行に割った。主張の中身は変えていない。",
         "2026-11-02: Q̌_ε の有限積を def_finite_product_of_matrices の参照にし、Step 1 の最後の行「零行列は行列積の零元」を zero_matrix_is_right_zero_of_mat_mult に、Step 2 の最後の行「単位行列の有限積は単位行列」を finite_product_of_identity_matrices に替えた（どちらも新しく足した主張）。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_32。",
+        "2026-11-02: ∏_{μ≠ν} を使っていた 3 行（Step 1 の ε ≠ ε' の鎖、Step 3 の ň_νQ̌_ε の鎖の最初と最後）を、def_finite_product_of_matrices_omitting_one_index と moving_one_factor_of_finite_product_to_the_end の参照で書き直した（Step 1 は R_ν^{(ε_ν)} と Q̌_{ε'} の因子の可換性を先に示し、Step 3 は因子ごとの可換性の 3 つの場合を先に置いた）。主張の文の「因子は互いに可換なので、積の順序は問わない」は、有限積を左から掛けると定めたので外した。主張の中身は不変。SageMath は 050 の check_35。",
       ],
     },
   },

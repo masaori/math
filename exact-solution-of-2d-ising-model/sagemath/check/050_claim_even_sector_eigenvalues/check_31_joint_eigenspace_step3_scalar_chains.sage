@@ -1,11 +1,10 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 3 の二つの場合の鎖の末尾と、最後の鎖を一行ずつ厳密に確かめる（M = 2, 3, 4、全ての ε ∈ {0,1}^M と ν）。
+# Step 3 の二つの場合の鎖の末尾を一行ずつ厳密に確かめる（M = 2, 3, 4 の全ての ň_μ）。
 #   ε_ν = 1: ň_ν R_ν^{(1)} = ň_νň_ν = ň_ν = R_ν^{(1)} = 1_ℂ R_ν^{(1)}（scalar_multiple_by_one を右辺から左辺へ）= ε_ν R_ν^{(ε_ν)}
 #   ε_ν = 0: ň_ν R_ν^{(0)} = ň_ν(I − ň_ν) = O（途中の 7 行は check_24・check_30）= 0_ℂ R_ν^{(0)}
 #            （zero_scalar_multiple_is_zero_matrix を右辺から左辺へ）= ε_ν R_ν^{(ε_ν)}
-#   最後の鎖: ň_νQ̌_ε = (∏_{μ≠ν}R_μ)ň_νR_ν = (∏_{μ≠ν}R_μ)(ε_νR_ν) = ε_ν((∏_{μ≠ν}R_μ)R_ν)
-#            （scalar_multiple_factors_out_of_right_factor）= ε_ν∏_μR_μ（異なる添字の因子の可換性）= ε_νQ̌_ε
-# 有限積は μ = 1, …, M の順に左から掛ける。行列の積・和・差・スカラー倍・単位行列は本文の成分の式で組む。
+# ň_νQ̌_ε の鎖は check_35 が確かめる。
+# 行列の積・和・差・スカラー倍・単位行列は本文の成分の式で組む。
 # ň_μ は check_24・check_30 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
 # 否定コントロール: 冪等でない不定元の 2×2 行列では、冪等性（check_number_operator_idempotent (3)）を使う行だけが等号を外れる。
 # 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
@@ -73,21 +72,6 @@ for M in range(2, 5):
         assert n ^ 2 == n                                              # (3) の仮定
         check_chain(case_one_chain(n), ("eps=1", M), True)
         check_chain(case_zero_chain(n), ("eps=0", M), True)
-    for eps in cartesian_product([[0, 1]] * M):
-        R = [ns[mu] if eps[mu] == 1 else body_difference(Id, ns[mu]) for mu in range(M)]
-        Q = body_prod(R, QQ, N)                                        # Q̌_ε の定義（冒頭）
-        for nu in range(M):
-            others = body_prod([R[mu] for mu in range(M) if mu != nu], QQ, N)
-            e = QQ(eps[nu])
-            lines = [
-                (body_product(ns[nu], Q), False),
-                (body_product(others, body_product(ns[nu], R[nu])), False),   # Step 3 の最初の鎖
-                (body_product(others, body_scalar(e, R[nu])), False),         # 直前の二つの場合
-                (body_scalar(e, body_product(others, R[nu])), False),         # scalar_multiple_factors_out_of_right_factor
-                (body_scalar(e, body_prod(R, QQ, N)), False),                 # 異なる添字の因子の可換性
-                (body_scalar(e, Q), False),                                   # Q̌_ε の定義（冒頭）
-            ]
-            check_chain(lines, ("final", M, tuple(eps), nu), True)
 
 # 否定コントロール: 不定元の成分の 2×2 行列（冪等でない）
 Rg = PolynomialRing(QQ, ["x%d" % k for k in range(4)])
@@ -102,4 +86,4 @@ for chain in (case_one_chain, case_zero_chain):
             neg_control += 1
 assert neg_control == 2
 
-print("PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾と最後の鎖: %d 段、否定コントロール %d 行" % (count, neg_control))
+print("PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾: %d 段、否定コントロール %d 行" % (count, neg_control))
