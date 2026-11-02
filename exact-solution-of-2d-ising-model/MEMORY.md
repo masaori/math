@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算の連続実行の回が、前の回が main へ入れ終えた `cosh_addition_and_half_angle` をもう一度扱った。作業ツリーが前の回の成果を含まない古い main から作られ、着手前に origin を取り込んでいなかったためである。こちらの版は main の版（21 ブロックに分けたもの）に含まれるので取り下げ、runbook の「毎回の手順」の最初に `git fetch origin && git rebase origin/main` を足した。次は状態台帳どおり `elementary_sine_bounds`。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、5 つの主張と arcsinh の定義を束ねていた `cosh_addition_and_half_angle` を 1 ブロック 1 主張の 21 ブロック（cosh・sinh の偶奇性・加法定理・半角と倍角・sinh 0 = 0・単調性・単射性・sinh' = cosh・√(y²+1) > 0・arcsinh の定義と性質と微分・cosh ≥ 1・cosh の単調性・t ≤ sinh t・sinh t ≤ t cosh t）に分け、20 個の主張に同名の検算を付けた（未検算 95 件）。省いていた鎖を書き、未定義の実数の絶対値に頼る段を除き、微分の公式を `remark_real_analysis_facts_R3_R4` に宣言し、下流の参照を付け替えた。計算の誤りは無かった。実対数の定義の前方参照と、Lean のコメントが旧ラベルを指したままであることは状態台帳に記録した。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十四個目を行った。`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `sign_flip_conjugation` Step 3 の符号の外出し 2 か所を `negation_factors_out_of_*_factor` に、`V_plus_is_invertible` Step 2・Step 3 の鎖を括弧を全て書いた 1 行 1 主張の鎖（スカラー倍・結合律・単位行列の左右の積のラベル参照）に替え、Lean の具体版を同じ行の `calc` に、SageMath に check_09・check_10 を足した（全 PASS）。`check-no-sorry.sh` の `'` を含む名前の引用符の欠けを直した。次は同じファイルに残る名前だけの根拠（状態台帳の次の一歩）。
