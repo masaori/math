@@ -8,23 +8,29 @@ def blockPreservingPermutations {J K : Type*} [Fintype J] [DecidableEq J]
     (block : J → K) [DecidableEq K] : Finset (Equiv.Perm J) :=
   univ.filter (fun σ => ∀ j, block (σ j) = block j)
 
+private theorem blockDiagonal_permutationProduct_eq_zero
+    {J K : Type*} [Fintype J] [LinearOrder J] [DecidableEq K]
+    (block : J → K) (B : Matrix J J (Polynomial Qbar))
+    (hoff : ∀ i j, block i ≠ block j → B i j = 0)
+    (σ : Equiv.Perm J) (j : J) (hj : block (σ j) ≠ block j) :
+    (∏ i : J, B i (σ i)) = 0 := by
+  classical
+  have hfactor : B j (σ j) = 0 := hoff j (σ j) (Ne.symm hj)
+  calc
+    (∏ i : J, B i (σ i)) = B j (σ j) * ∏ i ∈ (univ : Finset J).erase j, B i (σ i) :=
+      (Finset.mul_prod_erase univ (fun i => B i (σ i)) (mem_univ j)).symm
+    _ = 0 * ∏ i ∈ (univ : Finset J).erase j, B i (σ i) :=
+      congrArg (· * ∏ i ∈ (univ : Finset J).erase j, B i (σ i)) hfactor
+    _ = 0 := zero_mul _
+
 theorem blockDiagonal_signedPermutationTerm_eq_zero
     {J K : Type*} [Fintype J] [LinearOrder J] [DecidableEq K]
     (block : J → K) (B : Matrix J J (Polynomial Qbar))
     (hoff : ∀ i j, block i ≠ block j → B i j = 0)
     (σ : Equiv.Perm J) (j : J) (hj : block (σ j) ≠ block j) :
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i k : J => i < k) σ : ℤ) : Qbar) *
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
       (∏ i : J, B i (σ i)) = 0 := by
-  classical
-  have hfactor : B j (σ j) = 0 := hoff j (σ j) (Ne.symm hj)
-  have hproduct : (∏ i : J, B i (σ i)) = 0 := by
-    calc
-      (∏ i : J, B i (σ i)) = B j (σ j) * ∏ i ∈ (univ : Finset J).erase j, B i (σ i) :=
-        (Finset.mul_prod_erase univ (fun i => B i (σ i)) (mem_univ j)).symm
-      _ = 0 * ∏ i ∈ (univ : Finset J).erase j, B i (σ i) :=
-        congrArg (· * ∏ i ∈ (univ : Finset J).erase j, B i (σ i)) hfactor
-      _ = 0 := zero_mul _
-  rw [hproduct, mul_zero]
+  rw [blockDiagonal_permutationProduct_eq_zero block B hoff σ j hj, mul_zero]
 
 theorem blockDiagonal_det_eq_sum_preserving
     {J K : Type*} [Fintype J] [LinearOrder J] [DecidableEq K]
@@ -41,7 +47,8 @@ theorem blockDiagonal_det_eq_sum_preserving
       ¬ (∀ j, block (σ j) = block j) → term σ = 0 := by
     intro σ _ hσ
     obtain ⟨j, hj⟩ := not_forall.mp hσ
-    exact blockDiagonal_signedPermutationTerm_eq_zero block B hoff σ j hj
+    dsimp [term]
+    rw [blockDiagonal_permutationProduct_eq_zero block B hoff σ j hj, mul_zero]
   calc
     Matrix.det B = ∑ σ : Equiv.Perm J, term σ := qbarPolynomial_det_row_expansion B
     _ = ∑ σ ∈ blockPreservingPermutations block, term σ := by

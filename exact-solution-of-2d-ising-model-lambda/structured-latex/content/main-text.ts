@@ -6419,7 +6419,15 @@ a+2b&=(a+b)+b
 &=0
 &&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
 \end{aligned}`),
-                paragraph(["である。よって定数多項式の符号を掛けた項も零である。置換展開を、ブロックを保つ置換と保たない置換に分ける。"]),
+                displayMath(String.raw`\begin{aligned}
+\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
+\prod_{i\in\mathcal J}B_{i,\sigma(i)}
+&=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\cdot0
+&&(\because\ \text{直前の積の等式})\\
+&=0
+&&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
+\end{aligned}`),
+                paragraph(["置換展開を、ブロックを保つ置換と保たない置換に分ける。"]),
                 displayMath(String.raw`\begin{aligned}
 \det_x(B)
 &=\sum_{\sigma\in\operatorname{Perm}(\mathcal J)}
