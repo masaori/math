@@ -4,7 +4,17 @@
 人手証明が使うのは、二つの通過がともに直進であるという二条件の交換と、
 二つの軸が異なるという関係の対称性だけである。辺・格子・方向番号・有限性は使わない。
 -/
+import Mathlib.Data.Int.Basic
+
 namespace Ising2DLambda.NecSuf.KacWard
+
+/-- 二つの接続が同じ頂点で直進し、進入方向の軸が異なる関係。 -/
+def edgeTransverseCrossing {E V A : Type}
+    (successor : E → E → Prop) (target : E → V)
+    (turn : E → E → ℤ) (axis : E → A)
+    (e f e' f' : E) : Prop :=
+  successor e f ∧ successor e' f' ∧ target e = target e' ∧
+    turn e f = 0 ∧ turn e' f' = 0 ∧ axis e ≠ axis e'
 
 /-- 二つの局所データがともに条件 `straight` を満たし、軸が `different` の関係にあることは、
 `different` が対称ならば二つの局所データの順序に依らない。 -/

@@ -5,10 +5,28 @@
 -/
 import Ising2DLambda.NecSuf.KacWard.TotalTurning
 import Ising2DLambda.NecSuf.KacWard.TransverseCrossing
+import Ising2DLambda.KacWard.StepTurning
+import Ising2DLambda.KacWard.DirectionGateCrossingTurning
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
+
+/-- 実際の向き付き辺が作る、共通頂点での二つの直進通過の横断。 -/
+def edgeTransverseCrossing {L : ℕ} (e f e' f' : OrientedEdge L) : Prop :=
+  f ∈ nonbacktrackingSuccessors e ∧ f' ∈ nonbacktrackingSuccessors e' ∧
+    orientedTarget e = orientedTarget e' ∧
+    stepTurning e f = 0 ∧ stepTurning e' f' = 0 ∧
+    directionAxis (directionNumber e) ≠ directionAxis (directionNumber e')
+
+theorem edgeTransverseCrossing_from_necSuf {L : ℕ}
+    (e f e' f' : OrientedEdge L) :
+    edgeTransverseCrossing e f e' f' ↔
+      Ising2DLambda.NecSuf.KacWard.edgeTransverseCrossing
+        (fun a b => b ∈ nonbacktrackingSuccessors a)
+        orientedTarget stepTurning (fun a => directionAxis (directionNumber a))
+        e f e' f' := by
+  rfl
 
 /-- 正方格子の一回の通過が持つ局所データ。一歩の回転と、水平・垂直の軸。 -/
 structure LocalVisit where

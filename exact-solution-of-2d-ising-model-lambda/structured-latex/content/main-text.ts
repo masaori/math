@@ -9112,7 +9112,7 @@ j\in O'
  &\ \Longleftrightarrow\ j\in O
  &&\bigl(\because\ \blkref{def_odd_orbit_selection}\bigr).
 \end{aligned}`),
-                displayMath(String.raw`O'=O\qquad(\because\ \forall j\in\mathcal J,\ j\in O'\Longleftrightarrow j\in O\text{ と集合の外延性})`),
+                displayMath(String.raw`O'=O\qquad\bigl(\because\ \forall j\in\mathcal J,\ j\in O'\Longleftrightarrow j\in O\text{ と集合の外延性}\bigr)`),
                 paragraph([math(String.raw`O=\varnothing`), " なら、両方で選択を定めない。以下は ", math(String.raw`O\ne\varnothing`), " とする。集合等号により ", math(String.raw`O'\ne\varnothing`), " でもあるから、", math(String.raw`m:=\operatorname{oddmin}(\sigma)\in O`), " と ", math(String.raw`m':=\operatorname{oddmin}(\tau)\in O'`), " がともに定まる（", ref("def_odd_orbit_selection"), "）。"]),
                 displayMath(String.raw`\begin{aligned}
 m'\in O&\ \Longleftrightarrow\ m'\in O'
@@ -59507,6 +59507,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           kind: "definition",
                           title: { text: "格子頂点で横断する二つの通過" },
                           labels: ["def_transverse_crossing"],
+                          lean: [
+                            "Ising2DLambda.KacWard.edgeTransverseCrossing",
+                            "Ising2DLambda.NecSuf.KacWard.edgeTransverseCrossing",
+                            "Ising2DLambda.KacWard.edgeTransverseCrossing_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([
