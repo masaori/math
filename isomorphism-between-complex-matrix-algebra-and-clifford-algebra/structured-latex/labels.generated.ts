@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_scalar_multiple_of_linear_combination",
   "claim_sum_of_linear_combinations_of_same_family",
+  "claim_uniqueness_of_coefficients_of_linear_combination",
   "claim_zero_map_is_linear_form",
   "claim_zero_scalar_multiple_is_zero_vector",
   "def_basis",

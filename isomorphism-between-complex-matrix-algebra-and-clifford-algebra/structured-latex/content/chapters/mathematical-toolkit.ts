@@ -1472,4 +1472,173 @@ L^{\lambda}_m+_V L^{\mu}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_uniqueness_of_coefficients_of_linear_combination",
+    kind: "claim",
+    title: { text: "一次独立な族による線型結合の係数の一意性" },
+    labels: ["claim_uniqueness_of_coefficients_of_linear_combination"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の元の一次独立な番号付けた族（",
+        ref("def_linear_independence"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " と ",
+        math(String.raw`\mu_k`),
+        " が一つずつ与えられ、線型結合（",
+        ref("def_linear_combination"),
+        "）について",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V b_k=\sum_{k=1}^{n}\mu_k\cdot_V b_k`),
+      paragraph([
+        "が成り立つとする。このとき、すべての ",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\lambda_k=\mu_k`),
+        " である。",
+      ]),
+      paragraph([
+        "仮定に使うのは族 ",
+        math(String.raw`b`),
+        " の一次独立性だけであり、",
+        math(String.raw`b`),
+        " が ",
+        math(String.raw`V`),
+        " を線型結合で張ることは使わない。",
+        math(String.raw`V`),
+        " の基底（",
+        ref("def_basis"),
+        "）は一次独立な族なので、基底による線型結合の係数はこの主張により一つに決まる。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`-1_{\mathbb{C}}`),
+        " を、",
+        math(String.raw`1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})=0_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`\mathbb{C}`),
+        " の元（",
+        math(String.raw`1_{\mathbb{C}}`),
+        " の加法の逆元）とする。",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`y`),
+        " と、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " ごとの ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\nu_k`),
+        " を次で置く。",
+      ]),
+      list([
+        [math(String.raw`y:=\sum_{k=1}^{n}\mu_k\cdot_V b_k\in V`)],
+        [
+          math(String.raw`\nu_k:=\lambda_k+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)\in\mathbb{C}`),
+          "（",
+          math(String.raw`k\in\{1,\dots,n\}`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "仮定は ",
+        math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V b_k=y`),
+        " と書ける。まず、係数 ",
+        math(String.raw`\nu_1,\dots,\nu_n`),
+        " による線型結合が ",
+        math(String.raw`0_V`),
+        " であることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}\nu_k\cdot_V b_k
+&=\sum_{k=1}^{n}\Bigl(\lambda_k+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)\Bigr)\cdot_V b_k
+&&\left(\because\ \nu_k\ \text{の置き方}\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)+_V\left(\sum_{k=1}^{n}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)\cdot_V b_k\right)
+&&\left(\because\ \text{同じ族の線型結合の和。}\blkref{claim_sum_of_linear_combinations_of_same_family}\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)+_V\left((-1_{\mathbb{C}})\cdot_V\left(\sum_{k=1}^{n}\mu_k\cdot_V b_k\right)\right)
+&&\left(\because\ \text{線型結合のスカラー倍（}\mu=-1_{\mathbb{C}}\text{）。}\blkref{claim_scalar_multiple_of_linear_combination}\right)\\
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)+_V\bigl((-1_{\mathbb{C}})\cdot_V y\bigr)
+&&\left(\because\ y\ \text{の置き方}\right)\\
+&=y+_V\bigl((-1_{\mathbb{C}})\cdot_V y\bigr)
+&&\left(\because\ \text{仮定}\right)\\
+&=(1_{\mathbb{C}}\cdot_V y)+_V\bigl((-1_{\mathbb{C}})\cdot_V y\bigr)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_V y
+&&\left(\because\ \text{スカラーの加法についての分配法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_V y
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定め方}\right)\\
+&=0_V
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=y\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph([
+        "族 ",
+        math(String.raw`b`),
+        " は一次独立なので、一次独立の定義（",
+        ref("def_linear_independence"),
+        "）を係数 ",
+        math(String.raw`\nu_1,\dots,\nu_n`),
+        " に適用して、すべての ",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\nu_k=0_{\mathbb{C}}`),
+        " を得る。",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " を任意に取る。次の式変形はすべて ",
+        math(String.raw`\mathbb{C}`),
+        " の中の計算である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mu_k
+&=0_{\mathbb{C}}+_{\mathbb{C}}\mu_k
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=\nu_k+_{\mathbb{C}}\mu_k
+&&\left(\because\ \nu_k=0_{\mathbb{C}}\right)\\
+&=\Bigl(\lambda_k+_{\mathbb{C}}\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)\Bigr)+_{\mathbb{C}}\mu_k
+&&\left(\because\ \nu_k\ \text{の置き方}\right)\\
+&=\lambda_k+_{\mathbb{C}}\Bigl(\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)+_{\mathbb{C}}\mu_k\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=\lambda_k+_{\mathbb{C}}\Bigl(\bigl((-1_{\mathbb{C}})\cdot_{\mathbb{C}}\mu_k\bigr)+_{\mathbb{C}}\bigl(1_{\mathbb{C}}\cdot_{\mathbb{C}}\mu_k\bigr)\Bigr)
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\lambda_k+_{\mathbb{C}}\Bigl(\bigl((-1_{\mathbb{C}})+_{\mathbb{C}}1_{\mathbb{C}}\bigr)\cdot_{\mathbb{C}}\mu_k\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=\lambda_k+_{\mathbb{C}}\Bigl(\bigl(1_{\mathbb{C}}+_{\mathbb{C}}(-1_{\mathbb{C}})\bigr)\cdot_{\mathbb{C}}\mu_k\Bigr)
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=\lambda_k+_{\mathbb{C}}\bigl(0_{\mathbb{C}}\cdot_{\mathbb{C}}\mu_k\bigr)
+&&\left(\because\ -1_{\mathbb{C}}\ \text{の定め方}\right)\\
+&=\lambda_k+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\cdot_{\mathbb{C}}\mu_k=0_{\mathbb{C}}\right)\\
+&=\lambda_k
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "したがって、すべての ",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について ",
+        math(String.raw`\lambda_k=\mu_k`),
+        " である。",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`\{1,\dots,n\}`),
+        " が空集合なので、結論は条件なしに成り立つ。",
+      ]),
+    ],
+  },
 ]);
