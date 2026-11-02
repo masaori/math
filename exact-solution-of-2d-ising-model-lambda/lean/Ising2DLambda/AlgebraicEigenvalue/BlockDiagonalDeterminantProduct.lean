@@ -72,8 +72,7 @@ theorem blockDiagonal_det_eq_prod_fiber_dets
       Matrix.det (fun i j : {v : J // block v = k} => B i.1 j.1) := by
   classical
   let weight (k : K) (τ : Equiv.Perm {v : J // block v = k}) : Polynomial Qbar :=
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign
-      (fun i j : {v : J // block v = k} => i < j) τ : ℤ) : Qbar) *
+    Polynomial.C (((Equiv.Perm.sign τ : ℤ) : Qbar)) *
       ∏ i : {v : J // block v = k}, B i.1 (τ i).1
   calc
     Matrix.det B =
@@ -86,14 +85,26 @@ theorem blockDiagonal_det_eq_prod_fiber_dets
           ∏ k : K, weight k (parts k) := by
       refine Finset.sum_congr rfl ?_
       intro parts _
-      simpa only [weight, IntegerMatrix.inversionSign_eq_mathlibSign] using
+      simpa only [weight] using
         blockDiagonal_term_eq_prod_fiber_terms block B parts
     _ = ∏ k : K, ∑ τ : Equiv.Perm {v : J // block v = k}, weight k τ :=
       (polynomial_prod_sum_fibers weight).symm
     _ = ∏ k : K, Matrix.det (fun i j : {v : J // block v = k} => B i.1 j.1) := by
       refine Finset.prod_congr rfl ?_
       intro k _
-      exact (qbarPolynomial_det_row_expansion
-        (fun i j : {v : J // block v = k} => B i.1 j.1)).symm
+      calc
+        (∑ τ : Equiv.Perm {v : J // block v = k}, weight k τ) =
+            ∑ τ : Equiv.Perm {v : J // block v = k},
+              Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign
+                (fun i j : {v : J // block v = k} => i < j) τ : ℤ) : Qbar) *
+                ∏ i : {v : J // block v = k}, B i.1 (τ i).1 := by
+          apply Finset.sum_congr rfl
+          intro τ _
+          dsimp only [weight]
+          exact (congrArg (fun z : ℤ => Polynomial.C (z : Qbar) *
+            ∏ i : {v : J // block v = k}, B i.1 (τ i).1)
+              (IntegerMatrix.inversionSign_eq_mathlibSign τ)).symm
+        _ = _ := (qbarPolynomial_det_row_expansion
+          (fun i j : {v : J // block v = k} => B i.1 j.1)).symm
 
 end Ising2DLambda.AlgebraicEigenvalue

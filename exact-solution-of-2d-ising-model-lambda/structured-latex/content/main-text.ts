@@ -62489,7 +62489,10 @@ P_{k+1}(\gamma)_{\mathrm{row}}
                         " により、各 ", math(String.raw`r\in\{0,1,\ldots,m-1\}`),
                         " について、ある ", math(String.raw`a_r,b_r\in\mathbb Z`), " があり",
                       ]),
-                      displayMath(String.raw`P_r(\gamma)=\bigl(s(i_r)+La_r,\ s(j_r)+Lb_r\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+P_r(\gamma)&=\bigl(s(i_r)+La_r,\ s(j_r)+Lb_r\bigr)
+&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr).
+\end{aligned}`),
                       paragraph(["と書ける。したがって第 1 成分について"]),
                       displayMath(String.raw`\begin{aligned}
 s(i_j)-s(i_k)
