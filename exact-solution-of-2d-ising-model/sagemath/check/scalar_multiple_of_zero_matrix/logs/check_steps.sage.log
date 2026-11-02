@@ -1,0 +1,3 @@
+checked 36 entrywise chains over 9 shapes
+対照: 零でない行列のスカラー倍は零行列と一致しない
+RESULT: PASS

@@ -514,6 +514,60 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_scalar_multiple_of_zero_matrix",
+    kind: "claim",
+    title: { text: "零行列のスカラー倍は零行列" },
+    labels: ["scalar_multiple_of_zero_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(String.raw`aO = O`),
+      paragraph([
+        "が成り立つ。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(aO)_{ik}
+&= a\,O_{ik}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)\\
+&= a\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z = a)\bigr)\\
+&= O_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`aO = O`),
+        " である（行列の等号は成分ごと）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。theorem_exp_zero の証明が「零行列のスカラー倍は零行列である」と名前だけで根拠にしていた段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

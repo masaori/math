@@ -1034,6 +1034,9 @@ targets=(
   Ising2D.zero_matrix_add_matrix_of_necSuf
   Ising2D.matrix_sub_zero_matrix_of_necSuf
   Ising2D.finite_sum_of_zero_matrices_of_necSuf
+  Ising2D.matrix_smul_zero_matrix_apply
+  Ising2D.matrix_smul_zero_matrix
+  Ising2D.matrix_smul_zero_matrix_of_necSuf
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I
   Ising2D.twoByTwo_one_eq_kroneckerDelta
@@ -1063,6 +1066,8 @@ targets=(
   Ising2D.NecSuf.sub_zero_matrix_apply
   Ising2D.NecSuf.sub_zero_matrix
   Ising2D.NecSuf.sum_zero_matrices
+  Ising2D.NecSuf.smul_zero_matrix_apply
+  Ising2D.NecSuf.smul_zero_matrix
   Ising2D.eigenvalue_AMat_iff
   Ising2D.isEigenvector_smul_eigen_pos
   Ising2D.isEigenvector_smul_eigen_neg

@@ -1464,12 +1464,12 @@ S_NT_N
 &&(\because\ n \geq 1\ \text{のとき}\ O^n = O)\\
 &= I + \sum_{n=1}^{\infty} \frac{O}{n!}
 &&(\because\ 0! = 1)\\
-&= I + O \cdot \sum_{n=1}^{\infty} \frac{1}{n!}
-&&(\because\ \text{収束級数のスカラー倍は各項のスカラー倍の和である})\\
+&= I + \Bigl(\sum_{n=1}^{\infty} \frac{1}{n!}\Bigr)_{\mathbb{C}} O
+&&(\because\ \text{収束級数のスカラー倍は各項のスカラー倍の和である。実数の係数は}\ \blkref{inclusion_rr_to_cc}\ \text{の記法}\ r_{\mathbb{C}}\ \text{で}\ \mathbb{C}\ \text{へ移す})\\
 &= I + O
-&&(\because\ \text{零行列のスカラー倍は零行列である})\\
+&&(\because\ \blkref{scalar_multiple_of_zero_matrix}\ \bigl(a = \bigl(\textstyle\sum_{n=1}^{\infty} 1/n!\bigr)_{\mathbb{C}}\bigr))\\
 &= I
-&&(\because\ \text{零行列は行列の加法の単位元である})
+&&(\because\ \blkref{matrix_plus_zero_matrix}\ (X = I))
 \end{aligned}`,
       ),
     ],
@@ -1477,6 +1477,7 @@ S_NT_N
       status: "converted",
       notes: [
         "2026-09-03 の式変形統一で、証明末尾の参照一覧を削除し、exp の定義を使う最初の等式行の行末へラベル参照を移した。内容・式変形・根拠は変えていない。",
+        "2026-11-02: 「零行列のスカラー倍は零行列である」「零行列は行列の加法の単位元である」の名前だけの根拠を scalar_multiple_of_zero_matrix・matrix_plus_zero_matrix へのラベル参照に替えた。あわせて、スカラーを右に書いていた O · Σ 1/n! を def_matrix_scalar_multiple の書き方に合わせ、実数の和を inclusion_rr_to_cc の記法で ℂ へ移した (Σ 1/n!)_ℂ O に直した。",
       ],
     },
   },
