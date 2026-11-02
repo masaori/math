@@ -2532,4 +2532,191 @@ L_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_value_of_linear_combination_in_dual_space",
+    kind: "claim",
+    title: { text: "双対空間の元の線型結合の点での値は、係数と値の積の ℂ の中の番号順の和である" },
+    labels: ["claim_value_of_linear_combination_in_dual_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        " をその双対空間（",
+        ref("def_dual_space"),
+        "）とする。双対空間は ℂ-線型空間である（",
+        ref("claim_dual_space_is_complex_vector_space"),
+        "）ので、",
+        math(String.raw`V^{*}`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）と、",
+        math(String.raw`V^{*}`),
+        " の中の線型結合（",
+        ref("def_linear_combination"),
+        "）が定まる。",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`f:\{1,\dots,n\}\to V^{*}`),
+        " を ",
+        math(String.raw`V^{*}`),
+        " の元の番号付けた族とし、",
+        math(String.raw`f_k:=f(k)\in V^{*}`),
+        " と書く。",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられているとする。このとき、すべての ",
+        math(String.raw`x\in V`),
+        " について、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）を使った次の ",
+        math(String.raw`\mathbb{C}`),
+        " の等式が成り立つ。",
+      ]),
+      displayMath(String.raw`\left(\sum_{k=1}^{n}\lambda_k\cdot_{V^{*}}f_k\right)(x)=\sum_{\mathbb{C},\,k=1}^{n}\lambda_k\cdot_{\mathbb{C}}f_k(x)`),
+      paragraph([
+        "左辺は、",
+        math(String.raw`V^{*}`),
+        " の中の線型結合 ",
+        math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_{V^{*}}f_k\in V^{*}`),
+        "、すなわち ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）の、",
+        math(String.raw`x`),
+        " での値である。右辺は、",
+        math(String.raw`\alpha_k:=\lambda_k\cdot_{\mathbb{C}}f_k(x)\in\mathbb{C}`),
+        "（",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        "）と置いたときの ",
+        math(String.raw`\alpha_1,\dots,\alpha_n`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x\in V`),
+        " を任意に取る。係数 ",
+        math(String.raw`\lambda_1,\dots,\lambda_n`),
+        " と族 ",
+        math(String.raw`f`),
+        " について、ℂ-線型空間 ",
+        math(String.raw`(V^{*},+_{V^{*}},\cdot_{V^{*}},0_{V^{*}})`),
+        " の中の線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V^{*}`),
+        " の元を ",
+        math(String.raw`L_r`),
+        "、",
+        math(String.raw`\alpha_k:=\lambda_k\cdot_{\mathbb{C}}f_k(x)`),
+        " について ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和の定義（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）が帰納的に定める ",
+        math(String.raw`\mathbb{C}`),
+        " の元を ",
+        math(String.raw`S_r`),
+        " と書く（",
+        math(String.raw`r\in\{0,1,\dots,n\}`),
+        "）。すなわち次である。",
+      ]),
+      list([
+        [
+          math(String.raw`L_0:=0_{V^{*}}`),
+          "、",
+          math(String.raw`L_r:=L_{r-1}+_{V^{*}}(\lambda_r\cdot_{V^{*}}f_r)`),
+          "（",
+          math(String.raw`1\le r\le n`),
+          "）",
+        ],
+        [
+          math(String.raw`S_0:=0_{\mathbb{C}}`),
+          "、",
+          math(String.raw`S_r:=S_{r-1}+_{\mathbb{C}}\bigl(\lambda_r\cdot_{\mathbb{C}}f_r(x)\bigr)`),
+          "（",
+          math(String.raw`1\le r\le n`),
+          "）",
+        ],
+      ]),
+      paragraph([
+        "主張の左辺は ",
+        math(String.raw`L_n(x)`),
+        "、右辺は ",
+        math(String.raw`S_n`),
+        " である。すべての ",
+        math(String.raw`r\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L_r(x)=S_r`),
+        " であることを、",
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r=n`),
+        " の場合が主張である。",
+      ]),
+      paragraph([math(String.raw`r=0`), " のとき："]),
+      displayMath(String.raw`\begin{aligned}
+L_0(x)
+&=0_{V^{*}}(x)
+&&\left(\because\ L_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=z_V(x)
+&&\left(\because\ 0_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ z_V\ \text{の定義。}\blkref{claim_zero_map_is_linear_form}\right)\\
+&=S_0
+&&\left(\because\ S_0\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le r\le n`),
+        " とし、",
+        math(String.raw`L_{r-1}(x)=S_{r-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_r(x)
+&=\bigl(L_{r-1}+_{V^{*}}(\lambda_r\cdot_{V^{*}}f_r)\bigr)(x)
+&&\left(\because\ L_r\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=s_{L_{r-1},\,\lambda_r\cdot_{V^{*}}f_r}(x)
+&&\left(\because\ +_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=L_{r-1}(x)+_{\mathbb{C}}(\lambda_r\cdot_{V^{*}}f_r)(x)
+&&\left(\because\ s\ \text{の定義。}\blkref{claim_pointwise_sum_of_linear_forms_is_linear_form}\right)\\
+&=S_{r-1}+_{\mathbb{C}}(\lambda_r\cdot_{V^{*}}f_r)(x)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=S_{r-1}+_{\mathbb{C}}m_{\lambda_r,f_r}(x)
+&&\left(\because\ \cdot_{V^{*}}\ \text{の定義。}\blkref{def_dual_space}\right)\\
+&=S_{r-1}+_{\mathbb{C}}\bigl(\lambda_r\cdot_{\mathbb{C}}f_r(x)\bigr)
+&&\left(\because\ m\ \text{の定義。}\blkref{claim_pointwise_scalar_multiple_of_linear_form_is_linear_form}\right)\\
+&=S_r
+&&\left(\because\ S_r\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`r\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`L_r(x)=S_r`),
+        " が示された。",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`r=0`),
+        " の場合だけで足りる。",
+        math(String.raw`x`),
+        " は任意だったので、主張がすべての ",
+        math(String.raw`x\in V`),
+        " について成り立つ。",
+      ]),
+    ],
+  },
 ]);
