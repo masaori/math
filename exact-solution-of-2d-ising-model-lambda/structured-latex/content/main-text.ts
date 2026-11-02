@@ -58107,6 +58107,10 @@ c_{\mathrm v}(e,d):=
                       title: { text: "符号付き偶部分グラフ多項式" },
                       labels: ["def_signed_even_subgraph_polynomial"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.signedEvenSubgraphCoefficient",
+                        "Ising2DLambda.KacWard.signedEvenSubgraphPolynomial",
+                      ],
                       statement: [
                         paragraph([
                           math(String.raw`L\ge1`), " とし、", math(String.raw`(a,b)\in\mathcal S`),

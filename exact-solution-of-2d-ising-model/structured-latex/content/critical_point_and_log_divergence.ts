@@ -565,17 +565,20 @@ A &= s_1 s_2^*
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので",
       ]),
-      displayMath(String.raw`\sinh 2K_2^* = \frac{1}{s_2}`),
+      displayMath(String.raw`\sinh 2K_2^* = \frac{1}{s_2}
+\quad\bigl(\because\ \blkref{def_transfer_matrix_symbols},\ \blkref{cosh_sinh_basic_properties}\text{ と }s_2>0\bigr)`),
       paragraph(["したがって"]),
       displayMath(
         String.raw`\begin{aligned}
 s_1 s_2 = 1
 &\iff \sinh 2K_1 = \frac{1}{s_2}
-&&\bigl(\because\ s_2 > 0 \text{ で両辺を割る}\bigr) \\
-&\iff \sinh 2K_1 = \sinh 2K_2^* \\
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols}\text{ と }s_2 > 0\text{ で両辺を割る}\bigr) \\
+&\iff \sinh 2K_1 = \sinh 2K_2^*
+&&\bigl(\because\ \blkref{def_transfer_matrix_symbols},\ \blkref{cosh_sinh_basic_properties}\text{ と }s_2>0\bigr) \\
 &\iff 2K_1 = 2K_2^*
 &&\bigl(\because\ \blkref{sinh_is_injective}\bigr) \\
 &\iff K_1 = K_2^*
+&&\bigl(\because\ \mathbb{R}\text{ の四則と }2\ne0\bigr)
 \end{aligned}`,
       ),
       paragraph([
