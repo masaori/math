@@ -563,7 +563,7 @@ theorem Uflip_conj_sigmaZ_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
 noncomputable def UflipUnit (M : ℕ) : (TensorPow M)ˣ :=
   ⟨Uflip M, UflipInv M, Uflip_mul_inv, UflipInv_mul⟩
 
-/-- 人手 Step 3 の 3 行: 共役 `X ↦ U X U^{-1}` は積を保つ。
+/-- 人手 Step 2・Step 3 の 3 行: 共役 `X ↦ U X U^{-1}` は積を保つ。
 `U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性 `Conjugation.T_mul`）
 `= (UAU^{-1})(UBU^{-1})`（`T_B` の定義）。Lean の `U * X * U⁻¹` は人手の読み `(UX)U^{-1}` と同じ括弧である。 -/
 theorem Uflip_conj_mul (A B : TensorPow M) :
@@ -588,67 +588,135 @@ theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
     Uflip M * (∑ i ∈ s, f i) * UflipInv M = ∑ i ∈ s, Uflip M * f i * UflipInv M := by
   rw [Finset.mul_sum, Finset.sum_mul]
 
-/-! ## `Uσ_k^aU^{-1}` の符号をスカラー倍で書いた形（人手 Step 2 の「符号は因子ごとの符号の積」のため）
+/-! ## Jordan–Wigner 文字列 `P_r` と `Z_m`・`Y_m` への作用（人手 Step 2）
 
-人手 Step 2 は `Z_m`・`Y_m` の各因子に Step 1 を適用し、符号を因子ごとの符号の積として数える。
-Lean ではその積を `ℂ` の積として扱うので、上の人手の形を `c • σ_k^a`（`c = ±1`）へ書き直したものを置く。 -/
+人手の `P_0 := I`、`P_{r+1} := P_rσ_{r+1}^x` は Lean の `xString M r`（`xString_zero`・`xString_succ`）にあたる。
+Lean のサイトは 0 始まりなので、人手の `σ_{r+1}^x` は Lean の `sigmaX ⟨r, _⟩`、人手の `Z_m`（`1 ≤ m`）は Lean の `Z ⟨m-1, _⟩` である。
+`P_r` の添字 `r`（因子の個数）は両者で同じなので、`r` の偶奇も同じである。 -/
 
-/-- `Uσ_k^xU^{-1} = (-1)σ_k^x`（`Uflip_conj_sigmaX_eq_neg` と `negation_is_scalar_multiple_by_minus_one`）。 -/
-theorem Uflip_conj_sigmaX (k : Fin M) :
-    Uflip M * sigmaX k * UflipInv M = (-1 : ℂ) • sigmaX k := by
-  rw [Uflip_conj_sigmaX_eq_neg, neg_eq_neg_one_smul_tensorPow]
+/-- 人手 Step 2 の `r = 0` の鎖: `UP_0U^{-1} = UIU^{-1} = T_U(I) = I = P_0`。 -/
+theorem Uflip_conj_xString_zero :
+    Uflip M * xString M 0 * UflipInv M = xString M 0 :=
+  calc Uflip M * xString M 0 * UflipInv M
+      = Uflip M * 1 * UflipInv M := by rw [xString_zero]                   -- `P_0` の定義
+    _ = Conjugation.T (UflipUnit M) 1 := rfl                                -- `T_B` の定義（`B = U`）
+    _ = 1 := Conjugation.T_one _                                            -- 単位性
+    _ = xString M 0 := xString_zero.symm                                    -- `P_0` の定義
 
-/-- `Uσ_k^yU^{-1} = (±1)σ_k^y`（`Uflip_conj_sigmaY_of_even`・`Uflip_conj_sigmaY_of_odd` を偶奇で選ぶ）。 -/
-theorem Uflip_conj_sigmaY (k : Fin M) :
-    Uflip M * sigmaY k * UflipInv M = (if Even (k : ℕ) then (1 : ℂ) else -1) • sigmaY k := by
-  by_cases hk : Even (k : ℕ)
-  · rw [if_pos hk, Uflip_conj_sigmaY_of_even k hk, one_smul]
-                                                        -- 人手の `k` 奇数。`scalar_multiple_by_one`（mathlib の `one_smul`）
-  · rw [if_neg hk, Uflip_conj_sigmaY_of_odd k hk, neg_eq_neg_one_smul_tensorPow]
-                                                        -- 人手の `k` 偶数。`negation_is_scalar_multiple_by_minus_one`
+/-- 人手 Step 2 の帰納法の段の前半（場合分けの前の 6 行）:
+`UP_{r+1}U^{-1} = U(P_rσ_{r+1}^x)U^{-1} = (UP_rU^{-1})(Uσ_{r+1}^xU^{-1}) = (UP_rU^{-1})(-σ_{r+1}^x) = -((UP_rU^{-1})σ_{r+1}^x)`。
+`T_B` の定義・乗法性・`T_B` の定義の 3 行は `Uflip_conj_mul` が持つ。 -/
+theorem Uflip_conj_xString_succ (r : ℕ) (hr : r < M) :
+    Uflip M * xString M (r + 1) * UflipInv M
+      = -((Uflip M * xString M r * UflipInv M) * sigmaX ⟨r, hr⟩) :=
+  calc Uflip M * xString M (r + 1) * UflipInv M
+      = Uflip M * (xString M r * sigmaX ⟨r, hr⟩) * UflipInv M := by
+        rw [xString_succ r hr]                                              -- `P_{r+1}` の定義
+    _ = (Uflip M * xString M r * UflipInv M) * (Uflip M * sigmaX ⟨r, hr⟩ * UflipInv M) :=
+        Uflip_conj_mul _ _                                                  -- `T_B` の定義・乗法性・`T_B` の定義
+    _ = (Uflip M * xString M r * UflipInv M) * (-(sigmaX ⟨r, hr⟩)) := by
+        rw [Uflip_conj_sigmaX_eq_neg]                                       -- Step 1 の `Uσ_k^xU^{-1} = -σ_k^x`
+    _ = -((Uflip M * xString M r * UflipInv M) * sigmaX ⟨r, hr⟩) :=
+        mul_neg_matrix_tensorPow _ _                                        -- `negation_factors_out_of_right_factor`
 
-/-- `Uσ_k^zU^{-1} = (∓1)σ_k^z`（`Uflip_conj_sigmaZ_of_even`・`Uflip_conj_sigmaZ_of_odd` を偶奇で選ぶ）。 -/
-theorem Uflip_conj_sigmaZ (k : Fin M) :
-    Uflip M * sigmaZ k * UflipInv M = (if Even (k : ℕ) then (-1 : ℂ) else 1) • sigmaZ k := by
-  by_cases hk : Even (k : ℕ)
-  · rw [if_pos hk, Uflip_conj_sigmaZ_of_even k hk, neg_eq_neg_one_smul_tensorPow]
-                                                        -- 人手の `k` 奇数。`negation_is_scalar_multiple_by_minus_one`
-  · rw [if_neg hk, Uflip_conj_sigmaZ_of_odd k hk, one_smul]
-                                                        -- 人手の `k` 偶数。`scalar_multiple_by_one`（mathlib の `one_smul`）
+/-- 人手 Step 2 の帰納法: `UP_rU^{-1}` は `r` 偶数で `P_r`、`r` 奇数で `-P_r`。 -/
+theorem Uflip_conj_xString_parity (r : ℕ) (hr : r ≤ M) :
+    (Even r → Uflip M * xString M r * UflipInv M = xString M r) ∧
+      (¬ Even r → Uflip M * xString M r * UflipInv M = -(xString M r)) := by
+  induction r with
+  | zero => exact ⟨fun _ => Uflip_conj_xString_zero, fun h => absurd (Nat.even_iff.2 rfl) h⟩
+  | succ r ih =>
+      have hr' : r < M := by omega
+      obtain ⟨ihEven, ihOdd⟩ := ih (by omega)
+      constructor
+      · intro hEven
+        -- 人手の `r` 奇数の場合（`r + 1` が偶数）
+        have hOdd : ¬ Even r := fun h => Nat.not_even_iff_odd.2 h.add_one hEven
+        calc Uflip M * xString M (r + 1) * UflipInv M
+            = -((Uflip M * xString M r * UflipInv M) * sigmaX ⟨r, hr'⟩) :=
+              Uflip_conj_xString_succ r hr'                                 -- 上の前半の 6 行
+          _ = -((-(xString M r)) * sigmaX ⟨r, hr'⟩) := by rw [ihOdd hOdd]   -- 帰納法の仮定
+          _ = -(-(xString M r * sigmaX ⟨r, hr'⟩)) := by
+              rw [neg_mul_matrix_tensorPow]                                 -- `negation_factors_out_of_left_factor`
+          _ = xString M r * sigmaX ⟨r, hr'⟩ := neg_neg_tensorPow _          -- `matrix_double_negation`
+          _ = xString M (r + 1) := (xString_succ r hr').symm                -- `P_{r+1}` の定義
+      · intro hOdd
+        -- 人手の `r` 偶数の場合（`r + 1` が奇数）
+        have hEven : Even r := by
+          by_contra h
+          exact hOdd ((Nat.not_even_iff_odd.1 h).add_one)
+        calc Uflip M * xString M (r + 1) * UflipInv M
+            = -((Uflip M * xString M r * UflipInv M) * sigmaX ⟨r, hr'⟩) :=
+              Uflip_conj_xString_succ r hr'                                 -- 上の前半の 6 行
+          _ = -(xString M r * sigmaX ⟨r, hr'⟩) := by rw [ihEven hEven]      -- 帰納法の仮定
+          _ = -(xString M (r + 1)) := by rw [xString_succ r hr']            -- `P_{r+1}` の定義
 
-/-! ## Jordan–Wigner 文字列への作用 -/
+theorem Uflip_conj_xString_of_even (r : ℕ) (hr : r ≤ M) (h : Even r) :
+    Uflip M * xString M r * UflipInv M = xString M r :=
+  (Uflip_conj_xString_parity r hr).1 h
 
-theorem Uflip_conj_xString (k : ℕ) (hk : k ≤ M) :
-    Uflip M * xString M k * UflipInv M = ((-1 : ℂ) ^ k) • xString M k := by
-  induction k with
-  | zero => simp [Uflip_mul_inv]
-  | succ k ih =>
-      have hk' : k < M := by omega
-      rw [xString_succ k hk', Uflip_conj_mul, ih (by omega), Uflip_conj_sigmaX]
-      rw [smul_mul_assoc, Matrix.mul_smul, smul_smul, ← xString_succ k hk']
-      congr 1
-      all_goals ring
+theorem Uflip_conj_xString_of_odd (r : ℕ) (hr : r ≤ M) (h : ¬ Even r) :
+    Uflip M * xString M r * UflipInv M = -(xString M r) :=
+  (Uflip_conj_xString_parity r hr).2 h
 
-/-- **原文 Step 1 の帰結**: `U Z_m U^{-1} = -Z_m`（`m` の偶奇によらない）。 -/
+/-- 人手 Step 2 の `UZ_mU^{-1} = -Z_m`。Lean の `(m : ℕ)` 偶数が人手の `m` 奇数（`m - 1` 偶数）。
+人手の場合分けの行は、Lean では場合ごとの `calc` に分けて書く。 -/
 theorem Uflip_conj_Z (m : Fin M) : Uflip M * Z m * UflipInv M = -(Z m) := by
-  rw [Z_eq_xString_mul, Uflip_conj_mul, Uflip_conj_xString (m : ℕ) (le_of_lt m.isLt),
-    Uflip_conj_sigmaZ, smul_mul_assoc, Matrix.mul_smul, smul_smul, ← Z_eq_xString_mul]
-  have hsign : ((-1 : ℂ) ^ (m : ℕ)) * (if Even (m : ℕ) then (-1 : ℂ) else 1) = -1 := by
-    by_cases h : Even (m : ℕ)
-    · rw [if_pos h, h.neg_one_pow, one_mul]
-    · rw [if_neg h, (Nat.not_even_iff_odd.1 h).neg_one_pow, mul_one]
-  rw [hsign, neg_one_smul]
+  by_cases h : Even (m : ℕ)
+  · -- 人手の `m` 奇数
+    calc Uflip M * Z m * UflipInv M
+        = Uflip M * (xString M m * sigmaZ m) * UflipInv M := by
+          rw [Z_eq_xString_mul]                                             -- `Z_m` の定義と `P_{m-1}` の定義
+      _ = (Uflip M * xString M m * UflipInv M) * (Uflip M * sigmaZ m * UflipInv M) :=
+          Uflip_conj_mul _ _                                                -- `T_B` の定義・乗法性・`T_B` の定義
+      _ = xString M m * (Uflip M * sigmaZ m * UflipInv M) := by
+          rw [Uflip_conj_xString_of_even _ (le_of_lt m.isLt) h]             -- 上の `UP_rU^{-1}`（`r = m - 1`）
+      _ = xString M m * (-(sigmaZ m)) := by
+          rw [Uflip_conj_sigmaZ_of_even m h]                                -- Step 1 の `Uσ_k^zU^{-1}`（`k = m`）
+      _ = -(xString M m * sigmaZ m) := mul_neg_matrix_tensorPow _ _         -- `negation_factors_out_of_right_factor`
+      _ = -(Z m) := by rw [Z_eq_xString_mul]                                -- `Z_m` の定義と `P_{m-1}` の定義
+  · -- 人手の `m` 偶数
+    calc Uflip M * Z m * UflipInv M
+        = Uflip M * (xString M m * sigmaZ m) * UflipInv M := by
+          rw [Z_eq_xString_mul]                                             -- `Z_m` の定義と `P_{m-1}` の定義
+      _ = (Uflip M * xString M m * UflipInv M) * (Uflip M * sigmaZ m * UflipInv M) :=
+          Uflip_conj_mul _ _                                                -- `T_B` の定義・乗法性・`T_B` の定義
+      _ = (-(xString M m)) * (Uflip M * sigmaZ m * UflipInv M) := by
+          rw [Uflip_conj_xString_of_odd _ (le_of_lt m.isLt) h]              -- 上の `UP_rU^{-1}`（`r = m - 1`）
+      _ = (-(xString M m)) * sigmaZ m := by
+          rw [Uflip_conj_sigmaZ_of_odd m h]                                 -- Step 1 の `Uσ_k^zU^{-1}`（`k = m`）
+      _ = -(xString M m * sigmaZ m) := neg_mul_matrix_tensorPow _ _         -- `negation_factors_out_of_left_factor`
+      _ = -(Z m) := by rw [Z_eq_xString_mul]                                -- `Z_m` の定義と `P_{m-1}` の定義
 
-/-- **原文 Step 1 の帰結**: `U Y_m U^{-1} = +Y_m`（`m` の偶奇によらない）。 -/
+/-- 人手 Step 2 の `UY_mU^{-1} = Y_m`。Lean の `(m : ℕ)` 偶数が人手の `m` 奇数（`m - 1` 偶数）。 -/
 theorem Uflip_conj_Y (m : Fin M) : Uflip M * Y m * UflipInv M = Y m := by
-  rw [Y_eq_xString_mul, Uflip_conj_mul, Uflip_conj_xString (m : ℕ) (le_of_lt m.isLt),
-    Uflip_conj_sigmaY, smul_mul_assoc, Matrix.mul_smul, smul_smul, ← Y_eq_xString_mul]
-  have hsign : ((-1 : ℂ) ^ (m : ℕ)) * (if Even (m : ℕ) then (1 : ℂ) else -1) = 1 := by
-    by_cases h : Even (m : ℕ)
-    · rw [if_pos h, h.neg_one_pow, one_mul]
-    · rw [if_neg h, (Nat.not_even_iff_odd.1 h).neg_one_pow]
-      norm_num
-  rw [hsign, one_smul]
+  by_cases h : Even (m : ℕ)
+  · -- 人手の `m` 奇数
+    calc Uflip M * Y m * UflipInv M
+        = Uflip M * (xString M m * sigmaY m) * UflipInv M := by
+          rw [Y_eq_xString_mul]                                             -- `Y_m` の定義と `P_{m-1}` の定義
+      _ = (Uflip M * xString M m * UflipInv M) * (Uflip M * sigmaY m * UflipInv M) :=
+          Uflip_conj_mul _ _                                                -- `T_B` の定義・乗法性・`T_B` の定義
+      _ = xString M m * (Uflip M * sigmaY m * UflipInv M) := by
+          rw [Uflip_conj_xString_of_even _ (le_of_lt m.isLt) h]             -- 上の `UP_rU^{-1}`（`r = m - 1`）
+      _ = xString M m * sigmaY m := by
+          rw [Uflip_conj_sigmaY_of_even m h]                                -- Step 1 の `Uσ_k^yU^{-1}`（`k = m`）
+      _ = Y m := by rw [Y_eq_xString_mul]                                   -- `Y_m` の定義と `P_{m-1}` の定義
+  · -- 人手の `m` 偶数
+    calc Uflip M * Y m * UflipInv M
+        = Uflip M * (xString M m * sigmaY m) * UflipInv M := by
+          rw [Y_eq_xString_mul]                                             -- `Y_m` の定義と `P_{m-1}` の定義
+      _ = (Uflip M * xString M m * UflipInv M) * (Uflip M * sigmaY m * UflipInv M) :=
+          Uflip_conj_mul _ _                                                -- `T_B` の定義・乗法性・`T_B` の定義
+      _ = (-(xString M m)) * (Uflip M * sigmaY m * UflipInv M) := by
+          rw [Uflip_conj_xString_of_odd _ (le_of_lt m.isLt) h]              -- 上の `UP_rU^{-1}`（`r = m - 1`）
+      _ = (-(xString M m)) * (-(sigmaY m)) := by
+          rw [Uflip_conj_sigmaY_of_odd m h]                                 -- Step 1 の `Uσ_k^yU^{-1}`（`k = m`）
+      _ = -(xString M m * (-(sigmaY m))) := neg_mul_matrix_tensorPow _ _    -- `negation_factors_out_of_left_factor`
+      _ = -(-(xString M m * sigmaY m)) := by
+          rw [mul_neg_matrix_tensorPow]                                     -- `negation_factors_out_of_right_factor`
+      _ = xString M m * sigmaY m := neg_neg_tensorPow _                     -- `matrix_double_negation`
+      _ = Y m := by rw [Y_eq_xString_mul]                                   -- `Y_m` の定義と `P_{m-1}` の定義
 
 /-! ## `H_1^{(+)}`, `H_2` への作用（人手 Step 3） -/
 

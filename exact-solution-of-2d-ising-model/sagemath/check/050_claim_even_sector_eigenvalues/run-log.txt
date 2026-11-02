@@ -106,3 +106,6 @@ check_08: PASS
   (V^{(+)})^{-1} の固有値の虚部の最大絶対値: max residual = 1.732e-14  ->  PASS
   (V^{(+)})^{-1} の固有値の実部の全体最小 = 5.145e-04  ->  PASS（正）
 RESULT: PASS
+
+# 実行コマンド: sage check_19_sign_flip_step2_Z_Y_chains.sage
+PASS sign_flip_conjugation Step 2 の P_r の帰納法と Z_m・Y_m の鎖: 436 段

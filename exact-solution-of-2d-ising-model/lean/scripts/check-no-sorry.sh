@@ -712,6 +712,11 @@ targets=(
   Ising2D.Uflip_conj_sigmaZ_of_odd
   Ising2D.Uflip_mul_inv
   Ising2D.UflipInv_mul
+  Ising2D.Uflip_conj_xString_zero
+  Ising2D.Uflip_conj_xString_succ
+  Ising2D.Uflip_conj_xString_parity
+  Ising2D.Uflip_conj_xString_of_even
+  Ising2D.Uflip_conj_xString_of_odd
   Ising2D.Uflip_conj_Z
   Ising2D.Uflip_conj_Y
   Ising2D.Uflip_conj_H1

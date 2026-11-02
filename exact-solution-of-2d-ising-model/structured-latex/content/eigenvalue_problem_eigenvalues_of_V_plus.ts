@@ -987,78 +987,182 @@ U\sigma_k^z U^{-1}
         " と ",
         math(String.raw`Y_m`),
         " への作用）。",
-        ref("def_transfer_matrix_symbols"),
+        math(String.raw`U`),
+        " は Step 0 より可逆なので、",
+        ref("conjugation_is_ring_homomorphism"),
+        " を ",
+        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`B = U`),
+        " として使う（",
+        math(String.raw`UXU^{-1}`),
+        " は ",
+        math(String.raw`(UX)U^{-1}`),
+        " と読む）。",
+        math(String.raw`r \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`0 \leq r \leq M_{\mathrm{col}}`),
+        " について ",
+        math(String.raw`P_r \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`P_0 := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}, \qquad
+P_{r+1} := P_r\,\sigma_{r+1}^x \quad (0 \leq r < M_{\mathrm{col}})`,
+      ),
+      paragraph([
+        "で定める（",
+        math(String.raw`P_r`),
+        " は積 ",
+        math(String.raw`\sigma_1^x\cdots\sigma_r^x`),
+        " を左から読んだもの）。",
+        ref("def_jordan_wigner_Z_matrices"),
+        " と ",
+        ref("def_jordan_wigner_Y_matrices"),
         " の ",
         math(String.raw`Z_m = \sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^z`),
         "、",
         math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\,\sigma_m^y`),
-        " の各因子に Step 1 を適用すると、符号は因子ごとの符号の積になる。先頭の ",
-        math(String.raw`\sigma^x`),
-        " の因子は ",
-        math(String.raw`m-1`),
-        " 個あり、Step 1 の合成の後の ",
-        math(String.raw`U\sigma_k^xU^{-1} = -\sigma_k^x`),
-        " より各々 ",
-        math(String.raw`-1`),
-        " なので寄与は ",
-        math(String.raw`(-1)^{m-1}`),
-        "。第 ",
+        " は、積を同じく左から読むので ",
+        math(String.raw`Z_m = P_{m-1}\sigma_m^z`),
+        "、",
+        math(String.raw`Y_m = P_{m-1}\sigma_m^y`),
+        " である（",
+        math(String.raw`m = 1`),
+        " では左側の空積が ",
+        math(String.raw`P_0`),
+        " にあたる）。まず ",
+        math(String.raw`r \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`0 \leq r \leq M_{\mathrm{col}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`UP_rU^{-1} = \begin{cases}P_r & (r\ \text{偶数}) \\ -P_r & (r\ \text{奇数})\end{cases}`,
+      ),
+      paragraph([
+        "を ",
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r = 0`),
+        " では",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+UP_0U^{-1}
+&= U\,I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,U^{-1}
+   \quad (\because\ P_0\ \text{の定義}) \\
+&= T_U\left(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の単位性}\right) \\
+&= P_0
+   \quad (\because\ P_0\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`0`),
+        " は偶数）。",
+        math(String.raw`0 \leq r < M_{\mathrm{col}}`),
+        " で ",
+        math(String.raw`r`),
+        " について成り立つとすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+UP_{r+1}U^{-1}
+&= U\left(P_r\sigma_{r+1}^x\right)U^{-1}
+   \quad (\because\ P_{r+1}\ \text{の定義}) \\
+&= T_U\left(P_r\sigma_{r+1}^x\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= T_U(P_r)\,T_U\left(\sigma_{r+1}^x\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
+&= \left(UP_rU^{-1}\right)\left(U\sigma_{r+1}^xU^{-1}\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= \left(UP_rU^{-1}\right)\left(-\sigma_{r+1}^x\right)
+   \quad (\because\ \text{Step 1 の }U\sigma_k^xU^{-1} = -\sigma_k^x\text{ を }k = r+1\text{ で}) \\
+&= -\left(\left(UP_rU^{-1}\right)\sigma_{r+1}^x\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right) \\
+&= \begin{cases}-\left(P_r\sigma_{r+1}^x\right) & (r\ \text{偶数}) \\ -\left(\left(-P_r\right)\sigma_{r+1}^x\right) & (r\ \text{奇数})\end{cases}
+   \quad (\because\ \text{帰納法の仮定}) \\
+&= \begin{cases}-\left(P_r\sigma_{r+1}^x\right) & (r\ \text{偶数}) \\ -\left(-\left(P_r\sigma_{r+1}^x\right)\right) & (r\ \text{奇数})\end{cases}
+   \quad \left(\because\ r\ \text{奇数の場合に }\blkref{negation_factors_out_of_left_factor}\right) \\
+&= \begin{cases}-\left(P_r\sigma_{r+1}^x\right) & (r\ \text{偶数}) \\ P_r\sigma_{r+1}^x & (r\ \text{奇数})\end{cases}
+   \quad \left(\because\ r\ \text{奇数の場合に }\blkref{matrix_double_negation}\right) \\
+&= \begin{cases}-P_{r+1} & (r\ \text{偶数}) \\ P_{r+1} & (r\ \text{奇数})\end{cases}
+   \quad (\because\ P_{r+1}\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`r`),
+        " が偶数なら ",
+        math(String.raw`r+1`),
+        " は奇数、",
+        math(String.raw`r`),
+        " が奇数なら ",
+        math(String.raw`r+1`),
+        " は偶数なので、",
+        math(String.raw`r+1`),
+        " についても成り立つ。これを ",
+        math(String.raw`r = m-1`),
+        "（",
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}`),
+        "。",
         math(String.raw`m`),
-        " 因子の寄与は Step 1 の合成の後の ",
-        math(String.raw`U\sigma_k^zU^{-1}`),
-        "・",
-        math(String.raw`U\sigma_k^yU^{-1}`),
-        " の式より",
+        " が奇数なら ",
+        math(String.raw`m-1`),
+        " は偶数、",
+        math(String.raw`m`),
+        " が偶数なら ",
+        math(String.raw`m-1`),
+        " は奇数）で使うと、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U Z_m U^{-1}
-&= (-1)^{m-1}\cdot\begin{cases}-1 & (m\ \text{奇数}) \\ +1 & (m\ \text{偶数})\end{cases}\ Z_m
-   \quad (\because\ \text{Step 1 を }Z_m\text{ の各因子に適用}) \\
+&= U\left(P_{m-1}\sigma_m^z\right)U^{-1}
+   \quad \left(\because\ \blkref{def_jordan_wigner_Z_matrices}\text{ と }P_{m-1}\ \text{の定義}\right) \\
+&= T_U\left(P_{m-1}\sigma_m^z\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= T_U(P_{m-1})\,T_U\left(\sigma_m^z\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
+&= \left(UP_{m-1}U^{-1}\right)\left(U\sigma_m^zU^{-1}\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= \begin{cases}P_{m-1}\left(U\sigma_m^zU^{-1}\right) & (m\ \text{奇数}) \\ \left(-P_{m-1}\right)\left(U\sigma_m^zU^{-1}\right) & (m\ \text{偶数})\end{cases}
+   \quad (\because\ \text{上の }UP_rU^{-1}\text{ を }r = m-1\text{ で}) \\
+&= \begin{cases}P_{m-1}\left(-\sigma_m^z\right) & (m\ \text{奇数}) \\ \left(-P_{m-1}\right)\sigma_m^z & (m\ \text{偶数})\end{cases}
+   \quad (\because\ \text{Step 1 の }U\sigma_k^zU^{-1}\text{ を }k = m\text{ で}) \\
+&= \begin{cases}-\left(P_{m-1}\sigma_m^z\right) & (m\ \text{奇数}) \\ \left(-P_{m-1}\right)\sigma_m^z & (m\ \text{偶数})\end{cases}
+   \quad \left(\because\ m\ \text{奇数の場合に }\blkref{negation_factors_out_of_right_factor}\right) \\
+&= -\left(P_{m-1}\sigma_m^z\right)
+   \quad \left(\because\ m\ \text{偶数の場合に }\blkref{negation_factors_out_of_left_factor}\right) \\
 &= -\,Z_m
-   \quad (\because\ m\ \text{の偶奇ごとに符号を計算}), \\
+   \quad \left(\because\ \blkref{def_jordan_wigner_Z_matrices}\text{ と }P_{m-1}\ \text{の定義}\right), \\
 U Y_m U^{-1}
-&= (-1)^{m-1}\cdot\begin{cases}+1 & (m\ \text{奇数}) \\ -1 & (m\ \text{偶数})\end{cases}\ Y_m
-   \quad (\because\ \text{Step 1 を }Y_m\text{ の各因子に適用}) \\
-&= +\,Y_m
-   \quad (\because\ m\ \text{の偶奇ごとに符号を計算})
+&= U\left(P_{m-1}\sigma_m^y\right)U^{-1}
+   \quad \left(\because\ \blkref{def_jordan_wigner_Y_matrices}\text{ と }P_{m-1}\ \text{の定義}\right) \\
+&= T_U\left(P_{m-1}\sigma_m^y\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= T_U(P_{m-1})\,T_U\left(\sigma_m^y\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
+&= \left(UP_{m-1}U^{-1}\right)\left(U\sigma_m^yU^{-1}\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= \begin{cases}P_{m-1}\left(U\sigma_m^yU^{-1}\right) & (m\ \text{奇数}) \\ \left(-P_{m-1}\right)\left(U\sigma_m^yU^{-1}\right) & (m\ \text{偶数})\end{cases}
+   \quad (\because\ \text{上の }UP_rU^{-1}\text{ を }r = m-1\text{ で}) \\
+&= \begin{cases}P_{m-1}\sigma_m^y & (m\ \text{奇数}) \\ \left(-P_{m-1}\right)\left(-\sigma_m^y\right) & (m\ \text{偶数})\end{cases}
+   \quad (\because\ \text{Step 1 の }U\sigma_k^yU^{-1}\text{ を }k = m\text{ で}) \\
+&= \begin{cases}P_{m-1}\sigma_m^y & (m\ \text{奇数}) \\ -\left(P_{m-1}\left(-\sigma_m^y\right)\right) & (m\ \text{偶数})\end{cases}
+   \quad \left(\because\ m\ \text{偶数の場合に }\blkref{negation_factors_out_of_left_factor}\right) \\
+&= \begin{cases}P_{m-1}\sigma_m^y & (m\ \text{奇数}) \\ -\left(-\left(P_{m-1}\sigma_m^y\right)\right) & (m\ \text{偶数})\end{cases}
+   \quad \left(\because\ m\ \text{偶数の場合に }\blkref{negation_factors_out_of_right_factor}\right) \\
+&= P_{m-1}\sigma_m^y
+   \quad \left(\because\ m\ \text{偶数の場合に }\blkref{matrix_double_negation}\right) \\
+&= Y_m
+   \quad \left(\because\ \blkref{def_jordan_wigner_Y_matrices}\text{ と }P_{m-1}\ \text{の定義}\right)
 \end{aligned}`,
       ),
-      paragraph([
-        "（",
-        math(String.raw`m`),
-        " 奇数なら ",
-        math(String.raw`(-1)^{m-1} = +1`),
-        "、",
-        math(String.raw`m`),
-        " 偶数なら ",
-        math(String.raw`(-1)^{m-1} = -1`),
-        " なので、いずれの場合も積は ",
-        math(String.raw`Z_m`),
-        " について ",
-        math(String.raw`-1`),
-        "、",
-        math(String.raw`Y_m`),
-        " について ",
-        math(String.raw`+1`),
-        " になる。",
-        math(String.raw`m = 1`),
-        " のときは先頭の ",
-        math(String.raw`\sigma^x`),
-        " の因子が無く ",
-        math(String.raw`Z_1 = \sigma_1^z`),
-        "、",
-        math(String.raw`Y_1 = \sigma_1^y`),
-        " だが、",
-        math(String.raw`1`),
-        " は奇数なので符号は同じく ",
-        math(String.raw`-1`),
-        "、",
-        math(String.raw`+1`),
-        " である。**",
-        math(String.raw`m`),
-        " の偶奇によらない**ことが要点である。）",
-      ]),
       paragraph([
         "Step 3（",
         math(String.raw`H_1^{(+)}`),
@@ -1080,15 +1184,13 @@ U Y_m U^{-1}
         math(String.raw`1`),
         " または ",
         math(String.raw`-1`),
-        " の有限和である。",
-        math(String.raw`U`),
-        " は Step 0 より可逆なので、",
+        " の有限和である。Step 2 と同じく ",
         ref("conjugation_is_ring_homomorphism"),
         " を ",
         math(String.raw`n = 2^{M_{\mathrm{col}}}`),
         "、",
         math(String.raw`B = U`),
-        " として使える。以下、",
+        " として使い、",
         math(String.raw`UXU^{-1}`),
         " は ",
         math(String.raw`(UX)U^{-1}`),
@@ -1186,6 +1288,9 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 2 の「Step 1 を Z_m の各因子に適用」「符号は因子ごとの符号の積」「m の偶奇ごとに符号を計算」の名前だけの根拠を、P_0 := I・P_{r+1} := P_rσ_{r+1}^x（積 σ_1^x⋯σ_r^x を左から読む）と置いて UP_rU^{-1} を r の偶奇で P_r・−P_r と書く帰納法（conjugation_is_ring_homomorphism の T_B の定義・単位性・乗法性、Step 1 の Uσ_k^xU^{-1} = −σ_k^x、negation_factors_out_of_right_factor・negation_factors_out_of_left_factor・matrix_double_negation）と、" +
+          "Z_m = P_{m−1}σ_m^z・Y_m = P_{m−1}σ_m^y から T_B の定義と乗法性で因子ごとの共役に割り、m の偶奇で場合分けして符号を 1 行ずつ外へ出す鎖にした。(−1)^{m−1} のような ℂ の冪は使わない（本文に ℂ の冪の定義が無く、符号の反転だけで足りる）。conjugation_is_ring_homomorphism を B = U で使う宣言を Step 3 から Step 2 へ移した。主張は変えていない。" +
+          "Lean の対応は Ising2D.Uflip_conj_xString_zero・Uflip_conj_xString_succ・Uflip_conj_xString_parity・Uflip_conj_xString_of_even・Uflip_conj_xString_of_odd（P_r の帰納法）・Uflip_conj_Z・Uflip_conj_Y（Z_m・Y_m の鎖）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_19_sign_flip_step2_Z_Y_chains.sage。",
         "2026-11-02: Step 1 の合成の段（UXU^{-1} = E(FXF^{-1})E^{-1} を断りなく使い、(∵ F による共役の計算)・(∵ E による共役の場合分け) の名前だけの根拠で、代入と符号の外出しを 1 行にまとめていた）を、" +
           "U の定義・Step 0 の U^{-1} = FE・mat_mult_associative 3 回・Step 0 の F^{-1} = F・E^{-1} = E の合成の鎖と、a ごとに F の式・negation_factors_out_of_right_factor・negation_factors_out_of_left_factor・E の式（k の偶奇）を 1 行ずつ引く鎖にした。" +
           "k 奇数の Uσ_k^yU^{-1} = −(−σ_k^y) を σ_k^y に戻す段のために主張 matrix_double_negation（−(−A) = A）を 002 章に足した。Step 2 の「Step 1 の第 1 式」「第 2・第 3 式」は、Step 1 に E の鎖の第 1〜4 式もあって曖昧なので、式で指すようにした。主張は変えていない。" +

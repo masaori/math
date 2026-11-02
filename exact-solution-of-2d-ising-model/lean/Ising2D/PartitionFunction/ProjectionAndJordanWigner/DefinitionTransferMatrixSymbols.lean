@@ -414,8 +414,8 @@ noncomputable def Z (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliZ)
 /-- 原文の `Y_m := σ^x_1 ⋯ σ^x_{m-1} σ^y_m`（`Y_1 := σ^y_1`）。 -/
 noncomputable def Y (m : Fin M) : TensorPow M := siteProd M (jwFamily m pauliY)
 
-/-- Jordan–Wigner 文字列 `σ^x_1 ⋯ σ^x_m`（Lean の 0 始まり添字で `i < m` なるサイト全部）。
-原文の `P_{m-1} = σ^x_1 ⋯ σ^x_{m-1}` にあたる。 -/
+/-- Jordan–Wigner 文字列。人手の 1 始まりのサイトで `P_m = σ^x_1 ⋯ σ^x_m`（Lean の 0 始まりの添字で `i < m` なるサイト全部）。
+人手の `Z_m = P_{m-1}σ_m^z` の `P_{m-1}` は、Lean の `Z ⟨m-1, _⟩` では `xString M (m-1)` にあたる。 -/
 noncomputable def xString (M : ℕ) (m : ℕ) : TensorPow M :=
   siteProd M (fun i => if (i : ℕ) < m then pauliX else 1)
 
@@ -427,7 +427,7 @@ theorem xString_zero : xString M 0 = 1 := by
     funext i; simp
   rw [h, siteProd_one]
 
-/-- 文字列は 1 サイトずつ伸ばせる: `P_{m+1} = P_m σ^x_m`。 -/
+/-- 文字列は 1 サイトずつ伸ばせる: 人手の `P_{m+1} = P_m σ^x_{m+1}`（Lean の 0 始まりのサイト `m` が人手のサイト `m+1`）。 -/
 theorem xString_succ (m : ℕ) (h : m < M) :
     xString M (m + 1) = xString M m * sigmaX ⟨m, h⟩ := by
   rw [xString, xString, sigmaX, siteOp_apply, ← siteProd_mul]
