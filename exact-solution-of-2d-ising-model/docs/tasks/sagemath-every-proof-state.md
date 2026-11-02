@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 313 件のうち、SageMath の検算が無いもの 87 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 313 件のうち、SageMath の検算が無いもの 86 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -126,9 +126,17 @@
   tanh・二つの双対結合定数・新しい二つの主張に同名の検算を付けた（共通の準備 `sagemath/_shared/positive_coupling_and_real_log.sage`）。等号は `QQ(E)`（E は exp(K) の値の不定元）と `K = log q` の点の `QQ` で厳密に、`K ∈ QQ` の点は本文の exp の部分和のボールで、実対数の値は 2 進の有理数の端点 lo<hi で挟み `exp(lo) < y < exp(hi)` を本文の exp のボールで確かめて判定した。
   双対結合定数の「log(tanh K)<0」と、log の単調性を def_real_logarithm_positive から引いていた 3 か所（`eigenvalue_problem_diagonalization_and_exponential_form.ts` の arccosh ≥ 0、`020_critical_point.ts` の arcsinh の log 評価の 2 行）を新しい主張の参照へ付け替えた。tanh の値域と K^*>0 は定義が終域として宣言しているので、定義の中の証明のまま残した。計算の誤りは無かった。
 
+- `two_by_two_transfer_identity`（2×2 の転送行列の恒等式 `A = (2s_2)^{1/2} exp(K_2^*σ^x)`）: `sagemath/check/two_by_two_transfer_identity/`。冪・各項の成分・部分和の行は
+  `GAUSSIAN[τ]` の行列で、包含 `a ↦ a_C` は `QQ[τ] → GAUSSIAN[τ]` の環準同型として、双曲線関数の行は `QQ(E)` と `K_2 = log x` の点の `AA` で厳密に、
+  極限・実対数・exp の値の行は本文の exp の部分和のボールで確かめた。人手証明の誤りを直した: 倍角公式とテイラー展開の根拠が `cosh_sinh_basic_properties` を
+  引いていた（そこには無い）。倍角公式は `sinh_double_angle_formula` へ付け替え、テイラー展開（本文の `sinh_cosh_taylor_series` には証明が無い）には頼らず、
+  部分和の成分を `(E_N(τ)±E_N(-τ))/2` で書いて `scalar_exp_is_limit_of_partial_sums` と三角不等式で極限を取る形にした。本文に無い行列の冪の指数法則・
+  非負実数の平方根の積の法則を、冪の定義による帰納法と二乗の比較に置き換えた。`t` を二つの意味に使っていたのを直し、実数のスカラー倍を `a_C` と明示した。
+  計算の誤りは無かった。
+
 ## 次の一歩
 
-`partition_function_transfer_matrix_representation.ts` の `two_by_two_transfer_identity`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_projection_and_jordan_wigner.ts` の `first_dual_coupling_relation`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -239,3 +247,9 @@
 - 2026-11-02、`def_real_logarithm_positive` のレビューで見つかった（根拠の欠け）: `exp: ℝ → ℝ_{>0}` の全射性を「実解析の標準的な事実（連続性と中間値の定理）」として参照なしで使っており、log の定義の成立がこれに依る。
   外部の事実として注記（`remark_real_analysis_facts_R3_R4` と同じ形）に宣言するか、本文で示す。また `thermodynamic_limit_row_limit_and_max_eigenvalue.ts`（1047 行付近）・`thermodynamic_limit_column_limit_and_closed_form.ts`（855 行付近）・
   `critical_point_and_log_divergence.ts`（1628・1630・1652・2051・2214 行付近）が log の単調性をラベル参照なしで使っている。`real_log_strictly_increasing` を引く形に、それぞれのブロックの検算を足すときに直す。この単位では直さなかった。
+- 2026-11-02、`two_by_two_transfer_identity` の検算で見つかった（根拠の欠けと、Lean との対応の欠け）: 下流 `second_transfer_matrix_pauli_form` の結論の鎖は、
+  `kronecker_multilinear` でスカラーを前へ出した後の `((2s_2)^{1/2})_C` の `M_col` 乗を `((2s_2)^{1/2})^{M_col}` の像にする段に `real_inclusion_preserves_product` を引いておらず、
+  主張の実数のスカラー倍・行列の実数の成分の読み方（`two_by_two_transfer_identity` の主張に書いた `a_C` の略記）も書いていない。書き直し前からの欠けで、そのブロックの検算を見直すときに扱う。
+  本文の `sinh_cosh_taylor_series`（`008_TV1_hatZ_hatY_part1.ts`）は証明が無い（`--list` にも出ない）。実数の絶対値と三角不等式を定めるブロックも本文に無い（`two_by_two_transfer_identity` は「実数の絶対値の三角不等式」を高校の範囲として使った）。
+  Lean の具体版 `ClaimTwoByTwoTransferIdentity.lean`（中間目標 `exp_smul_pauliX_eq_cosh_add_sinh`）は書き直し前の人手証明（冪の指数法則・級数の偶奇の分割）に対応していて、
+  書き直した人手証明（`B_τ` の冪の帰納法・`(E_N(τ)±E_N(-τ))/2` と三角不等式による極限・`q/(2r)` の二乗の比較）と 1 対 1 でない。Lean の連続実行の状態台帳へ渡す。

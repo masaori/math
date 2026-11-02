@@ -2307,7 +2307,25 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
         ref("def_indexed_hyperbolic_abbreviations"),
         " の ",
         math(String.raw`s_2 = \sinh 2K_2`),
-        " を用いる。",
+        " を用いる。この主張では、複素行列の成分に書いた実数 ",
+        math(String.raw`a`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " の略記であり、実数 ",
+        math(String.raw`a`),
+        " と複素行列 ",
+        math(String.raw`X`),
+        " の積 ",
+        math(String.raw`aX`),
+        " は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍 ",
+        math(String.raw`a_{\mathbb{C}}X`),
+        " の略記である（証明では ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " と明示して書く）。",
         math(String.raw`A \in \mathrm{Mat}(2,\mathbb{C})`),
         " を",
       ]),
@@ -2327,293 +2345,681 @@ K_2^*\in\mathbb{R}\ \land\ K_2^*>0
         math(String.raw`(2s_2)^{1/2}`),
         " は正の実数 ",
         math(String.raw`2s_2`),
-        " の非負平方根（",
+        "（",
+        ref("indexed_hyperbolic_abbreviations_positive"),
+        "）の非負平方根 ",
+        math(String.raw`\sqrt{2s_2}^{\,(\mathbb{R}_{\ge 0})}`),
+        "（",
         ref("definition_of_sqrt_r_positive"),
-        "）である。",
+        "）、",
+        math(String.raw`\sigma^x`),
+        " は ",
+        ref("pauli_matrix_products"),
+        " の Pauli 行列、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " (1) の行列の exp である。",
       ]),
     ],
     proof: [
       paragraph([
-        "中間目標: ",
-        math(String.raw`\exp(t\sigma^x)`),
-        " の閉じた形。",
+        "証明の中で使う記号を先に置く。",
+        math(String.raw`\tau \in \mathbb{R}`),
+        " とし、",
+        math(String.raw`B_\tau := \tau_{\mathbb{C}}\,\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
+        " とおく。",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`b^{(m)} \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を、",
+        math(String.raw`m`),
+        " が偶数なら ",
+        math(String.raw`b^{(m)} := I`),
+        "、奇数なら ",
+        math(String.raw`b^{(m)} := \sigma^x`),
+        " と定め、実数 ",
+        math(String.raw`\beta^{(m)}_{ij} \in \mathbb{R}\ (i, j \in \{1,2\})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`\beta^{(m)}_{11} = \beta^{(m)}_{22} := \frac{1 + (-1)^m}{2},
+\qquad
+\beta^{(m)}_{12} = \beta^{(m)}_{21} := \frac{1 - (-1)^m}{2}`,
+      ),
+      paragraph([
+        "と定める。",
         ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x`),
+        " の成分と、",
+        ref("def_identity_matrix"),
+        "・",
+        ref("def_kronecker_delta"),
+        " の ",
+        math(String.raw`I_{ij} = \delta_{ij}`),
+        " より、",
+        math(String.raw`(b^{(m)})_{ij} = \bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}}`),
+        " である。4 通りを書き下すと、",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`1_{\mathbb{C}} = (1)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`0_{\mathbb{C}} = (0)_{\mathbb{C}}`),
+        " により",
+      ]),
+      displayMath(
+        String.raw`\begin{array}{c|cc}
+ & i = j & i \ne j \\ \hline
+m\ \text{偶数} & (b^{(m)})_{ij} = I_{ij} = \delta_{ij} = 1_{\mathbb{C}} = (1)_{\mathbb{C}} = \bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}} & (b^{(m)})_{ij} = I_{ij} = \delta_{ij} = 0_{\mathbb{C}} = (0)_{\mathbb{C}} = \bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}} \\
+m\ \text{奇数} & (b^{(m)})_{ij} = (\sigma^x)_{ij} = 0_{\mathbb{C}} = (0)_{\mathbb{C}} = \bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}} & (b^{(m)})_{ij} = (\sigma^x)_{ij} = 1_{\mathbb{C}} = (1)_{\mathbb{C}} = \bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}}
+\end{array}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`x \in \mathbb{R}`),
+        " と ",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`E_N(x) := \sum_{m=0}^{N}\frac{x^m}{m!} \in \mathbb{R}`),
+        "（",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " の部分和）とおく。さらに ",
+        math(String.raw`t := \tanh K_2 \in \mathbb{R}`),
+        "、",
+        math(String.raw`r := \sqrt{t}^{\,(\mathbb{R}_{\ge 0})} \in \mathbb{R}_{\ge 0}`),
+        "、",
+        math(String.raw`q := (2s_2)^{1/2} = \sqrt{2s_2}^{\,(\mathbb{R}_{\ge 0})} \in \mathbb{R}_{\ge 0}`),
+        " とおく。",
+        ref("def_positive_coupling_tanh"),
         " より ",
-        math(String.raw`\sigma^x\sigma^x = I`),
-        " である。したがって ",
-        math(String.raw`p \in \mathbb{Z}_{\geq 0}`),
+        math(String.raw`0 < t < 1`),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`r^2 = t`),
+        "・",
+        math(String.raw`q^2 = 2s_2`),
+        " である。",
+        math(String.raw`r = 0`),
+        " なら ",
+        math(String.raw`t = r^2 = 0`),
+        " となって ",
+        math(String.raw`0 < t`),
+        " に反するので ",
+        math(String.raw`r > 0`),
+        " である。",
+        ref("def_second_dual_coupling_constant"),
+        " より ",
+        math(String.raw`K_2^* \in \mathbb{R}_{>0}`),
+        " なので ",
+        ref("indexed_hyperbolic_abbreviations_positive"),
+        " が当てはまり、",
+        math(String.raw`s_2 > 0`),
+        " から同じく ",
+        math(String.raw`q > 0`),
+        " である。最後に、",
+        math(String.raw`x, y \in \mathbb{R}`),
         " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(\sigma^x)^{2p}
-&= \left((\sigma^x)^2\right)^p
-   \quad (\because \text{行列の冪の指数法則}) \\
-&= I^p
-   \quad (\because (\sigma^x)^2=I) \\
-&= I
-   \quad (\because \text{単位行列の自然数冪}),
+x_{\mathbb{C}} - y_{\mathbb{C}}
+&= x_{\mathbb{C}} + \bigl(-y_{\mathbb{C}}\bigr)
+&&(\because \blkref{def_complex_difference}) \\
+&= x_{\mathbb{C}} + (-1_{\mathbb{C}})\,y_{\mathbb{C}}
+&&(\because \blkref{multiply_by_minus_one}) \\
+&= x_{\mathbb{C}} + (-1)_{\mathbb{C}}\,y_{\mathbb{C}}
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}}) \\
+&= x_{\mathbb{C}} + \bigl((-1)\,y\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \bigl(x + (-1)\,y\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}\ \text{を 2 項へ当てた}) \\
+&= (x - y)_{\mathbb{C}}
+&&(\because \text{実数の四則})
 \end{aligned}`,
       ),
-      displayMath(
-        String.raw`\begin{aligned}
-(\sigma^x)^{2p+1}
-&= (\sigma^x)^{2p}\sigma^x
-   \quad (\because \text{行列の冪の加法則}) \\
-&= I\sigma^x
-   \quad (\because (\sigma^x)^{2p}=I) \\
-&= \sigma^x
-   \quad (\because \text{単位行列の作用})
-\end{aligned}`,
-      ),
+      paragraph(["である。"]),
       paragraph([
-        "である。よって ",
-        math(String.raw`t \in \mathbb{R}`),
+        "中間目標: ",
+        math(String.raw`B_\tau`),
+        " の冪 ",
+        math(String.raw`B_\tau^{\,m} = (\tau^m)_{\mathbb{C}}\,b^{(m)}`),
+        "。",
+        math(String.raw`p \in \mathbb{Z}_{\ge 0}`),
         " について ",
+        math(String.raw`B_\tau^{\,2p} = (\tau^{2p})_{\mathbb{C}}\,I`),
+        " かつ ",
+        math(String.raw`B_\tau^{\,2p+1} = (\tau^{2p+1})_{\mathbb{C}}\,\sigma^x`),
+        " を ",
+        math(String.raw`p`),
+        " の帰納法で示す。冪は ",
         ref("def_exp"),
-        " の級数を偶数項と奇数項に分けると",
+        " (1) の ",
+        math(String.raw`A^0 := I,\ A^{m+1} := A^m A`),
+        " である。",
+        math(String.raw`p = 0`),
+        " の偶数の冪は",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(t\sigma^x)
-&= \left(\sum_{p=0}^{\infty}\frac{t^{2p}}{(2p)!}\right) I
-+ \left(\sum_{p=0}^{\infty}\frac{t^{2p+1}}{(2p+1)!}\right)\sigma^x
-   \quad (\because \text{絶対収束する指数級数を偶数項と奇数項へ分割し、}(\sigma^x)^{2p}=I,\ (\sigma^x)^{2p+1}=\sigma^x\text{ を適用}) \\
-&= \cosh(t)\,I + \sinh(t)\,\sigma^x
-   \quad (\because \cosh,\sinh\text{ のテイラー展開})
+B_\tau^{\,0}
+&= I
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I) \\
+&= 1_{\mathbb{C}}\,I
+&&(\because \blkref{scalar_multiple_by_one}) \\
+&= (\tau^{0})_{\mathbb{C}}\,I
+&&(\because \tau^0 = 1)
 \end{aligned}`,
       ),
       paragraph([
-        "（級数の分割は ",
-        ref("exp_converges"),
-        " の絶対収束と ",
-        ref("real_exp_series_converges"),
-        " による。最後の等号は ",
-        ref("cosh_sinh_basic_properties"),
+        "である。",
+        math(String.raw`B_\tau^{\,2p} = (\tau^{2p})_{\mathbb{C}}\,I`),
+        " を仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+B_\tau^{\,2p+1}
+&= B_\tau^{\,2p}\,B_\tau
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A) \\
+&= \bigl((\tau^{2p})_{\mathbb{C}}\,I\bigr)\,B_\tau
+&&(\because \text{帰納法の仮定}) \\
+&= \bigl((\tau^{2p})_{\mathbb{C}}\,I\bigr)\bigl(\tau_{\mathbb{C}}\,\sigma^x\bigr)
+&&(\because B_\tau\ \text{の定義}) \\
+&= (\tau^{2p})_{\mathbb{C}}\bigl(I\,(\tau_{\mathbb{C}}\,\sigma^x)\bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= (\tau^{2p})_{\mathbb{C}}\bigl(\tau_{\mathbb{C}}\,\sigma^x\bigr)
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}) \\
+&= \bigl((\tau^{2p})_{\mathbb{C}}\,\tau_{\mathbb{C}}\bigr)\sigma^x
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= (\tau^{2p}\,\tau)_{\mathbb{C}}\,\sigma^x
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= (\tau^{2p+1})_{\mathbb{C}}\,\sigma^x
+&&(\because \text{実数の冪}\ \tau^{k}\tau = \tau^{k+1})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+B_\tau^{\,2p+2}
+&= B_\tau^{\,2p+1}\,B_\tau
+&&(\because \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A) \\
+&= \bigl((\tau^{2p+1})_{\mathbb{C}}\,\sigma^x\bigr)\,B_\tau
+&&(\because \text{直前の式}) \\
+&= \bigl((\tau^{2p+1})_{\mathbb{C}}\,\sigma^x\bigr)\bigl(\tau_{\mathbb{C}}\,\sigma^x\bigr)
+&&(\because B_\tau\ \text{の定義}) \\
+&= (\tau^{2p+1})_{\mathbb{C}}\bigl(\sigma^x\,(\tau_{\mathbb{C}}\,\sigma^x)\bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= (\tau^{2p+1})_{\mathbb{C}}\bigl(\tau_{\mathbb{C}}\,(\sigma^x\sigma^x)\bigr)
+&&(\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= (\tau^{2p+1})_{\mathbb{C}}\bigl(\tau_{\mathbb{C}}\,I\bigr)
+&&(\because \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\sigma^x = I) \\
+&= \bigl((\tau^{2p+1})_{\mathbb{C}}\,\tau_{\mathbb{C}}\bigr)I
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= (\tau^{2p+1}\,\tau)_{\mathbb{C}}\,I
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= (\tau^{2p+2})_{\mathbb{C}}\,I
+&&(\because \text{実数の冪}\ \tau^{k}\tau = \tau^{k+1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`p`),
+        " での二つの等式が ",
+        math(String.raw`p`),
+        " の奇数の冪と ",
+        math(String.raw`p+1`),
+        " の偶数の冪の等式を与える。",
+        math(String.raw`b^{(m)}`),
+        " の定義により、これは ",
+        math(String.raw`B_\tau^{\,m} = (\tau^m)_{\mathbb{C}}\,b^{(m)}\ (m \in \mathbb{Z}_{\ge 0})`),
+        " である。",
+      ]),
+      paragraph([
+        "中間目標: 指数級数の各項の成分。",
+        math(String.raw`m \in \mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`i, j \in \{1,2\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\tfrac{1}{m!}\,B_\tau^{\,m}\Bigr)_{ij}
+&= \Bigl(\tfrac{1}{m!}\Bigr)_{\mathbb{C}}\bigl(B_\tau^{\,m}\bigr)_{ij}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \Bigl(\tfrac{1}{m!}\Bigr)_{\mathbb{C}}\bigl((\tau^{m})_{\mathbb{C}}\,b^{(m)}\bigr)_{ij}
+&&(\because \text{冪の中間目標}) \\
+&= \Bigl(\tfrac{1}{m!}\Bigr)_{\mathbb{C}}\Bigl((\tau^{m})_{\mathbb{C}}\,\bigl(b^{(m)}\bigr)_{ij}\Bigr)
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \Bigl(\tfrac{1}{m!}\Bigr)_{\mathbb{C}}\Bigl((\tau^{m})_{\mathbb{C}}\,\bigl(\beta^{(m)}_{ij}\bigr)_{\mathbb{C}}\Bigr)
+&&(\because (b^{(m)})_{ij} = (\beta^{(m)}_{ij})_{\mathbb{C}}) \\
+&= \Bigl(\tfrac{1}{m!}\Bigr)_{\mathbb{C}}\bigl(\tau^{m}\,\beta^{(m)}_{ij}\bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}) \\
+&= \Bigl(\tfrac{1}{m!}\,\tau^{m}\,\beta^{(m)}_{ij}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product})
+\end{aligned}`,
+      ),
+      paragraph(["であり、その実数は"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\tfrac{1}{m!}\,\tau^{m}\,\beta^{(m)}_{11}
+&= \tfrac{1}{m!}\,\tau^{m}\,\frac{1 + (-1)^m}{2}
+&&(\because \beta^{(m)}_{11}\ \text{の定義}) \\
+&= \frac{\tau^m + (-1)^m\tau^m}{2\cdot m!}
+&&(\because \text{実数の分配則}) \\
+&= \frac{\tau^m + (-\tau)^m}{2\cdot m!}
+&&(\because \text{実数の冪}\ (-1)^m\tau^m = (-\tau)^m),
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\tfrac{1}{m!}\,\tau^{m}\,\beta^{(m)}_{12}
+&= \tfrac{1}{m!}\,\tau^{m}\,\frac{1 - (-1)^m}{2}
+&&(\because \beta^{(m)}_{12}\ \text{の定義}) \\
+&= \frac{\tau^m - (-1)^m\tau^m}{2\cdot m!}
+&&(\because \text{実数の分配則}) \\
+&= \frac{\tau^m - (-\tau)^m}{2\cdot m!}
+&&(\because \text{実数の冪}\ (-1)^m\tau^m = (-\tau)^m)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（",
+        math(String.raw`\beta^{(m)}_{22} = \beta^{(m)}_{11}`),
+        "、",
+        math(String.raw`\beta^{(m)}_{21} = \beta^{(m)}_{12}`),
+        "）。",
+      ]),
+      paragraph([
+        "中間目標: 部分和の成分。",
+        math(String.raw`N \in \mathbb{Z}_{\ge 0}`),
+        " について ",
+        math(String.raw`S_N := \sum_{m=0}^{N}\frac{1}{m!}B_\tau^{\,m} \in \mathrm{Mat}(2,\mathbb{C})`),
+        " とおく。",
+        math(String.raw`(i,j) = (1,1), (2,2)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N)_{ij}
+&= \sum_{m=0}^{N}\Bigl(\tfrac{1}{m!}\,B_\tau^{\,m}\Bigr)_{ij}
+&&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=0}^{N}\Bigl(\frac{\tau^m + (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
+&&(\because \text{各項の成分の中間目標}) \\
+&= \Bigl(\sum_{m=0}^{N}\frac{\tau^m + (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \Bigl(\frac{1}{2}\Bigl(\sum_{m=0}^{N}\frac{\tau^m}{m!} + \sum_{m=0}^{N}\frac{(-\tau)^m}{m!}\Bigr)\Bigr)_{\mathbb{C}}
+&&(\because \text{実数の有限和の分配則}) \\
+&= \Bigl(\frac{E_N(\tau) + E_N(-\tau)}{2}\Bigr)_{\mathbb{C}}
+&&(\because E_N\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`(i,j) = (1,2), (2,1)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(S_N)_{ij}
+&= \sum_{m=0}^{N}\Bigl(\tfrac{1}{m!}\,B_\tau^{\,m}\Bigr)_{ij}
+&&(\because \blkref{finite_sum_of_matrices_entrywise}) \\
+&= \sum_{m=0}^{N}\Bigl(\frac{\tau^m - (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
+&&(\because \text{各項の成分の中間目標}) \\
+&= \Bigl(\sum_{m=0}^{N}\frac{\tau^m - (-\tau)^m}{2\cdot m!}\Bigr)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_finite_sum}) \\
+&= \Bigl(\frac{1}{2}\Bigl(\sum_{m=0}^{N}\frac{\tau^m}{m!} - \sum_{m=0}^{N}\frac{(-\tau)^m}{m!}\Bigr)\Bigr)_{\mathbb{C}}
+&&(\because \text{実数の有限和の分配則}) \\
+&= \Bigl(\frac{E_N(\tau) - E_N(-\tau)}{2}\Bigr)_{\mathbb{C}}
+&&(\because E_N\ \text{の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+      ]),
+      paragraph([
+        "中間目標: 部分和の成分の極限。",
+        math(String.raw`u_N := \bigl|E_N(\tau) - \exp(\tau)\bigr|`),
+        "、",
+        math(String.raw`v_N := \bigl|E_N(-\tau) - \exp(-\tau)\bigr|`),
+        " とおく（",
+        math(String.raw`\mathbb{R}`),
+        " の絶対値）。",
+        math(String.raw`(i,j) = (1,1), (2,2)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl|(S_N)_{ij} - (\cosh\tau)_{\mathbb{C}}\bigr|
+&= \Bigl|\Bigl(\frac{E_N(\tau) + E_N(-\tau)}{2}\Bigr)_{\mathbb{C}} - (\cosh\tau)_{\mathbb{C}}\Bigr|
+&&(\because \text{部分和の成分の中間目標}) \\
+&= \Bigl|\Bigl(\frac{E_N(\tau) + E_N(-\tau)}{2} - \cosh\tau\Bigr)_{\mathbb{C}}\Bigr|
+&&(\because \text{準備の}\ x_{\mathbb{C}} - y_{\mathbb{C}} = (x - y)_{\mathbb{C}}) \\
+&= \Bigl|\frac{E_N(\tau) + E_N(-\tau)}{2} - \cosh\tau\Bigr|
+&&(\because \blkref{abs_basic_properties}\ (6)) \\
+&= \Bigl|\frac{E_N(\tau) + E_N(-\tau)}{2} - \frac{\exp(\tau) + \exp(-\tau)}{2}\Bigr|
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \Bigl|\frac{\bigl(E_N(\tau) - \exp(\tau)\bigr) + \bigl(E_N(-\tau) - \exp(-\tau)\bigr)}{2}\Bigr|
+&&(\because \text{実数の四則}) \\
+&\le \frac{u_N + v_N}{2}
+&&(\because \text{実数の絶対値の三角不等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`(i,j) = (1,2), (2,1)`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl|(S_N)_{ij} - (\sinh\tau)_{\mathbb{C}}\bigr|
+&= \Bigl|\Bigl(\frac{E_N(\tau) - E_N(-\tau)}{2}\Bigr)_{\mathbb{C}} - (\sinh\tau)_{\mathbb{C}}\Bigr|
+&&(\because \text{部分和の成分の中間目標}) \\
+&= \Bigl|\Bigl(\frac{E_N(\tau) - E_N(-\tau)}{2} - \sinh\tau\Bigr)_{\mathbb{C}}\Bigr|
+&&(\because \text{準備の}\ x_{\mathbb{C}} - y_{\mathbb{C}} = (x - y)_{\mathbb{C}}) \\
+&= \Bigl|\frac{E_N(\tau) - E_N(-\tau)}{2} - \sinh\tau\Bigr|
+&&(\because \blkref{abs_basic_properties}\ (6)) \\
+&= \Bigl|\frac{E_N(\tau) - E_N(-\tau)}{2} - \frac{\exp(\tau) - \exp(-\tau)}{2}\Bigr|
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \Bigl|\frac{\bigl(E_N(\tau) - \exp(\tau)\bigr) - \bigl(E_N(-\tau) - \exp(-\tau)\bigr)}{2}\Bigr|
+&&(\because \text{実数の四則}) \\
+&\le \frac{u_N + v_N}{2}
+&&(\because \text{実数の絶対値の三角不等式})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("scalar_exp_is_limit_of_partial_sums"),
+        " を ",
+        math(String.raw`K = \mathbb{R}`),
+        "、",
+        math(String.raw`x = \tau`),
+        " と ",
+        math(String.raw`x = -\tau`),
+        " へ当てると、",
+        ref("def_matrix_norm"),
         " の ",
-        math(String.raw`\cosh, \sinh`),
-        " のテイラー展開。）したがって",
+        math(String.raw`K`),
+        " の列の収束の意味で ",
+        math(String.raw`u_N \to 0`),
+        "、",
+        math(String.raw`v_N \to 0`),
+        " である。",
+        math(String.raw`\varepsilon \in \mathbb{R}_{>0}`),
+        " に対し、",
+        math(String.raw`N \ge N_1`),
+        " で ",
+        math(String.raw`u_N < \varepsilon`),
+        "、",
+        math(String.raw`N \ge N_2`),
+        " で ",
+        math(String.raw`v_N < \varepsilon`),
+        " となる ",
+        math(String.raw`N_1, N_2 \in \mathbb{Z}_{\ge 0}`),
+        " を取ると、",
+        math(String.raw`N \ge \max(N_1, N_2)`),
+        " で ",
+        math(String.raw`(u_N + v_N)/2 < \varepsilon`),
+        " である。よって ",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束の意味で ",
+        math(String.raw`(S_N)_{ij} \to (\cosh\tau)_{\mathbb{C}}\ ((i,j) = (1,1),(2,2))`),
+        "、",
+        math(String.raw`(S_N)_{ij} \to (\sinh\tau)_{\mathbb{C}}\ ((i,j) = (1,2),(2,1))`),
+        " である（",
+        math(String.raw`\mathbb{R}`),
+        " への脱出: 極限）。一方 ",
+        ref("exp_converges"),
+        " (1b) より ",
+        math(String.raw`(S_N)_{ij} \to \bigl(\exp(B_\tau)\bigr)_{ij}`),
+        " である。したがって",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(\tau\sigma^x)
+&= \exp(B_\tau)
+&&(\because \text{主張の記法の約束と}\ B_\tau\ \text{の定義}) \\
+&= \begin{pmatrix} (\cosh\tau)_{\mathbb{C}} & (\sinh\tau)_{\mathbb{C}} \\ (\sinh\tau)_{\mathbb{C}} & (\cosh\tau)_{\mathbb{C}} \end{pmatrix}
+&&(\because \text{四つの成分へ}\ \blkref{scalar_limit_is_unique}\ \text{を同時適用。行列は成分で定まる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\tau = K_2^*`),
+        " として",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (2s_2)^{1/2}\exp\!\left(K_2^*\sigma^x\right)
-&= (2s_2)^{1/2}\bigl(\cosh(K_2^*)\,I + \sinh(K_2^*)\,\sigma^x\bigr)
-   \quad (\because \text{上の閉じた形に } t = K_2^* \text{ を代入}) \\
-&= \begin{pmatrix}
-(2s_2)^{1/2}\cosh K_2^* & (2s_2)^{1/2}\sinh K_2^* \\
-(2s_2)^{1/2}\sinh K_2^* & (2s_2)^{1/2}\cosh K_2^*
-\end{pmatrix}
-   \quad (\because I,\ \sigma^x \text{ の成分を書き下し、スカラー倍を各成分へ掛ける})
+&= q_{\mathbb{C}}\,\exp\!\left(B_{K_2^*}\right)
+&&(\because q\ \text{の定義と主張の記法の約束}) \\
+&= q_{\mathbb{C}}\begin{pmatrix} (\cosh K_2^*)_{\mathbb{C}} & (\sinh K_2^*)_{\mathbb{C}} \\ (\sinh K_2^*)_{\mathbb{C}} & (\cosh K_2^*)_{\mathbb{C}} \end{pmatrix}
+&&(\because \text{直前の式に}\ \tau = K_2^*\ \text{を代入}) \\
+&= \begin{pmatrix} q_{\mathbb{C}}(\cosh K_2^*)_{\mathbb{C}} & q_{\mathbb{C}}(\sinh K_2^*)_{\mathbb{C}} \\ q_{\mathbb{C}}(\sinh K_2^*)_{\mathbb{C}} & q_{\mathbb{C}}(\cosh K_2^*)_{\mathbb{C}} \end{pmatrix}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= \begin{pmatrix} (q\cosh K_2^*)_{\mathbb{C}} & (q\sinh K_2^*)_{\mathbb{C}} \\ (q\sinh K_2^*)_{\mathbb{C}} & (q\cosh K_2^*)_{\mathbb{C}} \end{pmatrix}
+&&(\because \blkref{real_inclusion_preserves_product})
 \end{aligned}`,
       ),
       paragraph([
-        "なので、示すべきは次の 2 つの等式である。",
+        "である。以下で次の 2 つの実数の等式を示す。",
       ]),
       displayMath(
-        String.raw`(2s_2)^{1/2}\cosh K_2^* = \exp(K_2), \qquad
-(2s_2)^{1/2}\sinh K_2^* = \exp(-K_2)`,
+        String.raw`q\cosh K_2^* = \exp(K_2), \qquad
+q\sinh K_2^* = \exp(-K_2)`,
       ),
       paragraph([
         "中間目標: ",
-        math(String.raw`\cosh K_2^*, \sinh K_2^*`),
+        math(String.raw`\exp(\pm K_2^*)`),
         " を ",
-        math(String.raw`K_2`),
+        math(String.raw`r`),
         " で書く。",
-        ref("def_second_dual_coupling_constant"),
-        " の ",
-        math(String.raw`K_2^* = -\tfrac12\log(\tanh K_2)`),
-        " より ",
-        math(String.raw`\log(\tanh K_2) = -2K_2^*`),
-        " である。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(-2K_2^*)
-&= \exp(\log(\tanh K_2))
-   \quad (\because \log(\tanh K_2) = -2K_2^* \text{ を指数へ代入}) \\
-&= \tanh K_2
-   \quad (\because \exp \text{ と } \log \text{ は互いに逆写像})
+&= \exp\!\Bigl(-2\cdot\bigl(-\tfrac{1}{2}\log(\tanh K_2)\bigr)\Bigr)
+&&(\because \blkref{def_second_dual_coupling_constant}) \\
+&= \exp\!\Bigl(-2\cdot\bigl(-\tfrac{1}{2}\log t\bigr)\Bigr)
+&&(\because t\ \text{の定義}) \\
+&= \exp(\log t)
+&&(\because -2\cdot\bigl(-\tfrac{1}{2}\bigr) = 1) \\
+&= t
+&&(\because \blkref{def_real_logarithm_positive}\ \text{の}\ \exp(\log y) = y)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(\exp(-K_2^*)\bigr)^2
+&= \exp(-K_2^*)\exp(-K_2^*)
+&&(\because \text{実数の二乗}) \\
+&= \exp(-2K_2^*)
+&&(\because \blkref{scalar_exp_product}) \\
+&= t
+&&(\because \text{直前の式})
 \end{aligned}`,
       ),
       paragraph([
-        "以後 ",
-        math(String.raw`t := \tanh K_2`),
-        " と置く。",
-      ]),
-      paragraph([
-        math(String.raw`K_2 > 0`),
+        ref("real_exp_positive"),
         " より ",
-        math(String.raw`0 < t < 1`),
-        " である（",
-        ref("cosh_sinh_basic_properties"),
-        " の ",
-        math(String.raw`\cosh x > \sinh x > 0\ (x>0)`),
-        "）。また",
+        math(String.raw`\exp(-K_2^*) \in \mathbb{R}_{\ge 0}`),
+        " であり、その二乗は ",
+        math(String.raw`t`),
+        " なので、",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        " の一意性と ",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`\exp(-K_2^*) = r`),
+        " である。また",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(-K_2^*)
-&= \left(\exp(-2K_2^*)\right)^{1/2}
-   \quad (\because \text{指数法則 } \exp(-2K_2^*) = (\exp(-K_2^*))^2 \text{ と } \exp(-K_2^*) > 0 \text{ の正の平方根}) \\
-&= t^{1/2}
-   \quad (\because \exp(-2K_2^*) = t),
+\exp(K_2^*)\,r
+&= \exp(K_2^*)\exp(-K_2^*)
+&&(\because \exp(-K_2^*) = r) \\
+&= \exp(0)
+&&(\because \blkref{scalar_exp_product}) \\
+&= 1
+&&(\because \blkref{scalar_exp_zero})
 \end{aligned}`,
       ),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(K_2^*)
-&= \frac{1}{\exp(-K_2^*)}
-   \quad (\because \text{指数法則 } \exp(K_2^*)\exp(-K_2^*) = 1) \\
-&= \frac{1}{t^{1/2}}
-   \quad (\because \exp(-K_2^*) = t^{1/2}) \\
-&= t^{-1/2}
-   \quad (\because \text{負冪の定義 } t^{-1/2} = 1/t^{1/2})
-\end{aligned}`,
-      ),
-      paragraph(["である。よって"]),
+      paragraph([
+        "であり ",
+        math(String.raw`r > 0`),
+        " なので ",
+        math(String.raw`\exp(K_2^*) = 1/r`),
+        " である。よって",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \cosh K_2^*
 &= \frac{\exp(K_2^*) + \exp(-K_2^*)}{2}
-   \quad (\because \cosh \text{ の定義 } \cosh x = \tfrac{\exp(x)+\exp(-x)}{2}) \\
-&= \frac{t^{-1/2} + t^{1/2}}{2}
-   \quad (\because \exp(K_2^*) = t^{-1/2},\ \exp(-K_2^*) = t^{1/2}) \\
-&= \frac{1+t}{2\,t^{1/2}}
-   \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}),
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \frac{1/r + r}{2}
+&&(\because \exp(K_2^*) = 1/r,\ \exp(-K_2^*) = r\ \text{を同時に代入}) \\
+&= \frac{1 + r^2}{2r}
+&&(\because \text{分子・分母に}\ r\ \text{を掛ける}) \\
+&= \frac{1 + t}{2r}
+&&(\because r^2 = t),
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sinh K_2^*
 &= \frac{\exp(K_2^*) - \exp(-K_2^*)}{2}
-   \quad (\because \sinh \text{ の定義 } \sinh x = \tfrac{\exp(x)-\exp(-x)}{2}) \\
-&= \frac{t^{-1/2} - t^{1/2}}{2}
-   \quad (\because \exp(K_2^*) = t^{-1/2},\ \exp(-K_2^*) = t^{1/2}) \\
-&= \frac{1-t}{2\,t^{1/2}}
-   \quad (\because \text{分子・分母に } t^{1/2} \text{ を掛ける}).
+&&(\because \blkref{def_cosh_sinh}) \\
+&= \frac{1/r - r}{2}
+&&(\because \exp(K_2^*) = 1/r,\ \exp(-K_2^*) = r\ \text{を同時に代入}) \\
+&= \frac{1 - r^2}{2r}
+&&(\because \text{分子・分母に}\ r\ \text{を掛ける}) \\
+&= \frac{1 - t}{2r}
+&&(\because r^2 = t)
 \end{aligned}`,
       ),
       paragraph([
-        "さらに ",
-        math(String.raw`t = \tanh K_2 = \dfrac{\sinh K_2}{\cosh K_2}`),
+        "である。",
+        ref("cosh_sinh_basic_properties"),
+        " (3) より ",
+        math(String.raw`\cosh K_2 > 0`),
+        "、",
+        math(String.raw`\sinh K_2 > 0`),
         " なので",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 1 + t
 &= 1 + \frac{\sinh K_2}{\cosh K_2}
-   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
+&&(\because \blkref{def_positive_coupling_tanh}) \\
 &= \frac{\cosh K_2 + \sinh K_2}{\cosh K_2}
-   \quad (\because \text{通分}) \\
+&&(\because \text{通分}) \\
 &= \frac{\exp(K_2)}{\cosh K_2}
-   \quad (\because \cosh x + \sinh x = \exp(x)),
+&&(\because \blkref{cosh_sinh_basic_properties}\ (1)),
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 1 - t
 &= 1 - \frac{\sinh K_2}{\cosh K_2}
-   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2}) \\
+&&(\because \blkref{def_positive_coupling_tanh}) \\
 &= \frac{\cosh K_2 - \sinh K_2}{\cosh K_2}
-   \quad (\because \text{通分}) \\
+&&(\because \text{通分}) \\
 &= \frac{\exp(-K_2)}{\cosh K_2}
-   \quad (\because \cosh x - \sinh x = \exp(-x)).
+&&(\because \blkref{cosh_sinh_basic_properties}\ (1))
 \end{aligned}`,
       ),
+      paragraph(["である。"]),
       paragraph([
-        "（",
-        math(String.raw`\cosh x \pm \sinh x = \exp(\pm x)`),
-        " は ",
-        ref("cosh_sinh_basic_properties"),
-        " による。）",
-      ]),
-      paragraph(["中間目標: 前因子。まず"]),
-      displayMath(String.raw`\begin{aligned}
-2s_2
-&= 2\sinh 2K_2
-   \quad (\because s_2 = \sinh 2K_2 \text{ の代入}) \\
-&= 2\left(2\sinh K_2\cosh K_2\right)
-   \quad (\because \text{倍角公式 }\sinh 2K_2 = 2\sinh K_2\cosh K_2) \\
-&= 4\sinh K_2\cosh K_2
-   \quad (\because \text{数の積の結合則})
-\end{aligned}`),
-      paragraph([
-        "である（倍角公式は ",
-        ref("cosh_sinh_basic_properties"),
-        " による）。",
-        math(String.raw`\sinh K_2, \cosh K_2 > 0`),
-        " なので",
+        "中間目標: 前因子 ",
+        math(String.raw`q/(2r) = \cosh K_2`),
+        "。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(2s_2)^{1/2}
-&= \left(4\sinh K_2\,\cosh K_2\right)^{1/2}
-   \quad (\because 2s_2 = 4\sinh K_2\cosh K_2 \text{ の代入}) \\
-&= 4^{1/2}\left(\sinh K_2\,\cosh K_2\right)^{1/2}
-   \quad (\because \text{非負実数の平方根は積を保つ}) \\
-&= 2\left(\sinh K_2\,\cosh K_2\right)^{1/2}
-   \quad (\because 4^{1/2} = 2)
+\Bigl(\frac{q}{2r}\Bigr)^2
+&= \frac{q^2}{4r^2}
+&&(\because \text{分数の二乗}) \\
+&= \frac{2s_2}{4r^2}
+&&(\because q^2 = 2s_2) \\
+&= \frac{2s_2}{4t}
+&&(\because r^2 = t) \\
+&= \frac{2\sinh 2K_2}{4t}
+&&(\because \blkref{def_indexed_hyperbolic_abbreviations}\ \text{の}\ s_2 = \sinh 2K_2) \\
+&= \frac{2\cdot 2\sinh\bigl(\tfrac{2K_2}{2}\bigr)\cosh\bigl(\tfrac{2K_2}{2}\bigr)}{4t}
+&&(\because \blkref{sinh_double_angle_formula}\ \text{を}\ x = 2K_2\ \text{へ当てた}) \\
+&= \frac{2\cdot 2\sinh K_2\cosh K_2}{4t}
+&&(\because \tfrac{2K_2}{2} = K_2) \\
+&= \frac{\sinh K_2\cosh K_2}{t}
+&&(\because 2\cdot 2 = 4\ \text{で約分}) \\
+&= \sinh K_2\cosh K_2\cdot\frac{\cosh K_2}{\sinh K_2}
+&&(\because \blkref{def_positive_coupling_tanh}\ \text{の}\ t = \tfrac{\sinh K_2}{\cosh K_2}) \\
+&= (\cosh K_2)^2
+&&(\because \sinh K_2 \ne 0\ \text{で約分})
 \end{aligned}`,
       ),
-      displayMath(
-        String.raw`t^{1/2} = \left(\frac{\sinh K_2}{\cosh K_2}\right)^{1/2}
-   \quad (\because t = \tanh K_2 = \tfrac{\sinh K_2}{\cosh K_2} \text{ の代入})`,
-      ),
-      paragraph(["したがって"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{(2s_2)^{1/2}}{2\,t^{1/2}}
-&= \frac{2\left(\sinh K_2\cosh K_2\right)^{1/2}}{2}
-   \left(\frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
-   \quad (\because \text{直前の 2 式の代入}) \\
-&= \left(\sinh K_2\cosh K_2\right)^{1/2}
-   \left(\frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
-   \quad (\because \text{約分 } \tfrac{2}{2} = 1) \\
-&= \left(\sinh K_2\cosh K_2 \cdot \frac{\cosh K_2}{\sinh K_2}\right)^{1/2}
-   \quad (\because \text{非負実数の平方根は積を保つ}) \\
-&= \left(\cosh^2 K_2\right)^{1/2}
-   \quad (\because \text{約分 } \tfrac{\sinh K_2}{\sinh K_2} = 1) \\
-&= \cosh K_2
-   \quad (\because \cosh K_2 > 0)
-\end{aligned}`,
-      ),
-      paragraph(["中間目標: 結論。上の二つの中間目標で得た式を合わせて"]),
+      paragraph([
+        math(String.raw`q > 0`),
+        "、",
+        math(String.raw`r > 0`),
+        " より ",
+        math(String.raw`q/(2r) > 0`),
+        "、また ",
+        math(String.raw`\cosh K_2 > 0`),
+        " なので、",
+        ref("cosh_sinh_basic_properties"),
+        " (4) より ",
+        math(String.raw`q/(2r) = \cosh K_2`),
+        " である。",
+      ]),
+      paragraph(["中間目標: 示すべき 2 つの等式。"]),
       displayMath(
         String.raw`\begin{aligned}
-(2s_2)^{1/2}\cosh K_2^*
-&= (2s_2)^{1/2}\,\frac{1+t}{2\,t^{1/2}}
-   \quad (\because \cosh K_2^* \text{ を } K_2 \text{ で書いた式}) \\
-&= \frac{(2s_2)^{1/2}}{2\,t^{1/2}}\,(1+t)
-   \quad (\because \text{積の並べ替え}) \\
+q\cosh K_2^*
+&= q\,\frac{1+t}{2r}
+&&(\because \cosh K_2^* = \tfrac{1+t}{2r}) \\
+&= \frac{q}{2r}\,(1+t)
+&&(\because \text{積の並べ替え}) \\
 &= \cosh K_2 \cdot (1+t)
-   \quad (\because \tfrac{(2s_2)^{1/2}}{2\,t^{1/2}}=\cosh K_2) \\
+&&(\because \tfrac{q}{2r} = \cosh K_2) \\
 &= \cosh K_2 \cdot \frac{\exp(K_2)}{\cosh K_2}
-   \quad (\because 1+t=\tfrac{\exp(K_2)}{\cosh K_2}) \\
+&&(\because 1+t = \tfrac{\exp(K_2)}{\cosh K_2}) \\
 &= \exp(K_2)
-   \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1),
+&&(\because \cosh K_2 \ne 0\ \text{で約分}),
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-(2s_2)^{1/2}\sinh K_2^*
-&= (2s_2)^{1/2}\,\frac{1-t}{2\,t^{1/2}}
-   \quad (\because \sinh K_2^* \text{ を } K_2 \text{ で書いた式}) \\
-&= \frac{(2s_2)^{1/2}}{2\,t^{1/2}}\,(1-t)
-   \quad (\because \text{積の並べ替え}) \\
+q\sinh K_2^*
+&= q\,\frac{1-t}{2r}
+&&(\because \sinh K_2^* = \tfrac{1-t}{2r}) \\
+&= \frac{q}{2r}\,(1-t)
+&&(\because \text{積の並べ替え}) \\
 &= \cosh K_2 \cdot (1-t)
-   \quad (\because \tfrac{(2s_2)^{1/2}}{2\,t^{1/2}}=\cosh K_2) \\
+&&(\because \tfrac{q}{2r} = \cosh K_2) \\
 &= \cosh K_2 \cdot \frac{\exp(-K_2)}{\cosh K_2}
-   \quad (\because 1-t=\tfrac{\exp(-K_2)}{\cosh K_2}) \\
+&&(\because 1-t = \tfrac{\exp(-K_2)}{\cosh K_2}) \\
 &= \exp(-K_2)
-   \quad (\because \text{約分 } \tfrac{\cosh K_2}{\cosh K_2} = 1).
+&&(\because \cosh K_2 \ne 0\ \text{で約分})
 \end{aligned}`,
       ),
-      paragraph(["これで主張の 2 式が示された。"]),
+      paragraph(["中間目標: 結論。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+A
+&= \begin{pmatrix} (\exp K_2)_{\mathbb{C}} & (\exp(-K_2))_{\mathbb{C}} \\ (\exp(-K_2))_{\mathbb{C}} & (\exp K_2)_{\mathbb{C}} \end{pmatrix}
+&&(\because A\ \text{の定義と主張の記法の約束}) \\
+&= \begin{pmatrix} (q\cosh K_2^*)_{\mathbb{C}} & (q\sinh K_2^*)_{\mathbb{C}} \\ (q\sinh K_2^*)_{\mathbb{C}} & (q\cosh K_2^*)_{\mathbb{C}} \end{pmatrix}
+&&(\because \text{示すべき 2 つの等式を四つの成分へ同時に代入}) \\
+&= (2s_2)^{1/2}\exp\!\left(K_2^*\sigma^x\right)
+&&(\because \text{上で求めた}\ (2s_2)^{1/2}\exp(K_2^*\sigma^x)\ \text{の成分})
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。分配関数の転送行列の章から転送行列の章へ移し、K_2^* と s_2 の参照先を <def_second_dual_coupling_constant> と <def_indexed_hyperbolic_abbreviations> にした。番号で区切っていた四つの段を中間目標の名前へ変えた。",
+        "2026-11-02: SageMath の検算を付けるときに証明を書き直した。倍角公式とテイラー展開の根拠が cosh_sinh_basic_properties を引いていた（そこには無い）。倍角公式は sinh_double_angle_formula へ付け替え、テイラー展開（本文の sinh_cosh_taylor_series には証明が無い）には頼らず、部分和の成分を 1 行 1 列の exp の部分和の半和 (E_N(τ)±E_N(-τ))/2 で書き、scalar_exp_is_limit_of_partial_sums と三角不等式で極限を取る形にした。行列の冪の指数法則・加法則（本文に無い）を def_exp (1) の冪の定義による一つの帰納法に、非負実数の平方根が積を保つこと（本文に無い）を二乗の比較（cosh_sinh_basic_properties (4)）に置き換えた。閉じた形の変数と tanh K_2 が同じ記号 t だったので、閉じた形の変数を τ にした。実数のスカラー倍と行列の実数の成分を a_C の略記として主張に書き、証明では a_C と明示した。",
       ],
     },
   },
