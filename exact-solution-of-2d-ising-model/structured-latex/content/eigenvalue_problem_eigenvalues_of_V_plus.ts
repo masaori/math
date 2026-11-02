@@ -2130,8 +2130,51 @@ X\,\check{n}_\nu
         math(String.raw`\check{n}_\mu^2 = \check{n}_\mu`),
         " と、単位行列が任意の行列と可換であること（",
         ref("scalar_identity_commutes"),
-        "）を使う。まず 2 つの冪等性：",
+        "）を使う。まず異なる上付き添字の積が両順序とも零であること：",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(1)}R_\mu^{(0)}
+&= \check{n}_\mu\left(I - \check{n}_\mu\right)
+   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu\left(I + \left(-\check{n}_\mu\right)\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu I + \check{n}_\mu\left(-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to I,\ C \to -\check{n}_\mu)\right) \\
+&= \check{n}_\mu + \check{n}_\mu\left(-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu + \left(-\left(\check{n}_\mu\check{n}_\mu\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu\check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu - \check{n}_\mu
+   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
+&= 0
+   \quad (\because \text{行列の加法逆元})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\mu^{(0)}R_\mu^{(1)}
+&= \left(I - \check{n}_\mu\right)\check{n}_\mu
+   \quad (\because R_\mu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= \left(I + \left(-\check{n}_\mu\right)\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\right) \\
+&= I\check{n}_\mu + \left(-\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to -\check{n}_\mu,\ C \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu + \left(-\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu + \left(-\left(\check{n}_\mu\check{n}_\mu\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu\check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu - \check{n}_\mu
+   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
+&= 0
+   \quad (\because \text{行列の加法逆元})
+\end{aligned}`,
+      ),
+      paragraph(["次に 2 つの冪等性（", math(String.raw`R_\mu^{(0)}R_\mu^{(0)}`), " は上の ", math(String.raw`R_\mu^{(1)}R_\mu^{(0)} = 0`), " を使う）："]),
       displayMath(
         String.raw`\begin{aligned}
 R_\mu^{(1)}R_\mu^{(1)}
@@ -2148,41 +2191,22 @@ R_\mu^{(1)}R_\mu^{(1)}
 R_\mu^{(0)}R_\mu^{(0)}
 &= \left(I-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
    \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）}) \\
-&= I - \check{n}_\mu - \check{n}_\mu + \check{n}_\mu\check{n}_\mu
-   \quad (\because \text{分配法則と、単位行列との積}) \\
-&= I - \check{n}_\mu - \check{n}_\mu + \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
-&= I - \check{n}_\mu
-   \quad (\because \text{行列の加法（同じ項の消去）}) \\
+&= \left(I + \left(-\check{n}_\mu\right)\right)\left(I-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\mu)\ \text{を左の因子へ}\right) \\
+&= I\left(I-\check{n}_\mu\right) + \left(-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to -\check{n}_\mu,\ C \to I-\check{n}_\mu)\right) \\
+&= \left(I-\check{n}_\mu\right) + \left(-\check{n}_\mu\right)\left(I-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I-\check{n}_\mu)\right) \\
+&= \left(I-\check{n}_\mu\right) + \left(-\left(\check{n}_\mu\left(I-\check{n}_\mu\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to I-\check{n}_\mu)\right) \\
+&= \left(I-\check{n}_\mu\right) - \check{n}_\mu\left(I-\check{n}_\mu\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I-\check{n}_\mu,\ B \to \check{n}_\mu\left(I-\check{n}_\mu\right))\ \text{を右辺から左辺へ}\right) \\
+&= \left(I-\check{n}_\mu\right) - 0
+   \quad (\because \text{上の } R_\mu^{(1)}R_\mu^{(0)} = \check{n}_\mu\left(I-\check{n}_\mu\right) = 0) \\
+&= I-\check{n}_\mu
+   \quad \left(\because\ \blkref{matrix_minus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I-\check{n}_\mu)\text{。本証明の } 0 \text{ は零行列 } O\right) \\
 &= R_\mu^{(0)}
    \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）})
-\end{aligned}`,
-      ),
-      paragraph(["次に異なる上付き添字の積が両順序とも零であること："]),
-      displayMath(
-        String.raw`\begin{aligned}
-R_\mu^{(1)}R_\mu^{(0)}
-&= \check{n}_\mu\left(I - \check{n}_\mu\right)
-   \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
-&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
-   \quad (\because \text{分配法則と、単位行列との積}) \\
-&= \check{n}_\mu - \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
-&= 0
-   \quad (\because \text{行列の加法逆元})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-R_\mu^{(0)}R_\mu^{(1)}
-&= \left(I - \check{n}_\mu\right)\check{n}_\mu
-   \quad (\because R_\mu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
-&= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
-   \quad (\because \text{分配法則と、単位行列との積}) \\
-&= \check{n}_\mu - \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
-&= 0
-   \quad (\because \text{行列の加法逆元})
 \end{aligned}`,
       ),
       paragraph(["最後に和が単位行列であること："]),
@@ -2325,8 +2349,16 @@ R_\mu^{(1)} + R_\mu^{(0)}
 \check{n}_\nu R_\nu^{(0)}
 &=\check{n}_\nu\left(I-\check{n}_\nu\right)
   \quad (\because R_\nu^{(0)}\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu\left(I+\left(-\check{n}_\nu\right)\right)
+  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I,\ B \to \check{n}_\nu)\right) \\
+&=\check{n}_\nu I+\check{n}_\nu\left(-\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to I,\ C \to -\check{n}_\nu)\right) \\
+&=\check{n}_\nu+\check{n}_\nu\left(-\check{n}_\nu\right)
+  \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu)\right) \\
+&=\check{n}_\nu+\left(-\left(\check{n}_\nu\check{n}_\nu\right)\right)
+  \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
 &=\check{n}_\nu-\check{n}_\nu\check{n}_\nu
-  \quad (\because \text{分配法則と、単位行列との積}) \\
+  \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu\check{n}_\nu)\ \text{を右辺から左辺へ}\right) \\
 &=\check{n}_\nu-\check{n}_\nu
   \quad (\because \check{n}_\nu\ \text{の冪等性 (3)}) \\
 &=0
@@ -2492,6 +2524,7 @@ y_{\epsilon'}
         "009 章の joint_eigenspace_decomposition の半整数運動量版。段階構造は同じで、添字集合 I が {1,…,M} に、m が M に、tr(Q_ε) = 2^{M−m} が 1 に置き換わる。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_02（M=2,3,4,5 の {0,1}^M を全列挙。tr(Q̌_ε) = 1 の残差 ≤ 1.1e-15、rank Q̌_ε = 1 を特異値で判定して違反 0 件）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02: Step 0 と Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_*_factor・identity_matrix_is_*_unit_of_mat_mult・negation_factors_out_of_*_factor の 1 行 1 主張の鎖にした。R_μ^{(0)}R_μ^{(0)} は行列の加法の結合則を本文に持たないので、R_μ^{(1)}R_μ^{(0)} = 0 を先に示し、それと matrix_minus_zero_matrix を引く鎖にした（Step 0 の中で異なる上付き添字の積を冪等性より前に置いた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24。",
       ],
     },
   },

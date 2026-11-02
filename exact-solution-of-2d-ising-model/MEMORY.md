@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十三個目として、`check_joint_eigenspace_decomposition` の Step 0・Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、差の書き換え・分配・単位行列・符号の外出しの主張の 1 行 1 主張の参照に割った（主張は不変）。`R^{(0)}R^{(0)} = R^{(0)}` は、本文に行列の加法の結合則が無いので `R^{(1)}R^{(0)} = 0` と `matrix_minus_zero_matrix` を引く鎖にし、Step 0 の中の順序を入れ替えた。Lean は人手と 1 対 1 の `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` と `matrix_sub_zero_matrix_tensorPow`、SageMath は `050` の check_24。次は状態台帳の (i)（`eigenvalues_of_check_Vprime` の結合法則とスカラー倍）。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、`epsilon_projectors_commute_with_transfer_matrices`（P^{(+)} と転送行列の可換性。四つの主張を束ねていた）を 1 ブロック 1 主張に分け、一般の主張 `epsilon_projector_commutes_with_epsilon_commuting_matrix`（ε と可換なら P^{(+)} とも可換）と V_1・V_2・V_1^{(+)}・(V_1^{(+)})^{1/2} への適用の 5 個の主張にし、同名の検算を付けた（未検算 82 件）。一般の主張の鎖の根拠の無い行を行列の演算の主張の参照にした。計算の誤りは無かった。次は `symmetrized_transfer_matrix_on_sectors`。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十二個目として、`check_number_operator_idempotent` (3) と `check_number_operators_commute` Step 2・Step 3 の名前だけの根拠「結合法則」6 か所を `mat_mult_associative` の 1 行 1 回の参照にし、同じ鎖の分配と符号の行も既存の主張の参照に割った（主張は不変）。Lean の具体版（`nOp_mul_self`・`mul_nOp_of_anticommute`・`nOp_mul_nOp_of_ne`）を人手と 1 対 1 の calc にし、必要十分版の特殊化は `*_of_necSuf` に残した。SageMath は `050` の check_23。次は状態台帳の (h)（`check_joint_eigenspace_decomposition` の「分配法則と、単位行列との積」）。
