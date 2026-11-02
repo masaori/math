@@ -150,3 +150,7 @@ RESULT: PASS
 # 実行コマンド: sage check_33_joint_eigenspace_step2_expansion_over_binary_words.sage
 PASS check_joint_eigenspace_decomposition Step 2 の鎖（和は def_sum_over_binary_words）: 12 段、否定コントロール 3 行
 RESULT: PASS
+
+# 実行コマンド: sage check_34_joint_eigenspace_commutation_and_square_chains.sage
+PASS check_joint_eigenspace_decomposition Step 0 の可換性・Step 1 の Q̌^2・Step 3 の左右の鎖: 1916 段、否定コントロール 1 行
+RESULT: PASS

@@ -14,7 +14,8 @@ Step 3 の `ε_ν = 1` の場合の `ň_ν R_ν^{(1)} = R_ν^{(1)}` は、定義
 Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）は、場合の仮定の行まで含めて `nOp_mul_projFactor_of_mem`（`ε_ν = 1`）・
 `nOp_mul_projFactor_of_not_mem`（`ε_ν = 0`）に置く。人手の `R_ν^{(ε_ν)}` は `NecSuf.projFactor F.nOp T ν`、`ε_ν` は
 `if ν ∈ T then (1 : ℂ) else 0` である。
-Step 3 の最後の鎖（`ň_νQ̌_ε = (∏_{μ≠ν}R_μ^{(ε_μ)})(ε_νR_ν^{(ε_ν)}) = ⋯ = ε_νQ̌_ε`）と Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
+Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、4 通りの上付き添字の組 `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}` の鎖）、
+Step 3 の最後の鎖（`ň_νQ̌_ε = (∏_{μ≠ν}R_μ^{(ε_μ)})(ε_νR_ν^{(ε_ν)}) = ⋯ = ε_νQ̌_ε`）と左右の鎖、Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 章 009 との違い（本章の要点）
@@ -187,7 +188,7 @@ theorem nOp_mul_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
   rw [Qproj, h]
   by_cases hT : ν ∈ T <;> simp [hT]
 
-/-- `ň_ν` は `Q̌_ε` と可換（原文 Step 0 の「因子はすべて可換」）。 -/
+/-- `ň_ν` は `Q̌_ε` と可換（人手 Step 3 の `Q̌_εň_ν = ň_νQ̌_ε`。人手は Step 0 の可換性と `matrix_commuting_with_each_factor_commutes_with_finite_product` で示す）。 -/
 theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
     Commute (F.nOp ν) (F.Qproj T) :=
   NecSuf.commute_projOn (n := F.nOp) (hn := F.commute_nOp_nOp)

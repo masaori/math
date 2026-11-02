@@ -2433,6 +2433,180 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_claim_matrix_commuting_with_each_factor_commutes_with_finite_product",
+    kind: "claim",
+    title: { text: "各因子と可換な行列は有限積とも可換" },
+    labels: ["matrix_commuting_with_each_factor_commutes_with_finite_product"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X, A_1,\dots,A_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が、全ての ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`XA_j = A_jX`),
+        " を満たすとする。有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`X\prod_{j=1}^{r} A_j = \Bigl(\prod_{j=1}^{r} A_j\Bigr)X`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、仮定を満たす全ての ",
+        math(String.raw`X`),
+        " と族 ",
+        math(String.raw`(A_j)`),
+        " について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X\prod_{j=1}^{1} A_j
+&= XA_1
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= A_1X
+&&(\because\ \text{仮定}\ XA_j = A_jX\ (j \to 1))\\
+&= \Bigl(\prod_{j=1}^{1} A_j\Bigr)X
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で成り立つと仮定する。",
+        math(String.raw`X, A_1,\dots,A_{r+1}`),
+        " が全ての ",
+        math(String.raw`j \in \{1,\dots,r+1\}`),
+        " について ",
+        math(String.raw`XA_j = A_jX`),
+        " を満たすとき、",
+        math(String.raw`X, A_1,\dots,A_r`),
+        " は帰納法の仮定の前提を満たすので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X\prod_{j=1}^{r+1} A_j
+&= X\Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}\Bigr)
+&&(\because\ \blkref{def_finite_product_of_matrices})\\
+&= \Bigl(X\prod_{j=1}^{r} A_j\Bigr)A_{r+1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to X,\ B \to \textstyle\prod_{j=1}^{r} A_j,\ C \to A_{r+1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)X\Bigr)A_{r+1}
+&&(\because\ \text{帰納法の仮定})\\
+&= \Bigl(\prod_{j=1}^{r} A_j\Bigr)\bigl(XA_{r+1}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1}^{r} A_j,\ B \to X,\ C \to A_{r+1})\bigr)\\
+&= \Bigl(\prod_{j=1}^{r} A_j\Bigr)\bigl(A_{r+1}X\bigr)
+&&(\because\ \text{仮定}\ XA_j = A_jX\ (j \to r+1))\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}\Bigr)X
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1}^{r} A_j,\ B \to A_{r+1},\ C \to X)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{j=1}^{r+1} A_j\Bigr)X
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{を右辺から左辺へ})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 3 の Q̌_εň_ν = ň_νQ̌_ε が「ň_ν と Q̌_ε の全因子の可換性」を名前だけで根拠にしていたので足した。" +
+          "Lean は具体版 Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product（ClaimFiniteProductsOfCommutingMatrices.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_product_of_two_finite_products_of_matrices",
+    kind: "claim",
+    title: { text: "二つの有限積の積は、因子ごとの積の有限積" },
+    labels: ["product_of_two_finite_products_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A_1,\dots,A_r, B_1,\dots,B_r \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が、",
+        math(String.raw`1 \leq j < i \leq r`),
+        " を満たす全ての ",
+        math(String.raw`i, j \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`A_iB_j = B_jA_i`),
+        " を満たすとする。有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\Bigl(\prod_{j=1}^{r} A_j\Bigr)\Bigl(\prod_{j=1}^{r} B_j\Bigr) = \prod_{j=1}^{r} \bigl(A_jB_j\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、仮定を満たす全ての族 ",
+        math(String.raw`(A_j), (B_j)`),
+        " について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\prod_{j=1}^{1} A_j\Bigr)\Bigl(\prod_{j=1}^{1} B_j\Bigr)
+&= A_1B_1
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{を 2 か所})\\
+&= \prod_{j=1}^{1} \bigl(A_jB_j\bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_jB_j)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で成り立つと仮定する。",
+        math(String.raw`A_1,\dots,A_{r+1}, B_1,\dots,B_{r+1}`),
+        " が ",
+        math(String.raw`1 \leq j < i \leq r+1`),
+        " で ",
+        math(String.raw`A_iB_j = B_jA_i`),
+        " を満たすとき、",
+        math(String.raw`A_1,\dots,A_r, B_1,\dots,B_r`),
+        " は帰納法の仮定の前提を満たす。また ",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " なら ",
+        math(String.raw`j < r+1`),
+        " なので ",
+        math(String.raw`A_{r+1}B_j = B_jA_{r+1}`),
+        " であり、",
+        math(String.raw`X := A_{r+1}`),
+        " と ",
+        math(String.raw`B_1,\dots,B_r`),
+        " は ",
+        ref("matrix_commuting_with_each_factor_commutes_with_finite_product"),
+        " の前提を満たす。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\prod_{j=1}^{r+1} A_j\Bigr)\Bigl(\prod_{j=1}^{r+1} B_j\Bigr)
+&= \Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}\Bigr)\Bigl(\Bigl(\prod_{j=1}^{r} B_j\Bigr)B_{r+1}\Bigr)
+&&(\because\ \blkref{def_finite_product_of_matrices}\ \text{を 2 か所})\\
+&= \Bigl(\Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)A_{r+1}\Bigr)\prod_{j=1}^{r} B_j\Bigr)B_{r+1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to (\textstyle\prod_{j=1}^{r} A_j)A_{r+1},\ B \to \textstyle\prod_{j=1}^{r} B_j,\ C \to B_{r+1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)\Bigl(A_{r+1}\prod_{j=1}^{r} B_j\Bigr)\Bigr)B_{r+1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1}^{r} A_j,\ B \to A_{r+1},\ C \to \textstyle\prod_{j=1}^{r} B_j)\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)\Bigl(\Bigl(\prod_{j=1}^{r} B_j\Bigr)A_{r+1}\Bigr)\Bigr)B_{r+1}
+&&\bigl(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (r \to r,\ X \to A_{r+1},\ A_j \to B_j)\bigr)\\
+&= \Bigl(\Bigl(\Bigl(\prod_{j=1}^{r} A_j\Bigr)\prod_{j=1}^{r} B_j\Bigr)A_{r+1}\Bigr)B_{r+1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1}^{r} A_j,\ B \to \textstyle\prod_{j=1}^{r} B_j,\ C \to A_{r+1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{r} \bigl(A_jB_j\bigr)\Bigr)A_{r+1}\Bigr)B_{r+1}
+&&(\because\ \text{帰納法の仮定})\\
+&= \Bigl(\prod_{j=1}^{r} \bigl(A_jB_j\bigr)\Bigr)\bigl(A_{r+1}B_{r+1}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to n,\ A \to \textstyle\prod_{j=1}^{r} (A_jB_j),\ B \to A_{r+1},\ C \to B_{r+1})\bigr)\\
+&= \prod_{j=1}^{r+1} \bigl(A_jB_j\bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_jB_j)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 1 の Q̌_ε^2 の鎖が「異なる添字の因子の可換性」を名前だけで根拠にしていたので足した。" +
+          "要るのは j < i の組の可換性だけで、A_i どうし・B_j どうしの可換性は使わない。Lean は具体版 Ising2D.product_of_two_finite_products_of_matrices（ClaimFiniteProductsOfCommutingMatrices.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_matrix_sum_with_itself_zero_implies_zero",
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },

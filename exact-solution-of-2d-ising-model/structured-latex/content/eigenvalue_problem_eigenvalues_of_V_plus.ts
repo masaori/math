@@ -2218,13 +2218,11 @@ X\,\check{n}_\nu
         "）である。",
       ]),
       paragraph([
-        "Step 0（1 つの添字についての関係）。",
+        "Step 0（1 つの添字についての関係と、異なる添字の因子の可換性）。",
         ref("check_number_operator_idempotent"),
         " (3) の ",
         math(String.raw`\check{n}_\mu^2 = \check{n}_\mu`),
-        " と、単位行列が任意の行列と可換であること（",
-        ref("scalar_identity_commutes"),
-        "）を使う。まず (3) を積の形にする：",
+        " を使う。まず (3) を積の形にする：",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -2330,21 +2328,76 @@ R_\mu^{(1)} + R_\mu^{(0)}
 \end{aligned}`,
       ),
       paragraph([
-        "また ",
+        "さらに異なる添字の因子の可換性を示す。",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        "、",
         math(String.raw`\mu \neq \nu`),
-        " のとき ",
-        ref("check_number_operators_commute"),
-        " (2) より ",
-        math(String.raw`\check{n}_\mu \check{n}_\nu = \check{n}_\nu \check{n}_\mu`),
-        " であり、",
-        math(String.raw`I`),
-        " は任意の行列と可換だから（",
-        ref("scalar_identity_commutes"),
-        "）、",
-        math(String.raw`R_\mu^{(e)}`),
-        " と ",
-        math(String.raw`R_\nu^{(e')}`),
-        " も可換である。",
+        " とする。まず単位行列との積の順序を入れ替える（",
+        math(String.raw`Y \in \{\check{n}_\nu,\ I - \check{n}_\nu\}`),
+        "）：",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+Y\,I
+&= Y
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to Y)\right) \\
+&= I\,Y
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to Y)\ \text{を右辺から左辺へ}\right)
+\end{aligned}`,
+      ),
+      paragraph(["次に 4 通りの上付き添字の組について："]),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\nu^{(1)}R_\mu^{(1)}
+&= \check{n}_\nu\check{n}_\mu
+   \quad (\because R_\nu^{(1)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu\check{n}_\nu
+   \quad \left(\because\ \blkref{check_number_operators_commute}\ (2)\ (\mu \to \nu,\ \nu \to \mu)\right) \\
+&= R_\mu^{(1)}R_\nu^{(1)}
+   \quad (\because R_\mu^{(1)}, R_\nu^{(1)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\nu^{(1)}R_\mu^{(0)}
+&= \check{n}_\nu\left(I - \check{n}_\mu\right)
+   \quad (\because R_\nu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= \left(I - \check{n}_\mu\right)\check{n}_\nu
+   \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to \check{n}_\nu,\ X \to I,\ W \to \check{n}_\mu)\text{。前提は上の}\ \check{n}_\nu I = I\check{n}_\nu\ \text{と}\ \blkref{check_number_operators_commute}\ (2)\ (\mu \to \nu,\ \nu \to \mu)\right) \\
+&= R_\mu^{(0)}R_\nu^{(1)}
+   \quad (\because R_\mu^{(0)}, R_\nu^{(1)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\nu^{(0)}R_\mu^{(1)}
+&= \left(I - \check{n}_\nu\right)\check{n}_\mu
+   \quad (\because R_\nu^{(0)}, R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= \check{n}_\mu\left(I - \check{n}_\nu\right)
+   \quad (\because \text{直前の鎖の}\ \check{n}_\nu\left(I - \check{n}_\mu\right) = \left(I - \check{n}_\mu\right)\check{n}_\nu\ \text{を}\ (\mu \to \nu,\ \nu \to \mu)\ \text{で、右辺から左辺へ}) \\
+&= R_\mu^{(1)}R_\nu^{(0)}
+   \quad (\because R_\mu^{(1)}, R_\nu^{(0)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+R_\nu^{(0)}R_\mu^{(0)}
+&= \left(I - \check{n}_\nu\right)\left(I - \check{n}_\mu\right)
+   \quad (\because R_\nu^{(0)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= \left(I - \check{n}_\mu\right)\left(I - \check{n}_\nu\right)
+   \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to I - \check{n}_\nu,\ X \to I,\ W \to \check{n}_\mu)\text{。前提は上の}\ \left(I - \check{n}_\nu\right)I = I\left(I - \check{n}_\nu\right)\ \text{と直前の鎖}\right) \\
+&= R_\mu^{(0)}R_\nu^{(0)}
+   \quad (\because R_\mu^{(0)}, R_\nu^{(0)} \text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "よって ",
+        math(String.raw`\mu \neq \nu`),
+        " と全ての ",
+        math(String.raw`e, e' \in \{0,1\}`),
+        " について ",
+        math(String.raw`R_\nu^{(e')}R_\mu^{(e)} = R_\mu^{(e)}R_\nu^{(e')}`),
+        " である（以下「Step 0 の可換性」と呼ぶ）。",
       ]),
       paragraph([
         "Step 1（(1) の証明）。",
@@ -2378,15 +2431,23 @@ R_\mu^{(1)} + R_\mu^{(0)}
       displayMath(
         String.raw`\begin{aligned}
 \check{Q}_\epsilon^2
+&=\check{Q}_\epsilon^1\,\check{Q}_\epsilon
+  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_\epsilon)\right) \\
+&=\left(\check{Q}_\epsilon^0\,\check{Q}_\epsilon\right)\check{Q}_\epsilon
+  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_\epsilon)\right) \\
+&=\left(I\,\check{Q}_\epsilon\right)\check{Q}_\epsilon
+  \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_\epsilon)\right) \\
+&=\check{Q}_\epsilon\check{Q}_\epsilon
+  \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\right) \\
 &=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
   \left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)
-  \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）を 2 か所}) \\
 &=\prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(\epsilon_\mu)}R_\mu^{(\epsilon_\mu)}\right)
-  \quad (\because \text{異なる添字の因子の可換性}) \\
+  \quad \left(\because\ \blkref{product_of_two_finite_products_of_matrices}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j \to R_j^{(\epsilon_j)},\ B_j \to R_j^{(\epsilon_j)})\text{。前提}\ R_i^{(\epsilon_i)}R_j^{(\epsilon_j)} = R_j^{(\epsilon_j)}R_i^{(\epsilon_i)}\ (j < i)\ \text{は Step 0 の可換性}\ (\nu \to i,\ \mu \to j,\ e' \to \epsilon_i,\ e \to \epsilon_j)\right) \\
 &=\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
   \quad (\because \text{Step 0 の二つの冪等性を各因子へ同時に適用}) \\
 &=\check{Q}_\epsilon
-  \quad (\because \check{Q}_\epsilon\text{ の定義})
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
 \end{aligned}`,
       ),
       paragraph([
@@ -2487,31 +2548,73 @@ R_\mu^{(1)} + R_\mu^{(0)}
 \end{aligned}`,
       ),
       paragraph([
-        "**左右どちらから掛けても同じである。** 実際 ",
+        "左右どちらから掛けても同じであることを示す。まず ",
         math(String.raw`\check{n}_\nu`),
         " は ",
         math(String.raw`\check{Q}_\epsilon`),
         " のどの因子 ",
         math(String.raw`R_\mu^{(\epsilon_\mu)}`),
-        " とも可換である（",
+        "（",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "）とも可換である。",
         math(String.raw`\mu \neq \nu`),
-        " なら Step 0 の可換性、",
-        math(String.raw`\mu = \nu`),
-        " なら ",
-        math(String.raw`\check{n}_\nu`),
-        " と ",
-        math(String.raw`\check{n}_\nu`),
-        " または ",
-        math(String.raw`I - \check{n}_\nu`),
-        " の可換性で、後者は ",
-        ref("scalar_identity_commutes"),
-        " による）から、",
+        " なら",
       ]),
       displayMath(
         String.raw`\begin{aligned}
+\check{n}_\nu R_\mu^{(\epsilon_\mu)}
+&=R_\nu^{(1)}R_\mu^{(\epsilon_\mu)}
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=R_\mu^{(\epsilon_\mu)}R_\nu^{(1)}
+  \quad (\because \text{Step 0 の可換性}\ (e' \to 1,\ e \to \epsilon_\mu)) \\
+&=R_\mu^{(\epsilon_\mu)}\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\mu = \nu`),
+        " で ",
+        math(String.raw`\epsilon_\nu = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(1)}
+&=\check{n}_\nu\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=R_\nu^{(1)}\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\mu = \nu`),
+        " で ",
+        math(String.raw`\epsilon_\nu = 0`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\nu R_\nu^{(0)}
+&=R_\nu^{(1)}R_\nu^{(0)}
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=0
+  \quad (\because \text{Step 0 の}\ R_\mu^{(1)}R_\mu^{(0)} = 0\ (\mu \to \nu)) \\
+&=R_\nu^{(0)}R_\nu^{(1)}
+  \quad (\because \text{Step 0 の}\ R_\mu^{(0)}R_\mu^{(1)} = 0\ (\mu \to \nu)\ \text{を右辺から左辺へ}) \\
+&=R_\nu^{(0)}\check{n}_\nu
+  \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）})
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
 \check{Q}_\epsilon\check{n}_\nu
+&=\left(\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}\right)\check{n}_\nu
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
+&=\check{n}_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
+  \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \check{n}_\nu,\ A_j \to R_j^{(\epsilon_j)})\ \text{を右辺から左辺へ。前提は直前の三つの場合}\right) \\
 &=\check{n}_\nu\check{Q}_\epsilon
-  \quad (\because \check{n}_\nu\text{ と }\check{Q}_\epsilon\text{ の全因子の可換性}) \\
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）}) \\
 &=\epsilon_\nu\check{Q}_\epsilon
   \quad (\because \text{直前の結果})
 \end{aligned}`,
