@@ -2219,6 +2219,63 @@ B_{ik}
     },
   },
   {
+    id: "linear_space_general_claim_matrix_plus_difference_cancels",
+    kind: "claim",
+    title: { text: "行列 A と差 B − A の和は B" },
+    labels: ["matrix_plus_difference_cancels"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`A + (B - A) = B`),
+      paragraph([
+        "が成り立つ。和は ",
+        ref("def_matrix_sum"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A + (B - A)\bigr)_{ik}
+&= A_{ik} + (B - A)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= A_{ik} + \bigl(B_{ik} - A_{ik}\bigr)
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)\\
+&= A_{ik} + \bigl(B_{ik} + (-A_{ik})\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= A_{ik} + \bigl((-A_{ik}) + B_{ik}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(A_{ik} + (-A_{ik})\bigr) + B_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= 0_{\mathbb{C}} + B_{ik}
+&&\bigl(\because\ -A_{ik}\ \text{は}\ A_{ik}\ \text{の加法の逆元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= B_{ik}
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元 }\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 0 が R_μ^{(1)} + R_μ^{(0)} = ň_μ + (I − ň_μ) = I を「行列の加法（加法逆元と単位元）」とだけ書いて主張を置かずに使っていたので足した。Lean は具体版 Ising2D.matrix_add_sub_cancel（ClaimMatrixPlusDifferenceCancels.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_product_of_anticommuting_matrices_commutes",
     kind: "claim",
     title: { text: "反可換な二つの行列の積は可換" },

@@ -2195,7 +2195,13 @@ X\,\check{n}_\nu
         math(String.raw`R_\mu^{(0)} := I - \check{n}_\mu`),
         "。",
         math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}`),
-        " である。",
+        " である。本証明の行列の等式の ",
+        math(String.raw`0`),
+        " は零行列 ",
+        math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        ref("def_zero_matrix"),
+        "）である。",
       ]),
       paragraph([
         "Step 0（1 つの添字についての関係）。",
@@ -2204,8 +2210,24 @@ X\,\check{n}_\nu
         math(String.raw`\check{n}_\mu^2 = \check{n}_\mu`),
         " と、単位行列が任意の行列と可換であること（",
         ref("scalar_identity_commutes"),
-        "）を使う。まず異なる上付き添字の積が両順序とも零であること：",
+        "）を使う。まず (3) を積の形にする：",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{n}_\mu\check{n}_\mu
+&= \left(I\,\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check{n}_\mu^0\,\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu^1\,\check{n}_\mu
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu^2
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
+&= \check{n}_\mu
+   \quad \left(\because\ \blkref{check_number_operator_idempotent}\ \text{(3)}\right)
+\end{aligned}`,
+      ),
+      paragraph(["次に異なる上付き添字の積が両順序とも零であること："]),
       displayMath(
         String.raw`\begin{aligned}
 R_\mu^{(1)}R_\mu^{(0)}
@@ -2222,9 +2244,9 @@ R_\mu^{(1)}R_\mu^{(0)}
 &= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
    \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu\check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu - \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
+   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu) \\
 &= 0
-   \quad (\because \text{行列の加法逆元})
+   \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu)\right)
 \end{aligned}`,
       ),
       displayMath(
@@ -2243,9 +2265,9 @@ R_\mu^{(0)}R_\mu^{(1)}
 &= \check{n}_\mu - \check{n}_\mu\check{n}_\mu
    \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu\check{n}_\mu)\ \text{を右辺から左辺へ}\right) \\
 &= \check{n}_\mu - \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
+   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu) \\
 &= 0
-   \quad (\because \text{行列の加法逆元})
+   \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \check{n}_\mu)\right)
 \end{aligned}`,
       ),
       paragraph(["次に 2 つの冪等性（", math(String.raw`R_\mu^{(0)}R_\mu^{(0)}`), " は上の ", math(String.raw`R_\mu^{(1)}R_\mu^{(0)} = 0`), " を使う）："]),
@@ -2255,7 +2277,7 @@ R_\mu^{(1)}R_\mu^{(1)}
 &= \check{n}_\mu\check{n}_\mu
    \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）}) \\
 &= \check{n}_\mu
-   \quad (\because \check{n}_\mu\ \text{の冪等性 (3)}) \\
+   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu) \\
 &= R_\mu^{(1)}
    \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）})
 \end{aligned}`,
@@ -2278,7 +2300,7 @@ R_\mu^{(0)}R_\mu^{(0)}
 &= \left(I-\check{n}_\mu\right) - 0
    \quad (\because \text{上の } R_\mu^{(1)}R_\mu^{(0)} = \check{n}_\mu\left(I-\check{n}_\mu\right) = 0) \\
 &= I-\check{n}_\mu
-   \quad \left(\because\ \blkref{matrix_minus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I-\check{n}_\mu)\text{。本証明の } 0 \text{ は零行列 } O\right) \\
+   \quad \left(\because\ \blkref{matrix_minus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I-\check{n}_\mu)\right) \\
 &= R_\mu^{(0)}
    \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）})
 \end{aligned}`,
@@ -2290,7 +2312,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &= \check{n}_\mu + \left(I - \check{n}_\mu\right)
    \quad (\because R_\mu^{(1)}, R_\mu^{(0)} \text{ の定義（冒頭）}) \\
 &= I
-   \quad (\because \text{行列の加法（加法逆元と単位元）})
+   \quad \left(\because\ \blkref{matrix_plus_difference_cancels}\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to I)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2407,7 +2429,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &=\check{n}_\nu\check{n}_\nu
   \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
 &=\check{n}_\nu
-  \quad (\because \check{n}_\nu\ \text{の冪等性 (3)}) \\
+  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=R_\nu^{(1)}
   \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
 &=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
@@ -2434,9 +2456,9 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &=\check{n}_\nu-\check{n}_\nu\check{n}_\nu
   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu\check{n}_\nu)\ \text{を右辺から左辺へ}\right) \\
 &=\check{n}_\nu-\check{n}_\nu
-  \quad (\because \check{n}_\nu\ \text{の冪等性 (3)}) \\
+  \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=0
-  \quad (\because \text{行列の加法逆元}) \\
+  \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
 &=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
   \quad (\because \epsilon_\nu=0\text{ と零元の積})
 \end{aligned}`,
@@ -2599,6 +2621,7 @@ y_{\epsilon'}
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_02（M=2,3,4,5 の {0,1}^M を全列挙。tr(Q̌_ε) = 1 の残差 ≤ 1.1e-15、rank Q̌_ε = 1 を特異値で判定して違反 0 件）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_*_factor・identity_matrix_is_*_unit_of_mat_mult・negation_factors_out_of_*_factor の 1 行 1 主張の鎖にした。R_μ^{(0)}R_μ^{(0)} は行列の加法の結合則を本文に持たないので、R_μ^{(1)}R_μ^{(0)} = 0 を先に示し、それと matrix_minus_zero_matrix を引く鎖にした（Step 0 の中で異なる上付き添字の積を冪等性より前に置いた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24。",
+        "2026-11-02: Step 0 と Step 3 の名前だけの根拠「行列の加法逆元」3 か所（ň − ň = 0）を matrix_difference_zero_iff_equal の ⟸ に、Step 0 の和の「行列の加法（加法逆元と単位元）」を新しい主張 matrix_plus_difference_cancels（A + (B − A) = B）に、冪等性の行 5 か所を、Step 0 の冒頭に置いた ň_μň_μ = ň_μ（check_number_operator_idempotent (3) の ň_μ^2 = ň_μ を def_exp (1) の冪から積へ運ぶ 5 行）の参照にした。本証明の 0 が零行列 O であることを冒頭に書いた（R_μ^{(0)}R_μ^{(0)} の鎖の行内の断り書きを移した）。主張は変えていない。Lean は冒頭の 5 行の calc Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq、nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self の段の付け替え、和の 2 行の calc nOp_add_one_sub_nOp。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_30。",
       ],
     },
   },

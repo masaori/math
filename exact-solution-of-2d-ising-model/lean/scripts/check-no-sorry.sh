@@ -1183,6 +1183,10 @@ targets=(
   Ising2D.matrix_add_comm_of_necSuf
   Ising2D.zero_smul_tensorPow
   Ising2D.add_comm_tensorPow
+  "Ising2D.NecSuf.add_sub_cancel_matrix'"
+  Ising2D.matrix_add_sub_cancel
+  Ising2D.matrix_add_sub_cancel_of_necSuf
+  Ising2D.add_sub_cancel_tensorPow
   Ising2D.conj_neg_matrix
   Ising2D.conj_sub_matrix
   Ising2D.conj_neg_matrix_of_necSuf
@@ -1648,9 +1652,11 @@ targets=(
   Ising2D.CheckFermiSetup.trace_nOpProd
   Ising2D.CheckFermiSetup.trace_nOp
   Ising2D.CheckFermiSetup.trace_nOpProd_univ
+  Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq
   Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp
   Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp
   Ising2D.CheckFermiSetup.one_sub_nOp_mul_self
+  Ising2D.CheckFermiSetup.nOp_add_one_sub_nOp
   Ising2D.CheckFermiSetup.Qproj_mul_self
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne
   Ising2D.CheckFermiSetup.sum_Qproj

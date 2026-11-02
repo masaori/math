@@ -343,6 +343,7 @@ export const ALL_LABELS = [
   "matrix_norm_submultiplicativity",
   "matrix_norm_triangle_inequality",
   "matrix_norm_vector_bound",
+  "matrix_plus_difference_cancels",
   "matrix_plus_zero_matrix",
   "matrix_sum_is_commutative",
   "matrix_sum_with_itself_zero_implies_zero",

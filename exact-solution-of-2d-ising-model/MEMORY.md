@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十九個目として、`check_joint_eigenspace_decomposition` の残りを 5 つの単位に割り、先頭の Step 0・Step 3 の「行列の加法逆元」3 か所を `matrix_difference_zero_iff_equal` の `⟸` に、和 `ň + (I − ň) = I` を新しい主張 `matrix_plus_difference_cancels` に、冪等性の行 5 か所を Step 0 冒頭の `ň_μň_μ = ň_μ`（(3) の冪の形を `def_exp` (1) で積へ運ぶ 5 行）の参照にした（主張の中身は不変）。Lean は具体版・必要十分版・`TensorPow M` の系と `nOp_mul_nOp_of_sq`・`nOp_add_one_sub_nOp`、SageMath は `matrix_plus_difference_cancels/` と `050` の `check_30`。次は Step 3 の行末の名前だけの根拠（状態台帳の (l2)）。
+
 2026-11-02: 全証明の SageMath 検算として、`T_V_plus_is_conjugation`（三つの共役の合成は V^{(+)} による共役に等しい）に検算 `sagemath/check/T_V_plus_is_conjugation/` を付けた（未検算 73 件）。因子と逆元を数体で厳密に作り、不定元の X で全行を確かめた。人手証明は、合成則が `mat_conj` の共役についての主張であることを `T'_g` で区別して準備に置き、散文を値の 8 行の鎖にした。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`nesting_of_commutator_of_H_and_check_Z`）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十八個目として、`check_number_operators_commute` Step 1 の「すなわち `XW = -(WX)`」を、`XW + WX = [X, W]_+ = O` の鎖と `matrix_equals_negation_if_sum_is_zero` の参照にした。4 式の右辺を零行列 `O` と書き、第 2 式・第 3 式の `δI = O` を新しい主張 `zero_scalar_multiple_is_zero_matrix`（`0_ℂA = O`）の行に、第 3 式の引数の入れ替えを新しい主張 `matrix_sum_is_commutative` の行を含む 7 行に開いた（主張の中身は不変）。Lean は `matrix_equals_negation_if_sum_is_zero` と新しい 2 主張の具体版・必要十分版・`TensorPow M` の系と、Step 1 の人手と 1 対 1 の calc（`anticomm_*_eq_zero`・`mul_eq_neg_of_anticomm_eq_zero`）。SageMath は新しい 2 ディレクトリと `050` の `check_29`。次は `check_joint_eigenspace_decomposition` の残りの名前だけの根拠。

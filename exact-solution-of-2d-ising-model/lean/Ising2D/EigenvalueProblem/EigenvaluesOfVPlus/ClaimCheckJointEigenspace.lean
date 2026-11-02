@@ -6,9 +6,11 @@
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。
 (1)(2)(3)(4) は**すべて必要十分版の特殊化として導出する**。
-ただし証明の Step 0 の 3 本の鎖（`R_μ^{(1)}R_μ^{(0)} = 0`・`R_μ^{(0)}R_μ^{(1)} = 0`・`R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`）は、
-人手の行と 1 対 1 の `calc` を `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` に置く
-（Step 3 の `ε_ν = 0` の場合の `ň_ν R_ν^{(0)} = 0` も `nOp_mul_one_sub_nOp` と同じ行である）。
+ただし証明の Step 0 の冒頭の `ň_μň_μ = ň_μ` と 4 本の鎖（`R_μ^{(1)}R_μ^{(0)} = 0`・`R_μ^{(0)}R_μ^{(1)} = 0`・
+`R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`・`R_μ^{(1)} + R_μ^{(0)} = I`）は、人手の行と 1 対 1 の `calc` を
+`nOp_mul_nOp_of_sq`・`nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self`・`nOp_add_one_sub_nOp` に置く
+（Step 3 の `ε_ν = 0` の場合の `ň_ν R_ν^{(0)} = 0` も `nOp_mul_one_sub_nOp` と同じ行である。`R_μ^{(1)}R_μ^{(1)} = R_μ^{(1)}` と
+Step 3 の `ε_ν = 1` の場合の `ň_ν R_ν^{(1)} = R_ν^{(1)}` は、定義の行を除くと `nOp_mul_nOp_of_sq` の 1 行である）。
 Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
@@ -24,6 +26,8 @@ Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperatorProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixPlusDifferenceCancelsFromNecSuf
 
 namespace Ising2D
 
@@ -38,6 +42,18 @@ variable {M : ℕ} (F : CheckFermiSetup M)
 人手の `R_μ^{(1)} := ň_μ`、`R_μ^{(0)} := I - ň_μ` を、そのまま `F.nOp i`・`1 - F.nOp i` と書く。
 各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
 
+/-- **原文 Step 0 の冒頭**: `check_number_operator_idempotent` (3) の `ň_μ^2 = ň_μ` を積の形 `ň_μň_μ = ň_μ` にする 5 行。 -/
+theorem nOp_mul_nOp_of_sq (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
+  calc F.nOp i * F.nOp i
+      = (1 * F.nOp i) * F.nOp i := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
+    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [pow_zero]
+                                                        -- `def_exp` (1) の `A^0 := I` を右辺から左辺へ
+    _ = F.nOp i ^ 1 * F.nOp i := by rw [← pow_succ (F.nOp i) 0]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 0`）を右辺から左辺へ
+    _ = F.nOp i ^ 2 := (pow_succ _ _).symm              -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 1`）を右辺から左辺へ
+    _ = F.nOp i := F.nOp_sq i                           -- `check_number_operator_idempotent` (3)
+
 /-- **原文 Step 0** の `R_μ^{(1)}R_μ^{(0)} = 0`（と Step 3 の `ε_ν = 0` の場合の `ň_ν R_ν^{(0)} = 0`）。 -/
 theorem nOp_mul_one_sub_nOp (i : CheckIdx M) : F.nOp i * (1 - F.nOp i) = 0 :=
   calc F.nOp i * (1 - F.nOp i)
@@ -51,10 +67,10 @@ theorem nOp_mul_one_sub_nOp (i : CheckIdx M) : F.nOp i * (1 - F.nOp i) = 0 :=
                                                         -- `negation_factors_out_of_right_factor`
     _ = F.nOp i - F.nOp i * F.nOp i := (sub_eq_add_neg_tensorPow _ _).symm
                                                         -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ
-    _ = F.nOp i - F.nOp i := by rw [F.nOp_mul_self i]
-                                                        -- `check_number_operator_idempotent` (3)
-    _ = 0 := sub_self _
-                                                        -- 行列の加法逆元（本文に引ける主張が無い名前だけの根拠）
+    _ = F.nOp i - F.nOp i := by rw [F.nOp_mul_nOp_of_sq i]
+                                                        -- Step 0 冒頭の `ň_μň_μ = ň_μ`
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl
+                                                        -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-- **原文 Step 0** の `R_μ^{(0)}R_μ^{(1)} = 0`。 -/
 theorem one_sub_nOp_mul_nOp (i : CheckIdx M) : (1 - F.nOp i) * F.nOp i = 0 :=
@@ -69,10 +85,10 @@ theorem one_sub_nOp_mul_nOp (i : CheckIdx M) : (1 - F.nOp i) * F.nOp i = 0 :=
                                                         -- `negation_factors_out_of_left_factor`
     _ = F.nOp i - F.nOp i * F.nOp i := (sub_eq_add_neg_tensorPow _ _).symm
                                                         -- `matrix_difference_is_sum_with_negation` を右辺から左辺へ
-    _ = F.nOp i - F.nOp i := by rw [F.nOp_mul_self i]
-                                                        -- `check_number_operator_idempotent` (3)
-    _ = 0 := sub_self _
-                                                        -- 行列の加法逆元（本文に引ける主張が無い名前だけの根拠）
+    _ = F.nOp i - F.nOp i := by rw [F.nOp_mul_nOp_of_sq i]
+                                                        -- Step 0 冒頭の `ň_μň_μ = ň_μ`
+    _ = 0 := (matrix_sub_eq_zero_iff_tensorPow _ _).mpr rfl
+                                                        -- `matrix_difference_zero_iff_equal` の `⟸`
 
 /-- **原文 Step 0** の `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`。 -/
 theorem one_sub_nOp_mul_self (i : CheckIdx M) : (1 - F.nOp i) * (1 - F.nOp i) = 1 - F.nOp i :=
@@ -92,6 +108,11 @@ theorem one_sub_nOp_mul_self (i : CheckIdx M) : (1 - F.nOp i) * (1 - F.nOp i) = 
                                                         -- 上の `R_μ^{(1)}R_μ^{(0)} = 0`
     _ = 1 - F.nOp i := matrix_sub_zero_matrix_tensorPow _
                                                         -- `matrix_minus_zero_matrix`
+
+/-- **原文 Step 0** の `R_μ^{(1)} + R_μ^{(0)} = I`。 -/
+theorem nOp_add_one_sub_nOp (i : CheckIdx M) : F.nOp i + (1 - F.nOp i) = 1 :=
+  calc F.nOp i + (1 - F.nOp i)
+      = 1 := add_sub_cancel_tensorPow _ _               -- `matrix_plus_difference_cancels`（`A → ň_μ`、`B → I`）
 
 /-- **原文 `check_joint_eigenspace_decomposition` の `Q̌_ε`**:
 `Q̌_T = ∏_{μ∈𝓜̌} (μ ∈ T ? ň_μ : I - ň_μ)`。 -/

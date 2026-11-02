@@ -136,3 +136,6 @@ PASS V_plus_is_invertible Step 2・Step 3 の実数の係数の包含の行: 168
 
 # 実行コマンド: sage check_28_check_number_operator_idempotent_anticommutator_chains.sage
 PASS check_number_operator_idempotent (1)・(2) の反交換子の鎖: 95 段、否定コントロール 3 行
+
+# 実行コマンド: sage check_30_joint_eigenspace_step0_square_inverse_and_sum_chains.sage
+PASS check_joint_eigenspace_decomposition Step 0 の冒頭の積の形・差が零行列の行・和の鎖: 79 段、否定コントロール 1 行
