@@ -61675,7 +61675,18 @@ w_{\mathrm h}(\gamma)\bmod2
 &&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr).
 \end{aligned}`),
                       paragraph([
-                        "縦向きも ", math(String.raw`c_{\mathrm v}`), " を用いた同じ三行で従う。",
+                        "縦向きについても",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+w_{\mathrm v}(\gamma)\bmod2
+&=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)(1-2d_k)\right)\bmod2
+&&\bigl(\because\ \blkref{def_directed_winding_numbers}\bigr)\\
+&=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2
+&&\bigl(\because\ 1-2d_k\equiv1\pmod2\text{ と法 }2\text{ の有限和}\bigr)\\
+&=v(\gamma)
+&&\bigl(\because\ \blkref{def_edge_sequence_seam_parities}\bigr).
+\end{aligned}`),
+                      paragraph([
                         "これは整数の合同と有限和だけの主張であり、実数体も複素数体も現れない。",
                         "後続では平面への持ち上げの整数変位から既存の四つの巻き付きセクターを読み戻すために使う。",
                       ]),

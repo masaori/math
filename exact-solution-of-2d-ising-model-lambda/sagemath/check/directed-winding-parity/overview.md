@@ -11,5 +11,5 @@ $$
 を整数環で計算し、$w\bmod2=p$ を横向き・縦向きの両方について検査する。
 
 - 実行: `sage sagemath/check/directed-winding-parity/check.sage`
-- 状態: PASS（2026-08-31）
+- 状態: PASS（2026-11-02）
 - 計算: `ZZ` 上の有限和と二で割った余りだけ。浮動小数点は使わない。
