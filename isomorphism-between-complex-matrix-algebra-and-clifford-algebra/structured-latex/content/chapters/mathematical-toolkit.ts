@@ -2118,4 +2118,180 @@ f(L_m)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_family_member_is_kronecker_delta_linear_combination",
+    kind: "claim",
+    title: { text: "番号付けた族の第 j 元は、係数がクロネッカーのデルタの線型結合である" },
+    labels: ["claim_family_member_is_kronecker_delta_linear_combination"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の元の番号付けた族（",
+        ref("def_linear_independence"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+        math(String.raw`j\in\{1,\dots,n\}`),
+        " とし、",
+        math(String.raw`\{1,\dots,n\}`),
+        " の二元についてのクロネッカーのデルタ ",
+        math(String.raw`\delta_{k,j}\in\mathbb{C}`),
+        "（",
+        ref("def_kronecker_delta"),
+        " で ",
+        math(String.raw`X:=\{1,\dots,n\}`),
+        " としたもの）を係数に取る。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n}\delta_{k,j}\cdot_V b_k=b_j`),
+    ],
+    proof: [
+      paragraph([
+        "係数 ",
+        math(String.raw`\delta_{1,j},\dots,\delta_{n,j}`),
+        " と族 ",
+        math(String.raw`b`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元を ",
+        math(String.raw`L_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）と書く。すなわち ",
+        math(String.raw`L_0:=0_V`),
+        "、",
+        math(String.raw`L_m:=L_{m-1}+_V(\delta_{m,j}\cdot_V b_m)`),
+        "（",
+        math(String.raw`1\le m\le n`),
+        "）であり、主張の左辺は ",
+        math(String.raw`L_n`),
+        " である。",
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について次が成り立つことを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+      ]),
+      displayMath(String.raw`L_m=
+\begin{cases}
+  0_V & (m<j),\\
+  b_j & (m\ge j).
+\end{cases}`),
+      paragraph([
+        math(String.raw`n\ge j`),
+        " なので、",
+        math(String.raw`m=n`),
+        " の場合が主張 ",
+        math(String.raw`L_n=b_j`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき：",
+        math(String.raw`j\ge 1`),
+        " なので ",
+        math(String.raw`0<j`),
+        " であり、",
+        math(String.raw`L_0=0_V`),
+        " は ",
+        math(String.raw`L_0`),
+        " の定義（",
+        ref("def_linear_combination"),
+        "）そのものである。",
+      ]),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について上の等式が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`j`),
+        " の大小で三つに場合を分ける。",
+      ]),
+      paragraph([
+        math(String.raw`m<j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " かつ ",
+        math(String.raw`m\neq j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_V+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=0_V+_V(0_{\mathbb{C}}\cdot_V b_m)
+&&\left(\because\ m\neq j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=0_V+_V 0_V
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=0_V
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=0_V+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=0_V+_V(1_{\mathbb{C}}\cdot_V b_m)
+&&\left(\because\ m=j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=0_V+_V b_m
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=b_m+_V 0_V
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=b_m
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=b_j
+&&\left(\because\ m=j\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m>j`),
+        " のとき：",
+        math(String.raw`m-1\ge j`),
+        " かつ ",
+        math(String.raw`m\neq j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=b_j+_V(\delta_{m,j}\cdot_V b_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1\ge j\right)\\
+&=b_j+_V(0_{\mathbb{C}}\cdot_V b_m)
+&&\left(\because\ m\neq j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=b_j+_V 0_V
+&&\left(\because\ \blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=b_j
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について帰納法の主張が示された。",
+      ]),
+    ],
+  },
 ]);
