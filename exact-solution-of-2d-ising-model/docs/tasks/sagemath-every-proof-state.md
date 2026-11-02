@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 311 件のうち、SageMath の検算が無いもの 91 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 313 件のうち、SageMath の検算が無いもの 87 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -122,9 +122,13 @@
   人手証明を直した: スカラーを `inclusion_rr_to_cc` の `μ(m)_C` と書き、場合分けを (∵) 付きの鎖に、ラベルの無かった根拠（行列と列ベクトルの積・恒等行列の作用・行列作用の線型性・スカラー倍の結合律）をラベル参照に。旧い「基底 (f_I) に関して対角行列」は f_I の成分を経ずに成分の意味の対角性へ渡していたので、クロネッカー積の成分（0 の因子）と積の成分の和から示す形にした。
   主張を分けたのに合わせ、下流 `first_transfer_matrix_pauli_form` の前半を、`D` の非対角成分・対角成分・`K_1 D` の成分の鎖に書き直し（`D f_{ι(μ)}` の固有ベクトルの鎖は外した）、成分の一致の鎖に `exp((K_1)_C d(μ)_C) = exp((K_1 d(μ))_C) = (exp(K_1 d(μ)))_C` の 2 行を足した。その検算（`check_D_entries_chain.sage`・`check_exp_inclusion_lines.sage`）を足し、旧 `check_bond_sum_diagonal_action.sage` を置き換え、`__file__` を使っていた読み込みを相対パスに直した。`thermodynamic_limit_column_limit_and_closed_form.ts` の Step 1 の参照を新しい主張へ付け替えた。計算の誤りは無かった。
 
+- `def_positive_coupling_tanh`・`def_real_logarithm_positive`・`def_first_dual_coupling_constant`・`def_second_dual_coupling_constant`（正の結合定数の tanh・正の実数上の実対数・二つの双対結合定数）: 実対数の定義が「定義・log の狭義単調増加（証明なし）・0<y<1 なら log y<0」を束ねていたので、1 ブロック 1 主張に分け、主張 `real_log_strictly_increasing`（exp の狭義単調増加からの背理法の証明を付けた）・`real_log_negative_below_one` を置いた（`partition_function_transfer_matrix_representation.ts`）。
+  tanh・二つの双対結合定数・新しい二つの主張に同名の検算を付けた（共通の準備 `sagemath/_shared/positive_coupling_and_real_log.sage`）。等号は `QQ(E)`（E は exp(K) の値の不定元）と `K = log q` の点の `QQ` で厳密に、`K ∈ QQ` の点は本文の exp の部分和のボールで、実対数の値は 2 進の有理数の端点 lo<hi で挟み `exp(lo) < y < exp(hi)` を本文の exp のボールで確かめて判定した。
+  双対結合定数の「log(tanh K)<0」と、log の単調性を def_real_logarithm_positive から引いていた 3 か所（`eigenvalue_problem_diagonalization_and_exponential_form.ts` の arccosh ≥ 0、`020_critical_point.ts` の arcsinh の log 評価の 2 行）を新しい主張の参照へ付け替えた。tanh の値域と K^*>0 は定義が終域として宣言しているので、定義の中の証明のまま残した。計算の誤りは無かった。
+
 ## 次の一歩
 
-`partition_function_transfer_matrix_representation.ts` の `def_positive_coupling_tanh`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_transfer_matrix_representation.ts` の `two_by_two_transfer_identity`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -232,4 +236,6 @@
 - 2026-11-02、同じレビューで見つかった（定義の書き分けの欠け）: `def_transfer_matrix` の `V_1`・`V_2` の成分の `exp(K_1 Σ μμ)` が実数の exp の値なのか、その ℂ への包含なのかを書いていない（`V_1` は `Mat(2^{M_col},ℂ)` の元）。`first_transfer_matrix_pauli_form` の鎖は `(exp(K_1 d(μ)))_C` まで書いたが、最後の `δ_{μ=μ'} exp(K_1 Σ μμ)` の行は定義の書き方に従ったままである。`def_transfer_matrix` の検算を足すときに扱う。
 - 2026-11-02、同じ作業で見つかった（検算の実行の方法）: 既存の検算のうち 94 ディレクトリ（`043_claim_transfer_matrix_bridge` ほか、番号付きのものの大半）は `_dir = os.path.dirname(os.path.abspath(__file__))` で準備を読み込んでおり、`bash sagemath/tools/run-all-checks.sh` から走らせると準備が見つからずに落ちる（SageMath は `__file__` を自分のパッケージの位置にする）。`first_transfer_matrix_pauli_form` だけは相対パスの `load("_prelude.sage")` に直した。ほかは手で `cd` して走らせた当時のログが残っている。ゴールラインの「足した検算が `run-all-checks.sh` で全部通る」は足した検算だけが対象なので妨げないが、まとめて相対パスに直すかを決める。
 - 2026-11-02、同じレビューで見つかった（重複）: `complex_exp_of_real_argument` の証明の準備は、`real_inclusion_preserves_product`（この単位で足した）と同じ計算をラベル無しで書いている。そのブロックを直すときに引く形にする。
-
+- 2026-11-02、`def_real_logarithm_positive` のレビューで見つかった（根拠の欠け）: `exp: ℝ → ℝ_{>0}` の全射性を「実解析の標準的な事実（連続性と中間値の定理）」として参照なしで使っており、log の定義の成立がこれに依る。
+  外部の事実として注記（`remark_real_analysis_facts_R3_R4` と同じ形）に宣言するか、本文で示す。また `thermodynamic_limit_row_limit_and_max_eigenvalue.ts`（1047 行付近）・`thermodynamic_limit_column_limit_and_closed_form.ts`（855 行付近）・
+  `critical_point_and_log_divergence.ts`（1628・1630・1652・2051・2214 行付近）が log の単調性をラベル参照なしで使っている。`real_log_strictly_increasing` を引く形に、それぞれのブロックの検算を足すときに直す。この単位では直さなかった。

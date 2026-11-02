@@ -1908,53 +1908,155 @@ K\in\mathbb{R}
       ]),
       displayMath(String.raw`\exp(\log y)=y,\qquad \log(\exp x)=x`),
       paragraph([
-        "が成り立つ。狭義単調増加な全単射の逆写像も狭義単調増加なので、",
-      ]),
-      displayMath(String.raw`0<u<v\Longrightarrow\log u<\log v\qquad(u,v\in\mathbb{R}_{>0})`),
-      paragraph([
-        "である。とくに、",
-        math(String.raw`y\in\mathbb{R}`),
-        " が ",
-        math(String.raw`0<y<1`),
-        " を満たすならば ",
-        math(String.raw`\log y<0`),
-        " である。",
-      ]),
-    ],
-    proof: [
-      paragraph([
-        math(String.raw`y\in\mathbb{R}`),
-        " かつ ",
-        math(String.raw`0<y<1`),
-        " とする。実対数の定義より ",
-        math(String.raw`y,1\in\mathbb{R}_{>0}`),
-        " および ",
-        math(String.raw`\log y,\log 1\in\mathbb{R}`),
-        " である。",
-      ]),
-      displayMath(String.raw`\begin{aligned}
-\log y
-&<\log 1
-&&\left(\because\ 0<y<1\text{ と }\log\text{ の狭義単調増加性}\right)\\
-&=\log(\exp 0)
-&&\left(\because\ \blkref{scalar_exp_zero}\right)\\
-&=0
-&&\left(\because\ \log\text{ は }\exp\text{ の逆写像}\right)
-\end{aligned}`),
-      paragraph([
-        "ゆえに ",
-        math(String.raw`0<y<1`),
-        " ならば ",
-        math(String.raw`\log y<0`),
-        " である。（実対数による ",
+        "が成り立つ（逆写像の定義）。（実対数による ",
         math(String.raw`\mathbb R`),
-        " 脱出）この項は実数指数関数の全単射性、実対数、および実数の順序を用いるため、有限な複素行列計算から実数解析へ移る先行定義である。",
+        " 脱出）この項は実数指数関数の全単射性と実対数を用いるため、有限な複素行列計算から実数解析へ移る先行定義である。",
       ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "第一の双対結合定数を定める前提として、正の実数上の実対数と、0<y<1 なら log y<0 となる符号性を一つの独立定義として置いた。数学的道具立ての既存分類・節境界は変更していない。",
+        "2026-11-02: 1 ブロック 1 主張に従い、定義の中で述べていた「log の狭義単調増加」と「0<y<1 なら log y<0」を、主張 real_log_strictly_increasing・real_log_negative_below_one へ分けた。狭義単調増加は証明なしで述べていたので、exp の狭義単調増加からの背理法の証明を付けた。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_real_log_strictly_increasing",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "正の実数上の実対数は狭義単調増加" },
+    labels: ["real_log_strictly_increasing"],
+    statement: [
+      paragraph([
+        ref("def_real_logarithm_positive"),
+        " の実対数について、",
+        math(String.raw`u,v\in\mathbb{R}_{>0}`),
+        " が ",
+        math(String.raw`u<v`),
+        " を満たすなら ",
+        math(String.raw`\log u<\log v`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "（実対数による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）",
+        math(String.raw`u,v\in\mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`u<v`),
+        " とする。",
+        ref("def_real_logarithm_positive"),
+        " より ",
+        math(String.raw`\log u,\log v\in\mathbb{R}`),
+        " である。",
+        math(String.raw`\log u<\log v`),
+        " でないと仮定する。",
+        math(String.raw`\mathbb{R}`),
+        " の順序の三分律より、",
+        math(String.raw`\log v<\log u`),
+        " または ",
+        math(String.raw`\log v=\log u`),
+        " である。",
+      ]),
+      paragraph([math(String.raw`\log v<\log u`), " の場合。"]),
+      displayMath(String.raw`\begin{aligned}
+v
+&=\exp(\log v)
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)\\
+&<\exp(\log u)
+&&\left(\because\ \log v<\log u\text{ と }\blkref{real_exp_strictly_increasing}\right)\\
+&=u
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)
+\end{aligned}`),
+      paragraph([
+        "これは ",
+        math(String.raw`u<v`),
+        " と両立しない（",
+        math(String.raw`\mathbb{R}`),
+        " の順序の非対称性）。",
+      ]),
+      paragraph([math(String.raw`\log v=\log u`), " の場合。"]),
+      displayMath(String.raw`\begin{aligned}
+v
+&=\exp(\log v)
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)\\
+&=\exp(\log u)
+&&\left(\because\ \log v=\log u\right)\\
+&=u
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)
+\end{aligned}`),
+      paragraph([
+        "これは ",
+        math(String.raw`u<v`),
+        " と両立しない（",
+        math(String.raw`\mathbb{R}`),
+        " の順序の非反射性）。どちらの場合も矛盾するので、",
+        math(String.raw`\log u<\log v`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: def_real_logarithm_positive の定義の中で証明なしに述べていた「狭義単調増加な全単射の逆写像も狭義単調増加」を、この主張として分け、exp の狭義単調増加からの背理法で示した。",
+      ],
+    },
+  },
+  {
+    id: "transfer_matrix_claim_real_log_negative_below_one",
+    kind: "claim",
+    origin: { path: "structured-latex/content/004_transfer_matrix.ts", ordinal: 1 },
+    title: { text: "1 より小さい正の実数の実対数は負" },
+    labels: ["real_log_negative_below_one"],
+    statement: [
+      paragraph([
+        ref("def_real_logarithm_positive"),
+        " の実対数について、",
+        math(String.raw`y\in\mathbb{R}`),
+        " が ",
+        math(String.raw`0<y<1`),
+        " を満たすなら ",
+        math(String.raw`\log y<0`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "（実対数による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）",
+        math(String.raw`y\in\mathbb{R}`),
+        "、",
+        math(String.raw`0<y<1`),
+        " とする。",
+        math(String.raw`0<y`),
+        " と ",
+        math(String.raw`0<1`),
+        " より ",
+        math(String.raw`y,1\in\mathbb{R}_{>0}`),
+        " であり、",
+        ref("def_real_logarithm_positive"),
+        " より ",
+        math(String.raw`\log y,\log 1\in\mathbb{R}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\log y
+&<\log 1
+&&\left(\because\ y<1\text{ と }\blkref{real_log_strictly_increasing}\right)\\
+&=\log(\exp 0)
+&&\left(\because\ \blkref{scalar_exp_zero}\right)\\
+&=0
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x)=x\right)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: def_real_logarithm_positive の定義の中に置いていた「0<y<1 なら log y<0」とその証明を、この主張として分けた。log の狭義単調増加の根拠を、新しい主張 real_log_strictly_increasing への参照にした。",
       ],
     },
   },
@@ -2002,7 +2104,7 @@ K_1\in\mathbb{R}_{>0}
       displayMath(String.raw`\begin{aligned}
 0<\tanh K_1<1
 &\Longrightarrow \log(\tanh K_1)<0
-&&\left(\because\ \blkref{def_real_logarithm_positive}\right)
+&&\left(\because\ \blkref{real_log_negative_below_one}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 -\frac{1}{2}&\in\mathbb{R}
@@ -2095,7 +2197,7 @@ K_2\in\mathbb{R}_{>0}
       displayMath(String.raw`\begin{aligned}
 0<\tanh K_2<1
 &\Longrightarrow \log(\tanh K_2)<0
-&&\left(\because\ \blkref{def_real_logarithm_positive}\right)
+&&\left(\because\ \blkref{real_log_negative_below_one}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 -\frac{1}{2}&\in\mathbb{R}

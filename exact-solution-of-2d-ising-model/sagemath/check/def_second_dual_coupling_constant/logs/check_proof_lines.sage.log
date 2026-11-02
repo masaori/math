@@ -1,0 +1,2 @@
+6 点 K_2 = log q（tanh は QQ）と 7 点 K_2 ∈ QQ（tanh はボール）で、鎖の各行と主張 K_2^* > 0 が成り立つ
+RESULT: PASS

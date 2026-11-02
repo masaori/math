@@ -130,7 +130,7 @@ y \ge 1 \ \land\ \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \ge 0
 &= \log(y + r)
    &&(\because\ \blkref{def_arccosh}) \\
 &\ge \log 1
-   &&(\because\ y + r \ge 1 \text{ と } \log \text{ の単調性。}\blkref{def_real_logarithm_positive}) \\
+   &&(\because\ y + r \ge 1\text{。}y + r > 1 \text{ なら }\blkref{real_log_strictly_increasing}\text{、}y + r = 1 \text{ なら等号}) \\
 &= 0
    &&(\because\ \log 1 = 0)
 \end{aligned}`,

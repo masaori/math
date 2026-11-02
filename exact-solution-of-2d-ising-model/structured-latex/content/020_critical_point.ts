@@ -2414,7 +2414,7 @@ y + s
 &= \log(y + s)
 &&(\because\ \blkref{def_arcsinh})\\
 &\geq \log(2y)
-&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ 2y \leq y+s\text{。}2y < y+s\ \text{なら}\ \blkref{def_real_logarithm_positive}\ \text{の}\ \log\ \text{の狭義単調増加、}2y = y+s\ \text{なら等号})
+&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ 2y \leq y+s\text{。}2y < y+s\ \text{なら}\ \blkref{real_log_strictly_increasing}\ \text{の}\ \log\ \text{の狭義単調増加、}2y = y+s\ \text{なら等号})
 \end{aligned}`),
       paragraph(["上からの評価。"]),
       displayMath(String.raw`\begin{aligned}
@@ -2422,7 +2422,7 @@ y + s
 &= \log(y + s)
 &&(\because\ \blkref{def_arcsinh})\\
 &\leq \log\left(2y + \frac{1}{2y}\right)
-&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ y+s \leq 2y + \tfrac{1}{2y}\text{。狭義なら}\ \blkref{def_real_logarithm_positive}\ \text{の}\ \log\ \text{の狭義単調増加、等しければ等号})\\
+&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ y+s \leq 2y + \tfrac{1}{2y}\text{。狭義なら}\ \blkref{real_log_strictly_increasing}\ \text{の}\ \log\ \text{の狭義単調増加、等しければ等号})\\
 &= \log\left(2y + 2y\cdot\frac{1}{4y^2}\right)
 &&(\because\ \tfrac{1}{2y} = 2y\cdot\tfrac{1}{4y^2}\text{。}\mathbb{R}\ \text{の四則})\\
 &= \log\left(2y\left(1 + \frac{1}{4y^2}\right)\right)
