@@ -133,17 +133,15 @@ theorem taggedDifference_incident_iff {L : ℕ}
     (e : OrientedEdge L) (q : Set (OrientedEdge L) × Bool) :
     let R : PerfectMatching (OrientedEdge L) :=
       ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (q ∈ (Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
-      Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅) ∧ e ∈ q.1) ↔
-      let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D
-        (shortUnderlyingPairs t) e
-      let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
+    (q ∈ concreteTaggedDifference D t ∧ e ∈ q.1) ↔
+      let d := concreteTaggedPairAt D t e
+      let r := concreteTaggedPairAt R ∅ e
       d ≠ r ∧ (q = d ∨ q = r) := by
   classical
   let R : PerfectMatching (OrientedEdge L) :=
     ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-  let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D (shortUnderlyingPairs t) e
-  let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
+  let d := concreteTaggedPairAt D t e
+  let r := concreteTaggedPairAt R ∅ e
   have hD (u : Set (OrientedEdge L) × Bool) :
       (u ∈ concreteTaggedPairs D t ∧ e ∈ u.1) ↔ u = d := by
     constructor
@@ -158,7 +156,7 @@ theorem taggedDifference_incident_iff {L : ℕ}
       rw [hu]
       exact ⟨⟨{e, perfectMatchingMate D e},
         (perfectMatchingMate_spec D e).2, rfl⟩,
-        by simp [d, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩
+        by simp [d, concreteTaggedPairAt]⟩
   have hR (u : Set (OrientedEdge L) × Bool) :
       (u ∈ concreteReferenceTaggedPairs L ∧ e ∈ u.1) ↔ u = r := by
     constructor
@@ -168,23 +166,16 @@ theorem taggedDifference_incident_iff {L : ℕ}
       have heq : p = ({e, perfectMatchingMate R e} : Set (OrientedEdge L)) :=
         (R.property.2 e).unique ⟨hp, he⟩ ⟨hp0, by simp⟩
       subst p
-      simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
+      simp [r, concreteTaggedPairAt]
     · intro hu
       rw [hu]
       exact ⟨⟨{e, perfectMatchingMate R e},
         (perfectMatchingMate_spec R e).2,
-        by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩,
-        by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]⟩
-  have hdmem : e ∈ d.1 := by simp [d, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
-  have hrmem : e ∈ r.1 := by simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
-  have hEq : concreteTaggedDifference D t =
-      Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
-        Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅ := by
-    ext u
-    simp [concreteTaggedDifference, concreteTaggedPairs,
-      concreteReferenceTaggedPairs, Ising2DLambda.NecSuf.KacWard.taggedEdges, R]
+        by simp [r, concreteTaggedPairAt]⟩,
+        by simp [r, concreteTaggedPairAt]⟩
+  have hdmem : e ∈ d.1 := by simp [d, concreteTaggedPairAt]
+  have hrmem : e ∈ r.1 := by simp [r, concreteTaggedPairAt]
   dsimp
-  rw [← hEq]
   change (q ∈ concreteTaggedPairs D t ∆ concreteReferenceTaggedPairs L ∧ e ∈ q.1) ↔
     d ≠ r ∧ (q = d ∨ q = r)
   constructor
@@ -208,5 +199,23 @@ theorem taggedDifference_incident_iff {L : ℕ}
       refine ⟨Set.mem_symmDiff.mpr (Or.inr ⟨((hR q).mpr hq).1, ?_⟩), he⟩
       intro ha
       exact hne (((hD q).mp ⟨ha, he⟩).symm.trans hq)
+
+theorem taggedDifference_incident_iff_from_necSuf {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (e : OrientedEdge L) (q : Set (OrientedEdge L) × Bool) :
+    let R : PerfectMatching (OrientedEdge L) :=
+      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
+    (q ∈ (Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
+      Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅) ∧ e ∈ q.1) ↔
+      let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D
+        (shortUnderlyingPairs t) e
+      let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
+      d ≠ r ∧ (q = d ∨ q = r) := by
+  simpa [concreteTaggedDifference, concreteTaggedPairs,
+    concreteReferenceTaggedPairs, concreteTaggedPairAt,
+    Ising2DLambda.NecSuf.KacWard.taggedEdges,
+    Ising2DLambda.NecSuf.KacWard.taggedPairAt, shortUnderlyingPairs_empty] using
+    taggedDifference_incident_iff D t e q
 
 end Ising2DLambda.KacWard
