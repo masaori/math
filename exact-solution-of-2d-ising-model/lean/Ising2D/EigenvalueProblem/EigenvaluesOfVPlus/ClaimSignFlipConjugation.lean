@@ -84,6 +84,51 @@ theorem UflipInv_mul : UflipInv M * Uflip M = 1 := by
     funext i; exact flipFamInv_mul i
   rw [h, siteProd_one]
 
+/-! ## 人手 Step 0 の `σ_m^aσ_m^a = I_{Mat(2^{M_col},ℂ)}`（`a ∈ {x, z}`）
+
+人手の鎖の 5 行と 1 対 1 に対応する。`siteProd M x` が人手のクロネッカー積 `x_1 ⊠ ⋯ ⊠ x_M`、
+`Function.update 1 m A` が「`m` 番目だけ `A`、ほかは `I = I_{Mat(2,ℂ)}`」の因子の並びである。 -/
+
+/-- 人手 Step 0 の鎖の 2 行目の右辺の因子の並び: 因子ごとの積 `(I⊠⋯⊠A⊠⋯⊠I)` と `(I⊠⋯⊠B⊠⋯⊠I)` の
+各サイトの積は、`m` 番目が `AB`、ほかが `II` である。 -/
+theorem update_one_mul_update_one_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
+    Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m A
+        * Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m B
+      = Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) m (A * B) := by
+  funext i
+  by_cases h : i = m
+  · subst h; simp only [Pi.mul_apply, Function.update_self]
+  · simp only [Pi.mul_apply, Function.update_of_ne h, Pi.one_apply]
+
+/-- 人手 Step 0 の鎖（`a` を一つ固定した形）。`A = σ^a` で `AA = I` なら、サイト `m` の `σ_m^a` について
+`σ_m^aσ_m^a = I_{Mat(2^{M_col},ℂ)}`。 -/
+theorem siteOp_mul_self_of_mul_self_eq_one (m : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ)
+    (hA : A * A = 1) : siteOp m A * siteOp m A = 1 :=
+  calc siteOp m A * siteOp m A
+      = siteProd M (Function.update 1 m A) * siteProd M (Function.update 1 m A) := rfl
+                                                        -- `def_site_pauli_matrices`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) m (A * A)) := by
+        rw [← siteProd_mul, update_one_mul_update_one_same]
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) m 1) := by
+        rw [hA]                                         -- `pauli_matrix_products` の `σ^aσ^a = I`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) m 1) := by
+        rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`m` 番目以外へ同時適用）
+    _ = 1 := by
+        rw [Function.update_eq_self_iff.mpr rfl]
+        exact siteProd_one M                            -- `kronecker_product_rule` (2)
+
+/-- 人手 Step 0 の `σ_m^xσ_m^x = I_{Mat(2^{M_col},ℂ)}`（`a = x`）。同じ主張の `sigmaX_mul_self`
+（`DefinitionTransferMatrixSymbols.lean`）は `siteOp_mul_same` で 1 段に閉じており、この鎖の 5 行とは対応しない。 -/
+theorem sigmaX_mul_sigmaX_site (m : Fin M) : sigmaX m * sigmaX m = 1 :=
+  siteOp_mul_self_of_mul_self_eq_one m pauliX pauliX_mul_pauliX
+
+/-- 人手 Step 0 の `σ_m^zσ_m^z = I_{Mat(2^{M_col},ℂ)}`（`a = z`）。同じ主張の `sigmaZ_mul_self`
+（`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`）は `epsilon_G_is_involution` の箇所に対応する。 -/
+theorem sigmaZ_mul_sigmaZ_site (m : Fin M) : sigmaZ m * sigmaZ m = 1 :=
+  siteOp_mul_self_of_mul_self_eq_one m pauliZ pauliZ_mul_pauliZ
+
 /-! ## 共役写像の性質 -/
 
 /-- 人手 Step 0 の可逆性から作る、`U` を可逆元とする `TensorPow M` の単元（`↑· = U`、`↑·⁻¹ = U^{-1}`）。 -/

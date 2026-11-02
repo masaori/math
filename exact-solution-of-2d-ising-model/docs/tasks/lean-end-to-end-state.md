@@ -572,6 +572,12 @@
     Lean は `UflipUnit`（`U` を可逆元とする単元）を置き、`Uflip_conj_mul` を `noncomm_ring` から `Conjugation.T_mul` の特殊化に、`Uflip_conj_smul` を `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow` に、`Uflip_conj_S1plus`・`Uflip_conj_S2` を人手の行と 1 対 1 の `calc` にした。
     SageMath `050_claim_even_sector_eigenvalues/check_11_sign_flip_step3_step4_conjugation_chains.sage`（`QQ(i)`、150 段）を足した（全 PASS）。レビューで必須の指摘は無かった（任意の指摘のうち 2 件は下の次の一歩に残した）。
 
+  - ゴールラインの確認の四十六個目（済み、2026-11-02）: `eigenvalue_problem_eigenvalues_of_V_plus.ts` の `sign_flip_conjugation` Step 0 の `σ_m^xσ_m^x = I`・`σ_m^zσ_m^z = I`（名前だけの根拠「パウリ行列の積」、`I` に添字なし）を扱った（係数は `ℂ`）。
+    `a ∈ {x, z}` についての 5 行の鎖（`def_site_pauli_matrices`・`kronecker_product_rule` (1)・`pauli_matrix_products`・`identity_matrix_is_left_unit_of_mat_mult` を `m` 番目以外の因子へ同時適用・`kronecker_product_rule` (2)）にし、鎖の中に限り `I := I_{Mat(2,ℂ)}` と書くことを宣言した（結論は `I_{Mat(2^{M_col},ℂ)}`）。主張は変えていない。
+    Lean は具体版 `siteOp_mul_self_of_mul_self_eq_one`（人手の 5 行と 1 対 1 の `calc`）と特殊化 `sigmaX_mul_sigmaX_site`・`sigmaZ_mul_sigmaZ_site` を `ClaimSignFlipConjugation.lean` に置いた（`check-no-sorry.sh` に足した）。
+    SageMath `050_claim_even_sector_eigenvalues/check_12_sign_flip_step0_site_square_chains.sage`（`QQ(i)`、90 段）を足した（全 PASS）。
+    レビューの必須の指摘 1 件（「以下 `I := I_{Mat(2,ℂ)}`」が同じ証明の後ろの `U^{-1}U = I` と食い違う）を宣言の範囲を鎖の中に限って直し、任意の指摘 2 件（同じ主張の既存の定理との関係の注記、否定コントロールを鎖の判定に通す）を直した。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -596,7 +602,7 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文に `(-1)·(-1) = 1`（ℂ）を主張として置くブロックが無い。`V1_in_Z_Y_epsilon` の Step 0 の σ^yσ^x の鎖が `definition_of_cc` の積の名前で引いており、Lean は `neg_one_mul`・`neg_neg` の 2 補題で閉じている（三十七個目のレビューの任意の指摘）。主張として足して引くかを判断する。
 - Lean の `TensorPow M` は行列の添字を `Conf M`（`Fin M → Fin 2`）に取り、人手の `Mat(2^{M_col},ℂ)` の添字 `1, …, 2^{M_col}` と型が違う。このため単位行列・差の段では、添字が `Fin m` の具体版ではなく、必要十分版を `Conf M` へ特殊化した系（`identity_matrix_mul_tensorPow` ほか、`scalar_identity_commutes_tensorPow`）を使っている（三十八個目のレビューの任意の指摘）。上の「有限和の添字の付け方」の件と合わせて、人手が多重添字の集合 `𝓘` で行列を添字づけるのか、Lean が `Conf M` と `Fin (2^M)` の間の写像に名前を付けるのかを判断する。
 
-- `eigenvalue_problem_eigenvalues_of_V_plus.ts` に残る名前だけの根拠（四十四個目のレビュー）。`sign_flip_conjugation` Step 0 の `σσ = I`（`I` に添字が無い）、Step 1 の「パウリ行列の積」の各行（反交換と符号の外出し、`σσ = I` と右単位元が 1 行に混ざる）、
+- `eigenvalue_problem_eigenvalues_of_V_plus.ts` に残る名前だけの根拠（四十四個目のレビュー）。`sign_flip_conjugation` Step 0 の `σσ = I` は四十六個目で済んだ。Step 0 の残りの「可逆行列の有限積も可逆」には参照も鎖も無く、Lean の `Uflip_mul_inv`・`UflipInv_mul` はサイトごとの因子 `flipFam` で示していて Step 0 の鎖（`sigmaX_mul_sigmaX_site` ほか）を使わない（`U = EF` を `E`・`F` の積として持たない）。次は Step 1 の「パウリ行列の積」の各行（反交換と符号の外出し、`σσ = I` と右単位元が 1 行に混ざる）、
   Step 1 の `E(-σ_k^x)E^{-1} = -σ_k^x`・`-Eσ_k^yE^{-1}` の行（代入と符号の外出しが 1 行）、Step 3 の「共役の ℂ 線型性」（`H_1^{(+)}`・`H_2` の有限和への適用。`linearity_of_T` は 2 項の線型結合しか述べない）、Step 2・Step 3 の単項の `+`。Step 3 の直前の段落「以下、共役が ℂ 線型で積を保つこと（…）を繰り返し使う」は、積を保つことが四十五個目でラベル参照になったので、線型性を扱うときに整理する（四十五個目のレビューの任意の指摘）。`conjugation_is_ring_homomorphism` 自身が `T_B(A) = BAB^{-1}` の括弧の読みを宣言しておらず、証明の 1 段目も括弧を外している（Lean の `Conjugation.T` は `(BA)B^{-1}`。同じレビューの任意の指摘）。
   ほかのブロックの「結合法則」（`Λ̌` の固有値の章の 1016・1027・1148・1179〜1187・2012・2083・2151・3329 行付近）、「単位行列との積」（1547・1563・1576・1666・1724・1833 行付近）、「スカラー倍」（287・299・357・2016〜2020・2087〜2091 行付近）。
   `V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` は実数で、引く主張は係数を `ℂ` に取るが、`a` を `ℂ` の元として使うことを本文に書いていない（記号の帰属）。

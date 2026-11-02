@@ -474,22 +474,28 @@ U\,S_2\,U^{-1} = -\,S_2`,
     ],
     proof: [
       paragraph([
-        "Step 0（可逆性）。",
-        ref("pauli_matrix_products"),
-        " より ",
-        math(String.raw`\sigma^x\sigma^x = \sigma^z\sigma^z = I`),
-        " なので、各サイト ",
-        math(String.raw`m`),
-        " で",
+        "Step 0（可逆性）。次の鎖の中に限り ",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+        math(String.raw`1 \leq m \leq M_{\mathrm{col}}`),
+        " と ",
+        math(String.raw`a \in \{x, z\}`),
+        " について、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sigma_m^x\sigma_m^x
-&= I
-   \quad (\because\ \text{パウリ行列の積}), \\
-\sigma_m^z\sigma_m^z
-&= I
-   \quad (\because\ \text{パウリ行列の積})
+\sigma_m^a\sigma_m^a
+&= \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{m\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^a}^{m\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
+&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^a\sigma^a)}^{m\text{th}}\boxtimes\cdots\boxtimes(II)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= (II)\boxtimes\cdots\boxtimes\overbrace{I}^{m\text{th}}\boxtimes\cdots\boxtimes(II)
+   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^a\sigma^a = I\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{I}^{m\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }m\text{ 番目以外の因子へ同時適用}\right) \\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (2)}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -825,6 +831,7 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 0 の σ_m^xσ_m^x = I・σ_m^zσ_m^z = I（名前だけの根拠「パウリ行列の積」、I に添字なし）を、a ∈ {x, z} について def_site_pauli_matrices・kronecker_product_rule (1)・pauli_matrix_products・identity_matrix_is_left_unit_of_mat_mult・kronecker_product_rule (2) の 5 行の鎖にした。Lean の対応は Ising2D.sigmaX_mul_sigmaX_site・Ising2D.sigmaZ_mul_sigmaZ_site（ClaimSignFlipConjugation.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_12_sign_flip_step0_site_square_chains.sage。",
         "2026-11-02: Step 3 の「共役は積を保つ」2 か所を conjugation_is_ring_homomorphism の T_B の定義と乗法性の 3 行に、Step 4 の「S の定義かつ共役はスカラー倍を保つ」2 か所を S の定義・scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor・Step 3・scalar_multiple_of_negated_matrix・S の定義の 6 行に割った。UXU^{-1} を (UX)U^{-1} と読むことを Step 3 に書いた。Lean の対応は Ising2D.Uflip_conj_mul（Conjugation.T_mul の特殊化）・Ising2D.Uflip_conj_S1plus・Ising2D.Uflip_conj_S2。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_11_sign_flip_step3_step4_conjugation_chains.sage。",
         "2026-11-02: Step 3 の符号を積の外へ出す 2 段を negation_factors_out_of_right_factor・negation_factors_out_of_left_factor へのラベル参照にした。Lean の対応は Ising2D.Uflip_conj_H1・Ising2D.Uflip_conj_H2 の mul_neg_matrix_tensorPow・neg_mul_matrix_tensorPow。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_09_sign_flip_step3_chains.sage（QQ(i) の厳密計算）。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",

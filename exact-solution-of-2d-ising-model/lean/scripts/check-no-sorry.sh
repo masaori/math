@@ -694,6 +694,8 @@ targets=(
   Ising2D.Uflip_conj_H2
   Ising2D.Uflip_conj_S1
   Ising2D.Uflip_conj_S2
+  Ising2D.sigmaX_mul_sigmaX_site
+  Ising2D.sigmaZ_mul_sigmaZ_site
   Ising2D.Uflip_conj_pow
   Ising2D.Uflip_conj_expPartialSum
   Ising2D.Uflip_conj_matExp
