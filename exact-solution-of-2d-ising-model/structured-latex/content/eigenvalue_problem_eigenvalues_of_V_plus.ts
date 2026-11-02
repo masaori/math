@@ -2415,7 +2415,7 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &=\check{n}_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
   \quad (\because \check{Q}_\epsilon\text{ の定義}) \\
 &=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
-  \check{n}_\nu R_\nu^{(\epsilon_\nu)}
+  \left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
   \quad (\because \text{異なる添字の因子の可換性})
 \end{aligned}`,
       ),
@@ -2432,8 +2432,10 @@ R_\mu^{(1)} + R_\mu^{(0)}
   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=R_\nu^{(1)}
   \quad (\because R_\nu^{(1)}\text{ の定義（冒頭）}) \\
+&=1_{\mathbb{C}}\,R_\nu^{(1)}
+  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(1)})\ \text{を右辺から左辺へ}\right) \\
 &=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \epsilon_\nu=1\text{ と単位元の積})
+  \quad (\because \text{場合の仮定 } \epsilon_\nu=1)
 \end{aligned}`,
       ),
       paragraph([
@@ -2459,19 +2461,28 @@ R_\mu^{(1)} + R_\mu^{(0)}
   \quad (\because \text{Step 0 冒頭の } \check{n}_\mu\check{n}_\mu = \check{n}_\mu\ (\mu \to \nu)) \\
 &=0
   \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\nu,\ B \to \check{n}_\nu)\right) \\
+&=0_{\mathbb{C}}\,R_\nu^{(0)}
+  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to R_\nu^{(0)})\ \text{を右辺から左辺へ}\right) \\
 &=\epsilon_\nu R_\nu^{(\epsilon_\nu)}
-  \quad (\because \epsilon_\nu=0\text{ と零元の積})
+  \quad (\because \text{場合の仮定 } \epsilon_\nu=0)
 \end{aligned}`,
       ),
       paragraph(["したがって、どちらの場合も"]),
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\nu\check{Q}_\epsilon
+&=\left(\prod_{\mu \neq \nu} R_\mu^{(\epsilon_\mu)}\right)
+  \left(\check{n}_\nu R_\nu^{(\epsilon_\nu)}\right)
+  \quad (\because \text{Step 3 の最初の鎖}) \\
 &=\left(\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)}\right)
-  \epsilon_\nu R_\nu^{(\epsilon_\nu)}
+  \left(\epsilon_\nu R_\nu^{(\epsilon_\nu)}\right)
   \quad (\because \text{直前の二つの場合}) \\
+&=\epsilon_\nu\left(\left(\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)}\right)R_\nu^{(\epsilon_\nu)}\right)
+  \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\nu,\ A \to \textstyle\prod_{\mu\ne\nu}R_\mu^{(\epsilon_\mu)},\ B \to R_\nu^{(\epsilon_\nu)})\right) \\
+&=\epsilon_\nu\prod_{\mu=1}^{M_{\mathrm{col}}}R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{異なる添字の因子の可換性}) \\
 &=\epsilon_\nu\check{Q}_\epsilon
-  \quad (\because \check{Q}_\epsilon\text{ の定義とスカラーの分配})
+  \quad (\because \check{Q}_\epsilon\text{ の定義（冒頭）})
 \end{aligned}`,
       ),
       paragraph([
@@ -2622,6 +2633,7 @@ y_{\epsilon'}
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_*_factor・identity_matrix_is_*_unit_of_mat_mult・negation_factors_out_of_*_factor の 1 行 1 主張の鎖にした。R_μ^{(0)}R_μ^{(0)} は行列の加法の結合則を本文に持たないので、R_μ^{(1)}R_μ^{(0)} = 0 を先に示し、それと matrix_minus_zero_matrix を引く鎖にした（Step 0 の中で異なる上付き添字の積を冪等性より前に置いた）。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24。",
         "2026-11-02: Step 0 と Step 3 の名前だけの根拠「行列の加法逆元」3 か所（ň − ň = 0）を matrix_difference_zero_iff_equal の ⟸ に、Step 0 の和の「行列の加法（加法逆元と単位元）」を新しい主張 matrix_plus_difference_cancels（A + (B − A) = B）に、冪等性の行 5 か所を、Step 0 の冒頭に置いた ň_μň_μ = ň_μ（check_number_operator_idempotent (3) の ň_μ^2 = ň_μ を def_exp (1) の冪から積へ運ぶ 5 行）の参照にした。本証明の 0 が零行列 O であることを冒頭に書いた（R_μ^{(0)}R_μ^{(0)} の鎖の行内の断り書きを移した）。主張は変えていない。Lean は冒頭の 5 行の calc Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq、nOp_mul_one_sub_nOp・one_sub_nOp_mul_nOp・one_sub_nOp_mul_self の段の付け替え、和の 2 行の calc nOp_add_one_sub_nOp。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_30。",
+        "2026-11-02: Step 3 の名前だけの根拠「ε_ν=1 と単位元の積」を scalar_multiple_by_one を右辺から左辺へ引く行と場合の仮定の行に、「ε_ν=0 と零元の積」を zero_scalar_multiple_is_zero_matrix を右辺から左辺へ引く行と場合の仮定の行に、「Q̌_ε の定義とスカラーの分配」を Step 3 の最初の鎖・直前の二つの場合・scalar_multiple_factors_out_of_right_factor・異なる添字の因子の可換性・Q̌_ε の定義の 5 行に割った。主張の中身は変えていない。",
       ],
     },
   },

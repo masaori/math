@@ -11,7 +11,10 @@
 `nOp_mul_nOp_of_sq`・`nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self`・`nOp_add_one_sub_nOp` に置く
 （Step 3 の `ε_ν = 0` の場合の `ň_ν R_ν^{(0)} = 0` も `nOp_mul_one_sub_nOp` と同じ行である。`R_μ^{(1)}R_μ^{(1)} = R_μ^{(1)}` と
 Step 3 の `ε_ν = 1` の場合の `ň_ν R_ν^{(1)} = R_ν^{(1)}` は、定義の行を除くと `nOp_mul_nOp_of_sq` の 1 行である）。
-Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
+Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）は、場合の仮定の行まで含めて `nOp_mul_projFactor_of_mem`（`ε_ν = 1`）・
+`nOp_mul_projFactor_of_not_mem`（`ε_ν = 0`）に置く。人手の `R_ν^{(ε_ν)}` は `NecSuf.projFactor F.nOp T ν`、`ε_ν` は
+`if ν ∈ T then (1 : ℂ) else 0` である。
+Step 3 の最後の鎖（`ň_νQ̌_ε = (∏_{μ≠ν}R_μ^{(ε_μ)})(ε_νR_ν^{(ε_ν)}) = ⋯ = ε_νQ̌_ε`）と Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 章 009 との違い（本章の要点）
@@ -28,6 +31,8 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperato
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixPlusDifferenceCancelsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
 
 namespace Ising2D
 
@@ -113,6 +118,39 @@ theorem one_sub_nOp_mul_self (i : CheckIdx M) : (1 - F.nOp i) * (1 - F.nOp i) = 
 theorem nOp_add_one_sub_nOp (i : CheckIdx M) : F.nOp i + (1 - F.nOp i) = 1 :=
   calc F.nOp i + (1 - F.nOp i)
       = 1 := add_sub_cancel_tensorPow _ _               -- `matrix_plus_difference_cancels`（`A → ň_μ`、`B → I`）
+
+/-! ## 原文 Step 3 の二つの場合（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）
+
+人手の `R_ν^{(ε_ν)}` を `NecSuf.projFactor F.nOp T ν`（`ν ∈ T` なら `ň_ν`、そうでなければ `I - ň_ν`）、
+`R_ν^{(1)}` を `F.nOp ν`、`R_ν^{(0)}` を `1 - F.nOp ν`、`ε_ν` を `if ν ∈ T then (1 : ℂ) else 0` と書く。
+人手は場合を分ける段落で `R_ν^{(ε_ν)}` を `R_ν^{(1)}`（`R_ν^{(0)}`）にしてから鎖を始めるので、Lean の 1 段目はその置き換えと定義の行を合わせて運ぶ。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
+
+/-- **原文 Step 3 の `ε_ν = 1` の場合**: `ň_ν R_ν^{(1)} = ň_νň_ν = ň_ν = R_ν^{(1)} = 1_ℂ R_ν^{(1)} = ε_ν R_ν^{(ε_ν)}`。 -/
+theorem nOp_mul_projFactor_of_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : ν ∈ T) :
+    F.nOp ν * NecSuf.projFactor F.nOp T ν
+      = (if ν ∈ T then (1 : ℂ) else 0) • NecSuf.projFactor F.nOp T ν :=
+  calc F.nOp ν * NecSuf.projFactor F.nOp T ν
+      = F.nOp ν * F.nOp ν := by rw [NecSuf.projFactor_of_mem hν]
+                                                        -- 場合の仮定で `R_ν^{(ε_ν)} = R_ν^{(1)}`、続けて `R_ν^{(1)}` の定義（冒頭）
+    _ = F.nOp ν := F.nOp_mul_nOp_of_sq ν                -- Step 0 冒頭の `ň_μň_μ = ň_μ`（`μ → ν`）
+    _ = (1 : ℂ) • F.nOp ν := (one_smul_tensorPow _).symm
+                                                        -- `scalar_multiple_by_one` を右辺から左辺へ
+                                                        -- （人手の `= R_ν^{(1)}`（定義）の行は、Lean では `F.nOp ν` のままで同じ項）
+    _ = (if ν ∈ T then (1 : ℂ) else 0) • NecSuf.projFactor F.nOp T ν := by
+        rw [if_pos hν, NecSuf.projFactor_of_mem hν]     -- 場合の仮定 `ε_ν = 1`
+
+/-- **原文 Step 3 の `ε_ν = 0` の場合**: `ň_ν R_ν^{(0)} = ň_ν(I - ň_ν) = ⋯ = O = 0_ℂ R_ν^{(0)} = ε_ν R_ν^{(ε_ν)}`。 -/
+theorem nOp_mul_projFactor_of_not_mem {ν : CheckIdx M} {T : Finset (CheckIdx M)} (hν : ν ∉ T) :
+    F.nOp ν * NecSuf.projFactor F.nOp T ν
+      = (if ν ∈ T then (1 : ℂ) else 0) • NecSuf.projFactor F.nOp T ν :=
+  calc F.nOp ν * NecSuf.projFactor F.nOp T ν
+      = F.nOp ν * (1 - F.nOp ν) := by rw [NecSuf.projFactor_of_notMem hν]
+                                                        -- 場合の仮定で `R_ν^{(ε_ν)} = R_ν^{(0)}`、続けて `R_ν^{(0)}` の定義（冒頭）
+    _ = 0 := F.nOp_mul_one_sub_nOp ν                    -- 人手の続く 7 行（`nOp_mul_one_sub_nOp` の calc と同じ行）
+    _ = (0 : ℂ) • (1 - F.nOp ν) := (zero_smul_tensorPow _).symm
+                                                        -- `zero_scalar_multiple_is_zero_matrix` を右辺から左辺へ
+    _ = (if ν ∈ T then (1 : ℂ) else 0) • NecSuf.projFactor F.nOp T ν := by
+        rw [if_neg hν, NecSuf.projFactor_of_notMem hν]  -- 場合の仮定 `ε_ν = 0`
 
 /-- **原文 `check_joint_eigenspace_decomposition` の `Q̌_ε`**:
 `Q̌_T = ∏_{μ∈𝓜̌} (μ ∈ T ? ň_μ : I - ň_μ)`。 -/

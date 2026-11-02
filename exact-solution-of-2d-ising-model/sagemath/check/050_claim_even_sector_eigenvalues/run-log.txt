@@ -139,3 +139,6 @@ PASS check_number_operator_idempotent (1)・(2) の反交換子の鎖: 95 段、
 
 # 実行コマンド: sage check_30_joint_eigenspace_step0_square_inverse_and_sum_chains.sage
 PASS check_joint_eigenspace_decomposition Step 0 の冒頭の積の形・差が零行列の行・和の鎖: 79 段、否定コントロール 1 行
+
+# 実行コマンド: sage check_31_joint_eigenspace_step3_scalar_chains.sage
+PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾と最後の鎖: 568 段、否定コントロール 2 行

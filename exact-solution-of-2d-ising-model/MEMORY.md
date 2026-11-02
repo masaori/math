@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の七十個目として、`check_joint_eigenspace_decomposition` Step 3 の名前だけの根拠「`ε_ν=1` と単位元の積」「`ε_ν=0` と零元の積」「`Q̌_ε` の定義とスカラーの分配」を、`scalar_multiple_by_one`・`zero_scalar_multiple_is_zero_matrix` を右辺から左辺へ引く行と場合の仮定の行、`scalar_multiple_factors_out_of_right_factor` を含む 5 行の鎖にした（主張の中身は不変）。Lean は `scalar_multiple_by_one` の具体版・必要十分版・`TensorPow M` の系と、Step 3 の二つの場合の `nOp_mul_projFactor_of_mem`・`nOp_mul_projFactor_of_not_mem`。SageMath は `050` の `check_31`。次は状態台帳の (l3)（Step 1〜Step 3 の因子の可換性・零元・分配の展開・単位行列の有限積）。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十九個目として、`check_joint_eigenspace_decomposition` の残りを 5 つの単位に割り、先頭の Step 0・Step 3 の「行列の加法逆元」3 か所を `matrix_difference_zero_iff_equal` の `⟸` に、和 `ň + (I − ň) = I` を新しい主張 `matrix_plus_difference_cancels` に、冪等性の行 5 か所を Step 0 冒頭の `ň_μň_μ = ň_μ`（(3) の冪の形を `def_exp` (1) で積へ運ぶ 5 行）の参照にした（主張の中身は不変）。Lean は具体版・必要十分版・`TensorPow M` の系と `nOp_mul_nOp_of_sq`・`nOp_add_one_sub_nOp`、SageMath は `matrix_plus_difference_cancels/` と `050` の `check_30`。次は Step 3 の行末の名前だけの根拠（状態台帳の (l2)）。
 
 2026-11-02: 全証明の SageMath 検算として、`nesting_of_commutator_of_H_and_check_Z`（Ž・Y̌ についての n 重交換子 (h1.z)〜(h2.y)）に検算 `sagemath/check/nesting_of_commutator_of_H_and_check_Z/` を付けた（未検算 72 件）。位相を円分体、(K_1)_C・(K_2^*)_C を不定元に置き、前提 (A)〜(D)・準備の二つの鎖・四つの帰納法の全行と主張を厳密に確かめた。人手証明は、主張の中の n 重交換子を `def_ad_X_matrix` の ad^n への参照に、K_1・K_2^*・θ̃ を包含の像で書き、名前だけの根拠をラベル参照に、鎖の後の散文の照合を鎖の行にした（主張の中身は不変）。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`cosh_sinh_coefficient_conversion_for_check`）。
