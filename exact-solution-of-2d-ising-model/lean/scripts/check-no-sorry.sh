@@ -1224,6 +1224,10 @@ targets=(
   Ising2D.matrix_eq_neg_of_add_eq_zero
   Ising2D.matrix_eq_neg_of_add_eq_zero_of_necSuf
   Ising2D.eq_neg_of_add_eq_zero_tensorPow
+  "Ising2D.NecSuf.mul_sub_eq_sub_mul_of_commute_matrix'"
+  Ising2D.matrix_mul_sub_eq_sub_mul_of_commute
+  Ising2D.matrix_mul_sub_eq_sub_mul_of_commute_of_necSuf
+  Ising2D.mul_sub_eq_sub_mul_of_commute_tensorPow
   "Ising2D.NecSuf.zero_smul_matrix'"
   "Ising2D.NecSuf.add_comm_matrix'"
   Ising2D.matrix_zero_smul
@@ -1710,6 +1714,12 @@ targets=(
   Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp
   Ising2D.CheckFermiSetup.one_sub_nOp_mul_self
   Ising2D.CheckFermiSetup.nOp_add_one_sub_nOp
+  Ising2D.CheckFermiSetup.mul_identity_eq_identity_mul_step0
+  Ising2D.CheckFermiSetup.nOp_mul_nOp_comm_step0
+  Ising2D.CheckFermiSetup.nOp_mul_one_sub_nOp_comm_step0
+  Ising2D.CheckFermiSetup.one_sub_nOp_mul_nOp_comm_step0
+  Ising2D.CheckFermiSetup.one_sub_nOp_mul_one_sub_nOp_comm_step0
+  Ising2D.CheckFermiSetup.projFactor_mul_comm_step0
   Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_mem
   Ising2D.CheckFermiSetup.nOp_mul_projFactor_of_not_mem
   Ising2D.CheckFermiSetup.Qproj_mul_self

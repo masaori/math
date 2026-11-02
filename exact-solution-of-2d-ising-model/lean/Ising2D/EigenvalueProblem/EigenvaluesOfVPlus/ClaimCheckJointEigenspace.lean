@@ -14,7 +14,9 @@ Step 3 の `ε_ν = 1` の場合の `ň_ν R_ν^{(1)} = R_ν^{(1)}` は、定義
 Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）は、場合の仮定の行まで含めて `nOp_mul_projFactor_of_mem`（`ε_ν = 1`）・
 `nOp_mul_projFactor_of_not_mem`（`ε_ν = 0`）に置く。人手の `R_ν^{(ε_ν)}` は `NecSuf.projFactor F.nOp T ν`、`ε_ν` は
 `if ν ∈ T then (1 : ℂ) else 0` である。
-Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、4 通りの上付き添字の組 `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}` の鎖）、
+Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、4 通りの上付き添字の組 `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}` の鎖）は、
+`mul_identity_eq_identity_mul_step0`・`nOp_mul_nOp_comm_step0`・`nOp_mul_one_sub_nOp_comm_step0`・`one_sub_nOp_mul_nOp_comm_step0`・
+`one_sub_nOp_mul_one_sub_nOp_comm_step0` に人手の行と 1 対 1 の `calc` で置き、まとめた「Step 0 の可換性」を `projFactor_mul_comm_step0` に置く。
 Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と `Q̌_εň_ν` の鎖、
 Step 1 の `ε ≠ ε'` の鎖を含む Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
@@ -37,6 +39,7 @@ Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperatorProduct
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixPlusDifferenceCancelsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
@@ -126,6 +129,65 @@ theorem one_sub_nOp_mul_self (i : CheckIdx M) : (1 - F.nOp i) * (1 - F.nOp i) = 
 theorem nOp_add_one_sub_nOp (i : CheckIdx M) : F.nOp i + (1 - F.nOp i) = 1 :=
   calc F.nOp i + (1 - F.nOp i)
       = 1 := add_sub_cancel_tensorPow _ _               -- `matrix_plus_difference_cancels`（`A → ň_μ`、`B → I`）
+
+/-! ## 原文 Step 0 の異なる添字の因子の可換性
+
+人手の各鎖の最初と最後の行（`R_ν^{(e')}`・`R_μ^{(e)}` の定義（冒頭））は、Lean では `F.nOp`・`1 - F.nOp` をそのまま書くので同じ項である。
+残りの行を `calc` の段に置く。 -/
+
+/-- **原文 Step 0** の `YI = IY`（人手は `Y ∈ {ň_ν, I - ň_ν}` について書く。2 行の鎖は `Y` に依らない）。 -/
+theorem mul_identity_eq_identity_mul_step0 (Y : TensorPow M) : Y * 1 = 1 * Y :=
+  calc Y * 1
+      = Y := mul_identity_matrix_tensorPow Y            -- `identity_matrix_is_right_unit_of_mat_mult`（`A → Y`）
+    _ = 1 * Y := (identity_matrix_mul_tensorPow Y).symm -- `identity_matrix_is_left_unit_of_mat_mult`（`A → Y`）を右辺から左辺へ
+
+/-- **原文 Step 0** の `R_ν^{(1)}R_μ^{(1)} = R_μ^{(1)}R_ν^{(1)}`（`μ ≠ ν`）。 -/
+theorem nOp_mul_nOp_comm_step0 {μ ν : CheckIdx M} (h : μ ≠ ν) :
+    F.nOp ν * F.nOp μ = F.nOp μ * F.nOp ν :=
+  calc F.nOp ν * F.nOp μ
+      = F.nOp μ * F.nOp ν := F.nOp_mul_nOp_of_ne h.symm -- `check_number_operators_commute` (2)（`μ → ν`、`ν → μ`）
+
+/-- **原文 Step 0** の `R_ν^{(1)}R_μ^{(0)} = R_μ^{(0)}R_ν^{(1)}`（`μ ≠ ν`）。 -/
+theorem nOp_mul_one_sub_nOp_comm_step0 {μ ν : CheckIdx M} (h : μ ≠ ν) :
+    F.nOp ν * (1 - F.nOp μ) = (1 - F.nOp μ) * F.nOp ν :=
+  calc F.nOp ν * (1 - F.nOp μ)
+      = (1 - F.nOp μ) * F.nOp ν :=
+        mul_sub_eq_sub_mul_of_commute_tensorPow (F.nOp ν) 1 (F.nOp μ)
+          (mul_identity_eq_identity_mul_step0 (F.nOp ν)) (F.nOp_mul_nOp_of_ne h.symm)
+                                                        -- `commuting_with_difference`（`G → ň_ν`、`X → I`、`W → ň_μ`）。
+                                                        -- 前提は上の `ň_νI = Iň_ν` と `check_number_operators_commute` (2)（`μ → ν`、`ν → μ`）
+
+/-- **原文 Step 0** の `R_ν^{(0)}R_μ^{(1)} = R_μ^{(1)}R_ν^{(0)}`（`μ ≠ ν`）。 -/
+theorem one_sub_nOp_mul_nOp_comm_step0 {μ ν : CheckIdx M} (h : μ ≠ ν) :
+    (1 - F.nOp ν) * F.nOp μ = F.nOp μ * (1 - F.nOp ν) :=
+  calc (1 - F.nOp ν) * F.nOp μ
+      = F.nOp μ * (1 - F.nOp ν) := (F.nOp_mul_one_sub_nOp_comm_step0 h.symm).symm
+                                                        -- 直前の鎖を `(μ → ν, ν → μ)` で、右辺から左辺へ
+
+/-- **原文 Step 0** の `R_ν^{(0)}R_μ^{(0)} = R_μ^{(0)}R_ν^{(0)}`（`μ ≠ ν`）。 -/
+theorem one_sub_nOp_mul_one_sub_nOp_comm_step0 {μ ν : CheckIdx M} (h : μ ≠ ν) :
+    (1 - F.nOp ν) * (1 - F.nOp μ) = (1 - F.nOp μ) * (1 - F.nOp ν) :=
+  calc (1 - F.nOp ν) * (1 - F.nOp μ)
+      = (1 - F.nOp μ) * (1 - F.nOp ν) :=
+        mul_sub_eq_sub_mul_of_commute_tensorPow (1 - F.nOp ν) 1 (F.nOp μ)
+          (mul_identity_eq_identity_mul_step0 (1 - F.nOp ν)) (F.one_sub_nOp_mul_nOp_comm_step0 h)
+                                                        -- `commuting_with_difference`（`G → I - ň_ν`、`X → I`、`W → ň_μ`）。
+                                                        -- 前提は上の `(I - ň_ν)I = I(I - ň_ν)` と直前の鎖
+
+/-- **原文 Step 0 の可換性**: `μ ≠ ν` と全ての `e, e' ∈ {0,1}` について `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}`。
+人手の `e'` は `ν ∈ T'`、`e` は `μ ∈ T` で表す（`NecSuf.projFactor`）。4 通りの組は上の 4 本の鎖である。 -/
+theorem projFactor_mul_comm_step0 {μ ν : CheckIdx M} (h : μ ≠ ν) (T T' : Finset (CheckIdx M)) :
+    NecSuf.projFactor F.nOp T' ν * NecSuf.projFactor F.nOp T μ
+      = NecSuf.projFactor F.nOp T μ * NecSuf.projFactor F.nOp T' ν := by
+  by_cases hν : ν ∈ T' <;> by_cases hμ : μ ∈ T
+  · rw [NecSuf.projFactor_of_mem hν, NecSuf.projFactor_of_mem hμ]
+    exact F.nOp_mul_nOp_comm_step0 h                    -- `(e', e) = (1, 1)`
+  · rw [NecSuf.projFactor_of_mem hν, NecSuf.projFactor_of_notMem hμ]
+    exact F.nOp_mul_one_sub_nOp_comm_step0 h            -- `(e', e) = (1, 0)`
+  · rw [NecSuf.projFactor_of_notMem hν, NecSuf.projFactor_of_mem hμ]
+    exact F.one_sub_nOp_mul_nOp_comm_step0 h            -- `(e', e) = (0, 1)`
+  · rw [NecSuf.projFactor_of_notMem hν, NecSuf.projFactor_of_notMem hμ]
+    exact F.one_sub_nOp_mul_one_sub_nOp_comm_step0 h    -- `(e', e) = (0, 0)`
 
 /-! ## 原文 Step 3 の二つの場合（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）
 
