@@ -1641,4 +1641,196 @@ L^{\lambda}_m+_V L^{\mu}_m
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_coordinate_map_is_linear_form",
+    kind: "claim",
+    title: { text: "基底についての座標の写像は線型形式である" },
+    labels: ["claim_coordinate_map_is_linear_form"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        "、",
+        math(String.raw`b:\{1,\dots,n\}\to V`),
+        " を ",
+        math(String.raw`V`),
+        " の基底（",
+        ref("def_basis"),
+        "）とし、",
+        math(String.raw`b_k:=b(k)`),
+        " と書く。",
+      ]),
+      paragraph([
+        "各 ",
+        math(String.raw`x\in V`),
+        " に対し、",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " を一つずつ与える与え方であって、線型結合（",
+        ref("def_linear_combination"),
+        "）が ",
+        math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V b_k=x`),
+        " を満たすものは、ちょうど一つ存在する。存在するのは ",
+        math(String.raw`b`),
+        " が ",
+        math(String.raw`V`),
+        " を線型結合で張るからであり（",
+        ref("def_spanning_family"),
+        "）、一つしかないのは ",
+        math(String.raw`b`),
+        " が一次独立だからである（",
+        ref("claim_uniqueness_of_coefficients_of_linear_combination"),
+        "）。",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " について、この与え方が ",
+        math(String.raw`k`),
+        " に与える ",
+        math(String.raw`\mathbb{C}`),
+        " の元を ",
+        math(String.raw`\beta^{b}_k(x)`),
+        " と書く。これで写像 ",
+        math(String.raw`\beta^{b}_k:V\to\mathbb{C}`),
+        " が定まり、",
+        math(String.raw`b`),
+        " についての第 ",
+        math(String.raw`k`),
+        " 座標の写像と呼ぶ。定め方から、",
+        math(String.raw`x\in V`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [
+          math(String.raw`\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V b_k=x`),
+          "。",
+        ],
+        [
+          math(String.raw`\{1,\dots,n\}`),
+          " の各元 ",
+          math(String.raw`k`),
+          " に ",
+          math(String.raw`\mathbb{C}`),
+          " の元 ",
+          math(String.raw`\lambda_k`),
+          " を一つずつ与える与え方が ",
+          math(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V b_k=x`),
+          " を満たすならば、すべての ",
+          math(String.raw`k\in\{1,\dots,n\}`),
+          " について ",
+          math(String.raw`\beta^{b}_k(x)=\lambda_k`),
+          " である。",
+        ],
+      ]),
+      paragraph([
+        "このとき、各 ",
+        math(String.raw`i\in\{1,\dots,n\}`),
+        " について、",
+        math(String.raw`\beta^{b}_i`),
+        " は ",
+        math(String.raw`V`),
+        " 上の線型形式（",
+        ref("def_linear_form"),
+        "）である。",
+      ]),
+      paragraph([
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`\{1,\dots,n\}`),
+        " が空集合で座標の写像が一つも無いので、",
+        math(String.raw`n\ge 1`),
+        " とした。",
+        math(String.raw`\beta^{b}_k`),
+        " は族 ",
+        math(String.raw`b`),
+        " 全体に依存し、",
+        math(String.raw`b_k`),
+        " 一つだけからは決まらない。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i\in\{1,\dots,n\}`),
+        "、",
+        math(String.raw`x,y\in V`),
+        "、",
+        math(String.raw`\rho\in\mathbb{C}`),
+        " を任意に取り、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " ごとの ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " と ",
+        math(String.raw`\mu_k`),
+        " を次で置く。",
+      ]),
+      list([
+        [math(String.raw`\lambda_k:=\beta^{b}_k(x)\in\mathbb{C}`)],
+        [math(String.raw`\mu_k:=\beta^{b}_k(y)\in\mathbb{C}`)],
+      ]),
+      paragraph([
+        "まず、係数 ",
+        math(String.raw`\lambda_1+_{\mathbb{C}}\mu_1,\dots,\lambda_n+_{\mathbb{C}}\mu_n`),
+        " による線型結合が ",
+        math(String.raw`x+_V y`),
+        " であることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}(\lambda_k+_{\mathbb{C}}\mu_k)\cdot_V b_k
+&=\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)+_V\left(\sum_{k=1}^{n}\mu_k\cdot_V b_k\right)
+&&\left(\because\ \text{同じ族の線型結合の和。}\blkref{claim_sum_of_linear_combinations_of_same_family}\right)\\
+&=\left(\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V b_k\right)+_V\left(\sum_{k=1}^{n}\beta^{b}_k(y)\cdot_V b_k\right)
+&&\left(\because\ \lambda_k,\ \mu_k\ \text{の置き方}\right)\\
+&=x+_V y
+&&\left(\because\ \text{主張の中の座標の写像の一つ目の性質を}\ x\ \text{と}\ y\ \text{に}\right).
+\end{aligned}`),
+      paragraph([
+        "次に、係数 ",
+        math(String.raw`\rho\cdot_{\mathbb{C}}\lambda_1,\dots,\rho\cdot_{\mathbb{C}}\lambda_n`),
+        " による線型結合が ",
+        math(String.raw`\rho\cdot_V x`),
+        " であることを示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{k=1}^{n}(\rho\cdot_{\mathbb{C}}\lambda_k)\cdot_V b_k
+&=\rho\cdot_V\left(\sum_{k=1}^{n}\lambda_k\cdot_V b_k\right)
+&&\left(\because\ \text{線型結合のスカラー倍（}\mu=\rho\text{）。}\blkref{claim_scalar_multiple_of_linear_combination}\right)\\
+&=\rho\cdot_V\left(\sum_{k=1}^{n}\beta^{b}_k(x)\cdot_V b_k\right)
+&&\left(\because\ \lambda_k\ \text{の置き方}\right)\\
+&=\rho\cdot_V x
+&&\left(\because\ \text{主張の中の座標の写像の一つ目の性質を}\ x\ \text{に}\right).
+\end{aligned}`),
+      paragraph(["加法を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\beta^{b}_i(x+_V y)
+&=\lambda_i+_{\mathbb{C}}\mu_i
+&&\left(\because\ \text{主張の中の座標の写像の二つ目の性質を}\ x+_V y\ \text{と係数}\ \lambda_k+_{\mathbb{C}}\mu_k\ \text{に。上の一つ目の式変形}\right)\\
+&=\beta^{b}_i(x)+_{\mathbb{C}}\beta^{b}_i(y)
+&&\left(\because\ \lambda_i,\ \mu_i\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つこと："]),
+      displayMath(String.raw`\begin{aligned}
+\beta^{b}_i(\rho\cdot_V x)
+&=\rho\cdot_{\mathbb{C}}\lambda_i
+&&\left(\because\ \text{主張の中の座標の写像の二つ目の性質を}\ \rho\cdot_V x\ \text{と係数}\ \rho\cdot_{\mathbb{C}}\lambda_k\ \text{に。上の二つ目の式変形}\right)\\
+&=\rho\cdot_{\mathbb{C}}\beta^{b}_i(x)
+&&\left(\because\ \lambda_i\ \text{の置き方}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x,y,\rho`),
+        " は任意だったので、",
+        math(String.raw`\beta^{b}_i`),
+        " は線型形式の定義（",
+        ref("def_linear_form"),
+        "）の二つの条件を満たす。",
+      ]),
+    ],
+  },
 ]);
