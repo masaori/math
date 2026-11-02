@@ -14,6 +14,11 @@ def shortUnderlyingPairs {L : ℕ}
     Set (Set (OrientedEdge L)) :=
   {q | ∃ p ∈ t, q = {p.1, p.2}}
 
+@[simp] theorem shortUnderlyingPairs_empty {L : ℕ} :
+    shortUnderlyingPairs (∅ : Finset (OrientedEdge L × OrientedEdge L)) = ∅ := by
+  ext q
+  simp [shortUnderlyingPairs]
+
 theorem shortUnderlyingPairs_iff {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
@@ -60,6 +65,15 @@ noncomputable def concreteTaggedActiveVertices {L : ℕ}
     Set (OrientedEdge L) :=
   {e | ∃ q ∈ concreteTaggedDifference D t, e ∈ q.1}
 
+/-- The unique labelled matching pair incident to an oriented edge. -/
+noncomputable def concreteTaggedPairAt {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (e : OrientedEdge L) : Set (OrientedEdge L) × Bool := by
+  classical
+  let p : Set (OrientedEdge L) := {e, perfectMatchingMate D e}
+  exact (p, decide (p ∈ shortUnderlyingPairs t))
+
 theorem taggedDifference_local_degree {L : ℕ} (z : Qbar)
     (s : SpinStructure) (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
@@ -70,9 +84,8 @@ theorem taggedDifference_local_degree {L : ℕ} (z : Qbar)
     (e : OrientedEdge L) :
     let R : PerfectMatching (OrientedEdge L) :=
       ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D
-      (shortUnderlyingPairs t) e
-    let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
+    let d := concreteTaggedPairAt D t e
+    let r := concreteTaggedPairAt R ∅ e
     d = r ∨ (d ≠ r ∧ d.2 = true ∧ r.2 = false) := by
   classical
   let R : PerfectMatching (OrientedEdge L) :=
@@ -102,15 +115,15 @@ theorem taggedDifference_local_degree {L : ℕ} (z : Qbar)
     constructor
     · intro heq
       have htag := congrArg Prod.snd heq
-      simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort] at htag
-    · simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort]
+      simp [concreteTaggedPairAt, hshort] at htag
+    · simp [concreteTaggedPairAt, hshort]
   · left
     have hp : ({e, perfectMatchingMate D e} : Set (OrientedEdge L)) ∈ R.val :=
       hLong _ (perfectMatchingMate_spec D e).2 hshort
     have hm : perfectMatchingMate R e = perfectMatchingMate D e :=
       perfectMatchingMate_eq_of_pair R e (perfectMatchingMate D e)
         (perfectMatchingMate_spec D e).1 hp
-    simp [Ising2DLambda.NecSuf.KacWard.taggedPairAt, hshort]
+    simp [concreteTaggedPairAt, hshort]
     exact congrArg (fun x : OrientedEdge L =>
       ({e, x} : Set (OrientedEdge L))) hm.symm
 

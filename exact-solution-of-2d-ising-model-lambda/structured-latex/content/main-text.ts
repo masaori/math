@@ -71198,6 +71198,8 @@ q_{\vec e,\vec f}
                         "Ising2DLambda.KacWard.concreteTaggedPairs",
                         "Ising2DLambda.KacWard.concreteReferenceTaggedPairs",
                         "Ising2DLambda.KacWard.concreteTaggedDifference",
+                        "Ising2DLambda.KacWard.concreteTaggedPairAt",
+                        "Ising2DLambda.KacWard.concreteTaggedPairAt_eq_necSuf",
                         "Ising2DLambda.KacWard.concreteTaggedDifference_eq_necSuf",
                         "Ising2DLambda.NecSuf.KacWard.taggedEdges",
                       ],
@@ -71231,7 +71233,11 @@ q_{\vec e,\vec f}
                     ],
                     proof: [
                       paragraph(["点 ", math(String.raw`\vec e`), " を固定する。", ref("def_finite_perfect_matching"), " により、", math(String.raw`D`), " と ", ref("claim_reference_long_matching"), " の ", math(String.raw`\mathcal D_0`), " には、それぞれ ", math(String.raw`\vec e`), " を含む対がちょうど一つある。それらを ", math(String.raw`d_{\vec e}`), "、", math(String.raw`r_{\vec e}`), " と書く。前者の標識を ", math(String.raw`t_{\vec e}`), " と書き、後者の標識は長い。"]),
-                      paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{long}`), " なら、", ref("claim_nonzero_long_pair_reference"), " より ", math(String.raw`d_{\vec e}\in\mathcal D_0`), " である。", math(String.raw`\mathcal D_0`), " における対の一意性から ", math(String.raw`d_{\vec e}=r_{\vec e}`), " である。従って二つの標識付き対は同じであり、対称差では共に消える。"]),
+                      paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{long}`), " なら、", ref("claim_nonzero_long_pair_reference"), " より ", math(String.raw`d_{\vec e}\in\mathcal D_0`), " である。", math(String.raw`\mathcal D_0`), " における対の一意性から次を得る。"]),
+                      displayMath(String.raw`\begin{aligned}
+d_{\vec e}&=r_{\vec e}&&(\because\ \blkref{claim_reference_long_matching}\text{ の対の一意性})
+\end{aligned}`),
+                      paragraph(["従って二つの標識付き対は同じであり、対称差では共に消える。"]),
                       paragraph(["もし ", math(String.raw`t_{\vec e}=\mathsf{short}`), " なら、二つの標識付き対は標識が異なるので等しくない。各完全マッチングで ", math(String.raw`\vec e`), " を含む別の対は存在しないから、この二本だけが対称差に残る。特に ", math(String.raw`d_{\vec e}=r_{\vec e}`), " が二元集合として成立しても二本は残る。実数体と複素数体は現れない。"]),
                     ],
                   },

@@ -6,6 +6,14 @@ namespace Ising2DLambda.KacWard
 open Ising2DLambda.AlgebraicEigenvalue
 open scoped symmDiff
 
+theorem concreteTaggedPairAt_eq_necSuf {L : ℕ}
+    (D : PerfectMatching (OrientedEdge L))
+    (t : Finset (OrientedEdge L × OrientedEdge L))
+    (e : OrientedEdge L) :
+    concreteTaggedPairAt D t e =
+      Ising2DLambda.NecSuf.KacWard.taggedPairAt D (shortUnderlyingPairs t) e := by
+  rfl
+
 theorem concreteTaggedDifference_eq_necSuf {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L)) :

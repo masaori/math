@@ -1,4 +1,4 @@
-import Ising2DLambda.KacWard.TaggedSymmetricDifferenceDegree
+import Ising2DLambda.KacWard.TaggedSymmetricDifferenceConcreteFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TaggedSymmetricDifferenceActiveVertices
 
 namespace Ising2DLambda.KacWard
@@ -26,6 +26,7 @@ theorem taggedDifference_active_iff_short {L : ℕ} (z : Qbar)
   let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ e
   have hlocal := taggedDifference_local_degree z s D t hterm e
   have hincident := taggedDifference_incident_iff D t e
+  simp only [concreteTaggedPairAt_eq_necSuf, shortUnderlyingPairs_empty] at hlocal
   change d = r ∨ (d ≠ r ∧ d.2 = true ∧ r.2 = false) at hlocal
   constructor
   · rintro ⟨q, hq, he⟩
