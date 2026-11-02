@@ -95,16 +95,15 @@ theorem blockDiagonal_det_eq_prod_fiber_dets
       calc
         (∑ τ : Equiv.Perm {v : J // block v = k}, weight k τ) =
             ∑ τ : Equiv.Perm {v : J // block v = k},
-              Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign
-                (fun i j : {v : J // block v = k} => i < j) τ : ℤ) : Qbar) *
+              ((Equiv.Perm.sign τ : ℤ) : Polynomial Qbar) *
                 ∏ i : {v : J // block v = k}, B i.1 (τ i).1 := by
-          apply Finset.sum_congr rfl
-          intro τ _
-          dsimp only [weight]
-          exact (congrArg (fun z : ℤ => Polynomial.C (z : Qbar) *
-            ∏ i : {v : J // block v = k}, B i.1 (τ i).1)
-              (IntegerMatrix.inversionSign_eq_mathlibSign τ)).symm
-        _ = _ := (qbarPolynomial_det_row_expansion
-          (fun i j : {v : J // block v = k} => B i.1 j.1)).symm
+          simp only [weight, map_intCast]
+        _ = Matrix.det (Matrix.transpose
+              (fun i j : {v : J // block v = k} => B i.1 j.1)) := by
+          simpa only [Matrix.transpose_apply] using
+            (Matrix.det_apply' (Matrix.transpose
+              (fun i j : {v : J // block v = k} => B i.1 j.1))).symm
+        _ = Matrix.det (fun i j : {v : J // block v = k} => B i.1 j.1) :=
+          Matrix.det_transpose _
 
 end Ising2DLambda.AlgebraicEigenvalue

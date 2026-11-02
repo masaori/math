@@ -1,6 +1,5 @@
 # 本文に登録された Lean 具体版のうち、必要十分版を参照する既知の宣言。
 # 参照を解消したときだけ対応する行を消す。
-Ising2DLambda.AlgebraicEigenvalue.blockDiagonal_det_eq_prod_fiber_dets
 Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree
 Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_mul_function_expansion
 Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_row_expansion

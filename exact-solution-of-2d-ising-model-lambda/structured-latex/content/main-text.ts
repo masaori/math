@@ -6543,7 +6543,14 @@ a+2b&=(a+b)+b
                   paragraph(["同じファイバー内の転倒対 ", math(String.raw`(i,j)\in\mathcal J_k\times\mathcal J_k`), " は、制限置換 ", math(String.raw`\sigma_k`), " の転倒対と一対一に対応する。特に個数は ", math(String.raw`\operatorname{inv}(\sigma_k)`), " である。"]),
                 ],
                 proof: [
-                  paragraph(["写像 ", math(String.raw`(i,j)\mapsto(i,j)`), " を使う。", math(String.raw`i,j\in\mathcal J_k`), " なら、", math(String.raw`i<j`), " は引き継いだ順序でも同じ条件であり、", math(String.raw`\sigma_k(i)=\sigma(i)`), " と ", math(String.raw`\sigma_k(j)=\sigma(j)`), " が成り立つ（", ref("claim_block_preserving_permutation_bijection"), "）。したがって ", math(String.raw`\sigma(j)<\sigma(i)`), " と ", math(String.raw`\sigma_k(j)<\sigma_k(i)`), " は同値である。逆写像も ", math(String.raw`(i,j)\mapsto(i,j)`), " なので全単射であり、個数の等号が従う。"]),
+                  paragraph(["写像 ", math(String.raw`(i,j)\mapsto(i,j)`), " を使う。", math(String.raw`i,j\in\mathcal J_k`), " なら、", math(String.raw`i<j`), " は引き継いだ順序でも同じ条件であり、", math(String.raw`\sigma_k(i)=\sigma(i)`), " と ", math(String.raw`\sigma_k(j)=\sigma(j)`), " が成り立つ（", ref("claim_block_preserving_permutation_bijection"), "）。逆写像も ", math(String.raw`(i,j)\mapsto(i,j)`), " である。よって転倒対の個数は"]),
+                  displayMath(String.raw`\begin{aligned}
+|\{(i,j)\in\mathcal J_k\times\mathcal J_k:i<j,\ \sigma(j)<\sigma(i)\}|
+&=|\{(i,j)\in\mathcal J_k\times\mathcal J_k:i<j,\ \sigma_k(j)<\sigma_k(i)\}|
+&&(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ と引き継いだ順序})\\
+&=\operatorname{inv}(\sigma_k)
+&&(\because\ \blkref{def_inversion_count})
+\end{aligned}`),
                 ],
               },
             }],
