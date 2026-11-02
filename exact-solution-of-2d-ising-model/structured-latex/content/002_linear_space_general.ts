@@ -1340,6 +1340,117 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_negation_distributes_over_matrix_sum",
+    kind: "claim",
+    title: { text: "行列の和の符号反転は符号反転の和に等しい" },
+    labels: ["negation_distributes_over_matrix_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。符号反転は ",
+        ref("def_matrix_negation"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`-(A + B) = (-A) + (-B)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(-(A + B)\bigr)_{ij}
+&= -\bigl((A + B)_{ij}\bigr)
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= -(A_{ij} + B_{ij})
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)\\
+&= (-1_{\mathbb{C}})\,(A_{ij} + B_{ij})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= (-1_{\mathbb{C}})\,A_{ij} + (-1_{\mathbb{C}})\,B_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-A_{ij}) + (-B_{ij})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\text{ を 2 か所へ同時適用}\bigr)\\
+&= (-A)_{ij} + (-B)_{ij}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\text{ を 2 か所へ同時適用}\bigr)\\
+&= \bigl((-A) + (-B)\bigr)_{ij}
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_2 の鎖で、符号反転した項の有限和 Σ(−(Z_mY_m)) を −Σ Z_mY_m にまとめる段（finite_sum_of_negated_matrices）の帰納法の段に要るので足した。" +
+          "−A は def_matrix_negation の成分ごとの符号反転なので、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_negated_matrices",
+    kind: "claim",
+    title: { text: "符号反転した行列の有限和は有限和の符号反転に等しい" },
+    labels: ["finite_sum_of_negated_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{r} (-X_j) = -\sum_{j=1}^{r} X_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (-X_j)
+&= -X_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } -X_j\text{）}\bigr)\\
+&= -\sum_{j=1}^{1} X_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{r+1} (-X_j)
+&= \Bigl(\sum_{j=1}^{r} (-X_j)\Bigr) + (-X_{r+1})
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } -X_j\text{）}\bigr)\\
+&= \Bigl(-\sum_{j=1}^{r} X_j\Bigr) + (-X_{r+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= -\Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)
+&&\bigl(\because\ \blkref{negation_distributes_over_matrix_sum}\ \bigl(A = \textstyle\sum_{j=1}^{r} X_j,\ B = X_{r+1}\bigr)\bigr)\\
+&= -\sum_{j=1}^{r+1} X_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 3 の H_2 の鎖 UH_2U^{-1} = Σ T_U(Z_mY_m) = Σ(−(Z_mY_m)) = −Σ Z_mY_m の最後の段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_difference",
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },
