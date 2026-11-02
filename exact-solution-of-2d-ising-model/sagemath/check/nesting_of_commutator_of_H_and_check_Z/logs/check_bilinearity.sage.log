@@ -1,0 +1,39 @@
+PASS: d=1: [αX, βW]（交換子の定義の左辺） = (αX)(βW) - (βW)(αX)
+PASS: d=1: (αX)(βW) - (βW)(αX) = α(X(βW)) - (βW)(αX)
+PASS: d=1: α(X(βW)) - (βW)(αX) = α(β(XW)) - (βW)(αX)
+PASS: d=1: α(β(XW)) - (βW)(αX) = (αβ)(XW) - (βW)(αX)
+PASS: d=1: (αβ)(XW) - (βW)(αX) = (αβ)(XW) - β(W(αX))
+PASS: d=1: (αβ)(XW) - β(W(αX)) = (αβ)(XW) - β(α(WX))
+PASS: d=1: (αβ)(XW) - β(α(WX)) = (αβ)(XW) - (βα)(WX)
+PASS: d=1: (αβ)(XW) - (βα)(WX) = (αβ)(XW) - (αβ)(WX)
+PASS: d=1: (αβ)(XW) - (αβ)(WX) = (αβ)(XW - WX)
+PASS: d=1: (αβ)(XW - WX) = (αβ)[X, W]
+PASS: d=1: 最後の値が Sage の (αβ)(XW - WX) と一致
+PASS: d=1: 最初の値が Sage の [αX, βW] と一致
+PASS: d=2: [αX, βW]（交換子の定義の左辺） = (αX)(βW) - (βW)(αX)
+PASS: d=2: (αX)(βW) - (βW)(αX) = α(X(βW)) - (βW)(αX)
+PASS: d=2: α(X(βW)) - (βW)(αX) = α(β(XW)) - (βW)(αX)
+PASS: d=2: α(β(XW)) - (βW)(αX) = (αβ)(XW) - (βW)(αX)
+PASS: d=2: (αβ)(XW) - (βW)(αX) = (αβ)(XW) - β(W(αX))
+PASS: d=2: (αβ)(XW) - β(W(αX)) = (αβ)(XW) - β(α(WX))
+PASS: d=2: (αβ)(XW) - β(α(WX)) = (αβ)(XW) - (βα)(WX)
+PASS: d=2: (αβ)(XW) - (βα)(WX) = (αβ)(XW) - (αβ)(WX)
+PASS: d=2: (αβ)(XW) - (αβ)(WX) = (αβ)(XW - WX)
+PASS: d=2: (αβ)(XW - WX) = (αβ)[X, W]
+PASS: d=2: 最後の値が Sage の (αβ)(XW - WX) と一致
+PASS: d=2: 最初の値が Sage の [αX, βW] と一致
+PASS: d=2: 対照 [αX, βW] ≠ α[X, W]
+PASS: d=3: [αX, βW]（交換子の定義の左辺） = (αX)(βW) - (βW)(αX)
+PASS: d=3: (αX)(βW) - (βW)(αX) = α(X(βW)) - (βW)(αX)
+PASS: d=3: α(X(βW)) - (βW)(αX) = α(β(XW)) - (βW)(αX)
+PASS: d=3: α(β(XW)) - (βW)(αX) = (αβ)(XW) - (βW)(αX)
+PASS: d=3: (αβ)(XW) - (βW)(αX) = (αβ)(XW) - β(W(αX))
+PASS: d=3: (αβ)(XW) - β(W(αX)) = (αβ)(XW) - β(α(WX))
+PASS: d=3: (αβ)(XW) - β(α(WX)) = (αβ)(XW) - (βα)(WX)
+PASS: d=3: (αβ)(XW) - (βα)(WX) = (αβ)(XW) - (αβ)(WX)
+PASS: d=3: (αβ)(XW) - (αβ)(WX) = (αβ)(XW - WX)
+PASS: d=3: (αβ)(XW - WX) = (αβ)[X, W]
+PASS: d=3: 最後の値が Sage の (αβ)(XW - WX) と一致
+PASS: d=3: 最初の値が Sage の [αX, βW] と一致
+PASS: d=3: 対照 [αX, βW] ≠ α[X, W]
+RESULT: PASS

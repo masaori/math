@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 349 件のうち、SageMath の検算が無いもの 73 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 352 件のうち、SageMath の検算が無いもの 72 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -176,9 +176,13 @@
   可逆性の三つの主張と同じく K_1 = 2 log y・K_2 = log x と選んで因子とその逆元を厳密に作り、一つの数体へ移して、成分が独立な不定元の X について準備の四つの可逆性・`T_g(X) = T'_g(X)`・鎖の値と主張を確かめた（浮動小数点なし）。
   人手証明を直した: 合成則 `conjugation_is_ring_homomorphism` は `mat_conj` の共役についての主張で、`def_T_g` の共役とは別の定義なので、`mat_conj` の共役を `T'_g` と書いて `T_g(X) = (gX)g^{-1} = T'_g(X)` を準備に置いた。可逆性の散文を準備の 4 行に、合成則の当てはめと末尾の合成の順序の散文を、写像の合成の定義を挟んだ値の 8 行の鎖にした。証明の中の (V_1^{(+)})^{1/2} は `mat_conj` の変数 B と重ならないよう S と書いた。主張に M_col・R と V^{(+)} ∈ R^× の根拠を書いた。計算の誤りは無かった。Lean の `TVPlus_eq_TConj` は必要十分版の `TV_eq_TConj` を引くだけの形で、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `nesting_of_commutator_of_H_and_check_Z`（Ž・Y̌ についての n 重交換子）: `sagemath/check/nesting_of_commutator_of_H_and_check_Z/`。
+  位相 exp(-i(j_R θ̃_μ)_C) を 1 の冪根として円分体 `QQ(ζ_{4M})` に、(K_1)_C・(K_2^*)_C をその上の多項式環の不定元に置き、`M_col = 2..5`・全 μ で、前提 (A)〜(D)、準備（交換子の双線型性・位相の積）の鎖、四つの主張の基底段階と二つの帰納段階の全行（`n = 0..6`）と主張（`n = 0..7`）を厳密に確かめた。位相の積の鎖と円分体の表し方は本文の exp のボールで補助に照合した。
+  人手証明を直した: 主張の中で定めていた交換子と n 重の反復を `def_ad_X_matrix` の ad^n への参照に、K_1・K_2^*・θ̃ を `inclusion_rr_to_cc` の像で書き、係数を一つの複素数にまとめるスカラー倍の括弧と (−1) の冪の指数の所属を書いた。証明は、双線型性の名前だけの根拠をスカラー倍の主張へのラベル参照に、`exp(-iθ̃)exp(iθ̃) = 1` を `scalar_exp_product`・`scalar_exp_zero` の鎖に、帰納段階の鎖を冪の約束（`scalar_exp_is_limit_of_partial_sums`）と指数の等式の行まで延ばして n+1 の主張の右辺に着く一続きにし、鎖の後の散文の照合を除いた。計算の誤りは無かった。Lean の `ClaimNestedCommutator.lean` の新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `nesting_of_commutator_of_H_and_check_Z`（Ž・Y̌ についての n 重交換子。`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `cosh_sinh_coefficient_conversion_for_check`（Ž・Y̌ についての cosh・sinh の展開係数への変換。`--list` の先頭）から、文書順に検算を足す。このブロックは `nesting_of_commutator_of_H_and_check_Z` を旧い表記（K_1・exp(-iθ̃) を包含の像なしで）で引いているので、引く行を新しい主張の (K_1)_C・(θ̃)_C の形にそろえる。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
@@ -186,7 +190,7 @@
 
 - 2026-11-02、`V2_invertible` のレビューで見つかった（暗黙の包含）: `def_V1_plus_square_root`・`V2_exponential_representation` は `K_1, K_2^*, s_2 ∈ ℝ_{>0} ⊂ ℂ` と書き、実数を包含の像を書かずに ℂ の係数として掛けている（係数 `(2s_2)^{M_col/2}` も同じ）。この単位では使う側の証明で `(K_1)_ℂ`・`(K_2^*)_ℂ`・`a_ℂ` と読み替える行を置いた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 
-- 2026-11-02、`half_integer_phase_antiperiodicity` の検算で見つかった（表記の揺れと未整備の前提）: 主張を `exp(-i((M_col)_R θ̃_μ)_C) = -1_C` と像の記号付きに直したが、下流の `nesting_of_commutator_of_H_and_check_Z` などは旧い `exp(-iM_col θ̃_μ) = -1` の形で引いている。下流の検算を足すときに表記をそろえる。また全実数上の cos・sin（2π 周期性・偶奇性・cos π・sin π）と Euler の公式は本文に無く、`euler_formula_cos_sin`・`exp_sum`・この単位の三つの主張がそれを前提にしている。直すには、計算公式の章に全実数上の cos・sin の定義とこれらの性質の主張を置く。
+- 2026-11-02、`half_integer_phase_antiperiodicity` の検算で見つかった（表記の揺れと未整備の前提）: 主張を `exp(-i((M_col)_R θ̃_μ)_C) = -1_C` と像の記号付きに直したが、下流（`commutator_of_H_and_check_Z_Y` の証明など）は旧い `exp(-iM_col θ̃_μ) = -1` の形で引いている。下流の検算を足すときに表記をそろえる。また全実数上の cos・sin（2π 周期性・偶奇性・cos π・sin π）と Euler の公式は本文に無く、`euler_formula_cos_sin`・`exp_sum`・この単位の三つの主張がそれを前提にしている。直すには、計算公式の章に全実数上の cos・sin の定義とこれらの性質の主張を置く。
 
 - 2026-11-02、`antiperiodic_exp_sum` のレビューで見つかった（記号の省略）: `exp_sum` の主張は `exp(2πijk/M_col) = M_col δ` と像の記号を省いて書いており、`antiperiodic_exp_sum` は適用の前に読み方を地の文で述べて引いている。`def_delta_M` も写像を `δ^{M_col}`、値を `δ^{(M_col)}` と書き分けが混在し、値の `1`・`0` を `1_C`・`0_C` と書かず、自然数 M_col による整数の合同を ℤ への像を書かずに使っている。どちらも既に検算が付いたブロックなので、この単位では直さず、検算の付いたブロックの見直しで扱う。
 
