@@ -584,13 +584,9 @@ v_p(a)-v_p(b)
 &=\bigl(\log q_1+\log q_2\bigr)(p)
 &&\bigl(\because\ \blkref{def_log_order_group}\text{ の }\Lambda\text{ の加法は素数ごとの }\mathbb{Z}\text{ の加法}\bigr)
 \end{aligned}`),
-                        paragraph([
-                          "が成り立つ。写像としてすべての素数で値が等しいので、",
-                          math(String.raw`\Lambda`),
-                          " の元として ",
-                          math(String.raw`\log(q_1q_2)=\log q_1+\log q_2`),
-                          " である。",
-                        ]),
+                        paragraph(["が成り立つ。すべての素数で値が等しいので、"]),
+                        displayMath(String.raw`\log(q_1q_2)=\log q_1+\log q_2
+\qquad\bigl(\because\ \Lambda\text{ の元は素数から }\mathbb Z\text{ への写像（}\blkref{def_log_order_group}\text{）}\bigr)`),
                         paragraph([
                           "以上は整数の演算と素因数分解の一意性だけからなり、実数体も複素数体も現れない。",
                           "指数関数も実対数も使っていない。",
@@ -59695,6 +59691,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                       kind: "definition",
                       title: { text: "閉歩道の横断数" },
                       labels: ["def_closed_walk_crossing_number"],
+                      lean: [
+                        "Ising2DLambda.KacWard.closedWalkCrossingNumber",
+                        "Ising2DLambda.NecSuf.KacWard.closedWalkCrossingNumber",
+                        "Ising2DLambda.KacWard.closedWalkCrossingNumber_from_necSuf",
+                      ],
                       habitat: "N",
                       statement: [
                         paragraph([
