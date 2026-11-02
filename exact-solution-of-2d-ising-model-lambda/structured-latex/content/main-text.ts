@@ -62458,8 +62458,12 @@ P_{k+1}(\gamma)_{\mathrm{row}}
 &&\bigl(\because\ i'_k=i_{k+1}\bigr)\\
 &=s(i_{k+1})+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+\bigl(s(i'_{k+1})-s(i_{k+1})\bigr)+L\,c_{\mathrm v}(\vec e_{k+1})(1-2d_{k+1})
 &&\bigl(\because\ \blkref{claim_edge_representative_displacement}\text{ を移項する}\bigr)\\
+&=s(i'_{k+1})+L\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+L\,c_{\mathrm v}(\vec e_{k+1})(1-2d_{k+1})
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則と打ち消し}\bigr)\\
+&=s(i'_{k+1})+L\Bigl(\sum_{t=1}^{k}c_{\mathrm v}(\vec e_t)(1-2d_t)+c_{\mathrm v}(\vec e_{k+1})(1-2d_{k+1})\Bigr)
+&&\bigl(\because\ L\text{ の分配則}\bigr)\\
 &=s(i'_{k+1})+L\sum_{t=1}^{k+1}c_{\mathrm v}(\vec e_t)(1-2d_t)
-&&\bigl(\because\ \mathbb Z\text{ の加法の結合則と打ち消し、}L\text{ の分配則と有限和の末項の吸収}\bigr)
+&&\bigl(\because\ \text{有限和の末項の吸収}\bigr)
 \end{aligned}`),
                       paragraph([
                         "で、第 ", math(String.raw`k+1`),
@@ -64364,6 +64368,8 @@ t_{\circ}(\gamma)
                       habitat: "Z",
                       lean: [
                         "Ising2DLambda.KacWard.periodicPlaneLift",
+                        "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk",
+                        "Ising2DLambda.KacWard.periodicPlaneLiftFromWalk_eq",
                       ],
                       statement: [
                         paragraph([
