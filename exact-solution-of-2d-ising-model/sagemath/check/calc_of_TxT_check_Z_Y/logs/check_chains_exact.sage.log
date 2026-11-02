@@ -1,0 +1,259 @@
+PASS: M=2 x=2 y=2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=2 x=2 y=2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=2 y=2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=2 x=2 y=2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=2 x=2 y=2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=2 y=2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+SKIP: M=2 x=2 y=2 mu=1 (V_1): B_1(θ̃) が対称（exp(iθ̃) = ±i）なので転置の対照は意味を持たない
+PASS: M=2 x=2 y=2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=2 x=2 y=2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=2 x=2 y=2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=2 y=2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=2 x=2 y=2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=2 x=2 y=2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=2 y=2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=2 x=2 y=2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=2 x=2 y=2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=2 y=2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=2 x=2 y=2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=2 x=2 y=2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=2 y=2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+SKIP: M=2 x=2 y=2 mu=2 (V_1): B_1(θ̃) が対称（exp(iθ̃) = ±i）なので転置の対照は意味を持たない
+PASS: M=2 x=2 y=2 mu=2 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=2 x=2 y=2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=2 x=2 y=2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=2 y=2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=2 x=2 y=2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=2 x=2 y=2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=2 y=2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+M=2 x=2 y=2: done
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+SKIP: M=2 x=3 y=3/2 mu=1 (V_1): B_1(θ̃) が対称（exp(iθ̃) = ±i）なので転置の対照は意味を持たない
+PASS: M=2 x=3 y=3/2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=3 y=3/2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+SKIP: M=2 x=3 y=3/2 mu=2 (V_1): B_1(θ̃) が対称（exp(iθ̃) = ±i）なので転置の対照は意味を持たない
+PASS: M=2 x=3 y=3/2 mu=2 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=2 x=3 y=3/2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+M=2 x=3 y=3/2: done
+PASS: M=3 x=2 y=2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=2 y=2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=2 y=2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=2 y=2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=2 y=2 mu=1 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=3 x=2 y=2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=3 x=2 y=2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=2 y=2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=2 y=2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=2 y=2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=3 x=2 y=2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=2 y=2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=2 y=2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=2 y=2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=2 y=2 mu=2 (V_1): 対照 B_1 の転置では一致しない
+SKIP: M=3 x=2 y=2 mu=2 (V_1): exp(iθ̃) = exp(-iθ̃) なので B_1(-θ̃) の対照は意味を持たない
+PASS: M=3 x=2 y=2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=2 y=2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=2 y=2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=2 y=2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=3 x=2 y=2 mu=3 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=2 y=2 mu=3 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=3 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=2 y=2 mu=3 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=2 y=2 mu=3 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=3 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=2 y=2 mu=3 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=3 x=2 y=2 mu=3 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=3 x=2 y=2 mu=3 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=2 y=2 mu=3 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=2 y=2 mu=3 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=2 y=2 mu=3 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=2 y=2 mu=3 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=2 y=2 mu=3 (V_2): 対照 B_2 の転置では一致しない
+M=3 x=2 y=2: done
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=3 y=3/2 mu=2 (V_1): 対照 B_1 の転置では一致しない
+SKIP: M=3 x=3 y=3/2 mu=2 (V_1): exp(iθ̃) = exp(-iθ̃) なので B_1(-θ̃) の対照は意味を持たない
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=3 x=3 y=3/2 mu=3 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=3 x=3 y=3/2 mu=3 (V_2): 対照 B_2 の転置では一致しない
+M=3 x=3 y=3/2: done
+PASS: M=4 x=2 y=2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=2 y=2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=2 y=2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=2 y=2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=2 y=2 mu=1 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=2 y=2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=2 y=2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=2 y=2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=2 y=2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=2 y=2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=2 y=2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=2 y=2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=2 y=2 mu=2 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=2 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=2 y=2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=2 y=2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=2 y=2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=2 y=2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=3 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=2 y=2 mu=3 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=3 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=2 y=2 mu=3 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=2 y=2 mu=3 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=3 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=2 y=2 mu=3 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=3 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=2 y=2 mu=3 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=2 y=2 mu=3 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=3 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=2 y=2 mu=3 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=2 y=2 mu=3 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=3 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=4 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=2 y=2 mu=4 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=4 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=2 y=2 mu=4 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=2 y=2 mu=4 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=4 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=2 y=2 mu=4 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=2 y=2 mu=4 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=2 y=2 mu=4 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=2 y=2 mu=4 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=2 y=2 mu=4 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=2 y=2 mu=4 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=2 y=2 mu=4 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=2 y=2 mu=4 (V_2): 対照 B_2 の転置では一致しない
+M=4 x=2 y=2: done
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=1 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=1 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=2 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=2 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=3 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=3 (V_2): 対照 B_2 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 第 1 行 (T_S(Ž), T_S(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 1・2 式）
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_1(θ̃_μ)
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 第 3 行 = 第 4 行 (Ž, Y̌)B_1(θ̃)
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 対照 非対角成分の符号を逆にした B_1 では一致しない
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 対照 B_1 の転置では一致しない
+PASS: M=4 x=3 y=3/2 mu=4 (V_1): 対照 B_1(-θ̃) では一致しない
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 第 1 行 (T_V2(Ž), T_V2(Y̌)) = 第 2 行（T_actions_on_check_Z_Y の第 3・4 式）
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 第 2 行 = 第 3 行（def_pair_of_matrices_times_two_by_two_matrix）
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 第 3 行の 2×2 行列 = def_B1_theta_B2 の B_2
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 第 3 行 = 第 4 行 (Ž, Y̌)B_2
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 主張（Sage の積・inverse・aA + bB で組んだ両辺）
+PASS: M=4 x=3 y=3/2 mu=4 (V_2): 対照 B_2 の転置では一致しない
+M=4 x=3 y=3/2: done
+RESULT: PASS

@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 362 件のうち、SageMath の検算が無いもの 67 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 362 件のうち、SageMath の検算が無いもの 66 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -198,13 +198,19 @@
   K_1 = 2 log y・K_2 = log x と選んで g・g^{-1} を QQ に作り、Ž_μ・Y̌_μ を円分体に、a, b を不定元に置いて、証明の一行・当てはめた `linearity_of_T` の鎖の各行・g ∈ R^× を `M_col = 2..4`・全 μ で厳密に確かめた。
   人手証明を直した: 主張を `T_actions_on_check_Z_Y` と同じ書き方にそろえ、M_col・R・Ž_μ・Y̌_μ の所属、`def_T_g` と可逆性の根拠を書いた。証明の準備に linearity_of_T の各記号へ何を当てるかを書き、地の文「一続きである。」を除いた（主張の中身は不変）。計算の誤りは無かった。
 
+- `calc_of_TxT_check_Z_Y`（T_{(V_1^{(+)})^{1/2}}・T_{V_2} の (Ž, Y̌) への直積作用）: `sagemath/check/calc_of_TxT_check_Z_Y/`（共通の準備を `T_actions_on_check_Z_Y` の検算から `sagemath/_shared/transfer_factor_actions_on_check_Z_Y.sage` へ切り出して共有）。
+  鎖の始点を `T_actions_on_check_Z_Y` を使わずに共役 (gW)g^{-1} で作り、二本の鎖の全行と主張を `M_col = 2..4`・全 μ で数体の中で厳密に確かめた（浮動小数点なし）。定義の展開の行は成分の配置の写しを見るだけであることを overview に書いた。
+  人手証明を直した: 主張の中で定めていた行列の組と 2×2 行列の積を新しい定義 `def_pair_of_matrices_times_two_by_two_matrix`（列ごとの `def_pair_of_matrices_times_column_of_numbers` の組）に切り出し、`def_B1_theta_B2` の成分を `T_actions_on_check_Z_Y` の係数と同じ包含の像の表記にした。主張に M_col・R・θ̃ とその像の出所を書き、証明の地の文を除いた（主張の中身は不変）。積を引いていた `T_V_plus_check_Z_Y_via_B1_B2_B1` と対角化の章の 2 か所の参照を新しい定義へ付け替えた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `calc_of_TxT_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。`calc_of_TxT_check_Z_Y`・`T_V_plus_action_on_check_Z_Y` は `T_actions_on_check_Z_Y` を旧い表記（`cosh(K_1)`・`i exp(-iθ̃)sinh(K_1)` を包含の像なしで）で引き、行列の組と数の列の積を主張の中で定めているので、新しい表記と定義 `def_pair_of_matrices_times_column_of_numbers` にそろえる。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `factorization_of_A_theta_general`（`--list` の先頭）から、文書順に検算を足す。この証明は a := cosh K_1 ∈ ℝ・b := sinh K_1 ∈ ℝ と置いて B_1(θ) を実数の成分で書いており、`def_B1_theta_B2` の成分（`(cosh K_1)_C`・`exp(i(θ)_C)` の包含の像）とそろっていないので、a, b などを ℂ の元として置き直す。`T_V_plus_check_Z_Y` の証明も `T_actions_on_check_Z_Y` を旧い表記（`cosh(K_1)`・`i exp(-iθ̃)sinh(K_1)`）で引き、式変形の間に地の文（「3 行目・5 行目の線型性は…」「同様に」）が残っている。検算は付いているので、検算の付いたブロックの見直しで扱う。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`calc_of_TxT_check_Z_Y` のレビューで見つかった（1 ブロック 2 定義・2 主張。今回の差分より前から）: `def_B1_theta_B2` は B_1(θ) と B_2 の二つを一つのブロックで定め、`calc_of_TxT_check_Z_Y`・`T_actions_on_check_Z_Y` は複数の式を一つの主張にしている。分けるとラベル参照（本文 20 か所余りと Lean の注記）を付け替えることになるので、検算の付いたブロックの見直しで扱う。対角化の章の行列の組と 2×2 行列の積の結合律の段も、列の比較を散文の一文で済ませ、「行ベクトルへの作用の定め方」にラベルを引いていない。その段は積を `def_pair_of_matrices_times_two_by_two_matrix` のものとだけ定めて `g_{11}A_0 + g_{21}B_0` の形を使っており、`def_pair_of_matrices_times_column_of_numbers` までの展開を引いていない。
 
 - 2026-11-02、`linearity_of_T_on_check_Z_Y`・`linearity_of_T_V2` のレビューで見つかった（同一視。今回の差分より前から）: この章の主張は `M_col ∈ ℤ_{≥2}` を `def_invertible_elements_of_R`・`linearity_of_T` の `M ∈ ℕ_{>0}` へ「M を M_col に取った」と写像なしで渡し、`R = Mat(2^{M_col},ℂ)` と書く。一方 `def_half_integer_checkZ`・`def_half_integer_checkY` は Ž_μ・Y̌_μ を `Mat(2^{(M_col)_ℕ},ℂ)` の元と定めている。直すには `antiperiodic_exp_sum` の `(M_col)_ℕ` を通すか `linearity_of_T` の M を ℤ_{≥1} に合わせ、`T_actions_on_check_Z_Y` からこの二つの線型性の主張までをまとめて書き直す。検算の付いたブロックの見直しで扱う。
 

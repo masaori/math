@@ -6378,26 +6378,45 @@ T_{V_2}\!\left(a\check Z_\mu+b\check Y_\mu\right)
     title: { tex: String.raw`B_1(\theta), B_2 \text{ の定義}` },
     labels: ["def_B1_theta_B2"],
     statement: [
-      paragraph([math(String.raw`\theta \in \mathbb{R}`), " について、"]),
+      paragraph([
+        math(String.raw`\theta \in \mathbb{R}`),
+        " とその ",
+        ref("inclusion_rr_to_cc"),
+        " による像 ",
+        math(String.raw`(\theta)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`K_1, K_2^* \in \mathbb{R}`),
+        "（",
+        ref("def_transfer_matrix_symbols"),
+        "）、実数の積 ",
+        math(String.raw`2K_2^* \in \mathbb{R}`),
+        "、",
+        math(String.raw`\cosh, \sinh`),
+        "（",
+        ref("def_cosh_sinh"),
+        "）の値の像 ",
+        math(String.raw`(\cosh K_1)_{\mathbb{C}}, (\sinh K_1)_{\mathbb{C}}, (\cosh 2K_2^*)_{\mathbb{C}}, (\sinh 2K_2^*)_{\mathbb{C}}`),
+        "、数の ",
+        math(String.raw`\exp`),
+        "（",
+        ref("def_scalar_exp"),
+        "）を用いて",
+      ]),
       displayMath(
         String.raw`B_1(\theta) := \begin{pmatrix}
-\cosh K_1 & -i \exp(i\theta)\sinh K_1 \\
-i \exp(-i\theta)\sinh K_1 & \cosh K_1
+(\cosh K_1)_{\mathbb{C}} & \bigl((-i)\,\exp\bigl(i(\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\
+\bigl(i\,\exp\bigl(-i(\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} & (\cosh K_1)_{\mathbb{C}}
 \end{pmatrix},
 \qquad
 B_2 := \begin{pmatrix}
-\cosh(2K_2^*) & i\sinh(2K_2^*) \\
--i\sinh(2K_2^*) & \cosh(2K_2^*)
+(\cosh 2K_2^*)_{\mathbb{C}} & i\,(\sinh 2K_2^*)_{\mathbb{C}} \\
+(-i)(\sinh 2K_2^*)_{\mathbb{C}} & (\cosh 2K_2^*)_{\mathbb{C}}
 \end{pmatrix}`,
       ),
       paragraph([
         "と定める（いずれも ",
         math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
-        " の元。",
-        math(String.raw`K_1, K_2^*`),
-        " は ",
-        ref("def_transfer_matrix_symbols"),
-        " の記号）。",
+        " の元）。",
       ]),
     ],
     conversion: {
@@ -6405,6 +6424,42 @@ B_2 := \begin{pmatrix}
       notes: [
         "008 章では B_1, B_2 は factorization_of_A_theta の statement と T_V_hatZ_hatY の proof の中で θ_μ（μ ∈ calM）に限って導入されている。半整数運動量 θ~_μ で使うために、θ ∈ R 一般の定義として立て直した（008 章側は変更していない）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02（全証明の SageMath 検算）: 成分を T_actions_on_check_Z_Y の主張と同じ表記（包含の像、係数をまとめた積）で書いた。中身は不変。",
+      ],
+    },
+  },
+  {
+    id: "evensectorT_definition_pair_of_matrices_times_two_by_two_matrix",
+    kind: "definition",
+    origin: { path: "structured-latex/content/014_even_sector_T_action.ts", ordinal: 10 },
+    title: { tex: String.raw`\text{行列の組と } 2\times 2 \text{ 行列の積}` },
+    labels: ["def_pair_of_matrices_times_two_by_two_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`d\in\mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B\in\mathrm{Mat}(d,\mathbb{C})`),
+        "、",
+        math(String.raw`p, q, r, s\in\mathbb{C}`),
+        " について、行列の組 ",
+        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}`),
+        " と ",
+        math(String.raw`\begin{pmatrix}p & q \\ r & s\end{pmatrix}\in\mathrm{Mat}(2,\mathbb{C})`),
+        " の積を、",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " の積を列ごとに並べた組",
+      ]),
+      displayMath(
+        String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p & q \\ r & s\end{pmatrix}
+:= \left(\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p \\ r\end{pmatrix},\ \begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}q \\ s\end{pmatrix}\right)
+\ \in\ \mathrm{Mat}(d,\mathbb{C})\times\mathrm{Mat}(d,\mathbb{C})`,
+      ),
+      paragraph(["と定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算）: calc_of_TxT_check_Z_Y の主張の中で定めていた積を、1 ブロック 1 定義に従って切り出した。",
       ],
     },
   },
@@ -6415,104 +6470,119 @@ B_2 := \begin{pmatrix}
     title: { tex: String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2} \text{ の } (\check{Z}, \check{Y}) \text{ への直積作用}` },
     labels: ["calc_of_TxT_check_Z_Y"],
     statement: [
-      paragraph([math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）", " について、"]),
+      paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        "、",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取ったもの）、",
+        math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
+        "、",
+        math(String.raw`\tilde\theta = \tilde\theta_\mu \in \mathbb{R}`),
+        " とその像 ",
+        math(String.raw`(\tilde\theta)_{\mathbb{C}}`),
+        "、",
+        math(String.raw`\check{Z}_\mu, \check{Y}_\mu \in R`),
+        "、共役 ",
+        math(String.raw`T_{\left(V_1^{(+)}\right)^{1/2}}, T_{V_2}: R\to R`),
+        "、その主張の係数に現れる ",
+        math(String.raw`K_1, K_2^*`),
+        " の値の像は ",
+        ref("T_actions_on_check_Z_Y"),
+        " のものとする。",
+        math(String.raw`B_1(\tilde\theta), B_2 \in \mathrm{Mat}(2,\mathbb{C})`),
+        " は ",
+        ref("def_B1_theta_B2"),
+        " の ",
+        math(String.raw`\theta`),
+        " を ",
+        math(String.raw`\tilde\theta`),
+        " に取ったもの、行列の組と ",
+        math(String.raw`2\times 2`),
+        " 行列の積は ",
+        ref("def_pair_of_matrices_times_two_by_two_matrix"),
+        " の ",
+        math(String.raw`d`),
+        " を ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " に取ったものとする。このとき",
+      ]),
       displayMath(
         String.raw`\left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right)
-= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1\!\left(\tilde\theta_\mu\right)`,
+= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1(\tilde\theta)`,
       ),
       displayMath(
         String.raw`\left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
 = \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2`,
       ),
-      paragraph([
-        "ここで ",
-        math(String.raw`B_1, B_2`),
-        " は ",
-        ref("def_B1_theta_B2"),
-        " のものであり、行ベクトルと ",
-        math(String.raw`2\times 2`),
-        " 行列の積は列ごとの ",
-        math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}a \\ b\end{pmatrix} = aA + bB`),
-        " を 2 列並べたもの、すなわち",
-      ]),
-      displayMath(
-        String.raw`\begin{pmatrix}A, & B\end{pmatrix}
-\begin{pmatrix}p & q \\ r & s\end{pmatrix}
-:= \left(pA + rB,\ qA + sB\right)`,
-      ),
-      paragraph(["とする。"]),
+      paragraph(["である（いずれも ", math(String.raw`R\times R`), " の元の等式）。"]),
     ],
     proof: [
-      paragraph([
-        ref("T_actions_on_check_Z_Y"),
-        " の 4 式の列ベクトル表示を、",
-        math(String.raw`\check{Z}_\mu`),
-        " 分・",
-        math(String.raw`\check{Y}_\mu`),
-        " 分の順に 2 列並べる。",
-        math(String.raw`\tilde\theta := \tilde\theta_\mu`),
-        " と書くと ",
-        math(String.raw`V_1`),
-        " 分は",
-      ]),
       displayMath(
         String.raw`\begin{aligned}
 &\left(T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu),\
 T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\right) \\
 &= \left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}\cosh(K_1) \\ i \exp(-i\tilde\theta)\sinh(K_1)\end{pmatrix},\ \
+   \begin{pmatrix}
+     (\cosh K_1)_{\mathbb{C}} \\
+     \bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}}
+   \end{pmatrix},\ \
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}-i \exp(i\tilde\theta)\sinh(K_1) \\ \cosh(K_1)\end{pmatrix}
+   \begin{pmatrix}
+     \bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\
+     (\cosh K_1)_{\mathbb{C}}
+   \end{pmatrix}
    \right)
-   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ を 2 列へ同時適用}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ の } T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Z}_\mu)\text{・}T_{\left(V_1^{(+)}\right)^{1/2}}(\check{Y}_\mu)\text{ の式を 2 成分へ同時適用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
-   \cosh(K_1) & -i \exp(i\tilde\theta)\sinh(K_1) \\
-   i \exp(-i\tilde\theta)\sinh(K_1) & \cosh(K_1)
+     (\cosh K_1)_{\mathbb{C}} & \bigl((-i)\,\exp\bigl(i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} \\
+     \bigl(i\,\exp\bigl(-i(\tilde\theta)_{\mathbb{C}}\bigr)\bigr)(\sinh K_1)_{\mathbb{C}} & (\cosh K_1)_{\mathbb{C}}
    \end{pmatrix}
-   \quad (\because \text{statement の行ベクトルと行列の積の定義}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1\!\left(\tilde\theta_\mu\right)
+   \quad (\because \blkref{def_pair_of_matrices_times_two_by_two_matrix}) \\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_1(\tilde\theta)
    \quad (\because \blkref{def_B1_theta_B2})
 \end{aligned}`,
       ),
-      paragraph([math(String.raw`V_2`), " 分も同様に、"]),
       displayMath(
         String.raw`\begin{aligned}
-\left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right)
+&\left(T_{V_2}(\check{Z}_\mu),\ T_{V_2}(\check{Y}_\mu)\right) \\
 &= \left(
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}\cosh(2K_2^*) \\ -i\sinh(2K_2^*)\end{pmatrix},\ \
+   \begin{pmatrix}
+     (\cosh 2K_2^*)_{\mathbb{C}} \\
+     (-i)(\sinh 2K_2^*)_{\mathbb{C}}
+   \end{pmatrix},\ \
    \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \begin{pmatrix}i\sinh(2K_2^*) \\ \cosh(2K_2^*)\end{pmatrix}
+   \begin{pmatrix}
+     i\,(\sinh 2K_2^*)_{\mathbb{C}} \\
+     (\cosh 2K_2^*)_{\mathbb{C}}
+   \end{pmatrix}
    \right)
-   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ を 2 列へ同時適用}) \\
+   \quad (\because \blkref{T_actions_on_check_Z_Y}\text{ の } T_{V_2}(\check{Z}_\mu)\text{・}T_{V_2}(\check{Y}_\mu)\text{ の式を 2 成分へ同時適用}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
    \begin{pmatrix}
-   \cosh(2K_2^*) & i\sinh(2K_2^*) \\
-   -i\sinh(2K_2^*) & \cosh(2K_2^*)
+     (\cosh 2K_2^*)_{\mathbb{C}} & i\,(\sinh 2K_2^*)_{\mathbb{C}} \\
+     (-i)(\sinh 2K_2^*)_{\mathbb{C}} & (\cosh 2K_2^*)_{\mathbb{C}}
    \end{pmatrix}
-   \quad (\because \text{statement の行ベクトルと行列の積の定義}) \\
+   \quad (\because \blkref{def_pair_of_matrices_times_two_by_two_matrix}) \\
 &= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix} B_2
    \quad (\because \blkref{def_B1_theta_B2})
 \end{aligned}`,
       ),
-      paragraph([
-        "並べた 2 列がそれぞれ ",
-        ref("def_B1_theta_B2"),
-        " の ",
-        math(String.raw`B_1(\tilde\theta_\mu)`),
-        "、",
-        math(String.raw`B_2`),
-        " の第 1 列・第 2 列に一致している。",
-      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "008 章の calc_of_TxT_hatZxhatY の半整数運動量版。008 章は直積写像 T×T を別ブロックで定義してから 2 列を並べていたが、直積写像の記号は以降で使われないので、ここでは 2 つの像の組をそのまま行ベクトル×行列の形に書いた。",
-        "数値確認済み（sagemath/check/047_claim_even_sector_T_action/check_03_T_actions.sage の「B1 右乗」「B2 右乗」列）。",
+        "2026-11-02（全証明の SageMath 検算）: 主張を T_actions_on_check_Z_Y の新しい表記にそろえ、主張の中で定めていた行列の組と 2×2 行列の積を def_pair_of_matrices_times_two_by_two_matrix に切り出した。証明の地の文を除いた。主張の中身は不変。検算は sagemath/check/calc_of_TxT_check_Z_Y/。",
       ],
     },
   },
@@ -7084,8 +7154,10 @@ T_{(V^{(+)})}(\check{Y}_\mu)
         "が成り立つ。行ベクトルと ",
         math(String.raw`2\times 2`),
         " 行列の積は ",
-        ref("calc_of_TxT_check_Z_Y"),
-        " の ",
+        ref("def_pair_of_matrices_times_two_by_two_matrix"),
+        "・",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " を続けて展開した ",
         math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p & q \\ r & s\end{pmatrix} = (pA + rB,\ qA + sB)`),
         " である。最後の等号の根拠である行列の等式 ",
         math(String.raw`A(\theta) = B_1(\theta) B_2 B_1(\theta)\ (\theta \in \mathbb{R})`),

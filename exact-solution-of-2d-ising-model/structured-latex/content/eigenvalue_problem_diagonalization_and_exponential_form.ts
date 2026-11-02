@@ -3181,8 +3181,10 @@ t^2
         "と定める（行ベクトルと ",
         math(String.raw`2\times 2`),
         " 行列の積は ",
-        ref("calc_of_TxT_check_Z_Y"),
-        " の ",
+        ref("def_pair_of_matrices_times_two_by_two_matrix"),
+        "・",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
+        " を続けて展開した ",
         math(String.raw`\begin{pmatrix}A, & B\end{pmatrix}\begin{pmatrix}p & q \\ r & s\end{pmatrix} = (pA + rB,\ qA + sB)`),
         "）。",
       ]),
@@ -3921,7 +3923,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\c
         "以下、行ベクトルと ",
         math(String.raw`2\times 2`),
         " 行列の積は ",
-        ref("calc_of_TxT_check_Z_Y"),
+        ref("def_pair_of_matrices_times_two_by_two_matrix"),
         " のものとする。まず、",
         math(String.raw`A_0, B_0 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " と ",
@@ -4052,7 +4054,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
       status: "added",
       notes: [
         "008 章の commutation_V_psi の半整数運動量版。008 章は行ベクトル×行列の結合律を暗黙に使っていたが、" +
-          "本章では行ベクトル×行列の積を calc_of_TxT_check_Z_Y の定義で入れているので、結合律を proof の冒頭で明示的に確かめた。",
+          "本章では行ベクトル×行列の積を def_pair_of_matrices_times_two_by_two_matrix（当時は calc_of_TxT_check_Z_Y の主張の中）の定義で入れているので、結合律を proof の冒頭で明示的に確かめた。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_03（V^{(+)} を行列指数関数から直接構成して共役を計算）。",
         "2026-08-19 の式変形統一で、行ベクトルへの線型作用の一行二等号を定義と線型性の三段へ分け、" +
           "転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた。内容と参照は変えていない。",

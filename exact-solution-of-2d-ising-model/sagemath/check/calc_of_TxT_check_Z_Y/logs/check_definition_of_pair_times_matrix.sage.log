@@ -1,0 +1,7 @@
+PASS: d=1: (A, B)P = (pA + rB, qA + sB)
+PASS: d=1: 対照 行で読んだ組 (pA + qB, rA + sB) とは異なる
+PASS: d=2: (A, B)P = (pA + rB, qA + sB)
+PASS: d=2: 対照 行で読んだ組 (pA + qB, rA + sB) とは異なる
+PASS: d=4: (A, B)P = (pA + rB, qA + sB)
+PASS: d=4: 対照 行で読んだ組 (pA + qB, rA + sB) とは異なる
+RESULT: PASS
