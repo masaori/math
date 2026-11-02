@@ -59603,6 +59603,16 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                       kind: "definition",
                       title: { text: "閉歩道の通過" },
                       labels: ["def_closed_walk_passes"],
+                      lean: [
+                        "Ising2DLambda.KacWard.closedWalkSuccessor",
+                        "Ising2DLambda.KacWard.closedWalkSuccessor_from_necSuf",
+                        "Ising2DLambda.KacWard.closedWalkPass",
+                        "Ising2DLambda.KacWard.closedWalkPassVertex",
+                        "Ising2DLambda.KacWard.closedWalkPass_valid",
+                        "Ising2DLambda.NecSuf.KacWard.cyclicSuccessor",
+                        "Ising2DLambda.NecSuf.KacWard.cyclicPass",
+                        "Ising2DLambda.NecSuf.KacWard.cyclicPassVertex",
+                      ],
                       habitat: "N",
                       statement: [
                         paragraph([
