@@ -1,0 +1,4 @@
+  M_col=2: Sage の逆行列のボールが exp(-X) と重なる
+  M_col=3: Sage の逆行列のボールが exp(-X) と重なる
+  M_col=4: Sage の逆行列のボールが exp(-X) と重なる
+RESULT: PASS

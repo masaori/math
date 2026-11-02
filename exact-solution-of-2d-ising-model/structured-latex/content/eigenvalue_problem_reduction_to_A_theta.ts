@@ -3763,32 +3763,79 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     labels: ["V1_plus_half_invertible"],
     statement: [
       paragraph([
-        ref("def_V1_plus_square_root"),
-        " で定めた ",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " は可逆である。すなわち、",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        " とし、",
         ref("def_invertible_elements_of_R"),
         " の ",
-        math(String.raw`R^\times`),
-        " の元である。",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        ref("def_V1_plus_square_root"),
+        " で定めた ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}\in R`),
+        " は可逆である。すなわち ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2}\in R^\times`),
+        " である。",
       ]),
     ],
     proof: [
       paragraph([
-        math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb C)`),
-        " である。逆行列を一続きに計算すると、",
+        math(String.raw`X:=\bigl(\tfrac{i}{2}(K_1)_{\mathbb{C}}\bigr)H_1^{(+)}\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`(K_1)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " による ",
+        math(String.raw`K_1\in\mathbb{R}_{>0}`),
+        " の像、",
+        math(String.raw`\tfrac{i}{2}(K_1)_{\mathbb{C}}\in\mathbb{C}`),
+        " によるスカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "。",
+        ref("def_V1_plus_square_root"),
+        " が ",
+        math(String.raw`\mathbb{R}_{>0}\subset\mathbb{C}`),
+        " と書いて掛けている ",
+        math(String.raw`K_1`),
+        " はこの像である）、",
+        math(String.raw`h:=\exp(-X)\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`-X`),
+        " は ",
+        ref("def_matrix_negation"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        "）と置く。",
       ]),
       displayMath(String.raw`\begin{aligned}
-\left(\left(V_1^{(+)}\right)^{1/2}\right)^{-1}
-&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)^{-1}
+\left(V_1^{(+)}\right)^{1/2}h
+&=\left(V_1^{(+)}\right)^{1/2}\exp(-X)
+&&(\because\ h\ \text{の置き方})\\
+&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)\exp(-X)
 &&\bigl(\because\ \blkref{def_V1_plus_square_root}\bigr)\\
-&=\exp\!\left(-\tfrac{i}{2}K_1H_1^{(+)}\right)
-&&\bigl(\because\ \blkref{matrix_exp_conjugation}\text{ (3)}\bigr)
+&=\exp(X)\exp(-X)
+&&\bigl(\because\ X\ \text{の置き方}\ (K_1\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_1)_{\mathbb{C}})\bigr)\\
+&=\exp(-(-X))\exp(-X)
+&&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to X)\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -X)\bigr),\\[2mm]
+h\left(V_1^{(+)}\right)^{1/2}
+&=\exp(-X)\left(V_1^{(+)}\right)^{1/2}
+&&(\because\ h\ \text{の置き方})\\
+&=\exp(-X)\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)
+&&\bigl(\because\ \blkref{def_V1_plus_square_root}\bigr)\\
+&=\exp(-X)\exp(X)
+&&\bigl(\because\ X\ \text{の置き方}\ (K_1\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_1)_{\mathbb{C}})\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to X)\bigr)
 \end{aligned}`),
-      paragraph([
-        "したがって ", math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " は可逆である。",
-      ]),
+      displayMath(String.raw`\left(V_1^{(+)}\right)^{1/2}\in R^\times
+\qquad\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ (M\to M_{\mathrm{col}},\ g\to \left(V_1^{(+)}\right)^{1/2},\ h\to \exp(-X))\bigr)`),
     ],
     conversion: { status: "added" },
   },
@@ -3800,51 +3847,149 @@ A\!\left(\tilde\theta_\mu\right) = B_1\!\left(\tilde\theta_\mu\right) B_2 B_1\!\
     labels: ["V2_invertible"],
     statement: [
       paragraph([
-        ref("def_transfer_matrix_symbols"),
-        " で定めた ",
-        math(String.raw`V_2`),
-        " は可逆である。すなわち、",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
         ref("def_invertible_elements_of_R"),
         " の ",
-        math(String.raw`R^\times`),
-        " の元である。",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        ref("def_transfer_matrix_symbols"),
+        " で定めた ",
+        math(String.raw`V_2\in R`),
+        " は可逆である。すなわち ",
+        math(String.raw`V_2\in R^\times`),
+        " である。",
       ]),
     ],
     proof: [
       paragraph([
-        ref("matrix_exp_conjugation"),
-        " (3) を ",
-        math(String.raw`iK_2^*H_2\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " に適用すると、",
-        math(String.raw`\exp\!\left(iK_2^*H_2\right)`),
-        " は可逆である。",
-      ]),
-      paragraph([
-        ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`K_2 > 0`),
-        " より ",
-        math(String.raw`s_2 = \sinh 2K_2 > 0`),
-        " なので ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{C}\setminus\{0\}`),
-        " である。",
-        ref("def_invertible_elements_of_R"),
-        " (iv) より",
-      ]),
-      displayMath(String.raw`(2s_2)^{M_{\mathrm{col}}/2}I\in R^\times
-\qquad\bigl(\because\ \blkref{def_invertible_elements_of_R}\text{ (iv)}\bigr)`),
-      paragraph([
+        math(String.raw`Y:=\bigl(i(K_2^*)_{\mathbb{C}}\bigr)H_2\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`(K_2^*)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " による ",
+        math(String.raw`K_2^*\in\mathbb{R}_{>0}`),
+        " の像。",
         ref("V2_exponential_representation"),
-        " の指数表示により",
+        " が ",
+        math(String.raw`\mathbb{R}_{>0}\subset\mathbb{C}`),
+        " と書いて掛けている ",
+        math(String.raw`K_2^*`),
+        " と係数 ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
+        " は、それぞれ ",
+        math(String.raw`(K_2^*)_{\mathbb{C}}`),
+        " と下の ",
+        math(String.raw`a_{\mathbb{C}}`),
+        " である）、",
+        math(String.raw`a:=(2s_2)^{M_{\mathrm{col}}/2}`),
+        " と置く。",
       ]),
-      displayMath(String.raw`V_2=(2s_2)^{M_{\mathrm{col}}/2}I\cdot\exp\!\left(iK_2^*H_2\right)
-\qquad\bigl(\because\ \blkref{V2_exponential_representation}\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+a
+&=(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ \text{の}\ s_2=\sinh 2K_2\bigr)\\
+&\in\mathbb{R}_{>0}
+&&\bigl(\because\ \blkref{def_second_transfer_matrix_prefactor}\bigr)
+\end{aligned}`),
       paragraph([
-        ref("def_invertible_elements_of_R"),
-        " (ii) をこの積へ適用すると、",
-        math(String.raw`V_2\in R^\times`),
-        " である。",
+        "なので ",
+        math(String.raw`a\neq 0`),
+        " であり、",
+        math(String.raw`\mathbb{R}`),
+        " の逆数 ",
+        math(String.raw`a^{-1}\in\mathbb{R}`),
+        " がある（",
+        math(String.raw`\mathbb{R}`),
+        " が現れるのは、",
+        math(String.raw`\sinh`),
+        " が実数の ",
+        math(String.raw`\exp`),
+        " の値で、",
+        math(String.raw`(2\sinh 2K_2)^{M_{\mathrm{col}}/2}`),
+        " が正の実数の平方根の冪だからである）。",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍は係数を ",
+        math(String.raw`\mathbb{C}`),
+        " に取るので、実数 ",
+        math(String.raw`a`),
+        "・",
+        math(String.raw`a^{-1}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`a_{\mathbb{C}}`),
+        "・",
+        math(String.raw`(a^{-1})_{\mathbb{C}}`),
+        " として掛ける。",
+        math(String.raw`h:=(a^{-1})_{\mathbb{C}}\exp(-Y)\in\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        "（",
+        math(String.raw`-Y`),
+        " は ",
+        ref("def_matrix_negation"),
+        "）と置く。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+V_2h
+&=V_2\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&(\because\ h\ \text{の置き方})\\
+&=\Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{V2_exponential_representation}\bigr)\\
+&=\Bigl(a_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)\Bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ a\ \text{の置き方}\ (\text{係数は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ a_{\mathbb{C}})\bigr)\\
+&=\bigl(a_{\mathbb{C}}\exp(Y)\bigr)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)
+&&\bigl(\because\ Y\ \text{の置き方}\ (K_2^*\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_2^*)_{\mathbb{C}})\bigr)\\
+&=a_{\mathbb{C}}\Bigl(\exp(Y)\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&=a_{\mathbb{C}}\Bigl((a^{-1})_{\mathbb{C}}\bigl(\exp(Y)\exp(-Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&=\bigl(a_{\mathbb{C}}(a^{-1})_{\mathbb{C}}\bigr)\bigl(\exp(Y)\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&=(aa^{-1})_{\mathbb{C}}\bigl(\exp(Y)\exp(-Y)\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a\to a,\ b\to a^{-1})\bigr)\\
+&=(1)_{\mathbb{C}}\bigl(\exp(Y)\exp(-Y)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ aa^{-1}=1)\\
+&=1_{\mathbb{C}}\bigl(\exp(Y)\exp(-Y)\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\bigr)\\
+&=\exp(Y)\exp(-Y)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&=\exp(-(-Y))\exp(-Y)
+&&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to Y)\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -Y)\bigr),\\[2mm]
+hV_2
+&=\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)V_2
+&&(\because\ h\ \text{の置き方})\\
+&=\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\left(iK_2^*H_2\right)\Bigr)
+&&\bigl(\because\ \blkref{V2_exponential_representation}\bigr)\\
+&=\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\Bigl(a_{\mathbb{C}}\exp\!\left(iK_2^*H_2\right)\Bigr)
+&&\bigl(\because\ a\ \text{の置き方}\ (\text{係数は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ a_{\mathbb{C}})\bigr)\\
+&=\bigl((a^{-1})_{\mathbb{C}}\exp(-Y)\bigr)\bigl(a_{\mathbb{C}}\exp(Y)\bigr)
+&&\bigl(\because\ Y\ \text{の置き方}\ (K_2^*\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (K_2^*)_{\mathbb{C}})\bigr)\\
+&=(a^{-1})_{\mathbb{C}}\Bigl(\exp(-Y)\bigl(a_{\mathbb{C}}\exp(Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&=(a^{-1})_{\mathbb{C}}\Bigl(a_{\mathbb{C}}\bigl(\exp(-Y)\exp(Y)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&=\bigl((a^{-1})_{\mathbb{C}}a_{\mathbb{C}}\bigr)\bigl(\exp(-Y)\exp(Y)\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&=(a^{-1}a)_{\mathbb{C}}\bigl(\exp(-Y)\exp(Y)\bigr)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a\to a^{-1},\ b\to a)\bigr)\\
+&=(1)_{\mathbb{C}}\bigl(\exp(-Y)\exp(Y)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ a^{-1}a=1)\\
+&=1_{\mathbb{C}}\bigl(\exp(-Y)\exp(Y)\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\ r_{\mathbb{C}}\ \text{の}\ r=1\bigr)\\
+&=\exp(-Y)\exp(Y)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to Y)\bigr)
+\end{aligned}`),
+      displayMath(String.raw`V_2\in R^\times
+\qquad\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ (M\to M_{\mathrm{col}},\ g\to V_2,\ h\to (a^{-1})_{\mathbb{C}}\exp(-Y))\bigr)`),
     ],
     conversion: { status: "added" },
   },
@@ -3885,45 +4030,40 @@ T_{V_2}\!\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)
     labels: ["V_plus_factors_invertible"],
     statement: [
       paragraph([
-        ref("def_V_plus"),
-        " で定めた ",
-        math(String.raw`V^{(+)}`),
-        " は可逆である。すなわち、",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        " とし、",
         ref("def_invertible_elements_of_R"),
         " の ",
-        math(String.raw`R^\times`),
-        " の元である。",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        ref("def_V_plus"),
+        " で定めた ",
+        math(String.raw`V^{(+)}\in R`),
+        " は可逆である。すなわち ",
+        math(String.raw`V^{(+)}\in R^\times`),
+        " である。",
       ]),
     ],
     proof: [
       paragraph([
-        ref("V1_plus_half_invertible"),
-        " と ",
-        ref("V2_invertible"),
-        " により、",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " と ",
-        math(String.raw`V_2`),
-        " は可逆である。",
+        math(String.raw`B:=\left(V_1^{(+)}\right)^{1/2}\in R`),
+        "（",
+        ref("def_V1_plus_square_root"),
+        "）と置く。",
       ]),
-      displayMath(
-        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\in R^\times
-\quad\bigl(\because\ \blkref{V1_plus_half_invertible},\ \blkref{V2_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\bigr),
-\qquad R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
-      paragraph([
-        ref("V1_plus_half_invertible"), "、", ref("V2_invertible"), "、",
-        ref("def_invertible_elements_of_R"), " (ii)。",
-      ]),
-      displayMath(
-        String.raw`\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}
-\in R^\times
-\quad\bigl(\because\ \text{直前の積と }\blkref{V1_plus_half_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\bigr)`,
-      ),
-      paragraph([ref("V1_plus_half_invertible"), "、", ref("def_invertible_elements_of_R"), " (ii)。"]),
-      displayMath(String.raw`V^{(+)}\in R^\times
-\quad\bigl(\because\ \text{直前の所属と }\blkref{def_V_plus}\bigr)`),
-      paragraph([ref("def_V_plus"), "。"]),
+      displayMath(String.raw`BV_2\in R^\times
+\qquad\bigl(\because\ \blkref{V1_plus_half_invertible},\ \blkref{V2_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to B,\ g_2\to V_2)\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+V^{(+)}
+&=(BV_2)B
+&&\bigl(\because\ \blkref{def_V_plus}\bigr)\\
+&\in R^\times
+&&\bigl(\because\ \text{前の式の}\ BV_2\in R^\times,\ \blkref{V1_plus_half_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to BV_2,\ g_2\to B)\bigr)
+\end{aligned}`),
     ],
     conversion: { status: "added" },
   },

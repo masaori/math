@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 346 件のうち、SageMath の検算が無いもの 77 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 346 件のうち、SageMath の検算が無いもの 74 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -168,13 +168,19 @@
   角度の鎖は π を不定元にした有理関数体で、exp と cos・sin の鎖は 1 の冪根と AA で厳密に組んだ。ただしその `QQbar` の比較は 1 の冪根の表し方で自明に成り立つので、周期性・偶奇性・特殊値の行は Arb の cos・sin で、exp と cos・sin を結ぶ行と主張は本文の exp の部分和と尾の上界のボールで確かめた（各 overview に自明な比較を明記）。Ž・Y̌ は Jordan–Wigner 行列を円分体の行列で組んで比べた。
   人手証明を直した: 実数・複素数に像の記号を付け、θ̃ の定義の式から角度の鎖を始め、`cos(2πμ-π) = -1` と `sin(2πμ-π) = 0` を一行に束ねていたのを周期性・偶奇性・特殊値の一行一操作に、`-1_C` までを差の定義・`multiply_by_minus_one`・体の公理の鎖にした。全実数上の cos・sin（`def_sin`・`def_cos` は [-π/2, π/2] だけ）の性質に依ることを三つの主張に書いた。計算の誤りは無かった。Lean の `DefinitionHalfIntegerModes.lean` は旧い証明の形のままで、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `V1_plus_half_invertible`・`V2_invertible`・`V_plus_factors_invertible`（(V_1^{(+)})^{1/2}・V_2・V^{(+)} の可逆性）: `sagemath/check/<ラベル>/`（共通の準備 `sagemath/_shared/transfer_matrix_factor_inverses.sage`）。
+  K_1 = 2 log y・K_2 = log x と選ぶと、iH_1^{(+)}・iH_2 が整数の固有値をもつ整数行列なので exp(±X)・exp(±Y) が固有値の射影の和として `QQ`・`AA` に乗り、V_2 も成分の定義で `QQ` に乗る。三つの証明の全行と主張をこれで厳密に確かめ、本文の部分和の exp のボールの検算を補助に置いた。包含 a_ℂ の行は ℂ を実数の対で持つ `complex_as_real_pairs.sage` で確かめた。
+  人手証明を直した: `V1_plus_half_invertible` の鎖が逆元 `((V_1^{(+)})^{1/2})^{-1}` から始めて可逆性を前提にしていたのを、`def_invertible_elements_of_R` の定義の h = exp(-X) を両側から掛けて I に着く二つの鎖（`exp_of_negative_is_left_inverse`・`matrix_double_negation`）にした。`V2_invertible` は `(2s_2)^{M/2}I·exp(...)` とスカラー倍を単位行列との積に読み替えていたのを、`V_plus_is_invertible` と同じ係数を出す鎖にし、a > 0 を `def_second_transfer_matrix_prefactor` から引いた。`V_plus_factors_invertible` の末尾の参照の一覧を各行の根拠へ移した。K_1・K_2^*・a は `inclusion_rr_to_cc` の像として書いた。計算の誤りは無かった。Lean の `DefinitionVPlus.lean` の `isUnit_V1plusHalf`・`isUnit_V2`・`isUnit_VPlus` は単元を渡すだけの形で、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `V1_plus_half_invertible`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `T_V_plus_is_conjugation`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`V2_invertible` のレビューで見つかった（暗黙の包含）: `def_V1_plus_square_root`・`V2_exponential_representation` は `K_1, K_2^*, s_2 ∈ ℝ_{>0} ⊂ ℂ` と書き、実数を包含の像を書かずに ℂ の係数として掛けている（係数 `(2s_2)^{M_col/2}` も同じ）。この単位では使う側の証明で `(K_1)_ℂ`・`(K_2^*)_ℂ`・`a_ℂ` と読み替える行を置いた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 
 - 2026-11-02、`half_integer_phase_antiperiodicity` の検算で見つかった（表記の揺れと未整備の前提）: 主張を `exp(-i((M_col)_R θ̃_μ)_C) = -1_C` と像の記号付きに直したが、下流の `nesting_of_commutator_of_H_and_check_Z` などは旧い `exp(-iM_col θ̃_μ) = -1` の形で引いている。下流の検算を足すときに表記をそろえる。また全実数上の cos・sin（2π 周期性・偶奇性・cos π・sin π）と Euler の公式は本文に無く、`euler_formula_cos_sin`・`exp_sum`・この単位の三つの主張がそれを前提にしている。直すには、計算公式の章に全実数上の cos・sin の定義とこれらの性質の主張を置く。
 
