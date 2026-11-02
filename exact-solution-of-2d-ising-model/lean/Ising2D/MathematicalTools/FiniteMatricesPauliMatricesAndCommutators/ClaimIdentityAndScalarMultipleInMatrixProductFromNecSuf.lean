@@ -43,4 +43,12 @@ theorem identity_matrix_mul_tensorPow {M : ℕ} (A : TensorPow M) : (1 : TensorP
 theorem mul_identity_matrix_tensorPow {M : ℕ} (A : TensorPow M) : A * (1 : TensorPow M) = A :=
   NecSuf.mul_one_matrix A
 
+/-- `scalar_multiple_factors_out_of_left_factor` の `TensorPow M` での系（`NecSuf.smul_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
+theorem smul_mul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : (a • A) * B = a • (A * B) :=
+  NecSuf.smul_mul_matrix' a A B
+
+/-- `scalar_multiple_factors_out_of_right_factor` の `TensorPow M` での系（`NecSuf.mul_smul_matrix'` の添字 `Conf M` の特殊化）。 -/
+theorem mul_smul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : A * (a • B) = a • (A * B) :=
+  NecSuf.mul_smul_matrix' a A B
+
 end Ising2D

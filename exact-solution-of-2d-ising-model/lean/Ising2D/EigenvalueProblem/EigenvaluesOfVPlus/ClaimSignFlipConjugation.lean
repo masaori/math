@@ -28,6 +28,7 @@ Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj
 `Uflip_conj_H1plus` / `Uflip_conj_S1plus` はその `η = -1` の場合として立てる。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
 
 namespace Ising2D
 
@@ -198,13 +199,15 @@ theorem Uflip_conj_H1 (η : ℂ) : Uflip M * H1 M η * UflipInv M = -(H1 M η) :
   rw [H1, Uflip_conj_sum, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun m _ => ?_
   rw [Uflip_conj_smul, Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z]
-  rw [Matrix.mul_neg, smul_neg]
+  -- 人手 Step 3 の `Y_j(-Z_k) = -(Y_jZ_k)`（`negation_factors_out_of_right_factor`）
+  rw [mul_neg_matrix_tensorPow, smul_neg]
 
 /-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_2 U^{-1} = -H_2`。 -/
 theorem Uflip_conj_H2 : Uflip M * H2 M * UflipInv M = -(H2 M) := by
   rw [H2, Uflip_conj_sum, ← Finset.sum_neg_distrib]
   refine Finset.sum_congr rfl fun m _ => ?_
-  rw [Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z, Matrix.neg_mul]
+  -- 人手 Step 3 の `(-Z_j)Y_j = -(Z_jY_j)`（`negation_factors_out_of_left_factor`）
+  rw [Uflip_conj_mul, Uflip_conj_Y, Uflip_conj_Z, neg_mul_matrix_tensorPow]
 
 /-- 補助: 一般形で `U (i K_1 H1 M η) U^{-1} = -(i K_1 H1 M η)`。 -/
 theorem Uflip_conj_S1 (K1 η : ℂ) :

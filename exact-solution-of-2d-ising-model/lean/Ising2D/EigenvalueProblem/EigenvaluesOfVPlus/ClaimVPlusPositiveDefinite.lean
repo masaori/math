@@ -22,6 +22,7 @@
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 
 namespace Ising2D
 
@@ -174,16 +175,39 @@ theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
       = (a • (Ep * Ap * Ep)) * (a⁻¹ • (Em * Am * Em)) := by
         -- `V^{(+)}` と `R^{(+)}` の表示、`(2s_2)^{-M/2} = a^{-1}`
         rw [VPlus_eq_smul, VPlusInv, rpow_neg_half_M_eq_inv hs2]
-    _ = (a * a⁻¹) • (Ep * Ap * Ep * (Em * Am * Em)) := by
-        -- `scalar_identity_commutes` とスカラー倍の結合法則
-        rw [smul_mul_smul_comm]
-    _ = Ep * Ap * Ep * (Em * Am * Em) := by rw [mul_inv_cancel₀ hane, one_smul]
-    _ = Ep * Ap * (Ep * Em) * Am * Em := by noncomm_ring
-    _ = Ep * Ap * 1 * Am * Em := by rw [hEpEm]
-    _ = Ep * Ap * Am * Em := by rw [mul_one]
-    _ = Ep * (Ap * Am) * Em := by noncomm_ring
-    _ = Ep * 1 * Em := by rw [hApAm]
-    _ = Ep * Em := by rw [mul_one]
+    _ = a • ((Ep * Ap * Ep) * (a⁻¹ • (Em * Am * Em))) := by
+        -- `scalar_multiple_factors_out_of_left_factor`
+        rw [smul_mul_matrix_tensorPow]
+    _ = a • (a⁻¹ • ((Ep * Ap * Ep) * (Em * Am * Em))) := by
+        -- `scalar_multiple_factors_out_of_right_factor`
+        rw [mul_smul_matrix_tensorPow]
+    _ = (a * a⁻¹) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
+        -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
+        rw [smul_smul]
+    _ = (1 : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by rw [mul_inv_cancel₀ hane]
+    _ = (Ep * Ap * Ep) * (Em * Am * Em) := by
+        -- `scalar_multiple_by_one`（Lean の具体版は無く、mathlib の `one_smul`）
+        rw [one_smul]
+    _ = ((Ep * Ap * Ep) * (Em * Am)) * Em := by
+        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+        rw [Matrix.mul_assoc (Ep * Ap * Ep) (Em * Am) Em]
+    _ = ((Ep * Ap) * (Ep * (Em * Am))) * Em := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc (Ep * Ap) Ep (Em * Am)]
+    _ = ((Ep * Ap) * ((Ep * Em) * Am)) * Em := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc Ep Em Am]
+    _ = ((Ep * Ap) * (1 * Am)) * Em := by rw [hEpEm]
+    _ = ((Ep * Ap) * Am) * Em := by
+        -- `identity_matrix_is_left_unit_of_mat_mult` を `A_-` へ適用
+        rw [identity_matrix_mul_tensorPow]
+    _ = (Ep * (Ap * Am)) * Em := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc Ep Ap Am]
+    _ = (Ep * 1) * Em := by rw [hApAm]
+    _ = Ep * Em := by
+        -- `identity_matrix_is_right_unit_of_mat_mult` を `E_+` へ適用
+        rw [mul_identity_matrix_tensorPow]
     _ = 1 := hEpEm
 
 /-- **原文 `V_plus_is_invertible` Step 3**: `VPlusInv` は `V^{(+)}` の左逆。 -/
@@ -201,16 +225,39 @@ theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
       = (a⁻¹ • (Em * Am * Em)) * (a • (Ep * Ap * Ep)) := by
         -- `R^{(+)}` と `V^{(+)}` の表示、`(2s_2)^{-M/2} = a^{-1}`
         rw [VPlus_eq_smul, VPlusInv, rpow_neg_half_M_eq_inv hs2]
-    _ = (a⁻¹ * a) • (Em * Am * Em * (Ep * Ap * Ep)) := by
-        -- `scalar_identity_commutes` とスカラー倍の結合法則
-        rw [smul_mul_smul_comm]
-    _ = Em * Am * Em * (Ep * Ap * Ep) := by rw [inv_mul_cancel₀ hane, one_smul]
-    _ = Em * Am * (Em * Ep) * Ap * Ep := by noncomm_ring
-    _ = Em * Am * 1 * Ap * Ep := by rw [hEmEp]
-    _ = Em * Am * Ap * Ep := by rw [mul_one]
-    _ = Em * (Am * Ap) * Ep := by noncomm_ring
-    _ = Em * 1 * Ep := by rw [hAmAp]
-    _ = Em * Ep := by rw [mul_one]
+    _ = a⁻¹ • ((Em * Am * Em) * (a • (Ep * Ap * Ep))) := by
+        -- `scalar_multiple_factors_out_of_left_factor`
+        rw [smul_mul_matrix_tensorPow]
+    _ = a⁻¹ • (a • ((Em * Am * Em) * (Ep * Ap * Ep))) := by
+        -- `scalar_multiple_factors_out_of_right_factor`
+        rw [mul_smul_matrix_tensorPow]
+    _ = (a⁻¹ * a) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
+        -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
+        rw [smul_smul]
+    _ = (1 : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by rw [inv_mul_cancel₀ hane]
+    _ = (Em * Am * Em) * (Ep * Ap * Ep) := by
+        -- `scalar_multiple_by_one`（Lean の具体版は無く、mathlib の `one_smul`）
+        rw [one_smul]
+    _ = ((Em * Am * Em) * (Ep * Ap)) * Ep := by
+        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+        rw [Matrix.mul_assoc (Em * Am * Em) (Ep * Ap) Ep]
+    _ = ((Em * Am) * (Em * (Ep * Ap))) * Ep := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc (Em * Am) Em (Ep * Ap)]
+    _ = ((Em * Am) * ((Em * Ep) * Ap)) * Ep := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc Em Ep Ap]
+    _ = ((Em * Am) * (1 * Ap)) * Ep := by rw [hEmEp]
+    _ = ((Em * Am) * Ap) * Ep := by
+        -- `identity_matrix_is_left_unit_of_mat_mult` を `A_+` へ適用
+        rw [identity_matrix_mul_tensorPow]
+    _ = (Em * (Am * Ap)) * Ep := by
+        -- `mat_mult_associative`
+        rw [Matrix.mul_assoc Em Am Ap]
+    _ = (Em * 1) * Ep := by rw [hAmAp]
+    _ = Em * Ep := by
+        -- `identity_matrix_is_right_unit_of_mat_mult` を `E_-` へ適用
+        rw [mul_identity_matrix_tensorPow]
     _ = 1 := hEmEp
 
 /-- **原文 `V_plus_inverse_is_positive_definite`**:

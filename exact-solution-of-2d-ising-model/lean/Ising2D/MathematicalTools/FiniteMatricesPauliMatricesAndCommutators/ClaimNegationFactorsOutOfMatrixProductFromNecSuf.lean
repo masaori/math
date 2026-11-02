@@ -4,9 +4,13 @@
 具体版 `ClaimNegationFactorsOutOfMatrixProduct.lean` の主張を、必要十分版 `Ising2D/NecSuf/NegMatrixProduct.lean` の
 係数 `R := ℂ`、添字 `Fin m`・`Fin n`・`Fin p` の特殊化として得る。人手のラベルは
 `negation_factors_out_of_left_factor`・`negation_factors_out_of_right_factor`。
+
+`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。具体版は添字が `Fin m` の行列について述べてあり、
+`Conf M` の行列には当てはまらないためである。
 -/
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProduct
 import Ising2D.NecSuf.NegMatrixProduct
+import Ising2D.Basic
 
 namespace Ising2D
 
@@ -18,6 +22,14 @@ theorem neg_mul_matrix_of_necSuf {m n p : ℕ} (A : Matrix (Fin m) (Fin n) ℂ) 
 /-- `mul_neg_matrix` を `NecSuf.mul_neg_matrix'`（係数 `ℂ`）の特殊化として得る。 -/
 theorem mul_neg_matrix_of_necSuf {m n p : ℕ} (A : Matrix (Fin m) (Fin n) ℂ) (B : Matrix (Fin n) (Fin p) ℂ) :
     A * (-B) = -(A * B) :=
+  NecSuf.mul_neg_matrix' A B
+
+/-- `negation_factors_out_of_left_factor` の `TensorPow M` での系（`NecSuf.neg_mul_matrix'` の添字 `Conf M` の特殊化）。 -/
+theorem neg_mul_matrix_tensorPow {M : ℕ} (A B : TensorPow M) : (-A) * B = -(A * B) :=
+  NecSuf.neg_mul_matrix' A B
+
+/-- `negation_factors_out_of_right_factor` の `TensorPow M` での系（`NecSuf.mul_neg_matrix'` の添字 `Conf M` の特殊化）。 -/
+theorem mul_neg_matrix_tensorPow {M : ℕ} (A B : TensorPow M) : A * (-B) = -(A * B) :=
   NecSuf.mul_neg_matrix' A B
 
 end Ising2D

@@ -1040,6 +1040,12 @@ targets=(
   Ising2D.neg_mul_matrix_apply
   Ising2D.neg_mul_matrix
   Ising2D.neg_mul_matrix_of_necSuf
+  Ising2D.neg_mul_matrix_tensorPow
+  Ising2D.mul_neg_matrix_tensorPow
+  Ising2D.smul_mul_matrix_tensorPow
+  Ising2D.mul_smul_matrix_tensorPow
+  Ising2D.identity_matrix_mul_tensorPow
+  Ising2D.mul_identity_matrix_tensorPow
   Ising2D.mul_neg_matrix_apply
   Ising2D.mul_neg_matrix
   Ising2D.mul_neg_matrix_of_necSuf
@@ -1077,12 +1083,12 @@ targets=(
   Ising2D.NecSuf.sum_zero_matrices
   Ising2D.NecSuf.smul_zero_matrix_apply
   Ising2D.NecSuf.smul_zero_matrix
-  Ising2D.NecSuf.neg_mul_matrix_apply'
-  Ising2D.NecSuf.neg_mul_matrix'
-  Ising2D.NecSuf.mul_neg_matrix_apply'
-  Ising2D.NecSuf.mul_neg_matrix'
-  Ising2D.NecSuf.smul_sub_matrix_apply'
-  Ising2D.NecSuf.smul_sub_matrix'
+  "Ising2D.NecSuf.neg_mul_matrix_apply'"
+  "Ising2D.NecSuf.neg_mul_matrix'"
+  "Ising2D.NecSuf.mul_neg_matrix_apply'"
+  "Ising2D.NecSuf.mul_neg_matrix'"
+  "Ising2D.NecSuf.smul_sub_matrix_apply'"
+  "Ising2D.NecSuf.smul_sub_matrix'"
   Ising2D.eigenvalue_AMat_iff
   Ising2D.isEigenvector_smul_eigen_pos
   Ising2D.isEigenvector_smul_eigen_neg

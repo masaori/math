@@ -726,17 +726,17 @@ U Y_m U^{-1}
 U\left(Y_j Z_k\right)U^{-1}
 &= \left(U Y_j U^{-1}\right)\left(U Z_k U^{-1}\right)
    \quad (\because\ \text{共役は積を保つ}) \\
-&= (+Y_j)(-Z_k)
-   \quad (\because\ \text{Step 2}) \\
-&= -\,Y_j Z_k
-   \quad (\because\ \text{スカラー倍と行列積の両立}), \\
+&= Y_j(-Z_k)
+   \quad (\because\ \text{Step 2 の }UY_jU^{-1}=+\,Y_j\text{ と }UZ_kU^{-1}=-\,Z_k) \\
+&= -\,(Y_j Z_k)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right), \\
 U\left(Z_j Y_j\right)U^{-1}
 &= \left(U Z_j U^{-1}\right)\left(U Y_j U^{-1}\right)
    \quad (\because\ \text{共役は積を保つ}) \\
-&= (-Z_j)(+Y_j)
-   \quad (\because\ \text{Step 2}) \\
-&= -\,Z_j Y_j
-   \quad (\because\ \text{スカラー倍と行列積の両立})
+&= (-Z_j)Y_j
+   \quad (\because\ \text{Step 2 の }UZ_jU^{-1}=-\,Z_j\text{ と }UY_jU^{-1}=+\,Y_j) \\
+&= -\,(Z_j Y_j)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -789,6 +789,7 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 3 の符号を積の外へ出す 2 段を negation_factors_out_of_right_factor・negation_factors_out_of_left_factor へのラベル参照にした。Lean の対応は Ising2D.Uflip_conj_H1・Ising2D.Uflip_conj_H2 の mul_neg_matrix_tensorPow・neg_mul_matrix_tensorPow。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_09_sign_flip_step3_chains.sage（QQ(i) の厳密計算）。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "この U は M の偶奇によらず両方の符号 (±) について働く。M=2,3,4,5,6 と両符号で残差 0 を数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_02_sign_flip_conjugation.sage）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
@@ -2600,31 +2601,47 @@ A_-A_+
         math(String.raw`a>0`),
         " であり、正の実数の冪の指数法則から ",
         math(String.raw`a^{-1}=(2s_2)^{-M_{\mathrm{col}}/2}`),
-        " である。スカラー倍した単位行列は全行列と可換する（",
-        ref("scalar_identity_commutes"),
-        "）ので、結合法則と Step 1 を使って",
+        " である。",
+        math(String.raw`V^{(+)}`),
+        " と ",
+        math(String.raw`R^{(+)}`),
+        " の 3 つの因子の積は、左の 2 つを先に掛けたもの ",
+        math(String.raw`V^{(+)}=a\bigl((E_+A_+)E_+\bigr)`),
+        "、",
+        math(String.raw`R^{(+)}=a^{-1}\bigl((E_-A_-)E_-\bigr)`),
+        " と読む。Step 1 を使って",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}R^{(+)}
-&=(aE_+A_+E_+)(a^{-1}E_-A_-E_-)
+&=(a((E_+A_+)E_+))(a^{-1}((E_-A_-)E_-))
 &&(\because\ V^{(+)}\text{ と }R^{(+)}\text{ の表示})\\
-&=aa^{-1}E_+A_+E_+E_-A_-E_-
-&&\left(\because\ \blkref{scalar_identity_commutes}\ \text{とスカラー倍の結合法則}\right)\\
-&=E_+A_+E_+E_-A_-E_-
-&&(\because\ aa^{-1}=1)\\
-&=E_+A_+(E_+E_-)A_-E_-
-&&(\because\ \text{行列積の結合法則})\\
-&=E_+A_+IA_-E_-
+&=a\bigl(((E_+A_+)E_+)(a^{-1}((E_-A_-)E_-))\bigr)
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right)\\
+&=a\bigl(a^{-1}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)\bigr)
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right)\\
+&=(aa^{-1})\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
+&&\left(\because\ \blkref{scalar_multiple_is_associative}\right)\\
+&=1_{\mathbb{C}}\bigl(((E_+A_+)E_+)((E_-A_-)E_-)\bigr)
+&&(\because\ aa^{-1}=1_{\mathbb{C}})\\
+&=((E_+A_+)E_+)((E_-A_-)E_-)
+&&\left(\because\ \blkref{scalar_multiple_by_one}\right)\\
+&=\bigl(((E_+A_+)E_+)(E_-A_-)\bigr)E_-
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_+A_+)(E_+(E_-A_-))\bigr)E_-
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_+A_+)((E_+E_-)A_-)\bigr)E_-
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_+A_+)(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}A_-)\bigr)E_-
 &&(\because\ \text{Step 1 の第一の左右逆})\\
-&=E_+A_+A_-E_-
-&&(\because\ \text{単位行列})\\
-&=E_+(A_+A_-)E_-
-&&(\because\ \text{行列積の結合法則})\\
-&=E_+IE_-
+&=\bigl((E_+A_+)A_-\bigr)E_-
+&&\left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を }A_-\text{ へ適用}\right)\\
+&=\bigl(E_+(A_+A_-)\bigr)E_-
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=(E_+I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})})E_-
 &&(\because\ \text{Step 1 の第三の左右逆})\\
 &=E_+E_-
-&&(\because\ \text{単位行列})\\
+&&\left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を }E_+\text{ へ適用}\right)\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&(\because\ \text{Step 1 の第一の左右逆}).
 \end{aligned}`,
@@ -2633,24 +2650,34 @@ V^{(+)}R^{(+)}
       displayMath(
         String.raw`\begin{aligned}
 R^{(+)}V^{(+)}
-&=(a^{-1}E_-A_-E_-)(aE_+A_+E_+)
+&=(a^{-1}((E_-A_-)E_-))(a((E_+A_+)E_+))
 &&(\because\ R^{(+)}\text{ と }V^{(+)}\text{ の表示})\\
-&=a^{-1}aE_-A_-E_-E_+A_+E_+
-&&\left(\because\ \blkref{scalar_identity_commutes}\ \text{とスカラー倍の結合法則}\right)\\
-&=E_-A_-E_-E_+A_+E_+
-&&(\because\ a^{-1}a=1)\\
-&=E_-A_-(E_-E_+)A_+E_+
-&&(\because\ \text{行列積の結合法則})\\
-&=E_-A_-IA_+E_+
+&=a^{-1}\bigl(((E_-A_-)E_-)(a((E_+A_+)E_+))\bigr)
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right)\\
+&=a^{-1}\bigl(a\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)\bigr)
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right)\\
+&=(a^{-1}a)\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
+&&\left(\because\ \blkref{scalar_multiple_is_associative}\right)\\
+&=1_{\mathbb{C}}\bigl(((E_-A_-)E_-)((E_+A_+)E_+)\bigr)
+&&(\because\ a^{-1}a=1_{\mathbb{C}})\\
+&=((E_-A_-)E_-)((E_+A_+)E_+)
+&&\left(\because\ \blkref{scalar_multiple_by_one}\right)\\
+&=\bigl(((E_-A_-)E_-)(E_+A_+)\bigr)E_+
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_-A_-)(E_-(E_+A_+))\bigr)E_+
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_-A_-)((E_-E_+)A_+)\bigr)E_+
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=\bigl((E_-A_-)(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}A_+)\bigr)E_+
 &&(\because\ \text{Step 1 の第二の左右逆})\\
-&=E_-A_-A_+E_+
-&&(\because\ \text{単位行列})\\
-&=E_-(A_-A_+)E_+
-&&(\because\ \text{行列積の結合法則})\\
-&=E_-IE_+
+&=\bigl((E_-A_-)A_+\bigr)E_+
+&&\left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を }A_+\text{ へ適用}\right)\\
+&=\bigl(E_-(A_-A_+)\bigr)E_+
+&&\left(\because\ \blkref{mat_mult_associative}\right)\\
+&=(E_-I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})})E_+
 &&(\because\ \text{Step 1 の第四の左右逆})\\
 &=E_-E_+
-&&(\because\ \text{単位行列})\\
+&&\left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を }E_-\text{ へ適用}\right)\\
 &=I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}
 &&(\because\ \text{Step 1 の第二の左右逆}).
 \end{aligned}`,
@@ -2666,6 +2693,7 @@ R^{(+)}V^{(+)}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 2・Step 3 の鎖の積に括弧を全て書き、スカラー倍・結合律・単位行列の段をそれぞれ 1 行 1 主張のラベル参照にした。Lean の Ising2D.VPlus_mul_VPlusInv・Ising2D.VPlusInv_mul_VPlus は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_10_V_plus_inverse_chains.sage（QQ の厳密計算）。",
         "旧 V_plus_is_positive_definite の Step 4 前半を、左右の積をそれぞれ省略せず計算する独立した主張へ分けた。Lean の対応定理は Ising2D.VPlus_mul_VPlusInv と Ising2D.VPlusInv_mul_VPlus。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_07_V_plus_mul_inverse.sage と check_08_inverse_mul_V_plus.sage。候補逆行列を因子の逆順積から構成し、左右の積を別ファイルで I と比較する。",
       ],

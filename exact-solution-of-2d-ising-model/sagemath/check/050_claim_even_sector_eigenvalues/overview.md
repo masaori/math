@@ -96,6 +96,8 @@ U        := E F,  E = Π_{m 奇数} σ_m^x,  F = Π_{m=1}^{M} σ_m^z
 | 06 | check_06_eigenvalues_V_plus.sage | `eigenvalues_of_V_plus` / `max_eigenvalue_of_V_plus_simple`。`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、**`V^{(+)}` の `2^M` 個の固有値全体が `{Λ̌_ε}` に相対誤差 1e-8 以下で一致**、`Λ̌_max = Λ^{(1/2)}_M`、`γ(θ~_μ) > 0`、**最大固有値の単純性**。対照として `Λ^{(0)}_M`（整数運動量）とは一致しないこと | PASS | 固有値一致の相対差 ≤ 9.0e-12、`Λ̌_max = Λ^{(1/2)}_M` の相対差 `0.0`、`min γ = 5.4e-1`、単純性の相対差 ≥ 4.17e-1 |
 | 07 | check_07_V_plus_mul_inverse.sage | `V_plus_is_invertible` の右逆検査。本文と同じ明示式で作った `R^{(+)}` について `V^{(+)}R^{(+)} = I` | PASS | 相対残差 ≤ 1.889e-11 |
 | 08 | check_08_inverse_mul_V_plus.sage | `V_plus_is_invertible` の左逆検査。本文と同じ明示式で作った `R^{(+)}` について `R^{(+)}V^{(+)} = I` | PASS | 相対残差 ≤ 2.197e-11 |
+| 09 | check_09_sign_flip_step3_chains.sage | `sign_flip_conjugation` の Step 3 の二つの鎖（`U(Y_jZ_k)U^{-1} = Y_j(-Z_k) = -(Y_jZ_k)`、`U(Z_jY_j)U^{-1} = (-Z_j)Y_j = -(Z_jY_j)`）を一行ずつ。`QQ(i)` の厳密計算、`M = 2,3,4` の全ての `j, k`、符号反転は `def_matrix_negation` のとおり成分ごと。否定コントロール 1 件 | PASS | 114 段、全段で厳密に一致 |
+| 10 | check_10_V_plus_inverse_chains.sage | `V_plus_is_invertible` の Step 2・Step 3 の鎖の 2 行目以降を一行ずつ（1 行目の表示は check_07・check_08 が覆う）。`E_±, A_±` の代わりに `QQ` 上の可逆行列と逆行列を置き（各段は Step 1 の左右逆だけを使う）、スカラー倍の 5 段・結合律・左右逆・単位行列を左右から掛ける段を本文と同じ括弧で確かめる。否定コントロール 1 件 | PASS | 252 段、全段で厳密に一致 |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論
