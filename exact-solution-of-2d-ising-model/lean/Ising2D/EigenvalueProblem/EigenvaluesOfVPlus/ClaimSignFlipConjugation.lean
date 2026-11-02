@@ -25,10 +25,13 @@
 （`(−)` セクターは参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。
 Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj_H1` / `Uflip_conj_S1` を補助として残し
 （整数運動量の経路の形式化の記録と章 017 が使う）、人手の主張に対応する `(+)` の定理
-`Uflip_conj_H1plus` / `Uflip_conj_S1plus` はその `η = -1` の場合として立てる。
+`Uflip_conj_H1plus` はその `η = -1` の場合として立て、`Uflip_conj_S1plus` は人手 Step 4 の鎖の行どおりに `Uflip_conj_H1plus` から示す。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfNegatedMatrixFromNecSuf
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 
 namespace Ising2D
 
@@ -83,18 +86,30 @@ theorem UflipInv_mul : UflipInv M * Uflip M = 1 := by
 
 /-! ## 共役写像の性質 -/
 
-/-- 共役 `X ↦ U X U^{-1}` は積を保つ（原文 Step 2 の「共役は ℂ 線型で積を保つ」）。 -/
+/-- 人手 Step 0 の可逆性から作る、`U` を可逆元とする `TensorPow M` の単元（`↑· = U`、`↑·⁻¹ = U^{-1}`）。 -/
+noncomputable def UflipUnit (M : ℕ) : (TensorPow M)ˣ :=
+  ⟨Uflip M, UflipInv M, Uflip_mul_inv, UflipInv_mul⟩
+
+/-- 人手 Step 3 の 3 行: 共役 `X ↦ U X U^{-1}` は積を保つ。
+`U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性 `Conjugation.T_mul`）
+`= (UAU^{-1})(UBU^{-1})`（`T_B` の定義）。Lean の `U * X * U⁻¹` は人手の読み `(UX)U^{-1}` と同じ括弧である。 -/
 theorem Uflip_conj_mul (A B : TensorPow M) :
     Uflip M * (A * B) * UflipInv M
-      = (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M) := by
-  have h : (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M)
-      = Uflip M * A * (UflipInv M * Uflip M) * B * UflipInv M := by noncomm_ring
-  rw [h, UflipInv_mul]
-  noncomm_ring
+      = (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M) :=
+  calc Uflip M * (A * B) * UflipInv M
+      = Conjugation.T (UflipUnit M) (A * B) := rfl                           -- `T_B` の定義（`B = U`）
+    _ = Conjugation.T (UflipUnit M) A * Conjugation.T (UflipUnit M) B :=
+        Conjugation.T_mul _ _ _                                              -- 乗法性
+    _ = (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M) := rfl       -- `T_B` の定義（`B = U`）
 
+/-- 人手 Step 4 の 2 行: `(U(cA))U^{-1} = (c(UA))U^{-1} = c((UA)U^{-1})`。 -/
 theorem Uflip_conj_smul (c : ℂ) (A : TensorPow M) :
-    Uflip M * (c • A) * UflipInv M = c • (Uflip M * A * UflipInv M) := by
-  rw [Matrix.mul_smul, Matrix.smul_mul]
+    Uflip M * (c • A) * UflipInv M = c • (Uflip M * A * UflipInv M) :=
+  calc Uflip M * (c • A) * UflipInv M
+      = (c • (Uflip M * A)) * UflipInv M := by
+        rw [mul_smul_matrix_tensorPow]                                       -- `scalar_multiple_factors_out_of_right_factor`
+    _ = c • (Uflip M * A * UflipInv M) :=
+        smul_mul_matrix_tensorPow _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
 
 theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
     Uflip M * (∑ i ∈ s, f i) * UflipInv M = ∑ i ∈ s, Uflip M * f i * UflipInv M := by
@@ -214,21 +229,33 @@ theorem Uflip_conj_S1 (K1 η : ℂ) :
     Uflip M * ((Complex.I * K1) • H1 M η) * UflipInv M = -((Complex.I * K1) • H1 M η) := by
   rw [Uflip_conj_smul, Uflip_conj_H1, smul_neg]
 
-/-- **人手本文 `sign_flip_conjugation`**: `U S_2 U^{-1} = -S_2`（`S_2 = i K_2^* H_2`）。 -/
+/-- **人手本文 `sign_flip_conjugation`（Step 4）**: `U S_2 U^{-1} = -S_2`（`S_2 = i K_2^* H_2`）。人手の鎖の 6 行と 1 対 1（両端の「`S_2` の定義」の行は Lean では主張の式そのもの）。 -/
 theorem Uflip_conj_S2 (K2star : ℂ) :
     Uflip M * ((Complex.I * K2star) • H2 M) * UflipInv M
-      = -((Complex.I * K2star) • H2 M) := by
-  rw [Uflip_conj_smul, Uflip_conj_H2, smul_neg]
+      = -((Complex.I * K2star) • H2 M) :=
+  calc Uflip M * ((Complex.I * K2star) • H2 M) * UflipInv M
+      = ((Complex.I * K2star) • (Uflip M * H2 M)) * UflipInv M := by
+        rw [mul_smul_matrix_tensorPow]                                       -- `scalar_multiple_factors_out_of_right_factor`
+    _ = (Complex.I * K2star) • (Uflip M * H2 M * UflipInv M) :=
+        smul_mul_matrix_tensorPow _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (Complex.I * K2star) • (-(H2 M)) := by rw [Uflip_conj_H2]            -- Step 3
+    _ = -((Complex.I * K2star) • H2 M) := smul_neg_matrix_tensorPow _ _      -- `scalar_multiple_of_negated_matrix`
 
 /-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_1^{(+)} U^{-1} = -H_1^{(+)}`。 -/
 theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) :=
   Uflip_conj_H1 (-1)
 
 /-- **人手本文 `sign_flip_conjugation`（Step 4）**: `U S_1^{(+)} U^{-1} = -S_1^{(+)}`
-（`S_1^{(+)} = i K_1 H_1^{(+)}`）。 -/
+（`S_1^{(+)} = i K_1 H_1^{(+)}`）。人手の鎖の 6 行と 1 対 1（両端の「`S_1^{(+)}` の定義」の行は Lean では主張の式そのもの）。 -/
 theorem Uflip_conj_S1plus (K1 : ℂ) :
     Uflip M * ((Complex.I * K1) • H1plus M) * UflipInv M = -((Complex.I * K1) • H1plus M) :=
-  Uflip_conj_S1 K1 (-1)
+  calc Uflip M * ((Complex.I * K1) • H1plus M) * UflipInv M
+      = ((Complex.I * K1) • (Uflip M * H1plus M)) * UflipInv M := by
+        rw [mul_smul_matrix_tensorPow]                                       -- `scalar_multiple_factors_out_of_right_factor`
+    _ = (Complex.I * K1) • (Uflip M * H1plus M * UflipInv M) :=
+        smul_mul_matrix_tensorPow _ _ _                                      -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (Complex.I * K1) • (-(H1plus M)) := by rw [Uflip_conj_H1plus]        -- Step 3
+    _ = -((Complex.I * K1) • H1plus M) := smul_neg_matrix_tensorPow _ _      -- `scalar_multiple_of_negated_matrix`
 
 /-! ## 指数関数への作用（人手本文 `constant_c_value_even_sector` Step 2） -/
 

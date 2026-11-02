@@ -991,6 +991,68 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_scalar_multiple_of_negated_matrix",
+    kind: "claim",
+    title: { text: "符号反転した行列のスカラー倍はスカラー倍の符号反転に等しい" },
+    labels: ["scalar_multiple_of_negated_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`a(-A) = -(aA)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(a(-A)\bigr)_{ij}
+&= a\,(-A)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= a\,(-A_{ij})
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= a\,\bigl((-1_{\mathbb{C}})\,A_{ij}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl(a\,(-1_{\mathbb{C}})\bigr)\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl((-1_{\mathbb{C}})\,a\bigr)\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-1_{\mathbb{C}})\,(a\,A_{ij})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= -(a\,A_{ij})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= -(aA)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= \bigl(-(aA)\bigr)_{ij}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 4 が「共役はスカラー倍を保つ」と名前だけで根拠にしていた鎖を一ステップ一定理に割ると、" +
+          "iK_1(−H_1^{(+)}) = −(iK_1H_1^{(+)}) の段が要るので足した。−A は def_matrix_negation の成分ごとの符号反転であって (−1)A ではないので、スカラー倍の結合律の特殊化としてではなく、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_difference",
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },

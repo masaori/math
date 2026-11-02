@@ -24,6 +24,7 @@
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）
+  - `sign_flip_conjugation`（Step 3・Step 4 の鎖。check_09・check_11）
 
 ### 何を確定させるための検証か
 
@@ -98,6 +99,7 @@ U        := E F,  E = Π_{m 奇数} σ_m^x,  F = Π_{m=1}^{M} σ_m^z
 | 08 | check_08_inverse_mul_V_plus.sage | `V_plus_is_invertible` の左逆検査。本文と同じ明示式で作った `R^{(+)}` について `R^{(+)}V^{(+)} = I` | PASS | 相対残差 ≤ 2.197e-11 |
 | 09 | check_09_sign_flip_step3_chains.sage | `sign_flip_conjugation` の Step 3 の二つの鎖（`U(Y_jZ_k)U^{-1} = Y_j(-Z_k) = -(Y_jZ_k)`、`U(Z_jY_j)U^{-1} = (-Z_j)Y_j = -(Z_jY_j)`）を一行ずつ。`QQ(i)` の厳密計算、`M = 2,3,4` の全ての `j, k`、符号反転は `def_matrix_negation` のとおり成分ごと。否定コントロール 1 件 | PASS | 114 段、全段で厳密に一致 |
 | 10 | check_10_V_plus_inverse_chains.sage | `V_plus_is_invertible` の Step 2・Step 3 の鎖の 2 行目以降を一行ずつ（1 行目の表示は check_07・check_08 が覆う）。`E_±, A_±` の代わりに `QQ` 上の可逆行列と逆行列を置き（各段は Step 1 の左右逆だけを使う）、スカラー倍の 5 段・結合律・左右逆・単位行列を左右から掛ける段を本文と同じ括弧で確かめる。否定コントロール 1 件 | PASS | 252 段、全段で厳密に一致 |
+| 11 | check_11_sign_flip_step3_step4_conjugation_chains.sage | `sign_flip_conjugation` の Step 3 の「`conjugation_is_ring_homomorphism` の `T_B` の定義 → 乗法性 → `T_B` の定義」の三行（二つの鎖とも）と、Step 4 の二つの六行の鎖（`S` の定義・`scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor`・Step 3・`scalar_multiple_of_negated_matrix`・`S` の定義）を一行ずつ。`QQ(i)` の厳密計算、`M = 2,3,4`、`UXU^{-1}` は本文どおり `(UX)U^{-1}`、`K_1, K_2^*` は正の有理数の代表値、符号反転とスカラー倍は成分ごと。否定コントロール 1 件 | PASS | 150 段、全段で厳密に一致 |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論

@@ -354,6 +354,7 @@ export const ALL_LABELS = [
   "scalar_multiple_factors_out_of_left_factor",
   "scalar_multiple_factors_out_of_right_factor",
   "scalar_multiple_is_associative",
+  "scalar_multiple_of_negated_matrix",
   "scalar_multiple_of_zero_matrix",
   "second_derivative_log_divergence",
   "second_dual_coupling_relation",

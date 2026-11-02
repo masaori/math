@@ -566,6 +566,11 @@
     `VPlus_mul_VPlusInv`・`VPlusInv_mul_VPlus` を人手の各行と 1 対 1 の `calc` にした（系 `smul_mul_matrix_tensorPow`・`mul_smul_matrix_tensorPow` を足した。`mat_mult_associative`・`scalar_multiple_is_associative`・`scalar_multiple_by_one` は Lean の具体版が無いので mathlib の `Matrix.mul_assoc`（引数を明示して 1 回ずつ）・`smul_smul`・`one_smul` のまま）。
     SageMath `050_claim_even_sector_eigenvalues/check_09_sign_flip_step3_chains.sage`（`QQ(i)`、114 段）・`check_10_V_plus_inverse_chains.sage`（`QQ`、252 段）を足した（全 PASS）。
     `check-no-sorry.sh` が四十三個目で足した `'` を含む 6 つの名前を引用符なしで置いていて `lake env lean` が落ちていた（終了コード 1）ので、`"…"` で囲んで直した。再レビューで必須の指摘は無くなった。
+  - ゴールラインの確認の四十五個目（済み、2026-11-02）: `eigenvalue_problem_eigenvalues_of_V_plus.ts` の `sign_flip_conjugation` の Step 3 の「共役は積を保つ」2 か所と Step 4 の「`S` の定義かつ共役はスカラー倍を保つ」2 か所を扱った（係数は `ℂ`）。
+    Step 3 は `conjugation_is_ring_homomorphism` を `n = 2^{M_col}`、`B = U`（Step 0 で可逆）として、`T_B` の定義・乗法性・`T_B` の定義の 3 行にし、`UXU^{-1}` を `(UX)U^{-1}` と読むことを Step 3 の冒頭に書いた。
+    Step 4 は `S` の定義・`scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor`・Step 3・`scalar_multiple_of_negated_matrix`・`S` の定義の 6 行にした。`a(−H) = −(aH)` を引ける主張が無かったので、主張 `scalar_multiple_of_negated_matrix`（`a(−A)=−(aA)`、成分の鎖）を `002_linear_space_general.ts` に足した（SageMath `sagemath/check/scalar_multiple_of_negated_matrix/`、Lean の具体版 `smul_neg_matrix`（`ClaimScalarMultipleOfNegatedMatrix.lean`）、必要十分版 `NecSuf/SmulNegMatrix.lean`（係数は `Monoid` と `HasDistribNeg`。鎖に和が無いので加法は効かない）、系 `smul_neg_matrix_tensorPow`）。主張は変えていない。
+    Lean は `UflipUnit`（`U` を可逆元とする単元）を置き、`Uflip_conj_mul` を `noncomm_ring` から `Conjugation.T_mul` の特殊化に、`Uflip_conj_smul` を `mul_smul_matrix_tensorPow`・`smul_mul_matrix_tensorPow` に、`Uflip_conj_S1plus`・`Uflip_conj_S2` を人手の行と 1 対 1 の `calc` にした。
+    SageMath `050_claim_even_sector_eigenvalues/check_11_sign_flip_step3_step4_conjugation_chains.sage`（`QQ(i)`、150 段）を足した（全 PASS）。レビューで必須の指摘は無かった（任意の指摘のうち 2 件は下の次の一歩に残した）。
 
 ## 次の一歩
 
@@ -592,7 +597,7 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - Lean の `TensorPow M` は行列の添字を `Conf M`（`Fin M → Fin 2`）に取り、人手の `Mat(2^{M_col},ℂ)` の添字 `1, …, 2^{M_col}` と型が違う。このため単位行列・差の段では、添字が `Fin m` の具体版ではなく、必要十分版を `Conf M` へ特殊化した系（`identity_matrix_mul_tensorPow` ほか、`scalar_identity_commutes_tensorPow`）を使っている（三十八個目のレビューの任意の指摘）。上の「有限和の添字の付け方」の件と合わせて、人手が多重添字の集合 `𝓘` で行列を添字づけるのか、Lean が `Conf M` と `Fin (2^M)` の間の写像に名前を付けるのかを判断する。
 
 - `eigenvalue_problem_eigenvalues_of_V_plus.ts` に残る名前だけの根拠（四十四個目のレビュー）。`sign_flip_conjugation` Step 0 の `σσ = I`（`I` に添字が無い）、Step 1 の「パウリ行列の積」の各行（反交換と符号の外出し、`σσ = I` と右単位元が 1 行に混ざる）、
-  Step 1 の `E(-σ_k^x)E^{-1} = -σ_k^x`・`-Eσ_k^yE^{-1}` の行（代入と符号の外出しが 1 行）、Step 3 の「共役は積を保つ」と「共役の ℂ 線型性」、Step 4 の「共役はスカラー倍を保つ」（Lean は mathlib の `smul_neg`）、Step 2・Step 3 の単項の `+`。
+  Step 1 の `E(-σ_k^x)E^{-1} = -σ_k^x`・`-Eσ_k^yE^{-1}` の行（代入と符号の外出しが 1 行）、Step 3 の「共役の ℂ 線型性」（`H_1^{(+)}`・`H_2` の有限和への適用。`linearity_of_T` は 2 項の線型結合しか述べない）、Step 2・Step 3 の単項の `+`。Step 3 の直前の段落「以下、共役が ℂ 線型で積を保つこと（…）を繰り返し使う」は、積を保つことが四十五個目でラベル参照になったので、線型性を扱うときに整理する（四十五個目のレビューの任意の指摘）。`conjugation_is_ring_homomorphism` 自身が `T_B(A) = BAB^{-1}` の括弧の読みを宣言しておらず、証明の 1 段目も括弧を外している（Lean の `Conjugation.T` は `(BA)B^{-1}`。同じレビューの任意の指摘）。
   ほかのブロックの「結合法則」（`Λ̌` の固有値の章の 1016・1027・1148・1179〜1187・2012・2083・2151・3329 行付近）、「単位行列との積」（1547・1563・1576・1666・1724・1833 行付近）、「スカラー倍」（287・299・357・2016〜2020・2087〜2091 行付近）。
   `V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` は実数で、引く主張は係数を `ℂ` に取るが、`a` を `ℂ` の元として使うことを本文に書いていない（記号の帰属）。
 - 人手 `mat_mult_associative`・`scalar_multiple_is_associative`・`scalar_multiple_by_one` に Lean の具体版が無い。`VPlus_mul_VPlusInv` ほかが mathlib の `Matrix.mul_assoc`・`smul_smul`・`one_smul` で閉じている。具体版（と `TensorPow M` の系）を置くかを決める。

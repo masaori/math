@@ -89,6 +89,7 @@
 | `Vmat` / `Vmat_posDef` / `trace_Vmat_pos` | `V` の定義・正定値性・`tr(V) > 0` | `V_is_positive_definite` |
 | `Uflip` / `UflipInv` / `Uflip_mul_inv` / `UflipInv_mul` | 符号反転共役 `U = EF` と可逆性 | `sign_flip_conjugation` Step 0 |
 | `Uflip_conj_sigmaX/Y/Z` | `U σ^a_k U^{-1}` の符号 | 同 Step 1 |
+| `UflipUnit` / `Uflip_conj_mul` / `Uflip_conj_smul` | `U` を可逆元とする単元、共役は積を保つ（`Conjugation.T_mul` の特殊化）、`(U(cA))U^{-1} = c((UA)U^{-1})` | 同 Step 3 の `conjugation_is_ring_homomorphism` の 3 行、Step 4 の `scalar_multiple_factors_out_of_right_factor`・`..._left_factor` の 2 行 |
 | `Uflip_conj_Z` / `Uflip_conj_Y` | `U Z_m U^{-1} = -Z_m`, `U Y_m U^{-1} = Y_m` | 同（原文には無い中間段階） |
 | `Uflip_conj_H1plus` / `Uflip_conj_H2` / `Uflip_conj_S1plus` / `Uflip_conj_S2` | `U H U^{-1} = -H`, `U S U^{-1} = -S`（`H = H_1^{(+)}, H_2`。`Uflip_conj_H1` / `Uflip_conj_S1` は補助の一般形） | `sign_flip_conjugation` |
 | `Uflip_conj_pow` / `Uflip_conj_expPartialSum` | `US^kU^{-1} = (USU^{-1})^k`、部分和の共役 `U s_n(S) U^{-1} = s_n(USU^{-1})` | `constant_c_value` Step 2 |

@@ -719,20 +719,40 @@ U Y_m U^{-1}
         math(String.raw`1`),
         " または ",
         math(String.raw`-1`),
-        " の有限和である。Step 2 より各項について",
+        " の有限和である。",
+        math(String.raw`U`),
+        " は Step 0 より可逆なので、",
+        ref("conjugation_is_ring_homomorphism"),
+        " を ",
+        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`B = U`),
+        " として使える。以下、",
+        math(String.raw`UXU^{-1}`),
+        " は ",
+        math(String.raw`(UX)U^{-1}`),
+        " と読む。Step 2 より各項について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U\left(Y_j Z_k\right)U^{-1}
+&= T_U\left(Y_j Z_k\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= T_U(Y_j)\,T_U(Z_k)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
 &= \left(U Y_j U^{-1}\right)\left(U Z_k U^{-1}\right)
-   \quad (\because\ \text{共役は積を保つ}) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
 &= Y_j(-Z_k)
    \quad (\because\ \text{Step 2 の }UY_jU^{-1}=+\,Y_j\text{ と }UZ_kU^{-1}=-\,Z_k) \\
 &= -\,(Y_j Z_k)
    \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right), \\
 U\left(Z_j Y_j\right)U^{-1}
+&= T_U\left(Z_j Y_j\right)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+&= T_U(Z_j)\,T_U(Y_j)
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
 &= \left(U Z_j U^{-1}\right)\left(U Y_j U^{-1}\right)
-   \quad (\because\ \text{共役は積を保つ}) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
 &= (-Z_j)Y_j
    \quad (\because\ \text{Step 2 の }UZ_jU^{-1}=-\,Z_j\text{ と }UY_jU^{-1}=+\,Y_j) \\
 &= -\,(Z_j Y_j)
@@ -755,24 +775,40 @@ U H_2 U^{-1} = -\,H_2`,
         math(String.raw`S_1^{(+)} = iK_1H_1^{(+)}`),
         "、",
         math(String.raw`S_2 = iK_2^*H_2`),
-        " であり、スカラー倍は共役と可換なので Step 3 から",
+        "（",
+        ref("iH_is_real_symmetric"),
+        "）である。",
+        math(String.raw`iK_1, iK_2^* \in \mathbb{C}`),
+        " はスカラーである。Step 3 から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U S_1^{(+)} U^{-1}
-&= iK_1\,U H_1^{(+)} U^{-1}
-   \quad (\because\ S_1^{(+)}=iK_1H_1^{(+)}\ \text{かつ共役はスカラー倍を保つ}) \\
-&= -iK_1H_1^{(+)}
-   \quad (\because\ \text{Step 3}) \\
+&= \bigl(U\,(iK_1H_1^{(+)})\bigr)U^{-1}
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=iK_1H_1^{(+)}\right) \\
+&= \bigl((iK_1)(UH_1^{(+)})\bigr)U^{-1}
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right) \\
+&= (iK_1)\bigl((UH_1^{(+)})U^{-1}\bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right) \\
+&= (iK_1)\bigl(-H_1^{(+)}\bigr)
+   \quad (\because\ \text{Step 3 の }UH_1^{(+)}U^{-1}=-H_1^{(+)}) \\
+&= -\bigl((iK_1)H_1^{(+)}\bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_of_negated_matrix}\right) \\
 &= -\,S_1^{(+)}
-   \quad (\because\ S_1^{(+)}=iK_1H_1^{(+)}), \\
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=iK_1H_1^{(+)}\right), \\
 U S_2 U^{-1}
-&= iK_2^*\,U H_2 U^{-1}
-   \quad (\because\ S_2=iK_2^*H_2\ \text{かつ共役はスカラー倍を保つ}) \\
-&= -iK_2^*H_2
-   \quad (\because\ \text{Step 3}) \\
+&= \bigl(U\,(iK_2^*H_2)\bigr)U^{-1}
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=iK_2^*H_2\right) \\
+&= \bigl((iK_2^*)(UH_2)\bigr)U^{-1}
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right) \\
+&= (iK_2^*)\bigl((UH_2)U^{-1}\bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right) \\
+&= (iK_2^*)\bigl(-H_2\bigr)
+   \quad (\because\ \text{Step 3 の }UH_2U^{-1}=-H_2) \\
+&= -\bigl((iK_2^*)H_2\bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_of_negated_matrix}\right) \\
 &= -\,S_2
-   \quad (\because\ S_2=iK_2^*H_2)
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=iK_2^*H_2\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -789,6 +825,7 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 3 の「共役は積を保つ」2 か所を conjugation_is_ring_homomorphism の T_B の定義と乗法性の 3 行に、Step 4 の「S の定義かつ共役はスカラー倍を保つ」2 か所を S の定義・scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor・Step 3・scalar_multiple_of_negated_matrix・S の定義の 6 行に割った。UXU^{-1} を (UX)U^{-1} と読むことを Step 3 に書いた。Lean の対応は Ising2D.Uflip_conj_mul（Conjugation.T_mul の特殊化）・Ising2D.Uflip_conj_S1plus・Ising2D.Uflip_conj_S2。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_11_sign_flip_step3_step4_conjugation_chains.sage。",
         "2026-11-02: Step 3 の符号を積の外へ出す 2 段を negation_factors_out_of_right_factor・negation_factors_out_of_left_factor へのラベル参照にした。Lean の対応は Ising2D.Uflip_conj_H1・Ising2D.Uflip_conj_H2 の mul_neg_matrix_tensorPow・neg_mul_matrix_tensorPow。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_09_sign_flip_step3_chains.sage（QQ(i) の厳密計算）。",
         "抽象テンソル積の記法を廃した（README のゴール設定 2 節）。Mat(2,C)^{⊗M}（抽象テンソル冪）を具体的な行列空間 Mat(2^M,C) へ置き換えた。主張・証明の内容と段階構造・ラベルは変えていない。",
         "この U は M の偶奇によらず両方の符号 (±) について働く。M=2,3,4,5,6 と両符号で残差 0 を数値確認した（sagemath/check/042_claim_constant_c_and_eigenvalues_of_V/check_02_sign_flip_conjugation.sage）。",
