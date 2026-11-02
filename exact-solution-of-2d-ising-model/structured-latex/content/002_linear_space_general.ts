@@ -991,6 +991,193 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_sum_of_complex_sums",
+    kind: "claim",
+    title: { text: "複素数の和の有限和は有限和の和" },
+    labels: ["finite_sum_of_complex_sums"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_n, b_1,\dots,b_n \in \mathbb{C}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、和は ",
+        ref("definition_of_cc"),
+        " の和による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{n} (a_j + b_j) = \Bigl(\sum_{j=1}^{n} a_j\Bigr) + \Bigl(\sum_{j=1}^{n} b_j\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (a_j + b_j)
+&= a_1 + b_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} a_j\Bigr) + \Bigl(\sum_{j=1}^{1} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\text{ を 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`n`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{n+1}, b_1,\dots,b_{n+1} \in \mathbb{C}`),
+        " を取る。",
+        math(String.raw`\alpha := \sum_{j=1}^{n} a_j`),
+        "、",
+        math(String.raw`\beta := \sum_{j=1}^{n} b_j`),
+        " とおく（",
+        math(String.raw`\alpha, \beta \in \mathbb{C}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{n+1} (a_j + b_j)
+&= \Bigl(\sum_{j=1}^{n} (a_j + b_j)\Bigr) + (a_{n+1} + b_{n+1})
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)\\
+&= (\alpha + \beta) + (a_{n+1} + b_{n+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \alpha + \bigl(\beta + (a_{n+1} + b_{n+1})\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の和の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \alpha + \bigl((\beta + a_{n+1}) + b_{n+1}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の和の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \alpha + \bigl((a_{n+1} + \beta) + b_{n+1}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の和の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \alpha + \bigl(a_{n+1} + (\beta + b_{n+1})\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の和の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (\alpha + a_{n+1}) + (\beta + b_{n+1})
+&&\bigl(\because\ \mathbb{C}\ \text{の和の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n+1} a_j\Bigr) + \Bigl(\sum_{j=1}^{n+1} b_j\Bigr)
+&&\bigl(\because\ \alpha, \beta\ \text{の置き方と }\blkref{def_finite_sum_of_complex_numbers}\text{ を 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。行列の積が右の因子の和・左の因子の和に分配すること（mat_mult_distributes_over_sum_in_right_factor・mat_mult_distributes_over_sum_in_left_factor）の成分の鎖で、" +
+          "項ごとの和の有限和を二つの有限和に分ける段を引けるよう足した。和の結合律・交換律の適用を、帰納法の 1 段ずつに割った。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_mat_mult_distributes_over_sum_in_right_factor",
+    kind: "claim",
+    title: { text: "行列の積は右の因子の和に分配する" },
+    labels: ["mat_mult_distributes_over_sum_in_right_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B, C \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。和は ",
+        ref("def_matrix_sum"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A(B + C) = AB + AC`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A(B + C)\bigr)_{ik}
+&= \sum_{j=1}^{n} A_{ij}\,(B + C)_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,(B_{jk} + C_{jk})
+&&\bigl(\because\ \text{行列の和の定義 }\blkref{def_matrix_sum}\bigr)\\
+&= \sum_{j=1}^{n} \bigl(A_{ij}\,B_{jk} + A_{ij}\,C_{jk}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\text{ を各項へ同時適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} A_{ij}\,B_{jk}\Bigr) + \Bigl(\sum_{j=1}^{n} A_{ij}\,C_{jk}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\bigr)\\
+&= (AB)_{ik} + (AC)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\text{ を 2 か所へ同時適用}\bigr)\\
+&= (AB + AC)_{ik}
+&&\bigl(\because\ \text{行列の和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。linearity_of_T の証明が「左からの行列積の分配法則」と名前だけで根拠にしていた段を引けるよう足した。" +
+          "sign_flip_conjugation の Step 3 の「共役の ℂ 線型性」（有限和への適用）は、いまは名前だけの根拠であり、共役が和を保つことを示す主張を経てこの主張を引くよう直す予定である。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_mat_mult_distributes_over_sum_in_left_factor",
+    kind: "claim",
+    title: { text: "行列の積は左の因子の和に分配する" },
+    labels: ["mat_mult_distributes_over_sum_in_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。和は ",
+        ref("def_matrix_sum"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(A + B)C = AC + BC`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A + B)C\bigr)_{ik}
+&= \sum_{j=1}^{n} (A + B)_{ij}\,C_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} (A_{ij} + B_{ij})\,C_{jk}
+&&\bigl(\because\ \text{行列の和の定義 }\blkref{def_matrix_sum}\bigr)\\
+&= \sum_{j=1}^{n} \bigl(A_{ij}\,C_{jk} + B_{ij}\,C_{jk}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\text{ を各項へ同時適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{n} A_{ij}\,C_{jk}\Bigr) + \Bigl(\sum_{j=1}^{n} B_{ij}\,C_{jk}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\bigr)\\
+&= (AC)_{ik} + (BC)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\text{ を 2 か所へ同時適用}\bigr)\\
+&= (AC + BC)_{ik}
+&&\bigl(\because\ \text{行列の和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。linearity_of_T の証明が「右からの行列積の分配法則」と名前だけで根拠にしていた段を引けるよう足した。" +
+          "sign_flip_conjugation の Step 3 の「共役の ℂ 線型性」（有限和への適用）は、いまは名前だけの根拠であり、共役が和を保つことを示す主張を経てこの主張を引くよう直す予定である。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_negation_is_scalar_multiple_by_minus_one",
     kind: "claim",
     title: { text: "行列の符号反転は −1 倍に等しい" },

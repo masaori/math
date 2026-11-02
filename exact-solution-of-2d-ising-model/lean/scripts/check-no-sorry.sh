@@ -1103,6 +1103,18 @@ targets=(
   Ising2D.complex_neg_one_mul_neg_one
   Ising2D.neg_neg_matrix_of_necSuf
   Ising2D.neg_neg_tensorPow
+  Ising2D.finite_sum_of_complex_sums_step
+  Ising2D.finite_sum_of_complex_sums_succ
+  Ising2D.finite_sum_of_complex_sums
+  Ising2D.mul_add_matrix_apply
+  Ising2D.mul_add_matrix
+  Ising2D.add_mul_matrix_apply
+  Ising2D.add_mul_matrix
+  Ising2D.finite_sum_of_complex_sums_of_necSuf
+  Ising2D.mul_add_matrix_of_necSuf
+  Ising2D.add_mul_matrix_of_necSuf
+  Ising2D.mul_add_matrix_tensorPow
+  Ising2D.add_mul_matrix_tensorPow
   Ising2D.Uflip_conj_mul
   Ising2D.Uflip_conj_smul
   Ising2D.mul_neg_matrix_of_necSuf
@@ -1150,6 +1162,14 @@ targets=(
   "Ising2D.NecSuf.neg_eq_neg_one_smul_matrix'"
   "Ising2D.NecSuf.neg_neg_matrix_apply'"
   "Ising2D.NecSuf.neg_neg_matrix'"
+  "Ising2D.NecSuf.finite_sum_add_step'"
+  "Ising2D.NecSuf.finite_sum_add_succ'"
+  "Ising2D.NecSuf.finite_sum_add_fin'"
+  "Ising2D.NecSuf.finite_sum_add'"
+  "Ising2D.NecSuf.mul_add_matrix_apply'"
+  "Ising2D.NecSuf.mul_add_matrix'"
+  "Ising2D.NecSuf.add_mul_matrix_apply'"
+  "Ising2D.NecSuf.add_mul_matrix'"
   "Ising2D.NecSuf.smul_sub_matrix_apply'"
   "Ising2D.NecSuf.smul_sub_matrix'"
   Ising2D.eigenvalue_AMat_iff

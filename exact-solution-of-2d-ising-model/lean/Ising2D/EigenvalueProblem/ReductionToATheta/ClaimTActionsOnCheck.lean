@@ -51,6 +51,8 @@
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimExtractTaylor
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionB1B2
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 
 namespace Ising2D
 
@@ -295,16 +297,26 @@ theorem actsBy_TConj_V2_check {K2 : ℝ} (hK2 : 0 < K2) (μ : ℤ) :
 
 /-! ## 共役写像の一般線型性と半指数行列への特殊化 -/
 
-/-- **本文 `linearity_of_T` の具体版**: 有限複素行列の積を一段ずつ分配して示す。 -/
+/-- **本文 `linearity_of_T` の具体版**: 人手の鎖の 6 行と 1 対 1 の `calc`（`T_g(h)` は `(gh)g^{-1}`。Lean の `TConj_apply` も同じ括弧）。 -/
 theorem linearity_of_T_on_check (g : (TensorPow M)ˣ) (a b : ℂ) (X W : TensorPow M) :
-    TConj g (a • X + b • W) = a • TConj g X + b • TConj g W := by
-  change (g : TensorPow M) * (a • X + b • W) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M)
-      = a • ((g : TensorPow M) * X * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M))
-        + b • ((g : TensorPow M) * W * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M))
-  rw [mul_add]
-  rw [add_mul]
-  rw [mul_smul_comm, mul_smul_comm]
-  rw [smul_mul_assoc, smul_mul_assoc]
+    TConj g (a • X + b • W) = a • TConj g X + b • TConj g W :=
+  calc TConj g (a • X + b • W)
+      = ((g : TensorPow M) * (a • X + b • W)) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M) :=
+        TConj_apply _ _                                                          -- `def_T_g`
+    _ = ((g : TensorPow M) * (a • X) + (g : TensorPow M) * (b • W))
+          * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M) := by
+        rw [mul_add_matrix_tensorPow]                                            -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = ((g : TensorPow M) * (a • X)) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          + ((g : TensorPow M) * (b • W)) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M) :=
+        add_mul_matrix_tensorPow _ _ _                                           -- `mat_mult_distributes_over_sum_in_left_factor`
+    _ = (a • ((g : TensorPow M) * X)) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M)
+          + (b • ((g : TensorPow M) * W)) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M) := by
+        rw [mul_smul_matrix_tensorPow a, mul_smul_matrix_tensorPow b]            -- `scalar_multiple_factors_out_of_right_factor` を 2 か所
+    _ = a • (((g : TensorPow M) * X) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M))
+          + b • (((g : TensorPow M) * W) * ((g⁻¹ : (TensorPow M)ˣ) : TensorPow M)) := by
+        rw [smul_mul_matrix_tensorPow a, smul_mul_matrix_tensorPow b]            -- `scalar_multiple_factors_out_of_left_factor` を 2 か所
+    _ = a • TConj g X + b • TConj g W := by
+        rw [TConj_apply, TConj_apply]                                            -- `def_T_g` を 2 か所
 
 /-- 具体版が必要十分版 `TConj_linear` の有限複素行列への特殊化であることを記録する。 -/
 theorem linearity_of_T_on_check_from_general (g : (TensorPow M)ˣ)

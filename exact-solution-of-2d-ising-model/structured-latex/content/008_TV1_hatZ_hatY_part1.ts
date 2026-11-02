@@ -341,27 +341,39 @@ h(g_1g_2)
     proof: [
       paragraph([
         ref("def_T_g"),
-        " の定義を用い、行列積の左右の分配と、複素スカラー倍と行列積の両立を一回ずつ適用する。",
+        " の ",
+        math(String.raw`g \cdot h \cdot g^{-1}`),
+        " は ",
+        math(String.raw`(gh)g^{-1}`),
+        " と読む（",
+        math(String.raw`g, g^{-1} \in R`),
+        "）。鎖が引く 4 つの主張（行列の積の分配の 2 つと、スカラー倍を積の外へ出す 2 つ）は、どれも ",
+        math(String.raw`m = n = p = 2^M`),
+        " として使う。",
       ]),
       displayMath(String.raw`\begin{aligned}
 T_g(aX+bW)
-&=g(aX+bW)g^{-1}
+&=\bigl(g(aX+bW)\bigr)g^{-1}
 &&\left(\because\ \blkref{def_T_g}\right)\\
 &=\bigl(g(aX)+g(bW)\bigr)g^{-1}
-&&\left(\because\ \text{左からの行列積の分配法則}\right)\\
-&=g(aX)g^{-1}+g(bW)g^{-1}
-&&\left(\because\ \text{右からの行列積の分配法則}\right)\\
-&=a(gX)g^{-1}+b(gW)g^{-1}
-&&\left(\because\ \text{左からの行列積と複素スカラー倍の両立}\right)\\
-&=a(gXg^{-1})+b(gWg^{-1})
-&&\left(\because\ \text{右からの行列積と複素スカラー倍の両立}\right)\\
+&&\left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\right)\\
+&=\bigl(g(aX)\bigr)g^{-1}+\bigl(g(bW)\bigr)g^{-1}
+&&\left(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\right)\\
+&=\bigl(a(gX)\bigr)g^{-1}+\bigl(b(gW)\bigr)g^{-1}
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\text{ を 2 か所へ同時適用}\right)\\
+&=a\bigl((gX)g^{-1}\bigr)+b\bigl((gW)g^{-1}\bigr)
+&&\left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\text{ を 2 か所へ同時適用}\right)\\
 &=a\,T_g(X)+b\,T_g(W)
-&&\left(\because\ \blkref{def_T_g}\right).
+&&\left(\because\ \blkref{def_T_g}\text{ を 2 か所へ同時適用}\right).
 \end{aligned}`),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-02: 証明の「左からの行列積の分配法則」「右からの行列積の分配法則」「左からの行列積と複素スカラー倍の両立」「右からの行列積と複素スカラー倍の両立」の名前だけの根拠を、" +
+          "mat_mult_distributes_over_sum_in_right_factor・mat_mult_distributes_over_sum_in_left_factor・scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor へのラベル参照にした。" +
+          "g·h·g^{-1} を (gh)g^{-1} と読むことを書き、鎖の積に括弧を全て書いた。主張は変えていない。" +
+          "Lean の対応は Ising2D.linearity_of_T_on_check（同じ行の calc）。数値検証: sagemath/check/200_linearity_of_T/check_01_linearity.sage。",
         "2026-09-02 の論文構成再編で、二つの転送行列に限った未証明の記述から、任意の可逆な有限複素行列による共役写像の線型性へ立て直した。イジング固有の特殊化は 014_even_sector_T_action.ts 側へ分離した。",
       ],
     },

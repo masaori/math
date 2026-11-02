@@ -1,12 +1,19 @@
 # <linearity_of_T>: 任意の可逆な有限複素行列 g に対して T_g が C-線型
-import os
-_dir = os.path.dirname(os.path.abspath(__file__)) if "__file__" in dir() else "."
-load(os.path.join(_dir, "../../_shared/operators.sage"))
+# 本文の鎖の六行を、各行に書かれた括弧どおりに、積・和・スカラー倍を本文の定義（mat_mult・def_matrix_sum・
+# def_matrix_scalar_multiple）の成分の式で組んで一行ずつ比べる。T_g(h) は (gh)g^{-1} と読む。
+# 主張は Sage 組み込みの演算（独立な経路）で組んだ g(aX+bW)g^{-1} とも比べる。
+load("../../_shared/operators.sage")
+load("../../_shared/matrix_operations_by_definition.sage")
 rep = CheckReport("linearity_of_T")
 K.<ii> = QuadraticField(-1)
 
-def exact_conjugation(g, X):
-    return g * X * g.inverse()
+mul = body_product
+add = body_sum
+smul = body_scalar
+
+def T(g, gi, h):
+    """def_T_g の T_g(h) = (gh)g^{-1}。"""
+    return mul(mul(g, h), gi)
 
 for n in [2,4,8]:
     for trial in range(3):
@@ -19,20 +26,26 @@ for n in [2,4,8]:
                    K(0) if j > k else K(j + trial + 2 + ii) if j == k
                    else K(j + k + trial + 1 + (k - j)*ii))
         gi = g.inverse()
+        assert mul(g, gi) == identity_matrix(K, n) and mul(gi, g) == identity_matrix(K, n)
 
-        lhs = exact_conjugation(g, a*Xr + b*Wr)
-        definition = g * (a*Xr + b*Wr) * gi
-        left_distributive = (g * (a*Xr) + g * (b*Wr)) * gi
-        right_distributive = g * (a*Xr) * gi + g * (b*Wr) * gi
-        left_scalar_compatible = a*(g * Xr) * gi + b*(g * Wr) * gi
-        right_scalar_compatible = a*(g * Xr * gi) + b*(g * Wr * gi)
-        rhs = a*exact_conjugation(g, Xr) + b*exact_conjugation(g, Wr)
-
+        aX, bW = smul(a, Xr), smul(b, Wr)
+        lines = [
+            T(g, gi, add(aX, bW)),                                             # T_g(aX+bW)
+            mul(mul(g, add(aX, bW)), gi),                                      # def_T_g
+            mul(add(mul(g, aX), mul(g, bW)), gi),                              # mat_mult_distributes_over_sum_in_right_factor
+            add(mul(mul(g, aX), gi), mul(mul(g, bW), gi)),                     # mat_mult_distributes_over_sum_in_left_factor
+            add(mul(smul(a, mul(g, Xr)), gi), mul(smul(b, mul(g, Wr)), gi)),   # scalar_multiple_factors_out_of_right_factor（2 か所）
+            add(smul(a, mul(mul(g, Xr), gi)), smul(b, mul(mul(g, Wr), gi))),   # scalar_multiple_factors_out_of_left_factor（2 か所）
+            add(smul(a, T(g, gi, Xr)), smul(b, T(g, gi, Wr))),                 # def_T_g（2 か所）
+        ]
+        names = ["T_g の定義", "右の因子の和への分配", "左の因子の和への分配",
+                 "右の因子のスカラー倍を外へ", "左の因子のスカラー倍を外へ", "T_g の定義へ戻す"]
         prefix = f"n={n}, trial={trial}"
-        rep.truth(lhs == definition, f"{prefix}: T_g の定義")
-        rep.truth(definition == left_distributive, f"{prefix}: 左分配")
-        rep.truth(left_distributive == right_distributive, f"{prefix}: 右分配")
-        rep.truth(right_distributive == left_scalar_compatible, f"{prefix}: 左行列積とスカラー倍の両立")
-        rep.truth(left_scalar_compatible == right_scalar_compatible, f"{prefix}: 右行列積とスカラー倍の両立")
-        rep.truth(right_scalar_compatible == rhs, f"{prefix}: T_g の定義へ戻す")
+        for t in range(len(lines) - 1):
+            rep.truth(lines[t] == lines[t + 1], f"{prefix}: {names[t]}")
+        # 比べる側: Sage 組み込みの演算
+        rep.truth(lines[0] == g * (a*Xr + b*Wr) * gi and lines[-1] == a*(g*Xr*gi) + b*(g*Wr*gi),
+                  f"{prefix}: 主張を Sage の演算と比べる")
+        # 対照: b の項を落とした右辺とは一致しない
+        rep.truth(lines[0] != smul(a, T(g, gi, Xr)), f"{prefix}: 否定コントロール")
 rep.finish()
