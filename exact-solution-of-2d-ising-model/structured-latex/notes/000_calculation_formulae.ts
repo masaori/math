@@ -183,4 +183,24 @@ export default defineNotes([
       ]),
     ],
   },
+  {
+    id: "note_critical_010_claim_sine_integral_two_sided_log_divergence_source",
+    targets: ["sine_integral_two_sided"],
+    title: { text: "対数発散の源" },
+    body: [
+      paragraph([
+        "これが対数発散の源である。",
+        math(String.raw`2\log\frac{\pi}{\delta} = 2\log\pi + 2\log\frac{1}{\delta}`),
+        " なので、積分と ",
+        math(String.raw`2\log\frac{1}{\delta}`),
+        " の差は ",
+        math(String.raw`2\log\pi`),
+        " 以上 ",
+        math(String.raw`2\log\pi + \frac{2\delta^2}{\pi^2} + B`),
+        " 以下にあり、",
+        math(String.raw`\delta \to +0`),
+        " で有界に留まる。",
+      ]),
+    ],
+  },
 ]);

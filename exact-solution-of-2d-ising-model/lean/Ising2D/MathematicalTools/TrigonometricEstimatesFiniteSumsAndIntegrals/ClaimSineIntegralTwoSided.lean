@@ -3,6 +3,8 @@
 
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
 - `critical_010_claim_sine_integral_two_sided`（ラベル `sine_integral_two_sided`）
+- `critical_definition_sine_integral_constant`（ラベル `def_sine_integral_constant`）
+- `critical_claim_sine_integral_constant_numerical_bound`（ラベル `sine_integral_constant_numerical_bound`）
 
 **これが対数発散の源である。**
 
@@ -20,9 +22,10 @@ namespace Ising2D
 
 open Real MeasureTheory intervalIntegral
 
-/-- 原文の `B := π²/(12 c_0(1+c_0))`。 -/
+/-- 人手 `def_sine_integral_constant` の `B := π²/(12 c_0(1+c_0))`。 -/
 noncomputable def Bconst : ℝ := Real.pi ^ 2 / (12 * c0 * (1 + c0))
 
+/-- 人手 `sine_integral_constant_numerical_bound` の `B ≤ 0.88`。 -/
 theorem Bconst_le : Bconst ≤ 0.88 := by
   have hc := c0_bounds
   have hpi := Real.pi_lt_d6

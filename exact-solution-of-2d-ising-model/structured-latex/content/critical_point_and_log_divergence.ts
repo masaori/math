@@ -1487,7 +1487,11 @@ G''(\kappa)
         math(String.raw`R_0 := \displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt S}-2\log\frac{\pi}{\delta}`),
         " とおく。このとき ",
         math(String.raw`0 \leq R_0 \leq \frac{2\delta^2}{\pi^2} + B`),
-        " である。",
+        " である（",
+        math(String.raw`B`),
+        " は ",
+        ref("def_sine_integral_constant"),
+        " のもの）。",
         math(String.raw`R := J - 2\log\frac{\pi}{\delta}`),
         " とおく。先に得た差の評価を使う。",
       ]),
@@ -1530,7 +1534,7 @@ R
       displayMath(String.raw`\begin{aligned}
 |R|
 &\leq\max\left\{\frac{2\cdot 0.2527^2}{9.8696}+0.88,\ \frac{3.1416}{2}\cdot1.0315\right\}
-&&\bigl(\because\ \text{直前の }|R|\text{ の評価と数値上下界}\bigr)\\
+&&\bigl(\because\ \text{直前の }|R|\text{ の評価と数値上下界。}B \leq 0.88\ \text{は}\ \blkref{sine_integral_constant_numerical_bound}\bigr)\\
 &\leq\max\left\{0.0130+0.88,\ 1.6203\right\}
 &&\bigl(\because\ \text{有理数の四則}\bigr)\\
 &\leq1.621

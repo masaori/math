@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算の連続実行として、`sine_integral_two_sided`（正弦を含む積分の両側評価）の B の定義と B ≤ 0.88 を独立のブロックに分け、平方根どうしの大小の根拠として主張 `nonnegative_real_order_from_squares` を足し、3 個の主張に同名の検算を付けた（未検算 92 件）。本文に無い平方根の単調性に頼る段を新しい主張から引く形にし、各点評価を 1 行 1 操作の鎖にした。計算の誤りは無かった。Lean の具体版が直した人手証明と 1 対 1 でないことは状態台帳に記録した。次は `sigma_z_diagonal_action`。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十七個目を行った。`sign_flip_conjugation` Step 1 の `Fσ_k^xF^{-1}`・`Fσ_k^zF^{-1}` の名前だけの根拠「パウリ行列の積」を、`σ_k^zσ_k^x = -(σ_k^xσ_k^z)` の 10 行の準備の鎖と 5 行・2 行の鎖に替え、主張 `negation_is_scalar_multiple_by_minus_one`（`-A = (-1)A`）を足した（SageMath の検算、Lean の具体版・必要十分版・系、`ClaimSignFlipConjugation.lean` の 1 対 1 の `calc` 3 本、SageMath check_13）。次は `Fσ_k^yF^{-1}` と `E` による共役の鎖（状態台帳の次の一歩）。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、`closed_form_log_integral`（三つの主張を束ねていた積分の評価）を 1 ブロック 1 主張の 8 ブロック（log の積の法則・log(1+x) ≤ x・arcsinh の引数の両側評価・arcsinh の log 評価・閉じた形の積分・積分の log 評価・3/2 乗の定義・3/2 乗の積分の評価）に分け、7 個の主張に同名の検算を付けた（未検算 93 件）。本文に無い平方根の商・単調性の規則に頼る段を、一意性・(y+s)(s-y) = 1・背理法の鎖に置き換えた。計算の誤りは無かった。`second_derivative_log_divergence` が使う 3/2 乗の積の法則・単調性（(S(1+S))^{3/2} = S^{3/2}(1+S)^{3/2} など）は本文で示されていないので、その主張の番で扱う。次は `sine_integral_two_sided`。

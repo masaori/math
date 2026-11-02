@@ -41,6 +41,8 @@ export default defineBlocks([
         ref("log_integral_two_sided_bounds"),
         "・",
         ref("three_halves_power_integral_bound"),
+        "・",
+        ref("sine_integral_two_sided"),
         " が使う。",
       ]),
       list([
@@ -207,12 +209,16 @@ export default defineBlocks([
           ref("closed_form_log_integral"),
           "、",
           ref("three_halves_power_integral_bound"),
+          "、",
+          ref("sine_integral_two_sided"),
           " で、(R4) に渡す導関数を求める段と、被積分関数の連続性を言う段に使う。正弦・余弦の導関数は、そのうち ",
           ref("argument_minus_sine_nonnegative"),
           "、",
           ref("cosine_quadratic_lower_bound"),
           "、",
           ref("sine_cubic_lower_bound"),
+          "、",
+          ref("sine_integral_two_sided"),
           " で使う。",
         ],
       ]),
@@ -2834,28 +2840,185 @@ r(\pi)^2
   },
 
   {
+    id: "critical_claim_nonnegative_real_order_from_squares",
+    kind: "claim",
+    title: { tex: String.raw`u^2 \leq v^2 \Longrightarrow u \leq v \quad (u, v \in \mathbb{R}_{\geq 0})` },
+    labels: ["nonnegative_real_order_from_squares"],
+    statement: [
+      paragraph([
+        math(String.raw`u, v \in \mathbb{R}_{\geq 0}`),
+        " が ",
+        math(String.raw`u^2 \leq v^2`),
+        " を満たすならば ",
+        math(String.raw`u \leq v`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`v < u`),
+        " と仮定する。",
+        math(String.raw`0 \leq v < u`),
+        " なので ",
+        math(String.raw`u > 0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+v^2
+&= v\cdot v\\
+&\leq v\cdot u
+&&(\because\ \text{仮定}\ v < u\ \text{の両辺に}\ v \geq 0\ \text{を掛ける})\\
+&< u\cdot u
+&&(\because\ \text{仮定}\ v < u\ \text{の両辺に}\ u > 0\ \text{を掛ける})\\
+&= u^2
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        math(String.raw`u^2 \leq v^2`),
+        " に矛盾する。よって ",
+        math(String.raw`u \leq v`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sine_integral_two_sided の証明が平方根どうしの大小（D_2 ≤ D_1、D_1 ≥ p、D_2 ≥ c_0 p、D_1, D_2 ≥ δ）を本文に無い平方根の単調性で済ませていたので、その根拠として足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_definition_sine_integral_constant",
+    kind: "definition",
+    title: { tex: String.raw`B := \tfrac{\pi^2}{12\,c_0(1+c_0)}` },
+    labels: ["def_sine_integral_constant"],
+    statement: [
+      paragraph([
+        ref("def_sine_bound_constant"),
+        " の ",
+        math(String.raw`c_0`),
+        " を用いて",
+      ]),
+      displayMath(String.raw`B := \frac{\pi^2}{12\,c_0\left(1+c_0\right)} \in \mathbb{R}`),
+      paragraph([
+        "と定める。",
+        ref("sine_bound_constant_numerical_bounds"),
+        " より ",
+        math(String.raw`c_0 \geq 0.5887 > 0`),
+        "、したがって ",
+        math(String.raw`1 + c_0 > 0`),
+        " で、分母 ",
+        math(String.raw`12\,c_0(1+c_0)`),
+        " は正の実数の積なので 0 でない。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは ",
+        math(String.raw`\pi`),
+        " が実数だからである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sine_integral_two_sided の主張の中で置いていた B を独立の定義にし、分母が 0 でないことを書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sine_integral_constant_numerical_bound",
+    kind: "claim",
+    title: { tex: String.raw`B \leq 0.88` },
+    labels: ["sine_integral_constant_numerical_bound"],
+    statement: [
+      paragraph([
+        ref("def_sine_integral_constant"),
+        " の ",
+        math(String.raw`B`),
+        " について ",
+        math(String.raw`B \leq 0.88`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("sine_bound_constant_numerical_bounds"),
+        " の ",
+        math(String.raw`c_0 \geq 0.5887`),
+        " の両辺に ",
+        math(String.raw`1`),
+        " を足して ",
+        math(String.raw`1 + c_0 \geq 1.5887 > 0`),
+        " である。これらから次を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+12\,c_0\left(1+c_0\right)
+&\geq 12\cdot 0.5887\cdot\left(1+c_0\right)
+&&(\because\ c_0 \geq 0.5887\ \text{の両辺に}\ 12\left(1+c_0\right) > 0\ \text{を掛ける})\\
+&\geq 12\cdot 0.5887\cdot 1.5887
+&&(\because\ 1 + c_0 \geq 1.5887\ \text{の両辺に}\ 12\cdot 0.5887 > 0\ \text{を掛ける})\\
+&= 11.22321228
+&&(\because\ \mathbb{Q}\ \text{の四則})\\
+&\geq 11.22
+&&(\because\ \mathbb{Q}\ \text{の大小比較})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{12\,c_0\left(1+c_0\right)}
+&= \frac{11.22}{12\,c_0\left(1+c_0\right)}\cdot\frac{1}{11.22}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{12\,c_0\left(1+c_0\right)}{12\,c_0\left(1+c_0\right)}\cdot\frac{1}{11.22}
+&&(\because\ 11.22 \leq 12\,c_0(1+c_0)\ \text{の両辺に}\ \tfrac{1}{12c_0(1+c_0)\cdot 11.22} > 0\ \text{を掛ける})\\
+&= \frac{1}{11.22}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+B
+&= \frac{\pi^2}{12\,c_0\left(1+c_0\right)}
+&&(\because\ \blkref{def_sine_integral_constant})\\
+&\leq \frac{9.8697}{12\,c_0\left(1+c_0\right)}
+&&(\because\ \blkref{pi_squared_numerical_bounds}\ \text{の}\ \pi^2 \leq 9.8697\ \text{の両辺を}\ 12\,c_0(1+c_0) > 0\ \text{で割る})\\
+&\leq \frac{9.8697}{11.22}
+&&(\because\ \text{準備の}\ \tfrac{1}{12c_0(1+c_0)} \leq \tfrac{1}{11.22}\ \text{の両辺に}\ 9.8697 > 0\ \text{を掛ける})\\
+&= \frac{98697}{112200}
+&&(\because\ \mathbb{Q}\ \text{の四則})\\
+&\leq \frac{98736}{112200}
+&&(\because\ 98697 \leq 98736\ \text{の両辺を}\ 112200 > 0\ \text{で割る})\\
+&= 0.88
+&&(\because\ \mathbb{Q}\ \text{の四則。}0.88\cdot 112200 = 98736)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: sine_integral_two_sided の主張の括弧書きと証明の末尾にあった B の数値評価を独立の主張にし、積の評価と割り算の評価を 1 行 1 操作の鎖にした。",
+      ],
+    },
+  },
+
+  {
     id: "critical_010_claim_sine_integral_two_sided",
     kind: "claim",
     origin: { path: SRC, ordinal: 12 },
     title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B` },
     labels: ["sine_integral_two_sided"],
     statement: [
-      paragraph(["平方根と正弦は ", ref("definition_of_sqrt_r_positive"), "、", ref("def_sin"), " を用いる。"]),
       paragraph([
-        ref("def_sine_bound_constant"),
-        " の ",
-        math(String.raw`c_0 = 1-\tfrac{\pi^2}{24}`),
-        " を用いて",
-      ]),
-      displayMath(
-        String.raw`B := \frac{\pi^2}{12\,c_0\left(1+c_0\right)}`,
-      ),
-      paragraph([
-        "とおく（",
-        math(String.raw`B \leq 0.88`),
-        "）。このとき ",
+        "平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        "、正弦は ",
+        ref("def_sin"),
+        "、",
+        math(String.raw`\log`),
+        " は ",
+        ref("def_real_logarithm_positive"),
+        "、",
+        math(String.raw`B`),
+        " は ",
+        ref("def_sine_integral_constant"),
+        " のものを用いる。",
         math(String.raw`\delta \in \mathbb{R}_{>0}`),
-        " について",
+        " なら",
       ]),
       displayMath(
         String.raw`2\log\frac{\pi}{\delta}
@@ -2863,149 +3026,282 @@ r(\pi)^2
 \ \leq\ 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B`,
       ),
       paragraph([
-        "**これが対数発散の源である。** 右辺・左辺の差は ",
-        math(String.raw`\delta \to +0`),
-        " で有界に留まるので、この積分は ",
-        math(String.raw`2\log\frac{1}{\delta}`),
-        " との差が有界に留まる。",
+        math(String.raw`\theta \in [0,\pi]`),
+        " なら ",
+        math(String.raw`\tfrac{\theta}{2} \in [0,\tfrac{\pi}{2}]`),
+        " なので ",
+        math(String.raw`\sin\tfrac{\theta}{2}`),
+        " は定まり、平方根の中身は ",
+        math(String.raw`\delta^2 > 0`),
+        " 以上なので平方根も定まる。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、区間 ",
+        math(String.raw`[0,\pi]`),
+        " 上の積分と実対数を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4) と微分の公式）。",
       ]),
     ],
     proof: [
       paragraph([
-        "Step 0（積分が定まること）。",
-        math(String.raw`\delta > 0`),
-        " なので被積分関数は ",
-        math(String.raw`[0,\pi]`),
-        " 上連続（分母は ",
-        math(String.raw`\geq \delta > 0`),
-        "）である。以下 ",
-        math(String.raw`p := \dfrac{\theta}{2} \in [0,\tfrac\pi2]`),
+        "準備。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の数値の評価より ",
+        math(String.raw`\pi > 0`),
+        "、",
+        ref("sine_bound_constant_numerical_bounds"),
+        " より ",
+        math(String.raw`c_0 \geq 0.5887 > 0`),
+        " である。",
+        math(String.raw`\theta \in [0,\pi]`),
+        " について ",
+        math(String.raw`p := \tfrac{\theta}{2} \in [0,\tfrac{\pi}{2}]`),
         "、",
         math(String.raw`s := \sin p`),
         "、",
         math(String.raw`D_1 := \sqrt{\delta^2+p^2}`),
         "、",
         math(String.raw`D_2 := \sqrt{\delta^2+s^2}`),
-        " と略記する。",
-      ]),
-      paragraph([
-        "Step 1（下からの評価）。",
-        ref("argument_minus_sine_nonnegative"),
-        " より ",
-        math(String.raw`s \leq p`),
-        " なので ",
-        math(String.raw`D_2 \leq D_1`),
-        "、したがって各点で ",
-        math(String.raw`\dfrac{1}{D_2} \geq \dfrac{1}{D_1}`),
-        "。(R3) の単調性と ",
-        ref("log_integral_two_sided_bounds"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\int_0^{\pi}\frac{d\theta}{D_2}
-\ \geq\ \int_0^{\pi}\frac{d\theta}{D_1}
-\ =\ \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
-\ \geq\ 2\log\frac{\pi}{\delta}`,
-      ),
-      paragraph([
-        "Step 2（差の各点評価）。",
-        math(String.raw`p \in (0,\tfrac\pi2]`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{D_2} - \frac{1}{D_1}
-&= \frac{D_1 - D_2}{D_1D_2} \\
-&= \frac{D_1^2 - D_2^2}{D_1D_2\left(D_1+D_2\right)}
-   \quad (\because D_1 - D_2 = \tfrac{D_1^2-D_2^2}{D_1+D_2},\ D_1+D_2 > 0) \\
-&= \frac{p^2 - s^2}{D_1D_2\left(D_1+D_2\right)}
-   \quad (\because D_1^2 - D_2^2 = (\delta^2+p^2)-(\delta^2+s^2) = p^2-s^2) \\
-&= \frac{\left(p-s\right)\left(p+s\right)}{D_1D_2\left(D_1+D_2\right)}
-\end{aligned}`,
-      ),
-      paragraph([
-        "分子は ",
-        ref("argument_minus_sine_nonnegative"),
-        " の ",
-        math(String.raw`0 \leq p - s`),
-        " と ",
-        ref("elementary_sine_bounds"),
-        "（",
-        math(String.raw`\theta = 2p`),
-        "）の ",
-        math(String.raw`p - s \leq \tfrac{\theta^3}{48} = \tfrac{p^3}{6}`),
-        " による ",
-        math(String.raw`0 \leq p - s \leq \tfrac{p^3}{6}`),
-        " と ",
-        math(String.raw`p+s \leq 2p`),
-        " より ",
-        math(String.raw`\left(p-s\right)\left(p+s\right) \leq \dfrac{p^3}{6}\cdot 2p = \dfrac{p^4}{3}`),
-        "。分母は ",
-        math(String.raw`D_1 \geq p`),
-        "、",
-        math(String.raw`D_2 \geq s \geq c_0 p`),
-        "（",
+        " と置く（",
+        math(String.raw`p, s, D_1, D_2`),
+        " は ",
+        math(String.raw`\theta`),
+        " の関数で、値は ",
+        math(String.raw`\mathbb{R}`),
+        " の元）。",
         ref("sine_half_angle_linear_bounds"),
-        "）より",
+        " より ",
+        math(String.raw`c_0 p \leq s \leq p`),
+        "、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`D_1, D_2 \geq 0`),
+        "、",
+        math(String.raw`D_1^2 = \delta^2+p^2`),
+        "、",
+        math(String.raw`D_2^2 = \delta^2+s^2`),
+        " である。また ",
+        math(String.raw`p^2 = \tfrac{\theta^2}{4}`),
+        " なので ",
+        math(String.raw`D_1 = \sqrt{\delta^2+\theta^2/4}`),
+        " である。",
       ]),
-      displayMath(
-        String.raw`D_1D_2\left(D_1+D_2\right) \ \geq\ p\cdot c_0p\cdot\left(p + c_0p\right) = c_0\left(1+c_0\right)p^3`,
-      ),
-      paragraph(["したがって"]),
-      displayMath(
-        String.raw`0 \ \leq\ \frac{1}{D_2} - \frac{1}{D_1}
-\ \leq\ \frac{p^4/3}{c_0\left(1+c_0\right)p^3}
-= \frac{p}{3c_0\left(1+c_0\right)}
-= \frac{\theta}{6c_0\left(1+c_0\right)}`,
-      ),
+      displayMath(String.raw`0 \leq c_0 p \leq s
+\qquad (\because\ c_0 > 0,\ p \geq 0\ \text{より}\ c_0 p \geq 0\text{。}\blkref{sine_half_angle_linear_bounds})`),
+      displayMath(String.raw`\delta^2 \leq \delta^2 + p^2 = D_1^2,\quad \delta^2 \leq \delta^2 + s^2 = D_2^2
+\qquad (\because\ p^2, s^2 \geq 0)`),
+      displayMath(String.raw`0 < \delta \leq D_1,\quad 0 < \delta \leq D_2
+\qquad (\because\ \blkref{nonnegative_real_order_from_squares}\ \text{を}\ (u,v) = (\delta, D_1), (\delta, D_2)\ \text{に})`),
       paragraph([
-        "（",
-        math(String.raw`p = 0`),
-        " では ",
-        math(String.raw`\tfrac1{D_2}-\tfrac1{D_1} = 0`),
-        " なので、この評価は ",
-        math(String.raw`[0,\tfrac\pi2]`),
-        " 全体で成り立つ。）",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（定数関数・恒等関数・定数倍・積・和・平方根・合成・商）と正弦の導関数より、",
+        math(String.raw`\theta \mapsto \tfrac{1}{D_1}`),
+        "、",
+        math(String.raw`\theta \mapsto \tfrac{1}{D_2}`),
+        " は ",
+        math(String.raw`[0,\pi]`),
+        " 上微分可能（平方根の中身は ",
+        math(String.raw`\delta^2 > 0`),
+        " 以上、分母は ",
+        math(String.raw`\delta > 0`),
+        " 以上）、したがって連続であり、その差も連続である。",
       ]),
-      paragraph(["Step 3（積分して足す）。(R3) の単調性と (R4) より"]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph(["各点の大小。"]),
+      displayMath(String.raw`\begin{aligned}
+s^2
+&= s\cdot s\\
+&\leq s\cdot p
+&&(\because\ s \leq p\ \text{の両辺に}\ s \geq 0\ \text{を掛ける})\\
+&\leq p\cdot p
+&&(\because\ s \leq p\ \text{の両辺に}\ p \geq 0\ \text{を掛ける})\\
+&= p^2
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+D_2^2
+&= \delta^2 + s^2
+&&(\because\ \blkref{definition_of_sqrt_r_positive})\\
+&\leq \delta^2 + p^2
+&&(\because\ s^2 \leq p^2\ \text{の両辺に}\ \delta^2\ \text{を足す})\\
+&= D_1^2
+&&(\because\ \blkref{definition_of_sqrt_r_positive})
+\end{aligned}`),
+      displayMath(String.raw`D_2 \leq D_1
+\qquad (\because\ \blkref{nonnegative_real_order_from_squares}\ \text{を}\ (u,v) = (D_2, D_1)\ \text{に})`),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{D_1}
+&= D_2\cdot\frac{1}{D_1D_2}
+&&(\because\ \mathbb{R}\ \text{の四則。}D_1D_2 \neq 0)\\
+&\leq D_1\cdot\frac{1}{D_1D_2}
+&&(\because\ D_2 \leq D_1\ \text{の両辺に}\ \tfrac{1}{D_1D_2} > 0\ \text{を掛ける})\\
+&= \frac{1}{D_2}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph(["下からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}}
+&= \int_0^{\pi}\frac{d\theta}{D_2}
+&&(\because\ p, s, D_2\ \text{の置き方})\\
+&\geq \int_0^{\pi}\frac{d\theta}{D_1}
+&&(\because\ \text{(R3) の単調性と、各点で}\ \tfrac{1}{D_1} \leq \tfrac{1}{D_2})\\
+&= \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
+&&(\because\ D_1 = \sqrt{\delta^2+\theta^2/4})\\
+&\geq 2\log\frac{\pi}{\delta}
+&&(\because\ \blkref{log_integral_two_sided_bounds}\ \text{の下からの評価})
+\end{aligned}`),
+      paragraph([
+        "差の各点評価の準備。",
+        math(String.raw`\theta^3 = (2p)^3 = 8p^3`),
+        " なので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p - s
+&= \frac{\theta}{2} - \sin\frac{\theta}{2}
+&&(\because\ p, s\ \text{の置き方})\\
+&\leq \frac{\theta^3}{48}
+&&(\because\ \blkref{elementary_sine_bounds})\\
+&= \frac{p^3}{6}
+&&(\because\ \theta^3 = 8p^3\ \text{と}\ \mathbb{Q}\ \text{の四則})
+\end{aligned}`),
+      displayMath(String.raw`0 \leq p + s \leq p + p = 2p
+\qquad (\because\ 0 \leq s \leq p)`),
+      displayMath(String.raw`p \leq D_1
+\qquad (\because\ p^2 \leq \delta^2 + p^2 = D_1^2\ \text{と}\ \blkref{nonnegative_real_order_from_squares}\ \text{を}\ (u,v) = (p, D_1)\ \text{に})`),
+      displayMath(String.raw`\begin{aligned}
+\left(c_0p\right)^2
+&= c_0p\cdot c_0p\\
+&\leq c_0p\cdot s
+&&(\because\ c_0p \leq s\ \text{の両辺に}\ c_0p \geq 0\ \text{を掛ける})\\
+&\leq s\cdot s
+&&(\because\ c_0p \leq s\ \text{の両辺に}\ s \geq 0\ \text{を掛ける})\\
+&\leq \delta^2 + s^2
+&&(\because\ \delta^2 \geq 0)\\
+&= D_2^2
+&&(\because\ \blkref{definition_of_sqrt_r_positive})
+\end{aligned}`),
+      displayMath(String.raw`c_0p \leq D_2
+\qquad (\because\ \blkref{nonnegative_real_order_from_squares}\ \text{を}\ (u,v) = (c_0p, D_2)\ \text{に})`),
+      displayMath(String.raw`p + c_0p \leq D_1 + D_2
+\qquad (\because\ p \leq D_1\ \text{と}\ c_0p \leq D_2\ \text{を辺ごとに足す})`),
+      displayMath(String.raw`\begin{aligned}
+D_1D_2\left(D_1+D_2\right)
+&\geq p\cdot D_2\left(D_1+D_2\right)
+&&(\because\ p \leq D_1\ \text{の両辺に}\ D_2(D_1+D_2) > 0\ \text{を掛ける})\\
+&\geq p\cdot c_0p\cdot\left(D_1+D_2\right)
+&&(\because\ c_0p \leq D_2\ \text{の両辺に}\ p(D_1+D_2) \geq 0\ \text{を掛ける})\\
+&\geq p\cdot c_0p\cdot\left(p + c_0p\right)
+&&(\because\ p + c_0p \leq D_1 + D_2\ \text{の両辺に}\ p\cdot c_0p \geq 0\ \text{を掛ける})\\
+&= c_0\left(1+c_0\right)p^3
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "差の各点評価。",
+        math(String.raw`p > 0`),
+        " のとき、",
+        math(String.raw`c_0(1+c_0)p^3 > 0`),
+        " なので、分母の逆数の評価",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{D_1D_2\left(D_1+D_2\right)}
+&= \frac{c_0\left(1+c_0\right)p^3}{D_1D_2\left(D_1+D_2\right)}\cdot\frac{1}{c_0\left(1+c_0\right)p^3}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{D_1D_2\left(D_1+D_2\right)}{D_1D_2\left(D_1+D_2\right)}\cdot\frac{1}{c_0\left(1+c_0\right)p^3}
+&&(\because\ c_0(1+c_0)p^3 \leq D_1D_2(D_1+D_2)\ \text{の両辺に}\ \tfrac{1}{D_1D_2(D_1+D_2)\,c_0(1+c_0)p^3} > 0\ \text{を掛ける})\\
+&= \frac{1}{c_0\left(1+c_0\right)p^3}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      paragraph(["を使って"]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{D_2} - \frac{1}{D_1}
+&= \frac{D_1 - D_2}{D_1D_2}
+&&(\because\ \mathbb{R}\ \text{の四則。}D_1D_2 \neq 0)\\
+&= \frac{\left(D_1 - D_2\right)\left(D_1+D_2\right)}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \text{分子と分母に}\ D_1+D_2 > 0\ \text{を掛ける})\\
+&= \frac{D_1^2 - D_2^2}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \text{分配則})\\
+&= \frac{\left(\delta^2+p^2\right) - \left(\delta^2+s^2\right)}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \blkref{definition_of_sqrt_r_positive})\\
+&= \frac{p^2 - s^2}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \frac{\left(p-s\right)\left(p+s\right)}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \text{分配則})\\
+&\leq \frac{\frac{p^3}{6}\left(p+s\right)}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ p - s \leq \tfrac{p^3}{6}\ \text{の両辺に}\ \tfrac{p+s}{D_1D_2(D_1+D_2)} \geq 0\ \text{を掛ける})\\
+&\leq \frac{\frac{p^3}{6}\cdot 2p}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ p + s \leq 2p\ \text{の両辺に}\ \tfrac{p^3/6}{D_1D_2(D_1+D_2)} \geq 0\ \text{を掛ける})\\
+&= \frac{p^4}{3}\cdot\frac{1}{D_1D_2\left(D_1+D_2\right)}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{p^4}{3}\cdot\frac{1}{c_0\left(1+c_0\right)p^3}
+&&(\because\ \text{分母の逆数の評価の両辺に}\ \tfrac{p^4}{3} \geq 0\ \text{を掛ける})\\
+&= \frac{p}{3c_0\left(1+c_0\right)}
+&&(\because\ \text{約分。}p \neq 0)\\
+&= \frac{\theta}{6c_0\left(1+c_0\right)}
+&&(\because\ p = \tfrac{\theta}{2})
+\end{aligned}`),
+      paragraph([
+        math(String.raw`p = 0`),
+        " のとき、",
+        ref("sine_zero"),
+        " より ",
+        math(String.raw`s = \sin 0 = 0 = p`),
+        " なので ",
+        math(String.raw`D_2 = D_1`),
+        " で、",
+        math(String.raw`\theta = 2p = 0`),
+        " なので",
+      ]),
+      displayMath(String.raw`\frac{1}{D_2} - \frac{1}{D_1} = 0 = \frac{\theta}{6c_0\left(1+c_0\right)}
+\qquad (\because\ D_2 = D_1,\ \theta = 0)`),
+      paragraph([
+        "したがって ",
+        math(String.raw`[0,\pi]`),
+        " の各点で ",
+        math(String.raw`\tfrac{1}{D_2} - \tfrac{1}{D_1} \leq \tfrac{\theta}{6c_0(1+c_0)}`),
+        " である。",
+        math(String.raw`F(\theta) := \tfrac{\theta^2}{2}`),
+        " は微分の公式（定数倍・積・恒等関数）より微分可能で ",
+        math(String.raw`F'(\theta) = \tfrac{1}{2}(1\cdot\theta + \theta\cdot 1) = \theta`),
+        "、",
+        math(String.raw`F'`),
+        " は恒等関数なので連続である。",
+        math(String.raw`\theta \mapsto \tfrac{\theta}{6c_0(1+c_0)}`),
+        " も恒等関数の定数倍なので微分可能、したがって連続である（微分の公式）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 \int_0^{\pi}\left(\frac{1}{D_2}-\frac{1}{D_1}\right)d\theta
 &\leq \int_0^{\pi}\frac{\theta}{6c_0\left(1+c_0\right)}\,d\theta
-   \quad (\because \text{Step 2 と (R3)}) \\
-&= \frac{1}{6c_0\left(1+c_0\right)}\cdot\frac{\pi^2}{2}
-   \quad (\because \text{(R4) を } F(\theta)=\tfrac{\theta^2}{2} \text{ に適用}) \\
-&= \frac{\pi^2}{12c_0\left(1+c_0\right)} \\
+&&(\because\ \text{(R3) の単調性と、差の各点評価})\\
+&= \frac{1}{6c_0\left(1+c_0\right)}\int_0^{\pi}\theta\,d\theta
+&&(\because\ \text{(R3) の線型性を}\ \lambda = \tfrac{1}{6c_0(1+c_0)},\ \nu = 0\ \text{で})\\
+&= \frac{1}{6c_0\left(1+c_0\right)}\left(\frac{\pi^2}{2} - \frac{0^2}{2}\right)
+&&(\because\ \text{(R4) を}\ F\ \text{に})\\
+&= \frac{\pi^2}{12c_0\left(1+c_0\right)}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
 &= B
-\end{aligned}`,
-      ),
-      paragraph([
-        "よって (R3) の線型性と ",
-        ref("log_integral_two_sided_bounds"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\int_0^{\pi}\frac{d\theta}{D_2}
-= \int_0^{\pi}\frac{d\theta}{D_1} + \int_0^{\pi}\left(\frac{1}{D_2}-\frac{1}{D_1}\right)d\theta
-\ \leq\ \left(2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}\right) + B`,
-      ),
-      paragraph([
-        "数値評価は ",
-        ref("sine_bound_constant_numerical_bounds"),
-        " の ",
-        math(String.raw`c_0 \geq 0.5887`),
-        " より ",
-        math(String.raw`12c_0(1+c_0) \geq 12\cdot 0.5887\cdot 1.5887 \geq 11.22`),
-        "、",
-        math(String.raw`B \leq \dfrac{9.8697}{11.22} \leq 0.88`),
-        "（",
-        ref("pi_squared_numerical_bounds"),
-        " の ",
-        math(String.raw`\pi^2 \leq 9.8697`),
-        "）",
-        "。",
-      ]),
+&&(\because\ \blkref{def_sine_integral_constant})
+\end{aligned}`),
+      paragraph(["上からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\sin^2(\theta/2)}}
+&= \int_0^{\pi}\frac{d\theta}{D_2}
+&&(\because\ p, s, D_2\ \text{の置き方})\\
+&= \int_0^{\pi}\left(\frac{1}{D_1} + \left(\frac{1}{D_2}-\frac{1}{D_1}\right)\right)d\theta
+&&(\because\ \mathbb{R}\ \text{の四則を各点で})\\
+&= \int_0^{\pi}\frac{d\theta}{D_1} + \int_0^{\pi}\left(\frac{1}{D_2}-\frac{1}{D_1}\right)d\theta
+&&(\because\ \text{(R3) の線型性を}\ \lambda = \nu = 1\ \text{で})\\
+&= \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} + \int_0^{\pi}\left(\frac{1}{D_2}-\frac{1}{D_1}\right)d\theta
+&&(\because\ D_1 = \sqrt{\delta^2+\theta^2/4})\\
+&\leq \left(2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}\right) + \int_0^{\pi}\left(\frac{1}{D_2}-\frac{1}{D_1}\right)d\theta
+&&(\because\ \blkref{log_integral_two_sided_bounds}\ \text{の上からの評価})\\
+&\leq \left(2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}\right) + B
+&&(\because\ \text{差の積分の評価}\ \textstyle\int_0^{\pi}(\tfrac{1}{D_2}-\tfrac{1}{D_1})\,d\theta \leq B)\\
+&= 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2} + B
+\end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 1 ブロック 1 主張にするため、B の定義を def_sine_integral_constant へ、B ≤ 0.88 を sine_integral_constant_numerical_bound へ分けた。平方根どうしの大小を nonnegative_real_order_from_squares から、0 ≤ c_0 p ≤ s・D_1, D_2 ≥ δ > 0・被積分関数の連続性・F(θ) = θ²/2 の導関数を準備に書き、各点の大小と差の各点評価を 1 行 1 操作の鎖にした。「これが対数発散の源である」の段落は解釈なので注記 note_critical_010_claim_sine_integral_two_sided_log_divergence_source へ移した。",
+      ],
+    },
   },
 ]);

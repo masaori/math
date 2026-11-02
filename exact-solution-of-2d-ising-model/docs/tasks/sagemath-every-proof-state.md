@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 295 件のうち、SageMath の検算が無いもの 93 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 297 件のうち、SageMath の検算が無いもの 92 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -112,9 +112,14 @@
   ラベルの無かった log の積の法則と log(1+x) ≤ x を主張にし、arcsinh の下からの評価・F(0) = 0・導関数の連続性を書き、3/2 乗を定義した）。
   下流（`sine_integral_two_sided` の 2 箇所、`second_derivative_log_divergence`、注記 `remark_real_analysis_facts_R3_R4`）の参照と Lean のコメント・`lean/docs/ch020-formalization.md` を新しいラベルに付け替えた（Lean の証明は変えていない）。計算の誤りは無かった。
 
+- `sine_integral_two_sided`（2 log(π/δ) ≤ ∫_0^π dθ/√(δ²+sin²(θ/2)) ≤ 2 log(π/δ) + 2δ²/π² + B）: 主張の中で置いていた B の定義と B ≤ 0.88 を、定義 `def_sine_integral_constant`・主張 `sine_integral_constant_numerical_bound` へ分け、平方根どうしの大小の根拠として主張 `nonnegative_real_order_from_squares`（u, v ≥ 0 で u² ≤ v² なら u ≤ v）を足した（`020_critical_point.ts`）。3 個の主張に同名の検算を付けた。
+  等号と不等号の差の因数分解は QQ[u,v]・QQ[c]・有理関数体・D1²・D2² の関係式のイデアルで厳密に、各点の大小は sin を AA で厳密に・π をボールで、積分は Arb の厳密な数値積分で確かめた。
+  人手証明を直した（本文に無い平方根の単調性に頼っていた D2 ≤ D1・D1 ≥ p・D2 ≥ c0 p・分母 ≥ δ を新しい主張から、0 ≤ c0 p ≤ s・被積分関数の連続性・F(θ) = θ²/2 の導関数を準備に、各点評価と B の数値評価を 1 行 1 操作の鎖に、逆数の大小を独立の鎖に）。
+  「これが対数発散の源である」の段落は解釈なので注記へ移した。下流 `second_derivative_log_divergence` の B と 0.88 の行に新しいラベルの参照を足した。計算の誤りは無かった。
+
 ## 次の一歩
 
-`020_critical_point.ts` の `sine_integral_two_sided`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_transfer_matrix_representation.ts` の `sigma_z_diagonal_action`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -216,3 +221,4 @@
 - 2026-11-02、`elementary_sine_bounds` の分割で見つかった（外部の前提と Lean との対応）: 本文の sin・cos（弧の長さで定めた arcsin の逆関数）の導関数と π の数値は、本文では証明せず `remark_real_analysis_facts_R3_R4` で外部から持ち込んだ。本文の中で示すなら、arcsin の導関数と逆関数の微分から sin' = cos を導き、π の評価を折れ線の弧の長さから導く。
   `critical_point_and_log_divergence.ts` の `second_derivative_log_divergence` の `9.8696 ≤ π²`・`π ≤ 3.1416` は、まだ `pi_squared_numerical_bounds` と円周率の数値の評価を引いていない。そのブロックの検算を足すときに扱う。
   Lean の `ClaimElementarySineBounds.lean` と `lean/docs/ch020-formalization.md` は、`c0`・`c0_bounds`・`elementary_sine_bounds_linear` をラベル `elementary_sine_bounds` に対応づけたままで、実際の対応は `def_sine_bound_constant`・`sine_bound_constant_numerical_bounds`・`sine_half_angle_linear_bounds` である。`elementary_sine_bounds_cube` は下側 0 ≤ θ/2 - sin(θ/2) も述べるが、人手の主張は上側だけになった。足した主張（`sine_zero` から `sine_cubic_lower_bound` まで、`pi_squared_numerical_bounds`）に 1 対 1 の Lean は無く、今の Lean は mathlib の `Real.sin_le`・`Real.sin_ge_sub_cube` に委ねている。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-02、`sine_integral_two_sided` の分割で見つかった（Lean との対応）: Lean の具体版 `ClaimSineIntegralTwoSided.lean` は、各点評価を必要十分版の系と `nlinarith` で示しており、直した人手証明（`nonnegative_real_order_from_squares` を引く平方根の大小、差の各点評価の 12 行の鎖、分母の逆数の評価）と 1 対 1 に対応しない。`Bconst_le` も `nlinarith` で、`sine_integral_constant_numerical_bound` の鎖と対応しない。`nonnegative_real_order_from_squares` に対応する Lean は無い（コメントの対応づけだけ新しいラベルへ直した）。Lean の連続実行の状態台帳へ渡す。
