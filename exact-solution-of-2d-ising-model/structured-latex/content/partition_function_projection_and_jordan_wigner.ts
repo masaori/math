@@ -3293,9 +3293,18 @@ P^{(+)} f
         " を用いて",
       ]),
       displayMath(
-        String.raw`V^{(+)} := \left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}
+        String.raw`V^{(+)} := \left(\left(V_1^{(+)}\right)^{1/2} V_2\right) \left(V_1^{(+)}\right)^{1/2}
 \ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
+      paragraph([
+        "積は ",
+        ref("mat_mult"),
+        " による。",
+        ref("mat_mult_associative"),
+        " より括弧の付け方によらず同じ行列なので、以後括弧を省いて ",
+        math(String.raw`\left(V_1^{(+)}\right)^{1/2} V_2 \left(V_1^{(+)}\right)^{1/2}`),
+        " とも書く。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -3985,10 +3994,18 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
         " を用いて",
       ]),
       displayMath(
-        String.raw`W := V_1^{1/2}\,V_2\,V_1^{1/2}
+        String.raw`W := \left(V_1^{1/2}\,V_2\right)V_1^{1/2}
 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
       ),
-      paragraph(["と定める。"]),
+      paragraph([
+        "と定める。積は ",
+        ref("mat_mult"),
+        " による。",
+        ref("mat_mult_associative"),
+        " より括弧の付け方によらず同じ行列なので、以後括弧を省いて ",
+        math(String.raw`V_1^{1/2}V_2V_1^{1/2}`),
+        " とも書く。",
+      ]),
     ],
     conversion: { status: "added" },
   },
@@ -4000,54 +4017,115 @@ P^{(+)}\left(V_1^{(+)}\right)^{1/2}
     labels: ["symmetrized_transfer_matrix_on_sectors"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        "、結合定数 ",
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " とする。",
         ref("def_symmetrized_transfer_matrix"), " の ", math(String.raw`W`),
         "、", ref("def_epsilon_projectors"), " の ", math(String.raw`P^{(+)}`),
         "、", ref("def_V_plus"), " の ", math(String.raw`V^{(+)}`),
-        " について、次が成り立つ。",
+        "（いずれも ", math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`), " の元）",
+        "について、次が成り立つ。",
       ]),
       displayMath(String.raw`W P^{(+)} = V^{(+)}P^{(+)}`),
     ],
     proof: [
       paragraph([
-        math(String.raw`B:=V_1^{1/2}`), " は ", ref("def_transfer_matrix_square_root"),
-        "、", math(String.raw`C:=(V_1^{(+)})^{1/2}`), " は ", ref("def_V1_plus_square_root"),
-        " の行列とし、", math(String.raw`P:=P^{(+)}`), " と略記する。",
-        ref("V1_restriction_to_eigenspaces"), " に結合定数 ", math(String.raw`K_1/2`),
-        " を代入すると（右辺の指数の中身は ", ref("def_H1_plus"), " の ", math(String.raw`\tfrac{i}{2}K_1H_1^{(+)}`),
-        " である）、任意の ", math(String.raw`f\in\mathcal F^{(+)}`),
-        " について ", math(String.raw`Bf=Cf`), " を得る。",
-        ref("epsilon_projector_properties"), " (2) より任意の ", math(String.raw`x\in\mathbb C^{2^{M_{\mathrm{col}}}}`),
-        " に対して ", math(String.raw`Px\in\mathcal F^{(+)}`), " なので、",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`), "、",
+        math(String.raw`B:=V_1^{1/2}`), "（", ref("def_transfer_matrix_square_root"), "）、",
+        math(String.raw`C:=\left(V_1^{(+)}\right)^{1/2}`), "（", ref("def_V1_plus_square_root"), "）、",
+        math(String.raw`P:=P^{(+)}`), " と書く。",
+        math(String.raw`\mathbb{C}^{n}`), " の元は ", ref("mat_mult"),
+        " のとおり ", math(String.raw`n`), " 行 1 列の行列として積に入れる。",
+        math(String.raw`V_1'\in\mathrm{Mat}(n,\mathbb{C})`), " を、",
+        ref("def_transfer_matrix"), " の ", math(String.raw`V_1`),
+        " を結合定数 ", math(String.raw`\tfrac12 K_1\in\mathbb{R}_{>0}`), " で作った行列とする。",
+        math(String.raw`D := \sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^z\sigma_{m+1}^z`),
+        " は ", ref("def_transfer_matrix_square_root"), " のもの、",
+        math(String.raw`H_1^{(+)}`), " は ", ref("def_H1_plus"), " のもの、",
+        math(String.raw`\mathcal F^{(+)}`), " は ", ref("def_even_eigenvectors_of_epsilon"),
+        " のもので、",
+        "実数 ", math(String.raw`\tfrac12,\ K_1,\ \tfrac12K_1`), " は、行列のスカラー倍に入るときは ",
+        ref("inclusion_rr_to_cc"), " の包含で写した ", math(String.raw`\mathbb{C}`),
+        " の元を同じ記号で書き、", math(String.raw`\tfrac{i}{2} := i\cdot\tfrac12\in\mathbb{C}`), " とおく。",
+        "任意の ", math(String.raw`f\in\mathcal F^{(+)}`), " について",
       ]),
       displayMath(String.raw`\begin{aligned}
-(BP)x
-&=B(Px) &&(\because\ \text{行列積の結合則})\\
-&=C(Px) &&(\because\ \blkref{V1_restriction_to_eigenspaces}\text{ に }K_1/2\text{ と }Px\text{ を代入})\\
-&=(CP)x &&(\because\ \text{行列積の結合則}).
+Bf
+&=\exp\!\left(\tfrac12 K_1 D\right)f
+  &&(\because\ \blkref{def_transfer_matrix_square_root})\\
+&=V_1'f
+  &&(\because\ \blkref{first_transfer_matrix_pauli_form}\ (K_1\to\tfrac12K_1))\\
+&=\left(\mathbf{end}(V_1')\right)(f)
+  &&(\because\ \blkref{end_agrees_with_matrix_vector_product})\\
+&=\left(\mathbf{end}\!\left(\exp\!\left(i\left(\tfrac12K_1\right)\left(Y_1Z_2+\cdots+Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}}-Y_{M_{\mathrm{col}}}Z_1\right)\right)\right)\right)(f)
+  &&(\because\ \blkref{V1_restriction_to_eigenspaces}\ (K_1\to\tfrac12K_1),\ f\in\mathcal F^{(+)})\\
+&=\left(\mathbf{end}\!\left(\exp\!\left(i\left(\tfrac12K_1\right)H_1^{(+)}\right)\right)\right)(f)
+  &&(\because\ \blkref{def_H1_plus})\\
+&=\exp\!\left(i\left(\tfrac12K_1\right)H_1^{(+)}\right)f
+  &&(\because\ \blkref{end_agrees_with_matrix_vector_product})\\
+&=\exp\!\left(i\left(\tfrac12\cdot K_1\right)H_1^{(+)}\right)f
+  &&(\because\ \blkref{real_inclusion_preserves_product}\text{。実数の積 }\tfrac12K_1\text{ の像は像どうしの }\mathbb{C}\text{ の積})\\
+&=\exp\!\left(\tfrac{i}{2}K_1H_1^{(+)}\right)f
+  &&(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field})\\
+&=Cf
+  &&(\because\ \blkref{def_V1_plus_square_root}).
 \end{aligned}`),
       paragraph([
-        "すべての数ベクトルへの作用が等しいため ", math(String.raw`BP=CP`), " である。",
+        "任意の ", math(String.raw`x\in\mathbb C^{n}`), " について、",
+        ref("epsilon_projector_properties"), " (2) より ",
+        math(String.raw`Px\in\mathcal F^{(+)}`), " なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\mathbf{end}(BP)\right)(x)
+&=(BP)x
+  &&(\because\ \blkref{end_agrees_with_matrix_vector_product})\\
+&=B(Px)
+  &&(\because\ \blkref{mat_mult_associative})\\
+&=C(Px)
+  &&(\because\ \text{上の }Bf=Cf\text{ を }f\to Px\text{ で})\\
+&=(CP)x
+  &&(\because\ \blkref{mat_mult_associative})\\
+&=\left(\mathbf{end}(CP)\right)(x)
+  &&(\because\ \blkref{end_agrees_with_matrix_vector_product}).
+\end{aligned}`),
+      paragraph([
+        "これがすべての ", math(String.raw`x\in\mathbb C^{n}`), " で成り立つので、",
+        math(String.raw`\mathcal F = \mathbb C^{n}`), " 上の写像として ",
+        math(String.raw`\mathbf{end}(BP)=\mathbf{end}(CP)`), " であり、",
+        ref("end_is_algebra_isomorphism"), " (1) の単射性より ",
+        math(String.raw`BP=CP`), " である。これと ",
         ref("epsilon_projector_commutes_with_V1_plus_square_root"), " の ",
-        math(String.raw`PC=CP`), " と ", ref("epsilon_projector_commutes_with_V2"), " の ",
+        math(String.raw`PC=CP`), "、",
+        ref("epsilon_projector_commutes_with_V2"), " の ",
         math(String.raw`PV_2=V_2P`), " を用いると、",
       ]),
       displayMath(String.raw`\begin{aligned}
 WP
-&=BV_2BP &&(\because\ \blkref{def_symmetrized_transfer_matrix})\\
-&=BV_2CP &&(\because\ BP=CP)\\
-&=BV_2PC &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root}\text{ の }CP=PC)\\
-&=BPV_2C &&(\because\ \blkref{epsilon_projector_commutes_with_V2}\text{ の }V_2P=PV_2)\\
-&=CPV_2C &&(\because\ BP=CP)\\
-&=CV_2PC &&(\because\ \blkref{epsilon_projector_commutes_with_V2}\text{ の }PV_2=V_2P)\\
-&=CV_2CP &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root}\text{ の }PC=CP)\\
+&=\left((BV_2)B\right)P &&(\because\ \blkref{def_symmetrized_transfer_matrix})\\
+&=(BV_2)(BP) &&(\because\ \blkref{mat_mult_associative})\\
+&=(BV_2)(CP) &&(\because\ BP=CP)\\
+&=(BV_2)(PC) &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root})\\
+&=\left((BV_2)P\right)C &&(\because\ \blkref{mat_mult_associative})\\
+&=\left(B(V_2P)\right)C &&(\because\ \blkref{mat_mult_associative})\\
+&=\left(B(PV_2)\right)C &&(\because\ \blkref{epsilon_projector_commutes_with_V2})\\
+&=\left((BP)V_2\right)C &&(\because\ \blkref{mat_mult_associative})\\
+&=\left((CP)V_2\right)C &&(\because\ BP=CP)\\
+&=\left(C(PV_2)\right)C &&(\because\ \blkref{mat_mult_associative})\\
+&=\left(C(V_2P)\right)C &&(\because\ \blkref{epsilon_projector_commutes_with_V2})\\
+&=\left((CV_2)P\right)C &&(\because\ \blkref{mat_mult_associative})\\
+&=(CV_2)(PC) &&(\because\ \blkref{mat_mult_associative})\\
+&=(CV_2)(CP) &&(\because\ \blkref{epsilon_projector_commutes_with_V1_plus_square_root})\\
+&=\left((CV_2)C\right)P &&(\because\ \blkref{mat_mult_associative})\\
 &=V^{(+)}P &&(\because\ \blkref{def_V_plus}).
 \end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
-        "セクター射影子による表示を上限の最大値分解から分離した。BP=CP と後続の等式鎖は一行ずつ SageMath 検査へ対応済みである。Lean では physicalSymTransferR_map_mul_epsProj_eq_Vsym として同じ九段を形式化済みである。有限個の浮動小数点計算の成功と形式証明は別の検証層として扱う。",
+        "セクター射影子による表示を上限の最大値分解から分離した。Lean の具体版は PhysicalSymTransferBridge.lean の Ising2D.symmetrized_transfer_matrix_on_sectors で、2026-11-02 に書き直す前の人手証明（九段）の形のままであり、新しい鎖と 1 対 1 ではない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。V^{(+)} の定義の参照先を <def_V_plus> にし、射影子の像の参照を <epsilon_projector_properties> (2) に直した。",
+        "2026-11-02（全証明の SageMath 検算 symmetrized_transfer_matrix_on_sectors）: 主張に M_col ≥ 2・K_1, K_2 > 0 の帰属を書いた。散文で「K_1/2 を代入すると Bf = Cf」としていた段を、def_transfer_matrix_square_root・first_transfer_matrix_pauli_form（結合定数 K_1/2 の V_1'）・end_agrees_with_matrix_vector_product・V1_restriction_to_eigenspaces・def_H1_plus・real_inclusion_preserves_product・ℂ の結合律・def_V1_plus_square_root の一行一操作の鎖に、「すべての数ベクトルへの作用が等しいため BP = CP」を end の単射性（end_is_algebra_isomorphism (1)）から示す形に、ラベルの無かった「行列積の結合則」を mat_mult_associative の参照にした。W と V^{(+)} の定義に積の括弧を明示し、WP の鎖を括弧どおりの十六等号にして、括弧の付け替えを mat_mult_associative の一行ずつにした。044 の九本の浮動小数点の行単位検査は厳密な検算 sagemath/check/symmetrized_transfer_matrix_on_sectors/ に置き換えた。計算の誤りは無かった。",
       ],
     },
   },

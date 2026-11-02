@@ -30,8 +30,8 @@
   `044_claim_max_eigenvalue/_prelude.sage`（と、それが読む `043_claim_transfer_matrix_bridge/_prelude.sage`）の定義を使う。
   `V_2` はパウリ行列表示（`second_transfer_matrix_pauli_form` の右辺）で作るので、3 行目から 4 行目の残差は、
   `iH_2 = Σ_m σ^x_m` が倍精度でも成分ごとに一致するため 0 になる。
-- 0 行目から 1 行目の等号（`symmetrized_transfer_matrix_on_sectors`）は、`044_claim_max_eigenvalue/` の
-  一行ずつの検査（`check_W_P_equals_B_V2_B_P.sage` ほか）が確かめている。ここでは代入を重ねた結果の一致を確かめる。
+- 0 行目から 1 行目の等号（`symmetrized_transfer_matrix_on_sectors`）は、`check/symmetrized_transfer_matrix_on_sectors/` の
+  一行ずつの検算が確かめている。ここでは代入を重ねた結果の一致を確かめる。
 
 ## 実行方法
 

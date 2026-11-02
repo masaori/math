@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 82 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 81 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -154,11 +154,21 @@
   一般の主張の 9 行の鎖は `QQ(i)` 上の不定元の行列 X := Y + εYε で厳密に（仮定を外すと第 5→6 行だけが崩れる）、主張は ε と可換な行列の空間の基底で、V_1・V_2 は成分の exp の値を不定元に置いて厳密に、V_1^{(+)} と平方根は exp を本文の部分和と尾の上界のボールで確かめた。
   人手証明を直した（「分配法則」「IX = X」「X = XI」「分配法則とスカラー倍との可換性」を `002_linear_space_general.ts` の主張の参照の一行一操作に、1/2 が `inclusion_rr_to_cc` の ℂ の元であることを明記）。下流 `symmetrized_transfer_matrix_on_sectors` の 5 か所・不採用のノート `minus_sector_not_adopted.ts` の 2 か所・Lean のコメントと `lean/README.md`・`lean/docs/ch010-formalization.md`・043 の検算の説明を新しいラベルに付け替えた。計算の誤りは無かった。Lean の具体版 `commute_epsProjPlus_of_commute_epsilon` は人手の 9 行の鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `symmetrized_transfer_matrix_on_sectors`（`W P^{(+)} = V^{(+)} P^{(+)}`）: `sagemath/check/symmetrized_transfer_matrix_on_sectors/`。証明の三つの鎖（f ∈ F^{(+)} で `Bf = Cf` の 9 等号、`end(BP)(x) = ⋯ = end(CP)(x)` の 5 等号、`WP = ⋯ = V^{(+)}P` の 16 等号）を一行ずつ確かめた。
+  `Bf = Cf` は exp の値だけを本文の部分和と尾の上界のボールで、定義と和の形の行は `QQ(i)` で厳密に（first_transfer_matrix_pauli_form の行は exp((1/2)K_1 n) を不定元の冪に置いて厳密に）、end は def_end_iso の文言どおりに組んだ写像で計算した。
+  後の二つの鎖は、仮定（`Bf = Cf`、`BP = CP`・`PC = CP`・`PV_2 = V_2P`）を満たす一般の組（不定元の行列、M_col = 3, 4 は `QQ(i)` の乱数）で厳密に確かめ、仮定を一つずつ外すとその仮定を引く行だけが崩れることを見た。主張は本文の行列のボールで確かめた。
+  人手証明を直した: 主張に `M_col ≥ 2`・`K_1, K_2 > 0` を書いた。散文の「K_1/2 を代入すると Bf = Cf」を、結合定数 (1/2)K_1 の `V_1'` を置いた一行一操作の鎖にした。「すべての数ベクトルへの作用が等しいため BP = CP」は、`end_is_algebra_isomorphism` (1) の単射性から示す形にした。ラベルの無かった「行列積の結合則」は `mat_mult_associative` の参照にした。
+  `def_symmetrized_transfer_matrix` と `def_V_plus` の三つの行列の積に括弧を明示し、`WP` の鎖を括弧どおりの 16 等号にした。044 の九本の浮動小数点の行単位検査は、証明の行が変わったので削除した。計算の誤りは無かった。Lean の具体版 `Ising2D.symmetrized_transfer_matrix_on_sectors`（`PhysicalSymTransferBridge.lean`）は旧い九段の形のままで、新しい鎖（end を通す段・16 等号）と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`partition_function_projection_and_jordan_wigner.ts` の `symmetrized_transfer_matrix_on_sectors`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `antiperiodic_exp_sum`（`--list` の先頭）から、文書順に検算を足す。
+
+番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`symmetrized_transfer_matrix_on_sectors` の検算で見つかった（括弧の無い積）: `def_symmetrized_transfer_matrix` と `def_V_plus` の定義に積の括弧を明示した。しかし、ほかのブロックは括弧を省いた `V_1^{1/2}V_2V_1^{1/2}`・`BV_2B` を、結合律を引かずに使っている（`thermodynamic_limit_column_limit_and_closed_form.ts` の `εW = Wε` の鎖、`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `W = BV_2B`、`V_plus_exponential_form` の鎖など）。定義のブロックには「括弧によらず同じ行列なので省いて書く」と書いたが、各鎖の括弧の付け替えは、それぞれのブロックの検算を足すときに扱う。
 
 - 2026-11-02、`epsilon_commutes_with_transfer_matrices` の分割で見つかった（重複）: `V1_in_Z_Y_epsilon` の証明 Step 1 は、新しい主張 `site_pauli_prefix_product_kronecker_form` と同じ帰納法を証明の中で示し直している。`V1_restriction_to_eigenspaces` の証明 Step 1・Step 2 も、`epsilon_anticommutes_with_jordan_wigner_Z`・`_Y`・`product_of_anticommuting_matrices_commutes` と同じ内容を散文と未ラベルの根拠で示している。どちらも既に検算が付いているので、この単位では書き換えず、新しい主張を引く形への置き換えは検算の付いたブロックの見直しで扱う。
 
