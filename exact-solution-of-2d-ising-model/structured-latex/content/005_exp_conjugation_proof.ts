@@ -1322,7 +1322,11 @@ u+\overline{u}
       paragraph([
         "（2）",
         math(String.raw`g\in\mathrm{M}(n,\mathbb{C})`),
-        " が正則（すなわち ",
+        " が正則（すなわち、",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）として ",
         math(String.raw`gh=hg=I`),
         " を満たす ",
         math(String.raw`h\in\mathrm{M}(n,\mathbb{C})`),
@@ -1349,15 +1353,15 @@ u+\overline{u}
         String.raw`\begin{aligned}
 h
 &=hI
-  \quad (\because \text{単位行列との右からの積}) \\
+  \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
 &=h(gh')
   \quad (\because gh'=I) \\
 &=(hg)h'
-  \quad (\because \text{行列積の結合律}) \\
+  \quad (\because \blkref{mat_mult_associative}) \\
 &=Ih'
   \quad (\because hg=I) \\
 &=h'
-  \quad (\because \text{単位行列との左からの積})
+  \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
       paragraph([
@@ -1379,6 +1383,7 @@ h
           "README のゴール設定によりリー群の経路を本文から外したので、同じ labels: def_ad_X_matrix で" +
           "複素行列だけを使う具体版へ置き換えた。旧ブロックは " +
           "structured-latex/notes/005_exp_conjugation_lie_route.ts に原文のまま退避してある。",
+        "2026-11-02: 逆行列の一意性の鎖で、名前だけの根拠「単位行列との右からの積」「単位行列との左からの積」を identity_matrix_is_right_unit_of_mat_mult・identity_matrix_is_left_unit_of_mat_mult へのラベル参照に、「行列積の結合律」を mat_mult_associative へのラベル参照に替え、正則の定義の I が I_{Mat(n,C)}（def_identity_matrix）であることを書いた。",
       ],
     },
   },
@@ -1516,8 +1521,10 @@ h
 \mathrm{ad}_X(cZ)
 &= X(cZ)-(cZ)X
 &&(\because\ \mathrm{ad}_X \text{ の定義})\\
+&= c(XZ)-(cZ)X
+&&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor})\\
 &= c(XZ)-c(ZX)
-&&(\because\ \text{スカラー倍と行列の積の両立})\\
+&&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
 &= c(XZ-ZX)
 &&(\because\ \text{スカラー倍の分配律})\\
 &= c\,\mathrm{ad}_X(Z)
@@ -2096,6 +2103,7 @@ X(-X)
         "2026-09-04 の式変形統一で、Step 5 の三角不等式・斉次性と指数級数の尾部評価に後置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 6 の三角不等式と斉次性に前置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 7 の指数の積の定理に前置きしていた参照段落を削った（各適用行の末尾に同じ \\blkref が既にある）。内容・式変形・根拠は変えていない。",
+        "2026-11-02: Step 1 の ad_X(cZ) の鎖で、名前だけの根拠「スカラー倍と行列の積の両立」で 2 つの項を同時に変えていた 1 行を、scalar_multiple_factors_out_of_right_factor（X(cZ)=c(XZ)）と scalar_multiple_factors_out_of_left_factor（(cZ)X=c(ZX)）の 2 行に割ってラベル参照に替えた。",
       ],
     },
   },
