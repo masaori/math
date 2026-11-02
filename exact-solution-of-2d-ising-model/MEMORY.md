@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算として、`linearity_of_T_on_check_Z_Y`・`linearity_of_T_V2`（(V_1^{(+)})^{1/2}・V_2 による共役写像の ℂ 線型性）に検算 `sagemath/check/<ラベル>/` を付けた（未検算 67 件）。g を K_1 = 2 log y・K_2 = log x で QQ に作り、a, b を不定元にして証明の一行と当てはめた linearity_of_T の鎖を厳密に確かめた。人手証明は主張を T_actions_on_check_Z_Y と同じ書き方にそろえ、各記号の所属と根拠を書いた（主張の中身は不変）。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`calc_of_TxT_check_Z_Y`）。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の七十五個目として、`check_joint_eigenspace_decomposition` の (l4) を行った。定義 `def_power_of_complex_number` と主張 `sum_over_binary_words_distributes_in_right_factor` を足し、Step 4 の「冪の零乗」と Step 5 の「単位行列の作用」「行列の作用の分配法則」2 か所「零ベクトルへの行列の作用」をラベル参照に替えた（主張の中身は不変）。Lean は具体版 `mul_binaryWordMatrixSum`、必要十分版からの導出と `TensorPow M` の系。SageMath は新しいディレクトリと `050` の `check_36`。次は状態台帳の (l4b)（Step 5 の「Step 1 の直交性と冪等性」の行）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の七十四個目として、`check_joint_eigenspace_decomposition` の (l3c2) を行った。定義 `def_finite_product_of_matrices_omitting_one_index`・主張 `moving_one_factor_of_finite_product_to_the_end` を足し、`∏_{μ≠ν}` を使う Step 1 の `ε ≠ ε'` の鎖と Step 3 の `ň_νQ̌_ε` の鎖をその参照で書き直した（主張の中身は不変）。Lean は具体版 `DefinitionFiniteProductOfMatricesOmittingOneIndex.lean`、必要十分版 `NecSuf/FiniteProductOmittingOneIndex.lean`、`TensorPow M` の系。SageMath は新しいディレクトリと `050` の `check_35`。次は状態台帳の (l4)（Step 4・Step 5 の名前だけの根拠）。

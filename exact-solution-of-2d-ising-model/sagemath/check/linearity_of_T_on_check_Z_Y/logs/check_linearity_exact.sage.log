@@ -1,0 +1,199 @@
+PASS: M=2 y=2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=2 y=2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=2 y=2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=2 y=2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=2 y=2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=2 y=2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=2 y=2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=2 y=2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=2 y=2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=2 y=2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=2 y=2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=2 y=2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=2 y=2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=2 y=2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=2 y=2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=2 y=2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=2 y=2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=2 y=2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=2 y=2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=2 y=2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=2 y=2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=2 y=2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=2 y=2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=2 y=3/2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=2 y=3/2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=2 y=3/2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=2 y=3/2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=2 y=3/2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=2 y=3/2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=2 y=3/2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=2 y=3/2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=2 y=3/2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=2 y=3/2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=2 y=3/2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=2 y=3/2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=2 y=3/2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=2 y=3/2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=2 y=3/2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=2 y=3/2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=2 y=3/2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=2 y=3/2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=3 y=2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=3 y=2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=3 y=2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=2 mu=3: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=2 mu=3: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=3: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=2 mu=3: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=2 mu=3: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=2 mu=3: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=2 mu=3: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=2 mu=3: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=2 mu=3: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=2 mu=3: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=3/2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=3 y=3/2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=3 y=3/2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=3 y=3/2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=3/2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=3/2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=3/2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=3/2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=3/2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=3/2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=3/2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=3/2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=3/2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=3/2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=3/2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=3/2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=3/2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=3 y=3/2 mu=3: Ž_μ, Y̌_μ ∈ R
+PASS: M=3 y=3/2 mu=3: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=3: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=3: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=3 y=3/2 mu=3: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=3 y=3/2 mu=3: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=3 y=3/2 mu=3: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=3 y=3/2 mu=3: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=3 y=3/2 mu=3: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=3 y=3/2 mu=3: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=4 y=2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=4 y=2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=4 y=2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=2 mu=3: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=2 mu=3: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=3: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=3: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=2 mu=3: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=2 mu=3: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=2 mu=3: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=2 mu=3: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=2 mu=3: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=2 mu=3: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=2 mu=4: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=2 mu=4: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=4: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=2 mu=4: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=2 mu=4: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=2 mu=4: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=2 mu=4: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=2 mu=4: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=2 mu=4: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=2 mu=4: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=3/2: S, S^{-1} は 2^M 次の正方行列
+PASS: M=4 y=3/2: SS^{-1} = S^{-1}S = I（S ∈ R^×）
+PASS: M=4 y=3/2: 渡した S^{-1} は Sage の inverse と一致
+PASS: M=4 y=3/2 mu=1: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=3/2 mu=1: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=1: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=1: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=1: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=3/2 mu=1: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=3/2 mu=1: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=3/2 mu=1: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=3/2 mu=1: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=3/2 mu=1: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=3/2 mu=2: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=3/2 mu=2: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=2: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=2: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=2: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=3/2 mu=2: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=3/2 mu=2: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=3/2 mu=2: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=3/2 mu=2: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=3/2 mu=2: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=3/2 mu=3: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=3/2 mu=3: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=3: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=3: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=3: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=3/2 mu=3: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=3/2 mu=3: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=3/2 mu=3: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=3/2 mu=3: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=3/2 mu=3: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+PASS: M=4 y=3/2 mu=4: Ž_μ, Y̌_μ ∈ R
+PASS: M=4 y=3/2 mu=4: linearity_of_T の行「T_g(aŽ+bY̌) = (g(aŽ+bY̌))g^{-1}」=「(g(aŽ)+g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=4: linearity_of_T の行「(g(aŽ)+g(bY̌))g^{-1}」=「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=4: linearity_of_T の行「(g(aŽ))g^{-1}+(g(bY̌))g^{-1}」=「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」
+PASS: M=4 y=3/2 mu=4: linearity_of_T の行「(a(gŽ))g^{-1}+(b(gY̌))g^{-1}」=「a((gŽ)g^{-1})+b((gY̌)g^{-1})」
+PASS: M=4 y=3/2 mu=4: linearity_of_T の行「a((gŽ)g^{-1})+b((gY̌)g^{-1})」=「aT_g(Ž)+bT_g(Y̌)」
+PASS: M=4 y=3/2 mu=4: 主張の一行 T_S(aŽ_μ+bY̌_μ) = aT_S(Ž_μ)+bT_S(Y̌_μ)
+PASS: M=4 y=3/2 mu=4: Sage の積と inverse で組んだ両辺も一致し、本文の成分の式の値に等しい
+PASS: M=4 y=3/2 mu=4: 対照 a と b を入れ替えた右辺とは一致しない
+PASS: M=4 y=3/2 mu=4: 対照 T_S(Ž_μ) ≠ Ž_μ、T_S(Y̌_μ) ≠ Y̌_μ
+RESULT: PASS
