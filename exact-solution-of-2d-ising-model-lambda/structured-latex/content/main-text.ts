@@ -6494,19 +6494,19 @@ a+2b&=(a+b)+b
                 displayMath(String.raw`\begin{aligned}
 (\operatorname{Res}(\operatorname{Glue}((\tau_h)_h)))_k(j)
 &=\operatorname{Glue}((\tau_h)_h)(j)
-&&(\because\ \operatorname{Res}\text{ の定義})\\
+&&\bigl(\because\ \operatorname{Res}\text{ の定義}\bigr)\\
 &=\tau_{b(j)}(j)
-&&(\because\ \operatorname{Glue}\text{ の定義})\\
+&&\bigl(\because\ \operatorname{Glue}\text{ の定義}\bigr)\\
 &=\tau_k(j)
-&&(\because\ j\in\mathcal J_k)
+&&\bigl(\because\ j\in\mathcal J_k\bigr)
 \end{aligned}`),
                 paragraph(["である。また任意の ", math(String.raw`\sigma\in\operatorname{Perm}_b(\mathcal J)`), " と ", math(String.raw`j\in\mathcal J`), " について"]),
                 displayMath(String.raw`\begin{aligned}
 \operatorname{Glue}(\operatorname{Res}(\sigma))(j)
 &=\sigma_{b(j)}(j)
-&&(\because\ \operatorname{Glue}\text{ の定義})\\
+&&\bigl(\because\ \operatorname{Glue}\text{ の定義}\bigr)\\
 &=\sigma(j)
-&&(\because\ \operatorname{Res}\text{ の定義})
+&&\bigl(\because\ \operatorname{Res}\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["となる。二つの合成が恒等写像なので ", math(String.raw`\operatorname{Res}`), " は全単射である。空のファイバー上には空置換がただ一つあり、同じ議論が成り立つ。"]),
               ],
@@ -59476,6 +59476,12 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           kind: "definition",
                           title: { text: "方向番号の軸" },
                           labels: ["def_direction_axis"],
+                          lean: [
+                            "Ising2DLambda.KacWard.directionAxis",
+                            "Ising2DLambda.KacWard.directionAxis_values",
+                            "Ising2DLambda.NecSuf.KacWard.residueAxis",
+                            "Ising2DLambda.KacWard.directionAxis_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([
