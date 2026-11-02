@@ -6415,19 +6415,19 @@ a+2b&=(a+b)+b
                 displayMath(String.raw`\begin{aligned}
 \prod_{i\in\mathcal J}B_{i,\sigma(i)}
 &=B_{j,\sigma(j)}\prod_{i\in\mathcal J\setminus\{j\}}B_{i,\sigma(i)}
-&&(\because\ \text{有限積から }j\text{ の因子を取り出す})\\
+&&\bigl(\because\ \text{有限積から }j\text{ の因子を取り出す}\bigr)\\
 &=0\cdot\prod_{i\in\mathcal J\setminus\{j\}}B_{i,\sigma(i)}
-&&(\because\ b(j)\ne b(\sigma(j))\text{ とブロック外の零成分})\\
+&&\bigl(\because\ b(j)\ne b(\sigma(j))\text{ とブロック外の零成分}\bigr)\\
 &=0
-&&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の零元}\bigr)
 \end{aligned}`),
                 displayMath(String.raw`\begin{aligned}
 \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}
 \prod_{i\in\mathcal J}B_{i,\sigma(i)}
 &=\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\sigma))}\cdot0
-&&(\because\ \text{直前の積の等式})\\
+&&\bigl(\because\ \text{直前の積の等式}\bigr)\\
 &=0
-&&(\because\ \overline{\mathbb Q}[x]\text{ の零元})
+&&\bigl(\because\ \overline{\mathbb Q}[x]\text{ の零元}\bigr)
 \end{aligned}`),
                 paragraph(["置換展開を、ブロックを保つ置換と保たない置換に分ける。"]),
                 displayMath(String.raw`\begin{aligned}
