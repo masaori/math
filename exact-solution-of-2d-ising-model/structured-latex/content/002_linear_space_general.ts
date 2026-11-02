@@ -1101,6 +1101,58 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_matrix_double_negation",
+    kind: "claim",
+    title: { text: "行列の符号反転を二回施すと元に戻る" },
+    labels: ["matrix_double_negation"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。符号反転は ",
+        ref("def_matrix_negation"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`-(-A) = A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(-(-A)\bigr)_{ij}
+&= -\bigl((-A)_{ij}\bigr)
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= -(-A_{ij})
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= (-1_{\mathbb{C}})\,\bigl((-1_{\mathbb{C}})\,A_{ij}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\text{ を 2 か所へ同時適用}\bigr)\\
+&= \bigl((-1_{\mathbb{C}})\,(-1_{\mathbb{C}})\bigr)\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= 1_{\mathbb{C}}\,A_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{で}\ (-1_{\mathbb{C}})(-1_{\mathbb{C}})=1_{\mathbb{C}}\text{。}\blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= A_{ij}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 1 の合成の段で、k が奇数のときの Uσ_k^yU^{-1} が −(−σ_k^y) になり、" +
+          "σ_k^y へ戻す段を引けるよう足した。−A は def_matrix_negation の成分ごとの符号反転なので、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_difference",
     kind: "claim",
     title: { text: "スカラー倍は行列の差に分配する" },

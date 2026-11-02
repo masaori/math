@@ -296,6 +296,7 @@ export const ALL_LABELS = [
   "matrix_completeness",
   "matrix_difference_mul_vector",
   "matrix_difference_zero_iff_equal",
+  "matrix_double_negation",
   "matrix_exp_conjugation",
   "matrix_exp_series_converges",
   "matrix_minus_zero_matrix",

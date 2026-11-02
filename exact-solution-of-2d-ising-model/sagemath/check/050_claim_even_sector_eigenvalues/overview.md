@@ -24,7 +24,7 @@
   - `constant_c_value_even_sector`（**`c = (2 sinh 2K_2)^{M/2}`**）
   - `eigenvalues_of_V_plus`（`Λ̌_ε = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ε_μ − 1/2))`）
   - `max_eigenvalue_of_V_plus_simple`（`Λ̌_max = Λ^{(1/2)}_M` であり**単純固有値**）
-  - `sign_flip_conjugation`（Step 0・Step 1 の F・E による共役・Step 3・Step 4 の鎖。check_09・check_11・check_12・check_13・check_14・check_15・check_16・check_17）
+  - `sign_flip_conjugation`（Step 0・Step 1 の F・E による共役・Step 3・Step 4 の鎖。check_09・check_11・check_12・check_13・check_14・check_15・check_16・check_17・check_18）
 
 ### 何を確定させるための検証か
 
@@ -106,6 +106,7 @@ U        := E F,  E = E_1⊠…⊠E_M（E_m = σ^x（m 奇数）, I（m 偶数�
 | 15 | check_15_sign_flip_step1_E_conjugation_chains.sage | `sign_flip_conjugation` の Step 1 の `σ_k^pσ_k^q` の 10 行の鎖を足した組 `(p, q) = (y, x)` で、`k` が奇数のときの `Eσ_k^xE^{-1}` の鎖（Step 0・`identity_matrix_is_left_unit_of_mat_mult` の 2 行）と `Eσ_k^aE^{-1}`（`a = y, z`）の鎖（`(σ_k^xσ_k^a)σ_k^x` から `mat_mult_associative`・上の鎖の `(a, x)`・`negation_factors_out_of_right_factor`・`mat_mult_associative`・Step 0・`identity_matrix_is_left_unit_of_mat_mult` の 6 行）を一行ずつ。旧版の本文の 1 行目（第 `k` 因子だけが効く）を `E = ∏_{m 奇数}σ_m^x`・`E^{-1} = E` から組んで比べる段も残す（いまの本文の鎖の先頭は check_17 が受け持つ）。`QQ(i)` の厳密計算、`M = 2,3,4`、全ての奇数 `k`。否定コントロール 1 件 | PASS | 135 段、全段で厳密に一致 |
 | 16 | check_16_sign_flip_step0_E_F_U_invertibility_chains.sage | `sign_flip_conjugation` の Step 0 の可逆性の鎖。`E_mE_m = σ^xσ^x = I`（`m` 奇数）・`E_mE_m = II = I`（`m` 偶数）、`FF = I`・`EE = I` の 4 行ずつ（`F`・`E` の定義・`kronecker_product_rule` (1)・`pauli_matrix_products` / 上の `E_mE_m = I`・`kronecker_product_rule` (2)）、`def_invertible_elements_of_R` (ii) の証明の 6 行ずつを `g_1 = E`・`g_2 = F` で、`U^{-1} = F^{-1}E^{-1} = FE^{-1} = FE` を Sage の逆行列と突き合わせる。クロネッカー積の `E`・`F` が旧定義の行列の積 `∏_{m 奇数}σ_m^x`・`∏_mσ_m^z` と一致することも確かめる。`QQ(i)` の厳密計算、`M = 2,3,4,5`。否定コントロール 1 件 | PASS | 120 段、全段で厳密に一致 |
 | 17 | check_17_sign_flip_step1_W_conjugation_chains.sage | `sign_flip_conjugation` の Step 1 の先頭の 3 本の鎖を一行ずつ。`Wσ_k^aW^{-1} = I⊠⋯⊠((W_kσ^a)W_k)⊠⋯⊠I`（`W ∈ {E, F}`、Step 0 の `W^{-1} = W`・`W` の定義・`def_site_pauli_matrices`・`kronecker_product_rule` (1) 2 回・`identity_matrix_is_right_unit_of_mat_mult`・Step 0 の `W_mW_m = I` の 7 行）、`I⊠⋯⊠((σ^pσ^a)σ^p)⊠⋯⊠I = (σ_k^pσ_k^a)σ_k^p`（`p ∈ {x, z}`、5 行）、`k` 偶数の `I⊠⋯⊠((E_kσ^a)E_k)⊠⋯⊠I = σ_k^a`（4 行）。`F`・`E` の鎖の 1 行目の結論の符号も突き合わせる。`QQ(i)` の厳密計算、`M = 2,3,4`、全ての `k` と `a ∈ {x, y, z}`。否定コントロール 1 件 | PASS | 690 段、全段で厳密に一致 |
+| 18 | check_18_sign_flip_step1_composition_chains.sage | `sign_flip_conjugation` の Step 1 の合成の段を一行ずつ。合成の鎖 `UXU^{-1} = E(FXF^{-1})E^{-1}`（`U` の定義・Step 0 の `U^{-1} = FE`・`mat_mult_associative` 3 回・Step 0 の `F^{-1} = F`・`E^{-1} = E` の 7 行。成分を不定元に置いた `X` と全ての `σ_k^a` で）と、`a = x, y, z` の鎖（上の `F` の式・`negation_factors_out_of_right_factor`・`negation_factors_out_of_left_factor`・`E` の式（`k` の偶奇）・`k` 奇数の `σ^y` で `matrix_double_negation`）。否定コントロールとして、`U^{-1}` を `EF` と取り違えると合成の鎖の 3 行目の符号反転になり一致しないことを確かめる | PASS | `M = 2, 3, 4`、全ての `k`、`QQ(i)` と `QQ(i)` 上の多項式環で厳密等号（336 段） |
 | 逆行列の正定値性 | check_V_plus_inverse_positive_definite.sage | `V_plus_inverse_is_positive_definite`。本文の候補逆行列について全固有値の虚部が許容誤差以下で、実部がすべて正であることを独立検査 | PASS | 虚部の最大絶対値 `1.732e-14`、実部の最小値 `5.145e-4 > 0` |
 
 ## 結論

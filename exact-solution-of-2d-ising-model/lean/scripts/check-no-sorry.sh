@@ -689,8 +689,6 @@ targets=(
   Ising2D.eFlipFam_mul_self
   Ising2D.Fflip_mul_self
   Ising2D.Eflip_mul_self
-  Ising2D.Uflip_eq_siteProd
-  Ising2D.UflipInv_eq_siteProd
   Ising2D.siteProd_conj_siteOp
   Ising2D.siteProd_update_conj_eq_siteOp
   Ising2D.siteProd_update_eFlipFam_conj_of_odd
@@ -703,6 +701,15 @@ targets=(
   Ising2D.Eflip_conj_sigmaX_of_even
   Ising2D.Eflip_conj_sigmaY_of_even
   Ising2D.Eflip_conj_sigmaZ_of_even
+  Ising2D.Eflip_conj_sigmaX_of_odd
+  Ising2D.Eflip_conj_sigmaY_of_odd
+  Ising2D.Eflip_conj_sigmaZ_of_odd
+  Ising2D.Uflip_conj_eq_Eflip_conj_Fflip_conj
+  Ising2D.Uflip_conj_sigmaX_eq_neg
+  Ising2D.Uflip_conj_sigmaY_of_even
+  Ising2D.Uflip_conj_sigmaY_of_odd
+  Ising2D.Uflip_conj_sigmaZ_of_even
+  Ising2D.Uflip_conj_sigmaZ_of_odd
   Ising2D.Uflip_mul_inv
   Ising2D.UflipInv_mul
   Ising2D.Uflip_conj_Z
@@ -1085,6 +1092,12 @@ targets=(
   Ising2D.neg_eq_neg_one_smul_matrix
   Ising2D.neg_eq_neg_one_smul_matrix_of_necSuf
   Ising2D.neg_eq_neg_one_smul_tensorPow
+  Ising2D.neg_neg_matrix_apply
+  Ising2D.neg_neg_matrix
+  Ising2D.complex_neg_eq_neg_one_mul
+  Ising2D.complex_neg_one_mul_neg_one
+  Ising2D.neg_neg_matrix_of_necSuf
+  Ising2D.neg_neg_tensorPow
   Ising2D.Uflip_conj_mul
   Ising2D.Uflip_conj_smul
   Ising2D.mul_neg_matrix_of_necSuf
@@ -1130,6 +1143,8 @@ targets=(
   "Ising2D.NecSuf.smul_neg_matrix'"
   "Ising2D.NecSuf.neg_eq_neg_one_smul_matrix_apply'"
   "Ising2D.NecSuf.neg_eq_neg_one_smul_matrix'"
+  "Ising2D.NecSuf.neg_neg_matrix_apply'"
+  "Ising2D.NecSuf.neg_neg_matrix'"
   "Ising2D.NecSuf.smul_sub_matrix_apply'"
   "Ising2D.NecSuf.smul_sub_matrix'"
   Ising2D.eigenvalue_AMat_iff

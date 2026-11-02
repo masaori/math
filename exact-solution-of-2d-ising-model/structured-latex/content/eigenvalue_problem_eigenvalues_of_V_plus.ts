@@ -903,33 +903,71 @@ E\sigma_k^zE^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        "この 2 つを合成して（",
-        math(String.raw`U X U^{-1} = E(FXF^{-1})E^{-1}`),
-        "）、",
+        "この 2 つを合成する。",
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+UXU^{-1}
+&= \left((EF)X\right)U^{-1}
+   \quad (\because\ U\ \text{の定義}) \\
+&= \left((EF)X\right)(FE)
+   \quad (\because\ \text{Step 0 の }U^{-1} = FE) \\
+&= \left(E(FX)\right)(FE)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= \left(\left(E(FX)\right)F\right)E
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= \left(E\left((FX)F\right)\right)E
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= \left(E\left((FX)F^{-1}\right)\right)E
+   \quad (\because\ \text{Step 0 の }F^{-1} = F) \\
+&= \left(E\left((FX)F^{-1}\right)\right)E^{-1}
+   \quad (\because\ \text{Step 0 の }E^{-1} = E) \\
+&= E\left(FXF^{-1}\right)E^{-1}
+   \quad (\because\ \text{Step 1 の冒頭の読み }WXW^{-1} = (WX)W^{-1})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。この合成の鎖に、上の ",
+        math(String.raw`F\sigma_k^aF^{-1}`),
+        " の 3 式と ",
+        math(String.raw`E\sigma_k^aE^{-1}`),
+        " の 4 式を代入する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U\sigma_k^x U^{-1}
 &= E\left(F\sigma_k^xF^{-1}\right)E^{-1}
-   \quad (\because\ U=EF) \\
-&= E(-\sigma_k^x)E^{-1}
-   \quad (\because\ F\text{ による共役の計算}) \\
+   \quad (\because\ \text{上の合成の鎖を }X = \sigma_k^x\text{ で}) \\
+&= E\left(-\sigma_k^x\right)E^{-1}
+   \quad (\because\ \text{上の }F\sigma_k^xF^{-1} = -\sigma_k^x) \\
+&= \left(-\left(E\sigma_k^x\right)\right)E^{-1}
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right) \\
+&= -\left(\left(E\sigma_k^x\right)E^{-1}\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right) \\
 &= -\sigma_k^x
-   \quad (\because\ E\sigma_k^xE^{-1}=\sigma_k^x), \\
+   \quad (\because\ \text{上の }E\sigma_k^aE^{-1}\text{ の第 1 式（}k\text{ 偶数、}a = x\text{）と第 2 式（}k\text{ 奇数）}), \\
 U\sigma_k^y U^{-1}
 &= E\left(F\sigma_k^yF^{-1}\right)E^{-1}
-   \quad (\because\ U=EF) \\
-&= -E\sigma_k^yE^{-1}
-   \quad (\because\ F\text{ による共役の計算}) \\
-&= \begin{cases}+\sigma_k^y & (k\ \text{奇数}) \\ -\sigma_k^y & (k\ \text{偶数})\end{cases}
-   \quad (\because\ E\text{ による共役の場合分け}), \\
+   \quad (\because\ \text{上の合成の鎖を }X = \sigma_k^y\text{ で}) \\
+&= E\left(-\sigma_k^y\right)E^{-1}
+   \quad (\because\ \text{上の }F\sigma_k^yF^{-1} = -\sigma_k^y) \\
+&= \left(-\left(E\sigma_k^y\right)\right)E^{-1}
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right) \\
+&= -\left(\left(E\sigma_k^y\right)E^{-1}\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right) \\
+&= \begin{cases}-\left(-\sigma_k^y\right) & (k\ \text{奇数}) \\ -\sigma_k^y & (k\ \text{偶数})\end{cases}
+   \quad (\because\ \text{上の }E\sigma_k^aE^{-1}\text{ の第 3 式（}k\text{ 奇数）と第 1 式（}k\text{ 偶数、}a = y\text{）}) \\
+&= \begin{cases}\sigma_k^y & (k\ \text{奇数}) \\ -\sigma_k^y & (k\ \text{偶数})\end{cases}
+   \quad \left(\because\ k\ \text{奇数の場合に }\blkref{matrix_double_negation}\right), \\
 U\sigma_k^z U^{-1}
 &= E\left(F\sigma_k^zF^{-1}\right)E^{-1}
-   \quad (\because\ U=EF) \\
+   \quad (\because\ \text{上の合成の鎖を }X = \sigma_k^z\text{ で}) \\
 &= E\sigma_k^zE^{-1}
-   \quad (\because\ F\text{ による共役の計算}) \\
-&= \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ +\sigma_k^z & (k\ \text{偶数})\end{cases}
-   \quad (\because\ E\text{ による共役の場合分け})
+   \quad (\because\ \text{上の }F\sigma_k^zF^{-1} = \sigma_k^z) \\
+&= \begin{cases}-\sigma_k^z & (k\ \text{奇数}) \\ \sigma_k^z & (k\ \text{偶数})\end{cases}
+   \quad (\because\ \text{上の }E\sigma_k^aE^{-1}\text{ の第 4 式（}k\text{ 奇数）と第 1 式（}k\text{ 偶数、}a = z\text{）})
 \end{aligned}`,
       ),
       paragraph([
@@ -958,13 +996,19 @@ U\sigma_k^z U^{-1}
         math(String.raw`\sigma^x`),
         " の因子は ",
         math(String.raw`m-1`),
-        " 個あり、Step 1 の第 1 式より各々 ",
+        " 個あり、Step 1 の合成の後の ",
+        math(String.raw`U\sigma_k^xU^{-1} = -\sigma_k^x`),
+        " より各々 ",
         math(String.raw`-1`),
         " なので寄与は ",
         math(String.raw`(-1)^{m-1}`),
         "。第 ",
         math(String.raw`m`),
-        " 因子の寄与は Step 1 の第 2・第 3 式より",
+        " 因子の寄与は Step 1 の合成の後の ",
+        math(String.raw`U\sigma_k^zU^{-1}`),
+        "・",
+        math(String.raw`U\sigma_k^yU^{-1}`),
+        " の式より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1142,6 +1186,11 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 1 の合成の段（UXU^{-1} = E(FXF^{-1})E^{-1} を断りなく使い、(∵ F による共役の計算)・(∵ E による共役の場合分け) の名前だけの根拠で、代入と符号の外出しを 1 行にまとめていた）を、" +
+          "U の定義・Step 0 の U^{-1} = FE・mat_mult_associative 3 回・Step 0 の F^{-1} = F・E^{-1} = E の合成の鎖と、a ごとに F の式・negation_factors_out_of_right_factor・negation_factors_out_of_left_factor・E の式（k の偶奇）を 1 行ずつ引く鎖にした。" +
+          "k 奇数の Uσ_k^yU^{-1} = −(−σ_k^y) を σ_k^y に戻す段のために主張 matrix_double_negation（−(−A) = A）を 002 章に足した。Step 2 の「Step 1 の第 1 式」「第 2・第 3 式」は、Step 1 に E の鎖の第 1〜4 式もあって曖昧なので、式で指すようにした。主張は変えていない。" +
+          "Lean の対応は Ising2D.Uflip_conj_eq_Eflip_conj_Fflip_conj（合成の鎖）・Uflip_conj_sigmaX_eq_neg・Uflip_conj_sigmaY_of_even・Uflip_conj_sigmaY_of_odd・Uflip_conj_sigmaZ_of_even・Uflip_conj_sigmaZ_of_odd（Lean の (k : ℕ) 偶数が人手の k 奇数）と matrix_double_negation の具体版 neg_neg_matrix。" +
+          "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_18_sign_flip_step1_composition_chains.sage、sagemath/check/matrix_double_negation/。",
         "2026-11-02: E・F を σ_m^x・σ_m^z の行列の積から、サイトごとの因子 E_m（m 奇数なら σ^x、偶数なら I）・σ^z のクロネッカー積 E := E_1⊠⋯⊠E_{M_col}、F := σ^z⊠⋯⊠σ^z に定義し直した（同じ行列である）。" +
           "Step 0 の「可逆行列の有限積も可逆」（参照も鎖も無かった）を、E_mE_m = I の 2 行の鎖、FF = I・EE = I の 4 行の鎖（kronecker_product_rule (1)・pauli_matrix_products / E_mE_m = I・kronecker_product_rule (2)）、def_invertible_elements_of_R の逆元の一意性による F^{-1} = F・E^{-1} = E、同じ定義の (ii) による U^{-1} = F^{-1}E^{-1} = FE^{-1} = FE の鎖にした。" +
           "Step 1 の F・E の鎖の 1 行目「k 以外のサイトの因子は可換」「k が奇数なら第 k 因子だけが効く」「k が偶数なら E の全因子と可換」を、W ∈ {E, F} についての Wσ_k^aW^{-1} = I⊠⋯⊠((W_kσ^a)W_k)⊠⋯⊠I の 7 行の鎖、p ∈ {x, z} についての I⊠⋯⊠((σ^pσ^a)σ^p)⊠⋯⊠I = (σ_k^pσ_k^a)σ_k^p の 5 行の鎖、k 偶数の 4 行の鎖へのラベル参照つきの段に替え、(σ^z)^{-1} = σ^z・(σ^x)^{-1} = σ^x の名残を Step 0 の W^{-1} = W に替えた。主張は変えていない。" +

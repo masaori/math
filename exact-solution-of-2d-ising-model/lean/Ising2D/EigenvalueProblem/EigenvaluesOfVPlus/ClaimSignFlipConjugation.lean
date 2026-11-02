@@ -33,6 +33,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfNegatedMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 
 namespace Ising2D
@@ -127,29 +128,6 @@ theorem UflipInv_mul : UflipInv M * Uflip M = 1 :=
     _ = Fflip M * Fflip M := by rw [mul_identity_matrix_tensorPow]
                                                         -- `identity_matrix_is_right_unit_of_mat_mult`
     _ = 1 := Fflip_mul_self                             -- `g_2^{-1}g_2 = I`（`FF = I`）
-
-/-- 人手の `U = EF` のサイト `i` の因子 `E_{i+1}σ^z`（`Uflip_conj_sigmaX` ほかのサイトごとの成分計算が使う）。 -/
-noncomputable def flipFam (M : ℕ) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
-  fun i => eFlipFam M i * pauliZ
-
-/-- `U^{-1} = FE` のサイト `i` の因子 `σ^zE_{i+1}`。 -/
-noncomputable def flipFamInv (M : ℕ) : Fin M → Matrix (Fin 2) (Fin 2) ℂ :=
-  fun i => pauliZ * eFlipFam M i
-
-/-- `U = EF` はサイトごとの因子 `E_{i+1}σ^z` のクロネッカー積（`kronecker_product_rule` (1)）。 -/
-theorem Uflip_eq_siteProd : Uflip M = siteProd M (flipFam M) :=
-  (siteProd_mul M _ _).symm
-
-/-- `U^{-1} = FE` はサイトごとの因子 `σ^zE_{i+1}` のクロネッカー積（`kronecker_product_rule` (1)）。 -/
-theorem UflipInv_eq_siteProd : UflipInv M = siteProd M (flipFamInv M) :=
-  (siteProd_mul M _ _).symm
-
-private theorem flipFam_mul_inv (i : Fin M) : flipFam M i * flipFamInv M i = 1 := by
-  unfold flipFam flipFamInv eFlipFam
-  by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
-    · ext a b
-      fin_cases a <;> fin_cases b <;>
-        simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two, Matrix.one_apply]
 
 /-! ## 人手 Step 0 の `σ_m^aσ_m^a = I_{Mat(2^{M_col},ℂ)}`（`a ∈ {x, z}`）
 
@@ -322,8 +300,7 @@ theorem Eflip_conj_siteOp_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) (A : Matri
 
 人手の鎖の各行と 1 対 1 に対応する。1・2 行目は `Fflip_conj_siteOp`、3 行目以降は下の `sigmaZ_sigmaX_sigmaZ_site`・`sigmaZ_sigmaY_sigmaZ_site`・`sigmaZ_sigmaZ_sigmaZ_site` である。
 鎖の全体は `Fflip_conj_sigmaX`・`Fflip_conj_sigmaY`・`Fflip_conj_sigmaZ`。
-`U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaY`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
-クロネッカー積として持ち、サイトごとの成分計算で示しており、ここの鎖を使わない。 -/
+`U σ_k^a U^{-1}` は、下の合成の鎖 `Uflip_conj_eq_Eflip_conj_Fflip_conj` にこれらと `E` による共役の鎖を代入して得る。 -/
 
 /-- 人手 Step 1 の `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`（`(p, q) ∈ {(z, x), (y, z), (y, x)}`）の 10 行の鎖（組を一つ固定した形）。
 `A = σ^p`、`B = σ^q` で `AB = -(BA)` なら、サイト `k` の `σ_k^p`・`σ_k^q` について `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`。 -/
@@ -476,6 +453,110 @@ theorem Eflip_conj_sigmaZ_of_even (k : Fin M) (hk : Even (k : ℕ)) :
     (Eflip M * sigmaZ k) * Eflip M = -(sigmaZ k) :=
   (Eflip_conj_siteOp_of_even k hk pauliZ).trans (sigmaX_sigmaZ_sigmaX_site k)
 
+/-- 人手 Step 1 の `Eσ_k^aE^{-1}` の第 1 式（`k` 偶数）を `a = x` で（人手の `k` 偶数は `(k : ℕ)` 奇数）。 -/
+theorem Eflip_conj_sigmaX_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
+    (Eflip M * sigmaX k) * Eflip M = sigmaX k :=
+  Eflip_conj_siteOp_of_odd k hk pauliX
+
+/-- 人手 Step 1 の `Eσ_k^aE^{-1}` の第 1 式（`k` 偶数）を `a = y` で。 -/
+theorem Eflip_conj_sigmaY_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
+    (Eflip M * sigmaY k) * Eflip M = sigmaY k :=
+  Eflip_conj_siteOp_of_odd k hk pauliY
+
+/-- 人手 Step 1 の `Eσ_k^aE^{-1}` の第 1 式（`k` 偶数）を `a = z` で。 -/
+theorem Eflip_conj_sigmaZ_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
+    (Eflip M * sigmaZ k) * Eflip M = sigmaZ k :=
+  Eflip_conj_siteOp_of_odd k hk pauliZ
+
+/-! ## 人手 Step 1 の合成の鎖と `Uσ_k^aU^{-1}`
+
+人手の合成の鎖の各行と 1 対 1 に対応する。人手の 6・7 行目「Step 0 の `F^{-1} = F`」「Step 0 の `E^{-1} = E`」と
+8 行目「Step 1 の冒頭の読み」は、Lean では `F^{-1}`・`E^{-1}` を置かず `(W X) W` で述べるので立てない（`Fflip_conj_siteOp` と同じ扱い）。 -/
+
+/-- 人手 Step 1 の合成の鎖: `UXU^{-1} = E(FXF^{-1})E^{-1}`。 -/
+theorem Uflip_conj_eq_Eflip_conj_Fflip_conj (X : TensorPow M) :
+    Uflip M * X * UflipInv M = (Eflip M * ((Fflip M * X) * Fflip M)) * Eflip M :=
+  calc Uflip M * X * UflipInv M
+      = ((Eflip M * Fflip M) * X) * UflipInv M := rfl  -- `U` の定義
+    _ = ((Eflip M * Fflip M) * X) * (Fflip M * Eflip M) := rfl
+                                                        -- Step 0 の `U^{-1} = FE`
+    _ = (Eflip M * (Fflip M * X)) * (Fflip M * Eflip M) := by
+        rw [Matrix.mul_assoc (Eflip M) (Fflip M) X]    -- `mat_mult_associative`（mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = ((Eflip M * (Fflip M * X)) * Fflip M) * Eflip M := by
+        rw [← Matrix.mul_assoc (Eflip M * (Fflip M * X)) (Fflip M) (Eflip M)]
+                                                        -- `mat_mult_associative`
+    _ = (Eflip M * ((Fflip M * X) * Fflip M)) * Eflip M := by
+        rw [Matrix.mul_assoc (Eflip M) (Fflip M * X) (Fflip M)]
+                                                        -- `mat_mult_associative`
+
+/-- 人手 Step 1 の `Uσ_k^xU^{-1} = -σ_k^x`（`k` の偶奇によらない）。 -/
+theorem Uflip_conj_sigmaX_eq_neg (k : Fin M) :
+    Uflip M * sigmaX k * UflipInv M = -(sigmaX k) :=
+  calc Uflip M * sigmaX k * UflipInv M
+      = (Eflip M * ((Fflip M * sigmaX k) * Fflip M)) * Eflip M :=
+        Uflip_conj_eq_Eflip_conj_Fflip_conj _           -- 上の合成の鎖（`X = σ_k^x`）
+    _ = (Eflip M * (-(sigmaX k))) * Eflip M := by rw [Fflip_conj_sigmaX]
+                                                        -- 上の `Fσ_k^xF^{-1} = -σ_k^x`
+    _ = (-(Eflip M * sigmaX k)) * Eflip M := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((Eflip M * sigmaX k) * Eflip M) := neg_mul_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(sigmaX k) := by
+        by_cases hk : Even (k : ℕ)
+        · rw [Eflip_conj_sigmaX_of_even k hk]           -- `E` の第 2 式（人手の `k` 奇数）
+        · rw [Eflip_conj_sigmaX_of_odd k hk]            -- `E` の第 1 式（人手の `k` 偶数、`a = x`）
+
+/-- 人手 Step 1 の `Uσ_k^yU^{-1} = σ_k^y`（人手の `k` 奇数、Lean の `(k : ℕ)` 偶数）。 -/
+theorem Uflip_conj_sigmaY_of_even (k : Fin M) (hk : Even (k : ℕ)) :
+    Uflip M * sigmaY k * UflipInv M = sigmaY k :=
+  calc Uflip M * sigmaY k * UflipInv M
+      = (Eflip M * ((Fflip M * sigmaY k) * Fflip M)) * Eflip M :=
+        Uflip_conj_eq_Eflip_conj_Fflip_conj _           -- 上の合成の鎖（`X = σ_k^y`）
+    _ = (Eflip M * (-(sigmaY k))) * Eflip M := by rw [Fflip_conj_sigmaY]
+                                                        -- 上の `Fσ_k^yF^{-1} = -σ_k^y`
+    _ = (-(Eflip M * sigmaY k)) * Eflip M := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((Eflip M * sigmaY k) * Eflip M) := neg_mul_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(-(sigmaY k)) := by rw [Eflip_conj_sigmaY_of_even k hk]
+                                                        -- `E` の第 3 式（人手の `k` 奇数）
+    _ = sigmaY k := neg_neg_tensorPow _                 -- `matrix_double_negation`
+
+/-- 人手 Step 1 の `Uσ_k^yU^{-1} = -σ_k^y`（人手の `k` 偶数、Lean の `(k : ℕ)` 奇数）。 -/
+theorem Uflip_conj_sigmaY_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
+    Uflip M * sigmaY k * UflipInv M = -(sigmaY k) :=
+  calc Uflip M * sigmaY k * UflipInv M
+      = (Eflip M * ((Fflip M * sigmaY k) * Fflip M)) * Eflip M :=
+        Uflip_conj_eq_Eflip_conj_Fflip_conj _           -- 上の合成の鎖（`X = σ_k^y`）
+    _ = (Eflip M * (-(sigmaY k))) * Eflip M := by rw [Fflip_conj_sigmaY]
+                                                        -- 上の `Fσ_k^yF^{-1} = -σ_k^y`
+    _ = (-(Eflip M * sigmaY k)) * Eflip M := by rw [mul_neg_matrix_tensorPow]
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((Eflip M * sigmaY k) * Eflip M) := neg_mul_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(sigmaY k) := by rw [Eflip_conj_sigmaY_of_odd k hk]
+                                                        -- `E` の第 1 式（人手の `k` 偶数、`a = y`）
+
+/-- 人手 Step 1 の `Uσ_k^zU^{-1} = -σ_k^z`（人手の `k` 奇数、Lean の `(k : ℕ)` 偶数）。 -/
+theorem Uflip_conj_sigmaZ_of_even (k : Fin M) (hk : Even (k : ℕ)) :
+    Uflip M * sigmaZ k * UflipInv M = -(sigmaZ k) :=
+  calc Uflip M * sigmaZ k * UflipInv M
+      = (Eflip M * ((Fflip M * sigmaZ k) * Fflip M)) * Eflip M :=
+        Uflip_conj_eq_Eflip_conj_Fflip_conj _           -- 上の合成の鎖（`X = σ_k^z`）
+    _ = (Eflip M * sigmaZ k) * Eflip M := by rw [Fflip_conj_sigmaZ]
+                                                        -- 上の `Fσ_k^zF^{-1} = σ_k^z`
+    _ = -(sigmaZ k) := Eflip_conj_sigmaZ_of_even k hk   -- `E` の第 4 式（人手の `k` 奇数）
+
+/-- 人手 Step 1 の `Uσ_k^zU^{-1} = σ_k^z`（人手の `k` 偶数、Lean の `(k : ℕ)` 奇数）。 -/
+theorem Uflip_conj_sigmaZ_of_odd (k : Fin M) (hk : ¬ Even (k : ℕ)) :
+    Uflip M * sigmaZ k * UflipInv M = sigmaZ k :=
+  calc Uflip M * sigmaZ k * UflipInv M
+      = (Eflip M * ((Fflip M * sigmaZ k) * Fflip M)) * Eflip M :=
+        Uflip_conj_eq_Eflip_conj_Fflip_conj _           -- 上の合成の鎖（`X = σ_k^z`）
+    _ = (Eflip M * sigmaZ k) * Eflip M := by rw [Fflip_conj_sigmaZ]
+                                                        -- 上の `Fσ_k^zF^{-1} = σ_k^z`
+    _ = sigmaZ k := Eflip_conj_sigmaZ_of_odd k hk       -- `E` の第 1 式（人手の `k` 偶数、`a = z`）
+
 /-! ## 共役写像の性質 -/
 
 /-- 人手 Step 0 の可逆性から作る、`U` を可逆元とする `TensorPow M` の単元（`↑· = U`、`↑·⁻¹ = U^{-1}`）。 -/
@@ -507,61 +588,33 @@ theorem Uflip_conj_sum {ι : Type*} (s : Finset ι) (f : ι → TensorPow M) :
     Uflip M * (∑ i ∈ s, f i) * UflipInv M = ∑ i ∈ s, Uflip M * f i * UflipInv M := by
   rw [Finset.mul_sum, Finset.sum_mul]
 
-/-- サイト局所作用素への共役。 -/
-theorem Uflip_conj_siteProd (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
-    Uflip M * siteProd M x * UflipInv M
-      = siteProd M (fun i => flipFam M i * x i * flipFamInv M i) := by
-  rw [Uflip_eq_siteProd, UflipInv_eq_siteProd, ← siteProd_mul, ← siteProd_mul]
-  rfl
+/-! ## `Uσ_k^aU^{-1}` の符号をスカラー倍で書いた形（人手 Step 2 の「符号は因子ごとの符号の積」のため）
 
-theorem Uflip_conj_siteOp (k : Fin M) (A : Matrix (Fin 2) (Fin 2) ℂ) :
-    Uflip M * siteOp k A * UflipInv M = siteOp k (flipFam M k * A * flipFamInv M k) := by
-  rw [siteOp_apply, Uflip_conj_siteProd, siteOp_apply]
-  congr 1
-  funext i
-  by_cases h : i = k
-  · subst h; simp
-  · simp [h, flipFam_mul_inv i]
+人手 Step 2 は `Z_m`・`Y_m` の各因子に Step 1 を適用し、符号を因子ごとの符号の積として数える。
+Lean ではその積を `ℂ` の積として扱うので、上の人手の形を `c • σ_k^a`（`c = ±1`）へ書き直したものを置く。 -/
 
-/-! ## `σ^x, σ^y, σ^z` への作用（原文 Step 1） -/
-
-private theorem conj_pauliX (i : Fin M) :
-    flipFam M i * pauliX * flipFamInv M i = (-1 : ℂ) • pauliX := by
-  unfold flipFam flipFamInv eFlipFam
-  by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
-    · ext a b
-      fin_cases a <;> fin_cases b <;>
-        simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
-
-private theorem conj_pauliY (i : Fin M) :
-    flipFam M i * pauliY * flipFamInv M i
-      = (if Even (i : ℕ) then (1 : ℂ) else -1) • pauliY := by
-  unfold flipFam flipFamInv eFlipFam
-  by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
-    · ext a b
-      fin_cases a <;> fin_cases b <;>
-        simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
-
-private theorem conj_pauliZ (i : Fin M) :
-    flipFam M i * pauliZ * flipFamInv M i
-      = (if Even (i : ℕ) then (-1 : ℂ) else 1) • pauliZ := by
-  unfold flipFam flipFamInv eFlipFam
-  by_cases h : Even (i : ℕ) <;> simp only [h, if_pos, if_neg, if_true, if_false] <;>
-    · ext a b
-      fin_cases a <;> fin_cases b <;>
-        simp [pauliX, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
-
+/-- `Uσ_k^xU^{-1} = (-1)σ_k^x`（`Uflip_conj_sigmaX_eq_neg` と `negation_is_scalar_multiple_by_minus_one`）。 -/
 theorem Uflip_conj_sigmaX (k : Fin M) :
     Uflip M * sigmaX k * UflipInv M = (-1 : ℂ) • sigmaX k := by
-  rw [sigmaX, Uflip_conj_siteOp, conj_pauliX, map_smul]
+  rw [Uflip_conj_sigmaX_eq_neg, neg_eq_neg_one_smul_tensorPow]
 
+/-- `Uσ_k^yU^{-1} = (±1)σ_k^y`（`Uflip_conj_sigmaY_of_even`・`Uflip_conj_sigmaY_of_odd` を偶奇で選ぶ）。 -/
 theorem Uflip_conj_sigmaY (k : Fin M) :
     Uflip M * sigmaY k * UflipInv M = (if Even (k : ℕ) then (1 : ℂ) else -1) • sigmaY k := by
-  rw [sigmaY, Uflip_conj_siteOp, conj_pauliY, map_smul]
+  by_cases hk : Even (k : ℕ)
+  · rw [if_pos hk, Uflip_conj_sigmaY_of_even k hk, one_smul]
+                                                        -- 人手の `k` 奇数。`scalar_multiple_by_one`（mathlib の `one_smul`）
+  · rw [if_neg hk, Uflip_conj_sigmaY_of_odd k hk, neg_eq_neg_one_smul_tensorPow]
+                                                        -- 人手の `k` 偶数。`negation_is_scalar_multiple_by_minus_one`
 
+/-- `Uσ_k^zU^{-1} = (∓1)σ_k^z`（`Uflip_conj_sigmaZ_of_even`・`Uflip_conj_sigmaZ_of_odd` を偶奇で選ぶ）。 -/
 theorem Uflip_conj_sigmaZ (k : Fin M) :
     Uflip M * sigmaZ k * UflipInv M = (if Even (k : ℕ) then (-1 : ℂ) else 1) • sigmaZ k := by
-  rw [sigmaZ, Uflip_conj_siteOp, conj_pauliZ, map_smul]
+  by_cases hk : Even (k : ℕ)
+  · rw [if_pos hk, Uflip_conj_sigmaZ_of_even k hk, neg_eq_neg_one_smul_tensorPow]
+                                                        -- 人手の `k` 奇数。`negation_is_scalar_multiple_by_minus_one`
+  · rw [if_neg hk, Uflip_conj_sigmaZ_of_odd k hk, one_smul]
+                                                        -- 人手の `k` 偶数。`scalar_multiple_by_one`（mathlib の `one_smul`）
 
 /-! ## Jordan–Wigner 文字列への作用 -/
 
