@@ -37,11 +37,11 @@ theorem blockDiagonal_det_eq_sum_preserving
     (block : J → K) (B : Matrix J J (Polynomial Qbar))
     (hoff : ∀ i j, block i ≠ block j → B i j = 0) :
     Matrix.det B = ∑ σ ∈ blockPreservingPermutations block,
-      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i k : J => i < k) σ : ℤ) : Qbar) *
+      Polynomial.C (((Equiv.Perm.sign σ : ℤ) : Qbar)) *
         ∏ i : J, B i (σ i) := by
   classical
   let term : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i k : J => i < k) σ : ℤ) : Qbar) *
+    Polynomial.C (((Equiv.Perm.sign σ : ℤ) : Qbar)) *
       ∏ i : J, B i (σ i)
   have hzero : ∀ σ ∈ (univ : Finset (Equiv.Perm J)),
       ¬ (∀ j, block (σ j) = block j) → term σ = 0 := by
@@ -50,7 +50,13 @@ theorem blockDiagonal_det_eq_sum_preserving
     dsimp [term]
     rw [blockDiagonal_permutationProduct_eq_zero block B hoff σ j hj, mul_zero]
   calc
-    Matrix.det B = ∑ σ : Equiv.Perm J, term σ := qbarPolynomial_det_row_expansion B
+    Matrix.det B = ∑ σ : Equiv.Perm J, term σ := by
+      calc
+        Matrix.det B = Matrix.det B.transpose := (Matrix.det_transpose B).symm
+        _ = ∑ σ : Equiv.Perm J, ((Equiv.Perm.sign σ : ℤ) : Polynomial Qbar) *
+            ∏ i : J, B.transpose (σ i) i := Matrix.det_apply' _
+        _ = ∑ σ : Equiv.Perm J, term σ := by
+          simp only [term, Matrix.transpose_apply, map_intCast]
     _ = ∑ σ ∈ blockPreservingPermutations block, term σ := by
       simpa only [blockPreservingPermutations] using
         (Finset.sum_filter_of_ne (s := (univ : Finset (Equiv.Perm J)))

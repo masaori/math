@@ -74637,7 +74637,13 @@ G^{a,b,\kappa}_{\vec g,\vec f}
 &=\sigma^2\quad(\because z^L=\sigma)\\
 &=1\quad(\because \sigma\in\{1,-1\}).
 \end{aligned}`),
-                  paragraph(["非零の ", math(String.raw`z`), " の逆元を右から掛けて、", math(String.raw`\sigma z^{L-1}=z^{-1}`), " を得る。"]),
+                  paragraph(["非零の ", math(String.raw`z`), " の逆元を右から掛ける。"]),
+                  displayMath(String.raw`\begin{aligned}
+\sigma z^{L-1}
+&=((\sigma z^{L-1})z)z^{-1}&&\bigl(\because\text{結合律と }zz^{-1}=1\bigr)\\
+&=1z^{-1}&&\bigl(\because\text{直前の積の等式}\bigr)\\
+&=z^{-1}&&\bigl(\because\text{乗法の単位元}\bigr).
+\end{aligned}`),
                 ],
               },
             },
