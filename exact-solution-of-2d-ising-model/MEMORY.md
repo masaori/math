@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算の連続実行として、`riemann_sum_to_integral`（等間隔点の平均は積分に収束する）の検算 `sagemath/check/riemann_sum_to_integral/` を足した（未検算 96 件）。π を `AA[p]` の不定元で持ち、大小はボールで符号を決めて厳密に確かめた。人手証明で、連続度 `ω(h)` が実数として定まること（有界性）が示されていなかったので、一様連続性から示す段を足し、区間加法性の前提・距離・主張の評価・収束の段を根拠付きの鎖にした。計算の誤りは無かった。Lean の具体版が `δ ∈ [0,1)` で人手と 1 対 1 でないことは状態台帳に記録した。次は `cosh_addition_and_half_angle`。
+
 2026-11-02: 連続実行「複素行列版イジング: 章立ての組み直し」（2026-10-31 のゴール達成で一時停止していた）を scheduled-tasks でアーカイブした。状態台帳の「次の一歩」が空で、この連続実行の指示が進める単位は残っていない。確認コマンド `bash scripts/verify-complex-matrix-ising-paper-artifacts.sh` は 2026-11-02 に PASS。状態台帳の「未確定」の作業の順序の外の項目を扱うなら、別の指示で定期実行を立てるか、アーカイブを戻して指示を書き換える。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十個目を行った。本文 `002_linear_space_general.ts` に `scalar_multiple_of_zero_matrix`（`aO = O`）を足し、`003_exp_linear_map.ts` の `theorem_exp_zero` の「零行列のスカラー倍は零行列」「零行列は加法の単位元」をラベル参照に替えた（スカラーを右に書いていた `O · Σ 1/n!` を `(Σ 1/n!)_ℂ O` に直した）。SageMath `sagemath/check/scalar_multiple_of_zero_matrix/` と、Lean の具体版 `ClaimScalarMultipleOfZeroMatrix.lean`・必要十分版 `NecSuf/SmulZeroMatrix.lean`（`SMulZeroClass`）・系を置いた。`003` の残りは係数が `K` の箇所だけになった。次の一歩は状態台帳の「次の一歩」（`004_transfer_matrix.ts`）。
