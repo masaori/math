@@ -39,43 +39,35 @@ theorem taggedDifference_active_mates {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
     (t : Finset (OrientedEdge L × OrientedEdge L))
     (i : OrientedEdge L)
-    (hi : i ∈ Ising2DLambda.NecSuf.KacWard.activeVertices D
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-      (shortUnderlyingPairs t)) :
-    perfectMatchingMate D i ∈ Ising2DLambda.NecSuf.KacWard.activeVertices D
-      ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-      (shortUnderlyingPairs t) ∧
+    (hi : i ∈ concreteTaggedActiveVertices D t) :
+    perfectMatchingMate D i ∈ concreteTaggedActiveVertices D t ∧
     perfectMatchingMate
       (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
         PerfectMatching (OrientedEdge L)) i ∈
-      Ising2DLambda.NecSuf.KacWard.activeVertices D
-        ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-        (shortUnderlyingPairs t) := by
+      concreteTaggedActiveVertices D t := by
   classical
   let R : PerfectMatching (OrientedEdge L) :=
     ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-  let A := Ising2DLambda.NecSuf.KacWard.taggedEdges D (shortUnderlyingPairs t) ∆
-    Ising2DLambda.NecSuf.KacWard.taggedEdges R ∅
-  let d := Ising2DLambda.NecSuf.KacWard.taggedPairAt D (shortUnderlyingPairs t) i
-  let r := Ising2DLambda.NecSuf.KacWard.taggedPairAt R ∅ i
-  have hactive : d ≠ r := hi
+  let d := concreteTaggedPairAt D t i
+  let r := concreteTaggedPairAt R ∅ i
+  obtain ⟨q, hq, hqi⟩ := hi
+  have hactive : d ≠ r :=
+    ((taggedDifference_incident_iff D t i q).mp ⟨hq, hqi⟩).1
   -- The short and long labelled pairs at the oriented edge both survive.
-  have hd : d ∈ A :=
-    (taggedDifference_incident_iff_from_necSuf D t i d).mpr
+  have hd : d ∈ concreteTaggedDifference D t :=
+    (taggedDifference_incident_iff D t i d).mpr
       ⟨hactive, Or.inl rfl⟩ |>.1
-  have hr : r ∈ A :=
-    (taggedDifference_incident_iff_from_necSuf D t i r).mpr
+  have hr : r ∈ concreteTaggedDifference D t :=
+    (taggedDifference_incident_iff D t i r).mpr
       ⟨hactive, Or.inr rfl⟩ |>.1
   constructor
   -- The other endpoint of each surviving pair is an active oriented edge.
   · have hj : perfectMatchingMate D i ∈ d.1 := by
-      simp [d, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
-    exact ((taggedDifference_incident_iff_from_necSuf D t
-      (perfectMatchingMate D i) d).mp ⟨hd, hj⟩).1
+      simp [d, concreteTaggedPairAt]
+    exact ⟨d, hd, hj⟩
   · have hj : perfectMatchingMate R i ∈ r.1 := by
-      simp [r, Ising2DLambda.NecSuf.KacWard.taggedPairAt]
-    exact ((taggedDifference_incident_iff_from_necSuf D t
-      (perfectMatchingMate R i) r).mp ⟨hr, hj⟩).1
+      simp [r, concreteTaggedPairAt]
+    exact ⟨r, hr, hj⟩
 
 theorem taggedDifference_active_mates_from_necSuf {L : ℕ}
     (D : PerfectMatching (OrientedEdge L))
@@ -93,8 +85,7 @@ theorem taggedDifference_active_mates_from_necSuf {L : ℕ}
       Ising2DLambda.NecSuf.KacWard.activeVertices D
         ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
         (shortUnderlyingPairs t) := by
-  exact Ising2DLambda.NecSuf.KacWard.activeVertices_mates D
-    ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
-    (shortUnderlyingPairs t) i hi
+  rw [← concreteTaggedActiveVertices_eq_activeVertices] at hi ⊢
+  exact taggedDifference_active_mates D t i hi
 
 end Ising2DLambda.KacWard

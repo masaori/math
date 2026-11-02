@@ -19967,9 +19967,11 @@ O(\tau)
                         ]),
                         displayMath(String.raw`\begin{aligned}
 F(O,O')\setminus F_\varphi(O,O')
-&=\bigl\{\,(\tau,\tau')\in O\times O' \;\bigm|\; \tau\prec\tau'\ \text{かつ}\ \varphi(\tau')\prec\varphi(\tau)\,\bigr\},\\
+&=\bigl\{\,(\tau,\tau')\in O\times O' \;\bigm|\; \tau\prec\tau'\ \text{かつ}\ \varphi(\tau')\prec\varphi(\tau)\,\bigr\}
+&&\bigl(\because\ \blkref{def_cross_orbit_ordered_pairs},\ \blkref{def_cross_orbit_ordered_pairs_image}\text{ と三分律}\bigr),\\
 F_\varphi(O,O')\setminus F(O,O')
 &=\bigl\{\,(\tau,\tau')\in O\times O' \;\bigm|\; \tau'\prec\tau\ \text{かつ}\ \varphi(\tau)\prec\varphi(\tau')\,\bigr\}
+&&\bigl(\because\ \blkref{def_cross_orbit_ordered_pairs},\ \blkref{def_cross_orbit_ordered_pairs_image}\text{ と三分律}\bigr)
 \end{aligned}`),
                         paragraph([
                           "である。",

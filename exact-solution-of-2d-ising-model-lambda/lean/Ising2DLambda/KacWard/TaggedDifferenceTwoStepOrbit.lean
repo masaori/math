@@ -18,9 +18,9 @@ noncomputable def taggedActiveShortMate {L : ℕ}
         ⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩
         (shortUnderlyingPairs t)} where
   toFun i := ⟨perfectMatchingMate D i.1,
-    (taggedDifference_active_mates D t i.1 i.2).1⟩
+    (taggedDifference_active_mates_from_necSuf D t i.1 i.2).1⟩
   invFun i := ⟨perfectMatchingMate D i.1,
-    (taggedDifference_active_mates D t i.1 i.2).1⟩
+    (taggedDifference_active_mates_from_necSuf D t i.1 i.2).1⟩
   left_inv i := Subtype.ext (perfectMatchingMate_involutive D i.1)
   right_inv i := Subtype.ext (perfectMatchingMate_involutive D i.1)
 
@@ -34,11 +34,11 @@ noncomputable def taggedActiveLongMate {L : ℕ}
   toFun i := ⟨perfectMatchingMate
     (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
       PerfectMatching (OrientedEdge L)) i.1,
-    (taggedDifference_active_mates D t i.1 i.2).2⟩
+    (taggedDifference_active_mates_from_necSuf D t i.1 i.2).2⟩
   invFun i := ⟨perfectMatchingMate
     (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
       PerfectMatching (OrientedEdge L)) i.1,
-    (taggedDifference_active_mates D t i.1 i.2).2⟩
+    (taggedDifference_active_mates_from_necSuf D t i.1 i.2).2⟩
   left_inv i := Subtype.ext (perfectMatchingMate_involutive
     (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
       PerfectMatching (OrientedEdge L)) i.1)
@@ -88,7 +88,6 @@ theorem concreteTaggedActiveVertices_mates {L : ℕ}
       perfectMatchingMate
         (⟨referenceLongPairs L, referenceLongMatching_isPerfectMatching L⟩ :
           PerfectMatching (OrientedEdge L)) i ∈ concreteTaggedActiveVertices D t := by
-  rw [concreteTaggedActiveVertices_eq_activeVertices] at hi ⊢
   exact taggedDifference_active_mates D t i hi
 
 /-- The short matching mate on the concretely labelled active edges. -/
