@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 279 件のうち、SageMath の検算が無いもの 95 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 289 件のうち、SageMath の検算が無いもの 94 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -98,9 +98,15 @@
   本文で宣言していなかった微分の事実（exp' = exp、log'、平方根の微分、和・定数倍・積・商・合成の公式、微分可能なら連続）を `remark_real_analysis_facts_R3_R4` に「微分の公式」として足した。
   下流（`critical_point_and_log_divergence.ts` の約 30 箇所、`closed_form_log_integral`）の「(1)」〜「(5)」の参照を、その行を実際に支える新しいラベルに付け替えた。計算の誤りは無かった。
 
+- `elementary_sine_bounds`（正弦の初等評価。四つの不等式と c_0 の定義・数値評価を束ねていたブロック）: 1 ブロック 1 主張に分け、`sine_zero`・`cosine_zero`・`cosine_at_most_one`・`argument_minus_sine_nonnegative`（t - sin t ≥ 0）・`cosine_quadratic_lower_bound`・`sine_cubic_lower_bound`・
+  `pi_squared_numerical_bounds`・定義 `def_sine_bound_constant`（c_0）・`sine_bound_constant_numerical_bounds`・`elementary_sine_bounds`（上側 θ/2 - sin(θ/2) ≤ θ³/48 だけ）・`sine_half_angle_linear_bounds` の 11 ブロックにした（`020_critical_point.ts`）。10 個の主張に同名の検算を付けた（共通の準備 `sagemath/_shared/sine_cosine_by_definition.sage`）。
+  sin・cos は角度を π の有理数倍に限って `AA` で厳密に、導関数と積分の値は SR で、π を含む大小は Arb の π のボールで確かめた。端点で等号になる行は π の不定元の多項式で両辺の一致を見た。
+  人手証明の誤りを直した: 証明は `t ≥ 0` の全体で sin・cos を使っていたが、本文の sin・cos は `[-π/2, π/2]` でしか定義されていないので、範囲を `[0, π/2]` に改めた。sin 0 = 0・cos 0 = 1・1 - cos ≥ 0 の根拠、(R4) に渡す導関数、1 行 1 操作の分割を足した。
+  根拠なしで使っていた sin・cos の導関数と `9.8696 ≤ π² ≤ 9.8697` を、`remark_real_analysis_facts_R3_R4` に「本文の正弦・余弦・円周率についての主張で、本文では証明しない」項（sin' = cos、cos' = -sin、`3.141592 ≤ π ≤ 3.141593`）として宣言し、π² の評価はそこから導いた。下流（`sine_integral_two_sided`・`second_derivative_log_divergence`）の参照を付け替えた。数値の誤りは無かった。
+
 ## 次の一歩
 
-`020_critical_point.ts` の `elementary_sine_bounds`（`--list` の先頭）から、文書順に検算を足す。
+`020_critical_point.ts` の `closed_form_log_integral`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -199,3 +205,6 @@
   Lean の具体版 `ClaimCoshAdditionAndHalfAngle.lean`（mathlib の `Real.cosh_add` などへ委ねていて人手証明と 1 対 1 でない）と、`DefinitionKappaAndCritical.lean`・
   `ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`・`ClaimGammaDerivativesInKappa.lean`・`ClaimClosedFormLogIntegral.lean`・`NecSuf/HyperbolicBounds.lean`・`lean/docs/ch020-formalization.md` のコメントは、
   消えたラベル `cosh_addition_and_half_angle` の (1)〜(5) を指したままである。Lean の連続実行の状態台帳へ渡す。
+- 2026-11-02、`elementary_sine_bounds` の分割で見つかった（外部の前提と Lean との対応）: 本文の sin・cos（弧の長さで定めた arcsin の逆関数）の導関数と π の数値は、本文では証明せず `remark_real_analysis_facts_R3_R4` で外部から持ち込んだ。本文の中で示すなら、arcsin の導関数と逆関数の微分から sin' = cos を導き、π の評価を折れ線の弧の長さから導く。
+  `critical_point_and_log_divergence.ts` の `second_derivative_log_divergence` の `9.8696 ≤ π²`・`π ≤ 3.1416` は、まだ `pi_squared_numerical_bounds` と円周率の数値の評価を引いていない。そのブロックの検算を足すときに扱う。
+  Lean の `ClaimElementarySineBounds.lean` と `lean/docs/ch020-formalization.md` は、`c0`・`c0_bounds`・`elementary_sine_bounds_linear` をラベル `elementary_sine_bounds` に対応づけたままで、実際の対応は `def_sine_bound_constant`・`sine_bound_constant_numerical_bounds`・`sine_half_angle_linear_bounds` である。`elementary_sine_bounds_cube` は下側 0 ≤ θ/2 - sin(θ/2) も述べるが、人手の主張は上側だけになった。足した主張（`sine_zero` から `sine_cubic_lower_bound` まで、`pi_squared_numerical_bounds`）に 1 対 1 の Lean は無く、今の Lean は mathlib の `Real.sin_le`・`Real.sin_ge_sub_cube` に委ねている。Lean の連続実行の状態台帳へ渡す。

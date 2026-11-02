@@ -15,17 +15,23 @@ export default defineBlocks([
   {
     id: "critical_remark_real_analysis_facts_R3_R4",
     kind: "remark",
-    title: { text: "積分の評価で持ち込む実数解析の事実（(R3)・(R4)・微分の公式）" },
+    title: { text: "積分の評価で持ち込む実数解析の事実（(R3)・(R4)・微分の公式・円周率の数値）" },
     labels: ["remark_real_analysis_facts_R3_R4"],
     statement: [
       paragraph([
-        "以下の双曲線関数の主張と ",
-        ref("elementary_sine_bounds"),
+        "以下の双曲線関数の主張と、正弦・余弦の評価（",
+        ref("argument_minus_sine_nonnegative"),
         "・",
+        ref("cosine_quadratic_lower_bound"),
+        "・",
+        ref("sine_cubic_lower_bound"),
+        "）と、",
         ref("closed_form_log_integral"),
         "・",
         ref("sine_integral_two_sided"),
-        " は、実数の区間上の関数の微分と積分を扱うので、次の実数解析の事実を外部から持ち込む。",
+        " は、実数の区間上の関数の微分と積分を扱うので、次の事実を外部から持ち込む。(R3)(R4) と微分の公式は実数解析の一般の事実であり、正弦・余弦の導関数と円周率の数値の評価は本文の正弦・余弦・円周率についての主張である。円周率の数値の評価は、",
+        ref("pi_squared_numerical_bounds"),
+        " が使う。",
       ]),
       list([
         [
@@ -83,6 +89,52 @@ export default defineBlocks([
           math(String.raw`1`),
           "。微分可能な関数の和・定数倍・積・商（分母が 0 でないところ）・合成は微分可能で、導関数は和・定数倍・積・商・合成の微分の公式で与えられる。微分可能な関数は連続である。",
         ],
+        [
+          "**正弦・余弦の導関数**（本文の正弦・余弦についての主張で、本文では証明しない）：",
+          ref("def_sin"),
+          " の ",
+          math(String.raw`\sin`),
+          "（",
+          ref("def_arcsin"),
+          " の弧の長さで定めた ",
+          math(String.raw`\arcsin`),
+          " の逆関数）と ",
+          ref("def_cos"),
+          " の ",
+          math(String.raw`\cos`),
+          " は ",
+          math(String.raw`[-\pi/2,\pi/2]`),
+          " 上微分可能で（端点では片側の微分）、",
+          math(String.raw`\sin' = \cos`),
+          "、",
+          math(String.raw`\cos' = -\sin`),
+          "。これは、本文の ",
+          math(String.raw`\sin`),
+          "・",
+          math(String.raw`\cos`),
+          " が、弧の長さで定める正弦・余弦として齋藤微積分（",
+          ref("def_arc_length"),
+          "・",
+          ref("arcsin_is_bijection"),
+          " が引く文献）で扱われているものと一致することを前提にしている。",
+        ],
+        [
+          "**円周率の数値の評価**（本文の ",
+          math(String.raw`\pi`),
+          " についての主張で、本文では証明しない）：",
+          ref("arcsin_is_bijection"),
+          " が齋藤微積分から持ち込んだ ",
+          math(String.raw`\pi \in \mathbb{R}`),
+          "（",
+          math(String.raw`\arcsin(1) = \pi/2`),
+          " となる実数、すなわち単位円の弧 ",
+          math(String.raw`(1,0)`),
+          " から ",
+          math(String.raw`(0,1)`),
+          " までの長さの 2 倍）について ",
+          math(String.raw`3.141592 \leq \pi \leq 3.141593`),
+          "。",
+        ],
       ]),
       paragraph(["どの段でどれを使うかは次のとおりである。"]),
       list([
@@ -92,7 +144,11 @@ export default defineBlocks([
           "、",
           ref("sinh_at_most_argument_times_cosh"),
           "、",
-          ref("elementary_sine_bounds"),
+          ref("argument_minus_sine_nonnegative"),
+          "、",
+          ref("cosine_quadratic_lower_bound"),
+          "、",
+          ref("sine_cubic_lower_bound"),
           "、",
           ref("sine_integral_two_sided"),
           " で、被積分関数の各点評価を積分へ持ち上げる段と積分を足し合わせる段に使う。",
@@ -103,7 +159,11 @@ export default defineBlocks([
           "、",
           ref("sinh_at_most_argument_times_cosh"),
           "、",
-          ref("elementary_sine_bounds"),
+          ref("argument_minus_sine_nonnegative"),
+          "、",
+          ref("cosine_quadratic_lower_bound"),
+          "、",
+          ref("sine_cubic_lower_bound"),
           "、",
           ref("closed_form_log_integral"),
           "、",
@@ -120,8 +180,20 @@ export default defineBlocks([
           "、",
           ref("sinh_at_most_argument_times_cosh"),
           "、",
+          ref("argument_minus_sine_nonnegative"),
+          "、",
+          ref("cosine_quadratic_lower_bound"),
+          "、",
+          ref("sine_cubic_lower_bound"),
+          "、",
           ref("closed_form_log_integral"),
-          " で、(R4) に渡す導関数を求める段と、被積分関数の連続性を言う段に使う。",
+          " で、(R4) に渡す導関数を求める段と、被積分関数の連続性を言う段に使う。正弦・余弦の導関数は、そのうち ",
+          ref("argument_minus_sine_nonnegative"),
+          "、",
+          ref("cosine_quadratic_lower_bound"),
+          "、",
+          ref("sine_cubic_lower_bound"),
+          " で使う。",
         ],
       ]),
       paragraph([
@@ -133,6 +205,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-10-31: 章立ての組み直しで、臨界点の章の注記 remark_real_analysis_escape_chapter_E から、数学的道具立ての章に残った 4 項が使う (R3)(R4) の宣言を、その文面のまま分けて置いた。",
+        "2026-11-02: elementary_sine_bounds を分けるときに、証明が使っていた sin・cos の導関数と、根拠なしで使っていた π の数値を、外部から持ち込む事実として足した。",
       ],
     },
   },
@@ -1353,154 +1426,662 @@ t
   },
 
   {
-    id: "critical_008_claim_elementary_sine_bounds",
+    id: "critical_claim_sine_zero",
     kind: "claim",
-    origin: { path: SRC, ordinal: 10 },
-    title: { tex: String.raw`0 \leq \tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48} \quad (0 \leq \theta \leq \pi)` },
-    labels: ["elementary_sine_bounds"],
+    title: { tex: String.raw`\sin 0 = 0` },
+    labels: ["sine_zero"],
     statement: [
-      paragraph(["正弦・余弦は ", ref("def_sin"), "、", ref("def_cos"), " のものを用いる。"]),
       paragraph([
-        math(String.raw`c_0 := 1 - \dfrac{\pi^2}{24}`),
-        " とおく（",
-        math(String.raw`0.5887 \leq c_0 \leq 0.5888`),
-        "）。",
-        math(String.raw`\theta \in [0,\pi]`),
-        " について次が成り立つ。",
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " について ",
+        math(String.raw`\sin 0 = 0`),
+        "。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-0 \ \leq\ \frac{\theta}{2} - \sin\frac{\theta}{2} \ &\leq\ \frac{\theta^3}{48} \\
-c_0\,\frac{\theta}{2} \ \leq\ \sin\frac{\theta}{2} \ &\leq\ \frac{\theta}{2}
-\end{aligned}`,
-      ),
     ],
     proof: [
       paragraph([
-        "Step 1。",
-        math(String.raw`t \geq 0`),
+        math(String.raw`y_0 := \sin 0 \in [-1,1]`),
+        " とおく。",
+        ref("def_sin"),
+        " より ",
+        math(String.raw`\arcsin(y_0) = 0`),
+        " である。",
+        math(String.raw`y_0 > 0`),
+        " と仮定すると ",
+        math(String.raw`-y_0 \in [-1,0)`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(-y_0)
+&= -\arcsin(-(-y_0))
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式。}-1 \leq -y_0 < 0)\\
+&= -\arcsin(y_0)
+&&(\because\ -(-y_0) = y_0)\\
+&= -0
+&&(\because\ \arcsin(y_0) = 0)\\
+&= 0
+\end{aligned}`),
+      paragraph([
+        "となる。一方 ",
+        math(String.raw`-y_0 < y_0`),
+        " なので ",
+        ref("arcsin_is_bijection"),
+        " の狭義単調増加より ",
+        math(String.raw`\arcsin(-y_0) < \arcsin(y_0) = 0`),
+        " であり、矛盾する。",
+        math(String.raw`y_0 < 0`),
+        " と仮定すると ",
+        math(String.raw`y_0 \in [-1,0)`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arcsin(-y_0)
+&= -(-\arcsin(-y_0))
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= -\arcsin(y_0)
+&&(\because\ \blkref{def_arcsin}\ \text{の第二の式。}-1 \leq y_0 < 0)\\
+&= -0
+&&(\because\ \arcsin(y_0) = 0)\\
+&= 0
+\end{aligned}`),
+      paragraph([
+        "となる。一方 ",
+        math(String.raw`y_0 < -y_0`),
+        " なので ",
+        ref("arcsin_is_bijection"),
+        " の狭義単調増加より ",
+        math(String.raw`0 = \arcsin(y_0) < \arcsin(-y_0)`),
+        " であり、矛盾する。よって ",
+        math(String.raw`y_0 = 0`),
+        "、すなわち ",
+        math(String.raw`\sin 0 = 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: elementary_sine_bounds を分けるときに、積分の端点 0 での値に要るので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosine_zero",
+    kind: "claim",
+    title: { tex: String.raw`\cos 0 = 1` },
+    labels: ["cosine_zero"],
+    statement: [
+      paragraph([
+        ref("def_cos"),
+        " の ",
+        math(String.raw`\cos`),
         " について ",
-        math(String.raw`1 - \cos v \geq 0`),
-        " なので、(R4) を ",
-        math(String.raw`F(t) = t - \sin t`),
-        "（",
-        math(String.raw`F' = 1-\cos`),
-        " は連続）に適用し (R3) の単調性を使うと",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-t-\sin t
-&=\int_0^t(1-\cos v)\,dv
-&& (\because \text{(R4) を }F(t)=t-\sin t\text{ に適用}) \\
-&\geq\int_0^t0\,dv
-&& (\because 1-\cos v\geq0\text{ と (R3) の単調性}) \\
-&=0
-&& (\because \text{零関数の積分})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 2。Step 1 より ",
-        math(String.raw`u \geq 0`),
-        " で ",
-        math(String.raw`u - \sin u \geq 0`),
-        " なので、(R4) を ",
-        math(String.raw`F(t) = \sin t - t + \tfrac{t^3}{6}`),
-        " の導関数 ",
-        math(String.raw`F'(t) = \cos t - 1 + \tfrac{t^2}{2}`),
-        " に対して 2 段階に使う。まず",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cos t-1+\frac{t^2}{2}
-&=\int_0^t(u-\sin u)\,du
-&& (\because \text{(R4) と }(\cos t-1+t^2/2)'=t-\sin t) \\
-&\geq\int_0^t0\,du
-&& (\because \text{Step 1 と (R3) の単調性}) \\
-&=0
-&& (\because \text{零関数の積分})
-\end{aligned}
-\qquad (t\geq0)`,
-      ),
-      paragraph(["次に、これを被積分関数として"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sin t-t+\frac{t^3}{6}
-&=\int_0^t\left(\cos v-1+\frac{v^2}{2}\right)dv
-&& (\because \text{(R4) と }(\sin t-t+t^3/6)'=\cos t-1+t^2/2) \\
-&\geq\int_0^t0\,dv
-&& (\because \text{直前の非負性と (R3) の単調性}) \\
-&=0
-&& (\because \text{零関数の積分})
-\end{aligned}
-\qquad (t\geq0)`,
-      ),
-      paragraph([
-        "すなわち ",
-        math(String.raw`t \geq 0`),
-        " で ",
-        math(String.raw`t - \dfrac{t^3}{6} \leq \sin t \leq t`),
+        math(String.raw`\cos 0 = 1`),
         "。",
       ]),
-      paragraph([
-        "Step 3。",
-        math(String.raw`t = \dfrac{\theta}{2}`),
-        " とおくと ",
-        math(String.raw`\theta \in [0,\pi]`),
-        " より ",
-        math(String.raw`t \in [0,\tfrac\pi2]`),
-        " であり、Step 2 から",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-0
-&\leq\frac{\theta}{2}-\sin\frac{\theta}{2}
-&& (\because \text{Step 1 を }t=\theta/2\text{ に適用}) \\
-&\leq\frac{1}{6}\left(\frac{\theta}{2}\right)^3
-&& (\because \text{Step 2 を }t=\theta/2\text{ に適用}) \\
-&=\frac{\theta^3}{48}
-&& (\because \mathbb R\text{ の四則})
-\end{aligned}`,
-      ),
-      paragraph(["また"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sin\frac{\theta}{2}
-&\geq \frac{\theta}{2} - \frac{1}{6}\left(\frac{\theta}{2}\right)^3
-&& (\because \text{Step 2}) \\
-&= \frac{\theta}{2}\left(1 - \frac{1}{6}\left(\frac{\theta}{2}\right)^2\right)
-&& (\because \mathbb R\text{ の分配則}) \\
-&\geq \frac{\theta}{2}\left(1 - \frac{1}{6}\cdot\frac{\pi^2}{4}\right)
-&& (\because 0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}) \\
-&= c_0\,\frac{\theta}{2}
-&& (\because c_0=1-\pi^2/24\text{ の定義と }\mathbb R\text{ の四則})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`c_0`),
-        " の数値評価は ",
-        math(String.raw`9.8696 \leq \pi^2 \leq 9.8697`),
-        " を使う。",
-      ]),
+    ],
+    proof: [
       displayMath(String.raw`\begin{aligned}
-c_0
-&=1-\frac{\pi^2}{24}
-&& (\because c_0\text{ の定義})\\
-&\geq 1-\frac{9.8697}{24}
-&& (\because \pi^2\leq9.8697)\\
-&\geq 0.5887
-&& (\because \mathbb R\text{ の四則}).
-\end{aligned}`),
-      displayMath(String.raw`\begin{aligned}
-c_0
-&=1-\frac{\pi^2}{24}
-&& (\because c_0\text{ の定義})\\
-&\leq 1-\frac{9.8696}{24}
-&& (\because 9.8696\leq\pi^2)\\
-&\leq 0.5888
-&& (\because \mathbb R\text{ の四則}).
+\cos 0
+&= \sqrt{1-(\sin 0)^2}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \blkref{def_cos})\\
+&= \sqrt{1-0^2}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \blkref{sine_zero})\\
+&= \sqrt{1}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 1
+&&(\because\ 1 \geq 0\ \text{かつ}\ 1^2 = 1\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ 1)
 \end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: elementary_sine_bounds を分けるときに、積分の端点 0 での値に要るので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosine_at_most_one",
+    kind: "claim",
+    title: { tex: String.raw`\cos v \leq 1` },
+    labels: ["cosine_at_most_one"],
+    statement: [
+      paragraph([
+        ref("def_cos"),
+        " の ",
+        math(String.raw`\cos`),
+        " について、",
+        math(String.raw`v \in [-\pi/2,\pi/2]`),
+        " ならば ",
+        math(String.raw`\cos v \leq 1`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`c := \cos v \in \mathbb{R}`),
+        " とおく。",
+        ref("def_cos"),
+        " と ",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`c \geq 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c^2
+&= \left(\sqrt{1-(\sin v)^2}^{(\mathbb{R}_{\geq 0})}\right)^2
+&&(\because\ \blkref{def_cos})\\
+&= 1-(\sin v)^2
+&&(\because\ \blkref{definition_of_sqrt_r_positive})\\
+&\leq 1
+&&(\because\ (\sin v)^2 \geq 0)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`1 < c`),
+        " と仮定すると ",
+        math(String.raw`c > 1 > 0`),
+        " であり、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c^2
+&= c \cdot c\\
+&> 1 \cdot c
+&&(\because\ 1 < c\ \text{の両辺に}\ c > 0\ \text{を掛ける})\\
+&> 1 \cdot 1
+&&(\because\ 1 < c\ \text{の両辺に}\ 1 > 0\ \text{を掛ける})\\
+&= 1
+\end{aligned}`),
+      paragraph([
+        "となって ",
+        math(String.raw`c^2 \leq 1`),
+        " に反する。よって ",
+        math(String.raw`c \leq 1`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: elementary_sine_bounds を分けるときに、被積分関数 1 - cos v の符号に要るので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_argument_minus_sine_nonnegative",
+    kind: "claim",
+    title: { tex: String.raw`t - \sin t \geq 0 \quad (0 \leq t \leq \pi/2)` },
+    labels: ["argument_minus_sine_nonnegative"],
+    statement: [
+      paragraph([
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " について、",
+        math(String.raw`t \in [0,\pi/2]`),
+        " ならば ",
+        math(String.raw`t - \sin t \geq 0`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、証明で区間 ",
+        math(String.raw`[0,t]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4)）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t = 0`),
+        " なら ",
+        ref("sine_zero"),
+        " より ",
+        math(String.raw`t - \sin t = 0 - 0 = 0`),
+        "。以下 ",
+        math(String.raw`t > 0`),
+        " とする。",
+        math(String.raw`[0,t] \subset [-\pi/2,\pi/2]`),
+        " なので、",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式と正弦・余弦の導関数より ",
+        math(String.raw`F(u) := u - \sin u`),
+        " は ",
+        math(String.raw`[0,t]`),
+        " 上微分可能で ",
+        math(String.raw`F'(u) = 1 - \cos u`),
+        " であり、",
+        math(String.raw`\cos`),
+        " は微分可能なので ",
+        math(String.raw`F'`),
+        " は連続である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t - \sin t
+&= (t - \sin t) - (0 - \sin 0)
+&&(\because\ \blkref{sine_zero}\ \text{より}\ 0 - \sin 0 = 0)\\
+&= \int_0^t (1 - \cos u)\,du
+&&(\because\ \text{(R4) を}\ F\ \text{に})\\
+&\geq \int_0^t 0\,du
+&&(\because\ \text{(R3) の単調性と、}u \in [0,t]\ \text{で}\ 1 - \cos u \geq 0\text{。}\blkref{cosine_at_most_one})\\
+&= 0 - 0
+&&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
+&= 0
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の Step 1 を独立の主張にした。sin の定義域が [-π/2, π/2] なので t の範囲を t ≥ 0 から [0, π/2] に改め、端点 0 での値と 1 - cos u ≥ 0 の根拠を足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosine_quadratic_lower_bound",
+    kind: "claim",
+    title: { tex: String.raw`\cos t - 1 + \tfrac{t^2}{2} \geq 0 \quad (0 \leq t \leq \pi/2)` },
+    labels: ["cosine_quadratic_lower_bound"],
+    statement: [
+      paragraph([
+        ref("def_cos"),
+        " の ",
+        math(String.raw`\cos`),
+        " について、",
+        math(String.raw`t \in [0,\pi/2]`),
+        " ならば ",
+        math(String.raw`\cos t - 1 + \tfrac{t^2}{2} \geq 0`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、証明で区間 ",
+        math(String.raw`[0,t]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4)）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t = 0`),
+        " なら ",
+        ref("cosine_zero"),
+        " より ",
+        math(String.raw`\cos t - 1 + \tfrac{t^2}{2} = 1 - 1 + 0 = 0`),
+        "。以下 ",
+        math(String.raw`t > 0`),
+        " とする。",
+        math(String.raw`[0,t] \subset [-\pi/2,\pi/2]`),
+        " なので、",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式と正弦・余弦の導関数より ",
+        math(String.raw`G(u) := \cos u - 1 + \tfrac{u^2}{2}`),
+        " は ",
+        math(String.raw`[0,t]`),
+        " 上微分可能で ",
+        math(String.raw`G'(u) = -\sin u + u = u - \sin u`),
+        " であり、",
+        math(String.raw`\sin`),
+        " は微分可能なので ",
+        math(String.raw`G'`),
+        " は連続である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cos t - 1 + \frac{t^2}{2}
+&= \left(\cos t - 1 + \frac{t^2}{2}\right) - \left(\cos 0 - 1 + \frac{0^2}{2}\right)
+&&(\because\ \blkref{cosine_zero}\ \text{より}\ \cos 0 - 1 + \tfrac{0^2}{2} = 0)\\
+&= \int_0^t (u - \sin u)\,du
+&&(\because\ \text{(R4) を}\ G\ \text{に})\\
+&\geq \int_0^t 0\,du
+&&(\because\ \text{(R3) の単調性と、}u \in [0,t]\ \text{で}\ u - \sin u \geq 0\text{。}\blkref{argument_minus_sine_nonnegative})\\
+&= 0 - 0
+&&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
+&= 0
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の Step 2 の前半を独立の主張にした。t の範囲を [0, π/2] に改め、端点 0 での値と導関数の根拠を足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sine_cubic_lower_bound",
+    kind: "claim",
+    title: { tex: String.raw`\sin t - t + \tfrac{t^3}{6} \geq 0 \quad (0 \leq t \leq \pi/2)` },
+    labels: ["sine_cubic_lower_bound"],
+    statement: [
+      paragraph([
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " について、",
+        math(String.raw`t \in [0,\pi/2]`),
+        " ならば ",
+        math(String.raw`\sin t - t + \tfrac{t^3}{6} \geq 0`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、証明で区間 ",
+        math(String.raw`[0,t]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4)）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t = 0`),
+        " なら ",
+        ref("sine_zero"),
+        " より ",
+        math(String.raw`\sin t - t + \tfrac{t^3}{6} = 0 - 0 + 0 = 0`),
+        "。以下 ",
+        math(String.raw`t > 0`),
+        " とする。",
+        math(String.raw`[0,t] \subset [-\pi/2,\pi/2]`),
+        " なので、",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式と正弦・余弦の導関数より ",
+        math(String.raw`H(v) := \sin v - v + \tfrac{v^3}{6}`),
+        " は ",
+        math(String.raw`[0,t]`),
+        " 上微分可能で ",
+        math(String.raw`H'(v) = \cos v - 1 + \tfrac{v^2}{2}`),
+        " であり、",
+        math(String.raw`\cos`),
+        " は微分可能なので ",
+        math(String.raw`H'`),
+        " は連続である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sin t - t + \frac{t^3}{6}
+&= \left(\sin t - t + \frac{t^3}{6}\right) - \left(\sin 0 - 0 + \frac{0^3}{6}\right)
+&&(\because\ \blkref{sine_zero}\ \text{より}\ \sin 0 - 0 + \tfrac{0^3}{6} = 0)\\
+&= \int_0^t \left(\cos v - 1 + \frac{v^2}{2}\right)dv
+&&(\because\ \text{(R4) を}\ H\ \text{に})\\
+&\geq \int_0^t 0\,dv
+&&(\because\ \text{(R3) の単調性と、}v \in [0,t]\ \text{で}\ \cos v - 1 + \tfrac{v^2}{2} \geq 0\text{。}\blkref{cosine_quadratic_lower_bound})\\
+&= 0 - 0
+&&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
+&= 0
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の Step 2 の後半を独立の主張にした。t の範囲を [0, π/2] に改め、端点 0 での値と導関数の根拠を足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_pi_squared_numerical_bounds",
+    kind: "claim",
+    title: { tex: String.raw`9.8696 \leq \pi^2 \leq 9.8697` },
+    labels: ["pi_squared_numerical_bounds"],
+    statement: [
+      paragraph([
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の数値の評価の下で、",
+        math(String.raw`9.8696 \leq \pi^2 \leq 9.8697`),
+        "（",
+        math(String.raw`\pi \in \mathbb{R}`),
+        "）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "円周率の数値の評価より ",
+        math(String.raw`0 < 3.141592 \leq \pi \leq 3.141593`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\pi^2
+&= \pi \cdot \pi\\
+&\geq 3.141592 \cdot \pi
+&&(\because\ 3.141592 \leq \pi\ \text{の両辺に}\ \pi > 0\ \text{を掛ける})\\
+&\geq 3.141592 \cdot 3.141592
+&&(\because\ 3.141592 \leq \pi\ \text{の両辺に}\ 3.141592 > 0\ \text{を掛ける})\\
+&= 9.869600294464
+&&(\because\ \mathbb{Q}\ \text{の積})\\
+&\geq 9.8696
+&&(\because\ \mathbb{Q}\ \text{の大小比較})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\pi^2
+&= \pi \cdot \pi\\
+&\leq 3.141593 \cdot \pi
+&&(\because\ \pi \leq 3.141593\ \text{の両辺に}\ \pi > 0\ \text{を掛ける})\\
+&\leq 3.141593 \cdot 3.141593
+&&(\because\ \pi \leq 3.141593\ \text{の両辺に}\ 3.141593 > 0\ \text{を掛ける})\\
+&= 9.869606577649
+&&(\because\ \mathbb{Q}\ \text{の積})\\
+&\leq 9.8697
+&&(\because\ \mathbb{Q}\ \text{の大小比較})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds が根拠なしで使っていた 9.8696 ≤ π² ≤ 9.8697 を、外部から持ち込む円周率の数値の評価から導く主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_definition_sine_bound_constant",
+    kind: "definition",
+    title: { tex: String.raw`c_0 := 1 - \tfrac{\pi^2}{24}` },
+    labels: ["def_sine_bound_constant"],
+    statement: [
+      paragraph([
+        math(String.raw`c_0 := 1 - \dfrac{\pi^2}{24} \in \mathbb{R}`),
+        " と定める（",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは ",
+        math(String.raw`\pi`),
+        " が実数だからである）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の主張の中で置いていた c_0 を独立の定義にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sine_bound_constant_numerical_bounds",
+    kind: "claim",
+    title: { tex: String.raw`0.5887 \leq c_0 \leq 0.5888` },
+    labels: ["sine_bound_constant_numerical_bounds"],
+    statement: [
+      paragraph([
+        ref("def_sine_bound_constant"),
+        " の ",
+        math(String.raw`c_0`),
+        " について ",
+        math(String.raw`0.5887 \leq c_0 \leq 0.5888`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        ref("pi_squared_numerical_bounds"),
+        " の ",
+        math(String.raw`9.8696 \leq \pi^2 \leq 9.8697`),
+        " から、次を得る。",
+      ]),
+      displayMath(String.raw`\frac{9.8696}{24} \leq \frac{\pi^2}{24} \leq \frac{9.8697}{24}
+\qquad (\because\ \text{各辺を}\ 24 > 0\ \text{で割る})`),
+      displayMath(String.raw`-\frac{9.8697}{24} \leq -\frac{\pi^2}{24} \leq -\frac{9.8696}{24}
+\qquad (\because\ \text{各辺に}\ -1 < 0\ \text{を掛けると向きが反転する})`),
+      displayMath(String.raw`1-\frac{9.8697}{24} \leq 1-\frac{\pi^2}{24} \leq 1-\frac{9.8696}{24}
+\qquad (\because\ \text{各辺に}\ 1\ \text{を足す})`),
+      displayMath(String.raw`\begin{aligned}
+c_0
+&= 1-\frac{\pi^2}{24}
+&&(\because\ \blkref{def_sine_bound_constant})\\
+&\geq 1-\frac{9.8697}{24}
+&&(\because\ \text{上の三つ目の不等式の左側})\\
+&= \frac{14.1303}{24}
+&&(\because\ \mathbb{Q}\ \text{の四則})\\
+&\geq \frac{14.1288}{24}
+&&(\because\ 14.1288 \leq 14.1303\ \text{の両辺を}\ 24 > 0\ \text{で割る})\\
+&= 0.5887
+&&(\because\ \mathbb{Q}\ \text{の四則。}0.5887 \cdot 24 = 14.1288)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_0
+&= 1-\frac{\pi^2}{24}
+&&(\because\ \blkref{def_sine_bound_constant})\\
+&\leq 1-\frac{9.8696}{24}
+&&(\because\ \text{上の三つ目の不等式の右側})\\
+&= \frac{14.1304}{24}
+&&(\because\ \mathbb{Q}\ \text{の四則})\\
+&\leq \frac{14.1312}{24}
+&&(\because\ 14.1304 \leq 14.1312\ \text{の両辺を}\ 24 > 0\ \text{で割る})\\
+&= 0.5888
+&&(\because\ \mathbb{Q}\ \text{の四則。}0.5888 \cdot 24 = 14.1312)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の c_0 の数値評価を独立の主張にし、有理数の四則と大小比較の行を分けた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_008_claim_elementary_sine_bounds",
+    kind: "claim",
+    origin: { path: SRC, ordinal: 10 },
+    title: { tex: String.raw`\tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48} \quad (0 \leq \theta \leq \pi)` },
+    labels: ["elementary_sine_bounds"],
+    statement: [
+      paragraph([
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " について、",
+        math(String.raw`\theta \in [0,\pi]`),
+        " ならば ",
+        math(String.raw`\tfrac{\theta}{2} - \sin\tfrac{\theta}{2} \leq \tfrac{\theta^3}{48}`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0 \leq \theta \leq \pi`),
+        " の各辺を ",
+        math(String.raw`2 > 0`),
+        " で割って ",
+        math(String.raw`\tfrac{\theta}{2} \in [0,\tfrac{\pi}{2}]`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{\theta}{2} - \sin\frac{\theta}{2}
+&= \frac{1}{6}\left(\frac{\theta}{2}\right)^3 - \left(\sin\frac{\theta}{2} - \frac{\theta}{2} + \frac{1}{6}\left(\frac{\theta}{2}\right)^3\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{1}{6}\left(\frac{\theta}{2}\right)^3 - 0
+&&(\because\ \blkref{sine_cubic_lower_bound}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
+&= \frac{\theta^3}{48}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 1 ブロック 1 主張にするため、一般の t の三つの評価（argument_minus_sine_nonnegative・cosine_quadratic_lower_bound・sine_cubic_lower_bound）、c_0 の定義と数値評価、c_0 θ/2 ≤ sin(θ/2) ≤ θ/2（sine_half_angle_linear_bounds）を別のブロックへ分け、このブロックには上側の θ³/48 の評価だけを残した（下側 0 ≤ θ/2 - sin(θ/2) は argument_minus_sine_nonnegative の当てはめなので主張から外した）。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sine_half_angle_linear_bounds",
+    kind: "claim",
+    title: { tex: String.raw`c_0\tfrac{\theta}{2} \leq \sin\tfrac{\theta}{2} \leq \tfrac{\theta}{2} \quad (0 \leq \theta \leq \pi)` },
+    labels: ["sine_half_angle_linear_bounds"],
+    statement: [
+      paragraph([
+        ref("def_sin"),
+        " の ",
+        math(String.raw`\sin`),
+        " と ",
+        ref("def_sine_bound_constant"),
+        " の ",
+        math(String.raw`c_0`),
+        " について、",
+        math(String.raw`\theta \in [0,\pi]`),
+        " ならば ",
+        math(String.raw`c_0\tfrac{\theta}{2} \leq \sin\tfrac{\theta}{2} \leq \tfrac{\theta}{2}`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`0 \leq \theta \leq \pi`),
+        " の各辺を ",
+        math(String.raw`2 > 0`),
+        " で割って ",
+        math(String.raw`0 \leq \tfrac{\theta}{2} \leq \tfrac{\pi}{2}`),
+        " である。これから次を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\frac{\theta}{2}\right)^2
+&= \frac{\theta}{2}\cdot\frac{\theta}{2}\\
+&\leq \frac{\theta}{2}\cdot\frac{\pi}{2}
+&&(\because\ \tfrac{\theta}{2} \leq \tfrac{\pi}{2}\ \text{の両辺に}\ \tfrac{\theta}{2} \geq 0\ \text{を掛ける})\\
+&\leq \frac{\pi}{2}\cdot\frac{\pi}{2}
+&&(\because\ \tfrac{\theta}{2} \leq \tfrac{\pi}{2}\ \text{の両辺に}\ \tfrac{\pi}{2} > 0\ \text{を掛ける})\\
+&= \frac{\pi^2}{4}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph(["これを使って次を得る。"]),
+      displayMath(String.raw`-\frac{1}{6}\left(\frac{\theta}{2}\right)^2 \geq -\frac{1}{6}\cdot\frac{\pi^2}{4}
+\qquad (\because\ (\tfrac{\theta}{2})^2 \leq \tfrac{\pi^2}{4}\ \text{の両辺に}\ -\tfrac{1}{6} < 0\ \text{を掛けると向きが反転する})`),
+      displayMath(String.raw`1 - \frac{1}{6}\left(\frac{\theta}{2}\right)^2 \geq 1 - \frac{1}{6}\cdot\frac{\pi^2}{4}
+\qquad (\because\ \text{直前の不等式の両辺に}\ 1\ \text{を足す})`),
+      paragraph(["上からの評価は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\sin\frac{\theta}{2}
+&= \frac{\theta}{2} - \left(\frac{\theta}{2} - \sin\frac{\theta}{2}\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{\theta}{2} - 0
+&&(\because\ \blkref{argument_minus_sine_nonnegative}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
+&= \frac{\theta}{2}
+\end{aligned}`),
+      paragraph(["下からの評価は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\sin\frac{\theta}{2}
+&= \left(\frac{\theta}{2} - \frac{1}{6}\left(\frac{\theta}{2}\right)^3\right) + \left(\sin\frac{\theta}{2} - \frac{\theta}{2} + \frac{1}{6}\left(\frac{\theta}{2}\right)^3\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\geq \frac{\theta}{2} - \frac{1}{6}\left(\frac{\theta}{2}\right)^3 + 0
+&&(\because\ \blkref{sine_cubic_lower_bound}\ \text{を}\ t = \tfrac{\theta}{2}\ \text{に})\\
+&= \frac{\theta}{2}\left(1 - \frac{1}{6}\left(\frac{\theta}{2}\right)^2\right)
+&&(\because\ \mathbb{R}\ \text{の分配則})\\
+&\geq \frac{\theta}{2}\left(1 - \frac{1}{6}\cdot\frac{\pi^2}{4}\right)
+&&(\because\ \text{上の}\ 1 - \tfrac{1}{6}(\tfrac{\theta}{2})^2 \geq 1 - \tfrac{1}{6}\cdot\tfrac{\pi^2}{4}\ \text{の両辺に}\ \tfrac{\theta}{2} \geq 0\ \text{を掛ける})\\
+&= \frac{\theta}{2}\left(1 - \frac{\pi^2}{24}\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= c_0\,\frac{\theta}{2}
+&&(\because\ \blkref{def_sine_bound_constant}\ \text{と}\ \mathbb{R}\ \text{の積の可換性})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 elementary_sine_bounds の主張の第二の行を独立の主張にした。(θ/2)² ≤ π²/4 を準備の鎖にした。",
+      ],
+    },
   },
 
   {
@@ -1664,7 +2245,7 @@ G'(\theta)
     statement: [
       paragraph(["平方根と正弦は ", ref("definition_of_sqrt_r_positive"), "、", ref("def_sin"), " を用いる。"]),
       paragraph([
-        ref("elementary_sine_bounds"),
+        ref("def_sine_bound_constant"),
         " の ",
         math(String.raw`c_0 = 1-\tfrac{\pi^2}{24}`),
         " を用いて",
@@ -1712,7 +2293,7 @@ G'(\theta)
       ]),
       paragraph([
         "Step 1（下からの評価）。",
-        ref("elementary_sine_bounds"),
+        ref("argument_minus_sine_nonnegative"),
         " より ",
         math(String.raw`s \leq p`),
         " なので ",
@@ -1747,8 +2328,16 @@ G'(\theta)
       ),
       paragraph([
         "分子は ",
-        ref("elementary_sine_bounds"),
+        ref("argument_minus_sine_nonnegative"),
         " の ",
+        math(String.raw`0 \leq p - s`),
+        " と ",
+        ref("elementary_sine_bounds"),
+        "（",
+        math(String.raw`\theta = 2p`),
+        "）の ",
+        math(String.raw`p - s \leq \tfrac{\theta^3}{48} = \tfrac{p^3}{6}`),
+        " による ",
         math(String.raw`0 \leq p - s \leq \tfrac{p^3}{6}`),
         " と ",
         math(String.raw`p+s \leq 2p`),
@@ -1759,7 +2348,7 @@ G'(\theta)
         "、",
         math(String.raw`D_2 \geq s \geq c_0 p`),
         "（",
-        ref("elementary_sine_bounds"),
+        ref("sine_half_angle_linear_bounds"),
         "）より",
       ]),
       displayMath(
@@ -1805,13 +2394,18 @@ G'(\theta)
       ),
       paragraph([
         "数値評価は ",
-        ref("elementary_sine_bounds"),
+        ref("sine_bound_constant_numerical_bounds"),
         " の ",
         math(String.raw`c_0 \geq 0.5887`),
         " より ",
         math(String.raw`12c_0(1+c_0) \geq 12\cdot 0.5887\cdot 1.5887 \geq 11.22`),
         "、",
         math(String.raw`B \leq \dfrac{9.8697}{11.22} \leq 0.88`),
+        "（",
+        ref("pi_squared_numerical_bounds"),
+        " の ",
+        math(String.raw`\pi^2 \leq 9.8697`),
+        "）",
         "。",
       ]),
     ],

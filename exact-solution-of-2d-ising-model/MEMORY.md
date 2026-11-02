@@ -2,6 +2,8 @@
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十六個目を行った。`sign_flip_conjugation` の Step 0 の `σ_m^xσ_m^x = I`・`σ_m^zσ_m^z = I`（名前だけの根拠「パウリ行列の積」）を、`def_site_pauli_matrices`・`kronecker_product_rule` (1)・`pauli_matrix_products`・`identity_matrix_is_left_unit_of_mat_mult`・`kronecker_product_rule` (2) の 5 行の鎖にし、Lean の具体版 `siteOp_mul_self_of_mul_self_eq_one`（`sigmaX_mul_sigmaX_site`・`sigmaZ_mul_sigmaZ_site`）と SageMath の check_12（90 段）を置いた。次は同じ証明の Step 1 の「パウリ行列の積」の各行（状態台帳の「次の一歩」）。
 
+2026-11-02: 全証明の SageMath 検算の連続実行として、`elementary_sine_bounds`（正弦の初等評価）を 1 ブロック 1 主張の 11 ブロック（sin 0 = 0・cos 0 = 1・cos ≤ 1・t - sin t ≥ 0・cos t - 1 + t²/2 ≥ 0・sin t - t + t³/6 ≥ 0・π² の評価・c_0 の定義と評価・θ³/48 の評価・c_0 θ/2 ≤ sin(θ/2) ≤ θ/2）に分け、10 個の主張に同名の検算を付けた（未検算 94 件）。sin・cos の定義域が [-π/2, π/2] なのに t ≥ 0 全体で使っていた誤りを直し、sin・cos の導関数と π の数値を外部の主張として注記に宣言した。数値の誤りは無かった。Lean のコメントの対応づけの古さは状態台帳に記録した。次は `closed_form_log_integral`。
+
 2026-11-02: 全証明の SageMath 検算の連続実行の回が、前の回が main へ入れ終えた `cosh_addition_and_half_angle` をもう一度扱った。作業ツリーが前の回の成果を含まない古い main から作られ、着手前に origin を取り込んでいなかったためである。こちらの版は main の版（21 ブロックに分けたもの）に含まれるので取り下げ、runbook の「毎回の手順」の最初に `git fetch origin && git rebase origin/main` を足した。次は状態台帳どおり `elementary_sine_bounds`。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、5 つの主張と arcsinh の定義を束ねていた `cosh_addition_and_half_angle` を 1 ブロック 1 主張の 21 ブロック（cosh・sinh の偶奇性・加法定理・半角と倍角・sinh 0 = 0・単調性・単射性・sinh' = cosh・√(y²+1) > 0・arcsinh の定義と性質と微分・cosh ≥ 1・cosh の単調性・t ≤ sinh t・sinh t ≤ t cosh t）に分け、20 個の主張に同名の検算を付けた（未検算 95 件）。省いていた鎖を書き、未定義の実数の絶対値に頼る段を除き、微分の公式を `remark_real_analysis_facts_R3_R4` に宣言し、下流の参照を付け替えた。計算の誤りは無かった。実対数の定義の前方参照と、Lean のコメントが旧ラベルを指したままであることは状態台帳に記録した。

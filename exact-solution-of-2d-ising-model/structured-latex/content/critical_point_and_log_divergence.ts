@@ -1567,7 +1567,7 @@ R
 \end{aligned}`,
       ),
       paragraph([
-        ref("elementary_sine_bounds"),
+        ref("sine_half_angle_linear_bounds"),
         " より ",
         math(String.raw`\sin\!\left(\tfrac\theta2\right) \geq c_0\tfrac\theta2`),
         " なので ",
@@ -1584,7 +1584,7 @@ T
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{S^{3/2}}
 && (\because \text{直前の各点評価と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{\left(\delta^2+\frac{c_0^2\theta^2}{4}\right)^{3/2}}
-&& (\because \blkref{elementary_sine_bounds}\text{ と (R3) の単調性}) \\
+&& (\because \blkref{sine_half_angle_linear_bounds}\text{ と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\cdot\frac{2}{c_0\delta^2}
 && (\because \blkref{closed_form_log_integral}\text{ (3)}) \\
 &= \frac{4\delta^2\cosh^2\!\left(\frac{\kappa}{2}\right)}{4}\cdot\frac{2}{c_0\delta^2}
@@ -1592,7 +1592,7 @@ T
 &= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0}
 && (\because \delta>0\text{ と }\mathbb R\text{ の四則}) \\
 &\leq \frac{2\cdot 1.0315^2}{0.5887}
-&& (\because \kappa \leq \tfrac12,\ \cosh(\tfrac\kappa2)\leq1.0315,\ \blkref{elementary_sine_bounds}:c_0\geq0.5887) \\
+&& (\because \kappa \leq \tfrac12,\ \cosh(\tfrac\kappa2)\leq1.0315,\ \blkref{sine_bound_constant_numerical_bounds}:c_0\geq0.5887) \\
 &\leq 3.615
 && (\because \text{有理数の大小比較})
 \end{aligned}`,
