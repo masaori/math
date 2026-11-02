@@ -7,6 +7,7 @@
 
 export const ALL_LABELS = [
   "claim_coordinate_map_is_linear_form",
+  "claim_coordinate_maps_form_dual_basis",
   "claim_dual_space_is_complex_vector_space",
   "claim_family_member_is_kronecker_delta_linear_combination",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
