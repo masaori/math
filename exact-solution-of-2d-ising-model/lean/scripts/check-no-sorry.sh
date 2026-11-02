@@ -701,6 +701,10 @@ targets=(
   Ising2D.sigmaY_mul_sigmaZ_site
   Ising2D.sigmaZ_sigmaX_sigmaZ_site
   Ising2D.sigmaZ_sigmaY_sigmaZ_site
+  Ising2D.sigmaY_mul_sigmaX_site
+  Ising2D.sigmaX_sigmaX_sigmaX_site
+  Ising2D.sigmaX_sigmaY_sigmaX_site
+  Ising2D.sigmaX_sigmaZ_sigmaX_site
   Ising2D.sigmaZ_sigmaZ_sigmaZ_site
   Ising2D.Uflip_conj_pow
   Ising2D.Uflip_conj_expPartialSum

@@ -528,7 +528,7 @@ U\,S_2\,U^{-1} = -\,S_2`,
         "まず同じサイト ",
         math(String.raw`k`),
         " の二つのパウリ行列の積の順序を入れ替える。次の鎖の中に限り ",
-        math(String.raw`(p, q) \in \{(z, x),\ (y, z)\}`),
+        math(String.raw`(p, q) \in \{(z, x),\ (y, z),\ (y, x)\}`),
         " とし、",
         math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
         " と書く。",
@@ -618,31 +618,57 @@ F\sigma_k^z F^{-1}
         " と可換であり、", math(String.raw`k`),
         " が奇数なら第 ", math(String.raw`k`),
         " 因子だけを計算すればよい。",
+        math(String.raw`(\sigma^x)^{-1} = \sigma^x`),
+        "、上の鎖（",
+        math(String.raw`(p, q) = (y, x)`),
+        " と ",
+        math(String.raw`(z, x)`),
+        "）および Step 0 の ",
+        math(String.raw`\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 E\sigma_k^aE^{-1}
 &= \sigma_k^a
-&& (\because\ k\text{ が偶数なら }E\text{ の全因子と可換}),\\
+   \quad (\because\ k\text{ が偶数なら }E\text{ の全因子と可換}),\\
 E\sigma_k^xE^{-1}
-&= \sigma_k^x\sigma_k^x\sigma_k^x
-&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= \left(\sigma_k^x\sigma_k^x\right)\sigma_k^x
+   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^x
+   \quad (\because\ \text{Step 0 の }\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で})\\
 &= \sigma_k^x
-&& (\because\ \text{パウリ行列の積}),\\
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right),\\
 E\sigma_k^yE^{-1}
-&= \sigma_k^x\sigma_k^y\sigma_k^x
-&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
-&= -\sigma_k^y\sigma_k^x\sigma_k^x
-&& (\because\ \text{パウリ行列の積})\\
+&= \left(\sigma_k^x\sigma_k^y\right)\sigma_k^x
+   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= \sigma_k^x\left(\sigma_k^y\sigma_k^x\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
+&= \sigma_k^x\left(-\left(\sigma_k^x\sigma_k^y\right)\right)
+   \quad (\because\ \text{上の鎖を }(p, q) = (y, x)\text{ で})\\
+&= -\left(\sigma_k^x\left(\sigma_k^x\sigma_k^y\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right)\\
+&= -\left(\left(\sigma_k^x\sigma_k^x\right)\sigma_k^y\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
+&= -\left(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^y\right)
+   \quad (\because\ \text{Step 0 の }\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で})\\
 &= -\sigma_k^y
-&& (\because\ \text{パウリ行列の積}),\\
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right),\\
 E\sigma_k^zE^{-1}
-&= \sigma_k^x\sigma_k^z\sigma_k^x
-&& (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
-&= -\sigma_k^z\sigma_k^x\sigma_k^x
-&& (\because\ \text{パウリ行列の積})\\
+&= \left(\sigma_k^x\sigma_k^z\right)\sigma_k^x
+   \quad (\because\ k\text{ が奇数なら第 }k\text{ 因子だけが効く})\\
+&= \sigma_k^x\left(\sigma_k^z\sigma_k^x\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
+&= \sigma_k^x\left(-\left(\sigma_k^x\sigma_k^z\right)\right)
+   \quad (\because\ \text{上の鎖を }(p, q) = (z, x)\text{ で})\\
+&= -\left(\sigma_k^x\left(\sigma_k^x\sigma_k^z\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right)\\
+&= -\left(\left(\sigma_k^x\sigma_k^x\right)\sigma_k^z\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right)\\
+&= -\left(I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^z\right)
+   \quad (\because\ \text{Step 0 の }\sigma_m^x\sigma_m^x = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で})\\
 &= -\sigma_k^z
-&& (\because\ \text{パウリ行列の積})
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -885,6 +911,9 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 1 の Eσ_k^aE^{-1}（k 奇数、a ∈ {x, y, z}）の名前だけの根拠「パウリ行列の積」5 行を、1 行目の積を (σ_k^xσ_k^a)σ_k^x と括弧付きで書き、" +
+          "a = x は Step 0 の σ_m^xσ_m^x = I と identity_matrix_is_left_unit_of_mat_mult の 2 行、a = y, z は mat_mult_associative で σ_k^x(σ_k^aσ_k^x) に組み替えて σ_k^pσ_k^q の鎖（(p, q) = (y, x) を足した）・negation_factors_out_of_right_factor・mat_mult_associative・Step 0・identity_matrix_is_left_unit_of_mat_mult の 6 行にした。" +
+          "pauli_matrix_products の σ^yσ^x = −σ^xσ^y・σ^zσ^x = −σ^xσ^z をそのままの向きで使う。主張は変えていない。Lean の対応は Ising2D.sigmaY_mul_sigmaX_site・sigmaX_sigmaX_sigmaX_site・sigmaX_sigmaY_sigmaX_site・sigmaX_sigmaZ_sigmaX_site。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_15_sign_flip_step1_E_conjugation_chains.sage。",
         "2026-11-02: Step 1 の Fσ_k^yF^{-1} の名前だけの根拠「パウリ行列の積」2 行を、mat_mult_associative で (σ_k^zσ_k^y)σ_k^z を σ_k^z(σ_k^yσ_k^z) に組み替え、" +
           "σ_k^zσ_k^x の鎖を (p, q) ∈ {(z, x), (y, z)} の σ_k^pσ_k^q = −(σ_k^qσ_k^p) に一般化したものを (y, z) で使い、negation_factors_out_of_right_factor・mat_mult_associative・Step 0・identity_matrix_is_left_unit_of_mat_mult の鎖にした（p, q は Step 1 冒頭と E の段落の a, b と別の文字）。" +
           "pauli_matrix_products の σ^yσ^z = −σ^zσ^y をそのままの向きで使うので、行列の二重の符号反転は要らない。主張は変えていない。Lean の対応は Ising2D.siteOp_mul_of_anticomm・sigmaY_mul_sigmaZ_site・sigmaZ_sigmaY_sigmaZ_site。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_14_sign_flip_step1_F_conjugation_sigma_y_chain.sage。",

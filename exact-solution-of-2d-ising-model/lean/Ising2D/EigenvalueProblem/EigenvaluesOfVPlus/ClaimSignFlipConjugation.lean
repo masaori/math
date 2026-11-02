@@ -137,7 +137,7 @@ theorem sigmaZ_mul_sigmaZ_site (m : Fin M) : sigmaZ m * sigmaZ m = 1 :=
 `U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaY`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
 クロネッカー積として持ち、サイトごとの成分計算で示しており、ここの鎖を使わない。 -/
 
-/-- 人手 Step 1 の `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`（`(p, q) ∈ {(z, x), (y, z)}`）の 10 行の鎖（組を一つ固定した形）。
+/-- 人手 Step 1 の `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`（`(p, q) ∈ {(z, x), (y, z), (y, x)}`）の 10 行の鎖（組を一つ固定した形）。
 `A = σ^p`、`B = σ^q` で `AB = -(BA)` なら、サイト `k` の `σ_k^p`・`σ_k^q` について `σ_k^pσ_k^q = -(σ_k^qσ_k^p)`。 -/
 theorem siteOp_mul_of_anticomm (k : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) (hAB : A * B = -(B * A)) :
     siteOp k A * siteOp k B = -(siteOp k B * siteOp k A) :=
@@ -176,6 +176,10 @@ theorem sigmaZ_mul_sigmaX_site (k : Fin M) : sigmaZ k * sigmaX k = -(sigmaX k * 
 theorem sigmaY_mul_sigmaZ_site (k : Fin M) : sigmaY k * sigmaZ k = -(sigmaZ k * sigmaY k) :=
   siteOp_mul_of_anticomm k pauliY pauliZ pauliY_mul_pauliZ_anticomm
 
+/-- 人手 Step 1 の `σ_k^yσ_k^x = -(σ_k^xσ_k^y)`（`(p, q) = (y, x)`）。 -/
+theorem sigmaY_mul_sigmaX_site (k : Fin M) : sigmaY k * sigmaX k = -(sigmaX k * sigmaY k) :=
+  siteOp_mul_of_anticomm k pauliY pauliX pauliY_mul_pauliX
+
 /-- 人手 Step 1 の `Fσ_k^xF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^x)σ_k^z = -σ_k^x`。 -/
 theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k = -(sigmaX k) :=
   calc (sigmaZ k * sigmaX k) * sigmaZ k
@@ -211,6 +215,49 @@ theorem sigmaZ_sigmaZ_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaZ k) * sigmaZ k
   calc (sigmaZ k * sigmaZ k) * sigmaZ k
       = 1 * sigmaZ k := by rw [sigmaZ_mul_sigmaZ_site]  -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
     _ = sigmaZ k := identity_matrix_mul_tensorPow _     -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-! ## 人手 Step 1 の `E` による共役の鎖（`k` が奇数、`a ∈ {x, y, z}`）
+
+人手の鎖の各行と 1 対 1 に対応する。各鎖の 1 行目「`k` が奇数なら第 `k` 因子だけが効く」
+（`Eσ_k^aE^{-1} = (σ_k^xσ_k^a)σ_k^x`）は Lean に `E` を置いていないので立てず、2 行目以降を `(σ_k^xσ_k^a)σ_k^x` から示す。 -/
+
+/-- 人手 Step 1 の `Eσ_k^xE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^x)σ_k^x = σ_k^x`。 -/
+theorem sigmaX_sigmaX_sigmaX_site (k : Fin M) : (sigmaX k * sigmaX k) * sigmaX k = sigmaX k :=
+  calc (sigmaX k * sigmaX k) * sigmaX k
+      = 1 * sigmaX k := by rw [sigmaX_mul_sigmaX_site]  -- Step 0 の `σ_m^xσ_m^x = I`（`m = k`）
+    _ = sigmaX k := identity_matrix_mul_tensorPow _     -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- 人手 Step 1 の `Eσ_k^yE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^y)σ_k^x = -σ_k^y`。 -/
+theorem sigmaX_sigmaY_sigmaX_site (k : Fin M) : (sigmaX k * sigmaY k) * sigmaX k = -(sigmaY k) :=
+  calc (sigmaX k * sigmaY k) * sigmaX k
+      = sigmaX k * (sigmaY k * sigmaX k) := Matrix.mul_assoc (sigmaX k) (sigmaY k) (sigmaX k)
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = sigmaX k * (-(sigmaX k * sigmaY k)) := by rw [sigmaY_mul_sigmaX_site]
+                                                        -- 上の `σ_k^pσ_k^q` の鎖（`(p, q) = (y, x)`）
+    _ = -(sigmaX k * (sigmaX k * sigmaY k)) := mul_neg_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((sigmaX k * sigmaX k) * sigmaY k) := by rw [← Matrix.mul_assoc (sigmaX k) (sigmaX k) (sigmaY k)]
+                                                        -- `mat_mult_associative`（mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = -(1 * sigmaY k) := by rw [sigmaX_mul_sigmaX_site]
+                                                        -- Step 0 の `σ_m^xσ_m^x = I`（`m = k`）
+    _ = -(sigmaY k) := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- 人手 Step 1 の `Eσ_k^zE^{-1}` の鎖の 2 行目以降: `(σ_k^xσ_k^z)σ_k^x = -σ_k^z`。 -/
+theorem sigmaX_sigmaZ_sigmaX_site (k : Fin M) : (sigmaX k * sigmaZ k) * sigmaX k = -(sigmaZ k) :=
+  calc (sigmaX k * sigmaZ k) * sigmaX k
+      = sigmaX k * (sigmaZ k * sigmaX k) := Matrix.mul_assoc (sigmaX k) (sigmaZ k) (sigmaX k)
+                                                        -- `mat_mult_associative`（mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = sigmaX k * (-(sigmaX k * sigmaZ k)) := by rw [sigmaZ_mul_sigmaX_site]
+                                                        -- 上の `σ_k^pσ_k^q` の鎖（`(p, q) = (z, x)`）
+    _ = -(sigmaX k * (sigmaX k * sigmaZ k)) := mul_neg_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_right_factor`
+    _ = -((sigmaX k * sigmaX k) * sigmaZ k) := by rw [← Matrix.mul_assoc (sigmaX k) (sigmaX k) (sigmaZ k)]
+                                                        -- `mat_mult_associative`（mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = -(1 * sigmaZ k) := by rw [sigmaX_mul_sigmaX_site]
+                                                        -- Step 0 の `σ_m^xσ_m^x = I`（`m = k`）
+    _ = -(sigmaZ k) := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-! ## 共役写像の性質 -/
 

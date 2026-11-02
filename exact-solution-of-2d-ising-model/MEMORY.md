@@ -1,5 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の四十九個目を行った。`sign_flip_conjugation` Step 1 の `E` による共役の鎖（`k` 奇数）の名前だけの根拠「パウリ行列の積」5 行を、`(σ_k^xσ_k^a)σ_k^x` から Step 0 の `σ_m^xσ_m^x = I`・`mat_mult_associative`・`σ_k^pσ_k^q` の鎖（組 `(y, x)` を足した）・`negation_factors_out_of_right_factor` の鎖にした（Lean の `sigmaY_mul_sigmaX_site`・`sigmaX_sigmaX_sigmaX_site`・`sigmaX_sigmaY_sigmaX_site`・`sigmaX_sigmaZ_sigmaX_site`、SageMath check_15）。次は `F`・`E` の鎖の 1 行目「`k` 以外のサイトの因子は可換」（状態台帳の次の一歩）。
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十八個目を行った。`sign_flip_conjugation` Step 1 の `Fσ_k^yF^{-1}` の名前だけの根拠「パウリ行列の積」を、結合律で `σ_k^z(σ_k^yσ_k^z)` に組み替えて `pauli_matrix_products` の向きのまま使う 6 行の鎖にし、`σ_k^zσ_k^x` の鎖を `(p, q) ∈ {(z, x), (y, z)}` に一般化した（Lean の `siteOp_mul_of_anticomm`・`sigmaY_mul_sigmaZ_site`・`sigmaZ_sigmaY_sigmaZ_site`、SageMath check_14）。二重の符号反転の主張は要らなかった。次は `E` による共役の鎖（状態台帳の次の一歩）。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、`sine_integral_two_sided`（正弦を含む積分の両側評価）の B の定義と B ≤ 0.88 を独立のブロックに分け、平方根どうしの大小の根拠として主張 `nonnegative_real_order_from_squares` を足し、3 個の主張に同名の検算を付けた（未検算 92 件）。本文に無い平方根の単調性に頼る段を新しい主張から引く形にし、各点評価を 1 行 1 操作の鎖にした。計算の誤りは無かった。Lean の具体版が直した人手証明と 1 対 1 でないことは状態台帳に記録した。次は `sigma_z_diagonal_action`。
