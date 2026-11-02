@@ -5750,12 +5750,13 @@ a_{k+1}&=c+1
 a_k&=c
 &&\bigl(\because\ c+1=a_{k+1}\le a_k+1\text{ の移項で }c\le a_k\text{、これと }a_k\le c\text{ と順序の反対称性}\bigr)
 \end{aligned}`),
-                  paragraph([
-                    "となるので ", math(String.raw`\chi^{+}_c(k)=1`),
-                    " である。また ", math(String.raw`a_k=c\ne c+1`),
-                    " なので ", math(String.raw`\chi^{-}_c(k)=0`),
-                    " であり、右辺も ", math(String.raw`1`), " である。",
-                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\chi^{+}_c(k)-\chi^{-}_c(k)
+&=1-0
+&&\bigl(\because\ a_k=c,\ a_{k+1}=c+1\text{ と上下横断の指示値の定義}\bigr)\\
+&=1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
                   paragraph([
                     "左辺が ", math(String.raw`-1`), " の場合。差が ",
                     math(String.raw`-1`), " になるのは ",
@@ -5775,12 +5776,13 @@ a_k&=c+1
 a_{k+1}&=c
 &&\bigl(\because\ c+1=a_k\le a_{k+1}+1\text{ の移項で }c\le a_{k+1}\text{、これと }a_{k+1}\le c\text{ と順序の反対称性}\bigr)
 \end{aligned}`),
-                  paragraph([
-                    "となるので ",
-                    math(String.raw`\chi^{-}_c(k)=1`), "、",
-                    math(String.raw`\chi^{+}_c(k)=0`),
-                    " であり、右辺も ", math(String.raw`-1`), " である。",
-                  ]),
+                  displayMath(String.raw`\begin{aligned}
+\chi^{+}_c(k)-\chi^{-}_c(k)
+&=0-1
+&&\bigl(\because\ a_k=c+1,\ a_{k+1}=c\text{ と上下横断の指示値の定義}\bigr)\\
+&=-1
+&&\bigl(\because\ \mathbb Z\text{ の減法}\bigr)
+\end{aligned}`),
                   paragraph([
                     "左辺が ", math(String.raw`0`), " の場合。もし ",
                     math(String.raw`\chi^{+}_c(k)=1`), " なら ",
