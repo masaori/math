@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 346 件のうち、SageMath の検算が無いもの 74 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 349 件のうち、SageMath の検算が無いもの 73 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -172,9 +172,13 @@
   K_1 = 2 log y・K_2 = log x と選ぶと、iH_1^{(+)}・iH_2 が整数の固有値をもつ整数行列なので exp(±X)・exp(±Y) が固有値の射影の和として `QQ`・`AA` に乗り、V_2 も成分の定義で `QQ` に乗る。三つの証明の全行と主張をこれで厳密に確かめ、本文の部分和の exp のボールの検算を補助に置いた。包含 a_ℂ の行は ℂ を実数の対で持つ `complex_as_real_pairs.sage` で確かめた。
   人手証明を直した: `V1_plus_half_invertible` の鎖が逆元 `((V_1^{(+)})^{1/2})^{-1}` から始めて可逆性を前提にしていたのを、`def_invertible_elements_of_R` の定義の h = exp(-X) を両側から掛けて I に着く二つの鎖（`exp_of_negative_is_left_inverse`・`matrix_double_negation`）にした。`V2_invertible` は `(2s_2)^{M/2}I·exp(...)` とスカラー倍を単位行列との積に読み替えていたのを、`V_plus_is_invertible` と同じ係数を出す鎖にし、a > 0 を `def_second_transfer_matrix_prefactor` から引いた。`V_plus_factors_invertible` の末尾の参照の一覧を各行の根拠へ移した。K_1・K_2^*・a は `inclusion_rr_to_cc` の像として書いた。計算の誤りは無かった。Lean の `DefinitionVPlus.lean` の `isUnit_V1plusHalf`・`isUnit_V2`・`isUnit_VPlus` は単元を渡すだけの形で、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `T_V_plus_is_conjugation`（`T_{(V^{(+)})} = T_{V^{(+)}}`。三つの共役の合成は V^{(+)} による共役に等しい）: `sagemath/check/T_V_plus_is_conjugation/`。
+  可逆性の三つの主張と同じく K_1 = 2 log y・K_2 = log x と選んで因子とその逆元を厳密に作り、一つの数体へ移して、成分が独立な不定元の X について準備の四つの可逆性・`T_g(X) = T'_g(X)`・鎖の値と主張を確かめた（浮動小数点なし）。
+  人手証明を直した: 合成則 `conjugation_is_ring_homomorphism` は `mat_conj` の共役についての主張で、`def_T_g` の共役とは別の定義なので、`mat_conj` の共役を `T'_g` と書いて `T_g(X) = (gX)g^{-1} = T'_g(X)` を準備に置いた。可逆性の散文を準備の 4 行に、合成則の当てはめと末尾の合成の順序の散文を、写像の合成の定義を挟んだ値の 8 行の鎖にした。証明の中の (V_1^{(+)})^{1/2} は `mat_conj` の変数 B と重ならないよう S と書いた。主張に M_col・R と V^{(+)} ∈ R^× の根拠を書いた。計算の誤りは無かった。Lean の `TVPlus_eq_TConj` は必要十分版の `TV_eq_TConj` を引くだけの形で、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `T_V_plus_is_conjugation`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `nesting_of_commutator_of_H_and_check_Z`（Ž・Y̌ についての n 重交換子。`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算として、`T_V_plus_is_conjugation`（三つの共役の合成は V^{(+)} による共役に等しい）に検算 `sagemath/check/T_V_plus_is_conjugation/` を付けた（未検算 73 件）。因子と逆元を数体で厳密に作り、不定元の X で全行を確かめた。人手証明は、合成則が `mat_conj` の共役についての主張であることを `T'_g` で区別して準備に置き、散文を値の 8 行の鎖にした。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`nesting_of_commutator_of_H_and_check_Z`）。
+
 2026-11-02: 全証明の SageMath 検算として、`V1_plus_half_invertible`・`V2_invertible`・`V_plus_factors_invertible`（(V_1^{(+)})^{1/2}・V_2・V^{(+)} の可逆性）に検算を付けた（未検算 74 件）。K_1 = 2 log y・K_2 = log x と選んで exp を固有値の射影の和で厳密に作り、全行を確かめた。人手証明は、逆元から始めて可逆性を前提にしていた鎖を h を両側から掛けて I に着く鎖に、スカラー倍を単位行列との積に読み替えていた行を係数を出す鎖にし、K・a を包含の像で書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`T_V_plus_is_conjugation`）。
 
 2026-11-02: 全証明の SageMath 検算として、`half_integer_phase_antiperiodicity`・`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` に検算を付けた。係数の一致を新しい主張 `half_integer_phase_periodicity` に、負角の Euler 表示を新しい主張 `exp_of_negative_i_real_as_cos_minus_i_sin` に切り出し、5 個に同名の検算を付けた（未検算 77 件）。人手証明は一行一操作の鎖と像の記号に直し、全実数上の cos・sin（未整備）に依ることを主張に書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」。

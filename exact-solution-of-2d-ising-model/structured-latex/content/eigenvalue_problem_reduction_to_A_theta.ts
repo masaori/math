@@ -4075,61 +4075,142 @@ V^{(+)}
     labels: ["T_V_plus_is_conjugation"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 2}`),
+        " とし、",
+        math(String.raw`R:=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と書く（",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取ったもの）。",
         ref("def_T_V_plus"),
-        " で合成として定めた ",
-        math(String.raw`T_{(V^{(+)})}`),
+        " で合成として定めた写像 ",
+        math(String.raw`T_{(V^{(+)})}:R\to R`),
         " は、",
         ref("def_V_plus"),
         " の ",
         math(String.raw`V^{(+)}`),
-        " による共役そのものに一致する。",
+        "（",
+        ref("V_plus_factors_invertible"),
+        " により ",
+        math(String.raw`V^{(+)}\in R^\times`),
+        "）による ",
+        ref("def_T_g"),
+        " の共役 ",
+        math(String.raw`T_{V^{(+)}}:R\to R`),
+        " に、写像として一致する。",
       ]),
       displayMath(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
     ],
     proof: [
       paragraph([
-        ref("V1_plus_half_invertible"),
-        " と ",
-        ref("V2_invertible"),
-        " により、",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}`),
-        " と ",
-        math(String.raw`V_2`),
-        " は可逆である。また ",
-        ref("def_invertible_elements_of_R"),
-        " (ii) より、",
-        math(String.raw`\left(V_1^{(+)}\right)^{1/2}V_2`),
-        " も可逆である。したがって、",
-        ref("conjugation_is_ring_homomorphism"),
-        " の合成則 ",
-        math(String.raw`T_g \circ T_h = T_{gh}`),
-        " を、まず ",
-        math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}`),
-        "、",
-        math(String.raw`h = V_2`),
-        " に、次に ",
-        math(String.raw`g = \left(V_1^{(+)}\right)^{1/2}V_2`),
-        "、",
-        math(String.raw`h = \left(V_1^{(+)}\right)^{1/2}`),
-        " に適用できる。よって、",
+        math(String.raw`S:=\left(V_1^{(+)}\right)^{1/2}\in R`),
+        "（",
+        ref("def_V1_plus_square_root"),
+        "）と書く。四つの行列の可逆性を先に並べる。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}
-&=T_{\left(V_1^{(+)}\right)^{1/2}}\circ T_{V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-&&\bigl(\because\ \blkref{def_T_V_plus}\bigr)\\
-&= T_{\left(V_1^{(+)}\right)^{1/2}V_2}\circ T_{\left(V_1^{(+)}\right)^{1/2}}
-&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
-&= T_{\left(V_1^{(+)}\right)^{1/2}V_2\left(V_1^{(+)}\right)^{1/2}}
-&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\bigr)\\
-&= T_{V^{(+)}}
-&&\bigl(\because\ \blkref{def_V_plus}\bigr)
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+&S\in R^\times
+&&\bigl(\because\ \blkref{V1_plus_half_invertible}\bigr)\\
+&V_2\in R^\times
+&&\bigl(\because\ \blkref{V2_invertible}\bigr)\\
+&SV_2\in R^\times
+&&\bigl(\because\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to S,\ g_2\to V_2)\bigr)\\
+&V^{(+)}\in R^\times
+&&\bigl(\because\ \blkref{V_plus_factors_invertible}\bigr)
+\end{aligned}`),
       paragraph([
-        "ここで合成則は最初に左の 2 つへ、次にその結果と残りの 1 つへ適用した。合成の順序は ",
-        math(String.raw`T_{(V^{(+)})}(X) = T_{\left(V_1^{(+)}\right)^{1/2}}\left(T_{V_2}\left(T_{\left(V_1^{(+)}\right)^{1/2}}(X)\right)\right)`),
-        " の定義どおりである。",
+        math(String.raw`g\in R^\times`),
+        " について、",
+        ref("mat_conj"),
+        " の ",
+        math(String.raw`n`),
+        " を ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        "、その変数 ",
+        math(String.raw`B`),
+        " を ",
+        math(String.raw`g`),
+        " に取った写像を ",
+        math(String.raw`T'_g:R\to R`),
+        "、",
+        math(String.raw`T'_g(X):=(gX)g^{-1}`),
+        " と書く（",
+        ref("mat_conj"),
+        " の ",
+        math(String.raw`T_B`),
+        " と ",
+        ref("def_T_g"),
+        " の ",
+        math(String.raw`T_g`),
+        " を記号で区別するため）。",
+        math(String.raw`g^{-1}`),
+        " は ",
+        ref("def_invertible_elements_of_R"),
+        " の逆元で ",
+        math(String.raw`gg^{-1}=I`),
+        " かつ ",
+        math(String.raw`g^{-1}g=I`),
+        " を満たすので、",
+        math(String.raw`g`),
+        " は ",
+        ref("conjugation_is_ring_homomorphism"),
+        " の意味で正則であり、",
+        math(String.raw`g^{-1}`),
+        " はそこでの逆行列でもある。",
+        ref("def_T_g"),
+        " の ",
+        math(String.raw`g\cdot h\cdot g^{-1}`),
+        " は ",
+        math(String.raw`(gh)g^{-1}`),
+        " と読む（",
+        ref("linearity_of_T"),
+        " の証明と同じ読み方）。任意の ",
+        math(String.raw`X\in R`),
+        " について、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_g(X)
+&=(gX)g^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\bigr)\\
+&=T'_g(X)
+&&\bigl(\because\ T'_g\text{ の定め方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である（以下、これを ",
+        math(String.raw`T_g=T'_g`),
+        " と書いて、",
+        math(String.raw`X`),
+        " 以外の値へも当てる）。",
+        math(String.raw`X\in R`),
+        " を任意に取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}(X)
+&=T_{S}\Bigl(T_{V_2}\bigl(T_{S}(X)\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_T_V_plus}\bigr)\\
+&=T'_{S}\Bigl(T'_{V_2}\bigl(T'_{S}(X)\bigr)\Bigr)
+&&\bigl(\because\ \text{準備の }T_g=T'_g\text{ を }g\to S,\ V_2,\ S\text{ の 3 か所へ同時適用}\bigr)\\
+&=\bigl(T'_{S}\circ T'_{V_2}\bigr)\bigl(T'_{S}(X)\bigr)
+&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+&=T'_{SV_2}\bigl(T'_{S}(X)\bigr)
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\ (n\to 2^{M_{\mathrm{col}}},\ G\to S,\ H\to V_2)\bigr)\\
+&=\bigl(T'_{SV_2}\circ T'_{S}\bigr)(X)
+&&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
+&=T'_{(SV_2)S}(X)
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の合成則}\ (n\to 2^{M_{\mathrm{col}}},\ G\to SV_2,\ H\to S)\bigr)\\
+&=T'_{V^{(+)}}(X)
+&&\bigl(\because\ \blkref{def_V_plus}\text{ の }V^{(+)}:=(SV_2)S\bigr)\\
+&=T_{V^{(+)}}(X)
+&&\bigl(\because\ \text{準備の }T_g=T'_g\text{ を }g\to V^{(+)}\text{ に}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`X\in R`),
+        " は任意だったので、二つの写像 ",
+        math(String.raw`T_{(V^{(+)})},\,T_{V^{(+)}}:R\to R`),
+        " は全ての値が一致し、写像として等しい。",
       ]),
     ],
     conversion: {
@@ -4138,6 +4219,7 @@ T_{(V^{(+)})}
         "旧 008 章のうち参照用ノート notes/integer_momentum_route_not_adopted.ts に退避した def_T_V は、T_{(V)} を (V_1^{(±)})^{1/2}, V_2 の共役の合成として定義し、同じノートの why_008_applies_only_to_minus_sector のとおりその V は実質 (-) 専用である。混同しないよう、本文では V^{(+)}（射影の章の def_V_plus）による T_{(V^{(+)})} を def_T_V_plus として、def_T_V を参照せずに定義している。",
         "旧 008 章は (V_1^{(±)})^{1/2} を「exp(iK_1H_1^{(±)}) の 1/2 乗」と書いたうえで proof の中で exp((1/2)iK_1H_1^{(±)}) と読み替えていた（参照用ノート notes/integer_momentum_route_not_adopted.ts の note_evensectorT_005_claim_T_actions_integer_route_TV1_hatZ_hatY_012_claim_TV1_TV2_actions へ退避した TV1_hatZ_hatY_012_claim_TV1_TV2_actions の proof）。本文では最初から exp((i/2)K_1H_1^{(+)}) を定義 def_V1_plus_square_root とし、それが V_1^{(+)} の平方根であることを V1_plus_square_root_property（最大固有値に属する固有ベクトルの章）で示した（読み替えを暗黙にしない）。",
         "T_{(V^{(+)})} = T_{V^{(+)}}（合成が積による共役に一致すること）は数値でも確認済み（sagemath/check/047_claim_even_sector_T_action/check_04, 「合成=共役」列）。",
+        "2026-11-02: 全証明の SageMath 検算（sagemath/check/T_V_plus_is_conjugation/）を付けるにあたり、証明を値の一続きの鎖にした。可逆性の散文を準備の 4 行に、合成則の当てはめと末尾の合成の順序の散文を写像の合成の定義を挟んだ鎖にした。conjugation_is_ring_homomorphism の合成則は mat_conj の T_B についての主張なので、def_T_g の T_g と記号を分けて T'_g と書き（証明の中の (V_1^{(+)})^{1/2} は mat_conj の変数 B と重ならないよう S と書く）、T_g(X) = (gX)g^{-1} = T'_g(X) を準備に置いた。主張に M_col と R を書き、写像としての等号であることを明記した（主張の中身は不変）。",
       ],
     },
   },
