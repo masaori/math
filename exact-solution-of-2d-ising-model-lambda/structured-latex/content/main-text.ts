@@ -71879,7 +71879,17 @@ w_{r+1}
                       paragraph(["辺長一の一歩閉路も含む。両辺は有限集合であり、実数体と複素数体は現れない。"]),
                     ],
                     proof: [
-                      paragraph(["右辺の元 ", math(String.raw`e=p(w_{C,r})`), " を取る。", ref("claim_projected_edge_cycle_nonbacktracking"), " により ", math(String.raw`w_{C,r}=\iota(c_C(2r))`), " である。", ref("def_edge_reversal"), " により ", math(String.raw`p(w_{C,r})=p(c_C(2r))`), " となる。", ref("claim_tagged_difference_alternating_cycle"), " により ", math(String.raw`c_C(2r)`), " は活動点なので、", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`e\in P(D,T)`), " である。"]),
+                      paragraph(["右辺の元 ", math(String.raw`e=p(w_{C,r})`), " を取る。このとき"]),
+                      displayMath(String.raw`\begin{aligned}
+e
+&=p(w_{C,r})
+&&\bigl(\because\ e\text{ の取り方}\bigr)\\
+&=p(\iota(c_C(2r)))
+&&\bigl(\because\ \blkref{claim_projected_edge_cycle_nonbacktracking}\bigr)\\
+&=p(c_C(2r))
+&&\bigl(\because\ \blkref{def_edge_reversal}\bigr).
+\end{aligned}`),
+                      paragraph([ref("claim_tagged_difference_alternating_cycle"), " により ", math(String.raw`c_C(2r)`), " は活動点なので、", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`e\in P(D,T)`), " である。"]),
                       paragraph(["逆に ", math(String.raw`e\in P(D,T)`), " を取る。", ref("def_oriented_edges"), " の二方向のうち一つを ", math(String.raw`\vec e`), " とする。", ref("claim_tagged_complement_active_vertices"), " より ", math(String.raw`\vec e`), " は活動点である。", ref("claim_tagged_difference_cycle_cover"), " により ", math(String.raw`\vec e`), " はある交互閉路 ", math(String.raw`C`), " に属する。"]),
                       paragraph(["もし ", math(String.raw`\vec e`), " が第一色なら、", ref("claim_tagged_difference_alternating_cycle"), " の一周期の列挙により ", math(String.raw`\vec e=c_C(2r)`), " となる ", math(String.raw`0\le r<k_C`), " がある。このとき"]),
                       displayMath(String.raw`\begin{aligned}
