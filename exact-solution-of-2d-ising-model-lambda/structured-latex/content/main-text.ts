@@ -34273,7 +34273,8 @@ f
                       ref("claim_qbar_poly_linear_factor_product_extract"),
                       " により、ある ", math(String.raw`B\in\overline{\mathbb{Q}}[t]`), " が存在して",
                     ]),
-                    displayMath(String.raw`\prod_{r=0}^{j-1}(t-\widehat{w(r)})=(t-\widehat{w(i)})B`),
+                    displayMath(String.raw`\prod_{r=0}^{j-1}(t-\widehat{w(r)})=(t-\widehat{w(i)})B
+\qquad(\because\ \blkref{claim_qbar_poly_linear_factor_product_extract})`),
                     paragraph([
                       "を満たし、さらに ", math(String.raw`l\in\mathbb{N}`), " が ",
                       math(String.raw`j-1<l`), " を満たすならば ",
