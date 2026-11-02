@@ -137,6 +137,30 @@ noncomputable def H1 (M : ℕ) (η : ℂ) : TensorPow M :=
 /-- `H_1^{(+)}` は一般形 `H1` の `η = -1`。 -/
 theorem H1plus_eq_H1 : H1plus M = H1 M (-1) := rfl
 
+/-- **人手本文 `def_H1_plus` の式そのもの**: `M_col = r + 2 ≥ 2` のとき
+`H_1^{(+)} = Σ_{m=1}^{M_col-1} Y_m Z_{m+1} - Y_{M_col} Z_1`。
+Lean の `H1plus` は境界項の係数 `-1` を `lastSign (-1)` に持たせた `Fin M` の上の一つの和なので、
+人手の差の形とはこの補題でつなぐ。Lean の添字は 0 始まりなので、人手の `m ∈ {1, …, M_col-1}` は
+`Fin.castSucc m`（`m : Fin (r + 1)`）、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0` である。
+同じ式を `Finset.filter` の上の和で述べた `H1plus_eq_bulk_sub_boundary`（`ClaimH1PlusInSigmaZForm.lean`）もある。
+こちらは和を `Fin (r + 1)` の上に取るので、項の個数 `r + 1`（人手の `M_col - 1`）の有限和を `Fin (r + 1)` の上の和として述べた
+有限和の主張の系（`conj_finite_sum_tensorPow`・`neg_finite_sum_tensorPow`）へそのまま渡せる。 -/
+theorem H1plus_eq_sub (r : ℕ) :
+    H1plus (r + 2)
+      = (∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)) - Y (Fin.last (r + 1)) * Z 0 := by
+  rw [H1plus, Fin.sum_univ_castSucc, sub_eq_add_neg]
+  congr 1
+  · refine Finset.sum_congr rfl fun m _ => ?_
+    have hlt : ((Fin.castSucc m : Fin (r + 2)) : ℕ) + 1 < r + 2 := by
+      simp only [Fin.val_castSucc]; omega
+    have hnext : nextSite (Fin.castSucc m) = Fin.succ m :=
+      Fin.ext (by rw [nextSite_val_of_lt hlt]; simp)
+    rw [lastSign_of_not_last (Nat.ne_of_lt hlt), one_smul, hnext]
+  · have hlast : ((Fin.last (r + 1) : Fin (r + 2)) : ℕ) + 1 = r + 2 := by simp
+    have hnext : nextSite (Fin.last (r + 1)) = 0 :=
+      Fin.ext (by rw [nextSite_val_of_last hlast]; rfl)
+    rw [lastSign_of_last hlast, hnext, neg_one_smul]
+
 /-- **人手本文 `def_H2` の `H_2 = Z_1 Y_1 + Z_2 Y_2 + ⋯ + Z_M Y_M`**。 -/
 noncomputable def H2 (M : ℕ) : TensorPow M := ∑ m : Fin M, Z m * Y m
 

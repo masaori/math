@@ -25,8 +25,9 @@
 人手の本文は `(+)` セクターの `U H_1^{(+)} U^{-1} = -H_1^{(+)}`, `U S_1^{(+)} U^{-1} = -S_1^{(+)}` だけを述べる
 （`(−)` セクターは参照用ノート `structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。
 Lean では境界項の係数を引数 `η` に持たせた一般形 `Uflip_conj_H1` / `Uflip_conj_S1` を補助として残し
-（整数運動量の経路の形式化の記録と章 017 が使う）、人手の主張に対応する `(+)` の定理
-`Uflip_conj_H1plus` はその `η = -1` の場合として立て、`Uflip_conj_S1plus` は人手 Step 4 の鎖の行どおりに `Uflip_conj_H1plus` から示す。
+（整数運動量の経路の形式化の記録と章 017 が使う）。人手の主張に対応する `(+)` の定理 `Uflip_conj_H1plus` は、
+人手の範囲 `M_col ≥ 2`（Lean の `M = r + 2`）では人手 Step 3 の `H_1^{(+)}` の鎖の行どおりに示し、人手の範囲の外の `M = 0, 1` だけを
+一般形の `η = -1` で閉じる。`Uflip_conj_S1plus` は人手 Step 4 の鎖の行どおりに `Uflip_conj_H1plus` から示す。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
@@ -37,6 +38,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHomFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesSumsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationDistributesOverMatrixSumFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixConjugationPreservesDifferenceFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDifferenceIsSumWithNegationFromNecSuf
 
 namespace Ising2D
 
@@ -777,9 +780,52 @@ theorem Uflip_conj_S2 (K2star : ℂ) :
     _ = (Complex.I * K2star) • (-(H2 M)) := by rw [Uflip_conj_H2]            -- Step 3
     _ = -((Complex.I * K2star) • H2 M) := smul_neg_matrix_tensorPow _ _      -- `scalar_multiple_of_negated_matrix`
 
-/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_1^{(+)} U^{-1} = -H_1^{(+)}`。 -/
-theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) :=
-  Uflip_conj_H1 (-1)
+/-- 人手 Step 3 の項の鎖 `U(Y_jZ_k)U^{-1} = -(Y_jZ_k)` の 5 行と 1 対 1。 -/
+theorem Uflip_conj_YZ (j k : Fin M) : Uflip M * (Y j * Z k) * UflipInv M = -(Y j * Z k) :=
+  calc Uflip M * (Y j * Z k) * UflipInv M
+      = Conjugation.T (UflipUnit M) (Y j * Z k) := rfl                      -- `T_B` の定義（`B = U`）
+    _ = Conjugation.T (UflipUnit M) (Y j) * Conjugation.T (UflipUnit M) (Z k) :=
+        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
+    _ = (Uflip M * Y j * UflipInv M) * (Uflip M * Z k * UflipInv M) := rfl   -- `T_B` の定義（`B = U`）
+    _ = Y j * (-(Z k)) := by rw [Uflip_conj_Y, Uflip_conj_Z]                 -- Step 2 の `UY_jU^{-1} = +Y_j` と `UZ_kU^{-1} = -Z_k`
+    _ = -(Y j * Z k) := mul_neg_matrix_tensorPow _ _                         -- `negation_factors_out_of_right_factor`
+
+/-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_1^{(+)} U^{-1} = -H_1^{(+)}`。
+人手は主張の仮定 `M_col ≥ 2` の下で述べ、`M = r + 2` の場合の `calc` の 9 段が人手の `H_1^{(+)}` の鎖の 9 行と 1 対 1 である。
+両端の行は、Lean の `lastSign` 付きの和 `H1plus` を `H1plus_eq_sub` で人手の差の形 `Σ_{m=1}^{M_col-1}Y_mZ_{m+1} - Y_{M_col}Z_1` に読み替える
+（Lean の添字は 0 始まりなので、人手の `m` は `Fin.castSucc m`、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0`）。
+`M = 0, 1` は人手の範囲の外で、補助の一般形 `Uflip_conj_H1` の `η = -1` で閉じる。 -/
+theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) := by
+  match M with
+  | 0 => exact Uflip_conj_H1 (-1)
+  | 1 => exact Uflip_conj_H1 (-1)
+  | r + 2 =>
+    calc Uflip (r + 2) * H1plus (r + 2) * UflipInv (r + 2)
+        = Uflip (r + 2) * ((∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m))
+            - Y (Fin.last (r + 1)) * Z 0) * UflipInv (r + 2) := by
+          rw [H1plus_eq_sub]                                                -- `def_H1_plus`
+      _ = Conjugation.T (UflipUnit (r + 2))
+            ((∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)) - Y (Fin.last (r + 1)) * Z 0) :=
+          rfl                                                               -- `T_B` の定義（`B = U`）
+      _ = Conjugation.T (UflipUnit (r + 2)) (∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m))
+            - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) :=
+          conj_sub_tensorPow _ _ _                                          -- `matrix_conjugation_preserves_difference`
+      _ = (∑ m : Fin (r + 1), Conjugation.T (UflipUnit (r + 2)) (Y (Fin.castSucc m) * Z (Fin.succ m)))
+            - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) := by
+          rw [conj_finite_sum_tensorPow (UflipUnit (r + 2)) r]              -- `matrix_conjugation_preserves_finite_sum`
+      _ = (∑ m : Fin (r + 1), Uflip (r + 2) * (Y (Fin.castSucc m) * Z (Fin.succ m)) * UflipInv (r + 2))
+            - Uflip (r + 2) * (Y (Fin.last (r + 1)) * Z 0) * UflipInv (r + 2) :=
+          rfl                                                               -- `T_B` の定義を各項と引く項に
+      _ = (∑ m : Fin (r + 1), -(Y (Fin.castSucc m) * Z (Fin.succ m)))
+            - (-(Y (Fin.last (r + 1)) * Z 0)) := by
+          rw [Finset.sum_congr rfl fun m _ => Uflip_conj_YZ (Fin.castSucc m) (Fin.succ m),
+            Uflip_conj_YZ (Fin.last (r + 1)) 0]                             -- 上の項の鎖を各項（`j = m`, `k = m + 1`）と引く項（`j = M_col`, `k = 1`）に
+      _ = (-(∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)))
+            - (-(Y (Fin.last (r + 1)) * Z 0)) := by
+          rw [neg_finite_sum_tensorPow r]                                   -- `finite_sum_of_negated_matrices`
+      _ = -((∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)) - Y (Fin.last (r + 1)) * Z 0) :=
+          neg_sub_neg_tensorPow _ _                                         -- `difference_of_negated_matrices`
+      _ = -(H1plus (r + 2)) := by rw [H1plus_eq_sub]                        -- `def_H1_plus`
 
 /-- **人手本文 `sign_flip_conjugation`（Step 4）**: `U S_1^{(+)} U^{-1} = -S_1^{(+)}`
 （`S_1^{(+)} = i K_1 H_1^{(+)}`）。人手の鎖の 6 行と 1 対 1（両端の「`S_1^{(+)}` の定義」の行は Lean では主張の式そのもの）。 -/

@@ -618,6 +618,7 @@ targets=(
   Ising2D.V_plus_exponential_form
   Ising2D.W_P_plus_eq_V_plus_P_plus_image_and_V_plus_exponential_form
   Ising2D.H1plus_eq_H1
+  Ising2D.H1plus_eq_sub
   Ising2D.V1plus_exponential_representation
   Ising2D.V1plus_eq_V1pm
   Ising2D.isUnit_V1plus
@@ -734,6 +735,7 @@ targets=(
   Ising2D.Uflip_conj_Z
   Ising2D.Uflip_conj_Y
   Ising2D.Uflip_conj_H1
+  Ising2D.Uflip_conj_YZ
   Ising2D.Uflip_conj_ZY
   Ising2D.Uflip_conj_H2
   Ising2D.Uflip_conj_S1

@@ -112,3 +112,6 @@ PASS sign_flip_conjugation Step 2 の P_r の帰納法と Z_m・Y_m の鎖: 436 
 
 # 実行コマンド: sage check_20_sign_flip_step3_H2_chain.sage
 PASS sign_flip_conjugation Step 3 の H_2 の鎖と項の鎖: 98 段
+
+# 実行コマンド: sage check_21_sign_flip_step3_H1plus_chain.sage
+PASS sign_flip_conjugation Step 3 の H_1^{(+)} の鎖と項の鎖: 306 段

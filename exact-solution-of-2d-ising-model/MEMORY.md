@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の五十九個目として、`sign_flip_conjugation` Step 3 の「共役の ℂ 線型性より `UH_1^{(+)}U^{-1} = -H_1^{(+)}`」を 9 行の鎖（`def_H1_plus`・`T_B` の定義・`matrix_conjugation_preserves_difference`・`matrix_conjugation_preserves_finite_sum`・項の鎖・`finite_sum_of_negated_matrices`・`difference_of_negated_matrices` ほか）にした。Lean は `H1plus_eq_sub`（`lastSign` 付きの和を人手の差の形へ）・`Uflip_conj_YZ`・`Uflip_conj_H1plus`（`M = r + 2` の `calc` 9 段）、SageMath は `check_21_sign_flip_step3_H1plus_chain.sage`（306 段）。次は単項の `+` と、鎖が引く主張の変数の置き方の揃え（状態台帳の「次の一歩」）。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、`epsilon_projector_properties`（P^{(+)} の冪等性と像が F^{(+)} に等しいこと）に同名の検算を付けた（未検算 84 件）。四つの鎖の全行を QQ 上の不定元のベクトルで厳密に確かめ、ε^2 = I と仮定 εf = f を使う行を不定元の行列・任意のベクトルとの差で特定した。人手証明の束ねた行・根拠の無い行を、行列の演算の主張を引く一行一操作に分けた。計算の誤りは無かった。次は `epsilon_commutes_with_transfer_matrices`。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、`first_dual_coupling_relation`（第一の結合定数と双対結合定数の双対関係）に同名の検算を付けた（未検算 85 件）。等号の行は根拠の関係だけを代入する有理関数体と形式冪級数で厳密に確かめた。レビューの指摘で、`exp(-log tanh K_1)tanh K_1 = 1` の行が直前の鎖 `exp(-L)exp(L) = 1` を引いていなかった根拠の欠けを、一本の鎖にまとめて直した。計算の誤りは無かった。第二の双対関係の証明にも同じ欠けがあることと、その検算が浮動小数点であることは状態台帳に記録した。次は `epsilon_projector_properties`。
