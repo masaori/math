@@ -1,0 +1,4 @@
+準備の 1 行目 exp(u+v) = exp(u)exp(v) が全次数 14 以下の形式冪級数で成り立つ
+5 組の (a, b) で exp(log a + log b) が ab を含み、log(ab) と log a + log b が一致する
+対照: log(1+1) は log 1 + log 1 と異なる（積の法則は和では成り立たない）
+RESULT: PASS

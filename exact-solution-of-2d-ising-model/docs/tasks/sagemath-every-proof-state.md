@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 289 件のうち、SageMath の検算が無いもの 94 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 295 件のうち、SageMath の検算が無いもの 93 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -104,9 +104,17 @@
   人手証明の誤りを直した: 証明は `t ≥ 0` の全体で sin・cos を使っていたが、本文の sin・cos は `[-π/2, π/2]` でしか定義されていないので、範囲を `[0, π/2]` に改めた。sin 0 = 0・cos 0 = 1・1 - cos ≥ 0 の根拠、(R4) に渡す導関数、1 行 1 操作の分割を足した。
   根拠なしで使っていた sin・cos の導関数と `9.8696 ≤ π² ≤ 9.8697` を、`remark_real_analysis_facts_R3_R4` に「本文の正弦・余弦・円周率についての主張で、本文では証明しない」項（sin' = cos、cos' = -sin、`3.141592 ≤ π ≤ 3.141593`）として宣言し、π² の評価はそこから導いた。下流（`sine_integral_two_sided`・`second_derivative_log_divergence`）の参照を付け替えた。数値の誤りは無かった。
 
+- `closed_form_log_integral`（閉じた形の積分・arcsinh と積分の log 評価・3/2 乗の積分の評価を束ねていたブロック）: 1 ブロック 1 主張に分け、`real_log_of_product`（log(ab) = log a + log b）・`log_one_plus_at_most_argument`（log(1+x) ≤ x）・
+  `arcsinh_argument_two_sided_bounds`（2y ≤ y + √(y²+1) ≤ 2y + 1/(2y)）・`arcsinh_two_sided_log_bounds`・`closed_form_log_integral`（閉じた形だけ）・`log_integral_two_sided_bounds`・定義 `def_three_halves_power`（w^{3/2} := w√w）・
+  `three_halves_power_integral_bound` の 8 ブロックにした（`020_critical_point.ts`）。7 個の主張に同名の検算を付けた（共通の準備 `sagemath/_shared/log_integral_by_balls.sage`）。
+  等号は `QQ` 上の多項式環・有理関数体・平方根の関係式だけを持つ関数体（θ の微分も）・`AA`・`QQbar` で厳密に、π を含む等号は π を不定元に置いて、積分・log・π の値は Arb の厳密な数値積分とボールで確かめた。
+  人手証明を直した（平方根の商・単調性を定めるブロックが本文に無いので、√(q²+1) = W/δ を平方根の一意性から、√(y²+1) ≤ y + 1/(2y) を (y+s)(s-y) = 1 から、√(δ²+a²π²/4) > aπ/2 を背理法の鎖で示した。
+  ラベルの無かった log の積の法則と log(1+x) ≤ x を主張にし、arcsinh の下からの評価・F(0) = 0・導関数の連続性を書き、3/2 乗を定義した）。
+  下流（`sine_integral_two_sided` の 2 箇所、`second_derivative_log_divergence`、注記 `remark_real_analysis_facts_R3_R4`）の参照と Lean のコメント・`lean/docs/ch020-formalization.md` を新しいラベルに付け替えた（Lean の証明は変えていない）。計算の誤りは無かった。
+
 ## 次の一歩
 
-`020_critical_point.ts` の `closed_form_log_integral`（`--list` の先頭）から、文書順に検算を足す。
+`020_critical_point.ts` の `sine_integral_two_sided`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 

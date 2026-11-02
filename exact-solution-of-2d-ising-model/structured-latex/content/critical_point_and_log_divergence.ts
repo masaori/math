@@ -1539,7 +1539,9 @@ R
       paragraph([
         "Step 5（",
         math(String.raw`T`),
-        " の評価）。",
+        " の評価）。3/2 乗は ",
+        ref("def_three_halves_power"),
+        " のものである。",
         ref("gamma_derivatives_in_kappa"),
         " (1) より ",
         math(String.raw`\dfrac{\cosh\gamma}{\sinh^3\gamma} = \dfrac{1+2S}{8\left(S(1+S)\right)^{3/2}}`),
@@ -1573,8 +1575,8 @@ R
         " なので ",
         math(String.raw`S \geq \delta^2 + \dfrac{c_0^2\theta^2}{4}`),
         "、したがって (R3) と ",
-        ref("closed_form_log_integral"),
-        " (3)（",
+        ref("three_halves_power_integral_bound"),
+        "（",
         math(String.raw`a = c_0`),
         "）より",
       ]),
@@ -1586,7 +1588,7 @@ T
 &\leq \frac{\sinh^2\kappa}{4}\int_0^{\pi}\frac{d\theta}{\left(\delta^2+\frac{c_0^2\theta^2}{4}\right)^{3/2}}
 && (\because \blkref{sine_half_angle_linear_bounds}\text{ と (R3) の単調性}) \\
 &\leq \frac{\sinh^2\kappa}{4}\cdot\frac{2}{c_0\delta^2}
-&& (\because \blkref{closed_form_log_integral}\text{ (3)}) \\
+&& (\because \blkref{three_halves_power_integral_bound}) \\
 &= \frac{4\delta^2\cosh^2\!\left(\frac{\kappa}{2}\right)}{4}\cdot\frac{2}{c_0\delta^2}
 && (\because \blkref{sinh_double_angle_formula}:\ \sinh\kappa=2\delta\cosh(\tfrac\kappa2)) \\
 &= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0}

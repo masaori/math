@@ -109,14 +109,14 @@
 | `Ising2D.elementary_sine_bounds_cube` | **`0 ≤ θ/2 - sin(θ/2) ≤ θ³/48`**（`0 ≤ θ ≤ π`） | (1) |
 | `Ising2D.elementary_sine_bounds_linear` | **`c_0(θ/2) ≤ sin(θ/2) ≤ θ/2`**（`0 ≤ θ ≤ π`） | (2) |
 
-### 1.6 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（ラベル `closed_form_log_integral`）
+### 1.6 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`（ラベル `closed_form_log_integral`・`arcsinh_two_sided_log_bounds`・`log_integral_two_sided_bounds`・`three_halves_power_integral_bound`）
 
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
-| `Ising2D.integral_inv_sqrt_pi` | **`∫_0^π dθ/√(δ²+θ²/4) = 2 arcsinh(π/(2δ))`** | (1) |
-| `Ising2D.arsinh_log_bounds` | **`log(2y) ≤ arcsinh y ≤ log(2y)+1/(4y²)`** | (2) 前半 |
-| `Ising2D.integral_inv_sqrt_pi_bounds` | **`2log(π/δ) ≤ ∫ ≤ 2log(π/δ)+2δ²/π²`** | (2) 後半 |
-| `Ising2D.integral_inv_pow_three_half_pi` | `∫_0^π dθ/(δ²+θ²/4)^{3/2}` の閉じた形 | (3) |
+| `Ising2D.integral_inv_sqrt_pi` | **`∫_0^π dθ/√(δ²+θ²/4) = 2 arcsinh(π/(2δ))`** | `closed_form_log_integral` |
+| `Ising2D.arsinh_log_bounds` | **`log(2y) ≤ arcsinh y ≤ log(2y)+1/(4y²)`** | `arcsinh_two_sided_log_bounds` |
+| `Ising2D.integral_inv_sqrt_pi_bounds` | **`2log(π/δ) ≤ ∫ ≤ 2log(π/δ)+2δ²/π²`** | `log_integral_two_sided_bounds` |
+| `Ising2D.integral_inv_pow_three_half_pi` | `∫_0^π dθ/(δ²+θ²/4)^{3/2}` の評価 `≤ 2/(aδ²)` | `three_halves_power_integral_bound` |
 
 ### 1.7 `MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimSineIntegralTwoSided.lean`（ラベル `sine_integral_two_sided`）
 

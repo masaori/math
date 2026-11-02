@@ -66,7 +66,7 @@ sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)
 |---|---------|---------|-----------|------|
 | 01 | check_01_gamma_kappa_identity.sage | 鍵の恒等式（加法定理の段 → `γ_1` → `cosh γ` → 半角 → `arcsinh` 表示 → `κ` の偶関数性）、旧 `cosh_addition_and_half_angle` (2)(4)(5)（いまの `cosh_half_angle_formula`・`sinh_equation_solved_by_arcsinh`・`sinh_at_least_argument` ほか） | PASS | （run-log.txt 参照） |
 | 02 | check_02_critical_equivalence.sage | `s1s2=1 ⟺ K1=K2* ⟺ κ=0 ⟺ c1=s1c2`、等方で `A=1`、`κ'`/`κ''` の式、`|K−K_c|≤1/10` の定数 10 件 | PASS | （run-log.txt 参照） |
-| 03 | check_03_elementary_bounds.sage | `elementary_sine_bounds`（`c_0`）、`closed_form_log_integral` (1)(2)(3)、`sine_integral_two_sided` の両側評価、`γ` の導関数の式と `\|∂_κγ\|≤1` | PASS | （run-log.txt 参照） |
+| 03 | check_03_elementary_bounds.sage | `elementary_sine_bounds`（`c_0`）、`closed_form_log_integral`・`arcsinh_two_sided_log_bounds`・`log_integral_two_sided_bounds`・`three_halves_power_integral_bound`（旧 `closed_form_log_integral` の三つの主張）、`sine_integral_two_sided` の両側評価、`γ` の導関数の式と `\|∂_κγ\|≤1` | PASS | （run-log.txt 参照） |
 | 04 | check_04_G_second_derivative.sage | 本文 Step 1（(R5) の交換・`\|G'\|≤1/2`）／Step 2,3（折り返しと `J,T` 分解）／Step 4,5,6 の各定数／Step 7 の `6/5`、偶関数性、発散 | PASS | （run-log.txt 参照） |
 | 05 | check_05_specific_heat.sage | `f''` の分解式、主定理の `45` / `49`、比 `f''/log(1/\|K−K_c\|) → 8/π`、有限 `M` からの収束、`C = k_B K² f''` | PASS | （run-log.txt 参照） |
 

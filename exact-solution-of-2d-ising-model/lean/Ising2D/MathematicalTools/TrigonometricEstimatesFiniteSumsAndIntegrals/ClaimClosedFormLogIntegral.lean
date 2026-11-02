@@ -3,6 +3,9 @@
 
 人手証明（正本は `structured-latex/content/020_critical_point.ts`）:
 - `critical_009_claim_closed_form_log_integral`（ラベル `closed_form_log_integral`）
+- `critical_claim_arcsinh_two_sided_log_bounds`（ラベル `arcsinh_two_sided_log_bounds`）
+- `critical_claim_log_integral_two_sided_bounds`（ラベル `log_integral_two_sided_bounds`）
+- `critical_claim_three_halves_power_integral_bound`（ラベル `three_halves_power_integral_bound`）
 
 **具体版**（人手証明と同じ抽象度＝`a = 1/2`, `b = π` に固定した形）。
 必要十分版は `Ising2D/NecSuf/LogDivergentIntegral.lean`
@@ -18,7 +21,7 @@ namespace Ising2D
 
 open Real MeasureTheory
 
-/-- **人手証明 `closed_form_log_integral` (1)**:
+/-- **人手証明 `closed_form_log_integral`**:
 `∫_0^π dθ/√(δ² + θ²/4) = 2 arcsinh(π/(2δ))`。
 必要十分版 `NecSuf.integral_inv_sqrt_quad` の `a = 1/2`, `b = π` への特殊化。 -/
 theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
@@ -33,13 +36,13 @@ theorem integral_inv_sqrt_pi {δ : ℝ} (hδ : 0 < δ) :
   rw [this]
   field_simp
 
-/-- **人手証明 `closed_form_log_integral` (2) 前半**: `log(2y) ≤ arcsinh y ≤ log(2y) + 1/(4y²)`。
+/-- **人手証明 `arcsinh_two_sided_log_bounds`**: `log(2y) ≤ arcsinh y ≤ log(2y) + 1/(4y²)`。
 必要十分版そのもの。 -/
 theorem arsinh_log_bounds {y : ℝ} (hy : 0 < y) :
     Real.log (2 * y) ≤ Real.arsinh y ∧ Real.arsinh y ≤ Real.log (2 * y) + 1 / (4 * y ^ 2) :=
   ⟨NecSuf.log_two_mul_le_arsinh hy, NecSuf.arsinh_le_log_two_mul_add hy⟩
 
-/-- **人手証明 `closed_form_log_integral` (2) 後半**:
+/-- **人手証明 `log_integral_two_sided_bounds`**:
 `2 log(π/δ) ≤ ∫_0^π dθ/√(δ²+θ²/4) ≤ 2 log(π/δ) + 2δ²/π²`。 -/
 theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
     2 * Real.log (Real.pi / δ) ≤ (∫ θ in (0:ℝ)..Real.pi, (Real.sqrt (δ ^ 2 + θ ^ 2 / 4))⁻¹) ∧
@@ -59,7 +62,7 @@ theorem integral_inv_sqrt_pi_bounds {δ : ℝ} (hδ : 0 < δ) :
   rw [hsplit]
   constructor <;> linarith
 
-/-- **人手証明 `closed_form_log_integral` (3)**:
+/-- **人手証明 `three_halves_power_integral_bound`**:
 `∫_0^π dθ/(δ² + a²θ²/4)^{3/2} ≤ 2/(a δ²)`。
 必要十分版 `NecSuf.integral_inv_pow_three_half_le` の `A = a/2`, `b = π` への特殊化。 -/
 theorem integral_inv_pow_three_half_pi {δ a : ℝ} (hδ : 0 < δ) (ha : 0 < a) :

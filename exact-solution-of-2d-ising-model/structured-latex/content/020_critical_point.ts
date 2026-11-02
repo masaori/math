@@ -26,11 +26,21 @@ export default defineBlocks([
         "・",
         ref("sine_cubic_lower_bound"),
         "）と、",
+        ref("log_one_plus_at_most_argument"),
+        "・",
         ref("closed_form_log_integral"),
+        "・",
+        ref("log_integral_two_sided_bounds"),
+        "・",
+        ref("three_halves_power_integral_bound"),
         "・",
         ref("sine_integral_two_sided"),
         " は、実数の区間上の関数の微分と積分を扱うので、次の事実を外部から持ち込む。(R3)(R4) と微分の公式は実数解析の一般の事実であり、正弦・余弦の導関数と円周率の数値の評価は本文の正弦・余弦・円周率についての主張である。円周率の数値の評価は、",
         ref("pi_squared_numerical_bounds"),
+        "・",
+        ref("log_integral_two_sided_bounds"),
+        "・",
+        ref("three_halves_power_integral_bound"),
         " が使う。",
       ]),
       list([
@@ -150,6 +160,8 @@ export default defineBlocks([
           "、",
           ref("sine_cubic_lower_bound"),
           "、",
+          ref("log_one_plus_at_most_argument"),
+          "、",
           ref("sine_integral_two_sided"),
           " で、被積分関数の各点評価を積分へ持ち上げる段と積分を足し合わせる段に使う。",
         ],
@@ -165,7 +177,11 @@ export default defineBlocks([
           "、",
           ref("sine_cubic_lower_bound"),
           "、",
+          ref("log_one_plus_at_most_argument"),
+          "、",
           ref("closed_form_log_integral"),
+          "、",
+          ref("three_halves_power_integral_bound"),
           "、",
           ref("sine_integral_two_sided"),
           " で、導関数が分かっている関数の積分値を求める段に使う。",
@@ -186,7 +202,11 @@ export default defineBlocks([
           "、",
           ref("sine_cubic_lower_bound"),
           "、",
+          ref("log_one_plus_at_most_argument"),
+          "、",
           ref("closed_form_log_integral"),
+          "、",
+          ref("three_halves_power_integral_bound"),
           " で、(R4) に渡す導関数を求める段と、被積分関数の連続性を言う段に使う。正弦・余弦の導関数は、そのうち ",
           ref("argument_minus_sine_nonnegative"),
           "、",
@@ -2085,155 +2105,732 @@ c_0
   },
 
   {
+    id: "critical_claim_real_log_of_product",
+    kind: "claim",
+    title: { tex: String.raw`\log(ab) = \log a + \log b` },
+    labels: ["real_log_of_product"],
+    statement: [
+      paragraph([
+        ref("def_real_logarithm_positive"),
+        " の ",
+        math(String.raw`\log : \mathbb{R}_{>0} \to \mathbb{R}`),
+        " について、",
+        math(String.raw`a, b \in \mathbb{R}_{>0}`),
+        " なら ",
+        math(String.raw`ab \in \mathbb{R}_{>0}`),
+        " であり",
+      ]),
+      displayMath(String.raw`\log(ab) = \log a + \log b`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、実対数の値が実数だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`a > 0`),
+        " と ",
+        math(String.raw`b > 0`),
+        " より、正の数の積は正なので ",
+        math(String.raw`ab > 0`),
+        " である。",
+        math(String.raw`\log a, \log b \in \mathbb{R}`),
+        " である（",
+        ref("def_real_logarithm_positive"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\exp(\log a + \log b)
+&= \exp(\log a)\exp(\log b)
+&&(\because\ \blkref{scalar_exp_product}\ \text{を右辺から左辺へ})\\
+&= ab
+&&(\because\ \blkref{def_real_logarithm_positive}\ \text{の }\exp(\log y) = y\ \text{を 2 箇所へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log(ab)
+&= \log\left(\exp(\log a + \log b)\right)
+&&(\because\ \text{準備の鎖})\\
+&= \log a + \log b
+&&(\because\ \blkref{def_real_logarithm_positive}\ \text{の }\log(\exp x) = x)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (2) の証明が根拠「log(ab) = log a + log b」をラベルなしで使っていたので、exp の積の法則から示す主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_log_one_plus_at_most_argument",
+    kind: "claim",
+    title: { tex: String.raw`\log(1+x) \leq x \quad (x \geq 0)` },
+    labels: ["log_one_plus_at_most_argument"],
+    statement: [
+      paragraph([
+        ref("def_real_logarithm_positive"),
+        " の ",
+        math(String.raw`\log`),
+        " について、",
+        math(String.raw`x \in \mathbb{R}_{\geq 0}`),
+        " なら ",
+        math(String.raw`1 + x \in \mathbb{R}_{>0}`),
+        " であり ",
+        math(String.raw`\log(1+x) \leq x`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、実対数の値が実数であり、証明で区間 ",
+        math(String.raw`[0,x]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4) と微分の公式）。",
+      ]),
+    ],
+    proof: [
+      paragraph(["準備。"]),
+      displayMath(String.raw`\begin{aligned}
+\log(1+0)
+&= \log 1
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \log(\exp 0)
+&&(\because\ \blkref{scalar_exp_zero})\\
+&= 0
+&&(\because\ \blkref{def_real_logarithm_positive}\ \text{の }\log(\exp x) = x)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`x = 0`),
+        " なら ",
+        math(String.raw`\log(1+x) = \log(1+0) = 0 = x`),
+        " である。以下 ",
+        math(String.raw`x > 0`),
+        " とする。",
+        math(String.raw`v \in [0,x]`),
+        " なら ",
+        math(String.raw`1 + v \geq 1 > 0`),
+        " なので、",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（恒等関数・定数関数・和・差・",
+        math(String.raw`\log' (w) = \tfrac1w`),
+        "・合成）より ",
+        math(String.raw`H(v) := v - \log(1+v)`),
+        " は ",
+        math(String.raw`[0,x]`),
+        " 上微分可能で、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+H'(v)
+&= 1 - \log'(1+v)\cdot(0 + 1)
+&&(\because\ \text{微分の公式の差・合成・和と、恒等関数の導関数}\ 1\text{、定数関数の導関数}\ 0)\\
+&= 1 - \frac{1}{1+v}\cdot 1
+&&(\because\ \text{微分の公式の }\log'(w) = \tfrac1w\text{。}1+v > 0)\\
+&= 1 - \frac{1}{1+v}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`H'`),
+        " は微分可能な関数の差と商（分母 ",
+        math(String.raw`1+v \neq 0`),
+        "）なので微分可能、したがって連続である。さらに ",
+        math(String.raw`v \in [0,x]`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1 - \frac{1}{1+v}
+&= \frac{(1+v) - 1}{1+v}
+&&(\because\ \text{通分。}1+v \neq 0)\\
+&= \frac{v}{1+v}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\geq 0
+&&(\because\ v \geq 0\ \text{と}\ 1+v > 0)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+x - \log(1+x)
+&= \left(x - \log(1+x)\right) - \left(0 - \log(1+0)\right)
+&&(\because\ \text{準備の鎖より}\ 0 - \log(1+0) = 0)\\
+&= \int_0^x\left(1 - \frac{1}{1+v}\right)dv
+&&(\because\ \text{(R4) を}\ H\ \text{に})\\
+&\geq \int_0^x 0\,dv
+&&(\because\ \text{(R3) の単調性と、直前の鎖の各点の評価})\\
+&= 0 - 0
+&&(\because\ \text{(R4) を定数関数}\ 0\ \text{に。微分の公式で導関数は}\ 0)\\
+&= 0
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\log(1+x)
+&= x - \left(x - \log(1+x)\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq x - 0
+&&(\because\ \text{直前の鎖})\\
+&= x
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (2) の証明が括弧書きで示していた log(1+x) ≤ x を独立の主張にし、x = 0 の場合、H の微分可能性と導関数、被積分関数の符号を (∵) 付きの鎖にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_arcsinh_argument_two_sided_bounds",
+    kind: "claim",
+    title: { tex: String.raw`2y \leq y + \sqrt{y^2+1} \leq 2y + \tfrac{1}{2y} \quad (y > 0)` },
+    labels: ["arcsinh_argument_two_sided_bounds"],
+    statement: [
+      paragraph([
+        "非負実数の平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        " を用いる。",
+        math(String.raw`y \in \mathbb{R}_{>0}`),
+        " なら",
+      ]),
+      displayMath(String.raw`2y \ \leq\ y + \sqrt{y^2+1} \ \leq\ 2y + \frac{1}{2y}`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、平方根の値が実数だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`s := \sqrt{y^2+1} \in \mathbb{R}_{\geq 0}`),
+        " と置く。",
+        ref("arcsinh_argument_is_positive"),
+        " より ",
+        math(String.raw`y + s > 0`),
+        "、",
+        ref("arcsinh_argument_times_conjugate_is_one"),
+        " より ",
+        math(String.raw`(y+s)(s-y) = 1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s - y
+&= \frac{(y+s)(s-y)}{y+s}
+&&(\because\ y + s \neq 0\ \text{で約分の逆})\\
+&= \frac{1}{y+s}
+&&(\because\ \blkref{arcsinh_argument_times_conjugate_is_one})
+\end{aligned}`),
+      paragraph(["下からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+y + s
+&= 2y + (s - y)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 2y + \frac{1}{y+s}
+&&(\because\ \text{準備の鎖})\\
+&\geq 2y
+&&(\because\ y + s > 0\ \text{より}\ \tfrac{1}{y+s} > 0)
+\end{aligned}`),
+      paragraph([
+        "上からの評価。下からの評価と ",
+        math(String.raw`2y > 0`),
+        " より ",
+        math(String.raw`y + s \geq 2y > 0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{y+s}
+&= 2y\cdot\frac{1}{(y+s)\,2y}
+&&(\because\ \mathbb{R}\ \text{の四則。}y+s \neq 0,\ 2y \neq 0)\\
+&\leq (y+s)\cdot\frac{1}{(y+s)\,2y}
+&&(\because\ 2y \leq y+s\ \text{の両辺に正の数}\ \tfrac{1}{(y+s)\,2y}\ \text{を掛ける})\\
+&= \frac{1}{2y}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+y + s
+&= 2y + (s - y)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 2y + \frac{1}{y+s}
+&&(\because\ \text{準備の鎖})\\
+&\leq 2y + \frac{1}{2y}
+&&(\because\ \tfrac{1}{y+s} \leq \tfrac{1}{2y})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (2) の証明の 2y ≤ y + √(y²+1) ≤ 2y + 1/(2y) を独立の主張にした。旧証明は √(y²+1) ≥ y と、(y + 1/(2y))² ≥ y²+1 から平方根の単調性で √(y²+1) ≤ y + 1/(2y) を出していたが、平方根の単調性を定めるブロックが本文に無い。" +
+          "arcsinh_argument_times_conjugate_is_one の (y+s)(s-y) = 1 から s - y = 1/(y+s) を出し、両側をそこから示す形に改めた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_arcsinh_two_sided_log_bounds",
+    kind: "claim",
+    title: { tex: String.raw`\log(2y) \leq \mathrm{arcsinh}(y) \leq \log(2y) + \tfrac{1}{4y^2} \quad (y > 0)` },
+    labels: ["arcsinh_two_sided_log_bounds"],
+    statement: [
+      paragraph([
+        ref("def_arcsinh"),
+        " の ",
+        math(String.raw`\mathrm{arcsinh}`),
+        " と ",
+        ref("def_real_logarithm_positive"),
+        " の ",
+        math(String.raw`\log`),
+        " について、",
+        math(String.raw`y \in \mathbb{R}_{>0}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\log(2y) \ \leq\ \mathrm{arcsinh}(y) \ \leq\ \log(2y) + \frac{1}{4y^2}`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、実対数と平方根の値が実数だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`s := \sqrt{y^2+1} \in \mathbb{R}_{\geq 0}`),
+        " と置く。",
+        math(String.raw`2y > 0`),
+        "、",
+        math(String.raw`y + s > 0`),
+        "（",
+        ref("arcsinh_argument_is_positive"),
+        "）、",
+        math(String.raw`1 + \tfrac{1}{4y^2} > 0`),
+        "、",
+        math(String.raw`2y + \tfrac{1}{2y} > 0`),
+        " なので、以下の ",
+        math(String.raw`\log`),
+        " の引数はどれも正である。",
+      ]),
+      paragraph(["下からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{arcsinh}(y)
+&= \log(y + s)
+&&(\because\ \blkref{def_arcsinh})\\
+&\geq \log(2y)
+&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ 2y \leq y+s\text{。}2y < y+s\ \text{なら}\ \blkref{def_real_logarithm_positive}\ \text{の}\ \log\ \text{の狭義単調増加、}2y = y+s\ \text{なら等号})
+\end{aligned}`),
+      paragraph(["上からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{arcsinh}(y)
+&= \log(y + s)
+&&(\because\ \blkref{def_arcsinh})\\
+&\leq \log\left(2y + \frac{1}{2y}\right)
+&&(\because\ \blkref{arcsinh_argument_two_sided_bounds}\ \text{の}\ y+s \leq 2y + \tfrac{1}{2y}\text{。狭義なら}\ \blkref{def_real_logarithm_positive}\ \text{の}\ \log\ \text{の狭義単調増加、等しければ等号})\\
+&= \log\left(2y + 2y\cdot\frac{1}{4y^2}\right)
+&&(\because\ \tfrac{1}{2y} = 2y\cdot\tfrac{1}{4y^2}\text{。}\mathbb{R}\ \text{の四則})\\
+&= \log\left(2y\left(1 + \frac{1}{4y^2}\right)\right)
+&&(\because\ \text{分配則})\\
+&= \log(2y) + \log\left(1 + \frac{1}{4y^2}\right)
+&&(\because\ \blkref{real_log_of_product})\\
+&\leq \log(2y) + \frac{1}{4y^2}
+&&(\because\ \blkref{log_one_plus_at_most_argument}\ \text{を}\ x = \tfrac{1}{4y^2} \geq 0\ \text{に})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (2) の前半を独立の主張にした。下からの評価が旧証明では書かれていなかったので鎖を足し、log の積の法則と log(1+x) ≤ x をラベル参照で引いた。",
+      ],
+    },
+  },
+
+  {
     id: "critical_009_claim_closed_form_log_integral",
     kind: "claim",
     origin: { path: SRC, ordinal: 11 },
     title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)` },
     labels: ["closed_form_log_integral"],
     statement: [
-      paragraph(["非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), " を用いる。"]),
       paragraph([
+        "非負実数の平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        " を、",
+        math(String.raw`\mathrm{arcsinh}`),
+        " は ",
+        ref("def_arcsinh"),
+        " を用いる。",
         math(String.raw`\delta \in \mathbb{R}_{>0}`),
-        " と ",
-        math(String.raw`a \in \mathbb{R}_{>0}`),
-        " について次が成り立つ。",
+        " なら",
       ]),
-      list([
-        [
-          "(1) ",
-          math(String.raw`\displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2 + \theta^2/4}}
-             = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)`),
-        ],
-        [
-          "(2) ",
-          math(String.raw`y \in \mathbb{R}_{>0}`),
-          " について ",
-          math(String.raw`\log(2y) \leq \mathrm{arcsinh}(y) \leq \log(2y) + \dfrac{1}{4y^2}`),
-          "。とくに (1) と合わせて",
-          math(String.raw`\quad 2\log\dfrac{\pi}{\delta} \ \leq\ \displaystyle\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
-             \ \leq\ 2\log\dfrac{\pi}{\delta} + \dfrac{2\delta^2}{\pi^2}`),
-          "。",
-        ],
-        [
-          "(3) ",
-          math(String.raw`\displaystyle\int_0^{\pi}\frac{d\theta}{\left(\delta^2 + a^2\theta^2/4\right)^{3/2}}
-             \ \leq\ \frac{2}{a\,\delta^2}`),
-        ],
+      displayMath(String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2 + \theta^2/4}}
+   = 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、区間 ",
+        math(String.raw`[0,\pi]`),
+        " 上の積分と微分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R4) と微分の公式）。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) の証明。",
-        math(String.raw`F(\theta) := 2\,\mathrm{arcsinh}\!\left(\dfrac{\theta}{2\delta}\right)`),
-        " とおくと",
+        "準備。",
+        math(String.raw`\theta \in [0,\pi]`),
+        " について ",
+        math(String.raw`q(\theta) := \dfrac{\theta}{2\delta} \in \mathbb{R}`),
+        "、",
+        math(String.raw`F(\theta) := 2\,\mathrm{arcsinh}(q(\theta)) \in \mathbb{R}`),
+        "、",
+        math(String.raw`W(\theta) := \sqrt{\delta^2 + \theta^2/4} \in \mathbb{R}_{\geq 0}`),
+        " と置く。",
+        math(String.raw`\delta^2 + \theta^2/4 \geq \delta^2 > 0`),
+        " と ",
+        math(String.raw`W(\theta)^2 = \delta^2 + \theta^2/4`),
+        " より ",
+        math(String.raw`W(\theta) \neq 0`),
+        "、したがって ",
+        math(String.raw`W(\theta) > 0`),
+        " である。",
+        math(String.raw`\tfrac{W(\theta)}{\delta} \geq 0`),
+        " であり",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
+\left(\frac{W(\theta)}{\delta}\right)^2
+&= \frac{W(\theta)^2}{\delta^2}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \frac{\delta^2 + \theta^2/4}{\delta^2}
+&&(\because\ \blkref{definition_of_sqrt_r_positive})\\
+&= \left(\frac{\theta}{2\delta}\right)^2 + 1
+&&(\because\ \mathbb{R}\ \text{の四則。}\delta \neq 0)\\
+&= q(\theta)^2 + 1
+&&(\because\ q\ \text{の置き方})
+\end{aligned}`),
+      paragraph([
+        "なので、",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        " の一意性より ",
+        math(String.raw`\sqrt{q(\theta)^2+1} = \tfrac{W(\theta)}{\delta}`),
+        " である。同じ一意性と ",
+        math(String.raw`1 \geq 0`),
+        "、",
+        math(String.raw`1^2 = 1`),
+        " より ",
+        math(String.raw`\sqrt{1} = 1`),
+        " である。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（定数倍と恒等関数）より ",
+        math(String.raw`q`),
+        " は微分可能で ",
+        math(String.raw`q'(\theta) = \tfrac{1}{2\delta}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 F'(\theta)
-&= 2\cdot\frac{1}{\sqrt{\left(\frac{\theta}{2\delta}\right)^2+1}}\cdot\frac{1}{2\delta}
-   \quad (\because \blkref{arcsinh_derivative}\text{ と合成関数の微分}) \\
-&= \frac{1}{\delta}\cdot\frac{2\delta}{\sqrt{\theta^2 + 4\delta^2}}
-   \quad (\because \delta > 0 \text{ より } \sqrt{\tfrac{\theta^2+4\delta^2}{4\delta^2}} = \tfrac{\sqrt{\theta^2+4\delta^2}}{2\delta}) \\
-&= \frac{2}{\sqrt{\theta^2+4\delta^2}} \\
-&= \frac{1}{\sqrt{\delta^2 + \theta^2/4}}
-\end{aligned}`,
-      ),
+&= 2\,\mathrm{arcsinh}'(q(\theta))\,q'(\theta)
+&&(\because\ \text{微分の公式の定数倍と合成。}\blkref{arcsinh_derivative}\ \text{より}\ \mathrm{arcsinh}\ \text{は微分可能})\\
+&= 2\cdot\frac{1}{\sqrt{q(\theta)^2+1}}\cdot q'(\theta)
+&&(\because\ \blkref{arcsinh_derivative})\\
+&= 2\cdot\frac{1}{\sqrt{q(\theta)^2+1}}\cdot\frac{1}{2\delta}
+&&(\because\ q'(\theta) = \tfrac{1}{2\delta})\\
+&= 2\cdot\frac{1}{W(\theta)/\delta}\cdot\frac{1}{2\delta}
+&&(\because\ \sqrt{q(\theta)^2+1} = \tfrac{W(\theta)}{\delta})\\
+&= 2\cdot\frac{\delta}{W(\theta)}\cdot\frac{1}{2\delta}
+&&(\because\ \mathbb{R}\ \text{の四則。}W(\theta) \neq 0)\\
+&= \frac{1}{W(\theta)}
+&&(\because\ \text{約分})
+\end{aligned}`),
       paragraph([
-        math(String.raw`F'`),
-        " は ",
-        math(String.raw`[0,\pi]`),
-        " 上連続（分母は ",
-        math(String.raw`\geq \delta > 0`),
-        "）なので (R4) より",
+        math(String.raw`W`),
+        " は平方根と ",
+        math(String.raw`\mathbb{R}_{>0}`),
+        " に値をとる微分可能な関数 ",
+        math(String.raw`\theta \mapsto \delta^2 + \theta^2/4`),
+        " の合成なので微分可能で、",
+        math(String.raw`F' = \tfrac{1}{W}`),
+        " は分母が 0 でない商なので微分可能、したがって連続である（微分の公式）。",
       ]),
-      displayMath(
-        String.raw`\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
-= F(\pi) - F(0)
-= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right) - 0`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+F(0)
+&= 2\,\mathrm{arcsinh}(0)
+&&(\because\ q(0) = 0)\\
+&= 2\log\left(0 + \sqrt{0^2+1}\right)
+&&(\because\ \blkref{def_arcsinh})\\
+&= 2\log\left(\sqrt{1}\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 2\log 1
+&&(\because\ \sqrt{1} = 1)\\
+&= 2\log(\exp 0)
+&&(\because\ \blkref{scalar_exp_zero})\\
+&= 2\cdot 0
+&&(\because\ \blkref{def_real_logarithm_positive}\ \text{の }\log(\exp x) = x)\\
+&= 0
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
+&= \int_0^{\pi}F'(\theta)\,d\theta
+&&(\because\ W\ \text{の置き方と}\ F'(\theta) = \tfrac{1}{W(\theta)})\\
+&= F(\pi) - F(0)
+&&(\because\ \text{(R4) を}\ F\ \text{に})\\
+&= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right) - F(0)
+&&(\because\ F\ \text{と}\ q\ \text{の置き方})\\
+&= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right) - 0
+&&(\because\ F(0) = 0)\\
+&= 2\,\mathrm{arcsinh}\!\left(\frac{\pi}{2\delta}\right)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral は (1) の閉じた形、(2) の arcsinh と積分の log 評価、(3) の 3/2 乗の積分の評価を束ねていたので、1 ブロック 1 主張に分け、このブロックには (1) だけを残した。" +
+          "旧証明の √((θ²+4δ²)/(4δ²)) = √(θ²+4δ²)/(2δ) は平方根の商の規則を定めるブロックが本文に無いので、平方根の一意性から √(q²+1) = W/δ を示す形に改め、F(0) = 0 と F' の連続性を書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_log_integral_two_sided_bounds",
+    kind: "claim",
+    title: { tex: String.raw`2\log\frac{\pi}{\delta} \leq \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}} \leq 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}` },
+    labels: ["log_integral_two_sided_bounds"],
+    statement: [
       paragraph([
-        "(2) の証明。",
-        ref("def_arcsinh"),
-        " の ",
-        math(String.raw`\mathrm{arcsinh}(y) = \log(y+\sqrt{y^2+1})`),
-        " について、",
-        math(String.raw`y > 0`),
-        " のとき",
-      ]),
-      displayMath(
-        String.raw`2y \ \leq\ y + \sqrt{y^2+1} \ \leq\ 2y + \frac{1}{2y}`,
-      ),
-      paragraph([
-        "が成り立つ（左は ",
-        math(String.raw`\sqrt{y^2+1} \geq y`),
-        "、右は ",
-        math(String.raw`\left(y+\tfrac{1}{2y}\right)^2 = y^2+1+\tfrac{1}{4y^2} \geq y^2+1`),
-        " と両辺の正値性から ",
-        math(String.raw`\sqrt{y^2+1} \leq y + \tfrac1{2y}`),
-        "）。",
+        "非負実数の平方根は ",
+        ref("definition_of_sqrt_r_positive"),
+        " を、",
         math(String.raw`\log`),
-        " は狭義単調増加なので",
+        " は ",
+        ref("def_real_logarithm_positive"),
+        " を用いる。",
+        math(String.raw`\delta \in \mathbb{R}_{>0}`),
+        " なら",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{arcsinh}(y)
-&\leq \log\left(2y + \frac{1}{2y}\right)
-   \quad (\because \text{直前の不等式と } \log \text{ の狭義単調増加性}) \\
-&= \log(2y) + \log\left(1 + \frac{1}{4y^2}\right)
-   \quad (\because \log(ab) = \log a + \log b) \\
-&\leq \log(2y) + \frac{1}{4y^2}
-   \quad (\because \log(1+x) \leq x)
-\end{aligned}`,
-      ),
+      displayMath(String.raw`2\log\frac{\pi}{\delta} \ \leq\ \int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
+   \ \leq\ 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}`),
       paragraph([
-        "（",
-        math(String.raw`\log(1+x)\leq x`),
-        " は (R4) より ",
-        math(String.raw`x - \log(1+x) = \int_0^x\left(1-\tfrac1{1+v}\right)dv \geq 0`),
-        "（",
-        math(String.raw`x \geq 0`),
-        "）から従う。）",
-        math(String.raw`y = \dfrac{\pi}{2\delta}`),
-        " を (1) へ代入すると ",
-        math(String.raw`\log(2y) = \log\dfrac{\pi}{\delta}`),
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、区間 ",
+        math(String.raw`[0,\pi]`),
+        " 上の積分と実対数を使うからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の数値の評価より ",
+        math(String.raw`\pi \geq 3.141592 > 0`),
+        " である。",
+        math(String.raw`y := \dfrac{\pi}{2\delta} \in \mathbb{R}_{>0}`),
+        " と置くと、",
+        math(String.raw`\mathbb{R}`),
+        " の四則より ",
+        math(String.raw`2y = \dfrac{\pi}{\delta}`),
         "、",
         math(String.raw`\dfrac{1}{4y^2} = \dfrac{\delta^2}{\pi^2}`),
-        " なので、両辺を 2 倍して主張の評価を得る。",
+        " である。",
       ]),
+      paragraph(["下からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
+&= 2\,\mathrm{arcsinh}(y)
+&&(\because\ \blkref{closed_form_log_integral}\ \text{と}\ y\ \text{の置き方})\\
+&\geq 2\log(2y)
+&&(\because\ \blkref{arcsinh_two_sided_log_bounds}\ \text{の下からの評価に}\ 2 > 0\ \text{を掛ける})\\
+&= 2\log\frac{\pi}{\delta}
+&&(\because\ 2y = \tfrac{\pi}{\delta})
+\end{aligned}`),
+      paragraph(["上からの評価。"]),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\sqrt{\delta^2+\theta^2/4}}
+&= 2\,\mathrm{arcsinh}(y)
+&&(\because\ \blkref{closed_form_log_integral}\ \text{と}\ y\ \text{の置き方})\\
+&\leq 2\left(\log(2y) + \frac{1}{4y^2}\right)
+&&(\because\ \blkref{arcsinh_two_sided_log_bounds}\ \text{の上からの評価に}\ 2 > 0\ \text{を掛ける})\\
+&= 2\left(\log\frac{\pi}{\delta} + \frac{\delta^2}{\pi^2}\right)
+&&(\because\ 2y = \tfrac{\pi}{\delta},\ \tfrac{1}{4y^2} = \tfrac{\delta^2}{\pi^2})\\
+&= 2\log\frac{\pi}{\delta} + \frac{2\delta^2}{\pi^2}
+&&(\because\ \text{分配則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (2) の後半（「とくに (1) と合わせて」の積分の評価）を独立の主張にし、代入と 2 倍を (∵) 付きの鎖にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_definition_three_halves_power",
+    kind: "definition",
+    title: { tex: String.raw`w^{3/2} := w\sqrt{w}` },
+    labels: ["def_three_halves_power"],
+    statement: [
       paragraph([
-        "(3) の証明。",
-        math(String.raw`G(\theta) := \dfrac{\theta}{\delta^2\sqrt{\delta^2 + a^2\theta^2/4}}`),
-        " とおくと",
+        math(String.raw`w \in \mathbb{R}_{>0}`),
+        " について、",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根を使い",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`w^{3/2} := w\sqrt{w} \in \mathbb{R}_{>0}`),
+      paragraph([
+        "と定める。値が正であるのは、",
+        math(String.raw`\sqrt{w} \geq 0`),
+        " と ",
+        math(String.raw`(\sqrt{w})^2 = w > 0`),
+        " より ",
+        math(String.raw`\sqrt{w} > 0`),
+        " であり、正の数の積は正だからである。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、平方根の値が実数だからである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (3) が定義なしで使っていた 3/2 乗を定義として置いた。second_derivative_log_divergence の Step 5 の 3/2 乗もこの定義を引く。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_three_halves_power_integral_bound",
+    kind: "claim",
+    title: { tex: String.raw`\int_0^{\pi}\frac{d\theta}{\left(\delta^2 + a^2\theta^2/4\right)^{3/2}} \leq \frac{2}{a\,\delta^2}` },
+    labels: ["three_halves_power_integral_bound"],
+    statement: [
+      paragraph([
+        ref("def_three_halves_power"),
+        " の 3/2 乗について、",
+        math(String.raw`\delta, a \in \mathbb{R}_{>0}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\int_0^{\pi}\frac{d\theta}{\left(\delta^2 + a^2\theta^2/4\right)^{3/2}} \ \leq\ \frac{2}{a\,\delta^2}`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、区間 ",
+        math(String.raw`[0,\pi]`),
+        " 上の積分と微分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R4) と微分の公式）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`\theta \in [0,\pi]`),
+        " について ",
+        math(String.raw`w(\theta) := \delta^2 + a^2\theta^2/4`),
+        "、",
+        math(String.raw`r(\theta) := \sqrt{w(\theta)}`),
+        "、",
+        math(String.raw`G(\theta) := \dfrac{\theta}{\delta^2\,r(\theta)}`),
+        " と置く。",
+        math(String.raw`w(\theta) \geq \delta^2 > 0`),
+        " なので、",
+        ref("def_three_halves_power"),
+        " と同じ理由で ",
+        math(String.raw`r(\theta) > 0`),
+        " であり、",
+        math(String.raw`r(\theta)^2 = w(\theta)`),
+        "（",
+        ref("definition_of_sqrt_r_positive"),
+        "）である。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式（定数倍・積・和・平方根・合成・商）より ",
+        math(String.raw`w, r, G`),
+        " は微分可能で、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+w'(\theta)
+&= 0 + \frac{a^2}{4}\,(1\cdot\theta + \theta\cdot 1)
+&&(\because\ \text{微分の公式の和・定数倍・積と、定数関数の導関数}\ 0\text{、恒等関数の導関数}\ 1)\\
+&= \frac{a^2\theta}{2}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+r'(\theta)
+&= \frac{1}{2\sqrt{w(\theta)}}\,w'(\theta)
+&&(\because\ \text{微分の公式の平方根と合成。}w(\theta) > 0)\\
+&= \frac{1}{2\,r(\theta)}\cdot\frac{a^2\theta}{2}
+&&(\because\ r\ \text{の置き方と}\ w'(\theta) = \tfrac{a^2\theta}{2})\\
+&= \frac{a^2\theta}{4\,r(\theta)}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
 G'(\theta)
-&= \frac{\sqrt{\delta^2+\frac{a^2\theta^2}{4}} - \theta\cdot\frac{a^2\theta/4}{\sqrt{\delta^2+\frac{a^2\theta^2}{4}}}}
-        {\delta^2\left(\delta^2+\frac{a^2\theta^2}{4}\right)}
-   \quad (\because \text{商の微分}) \\
-&= \frac{\left(\delta^2+\frac{a^2\theta^2}{4}\right) - \frac{a^2\theta^2}{4}}
-        {\delta^2\left(\delta^2+\frac{a^2\theta^2}{4}\right)^{3/2}} \\
-&= \frac{1}{\left(\delta^2+\frac{a^2\theta^2}{4}\right)^{3/2}}
-\end{aligned}`,
-      ),
+&= \frac{1\cdot\delta^2 r(\theta) - \theta\cdot\delta^2 r'(\theta)}{\left(\delta^2 r(\theta)\right)^2}
+&&(\because\ \text{微分の公式の商と定数倍。}\delta^2 r(\theta) \neq 0)\\
+&= \frac{\delta^2 r(\theta) - \theta\cdot\delta^2\,\dfrac{a^2\theta}{4\,r(\theta)}}{\left(\delta^2 r(\theta)\right)^2}
+&&(\because\ r'(\theta) = \tfrac{a^2\theta}{4 r(\theta)})\\
+&= \frac{\delta^2 r(\theta) - \delta^2\,\dfrac{a^2\theta^2}{4\,r(\theta)}}{\delta^4\,r(\theta)^2}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \frac{\delta^2 r(\theta)^2 - \delta^2\,\dfrac{a^2\theta^2}{4}}{\delta^4\,r(\theta)^3}
+&&(\because\ \text{分子と分母に}\ r(\theta)\ \text{を掛ける})\\
+&= \frac{\delta^2\left(r(\theta)^2 - \dfrac{a^2\theta^2}{4}\right)}{\delta^4\,r(\theta)^3}
+&&(\because\ \text{分配則})\\
+&= \frac{\delta^2\cdot\delta^2}{\delta^4\,r(\theta)^3}
+&&(\because\ r(\theta)^2 = w(\theta) = \delta^2 + \tfrac{a^2\theta^2}{4})\\
+&= \frac{1}{r(\theta)^2\,r(\theta)}
+&&(\because\ \text{約分})\\
+&= \frac{1}{w(\theta)\sqrt{w(\theta)}}
+&&(\because\ r(\theta)^2 = w(\theta)\ \text{と}\ r\ \text{の置き方})\\
+&= \frac{1}{w(\theta)^{3/2}}
+&&(\because\ \blkref{def_three_halves_power})
+\end{aligned}`),
       paragraph([
         math(String.raw`G'`),
-        " は ",
-        math(String.raw`[0,\pi]`),
-        " 上連続なので (R4) より",
+        " は分母が 0 でない微分可能な関数の商なので微分可能、したがって連続である（微分の公式）。",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の数値の評価より ",
+        math(String.raw`\pi > 0`),
+        "、したがって ",
+        math(String.raw`\tfrac{a\pi}{2} > 0`),
+        " である。",
+        math(String.raw`r(\pi) \leq \tfrac{a\pi}{2}`),
+        " と仮定すると",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\int_0^{\pi}\frac{d\theta}{\left(\delta^2+\frac{a^2\theta^2}{4}\right)^{3/2}}
-&= G(\pi) - G(0) \\
-&= \frac{\pi}{\delta^2\sqrt{\delta^2 + \frac{a^2\pi^2}{4}}} \\
-&\leq \frac{\pi}{\delta^2\cdot\frac{a\pi}{2}}
-   \quad (\because \sqrt{\delta^2 + \tfrac{a^2\pi^2}{4}} \geq \sqrt{\tfrac{a^2\pi^2}{4}} = \tfrac{a\pi}{2}) \\
-&= \frac{2}{a\delta^2}
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+r(\pi)^2
+&= r(\pi)\cdot r(\pi)\\
+&\leq \frac{a\pi}{2}\cdot r(\pi)
+&&(\because\ \text{仮定の両辺に}\ r(\pi) > 0\ \text{を掛ける})\\
+&\leq \frac{a\pi}{2}\cdot\frac{a\pi}{2}
+&&(\because\ \text{仮定の両辺に}\ \tfrac{a\pi}{2} > 0\ \text{を掛ける})\\
+&= \frac{a^2\pi^2}{4}\\
+&< \delta^2 + \frac{a^2\pi^2}{4}
+&&(\because\ \delta^2 > 0)\\
+&= r(\pi)^2
+&&(\because\ r(\pi)^2 = w(\pi))
+\end{aligned}`),
+      paragraph([
+        "となり矛盾する。よって ",
+        math(String.raw`r(\pi) > \tfrac{a\pi}{2} > 0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\frac{1}{r(\pi)}
+&= \frac{a\pi}{2}\cdot\frac{2}{a\pi\,r(\pi)}
+&&(\because\ \mathbb{R}\ \text{の四則。}a\pi \neq 0,\ r(\pi) \neq 0)\\
+&\leq r(\pi)\cdot\frac{2}{a\pi\,r(\pi)}
+&&(\because\ \tfrac{a\pi}{2} < r(\pi)\ \text{の両辺に正の数}\ \tfrac{2}{a\pi\,r(\pi)}\ \text{を掛ける})\\
+&= \frac{2}{a\pi}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\int_0^{\pi}\frac{d\theta}{\left(\delta^2+a^2\theta^2/4\right)^{3/2}}
+&= \int_0^{\pi}G'(\theta)\,d\theta
+&&(\because\ w\ \text{の置き方と}\ G'(\theta) = \tfrac{1}{w(\theta)^{3/2}})\\
+&= G(\pi) - G(0)
+&&(\because\ \text{(R4) を}\ G\ \text{に})\\
+&= \frac{\pi}{\delta^2\,r(\pi)} - \frac{0}{\delta^2\,r(0)}
+&&(\because\ G\ \text{の置き方})\\
+&= \frac{\pi}{\delta^2}\cdot\frac{1}{r(\pi)}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\leq \frac{\pi}{\delta^2}\cdot\frac{2}{a\pi}
+&&(\because\ \tfrac{1}{r(\pi)} \leq \tfrac{2}{a\pi}\ \text{の両辺に}\ \tfrac{\pi}{\delta^2} > 0\ \text{を掛ける})\\
+&= \frac{2}{a\,\delta^2}
+&&(\because\ \text{約分})
+\end{aligned}`),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 closed_form_log_integral (3) を独立の主張にした。3/2 乗を def_three_halves_power で定め、G' の計算を w'・r' の鎖と 1 行 1 操作の鎖に分け、√(δ² + a²π²/4) ≥ aπ/2 を平方根の単調性ではなく背理法の鎖で示した。",
+      ],
+    },
   },
 
   {
@@ -2301,8 +2898,8 @@ G'(\theta)
         "、したがって各点で ",
         math(String.raw`\dfrac{1}{D_2} \geq \dfrac{1}{D_1}`),
         "。(R3) の単調性と ",
-        ref("closed_form_log_integral"),
-        " (2) より",
+        ref("log_integral_two_sided_bounds"),
+        " より",
       ]),
       displayMath(
         String.raw`\int_0^{\pi}\frac{d\theta}{D_2}
@@ -2384,8 +2981,8 @@ G'(\theta)
       ),
       paragraph([
         "よって (R3) の線型性と ",
-        ref("closed_form_log_integral"),
-        " (2) より",
+        ref("log_integral_two_sided_bounds"),
+        " より",
       ]),
       displayMath(
         String.raw`\int_0^{\pi}\frac{d\theta}{D_2}

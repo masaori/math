@@ -1,7 +1,7 @@
 /-
 # 対数発散する積分（必要十分版）
 
-対応する人手証明のラベル: `closed_form_log_integral`, `sine_integral_two_sided`
+対応する人手証明のラベル: `closed_form_log_integral`, `three_halves_power_integral_bound`, `sine_integral_two_sided`
 （正本は `structured-latex/content/020_critical_point.ts`）
 
 具体版: `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimClosedFormLogIntegral.lean`,
@@ -63,7 +63,7 @@ theorem hasDerivAt_quad (δ a θ : ℝ) :
   rw [hv] at hp
   simpa using hp.const_add (δ ^ 2)
 
-/-- **必要十分版（`closed_form_log_integral` (1)）**:
+/-- **必要十分版（`closed_form_log_integral`）**:
 `∫_0^b dθ/√(δ² + a²θ²) = arsinh(ab/δ)/a`。
 人手証明は `a = 1/2`, `b = π` の場合しか述べていないが、証明に効いているのは
 `F(θ) = arsinh(aθ/δ)/a` が原始関数であることだけである。 -/
@@ -101,7 +101,7 @@ theorem integral_inv_sqrt_quad {δ a b : ℝ} (hδ : 0 < δ) (ha : 0 < a) :
   rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv hcont.intervalIntegrable]
   simp
 
-/-- `∫_0^b dθ/(δ² + a²θ²)^{3/2} = b/(δ²√(δ²+a²b²))`（**必要十分版**、`closed_form_log_integral` (3)）。
+/-- `∫_0^b dθ/(δ² + a²θ²)^{3/2} = b/(δ²√(δ²+a²b²))`（**必要十分版**、`three_halves_power_integral_bound`）。
 `(δ²+a²θ²)^{3/2}` は `(δ²+a²θ²)·√(δ²+a²θ²)` として書く（rpow を避ける）。 -/
 theorem integral_inv_pow_three_half {δ a b : ℝ} (hδ : 0 < δ) :
     (∫ θ in (0:ℝ)..b,
@@ -147,7 +147,7 @@ theorem integral_inv_pow_three_half {δ a b : ℝ} (hδ : 0 < δ) :
   simp
 
 /-- 上の系: `∫_0^b dθ/(δ²+a²θ²)^{3/2} ≤ 1/(a δ²)`（`a, b, δ > 0`）。
-人手証明 `closed_form_log_integral` (3) の（`1/2` 倍だけ強い）形。 -/
+人手証明 `three_halves_power_integral_bound` の（`1/2` 倍だけ強い）形。 -/
 theorem integral_inv_pow_three_half_le {δ a b : ℝ} (hδ : 0 < δ) (ha : 0 < a) (hb : 0 < b) :
     (∫ θ in (0:ℝ)..b,
         ((δ ^ 2 + (a * θ) ^ 2) * Real.sqrt (δ ^ 2 + (a * θ) ^ 2))⁻¹)

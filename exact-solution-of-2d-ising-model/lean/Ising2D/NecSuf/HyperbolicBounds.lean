@@ -1,7 +1,7 @@
 /-
 # `sinh`, `cosh`, `arsinh` の初等評価（必要十分版）
 
-対応する人手証明のラベル: `cosh_addition_and_half_angle`, `closed_form_log_integral`
+対応する人手証明のラベル: `cosh_addition_and_half_angle`, `arcsinh_two_sided_log_bounds`
 （正本は `structured-latex/content/020_critical_point.ts`）
 
 具体版: `Ising2D/MathematicalTools/RealSquareRootExponentialAndHyperbolicFunctions/ClaimCoshAdditionAndHalfAngle.lean`,
