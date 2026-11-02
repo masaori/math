@@ -32438,7 +32438,7 @@ f
                       ref("claim_qbar_factor_quotient_other_root_zero"), " より ", math(String.raw`\mathrm{aev}_{w'}(g)=0`), " である。"]),
                     paragraph(["したがって帰納法の仮定を ", math(String.raw`g`), " と ", math(String.raw`s\setminus\{w\}`),
                       " に当てることができ、"]),
-                    displayMath(String.raw`\lvert s\setminus\{w\}\rvert\le n`),
+                    displayMath(String.raw`\lvert s\setminus\{w\}\rvert\le n\qquad\bigl(\because\ \text{帰納法の仮定}\bigr)`),
                     paragraph(["を得る。", math(String.raw`w\in s`), " なので、"]),
                     displayMath(String.raw`\begin{aligned}
 \lvert s\rvert
