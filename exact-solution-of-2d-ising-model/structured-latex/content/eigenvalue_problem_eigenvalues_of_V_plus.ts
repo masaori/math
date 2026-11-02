@@ -2176,7 +2176,17 @@ X\,\check{n}_\nu
         ],
       ]),
       paragraph([
-        "が成り立つ。すなわち ",
+        "が成り立つ。(2) の和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}`),
+        "）による（",
+        ref("def_check_index_set"),
+        " により ",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " なので ",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
+        "）。すなわち ",
         math(String.raw`\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " は ",
         math(String.raw`2^{M_{\mathrm{col}}}`),
@@ -2388,26 +2398,13 @@ R_\mu^{(1)} + R_\mu^{(0)}
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
    \quad (\because \check{Q}_\epsilon \text{ の定義（冒頭）}) \\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}\left(R_\mu^{(1)} + R_\mu^{(0)}\right)
-   \quad (\because \text{可換な有限個の因子の積の分配法則による展開}) \\
+   \quad \left(\because\ \blkref{expansion_of_finite_product_of_two_term_sums}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ A_j^{(e)} \to R_j^{(e)})\ \text{を右辺から左辺へ}\right) \\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} I
    \quad (\because \text{Step 0 の和が単位行列であることを各因子へ同時に適用}) \\
 &= I
    \quad \left(\because\ \blkref{finite_product_of_identity_matrices}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}})\right)
 \end{aligned}`,
       ),
-      paragraph([
-        "（展開して現れる項は、各 ",
-        math(String.raw`\mu`),
-        " について ",
-        math(String.raw`R_\mu^{(1)}`),
-        " と ",
-        math(String.raw`R_\mu^{(0)}`),
-        " のどちらを選ぶかの全ての選び方に 1 対 1 に対応し、その選び方の全体が ",
-        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
-        "（要素数 ",
-        math(String.raw`2^{M_{\mathrm{col}}}`),
-        "）である。）",
-      ]),
       paragraph([
         "Step 3（(3) の証明）。",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
@@ -2632,6 +2629,7 @@ y_{\epsilon'}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 2 の「可換な有限個の因子の積の分配法則による展開」を expansion_of_finite_product_of_two_term_sums の参照（右辺から左辺へ）にし、(2) の和を def_sum_over_binary_words で定めた（展開の項の数え方を説明していた段落は消した）。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_33。",
         "009 章の joint_eigenspace_decomposition の半整数運動量版。段階構造は同じで、添字集合 I が {1,…,M} に、m が M に、tr(Q_ε) = 2^{M−m} が 1 に置き換わる。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_02（M=2,3,4,5 の {0,1}^M を全列挙。tr(Q̌_ε) = 1 の残差 ≤ 1.1e-15、rank Q̌_ε = 1 を特異値で判定して違反 0 件）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",

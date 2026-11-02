@@ -1178,6 +1178,15 @@ targets=(
   Ising2D.finiteMatrixProduct_eq_finProdLeft
   Ising2D.finite_product_of_identity_matrices_of_necSuf
   Ising2D.finite_product_of_identity_matrices_tensorPow
+  "Ising2D.NecSuf.binWordSum_map"
+  "Ising2D.NecSuf.finProdLeft_add_eq_binWordSum"
+  Ising2D.binaryWordMatrixSum_mul
+  Ising2D.binaryWordMatrixSum_eq_binWordSum
+  Ising2D.binaryWordMatrixSum_mul_of_necSuf
+  Ising2D.binWordSum_mul_tensorPow
+  Ising2D.expansion_of_finite_product_of_two_term_sums
+  Ising2D.expansion_of_finite_product_of_two_term_sums_of_necSuf
+  Ising2D.expansion_of_finite_product_of_two_term_sums_tensorPow
   "Ising2D.NecSuf.sub_neg_eq_zero_of_add_eq_zero_matrix'"
   "Ising2D.NecSuf.eq_neg_of_add_eq_zero_matrix'"
   Ising2D.matrix_sub_neg_eq_zero_of_add_eq_zero

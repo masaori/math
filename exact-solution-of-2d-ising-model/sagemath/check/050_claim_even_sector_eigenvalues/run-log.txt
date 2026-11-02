@@ -146,3 +146,7 @@ PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾と�
 # 実行コマンド: sage check_32_joint_eigenspace_step1_step2_zero_and_identity_products.sage
 PASS check_joint_eigenspace_decomposition Step 1 の ε ≠ ε' の鎖と Step 2 の鎖: 933 段、否定コントロール 2 行
 RESULT: PASS
+
+# 実行コマンド: sage check_33_joint_eigenspace_step2_expansion_over_binary_words.sage
+PASS check_joint_eigenspace_decomposition Step 2 の鎖（和は def_sum_over_binary_words）: 12 段、否定コントロール 3 行
+RESULT: PASS

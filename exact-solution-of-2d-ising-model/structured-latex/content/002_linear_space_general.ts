@@ -2197,6 +2197,242 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_definition_sum_over_binary_words",
+    kind: "definition",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の行列の和}` },
+    labels: ["def_sum_over_binary_words"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
+        " について、",
+        math(String.raw`\{0,1\} \subset \mathbb{Z}`),
+        " とし、",
+        math(String.raw`\{0,1\}^{r}`),
+        " は写像 ",
+        math(String.raw`\epsilon : \{1,\dots,r\} \to \{0,1\}`),
+        " の全体とし、",
+        math(String.raw`\epsilon`),
+        " を ",
+        math(String.raw`(\epsilon_1,\dots,\epsilon_r)`),
+        "（",
+        math(String.raw`\epsilon_j := \epsilon(j)`),
+        "）と書く。",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        " と ",
+        math(String.raw`e \in \{0,1\}`),
+        " に対して、",
+        math(String.raw`(\epsilon', e) \in \{0,1\}^{r+1}`),
+        " を",
+      ]),
+      displayMath(String.raw`(\epsilon', e)_j := \epsilon'_j \quad (j \in \{1,\dots,r\}),
+\qquad
+(\epsilon', e)_{r+1} := e`),
+      paragraph([
+        "と定める。",
+        math(String.raw`\{0,1\}^{1}`),
+        " の元は ",
+        math(String.raw`(1)`),
+        "（",
+        math(String.raw`(1)_1 = 1`),
+        "）と ",
+        math(String.raw`(0)`),
+        "（",
+        math(String.raw`(0)_1 = 0`),
+        "）の二つである。",
+      ]),
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        " と、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`B_\epsilon \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）について、和 ",
+        math(String.raw`\sum_{\epsilon \in \{0,1\}^{r}} B_\epsilon \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を ",
+        math(String.raw`r`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\sum_{\epsilon \in \{0,1\}^{1}} B_\epsilon := B_{(1)} + B_{(0)},
+\qquad
+\sum_{\epsilon \in \{0,1\}^{r+1}} B_\epsilon := \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(B_{(\epsilon',1)} + B_{(\epsilon',0)}\Bigr)`),
+      paragraph([
+        "と定める（右辺の和は ",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`B_{(\epsilon',1)} + B_{(\epsilon',0)}`),
+        " の和である）。和 ",
+        math(String.raw`+`),
+        " は ",
+        ref("def_matrix_sum"),
+        " の行列の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の (2) の Σ_{ε∈{0,1}^𝓜̌} Q̌_ε と Step 2 の「可換な有限個の因子の積の分配法則による展開」が、{0,1}^𝓜̌ の上の和の足す順序を定めずに使っていたので足した。" +
+          "最後の成分で 1 を 0 より先に置くのは、展開する因子 R_μ^{(1)} + R_μ^{(0)} の並びに合わせたためである。Lean は Ising2D.binaryWordMatrixSum（DefinitionSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_sum_over_binary_words_distributes_in_left_factor",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に右から行列を掛けると、各項に掛けた和になる}` },
+    labels: ["sum_over_binary_words_distributes_in_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`X_\epsilon \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。和は ",
+        ref("def_sum_over_binary_words"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{\epsilon \in \{0,1\}^{r}} X_\epsilon\Bigr) C = \sum_{\epsilon \in \{0,1\}^{r}} X_\epsilon C`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{1}} X_\epsilon\Bigr) C
+&= \bigl(X_{(1)} + X_{(0)}\bigr) C
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon)\bigr)\\
+&= X_{(1)} C + X_{(0)} C
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (A \to X_{(1)},\ B \to X_{(0)})\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} X_\epsilon C
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon C)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`X_\epsilon`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr) C
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr)\Bigr) C
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon)\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr) C
+&&\bigl(\because\ \text{帰納法の仮定}\ (X_{\epsilon'} \to X_{(\epsilon',1)} + X_{(\epsilon',0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} C + X_{(\epsilon',0)} C\bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ (A \to X_{(\epsilon',1)},\ B \to X_{(\epsilon',0)})\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon C
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to X_\epsilon C)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。expansion_of_finite_product_of_two_term_sums の帰納法の段が使うので足した。Lean は具体版 Ising2D.binaryWordMatrixSum_mul（DefinitionSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_expansion_of_finite_product_of_two_term_sums",
+    kind: "claim",
+    title: { text: "二項の和の有限積の展開" },
+    labels: ["expansion_of_finite_product_of_two_term_sums"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " と ",
+        math(String.raw`e \in \{0,1\}`),
+        " で添字付けられた ",
+        math(String.raw`A_j^{(e)} \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。有限積は ",
+        ref("def_finite_product_of_matrices"),
+        "、",
+        math(String.raw`\{0,1\}^{r}`),
+        " の上の和は ",
+        ref("def_sum_over_binary_words"),
+        "、和 ",
+        math(String.raw`A_j^{(1)} + A_j^{(0)}`),
+        " は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{r} \Bigl(A_j^{(1)} + A_j^{(0)}\Bigr) = \sum_{\epsilon \in \{0,1\}^{r}} \prod_{j=1}^{r} A_j^{(\epsilon_j)}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
+        " の元の全ての族 ",
+        math(String.raw`(A_j^{(e)})`),
+        " について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} \Bigl(A_j^{(1)} + A_j^{(0)}\Bigr)
+&= A_1^{(1)} + A_1^{(0)}
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{(1)} + A_j^{(0)})\bigr)\\
+&= A_1^{((1)_1)} + A_1^{((0)_1)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (1)_1 = 1,\ (0)_1 = 0\bigr)\\
+&= \prod_{j=1}^{1} A_j^{((1)_j)} + \prod_{j=1}^{1} A_j^{((0)_j)}
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{((1)_j)},\ A_j \to A_j^{((0)_j)})\ \text{を右辺から左辺へ 2 か所}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} \prod_{j=1}^{1} A_j^{(\epsilon_j)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to \textstyle\prod_{j=1}^{1} A_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`j \in \{1,\dots,r+1\}`),
+        " で添字付けられた族 ",
+        math(String.raw`(A_j^{(e)})`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{r+1} \Bigl(A_j^{(1)} + A_j^{(0)}\Bigr)
+&= \Bigl(\prod_{j=1}^{r} \Bigl(A_j^{(1)} + A_j^{(0)}\Bigr)\Bigr)\Bigl(A_{r+1}^{(1)} + A_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{(1)} + A_j^{(0)})\bigr)\\
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \prod_{j=1}^{r} A_j^{(\epsilon'_j)}\Bigr)\Bigl(A_{r+1}^{(1)} + A_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\ (A_j^{(e)} \to A_j^{(e)}\ (j \in \{1,\dots,r\}))\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r} A_j^{(\epsilon'_j)}\Bigr)\Bigl(A_{r+1}^{(1)} + A_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\ (m, n, p \to n,\ X_{\epsilon'} \to \textstyle\prod_{j=1}^{r} A_j^{(\epsilon'_j)},\ C \to A_{r+1}^{(1)} + A_{r+1}^{(0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} A_j^{(\epsilon'_j)}\Bigr) A_{r+1}^{(1)} + \Bigl(\prod_{j=1}^{r} A_j^{(\epsilon'_j)}\Bigr) A_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m, n, p \to n,\ A \to \textstyle\prod_{j=1}^{r} A_j^{(\epsilon'_j)},\ B \to A_{r+1}^{(1)},\ C \to A_{r+1}^{(0)})\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} A_j^{((\epsilon',1)_j)}\Bigr) A_{r+1}^{((\epsilon',1)_{r+1})} + \Bigl(\prod_{j=1}^{r} A_j^{((\epsilon',0)_j)}\Bigr) A_{r+1}^{((\epsilon',0)_{r+1})}\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (\epsilon', e)_j = \epsilon'_j\ (j \leq r),\ (\epsilon', e)_{r+1} = e\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r+1} A_j^{((\epsilon',1)_j)} + \prod_{j=1}^{r+1} A_j^{((\epsilon',0)_j)}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_matrices}\ (A_j \to A_j^{((\epsilon',e)_j)})\ \text{を右辺から左辺へ、各項の 2 か所へ同時適用}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} \prod_{j=1}^{r+1} A_j^{(\epsilon_j)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (B_\epsilon \to \textstyle\prod_{j=1}^{r+1} A_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 2 が「可換な有限個の因子の積の分配法則による展開」を名前だけで根拠にしていたので足した。" +
+          "積は左から掛ける（def_finite_product_of_matrices）ので、因子の可換性は要らない。Lean は具体版 Ising2D.expansion_of_finite_product_of_two_term_sums（ClaimExpansionOfFiniteProductOfTwoTermSums.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_matrix_sum_with_itself_zero_implies_zero",
     kind: "claim",
     title: { text: "自分自身との和が零行列なら零行列" },

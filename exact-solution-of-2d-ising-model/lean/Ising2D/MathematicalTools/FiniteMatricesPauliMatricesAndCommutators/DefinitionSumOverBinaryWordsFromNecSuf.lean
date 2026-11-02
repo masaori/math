@@ -1,0 +1,35 @@
+/-
+# `{0,1}^r` の上の行列の和と、右から行列を掛けることとの分配（具体版を必要十分版から導く）
+
+具体版 `DefinitionSumOverBinaryWords.lean` の定義と主張を、必要十分版 `Ising2D/NecSuf/BinaryWordSum.lean` の
+`α := Mat(m,n,ℂ)`、`f := (· C)` の特殊化として得る。`hf := add_mul_matrix`（人手の `mat_mult_distributes_over_sum_in_left_factor`）を渡す。
+人手のラベルは `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`。
+
+`TensorPow M`（添字 `Conf M`）の系も同じ必要十分版の特殊化として置く。`TensorPow M` の `{0,1}^r` の上の和は `NecSuf.binWordSum` である。
+-/
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWords
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
+import Ising2D.NecSuf.BinaryWordSum
+
+namespace Ising2D
+
+/-- 具体版の和 `binaryWordMatrixSum` は、必要十分版 `NecSuf.binWordSum` の `α := Mat(m,n,ℂ)` の場合である（2 つの節が一致する）。 -/
+theorem binaryWordMatrixSum_eq_binWordSum {m n : ℕ} :
+    ∀ (r : ℕ) (B : (Fin (r + 1) → Fin 2) → Matrix (Fin m) (Fin n) ℂ), binaryWordMatrixSum r B = NecSuf.binWordSum r B
+  | 0, _ => rfl
+  | r + 1, B => by
+    rw [binaryWordMatrixSum_succ, NecSuf.binWordSum_succ, binaryWordMatrixSum_eq_binWordSum r]
+
+/-- `sum_over_binary_words_distributes_in_left_factor` を `NecSuf.binWordSum_map`（`f := (· C)`）の特殊化として得る。 -/
+theorem binaryWordMatrixSum_mul_of_necSuf {m n p : ℕ} (r : ℕ)
+    (X : (Fin (r + 1) → Fin 2) → Matrix (Fin m) (Fin n) ℂ) (C : Matrix (Fin n) (Fin p) ℂ) :
+    binaryWordMatrixSum r X * C = binaryWordMatrixSum r (fun ε => X ε * C) := by
+  rw [binaryWordMatrixSum_eq_binWordSum, binaryWordMatrixSum_eq_binWordSum]
+  exact NecSuf.binWordSum_map (· * C) (fun a b => add_mul_matrix a b C) r X
+
+/-- `sum_over_binary_words_distributes_in_left_factor` の `TensorPow M` での系。 -/
+theorem binWordSum_mul_tensorPow {M : ℕ} (r : ℕ) (X : (Fin (r + 1) → Fin 2) → TensorPow M) (C : TensorPow M) :
+    NecSuf.binWordSum r X * C = NecSuf.binWordSum r (fun ε => X ε * C) :=
+  NecSuf.binWordSum_map (· * C) (fun a b => add_mul_matrix_tensorPow a b C) r X
+
+end Ising2D
