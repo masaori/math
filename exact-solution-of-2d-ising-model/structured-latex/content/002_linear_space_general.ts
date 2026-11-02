@@ -867,6 +867,197 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_negation_factors_out_of_left_factor",
+    kind: "claim",
+    title: { text: "左の因子の符号反転は行列の積の外へ出る" },
+    labels: ["negation_factors_out_of_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。符号反転は ",
+        ref("def_matrix_negation"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(-A)B = -(AB)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((-A)B\bigr)_{ik}
+&= \sum_{j=1}^{n} (-A)_{ij}\,B_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} (-A_{ij})\,B_{jk}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= \sum_{j=1}^{n} \bigl((-1_{\mathbb{C}})\,A_{ij}\bigr)\,B_{jk}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \sum_{j=1}^{n} (-1_{\mathbb{C}})\,(A_{ij}\,B_{jk})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-1_{\mathbb{C}}) \sum_{j=1}^{n} A_{ij}\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-1_{\mathbb{C}})\,(AB)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= -(AB)_{ik}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl(-(AB)\bigr)_{ik}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。matrix_exp_conjugation の Step 7 が「行列のスカラー倍と積の両立を c=−1 に取ること」と名前だけで根拠にしていた段を引けるよう足した。" +
+          "−A は def_matrix_negation の成分ごとの符号反転であって (−1)A ではないので、スカラー倍の主張の特殊化としてではなく、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_negation_factors_out_of_right_factor",
+    kind: "claim",
+    title: { text: "右の因子の符号反転は行列の積の外へ出る" },
+    labels: ["negation_factors_out_of_right_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。符号反転は ",
+        ref("def_matrix_negation"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`A(-B) = -(AB)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(A(-B)\bigr)_{ik}
+&= \sum_{j=1}^{n} A_{ij}\,(-B)_{jk}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,(-B_{jk})
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= \sum_{j=1}^{n} A_{ij}\,\bigl((-1_{\mathbb{C}})\,B_{jk}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \sum_{j=1}^{n} \bigl(A_{ij}\,(-1_{\mathbb{C}})\bigr)\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} \bigl((-1_{\mathbb{C}})\,A_{ij}\bigr)\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{n} (-1_{\mathbb{C}})\,(A_{ij}\,B_{jk})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-1_{\mathbb{C}}) \sum_{j=1}^{n} A_{ij}\,B_{jk}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律を有限和の項の数だけ繰り返す }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-1_{\mathbb{C}})\,(AB)_{ik}
+&&\bigl(\because\ \text{行列の積の定義 }\blkref{mat_mult}\bigr)\\
+&= -(AB)_{ik}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl(-(AB)\bigr)_{ik}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。matrix_exp_conjugation の Step 7 が「行列のスカラー倍と積の両立を c=−1 に取ること」と名前だけで根拠にしていた段を引けるよう足した。" +
+          "−B は def_matrix_negation の成分ごとの符号反転であって (−1)B ではないので、スカラー倍の主張の特殊化としてではなく、成分計算の鎖で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_difference",
+    kind: "claim",
+    title: { text: "スカラー倍は行列の差に分配する" },
+    labels: ["scalar_multiple_distributes_over_matrix_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`c(A - B) = cA - cB`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c(A - B)\bigr)_{ik}
+&= c\,(A - B)_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= c\,(A_{ik} - B_{ik})
+&&\bigl(\because\ \text{差の定義 }\blkref{def_matrix_difference}\bigr)\\
+&= c\,\bigl(A_{ik} + (-B_{ik})\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= c\,A_{ik} + c\,(-B_{ik})
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= c\,A_{ik} + c\,\bigl((-1_{\mathbb{C}})\,B_{ik}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= c\,A_{ik} + \bigl(c\,(-1_{\mathbb{C}})\bigr)\,B_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= c\,A_{ik} + \bigl((-1_{\mathbb{C}})\,c\bigr)\,B_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= c\,A_{ik} + (-1_{\mathbb{C}})\,(c\,B_{ik})
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= c\,A_{ik} + \bigl(-(c\,B_{ik})\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= c\,A_{ik} - c\,B_{ik}
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= (cA)_{ik} - (cB)_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用}\bigr)\\
+&= (cA - cB)_{ik}
+&&\bigl(\because\ \text{差の定義 }\blkref{def_matrix_difference}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。matrix_exp_conjugation の Step 1 の ad_X(cZ) の鎖が「スカラー倍の分配律」と名前だけで根拠にしていた段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_is_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

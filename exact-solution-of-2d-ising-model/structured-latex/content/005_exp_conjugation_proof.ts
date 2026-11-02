@@ -1526,7 +1526,7 @@ h
 &= c(XZ)-c(ZX)
 &&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor})\\
 &= c(XZ-ZX)
-&&(\because\ \text{スカラー倍の分配律})\\
+&&(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (A = XZ,\ B = ZX))\\
 &= c\,\mathrm{ad}_X(Z)
 &&(\because\ \mathrm{ad}_X \text{ の定義})
 \end{aligned}`,
@@ -2035,13 +2035,13 @@ D_N := \left\{(p,q) \;\middle|\; 0\le p,q\le N,\ p+q>N\right\}
         String.raw`\begin{aligned}
 X(-X)
 &= -\left(XX\right)
-   &&(\because\ \text{行列のスカラー倍と積の両立を}\ c=-1\ \text{に取ること}) \\
+   &&(\because\ \blkref{negation_factors_out_of_right_factor}\ (A = X,\ B = X)) \\
 &= -X^2
    &&(\because\ \text{行列の冪の定義}) \\
 &= -\left(XX\right)
    &&(\because\ \text{行列の冪の定義}) \\
 &= (-X)X
-   &&(\because\ \text{行列のスカラー倍と積の両立を}\ c=-1\ \text{に取ること})
+   &&(\because\ \blkref{negation_factors_out_of_left_factor}\ (A = X,\ B = X))
 \end{aligned}`,
       ),
       displayMath(
@@ -2104,6 +2104,7 @@ X(-X)
         "2026-09-04 の式変形統一で、Step 6 の三角不等式と斉次性に前置きしていた参照を、各適用行の末尾へ移した。内容・式変形・根拠は変えていない。",
         "2026-09-04 の式変形統一で、Step 7 の指数の積の定理に前置きしていた参照段落を削った（各適用行の末尾に同じ \\blkref が既にある）。内容・式変形・根拠は変えていない。",
         "2026-11-02: Step 1 の ad_X(cZ) の鎖で、名前だけの根拠「スカラー倍と行列の積の両立」で 2 つの項を同時に変えていた 1 行を、scalar_multiple_factors_out_of_right_factor（X(cZ)=c(XZ)）と scalar_multiple_factors_out_of_left_factor（(cZ)X=c(ZX)）の 2 行に割ってラベル参照に替えた。",
+        "2026-11-02: Step 1 の ad_X(cZ) の鎖の名前だけの根拠「スカラー倍の分配律」を scalar_multiple_distributes_over_matrix_difference へ、Step 7 の X(−X)=(−X)X の鎖の「行列のスカラー倍と積の両立を c=−1 に取ること」2 か所を negation_factors_out_of_right_factor・negation_factors_out_of_left_factor へのラベル参照に替えた（−X は def_matrix_negation の成分ごとの符号反転なので、(−1)X のスカラー倍としてではなく符号反転の主張として引く）。",
       ],
     },
   },

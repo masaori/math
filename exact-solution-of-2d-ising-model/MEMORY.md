@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の四十三個目を行った。`002_linear_space_general.ts` に主張 `negation_factors_out_of_left_factor`（`(−A)B=−(AB)`）・`negation_factors_out_of_right_factor`（`A(−B)=−(AB)`）・`scalar_multiple_distributes_over_matrix_difference`（`c(A−B)=cA−cB`）を足し、`005_exp_conjugation_proof.ts` の `matrix_exp_conjugation` Step 1 の「スカラー倍の分配律」と Step 7 の「スカラー倍と積の両立を c=−1 に取ること」2 か所をラベル参照に替えた。SageMath の検算 3 件（PASS）と `142_matrix_exp_conjugation/check_02` の 3 段目、Lean の具体版・必要十分版（係数は `Semiring`＋`HasDistribNeg`。可換則・加法の逆元は効かない）・導出を置いた。次は `eigenvalue_problem_eigenvalues_of_V_plus.ts` の 6 か所（状態台帳の次の一歩）。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十二個目を行った。`005_exp_conjugation_proof.ts` の `def_ad_X_matrix` の逆行列の一意性の鎖（単位行列の左右の積・結合律）と `matrix_exp_conjugation` Step 1 の `ad_X(cZ)` の鎖（両立の 1 行を左右の因子の 2 行に割る）をラベル参照に替え、SageMath に Step 1 の鎖の検算 `check_02_ad_linearity_chain.sage` を足した（PASS）。Lean の `matrix_exp_conjugation` が人手証明と 1 対 1 でないこと（既存）を状態台帳の次の一歩に件として足した。次は同じファイルの残り 3 か所（`c(A−B)=cA−cB`、`A(−B)=−(AB)`・`(−A)B=−(AB)` を主張として足してから替える）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十一個目を行った。`004_transfer_matrix.ts` の `exp_of_diagonal_matrix` の冪の帰納法の基底で、名前だけの根拠「単位行列の非対角成分」「単位行列の対角成分」を `def_identity_matrix`・`def_kronecker_delta` へのラベル参照の 2 段に割り、SageMath の基底の鎖に行を足した（全 PASS）。Lean の具体版の鎖は無い。次は `005_exp_conjugation_proof.ts` の「単位行列との積」3 か所ほか（状態台帳の次の一歩）。

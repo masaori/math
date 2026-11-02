@@ -3,7 +3,8 @@
 #   ad_X(Z+W) = X(Z+W)-(Z+W)X = (XZ+XW)-(ZX+WX) = (XZ-ZX)+(XW-WX) = ad_X(Z)+ad_X(W)
 #   ad_X(cZ)  = X(cZ)-(cZ)X = c(XZ)-(cZ)X = c(XZ)-c(ZX) = c(XZ-ZX) = c ad_X(Z)
 #   2 行目から 3 行目は scalar_multiple_factors_out_of_right_factor（X(cZ)=c(XZ)）、
-#   3 行目から 4 行目は scalar_multiple_factors_out_of_left_factor（(cZ)X=c(ZX)）。
+#   3 行目から 4 行目は scalar_multiple_factors_out_of_left_factor（(cZ)X=c(ZX)）、
+#   4 行目から 5 行目は scalar_multiple_distributes_over_matrix_difference（c(XZ)-c(ZX)=c(XZ-ZX)）。
 # X, Z, W の成分と c を QQ(i) 上の多項式環の独立な不定元に置く（n = 1, 2, 3）。厳密等号。
 GAUSSIAN = QuadraticField(-1, "i")
 
@@ -46,6 +47,7 @@ for n in range(1, 4):
     # 各段で使った主張そのもの
     assert X * cZ == scalar_times(c, X * Z)
     assert cZ * X == scalar_times(c, Z * X)
+    assert scalar_times(c, X * Z) - scalar_times(c, Z * X) == scalar_times(c, X * Z - Z * X)
     # 対照: 第 2 項の c を落とすと一致しない（差は (c−1)ZX で、不定元の多項式として零でない）
     assert X * cZ - Z * X != chain_scalar[0]
     count += 1

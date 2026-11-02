@@ -1037,6 +1037,15 @@ targets=(
   Ising2D.matrix_smul_zero_matrix_apply
   Ising2D.matrix_smul_zero_matrix
   Ising2D.matrix_smul_zero_matrix_of_necSuf
+  Ising2D.neg_mul_matrix_apply
+  Ising2D.neg_mul_matrix
+  Ising2D.neg_mul_matrix_of_necSuf
+  Ising2D.mul_neg_matrix_apply
+  Ising2D.mul_neg_matrix
+  Ising2D.mul_neg_matrix_of_necSuf
+  Ising2D.matrix_smul_sub_apply
+  Ising2D.matrix_smul_sub
+  Ising2D.matrix_smul_sub_of_necSuf
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I
   Ising2D.twoByTwo_one_eq_kroneckerDelta
@@ -1068,6 +1077,12 @@ targets=(
   Ising2D.NecSuf.sum_zero_matrices
   Ising2D.NecSuf.smul_zero_matrix_apply
   Ising2D.NecSuf.smul_zero_matrix
+  Ising2D.NecSuf.neg_mul_matrix_apply'
+  Ising2D.NecSuf.neg_mul_matrix'
+  Ising2D.NecSuf.mul_neg_matrix_apply'
+  Ising2D.NecSuf.mul_neg_matrix'
+  Ising2D.NecSuf.smul_sub_matrix_apply'
+  Ising2D.NecSuf.smul_sub_matrix'
   Ising2D.eigenvalue_AMat_iff
   Ising2D.isEigenvector_smul_eigen_pos
   Ising2D.isEigenvector_smul_eigen_neg
