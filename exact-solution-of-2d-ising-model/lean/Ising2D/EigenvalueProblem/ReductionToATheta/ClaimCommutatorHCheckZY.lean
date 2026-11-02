@@ -39,6 +39,11 @@
   「和と境界項に分ける」「境界項（または和の項）を 0 で消す」「零行列の和」の行は、
   `lie_H1Plus_Z`・`lie_H1Plus_Y` の `Finset.sum_eq_single` 1 回にまとまる（`lie_H2_Z`・`lie_H2_Y` も同じ）。
   境界項の等式 `[-Y_M Z_1, Z_1] = 2Y♭_0`・`[-Y_M Z_1, Y_M] = -2Z♭_{M+1}` は、その場合分けの中の `rw` で出す。
+  人手のこの段の根拠は、`O` を足して消す行が `matrix_plus_zero_matrix`・`zero_matrix_plus_matrix`、`O` を引いて消す行が
+  `matrix_minus_zero_matrix`、零行列の有限和を `O` にする行が `finite_sum_of_zero_matrices`（添字が `1, …, M-1` の 2 か所）と
+  名前の根拠「零行列の和は零行列」（一つの添字を除いた集合の上の和の 4 か所。`M = 2` では空の和）である。
+  具体版（`ClaimAddAndSubtractZeroMatrix.lean`）は添字が `Fin m` の行列についてのもので、`TensorPow M` の添字 `Conf M` に当てはまらない。
+  加えて有限和の添字の付け方が本文でまだ定まっていない（状態台帳の「有限和の添字の付け方」の件）ので、`Finset.sum_eq_single` にまとめたままにしてある。
 * Step 3 の添字の付け替え `l = j - 1` は、Lean の 0 始まりの `Fin` の値がそのまま人手の `l` なので、行が無い。
   Step 4 の付け替え `l = j + 1` は `checkPhase_add_left`（`theorem_exp_product`）と同じ行で行う。
 * 人手の「分配則」の行では、`2` と `e^{∓iθ~_μ}` を 1 つのスカラーにまとめる。

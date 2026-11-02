@@ -234,6 +234,7 @@ export const ALL_LABELS = [
   "factorization_of_A_theta_general",
   "finite_sum_of_complex_zeros",
   "finite_sum_of_matrices_entrywise",
+  "finite_sum_of_zero_matrices",
   "first_and_second_projections",
   "first_dual_coupling_relation",
   "first_transfer_matrix_pauli_form",
@@ -278,10 +279,12 @@ export const ALL_LABELS = [
   "matrix_difference_zero_iff_equal",
   "matrix_exp_conjugation",
   "matrix_exp_series_converges",
+  "matrix_minus_zero_matrix",
   "matrix_multiplication_continuity",
   "matrix_norm_submultiplicativity",
   "matrix_norm_triangle_inequality",
   "matrix_norm_vector_bound",
+  "matrix_plus_zero_matrix",
   "max_eigenvalue_of_V_plus_simple",
   "max_eigenvector_in_even_sector",
   "max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus",
@@ -372,6 +375,7 @@ export const ALL_LABELS = [
   "trace_power_sandwich",
   "trace_power_upper_bound",
   "two_by_two_transfer_identity",
+  "zero_matrix_plus_matrix",
 ] as const
 
 /** content/ に実在するラベル。相互参照はこの型の値しか指せない。 */

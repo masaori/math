@@ -253,6 +253,267 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_claim_matrix_plus_zero_matrix",
+    kind: "claim",
+    title: { text: "零行列を右から足しても行列は変わらない" },
+    labels: ["matrix_plus_zero_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`X + O = X`),
+      paragraph([
+        "が成り立つ。和は ",
+        ref("def_matrix_sum"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定し、",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " を ",
+        math(String.raw`X_{ik} = (a,b)`),
+        "（",
+        ref("definition_of_cc"),
+        " の台集合 ",
+        math(String.raw`\mathbf{C} = \mathbf{R}^2`),
+        " の元として）となるように取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(X + O)_{ik}
+&= X_{ik} + O_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= X_{ik} + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= (a,b) + 0_{\mathbb{C}}
+&&\bigl(\because\ a, b\ \text{の取り方}\bigr)\\
+&= (a,b) + (0,0)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (a+0,\ b+0)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の和}\bigr)\\
+&= (a,b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + 0 = a,\ b + 0 = b\bigr)\\
+&= X_{ik}
+&&\bigl(\because\ a, b\ \text{の取り方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`X + O = X`),
+        " である（行列の等号は成分ごと）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列の和は零行列」と名前だけで根拠にしていた段を、" +
+          "有限和を O にする段と O を足して消す段に分け、後者を引けるよう足した（前者は 4 か所で添字の集合の上の和のため名前の根拠のまま）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_zero_matrix_plus_matrix",
+    kind: "claim",
+    title: { text: "零行列を左から足しても行列は変わらない" },
+    labels: ["zero_matrix_plus_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`O + X = X`),
+      paragraph([
+        "が成り立つ。和は ",
+        ref("def_matrix_sum"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定し、",
+        math(String.raw`a, b \in \mathbb{R}`),
+        " を ",
+        math(String.raw`X_{ik} = (a,b)`),
+        "（",
+        ref("definition_of_cc"),
+        " の台集合 ",
+        math(String.raw`\mathbf{C} = \mathbf{R}^2`),
+        " の元として）となるように取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(O + X)_{ik}
+&= O_{ik} + X_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= 0_{\mathbb{C}} + X_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= 0_{\mathbb{C}} + (a,b)
+&&\bigl(\because\ a, b\ \text{の取り方}\bigr)\\
+&= (0,0) + (a,b)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (0+a,\ 0+b)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の和}\bigr)\\
+&= (a,b)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 + a = a,\ 0 + b = b\bigr)\\
+&= X_{ik}
+&&\bigl(\because\ a, b\ \text{の取り方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`O + X = X`),
+        " である（行列の等号は成分ごと）。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 の j = 1・j = M_col の鎖が、" +
+          "零行列の有限和を左に持つ和を「零行列の和は零行列」と名前だけで根拠にしていたので、引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_minus_zero_matrix",
+    kind: "claim",
+    title: { text: "零行列を引いても行列は変わらない" },
+    labels: ["matrix_minus_zero_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`X - O = X`),
+      paragraph([
+        "が成り立つ。差は ",
+        ref("def_matrix_difference"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を固定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(X - O)_{ik}
+&= X_{ik} - O_{ik}
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)\\
+&= X_{ik} - 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= X_{ik} + (-0_{\mathbb{C}})
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= X_{ik} + (-1_{\mathbb{C}}) \cdot 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= X_{ik} + (-1,0) \cdot (0,0)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= X_{ik} + \bigl((-1)\cdot 0 - 0 \cdot 0,\ (-1)\cdot 0 + 0 \cdot 0\bigr)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の積}\bigr)\\
+&= X_{ik} + (0,0)
+&&\bigl(\because\ \mathbb{R}\ \text{の四則}\bigr)\\
+&= X_{ik} + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= X_{ik} + O_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= (X + O)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、すべての成分が等しいので ",
+        math(String.raw`X - O = X + O`),
+        " である（行列の等号は成分ごと）。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X - O
+&= X + O
+&&\bigl(\because\ \text{上の成分ごとの等式}\bigr)\\
+&= X
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列を引いても変わらない」と名前だけで根拠にしていたので、引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_zero_matrices",
+    kind: "claim",
+    title: { text: "零行列の有限和は零行列" },
+    labels: ["finite_sum_of_zero_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        " について、",
+        math(String.raw`O \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_zero_matrix"),
+        "）を ",
+        math(String.raw`r`),
+        " 個足した有限和（",
+        ref("def_finite_sum_of_matrices"),
+        " で ",
+        math(String.raw`X_1 = \dots = X_r = O`),
+        " としたもの）について",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{r} O = O`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} O
+&= O
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)
+\end{aligned}`),
+      paragraph(["である。", math(String.raw`r`), " で成り立つと仮定すると"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{r+1} O
+&= \Bigl(\sum_{j=1}^{r} O\Bigr) + O
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= O + O
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (X = O)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-01: 原文（Typst）に対応ブロックは無い。commutator_of_H_and_check_Z_Y Step 1 が「零行列の和は零行列」と名前だけで根拠にしていた段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_mat_mult_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

@@ -251,20 +251,22 @@ for M in STEP_M:
             msum([comm(O.Z[a] * O.Y[a], Zj) for a in range(1, M + 1)]),
             comm(Zj * Yj, Zj) + msum([comm(O.Z[a] * O.Y[a], Zj) for a in others]),
             comm(Zj * Yj, Zj) + msum([Zero for a in others]),
+            comm(Zj * Yj, Zj) + Zero,
             comm(Zj * Yj, Zj),
             -2 * Yj,
         ], ["def_H2", "第 1 引数の C 線型性", "a=j の項を分ける",
-            "[Z_aY_a,Z_j]=0 (a!=j) を各項へ", "零行列の和は零行列", "[Z_jY_j,Z_j] = -2Y_j"])
+            "[Z_aY_a,Z_j]=0 (a!=j) を各項へ", "零行列の和は零行列（一つの添字を除いた集合の上の和）", "matrix_plus_zero_matrix", "[Z_jY_j,Z_j] = -2Y_j"])
         chain("commutator Step1 [H_2,Y_j]", [
             comm(H2, Yj),
             comm(H2sum, Yj),
             msum([comm(O.Z[a] * O.Y[a], Yj) for a in range(1, M + 1)]),
             comm(Zj * Yj, Yj) + msum([comm(O.Z[a] * O.Y[a], Yj) for a in others]),
             comm(Zj * Yj, Yj) + msum([Zero for a in others]),
+            comm(Zj * Yj, Yj) + Zero,
             comm(Zj * Yj, Yj),
             2 * Zj,
         ], ["def_H2", "第 1 引数の C 線型性", "a=j の項を分ける",
-            "[Z_aY_a,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列", "[Z_jY_j,Y_j] = 2Z_j"])
+            "[Z_aY_a,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列（一つの添字を除いた集合の上の和）", "matrix_plus_zero_matrix", "[Z_jY_j,Y_j] = 2Z_j"])
 
     # [H_1^{(+)}, Z_j], [H_1^{(+)}, Y_j] の場合分けの鎖
     H1sum = msum([O.Y[m] * O.Z[m + 1] for m in range(1, M)]) - YM * Z1
@@ -281,23 +283,25 @@ for M in STEP_M:
             msum([comm(O.Y[m] * O.Z[m + 1], Zj) for m in bulk]),
             comm(O.Y[j - 1] * Zj, Zj) + msum([comm(O.Y[m] * O.Z[m + 1], Zj) for m in rest]),
             comm(O.Y[j - 1] * Zj, Zj) + msum([Zero for m in rest]),
+            comm(O.Y[j - 1] * Zj, Zj) + Zero,
             comm(O.Y[j - 1] * Zj, Zj),
             2 * O.Y[j - 1],
             2 * Yflat(O, j - 1),
         ], ["def_H1_plus の境界符号", "第 1 引数の C 線型性",
-            "[Y_aZ_b,Z_j]=0 (b!=j) を a=M,b=1 に", "零行列を引いても不変",
-            "m=j-1 の項を分ける", "[Y_aZ_b,Z_j]=0 (b!=j) を各項へ", "零行列の和は零行列",
-            "[Y_mZ_{m+1},Z_{m+1}] = 2Y_m (m=j-1)", "Y^flat_{j-1} := Y_{j-1}"])
+            "[Y_aZ_b,Z_j]=0 (b!=j) を a=M,b=1 に", "matrix_minus_zero_matrix",
+            "m=j-1 の項を分ける", "[Y_aZ_b,Z_j]=0 (b!=j) を各項へ", "零行列の和は零行列（一つの添字を除いた集合の上の和）",
+            "matrix_plus_zero_matrix", "[Y_mZ_{m+1},Z_{m+1}] = 2Y_m (m=j-1)", "Y^flat_{j-1} := Y_{j-1}"])
     chain("commutator Step1 [H_1^{(+)},Z_1]", [
         comm(H1p, Z1),
         comm(H1sum, Z1),
         msum([comm(O.Y[m] * O.Z[m + 1], Z1) for m in bulk]) + comm(-YM * Z1, Z1),
         msum([Zero for m in bulk]) + comm(-YM * Z1, Z1),
+        Zero + comm(-YM * Z1, Z1),
         comm(-YM * Z1, Z1),
         2 * Yflat(O, 0),
     ], ["def_H1_plus の境界符号", "第 1 引数の加法性",
-        "[Y_aZ_b,Z_j]=0 (b!=j) を b=m+1>=2, j=1 で各項へ", "零行列の和は零行列",
-        "境界項の等式"])
+        "[Y_aZ_b,Z_j]=0 (b!=j) を b=m+1>=2, j=1 で各項へ", "finite_sum_of_zero_matrices",
+        "zero_matrix_plus_matrix", "境界項の等式"])
     for j in range(1, M):
         Yj = O.Y[j]
         rest = [m for m in bulk if m != j]
@@ -309,23 +313,25 @@ for M in STEP_M:
             msum([comm(O.Y[m] * O.Z[m + 1], Yj) for m in bulk]),
             comm(Yj * O.Z[j + 1], Yj) + msum([comm(O.Y[m] * O.Z[m + 1], Yj) for m in rest]),
             comm(Yj * O.Z[j + 1], Yj) + msum([Zero for m in rest]),
+            comm(Yj * O.Z[j + 1], Yj) + Zero,
             comm(Yj * O.Z[j + 1], Yj),
             -2 * O.Z[j + 1],
             -2 * Zflat(O, j + 1),
         ], ["def_H1_plus の境界符号", "第 1 引数の C 線型性",
-            "[Y_aZ_b,Y_j]=0 (a!=j) を a=M,b=1 に", "零行列を引いても不変",
-            "m=j の項を分ける", "[Y_aZ_b,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列",
-            "[Y_mZ_{m+1},Y_m] = -2Z_{m+1} (m=j)", "Z^flat_{j+1} := Z_{j+1}"])
+            "[Y_aZ_b,Y_j]=0 (a!=j) を a=M,b=1 に", "matrix_minus_zero_matrix",
+            "m=j の項を分ける", "[Y_aZ_b,Y_j]=0 (a!=j) を各項へ", "零行列の和は零行列（一つの添字を除いた集合の上の和）",
+            "matrix_plus_zero_matrix", "[Y_mZ_{m+1},Y_m] = -2Z_{m+1} (m=j)", "Z^flat_{j+1} := Z_{j+1}"])
     chain("commutator Step1 [H_1^{(+)},Y_M]", [
         comm(H1p, YM),
         comm(H1sum, YM),
         msum([comm(O.Y[m] * O.Z[m + 1], YM) for m in bulk]) + comm(-YM * Z1, YM),
         msum([Zero for m in bulk]) + comm(-YM * Z1, YM),
+        Zero + comm(-YM * Z1, YM),
         comm(-YM * Z1, YM),
         -2 * Zflat(O, M + 1),
     ], ["def_H1_plus の境界符号", "第 1 引数の加法性",
-        "[Y_aZ_b,Y_j]=0 (a!=j) を a=m<=M-1, j=M で各項へ", "零行列の和は零行列",
-        "境界項の等式"])
+        "[Y_aZ_b,Y_j]=0 (a!=j) を a=m<=M-1, j=M で各項へ", "finite_sum_of_zero_matrices",
+        "zero_matrix_plus_matrix", "境界項の等式"])
 
     # Step 1 の主張（4 式）
     for j in range(1, M + 1):

@@ -536,6 +536,16 @@
     `identity_matrix_mul_tensorPow`・`mul_identity_matrix_tensorPow`（`ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf.lean`）・`matrix_sub_eq_zero_iff_tensorPow`（`ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf.lean`）を足して、mathlib の `one_mul`・`mul_one`・`sub_self` から替えた。
     レビューの必須の指摘は無かった。任意の指摘（仮の記号 `σ` の根拠、`Conf M` の段を mathlib のまま残していたこと）を直した。
 
+  - ゴールラインの確認の三十九個目（済み、2026-11-02）: `eigenvalue_problem_reduction_to_A_theta.ts` の `commutator_of_H_and_check_Z_Y` Step 1 に残っていた「零行列の和は零行列」6 か所と「零行列を引いても変わらない」2 か所を扱った。
+    本文 `002_linear_space_general.ts` に主張 `matrix_plus_zero_matrix`（`X + O = X`）・`zero_matrix_plus_matrix`（`O + X = X`）・`matrix_minus_zero_matrix`（`X − O = X`）・`finite_sum_of_zero_matrices`（`Σ_{j=1}^{r} O = O`、`r ≥ 1`）を 1 ブロック 1 主張で足した
+    （置き場は前回の案の `000_calculation_formulae_45_46.ts` ではなく、引く `def_matrix_sum`・`def_finite_sum_of_matrices` と同じファイルにした。前方参照を作らないため）。
+    「零行列の和は零行列」の行を「有限和を O にする行」と「O を足して消す行」の 2 行に分け、後者を `matrix_plus_zero_matrix`・`zero_matrix_plus_matrix` に、「零行列を引いても変わらない」を `matrix_minus_zero_matrix` にした。
+    有限和を O にする行は、添字が `1..M_col−1` の 2 か所（`[H_1^{(+)}, Z_1]`・`[H_1^{(+)}, Y_{M_col}]`）だけを `finite_sum_of_zero_matrices` にした。残る 4 か所は一つの添字を除いた集合の上の和で名前の根拠のまま残した（次の一歩の「有限和の添字の付け方」の件）。
+    SageMath は 4 つの主張の検算 `sagemath/check/<ラベル>/` を足し（`QQ` の多項式環の厳密計算）、`051_stepwise_identities_of_chapter_Cprime` の check_01 に足した行を入れた（288 → 294 段、全段 PASS）。
+    Lean は具体版 `MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimAddAndSubtractZeroMatrix.lean`（人手の鎖と 1 段ずつの `calc`）、必要十分版 `NecSuf/MatrixAddSubZero.lean`（`AddZeroClass`・`SubNegZeroMonoid`・`AddCommMonoid`。乗法は効かない）、系 `ClaimAddAndSubtractZeroMatrixFromNecSuf.lean` を置いた。
+    `ClaimCommutatorHCheckZY.lean` はこの段を `Finset.sum_eq_single` にまとめたまま（`TensorPow M` の添字 `Conf M` と和の添字の件のため）で、冒頭に新しい根拠との対応を書いた。
+    レビューの必須の指摘 2 件（範囲外の和への `finite_sum_of_zero_matrices` の適用、1 行に 2 操作）を直し、再レビューで必須の指摘は無くなった。
+
 ## 次の一歩
 
 runbook のゴールラインの確認を続ける。先頭の一つだけを行う。
@@ -543,11 +553,12 @@ runbook のゴールラインの確認を続ける。先頭の一つだけを行
 - 本文のほかの証明（`003_exp_linear_map.ts`・`004_transfer_matrix.ts`・`005_exp_conjugation_proof.ts`・`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` と章のファイル）が、
   「単位行列の性質」「行列のスカラー倍の定義」「行列の和の定義」「行列の差は成分ごと」を、名前だけで根拠にしている（約 30 か所）。`def_identity_matrix`・`def_matrix_scalar_multiple`・`def_matrix_difference`・`def_zero_matrix` へのラベル参照に替える。
   行列の和を定義するブロックは `def_matrix_sum`（`002_linear_space_general.ts`、2026-11-01 に SageMath の検算の連続実行が足した）。各ブロックの Lean の対応も確かめる。
-  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。`005_exp_conjugation_proof.ts` は三十五個目で 4 か所とも替えた。`004_transfer_matrix.ts` は三十六個目で 5 か所とも替えた（行列の有限和は `finite_sum_of_matrices_entrywise` を引く）。`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` は三十七個目で 4 種が 0 か所と確かめ、同じ回に `partition_function_projection_and_jordan_wigner.ts` の 4 か所を替えた。`eigenvalue_problem_reduction_to_A_theta.ts` は三十八個目で、本文の主張で引ける 23 か所を替えた。次は同じファイルの `commutator_of_H_and_check_Z_Y` Step 1 に残る「零行列の和は零行列」6 か所と「零行列を引いても変わらない」2 か所である。引ける主張が本文に無いので、`X + Σ O = X`（零行列の有限和は零行列・零行列を足しても変わらない）と `X - O = X` を成分の鎖で示す主張を `000_calculation_formulae_45_46.ts` に足し（SageMath の検算も付ける）、参照に替える。Lean の `lie_H2_Z` ほかはこの段を `Finset.sum_eq_single` 1 回にまとめている（ファイル冒頭の「まとまっている箇所」）ので、対応を確かめる。残りは `003_exp_linear_map.ts`・`005_exp_conjugation_proof.ts`・`004_transfer_matrix.ts` の未着手の言い回し（「単位行列の対角成分」「零行列のスカラー倍」など）と、ほかの章のファイル。
+  1 回に 1 ファイルずつ進める（`002_linear_space_general.ts` の `scalar_identity_commutes` は三十二個目、`006_Z_Y_anticommutation.ts` の `pauli_matrix_products` は三十三個目で済んだ。行列の符号反転は `def_matrix_negation` を引く）。`003_exp_linear_map.ts` は三十四個目で、係数が `ℂ` の 1 か所だけ替えた。`005_exp_conjugation_proof.ts` は三十五個目で 4 か所とも替えた。`004_transfer_matrix.ts` は三十六個目で 5 か所とも替えた（行列の有限和は `finite_sum_of_matrices_entrywise` を引く）。`008_TV1_hatZ_hatY_part1.ts`・`009_eigenvalues_of_V.ts` は三十七個目で 4 種が 0 か所と確かめ、同じ回に `partition_function_projection_and_jordan_wigner.ts` の 4 か所を替えた。`eigenvalue_problem_reduction_to_A_theta.ts` は三十八個目で、本文の主張で引ける 23 か所を替えた。同じファイルの「零行列の和は零行列」「零行列を引いても変わらない」は三十九個目で扱った（一つの添字を除いた集合の上の和の 4 か所は下の「有限和の添字の付け方」の件に残る）。次は `003_exp_linear_map.ts`・`005_exp_conjugation_proof.ts`・`004_transfer_matrix.ts` の未着手の言い回し（「単位行列の対角成分」「零行列のスカラー倍」など）と、ほかの章のファイル。
   `002_linear_space_general.ts` の `matrix_completeness` Step 3 の「行列の差は成分ごとである」は `K = ℝ` または `ℂ` の行列で、`def_matrix_difference` は `ℂ` しか覆わないので、そのままは参照に替えられない（`mat_mult` を `K` について述べる件と同じ扱い。SageMath の連続実行の台帳にも記録がある）。
   `003_exp_linear_map.ts` の残り 4 か所（係数が `K` か `ℝ` の行列の差）も同じである。`def_matrix_difference`（と `def_zero_matrix`）を `K = ℝ` または `ℂ` について述べ直せば、この 5 か所を参照に替えられる。
 - 有限和の添字の付け方が本文で定まっていない。複素数の有限和 `def_finite_sum_of_complex_numbers`（添字 `1..m`）と行列の有限和 `def_finite_sum_of_matrices`（添字 `1..r`）は、添字が `1` から始まる場合しか定めない。
   本文は `Σ_{p=0}^{N}`（`exp_of_diagonal_matrix` など）と、多重添字の集合 `𝓘`・`𝓘×𝓘` の上の和（`end_agrees_with_matrix_vector_product` の基底による展開と主張の鎖、ほか `ℂ` の和を `𝓘` で取る既存の箇所）を使っており、`𝓘` の上で「左から足す」順序（`ν` で並べる等）を定めていない。複素数と行列の両方の有限和について、有限集合の添字の付け方を定める 1 件として扱う。
+  `commutator_of_H_and_check_Z_Y` Step 1 の「零行列の和は零行列（一つの添字を除いた集合の上の和。空の和を含む）」4 か所（`[H_2, Z_j]`・`[H_2, Y_j]`・`[H_1^{(+)}, Z_j]`（`2 ≤ j`）・`[H_1^{(+)}, Y_j]`（`j ≤ M_col−1`））も、この件で添字の集合の上の和と空の和（`M_col = 2` の後の 2 か所）を定めてから `finite_sum_of_zero_matrices` を広げて参照に替える。同じ鎖の前の行「`a = j`（`m = j−1`、`m = j`）の項を有限和から分ける」も同じ件である。
 - 本文に「行列の等号は成分ごと」を定める定義のブロックが無い（`matrix_difference_zero_iff_equal`・`mat_columnwise` などが名前だけで根拠にしている）。
   また数ベクトルを `m` 行 1 列の行列として扱うことを `mat_mult` が「みなす」と書いており、三十個目の定義もそれに乗っている（証明の書き方の「同一視をしない」）。
   行列の等号の定義と、数ベクトルと 1 列の行列を行き来する写像に名前を付けるかを判断する（Lean の数ベクトルは `Fin m → ℂ` で、1 列の行列とは別の型である）。

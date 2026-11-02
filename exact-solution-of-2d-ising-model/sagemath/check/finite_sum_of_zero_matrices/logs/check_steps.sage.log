@@ -1,0 +1,3 @@
+checked 63 induction steps (r = 1..7) over 9 shapes
+対照: 零でない項が混じると O にならない
+RESULT: PASS

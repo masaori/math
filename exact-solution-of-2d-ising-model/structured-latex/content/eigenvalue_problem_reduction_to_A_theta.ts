@@ -3093,8 +3093,10 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because a = j \text{ の項を有限和から分ける}) \\
 &= \left[Z_jY_j,\ Z_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} O
    &&(\because \text{上で示した } \left[Z_aY_a, Z_j\right] = O\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Z_j\right] + O
+   &&(\because \text{零行列の和は零行列（一つの添字を除いた集合の上の和。空の和を含む）}) \\
 &= \left[Z_jY_j,\ Z_j\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{matrix_plus_zero_matrix}) \\
 &= -2Y_j
    &&(\because \text{上で示した } \left[Z_jY_j, Z_j\right] = -2Y_j)
 \end{aligned}`,
@@ -3111,8 +3113,10 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because a = j \text{ の項を有限和から分ける}) \\
 &= \left[Z_jY_j,\ Y_j\right] + \sum_{\substack{1 \leq a \leq M_{\mathrm{col}} \\ a \neq j}} O
    &&(\because \text{上で示した } \left[Z_aY_a, Y_j\right] = O\ (a \neq j) \text{ を各項へ同時適用}) \\
+&= \left[Z_jY_j,\ Y_j\right] + O
+   &&(\because \text{零行列の和は零行列（一つの添字を除いた集合の上の和。空の和を含む）}) \\
 &= \left[Z_jY_j,\ Y_j\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{matrix_plus_zero_matrix}) \\
 &= 2Z_j
    &&(\because \text{上で示した } \left[Z_jY_j, Y_j\right] = 2Z_j)
 \end{aligned}`,
@@ -3136,13 +3140,15 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right] - O
    &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = M_{\mathrm{col}},\ b = 1 \neq j \text{ に適用}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Z_j\right]
-   &&(\because \text{零行列を引いても変わらない}) \\
+   &&(\because \blkref{matrix_minus_zero_matrix}) \\
 &= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j-1}}\left[Y_mZ_{m+1},\ Z_j\right]
    &&(\because 1 \leq j-1 \leq M_{\mathrm{col}}-1 \text{ なので } m = j-1 \text{ の項を有限和から分ける}) \\
 &= \left[Y_{j-1}Z_j,\ Z_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j-1}} O
    &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = m,\ b = m+1 \neq j \text{ として各項へ同時適用}) \\
+&= \left[Y_{j-1}Z_j,\ Z_j\right] + O
+   &&(\because \text{零行列の和は零行列（一つの添字を除いた集合の上の和。空の和を含む）}) \\
 &= \left[Y_{j-1}Z_j,\ Z_j\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{matrix_plus_zero_matrix}) \\
 &= 2Y_{j-1}
    &&(\because \text{上で示した } \left[Y_mZ_{m+1}, Z_{m+1}\right] = 2Y_m \text{ を } m = j-1 \text{ に適用}) \\
 &= 2Y_{j-1}^{\flat}
@@ -3162,8 +3168,10 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
    &&(\because \text{上で示した } \left[Y_aZ_b, Z_j\right] = O\ (b \neq j) \text{ を } a = m,\ b = m+1 \geq 2,\ j = 1 \text{ として各項へ同時適用}) \\
+&= O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
+   &&(\because \blkref{finite_sum_of_zero_matrices}) \\
 &= \left[-Y_{M_{\mathrm{col}}}Z_1,\ Z_1\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{zero_matrix_plus_matrix}) \\
 &= 2\,Y_0^{\flat}
    &&(\because \text{上で示した境界項の等式})
 \end{aligned}`,
@@ -3189,13 +3197,15 @@ Z_jZ_j &= I,\quad Y_jY_j = I
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right] - O
    &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = M_{\mathrm{col}} \neq j,\ b = 1 \text{ に適用}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1}\left[Y_mZ_{m+1},\ Y_j\right]
-   &&(\because \text{零行列を引いても変わらない}) \\
+   &&(\because \blkref{matrix_minus_zero_matrix}) \\
 &= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j}}\left[Y_mZ_{m+1},\ Y_j\right]
    &&(\because 1 \leq j \leq M_{\mathrm{col}}-1 \text{ なので } m = j \text{ の項を有限和から分ける}) \\
 &= \left[Y_jZ_{j+1},\ Y_j\right] + \sum_{\substack{1 \leq m \leq M_{\mathrm{col}}-1 \\ m \neq j}} O
    &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = m \neq j,\ b = m+1 \text{ として各項へ同時適用}) \\
+&= \left[Y_jZ_{j+1},\ Y_j\right] + O
+   &&(\because \text{零行列の和は零行列（一つの添字を除いた集合の上の和。空の和を含む）}) \\
 &= \left[Y_jZ_{j+1},\ Y_j\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{matrix_plus_zero_matrix}) \\
 &= -2Z_{j+1}
    &&(\because \text{上で示した } \left[Y_mZ_{m+1}, Y_m\right] = -2Z_{m+1} \text{ を } m = j \text{ に適用}) \\
 &= -2Z_{j+1}^{\flat}
@@ -3215,8 +3225,10 @@ Z_jZ_j &= I,\quad Y_jY_j = I
    &&(\because \text{交換子の第 1 引数についての加法性}) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
    &&(\because \text{上で示した } \left[Y_aZ_b, Y_j\right] = O\ (a \neq j) \text{ を } a = m \leq M_{\mathrm{col}}-1,\ b = m+1,\ j = M_{\mathrm{col}} \text{ として各項へ同時適用}) \\
+&= O + \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
+   &&(\because \blkref{finite_sum_of_zero_matrices}) \\
 &= \left[-Y_{M_{\mathrm{col}}}Z_1,\ Y_{M_{\mathrm{col}}}\right]
-   &&(\because \text{零行列の和は零行列}) \\
+   &&(\because \blkref{zero_matrix_plus_matrix}) \\
 &= -2\,Z_{M_{\mathrm{col}}+1}^{\flat}
    &&(\because \text{上で示した境界項の等式})
 \end{aligned}`,
@@ -3408,6 +3420,10 @@ Z_jZ_j &= I,\quad Y_jY_j = I
         "2026-11-01: Step 1 の名前だけの根拠「単位行列の性質」（9 か所）を identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult へ、" +
           "「同じ行列の差は零行列」（4 か所）を matrix_difference_zero_iff_equal の ⟸ へのラベル参照に替え、零行列の記号を def_zero_matrix の O に揃えた。" +
           "「零行列の和は零行列」「零行列を引いても変わらない」は引ける主張が本文に無いので残した。",
+        "2026-11-01: Step 1 の名前だけの根拠「零行列の和は零行列」（6 か所）を、零行列の有限和を O にする行と O を足して消す行" +
+          "（matrix_plus_zero_matrix・zero_matrix_plus_matrix）の 2 行に分け、「零行列を引いても変わらない」（2 か所）を matrix_minus_zero_matrix へのラベル参照に替えた。" +
+          "有限和を O にする行は、添字が 1..M_col−1 の 2 か所だけを finite_sum_of_zero_matrices へのラベル参照にした。" +
+          "残る 4 か所は一つの添字を除いた集合の上の和（M_col = 2 では空の和）で、本文の有限和の定義（添字 1..r、r ≥ 1）が覆わないので名前の根拠のまま残した。式・主張は変えていない。",
       ],
     },
   },
