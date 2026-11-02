@@ -23,6 +23,18 @@ def windingParallelCoordinate (wv wh : ℤ) : (ℤ × ℤ) →+ ℤ where
     dsimp
     ring
 
+/-- 実際の閉じた辺列の巻き付き数から平行座標を定める。 -/
+def windingParallelCoordinateFromWalk {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) : (ℤ × ℤ) →+ ℤ :=
+  windingParallelCoordinate
+    (verticalDirectedWindingNumber γ) (horizontalDirectedWindingNumber γ)
+
+theorem windingParallelCoordinateFromWalk_apply {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (p : ℤ × ℤ) :
+    windingParallelCoordinateFromWalk γ p =
+      verticalDirectedWindingNumber γ * p.1 +
+        horizontalDirectedWindingNumber γ * p.2 := rfl
+
 /-- 一周期の平面並進ベクトルの平行座標。 -/
 lemma windingParallelCoordinate_windingShift
     (L : ℕ) (wv wh : ℤ) :

@@ -64600,7 +64600,12 @@ s(i_r)-s(i_{r'})
                         "よって左辺の各値は右辺の有限集合に属する。逆に任意の ",
                         math(String.raw`r\in\{0,\ldots,m-1\}`), " について ",
                         math(String.raw`k=r`), "、", math(String.raw`q=0`),
-                        " と取れば同じ等式により右辺の値が左辺にも現れるので、二集合は等しい。",
+                        " と取れば同じ等式により右辺の値が左辺にも現れる。したがって",
+                      ]),
+                      displayMath(String.raw`\left\{\kappa_{\gamma}\!\left(\widetilde P_k(\gamma)\right)\ \middle|\ k\in\mathbb Z\right\}
+=\left\{\kappa_{\gamma}\!\left(P_r(\gamma)\right)\ \middle|\ r\in\{0,\ldots,m-1\}\right\}
+\qquad\bigl(\because\ \text{上の両包含}\bigr)`),
+                      paragraph([
                         "右辺は有限で空でない整数集合だから最小元と最大元を持つ。全過程は整数の有限集合と四則だけで閉じ、実数体も複素数体も現れない。",
                       ]),
                     ],
@@ -64627,6 +64632,11 @@ s(i_r)-s(i_{r'})
                       title: { text: "巻き付きベクトルに平行な整数座標" },
                       labels: ["def_winding_parallel_coordinate"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.windingParallelCoordinate",
+                        "Ising2DLambda.KacWard.windingParallelCoordinateFromWalk",
+                        "Ising2DLambda.KacWard.windingParallelCoordinateFromWalk_apply",
+                      ],
                       statement: [
                         paragraph([
                           "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
