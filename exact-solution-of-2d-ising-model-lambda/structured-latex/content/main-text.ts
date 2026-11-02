@@ -30818,6 +30818,7 @@ z^{\,L+1}&=z^{L}\,z
 &=1\cdot z
 &&(\because\ \text{仮定}\ z^{L}=1)\\
 &=z
+&&(\because\ \overline{\mathbb Q}\text{ の乗法単位元})
 \end{aligned}`),
                     paragraph([
                       ref("def_qbar_eigenspace"),
@@ -58608,6 +58609,12 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           title: { text: "総回転数" },
                           labels: ["def_total_turning"],
                           habitat: "Z",
+                          lean: [
+                            "Ising2DLambda.KacWard.edgeSequenceTotalTurning",
+                            "Ising2DLambda.KacWard.edgeSequenceTotalTurning_eq",
+                            "Ising2DLambda.NecSuf.KacWard.edgeSequenceTotalTurning",
+                            "Ising2DLambda.KacWard.edgeSequenceTotalTurning_from_necSuf",
+                          ],
                           statement: [
                             paragraph([
                               "非後退辺列 ",
