@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算として、`half_integer_phase_antiperiodicity`・`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` に検算を付けた。係数の一致を新しい主張 `half_integer_phase_periodicity` に、負角の Euler 表示を新しい主張 `exp_of_negative_i_real_as_cos_minus_i_sin` に切り出し、5 個に同名の検算を付けた（未検算 77 件）。人手証明は一行一操作の鎖と像の記号に直し、全実数上の cos・sin（未整備）に依ることを主張に書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十六個目として、`V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` を `ℝ_{>0}` の元として宣言し、スカラー倍の係数を包含 `a_ℂ`・`(a^{-1})_ℂ` で書いた（`aa^{-1} = 1_ℂ` は `real_inclusion_preserves_product`・`ℝ` の `aa^{-1} = 1`・略記 `1_ℂ = (1)_ℂ` の 3 行）。`V_plus_is_positive_definite` の係数も `((2s_2)^{M_col/2})_ℂ` にした。Lean の `VPlus_mul_VPlusInv`・`VPlusInv_mul_VPlus` は `a : ℝ` の同じ行の calc、SageMath は `050` の `check_27`。次は状態台帳の「次の一歩」の「(k) の後に扱う」残り（`check_number_operator_idempotent`・`check_number_operators_commute` から）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十五個目として、`max_eigenvalue_of_V_plus_simple` (3) の固有方程式に左から `Q̌_{ε'}` を掛ける鎖の名前だけの根拠「行列の積の結合法則」を、`scalar_multiple_factors_out_of_left_factor`・`eigenvalues_of_V_plus` (1)・`mat_mult_associative`（`q → 1`）・固有方程式・`scalar_multiple_factors_out_of_right_factor` の 1 行 1 主張の 5 行にした（主張は不変）。Lean は人手と 1 対 1 の `checkBigLambda_smul_Qproj_mulVec_of_eigen` と人手の順の `eq_Qproj_univ_mulVec_of_eigen`（必要十分版の特殊化は `_of_necSuf`、必要十分版も同じ 5 段）、SageMath は `050` の `check_26`（143 段）。次の一歩は状態台帳の (k)。

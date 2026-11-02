@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 80 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 346 件のうち、SageMath の検算が無いもの 77 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -163,13 +163,20 @@
 - `antiperiodic_exp_sum`（半整数運動量 θ̃_μ の指数和）: `sagemath/check/antiperiodic_exp_sum/`。exp(i(2πq)_C)（q ∈ `QQ`）を 1 の冪根として `UniversalCyclotomicField` で持ち、証明の全ての鎖（像の 6 行、k_R θ̃_μ の 6 等号は π を不定元にして、S の書き換え、T_{2M,k} の 9 等号、exp_sum の適用、偶数・奇数・非整除の鎖、「とくに」の背理法の鎖）を M_col = 2..8、k = -3M..3M で厳密に確かめた。1 の冪根が本文の exp の値であることと主張は、本文の exp の部分和と尾の上界のボールで確かめた。
   レビューの指摘で人手証明を直した: 主張の左辺と S を結ぶ散文を鎖に、θ̃ の鎖・奇偶の分割・約分・偶数と奇数の場合の差の行を一行一操作に、非整除の段の散文を 7 等号の鎖に、δ の値に `def_delta_M` と `(2(M)_N)_Z = 2M_col` を根拠として挙げ、`2_R`・`1_C` の添字をそろえ、`real_inclusion_preserves_product`・`def_complex_difference`・`multiply_by_minus_one` を引いた。計算の誤りは無かった。
 
+- `half_integer_phase_antiperiodicity`・`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity`（θ̃_μ の反周期性 `exp(-i((M_col)_R θ̃_μ)_C) = -1_C` と、Ž・Y̌ の添字周期性）: 二つの周期性の証明が同じ二つの鎖を重複して持っていたので、係数の一致を新しい主張 `half_integer_phase_periodicity`（`exp(-i(j_R θ̃_{μ+M})_C) = exp(-i(j_R θ̃_μ)_C)`）に切り出した。
+  三つの主張が「euler_formula_cos_sin の証明冒頭で導いた exp(-ix) = cos x - i sin x」（証明の中の式でラベルが無い）を根拠にしていたので、`euler_formula_cos_sin` の主張から導く新しい主張 `exp_of_negative_i_real_as_cos_minus_i_sin` を `000_calculation_formulae_30_44.ts` の末尾に置いた。5 個の主張に同名の検算を付けた（共通の準備 `sagemath/_shared/half_integer_phase_exact.sage`）。
+  角度の鎖は π を不定元にした有理関数体で、exp と cos・sin の鎖は 1 の冪根と AA で厳密に組んだ。ただしその `QQbar` の比較は 1 の冪根の表し方で自明に成り立つので、周期性・偶奇性・特殊値の行は Arb の cos・sin で、exp と cos・sin を結ぶ行と主張は本文の exp の部分和と尾の上界のボールで確かめた（各 overview に自明な比較を明記）。Ž・Y̌ は Jordan–Wigner 行列を円分体の行列で組んで比べた。
+  人手証明を直した: 実数・複素数に像の記号を付け、θ̃ の定義の式から角度の鎖を始め、`cos(2πμ-π) = -1` と `sin(2πμ-π) = 0` を一行に束ねていたのを周期性・偶奇性・特殊値の一行一操作に、`-1_C` までを差の定義・`multiply_by_minus_one`・体の公理の鎖にした。全実数上の cos・sin（`def_sin`・`def_cos` は [-π/2, π/2] だけ）の性質に依ることを三つの主張に書いた。計算の誤りは無かった。Lean の `DefinitionHalfIntegerModes.lean` は旧い証明の形のままで、新しい鎖と 1 対 1 ではない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `half_integer_phase_antiperiodicity`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `V1_plus_half_invertible`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`half_integer_phase_antiperiodicity` の検算で見つかった（表記の揺れと未整備の前提）: 主張を `exp(-i((M_col)_R θ̃_μ)_C) = -1_C` と像の記号付きに直したが、下流の `nesting_of_commutator_of_H_and_check_Z` などは旧い `exp(-iM_col θ̃_μ) = -1` の形で引いている。下流の検算を足すときに表記をそろえる。また全実数上の cos・sin（2π 周期性・偶奇性・cos π・sin π）と Euler の公式は本文に無く、`euler_formula_cos_sin`・`exp_sum`・この単位の三つの主張がそれを前提にしている。直すには、計算公式の章に全実数上の cos・sin の定義とこれらの性質の主張を置く。
 
 - 2026-11-02、`antiperiodic_exp_sum` のレビューで見つかった（記号の省略）: `exp_sum` の主張は `exp(2πijk/M_col) = M_col δ` と像の記号を省いて書いており、`antiperiodic_exp_sum` は適用の前に読み方を地の文で述べて引いている。`def_delta_M` も写像を `δ^{M_col}`、値を `δ^{(M_col)}` と書き分けが混在し、値の `1`・`0` を `1_C`・`0_C` と書かず、自然数 M_col による整数の合同を ℤ への像を書かずに使っている。どちらも既に検算が付いたブロックなので、この単位では直さず、検算の付いたブロックの見直しで扱う。
 

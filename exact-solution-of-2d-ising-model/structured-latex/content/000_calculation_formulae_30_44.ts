@@ -2869,4 +2869,82 @@ z
       ],
     },
   },
+  {
+    id: "calculation_formulae_claim_exp_of_negative_i_real_as_cos_minus_i_sin",
+    kind: "claim",
+    title: { tex: String.raw`\exp(-i\theta_{\mathbb C})=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}` },
+    labels: ["exp_of_negative_i_real_as_cos_minus_i_sin"],
+    statement: [
+      paragraph([
+        math(String.raw`\theta\in\mathbb R`),
+        " とする。",
+        ref("euler_formula_cos_sin"),
+        " と同じく、実数 ",
+        math(String.raw`\cos\theta,\sin\theta`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の包含で ",
+        math(String.raw`\mathbb C`),
+        " の元 ",
+        math(String.raw`(\cos\theta)_{\mathbb C},(\sin\theta)_{\mathbb C}`),
+        " として読み、",
+        ref("euler_formula_cos_sin"),
+        " の ",
+        math(String.raw`\exp(\pm i\theta)`),
+        " を ",
+        math(String.raw`\exp(\pm i\theta_{\mathbb C})`),
+        " と書く。このとき",
+      ]),
+      displayMath(String.raw`\exp(-i\theta_{\mathbb C})=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}`),
+      paragraph([
+        "が成り立つ。全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり未整備である。この主張は ",
+        ref("euler_formula_cos_sin"),
+        " を前提とし、したがって全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の拡張（未整備）に依る。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`a:=\exp(i\theta_{\mathbb C})\in\mathbb C`),
+        "、",
+        math(String.raw`b:=\exp(-i\theta_{\mathbb C})\in\mathbb C`),
+        " とおく。",
+        ref("complex_numbers_form_a_field"),
+        " の体で ",
+        math(String.raw`2_{\mathbb C}\neq0_{\mathbb C}`),
+        "、",
+        math(String.raw`i\neq0_{\mathbb C}`),
+        " なので ",
+        math(String.raw`2_{\mathbb C}i\neq0_{\mathbb C}`),
+        " であり、以下の分数は定まる。主張の左辺から",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+b
+&=\frac{2_{\mathbb C}b}{2_{\mathbb C}}
+&&\bigl(\because\ 2_{\mathbb C}\neq0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=\frac{(a+b)-(a-b)}{2_{\mathbb C}}
+&&\bigl(\because\ \mathbb C\text{ の四則}\ (\blkref{complex_numbers_form_a_field},\ \blkref{def_complex_difference})\bigr)\\
+&=\frac{a+b}{2_{\mathbb C}}-\frac{a-b}{2_{\mathbb C}}
+&&\bigl(\because\ \text{分配法則}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(\cos\theta)_{\mathbb C}-\frac{a-b}{2_{\mathbb C}}
+&&\bigl(\because\ \blkref{euler_formula_cos_sin}\text{ の第 1 の等式}\bigr)\\
+&=(\cos\theta)_{\mathbb C}-i\cdot\frac{a-b}{2_{\mathbb C}i}
+&&\bigl(\because\ i\neq0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(\cos\theta)_{\mathbb C}-i(\sin\theta)_{\mathbb C}
+&&\bigl(\because\ \blkref{euler_formula_cos_sin}\text{ の第 2 の等式}\bigr)
+\end{aligned}`),
+      paragraph(["となる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算）: 半整数運動量の位相の主張が「euler_formula_cos_sin の証明冒頭で導いた exp(-ix) = cos x - i sin x」を根拠にしていた。証明の中の式はラベルで引けないので、euler_formula_cos_sin の主張から導く形で独立した主張にした。",
+      ],
+    },
+  },
 ]);

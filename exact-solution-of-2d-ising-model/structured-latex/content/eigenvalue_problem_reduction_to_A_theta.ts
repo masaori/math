@@ -2253,7 +2253,7 @@ k
     id: "evensector_003_claim_half_integer_phase_antiperiodicity",
     kind: "claim",
     origin: { path: "structured-latex/content/013_even_sector_modes.ts", ordinal: 5 },
-    title: { tex: String.raw`\tilde\theta_\mu \text{ の反周期性 } \exp(-iM_{\mathrm{col}}\tilde\theta_\mu) = -1` },
+    title: { tex: String.raw`\tilde\theta_\mu \text{ の反周期性 } \exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}) = -1_{\mathbb C}` },
     labels: ["half_integer_phase_antiperiodicity"],
     statement: [
       paragraph([
@@ -2263,53 +2263,215 @@ k
         " とする。",
         ref("antiperiodic_exp_sum"),
         " の ",
-        math(String.raw`\tilde\theta_\mu`),
-        " について",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " と像の記号 ",
+        math(String.raw`a_{\mathbb R}`),
+        "（",
+        math(String.raw`a\in\mathbb Z`),
+        "）、",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`r_{\mathbb C}`),
+        "（",
+        math(String.raw`r\in\mathbb R`),
+        "）を用いる。このとき",
       ]),
-      displayMath(String.raw`\exp(-i M_{\mathrm{col}} \tilde\theta_\mu) = -1`),
-      paragraph(["が成り立つ。"]),
+      displayMath(String.raw`\exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}) = -1_{\mathbb C}`),
+      paragraph([
+        "が成り立つ。証明は全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の性質（",
+        math(String.raw`2\pi`),
+        " 周期性、",
+        math(String.raw`\cos`),
+        " が偶関数で ",
+        math(String.raw`\sin`),
+        " が奇関数であること、",
+        math(String.raw`\cos\pi=-1_{\mathbb R}`),
+        "、",
+        math(String.raw`\sin\pi=0_{\mathbb R}`),
+        "）を使う。",
+        ref("def_sin"),
+        "・",
+        ref("def_cos"),
+        " は ",
+        math(String.raw`[-\pi/2,\pi/2]`),
+        " 上でしか定めておらず、全実数への拡張は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり未整備なので、この主張はその拡張を前提とする。",
+      ]),
     ],
     proof: [
       paragraph([
-        "まず指数の角度を計算する。",
+        "指数の中の実数を求める。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " である。",
       ]),
       displayMath(String.raw`\begin{aligned}
-M_{\mathrm{col}}\tilde\theta_\mu
-&=M_{\mathrm{col}}\cdot\frac{2\pi}{M_{\mathrm{col}}}\left(\mu-\tfrac12\right)
-&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi}{M_{\mathrm{col}}}(\mu-\tfrac12)\text{ を代入}\bigr)\\
-&=2\pi\left(\mu-\tfrac12\right)
-&&\bigl(\because\ M_{\mathrm{col}}\geq2\text{ より }M_{\mathrm{col}}\neq0\text{ なので }M_{\mathrm{col}}\text{ を約分}\bigr)\\
-&=2\pi\mu-\pi
-&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)
+(M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu
+&=(M_{\mathrm{col}})_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=2\pi\left(\mu_{\mathbb R}-\tfrac12\right)
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr)\\
+&=2\pi\mu_{\mathbb R}-2\pi\cdot\tfrac12
+&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&=2\pi\mu_{\mathbb R}-\pi\left(2\cdot\tfrac12\right)
+&&\bigl(\because\ \mathbb R\text{ の積の結合律と交換律}\bigr)\\
+&=2\pi\mu_{\mathbb R}-\pi
+&&\bigl(\because\ 2\cdot\tfrac12=1\bigr)\\
+&=-\pi+2\pi\mu_{\mathbb R}
+&&\bigl(\because\ \mathbb R\text{ の加法の交換律}\bigr)
 \end{aligned}`),
-      paragraph([
-        "この等式と ",
-        ref("euler_formula_cos_sin"),
-        " より",
-      ]),
+      paragraph(["これを使って、主張の左辺から"]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(-iM_{\mathrm{col}}\tilde\theta_\mu)
-&= \cos\!\left(M_{\mathrm{col}}\tilde\theta_\mu\right)-i\sin\!\left(M_{\mathrm{col}}\tilde\theta_\mu\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
-&= \cos(2\pi\mu-\pi)-i\sin(2\pi\mu-\pi)
-&&\bigl(\because M_{\mathrm{col}}\tilde\theta_\mu=2\pi\mu-\pi\ \text{を 2 箇所へ同時代入}\bigr) \\
-&= -1-i\sin(2\pi\mu-\pi)
-&&\bigl(\because \mu\in\mathbb Z\ \text{より}\ \cos(2\pi\mu-\pi)=-1\bigr) \\
-&= -1-i\cdot0
-&&\bigl(\because \mu\in\mathbb Z\ \text{より}\ \sin(2\pi\mu-\pi)=0\bigr) \\
-&= -1-0
-&&\bigl(\because i\cdot0=0\bigr) \\
-&= -1
-&&\bigl(\because \text{加法の単位元}\bigr)
+\exp(-i((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+&=(\cos((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin((M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}
+&&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=(M_{\mathrm{col}})_{\mathbb R}\tilde\theta_\mu\text{ で}\bigr) \\
+&=(\cos(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}-i(\sin(-\pi+2\pi\mu_{\mathbb R}))_{\mathbb C}
+&&\bigl(\because\ \text{上の鎖を 2 箇所へ同時代入}\bigr) \\
+&=(\cos(-\pi))_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
+&&\bigl(\because\ \mu\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
+&=(\cos\pi)_{\mathbb C}-i(\sin(-\pi))_{\mathbb C}
+&&\bigl(\because\ \cos\text{ は偶関数}\bigr) \\
+&=(\cos\pi)_{\mathbb C}-i(-\sin\pi)_{\mathbb C}
+&&\bigl(\because\ \sin\text{ は奇関数}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i(-\sin\pi)_{\mathbb C}
+&&\bigl(\because\ \cos\pi=-1_{\mathbb R}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i(-0_{\mathbb R})_{\mathbb C}
+&&\bigl(\because\ \sin\pi=0_{\mathbb R}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i(0_{\mathbb R})_{\mathbb C}
+&&\bigl(\because\ -0_{\mathbb R}=0_{\mathbb R}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-i\cdot0_{\mathbb C}
+&&\bigl(\because\ (0_{\mathbb R})_{\mathbb C}=(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{complex_numbers_form_a_field}\text{ の零元})\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}-0_{\mathbb C}
+&&\bigl(\because\ i\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}+(-0_{\mathbb C})
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}+(-1_{\mathbb C})\cdot0_{\mathbb C}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}+0_{\mathbb C}
+&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&=(-1_{\mathbb R})_{\mathbb C}
+&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&=-1_{\mathbb C}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\text{ と }\blkref{definition_of_cc}\text{ の和により }(1_{\mathbb R},0_{\mathbb R})+(-1_{\mathbb R},0_{\mathbb R})=(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}\text{ なので、}(-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)
 \end{aligned}`,
       ),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "旧複合ラベル def_half_integer_modes の (1) から、半整数位相の反周期性だけを独立した主張へ分離した。",
-        "複素指数の先行定義と所属証明は現行本文では未整備である。分離後の証明では、行列の exp 積公式をスカラーへ無標識に同一視せず、Euler 公式を一度だけ適用してから実数の三角関数値を一段ずつ評価する。",
+        "2026-11-02（全証明の SageMath 検算）: 主張と証明の実数・複素数に像の記号を付け、θ̃_μ の定義の式どおりに角度の鎖を始め、cos(2πμ-π) = -1 と sin(2πμ-π) = 0 を 1 行に束ねていたのを、周期性・偶奇性・特殊値の一行一操作に分けた。負角の Euler 表示は euler_formula_cos_sin の証明の中の式ではなく、主張 exp_of_negative_i_real_as_cos_minus_i_sin を引く。全実数上の cos・sin の性質に依ることを主張に書いた。",
+      ],
+    },
+  },
+  {
+    id: "evensector_claim_half_integer_phase_periodicity",
+    kind: "claim",
+    title: { tex: String.raw`\tilde\theta_\mu \text{ の添字をずらした位相 } \exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C}) = \exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})` },
+    labels: ["half_integer_phase_periodicity"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
+        "、",
+        math(String.raw`\mu\in\mathbb Z`),
+        "、",
+        math(String.raw`j\in\mathbb Z`),
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        " と像の記号 ",
+        math(String.raw`a_{\mathbb R}`),
+        "（",
+        math(String.raw`a\in\mathbb Z`),
+        "）、",
+        ref("inclusion_rr_to_cc"),
+        " の ",
+        math(String.raw`r_{\mathbb C}`),
+        "（",
+        math(String.raw`r\in\mathbb R`),
+        "）を用いる。このとき",
+      ]),
+      displayMath(String.raw`\exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C}) = \exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})`),
+      paragraph([
+        "が成り立つ。証明は全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の ",
+        math(String.raw`2\pi`),
+        " 周期性（",
+        math(String.raw`x\in\mathbb R`),
+        "、",
+        math(String.raw`n\in\mathbb Z`),
+        " について ",
+        math(String.raw`\cos(x+2\pi n_{\mathbb R})=\cos x`),
+        "、",
+        math(String.raw`\sin(x+2\pi n_{\mathbb R})=\sin x`),
+        "）を使う。全実数への拡張は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり未整備なので、この主張はその拡張を前提とする。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "添字をずらした角度を求める。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\tilde\theta_{\mu+M_{\mathrm{col}}}
+&=\frac{2\pi\left((\mu+M_{\mathrm{col}})_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta\text{ の定義を }\mu+M_{\mathrm{col}}\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\frac{2\pi\left((\mu_{\mathbb R}+(M_{\mathrm{col}})_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和を保つ}\bigr)\\
+&=\frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr)\\
+&=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&=\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の和}\bigr)\\
+&=\tilde\theta_\mu+\frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\tilde\theta_\mu+2\pi
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr)
+\end{aligned}`),
+      paragraph(["これに ", math(String.raw`j_{\mathbb R}`), " を掛けると"]),
+      displayMath(String.raw`\begin{aligned}
+j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}
+&=j_{\mathbb R}\left(\tilde\theta_\mu+2\pi\right)
+&&\bigl(\because\ \text{上の鎖}\bigr)\\
+&=j_{\mathbb R}\tilde\theta_\mu+j_{\mathbb R}\cdot2\pi
+&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&=j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}
+&&\bigl(\because\ \mathbb R\text{ の積の交換律}\bigr)
+\end{aligned}`),
+      paragraph(["となる。これを使って、主張の左辺から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C})
+&=(\cos(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}))_{\mathbb C}
+&&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}}\text{ で}\bigr) \\
+&=(\cos(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu+2\pi j_{\mathbb R}))_{\mathbb C}
+&&\bigl(\because\ \text{上の鎖を 2 箇所へ同時代入}\bigr) \\
+&=(\cos(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}-i(\sin(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}
+&&\bigl(\because\ j\in\mathbb Z\text{ と }\cos,\sin\text{ の }2\pi\text{ 周期性を 2 箇所へ同時適用}\bigr) \\
+&=\exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+&&\bigl(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=j_{\mathbb R}\tilde\theta_\mu\text{ で}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02（全証明の SageMath 検算）: half_integer_checkZ_periodicity と half_integer_checkY_periodicity の証明が同じ二つの鎖（添字をずらした角度と係数の一致）を重複して持っていたので、係数の一致を一つの主張に切り出した。",
       ],
     },
   },
@@ -2332,64 +2494,44 @@ M_{\mathrm{col}}\tilde\theta_\mu
         ref("def_half_integer_checkZ"),
         " の Fourier 行列について、",
         math(String.raw`\check{Z}_{\mu+M_{\mathrm{col}}} = \check{Z}_\mu`),
-        " が成り立つ。",
+        " が成り立つ。この主張は ",
+        ref("half_integer_phase_periodicity"),
+        " を通じて、全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の ",
+        math(String.raw`2\pi`),
+        " 周期性（未整備）を前提とする。",
       ]),
     ],
     proof: [
-      paragraph(["まず添字をずらした角度を計算する。"]),
-      displayMath(String.raw`\begin{aligned}
-\tilde\theta_{\mu+M_{\mathrm{col}}}
-&=\frac{2\pi\left(\mu+M_{\mathrm{col}}-\tfrac12\right)}{M_{\mathrm{col}}}
-&&\bigl(\because\ \tilde\theta_\mu\text{ の定義に }\mu+M_{\mathrm{col}}\text{ を代入}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)+2\pi M_{\mathrm{col}}}{M_{\mathrm{col}}}
-&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)}{M_{\mathrm{col}}}+\frac{2\pi M_{\mathrm{col}}}{M_{\mathrm{col}}}
-&&\bigl(\because\ \mathbb R\text{ の分数の加法}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)}{M_{\mathrm{col}}}+2\pi
-&&\bigl(\because\ M_{\mathrm{col}}\geq2\text{ より }M_{\mathrm{col}}\neq0\text{ であり、分子と分母の }M_{\mathrm{col}}\text{ を約分}\bigr)\\
-&=\tilde\theta_\mu+2\pi
-&&\bigl(\because\ \tilde\theta_\mu\text{ の定義}\bigr)
-\end{aligned}`),
       paragraph([
-        math(String.raw`j \in \mathbb{Z}`),
-        " について、",
-        ref("euler_formula_cos_sin"),
-        " の証明冒頭で導いた負角の表示と、正弦・余弦の ",
-        math(String.raw`2\pi`),
-        " 周期性を用いると",
+        math(String.raw`j\in\{1,\dots,(M_{\mathrm{col}})_{\mathbb N}\}`),
+        " について ",
+        math(String.raw`j_{\mathbb Z}\in\mathbb Z`),
+        " であり、",
+        ref("antiperiodic_exp_sum"),
+        " の記号で ",
+        math(String.raw`(j_{\mathbb Z})_{\mathbb R}=j_{\mathbb R}`),
+        " である。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(-ij\tilde\theta_{\mu+M_{\mathrm{col}}})
-&=\cos\!\left(j\tilde\theta_{\mu+M_{\mathrm{col}}}\right)-i\sin\!\left(j\tilde\theta_{\mu+M_{\mathrm{col}}}\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
-&=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
-&&\bigl(\because \tilde\theta_{\mu+M_{\mathrm{col}}}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
-&=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
-&&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
-&=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
-&&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
-&=\exp(-ij\tilde\theta_\mu)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
-\end{aligned}`,
-      ),
-      paragraph(["係数がすべて一致するので、一続きに"]),
-      displayMath(
-        String.raw`\begin{aligned}
 \check{Z}_{\mu+M_{\mathrm{col}}}
-&=\sum_{j_{\mathbb N}=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})Z_{j_{\mathbb Z}}
-&&\left(\because\ \check{Z}_{\mu+M_{\mathrm{col}}}\text{ の定義}\right)\\
-&=\sum_{j_{\mathbb N}=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu})Z_{j_{\mathbb Z}}
-&&\left(\because\ \text{上で得た }\exp(-ij\tilde\theta_{\mu+M_{\mathrm{col}}})=\exp(-ij\tilde\theta_\mu)\text{ を全項へ同時適用}\right)\\
+&=\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C})Z_{j_{\mathbb Z}}
+&&\left(\because\ \blkref{def_half_integer_checkZ}\text{ を }\mu+M_{\mathrm{col}}\in\mathbb Z\text{ で}\right)\\
+&=\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-i(j_{\mathbb R}\tilde\theta_{\mu})_{\mathbb C})Z_{j_{\mathbb Z}}
+&&\left(\because\ \blkref{half_integer_phase_periodicity}\text{ を整数 }j_{\mathbb Z}\text{ で全項へ同時適用}\right)\\
 &=\check{Z}_{\mu}
-&&\left(\because\ \check{Z}_{\mu}\text{ の定義}\right)
+&&\left(\because\ \blkref{def_half_integer_checkZ}\text{ を }\mu\text{ で}\right)
 \end{aligned}`,
       ),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "旧複合ラベル def_half_integer_modes の (2) から、半整数運動量 Fourier Z 行列の添字周期性だけを独立した主張へ分離した。",
+        "2026-11-02（全証明の SageMath 検算）: 係数の一致の二つの鎖を half_integer_phase_periodicity へ切り出し、ここではそれを引く。",
       ],
     },
   },
@@ -2412,64 +2554,44 @@ M_{\mathrm{col}}\tilde\theta_\mu
         ref("def_half_integer_checkY"),
         " の Fourier 行列について、",
         math(String.raw`\check{Y}_{\mu+M_{\mathrm{col}}} = \check{Y}_\mu`),
-        " が成り立つ。",
+        " が成り立つ。この主張は ",
+        ref("half_integer_phase_periodicity"),
+        " を通じて、全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の ",
+        math(String.raw`2\pi`),
+        " 周期性（未整備）を前提とする。",
       ]),
     ],
     proof: [
-      paragraph(["まず添字をずらした角度を計算する。"]),
-      displayMath(String.raw`\begin{aligned}
-\tilde\theta_{\mu+M_{\mathrm{col}}}
-&=\frac{2\pi\left(\mu+M_{\mathrm{col}}-\tfrac12\right)}{M_{\mathrm{col}}}
-&&\bigl(\because\ \tilde\theta_\mu\text{ の定義に }\mu+M_{\mathrm{col}}\text{ を代入}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)+2\pi M_{\mathrm{col}}}{M_{\mathrm{col}}}
-&&\bigl(\because\ \mathbb R\text{ の分配則}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)}{M_{\mathrm{col}}}+\frac{2\pi M_{\mathrm{col}}}{M_{\mathrm{col}}}
-&&\bigl(\because\ \mathbb R\text{ の分数の加法}\bigr)\\
-&=\frac{2\pi\left(\mu-\tfrac12\right)}{M_{\mathrm{col}}}+2\pi
-&&\bigl(\because\ M_{\mathrm{col}}\geq2\text{ より }M_{\mathrm{col}}\neq0\text{ であり、分子と分母の }M_{\mathrm{col}}\text{ を約分}\bigr)\\
-&=\tilde\theta_\mu+2\pi
-&&\bigl(\because\ \tilde\theta_\mu\text{ の定義}\bigr)
-\end{aligned}`),
       paragraph([
-        math(String.raw`j \in \mathbb{Z}`),
-        " について、",
-        ref("euler_formula_cos_sin"),
-        " の証明冒頭で導いた負角の表示と、正弦・余弦の ",
-        math(String.raw`2\pi`),
-        " 周期性を用いると",
+        math(String.raw`j\in\{1,\dots,(M_{\mathrm{col}})_{\mathbb N}\}`),
+        " について ",
+        math(String.raw`j_{\mathbb Z}\in\mathbb Z`),
+        " であり、",
+        ref("antiperiodic_exp_sum"),
+        " の記号で ",
+        math(String.raw`(j_{\mathbb Z})_{\mathbb R}=j_{\mathbb R}`),
+        " である。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(-ij\tilde\theta_{\mu+M_{\mathrm{col}}})
-&=\cos\!\left(j\tilde\theta_{\mu+M_{\mathrm{col}}}\right)-i\sin\!\left(j\tilde\theta_{\mu+M_{\mathrm{col}}}\right)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた }\exp(-ix)=\cos x-i\sin x\bigr) \\
-&=\cos\!\left(j(\tilde\theta_\mu+2\pi)\right)-i\sin\!\left(j(\tilde\theta_\mu+2\pi)\right)
-&&\bigl(\because \tilde\theta_{\mu+M_{\mathrm{col}}}=\tilde\theta_\mu+2\pi\text{ を 2 箇所へ同時代入}\bigr) \\
-&=\cos\!\left(j\tilde\theta_\mu+2\pi j\right)-i\sin\!\left(j\tilde\theta_\mu+2\pi j\right)
-&&\bigl(\because \mathbb R\text{ の分配則}\bigr) \\
-&=\cos\!\left(j\tilde\theta_\mu\right)-i\sin\!\left(j\tilde\theta_\mu\right)
-&&\bigl(\because j\in\mathbb Z\text{ と正弦・余弦の }2\pi\text{ 周期性}\bigr) \\
-&=\exp(-ij\tilde\theta_\mu)
-&&\bigl(\because \blkref{euler_formula_cos_sin}\text{ の証明冒頭で導いた等式の対称律}\bigr)
-\end{aligned}`,
-      ),
-      paragraph(["係数がすべて一致するので、一続きに"]),
-      displayMath(
-        String.raw`\begin{aligned}
 \check{Y}_{\mu+M_{\mathrm{col}}}
-&=\sum_{j_{\mathbb N}=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})Y_{j_{\mathbb Z}}
-&&\left(\because\ \check{Y}_{\mu+M_{\mathrm{col}}}\text{ の定義}\right)\\
-&=\sum_{j_{\mathbb N}=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-ij_{\mathbb R}\tilde\theta_{\mu})Y_{j_{\mathbb Z}}
-&&\left(\because\ \text{上で得た }\exp(-ij\tilde\theta_{\mu+M_{\mathrm{col}}})=\exp(-ij\tilde\theta_\mu)\text{ を全項へ同時適用}\right)\\
+&=\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-i(j_{\mathbb R}\tilde\theta_{\mu+M_{\mathrm{col}}})_{\mathbb C})Y_{j_{\mathbb Z}}
+&&\left(\because\ \blkref{def_half_integer_checkY}\text{ を }\mu+M_{\mathrm{col}}\in\mathbb Z\text{ で}\right)\\
+&=\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(-i(j_{\mathbb R}\tilde\theta_{\mu})_{\mathbb C})Y_{j_{\mathbb Z}}
+&&\left(\because\ \blkref{half_integer_phase_periodicity}\text{ を整数 }j_{\mathbb Z}\text{ で全項へ同時適用}\right)\\
 &=\check{Y}_{\mu}
-&&\left(\because\ \check{Y}_{\mu}\text{ の定義}\right)
+&&\left(\because\ \blkref{def_half_integer_checkY}\text{ を }\mu\text{ で}\right)
 \end{aligned}`,
       ),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "旧複合ラベル def_half_integer_modes の (2) から、半整数運動量 Fourier Y 行列の添字周期性だけを独立した主張へ分離した。",
+        "2026-11-02（全証明の SageMath 検算）: 係数の一致の二つの鎖を half_integer_phase_periodicity へ切り出し、ここではそれを引く。",
       ],
     },
   },
