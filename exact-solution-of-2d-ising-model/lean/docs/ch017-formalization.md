@@ -124,7 +124,8 @@
 | `tagPoint_half_eq_thetaTilde` | `t^{(M)}_μ|_{δ=1/2} = θ~_μ` | 同 (1) |
 | `checkBigLambda_univ_eq_LambdaM` | **`Λ̌_max = Λ^{(1/2)}_M`** | `max_eigenvalue_of_V_plus_simple` (1) |
 | `checkBigLambda_lt_max` / `checkBigLambda_lt_max_of_gammaFn` | **`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_max`（狭義）** | 同 (2) |
-| `eq_Qproj_univ_mulVec_of_eigen` | **固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る** | 同 (3) 前半 |
+| `checkBigLambda_smul_Qproj_mulVec_of_eigen` | `V^{(+)}x = Λ̌_max x` なら `Λ̌_{ε'}(Q̌_{ε'}x) = Λ̌_max(Q̌_{ε'}x)`（人手の 5 行の鎖と 1 対 1） | 同 (3) の左から `Q̌_{ε'}` を掛ける鎖 |
+| `eq_Qproj_univ_mulVec_of_eigen`（人手の順。必要十分版の特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） | **固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る** | 同 (3) 前半 |
 | `finrank_range_Qproj_univ` | **その空間の次元は `1`（単純固有値）** | 同 (3) 後半 |
 | `CheckFermiSetup.isInternal_range_Qproj` | **`ℂ^{2^M} = ⊕_ε im Q̌_ε`（内部直和。各成分は 1 次元）** | `check_joint_eigenspace_decomposition` (5) |
 | `CheckFermiSetup.iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | 同 (5) を `Submodule` の言葉で分けて述べた版 | 同 (5) |
@@ -146,7 +147,7 @@
 | `eigenvalues_of_check_Vprime` | `CheckFermiSetup.Vprime_mul_Qproj` / `Qproj_mul_Vprime` | `NecSuf.exp_mul_eq_of_mul_eq_smul`（章 009 と同一）／その左右反転 `NecSuf.mul_exp_eq_of_mul_eq_smul` |
 | `constant_c_value_even_sector` | `Ising2D.constant_c_value_even_sector` | `NecSuf.const_eq_of_trace_ratio` |
 | `eigenvalues_of_V_plus` (2) | `checkBigLambda_le_max` / `checkBigLambda_min_le` | `NecSuf.sum_weight_le_univ` / `sum_weight_empty_le` |
-| `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_max` / `eq_Qproj_univ_mulVec_of_eigen` | `NecSuf.sum_weight_lt_of_ne_univ` / `NecSuf.eq_proj_of_eigen` |
+| `max_eigenvalue_of_V_plus_simple` (2)(3) | `checkBigLambda_lt_max` / `eq_Qproj_univ_mulVec_of_eigen`（特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`） | `NecSuf.sum_weight_lt_of_ne_univ` / `NecSuf.eq_proj_of_eigen` |
 | `check_joint_eigenspace_decomposition` (5) | `CheckFermiSetup.isInternal_range_Qproj` / `iSup_range_Qproj_eq_top` / `iSupIndep_range_Qproj` | `NecSuf.isInternal_range_proj`（**章 009 と同一**） |
 | `eigenvalues_of_check_Vprime` / `eigenvalues_of_V_plus`（対角化可能） | `CheckFermiSetup.exists_eigenBasis_Vprime` / `exists_conj_diagonal_Vprime`、`exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus` | `NecSuf.exists_eigenBasis_of_matrix_proj` / `exists_conj_diagonal_of_matrix_proj`（**章 009 と同一**） |
 

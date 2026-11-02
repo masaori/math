@@ -142,11 +142,73 @@ theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam
     exact Real.sinh_pos_iff.2 this
   exact checkBigLambda_lt_max F g hgpos hs2 hT
 
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の固有方程式に左から `Q̌_{ε'}` を掛ける鎖**:
+`V^{(+)}x = Λ̌_max x` なら `Λ̌_{ε'}(Q̌_{ε'}x) = Λ̌_max(Q̌_{ε'}x)`。人手の 5 行と 1 対 1 の calc。
+Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので、`q → 1`・`p → 1` で引く人手の主張は
+mathlib の `Matrix.smul_mulVec`・`Matrix.mulVec_mulVec`・`Matrix.mulVec_smul` で書く。
+必要十分版 `NecSuf.eq_proj_of_eigen` の中の `hchain` が同じ 5 段の calc である。 -/
+theorem checkBigLambda_smul_Qproj_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+    {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g)
+    {x : Conf M → ℂ}
+    (hx : (VPlus M s2 K1 K2star).mulVec x
+            = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x)
+    (T : Finset (CheckIdx M)) :
+    ((checkBigLambda F g s2 T : ℝ) : ℂ) • (F.Qproj T).mulVec x
+      = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • (F.Qproj T).mulVec x :=
+  calc ((checkBigLambda F g s2 T : ℝ) : ℂ) • (F.Qproj T).mulVec x
+      = (((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T).mulVec x :=
+        (Matrix.smul_mulVec _ _ _).symm
+                                                        -- `scalar_multiple_factors_out_of_left_factor`（`p → 1`）を右辺から左辺へ
+    _ = (F.Qproj T * VPlus M s2 K1 K2star).mulVec x := by
+        rw [Qproj_mul_VPlus F g hK1 hK2 hs2 hVeq T]
+                                                        -- `eigenvalues_of_V_plus` (1) の `Q̌_ε V^{(+)} = Λ̌_ε Q̌_ε` を右辺から左辺へ
+    _ = (F.Qproj T).mulVec ((VPlus M s2 K1 K2star).mulVec x) :=
+        (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`（`q → 1`）
+    _ = (F.Qproj T).mulVec (((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x) := by rw [hx]
+                                                        -- `V^{(+)}x = Λ̌_max x`
+    _ = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • (F.Qproj T).mulVec x :=
+        Matrix.mulVec_smul _ _ _
+                                                        -- `scalar_multiple_factors_out_of_right_factor`（`p → 1`）
+
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (3) 前半**:
 固有値 `Λ̌_max` の固有ベクトルは `im Q̌_{(1,…,1)}` に入る。
 
-必要十分版 `NecSuf.eq_proj_of_eigen` の特殊化（作用は `Matrix.mulVec`）。 -/
+人手の順に、左から `Q̌_{ε'}` を掛ける鎖（`checkBigLambda_smul_Qproj_mulVec_of_eigen`）→
+`(Λ̌_{ε'} − Λ̌_max)Q̌_{ε'}x = 0` → (2) により `Λ̌_{ε'} − Λ̌_max ≠ 0` で割って `Q̌_{ε'}x = 0` →
+`x = Σ_ε Q̌_ε x` の `ε ≠ (1,…,1)` の項を消す、で示す。
+必要十分版 `NecSuf.eq_proj_of_eigen` の特殊化は `eq_Qproj_univ_mulVec_of_eigen_of_necSuf`。 -/
 theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+    (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g)
+    {x : Conf M → ℂ}
+    (hx : (VPlus M s2 K1 K2star).mulVec x
+            = ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) • x) :
+    x = (F.Qproj Finset.univ).mulVec x := by
+  classical
+  have hzero : ∀ T : Finset (CheckIdx M), T ≠ Finset.univ → (F.Qproj T).mulVec x = 0 := by
+    intro T hT
+    have hdiff : (((checkBigLambda F g s2 T : ℝ) : ℂ)
+        - ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ)) • (F.Qproj T).mulVec x = 0 := by
+      rw [sub_smul, checkBigLambda_smul_Qproj_mulVec_of_eigen F g hK1 hK2 hs2 hVeq hx T, sub_self]
+    have hne : ((checkBigLambda F g s2 T : ℝ) : ℂ)
+        - ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) ≠ 0 :=
+      sub_ne_zero.2 fun hc =>
+        ne_of_lt (checkBigLambda_lt_max F g hgpos hs2 hT) (Complex.ofReal_injective hc)
+    exact (smul_eq_zero.1 hdiff).resolve_left hne
+  calc x = ∑ T : Finset (CheckIdx M), (F.Qproj T).mulVec x := (F.sum_Qproj_mulVec x).symm
+                                                        -- `check_joint_eigenspace_decomposition` (2) の `x = Σ_ε Q̌_ε x`
+    _ = (F.Qproj Finset.univ).mulVec x :=
+        Finset.sum_eq_single Finset.univ (fun T _ hT => hzero T hT)
+          (fun h => absurd (Finset.mem_univ _) h)
+                                                        -- `ε ≠ (1,…,1)` の項は `Q̌_ε x = 0`
+
+/-- `eq_Qproj_univ_mulVec_of_eigen` を必要十分版 `NecSuf.eq_proj_of_eigen` の特殊化として得る
+（作用は `Matrix.mulVec`）。 -/
+theorem eq_Qproj_univ_mulVec_of_eigen_of_necSuf (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     (hgpos : ∀ i, 0 < g i) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
     (hVeq : VPlus M s2 K1 K2star = c • F.Vprime g)

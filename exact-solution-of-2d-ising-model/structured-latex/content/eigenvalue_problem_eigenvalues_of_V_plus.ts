@@ -4049,12 +4049,16 @@ t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M_{\mathrm{col}}/2} > 0
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_{\epsilon'}\left(\check{Q}_{\epsilon'}x\right)
+&= \left(\check\Lambda_{\epsilon'}\check{Q}_{\epsilon'}\right)x
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to \check\Lambda_{\epsilon'},\ A \to \check{Q}_{\epsilon'},\ B \to x)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\check{Q}_{\epsilon'}V^{(+)}\right)x
-   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (1)}) \\
+   \quad \left(\because\ \blkref{eigenvalues_of_V_plus}\ (1)\ \text{の}\ \check{Q}_\epsilon V^{(+)} = \check\Lambda_\epsilon\check{Q}_\epsilon\ (\epsilon \to \epsilon')\ \text{を右辺から左辺へ}\right) \\
 &= \check{Q}_{\epsilon'}\left(V^{(+)}x\right)
-   \quad (\because \text{行列の積の結合法則}) \\
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{Q}_{\epsilon'},\ B \to V^{(+)},\ C \to x)\right) \\
+&= \check{Q}_{\epsilon'}\left(\check\Lambda_{\max}x\right)
+   \quad (\because V^{(+)}x = \check\Lambda_{\max}x) \\
 &= \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right)
-   \quad (\because V^{(+)}x = \check\Lambda_{\max}x)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to \check\Lambda_{\max},\ A \to \check{Q}_{\epsilon'},\ B \to x)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -4110,9 +4114,10 @@ x &= \sum_{\epsilon}\check{Q}_\epsilon x
       notes: [
         "この主張が docs/tasks/free-energy-roadmap/task-dependency-graph.md の章 C′ の出口である。Λ̌_max = Λ^{(1/2)}_M により remark_remaining_input_even_sector の「残っている入力」が埋まり、sector_decomposition_of_rayleigh_sup の c_+(M) を Λ^{(1/2)}_M と結びつける準備が整う（その接続そのものは次の作業）。",
         "単純性は「最大固有値だけ」の性質である。固有値全体が相異なるわけではない（eigenvalues_of_check_Vprime の statement 末尾）。",
-        "(3) の証明は固有方程式の両辺に左から Q̌_{ε'} を掛けるだけで済み、check_joint_eigenspace_decomposition (5) の直和性は使わない（以前は使っていた。docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 2・2' に対応。Lean 側は Ising2D.Abstract.eq_proj_of_eigen）。使うのは (2) の Σ_ε Q̌_ε = I と eigenvalues_of_V_plus (1) の左から掛ける形、および dim = 1 のための (4) だけである。",
+        "(3) の証明は固有方程式の両辺に左から Q̌_{ε'} を掛けるだけで済み、check_joint_eigenspace_decomposition (5) の直和性は使わない（以前は使っていた。docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 2・2' に対応。Lean 側は Ising2D.NecSuf.eq_proj_of_eigen）。使うのは (2) の Σ_ε Q̌_ε = I と eigenvalues_of_V_plus (1) の左から掛ける形、および dim = 1 のための (4) だけである。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（Λ̌_max = Λ^{(1/2)}_M の相対差 0.0、γ(θ~_μ) の全体最小 5.4e-1 > 0、最大固有値と 2 番目の固有値の相対差の最小 4.17e-1。対照として整数運動量の Λ^{(0)}_M とは一致しない）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-02: (3) の固有方程式に左から Q̌_{ε'} を掛ける鎖の名前だけの根拠「行列の積の結合法則」を mat_mult_associative（q → 1）の参照にし、(1) の行に隠れていた (Λ̌_{ε'}Q̌_{ε'})x = Λ̌_{ε'}(Q̌_{ε'}x) と固有方程式の行に隠れていた Q̌_{ε'}(Λ̌_max x) = Λ̌_max(Q̌_{ε'}x) を scalar_multiple_factors_out_of_left_factor・scalar_multiple_factors_out_of_right_factor（p → 1）の行に分けた（5 行）。主張は変えていない。Lean の Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen は同じ 5 行の calc で、Ising2D.eq_Qproj_univ_mulVec_of_eigen はそれを使って人手の順に示す（必要十分版の特殊化は eq_Qproj_univ_mulVec_of_eigen_of_necSuf）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_26。",
       ],
     },
   },

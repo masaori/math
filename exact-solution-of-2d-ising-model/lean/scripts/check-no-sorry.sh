@@ -1663,7 +1663,9 @@ targets=(
   Ising2D.tagPoint_half_eq_thetaTilde
   Ising2D.checkBigLambda_univ_eq_LambdaM
   Ising2D.checkBigLambda_lt_max_of_gammaFn
+  Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen
   Ising2D.eq_Qproj_univ_mulVec_of_eigen
+  Ising2D.eq_Qproj_univ_mulVec_of_eigen_of_necSuf
   Ising2D.finrank_range_Qproj_univ
   Ising2D.star_checkQ
   Ising2D.star_two_mul_sqrtM

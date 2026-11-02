@@ -16,21 +16,20 @@
 章 009 が `γ(θ_μ) ≥ 0` しか持てず単純性を言えなかったのは、
 まさにこの狭義性が無かったからである。
 
-**(3) 固有空間が 1 次元であること。** 人手証明は
-「`x = ∑_ε Q̌_ε x` と (5) の直和性から各項が `0`」という筋で書いているが、
-形式化してみると**直和分解 (5) は要らない**。効いているのは
+**(3) 固有空間が 1 次元であること。** 人手証明は固有方程式に左から `Q̌_{ε'}` を掛けて
+`Q̌_{ε'}x = 0`（`ε' ≠ (1,…,1)`）を出し、`x = ∑_ε Q̌_ε x` の項を消す筋で、
+**直和分解 (5) は使わない**。効いているのは
 
-1. 台が環であり、その環が加群へ作用すること（作用の 4 法則だけ）、
+1. 台が環であり、その環が加群へ作用すること（作用の 5 法則だけ）、
 2. `∑_ε Q_ε = 1`（単位の分解）、
-3. `Q_ε V = Λ_ε Q_ε`（**左からの**固有関係。人手証明は `V Q_ε = Λ_ε Q_ε` を
-   書いているが、`V` と `Q_ε` が可換なので同値）、
+3. `Q_ε V = Λ_ε Q_ε`（**左からの**固有関係。人手 `eigenvalues_of_V_plus` (1) の `Q̌_ε V^{(+)} = Λ̌_ε Q̌_ε`）、
 4. `Λ_ε ≠ Λ_{ε_0}`（`ε ≠ ε_0`）、
 
 の 4 つだけである（`eq_proj_of_eigen`）。射影であること（`Q^2 = Q`）も、
 `Q_ε Q_{ε'} = 0` も、有限次元性も、複素数体であることすら使っていない
 （スカラーは可除環ならよい。ここでは具体版に合わせて ℂ で述べる）。
 
-作用を `Module` インスタンスではなく明示の 4 法則
+作用を `Module` インスタンスではなく明示の 5 法則
 （`hmul`, `hone`, `hsmul`, `hlin`, `hsum`）で受け取っているのは、
 具体版が **行列の `mulVec` による作用**（`ℂ^{2^M}` への作用）を使うためである。
 同じ補題は `act = (· * ·)`（環の自分自身への作用）にも特殊化できる。
@@ -121,10 +120,22 @@ theorem eq_proj_of_eigen
     x = act (Q i₀) x := by
   have hzero : ∀ i, i ≠ i₀ → act (Q i) x = 0 := by
     intro i hi
-    have h1 : act (Q i * V) x = lam i • act (Q i) x := by rw [hQV i, hsmul]
-    have h2 : act (Q i * V) x = lam i₀ • act (Q i) x := by rw [hmul, hx, hlin]
+    -- 具体版 `Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen` の 5 行の鎖と同じ段
+    -- （人手 `max_eigenvalue_of_V_plus_simple` (3) の左から `Q̌_{ε'}` を掛ける鎖）
+    have hchain : lam i • act (Q i) x = lam i₀ • act (Q i) x :=
+      calc lam i • act (Q i) x
+          = act (lam i • Q i) x := (hsmul _ _ _).symm
+                                                        -- 左の因子のスカラー倍の外出しを右辺から左辺へ
+        _ = act (Q i * V) x := by rw [hQV i]
+                                                        -- `Q_ε V = Λ_ε Q_ε` を右辺から左辺へ
+        _ = act (Q i) (act V x) := hmul _ _ _
+                                                        -- 積の作用は作用の合成（結合律）
+        _ = act (Q i) (lam i₀ • x) := by rw [hx]
+                                                        -- 固有方程式
+        _ = lam i₀ • act (Q i) x := hlin _ _ _
+                                                        -- 右の因子のスカラー倍の外出し
     have h3 : (lam i - lam i₀) • act (Q i) x = 0 := by
-      rw [sub_smul, ← h1, ← h2, sub_self]
+      rw [sub_smul, hchain, sub_self]
     rcases smul_eq_zero.1 h3 with h | h
     · exact absurd (sub_eq_zero.1 h) (hne i hi)
     · exact h
