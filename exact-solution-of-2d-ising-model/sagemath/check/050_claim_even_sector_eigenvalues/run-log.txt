@@ -120,7 +120,7 @@ PASS sign_flip_conjugation Step 3 の H_1^{(+)} の鎖と項の鎖: 306 段
 PASS iH_is_real_symmetric Step 1・Step 2 の H_2・S_2・S_1^{(+)} の鎖: M = 2, 3, 4, 5
 
 # 実行コマンド: sage check_23_check_number_operator_associativity_chains.sage
-PASS check_number_operator_idempotent (3)・check_number_operators_commute Step 2・Step 3 の鎖: 721 段、否定コントロール 6 行
+PASS check_number_operator_idempotent (3)・check_number_operators_commute Step 2・Step 3 の鎖: 781 段、否定コントロール 6 行
 
 # 実行コマンド: sage check_24_joint_eigenspace_distributivity_chains.sage
 PASS check_joint_eigenspace_decomposition Step 0・Step 3 の分配と単位行列の鎖: 217 段、否定コントロール 3 行
@@ -133,3 +133,6 @@ PASS max_eigenvalue_of_V_plus_simple (3) の左から Q̌_{ε'} を掛ける鎖:
 
 # 実行コマンド: sage check_27_V_plus_inverse_real_inclusion_chains.sage
 PASS V_plus_is_invertible Step 2・Step 3 の実数の係数の包含の行: 168 段、否定コントロール 12 行
+
+# 実行コマンド: sage check_28_check_number_operator_idempotent_anticommutator_chains.sage
+PASS check_number_operator_idempotent (1)・(2) の反交換子の鎖: 95 段、否定コントロール 3 行

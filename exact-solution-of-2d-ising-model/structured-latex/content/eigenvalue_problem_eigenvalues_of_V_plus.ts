@@ -1494,98 +1494,109 @@ U S_2 U^{-1}
       ]),
       list([
         [
-          math(String.raw`\text{(1)}\quad \left(\check\psi_\mu^\dagger\right)^2 = 0,
-\qquad \left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2 = 0`),
+          math(String.raw`\text{(1)}\quad \check\psi_\mu^\dagger\check\psi_\mu^\dagger = O,
+\qquad \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu} = O`),
         ],
         [
           math(String.raw`\text{(2)}\quad \check\psi_{M_{\mathrm{col}}+1-\mu}\,\check\psi_\mu^\dagger = I - \check{n}_\mu`),
         ],
         [math(String.raw`\text{(3)}\quad \check{n}_\mu^2 = \check{n}_\mu`)],
       ]),
+      paragraph([
+        math(String.raw`O, I \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " は零行列（",
+        ref("def_zero_matrix"),
+        "）と単位行列（",
+        ref("def_identity_matrix"),
+        "）、",
+        math(String.raw`\check{n}_\mu^2`),
+        " は ",
+        ref("def_exp"),
+        " (1) の冪である。",
+      ]),
     ],
     proof: [
       paragraph([
-        "(1) 反交換関係の第 1 式 ",
-        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger]_+ = 0`),
-        " において ",
-        math(String.raw`\nu = \mu`),
-        " と取ると、反交換子の定義 ",
-        math(String.raw`[X,W]_+ = XW + WX`),
-        " より",
+        "(1) ",
+        ref("anticommutator_of_check_psi"),
+        " の第 1 式で ",
+        math(String.raw`\nu \to \mu`),
+        " と取ると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-0
+\check\psi_\mu^\dagger\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_\mu^\dagger
 &= \left[\check\psi_\mu^\dagger, \check\psi_\mu^\dagger\right]_+
-   \quad (\because \text{$\check\psi$ の反交換関係の第 1 式で } \nu = \mu\text{。}\blkref{anticommutator_of_check_psi}) \\
-&= \check\psi_\mu^\dagger\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_\mu^\dagger
-   \quad (\because \text{反交換子の定義}) \\
-&= 2\left(\check\psi_\mu^\dagger\right)^2
-   \quad (\because \text{同じ項の和})
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}},\ X, W \to \check\psi_\mu^\dagger)\ \text{を右辺から左辺へ}\right) \\
+&= O
+   \quad \left(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 1 式}\ (\nu \to \mu)\right)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`2 \neq 0`), " なので、直前の鎖の両辺を 2 で割ると",
+        "なので、",
+        ref("matrix_sum_with_itself_zero_implies_zero"),
+        " を ",
+        math(String.raw`m, p \to 2^{M_{\mathrm{col}}},\ X \to \check\psi_\mu^\dagger\check\psi_\mu^\dagger`),
+        " で引いて ",
+        math(String.raw`\check\psi_\mu^\dagger\check\psi_\mu^\dagger = O`),
+        " を得る。",
+        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        " (2)）なので、第 3 式で両方の添字を ",
+        math(String.raw`M_{\mathrm{col}}+1-\mu`),
+        " と取ると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\check\psi_\mu^\dagger\right)^2
-&= \frac12\,2\left(\check\psi_\mu^\dagger\right)^2
-   \quad (\because \mathbb C\text{ の四則}) \\
-&= \frac12\,0
-   \quad (\because \text{直前の鎖}) \\
-&= 0
-   \quad (\because \mathbb C\text{ の四則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "第 3 式 ",
-        math(String.raw`[\check\psi_\mu, \check\psi_\nu]_+ = 0`),
-        " で両方の添字を ", math(String.raw`M_{\mathrm{col}}+1-\mu`), " と取る。上と同じ三段を省略せず書くと",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-0
-&= \left[\check\psi_{M_{\mathrm{col}}+1-\mu},\check\psi_{M_{\mathrm{col}}+1-\mu}\right]_+
-   \quad (\because \text{$M_{\mathrm{col}}+1-\mu\in\check{\mathcal M}$ は添字集合の対称性。}\blkref{def_check_index_set}\text{。$\check\psi$ の反交換関係の第 3 式。}\blkref{anticommutator_of_check_psi}) \\
-&= \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}
+\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}
   +\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{反交換子の定義}) \\
-&= 2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
-   \quad (\because \text{同じ項の和})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
-&= \frac12\,2\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\right)^2
-   \quad (\because \mathbb C\text{ の四則}) \\
-&= \frac12\,0
-   \quad (\because \text{直前の鎖}) \\
-&= 0
-   \quad (\because \mathbb C\text{ の四則})
+&= \left[\check\psi_{M_{\mathrm{col}}+1-\mu},\check\psi_{M_{\mathrm{col}}+1-\mu}\right]_+
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}},\ X, W \to \check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
+&= O
+   \quad \left(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 3 式}\ (\mu, \nu \to M_{\mathrm{col}}+1-\mu)\right)
 \end{aligned}`,
       ),
       paragraph([
-        "(2) 反交換関係の第 2 式 ",
-        math(String.raw`[\check\psi_\mu^\dagger, \check\psi_\nu]_+ = \delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
-        " において ",
-        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
-        " と取る。このとき ",
-        math(String.raw`\delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\mu} = 1`),
-        " なので（",
+        "なので、",
+        ref("matrix_sum_with_itself_zero_implies_zero"),
+        " を ",
+        math(String.raw`m, p \to 2^{M_{\mathrm{col}}},\ X \to \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}`),
+        " で引いて ",
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu} = O`),
+        " を得る。",
+      ]),
+      paragraph([
+        "(2) ",
+        ref("anticommutator_of_check_psi"),
+        " の第 2 式で ",
+        math(String.raw`\nu \to M_{\mathrm{col}}+1-\mu`),
+        " と取ると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
+ +\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger
+&= \left[\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\mu}\right]_+
+   \quad \left(\because\ \blkref{def_matrix_anticommutator}\ (n \to 2^{M_{\mathrm{col}}},\ X \to \check\psi_\mu^\dagger,\ W \to \check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
+&= \delta_{M_{\mathrm{col}}+1-\mu,\,M_{\mathrm{col}}+1-\mu}\,I
+   \quad \left(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 2 式}\ (\nu \to M_{\mathrm{col}}+1-\mu)\right) \\
+&= 1_{\mathbb{C}}\,I
+   \quad \left(\because\ \blkref{def_kronecker_delta}\ (n \to M_{\mathrm{col}},\ i, j \to M_{\mathrm{col}}+1-\mu)\ \text{の}\ i = j\ \text{の場合}\right) \\
+&= I
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I)\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である（",
         math(String.raw`\check{\mathcal{M}}`),
-        " へ絞ったので合同式の計算が要らない）、",
+        " へ絞ったので合同式の計算が要らない）。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger
-&=\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
- +\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger\right)
- -\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \mathbb C\text{ の四則}) \\
 &= I-\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{$\check\psi$ の反交換関係の第 2 式。}\blkref{anticommutator_of_check_psi}) \\
+   \quad \left(\because\ \blkref{matrix_summand_from_sum_equation}\ (m,p \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu},\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_\mu^\dagger,\ C \to I)\ \text{と直前の鎖}\right) \\
 &= I-\check n_\mu
    \quad (\because \check{n}_\mu\ \text{の定義。}\blkref{def_check_number_operator})
 \end{aligned}`,
@@ -1594,6 +1605,14 @@ U S_2 U^{-1}
       displayMath(
         String.raw`\begin{aligned}
 \check{n}_\mu^2
+&= \check{n}_\mu^1\,\check{n}_\mu
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{n}_\mu)\right) \\
+&= \left(\check{n}_\mu^0\,\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{n}_\mu)\right) \\
+&= \left(I\,\check{n}_\mu\right)\check{n}_\mu
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu\,\check{n}_\mu
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
 &= \left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad (\because \check{n}_\mu\ \text{の定義。}\blkref{def_check_number_operator}) \\
 &= \check\psi_\mu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\right)\right)
@@ -1624,10 +1643,14 @@ U S_2 U^{-1}
    \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu},\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu})\right) \\
 &= \check{n}_\mu - \left(\check\psi_\mu^\dagger\check\psi_\mu^\dagger\right)\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
    \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p,q \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_\mu^\dagger,\ B \to \check\psi_\mu^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu})\ \text{を右辺から左辺へ}\right) \\
-&= \check{n}_\mu - 0\cdot 0
-   \quad (\because \text{(1)。(1) の左辺の 2 乗は、同じ行列どうしの積 } \check\psi_\mu^\dagger\check\psi_\mu^\dagger,\ \check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\ \text{のこと}) \\
+&= \check{n}_\mu - O\left(\check\psi_{M_{\mathrm{col}}+1-\mu}\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
+   \quad (\because \text{(1) の第 1 式}) \\
+&= \check{n}_\mu - O\,O
+   \quad (\because \text{(1) の第 2 式}) \\
+&= \check{n}_\mu - O
+   \quad \left(\because\ \blkref{zero_matrix_is_left_zero_of_mat_mult}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ B \to O)\right) \\
 &= \check{n}_\mu
-   \quad (\because \text{零元との積と減法})
+   \quad \left(\because\ \blkref{matrix_minus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to \check{n}_\mu)\right)
 \end{aligned}`,
       ),
     ],
@@ -1637,6 +1660,7 @@ U S_2 U^{-1}
         "009 章の number_operator_idempotent の半整数運動量版。009 章では ψ_{-μ} が定義域に入ること（γ_2(θ_{-μ}) ≠ 0）を確かめる必要があったが、anticommutator_of_check_psi が μ, ν ∈ Z 全体について成り立つのでその手当ては要らない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（残差 ≤ 1.6e-15）。",
         "2026-11-02: (3) の鎖の「行列の積の結合法則」「結合法則」を mat_mult_associative の 1 行 1 回の参照にし（各 2 行）、括弧を全て書いた。「行列の積の分配法則」の行を matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_left_factor・identity_matrix_is_left_unit_of_mat_mult・negation_factors_out_of_left_factor・mat_mult_distributes_over_sum_in_right_factor・negation_factors_out_of_right_factor の 7 行にした。主張は変えていない。Lean の Ising2D.CheckFermiSetup.nOp_mul_self は同じ 17 行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_23。",
+        "2026-11-02: (1)(2) の名前だけの根拠（反交換子の定義、同じ項の和、行列に当てた ℂ の四則）を、新しい def_matrix_anticommutator・matrix_sum_with_itself_zero_implies_zero・matrix_summand_from_sum_equation と def_kronecker_delta・scalar_multiple_by_one の参照にした。(1) の主張を 2 乗の記法から同じ行列どうしの積 = O の形に書き、(3) の鎖の先頭に def_exp (1) の冪を積へ運ぶ 4 行を足し、末尾の「(1)」と「零元との積と減法」を (1) の第 1 式・第 2 式・zero_matrix_is_left_zero_of_mat_mult・matrix_minus_zero_matrix の 4 行にした。主張の中身は変えていない。Lean は Ising2D.CheckFermiSetup.cre_sq・ann_sq・ann_mul_cre・nOp_sq・nOp_mul_self が同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_28。",
       ],
     },
   },

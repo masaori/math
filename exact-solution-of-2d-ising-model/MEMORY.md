@@ -5,6 +5,8 @@
 2026-11-02: 全証明の SageMath 検算として、`half_integer_phase_antiperiodicity`・`half_integer_checkZ_periodicity`・`half_integer_checkY_periodicity` に検算を付けた。係数の一致を新しい主張 `half_integer_phase_periodicity` に、負角の Euler 表示を新しい主張 `exp_of_negative_i_real_as_cos_minus_i_sin` に切り出し、5 個に同名の検算を付けた（未検算 77 件）。人手証明は一行一操作の鎖と像の記号に直し、全実数上の cos・sin（未整備）に依ることを主張に書いた。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」。
 
 2026-11-02: 行列から線型写像への対応の証明で、Kronecker のデルタの積の等号に行末根拠を付けた。数学的内容は変えていない。
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十七個目として、`check_number_operator_idempotent` の名前だけの根拠（反交換子の定義・同じ項の和・行列に当てた ℂ の四則・零元との積）を、新しい定義 `def_matrix_anticommutator` と主張 `zero_matrix_is_left_zero_of_mat_mult`・`matrix_sum_with_itself_zero_implies_zero`・`matrix_summand_from_sum_equation`（`002_linear_space_general.ts`）の参照にした。(3) の鎖の先頭に冪を積へ運ぶ 4 行を足した。Lean は `cre_sq`・`ann_sq`・`ann_mul_cre`・`nOp_sq`・`nOp_mul_self` を人手と 1 対 1 の calc にし、新しい主張の具体版・必要十分版・`TensorPow M` の系を置いた。SageMath は新しい 3 ディレクトリと `050` の `check_23`・`check_28`。次は状態台帳の「次の一歩」の `check_number_operators_commute` Step 1 の「すなわち `XW = -(WX)`」。
+
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十六個目として、`V_plus_is_invertible` Step 2 の `a := (2s_2)^{M_col/2}` を `ℝ_{>0}` の元として宣言し、スカラー倍の係数を包含 `a_ℂ`・`(a^{-1})_ℂ` で書いた（`aa^{-1} = 1_ℂ` は `real_inclusion_preserves_product`・`ℝ` の `aa^{-1} = 1`・略記 `1_ℂ = (1)_ℂ` の 3 行）。`V_plus_is_positive_definite` の係数も `((2s_2)^{M_col/2})_ℂ` にした。Lean の `VPlus_mul_VPlusInv`・`VPlusInv_mul_VPlus` は `a : ℝ` の同じ行の calc、SageMath は `050` の `check_27`。次は状態台帳の「次の一歩」の「(k) の後に扱う」残り（`check_number_operator_idempotent`・`check_number_operators_commute` から）。
 

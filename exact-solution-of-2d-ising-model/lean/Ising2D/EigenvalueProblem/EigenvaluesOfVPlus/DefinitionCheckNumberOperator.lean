@@ -8,10 +8,10 @@
 
 **必要十分版**は `Ising2D/NecSuf/NumberOperator.lean`（章 009 と共通）と
 `Ising2D/NecSuf/PairedFermion.lean`（対をなす添字の対合）。
-`check_number_operator_idempotent` (3) の `nOp_mul_self` と `check_number_operators_commute` の
+`check_number_operator_idempotent` の `cre_add_self_eq_zero`・`cre_sq`・`ann_add_self_eq_zero`・`ann_sq`（(1)）、
+`cre_ann_add_ann_cre_eq_one`・`ann_mul_cre`（(2)）、`nOp_sq`・`nOp_mul_self`（(3)）と、`check_number_operators_commute` の
 `mul_nOp_of_anticommute`・`commute_cre_nOp`・`commute_ann_nOp`・`nOp_mul_nOp_of_ne` は、人手の鎖と 1 対 1 の具体版である。
 同じ主張を必要十分版の特殊化として得たものを `*_of_necSuf` の名前で並べて置く。
-`check_number_operator_idempotent` (1)(2) は必要十分版の特殊化だけで、人手の鎖と 1 対 1 の具体版はまだ無い。
 
 ## 章 009 との関係（本章の要点）
 
@@ -48,6 +48,9 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquationsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionMatrixAnticommutator
 
 namespace Ising2D
 
@@ -121,16 +124,11 @@ theorem conjIdx_injective (M : ℕ) : Function.Injective (conjIdx M) :=
 
 /-! ## `Mat(2^M, ℂ)` に 2-捩れが無いこと（原文 `check_number_operator_idempotent` (1) で使う） -/
 
-/-- **原文 `check_number_operator_idempotent` (1) の「`2 ≠ 0` なので両辺を 2 で割る」**:
-`Mat(2^M, ℂ)` の `x` について `x + x = 0` なら `x = 0`。
-人手の鎖 `x = ½·2x = ½·0 = 0` のとおりに書く（`x + x = 2x` は人手の直前の鎖の「同じ項の和」）。
+/-- `Mat(2^M, ℂ)` の `x` について `x + x = 0` なら `x = 0`。人手 `matrix_sum_with_itself_zero_implies_zero` の
+`TensorPow M` の系 `eq_zero_of_add_self_eq_zero_tensorPow` の別名である。
 必要十分版 `NecSuf.sq_eq_zero_of_acomm_self`・`NecSuf.num_mul_num` が、環の公理と反交換関係のほかに仮定する唯一の性質である。 -/
 theorem tensorPow_two_torsion_free {M : ℕ} (x : TensorPow M) (h : x + x = 0) : x = 0 :=
-  calc x = (1 / 2 : ℂ) • ((2 : ℂ) • x) := by
-          rw [smul_smul]; norm_num
-    _ = (1 / 2 : ℂ) • (x + x) := by rw [two_smul]
-    _ = (1 / 2 : ℂ) • (0 : TensorPow M) := by rw [h]
-    _ = 0 := smul_zero _
+  eq_zero_of_add_self_eq_zero_tensorPow x h
 
 /-! ## 原文 `def_check_fermi` / `anticommutator_of_check_psi` の受け取り -/
 
@@ -216,20 +214,60 @@ theorem acomm_cre_ann_self (i : CheckIdx M) : F.cre i * F.ann i + F.ann i * F.cr
 
 /-! ## 原文 `check_number_operator_idempotent` -/
 
-/-- **原文 `check_number_operator_idempotent` (1)**: `(ψ̌_μ^†)^2 = 0`。 -/
+/-- **原文 `check_number_operator_idempotent` (1)** の第 1 の鎖: `ψ̌_μ^†ψ̌_μ^† + ψ̌_μ^†ψ̌_μ^† = [ψ̌_μ^†, ψ̌_μ^†]_+ = O`。 -/
+theorem cre_add_self_eq_zero (i : CheckIdx M) : F.cre i * F.cre i + F.cre i * F.cre i = 0 :=
+  calc F.cre i * F.cre i + F.cre i * F.cre i
+      = matAnticomm (F.cre i) (F.cre i) := rfl     -- `def_matrix_anticommutator` を右辺から左辺へ
+    _ = 0 := F.acomm_cre_cre i i                   -- `anticommutator_of_check_psi` の第 1 式（`ν → μ`）
+
+/-- **原文 `check_number_operator_idempotent` (1)**: `ψ̌_μ^†ψ̌_μ^† = O`（`matrix_sum_with_itself_zero_implies_zero`）。 -/
 theorem cre_sq (i : CheckIdx M) : F.cre i * F.cre i = 0 :=
+  eq_zero_of_add_self_eq_zero_tensorPow _ (F.cre_add_self_eq_zero i)
+
+/-- **原文 `check_number_operator_idempotent` (1)** の第 2 の鎖:
+`ψ̌_{M+1-μ}ψ̌_{M+1-μ} + ψ̌_{M+1-μ}ψ̌_{M+1-μ} = [ψ̌_{M+1-μ}, ψ̌_{M+1-μ}]_+ = O`。 -/
+theorem ann_add_self_eq_zero (i : CheckIdx M) : F.ann i * F.ann i + F.ann i * F.ann i = 0 :=
+  calc F.ann i * F.ann i + F.ann i * F.ann i
+      = matAnticomm (F.ann i) (F.ann i) := rfl     -- `def_matrix_anticommutator` を右辺から左辺へ
+    _ = 0 := F.acomm_ann_ann i i                   -- `anticommutator_of_check_psi` の第 3 式（`μ, ν → M+1-μ`）
+
+/-- **原文 `check_number_operator_idempotent` (1)**: `ψ̌_{M+1-μ}ψ̌_{M+1-μ} = O`（`matrix_sum_with_itself_zero_implies_zero`）。 -/
+theorem ann_sq (i : CheckIdx M) : F.ann i * F.ann i = 0 :=
+  eq_zero_of_add_self_eq_zero_tensorPow _ (F.ann_add_self_eq_zero i)
+
+/-- **原文 `check_number_operator_idempotent` (2)** の第 1 の鎖:
+`ψ̌_μ^†ψ̌_{M+1-μ} + ψ̌_{M+1-μ}ψ̌_μ^† = [ψ̌_μ^†, ψ̌_{M+1-μ}]_+ = δ I = 1_ℂ I = I`。
+`CheckFermiSetup` は反交換関係の右辺 `δ I` を `if … then I else O` の形で受け取っている（`acomm_cre_ann` は対の添字を
+付け替えた後の形）。このため人手の `δ_{M+1-μ, M+1-μ} = 1_ℂ`（`def_kronecker_delta`）と `1_ℂ I = I`（`scalar_multiple_by_one`）の
+2 行は、`if` の条件が成り立つことによる 1 段（`if_pos rfl`）になる。 -/
+theorem cre_ann_add_ann_cre_eq_one (i : CheckIdx M) : F.cre i * F.ann i + F.ann i * F.cre i = 1 :=
+  calc F.cre i * F.ann i + F.ann i * F.cre i
+      = matAnticomm (F.cre i) (F.ann i) := rfl              -- `def_matrix_anticommutator` を右辺から左辺へ
+    _ = (if i = i then (1 : TensorPow M) else 0) := F.acomm_cre_ann i i
+                                                            -- `anticommutator_of_check_psi` の第 2 式（`ν → M+1-μ`）
+    _ = 1 := if_pos rfl                                     -- `def_kronecker_delta` の `i = j` の場合と `scalar_multiple_by_one`
+
+/-- **原文 `check_number_operator_idempotent` (2)**: `ψ̌_{M+1-μ} ψ̌_μ^† = I - ň_μ`。人手の 2 行の鎖と 1 対 1。 -/
+theorem ann_mul_cre (i : CheckIdx M) : F.ann i * F.cre i = 1 - F.nOp i :=
+  calc F.ann i * F.cre i
+      = 1 - F.cre i * F.ann i := eq_sub_of_add_eq_tensorPow _ _ _ (F.cre_ann_add_ann_cre_eq_one i)
+                                                            -- `matrix_summand_from_sum_equation` と直前の鎖
+    _ = 1 - F.nOp i := rfl                                  -- `ň_μ` の定義（`def_check_number_operator`）
+
+/-- `cre_sq` を必要十分版 `NecSuf.sq_eq_zero_of_acomm_self` の特殊化として得る。 -/
+theorem cre_sq_of_necSuf (i : CheckIdx M) : F.cre i * F.cre i = 0 :=
   NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_cre_cre i i)
 
-/-- **原文 `check_number_operator_idempotent` (1)**: `(ψ̌_{M+1-μ})^2 = 0`。 -/
-theorem ann_sq (i : CheckIdx M) : F.ann i * F.ann i = 0 :=
+/-- `ann_sq` を必要十分版 `NecSuf.sq_eq_zero_of_acomm_self` の特殊化として得る。 -/
+theorem ann_sq_of_necSuf (i : CheckIdx M) : F.ann i * F.ann i = 0 :=
   NecSuf.sq_eq_zero_of_acomm_self tensorPow_two_torsion_free (F.acomm_ann_ann i i)
 
-/-- **原文 `check_number_operator_idempotent` (2)**: `ψ̌_{M+1-μ} ψ̌_μ^† = I - ň_μ`。 -/
-theorem ann_mul_cre (i : CheckIdx M) : F.ann i * F.cre i = 1 - F.nOp i :=
+/-- `ann_mul_cre` を必要十分版 `NecSuf.ann_mul_cre` の特殊化として得る。 -/
+theorem ann_mul_cre_of_necSuf (i : CheckIdx M) : F.ann i * F.cre i = 1 - F.nOp i :=
   NecSuf.ann_mul_cre F.cre F.ann i (F.acomm_cre_ann_self i)
 
-/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`。人手の 17 行の鎖と 1 対 1 に書く。
-最後の 2 行（`ň_μ - 0·0`、「零元との積と減法」）は人手でも名前だけの根拠で、Lean は `mul_zero`・`sub_zero` で閉じる。 -/
+/-- **原文 `check_number_operator_idempotent` (3)** の鎖のうち、`ň_μň_μ` から `ň_μ` までの 19 行と 1 対 1 に書く。
+冪を積へ運ぶ先頭の 4 行は `nOp_sq`。 -/
 theorem nOp_mul_self (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
   calc F.nOp i * F.nOp i
       = (F.cre i * F.ann i) * (F.cre i * F.ann i) := rfl
@@ -265,9 +303,24 @@ theorem nOp_mul_self (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=
     _ = F.nOp i - (F.cre i * F.cre i) * (F.ann i * F.ann i) := by
           rw [← Matrix.mul_assoc (F.cre i) (F.cre i) (F.ann i * F.ann i)]
                                                         -- `mat_mult_associative` を右辺から左辺へ
-    _ = F.nOp i - 0 * 0 := by rw [F.cre_sq i, F.ann_sq i]
-                                                        -- (1)
-    _ = F.nOp i := by rw [mul_zero, sub_zero]           -- 零元との積と減法（人手でも名前だけの根拠）
+    _ = F.nOp i - 0 * (F.ann i * F.ann i) := by rw [F.cre_sq i]
+                                                        -- (1) の第 1 式
+    _ = F.nOp i - 0 * 0 := by rw [F.ann_sq i]           -- (1) の第 2 式
+    _ = F.nOp i - 0 := by rw [zero_matrix_mul_tensorPow]
+                                                        -- `zero_matrix_is_left_zero_of_mat_mult`（`B → O`）
+    _ = F.nOp i := matrix_sub_zero_matrix_tensorPow _   -- `matrix_minus_zero_matrix`
+
+/-- **原文 `check_number_operator_idempotent` (3)**: `ň_μ^2 = ň_μ`。人手の鎖の先頭の 4 行（`def_exp` (1) の冪を積へ運ぶ）と、
+続く `nOp_mul_self` の 19 行。 -/
+theorem nOp_sq (i : CheckIdx M) : F.nOp i ^ 2 = F.nOp i :=
+  calc F.nOp i ^ 2
+      = F.nOp i ^ 1 * F.nOp i := pow_succ _ _           -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 1`）
+    _ = (F.nOp i ^ 0 * F.nOp i) * F.nOp i := by rw [pow_succ (F.nOp i) 0]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 0`）
+    _ = (1 * F.nOp i) * F.nOp i := by rw [pow_zero]     -- `def_exp` (1) の `A^0 := I`
+    _ = F.nOp i * F.nOp i := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = F.nOp i := F.nOp_mul_self i                     -- 続く 19 行（`nOp_mul_self`）
 
 /-- `nOp_mul_self` を必要十分版 `NecSuf.num_mul_num` の特殊化として得る。 -/
 theorem nOp_mul_self_of_necSuf (i : CheckIdx M) : F.nOp i * F.nOp i = F.nOp i :=

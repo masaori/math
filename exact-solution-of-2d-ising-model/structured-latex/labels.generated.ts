@@ -184,6 +184,7 @@ export const ALL_LABELS = [
   "def_kronecker",
   "def_kronecker_delta",
   "def_lattice_size",
+  "def_matrix_anticommutator",
   "def_matrix_difference",
   "def_matrix_negation",
   "def_matrix_norm",
@@ -343,6 +344,8 @@ export const ALL_LABELS = [
   "matrix_norm_triangle_inequality",
   "matrix_norm_vector_bound",
   "matrix_plus_zero_matrix",
+  "matrix_sum_with_itself_zero_implies_zero",
+  "matrix_summand_from_sum_equation",
   "max_eigenvalue_of_V_plus_simple",
   "max_eigenvector_in_even_sector",
   "max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus",
@@ -472,6 +475,7 @@ export const ALL_LABELS = [
   "trace_power_sandwich",
   "trace_power_upper_bound",
   "two_by_two_transfer_identity",
+  "zero_matrix_is_left_zero_of_mat_mult",
   "zero_matrix_plus_matrix",
 ] as const
 

@@ -1874,6 +1874,251 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_definition_matrix_anticommutator",
+    kind: "definition",
+    title: { text: "行列の反交換子" },
+    labels: ["def_matrix_anticommutator"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X, W \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について、反交換子 ",
+        math(String.raw`[X, W]_+ \in \mathrm{Mat}(n,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`[X, W]_+ := XW + WX`),
+      paragraph([
+        "で定める。積は ",
+        ref("mat_mult"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent の (1)(2) が「反交換子の定義」を定義のブロックを置かずに根拠にしていたので足した。Lean は Ising2D.matAnticomm（DefinitionMatrixAnticommutator.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_zero_matrix_is_left_zero_of_mat_mult",
+    kind: "claim",
+    title: { text: "零行列を左から掛けると零行列" },
+    labels: ["zero_matrix_is_left_zero_of_mat_mult"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。",
+        math(String.raw`O_{m,n} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`O_{m,p} \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`O_{m,n}\,B = O_{m,p}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(O_{m,n}\,B\bigr)_{ik}
+&= \sum_{j=1}^{n} \bigl(O_{m,n}\bigr)_{ij}\,B_{jk}
+&&\bigl(\because\ \blkref{mat_mult}\bigr)\\
+&= \sum_{j=1}^{n} 0_{\mathbb{C}}\,B_{jk}
+&&\bigl(\because\ \blkref{def_zero_matrix}\ \text{を各項へ}\bigr)\\
+&= \sum_{j=1}^{n} 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to B_{jk})\ \text{を各項へ}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{finite_sum_of_complex_zeros}\ (m \to n)\bigr)\\
+&= \bigl(O_{m,p}\bigr)_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (3) の末尾が「零元との積」を名前だけで根拠にしていたので足した。Lean は具体版 Ising2D.zero_matrix_mul（ClaimZeroMatrixProductAndSumEquations.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_sum_with_itself_zero_implies_zero",
+    kind: "claim",
+    title: { text: "自分自身との和が零行列なら零行列" },
+    labels: ["matrix_sum_with_itself_zero_implies_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " が ",
+        math(String.raw`X + X = O`),
+        " を満たすとする。和は ",
+        ref("def_matrix_sum"),
+        "、",
+        math(String.raw`O \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列である。このとき",
+      ]),
+      displayMath(String.raw`X = O`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`2_{\mathbb{C}} := \iota_{\mathbb{R}\to\mathbb{C}}(2)`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}} + 1_{\mathbb{C}}
+&= (1,0) + (1,0)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&= (1+1,\ 0+0)
+&&\bigl(\because\ \blkref{definition_of_cc}\ \text{の和}\bigr)\\
+&= (2,0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 2_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+2_{\mathbb{C}}
+&= (2,0)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)\\
+&\neq (0,0)
+&&(\because\ \text{第 1 成分が}\ 2 \neq 0\ (\mathbb{R}))\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって ",
+        math(String.raw`2_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
+        " なので、",
+        ref("complex_numbers_form_a_field"),
+        " の逆元の存在から ",
+        math(String.raw`2_{\mathbb{C}}^{-1} \in \mathbb{C}`),
+        " で ",
+        math(String.raw`2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}} = 1_{\mathbb{C}}`),
+        " となるものが取れる。両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+X_{ik}
+&= 1_{\mathbb{C}}\,X_{ik}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(2_{\mathbb{C}}^{-1}\,2_{\mathbb{C}}\bigr)\,X_{ik}
+&&\bigl(\because\ 2_{\mathbb{C}}^{-1}\ \text{の取り方}\bigr)\\
+&= 2_{\mathbb{C}}^{-1}\bigl(2_{\mathbb{C}}\,X_{ik}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= 2_{\mathbb{C}}^{-1}\bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})\,X_{ik}\bigr)
+&&(\because\ \text{上の鎖}\ 1_{\mathbb{C}} + 1_{\mathbb{C}} = 2_{\mathbb{C}}\ \text{を右辺から左辺へ})\\
+&= 2_{\mathbb{C}}^{-1}\bigl(1_{\mathbb{C}}\,X_{ik} + 1_{\mathbb{C}}\,X_{ik}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= 2_{\mathbb{C}}^{-1}\bigl(X_{ik} + X_{ik}\bigr)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元 }\blkref{complex_numbers_form_a_field}\ \text{を 2 か所へ}\bigr)\\
+&= 2_{\mathbb{C}}^{-1}\,(X + X)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= 2_{\mathbb{C}}^{-1}\,O_{ik}
+&&(\because\ \text{仮定}\ X + X = O)\\
+&= 2_{\mathbb{C}}^{-1}\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\ (z \to 2_{\mathbb{C}}^{-1})\bigr)\\
+&= O_{ik}
+&&\bigl(\because\ \blkref{def_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (1) が「同じ項の和」で X + X を 2X とし、行列に「ℂ の四則」を当てて ½ を掛けていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_zero_of_add_self_eq_zero（ClaimZeroMatrixProductAndSumEquations.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_matrix_summand_from_sum_equation",
+    kind: "claim",
+    title: { text: "和の等式から右の項を差で表す" },
+    labels: ["matrix_summand_from_sum_equation"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B, C \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        " が ",
+        math(String.raw`A + B = C`),
+        " を満たすとする。和は ",
+        ref("def_matrix_sum"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`B = C - A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,p,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+B_{ik}
+&= 0_{\mathbb{C}} + B_{ik}
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl((-A_{ik}) + A_{ik}\bigr) + B_{ik}
+&&\bigl(\because\ -A_{ik}\ \text{は}\ A_{ik}\ \text{の加法の逆元 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-A_{ik}) + \bigl(A_{ik} + B_{ik}\bigr)
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (-A_{ik}) + (A + B)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= (-A_{ik}) + C_{ik}
+&&(\because\ \text{仮定}\ A + B = C)\\
+&= C_{ik} + (-A_{ik})
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の交換律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= C_{ik} - A_{ik}
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&= (C - A)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent (2) が行列の等式に「ℂ の四則」を当てて ψ̌ψ̌^† = (ψ̌^†ψ̌ + ψ̌ψ̌^†) - ψ̌^†ψ̌ としていたので、成分の鎖で示すこの主張に置き換えた。Lean は具体版 Ising2D.matrix_eq_sub_of_add_eq（ClaimZeroMatrixProductAndSumEquations.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_product_of_anticommuting_matrices_commutes",
     kind: "claim",
     title: { text: "反可換な二つの行列の積は可換" },

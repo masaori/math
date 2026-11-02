@@ -1,5 +1,5 @@
 # 対象ラベル: check_number_operator_idempotent, check_number_operators_commute
-# check_number_operator_idempotent (3) の 17 行の鎖、check_number_operators_commute Step 2 の 10 行の鎖と
+# check_number_operator_idempotent (3) の 23 行の鎖（先頭 4 行は def_exp (1) の冪を積へ運ぶ）、check_number_operators_commute Step 2 の 10 行の鎖と
 # Step 3 の 7 行の鎖を、括弧どおりに一行ずつ厳密に確かめる（M = 2, 3, 4）。
 #   D_μ := ψ̌_μ^†、P_μ := ψ̌_{M+1-μ}、n_μ := D_μ P_μ（def_check_number_operator）。
 # 鎖が使う仮定は (1) D_μD_μ = O・P_μP_μ = O、(2) P_μD_μ = I - n_μ、Step 1 の AB = -(BA) だけなので、
@@ -30,7 +30,11 @@ def idempotent_chain(D, P, Id):
     n = D * P
     O = 0 * Id
     lines = [
-        ("n^2", n * n, False),
+        ("n^2", n ** 2, False),
+        ("n^1 n", (n ** 1) * n, False),                    # def_exp (1) の A^{m+1} := A^m A（m → 1）
+        ("(n^0 n) n", ((n ** 0) * n) * n, False),          # def_exp (1) の A^{m+1} := A^m A（m → 0）
+        ("(I n) n", (Id * n) * n, False),                  # def_exp (1) の A^0 := I
+        ("n n", n * n, False),                             # identity_matrix_is_left_unit_of_mat_mult
         ("(DP)(DP)", (D * P) * (D * P), False),
         ("D(P(DP))", D * (P * (D * P)), False),
         ("D((PD)P)", D * ((P * D) * P), False),
@@ -46,8 +50,10 @@ def idempotent_chain(D, P, Id):
         ("n-D((DP)P)", sub(n, D * ((D * P) * P)), False),
         ("n-D(D(PP))", sub(n, D * (D * (P * P))), False),
         ("n-(DD)(PP)", sub(n, (D * D) * (P * P)), False),
-        ("n-0·0", sub(n, O * O), True),                    # (1)
-        ("n", n, False),
+        ("n-O(PP)", sub(n, O * (P * P)), True),            # (1) の第 1 式
+        ("n-O O", sub(n, O * O), False),                   # (1) の第 2 式（左因子が O なので仮定なしでも両辺とも O になり、否定コントロールの対象にしない）
+        ("n-O", sub(n, O), False),                         # zero_matrix_is_left_zero_of_mat_mult（B → O）
+        ("n", n, False),                                   # matrix_minus_zero_matrix
     ]
     return lines
 

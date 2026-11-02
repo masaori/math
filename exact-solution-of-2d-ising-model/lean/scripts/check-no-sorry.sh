@@ -1154,6 +1154,21 @@ targets=(
   Ising2D.sub_eq_add_neg_tensorPow
   Ising2D.matrix_sub_zero_matrix_tensorPow
   Ising2D.neg_sub_neg_tensorPow
+  Ising2D.matAnticomm_def
+  Ising2D.zero_matrix_mul
+  Ising2D.one_add_one_eq_complexTwo
+  "Ising2D.NecSuf.zero_mul_matrix'"
+  "Ising2D.NecSuf.eq_zero_of_add_self_eq_zero_matrix'"
+  "Ising2D.NecSuf.eq_sub_of_add_eq_matrix'"
+  Ising2D.complexTwo_ne_zero
+  Ising2D.matrix_eq_zero_of_add_self_eq_zero
+  Ising2D.matrix_eq_sub_of_add_eq
+  Ising2D.zero_matrix_mul_of_necSuf
+  Ising2D.matrix_eq_zero_of_add_self_eq_zero_of_necSuf
+  Ising2D.matrix_eq_sub_of_add_eq_of_necSuf
+  Ising2D.zero_matrix_mul_tensorPow
+  Ising2D.eq_zero_of_add_self_eq_zero_tensorPow
+  Ising2D.eq_sub_of_add_eq_tensorPow
   Ising2D.conj_neg_matrix
   Ising2D.conj_sub_matrix
   Ising2D.conj_neg_matrix_of_necSuf
@@ -1593,6 +1608,13 @@ targets=(
   Ising2D.CheckFermiSetup.cre_sq
   Ising2D.CheckFermiSetup.ann_sq
   Ising2D.CheckFermiSetup.ann_mul_cre
+  Ising2D.CheckFermiSetup.cre_add_self_eq_zero
+  Ising2D.CheckFermiSetup.ann_add_self_eq_zero
+  Ising2D.CheckFermiSetup.cre_ann_add_ann_cre_eq_one
+  Ising2D.CheckFermiSetup.cre_sq_of_necSuf
+  Ising2D.CheckFermiSetup.ann_sq_of_necSuf
+  Ising2D.CheckFermiSetup.ann_mul_cre_of_necSuf
+  Ising2D.CheckFermiSetup.nOp_sq
   Ising2D.CheckFermiSetup.nOp_mul_self
   Ising2D.CheckFermiSetup.commute_cre_nOp
   Ising2D.CheckFermiSetup.commute_ann_nOp

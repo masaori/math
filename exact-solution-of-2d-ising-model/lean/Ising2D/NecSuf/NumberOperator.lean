@@ -50,7 +50,8 @@ theorem num_def (c a : ι → A) (i : ι) : num c a i = c i * a i := rfl
 
 /-- 2-捩れが無ければ、自分自身と反可換な元の平方は `0`。
 （人手証明 `number_operator_idempotent` (1) の
-「`0 = [ψ^†,ψ^†]₊ = 2(ψ^†)^2` と `2 ≠ 0`」にあたる。） -/
+「`ψ^†ψ^† + ψ^†ψ^† = [ψ^†,ψ^†]₊ = O`」と、章 017 の具体版が引く人手 `matrix_sum_with_itself_zero_implies_zero`（`X + X = O ⇒ X = O`）を
+仮定 `htf` として受け取ったものにあたる。） -/
 theorem sq_eq_zero_of_acomm_self (htf : ∀ x : A, x + x = 0 → x = 0) {x : A}
     (h : x * x + x * x = 0) : x * x = 0 :=
   htf _ h
@@ -58,7 +59,16 @@ theorem sq_eq_zero_of_acomm_self (htf : ∀ x : A, x + x = 0 → x = 0) {x : A}
 /-- 人手証明 `number_operator_idempotent` (2): `a_i c_i = 1 - n_i`。 -/
 theorem ann_mul_cre (c a : ι → A) (i : ι) (h : c i * a i + a i * c i = 1) :
     a i * c i = 1 - num c a i :=
-  eq_sub_of_add_eq' h
+  -- 具体版 `Ising2D.CheckFermiSetup.ann_mul_cre` が引く人手 `matrix_summand_from_sum_equation`（`A + B = C ⇒ B = C - A`）の
+  -- 成分の鎖 8 行を、環の元について同じ並びで書く（成分の和・差の定義の 2 段は現れない）。
+  calc a i * c i
+      = 0 + a i * c i := (zero_add _).symm                                     -- `0 + b = b`
+    _ = (-(c i * a i) + c i * a i) + a i * c i := by rw [neg_add_cancel]      -- `(-a) + a = 0`
+    _ = -(c i * a i) + (c i * a i + a i * c i) := add_assoc _ _ _             -- 加法の結合律
+    _ = -(c i * a i) + 1 := by rw [h]                                         -- 仮定（反交換関係）
+    _ = 1 + -(c i * a i) := add_comm _ _                                      -- 加法の交換律
+    _ = 1 - c i * a i := (sub_eq_add_neg _ _).symm                            -- `x - y = x + (-y)`
+    _ = 1 - num c a i := rfl                                                  -- `n_i` の定義
 
 /-- 人手証明 `number_operator_idempotent` (3): `n_i^2 = n_i`。 -/
 theorem num_mul_num (c a : ι → A) (i : ι) (htf : ∀ x : A, x + x = 0 → x = 0)
@@ -69,9 +79,9 @@ theorem num_mul_num (c a : ι → A) (i : ι) (htf : ∀ x : A, x + x = 0 → x 
   have ha2 : a i * a i = 0 := sq_eq_zero_of_acomm_self htf haa
   have hac : a i * c i = 1 - c i * a i := ann_mul_cre c a i hca
   show c i * a i * (c i * a i) = c i * a i
-  -- 具体版 `Ising2D.CheckFermiSetup.nOp_mul_self`（人手 `check_number_operator_idempotent` (3) の 17 行）と同じ段。
-  -- ただし `num` の定義を開く人手の 1・12・13 行目は、上の `show` で `num` を `c i * a i` と書いたので段として現れない（14 段）。
-  -- 効いているのは環の結合則・分配則・単位元・零元との積（`mul_zero`）・`-` と積の関係（`neg_mul`・`mul_neg`）・
+  -- 具体版 `Ising2D.CheckFermiSetup.nOp_mul_self`（人手 `check_number_operator_idempotent` (3) の `ň_μň_μ` からの行）と同じ段。
+  -- ただし冪を積へ運ぶ人手の先頭 4 行（具体版 `nOp_sq`）は無く、`num` の定義を開く行は、上の `show` で `num` を `c i * a i` と書いたので段として現れない（16 段）。
+  -- 効いているのは環の結合則・分配則・単位元・零元との積（`zero_mul`）・`-` と積の関係（`neg_mul`・`mul_neg`）・
   -- `sub_eq_add_neg`・`sub_zero` と、仮定 `hac`・`hc2`・`ha2`（後の 2 つは 2-捩れが無いことから出す）だけ。
   calc c i * a i * (c i * a i)
       = c i * (a i * (c i * a i)) := mul_assoc _ _ _
@@ -86,8 +96,10 @@ theorem num_mul_num (c a : ι → A) (i : ι) (htf : ∀ x : A, x + x = 0 → x 
     _ = c i * a i - c i * ((c i * a i) * a i) := (sub_eq_add_neg _ _).symm
     _ = c i * a i - c i * (c i * (a i * a i)) := by rw [mul_assoc (c i) (a i) (a i)]
     _ = c i * a i - (c i * c i) * (a i * a i) := by rw [← mul_assoc (c i) (c i) (a i * a i)]
-    _ = c i * a i - 0 * 0 := by rw [hc2, ha2]
-    _ = c i * a i := by rw [mul_zero, sub_zero]
+    _ = c i * a i - 0 * (a i * a i) := by rw [hc2]
+    _ = c i * a i - 0 * 0 := by rw [ha2]
+    _ = c i * a i - 0 := by rw [zero_mul]
+    _ = c i * a i := sub_zero _
 /-- 反可換な 2 元の積との可換性。人手証明 `number_operators_commute` Step 2（参照用ノート側の原文は
 「符号は `(-1)^2 = 1` となって消える」と書く）と、章 017 の `check_number_operators_commute` Step 2 の 10 行。
 段は符号の外出し（`neg_mul`・`mul_neg`）と二重の符号反転（`neg_neg`）に分けて書く。 -/
