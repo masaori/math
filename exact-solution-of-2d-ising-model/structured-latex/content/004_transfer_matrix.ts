@@ -548,8 +548,11 @@ E_{I,J} := E_{i_1j_1}\boxtimes\cdots\boxtimes E_{i_Mj_M} \in \mathrm{Mat}(2^M,\m
         math(String.raw`I=J \iff \forall m,\ i_m=j_m`),
         " より",
       ]),
-      displayMath(String.raw`\delta_{I,J} = \prod_{m=1}^{M}\delta_{i_m,j_m}`),
-      paragraph(["が成り立つ。"]),
+      displayMath(String.raw`\begin{aligned}
+\delta_{I,J}
+&=\prod_{m=1}^{M}\delta_{i_m,j_m}
+&&(\because\ I=J\iff\forall m,\ i_m=j_m\text{ と }\delta\text{ の定義}).
+\end{aligned}`),
       paragraph([
         "Step 1: ",
         math(String.raw`(\Theta_{I,J})_{I,J\in\mathcal{I}}`),

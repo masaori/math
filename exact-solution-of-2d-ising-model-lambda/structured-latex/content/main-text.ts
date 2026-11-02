@@ -61622,6 +61622,7 @@ n_{\mathrm{ct}}(\gamma_A)+n_{\mathrm{ct}}(\gamma_B)
                       kind: "definition",
                       title: { text: "閉歩道の向き付き切断線横断数" },
                       labels: ["def_directed_winding_numbers"],
+                      lean: ["Ising2DLambda.KacWard.horizontalDirectedWindingNumber", "Ising2DLambda.KacWard.verticalDirectedWindingNumber"],
                       habitat: "Z",
                       statement: [
                         paragraph([
