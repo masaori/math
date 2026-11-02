@@ -84814,9 +84814,14 @@ h\cdot h-(q-x_c)\cdot(q-x_c)
                       ref("claim_real_closed_sum_of_two_squares_is_square"),
                       " を三度当てて、",
                     ]),
-                    displayMath(String.raw`(t\cdot c_1)\cdot(t\cdot c_1)+(t\cdot c_2)\cdot(t\cdot c_2)=z_1\cdot z_1,\qquad
-z_1\cdot z_1+g\cdot g=z_2\cdot z_2,\qquad
-z_2\cdot z_2+\beta\cdot\beta=z_3\cdot z_3`),
+                    displayMath(String.raw`\begin{aligned}
+(t\cdot c_1)\cdot(t\cdot c_1)+(t\cdot c_2)\cdot(t\cdot c_2)&=z_1\cdot z_1
+&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)\\
+z_1\cdot z_1+g\cdot g&=z_2\cdot z_2
+&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)\\
+z_2\cdot z_2+\beta\cdot\beta&=z_3\cdot z_3
+&&\bigl(\because\ \blkref{claim_real_closed_sum_of_two_squares_is_square}\bigr)
+\end{aligned}`),
                     paragraph([
                       "となる ", math(String.raw`z_1,z_2,z_3\in R`), " を取る。",
                       math(String.raw`z_1=0`), " なら ",

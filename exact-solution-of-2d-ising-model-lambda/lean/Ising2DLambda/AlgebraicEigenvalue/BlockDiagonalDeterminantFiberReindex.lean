@@ -1,5 +1,5 @@
 import Ising2DLambda.AlgebraicEigenvalue.BlockPreservingPermutationBijection
-import Ising2DLambda.AlgebraicEigenvalue.BlockDiagonalDeterminantZeroTermsFromNecSuf
+import Ising2DLambda.AlgebraicEigenvalue.BlockDiagonalDeterminantZeroTerms
 
 namespace Ising2DLambda.AlgebraicEigenvalue
 
@@ -10,14 +10,13 @@ theorem blockDiagonal_det_eq_sum_fiber_permutation_families
     (hoff : ∀ i j, block i ≠ block j → B i j = 0) :
     Matrix.det B =
       ∑ parts : (∀ k : K, Equiv.Perm {j : J // block j = k}),
-        Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign
-          (fun i j : J => i < j)
-          ((blockPreservingPermutationEquiv block).symm parts).1 : ℤ) : Qbar) *
+        Polynomial.C (((Equiv.Perm.sign
+          ((blockPreservingPermutationEquiv block).symm parts).1 : ℤ) : Qbar)) *
           ∏ i : J, B i (((blockPreservingPermutationEquiv block).symm parts).1 i) := by
   classical
-  rw [blockDiagonal_det_eq_sum_preserving_from_necSuf block B hoff]
+  rw [blockDiagonal_det_eq_sum_preserving block B hoff]
   let term : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+    Polynomial.C (((Equiv.Perm.sign σ : ℤ) : Qbar)) *
       ∏ i : J, B i (σ i)
   change (∑ σ ∈ blockPreservingPermutations block, term σ) = _
   calc
