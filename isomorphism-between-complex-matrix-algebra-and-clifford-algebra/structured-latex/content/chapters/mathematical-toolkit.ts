@@ -2719,4 +2719,190 @@ L_r(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_ordered_sum_with_kronecker_delta_picks_term",
+    kind: "claim",
+    title: { text: "ℂ の中の番号順の和で、第 k 項にクロネッカーのデルタを掛けた和は第 j 項になる" },
+    labels: ["claim_ordered_sum_with_kronecker_delta_picks_term"],
+    statement: [
+      paragraph([
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\alpha_k`),
+        " が一つずつ与えられているとする。",
+        math(String.raw`j\in\{1,\dots,n\}`),
+        " とし、",
+        math(String.raw`\{1,\dots,n\}`),
+        " の二元についてのクロネッカーのデルタ ",
+        math(String.raw`\delta_{k,j}\in\mathbb{C}`),
+        "（",
+        ref("def_kronecker_delta"),
+        " で ",
+        math(String.raw`X:=\{1,\dots,n\}`),
+        " としたもの）を取る。このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）について次の ",
+        math(String.raw`\mathbb{C}`),
+        " の等式が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{\mathbb{C},\,k=1}^{n}\alpha_k\cdot_{\mathbb{C}}\delta_{k,j}=\alpha_j`),
+      paragraph([
+        "左辺は、",
+        math(String.raw`\beta_k:=\alpha_k\cdot_{\mathbb{C}}\delta_{k,j}\in\mathbb{C}`),
+        "（",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        "）と置いたときの ",
+        math(String.raw`\beta_1,\dots,\beta_n`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\beta_k:=\alpha_k\cdot_{\mathbb{C}}\delta_{k,j}`),
+        "（",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        "）について、",
+        math(String.raw`\mathbb{C}`),
+        " の中の番号順の和の定義（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）が帰納的に定める ",
+        math(String.raw`\mathbb{C}`),
+        " の元を ",
+        math(String.raw`S_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）と書く。すなわち ",
+        math(String.raw`S_0:=0_{\mathbb{C}}`),
+        "、",
+        math(String.raw`S_m:=S_{m-1}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})`),
+        "（",
+        math(String.raw`1\le m\le n`),
+        "）であり、主張の左辺は ",
+        math(String.raw`S_n`),
+        " である。",
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について次が成り立つことを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+      ]),
+      displayMath(String.raw`S_m=
+\begin{cases}
+  0_{\mathbb{C}} & (m<j),\\
+  \alpha_j & (m\ge j).
+\end{cases}`),
+      paragraph([
+        math(String.raw`n\ge j`),
+        " なので、",
+        math(String.raw`m=n`),
+        " の場合が主張 ",
+        math(String.raw`S_n=\alpha_j`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき：",
+        math(String.raw`j\ge 1`),
+        " なので ",
+        math(String.raw`0<j`),
+        " であり、",
+        math(String.raw`S_0=0_{\mathbb{C}}`),
+        " は ",
+        math(String.raw`S_0`),
+        " の定義（",
+        ref("def_ordered_sum_in_complex_numbers"),
+        "）そのものである。",
+      ]),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について上の等式が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`j`),
+        " の大小で三つに場合を分ける。",
+      ]),
+      paragraph([
+        math(String.raw`m<j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " かつ ",
+        math(String.raw`m\neq j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_m
+&=S_{m-1}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ S_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}0_{\mathbb{C}})
+&&\left(\because\ m\neq j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ \alpha\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_m
+&=S_{m-1}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ S_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}1_{\mathbb{C}})
+&&\left(\because\ m=j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=0_{\mathbb{C}}+_{\mathbb{C}}\alpha_m
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right)\\
+&=\alpha_m
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right)\\
+&=\alpha_j
+&&\left(\because\ m=j\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m>j`),
+        " のとき：",
+        math(String.raw`m-1\ge j`),
+        " かつ ",
+        math(String.raw`m\neq j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_m
+&=S_{m-1}+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ S_m\ \text{の定義。}\blkref{def_ordered_sum_in_complex_numbers}\right)\\
+&=\alpha_j+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}\delta_{m,j})
+&&\left(\because\ \text{帰納法の仮定。}\ m-1\ge j\right)\\
+&=\alpha_j+_{\mathbb{C}}(\alpha_m\cdot_{\mathbb{C}}0_{\mathbb{C}})
+&&\left(\because\ m\neq j\ \text{と}\ \blkref{def_kronecker_delta}\right)\\
+&=\alpha_j+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ \mathbb{C}\ \text{の中で}\ \alpha\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=\alpha_j
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について帰納法の主張が示された。",
+      ]),
+    ],
+  },
 ]);

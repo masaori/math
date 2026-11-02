@@ -11,6 +11,7 @@ export const ALL_LABELS = [
   "claim_dual_space_is_complex_vector_space",
   "claim_family_member_is_kronecker_delta_linear_combination",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
+  "claim_ordered_sum_with_kronecker_delta_picks_term",
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
   "claim_scalar_multiple_of_linear_combination",
