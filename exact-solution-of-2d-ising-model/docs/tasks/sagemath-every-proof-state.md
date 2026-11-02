@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 313 件のうち、SageMath の検算が無いもの 86 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 319 件のうち、SageMath の検算が無いもの 85 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -134,12 +134,20 @@
   非負実数の平方根の積の法則を、冪の定義による帰納法と二乗の比較に置き換えた。`t` を二つの意味に使っていたのを直し、実数のスカラー倍を `a_C` と明示した。
   計算の誤りは無かった。
 
+- `first_dual_coupling_relation`（第一の結合定数と双対結合定数の双対関係 `sinh(2K_1)sinh(2K_1^*) = 1`）: `sagemath/check/first_dual_coupling_relation/`。等号の行は、証明に現れる実数（`exp(±K_1)`・`tanh K_1`・`exp(±2K_1^*)` など）を独立な不定元に置いた有理関数体で、
+  各行の差がその行の根拠の関係だけを代入して 0 になることで厳密に確かめ（代入しなければ一致しないことも見る）、代入した exp の関係は形式冪級数で、大小の行と主張は `K_1 = log q` の点の `QQ` と `K_1 ∈ QQ` の点の本文の exp のボールで確かめた。
+  レビューの指摘で人手証明の根拠の欠けを直した: `exp(-log tanh K_1)tanh K_1 = 1` の行は `exp(log y) = y` だけを根拠に書き、直前の独立の鎖 `exp(-L)exp(L) = exp(0) = 1` を引いていなかったので、`exp(-L)tanh K_1` から始まる一本の鎖にまとめた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`partition_function_projection_and_jordan_wigner.ts` の `first_dual_coupling_relation`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_projection_and_jordan_wigner.ts` の `epsilon_projector_properties`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
+- 2026-11-02、`first_dual_coupling_relation` のレビューで見つかった（根拠の欠け）: 同じ形の `second_dual_coupling_relation`（第二の双対関係）の証明も、
+  `exp(-log tanh K_2)tanh K_2 = 1` の行が `exp(log y) = y` だけを根拠にし、直前の独立の鎖 `exp(-L)exp(L) = exp(0) = 1` を引いていない。
+  第一の双対関係と同じく一本の鎖にまとめれば直る。その検算 `sagemath/check/second_dual_coupling_relation/` は各行を 200 bit の浮動小数点で比べており、
+  厳密計算を優先する規律にも合わない。この単位では直さなかった。検算の付いたブロックの見直しで扱う。
 - 2026-11-01、`mat_columnwise` のレビューで見つかった（計算の誤りではなく「同一視をしない」規律への違反）:
   行列の積の定義（`mat_mult`）は「数ベクトルは n 行 1 列の行列とみなし」と書き、正定値行列の定義
   （`def_hermitian_positive_definite`）も「1×1 行列を ℂ と同一視する」と書いている。ベクトルの転置 `x^⊤`・

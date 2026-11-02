@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 全証明の SageMath 検算の連続実行として、`first_dual_coupling_relation`（第一の結合定数と双対結合定数の双対関係）に同名の検算を付けた（未検算 85 件）。等号の行は根拠の関係だけを代入する有理関数体と形式冪級数で厳密に確かめた。レビューの指摘で、`exp(-log tanh K_1)tanh K_1 = 1` の行が直前の鎖 `exp(-L)exp(L) = 1` を引いていなかった根拠の欠けを、一本の鎖にまとめて直した。計算の誤りは無かった。第二の双対関係の証明にも同じ欠けがあることと、その検算が浮動小数点であることは状態台帳に記録した。次は `epsilon_projector_properties`。
+
 2026-11-02: 全証明の SageMath 検算の連続実行として、`two_by_two_transfer_identity`（2×2 の転送行列の恒等式）に同名の検算を付けた（未検算 86 件）。証明の根拠の誤り（倍角公式とテイラー展開を `cosh_sinh_basic_properties` から引いていた）を直し、証明の無い `sinh_cosh_taylor_series` に頼らず、部分和の成分を 1 行 1 列の exp の部分和の半和で書いて極限を取る形にした。本文に無い冪の指数法則・平方根の積の法則を、冪の定義による帰納法と二乗の比較に置き換えた。計算の誤りは無かった。下流 `second_transfer_matrix_pauli_form` の `((2s_2)^{1/2})_C` の冪を実数の冪の像にする段の根拠の欠けと、Lean の具体版が書き直した人手証明と 1 対 1 でないことは状態台帳に記録した。次は `first_dual_coupling_relation`。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、正の結合定数の tanh・正の実数上の実対数・二つの双対結合定数の 4 定義を扱った。実対数の定義が束ねていた「log の狭義単調増加（証明なし）」と「0<y<1 なら log y<0」を主張 `real_log_strictly_increasing`（背理法の証明を付けた）・`real_log_negative_below_one` に分け、下流の参照 5 か所を付け替え、5 個に同名の検算を付けた（未検算 87 件）。実対数の値は有理数の端点で挟み、本文の exp のボールで端点を確かめる形にした。計算の誤りは無かった。exp の全射性の外部参照と、ラベルなしの log の単調性 7 か所は状態台帳に記録した。次は `two_by_two_transfer_identity`。

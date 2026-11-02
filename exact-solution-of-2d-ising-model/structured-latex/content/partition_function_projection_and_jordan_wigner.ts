@@ -460,7 +460,9 @@ K_1^*&=-\frac12\log(\tanh K_1)
 &&\left(\because\ \mathbb{R}\text{ の等式の両辺を }2\text{ 倍}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
-&\exp\!\left(-\log(\tanh K_1)\right)\exp\!\left(\log(\tanh K_1)\right)\\
+&\exp\!\left(-\log(\tanh K_1)\right)\tanh K_1\\
+&\qquad=\exp\!\left(-\log(\tanh K_1)\right)\exp\!\left(\log(\tanh K_1)\right)
+&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)\\
 &\qquad=\exp\!\left(-\log(\tanh K_1)+\log(\tanh K_1)\right)
 &&\left(\because\ \exp(x)\exp(y)=\exp(x+y)\ \blkref{scalar_exp_product}\right)\\
 &\qquad=\exp(0)
@@ -469,12 +471,9 @@ K_1^*&=-\frac12\log(\tanh K_1)
 &&\left(\because\ \exp(0)=1\ \blkref{scalar_exp_zero}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
-\exp\!\left(-\log(\tanh K_1)\right)\tanh K_1
-&=1
-&&\left(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log y)=y\right)\\
 \exp\!\left(-\log(\tanh K_1)\right)
 &=\frac1{\tanh K_1}
-&&\left(\because\ \tanh K_1\ne0\text{ と }\mathbb{R}\text{ の除法}\right)
+&&\left(\because\ \text{直前の等式の両辺を }\tanh K_1\ne0\text{ で割る}\right)
 \end{aligned}`),
       displayMath(String.raw`\begin{aligned}
 \exp(2K_1^*)
