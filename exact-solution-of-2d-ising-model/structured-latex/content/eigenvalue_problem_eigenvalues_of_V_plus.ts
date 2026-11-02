@@ -971,17 +971,6 @@ U\sigma_k^z U^{-1}
 \end{aligned}`,
       ),
       paragraph([
-        "以下、共役 ",
-        math(String.raw`X \mapsto UXU^{-1}`),
-        " が ",
-        math(String.raw`\mathbb{C}`),
-        " 線型で積を保つこと（",
-        math(String.raw`U(XY)U^{-1} = (UXU^{-1})(UYU^{-1})`),
-        "、",
-        math(String.raw`U^{-1}U = I`),
-        " より）を繰り返し使う。",
-      ]),
-      paragraph([
         "Step 2（",
         math(String.raw`Z_m`),
         " と ",
@@ -1185,57 +1174,43 @@ U Y_m U^{-1}
         " または ",
         math(String.raw`-1`),
         " の有限和である。Step 2 と同じく ",
-        ref("conjugation_is_ring_homomorphism"),
-        " を ",
-        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
-        "、",
-        math(String.raw`B = U`),
-        " として使い、",
         math(String.raw`UXU^{-1}`),
         " は ",
         math(String.raw`(UX)U^{-1}`),
-        " と読む。Step 2 より各項について",
+        " と読む。",
+        math(String.raw`j, k \in \{1, \dots, M_{\mathrm{col}}\}`),
+        " について、Step 2 より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U\left(Y_j Z_k\right)U^{-1}
 &= T_U\left(Y_j Z_k\right)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= T_U(Y_j)\,T_U(Z_k)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= \left(U Y_j U^{-1}\right)\left(U Z_k U^{-1}\right)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= Y_j(-Z_k)
-   \quad (\because\ \text{Step 2 の }UY_jU^{-1}=+\,Y_j\text{ と }UZ_kU^{-1}=-\,Z_k) \\
+   \quad (\because\ \text{Step 2 の }UY_mU^{-1}=Y_m\text{ を }m = j\text{ で、}UZ_mU^{-1}=-\,Z_m\text{ を }m = k\text{ で}) \\
 &= -\,(Y_j Z_k)
-   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\right), \\
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ A \to Y_j,\ B \to Z_k)\right), \\
 U\left(Z_j Y_j\right)U^{-1}
 &= T_U\left(Z_j Y_j\right)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= T_U(Z_j)\,T_U(Y_j)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= \left(U Z_j U^{-1}\right)\left(U Y_j U^{-1}\right)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= (-Z_j)Y_j
-   \quad (\because\ \text{Step 2 の }UZ_jU^{-1}=-\,Z_j\text{ と }UY_jU^{-1}=+\,Y_j) \\
+   \quad (\because\ \text{Step 2 の }UZ_mU^{-1}=-\,Z_m\text{ と }UY_mU^{-1}=Y_m\text{ を }m = j\text{ で}) \\
 &= -\,(Z_j Y_j)
-   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ A \to Z_j,\ B \to Y_j)\right)
 \end{aligned}`,
       ),
       paragraph([
         "である。",
         math(String.raw`H_2`),
-        " については、",
-        ref("matrix_conjugation_preserves_finite_sum"),
-        " を ",
-        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
-        "、",
-        math(String.raw`B = U`),
-        "、",
-        math(String.raw`r = M_{\mathrm{col}}`),
-        "、",
-        math(String.raw`X_m = Z_mY_m`),
-        " として使い、",
+        " については",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1243,15 +1218,15 @@ U H_2 U^{-1}
 &= U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m\Bigr)U^{-1}
    \quad \left(\because\ \blkref{def_H2}\right) \\
 &= T_U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m\Bigr)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}} T_U\left(Z_mY_m\right)
-   \quad \left(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\right) \\
+   \quad \left(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U,\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (Z_1Y_1,\dots,Z_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}))\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}} U\left(Z_mY_m\right)U^{-1}
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）を各項に}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\text{ を各項に}\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}} \left(-\,(Z_mY_m)\right)
    \quad (\because\ \text{上の }U(Z_jY_j)U^{-1} = -\,(Z_jY_j)\text{ を各項に }j = m\text{ で}) \\
 &= -\sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m
-   \quad \left(\because\ \blkref{finite_sum_of_negated_matrices}\text{ を }r = M_{\mathrm{col}}\text{、}X_m = Z_mY_m\text{ で}\right) \\
+   \quad \left(\because\ \blkref{finite_sum_of_negated_matrices}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (Z_1Y_1,\dots,Z_{M_{\mathrm{col}}}Y_{M_{\mathrm{col}}}))\right) \\
 &= -\,H_2
    \quad \left(\because\ \blkref{def_H2}\right)
 \end{aligned}`,
@@ -1263,27 +1238,7 @@ U H_2 U^{-1}
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " より ",
         math(String.raw`M_{\mathrm{col}}-1 \in \mathbb{Z}_{\geq 1}`),
-        " である。",
-        ref("matrix_conjugation_preserves_difference"),
-        " を ",
-        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
-        "、",
-        math(String.raw`B = U`),
-        "、",
-        math(String.raw`X = \sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1}`),
-        "、",
-        math(String.raw`W = Y_{M_{\mathrm{col}}}Z_1`),
-        " として、",
-        ref("matrix_conjugation_preserves_finite_sum"),
-        " を ",
-        math(String.raw`n = 2^{M_{\mathrm{col}}}`),
-        "、",
-        math(String.raw`B = U`),
-        "、",
-        math(String.raw`r = M_{\mathrm{col}}-1`),
-        "、",
-        math(String.raw`X_m = Y_mZ_{m+1}`),
-        " として使い、",
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1291,19 +1246,19 @@ U H_1^{(+)} U^{-1}
 &= U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\Bigr)U^{-1}
    \quad \left(\because\ \blkref{def_H1_plus}\right) \\
 &= T_U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\Bigr)
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\right) \\
 &= T_U\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1}\Bigr) - T_U\left(Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad \left(\because\ \blkref{matrix_conjugation_preserves_difference}\right) \\
+   \quad \left(\because\ \blkref{matrix_conjugation_preserves_difference}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U,\ X \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1} Y_\ell Z_{\ell+1},\ W \to Y_{M_{\mathrm{col}}}Z_1)\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} T_U\left(Y_mZ_{m+1}\right) - T_U\left(Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad \left(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\right) \\
+   \quad \left(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U,\ r \to M_{\mathrm{col}}-1,\ (X_1,\dots,X_r) \to (Y_1Z_2,\dots,Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}}))\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} U\left(Y_mZ_{m+1}\right)U^{-1} - U\left(Y_{M_{\mathrm{col}}}Z_1\right)U^{-1}
-   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義（}B=U\text{）を各項と引く項に}\right) \\
+   \quad \left(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の }T_B\text{ の定義}\ (n \to 2^{M_{\mathrm{col}}},\ B \to U)\text{ を各項と引く項に}\right) \\
 &= \sum_{m=1}^{M_{\mathrm{col}}-1} \left(-\,(Y_mZ_{m+1})\right) - \left(-\,(Y_{M_{\mathrm{col}}}Z_1)\right)
    \quad (\because\ \text{上の }U(Y_jZ_k)U^{-1} = -\,(Y_jZ_k)\text{ を各項に }j = m\text{、}k = m+1\text{ で、引く項に }j = M_{\mathrm{col}}\text{、}k = 1\text{ で}) \\
 &= \Bigl(-\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1}\Bigr) - \left(-\,(Y_{M_{\mathrm{col}}}Z_1)\right)
-   \quad \left(\because\ \blkref{finite_sum_of_negated_matrices}\text{ を }r = M_{\mathrm{col}}-1\text{、}X_m = Y_mZ_{m+1}\text{ で}\right) \\
+   \quad \left(\because\ \blkref{finite_sum_of_negated_matrices}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ (X_1,\dots,X_r) \to (Y_1Z_2,\dots,Y_{M_{\mathrm{col}}-1}Z_{M_{\mathrm{col}}}))\right) \\
 &= -\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\Bigr)
-   \quad \left(\because\ \blkref{difference_of_negated_matrices}\text{ を }A = \textstyle\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1}\text{、}B = Y_{M_{\mathrm{col}}}Z_1\text{ で}\right) \\
+   \quad \left(\because\ \blkref{difference_of_negated_matrices}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1} Y_\ell Z_{\ell+1},\ B \to Y_{M_{\mathrm{col}}}Z_1)\right) \\
 &= -\,H_1^{(+)}
    \quad \left(\because\ \blkref{def_H1_plus}\right)
 \end{aligned}`,
@@ -1366,6 +1321,8 @@ U S_2 U^{-1}
     conversion: {
       status: "added",
       notes: [
+        "2026-11-02: Step 3 の項の鎖の根拠「Step 2 の UY_jU^{-1} = +Y_j」（本文に単項の + の定義が無い）を「Step 2 の UY_mU^{-1} = Y_m を m = j で」に直し、項の鎖の j, k ∈ {1, …, M_col} を宣言した。" +
+          "Step 3 の鎖が引く主張（negation_factors_out_of_left_factor・negation_factors_out_of_right_factor・matrix_conjugation_preserves_difference・matrix_conjugation_preserves_finite_sum・finite_sum_of_negated_matrices・difference_of_negated_matrices）の変数の置き方を、行末の (A → …, B → …) の形に揃えた（主張の B と Step 3 の B = U、主張の行数 m と和の添字 m が衝突していたため。行列の大きさ 2^{M_col} も書き、有限和の項は (X_1, …, X_r) → (…) の列で、和の値を置く変数の添字は ℓ で書いた）。conjugation_is_ring_homomorphism の T_B の定義と乗法性の行も (n → 2^{M_col}, B → U) の形にした。Step 2 の前の段落「以下、共役が ℂ 線型で積を保つこと（…）を繰り返し使う」は、Step 2・Step 3 の各行がその性質をラベル参照で引くようになったので削った。主張は変えていない。",
         "2026-11-02: Step 3 の「共役の ℂ 線型性より UH_1^{(+)}U^{-1} = −H_1^{(+)}」（名前だけの根拠）を、def_H1_plus・T_B の定義・matrix_conjugation_preserves_difference・matrix_conjugation_preserves_finite_sum（r = M_col−1 ≥ 1、X_m = Y_mZ_{m+1}）・T_B の定義を各項と引く項に・上の U(Y_jZ_k)U^{-1} = −(Y_jZ_k)・finite_sum_of_negated_matrices・difference_of_negated_matrices・def_H1_plus の 9 行の鎖にした。主張は変えていない。" +
           "Lean の対応は Ising2D.H1plus_eq_sub（Lean の lastSign 付きの和を def_H1_plus の差の形へ）・Ising2D.Uflip_conj_YZ（項の鎖）・Ising2D.Uflip_conj_H1plus（M = r+2 の場合の calc の 9 段。conj_sub_tensorPow・conj_finite_sum_tensorPow・neg_finite_sum_tensorPow・neg_sub_neg_tensorPow）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_21_sign_flip_step3_H1plus_chain.sage。",
         "2026-11-02: Step 3 の「共役の ℂ 線型性より UH_2U^{-1} = −H_2」（名前だけの根拠）を、def_H2・conjugation_is_ring_homomorphism の T_B の定義・matrix_conjugation_preserves_finite_sum（r = M_col、X_m = Z_mY_m）・T_B の定義を各項に・上の U(Z_jY_j)U^{-1} = −(Z_jY_j)・finite_sum_of_negated_matrices・def_H2 の 7 行の鎖にした。Step 3 冒頭の H_2 の出典も iH_is_real_symmetric の Step 1 から def_H2 に替えた。H_1^{(+)} の鎖は差の項を含むので別に扱う。主張は変えていない。" +

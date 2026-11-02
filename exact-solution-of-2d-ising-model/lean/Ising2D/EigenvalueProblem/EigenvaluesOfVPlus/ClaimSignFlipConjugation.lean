@@ -15,7 +15,7 @@
 `G` の因子の符号を `M` の偶奇で場合分けして数えている。
 しかし実際には
 
-  `U Z_m U^{-1} = -Z_m`,  `U Y_m U^{-1} = +Y_m`   （**`m` によらず**）
+  `U Z_m U^{-1} = -Z_m`,  `U Y_m U^{-1} = Y_m`   （**`m` によらず**）
 
 が成り立ち、ここから `U H_1^{(±)} U^{-1} = -H_1^{(±)}`、`U H_2 U^{-1} = -H_2` が
 （`H_1` が `Y_m Z_{m+1}` の、`H_2` が `Z_m Y_m` の和であることから）直ちに従う。
@@ -736,12 +736,12 @@ theorem Uflip_conj_H1 (η : ℂ) : Uflip M * H1 M η * UflipInv M = -(H1 M η) :
 /-- 人手 Step 3 の項の鎖 `U(Z_jY_j)U^{-1} = -(Z_jY_j)` の 5 行と 1 対 1。 -/
 theorem Uflip_conj_ZY (j : Fin M) : Uflip M * (Z j * Y j) * UflipInv M = -(Z j * Y j) :=
   calc Uflip M * (Z j * Y j) * UflipInv M
-      = Conjugation.T (UflipUnit M) (Z j * Y j) := rfl                      -- `T_B` の定義（`B = U`）
+      = Conjugation.T (UflipUnit M) (Z j * Y j) := rfl                      -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = Conjugation.T (UflipUnit M) (Z j) * Conjugation.T (UflipUnit M) (Y j) :=
-        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
-    _ = (Uflip M * Z j * UflipInv M) * (Uflip M * Y j * UflipInv M) := rfl   -- `T_B` の定義（`B = U`）
-    _ = (-(Z j)) * Y j := by rw [Uflip_conj_Z, Uflip_conj_Y]                 -- Step 2 の `UZ_jU^{-1} = -Z_j` と `UY_jU^{-1} = +Y_j`
-    _ = -(Z j * Y j) := neg_mul_matrix_tensorPow _ _                         -- `negation_factors_out_of_left_factor`
+        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性（`n → 2^{M_col}`, `B → U`）
+    _ = (Uflip M * Z j * UflipInv M) * (Uflip M * Y j * UflipInv M) := rfl   -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
+    _ = (-(Z j)) * Y j := by rw [Uflip_conj_Z, Uflip_conj_Y]                 -- Step 2 の `UZ_mU^{-1} = -Z_m` と `UY_mU^{-1} = Y_m` を `m = j` で
+    _ = -(Z j * Y j) := neg_mul_matrix_tensorPow _ _                         -- `negation_factors_out_of_left_factor`（`m, n, p → 2^{M_col}`, `A → Z_j`, `B → Y_j`）
 
 /-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_2 U^{-1} = -H_2`。
 人手は `M_col ≥ 2` で、`M = r + 1` の場合の `calc` の 7 段が人手の `H_2` の鎖の 7 行と 1 対 1 である
@@ -753,14 +753,14 @@ theorem Uflip_conj_H2 : Uflip M * H2 M * UflipInv M = -(H2 M) := by
   | succ r =>
     calc Uflip (r + 1) * H2 (r + 1) * UflipInv (r + 1)
         = Uflip (r + 1) * (∑ m : Fin (r + 1), Z m * Y m) * UflipInv (r + 1) := rfl  -- `def_H2`
-      _ = Conjugation.T (UflipUnit (r + 1)) (∑ m : Fin (r + 1), Z m * Y m) := rfl -- `T_B` の定義（`B = U`）
+      _ = Conjugation.T (UflipUnit (r + 1)) (∑ m : Fin (r + 1), Z m * Y m) := rfl -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
       _ = ∑ m : Fin (r + 1), Conjugation.T (UflipUnit (r + 1)) (Z m * Y m) :=
-          conj_finite_sum_tensorPow _ r _                                    -- `matrix_conjugation_preserves_finite_sum`
-      _ = ∑ m : Fin (r + 1), Uflip (r + 1) * (Z m * Y m) * UflipInv (r + 1) := rfl -- `T_B` の定義を各項に
+          conj_finite_sum_tensorPow _ r _                                    -- `matrix_conjugation_preserves_finite_sum`（`n → 2^{M_col}`, `B → U`, `r → M_col`, `(X_1, …, X_r) → (Z_1Y_1, …, Z_{M_col}Y_{M_col})`）
+      _ = ∑ m : Fin (r + 1), Uflip (r + 1) * (Z m * Y m) * UflipInv (r + 1) := rfl -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）を各項に
       _ = ∑ m : Fin (r + 1), -(Z m * Y m) :=
           Finset.sum_congr rfl fun m _ => Uflip_conj_ZY m                    -- 上の項の鎖を各項に
       _ = -(∑ m : Fin (r + 1), Z m * Y m) :=
-          neg_finite_sum_tensorPow r _                                       -- `finite_sum_of_negated_matrices`
+          neg_finite_sum_tensorPow r _                                       -- `finite_sum_of_negated_matrices`（`m, n → 2^{M_col}`, `r → M_col`, `(X_1, …, X_r) → (Z_1Y_1, …, Z_{M_col}Y_{M_col})`）
       _ = -(H2 (r + 1)) := rfl                                               -- `def_H2`
 
 /-- 補助: 一般形で `U (i K_1 H1 M η) U^{-1} = -(i K_1 H1 M η)`。 -/
@@ -783,12 +783,12 @@ theorem Uflip_conj_S2 (K2star : ℂ) :
 /-- 人手 Step 3 の項の鎖 `U(Y_jZ_k)U^{-1} = -(Y_jZ_k)` の 5 行と 1 対 1。 -/
 theorem Uflip_conj_YZ (j k : Fin M) : Uflip M * (Y j * Z k) * UflipInv M = -(Y j * Z k) :=
   calc Uflip M * (Y j * Z k) * UflipInv M
-      = Conjugation.T (UflipUnit M) (Y j * Z k) := rfl                      -- `T_B` の定義（`B = U`）
+      = Conjugation.T (UflipUnit M) (Y j * Z k) := rfl                      -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
     _ = Conjugation.T (UflipUnit M) (Y j) * Conjugation.T (UflipUnit M) (Z k) :=
-        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
-    _ = (Uflip M * Y j * UflipInv M) * (Uflip M * Z k * UflipInv M) := rfl   -- `T_B` の定義（`B = U`）
-    _ = Y j * (-(Z k)) := by rw [Uflip_conj_Y, Uflip_conj_Z]                 -- Step 2 の `UY_jU^{-1} = +Y_j` と `UZ_kU^{-1} = -Z_k`
-    _ = -(Y j * Z k) := mul_neg_matrix_tensorPow _ _                         -- `negation_factors_out_of_right_factor`
+        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性（`n → 2^{M_col}`, `B → U`）
+    _ = (Uflip M * Y j * UflipInv M) * (Uflip M * Z k * UflipInv M) := rfl   -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
+    _ = Y j * (-(Z k)) := by rw [Uflip_conj_Y, Uflip_conj_Z]                 -- Step 2 の `UY_mU^{-1} = Y_m` を `m = j` で、`UZ_mU^{-1} = -Z_m` を `m = k` で
+    _ = -(Y j * Z k) := mul_neg_matrix_tensorPow _ _                         -- `negation_factors_out_of_right_factor`（`m, n, p → 2^{M_col}`, `A → Y_j`, `B → Z_k`）
 
 /-- **人手本文 `sign_flip_conjugation`（Step 3）**: `U H_1^{(+)} U^{-1} = -H_1^{(+)}`。
 人手は主張の仮定 `M_col ≥ 2` の下で述べ、`M = r + 2` の場合の `calc` の 9 段が人手の `H_1^{(+)}` の鎖の 9 行と 1 対 1 である。
@@ -806,25 +806,25 @@ theorem Uflip_conj_H1plus : Uflip M * H1plus M * UflipInv M = -(H1plus M) := by
           rw [H1plus_eq_sub]                                                -- `def_H1_plus`
       _ = Conjugation.T (UflipUnit (r + 2))
             ((∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)) - Y (Fin.last (r + 1)) * Z 0) :=
-          rfl                                                               -- `T_B` の定義（`B = U`）
+          rfl                                                               -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）
       _ = Conjugation.T (UflipUnit (r + 2)) (∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m))
             - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) :=
-          conj_sub_tensorPow _ _ _                                          -- `matrix_conjugation_preserves_difference`
+          conj_sub_tensorPow _ _ _                                          -- `matrix_conjugation_preserves_difference`（`n → 2^{M_col}`, `B → U`, `X → Σ_{ℓ=1}^{M_col-1} Y_ℓZ_{ℓ+1}`, `W → Y_{M_col}Z_1`）
       _ = (∑ m : Fin (r + 1), Conjugation.T (UflipUnit (r + 2)) (Y (Fin.castSucc m) * Z (Fin.succ m)))
             - Conjugation.T (UflipUnit (r + 2)) (Y (Fin.last (r + 1)) * Z 0) := by
-          rw [conj_finite_sum_tensorPow (UflipUnit (r + 2)) r]              -- `matrix_conjugation_preserves_finite_sum`
+          rw [conj_finite_sum_tensorPow (UflipUnit (r + 2)) r]              -- `matrix_conjugation_preserves_finite_sum`（`n → 2^{M_col}`, `B → U`, `r → M_col-1`, `(X_1, …, X_r) → (Y_1Z_2, …, Y_{M_col-1}Z_{M_col})`）
       _ = (∑ m : Fin (r + 1), Uflip (r + 2) * (Y (Fin.castSucc m) * Z (Fin.succ m)) * UflipInv (r + 2))
             - Uflip (r + 2) * (Y (Fin.last (r + 1)) * Z 0) * UflipInv (r + 2) :=
-          rfl                                                               -- `T_B` の定義を各項と引く項に
+          rfl                                                               -- `T_B` の定義（`n → 2^{M_col}`, `B → U`）を各項と引く項に
       _ = (∑ m : Fin (r + 1), -(Y (Fin.castSucc m) * Z (Fin.succ m)))
             - (-(Y (Fin.last (r + 1)) * Z 0)) := by
           rw [Finset.sum_congr rfl fun m _ => Uflip_conj_YZ (Fin.castSucc m) (Fin.succ m),
             Uflip_conj_YZ (Fin.last (r + 1)) 0]                             -- 上の項の鎖を各項（`j = m`, `k = m + 1`）と引く項（`j = M_col`, `k = 1`）に
       _ = (-(∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)))
             - (-(Y (Fin.last (r + 1)) * Z 0)) := by
-          rw [neg_finite_sum_tensorPow r]                                   -- `finite_sum_of_negated_matrices`
+          rw [neg_finite_sum_tensorPow r]                                   -- `finite_sum_of_negated_matrices`（`m, n → 2^{M_col}`, `r → M_col-1`, `(X_1, …, X_r) → (Y_1Z_2, …, Y_{M_col-1}Z_{M_col})`）
       _ = -((∑ m : Fin (r + 1), Y (Fin.castSucc m) * Z (Fin.succ m)) - Y (Fin.last (r + 1)) * Z 0) :=
-          neg_sub_neg_tensorPow _ _                                         -- `difference_of_negated_matrices`
+          neg_sub_neg_tensorPow _ _                                         -- `difference_of_negated_matrices`（`m, n → 2^{M_col}`, `A → Σ_{ℓ=1}^{M_col-1} Y_ℓZ_{ℓ+1}`, `B → Y_{M_col}Z_1`）
       _ = -(H1plus (r + 2)) := by rw [H1plus_eq_sub]                        -- `def_H1_plus`
 
 /-- **人手本文 `sign_flip_conjugation`（Step 4）**: `U S_1^{(+)} U^{-1} = -S_1^{(+)}`
