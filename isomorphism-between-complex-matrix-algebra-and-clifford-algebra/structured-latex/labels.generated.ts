@@ -19,6 +19,7 @@ export const ALL_LABELS = [
   "def_basis",
   "def_complex_vector_space",
   "def_dual_space",
+  "def_kronecker_delta",
   "def_linear_combination",
   "def_linear_form",
   "def_linear_independence",
