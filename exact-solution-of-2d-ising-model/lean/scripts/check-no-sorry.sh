@@ -1165,6 +1165,19 @@ targets=(
   Ising2D.matrix_smul_sub_apply
   Ising2D.matrix_smul_sub
   Ising2D.matrix_smul_sub_of_necSuf
+  Ising2D.smul_sub_tensorPow
+  Ising2D.matrix_smul_add_apply
+  Ising2D.matrix_smul_add
+  Ising2D.finite_sum_smul_of_matrices
+  Ising2D.matrix_smul_add_of_necSuf
+  Ising2D.finite_sum_smul_of_matrices_of_necSuf
+  Ising2D.smul_add_tensorPow
+  Ising2D.finite_sum_smul_tensorPow
+  Ising2D.H2_eq_neg_I_smul_sum_sigmaX
+  Ising2D.S2_eq_K2star_smul_sum_sigmaX
+  Ising2D.Y_castSucc_mul_Z_succ
+  Ising2D.Y_last_mul_Z_zero
+  Ising2D.S1plus_eq_K1_smul_sub
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I
   Ising2D.twoByTwo_one_eq_kroneckerDelta
@@ -1219,6 +1232,9 @@ targets=(
   "Ising2D.NecSuf.conj_finite_sum_matrix'"
   "Ising2D.NecSuf.neg_add_matrix'"
   "Ising2D.NecSuf.neg_finite_sum_matrix'"
+  "Ising2D.NecSuf.smul_add_matrix_apply'"
+  "Ising2D.NecSuf.smul_add_matrix'"
+  "Ising2D.NecSuf.finite_sum_smul_matrix'"
   "Ising2D.NecSuf.sub_eq_add_neg_matrix'"
   "Ising2D.NecSuf.neg_sub_neg_matrix'"
   "Ising2D.NecSuf.conj_neg_matrix'"

@@ -115,3 +115,6 @@ PASS sign_flip_conjugation Step 3 の H_2 の鎖と項の鎖: 98 段
 
 # 実行コマンド: sage check_21_sign_flip_step3_H1plus_chain.sage
 PASS sign_flip_conjugation Step 3 の H_1^{(+)} の鎖と項の鎖: 306 段
+
+# 実行コマンド: sage check_22_iH_real_symmetric_scalar_chains.sage
+PASS iH_is_real_symmetric Step 1・Step 2 の H_2・S_2・S_1^{(+)} の鎖: M = 2, 3, 4, 5

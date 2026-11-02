@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: Lean の通しの証明のゴールラインの確認の六十一個目として、`iH_is_real_symmetric` Step 1・Step 2 の「スカラー倍の和の分配」「スカラー倍の交換」「スカラー倍の和の分配と交換」「i·(−i) = 1 と分配則」を 1 行 1 主張のラベル参照にした。主張 `scalar_multiple_distributes_over_matrix_sum`（`c(A+B) = cA+cB`）・`finite_sum_of_scalar_multiples`（`Σ(cX_j) = cΣX_j`）を `002_linear_space_general.ts` に足し、SageMath の検算、Lean の具体版・必要十分版 `NecSuf/SmulMatrixSum.lean`・`TensorPow M` の系、鎖と 1 対 1 の `ClaimIHPauliForm.lean` を置いた。S_1^{(+)} の鎖の境界項と和の項の代入は 2 行に分けた。次は状態台帳の (g)（`check_number_operator_*` の「結合法則」）。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十個目として、`sign_flip_conjugation` Step 3 の項の鎖の根拠「Step 2 の `UY_jU^{-1} = +Y_j`」（本文に単項の `+` の定義が無い）を「Step 2 の `UY_mU^{-1} = Y_m` を `m = j` で」に直し、`j, k ∈ {1, …, M_col}` を宣言した。Step 3 の鎖が引く主張の変数の置き方を行末の `(変数 → 値)` の形に揃えた（主張の `B` と `B = U`、主張の行数 `m` と和の添字 `m` の衝突を解いた）。Lean は証明を変えず、Step 3 のコメントを同じ形にした。通しの判定スクリプトは通る。次は同じファイルのほかのブロックに残る名前だけの根拠（状態台帳の「次の一歩」）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の五十九個目として、`sign_flip_conjugation` Step 3 の「共役の ℂ 線型性より `UH_1^{(+)}U^{-1} = -H_1^{(+)}`」を 9 行の鎖（`def_H1_plus`・`T_B` の定義・`matrix_conjugation_preserves_difference`・`matrix_conjugation_preserves_finite_sum`・項の鎖・`finite_sum_of_negated_matrices`・`difference_of_negated_matrices` ほか）にした。Lean は `H1plus_eq_sub`（`lastSign` 付きの和を人手の差の形へ）・`Uflip_conj_YZ`・`Uflip_conj_H1plus`（`M = r + 2` の `calc` 9 段）、SageMath は `check_21_sign_flip_step3_H1plus_chain.sage`（306 段）。次は単項の `+` と、鎖が引く主張の変数の置き方の揃え（状態台帳の「次の一歩」）。

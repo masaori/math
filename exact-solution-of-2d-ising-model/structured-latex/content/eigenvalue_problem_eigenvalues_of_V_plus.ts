@@ -281,24 +281,32 @@ Z_m Y_m
 H_2
 &= \sum_{m=1}^{M_{\mathrm{col}}} Z_mY_m
    \quad (\because\ \blkref{def_H2}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}} (-i\,\sigma_m^x)
-   \quad (\because \text{上で得た } Z_mY_m = -i\,\sigma_m^x) \\
-&= -i\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
-   \quad (\because \text{スカラー倍の和の分配})
+&= \sum_{m=1}^{M_{\mathrm{col}}} \left((-i)\sigma_m^x\right)
+   \quad (\because \text{上で得た } Z_mY_m = (-i)\sigma_m^x) \\
+&= (-i)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ c \to -i,\ (X_1,\dots,X_r) \to (\sigma_1^x,\dots,\sigma_{M_{\mathrm{col}}}^x))\right)
 \end{aligned}`,
       ),
       paragraph(["であり、"]),
       displayMath(
         String.raw`\begin{aligned}
 S_2
-&= iK_2^*H_2
-   \quad (\because S_2 \text{ の定義}) \\
-&= iK_2^*\left(-i\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
+&= (iK_2^*)H_2
+   \quad (\because S_2 \text{ の定義（係数 } iK_2^* \in \mathbb{C} \text{ のスカラー倍）}) \\
+&= (iK_2^*)\left((-i)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
    \quad (\because \text{上で得た } H_2 \text{ の表示}) \\
-&= i(-i)\,K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
-   \quad (\because \text{スカラー倍の交換}) \\
+&= \bigl((iK_2^*)(-i)\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to iK_2^*,\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
+&= \bigl(i(K_2^*(-i))\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= \bigl(i((-i)K_2^*)\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= \bigl((i(-i))K_2^*\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= (1_{\mathbb{C}}K_2^*)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
 &= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
-   \quad (\because i\cdot(-i) = 1)
+   \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -347,16 +355,32 @@ Y_{M_{\mathrm{col}}} Z_1
       displayMath(
         String.raw`\begin{aligned}
 S_1^{(+)}
-&= iK_1H_1^{(+)}
-   \quad (\because S_1^{(+)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because H_1^{(+)} \text{ の定義}) \\
-&= iK_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left(-i\,\sigma_m^z\sigma_{m+1}^z\right) - (-i\,G)\right)
-   \quad (\because \text{上で得た } Y_mZ_{m+1},\ Y_{M_{\mathrm{col}}}Z_1 \text{ の表示}) \\
-&= i(-i)\,K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
-   \quad (\because \text{スカラー倍の和の分配と交換}) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1\,G
-   \quad (\because i\cdot(-i) = 1 \text{ と分配則})
+&= (iK_1)H_1^{(+)}
+   \quad (\because S_1^{(+)} \text{ の定義（係数 } iK_1 \in \mathbb{C} \text{ のスカラー倍）}) \\
+&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
+   \quad (\because\ \blkref{def_H1_plus}) \\
+&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - Y_{M_{\mathrm{col}}}Z_1\right)
+   \quad (\because \text{上で得た } Y_mZ_{m+1} = (-i)\sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
+&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - (-i)G\right)
+   \quad (\because \text{上で得た } Y_{M_{\mathrm{col}}}Z_1 = (-i)G) \\
+&= (iK_1)\left((-i)\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (-i)G\right)
+   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ c \to -i,\ (X_1,\dots,X_r) \to (\sigma_1^z\sigma_2^z,\dots,\sigma_{M_{\mathrm{col}}-1}^z\sigma_{M_{\mathrm{col}}}^z))\right) \\
+&= (iK_1)\left((-i)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\ \text{を右辺から左辺へ}\right) \\
+&= \bigl((iK_1)(-i)\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to iK_1,\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z - G)\right) \\
+&= \bigl(i(K_1(-i))\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= \bigl(i((-i)K_1)\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= \bigl((i(-i))K_1\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
+&= (1_{\mathbb{C}}K_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
+&= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right) \\
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G
+   \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -435,6 +459,7 @@ S_1^{(+)}
         "2026-08-15 の式変形統一で、Step 1 の Z_mY_m の鎖と Step 2 の Y_mZ_{m+1} の鎖の先頭行（定義の適用）に欠けていた行末根拠を補った。内容は変えていない。",
         "2026-09-05 の式変形統一で、Step 0 の三つの Pauli 行列積について、段落に置かれていた参照を実際に行列表示を使う各等号の行末へ移した。内容と計算順序は変えていない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-02: Step 1・Step 2 の「スカラー倍の和の分配」「スカラー倍の交換」「スカラー倍の和の分配と交換」「i·(−i) = 1 と分配則」を、finite_sum_of_scalar_multiples・scalar_multiple_distributes_over_matrix_difference・scalar_multiple_is_associative と ℂ の積の結合律・交換律・単位元の 1 行 1 主張に分けた。S_1^{(+)}・S_2 の係数を (iK_1)・(iK_2^*) と括弧で書き、H_1^{(+)} の定義を def_H1_plus で引く。S_1^{(+)} の鎖の「上で得た表示」の行を、和の各項への代入と境界項への代入の 2 行に分けた。",
       ],
     },
   },

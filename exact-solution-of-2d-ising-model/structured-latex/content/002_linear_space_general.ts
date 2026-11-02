@@ -1608,6 +1608,118 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_scalar_multiple_distributes_over_matrix_sum",
+    kind: "claim",
+    title: { text: "スカラー倍は行列の和に分配する" },
+    labels: ["scalar_multiple_distributes_over_matrix_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`c(A + B) = cA + cB`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(c(A + B)\bigr)_{ij}
+&= c\,(A + B)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)\\
+&= c\,(A_{ij} + B_{ij})
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)\\
+&= c\,A_{ij} + c\,B_{ij}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (cA)_{ij} + (cB)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用}\bigr)\\
+&= (cA + cB)_{ij}
+&&\bigl(\because\ \text{和の定義 }\blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。スカラー倍を有限和の外へ出す finite_sum_of_scalar_multiples の帰納法の段に要るので足した。" +
+          "iH_is_real_symmetric の Step 1・Step 2 の鎖が「スカラー倍の和の分配」と名前だけで根拠にしていた段を、その主張で引けるようにするためである。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_scalar_multiples",
+    kind: "claim",
+    title: { text: "スカラー倍した行列の有限和は有限和のスカラー倍に等しい" },
+    labels: ["finite_sum_of_scalar_multiples"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{r} (cX_j) = c\sum_{j=1}^{r} X_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (cX_j)
+&= cX_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } cX_j\text{）}\bigr)\\
+&= c\sum_{j=1}^{1} X_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{r+1} (cX_j)
+&= \Bigl(\sum_{j=1}^{r} (cX_j)\Bigr) + cX_{r+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } cX_j\text{）}\bigr)\\
+&= \Bigl(c\sum_{j=1}^{r} X_j\Bigr) + cX_{r+1}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= c\Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_distributes_over_matrix_sum}\ \bigl(A \to \textstyle\sum_{j=1}^{r} X_j,\ B \to X_{r+1}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
+&= c\sum_{j=1}^{r+1} X_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 1 の Σ(−iσ_m^x) = −iΣσ_m^x と、Step 2 の Σ(−iσ_m^zσ_{m+1}^z) = −iΣσ_m^zσ_{m+1}^z が" +
+          "「スカラー倍の和の分配」と名前だけで根拠にしていた段を引けるよう足した。finite_sum_of_negated_matrices と同じ帰納法の形で示した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_is_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
