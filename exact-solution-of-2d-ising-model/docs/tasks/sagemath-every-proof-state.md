@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 81 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 344 件のうち、SageMath の検算が無いもの 80 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -160,13 +160,18 @@
   人手証明を直した: 主張に `M_col ≥ 2`・`K_1, K_2 > 0` を書いた。散文の「K_1/2 を代入すると Bf = Cf」を、結合定数 (1/2)K_1 の `V_1'` を置いた一行一操作の鎖にした。「すべての数ベクトルへの作用が等しいため BP = CP」は、`end_is_algebra_isomorphism` (1) の単射性から示す形にした。ラベルの無かった「行列積の結合則」は `mat_mult_associative` の参照にした。
   `def_symmetrized_transfer_matrix` と `def_V_plus` の三つの行列の積に括弧を明示し、`WP` の鎖を括弧どおりの 16 等号にした。044 の九本の浮動小数点の行単位検査は、証明の行が変わったので削除した。計算の誤りは無かった。Lean の具体版 `Ising2D.symmetrized_transfer_matrix_on_sectors`（`PhysicalSymTransferBridge.lean`）は旧い九段の形のままで、新しい鎖（end を通す段・16 等号）と 1 対 1 ではない（Lean の連続実行の受け持ち）。
 
+- `antiperiodic_exp_sum`（半整数運動量 θ̃_μ の指数和）: `sagemath/check/antiperiodic_exp_sum/`。exp(i(2πq)_C)（q ∈ `QQ`）を 1 の冪根として `UniversalCyclotomicField` で持ち、証明の全ての鎖（像の 6 行、k_R θ̃_μ の 6 等号は π を不定元にして、S の書き換え、T_{2M,k} の 9 等号、exp_sum の適用、偶数・奇数・非整除の鎖、「とくに」の背理法の鎖）を M_col = 2..8、k = -3M..3M で厳密に確かめた。1 の冪根が本文の exp の値であることと主張は、本文の exp の部分和と尾の上界のボールで確かめた。
+  レビューの指摘で人手証明を直した: 主張の左辺と S を結ぶ散文を鎖に、θ̃ の鎖・奇偶の分割・約分・偶数と奇数の場合の差の行を一行一操作に、非整除の段の散文を 7 等号の鎖に、δ の値に `def_delta_M` と `(2(M)_N)_Z = 2M_col` を根拠として挙げ、`2_R`・`1_C` の添字をそろえ、`real_inclusion_preserves_product`・`def_complex_difference`・`multiply_by_minus_one` を引いた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_reduction_to_A_theta.ts` の `antiperiodic_exp_sum`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_reduction_to_A_theta.ts` の `half_integer_phase_antiperiodicity`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`antiperiodic_exp_sum` のレビューで見つかった（記号の省略）: `exp_sum` の主張は `exp(2πijk/M_col) = M_col δ` と像の記号を省いて書いており、`antiperiodic_exp_sum` は適用の前に読み方を地の文で述べて引いている。`def_delta_M` も写像を `δ^{M_col}`、値を `δ^{(M_col)}` と書き分けが混在し、値の `1`・`0` を `1_C`・`0_C` と書かず、自然数 M_col による整数の合同を ℤ への像を書かずに使っている。どちらも既に検算が付いたブロックなので、この単位では直さず、検算の付いたブロックの見直しで扱う。
 
 - 2026-11-02、`symmetrized_transfer_matrix_on_sectors` の検算で見つかった（括弧の無い積）: `def_symmetrized_transfer_matrix` と `def_V_plus` の定義に積の括弧を明示した。しかし、ほかのブロックは括弧を省いた `V_1^{1/2}V_2V_1^{1/2}`・`BV_2B` を、結合律を引かずに使っている（`thermodynamic_limit_column_limit_and_closed_form.ts` の `εW = Wε` の鎖、`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `W = BV_2B`、`V_plus_exponential_form` の鎖など）。定義のブロックには「括弧によらず同じ行列なので省いて書く」と書いたが、各鎖の括弧の付け替えは、それぞれのブロックの検算を足すときに扱う。
 

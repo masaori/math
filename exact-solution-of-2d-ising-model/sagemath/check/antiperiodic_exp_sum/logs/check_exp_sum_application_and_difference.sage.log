@@ -1,0 +1,8 @@
+  M_col=2: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -6..6 で成り立つ
+  M_col=3: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -9..9 で成り立つ
+  M_col=4: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -12..12 で成り立つ
+  M_col=5: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -15..15 で成り立つ
+  M_col=6: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -18..18 で成り立つ
+  M_col=7: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -21..21 で成り立つ
+  M_col=8: exp_sum の適用の 4 行と S = T_(2M,k) - T_(M,k) の 2 等号が k = -24..24 で成り立つ
+RESULT: PASS

@@ -2,6 +2,9 @@
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十四個目として、`eigenvalues_of_check_Vprime` の Step 2・Step 3' の帰納法と Step 4 の名前だけの根拠「行列の冪の定義と積の結合法則」「スカラー倍と行列の積の交換」「スカラー倍の結合法則」「行列積の結合法則」7 か所（と `k = 0` の「自明」）を、`def_exp` (1)・`mat_mult_associative`・`scalar_multiple_factors_out_of_*_factor`・`scalar_multiple_is_associative`・`scalar_multiple_by_one`・単位行列の主張・ℂ の交換律の 1 行 1 主張の鎖にした（主張は不変。冪の定義 `A^{m+1} := A^mA` に合わせて Step 2 の順序を組み直した）。Lean は人手と 1 対 1 の `Xop_pow_mul_Qproj`・`Qproj_mul_Xop_pow`・`Qproj_mulVec_Qproj_mulVec`、SageMath は `050` の `check_25`（1129 段）。次の一歩は状態台帳の (j)。
 2026-11-02: 可算二次元イジングの書式統一として、臨界条件と双対結合の同値の証明に実双曲線正弦の代入と二倍の除去の根拠を付けた。主張は変えていない。
+
+2026-11-02: 全証明の SageMath 検算の連続実行として、`antiperiodic_exp_sum`（半整数運動量の指数和）に検算 `sagemath/check/antiperiodic_exp_sum/` を付けた（未検算 80 件）。指数の値を 1 の冪根として厳密に持ち、全ての鎖を一行ずつ確かめた。レビューの指摘で、散文の段（主張の左辺と S、非整除の場合）を鎖に、複数の操作を束ねた行を一行一操作に分け、δ の値に def_delta_M を引いた。exp_sum と def_delta_M の記号の省略は状態台帳に記録した。計算の誤りは無かった。次は `half_integer_phase_antiperiodicity`。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の六十三個目として、`check_joint_eigenspace_decomposition` の Step 0・Step 3 の名前だけの根拠「分配法則と、単位行列との積」4 か所を、差の書き換え・分配・単位行列・符号の外出しの主張の 1 行 1 主張の参照に割った（主張は不変）。`R^{(0)}R^{(0)} = R^{(0)}` は、本文に行列の加法の結合則が無いので `R^{(1)}R^{(0)} = 0` と `matrix_minus_zero_matrix` を引く鎖にし、Step 0 の中の順序を入れ替えた。Lean は人手と 1 対 1 の `nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self` と `matrix_sub_zero_matrix_tensorPow`、SageMath は `050` の check_24。次は状態台帳の (i)（`eigenvalues_of_check_Vprime` の結合法則とスカラー倍）。
 
 2026-11-02: 全証明の SageMath 検算の連続実行として、`symmetrized_transfer_matrix_on_sectors`（`W P^{(+)} = V^{(+)} P^{(+)}`）に検算 `sagemath/check/symmetrized_transfer_matrix_on_sectors/` を付けた（未検算 81 件）。散文の「K_1/2 を代入して Bf = Cf」と「作用が等しいので BP = CP」を、ラベル参照付きの鎖と end の単射性から示す形にした。W と V^{(+)} の定義に積の括弧を明示し、WP の鎖を 16 等号にした。044 の古い行単位検査は削除した。計算の誤りは無かった。次は `antiperiodic_exp_sum`。

@@ -1,0 +1,2 @@
+  M_col = 2..40: 像の 6 行と (M_col)_R ≥ 2 > 0、2(M_col)_R ≠ 0 が成り立つ
+RESULT: PASS

@@ -1685,7 +1685,7 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         " である。したがって ",
         math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}`),
         " であり、さらに実数の零因子がないことから ",
-        math(String.raw`2(M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}`),
+        math(String.raw`2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}`),
         " である。以下の分数はこの二つの非零性により定まる。",
       ]),
       paragraph([
@@ -1750,18 +1750,24 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
       paragraph(["最初に、自然数の項数と整数の格子幅の像を対応させる。包含写像の保存性より"]),
       displayMath(
         String.raw`\begin{aligned}
+(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}
+&=2M_{\mathrm{col}}
+&&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z}\text{ は積を保つ},\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
 &=(M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}\bigr)\\
 (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}
-&=2(M_{\mathrm{col}})_{\mathbb R}
+&=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
 &&\bigl(\because\ \iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
+(2M_{\mathrm{col}})_{\mathbb R}
+&=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は積を保つ}\bigr)\\
 ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}
 &=(M_{\mathrm{col}})_{\mathbb C}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
 (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}
 &=(2M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=2(M_{\mathrm{col}})_{\mathbb R}\bigr).
+&&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}=(2M_{\mathrm{col}})_{\mathbb R}\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -1780,26 +1786,46 @@ c_1 c_2^* - s_1 s_2^*\cos\theta
         math(String.raw`(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}`),
         " は複素数であり、",
         math(String.raw`i(k_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\in\mathbb C`),
-        " である。まず指数の実数部分を計算する。",
+        " である。まず、",
+        math(String.raw`\mu\in\mathbb Z`),
+        " について指数の中の実数を計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 k_{\mathbb R}\tilde\theta_\mu
+&=k_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義}\bigr)\\
 &=\frac{2\pi k_{\mathbb R}\left(\mu_{\mathbb R}-\frac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ \tilde\theta_\mu=\tfrac{2\pi(\mu_{\mathbb R}-\frac12)}{(M_{\mathrm{col}})_{\mathbb R}}\bigr)\\
-&=\frac{2\pi(2\mu_{\mathbb R}-1)k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}
-&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R},\ 2_{\mathbb R}\ne0_{\mathbb R}\text{ と }\mathbb R\text{ の分数の通分}\bigr).
+&&\bigl(\because\ \mathbb R\text{ の積の交換律・結合律}\bigr)\\
+&=\frac{2\pi k_{\mathbb R}\cdot2_{\mathbb R}\left(\mu_{\mathbb R}-\frac12\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R},\ 2_{\mathbb R}\ne0_{\mathbb R}\text{ なので分子と分母に }2_{\mathbb R}\text{ を掛ける}\bigr)\\
+&=\frac{2\pi k_{\mathbb R}\left(2_{\mathbb R}\mu_{\mathbb R}-2_{\mathbb R}\cdot\frac12\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr)\\
+&=\frac{2\pi k_{\mathbb R}(2_{\mathbb R}\mu_{\mathbb R}-1_{\mathbb R})}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ 2_{\mathbb R}\cdot\tfrac12=1_{\mathbb R}\bigr)\\
+&=\frac{2\pi(2_{\mathbb R}\mu_{\mathbb R}-1_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の積の交換律}\bigr).
 \end{aligned}`,
       ),
       paragraph([
-        "したがって、求める和を",
+        "主張の左辺を",
       ]),
       displayMath(
-        String.raw`S_{M_{\mathrm{col}},k}:=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}
-\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})\in\mathbb C`,
+        String.raw`S_{M_{\mathrm{col}},k}:=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}} \exp(i (k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C})\in\mathbb C`,
       ),
       paragraph([
-        "と書ける。また、正の自然数 ",
+        "とおくと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M_{\mathrm{col}},k}
+&=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}
+\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-1_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&&\bigl(\because\ \text{直前の鎖を各項の }\mu_{\mathbb Z}\in\mathbb Z\text{ へ適用}\bigr).
+\end{aligned}`,
+      ),
+      paragraph([
+        "また、正の自然数 ",
         math(String.raw`N\in\mathbb N_{\ge1}`),
         " については、順序を保つ包含写像により ",
         math(String.raw`N_{\mathbb R}\ge1_{\mathbb R}>0_{\mathbb R}`),
@@ -1827,15 +1853,20 @@ k_{\mathbb R}\tilde\theta_\mu
 T_{2(M_{\mathrm{col}})_{\mathbb N},k}
 &=\sum_{r=1}^{2(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ T_{N,k}\text{ の定義に }N=2(M_{\mathrm{col}})_{\mathbb N}\text{ を代入}\bigr)\\
-&=\sum_{r=1}^{2(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
-&&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=2(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
-&=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R}-1)k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
-+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&=\sum_{r=1}^{2(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(r_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
+&=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi((2\mu-1)_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
++\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi((2\mu)_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ r\text{ の奇偶による有限和の分割}\bigr)\\
-&=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
-&&\bigl(\because\ S_{M_{\mathrm{col}},k}\text{ の定義}\bigr)\\
+&=\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}-1_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
++\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&&\bigl(\because\ (2\mu-1)+1=2\mu\text{ と、}\iota_{\mathbb N\to\mathbb Z},\iota_{\mathbb Z\to\mathbb R}\text{ が単位元・和・積を保つことから }((2\mu-1)_{\mathbb Z})_{\mathbb R}+1_{\mathbb R}=2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R}\bigr)\\
+&=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(2_{\mathbb R}(\mu_{\mathbb Z})_{\mathbb R})k_{\mathbb R}}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&&\bigl(\because\ S_{M_{\mathrm{col}},k}\text{ の上の式}\bigr)\\
+&=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2_{\mathbb R}\left(2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}\right)}{2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
+&&\bigl(\because\ \mathbb R\text{ の積の交換律・結合律}\bigr)\\
 &=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}\right)_{\mathbb C})
-&&\bigl(\because\ 2(M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}\text{ と分数の約分}\bigr)\\
+&&\bigl(\because\ 2_{\mathbb R}\ne0_{\mathbb R},\ (M_{\mathrm{col}})_{\mathbb R}\ne0_{\mathbb R}\text{ による約分}\bigr)\\
 &=S_{M_{\mathrm{col}},k}+\sum_{\mu=1}^{(M_{\mathrm{col}})_{\mathbb N}}\exp(i\left(\frac{2\pi(\mu_{\mathbb Z})_{\mathbb R}k_{\mathbb R}}{((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}}\right)_{\mathbb C})
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb R}=(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
 &=S_{M_{\mathrm{col}},k}+T_{(M_{\mathrm{col}})_{\mathbb N},k}
@@ -1844,7 +1875,15 @@ T_{2(M_{\mathrm{col}})_{\mathbb N},k}
       ),
       paragraph([
         ref("exp_sum"),
-        " を正の整数 ",
+        " は像の記号を省いて書いており、左辺の項 ",
+        math(String.raw`\exp(2\pi ijk/M_{\mathrm{col}})`),
+        " は ",
+        math(String.raw`\exp(i(2\pi(j_{\mathbb Z})_{\mathbb R}k_{\mathbb R}/(M_{\mathrm{col}})_{\mathbb R})_{\mathbb C})`),
+        "、右辺の係数 ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " は ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}`),
+        " を表す。これを正の自然数 ",
         math(String.raw`2(M_{\mathrm{col}})_{\mathbb N}`),
         " と ",
         math(String.raw`(M_{\mathrm{col}})_{\mathbb N}`),
@@ -1856,12 +1895,12 @@ T_{2(M_{\mathrm{col}})_{\mathbb N},k}
         String.raw`\begin{aligned}
 T_{2(M_{\mathrm{col}})_{\mathbb N},k}
 &=(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}\,\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}
-&&\bigl(\because\ \text{exp\_sum}\text{ を }2(M_{\mathrm{col}})_{\mathbb N}\text{ に適用}\bigr),\\
+&&\bigl(\because\ \blkref{exp_sum}\text{ を }2(M_{\mathrm{col}})_{\mathbb N}\text{ に適用}\bigr),\\
 &=(2M_{\mathrm{col}})_{\mathbb C}\,\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}
 &&\bigl(\because\ (2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}=(2M_{\mathrm{col}})_{\mathbb C}\bigr),\\
 T_{(M_{\mathrm{col}})_{\mathbb N},k}
 &=((M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}
-&&\bigl(\because\ \text{exp\_sum}\text{ を }(M_{\mathrm{col}})_{\mathbb N}\text{ に適用}\bigr),\\
+&&\bigl(\because\ \blkref{exp_sum}\text{ を }(M_{\mathrm{col}})_{\mathbb N}\text{ に適用}\bigr),\\
 &=(M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}
 &&\bigl(\because\ ((M_{\mathrm{col}})_{\mathbb N})_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\bigr).
 \end{aligned}`,
@@ -1884,19 +1923,44 @@ S_{M_{\mathrm{col}},k}
         math(String.raw`M_{\mathrm{col}}\mid k`),
         " となることの対偶から ",
         math(String.raw`2M_{\mathrm{col}}\nmid k`),
-        " でもある。したがって ",
-        math(String.raw`\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
-        " かつ ",
-        math(String.raw`\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)} = 0_{\mathbb C}`),
-        " なので和は ",
-        math(String.raw`0_{\mathbb C}`),
-        "。",
+        " でもある。",
+        math(String.raw`((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}`),
+        "、",
+        math(String.raw`(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=2M_{\mathrm{col}}`),
+        " と ",
+        ref("def_delta_M"),
+        " により ",
+        math(String.raw`\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
+        " なので",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+S_{M_{\mathrm{col}},k}
+&=(2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}
+&&\bigl(\because\ \delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C}\bigr)\\
+&=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}
+&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=0_{\mathbb C}-0_{\mathbb C}
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=0_{\mathbb C}+(-0_{\mathbb C})
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&=-0_{\mathbb C}
+&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(-1_{\mathbb C})\cdot0_{\mathbb C}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&=0_{\mathbb C}
+&&\bigl(\because\ (-1_{\mathbb C})\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr).
+\end{aligned}`,
+      ),
       paragraph([
         math(String.raw`k = lM_{\mathrm{col}}`),
         "（",
         math(String.raw`l \in \mathbb{Z}`),
-        "）のときは ",
+        "）のときは、",
+        math(String.raw`((M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=M_{\mathrm{col}}`),
+        " と ",
+        ref("def_delta_M"),
+        " により ",
         math(String.raw`\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)} = 1_{\mathbb C}`),
         " である。また ",
         math(String.raw`M_{\mathrm{col}}\ne0`),
@@ -1913,7 +1977,11 @@ S_{M_{\mathrm{col}},k}
       ),
       paragraph([
         math(String.raw`l`),
-        " が偶数なら ",
+        " が偶数なら、",
+        math(String.raw`(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=2M_{\mathrm{col}}\mid k`),
+        " と ",
+        ref("def_delta_M"),
+        " により ",
         math(String.raw`\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=1_{\mathbb C}`),
         " なので",
       ]),
@@ -1923,20 +1991,32 @@ S_{M_{\mathrm{col}},k}
 &=(2M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
 &&\bigl(\because\ \delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=\delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
 &=(2M_{\mathrm{col}})_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
-&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(2M_{\mathrm{col}})_{\mathbb C}\bigr)\\
+&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(2M_{\mathrm{col}})_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=(2M_{\mathrm{col}})_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\bigr)\\
-&=(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\bigr)\\
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R})_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb R}=2_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\bigr)\\
+&=2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr)\\
+&=2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}-1_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(2_{\mathbb C}-1_{\mathbb C})(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の分配法則}\bigr)\\
+&=1_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ と }\blkref{def_complex_difference}\text{ により }2_{\mathbb C}-1_{\mathbb C}=(2_{\mathbb R}-1_{\mathbb R},0_{\mathbb R})=(1_{\mathbb R},0_{\mathbb R})=1_{\mathbb C}\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
-&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元}\bigr)\\
+&&\bigl(\because\ \mathbb C\text{ の積の交換律}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})^l
-&&\bigl(\because\ l\text{ が偶数なら }(-1_{\mathbb C})^l=1_{\mathbb C}\bigr).
+&&\bigl(\because\ (-1_{\mathbb C})(-1_{\mathbb C})=1_{\mathbb C}\text{ と }(-1_{\mathbb C})^{-1}=-1_{\mathbb C}\text{ から、すべての }l\in\mathbb Z\text{ で }(-1_{\mathbb C})^{l+2}=(-1_{\mathbb C})^l\text{ であり、}(-1_{\mathbb C})^0=1_{\mathbb C}\text{ なので偶数の }l\text{ では }(-1_{\mathbb C})^l=1_{\mathbb C}\bigr).
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`l`),
-        " が奇数なら ",
+        " が奇数なら、",
+        math(String.raw`(2(M_{\mathrm{col}})_{\mathbb N})_{\mathbb Z}=2M_{\mathrm{col}}\nmid k`),
+        " と ",
+        ref("def_delta_M"),
+        " により ",
         math(String.raw`\delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C}`),
         " なので",
       ]),
@@ -1946,15 +2026,19 @@ S_{M_{\mathrm{col}},k}
 &=(2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
 &&\bigl(\because\ \delta^{2(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=0_{\mathbb C},\ \delta^{(M_{\mathrm{col}})_{\mathbb N}}_{(k,0)}=1_{\mathbb C}\bigr)\\
 &=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
-&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\bigr)\\
+&&\bigl(\because\ (2M_{\mathrm{col}})_{\mathbb C}\cdot0_{\mathbb C}=0_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\bigr)\\
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=0_{\mathbb C}+(-(M_{\mathrm{col}})_{\mathbb C})
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
 &=-(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ 0_{\mathbb C}-(M_{\mathrm{col}})_{\mathbb C}=-(M_{\mathrm{col}})_{\mathbb C}\bigr)\\
+&&\bigl(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
+&=(-1_{\mathbb C})(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})
-&&\bigl(\because\ -(M_{\mathrm{col}})_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})\bigr)\\
+&&\bigl(\because\ \mathbb C\text{ の積の交換律}\ (\blkref{complex_numbers_form_a_field})\bigr)\\
 &=(M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})^l
-&&\bigl(\because\ l\text{ が奇数なら }(-1_{\mathbb C})^l=-1_{\mathbb C}\bigr).
+&&\bigl(\because\ (-1_{\mathbb C})(-1_{\mathbb C})=1_{\mathbb C}\text{ と }(-1_{\mathbb C})^{-1}=-1_{\mathbb C}\text{ から、すべての }l\in\mathbb Z\text{ で }(-1_{\mathbb C})^{l+2}=(-1_{\mathbb C})^l\text{ であり、}(-1_{\mathbb C})^1=-1_{\mathbb C}\text{ なので奇数の }l\text{ では }(-1_{\mathbb C})^l=-1_{\mathbb C}\bigr).
 \end{aligned}`,
       ),
       paragraph([
@@ -2042,9 +2126,9 @@ k
         String.raw`\begin{aligned}
 (M_{\mathrm{col}})_{\mathbb C}(-1_{\mathbb C})^0
 &=(M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}
-&&\bigl(\because\ (-1)^0=1\bigr) \\
+&&\bigl(\because\ (-1_{\mathbb C})^0=1_{\mathbb C}\bigr) \\
 &=(M_{\mathrm{col}})_{\mathbb C}
-&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\bigr).
+&&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb C}\cdot1_{\mathbb C}=(M_{\mathrm{col}})_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})\bigr).
 \end{aligned}`,
       ),
       paragraph(["となる。"]),
