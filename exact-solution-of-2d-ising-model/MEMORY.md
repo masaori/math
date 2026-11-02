@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-02: 連続実行「複素行列版イジング: 章立ての組み直し」（2026-10-31 のゴール達成で一時停止していた）を scheduled-tasks でアーカイブした。状態台帳の「次の一歩」が空で、この連続実行の指示が進める単位は残っていない。確認コマンド `bash scripts/verify-complex-matrix-ising-paper-artifacts.sh` は 2026-11-02 に PASS。状態台帳の「未確定」の作業の順序の外の項目を扱うなら、別の指示で定期実行を立てるか、アーカイブを戻して指示を書き換える。
+
 2026-11-02: Lean の通しの証明のゴールラインの確認の四十個目を行った。本文 `002_linear_space_general.ts` に `scalar_multiple_of_zero_matrix`（`aO = O`）を足し、`003_exp_linear_map.ts` の `theorem_exp_zero` の「零行列のスカラー倍は零行列」「零行列は加法の単位元」をラベル参照に替えた（スカラーを右に書いていた `O · Σ 1/n!` を `(Σ 1/n!)_ℂ O` に直した）。SageMath `sagemath/check/scalar_multiple_of_zero_matrix/` と、Lean の具体版 `ClaimScalarMultipleOfZeroMatrix.lean`・必要十分版 `NecSuf/SmulZeroMatrix.lean`（`SMulZeroClass`）・系を置いた。`003` の残りは係数が `K` の箇所だけになった。次の一歩は状態台帳の「次の一歩」（`004_transfer_matrix.ts`）。
 
 2026-11-02: Lean の通しの証明のゴールラインの確認の三十九個目を行った。本文 `002_linear_space_general.ts` に `matrix_plus_zero_matrix`・`zero_matrix_plus_matrix`・`matrix_minus_zero_matrix`・`finite_sum_of_zero_matrices` を足し、`commutator_of_H_and_check_Z_Y` Step 1 の「零行列の和は零行列」を 2 行に分けて O を足して消す 6 行と添字 1..M_col−1 の 2 行をラベル参照に、「零行列を引いても変わらない」2 か所を `matrix_minus_zero_matrix` にした。一つの添字を除いた集合の上の和の 4 か所は「有限和の添字の付け方」の件に残した。SageMath 4 件を足し 051 の check_01 を 294 段に、Lean の具体版・必要十分版（`NecSuf/MatrixAddSubZero.lean`）・系を置いた。次の一歩は状態台帳の「次の一歩」。
