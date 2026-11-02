@@ -58327,6 +58327,12 @@ const chapter_discrete_whitney = defineSection({
                           title: { text: "有限な向き付き辺列の切断線偶奇" },
                           labels: ["def_edge_sequence_seam_parities"],
                           habitat: "N",
+                          lean: [
+                            "Ising2DLambda.KacWard.edgeSequenceSeamParities",
+                            "Ising2DLambda.KacWard.edgeSequenceSeamParities_apply",
+                            "Ising2DLambda.NecSuf.KacWard.edgeSequenceSeamParities",
+                            "Ising2DLambda.KacWard.edgeSequenceSeamParities_from_necSuf",
+                          ],
                           statement: [
                             paragraph([
                               math(String.raw`m\in\mathbb N`), " とし、有限な向き付き辺列を ",
@@ -60460,7 +60466,8 @@ c(\gamma)+1
                         math(String.raw`\vec f'=\vec e_{\sigma(l)}`), " に適用すると",
                       ]),
                       displayMath(String.raw`\bigl(\tau(\vec e_k,\vec e_{\sigma(k)})+\tau(\vec e_l,\vec e_{\sigma(l)})\bigr)
--\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)\in\{-4,0,4\}`),
+-\bigl(\tau(\vec e_k,\vec e_{\sigma(l)})+\tau(\vec e_l,\vec e_{\sigma(k)})\bigr)\in\{-4,0,4\}
+\qquad\bigl(\because\ \blkref{claim_reconnection_turning_difference}\bigr)`),
                       paragraph([
                         "であり、第一の準備により最初の括弧は ", math(String.raw`0`),
                         " なので ", math(String.raw`-S\in\{-4,0,4\}`), "、よって ",

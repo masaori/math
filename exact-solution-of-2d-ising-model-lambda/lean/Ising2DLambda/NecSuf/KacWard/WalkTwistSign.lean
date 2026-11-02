@@ -14,6 +14,11 @@ def parity {E : Type} (cut : E → Bool) : List E → Bool
   | [] => false
   | e :: es => Bool.xor (cut e) (parity cut es)
 
+/-- 二つの自然数値写像について、有限列の二つの偶奇を同時に読む。 -/
+def edgeSequenceSeamParities {E : Type} (horizontal vertical : E → ℕ)
+    (walk : List E) : ℕ × ℕ :=
+  ((walk.map horizontal).sum % 2, (walk.map vertical).sum % 2)
+
 def boolSign (p : Bool) : ℤ := if p then -1 else 1
 
 def twistParity {E : Type} (a b : Bool) (horizontal vertical : E → Bool) (e : E) : Bool :=

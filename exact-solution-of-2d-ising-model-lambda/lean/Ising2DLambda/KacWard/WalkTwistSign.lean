@@ -10,6 +10,22 @@ import Ising2DLambda.NecSuf.KacWard.WalkTwistSign
 
 namespace Ising2DLambda.KacWard
 
+/-- 有限な向き付き辺列の横・縦の切断線偶奇。 -/
+def edgeSequenceSeamParities {L : ℕ} (walk : List (OrientedEdge L)) : ℕ × ℕ :=
+  ((walk.map horizontalSeamParity).sum % 2,
+    (walk.map verticalSeamParity).sum % 2)
+
+theorem edgeSequenceSeamParities_apply {L : ℕ} (walk : List (OrientedEdge L)) :
+    edgeSequenceSeamParities walk =
+      ((walk.map horizontalSeamParity).sum % 2,
+        (walk.map verticalSeamParity).sum % 2) := rfl
+
+theorem edgeSequenceSeamParities_from_necSuf {L : ℕ}
+    (walk : List (OrientedEdge L)) :
+    edgeSequenceSeamParities walk =
+      Ising2DLambda.NecSuf.KacWard.edgeSequenceSeamParities
+        horizontalSeamParity verticalSeamParity walk := rfl
+
 private lemma negOnePow_mod_two (n : ℕ) :
     (-1 : ℤ) ^ n = (-1 : ℤ) ^ (n % 2) := by
   conv_lhs => rw [← Nat.mod_add_div n 2]
