@@ -2412,7 +2412,11 @@ V_2
         ref("def_even_eigenvectors_of_epsilon"),
         " の ",
         math(String.raw`\mathcal{F}^{(+)}`),
-        " について、次の二つが成り立つ。",
+        " について、次の二つが成り立つ。ここで ",
+        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について ",
+        math(String.raw`X^2 := XX`),
+        " と書く。",
       ]),
       list([
         [math(String.raw`\text{(1)}\quad \left(P^{(+)}\right)^2 = P^{(+)}`)],
@@ -2422,20 +2426,63 @@ V_2
       ]),
     ],
     proof: [
+      paragraph([
+        "以下 ",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        " と書き、",
+        math(String.raw`\mathbb{C}^{n}`),
+        " の元は ",
+        ref("mat_mult"),
+        " のとおり ",
+        math(String.raw`n`),
+        " 行 1 列の行列として積に入れる。スカラー ",
+        math(String.raw`\tfrac{1}{2},\ \tfrac{1}{4},\ 2`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " の包含で実数 ",
+        math(String.raw`\tfrac{1}{2},\ \tfrac{1}{4},\ 2`),
+        " を写した ",
+        math(String.raw`\mathbb{C}`),
+        " の元であり、以下の数の等式はすべて ",
+        math(String.raw`\mathbb{C}`),
+        " の中の等式である。",
+      ]),
       paragraph(["(1)"]),
       displayMath(
         String.raw`\begin{aligned}
 \left(P^{(+)}\right)^2
-&= \tfrac{1}{4}\left(I + \varepsilon\right)\left(I + \varepsilon\right)
+&= P^{(+)}P^{(+)}
+   \quad (\because X^2 := XX) \\
+&= \left(\tfrac{1}{2}\left(I + \varepsilon\right)\right)\left(\tfrac{1}{2}\left(I + \varepsilon\right)\right)
    \quad (\because \blkref{def_epsilon_projectors}) \\
-&= \tfrac{1}{4}\left(I + \varepsilon + \varepsilon + \varepsilon^2\right)
-   \quad (\because \text{分配法則と } I\varepsilon=\varepsilon I=\varepsilon) \\
-&= \tfrac{1}{4}\left(I + 2\varepsilon + \varepsilon^2\right)
-   \quad (\because \text{同類項をまとめる}) \\
-&= \tfrac{1}{4}\left(2I + 2\varepsilon\right)
-   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
+&= \tfrac{1}{2}\left(\left(I + \varepsilon\right)\left(\tfrac{1}{2}\left(I + \varepsilon\right)\right)\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= \tfrac{1}{2}\left(\tfrac{1}{2}\left(\left(I + \varepsilon\right)\left(I + \varepsilon\right)\right)\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= \left(\tfrac{1}{2}\cdot\tfrac{1}{2}\right)\left(\left(I + \varepsilon\right)\left(I + \varepsilon\right)\right)
+   \quad (\because \blkref{scalar_multiple_is_associative}) \\
+&= \tfrac{1}{4}\left(\left(I + \varepsilon\right)\left(I + \varepsilon\right)\right)
+   \quad (\because \blkref{real_inclusion_preserves_product}\ \text{と}\ \mathbb{R}\ \text{での}\ \tfrac{1}{2}\cdot\tfrac{1}{2} = \tfrac{1}{4}) \\
+&= \tfrac{1}{4}\left(I\left(I + \varepsilon\right) + \varepsilon\left(I + \varepsilon\right)\right)
+   \quad (\because \blkref{mat_mult_distributes_over_sum_in_left_factor}) \\
+&= \tfrac{1}{4}\left(\left(II + I\varepsilon\right) + \left(\varepsilon I + \varepsilon\varepsilon\right)\right)
+   \quad (\because \blkref{mat_mult_distributes_over_sum_in_right_factor}\ \text{を二つの積へ同時に適用}) \\
+&= \tfrac{1}{4}\left(\left(I + \varepsilon\right) + \left(\varepsilon I + \varepsilon\varepsilon\right)\right)
+   \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ II,\ I\varepsilon\ \text{へ同時に適用}) \\
+&= \tfrac{1}{4}\left(\left(I + \varepsilon\right) + \left(\varepsilon + \varepsilon\varepsilon\right)\right)
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
+&= \tfrac{1}{4}\left(\left(I + \varepsilon\right) + \left(\varepsilon + I\right)\right)
+   \quad (\because \varepsilon\varepsilon = \varepsilon^2 = I,\ \blkref{epsilon_square_and_eigenvalues}) \\
+&= \tfrac{1}{4}\left(\left(I + \varepsilon\right) + \left(I + \varepsilon\right)\right)
+   \quad (\because \blkref{def_matrix_sum}\ \text{による成分ごとの加法の可換性}) \\
+&= \tfrac{1}{4}\left(2\left(I + \varepsilon\right)\right)
+   \quad (\because \blkref{def_matrix_sum}\ \text{と}\ \blkref{def_matrix_scalar_multiple}\ \text{により成分ごとに}\ z + z = 2z) \\
+&= \left(\tfrac{1}{4}\cdot 2\right)\left(I + \varepsilon\right)
+   \quad (\because \blkref{scalar_multiple_is_associative}) \\
 &= \tfrac{1}{2}\left(I + \varepsilon\right)
-   \quad (\because \text{スカラー倍を整理する}) \\
+   \quad (\because \blkref{real_inclusion_preserves_product}\ \text{と}\ \mathbb{R}\ \text{での}\ \tfrac{1}{4}\cdot 2 = \tfrac{1}{2}) \\
 &= P^{(+)}
    \quad (\because \blkref{def_epsilon_projectors})
 \end{aligned}`,
@@ -2444,94 +2491,114 @@ V_2
         "(2) ",
         ref("def_even_eigenvectors_of_epsilon"),
         " より ",
-        math(String.raw`\mathcal{F}^{(+)} = \{f \in \mathbb{C}^{2^{M_{\mathrm{col}}}} \mid \varepsilon f = f\}`),
-        "（",
-        math(String.raw`\varepsilon f`),
-        " は行列と数ベクトルの積）である。",
+        math(String.raw`\mathcal{F}^{(+)} = \{f \in \mathbb{C}^{n} \mid \varepsilon f = f\}`),
+        " である。",
       ]),
       paragraph([
         math(String.raw`(\subseteq)`),
         " ",
         math(String.raw`y \in \mathrm{im}\,P^{(+)}`),
         " とすると、ある ",
-        math(String.raw`x\in\mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        math(String.raw`x\in\mathbb{C}^{n}`),
         " について ",
         math(String.raw`y = P^{(+)}x`),
-        " と書ける。まず",
+        " と書ける。このとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 P^{(+)}y
-&= P^{(+)}P^{(+)}x
+&= P^{(+)}\left(P^{(+)}x\right)
    \quad (\because y = P^{(+)}x) \\
+&= \left(P^{(+)}P^{(+)}\right)x
+   \quad (\because \blkref{mat_mult_associative}) \\
 &= \left(P^{(+)}\right)^2x
-   \quad (\because \text{積の冪の表記}) \\
+   \quad (\because X^2 := XX) \\
 &= P^{(+)}x
-   \quad (\because \text{(1) の冪等性}) \\
+   \quad (\because \text{(1)}) \\
 &= y
    \quad (\because y = P^{(+)}x)
 \end{aligned}`,
       ),
-      paragraph(["である。よって"]),
+      paragraph(["であり、これを使うと"]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon y
-&= \varepsilon P^{(+)} y
-   \quad (\because \text{上の等式 } y = P^{(+)}y) \\
-&= \varepsilon\cdot\tfrac{1}{2}\left(I + \varepsilon\right) y
+&= \varepsilon\left(P^{(+)} y\right)
+   \quad (\because \text{上の等式 } P^{(+)}y = y) \\
+&= \varepsilon\left(\left(\tfrac{1}{2}\left(I + \varepsilon\right)\right) y\right)
    \quad (\because \blkref{def_epsilon_projectors}) \\
-&= \tfrac{1}{2}\left(\varepsilon I + \varepsilon^2\right) y
-   \quad (\because \text{分配法則}) \\
-&= \tfrac{1}{2}\left(\varepsilon + \varepsilon^2\right) y
-   \quad (\because \varepsilon I=\varepsilon) \\
-&= \tfrac{1}{2}\left(\varepsilon + I\right) y
-   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の } \varepsilon^2=I) \\
-&= \tfrac{1}{2}\left(I + \varepsilon\right) y
-   \quad (\because \text{行列の加法の可換性}) \\
+&= \varepsilon\left(\tfrac{1}{2}\left(\left(I + \varepsilon\right) y\right)\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
+&= \tfrac{1}{2}\left(\varepsilon\left(\left(I + \varepsilon\right) y\right)\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= \tfrac{1}{2}\left(\left(\varepsilon\left(I + \varepsilon\right)\right) y\right)
+   \quad (\because \blkref{mat_mult_associative}) \\
+&= \tfrac{1}{2}\left(\left(\varepsilon I + \varepsilon\varepsilon\right) y\right)
+   \quad (\because \blkref{mat_mult_distributes_over_sum_in_right_factor}) \\
+&= \tfrac{1}{2}\left(\left(\varepsilon + \varepsilon\varepsilon\right) y\right)
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}) \\
+&= \tfrac{1}{2}\left(\left(\varepsilon + I\right) y\right)
+   \quad (\because \varepsilon\varepsilon = \varepsilon^2 = I,\ \blkref{epsilon_square_and_eigenvalues}) \\
+&= \tfrac{1}{2}\left(\left(I + \varepsilon\right) y\right)
+   \quad (\because \blkref{def_matrix_sum}\ \text{による成分ごとの加法の可換性}) \\
+&= \left(\tfrac{1}{2}\left(I + \varepsilon\right)\right) y
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
 &= P^{(+)}y
    \quad (\because \blkref{def_epsilon_projectors}) \\
 &= y
-   \quad (\because \text{上の等式 } y = P^{(+)}y)
+   \quad (\because \text{上の等式 } P^{(+)}y = y)
 \end{aligned}`,
       ),
       paragraph([
-        "よって ",
+        "となる。よって ",
         ref("def_even_eigenvectors_of_epsilon"),
         " により ",
         math(String.raw`y \in \mathcal{F}^{(+)}`),
-        "。",
+        " である。",
       ]),
       paragraph([
         math(String.raw`(\supseteq)`),
         " ",
         math(String.raw`f \in \mathcal{F}^{(+)}`),
-        " すなわち（",
+        " とする。",
         ref("def_even_eigenvectors_of_epsilon"),
-        " により）",
+        " により ",
         math(String.raw`\varepsilon f = f`),
-        " とすると",
+        " であり、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 P^{(+)} f
-&= \tfrac{1}{2}\left(I + \varepsilon\right) f
+&= \left(\tfrac{1}{2}\left(I + \varepsilon\right)\right) f
    \quad (\because \blkref{def_epsilon_projectors}) \\
+&= \tfrac{1}{2}\left(\left(I + \varepsilon\right) f\right)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor}) \\
 &= \tfrac{1}{2}\left(If + \varepsilon f\right)
-   \quad (\because \text{分配法則}) \\
+   \quad (\because \blkref{mat_mult_distributes_over_sum_in_left_factor}) \\
 &= \tfrac{1}{2}\left(f + \varepsilon f\right)
-   \quad (\because If=f) \\
+   \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}) \\
 &= \tfrac{1}{2}\left(f + f\right)
    \quad (\because \text{仮定 } \varepsilon f = f) \\
 &= \tfrac{1}{2}\left(2f\right)
-   \quad (\because \text{同類項をまとめる}) \\
+   \quad (\because \blkref{def_matrix_sum}\ \text{と}\ \blkref{def_matrix_scalar_multiple}\ \text{により成分ごとに}\ z + z = 2z) \\
+&= \left(\tfrac{1}{2}\cdot 2\right)f
+   \quad (\because \blkref{scalar_multiple_is_associative}) \\
+&= 1_{\mathbb{C}}\,f
+   \quad (\because \blkref{real_inclusion_preserves_product}\ \text{と}\ \mathbb{R}\ \text{での}\ \tfrac{1}{2}\cdot 2 = 1) \\
 &= f
-   \quad (\because \text{スカラー倍を整理する})
+   \quad (\because \blkref{scalar_multiple_by_one})
 \end{aligned}`,
       ),
       paragraph([
-        "よって ",
-        math(String.raw`f = P^{(+)}f \in \mathrm{im}\,P^{(+)}`),
-        "。",
+        "となる。よって ",
+        math(String.raw`f = P^{(+)}f`),
+        " であり、",
+        math(String.raw`\mathrm{im}\,P^{(+)}`),
+        " の定義（",
+        math(String.raw`x := f`),
+        " と取る）により ",
+        math(String.raw`f \in \mathrm{im}\,P^{(+)}`),
+        " である。",
       ]),
     ],
     conversion: {
@@ -2540,6 +2607,7 @@ P^{(+)} f
         "式変形の書き方の統一（2026-08-14）: 各式変形の行末に残っていた根拠に対応するラベル参照を、各鎖の直後へ追加した。等式・不等式・場合分け・使用する根拠の内容は変えていない。",
         "式変形の書き方の統一（2026-09-03）: 各鎖の直後に置かれた参照段落を削り、参照を実際に使う各式変形行の行末の \\blkref へ移した。内容・式変形・根拠・参照は不変である。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 (1) の P^{(+)}P^{(-)}=0 と旧 (2) の P^{(+)}+P^{(-)}=I を除き、旧 (3) を (2) とした。F^{(+)} の定義の参照先を <def_even_eigenvectors_of_epsilon> にし、像を数ベクトル空間 C^{2^M} の部分集合として書いた。",
+        "2026-11-02（全証明の SageMath 検算 epsilon_projector_properties）: 分配法則と単位行列の性質を一行に束ねていた行、スカラー倍の出し入れ・結合法則を根拠なしで行っていた行、P(Px) = (P^2)x で行列の積の結合法則を引いていなかった行を、002_linear_space_general の行列の演算の主張へのラベル参照付きの一行一操作に分けた。X^2 := XX の表記を主張に、n := 2^{M_col}・C^n の元を n 行 1 列の行列として積に入れること・スカラー 1/2, 1/4, 2 が inclusion_rr_to_cc による C の元であることを証明の冒頭に置いた。(I+ε)+(ε+I) = 2I+2ε の行を、加法の可換性と A+A = 2A の二行に分けた。数の積の行に real_inclusion_preserves_product を引いた。計算の誤りは無かった。",
       ],
     },
   },

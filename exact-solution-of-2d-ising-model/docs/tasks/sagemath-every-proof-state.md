@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 319 件のうち、SageMath の検算が無いもの 85 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 319 件のうち、SageMath の検算が無いもの 84 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -138,11 +138,16 @@
   各行の差がその行の根拠の関係だけを代入して 0 になることで厳密に確かめ（代入しなければ一致しないことも見る）、代入した exp の関係は形式冪級数で、大小の行と主張は `K_1 = log q` の点の `QQ` と `K_1 ∈ QQ` の点の本文の exp のボールで確かめた。
   レビューの指摘で人手証明の根拠の欠けを直した: `exp(-log tanh K_1)tanh K_1 = 1` の行は `exp(log y) = y` だけを根拠に書き、直前の独立の鎖 `exp(-L)exp(L) = exp(0) = 1` を引いていなかったので、`exp(-L)tanh K_1` から始まる一本の鎖にまとめた。計算の誤りは無かった。
 
+- `epsilon_projector_properties`（`P^{(+)} = (1/2)(I + ε)` の冪等性と、像が `F^{(+)} = {f | εf = f}` に等しいこと）: `sagemath/check/epsilon_projector_properties/`。ε と `P^{(+)}` を本文の定め方（成分の式のクロネッカー積と積）と Sage 組み込みの二経路で作り、四つの鎖の全行を `QQ` 上の多項式環の不定元のベクトルで、`M_col = 1,…,5` で厳密に確かめた。ε を不定元の行列に、`f` を任意のベクトルに置き換えて、`ε^2 = I` と仮定 `εf = f` をそれぞれ一行だけが使っていることを差の形で確かめた。主張 (2) は `P` の列空間と `ε - I` の核の `QQ` 上の一致で確かめた。
+  レビューの指摘で人手証明を直した（分配法則と単位行列を一行に束ねた行、スカラー倍の出し入れ・結合法則を根拠なしで行っていた行、`P(Px) = (P^2)x` で結合法則を引いていなかった行、`(I+ε)+(ε+I) = 2I+2ε` の行を、`002_linear_space_general.ts` の行列の演算の主張を引く一行一操作に分けた。`X^2 := XX` を主張に、スカラーが `inclusion_rr_to_cc` による ℂ の元であることを証明の冒頭に置き、数の積の行に `real_inclusion_preserves_product` を引いた）。計算の誤りは無かった。Lean の具体版 `ClaimEpsilonProjectors.lean` は人手の新しい行の並びとまだ 1 行ずつは対応していない（Lean の連続実行の受け持ち）。
+
 ## 次の一歩
 
-`partition_function_projection_and_jordan_wigner.ts` の `epsilon_projector_properties`（`--list` の先頭）から、文書順に検算を足す。
+`partition_function_projection_and_jordan_wigner.ts` の `epsilon_commutes_with_transfer_matrices`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-02、`epsilon_projector_properties` のレビューで見つかった（未定義の表記と同一視）: 行列の二乗 `X^2` を定めるブロックが本文に無く、`epsilon_square_and_eigenvalues` の `ε^2` などが定義なしで使っている（このブロックでは主張の中で `X^2 := XX` と書いた）。直すには `002_linear_space_general.ts` に行列の冪の定義を置き、使う側から引く。また (⊇) の鎖は `Mat(n,1,ℂ)` についての主張を `f ∈ ℂ^n` にそのまま当てており、`mat_mult` の「n 行 1 列の行列とみなし」（`mat_columnwise` の項の同一視の課題）に依存する。
 
 - 2026-11-02、`first_dual_coupling_relation` のレビューで見つかった（根拠の欠け）: 同じ形の `second_dual_coupling_relation`（第二の双対関係）の証明も、
   `exp(-log tanh K_2)tanh K_2 = 1` の行が `exp(log y) = y` だけを根拠にし、直前の独立の鎖 `exp(-L)exp(L) = exp(0) = 1` を引いていない。
