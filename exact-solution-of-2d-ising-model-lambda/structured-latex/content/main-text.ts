@@ -59360,15 +59360,24 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
 \end{aligned}`),
                         paragraph([
                           "である。二つの鎖の左辺は同じ値なので、",
-                          math(String.raw`\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_1)
-=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_2)`),
-                          " である。両辺に ",
+                        ]),
+                        displayMath(String.raw`\begin{aligned}
+\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_1)
+&=\bigl(\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')\bigr)+\pi_4(S_2)
+&&\bigl(\because\ \text{直前の二つの式鎖の左辺が一致する}\bigr)
+\end{aligned}`),
+                        paragraph([
+                          "である。両辺に ",
                           math(String.raw`\operatorname{dir}(\vec e)+\operatorname{dir}(\vec e')`),
                           " の加法逆元を左から加えると（",
                           math(String.raw`\mathbb Z/4\mathbb Z`), " は加法群）、",
-                          math(String.raw`\pi_4(S_1)=\pi_4(S_2)`),
-                          " を得る。このとき",
                         ]),
+                        displayMath(String.raw`\begin{aligned}
+\pi_4(S_1)
+&=\pi_4(S_2)
+&&\bigl(\because\ \mathbb Z/4\mathbb Z\text{ の加法群で共通の項を打ち消す}\bigr)
+\end{aligned}`),
+                        paragraph(["を得る。このとき"]),
                         displayMath(String.raw`\begin{aligned}
 \pi_4(S_2)+\pi_4(D)
 &=\pi_4(S_2+D)
