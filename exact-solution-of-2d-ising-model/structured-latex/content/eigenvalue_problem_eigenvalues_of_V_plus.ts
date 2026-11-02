@@ -523,36 +523,84 @@ U\,S_2\,U^{-1} = -\,S_2`,
         " 因子の ",
         math(String.raw`\sigma_k^z`),
         " だけが効く。",
+      ]),
+      paragraph([
+        "まず同じサイト ",
+        math(String.raw`k`),
+        " の ",
+        math(String.raw`\sigma_k^z`),
+        " と ",
+        math(String.raw`\sigma_k^x`),
+        " の積の順序を入れ替える。次の鎖の中に限り ",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_k^z\sigma_k^x
+&= \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
+&= (II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^x)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{(\sigma^z\sigma^x)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left(-(\sigma^x\sigma^z)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{pauli_matrix_products}\text{ の }\sigma^z\sigma^x = -\,\sigma^x\sigma^z\right) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left((-1_{\mathbb{C}})(\sigma^x\sigma^z)\right)}^{k\text{th}}\boxtimes\cdots\boxtimes I
+   \quad \left(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\right) \\
+&= (-1_{\mathbb{C}})\left(I\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \quad \left(\because\ \blkref{kronecker_multilinear}\text{ の第 }k\text{ 因子についての線型性}\right) \\
+&= (-1_{\mathbb{C}})\left((II)\boxtimes\cdots\boxtimes\overbrace{(\sigma^x\sigma^z)}^{k\text{th}}\boxtimes\cdots\boxtimes(II)\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\text{ を }k\text{ 番目以外の因子へ同時適用}\right) \\
+&= (-1_{\mathbb{C}})\left(\left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^x}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)
+   \left(I\boxtimes\cdots\boxtimes\overbrace{\sigma^z}^{k\text{th}}\boxtimes\cdots\boxtimes I\right)\right)
+   \quad \left(\because\ \blkref{kronecker_product_rule}\text{ (1)}\right) \\
+&= (-1_{\mathbb{C}})\left(\sigma_k^x\sigma_k^z\right)
+   \quad \left(\because\ \blkref{def_site_pauli_matrices}\right) \\
+&= -\left(\sigma_k^x\sigma_k^z\right)
+   \quad \left(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\right)
+\end{aligned}`,
+      ),
+      paragraph([
         ref("pauli_matrix_products"),
         " の ",
-        math(String.raw`\sigma^z\sigma^x = -\sigma^x\sigma^z`),
-        "、",
         math(String.raw`\sigma^y\sigma^z = -\sigma^z\sigma^y`),
-        "、および ",
+        "、",
         math(String.raw`(\sigma^z)^{-1} = \sigma^z`),
+        "、上の鎖および Step 0 の ",
+        math(String.raw`\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
         " より",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 F\sigma_k^x F^{-1}
-&= \sigma_k^z\sigma_k^x\sigma_k^z
+&= \left(\sigma_k^z\sigma_k^x\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^x\text{ と可換}) \\
-&= -\sigma_k^x\sigma_k^z\sigma_k^z
-   \quad (\because\ \text{パウリ行列の積}) \\
+&= \left(-\left(\sigma_k^x\sigma_k^z\right)\right)\sigma_k^z
+   \quad (\because\ \text{上の }\sigma_k^z\sigma_k^x\text{ の鎖}) \\
+&= -\left(\left(\sigma_k^x\sigma_k^z\right)\sigma_k^z\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_left_factor}\right) \\
+&= -\left(\sigma_k^x\left(\sigma_k^z\sigma_k^z\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\right) \\
+&= -\left(\sigma_k^x\, I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\right)
+   \quad (\because\ \text{Step 0 の }\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で}) \\
 &= -\sigma_k^x
-   \quad (\because\ \text{パウリ行列の積}), \\
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\right), \\
 F\sigma_k^y F^{-1}
-&= \sigma_k^z\sigma_k^y\sigma_k^z
+&= \left(\sigma_k^z\sigma_k^y\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^y\text{ と可換}) \\
 &= -\sigma_k^y\sigma_k^z\sigma_k^z
    \quad (\because\ \text{パウリ行列の積}) \\
 &= -\sigma_k^y
    \quad (\because\ \text{パウリ行列の積}), \\
 F\sigma_k^z F^{-1}
-&= \sigma_k^z\sigma_k^z\sigma_k^z
+&= \left(\sigma_k^z\sigma_k^z\right)\sigma_k^z
    \quad (\because\ k\ \text{以外のサイトの因子は }\sigma_k^z\text{ と可換}) \\
+&= I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\,\sigma_k^z
+   \quad (\because\ \text{Step 0 の }\sigma_m^z\sigma_m^z = I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}\text{ を }m = k\text{ で}) \\
 &= \sigma_k^z
-   \quad (\because\ \text{パウリ行列の積})
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\right)
 \end{aligned}`,
       ),
       paragraph([

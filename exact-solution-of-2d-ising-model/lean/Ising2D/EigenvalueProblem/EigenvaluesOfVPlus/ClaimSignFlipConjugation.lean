@@ -31,6 +31,7 @@ import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationFactorsOutOfMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfNegatedMatrixFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 
 namespace Ising2D
@@ -128,6 +129,62 @@ theorem sigmaX_mul_sigmaX_site (m : Fin M) : sigmaX m * sigmaX m = 1 :=
 （`ClaimEpsilonD0GCommuteAndDiagonalAction.lean`）は `epsilon_G_is_involution` の箇所に対応する。 -/
 theorem sigmaZ_mul_sigmaZ_site (m : Fin M) : sigmaZ m * sigmaZ m = 1 :=
   siteOp_mul_self_of_mul_self_eq_one m pauliZ pauliZ_mul_pauliZ
+
+/-! ## 人手 Step 1 の `F` による共役の鎖（`a ∈ {x, z}`）
+
+人手の鎖の各行と 1 対 1 に対応する。各鎖の 1 行目「`k` 以外のサイトの因子は `σ_k^a` と可換」
+（`Fσ_k^aF^{-1} = (σ_k^zσ_k^a)σ_k^z`）は Lean に `F` を置いていないので立てず、2 行目以降を `(σ_k^zσ_k^a)σ_k^z` から示す。
+`U σ_k^a U^{-1}` の符号を与える `Uflip_conj_sigmaX`・`Uflip_conj_sigmaZ` は、`U` をサイトごとの因子 `flipFam` の
+クロネッカー積として持ち、サイトごとの成分計算で示しており、ここの鎖を使わない。 -/
+
+/-- 人手 Step 1 の `σ_k^zσ_k^x = -(σ_k^xσ_k^z)` の 10 行の鎖。 -/
+theorem sigmaZ_mul_sigmaX_site (k : Fin M) : sigmaZ k * sigmaX k = -(sigmaX k * sigmaZ k) :=
+  calc sigmaZ k * sigmaX k
+      = siteProd M (Function.update 1 k pauliZ) * siteProd M (Function.update 1 k pauliX) := rfl
+                                                        -- `def_site_pauli_matrices`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (pauliZ * pauliX)) := by
+        rw [← siteProd_mul, update_one_mul_update_one_same]
+                                                        -- `kronecker_product_rule` (1)
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (pauliZ * pauliX)) := by
+        rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (-(pauliX * pauliZ))) := by
+        rw [pauliZ_mul_pauliX]                          -- `pauli_matrix_products` の `σ^zσ^x = -σ^xσ^z`
+    _ = siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k ((-1 : ℂ) • (pauliX * pauliZ))) := by
+        rw [neg_eq_neg_one_smul_matrix (pauliX * pauliZ)]
+                                                        -- `negation_is_scalar_multiple_by_minus_one`
+    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ)) k (pauliX * pauliZ)) :=
+        (siteProd M).map_update_smul _ k (-1 : ℂ) (pauliX * pauliZ)
+                                                        -- `kronecker_multilinear`（第 `k` 因子についての線型性。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回）
+    _ = (-1 : ℂ) • siteProd M (Function.update (fun _ : Fin M => (1 : Matrix (Fin 2) (Fin 2) ℂ) * 1) k (pauliX * pauliZ)) := by
+        rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`k` 番目以外へ同時適用）
+    _ = (-1 : ℂ) • (siteProd M (Function.update 1 k pauliX) * siteProd M (Function.update 1 k pauliZ)) := by
+        rw [← siteProd_mul, update_one_mul_update_one_same]
+                                                        -- `kronecker_product_rule` (1)
+    _ = (-1 : ℂ) • (sigmaX k * sigmaZ k) := rfl         -- `def_site_pauli_matrices`
+    _ = -(sigmaX k * sigmaZ k) := (neg_eq_neg_one_smul_tensorPow _).symm
+                                                        -- `negation_is_scalar_multiple_by_minus_one`
+
+/-- 人手 Step 1 の `Fσ_k^xF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^x)σ_k^z = -σ_k^x`。 -/
+theorem sigmaZ_sigmaX_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaX k) * sigmaZ k = -(sigmaX k) :=
+  calc (sigmaZ k * sigmaX k) * sigmaZ k
+      = (-(sigmaX k * sigmaZ k)) * sigmaZ k := by rw [sigmaZ_mul_sigmaX_site]
+                                                        -- 上の `σ_k^zσ_k^x` の鎖
+    _ = -((sigmaX k * sigmaZ k) * sigmaZ k) := neg_mul_matrix_tensorPow _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(sigmaX k * (sigmaZ k * sigmaZ k)) := by rw [Matrix.mul_assoc (sigmaX k) (sigmaZ k) (sigmaZ k)]
+                                                        -- `mat_mult_associative`（Lean の具体版は無く、mathlib の `Matrix.mul_assoc` を 1 回）
+    _ = -(sigmaX k * 1) := by rw [sigmaZ_mul_sigmaZ_site]
+                                                        -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
+    _ = -(sigmaX k) := by rw [mul_identity_matrix_tensorPow]
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+
+/-- 人手 Step 1 の `Fσ_k^zF^{-1}` の鎖の 2 行目以降: `(σ_k^zσ_k^z)σ_k^z = σ_k^z`。 -/
+theorem sigmaZ_sigmaZ_sigmaZ_site (k : Fin M) : (sigmaZ k * sigmaZ k) * sigmaZ k = sigmaZ k :=
+  calc (sigmaZ k * sigmaZ k) * sigmaZ k
+      = 1 * sigmaZ k := by rw [sigmaZ_mul_sigmaZ_site]  -- Step 0 の `σ_m^zσ_m^z = I`（`m = k`）
+    _ = sigmaZ k := identity_matrix_mul_tensorPow _     -- `identity_matrix_is_left_unit_of_mat_mult`
 
 /-! ## 共役写像の性質 -/
 

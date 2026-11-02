@@ -313,6 +313,7 @@ export const ALL_LABELS = [
   "multiply_by_minus_one",
   "negation_factors_out_of_left_factor",
   "negation_factors_out_of_right_factor",
+  "negation_is_scalar_multiple_by_minus_one",
   "negative_number_to_sqrt",
   "nesting_of_commutator_of_H_and_check_Z",
   "nonzero_kernel_iff_det_zero_two_by_two",

@@ -991,6 +991,54 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_negation_is_scalar_multiple_by_minus_one",
+    kind: "claim",
+    title: { text: "行列の符号反転は −1 倍に等しい" },
+    labels: ["negation_is_scalar_multiple_by_minus_one"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。符号反転は ",
+        ref("def_matrix_negation"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`-A = (-1_{\mathbb{C}})\,A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-A)_{ij}
+&= -A_{ij}
+&&\bigl(\because\ \text{符号反転の定義 }\blkref{def_matrix_negation}\bigr)\\
+&= (-1_{\mathbb{C}})\,A_{ij}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \bigl((-1_{\mathbb{C}})\,A\bigr)_{ij}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。sign_flip_conjugation の Step 1 が「パウリ行列の積」と名前だけで根拠にしていた σ_k^zσ_k^x = −(σ_k^xσ_k^z) を一ステップ一定理に割ると、" +
+          "サイト k の因子の符号反転をクロネッカー積の外へ出す段で kronecker_multilinear（スカラー倍についての線型性）を使うために、−C を (−1)C に書き直す段が要るので足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_of_negated_matrix",
     kind: "claim",
     title: { text: "符号反転した行列のスカラー倍はスカラー倍の符号反転に等しい" },
