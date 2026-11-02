@@ -347,6 +347,20 @@ targets=(
   Ising2D.matrixExp_diagonal_apply
   Ising2D.matExp_diagonal
   # --- 数学的道具立て「可逆行列・線型写像との対応・共役変換」（MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/。必要十分版は NecSuf/Conjugation.lean）---
+  Ising2D.Conjugation.conj_mul_matrix
+  Ising2D.Conjugation.conj_one_matrix
+  Ising2D.Conjugation.mul_mul_inv_rev_matrix
+  Ising2D.Conjugation.inv_rev_mul_mul_matrix
+  Ising2D.Conjugation.mulUnitOfChains
+  Ising2D.Conjugation.mulUnitOfChains_eq_mul
+  Ising2D.Conjugation.units_mul_inv_rev_matrix
+  Ising2D.Conjugation.conj_comp_matrix
+  Ising2D.Conjugation.conj_comp_matrix_of_chains
+  Ising2D.Conjugation.conj_mul_matrix_of_necSuf
+  Ising2D.Conjugation.conj_one_matrix_of_necSuf
+  Ising2D.Conjugation.conj_comp_matrix_of_necSuf
+  Ising2D.Conjugation.conj_mul_tensorPow
+  Ising2D.Conjugation.conj_one_tensorPow
   Ising2D.Conjugation.T_mul
   Ising2D.Conjugation.T_one
   Ising2D.Conjugation.T_add

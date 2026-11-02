@@ -11,132 +11,198 @@ export default defineBlocks([
       paragraph([math(String.raw`n \in \mathbb{Z}_{\geq 1}`), " とする。"]),
       paragraph([
         math(String.raw`B \in (\mathrm{Mat}(n,\mathbb{C}))^\times`),
-        "（正則）について、共役写像 ",
+        "（正則）について、",
+        ref("mat_conj"),
+        " の共役写像 ",
         math(String.raw`T_B : \mathrm{Mat}(n,\mathbb{C}) \to \mathrm{Mat}(n,\mathbb{C})`),
         "、",
-        math(String.raw`T_B(A) = B A B^{-1}`),
-        " は次を満たす。",
+        math(String.raw`T_B(A) = (BA)B^{-1}`),
+        "（",
+        ref("mat_conj"),
+        " の定義）は次を満たす。ここで、正則な ",
+        math(String.raw`P \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について ",
+        math(String.raw`P^{-1}`),
+        " は ",
+        math(String.raw`PP^{-1} = I`),
+        " かつ ",
+        math(String.raw`P^{-1}P = I`),
+        " を満たす行列である（正則の意味。",
+        math(String.raw`I := I_{\mathrm{Mat}(n,\mathbb{C})}`),
+        "）。",
       ]),
       list([
         ["乗法的: 任意の ", math(String.raw`A, C \in \mathrm{Mat}(n,\mathbb{C})`), " について ", math(String.raw`T_B(AC) = T_B(A) T_B(C)`)],
         ["単位的: ", math(String.raw`T_B(I) = I`)],
-        ["合成則: ", math(String.raw`A, B \in (\mathrm{Mat}(n,\mathbb{C}))^\times`), "（正則）について ", math(String.raw`T_A \circ T_B = T_{AB}`)],
+        [
+          "合成則: ",
+          math(String.raw`G, H \in (\mathrm{Mat}(n,\mathbb{C}))^\times`),
+          "（正則）について ",
+          math(String.raw`GH`),
+          " は正則であり、",
+          ref("mat_conj"),
+          " の共役写像 ",
+          math(String.raw`T_G, T_H, T_{GH}`),
+          " について ",
+          math(String.raw`T_G \circ T_H = T_{GH}`),
+        ],
       ]),
     ],
     proof: [
+      paragraph([
+        "鎖が引く 3 つの主張（行列の積の結合法則と、単位行列を左右から掛けること）は、どれもその行列の大きさをすべてこの主張の ",
+        math("n"),
+        " として使う。",
+      ]),
       paragraph(["乗法性を示す。", math(String.raw`A, C \in \mathrm{Mat}(n,\mathbb{C})`), " とする。"]),
       displayMath(
         String.raw`\begin{aligned}
 T_B(AC)
-&= B(AC)B^{-1}
-&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
-&= BACB^{-1}
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
-&= BAICB^{-1}
-&&\bigl(\because\ \text{単位元の性質 }IC = C\bigr)\\
-&= BA(B^{-1}B)CB^{-1}
+&= \bigl(B(AC)\bigr)B^{-1}
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義}\bigr)\\
+&= \bigl((BA)C\bigr)B^{-1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \bigl((BA)(IC)\bigr)B^{-1}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&= \Bigl((BA)\bigl((B^{-1}B)C\bigr)\Bigr)B^{-1}
 &&\bigl(\because\ B^{-1}B = I\bigr)\\
-&= (BAB^{-1})(BCB^{-1})
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
-&= T_B(A)(BCB^{-1})
-&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= \Bigl((BA)\bigl(B^{-1}(BC)\bigr)\Bigr)B^{-1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \Bigl(\bigl((BA)B^{-1}\bigr)(BC)\Bigr)B^{-1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \bigl((BA)B^{-1}\bigr)\bigl((BC)B^{-1}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= T_B(A)\bigl((BC)B^{-1}\bigr)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義}\bigr)\\
 &= T_B(A) T_B(C)
-&&\bigl(\because\ T_B\text{ の定義}\bigr)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義}\bigr)
 \end{aligned}`,
       ),
-      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
       paragraph(["単位性を示す。"]),
       displayMath(
         String.raw`\begin{aligned}
 T_B(I)
-&= BIB^{-1}
-&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
+&= (BI)B^{-1}
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義}\bigr)\\
 &= BB^{-1}
-&&\bigl(\because\ \text{単位元の性質 }BI = B\bigr)\\
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
 &= I
 &&\bigl(\because\ BB^{-1} = I\bigr)
 \end{aligned}`,
       ),
-      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
       paragraph([
         "合成則を示す。",
-        math(String.raw`A, B \in (\mathrm{Mat}(n,\mathbb{C}))^\times`),
-        "（正則）とする。準備として、行列の積の逆元 ",
-        math(String.raw`(AB)^{-1} = B^{-1}A^{-1}`),
-        " を確認する。",
-        math(String.raw`B^{-1}A^{-1}`),
+        math(String.raw`G, H \in (\mathrm{Mat}(n,\mathbb{C}))^\times`),
+        "（正則）とする。準備として、",
+        math(String.raw`GH`),
+        " が正則で ",
+        math(String.raw`(GH)^{-1} = H^{-1}G^{-1}`),
+        " であることを確認する。",
+        math(String.raw`H^{-1}G^{-1}`),
         " が ",
-        math(String.raw`AB`),
+        math(String.raw`GH`),
         " の右逆元かつ左逆元であることを示せばよい。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(AB)(B^{-1}A^{-1})
-&= A(BB^{-1})A^{-1}
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
-&= AIA^{-1}
-&&\bigl(\because\ BB^{-1} = I\bigr)\\
-&= AA^{-1}
-&&\bigl(\because\ \text{単位元の性質 }AI = A\bigr)\\
+(GH)(H^{-1}G^{-1})
+&= G\bigl(H(H^{-1}G^{-1})\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= G\bigl((HH^{-1})G^{-1}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= G(IG^{-1})
+&&\bigl(\because\ HH^{-1} = I\bigr)\\
+&= GG^{-1}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
 &= I
-&&\bigl(\because\ AA^{-1} = I\bigr)
+&&\bigl(\because\ GG^{-1} = I\bigr)
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-(B^{-1}A^{-1})(AB)
-&= B^{-1}(A^{-1}A)B
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
-&= B^{-1}IB
-&&\bigl(\because\ A^{-1}A = I\bigr)\\
-&= B^{-1}B
-&&\bigl(\because\ \text{単位元の性質 }IB = B\bigr)\\
+(H^{-1}G^{-1})(GH)
+&= H^{-1}\bigl(G^{-1}(GH)\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= H^{-1}\bigl((G^{-1}G)H\bigr)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= H^{-1}(IH)
+&&\bigl(\because\ G^{-1}G = I\bigr)\\
+&= H^{-1}H
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
 &= I
-&&\bigl(\because\ B^{-1}B = I\bigr)
+&&\bigl(\because\ H^{-1}H = I\bigr)
 \end{aligned}`,
       ),
       paragraph([
         "よって、",
-        math(String.raw`B^{-1}A^{-1}`),
+        math(String.raw`H^{-1}G^{-1}`),
         " は ",
-        math(String.raw`AB`),
-        " の両側逆元であり、逆元の一意性から ",
-        math(String.raw`(AB)^{-1} = B^{-1}A^{-1}`),
-        " が成り立つ。任意の ",
-        math(String.raw`M \in \mathrm{Mat}(n,\mathbb{C})`),
+        math(String.raw`GH`),
+        " の両側逆元であり、",
+        math(String.raw`GH`),
+        " は正則である。",
+        math(String.raw`(GH)^{-1}`),
+        " は ",
+        math(String.raw`(GH)^{-1}(GH) = I`),
+        " を満たすので（正則の意味）、逆元は一つに定まる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(GH)^{-1}
+&= (GH)^{-1}I
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
+&= (GH)^{-1}\bigl((GH)(H^{-1}G^{-1})\bigr)
+&&\bigl(\because\ \text{上の右逆元の鎖}\bigr)\\
+&= \bigl((GH)^{-1}(GH)\bigr)(H^{-1}G^{-1})
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= I(H^{-1}G^{-1})
+&&\bigl(\because\ (GH)^{-1}(GH) = I\bigr)\\
+&= H^{-1}G^{-1}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "任意の ",
+        math(String.raw`X \in \mathrm{Mat}(n,\mathbb{C})`),
         " に対して、",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-(T_A \circ T_B)(M)
-&= T_A(T_B(M))
+(T_G \circ T_H)(X)
+&= T_G\bigl(T_H(X)\bigr)
 &&\bigl(\because\ \text{写像の合成の定義}\bigr)\\
-&= T_A(BMB^{-1})
-&&\bigl(\because\ T_B\text{ の定義}\bigr)\\
-&= A(BMB^{-1})A^{-1}
-&&\bigl(\because\ T_A\text{ の定義}\bigr)\\
-&= (AB)M(B^{-1}A^{-1})
-&&\bigl(\because\ \text{行列の積の結合法則}\bigr)\\
-&= (AB)M(AB)^{-1}
-&&\bigl(\because\ (AB)^{-1} = B^{-1}A^{-1}\bigr)\\
-&= T_{AB}(M)
-&&\bigl(\because\ T_{AB}\text{ の定義}\bigr)
+&= T_G\bigl((HX)H^{-1}\bigr)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義（}B \to H\text{）}\bigr)\\
+&= \Bigl(G\bigl((HX)H^{-1}\bigr)\Bigr)G^{-1}
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義（}B \to G\text{）}\bigr)\\
+&= \Bigl(\bigl(G(HX)\bigr)H^{-1}\Bigr)G^{-1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \Bigl(\bigl((GH)X\bigr)H^{-1}\Bigr)G^{-1}
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \bigl((GH)X\bigr)(H^{-1}G^{-1})
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \bigl((GH)X\bigr)(GH)^{-1}
+&&\bigl(\because\ (GH)^{-1} = H^{-1}G^{-1}\bigr)\\
+&= T_{GH}(X)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の }T_B\text{ の定義（}B \to GH\text{）}\bigr)
 \end{aligned}`,
       ),
-      paragraph(["（引いたブロック: ", ref("mat_conj"), "）"]),
       paragraph([
         "が成り立つ。よって、任意の ",
-        math(String.raw`M \in \mathrm{Mat}(n,\mathbb{C})`),
+        math(String.raw`X \in \mathrm{Mat}(n,\mathbb{C})`),
         " について ",
-        math(String.raw`(T_A \circ T_B)(M) = T_{AB}(M)`),
+        math(String.raw`(T_G \circ T_H)(X) = T_{GH}(X)`),
         " であるから、",
-        math(String.raw`T_A \circ T_B = T_{AB}`),
+        math(String.raw`T_G \circ T_H = T_{GH}`),
         " である。",
       ]),
     ],
     conversion: {
       status: "converted",
       notes: [
+        "2026-11-02: 主張の中で T_B(A) = BAB^{-1} と定義し直していた共役写像を mat_conj の T_B（(BA)B^{-1} と読む）として述べ直し、合成則の T_A・T_{AB} も同じ写像とし、AB が正則であることを主張に入れた（証明の準備で示していた）。" +
+          "三つの鎖の括弧を外した行（BACB^{-1} など）を括弧付きの行にし、名前だけの根拠「行列の積の結合法則」「単位元の性質」を mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・identity_matrix_is_right_unit_of_mat_mult へのラベル参照にした。結合法則を 1 行に 2 回使っていた行を 1 回ずつに割った（乗法性の鎖は 7 行から 9 行、合成則の鎖は 6 行から 8 行、逆元の 2 本は 4 行から 5 行）。合成則の正則な行列を A, B から G, H に、変数 M を X にした（乗法性の A と主張の頭の B、行列の大きさの文字と紛れないように）。「逆元の一意性から (AB)^{-1} = B^{-1}A^{-1}」を、(GH)^{-1}(GH) = I と右逆元の鎖から (GH)^{-1} = H^{-1}G^{-1} を出す 5 行の鎖にした（左逆元の鎖は GH が正則であることに使う）。正則の意味（正則な P について P^{-1} が満たす 2 式）を主張に書いた。主張は弱めていない（「GH は正則」を足した分だけ強めた）。" +
+          "Lean の対応は Ising2D.Conjugation.conj_mul_matrix・conj_one_matrix・mul_mul_inv_rev_matrix・inv_rev_mul_mul_matrix・mulUnitOfChains（GH が正則）・units_mul_inv_rev_matrix・conj_comp_matrix・conj_comp_matrix_of_chains（ClaimConjugationIsRingHom.lean）、必要十分版 NecSuf.Conj.sandwich_mul・sandwich_one・sandwich_comp を同じ段の calc にした。数値検証: sagemath/check/117_conjugation_is_ring_homomorphism/check_02_chains.sage。",
         "式変形の書き方の統一（2026-08-09）。Step 1 / Step 2 / Step 3 という番号での区切りを、それぞれの中間目標の名前（乗法性・単位性・合成則）へ変えた。合成則の中の逆元の公式は式変形ではなく準備なので、そう呼び直した。証明の冒頭に置かれていた共役写像の定義への参照を、それを使った各鎖の直後へ移した（この生成器は \\blkref を定義していないので、(∵ …) の中には題を書き、ラベル参照は式の直後に置く）。式変形の段は 1 つも増減していない。",
         "2026-08-31 の式変形統一で、五本の鎖に行中の \\quad(\\because …) で置かれていた根拠 20 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・式変形・参照は変えていない。",
       ],

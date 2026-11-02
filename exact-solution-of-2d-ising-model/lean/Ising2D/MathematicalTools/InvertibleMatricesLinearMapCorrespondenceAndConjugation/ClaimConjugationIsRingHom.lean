@@ -14,12 +14,36 @@
 
 を満たす。原文はこれらを行列積の結合法則と `B B⁻¹ = B⁻¹ B = I` から直接示している。
 
-本ファイルでは
+## 人手証明と 1 対 1 に対応する具体版
+
+節 `ComplexMatrixChains` の 6 本が人手の鎖と 1 段ずつ対応する。人手の正則な `B ∈ Mat(n,ℂ)` は Lean の単元
+`B : (Matrix (Fin n) (Fin n) ℂ)ˣ`（`↑B` が `B`、`↑B⁻¹` が `B^{-1}`）で、人手の `T_B`（`mat_conj` の `T_B(A) := (BA)B^{-1}`）は
+`T B A = ↑B * A * ↑B⁻¹`（Lean の `x * y * z` は `(x * y) * z`）である。
+
+* 乗法性の鎖の 9 行 ↔ `conj_mul_matrix` の `calc` の 9 段。
+* 単位性の鎖の 3 行 ↔ `conj_one_matrix` の 3 段。
+* 合成則の準備の 2 本（右逆元・左逆元の各 5 行）↔ `mul_mul_inv_rev_matrix`・`inv_rev_mul_mul_matrix`。
+  人手の「`H^{-1}G^{-1}` は `GH` の両側逆元であり、`GH` は正則」↔ `mulUnitOfChains`（2 本の鎖から組んだ単元）と
+  `mulUnitOfChains_eq_mul`（その単元は単元の積 `G * H` と同じ）。
+  人手の `(GH)^{-1} = H^{-1}G^{-1}` の 5 行の鎖 ↔ `units_mul_inv_rev_matrix` の 5 段（値が `GH` のどの単元 `U` についても述べる）。
+* 合成則の鎖の 8 行 ↔ `conj_comp_matrix` の 8 段（`T_{GH}` は値が `GH` の単元 `U` の `T U`）。
+  2 本の鎖から組んだ単元で述べたものが `conj_comp_matrix_of_chains`。
+* `mat_mult_associative` は Lean の具体版が無く、mathlib の `Matrix.mul_assoc` を 1 段に 1 回使う。
+  `identity_matrix_is_left_unit_of_mat_mult`・`..._right_unit_...` は `identity_matrix_mul`・`mul_identity_matrix`。
+  `B^{-1}B = I`・`BB^{-1} = I` は単元の `Units.inv_mul`・`Units.mul_inv`。
+* 人手の `n ∈ ℤ_{≥1}` に対し、Lean は `ℕ` で `0` も許す（成分が無いだけで、どの主張もそのまま成り立つ）。
+
+必要十分版は `Ising2D/NecSuf/Conjugation.lean` の `Conj.sandwich_mul`・`Conj.sandwich_one`・`Conj.sandwich_comp`（同じ段の `calc`）。
+
+## 一般の環での形（下の節 `Ring`）
+
+本ファイルではさらに
 * 一般の環 `R` とその可逆元 `B : Rˣ` に対して定式化し（行列環はその特別な場合）、
 * 原文と同じ形（`Matrix n n ℂ` と `Matrix.inv` による `B⁻¹`）でも系として述べ、
 * さらに mathlib の `ConjAct` 作用（`MulSemiringAction (ConjAct Rˣ) R`）と一致することを示して、
   加法性まで込めた「環準同型」であることを既存結果に接続する。
 -/
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
 import Mathlib.Algebra.Ring.Action.ConjAct
 import Mathlib.Data.Complex.Basic
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
@@ -39,10 +63,10 @@ theorem T_apply (B : Rˣ) (A : R) : T B A = (B : R) * A * ((B⁻¹ : Rˣ) : R) :
 /-- `T_B` は mathlib の共役作用 `ConjAct Rˣ ↷ R` そのものである。 -/
 theorem T_eq_conjAct_smul (B : Rˣ) (A : R) : T B A = ConjAct.toConjAct B • A := rfl
 
-/-- **(1) 乗法的**: `T_B(A C) = T_B(A) T_B(C)`。
+/-- **(1) 乗法的**（一般の環の単元）: `T_B(A C) = T_B(A) T_B(C)`。
 
-原文どおり、結合法則と `B⁻¹ B = I` を挿し込む計算だけで示す
-（mathlib の群作用の一般論には委ねない。人手証明と 1 対 1 に対応させるため）。 -/
+結合法則と `B⁻¹ B = I` を挿し込む計算だけで示す（mathlib の群作用の一般論には委ねない）。
+`simp` で結合法則をまとめて使うので、人手の鎖と 1 段ずつは対応しない。1 対 1 の具体版は節 `ComplexMatrixChains` の `conj_mul_matrix`。 -/
 theorem T_mul (B : Rˣ) (A C : R) : T B (A * C) = T B A * T B C := by
   calc T B (A * C) = (B : R) * A * C * ((B⁻¹ : Rˣ) : R) := by
         simp only [T, mul_assoc]
@@ -133,5 +157,183 @@ theorem matrix_conj_comp (A B : Matrix n n ℂ)
   simp [Matrix.mul_assoc]
 
 end Matrix
+
+section ComplexMatrixChains
+
+open Matrix
+
+variable {n : ℕ}
+
+/-- **`conjugation_is_ring_homomorphism` の乗法性**: `T_B(AC) = T_B(A)T_B(C)`。人手の乗法性の鎖の 9 行。 -/
+theorem conj_mul_matrix (B : (Matrix (Fin n) (Fin n) ℂ)ˣ) (A C : Matrix (Fin n) (Fin n) ℂ) :
+    T B (A * C) = T B A * T B C :=
+  calc T B (A * C)
+      = ((B : Matrix (Fin n) (Fin n) ℂ) * (A * C)) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) :=
+        rfl                                                                   -- `mat_conj` の `T_B` の定義
+    _ = (((B : Matrix (Fin n) (Fin n) ℂ) * A) * C) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [Matrix.mul_assoc (B : Matrix (Fin n) (Fin n) ℂ) A C]             -- `mat_mult_associative`
+    _ = (((B : Matrix (Fin n) (Fin n) ℂ) * A) * ((1 : Matrix (Fin n) (Fin n) ℂ) * C))
+          * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [identity_matrix_mul C]                                            -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = (((B : Matrix (Fin n) (Fin n) ℂ) * A)
+          * ((((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) * (B : Matrix (Fin n) (Fin n) ℂ)) * C))
+          * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [B.inv_mul]                                                        -- `B^{-1}B = I`
+    _ = (((B : Matrix (Fin n) (Fin n) ℂ) * A)
+          * (((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) * ((B : Matrix (Fin n) (Fin n) ℂ) * C)))
+          * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [Matrix.mul_assoc ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          (B : Matrix (Fin n) (Fin n) ℂ) C]                                   -- `mat_mult_associative`
+    _ = ((((B : Matrix (Fin n) (Fin n) ℂ) * A) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+          * ((B : Matrix (Fin n) (Fin n) ℂ) * C))
+          * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [← Matrix.mul_assoc ((B : Matrix (Fin n) (Fin n) ℂ) * A)
+          ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          ((B : Matrix (Fin n) (Fin n) ℂ) * C)]                               -- `mat_mult_associative`
+    _ = (((B : Matrix (Fin n) (Fin n) ℂ) * A) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+          * (((B : Matrix (Fin n) (Fin n) ℂ) * C) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) :=
+        Matrix.mul_assoc _ _ _                                                -- `mat_mult_associative`
+    _ = T B A * (((B : Matrix (Fin n) (Fin n) ℂ) * C) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) :=
+        rfl                                                                   -- `mat_conj` の `T_B` の定義
+    _ = T B A * T B C := rfl                                                  -- `mat_conj` の `T_B` の定義
+
+/-- **`conjugation_is_ring_homomorphism` の単位性**: `T_B(I) = I`。人手の単位性の鎖の 3 行。 -/
+theorem conj_one_matrix (B : (Matrix (Fin n) (Fin n) ℂ)ˣ) :
+    T B (1 : Matrix (Fin n) (Fin n) ℂ) = 1 :=
+  calc T B (1 : Matrix (Fin n) (Fin n) ℂ)
+      = ((B : Matrix (Fin n) (Fin n) ℂ) * 1) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) :=
+        rfl                                                                   -- `mat_conj` の `T_B` の定義
+    _ = (B : Matrix (Fin n) (Fin n) ℂ) * ((B⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [mul_identity_matrix]                                              -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = 1 := B.mul_inv                                                        -- `BB^{-1} = I`
+
+/-- **`conjugation_is_ring_homomorphism` の合成則の準備（右逆元）**: `(GH)(H^{-1}G^{-1}) = I`。人手の 5 行。 -/
+theorem mul_mul_inv_rev_matrix (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) :
+    ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))
+      * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) = 1 :=
+  calc ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))
+        * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+            * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+      = (G : Matrix (Fin n) (Fin n) ℂ) * ((H : Matrix (Fin n) (Fin n) ℂ)
+          * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+            * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))) :=
+        Matrix.mul_assoc _ _ _                                                -- `mat_mult_associative`
+    _ = (G : Matrix (Fin n) (Fin n) ℂ) * (((H : Matrix (Fin n) (Fin n) ℂ)
+          * ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+            * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [Matrix.mul_assoc (H : Matrix (Fin n) (Fin n) ℂ)]                  -- `mat_mult_associative`
+    _ = (G : Matrix (Fin n) (Fin n) ℂ)
+          * ((1 : Matrix (Fin n) (Fin n) ℂ) * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [H.mul_inv]                                                        -- `HH^{-1} = I`
+    _ = (G : Matrix (Fin n) (Fin n) ℂ) * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [identity_matrix_mul]                                              -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = 1 := G.mul_inv                                                        -- `GG^{-1} = I`
+
+/-- **`conjugation_is_ring_homomorphism` の合成則の準備（左逆元）**: `(H^{-1}G^{-1})(GH) = I`。人手の 5 行。 -/
+theorem inv_rev_mul_mul_matrix (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) :
+    (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+        * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+      * ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) = 1 :=
+  calc (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+        * ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))
+      = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * (((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+            * ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))) :=
+        Matrix.mul_assoc _ _ _                                                -- `mat_mult_associative`
+    _ = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) * (G : Matrix (Fin n) (Fin n) ℂ))
+            * (H : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [Matrix.mul_assoc ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)]
+                                                                              -- `mat_mult_associative`
+    _ = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((1 : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [G.inv_mul]                                                        -- `G^{-1}G = I`
+    _ = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [identity_matrix_mul]                                              -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = 1 := H.inv_mul                                                        -- `H^{-1}H = I`
+
+/-- **`conjugation_is_ring_homomorphism` の合成則の準備（`GH` は正則）**: 右逆元・左逆元の 2 本の鎖から組んだ、
+`GH` を値に、`H^{-1}G^{-1}` を逆元に持つ単元。人手の「`H^{-1}G^{-1}` は `GH` の両側逆元であり、`GH` は正則」。 -/
+def mulUnitOfChains (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) : (Matrix (Fin n) (Fin n) ℂ)ˣ :=
+  ⟨(G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ),
+    ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+      * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ),
+    mul_mul_inv_rev_matrix G H, inv_rev_mul_mul_matrix G H⟩
+
+/-- 2 本の鎖から組んだ単元 `mulUnitOfChains G H` は、単元の積 `G * H` と同じ単元である（値がどちらも `GH`）。
+合成則の `T_{GH}` を `T (G * H)` で書くための橋。 -/
+theorem mulUnitOfChains_eq_mul (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) : mulUnitOfChains G H = G * H :=
+  Units.ext rfl
+
+/-- **`conjugation_is_ring_homomorphism` の合成則の準備（逆元は一つに定まる）**: 値が `GH` の単元 `U` なら、どれについても
+`U^{-1} = H^{-1}G^{-1}`。人手の 5 行の鎖（`(GH)^{-1}(GH) = I` と右逆元の鎖）。人手の `(GH)^{-1}` は、`GH` を値に持つ
+どの単元の逆元でもよい（どれも `H^{-1}G^{-1}` になることが、逆元が一つに定まることである）。 -/
+theorem units_mul_inv_rev_matrix (G H U : (Matrix (Fin n) (Fin n) ℂ)ˣ)
+    (hU : (U : Matrix (Fin n) (Fin n) ℂ) = (G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) :
+    ((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+      = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) :=
+  calc ((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+      = ((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) * 1 := by
+        rw [mul_identity_matrix]                                              -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = ((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * (((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))
+            * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+              * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))) := by
+        rw [mul_mul_inv_rev_matrix]                                           -- 右逆元の鎖
+    _ = (((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)))
+            * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+              * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) :=
+        (Matrix.mul_assoc _ _ _).symm                                         -- `mat_mult_associative`
+    _ = (1 : Matrix (Fin n) (Fin n) ℂ)
+            * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+              * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) := by
+        rw [← hU, U.inv_mul]                                                 -- `(GH)^{-1}(GH) = I`
+    _ = ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) :=
+        identity_matrix_mul _                                                 -- `identity_matrix_is_left_unit_of_mat_mult`
+
+/-- **`conjugation_is_ring_homomorphism` の合成則**: `(T_G ∘ T_H)(X) = T_{GH}(X)`。人手の合成則の鎖の 8 行。
+`T_{GH}` は、値が `GH` の単元 `U`（例えば 2 本の鎖から組んだ `mulUnitOfChains G H`）による共役である。 -/
+theorem conj_comp_matrix (G H U : (Matrix (Fin n) (Fin n) ℂ)ˣ)
+    (hU : (U : Matrix (Fin n) (Fin n) ℂ) = (G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ))
+    (X : Matrix (Fin n) (Fin n) ℂ) :
+    (T G ∘ T H) X = T U X :=
+  calc (T G ∘ T H) X
+      = T G (T H X) := rfl                                                    -- 写像の合成の定義
+    _ = T G (((H : Matrix (Fin n) (Fin n) ℂ) * X) * ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) :=
+        rfl                                                                   -- `mat_conj` の `T_B` の定義（`B → H`）
+    _ = ((G : Matrix (Fin n) (Fin n) ℂ)
+          * (((H : Matrix (Fin n) (Fin n) ℂ) * X) * ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)))
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) :=
+        rfl                                                                   -- `mat_conj` の `T_B` の定義（`B → G`）
+    _ = (((G : Matrix (Fin n) (Fin n) ℂ) * ((H : Matrix (Fin n) (Fin n) ℂ) * X))
+          * ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [← Matrix.mul_assoc (G : Matrix (Fin n) (Fin n) ℂ) ((H : Matrix (Fin n) (Fin n) ℂ) * X)]
+                                                                              -- `mat_mult_associative`
+    _ = ((((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) * X)
+          * ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ))
+          * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [← Matrix.mul_assoc (G : Matrix (Fin n) (Fin n) ℂ) (H : Matrix (Fin n) (Fin n) ℂ) X]
+                                                                              -- `mat_mult_associative`
+    _ = (((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) * X)
+          * (((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+            * ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)) :=
+        Matrix.mul_assoc _ _ _                                                -- `mat_mult_associative`
+    _ = (((G : Matrix (Fin n) (Fin n) ℂ) * (H : Matrix (Fin n) (Fin n) ℂ)) * X)
+          * ((U⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) := by
+        rw [units_mul_inv_rev_matrix G H U hU]                               -- `(GH)^{-1} = H^{-1}G^{-1}`
+    _ = T U X := by rw [T, hU]                                                -- `mat_conj` の `T_B` の定義（`B → GH`）
+
+/-- 合成則を、2 本の鎖から組んだ単元（`GH` は正則）で述べたもの。 -/
+theorem conj_comp_matrix_of_chains (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) (X : Matrix (Fin n) (Fin n) ℂ) :
+    (T G ∘ T H) X = T (mulUnitOfChains G H) X :=
+  conj_comp_matrix G H (mulUnitOfChains G H) rfl X
+
+end ComplexMatrixChains
 
 end Ising2D.Conjugation

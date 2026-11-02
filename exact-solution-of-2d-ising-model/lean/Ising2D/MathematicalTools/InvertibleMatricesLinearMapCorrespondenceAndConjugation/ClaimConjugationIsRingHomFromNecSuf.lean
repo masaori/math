@@ -21,6 +21,7 @@
   （`Matrix.mul_inv_rev`）は、右側に出てくる `B⁻¹A⁻¹` を `(AB)⁻¹` と書き直すためだけに使う。
   mathlib の `Matrix.inv` は特異行列に `0` を返す全域関数なので、この書き直しにも正則性は要らない。
 -/
+import Ising2D.Basic
 import Ising2D.NecSuf.Conjugation
 import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
@@ -94,5 +95,50 @@ theorem matrix_conj_add_of_necSuf (B : Matrix n n ℂ) (A C : Matrix n n ℂ) :
   Conj.sandwich_add B B⁻¹ A C
 
 end Matrix
+
+section ComplexMatrixChains
+
+/-! ### 具体版 `conj_mul_matrix`・`conj_one_matrix`・`conj_comp_matrix` を必要十分版の特殊化として得る
+
+`Conj.sandwich_mul` には `u * b = 1` として `B.inv_mul`（`B^{-1}B = I`）を、`Conj.sandwich_one` には `b * u = 1` として
+`B.mul_inv`（`BB^{-1} = I`）を渡す。合成則は `Conj.sandwich_comp` が `B^{-1}A^{-1}` で述べるので、
+具体版と同じく `(GH)^{-1} = H^{-1}G^{-1}`（`units_mul_inv_rev_matrix`）で書き直す。 -/
+
+variable {n : ℕ}
+
+theorem conj_mul_matrix_of_necSuf (B : (Matrix (Fin n) (Fin n) ℂ)ˣ) (A C : Matrix (Fin n) (Fin n) ℂ) :
+    T B (A * C) = T B A * T B C :=
+  Conj.sandwich_mul B.inv_mul A C
+
+theorem conj_one_matrix_of_necSuf (B : (Matrix (Fin n) (Fin n) ℂ)ˣ) :
+    T B (1 : Matrix (Fin n) (Fin n) ℂ) = 1 :=
+  Conj.sandwich_one B.mul_inv
+
+theorem conj_comp_matrix_of_necSuf (G H : (Matrix (Fin n) (Fin n) ℂ)ˣ) (X : Matrix (Fin n) (Fin n) ℂ) :
+    (T G ∘ T H) X = T (G * H) X := by
+  show Conj.sandwich (G : Matrix (Fin n) (Fin n) ℂ) ((G⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+      (Conj.sandwich (H : Matrix (Fin n) (Fin n) ℂ) ((H⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) X)
+    = Conj.sandwich ((G * H : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
+        (((G * H)⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ) X
+  rw [Conj.sandwich_comp, units_mul_inv_rev_matrix G H (G * H) (Units.val_mul G H), Units.val_mul]
+
+end ComplexMatrixChains
+
+section TensorPow
+
+/-! ### `TensorPow M`（`Mat(2^M,ℂ)` の Lean の型）での系
+
+`sign_flip_conjugation` Step 2・Step 3 が `B = U`、`n = 2^{M_col}` で使う乗法性と単位性。添字の型が `Fin n` でなく
+`Conf M` なので、具体版を型ごとに書き直さず、必要十分版をそのまま特殊化する（他の `*_tensorPow` の系と同じ扱い）。 -/
+
+theorem conj_mul_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) (A C : TensorPow M) :
+    T B (A * C) = T B A * T B C :=
+  Conj.sandwich_mul B.inv_mul A C
+
+theorem conj_one_tensorPow {M : ℕ} (B : (TensorPow M)ˣ) :
+    T B (1 : TensorPow M) = 1 :=
+  Conj.sandwich_one B.mul_inv
+
+end TensorPow
 
 end Ising2D.Conjugation

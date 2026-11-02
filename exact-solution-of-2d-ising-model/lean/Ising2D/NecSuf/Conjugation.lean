@@ -73,8 +73,16 @@ variable {M : Type*} [Semigroup M]
 原文 Step 3 が `(AB)⁻¹ = B⁻¹A⁻¹` を確認しているのは、右側に現れる `b'*a'` を
 `(ab)` の逆元と読み替えるためであって、合成則そのものには可逆性が効いていない。 -/
 theorem sandwich_comp (a a' b b' x : M) :
-    sandwich a a' (sandwich b b' x) = sandwich (a * b) (b' * a') x := by
-  simp only [sandwich, mul_assoc]
+    sandwich a a' (sandwich b b' x) = sandwich (a * b) (b' * a') x :=
+  -- 具体版 `Conjugation.conj_comp_matrix` の 8 段から、写像の合成の定義の段（ここでは関数適用そのもの）と
+  -- `(GH)^{-1} = H^{-1}G^{-1}` で右側を書き直す段の 2 段を除いた 6 段。
+  calc sandwich a a' (sandwich b b' x)
+      = sandwich a a' ((b * x) * b') := rfl                                   -- `T_B` の定義
+    _ = (a * ((b * x) * b')) * a' := rfl                                      -- `T_B` の定義（`B → A`）
+    _ = ((a * (b * x)) * b') * a' := by rw [← mul_assoc a (b * x) b']         -- 結合律
+    _ = (((a * b) * x) * b') * a' := by rw [← mul_assoc a b x]                -- 結合律
+    _ = ((a * b) * x) * (b' * a') := mul_assoc _ _ _                          -- 結合律
+    _ = sandwich (a * b) (b' * a') x := rfl                                   -- `T_B` の定義（`B → AB`）
 
 end Semigroup
 
@@ -86,15 +94,26 @@ variable {M : Type*} [Monoid M]
 
 `b * (a*c) * u = (b*a*u) * (b*c*u)`。真ん中で `u * b` が消えることだけが効いている。 -/
 theorem sandwich_mul {b u : M} (h : u * b = 1) (a c : M) :
-    sandwich b u (a * c) = sandwich b u a * sandwich b u c := by
+    sandwich b u (a * c) = sandwich b u a * sandwich b u c :=
+  -- 具体版 `Conjugation.conj_mul_matrix` の 9 段と 1 段ずつ対応する。
   calc sandwich b u (a * c)
-      = b * a * c * u := by simp only [sandwich, mul_assoc]
-    _ = b * a * (u * b) * c * u := by rw [h]; simp only [mul_one]
-    _ = sandwich b u a * sandwich b u c := by simp only [sandwich, mul_assoc]
+      = (b * (a * c)) * u := rfl                                              -- `T_B` の定義
+    _ = ((b * a) * c) * u := by rw [mul_assoc b a c]                          -- 結合律
+    _ = ((b * a) * (1 * c)) * u := by rw [one_mul c]                          -- 単位元を左から掛ける
+    _ = ((b * a) * ((u * b) * c)) * u := by rw [h]                            -- `u * b = 1`
+    _ = ((b * a) * (u * (b * c))) * u := by rw [mul_assoc u b c]              -- 結合律
+    _ = (((b * a) * u) * (b * c)) * u := by rw [← mul_assoc (b * a) u (b * c)] -- 結合律
+    _ = ((b * a) * u) * ((b * c) * u) := mul_assoc _ _ _                      -- 結合律
+    _ = sandwich b u a * ((b * c) * u) := rfl                                 -- `T_B` の定義
+    _ = sandwich b u a * sandwich b u c := rfl                                -- `T_B` の定義
 
 /-- **(2) 単位性**: 必要なのは `b * u = 1`（`u` が `b` の**右**逆元であること）だけ。 -/
-theorem sandwich_one {b u : M} (h : b * u = 1) : sandwich b u (1 : M) = 1 := by
-  simp only [sandwich, mul_one, h]
+theorem sandwich_one {b u : M} (h : b * u = 1) : sandwich b u (1 : M) = 1 :=
+  -- 具体版 `Conjugation.conj_one_matrix` の 3 段と 1 段ずつ対応する。
+  calc sandwich b u (1 : M)
+      = (b * 1) * u := rfl                                                    -- `T_B` の定義
+    _ = b * u := by rw [mul_one b]                                            -- 単位元を右から掛ける
+    _ = 1 := h                                                                -- `b * u = 1`
 
 /-- 単元 `b : Mˣ` による共役写像を、**モノイド準同型**としてまとめたもの。
 これが (1) と (2) を同時に主張している（両側逆元が必要なのはここで初めて）。 -/

@@ -519,11 +519,15 @@ Lean の `A (ι μ) (ι μ')` である。したがって人手の証明中の�
 | `Ising2D.centralizer_is_scalar` | 全元と可換な元はスカラー | `<centralizer_is_scalar>` |
 | `Ising2D.centralizer_is_scalar_abstract` | 同上（抽象テンソル冪側） | 同上（移送の例） |
 | `Ising2D.matExp_hasSum` | `exp(X) = ∑_k (k!)^{-1}X^k`（Frobenius ノルムでの級数の和） | `def_exp` |
-| `Ising2D.Conjugation.T_mul` | 共役写像は乗法的 | `<conjugation_is_ring_homomorphism>` (1) |
+| `Ising2D.Conjugation.conj_mul_matrix` | 共役写像は乗法的（`(Matrix (Fin n) (Fin n) ℂ)ˣ` の単元 `B`、人手の乗法性の鎖の 9 行と 1 対 1 の `calc`。`TensorPow M` での系は `conj_mul_tensorPow`） | `<conjugation_is_ring_homomorphism>` 乗法性 |
+| `Ising2D.Conjugation.conj_one_matrix` | 共役写像は単位的（人手の単位性の鎖の 3 行。`TensorPow M` での系は `conj_one_tensorPow`） | `<conjugation_is_ring_homomorphism>` 単位性 |
+| `Ising2D.Conjugation.mul_mul_inv_rev_matrix` / `inv_rev_mul_mul_matrix` / `mulUnitOfChains` / `units_mul_inv_rev_matrix` | `(GH)(H^{-1}G^{-1}) = I`・`(H^{-1}G^{-1})(GH) = I`（各 5 行）、2 本から組んだ単元（`GH` は正則。`mulUnitOfChains_eq_mul` で `G * H` と同じ）、`(GH)^{-1} = H^{-1}G^{-1}`（5 行。値が `GH` のどの単元についても） | `<conjugation_is_ring_homomorphism>` 合成則の準備 |
+| `Ising2D.Conjugation.conj_comp_matrix` / `conj_comp_matrix_of_chains` | `(T_G ∘ T_H)(X) = T_{GH}(X)`（人手の合成則の鎖の 8 行。`T_{GH}` は値が `GH` の単元の共役、2 本の鎖から組んだ単元で述べたものが `_of_chains`） | `<conjugation_is_ring_homomorphism>` 合成則 |
+| `Ising2D.Conjugation.T_mul` | 共役写像は乗法的（一般の環 `R` の単元。人手と 1 対 1 ではない） | `<conjugation_is_ring_homomorphism>` (1) |
 | `Ising2D.Conjugation.T_one` | 共役写像は単位的 | `<conjugation_is_ring_homomorphism>` (2) |
 | `Ising2D.Conjugation.T_comp` | `T_A ∘ T_B = T_{AB}` | `<conjugation_is_ring_homomorphism>` (3) |
 | `Ising2D.Conjugation.TMonoidHom` | `B ↦ T_B` は群準同型 `Rˣ →* RingAut R` | (3) の言い換え |
-| `Ising2D.Conjugation.matrix_conj_*` | 上記を `Matrix.inv` の記法で述べた版 | 原文の記法に忠実な版 |
+| `Ising2D.Conjugation.matrix_conj_*` | 一般の環の版を `Matrix.inv` の記法で述べた版（人手と 1 対 1 ではない。1 対 1 は上の `conj_*_matrix`） | 原文の記法に寄せた版 |
 | `Ising2D.acomm` / `Ising2D.commutator_via_anticommutators` | `[a b, c] = a [b,c]₊ - [a,c]₊ b`（任意の環） | `<commutator_via_anticommutators>` |
 | `Ising2D.matrix_commutator_via_anticommutators` | 同上を `Mat(n, ℂ)` で述べた版 | 同上 |
 | `Ising2D.pauliX/pauliY/pauliZ` と積公式 | Pauli 行列とその積・反可換関係 | `<Z_Y_generate_algebra>` Step 1 |

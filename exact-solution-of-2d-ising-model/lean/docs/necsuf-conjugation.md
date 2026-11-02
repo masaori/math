@@ -7,12 +7,19 @@
 
 | | ファイル | 主要な宣言 |
 | --- | --- | --- |
-| 具体版（人手証明と 1 対 1） | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` | `Ising2D.Conjugation.matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` |
+| 具体版（人手証明と 1 対 1） | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHom.lean` | `Ising2D.Conjugation.conj_mul_matrix` / `conj_one_matrix` / `mul_mul_inv_rev_matrix` / `inv_rev_mul_mul_matrix` / `mulUnitOfChains` / `units_mul_inv_rev_matrix` / `conj_comp_matrix` / `conj_comp_matrix_of_chains`（`Matrix.inv` の記法の `matrix_conj_mul` / `matrix_conj_one` / `matrix_conj_comp` は人手の鎖と 1 対 1 ではない） |
 | 必要十分版 | `Ising2D/NecSuf/Conjugation.lean` | `Ising2D.NecSuf.Conj.sandwich_mul` / `sandwich_one` / `sandwich_comp` / `sandwich_add` / `conjMulAutHom` |
-| 必要十分版からの導出 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.matrix_conj_mul_of_necSuf` ほか |
+| 必要十分版からの導出 | `Ising2D/MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/ClaimConjugationIsRingHomFromNecSuf.lean` | `Ising2D.Conjugation.conj_mul_matrix_of_necSuf` / `conj_one_matrix_of_necSuf` / `conj_comp_matrix_of_necSuf`、`TensorPow M` での系 `conj_mul_tensorPow` / `conj_one_tensorPow`、`matrix_conj_mul_of_necSuf` ほか |
 
 以下はすべて Lean で通っている証明（`lake build` と `scripts/check-no-sorry.sh` が通る状態）に
 基づく記述であり、見込みや推測ではない。
+
+**手順の対応**（README 4 節の要件 1）: `Conj.sandwich_mul` の `calc` の 9 段は具体版 `conj_mul_matrix` の 9 段
+（`T_B` の定義・結合律・単位元を左から掛ける・`u * b = 1`・結合律 3 回・`T_B` の定義 2 回）と、`Conj.sandwich_one` の 3 段は
+`conj_one_matrix` の 3 段と 1 段ずつ対応する。`Conj.sandwich_comp` の 6 段は `conj_comp_matrix` の 8 段から、写像の合成の定義の段
+（関数適用そのもの）と `(GH)^{-1} = H^{-1}G^{-1}` で書き直す段を除いたものである（下の 1 節の最後の段落）。
+合成則の準備の 4 本（右逆元・左逆元の鎖、`GH` の正則性、逆元が一つに定まる鎖）には必要十分版の対応物を置かない。
+必要十分版の合成則は右側を `b' * a'` のまま述べ、逆元を使わないので、準備が要らないからである。
 
 ## 1. 「環」は要らない — (1)(2)(3) はモノイドで足りる
 

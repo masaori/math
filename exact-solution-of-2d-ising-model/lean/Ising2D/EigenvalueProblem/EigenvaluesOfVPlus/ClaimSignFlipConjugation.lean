@@ -34,7 +34,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleOfNegatedMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOneFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
-import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHom
+import Ising2D.MathematicalTools.InvertibleMatricesLinearMapCorrespondenceAndConjugation.ClaimConjugationIsRingHomFromNecSuf
 
 namespace Ising2D
 
@@ -564,7 +564,7 @@ noncomputable def UflipUnit (M : ℕ) : (TensorPow M)ˣ :=
   ⟨Uflip M, UflipInv M, Uflip_mul_inv, UflipInv_mul⟩
 
 /-- 人手 Step 2・Step 3 の 3 行: 共役 `X ↦ U X U^{-1}` は積を保つ。
-`U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性 `Conjugation.T_mul`）
+`U(AB)U^{-1} = T_U(AB)`（`T_B` の定義）`= T_U(A)T_U(B)`（`conjugation_is_ring_homomorphism` の乗法性。具体版 `Conjugation.conj_mul_matrix` の `TensorPow M` の系 `Conjugation.conj_mul_tensorPow`）
 `= (UAU^{-1})(UBU^{-1})`（`T_B` の定義）。Lean の `U * X * U⁻¹` は人手の読み `(UX)U^{-1}` と同じ括弧である。 -/
 theorem Uflip_conj_mul (A B : TensorPow M) :
     Uflip M * (A * B) * UflipInv M
@@ -572,7 +572,7 @@ theorem Uflip_conj_mul (A B : TensorPow M) :
   calc Uflip M * (A * B) * UflipInv M
       = Conjugation.T (UflipUnit M) (A * B) := rfl                           -- `T_B` の定義（`B = U`）
     _ = Conjugation.T (UflipUnit M) A * Conjugation.T (UflipUnit M) B :=
-        Conjugation.T_mul _ _ _                                              -- 乗法性
+        Conjugation.conj_mul_tensorPow _ _ _                                 -- 乗法性
     _ = (Uflip M * A * UflipInv M) * (Uflip M * B * UflipInv M) := rfl       -- `T_B` の定義（`B = U`）
 
 /-- 人手 Step 4 の 2 行: `(U(cA))U^{-1} = (c(UA))U^{-1} = c((UA)U^{-1})`。 -/
@@ -600,7 +600,7 @@ theorem Uflip_conj_xString_zero :
   calc Uflip M * xString M 0 * UflipInv M
       = Uflip M * 1 * UflipInv M := by rw [xString_zero]                   -- `P_0` の定義
     _ = Conjugation.T (UflipUnit M) 1 := rfl                                -- `T_B` の定義（`B = U`）
-    _ = 1 := Conjugation.T_one _                                            -- 単位性
+    _ = 1 := Conjugation.conj_one_tensorPow _                               -- 単位性（`Conjugation.conj_one_matrix` の `TensorPow M` の系）
     _ = xString M 0 := xString_zero.symm                                    -- `P_0` の定義
 
 /-- 人手 Step 2 の帰納法の段の前半（場合分けの前の 6 行）:
