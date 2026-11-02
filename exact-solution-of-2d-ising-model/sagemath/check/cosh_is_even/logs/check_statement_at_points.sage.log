@@ -1,0 +1,3 @@
+cosh(-x) と cosh(x) の形式冪級数が全次数 14 以下で一致（sinh は一致しない）
+6 点で cosh(-x) と cosh(x) のボールが重なり、x ≠ 0 では sinh(-x) と sinh(x) は重ならない
+RESULT: PASS

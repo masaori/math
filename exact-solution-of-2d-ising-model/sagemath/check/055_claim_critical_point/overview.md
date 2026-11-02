@@ -4,9 +4,9 @@
 
 **対象ラベル**: `specific_heat_log_divergence` （structured-latex 側の安定識別子）
 
-- ファイル: `structured-latex/content/critical_point_and_log_divergence.ts`（臨界点の章）。`cosh_addition_and_half_angle`・`elementary_sine_bounds`・`closed_form_log_integral`・`sine_integral_two_sided` は `structured-latex/content/020_critical_point.ts`（数学的道具立て）
+- ファイル: `structured-latex/content/critical_point_and_log_divergence.ts`（臨界点の章）。双曲線関数の主張（`cosh_addition_formula` ほか）・`elementary_sine_bounds`・`closed_form_log_integral`・`sine_integral_two_sided` は `structured-latex/content/020_critical_point.ts`（数学的道具立て）
 - 併せて検証:
-  - `cosh_addition_and_half_angle`（加法定理・半角公式・`arcsinh`）
+  - 双曲線関数の主張（加法定理・半角公式・`arcsinh`。2026-11-02 に旧 `cosh_addition_and_half_angle` を `cosh_addition_formula` ほか 21 ブロックに分けた。各主張の検算は `sagemath/check/<ラベル>/`）
   - `def_kappa` / `def_critical_sinh_product_A` / `gamma_kappa_identity`（鍵の恒等式）
   - `critical_point_iff_kappa_zero`（臨界条件の同値。008 章 `critical_condition_c1_eq_s1_c2` とも突き合わせ）
   - `isotropic_A_equals_one` / `kappa_of_K_basic`（等方な場合の設定と定数）
@@ -64,7 +64,7 @@ sinh²(γ(θ)/2) = sinh²(κ/2) + A sin²(θ/2)
 
 | # | ファイル | 検証内容 | ステータス | 結果 |
 |---|---------|---------|-----------|------|
-| 01 | check_01_gamma_kappa_identity.sage | 鍵の恒等式（加法定理の段 → `γ_1` → `cosh γ` → 半角 → `arcsinh` 表示 → `κ` の偶関数性）、`cosh_addition_and_half_angle` (2)(4)(5) | PASS | （run-log.txt 参照） |
+| 01 | check_01_gamma_kappa_identity.sage | 鍵の恒等式（加法定理の段 → `γ_1` → `cosh γ` → 半角 → `arcsinh` 表示 → `κ` の偶関数性）、旧 `cosh_addition_and_half_angle` (2)(4)(5)（いまの `cosh_half_angle_formula`・`sinh_equation_solved_by_arcsinh`・`sinh_at_least_argument` ほか） | PASS | （run-log.txt 参照） |
 | 02 | check_02_critical_equivalence.sage | `s1s2=1 ⟺ K1=K2* ⟺ κ=0 ⟺ c1=s1c2`、等方で `A=1`、`κ'`/`κ''` の式、`|K−K_c|≤1/10` の定数 10 件 | PASS | （run-log.txt 参照） |
 | 03 | check_03_elementary_bounds.sage | `elementary_sine_bounds`（`c_0`）、`closed_form_log_integral` (1)(2)(3)、`sine_integral_two_sided` の両側評価、`γ` の導関数の式と `\|∂_κγ\|≤1` | PASS | （run-log.txt 参照） |
 | 04 | check_04_G_second_derivative.sage | 本文 Step 1（(R5) の交換・`\|G'\|≤1/2`）／Step 2,3（折り返しと `J,T` 分解）／Step 4,5,6 の各定数／Step 7 の `6/5`、偶関数性、発散 | PASS | （run-log.txt 参照） |

@@ -1,0 +1,3 @@
+exp(-u) の鎖の 1〜4 行目、W·exp(u) = 1 の下での 7 行目、主の鎖の 3〜5 行目が L[W] で厳密に成り立つ
+7 点で exp(u) = y+s、exp(-u)exp(u) = 1、exp(-u) = s-y、sinh(arcsinh(y)) = y がボールで成り立つ
+RESULT: PASS

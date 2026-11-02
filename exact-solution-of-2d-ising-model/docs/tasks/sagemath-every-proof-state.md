@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-02: 証明を持つブロック 260 件のうち、SageMath の検算が無いもの 96 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-02: 証明を持つブロック 279 件のうち、SageMath の検算が無いもの 95 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -87,9 +87,20 @@
   人手証明の欠けを直した: 連続度 `ω(h)` は上限で定めていたが、定義の集合が上に有界であること（`ω(h)` が実数として定まること）を示していなかったので、一様連続性（`ε = 1`）と `u_j` の分点の鎖から `0 ≤ ω(h) ≤ K` を示す段を足した。
   あわせて、端点 `x_ν` と長さ `len(I_μ)` を置いて区間加法性の前提（端のつながり）を鎖で示し、距離・`|t-s| ≤ 2π`・`u_j ∈ [0,2π]`・主張の評価・`N := ⌊2π/η_0⌋+1` を (∵) 付きの鎖に、外部前提の一様連続性を使う `≤` の形で書き、実数列の極限の意味と ℝ への脱出を主張に書いた。一様連続性の幅をずらしの量 `δ` と分けて `η_0`・`η_1` にした。計算の誤りは無かった。
 
+- `cosh_addition_and_half_angle`（cosh・sinh の加法定理・半角公式・sinh の単調性・arcsinh・`t ≤ sinh t ≤ t cosh t` を束ねていたブロック）: 1 ブロック 1 主張に分け、
+  `cosh_is_even`・`sinh_is_odd`・`cosh_addition_formula`・`sinh_addition_formula`・`cosh_half_angle_formula`・`sinh_double_angle_formula`・`sinh_zero`・`sinh_strictly_increasing`・`sinh_is_injective`・`sinh_derivative`・
+  `sqrt_of_square_plus_one_is_positive`・`arcsinh_argument_times_conjugate_is_one`・`arcsinh_argument_is_positive`・定義 `def_arcsinh`・`sinh_of_arcsinh`・`sinh_equation_solved_by_arcsinh`・`arcsinh_derivative`・`cosh_at_least_one`・`cosh_monotone_on_nonnegative`・
+  `sinh_at_least_argument`・`sinh_at_most_argument_times_cosh` の 21 ブロックにした（`020_critical_point.ts`）。20 個の主張それぞれに同名の検算 `sagemath/check/<ラベル>/` を付けた（共通の準備 `sagemath/_shared/hyperbolic_by_definition.sage`）。
+  等号は exp の値の不定元・剰余環・関数体 `QQ(y)[s]/(s²-y²-1)`（微分も）・形式冪級数（全次数 14 以下）・`AA` で厳密に、不等号と主張は本文の exp の部分和に尾の評価を足したボールで確かめた。
+  人手証明を直した（「定義から直ちに従う」「同じ計算で従う」で省いていた cosh の偶関数性・sinh の奇関数性・sinh の加法定理・倍角公式・sinh' = cosh を鎖に、
+  未定義の実数の絶対値に頼っていた `y + √(y²+1) > 0` を `(y+s)(s-y) = 1` と `p+q = 2s > 0` からの背理法に、`exp(-u) = s-y` を exp の積の法則からの鎖に、
+  cosh の `[0,∞)` 上の単調性と `cosh ≥ 1` を積分ではなく加法定理・半角公式から、(5) の二つの不等式を主張の左辺から始まる鎖に）。
+  本文で宣言していなかった微分の事実（exp' = exp、log'、平方根の微分、和・定数倍・積・商・合成の公式、微分可能なら連続）を `remark_real_analysis_facts_R3_R4` に「微分の公式」として足した。
+  下流（`critical_point_and_log_divergence.ts` の約 30 箇所、`closed_form_log_integral`）の「(1)」〜「(5)」の参照を、その行を実際に支える新しいラベルに付け替えた。計算の誤りは無かった。
+
 ## 次の一歩
 
-`020_critical_point.ts` の `cosh_addition_and_half_angle`（`--list` の先頭）から、文書順に検算を足す。
+`020_critical_point.ts` の `elementary_sine_bounds`（`--list` の先頭）から、文書順に検算を足す。
 
 ## 検算で見つかった本文の誤り
 
@@ -178,3 +189,13 @@
   Lean の具体版 `ClaimPsdCauchySchwarz.lean` は必要十分版からの一行の導出（`simpa`）で、直した人手証明（準備・展開・二つの場合）と 1 対 1 に対応しない。Lean の連続実行の状態台帳へ渡す。
 - 2026-11-02、`riemann_sum_to_integral` の検算で見つかった（Lean との対応の欠けと下流の記述）: Lean の具体版 `TheoremRiemannSumToIntegral.lean` は `δ ∈ [0,1)`（人手は `[0,1]`）で、必要十分版 `NecSuf/RiemannSum.lean` の冒頭は人手の主張を「周期 `2π`」と書いているが、人手は周期性を仮定しない。直した人手証明（`ω(h)` の有界性の段、端点 `x_ν` の鎖）と 1 対 1 にも対応していない。Lean の連続実行の状態台帳へ渡す。
   `thermodynamic_limit_column_limit_and_closed_form.ts` の「積分について外部から持ち込む事実は (R1)(R2) の 2 つだけ」は、人手証明が使う `ℝ` の上限の存在とアルキメデス性を数えていない（積分についての事実ではないので矛盾ではないが、`ℝ` の性質の一覧としては欠ける）。この単位では直さなかった。
+- 2026-11-02、`cosh_addition_and_half_angle` の分割で見つかった（文書順と未宣言の事実）: `def_arcsinh`・`sinh_of_arcsinh`・`remark_real_analysis_facts_R3_R4` の微分の公式は、文書順で後ろの
+  `partition_function_transfer_matrix_representation.ts` にある実対数 `def_real_logarithm_positive` を引く（旧ブロックは log を参照なしで使っていたので表に出ていなかった）。
+  組み直した章の並び（`tools/content-modules.ts` の `TRAILING_CONTENT_FILES`）を変えないため、この単位では動かさなかった。直すには、実対数の定義を `003_exp_linear_map.ts` の
+  `real_exp_strictly_increasing` の後へ移す（依存は実数の exp の三つのブロックだけ）。目録の道具 `tools/build-flat-inventory.ts` には実対数を数学的道具立てとして登録した
+  （この道具は origin/main の時点で、他の単位が足した項目について「数学的道具立てが2次元イジングモデルの項を前提にしています」で止まっている）。
+  `elementary_sine_bounds`・`sine_integral_two_sided` は sin・cos の微分（`(cos t-1+t²/2)' = t-sin t` など）を使うが、微分の公式は sin・cos の導関数を宣言していない。次の単位で扱う。
+  `second_derivative_log_divergence` の `δ ≤ sinh(1/4) ≤ 0.2527` の数値の上界には根拠が無い（旧 (5) からは `(1/4)cosh(1/4) ≈ 0.2579` までしか出ない）。そのブロックの検算を足すときに扱う。
+  Lean の具体版 `ClaimCoshAdditionAndHalfAngle.lean`（mathlib の `Real.cosh_add` などへ委ねていて人手証明と 1 対 1 でない）と、`DefinitionKappaAndCritical.lean`・
+  `ClaimCriticalPointSinhKcAndSecondDerivativeLogDivergence.lean`・`ClaimGammaDerivativesInKappa.lean`・`ClaimClosedFormLogIntegral.lean`・`NecSuf/HyperbolicBounds.lean`・`lean/docs/ch020-formalization.md` のコメントは、
+  消えたラベル `cosh_addition_and_half_angle` の (1)〜(5) を指したままである。Lean の連続実行の状態台帳へ渡す。

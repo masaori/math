@@ -1,6 +1,6 @@
 # ---------------------------------------------------------
 # SageMath: 鍵の恒等式（章 E の出発点）
-#   対象: structured-latex gamma_kappa_identity, cosh_addition_and_half_angle
+#   対象: structured-latex gamma_kappa_identity, 双曲線関数の主張（旧 cosh_addition_and_half_angle）
 #
 #   cosh gamma(theta) = gamma_1(theta) = cosh kappa + 2 A sin^2(theta/2)
 #   sinh^2(gamma/2)   = sinh^2(kappa/2) + A sin^2(theta/2)

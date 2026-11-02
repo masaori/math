@@ -5,7 +5,7 @@
 #   (1) K_c := (1/2) log(1 + sqrt 2) について sinh 2K_c = 1 と K_c > 0 を、
 #       x := exp(2K_c) = 1 + sqrt 2 として代数的数体 QQbar で厳密に確かめる
 #       （sinh 2K_c = (x - 1/x)/2）。sinh 2K = 1 の解が R_{>0} にただ一つであることは
-#       sinh の狭義単調性による（cosh_addition_and_half_angle (3)）。ここでは格子点での
+#       sinh の単射性による（sinh_is_injective）。ここでは格子点での
 #       sinh 2K - 1 の符号の変化が一回だけであることを見る（例示）。
 #   (2) 証明の式変形: arccosh 表示の f と、(1/2) log(2 sinh 2K) + G(kappa(K))（specific_heat_log_divergence の f）
 #       が一致すること。その上で 0 < |K - K_c| <= 1/10 で |f''(K) - (8/pi) log(1/|K-K_c|)| <= 49。

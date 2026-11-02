@@ -1,0 +1,3 @@
+sinh(-x) と -sinh(x) の形式冪級数が全次数 14 以下で一致
+6 点で sinh(-x) と -sinh(x) のボールが重なり、x ≠ 0 では sinh(x) とは重ならない
+RESULT: PASS

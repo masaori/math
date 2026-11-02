@@ -15,19 +15,17 @@ export default defineBlocks([
   {
     id: "critical_remark_real_analysis_facts_R3_R4",
     kind: "remark",
-    title: { text: "積分の評価で持ち込む実数解析の事実（(R3)・(R4)）" },
+    title: { text: "積分の評価で持ち込む実数解析の事実（(R3)・(R4)・微分の公式）" },
     labels: ["remark_real_analysis_facts_R3_R4"],
     statement: [
       paragraph([
-        "以下の ",
-        ref("cosh_addition_and_half_angle"),
-        "・",
+        "以下の双曲線関数の主張と ",
         ref("elementary_sine_bounds"),
         "・",
         ref("closed_form_log_integral"),
         "・",
         ref("sine_integral_two_sided"),
-        " は、実数の区間上の連続関数の積分を扱うので、次の 2 つの実数解析の事実を外部から持ち込む。",
+        " は、実数の区間上の関数の微分と積分を扱うので、次の実数解析の事実を外部から持ち込む。",
       ]),
       list([
         [
@@ -56,13 +54,44 @@ export default defineBlocks([
           math(String.raw`\int_a^b g(t)\,dt = F(b)-F(a)`),
           "。",
         ],
+        [
+          "**微分の公式**：",
+          ref("def_scalar_exp"),
+          " の実数の exp は ",
+          math(String.raw`\mathbb{R}`),
+          " 上微分可能で ",
+          math(String.raw`\exp' = \exp`),
+          "。",
+          ref("def_real_logarithm_positive"),
+          " の ",
+          math(String.raw`\log`),
+          " は ",
+          math(String.raw`\mathbb{R}_{>0}`),
+          " 上微分可能で ",
+          math(String.raw`\log'(w) = \tfrac1w`),
+          "。",
+          ref("definition_of_sqrt_r_positive"),
+          " の平方根は ",
+          math(String.raw`\mathbb{R}_{>0}`),
+          " 上微分可能で ",
+          math(String.raw`(\sqrt{\ })'(w) = \tfrac{1}{2\sqrt w}`),
+          "。定数関数と恒等関数 ",
+          math(String.raw`u \mapsto u`),
+          " は微分可能で、導関数はそれぞれ ",
+          math(String.raw`0`),
+          " と ",
+          math(String.raw`1`),
+          "。微分可能な関数の和・定数倍・積・商（分母が 0 でないところ）・合成は微分可能で、導関数は和・定数倍・積・商・合成の微分の公式で与えられる。微分可能な関数は連続である。",
+        ],
       ]),
       paragraph(["どの段でどれを使うかは次のとおりである。"]),
       list([
         [
           "(R3) は ",
-          ref("cosh_addition_and_half_angle"),
-          " (5)、",
+          ref("sinh_at_least_argument"),
+          "、",
+          ref("sinh_at_most_argument_times_cosh"),
+          "、",
           ref("elementary_sine_bounds"),
           "、",
           ref("sine_integral_two_sided"),
@@ -70,8 +99,10 @@ export default defineBlocks([
         ],
         [
           "(R4) は ",
-          ref("cosh_addition_and_half_angle"),
-          " (5)、",
+          ref("sinh_at_least_argument"),
+          "、",
+          ref("sinh_at_most_argument_times_cosh"),
+          "、",
           ref("elementary_sine_bounds"),
           "、",
           ref("closed_form_log_integral"),
@@ -79,10 +110,23 @@ export default defineBlocks([
           ref("sine_integral_two_sided"),
           " で、導関数が分かっている関数の積分値を求める段に使う。",
         ],
+        [
+          "微分の公式は ",
+          ref("sinh_derivative"),
+          "、",
+          ref("arcsinh_derivative"),
+          "、",
+          ref("sinh_at_least_argument"),
+          "、",
+          ref("sinh_at_most_argument_times_cosh"),
+          "、",
+          ref("closed_form_log_integral"),
+          " で、(R4) に渡す導関数を求める段と、被積分関数の連続性を言う段に使う。",
+        ],
       ]),
       paragraph([
         "**これ以外の解析的道具（広義積分、一様収束、優収束、実解析性、平均値の定理）は使わない。**",
-        "とくに以下の 4 項に現れる積分はすべて有界閉区間上の連続関数の積分であり、広義積分は現れない。",
+        "とくに以下に現れる積分はすべて有界閉区間上の連続関数の積分であり、広義積分は現れない。",
       ]),
     ],
     conversion: {
@@ -94,239 +138,1216 @@ export default defineBlocks([
   },
 
   {
-    id: "critical_001_claim_cosh_addition_and_half_angle",
+    id: "critical_claim_cosh_is_even",
+    kind: "claim",
+    title: { tex: String.raw`\cosh \text{ は偶関数}` },
+    labels: ["cosh_is_even"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
+      displayMath(String.raw`\cosh(-x) = \cosh x`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\cosh(-x)
+&= \frac{\exp(-x)+\exp(-(-x))}{2}
+&&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{\exp(-x)+\exp(x)}{2}
+&&(\because\ -(-x) = x)\\
+&= \frac{\exp(x)+\exp(-x)}{2}
+&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&= \cosh x
+&&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (1) の証明が「cosh(-y) = cosh y は定義から直ちに従う」と書いて省いていた等式を、独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_is_odd",
+    kind: "claim",
+    title: { tex: String.raw`\sinh \text{ は奇関数}` },
+    labels: ["sinh_is_odd"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
+      displayMath(String.raw`\sinh(-x) = -\sinh x`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\sinh(-x)
+&= \frac{\exp(-x)-\exp(-(-x))}{2}
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{\exp(-x)-\exp(x)}{2}
+&&(\because\ -(-x) = x)\\
+&= \frac{-\left(\exp(x)-\exp(-x)\right)}{2}
+&&(\because\ a-b = -(b-a))\\
+&= -\frac{\exp(x)-\exp(-x)}{2}
+&&(\because\ \text{分子の符号を分数の外へ出す})\\
+&= -\sinh x
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (1) の証明が「sinh(-y) = -sinh y は定義から直ちに従う」と書いて省いていた等式を、独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosh_addition_formula",
     kind: "claim",
     origin: { path: SRC, ordinal: 3 },
-    title: { tex: String.raw`\cosh,\sinh \text{ の加法定理・半角公式と } \mathrm{arcsinh}` },
-    labels: ["cosh_addition_and_half_angle"],
+    title: { tex: String.raw`\cosh \text{ の加法定理}` },
+    labels: ["cosh_addition_formula"],
     statement: [
-      paragraph(["非負実数の平方根は ", ref("definition_of_sqrt_r_positive"), " を使う。"]),
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x, y \in \mathbb{R}`), " について（複号同順）"]),
+      displayMath(String.raw`\cosh(x \pm y) = \cosh x\cosh y \pm \sinh x\sinh y`),
       paragraph([
-        ref("cosh_sinh_basic_properties"),
-        " の ",
-        math(String.raw`\cosh, \sinh : \mathbb{R} \to \mathbb{R}`),
-        " について次が成り立つ。",
-      ]),
-      list([
-        [
-          "(1) ",
-          math(String.raw`x, y \in \mathbb{R}`),
-          " について ",
-          math(String.raw`\cosh(x \pm y) = \cosh x\cosh y \pm \sinh x \sinh y`),
-          "、",
-          math(String.raw`\sinh(x \pm y) = \sinh x\cosh y \pm \cosh x \sinh y`),
-          "。",
-        ],
-        [
-          "(2) ",
-          math(String.raw`x \in \mathbb{R}`),
-          " について ",
-          math(String.raw`\cosh x = 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)`),
-          "、",
-          math(String.raw`\sinh x = 2\sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)`),
-          "。",
-        ],
-        [
-          "(3) ",
-          math(String.raw`\sinh`),
-          " は ",
-          math(String.raw`\mathbb{R}`),
-          " 上狭義単調増加である。",
-        ],
-        [
-          "(4) ",
-          math(String.raw`y \in \mathbb{R}`),
-          " について ",
-          math(String.raw`\mathrm{arcsinh}(y) := \log\left(y + \sqrt{y^2+1}\right)`),
-          " が定まり、",
-          math(String.raw`\sinh(\mathrm{arcsinh}(y)) = y`),
-          "。したがって (3) と合わせて ",
-          math(String.raw`u \in \mathbb{R}`),
-          " について ",
-          math(String.raw`\sinh u = y \iff u = \mathrm{arcsinh}(y)`),
-          "。さらに ",
-          math(String.raw`\mathrm{arcsinh}`),
-          " は微分可能で ",
-          math(String.raw`\mathrm{arcsinh}'(y) = \dfrac{1}{\sqrt{y^2+1}}`),
-          "。",
-        ],
-        [
-          "(5) ",
-          math(String.raw`t \in \mathbb{R}_{\geq 0}`),
-          " について ",
-          math(String.raw`t \leq \sinh t \leq t\cosh t`),
-          "。",
-        ],
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
       ]),
     ],
     proof: [
       paragraph([
-        "(1) の証明。",
-        ref("cosh_sinh_basic_properties"),
-        " の定義と ",
-        math(String.raw`\exp(a)\exp(b) = \exp(a+b)`),
-        " より",
+        "以下の exp はすべて ",
+        ref("def_scalar_exp"),
+        " の実数の exp である。記号 ",
+        math(String.raw`E_{x} := \exp(x),\ E_{-x} := \exp(-x),\ E_{y} := \exp(y),\ E_{-y} := \exp(-y)`),
+        " を置く（",
+        math(String.raw`E_{x}, E_{-x}, E_{y}, E_{-y} \in \mathbb{R}`),
+        "）。複号が ",
+        math(String.raw`+`),
+        " の場合。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x\cosh y + \sinh x\sinh y
-&= \frac{\left(\exp(x)+\exp(-x)\right)\left(\exp(y)+\exp(-y)\right)}{4}
- + \frac{\left(\exp(x)-\exp(-x)\right)\left(\exp(y)-\exp(-y)\right)}{4}
-   &&(\because \text{cosh\_sinh\_basic\_properties の定義}) \\
-&= \frac{\left(\exp(x+y)+\exp(x-y)+\exp(-x+y)+\exp(-x-y)\right)
-       + \left(\exp(x+y)-\exp(x-y)-\exp(-x+y)+\exp(-x-y)\right)}{4}
-   &&(\because \exp(a)\exp(b)=\exp(a+b)) \\
-&= \frac{2\exp(x+y)+2\exp(-(x+y))}{4} \\
-&= \frac{\exp(x+y)+\exp(-(x+y))}{2} \\
-&= \cosh(x+y)
-   &&(\because \text{cosh\_sinh\_basic\_properties の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`y`),
-        " を ",
-        math(String.raw`-y`),
-        " に置き換えると（",
-        math(String.raw`\cosh(-y)=\cosh y`),
-        "、",
-        math(String.raw`\sinh(-y)=-\sinh y`),
-        " は定義から直ちに従う）",
-        math(String.raw`\cosh(x-y) = \cosh x\cosh y - \sinh x\sinh y`),
-        " を得る。",
-        math(String.raw`\sinh`),
-        " についても同じ計算（2 つの積の差を取る）で従う。",
-      ]),
-      paragraph([
-        "(2) の証明。(1) で ",
-        math(String.raw`x = y = \tfrac{x}{2}`),
-        " とすると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\cosh x
-&= \cosh^2\!\left(\tfrac{x}{2}\right) + \sinh^2\!\left(\tfrac{x}{2}\right)
-   &&(\because \text{cosh\_addition\_and\_half\_angle (1)}) \\
-&= \left(1 + \sinh^2\!\left(\tfrac{x}{2}\right)\right) + \sinh^2\!\left(\tfrac{x}{2}\right)
-   &&(\because \text{cosh\_sinh\_basic\_properties (2)}) \\
-&= 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\sinh x = 2\sinh(\tfrac{x}{2})\cosh(\tfrac{x}{2})`),
-        " も (1) の ",
-        math(String.raw`\sinh`),
-        " の加法定理で ",
-        math(String.raw`x = y = \tfrac{x}{2}`),
-        " とすれば従う。",
-      ]),
-      paragraph([
-        "(3) の証明。",
-        math(String.raw`x < y`),
-        " とする。",
-        ref("cosh_sinh_basic_properties"),
-        " で用いた ",
-        math(String.raw`\exp`),
-        " の狭義単調増加性より ",
-        math(String.raw`\exp(x) < \exp(y)`),
-        " かつ ",
-        math(String.raw`\exp(-x) > \exp(-y)`),
-        "。よって",
-      ]),
-      displayMath(
-        String.raw`\sinh x = \frac{\exp(x)-\exp(-x)}{2} < \frac{\exp(y)-\exp(-y)}{2} = \sinh y`,
-      ),
-      paragraph([
-        "(4) の証明。",
-        math(String.raw`\sqrt{y^2+1} > \sqrt{y^2} = |y| \geq -y`),
-        " より ",
-        math(String.raw`y+\sqrt{y^2+1} > 0`),
-        " なので ",
-        math(String.raw`u := \log(y+\sqrt{y^2+1})`),
-        " が定まる。このとき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(-u)
-&= \frac{1}{y+\sqrt{y^2+1}} \\
-&= \frac{\sqrt{y^2+1}-y}{\left(\sqrt{y^2+1}+y\right)\left(\sqrt{y^2+1}-y\right)}
-   &&(\because \text{分母の有理化}) \\
-&= \frac{\sqrt{y^2+1}-y}{\left(y^2+1\right)-y^2} \\
-&= \sqrt{y^2+1}-y
-\end{aligned}`,
-      ),
-      paragraph(["であるから"]),
-      displayMath(
-        String.raw`\sinh u
-= \frac{\exp(u)-\exp(-u)}{2}
-= \frac{\left(y+\sqrt{y^2+1}\right)-\left(\sqrt{y^2+1}-y\right)}{2}
-= y`,
-      ),
-      paragraph([
-        "(3) より ",
-        math(String.raw`\sinh`),
-        " は単射なので ",
-        math(String.raw`\sinh u = y \iff u = \mathrm{arcsinh}(y)`),
-        "。微分は",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{arcsinh}'(y)
-&= \frac{1}{y+\sqrt{y^2+1}}\cdot\left(1 + \frac{y}{\sqrt{y^2+1}}\right)
-   &&(\because \log \text{ と } \sqrt{\ } \text{ の微分・合成関数の微分}) \\
-&= \frac{1}{y+\sqrt{y^2+1}}\cdot\frac{\sqrt{y^2+1}+y}{\sqrt{y^2+1}} \\
-&= \frac{1}{\sqrt{y^2+1}}
-\end{aligned}`,
-      ),
-      paragraph([
-        "(5) の証明。",
-        ref("cosh_sinh_basic_properties"),
-        " (3) より ",
-        math(String.raw`u > 0`),
-        " で ",
-        math(String.raw`\sinh u > 0`),
-        " であり、",
-        math(String.raw`\cosh' = \sinh`),
-        "、",
-        math(String.raw`\sinh' = \cosh`),
-        " は定義から直ちに従う。(R4) を ",
-        math(String.raw`F = \sinh`),
-        " に適用すると",
-      ]),
-      displayMath(
-        String.raw`\sinh t = \sinh t - \sinh 0 = \int_0^t \cosh u\,du
-\qquad (t \in \mathbb{R}_{\geq 0})`,
-      ),
-      paragraph([
-        "同様に ",
-        math(String.raw`\cosh u = 1 + \int_0^u \sinh v\,dv`),
-        " であり、",
-        math(String.raw`v \in [0,u]`),
-        " で ",
-        math(String.raw`\sinh v \geq 0`),
-        " なので (R3) の単調性より ",
-        math(String.raw`\cosh u \geq 1`),
-        " かつ ",
-        math(String.raw`\cosh`),
-        " は ",
-        math(String.raw`[0,\infty)`),
-        " 上で単調増加である。よって ",
-        math(String.raw`u \in [0,t]`),
-        " で ",
-        math(String.raw`1 \leq \cosh u \leq \cosh t`),
-        " であり、(R3) の単調性を ",
-        math(String.raw`\int_0^t`),
-        " に適用して",
-      ]),
-      displayMath(
-        String.raw`t = \int_0^t 1\,du \ \leq\ \int_0^t\cosh u\,du = \sinh t
-\ \leq\ \int_0^t \cosh t\,du = t\cosh t`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\cosh(x+y)
+&= \frac{\exp(x+y)+\exp(-(x+y))}{2}
+&&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{\exp(x+y)+\exp((-x)+(-y))}{2}
+&&(\because\ -(x+y) = (-x)+(-y))\\
+&= \frac{E_{x}E_{y}+E_{-x}E_{-y}}{2}
+&&(\because\ \exp(s+t) = \exp(s)\exp(t)\ \text{を 2 箇所へ。}\blkref{scalar_exp_product})\\
+&= \frac{2E_{x}E_{y}+2E_{-x}E_{-y}}{4}
+&&(\because\ \text{分母と分子に }2\text{ を掛ける})\\
+&= \frac{\left(E_{x}E_{y}+E_{x}E_{-y}+E_{-x}E_{y}+E_{-x}E_{-y}\right)
+        +\left(E_{x}E_{y}-E_{x}E_{-y}-E_{-x}E_{y}+E_{-x}E_{-y}\right)}{4}
+&&(\because\ E_{x}E_{-y}\ \text{と}\ E_{-x}E_{y}\ \text{を足して引く})\\
+&= \frac{\left(E_{x}+E_{-x}\right)\left(E_{y}+E_{-y}\right)
+        +\left(E_{x}-E_{-x}\right)\left(E_{y}-E_{-y}\right)}{4}
+&&(\because\ \text{分配則})\\
+&= \frac{E_{x}+E_{-x}}{2}\cdot\frac{E_{y}+E_{-y}}{2}
+ + \frac{E_{x}-E_{-x}}{2}\cdot\frac{E_{y}-E_{-y}}{2}
+&&(\because\ \text{分数の和と積})\\
+&= \cosh x\cosh y + \sinh x\sinh y
+&&(\because\ \cosh,\ \sinh\ \text{の定義を 4 箇所へ。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+      paragraph(["複号が ", math(String.raw`-`), " の場合。"]),
+      displayMath(String.raw`\begin{aligned}
+\cosh(x-y)
+&= \cosh(x+(-y))
+&&(\because\ x-y = x+(-y))\\
+&= \cosh x\cosh(-y) + \sinh x\sinh(-y)
+&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる})\\
+&= \cosh x\cosh y + \sinh x\left(-\sinh y\right)
+&&(\because\ \blkref{cosh_is_even},\ \blkref{sinh_is_odd})\\
+&= \cosh x\cosh y - \sinh x\sinh y
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-01 の式変形統一で、(1)(2)(4) の四本の鎖にあった根拠 7 行を行中の \\quad (\\because …) から" +
           "行末の根拠列（aligned の &&）へ揃えた。式変形・根拠・段数・参照は変えていない。",
+        "2026-11-02: SageMath の検算を付けるにあたり、5 つの主張と arcsinh の定義を束ねていた cosh_addition_and_half_angle を 1 ブロック 1 主張に分け、" +
+          "その cosh の加法定理をこのブロックにした。鎖を主張の左辺から始め、exp の積の法則・分配則・分数の和と積を一行ずつに分け、" +
+          "複号が - の場合を cosh_is_even・sinh_is_odd を引く鎖で書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_addition_formula",
+    kind: "claim",
+    title: { tex: String.raw`\sinh \text{ の加法定理}` },
+    labels: ["sinh_addition_formula"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x, y \in \mathbb{R}`), " について（複号同順）"]),
+      displayMath(String.raw`\sinh(x \pm y) = \sinh x\cosh y \pm \cosh x\sinh y`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "記号 ",
+        math(String.raw`E_{x}, E_{-x}, E_{y}, E_{-y} \in \mathbb{R}`),
+        " は ",
+        ref("cosh_addition_formula"),
+        " の証明と同じく、",
+        ref("def_scalar_exp"),
+        " の実数の exp の値 ",
+        math(String.raw`\exp(x), \exp(-x), \exp(y), \exp(-y)`),
+        " とする。複号が ",
+        math(String.raw`+`),
+        " の場合。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sinh(x+y)
+&= \frac{\exp(x+y)-\exp(-(x+y))}{2}
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{\exp(x+y)-\exp((-x)+(-y))}{2}
+&&(\because\ -(x+y) = (-x)+(-y))\\
+&= \frac{E_{x}E_{y}-E_{-x}E_{-y}}{2}
+&&(\because\ \exp(s+t) = \exp(s)\exp(t)\ \text{を 2 箇所へ。}\blkref{scalar_exp_product})\\
+&= \frac{2E_{x}E_{y}-2E_{-x}E_{-y}}{4}
+&&(\because\ \text{分母と分子に }2\text{ を掛ける})\\
+&= \frac{\left(E_{x}E_{y}+E_{x}E_{-y}-E_{-x}E_{y}-E_{-x}E_{-y}\right)
+        +\left(E_{x}E_{y}-E_{x}E_{-y}+E_{-x}E_{y}-E_{-x}E_{-y}\right)}{4}
+&&(\because\ E_{x}E_{-y}\ \text{と}\ E_{-x}E_{y}\ \text{を足して引く})\\
+&= \frac{\left(E_{x}-E_{-x}\right)\left(E_{y}+E_{-y}\right)
+        +\left(E_{x}+E_{-x}\right)\left(E_{y}-E_{-y}\right)}{4}
+&&(\because\ \text{分配則})\\
+&= \frac{E_{x}-E_{-x}}{2}\cdot\frac{E_{y}+E_{-y}}{2}
+ + \frac{E_{x}+E_{-x}}{2}\cdot\frac{E_{y}-E_{-y}}{2}
+&&(\because\ \text{分数の和と積})\\
+&= \sinh x\cosh y + \cosh x\sinh y
+&&(\because\ \cosh,\ \sinh\ \text{の定義を 4 箇所へ。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+      paragraph(["複号が ", math(String.raw`-`), " の場合。"]),
+      displayMath(String.raw`\begin{aligned}
+\sinh(x-y)
+&= \sinh(x+(-y))
+&&(\because\ x-y = x+(-y))\\
+&= \sinh x\cosh(-y) + \cosh x\sinh(-y)
+&&(\because\ \text{複号が }+\text{ の場合を }-y \in \mathbb{R}\text{ に当てはめる})\\
+&= \sinh x\cosh y + \cosh x\left(-\sinh y\right)
+&&(\because\ \blkref{cosh_is_even},\ \blkref{sinh_is_odd})\\
+&= \sinh x\cosh y - \cosh x\sinh y
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (1) の sinh の加法定理を独立の主張にした。旧証明は「sinh についても同じ計算で従う」としか書いていなかったので、鎖を書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosh_half_angle_formula",
+    kind: "claim",
+    title: { tex: String.raw`\cosh \text{ の半角公式}` },
+    labels: ["cosh_half_angle_formula"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
+      displayMath(String.raw`\cosh x = 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)`),
+      paragraph(["ここで ", math(String.raw`\sinh^2(a) := (\sinh a)^2`), " である。"]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\cosh x
+&= \cosh\!\left(\tfrac{x}{2}+\tfrac{x}{2}\right)
+&&(\because\ x = \tfrac{x}{2}+\tfrac{x}{2})\\
+&= \cosh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)
+ + \sinh\!\left(\tfrac{x}{2}\right)\sinh\!\left(\tfrac{x}{2}\right)
+&&(\because\ \blkref{cosh_addition_formula}\ \text{の複号 }+\text{ を }x \to \tfrac{x}{2},\ y \to \tfrac{x}{2}\text{ で})\\
+&= \left(\cosh\tfrac{x}{2}\right)^2 + \left(\sinh\tfrac{x}{2}\right)^2
+&&(\because\ \text{二乗の記法})\\
+&= \left(1 + \left(\sinh\tfrac{x}{2}\right)^2\right) + \left(\sinh\tfrac{x}{2}\right)^2
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ \text{(2) を }\tfrac{x}{2}\text{ で移項})\\
+&= 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)
+&&(\because\ \text{同類項をまとめる})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (2) の第 1 式を独立の主張にし、鎖を主張の左辺から始めて、x = x/2 + x/2 の段と二乗の記法の段を足した。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_double_angle_formula",
+    kind: "claim",
+    title: { tex: String.raw`\sinh \text{ の倍角公式}` },
+    labels: ["sinh_double_angle_formula"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について"]),
+      displayMath(String.raw`\sinh x = 2\sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\sinh x
+&= \sinh\!\left(\tfrac{x}{2}+\tfrac{x}{2}\right)
+&&(\because\ x = \tfrac{x}{2}+\tfrac{x}{2})\\
+&= \sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)
+ + \cosh\!\left(\tfrac{x}{2}\right)\sinh\!\left(\tfrac{x}{2}\right)
+&&(\because\ \blkref{sinh_addition_formula}\ \text{の複号 }+\text{ を }x \to \tfrac{x}{2},\ y \to \tfrac{x}{2}\text{ で})\\
+&= \sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)
+ + \sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)
+&&(\because\ \mathbb{R}\ \text{の乗法の交換律})\\
+&= 2\sinh\!\left(\tfrac{x}{2}\right)\cosh\!\left(\tfrac{x}{2}\right)
+&&(\because\ \text{同類項をまとめる})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (2) の第 2 式を独立の主張にした。旧証明は「sinh の加法定理で x = y = x/2 とすれば従う」としか書いていなかったので、鎖を書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_zero",
+    kind: "claim",
+    title: { tex: String.raw`\sinh 0 = 0` },
+    labels: ["sinh_zero"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`\sinh`), " について"]),
+      displayMath(String.raw`\sinh 0 = 0`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\sinh 0
+&= \frac{\exp(0)-\exp(-0)}{2}
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{\exp(0)-\exp(0)}{2}
+&&(\because\ -0 = 0)\\
+&= \frac{1-1}{2}
+&&(\because\ \blkref{scalar_exp_zero}\ \text{を 2 箇所へ})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が使っていた sinh 0 = 0 を、cosh の単調性と (5) の二つの不等式から引けるよう独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_strictly_increasing",
+    kind: "claim",
+    title: { tex: String.raw`\sinh \text{ は狭義単調増加}` },
+    labels: ["sinh_strictly_increasing"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`x, y \in \mathbb{R}`),
+        " が ",
+        math(String.raw`x < y`),
+        " を満たすなら ",
+        math(String.raw`\sinh x < \sinh y`),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph(["準備として、二つの exp の大小を作る。"]),
+      displayMath(String.raw`\begin{aligned}
+x < y
+&\Longrightarrow \exp(x) < \exp(y)
+&&(\because\ \blkref{real_exp_strictly_increasing})\\
+x < y
+&\Longrightarrow -y < -x
+&&(\because\ \text{両辺に }-1<0\text{ を掛けると不等号の向きが反転する})\\
+&\Longrightarrow \exp(-y) < \exp(-x)
+&&(\because\ \blkref{real_exp_strictly_increasing})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp(x) < \exp(y)
+&\Longrightarrow \exp(y)-\exp(x) > 0
+&&(\because\ \text{両辺に }-\exp(x)\text{ を加える})\\
+\exp(-y) < \exp(-x)
+&\Longrightarrow \exp(-x)-\exp(-y) > 0
+&&(\because\ \text{両辺に }-\exp(-y)\text{ を加える})\\
+\exp(y)-\exp(x) > 0\ \land\ \exp(-x)-\exp(-y) > 0
+&\Longrightarrow \left(\exp(y)-\exp(x)\right)+\left(\exp(-x)-\exp(-y)\right) > 0
+&&(\because\ \text{正の実数の和は正})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh y - \sinh x
+&= \frac{\exp(y)-\exp(-y)}{2} - \frac{\exp(x)-\exp(-x)}{2}
+&&(\because\ \sinh\ \text{の定義を 2 箇所へ。}\blkref{def_cosh_sinh})\\
+&= \frac{\left(\exp(y)-\exp(-y)\right)-\left(\exp(x)-\exp(-x)\right)}{2}
+&&(\because\ \text{分母の等しい分数の差})\\
+&= \frac{\left(\exp(y)-\exp(x)\right)+\left(\exp(-x)-\exp(-y)\right)}{2}
+&&(\because\ \text{分子の項の並べ替え})\\
+&> 0
+&&(\because\ \text{上の分子の正値性と、正の数を }2>0\text{ で割ると正})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh y - \sinh x > 0
+&\Longrightarrow \sinh x < \sinh y
+&&(\because\ \text{両辺に }\sinh x\text{ を加える})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (3) を独立の主張にした。旧証明は exp(-x) > exp(-y) を -x > -y を経ずに書き、二つの不等式を一つの < で合わせていたので、準備の鎖と差の鎖に分けた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_is_injective",
+    kind: "claim",
+    title: { tex: String.raw`\sinh \text{ は単射}` },
+    labels: ["sinh_is_injective"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`u, v \in \mathbb{R}`),
+        " が ",
+        math(String.raw`\sinh u = \sinh v`),
+        " を満たすなら ",
+        math(String.raw`u = v`),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph(["対偶を示す。"]),
+      displayMath(String.raw`\begin{aligned}
+u \neq v
+&\Longrightarrow u < v\ \lor\ v < u
+&&(\because\ \mathbb{R}\ \text{の順序は全順序})\\
+&\Longrightarrow \sinh u < \sinh v\ \lor\ \sinh v < \sinh u
+&&(\because\ \blkref{sinh_strictly_increasing}\ \text{をそれぞれの場合へ})\\
+&\Longrightarrow \sinh u \neq \sinh v
+&&(\because\ a < b\ \text{なら}\ a \neq b)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の証明と下流（kappa_of_K_basic、臨界点の sinh 2K_c = 1 の解）が「(3) より sinh は単射」と書いて使っていた事実を、独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_derivative",
+    kind: "claim",
+    title: { tex: String.raw`\sinh' = \cosh` },
+    labels: ["sinh_derivative"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`\sinh : \mathbb{R} \to \mathbb{R}`),
+        " は微分可能で、",
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\sinh'(x) = \cosh x`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、微分が実数の極限で定まるからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`n : \mathbb{R} \to \mathbb{R},\ n(x) := -x`),
+        " と置くと、",
+        math(String.raw`\sinh = \tfrac12\left(\exp - \exp\circ n\right)`),
+        " である（",
+        ref("def_cosh_sinh"),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sinh'(x)
+&= \left(\tfrac12\left(\exp - \exp\circ n\right)\right)'(x)
+&&(\because\ \sinh = \tfrac12\left(\exp - \exp\circ n\right))\\
+&= \tfrac12\left(\exp - \exp\circ n\right)'(x)
+&&(\because\ \text{微分の公式の定数倍})\\
+&= \tfrac12\left(\exp'(x) - (\exp\circ n)'(x)\right)
+&&(\because\ \text{微分の公式の和（差は }-1\text{ 倍との和）})\\
+&= \tfrac12\left(\exp'(x) - \exp'(n(x))\cdot n'(x)\right)
+&&(\because\ \text{微分の公式の合成})\\
+&= \tfrac12\left(\exp(x) - \exp(n(x))\cdot n'(x)\right)
+&&(\because\ \text{微分の公式の }\exp' = \exp\text{ を 2 箇所へ})\\
+&= \tfrac12\left(\exp(x) - \exp(-x)\cdot n'(x)\right)
+&&(\because\ n(x) = -x)\\
+&= \tfrac12\left(\exp(x) - \exp(-x)\cdot(-1)\right)
+&&(\because\ n = (-1)\cdot\mathrm{id}\text{ に微分の公式の定数倍と恒等関数の導関数 }1)\\
+&= \frac{\exp(x)+\exp(-x)}{2}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \cosh x
+&&(\because\ \cosh\ \text{の定義。}\blkref{def_cosh_sinh})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が「sinh' = cosh は定義から直ちに従う」と書いて省いていた等式を、微分の公式から導く独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sqrt_of_square_plus_one_is_positive",
+    kind: "claim",
+    title: { tex: String.raw`\sqrt{y^2+1} > 0` },
+    labels: ["sqrt_of_square_plus_one_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        " について ",
+        math(String.raw`y^2+1 \in \mathbb{R}_{\geq 0}`),
+        " であり、",
+        ref("definition_of_sqrt_r_positive"),
+        " の平方根について ",
+        math(String.raw`\sqrt{y^2+1} > 0`),
+        "。",
+      ]),
+    ],
+    proof: [
+      paragraph(["実数の平方は非負なので ", math(String.raw`y^2 \geq 0`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+y^2+1
+&\geq 0+1
+&&(\because\ y^2 \geq 0\ \text{の両辺に }1\text{ を加える})\\
+&= 1
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&> 0
+&&(\because\ \mathbb{R}\ \text{の順序})
+\end{aligned}`),
+      paragraph([
+        "とくに ",
+        math(String.raw`y^2+1 \in \mathbb{R}_{\geq 0}`),
+        " なので ",
+        math(String.raw`s := \sqrt{y^2+1}`),
+        " が定まり、",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`s \geq 0`),
+        " かつ ",
+        math(String.raw`s^2 = y^2+1`),
+        " である。",
+        math(String.raw`s = 0`),
+        " と仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+s = 0
+&\Longrightarrow s^2 = 0
+&&(\because\ 0^2 = 0)\\
+&\Longrightarrow y^2+1 = 0
+&&(\because\ s^2 = y^2+1)
+\end{aligned}`),
+      paragraph([
+        "となり ",
+        math(String.raw`y^2+1 \geq 1`),
+        " に反する。よって ",
+        math(String.raw`s \neq 0`),
+        " であり、",
+        math(String.raw`s \geq 0`),
+        " と合わせて ",
+        math(String.raw`\sqrt{y^2+1} = s > 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: arcsinh の定義・微分の証明が使う √(y²+1) > 0 を、他のブロックの証明の中身を引かずに済むよう独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_arcsinh_argument_times_conjugate_is_one",
+    kind: "claim",
+    title: { tex: String.raw`\left(y+\sqrt{y^2+1}\right)\left(\sqrt{y^2+1}-y\right) = 1` },
+    labels: ["arcsinh_argument_times_conjugate_is_one"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        " について（平方根は ",
+        ref("sqrt_of_square_plus_one_is_positive"),
+        " により定まる）",
+      ]),
+      displayMath(String.raw`\left(y+\sqrt{y^2+1}\right)\left(\sqrt{y^2+1}-y\right) = 1`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s := \sqrt{y^2+1} \in \mathbb{R}_{\geq 0}`),
+        " と置く。",
+        ref("definition_of_sqrt_r_positive"),
+        " より ",
+        math(String.raw`s^2 = y^2+1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(y+s\right)\left(s-y\right)
+&= ys - y^2 + s^2 - sy
+&&(\because\ \text{分配則})\\
+&= s^2 - y^2
+&&(\because\ ys = sy\ \text{と項の並べ替え})\\
+&= (y^2+1) - y^2
+&&(\because\ s^2 = y^2+1)\\
+&= 1
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: arcsinh_argument_is_positive と sinh_of_arcsinh が使う (y+s)(s-y) = 1 を、証明の中身を引かずに済むよう独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_arcsinh_argument_is_positive",
+    kind: "claim",
+    title: { tex: String.raw`y + \sqrt{y^2+1} > 0` },
+    labels: ["arcsinh_argument_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        " について（平方根は ",
+        ref("sqrt_of_square_plus_one_is_positive"),
+        " により定まる）",
+      ]),
+      displayMath(String.raw`y + \sqrt{y^2+1} > 0`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`s := \sqrt{y^2+1}`),
+        "、",
+        math(String.raw`p := y + s,\ q := s - y \in \mathbb{R}`),
+        " と置く。",
+        ref("arcsinh_argument_times_conjugate_is_one"),
+        " より ",
+        math(String.raw`pq = 1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+p + q
+&= (y+s) + (s-y)
+&&(\because\ p,\ q\ \text{の置き方})\\
+&= 2s
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&> 2\cdot 0
+&&(\because\ \blkref{sqrt_of_square_plus_one_is_positive}\text{ の }s > 0\text{ の両辺に }2>0\text{ を掛ける})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph(["背理法で ", math(String.raw`p > 0`), " を示す。", math(String.raw`p \leq 0`), " と仮定する。"]),
+      displayMath(String.raw`\begin{aligned}
+p \leq 0\ \land\ pq = 1
+&\Longrightarrow p < 0
+&&(\because\ p = 0\ \text{なら}\ pq = 0 \neq 1)\\
+p < 0\ \land\ pq = 1
+&\Longrightarrow q < 0
+&&(\because\ q \geq 0\ \text{なら}\ pq \leq 0 < 1)\\
+p < 0\ \land\ q < 0
+&\Longrightarrow p + q < 0
+&&(\because\ \text{負の実数の和は負})
+\end{aligned}`),
+      paragraph([
+        "これは ",
+        math(String.raw`p + q > 0`),
+        " に反する。よって ",
+        math(String.raw`y + \sqrt{y^2+1} = p > 0`),
+        " である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の証明は y + √(y²+1) > 0 を √(y²+1) > √(y²) = |y| ≥ -y で示していたが、実数の絶対値と平方根の単調性を定めるブロックが本文に無い。" +
+          "(y+s)(s-y) = 1 と (y+s)+(s-y) = 2s > 0 から示す形に改め、arcsinh の定義の前提として独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_definition_arcsinh",
+    kind: "definition",
+    title: { tex: String.raw`\mathrm{arcsinh}` },
+    labels: ["def_arcsinh"],
+    statement: [
+      paragraph([
+        math(String.raw`y \in \mathbb{R}`),
+        " について、",
+        ref("arcsinh_argument_is_positive"),
+        " より ",
+        math(String.raw`y + \sqrt{y^2+1} \in \mathbb{R}_{>0}`),
+        " なので、",
+        ref("def_real_logarithm_positive"),
+        " の実対数を使い",
+      ]),
+      displayMath(String.raw`\mathrm{arcsinh}(y) := \log\left(y + \sqrt{y^2+1}\right) \in \mathbb{R}`),
+      paragraph([
+        "と定める。これにより写像 ",
+        math(String.raw`\mathrm{arcsinh} : \mathbb{R} \to \mathbb{R}`),
+        " が定まる。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、実対数と平方根の値が実数だからである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の主張の中にあった arcsinh の定義を、定義のブロックとして分けた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_of_arcsinh",
+    kind: "claim",
+    title: { tex: String.raw`\sinh(\mathrm{arcsinh}(y)) = y` },
+    labels: ["sinh_of_arcsinh"],
+    statement: [
+      paragraph([
+        ref("def_arcsinh"),
+        " の ",
+        math(String.raw`\mathrm{arcsinh}`),
+        " と ",
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`\sinh`),
+        " について、",
+        math(String.raw`y \in \mathbb{R}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\sinh(\mathrm{arcsinh}(y)) = y`),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`s := \sqrt{y^2+1} \in \mathbb{R}_{\geq 0}`),
+        "（",
+        math(String.raw`s^2 = y^2+1`),
+        "）、",
+        math(String.raw`u := \mathrm{arcsinh}(y) = \log(y+s) \in \mathbb{R}`),
+        " と置く。",
+        ref("arcsinh_argument_times_conjugate_is_one"),
+        " より ",
+        math(String.raw`(y+s)(s-y) = 1`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\exp(u)
+&= \exp(\log(y+s))
+&&(\because\ u\ \text{の置き方})\\
+&= y+s
+&&(\because\ \blkref{def_real_logarithm_positive}\ \text{の }\exp(\log w) = w\text{。}y+s>0\ \text{は}\ \blkref{arcsinh_argument_is_positive})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\exp(-u)
+&= \exp(-u)\cdot 1
+&&(\because\ 1\ \text{は乗法の単位元})\\
+&= \exp(-u)\left((y+s)(s-y)\right)
+&&(\because\ \blkref{arcsinh_argument_times_conjugate_is_one})\\
+&= \left(\exp(-u)\,(y+s)\right)(s-y)
+&&(\because\ \mathbb{R}\ \text{の乗法の結合律})\\
+&= \left(\exp(-u)\exp(u)\right)(s-y)
+&&(\because\ \exp(u) = y+s)\\
+&= \exp((-u)+u)\,(s-y)
+&&(\because\ \blkref{scalar_exp_product})\\
+&= \exp(0)\,(s-y)
+&&(\because\ (-u)+u = 0)\\
+&= s-y
+&&(\because\ \blkref{scalar_exp_zero})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh(\mathrm{arcsinh}(y))
+&= \sinh u
+&&(\because\ u\ \text{の置き方})\\
+&= \frac{\exp(u)-\exp(-u)}{2}
+&&(\because\ \sinh\ \text{の定義。}\blkref{def_cosh_sinh})\\
+&= \frac{(y+s)-(s-y)}{2}
+&&(\because\ \text{上の二つの鎖})\\
+&= \frac{2y}{2}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= y
+&&(\because\ \text{約分})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の sinh(arcsinh(y)) = y を独立の主張にした。旧証明の exp(-u) = 1/(y+√(y²+1)) は exp(u)exp(-u) = 1 を根拠に書いていなかったので、" +
+          "(y+s)(s-y) = 1 と exp の積の法則で exp(-u) = s - y を出す鎖に改めた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_equation_solved_by_arcsinh",
+    kind: "claim",
+    title: { tex: String.raw`\sinh u = y \iff u = \mathrm{arcsinh}(y)` },
+    labels: ["sinh_equation_solved_by_arcsinh"],
+    statement: [
+      paragraph([
+        ref("def_arcsinh"),
+        " の ",
+        math(String.raw`\mathrm{arcsinh}`),
+        " と ",
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`\sinh`),
+        " について、",
+        math(String.raw`u, y \in \mathbb{R}`),
+        " なら",
+      ]),
+      displayMath(String.raw`\sinh u = y \iff u = \mathrm{arcsinh}(y)`),
+    ],
+    proof: [
+      paragraph(["両方向を別々に示すので、ここは一続きの式にしない。"]),
+      displayMath(String.raw`\begin{aligned}
+u = \mathrm{arcsinh}(y)
+&\Longrightarrow \sinh u = \sinh(\mathrm{arcsinh}(y))
+&&(\because\ \text{等しい実数の }\sinh\text{ は等しい})\\
+&\Longrightarrow \sinh u = y
+&&(\because\ \blkref{sinh_of_arcsinh})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sinh u = y
+&\Longrightarrow \sinh u = \sinh(\mathrm{arcsinh}(y))
+&&(\because\ \blkref{sinh_of_arcsinh})\\
+&\Longrightarrow u = \mathrm{arcsinh}(y)
+&&(\because\ \blkref{sinh_is_injective})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の「(3) と合わせて sinh u = y ⟺ u = arcsinh(y)」を独立の主張にし、両方向を根拠付きの鎖で書いた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_arcsinh_derivative",
+    kind: "claim",
+    title: { tex: String.raw`\mathrm{arcsinh}'(y) = \tfrac{1}{\sqrt{y^2+1}}` },
+    labels: ["arcsinh_derivative"],
+    statement: [
+      paragraph([
+        ref("def_arcsinh"),
+        " の ",
+        math(String.raw`\mathrm{arcsinh} : \mathbb{R} \to \mathbb{R}`),
+        " は微分可能で、",
+        math(String.raw`y \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\mathrm{arcsinh}'(y) = \frac{1}{\sqrt{y^2+1}}`),
+      paragraph([
+        "右辺の分母は ",
+        ref("sqrt_of_square_plus_one_is_positive"),
+        " より正である。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、微分が実数の極限で定まるからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の微分の公式）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`r : \mathbb{R} \to \mathbb{R}_{>0},\ r(y) := y^2+1`),
+        "、",
+        math(String.raw`s : \mathbb{R} \to \mathbb{R}_{>0},\ s(y) := \sqrt{r(y)}`),
+        "、",
+        math(String.raw`p : \mathbb{R} \to \mathbb{R}_{>0},\ p(y) := y + s(y)`),
+        " と置く（値が正であることは ",
+        ref("sqrt_of_square_plus_one_is_positive"),
+        " と ",
+        ref("arcsinh_argument_is_positive"),
+        " による）。",
+        ref("def_arcsinh"),
+        " より ",
+        math(String.raw`\mathrm{arcsinh} = \log\circ p`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+r'(y)
+&= (\mathrm{id}\cdot\mathrm{id})'(y) + 0
+&&(\because\ r = \mathrm{id}\cdot\mathrm{id} + 1\text{ に微分の公式の和と定数関数})\\
+&= 1\cdot y + y\cdot 1
+&&(\because\ \text{微分の公式の積と恒等関数の導関数 }1)\\
+&= 2y
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+s'(y)
+&= (\sqrt{\ })'(r(y))\cdot r'(y)
+&&(\because\ \text{微分の公式の合成})\\
+&= \frac{1}{2\sqrt{r(y)}}\cdot r'(y)
+&&(\because\ \text{微分の公式の平方根。}r(y) > 0)\\
+&= \frac{1}{2\sqrt{y^2+1}}\cdot 2y
+&&(\because\ r\ \text{の置き方と、上の }r'\text{ の鎖})\\
+&= \frac{y}{\sqrt{y^2+1}}
+&&(\because\ \text{約分})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{arcsinh}'(y)
+&= \log'(p(y))\cdot p'(y)
+&&(\because\ \text{微分の公式の合成。}p(y) > 0)\\
+&= \frac{1}{y+\sqrt{y^2+1}}\cdot p'(y)
+&&(\because\ \text{微分の公式の }\log'(w) = \tfrac1w)\\
+&= \frac{1}{y+\sqrt{y^2+1}}\cdot\left(1 + s'(y)\right)
+&&(\because\ p = \mathrm{id} + s\text{ に微分の公式の和と恒等関数の導関数 }1)\\
+&= \frac{1}{y+\sqrt{y^2+1}}\cdot\left(1 + \frac{y}{\sqrt{y^2+1}}\right)
+&&(\because\ \text{上の }s'(y))\\
+&= \frac{1}{y+\sqrt{y^2+1}}\cdot\frac{\sqrt{y^2+1}+y}{\sqrt{y^2+1}}
+&&(\because\ \text{通分。}\blkref{sqrt_of_square_plus_one_is_positive})\\
+&= \frac{1}{\sqrt{y^2+1}}
+&&(\because\ \text{約分。}\blkref{arcsinh_argument_is_positive})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (4) の arcsinh の微分を独立の主張にした。旧証明の「log と √ の微分・合成関数の微分」は本文で宣言されていない事実だったので、" +
+          "remark_real_analysis_facts_R3_R4 に微分の公式を足して引き、√(y²+1) の微分を別の鎖に分けた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosh_at_least_one",
+    kind: "claim",
+    title: { tex: String.raw`\cosh x \geq 1` },
+    labels: ["cosh_at_least_one"],
+    statement: [
+      paragraph([ref("def_cosh_sinh"), " の ", math(String.raw`x \in \mathbb{R}`), " について ", math(String.raw`\cosh x \geq 1`), "。"]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph(["実数の平方は非負なので ", math(String.raw`\sinh^2\!\left(\tfrac{x}{2}\right) \geq 0`), " である。"]),
+      displayMath(String.raw`\begin{aligned}
+\sinh^2\!\left(\tfrac{x}{2}\right) \geq 0
+&\Longrightarrow 2\sinh^2\!\left(\tfrac{x}{2}\right) \geq 2\cdot 0
+&&(\because\ \text{両辺に }2>0\text{ を掛ける})\\
+&\Longrightarrow 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right) \geq 1 + 2\cdot 0
+&&(\because\ \text{両辺に }1\text{ を加える})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cosh x
+&= 1 + 2\sinh^2\!\left(\tfrac{x}{2}\right)
+&&(\because\ \blkref{cosh_half_angle_formula})\\
+&\geq 1 + 2\cdot 0
+&&(\because\ \text{上の含意の鎖})\\
+&= 1
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が積分の単調性から導いていた cosh u ≥ 1 を、半角公式から導く独立の主張にした。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_cosh_monotone_on_nonnegative",
+    kind: "claim",
+    title: { tex: String.raw`\cosh \text{ は } \mathbb{R}_{\geq 0} \text{ 上で単調増加}` },
+    labels: ["cosh_monotone_on_nonnegative"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`u, t \in \mathbb{R}`),
+        " が ",
+        math(String.raw`0 \leq u \leq t`),
+        " を満たすなら ",
+        math(String.raw`\cosh u \leq \cosh t`),
+        "。",
+      ]),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "準備。",
+        math(String.raw`a := \tfrac{t+u}{2},\ b := \tfrac{t-u}{2} \in \mathbb{R}`),
+        " と置く。",
+        math(String.raw`a + b = t`),
+        "、",
+        math(String.raw`a - b = u`),
+        " であり、",
+        math(String.raw`t + u \geq 0`),
+        "・",
+        math(String.raw`t - u \geq 0`),
+        " より ",
+        math(String.raw`a \geq 0`),
+        "・",
+        math(String.raw`b \geq 0`),
+        " である。",
+        math(String.raw`c \in \mathbb{R}_{\geq 0}`),
+        " について ",
+        math(String.raw`\sinh c \geq 0`),
+        " である。実際 ",
+        math(String.raw`c = 0`),
+        " なら ",
+        ref("sinh_zero"),
+        " より ",
+        math(String.raw`\sinh c = 0`),
+        "、",
+        math(String.raw`c > 0`),
+        " なら ",
+        ref("cosh_sinh_basic_properties"),
+        " (3) より ",
+        math(String.raw`\sinh c > 0`),
+        "。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+a \geq 0\ \land\ b \geq 0
+&\Longrightarrow \sinh a \geq 0\ \land\ \sinh b \geq 0
+&&(\because\ \text{準備})\\
+&\Longrightarrow \sinh a\sinh b \geq 0
+&&(\because\ \text{非負の実数の積は非負})\\
+&\Longrightarrow 2\sinh a\sinh b \geq 0
+&&(\because\ \text{両辺に }2>0\text{ を掛ける})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cosh t - \cosh u
+&= \cosh(a+b) - \cosh(a-b)
+&&(\because\ a+b = t,\ a-b = u)\\
+&= \left(\cosh a\cosh b + \sinh a\sinh b\right) - \left(\cosh a\cosh b - \sinh a\sinh b\right)
+&&(\because\ \blkref{cosh_addition_formula}\ \text{の複号 }\pm\text{ を 1 箇所ずつ})\\
+&= 2\sinh a\sinh b
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&\geq 0
+&&(\because\ \text{上の含意の鎖})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cosh t - \cosh u \geq 0
+&\Longrightarrow \cosh u \leq \cosh t
+&&(\because\ \text{両辺に }\cosh u\text{ を加える})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の証明が積分から導いていた cosh の [0,∞) 上の単調性を、加法定理から導く独立の主張にした。" +
+          "下流（second_derivative_log_divergence の cosh(κ/2) ≤ cosh(1/4)）が旧 (2)(3) を引いて使っていた事実でもある。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_at_least_argument",
+    kind: "claim",
+    title: { tex: String.raw`t \leq \sinh t \quad (t \geq 0)` },
+    labels: ["sinh_at_least_argument"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`t \in \mathbb{R}_{\geq 0}`),
+        " について ",
+        math(String.raw`t \leq \sinh t`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、証明で区間 ",
+        math(String.raw`[0,t]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4)）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t = 0`),
+        " なら ",
+        ref("sinh_zero"),
+        " より ",
+        math(String.raw`\sinh t = 0 = t`),
+        "。以下 ",
+        math(String.raw`t > 0`),
+        " とする。",
+        ref("sinh_derivative"),
+        " より ",
+        math(String.raw`\sinh`),
+        " は微分可能で ",
+        math(String.raw`\sinh' = \cosh`),
+        "、",
+        math(String.raw`\cosh`),
+        " は微分の公式（和・定数倍・合成と ",
+        math(String.raw`\exp' = \exp`),
+        "）より微分可能なので連続である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+t
+&= t - 0
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \int_0^t 1\,du
+&&(\because\ \text{(R4) を }F(u) = u\text{ に。微分の公式で }F' = 1)\\
+&\leq \int_0^t \cosh u\,du
+&&(\because\ \text{(R3) の単調性と、}u \in [0,t]\text{ で }1 \leq \cosh u\text{。}\blkref{cosh_at_least_one})\\
+&= \sinh t - \sinh 0
+&&(\because\ \text{(R4) を }F = \sinh\text{ に。}\blkref{sinh_derivative})\\
+&= \sinh t - 0
+&&(\because\ \blkref{sinh_zero})\\
+&= \sinh t
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の前半を独立の主張にし、主張の左辺から始まる一続きの鎖に改めた。",
+      ],
+    },
+  },
+
+  {
+    id: "critical_claim_sinh_at_most_argument_times_cosh",
+    kind: "claim",
+    title: { tex: String.raw`\sinh t \leq t\cosh t \quad (t \geq 0)` },
+    labels: ["sinh_at_most_argument_times_cosh"],
+    statement: [
+      paragraph([
+        ref("def_cosh_sinh"),
+        " の ",
+        math(String.raw`t \in \mathbb{R}_{\geq 0}`),
+        " について ",
+        math(String.raw`\sinh t \leq t\cosh t`),
+        "。",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、証明で区間 ",
+        math(String.raw`[0,t]`),
+        " 上の積分を使うからである（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の (R3)(R4)）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`t = 0`),
+        " なら ",
+        ref("sinh_zero"),
+        " より ",
+        math(String.raw`\sinh t = 0 = t\cosh t`),
+        "。以下 ",
+        math(String.raw`t > 0`),
+        " とする。",
+        ref("sinh_at_least_argument"),
+        " の証明と同じく ",
+        math(String.raw`\cosh`),
+        " は連続である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sinh t
+&= \sinh t - 0
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \sinh t - \sinh 0
+&&(\because\ \blkref{sinh_zero})\\
+&= \int_0^t \cosh u\,du
+&&(\because\ \text{(R4) を }F = \sinh\text{ に。}\blkref{sinh_derivative})\\
+&\leq \int_0^t \cosh t\,du
+&&(\because\ \text{(R3) の単調性と、}u \in [0,t]\text{ で }\cosh u \leq \cosh t\text{。}\blkref{cosh_monotone_on_nonnegative})\\
+&= t\cosh t - 0\cdot\cosh t
+&&(\because\ \text{(R4) を }F(u) = u\cosh t\text{ に。微分の公式で }F' = \cosh t)\\
+&= t\cosh t
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 旧 cosh_addition_and_half_angle (5) の後半を独立の主張にし、主張の左辺から始まる一続きの鎖に改めた。cosh の単調性は cosh_monotone_on_nonnegative から引く。",
       ],
     },
   },
@@ -529,7 +1550,7 @@ c_0
         String.raw`\begin{aligned}
 F'(\theta)
 &= 2\cdot\frac{1}{\sqrt{\left(\frac{\theta}{2\delta}\right)^2+1}}\cdot\frac{1}{2\delta}
-   \quad (\because \text{cosh\_addition\_and\_half\_angle (4) と合成関数の微分}) \\
+   \quad (\because \blkref{arcsinh_derivative}\text{ と合成関数の微分}) \\
 &= \frac{1}{\delta}\cdot\frac{2\delta}{\sqrt{\theta^2 + 4\delta^2}}
    \quad (\because \delta > 0 \text{ より } \sqrt{\tfrac{\theta^2+4\delta^2}{4\delta^2}} = \tfrac{\sqrt{\theta^2+4\delta^2}}{2\delta}) \\
 &= \frac{2}{\sqrt{\theta^2+4\delta^2}} \\
@@ -551,8 +1572,8 @@ F'(\theta)
       ),
       paragraph([
         "(2) の証明。",
-        ref("cosh_addition_and_half_angle"),
-        " (4) の ",
+        ref("def_arcsinh"),
+        " の ",
         math(String.raw`\mathrm{arcsinh}(y) = \log(y+\sqrt{y^2+1})`),
         " について、",
         math(String.raw`y > 0`),

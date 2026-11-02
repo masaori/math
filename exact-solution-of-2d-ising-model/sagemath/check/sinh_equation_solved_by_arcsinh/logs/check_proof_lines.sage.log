@@ -1,0 +1,2 @@
+6 点で sinh(arcsinh(y)) のボールが y と重なり、arcsinh(y) から離した 4 つの u では sinh u が y と重ならない
+RESULT: PASS

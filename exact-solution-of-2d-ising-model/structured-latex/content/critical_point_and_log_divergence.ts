@@ -440,7 +440,7 @@ A &= s_1 s_2^*
    &&(\because \blkref{def_gamma1_gamma2_of_theta}) \\
 &= \left(c_1c_2^* - s_1s_2^*\right) + s_1s_2^*\left(1 - \cos\theta\right) \\
 &= \cosh\left(2K_1 - 2K_2^*\right) + s_1s_2^*\left(1-\cos\theta\right)
-   &&(\because \blkref{cosh_addition_and_half_angle}\text{ (1) を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
+   &&(\because \blkref{cosh_addition_formula}\text{ の複号 }-\text{ を } x = 2K_1,\ y = 2K_2^* \text{ に適用}) \\
 &= \cosh\kappa + A\left(1-\cos\theta\right)
    &&(\because \blkref{def_kappa}\text{ と }\blkref{def_critical_sinh_product_A}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
@@ -457,8 +457,8 @@ A &= s_1 s_2^*
       ]),
       paragraph([
         "Step 2（半角の形へ）。",
-        ref("cosh_addition_and_half_angle"),
-        " (2) を ",
+        ref("cosh_half_angle_formula"),
+        " を ",
         math(String.raw`x = \gamma(\theta)`),
         " と ",
         math(String.raw`x = \kappa`),
@@ -468,11 +468,11 @@ A &= s_1 s_2^*
         String.raw`\begin{aligned}
 1 + 2\sinh^2\!\left(\frac{\gamma(\theta)}{2}\right)
 &= \cosh\gamma(\theta)
-   &&(\because \text{cosh\_addition\_and\_half\_angle (2)}) \\
+   &&(\because \blkref{cosh_half_angle_formula}) \\
 &= \cosh\kappa + 2A\sin^2\!\left(\frac{\theta}{2}\right)
    &&(\because \text{Step 1}) \\
 &= 1 + 2\sinh^2\!\left(\frac{\kappa}{2}\right) + 2A\sin^2\!\left(\frac{\theta}{2}\right)
-   &&(\because \text{cosh\_addition\_and\_half\_angle (2)})
+   &&(\because \blkref{cosh_half_angle_formula})
 \end{aligned}`,
       ),
       paragraph([
@@ -505,8 +505,8 @@ A &= s_1 s_2^*
       ]),
       displayMath(String.raw`\sinh\!\left(\frac{\gamma(\theta)}{2}\right) = \sqrt{S}`),
       paragraph([
-        ref("cosh_addition_and_half_angle"),
-        " (4) を ",
+        ref("sinh_equation_solved_by_arcsinh"),
+        " を ",
         math(String.raw`u = \tfrac{\gamma(\theta)}{2}`),
         "、",
         math(String.raw`y = \sqrt{S}`),
@@ -574,7 +574,7 @@ s_1 s_2 = 1
 &&\bigl(\because\ s_2 > 0 \text{ で両辺を割る}\bigr) \\
 &\iff \sinh 2K_1 = \sinh 2K_2^* \\
 &\iff 2K_1 = 2K_2^*
-&&\bigl(\because\ \text{cosh\_addition\_and\_half\_angle (3)：} \sinh \text{ は狭義単調増加ゆえ単射}\bigr) \\
+&&\bigl(\because\ \blkref{sinh_is_injective}\bigr) \\
 &\iff K_1 = K_2^*
 \end{aligned}`,
       ),
@@ -679,8 +679,10 @@ A
         " を ",
         math(String.raw`\sinh 2K_c = 1`),
         " で定める（",
-        ref("cosh_addition_and_half_angle"),
-        " (4) より ",
+        ref("sinh_equation_solved_by_arcsinh"),
+        " と ",
+        ref("def_arcsinh"),
+        " より ",
         math(String.raw`2K_c = \mathrm{arcsinh}(1) = \log(1+\sqrt2)`),
         " と一意に定まる）。",
       ]),
@@ -752,7 +754,7 @@ A
 &= -\frac{1}{2\sinh K\cosh K}
 &&\bigl(\because\ \mathbb R\text{ の四則}\bigr) \\
 &= -\frac{1}{\sinh 2K}
-&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ の倍角公式}\bigr)
+&&\bigl(\because\ \blkref{sinh_double_angle_formula}\text{ を }x = 2K\text{ で}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -795,8 +797,8 @@ A
         " より ",
         math(String.raw`\sinh 2K = 1 = \sinh 2K_c`),
         "、",
-        ref("cosh_addition_and_half_angle"),
-        " (3) の単射性より ",
+        ref("sinh_is_injective"),
+        " より ",
         math(String.raw`K = K_c`),
         "。",
       ]),
@@ -824,8 +826,8 @@ A
         "（",
         math(String.raw`\cosh > 0`),
         "）。",
-        ref("cosh_addition_and_half_angle"),
-        " (1) を ",
+        ref("sinh_addition_formula"),
+        " の複号 + を ",
         math(String.raw`x = 2K_c`),
         "、",
         math(String.raw`y = 2(K-K_c) \in [-\tfrac15,\tfrac15]`),
@@ -837,14 +839,14 @@ A
 &= \sinh\left(2K_c + 2(K-K_c)\right)
 &&(\because\ \mathbb R\text{ の四則}) \\
 &= \sinh 2K_c\cosh\left(2(K-K_c)\right) + \cosh 2K_c\sinh\left(2(K-K_c)\right)
-&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の加法公式}) \\
+&&(\because\ \blkref{sinh_addition_formula}) \\
 &= \cosh\left(2(K-K_c)\right) + \sqrt2\,\sinh\left(2(K-K_c)\right)
 &&(\because \sinh 2K_c = 1,\ \cosh 2K_c = \sqrt2)
 \end{aligned}`,
       ),
       paragraph([
-        ref("cosh_addition_and_half_angle"),
-        " (3) より ",
+        ref("sinh_strictly_increasing"),
+        " より ",
         math(String.raw`\sinh`),
         " は狭義単調増加なので、",
         math(String.raw`2K_c - 0.2 \leq 2K \leq 2K_c + 0.2`),
@@ -852,6 +854,14 @@ A
         math(String.raw`\sinh(2K_c-0.2) \leq \sinh 2K \leq \sinh(2K_c+0.2)`),
         " であり、上の加法定理の式（",
         math(String.raw`2(K-K_c) = \pm 0.2`),
+        "）と ",
+        ref("cosh_is_even"),
+        "・",
+        ref("sinh_is_odd"),
+        "（",
+        math(String.raw`\cosh(-0.2) = \cosh 0.2`),
+        "、",
+        math(String.raw`\sinh(-0.2) = -\sinh 0.2`),
         "）から",
       ]),
       displayMath(
@@ -870,14 +880,14 @@ A
         String.raw`\begin{aligned}
 \sinh 2K
 &\geq \cosh 0.2-\sqrt2\sinh 0.2
-&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の単調性と上の端点の式}) \\
+&&(\because\ \blkref{sinh_strictly_increasing}\text{ と上の端点の式}) \\
 &\geq 1.02006-1.414214\cdot0.2013361
 &&(\because\ \text{上の数値評価}) \\
 &\geq 0.7353
 &&(\because\ \mathbb Q\text{ の四則}). \\
 \sinh 2K
 &\leq \cosh 0.2+\sqrt2\sinh 0.2
-&&(\because\ \blkref{cosh_addition_and_half_angle}\text{ の単調性と上の端点の式}) \\
+&&(\because\ \blkref{sinh_strictly_increasing}\text{ と上の端点の式}) \\
 &\leq 1.020067+1.414214\cdot0.2013361
 &&(\because\ \text{上の数値評価}) \\
 &\leq 1.3048
@@ -1100,12 +1110,12 @@ A
         String.raw`\begin{aligned}
 \sinh\gamma
 &= 2\sinh\!\left(\frac{\gamma}{2}\right)\cosh\!\left(\frac{\gamma}{2}\right)
-   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
+   &&(\because\ \blkref{sinh_double_angle_formula}) \\
 &= 2\sqrt{S}\sqrt{1+S} &&(\because\ \text{本主張 (1) の二つの半角等式}) \\
 &= 2\sqrt{S(1+S)} &&(\because\ \mathbb R\text{ の平方根の積}) \\
 \cosh\gamma
 &= 1 + 2\sinh^2\!\left(\frac{\gamma}{2}\right)
-   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
+   &&(\because\ \blkref{cosh_half_angle_formula}) \\
 &= 1 + 2S
    &&(\because\ \text{本主張 (1) の } \sinh(\tfrac\gamma2) = \sqrt S)
 \end{aligned}`,
@@ -1129,10 +1139,10 @@ A
         String.raw`\begin{aligned}
 \frac{\partial S}{\partial\kappa}
 &= 2\sinh\!\left(\frac{\kappa}{2}\right)\cdot\cosh\!\left(\frac{\kappa}{2}\right)\cdot\frac{1}{2}
-   &&(\because (\sinh)' = \cosh \text{ と合成関数の微分}) \\
+   &&(\because \blkref{sinh_derivative}\text{ と合成関数の微分}) \\
 &= \sinh\!\left(\frac{\kappa}{2}\right)\cosh\!\left(\frac{\kappa}{2}\right) &&(\because\ \mathbb R\text{ の四則}) \\
 &= \frac{1}{2}\sinh\kappa
-   &&(\because\ \blkref{cosh_addition_and_half_angle})
+   &&(\because\ \blkref{sinh_double_angle_formula})
 \end{aligned}`,
       ),
       paragraph(["したがって"]),
@@ -1142,7 +1152,7 @@ A
 &= 2\cdot\mathrm{arcsinh}'\!\left(\sqrt S\right)\cdot\frac{1}{2\sqrt S}\cdot\frac{\partial S}{\partial\kappa}
    &&(\because \text{合成関数の微分と } (\sqrt{\ })' = \tfrac{1}{2\sqrt{\ }}) \\
 &= 2\cdot\frac{1}{\sqrt{S+1}}\cdot\frac{1}{2\sqrt S}\cdot\frac{1}{2}\sinh\kappa
-   &&(\because\ \blkref{cosh_addition_and_half_angle}) \\
+   &&(\because\ \blkref{arcsinh_derivative}\text{ と上の }\tfrac{\partial S}{\partial\kappa}) \\
 &= \frac{\sinh\kappa}{2\sqrt{S(1+S)}} &&(\because\ \mathbb R\text{ の四則と平方根の積}) \\
 &= \frac{\sinh\kappa}{\sinh\gamma}
    &&(\because\ \text{本主張 (1)})
@@ -1153,7 +1163,7 @@ A
         String.raw`\begin{aligned}
 \frac{\partial^2\gamma}{\partial\kappa^2}
 &= \frac{\cosh\kappa\cdot\sinh\gamma - \sinh\kappa\cdot\cosh\gamma\cdot\dfrac{\partial\gamma}{\partial\kappa}}{\sinh^2\gamma}
-   &&(\because \text{商の微分と } (\sinh)' = \cosh) \\
+   &&(\because \text{商の微分と }\blkref{sinh_derivative}) \\
 &= \frac{\cosh\kappa}{\sinh\gamma}
  - \frac{\sinh\kappa\cosh\gamma}{\sinh^2\gamma}\cdot\frac{\sinh\kappa}{\sinh\gamma}
    &&(\because \text{直前の式}) \\
@@ -1179,7 +1189,7 @@ A
 &= 2\left|\sinh\!\left(\frac{\kappa}{2}\right)\right|\cosh\!\left(\frac{\kappa}{2}\right)
    &&(\because \cosh > 0) \\
 &= \left|\sinh\kappa\right|
-   &&(\because\ \blkref{cosh_addition_and_half_angle})
+   &&(\because\ \blkref{sinh_double_angle_formula})
 \end{aligned}`,
       ),
       paragraph([
@@ -1329,8 +1339,8 @@ G(-\kappa)
         " とする。",
         math(String.raw`\delta := \sinh\!\left(\tfrac{\kappa}{2}\right) > 0`),
         " とおくと ",
-        ref("cosh_addition_and_half_angle"),
-        " (3)(5) より ",
+        ref("cosh_sinh_basic_properties"),
+        " (3) と ", ref("sinh_strictly_increasing"), " より ",
         math(String.raw`0 < \delta \leq \sinh\tfrac14 \leq 0.2527`),
         "。",
       ]),
@@ -1578,7 +1588,7 @@ T
 &\leq \frac{\sinh^2\kappa}{4}\cdot\frac{2}{c_0\delta^2}
 && (\because \blkref{closed_form_log_integral}\text{ (3)}) \\
 &= \frac{4\delta^2\cosh^2\!\left(\frac{\kappa}{2}\right)}{4}\cdot\frac{2}{c_0\delta^2}
-&& (\because \blkref{cosh_addition_and_half_angle}\text{ (2)}:\ \sinh\kappa=2\delta\cosh(\tfrac\kappa2)) \\
+&& (\because \blkref{sinh_double_angle_formula}:\ \sinh\kappa=2\delta\cosh(\tfrac\kappa2)) \\
 &= \frac{2\cosh^2\!\left(\frac{\kappa}{2}\right)}{c_0}
 && (\because \delta>0\text{ と }\mathbb R\text{ の四則}) \\
 &\leq \frac{2\cdot 1.0315^2}{0.5887}
@@ -1593,8 +1603,8 @@ T
         " を ",
         math(String.raw`\log\frac1\kappa`),
         " に直す）。",
-        ref("cosh_addition_and_half_angle"),
-        " (5) を ",
+        ref("sinh_at_least_argument"),
+        " と ", ref("sinh_at_most_argument_times_cosh"), " を ",
         math(String.raw`t = \tfrac\kappa2`),
         " に適用すると ",
         math(String.raw`\tfrac\kappa2 \leq \delta \leq \tfrac\kappa2\cosh\tfrac\kappa2`),
@@ -1616,11 +1626,11 @@ T
       ),
       paragraph([
         math(String.raw`\rho := \log\frac{\kappa}{\delta} - \log 2`),
-        " とおく。直前の評価と ", ref("cosh_addition_and_half_angle"),
-        " (5) を用いると、",
+        " とおく。直前の評価と ", ref("cosh_monotone_on_nonnegative"),
+        " を用いると、",
       ]),
       displayMath(String.raw`\cosh\!\left(\frac\kappa2\right)\leq\cosh\tfrac14
-\quad(\because\ 0<\kappa\leq\tfrac12\text{ と }\blkref{cosh_addition_and_half_angle}\text{ (2)(3)}).`),
+\quad(\because\ 0<\kappa\leq\tfrac12\text{ と }\blkref{cosh_monotone_on_nonnegative}).`),
       displayMath(String.raw`\begin{aligned}
 \log\frac{\pi}{\delta}
 &=\log\frac1\kappa+\log\pi+\log\frac\kappa\delta
@@ -1645,13 +1655,13 @@ T
  + \cosh\kappa\left(\log(2\pi) + \rho\right)
 \end{aligned}`,
       ),
-      paragraph(["右辺第 1 項は、", ref("cosh_addition_and_half_angle"), " (2)(5) より"]),
+      paragraph(["右辺第 1 項は、", ref("cosh_half_angle_formula"), " と ", ref("sinh_at_most_argument_times_cosh"), " より"]),
       displayMath(String.raw`\begin{aligned}
 \cosh\kappa-1
 &=2\sinh^2\!\left(\frac\kappa2\right)
-&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (2)}\bigr)\\
+&&\bigl(\because\ \blkref{cosh_half_angle_formula}\bigr)\\
 &\leq2\left(\frac\kappa2\cosh\frac14\right)^2
-&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (5) と }0<\kappa\leq\tfrac12\bigr)\\
+&&\bigl(\because\ \blkref{sinh_at_most_argument_times_cosh}\text{、}\blkref{cosh_monotone_on_nonnegative}\text{ と }0<\kappa\leq\tfrac12\bigr)\\
 &\leq0.532\,\kappa^2
 &&\bigl(\because\ \cosh\tfrac14\text{ の数値上界}\bigr).
 \end{aligned}`),
@@ -2170,9 +2180,9 @@ G''(\kappa)
         String.raw`\begin{aligned}
 \sinh u = 1
 &\iff u = \mathrm{arcsinh}(1)
-&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (3)(4)}\bigr)\\
+&&\bigl(\because\ \blkref{sinh_equation_solved_by_arcsinh}\bigr)\\
 &\iff u = \log\left(1+\sqrt{1^2+1}\right)
-&&\bigl(\because\ \blkref{cosh_addition_and_half_angle}\text{ (4) の }\mathrm{arcsinh}\text{ の定義}\bigr)\\
+&&\bigl(\because\ \blkref{def_arcsinh}\bigr)\\
 &\iff u = \log\left(1+\sqrt{2}\right)
 &&\bigl(\because\ \mathbb R\text{ の四則}\bigr)
 \end{aligned}`,

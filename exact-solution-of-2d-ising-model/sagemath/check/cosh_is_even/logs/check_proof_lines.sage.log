@@ -1,0 +1,3 @@
+-(-x) = x が QQ[x] で成り立つ（-(-x) ≠ -x）
+四行が QQ 上の不定元 Ep = exp(x), Em = exp(-x) で厳密に一致し、sinh では一致しない（対照）
+RESULT: PASS

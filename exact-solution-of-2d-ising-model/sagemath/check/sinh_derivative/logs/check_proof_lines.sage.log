@@ -1,0 +1,3 @@
+九行が QQ[x] の形式冪級数で全次数 13 以下で一致する（sinh' ≠ sinh は対照）
+SR の記号微分でも sinh' = cosh の両端が一致する
+RESULT: PASS
