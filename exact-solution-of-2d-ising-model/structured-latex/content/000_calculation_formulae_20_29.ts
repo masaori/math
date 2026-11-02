@@ -1518,6 +1518,43 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_definition_power_of_complex_number",
+    kind: "definition",
+    title: { text: "複素数の冪" },
+    labels: ["def_power_of_complex_number"],
+    statement: [
+      paragraph([
+        math(String.raw`z \in \mathbb{C}`),
+        " と ",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        " について、冪 ",
+        math(String.raw`z^m \in \mathbb{C}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`z^0 := 1_{\mathbb{C}},
+\qquad
+z^{m+1} := z^m\, z`),
+      paragraph([
+        "と定める。積は ",
+        ref("definition_of_cc"),
+        " の積、",
+        math(String.raw`1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 4 の最後の行 2^0 = 1 が「冪の零乗」を名前だけで根拠にしていたので足した。" +
+          "行列の冪（def_exp (1) の A^0 := I、A^{m+1} := A^m A）と同じ形に揃えた。Lean の ℂ の冪は Monoid.npow で、二つの式は pow_zero・pow_succ である。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_finite_product_with_zero_factor_is_zero",
     kind: "claim",
     title: { text: "0 の因子を持つ複素数の有限積は 0" },

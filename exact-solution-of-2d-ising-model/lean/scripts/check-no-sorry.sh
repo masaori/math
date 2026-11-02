@@ -1189,6 +1189,9 @@ targets=(
   Ising2D.binaryWordMatrixSum_eq_binWordSum
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
   Ising2D.binWordSum_mul_tensorPow
+  Ising2D.mul_binaryWordMatrixSum
+  Ising2D.mul_binaryWordMatrixSum_of_necSuf
+  Ising2D.mul_binWordSum_tensorPow
   Ising2D.expansion_of_finite_product_of_two_term_sums
   Ising2D.expansion_of_finite_product_of_two_term_sums_of_necSuf
   Ising2D.expansion_of_finite_product_of_two_term_sums_tensorPow

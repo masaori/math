@@ -2,7 +2,7 @@
 # `{0,1}^r` の上の和、その加法を保つ写像による像、二項の和の有限積の展開（必要十分版）
 
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/DefinitionSumOverBinaryWords.lean`
-（人手 `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`）と
+（人手 `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`・`sum_over_binary_words_distributes_in_right_factor`）と
 `ClaimExpansionOfFiniteProductOfTwoTermSums.lean`（人手 `expansion_of_finite_product_of_two_term_sums`）。
 具体版をこのファイルの系として導くのは、同じフォルダの `DefinitionSumOverBinaryWordsFromNecSuf.lean`・
 `ClaimExpansionOfFiniteProductOfTwoTermSumsFromNecSuf.lean`。
@@ -14,13 +14,15 @@
 | 具体版の段 | 必要十分版 |
 | --- | --- |
 | `sum_over_binary_words_distributes_in_left_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (· C)`） |
+| `sum_over_binary_words_distributes_in_right_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (C * ·)`） |
 | `expansion_of_finite_product_of_two_term_sums` の `r = 1`・`r → r + 1`（同じ並び） | `finProdLeft_add_eq_binWordSum` の 2 つの節 |
 
 ## 何が効いているか / 効いていないか
 
 - 和の定義に要るのは二項演算 `+` だけである（`Add α`）。零元・結合則・可換則は効いていない（空の和を持たず、足す順序を定義で固定する）。
 - 右から掛けることとの分配で効くのは、写像 `f` が `+` を保つこと（`f (a + b) = f a + f b`）だけである。具体版は `f := (· C)` で、
-  `mat_mult_distributes_over_sum_in_left_factor` がこの仮定に当たる。
+  `mat_mult_distributes_over_sum_in_left_factor` がこの仮定に当たる。左から掛ける側も同じ補題で、`f := (C * ·)`、
+  `mat_mult_distributes_over_sum_in_right_factor` が仮定に当たる（右と左で別の性質は効いていない）。
 - 展開で効くのは、二つの分配律（`Distrib R`）だけである。積の結合則、単位元、零元、和の結合則・可換則、因子どうしの可換性は効いていない
   （積を左から掛けるので、`(∏_{j≤r} …) A_{r+1}` の形が定義そのものである）。
 -/
@@ -44,7 +46,8 @@ theorem binWordSum_succ {α : Type*} [Add α] (r : ℕ) (B : (Fin (r + 2) → Fi
     binWordSum (r + 1) B
       = binWordSum r (fun ε' => B (Fin.snoc (α := fun _ => Fin 2) ε' 1) + B (Fin.snoc (α := fun _ => Fin 2) ε' 0)) := rfl
 
-/-- **和を保つ写像は `{0,1}^r` の上の和を保つ**（具体版 `sum_over_binary_words_distributes_in_left_factor` は `f := (· C)`）。 -/
+/-- **和を保つ写像は `{0,1}^r` の上の和を保つ**（具体版 `sum_over_binary_words_distributes_in_left_factor` は `f := (· C)`、
+`sum_over_binary_words_distributes_in_right_factor` は `f := (C * ·)`）。 -/
 theorem binWordSum_map {α β : Type*} [Add α] [Add β] (f : α → β) (hf : ∀ a b, f (a + b) = f a + f b) :
     ∀ (r : ℕ) (X : (Fin (r + 1) → Fin 2) → α), f (binWordSum r X) = binWordSum r (fun ε => f (X ε))
   | 0, X =>

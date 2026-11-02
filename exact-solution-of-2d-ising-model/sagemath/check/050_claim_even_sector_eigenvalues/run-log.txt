@@ -166,3 +166,8 @@ RESULT: PASS
 # 実行コマンド: sage check_35_joint_eigenspace_moving_one_factor_chains.sage
 PASS check_joint_eigenspace_decomposition Step 1 の ε ≠ ε' の鎖・Step 3 の ň_νQ̌_ε の鎖: 8352 段、否定コントロール 1 行
 RESULT: PASS
+
+##### 2026-11-02 に check_36 を足した（Step 4 の冪と Step 5 の数ベクトルの鎖）
+# 実行コマンド: sage check_36_joint_eigenspace_step4_step5_power_and_vector_chains.sage
+PASS check_joint_eigenspace_decomposition Step 4 の冪・Step 5 の数ベクトルの鎖: 177 段、否定コントロール 3 行
+RESULT: PASS

@@ -17,6 +17,12 @@ Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`�
 Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、4 通りの上付き添字の組 `R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}` の鎖）、
 Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と `Q̌_εň_ν` の鎖、
 Step 1 の `ε ≠ ε'` の鎖を含む Step 1〜Step 5 の鎖と 1 対 1 の具体版はまだ無い。
+Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
+下の `trace_Qproj` では必要十分版から `2^M · tr(Q̌_ε) = 2^M` を出して `2^M` で約分しており、人手の 3 行と 1 対 1 の版はまだ無い。Step 5 の人手の根拠
+`identity_matrix_is_left_unit_of_mat_mult`（`n → 1`）・`sum_over_binary_words_distributes_in_left_factor`・
+`sum_over_binary_words_distributes_in_right_factor`（`p → 1`）・`zero_matrix_is_right_zero_of_mat_mult`（`p → 1`）は、
+下の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero` ではまだ mathlib の `Matrix.one_mulVec`・`Matrix.sum_mulVec`・`Matrix.mulVec_sum`・
+`Matrix.mulVec_zero` で閉じている（人手の数ベクトルは 1 列の行列、Lean は `Conf M → ℂ` で、和も `Finset.sum`）。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 章 009 との違い（本章の要点）

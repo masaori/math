@@ -2348,6 +2348,77 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_claim_sum_over_binary_words_distributes_in_right_factor",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に左から行列を掛けると、各項に掛けた和になる}` },
+    labels: ["sum_over_binary_words_distributes_in_right_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`X_\epsilon \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。和は ",
+        ref("def_sum_over_binary_words"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`C \Bigl(\sum_{\epsilon \in \{0,1\}^{r}} X_\epsilon\Bigr) = \sum_{\epsilon \in \{0,1\}^{r}} C X_\epsilon`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`\mathrm{Mat}(n,p,\mathbb{C})`),
+        " の元の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+C \Bigl(\sum_{\epsilon \in \{0,1\}^{1}} X_\epsilon\Bigr)
+&= C \bigl(X_{(1)} + X_{(0)}\bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (m \to n,\ n \to p,\ B_\epsilon \to X_\epsilon)\bigr)\\
+&= C X_{(1)} + C X_{(0)}
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (A \to C,\ B \to X_{(1)},\ C \to X_{(0)})\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} C X_\epsilon
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (n \to p,\ B_\epsilon \to C X_\epsilon)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`X_\epsilon`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+C \Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} X_\epsilon\Bigr)
+&= C \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (m \to n,\ n \to p,\ B_\epsilon \to X_\epsilon)\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} C \bigl(X_{(\epsilon',1)} + X_{(\epsilon',0)}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\ (X_{\epsilon'} \to X_{(\epsilon',1)} + X_{(\epsilon',0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(C X_{(\epsilon',1)} + C X_{(\epsilon',0)}\bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (A \to C,\ B \to X_{(\epsilon',1)},\ C \to X_{(\epsilon',0)})\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} C X_\epsilon
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (n \to p,\ B_\epsilon \to C X_\epsilon)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-02: 原文（Typst）に対応ブロックは無い。check_joint_eigenspace_decomposition の Step 5 の Q̌_{ε'}(Σ_ε y_ε) = Σ_ε Q̌_{ε'}y_ε が「行列の作用の分配法則」を名前だけで根拠にしていたので足した。" +
+          "sum_over_binary_words_distributes_in_left_factor と同じ帰納法で、分配を右の因子の側にしたもの。Lean は具体版 Ising2D.mul_binaryWordMatrixSum（DefinitionSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_expansion_of_finite_product_of_two_term_sums",
     kind: "claim",
     title: { text: "二項の和の有限積の展開" },

@@ -2679,7 +2679,7 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
 &= 2^{0}
   \quad (\because M_{\mathrm{col}}-M_{\mathrm{col}}=0) \\
 &= 1
-  \quad (\because \text{冪の零乗})
+  \quad \left(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\ (z \to 2)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2703,7 +2703,23 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
 \end{aligned}`,
       ),
       paragraph([
-        "Step 5（(5) の証明）。(2) より任意の ",
+        "Step 5（(5) の証明）。本 Step では、数ベクトル ",
+        math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " を ",
+        ref("mat_mult"),
+        " のとおり ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列として扱う。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " で添字付けられた数ベクトルの和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}}`),
+        "）により、零ベクトルは零行列 ",
+        math(String.raw`O_{2^{M_{\mathrm{col}}},1}`),
+        "（",
+        ref("def_zero_matrix"),
+        "）である。任意の ",
         math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
         " について",
       ]),
@@ -2711,23 +2727,23 @@ R_\nu^{(\epsilon_\nu)}R_\nu^{(\epsilon'_\nu)}
         String.raw`\begin{aligned}
 x
 &= Ix
-  \quad (\because \text{単位行列の作用}) \\
+  \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ A \to x)\ \text{を右辺から左辺へ}\right) \\
 &= \left(\sum_\epsilon \check{Q}_\epsilon\right)x
-  \quad (\because \text{Step 2 の射影子の和}) \\
+  \quad (\because \text{Step 2 で示した (2) を右辺から左辺へ}) \\
 &= \sum_\epsilon \check{Q}_\epsilon x
-  \quad (\because \text{行列の作用の分配法則})
+  \quad \left(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ r \to M_{\mathrm{col}},\ X_\epsilon \to \check{Q}_\epsilon,\ C \to x)\right)
 \end{aligned}`,
       ),
       paragraph([
         "である。各項 ", math(String.raw`\check{Q}_\epsilon x`), " は ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " に属するから和は全体を張る。直和であることを見るために ",
-        math(String.raw`\sum_\epsilon y_\epsilon = 0`),
+        math(String.raw`\sum_\epsilon y_\epsilon = O_{2^{M_{\mathrm{col}}},1}`),
         "（",
         math(String.raw`y_\epsilon \in \mathrm{im}\,\check{Q}_\epsilon`),
         "）とする。任意の ", math(String.raw`\epsilon'`), " を固定する。Step 1 より、",
         math(String.raw`\epsilon\ne\epsilon'`), " なら ",
-        math(String.raw`\check{Q}_{\epsilon'}y_\epsilon=0`),
+        math(String.raw`\check{Q}_{\epsilon'}y_\epsilon=O_{2^{M_{\mathrm{col}}},1}`),
         " であり、", math(String.raw`y_{\epsilon'}\in\mathrm{im}\,\check{Q}_{\epsilon'}`),
         " と冪等性から ",
         math(String.raw`\check{Q}_{\epsilon'}y_{\epsilon'}=y_{\epsilon'}`), " である。したがって",
@@ -2738,11 +2754,11 @@ y_{\epsilon'}
 &= \sum_\epsilon \check{Q}_{\epsilon'}y_\epsilon
   \quad (\because \text{Step 1 の直交性と冪等性}) \\
 &= \check{Q}_{\epsilon'}\left(\sum_\epsilon y_\epsilon\right)
-  \quad (\because \text{行列の作用の分配法則}) \\
-&= \check{Q}_{\epsilon'}0
-  \quad (\because \sum_\epsilon y_\epsilon=0) \\
-&= 0
-  \quad (\because \text{零ベクトルへの行列の作用})
+  \quad \left(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ r \to M_{\mathrm{col}},\ C \to \check{Q}_{\epsilon'},\ X_\epsilon \to y_\epsilon)\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_{\epsilon'}\,O_{2^{M_{\mathrm{col}}},1}
+  \quad (\because \textstyle\sum_\epsilon y_\epsilon = O_{2^{M_{\mathrm{col}}},1}) \\
+&= O_{2^{M_{\mathrm{col}}},1}
+  \quad \left(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ A \to \check{Q}_{\epsilon'})\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -2774,6 +2790,7 @@ y_{\epsilon'}
         "2026-11-02: Step 3 の名前だけの根拠「ε_ν=1 と単位元の積」を scalar_multiple_by_one を右辺から左辺へ引く行と場合の仮定の行に、「ε_ν=0 と零元の積」を zero_scalar_multiple_is_zero_matrix を右辺から左辺へ引く行と場合の仮定の行に、「Q̌_ε の定義とスカラーの分配」を Step 3 の最初の鎖・直前の二つの場合・scalar_multiple_factors_out_of_right_factor・異なる添字の因子の可換性・Q̌_ε の定義の 5 行に割った。主張の中身は変えていない。",
         "2026-11-02: Q̌_ε の有限積を def_finite_product_of_matrices の参照にし、Step 1 の最後の行「零行列は行列積の零元」を zero_matrix_is_right_zero_of_mat_mult に、Step 2 の最後の行「単位行列の有限積は単位行列」を finite_product_of_identity_matrices に替えた（どちらも新しく足した主張）。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_32。",
         "2026-11-02: ∏_{μ≠ν} を使っていた 3 行（Step 1 の ε ≠ ε' の鎖、Step 3 の ň_νQ̌_ε の鎖の最初と最後）を、def_finite_product_of_matrices_omitting_one_index と moving_one_factor_of_finite_product_to_the_end の参照で書き直した（Step 1 は R_ν^{(ε_ν)} と Q̌_{ε'} の因子の可換性を先に示し、Step 3 は因子ごとの可換性の 3 つの場合を先に置いた）。主張の文の「因子は互いに可換なので、積の順序は問わない」は、有限積を左から掛けると定めたので外した。主張の中身は不変。SageMath は 050 の check_35。",
+        "2026-11-02: Step 4 の「冪の零乗」を新しく足した def_power_of_complex_number の参照に、Step 5 の「単位行列の作用」を identity_matrix_is_left_unit_of_mat_mult（n → 1）に、「行列の作用の分配法則」2 か所を sum_over_binary_words_distributes_in_left_factor（p → 1）と新しく足した sum_over_binary_words_distributes_in_right_factor に、「零ベクトルへの行列の作用」を zero_matrix_is_right_zero_of_mat_mult（p → 1）に替えた。数ベクトルを 2^{M_col} 行 1 列の行列として扱うこと、数ベクトルの和が def_sum_over_binary_words によること、零ベクトルが O_{2^{M_col},1} であることを Step 5 の冒頭に書いた。主張の中身は不変。SageMath は 050 の check_36。",
       ],
     },
   },
