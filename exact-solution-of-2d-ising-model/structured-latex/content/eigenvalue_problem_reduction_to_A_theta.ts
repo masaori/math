@@ -87,7 +87,7 @@ export default defineBlocks([
 &= \sum_{j=1}^{M_{\mathrm{col}}} \exp\!\left(2\pi i\, l j\right)
 &&(\because\ M_{\mathrm{col}}\geq1\ \text{より}\ M_{\mathrm{col}}\neq0\ \text{なので約分した}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}} \left(\cos 2\pi l j + i \sin 2\pi l j\right)
-&&(\because\ \text{オイラーの公式}) \\
+&&(\because\ \text{オイラーの公式、}\blkref{euler_formula_cos_sin}) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}} \left(1 + i \cdot 0\right)
 &&(\because\ lj \in \mathbb{Z}\ \text{なので}\ \cos 2\pi lj = 1,\ \sin 2\pi lj = 0) \\
 &= \sum_{j=1}^{M_{\mathrm{col}}} 1
@@ -95,16 +95,9 @@ export default defineBlocks([
 &= M_{\mathrm{col}}
 &&(\because\ \text{項数が}\ M_{\mathrm{col}}\ \text{である}) \\
 &= M_{\mathrm{col}}\,\delta^{(M_{\mathrm{col}})}_{(k,0)}
-&&(\because\ k \equiv 0 \pmod{M_{\mathrm{col}}}\ \text{なので}\ \delta^{(M_{\mathrm{col}})}_{(k,0)} = 1\ \text{である})
+&&(\because\ k \equiv 0 \pmod{M_{\mathrm{col}}}\ \text{なので}\ \delta^{(M_{\mathrm{col}})}_{(k,0)} = 1\ \text{である、}\blkref{def_delta_M})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたのは ",
-        ref("euler_formula_cos_sin"),
-        " と ",
-        ref("def_delta_M"),
-        " である。",
-      ]),
       paragraph([
         math(String.raw`(b)\; k \not\equiv 0 \pmod{M_{\mathrm{col}}}`),
         " のとき。",
@@ -129,14 +122,9 @@ export default defineBlocks([
 &= 0
 &&(\because\ 1 - 1 = 0\ \text{であり、分子が}\ 0\ \text{の分数は}\ 0\ \text{である（}1 - r \neq 0\text{）}) \\
 &= M_{\mathrm{col}}\,\delta^{(M_{\mathrm{col}})}_{(k,0)}
-&&(\because\ k \not\equiv 0 \pmod{M_{\mathrm{col}}}\ \text{なので}\ \delta^{(M_{\mathrm{col}})}_{(k,0)} = 0\ \text{である})
+&&(\because\ k \not\equiv 0 \pmod{M_{\mathrm{col}}}\ \text{なので}\ \delta^{(M_{\mathrm{col}})}_{(k,0)} = 0\ \text{である、}\blkref{def_delta_M})
 \end{aligned}`,
       ),
-      paragraph([
-        "引いたのは ",
-        ref("def_delta_M"),
-        " である。",
-      ]),
     ],
     conversion: {
       status: "converted",

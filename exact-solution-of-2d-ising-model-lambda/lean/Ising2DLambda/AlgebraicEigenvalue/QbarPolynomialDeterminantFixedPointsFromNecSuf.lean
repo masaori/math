@@ -9,6 +9,22 @@ namespace Ising2DLambda.AlgebraicEigenvalue
 
 open Finset
 
+/-- 具体版の転倒数による符号を必要十分版の符号へ移す。 -/
+theorem qbarPolynomial_fixedPointFree_sum_sign_from_necSuf
+    {J : Type*} [Fintype J] [LinearOrder J]
+    (A : Matrix J J (Polynomial Qbar)) :
+    (∑ σ ∈ fixedPointFreePermutations J,
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) * ∏ i : J, A i (σ i)) =
+    ∑ σ ∈ fixedPointFreePermutations J,
+      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := by
+  classical
+  apply Finset.sum_congr rfl
+  intro σ _
+  exact congrArg (fun z : ℤ => Polynomial.C (z : Qbar) * ∏ i : J, A i (σ i))
+    ((qbarPermutationSign_eq_mathlibSign σ).trans
+      (IntegerMatrix.inversionSign_eq_mathlibSign σ).symm)
+
 theorem qbarPolynomial_det_eq_sum_fixedPointFree_from_necSuf
     {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) (hdiag : ∀ i : J, A i i = 0) :

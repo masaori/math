@@ -7962,6 +7962,7 @@ b_D:=\prod_{(i,j)\in E_D}A_{i,j}\in\overline{\mathbb Q}[x],\\
                 "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree",
                 "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedProduct_zero_of_factor_zero_necSuf",
                 "Ising2DLambda.NecSuf.AlgebraicEigenvalue.weightedProduct_filter_zero_necSuf",
+                "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_fixedPointFree_sum_sign_from_necSuf",
                 "Ising2DLambda.AlgebraicEigenvalue.qbarPolynomial_det_eq_sum_fixedPointFree_from_necSuf",
               ],
               verification: ["sagemath/check/qbar-determinant-fixed-points"],

@@ -1,6 +1,6 @@
 import Ising2DLambda.AlgebraicEigenvalue.MatchingPairEvenSum
 import Ising2DLambda.AlgebraicEigenvalue.OddOrbitSignedSumZero
-import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFixedPoints
+import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialDeterminantFixedPointsFromNecSuf
 import Ising2DLambda.AlgebraicEigenvalue.QbarPolynomialPfaffian
 import Ising2DLambda.NecSuf.AlgebraicEigenvalue.PfaffianDeterminant
 import Mathlib.Algebra.Ring.Parity
@@ -118,8 +118,11 @@ theorem qbarPolynomialPfaffian_sq_eq_det
   apply Eq.symm
   calc
     Matrix.det A = ∑ σ ∈ fixedPointFreePermutations J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := qbarPolynomial_det_eq_sum_fixedPointFree A hA.1
+    _ = ∑ σ ∈ fixedPointFreePermutations J,
+      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := qbarPolynomial_fixedPointFree_sum_sign_from_necSuf A
     _ = (∑ σ : EvenOrbitPermutation J,
       Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i)) +
@@ -150,8 +153,11 @@ theorem qbarPolynomialPfaffian_sq_eq_det_from_necSuf
   apply Eq.symm
   calc
     Matrix.det A = ∑ σ ∈ fixedPointFreePermutations J,
-      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := qbarPolynomial_det_eq_sum_fixedPointFree A hA.1
+    _ = ∑ σ ∈ fixedPointFreePermutations J,
+      Polynomial.C ((sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+        ∏ i : J, A i (σ i) := qbarPolynomial_fixedPointFree_sum_sign_from_necSuf A
     _ = ∑ σ : EvenOrbitPermutation J,
       Polynomial.C ((sign (fun i j : J => i < j) σ.val : ℤ) : Qbar) *
         ∏ i : J, A i (σ.val i) := hsplit

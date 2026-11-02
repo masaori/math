@@ -36,11 +36,11 @@ theorem qbarPolynomial_det_eq_sum_fixedPointFree
     {J : Type*} [Fintype J] [LinearOrder J]
     (A : Matrix J J (Polynomial Qbar)) (hdiag : ∀ i : J, A i i = 0) :
     Matrix.det A = ∑ σ ∈ fixedPointFreePermutations J,
-      Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar) *
+      Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar) *
         ∏ i : J, A i (σ i) := by
   classical
   let c : Equiv.Perm J → Polynomial Qbar := fun σ =>
-    Polynomial.C ((NecSuf.AlgebraicEigenvalue.sign (fun i j : J => i < j) σ : ℤ) : Qbar)
+    Polynomial.C ((qbarPermutationSign σ : ℤ) : Qbar)
   let excluded : Finset (Equiv.Perm J) :=
     univ.filter (fun σ => ¬ ∀ i : J, σ i ≠ i)
   have hExcluded : ∀ σ ∈ excluded, c σ * (∏ i : J, A i (σ i)) = 0 := by
@@ -50,7 +50,7 @@ theorem qbarPolynomial_det_eq_sum_fixedPointFree
     exact qbarPolynomial_signedPermutationTerm_eq_zero_of_fixed A hdiag σ j (not_not.mp hj) (c σ)
   calc
     Matrix.det A = ∑ σ : Equiv.Perm J, c σ * ∏ i : J, A i (σ i) :=
-      qbarPolynomial_det_row_expansion_from_necSuf A
+      qbarPolynomial_det_row_expansion A
     _ = (∑ σ ∈ fixedPointFreePermutations J, c σ * ∏ i : J, A i (σ i)) +
         ∑ σ ∈ excluded, c σ * ∏ i : J, A i (σ i) := by
       simpa only [fixedPointFreePermutations, excluded] using
