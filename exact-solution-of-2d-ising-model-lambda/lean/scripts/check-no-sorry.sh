@@ -2212,6 +2212,11 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.smoothedCyclicTotalTurning
   Ising2DLambda.KacWard.smoothedCyclicTotalTurning
   Ising2DLambda.KacWard.smoothedCyclicTotalTurning_from_necSuf
+  Ising2DLambda.NecSuf.KacWard.smoothedSuccessorMap
+  Ising2DLambda.NecSuf.KacWard.smoothedSuccessorEdge_eq_map
+  Ising2DLambda.KacWard.smoothedSuccessorMap
+  Ising2DLambda.KacWard.smoothedExitEdge_eq_map
+  Ising2DLambda.KacWard.smoothedSuccessorMap_from_necSuf
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance_from_necSuf
   Ising2DLambda.NecSuf.KacWard.smoothing_split_closed_connections_necSuf

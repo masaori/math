@@ -60634,6 +60634,13 @@ t_{\mathrm{sm}}(\gamma;k,l)
                         kind: "definition",
                         title: { text: "平滑化後の添字後続写像" },
                         labels: ["def_smoothed_successor_map"],
+                        lean: [
+                          "Ising2DLambda.KacWard.smoothedSuccessorMap",
+                          "Ising2DLambda.NecSuf.KacWard.smoothedSuccessorMap",
+                          "Ising2DLambda.KacWard.smoothedSuccessorMap_from_necSuf",
+                          "Ising2DLambda.KacWard.smoothedExitEdge_eq_map",
+                          "Ising2DLambda.NecSuf.KacWard.smoothedSuccessorEdge_eq_map",
+                        ],
                         habitat: "N",
                         statement: [
                           paragraph([
@@ -71097,7 +71104,10 @@ q_{\vec e,\vec f}
 &=\iota(\vec e)&&\bigl(\because\ \blkref{claim_local_pairing_matching_construction}\text{ の非選択辺の場合分け}\bigr)\\
 &=\operatorname{mate}_D(\vec e)&&\bigl(\because\ \blkref{claim_tagged_matching_mate_outside_complement}\bigr).
 \end{aligned}`),
-                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " は以上のいずれかに属するので二つの相手写像は全域で等しい。", ref("claim_perfect_matching_involution"), " の完全マッチングと不動点のない対合の一対一対応により、", math(String.raw`\mathcal D_\tau=D`), " である。"]),
+                      paragraph(["各 ", math(String.raw`\vec e\in\vec E_L`), " は以上のいずれかに属するので二つの相手写像は全域で等しい。したがって"]),
+                      displayMath(String.raw`\mathcal D_\tau=D
+\qquad\bigl(\because\ \blkref{claim_perfect_matching_involution}\text{ と相手写像の全域での一致}\bigr)`),
+                      paragraph(["である。"]),
                     ],
                   },
                 },
