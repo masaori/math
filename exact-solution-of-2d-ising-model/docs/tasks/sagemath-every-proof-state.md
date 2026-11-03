@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 391 件のうち、SageMath の検算が無いもの 46 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 391 件のうち、SageMath の検算が無いもの 45 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -284,9 +284,14 @@
   人手証明を直した（計算の誤りは無かった）: 旧 Step 1 は `commutation_V_plus_check_psi` の証明の中の結合律と名前だけの「行ベクトルと 2×2 行列の積の結合法則」、本文に無い (A, B)I = (A, B) を使っていた。準備 1（ψ̌ を Ž, Y̌ で書く 7 個の等号）と準備 2（P̌P̌^{-1} = I から X_l = q_{1l}Ψ_1 + q_{2l}Ψ_2 を出す 14 個の等号）に替え、旧 Step 2・3 を T_{(V^{(+)})}(X_l) から T_{(V̌')}(X_l) までの 10 個の等号の鎖にまとめた。(exp(±γ))_C にそろえ、T_{(V̌')} = T_{V̌'} を `def_check_Vprime` (2) から引き、ℝ への脱出をどのブロックから引き継ぐかを書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は注記のみ変え、このモジュールの `lake build` と `check-no-sorry.sh` は通る）: `ClaimTVPlusEqTCheckVprimeOnCheckZY.lean` の `checkZY_row_eq_rowMul_checkPmat_inv` は旧い Step 1（`rowMul_one`・`rowMul_rowMul`）のままで、人手の準備 2（成分の和の入れ替えの鎖）と 1 対 1 でない。本体の一本の鎖を Lean は二つの `calc` に分けている。
 
+- `T_V_plus_eq_T_check_Vprime`（T_{(V^{(+)})} = T_{(V̌')}）: `sagemath/check/T_V_plus_eq_T_check_Vprime/`。
+  V̌' を含まない行（復元公式、準備 1 の第 1 の鎖、Step 1 の第 1〜第 6 等号、Step 2 の V^{(+)} の側）は数体 F の中で厳密に、V̌' を含む行と主張（全ての行列単位 e_{rs} と標本 3 個）は V̌' = exp(X̌) を ComplexBallField(512) で囲んで、結合定数 3 組 × M_col = 2..4 で確かめた。
+  人手証明を直した（計算の誤りは無かった。主張は不変）: 旧 Step 1 の「単位的環準同型かつ線型」は def_T_g の T_g と mat_conj の T_B を区別せずに mat_conj・conjugation_is_ring_homomorphism を当てていたので、T'_g を置いて準備 1 の二つの鎖で結んだ。復元公式を recover_Z_Y_from_check_Z_Y の主張の形（(M_col)_C^{-1} と係数を左に）にそろえ、旧 Step 2 の「線型性」1 行を 13 個の等号に開いた（matrix_conjugation_preserves_finite_sum、μ_ℤ ∈ M̌）。旧 Step 3 の αx+βy を Z_Y_generate_algebra の (iii) に合わせて和とスカラー倍の鎖に分けた。二回のレビューで指摘が無くなるまで直した。
+  申し送り（Lean の連続実行の受け持ち。Lean は変えていない。このモジュールの `lake build`・`check-no-sorry.sh` は通る）: `ClaimTVPlusEqTCheckVprime.lean` は mathlib の `AlgHom.equalizer` と `checkZ_checkY_generate_algebra`（Ž, Y̌ の生成性。人手の Step 1 の復元と Step 3 を合わせたもの）で閉じる別の経路であり、人手の準備 1・Step 1 の 13 個の等号と 1 対 1 でない。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `T_V_plus_eq_T_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_check_number_operator`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

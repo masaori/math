@@ -7945,166 +7945,343 @@ T_{(V^{(+)})}\!\left(X_l\right)
     ],
     proof: [
       paragraph([
-        "Step 1（両者は単位的環準同型かつ線型）。",
-        ref("V_plus_factors_invertible"),
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R := \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         " と ",
-        ref("T_V_plus_is_conjugation"),
-        " より ",
+        math(String.raw`R^\times`),
+        "、",
+        math(String.raw`I := I_{R}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）を用いる。",
+        ref("V_plus_factors_invertible"),
+        " により ",
         math(String.raw`V^{(+)} \in R^\times`),
-        " かつ ",
-        math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
         "、",
         ref("def_check_Vprime"),
-        " (2) より ",
-        math(String.raw`\check{V}'`),
-        " は可逆で ",
-        math(String.raw`T_{(\check{V}')} = T_{\check{V}'}`),
-        " である。可逆元による共役は ",
-        ref("conjugation_is_ring_homomorphism"),
-        " より乗法的かつ単位的（",
-        math(String.raw`T_g(I) = I`),
-        "）であり、",
+        " (2) により ",
+        math(String.raw`\check{V}' \in R^\times`),
+        " である。",
+        math(String.raw`g \in R^\times`),
+        " について、",
         ref("mat_conj"),
-        " より線型である。",
+        " の ",
+        math(String.raw`n`),
+        " を ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        "、その変数 ",
+        math(String.raw`B`),
+        " を ",
+        math(String.raw`g`),
+        " に取った写像を ",
+        math(String.raw`T'_g : R \to R`),
+        "、",
+        math(String.raw`T'_g(X) := (gX)g^{-1}`),
+        " と書く（",
+        ref("def_T_g"),
+        " の ",
+        math(String.raw`T_g`),
+        " と記号で区別するため）。",
+        math(String.raw`g^{-1}`),
+        " は ",
+        ref("def_invertible_elements_of_R"),
+        " の逆元で ",
+        math(String.raw`gg^{-1} = I`),
+        " かつ ",
+        math(String.raw`g^{-1}g = I`),
+        " を満たすので、",
+        math(String.raw`g`),
+        " は ",
+        ref("mat_conj"),
+        "・",
+        ref("conjugation_is_ring_homomorphism"),
+        " の意味で正則であり、",
+        math(String.raw`g^{-1}`),
+        " はそこでの逆行列でもある。",
+        ref("def_T_g"),
+        " の ",
+        math(String.raw`g \cdot h \cdot g^{-1}`),
+        " と ",
+        ref("def_check_Vprime"),
+        " (2) の ",
+        math(String.raw`\check{V}'\,W\,(\check{V}')^{-1}`),
+        " は、",
+        ref("linearity_of_T"),
+        " の証明と同じく左から順に ",
+        math(String.raw`(gh)g^{-1}`),
+        "・",
+        math(String.raw`(\check{V}'W)(\check{V}')^{-1}`),
+        " と読む。",
       ]),
       paragraph([
-        "Step 2（各 ",
-        math(String.raw`Z_m, Y_m`),
-        " 上で一致）。",
-        ref("recover_Z_Y_from_check_Z_Y"),
-        " より ",
-        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        "準備 1（二つの写像を ",
+        ref("mat_conj"),
+        " の共役として読む）。任意の ",
+        math(String.raw`X \in R`),
         " について",
       ]),
-      displayMath(
-        String.raw`Z_m = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Z}_\mu\,\exp(im\tilde\theta_\mu),
-\qquad
-Y_m = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}(X)
+&= T_{V^{(+)}}(X)
+&&\bigl(\because\ \blkref{T_V_plus_is_conjugation}\bigr)\\
+&= \left(V^{(+)}X\right)\left(V^{(+)}\right)^{-1}
+&&\bigl(\because\ \blkref{def_T_g}\ (M \to M_{\mathrm{col}},\ g \to V^{(+)})\bigr)\\
+&= T'_{V^{(+)}}(X)
+&&\bigl(\because\ T'_g\text{ の定め方}\ (g \to V^{(+)})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+T_{(\check{V}')}(X)
+&= \left(\check{V}'X\right)\left(\check{V}'\right)^{-1}
+&&\bigl(\because\ \blkref{def_check_Vprime}\ (2)\ (W \to X)\bigr)\\
+&= T'_{\check{V}'}(X)
+&&\bigl(\because\ T'_g\text{ の定め方}\ (g \to \check{V}')\bigr)
+\end{aligned}`),
       paragraph([
-        "である。",
-        math(String.raw`\exp(im\tilde\theta_\mu)/M_{\mathrm{col}} \in \mathbb{C}`),
-        " はスカラーなので、この復元公式と、Step 1 の線型性と、",
-        ref("T_V_plus_eq_T_check_Vprime_on_check_Z_Y"),
-        "（以下「",
-        math(String.raw`\check{Z},\check{Y}`),
-        " 上の一致」と呼ぶ）より",
+        "準備 2（復元公式の記号）。",
+        ref("recover_Z_Y_from_check_Z_Y"),
+        " の ",
+        math(String.raw`N := (M_{\mathrm{col}})_{\mathbb N} \in \mathbb{N}_{\geq 2}`),
+        "、像の記号 ",
+        math(String.raw`j_{\mathbb Z}, j_{\mathbb R}, \mu_{\mathbb Z}`),
+        "、",
+        math(String.raw`\tilde\theta_{\mu_{\mathbb Z}} \in \mathbb{R}`),
+        " と ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}^{-1} \in \mathbb{C}`),
+        " を用いる。",
+        math(String.raw`j, \mu \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`c := (M_{\mathrm{col}})_{\mathbb C}^{-1} \in \mathbb{C}`),
+        "、",
+        math(String.raw`a_{j\mu} := \exp\!\left(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right) \in \mathbb{C}`),
+        " と置く（",
+        math(String.raw`\tilde\theta_{\mu_{\mathbb Z}}`),
+        " は ",
+        math(String.raw`\pi`),
+        " を含む実数で、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の級数の極限なので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " を使う。値はすでに ",
+        ref("recover_Z_Y_from_check_Z_Y"),
+        " が定めたものをそのまま使う）。",
+        math(String.raw`\mu \in \{1,\dots,N\}`),
+        " のとき ",
+        math(String.raw`\mu_{\mathbb Z} \in \{1,\dots,M_{\mathrm{col}}\} = \check{\mathcal{M}}`),
+        "（",
+        ref("def_check_index_set"),
+        "）である。",
+        math(String.raw`W \in \{\check{Z}, \check{Y}\}`),
+        "、",
+        math(String.raw`U \in \{Z, Y\}`),
+        " を対応させて（",
+        math(String.raw`W = \check{Z}`),
+        " のとき ",
+        math(String.raw`U = Z`),
+        "、",
+        math(String.raw`W = \check{Y}`),
+        " のとき ",
+        math(String.raw`U = Y`),
+        "）、",
+        ref("recover_Z_Y_from_check_Z_Y"),
+        " の二つの式を一つに",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}(Z_m)
-&= T_{(V^{(+)})}\!\left(\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Z}_\mu\,\exp(im\tilde\theta_\mu)\right)
-   \quad (\because \text{復元公式}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \exp(im\tilde\theta_\mu)\,T_{(V^{(+)})}\!\left(\check{Z}_\mu\right)
-   \quad (\because \text{Step 1 の線型性}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \exp(im\tilde\theta_\mu)\,T_{(\check{V}')}\!\left(\check{Z}_\mu\right)
-   \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
-&= T_{(\check{V}')}\!\left(\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Z}_\mu\,\exp(im\tilde\theta_\mu)\right)
-   \quad (\because \text{Step 1 の線型性}) \\
-&= T_{(\check{V}')}(Z_m)
-   \quad (\because \text{復元公式})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`c\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}} = U_{j_{\mathbb Z}}`),
+      paragraph(["と書く（以下「復元公式」）。"]),
       paragraph([
-        math(String.raw`Y_m`),
-        " についても",
+        "Step 1（",
+        math(String.raw`Z_{j_{\mathbb Z}}, Y_{j_{\mathbb Z}}`),
+        " 上で一致）。",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        " と、準備 2 の対応する組 ",
+        math(String.raw`(W, U)`),
+        " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}(Y_m)
-&= T_{(V^{(+)})}\!\left(\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)\right)
-   \quad (\because \text{復元公式}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \exp(im\tilde\theta_\mu)\,T_{(V^{(+)})}\!\left(\check{Y}_\mu\right)
-   \quad (\because \text{Step 1 の線型性}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \exp(im\tilde\theta_\mu)\,T_{(\check{V}')}\!\left(\check{Y}_\mu\right)
-   \quad (\because \check{Z},\check{Y}\text{ 上の一致}) \\
-&= T_{(\check{V}')}\!\left(\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Y}_\mu\,\exp(im\tilde\theta_\mu)\right)
-   \quad (\because \text{Step 1 の線型性}) \\
-&= T_{(\check{V}')}(Y_m)
-   \quad (\because \text{復元公式})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}\!\left(U_{j_{\mathbb Z}}\right)
+&= T_{(V^{(+)})}\!\left(c\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{復元公式を右辺から左辺へ}\bigr)\\
+&= T'_{V^{(+)}}\!\left(c\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖}\bigr)\\
+&= c\,T'_{V^{(+)}}\!\left(\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式}\ (\alpha \to c)\bigr)\\
+&= c\sum_{\mu=1}^{N} T'_{V^{(+)}}\!\left(a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\ (n \to 2^{M_{\mathrm{col}}},\ B \to V^{(+)},\ r \to N,\ (X_1,\dots,X_r) \to (a_{j1}W_{1_{\mathbb Z}},\dots,a_{jN}W_{N_{\mathbb Z}}))\bigr)\\
+&= c\sum_{\mu=1}^{N} a_{j\mu}\,T'_{V^{(+)}}\!\left(W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式を }N\text{ 個の項へ同時適用}\bigr)\\
+&= c\sum_{\mu=1}^{N} a_{j\mu}\,T_{(V^{(+)})}\!\left(W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、}N\text{ 個の項へ同時適用}\bigr)\\
+&= c\sum_{\mu=1}^{N} a_{j\mu}\,T_{(\check{V}')}\!\left(W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{T_V_plus_eq_T_check_Vprime_on_check_Z_Y}\ (\mu \to \mu_{\mathbb Z} \in \check{\mathcal{M}})\text{ を }N\text{ 個の項へ同時適用}\bigr)\\
+&= c\sum_{\mu=1}^{N} a_{j\mu}\,T'_{\check{V}'}\!\left(W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を }N\text{ 個の項へ同時適用}\bigr)\\
+&= c\sum_{\mu=1}^{N} T'_{\check{V}'}\!\left(a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式を右辺から左辺へ、}N\text{ 個の項へ同時適用}\bigr)\\
+&= c\,T'_{\check{V}'}\!\left(\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{matrix_conjugation_preserves_finite_sum}\ (n \to 2^{M_{\mathrm{col}}},\ B \to \check{V}',\ r \to N,\ (X_1,\dots,X_r) \to (a_{j1}W_{1_{\mathbb Z}},\dots,a_{jN}W_{N_{\mathbb Z}}))\text{ を右辺から左辺へ}\bigr)\\
+&= T'_{\check{V}'}\!\left(c\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式}\ (\alpha \to c)\text{ を右辺から左辺へ}\bigr)\\
+&= T_{(\check{V}')}\!\left(c\sum_{\mu=1}^{N} a_{j\mu}W_{\mu_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を右辺から左辺へ}\bigr)\\
+&= T_{(\check{V}')}\!\left(U_{j_{\mathbb Z}}\right)
+&&\bigl(\because\ \text{復元公式}\bigr)
+\end{aligned}`),
       paragraph([
-        "であるから ",
-        math(String.raw`T_{(V^{(+)})}(Y_m) = T_{(\check{V}')}(Y_m)`),
-        "。",
+        math(String.raw`(W, U) = (\check{Z}, Z)`),
+        " が ",
+        math(String.raw`Z_{j_{\mathbb Z}}`),
+        " での一致、",
+        math(String.raw`(W, U) = (\check{Y}, Y)`),
+        " が ",
+        math(String.raw`Y_{j_{\mathbb Z}}`),
+        " での一致である。",
+        math(String.raw`j`),
+        " が ",
+        math(String.raw`\{1,\dots,N\}`),
+        " を動くとき ",
+        math(String.raw`j_{\mathbb Z}`),
+        " は ",
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
+        " を動く。",
       ]),
-      paragraph(["Step 3（一致する元の集合）。"]),
+      paragraph(["Step 2（一致する元の集合は閉じている）。"]),
       displayMath(
-        String.raw`\mathcal{E} := \left\{\,x \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})\ :\
-T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
+        String.raw`\mathcal{E} := \left\{\,x \in R\ :\ T_{(V^{(+)})}(x) = T_{(\check{V}')}(x)\,\right\}`,
       ),
       paragraph([
         "とおく。",
         math(String.raw`x, y \in \mathcal{E}`),
         "、",
-        math(String.raw`\alpha, \beta \in \mathbb{C}`),
-        " について、Step 1 の線型性から",
+        math(String.raw`\alpha \in \mathbb{C}`),
+        " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}(\alpha x + \beta y)
-&= \alpha T_{(V^{(+)})}(x) + \beta T_{(V^{(+)})}(y)
-   \quad (\because \text{Step 1 の線型性}) \\
-&= \alpha T_{(\check{V}')}(x) + \beta T_{(\check{V}')}(y)
-   \quad (\because x, y \in \mathcal{E}) \\
-&= T_{(\check{V}')}(\alpha x + \beta y)
-   \quad (\because \text{Step 1 の線型性})
-\end{aligned}`,
-      ),
-      paragraph([
-        "ゆえ ",
-        math(String.raw`\alpha x + \beta y \in \mathcal{E}`),
-        "。Step 1 の乗法性（",
-        ref("conjugation_is_ring_homomorphism"),
-        "）から",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}(x + y)
+&= T'_{V^{(+)}}(x + y)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖}\bigr)\\
+&= T'_{V^{(+)}}(x) + T'_{V^{(+)}}(y)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の和の式}\bigr)\\
+&= T_{(V^{(+)})}(x) + T_{(V^{(+)})}(y)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所へ同時適用}\bigr)\\
+&= T_{(\check{V}')}(x) + T_{(\check{V}')}(y)
+&&\bigl(\because\ x, y \in \mathcal{E}\bigr)\\
+&= T'_{\check{V}'}(x) + T'_{\check{V}'}(y)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を 2 か所へ同時適用}\bigr)\\
+&= T'_{\check{V}'}(x + y)
+&&\bigl(\because\ \blkref{mat_conj}\text{ の和の式を右辺から左辺へ}\bigr)\\
+&= T_{(\check{V}')}(x + y)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}(\alpha x)
+&= T'_{V^{(+)}}(\alpha x)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖}\bigr)\\
+&= \alpha\,T'_{V^{(+)}}(x)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式}\bigr)\\
+&= \alpha\,T_{(V^{(+)})}(x)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ}\bigr)\\
+&= \alpha\,T_{(\check{V}')}(x)
+&&\bigl(\because\ x \in \mathcal{E}\bigr)\\
+&= \alpha\,T'_{\check{V}'}(x)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖}\bigr)\\
+&= T'_{\check{V}'}(\alpha x)
+&&\bigl(\because\ \blkref{mat_conj}\text{ のスカラー倍の式を右辺から左辺へ}\bigr)\\
+&= T_{(\check{V}')}(\alpha x)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
 T_{(V^{(+)})}(xy)
+&= T'_{V^{(+)}}(xy)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖}\bigr)\\
+&= T'_{V^{(+)}}(x)\,T'_{V^{(+)}}(y)
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\ (B \to V^{(+)})\bigr)\\
 &= T_{(V^{(+)})}(x)\,T_{(V^{(+)})}(y)
-   \quad (\because \text{共役は環準同型（乗法的）}) \\
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖を右辺から左辺へ、2 か所へ同時適用}\bigr)\\
 &= T_{(\check{V}')}(x)\,T_{(\check{V}')}(y)
-   \quad (\because x, y \in \mathcal{E}) \\
+&&\bigl(\because\ x, y \in \mathcal{E}\bigr)\\
+&= T'_{\check{V}'}(x)\,T'_{\check{V}'}(y)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を 2 か所へ同時適用}\bigr)\\
+&= T'_{\check{V}'}(xy)
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の乗法性}\ (B \to \check{V}')\text{ を右辺から左辺へ}\bigr)\\
 &= T_{(\check{V}')}(xy)
-   \quad (\because \text{共役は環準同型（乗法的）})
-\end{aligned}`,
-      ),
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+T_{(V^{(+)})}(I)
+&= T'_{V^{(+)}}(I)
+&&\bigl(\because\ \text{準備 1 の第 1 の鎖}\bigr)\\
+&= I
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の単位性}\ (B \to V^{(+)})\bigr)\\
+&= T'_{\check{V}'}(I)
+&&\bigl(\because\ \blkref{conjugation_is_ring_homomorphism}\text{ の単位性}\ (B \to \check{V}')\text{ を右辺から左辺へ}\bigr)\\
+&= T_{(\check{V}')}(I)
+&&\bigl(\because\ \text{準備 1 の第 2 の鎖を右辺から左辺へ}\bigr)
+\end{aligned}`),
       paragraph([
-        "ゆえ ",
-        math(String.raw`xy \in \mathcal{E}`),
-        "。また Step 1 の単位性より ",
-        math(String.raw`T_{(V^{(+)})}(I) = I = T_{(\check{V}')}(I)`),
-        " なので ",
-        math(String.raw`I \in \mathcal{E}`),
-        "。すなわち ",
+        "よって ",
+        math(String.raw`x + y,\ \alpha x,\ xy,\ I \in \mathcal{E}`),
+        " である。Step 1 より ",
+        math(String.raw`Z_1,\dots,Z_{M_{\mathrm{col}}},Y_1,\dots,Y_{M_{\mathrm{col}}} \in \mathcal{E}`),
+        " でもあるから、",
         math(String.raw`\mathcal{E}`),
-        " は単位元を含み、和・スカラー倍・積について閉じる。",
+        " は ",
+        ref("Z_Y_generate_algebra"),
+        " の意味で閉じている（(i) は Step 1、(ii) は ",
+        math(String.raw`I \in \mathcal{E}`),
+        "、(iii) は ",
+        math(String.raw`x + y, \alpha x \in \mathcal{E}`),
+        "、(iv) は ",
+        math(String.raw`xy \in \mathcal{E}`),
+        "）。",
       ]),
       paragraph([
-        "Step 4（結論）。Step 2 より ",
-        math(String.raw`S := \{Z_1,\dots,Z_{M_{\mathrm{col}}},Y_1,\dots,Y_{M_{\mathrm{col}}}\} \subseteq \mathcal{E}`),
-        " である。",
+        "Step 3（結論）。",
         ref("Z_Y_generate_algebra"),
         " の ",
         math(String.raw`\mathcal{A}`),
-        "（",
-        math(String.raw`S`),
-        " を含み和・スカラー倍・積で閉じ単位元を含む最小の部分集合）について Step 3 より ",
+        " は閉じている部分集合のうち最小のものなので、Step 2 より ",
         math(String.raw`\mathcal{A} \subseteq \mathcal{E}`),
-        " であり、",
+        " である。",
         ref("Z_Y_generate_algebra"),
         " より ",
-        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`\mathcal{A} = R`),
+        " であり、",
+        math(String.raw`\mathcal{E}`),
+        " の定め方より ",
+        math(String.raw`\mathcal{E} \subseteq R`),
         " であるから",
       ]),
-      displayMath(
-        String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}) = \mathcal{A} \subseteq \mathcal{E} \subseteq \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`,
-      ),
+      displayMath(String.raw`R = \mathcal{A} \subseteq \mathcal{E} \subseteq R`),
       paragraph([
         "すなわち ",
-        math(String.raw`\mathcal{E} = \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        "。これが statement である。",
+        math(String.raw`\mathcal{E} = R`),
+        "。これが主張である。この証明は新たに ",
+        math(String.raw`\mathbb{R}`),
+        " を持ち込まない。",
+        math(String.raw`\tilde\theta_{\mu_{\mathbb Z}} \in \mathbb{R}`),
+        " と ",
+        math(String.raw`\exp`),
+        " の値は ",
+        ref("recover_Z_Y_from_check_Z_Y"),
+        " から、",
+        math(String.raw`\check{V}' = \exp(\check{X})`),
+        " は ",
+        ref("def_exp"),
+        " の極限と実対数による arccosh を通して ",
+        ref("def_check_Vprime"),
+        " から、",
+        math(String.raw`\mathbb{R}`),
+        " への脱出を引き継ぐ。この証明の中の計算は ",
+        math(String.raw`\mathbb{C}`),
+        " と ",
+        math(String.raw`R`),
+        " の演算だけで閉じる。",
       ]),
     ],
     conversion: {
@@ -8114,6 +8291,13 @@ T_{(V^{(+)})}(xy)
           "recover_Z_Y_from_check_Z_Y（半整数運動量版）へ差し替わるほかは同じ議論である。",
         "数値検証: sagemath/check/049_claim_even_sector_fermions/check_05（Z_m, Y_m だけでなく、" +
           "行列単位 e_{ij} 全体（2^M × 2^M 個）についても両者の共役が一致することを直接確認）。",
+        "2026-11-03: 全証明の SageMath 検算（sagemath/check/T_V_plus_eq_T_check_Vprime/）を付けるにあたり、証明を一ステップ一定理の鎖にした。" +
+          "旧 Step 1 の「単位的環準同型かつ線型」を、def_T_g の T_g・def_check_Vprime (2) の T_{(V̌')} と mat_conj の T'_g を記号で分けて結ぶ準備 1 の二つの鎖に替えた" +
+          "（mat_conj・matrix_conjugation_preserves_finite_sum・conjugation_is_ring_homomorphism は T'_g についての主張なので）。" +
+          "復元公式を recover_Z_Y_from_check_Z_Y の主張の形（(M_col)_C^{-1} を左から掛け、係数 exp(i(j_R θ̃_{μ_Z})_C) を左に置く）にそろえ、" +
+          "旧 Step 2 の「Step 1 の線型性」1 行に束ねていた (M_col)_C^{-1} 倍・有限和・各項のスカラー倍を 13 個の等号の鎖に開いた。" +
+          "旧 Step 3 の αx + βy の閉包を、Z_Y_generate_algebra の (iii) に合わせて和とスカラー倍の二つの鎖に分け、各行の根拠を準備 1 と mat_conj・conjugation_is_ring_homomorphism から引いた。" +
+          "Step 4 の「Step 3 より A ⊆ E」に、E が Z_Y_generate_algebra の意味で閉じていることと A の最小性を書き、ℝ への脱出の引き継ぎ元を書いた。主張の中身は変えていない。",
       ],
     },
   },
