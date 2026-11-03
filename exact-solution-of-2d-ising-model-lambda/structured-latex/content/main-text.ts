@@ -63798,6 +63798,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                         title: { text: "歩道沿いの外側帯" },
                         labels: ["def_walk_side_exterior_band"],
                         habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.walkSideExteriorBandFromWalk",
+                          "Ising2DLambda.NecSuf.KacWard.walkSideBand",
+                          "Ising2DLambda.KacWard.walkSideExteriorBandFromWalk_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "整数巻き付き数（", ref("def_directed_winding_numbers"), "）が ",
@@ -64032,9 +64037,12 @@ r<r_{\min}\ \text{または}\ r_{\max}\le r\ \text{または}\
 c<c_{\min}\ \text{または}\ c_{\max}\le c\right\}`),
                       paragraph([
                         "と置く。内側セルの有界性（", ref("claim_odd_ray_interior_cells_bounded"),
-                        "）により ",
-                        math(String.raw`\mathcal U(\gamma)\subset(\mathbb Z\times\mathbb Z)\setminus\mathcal F_{\rightarrow}(\gamma)`),
-                        " である。また ", math(String.raw`\mathcal U(\gamma)`),
+                        "）により",
+                      ]),
+                      displayMath(String.raw`\mathcal U(\gamma)\subset(\mathbb Z\times\mathbb Z)\setminus\mathcal F_{\rightarrow}(\gamma)
+\qquad\bigl(\because\ \blkref{claim_odd_ray_interior_cells_bounded}\bigr)`),
+                      paragraph([
+                        "である。また ", math(String.raw`\mathcal U(\gamma)`),
                         " は辺連結である。実際、左側または右側にあるセルは同じ列のまま行座標を ",
                         math(String.raw`r_{\min}-1`), " まで一つずつ動かし、その行に沿って ",
                         math(String.raw`(r_{\min}-1,c_{\min}-1)`),
