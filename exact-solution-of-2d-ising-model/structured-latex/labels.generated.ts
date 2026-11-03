@@ -239,6 +239,7 @@ export const ALL_LABELS = [
   "diagonalization_check_P_D",
   "difference_of_negated_matrices",
   "difference_of_scalar_multiples_of_one_matrix",
+  "distinct_site_pauli_matrices_commute",
   "duality_c2_star_eq_s2_star_c2",
   "eigenvalues_of_V_plus",
   "eigenvalues_of_check_Vprime",

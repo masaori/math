@@ -926,6 +926,134 @@ s(i,M_{\mathrm{col}}+1)
     },
   },
   {
+    id: "transfer_matrix_claim_distinct_site_pauli_matrices_commute",
+    kind: "claim",
+    title: { text: "相異なるサイトに置いた Pauli 行列は可換" },
+    labels: ["distinct_site_pauli_matrices_commute"],
+    statement: [
+      paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb{Z}_{\geq 1}`),
+        " とし、",
+        ref("def_site_pauli_matrices"),
+        " のサイトごとの Pauli 行列 ",
+        math(String.raw`\sigma_k^a \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        math(String.raw`j,k\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " が ",
+        math(String.raw`j\neq k`),
+        " を満たし、",
+        math(String.raw`a,b\in\{x,y,z\}`),
+        " ならば、",
+      ]),
+      displayMath(String.raw`\sigma_j^a\,\sigma_k^b = \sigma_k^b\,\sigma_j^a`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書き、",
+        math(String.raw`i\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " に対して ",
+        math(String.raw`x_i, y_i \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(
+        String.raw`x_i := \begin{cases} \sigma^a & (i = j) \\ I & (i \neq j) \end{cases},
+\qquad
+y_i := \begin{cases} \sigma^b & (i = k) \\ I & (i \neq k) \end{cases}`,
+      ),
+      paragraph(["と置く。"]),
+      displayMath(
+        String.raw`\sigma_j^a = x_1\boxtimes\cdots\boxtimes x_{M_{\mathrm{col}}},\qquad
+\sigma_k^b = y_1\boxtimes\cdots\boxtimes y_{M_{\mathrm{col}}}
+\quad (\because \blkref{def_site_pauli_matrices})`,
+      ),
+      paragraph([
+        "各 ",
+        math(String.raw`i\in\{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`y_ix_i = x_iy_i`),
+        " を、",
+        math(String.raw`i`),
+        " の場合に分けて示す。",
+        math(String.raw`i = j`),
+        " のとき（",
+        math(String.raw`j\neq k`),
+        " より ",
+        math(String.raw`i\neq k`),
+        "）、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y_ix_i
+&= I\,\sigma^a
+   \quad (\because x_i,\ y_i \text{ の定義}) \\
+&= \sigma^a
+   \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m \to 2,\ n \to 2,\ A \to \sigma^a)) \\
+&= \sigma^a\,I
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m \to 2,\ n \to 2,\ A \to \sigma^a)\ \text{を右辺から左辺へ}) \\
+&= x_iy_i
+   \quad (\because x_i,\ y_i \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`i = k`),
+        " のとき（",
+        math(String.raw`j\neq k`),
+        " より ",
+        math(String.raw`i\neq j`),
+        "）、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y_ix_i
+&= \sigma^b\,I
+   \quad (\because x_i,\ y_i \text{ の定義}) \\
+&= \sigma^b
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m \to 2,\ n \to 2,\ A \to \sigma^b)) \\
+&= I\,\sigma^b
+   \quad (\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m \to 2,\ n \to 2,\ A \to \sigma^b)\ \text{を右辺から左辺へ}) \\
+&= x_iy_i
+   \quad (\because x_i,\ y_i \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`i\neq j`),
+        " かつ ",
+        math(String.raw`i\neq k`),
+        " のとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+y_ix_i
+&= I\,I
+   \quad (\because x_i,\ y_i \text{ の定義}) \\
+&= x_iy_i
+   \quad (\because x_i,\ y_i \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph(["これらを使うと、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_j^a\,\sigma_k^b
+&= (x_1\boxtimes\cdots\boxtimes x_{M_{\mathrm{col}}})(y_1\boxtimes\cdots\boxtimes y_{M_{\mathrm{col}}})
+   \quad (\because \text{準備の}\ \sigma_j^a,\ \sigma_k^b\ \text{の表示}) \\
+&= (y_1\boxtimes\cdots\boxtimes y_{M_{\mathrm{col}}})(x_1\boxtimes\cdots\boxtimes x_{M_{\mathrm{col}}})
+   \quad (\because \blkref{tensor_commutation_from_all_sites}\ (M \to M_{\mathrm{col}})\ \text{と、全ての}\ i\ \text{についての}\ y_ix_i = x_iy_i) \\
+&= \sigma_k^b\,\sigma_j^a
+   \quad (\because \text{準備の}\ \sigma_j^a,\ \sigma_k^b\ \text{の表示})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 0 が「相異なるサイトに置かれた σ_j^a と σ_k^b は可換である」を、kronecker_product_rule (1) と「各サイトでは一方が I」の散文で述べていたので、tensor_commutation_from_all_sites で引ける主張として足した。",
+      ],
+    },
+  },
+  {
     id: "bridge_001_definition_config_basis",
     kind: "definition",
     origin: { path: "structured-latex/content/010_transfer_matrix_bridge.ts", ordinal: 3 },

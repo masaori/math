@@ -47,6 +47,8 @@ Lean では `Z 0 = sigmaZ 0` にあたり、`xString` の値が `1` になるこ
 -/
 import Ising2D.Representation
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectors
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProduct
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimTensorCommutationFromAllSites
 
 namespace Ising2D
 
@@ -340,19 +342,47 @@ theorem siteOp_mul_same (k : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
   funext i
   by_cases h : i = k <;> simp [Pi.mul_apply, h]
 
-/-- 異なるサイトの作用素は可換（原文 Step 1 の異サイト可換性）。 -/
+/-- **人手 `distinct_site_pauli_matrices_commute`**（`structured-latex/content/partition_function_transfer_matrix_representation.ts`）:
+相異なるサイト `k ≠ l` に置いた作用素は可換。人手は `A → σ^a`、`B → σ^b`（`a, b ∈ {x, y, z}`）で述べ、証明は Pauli 行列の性質を使わないので、
+Lean は `A, B ∈ Mat(2, ℂ)` で述べる（`Z_Y_generate_algebra` の Step 1 もこの形で使う）。
+
+人手との対応: 人手のサイト `j, k` は Lean の `k, l` である。準備の `x_i`・`y_i` は `Function.update 1 k A`・`Function.update 1 l B`、`σ_j^a = x_1⊠⋯⊠x_{M_col}` の表示は
+`siteOp` の定義の展開（`rfl`。`def_site_pauli_matrices`）。`y_ix_i = x_iy_i` の 3 つの場合（人手の `i = j`・`i = k`・どちらでもない）は `hsite` の 3 つの枝（`i = k`・`i = l`・どちらでもない）で、
+`i = k`・`i = l` の枝は人手の 4 行（`x_i, y_i` の定義・単位行列の左右の単位元・`x_i, y_i` の定義）と同じ順の `calc`。
+最後の 3 行の鎖は `calc` の 3 段で、中の段が `tensor_commutation_from_all_sites`（`siteProd_commute_of_sitewise_commute`）。
+必要十分版は `NecSuf/SitewiseCommute.lean` の `update_mul_comm_of_ne`、導出は `ClaimDistinctSitePauliMatricesCommuteFromNecSuf.lean`。 -/
 theorem siteOp_mul_comm {k l : Fin M} (hkl : k ≠ l) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
     siteOp k A * siteOp l B = siteOp l B * siteOp k A := by
-  rw [siteOp_apply, siteOp_apply, ← siteProd_mul, ← siteProd_mul]
-  congr 1
-  funext i
-  simp only [Pi.mul_apply, Function.update_apply, Pi.one_apply]
-  by_cases hk : i = k
-  · have hl : ¬ (i = l) := by rw [hk]; exact hkl
-    rw [if_pos hk, if_neg hl, mul_one, one_mul]
-  · by_cases hl : i = l
-    · rw [if_neg hk, if_pos hl, mul_one, one_mul]
-    · rw [if_neg hk, if_neg hl]
+  have hsite : ∀ i, Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) l B i
+        * Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A i
+      = Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) k A i
+        * Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) l B i := by
+    intro i
+    by_cases hik : i = k
+    · -- `i = k`（`k ≠ l` より `i ≠ l`）
+      have hil : i ≠ l := by rw [hik]; exact hkl
+      rw [Function.update_of_ne hil, hik, Function.update_self]
+      show (1 : Matrix (Fin 2) (Fin 2) ℂ) * A = A * (1 : Matrix (Fin 2) (Fin 2) ℂ)  -- `x_i, y_i` の定義
+      calc (1 : Matrix (Fin 2) (Fin 2) ℂ) * A
+          = A := identity_matrix_mul A                    -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → σ^a`）
+        _ = A * (1 : Matrix (Fin 2) (Fin 2) ℂ) := (mul_identity_matrix A).symm
+                                                          -- `identity_matrix_is_right_unit_of_mat_mult` を右辺から左辺へ
+    · by_cases hil : i = l
+      · -- `i = l`（`k ≠ l` より `i ≠ k`）
+        rw [Function.update_of_ne hik, hil, Function.update_self]
+        show B * (1 : Matrix (Fin 2) (Fin 2) ℂ) = (1 : Matrix (Fin 2) (Fin 2) ℂ) * B  -- `x_i, y_i` の定義
+        calc B * (1 : Matrix (Fin 2) (Fin 2) ℂ)
+            = B := mul_identity_matrix B                  -- `identity_matrix_is_right_unit_of_mat_mult`（`m, n → 2`, `A → σ^b`）
+          _ = (1 : Matrix (Fin 2) (Fin 2) ℂ) * B := (identity_matrix_mul B).symm
+                                                          -- `identity_matrix_is_left_unit_of_mat_mult` を右辺から左辺へ
+      · -- `i ≠ k` かつ `i ≠ l`: 両辺とも `I I`（`x_i, y_i` の定義）
+        rw [Function.update_of_ne hik, Function.update_of_ne hil]
+  calc siteOp k A * siteOp l B
+      = siteProd M (Function.update 1 k A) * siteProd M (Function.update 1 l B) := rfl
+                                                          -- 準備の `σ_j^a`・`σ_k^b` の表示（`def_site_pauli_matrices`）
+    _ = siteProd M (Function.update 1 l B) * siteProd M (Function.update 1 k A) :=
+        siteProd_commute_of_sitewise_commute _ _ hsite    -- `tensor_commutation_from_all_sites`（`M → M_col`）と全ての `i` の `y_ix_i = x_iy_i`
+    _ = siteOp l B * siteOp k A := rfl                    -- 準備の `σ_j^a`・`σ_k^b` の表示
 
 /-- 原文の `σ^x_k`。 -/
 noncomputable def sigmaX (k : Fin M) : TensorPow M := siteOp k pauliX

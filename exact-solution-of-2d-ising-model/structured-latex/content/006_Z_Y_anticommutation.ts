@@ -390,9 +390,9 @@ XY
 &= (x_1y_1)\boxtimes\cdots\boxtimes(x_My_M)
 &&(\because\ \blkref{kronecker_product_rule}\ (1)) \\
 &= (y_1x_1)\boxtimes\cdots\boxtimes(y_Mx_M)
-&&(\because\ \text{仮定}\ x_iy_i = y_ix_i\ \text{を全ての}\ i\ \text{へ同時に適用}) \\
+&&(\because\ \text{仮定}\ y_ix_i = x_iy_i\ \text{を右辺から左辺へ、全ての}\ i\ \text{へ同時に適用}) \\
 &= (y_1\boxtimes\cdots\boxtimes y_M)(x_1\boxtimes\cdots\boxtimes x_M)
-&&(\because\ \blkref{kronecker_product_rule}\ (1)) \\
+&&(\because\ \blkref{kronecker_product_rule}\ (1)\ \text{を右辺から左辺へ}) \\
 &= YX
 &&(\because\ X, Y \text{ の定義})
 \end{aligned}`,
@@ -402,6 +402,7 @@ XY
       status: "added",
       notes: [
         "2026-11-02（全証明の SageMath 検算 epsilon_commutes_with_transfer_matrices）: 原文（Typst）に対応ブロックは無い。tensor_anticommutation_from_single_site の可換の側として、ε と σ_k^x の可換性を引けるよう足した。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 3 行目の根拠を、仮定 y_ix_i = x_iy_i を右辺から左辺へ使う形に、4 行目の根拠を kronecker_product_rule (1) を右辺から左辺へ使う形に書き直した。主張と式は変えていない。",
       ],
     },
   },

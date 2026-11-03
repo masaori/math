@@ -155,6 +155,12 @@ targets=(
   Ising2D.siteOp_one
   Ising2D.siteOp_mul_same
   Ising2D.siteOp_mul_comm
+  Ising2D.siteOp_mul_comm_of_necSuf
+  Ising2D.siteProd_commute_of_sitewise_commute
+  Ising2D.siteProd_commute_of_sitewise_commute_of_necSuf
+  Ising2D.NecSuf.commute_of_sitewise_commute
+  Ising2D.NecSuf.update_sitewise_commute_of_ne
+  Ising2D.NecSuf.update_mul_comm_of_ne
   Ising2D.sigmaX_eq
   Ising2D.jw_eq_xString_mul
   Ising2D.Z_eq_xString_mul
