@@ -62894,6 +62894,11 @@ k\in\{1,\ldots,m\}\ \middle|\
                         title: { text: "右半直線との交差奇偶で定める内側セル" },
                         labels: ["def_odd_ray_interior_cells"],
                         habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk",
+                          "Ising2DLambda.NecSuf.KacWard.oddRayInteriorCells",
+                          "Ising2DLambda.KacWard.oddRayInteriorCellsOfWalk_eq_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "整数巻き付き数が ", math(String.raw`w_{\mathrm h}(\gamma)=w_{\mathrm v}(\gamma)=0`),
