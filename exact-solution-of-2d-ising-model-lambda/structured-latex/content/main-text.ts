@@ -66395,6 +66395,11 @@ cL W_{\perp}(\gamma)
                       title: { text: "平面の単位格子路のトーラス射影" },
                       labels: ["def_plane_unit_path_torus_projection"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.planeVertexProjection",
+                        "Ising2DLambda.KacWard.planeUnitPathTorusProjection",
+                        "Ising2DLambda.NecSuf.KacWard.finitePathEdgeProjection",
+                      ],
                       statement: [
                         paragraph([
                           "頂点射影 ", math(String.raw`\operatorname{vt}:\mathbb Z\times\mathbb Z\to V_L`),
@@ -66512,12 +66517,25 @@ cL W_{\perp}(\gamma)
                         "以上で端点の等式が四つの場合すべてで成り立つ。",
                       ]),
                       paragraph([
-                        "次に接続を確かめる。任意の ", math(String.raw`j\in\{0,\ldots,n-2\}`), " について ",
-                        math(String.raw`\operatorname{tgt}(p_j(W))=\operatorname{vt}(W_{j+1})=\operatorname{src}(p_{j+1}(W))`),
-                        "（端点の等式）であり、末尾では ",
-                        math(String.raw`\operatorname{tgt}(p_{n-1}(W))=\operatorname{vt}(W_n)=\operatorname{vt}(W_0)=\operatorname{src}(p_0(W))`),
-                        "（", math(String.raw`W_n=W_0`), " の仮定）である。",
+                        "次に接続を確かめる。任意の ", math(String.raw`j\in\{0,\ldots,n-2\}`), " について",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(p_j(W))
+&=\operatorname{vt}(W_{j+1})
+&&\bigl(\because\ \text{上で示した終点の等式}\bigr)\\
+&=\operatorname{src}(p_{j+1}(W))
+&&\bigl(\because\ \text{上で示した始点の等式}\bigr).
+\end{aligned}`),
+                      paragraph(["末尾では ", math(String.raw`W_n=W_0`), " より"]),
+                      displayMath(String.raw`\begin{aligned}
+\operatorname{tgt}(p_{n-1}(W))
+&=\operatorname{vt}(W_n)
+&&\bigl(\because\ \text{上で示した終点の等式}\bigr)\\
+&=\operatorname{vt}(W_0)
+&&\bigl(\because\ W_n=W_0\bigr)\\
+&=\operatorname{src}(p_0(W))
+&&\bigl(\because\ \text{上で示した始点の等式}\bigr).
+\end{aligned}`),
                       paragraph([
                         "次に、固定した ", math(String.raw`j`), " について、射影の辺が始点側の平面点と差を決めることを見る。",
                         ref("def_plane_unit_path_torus_projection"), " の四つの場合の値は、台の辺の属す集合（",

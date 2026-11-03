@@ -15,6 +15,13 @@ def projectedUnitStep (L : ℕ) [NeZero L] (p u : ℤ × ℤ) : OrientedEdge L :
     (edgeOfRow L false (p.1 + u.1) (p.2 + u.2), true)
   else (edgeOfRow L true (p.1 + u.1) (p.2 + u.2), true)
 
+/-- `def_plane_unit_path_torus_projection`。平面路の各歩を実際のトーラス辺へ射影する。 -/
+def planeUnitPathTorusProjection (L n : ℕ) [NeZero L]
+    (W : Fin (n + 1) → ℤ × ℤ) (j : Fin n) : OrientedEdge L :=
+  let p := W ⟨j.val, by omega⟩
+  let q := W ⟨j.val + 1, by omega⟩
+  projectedUnitStep L p (q - p)
+
 def unitStepDirection (u : ℤ × ℤ) : ZMod 4 :=
   if u = (0, 1) then 0 else if u = (1, 0) then 1
   else if u = (0, -1) then 2 else 3
