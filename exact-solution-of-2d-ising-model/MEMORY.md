@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-03: Lean の通しの証明のゴールラインの確認の百九個目として、人手 `check_joint_eigenspace_decomposition` を棚卸しし、証明の冒頭で根拠なしに置いていた `Q̌_ε = ∏R_μ^{(ε_μ)}` を、定義の因子 `ε_μň_μ + (1−ε_μ)(I−ň_μ)` が `R_μ^{(ε_μ)}` に等しいことの二場合の 10 行の鎖と、各因子へ同時に適用する 2 行の鎖にした（主張は不変）。Lean に人手と 1 対 1 の `defFactor_one`・`defFactor_zero`・`defFactor_eq_rFactor`・`Qproj_eq_finProdLeft_rFactor` を置き、SageMath は 050 の check_48。次は同じファイルの `eigenvalues_of_check_Vprime` から棚卸しを続ける（状態台帳 `docs/tasks/lean-end-to-end-state.md` の「次の一歩」）。
+
 2026-11-03: Lean の通しの証明のゴールラインの確認の百八個目として、人手 `trace_of_check_number_operator_product`（ň とその補の積のトレース）の名前だけの根拠（「分配則とトレースの線型性」、因子ごとの可換性から積との可換性を言う散文、巡回性の行の結合律）を 1 行 1 主張の鎖にし、帰納法を有限積の定義どおり最後の因子を分ける形にした（主張は不変）。Lean に人手と 1 対 1 の具体版 `CheckFermiSetup.trace_projFactor_finProdLeft` と同じ手順の必要十分版 `NecSuf/TraceOfNumberOperatorProductByLastFactor.lean`・導出を置き、`tr(Q̌_ε) = 1` の鎖 `trace_Qproj_step4` をそれ経由にした。SageMath は 050 の check_47。二回のレビューの指摘を直した。次は同じファイルの `check_joint_eigenspace_decomposition` から棚卸しを続ける。
 
 2026-11-03: 全証明の SageMath 検算として、`def_check_number_operator`（ň_μ := ψ̌_μ^† ψ̌_{M_col+1−μ} の定義と、共役添字の対合・X̌ と V̌' の書き換え）に検算 `sagemath/check/def_check_number_operator/` を付けた（未検算 44 件）。(1) の対合は `ZZ[M, μ]` と M_col = 2..40 の `ZZ` で、(2) の X̌ の鎖は γ を独立な不定元に置いて数体 E_μ の中で厳密に、γ の実際の値の X̌ と V̌' = exp(X̌) はボールで確かめた。人手証明の散文を等号の鎖に替え、主張 (2) の実数係数を (·)_C で書き、主張 (1) の根拠の取り違え（対合から添字の帰属を出していた）を直した（計算の誤りは無し、中身は不変）。二回のレビューで指摘が無くなるまで直した。次は `iH_is_real_symmetric`。

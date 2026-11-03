@@ -2885,15 +2885,94 @@ X\,\check{n}_\nu
         math(String.raw`R_\mu^{(1)} := \check{n}_\mu`),
         "、",
         math(String.raw`R_\mu^{(0)} := I - \check{n}_\mu`),
-        "。",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}`),
-        " である。本証明の行列の等式の ",
+        "。本証明の行列の等式の ",
         math(String.raw`0`),
         " は零行列 ",
         math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
         "（",
         ref("def_zero_matrix"),
         "）である。",
+      ]),
+      paragraph([
+        "まず ",
+        math(String.raw`\check{Q}_\epsilon`),
+        " の因子を ",
+        math(String.raw`R_\mu^{(\epsilon_\mu)}`),
+        " で書く。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " とする。",
+        math(String.raw`\epsilon_\mu = 1`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)
+&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
+  \quad (\because \text{場合の仮定 } \epsilon_\mu=1) \\
+&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(1_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{def_complex_difference}\ (z \to 1_{\mathbb{C}},\ w \to 1_{\mathbb{C}})\right) \\
+&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 1_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to 1_{\mathbb{C}})\right) \\
+&= 1_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\right) \\
+&= 1_{\mathbb{C}}\,\check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の逆元}\right) \\
+&= \check{n}_\mu + 0_{\mathbb{C}}\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
+&= \check{n}_\mu + O
+  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I - \check{n}_\mu)\right) \\
+&= \check{n}_\mu
+  \quad \left(\because\ \blkref{matrix_plus_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to \check{n}_\mu)\right) \\
+&= R_\mu^{(1)}
+  \quad (\because R_\mu^{(1)} \text{ の定義（冒頭）}) \\
+&= R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{場合の仮定 } \epsilon_\mu=1)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon_\mu = 0`),
+        " の場合は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)
+&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}-0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
+  \quad (\because \text{場合の仮定 } \epsilon_\mu=0) \\
+&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-\left(0_{\mathbb{C}}\right)\right)\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{def_complex_difference}\ (z \to 1_{\mathbb{C}},\ w \to 0_{\mathbb{C}})\right) \\
+&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+\left(-1_{\mathbb{C}}\right)\cdot 0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to 0_{\mathbb{C}})\right) \\
+&= 0_{\mathbb{C}}\,\check{n}_\mu + \left(1_{\mathbb{C}}+0_{\mathbb{C}}\right)\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{complex_times_zero_is_zero}\ (z \to -1_{\mathbb{C}})\right) \\
+&= 0_{\mathbb{C}}\,\check{n}_\mu + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法の単位元}\right) \\
+&= O + 1_{\mathbb{C}}\left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu)\right) \\
+&= O + \left(I - \check{n}_\mu\right)
+  \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to I - \check{n}_\mu)\right) \\
+&= I - \check{n}_\mu
+  \quad \left(\because\ \blkref{zero_matrix_plus_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ X \to I - \check{n}_\mu)\right) \\
+&= R_\mu^{(0)}
+  \quad (\because R_\mu^{(0)} \text{ の定義（冒頭）}) \\
+&= R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{場合の仮定 } \epsilon_\mu=0)
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+\Bigl(\epsilon_\mu\,\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\Bigr)
+  \quad (\because \check{Q}_\epsilon \text{ の定義（主張）}) \\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} R_\mu^{(\epsilon_\mu)}
+  \quad (\because \text{直前の二つの場合を各因子へ同時に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。以下の鎖の「",
+        math(String.raw`\check{Q}_\epsilon`),
+        " の定義（冒頭）」はこの等式を指す。",
       ]),
       paragraph([
         "Step 0（1 つの添字についての関係と、異なる添字の因子の可換性）。",
@@ -3525,6 +3604,7 @@ y_{\epsilon'}
         "2026-11-02: ∏_{μ≠ν} を使っていた 3 行（Step 1 の ε ≠ ε' の鎖、Step 3 の ň_νQ̌_ε の鎖の最初と最後）を、def_finite_product_of_matrices_omitting_one_index と moving_one_factor_of_finite_product_to_the_end の参照で書き直した（Step 1 は R_ν^{(ε_ν)} と Q̌_{ε'} の因子の可換性を先に示し、Step 3 は因子ごとの可換性の 3 つの場合を先に置いた）。主張の文の「因子は互いに可換なので、積の順序は問わない」は、有限積を左から掛けると定めたので外した。主張の中身は不変。SageMath は 050 の check_35。",
         "2026-11-02: Step 4 の「冪の零乗」を新しく足した def_power_of_complex_number の参照に、Step 5 の「単位行列の作用」を identity_matrix_is_left_unit_of_mat_mult（n → 1）に、「行列の作用の分配法則」2 か所を sum_over_binary_words_distributes_in_left_factor（p → 1）と新しく足した sum_over_binary_words_distributes_in_right_factor に、「零ベクトルへの行列の作用」を zero_matrix_is_right_zero_of_mat_mult（p → 1）に替えた。数ベクトルを 2^{M_col} 行 1 列の行列として扱うこと、数ベクトルの和が def_sum_over_binary_words によること、零ベクトルが O_{2^{M_col},1} であることを Step 5 の冒頭に書いた。主張の中身は不変。SageMath は 050 の check_36。",
         "2026-11-02: Step 5 の直和の鎖の 1 行目「Step 1 の直交性と冪等性」を、新しく足した sum_over_binary_words_with_one_nonzero_term の参照（右辺から左辺へ）と、その前提 Q̌_{ε'}y_ε = O（ε ≠ ε'）の 4 行の鎖（x_ε の取り方・mat_mult_associative（q → 1）・Step 1 の (1)・zero_matrix_is_left_zero_of_mat_mult（p → 1））、Q̌_{ε'}y_{ε'} = y_{ε'} の 4 行の鎖（mat_mult_associative・Step 1 の Q̌_εQ̌_ε = Q̌_ε）に替えた。散文「各項は像に属するから和は全体を張る」を、Q̌_εx ∈ im Q̌_ε を trace_of_idempotent の im の定義で述べる文にした。y_ε ∈ im Q̌_ε から y_ε = Q̌_εx_ε となる x_ε を取ることを書いた。主張の中身は不変。SageMath は 050 の check_joint_eigenspace_step5_direct_sum_first_line.sage。",
+        "2026-11-03: 証明の冒頭で名前だけで置いていた Q̌_ε = ∏R_μ^{(ε_μ)} を、定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) が R_μ^{(ε_μ)} に等しいことの二場合の 10 行の鎖（場合の仮定・def_complex_difference・multiply_by_minus_one・complex_numbers_form_a_field（ε_μ = 0 は complex_times_zero_is_zero も）・scalar_multiple_by_one・zero_scalar_multiple_is_zero_matrix・matrix_plus_zero_matrix／zero_matrix_plus_matrix・R の定義）と、それを各因子へ同時に適用する 2 行の鎖にした。主張の中身は変えていない。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_48。",
       ],
     },
   },

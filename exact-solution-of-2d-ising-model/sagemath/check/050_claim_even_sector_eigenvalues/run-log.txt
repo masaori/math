@@ -262,3 +262,9 @@ RESULT: PASS
   36 項（M_col = 2..7 で S_2・S_1^(+) の成分の実性・転置での対称性・A^* = A。係数は不定元、QQ[i] の厳密計算）
   否定コントロール 6 件: i を掛けない H_2 は転置で対称だが成分が実でなく、エルミートでない（M_col ごと）
 RESULT: PASS
+
+##### 2026-11-03 に check_48_joint_eigenspace_factor_as_R_chains を足した（check_joint_eigenspace_decomposition の証明の冒頭: 定義の因子 = R_μ^{(ε_μ)} の二場合の鎖と Q̌_ε = ∏R の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_48_joint_eigenspace_factor_as_R_chains.sage
+  236 段（M_col = 2..4 の全ての μ の二場合の 10 行の鎖、全ての語 ε の Q̌_ε = ∏R、不定元の成分の 2×2 行列での二場合の鎖、スカラーの差の鎖 8 段（QQ[i]）。QQ の厳密計算）
+  否定コントロール 2 件: 場合の仮定を取り違えると場合の仮定の行が外れる
+RESULT: PASS
