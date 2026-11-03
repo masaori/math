@@ -5,7 +5,7 @@
 `check_joint_eigenspace_decomposition`（`evenEigen_005_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。
-(1)(2)(3)(4) は、(1) 前半の `Qproj_mul_Qproj_of_ne`（人手の範囲 `M_col ≥ 2` では Step 1 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`）を除き、**必要十分版の特殊化として導出する**。
+(1)(2)(3)(4) は、(1) の `Qproj_mul_Qproj_of_ne`・`Qproj_mul_self`（人手の範囲 `M_col ≥ 2` では Step 1 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`・`Qproj_mul_self_of_necSuf`）を除き、**必要十分版の特殊化として導出する**。
 ただし証明の Step 0 の冒頭の `ň_μň_μ = ň_μ` と 4 本の鎖（`R_μ^{(1)}R_μ^{(0)} = 0`・`R_μ^{(0)}R_μ^{(1)} = 0`・
 `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`・`R_μ^{(1)} + R_μ^{(0)} = I`）は、人手の行と 1 対 1 の `calc` を
 `nOp_mul_nOp_of_sq`・`nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self`・`nOp_add_one_sub_nOp` に置く
@@ -23,7 +23,10 @@ Step 0 の異なる添字の因子の可換性の鎖（`YI = IY` の 2 行と、
 Step 1 の `ε ≠ ε'` の鎖（`R_ν^{(ε_ν)}` と `Q̌_{ε'}` の因子の可換性と、10 行の鎖）は
 `projFactor_mul_projFactor_eq_zero_step1`・`projFactor_comm_factor_step1`・`Qproj_mul_Qproj_of_ne_step1` に置き、
 (1) 前半の `Qproj_mul_Qproj_of_ne` は人手の範囲 `M_col ≥ 2` でこの鎖を使う。
-Step 1 の `ε = ε'` の鎖、Step 2、Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と
+Step 1 の `ε = ε'` の鎖（8 行）は、`Q̌_ε^2 = Q̌_εQ̌_ε` の 4 行 `Qproj_sq_eq_mul_self_step1` と `Q̌_εQ̌_ε = Q̌_ε` の 4 行 `Qproj_mul_self_step1`
+（各因子の冪等性は `projFactor_mul_self_step0`）に分けて置き、`Qproj_sq_step1` でつなぐ。(1) 後半の `Qproj_mul_self` は `M ≥ 1`（人手の範囲 `M_col ≥ 2` を含む）で
+`Qproj_mul_self_step1` を使う。
+Step 2、Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と
 `Q̌_εň_ν` の鎖と 1 対 1 の具体版はまだ無い。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
 下の `trace_Qproj` では必要十分版から `2^M · tr(Q̌_ε) = 2^M` を出して `2^M` で約分しており、人手の 3 行と 1 対 1 の版はまだ無い。Step 5 の人手の根拠
@@ -277,9 +280,73 @@ theorem Qproj_eq_finProdLeft {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset
           (fun i j => NecSuf.commute_projFactor F.commute_nOp_nOp T T i j) r
           checkIdxOfFin checkIdxOfFin_injective).symm    -- 必要十分版（単射な添字の写像）
 
-/-- **原文 (1) 後半**: `Q̌_ε^2 = Q̌_ε`。 -/
-theorem Qproj_mul_self (T : Finset (CheckIdx M)) : F.Qproj T * F.Qproj T = F.Qproj T :=
+/-! ## 原文 Step 1 の `ε = ε'` の鎖
+
+人手の 8 行の鎖を、`Q̌_ε^2` から `Q̌_εQ̌_ε` までの 4 行（`Qproj_sq_eq_mul_self_step1`）と、`Q̌_εQ̌_ε` から `Q̌_ε` までの 4 行
+（`Qproj_mul_self_step1`）に分けて置き、`Qproj_sq_step1` でつなぐ。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
+
+/-- **原文 Step 1** の「各因子が Step 0 より冪等」: `R_μ^{(ε_μ)}R_μ^{(ε_μ)} = R_μ^{(ε_μ)}`。
+`ε_μ = 1` なら Step 0 冒頭の `ň_μň_μ = ň_μ`、`ε_μ = 0` なら Step 0 の `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`（Step 0 の二つの冪等性）。 -/
+theorem projFactor_mul_self_step0 (T : Finset (CheckIdx M)) (μ : CheckIdx M) :
+    NecSuf.projFactor F.nOp T μ * NecSuf.projFactor F.nOp T μ = NecSuf.projFactor F.nOp T μ := by
+  by_cases hμ : μ ∈ T
+  · rw [NecSuf.projFactor_of_mem hμ]
+    exact F.nOp_mul_nOp_of_sq μ                         -- `ε_μ = 1`: Step 0 冒頭の `ň_μň_μ = ň_μ`
+  · rw [NecSuf.projFactor_of_notMem hμ]
+    exact F.one_sub_nOp_mul_self μ                      -- `ε_μ = 0`: Step 0 の `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`
+
+/-- **原文 Step 1** の `ε = ε'` の鎖の 1〜4 行: `Q̌_ε^2 = Q̌_ε^1Q̌_ε = (Q̌_ε^0Q̌_ε)Q̌_ε = (IQ̌_ε)Q̌_ε = Q̌_εQ̌_ε`。 -/
+theorem Qproj_sq_eq_mul_self_step1 (T : Finset (CheckIdx M)) : F.Qproj T ^ 2 = F.Qproj T * F.Qproj T :=
+  calc F.Qproj T ^ 2
+      = F.Qproj T ^ 1 * F.Qproj T := pow_succ _ 1       -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 1`、`A → Q̌_ε`）
+    _ = (F.Qproj T ^ 0 * F.Qproj T) * F.Qproj T := by rw [pow_succ (F.Qproj T) 0]
+                                                        -- `def_exp` (1) の `A^{m+1} := A^m A`（`m → 0`、`A → Q̌_ε`）
+    _ = (1 * F.Qproj T) * F.Qproj T := by rw [pow_zero] -- `def_exp` (1) の `A^0 := I`（`A → Q̌_ε`）
+    _ = F.Qproj T * F.Qproj T := by rw [identity_matrix_mul_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`A → Q̌_ε`）
+
+/-- **原文 Step 1** の `ε = ε'` の鎖の 5〜8 行: `Q̌_εQ̌_ε = (∏R_μ^{(ε_μ)})(∏R_μ^{(ε_μ)}) = ∏(R_μ^{(ε_μ)}R_μ^{(ε_μ)}) = ∏R_μ^{(ε_μ)} = Q̌_ε`。
+人手の `M_col` が Lean の `r + 1`（人手の `M_col ≥ 2` を含む。`product_of_two_finite_products_of_matrices` は因子が 1 つ以上の積について述べる）、
+人手の `R_j^{(ε_j)}` が `NecSuf.projFactor F.nOp T (checkIdxOfFin j)` である。 -/
+theorem Qproj_mul_self_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset (CheckIdx (r + 1))) :
+    F.Qproj T * F.Qproj T = F.Qproj T :=
+  calc F.Qproj T * F.Qproj T
+      = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j))
+          * NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)) := by
+        rw [Qproj_eq_finProdLeft F T]                   -- `Q̌_ε` の定義（冒頭）を 2 か所
+    _ = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)
+          * NecSuf.projFactor F.nOp T (checkIdxOfFin j)) :=
+        finProdLeft_mul_finProdLeft_tensorPow r
+          (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j))
+          (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j))
+          (fun i j hji => F.projFactor_mul_comm_step0 (checkIdxOfFin_injective.ne hji.ne) T T)
+                                                        -- `product_of_two_finite_products_of_matrices`
+                                                        -- （`A_j → R_j^{(ε_j)}`、`B_j → R_j^{(ε_j)}`）。前提は Step 0 の可換性
+                                                        -- （`ν → i`、`μ → j`、`e' → ε_i`、`e → ε_j`）
+    _ = NecSuf.finProdLeft r (fun j => NecSuf.projFactor F.nOp T (checkIdxOfFin j)) :=
+        congrArg (NecSuf.finProdLeft r) (funext fun j => F.projFactor_mul_self_step0 T (checkIdxOfFin j))
+                                                        -- Step 0 の二つの冪等性を各因子へ同時に適用
+    _ = F.Qproj T := (Qproj_eq_finProdLeft F T).symm    -- `Q̌_ε` の定義（冒頭）
+
+/-- **原文 Step 1** の `ε = ε'` の鎖（8 行）: `Q̌_ε^2 = Q̌_ε`（`M_col = r + 1`）。 -/
+theorem Qproj_sq_step1 {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset (CheckIdx (r + 1))) :
+    F.Qproj T ^ 2 = F.Qproj T :=
+  calc F.Qproj T ^ 2
+      = F.Qproj T * F.Qproj T := F.Qproj_sq_eq_mul_self_step1 T
+                                                        -- 鎖の 1〜4 行
+    _ = F.Qproj T := Qproj_mul_self_step1 F T           -- 鎖の 5〜8 行
+
+/-- **原文 (1) 後半** の必要十分版の特殊化（人手の範囲外の `M_col = 0` でも成り立つ）。 -/
+theorem Qproj_mul_self_of_necSuf (T : Finset (CheckIdx M)) : F.Qproj T * F.Qproj T = F.Qproj T :=
   NecSuf.projOn_mul_self F.nOp_mul_self _ _
+
+/-- **原文 (1) 後半**: `Q̌_εQ̌_ε = Q̌_ε`（人手の主張 `Q̌_ε^2 = Q̌_ε` は `Qproj_sq_step1`。使う側が積の形で引くので、型は積の形のままにする）。
+人手の範囲 `M_col ≥ 2`（`M = r + 1` に含まれる）では Step 1 の鎖の 5〜8 行 `Qproj_mul_self_step1` で示す。
+`M = 0` は人手の範囲外で、必要十分版の特殊化 `Qproj_mul_self_of_necSuf` で閉じる。 -/
+theorem Qproj_mul_self (T : Finset (CheckIdx M)) : F.Qproj T * F.Qproj T = F.Qproj T := by
+  match M, F, T with
+  | 0, F, T => exact F.Qproj_mul_self_of_necSuf T
+  | r + 1, F, T => exact Qproj_mul_self_step1 F T
 
 /-! ## 原文 Step 1 の `ε ≠ ε'` の鎖
 

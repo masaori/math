@@ -1725,6 +1725,11 @@ targets=(
   Ising2D.NecSuf.finProdLeft_eq_noncommProd_image
   Ising2D.CheckFermiSetup.Qproj_eq_finProdLeft
   Ising2D.CheckFermiSetup.Qproj_mul_self
+  Ising2D.CheckFermiSetup.projFactor_mul_self_step0
+  Ising2D.CheckFermiSetup.Qproj_sq_eq_mul_self_step1
+  Ising2D.CheckFermiSetup.Qproj_mul_self_step1
+  Ising2D.CheckFermiSetup.Qproj_sq_step1
+  Ising2D.CheckFermiSetup.Qproj_mul_self_of_necSuf
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne
   Ising2D.CheckFermiSetup.projFactor_mul_projFactor_eq_zero_step1
   Ising2D.CheckFermiSetup.projFactor_comm_factor_step1
