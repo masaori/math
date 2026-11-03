@@ -223,3 +223,8 @@ ALL PASS
 # 実行コマンド: ~/micromamba/envs/sage/bin/sage check_39_iH_real_symmetric_step2_YZ_kronecker_chain.sage
 判定 255 段（M_col = 2..6、全ての m ∈ {1,…,M_col-1}）、否定コントロール 29 件
 ALL PASS
+
+##### 2026-11-03 に check_40_iH_real_symmetric_step2_boundary_YZ_kronecker_chain を足した（iH_is_real_symmetric Step 2 の境界項の準備と Y_{M_col}Z_1 の 8 行の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_40_iH_real_symmetric_step2_boundary_YZ_kronecker_chain.sage
+判定 66 段（M_col = 2..7）、否定コントロール 12 件
+ALL PASS

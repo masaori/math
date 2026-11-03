@@ -519,18 +519,67 @@ Y_m Z_{m+1}
    \quad (\because \text{準備の } \sigma_m^z\sigma_{m+1}^z \text{ の表示})
 \end{aligned}`,
       ),
-      paragraph(["また境界項について"]),
+      paragraph([
+        "また境界項について、準備として、",
+        ref("def_jordan_wigner_Y_matrices"),
+        " の ",
+        math(String.raw`Y_{M_{\mathrm{col}}}`),
+        " と ",
+        ref("def_jordan_wigner_Z_matrices"),
+        " の ",
+        math(String.raw`Z_1`),
+        " と、主張の ",
+        math(String.raw`G`),
+        " をクロネッカー積で表す（",
+        math(String.raw`M_{\mathrm{col}} = 2`),
+        " のとき第 ",
+        math(String.raw`2`),
+        " から第 ",
+        math(String.raw`M_{\mathrm{col}}-1`),
+        " までの因子は無い）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+Y_{M_{\mathrm{col}}}
+&= \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^{y}
+&&(\because\ \blkref{def_jordan_wigner_Y_matrices}\ (m \to M_{\mathrm{col}})\text{。積は左から掛けたものと読む})\\
+&= \sigma^x\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\overbrace{\sigma^{y}}^{M_{\mathrm{col}}\text{th}}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = \cdots = a_{M_{\mathrm{col}}-1} = x,\ a_{M_{\mathrm{col}}} = y))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+Z_1
+&= \sigma_1^{z}
+&&(\because\ \blkref{def_jordan_wigner_Z_matrices}\ (m \to 1))\\
+&= \overbrace{\sigma^{z}}^{1\text{st}}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-2}\boxtimes I
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to 1,\ a_1 = z))
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+G
+&= \sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
+&&(\because\ \text{主張の } G \text{ の定義（}M_{\mathrm{col}} = 2\ \text{では}\ \sigma_1^y\sigma_2^y\text{）。積は左から掛けたものと読む})\\
+&= \overbrace{\sigma^{y}}^{1\text{st}}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\overbrace{\sigma^{y}}^{M_{\mathrm{col}}\text{th}}
+&&(\because\ \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M_{\mathrm{col}},\ a_1 = y,\ a_2 = \cdots = a_{M_{\mathrm{col}}-1} = x,\ a_{M_{\mathrm{col}}} = y))
+\end{aligned}`),
+      paragraph(["このとき"]),
       displayMath(
         String.raw`\begin{aligned}
 Y_{M_{\mathrm{col}}} Z_1
-&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y\right)\sigma_1^z
-   \quad (\because Y_{M_{\mathrm{col}}},\ Z_1 \text{ の定義}) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because \sigma_1^z \text{ は他の因子と可換}) \\
-&= (-i)\sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because \text{Step 0}) \\
+&= \Bigl(\sigma^x\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)Z_1
+   \quad (\because \text{準備の } Y_{M_{\mathrm{col}}} \text{ の表示}) \\
+&= \Bigl(\sigma^x\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)
+   \Bigl(\sigma^{z}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-2}\boxtimes I\Bigr)
+   \quad (\because \text{準備の } Z_1 \text{ の表示}) \\
+&= (\sigma^x\sigma^{z})\boxtimes\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{M_{\mathrm{col}}-2}\boxtimes(\sigma^{y}I)
+   \quad (\because \blkref{kronecker_product_rule}\ (1)\ (M \to M_{\mathrm{col}},\ A_k \to \text{準備の } Y_{M_{\mathrm{col}}} \text{ の第 } k \text{ 因子},\ B_k \to \text{準備の } Z_1 \text{ の第 } k \text{ 因子})) \\
+&= (\sigma^x\sigma^{z})\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes(\sigma^{y}I)
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2,\ A \to \sigma^x)\ \text{を第}\ 2\ \text{から第}\ M_{\mathrm{col}}-1\ \text{因子へ同時に適用}) \\
+&= (\sigma^x\sigma^{z})\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}
+   \quad (\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2,\ A \to \sigma^y)\ \text{を第}\ M_{\mathrm{col}}\ \text{因子へ}) \\
+&= \bigl((-i)\sigma^{y}\bigr)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}
+   \quad (\because \text{Step 0 の } \sigma^x\sigma^z = (-i)\sigma^y) \\
+&= (-i)\Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)
+   \quad (\because \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (M \to M_{\mathrm{col}},\ j \to 1,\ c \to -i,\ A_1 \to \sigma^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to \sigma^y)) \\
 &= (-i)G
-   \quad (\because G \text{ の定義})
+   \quad (\because \text{準備の } G \text{ の表示})
 \end{aligned}`,
       ),
       paragraph([
@@ -651,6 +700,7 @@ S_1^{(+)}
         "2026-11-03: Step 0 の三つの Pauli 行列積で名前だけの根拠だった「行列積の成分計算」「σ の行列表示」を、mat_mult・pauli_matrix_products・def_matrix_scalar_multiple へのラベル参照と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律・結合律、multiply_by_minus_one、(-1)·(-1) = 1）を 1 段に 1 つずつ使う段に割った。σ^zσ^y・σ^yσ^x の鎖は V1_in_Z_Y_epsilon の Step 0 と同じ鎖である。σ^xσ^z の鎖が使う (-i)·i = 1 と (-i)·(-i) = -1 を Step 0 の準備に置き、準備の i·i = -1 を definition_of_cc の積で受けるために i := (0_ℝ,1_ℝ) ∈ ℂ を主張の前置きに書いた（主張の S_1^{(+)}・S_2 の i の帰属も決まる）。Step 0〜Step 2 の鎖の終わりの -i\\,σ を、S_2・S_1^{(+)} の鎖が引く形 (-i)σ に揃えた。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 1 の Z_mY_m の鎖が「σ_m^z は σ_j^x (j<m) と可換」「σ_j^xσ_j^x = I」「Step 0」を名前だけで根拠にしていたのを、準備で def_jordan_wigner_Z_matrices・def_jordan_wigner_Y_matrices と site_pauli_prefix_product_kronecker_form により Z_m・Y_m をクロネッカー積で表し、kronecker_product_rule (1)・pauli_matrix_products の σ^xσ^x = I・identity_matrix_is_left_unit_of_mat_mult・Step 0 の σ^zσ^y = (-i)σ^x・kronecker_multilinear・def_site_pauli_matrices を 1 行に 1 つずつ引く 8 行の鎖に直した。Step 1 で I := I_{Mat(2,ℂ)} と置いたので、Step 2 の σ_j^xσ_j^x = I の右辺を I_{Mat(2^{M_col},ℂ)} と書き分けた。もとの「因子を寄せて σ^x の積を消す」道は、σ_1^x⋯σ_{m-1}^x の 2 乗が I であることを引ける主張が本文に無く、因子の並べ替えも一つの行に束ねていたので、既存の主張で閉じるクロネッカー積の道に替えた（global_spin_flip_jordan_wigner_representation の Z_mY_m の鎖と同じ道。Lean の Z_mul_Y_same と 1 対 1）。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 の Y_mZ_{m+1} の鎖が「相異なる因子どうしは可換」「σ_j^xσ_j^x = I」「Step 0」を名前だけで根拠にしていたのを、Step 1 と同じ道に直した。準備で def_jordan_wigner_Y_matrices・def_jordan_wigner_Z_matrices と site_pauli_prefix_product_kronecker_form により Y_m・Z_{m+1} を、def_site_pauli_matrices・kronecker_product_rule (1)・identity_matrix_is_right_unit_of_mat_mult・identity_matrix_is_left_unit_of_mat_mult により σ_m^zσ_{m+1}^z をクロネッカー積で表し、鎖は kronecker_product_rule (1)・pauli_matrix_products の σ^xσ^x = I・identity_matrix_is_left_unit_of_mat_mult（A → σ^z と A → I の 2 行）・Step 0 の σ^yσ^x = (-i)σ^z・kronecker_multilinear・準備の σ_m^zσ_{m+1}^z の表示を 1 行に 1 つずつ引く 9 行にした（Lean の Y_castSucc_mul_Z_succ と 1 対 1）。主張は変えていない。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 の境界項 Y_{M_col}Z_1 の鎖が「Y_{M_col}, Z_1 の定義」「σ_1^z は他の因子と可換」「Step 0」「G の定義」を名前だけで根拠にし、3 行目で σ_1^xσ_1^z = (-i)σ_1^y と (-i) を積の外へ出す段を束ねていたのを、Step 1・Step 2 の内部辺と同じ道に直した。準備で def_jordan_wigner_Y_matrices・def_jordan_wigner_Z_matrices・主張の G の定義と site_pauli_prefix_product_kronecker_form により Y_{M_col}・Z_1・G をクロネッカー積で表し、鎖は kronecker_product_rule (1)・identity_matrix_is_right_unit_of_mat_mult（A → σ^x と A → σ^y の 2 行）・Step 0 の σ^xσ^z = (-i)σ^y・kronecker_multilinear・準備の G の表示を 1 行に 1 つずつ引く 8 行にした（Lean の Y_last_mul_Z_zero と 1 対 1）。主張は変えていない。",
       ],
     },
   },
