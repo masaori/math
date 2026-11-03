@@ -302,6 +302,76 @@ theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
       _ = (((F.gval g T : ℝ) : ℂ)) ^ (k + 1) • F.Qproj T := by rw [pow_succ]
                                                         -- `ǧ(ε)^{k+1} := ǧ(ε)^k ǧ(ε)`
 
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の部分和**: `E_K := Σ_{k=0}^{K} (1/k!) X̌^k`。
+人手の添字 `0` からの和（`def_finite_sum_of_matrices_from_index_zero`）は `Finset.range (K + 1)` の上の和で書く。 -/
+noncomputable def partialExpSum (g : CheckIdx M → ℝ) (K : ℕ) : TensorPow M :=
+  ∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) • F.Xop g ^ k
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の部分和の鎖**: `E_K Q̌_ε = (Σ_{k=0}^{K} (1/k!) ǧ(ε)^k) Q̌_ε`。人手の 8 行と 1 対 1 の calc。
+人手の `Σ_{j=1}^{K+1}` は `Fin (K + 1)` の上の和で、人手の `j − 1` が Lean の `(j : ℕ)` に当たる。
+`def_finite_sum_of_matrices_from_index_zero`・`def_finite_sum_of_complex_numbers_from_index_zero` の式（添字 `0` からの和を添字 `1` からの和へずらす）は
+mathlib の `Finset.sum_range`（`Σ_{i ∈ range n} f i = Σ_{i : Fin n} f i`）で出す。
+和の各項へ同じ主張を同時に適用する行（人手の「各項へ」）は `Finset.sum_congr` で書く。 -/
+theorem partialExpSum_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (K : ℕ) :
+    F.partialExpSum g K * F.Qproj T
+      = (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * (((F.gval g T : ℝ) : ℂ)) ^ k) • F.Qproj T := by
+  set Q := F.Qproj T
+  set X := F.Xop g
+  set G : ℂ := ((F.gval g T : ℝ) : ℂ)
+  calc F.partialExpSum g K * Q
+      = (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) • X ^ k) * Q := rfl
+                                                        -- `E_K` の定義
+    _ = (∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • X ^ (j : ℕ)) * Q := by
+          rw [Finset.sum_range (fun k => (1 / (k.factorial : ℂ)) • X ^ k)]
+                                                        -- `def_finite_sum_of_matrices_from_index_zero`（項 `(1/k!)X̌^k`）
+    _ = ∑ j : Fin (K + 1), ((1 / ((j : ℕ).factorial : ℂ)) • X ^ (j : ℕ)) * Q := finite_sum_mul_tensorPow K _ Q
+                                                        -- `finite_sum_of_matrices_distributes_in_left_factor`（`r → K + 1`）
+    _ = ∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • (X ^ (j : ℕ) * Q) :=
+        Finset.sum_congr rfl fun j _ => smul_mul_matrix_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_left_factor` を各項へ
+    _ = ∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • (G ^ (j : ℕ) • Q) :=
+        Finset.sum_congr rfl fun j _ => by rw [F.Xop_pow_mul_Qproj g T]
+                                                        -- Step 2（`k → j − 1`）を各項へ
+    _ = ∑ j : Fin (K + 1), ((1 / ((j : ℕ).factorial : ℂ)) * G ^ (j : ℕ)) • Q :=
+        Finset.sum_congr rfl fun j _ => smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative` を各項へ（Lean の具体版は無く、mathlib の `smul_smul`）
+    _ = (∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) * G ^ (j : ℕ)) • Q := finite_sum_smul_one_tensorPow K _ Q
+                                                        -- `finite_sum_of_scalar_multiples_of_one_matrix`（`r → K + 1`）
+    _ = (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * G ^ k) • Q := by
+          rw [Finset.sum_range (fun k => (1 / (k.factorial : ℂ)) * G ^ k)]
+                                                        -- `def_finite_sum_of_complex_numbers_from_index_zero`（項 `(1/k!)ǧ(ε)^k`）を右辺から左辺へ
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3' の部分和の鎖**: `Q̌_ε E_K = (Σ_{k=0}^{K} (1/k!) ǧ(ε)^k) Q̌_ε`。人手の 8 行と 1 対 1 の calc
+（添字の読み替えは `partialExpSum_mul_Qproj` と同じ）。 -/
+theorem Qproj_mul_partialExpSum (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (K : ℕ) :
+    F.Qproj T * F.partialExpSum g K
+      = (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * (((F.gval g T : ℝ) : ℂ)) ^ k) • F.Qproj T := by
+  set Q := F.Qproj T
+  set X := F.Xop g
+  set G : ℂ := ((F.gval g T : ℝ) : ℂ)
+  calc Q * F.partialExpSum g K
+      = Q * (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) • X ^ k) := rfl
+                                                        -- `E_K` の定義
+    _ = Q * (∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • X ^ (j : ℕ)) := by
+          rw [Finset.sum_range (fun k => (1 / (k.factorial : ℂ)) • X ^ k)]
+                                                        -- `def_finite_sum_of_matrices_from_index_zero`（項 `(1/k!)X̌^k`）
+    _ = ∑ j : Fin (K + 1), Q * ((1 / ((j : ℕ).factorial : ℂ)) • X ^ (j : ℕ)) := mul_finite_sum_tensorPow K Q _
+                                                        -- `finite_sum_of_matrices_distributes_in_right_factor`（`r → K + 1`）
+    _ = ∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • (Q * X ^ (j : ℕ)) :=
+        Finset.sum_congr rfl fun j _ => mul_smul_matrix_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_right_factor` を各項へ
+    _ = ∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) • (G ^ (j : ℕ) • Q) :=
+        Finset.sum_congr rfl fun j _ => by rw [F.Qproj_mul_Xop_pow g T]
+                                                        -- Step 3' の帰納法（`k → j − 1`）を各項へ
+    _ = ∑ j : Fin (K + 1), ((1 / ((j : ℕ).factorial : ℂ)) * G ^ (j : ℕ)) • Q :=
+        Finset.sum_congr rfl fun j _ => smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative` を各項へ（mathlib の `smul_smul`）
+    _ = (∑ j : Fin (K + 1), (1 / ((j : ℕ).factorial : ℂ)) * G ^ (j : ℕ)) • Q := finite_sum_smul_one_tensorPow K _ Q
+                                                        -- `finite_sum_of_scalar_multiples_of_one_matrix`（`r → K + 1`）
+    _ = (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * G ^ k) • Q := by
+          rw [Finset.sum_range (fun k => (1 / (k.factorial : ℂ)) * G ^ k)]
+                                                        -- `def_finite_sum_of_complex_numbers_from_index_zero`（項 `(1/k!)ǧ(ε)^k`）を右辺から左辺へ
+
 /-- **原文 `eigenvalues_of_check_Vprime` Step 4 の最初の鎖**: `y = Q̌_ε x` なら `Q̌_ε y = y`。
 人手の 8 行（両端の `y = Q̌_ε x` の書き換えは Lean では `y` を置かずに書くので現れない）と 1 対 1 の calc。 -/
 theorem Qproj_mulVec_Qproj_mulVec (T : Finset (CheckIdx M)) (x : Conf M → ℂ) :

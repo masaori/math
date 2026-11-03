@@ -183,6 +183,45 @@ export default defineBlocks([
     },
   },
   {
+    id: "linear_space_general_definition_finite_sum_of_matrices_from_index_zero",
+    kind: "definition",
+    title: { text: "添字が 0 から始まる行列の有限和" },
+    labels: ["def_finite_sum_of_matrices_from_index_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`K \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`X_0,\dots,X_K \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）について、有限和 ",
+        math(String.raw`\sum_{k=0}^{K} X_k \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`\sum_{k=0}^{K} X_k := \sum_{j=1}^{K+1} X_{j-1}`),
+      paragraph([
+        "と定める。右辺は ",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和（",
+        math(String.raw`r \to K+1`),
+        "、",
+        math(String.raw`j`),
+        " 番目の項を ",
+        math(String.raw`X_{j-1}`),
+        " とする）である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 3・Step 3' の部分和 E_K = Σ_{k=0}^{K}(1/k!)X̌^k は添字が 0 から始まり、" +
+          "def_finite_sum_of_matrices（添字 1..r）が覆わなかったので、その和へ添字をずらして定めた。def_finite_sum_of_complex_numbers_from_index_zero と同じ形である。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_finite_sum_of_matrices_entrywise",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },

@@ -1075,6 +1075,42 @@ T_B(X - W)
   },
 
   {
+    id: "calc_formulae_008d_definition_finite_sum_of_complex_numbers_from_index_zero",
+    kind: "definition",
+    title: { text: "添字が 0 から始まる複素数の有限和" },
+    labels: ["def_finite_sum_of_complex_numbers_from_index_zero"],
+    statement: [
+      paragraph([
+        math(String.raw`K \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`z_0,\dots,z_K \in \mathbb{C}`),
+        " について、有限和 ",
+        math(String.raw`\sum_{k=0}^{K} z_k \in \mathbb{C}`),
+        " を",
+      ]),
+      displayMath(String.raw`\sum_{k=0}^{K} z_k := \sum_{j=1}^{K+1} z_{j-1}`),
+      paragraph([
+        "と定める。右辺は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " の有限和（",
+        math(String.raw`m \to K+1`),
+        "、",
+        math(String.raw`j`),
+        " 番目の項を ",
+        math(String.raw`z_{j-1}`),
+        " とする）である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 3・Step 3' の部分和 Σ_{k=0}^{K} は添字が 0 から始まり、" +
+          "def_finite_sum_of_complex_numbers（添字 1..m）が覆わなかったので、その和へ添字をずらして定めた。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_complex_zeros",
     kind: "claim",
     title: { text: "複素数の零の有限和は零" },

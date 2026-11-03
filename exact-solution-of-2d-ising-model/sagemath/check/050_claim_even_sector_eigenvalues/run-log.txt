@@ -186,3 +186,8 @@ RESULT: PASS
 # 実行コマンド: sage check_eigenvalues_of_check_Vprime_step1_right_chain.sage
 checked 405 steps (model M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
 RESULT: PASS
+
+##### 2026-11-03 に check_eigenvalues_of_check_Vprime_step3_partial_sum_chains を足した（eigenvalues_of_check_Vprime Step 3・Step 3' の部分和の鎖）
+# 実行コマンド: sage check_eigenvalues_of_check_Vprime_step3_partial_sum_chains.sage
+checked 974 steps (model M = 2, 3 with all eps and K = 0..4, and 7 + 7 steps of the generic control); the only failing step in each control chain is the one citing Step 2 (Step 3' induction)
+RESULT: PASS
