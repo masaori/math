@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 363 件のうち、SageMath の検算が無いもの 64 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 363 件のうち、SageMath の検算が無いもの 62 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -208,13 +208,17 @@
 
 - `arccosh_properties`（逆双曲線余弦は非負側の双曲線余弦の逆）: `sagemath/check/arccosh_properties/`。等号の行は exp・cosh・sinh の値を不定元に置き、各行がその行の (∵) の関係式だけのイデアルで成り立つことを厳密に、指数法則は形式冪級数で、準備の r と (4) は `AA` で、log・exp の値を含む行と主張は本文の exp のボールと log の囲みで確かめた。レビューの指摘で人手証明を直した（`log 1 = 0` を「`def_real_logarithm_positive` の証明で示した」と引いていたがその定義に証明は無いので `scalar_exp_zero` と `log(exp x) = x` の鎖を準備に、`exp(-u)exp(u) = exp(0)` を結合律・指数法則・`-u+u=0` の三行に、cosh の鎖と (3)・(4) の二操作の行を一行ずつに、(1) と `sinh t ≥ 0` を場合分けの鎖に、√ の一意性を (∵) に、ℝ 脱出の明示）。計算の誤りは無かった。
 
+- `def_half_integer_modes`（θ̃ の共役添字の恒等式 θ̃_{1-μ} = -θ̃_μ）と `conjugate_index_of_check_Z_Y`（M̌ の内側で共役添字を取る）: `sagemath/check/def_half_integer_modes/`・`sagemath/check/conjugate_index_of_check_Z_Y/`。角度の鎖は π・μ・M・j を不定元にした有理関数体で、符号の鎖は ℂ を実数の対にした多項式環で、(2) の cos・sin の値を代入した後の ℂ の計算は AA の実数の対で、(3) は円分体の行列で厳密に、指数法則・exp と cos・sin の行・cos(2πj) = 1・sin(2πj) = 0・主張は本文の exp のボールで確かめた。人手証明を直した: (2) の証明が、主張と違う式を述べる `euler_formula_cos_sin` と行列の `theorem_exp_product` (n=1) を引いていたので、`exp_of_negative_i_real_as_cos_minus_i_sin` と `scalar_exp_product` に付け替え、包含の和・積の保存と符号の鎖を置いた。(2) の主張を像の記号で書き、全実数上の cos・sin の値を前提とすることを主張に書いた。二つの角度の鎖を像の記号 μ_R・(M_col)_R・ι(1) で書き直し、(1) の根拠「ℂ の四則」を ℝ に直し、結合律・`1_R - 1/2 = 1/2`・符号の行を一行ずつに分けた（主張の中身は不変）。(2) を引く `check_Q_is_hermitian` の引用も新しい記号にした。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_half_integer_modes`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `anticommutator_of_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`conjugate_index_of_check_Z_Y` のレビューで見つかった（1 ブロック 1 主張と命名。今回の差分より前から）: `conjugate_index_of_check_Z_Y` は (1)(2)(3) の三つの主張を一つのブロックに束ねている。`def_half_integer_modes` はラベルが `def_` なのに中身は主張で、旧複合主張の番号「(3)」が主張に残っている。分けるとラベル参照（本文と Lean の注記）を付け替えることになるので、検算の付いたブロックの見直しで扱う。(2) は全実数上の cos・sin の周期性（未整備）に依る。
 
 - 2026-11-03、`arccosh_properties` のレビューで見つかった（ℝ 脱出の明示の欠けと一行二操作。今回の差分より前から）: `def_arccosh` は実対数と ℝ の完備性による平方根を使うのに ℝ 脱出を書いておらず、右辺が定まることの鎖も `y ≥ 1 > 0 より y^2 ≥ 1` を一行に束ねている。定義のブロックには検算の対象の証明が無いので、この単位では直さなかった。
 

@@ -745,26 +745,40 @@ P_{m-1}Y_m
     ],
     proof: [
       paragraph([
-        "(3) 共役添字について、一続きに",
+        "(3) 共役添字について示す。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " である。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \tilde\theta_{1-\mu}
-&=\frac{2\pi\left(1-\mu-\frac12\right)}{M_{\mathrm{col}}}
-&&\left(\because\ \tilde\theta_{1-\mu}\text{ の定義}\right)\\
-&=\frac{2\pi\left(\frac12-\mu\right)}{M_{\mathrm{col}}}
-&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
-&=-\frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}
-&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
+&=\frac{2\pi\left((1-\mu)_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \tilde\theta\text{ の定義を }1-\mu\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\frac{2\pi\left((\iota_{\mathbb Z\to\mathbb R}(1)-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\frac{2\pi\left((1_{\mathbb R}-\mu_{\mathbb R})-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr)\\
+&=\frac{2\pi\left((1_{\mathbb R}-\tfrac12)-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr)\\
+&=\frac{2\pi\left(\tfrac12-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr)\\
+&=\frac{2\pi\left(-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\bigr)\\
+&=-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \mathbb R\text{ の積と }(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数から }-1\text{ をくくり出す}\bigr)\\
 &=-\tilde\theta_\mu
-&&\left(\because\ \tilde\theta_\mu\text{ の定義}\right)
+&&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr)
 \end{aligned}`,
       ),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "converted",
       notes: [
         "旧複合ラベルは、後続参照の意味を保つため、共役添字恒等式だけを述べる残余主張に残した。",
+        "2026-11-03（全証明の SageMath 検算）: 鎖を antiperiodic_exp_sum の像の記号 μ_R・(M_col)_R で書き直し、整数から実数への包含が差と単位元を保つ行を分けた（主張は不変）。",
         "(3) により、整数運動量の場合に -μ が果たしていた「共役添字」の役割を、半整数運動量では 1-μ が果たす。反交換関係の対が μ+ν ≡ 1 (mod M) になるのはこのためである。",
       ],
     },
@@ -786,7 +800,7 @@ P_{m-1}Y_m
         [math(String.raw`\text{(1)}\quad \tilde\theta_{M_{\mathrm{col}}+1-\mu} = 2\pi - \tilde\theta_\mu`)],
         [
           math(
-            String.raw`\text{(2)}\quad \exp(-ij\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \exp(ij\tilde\theta_\mu)
+            String.raw`\text{(2)}\quad \exp(-i(j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu})_{\mathbb C}) = \exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
 \qquad (j \in \mathbb{Z})`,
           ),
         ],
@@ -813,6 +827,29 @@ P_{m-1}Y_m
         " で置き換えてよい。**以降つねにそうする。**",
       ]),
       paragraph([
+        "ここで ",
+        math(String.raw`j_{\mathbb R}`),
+        " は ",
+        ref("antiperiodic_exp_sum"),
+        " の整数の実数への像、",
+        math(String.raw`r_{\mathbb C}`),
+        "（",
+        math(String.raw`r\in\mathbb R`),
+        "）は ",
+        ref("inclusion_rr_to_cc"),
+        " の像である。(2) の証明は全実数上の ",
+        math(String.raw`\cos,\sin`),
+        " の値 ",
+        math(String.raw`\cos(2\pi n_{\mathbb R})=1_{\mathbb R}`),
+        "、",
+        math(String.raw`\sin(2\pi n_{\mathbb R})=0_{\mathbb R}`),
+        "（",
+        math(String.raw`n\in\mathbb Z`),
+        "）を使う。全実数への拡張は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり未整備なので、(2) はその拡張を前提とする。",
+      ]),
+      paragraph([
         "(2) は ",
         ref("def_half_integer_modes"),
         " (3) の ",
@@ -832,46 +869,128 @@ P_{m-1}Y_m
       paragraph([
         "(1) ",
         ref("antiperiodic_exp_sum"),
-        " の ",
-        math(String.raw`\tilde\theta`),
-        " の定義より",
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " である。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \tilde\theta_{M_{\mathrm{col}}+1-\mu}
-&= \frac{2\pi\left(M_{\mathrm{col}}+1-\mu-\frac12\right)}{M_{\mathrm{col}}}
-   &&(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義}) \\
-&= \frac{2\pi\left(M_{\mathrm{col}} - \left(\mu-\frac12\right)\right)}{M_{\mathrm{col}}}
-   &&\left(\because M_{\mathrm{col}}+1-\mu-\tfrac12 = M_{\mathrm{col}} - \left(\mu-\tfrac12\right)\right) \\
-&= 2\pi - \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}}
-   &&(\because \mathbb C \text{ の四則}) \\
+&= \frac{2\pi\left((M_{\mathrm{col}}+1-\mu)_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \tilde\theta\text{ の定義を }M_{\mathrm{col}}+1-\mu\in\mathbb Z\text{ で。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+\iota_{\mathbb Z\to\mathbb R}(1)-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので和と差を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{2\pi\left(\left((M_{\mathrm{col}})_{\mathbb R}+1_{\mathbb R}-\mu_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は単位元を保つ。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(1_{\mathbb R}-\tfrac12\right)-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律と交換律}\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\tfrac12-\mu_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ 1_{\mathbb R}-\tfrac12=\tfrac12\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}+\left(\tfrac12-\mu_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の加法の結合律（差は加法の逆元の和）}\bigr) \\
+&= \frac{2\pi\left((M_{\mathrm{col}})_{\mathbb R}-\left(\mu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ で }\tfrac12-\mu_{\mathbb R}=-\left(\mu_{\mathbb R}-\tfrac12\right)\text{（}-(a-b)=-a+b\text{）と、差は加法の逆元の和}\bigr) \\
+&= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}-2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ \mathbb R\text{ の分配法則}\bigr) \\
+&= \frac{2\pi(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の差}\bigr) \\
+&= 2\pi-\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+   &&\bigl(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ による約分}\bigr) \\
 &= 2\pi - \tilde\theta_\mu
-   &&(\because \blkref{antiperiodic_exp_sum}\text{ の } \tilde\theta \text{ の定義})
+   &&\bigl(\because\ \tilde\theta_\mu\text{ の定義。}\blkref{antiperiodic_exp_sum}\bigr)
 \end{aligned}`,
       ),
       paragraph([
         "(2) ",
         math(String.raw`j \in \mathbb{Z}`),
-        " について、(1) と指数法則より",
+        " とする。準備として、指数の中の実数を (1) で書き直す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(-ij\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-&= \exp(-ij\left(2\pi - \tilde\theta_\mu\right))
-   &&(\because \text{直前の (1)}) \\
-&= \exp(-2\pi i j)\,\exp(ij\tilde\theta_\mu)
-   &&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \left(\cos(2\pi j) - i\sin(2\pi j)\right)\exp(ij\tilde\theta_\mu)
-   &&(\because \blkref{euler_formula_cos_sin}) \\
-&= \exp(ij\tilde\theta_\mu)
-   &&(\because j \in \mathbb{Z} \text{ より } \cos(2\pi j) = 1,\ \sin(2\pi j) = 0)
+j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
+&= j_{\mathbb R}\left(2\pi - \tilde\theta_\mu\right)
+   &&(\because\ \text{直前の (1)}) \\
+&= j_{\mathbb R}\cdot2\pi - j_{\mathbb R}\tilde\theta_\mu
+   &&(\because\ \mathbb R\text{ の分配法則}) \\
+&= 2\pi j_{\mathbb R} - j_{\mathbb R}\tilde\theta_\mu
+   &&(\because\ \mathbb R\text{ の積の交換律}) \\
+&= 2\pi j_{\mathbb R} + \left(-(j_{\mathbb R}\tilde\theta_\mu)\right)
+   &&(\because\ \mathbb R\text{ の差は加法の逆元の和})
 \end{aligned}`,
       ),
       paragraph([
-        "ここで指数法則の ", math(String.raw`n=1`), " は ",
-        math(String.raw`\mathrm{Mat}(1,\mathbb{C}) = \mathbb{C}`),
-        " における適用である。",
+        "また、",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）を ",
+        math(String.raw`(-(j_{\mathbb R}\tilde\theta_\mu))_{\mathbb C}`),
+        " に掛けたものを書き直す。主張と ",
+        ref("exp_of_negative_i_real_as_cos_minus_i_sin"),
+        " の ",
+        math(String.raw`-i\theta_{\mathbb C}`),
+        " も、この ",
+        math(String.raw`-i`),
+        " を掛けた ",
+        math(String.raw`(-i)\,\theta_{\mathbb C}`),
+        " の意味である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(-i)\left(-(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}
+&= (-i)\left((-1_{\mathbb R})(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}
+   &&(\because\ \mathbb R\text{ で }-x=(-1_{\mathbb R})x) \\
+&= (-i)\left((-1_{\mathbb R})_{\mathbb C}\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&(\because\ \blkref{real_inclusion_preserves_product}) \\
+&= (-i)\left((-1_{\mathbb C})\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&\bigl(\because\ (-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ の和},\ \blkref{complex_numbers_form_a_field})\bigr) \\
+&= \left((-1_{\mathbb C})\,i\right)\left((-1_{\mathbb C})\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&(\because\ \blkref{multiply_by_minus_one}) \\
+&= \left((-1_{\mathbb C})(-1_{\mathbb C})\right)\left(i\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&(\because\ \mathbb C\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}) \\
+&= 1_{\mathbb C}\left(i\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&(\because\ (-1_{\mathbb C})(-1_{\mathbb C})=1_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})) \\
+&= i\,(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}
+   &&(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field}))
+\end{aligned}`,
+      ),
+      paragraph(["これらを使って、主張の左辺から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-i(j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu})_{\mathbb C})
+&= \exp\!\left(-i\left(2\pi j_{\mathbb R} + \left(-(j_{\mathbb R}\tilde\theta_\mu)\right)\right)_{\mathbb C}\right)
+   &&(\because\ \text{準備の第一の鎖}) \\
+&= \exp\!\left(-i\left((2\pi j_{\mathbb R})_{\mathbb C} + \left(-(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}\right)\right)
+   &&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2,\ r_1=2\pi j_{\mathbb R},\ r_2=-(j_{\mathbb R}\tilde\theta_\mu)\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で }r_1+r_2\text{ の形に開く}\bigr) \\
+&= \exp\!\left((-i)(2\pi j_{\mathbb R})_{\mathbb C} + (-i)\left(-(j_{\mathbb R}\tilde\theta_\mu)\right)_{\mathbb C}\right)
+   &&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&= \exp\!\left((-i)(2\pi j_{\mathbb R})_{\mathbb C} + i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}\right)
+   &&(\because\ \text{準備の第二の鎖}) \\
+&= \exp((-i)(2\pi j_{\mathbb R})_{\mathbb C})\,\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で}) \\
+&= \left((\cos(2\pi j_{\mathbb R}))_{\mathbb C} - i(\sin(2\pi j_{\mathbb R}))_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin}\text{ を }\theta=2\pi j_{\mathbb R}\text{ で}) \\
+&= \left((1_{\mathbb R})_{\mathbb C} - i(\sin(2\pi j_{\mathbb R}))_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ j\in\mathbb Z\text{ と全実数上の }\cos(2\pi n_{\mathbb R})=1_{\mathbb R}) \\
+&= \left((1_{\mathbb R})_{\mathbb C} - i(0_{\mathbb R})_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ j\in\mathbb Z\text{ と全実数上の }\sin(2\pi n_{\mathbb R})=0_{\mathbb R}) \\
+&= \left(1_{\mathbb C} - i\cdot0_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&\bigl(\because\ (1_{\mathbb R})_{\mathbb C}=(1_{\mathbb R},0_{\mathbb R})=1_{\mathbb C},\ (0_{\mathbb R})_{\mathbb C}=(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{complex_numbers_form_a_field}\text{ の単位元と零元})\bigr) \\
+&= \left(1_{\mathbb C} - 0_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{complex_times_zero_is_zero}) \\
+&= \left(1_{\mathbb C} + (-0_{\mathbb C})\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{def_complex_difference}) \\
+&= \left(1_{\mathbb C} + (-1_{\mathbb C})\,0_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{multiply_by_minus_one}) \\
+&= \left(1_{\mathbb C} + 0_{\mathbb C}\right)\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ \blkref{complex_times_zero_is_zero}) \\
+&= 1_{\mathbb C}\exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ 0_{\mathbb C}\text{ は和の単位元}\ (\blkref{complex_numbers_form_a_field})) \\
+&= \exp(i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C})
+   &&(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field}))
+\end{aligned}`,
+      ),
+      paragraph(["となる。"]),
       paragraph([
         "(3) ",
         ref("half_integer_checkZ_periodicity"),
@@ -906,6 +1025,7 @@ P_{m-1}Y_m
       status: "added",
       notes: [
         "2026-09-01 の式変形統一で、二本の式変形鎖の行中にあった根拠 7 行を行末の根拠列（aligned の &&）へ揃え、添字の周期性の二本の等式を同じ形へ開いた。内容・式変形・根拠・ラベル参照は不変である。",
+        "2026-11-03（全証明の SageMath 検算）: (2) の主張を像の記号 j_R・(·)_C で書き、全実数上の cos・sin の値を前提とすることを主張に書いた。(2) の証明は、主張と違う式を述べる euler_formula_cos_sin と行列の theorem_exp_product (n=1) を引いていたので、exp_of_negative_i_real_as_cos_minus_i_sin と scalar_exp_product に付け替え、包含の和・積の保存と符号の鎖を置いた。(1) の根拠「ℂ の四則」は実数の計算なので ℝ に直し、像の記号で書き直した。",
       ],
     },
   },

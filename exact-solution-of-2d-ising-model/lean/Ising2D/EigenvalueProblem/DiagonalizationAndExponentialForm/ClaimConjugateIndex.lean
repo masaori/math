@@ -7,8 +7,8 @@
 
 **必要十分版は無い。** (1)(3) は `θ~` の定義と添字の周期性（既存の必要十分版
 `Ising2D.NecSuf.transform_periodic` の特殊化）から出る書き換えで、
-新たに取り払える構造が無い。(2) は (1)・指数法則・Euler の公式・`cos(2πj) = 1, sin(2πj) = 0`
-の 4 行で、使っているのは複素指数関数のこれらの性質だけであり、取り払える構造が無い。
+新たに取り払える構造が無い。(2) は (1)・指数法則・負の角の Euler の公式・`cos(2πj) = 1, sin(2πj) = 0`
+の 4 行（人手ではこれに包含の和・積の保存と ℂ の符号の計算の行が付く）で、使っているのは複素指数関数のこれらの性質だけであり、取り払える構造が無い。
 
 ## 原文の主張（`μ ∈ 𝓜̌`）
 
@@ -37,8 +37,9 @@ theorem thetaTilde_conj (hM : M ≠ 0) (μ : ℤ) :
 /-- **(2)**: `e^{-ij θ~_{M+1-μ}} = e^{ij θ~_μ}`（`j ∈ ℤ`）。
 
 人手の整数 `j` は Lean の `k` である。右辺の `e^{ij θ~_μ}` は `e^{-i(-j) θ~_μ} = checkPhase M (-j) μ` である。
-人手の式変形の 4 行（(1)、指数法則 `theorem_exp_product` (`n = 1`)、
-Euler の公式 `euler_formula_cos_sin`、`cos(2πj) = 1, sin(2πj) = 0`）に 1 行ずつ対応させ、
+人手の式変形の主な 4 行（(1)、指数法則 `scalar_exp_product`、
+負の角の Euler の公式 `exp_of_negative_i_real_as_cos_minus_i_sin`、`cos(2πj) = 1, sin(2πj) = 0`）に 1 行ずつ対応させ、
+人手の包含の和・積の保存と ℂ の符号の行（準備の二つの鎖と、`1_C - i·0_C = 1_C` までの行）は `push_cast`・`ring` が担う。
 両端を `checkPhase_eq_exp`（`checkPhase` が `e^{-ik θ~_μ}` そのものであること）で開く。 -/
 theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
     checkPhase M k ((M : ℤ) + 1 - μ) = checkPhase M (-k) μ := by
@@ -49,20 +50,20 @@ theorem checkPhase_conj' (hM : M ≠ 0) (k μ : ℤ) :
       -- (∵ 直前の (1))
     _ = Complex.exp (-(Complex.I * (k : ℂ) * ((2 * Real.pi - thetaTilde M μ : ℝ) : ℂ))) := by
         rw [thetaTilde_conj hM μ]
-      -- (∵ theorem_exp_product (n = 1))
+      -- (∵ scalar_exp_product。人手の準備の二つの鎖と包含の和の保存の行を含む)
     _ = Complex.exp (-(2 * (Real.pi : ℂ) * Complex.I * (k : ℂ)))
           * Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
         rw [← Complex.exp_add]
         congr 1
         push_cast
         ring
-      -- (∵ euler_formula_cos_sin。exp(φi) = cos φ + i sin φ を φ = -2πj に当て、cos(-x) = cos x, sin(-x) = -sin x で書き直す)
+      -- (∵ exp_of_negative_i_real_as_cos_minus_i_sin を θ = 2πj で。Lean では exp(φi) = cos φ + i sin φ を φ = -2πj に当て、cos(-x) = cos x, sin(-x) = -sin x で書き直す)
     _ = (Complex.cos (2 * (Real.pi : ℂ) * (k : ℂ)) - Complex.I * Complex.sin (2 * (Real.pi : ℂ) * (k : ℂ)))
           * Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
         rw [show -(2 * (Real.pi : ℂ) * Complex.I * (k : ℂ)) = (-(2 * (Real.pi : ℂ) * (k : ℂ))) * Complex.I by ring,
           Complex.exp_mul_I, Complex.cos_neg, Complex.sin_neg]
         ring
-      -- (∵ j ∈ ℤ より cos(2πj) = 1, sin(2πj) = 0)
+      -- (∵ j ∈ ℤ より cos(2πj) = 1, sin(2πj) = 0。人手の 1_C - i·0_C = 1_C までの行を含む)
     _ = Complex.exp (Complex.I * (k : ℂ) * (thetaTilde M μ : ℂ)) := by
         have hcos : Complex.cos (2 * (Real.pi : ℂ) * (k : ℂ)) = 1 := by
           rw [show 2 * (Real.pi : ℂ) * (k : ℂ) = (k : ℂ) * (2 * (Real.pi : ℂ)) by ring]

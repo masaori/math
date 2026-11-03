@@ -1,0 +1,50 @@
+# 対象ラベル: conjugate_index_of_check_Z_Y
+# 実数の二つの鎖を、π・μ・M・j を不定元にした QQ 上の有理関数体で、各行をその行の式の形のまま組んで隣と比べる。
+# - (1) θ̃_{M+1-μ} = ⋯ = 2π - θ̃_μ の 11 等号
+# - (2) の準備の第一の鎖 j_R θ̃_{M+1-μ} = j_R(2π - θ̃_μ) = j_R·2π - j_R θ̃_μ = 2πj_R - j_R θ̃_μ = 2πj_R + (-(j_R θ̃_μ)) の 4 等号
+# 整数の像の行（(M+1-μ)_R = (M)_R + ι(1) - μ_R、ι(1) = 1_R）は antiperiodic_exp_sum の仮定（包含は零・単位元・和を保つ）を
+# そのまま使う行で、有理関数体の上では両辺が同じ式になり、検算は中身を持たない。
+# 具体の点: M = 2..8、μ = -2M..2M、j = -2M..2M で、各行の 角度/2π が一致することも見る。μ ∈ M̌ = {1..M} なら M+1-μ ∈ M̌ も見る。
+# 対照: (1) の右辺を π - θ̃_μ にすると崩れる。
+load("../../_shared/half_integer_phase_exact.sage")
+h = QQ(1) / 2
+th = lambda m: theta_tilde_formula(m, M_)
+lines1 = [
+    ("θ̃_{M+1-μ}", th(M_ + 1 - mu_)),
+    ("2π((M+1-μ)_R - 1/2)/(M)_R", 2 * pi_ * ((M_ + 1 - mu_) - h) / M_),
+    ("2π(((M)_R + ι(1) - μ_R) - 1/2)/(M)_R", 2 * pi_ * ((M_ + 1 - mu_) - h) / M_),
+    ("2π(((M)_R + 1_R - μ_R) - 1/2)/(M)_R", 2 * pi_ * ((M_ + 1 - mu_) - h) / M_),
+    ("2π((M)_R + (1_R - 1/2) - μ_R)/(M)_R", 2 * pi_ * (M_ + (1 - h) - mu_) / M_),
+    ("2π((M)_R + 1/2 - μ_R)/(M)_R", 2 * pi_ * (M_ + h - mu_) / M_),
+    ("2π((M)_R + (1/2 - μ_R))/(M)_R", 2 * pi_ * (M_ + (h - mu_)) / M_),
+    ("2π((M)_R - (μ_R - 1/2))/(M)_R", 2 * pi_ * (M_ - (mu_ - h)) / M_),
+    ("(2π(M)_R - 2π(μ_R - 1/2))/(M)_R", (2 * pi_ * M_ - 2 * pi_ * (mu_ - h)) / M_),
+    ("2π(M)_R/(M)_R - 2π(μ_R - 1/2)/(M)_R", 2 * pi_ * M_ / M_ - 2 * pi_ * (mu_ - h) / M_),
+    ("2π - 2π(μ_R - 1/2)/(M)_R", 2 * pi_ - 2 * pi_ * (mu_ - h) / M_),
+    ("2π - θ̃_μ", 2 * pi_ - th(mu_)),
+]
+check_adjacent(lines1, "(1) の鎖")
+assert th(M_ + 1 - mu_) != pi_ - th(mu_)
+lines2 = [
+    ("j_R θ̃_{M+1-μ}", j_ * th(M_ + 1 - mu_)),
+    ("j_R(2π - θ̃_μ)", j_ * (2 * pi_ - th(mu_))),
+    ("j_R·2π - j_R θ̃_μ", j_ * (2 * pi_) - j_ * th(mu_)),
+    ("2πj_R - j_R θ̃_μ", 2 * pi_ * j_ - j_ * th(mu_)),
+    ("2πj_R + (-(j_R θ̃_μ))", 2 * pi_ * j_ + (-(j_ * th(mu_)))),
+]
+check_adjacent(lines2, "(2) の準備の第一の鎖")
+print("  (1) の 11 等号と (2) の準備の 4 等号が有理関数体で成り立つ。(1) の右辺を π - θ̃_μ にすると崩れる")
+n = 0
+for M in range(2, 9):
+    for mu in range(-2 * M, 2 * M + 1):
+        v1 = [x.subs(pi_=1, mu=mu, M=M) / 2 for _, x in lines1]
+        assert len(set(v1)) == 1 and v1[0] == theta_over_2pi(M, M + 1 - mu)
+        assert theta_over_2pi(M, M + 1 - mu) == 1 - theta_over_2pi(M, mu)
+        if 1 <= mu <= M:
+            assert 1 <= M + 1 - mu <= M
+        for j in range(-2 * M, 2 * M + 1):
+            v2 = [x.subs(pi_=1, mu=mu, M=M, j=j) / 2 for _, x in lines2]
+            assert len(set(v2)) == 1
+            n += 1
+print(f"  {n} 組の (M, μ, j) で、各行の 角度/2π が一致する。μ ∈ M̌ なら M+1-μ ∈ M̌")
+print("RESULT: PASS")
