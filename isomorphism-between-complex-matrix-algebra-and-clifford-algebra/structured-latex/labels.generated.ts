@@ -27,6 +27,7 @@ export const ALL_LABELS = [
   "def_direct_sum_of_two_vector_spaces",
   "def_dual_basis",
   "def_dual_space",
+  "def_embedding_into_first_component_of_direct_sum",
   "def_kronecker_delta",
   "def_linear_combination",
   "def_linear_form",
