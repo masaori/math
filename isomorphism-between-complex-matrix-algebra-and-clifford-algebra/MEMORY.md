@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-03: 「ℂ に ℂ-線型空間の構造を与える組」の行を定義と公理の二行に割り、組の定義（ラベル def_complex_numbers_as_complex_vector_space、記号 ℂ^vec=(ℂ,+_{ℂ^vec},·_{ℂ^vec},0_{ℂ^vec})）を置いた。次は ℂ^vec が ℂ-線型空間であること（八つの公理を、演算の定義で ℂ の加法・乗法へ開き、ℂ の結合・交換・分配法則と単位元で閉じる。加法の逆元は (-1_ℂ)·_ℂ x を使う。双対空間の公理の確認 claim_dual_space_is_complex_vector_space と同じ形）。
 - 2026-11-03: 直和の元が二つの埋め込み写像の像の和であること（ラベル claim_direct_sum_element_is_sum_of_embedded_components、等式 (x,y)=in_1(x)+in_2(y)）を示した。次は ℂ に ℂ-線型空間の構造を与える組に名前を付け、公理を満たすこと。
 - 2026-11-03: 直和の第二成分への埋め込み写像が線型写像であること（ラベル claim_embedding_into_second_component_is_linear_map）を示した。次は直和の元が二つの埋め込み写像の像の和であること（(x,y)=in_1(x)+in_2(y)。直和の加法の定義と V_1・V_2 の加法の単位元で閉じる見込み）。
 - 2026-11-03: 零ベクトルのスカラー倍が零ベクトルであること（ラベル claim_scalar_multiple_of_zero_vector_is_zero_vector、等式 λ·_V0_V=0_V）を示した。次は直和の第二成分への埋め込み写像が線型写像であること（claim_embedding_into_first_component_is_linear_map と同じ形。V_1 の中の λ·0_{V_1}=0_{V_1} は導き直さず本主張を V=V_1 で引く）。
