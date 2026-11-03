@@ -4205,4 +4205,257 @@ x+_{\mathbb{C}^{\mathrm{vec}}}x'
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_moving_term_of_linear_combination_to_last",
+    kind: "claim",
+    title: { text: "線型結合の第 j 項を最後へ移しても値は変わらない" },
+    labels: ["claim_moving_term_of_linear_combination_to_last"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`n\in\mathbb{Z}_{\ge 1}`),
+        " とし、",
+        math(String.raw`\{1,\dots,n\}`),
+        " の各元 ",
+        math(String.raw`k`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`x_k`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_k`),
+        " が一つずつ与えられているとする。",
+        math(String.raw`j\in\{1,\dots,n\}`),
+        " とし、写像 ",
+        math(String.raw`\rho_j:\{1,\dots,n-1\}\to\{1,\dots,n\}`),
+        " を次で定める（",
+        math(String.raw`n=1`),
+        " のとき ",
+        math(String.raw`\{1,\dots,0\}`),
+        " は空集合で、",
+        math(String.raw`\rho_j`),
+        " は空集合からの写像である）。",
+      ]),
+      displayMath(String.raw`\rho_j(k):=
+\begin{cases}
+  k & (k<j),\\
+  k+1 & (k\ge j).
+\end{cases}`),
+      paragraph([
+        "値が ",
+        math(String.raw`\{1,\dots,n\}`),
+        " に入るのは、",
+        math(String.raw`k<j`),
+        " なら ",
+        math(String.raw`1\le k<j\le n`),
+        "、",
+        math(String.raw`k\ge j`),
+        " なら ",
+        math(String.raw`2\le j+1\le k+1\le (n-1)+1=n`),
+        " だからである。",
+        math(String.raw`k\in\{1,\dots,n-1\}`),
+        " について ",
+        math(String.raw`\tilde{x}_k:=x_{\rho_j(k)}\in V`),
+        "、",
+        math(String.raw`\tilde{\lambda}_k:=\lambda_{\rho_j(k)}\in\mathbb{C}`),
+        " と置く（第 ",
+        math(String.raw`j`),
+        " 項を除き、残りを番号の順のまま詰めた族と係数）。このとき、線型結合（",
+        ref("def_linear_combination"),
+        "）について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{k=1}^{n}\lambda_k\cdot_V x_k
+=\Bigl(\sum_{k=1}^{n-1}\tilde{\lambda}_k\cdot_V\tilde{x}_k\Bigr)+_V(\lambda_j\cdot_V x_j)`),
+    ],
+    proof: [
+      paragraph([
+        "係数 ",
+        math(String.raw`\lambda_1,\dots,\lambda_n`),
+        " と ",
+        math(String.raw`x_1,\dots,x_n`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が帰納的に定める ",
+        math(String.raw`V`),
+        " の元を ",
+        math(String.raw`L_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        "）と書き、係数 ",
+        math(String.raw`\tilde{\lambda}_1,\dots,\tilde{\lambda}_{n-1}`),
+        " と ",
+        math(String.raw`\tilde{x}_1,\dots,\tilde{x}_{n-1}`),
+        " について同じ定義が定める ",
+        math(String.raw`V`),
+        " の元を ",
+        math(String.raw`\tilde{L}_m`),
+        "（",
+        math(String.raw`m\in\{0,1,\dots,n-1\}`),
+        "）と書く。すなわち ",
+        math(String.raw`L_0:=0_V`),
+        "、",
+        math(String.raw`L_m:=L_{m-1}+_V(\lambda_m\cdot_V x_m)`),
+        "（",
+        math(String.raw`1\le m\le n`),
+        "）、",
+        math(String.raw`\tilde{L}_0:=0_V`),
+        "、",
+        math(String.raw`\tilde{L}_m:=\tilde{L}_{m-1}+_V(\tilde{\lambda}_m\cdot_V\tilde{x}_m)`),
+        "（",
+        math(String.raw`1\le m\le n-1`),
+        "）であり、主張の左辺は ",
+        math(String.raw`L_n`),
+        "、右辺は ",
+        math(String.raw`\tilde{L}_{n-1}+_V(\lambda_j\cdot_V x_j)`),
+        " である。",
+      ]),
+      paragraph([
+        "すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について次が成り立つことを、",
+        math(String.raw`m`),
+        " についての帰納法で示す（",
+        math(String.raw`m<j`),
+        " なら ",
+        math(String.raw`m\le j-1\le n-1`),
+        "、",
+        math(String.raw`m\ge j`),
+        " なら ",
+        math(String.raw`0\le j-1\le m-1\le n-1`),
+        " なので、右辺の ",
+        math(String.raw`\tilde{L}`),
+        " の添字は ",
+        math(String.raw`\{0,1,\dots,n-1\}`),
+        " に入る）。",
+      ]),
+      displayMath(String.raw`L_m=
+\begin{cases}
+  \tilde{L}_m & (m<j),\\
+  \tilde{L}_{m-1}+_V(\lambda_j\cdot_V x_j) & (m\ge j).
+\end{cases}`),
+      paragraph([
+        math(String.raw`n\ge j`),
+        " なので、",
+        math(String.raw`m=n`),
+        " の場合が主張 ",
+        math(String.raw`L_n=\tilde{L}_{n-1}+_V(\lambda_j\cdot_V x_j)`),
+        " である。",
+      ]),
+      paragraph([
+        math(String.raw`m=0`),
+        " のとき：",
+        math(String.raw`j\ge 1`),
+        " なので ",
+        math(String.raw`0<j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_0
+&=0_V
+&&\left(\because\ L_0\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\tilde{L}_0
+&&\left(\because\ \tilde{L}_0\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`m-1`),
+        " について上の等式が成り立つと仮定する（帰納法の仮定）。",
+        math(String.raw`m`),
+        " と ",
+        math(String.raw`j`),
+        " の大小で三つに場合を分ける。",
+      ]),
+      paragraph([
+        math(String.raw`m<j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " である。また ",
+        math(String.raw`1\le m\le j-1\le n-1`),
+        " なので ",
+        math(String.raw`m\in\{1,\dots,n-1\}`),
+        " であり、",
+        math(String.raw`m<j`),
+        " から ",
+        math(String.raw`\rho_j(m)=m`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\tilde{L}_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=\tilde{L}_{m-1}+_V(\lambda_{\rho_j(m)}\cdot_V x_{\rho_j(m)})
+&&\left(\because\ \rho_j(m)=m\right)\\
+&=\tilde{L}_{m-1}+_V(\tilde{\lambda}_m\cdot_V\tilde{x}_m)
+&&\left(\because\ \tilde{\lambda}_m,\ \tilde{x}_m\ \text{の定義}\right)\\
+&=\tilde{L}_m
+&&\left(\because\ \tilde{L}_m\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m=j`),
+        " のとき：",
+        math(String.raw`m-1<j`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\tilde{L}_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1<j\right)\\
+&=\tilde{L}_{m-1}+_V(\lambda_j\cdot_V x_j)
+&&\left(\because\ m=j\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`m>j`),
+        " のとき：",
+        math(String.raw`m-1\ge j`),
+        " である。また ",
+        math(String.raw`1\le j\le m-1\le n-1`),
+        " なので ",
+        math(String.raw`m-1\in\{1,\dots,n-1\}`),
+        " であり、",
+        math(String.raw`m-1\ge j`),
+        " から ",
+        math(String.raw`\rho_j(m-1)=(m-1)+1=m`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+L_m
+&=L_{m-1}+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ L_m\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\bigl(\tilde{L}_{m-2}+_V(\lambda_j\cdot_V x_j)\bigr)+_V(\lambda_m\cdot_V x_m)
+&&\left(\because\ \text{帰納法の仮定。}\ m-1\ge j\right)\\
+&=\tilde{L}_{m-2}+_V\bigl((\lambda_j\cdot_V x_j)+_V(\lambda_m\cdot_V x_m)\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\tilde{L}_{m-2}+_V\bigl((\lambda_m\cdot_V x_m)+_V(\lambda_j\cdot_V x_j)\bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(\tilde{L}_{m-2}+_V(\lambda_m\cdot_V x_m)\bigr)+_V(\lambda_j\cdot_V x_j)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(\tilde{L}_{m-2}+_V(\lambda_{\rho_j(m-1)}\cdot_V x_{\rho_j(m-1)})\bigr)+_V(\lambda_j\cdot_V x_j)
+&&\left(\because\ \rho_j(m-1)=m\right)\\
+&=\bigl(\tilde{L}_{m-2}+_V(\tilde{\lambda}_{m-1}\cdot_V\tilde{x}_{m-1})\bigr)+_V(\lambda_j\cdot_V x_j)
+&&\left(\because\ \tilde{\lambda}_{m-1},\ \tilde{x}_{m-1}\ \text{の定義}\right)\\
+&=\tilde{L}_{m-1}+_V(\lambda_j\cdot_V x_j)
+&&\left(\because\ \tilde{L}_{m-1}\ \text{の定義。}\blkref{def_linear_combination}\right).
+\end{aligned}`),
+      paragraph([
+        "二行目の帰納法の仮定は、",
+        math(String.raw`m-1\ge j`),
+        " の場合の等式 ",
+        math(String.raw`L_{m-1}=\tilde{L}_{(m-1)-1}+_V(\lambda_j\cdot_V x_j)`),
+        " である。",
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について帰納法の主張が示された。",
+      ]),
+    ],
+  },
 ]);
