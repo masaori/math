@@ -9,6 +9,25 @@ import Mathlib.Tactic
 
 namespace Ising2DLambda.NecSuf.KacWard
 
+/-- 最初に移動後の点族へ当たる正の歩数の有限集合。 -/
+noncomputable def firstHitStepSet {I X : Type*} (path : ℕ → X)
+    (translated : I → X) (bound : ℕ) : Finset ℕ := by
+  classical
+  exact (Finset.Icc 1 bound).filter (fun s => ∃ i, path s = translated i)
+
+/-- 当たり歩数の有限集合の最小元。 -/
+noncomputable def firstHitStep {I X : Type*} (path : ℕ → X)
+    (translated : I → X) (bound : ℕ)
+    (hnonempty : (firstHitStepSet path translated bound).Nonempty) : ℕ :=
+  (firstHitStepSet path translated bound).min' hnonempty
+
+/-- 最初の当たりで止めた点列。定義域は始点から最初の当たりまで。 -/
+noncomputable def firstHitPrefix {I X : Type*} (path : ℕ → X)
+    (translated : I → X) (bound : ℕ)
+    (hnonempty : (firstHitStepSet path translated bound).Nonempty) :
+    Fin (firstHitStep path translated bound hnonempty + 1) → X :=
+  fun s => path s.val
+
 /-- 最初の当たりで打ち切った単射な点列は、二つの点族と両端でだけ交わる。 -/
 theorem first_hit_prefix_meets_families_only_at_ends_necSuf
     {I X : Type*} (path : ℕ → X) (original translated : I → X)

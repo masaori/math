@@ -65606,6 +65606,16 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
                       title: { text: "最初に当たる歩数で打ち切った接続階段" },
                       labels: ["def_first_hit_connecting_staircase"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.firstHitStepSetFromWalk",
+                        "Ising2DLambda.KacWard.firstHitStepSetFromWalk_nonempty",
+                        "Ising2DLambda.KacWard.firstHitStepFromWalk",
+                        "Ising2DLambda.KacWard.firstHitConnectingStaircaseFromWalk",
+                        "Ising2DLambda.NecSuf.KacWard.firstHitStepSet",
+                        "Ising2DLambda.NecSuf.KacWard.firstHitStep",
+                        "Ising2DLambda.NecSuf.KacWard.firstHitPrefix",
+                        "Ising2DLambda.KacWard.firstHitConnectingStaircaseFromWalk_eq_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -82296,7 +82306,11 @@ const chapter_fisher_zero_density = defineSection({
                       math(String.raw`a_m=\Omega_L(m)`), " として読むと、任意の ", math(String.raw`k\in\mathbb{N}`),
                       " について",
                     ]),
-                    displayMath(String.raw`\mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}`),
+                    displayMath(String.raw`\begin{aligned}
+\mathrm{ac}_k\bigl(\operatorname{Lift}^{F}(Z_L)\bigr)
+&=\begin{cases}\Omega_L(k)&(k\le2L^{2})\\ 0&(2L^{2}<k)\end{cases}
+&&\bigl(\because\ \blkref{claim_coefficient_representation}\text{ と }\blkref{def_integer_polynomial_qbar_lift}\bigr).
+\end{aligned}`),
                     paragraph([
                       "である（", math(String.raw`\Omega_L(k)\in\mathbb{N}`), " は ", ref("def_multiplicity"), "。",
                       math(String.raw`\mathbb{N}\subset\mathbb{Z}\subset\mathbb{Q}\subset\overline{\mathbb{Q}}`),
