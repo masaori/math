@@ -29,6 +29,7 @@ export const ALL_LABELS = [
   "def_dual_basis",
   "def_dual_space",
   "def_embedding_into_first_component_of_direct_sum",
+  "def_embedding_into_second_component_of_direct_sum",
   "def_kronecker_delta",
   "def_linear_combination",
   "def_linear_form",
