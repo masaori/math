@@ -1103,6 +1103,7 @@ targets=(
   Ising2D.smul_mul_matrix_tensorPow
   Ising2D.mul_smul_matrix_tensorPow
   Ising2D.identity_matrix_mul_tensorPow
+  Ising2D.identity_matrix_mul_colVec
   Ising2D.mul_identity_matrix_tensorPow
   Ising2D.mul_neg_matrix_apply
   Ising2D.mul_neg_matrix
@@ -1167,12 +1168,14 @@ targets=(
   Ising2D.matrix_eq_zero_of_add_self_eq_zero_of_necSuf
   Ising2D.matrix_eq_sub_of_add_eq_of_necSuf
   Ising2D.zero_matrix_mul_tensorPow
+  Ising2D.zero_matrix_mul_colVec
   Ising2D.eq_zero_of_add_self_eq_zero_tensorPow
   Ising2D.eq_sub_of_add_eq_tensorPow
   "Ising2D.NecSuf.mul_zero_matrix'"
   Ising2D.matrix_mul_zero_matrix
   Ising2D.matrix_mul_zero_matrix_of_necSuf
   Ising2D.matrix_mul_zero_matrix_tensorPow
+  Ising2D.matrix_mul_zero_colVec
   "Ising2D.NecSuf.finProdLeft_const_one'"
   Ising2D.finite_product_of_identity_matrices
   Ising2D.finiteMatrixProduct_eq_finProdLeft
@@ -1193,9 +1196,11 @@ targets=(
   Ising2D.binaryWordMatrixSum_eq_binWordSum
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
   Ising2D.binWordSum_mul_tensorPow
+  Ising2D.binWordSum_mul_colVec
   Ising2D.mul_binaryWordMatrixSum
   Ising2D.mul_binaryWordMatrixSum_of_necSuf
   Ising2D.mul_binWordSum_tensorPow
+  Ising2D.mul_binWordSum_colVec
   Ising2D.binaryWord_one_eq_one_or_zero
   Ising2D.binaryWord_fin_two_eq_one_or_zero
   Ising2D.binaryWord_snoc_ne_of_ne_init
@@ -1203,6 +1208,7 @@ targets=(
   Ising2D.binaryWordMatrixSum_eq_of_eq_zero
   Ising2D.binaryWordMatrixSum_eq_of_eq_zero_of_necSuf
   Ising2D.binWordSum_eq_of_eq_zero_tensorPow
+  Ising2D.binWordSum_eq_of_eq_zero_colVec
   Ising2D.expansion_of_finite_product_of_two_term_sums
   Ising2D.expansion_of_finite_product_of_two_term_sums_of_necSuf
   Ising2D.expansion_of_finite_product_of_two_term_sums_tensorPow
@@ -1754,6 +1760,11 @@ targets=(
   Ising2D.CheckFermiSetup.trace_Qproj
   Ising2D.CheckFermiSetup.finrank_range_Qproj
   Ising2D.CheckFermiSetup.sum_Qproj_mulVec
+  Ising2D.CheckFermiSetup.colVec_eq_sum_Qproj_mul_step5
+  Ising2D.CheckFermiSetup.Qproj_mul_colVec_of_ne_step5
+  Ising2D.CheckFermiSetup.Qproj_mul_colVec_self_step5
+  Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5
+  Ising2D.CheckFermiSetup.replicateCol_finset_sum
   Ising2D.CheckFermiSetup.eq_zero_of_sum_eq_zero
   Ising2D.CheckFermiSetup.Xop_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Xop

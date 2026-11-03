@@ -50,4 +50,9 @@ theorem eq_zero_of_add_self_eq_zero_tensorPow {M : ℕ} (X : TensorPow M) (h : X
 theorem eq_sub_of_add_eq_tensorPow {M : ℕ} (A B C : TensorPow M) (h : A + B = C) : B = C - A :=
   NecSuf.eq_sub_of_add_eq_matrix' A B C h
 
+/-- `zero_matrix_is_left_zero_of_mat_mult`（`p → 1`）の、`TensorPow M` と `2^M` 行 1 列の行列での系
+（`NecSuf.zero_mul_matrix'` の特殊化）。 -/
+theorem zero_matrix_mul_colVec {M : ℕ} (B : Matrix (Conf M) (Fin 1) ℂ) : (0 : TensorPow M) * B = 0 :=
+  NecSuf.zero_mul_matrix' (fun x => zero_mul x) B
+
 end Ising2D

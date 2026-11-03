@@ -60,4 +60,25 @@ theorem binWordSum_eq_of_eq_zero_tensorPow {M : ℕ} (r : ℕ) (ε' : Fin (r + 1
     NecSuf.binWordSum r B = B ε' :=
   NecSuf.binWordSum_eq_of_eq_zero r ε' B hB
 
+/-- `sum_over_binary_words_distributes_in_left_factor`（`p → 1`）の、`TensorPow M` の和に `2^M` 行 1 列の行列を右から掛ける系
+（`NecSuf.binWordSum_map` の `f := (· C)`）。 -/
+theorem binWordSum_mul_colVec {M : ℕ} (r : ℕ) (X : (Fin (r + 1) → Fin 2) → TensorPow M)
+    (C : Matrix (Conf M) (Fin 1) ℂ) :
+    NecSuf.binWordSum r X * C = NecSuf.binWordSum r (fun ε => X ε * C) :=
+  NecSuf.binWordSum_map (fun Y : TensorPow M => Y * C) (fun a b => NecSuf.add_mul_matrix' a b C) r X
+
+/-- `sum_over_binary_words_distributes_in_right_factor`（`p → 1`）の、`2^M` 行 1 列の行列の和に `TensorPow M` の元を左から掛ける系
+（`NecSuf.binWordSum_map` の `f := (C * ·)`）。 -/
+theorem mul_binWordSum_colVec {M : ℕ} (r : ℕ) (C : TensorPow M)
+    (X : (Fin (r + 1) → Fin 2) → Matrix (Conf M) (Fin 1) ℂ) :
+    C * NecSuf.binWordSum r X = NecSuf.binWordSum r (fun ε => C * X ε) :=
+  NecSuf.binWordSum_map (fun Y : Matrix (Conf M) (Fin 1) ℂ => C * Y) (fun a b => NecSuf.mul_add_matrix' C a b) r X
+
+/-- `sum_over_binary_words_with_one_nonzero_term`（`m → 2^M`、`n → 1`）の、`2^M` 行 1 列の行列での系
+（`NecSuf.binWordSum_eq_of_eq_zero` の特殊化）。 -/
+theorem binWordSum_eq_of_eq_zero_colVec {M : ℕ} (r : ℕ) (ε' : Fin (r + 1) → Fin 2)
+    (B : (Fin (r + 1) → Fin 2) → Matrix (Conf M) (Fin 1) ℂ) (hB : ∀ ε, ε ≠ ε' → B ε = 0) :
+    NecSuf.binWordSum r B = B ε' :=
+  NecSuf.binWordSum_eq_of_eq_zero r ε' B hB
+
 end Ising2D

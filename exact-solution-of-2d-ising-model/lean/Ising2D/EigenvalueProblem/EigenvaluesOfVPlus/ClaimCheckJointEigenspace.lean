@@ -36,11 +36,10 @@ Step 3 の最初の三つの場合（`ň_ν R_μ^{(ε_μ)} = R_μ^{(ε_μ)} ň_�
 `nOp_mul_Qproj_of_necSuf`・`commute_nOp_Qproj_of_necSuf`）。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1` の 3 行（`trace_of_check_number_operator_product`・`M_col − M_col = 0`・`def_power_of_complex_number` の `z^0 := 1_ℂ`）は
 `trace_Qproj_step4` に人手と 1 対 1 の calc で置き、(4) 前半の `trace_Qproj` はこの鎖から示す。1 行目が引く主張は、因子の混在を許す
-人手の主張そのものの具体版 `trace_projFactorProd`（`ClaimTraceCheckNumberOperatorProduct.lean`）である。Step 5 の人手の根拠
-`identity_matrix_is_left_unit_of_mat_mult`（`n → 1`）・`sum_over_binary_words_distributes_in_left_factor`・
-`sum_over_binary_words_distributes_in_right_factor`（`p → 1`）・`zero_matrix_is_right_zero_of_mat_mult`（`p → 1`）は、
-下の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero` ではまだ mathlib の `Matrix.one_mulVec`・`Matrix.sum_mulVec`・`Matrix.mulVec_sum`・
-`Matrix.mulVec_zero` で閉じている（人手の数ベクトルは 1 列の行列、Lean は `Conf M → ℂ` で、和も `Finset.sum`）。
+人手の主張そのものの具体版 `trace_projFactorProd`（`ClaimTraceCheckNumberOperatorProduct.lean`）である。Step 5 の鎖は、人手が数ベクトルを扱う 1 列の行列
+`Matrix (Conf M) (Fin 1) ℂ` で `colVec_eq_sum_Qproj_mul_step5`・`Qproj_mul_colVec_of_ne_step5`・`Qproj_mul_colVec_self_step5`・
+`eq_zero_of_binWordSum_eq_zero_step5` に人手と 1 対 1 の calc で置き、(5) の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero`（数ベクトル
+`Conf M → ℂ`、和は `Finset.sum`）は人手の範囲 `M_col ≥ 2` で `Matrix.replicateCol (Fin 1)` を通してこの鎖から示す（`M = 0` は mathlib で閉じる）。
 (5)（`ℂ^{2^M}` の直和分解）だけは台が行列環であることを本質的に使うので、ここにしか無い。
 
 ## 章 009 との違い（本章の要点）
@@ -67,6 +66,9 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteProductsOfCommutingMatricesFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixIsRightZeroOfMatMultFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesOmittingOneIndexFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionSumOverBinaryWordsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroMatrixProductAndSumEquationsFromNecSuf
 
 namespace Ising2D
 
@@ -770,31 +772,162 @@ theorem finrank_range_Qproj (T : Finset (CheckIdx M)) :
     ((Module.finrank ℂ (LinearMap.range (Matrix.toLin' (F.Qproj T))) : ℕ) : ℂ) = 1 := by
   rw [← trace_of_idempotent _ (F.Qproj_mul_self T), F.trace_Qproj T]
 
-/-! ## 原文 (5): `ℂ^{2^M}` の直和分解 -/
+/-! ## 原文 Step 5（(5) の証明）
 
-/-- **原文 (5) 前半**: 任意の `x` は `x = ∑_ε Q̌_ε x` と書ける（和が全体を張る）。 -/
+人手は数ベクトル `x ∈ ℂ^{2^{M_col}}` を `mat_mult` のとおり `2^{M_col}` 行 1 列の行列として扱う。Lean の 1 列の行列は
+`Matrix (Conf M) (Fin 1) ℂ` で、Lean の数ベクトル `Conf M → ℂ` とは別の型である。そこで Step 5 の鎖は 1 列の行列について
+人手の行と 1 対 1 の calc で置き（`colVec_eq_sum_Qproj_mul_step5`・`Qproj_mul_colVec_of_ne_step5`・`Qproj_mul_colVec_self_step5`・
+`eq_zero_of_binWordSum_eq_zero_step5`）、(5) の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero`（数ベクトルの型、和は `𝓜̌` の部分集合の上の
+`Finset.sum`）へは、数ベクトルを 1 列の行列へ送る mathlib の単射 `Matrix.replicateCol (Fin 1)` と、語から部分集合への全単射
+`finsetOfBinWord`・`NecSuf.binWordSum_eq_sum` で運ぶ。運ぶ段は人手の証明の行ではない。
+人手の `M_col` が Lean の `r + 1`、人手の和 `Σ_{ε∈{0,1}^𝓜̌}` は `NecSuf.binWordSum r`（`def_sum_over_binary_words`、`m → 2^{M_col}`、`n → 1`、`r → M_col`）、
+零ベクトル `O_{2^{M_col},1}` は Lean の `0` である。`mat_mult_associative` の行は、Step 1 と同じく mathlib の `Matrix.mul_assoc` で受ける
+（人手 `mat_mult_associative` の具体版が無い）。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
+
+/-- **原文 Step 5** の前半の鎖（3 行）: `x = Ix = (Σ_ε Q̌_ε)x = Σ_ε Q̌_εx`。人手の `M_col` が Lean の `r + 1`、
+人手の `x` が 1 列の行列 `x : Matrix (Conf (r + 1)) (Fin 1) ℂ` である。 -/
+theorem colVec_eq_sum_Qproj_mul_step5 {r : ℕ} (F : CheckFermiSetup (r + 1))
+    (x : Matrix (Conf (r + 1)) (Fin 1) ℂ) :
+    x = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε) * x) :=
+  calc x
+      = (1 : TensorPow (r + 1)) * x := (identity_matrix_mul_colVec x).symm
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+                                                        -- （`m → 2^{M_col}`、`n → 1`、`A → x`）を右辺から左辺へ
+    _ = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε)) * x := by rw [sum_Qproj_step2 F]
+                                                        -- Step 2 で示した (2) を右辺から左辺へ
+    _ = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε) * x) := binWordSum_mul_colVec r _ x
+                                                        -- `sum_over_binary_words_distributes_in_left_factor`
+                                                        -- （`m,n → 2^{M_col}`、`p → 1`、`r → M_col`、`X_ε → Q̌_ε`、`C → x`）
+
+/-- **原文 Step 5** の `ε ≠ ε'` の鎖（4 行）: `Q̌_{ε'}y_ε = Q̌_{ε'}(Q̌_εx_ε) = (Q̌_{ε'}Q̌_ε)x_ε = O x_ε = O`。
+`x_ε` の取り方 `y_ε = Q̌_εx_ε` を仮定 `hy` で受ける。 -/
+theorem Qproj_mul_colVec_of_ne_step5 {r : ℕ} (F : CheckFermiSetup (r + 1)) {ε ε' : Fin (r + 1) → Fin 2}
+    (h : ε ≠ ε') (y x : Matrix (Conf (r + 1)) (Fin 1) ℂ) (hy : y = F.Qproj (finsetOfBinWord ε) * x) :
+    F.Qproj (finsetOfBinWord ε') * y = 0 :=
+  calc F.Qproj (finsetOfBinWord ε') * y
+      = F.Qproj (finsetOfBinWord ε') * (F.Qproj (finsetOfBinWord ε) * x) := by rw [hy]
+                                                        -- `x_ε` の取り方
+    _ = (F.Qproj (finsetOfBinWord ε') * F.Qproj (finsetOfBinWord ε)) * x := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative`（`m,n,p → 2^{M_col}`、`q → 1`、
+                                                        -- `A → Q̌_{ε'}`、`B → Q̌_ε`、`C → x_ε`）を右辺から左辺へ
+    _ = (0 : TensorPow (r + 1)) * x := by
+        rw [F.Qproj_mul_Qproj_of_ne (fun hT => h (finsetOfBinWord_bijective.1 hT).symm)]
+                                                        -- Step 1 で示した (1) の `Q̌_εQ̌_{ε'} = 0`（`ε → ε'`、`ε' → ε`）。
+                                                        -- `ε ≠ ε'` を `finsetOfBinWord`（単射）で Lean の添字 `T ≠ T'` へ移すのは運ぶ段
+    _ = 0 := zero_matrix_mul_colVec x                  -- `zero_matrix_is_left_zero_of_mat_mult`（`m,n → 2^{M_col}`、`p → 1`、`B → x_ε`）
+
+/-- **原文 Step 5** の `Q̌_{ε'}y_{ε'}` の鎖（4 行）: `Q̌_{ε'}y_{ε'} = Q̌_{ε'}(Q̌_{ε'}x_{ε'}) = (Q̌_{ε'}Q̌_{ε'})x_{ε'} = Q̌_{ε'}x_{ε'} = y_{ε'}`。 -/
+theorem Qproj_mul_colVec_self_step5 {r : ℕ} (F : CheckFermiSetup (r + 1)) (ε' : Fin (r + 1) → Fin 2)
+    (y x : Matrix (Conf (r + 1)) (Fin 1) ℂ) (hy : y = F.Qproj (finsetOfBinWord ε') * x) :
+    F.Qproj (finsetOfBinWord ε') * y = y :=
+  calc F.Qproj (finsetOfBinWord ε') * y
+      = F.Qproj (finsetOfBinWord ε') * (F.Qproj (finsetOfBinWord ε') * x) := by rw [hy]
+                                                        -- `x_{ε'}` の取り方
+    _ = (F.Qproj (finsetOfBinWord ε') * F.Qproj (finsetOfBinWord ε')) * x := (Matrix.mul_assoc _ _ _).symm
+                                                        -- `mat_mult_associative`（`m,n,p → 2^{M_col}`、`q → 1`、
+                                                        -- `A,B → Q̌_{ε'}`、`C → x_{ε'}`）を右辺から左辺へ
+    _ = F.Qproj (finsetOfBinWord ε') * x := by rw [Qproj_mul_self_step1 F]
+                                                        -- Step 1 の `ε = ε'` の鎖で示した `Q̌_εQ̌_ε = Q̌_ε`（`ε → ε'`）
+    _ = y := hy.symm                                    -- `x_{ε'}` の取り方
+
+/-- **原文 Step 5** の直和の鎖（5 行）: `y_ε ∈ im Q̌_ε`（`trace_of_idempotent` の `im` の定義により `y_ε = Q̌_εx_ε` となる `x_ε` を取る）、
+`Σ_ε y_ε = O` なら、各 `ε'` について
+`y_{ε'} = Q̌_{ε'}y_{ε'} = Σ_ε Q̌_{ε'}y_ε = Q̌_{ε'}(Σ_ε y_ε) = Q̌_{ε'}O = O`。 -/
+theorem eq_zero_of_binWordSum_eq_zero_step5 {r : ℕ} (F : CheckFermiSetup (r + 1))
+    (y : (Fin (r + 1) → Fin 2) → Matrix (Conf (r + 1)) (Fin 1) ℂ)
+    (hy : ∀ ε, ∃ x : Matrix (Conf (r + 1)) (Fin 1) ℂ, y ε = F.Qproj (finsetOfBinWord ε) * x)
+    (hsum : NecSuf.binWordSum r y = 0) (ε' : Fin (r + 1) → Fin 2) : y ε' = 0 := by
+  choose x hx using hy                                  -- `im` の定義により `x_ε` を取る
+  calc y ε'
+      = F.Qproj (finsetOfBinWord ε') * y ε' := (Qproj_mul_colVec_self_step5 F ε' (y ε') (x ε') (hx ε')).symm
+                                                        -- `Q̌_{ε'}y_{ε'}` の鎖を右辺から左辺へ
+    _ = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε') * y ε) :=
+        (binWordSum_eq_of_eq_zero_colVec r ε' (fun ε => F.Qproj (finsetOfBinWord ε') * y ε)
+          (fun ε h => Qproj_mul_colVec_of_ne_step5 F h (y ε) (x ε) (hx ε))).symm
+                                                        -- `sum_over_binary_words_with_one_nonzero_term`
+                                                        -- （`m → 2^{M_col}`、`n → 1`、`r → M_col`、`B_ε → Q̌_{ε'}y_ε`）を右辺から左辺へ。
+                                                        -- 前提は `ε ≠ ε'` の `Q̌_{ε'}y_ε` の鎖
+    _ = F.Qproj (finsetOfBinWord ε') * NecSuf.binWordSum r y := (mul_binWordSum_colVec r _ y).symm
+                                                        -- `sum_over_binary_words_distributes_in_right_factor`
+                                                        -- （`m,n → 2^{M_col}`、`p → 1`、`r → M_col`、`C → Q̌_{ε'}`、`X_ε → y_ε`）を右辺から左辺へ
+    _ = F.Qproj (finsetOfBinWord ε') * (0 : Matrix (Conf (r + 1)) (Fin 1) ℂ) := by rw [hsum]
+                                                        -- `Σ_ε y_ε = O_{2^{M_col},1}`
+    _ = 0 := matrix_mul_zero_colVec _                   -- `zero_matrix_is_right_zero_of_mat_mult`（`m,n → 2^{M_col}`、`p → 1`、`A → Q̌_{ε'}`）
+
+/-! ## 原文 (5): `ℂ^{2^M}` の直和分解
+
+人手の範囲 `M_col ≥ 2`（`M = r + 1` に含まれる）では Step 5 の鎖から運ぶ。`M = 0` は人手の範囲外で、mathlib の
+`Matrix.sum_mulVec`・`Matrix.one_mulVec`・`Matrix.mulVec_sum`・`Matrix.mulVec_zero` で閉じる。 -/
+
+/-- 数ベクトルの族の `Finset.sum` を 1 列の行列へ送ると、1 列の行列の `Finset.sum` になる（運ぶ段。人手の行ではない）。 -/
+theorem replicateCol_finset_sum {ι : Type*} (s : Finset ι) (v : ι → Conf M → ℂ) :
+    Matrix.replicateCol (Fin 1) (∑ i ∈ s, v i) = ∑ i ∈ s, Matrix.replicateCol (Fin 1) (v i) := by
+  ext a b
+  simp [Matrix.sum_apply]
+
+/-- **原文 (5) 前半**: 任意の `x` は `x = ∑_ε Q̌_ε x` と書ける（和が全体を張る）。
+`M = r + 1` では、1 列の行列へ送って Step 5 の前半の鎖 `colVec_eq_sum_Qproj_mul_step5` から示す。 -/
 theorem sum_Qproj_mulVec (x : Conf M → ℂ) :
     ∑ T : Finset (CheckIdx M), (F.Qproj T).mulVec x = x := by
-  rw [← Matrix.sum_mulVec, F.sum_Qproj, Matrix.one_mulVec]
+  match M, F with
+  | 0, F => rw [← Matrix.sum_mulVec, F.sum_Qproj, Matrix.one_mulVec]
+  | r + 1, F =>
+    apply Matrix.replicateCol_injective (ι := Fin 1)
+    calc Matrix.replicateCol (Fin 1) (∑ T : Finset (CheckIdx (r + 1)), (F.Qproj T).mulVec x)
+        = ∑ T : Finset (CheckIdx (r + 1)), F.Qproj T * Matrix.replicateCol (Fin 1) x := by
+          rw [replicateCol_finset_sum]
+          exact Finset.sum_congr rfl (fun T _ => Matrix.replicateCol_mulVec _ _)
+                                                        -- 1 列の行列へ送る（運ぶ段）
+      _ = ∑ ε : Fin (r + 1) → Fin 2, F.Qproj (finsetOfBinWord ε) * Matrix.replicateCol (Fin 1) x :=
+          (Fintype.sum_bijective finsetOfBinWord finsetOfBinWord_bijective _ _ (fun _ => rfl)).symm
+                                                        -- 語から部分集合への全単射で添字を付け替える（運ぶ段）
+      _ = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε) * Matrix.replicateCol (Fin 1) x) :=
+          (NecSuf.binWordSum_eq_sum r _).symm           -- Lean の和を人手の和へ付け替える（運ぶ段）
+      _ = Matrix.replicateCol (Fin 1) x := (colVec_eq_sum_Qproj_mul_step5 F _).symm
+                                                        -- Step 5 の前半の鎖を右辺から左辺へ
 
-/-- **原文 (5) 後半**: `y_ε ∈ im Q̌_ε` かつ `∑_ε y_ε = 0` なら各 `y_ε = 0`（直和性）。 -/
+/-- **原文 (5) 後半**: `y_ε ∈ im Q̌_ε` かつ `∑_ε y_ε = 0` なら各 `y_ε = 0`（直和性）。
+`M = r + 1` では、1 列の行列へ送って Step 5 の直和の鎖 `eq_zero_of_binWordSum_eq_zero_step5` から示す。 -/
 theorem eq_zero_of_sum_eq_zero (y : Finset (CheckIdx M) → Conf M → ℂ)
     (hy : ∀ T, ∃ x, y T = (F.Qproj T).mulVec x)
     (hsum : ∑ T : Finset (CheckIdx M), y T = 0) (T₀ : Finset (CheckIdx M)) : y T₀ = 0 := by
   classical
-  have hfix : ∀ T, (F.Qproj T₀).mulVec (y T) = if T = T₀ then y T else 0 := by
-    intro T
-    obtain ⟨x, hx⟩ := hy T
-    by_cases hT : T = T₀
-    · subst hT
-      rw [if_pos rfl, hx, Matrix.mulVec_mulVec, F.Qproj_mul_self]
-    · rw [if_neg hT, hx, Matrix.mulVec_mulVec,
-        F.Qproj_mul_Qproj_of_ne (Ne.symm hT), Matrix.zero_mulVec]
-  have hkey : (F.Qproj T₀).mulVec (∑ T : Finset (CheckIdx M), y T) = y T₀ := by
-    rw [Matrix.mulVec_sum, Finset.sum_congr rfl (fun T _ => hfix T)]
-    simp
-  rw [hsum, Matrix.mulVec_zero] at hkey
-  exact hkey.symm
+  match M, F, y, hy, hsum, T₀ with
+  | 0, F, y, hy, hsum, T₀ =>
+    have hfix : ∀ T, (F.Qproj T₀).mulVec (y T) = if T = T₀ then y T else 0 := by
+      intro T
+      obtain ⟨x, hx⟩ := hy T
+      by_cases hT : T = T₀
+      · subst hT
+        rw [if_pos rfl, hx, Matrix.mulVec_mulVec, F.Qproj_mul_self]
+      · rw [if_neg hT, hx, Matrix.mulVec_mulVec,
+          F.Qproj_mul_Qproj_of_ne (Ne.symm hT), Matrix.zero_mulVec]
+    have hkey : (F.Qproj T₀).mulVec (∑ T : Finset (CheckIdx 0), y T) = y T₀ := by
+      rw [Matrix.mulVec_sum, Finset.sum_congr rfl (fun T _ => hfix T)]
+      simp
+    rw [hsum, Matrix.mulVec_zero] at hkey
+    exact hkey.symm
+  | r + 1, F, y, hy, hsum, T₀ =>
+    obtain ⟨ε', rfl⟩ := finsetOfBinWord_bijective.2 T₀
+    have hY : ∀ ε, ∃ X : Matrix (Conf (r + 1)) (Fin 1) ℂ,
+        Matrix.replicateCol (Fin 1) (y (finsetOfBinWord ε)) = F.Qproj (finsetOfBinWord ε) * X := by
+      intro ε
+      obtain ⟨x, hx⟩ := hy (finsetOfBinWord ε)
+      exact ⟨Matrix.replicateCol (Fin 1) x, by rw [hx, Matrix.replicateCol_mulVec]⟩
+                                                        -- 1 列の行列へ送る（運ぶ段）
+    have hsumY : NecSuf.binWordSum r (fun ε => Matrix.replicateCol (Fin 1) (y (finsetOfBinWord ε))) = 0 :=
+      calc NecSuf.binWordSum r (fun ε => Matrix.replicateCol (Fin 1) (y (finsetOfBinWord ε)))
+          = ∑ ε : Fin (r + 1) → Fin 2, Matrix.replicateCol (Fin 1) (y (finsetOfBinWord ε)) :=
+            NecSuf.binWordSum_eq_sum r _                -- 人手の和を Lean の和へ付け替える（運ぶ段）
+        _ = ∑ T : Finset (CheckIdx (r + 1)), Matrix.replicateCol (Fin 1) (y T) :=
+            Fintype.sum_bijective finsetOfBinWord finsetOfBinWord_bijective _ _ (fun _ => rfl)
+                                                        -- 語から部分集合への全単射で添字を付け替える（運ぶ段）
+        _ = Matrix.replicateCol (Fin 1) (∑ T : Finset (CheckIdx (r + 1)), y T) :=
+            (replicateCol_finset_sum _ _).symm          -- 1 列の行列へ送る（運ぶ段）
+        _ = 0 := by rw [hsum, Matrix.replicateCol_zero]
+    exact (Matrix.replicateCol_eq_zero (ι := Fin 1) _).1
+      (eq_zero_of_binWordSum_eq_zero_step5 F _ hY hsumY ε')
+                                                        -- Step 5 の直和の鎖
 
 end CheckFermiSetup
 

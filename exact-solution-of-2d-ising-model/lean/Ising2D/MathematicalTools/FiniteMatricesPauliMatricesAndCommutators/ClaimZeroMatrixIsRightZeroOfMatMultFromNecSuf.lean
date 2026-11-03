@@ -23,4 +23,9 @@ theorem matrix_mul_zero_matrix_of_necSuf {m n p : ℕ} (A : Matrix (Fin m) (Fin 
 theorem matrix_mul_zero_matrix_tensorPow {M : ℕ} (A : TensorPow M) : A * (0 : TensorPow M) = 0 :=
   NecSuf.mul_zero_matrix' (fun x => mul_zero x) A
 
+/-- `zero_matrix_is_right_zero_of_mat_mult`（`p → 1`）の、`TensorPow M` と `2^M` 行 1 列の行列での系
+（`NecSuf.mul_zero_matrix'` の特殊化）。 -/
+theorem matrix_mul_zero_colVec {M : ℕ} (A : TensorPow M) : A * (0 : Matrix (Conf M) (Fin 1) ℂ) = 0 :=
+  NecSuf.mul_zero_matrix' (fun x => mul_zero x) A
+
 end Ising2D

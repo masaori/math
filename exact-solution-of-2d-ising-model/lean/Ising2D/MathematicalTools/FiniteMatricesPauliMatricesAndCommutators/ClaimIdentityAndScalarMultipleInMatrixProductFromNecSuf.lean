@@ -51,4 +51,9 @@ theorem smul_mul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : (a �
 theorem mul_smul_matrix_tensorPow {M : ℕ} (a : ℂ) (A B : TensorPow M) : A * (a • B) = a • (A * B) :=
   NecSuf.mul_smul_matrix' a A B
 
+/-- `identity_matrix_is_left_unit_of_mat_mult`（`n → 1`）の、`TensorPow M` と `2^M` 行 1 列の行列（添字 `Conf M` と `Fin 1`）での系
+（`NecSuf.one_mul_matrix` の特殊化）。人手が数ベクトルを `mat_mult` のとおり 1 列の行列として扱う箇所で使う。 -/
+theorem identity_matrix_mul_colVec {M : ℕ} (X : Matrix (Conf M) (Fin 1) ℂ) : (1 : TensorPow M) * X = X :=
+  NecSuf.one_mul_matrix X
+
 end Ising2D
