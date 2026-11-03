@@ -1284,6 +1284,10 @@ targets=(
   Ising2D.finite_sum_smul_one_matrix
   Ising2D.finite_sum_smul_one_matrix_of_necSuf
   Ising2D.finite_sum_smul_one_tensorPow
+  Ising2D.matrix_mul_right_tendsto
+  Ising2D.matrix_mul_right_tendsto_of_necSuf
+  Ising2D.mul_right_tendsto_tensorPow
+  "Ising2D.NecSuf.mul_right_tendsto'"
   Ising2D.matrix_mul_left_tendsto
   Ising2D.smul_matrix_tendsto
   Ising2D.matrix_mul_left_tendsto_of_necSuf
@@ -1808,6 +1812,10 @@ targets=(
   Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec
   Ising2D.CheckFermiSetup.Vprime_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Vprime
+  Ising2D.CheckFermiSetup.partialExpSum_tendsto
+  Ising2D.CheckFermiSetup.complex_exp_partial_sum_tendsto
+  Ising2D.CheckFermiSetup.Vprime_mul_Qproj_of_necSuf
+  Ising2D.CheckFermiSetup.Qproj_mul_Vprime_of_necSuf
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
   Ising2D.CheckFermiSetup.trace_Vprime
   Ising2D.CheckFermiSetup.trace_Vprime_inv

@@ -9,11 +9,11 @@
 `NecSuf.pow_mul_eq_of_mul_eq_smul`（原文 Step 2）と
 `NecSuf.exp_mul_eq_of_mul_eq_smul`（原文 Step 3）、
 および `Ising2D/NecSuf/SimpleEigenvalue.lean` の左右反転版
-（`NecSuf.mul_exp_eq_of_mul_eq_smul`。原文が区別していない
-`Q̌_ε V̌' = e^ǧ Q̌_ε` の形で、後段の単純性の証明が要求する）。
+（`NecSuf.mul_exp_eq_of_mul_eq_smul`。原文 Step 3' の `Q̌_ε V̌' = e^ǧ Q̌_ε` の形で、後段の単純性の証明が要求する）。
+Step 3・Step 3' の具体版 `Vprime_mul_Qproj`・`Qproj_mul_Vprime` は人手の極限の鎖と 1 対 1 の calc で示し、
+同じ主張を必要十分版の特殊化として得る導出は同じフォルダの `ClaimEigenvaluesCheckVprimeFromNecSuf.lean` に置く。
 
-**章 009 の `eigenvalues_of_Vprime` とまったく同じ必要十分版の特殊化である。**
-違いは重複度で、章 009 の `2^{M-m}` が `m = M` により `1` になる。
+必要十分版は章 009 の `eigenvalues_of_Vprime` と同じである（このファイルの具体版は必要十分版を引かず、特殊化は FromNecSuf の側に置く）。違いは重複度で、章 009 の `2^{M-m}` が `m = M` により `1` になる。
 
 ## `γ(θ~_μ)` の扱い
 
@@ -28,10 +28,11 @@ import Ising2D.NecSuf.SimpleEigenvalue
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInLeftFactorFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInRightFactorFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
+import Ising2D.MathematicalTools.VectorAndMatrixNormsAndConvergence.ClaimContinuityOfProductsAndScalarMultiplesFromNecSuf
 
 namespace Ising2D
 
-open Matrix
+open Matrix Filter Topology
 
 namespace CheckFermiSetup
 
@@ -234,7 +235,8 @@ theorem Qproj_mul_Xop (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
 /-- **原文 `eigenvalues_of_check_Vprime` Step 2**: `X̌^k Q̌_ε = ǧ(ε)^k Q̌_ε`。
 人手の帰納法の鎖（`k = 0` の 4 行、`k + 1` の 8 行）と 1 対 1 の calc。行列の冪は `def_exp` (1) の
 `A^0 := I`・`A^{m+1} := A^m A`（mathlib の `pow_zero`・`pow_succ` が同じ形）、数の冪も同じ形で証明の中で定めている。
-同じ主張の必要十分版の特殊化は `NecSuf.pow_mul_eq_of_mul_eq_smul`（`Vprime_mul_Qproj` が使う）。 -/
+同じ主張の必要十分版は `NecSuf.pow_mul_eq_of_mul_eq_smul`（`ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Vprime_mul_Qproj_of_necSuf` が `NecSuf.exp_mul_eq_of_mul_eq_smul` の中で使う）。
+具体版の `Vprime_mul_Qproj` は部分和の鎖 `partialExpSum_mul_Qproj` を経てこの定理を使う。 -/
 theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k : ℕ) :
     F.Xop g ^ k * F.Qproj T = (((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T := by
   induction k with
@@ -270,7 +272,8 @@ theorem Xop_pow_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k 
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 3' の帰納法**: `Q̌_ε X̌^k = ǧ(ε)^k Q̌_ε`。
 人手の鎖（`k = 0` の 4 行、`k + 1` の 7 行）と 1 対 1 の calc。
-同じ主張の必要十分版の特殊化は `NecSuf.mul_exp_eq_of_mul_eq_smul` の中の冪の段（`Qproj_mul_Vprime` が使う）。 -/
+同じ主張の必要十分版は `NecSuf.mul_exp_eq_of_mul_eq_smul` の中の冪の段（`ClaimEigenvaluesCheckVprimeFromNecSuf.lean` の `Qproj_mul_Vprime_of_necSuf` が使う）。
+具体版の `Qproj_mul_Vprime` は部分和の鎖 `Qproj_mul_partialExpSum` を経てこの定理を使う。 -/
 theorem Qproj_mul_Xop_pow (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) (k : ℕ) :
     F.Qproj T * F.Xop g ^ k = (((F.gval g T : ℝ) : ℂ)) ^ k • F.Qproj T := by
   induction k with
@@ -392,25 +395,118 @@ theorem Qproj_mulVec_Qproj_mulVec (T : Finset (CheckIdx M)) (x : Conf M → ℂ)
                                                         -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
                                                         -- （Lean の `Qproj_mul_self` は `Q̌_ε Q̌_ε = Q̌_ε` の形なので mathlib の `sq` で読み替える）
 
-set_option backward.isDefEq.respectTransparency false in
-/-- **原文 `eigenvalues_of_check_Vprime` Step 3**: `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`。 -/
-theorem Vprime_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
-    F.Vprime g * F.Qproj T = ((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T := by
-  have h : NormedSpace.exp (F.Xop g) * F.Qproj T
-      = Complex.exp ((F.gval g T : ℝ) : ℂ) • F.Qproj T :=
-    open scoped Norms.Operator in
-      NecSuf.exp_mul_eq_of_mul_eq_smul (F.Xop_mul_Qproj g T)
-  rw [Vprime, matExp, h, Complex.ofReal_exp]
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の極限の鎖の 1 行目の根拠**: 部分和 `E_K` は `K → ∞` で `V̌' = exp(X̌)` に収束する
+（`def_exp` と `matrix_exp_series_converges` (1)（`N → K`、`A → X̌`））。`matrix_exp_series_converges` の Lean の具体版は無く、Lean の `def_exp` は `matExp_hasSum`（項 `(k!)^{-1} X̌^k` の
+`Finset.range n` の上の和が `n → ∞` で収束する）で、`E_K` は `Finset.range (K + 1)` の上の和なので、添字を `K ↦ K + 1` で送る
+（`Filter.tendsto_add_atTop_nat`）。係数の `(k!)^{-1}` と `1/k!` は mathlib の `one_div` で同じ数である。 -/
+theorem partialExpSum_tendsto (g : CheckIdx M → ℝ) :
+    Tendsto (fun K => F.partialExpSum g K) atTop (𝓝 (F.Vprime g)) := by
+  have h := ((matExp_hasSum (F.Xop g)).tendsto_sum_nat).comp (tendsto_add_atTop_nat 1)
+  refine h.congr fun K => ?_
+  simp only [Function.comp_apply, partialExpSum, one_div]
+
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3 の極限の鎖の 6 行目が引く `scalar_exp_is_limit_of_partial_sums`**
+（係数の集合 `K → ℂ`、`x → ǧ(ε)_ℂ`）: `Σ_{k=0}^{K} z^k/k! → exp(z)`。人手のこの主張の Lean の具体版はまだ無く、
+mathlib の `NormedSpace.expSeries_div_hasSum_exp`（`Complex.exp_eq_exp_ℂ` で `Complex.exp` へ読み替える）で閉じる。
+添字は `partialExpSum_tendsto` と同じく `K ↦ K + 1` で送る。 -/
+theorem complex_exp_partial_sum_tendsto (z : ℂ) :
+    Tendsto (fun K => ∑ k ∈ Finset.range (K + 1), z ^ k / (k.factorial : ℂ)) atTop (𝓝 (Complex.exp z)) := by
+  have h := NormedSpace.expSeries_div_hasSum_exp z
+  rw [← Complex.exp_eq_exp_ℂ] at h
+  exact (h.tendsto_sum_nat).comp (tendsto_add_atTop_nat 1)
 
 set_option backward.isDefEq.respectTransparency false in
-/-- 左右を入れ替えた形 `Q̌_ε V̌' = e^{ǧ(ε)} Q̌_ε`（単純性の証明で使う）。 -/
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3**: `V̌' Q̌_ε = e^{ǧ(ε)} Q̌_ε`。人手の極限の鎖（7 行）と 1 対 1 の calc。
+
+人手の `lim_{K→∞}` は mathlib の `limUnder atTop` で書く。人手の各行の極限は `def_matrix_norm` の意味で、
+その収束は `‖A_K − A‖ → 0` である。Lean の行列の列の収束 `Tendsto … (𝓝 A)` とは、Frobenius ノルム（`def_matrix_norm` の
+行列ノルムと値が一致する）を入れて `tendsto_iff_norm_sub_tendsto_zero` で行き来する（人手の行ではない。収束の定義の読み替え）。
+`limUnder` の値を極限の値に置き換える段（`Filter.Tendsto.limUnder_eq`）は、人手の `matrix_norm_triangle_inequality` (4)
+（極限の一意性。`lim` が一意に定まる極限を表すこと）に当たる。(4) の Lean の具体版は無く、mathlib の `Filter.Tendsto.limUnder_eq` で閉じる。
+- 1 行目: `partialExpSum_tendsto`（`def_exp` と `matrix_exp_series_converges` (1)）。
+- 2 行目: `matrix_multiplication_continuity`（`n → 2^{M_col}`。Lean は `TensorPow M` の系 `mul_right_tendsto_tensorPow`）。
+- 3 行目: 部分和の鎖 `partialExpSum_mul_Qproj` を各 `K` へ。
+- 4 行目: Lean の `G` は初めから `((ǧ(ε) : ℝ) : ℂ)`（`inclusion_rr_to_cc` の `ǧ(ε)_ℂ`）なので、この行は `rfl` である。
+- 5 行目: `(1/k!) z = z (1/k!) = z/k!`（mathlib の `mul_comm`・`mul_one_div`）を各項へ。
+- 6 行目: `scalar_exp_is_limit_of_partial_sums`（`complex_exp_partial_sum_tendsto`）の極限を仮定に置いた
+  `scalar_sequence_times_matrix_converges`（Lean は `TensorPow M` の系 `smul_tendsto_tensorPow`）と、`matrix_norm_triangle_inequality` (4)。
+- 7 行目: `complex_exp_of_real_argument`（Lean の具体版は無く、mathlib の `Complex.ofReal_exp`）。 -/
+theorem Vprime_mul_Qproj (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
+    F.Vprime g * F.Qproj T = ((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T := by
+  letI : NormedAddCommGroup (TensorPow M) := Matrix.frobeniusNormedAddCommGroup
+  set Q := F.Qproj T
+  set G : ℂ := ((F.gval g T : ℝ) : ℂ)
+  have hE := F.partialExpSum_tendsto g
+  -- `E_K Q̌_ε → V̌' Q̌_ε`（`matrix_multiplication_continuity`）
+  have hEQ : Tendsto (fun K => F.partialExpSum g K * Q) atTop (𝓝 (F.Vprime g * Q)) :=
+    tendsto_iff_norm_sub_tendsto_zero.2
+      (mul_right_tendsto_tensorPow Q _ _ (tendsto_iff_norm_sub_tendsto_zero.1 hE))
+  -- `(Σ_{k=0}^{K} G^k/k!) Q̌_ε → exp(G) Q̌_ε`（`scalar_exp_is_limit_of_partial_sums` と `scalar_sequence_times_matrix_converges`）
+  have hcQ : Tendsto (fun K => (∑ k ∈ Finset.range (K + 1), G ^ k / (k.factorial : ℂ)) • Q) atTop
+      (𝓝 (Complex.exp G • Q)) :=
+    tendsto_iff_norm_sub_tendsto_zero.2
+      (smul_tendsto_tensorPow _ _ Q (tendsto_iff_norm_sub_tendsto_zero.1 (complex_exp_partial_sum_tendsto G)))
+  calc F.Vprime g * Q
+      = (limUnder atTop (fun K => F.partialExpSum g K)) * Q := by rw [hE.limUnder_eq]
+                                                        -- `V̌' = exp(X̌)` は部分和 `E_K` の極限（`def_exp`、`matrix_exp_series_converges` (1)）
+    _ = limUnder atTop (fun K => F.partialExpSum g K * Q) := by rw [hE.limUnder_eq, hEQ.limUnder_eq]
+                                                        -- `matrix_multiplication_continuity`（`(A_N)_N → (E_N)_N`、`A → V̌'`、`B → Q̌_ε`）
+    _ = limUnder atTop
+          (fun K => (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * (((F.gval g T : ℝ) : ℂ)) ^ k) • Q) := by
+          congr 1; funext K; exact F.partialExpSum_mul_Qproj g T K
+                                                        -- 上の部分和の鎖を各 `K` へ
+    _ = limUnder atTop (fun K => (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * G ^ k) • Q) := rfl
+                                                        -- 鎖の係数 `ǧ(ε) ∈ ℝ` は `inclusion_rr_to_cc` の `ǧ(ε)_ℂ` として掛けている
+    _ = limUnder atTop (fun K => (∑ k ∈ Finset.range (K + 1), G ^ k / (k.factorial : ℂ)) • Q) := by
+          congr 1; funext K; congr 1
+          exact Finset.sum_congr rfl fun k _ => by rw [mul_comm, mul_one_div]
+                                                        -- `(1/k!) z = z (1/k!) =: z/k!` を各項へ
+    _ = Complex.exp G • Q := hcQ.limUnder_eq
+                                                        -- `scalar_exp_is_limit_of_partial_sums`（`x → ǧ(ε)_ℂ`）の極限を仮定に置いた
+                                                        -- `scalar_sequence_times_matrix_converges` と `matrix_norm_triangle_inequality` (4)
+    _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • Q := by rw [Complex.ofReal_exp]
+                                                        -- `complex_exp_of_real_argument`（`x → ǧ(ε)`。Lean の具体版は無く、mathlib の `Complex.ofReal_exp`）
+
+set_option backward.isDefEq.respectTransparency false in
+/-- **原文 `eigenvalues_of_check_Vprime` Step 3'**: 左右を入れ替えた形 `Q̌_ε V̌' = e^{ǧ(ε)} Q̌_ε`（単純性の証明で使う）。
+人手の極限の鎖の 1〜7 行と 1 対 1 の calc（読み替えは `Vprime_mul_Qproj` と同じ）。2 行目は
+`matrix_multiplication_continuity_in_right_factor`（Lean は `TensorPow M` の系 `mul_left_tendsto_tensorPow`）、3 行目は
+部分和の鎖 `Qproj_mul_partialExpSum` を各 `K` へ。人手の鎖の最後の行「`= V̌'Q̌_ε`（Step 3 の極限の鎖）」は、
+この定理の主張が `e^{ǧ(ε)} Q̌_ε` で止まるので置かない（`Vprime_mul_Qproj` を右辺から左辺へ引けば得られる）。 -/
 theorem Qproj_mul_Vprime (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     F.Qproj T * F.Vprime g = ((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T := by
-  have h : F.Qproj T * NormedSpace.exp (F.Xop g)
-      = Complex.exp ((F.gval g T : ℝ) : ℂ) • F.Qproj T :=
-    open scoped Norms.Operator in
-      NecSuf.mul_exp_eq_of_mul_eq_smul (F.Qproj_mul_Xop g T)
-  rw [Vprime, matExp, h, Complex.ofReal_exp]
+  letI : NormedAddCommGroup (TensorPow M) := Matrix.frobeniusNormedAddCommGroup
+  set Q := F.Qproj T
+  set G : ℂ := ((F.gval g T : ℝ) : ℂ)
+  have hE := F.partialExpSum_tendsto g
+  -- `Q̌_ε E_K → Q̌_ε V̌'`（`matrix_multiplication_continuity_in_right_factor`）
+  have hQE : Tendsto (fun K => Q * F.partialExpSum g K) atTop (𝓝 (Q * F.Vprime g)) :=
+    tendsto_iff_norm_sub_tendsto_zero.2
+      (mul_left_tendsto_tensorPow Q _ _ (tendsto_iff_norm_sub_tendsto_zero.1 hE))
+  have hcQ : Tendsto (fun K => (∑ k ∈ Finset.range (K + 1), G ^ k / (k.factorial : ℂ)) • Q) atTop
+      (𝓝 (Complex.exp G • Q)) :=
+    tendsto_iff_norm_sub_tendsto_zero.2
+      (smul_tendsto_tensorPow _ _ Q (tendsto_iff_norm_sub_tendsto_zero.1 (complex_exp_partial_sum_tendsto G)))
+  calc Q * F.Vprime g
+      = Q * (limUnder atTop (fun K => F.partialExpSum g K)) := by rw [hE.limUnder_eq]
+                                                        -- `V̌' = exp(X̌)` は部分和 `E_K` の極限（Step 3 の級数表示）
+    _ = limUnder atTop (fun K => Q * F.partialExpSum g K) := by rw [hE.limUnder_eq, hQE.limUnder_eq]
+                                                        -- `matrix_multiplication_continuity_in_right_factor`（`(A_N)_N → (E_N)_N`、`A → V̌'`、`B → Q̌_ε`）
+    _ = limUnder atTop
+          (fun K => (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * (((F.gval g T : ℝ) : ℂ)) ^ k) • Q) := by
+          congr 1; funext K; exact F.Qproj_mul_partialExpSum g T K
+                                                        -- 上の部分和の鎖を各 `K` へ
+    _ = limUnder atTop (fun K => (∑ k ∈ Finset.range (K + 1), (1 / (k.factorial : ℂ)) * G ^ k) • Q) := rfl
+                                                        -- 鎖の係数 `ǧ(ε) ∈ ℝ` は `inclusion_rr_to_cc` の `ǧ(ε)_ℂ` として掛けている
+    _ = limUnder atTop (fun K => (∑ k ∈ Finset.range (K + 1), G ^ k / (k.factorial : ℂ)) • Q) := by
+          congr 1; funext K; congr 1
+          exact Finset.sum_congr rfl fun k _ => by rw [mul_comm, mul_one_div]
+                                                        -- `(1/k!) z = z (1/k!) =: z/k!` を各項へ
+    _ = Complex.exp G • Q := hcQ.limUnder_eq
+                                                        -- `scalar_exp_is_limit_of_partial_sums` の極限を仮定に置いた
+                                                        -- `scalar_sequence_times_matrix_converges` と `matrix_norm_triangle_inequality` (4)
+    _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • Q := by rw [Complex.ofReal_exp]
+                                                        -- `complex_exp_of_real_argument`（`x → ǧ(ε)`）
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 4**:
 `im Q̌_ε` の元は固有値 `e^{ǧ(ε)}` の固有ベクトル。 -/
