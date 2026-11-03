@@ -1,0 +1,10 @@
+== gamma_theta_tilde_mu_positive: 一般の点の背理の鎖
+PASS 第 1 行 = 第 2 行（準備の cosh t = g の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS 第 2 行 = 第 3 行（仮定 t = 0 の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS 第 3 行 = 第 4 行（def_cosh_sinh の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS 第 4 行 = 第 5 行（-0 = 0 の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS 第 5 行 = 第 6 行（scalar_exp_zero の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS 第 6 行 = 第 7 行（ℝ の四則。関係なしで一致）
+PASS -0 = 0（QQ）
+-- gamma_theta_tilde_mu_positive: 一般の点の背理の鎖: 7/7 PASS
+RESULT: PASS

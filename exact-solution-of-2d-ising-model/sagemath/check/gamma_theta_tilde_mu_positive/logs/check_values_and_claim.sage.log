@@ -1,0 +1,11 @@
+== gamma_theta_tilde_mu_positive: 具体の値と主張
+PASS 準備: g > 1、g ≥ 1（gamma1_gt_1_theta_tilde の当てはめ）（140 組のうち不一致 0）
+PASS w = g + √(g^2 - 1) は w ≥ 1、w > 1（AA）（140 組のうち不一致 0）
+PASS 準備: cosh t = (exp t + exp(-t))/2 = (w + 1/w)/2 = g（arccosh_properties (2) の当てはめ。AA）（140 組のうち不一致 0）
+PASS 準備: t ≥ 0（arccosh_properties (1) の当てはめ。ボールの下端）（140 組のうち不一致 0）
+PASS 主張: t = γ(θ~_μ) > 0（ボールの下端が正）（140 組のうち不一致 0）
+PASS t = 0 はボールに含まれない（背理の仮定は成り立たない）（140 組のうち不一致 0）
+PASS 組の数 140
+PASS 対照: g = 1 では w = 1、t = log 1 = 0（狭義の不等号は成り立たない）
+-- gamma_theta_tilde_mu_positive: 具体の値と主張: 8/8 PASS
+RESULT: PASS

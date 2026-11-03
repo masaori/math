@@ -4252,113 +4252,145 @@ c_2s_2^*
     labels: ["gamma1_gt_1_theta_tilde"],
     statement: [
       paragraph([
+        ref("def_transfer_matrix_symbols"),
+        " の記号のもと ",
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         "、",
         math(String.raw`\mu \in \check{\mathcal{M}}`), "（", ref("def_check_index_set"), "）",
-        " について、",
+        " とする。",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu) \in \mathbb{R}`),
+        " について",
       ]),
       displayMath(String.raw`\gamma_1(\tilde\theta_\mu) \geq 1, \qquad \text{さらに} \qquad \gamma_1(\tilde\theta_\mu) > 1`),
       paragraph([
-        "が成り立つ。狭義の不等号は ",
+        "が成り立つ。証明は ",
+        ref("gamma1_lower_bound_all_theta"),
+        " を通じて、全実数上の ",
+        math(String.raw`\cos`),
+        " の性質 ",
+        math(String.raw`\cos\theta \leq 1\ (\theta \in \mathbb{R})`),
+        " を前提とする。狭義の不等号は ",
         ref("gamma_2_theta_tilde_nonzero"),
-        " による。これは後段で最大固有値の一意性に使う。",
+        " による。",
       ]),
     ],
     proof: [
       paragraph([
-        "Step 1（",
-        math(String.raw`\gamma_1(\tilde\theta_\mu) > 0`),
-        "）。",
-        math(String.raw`x \in \mathbb{R}`),
-        " について ",
-        math(String.raw`\cosh x - \sinh x = \exp(-x) > 0`),
+        "準備。",
+        math(String.raw`\theta := \tilde\theta_\mu \in \mathbb{R}`),
         "（",
-        ref("cosh_sinh_basic_properties"),
-        "）なので ",
-        math(String.raw`c_1 > s_1 > 0`),
-        "、",
-        math(String.raw`c_2^* > s_2^* > 0`),
+        ref("antiperiodic_exp_sum"),
+        "）、",
+        math(String.raw`g := \gamma_1(\theta) \in \mathbb{R}`),
         "（",
-        math(String.raw`K_1 > 0`),
-        " と、",
-        ref("def_second_dual_coupling_constant"),
-        " による ",
-        math(String.raw`K_2^* \in \mathbb{R}_{>0}`),
-        " より ",
-        math(String.raw`s_1, s_2^* > 0`),
-        "）。また ",
-        math(String.raw`\cos\tilde\theta_\mu \leq 1`),
-        " である。",
         ref("def_gamma1_gamma2_of_theta"),
-        " の定義から",
+        "）、",
+        math(String.raw`r := \left|\gamma_2(\theta)\right| \in \mathbb{R}_{\geq 0}`),
+        "（",
+        ref("def_abs_arg"),
+        "）と置く。現れる量はすべて ",
+        math(String.raw`\mathbb{R}`),
+        " の元で、不等号は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序である（",
+        math(String.raw`\tilde\theta_\mu`),
+        " は ",
+        math(String.raw`\pi`),
+        " を含み、",
+        math(String.raw`g`),
+        " は実数の exp と全実数上の ",
+        math(String.raw`\cos`),
+        " の値から、",
+        math(String.raw`r`),
+        " は非負の平方根から作るので、いずれも ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性に依る）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_1(\tilde\theta_\mu)
-&= c_1c_2^* - s_1s_2^*\cos\tilde\theta_\mu
-   \quad (\because \gamma_1 \text{ の定義}) \\
-&\geq c_1c_2^* - s_1s_2^*
-   \quad (\because \cos\tilde\theta_\mu \leq 1 \text{ かつ } s_1s_2^* > 0) \\
-&> s_1s_2^* - s_1s_2^*
-   \quad (\because c_1 > s_1 > 0,\ c_2^* > s_2^* > 0 \text{ より } c_1c_2^* > s_1s_2^*) \\
-&= 0
-   \quad (\because \mathbb{R} \text{ の四則})
+&g \geq \cosh\left(2K_1 - 2K_2^*\right)\ \text{かつ}\ \cosh\left(2K_1 - 2K_2^*\right) \geq 1
+&&(\because\ \blkref{gamma1_lower_bound_all_theta}\ \text{を}\ \theta\ \text{に適用})\\
+&\Longrightarrow\ g \geq 1
+&&(\because\ \mathbb{R}\ \text{の順序の推移律})\\
+&\Longrightarrow\ g > 0
+&&(\because\ g \geq 1\ \text{と}\ 1 > 0\ \text{に}\ \mathbb{R}\ \text{の順序の推移律})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+&\gamma_2(\theta) \neq 0_{\mathbb{C}}
+&&(\because\ \blkref{gamma_2_theta_tilde_nonzero})\\
+&\Longrightarrow\ r \neq 0
+&&(\because\ \blkref{abs_basic_properties}\ (3)\ \text{の対偶})\\
+&\Longrightarrow\ r > 0
+&&(\because\ \blkref{def_abs_arg}\ \text{の}\ r \geq 0\ \text{かつ}\ r \neq 0)\\
+&\Longrightarrow\ r \cdot r > 0 \cdot r
+&&(\because\ r > 0\ \text{の両辺に}\ 0 < r\ \text{を掛ける})\\
+&\Longrightarrow\ r \cdot r > 0
+&&(\because\ 0 \cdot r = 0)\\
+&\Longrightarrow\ r^2 > 0
+&&(\because\ \text{平方の定義}\ r^2 = r \cdot r)
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2（",
-        math(String.raw`\gamma_1(\tilde\theta_\mu)^2 > 1`),
-        "）。主張の左辺から",
-        ref("det_A_theta_tilde"),
-        " と ",
-        ref("gamma_2_theta_tilde_nonzero"),
-        " を順に引くと",
+        "第 1 の不等式 ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu) \geq 1`),
+        " は準備の ",
+        math(String.raw`g \geq 1`),
+        " である。第 2 の不等式のために ",
+        math(String.raw`g^2`),
+        " を評価する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_1(\tilde\theta_\mu)^2
-&= 1 + \left|\gamma_2(\tilde\theta_\mu)\right|^2
-   \quad (\because \det A(\tilde\theta_\mu)=1 \text{ と固有値の積}) \\
+g^2
+&= 1 + r^2
+&&(\because\ \blkref{det_A_theta_tilde}\ (\gamma_1(\tilde\theta_\mu)^2 = 1 + |\gamma_2(\tilde\theta_\mu)|^2))\\
 &> 1 + 0
-   \quad (\because \gamma_2(\tilde\theta_\mu)\ne0 \text{ より } \left|\gamma_2(\tilde\theta_\mu)\right|^2>0) \\
+&&(\because\ \text{準備の}\ r^2 > 0\ \text{の両辺に}\ 1\ \text{を加える})\\
 &= 1
-   \quad (\because \mathbb{R} \text{ の四則})
+&&(\because\ 0\ \text{は加法の単位元})
 \end{aligned}`,
       ),
       paragraph([
-        "Step 3（結論）。",
-        math(String.raw`t := \gamma_1(\tilde\theta_\mu) > 0`),
-        " と置く。Step 2 より ",
-        math(String.raw`t^2>1`),
-        " である。一方、",
-        math(String.raw`t \leq 1`),
+        math(String.raw`g \leq 1`),
         " と仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-t^2
-&= t\cdot t
-   \quad (\because \text{平方の定義}) \\
-&\leq 1\cdot t
-   \quad (\because t\leq1 \text{ の両辺に }0<t\text{ を掛ける}) \\
-&\leq 1\cdot1
-   \quad (\because t\leq1 \text{ の両辺に }0<1\text{ を掛ける}) \\
+g^2
+&= g \cdot g
+&&(\because\ \text{平方の定義})\\
+&\leq 1 \cdot g
+&&(\because\ g \leq 1\ \text{の両辺に準備の}\ 0 < g\ \text{を掛ける})\\
+&\leq 1 \cdot 1
+&&(\because\ g \leq 1\ \text{の両辺に}\ 0 < 1\ \text{を掛ける})\\
 &= 1
-   \quad (\because \mathbb{R} \text{ の乗法単位元})
+&&(\because\ 1\ \text{は乗法の単位元})
 \end{aligned}`,
       ),
       paragraph([
-        "となり Step 2 の ",
-        math(String.raw`t^2>1`),
-        " と矛盾する。したがって ",
-        math(String.raw`t>1`),
+        "となり、上の ",
+        math(String.raw`g^2 > 1`),
+        " と合わせて ",
+        math(String.raw`1 < g^2 \leq 1`),
         "、すなわち ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu)>1`),
-        " である。さらに ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu) \geq 1`),
-        " は狭義不等式から従う。",
+        math(String.raw`1 < 1`),
+        " となって ",
+        math(String.raw`\mathbb{R}`),
+        " の順序に矛盾する。したがって ",
+        math(String.raw`g \leq 1`),
+        " ではなく、",
+        math(String.raw`\mathbb{R}`),
+        " の順序は全順序なので ",
+        math(String.raw`g > 1`),
+        "、すなわち ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu) > 1`),
+        " である。",
       ]),
     ],
     conversion: {
@@ -4370,6 +4402,8 @@ t^2
         "2026-08-19 の式変形統一で、Step 1 の正値性を一操作ずつの鎖へ分け、Step 2 の平方評価と Step 3 の背理法を主張の左辺から始まる鎖へ開いた。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。" +
           "Step 1 で出典なしに使っていた K_2^* > 0 に def_second_dual_coupling_constant の参照を付けた。",
+        "2026-11-03: SageMath の検算（sagemath/check/gamma1_gt_1_theta_tilde/）を付けるときに証明を直した。Step 1 の γ_1 > 0 は、根拠の無い cos θ~_μ ≤ 1 と c_1 > s_1 > 0 を使っていたのを、gamma1_lower_bound_all_theta の γ_1(θ) ≥ cosh(2K_1 − 2K_2^*) ≥ 1 から g ≥ 1 と g > 0 を出す準備に替えた（第 1 の不等式 γ_1 ≥ 1 は狭義の不等式から従うと書いていたのを、この準備で直接示した）。" +
+          "Step 2 の根拠「det A = 1 と固有値の積」を det_A_theta_tilde の γ_1^2 = 1 + |γ_2|^2 に、「γ_2 ≠ 0 より |γ_2|^2 > 0」を gamma_2_theta_tilde_nonzero・abs_basic_properties (3) からの含意の鎖にした。cos θ ≤ 1（全実数）を前提とすることを主張に書き、主張の中の「後段で最大固有値の一意性に使う」の一文は使い道の説明なので除いた（中身は不変）。",
       ],
     },
   },
@@ -4401,36 +4435,67 @@ t^2
     ],
     proof: [
       paragraph([
+        "準備。",
+        math(String.raw`g := \gamma_1(\tilde\theta_\mu) \in \mathbb{R}`),
+        "、",
+        math(String.raw`t := \gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        " と置く。",
+        ref("gamma1_gt_1_theta_tilde"),
+        " より ",
+        math(String.raw`g > 1`),
+        "、とくに ",
+        math(String.raw`g \geq 1`),
+        " であり、",
         ref("def_gamma_theta"),
         " より ",
-        math(String.raw`\gamma(\tilde\theta_\mu) \geq 0`),
-        " である。",
-        math(String.raw`\gamma(\tilde\theta_\mu) = 0`),
+        math(String.raw`t = \mathrm{arccosh}(g)`),
+        " である。したがって ",
+        ref("arccosh_properties"),
+        " (1)・(2) を ",
+        math(String.raw`y = g`),
+        " に適用して ",
+        math(String.raw`t \geq 0`),
+        "、",
+        math(String.raw`\cosh t = g`),
+        " である。以下の exp は ",
+        ref("def_cosh_sinh"),
+        " のとおり実数の exp である。",
+      ]),
+      paragraph([
+        math(String.raw`t = 0`),
         " と仮定すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_1(\tilde\theta_\mu)
-&= \cosh\gamma(\tilde\theta_\mu)
-&&(\because\ \blkref{def_gamma_theta}\ (\cosh\gamma(\theta) = \gamma_1(\theta))\ \text{を}\ \theta = \tilde\theta_\mu\ \text{に適用})\\
+g
+&= \cosh t
+&&(\because\ \text{準備の}\ \cosh t = g\ (\blkref{arccosh_properties}\ (2)))\\
 &= \cosh 0
-&&(\because\ \text{仮定}\ \gamma(\tilde\theta_\mu) = 0)\\
+&&(\because\ \text{仮定}\ t = 0)\\
 &= \frac{\exp 0 + \exp(-0)}{2}
 &&(\because\ \blkref{def_cosh_sinh})\\
 &= \frac{\exp 0 + \exp 0}{2}
 &&(\because\ -0 = 0)\\
 &= \frac{1 + 1}{2}
-&&(\because\ \blkref{scalar_exp_zero})\\
+&&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{R}))\\
 &= 1
 &&(\because\ \mathbb{R}\ \text{の四則})
 \end{aligned}`,
       ),
       paragraph([
-        "となり、",
-        ref("gamma1_gt_1_theta_tilde"),
-        " の ",
-        math(String.raw`\gamma_1(\tilde\theta_\mu) > 1`),
-        " に矛盾する。よって ",
+        "となり、準備の ",
+        math(String.raw`g > 1`),
+        " と合わせて ",
+        math(String.raw`1 > 1`),
+        " となって ",
+        math(String.raw`\mathbb{R}`),
+        " の順序に矛盾する。よって ",
+        math(String.raw`t \neq 0`),
+        " であり、準備の ",
+        math(String.raw`t \geq 0`),
+        " と合わせて ",
+        math(String.raw`t > 0`),
+        "、すなわち ",
         math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
         " である。",
       ]),
@@ -4445,6 +4510,7 @@ t^2
           "このブロックには γ(θ~_μ) > 0 の主張だけを残した（1 ブロック 1 主張）。中身に合わせ、ラベルを def_gamma_theta_tilde_mu から gamma_theta_tilde_mu_positive へ、" +
           "id を Athetatilde_008_definition_gamma_theta_tilde から Athetatilde_008_claim_gamma_theta_tilde_positive へ改めた。" +
           "statement の括弧書きにあった背理法を、式変形の形で証明へ移した。中身は変えていない。",
+        "2026-11-03: SageMath の検算（sagemath/check/gamma_theta_tilde_mu_positive/）を付けるときに証明を直した。γ ≥ 0 と cosh γ = γ_1 の根拠を def_gamma_theta だけから、それが引く arccosh_properties (1)・(2) の y = γ_1(θ~_μ) への適用に（γ_1 ≥ 1 は gamma1_gt_1_theta_tilde から）、値 γ(θ~_μ) を関数 γ と別の文字 t で置き、矛盾と結論の散文を 1 > 1 と t ≠ 0 かつ t ≥ 0 の形に書いた（中身は不変）。",
       ],
     },
   },
