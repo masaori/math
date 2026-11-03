@@ -7,8 +7,9 @@
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
 Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性の `σ^x_m`・`σ^z_mσ^z_{m+1}`・`G` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`・`boundaryYXY_eq_neg_one_smul_real`・`boundaryYXY_hasRealEntries`）もこのファイルが持つ。
 Step 3 の `S_2`・`S_1^{(+)}` の転置の鎖（`S2_transpose_by_pauli_form`・`S1plus_transpose_by_pauli_form`）と成分の実性（`S2_hasRealEntries`・`S1plus_hasRealEntries`）もこのファイルが持つ。
-Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
-（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
+Step 3 の最後の文（`S_1^{(+)}`・`S_2` は実対称なので `real_symmetric_matrix_is_hermitian` よりエルミート）は `S2_isHermitian_of_real_symmetric`・`S1plus_isHermitian_of_real_symmetric` が持つ。
+同じ結論を、これらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
+（`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）も持っており、使う側はいまはそちらを引いている。
 
 ## 人手証明との対応
 
@@ -36,6 +37,7 @@ Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対�
 | Step 3 の `(S_1^{(+)})^⊤ = S_1^{(+)}` の 7 行（Step 2 の `S_1^{(+)}` の表示 → `transpose_of_matrix_difference` → `transpose_of_matrix_scalar_multiple` を 2 箇所 → `transpose_of_finite_sum_of_matrices` → `(σ^z_mσ^z_{m+1})^⊤` を各項へ → `G^⊤ = G` → Step 2 の表示） | `S1plus_transpose_by_pauli_form` の `calc` の 7 段 |
 | Step 3 の `S_2` の成分の実性（`σ^x_m` の成分の実性 → `finite_sum_of_real_entry_matrices_has_real_entries`（`r → M_col`） → Step 1 の表示 → `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_2^*`）） | `S2_hasRealEntries` |
 | Step 3 の `S_1^{(+)}` の成分の実性（`σ^z_mσ^z_{m+1}` の成分の実性 → `finite_sum_of_real_entry_matrices_has_real_entries`（`r → M_col-1`） → `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_1`、`B → Σσ^zσ^z` と `B → G`） → Step 2 の表示 → `difference_of_real_entry_matrices_has_real_entries`） | `S1plus_hasRealEntries` |
+| Step 3 の最後の文（成分の実性と転置での対称性を合わせて実対称（`def_real_symmetric_complex_matrix`） → `real_symmetric_matrix_is_hermitian`（`n → 2^{M_col}`, `A → S_2` と `A → S_1^{(+)}`）） | `S2_isHermitian_of_real_symmetric`・`S1plus_isHermitian_of_real_symmetric` |
 
 - 人手は `K_1, K_2^* ∈ ℝ` を係数の位置で `(K_1)_ℂ`・`(K_2^*)_ℂ`（`inclusion_rr_to_cc` の略記）と書く。Lean は Step 1・Step 2 の表示と転置の鎖では、それを `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
   これらの鎖は係数の実性を使わないので、仮定 `star K1 = K1` は置かない。
@@ -63,6 +65,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealSc
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimSumsOfRealEntryMatricesHaveRealEntries
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimRealSymmetricMatrixIsHermitian
 
 namespace Ising2D
 
@@ -667,5 +670,19 @@ theorem S1plus_hasRealEntries (K1 : ℝ) (r : ℕ) :
   have hK1G := real_smul_hasRealEntries K1 _ (boundaryYXY_hasRealEntries r)  -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_1`, `B → G`）
   rw [S1plus_eq_K1_smul_sub]                             -- Step 2 の `S_1^{(+)}` の表示
   exact sub_hasRealEntries_tensorPow _ _ hK1sum hK1G     -- `difference_of_real_entry_matrices_has_real_entries`（`A → (K_1)_ℂΣσ^zσ^z`, `B → (K_1)_ℂG`）
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の最後の文（`S_2`）**: `S_2` の成分の実性と `(S_2)^⊤ = S_2` を合わせて実対称
+（`def_real_symmetric_complex_matrix`）とし、`real_symmetric_matrix_is_hermitian`（`n → 2^{M_col}`, `A → S_2`）でエルミートとする。 -/
+theorem S2_isHermitian_of_real_symmetric (K2star : ℝ) (r : ℕ) :
+    ((Complex.I * (K2star : ℂ)) • H2 (r + 1)).IsHermitian :=
+  real_symmetric_isHermitian _
+    ⟨S2_hasRealEntries K2star r, S2_transpose_by_pauli_form (K2star : ℂ) r⟩
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の最後の文（`S_1^{(+)}`）**: `S_1^{(+)}` の成分の実性と `(S_1^{(+)})^⊤ = S_1^{(+)}` を合わせて
+実対称（`def_real_symmetric_complex_matrix`）とし、`real_symmetric_matrix_is_hermitian`（`n → 2^{M_col}`, `A → S_1^{(+)}`）でエルミートとする。 -/
+theorem S1plus_isHermitian_of_real_symmetric (K1 : ℝ) (r : ℕ) :
+    ((Complex.I * (K1 : ℂ)) • H1plus (r + 2)).IsHermitian :=
+  real_symmetric_isHermitian _
+    ⟨S1plus_hasRealEntries K1 r, S1plus_transpose_by_pauli_form (K1 : ℂ) r⟩
 
 end Ising2D

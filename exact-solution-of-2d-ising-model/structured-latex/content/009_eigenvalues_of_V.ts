@@ -539,15 +539,122 @@ Qv_j
         math(String.raw`A`),
         " は**正定値**であるという。",
       ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 最後の段落「成分がすべて実数で A^⊤ = A な行列は \\overline{A_{lk}} = A_{lk} = A_{kl} よりエルミートである。以下ではこれを実対称と呼ぶ」は、定義の中で主張を述べていた（1 ブロック 1 主張）。呼び名を定義 def_real_symmetric_complex_matrix へ、エルミートであることを主張 real_symmetric_matrix_is_hermitian へ切り出し、この段落を外した。共役転置・エルミート・正定値の定義は変えていない。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_definition_real_symmetric_complex_matrix",
+    kind: "definition",
+    title: { text: "実対称な複素行列" },
+    labels: ["def_real_symmetric_complex_matrix"],
+    statement: [
       paragraph([
-        "成分がすべて実数で ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。",
+        math(String.raw`A`),
+        " の成分がすべて実数であり（",
+        ref("def_matrix_with_real_entries"),
+        "）、かつ ",
         math(String.raw`A^{\top} = A`),
-        "（転置に関して対称）な行列は ",
-        math(String.raw`\overline{A_{lk}} = A_{lk} = A_{kl}`),
-        " よりエルミートである。以下ではこれを**実対称**と呼ぶ。",
+        "（転置は ",
+        ref("def_matrix_transpose"),
+        "）であるとき、",
+        math(String.raw`A`),
+        " は**実対称**であるという。",
       ]),
     ],
-    conversion: { status: "added" },
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_hermitian_positive_definite の最後の段落が「以下ではこれを実対称と呼ぶ」と呼び名を定め、同じ段落でエルミートであることを主張していたので、呼び名をこのブロックへ切り出した。def_real_symmetric_matrix（011_max_eigenvalue.ts）は Mat(n,ℝ) の元が対称であること（P_{kl} = P_{lk}）を定め、こちらは Mat(n,ℂ) の元について成分が inclusion_rr_to_cc の像に入ることと転置で不変なことを定める。台集合が違う別の定義であり、互いに引かない。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_real_symmetric_matrix_is_hermitian",
+    kind: "claim",
+    title: { text: "実対称な複素行列はエルミート" },
+    labels: ["real_symmetric_matrix_is_hermitian"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        " が実対称（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）ならば、",
+        math(String.raw`A^* = A`),
+        "、すなわち ",
+        math(String.raw`A`),
+        " は ",
+        ref("def_hermitian_positive_definite"),
+        " の意味でエルミートである。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`k, l \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`A`),
+        " の成分はすべて実数なので（",
+        ref("def_real_symmetric_complex_matrix"),
+        "）、",
+        ref("def_matrix_with_real_entries"),
+        "（",
+        math(String.raw`m, n \to n,\ B \to A,\ p \to l,\ q \to k`),
+        "）により ",
+        math(String.raw`A_{lk} = r_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r \in \mathbb{R}`),
+        " を取れる（",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(A^*\right)_{kl}
+&= \overline{A_{lk}}
+&&\bigl(\because\ \blkref{def_hermitian_positive_definite}\ \text{の共役転置}\bigr)\\
+&= \overline{r_{\mathbb{C}}}
+&&\bigl(\because\ r\ \text{の取り方}\ A_{lk} = r_{\mathbb{C}}\bigr)\\
+&= r_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_conjugate_of_real_inclusion}\bigr)\\
+&= A_{lk}
+&&\bigl(\because\ r\ \text{の取り方}\ A_{lk} = r_{\mathbb{C}}\bigr)\\
+&= \left(A^{\top}\right)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (m, n \to n,\ B \to A,\ p \to k,\ q \to l)\bigr)\\
+&= A_{kl}
+&&\bigl(\because\ A^{\top} = A\text{。}\blkref{def_real_symmetric_complex_matrix}\bigr)
+\end{aligned}`),
+      paragraph([
+        "よって全ての成分が一致し、",
+        math(String.raw`A^* = A`),
+        " を得る。これは ",
+        ref("def_hermitian_positive_definite"),
+        " のエルミートの条件そのものである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。def_hermitian_positive_definite の最後の段落が定義の中で「\\overline{A_{lk}} = A_{lk} = A_{kl} よりエルミートである」と主張し、iH_is_real_symmetric の Step 3・V_plus_is_positive_definite の Step 2・W_is_real_symmetric_positive_definite の Step 2 がそれを「最後の注意」として引いていたので、主張のブロックに切り出した。段落の 2 つの等号（成分が実数なので共役で変わらない、転置で不変）を、共役転置の定義・r の取り方・complex_conjugate_of_real_inclusion・def_matrix_transpose・A^⊤ = A の 1 行 1 根拠に割った。",
+      ],
+    },
   },
 
   {

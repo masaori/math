@@ -1379,6 +1379,12 @@ targets=(
   Ising2D.NecSuf.add_entries_mem
   Ising2D.NecSuf.sub_entries_mem
   Ising2D.NecSuf.finite_sum_entries_mem
+  Ising2D.complex_conjugate_of_real_inclusion
+  Ising2D.real_symmetric_isHermitian
+  Ising2D.real_symmetric_isHermitian_of_necSuf
+  Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
+  Ising2D.S2_isHermitian_of_real_symmetric
+  Ising2D.S1plus_isHermitian_of_real_symmetric
   Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I

@@ -256,3 +256,9 @@ RESULT: PASS
   66 項（M_col = 2..7 で σ^x・Σσ^x・K_2^*Σσ^x・S_2・σ^zσ^z・Σσ^zσ^z・G・K_1Σσ^zσ^z・K_1G・差・S_1^(+) の成分の実性。係数は不定元、QQ[i] の厳密計算）
   否定コントロール 6 件: i を掛けない H_2・H_1^(+) は成分が実でない（M_col ごと）
 RESULT: PASS
+
+##### 2026-11-03 に check_46_iH_real_symmetric_step3_hermitian を足した（iH_is_real_symmetric Step 3 の最後の文: 実対称なのでエルミート）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_46_iH_real_symmetric_step3_hermitian.sage
+  36 項（M_col = 2..7 で S_2・S_1^(+) の成分の実性・転置での対称性・A^* = A。係数は不定元、QQ[i] の厳密計算）
+  否定コントロール 6 件: i を掛けない H_2 は転置で対称だが成分が実でなく、エルミートでない（M_col ごと）
+RESULT: PASS
