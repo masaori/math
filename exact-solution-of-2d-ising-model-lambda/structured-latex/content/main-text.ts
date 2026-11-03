@@ -63497,6 +63497,11 @@ c'=c\ \text{かつ}\ r'\in\{r-1,r+1\}`),
                         title: { text: "セル集合の辺連結性" },
                         labels: ["def_edge_connected_cell_set"],
                         habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.EdgeConnectedCellSet",
+                          "Ising2DLambda.NecSuf.KacWard.ConnectedBy",
+                          "Ising2DLambda.KacWard.edgeConnectedCellSet_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "集合 ", math(String.raw`S\subset\mathbb Z\times\mathbb Z`),
@@ -63737,10 +63742,11 @@ V_{a_j-1,b_j}(\gamma)+V_{a_j,b_j}(\gamma)+H_{a_j,b_j-1}(\gamma)+H_{a_j,b_j}(\gam
                     proof: [
                       paragraph([
                         "歩道沿いの内側帯 ", math(String.raw`\mathcal B(\gamma)`), " は空でなく辺連結である（",
-                        ref("claim_walk_side_interior_band_edge_connected"), "）。定義から ",
-                        math(String.raw`\mathcal B(\gamma)\subset\mathcal F_{\rightarrow}(\gamma)`),
-                        " なので、内側セル集合も空でない。",
+                        ref("claim_walk_side_interior_band_edge_connected"), "）。",
                       ]),
+                      displayMath(String.raw`\mathcal B(\gamma)\subset\mathcal F_{\rightarrow}(\gamma)
+\qquad\bigl(\because\ \blkref{def_walk_side_interior_band}\bigr)`),
+                      paragraph(["したがって内側セル集合も空でない。"]),
                       paragraph([
                         "任意の内側セル ", math(String.raw`x=(r,c)\in\mathcal F_{\rightarrow}(\gamma)`),
                         " を取る。", ref("claim_interior_cells_reach_odd_vertical_edge"), " により、ある ",

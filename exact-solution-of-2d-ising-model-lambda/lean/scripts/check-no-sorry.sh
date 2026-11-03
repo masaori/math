@@ -1678,6 +1678,7 @@ targets=(
   Ising2DLambda.NecSuf.KacWard.four_cells_form_parity_arcs_necSuf
   Ising2DLambda.KacWard.vertexSurroundingCells_formParityArcs_from_necSuf
   Ising2DLambda.NecSuf.KacWard.finite_chain_union_connected_necSuf
+  Ising2DLambda.KacWard.edgeConnectedCellSet_from_necSuf
   Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected
   Ising2DLambda.KacWard.walkSideInteriorBand_nonempty_edgeConnected_from_necSuf
   Ising2DLambda.KacWard.walkSideExteriorBand_nonempty_edgeConnected

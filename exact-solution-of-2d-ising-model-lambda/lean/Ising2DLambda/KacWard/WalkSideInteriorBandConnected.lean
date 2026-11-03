@@ -33,6 +33,16 @@ theorem cellEdgeAdjacent_from_necSuf (p q : ℤ × ℤ) :
 def EdgeConnectedCellSet (S : Set (ℤ × ℤ)) : Prop :=
   ConnectedBy CellEdgeAdjacent S
 
+theorem edgeConnectedCellSet_from_necSuf (S : Set (ℤ × ℤ)) :
+    EdgeConnectedCellSet S ↔
+      Ising2DLambda.NecSuf.KacWard.ConnectedBy
+        (Ising2DLambda.NecSuf.KacWard.cellEdgeAdjacent
+          (fun p q : ℤ × ℤ =>
+            q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1))
+          (fun p q : ℤ × ℤ =>
+            q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1))) S :=
+  Iff.rfl
+
 /-- 持ち上げ点 `(row k, col k)` に接する四セルのうち、右半直線交差数が奇数のもの。 -/
 def surroundingInteriorCells
     (n : ℕ) (row col : ℕ → ℤ) (k : ℕ) : Set (ℤ × ℤ) :=
