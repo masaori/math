@@ -62224,6 +62224,12 @@ s(j')-s(j)
                       title: { text: "原始的な整数の組" },
                       labels: ["def_primitive_integer_pair"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.primitiveIntegerPair",
+                        "Ising2DLambda.KacWard.primitiveIntegerPair_iff_bezout",
+                        "Ising2DLambda.NecSuf.KacWard.primitivePair",
+                        "Ising2DLambda.KacWard.primitiveIntegerPair_from_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           "零でない整数の組 ", math(String.raw`(a,b)\in\mathbb Z\times\mathbb Z`),
@@ -64633,7 +64639,10 @@ t_{\circ}(\gamma)
                         " により、各 ", math(String.raw`t\in\{0,1,\ldots,m-1\}`),
                         " について、ある ", math(String.raw`a_t,b_t\in\mathbb Z`), " があり",
                       ]),
-                      displayMath(String.raw`P_t(\gamma)=\bigl(s(i_t)+La_t,\ s(j_t)+Lb_t\bigr)`),
+                      displayMath(String.raw`\begin{aligned}
+P_t(\gamma)&=\bigl(s(i_t)+La_t,\ s(j_t)+Lb_t\bigr)
+&&\bigl(\because\ \blkref{def_plane_lift},\ \blkref{claim_plane_lift_coordinates}\bigr).
+\end{aligned}`),
                       paragraph(["と書ける。まず ", math(String.raw`r=r'`), " を示す。第 1 成分について"]),
                       displayMath(String.raw`\begin{aligned}
 s(i_r)-s(i_{r'})
