@@ -3768,4 +3768,78 @@ h(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_direct_sum_element_is_sum_of_embedded_components",
+    kind: "claim",
+    title: { text: "直和の元は二つの埋め込み写像の像の和である" },
+    labels: ["claim_direct_sum_element_is_sum_of_embedded_components"],
+    statement: [
+      paragraph([
+        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
+        " と ",
+        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " をその直和（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、",
+        math(String.raw`\mathrm{in}_1:V_1\to V_1\oplus V_2`),
+        " を直和の第一成分への埋め込み写像（",
+        ref("def_embedding_into_first_component_of_direct_sum"),
+        "）、",
+        math(String.raw`\mathrm{in}_2:V_2\to V_1\oplus V_2`),
+        " を直和の第二成分への埋め込み写像（",
+        ref("def_embedding_into_second_component_of_direct_sum"),
+        "）とする。このとき ",
+        math(String.raw`V_1`),
+        " の任意の元 ",
+        math(String.raw`x`),
+        " と ",
+        math(String.raw`V_2`),
+        " の任意の元 ",
+        math(String.raw`y`),
+        " について、",
+        math(String.raw`V_1\oplus V_2`),
+        " の中で次の等式が成り立つ。",
+      ]),
+      displayMath(String.raw`(x,\ y)=\mathrm{in}_1(x)+_{V_1\oplus V_2}\mathrm{in}_2(y)`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x`),
+        " を ",
+        math(String.raw`V_1`),
+        " の任意の元、",
+        math(String.raw`y`),
+        " を ",
+        math(String.raw`V_2`),
+        " の任意の元とする。",
+        math(String.raw`V_1\oplus V_2`),
+        " の元の等しさは成分ごとの等しさなので（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、第一成分を書き換える行では ",
+        math(String.raw`V_1`),
+        " の公理を、第二成分を書き換える行では ",
+        math(String.raw`V_2`),
+        " の公理を当てる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x,\ y)
+&=(x+_{V_1}0_{V_1},\ y)
+&&\left(\because\ V_1\ \text{の加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=(x+_{V_1}0_{V_1},\ y+_{V_2}0_{V_2})
+&&\left(\because\ V_2\ \text{の加法の単位元（}x=y\text{）。}\blkref{def_complex_vector_space}\right)\\
+&=(x+_{V_1}0_{V_1},\ 0_{V_2}+_{V_2}y)
+&&\left(\because\ V_2\ \text{の加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=(x,\ 0_{V_2})+_{V_1\oplus V_2}(0_{V_1},\ y)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\mathrm{in}_1(x)+_{V_1\oplus V_2}(0_{V_1},\ y)
+&&\left(\because\ \mathrm{in}_1\ \text{の定義。}\blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&=\mathrm{in}_1(x)+_{V_1\oplus V_2}\mathrm{in}_2(y)
+&&\left(\because\ \mathrm{in}_2\ \text{の定義。}\blkref{def_embedding_into_second_component_of_direct_sum}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
