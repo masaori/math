@@ -8534,17 +8534,29 @@ V^{(+)}
           math(String.raw`\mu \mapsto M_{\mathrm{col}}+1-\mu`),
           " は ",
           math(String.raw`\check{\mathcal{M}}`),
+          " から ",
+          math(String.raw`\check{\mathcal{M}}`),
+          " への写像であり（",
+          ref("def_check_index_set"),
+          " (2)）、",
+          math(String.raw`\check{\mathcal{M}}`),
           " 上の対合である：",
           math(String.raw`M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu) = \mu`),
-          "。したがって ",
+          "。",
           math(String.raw`\check{n}_\mu`),
           " は ",
-          math(String.raw`\mu \in \check{\mathcal{M}}`),
+          math(String.raw`\mu \in \check{\mathcal{M}} = \{1, \dots, M_{\mathrm{col}}\}`),
           " の ",
           math(String.raw`M_{\mathrm{col}}`),
-          " 個で尽き、",
+          " 個であり、その定義に現れる添字 ",
+          math(String.raw`\mu`),
+          "・",
+          math(String.raw`M_{\mathrm{col}}+1-\mu`),
+          " はどちらも ",
           math(String.raw`\check{\mathcal{M}}`),
-          " の外の添字は要らない。",
+          " に入る（",
+          math(String.raw`\check{\mathcal{M}}`),
+          " の外の添字は要らない）。",
         ],
         [
           "(2) ",
@@ -8557,13 +8569,21 @@ V^{(+)}
         ],
       ]),
       displayMath(
-        String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)
-\left(\check{n}_\mu - \tfrac12 I\right),
+        String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}} \left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+\left(\check{n}_\mu - \left(\tfrac12\right)_{\mathbb{C}} I\right),
 \qquad
 \check{V}' = \exp\!\left(\check{X}\right)`,
       ),
       paragraph([
-        "と書ける。",
+        "と書ける（",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像。",
+        ref("def_check_Vprime"),
+        " と同じく、以降の本文はこの式を ",
+        math(String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu - \tfrac12 I\right)`),
+        " とも書く）。",
         "**",
         math(String.raw`\mu`),
         " は ",
@@ -8575,40 +8595,140 @@ V^{(+)}
     ],
     proof: [
       paragraph([
-        "(1) ",
-        math(String.raw`M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu) = \mu`),
-        " は展開するだけである。",
+        "(1) 写像 ",
+        math(String.raw`\sigma: \check{\mathcal{M}} \to \check{\mathcal{M}},\ \mu \mapsto M_{\mathrm{col}}+1-\mu`),
+        " を置く。",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`\mu \mapsto M_{\mathrm{col}}+1-\mu`),
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " の像 ",
+        math(String.raw`M_{\mathrm{col}}+1-\mu \in \mathbb{Z}`),
         " は ",
         math(String.raw`\check{\mathcal{M}}`),
-        " から ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " への写像であり、いま示したとおり 2 回施すと恒等写像になるので全単射（対合）である。",
+        " に入るので、",
+        math(String.raw`\sigma`),
+        " は写像として定まる。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " を任意に取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma(\sigma(\mu))
+&= M_{\mathrm{col}}+1-\sigma(\mu)
+&&(\because\ \sigma\ \text{の定義}\ (\mu \to \sigma(\mu))) \\
+&= M_{\mathrm{col}}+1-\left(M_{\mathrm{col}}+1-\mu\right)
+&&(\because\ \sigma\ \text{の定義}) \\
+&= \left(M_{\mathrm{col}}+1\right)-\left(M_{\mathrm{col}}+1\right)+\mu
+&&(\because\ \mathbb{Z}\ \text{の減法}\ a-(b-c) = a-b+c) \\
+&= 0+\mu
+&&(\because\ \mathbb{Z}\ \text{の加法の逆元}\ a-a = 0) \\
+&= \mu
+&&(\because\ \mathbb{Z}\ \text{の加法の単位元}\ 0+a = a)
+\end{aligned}`,
+      ),
+      paragraph([
         "したがって ",
+        math(String.raw`\sigma \circ \sigma`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " 上の恒等写像である。これから ",
+        math(String.raw`\sigma`),
+        " が全単射であることを示す。単射: ",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " が ",
+        math(String.raw`\sigma(\mu) = \sigma(\nu)`),
+        " を満たすとき、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mu
+&= \sigma(\sigma(\mu))
+&&(\because\ \text{上の鎖}) \\
+&= \sigma(\sigma(\nu))
+&&(\because\ \sigma(\mu) = \sigma(\nu)) \\
+&= \nu
+&&(\because\ \text{上の鎖}\ (\mu \to \nu))
+\end{aligned}`,
+      ),
+      paragraph([
+        "全射: ",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " に対し ",
+        math(String.raw`\sigma(\nu) \in \check{\mathcal{M}}`),
+        " であり、上の鎖（",
+        math(String.raw`\mu \to \nu`),
+        "）より ",
+        math(String.raw`\sigma(\sigma(\nu)) = \nu`),
+        " なので、",
+        math(String.raw`\nu`),
+        " は ",
+        math(String.raw`\sigma(\nu)`),
+        " の像である。よって ",
+        math(String.raw`\sigma`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " 上の対合（2 回施すと恒等写像になる全単射）である。",
+      ]),
+      paragraph([
+        "主張 (1) の残りの二つ（",
+        math(String.raw`\check{n}_\mu`),
+        " の個数と、その添字が ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " に入ること）は、対合であることではなく ",
+        ref("def_check_index_set"),
+        " から従う。",
+        math(String.raw`\check{\mathcal{M}} = \{1, \dots, M_{\mathrm{col}}\}`),
+        " は ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個の元を持つ（",
+        ref("def_check_index_set"),
+        " の定義）ので、",
         math(String.raw`\check{n}_\mu`),
         "（",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
-        "）を作るのに ",
+        "）は ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個である。",
+        math(String.raw`\check{n}_\mu = \check\psi_\mu^\dagger\,\check\psi_{\sigma(\mu)}`),
+        " に現れる添字は ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " と、冒頭で ",
+        ref("def_check_index_set"),
+        " (2) により ",
         math(String.raw`\check{\mathcal{M}}`),
-        " の外の添字は現れない。",
+        " に入ると確かめた ",
+        math(String.raw`\sigma(\mu)`),
+        " である。",
       ]),
       paragraph([
         "(2) ",
-        ref("def_check_Vprime"),
-        " の ",
-        math(String.raw`\check{X} = \sum_{\mu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} - \tfrac12 I\right)`),
-        " の各項の第 1 因子が定義により ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " のすべてについて ",
         math(String.raw`\check{n}_\mu`),
-        " である。",
+        " は定義されている（主張の前置き）。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{X}
+&= \sum_{\mu \in \check{\mathcal{M}}} \left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+\left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu} - \left(\tfrac12\right)_{\mathbb{C}} I\right)
+&&(\because\ \blkref{def_check_Vprime}\ \text{の}\ \check{X}\ \text{の定義}) \\
+&= \sum_{\mu \in \check{\mathcal{M}}} \left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+\left(\check{n}_\mu - \left(\tfrac12\right)_{\mathbb{C}} I\right)
+&&(\because\ \text{各項へ}\ \check{n}_\mu := \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\ \text{の定義})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\check{V}' = \exp\!\left(\check{X}\right)
+\qquad (\because\ \blkref{def_check_Vprime}\ \text{の}\ \check{V}'\ \text{の定義})`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
         "009 章の def_number_operator の半整数運動量版。対になる添字は −μ ではなく M+1−μ である（conjugate_index_of_check_Z_Y、def_check_index_set (2)）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01。対を −μ に取り違えると冪等性が残差 2.59 で破れることも対照として確認した。",
+        "2026-11-03: 全証明の SageMath 検算で、証明の (1) を σ(σ(μ)) = μ の等号の鎖と単射・全射の鎖に、(2) を def_check_Vprime の X̌ から始まる鎖に書き直し、主張 (2) の実数係数を包含の像 (·)_C で書いた（中身は不変）。検算は sagemath/check/def_check_number_operator/。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
       ],
     },

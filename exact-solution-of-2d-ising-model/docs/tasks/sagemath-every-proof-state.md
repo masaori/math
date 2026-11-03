@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 391 件のうち、SageMath の検算が無いもの 45 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 394 件のうち、SageMath の検算が無いもの 44 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -289,13 +289,20 @@
   人手証明を直した（計算の誤りは無かった。主張は不変）: 旧 Step 1 の「単位的環準同型かつ線型」は def_T_g の T_g と mat_conj の T_B を区別せずに mat_conj・conjugation_is_ring_homomorphism を当てていたので、T'_g を置いて準備 1 の二つの鎖で結んだ。復元公式を recover_Z_Y_from_check_Z_Y の主張の形（(M_col)_C^{-1} と係数を左に）にそろえ、旧 Step 2 の「線型性」1 行を 13 個の等号に開いた（matrix_conjugation_preserves_finite_sum、μ_ℤ ∈ M̌）。旧 Step 3 の αx+βy を Z_Y_generate_algebra の (iii) に合わせて和とスカラー倍の鎖に分けた。二回のレビューで指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は変えていない。このモジュールの `lake build`・`check-no-sorry.sh` は通る）: `ClaimTVPlusEqTCheckVprime.lean` は mathlib の `AlgHom.equalizer` と `checkZ_checkY_generate_algebra`（Ž, Y̌ の生成性。人手の Step 1 の復元と Step 3 を合わせたもの）で閉じる別の経路であり、人手の準備 1・Step 1 の 13 個の等号と 1 対 1 でない。
 
+- `def_check_number_operator`（ň_μ := ψ̌_μ^† ψ̌_{M_col+1−μ} の定義と、共役添字の対合・X̌ と V̌' の書き換え）: `sagemath/check/def_check_number_operator/`。
+  (1) は σ(σ(μ)) の鎖の 5 行を `ZZ[M, μ]` の多項式で、写像として定まること・対合・単射・全射を M_col = 2..40 の `ZZ` で厳密に確かめた。(2) の X̌ の鎖は γ(θ̃_μ) を独立な不定元に置き、各 μ の係数を E_μ := F(r_μ) の中で厳密に比べた（ψ̌_{M_col+1−μ} は r_{M_col+1−μ}^2 = r_μ^2 を確かめて E_μ へ移した）。X̌ を γ の実際の値で組んだものと V̌' = exp(X̌) は ComplexBallField(512) で囲んで、結合定数 3 組 × M_col = 2..4 で確かめた。(2) は定義の代入なので、検算は積の作り方・体の移し方の確認であることを overview に書いた。
+  人手証明を直した（計算の誤りは無かった。主張の中身は不変）: 証明の散文を、(1) は σ(σ(μ)) = μ の 5 行の鎖と単射の 3 行の鎖・全射の段落に、(2) は def_check_Vprime の X̌ から始まる鎖に替えた。主張 (2) の実数係数を (·)_C で書き、主張 (1) の「対合である。したがって M̌ の外の添字は要らない」を、写像であること（def_check_index_set (2)）・対合・個数・添字の帰属に分けて根拠を付けた。二回のレビューで指摘が無くなるまで直した。
+  申し送り（Lean の連続実行の受け持ち。Lean は変えていない）: `DefinitionCheckNumberOperator.lean` の `conjIdx_involutive` は `simp` 一つで、人手の σ(σ(μ)) の 5 行の鎖・単射・全射の鎖と 1 対 1 でない（単射は `Function.Involutive.injective`、全射は無い）。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_check_number_operator`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `iH_is_real_symmetric`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`def_check_number_operator` のレビューで見つかった（記号の使い回し。今回の差分より前から）: `def_check_Vprime` は「以降の本文は X̌ を Σ γ(θ̃_μ)(ψ̌^†ψ̌ − ½I) とも書く（実数によるスカラー倍は像 (·)_C によるスカラー倍を表す）」と約束し、`def_check_number_operator` (2) も同じ略記を使う。実数 γ・½ を ℂ のスカラーの記号として使い回す約束で、「同じ記号を 2 つの集合の元として使い回さない」に触れる。下流（`V_plus_eq_c_exp_sum_gamma_check_number_operator`、`eigenvalue_problem_eigenvalues_of_V_plus.ts` の X̌Q̌_ε の鎖など）がこの略記の形で引いているので、この単位では主張を (·)_C で書いたうえで略記の約束は残した。直すには `def_check_Vprime` と下流を (·)_C の形にそろえ、約束を除く。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`T_V_plus_eq_T_check_Vprime_on_check_Z_Y` のレビューで見つかった（主張の欠け。今回の差分より前から）: `diagonalization_check_P_D` の主張は P̌_μ^{-1} を使うが、P̌_μ ∈ Mat(2,ℂ)^×（`def_invertible_elements_of_R` の M = 1）を主張しておらず、証明も「det ≠ 0 より P̌^{-1} が存在する」をラベル無しで済ませている（2×2 行列の逆行列を与えるブロックが無い件は既出）。使う側（`commutation_V_plus_check_psi`・`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`）は「主張に現れる P̌_μ^{-1} は M = 1 の逆元」と読んで使った。直すには主張に P̌_μ ∈ Mat(2,ℂ)^× を足して証明で示す。検算の付いたブロックの見直しで扱う。
 
