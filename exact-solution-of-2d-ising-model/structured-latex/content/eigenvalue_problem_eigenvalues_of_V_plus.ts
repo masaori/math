@@ -2435,6 +2435,24 @@ X\,\check{n}_\nu
 = 2^{M_{\mathrm{col}}-k}`,
       ),
       paragraph([
+        math(String.raw`k \geq 1`),
+        " のとき左辺の積は ",
+        ref("def_finite_product_of_matrices"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ r \to k,\ A_j \to R_{\mu_j}^{(e_j)}`),
+        "）の左から順に掛ける有限積 ",
+        math(String.raw`\prod_{j=1}^{k} R_{\mu_j}^{(e_j)}`),
+        "、右辺は ",
+        ref("def_power_of_complex_number"),
+        " の冪である（",
+        math(String.raw`\mu_1,\dots,\mu_k`),
+        " は ",
+        math(String.raw`\check{\mathcal{M}}`),
+        " の相異なる元なので ",
+        math(String.raw`k \leq M_{\mathrm{col}}`),
+        "）。",
+      ]),
+      paragraph([
         "（",
         math(String.raw`k = 0`),
         " のときは空の積を ",
@@ -2471,122 +2489,270 @@ X\,\check{n}_\nu
     ],
     proof: [
       paragraph([
-        math(String.raw`\check{n}_\mu \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " であり ",
-        math(String.raw`I`),
-        " は ",
-        math(String.raw`2^{M_{\mathrm{col}}}`),
-        " 次の単位行列なので、",
-        ref("trace_basic_properties"),
-        " (3) より ",
-        math(String.raw`\mathrm{tr}(I) = 2^{M_{\mathrm{col}}}`),
-        " である（トレースは ",
+        "以下 ",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書き、トレースは ",
         ref("def_trace"),
-        "）。",
+        "、積は ",
+        ref("mat_mult"),
+        "（",
+        math(String.raw`m, n, p \to 2^{M_{\mathrm{col}}}`),
+        "）による。",
         math(String.raw`k`),
-        " に関する帰納法で示す。",
+        " についての帰納法で、相異なる添字の全ての列 ",
+        math(String.raw`\mu_1,\dots,\mu_k`),
+        " と全ての ",
+        math(String.raw`e_1,\dots,e_k`),
+        " について示す。",
       ]),
       paragraph([
         "基底段階（",
         math(String.raw`k = 0`),
-        "）では、空の積が単位行列であることから",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\mathrm{tr}(I)
-&= 2^{M_{\mathrm{col}}}
-   \quad (\because \text{トレースの基本性質 (3)。}\blkref{trace_basic_properties}) \\
-&= 2^{M_{\mathrm{col}}-0}
-   \quad (\because \mathbb C\text{ の四則})
-\end{aligned}`,
-      ),
-      paragraph(["したがって主張が成立する。"]),
-      paragraph([
-        "帰納段階：",
-        math(String.raw`k \geq 1`),
-        " とし、相異なる ",
-        math(String.raw`k-1`),
-        " 個の添字（と任意の ",
-        math(String.raw`e`),
-        " の選び方）については主張が成り立つと仮定する。相異なる ",
-        math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
-        " と ",
-        math(String.raw`e_1,\dots,e_k \in \{0,1\}`),
-        " を取り、",
-      ]),
-      displayMath(
-        String.raw`P := R_{\mu_2}^{(e_2)}R_{\mu_3}^{(e_3)}\cdots R_{\mu_k}^{(e_k)}`,
-      ),
-      paragraph([
-        "とおく。",
-        math(String.raw`\mu_1 \neq \mu_j`),
-        "（",
-        math(String.raw`j = 2,\dots,k`),
-        "）なので ",
-        ref("check_number_operators_commute"),
-        " (1) より ",
-        math(String.raw`\check\psi_{\mu_1}^\dagger`),
-        " と ",
-        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_1}`),
-        " はどの ",
-        math(String.raw`\check{n}_{\mu_j}`),
-        " とも可換であり、",
+        "）。空の積は主張の読みにより ",
         math(String.raw`I`),
-        " は任意の行列と可換だから（",
-        ref("scalar_identity_commutes"),
-        "）、",
-        math(String.raw`R_{\mu_j}^{(e_j)} \in \left\{\check{n}_{\mu_j},\, I - \check{n}_{\mu_j}\right\}`),
-        " とも可換である。したがって積 ",
-        math(String.raw`P`),
-        " とも可換である。同じく (2) と ",
-        ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`\check{n}_{\mu_1}`),
-        " と ",
-        math(String.raw`P`),
-        " は可換である。",
-      ]),
-      paragraph([
-        "まず ",
-        math(String.raw`2\,\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right) = \mathrm{tr}(P)`),
-        " を示す。途中で使う ", ref("check_number_operator_idempotent"),
-        " の第 2 式は ", math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_1}\check\psi_{\mu_1}^{\dagger}=I-\check n_{\mu_1}`),
         " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-&= \mathrm{tr}\!\left(\check\psi_{\mu_1}^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,P\right)
-   \quad (\because \check{n}_{\mu_1}\ \text{の定義。}\blkref{def_check_number_operator}) \\
-&= \mathrm{tr}\!\left(\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,P\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \text{トレースの巡回性を } A = \check\psi_{\mu_1}^\dagger,\
-       B = \check\psi_{M_{\mathrm{col}}+1-\mu_1}P \text{ に適用。}\blkref{trace_basic_properties}) \\
-&= \mathrm{tr}\!\left(P\,\check\psi_{M_{\mathrm{col}}+1-\mu_1}\,\check\psi_{\mu_1}^\dagger\right)
-   \quad (\because \check\psi_{M_{\mathrm{col}}+1-\mu_1} \text{ と } P \text{ の可換性（上で確認）}) \\
-&= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_1}\right)\right)
-   \quad (\because \check{n}_{\mu_1}\ \text{の冪等性の第 2 式。}\blkref{check_number_operator_idempotent}) \\
-&= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\,\check{n}_{\mu_1}\right)
-   \quad (\because \text{分配則とトレースの線型性。}\blkref{trace_basic_properties}) \\
-&= \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-   \quad (\because \check{n}_{\mu_1} \text{ と } P \text{ が可換})
+\mathrm{tr}(I)
+&= \sum_{l=1}^{2^{M_{\mathrm{col}}}} 1_{\mathbb{C}}
+   \quad \left(\because\ \blkref{trace_basic_properties}\ \text{(3)}\ (n \to 2^{M_{\mathrm{col}}})\right) \\
+&= 2^{M_{\mathrm{col}}}
+   \quad (\because 1_{\mathbb{C}}\ \text{を}\ 2^{M_{\mathrm{col}}}\ \text{個足した和。}\mathbb{C}\ \text{の四則}) \\
+&= 2^{M_{\mathrm{col}}-0}
+   \quad (\because \mathbb{Z}\ \text{の計算}\ M_{\mathrm{col}} - 0 = M_{\mathrm{col}})
 \end{aligned}`,
       ),
       paragraph([
-        "直前の鎖を移項し、2 で割ると",
+        "帰納段階。",
+        math(String.raw`k \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`k-1`),
+        " 個の相異なる添字の全ての列と全ての ",
+        math(String.raw`e`),
+        " の選び方について主張が成り立つと仮定する。相異なる ",
+        math(String.raw`\mu_1,\dots,\mu_k \in \check{\mathcal{M}}`),
+        " と ",
+        math(String.raw`e_1,\dots,e_k \in \{0,1\}`),
+        " を取る。",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        "（",
+        ref("def_check_index_set"),
+        "）の相異なる ",
+        math(String.raw`k`),
+        " 個の元なので ",
+        math(String.raw`k \leq M_{\mathrm{col}}`),
+        " であり、",
+        math(String.raw`M_{\mathrm{col}}-k,\ M_{\mathrm{col}}-(k-1) \in \mathbb{Z}_{\geq 0}`),
+        " である。",
+        math(String.raw`P \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を、",
+        math(String.raw`k = 1`),
+        " なら ",
+        math(String.raw`P := I`),
+        "、",
+        math(String.raw`k \geq 2`),
+        " なら ",
+        math(String.raw`P := \prod_{j=1}^{k-1} R_{\mu_j}^{(e_j)}`),
+        "（",
+        ref("def_finite_product_of_matrices"),
+        "、",
+        math(String.raw`r \to k-1`),
+        "）と置く。",
+        math(String.raw`P`),
+        " は ",
+        math(String.raw`k-1`),
+        " 個の相異なる添字 ",
+        math(String.raw`\mu_1,\dots,\mu_{k-1}`),
+        " の積（",
+        math(String.raw`k = 1`),
+        " なら空の積）なので、帰納法の仮定より",
+      ]),
+      displayMath(String.raw`\mathrm{tr}(P) = 2^{M_{\mathrm{col}}-(k-1)}`),
+      paragraph([
+        "である。以下、",
+        math(String.raw`\check{n}_{\mu_k} = \check\psi_{\mu_k}^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}`),
+        "（",
+        ref("def_check_number_operator"),
+        "）を使う。",
+      ]),
+      paragraph([
+        "準備 1（最後の因子を分ける）。",
+        math(String.raw`k = 1`),
+        " のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-2\,\mathrm{tr}\!\left(\check n_{\mu_1}P\right)
-&=\mathrm{tr}(P)
-   \quad (\because \mathbb C\text{ の四則}) \\
-\mathrm{tr}\!\left(\check n_{\mu_1}P\right)
-&=\frac12\,\mathrm{tr}(P)
-   \quad (\because \mathbb C\text{ の四則})
+\prod_{j=1}^{1} R_{\mu_j}^{(e_j)}
+&= R_{\mu_1}^{(e_1)}
+   \quad (\because\ \blkref{def_finite_product_of_matrices}) \\
+&= I\,R_{\mu_1}^{(e_1)}
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to R_{\mu_1}^{(e_1)})\ \text{を右辺から左辺へ}\right) \\
+&= P\,R_{\mu_k}^{(e_k)}
+   \quad (\because P\ \text{の置き方}\ (k = 1))
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`k \geq 2`), " のとき"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\prod_{j=1}^{k} R_{\mu_j}^{(e_j)}
+&= \Bigl(\prod_{j=1}^{k-1} R_{\mu_j}^{(e_j)}\Bigr) R_{\mu_k}^{(e_k)}
+   \quad (\because\ \blkref{def_finite_product_of_matrices}\ (r \to k-1)) \\
+&= P\,R_{\mu_k}^{(e_k)}
+   \quad (\because P\ \text{の置き方}\ (k \geq 2))
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 2（",
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_k}`),
+        " と ",
+        math(String.raw`P`),
+        " の可換性）。まず単位行列との積の順序を入れ替える：",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,I
+&= \check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_{M_{\mathrm{col}}+1-\mu_k})\right) \\
+&= I\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \check\psi_{M_{\mathrm{col}}+1-\mu_k})\ \text{を右辺から左辺へ}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`j \in \{1,\dots,k-1\}`),
+        " を取る。",
+        math(String.raw`\mu_j \neq \mu_k`),
+        " なので、",
+        math(String.raw`e_j = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,R_{\mu_j}^{(1)}
+&= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\,\check{n}_{\mu_j}
+   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義（主張）}) \\
+&= \check{n}_{\mu_j}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad \left(\because\ \blkref{check_number_operators_commute}\ \text{(1) の第 2 式}\ (\mu \to \mu_k,\ \nu \to \mu_j)\right) \\
+&= R_{\mu_j}^{(1)}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad (\because R_{\mu_j}^{(1)}\ \text{の定義（主張）})
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`e_j = 0`), " なら"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,R_{\mu_j}^{(0)}
+&= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\left(I - \check{n}_{\mu_j}\right)
+   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義（主張）}) \\
+&= \left(I - \check{n}_{\mu_j}\right)\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad \left(\because\ \blkref{commuting_with_difference}\ (n \to 2^{M_{\mathrm{col}}},\ G \to \check\psi_{M_{\mathrm{col}}+1-\mu_k},\ X \to I,\ W \to \check{n}_{\mu_j})\text{。前提は上の単位行列との積の鎖と、}\blkref{check_number_operators_commute}\ \text{(1) の第 2 式}\ (\mu \to \mu_k,\ \nu \to \mu_j)\right) \\
+&= R_{\mu_j}^{(0)}\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad (\because R_{\mu_j}^{(0)}\ \text{の定義（主張）})
+\end{aligned}`,
+      ),
+      paragraph([
+        "これで全ての ",
+        math(String.raw`j \in \{1,\dots,k-1\}`),
+        " について ",
+        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu_k}R_{\mu_j}^{(e_j)} = R_{\mu_j}^{(e_j)}\check\psi_{M_{\mathrm{col}}+1-\mu_k}`),
+        " である。",
+        math(String.raw`k = 1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,P
+&= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\,I
+   \quad (\because P\ \text{の置き方}\ (k = 1)) \\
+&= I\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad (\because \text{上の単位行列との積の鎖}) \\
+&= P\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad (\because P\ \text{の置き方}\ (k = 1))
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`k \geq 2`), " なら"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,P
+&= \check\psi_{M_{\mathrm{col}}+1-\mu_k}\prod_{j=1}^{k-1} R_{\mu_j}^{(e_j)}
+   \quad (\because P\ \text{の置き方}\ (k \geq 2)) \\
+&= \Bigl(\prod_{j=1}^{k-1} R_{\mu_j}^{(e_j)}\Bigr)\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad \left(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to k-1,\ X \to \check\psi_{M_{\mathrm{col}}+1-\mu_k},\ A_j \to R_{\mu_j}^{(e_j)})\text{。前提は直前の段落}\right) \\
+&= P\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}
+   \quad (\because P\ \text{の置き方}\ (k \geq 2))
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 3（",
+        math(String.raw`I - \check{n}_{\mu_k}`),
+        " を右から掛けたトレース）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_k}\right)\right)
+&= \mathrm{tr}\!\left(P\left(I + \left(-\check{n}_{\mu_k}\right)\right)\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (A \to I,\ B \to \check{n}_{\mu_k})\right) \\
+&= \mathrm{tr}\!\left(PI + P\left(-\check{n}_{\mu_k}\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (A \to P,\ B \to I,\ C \to -\check{n}_{\mu_k})\right) \\
+&= \mathrm{tr}\!\left(P + P\left(-\check{n}_{\mu_k}\right)\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (A \to P)\right) \\
+&= \mathrm{tr}\!\left(P + \left(-\left(P\check{n}_{\mu_k}\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (A \to P,\ B \to \check{n}_{\mu_k})\right) \\
+&= \mathrm{tr}\!\left(1_{\mathbb{C}}P + \left(-\left(P\check{n}_{\mu_k}\right)\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (A \to P)\ \text{を右辺から左辺へ}\right) \\
+&= \mathrm{tr}\!\left(1_{\mathbb{C}}P + \left(-1_{\mathbb{C}}\right)\left(P\check{n}_{\mu_k}\right)\right)
+   \quad \left(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\ (A \to P\check{n}_{\mu_k})\right) \\
+&= 1_{\mathbb{C}}\,\mathrm{tr}(P) + \left(-1_{\mathbb{C}}\right)\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad \left(\because\ \blkref{trace_basic_properties}\ \text{(1)}\ (n \to 2^{M_{\mathrm{col}}},\ \alpha \to 1_{\mathbb{C}},\ \beta \to -1_{\mathbb{C}},\ A \to P,\ B \to P\check{n}_{\mu_k})\right) \\
+&= \mathrm{tr}(P) + \left(-1_{\mathbb{C}}\right)\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad (\because 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \mathrm{tr}(P) + \left(-\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)\right)
+   \quad \left(\because\ \blkref{multiply_by_minus_one}\ (z \to \mathrm{tr}(P\check{n}_{\mu_k}))\ \text{を右辺から左辺へ}\right) \\
+&= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad \left(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "まず ",
+        math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k}) = \tfrac12\,\mathrm{tr}(P)`),
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+&= \mathrm{tr}\!\left(P\left(\check\psi_{\mu_k}^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu_k}\right)\right)
+   \quad (\because\ \blkref{def_check_number_operator}) \\
+&= \mathrm{tr}\!\left(\left(P\check\psi_{\mu_k}^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\mu_k}\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (A \to P,\ B \to \check\psi_{\mu_k}^\dagger,\ C \to \check\psi_{M_{\mathrm{col}}+1-\mu_k})\ \text{を右辺から左辺へ}\right) \\
+&= \mathrm{tr}\!\left(\check\psi_{M_{\mathrm{col}}+1-\mu_k}\left(P\check\psi_{\mu_k}^\dagger\right)\right)
+   \quad \left(\because\ \blkref{trace_basic_properties}\ \text{(2)}\ (A \to P\check\psi_{\mu_k}^\dagger,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu_k})\right) \\
+&= \mathrm{tr}\!\left(\left(\check\psi_{M_{\mathrm{col}}+1-\mu_k}P\right)\check\psi_{\mu_k}^\dagger\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (A \to \check\psi_{M_{\mathrm{col}}+1-\mu_k},\ B \to P,\ C \to \check\psi_{\mu_k}^\dagger)\ \text{を右辺から左辺へ}\right) \\
+&= \mathrm{tr}\!\left(\left(P\check\psi_{M_{\mathrm{col}}+1-\mu_k}\right)\check\psi_{\mu_k}^\dagger\right)
+   \quad (\because \text{準備 2}) \\
+&= \mathrm{tr}\!\left(P\left(\check\psi_{M_{\mathrm{col}}+1-\mu_k}\,\check\psi_{\mu_k}^\dagger\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (A \to P,\ B \to \check\psi_{M_{\mathrm{col}}+1-\mu_k},\ C \to \check\psi_{\mu_k}^\dagger)\right) \\
+&= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_k}\right)\right)
+   \quad \left(\because\ \blkref{check_number_operator_idempotent}\ \text{(2)}\ (\mu \to \mu_k)\right) \\
+&= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad (\because \text{準備 3})
+\end{aligned}`,
+      ),
+      paragraph(["直前の鎖の両辺に ", math(String.raw`\mathrm{tr}(P\check{n}_{\mu_k})`), " を足し、2 で割ると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+2\,\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+&= \mathrm{tr}(P)
+   \quad (\because \mathbb{C}\ \text{の四則}) \\
+\mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+&= \tfrac12\,\mathrm{tr}(P)
+   \quad (\because \mathbb{C}\ \text{の四則})
 \end{aligned}`,
       ),
       paragraph([
         "となる。これから ",
-        math(String.raw`e_1`),
+        math(String.raw`e_k`),
         " が ",
         math(String.raw`1`),
         " でも ",
@@ -2595,49 +2761,41 @@ X\,\check{n}_\nu
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{tr}\!\left(R_{\mu_1}^{(1)}P\right)
-&= \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-   \quad (\because R_{\mu_1}^{(1)}=\check n_{\mu_1}) \\
+\mathrm{tr}\!\left(P R_{\mu_k}^{(1)}\right)
+&= \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad (\because R_{\mu_k}^{(1)}\ \text{の定義（主張）}) \\
 &= \tfrac12\,\mathrm{tr}(P)
    \quad (\because \text{直前の鎖}), \\
-\mathrm{tr}\!\left(R_{\mu_1}^{(0)}P\right)
-&= \mathrm{tr}\!\left(\left(I - \check{n}_{\mu_1}\right)P\right)
-   \quad (\because R_{\mu_1}^{(0)}=I-\check n_{\mu_1}) \\
-&= \mathrm{tr}(P) - \mathrm{tr}\!\left(\check{n}_{\mu_1}P\right)
-   \quad (\because \text{分配則とトレースの線型性}) \\
+\mathrm{tr}\!\left(P R_{\mu_k}^{(0)}\right)
+&= \mathrm{tr}\!\left(P\left(I - \check{n}_{\mu_k}\right)\right)
+   \quad (\because R_{\mu_k}^{(0)}\ \text{の定義（主張）}) \\
+&= \mathrm{tr}(P) - \mathrm{tr}\!\left(P\check{n}_{\mu_k}\right)
+   \quad (\because \text{準備 3}) \\
 &= \mathrm{tr}(P) - \tfrac12\,\mathrm{tr}(P)
    \quad (\because \text{直前の鎖}) \\
 &= \tfrac12\,\mathrm{tr}(P)
-   \quad (\because \mathbb C\text{ の四則})
+   \quad (\because \mathbb{C}\ \text{の四則})
 \end{aligned}`,
       ),
-      paragraph([
-        "帰納法の仮定から ",
-        math(String.raw`\mathrm{tr}(P) = 2^{M_{\mathrm{col}}-(k-1)}`),
-        " なので、いずれの場合も",
-      ]),
+      paragraph(["したがって、いずれの場合も"]),
       displayMath(
         String.raw`\begin{aligned}
-\mathrm{tr}\!\left(R_{\mu_1}^{(e_1)}\cdots R_{\mu_k}^{(e_k)}\right)
-&= \frac{1}{2}\,\mathrm{tr}(P)
+\mathrm{tr}\!\left(\prod_{j=1}^{k} R_{\mu_j}^{(e_j)}\right)
+&= \mathrm{tr}\!\left(P R_{\mu_k}^{(e_k)}\right)
+   \quad (\because \text{準備 1}) \\
+&= \tfrac12\,\mathrm{tr}(P)
    \quad (\because \text{直前の二場合}) \\
-&= \frac{1}{2}\cdot 2^{M_{\mathrm{col}}-k+1}
+&= \tfrac12\cdot 2^{M_{\mathrm{col}}-(k-1)}
    \quad (\because \text{帰納法の仮定}) \\
+&= \tfrac12\cdot 2^{(M_{\mathrm{col}}-k)+1}
+   \quad (\because \mathbb{Z}\ \text{の計算}\ M_{\mathrm{col}}-(k-1) = (M_{\mathrm{col}}-k)+1) \\
+&= \tfrac12\cdot \left(2^{M_{\mathrm{col}}-k}\cdot 2\right)
+   \quad \left(\because\ \blkref{def_power_of_complex_number}\ (z \to 2,\ m \to M_{\mathrm{col}}-k)\right) \\
 &= 2^{M_{\mathrm{col}}-k}
-   \quad (\because \mathbb C\text{ の四則})
+   \quad (\because \mathbb{C}\ \text{の四則})
 \end{aligned}`,
       ),
-      paragraph([
-        "（",
-        ref("check_number_operators_commute"),
-        " (2) と ",
-        ref("scalar_identity_commutes"),
-        " より ",
-        math(String.raw`R_\mu^{(e)}`),
-        " たちは互いに可換で積の順序に依らないので、どの因子を ",
-        math(String.raw`\mu_1`),
-        " の位置に置いてもよく、一般の相異なる添字列についても同じ結論を得る。）",
-      ]),
+      paragraph(["で、", math(String.raw`k`), " で主張が成り立つ。"]),
     ],
     conversion: {
       status: "added",
@@ -2645,6 +2803,7 @@ X\,\check{n}_\nu
         "009 章の trace_of_number_operator_product の半整数運動量版。添字集合が I ではなく {1,…,M} 全部になるので、k は M まで走れて tr(ň_1⋯ň_M) = 2^0 = 1 になる（009 章では臨界点で |I| = M−1 までしか走れなかった）。",
         "009 章と違い、因子として ň_μ と I − ň_μ の混在を許す形で述べてある。どちらの因子でも tr(R_μ P) = tr(P)/2 が成り立つので帰納法は 1 段で済み、check_joint_eigenspace_decomposition の tr(Q̌_ε) = 1 を、∏(I − ň) の部分集合展開と二項定理を経ずに k = M の場合として直接得られる（docs/tasks/2026-07_lean-ch009-013/004_ch017_冗長な手順と暗黙の前提.md の指摘 1 に対応。Lean 側の Ising2D.Abstract.two_pow_smul_tau_projOn が同じ構造である）。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_01（ň のみの積について {1,…,M} の全部分集合、残差 ≤ 7.1e-15）。因子が混在する場合は check_02 の tr(Q̌_ε) = 1（k = M、残差 ≤ 1.1e-15）が該当する。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 証明の名前だけの根拠を、1 行 1 主張のラベル参照の鎖に直した。最初の因子 R_{μ_1} を分けて残りの積 P と可換性を使っていた帰納法を、def_finite_product_of_matrices の左から掛ける形に合わせて最後の因子 R_{μ_k} を分ける形にした（準備 1。k = 1 では P := I）。「ψ̌ は各 ň_{μ_j} と可換で I も任意の行列と可換だから R_{μ_j}^{(e_j)} とも、したがって P とも可換」の散文を、単位行列との積の 2 行・e_j ごとの 3 行（check_number_operators_commute (1)、commuting_with_difference）・matrix_commuting_with_each_factor_commutes_with_finite_product の鎖にした（準備 2。最後の因子を分けたので ψ̌_{M_col+1-μ_k} と P の可換性だけで済み、ň と P の可換性は使わない）。「分配則とトレースの線型性」2 か所を準備 3 の 10 行（差の書き換え・分配・単位行列・符号の外出し・1 倍・−1 倍・trace_basic_properties (1)・ℂ の計算）にし、巡回性の行の前後の結合律を mat_mult_associative の行に分けた。基底段階の tr(I) = 2^{M_col} を trace_basic_properties (3) からの 3 行にし、主張に積が def_finite_product_of_matrices の有限積であること・右辺の冪・k ≤ M_col を書いた。末尾の「積の順序に依らないので、どの因子を μ_1 の位置に置いてもよい」の段落は、帰納法が全ての添字の列について示すので要らなくなり、外した。主張は不変。Lean の具体版は Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft（ClaimTraceCheckNumberOperatorProduct.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_47。",
       ],
     },
   },

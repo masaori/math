@@ -36,7 +36,7 @@ Step 3 の最初の三つの場合（`ň_ν R_μ^{(ε_μ)} = R_μ^{(ε_μ)} ň_�
 `nOp_mul_Qproj_of_necSuf`・`commute_nOp_Qproj_of_necSuf`）。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1` の 3 行（`trace_of_check_number_operator_product`・`M_col − M_col = 0`・`def_power_of_complex_number` の `z^0 := 1_ℂ`）は
 `trace_Qproj_step4` に人手と 1 対 1 の calc で置き、(4) 前半の `trace_Qproj` はこの鎖から示す。1 行目が引く主張は、因子の混在を許す
-人手の主張そのものの具体版 `trace_projFactorProd`（`ClaimTraceCheckNumberOperatorProduct.lean`）である。Step 5 の鎖は、人手が数ベクトルを扱う 1 列の行列
+人手の主張そのものの、人手の帰納法と 1 対 1 の具体版 `trace_projFactor_finProdLeft`（`ClaimTraceCheckNumberOperatorProduct.lean`）である。Step 5 の鎖は、人手が数ベクトルを扱う 1 列の行列
 `Matrix (Conf M) (Fin 1) ℂ` で `colVec_eq_sum_Qproj_mul_step5`・`Qproj_mul_colVec_of_ne_step5`・`Qproj_mul_colVec_self_step5`・
 `eq_zero_of_binWordSum_eq_zero_step5` に人手と 1 対 1 の calc で置き、(5) の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero`（数ベクトル
 `Conf M → ℂ`、和は `Finset.sum`）は人手の範囲 `M_col ≥ 2` で `Matrix.replicateCol (Fin 1)` を通してこの鎖から示す（`M = 0` は mathlib で閉じる）。
@@ -759,19 +759,29 @@ theorem Qproj_mul_nOp (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 /-! ## トレースと次元（原文 (4)） -/
 
 /-- **原文 Step 4** の鎖（3 行）: `tr(Q̌_ε) = 2^{M_col−M_col} = 2^0 = 1`。
-1 行目は `trace_of_check_number_operator_product` の具体版 `trace_projFactorProd` を、`k → M_col`、
-`(μ_1, …, μ_{M_col}) → (1, …, M_col)`（Lean の `S → 𝓜̌` 全体。`|𝓜̌| = M_col` は `CheckIdx.card`）、
-`(e_1, …, e_{M_col}) → (ε_1, …, ε_{M_col})`（Lean の `T`）として適用する行である（`Q̌_ε` は `Qproj` の定義で `NecSuf.projOn F.nOp _ 𝓜̌ T`）。
+1 行目は `trace_of_check_number_operator_product` の具体版のうち人手の帰納法と 1 対 1 の `trace_projFactor_finProdLeft` を、`k → M_col`、
+`(μ_1, …, μ_{M_col}) → (1, …, M_col)`（Lean の `μ → checkIdxOfFin`。単射）、`(e_1, …, e_{M_col}) → (ε_1, …, ε_{M_col})`（Lean の `T`）として
+適用する行である。`Q̌_ε` は証明の冒頭の `Q̌_ε = ∏_{μ=1}^{M_col} R_μ^{(ε_μ)}`（`Qproj_eq_finProdLeft`）で左から掛ける積に読む。人手の `M_col` が Lean の `r + 1`。
 3 行目の `z^0 := 1_ℂ`（`def_power_of_complex_number`、`z → 2`）は、mathlib の `ℂ` の冪（`Monoid.npow`）の 0 乗の公理 `Monoid.npow_zero` から出る `pow_zero` で受ける。
-人手の範囲 `M_col ≥ 2` に限らず、すべての `M` で同じ鎖が通る。 -/
-theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 :=
-  calc (F.Qproj T).trace
-      = (2 : ℂ) ^ (M - M) := by
-        have h := F.trace_projFactorProd Finset.univ T
-        rw [Finset.card_univ, CheckIdx.card] at h
-        exact h                                         -- `trace_of_check_number_operator_product`（上の適用）
-    _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]             -- `M_col − M_col = 0`
-    _ = 1 := pow_zero (2 : ℂ)                           -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
+人手の範囲外の `M = 0` は、必要十分版の特殊化 `trace_projFactorProd`（`S → 𝓜̌` 全体）で同じ 3 行を通す。 -/
+theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := by
+  match M, F, T with
+  | 0, F, T =>
+    calc (F.Qproj T).trace
+        = (2 : ℂ) ^ (0 - 0) := by
+          have h := F.trace_projFactorProd Finset.univ T
+          rw [Finset.card_univ, CheckIdx.card] at h
+          exact h                                       -- `trace_of_check_number_operator_product`（必要十分版の特殊化）
+      _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]           -- `M_col − M_col = 0`
+      _ = 1 := pow_zero (2 : ℂ)                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
+  | r + 1, F, T =>
+    calc (F.Qproj T).trace
+        = (2 : ℂ) ^ ((r + 1) - (r + 1)) := by
+          rw [Qproj_eq_finProdLeft F T]
+          exact F.trace_projFactor_finProdLeft T r checkIdxOfFin checkIdxOfFin_injective
+                                                        -- `trace_of_check_number_operator_product`（上の適用）
+      _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]           -- `M_col − M_col = 0`
+      _ = 1 := pow_zero (2 : ℂ)                         -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
 
 /-- **原文 (4)**: `tr(Q̌_ε) = 1`。Step 4 の鎖 `trace_Qproj_step4` で示す。
 

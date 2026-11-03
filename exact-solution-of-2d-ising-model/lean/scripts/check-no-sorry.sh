@@ -713,6 +713,13 @@ targets=(
   Ising2D.NecSuf.sum_projOn
   Ising2D.NecSuf.num_mul_projOn
   Ising2D.NecSuf.two_pow_smul_tau_projOn
+  Ising2D.NecSuf.mul_one_eq_one_mul
+  Ising2D.NecSuf.ann_mul_projFactor
+  Ising2D.NecSuf.tau_mul_one_sub_num
+  Ising2D.NecSuf.tau_mul_num_chain
+  Ising2D.NecSuf.tau_mul_num_eq_half
+  Ising2D.NecSuf.tau_mul_projFactor_eq_half
+  Ising2D.NecSuf.tau_finProdLeft_projFactor
   Ising2D.NecSuf.pow_mul_eq_of_mul_eq_smul
   Ising2D.NecSuf.exp_mul_eq_of_mul_eq_smul
   Ising2D.eFlipFam_mul_self
@@ -1837,6 +1844,16 @@ targets=(
   Ising2D.CheckFermiSetup.commute_ann_nOp_of_necSuf
   Ising2D.CheckFermiSetup.nOp_mul_nOp_of_ne_of_necSuf
   Ising2D.CheckFermiSetup.trace_nOpProd
+  Ising2D.CheckFermiSetup.trace_projFactorProd
+  Ising2D.CheckFermiSetup.trace_identity_base_case
+  Ising2D.CheckFermiSetup.ann_mul_identity_prep2
+  Ising2D.CheckFermiSetup.ann_mul_projFactor_prep2
+  Ising2D.CheckFermiSetup.trace_mul_one_sub_nOp_prep3
+  Ising2D.CheckFermiSetup.trace_mul_nOp_chain
+  Ising2D.CheckFermiSetup.trace_mul_nOp_eq_half
+  Ising2D.CheckFermiSetup.trace_mul_projFactor_eq_half
+  Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft
+  Ising2D.CheckFermiSetup.trace_projFactor_finProdLeft_of_necSuf
   Ising2D.CheckFermiSetup.trace_nOp
   Ising2D.CheckFermiSetup.trace_nOpProd_univ
   Ising2D.CheckFermiSetup.nOp_mul_nOp_of_sq
