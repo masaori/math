@@ -121,6 +121,7 @@
 | `sigmaX_hasRealEntries` / `sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`（`ClaimIHPauliForm.lean`） | `σ^x_m`・`σ^z_mσ^z_{m+1}` の成分はすべて実数（因子の並びと `siteProd_hasRealEntries`） | `iH_is_real_symmetric` Step 3 の成分の実性（`G` を除く） |
 | `boundaryYXY_eq_neg_one_smul_real` / `boundaryYXY_hasRealEntries`（`ClaimIHPauliForm.lean`） | `G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y)`（人手の 7 行の鎖と 1 対 1）と、`G` の成分はすべて実数（`siteProd_hasRealEntries`・`real_smul_hasRealEntries`） | `iH_is_real_symmetric` Step 3 の `G` の成分の実性 |
 | `S2_transpose_by_pauli_form` / `S1plus_transpose_by_pauli_form`（`ClaimIHPauliForm.lean`） | `(S_2)^⊤ = S_2`（人手の 5 行の鎖と 1 対 1）と `(S_1^{(+)})^⊤ = S_1^{(+)}`（人手の 7 行の鎖と 1 対 1） | `iH_is_real_symmetric` Step 3 の S_2・S_1^{(+)} の転置の鎖 |
+| `S2_hasRealEntries` / `S1plus_hasRealEntries`（`ClaimIHPauliForm.lean`） | `S_2`・`S_1^{(+)}` の成分はすべて実数（係数 `K_2^*, K_1 ∈ ℝ` の包含。人手の 2 段落と 1 対 1） | `iH_is_real_symmetric` Step 3 の S_2・S_1^{(+)} の成分の実性 |
 | `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_smul` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。`V^{(+)} = (2s_2)^{M/2}exp(S_1^{(+)}/2)exp(S_2)exp(S_1^{(+)}/2)` | `def_V_plus`、`V_plus_is_positive_definite` Step 1 |
 | `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` Step 2〜3 |
 | `matExp_mul_matExp_neg_eq_one` / `matExp_neg_mul_matExp_eq_one` / `expHalfS1plus_mul_expNegHalfS1plus` / `expNegHalfS1plus_mul_expHalfS1plus` / `expS2_mul_expNegS2` / `expNegS2_mul_expS2`（`ClaimVPlusPositiveDefinite.lean`） | 指数行列どうしの左右逆 `E_±E_∓ = I`, `A_±A_∓ = I` | `V_plus_is_invertible` Step 1 |

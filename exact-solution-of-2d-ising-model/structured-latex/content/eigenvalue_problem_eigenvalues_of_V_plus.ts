@@ -81,7 +81,7 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
         "、",
         ref("sign_flip_conjugation"),
         "。いずれも ",
-        math(String.raw`S_1^{(+)} = iK_1H_1^{(+)}`),
+        math(String.raw`S_1^{(+)} = i(K_1)_{\mathbb{C}}H_1^{(+)}`),
         " について述べてある）。",
       ]),
       paragraph([
@@ -158,7 +158,7 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
     id: "eigenvalues_of_V_014_claim_iH_is_real_symmetric",
     kind: "claim",
     origin: { path: "structured-latex/content/009_eigenvalues_of_V.ts", ordinal: 16 },
-    title: { tex: String.raw`i K_1 H_1^{(+)} \text{ と } i K_2^* H_2 \text{ は実対称}` },
+    title: { tex: String.raw`i (K_1)_{\mathbb{C}} H_1^{(+)} \text{ と } i (K_2^*)_{\mathbb{C}} H_2 \text{ は実対称}` },
     labels: ["iH_is_real_symmetric"],
     statement: [
       paragraph([
@@ -167,18 +167,28 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
         math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
         "（",
         ref("definition_of_cc"),
-        " の台集合の元、虚数単位）とし、",
+        " の台集合の元、虚数単位）とする。",
+        math(String.raw`K_1, K_2^* \in \mathbb{R}`),
+        "（",
+        ref("def_transfer_matrix_symbols"),
+        " の記号）は、",
+        math(String.raw`\mathbb{C}`),
+        " の積と行列のスカラー倍の係数としては ",
+        math(String.raw`(K_1)_{\mathbb{C}}, (K_2^*)_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        " の略記）として使い、式でもそう書く。",
       ]),
       displayMath(
-        String.raw`S_1^{(+)} := i K_1 H_1^{(+)}, \qquad S_2 := i K_2^* H_2`,
+        String.raw`S_1^{(+)} := i (K_1)_{\mathbb{C}} H_1^{(+)}, \qquad S_2 := i (K_2^*)_{\mathbb{C}} H_2`,
       ),
       paragraph(["とおくと、"]),
       displayMath(
         String.raw`\begin{aligned}
-S_1^{(+)} &= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
-  - K_1\, G, \qquad
+S_1^{(+)} &= (K_1)_{\mathbb{C}}\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\right)
+  - (K_1)_{\mathbb{C}}\, G, \qquad
 G := \sigma_1^y\,\sigma_2^x \sigma_3^x \cdots \sigma_{M_{\mathrm{col}}-1}^x\, \sigma_{M_{\mathrm{col}}}^y \\
-S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x\right)
+S_2 &= (K_2^*)_{\mathbb{C}}\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -421,21 +431,21 @@ H_2
       displayMath(
         String.raw`\begin{aligned}
 S_2
-&= (iK_2^*)H_2
-   \quad (\because S_2 \text{ の定義（係数 } iK_2^* \in \mathbb{C} \text{ のスカラー倍）}) \\
-&= (iK_2^*)\left((-i)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
+&= (i(K_2^*)_{\mathbb{C}})H_2
+   \quad (\because S_2 \text{ の定義（係数 } i(K_2^*)_{\mathbb{C}} \in \mathbb{C} \text{ のスカラー倍）}) \\
+&= (i(K_2^*)_{\mathbb{C}})\left((-i)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\right)
    \quad (\because \text{上で得た } H_2 \text{ の表示}) \\
-&= \bigl((iK_2^*)(-i)\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
-   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to iK_2^*,\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
-&= \bigl(i(K_2^*(-i))\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= \bigl((i(K_2^*)_{\mathbb{C}})(-i)\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to i(K_2^*)_{\mathbb{C}},\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
+&= \bigl(i((K_2^*)_{\mathbb{C}}(-i))\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= \bigl(i((-i)K_2^*)\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= \bigl(i((-i)(K_2^*)_{\mathbb{C}})\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad \left(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= \bigl((i(-i))K_2^*\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= \bigl((i(-i))(K_2^*)_{\mathbb{C}}\bigr)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= (1_{\mathbb{C}}K_2^*)\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= (1_{\mathbb{C}}(K_2^*)_{\mathbb{C}})\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
-&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right)
 \end{aligned}`,
       ),
@@ -594,32 +604,32 @@ Y_{M_{\mathrm{col}}} Z_1
       displayMath(
         String.raw`\begin{aligned}
 S_1^{(+)}
-&= (iK_1)H_1^{(+)}
-   \quad (\because S_1^{(+)} \text{ の定義（係数 } iK_1 \in \mathbb{C} \text{ のスカラー倍）}) \\
-&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
+&= (i(K_1)_{\mathbb{C}})H_1^{(+)}
+   \quad (\because S_1^{(+)} \text{ の定義（係数 } i(K_1)_{\mathbb{C}} \in \mathbb{C} \text{ のスカラー倍）}) \\
+&= (i(K_1)_{\mathbb{C}})\left(\sum_{m=1}^{M_{\mathrm{col}}-1} Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because\ \blkref{def_H1_plus}) \\
-&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - Y_{M_{\mathrm{col}}}Z_1\right)
+&= (i(K_1)_{\mathbb{C}})\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - Y_{M_{\mathrm{col}}}Z_1\right)
    \quad (\because \text{上で得た } Y_mZ_{m+1} = (-i)\sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
-&= (iK_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - (-i)G\right)
+&= (i(K_1)_{\mathbb{C}})\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\left((-i)\sigma_m^z\sigma_{m+1}^z\right) - (-i)G\right)
    \quad (\because \text{上で得た } Y_{M_{\mathrm{col}}}Z_1 = (-i)G) \\
-&= (iK_1)\left((-i)\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (-i)G\right)
+&= (i(K_1)_{\mathbb{C}})\left((-i)\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (-i)G\right)
    \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ c \to -i,\ (X_1,\dots,X_r) \to (\sigma_1^z\sigma_2^z,\dots,\sigma_{M_{\mathrm{col}}-1}^z\sigma_{M_{\mathrm{col}}}^z))\right) \\
-&= (iK_1)\left((-i)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)\right)
+&= (i(K_1)_{\mathbb{C}})\left((-i)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)\right)
    \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\ \text{を右辺から左辺へ}\right) \\
-&= \bigl((iK_1)(-i)\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
-   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to iK_1,\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z - G)\right) \\
-&= \bigl(i(K_1(-i))\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+&= \bigl((i(K_1)_{\mathbb{C}})(-i)\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to i(K_1)_{\mathbb{C}},\ b \to -i,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z - G)\right) \\
+&= \bigl(i((K_1)_{\mathbb{C}}(-i))\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= \bigl(i((-i)K_1)\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+&= \bigl(i((-i)(K_1)_{\mathbb{C}})\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad \left(\because\ \mathbb{C}\ \text{の積の交換律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= \bigl((i(-i))K_1\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+&= \bigl((i(-i))(K_1)_{\mathbb{C}}\bigr)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad \left(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\right) \\
-&= (1_{\mathbb{C}}K_1)\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+&= (1_{\mathbb{C}}(K_1)_{\mathbb{C}})\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad (\because i\cdot(-i) = 1_{\mathbb{C}}) \\
-&= K_1\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
+&= (K_1)_{\mathbb{C}}\left(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - G\right)
    \quad \left(\because\ \mathbb{C}\ \text{の乗法の単位元 }\blkref{complex_numbers_form_a_field}\right) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G
-   \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\right)
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G
+   \quad \left(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ (m \to 2^{M_{\mathrm{col}}},\ p \to 2^{M_{\mathrm{col}}},\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to G)\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -721,13 +731,13 @@ G^\top
       displayMath(
         String.raw`\begin{aligned}
 \left(S_2\right)^\top
-&= \Bigl(K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
+&= \Bigl((K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
    \quad (\because \text{Step 1 の } S_2 \text{ の表示}) \\
-&= K_2^*\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
-   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to K_2^*,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
-&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^x\right)^\top
+&= (K_2^*)_{\mathbb{C}}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to (K_2^*)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
+&= (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^x\right)^\top
    \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (\sigma_1^x,\dots,\sigma_{M_{\mathrm{col}}}^x))\right) \\
-&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+&= (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
    \quad (\because \text{上で得た } \left(\sigma_m^x\right)^\top = \sigma_m^x \text{ を各項へ}) \\
 &= S_2
    \quad (\because \text{Step 1 の } S_2 \text{ の表示})
@@ -736,17 +746,17 @@ G^\top
       displayMath(
         String.raw`\begin{aligned}
 \left(S_1^{(+)}\right)^\top
-&= \Bigl(K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G\Bigr)^\top
+&= \Bigl((K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G\Bigr)^\top
    \quad (\because \text{Step 2 の } S_1^{(+)} \text{ の表示}) \\
-&= \Bigl(K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - \left(K_1G\right)^\top
-   \quad \left(\because\ \blkref{transpose_of_matrix_difference}\ (m, p \to 2^{M_{\mathrm{col}}},\ A \to K_1\textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to K_1G)\right) \\
-&= K_1\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - K_1G^\top
-   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z \text{ と } A \to G)\ \text{を 2 箇所へ同時に適用}\right) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\left(\sigma_m^z\sigma_{m+1}^z\right)^\top - K_1G^\top
+&= \Bigl((K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - \left((K_1)_{\mathbb{C}}G\right)^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_difference}\ (m, p \to 2^{M_{\mathrm{col}}},\ A \to (K_1)_{\mathbb{C}}\textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to (K_1)_{\mathbb{C}}G)\right) \\
+&= (K_1)_{\mathbb{C}}\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - (K_1)_{\mathbb{C}}G^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to (K_1)_{\mathbb{C}},\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z \text{ と } A \to G)\ \text{を 2 箇所へ同時に適用}\right) \\
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\left(\sigma_m^z\sigma_{m+1}^z\right)^\top - (K_1)_{\mathbb{C}}G^\top
    \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ (X_1,\dots,X_r) \to (\sigma_1^z\sigma_2^z,\dots,\sigma_{M_{\mathrm{col}}-1}^z\sigma_{M_{\mathrm{col}}}^z))\right) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G^\top
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G^\top
    \quad (\because \text{上で得た } \left(\sigma_m^z\sigma_{m+1}^z\right)^\top = \sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
-&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G
+&= (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G
    \quad (\because \text{上で得た } G^\top = G) \\
 &= S_1^{(+)}
    \quad (\because \text{Step 2 の } S_1^{(+)} \text{ の表示})
@@ -858,12 +868,69 @@ G
         " の成分はすべて実数である。",
       ]),
       paragraph([
-        math(String.raw`K_1, K_2^* \in \mathbb{R}`),
-        " なので、これらの実係数の有限和である ",
-        math(String.raw`S_1^{(+)}`),
-        "、",
+        "最後に ",
         math(String.raw`S_2`),
-        " は成分がすべて実数である。上で示した ",
+        "・",
+        math(String.raw`S_1^{(+)}`),
+        " の成分が実数であることを示す。上で見たとおり ",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`\sigma_m^x`),
+        " の成分はすべて実数なので、",
+        ref("finite_sum_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (\sigma_1^x,\dots,\sigma_{M_{\mathrm{col}}}^x)`),
+        "）より ",
+        math(String.raw`\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x`),
+        " の成分はすべて実数である。Step 1 の表示 ",
+        math(String.raw`S_2 = (K_2^*)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x`),
+        " と ",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ c \to K_2^*,\ B \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x`),
+        "）より、",
+        math(String.raw`S_2`),
+        " の成分はすべて実数である。",
+      ]),
+      paragraph([
+        "同じく ",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}-1\}`),
+        " について ",
+        math(String.raw`\sigma_m^z\sigma_{m+1}^z`),
+        " の成分はすべて実数なので、",
+        ref("finite_sum_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ (X_1,\dots,X_r) \to (\sigma_1^z\sigma_2^z,\dots,\sigma_{M_{\mathrm{col}}-1}^z\sigma_{M_{\mathrm{col}}}^z)`),
+        "。",
+        math(String.raw`M_{\mathrm{col}} \geq 2`),
+        " より ",
+        math(String.raw`r \geq 1`),
+        "）より ",
+        math(String.raw`\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z`),
+        " の成分はすべて実数である。これと上で見た ",
+        math(String.raw`G`),
+        " の成分の実性に ",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ B \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z`),
+        " と ",
+        math(String.raw`B \to G`),
+        "）を 2 箇所へ同時に当てはめて、",
+        math(String.raw`(K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z`),
+        " と ",
+        math(String.raw`(K_1)_{\mathbb{C}}G`),
+        " の成分はすべて実数である。Step 2 の表示 ",
+        math(String.raw`S_1^{(+)} = (K_1)_{\mathbb{C}}\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - (K_1)_{\mathbb{C}}G`),
+        " と ",
+        ref("difference_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ A \to (K_1)_{\mathbb{C}}\textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to (K_1)_{\mathbb{C}}G`),
+        "）より、",
+        math(String.raw`S_1^{(+)}`),
+        " の成分はすべて実数である。",
+      ]),
+      paragraph([
+        "上で示した ",
         math(String.raw`\left(S_2\right)^\top = S_2`),
         "・",
         math(String.raw`\left(S_1^{(+)}\right)^\top = S_1^{(+)}`),
@@ -894,6 +961,7 @@ G
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の成分の実性の箇条書きのうち σ_m^x・σ_m^zσ_{m+1}^z の 2 項目（「σ^x が 1 個、他は I。成分は実」「σ^z が 2 個、他は I。成分は実」）を、def_site_pauli_matrices・Step 2 の準備の表示で因子を並べ、新しい主張 identity_matrix_of_order_two_has_real_entries・pauli_x_has_real_entries・pauli_z_has_real_entries（006_Z_Y_anticommutation.ts）と kronecker_of_real_entry_matrices_has_real_entries を引く 2 段落に替えた。G の段は σ^y の成分の記述をそこへ移して段落にしただけで、論証は変えていない（G の成分の実性の鎖は別に扱う）。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の G の成分の実性の段落が「純虚数成分の因子 σ^y がちょうど 2 個なので、成分の積に現れる虚数単位は i^2 = -1 の形でまとまり、成分はすべて実数」と名前だけで述べていたのを、新しい定義 def_real_factor_of_pauli_y と主張 pauli_y_is_i_times_real_factor・real_factor_of_pauli_y_has_real_entries（006_Z_Y_anticommutation.ts）、real_scalar_multiple_of_real_entry_matrix_has_real_entries（002_linear_space_general.ts）を引く形にした。鎖は Step 2 の準備の G の表示・pauli_y_is_i_times_real_factor・kronecker_multilinear 2 回・scalar_multiple_is_associative・i·i = -1・inclusion_rr_to_cc の略記の 7 行で G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y) とし、続く段落で kronecker_of_real_entry_matrices_has_real_entries と real_scalar_multiple_of_real_entry_matrix_has_real_entries を引く。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の結論が S_1^{(+)}・S_2 の転置での対称性を「実係数の有限和」と名前だけで述べていたのを、新しい主張 transpose_of_matrix_sum・transpose_of_matrix_scalar_multiple・transpose_of_matrix_difference・transpose_of_finite_sum_of_matrices（002_linear_space_general.ts）を引く 2 本の鎖にした。S_2 は Step 1 の表示・transpose_of_matrix_scalar_multiple・transpose_of_finite_sum_of_matrices・(σ_m^x)^⊤ = σ_m^x を各項へ・Step 1 の表示の 5 行、S_1^{(+)} は Step 2 の表示・transpose_of_matrix_difference・transpose_of_matrix_scalar_multiple を 2 箇所・transpose_of_finite_sum_of_matrices・(σ_m^zσ_{m+1}^z)^⊤ を各項へ・G^⊤ = G・Step 2 の表示の 7 行。成分の実性（実係数の和）の段と実対称 ⇒ エルミートの段は散文のままである。主張は変えていない。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の結論が S_1^{(+)}・S_2 の成分の実性を「K_1, K_2^* ∈ ℝ なので、これらの実係数の有限和」と名前だけで述べていたのを、新しい主張 sum_of_real_entry_matrices_has_real_entries・difference_of_real_entry_matrices_has_real_entries・finite_sum_of_real_entry_matrices_has_real_entries（002_linear_space_general.ts）と real_scalar_multiple_of_real_entry_matrix_has_real_entries を引く 2 段落にした。K_1, K_2^* ∈ ℝ を ℂ の係数として (K_1)_ℂ・(K_2^*)_ℂ（inclusion_rr_to_cc の略記）として使うことを主張の前置きに書き、主張と Step 1〜3 の式の係数の位置の K_1・K_2^* をすべて (K_1)_ℂ・(K_2^*)_ℂ と書いた（ℝ の元として引く c → K_1 などはそのまま）。実対称 ⇒ エルミートの段は散文のままである。主張は変えていない。",
       ],
     },
   },
@@ -1727,49 +1795,49 @@ U H_1^{(+)} U^{-1}
         "Step 4（",
         math(String.raw`S_1^{(+)}, S_2`),
         " への言い換え）。",
-        math(String.raw`S_1^{(+)} = iK_1H_1^{(+)}`),
+        math(String.raw`S_1^{(+)} = i(K_1)_{\mathbb{C}}H_1^{(+)}`),
         "、",
-        math(String.raw`S_2 = iK_2^*H_2`),
+        math(String.raw`S_2 = i(K_2^*)_{\mathbb{C}}H_2`),
         "（",
         ref("iH_is_real_symmetric"),
         "）である。",
-        math(String.raw`iK_1, iK_2^* \in \mathbb{C}`),
+        math(String.raw`i(K_1)_{\mathbb{C}}, i(K_2^*)_{\mathbb{C}} \in \mathbb{C}`),
         " はスカラーである。Step 3 から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 U S_1^{(+)} U^{-1}
-&= \bigl(U\,(iK_1H_1^{(+)})\bigr)U^{-1}
-   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=iK_1H_1^{(+)}\right) \\
-&= \bigl((iK_1)(UH_1^{(+)})\bigr)U^{-1}
+&= \bigl(U\,(i(K_1)_{\mathbb{C}}H_1^{(+)})\bigr)U^{-1}
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=i(K_1)_{\mathbb{C}}H_1^{(+)}\right) \\
+&= \bigl((i(K_1)_{\mathbb{C}})(UH_1^{(+)})\bigr)U^{-1}
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right) \\
-&= (iK_1)\bigl((UH_1^{(+)})U^{-1}\bigr)
+&= (i(K_1)_{\mathbb{C}})\bigl((UH_1^{(+)})U^{-1}\bigr)
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right) \\
-&= (iK_1)\bigl(-H_1^{(+)}\bigr)
+&= (i(K_1)_{\mathbb{C}})\bigl(-H_1^{(+)}\bigr)
    \quad (\because\ \text{Step 3 の }UH_1^{(+)}U^{-1}=-H_1^{(+)}) \\
-&= -\bigl((iK_1)H_1^{(+)}\bigr)
+&= -\bigl((i(K_1)_{\mathbb{C}})H_1^{(+)}\bigr)
    \quad \left(\because\ \blkref{scalar_multiple_of_negated_matrix}\right) \\
 &= -\,S_1^{(+)}
-   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=iK_1H_1^{(+)}\right), \\
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_1^{(+)}:=i(K_1)_{\mathbb{C}}H_1^{(+)}\right), \\
 U S_2 U^{-1}
-&= \bigl(U\,(iK_2^*H_2)\bigr)U^{-1}
-   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=iK_2^*H_2\right) \\
-&= \bigl((iK_2^*)(UH_2)\bigr)U^{-1}
+&= \bigl(U\,(i(K_2^*)_{\mathbb{C}}H_2)\bigr)U^{-1}
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=i(K_2^*)_{\mathbb{C}}H_2\right) \\
+&= \bigl((i(K_2^*)_{\mathbb{C}})(UH_2)\bigr)U^{-1}
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\right) \\
-&= (iK_2^*)\bigl((UH_2)U^{-1}\bigr)
+&= (i(K_2^*)_{\mathbb{C}})\bigl((UH_2)U^{-1}\bigr)
    \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\right) \\
-&= (iK_2^*)\bigl(-H_2\bigr)
+&= (i(K_2^*)_{\mathbb{C}})\bigl(-H_2\bigr)
    \quad (\because\ \text{Step 3 の }UH_2U^{-1}=-H_2) \\
-&= -\bigl((iK_2^*)H_2\bigr)
+&= -\bigl((i(K_2^*)_{\mathbb{C}})H_2\bigr)
    \quad \left(\because\ \blkref{scalar_multiple_of_negated_matrix}\right) \\
 &= -\,S_2
-   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=iK_2^*H_2\right)
+   \quad \left(\because\ \blkref{iH_is_real_symmetric}\text{ の }S_2:=i(K_2^*)_{\mathbb{C}}H_2\right)
 \end{aligned}`,
       ),
       paragraph([
         math(String.raw`K_1, K_2^* > 0`),
         " より ",
-        math(String.raw`iK_1, iK_2^* \neq 0`),
+        math(String.raw`i(K_1)_{\mathbb{C}}, i(K_2^*)_{\mathbb{C}} \neq 0`),
         " なので、逆に ",
         math(String.raw`S`),
         " についての等式から ",

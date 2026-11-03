@@ -6,7 +6,7 @@
 
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
 Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性の `σ^x_m`・`σ^z_mσ^z_{m+1}`・`G` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`・`boundaryYXY_eq_neg_one_smul_real`・`boundaryYXY_hasRealEntries`）もこのファイルが持つ。
-Step 3 の `S_2`・`S_1^{(+)}` の転置の鎖（`S2_transpose_by_pauli_form`・`S1plus_transpose_by_pauli_form`）もこのファイルが持つ。
+Step 3 の `S_2`・`S_1^{(+)}` の転置の鎖（`S2_transpose_by_pauli_form`・`S1plus_transpose_by_pauli_form`）と成分の実性（`S2_hasRealEntries`・`S1plus_hasRealEntries`）もこのファイルが持つ。
 Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
@@ -34,9 +34,13 @@ Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対�
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 | Step 3 の `(S_2)^⊤ = S_2` の 5 行（Step 1 の `S_2` の表示 → `transpose_of_matrix_scalar_multiple` → `transpose_of_finite_sum_of_matrices` → `(σ^x_m)^⊤ = σ^x_m` を各項へ → Step 1 の表示） | `S2_transpose_by_pauli_form` の `calc` の 5 段 |
 | Step 3 の `(S_1^{(+)})^⊤ = S_1^{(+)}` の 7 行（Step 2 の `S_1^{(+)}` の表示 → `transpose_of_matrix_difference` → `transpose_of_matrix_scalar_multiple` を 2 箇所 → `transpose_of_finite_sum_of_matrices` → `(σ^z_mσ^z_{m+1})^⊤` を各項へ → `G^⊤ = G` → Step 2 の表示） | `S1plus_transpose_by_pauli_form` の `calc` の 7 段 |
+| Step 3 の `S_2` の成分の実性（`σ^x_m` の成分の実性 → `finite_sum_of_real_entry_matrices_has_real_entries`（`r → M_col`） → Step 1 の表示 → `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_2^*`）） | `S2_hasRealEntries` |
+| Step 3 の `S_1^{(+)}` の成分の実性（`σ^z_mσ^z_{m+1}` の成分の実性 → `finite_sum_of_real_entry_matrices_has_real_entries`（`r → M_col-1`） → `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_1`、`B → Σσ^zσ^z` と `B → G`） → Step 2 の表示 → `difference_of_real_entry_matrices_has_real_entries`） | `S1plus_hasRealEntries` |
 
-- 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
-  鎖は係数の実性を使わないので、仮定 `star K1 = K1` は置かない。
+- 人手は `K_1, K_2^* ∈ ℝ` を係数の位置で `(K_1)_ℂ`・`(K_2^*)_ℂ`（`inclusion_rr_to_cc` の略記）と書く。Lean は Step 1・Step 2 の表示と転置の鎖では、それを `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
+  これらの鎖は係数の実性を使わないので、仮定 `star K1 = K1` は置かない。
+  係数の実性を使う成分の実性（`S2_hasRealEntries`・`S1plus_hasRealEntries`）では `K1 K2star : ℝ` として受け取り、人手の主張の前置きの読み方
+  `(K_1)_ℂ`・`(K_2^*)_ℂ`（`inclusion_rr_to_cc` の略記）どおり `(K1 : ℂ)`・`(K2star : ℂ)` を係数にする。
 - 人手は `M_col ≥ 2` で述べる。`H_2`・`S_2` の鎖は `M = r + 1`、`S_1^{(+)}` の鎖は `M = r + 2` の場合を述べる
   （Lean の添字は 0 始まりなので、人手の `m` は `Fin.castSucc m`、`m + 1` は `Fin.succ m`、`M_col` は `Fin.last (r + 1)`、`1` は `0`）。
   人手の `H_1^{(+)}` の差の形は `H1plus_eq_sub`（`def_H1_plus`）で読み替える。
@@ -58,6 +62,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKronec
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealScalarMultipleOfRealEntryMatrixHasRealEntries
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimSumsOfRealEntryMatricesHaveRealEntries
 
 namespace Ising2D
 
@@ -634,5 +639,33 @@ theorem S1plus_transpose_by_pauli_form (K1 : ℂ) (r : ℕ) :
         rw [boundaryYXY_transpose]                                           -- 上で得た `G^⊤ = G`
     _ = (Complex.I * K1) • H1plus (r + 2) :=
         (S1plus_eq_K1_smul_sub K1 r).symm                                    -- Step 2 の `S_1^{(+)}` の表示
+
+/-! ## Step 3 の `S_2`・`S_1^{(+)}` の成分の実性
+
+人手の Step 3 の最後の 2 段落（`S_2`・`S_1^{(+)}` の成分が実数であること）と 1 対 1 に対応する。 -/
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `S_2` の成分の実性**（`M = r + 1`、`K_2^* ∈ ℝ`）:
+`σ^x_m` の成分はすべて実数なので `finite_sum_of_real_entry_matrices_has_real_entries` より `Σσ^x_m` の成分はすべて実数、
+Step 1 の表示 `S_2 = (K_2^*)_ℂΣσ^x_m` と `real_scalar_multiple_of_real_entry_matrix_has_real_entries` より `S_2` の成分はすべて実数。 -/
+theorem S2_hasRealEntries (K2star : ℝ) (r : ℕ) :
+    MatrixHasRealEntries ((Complex.I * (K2star : ℂ)) • H2 (r + 1)) := by
+  have hsum := finite_sum_hasRealEntries r (fun m : Fin (r + 1) => sigmaX m)
+    fun m => sigmaX_hasRealEntries m                     -- `finite_sum_of_real_entry_matrices_has_real_entries`（`m, n → 2^{M_col}`, `r → M_col`, `(X_1, …, X_r) → (σ^x_1, …, σ^x_{M_col})`）
+  rw [S2_eq_K2star_smul_sum_sigmaX]                      -- Step 1 の `S_2` の表示
+  exact real_smul_hasRealEntries K2star _ hsum           -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_2^*`, `B → Σσ^x_ℓ`）
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `S_1^{(+)}` の成分の実性**（`M = r + 2`、`K_1 ∈ ℝ`）:
+`σ^z_mσ^z_{m+1}` の成分はすべて実数なので `finite_sum_of_real_entry_matrices_has_real_entries` より `Σσ^z_mσ^z_{m+1}` の成分はすべて実数、
+これと `G` の成分の実性に `real_scalar_multiple_of_real_entry_matrix_has_real_entries` を当てはめ、
+Step 2 の表示 `S_1^{(+)} = (K_1)_ℂΣσ^zσ^z - (K_1)_ℂG` と `difference_of_real_entry_matrices_has_real_entries` より `S_1^{(+)}` の成分はすべて実数。 -/
+theorem S1plus_hasRealEntries (K1 : ℝ) (r : ℕ) :
+    MatrixHasRealEntries ((Complex.I * (K1 : ℂ)) • H1plus (r + 2)) := by
+  have hsum := finite_sum_hasRealEntries r
+    (fun m : Fin (r + 1) => sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))
+    fun m => sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries m  -- `finite_sum_of_real_entry_matrices_has_real_entries`（`r → M_col-1 ≥ 1`, `(X_1, …, X_r) → (σ^z_1σ^z_2, …, σ^z_{M_col-1}σ^z_{M_col})`）
+  have hK1sum := real_smul_hasRealEntries K1 _ hsum      -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_1`, `B → Σσ^z_ℓσ^z_{ℓ+1}`）
+  have hK1G := real_smul_hasRealEntries K1 _ (boundaryYXY_hasRealEntries r)  -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → K_1`, `B → G`）
+  rw [S1plus_eq_K1_smul_sub]                             -- Step 2 の `S_1^{(+)}` の表示
+  exact sub_hasRealEntries_tensorPow _ _ hK1sum hK1G     -- `difference_of_real_entry_matrices_has_real_entries`（`A → (K_1)_ℂΣσ^zσ^z`, `B → (K_1)_ℂG`）
 
 end Ising2D

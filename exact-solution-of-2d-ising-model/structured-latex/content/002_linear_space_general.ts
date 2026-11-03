@@ -5169,6 +5169,201 @@ G(X - W)
     },
   },
   {
+    id: "linear_space_general_claim_sum_of_real_entry_matrices_has_real_entries",
+    kind: "claim",
+    title: { text: "成分がすべて実数の行列の和は成分がすべて実数" },
+    labels: ["sum_of_real_entry_matrices_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の成分がすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）とする。このとき ",
+        math(String.raw`A + B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_matrix_sum"),
+        " の和）の成分もすべて実数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`q \in \{1,\dots,n\}`),
+        " を任意に取る。仮定（",
+        ref("def_matrix_with_real_entries"),
+        "）から ",
+        math(String.raw`A_{pq} = s_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`s \in \mathbb{R}`),
+        " と、",
+        math(String.raw`B_{pq} = t_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`t \in \mathbb{R}`),
+        " がある。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(A + B)_{pq}
+&= A_{pq} + B_{pq}
+&&(\because \blkref{def_matrix_sum}\ (i \to p,\ j \to q)) \\
+&= s_{\mathbb{C}} + t_{\mathbb{C}}
+&&(\because s, t \text{ の取り方}) \\
+&= (s, 0) + (t, 0)
+&&(\because \blkref{inclusion_rr_to_cc}\ \text{を 2 箇所へ同時に適用}) \\
+&= (s + t,\ 0 + 0)
+&&(\because \blkref{definition_of_cc}\ \text{の和}) \\
+&= (s + t,\ 0)
+&&(\because \mathbb{R}\ \text{で}\ 0 + 0 = 0) \\
+&= (s + t)_{\mathbb{C}}
+&&(\because \blkref{inclusion_rr_to_cc})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`r := s + t \in \mathbb{R}`),
+        " と取れば ",
+        math(String.raw`(A + B)_{pq} = r_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`p, q`),
+        " は任意なので ",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の結論が「実係数の有限和なので成分がすべて実数」と名前だけで述べていたのを、成分が実の行列の和・差・有限和の主張を引く形にするために足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_difference_of_real_entry_matrices_has_real_entries",
+    kind: "claim",
+    title: { text: "成分がすべて実数の行列の差は成分がすべて実数" },
+    labels: ["difference_of_real_entry_matrices_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の成分がすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）とする。このとき ",
+        math(String.raw`A - B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_matrix_difference"),
+        " の差）の成分もすべて実数である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+A - B
+&= A + (-B)
+&&(\because \blkref{matrix_difference_is_sum_with_negation}) \\
+&= A + (-1_{\mathbb{C}})B
+&&(\because \blkref{negation_is_scalar_multiple_by_minus_one}\ (A \to B)) \\
+&= A + (-1)_{\mathbb{C}}B
+&&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1))
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`B`),
+        " の成分はすべて実数なので、",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`c \to -1`),
+        "）より ",
+        math(String.raw`(-1)_{\mathbb{C}}B`),
+        " の成分はすべて実数である。",
+        math(String.raw`A`),
+        " の成分もすべて実数なので、",
+        ref("sum_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`B \to (-1)_{\mathbb{C}}B`),
+        "）より ",
+        math(String.raw`A + (-1)_{\mathbb{C}}B`),
+        " の成分はすべて実数である。上の鎖より、",
+        math(String.raw`A - B`),
+        " の成分はすべて実数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の結論で、S_1^{(+)} = (K_1)_ℂΣσ^zσ^z − (K_1)_ℂG の成分が実であることを引くために足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_real_entry_matrices_has_real_entries",
+    kind: "claim",
+    title: { text: "成分がすべて実数の行列の有限和は成分がすべて実数" },
+    labels: ["finite_sum_of_real_entry_matrices_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n,r \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の成分がすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）とする。このとき ",
+        math(String.raw`\sum_{j=1}^{r} X_j \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_finite_sum_of_matrices"),
+        " の有限和）の成分もすべて実数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\sum_{j=1}^{1} X_j = X_1
+\qquad (\because \blkref{def_finite_sum_of_matrices})`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`X_1`),
+        " の成分はすべて実数である（仮定）。",
+        math(String.raw`r`),
+        " で成り立つと仮定し、成分がすべて実数の ",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " を取る。",
+      ]),
+      displayMath(
+        String.raw`\sum_{j=1}^{r+1} X_j = \Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}
+\qquad (\because \blkref{def_finite_sum_of_matrices})`,
+      ),
+      paragraph([
+        "である。帰納法の仮定より ",
+        math(String.raw`\sum_{j=1}^{r} X_j`),
+        " の成分はすべて実数で、",
+        math(String.raw`X_{r+1}`),
+        " の成分もすべて実数（仮定）なので、",
+        ref("sum_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`A \to \sum_{j=1}^{r} X_j,\ B \to X_{r+1}`),
+        "）より ",
+        math(String.raw`\sum_{j=1}^{r+1} X_j`),
+        " の成分はすべて実数である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の結論で、Σσ_m^x・Σσ_m^zσ_{m+1}^z の成分が実であることを引くために足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },

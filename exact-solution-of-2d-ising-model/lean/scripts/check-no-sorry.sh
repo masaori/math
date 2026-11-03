@@ -1364,6 +1364,21 @@ targets=(
   "Ising2D.NecSuf.transpose_sub_matrix_apply'"
   "Ising2D.NecSuf.transpose_sub_matrix'"
   "Ising2D.NecSuf.finite_sum_transpose_matrix'"
+  Ising2D.S2_hasRealEntries
+  Ising2D.S1plus_hasRealEntries
+  Ising2D.matrix_add_hasRealEntries
+  Ising2D.matrix_sub_eq_add_real_neg_one_smul
+  Ising2D.matrix_sub_hasRealEntries
+  Ising2D.sub_eq_add_real_neg_one_smul_tensorPow
+  Ising2D.sub_hasRealEntries_tensorPow
+  Ising2D.finite_sum_hasRealEntries
+  Ising2D.real_image_add_closed
+  Ising2D.matrix_add_hasRealEntries_of_necSuf
+  Ising2D.matrix_sub_hasRealEntries_of_necSuf
+  Ising2D.finite_sum_hasRealEntries_of_necSuf
+  Ising2D.NecSuf.add_entries_mem
+  Ising2D.NecSuf.sub_entries_mem
+  Ising2D.NecSuf.finite_sum_entries_mem
   Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I

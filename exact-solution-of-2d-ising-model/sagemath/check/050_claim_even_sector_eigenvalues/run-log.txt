@@ -250,3 +250,9 @@ RESULT: PASS
   72 段（M_col = 2..7 の S_2 の 5 行と S_1^(+) の 7 行の鎖。係数は不定元、QQ[i] の厳密計算）
   否定コントロール 7 件: G^T = G の行の符号を壊すと一致しない（M_col ごと）、Y_1Z_2 は転置で対称でない
 RESULT: PASS
+
+##### 2026-11-03 に check_45_iH_real_symmetric_step3_S_real_entries を足した（iH_is_real_symmetric Step 3 の S_2・S_1^{(+)} の成分の実性の 2 段落）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_45_iH_real_symmetric_step3_S_real_entries.sage
+  66 項（M_col = 2..7 で σ^x・Σσ^x・K_2^*Σσ^x・S_2・σ^zσ^z・Σσ^zσ^z・G・K_1Σσ^zσ^z・K_1G・差・S_1^(+) の成分の実性。係数は不定元、QQ[i] の厳密計算）
+  否定コントロール 6 件: i を掛けない H_2・H_1^(+) は成分が実でない（M_col ごと）
+RESULT: PASS
