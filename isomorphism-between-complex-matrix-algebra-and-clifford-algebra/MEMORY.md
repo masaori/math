@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-03: 「二つの線型空間の直和」を二行に割り、直和の定義（ラベル def_direct_sum_of_two_vector_spaces、V_1⊕V_2 は順序対の集合、演算と零は成分ごと）を置いた。次は直和が ℂ-線型空間であること（八つの公理を、順序対の等しさ＝成分ごとの等しさで V_1・V_2 の公理へ帰着する。加法の逆元は各成分の逆元の組）。
 - 2026-11-02: 双対基底が双対空間を線型結合で張ること（ラベル claim_dual_basis_spans_dual_space、等式 g=Σ_k g(b_k)·_{V^*}f_k）を示した。次は二つの線型空間の直和（組の集合と成分ごとの演算）。
 - 2026-11-02: ℂ の中の番号順の和で第 k 項に δ_{k,j} を掛けた和が α_j になること（ラベル claim_ordered_sum_with_kronecker_delta_picks_term、等式 Σ_{ℂ,k} α_k·_ℂδ_{k,j}=α_j）を示した。次は双対基底が双対空間を線型結合で張ること（g∈V^* について h:=Σ_k g(b_k)·f_k と置き、claim_value_of_linear_combination_in_dual_space と双対基底の条件 f_k(b_j)=δ_{k,j} と本主張で h(b_j)=g(b_j) を出し、claim_linear_form_maps_linear_combination_to_ordered_sum と基底が張ることで各点 x で h(x)=g(x) を示す）。
 - 2026-11-02: 研究管理。経路の行列の等式を M=1,2,3 で厳密に確かめた。双対基底の定義・代数の中の番号順の積・a†_S・a_T・P の定義の行を足し、使わない双対基底の一意性の行を消し、a_i P=0 と P a†_i=0 を割って前へ移した。
