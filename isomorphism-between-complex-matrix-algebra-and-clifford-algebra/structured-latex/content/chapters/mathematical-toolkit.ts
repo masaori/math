@@ -3232,4 +3232,182 @@ h(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_direct_sum_of_two_vector_spaces_is_complex_vector_space",
+    kind: "claim",
+    title: { text: "二つの ℂ-線型空間の直和は ℂ-線型空間である" },
+    labels: ["claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"],
+    statement: [
+      paragraph([
+        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
+        " と ",
+        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " をその直和（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）とする。このとき組 ",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`V_1\oplus V_2`),
+        " の元は順序対なので（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、その任意の三元を ",
+        math(String.raw`(x_1,x_2),(y_1,y_2),(z_1,z_2)`),
+        "（",
+        math(String.raw`x_1,y_1,z_1\in V_1`),
+        "、",
+        math(String.raw`x_2,y_2,z_2\in V_2`),
+        "）と書く。",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。",
+      ]),
+      paragraph([
+        "ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。どの条件も ",
+        math(String.raw`V_1\oplus V_2`),
+        " の二つの元の等式であり、",
+        math(String.raw`V_1\oplus V_2`),
+        " の二つの元が等しいことは、第一成分どうしの ",
+        math(String.raw`V_1`),
+        " の等式と、第二成分どうしの ",
+        math(String.raw`V_2`),
+        " の等式がともに成り立つことである（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）。以下の式変形で「各成分に適用」と書いた行は、第一成分に ",
+        math(String.raw`V_1`),
+        " の公理、第二成分に ",
+        math(String.raw`V_2`),
+        " の同じ名前の公理を適用し、その二つの等式から順序対の等式を得る行である。",
+      ]),
+      paragraph(["加法の結合法則 ", math(String.raw`\bigl((x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)\bigr)+_{V_1\oplus V_2}(z_1,z_2)=(x_1,x_2)+_{V_1\oplus V_2}\bigl((y_1,y_2)+_{V_1\oplus V_2}(z_1,z_2)\bigr)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)\bigr)+_{V_1\oplus V_2}(z_1,z_2)
+&=(x_1+_{V_1}y_1,\ x_2+_{V_2}y_2)+_{V_1\oplus V_2}(z_1,z_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl((x_1+_{V_1}y_1)+_{V_1}z_1,\ (x_2+_{V_2}y_2)+_{V_2}z_2\bigr)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(x_1+_{V_1}(y_1+_{V_1}z_1),\ x_2+_{V_2}(y_2+_{V_2}z_2)\bigr)
+&&\left(\because\ \text{加法の結合法則を各成分に適用。}\blkref{def_complex_vector_space}\right)\\
+&=(x_1,x_2)+_{V_1\oplus V_2}(y_1+_{V_1}z_1,\ y_2+_{V_2}z_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(x_1,x_2)+_{V_1\oplus V_2}\bigl((y_1,y_2)+_{V_1\oplus V_2}(z_1,z_2)\bigr)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則 ", math(String.raw`(x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)=(y_1,y_2)+_{V_1\oplus V_2}(x_1,x_2)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)
+&=(x_1+_{V_1}y_1,\ x_2+_{V_2}y_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(y_1+_{V_1}x_1,\ y_2+_{V_2}x_2)
+&&\left(\because\ \text{加法の交換法則を各成分に適用。}\blkref{def_complex_vector_space}\right)\\
+&=(y_1,y_2)+_{V_1\oplus V_2}(x_1,x_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元 ", math(String.raw`(x_1,x_2)+_{V_1\oplus V_2}0_{V_1\oplus V_2}=(x_1,x_2)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(x_1,x_2)+_{V_1\oplus V_2}0_{V_1\oplus V_2}
+&=(x_1,x_2)+_{V_1\oplus V_2}(0_{V_1},0_{V_2})
+&&\left(\because\ 0_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(x_1+_{V_1}0_{V_1},\ x_2+_{V_2}0_{V_2})
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(x_1,x_2)
+&&\left(\because\ \text{加法の単位元を各成分に適用。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元は次のとおりである。",
+        math(String.raw`V_1`),
+        " の加法の逆元の条件（",
+        ref("def_complex_vector_space"),
+        "）により、",
+        math(String.raw`x_1+_{V_1}x_1'=0_{V_1}`),
+        " を満たす ",
+        math(String.raw`x_1'\in V_1`),
+        " を一つ選ぶ。同じく ",
+        math(String.raw`V_2`),
+        " の加法の逆元の条件により、",
+        math(String.raw`x_2+_{V_2}x_2'=0_{V_2}`),
+        " を満たす ",
+        math(String.raw`x_2'\in V_2`),
+        " を一つ選ぶ。このとき ",
+        math(String.raw`(x_1',x_2')\in V_1\oplus V_2`),
+        " は ",
+        math(String.raw`(x_1,x_2)+_{V_1\oplus V_2}(x_1',x_2')=0_{V_1\oplus V_2}`),
+        " を満たす。これは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(x_1,x_2)+_{V_1\oplus V_2}(x_1',x_2')
+&=(x_1+_{V_1}x_1',\ x_2+_{V_2}x_2')
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(0_{V_1},0_{V_2})
+&&\left(\because\ x_1'\ \text{と}\ x_2'\ \text{の選び方を各成分に適用}\right)\\
+&=0_{V_1\oplus V_2}
+&&\left(\because\ 0_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則 ", math(String.raw`(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V_1\oplus V_2}(x_1,x_2)=\lambda\cdot_{V_1\oplus V_2}\bigl(\mu\cdot_{V_1\oplus V_2}(x_1,x_2)\bigr)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V_1\oplus V_2}(x_1,x_2)
+&=\bigl((\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V_1}x_1,\ (\lambda\cdot_{\mathbb{C}}\mu)\cdot_{V_2}x_2\bigr)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{V_1}(\mu\cdot_{V_1}x_1),\ \lambda\cdot_{V_2}(\mu\cdot_{V_2}x_2)\bigr)
+&&\left(\because\ \text{スカラー倍の結合法則を各成分に適用。}\blkref{def_complex_vector_space}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}(\mu\cdot_{V_1}x_1,\ \mu\cdot_{V_2}x_2)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}\bigl(\mu\cdot_{V_1\oplus V_2}(x_1,x_2)\bigr)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元 ", math(String.raw`1_{\mathbb{C}}\cdot_{V_1\oplus V_2}(x_1,x_2)=(x_1,x_2)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot_{V_1\oplus V_2}(x_1,x_2)
+&=(1_{\mathbb{C}}\cdot_{V_1}x_1,\ 1_{\mathbb{C}}\cdot_{V_2}x_2)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=(x_1,x_2)
+&&\left(\because\ \text{スカラー倍の単位元を各成分に適用。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則 ", math(String.raw`\lambda\cdot_{V_1\oplus V_2}\bigl((x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)\bigr)=\lambda\cdot_{V_1\oplus V_2}(x_1,x_2)+_{V_1\oplus V_2}\lambda\cdot_{V_1\oplus V_2}(y_1,y_2)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\cdot_{V_1\oplus V_2}\bigl((x_1,x_2)+_{V_1\oplus V_2}(y_1,y_2)\bigr)
+&=\lambda\cdot_{V_1\oplus V_2}(x_1+_{V_1}y_1,\ x_2+_{V_2}y_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{V_1}(x_1+_{V_1}y_1),\ \lambda\cdot_{V_2}(x_2+_{V_2}y_2)\bigr)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{V_1}x_1+_{V_1}\lambda\cdot_{V_1}y_1,\ \lambda\cdot_{V_2}x_2+_{V_2}\lambda\cdot_{V_2}y_2\bigr)
+&&\left(\because\ \text{ベクトルの加法についての分配法則を各成分に適用。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\cdot_{V_1}x_1,\ \lambda\cdot_{V_2}x_2)+_{V_1\oplus V_2}(\lambda\cdot_{V_1}y_1,\ \lambda\cdot_{V_2}y_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}(x_1,x_2)+_{V_1\oplus V_2}\lambda\cdot_{V_1\oplus V_2}(y_1,y_2)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義を二か所に適用。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則 ", math(String.raw`(\lambda+_{\mathbb{C}}\mu)\cdot_{V_1\oplus V_2}(x_1,x_2)=\lambda\cdot_{V_1\oplus V_2}(x_1,x_2)+_{V_1\oplus V_2}\mu\cdot_{V_1\oplus V_2}(x_1,x_2)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda+_{\mathbb{C}}\mu)\cdot_{V_1\oplus V_2}(x_1,x_2)
+&=\bigl((\lambda+_{\mathbb{C}}\mu)\cdot_{V_1}x_1,\ (\lambda+_{\mathbb{C}}\mu)\cdot_{V_2}x_2\bigr)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\bigl(\lambda\cdot_{V_1}x_1+_{V_1}\mu\cdot_{V_1}x_1,\ \lambda\cdot_{V_2}x_2+_{V_2}\mu\cdot_{V_2}x_2\bigr)
+&&\left(\because\ \text{スカラーの加法についての分配法則を各成分に適用。}\blkref{def_complex_vector_space}\right)\\
+&=(\lambda\cdot_{V_1}x_1,\ \lambda\cdot_{V_2}x_2)+_{V_1\oplus V_2}(\mu\cdot_{V_1}x_1,\ \mu\cdot_{V_2}x_2)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}(x_1,x_2)+_{V_1\oplus V_2}\mu\cdot_{V_1\oplus V_2}(x_1,x_2)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義を二か所に適用。}\blkref{def_direct_sum_of_two_vector_spaces}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件が満たされたので、組 ",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
