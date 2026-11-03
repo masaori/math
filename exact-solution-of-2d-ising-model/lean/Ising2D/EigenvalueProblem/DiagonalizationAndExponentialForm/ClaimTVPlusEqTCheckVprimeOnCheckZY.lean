@@ -13,12 +13,15 @@
 
 | 人手の箇所 | Lean |
 | --- | --- |
-| Step 1 の 3 行の鎖 `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}` | `checkZY_row_eq_rowMul_checkPmat_inv` の `calc` |
-| 鎖の 1 行目が使う `P̌_μ P̌_μ^{-1} = I` | `Matrix.mul_nonsing_inv` と `det_checkPmat_ne_zero`（`diagonalization_check_P_D`） |
-| 鎖の 1 行目が使う `(A_0, B_0) I = (A_0, B_0)` | `rowMul_one`（`ClaimCommutationVPlusCheckPsi.lean`） |
-| 「すなわち」の 2 式 `Ž_μ = q_{11}ψ̌_μ^† + q_{21}ψ̌_μ`、`Y̌_μ = q_{12}ψ̌_μ^† + q_{22}ψ̌_μ` | `checkZ_eq_checkPmat_inv_col`・`checkY_eq_checkPmat_inv_col` |
-| Step 3 の 5 行の鎖（`Ž_μ` と `Y̌_μ`） | `eq_on_checkZY_of_eq_on_checkPsi` の 2 つの `calc` |
-| Step 2 の 2 つの鎖と主張 | `TVPlus_eq_TCheckVprime_on_checkZY` |
+| 準備 1（`ψ̌_μ^†, ψ̌_μ` を `Ž_μ, Y̌_μ` で書く 7 個の等号） | `checkPsi_row_eq_rowMul_checkPmat`（`ClaimCommutationVPlusCheckPsi.lean`） |
+| 準備 2 の鎖 `X_l = q_{1l}Ψ_1 + q_{2l}Ψ_2`（`P̌_μ P̌_μ^{-1} = I` から 14 個の等号） | `checkZY_row_eq_rowMul_checkPmat_inv` の `calc` と `checkZ_eq_checkPmat_inv_col`・`checkY_eq_checkPmat_inv_col` |
+| 準備 2 が使う `P̌_μ P̌_μ^{-1} = I` | `Matrix.mul_nonsing_inv` と `det_checkPmat_ne_zero`（`diagonalization_check_P_D`） |
+| 準備 3（`T_{(V^{(+)})} = T_{V^{(+)}}`、`T_{(V̌')} = T_{V̌'}`） | 呼び出し元が `TConj` の線型写像を渡すこと |
+| 本体の 10 個の等号（`l = 1, 2`） | `eq_on_checkZY_of_eq_on_checkPsi` の 2 つの `calc` と `TVPlus_eq_TCheckVprime_on_checkZY` の 2 つの `calc` |
+
+申し送り: 人手の準備 2 は行列の組の積の結合律を使わず、成分の和の入れ替えの鎖で `X_l = q_{1l}Ψ_1 + q_{2l}Ψ_2` を示す。
+Lean の `checkZY_row_eq_rowMul_checkPmat_inv` は旧い Step 1（`rowMul_one`・`rowMul_rowMul`）のままで、1 対 1 の対応の見直しが要る。
+本体は人手が一本の鎖（`T_{(V^{(+)})}(X_l)` から `T_{(V̌')}(X_l)` まで）で書き、Lean は Step 2 と Step 3 の `calc` に分けている。
 
 人手の proof 冒頭の段落（`V_plus_factors_invertible`・`T_V_plus_is_conjugation`・`def_check_Vprime` (2)・`mat_conj` から
 `T_{(V^{(+)})}`・`T_{(V̌')}` が ℂ 線型であることを得る）は、このファイルでは引かない。Step 3 の `T₁`・`T₂` を任意の

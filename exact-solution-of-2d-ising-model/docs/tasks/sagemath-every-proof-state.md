@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 387 件のうち、SageMath の検算が無いもの 47 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 391 件のうち、SageMath の検算が無いもの 46 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -279,15 +279,22 @@
   人手証明を書き直した（計算の誤りは無かった）: 旧証明は「交換子の第 1 引数の線型性」「反交換子の対称性」「exp(cI) = exp(c)I」「部分和が収束するので極限をとる」を根拠のブロックなしに使っていた。交換子の展開を準備 1〜5 に、cI の成分・exp(cI)・X̌ + cI と −X̌ の可換性と和を準備 6〜8 に 1 行 1 根拠で置き、Step 1・1' を commutator_via_anticommutators から始める鎖に、旧 Step 3〜5 と 3'〜5' を [X̌, W] = cW を満たす一般の W, c の Step 3〜6 にまとめた。主張の右辺を (exp(±γ(θ̃_μ)))_C と書いた。四回のレビューの指摘を直した。
   申し送り（Lean の連続実行の受け持ち。Lean はコメントのみ変え、`lake build`・`check-no-sorry.sh` は通る）: `ClaimActionTCheckVprime.lean` の `matExp_conj_eigen` は `exp_conj_two_dim_z` を z = y = a で使う別の論法で、人手の Step 3〜6（移項・帰納法・部分和の極限・theorem_exp_product）と 1 対 1 でない。下流の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` はこの主張を旧い exp(±γ)ψ̌ の形で引いているので、その検算を足すときに (exp(±γ))_C にそろえる。
 
+- `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（T_{(V^{(+)})} と T_{(V̌')} は Ž, Y̌ 上で一致する）: `sagemath/check/T_V_plus_eq_T_check_Vprime_on_check_Z_Y/`。
+  準備 1・準備 2 は X_1, X_2 と P̌ の成分を QQ 上の不定元に（q = P̌^{-1} はその分数体で）、本物の Ž_μ・Y̌_μ・P̌_μ・ψ̌_μ でも数体の中で、本体の第 1〜第 5 等号は T_{(V^{(+)})} を def_T_V_plus の合成で作って、結合定数 3 組 × M_col = 2..4 × 全 μ で厳密に確かめた。第 5〜第 10 等号（T_{(V̌')} を含む行）と主張は、γ の実対数・実数の exp・V̌' = exp(X̌) をボールで囲んで確かめた。
+  人手証明を直した（計算の誤りは無かった）: 旧 Step 1 は `commutation_V_plus_check_psi` の証明の中の結合律と名前だけの「行ベクトルと 2×2 行列の積の結合法則」、本文に無い (A, B)I = (A, B) を使っていた。準備 1（ψ̌ を Ž, Y̌ で書く 7 個の等号）と準備 2（P̌P̌^{-1} = I から X_l = q_{1l}Ψ_1 + q_{2l}Ψ_2 を出す 14 個の等号）に替え、旧 Step 2・3 を T_{(V^{(+)})}(X_l) から T_{(V̌')}(X_l) までの 10 個の等号の鎖にまとめた。(exp(±γ))_C にそろえ、T_{(V̌')} = T_{V̌'} を `def_check_Vprime` (2) から引き、ℝ への脱出をどのブロックから引き継ぐかを書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。
+  申し送り（Lean の連続実行の受け持ち。Lean は注記のみ変え、このモジュールの `lake build` と `check-no-sorry.sh` は通る）: `ClaimTVPlusEqTCheckVprimeOnCheckZY.lean` の `checkZY_row_eq_rowMul_checkPmat_inv` は旧い Step 1（`rowMul_one`・`rowMul_rowMul`）のままで、人手の準備 2（成分の和の入れ替えの鎖）と 1 対 1 でない。本体の一本の鎖を Lean は二つの `calc` に分けている。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `T_V_plus_eq_T_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
 
-- 2026-11-03、`commutation_V_plus_check_psi` の書き直しで見つかった（根拠の欠けと表記。今回の差分より前から）: `diagonalization_check_P_D` は「det P̌ ≠ 0 より P̌^{-1} が存在する」とだけ書き、2×2 行列の逆行列を与えるブロック（det ≠ 0 なら def_invertible_elements_of_R の M = 1 の可逆元であること）が本文に無い。また同じ主張の Ď_μ は実数 λ_{±,μ} と 0 を包含の像を書かずに Mat(2,ℂ) の成分にしている。この単位では使う側の準備 4 で読み方を書いた。下流の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` は、この主張を旧い exp(±γ)ψ̌ の形で引いているので、その検算を足すときに (exp(±γ))_C にそろえる。
+- 2026-11-03、`T_V_plus_eq_T_check_Vprime_on_check_Z_Y` のレビューで見つかった（主張の欠け。今回の差分より前から）: `diagonalization_check_P_D` の主張は P̌_μ^{-1} を使うが、P̌_μ ∈ Mat(2,ℂ)^×（`def_invertible_elements_of_R` の M = 1）を主張しておらず、証明も「det ≠ 0 より P̌^{-1} が存在する」をラベル無しで済ませている（2×2 行列の逆行列を与えるブロックが無い件は既出）。使う側（`commutation_V_plus_check_psi`・`T_V_plus_eq_T_check_Vprime_on_check_Z_Y`）は「主張に現れる P̌_μ^{-1} は M = 1 の逆元」と読んで使った。直すには主張に P̌_μ ∈ Mat(2,ℂ)^× を足して証明で示す。検算の付いたブロックの見直しで扱う。
+
+- 2026-11-03、`commutation_V_plus_check_psi` の書き直しで見つかった（根拠の欠けと表記。今回の差分より前から）: `diagonalization_check_P_D` は「det P̌ ≠ 0 より P̌^{-1} が存在する」とだけ書き、2×2 行列の逆行列を与えるブロック（det ≠ 0 なら def_invertible_elements_of_R の M = 1 の可逆元であること）が本文に無い。また同じ主張の Ď_μ は実数 λ_{±,μ} と 0 を包含の像を書かずに Mat(2,ℂ) の成分にしている。この単位では使う側の準備 4 で読み方を書いた。下流の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` の旧い exp(±γ)ψ̌ の形は、2026-11-03 にその検算を足したときに (exp(±γ))_C にそろえた。
 
 - 2026-11-03、`anticommutator_of_check_psi` のレビューで見つかった（表記の省略。今回の差分より前から）: `def_check_fermi` と `diagonalization_check_P_D` は係数を `∓r/(2√M_col b)`・`1/(2√M_col)` と書き、実数 r・√M_col・2 を包含の像を書かずに ℂ の係数にしており、ℂ の商も定めずに使っている（ℂ の商が本文に無い件は既出）。この単位では使う側の証明で包含の像と z w^{-1} で読み替えた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 
