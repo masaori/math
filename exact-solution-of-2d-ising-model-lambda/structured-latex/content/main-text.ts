@@ -62324,6 +62324,11 @@ s(j')-s(j)
                       title: { text: "方向単位ベクトル" },
                       labels: ["def_direction_unit_vector"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.directionUnitVector",
+                        "Ising2DLambda.NecSuf.KacWard.directionUnitVector",
+                        "Ising2DLambda.KacWard.directionUnitVector_from_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           "写像 ", math(String.raw`u:\mathbb Z/4\mathbb Z\to\mathbb Z\times\mathbb Z`),
@@ -68693,7 +68698,12 @@ a+3\cdot b&=t_{\circ}(\Gamma_2)+t_{\circ}(\gamma)
                         " のそれぞれについて ",
                         ref("claim_one_sided_closure_projection_cyclic_turning"), " により",
                       ]),
-                      displayMath(String.raw`a+cb=t_{\circ}(\Gamma_c)\in\{4,-4\}\qquad(c=1,2,3)`),
+                      displayMath(String.raw`\begin{aligned}
+a+cb&=t_{\circ}(\Gamma_c)
+&&\bigl(\because\ \text{上の三つの等式}\bigr)\\
+&\in\{4,-4\}\qquad(c=1,2,3)
+&&\bigl(\because\ \blkref{claim_one_sided_closure_projection_cyclic_turning}\bigr).
+\end{aligned}`),
                       paragraph([
                         "である。従って ", ref("claim_three_term_pm_four_difference_zero"),
                         " を ", math(String.raw`a,b`), " へ適用して ",
