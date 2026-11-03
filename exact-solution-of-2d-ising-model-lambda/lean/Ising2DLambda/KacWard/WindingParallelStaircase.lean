@@ -21,6 +21,12 @@ def windingParallelStaircase (L : ℕ) (wh wv : ℤ) : ℕ → ℤ × ℤ :=
     (L * wh.natAbs) (L * wv.natAbs)
     (0, Int.sign wh) (Int.sign wv, 0)
 
+/-- 実際の閉歩道の巻き付き数から作る正の平行階段。 -/
+def windingParallelStaircaseFromWalk {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) : ℕ → ℤ × ℤ :=
+  windingParallelStaircase L
+    (horizontalDirectedWindingNumber γ) (verticalDirectedWindingNumber γ)
+
 private lemma natAbs_pos_of_product_pos (L : ℕ) (w : ℤ)
     (h : 0 < L * w.natAbs) : 0 < w.natAbs := by
   by_contra hnot

@@ -65862,6 +65862,11 @@ E^{\gamma,k_0,u}_{2h+cm-j}+c\,B_{\gamma},&h+cm\le j\le 2h+cm,\\
                       title: { text: "巻き付きベクトルに平行な整数格子の階段" },
                       labels: ["def_winding_parallel_staircase"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.windingParallelStaircaseFromWalk",
+                        "Ising2DLambda.KacWard.windingParallelStaircase",
+                        "Ising2DLambda.NecSuf.KacWard.orderedTwoPhaseStaircase",
+                      ],
                       statement: [
                         paragraph([
                           "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
