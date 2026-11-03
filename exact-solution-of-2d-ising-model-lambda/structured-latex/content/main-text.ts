@@ -66446,11 +66446,6 @@ cL W_{\perp}(\gamma)
                     title: { text: "頂点単純な閉単位格子路のトーラス射影は閉じた非後退辺列である" },
                     labels: ["claim_plane_simple_cycle_projection_closed_nonbacktracking"],
                     habitat: "Z",
-                    lean: [
-                      "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking",
-                      "Ising2DLambda.NecSuf.KacWard.simple_cycle_projection_closed_nonbacktracking_necSuf",
-                      "Ising2DLambda.KacWard.planeSimpleCycleProjection_closedNonbacktracking_from_necSuf",
-                    ],
                     verification: ["sagemath/check/plane-cycle-torus-projection"],
                     statement: [
                       paragraph([
@@ -72432,9 +72427,10 @@ V^{\mathrm v}_{i,0}
 &&\bigl(\because\ \text{上で示した行によらない和}\bigr).
 \end{aligned}`),
                       paragraph(["各 ", math(String.raw`P_{i,j}`), " は頂点偶次数なので ", math(String.raw`C^{\mathrm v}`), " も頂点偶次数である。"]),
-                      paragraph(["従って頂点条件へ上の縦辺係数を代入すると ",
-                        math(String.raw`H^{\mathrm v}_{i,j}=H^{\mathrm v}_{i,j-1}`),
-                        " である。行 ", math(String.raw`i`), " に共通な係数を ",
+                      paragraph(["頂点条件へ上の縦辺係数を代入する。"]),
+                      displayMath(String.raw`H^{\mathrm v}_{i,j}=H^{\mathrm v}_{i,j-1}
+\qquad(\because\ \text{頂点偶次数条件と縦辺係数の相殺}).`),
+                      paragraph(["行 ", math(String.raw`i`), " に共通な係数を ",
                         math(String.raw`a_i\in\mathbb F_2`), " と書く。", math(String.raw`q_0:=0`),
                         "、", math(String.raw`1\le i<L`), " では ",
                         math(String.raw`q_i:=\sum_{r=1}^{i}a_r`), " と置く。"]),
@@ -72500,6 +72496,11 @@ H^{\mathrm h}_{0,j}
                       title: { text: "二つの有限辺鎖の交差数" },
                       labels: ["def_even_edge_chain_intersection"],
                       habitat: "N",
+                      lean: [
+                        "Ising2DLambda.KacWard.evenEdgeChainIntersection",
+                        "Ising2DLambda.NecSuf.KacWard.finiteEdgeChainIntersection",
+                        "Ising2DLambda.KacWard.evenEdgeChainIntersection_from_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           ref("claim_even_edge_chain_torus_normal_form"), " と同じ辺の標識を用いる。",
