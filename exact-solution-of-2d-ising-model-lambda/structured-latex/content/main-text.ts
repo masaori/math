@@ -61030,6 +61030,11 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
                       title: { text: "二本の閉歩道の間の混合横断数" },
                       labels: ["def_split_mutual_crossing_number"],
                       habitat: "N",
+                      lean: [
+                        "Ising2DLambda.KacWard.splitMutualCrossingNumber",
+                        "Ising2DLambda.NecSuf.KacWard.splitMutualCrossingNumber",
+                        "Ising2DLambda.KacWard.splitMutualCrossingNumber_from_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           ref("def_smoothed_crossing_number"), " と同じ閉じた非後退辺列 ",
@@ -61223,9 +61228,13 @@ c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
                       ]),
                       displayMath(String.raw`\begin{aligned}
 c(\gamma_A)+c(\gamma_B)+2
+&\le c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+2
+&&\bigl(\because\ c_{\times}(\gamma;k,l)\in\mathbb N\bigr)\\
+&\le c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)+n_{v,0}(\gamma)+1
+&&\bigl(\because\ 1\le n_{v,0}(\gamma)\bigr)\\
 &\le c(\gamma_A)+c(\gamma_B)+c_{\times}(\gamma;k,l)
   +n_{v,0}(\gamma)+n_{v,1}(\gamma)
-&&\bigl(\because\ c_{\times}\in\mathbb N,\ 1\le n_{v,0},\ 1\le n_{v,1}\bigr)\\
+&&\bigl(\because\ 1\le n_{v,1}(\gamma)\bigr)\\
 &=c_{\mathrm{sm}}(\gamma;k,l)+n_{v,0}(\gamma)+n_{v,1}(\gamma)
 &&\bigl(\because\ \blkref{claim_smoothing_split_crossing_partition}\bigr)\\
 &=c(\gamma)+1
