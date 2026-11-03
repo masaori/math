@@ -5454,7 +5454,7 @@ g
       ),
       paragraph([
         "が成り立つ（",
-        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        math(String.raw`I := I_{\mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb{C})}`),
         "、",
         math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}`),
         " は ",
@@ -5466,7 +5466,7 @@ g
         " は ",
         ref("def_zero_matrix"),
         " の零行列 ",
-        math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        math(String.raw`O \in \mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb{C})`),
         " である。対になる添字は ",
         math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
         " である。",
@@ -5476,343 +5476,743 @@ g
     ],
     proof: [
       paragraph([
-        "以下 ",
-        math(String.raw`a_\mu := \gamma_2(\tilde\theta_\mu)`),
+        "準備（記号と読み方）。",
+        math(String.raw`N := (M_{\mathrm{col}})_{\mathbb N}`),
         "、",
-        math(String.raw`b_\mu := \gamma_2(-\tilde\theta_\mu)`),
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}`),
+        "・",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}`),
+        " は ",
+        ref("antiperiodic_exp_sum"),
+        " の像の記号とし、",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{N},\mathbb{C})}`),
         "、",
-        math(String.raw`r_\mu := |a_\mu| \in \mathbb{R}_{>0}`),
-        "、",
-        math(String.raw`c_\mu := \dfrac{1}{2\sqrt{M_{\mathrm{col}}}\,b_\mu} \in \mathbb{C}^\times`),
-        " と略記する（",
-        ref("gamma_2_theta_tilde_nonzero"),
-        " と ",
-        ref("relation_of_gamma_2_theta_tilde"),
-        " より ",
-        math(String.raw`a_\mu \neq 0`),
-        "、",
-        math(String.raw`b_\mu \neq 0`),
+        math(String.raw`O \in \mathrm{Mat}(2^{N},\mathbb{C})`),
+        " と置く。",
+        math(String.raw`s := \sqrt{(M_{\mathrm{col}})_{\mathbb R}}^{(\mathbb{R}_{\ge 0})} \in \mathbb{R}_{\ge 0}`),
+        "（",
+        ref("definition_of_sqrt_r_positive"),
+        "。",
+        math(String.raw`s\,s = (M_{\mathrm{col}})_{\mathbb R}`),
+        "）と置く。",
+        math(String.raw`s`),
+        " と下の ",
+        math(String.raw`r_\lambda`),
+        " は ",
+        math(String.raw`\mathbb{R}_{\ge 0}`),
+        " の平方根の値であり、存在を ",
+        math(String.raw`\mathbb{R}`),
+        " の完備性に頼るので ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している（",
+        math(String.raw`M_{\mathrm{col}}`),
+        " が平方数でなければ ",
+        math(String.raw`s \notin \mathbb{Q}`),
         "）。",
+        math(String.raw`\sigma := s_{\mathbb C}`),
+        "、",
+        math(String.raw`t := 2_{\mathbb C}\,\sigma \in \mathbb{C}`),
+        "（",
+        math(String.raw`2_{\mathbb C} := (2_{\mathbb R})_{\mathbb C}`),
+        "、",
+        ref("inclusion_rr_to_cc"),
+        "）と置き、",
+        math(String.raw`\lambda \in \check{\mathcal{M}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`a_\lambda := \gamma_2(\tilde\theta_\lambda) \in \mathbb{C},\quad
+b_\lambda := \gamma_2(-\tilde\theta_\lambda) \in \mathbb{C},\quad
+r_\lambda := |a_\lambda| \in \mathbb{R}_{>0},\quad
+\rho_\lambda := (r_\lambda)_{\mathbb C},\quad
+d_\lambda := t\,b_\lambda \in \mathbb{C}`,
+      ),
+      paragraph([
+        "と置く（",
+        math(String.raw`r_\lambda > 0`),
+        " は ",
         ref("def_check_fermi"),
-        " は",
+        " の前置き）。",
+        ref("def_check_fermi"),
+        " の後段により ",
+        math(String.raw`t \neq 0_{\mathbb C}`),
+        "、",
+        math(String.raw`d_\lambda \neq 0_{\mathbb C}`),
+        " である。",
+        math(String.raw`w \in \mathbb{C}`),
+        "、",
+        math(String.raw`w \neq 0_{\mathbb C}`),
+        " の逆元 ",
+        math(String.raw`w^{-1}`),
+        " は ",
+        ref("complex_numbers_form_a_field"),
+        " のもので、商を ",
+        math(String.raw`z/w := z\,w^{-1}`),
+        " と書く。",
+        math(String.raw`-z := (-1_{\mathbb C})z`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " である。",
+      ]),
+      displayMath(
+        String.raw`u^{-}_\lambda := (-\rho_\lambda)\,d_\lambda^{-1},\qquad
+u^{+}_\lambda := \rho_\lambda\,d_\lambda^{-1},\qquad
+h := 1_{\mathbb C}\,t^{-1}`,
+      ),
+      paragraph([
+        "と置く。",
+        ref("def_check_fermi"),
+        " の係数 ",
+        math(String.raw`\frac{\mp r}{2\sqrt{M_{\mathrm{col}}}\,b}`),
+        "・",
+        math(String.raw`\frac{1}{2\sqrt{M_{\mathrm{col}}}}`),
+        " は、実数 ",
+        math(String.raw`r_\lambda`),
+        "・",
+        math(String.raw`2`),
+        "・",
+        math(String.raw`\sqrt{M_{\mathrm{col}}} = s`),
+        " を包含の像 ",
+        math(String.raw`\rho_\lambda`),
+        "・",
+        math(String.raw`2_{\mathbb C}`),
+        "・",
+        math(String.raw`\sigma`),
+        " と読んだ ",
+        math(String.raw`u^{\mp}_\lambda`),
+        "・",
+        math(String.raw`h`),
+        " である。したがって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\check\psi_\mu^\dagger &= c_\mu\left(-r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)
-&&\bigl(\because\ \blkref{def_check_fermi}\text{ と上の略記}\bigr),\\
-\check\psi_\mu &= c_\mu\left(+r_\mu\,\check{Z}_\mu + b_\mu\,\check{Y}_\mu\right)
-&&\bigl(\because\ \blkref{def_check_fermi}\text{ と上の略記}\bigr)
+\check\psi_\lambda^\dagger &= u^{-}_\lambda\check{Z}_\lambda + h\,\check{Y}_\lambda
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr),\\
+\check\psi_\lambda &= u^{+}_\lambda\check{Z}_\lambda + h\,\check{Y}_\lambda
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "と書ける。また ",
-        ref("anticommutator_of_check_Z_Y"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{Z}_\mu,\check{Z}_\nu\right]_+ &= 2M_{\mathrm{col}}\,\delta\,I
-&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
-\left[\check{Z}_\mu,\check{Y}_\nu\right]_+ &= 0
-&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
-\left[\check{Y}_\mu,\check{Z}_\nu\right]_+ &= 0
-&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\text{ と反交換子の対称性}\bigr),\\
-\left[\check{Y}_\mu,\check{Y}_\nu\right]_+ &= 2M_{\mathrm{col}}\,\delta\,I
-&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\bigr),\\
-\delta &:= \delta_{\nu,\,M_{\mathrm{col}}+1-\mu}
-&&\bigl(\because\ \text{略記}\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（",
-        math(String.raw`[\check{Y}_\mu, \check{Z}_\nu]_+ = [\check{Z}_\nu, \check{Y}_\mu]_+ = 0`),
-        " は反交換子の対称性による）。",
-      ]),
-      paragraph([
-        "Step 1（",
-        math(String.raw`\delta \neq 0`),
-        " のときの係数の関係）。",
-        math(String.raw`\delta = \delta_{\nu,\,M_{\mathrm{col}}+1-\mu} = 1`),
-        " とは ",
-        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
-        " そのものである（",
-        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
-        " に絞ったので合同式を解く必要がない。",
+        "である。",
+        math(String.raw`\delta := \delta_{\nu,\,M_{\mathrm{col}}+1-\mu} \in \mathbb{C}`),
+        "（",
+        ref("def_kronecker_delta"),
+        " を ",
+        math(String.raw`n = M_{\mathrm{col}}`),
+        " で。",
         ref("def_check_index_set"),
-        " (5)）。このとき ",
-        ref("periodicity_of_check_fermi"),
-        " (3) より",
+        " (2) により ",
+        math(String.raw`\nu,\ M_{\mathrm{col}}+1-\mu \in \check{\mathcal M}`),
+        "）、",
+        math(String.raw`\omega := \left(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\right)\delta \in \mathbb{C}`),
+        " と置く。",
+        ref("anticommutator_of_check_Z_Y"),
+        " の右辺の ",
+        math(String.raw`2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
+        " は、その主張の後段のとおりスカラー倍 ",
+        math(String.raw`\omega I`),
+        " である。",
+      ]),
+      paragraph([
+        "準備 1（",
+        math(String.raw`\check{Y}`),
+        " と ",
+        math(String.raw`\check{Z}`),
+        " の順の反交換子）。",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
+&= \check{Y}_\mu\check{Z}_\nu + \check{Z}_\nu\check{Y}_\mu
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= \check{Z}_\nu\check{Y}_\mu + \check{Y}_\mu\check{Z}_\nu
+&&\bigl(\because\ \blkref{matrix_sum_is_commutative}\bigr)\\
+&= \left[\check{Z}_\nu, \check{Y}_\mu\right]_+
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\text{ の第 2 式を添字の組 }(\nu,\mu)\text{ で}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 2（係数を残した展開）。",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        "、",
+        math(String.raw`u, u' \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left[u\check{Z}_\mu + h\check{Y}_\mu,\ u'\check{Z}_\nu + h\check{Y}_\nu\right]_+
+&= \Bigl[\sum_{j=1}^{2} x_jX_j,\ \sum_{k=1}^{2} y_kW_k\Bigr]_+
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{ を 2 箇所へ同時適用。}(x_1,x_2) := (u,h),\ (X_1,X_2) := (\check{Z}_\mu,\check{Y}_\mu),\ (y_1,y_2) := (u',h),\ (W_1,W_2) := (\check{Z}_\nu,\check{Y}_\nu)\bigr)\\
+&= \sum_{j=1}^{2}\sum_{k=1}^{2} (x_jy_k)\left[X_j, W_k\right]_+
+&&\bigl(\because\ \blkref{anticommutator_of_finite_sums_of_scalar_multiples}\ (n = 2^{N},\ r = s = 2)\bigr)\\
+&= \Bigl((uu')\left[\check{Z}_\mu,\check{Z}_\nu\right]_+ + (uh)\left[\check{Z}_\mu,\check{Y}_\nu\right]_+\Bigr)
+ + \Bigl((hu')\left[\check{Y}_\mu,\check{Z}_\nu\right]_+ + (hh)\left[\check{Y}_\mu,\check{Y}_\nu\right]_+\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{ を内側の 2 つと外側の 1 つへ同時適用}\bigr)\\
+&= \Bigl((uu')(\omega I) + (uh)O\Bigr)
+ + \Bigl((hu')\left[\check{Y}_\mu,\check{Z}_\nu\right]_+ + (hh)(\omega I)\Bigr)
+&&\bigl(\because\ \blkref{anticommutator_of_check_Z_Y}\text{ を 3 箇所へ同時適用}\bigr)\\
+&= \Bigl((uu')(\omega I) + (uh)O\Bigr)
+ + \Bigl((hu')O + (hh)(\omega I)\Bigr)
+&&(\because\ \text{準備 1})\\
+&= \Bigl((uu')(\omega I) + O\Bigr) + \Bigl(O + (hh)(\omega I)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= (uu')(\omega I) + \Bigl(O + (hh)(\omega I)\Bigr)
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\bigr)\\
+&= (uu')(\omega I) + (hh)(\omega I)
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\bigr)\\
+&= \bigl((uu')\omega\bigr)I + \bigl((hh)\omega\bigr)I
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= \sum_{j=1}^{2} (c_jI)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{。}(c_1, c_2) := ((uu')\omega, (hh)\omega)\bigr)\\
+&= \Bigl(\sum_{j=1}^{2} c_j\Bigr)I
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (r = 2)\bigr)\\
+&= \bigl((uu')\omega + (hh)\omega\bigr)I
+&&\bigl(\because\ \blkref{def_finite_sum_of_complex_numbers}\bigr)\\
+&= \bigl((uu' + hh)\,\omega\bigr)I
+&&\bigl(\because\ \mathbb{C}\text{ の分配法則。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。",
+      ]),
+      paragraph([
+        "準備 3（",
+        math(String.raw`\nu \neq M_{\mathrm{col}}+1-\mu`),
+        " の場合）。このとき ",
+        math(String.raw`\delta = 0_{\mathbb C}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "）なので、",
+        math(String.raw`w \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl(w\,\omega\bigr)I
+&= \Bigl(w\bigl(\left(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\right)0_{\mathbb C}\bigr)\Bigr)I
+&&\bigl(\because\ \omega\text{ の定義と }\delta = 0_{\mathbb C}\bigr)\\
+&= \bigl(w\,0_{\mathbb C}\bigr)I
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\bigr)\\
+&= 0_{\mathbb C}\,I
+&&\bigl(\because\ \blkref{complex_times_zero_is_zero}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr),\\[4pt]
+\delta\,I
+&= 0_{\mathbb C}\,I
+&&(\because\ \delta = 0_{\mathbb C})\\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 4（",
+        math(String.raw`\mathbb{C}`),
+        " の符号と逆元の規則）。",
+        math(String.raw`z, w \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})
+= (-1_{\mathbb R}, 0_{\mathbb R})(-1_{\mathbb R}, 0_{\mathbb R})
+&&\bigl(\because\ -1_{\mathbb C} = (-1_{\mathbb R})_{\mathbb C}\ (\blkref{inclusion_rr_to_cc})\bigr)\\
+&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
+= \bigl((-1_{\mathbb R})(-1_{\mathbb R}) - 0_{\mathbb R}0_{\mathbb R},\ (-1_{\mathbb R})0_{\mathbb R} + 0_{\mathbb R}(-1_{\mathbb R})\bigr)
+&&\bigl(\because\ \blkref{definition_of_cc}\text{ の積}\bigr)\\
+&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
+= (1_{\mathbb R}, 0_{\mathbb R})
+&&(\because\ \mathbb{R}\text{ の四則})\\
+&\phantom{\text{(i)}\quad (-1_{\mathbb C})(-1_{\mathbb C})}
+= 1_{\mathbb C}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr),\\[4pt]
+&\text{(ii)}\quad z(-w)
+= z\bigl((-1_{\mathbb C})w\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&\phantom{\text{(ii)}\quad z(-w)}
+= (-1_{\mathbb C})(zw)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&\phantom{\text{(ii)}\quad z(-w)}
+= -(zw)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr),\\[4pt]
+&\text{(iii)}\quad (-z)w
+= \bigl((-1_{\mathbb C})z\bigr)w
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&\phantom{\text{(iii)}\quad (-z)w}
+= (-1_{\mathbb C})(zw)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&\phantom{\text{(iii)}\quad (-z)w}
+= -(zw)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr),\\[4pt]
+&\text{(iv)}\quad -(-z)
+= (-1_{\mathbb C})\bigl((-1_{\mathbb C})z\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\text{ を 2 箇所へ同時適用}\bigr)\\
+&\phantom{\text{(iv)}\quad -(-z)}
+= \bigl((-1_{\mathbb C})(-1_{\mathbb C})\bigr)z
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&\phantom{\text{(iv)}\quad -(-z)}
+= 1_{\mathbb C}\,z
+&&(\because\ \text{(i)})\\
+&\phantom{\text{(iv)}\quad -(-z)}
+= z
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+&\text{(v)}\quad (-z)(-w)
+= -\bigl(z(-w)\bigr)
+&&(\because\ \text{(iii)})\\
+&\phantom{\text{(v)}\quad (-z)(-w)}
+= -\bigl(-(zw)\bigr)
+&&(\because\ \text{(ii)})\\
+&\phantom{\text{(v)}\quad (-z)(-w)}
+= zw
+&&(\because\ \text{(iv)})
+\end{aligned}`,
+      ),
+      paragraph([
+        "が成り立つ。さらに ",
+        math(String.raw`z \neq 0_{\mathbb C}`),
+        "、",
+        math(String.raw`w \neq 0_{\mathbb C}`),
+        " なら（逆元は ",
+        ref("complex_numbers_form_a_field"),
+        "）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)
+= \bigl(zz^{-1}\bigr)\bigl(ww^{-1}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&\phantom{\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
+= 1_{\mathbb C}1_{\mathbb C}
+&&\bigl(\because\ \text{逆元を 2 箇所へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&\phantom{\text{(vi)}\quad (zw)\bigl(z^{-1}w^{-1}\bigr)}
+= 1_{\mathbb C}
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+&\text{(vii)}\quad (-z)\bigl(-(z^{-1})\bigr)
+= zz^{-1}
+&&(\because\ \text{(v)})\\
+&\phantom{\text{(vii)}\quad (-z)\bigl(-(z^{-1})\bigr)}
+= 1_{\mathbb C}
+&&\bigl(\because\ \text{逆元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`x \in \mathbb{C}`),
+        " が ",
+        math(String.raw`xy = 1_{\mathbb C}`),
+        " となる ",
+        math(String.raw`y \in \mathbb{C}`),
+        " をもてば、",
+        math(String.raw`x = 0_{\mathbb C}`),
+        " とすると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb C}
+&= x\,y
+&&(\because\ xy = 1_{\mathbb C}\text{ を右辺から左辺へ})\\
+&= 0_{\mathbb C}\,y
+&&(\because\ x = 0_{\mathbb C})\\
+&= 0_{\mathbb C}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`1_{\mathbb C} \neq 0_{\mathbb C}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        "）に反するので ",
+        math(String.raw`x \neq 0_{\mathbb C}`),
+        " であり、逆元の一意性（",
+        ref("complex_numbers_form_a_field"),
+        "）より ",
+        math(String.raw`x^{-1} = y`),
+        " である。これを (vi)・(vii) に当てて、",
+      ]),
+      displayMath(
+        String.raw`\text{(viii)}\quad zw \neq 0_{\mathbb C},\quad (zw)^{-1} = z^{-1}w^{-1},\qquad
+\text{(ix)}\quad -z \neq 0_{\mathbb C},\quad (-z)^{-1} = -(z^{-1})`,
+      ),
+      paragraph([
+        "を得る。",
+      ]),
+      paragraph([
+        "準備 5（",
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
+        " の場合の係数）。このとき ",
+        math(String.raw`\delta = 1_{\mathbb C}`),
+        "（",
+        ref("def_kronecker_delta"),
+        "）であり、",
+        math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
+        " に絞ったので合同式を解く必要がない（",
+        ref("def_check_index_set"),
+        " (5)）。",
+        math(String.raw`a_\mu = (x, y) \in \mathbb{C} = \mathbb{R}^2`),
+        " と成分で書く。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 a_\nu
 &= \gamma_2(\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-   \quad (\because a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = M_{\mathrm{col}}+1-\mu) \\
+&&(\because\ a_\nu := \gamma_2(\tilde\theta_\nu),\ \nu = M_{\mathrm{col}}+1-\mu)\\
 &= \gamma_2(-\tilde\theta_\mu)
-   \quad (\because \blkref{periodicity_of_check_fermi}\ (3)) \\
+&&\bigl(\because\ \blkref{periodicity_of_check_fermi}\ (3)\bigr)\\
 &= b_\mu
-   \quad (\because b_\mu \text{ の略記}),\\[4pt]
+&&(\because\ b_\mu\text{ の定義}),\\[4pt]
 b_\nu
 &= \gamma_2(-\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-   \quad (\because b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = M_{\mathrm{col}}+1-\mu) \\
+&&(\because\ b_\nu := \gamma_2(-\tilde\theta_\nu),\ \nu = M_{\mathrm{col}}+1-\mu)\\
 &= \gamma_2(\tilde\theta_\mu)
-   \quad (\because \blkref{periodicity_of_check_fermi}\ (3)) \\
+&&\bigl(\because\ \blkref{periodicity_of_check_fermi}\ (3)\bigr)\\
 &= a_\mu
-   \quad (\because a_\mu \text{ の略記})
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        ref("relation_of_gamma_2_theta_tilde"),
-        " (1) の ",
-        math(String.raw`b_\mu = -\overline{a_\mu}`),
-        " と ",
-        math(String.raw`|\overline{z}| = |z|`),
-        "（",
-        ref("abs_basic_properties"),
-        "）より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
+&&(\because\ a_\mu\text{ の定義}),\\[4pt]
 r_\nu
 &= |a_\nu|
-   \quad (\because r_\nu := |a_\nu|) \\
+&&(\because\ r_\nu\text{ の定義})\\
 &= |b_\mu|
-   \quad (\because \text{上の } a_\nu = b_\mu) \\
+&&(\because\ \text{上の }a_\nu = b_\mu)\\
 &= \left|-\overline{a_\mu}\right|
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (1)) \\
-&= \left|\overline{a_\mu}\right|
-   \quad (\because \blkref{abs_basic_properties}\ (|-z| = |z|)) \\
+&&\bigl(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (1)\bigr)\\
+&= \left|(-1_{\mathbb C})\,\overline{a_\mu}\right|
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= \left|(-1_{\mathbb C})\,(x, -y)\right|
+&&\bigl(\because\ \blkref{def_complex_conjugate}\bigr)\\
+&= \left|(-1_{\mathbb R}, 0_{\mathbb R})\,(x, -y)\right|
+&&\bigl(\because\ -1_{\mathbb C} = (-1_{\mathbb R})_{\mathbb C} = (-1_{\mathbb R}, 0_{\mathbb R})\ (\blkref{inclusion_rr_to_cc})\bigr)\\
+&= \left|(-x,\ y)\right|
+&&\bigl(\because\ \blkref{definition_of_cc}\text{ の積：}\bigl((-1_{\mathbb R})x - 0_{\mathbb R}(-y),\ (-1_{\mathbb R})(-y) + 0_{\mathbb R}x\bigr) = (-x, y)\bigr)\\
+&= \sqrt{(-x)^2 + y^2}^{(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \blkref{abs_basic_properties}\ (1)\bigr)\\
+&= \sqrt{x^2 + y^2}^{(\mathbb{R}_{\ge 0})}
+&&\bigl(\because\ \mathbb{R}\text{ で }(-x)^2 = x^2\bigr)\\
 &= |a_\mu|
-   \quad (\because \blkref{abs_basic_properties}\ (|\bar z| = |z|)) \\
+&&\bigl(\because\ \blkref{abs_basic_properties}\ (1)\bigr)\\
 &= r_\mu
-   \quad (\because r_\mu := |a_\mu|)
+&&(\because\ r_\mu\text{ の定義})
 \end{aligned}`,
       ),
       paragraph([
-        "である。以下この共通の値を ",
-        math(String.raw`r := r_\mu = r_\nu > 0`),
-        " と書く。さらに ",
+        "である。以下 ",
+        math(String.raw`r := r_\mu = r_\nu \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`\rho := r_{\mathbb C} = \rho_\mu = \rho_\nu`),
+        " と書く。",
         ref("relation_of_gamma_2_theta_tilde"),
-        " (2) より",
+        " (2) の右辺 ",
+        math(String.raw`-|a_\mu|^2`),
+        " は実数なので、",
+        math(String.raw`\mathbb{C}`),
+        " の等式としては包含の像で読む。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 b_\mu b_\nu
 &= b_\mu a_\mu
-   \quad (\because \text{上の } b_\nu = a_\mu) \\
+&&(\because\ \text{上の }b_\nu = a_\mu)\\
 &= a_\mu b_\mu
-   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
-&= -r^2
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\ (2)),\\[4pt]
-c_\mu c_\nu
-&= \frac{1}{2\sqrt{M_{\mathrm{col}}}\,b_\mu}\cdot\frac{1}{2\sqrt{M_{\mathrm{col}}}\,b_\nu}
-   \quad (\because c_\mu := \tfrac{1}{2\sqrt{M_{\mathrm{col}}}\,b_\mu}) \\
-&= \frac{1}{4M_{\mathrm{col}}\,b_\mu b_\nu}
-   \quad \left(\because \left(2\sqrt{M_{\mathrm{col}}}\right)^2 = 4M_{\mathrm{col}}\right) \\
-&= \frac{1}{4M_{\mathrm{col}}\left(-r^2\right)}
-   \quad (\because \text{上の } b_\mu b_\nu = -r^2) \\
-&= \frac{-1}{4M_{\mathrm{col}}r^2}
-   \quad (\because \text{負号を分子へ移す（}\mathbb{C}\text{ の四則）})
+&&\bigl(\because\ \mathbb{C}\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(-|a_\mu|^2\bigr)_{\mathbb C}
+&&\bigl(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2)\bigr)\\
+&= \bigl(-(r\,r)\bigr)_{\mathbb C}
+&&\bigl(\because\ |a_\mu|^2 := |a_\mu|\,|a_\mu|\text{（}\mathbb{R}\text{ の 2 乗の記法）と }r = |a_\mu|\bigr)\\
+&= (-1_{\mathbb C})\,(r\,r)_{\mathbb C}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\text{ と }\blkref{definition_of_cc}\text{ の積：}(-1_{\mathbb R}, 0_{\mathbb R})(rr, 0_{\mathbb R}) = (-(rr), 0_{\mathbb R})\bigr)\\
+&= -\bigl((r\,r)_{\mathbb C}\bigr)
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= -(\rho\rho)
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr),\\[4pt]
+t\,t
+&= (2_{\mathbb C}\sigma)(2_{\mathbb C}\sigma)
+&&(\because\ t\text{ の定義})\\
+&= (2_{\mathbb C}2_{\mathbb C})(\sigma\sigma)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (2_{\mathbb R}2_{\mathbb R})_{\mathbb C}\,(s\,s)_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= (4_{\mathbb R})_{\mathbb C}\,(s\,s)_{\mathbb C}
+&&\bigl(\because\ \mathbb{R}\text{ で }2\cdot 2 = 4\bigr)\\
+&= (4_{\mathbb R})_{\mathbb C}\,\bigl((M_{\mathrm{col}})_{\mathbb R}\bigr)_{\mathbb C}
+&&\bigl(\because\ s\,s = s^2 = (M_{\mathrm{col}})_{\mathbb R}\text{（}\blkref{definition_of_sqrt_r_positive}\text{。}s^2 := s\,s\text{）}\bigr)\\
+&= 4_{\mathbb C}\,(M_{\mathrm{col}})_{\mathbb C}
+&&\bigl(\because\ 4_{\mathbb C} := (4_{\mathbb R})_{\mathbb C}\text{、}\blkref{antiperiodic_exp_sum}\text{ の像の記号}\bigr),\\[4pt]
+d_\mu d_\nu
+&= (t\,b_\mu)(t\,b_\nu)
+&&(\because\ d_\lambda\text{ の定義を 2 箇所へ同時適用})\\
+&= (t\,t)(b_\mu b_\nu)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (t\,t)\bigl(-(\rho\rho)\bigr)
+&&(\because\ \text{上の }b_\mu b_\nu = -(\rho\rho))\\
+&= -\bigl((t\,t)(\rho\rho)\bigr)
+&&(\because\ \text{準備 4 (ii)})
 \end{aligned}`,
       ),
       paragraph([
+        "である。",
+        math(String.raw`r \neq 0_{\mathbb R}`),
+        " より ",
+        math(String.raw`\rho = (r, 0_{\mathbb R}) \neq 0_{\mathbb C}`),
         "（",
-        math(String.raw`r > 0`),
-        " なので分母は ",
-        math(String.raw`0`),
-        " でない）。",
-      ]),
-      paragraph([
-        "Step 2（第 1 式）。反交換子 ",
-        math(String.raw`[X,W]_+ := XW + WX`),
-        " は両引数について ",
-        math(String.raw`\mathbb{C}`),
-        " 双線型である。実際",
+        ref("inclusion_rr_to_cc"),
+        "）、また ",
+        math(String.raw`t \neq 0_{\mathbb C}`),
+        " なので、準備 4 (viii) により ",
+        math(String.raw`t\,t`),
+        "、",
+        math(String.raw`\rho\rho`),
+        "、",
+        math(String.raw`(t\,t)(\rho\rho)`),
+        " は ",
+        math(String.raw`0_{\mathbb C}`),
+        " でなく、準備 4 (ix) により ",
+        math(String.raw`-\bigl((t\,t)(\rho\rho)\bigr) \neq 0_{\mathbb C}`),
+        " である。",
+        math(String.raw`d_\mu^{-1}d_\nu^{-1}`),
+        " を先に求める。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-[\alpha X, \beta W]_+
-&= (\alpha X)(\beta W) + (\beta W)(\alpha X)
-   \quad (\because \text{反交換子の定義}) \\
-&= \alpha\beta\,XW + \beta\alpha\,WX
-   \quad (\because \blkref{scalar_identity_commutes}\text{ を 2 箇所へ同時適用}) \\
-&= \alpha\beta\,XW + \alpha\beta\,WX
-   \quad (\because \mathbb{C}\text{ の乗法の可換則}) \\
-&= \alpha\beta\left(XW + WX\right)
-   \quad (\because \text{分配則による括り出し})
+d_\mu^{-1}d_\nu^{-1}
+&= (d_\mu d_\nu)^{-1}
+&&\bigl(\because\ \text{準備 4 (viii) を右辺から左辺へ}\bigr)\\
+&= \Bigl(-\bigl((t\,t)(\rho\rho)\bigr)\Bigr)^{-1}
+&&(\because\ \text{上の }d_\mu d_\nu = -((tt)(\rho\rho)))\\
+&= -\Bigl(\bigl((t\,t)(\rho\rho)\bigr)^{-1}\Bigr)
+&&\bigl(\because\ \text{準備 4 (ix)}\bigr)\\
+&= -\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)
+&&\bigl(\because\ \text{準備 4 (viii)}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "であり、和についての加法性も行列の積の分配法則から従う。これを使って",
+        "したがって三つの係数の組は",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u^{-}_\mu u^{-}_\nu
+&= \bigl((-\rho)d_\mu^{-1}\bigr)\bigl((-\rho)d_\nu^{-1}\bigr)
+&&(\because\ u^{-}_\lambda\text{ の定義と }\rho_\mu = \rho_\nu = \rho)\\
+&= \bigl((-\rho)(-\rho)\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (\rho\rho)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
+&&(\because\ \text{準備 4 (v)})\\
+&= (\rho\rho)\Bigl(-\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
+&&(\because\ \text{上の }d_\mu^{-1}d_\nu^{-1}\text{ の鎖})\\
+&= -\Bigl((\rho\rho)\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
+&&(\because\ \text{準備 4 (ii)})\\
+&= -\Bigl((t\,t)^{-1}\bigl((\rho\rho)(\rho\rho)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= -\bigl((t\,t)^{-1}1_{\mathbb C}\bigr)
+&&\bigl(\because\ \text{逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= -\bigl((t\,t)^{-1}\bigr)
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+u^{+}_\mu u^{+}_\nu
+&= \bigl(\rho\,d_\mu^{-1}\bigr)\bigl(\rho\,d_\nu^{-1}\bigr)
+&&(\because\ u^{+}_\lambda\text{ の定義と }\rho_\mu = \rho_\nu = \rho)\\
+&= (\rho\rho)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= (\rho\rho)\Bigl(-\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
+&&(\because\ \text{上の }d_\mu^{-1}d_\nu^{-1}\text{ の鎖})\\
+&= -\Bigl((\rho\rho)\bigl((t\,t)^{-1}(\rho\rho)^{-1}\bigr)\Bigr)
+&&(\because\ \text{準備 4 (ii)})\\
+&= -\Bigl((t\,t)^{-1}\bigl((\rho\rho)(\rho\rho)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= -\bigl((t\,t)^{-1}1_{\mathbb C}\bigr)
+&&\bigl(\because\ \text{逆元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= -\bigl((t\,t)^{-1}\bigr)
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+u^{-}_\mu u^{+}_\nu
+&= \bigl((-\rho)d_\mu^{-1}\bigr)\bigl(\rho\,d_\nu^{-1}\bigr)
+&&(\because\ u^{\mp}_\lambda\text{ の定義と }\rho_\mu = \rho_\nu = \rho)\\
+&= \bigl((-\rho)\rho\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(-(\rho\rho)\bigr)\bigl(d_\mu^{-1}d_\nu^{-1}\bigr)
+&&(\because\ \text{準備 4 (iii)})\\
+&= -\bigl((\rho\rho)(d_\mu^{-1}d_\nu^{-1})\bigr)
+&&(\because\ \text{準備 4 (iii)})\\
+&= -\Bigl(-\bigl((t\,t)^{-1}\bigr)\Bigr)
+&&\bigl(\because\ u^{+}_\mu u^{+}_\nu\text{ の鎖の第 2 行から最後の行までの等号 }(\rho\rho)(d_\mu^{-1}d_\nu^{-1}) = -((tt)^{-1})\bigr)\\
+&= (t\,t)^{-1}
+&&(\because\ \text{準備 4 (iv)}),\\[4pt]
+h\,h
+&= \bigl(1_{\mathbb C}t^{-1}\bigr)\bigl(1_{\mathbb C}t^{-1}\bigr)
+&&(\because\ h\text{ の定義})\\
+&= t^{-1}t^{-1}
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元を 2 箇所へ同時適用}\bigr)\\
+&= (t\,t)^{-1}
+&&\bigl(\because\ \text{準備 4 (viii) を右辺から左辺へ}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、これらから",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+u^{-}_\mu u^{-}_\nu + h\,h
+&= -\bigl((t\,t)^{-1}\bigr) + (t\,t)^{-1}
+&&(\because\ \text{上の二つの鎖})\\
+&= 0_{\mathbb C}
+&&\bigl(\because\ \text{加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+u^{+}_\mu u^{+}_\nu + h\,h
+&= -\bigl((t\,t)^{-1}\bigr) + (t\,t)^{-1}
+&&(\because\ \text{上の二つの鎖})\\
+&= 0_{\mathbb C}
+&&\bigl(\because\ \text{加法の逆元。}\blkref{complex_numbers_form_a_field}\bigr),\\[4pt]
+\bigl(u^{-}_\mu u^{+}_\nu + h\,h\bigr)\,\omega
+&= \bigl((t\,t)^{-1} + (t\,t)^{-1}\bigr)\,\omega
+&&(\because\ \text{上の二つの鎖})\\
+&= \bigl(1_{\mathbb C}(t\,t)^{-1} + 1_{\mathbb C}(t\,t)^{-1}\bigr)\,\omega
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元を 2 箇所へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl((1_{\mathbb C} + 1_{\mathbb C})(t\,t)^{-1}\bigr)\,\omega
+&&\bigl(\because\ \mathbb{C}\text{ の分配法則。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \bigl(2_{\mathbb C}(t\,t)^{-1}\bigr)\,\omega
+&&\bigl(\because\ 1_{\mathbb C} + 1_{\mathbb C} = (1_{\mathbb R} + 1_{\mathbb R}, 0_{\mathbb R}) = 2_{\mathbb C}\ (\blkref{definition_of_cc}\text{ の和})\bigr)\\
+&= \bigl(2_{\mathbb C}(t\,t)^{-1}\bigr)\Bigl(\bigl(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\bigr)1_{\mathbb C}\Bigr)
+&&(\because\ \omega\text{ の定義と }\delta = 1_{\mathbb C})\\
+&= \bigl(2_{\mathbb C}(t\,t)^{-1}\bigr)\bigl(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\bigr)
+&&\bigl(\because\ 1_{\mathbb C}\text{ は積の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl((2_{\mathbb C}2_{\mathbb C})(M_{\mathrm{col}})_{\mathbb C}\Bigr)(t\,t)^{-1}
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \Bigl((2_{\mathbb R}2_{\mathbb R})_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\Bigr)(t\,t)^{-1}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr)\\
+&= \Bigl(4_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\Bigr)(t\,t)^{-1}
+&&\bigl(\because\ \mathbb{R}\text{ で }2\cdot 2 = 4\text{。}4_{\mathbb C} := (4_{\mathbb R})_{\mathbb C}\bigr)\\
+&= (t\,t)(t\,t)^{-1}
+&&(\because\ \text{上の }t\,t = 4_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C})\\
+&= 1_{\mathbb C}
+&&\bigl(\because\ \text{逆元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "を得る。",
+      ]),
+      paragraph([
+        "第 1 式。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+
-&= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
-   c_\nu\left(-r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \blkref{def_check_fermi}) \\
-&= c_\mu c_\nu\Bigl(
-\left(-r_\mu\right)\left(-r_\nu\right)\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
-+ \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
-&\qquad\qquad
-+ b_\mu\left(-r_\nu\right)\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
-+ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
-\Bigr)
-   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
-&= c_\mu c_\nu\Bigl(
-\left(-r_\mu\right)\left(-r_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ \left(-r_\mu\right)b_\nu\cdot 0 \\
-&\qquad\qquad
-+ b_\mu\left(-r_\nu\right)\cdot 0
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\Bigr)
-   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
-&= c_\mu c_\nu\left(
-\left(-r_\mu\right)\left(-r_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\right)
-   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
-&= c_\mu c_\nu\left(
-r_\mu r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\right)
-   \quad (\because \left(-x\right)\left(-y\right) = xy\ (\mathbb{R}\text{ の四則})) \\
-&= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-   \quad (\because \text{分配則による } 2M_{\mathrm{col}}\,\delta\,I \text{ の括り出し})
+&= \left[u^{-}_\mu\check{Z}_\mu + h\check{Y}_\mu,\ u^{-}_\nu\check{Z}_\nu + h\check{Y}_\nu\right]_+
+&&\bigl(\because\ \blkref{def_check_fermi}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= \bigl((u^{-}_\mu u^{-}_\nu + h\,h)\,\omega\bigr)I
+&&(\because\ \text{準備 2 を }u = u^{-}_\mu,\ u' = u^{-}_\nu\text{ で})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\delta = 0`),
-        " なら全体が ",
-        math(String.raw`0`),
-        "。",
-        math(String.raw`\delta \neq 0`),
-        " なら Step 1 より ",
-        math(String.raw`r_\mu r_\nu = r^2`),
-        "、",
-        math(String.raw`b_\mu b_\nu = -r^2`),
-        " なので括弧は ",
-        math(String.raw`r^2 - r^2 = 0`),
-        "。いずれの場合も ",
-        math(String.raw`\left[\check\psi_\mu^\dagger, \check\psi_\nu^\dagger\right]_+ = 0`),
-        "。",
+        "である。",
+        math(String.raw`\nu \neq M_{\mathrm{col}}+1-\mu`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\bigl((u^{-}_\mu u^{-}_\nu + h\,h)\,\omega\bigr)I = O
+\quad (\because\ \text{準備 3 を }w = u^{-}_\mu u^{-}_\nu + hh\text{ で})`,
+      ),
+      paragraph([
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl((u^{-}_\mu u^{-}_\nu + h\,h)\,\omega\bigr)I
+&= \bigl(0_{\mathbb C}\,\omega\bigr)I
+&&(\because\ \text{準備 5 の }u^{-}_\mu u^{-}_\nu + hh = 0_{\mathbb C})\\
+&= 0_{\mathbb C}\,I
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。どちらの場合も主張の右辺 ",
+        math(String.raw`O`),
+        " に着く。",
       ]),
       paragraph([
-        "Step 3（第 3 式）。",
-        "第 1 式と同じ定義・双線型性・反交換関係を各行で適用すると",
+        "第 3 式。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu, \check\psi_\nu\right]_+
-&= \left[c_\mu\left(r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
-   c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \blkref{def_check_fermi}) \\
-&= c_\mu c_\nu\Bigl(
-r_\mu r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
-+ r_\mu b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
-&\qquad\qquad
-+ b_\mu r_\nu\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
-+ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
-\Bigr)
-   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
-&= c_\mu c_\nu\Bigl(
-r_\mu r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ r_\mu b_\nu\cdot 0
-+ b_\mu r_\nu\cdot 0
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\Bigr)
-   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
-&= c_\mu c_\nu\left(
-r_\mu r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\right)
-   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
-&= c_\mu c_\nu\left(r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-   \quad (\because \text{分配則による } 2M_{\mathrm{col}}\,\delta\,I \text{ の括り出し})
+&= \left[u^{+}_\mu\check{Z}_\mu + h\check{Y}_\mu,\ u^{+}_\nu\check{Z}_\nu + h\check{Y}_\nu\right]_+
+&&\bigl(\because\ \blkref{def_check_fermi}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= \bigl((u^{+}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I
+&&(\because\ \text{準備 2 を }u = u^{+}_\mu,\ u' = u^{+}_\nu\text{ で})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\delta = 0`),
-        " なら全体が ",
-        math(String.raw`0`),
-        "。",
-        math(String.raw`\delta \neq 0`),
-        " なら Step 1 より括弧が ",
-        math(String.raw`r^2-r^2=0`),
-        "。したがって ",
-        math(String.raw`\left[\check\psi_\mu, \check\psi_\nu\right]_+ = 0`),
-        "。",
+        "である。",
+        math(String.raw`\nu \neq M_{\mathrm{col}}+1-\mu`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\bigl((u^{+}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I = O
+\quad (\because\ \text{準備 3 を }w = u^{+}_\mu u^{+}_\nu + hh\text{ で})`,
+      ),
+      paragraph([
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl((u^{+}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I
+&= \bigl(0_{\mathbb C}\,\omega\bigr)I
+&&(\because\ \text{準備 5 の }u^{+}_\mu u^{+}_\nu + hh = 0_{\mathbb C})\\
+&= 0_{\mathbb C}\,I
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。どちらの場合も主張の右辺 ",
+        math(String.raw`O`),
+        " に着く。",
       ]),
       paragraph([
-        "Step 4（第 2 式）。定義・双線型性・反交換関係を各行で適用すると",
+        "第 2 式。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
-&= \left[c_\mu\left(-r_\mu\check{Z}_\mu + b_\mu\check{Y}_\mu\right),\
-   c_\nu\left(r_\nu\check{Z}_\nu + b_\nu\check{Y}_\nu\right)\right]_+
-   \quad (\because \blkref{def_check_fermi}) \\
-&= c_\mu c_\nu\Bigl(
-\left(-r_\mu\right)r_\nu\left[\check{Z}_\mu, \check{Z}_\nu\right]_+
-+ \left(-r_\mu\right)b_\nu\left[\check{Z}_\mu, \check{Y}_\nu\right]_+ \\
-&\qquad\qquad
-+ b_\mu r_\nu\left[\check{Y}_\mu, \check{Z}_\nu\right]_+
-+ b_\mu b_\nu\left[\check{Y}_\mu, \check{Y}_\nu\right]_+
-\Bigr)
-   \quad (\because \text{反交換子の } \mathbb{C} \text{ 双線型性}) \\
-&= c_\mu c_\nu\Bigl(
-\left(-r_\mu\right)r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ \left(-r_\mu\right)b_\nu\cdot 0
-+ b_\mu r_\nu\cdot 0
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\Bigr)
-   \quad (\because \blkref{anticommutator_of_check_Z_Y}\text{ を 4 箇所へ同時適用}) \\
-&= c_\mu c_\nu\left(
-\left(-r_\mu\right)r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-\right)
-   \quad (\because 0 \text{ 行列の項の消去（2 箇所へ同時適用）}) \\
-&= c_\mu c_\nu\left(-r_\mu r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
-+ b_\mu b_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I\right)
-   \quad (\because \left(-x\right)y=-xy\ (\mathbb{R}\text{ の四則})) \\
-&= c_\mu c_\nu\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-   \quad (\because \text{分配則による } 2M_{\mathrm{col}}\,\delta\,I \text{ の括り出し})
+&= \left[u^{-}_\mu\check{Z}_\mu + h\check{Y}_\mu,\ u^{+}_\nu\check{Z}_\nu + h\check{Y}_\nu\right]_+
+&&\bigl(\because\ \blkref{def_check_fermi}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= \bigl((u^{-}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I
+&&(\because\ \text{準備 2 を }u = u^{-}_\mu,\ u' = u^{+}_\nu\text{ で})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\delta = 0`),
-        " なら全体が ",
-        math(String.raw`0`),
-        " であり、",
-        math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}I = 0`),
-        " と一致する。",
-        math(String.raw`\delta \neq 0`),
-        "（すなわち ",
-        math(String.raw`\delta = 1`),
-        "）なら Step 1 より",
+        "である。",
+        math(String.raw`\nu \neq M_{\mathrm{col}}+1-\mu`),
+        " のとき",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left[\check\psi_\mu^\dagger, \check\psi_\nu\right]_+
-&= \frac{-1}{4M_{\mathrm{col}}r^2}\left(-r_\mu r_\nu + b_\mu b_\nu\right)\cdot 2M_{\mathrm{col}}\,\delta\,I
-   \quad (\because \text{Step 1}\ (c_\mu c_\nu = \tfrac{-1}{4M_{\mathrm{col}}r^2})) \\
-&= \frac{-1}{4M_{\mathrm{col}}r^2}\left(-r^2 + \left(-r^2\right)\right)\cdot 2M_{\mathrm{col}}\,I
-   \quad (\because \text{Step 1}\ (r_\mu r_\nu = r^2,\ b_\mu b_\nu = -r^2),\ \delta = 1) \\
-&= \frac{-1}{4M_{\mathrm{col}}r^2}\cdot\left(-2r^2\right)\cdot 2M_{\mathrm{col}}\,I
-   \quad (\because -r^2 + \left(-r^2\right) = -2r^2\text{（同類項の統合）}) \\
-&= \frac{\left(-1\right)\cdot\left(-2r^2\right)\cdot 2M_{\mathrm{col}}}{4M_{\mathrm{col}}r^2}\,I
-   \quad (\because \text{分数の積（}\mathbb{R}\text{ の四則）}) \\
-&= \frac{4M_{\mathrm{col}}r^2}{4M_{\mathrm{col}}r^2}\,I
-   \quad (\because \left(-1\right)\left(-2r^2\right) = 2r^2 \text{ と乗法の可換則}) \\
-&= I
-   \quad (\because M_{\mathrm{col}} \geq 2,\ r > 0 \text{ より } 4M_{\mathrm{col}}r^2 \neq 0 \text{ の約分})
+\bigl((u^{-}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I
+&= O
+&&(\because\ \text{準備 3 を }w = u^{-}_\mu u^{+}_\nu + hh\text{ で})\\
+&= \delta\,I
+&&(\because\ \text{準備 3 の }\delta I = O\text{ を右辺から左辺へ})
 \end{aligned}`,
       ),
       paragraph([
-        "であり、",
-        math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}I = I`),
-        " と一致する。",
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\bigl((u^{-}_\mu u^{+}_\nu + h\,h)\,\omega\bigr)I
+&= 1_{\mathbb C}\,I
+&&(\because\ \text{準備 5 の }(u^{-}_\mu u^{+}_\nu + hh)\,\omega = 1_{\mathbb C})\\
+&= \delta\,I
+&&(\because\ \delta = 1_{\mathbb C})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。どちらの場合も主張の右辺 ",
+        math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I = \delta\,I`),
+        " に一致する。",
       ]),
     ],
     conversion: {
@@ -5820,11 +6220,12 @@ r_\mu r_\nu\cdot 2M_{\mathrm{col}}\,\delta\,I
       notes: [
         "008 章の anticommutator_of_psi の半整数運動量版。008 章が Step 0（√ の分枝の一致）に費やしていた部分は、" +
           "係数が |γ_2|（非負実数）で書かれることにより絶対値の計算 1 行に置き換わった。",
-        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_02（M=2,3,4,5、μ,ν ∈ {1..M}（および負の μ）、5 組の (K1,K2)）。",
+        "数値検証: sagemath/check/anticommutator_of_check_psi/（証明の各行。厳密計算）。旧い sagemath/check/049_claim_even_sector_fermions/check_02 は主張だけを浮動小数点で確かめたもの。",
         "2026-08-19 の式変形統一で、行末根拠の機械識別子と「直前の displayMath」という指し方を人間可読な名前へ直し、" +
           "一行二等号（a_ν・b_ν の鎖と Step 4 の末尾）を一操作ずつに分け、根拠の無かった行（r_ν = r_μ、可換則、負号の移動、同類項の統合、約分）に行末根拠を補い、" +
           "散文に畳まれていた反交換子の双線型性の計算を鎖へ開いた。内容と参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。散文の「和についての加法性も分配法則から従う」を anticommutator_of_finite_sums_of_scalar_multiples による係数を残した展開（準備 2）に、反交換子の対称性を def_matrix_anticommutator と matrix_sum_is_commutative の鎖（準備 1）に、δ = 0 の場合の散文を準備 3 の鎖に、abs_basic_properties が述べていない |−z| = |z|・|z̄| = |z| を def_complex_conjugate と definition_of_cc の積・abs_basic_properties (1) の成分の鎖に、ℂ の符号と逆元の規則を準備 4 の鎖にした。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き（def_check_fermi の √M_col・r・2 を包含の像 σ・ρ・2_C で読む）、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I と O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。",
       ],
     },
   },

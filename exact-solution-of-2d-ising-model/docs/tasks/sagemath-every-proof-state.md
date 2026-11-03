@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 51 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 50 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -256,13 +256,20 @@
   人手証明を直した: (1) の根拠が主張と違う式を述べる `euler_formula_cos_sin` を「exp(i(t+2kπ)) = cos + i sin」に引いていたのを、準備で `euler_formula_cos_sin` から exp(ix) = cos x + i sin x と cos(−x) = cos x を導く鎖に、「(1) が従う」の散文を γ_1 の 3 行と γ_2 の 6 行の鎖に、(3) の γ の散文を `def_gamma_theta` の 3 行の鎖に、P̌ の「成分が書けることが分かる」を行列の 3 行の鎖にした。角度を像の記号 k_R・(1)_R・(−1)_R で書き、(−k)_R = −k_R を準備の鎖に、P̌_{M+1−μ} の主張を行列で明示し、全実数上の cos・sin の 2π 周期性を前提とすることと c_2^* の帰属を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
   申し送り（Lean の連続実行の受け持ち。Lean は不変で、この主張のモジュール `DefinitionCheckFermi` の `lake build` と `check-no-sorry.sh` は通る。全体の `lake build` はこの VM の負荷で 1 時間に終わらなかった）: `DefinitionCheckFermi.lean` の注記は旧い (1)(2)(3) の書き方（2kπ、散文の「(1) が従う」）のままで、新しい鎖（準備の exp(ix) の表示、γ_2 の 6 行、P̌ の行列）との 1 対 1 の対応の見直しが要る。P̌ の入れ替えの主張は Lean に無い。
 
+- `anticommutator_of_check_psi`（ψ̌ の反交換関係）: `sagemath/check/anticommutator_of_check_psi/`。
+  行列の鎖（準備 1〜3 と主張の三つの式）は Ž・Y̌ を円分体 QQ(ζ_{4M}) の行列として本文の成分の式で組み、準備 2 は係数 u, u', h を不定元に置いて M_col = 2..4 で、主張そのものは Sage の行列演算で M_col = 2..5 で確かめた。係数の鎖（準備 4・準備 5）は、一般の点で各行の差が根拠の関係だけのイデアルに入ること（対照つき）を、具体値で結合定数 4 組 × M_col = 2..6 の全 μ を円分体に r = |a_μ| を添えた体 L(R) で確かめた（浮動小数点・ボールなし。M_col ≥ 7 は L(R) の逆元の計算で 10 分を超えた）。
+  人手証明を直した: 「和についての加法性も分配法則から従う」の散文を `anticommutator_of_finite_sums_of_scalar_multiples` による係数を残した展開（準備 2）に、名前だけの「反交換子の対称性」を `def_matrix_anticommutator`・`matrix_sum_is_commutative` の鎖に、δ = 0 の場合の散文を準備 3 の鎖に。`abs_basic_properties` を |−z| = |z|・|z̄| = |z| の根拠に引いていた（この性質を述べていない）のを、`def_complex_conjugate`・`definition_of_cc` の積・`abs_basic_properties` (1) の成分の鎖に。ℂ の符号と逆元の規則（(−1)(−1) = 1、z(−w) = −(zw)、(zw)^{-1} = z^{-1}w^{-1}、(−z)^{-1} = −(z^{-1})、逆元をもてば 0 でない）を準備 4 の鎖に。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き、`def_check_fermi` の √M_col・r・2 を包含の像で読み、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I・O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変）: `ClaimAnticommutatorCheckPsi.lean` の注記は旧い Step 1〜4 の段の名前のままで、新しい準備 1〜5 と三つの式の鎖との 1 対 1 の対応の見直しが要る。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `anticommutator_of_check_psi`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `commutation_V_plus_check_psi`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`anticommutator_of_check_psi` のレビューで見つかった（表記の省略。今回の差分より前から）: `def_check_fermi` と `diagonalization_check_P_D` は係数を `∓r/(2√M_col b)`・`1/(2√M_col)` と書き、実数 r・√M_col・2 を包含の像を書かずに ℂ の係数にしており、ℂ の商も定めずに使っている（ℂ の商が本文に無い件は既出）。この単位では使う側の証明で包含の像と z w^{-1} で読み替えた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`det_A_theta_tilde` のレビューで見つかった（定義の欠け。今回の差分より前から）: ℂ の商 z/w と逆元 w^{-1} の記法を定めるブロックが本文に無く、`euler_formula_cos_sin` の sin の式などが `complex_numbers_form_a_field` の体構造だけを頼りに分数を書いている。この単位では証明の準備で z/w := zw^{-1} と置き、2_C・i・2_C i が 0 でないことを成分で示した。直すには計算公式の章に ℂ の逆元と商の定義を置き、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 

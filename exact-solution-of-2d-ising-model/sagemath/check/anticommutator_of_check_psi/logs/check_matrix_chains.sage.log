@@ -1,0 +1,7 @@
+== anticommutator_of_check_psi: 行列の鎖
+M=2 済み
+M=3 済み
+M=4 済み
+M=5 済み
+-- anticommutator_of_check_psi: 行列の鎖: 1603/1603 PASS
+RESULT: PASS
