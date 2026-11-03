@@ -65716,10 +65716,19 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
                         "）から相異なる。",
                       ]),
                       paragraph([
-                        "第二の主張を示す。始点は ",
-                        math(String.raw`E^{\gamma,k_0,u}_0=D^{\gamma,Q,u}_0=Q=\widetilde P_{k_0}(\gamma)`),
-                        "（", ref("def_iterated_transverse_staircase"), "、",
-                        ref("def_first_hit_connecting_staircase"), "）。基点は ",
+                        "第二の主張を示す。始点について、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+E^{\gamma,k_0,u}_0
+&=D^{\gamma,Q,u}_0
+&&\bigl(\because\ \blkref{def_first_hit_connecting_staircase}\bigr)\\
+&=Q
+&&\bigl(\because\ \blkref{def_iterated_transverse_staircase}\bigr)\\
+&=\widetilde P_{k_0}(\gamma)
+&&\bigl(\because\ \blkref{def_first_hit_connecting_staircase}\text{ の }Q\text{ の定義}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        "基点は ",
                         math(String.raw`K_{\max}(\gamma)\le\kappa_{\gamma}(Q)`),
                         " を等号で満たす（", ref("def_first_hit_connecting_staircase"),
                         " の ", math(String.raw`k_0`), " の取り方）ので、反復回数 ",
@@ -65789,6 +65798,11 @@ K_{\max}(\gamma):=\max_{0\le r<m}\kappa_{\gamma}(P_r(\gamma))\in\mathbb Z`),
                       title: { text: "接続階段と二つの周期持ち上げから作る閉路" },
                       labels: ["def_periodic_lift_closure_cycle"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.firstHitLiftIndexFromWalk",
+                        "Ising2DLambda.KacWard.periodicLiftClosureFromWalk",
+                        "Ising2DLambda.NecSuf.KacWard.fourPartClosure",
+                      ],
                       statement: [
                         paragraph([
                           "接続階段（", ref("def_first_hit_connecting_staircase"), "）の終点を ",
