@@ -5004,7 +5004,17 @@ g
         math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
         "、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
-        " とする。次が成り立つ。",
+        " とする。",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`\tilde\theta_\mu \in \mathbb{R}`),
+        "（",
+        math(String.raw`\mu \in \mathbb{Z}`),
+        "）と整数の像の記号 ",
+        math(String.raw`a_{\mathbb R} := \iota_{\mathbb Z\to\mathbb R}(a)`),
+        "（",
+        math(String.raw`a \in \mathbb{Z}`),
+        "）を用いる。次が成り立つ。",
       ]),
       list([
         [
@@ -5017,9 +5027,9 @@ g
           "、",
           math(String.raw`k \in \mathbb{Z}`),
           "）：",
-          math(String.raw`\gamma_1(\theta + 2k\pi) = \gamma_1(\theta)`),
+          math(String.raw`\gamma_1(\theta + 2\pi k_{\mathbb R}) = \gamma_1(\theta)`),
           "、",
-          math(String.raw`\gamma_2(\theta + 2k\pi) = \gamma_2(\theta)`),
+          math(String.raw`\gamma_2(\theta + 2\pi k_{\mathbb R}) = \gamma_2(\theta)`),
           "。",
         ],
         [
@@ -5028,12 +5038,12 @@ g
           " 周期性**（",
           math(String.raw`\mu, k \in \mathbb{Z}`),
           "）：",
-          math(String.raw`\tilde\theta_{\mu+kM_{\mathrm{col}}} = \tilde\theta_\mu + 2k\pi`),
+          math(String.raw`\tilde\theta_{\mu+kM_{\mathrm{col}}} = \tilde\theta_\mu + 2\pi k_{\mathbb R}`),
           "、したがって ",
           math(String.raw`\gamma_1(\tilde\theta_{\mu+kM_{\mathrm{col}}}) = \gamma_1(\tilde\theta_\mu)`),
           "、",
           math(String.raw`\gamma_2(\pm\tilde\theta_{\mu+kM_{\mathrm{col}}}) = \gamma_2(\pm\tilde\theta_\mu)`),
-          "。",
+          "（複号同順）。",
         ],
         [
           "(3) **共役添字**（",
@@ -5046,14 +5056,56 @@ g
           math(String.raw`\gamma_1(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma_1(\tilde\theta_\mu)`),
           "、",
           math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma(\tilde\theta_\mu)`),
-          "、",
-          math(String.raw`\check{P}_{M_{\mathrm{col}}+1-\mu}`),
-          " は ",
-          math(String.raw`\check{P}_\mu`),
+          "（",
+          ref("def_gamma_theta"),
+          "）、および ",
+          ref("diagonalization_check_P_D"),
           " の ",
-          math(String.raw`\gamma_2(\pm\tilde\theta_\mu)`),
-          " を入れ替えたもの。",
+          math(String.raw`\check{P}`),
+          " について",
         ],
+      ]),
+      displayMath(
+        String.raw`\check{P}_{M_{\mathrm{col}}+1-\mu}
+= \begin{pmatrix}
+\dfrac{-\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)}
+& \dfrac{+\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)} \\[8pt]
+\dfrac{1}{2\sqrt{M_{\mathrm{col}}}} & \dfrac{1}{2\sqrt{M_{\mathrm{col}}}}
+\end{pmatrix}`,
+      ),
+      paragraph([
+        "（",
+        math(String.raw`\check{P}_\mu`),
+        " の式の ",
+        math(String.raw`\gamma_2(\tilde\theta_\mu)`),
+        " と ",
+        math(String.raw`\gamma_2(-\tilde\theta_\mu)`),
+        " を入れ替えたもの）。",
+      ]),
+      paragraph([
+        "**この主張は全実数上の ",
+        math(String.raw`\cos, \sin`),
+        " を前提とする。** ",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の ",
+        math(String.raw`\gamma_1, \gamma_2`),
+        " は全実数上の ",
+        math(String.raw`\cos, \sin`),
+        " の値で書かれ、証明は ",
+        ref("euler_formula_cos_sin"),
+        " の二つの等式と ",
+        math(String.raw`2\pi`),
+        " 周期性（",
+        math(String.raw`x \in \mathbb{R}`),
+        "、",
+        math(String.raw`n \in \mathbb{Z}`),
+        " について ",
+        math(String.raw`\cos(x+2\pi n_{\mathbb R}) = \cos x`),
+        "、",
+        math(String.raw`\sin(x+2\pi n_{\mathbb R}) = \sin x`),
+        "）を使う。全実数への拡張は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり未整備である。",
       ]),
       paragraph([
         "**この主張の (2) だけは ",
@@ -5071,7 +5123,7 @@ g
         " の関数（",
         ref("def_gamma1_gamma2_of_theta"),
         "）であることによって意味をもつ主張であり、",
-        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        math(String.raw`\check{P}_\mu`),
         " や ",
         math(String.raw`\check\psi_\mu`),
         "（これらは ",
@@ -5081,154 +5133,283 @@ g
     ],
     proof: [
       paragraph([
-        "(1) 実数 ",
-        math(String.raw`t`),
-        " について ",
-        math(String.raw`\cos(t+2k\pi) = \cos t`),
-        "、",
-        math(String.raw`\sin(t+2k\pi) = \sin t`),
-        " であり、",
-        ref("euler_formula_cos_sin"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(i(t+2k\pi))
-&= \cos(t+2k\pi) + i\sin(t+2k\pi)
-   \quad (\because \blkref{euler_formula_cos_sin}) \\
-&= \cos t + i\sin t
-   \quad (\because \cos, \sin \text{ の } 2\pi \text{ 周期性}) \\
-&= \exp(it)
-   \quad (\because \blkref{euler_formula_cos_sin})
-\end{aligned}`,
-      ),
-      paragraph([
-        "である。",
-        ref("def_gamma1_gamma2_of_theta"),
-        " の ",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*\cos\theta`),
-        " と ",
-        math(String.raw`\gamma_2(\theta) = i\exp(i\theta)s_2^*\left(c_1\cos\theta - i\sin\theta - s_1c_2\right)`),
+        "準備。",
+        math(String.raw`c_1, c_2, c_2^*, s_1, s_2^* \in \mathbb{R}`),
         " は ",
-        math(String.raw`\cos\theta, \sin\theta, \exp(i\theta)`),
-        " のみを通じて ",
-        math(String.raw`\theta`),
-        " に依存するから、(1) が従う。",
+        ref("def_transfer_matrix_symbols"),
+        " の値、",
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\cos x, \sin x \in \mathbb{R}`),
+        " は全実数上の ",
+        math(String.raw`\cos, \sin`),
+        " の値である（全実数上への拡張は未整備）。これらの実数が ",
+        math(String.raw`\mathbb{C}`),
+        " の式に現れるときは、",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の書き方に従い ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " として読み、像の記号を省く。",
+        math(String.raw`\iota_{\mathbb Z\to\mathbb R}`),
+        " は ",
+        ref("antiperiodic_exp_sum"),
+        " のとおり零・単位元・和・積を保つ。",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R} \neq 0_{\mathbb R}`),
+        " も ",
+        ref("antiperiodic_exp_sum"),
+        " による。",
       ]),
+      paragraph([
+        "第一に、",
+        math(String.raw`x \in \mathbb{R}`),
+        " について ",
+        math(String.raw`\cos(-x)`),
+        " と ",
+        math(String.raw`\exp(ix)`),
+        " を書く（",
+        math(String.raw`-x \in \mathbb{R}`),
+        " なので ",
+        ref("euler_formula_cos_sin"),
+        " を ",
+        math(String.raw`-x`),
+        " にも適用できる）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cos(-x)
+&= \frac{\exp(i(-x)) + \exp(-i(-x))}{2}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -x\ \text{に適用})\\
+&= \frac{\exp(i(-x_{\mathbb C})) + \exp(-i(-x_{\mathbb C}))}{2}
+&&(\because\ (-x)_{\mathbb C} = (-x,0) = -(x,0) = -x_{\mathbb C}\ \text{を 2 箇所へ。}\blkref{inclusion_rr_to_cc}\text{、}\blkref{definition_of_cc})\\
+&= \frac{\exp(-ix) + \exp(ix)}{2}
+&&(\because\ \mathbb{C}\ \text{の四則}\ i(-w) = -iw,\ -i(-w) = iw\ \text{を}\ w = x_{\mathbb C}\ \text{で})\\
+&= \frac{\exp(ix) + \exp(-ix)}{2}
+&&(\because\ \mathbb{C}\ \text{の和の可換律})\\
+&= \cos x
+&&(\because\ \blkref{euler_formula_cos_sin})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cos x + i\sin x
+&= \frac{\exp(ix) + \exp(-ix)}{2} + i\,\frac{\exp(ix) - \exp(-ix)}{2i}
+&&(\because\ \blkref{euler_formula_cos_sin})\\
+&= \frac{\exp(ix) + \exp(-ix)}{2} + \frac{\exp(ix) - \exp(-ix)}{2}
+&&(\because\ \mathbb{C}\ \text{の四則}\ i/(2i) = 1/2)\\
+&= \exp(ix)
+&&(\because\ \mathbb{C}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "第二に、",
+        math(String.raw`k \in \mathbb{Z}`),
+        " について ",
+        math(String.raw`(-k)_{\mathbb R} = -k_{\mathbb R}`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(-k)_{\mathbb R}
+&= (-k)_{\mathbb R} + \bigl(k_{\mathbb R} + (-k_{\mathbb R})\bigr)
+&&(\because\ k_{\mathbb R} + (-k_{\mathbb R}) = 0_{\mathbb R}\ \text{と零の性質})\\
+&= \bigl((-k)_{\mathbb R} + k_{\mathbb R}\bigr) + (-k_{\mathbb R})
+&&(\because\ \mathbb{R}\ \text{の加法の結合律})\\
+&= \bigl((-k) + k\bigr)_{\mathbb R} + (-k_{\mathbb R})
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は和を保つ})\\
+&= (0)_{\mathbb R} + (-k_{\mathbb R})
+&&(\because\ \mathbb{Z}\ \text{で}\ (-k) + k = 0)\\
+&= 0_{\mathbb R} + (-k_{\mathbb R})
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は零を保つ})\\
+&= -k_{\mathbb R}
+&&(\because\ \text{零の性質})
+\end{aligned}`),
+      paragraph([
+        "(1) ",
+        math(String.raw`\theta \in \mathbb{R}`),
+        "、",
+        math(String.raw`k \in \mathbb{Z}`),
+        " とする。",
+        math(String.raw`\theta + 2\pi k_{\mathbb R} \in \mathbb{R}`),
+        " なので ",
+        ref("def_gamma1_gamma2_of_theta"),
+        " をこの点に適用できる。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_1(\theta + 2\pi k_{\mathbb R})
+&= c_1c_2^* - s_1s_2^*\cos(\theta + 2\pi k_{\mathbb R})
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ \theta + 2\pi k_{\mathbb R}\ \text{に適用})\\
+&= c_1c_2^* - s_1s_2^*\cos\theta
+&&(\because\ \cos\ \text{の}\ 2\pi\ \text{周期性を}\ n = k\ \text{で})\\
+&= \gamma_1(\theta)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta + 2\pi k_{\mathbb R})
+&= i\,\exp(i(\theta + 2\pi k_{\mathbb R}))\,s_2^*\bigl(c_1\cos(\theta + 2\pi k_{\mathbb R}) - i\sin(\theta + 2\pi k_{\mathbb R}) - s_1c_2\bigr)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ \theta + 2\pi k_{\mathbb R}\ \text{に適用})\\
+&= i\,\bigl(\cos(\theta + 2\pi k_{\mathbb R}) + i\sin(\theta + 2\pi k_{\mathbb R})\bigr)\,s_2^*\bigl(c_1\cos(\theta + 2\pi k_{\mathbb R}) - i\sin(\theta + 2\pi k_{\mathbb R}) - s_1c_2\bigr)
+&&(\because\ \text{準備の}\ \exp(ix)\ \text{の表示を}\ x = \theta + 2\pi k_{\mathbb R}\ \text{で})\\
+&= i\,\bigl(\cos\theta + i\sin(\theta + 2\pi k_{\mathbb R})\bigr)\,s_2^*\bigl(c_1\cos\theta - i\sin(\theta + 2\pi k_{\mathbb R}) - s_1c_2\bigr)
+&&(\because\ \cos\ \text{の}\ 2\pi\ \text{周期性を}\ n = k\ \text{で 2 箇所へ同時適用})\\
+&= i\,\bigl(\cos\theta + i\sin\theta\bigr)\,s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)
+&&(\because\ \sin\ \text{の}\ 2\pi\ \text{周期性を}\ n = k\ \text{で 2 箇所へ同時適用})\\
+&= i\,\exp(i\theta)\,s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)
+&&(\because\ \text{準備の}\ \exp(ix)\ \text{の表示を}\ x = \theta\ \text{で})\\
+&= \gamma_2(\theta)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})
+\end{aligned}`),
       paragraph([
         "(2) ",
-        ref("antiperiodic_exp_sum"),
-        " の ",
+        math(String.raw`\mu, k \in \mathbb{Z}`),
+        " とする。",
+        math(String.raw`\mu + kM_{\mathrm{col}} \in \mathbb{Z}`),
+        " なので ",
         math(String.raw`\tilde\theta`),
-        " の定義より",
+        " の定義をこの添字に適用できる。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
 \tilde\theta_{\mu+kM_{\mathrm{col}}}
-&= \frac{2\pi\left(\mu+kM_{\mathrm{col}}-\frac12\right)}{M_{\mathrm{col}}}
-   \quad (\because \blkref{antiperiodic_exp_sum}) \\
-&= \frac{2\pi\left(\mu-\frac12\right) + 2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
-   \quad (\because \mathbb{R}\text{ の分配則}) \\
-&= \frac{2\pi\left(\mu-\frac12\right)}{M_{\mathrm{col}}} + \frac{2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
-   \quad (\because \text{分数の和（分母 }M_{\mathrm{col}}\neq0\text{）}) \\
-&= \tilde\theta_\mu + \frac{2\pi kM_{\mathrm{col}}}{M_{\mathrm{col}}}
-   \quad (\because \blkref{antiperiodic_exp_sum}) \\
-&= \tilde\theta_\mu + 2k\pi
-   \quad (\because M_{\mathrm{col}}\neq0\text{ による約分})
-\end{aligned}`,
-      ),
-      paragraph([
-        "これを (1) に ",
-        math(String.raw`\theta = \tilde\theta_\mu`),
-        " として使えば ",
-        math(String.raw`\gamma_1(\tilde\theta_{\mu+kM_{\mathrm{col}}}) = \gamma_1(\tilde\theta_\mu)`),
-        " と ",
-        math(String.raw`\gamma_2(\tilde\theta_{\mu+kM_{\mathrm{col}}}) = \gamma_2(\tilde\theta_\mu)`),
-        "。また ",
-        math(String.raw`-\tilde\theta_{\mu+kM_{\mathrm{col}}} = -\tilde\theta_\mu + 2(-k)\pi`),
-        " なので (1) を ",
-        math(String.raw`\theta = -\tilde\theta_\mu`),
-        "、",
-        math(String.raw`k \to -k`),
-        " として使えば ",
-        math(String.raw`\gamma_2(-\tilde\theta_{\mu+kM_{\mathrm{col}}}) = \gamma_2(-\tilde\theta_\mu)`),
-        "。",
-      ]),
+&= \frac{2\pi\left((\mu+kM_{\mathrm{col}})_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \tilde\theta\ \text{の定義を}\ \mu+kM_{\mathrm{col}}\ \text{で。}\blkref{antiperiodic_exp_sum})\\
+&= \frac{2\pi\left(\left(\mu_{\mathbb R}+(kM_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は和を保つ})\\
+&= \frac{2\pi\left(\left(\mu_{\mathbb R}+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は積を保つ})\\
+&= \frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right)+k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の加法の結合律と交換律})\\
+&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)+2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb{R}\ \text{の分配法則})\\
+&= \frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}+\frac{2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\ \text{を分母とする分数の和})\\
+&= \tilde\theta_\mu+\frac{2\pi k_{\mathbb R}(M_{\mathrm{col}})_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \tilde\theta_\mu\ \text{の定義。}\blkref{antiperiodic_exp_sum})\\
+&= \tilde\theta_\mu+2\pi k_{\mathbb R}
+&&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\ \text{による約分})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\tilde\theta_{\mu+kM_{\mathrm{col}}}
+&= -\left(\tilde\theta_\mu+2\pi k_{\mathbb R}\right)
+&&(\because\ \text{上の鎖})\\
+&= \left(-\tilde\theta_\mu\right)+\left(-2\pi k_{\mathbb R}\right)
+&&(\because\ \mathbb{R}\ \text{で}\ -(u+v) = (-u)+(-v))\\
+&= \left(-\tilde\theta_\mu\right)+2\pi\left(-k_{\mathbb R}\right)
+&&(\because\ \mathbb{R}\ \text{で}\ -(uv) = u(-v))\\
+&= \left(-\tilde\theta_\mu\right)+2\pi(-k)_{\mathbb R}
+&&(\because\ \text{準備の第二})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_1(\tilde\theta_{\mu+kM_{\mathrm{col}}})
+&= \gamma_1(\tilde\theta_\mu+2\pi k_{\mathbb R})
+&&(\because\ \text{上の第一の鎖})\\
+&= \gamma_1(\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = \tilde\theta_\mu\ \text{で}),\\[4pt]
+\gamma_2(\tilde\theta_{\mu+kM_{\mathrm{col}}})
+&= \gamma_2(\tilde\theta_\mu+2\pi k_{\mathbb R})
+&&(\because\ \text{上の第一の鎖})\\
+&= \gamma_2(\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = \tilde\theta_\mu\ \text{で}),\\[4pt]
+\gamma_2(-\tilde\theta_{\mu+kM_{\mathrm{col}}})
+&= \gamma_2\bigl(\left(-\tilde\theta_\mu\right)+2\pi(-k)_{\mathbb R}\bigr)
+&&(\because\ \text{上の第二の鎖})\\
+&= \gamma_2(-\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = -\tilde\theta_\mu,\ -k \in \mathbb{Z}\ \text{で})
+\end{aligned}`),
       paragraph([
         "(3) ",
-        ref("conjugate_index_of_check_Z_Y"),
-        " (1) より ",
-        math(String.raw`\tilde\theta_{M_{\mathrm{col}}+1-\mu} = 2\pi - \tilde\theta_\mu = \left(-\tilde\theta_\mu\right) + 2\pi`),
-        " である。よって (1) を ",
-        math(String.raw`\theta = -\tilde\theta_\mu`),
-        "、",
-        math(String.raw`k = 1`),
-        " として使うと",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_2(\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-&= \gamma_2\!\left(\left(-\tilde\theta_\mu\right) + 2\pi\right)
-   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
-&= \gamma_2(-\tilde\theta_\mu)
-   \quad (\because \text{本ブロックの (1)}\ (k=1))
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
--\tilde\theta_{M_{\mathrm{col}}+1-\mu}
-&= -(2\pi-\tilde\theta_\mu)
-   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
-&= -2\pi+\tilde\theta_\mu
-   \quad (\because \mathbb{R}\text{ の分配則}) \\
-&= \tilde\theta_\mu+2(-1)\pi
-   \quad (\because \mathbb{R}\text{ の加法の可換則と }-2\pi=2(-1)\pi),\\[4pt]
-\gamma_2(-\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-&= \gamma_2(\tilde\theta_\mu+2(-1)\pi)
-   \quad (\because \text{上の等式}) \\
-&= \gamma_2(\tilde\theta_\mu)
-   \quad (\because \text{本ブロック }(1)),\\[4pt]
-\gamma_1(\tilde\theta_{M_{\mathrm{col}}+1-\mu})
-&= \gamma_1((-\tilde\theta_\mu)+2\pi)
-   \quad (\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1)) \\
-&= \gamma_1(-\tilde\theta_\mu)
-   \quad (\because \text{本ブロック }(1)) \\
-&= \gamma_1(\tilde\theta_\mu)
-   \quad (\because \cos(-t)=\cos t\text{ と }\blkref{def_gamma1_gamma2_of_theta}\text{ の }\gamma_1\text{ の定義})
-\end{aligned}`,
-      ),
-      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " とし、",
+        math(String.raw`\nu := M_{\mathrm{col}}+1-\mu`),
+        " とおく。",
         ref("def_check_index_set"),
         " (2) より ",
-        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
-        " なので ",
-        ref("def_gamma_theta"),
-        " の ",
-        math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \mathrm{arccosh}\!\left(\gamma_1(\tilde\theta_{M_{\mathrm{col}}+1-\mu})\right)`),
-        " が定義されており、これは ",
-        math(String.raw`\gamma_1`),
-        " の値だけで決まるので ",
-        math(String.raw`\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma(\tilde\theta_\mu)`),
-        "。",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " である。添字の角度を書く。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\tilde\theta_\nu
+&= 2\pi - \tilde\theta_\mu
+&&(\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1))\\
+&= 2\pi + \left(-\tilde\theta_\mu\right)
+&&(\because\ \mathbb{R}\ \text{の差の定義})\\
+&= \left(-\tilde\theta_\mu\right) + 2\pi
+&&(\because\ \mathbb{R}\ \text{の加法の交換律})\\
+&= \left(-\tilde\theta_\mu\right) + 2\pi\cdot1_{\mathbb R}
+&&(\because\ 1_{\mathbb R}\ \text{は積の単位元})\\
+&= \left(-\tilde\theta_\mu\right) + 2\pi\,(1)_{\mathbb R}
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は単位元を保つ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\tilde\theta_\nu
+&= -\left(2\pi - \tilde\theta_\mu\right)
+&&(\because\ \blkref{conjugate_index_of_check_Z_Y}\ (1))\\
+&= \tilde\theta_\mu + \left(-2\pi\right)
+&&(\because\ \mathbb{R}\ \text{で}\ -(u-v) = v+(-u))\\
+&= \tilde\theta_\mu + 2\pi\left(-1_{\mathbb R}\right)
+&&(\because\ \mathbb{R}\ \text{で}\ -u = u(-1_{\mathbb R}))\\
+&= \tilde\theta_\mu + 2\pi\left(-(1)_{\mathbb R}\right)
+&&(\because\ \iota_{\mathbb Z\to\mathbb R}\ \text{は単位元を保つ})\\
+&= \tilde\theta_\mu + 2\pi\,(-1)_{\mathbb R}
+&&(\because\ \text{準備の第二を}\ k = 1\ \text{で})
+\end{aligned}`),
+      paragraph(["これを使って、主張の左辺から"]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\tilde\theta_\nu)
+&= \gamma_2\bigl(\left(-\tilde\theta_\mu\right) + 2\pi\,(1)_{\mathbb R}\bigr)
+&&(\because\ \text{上の}\ \tilde\theta_\nu\ \text{の鎖})\\
+&= \gamma_2(-\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = -\tilde\theta_\mu,\ k = 1\ \text{で}),\\[4pt]
+\gamma_2(-\tilde\theta_\nu)
+&= \gamma_2\bigl(\tilde\theta_\mu + 2\pi\,(-1)_{\mathbb R}\bigr)
+&&(\because\ \text{上の}\ -\tilde\theta_\nu\ \text{の鎖})\\
+&= \gamma_2(\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = \tilde\theta_\mu,\ k = -1\ \text{で}),\\[4pt]
+\gamma_1(\tilde\theta_\nu)
+&= \gamma_1\bigl(\left(-\tilde\theta_\mu\right) + 2\pi\,(1)_{\mathbb R}\bigr)
+&&(\because\ \text{上の}\ \tilde\theta_\nu\ \text{の鎖})\\
+&= \gamma_1(-\tilde\theta_\mu)
+&&(\because\ \text{本ブロックの (1) を}\ \theta = -\tilde\theta_\mu,\ k = 1\ \text{で})\\
+&= c_1c_2^* - s_1s_2^*\cos(-\tilde\theta_\mu)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ -\tilde\theta_\mu\ \text{に適用})\\
+&= c_1c_2^* - s_1s_2^*\cos\tilde\theta_\mu
+&&(\because\ \text{準備の}\ \cos(-x) = \cos x\ \text{を}\ x = \tilde\theta_\mu\ \text{で})\\
+&= \gamma_1(\tilde\theta_\mu)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}),\\[4pt]
+\gamma(\tilde\theta_\nu)
+&= \mathrm{arccosh}\bigl(\gamma_1(\tilde\theta_\nu)\bigr)
+&&(\because\ \blkref{def_gamma_theta})\\
+&= \mathrm{arccosh}\bigl(\gamma_1(\tilde\theta_\mu)\bigr)
+&&(\because\ \text{上の}\ \gamma_1\ \text{の鎖})\\
+&= \gamma(\tilde\theta_\mu)
+&&(\because\ \blkref{def_gamma_theta})
+\end{aligned}`),
       paragraph([
+        "最後に ",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " なので ",
         ref("diagonalization_check_P_D"),
         " の ",
-        math(String.raw`\check{P}_\mu`),
-        " の成分は ",
-        math(String.raw`\left|\gamma_2(\tilde\theta_\mu)\right|`),
-        "、",
-        math(String.raw`\gamma_2(-\tilde\theta_\mu)`),
-        "、",
-        math(String.raw`M_{\mathrm{col}}`),
-        " だけで書かれているので、上の 2 式を代入すれば ",
-        math(String.raw`\check{P}_{M_{\mathrm{col}}+1-\mu}`),
-        " の成分が ",
-        math(String.raw`\left|\gamma_2(-\tilde\theta_\mu)\right|`),
-        " と ",
-        math(String.raw`\gamma_2(\tilde\theta_\mu)`),
-        " で書けることが分かる。",
+        math(String.raw`\check{P}_\nu`),
+        " が定まり、",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\check{P}_\nu
+&= \begin{pmatrix}
+\dfrac{-\left|\gamma_2(\tilde\theta_\nu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)}
+& \dfrac{+\left|\gamma_2(\tilde\theta_\nu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)} \\[8pt]
+\dfrac{1}{2\sqrt{M_{\mathrm{col}}}} & \dfrac{1}{2\sqrt{M_{\mathrm{col}}}}
+\end{pmatrix}
+&&(\because\ \blkref{diagonalization_check_P_D}\ \text{を}\ \nu\ \text{で})\\
+&= \begin{pmatrix}
+\dfrac{-\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)}
+& \dfrac{+\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\nu)} \\[8pt]
+\dfrac{1}{2\sqrt{M_{\mathrm{col}}}} & \dfrac{1}{2\sqrt{M_{\mathrm{col}}}}
+\end{pmatrix}
+&&(\because\ \text{上の}\ \gamma_2(\tilde\theta_\nu) = \gamma_2(-\tilde\theta_\mu)\ \text{を 2 箇所へ同時代入})\\
+&= \begin{pmatrix}
+\dfrac{-\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)}
+& \dfrac{+\left|\gamma_2(-\tilde\theta_\mu)\right|}{2\sqrt{M_{\mathrm{col}}}\,\gamma_2(\tilde\theta_\mu)} \\[8pt]
+\dfrac{1}{2\sqrt{M_{\mathrm{col}}}} & \dfrac{1}{2\sqrt{M_{\mathrm{col}}}}
+\end{pmatrix}
+&&(\because\ \text{上の}\ \gamma_2(-\tilde\theta_\nu) = \gamma_2(\tilde\theta_\mu)\ \text{を 2 箇所へ同時代入})
+\end{aligned}`),
+      paragraph(["となる。"]),
     ],
     conversion: {
       status: "added",
@@ -5239,9 +5420,11 @@ g
         "以前この主張は ψ̌_{μ+kM} = ψ̌_μ（μ ∈ Z）を含んでいたが、共役添字を 1−μ から M+1−μ へ書き換えたことで " +
           "ψ̌ を 𝓜̌ の外の添字で評価する箇所が本文から消えたため、その項目は不要になった。" +
           "γ_1, γ_2 は θ ∈ R の関数なので (2) だけは μ ∈ Z のまま残してある。",
-        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_01、sagemath/check/periodicity_of_check_fermi/（証明の各行）。",
         "2026-08-19 の式変形統一で、周期性の鎖の機械識別子を人間可読な根拠へ直し、根拠の無かった分配則の行を補った。" +
           "また、「同じ計算」に省略していた共役添字の二本の導出を、各結論の左辺から始まる鎖へ開いた。内容と参照は変えていない。",
+        "2026-11-03（全証明の SageMath 検算）: (1) が主張と違う式を述べる euler_formula_cos_sin を exp(i(t+2kπ)) の表示に引いていたので、準備で euler_formula_cos_sin から exp(ix) = cos x + i sin x と cos(−x) = cos x を導く鎖にした。" +
+          "「(1) が従う」「成分が書けることが分かる」の散文を γ_1・γ_2・γ・P̌ の鎖に、角度を像の記号 k_R で書き、P̌_{M+1−μ} の主張を行列で明示し、全実数上の cos・sin の 2π 周期性を前提とすることを主張に書いた。主張の中身は変えていない。",
       ],
     },
   },

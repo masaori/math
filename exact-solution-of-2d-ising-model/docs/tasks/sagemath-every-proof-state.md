@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 52 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 51 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -251,9 +251,14 @@
   人手証明を直した: r > 0 の根拠を `def_gamma_theta`・`gamma_theta_tilde_mu_positive`（どちらもこれを述べていない）から `gamma_2_theta_tilde_nonzero`・`abs_basic_properties` (3)・`def_abs_arg` の鎖に、値 γ(θ̃_μ) を関数 γ と別の文字 t で置き g・r・t の住処の理由を書き、sinh t > 0 の散文を `cosh_sinh_basic_properties` (3) の当てはめに、sinh t = r を同 (4)（正の数の平方の一致）の当てはめに、Step 2 を λ_± から始める鎖に、Step 3 の名前だけの根拠を `real_exp_strictly_increasing`・`scalar_exp_zero`・`real_exp_positive` に直し、−t < 0 を鎖にした。主張に λ_±・γ・exp の出所を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
   申し送り（Lean の連続実行の受け持ち。Lean は不変で `lake build`・`check-no-sorry.sh` は通る）: `DefinitionGammaTildeMu.lean` の `sinh_gammaTilde`（人手 Step 1）は `NecSuf.sinh_arcosh_of_sq` に委ねており、人手の新しい Step 1（平方の鎖と `cosh_sinh_basic_properties` (4)）との 1 対 1 の対応の見直しが要る。
 
+- `periodicity_of_check_fermi`（γ_1, γ_2 の 2π 周期性、θ̃ の添字の M_col 周期性、共役添字 M_col+1−μ）: `sagemath/check/periodicity_of_check_fermi/`。
+  一般の点は、準備の cos(−x)・exp(ix) の表示と (1) の γ_1・γ_2 の鎖の各行を ℚ(i) 上の不定元の多項式として別々に写し、隣り合う行の差がその行の根拠（`euler_formula_cos_sin` の二つの等式、cos・sin の 2π 周期性）だけのイデアルに入ること（対照つき）を、角度の鎖は π・μ_R・k_R・(M_col)_R を不定元にした有理関数体と整数の具体の点で確かめた。具体値は結合定数 4 組（臨界点 2 組を含む）× M_col = 2..8 で、(1)(2) は θ̃_m（m = −2M..3M）と k = −3..3、(3) は全 μ ∈ M̌ で、円分体と QQbar により厳密に確かめた（浮動小数点・ボールなし）。全実数上の cos・sin の周期性は、Sage の記号の cos(qπ)・sin(qπ) を QQbar に落とした値と照合した。
+  人手証明を直した: (1) の根拠が主張と違う式を述べる `euler_formula_cos_sin` を「exp(i(t+2kπ)) = cos + i sin」に引いていたのを、準備で `euler_formula_cos_sin` から exp(ix) = cos x + i sin x と cos(−x) = cos x を導く鎖に、「(1) が従う」の散文を γ_1 の 3 行と γ_2 の 6 行の鎖に、(3) の γ の散文を `def_gamma_theta` の 3 行の鎖に、P̌ の「成分が書けることが分かる」を行列の 3 行の鎖にした。角度を像の記号 k_R・(1)_R・(−1)_R で書き、(−k)_R = −k_R を準備の鎖に、P̌_{M+1−μ} の主張を行列で明示し、全実数上の cos・sin の 2π 周期性を前提とすることと c_2^* の帰属を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変で、この主張のモジュール `DefinitionCheckFermi` の `lake build` と `check-no-sorry.sh` は通る。全体の `lake build` はこの VM の負荷で 1 時間に終わらなかった）: `DefinitionCheckFermi.lean` の注記は旧い (1)(2)(3) の書き方（2kπ、散文の「(1) が従う」）のままで、新しい鎖（準備の exp(ix) の表示、γ_2 の 6 行、P̌ の行列）との 1 対 1 の対応の見直しが要る。P̌ の入れ替えの主張は Lean に無い。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `periodicity_of_check_fermi`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `anticommutator_of_check_psi`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
