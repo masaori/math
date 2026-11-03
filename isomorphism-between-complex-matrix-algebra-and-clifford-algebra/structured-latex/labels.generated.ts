@@ -12,6 +12,7 @@ export const ALL_LABELS = [
   "claim_dual_basis_spans_dual_space",
   "claim_dual_space_is_complex_vector_space",
   "claim_embedding_into_first_component_is_linear_map",
+  "claim_embedding_into_second_component_is_linear_map",
   "claim_family_member_is_kronecker_delta_linear_combination",
   "claim_linear_form_maps_linear_combination_to_ordered_sum",
   "claim_ordered_sum_with_kronecker_delta_picks_term",

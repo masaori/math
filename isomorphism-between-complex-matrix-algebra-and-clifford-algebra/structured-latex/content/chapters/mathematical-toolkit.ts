@@ -3680,4 +3680,92 @@ h(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_embedding_into_second_component_is_linear_map",
+    kind: "claim",
+    title: { text: "直和の第二成分への埋め込み写像は線型写像である" },
+    labels: ["claim_embedding_into_second_component_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
+        " と ",
+        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " をその直和（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、",
+        math(String.raw`\mathrm{in}_2:V_2\to V_1\oplus V_2`),
+        " を直和の第二成分への埋め込み写像（",
+        ref("def_embedding_into_second_component_of_direct_sum"),
+        "）とする。直和は ℂ-線型空間である（",
+        ref("claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"),
+        "）。このとき ",
+        math(String.raw`\mathrm{in}_2`),
+        " は ",
+        math(String.raw`V_2`),
+        " から ",
+        math(String.raw`V_1\oplus V_2`),
+        " への線型写像（",
+        ref("def_linear_map"),
+        "）である。すなわち、",
+        math(String.raw`V_2`),
+        " の任意の元 ",
+        math(String.raw`y,z`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\mathrm{in}_2(y+_{V_2}z)=\mathrm{in}_2(y)+_{V_1\oplus V_2}\mathrm{in}_2(z)`), "（加法を保つ）"],
+        [math(String.raw`\mathrm{in}_2(\lambda\cdot_{V_2}y)=\lambda\cdot_{V_1\oplus V_2}\mathrm{in}_2(y)`), "（スカラー倍を保つ）"],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`y,z`),
+        " を ",
+        math(String.raw`V_2`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。加法を保つことは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{in}_2(y+_{V_2}z)
+&=(0_{V_1},\ y+_{V_2}z)
+&&\left(\because\ \mathrm{in}_2\ \text{の定義。}\blkref{def_embedding_into_second_component_of_direct_sum}\right)\\
+&=(0_{V_1}+_{V_1}0_{V_1},\ y+_{V_2}z)
+&&\left(\because\ V_1\ \text{の加法の単位元（}x=0_{V_1}\text{）。}\blkref{def_complex_vector_space}\right)\\
+&=(0_{V_1},\ y)+_{V_1\oplus V_2}(0_{V_1},\ z)
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\mathrm{in}_2(y)+_{V_1\oplus V_2}\mathrm{in}_2(z)
+&&\left(\because\ \mathrm{in}_2\ \text{の定義を二か所に適用。}\blkref{def_embedding_into_second_component_of_direct_sum}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{in}_2(\lambda\cdot_{V_2}y)
+&=(0_{V_1},\ \lambda\cdot_{V_2}y)
+&&\left(\because\ \mathrm{in}_2\ \text{の定義。}\blkref{def_embedding_into_second_component_of_direct_sum}\right)\\
+&=(\lambda\cdot_{V_1}0_{V_1},\ \lambda\cdot_{V_2}y)
+&&\left(\because\ \text{零ベクトルのスカラー倍は零ベクトル（}V=V_1\text{）。}\blkref{claim_scalar_multiple_of_zero_vector_is_zero_vector}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}(0_{V_1},\ y)
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}\mathrm{in}_2(y)
+&&\left(\because\ \mathrm{in}_2\ \text{の定義。}\blkref{def_embedding_into_second_component_of_direct_sum}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`\mathrm{in}_2`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
