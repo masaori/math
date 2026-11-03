@@ -2490,199 +2490,522 @@ s_1c_2
     ],
     proof: [
       paragraph([
-        "(1) ",
-        math(String.raw`\theta := \tilde\theta_\mu \in \mathbb{R}`),
-        " と略記する（",
+        "準備。",
+        math(String.raw`\theta := \tilde\theta_\mu`),
+        " と略記する。",
         ref("antiperiodic_exp_sum"),
         " より ",
-        math(String.raw`\tilde\theta_\mu`),
-        " は**実数**であり、以下の共役の計算はこの実数性を使う）。",
-        ref("def_gamma1_gamma2_of_theta"),
-        " の証明中で確かめたとおり",
-      ]),
-      displayMath(
-        String.raw`\gamma_2(-\theta)
-= i\,\exp(-i\theta)s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
-\quad (\because \blkref{def_gamma1_gamma2_of_theta})`,
-      ),
-      paragraph([
-        "である。一方 ",
-        math(String.raw`\overline{\gamma_2(\theta)}`),
-        " を 1 段ずつ計算する。用いるのは、複素共役が積を保つこと ",
-        math(String.raw`\overline{zw} = \bar z\,\bar w`),
-        "、和を保つこと ",
-        math(String.raw`\overline{z+w} = \bar z + \bar w`),
-        "、実数が共役で不変であること、および ",
-        math(String.raw`\bar i = -i`),
-        " である（",
-        ref("definition_of_cc"),
-        " の成分表示から従う）。",
-        math(String.raw`c_1, c_2, s_1, s_2^*`),
-        " が実数であることは ",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " であり、以下の共役の計算はこの実数性を使う。",
+        math(String.raw`c_1, c_2, s_1, s_2^* \in \mathbb{R}`),
+        " は ",
         ref("def_transfer_matrix_symbols"),
         "、",
-        math(String.raw`\cos\theta, \sin\theta`),
-        " が実数であることは ",
-        math(String.raw`\theta \in \mathbb{R}`),
-        " による。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\overline{\gamma_2(\theta)}
-&= \overline{i\,\exp(i\theta)s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
-&= \bar i\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;
-   \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \text{複素共役が積を保つこと}) \\
-&= (-i)\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;
-   \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \bar i = -i) \\
-&= (-i)\,\exp(-i\theta)\;\overline{s_2^*}\;
-   \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because \theta \in \mathbb{R} \text{ と }\blkref{euler_formula_cos_sin}\text{ より } \overline{\exp(i\theta)} = \exp(-i\theta)) \\
-&= (-i)\,\exp(-i\theta)\,s_2^*\;
-   \overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
-   \quad (\because s_2^* \in \mathbb{R}) \\
-&= (-i)\,\exp(-i\theta)\,s_2^*
-   \left(\overline{c_1\cos\theta} - \overline{i\sin\theta} - \overline{s_1c_2}\right)
-   \quad (\because \text{複素共役が和・差を保つこと}) \\
-&= (-i)\,\exp(-i\theta)\,s_2^*
-   \bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
-   \quad (\because c_1\cos\theta,\ \sin\theta,\ s_1c_2 \in \mathbb{R} \text{ と } \bar i = -i) \\
-&= -\Bigl(i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
-   \quad (\because \text{複素数の四則}) \\
-&= -\gamma_2(-\theta)
-   \quad (\because \text{上の } \gamma_2(-\theta) \text{ の表示})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`\overline{\exp(i\theta)} = \exp(-i\theta)`),
+        math(String.raw`\cos\theta, \sin\theta, \cos(-\theta), \sin(-\theta) \in \mathbb{R}`),
         " は ",
         ref("euler_formula_cos_sin"),
-        " の ",
-        math(String.raw`\exp(i\theta) = \cos\theta + i\sin\theta`),
-        " と ",
-        math(String.raw`\theta \in \mathbb{R}`),
-        "、すなわち ",
-        math(String.raw`\cos\theta, \sin\theta`),
-        " が実数であることから従う。**",
-        math(String.raw`\theta`),
-        " が実数であるという前提をここで使っている。**）上の補助的な等式から、主張 (1) の左辺より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_2(-\theta)
-&= -\overline{\gamma_2(\theta)}
-   \quad (\because \overline{\gamma_2(\theta)}=-\gamma_2(-\theta)\text{ と複素数の四則})
-\end{aligned}`,
-      ),
-      paragraph(["を得る。"]),
-      paragraph([
-        "(2) (1) と ",
-        math(String.raw`z\overline{z} = |z|^2`),
+        " の前置きのとおり全実数上の ",
+        math(String.raw`\cos, \sin`),
+        " の値である（全実数上への拡張は未整備）。これらの実数が ",
+        math(String.raw`\mathbb{C}`),
+        " の式に現れるときは、",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の書き方に従い ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " として読み、像の記号を省く。",
+        math(String.raw`r, r' \in \mathbb{R}`),
+        " について ",
+        math(String.raw`r_{\mathbb{C}}r'_{\mathbb{C}} = (rr')_{\mathbb{C}}`),
         "（",
-        ref("abs_basic_properties"),
-        "）より",
+        ref("real_inclusion_preserves_product"),
+        "）なので、",
+        math(String.raw`c_1\cos\theta`),
+        "・",
+        math(String.raw`s_1c_2`),
+        " も実数の像である。複素共役は ",
+        ref("def_complex_conjugate"),
+        "、",
+        math(String.raw`-z`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        "、差は ",
+        ref("def_complex_difference"),
+        " のものとする。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      paragraph([
+        "第一に、",
+        math(String.raw`\cos(-\theta)`),
+        "・",
+        math(String.raw`\sin(-\theta)`),
+        "・",
+        math(String.raw`\exp(i\theta)`),
+        " を ",
+        math(String.raw`\exp(\pm i\theta)`),
+        " で書く（",
+        math(String.raw`-\theta \in \mathbb{R}`),
+        " なので ",
+        ref("euler_formula_cos_sin"),
+        " を ",
+        math(String.raw`-\theta`),
+        " にも適用できる）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\cos(-\theta)
+&= \frac{\exp(i(-\theta)) + \exp(-i(-\theta))}{2}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp(-i\theta) + \exp(i\theta)}{2}
+&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta,\ -i(-\theta) = i\theta)\\
+&= \frac{\exp(i\theta) + \exp(-i\theta)}{2}
+&&(\because\ \mathbb{C}\ \text{の和の可換律})\\
+&= \cos\theta
+&&(\because\ \blkref{euler_formula_cos_sin})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sin(-\theta)
+&= \frac{\exp(i(-\theta)) - \exp(-i(-\theta))}{2i}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を}\ -\theta\ \text{に適用})\\
+&= \frac{\exp(-i\theta) - \exp(i\theta)}{2i}
+&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta,\ -i(-\theta) = i\theta)\\
+&= -\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
+&&(\because\ \mathbb{C}\ \text{の四則})\\
+&= -\sin\theta
+&&(\because\ \blkref{euler_formula_cos_sin})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cos\theta + i\sin\theta
+&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + i\,\frac{\exp(i\theta) - \exp(-i\theta)}{2i}
+&&(\because\ \blkref{euler_formula_cos_sin})\\
+&= \frac{\exp(i\theta) + \exp(-i\theta)}{2} + \frac{\exp(i\theta) - \exp(-i\theta)}{2}
+&&(\because\ \mathbb{C}\ \text{の四則}\ i/(2i) = 1/2)\\
+&= \exp(i\theta)
+&&(\because\ \mathbb{C}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "第二に、",
+        math(String.raw`i = (0,1)`),
+        "（",
+        ref("antiperiodic_exp_sum"),
+        " の前置きの ",
+        math(String.raw`i`),
+        "）の複素共役と、",
+        math(String.raw`\exp(i\theta)`),
+        " の複素共役を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bar i
+&= \overline{(0,1)}
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= (0,-1)
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= (-1,0)(0,1)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ ((-1)\cdot 0 - 0\cdot 1,\ (-1)\cdot 1 + 0\cdot 0))\\
+&= (-1_{\mathbb{C}})(0,1)
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ (-1)_{\mathbb{C}} = (-1,0))\\
+&= (-1_{\mathbb{C}})\,i
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= -i
+&&(\because\ \blkref{multiply_by_minus_one})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\overline{\exp(i\theta)}
+&= \overline{\cos\theta + i\sin\theta}
+&&(\because\ \text{上の}\ \exp(i\theta)\ \text{の表示})\\
+&= \overline{\cos\theta} + \overline{i\sin\theta}
+&&(\because\ \blkref{complex_conjugate_of_sum}\ \text{を}\ m = 2\ \text{で})\\
+&= \overline{\cos\theta} + \bar i\;\overline{\sin\theta}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= \cos\theta + \bar i\sin\theta
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を 2 箇所へ})\\
+&= \cos\theta + (-i)\sin\theta
+&&(\because\ \text{上の}\ \bar i = -i)\\
+&= \cos\theta - i\sin\theta
+&&(\because\ \mathbb{C}\ \text{の四則})\\
+&= \exp(-i\theta)
+&&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin})
+\end{aligned}`),
+      paragraph([
+        "第三に、",
+        math(String.raw`\gamma_2(-\theta)`),
+        " を ",
+        math(String.raw`\theta`),
+        " の量で書く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(-\theta)
+&= i\,\exp(i(-\theta))\,s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{を}\ -\theta \in \mathbb{R}\ \text{に適用})\\
+&= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos(-\theta) - i\sin(-\theta) - s_1c_2\bigr)
+&&(\because\ \mathbb{C}\ \text{の四則}\ i(-\theta) = -i\theta)\\
+&= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - i\sin(-\theta) - s_1c_2\bigr)
+&&(\because\ \text{上の}\ \cos(-\theta) = \cos\theta)\\
+&= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - i(-\sin\theta) - s_1c_2\bigr)
+&&(\because\ \text{上の}\ \sin(-\theta) = -\sin\theta)\\
+&= i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+&&(\because\ \mathbb{C}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "第四に、",
+        math(String.raw`\overline{\gamma_2(\theta)}`),
+        " を 1 段ずつ計算する。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\overline{\gamma_2(\theta)}
+&= \overline{i\,\exp(i\theta)\,s_2^*\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
+&= \overline{i\,\exp(i\theta)\,s_2^*}\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= \overline{i\,\exp(i\theta)}\;\overline{s_2^*}\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= \bar i\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= (-i)\;\overline{\exp(i\theta)}\;\overline{s_2^*}\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \text{上の}\ \bar i = -i)\\
+&= (-i)\,\exp(-i\theta)\;\overline{s_2^*}\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \text{上の}\ \overline{\exp(i\theta)} = \exp(-i\theta))\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\;\overline{\bigl(c_1\cos\theta - i\sin\theta - s_1c_2\bigr)}
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion})\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(\overline{c_1\cos\theta - i\sin\theta} - \overline{s_1c_2}\bigr)
+&&(\because\ \blkref{complex_conjugate_of_difference})\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(\overline{c_1\cos\theta} - \overline{i\sin\theta} - \overline{s_1c_2}\bigr)
+&&(\because\ \blkref{complex_conjugate_of_difference})\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(\overline{c_1\cos\theta} - \bar i\;\overline{\sin\theta} - \overline{s_1c_2}\bigr)
+&&(\because\ \blkref{complex_conjugate_of_product})\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - \bar i\sin\theta - s_1c_2\bigr)
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を 3 箇所へ})\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta - (-i)\sin\theta - s_1c_2\bigr)
+&&(\because\ \text{上の}\ \bar i = -i)\\
+&= (-i)\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)
+&&(\because\ \mathbb{C}\ \text{の四則})\\
+&= -\Bigl(i\,\exp(-i\theta)\,s_2^*\bigl(c_1\cos\theta + i\sin\theta - s_1c_2\bigr)\Bigr)
+&&(\because\ \mathbb{C}\ \text{の四則})\\
+&= -\gamma_2(-\theta)
+&&(\because\ \text{上の}\ \gamma_2(-\theta)\ \text{の表示})
+\end{aligned}`),
+      paragraph([
+        "第五に、",
+        math(String.raw`\arctan 0 = 0`),
+        "・",
+        math(String.raw`\sin(\pi/2) = 1`),
+        "・",
+        math(String.raw`\cos(\pi/2) = 0`),
+        "・",
+        math(String.raw`0 < \pi`),
+        " を確かめる。",
+        math(String.raw`\pi`),
+        " は ",
+        math(String.raw`\arcsin(1) = \pi/2`),
+        " となる実数である（",
+        ref("remark_real_analysis_facts_R3_R4"),
+        " の円周率の項。",
+        math(String.raw`\pi \in \mathbb{R}`),
+        " を使うのは、弧の長さが実数だからである）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\arctan 0
+&= \arcsin\!\left(\frac{0}{\sqrt{1+0^2}^{(\mathbb{R}_{\geq 0})}}\right)
+&&(\because\ \blkref{def_arctan})\\
+&= \arcsin(0)
+&&(\because\ \mathbb{R}\ \text{の四則}\ 0/\sqrt{1}^{(\mathbb{R}_{\geq 0})} = 0)\\
+&= \arcsin(\sin 0)
+&&(\because\ \blkref{sine_zero})\\
+&= 0
+&&(\because\ \blkref{def_sin}\ \text{を}\ 0 \in [-\pi/2,\pi/2]\ \text{で})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\sin(\pi/2)
+&= \sin(\arcsin(1))
+&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)\\
+&= 1
+&&(\because\ \pi/2 = \arcsin(1) \in [-\pi/2,\pi/2]\ (\blkref{arcsin_is_bijection}\ \text{の値域})\ \text{で}\ \blkref{def_sin}\ \text{の}\ y\ \text{はただ一つ。}\arcsin(1) = \pi/2\ \text{なので}\ y = 1)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\cos(\pi/2)
+&= \sqrt{1-(\sin(\pi/2))^2}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \blkref{def_cos})\\
+&= \sqrt{1-1^2}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \text{上の}\ \sin(\pi/2) = 1)\\
+&= \sqrt{0}^{(\mathbb{R}_{\geq 0})}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= 0
+&&(\because\ 0 \geq 0\ \text{かつ}\ 0^2 = 0\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ 0)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\pi
+&= 2\arcsin(1)
+&&(\because\ \blkref{remark_real_analysis_facts_R3_R4}\ \text{の}\ \arcsin(1) = \pi/2)\\
+&> 2\arcsin(0)
+&&(\because\ 0 < 1\ \text{と}\ \blkref{arcsin_is_bijection}\ \text{の狭義単調増加})\\
+&= 2\cdot 0
+&&(\because\ \text{上の鎖の}\ \arcsin(0) = 0)\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "とくに ",
+        math(String.raw`0 \leq 0 - 2\cdot 0\cdot\pi < 2\pi`),
+        " と ",
+        math(String.raw`0 \leq \pi - 2\cdot 0\cdot\pi < 2\pi`),
+        " が成り立つので、",
+        ref("angle_section_existence_uniqueness"),
+        " の整数は角度 ",
+        math(String.raw`0`),
+        " と ",
+        math(String.raw`\pi`),
+        " のどちらについても ",
+        math(String.raw`0`),
+        " である。",
+      ]),
+      paragraph([
+        "(1) 主張 (1) の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(-\theta)
+&= -\bigl(-\gamma_2(-\theta)\bigr)
+&&(\because\ \mathbb{C}\ \text{の四則}\ (-1_{\mathbb{C}})(-1_{\mathbb{C}}) = 1_{\mathbb{C}})\\
+&= -\overline{\gamma_2(\theta)}
+&&(\because\ \text{上の}\ \overline{\gamma_2(\theta)} = -\gamma_2(-\theta))
+\end{aligned}`),
+      paragraph([
+        "(2) 主張 (2) の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
 \gamma_2(\theta)\gamma_2(-\theta)
 &= \gamma_2(\theta)\left(-\overline{\gamma_2(\theta)}\right)
-   \quad (\because (1)) \\
-&= -\gamma_2(\theta)\overline{\gamma_2(\theta)}
-   \quad (\because \mathbb{C}\text{ の四則}) \\
-&= -\left|\gamma_2(\theta)\right|^2
-   \quad (\because \blkref{abs_basic_properties}\ (z\bar z = |z|^2))
-\end{aligned}`,
-      ),
+&&(\because\ (1))\\
+&= \gamma_2(\theta)\left((-1_{\mathbb{C}})\,\overline{\gamma_2(\theta)}\right)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \left(\gamma_2(\theta)(-1_{\mathbb{C}})\right)\overline{\gamma_2(\theta)}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \left((-1_{\mathbb{C}})\,\gamma_2(\theta)\right)\overline{\gamma_2(\theta)}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\left(\gamma_2(\theta)\,\overline{\gamma_2(\theta)}\right)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\left(\overline{\gamma_2(\theta)}\,\gamma_2(\theta)\right)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= (-1_{\mathbb{C}})\left(\left|\gamma_2(\theta)\right|^2\right)_{\mathbb{C}}
+&&(\because\ \blkref{complex_conjugate_times_self})\\
+&= \left((-1)\left|\gamma_2(\theta)\right|^2\right)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \left(-\left|\gamma_2(\theta)\right|^2\right)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
       paragraph([
-        ref("gamma_2_theta_tilde_nonzero"),
+        "主張 (2) の右辺 ",
+        math(String.raw`-|\gamma_2(\theta)|^2`),
+        " はこの実数の像として読む。この実数が負であることを示す。",
+        ref("def_abs_arg"),
         " より ",
-        math(String.raw`\gamma_2(\theta) \neq 0`),
-        " なので ",
-        math(String.raw`|\gamma_2(\theta)|^2 > 0`),
-        "、したがってこの値は狭義に負の実数である。また (1) より ",
-        math(String.raw`\gamma_2(-\theta) = -\overline{\gamma_2(\theta)} \neq 0`),
-        "（複素共役は ",
-        math(String.raw`0`),
-        " を ",
-        math(String.raw`0`),
-        " にしか写さない）。",
-      ]),
-      paragraph([
-        "(3) 負の実数の偏角は ",
-        math(String.raw`\pi`),
-        " である。すなわち ",
-        math(String.raw`r := |\gamma_2(\theta)|^2 > 0`),
-        " として ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r = r\,\exp(i\pi)`),
-        " であり、",
-        math(String.raw`\pi \in [0,2\pi)`),
-        " だから ",
-        math(String.raw`\arg^{[0,2\pi)}(-r) = \pi`),
-        "（",
-        ref("angle_section_existence_uniqueness"),
-        " の一意性）。",
-      ]),
-      paragraph([
-        "(4) ",
-        math(String.raw`-\gamma_2(\theta)\gamma_2(-\theta) = |\gamma_2(\theta)|^2`),
-        " は**正**の実数なので ",
-        math(String.raw`\arg^{[0,2\pi)} = 0`),
-        " であり、",
-        ref("def_sqrt_cc"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sqrt{-\gamma_2(\theta)\gamma_2(-\theta)}
-&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\cdot 0/2)
-   \quad (\because \blkref{def_sqrt_cc}\text{ を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } 0 \text{ に適用}) \\
-&= \sqrt{\left|\gamma_2(\theta)\right|^2}
-   \quad (\because \exp(i\cdot 0) = 1) \\
-&= \left|\gamma_2(\theta)\right|
-   \quad (\because \blkref{sqrt_nonnegative_existence_uniqueness}\text{ と } |\gamma_2(\theta)| \geq 0) \\
-&> 0
-   \quad (\because \blkref{gamma_2_theta_tilde_nonzero})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（絶対値の非負平方根は ",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "、正値性は ",
+        math(String.raw`|\gamma_2(\theta)| \in \mathbb{R}_{\geq 0}`),
+        "、",
         ref("gamma_2_theta_tilde_nonzero"),
-        " による。）",
-      ]),
-      paragraph([
-        "(5) (3) より ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta)`),
-        " は絶対値 ",
-        math(String.raw`|\gamma_2(\theta)|^2`),
-        "、偏角 ",
-        math(String.raw`\pi`),
+        " の ",
+        math(String.raw`\gamma_2(\theta) \neq 0_{\mathbb{C}}`),
+        " と ",
+        ref("abs_basic_properties"),
+        " (3) より ",
+        math(String.raw`|\gamma_2(\theta)| \neq 0`),
         " なので、",
-        ref("def_sqrt_cc"),
-        " より",
+        math(String.raw`|\gamma_2(\theta)| > 0`),
+        " である。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sqrt{\gamma_2(\theta)\gamma_2(-\theta)}
-&= \sqrt{\left|\gamma_2(\theta)\right|^2}\;\exp(i\pi/2)
-   \quad (\because \blkref{def_sqrt_cc}\text{ を絶対値 } |\gamma_2(\theta)|^2,\ \text{偏角 } \pi \text{ に適用}) \\
-&= \left|\gamma_2(\theta)\right|\,\exp(i\pi/2)
-   \quad (\because \blkref{sqrt_nonnegative_existence_uniqueness}) \\
-&= \left|\gamma_2(\theta)\right|\left(\cos\tfrac{\pi}{2} + i\sin\tfrac{\pi}{2}\right)
-   \quad (\because \blkref{euler_formula_cos_sin}) \\
-&= i\left|\gamma_2(\theta)\right|
-   \quad (\because \cos\tfrac{\pi}{2}=0,\ \sin\tfrac{\pi}{2}=1\text{ と複素数の四則})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+0
+&= 0\cdot\left|\gamma_2(\theta)\right|
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&< \left|\gamma_2(\theta)\right|\left|\gamma_2(\theta)\right|
+&&(\because\ 0 < \left|\gamma_2(\theta)\right|\ \text{の両辺に正の実数}\ \left|\gamma_2(\theta)\right|\ \text{を掛ける})\\
+&= \left|\gamma_2(\theta)\right|^2
+&&(\because\ \text{実数の 2 乗の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+-\left|\gamma_2(\theta)\right|^2
+&< -0
+&&(\because\ \text{直前の鎖の}\ 0 < \left|\gamma_2(\theta)\right|^2\ \text{の両辺を}\ -1\ \text{倍すると向きが変わる})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
       paragraph([
-        "（非負平方根は ",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        " による。）",
+        math(String.raw`\gamma_2(-\theta) \neq 0_{\mathbb{C}}`),
+        " を背理法で示す。",
+        math(String.raw`\gamma_2(-\theta) = 0_{\mathbb{C}}`),
+        " と仮定すると、",
+        math(String.raw`\gamma_2(\theta) = (x,y)`),
+        " と成分で書いて",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta)
+&= (x,y)
+&&(\because\ \text{成分の置き方})\\
+&= \bigl(x,-(-y)\bigr)
+&&(\because\ \mathbb{R}\ \text{で}\ -(-y) = y)\\
+&= \overline{(x,-y)}
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \overline{\overline{(x,y)}}
+&&(\because\ \blkref{def_complex_conjugate})\\
+&= \overline{\overline{\gamma_2(\theta)}}
+&&(\because\ \text{成分の置き方})\\
+&= \overline{-\gamma_2(-\theta)}
+&&(\because\ \text{上の}\ \overline{\gamma_2(\theta)} = -\gamma_2(-\theta))\\
+&= \overline{-0_{\mathbb{C}}}
+&&(\because\ \text{仮定}\ \gamma_2(-\theta) = 0_{\mathbb{C}})\\
+&= \overline{(-1_{\mathbb{C}})\,0_{\mathbb{C}}}
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= \overline{0_{\mathbb{C}}}
+&&(\because\ \blkref{complex_times_zero_is_zero})\\
+&= 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_conjugate_of_real_inclusion}\ \text{を}\ r = 0\ \text{で})
+\end{aligned}`),
+      paragraph([
+        "となり、",
+        ref("gamma_2_theta_tilde_nonzero"),
+        " に反する。よって ",
+        math(String.raw`\gamma_2(-\theta) \neq 0_{\mathbb{C}}`),
+        " である。",
+      ]),
+      paragraph([
+        "(3) 以下 ",
+        math(String.raw`r := |\gamma_2(\theta)|^2 \in \mathbb{R}_{>0}`),
+        " と置く（",
+        math(String.raw`r > 0`),
+        " は (2) で示した）。まず ",
+        math(String.raw`\phi_{\mathrm{polar}}((-r)_{\mathbb{C}})`),
+        " を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}\bigl((-r)_{\mathbb{C}}\bigr)
+&= \phi_{\mathrm{polar}}\bigl((-r,0)\bigr)
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= \left[\left(\sqrt{(-r)^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan\bigl(0/(-r)\bigr)+\pi\right)\right]_{\sim}
+&&(\because\ \blkref{def_phi_polar}\ \text{の}\ x = -r < 0,\ y = 0 \geq 0\ \text{の場合})\\
+&= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0+\pi\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \left[\left(r,\ \arctan 0+\pi\right)\right]_{\sim}
+&&(\because\ r \geq 0\ \text{かつ}\ r^2 = r^2\ \text{なので、}\blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
+&= \left[\left(r,\ \pi\right)\right]_{\sim}
+&&(\because\ \text{準備の}\ \arctan 0 = 0)
+\end{aligned}`),
+      paragraph(["主張 (3) の左辺から始める。"]),
+      displayMath(String.raw`\begin{aligned}
+\arg^{[0,2\pi)}\!\left(\gamma_2(\theta)\gamma_2(-\theta)\right)
+&= \arg^{[0,2\pi)}\!\left((-r)_{\mathbb{C}}\right)
+&&(\because\ (2))\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\bigl(\phi_{\mathrm{polar}}((-r)_{\mathbb{C}})\bigr)\right)
+&&(\because\ \blkref{def_abs_arg})\\
+&= s_{[0,2\pi)}\!\left(\mathrm{pr}_2\bigl([(r,\pi)]_{\sim}\bigr)\right)
+&&(\because\ \text{上の}\ \phi_{\mathrm{polar}}((-r)_{\mathbb{C}})\ \text{の値})\\
+&= s_{[0,2\pi)}\!\left([\pi]_{\sim_{\mathrm{angle}}}\right)
+&&(\because\ \blkref{first_and_second_projections}\ \text{の}\ r \neq 0\ \text{の場合})\\
+&= \pi - 2\cdot 0\cdot\pi
+&&(\because\ \blkref{section_of_angle_representation}\ \text{と準備の、角度}\ \pi\ \text{の整数は}\ 0)\\
+&= \pi
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      paragraph([
+        "(4) まず ",
+        math(String.raw`-\gamma_2(\theta)\gamma_2(-\theta)`),
+        " と ",
+        math(String.raw`\phi_{\mathrm{polar}}(r_{\mathbb{C}})`),
+        " を求める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-\gamma_2(\theta)\gamma_2(-\theta)
+&= (-1_{\mathbb{C}})\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= (-1_{\mathbb{C}})\,(-r)_{\mathbb{C}}
+&&(\because\ (2))\\
+&= \bigl((-1)(-r)\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= r_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\phi_{\mathrm{polar}}\bigl(r_{\mathbb{C}}\bigr)
+&= \phi_{\mathrm{polar}}\bigl((r,0)\bigr)
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= \left[\left(\sqrt{r^2+0^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan(0/r)\right)\right]_{\sim}
+&&(\because\ \blkref{def_phi_polar}\ \text{の}\ x = r > 0\ \text{の場合})\\
+&= \left[\left(\sqrt{r^2}^{\,\mathbb{R}_{\ge 0}},\ \arctan 0\right)\right]_{\sim}
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \left[\left(r,\ \arctan 0\right)\right]_{\sim}
+&&(\because\ \blkref{definition_of_sqrt_r_positive}\ \text{のただ一つの元は}\ r)\\
+&= \left[\left(r,\ 0\right)\right]_{\sim}
+&&(\because\ \text{準備の}\ \arctan 0 = 0)
+\end{aligned}`),
+      paragraph([
+        "代表元 ",
+        math(String.raw`(r,0)`),
+        " の角度 ",
+        math(String.raw`0`),
+        " の整数は準備により ",
+        math(String.raw`0`),
+        " である。主張 (4) の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{-\gamma_2(\theta)\gamma_2(-\theta)}
+&= \sqrt{r_{\mathbb{C}}}
+&&(\because\ \text{上の}\ -\gamma_2(\theta)\gamma_2(-\theta) = r_{\mathbb{C}})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,0)\ \text{と整数}\ 0\ \text{で})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{0}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ 0\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cos 0,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
+&&(\because\ \blkref{def_phi_cartesian})\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\sin 0\bigr)
+&&(\because\ \blkref{cosine_zero})\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cdot 1,\ \left|\gamma_2(\theta)\right|\cdot 0\bigr)
+&&(\because\ \blkref{sine_zero})\\
+&= \bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&= \left|\gamma_2(\theta)\right|_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+      paragraph([
+        "主張 (4) の右辺 ",
+        math(String.raw`|\gamma_2(\theta)|`),
+        " はこの実数の像として読み、",
+        math(String.raw`|\gamma_2(\theta)| > 0`),
+        " は (2) で示した。",
+      ]),
+      paragraph([
+        "(5) 上の ",
+        math(String.raw`\phi_{\mathrm{polar}}((-r)_{\mathbb{C}}) = [(r,\pi)]_{\sim}`),
+        " の代表元 ",
+        math(String.raw`(r,\pi)`),
+        " の角度 ",
+        math(String.raw`\pi`),
+        " の整数は準備により ",
+        math(String.raw`0`),
+        " である。主張 (5) の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sqrt{\gamma_2(\theta)\gamma_2(-\theta)}
+&= \sqrt{(-r)_{\mathbb{C}}}
+&&(\because\ (2))\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\sqrt{r}^{\,\mathbb{R}_{\ge 0}},\ \tfrac{\pi}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \blkref{sqrt_expansion_via_polar}\ \text{を代表元}\ (r,\pi)\ \text{と整数}\ 0\ \text{で})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}-0\cdot\pi\right)\right]_{\sim}\right)
+&&(\because\ \left|\gamma_2(\theta)\right| \geq 0\ \text{かつ}\ \left|\gamma_2(\theta)\right|^2 = r\ \text{なので、}\blkref{definition_of_sqrt_r_positive})\\
+&= \phi_{\mathrm{cartesian}}\!\left(\left[\left(\left|\gamma_2(\theta)\right|,\ \tfrac{\pi}{2}\right)\right]_{\sim}\right)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cos\tfrac{\pi}{2},\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
+&&(\because\ \blkref{def_phi_cartesian})\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\sin\tfrac{\pi}{2}\bigr)
+&&(\because\ \text{準備の}\ \cos(\pi/2) = 0)\\
+&= \bigl(\left|\gamma_2(\theta)\right|\cdot 0,\ \left|\gamma_2(\theta)\right|\cdot 1\bigr)
+&&(\because\ \text{準備の}\ \sin(\pi/2) = 1)\\
+&= \bigl(0,\ \left|\gamma_2(\theta)\right|\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&= (0,1)\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積}\ (0\cdot|\gamma_2(\theta)| - 1\cdot 0,\ 0\cdot 0 + 1\cdot|\gamma_2(\theta)|))\\
+&= i\bigl(\left|\gamma_2(\theta)\right|,\ 0\bigr)
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= i\left|\gamma_2(\theta)\right|_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
@@ -2691,9 +3014,10 @@ s_1c_2
           "根号の中身が正の実数（(4)）・負の実数（(5)）に確定する。これにより後続の固有値・固有ベクトルの計算から" +
           "複素平方根の分枝の議論（008 章 eigenvector_of_A_theta が condition_of_commutativity_of_sqrt_and_product を" +
           "経由して行っていた部分）を追い出せる。",
-        "数値検証: sagemath/check/048_claim_A_theta_tilde/check_02（M = 2..8 の全 μ、16 組の (K_1,K_2)、残差 ≤ 4e-15）。",
+        "検算: sagemath/check/relation_of_gamma_2_theta_tilde/（厳密計算。浮動小数点の旧検算 sagemath/check/048_claim_A_theta_tilde/check_02 も残っている）。",
         "2026-08-19 の式変形統一で、補助的な共役計算の末尾に複素数の四則という行末根拠を補い、散文で行っていた両辺の符号反転を主張 (1) の左辺から始まる一段の鎖へ移した。(5) の終端にも三角関数の特殊値と複素数の四則を行末根拠として明記した。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03: SageMath の検算（sagemath/check/relation_of_gamma_2_theta_tilde/）を付けるときに証明を直した。γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず、euler_formula_cos_sin から cos(−θ)・sin(−θ) を求める鎖で作った。複素共役の行の根拠を complex_conjugate_of_product・complex_conjugate_of_difference・complex_conjugate_of_sum・complex_conjugate_of_real_inclusion に、ī = −i と conj(exp(iθ)) = exp(−iθ) を鎖に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に直した。(2) の狭義の負と γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian から一行ずつの鎖にした。主張の中身は不変。",
       ],
     },
   },

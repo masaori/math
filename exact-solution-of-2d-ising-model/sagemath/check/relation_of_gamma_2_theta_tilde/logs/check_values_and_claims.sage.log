@@ -1,0 +1,16 @@
+== relation_of_gamma_2_theta_tilde: 具体の値と主張
+PASS Sage の arcsin(1) = π/2（π の定め方）
+PASS arctan 0 の鎖 第 2 行: 0/√(1+0^2) = 0/1 = 0
+PASS arctan 0 の鎖 第 3 行: sin 0 = 0
+PASS arctan 0 の鎖 第 4 行と両端: arcsin(sin 0) = 0、Sage の arctan 0 = 0
+PASS cos(π/2) = 0、sin(π/2) = 1（1 の 4 乗根の実部・虚部）
+PASS cos(π/2) の鎖: √(1 - 1^2) = √0 = 0
+PASS cos 0 = 1、sin 0 = 0
+PASS 0 < π の鎖 第 1 行: π = 2 arcsin(1)
+PASS 0 < π の鎖 第 2 行: 2 arcsin(1) > 2 arcsin(0)
+PASS 0 < π の鎖 第 3・4 行: 2 arcsin(0) = 2·0 = 0
+PASS 角度 0 と π の angle_section_existence_uniqueness の整数は 0
+PASS 具体の組の数: 結合定数 4 組 × M_col = 2..8 の全 μ = 140 組
+PASS 全ての組で全ての行が一致
+-- relation_of_gamma_2_theta_tilde: 具体の値と主張: 13/13 PASS
+RESULT: PASS

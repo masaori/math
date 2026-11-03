@@ -1,0 +1,67 @@
+== relation_of_gamma_2_theta_tilde: 一般の点での鎖
+PASS ℂ の四則: i(-θ) = -iθ、-i(-θ) = iθ
+PASS cos(-θ) の鎖 第 1 行 = 第 2 行
+PASS cos(-θ) の鎖 第 2 行 = 第 3 行
+PASS cos(-θ) の鎖 最終行 = cos θ
+PASS sin(-θ) の鎖 第 1 行 = 第 2 行
+PASS sin(-θ) の鎖 第 2 行 = 第 3 行
+PASS sin(-θ) の鎖 最終行 = -sin θ
+PASS i/(2i) = 1/2
+PASS cos θ + i sin θ の鎖 第 1 行 = 第 2 行
+PASS cos θ + i sin θ の鎖 第 2 行 = 第 3 行
+PASS cos θ + i sin θ の鎖 第 1 行は euler_formula_cos_sin の代入
+PASS ī の鎖 第 1 行 = 第 2 行
+PASS ī の鎖 第 2 行 = 第 3 行
+PASS ī の鎖 第 3 行 = 第 4 行
+PASS ī の鎖 第 4 行 = 第 5 行
+PASS ī の鎖 第 5 行 = 第 6 行
+PASS conj(exp(iθ)) の鎖 第 1 行 = 第 2 行
+PASS conj(exp(iθ)) の鎖 第 2 行 = 第 3 行
+PASS conj(exp(iθ)) の鎖 第 3 行 = 第 4 行
+PASS conj(exp(iθ)) の鎖 第 4 行 = 第 5 行
+PASS conj(exp(iθ)) の鎖 第 5 行 = 第 6 行
+PASS conj(exp(iθ)) の鎖 最終行 cos θ - i sin θ = (c, -s)（exp_of_negative_i_real_as_cos_minus_i_sin の右辺）
+PASS γ_2(-θ) の鎖 第 2 行 = 第 3 行（法: [-cc + cm]）
+PASS   対照: 同じ行は関係 [-cc + cm] なしでは一致しない
+PASS γ_2(-θ) の鎖 第 3 行 = 第 4 行（法: [ss + sm]）
+PASS   対照: 同じ行は関係 [ss + sm] なしでは一致しない
+PASS γ_2(-θ) の鎖 第 4 行 = 第 5 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 1 行 = 第 2 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 2 行 = 第 3 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 3 行 = 第 4 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 4 行 = 第 5 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 5 行 = 第 6 行（法: [-p + u, q + v]）
+PASS   対照: 同じ行は関係なしでは一致しない
+PASS conj(γ_2(θ)) の鎖 第 6 行 = 第 7 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 7 行 = 第 8 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 8 行 = 第 9 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 9 行 = 第 10 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 10 行 = 第 11 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 11 行 = 第 12 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 12 行 = 第 13 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 13 行 = 第 14 行（法: []）
+PASS conj(γ_2(θ)) の鎖 第 14 行 = 第 15 行（法: []）
+PASS real_inclusion_preserves_product: c_1 cos θ・s_1 c_2 は実数の像
+PASS (1) 第 1 行: -(-z) = z
+PASS (2) の鎖 第 1 行 = 第 2 行
+PASS (2) の鎖 第 2 行 = 第 3 行
+PASS (2) の鎖 第 3 行 = 第 4 行
+PASS (2) の鎖 第 4 行 = 第 5 行
+PASS (2) の鎖 第 5 行 = 第 6 行
+PASS (2) の鎖 第 6 行 = 第 7 行
+PASS (2) の鎖 第 7 行 = 第 8 行
+PASS (2) の鎖 第 8 行 = 第 9 行
+PASS complex_conjugate_times_self: conj(z) z = (|z|^2)_C
+PASS 背理の鎖 第 1 行 = 第 2 行（二重の共役）
+PASS 背理の鎖 第 2 行 = 第 3 行（二重の共役）
+PASS 背理の鎖 第 3 行 = 第 4 行（二重の共役）
+PASS 背理の鎖: -0_C = (-1_C)0_C（multiply_by_minus_one）
+PASS 背理の鎖: (-1_C)0_C = 0_C（complex_times_zero_is_zero）
+PASS 背理の鎖: conj(0_C) = 0_C
+PASS (4) の準備 第 1 行: -z = (-1_C) z
+PASS (4) の準備 第 3・4 行: (-1_C)(-r)_C = ((-1)(-r))_C = r_C
+PASS (5) 第 9 行: (0,1)(|γ|, 0) = (0, |γ|)
+PASS (5) 第 11 行: (|γ|, 0) = |γ|_C
+PASS (4) 第 8 行: (|γ|·1, |γ|·0) = (|γ|, 0)
+-- relation_of_gamma_2_theta_tilde: 一般の点での鎖: 64/64 PASS
+RESULT: PASS

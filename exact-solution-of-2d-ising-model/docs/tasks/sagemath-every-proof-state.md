@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 370 件のうち、SageMath の検算が無いもの 57 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 372 件のうち、SageMath の検算が無いもの 56 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -229,13 +229,20 @@
   人手証明を直した: 第 1 因子 `a(θ) = i exp(iθ) s_2^*` が 0 でない理由を、本文に無い Euler の公式と `|exp(iθ)| = 1` から、逆元 `b(θ)` を作る 13 行の鎖と背理の鎖へ。「ℂ は零因子を持たない」（主張のブロックが無い）を `b(θ)` を使う二つの鎖へ。
   `w(θ)` の成分を準備の 4 行の鎖に、同値の鎖を成分ごとの 6 行に、Step 2 の奇偶と Step 4 の矛盾の散文を鎖に。主張の中身は不変。計算の誤りは無かった。
 
+- `relation_of_gamma_2_theta_tilde`（γ_2(−θ̃_μ) = −conj(γ_2(θ̃_μ)) とその帰結の (2)〜(5)）: `sagemath/check/relation_of_gamma_2_theta_tilde/`。
+  一般の点の鎖（exp(±iθ) を不定元・不透明な対にし、cos(−θ)・sin(−θ)・conj(exp(iθ)) の関係を法としてだけ一致することを対照つきで）と、結合定数 4 組（臨界点 2 組を含む）× M_col = 2..8 の全 μ の具体値（円分体と AA、角度 a + bπ）で全行を厳密に確かめた（浮動小数点なし）。
+  人手証明を直した: γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず euler_formula_cos_sin から作る鎖に。共役の行の根拠を complex_conjugate_of_product・_of_difference・_of_sum・_of_real_inclusion に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に、i = (0,1) の根拠を definition_of_cc（i を定めていない）から antiperiodic_exp_sum の前置きに。
+  (2) の狭義の負・γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian からの一行ずつの鎖に。主張の中身は不変。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `relation_of_gamma_2_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `det_A_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`relation_of_gamma_2_theta_tilde` のレビューで見つかった（定義の欠け。今回の差分より前から）: 虚数単位 i = (0,1) を定めるブロックが本文に無く、`antiperiodic_exp_sum` の主張の前置きが置いているだけである。`definition_of_cc` を i の根拠に引いている箇所がほかにもありうる。直すには `definition_of_cc` の直後に i の定義を置き、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`gamma_2_theta_tilde_nonzero` のレビューで見つかった（根拠の無い一般論。今回の差分より前から）: 「ℂ は体ゆえ零因子を持たない」を主張するブロックが本文に無いのに、`eigenvalue_problem_diagonalization_and_exponential_form.ts` の 2837・2944・3125 行付近、`eigenvalue_problem_eigenvalues_of_V_plus.ts` の 4046 行付近、`000_calculation_formulae_45_46.ts` の 726 行付近が `complex_numbers_form_a_field` だけを引いて使っている（行番号は 2026-11-03 の差分前）。この単位の証明では逆元を明示して使わない形にした。直すには、零因子を持たないことの主張を計算公式の章に置いて引くか、各所で逆元を明示する。検算の付いたブロックの見直しで扱う。
 

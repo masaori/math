@@ -1,0 +1,146 @@
+# 対象ラベル: relation_of_gamma_2_theta_tilde
+# 具体の結合定数と全ての μ で、準備の鎖の値と主張 (1)〜(5) を厳密に確かめる。
+# γ_2 は円分体 Q(ζ_{4M}) の元、偏角・平方根は AA × AA の対と角度 a + bπ（_shared/polar_trigonometry_exact.sage）で計算する。
+load("_prelude.sage")
+
+rep = Report("relation_of_gamma_2_theta_tilde: 具体の値と主張")
+
+# ---- 準備の第五: arctan 0 = 0、sin(π/2) = 1、cos(π/2) = 0、0 < π、角度 0・π の整数 ----
+rep.check(bool(arcsin(SR(1)) == pi / 2), "Sage の arcsin(1) = π/2（π の定め方）")
+rep.check(sqrt_aa(1 + 0**2) == 1 and QQ(0) / sqrt_aa(1 + 0**2) == 0, "arctan 0 の鎖 第 2 行: 0/√(1+0^2) = 0/1 = 0")
+rep.check(cos_sin(Ang(0))[1] == 0, "arctan 0 の鎖 第 3 行: sin 0 = 0")
+rep.check(bool(arcsin(sin(SR(0))) == 0) and bool(arctan(SR(0)) == 0), "arctan 0 の鎖 第 4 行と両端: arcsin(sin 0) = 0、Sage の arctan 0 = 0")
+rep.check(cos_sin(pi_ / 2) == (AA(0), AA(1)), "cos(π/2) = 0、sin(π/2) = 1（1 の 4 乗根の実部・虚部）")
+rep.check(sqrt_aa(1 - AA(1)**2) == 0, "cos(π/2) の鎖: √(1 - 1^2) = √0 = 0")
+rep.check(cos_sin(Ang(0)) == (AA(1), AA(0)), "cos 0 = 1、sin 0 = 0")
+rep.check(bool(pi == 2 * arcsin(SR(1))), "0 < π の鎖 第 1 行: π = 2 arcsin(1)")
+rep.check(bool(2 * arcsin(SR(1)) > 2 * arcsin(SR(0))), "0 < π の鎖 第 2 行: 2 arcsin(1) > 2 arcsin(0)")
+rep.check(bool(2 * arcsin(SR(0)) == 2 * 0) and 2 * 0 == 0, "0 < π の鎖 第 3・4 行: 2 arcsin(0) = 2·0 = 0")
+rep.check(n_of_section(Ang(0)) == 0 and n_of_section(pi_) == 0, "角度 0 と π の angle_section_existence_uniqueness の整数は 0")
+
+n_cases = 0
+fail_lines = {}
+def tick(ok, key):
+    if not ok:
+        fail_lines[key] = fail_lines.get(key, 0) + 1
+
+for (Yv, Zv) in COUPLINGS:
+    k = couplings(Yv, Zv)
+    for M in M_RANGE:
+        for mu in range(1, M + 1):
+            n_cases += 1
+            F, I_, Ep, Em, co, si = cyclotomic_angle(M, mu, 1)
+            _, _, Ep_m, Em_m, co_m, si_m = cyclotomic_angle(M, mu, -1)   # φ = -θ
+            # 準備の第一
+            tick(co_m == co, "cos(-θ) = cos θ")
+            tick(si_m == -si, "sin(-θ) = -sin θ")
+            tick(Ep_m == Em, "exp(i(-θ)) = exp(-iθ)")
+            tick(co + I_ * si == Ep, "cos θ + i sin θ = exp(iθ)")
+            tick(QQbar(co) == QQbar(cos(pi * (2 * mu - 1) / M)) and QQbar(si) == QQbar(sin(pi * (2 * mu - 1) / M)),
+                 "euler の式の cos・sin は Sage 組み込みの cos・sin と一致")
+            # 準備の第二
+            tick(I_.conjugate() == -I_, "ī = -i（円分体の共役）")
+            tick(Ep.conjugate() == Em, "conj(exp(iθ)) = exp(-iθ)")
+            tick(cc_conj(to_pair(Ep)) == to_pair(Em), "conj(exp(iθ)) = exp(-iθ)（def_complex_conjugate の対で）")
+            # 準備の第三: γ_2(-θ) の表示
+            g = gamma2_by_definition(I_, Ep, co, si, k)
+            gm = gamma2_by_definition(I_, Ep_m, co_m, si_m, k)
+            w = k['c1'] * co - I_ * si - k['s1'] * k['c2']
+            wp = k['c1'] * co + I_ * si - k['s1'] * k['c2']
+            gm_lines = [
+                I_ * Ep_m * k['s2s'] * (k['c1'] * co_m - I_ * si_m - k['s1'] * k['c2']),
+                I_ * Em * k['s2s'] * (k['c1'] * co_m - I_ * si_m - k['s1'] * k['c2']),
+                I_ * Em * k['s2s'] * (k['c1'] * co - I_ * si_m - k['s1'] * k['c2']),
+                I_ * Em * k['s2s'] * (k['c1'] * co - I_ * (-si) - k['s1'] * k['c2']),
+                I_ * Em * k['s2s'] * wp,
+            ]
+            tick(gm == gm_lines[0], "γ_2(-θ) の鎖 第 1 行は定義")
+            for j in range(len(gm_lines) - 1):
+                tick(gm_lines[j] == gm_lines[j + 1], f"γ_2(-θ) の鎖 第 {j+1} 行 = 第 {j+2} 行")
+            # 準備の第四: conj(γ_2(θ)) の鎖を円分体の共役で
+            s2s = F(k['s2s']); cj = lambda a: F(a).conjugate()
+            cg_lines = [
+                cj(g),
+                cj(I_ * Ep * s2s) * cj(w),
+                cj(I_ * Ep) * cj(s2s) * cj(w),
+                cj(I_) * cj(Ep) * cj(s2s) * cj(w),
+                (-I_) * cj(Ep) * cj(s2s) * cj(w),
+                (-I_) * Em * cj(s2s) * cj(w),
+                (-I_) * Em * s2s * cj(w),
+                (-I_) * Em * s2s * (cj(k['c1'] * co - I_ * si) - cj(k['s1'] * k['c2'])),
+                (-I_) * Em * s2s * (cj(k['c1'] * co) - cj(I_ * si) - cj(k['s1'] * k['c2'])),
+                (-I_) * Em * s2s * (cj(k['c1'] * co) - cj(I_) * cj(si) - cj(k['s1'] * k['c2'])),
+                (-I_) * Em * s2s * (k['c1'] * co - cj(I_) * si - k['s1'] * k['c2']),
+                (-I_) * Em * s2s * (k['c1'] * co - (-I_) * si - k['s1'] * k['c2']),
+                (-I_) * Em * s2s * wp,
+                -(I_ * Em * s2s * wp),
+                -gm,
+            ]
+            for j in range(len(cg_lines) - 1):
+                tick(cg_lines[j] == cg_lines[j + 1], f"conj(γ_2(θ)) の鎖 第 {j+1} 行 = 第 {j+2} 行")
+            tick(cj(co) == co and cj(si) == si and cj(k['c1'] * co) == k['c1'] * co, "cos θ・sin θ・c_1 cos θ は実数（共役で不変）")
+            # (1)
+            tick(gm == -(-gm) == -cj(g), "(1) γ_2(-θ) = -(-γ_2(-θ)) = -conj(γ_2(θ))")
+            tick(gm != cj(g), "(1) 対照: γ_2(-θ) ≠ +conj(γ_2(θ))")
+            # (2)
+            gp = to_pair(g)
+            abs2 = gp[0]**2 + gp[1]**2                      # abs_basic_properties (2)
+            absg = cc_abs_aa(gp)                            # |γ_2(θ)|
+            m1 = F(-1)
+            two_lines = [g * gm, g * (-cj(g)), g * (m1 * cj(g)), (g * m1) * cj(g), (m1 * g) * cj(g),
+                         m1 * (g * cj(g)), m1 * (cj(g) * g)]
+            for j in range(len(two_lines) - 1):
+                tick(two_lines[j] == two_lines[j + 1], "(2) の鎖 左辺 = 第 1 行" if j == 0 else f"(2) の鎖 第 {j} 行 = 第 {j+1} 行")
+            tick(to_pair(cj(g) * g) == (abs2, AA(0)), "(2) complex_conjugate_times_self: conj(γ)γ = (|γ|^2)_C")
+            tick(to_pair(g * gm) == (-abs2, AA(0)), "(2) γ_2(θ)γ_2(-θ) = (-|γ_2(θ)|^2)_C")
+            tick(g != 0 and absg != 0 and absg > 0 and abs2 > 0 and -abs2 < 0, "(2) |γ| ≠ 0、|γ| > 0、|γ|^2 > 0、-|γ|^2 < 0")
+            tick(gm != 0, "(2) γ_2(-θ) ≠ 0_C")
+            tick(cc_conj(cc_conj(gp)) == gp, "(2) 背理の鎖の二重の共役")
+            # (3)
+            r = abs2
+            tick(sqrt_aa((-r)**2 + 0**2) == r, "(3) φ_polar((-r)_C) の鎖: √((-r)^2 + 0^2) = r")
+            tick(phi_polar_equals((-r, AA(0)), (r, pi_)), "(3) φ_polar((-r)_C) = [(r, π)]")
+            t2 = pi_ if r != 0 else Ang(0)                 # first_and_second_projections
+            tick(section(t2) == pi_ and section_by_floor(t2) == pi_, "(3) arg = s_{[0,2π)}([π]) = π - 2·0·π = π")
+            # (4)
+            tick(-(g * gm) == F(-1) * (g * gm), "(4) 準備 第 1 行: -z = (-1_C) z")
+            tick(to_pair(F(-1) * (g * gm)) == cc_mul(iota(-1, AA), (-r, AA(0))) == (r, AA(0)), "(4) -γ_2(θ)γ_2(-θ) = (-1_C)(-r)_C = r_C")
+            tick(sqrt_aa(r**2 + 0**2) == r and phi_polar_equals((r, AA(0)), (r, Ang(0))), "(4) φ_polar(r_C) = [(r, 0)]")
+            four_lines = [
+                phi_cartesian((sqrt_aa(r), Ang(0) / 2 - 0 * pi_)),
+                phi_cartesian((absg, Ang(0) / 2 - 0 * pi_)),
+                phi_cartesian((absg, Ang(0))),
+                (absg * cos_sin(Ang(0))[0], absg * cos_sin(Ang(0))[1]),
+                (absg * 1, absg * cos_sin(Ang(0))[1]),
+                (absg * 1, absg * 0),
+                (absg, AA(0)),
+                iota(absg, AA),
+            ]
+            tick(sqrt_aa(r) == absg, "(4)(5) √r = |γ|（|γ| ≥ 0、|γ|^2 = r）")
+            for j in range(len(four_lines) - 1):
+                tick(four_lines[j] == four_lines[j + 1], f"(4) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(sqrt_cc_by_definition((r, AA(0)), (r, Ang(0))) == four_lines[0], "(4) 第 2 行: sqrt_expansion_via_polar の値が def_sqrt_cc の値と一致")
+            tick(to_pair(QQbar(r).sqrt()) == (absg, AA(0)), "(4) 対照: Sage の QQbar の平方根とも一致")
+            # (5)
+            five_lines = [
+                phi_cartesian((sqrt_aa(r), pi_ / 2 - 0 * pi_)),
+                phi_cartesian((absg, pi_ / 2 - 0 * pi_)),
+                phi_cartesian((absg, pi_ / 2)),
+                (absg * cos_sin(pi_ / 2)[0], absg * cos_sin(pi_ / 2)[1]),
+                (absg * 0, absg * cos_sin(pi_ / 2)[1]),
+                (absg * 0, absg * 1),
+                (AA(0), absg),
+                cc_mul((AA(0), AA(1)), (absg, AA(0))),
+                cc_mul(to_pair(I_), (absg, AA(0))),
+                cc_mul(to_pair(I_), iota(absg, AA)),
+            ]
+            for j in range(len(five_lines) - 1):
+                tick(five_lines[j] == five_lines[j + 1], f"(5) の鎖 第 {j+2} 行 = 第 {j+3} 行")
+            tick(sqrt_cc_by_definition((-r, AA(0)), (r, pi_)) == five_lines[0], "(5) 第 2 行: sqrt_expansion_via_polar の値が def_sqrt_cc の値と一致")
+            tick(to_pair(QQbar(-r).sqrt()) == (AA(0), absg), "(5) 対照: Sage の QQbar の平方根（主値）とも一致")
+
+rep.check(n_cases > 0, f"具体の組の数: 結合定数 {len(COUPLINGS)} 組 × M_col = {M_RANGE[0]}..{M_RANGE[-1]} の全 μ = {n_cases} 組")
+rep.check(not fail_lines, "全ての組で全ての行が一致")
+for key, cnt in sorted(fail_lines.items()):
+    print(f"  不一致: {key}: {cnt} 組")
+rep.finish()
