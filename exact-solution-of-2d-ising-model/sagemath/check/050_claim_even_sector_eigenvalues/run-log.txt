@@ -213,3 +213,8 @@ RESULT: PASS
 # 実行コマンド: ~/micromamba/envs/sage/bin/sage check_37_iH_real_symmetric_step0_pauli_product_chains.sage
 判定 44 段、否定コントロール 5 件
 ALL PASS
+
+##### 2026-11-03 に check_38_iH_real_symmetric_step1_ZY_kronecker_chain を足した（iH_is_real_symmetric Step 1 の準備と Z_mY_m の 8 行の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_38_iH_real_symmetric_step1_ZY_kronecker_chain.sage
+判定 150 段（M_col = 1..5、全ての m）
+ALL PASS

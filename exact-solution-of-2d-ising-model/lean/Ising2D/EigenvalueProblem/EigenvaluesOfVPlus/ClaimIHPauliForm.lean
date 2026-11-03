@@ -16,7 +16,7 @@ Step 3（成分が実で転置について対称）は、この表示を経な�
 | Step 0 の `σ^zσ^y = (-i)σ^x`（11 行。`V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と同じ鎖） | `pauliZ_mul_pauliY`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
 | Step 0 の `σ^yσ^x = (-i)σ^z`（12 行。`V1_in_Z_Y_epsilon` の Step 0 の第 1 の鎖と同じ鎖） | `pauliY_mul_pauliX_eq`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`） |
 | Step 0 の `σ^xσ^z = (-i)σ^y`（11 行） | `pauliX_mul_pauliZ_eq`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
-| Step 1 の `Z_mY_m = (-i)σ^x_m` | `Z_mul_Y_same`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
+| Step 1 の準備（`Z_m`・`Y_m` のクロネッカー積表示）と `Z_mY_m = (-i)σ^x_m` の 8 行（準備の `Z_m`・`Y_m` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult` → Step 0 の `σ^zσ^y = (-i)σ^x` → `kronecker_multilinear` → `def_site_pauli_matrices`） | `Z_mul_Y_same` の `calc` の 8 段（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`。準備の表示は Lean では `Z`・`Y` の定義そのもので `rfl`） |
 | Step 1 の `H_2` の鎖の 3 行（`def_H2` → 上で得た `Z_mY_m` → `finite_sum_of_scalar_multiples`） | `H2_eq_neg_I_smul_sum_sigmaX` の `calc` の 3 段 |
 | Step 1 の `S_2` の鎖の 8 行（`S_2` の定義 → `H_2` の表示 → `scalar_multiple_is_associative` → ℂ の積の結合律 → 交換律 → 結合律 → `i(-i) = 1` → 乗法の単位元） | `S2_eq_K2star_smul_sum_sigmaX` の `calc` の 7 段（先頭の「`S_2` の定義」の行は Lean では主張の左辺そのもの） |
 | Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_castSucc_mul_Z_succ`（`Y_mul_Z_next_of_not_last` を人手の差の形の添字へ） |

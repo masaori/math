@@ -582,58 +582,54 @@ theorem jw_mul_jw_same (m : Fin M) (A B : Matrix (Fin 2) (Fin 2) ℂ) :
   · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
     rw [jwFamily_of_gt h, jwFamily_of_gt h, mul_one, if_neg hne]
 
-/-- `Z_m Y_m = -√-1 σ^x_m`。原文の `ε` の表式（下記 `epsilon` の docstring 参照）の要。 -/
+/-- **人手 `iH_is_real_symmetric` Step 1 の `Z_mY_m = (-i)σ^x_m` の 8 行の鎖**（`global_spin_flip_jordan_wigner_representation` の
+`Z_mY_m` の鎖も同じ道で、そちらは 1・2 行目を 1 行にまとめている）。
+
+人手との対応: 人手の準備の `Z_m`・`Y_m` のクロネッカー積表示（`def_jordan_wigner_Z_matrices`・`def_jordan_wigner_Y_matrices` と
+`site_pauli_prefix_product_kronecker_form`）は、Lean では `Z`・`Y` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
+`calc` の 1・2 段は `rfl` である（Lean の `Z`・`Y` が人手の積の形と一致することは、`Z_eq_xString_mul`・`Y_eq_xString_mul`（`Z_m = P_{m-1}σ_m^z`）と `xString_succ`（`P_{r+1} = P_rσ_{r+1}^x`）を合わせて得られる。
+`site_pauli_prefix_product_kronecker_form` の Lean の具体版は無い）。
+人手の `m` は Lean の `m`（0 始まり）で、人手の「第 `1` から第 `m-1` 因子」「第 `m+1` 以降の因子」は Lean の `i < m`・`m < i` である。 -/
 theorem Z_mul_Y_same (m : Fin M) : Z m * Y m = (-Complex.I) • sigmaX m := by
   calc
-    -- 本文: 直前に得た `Z_m,Y_m` のクロネッカー積表示を積へ代入する。
-    Z m * Y m = siteProd M (jwFamily m pauliZ) * siteProd M (jwFamily m pauliY) := rfl
-    -- 本文: クロネッカー積の積を因子ごとの積へ移す。
-    _ = siteProd M (jwFamily m pauliZ * jwFamily m pauliY) :=
-      (siteProd_mul M (jwFamily m pauliZ) (jwFamily m pauliY)).symm
+    Z m * Y m = siteProd M (jwFamily m pauliZ) * Y m := rfl
+                                                        -- 準備の `Z_m` の表示
+    _ = siteProd M (jwFamily m pauliZ) * siteProd M (jwFamily m pauliY) := rfl
+                                                        -- 準備の `Y_m` の表示
     _ = siteProd M (fun i =>
         if (i : ℕ) < (m : ℕ) then pauliX * pauliX
         else if i = m then pauliZ * pauliY else 1 * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
       congr 1
       funext i
       simp only [Pi.mul_apply]
       rcases lt_trichotomy (i : ℕ) (m : ℕ) with h | h | h
-      · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
-        rw [jwFamily_of_lt h, jwFamily_of_lt h, if_pos h]
+      · rw [jwFamily_of_lt h, jwFamily_of_lt h, if_pos h]
       · have he : i = m := Fin.val_injective h
-        rw [he, jwFamily_self, jwFamily_self, if_neg (by omega), if_pos rfl]
+        rw [he, jwFamily_self, jwFamily_self, if_neg (lt_irrefl _), if_pos rfl]
       · have hne : i ≠ m := fun he => absurd (congrArg Fin.val he) (by omega)
         rw [jwFamily_of_gt h, jwFamily_of_gt h, if_neg (by omega), if_neg hne]
-    -- 本文: 先頭の各因子へ `(σˣ)²=I` を適用する。
     _ = siteProd M (fun i =>
         if (i : ℕ) < (m : ℕ) then 1
         else if i = m then pauliZ * pauliY else 1 * 1) := by
-      congr 1
-      funext i
-      by_cases h : (i : ℕ) < (m : ℕ) <;> simp [h]
-    -- 本文: 末尾の各因子へ `II=I` を適用する。
-    _ = siteProd M (fun i =>
-        if (i : ℕ) < (m : ℕ) then 1
-        else if i = m then pauliZ * pauliY else 1) := by
-      congr 1
-      funext i
-      simp
-    _ = siteOp m (pauliZ * pauliY) := by
-      rw [siteOp_apply]
-      congr 1
+      rw [pauliX_mul_pauliX]                            -- `pauli_matrix_products` の `σ^xσ^x = I`（第 1 から第 `m-1` 因子へ同時に適用）
+    _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m (pauliZ * pauliY)) := by
+      rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → I`。第 `m+1` 以降の因子へ同時に適用）
+      congr 1                                           -- 両辺は同じ因子の並び `I⊠⋯⊠I⊠(σ^zσ^y)⊠I⊠⋯⊠I`（`Function.update` は `ite` の書き方の違いだけ）
       funext i
       by_cases he : i = m
-      · subst i
-        simp
-      · have hlt_or_gt : (i : ℕ) < (m : ℕ) ∨ (m : ℕ) < (i : ℕ) := by omega
-        rcases hlt_or_gt with hlt | hgt
-        · simp [hlt, he]
-        · simp [he]
-    -- 本文: 一サイトの積 `σᶻσʸ=-iσˣ` を代入する。
-    _ = siteOp m ((-Complex.I) • pauliX) := by rw [pauliZ_mul_pauliY]
-    -- 本文: 一因子の複素スカラーをクロネッカー積の外へ出す。
-    _ = (-Complex.I) • siteOp m pauliX := by rw [map_smul]
-    -- 本文: サイト行列 `σ_m^x` の定義へ戻す。
-    _ = (-Complex.I) • sigmaX m := rfl
+      · rw [he, Function.update_self, if_neg (lt_irrefl _), if_pos rfl]
+      · rw [Function.update_of_ne he, if_neg he]
+        by_cases hlt : (i : ℕ) < (m : ℕ)
+        · rw [if_pos hlt]; rfl
+        · rw [if_neg hlt]; rfl
+    _ = siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m ((-Complex.I) • pauliX)) := by
+      rw [pauliZ_mul_pauliY]                            -- Step 0 の `σ^zσ^y = (-i)σ^x`
+    _ = (-Complex.I) • siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliX) :=
+      (siteProd M).map_update_smul _ m (-Complex.I) pauliX
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^x`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+    _ = (-Complex.I) • sigmaX m := rfl                  -- `def_site_pauli_matrices`（`k → m`, `a → x`）
 
 /-- `σ^x_m = √-1 Z_m Y_m`（上の言い換え）。 -/
 theorem sigmaX_eq_smul_Z_mul_Y (m : Fin M) : sigmaX m = Complex.I • (Z m * Y m) := by
