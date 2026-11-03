@@ -6545,9 +6545,9 @@ a+2b&=(a+b)+b
                   displayMath(String.raw`\begin{aligned}
 |\{(i,j)\in\mathcal J_k\times\mathcal J_k:i<j,\ \sigma(j)<\sigma(i)\}|
 &=|\{(i,j)\in\mathcal J_k\times\mathcal J_k:i<j,\ \sigma_k(j)<\sigma_k(i)\}|
-&&(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ と引き継いだ順序})\\
+&&\bigl(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ と引き継いだ順序}\bigr)\\
 &=\operatorname{inv}(\sigma_k)
-&&(\because\ \blkref{def_inversion_count})
+&&\bigl(\because\ \blkref{def_inversion_count}\bigr)
 \end{aligned}`),
                 ],
               },
@@ -59738,6 +59738,11 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                           kind: "definition",
                           title: { text: "頂点ごとの横断数" },
                           labels: ["def_vertexwise_crossing_number"],
+                          lean: [
+                            "Ising2DLambda.KacWard.vertexwiseCrossingNumber",
+                            "Ising2DLambda.NecSuf.KacWard.vertexwiseCrossingNumber",
+                            "Ising2DLambda.KacWard.vertexwiseCrossingNumber_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([

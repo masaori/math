@@ -961,6 +961,8 @@ import Ising2DLambda.NecSuf.KacWard.IndexPairCrossing
 import Ising2DLambda.KacWard.IndexPairCrossing
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkCrossingNumber
 import Ising2DLambda.KacWard.ClosedWalkCrossingNumber
+import Ising2DLambda.NecSuf.KacWard.VertexwiseCrossingNumber
+import Ising2DLambda.KacWard.VertexwiseCrossingNumber
 import Ising2DLambda.NecSuf.KacWard.CrossingNumberDouble
 import Ising2DLambda.KacWard.CrossingNumberDouble
 import Ising2DLambda.NecSuf.KacWard.CrossingNumberVertexDecomposition
