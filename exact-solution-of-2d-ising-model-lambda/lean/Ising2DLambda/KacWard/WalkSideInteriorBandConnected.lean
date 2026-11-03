@@ -20,6 +20,15 @@ def CellEdgeAdjacent (p q : ℤ × ℤ) : Prop :=
   (q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1)) ∨
   (q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1))
 
+theorem cellEdgeAdjacent_from_necSuf (p q : ℤ × ℤ) :
+    CellEdgeAdjacent p q ↔
+      Ising2DLambda.NecSuf.KacWard.cellEdgeAdjacent
+        (fun p q : ℤ × ℤ =>
+          q.1 = p.1 ∧ (q.2 = p.2 - 1 ∨ q.2 = p.2 + 1))
+        (fun p q : ℤ × ℤ =>
+          q.2 = p.2 ∧ (q.1 = p.1 - 1 ∨ q.1 = p.1 + 1)) p q :=
+  Iff.rfl
+
 /-- 整数格子セルの集合が辺隣接の有限列で連結であること。 -/
 def EdgeConnectedCellSet (S : Set (ℤ × ℤ)) : Prop :=
   ConnectedBy CellEdgeAdjacent S

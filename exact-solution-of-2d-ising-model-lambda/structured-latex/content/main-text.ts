@@ -63468,6 +63468,11 @@ C_2:=(a,b),\qquad C_3:=(a,b-1)`),
                         title: { text: "セルの辺隣接" },
                         labels: ["def_cell_edge_adjacency"],
                         habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.CellEdgeAdjacent",
+                          "Ising2DLambda.NecSuf.KacWard.cellEdgeAdjacent",
+                          "Ising2DLambda.KacWard.cellEdgeAdjacent_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "二つのセル ", math(String.raw`(r,c),(r',c')\in\mathbb Z\times\mathbb Z`),
@@ -63587,8 +63592,7 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         " と置く（", ref("def_odd_ray_interior_cells"), "）。",
                       ]),
                       paragraph([
-                        "まず ", math(String.raw`\mathcal B(\gamma)=\bigcup_{j=0}^{m-1}A_j`),
-                        " を両包含で確かめる。セル ", math(String.raw`(r,c)`),
+                        "まず内側帯と各頂点に接する内側セルの合併の一致を両包含で確かめる。セル ", math(String.raw`(r,c)`),
                         " の単位正方形の四隅 ", math(String.raw`(r,c),(r,c+1),(r+1,c),(r+1,c+1)`),
                         " のどれが ", math(String.raw`P_j(\gamma)=(a_j,b_j)`),
                         " に一致するかに応じて、", math(String.raw`(r,c)`), " は順に ",
@@ -63602,6 +63606,8 @@ C^{(j)}_3:=(a_j,b_j-1)`),
                         " なので ", math(String.raw`\mathcal B(\gamma)`), " に属する（",
                         ref("def_walk_side_interior_band"), "）。",
                       ]),
+                      displayMath(String.raw`\mathcal B(\gamma)=\bigcup_{j=0}^{m-1}A_j
+\qquad\bigl(\because\ \blkref{def_walk_side_interior_band}\text{ と }\blkref{def_odd_ray_interior_cells}\text{ による両包含}\bigr)`),
                       paragraph([
                         "次に、各 ", math(String.raw`A_j`), " が空でなく、その任意の二元が ",
                         math(String.raw`A_j`), " 内の辺隣接の列で結ばれることを見る。持ち上げ点の相異性と零巻き付きから ",

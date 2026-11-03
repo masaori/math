@@ -8,6 +8,11 @@ import Mathlib
 
 namespace Ising2DLambda.NecSuf.KacWard
 
+/-- Adjacency obtained from the two coordinate directions. -/
+def cellEdgeAdjacent {α : Type*}
+    (alongFirst alongSecond : α → α → Prop) (p q : α) : Prop :=
+  alongFirst p q ∨ alongSecond p q
+
 /-- 関係 `adj` の辺だけを使って集合 `S` の中で二点を結べること。 -/
 def ConnectedBy {α : Type*} (adj : α → α → Prop) (S : Set α) : Prop :=
   ∀ ⦃x⦄, x ∈ S → ∀ ⦃y⦄, y ∈ S →
