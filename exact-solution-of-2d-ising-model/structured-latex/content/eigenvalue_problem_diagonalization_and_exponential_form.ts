@@ -1436,133 +1436,320 @@ j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
     title: { tex: String.raw`\check{Z}, \check{Y} \text{ から } Z_j, Y_j \text{ を復元する}` },
     labels: ["recover_Z_Y_from_check_Z_Y"],
     statement: [
-      paragraph([math(String.raw`j \in \{1,\dots,M_{\mathrm{col}}\}`), " について"]),
+      paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
+        " とし、",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`N := (M_{\mathrm{col}})_{\mathbb N}\in\mathbb N_{\geq2}`),
+        "、像の記号 ",
+        math(String.raw`n_{\mathbb Z}, n_{\mathbb R}, a_{\mathbb R}, a_{\mathbb C}`),
+        " と ",
+        math(String.raw`\tilde\theta_\mu\in\mathbb R`),
+        "、",
+        ref("def_half_integer_checkZ"),
+        " の ",
+        math(String.raw`\check Z_\mu`),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の ",
+        math(String.raw`\check Y_\mu`),
+        " を用いる。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " なので ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}=((M_{\mathrm{col}})_{\mathbb R},0_{\mathbb R})\neq(0_{\mathbb R},0_{\mathbb R})=0_{\mathbb C}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）であり、その逆元 ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}^{-1}\in\mathbb C`),
+        " がある（",
+        ref("complex_numbers_form_a_field"),
+        "）。",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        " について",
+      ]),
       displayMath(
-        String.raw`Z_j = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Z}_\mu\,\exp(i j\tilde\theta_\mu),
+        String.raw`(M_{\mathrm{col}})_{\mathbb C}^{-1}\sum_{\mu=1}^{N} \exp\!\left(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\check{Z}_{\mu_{\mathbb Z}} = Z_{j_{\mathbb Z}},
 \qquad
-Y_j = \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}} \check{Y}_\mu\,\exp(i j\tilde\theta_\mu)`,
+(M_{\mathrm{col}})_{\mathbb C}^{-1}\sum_{\mu=1}^{N} \exp\!\left(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\check{Y}_{\mu_{\mathbb Z}} = Y_{j_{\mathbb Z}}`,
       ),
       paragraph([
-        "が成り立つ。とくに ",
-        math(String.raw`\check{Z}_1,\dots,\check{Z}_{M_{\mathrm{col}}},\check{Y}_1,\dots,\check{Y}_{M_{\mathrm{col}}}`),
+        "が成り立つ。",
+        math(String.raw`\exp`),
         " は ",
+        ref("def_scalar_exp"),
+        " の ",
+        math(String.raw`K=\mathbb C`),
+        " のもの、",
+        math(String.raw`i\,(x)_{\mathbb C}`),
+        " は ",
+        math(String.raw`\mathbb C`),
+        " の積、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " のものであり、両辺は ",
+        math(String.raw`\mathrm{Mat}(2^{N},\mathbb{C})`),
+        " の元である。",
+      ]),
+      paragraph([
+        "とくに、",
+        math(String.raw`\mathrm{Mat}(2^{N},\mathbb{C})`),
+        " の部分集合 ",
+        math(String.raw`T`),
+        " が、すべての ",
+        math(String.raw`\mu \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`\check{Z}_{\mu_{\mathbb Z}}, \check{Y}_{\mu_{\mathbb Z}} \in T`),
+        " を満たし、",
+        ref("Z_Y_generate_algebra"),
+        " の (ii)〜(iv)（単位行列を含み、和・スカラー倍・行列の積で閉じる）を満たすならば、",
+        math(String.raw`T = \mathrm{Mat}(2^{N},\mathbb{C})`),
+        " である。すなわち ",
+        math(String.raw`\check{Z}_{1_{\mathbb Z}},\dots,\check{Z}_{N_{\mathbb Z}},\check{Y}_{1_{\mathbb Z}},\dots,\check{Y}_{N_{\mathbb Z}}`),
+        " は ",
+        math(String.raw`\mathrm{Mat}(2^{N},\mathbb{C})`),
+        " を単位的 ",
+        math(String.raw`\mathbb{C}`),
+        " 代数として生成する（",
         ref("Z_Y_generate_algebra"),
         " の ",
-        math(String.raw`Z_j, Y_j`),
-        " を生成するので、",
         math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " を（単位的 ",
-        math(String.raw`\mathbb{C}`),
-        " 代数として）生成する。",
+        " はこの ",
+        math(String.raw`\mathrm{Mat}(2^{N},\mathbb{C})`),
+        " である）。",
       ]),
     ],
     proof: [
       paragraph([
-        "準備として、",
-        math(String.raw`j, k \in \{1,\dots,M_{\mathrm{col}}\}`),
-        " のとき ",
-        math(String.raw`|j-k| \leq M_{\mathrm{col}}-1 < M_{\mathrm{col}}`),
-        " なので、",
-        ref("antiperiodic_exp_sum"),
-        " を指数の整数 ",
-        math(String.raw`j-k`),
-        " に適用する。まず ",
-        math(String.raw`j = k`),
-        " のときは",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-j-k
-&=0
-&&(\because\ j=k\text{ と }\mathbb Z\text{ の減法})\\
-&=0\cdot M_{\mathrm{col}}
-&&(\because\ \mathbb Z\text{ の乗法})
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        math(String.raw`(-1)^0 = 1`),
+        "準備。",
+        math(String.raw`j, k, \mu \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`f_{j,\mu} := \exp(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}) \in \mathbb C`),
         "、",
-        math(String.raw`j \neq k`),
-        " のときは ",
-        math(String.raw`|j-k| < M_{\mathrm{col}}`),
-        " かつ ",
-        math(String.raw`j-k \neq 0`),
-        " なので ",
-        math(String.raw`j-k \not\equiv 0 \pmod M_{\mathrm{col}}`),
-        " である。したがって",
-      ]),
-      displayMath(
-        String.raw`\sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(j-k)\tilde\theta_\mu)
-= \begin{cases}
-M_{\mathrm{col}} & (j = k) \\
-0 & (j \neq k)
-\end{cases}\quad(\because\ \blkref{antiperiodic_exp_sum}\text{ と }|j-k|<M_{\mathrm{col}})`,
-      ),
-      paragraph([
-        "である。第 1 式は、",
+        math(String.raw`e_{k,\mu} := \exp(-i(k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}) \in \mathbb C`),
+        "（",
+        ref("def_scalar_exp"),
+        "）と置き、",
+        math(String.raw`c := (M_{\mathrm{col}})_{\mathbb C}^{-1} \in \mathbb C`),
+        " と置く。",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）であり、",
+        math(String.raw`-i(x)_{\mathbb C}`),
+        " は積 ",
+        math(String.raw`(-i)(x)_{\mathbb C}`),
+        " を表す。",
         ref("def_half_integer_checkZ"),
-        " と ",
-        ref("theorem_exp_product"),
-        " と準備の等式を順に使うと、一続きに",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Z}_\mu\,\exp(ij\tilde\theta_\mu)
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\left(\sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(-ik\tilde\theta_\mu)\right)\exp(ij\tilde\theta_\mu)
-&&(\because \blkref{def_half_integer_checkZ}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
-&&(\because \text{有限和への分配}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k\,\exp(i(j-k)\tilde\theta_\mu)
-&&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Z_k \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(j-k)\tilde\theta_\mu)
-&&(\because \text{有限和の順序交換}) \\
-&= \frac{1}{M_{\mathrm{col}}}\cdot Z_j\cdot M_{\mathrm{col}}
-&&(\because \blkref{antiperiodic_exp_sum}\text{ と準備の等式により } k = j \text{ の項だけが残る}) \\
-&= Z_j
-&&(\because M_{\mathrm{col}}\ne 0\text{ なのでスカラー }\tfrac{1}{M_{\mathrm{col}}}\text{ と }M_{\mathrm{col}}\text{ が相殺する})
-\end{aligned}`,
-      ),
-      paragraph([
-        "第 2 式も、",
+        "・",
         ref("def_half_integer_checkY"),
-        " の ",
-        math(String.raw`\check{Y}_\mu`),
-        " の定義から同じ根拠の並びで、一続きに",
+        " を ",
+        math(String.raw`\mu_{\mathbb Z}\in\mathbb Z`),
+        " で読むと、",
+        math(String.raw`\check{Z}_{\mu_{\mathbb Z}} = \sum_{k=1}^{N} e_{k,\mu}Z_{k_{\mathbb Z}}`),
+        "、",
+        math(String.raw`\check{Y}_{\mu_{\mathbb Z}} = \sum_{k=1}^{N} e_{k,\mu}Y_{k_{\mathbb Z}}`),
+        " である。",
+      ]),
+      paragraph([
+        "準備 1（",
+        math(String.raw`k \neq j`),
+        " の項）。",
+        math(String.raw`j, k \in \{1,\dots,N\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}, k_{\mathbb Z} \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " である。",
+        math(String.raw`k \neq j`),
+        " なら、標準包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}`),
+        " は単射なので ",
+        math(String.raw`j_{\mathbb Z} - k_{\mathbb Z} \neq 0`),
+        "、さらに ",
+        math(String.raw`|j_{\mathbb Z} - k_{\mathbb Z}| \leq M_{\mathrm{col}} - 1 < M_{\mathrm{col}}`),
+        " である。したがって ",
+        math(String.raw`A \in \mathrm{Mat}(2^{N},\mathbb{C})`),
+        " について",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\check{Y}_\mu\,\exp(ij\tilde\theta_\mu)
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\left(\sum_{k=1}^{M_{\mathrm{col}}} Y_k\,\exp(-ik\tilde\theta_\mu)\right)\exp(ij\tilde\theta_\mu)
-&&(\because \blkref{def_half_integer_checkY}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k\,\exp(-ik\tilde\theta_\mu)\,\exp(ij\tilde\theta_\mu)
-&&(\because \text{有限和への分配}) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k\,\exp(i(j-k)\tilde\theta_\mu)
-&&(\because \blkref{theorem_exp_product}\ (n=1)) \\
-&= \frac{1}{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} Y_k \sum_{\mu=1}^{M_{\mathrm{col}}} \exp(i(j-k)\tilde\theta_\mu)
-&&(\because \text{有限和の順序交換}) \\
-&= \frac{1}{M_{\mathrm{col}}}\cdot Y_j\cdot M_{\mathrm{col}}
-&&(\because \blkref{antiperiodic_exp_sum}\text{ と準備の等式により } k = j \text{ の項だけが残る}) \\
-&= Y_j
-&&(\because M_{\mathrm{col}}\ne 0\text{ なのでスカラー }\tfrac{1}{M_{\mathrm{col}}}\text{ と }M_{\mathrm{col}}\text{ が相殺する})
+\left(\sum_{\mu=1}^{N}\exp\!\left(i\,((j_{\mathbb Z}-k_{\mathbb Z})_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)A
+&= 0_{\mathbb C}\,A
+&&\bigl(\because\ \blkref{antiperiodic_exp_sum}\text{ の「とくに」を }0<|j_{\mathbb Z}-k_{\mathbb Z}|<M_{\mathrm{col}}\text{ の整数 }j_{\mathbb Z}-k_{\mathbb Z}\text{ で}\bigr) \\
+&= O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "生成性については、",
+        "である（",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列）。",
+      ]),
+      paragraph([
+        "準備 2（指数）。",
+        math(String.raw`j, k, \mu \in \{1,\dots,N\}`),
+        " について ",
+        math(String.raw`x := \tilde\theta_{\mu_{\mathbb Z}} \in \mathbb R`),
+        " と置く。実数の側で",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+j_{\mathbb R}x + (-1_{\mathbb R})(k_{\mathbb R}x)
+&= j_{\mathbb R}x + \left((-1_{\mathbb R})k_{\mathbb R}\right)x
+&&(\because\ \mathbb R\text{ の積の結合律}) \\
+&= j_{\mathbb R}x + \left(-k_{\mathbb R}\right)x
+&&(\because\ \mathbb R\text{ で }(-1_{\mathbb R})y=-y) \\
+&= \left(j_{\mathbb R} + \left(-k_{\mathbb R}\right)\right)x
+&&(\because\ \mathbb R\text{ の分配法則}) \\
+&= \left(j_{\mathbb R} - k_{\mathbb R}\right)x
+&&(\because\ \mathbb R\text{ の差は加法の逆元の和}) \\
+&= (j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和と零を保つので差を保つ。}j_{\mathbb R}=(j_{\mathbb Z})_{\mathbb R},\ k_{\mathbb R}=(k_{\mathbb Z})_{\mathbb R}\ (\blkref{antiperiodic_exp_sum})\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["であり、複素数の側で"]),
+      displayMath(
+        String.raw`\begin{aligned}
+i\,(j_{\mathbb R}x)_{\mathbb C} + (-i)(k_{\mathbb R}x)_{\mathbb C}
+&= i\,(j_{\mathbb R}x)_{\mathbb C} + \left((-1_{\mathbb C})\,i\right)(k_{\mathbb R}x)_{\mathbb C}
+&&(\because\ \blkref{multiply_by_minus_one}) \\
+&= i\,(j_{\mathbb R}x)_{\mathbb C} + \left(i\,(-1_{\mathbb C})\right)(k_{\mathbb R}x)_{\mathbb C}
+&&(\because\ \mathbb C\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}) \\
+&= i\,(j_{\mathbb R}x)_{\mathbb C} + i\left((-1_{\mathbb C})(k_{\mathbb R}x)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= i\left((j_{\mathbb R}x)_{\mathbb C} + (-1_{\mathbb C})(k_{\mathbb R}x)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&= i\left((j_{\mathbb R}x)_{\mathbb C} + (-1_{\mathbb R})_{\mathbb C}(k_{\mathbb R}x)_{\mathbb C}\right)
+&&\bigl(\because\ (-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ の和},\ \blkref{complex_numbers_form_a_field})\bigr) \\
+&= i\left((j_{\mathbb R}x)_{\mathbb C} + \left((-1_{\mathbb R})(k_{\mathbb R}x)\right)_{\mathbb C}\right)
+&&(\because\ \blkref{real_inclusion_preserves_product}) \\
+&= i\left(j_{\mathbb R}x + (-1_{\mathbb R})(k_{\mathbb R}x)\right)_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で二項の和の形に開く}\bigr) \\
+&= i\left((j_{\mathbb Z} - k_{\mathbb Z})_{\mathbb R}\,x\right)_{\mathbb C}
+&&(\because\ \text{直前の実数の鎖})
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
+      paragraph(["第 1 式。主張の左辺から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+c\sum_{\mu=1}^{N} f_{j,\mu}\check{Z}_{\mu_{\mathbb Z}}
+&= c\sum_{\mu=1}^{N} f_{j,\mu}\left(\sum_{k=1}^{N} e_{k,\mu}Z_{k_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{def_half_integer_checkZ}\text{ を }N\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{\mu=1}^{N}\sum_{k=1}^{N} f_{j,\mu}\left(e_{k,\mu}Z_{k_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を右辺から左辺へ、各 }\mu\text{ へ同時適用}\bigr) \\
+&= c\sum_{\mu=1}^{N}\sum_{k=1}^{N} \left(f_{j,\mu}e_{k,\mu}\right)Z_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\sum_{\mu=1}^{N} \left(f_{j,\mu}e_{k,\mu}\right)Z_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\ (r=s=N)\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} f_{j,\mu}e_{k,\mu}\right)Z_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を各 }k\text{ へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} \exp\!\left(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C} + (-i)(k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Z_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((j_{\mathbb Z}-k_{\mathbb Z})_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Z_{k_{\mathbb Z}}
+&&(\because\ \text{準備 2 の複素数の鎖を全ての }(k,\mu)\text{ へ同時適用}) \\
+&= c\left(\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((j_{\mathbb Z}-j_{\mathbb Z})_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Z_{j_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (q=j)\text{。}k\neq j\text{ の項は準備 1 の鎖（}A=Z_{k_{\mathbb Z}}\text{）で }O\bigr) \\
+&= c\left(\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((0)_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Z_{j_{\mathbb Z}}\right)
+&&(\because\ \mathbb Z\text{ で }j_{\mathbb Z}-j_{\mathbb Z}=0) \\
+&= c\left((M_{\mathrm{col}})_{\mathbb C}\,Z_{j_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{antiperiodic_exp_sum}\text{ の「とくに」を整数 }0\text{ で}\bigr) \\
+&= \left(c\,(M_{\mathrm{col}})_{\mathbb C}\right)Z_{j_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr) \\
+&= 1_{\mathbb C}\,Z_{j_{\mathbb Z}}
+&&\bigl(\because\ c\text{ は }(M_{\mathrm{col}})_{\mathbb C}\text{ の逆元。}\blkref{complex_numbers_form_a_field}\bigr) \\
+&= Z_{j_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["第 2 式。主張の左辺から"]),
+      displayMath(
+        String.raw`\begin{aligned}
+c\sum_{\mu=1}^{N} f_{j,\mu}\check{Y}_{\mu_{\mathbb Z}}
+&= c\sum_{\mu=1}^{N} f_{j,\mu}\left(\sum_{k=1}^{N} e_{k,\mu}Y_{k_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{def_half_integer_checkY}\text{ を }N\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{\mu=1}^{N}\sum_{k=1}^{N} f_{j,\mu}\left(e_{k,\mu}Y_{k_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を右辺から左辺へ、各 }\mu\text{ へ同時適用}\bigr) \\
+&= c\sum_{\mu=1}^{N}\sum_{k=1}^{N} \left(f_{j,\mu}e_{k,\mu}\right)Y_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\sum_{\mu=1}^{N} \left(f_{j,\mu}e_{k,\mu}\right)Y_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\ (r=s=N)\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} f_{j,\mu}e_{k,\mu}\right)Y_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を各 }k\text{ へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} \exp\!\left(i\,(j_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C} + (-i)(k_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Y_{k_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= c\sum_{k=1}^{N}\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((j_{\mathbb Z}-k_{\mathbb Z})_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Y_{k_{\mathbb Z}}
+&&(\because\ \text{準備 2 の複素数の鎖を全ての }(k,\mu)\text{ へ同時適用}) \\
+&= c\left(\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((j_{\mathbb Z}-j_{\mathbb Z})_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Y_{j_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (q=j)\text{。}k\neq j\text{ の項は準備 1 の鎖（}A=Y_{k_{\mathbb Z}}\text{）で }O\bigr) \\
+&= c\left(\left(\sum_{\mu=1}^{N} \exp\!\left(i\,((0)_{\mathbb R}\tilde\theta_{\mu_{\mathbb Z}})_{\mathbb C}\right)\right)Y_{j_{\mathbb Z}}\right)
+&&(\because\ \mathbb Z\text{ で }j_{\mathbb Z}-j_{\mathbb Z}=0) \\
+&= c\left((M_{\mathrm{col}})_{\mathbb C}\,Y_{j_{\mathbb Z}}\right)
+&&\bigl(\because\ \blkref{antiperiodic_exp_sum}\text{ の「とくに」を整数 }0\text{ で}\bigr) \\
+&= \left(c\,(M_{\mathrm{col}})_{\mathbb C}\right)Y_{j_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr) \\
+&= 1_{\mathbb C}\,Y_{j_{\mathbb Z}}
+&&\bigl(\because\ c\text{ は }(M_{\mathrm{col}})_{\mathbb C}\text{ の逆元。}\blkref{complex_numbers_form_a_field}\bigr) \\
+&= Y_{j_{\mathbb Z}}
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "生成について。",
+        math(String.raw`T`),
+        " を主張の部分集合とし、",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        " を取る。",
         ref("Z_Y_generate_algebra"),
-        " が ",
-        math(String.raw`Z_j, Y_j`),
-        " の生成性を主張しており、いま示した式は各 ",
-        math(String.raw`Z_j, Y_j`),
-        " が ",
-        math(String.raw`\check{Z}_\mu, \check{Y}_\mu`),
+        " の (iii) のスカラー倍により ",
+        math(String.raw`f_{j,\mu}\check{Z}_{\mu_{\mathbb Z}} \in T`),
+        "、(iii) の和を ",
+        ref("def_finite_sum_of_matrices"),
+        " の帰納法の各段へ適用して ",
+        math(String.raw`\sum_{\mu=1}^{N} f_{j,\mu}\check{Z}_{\mu_{\mathbb Z}} \in T`),
+        "、もう一度 (iii) のスカラー倍により ",
+        math(String.raw`c\sum_{\mu=1}^{N} f_{j,\mu}\check{Z}_{\mu_{\mathbb Z}} \in T`),
+        " であり、第 1 式によりこれは ",
+        math(String.raw`Z_{j_{\mathbb Z}}`),
+        " である。同じく第 2 式により ",
+        math(String.raw`Y_{j_{\mathbb Z}} \in T`),
+        " である。",
+        math(String.raw`1 \leq l \leq M_{\mathrm{col}}`),
+        " の整数 ",
+        math(String.raw`l`),
+        " は ",
+        math(String.raw`l = j_{\mathbb Z}`),
+        " となる ",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        " を持つ（",
+        math(String.raw`N_{\mathbb Z} = M_{\mathrm{col}}`),
+        "）ので、",
+        ref("Z_Y_generate_algebra"),
         " の ",
-        math(String.raw`\mathbb{C}`),
-        " 線型結合であることを与えるので、",
-        math(String.raw`\check{Z}, \check{Y}`),
-        " の生成する部分代数は ",
-        math(String.raw`Z_j, Y_j`),
-        " をすべて含み、したがって全体に一致する。",
+        math(String.raw`S`),
+        " について ",
+        math(String.raw`S \subseteq T`),
+        "、すなわち ",
+        math(String.raw`T`),
+        " は (i) も満たして閉じている。",
+        ref("Z_Y_generate_algebra"),
+        " の ",
+        math(String.raw`\mathcal{A}`),
+        " は閉じている部分集合のうち最小なので ",
+        math(String.raw`\mathcal{A} \subseteq T`),
+        " であり、",
+        ref("Z_Y_generate_algebra"),
+        " より ",
+        math(String.raw`\mathcal{A} = \mathrm{Mat}(2^{N},\mathbb{C})`),
+        " であるから ",
+        math(String.raw`\mathrm{Mat}(2^{N},\mathbb{C}) = \mathcal{A} \subseteq T \subseteq \mathrm{Mat}(2^{N},\mathbb{C})`),
+        "、すなわち ",
+        math(String.raw`T = \mathrm{Mat}(2^{N},\mathbb{C})`),
+        " である。",
       ]),
     ],
     conversion: {
@@ -1572,6 +1759,7 @@ M_{\mathrm{col}} & (j = k) \\
         "2026-08-19 の式変形統一で、二つの displayMath と間の散文に分かれていた復元式の導出を、準備の指数和等式と一続き六段の鎖へまとめ、「Y_j についても同じ計算」と畳まれていた第 2 式を同じ形の鎖へ開いた。内容・参照は変えていない。",
         "2026-08-31 の式変形統一で、準備の散文に埋まっていた j-k=0=0M を、整数の減法と乗法を一つずつ適用する二段の鎖へ開いた。内容・参照は変えていない。",
         "2026-08-31 の式変形統一で、三本の鎖に行中の \\quad(\\because …) で置かれていた根拠 14 行を、他の証明と同じ行末の根拠列（aligned の &&）へ揃えた。内容・参照は変えていない。",
+        "2026-11-03（全証明の SageMath 検算）: 主張に像の記号（j_Z・j_R・μ_Z）と (M_col)_C^{-1} の存在、exp・積・和の出所を書き、定義どおりスカラーを左に置いて主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を Z_Y_generate_algebra の (i)〜(iv) で述べ直した。証明は、行列の theorem_exp_product (n=1) を scalar_exp_product に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を finite_sum_of_scalar_multiples・新しい主張 finite_double_sum_of_matrices_interchange・finite_sum_of_matrices_with_single_nonzero_term に付け替え、指数の和を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。",
       ],
     },
   },

@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 365 件のうち、SageMath の検算が無いもの 61 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 367 件のうち、SageMath の検算が無いもの 60 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -214,9 +214,14 @@
   準備 1（添字の対角とデルタ）は整数で、準備 2 の実数の鎖・複素数の鎖は π・μ・ν・M・j を不定元にした有理関数体と実数の対で、三つの式の鎖（16・6・16 等号）は Z_j・Y_j を成分の式で組み位相を円分体 `QQ(ζ_{4M})` に置いて `M_col = 2..5`・全 μ, ν で、新しい二つの主張は `QQ` 上の多項式環で、すべて厳密に確かめた。位相の表し方・`scalar_exp_product`・`exp_sum` の行は本文の exp のボールで `M_col = 2..8` に確かめた。
   人手証明を直した: 名前だけの根拠「反交換子の ℂ 双線型性」を新しい二つの主張への参照に、行列の `theorem_exp_product` (n=1) を `scalar_exp_product` に付け替え、二重和から j = k の項を残す段を準備 1 と `finite_sum_with_single_nonzero_term` に、θ̃_μ + θ̃_ν の書き換えを一行一操作の実数の鎖と複素数の鎖に分け、第 3 式を省略せずに書き、主張に像の記号と 2M_col δ I・0 が何の元かを書いた（中身は不変）。計算の誤りは無かった。Lean の具体版 `ClaimAnticommutatorCheckZY.lean` の注記は旧い人手証明の行（双線型性・`theorem_exp_product`）のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。
 
+- `recover_Z_Y_from_check_Z_Y`（Ž・Y̌ から Z_j・Y_j を復元する）と、そのために足した `finite_double_sum_of_matrices_interchange`（行列の二重の有限和の順序交換）・`finite_sum_of_matrices_with_single_nonzero_term`（一つを除く項が零行列の有限和はその項）（`002_linear_space_general.ts`）: `sagemath/check/<ラベル>/`。
+  二つの主鎖（各 13 等号）と準備 1 は Z_j・Y_j を成分の式で組み位相を円分体 `QQ(ζ_{4M})` に置いて `M_col = 2..5`・全 j で、準備 2 の実数の鎖・複素数の鎖は有理関数体と実数の対で、生成（Ž・Y̌ から張る部分空間が全体）は `M_col = 2, 3` の円分体の線型代数で、新しい二つの主張は `QQ` 上の多項式環で、すべて厳密に確かめた。位相の表し方・`scalar_exp_product`・準備 2・`antiperiodic_exp_sum` の行は本文の exp のボールで `M_col = 2..8` に確かめた。
+  人手証明を直した: 主張を、定義どおりスカラーを左に置き、像の記号（j_Z・j_R・μ_Z）と `(M_col)_C^{-1}` の存在を書いて、主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を `Z_Y_generate_algebra` の (i)〜(iv) で述べ直した。行列の `theorem_exp_product` (n=1) を `scalar_exp_product` に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を `finite_sum_of_scalar_multiples` と新しい二つの主張に付け替え、指数を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。計算の誤りは無かった。
+  申し送り: Lean の具体版 `ClaimRecoverZYFromCheckZY.lean` は旧い証明の骨格（Step 0〜3）と旧い主張の形のままで、新しい 13 等号の鎖・生成の述べ方との 1 対 1 は Lean の連続実行の受け持ち。この主張を引く `T_V_plus_eq_T_check_Vprime` の証明の Step 2 は、復元公式を旧い形 (1/M)Σ Ž_μ exp(imθ̃_μ) で書き写しており、そのブロックの検算の単位で新しい形にそろえる。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `recover_Z_Y_from_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_gamma1_gamma2_of_theta`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

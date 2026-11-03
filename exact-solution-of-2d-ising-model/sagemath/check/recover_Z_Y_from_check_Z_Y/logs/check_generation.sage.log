@@ -1,0 +1,3 @@
+  M = 2: span closure of I, check Z, check Y has dimension 16 = 4^2; check Z alone gives 4
+  M = 3: span closure of I, check Z, check Y has dimension 64 = 4^3; check Z alone gives 8
+RESULT: PASS

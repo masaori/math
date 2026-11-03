@@ -1873,6 +1873,118 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_double_sum_of_matrices_interchange",
+    kind: "claim",
+    title: { text: "行列の二重の有限和は和の順序を入れ替えても等しい" },
+    labels: ["finite_double_sum_of_matrices_interchange"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r, s \in \mathbb{Z}_{\geq 1}`),
+        " とし、",
+        math(String.raw`a \in \{1,\dots,r\}`),
+        "、",
+        math(String.raw`b \in \{1,\dots,s\}`),
+        " について ",
+        math(String.raw`X_{a,b} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{a=1}^{r}\sum_{b=1}^{s} X_{a,b} = \sum_{b=1}^{s}\sum_{a=1}^{r} X_{a,b}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{a=1}^{r}\sum_{b=1}^{s} X_{a,b}\Bigr)_{ik}
+&= \sum_{a=1}^{r}\Bigl(\sum_{b=1}^{s} X_{a,b}\Bigr)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)\\
+&= \sum_{a=1}^{r}\sum_{b=1}^{s} (X_{a,b})_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を各 }a\text{ へ同時適用}\bigr)\\
+&= \sum_{b=1}^{s}\sum_{a=1}^{r} (X_{a,b})_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の加法の結合法則・交換法則による有限和の順序交換。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{b=1}^{s}\Bigl(\sum_{a=1}^{r} X_{a,b}\Bigr)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を右辺から左辺へ、各 }b\text{ へ同時適用}\bigr)\\
+&= \Bigl(\sum_{b=1}^{s}\sum_{a=1}^{r} X_{a,b}\Bigr)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（全証明の SageMath 検算 recover_Z_Y_from_check_Z_Y）: 原文（Typst）に対応ブロックは無い。recover_Z_Y_from_check_Z_Y の証明が行列の二重和の順序を「有限和の順序交換」と名前だけで入れ替えていたので、その段を引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_finite_sum_of_matrices_with_single_nonzero_term",
+    kind: "claim",
+    title: { text: "一つを除く項が零行列である行列の有限和は、その一つの項に等しい" },
+    labels: ["finite_sum_of_matrices_with_single_nonzero_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`q \in \{1,\dots,r\}`),
+        " とし、",
+        math(String.raw`a \neq q`),
+        " のすべての ",
+        math(String.raw`a \in \{1,\dots,r\}`),
+        " について ",
+        math(String.raw`X_a = O`),
+        "（",
+        ref("def_zero_matrix"),
+        " の零行列）とする。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{a=1}^{r} X_a = X_q`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`a \neq q`),
+        " なら ",
+        math(String.raw`(X_a)_{ik} = O_{ik} = 0_{\mathbb C}`),
+        "（",
+        ref("def_zero_matrix"),
+        "）なので、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{a=1}^{r} X_a\Bigr)_{ik}
+&= \sum_{a=1}^{r} (X_a)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)\\
+&= (X_q)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_with_single_nonzero_term}\ (m \to r,\ z_a \to (X_a)_{ik},\ n \to q)\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（全証明の SageMath 検算 recover_Z_Y_from_check_Z_Y）: 原文（Typst）に対応ブロックは無い。recover_Z_Y_from_check_Z_Y の証明が行列の有限和で「k = j の項だけが残る」と名前だけで述べていたので、その段を引けるよう、複素数の finite_sum_with_single_nonzero_term の行列版を足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_is_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
