@@ -60671,6 +60671,18 @@ t_{\mathrm{sm}}(\gamma;k,l)
                         kind: "definition",
                         title: { text: "横断が分ける二つの添字区間" },
                         labels: ["def_smoothing_index_blocks"],
+                        lean: [
+                          "Ising2DLambda.KacWard.smoothingIndexBlockA",
+                          "Ising2DLambda.KacWard.smoothingIndexBlockB",
+                          "Ising2DLambda.KacWard.smoothingIndexBlockB_membership",
+                          "Ising2DLambda.KacWard.smoothingIndexBlocks_nonempty",
+                          "Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockA",
+                          "Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockB",
+                          "Ising2DLambda.NecSuf.KacWard.smoothingIndexBlockB_membership",
+                          "Ising2DLambda.NecSuf.KacWard.smoothingIndexBlocks_nonempty",
+                          "Ising2DLambda.KacWard.smoothingIndexBlockA_from_necSuf",
+                          "Ising2DLambda.KacWard.smoothingIndexBlockB_from_necSuf",
+                        ],
                         habitat: "N",
                         statement: [
                           paragraph([
@@ -60967,9 +60979,16 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)
 &&\bigl(\because\ \blkref{def_smoothing_index_blocks}\text{ の }B=I_m\setminus A\text{ と互いに素な有限和の分割}\bigr).
 \end{aligned}`),
                       paragraph([
-                        "等しい自然数を二で割った余りは等しい。", math(String.raw`c=c_{\mathrm h}`),
-                        " と ", math(String.raw`c=c_{\mathrm v}`), " の二回適用と ",
-                        ref("def_edge_sequence_seam_parities"), " により、組の両成分について主張を得る。",
+                        math(String.raw`c=c_{\mathrm h}`), " と ", math(String.raw`c=c_{\mathrm v}`),
+                        " のそれぞれについて、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\left(\sum_{\vec e\in\gamma_A}c(\vec e)+\sum_{\vec e\in\gamma_B}c(\vec e)\right)\bmod 2
+&=\left(\sum_{r\in I_m}c(\vec e_r)\right)\bmod 2
+&&\bigl(\because\ \text{直前の有限和の等式}\bigr).
+\end{aligned}`),
+                      paragraph([
+                        ref("def_edge_sequence_seam_parities"), " を両成分へ適用すると主張の組の等式を得る。",
                         "全過程は自然数の有限和と偶奇だけで閉じ、実数体も複素数体も現れない。",
                         "この等式により、平滑化の帰納で閉歩道を二本に分けたとき、切断線偶奇も二本の和として追跡できる。",
                       ]),

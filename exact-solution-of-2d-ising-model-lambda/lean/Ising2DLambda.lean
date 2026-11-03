@@ -981,6 +981,8 @@ import Ising2DLambda.NecSuf.KacWard.SmoothedCyclicTotalTurning
 import Ising2DLambda.KacWard.SmoothedCyclicTotalTurning
 import Ising2DLambda.NecSuf.KacWard.SmoothedSuccessorMap
 import Ising2DLambda.KacWard.SmoothedSuccessorMap
+import Ising2DLambda.NecSuf.KacWard.SmoothingIndexBlocks
+import Ising2DLambda.KacWard.SmoothingIndexBlocks
 import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
