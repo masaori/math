@@ -35422,6 +35422,7 @@ Z_L
                   title: { text: "辺の部分集合が頂点に持つ端点の個数" },
                   labels: ["def_edge_subset_incidence_count"],
                   habitat: "N",
+                  lean: ["Ising2DLambda.FisherZero.edgeSubsetIncidenceCount"],
                   verification: ["sagemath/check/even-subgraph-spin-sum"],
                   statement: [
                     paragraph([
@@ -35521,9 +35522,11 @@ Z_L
                       ],
                       proof: [
                         paragraph([ref("def_edge_subset_incidence_count"), " と有限積の可換則より、任意の配位 ", math(String.raw`\sigma\in\Sigma_L`), " について"]),
-                        displayMath(String.raw`\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
-=\prod_{v\in V_L}\sigma(v)^{d_A(v)}
-\quad(\because\ A\times I\ \text{の項を端点の値ごとに並べ替える})`),
+                        displayMath(String.raw`\begin{aligned}
+\prod_{e\in A}\sigma(\partial_0(e))\sigma(\partial_1(e))
+&=\prod_{v\in V_L}\sigma(v)^{d_A(v)}
+&&\bigl(\because\ \blkref{def_edge_subset_incidence_count},\ A\times I\ \text{の項を端点の値ごとに並べ替える}\bigr)
+\end{aligned}`),
                         paragraph(["である。有限和に対する分配則を頂点ごとに繰り返すと"]),
                         displayMath(String.raw`\begin{aligned}
 S_L(A)
