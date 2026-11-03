@@ -11,7 +11,7 @@
  *
  * 検査すること。
  *   1. `Ising2DLambda.` で始まる名前は、`lean/Ising2DLambda/` のどこかで宣言されていること。
- *   2. それ以外の名前は、下の MATHLIB_ALLOWLIST に挙げたものだけ（mathlib の宣言を
+ *   2. それ以外の名前は、下の MATHLIB_ALLOWLIST に挙げたものだけ（Lean または mathlib の宣言を
  *      対応先にするのは、自前で定義を置いていない場合に限る。綴りの間違いを見逃さないため
  *      黙って通さず、ここへ明示的に足させる）。
  *
@@ -27,11 +27,13 @@ const projectRoot = join(structuredLatexDir, "..");
 const leanRoot = join(projectRoot, "lean", "Ising2DLambda");
 
 /**
- * mathlib の宣言をそのまま対応先にしてよいもの。
+ * Lean または mathlib の宣言をそのまま対応先にしてよいもの。
  * 自前で定義を置いていない対象に限る（例: 不定元 t は `Polynomial.X` そのものであり、
  * 別名を作ると人手証明の定義と Lean の定義が 2 つになる）。
  */
-const MATHLIB_ALLOWLIST = new Set(["Polynomial.X", "Finset.card", "Fintype.card"]);
+const MATHLIB_ALLOWLIST = new Set([
+  "Polynomial.X", "Finset.card", "Fintype.card", "HAdd.hAdd", "One.one",
+]);
 
 const DECL_RE =
   /^\s*(?:@\[[^\]]*\]\s*)?(?:noncomputable\s+|private\s+|protected\s+|scoped\s+)*(?:theorem|lemma|def|abbrev|structure|instance|inductive)\s+([A-Za-z0-9_.'₀-₉]+)/gm;

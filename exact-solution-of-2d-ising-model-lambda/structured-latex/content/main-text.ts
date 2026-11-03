@@ -12404,6 +12404,11 @@ const chapter_partition_polynomial = defineSection({
                       title: { text: "剰余類の加法の記法" },
                       labels: ["def_residue_addition_notation"],
                       habitat: "Z",
+                      lean: [
+                        "HAdd.hAdd",
+                        "One.one",
+                        "Ising2DLambda.PartitionPolynomial.residueProjection",
+                      ],
                       statement: [
                         paragraph([
                           math(String.raw`\mathbb{Z}/L\mathbb{Z}`),
@@ -13871,7 +13876,7 @@ n_{\mathrm{h}}
                     displayMath(String.raw`\begin{aligned}
 B(\sigma)&:=\bigl\{\,e\in E_L \;\bigm|\; \sigma(\partial_0(e))\ne\sigma(\partial_1(e))\,\bigr\}\\[2pt]
 b(\sigma)&=|B(\sigma)|
-&&(\because\ \blkref{def_broken_bond_count})
+&&\bigl(\because\ \blkref{def_broken_bond_count}\bigr)
 \end{aligned}`),
                     paragraph([
                       "と置く。あわせて、各 ",
@@ -13881,38 +13886,38 @@ b(\sigma)&=|B(\sigma)|
                     displayMath(String.raw`\begin{aligned}
 \bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
 &=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{h}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
-&&(\because\ j\mapsto n_{\mathrm{h}}(i,j)\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射})\\
+&&\bigl(\because\ j\mapsto n_{\mathrm{h}}(i,j)\ \text{が}\ E_{L,\mathrm{h},i}\ \text{への全単射}\bigr)\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i,\ j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\bigr)\,\bigr\}\bigr|
-&&(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）})\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）}\bigr)\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_i(\sigma)\bigr)(j+_{\mathbb{Z}/L\mathbb{Z}}\bar1)\,\bigr\}\bigr|
-&&(\because\ \blkref{def_row_restriction})\\
+&&\bigl(\because\ \blkref{def_row_restriction}\bigr)\\
 &=b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
-&&(\because\ \blkref{def_intra_row_broken_count})
+&&\bigl(\because\ \blkref{def_intra_row_broken_count}\bigr)
 \end{aligned}`),
                     displayMath(String.raw`\begin{aligned}
 \bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
 &=\bigl|\bigl\{\,j\in\mathbb{Z}/L\mathbb{Z} \;\bigm|\; n_{\mathrm{v}}(i,j)\in B(\sigma)\,\bigr\}\bigr|
-&&(\because\ j\mapsto n_{\mathrm{v}}(i,j)\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射})\\
+&&\bigl(\because\ j\mapsto n_{\mathrm{v}}(i,j)\ \text{が}\ E_{L,\mathrm{v},i}\ \text{への全単射}\bigr)\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \sigma\bigl((i,j)\bigr)\ne\sigma\bigl((i+_{\mathbb{Z}/L\mathbb{Z}}\bar1,\ j)\bigr)\,\bigr\}\bigr|
-&&(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）})\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\text{（端点の式）}\bigr)\\
 &=\bigl|\bigl\{\,j \;\bigm|\; \bigl(\rho_i(\sigma)\bigr)(j)\ne\bigl(\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)(j)\,\bigr\}\bigr|
-&&(\because\ \blkref{def_row_restriction})\\
+&&\bigl(\because\ \blkref{def_row_restriction}\bigr)\\
 &=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
-&&(\because\ \blkref{def_inter_row_broken_count})
+&&\bigl(\because\ \blkref{def_inter_row_broken_count}\bigr)
 \end{aligned}`),
                     paragraph(["準備したものを使うと"]),
                     displayMath(String.raw`\begin{aligned}
 b(\sigma)
 &=|B(\sigma)|
-&&(\because\ \text{上の準備})\\
+&&\bigl(\because\ \text{上の準備}\bigr)\\
 &=\bigl|B(\sigma)\cap E_{L,\mathrm{h}}\bigr|+\bigl|B(\sigma)\cap E_{L,\mathrm{v}}\bigr|
-&&(\because\ E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}\ \text{は互いに素な合併})\\
+&&\bigl(\because\ E_L=E_{L,\mathrm{h}}\cup E_{L,\mathrm{v}}\ \text{は互いに素な合併}\bigr)\\
 &=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{h},i}\bigr|
 +\sum_{i\in\mathbb{Z}/L\mathbb{Z}}\bigl|B(\sigma)\cap E_{L,\mathrm{v},i}\bigr|
-&&(\because\ \blkref{claim_edge_row_partition})\\
+&&\bigl(\because\ \blkref{claim_edge_row_partition}\bigr)\\
 &=\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{h}}\bigl(\rho_i(\sigma)\bigr)
 +\sum_{i\in\mathbb{Z}/L\mathbb{Z}}b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
-&&(\because\ \text{上の準備})
+&&\bigl(\because\ \text{上の準備}\bigr)
 \end{aligned}`),
                     paragraph([
                       "を得る。互いに素な有限集合の合併の元の個数がそれぞれの個数の和であることを、",
