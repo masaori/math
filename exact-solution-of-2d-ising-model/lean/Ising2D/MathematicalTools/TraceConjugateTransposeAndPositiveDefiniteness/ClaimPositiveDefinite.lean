@@ -39,6 +39,7 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.DefinitionTrace
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Mathlib.LinearAlgebra.Matrix.PosDef
 import Mathlib.Analysis.Normed.Algebra.MatrixExponential
 
@@ -65,12 +66,10 @@ Pauli 行列の転置 `pauliX_transpose`・`pauliZ_transpose`・`pauliY_transpos
 @[simp] theorem pauliY_conjTranspose : pauliYᴴ = pauliY := by
   ext a b; fin_cases a <;> fin_cases b <;> simp [pauliY]
 
-/-! ## `siteProd` の転置・共役転置 -/
+/-! ## `siteProd` の共役転置
 
-theorem siteProd_transpose (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
-    (siteProd M x)ᵀ = siteProd M (fun i => (x i)ᵀ) := by
-  ext s t
-  simp only [Matrix.transpose_apply, siteProd_apply]
+転置 `siteProd_transpose`（人手 `kronecker_transpose`）は、人手の成分の鎖と 1 対 1 の `calc` として
+`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean` に置いた。 -/
 
 theorem siteProd_conjTranspose (x : Fin M → Matrix (Fin 2) (Fin 2) ℂ) :
     (siteProd M x)ᴴ = siteProd M (fun i => (x i)ᴴ) := by

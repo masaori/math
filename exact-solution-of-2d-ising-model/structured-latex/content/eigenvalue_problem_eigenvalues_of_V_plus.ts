@@ -182,7 +182,9 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x
 \end{aligned}`,
       ),
       paragraph([
-        "であり（",
+        "であり、",
+        math(String.raw`G`),
+        " について（",
         math(String.raw`M_{\mathrm{col}} = 2`),
         " のとき ",
         math(String.raw`G = \sigma_1^y\sigma_2^y`),
@@ -621,23 +623,96 @@ S_1^{(+)}
 \end{aligned}`,
       ),
       paragraph([
-        "Step 3（実対称性）。転置について ",
-        math(String.raw`(\sigma^x)^\top = \sigma^x`),
-        "（",
-        ref("transpose_of_pauli_x"),
-        "）、",
-        math(String.raw`(\sigma^z)^\top = \sigma^z`),
-        "（",
-        ref("transpose_of_pauli_z"),
-        "）、",
-        math(String.raw`(\sigma^y)^\top = -\sigma^y`),
-        "（",
-        ref("transpose_of_pauli_y"),
-        "）、",
-        math(String.raw`I^\top = I`),
-        "（",
-        ref("transpose_of_identity_matrix_of_order_two"),
-        "）である。成分は、",
+        "Step 3（実対称性）。Step 1 と同じく ",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書く。まず転置（",
+        ref("def_matrix_transpose"),
+        "）を計算する。",
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について（",
+        math(String.raw`m = 1`),
+        " のとき第 ",
+        math(String.raw`m`),
+        " 因子より前の因子は無く、",
+        math(String.raw`m = M_{\mathrm{col}}`),
+        " のとき第 ",
+        math(String.raw`m`),
+        " 因子より後の因子は無い）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sigma_m^x\right)^\top
+&= \Bigl(I\boxtimes\cdots\boxtimes\overbrace{\sigma^{x}}^{m\text{th}}\boxtimes\cdots\boxtimes I\Bigr)^\top
+   \quad (\because \blkref{def_site_pauli_matrices}\ (k \to m,\ a \to x)) \\
+&= I^\top\boxtimes\cdots\boxtimes\overbrace{\left(\sigma^{x}\right)^\top}^{m\text{th}}\boxtimes\cdots\boxtimes I^\top
+   \quad (\because \blkref{kronecker_transpose}\ (M \to M_{\mathrm{col}},\ A_m \to \sigma^x,\ A_k \to I\ (k \neq m))) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\left(\sigma^{x}\right)^\top}^{m\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because \blkref{transpose_of_identity_matrix_of_order_two}\ \text{を第}\ m\ \text{因子以外の因子へ同時に適用}) \\
+&= I\boxtimes\cdots\boxtimes\overbrace{\sigma^{x}}^{m\text{th}}\boxtimes\cdots\boxtimes I
+   \quad (\because \blkref{transpose_of_pauli_x}\ \text{を第}\ m\ \text{因子へ}) \\
+&= \sigma_m^x
+   \quad (\because \blkref{def_site_pauli_matrices}\ (k \to m,\ a \to x))
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`m \in \{1,\dots,M_{\mathrm{col}}-1\}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(\sigma_m^z\sigma_{m+1}^z\right)^\top
+&= \Bigl(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^{z}\boxtimes\sigma^{z}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m-1}\Bigr)^\top
+   \quad (\because \text{Step 2 の準備の } \sigma_m^z\sigma_{m+1}^z \text{ の表示}) \\
+&= \overbrace{I^\top\boxtimes\cdots\boxtimes I^\top}^{m-1}\boxtimes\left(\sigma^{z}\right)^\top\boxtimes\left(\sigma^{z}\right)^\top\boxtimes\overbrace{I^\top\boxtimes\cdots\boxtimes I^\top}^{M_{\mathrm{col}}-m-1}
+   \quad (\because \blkref{kronecker_transpose}\ (M \to M_{\mathrm{col}},\ A_m \to \sigma^z,\ A_{m+1} \to \sigma^z,\ A_k \to I\ (k \neq m, m+1))) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\left(\sigma^{z}\right)^\top\boxtimes\left(\sigma^{z}\right)^\top\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m-1}
+   \quad (\because \blkref{transpose_of_identity_matrix_of_order_two}\ \text{を第}\ m\ \text{因子と第}\ m+1\ \text{因子以外の因子へ同時に適用}) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^{z}\boxtimes\sigma^{z}\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M_{\mathrm{col}}-m-1}
+   \quad (\because \blkref{transpose_of_pauli_z}\ \text{を第}\ m\ \text{因子と第}\ m+1\ \text{因子へ同時に適用}) \\
+&= \sigma_m^z\sigma_{m+1}^z
+   \quad (\because \text{Step 2 の準備の } \sigma_m^z\sigma_{m+1}^z \text{ の表示})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`G`),
+        " について（",
+        math(String.raw`M_{\mathrm{col}} = 2`),
+        " のとき第 ",
+        math(String.raw`2`),
+        " から第 ",
+        math(String.raw`M_{\mathrm{col}}-1`),
+        " までの因子は無い）",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+G^\top
+&= \Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)^\top
+   \quad (\because \text{Step 2 の準備の } G \text{ の表示}) \\
+&= \left(\sigma^{y}\right)^\top\boxtimes\overbrace{\left(\sigma^x\right)^\top\boxtimes\cdots\boxtimes\left(\sigma^x\right)^\top}^{M_{\mathrm{col}}-2}\boxtimes\left(\sigma^{y}\right)^\top
+   \quad (\because \blkref{kronecker_transpose}\ (M \to M_{\mathrm{col}},\ A_1 \to \sigma^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to \sigma^y)) \\
+&= \left(\sigma^{y}\right)^\top\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\left(\sigma^{y}\right)^\top
+   \quad (\because \blkref{transpose_of_pauli_x}\ \text{を第}\ 2\ \text{から第}\ M_{\mathrm{col}}-1\ \text{因子へ同時に適用}) \\
+&= \left(-\sigma^{y}\right)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\left(-\sigma^{y}\right)
+   \quad (\because \blkref{transpose_of_pauli_y}\ \text{を第}\ 1\ \text{因子と第}\ M_{\mathrm{col}}\ \text{因子へ同時に適用}) \\
+&= \bigl((-1_{\mathbb{C}})\sigma^{y}\bigr)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\bigl((-1_{\mathbb{C}})\sigma^{y}\bigr)
+   \quad (\because \blkref{negation_is_scalar_multiple_by_minus_one}\ (m, n \to 2,\ A \to \sigma^y)\ \text{を第}\ 1\ \text{因子と第}\ M_{\mathrm{col}}\ \text{因子へ同時に適用}) \\
+&= (-1_{\mathbb{C}})\Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\bigl((-1_{\mathbb{C}})\sigma^{y}\bigr)\Bigr)
+   \quad (\because \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (M \to M_{\mathrm{col}},\ j \to 1,\ c \to -1_{\mathbb{C}},\ A_1 \to \sigma^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to (-1_{\mathbb{C}})\sigma^y)) \\
+&= (-1_{\mathbb{C}})\Bigl((-1_{\mathbb{C}})\Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)\Bigr)
+   \quad (\because \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (M \to M_{\mathrm{col}},\ j \to M_{\mathrm{col}},\ c \to -1_{\mathbb{C}},\ A_1 \to \sigma^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to \sigma^y)) \\
+&= \bigl((-1_{\mathbb{C}})\cdot(-1_{\mathbb{C}})\bigr)\Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to -1_{\mathbb{C}},\ b \to -1_{\mathbb{C}},\ A \to \sigma^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes\sigma^{y})\right) \\
+&= 1_{\mathbb{C}}\Bigl(\sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}\Bigr)
+   \quad (\because \mathbb{C}\ \text{で}\ (-1)\cdot(-1)=1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= \sigma^{y}\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ A \to \sigma^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes\sigma^{y})\right) \\
+&= G
+   \quad (\because \text{Step 2 の準備の } G \text{ の表示})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。次に成分を見る。成分は、",
         math(String.raw`\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix}`),
         " と ",
         math(String.raw`\sigma^z = \begin{pmatrix}1&0\\0&-1\end{pmatrix}`),
@@ -647,17 +722,7 @@ S_1^{(+)}
         ref("pauli_matrix_products"),
         "）。クロネッカー積（",
         ref("def_kronecker"),
-        "）の成分は各因子の成分の積であり、転置は因子ごとの転置になる（",
-        ref("kronecker_transpose"),
-        "）：",
-      ]),
-      displayMath(
-        String.raw`\left(A_1\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}\right)^\top
-= A_1^\top\boxtimes\cdots\boxtimes A_{M_{\mathrm{col}}}^\top
-\quad (\because \text{クロネッカー積の転置})`,
-      ),
-      paragraph([
-        "したがって、",
+        "）の成分は各因子の成分の積である。したがって、",
       ]),
       list([
         [
@@ -666,7 +731,7 @@ S_1^{(+)}
           math(String.raw`\sigma^x`),
           " が 1 個、他は ",
           math(String.raw`I`),
-          "。成分は実、転置で不変。",
+          "。成分は実。",
         ],
         [
           math(String.raw`\sigma_m^z\sigma_{m+1}^z`),
@@ -674,7 +739,7 @@ S_1^{(+)}
           math(String.raw`\sigma^z`),
           " が 2 個、他は ",
           math(String.raw`I`),
-          "。成分は実、転置で不変。",
+          "。成分は実。",
         ],
         [
           math(String.raw`G`),
@@ -686,11 +751,7 @@ S_1^{(+)}
           math(String.raw`\sigma^x`),
           "。純虚数成分の因子がちょうど 2 個なので、成分の積に現れる虚数単位は ",
           math(String.raw`i^2 = -1`),
-          " の形でまとまり、成分はすべて実数。転置は ",
-          math(String.raw`(-1)^2 = 1`),
-          " 倍なので ",
-          math(String.raw`G^\top = G`),
-          "。",
+          " の形でまとまり、成分はすべて実数。",
         ],
       ]),
       paragraph([
@@ -718,6 +779,7 @@ S_1^{(+)}
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 の Y_mZ_{m+1} の鎖が「相異なる因子どうしは可換」「σ_j^xσ_j^x = I」「Step 0」を名前だけで根拠にしていたのを、Step 1 と同じ道に直した。準備で def_jordan_wigner_Y_matrices・def_jordan_wigner_Z_matrices と site_pauli_prefix_product_kronecker_form により Y_m・Z_{m+1} を、def_site_pauli_matrices・kronecker_product_rule (1)・identity_matrix_is_right_unit_of_mat_mult・identity_matrix_is_left_unit_of_mat_mult により σ_m^zσ_{m+1}^z をクロネッカー積で表し、鎖は kronecker_product_rule (1)・pauli_matrix_products の σ^xσ^x = I・identity_matrix_is_left_unit_of_mat_mult（A → σ^z と A → I の 2 行）・Step 0 の σ^yσ^x = (-i)σ^z・kronecker_multilinear・準備の σ_m^zσ_{m+1}^z の表示を 1 行に 1 つずつ引く 9 行にした（Lean の Y_castSucc_mul_Z_succ と 1 対 1）。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 の境界項 Y_{M_col}Z_1 の鎖が「Y_{M_col}, Z_1 の定義」「σ_1^z は他の因子と可換」「Step 0」「G の定義」を名前だけで根拠にし、3 行目で σ_1^xσ_1^z = (-i)σ_1^y と (-i) を積の外へ出す段を束ねていたのを、Step 1・Step 2 の内部辺と同じ道に直した。準備で def_jordan_wigner_Y_matrices・def_jordan_wigner_Z_matrices・主張の G の定義と site_pauli_prefix_product_kronecker_form により Y_{M_col}・Z_1・G をクロネッカー積で表し、鎖は kronecker_product_rule (1)・identity_matrix_is_right_unit_of_mat_mult（A → σ^x と A → σ^y の 2 行）・Step 0 の σ^xσ^z = (-i)σ^y・kronecker_multilinear・準備の G の表示を 1 行に 1 つずつ引く 8 行にした（Lean の Y_last_mul_Z_zero と 1 対 1）。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の冒頭が σ^x・σ^z の対称性と σ^y の交代性（(σ^y)^⊤ = -σ^y）を根拠なしに述べ、因子の I が転置で変わらないことも使っていたので、新しい主張 transpose_of_pauli_x・transpose_of_pauli_z・transpose_of_pauli_y・transpose_of_identity_matrix_of_order_two（006_Z_Y_anticommutation.ts）を引く形にした。成分が実・純虚数であることの根拠を pauli_matrix_products にした。Step 3 の残り（因子ごとの転置からの σ_m^x・σ_m^zσ_{m+1}^z・G の転置、成分の実性、実係数の和）は散文のままである。主張は変えていない。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 が σ_m^x・σ_m^zσ_{m+1}^z・G の転置を「転置で不変」「転置は (-1)^2 = 1 倍なので G^⊤ = G」と名前だけで述べ、kronecker_transpose を言い直した式を (∵ クロネッカー積の転置) で置いていたのを、3 つの鎖に替えた。σ_m^x は def_site_pauli_matrices・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_x・def_site_pauli_matrices の 5 行、σ_m^zσ_{m+1}^z は Step 2 の準備の表示・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_z・準備の表示の 5 行、G は Step 2 の準備の表示・kronecker_transpose・transpose_of_pauli_x・transpose_of_pauli_y・negation_is_scalar_multiple_by_minus_one・kronecker_multilinear 2 回・scalar_multiple_is_associative・(-1)(-1) = 1・scalar_multiple_by_one・準備の表示の 11 行。成分の実性の段（箇条書き）は転置の記述を外しただけで変えていない（主張は不変）。",
       ],
     },
   },

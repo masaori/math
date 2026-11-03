@@ -81,7 +81,7 @@
 | `FermiSetup.trace_Vprime_pos` | `tr(V') > 0` | 同 Step 5 |
 | `pauliX/Y/Z_transpose`・`identity_matrix_two_transpose`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） | Pauli 行列と 2 次の単位行列の転置 | `transpose_of_pauli_x`・`transpose_of_pauli_z`・`transpose_of_pauli_y`・`transpose_of_identity_matrix_of_order_two` |
 | `pauliX/Y/Z_conjTranspose` | Pauli 行列の共役転置 | `iH_is_real_symmetric` Step 3 |
-| `siteProd_transpose` / `siteProd_conjTranspose` | クロネッカー積の転置は因子ごとの転置 | `kronecker_transpose` |
+| `siteProd_transpose_apply` / `siteProd_transpose`（`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean`。人手の成分の鎖の 4 行と 1 対 1） / `siteProd_conjTranspose`（`ClaimPositiveDefinite.lean`） | クロネッカー積の転置は因子ごとの転置、共役転置も因子ごと | `kronecker_transpose`（共役転置は原文には無い中間段階） |
 | `Z_transpose` / `Z_conjTranspose` / `Y_transpose` / `Y_conjTranspose`（`ClaimPositiveDefinite.lean`） | `Z^⊤=Z`, `Y^⊤=-Y`, `Z^*=Z`, `Y^*=Y` | 同（原文には無い中間段階） |
 | `S1plus_isHermitian` / `S1plus_transpose` / `S2_isHermitian` / `S2_transpose` | `S_1^{(+)}, S_2` は実対称（人手の本文は `(+)` だけ。`S1_isHermitian` / `S1_transpose` は境界項の係数を `η` にした補助の一般形で、`S1plus_*` はその `η = -1`） | `iH_is_real_symmetric` |
 | `entries_real_of_isHermitian_of_transpose` | 「実対称」＝「エルミート＋転置不変」 | `def_hermitian_positive_definite` の最後の注意 |

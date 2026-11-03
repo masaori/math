@@ -91,6 +91,13 @@ targets=(
   Ising2D.matrix_eq_sum_E
   Ising2D.kroneckerTensorPowBasis
   Ising2D.kroneckerTensorPowBasis_apply
+  Ising2D.siteProd_transpose_apply
+  Ising2D.siteProd_transpose
+  Ising2D.siteProd_eq_kroneckerProdOf
+  Ising2D.siteProd_transpose_of_necSuf
+  Ising2D.NecSuf.kroneckerProdOf
+  Ising2D.NecSuf.kroneckerProdOf_transpose_apply
+  Ising2D.NecSuf.kroneckerProdOf_transpose
   # --- 数学的道具立て「有限行列・Pauli行列・交換子」（MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/。必要十分版は NecSuf/ScalarCentral.lean）---
   Ising2D.scalar_identity_commutes
   Ising2D.scalar_identity_commutes_of_necSuf
@@ -1314,6 +1321,10 @@ targets=(
   Ising2D.Y_castSucc_mul_Z_succ
   Ising2D.Y_last_mul_Z_zero
   Ising2D.S1plus_eq_K1_smul_sub
+  Ising2D.sigmaX_transpose
+  Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose
+  Ising2D.boundaryYXYFamily_eq_ite
+  Ising2D.boundaryYXY_transpose
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I
   Ising2D.twoByTwo_one_eq_kroneckerDelta

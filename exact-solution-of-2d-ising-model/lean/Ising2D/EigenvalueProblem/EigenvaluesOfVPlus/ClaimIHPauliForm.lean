@@ -5,7 +5,8 @@
 （`eigenvalues_of_V_014_claim_iH_is_real_symmetric`、ラベル **`iH_is_real_symmetric`**）
 
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
-Step 3（成分が実で転置について対称）は、この表示を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
+Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）もこのファイルが持つ。
+Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
 ## 人手証明との対応
@@ -22,6 +23,9 @@ Step 3（成分が実で転置について対称）は、この表示を経な�
 | Step 2 の準備（`Y_m`・`Z_{m+1}` のクロネッカー積表示と、`σ^z_mσ^z_{m+1}` の 6 行（`def_site_pauli_matrices` 2 回 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult` → `identity_matrix_is_left_unit_of_mat_mult` 2 回）） | `Y`・`Z` の定義（`rfl`）と `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker` の `calc` の 6 段 |
 | Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` の 9 行（`1 ≤ m ≤ M_col-1`。準備の `Y_m`・`Z_{m+1}` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult`（`A → σ^z`・`A → I`） → Step 0 の `σ^yσ^x = (-i)σ^z` → `kronecker_multilinear` → 準備の `σ^z_mσ^z_{m+1}` の表示） | `Y_castSucc_mul_Z_succ` の `calc` の 9 段（人手の差の形の添字 `Fin.castSucc m`・`Fin.succ m` で） |
 | Step 2 の境界項の準備（`Y_{M_col}`・`Z_1`・`G`（`G = σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`）のクロネッカー積表示）と `Y_{M_col}Z_1 = (-i)G` の 8 行（準備の `Y_{M_col}`・`Z_1` の表示 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult`（`A → σ^x`・`A → σ^y`） → Step 0 の `σ^xσ^z = (-i)σ^y` → `kronecker_multilinear` → 準備の `G` の表示） | `Y_last_mul_Z_zero` の `calc` の 8 段（人手の差の形の添字 `Fin.last (r + 1)`・`0` で。準備の `Y`・`Z` の表示は定義そのもので `rfl`、`G` の表示は `boundaryYXYFamily` との書き方の違いを揃える段） |
+| Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行（`def_site_pauli_matrices` → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_x` → `def_site_pauli_matrices`） | `sigmaX_transpose` の `calc` の 5 段（`kronecker_transpose` は `siteProd_transpose`、`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean`） |
+| Step 3 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行（Step 2 の準備の表示 → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_z` → 準備の表示） | `sigmaZ_castSucc_mul_sigmaZ_succ_transpose` の `calc` の 5 段 |
+| Step 3 の `G^⊤ = G` の 11 行（Step 2 の準備の `G` の表示 → `kronecker_transpose` → `transpose_of_pauli_x` → `transpose_of_pauli_y` → `negation_is_scalar_multiple_by_minus_one` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → `(-1)(-1) = 1` → `scalar_multiple_by_one` → 準備の表示） | `boundaryYXY_transpose` の `calc` の 11 段（準備の `G` の表示の `ite` の形は `boundaryYXYFamily_eq_ite`） |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 
 - 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
@@ -40,6 +44,9 @@ Step 3（成分が実で転置について対称）は、この表示を経な�
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.ClaimH1PlusInSigmaZForm
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOne
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 
 namespace Ising2D
 
@@ -313,5 +320,163 @@ theorem S1plus_eq_K1_smul_sub (K1 : ℂ) (r : ℕ) :
         rw [one_mul]                                                         -- ℂ の乗法の単位元
     _ = K1 • D - K1 • G :=
         smul_sub_tensorPow K1 D G                                            -- `scalar_multiple_distributes_over_matrix_difference`（`c → K_1`, `A → Σσ^zσ^z`, `B → G`）
+
+/-! ## Step 3 の転置の鎖
+
+人手の Step 3 の `(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G` の鎖と 1 対 1 に対応する。
+人手の因子の並び `I⊠⋯⊠σ^a⊠⋯⊠I` は、Lean では `siteProd` に入れる因子の族として `ite` で書く。`def_site_pauli_matrices` と
+Step 2 の準備の表示は `Function.update` で書いてあるので、`kronecker_transpose`（`siteProd_transpose`）の段と最後の段で、
+因子の族の書き方（`Function.update` と `ite`）を揃える（等式の変形ではなく書き方の違いだけ）。 -/
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行の鎖**（`m ∈ {1, …, M_col}`）。 -/
+theorem sigmaX_transpose {M : ℕ} (m : Fin M) : (sigmaX m)ᵀ = sigmaX m := by
+  have hform : ∀ A : Matrix (Fin 2) (Fin 2) ℂ,
+      Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m A = fun k => if k = m then A else 1 := by
+    intro A
+    funext k
+    by_cases h : k = m
+    · rw [h, Function.update_self, if_pos rfl]
+    · rw [Function.update_of_ne h, if_neg h]; rfl
+  calc
+    (sigmaX m)ᵀ
+        = (siteProd M (Function.update (1 : Fin M → Matrix (Fin 2) (Fin 2) ℂ) m pauliX))ᵀ := rfl
+                                                        -- `def_site_pauli_matrices`（`k → m`, `a → x`）
+    _ = siteProd M (fun k => if k = m then pauliXᵀ else (1 : Matrix (Fin 2) (Fin 2) ℂ)ᵀ) := by
+      rw [siteProd_transpose, hform]                    -- `kronecker_transpose`（`M → M_col`, `A_m → σ^x`, `A_k → I`（`k ≠ m`））
+      congr 1
+      funext k
+      dsimp only
+      by_cases h : k = m
+      · rw [if_pos h, if_pos h]
+      · rw [if_neg h, if_neg h]
+    _ = siteProd M (fun k => if k = m then pauliXᵀ else 1) := by
+      rw [identity_matrix_two_transpose]                -- `transpose_of_identity_matrix_of_order_two`（第 `m` 因子以外の因子へ同時に適用）
+    _ = siteProd M (fun k => if k = m then pauliX else 1) := by
+      rw [pauliX_transpose]                             -- `transpose_of_pauli_x`（第 `m` 因子へ）
+    _ = sigmaX m := by
+      rw [← hform]; rfl                                 -- `def_site_pauli_matrices`（`k → m`, `a → x`）
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行の鎖**（`1 ≤ m ≤ M_col - 1`、`M = r + 2`）。
+人手の `m` は Lean の `Fin.castSucc m`、`m + 1` は `Fin.succ m`。 -/
+theorem sigmaZ_castSucc_mul_sigmaZ_succ_transpose {r : ℕ} (m : Fin (r + 1)) :
+    (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ = sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m) := by
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
+  have hform : Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+      (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ
+        = fun i => if i = Fin.castSucc m then pauliZ else if i = Fin.succ m then pauliZ else 1 := by
+    funext i
+    by_cases ha : i = Fin.castSucc m
+    · rw [ha, Function.update_self, if_pos rfl]
+    · rw [Function.update_of_ne ha, if_neg ha]
+      by_cases hb : i = Fin.succ m
+      · rw [hb, Function.update_self, if_pos rfl]
+      · rw [Function.update_of_ne hb, if_neg hb]; rfl
+  calc
+    (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ
+        = (siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+            (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ))ᵀ := by
+      rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker]    -- Step 2 の準備の `σ^z_mσ^z_{m+1}` の表示
+    _ = siteProd (r + 2) (fun i => if i = Fin.castSucc m then pauliZᵀ
+          else if i = Fin.succ m then pauliZᵀ else (1 : Matrix (Fin 2) (Fin 2) ℂ)ᵀ) := by
+      rw [siteProd_transpose, hform]                    -- `kronecker_transpose`（`M → M_col`, `A_m, A_{m+1} → σ^z`, `A_k → I`（`k ≠ m, m+1`））
+      congr 1
+      funext i
+      dsimp only
+      by_cases ha : i = Fin.castSucc m
+      · rw [if_pos ha, if_pos ha]
+      · rw [if_neg ha, if_neg ha]
+        by_cases hb : i = Fin.succ m
+        · rw [if_pos hb, if_pos hb]
+        · rw [if_neg hb, if_neg hb]
+    _ = siteProd (r + 2) (fun i => if i = Fin.castSucc m then pauliZᵀ
+          else if i = Fin.succ m then pauliZᵀ else 1) := by
+      rw [identity_matrix_two_transpose]                -- `transpose_of_identity_matrix_of_order_two`（第 `m`・第 `m+1` 因子以外の因子へ同時に適用）
+    _ = siteProd (r + 2) (fun i => if i = Fin.castSucc m then pauliZ
+          else if i = Fin.succ m then pauliZ else 1) := by
+      rw [pauliZ_transpose]                             -- `transpose_of_pauli_z`（第 `m` 因子と第 `m+1` 因子へ同時に適用）
+    _ = sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m) := by
+      rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker, hform]   -- Step 2 の準備の `σ^z_mσ^z_{m+1}` の表示
+
+/-- 人手 `iH_is_real_symmetric` Step 2 の準備の `G` の表示 `σ^y⊠σ^x⊠⋯⊠σ^x⊠σ^y` の因子の並びを、`ite` で書いたもの
+（`boundaryYXYFamily` の `∨` と `ite` の書き方の違いだけ）。 -/
+theorem boundaryYXYFamily_eq_ite (r : ℕ) :
+    boundaryYXYFamily (r + 2) (by omega)
+      = fun i : Fin (r + 2) => if i = 0 then pauliY else if i = Fin.last (r + 1) then pauliY else pauliX := by
+  funext i
+  have hf : firstSite (r + 2) (by omega) = (0 : Fin (r + 2)) := Fin.ext (by simp [firstSite])
+  have hl : lastSite (r + 2) (by omega) = Fin.last (r + 1) := Fin.ext (by simp [lastSite])
+  simp only [boundaryYXYFamily, hf, hl]
+  by_cases h0 : i = 0
+  · rw [if_pos (Or.inl h0), if_pos h0]
+  · rw [if_neg h0]
+    by_cases hl' : i = Fin.last (r + 1)
+    · rw [if_pos (Or.inr hl'), if_pos hl']
+    · rw [if_neg (by tauto), if_neg hl']
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `G^⊤ = G` の 11 行の鎖**（`M_col = r + 2 ≥ 2`）。
+人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+theorem boundaryYXY_transpose (r : ℕ) :
+    (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ
+      = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
+  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
+  -- 因子の並び `A⊠σ^x⊠⋯⊠σ^x⊠B`（第 `1` 因子 `A`、第 `M_col` 因子 `B`）
+  let F : Matrix (Fin 2) (Fin 2) ℂ → Matrix (Fin 2) (Fin 2) ℂ → Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ :=
+    fun A B i => if i = 0 then A else if i = Fin.last (r + 1) then B else pauliX
+  -- `F A B` は `F A' B` の第 `1` 因子を `A` に置き換えたもの、`F A B` は `F A B'` の第 `M_col` 因子を `B` に置き換えたもの
+  -- （`kronecker_multilinear` を引くための書き方の違いだけ）
+  have hupd0 : ∀ A A' B, F A B = Function.update (F A' B) 0 A := by
+    intro A A' B
+    funext i
+    by_cases h0 : i = 0
+    · rw [h0, Function.update_self]; simp only [F, if_pos rfl]
+    · rw [Function.update_of_ne h0]; simp only [F, if_neg h0]
+  have hupdl : ∀ A B B', F A B = Function.update (F A B') (Fin.last (r + 1)) B := by
+    intro A B B'
+    funext i
+    by_cases hl : i = Fin.last (r + 1)
+    · rw [hl, Function.update_self]; simp only [F, if_neg h0l.symm, ↓reduceIte]
+    · rw [Function.update_of_ne hl]; simp only [F, if_neg hl]
+  calc
+    (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ
+        = (siteProd (r + 2) (F pauliY pauliY))ᵀ := by
+      rw [boundaryYXYFamily_eq_ite]                     -- Step 2 の準備の `G` の表示
+    _ = siteProd (r + 2) (fun i => if i = 0 then pauliYᵀ
+          else if i = Fin.last (r + 1) then pauliYᵀ else pauliXᵀ) := by
+      rw [siteProd_transpose]                           -- `kronecker_transpose`（`M → M_col`, `A_1, A_{M_col} → σ^y`, `A_k → σ^x`（`2 ≤ k ≤ M_col-1`））
+      congr 1
+      funext i
+      simp only [F]
+      by_cases h0 : i = 0
+      · rw [if_pos h0, if_pos h0]
+      · rw [if_neg h0, if_neg h0]
+        by_cases hl : i = Fin.last (r + 1)
+        · rw [if_pos hl, if_pos hl]
+        · rw [if_neg hl, if_neg hl]
+    _ = siteProd (r + 2) (fun i => if i = 0 then pauliYᵀ
+          else if i = Fin.last (r + 1) then pauliYᵀ else pauliX) := by
+      rw [pauliX_transpose]                             -- `transpose_of_pauli_x`（第 `2` から第 `M_col-1` 因子へ同時に適用）
+    _ = siteProd (r + 2) (F (-pauliY) (-pauliY)) := by
+      rw [pauliY_transpose]                             -- `transpose_of_pauli_y`（第 `1` 因子と第 `M_col` 因子へ同時に適用）
+    _ = siteProd (r + 2) (F ((-1 : ℂ) • pauliY) ((-1 : ℂ) • pauliY)) := by
+      rw [neg_eq_neg_one_smul_matrix pauliY]            -- `negation_is_scalar_multiple_by_minus_one`（`m, n → 2`, `A → σ^y`。第 `1` 因子と第 `M_col` 因子へ同時に適用）
+    _ = (-1 : ℂ) • siteProd (r + 2) (F pauliY ((-1 : ℂ) • pauliY)) := by
+      rw [hupd0 ((-1 : ℂ) • pauliY) pauliY ((-1 : ℂ) • pauliY)]
+      conv_rhs => rw [hupd0 pauliY pauliY ((-1 : ℂ) • pauliY)]
+      exact (siteProd (r + 2)).map_update_smul _ 0 (-1 : ℂ) pauliY
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → -1_ℂ`, `A_1 → σ^y`, `A_k → σ^x`, `A_{M_col} → (-1_ℂ)σ^y`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+    _ = (-1 : ℂ) • ((-1 : ℂ) • siteProd (r + 2) (F pauliY pauliY)) := by
+      rw [hupdl pauliY ((-1 : ℂ) • pauliY) pauliY]
+      conv_rhs => rw [hupdl pauliY pauliY pauliY]
+      congr 1
+      exact (siteProd (r + 2)).map_update_smul _ (Fin.last (r + 1)) (-1 : ℂ) pauliY
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → M_col`, `c → -1_ℂ`, `A_1 → σ^y`, `A_k → σ^x`, `A_{M_col} → σ^y`）。同上
+    _ = ((-1 : ℂ) * (-1)) • siteProd (r + 2) (F pauliY pauliY) :=
+      smul_smul _ _ _                                   -- `scalar_multiple_is_associative`（`a, b → -1_ℂ`。Lean の具体版は無く、mathlib の `smul_smul`）
+    _ = (1 : ℂ) • siteProd (r + 2) (F pauliY pauliY) := by
+      rw [mul_neg_one, neg_neg]                         -- ℂ で `(-1)·(-1) = 1`（`definition_of_cc` の積）
+    _ = siteProd (r + 2) (F pauliY pauliY) :=
+      one_smul_tensorPow _                              -- `scalar_multiple_by_one`（`TensorPow` の系 `one_smul_tensorPow`）
+    _ = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
+      rw [boundaryYXYFamily_eq_ite]                     -- Step 2 の準備の `G` の表示
 
 end Ising2D
