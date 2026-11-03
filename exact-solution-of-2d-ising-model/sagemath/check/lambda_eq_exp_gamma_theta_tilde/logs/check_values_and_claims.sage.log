@@ -1,0 +1,25 @@
+== lambda_eq_exp_gamma_theta_tilde: 具体の値と主張
+PASS 準備 (a): g は実数で g > 1（g ≥ 1）（140 組のうち不一致 0）
+PASS 準備: g^2 - 1 = N（F の中。√(g^2 - 1) = √N = r と置ける）（140 組のうち不一致 0）
+PASS 準備 (a): cosh t = g（arccosh_properties (2) の当てはめ）（140 組のうち不一致 0）
+PASS 準備 (b): t > 0（ボールの下端）（140 組のうち不一致 0）
+PASS 準備 (c) の鎖 第 1 行: γ_2(θ~_μ) ≠ 0（140 組のうち不一致 0）
+PASS 準備 (c) の鎖: r ≥ 0、r ≠ 0、r > 0（140 組のうち不一致 0）
+PASS 準備 (d): g^2 = 1 + r^2（140 組のうち不一致 0）
+PASS 準備 (e): -γ_2(θ~)γ_2(-θ~) = r^2（根号の非負の根は r）（140 組のうち不一致 0）
+PASS Step 1 の平方の鎖の全行（140 組のうち不一致 0）
+PASS Step 1: cosh t > sinh t かつ sinh t > 0（cosh_sinh_basic_properties (3)）（140 組のうち不一致 0）
+PASS Step 1: sinh t = r（140 組のうち不一致 0）
+PASS Step 2: λ_+ の鎖の全行（exp(t) = w）（140 組のうち不一致 0）
+PASS Step 2: λ_- の鎖の全行（exp(-t) = 1/w）（140 組のうち不一致 0）
+PASS 独立な照合: t = arccosh(g) のボールの下端 > 0（140 組のうち不一致 0）
+PASS 独立な照合: sinh(arccosh g) は +r と重なり -r とは重ならない（Step 1 の符号）（140 組のうち不一致 0）
+PASS 独立な照合: exp(±arccosh g) は g ± r と重なる（Step 2）（140 組のうち不一致 0）
+PASS Step 3: -t < 0（ボールの上端）（140 組のうち不一致 0）
+PASS Step 3: exp(t) > exp(0) = 1 > exp(-t) > 0（140 組のうち不一致 0）
+PASS 主張: λ_+ > 1 > λ_- > 0、λ_+ > λ_-（140 組のうち不一致 0）
+PASS 組の数 140
+PASS 対照: a = -r は a^2 = r^2 を満たすが負で r と異なる（正の条件が要る）
+PASS 対照: θ = 0 では g = 1、r = 0、exp(t) = 1 で λ_+ = λ_- = 1（分離しない）
+-- lambda_eq_exp_gamma_theta_tilde: 具体の値と主張: 22/22 PASS
+RESULT: PASS

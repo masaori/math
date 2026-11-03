@@ -1,0 +1,20 @@
+== lambda_eq_exp_gamma_theta_tilde: 一般の点の等号の鎖
+PASS Step 1 第 1 行 = 第 2 行（cosh_sinh_basic_properties (2) の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 1 第 2 行 = 第 3 行（準備 (a) cosh t = g の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 1 第 3 行 = 第 4 行（準備 (d) g^2 = 1 + r^2（det_A_theta_tilde） の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 1 第 4 行 = 第 5 行（ℝ の四則。関係なしで一致）
+PASS Step 2 λ_+ 第 1 行 = 第 2 行（準備 (e) λ_+ = g + r（eigenvector_of_A_theta_tilde） の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_+ 第 2 行 = 第 3 行（準備 (a) cosh t = g の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_+ 第 3 行 = 第 4 行（Step 1 sinh t = r の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_+ 第 4 行 = 第 5 行（cosh_sinh_basic_properties (1) の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_+ 第 5 行 = 第 6 行（+t = t。関係なしで一致）
+PASS Step 2 λ_- 第 1 行 = 第 2 行（準備 (e) λ_- = g - r（eigenvector_of_A_theta_tilde） の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_- 第 2 行 = 第 3 行（準備 (a) cosh t = g の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_- 第 3 行 = 第 4 行（Step 1 sinh t = r の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS Step 2 λ_- 第 4 行 = 第 5 行（cosh_sinh_basic_properties (1) の関係のイデアルで成り立ち、関係なしでは異なる）
+PASS cosh_sinh_basic_properties (1) は def_cosh_sinh の式から従う
+PASS cosh_sinh_basic_properties (2) は def_cosh_sinh の式と exp(t)exp(-t) = 1 から従う
+PASS 対照: exp(t)exp(-t) = 1 なしでは (2) は従わない
+PASS 整合: 準備から λ_+ λ_- = 1、λ_+ + λ_- = 2g
+-- lambda_eq_exp_gamma_theta_tilde: 一般の点の等号の鎖: 17/17 PASS
+RESULT: PASS

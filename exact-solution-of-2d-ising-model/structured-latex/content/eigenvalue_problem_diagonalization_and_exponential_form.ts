@@ -4533,7 +4533,21 @@ g
         String.raw`\lambda_{+,\mu} = \exp(+\gamma(\tilde\theta_\mu)), \qquad
 \lambda_{-,\mu} = \exp(-\gamma(\tilde\theta_\mu))`,
       ),
-      paragraph(["が成り立つ。とくに ", math(String.raw`\gamma(\tilde\theta_\mu) > 0`), " なので"]),
+      paragraph([
+        "が成り立つ。ここで ",
+        math(String.raw`\lambda_{\pm,\mu}`),
+        " は ",
+        ref("eigenvector_of_A_theta_tilde"),
+        " の固有値、",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_gamma_theta"),
+        " の関数で、exp は実数の exp である。とくに ",
+        math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
+        "（",
+        ref("gamma_theta_tilde_mu_positive"),
+        "）なので",
+      ]),
       displayMath(String.raw`\lambda_{+,\mu} > 1 > \lambda_{-,\mu} > 0`),
       paragraph([
         "であり、2 つの固有値は**必ず分離している**。",
@@ -4541,116 +4555,224 @@ g
     ],
     proof: [
       paragraph([
-        math(String.raw`g_1 := \gamma_1(\tilde\theta_\mu)`),
-        "、",
-        math(String.raw`r := |\gamma_2(\tilde\theta_\mu)| > 0`),
-        "、",
-        math(String.raw`\gamma := \gamma(\tilde\theta_\mu) > 0`),
-        " と略記する（",
+        "準備。",
+        math(String.raw`g := \gamma_1(\tilde\theta_\mu) \in \mathbb{R}`),
+        "（",
+        ref("def_gamma1_gamma2_of_theta"),
+        "。実数の exp で作る結合定数と ",
+        math(String.raw`\cos\tilde\theta_\mu`),
+        " の値なので ",
+        math(String.raw`\mathbb{R}`),
+        " に住む）、",
+        math(String.raw`r := \left|\gamma_2(\tilde\theta_\mu)\right| \in \mathbb{R}_{\geq 0}`),
+        "（",
+        ref("def_abs_arg"),
+        "。非負の平方根の値）、",
+        math(String.raw`t := \gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        "（",
         ref("def_gamma_theta"),
-        "、",
-        ref("gamma_theta_tilde_mu_positive"),
-        "）。",
+        "。",
+        ref("def_arccosh"),
+        " の実対数の値なので ",
+        math(String.raw`\mathbb{R}`),
+        " に住む）と置く（関数 ",
+        math(String.raw`\gamma`),
+        " とその値を区別するため、値に別の文字を使う）。以下の exp は ",
+        ref("def_cosh_sinh"),
+        " のとおり実数の exp である。準備で使う事実は次の五つである。",
       ]),
+      list([
+        [
+          "(a) ",
+          ref("gamma1_gt_1_theta_tilde"),
+          " より ",
+          math(String.raw`g > 1`),
+          "、とくに ",
+          math(String.raw`g \geq 1`),
+          " であり、",
+          ref("def_gamma_theta"),
+          " より ",
+          math(String.raw`t = \mathrm{arccosh}(g)`),
+          " である。",
+          ref("arccosh_properties"),
+          " (2) を ",
+          math(String.raw`y = g`),
+          " に適用して ",
+          math(String.raw`\cosh t = g`),
+          "。",
+        ],
+        [
+          "(b) ",
+          ref("gamma_theta_tilde_mu_positive"),
+          " より ",
+          math(String.raw`t > 0`),
+          "。",
+        ],
+        [
+          "(c) ",
+          math(String.raw`r > 0`),
+          "（下の鎖）。",
+        ],
+        [
+          "(d) ",
+          ref("det_A_theta_tilde"),
+          " より ",
+          math(String.raw`g^2 = 1 + r^2`),
+          "。",
+        ],
+        [
+          "(e) ",
+          ref("eigenvector_of_A_theta_tilde"),
+          " より ",
+          math(String.raw`\lambda_{+,\mu} = g + r`),
+          "、",
+          math(String.raw`\lambda_{-,\mu} = g - r`),
+          "。",
+        ],
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\gamma_2(\tilde\theta_\mu) \neq 0_{\mathbb{C}}
+&&(\because\ \blkref{gamma_2_theta_tilde_nonzero})\\
+&\Longrightarrow\ r \neq 0
+&&(\because\ \blkref{abs_basic_properties}\ (3)\ \text{の対偶})\\
+&\Longrightarrow\ r > 0
+&&(\because\ \blkref{def_abs_arg}\ \text{の}\ r \geq 0\ \text{かつ}\ r \neq 0)
+\end{aligned}`,
+      ),
       paragraph([
         "Step 1（",
-        math(String.raw`\sinh\gamma = r`),
-        "）。",
-        ref("def_gamma_theta"),
-        " より ",
-        math(String.raw`\cosh\gamma = g_1`),
-        " であり、",
-        ref("cosh_sinh_basic_properties"),
-        " の ",
-        math(String.raw`\cosh^2 - \sinh^2 = 1`),
-        " と ",
-        ref("det_A_theta_tilde"),
-        " の ",
-        math(String.raw`g_1^2 = 1 + r^2`),
-        " から",
+        math(String.raw`\sinh t = r`),
+        "）。まず両辺の平方が等しいことを示す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\left(\sinh\gamma\right)^2
-&= \left(\cosh\gamma\right)^2 - 1
-   \quad (\because \text{cosh\_sinh\_basic\_properties}\ (\cosh^2 - \sinh^2 = 1)) \\
-&= g_1^2 - 1
-   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
+\left(\sinh t\right)^2
+&= \left(\cosh t\right)^2 - 1
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (2)\ \text{を}\ x = t\ \text{に適用})\\
+&= g^2 - 1
+&&(\because\ \text{準備 (a) の}\ \cosh t = g)\\
 &= \left(1 + r^2\right) - 1
-   \quad (\because \text{det\_A\_theta\_tilde}\ (g_1^2 = 1 + r^2)) \\
+&&(\because\ \text{準備 (d) の}\ g^2 = 1 + r^2)\\
 &= r^2
-   \quad (\because \mathbb{R} \text{ の四則})
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`,
+      ),
+      paragraph(["次に両者が正であることを示す。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+&t > 0
+&&(\because\ \text{準備 (b)})\\
+&\Longrightarrow\ \cosh t > \sinh t\ \text{かつ}\ \sinh t > 0
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (3)\ \text{を}\ x = t\ \text{に適用})
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\gamma > 0`),
-        " より ",
-        math(String.raw`\sinh\gamma = \frac{1}{2}(\exp(\gamma) - \exp(-\gamma)) > 0`),
-        " であり、",
         math(String.raw`r > 0`),
-        " でもあるから、非負の平方根の一意性（",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        "）より ",
-        math(String.raw`\sinh\gamma = r`),
-        "。",
-      ]),
-      paragraph([
-        "Step 2（結論）。",
-        math(String.raw`\exp(\pm\gamma) = \cosh\gamma \pm \sinh\gamma`),
-        "（",
-        ref("cosh_sinh_basic_properties"),
-        "）と Step 1 より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(+\gamma)
-&= \cosh\gamma + \sinh\gamma
-   \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
-&= g_1 + \sinh\gamma
-   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
-&= g_1 + r
-   \quad (\because \text{Step 1}) \\
-&= \lambda_{+,\mu}
-   \quad (\because \text{eigenvector\_of\_A\_theta\_tilde}) \\
-\exp(-\gamma)
-&= \cosh\gamma - \sinh\gamma
-   \quad (\because \text{cosh\_sinh\_basic\_properties}) \\
-&= g_1 - \sinh\gamma
-   \quad (\because \text{def\_gamma\_theta}\ (\cosh\gamma = g_1)) \\
-&= g_1 - r
-   \quad (\because \text{Step 1}) \\
-&= \lambda_{-,\mu}
-   \quad (\because \text{eigenvector\_of\_A\_theta\_tilde})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`\lambda_{\pm,\mu} = g_1 \pm r`),
+        " は準備 (c) である。",
+        math(String.raw`a = \sinh t \in \mathbb{R}_{>0}`),
+        "、",
+        math(String.raw`b = r \in \mathbb{R}_{>0}`),
         " は ",
-        ref("eigenvector_of_A_theta_tilde"),
-        "。）",
+        math(String.raw`a^2 = b^2`),
+        " を満たすので、",
+        ref("cosh_sinh_basic_properties"),
+        " (4) より ",
+        math(String.raw`\sinh t = r`),
+        " である。",
       ]),
       paragraph([
-        "Step 3（分離）。",
-        math(String.raw`\gamma > 0`),
-        " と実指数関数の狭義単調増加性より",
+        "Step 2（",
+        math(String.raw`\lambda_{\pm,\mu} = \exp(\pm t)`),
+        "）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\exp(\gamma)
-&> \exp(0)
-   \quad (\because \gamma>0 \text{ と実指数関数の狭義単調増加性}) \\
-\exp(0)
-&= 1
-   \quad (\because \exp(0)=1) \\
-1=\exp(0)
-&> \exp(-\gamma)
-   \quad (\because 0>-\gamma \text{ と実指数関数の狭義単調増加性}) \\
-\exp(-\gamma)
-&> 0
-   \quad (\because \text{実指数関数の正値性})
+\lambda_{+,\mu}
+&= g + r
+&&(\because\ \text{準備 (e)})\\
+&= \cosh t + r
+&&(\because\ \text{準備 (a) の}\ \cosh t = g)\\
+&= \cosh t + \sinh t
+&&(\because\ \text{Step 1 の}\ \sinh t = r)\\
+&= \exp(t)
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (1)\ \text{を}\ x = t\ \text{に適用})\\
+&= \exp(+t)
+&&(\because\ +t = t)
 \end{aligned}`,
       ),
+      displayMath(
+        String.raw`\begin{aligned}
+\lambda_{-,\mu}
+&= g - r
+&&(\because\ \text{準備 (e)})\\
+&= \cosh t - r
+&&(\because\ \text{準備 (a) の}\ \cosh t = g)\\
+&= \cosh t - \sinh t
+&&(\because\ \text{Step 1 の}\ \sinh t = r)\\
+&= \exp(-t)
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (1)\ \text{を}\ x = t\ \text{に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`t = \gamma(\tilde\theta_\mu)`),
+        " なので、これが主張の前半である。",
+      ]),
+      paragraph([
+        "Step 3（分離）。まず ",
+        math(String.raw`-t < 0`),
+        " を示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&0 < t
+&&(\because\ \text{準備 (b)})\\
+&\Longrightarrow\ 0 + (-t) < t + (-t)
+&&(\because\ \mathbb{R}\ \text{の順序は両辺に同じ数を足しても保たれる})\\
+&\Longrightarrow\ -t < 0
+&&(\because\ \mathbb{R}\ \text{の四則})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\lambda_{+,\mu}
+&= \exp(t)
+&&(\because\ \text{Step 2})\\
+&> \exp(0)
+&&(\because\ \blkref{real_exp_strictly_increasing}\ \text{を}\ 0 < t\ \text{に適用})\\
+&= 1
+&&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{R}))
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+1
+&= \exp(0)
+&&(\because\ \blkref{scalar_exp_zero}\ (K = \mathbb{R}))\\
+&> \exp(-t)
+&&(\because\ \blkref{real_exp_strictly_increasing}\ \text{を}\ -t < 0\ \text{に適用})\\
+&= \lambda_{-,\mu}
+&&(\because\ \text{Step 2})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\lambda_{-,\mu}
+&= \exp(-t)
+&&(\because\ \text{Step 2})\\
+&> 0
+&&(\because\ \blkref{real_exp_positive}\ \text{を}\ x = -t\ \text{に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "三つを合わせて ",
+        math(String.raw`\lambda_{+,\mu} > 1 > \lambda_{-,\mu} > 0`),
+        " であり、",
+        math(String.raw`\mathbb{R}`),
+        " の順序の推移律より ",
+        math(String.raw`\lambda_{+,\mu} > \lambda_{-,\mu}`),
+        "、すなわち 2 つの固有値は分離している。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -4661,6 +4783,7 @@ g
         "数値検証: sagemath/check/048_claim_A_theta_tilde/check_05（cosh γ = γ_1、sinh γ = |γ_2|、λ_± = e^{±γ}、" +
           "min γ(θ~_μ) ≥ 3.0e-1 > 0、残差 ≤ 1e-12）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03: SageMath の検算（sagemath/check/lambda_eq_exp_gamma_theta_tilde/）を付けるときに証明を直した。r > 0 の根拠を def_gamma_theta・gamma_theta_tilde_mu_positive（どちらもこれを述べていない）から gamma_2_theta_tilde_nonzero・abs_basic_properties (3)・def_abs_arg の鎖に、値 γ(θ~_μ) を関数 γ と別の文字 t で置き、cosh t = g の根拠を arccosh_properties (2) の y = g への適用に、sinh t > 0 の散文を cosh_sinh_basic_properties (3) の当てはめに、sinh t = r の一意性を cosh_sinh_basic_properties (4)（正の数の平方の一致）の当てはめに、g・r・t の住処の理由を書き、Step 2 を λ_± から始める鎖に、Step 3 の名前だけの根拠（実指数関数の狭義単調増加性・exp(0) = 1・正値性）を real_exp_strictly_increasing・scalar_exp_zero・real_exp_positive に直し、−t < 0 を鎖にした。主張に λ_±・γ・exp の出所を書いた（中身は不変）。",
       ],
     },
   },

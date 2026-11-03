@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 372 件のうち、SageMath の検算が無いもの 53 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 52 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -246,9 +246,14 @@
   人手証明を直した: 前者の Step 1 は根拠の無い cos θ̃_μ ≤ 1 と c_1 > s_1 > 0 で γ_1 > 0 を出していたのを、`gamma1_lower_bound_all_theta` から g ≥ 1・g > 0 を出す準備に替え（第 1 の不等式 γ_1 ≥ 1 を直接示す）、全実数上の cos θ ≤ 1 を前提とすることを主張に書いた。Step 2 の根拠「det A = 1 と固有値の積」を `det_A_theta_tilde` の γ_1^2 = 1 + |γ_2|^2 に、「γ_2 ≠ 0 より |γ_2|^2 > 0」を `gamma_2_theta_tilde_nonzero`・`abs_basic_properties` (3)・`def_abs_arg` からの一操作ずつの含意の鎖にした。後者は γ ≥ 0・cosh γ = γ_1 の根拠を `arccosh_properties` (1)(2) に直し、値 γ(θ̃_μ) を関数 γ と別の文字 t で置いた。主張の中身は不変。計算の誤りは無かった。
   申し送り（Lean の連続実行の受け持ち。Lean は不変で `lake build`・`check-no-sorry.sh` は通る）: `TheoremMaxEigenvalueSimple.lean` の `gammaFn_thetaTilde_pos` が経由する `one_lt_gamma1R_thetaTilde_checkIndex` は `gamma1_gt_1_theta_tilde` を名乗るが cos θ̃_μ < 1 を使う別の論法で、人手と同じ手順の `ClaimDetATilde.lean` の `one_lt_gamma1R_thetaTilde` を経由していない。`ClaimDetATilde.lean` の注記は旧い Step 1〜3 の名前のままで、背理の鎖を `nlinarith` 一回で済ませ、r > 0 を `absGamma2_thetaTilde_pos` から直接取っている。`NecSuf/ArcoshExp.lean` の `arcosh_pos_of_one_lt` の注記は arcosh ≥ 0 の出典を `def_gamma_theta` としている（人手は `arccosh_properties` (1)）。
 
+- `lambda_eq_exp_gamma_theta_tilde`（λ_{±,μ} = exp(±γ(θ̃_μ)) と λ_+ > 1 > λ_- > 0）: `sagemath/check/lambda_eq_exp_gamma_theta_tilde/`。
+  一般の点は、Step 1 の平方の鎖と Step 2 の λ_+・λ_- の鎖の各行を `QQ` 上の不定元の多項式として別々に写し、隣り合う行の差がその行の根拠の関係だけのイデアルに入ること（対照つき）を確かめた。具体値は結合定数 4 組（臨界点 2 組を含む）× M_col = 2..8 の全 μ で、等号は円分体に r = |γ_2| = √(γ_2 conj γ_2) を添えた体の中で、順序は AA で厳密に確かめた（AA の入れ子の平方根の等号判定は 10 分を超えたので体へ移した）。t = log w と、w を通らずに g だけから作る arccosh(g)（ℝ への脱出）だけを `RealBallField(200)` で囲み、sinh t が +r の側にあること・exp(±t) が g ± r と重なることを照合した。対照として、正の条件を外した a = −r と、臨界点の θ = 0 で λ_+ = λ_- = 1 となり分離しないことを確かめた。
+  人手証明を直した: r > 0 の根拠を `def_gamma_theta`・`gamma_theta_tilde_mu_positive`（どちらもこれを述べていない）から `gamma_2_theta_tilde_nonzero`・`abs_basic_properties` (3)・`def_abs_arg` の鎖に、値 γ(θ̃_μ) を関数 γ と別の文字 t で置き g・r・t の住処の理由を書き、sinh t > 0 の散文を `cosh_sinh_basic_properties` (3) の当てはめに、sinh t = r を同 (4)（正の数の平方の一致）の当てはめに、Step 2 を λ_± から始める鎖に、Step 3 の名前だけの根拠を `real_exp_strictly_increasing`・`scalar_exp_zero`・`real_exp_positive` に直し、−t < 0 を鎖にした。主張に λ_±・γ・exp の出所を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変で `lake build`・`check-no-sorry.sh` は通る）: `DefinitionGammaTildeMu.lean` の `sinh_gammaTilde`（人手 Step 1）は `NecSuf.sinh_arcosh_of_sq` に委ねており、人手の新しい Step 1（平方の鎖と `cosh_sinh_basic_properties` (4)）との 1 対 1 の対応の見直しが要る。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `lambda_eq_exp_gamma_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `periodicity_of_check_fermi`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
