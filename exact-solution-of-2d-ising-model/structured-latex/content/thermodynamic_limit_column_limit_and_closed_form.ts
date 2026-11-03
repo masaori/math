@@ -2682,64 +2682,56 @@ v^\top Wv
     ],
     proof: [
       paragraph([
-        "Step 1（",
-        math(String.raw`N_{\mathrm{row}}`),
-        " の極限）。",
-        ref("limit_of_log_Z_in_N_row"),
-        " より、",
-        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
-        " を固定すると",
+        "まず任意の ", math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
+        " について、", ref("limit_of_log_Z_in_N_row"), " により",
       ]),
       displayMath(
-        String.raw`\lim_{N_{\mathrm{row}}\to\infty}
-\frac{1}{M_{\mathrm{col}}\,N_{\mathrm{row}}}\log Z(K_1,K_2) = \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})`,
+        String.raw`\begin{aligned}
+\lim_{N_{\mathrm{row}}\to\infty}
+\frac{1}{M_{\mathrm{col}}\,N_{\mathrm{row}}}\log Z(K_1,K_2)
+&=\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
+&&\bigl(\because\ \blkref{limit_of_log_Z_in_N_row}\bigr).
+\end{aligned}`,
       ),
       paragraph([
-        "である。以下 ",
-        math(String.raw`c(M_{\mathrm{col}})`),
-        " の ",
-        math(String.raw`M_{\mathrm{col}} \to \infty`),
-        " の挙動を調べる。",
-      ]),
-      paragraph([
-        "Step 2（",
-        math(String.raw`c(M_{\mathrm{col}})`),
-        " の挟み込み）。",
-        ref("c_between_Lambda_half_and_twice_Lambda_half"),
-        " より",
+        "次に ", ref("c_between_Lambda_half_and_twice_Lambda_half"),
+        " の両側評価を読む。",
       ]),
       displayMath(
-        String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`,
+        String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+\leq c(M_{\mathrm{col}})
+\leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+\qquad\bigl(\because\ \blkref{c_between_Lambda_half_and_twice_Lambda_half}\bigr)`,
       ),
       paragraph([
-        "Step 3（挟み撃ち）。Step 2 より ",
-        math(String.raw`\Lambda^{(1/2)}_{M_{\mathrm{col}}} \leq c(M_{\mathrm{col}}) \leq 2\Lambda^{(1/2)}_{M_{\mathrm{col}}}`),
-        " であり、すべて正の実数なので ",
-        math(String.raw`\log`),
-        " の単調性から",
+        "三つの量は正の実数である。実対数の単調性と正の整数 ",
+        math(String.raw`M_{\mathrm{col}}`), " で割る操作から",
       ]),
       displayMath(
         String.raw`\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
-\ \leq\ \frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
-\ \leq\ \frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}} + \frac{\log 2}{M_{\mathrm{col}}}`,
+\leq\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
+\leq\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
++\frac{\log 2}{M_{\mathrm{col}}}
+\qquad\bigl(\because\ \text{実対数の単調性と積公式、}M_{\mathrm{col}}>0\bigr)`,
       ),
       paragraph([
-        math(String.raw`(\log 2)/M_{\mathrm{col}} \to 0`),
-        " なので、",
-        ref("onsager_free_energy_expression"),
-        " を ",
-        math(String.raw`\delta = \tfrac12`),
-        " として適用すると",
+        "ここで ", math(String.raw`(\log 2)/M_{\mathrm{col}}\to0`),
+        " である。", ref("onsager_free_energy_expression"),
+        " を ", math(String.raw`\delta=\tfrac12`), " として使い、挟み撃ちすると",
       ]),
       displayMath(
-        String.raw`\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
-= \lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
-= \frac{1}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
+        String.raw`\begin{aligned}
+\lim_{M_{\mathrm{col}}\to\infty}\lim_{N_{\mathrm{row}}\to\infty}
+\frac{1}{M_{\mathrm{col}}N_{\mathrm{row}}}\log Z(K_1,K_2)
+&=\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log c(M_{\mathrm{col}})
+&&\bigl(\because\ \blkref{limit_of_log_Z_in_N_row}\bigr)\\
+&=\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(1/2)}_{M_{\mathrm{col}}}
+&&\bigl(\because\ \text{直前の両側評価と }(\log2)/M_{\mathrm{col}}\to0\bigr)\\
+&=\frac12\log\left(2\sinh 2K_2\right)
++\frac{1}{4\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
+&&\bigl(\because\ \blkref{onsager_free_energy_expression}\text{ に }\delta=\tfrac12\text{ を代入}\bigr).
+\end{aligned}`,
       ),
-      paragraph([
-        "Step 1 と合わせて主張の 2 重極限の値が定まる。",
-      ]),
       paragraph([
         "**実数解析（Riemann 積分）を使ったのは ",
         ref("riemann_sum_to_integral"),
