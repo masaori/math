@@ -4584,45 +4584,172 @@ V^{(+)}\check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        "すなわち ",
-        math(String.raw`\left(\check\Lambda_{\epsilon'} - \check\Lambda_{\max}\right)
-\check{Q}_{\epsilon'}x = 0`),
-        "。(2) より ",
+        "である。上の鎖の係数 ",
+        math(String.raw`\check\Lambda_{\epsilon'}, \check\Lambda_{\max} \in \mathbb{R}`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(\check\Lambda_{\epsilon'})_{\mathbb{C}} = (\check\Lambda_{\epsilon'}, 0)`),
+        "、",
+        math(String.raw`(\check\Lambda_{\max})_{\mathbb{C}} = (\check\Lambda_{\max}, 0)`),
+        " として掛けている（以下も同じ）。いま ",
         math(String.raw`\epsilon' \neq (1,\dots,1)`),
-        " のとき ",
-        math(String.raw`\check\Lambda_{\epsilon'} - \check\Lambda_{\max} \neq 0`),
-        " であり、これは ",
-        math(String.raw`0`),
-        " でない複素数なので割ることができて ",
-        math(String.raw`\check{Q}_{\epsilon'}x = 0`),
-        "。したがって ",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2) の ",
-        math(String.raw`x = \sum_\epsilon \check{Q}_\epsilon x`),
-        " において ",
-        math(String.raw`\epsilon \neq (1,\dots,1)`),
-        " の項がすべて消え、",
+        " とする。(2) より ",
+        math(String.raw`\check\Lambda_{\epsilon'} < \check\Lambda_{\max}`),
+        " なので ",
+        math(String.raw`\check\Lambda_{\epsilon'} \neq \check\Lambda_{\max}`),
+        " であり、",
+        math(String.raw`(\check\Lambda_{\epsilon'}, 0)`),
+        " と ",
+        math(String.raw`(\check\Lambda_{\max}, 0)`),
+        " は第 1 成分が違うので相異なる。",
+        math(String.raw`d := (\check\Lambda_{\epsilon'})_{\mathbb{C}} - (\check\Lambda_{\max})_{\mathbb{C}} \in \mathbb{C}`),
+        "（",
+        ref("def_complex_difference"),
+        "）とおく。",
+        ref("complex_numbers_form_a_field"),
+        " の加法の群構造より ",
+        math(String.raw`d = 0`),
+        " なら ",
+        math(String.raw`(\check\Lambda_{\epsilon'})_{\mathbb{C}} = d + (\check\Lambda_{\max})_{\mathbb{C}} = (\check\Lambda_{\max})_{\mathbb{C}}`),
+        " となるので ",
+        math(String.raw`d \neq 0`),
+        " であり、同じ主張の逆元の存在より ",
+        math(String.raw`d^{-1}d = 1_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`d^{-1} \in \mathbb{C}`),
+        " がある。",
+        math(String.raw`O \in \mathrm{Mat}(2^{M_{\mathrm{col}}},1,\mathbb{C})`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列（零ベクトル）である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-x &= \sum_{\epsilon}\check{Q}_\epsilon x
-   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (2)}) \\
+d\left(\check{Q}_{\epsilon'}x\right)
+&= \left(\check\Lambda_{\epsilon'} - \check\Lambda_{\max}\right)\left(\check{Q}_{\epsilon'}x\right)
+   \quad (\because d\text{ の置き方}) \\
+&= \check\Lambda_{\epsilon'}\left(\check{Q}_{\epsilon'}x\right) - \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right)
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to \check\Lambda_{\epsilon'},\ b \to \check\Lambda_{\max},\ A \to \check{Q}_{\epsilon'}x)\ \text{を右辺から左辺へ}\right) \\
+&= \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right) - \check\Lambda_{\max}\left(\check{Q}_{\epsilon'}x\right)
+   \quad (\because \text{上の鎖の両端の等式}\ \check\Lambda_{\epsilon'}(\check{Q}_{\epsilon'}x) = \check\Lambda_{\max}(\check{Q}_{\epsilon'}x)) \\
+&= O
+   \quad \left(\because\ \blkref{matrix_difference_zero_iff_equal}\ \text{の}\ \Leftarrow\ (m \to 2^{M_{\mathrm{col}}},\ p \to 1,\ A, B \to \check\Lambda_{\max}(\check{Q}_{\epsilon'}x))\right)
+\end{aligned}`,
+      ),
+      paragraph(["である。だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_{\epsilon'}x
+&= 1_{\mathbb{C}}\left(\check{Q}_{\epsilon'}x\right)
+   \quad \left(\because\ \blkref{scalar_multiple_by_one}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ A \to \check{Q}_{\epsilon'}x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(d^{-1}d\right)\left(\check{Q}_{\epsilon'}x\right)
+   \quad (\because d^{-1}d = 1_{\mathbb{C}}\ \text{を右辺から左辺へ}) \\
+&= d^{-1}\left(d\left(\check{Q}_{\epsilon'}x\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to d^{-1},\ b \to d,\ A \to \check{Q}_{\epsilon'}x)\ \text{を右辺から左辺へ}\right) \\
+&= d^{-1}O
+   \quad (\because \text{上の鎖}\ d(\check{Q}_{\epsilon'}x) = O) \\
+&= O
+   \quad \left(\because\ \blkref{scalar_multiple_of_zero_matrix}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ a \to d^{-1})\right)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon'`),
+        " は ",
+        math(String.raw`\epsilon' \neq (1,\dots,1)`),
+        " を満たす任意の元だったので、",
+        math(String.raw`\epsilon \neq (1,\dots,1)`),
+        " を満たす全ての ",
+        math(String.raw`\epsilon`),
+        " について ",
+        math(String.raw`\check{Q}_\epsilon x = O`),
+        " である。数ベクトル ",
+        math(String.raw`x`),
+        " は ",
+        ref("mat_mult"),
+        " のとおり ",
+        math(String.raw`2^{M_{\mathrm{col}}}`),
+        " 行 1 列の行列として扱い、",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " で添字付けられた和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}}`),
+        "）による。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+x &= Ix
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ A \to x)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\sum_{\epsilon}\check{Q}_\epsilon\right)x
+   \quad (\because \blkref{check_joint_eigenspace_decomposition}\text{ (2) を右辺から左辺へ}) \\
+&= \sum_{\epsilon}\check{Q}_\epsilon x
+   \quad \left(\because\ \blkref{sum_over_binary_words_distributes_in_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ r \to M_{\mathrm{col}},\ X_\epsilon \to \check{Q}_\epsilon,\ C \to x)\right) \\
 &= \check{Q}_{(1,\dots,1)}x
-   \quad (\because \epsilon \neq (1,\dots,1)\text{ の項は }\check{Q}_\epsilon x = 0)
+   \quad \left(\because\ \blkref{sum_over_binary_words_with_one_nonzero_term}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 1,\ r \to M_{\mathrm{col}},\ \epsilon' \to (1,\dots,1),\ B_\epsilon \to \check{Q}_\epsilon x)\text{。前提は上で示した }\check{Q}_\epsilon x = O\right)
 \end{aligned}`,
       ),
       paragraph([
         "とくに ",
         math(String.raw`x \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
-        " である。逆に ",
-        math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
-        " の各元が固有値 ",
+        " である（",
+        math(String.raw`\mathrm{im}\,Q := \{Qz \mid z \in \mathbb{C}^n\}`),
+        " は ",
+        ref("trace_of_idempotent"),
+        " の定義。",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ Q \to \check{Q}_{(1,\dots,1)}`),
+        "）。逆に ",
+        math(String.raw`y \in \mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
+        " とすると、",
+        math(String.raw`y = \check{Q}_{(1,\dots,1)}z`),
+        " を満たす ",
+        math(String.raw`z \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
+        " があり",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_{(1,\dots,1)}y
+&= \check{Q}_{(1,\dots,1)}\left(\check{Q}_{(1,\dots,1)}z\right)
+   \quad (\because y = \check{Q}_{(1,\dots,1)}z) \\
+&= \left(\check{Q}_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}\right)z
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A, B \to \check{Q}_{(1,\dots,1)},\ C \to z)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(I\check{Q}_{(1,\dots,1)}\right)\check{Q}_{(1,\dots,1)}\right)z
+   \quad \left(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(\check{Q}_{(1,\dots,1)}^0\check{Q}_{(1,\dots,1)}\right)\check{Q}_{(1,\dots,1)}\right)z
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\ (A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check{Q}_{(1,\dots,1)}^1\check{Q}_{(1,\dots,1)}\right)z
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 0,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_{(1,\dots,1)}^2 z
+   \quad \left(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\ (m \to 1,\ A \to \check{Q}_{(1,\dots,1)})\ \text{を右辺から左辺へ}\right) \\
+&= \check{Q}_{(1,\dots,1)}z
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (1)\ \text{の}\ \check{Q}_\epsilon^2 = \check{Q}_\epsilon\ (\epsilon \to (1,\dots,1))\right) \\
+&= y
+   \quad (\because y = \check{Q}_{(1,\dots,1)}z)
+\end{aligned}`,
+      ),
+      paragraph(["である。だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{(+)}y
+&= V^{(+)}\left(\check{Q}_{(1,\dots,1)}y\right)
+   \quad (\because \text{上の等式}\ \check{Q}_{(1,\dots,1)}y = y\ \text{を右辺から左辺へ}) \\
+&= \left(V^{(+)}\check{Q}_{(1,\dots,1)}\right)y
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to V^{(+)},\ B \to \check{Q}_{(1,\dots,1)},\ C \to y)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\check\Lambda_{(1,\dots,1)}\check{Q}_{(1,\dots,1)}\right)y
+   \quad \left(\because\ \blkref{eigenvalues_of_V_plus}\ (1)\ \text{の}\ V^{(+)}\check{Q}_\epsilon = \check\Lambda_\epsilon\check{Q}_\epsilon\ (\epsilon \to (1,\dots,1))\right) \\
+&= \left(\check\Lambda_{\max}\check{Q}_{(1,\dots,1)}\right)y
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (2)}) \\
+&= \check\Lambda_{\max}\left(\check{Q}_{(1,\dots,1)}y\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to \check\Lambda_{\max},\ A \to \check{Q}_{(1,\dots,1)},\ B \to y)\right) \\
+&= \check\Lambda_{\max}y
+   \quad (\because \text{上の等式}\ \check{Q}_{(1,\dots,1)}y = y)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。よって固有値 ",
         math(String.raw`\check\Lambda_{\max}`),
-        " の固有ベクトルであることは ",
-        ref("eigenvalues_of_V_plus"),
-        " (1) と ",
-        ref("eigenvalues_of_check_Vprime"),
-        " の Step 4 と同じ計算で従う。よって固有空間は ",
+        " の固有空間は ",
         math(String.raw`\mathrm{im}\,\check{Q}_{(1,\dots,1)}`),
         " に一致し、",
         ref("check_joint_eigenspace_decomposition"),
@@ -4641,6 +4768,7 @@ x &= \sum_{\epsilon}\check{Q}_\epsilon x
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02: (3) の固有方程式に左から Q̌_{ε'} を掛ける鎖の名前だけの根拠「行列の積の結合法則」を mat_mult_associative（q → 1）の参照にし、(1) の行に隠れていた (Λ̌_{ε'}Q̌_{ε'})x = Λ̌_{ε'}(Q̌_{ε'}x) と固有方程式の行に隠れていた Q̌_{ε'}(Λ̌_max x) = Λ̌_max(Q̌_{ε'}x) を scalar_multiple_factors_out_of_left_factor・scalar_multiple_factors_out_of_right_factor（p → 1）の行に分けた（5 行）。主張は変えていない。Lean の Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen は同じ 5 行の calc で、Ising2D.eq_Qproj_univ_mulVec_of_eigen はそれを使って人手の順に示す（必要十分版の特殊化は eq_Qproj_univ_mulVec_of_eigen_of_necSuf）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_26。",
         "2026-11-03: (2) の ǧ(1,…,1) − ǧ(ε) の鎖の名前だけの根拠「ǧ の定義と分配法則」「各項は 0 以上。μ = μ_0 の項だけを残す」を、ǧ の定義の 2 か所同時適用・finite_sum_of_real_differences・ℝ の分配法則・ℝ の計算・a_μ := γ(θ̃_μ)(1 − ε_μ) の置き方・finite_sum_of_nonnegative_reals_is_at_least_each_term の行に分け（a_μ ≥ 0 は鎖の前に置いた）、Λ̌_ε の鎖の「t ↦ exp(t) は狭義単調増加」を real_exp_strictly_increasing の参照として鎖の前へ出し（(2s_2)^{M_col/2} > 0 の s_2 > 0 は indexed_hyperbolic_abbreviations_positive）、両端の行を Λ̌_ε の定義・s_2 の略記・ǧ の定義の 1 行ずつに分け、最後に eigenvalues_of_V_plus (2) の行を置いた。主張は変えていない。Lean の Ising2D.gval_lt_gval_univ と Ising2D.checkBigLambda_lt_checkBigLambda_univ は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step2_strict_inequality_chains.sage。",
+        "2026-11-03: (3) の後半の名前だけの根拠を鎖にした。「0 でない複素数なので割ることができて」を、d := (Λ̌_{ε'})_ℂ − (Λ̌_max)_ℂ の置き方（d ≠ 0 と d^{-1} は (2)・inclusion_rr_to_cc・complex_numbers_form_a_field から鎖の前に置いた）、difference_of_scalar_multiples_of_one_matrix・matrix_difference_zero_iff_equal の 4 行と、scalar_multiple_by_one・d^{-1}d = 1_ℂ・scalar_multiple_is_associative・scalar_multiple_of_zero_matrix の 5 行にした。x = Σ_ε Q̌_ε x から ε ≠ (1,…,1) の項を消す行を、identity_matrix_is_left_unit_of_mat_mult・check_joint_eigenspace_decomposition (2)・sum_over_binary_words_distributes_in_left_factor・sum_over_binary_words_with_one_nonzero_term の 4 行にした。逆向きの「eigenvalues_of_V_plus (1) と eigenvalues_of_check_Vprime の Step 4 と同じ計算で従う」を、Q̌_{(1,…,1)}y = y の 8 行（eigenvalues_of_check_Vprime の Step 4 と同じ行）と V^{(+)}y = Λ̌_max y の 6 行にした。主張は変えていない。Lean の Ising2D.Qproj_mulVec_eq_zero_of_eigen（差と割り算の鎖）・Ising2D.colVec_eq_Qproj_mul_of_zero（項を消す鎖。Ising2D.eq_Qproj_univ_mulVec_of_eigen が数ベクトルへ運ぶ）・Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ（逆向きの鎖）は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step3_eigenspace_chains.sage。",
       ],
     },
   },

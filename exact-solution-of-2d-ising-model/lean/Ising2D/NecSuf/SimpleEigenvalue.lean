@@ -30,6 +30,9 @@
 `Q_ε Q_{ε'} = 0` も、有限次元性も、複素数体であることすら使っていない
 （スカラーは可除環ならよい。ここでは具体版に合わせて ℂ で述べる）。
 
+逆向き（`im Q̌_{(1,…,1)}` の元は固有ベクトル）は、作用の結合律・左の因子のスカラー倍の外出し・
+`Q_{ε_0}y = y`・**右からの**固有関係 `V Q_{ε_0} = Λ_{ε_0} Q_{ε_0}` だけで出る（`act_eq_smul_of_proj_fixed`）。
+
 作用を `Module` インスタンスではなく明示の 5 法則
 （`hmul`, `hone`, `hsmul`, `hlin`, `hsum`）で受け取っているのは、
 具体版が **行列の `mulVec` による作用**（`ℂ^{2^M}` への作用）を使うためである。
@@ -166,11 +169,25 @@ theorem eq_proj_of_eigen
                                                         -- 固有方程式
         _ = lam i₀ • act (Q i) x := hlin _ _ _
                                                         -- 右の因子のスカラー倍の外出し
-    have h3 : (lam i - lam i₀) • act (Q i) x = 0 := by
-      rw [sub_smul, hchain, sub_self]
-    rcases smul_eq_zero.1 h3 with h | h
-    · exact absurd (sub_eq_zero.1 h) (hne i hi)
-    · exact h
+    -- 具体版 `Ising2D.Qproj_mulVec_eq_zero_of_eigen` の 2 本の鎖と同じ段
+    have hd : lam i - lam i₀ ≠ 0 := fun h => hne i hi (sub_eq_zero.1 h)
+                                                        -- 加法の群構造
+    have h3 : (lam i - lam i₀) • act (Q i) x = 0 :=
+      calc (lam i - lam i₀) • act (Q i) x
+          = lam i • act (Q i) x - lam i₀ • act (Q i) x := sub_smul _ _ _
+                                                        -- スカラーの差の分配
+        _ = lam i₀ • act (Q i) x - lam i₀ • act (Q i) x := by rw [hchain]
+                                                        -- 上の鎖の両端の等式
+        _ = 0 := sub_self _                             -- 差が零
+    calc act (Q i) x
+        = (1 : ℂ) • act (Q i) x := (one_smul ℂ _).symm  -- `1` 倍
+      _ = ((lam i - lam i₀)⁻¹ * (lam i - lam i₀)) • act (Q i) x := by rw [inv_mul_cancel₀ hd]
+                                                        -- 逆元（スカラーが可除環であることが効くのはここだけ）
+      _ = (lam i - lam i₀)⁻¹ • ((lam i - lam i₀) • act (Q i) x) := mul_smul _ _ _
+                                                        -- スカラー倍の結合
+      _ = (lam i - lam i₀)⁻¹ • (0 : Mod) := by rw [h3]
+                                                        -- 上の鎖
+      _ = 0 := smul_zero _                              -- 零のスカラー倍
   calc x = act 1 x := (hone x).symm
     _ = act (∑ i, Q i) x := by rw [hres]
     _ = ∑ i, act (Q i) x := hsum _ _
@@ -178,6 +195,36 @@ theorem eq_proj_of_eigen
         rw [Finset.sum_eq_single i₀ (fun i _ hi => hzero i hi) (fun h => absurd (mem_univ i₀) h)]
 
 end SimpleEigen
+
+/-! ## 像の元が固有ベクトルであること（逆向き） -/
+
+section ProjFixed
+
+variable {R A Mod : Type*} [Mul A] [SMul R A] [SMul R Mod]
+
+/-- **人手証明 `max_eigenvalue_of_V_plus_simple` (3) の逆向きの必要十分版**:
+`Q_{ε_0}y = y`（像の元）と**右からの**固有関係 `V Q_{ε_0} = Λ_{ε_0} Q_{ε_0}` だけから `Vy = Λ_{ε_0} y`。
+
+手順は具体版 `Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ` の 6 行と同じ（`Λ̌_max = Λ̌_{(1,…,1)}` の行は
+具体版でも同じ項なので、ここでは現れない）。効いているのは作用の結合律（`hmul`）と、左の因子のスカラー倍の外出し（`hsmul`）だけで、
+台の乗法の結合則・単位元・加法（環であること）、加群の加法、単位の分解・`Λ` の相異・`Q` の冪等性
+（`Q_{ε_0}y = y` を作るのに使うが、ここでは結論を仮定で受ける）・右の因子のスカラー倍・スカラーが可除環であることは効いていない。
+そこで台 `A` は乗法だけ、`Mod` は集合、スカラー `R` は `A` と `Mod` に作用するだけの型で述べる。 -/
+theorem act_eq_smul_of_proj_fixed
+    (act : A → Mod → Mod)
+    (hmul : ∀ (x y : A) (v : Mod), act (x * y) v = act x (act y v))
+    (hsmul : ∀ (r : R) (x : A) (v : Mod), act (r • x) v = r • act x v)
+    {Q V : A} {lam : R} {y : Mod}
+    (hQy : act Q y = y) (hVQ : V * Q = lam • Q) :
+    act V y = lam • y :=
+  calc act V y
+      = act V (act Q y) := by rw [hQy]                  -- `Q y = y` を右辺から左辺へ
+    _ = act (V * Q) y := (hmul _ _ _).symm              -- 積の作用は作用の合成（結合律）を右辺から左辺へ
+    _ = act (lam • Q) y := by rw [hVQ]                  -- `V Q = Λ Q`
+    _ = lam • act Q y := hsmul _ _ _                    -- 左の因子のスカラー倍の外出し
+    _ = lam • y := by rw [hQy]                          -- `Q y = y`
+
+end ProjFixed
 
 /-! ## 左右を入れ替えた `exp(X) Q = e^g Q`
 

@@ -196,3 +196,9 @@ RESULT: PASS
 # 実行コマンド: sage check_eigenvalues_of_check_Vprime_step3_limit_chains.sage（1 行目の E_K → V̌' の検査を足して再実行）
 checked 1044 relations (M = 2, 3 with all eps, K = 0..20); a model eps with gcheck(eps) < 0 exists
 RESULT: PASS
+
+##### 2026-11-03 に check_max_eigenvalue_simple_step3_eigenspace_chains を足した（max_eigenvalue_of_V_plus_simple (3) の後半の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_max_eigenvalue_simple_step3_eigenspace_chains.sage
+PASS max_eigenvalue_of_V_plus_simple (3) の後半の鎖（差・割り算・項を消す・逆向きの 2 本）: 279 段、否定コントロール 9 件
+# レビューを受けて割り算の鎖の否定コントロールを足して再実行
+PASS max_eigenvalue_of_V_plus_simple (3) の後半の鎖（差・割り算・項を消す・逆向きの 2 本）: 279 段、否定コントロール 12 件
