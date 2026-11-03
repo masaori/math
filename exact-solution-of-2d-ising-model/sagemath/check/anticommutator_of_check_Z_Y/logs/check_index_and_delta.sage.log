@@ -1,0 +1,2 @@
+checked the diagonal of delta^(M) on {1..M}^2 and the two delta rows for M = 2..12 (649 pairs (mu, nu))
+RESULT: PASS

@@ -1038,6 +1038,22 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
     labels: ["anticommutator_of_check_Z_Y"],
     statement: [
       paragraph([
+        math(String.raw`M_{\mathrm{col}}\in\mathbb Z_{\geq2}`),
+        " とし、",
+        ref("antiperiodic_exp_sum"),
+        " の ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb N}\in\mathbb N_{\geq2}`),
+        " と像の記号 ",
+        math(String.raw`a_{\mathbb R}, a_{\mathbb C}`),
+        "、",
+        ref("def_half_integer_checkZ"),
+        " の ",
+        math(String.raw`\check Z_\mu`),
+        "、",
+        ref("def_half_integer_checkY"),
+        " の ",
+        math(String.raw`\check Y_\mu`),
+        " を用いる。",
         math(String.raw`\mu, \nu \in \check{\mathcal{M}}`),
         "（",
         ref("def_check_index_set"),
@@ -1051,17 +1067,43 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
 \left[\check{Y}_\mu, \check{Y}_\nu\right]_+ = 2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`,
       ),
       paragraph([
-        "が成り立つ。ここで ",
-        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
-        "、",
-        math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}`),
-        " は通常のクロネッカーのデルタ（",
+        "が成り立つ。反交換子は ",
+        ref("def_matrix_anticommutator"),
+        " のもの、",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb{C})}`),
+        " は単位行列である。",
+        ref("def_check_index_set"),
+        " (2) により ",
+        math(String.raw`\nu,\ M_{\mathrm{col}}+1-\mu \in \check{\mathcal M} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " なので、",
+        math(String.raw`\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\in\mathbb C`),
+        " は ",
+        ref("def_kronecker_delta"),
+        " のクロネッカーのデルタ（",
         math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
         " のとき ",
-        math(String.raw`1`),
+        math(String.raw`1_{\mathbb C}`),
         "、そうでないとき ",
-        math(String.raw`0`),
+        math(String.raw`0_{\mathbb C}`),
         "）である。",
+        math(String.raw`2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
+        " は、",
+        math(String.raw`2_{\mathbb C} := (2_{\mathbb R})_{\mathbb C}`),
+        " と ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb C}`),
+        " による複素数 ",
+        math(String.raw`(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C})\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}`),
+        " による ",
+        math(String.raw`I`),
+        " のスカラー倍（",
+        ref("def_matrix_scalar_multiple"),
+        "）を表し、",
+        math(String.raw`0`),
+        " は零行列 ",
+        math(String.raw`O \in \mathrm{Mat}(2^{(M_{\mathrm{col}})_{\mathbb N}},\mathbb{C})`),
+        "（",
+        ref("def_zero_matrix"),
+        "）を表す。",
       ]),
       paragraph([
         "**対になる添字に合同式が現れない**のは、添字の範囲を ",
@@ -1079,117 +1121,311 @@ j_{\mathbb R}\tilde\theta_{M_{\mathrm{col}}+1-\mu}
     ],
     proof: [
       paragraph([
-        "反交換子は両引数について ",
-        math(String.raw`\mathbb{C}`),
-        " 双線型（",
-        math(String.raw`[\alpha X,\beta W]_+ = \alpha\beta[X,W]_+`),
-        "）なので、",
+        "準備。",
+        math(String.raw`N := (M_{\mathrm{col}})_{\mathbb N}`),
+        " と置き、",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        "、",
+        math(String.raw`\lambda \in \mathbb Z`),
+        " について ",
+        math(String.raw`e_{j,\lambda} := \exp(-i(j_{\mathbb R}\tilde\theta_\lambda)_{\mathbb C}) \in \mathbb C`),
+        " と置く（",
         ref("def_half_integer_checkZ"),
-        "、",
-        ref("anticommutator_of_Z_and_Y"),
-        "、",
-        ref("theorem_exp_product"),
-        "、",
-        ref("exp_sum"),
-        "、",
+        " の仮定により ",
+        math(String.raw`\mathbb C`),
+        " の元）。",
+        math(String.raw`-i := (-1_{\mathbb C})\,i`),
+        "（",
+        ref("multiply_by_minus_one"),
+        "）であり、",
+        math(String.raw`-i(x)_{\mathbb C}`),
+        " は積 ",
+        math(String.raw`(-i)(x)_{\mathbb C}`),
+        " を表す。周期デルタ ",
+        math(String.raw`\delta^{(M_{\mathrm{col}})}`),
+        "（",
         ref("def_delta_M"),
+        "）の法は ",
+        math(String.raw`N`),
+        " である（",
+        ref("antiperiodic_exp_sum"),
+        "）。",
+      ]),
+      paragraph([
+        "準備 1（添字の対角）。",
+        math(String.raw`j, k \in \{1,\dots,N\}`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z}, k_{\mathbb Z} \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " である。",
+        math(String.raw`j = k`),
+        " なら ",
+        math(String.raw`j_{\mathbb Z} - k_{\mathbb Z} = 0 = 0\cdot M_{\mathrm{col}}`),
+        " なので ",
+        math(String.raw`\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})} = 1_{\mathbb C}`),
+        "。",
+        math(String.raw`j \neq k`),
+        " なら、標準包含 ",
+        math(String.raw`\iota_{\mathbb N\to\mathbb Z}`),
+        " は単射なので ",
+        math(String.raw`j_{\mathbb Z} \neq k_{\mathbb Z}`),
+        "、さらに ",
+        math(String.raw`0 < |j_{\mathbb Z} - k_{\mathbb Z}| \leq M_{\mathrm{col}} - 1 < M_{\mathrm{col}}`),
+        " なので ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " は ",
+        math(String.raw`j_{\mathbb Z} - k_{\mathbb Z}`),
+        " を割り切らず、",
+        math(String.raw`\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})} = 0_{\mathbb C}`),
+        "（",
+        ref("def_delta_M"),
+        "）。したがって ",
+        math(String.raw`\lambda, \lambda' \in \mathbb Z`),
         "、",
-        ref("def_check_index_set"),
-        " (5) を順に使うと、第 1 式は主張の左辺から一続きに",
+        math(String.raw`j \neq k`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(e_{j,\lambda}e_{k,\lambda'})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}
+&= (e_{j,\lambda}e_{k,\lambda'})\,0_{\mathbb C}
+&&(\because\ \text{準備 1}) \\
+&= 0_{\mathbb C}
+&&(\because\ \blkref{complex_times_zero_is_zero})
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 2（指数）。",
+        math(String.raw`\kappa := -(\mu+\nu-1) \in \mathbb Z`),
+        " と置く。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}`),
+        " である。",
+        math(String.raw`j \in \{1,\dots,N\}`),
+        " について、実数の側で",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu
+&= j_{\mathbb R}\left(\tilde\theta_\mu + \tilde\theta_\nu\right)
+&&(\because\ \mathbb R\text{ の分配法則}) \\
+&= j_{\mathbb R}\left(\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}} + \frac{2\pi\left(\nu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
+&&\bigl(\because\ \tilde\theta\text{ の定義を 2 箇所へ同時適用。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}-\tfrac12\right) + 2\pi\left(\nu_{\mathbb R}-\tfrac12\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ (M_{\mathrm{col}})_{\mathbb R}\neq0_{\mathbb R}\text{ を分母とする分数の和}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}-\tfrac12\right) + \left(\nu_{\mathbb R}-\tfrac12\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の分配法則}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}+\left(-\tfrac12\right)\right)+\left(\nu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の差は加法の逆元の和を 2 箇所へ同時適用}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}+\left(\left(-\tfrac12\right)+\left(\nu_{\mathbb R}+\left(-\tfrac12\right)\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の加法の結合律}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}+\left(\left(\nu_{\mathbb R}+\left(-\tfrac12\right)\right)+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の加法の交換律}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}+\left(\nu_{\mathbb R}+\left(\left(-\tfrac12\right)+\left(-\tfrac12\right)\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の加法の結合律}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}+\nu_{\mathbb R}\right)+\left(\left(-\tfrac12\right)+\left(-\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の加法の結合律}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}+\nu_{\mathbb R}\right)+\left(-\left(\tfrac12+\tfrac12\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }(-a)+(-b)=-(a+b)) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\left(\mu_{\mathbb R}+\nu_{\mathbb R}\right)+\left(-1_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \tfrac12+\tfrac12=1_{\mathbb R}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(\mu_{\mathbb R}+\nu_{\mathbb R}-1_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の差は加法の逆元の和}) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\left(-\left(\mu_{\mathbb R}+\nu_{\mathbb R}-1_{\mathbb R}\right)\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }-(-x)=x) \\
+&= j_{\mathbb R}\cdot\frac{2\pi\left(-\kappa_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&\bigl(\because\ \iota_{\mathbb Z\to\mathbb R}\text{ は和・零・単位元を保つので差と加法の逆元を保ち、}\kappa_{\mathbb R}=-\left(\mu_{\mathbb R}+\nu_{\mathbb R}-1_{\mathbb R}\right)\text{。}\blkref{antiperiodic_exp_sum}\bigr) \\
+&= \frac{j_{\mathbb R}\left(2\pi\left(-\kappa_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }a\cdot\tfrac{b}{c}=\tfrac{ab}{c}) \\
+&= \frac{j_{\mathbb R}\left(-\left(2\pi\kappa_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }a(-b)=-(ab)) \\
+&= \frac{-\left(j_{\mathbb R}\left(2\pi\kappa_{\mathbb R}\right)\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }a(-b)=-(ab)) \\
+&= \frac{-\left(\left(j_{\mathbb R}\,2\pi\right)\kappa_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の積の結合律}) \\
+&= \frac{-\left(\left(2\pi j_{\mathbb R}\right)\kappa_{\mathbb R}\right)}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ の積の交換律}) \\
+&= -\frac{2\pi j_{\mathbb R}\kappa_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}}
+&&(\because\ \mathbb R\text{ で }\tfrac{-a}{c}=-\tfrac{a}{c}\text{。}2\pi j_{\mathbb R}\kappa_{\mathbb R}:=\left(2\pi j_{\mathbb R}\right)\kappa_{\mathbb R})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        math(String.raw`y_j := \frac{2\pi j_{\mathbb R}\kappa_{\mathbb R}}{(M_{\mathrm{col}})_{\mathbb R}} \in \mathbb R`),
+        " と置くと、複素数の側で",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(-i)(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (-i)(j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}
+&= (-i)\left((j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の分配法則。}\blkref{complex_numbers_form_a_field}) \\
+&= (-i)\left(j_{\mathbb R}\tilde\theta_\mu + j_{\mathbb R}\tilde\theta_\nu\right)_{\mathbb C}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_finite_sum}\text{ を }m=2\text{ で。二項の有限和は }\blkref{def_finite_sum_of_complex_numbers}\text{ と }\mathbb R\text{ の有限和の定義で二項の和の形に開く}\bigr) \\
+&= (-i)\left(-y_j\right)_{\mathbb C}
+&&(\because\ \text{直前の実数の鎖}) \\
+&= (-i)\left((-1_{\mathbb R})y_j\right)_{\mathbb C}
+&&(\because\ \mathbb R\text{ で }-x=(-1_{\mathbb R})x) \\
+&= (-i)\left((-1_{\mathbb R})_{\mathbb C}\,(y_j)_{\mathbb C}\right)
+&&(\because\ \blkref{real_inclusion_preserves_product}) \\
+&= (-i)\left((-1_{\mathbb C})\,(y_j)_{\mathbb C}\right)
+&&\bigl(\because\ (-1_{\mathbb R})_{\mathbb C}=(-1_{\mathbb R},0_{\mathbb R})\text{ は }1_{\mathbb C}\text{ の加法の逆元 }-1_{\mathbb C}\ (\blkref{inclusion_rr_to_cc},\ \blkref{definition_of_cc}\text{ の和},\ \blkref{complex_numbers_form_a_field})\bigr) \\
+&= \left((-1_{\mathbb C})\,i\right)\left((-1_{\mathbb C})\,(y_j)_{\mathbb C}\right)
+&&(\because\ \blkref{multiply_by_minus_one}) \\
+&= (-1_{\mathbb C})\left(i\left((-1_{\mathbb C})(y_j)_{\mathbb C}\right)\right)
+&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1_{\mathbb C})\left(\left(i(-1_{\mathbb C})\right)(y_j)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1_{\mathbb C})\left(\left((-1_{\mathbb C})i\right)(y_j)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の積の交換律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1_{\mathbb C})\left((-1_{\mathbb C})\left(i\,(y_j)_{\mathbb C}\right)\right)
+&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \left((-1_{\mathbb C})(-1_{\mathbb C})\right)\left(i\,(y_j)_{\mathbb C}\right)
+&&(\because\ \mathbb C\text{ の積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= 1_{\mathbb C}\left(i\,(y_j)_{\mathbb C}\right)
+&&(\because\ (-1_{\mathbb C})(-1_{\mathbb C})=1_{\mathbb C}\ (\blkref{complex_numbers_form_a_field})) \\
+&= i\,(y_j)_{\mathbb C}
+&&(\because\ 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field}))
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        ref("exp_sum"),
+        " は包含の像を書いていないが、その ",
+        math(String.raw`M_{\mathrm{col}}\in\mathbb N_{\geq1}`),
+        " を ",
+        math(String.raw`N`),
+        "、",
+        math(String.raw`k\in\mathbb Z`),
+        " を ",
+        math(String.raw`\kappa`),
+        " に取ったとき、左辺の指数 ",
+        math(String.raw`\frac{2\pi i j \kappa}{N}`),
+        " は ",
+        math(String.raw`i\,(y_j)_{\mathbb C}`),
+        "、右辺の係数 ",
+        math(String.raw`N`),
+        " は ",
+        math(String.raw`N_{\mathbb C} = (M_{\mathrm{col}})_{\mathbb C}`),
+        "（",
+        math(String.raw`(N)_{\mathbb Z} = M_{\mathrm{col}}`),
+        "。",
+        ref("antiperiodic_exp_sum"),
+        "）であり、右辺の積は ",
+        math(String.raw`\mathbb C`),
+        " の積である。",
+      ]),
+      paragraph([
+        "第 1 式。主張の左辺から",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu, \check{Z}_\nu\right]_+
-&= \left[\sum_{j=1}^{M_{\mathrm{col}}} \exp(-ij\tilde\theta_\mu)Z_j,\ \sum_{k=1}^{M_{\mathrm{col}}} \exp(-ik\tilde\theta_\nu)Z_k\right]_+
-   &&\bigl(\because \blkref{def_half_integer_checkZ}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} \exp(-ij\tilde\theta_\mu)\,\exp(-ik\tilde\theta_\nu)
-   \left[Z_j, Z_k\right]_+
-   &&\bigl(\because \text{反交換子の } \mathbb{C} \text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}} \exp(-ij\tilde\theta_\mu)\,\exp(-ik\tilde\theta_\nu)\cdot 2I\,\delta^{(M_{\mathrm{col}})}_{(j,k)}
-   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}} \exp(-ij\tilde\theta_\mu)\,\exp(-ij\tilde\theta_\nu)
-   &&\bigl(\because 1 \leq j,k \leq M_{\mathrm{col}} \text{ では } \delta^{(M_{\mathrm{col}})}_{(j,k)} = 1 \iff j = k\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}} \exp(-ij\left(\tilde\theta_\mu + \tilde\theta_\nu\right))
-   &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}} \exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M_{\mathrm{col}}}\right)
-   &&\bigl(\because \tilde\theta_\mu + \tilde\theta_\nu = \tfrac{2\pi(\mu+\nu-1)}{M_{\mathrm{col}}}\bigr) \\
-&= 2M_{\mathrm{col}} I\,\delta^{(M_{\mathrm{col}})}_{(-(\mu+\nu-1),\,0)}
-   &&\bigl(\because \text{exp\_sum}\bigr) \\
-&= 2M_{\mathrm{col}} I\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}
-   &&\bigl(\because \text{def\_delta\_M}\bigr) \\
-&= 2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I
-   &&\bigl(\because \text{def\_check\_index\_set (5)}\ (\mu,\nu \in \check{\mathcal{M}})\bigr)
+&= \left[\sum_{j=1}^{N} e_{j,\mu}Z_{j_{\mathbb Z}},\ \sum_{k=1}^{N} e_{k,\nu}Z_{k_{\mathbb Z}}\right]_+
+   &&\bigl(\because \blkref{def_half_integer_checkZ}\text{ を 2 箇所へ同時適用}\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N} (e_{j,\mu}e_{k,\nu})\left[Z_{j_{\mathbb Z}}, Z_{k_{\mathbb Z}}\right]_+
+   &&\bigl(\because \blkref{anticommutator_of_finite_sums_of_scalar_multiples}\ (n = 2^{N},\ r = s = N)\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N} (e_{j,\mu}e_{k,\nu})\left(\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\left(2_{\mathbb C}I\right)\right)
+   &&\bigl(\because \blkref{anticommutator_of_Z_and_Y}\text{ を }N^2\text{ 個の項へ同時適用。右辺の }2I\delta\text{ を、}2_{\mathbb C}I\text{ の }\delta\text{ 倍と書いた}\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N} \left((e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{scalar_multiple_is_associative}\text{ を }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= \sum_{j=1}^{N}\left(\left(\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)\right)
+   &&\bigl(\because \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を各 }j\text{ へ同時適用}\bigr) \\
+&= \left(\sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\bigr) \\
+&= \left(\sum_{j=1}^{N}(e_{j,\mu}e_{j,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},j_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{finite_sum_with_single_nonzero_term}\text{ を各 }j\text{ へ }n = j\text{ で同時適用。}k\neq j\text{ の項は準備 1 の鎖で }0_{\mathbb C}\bigr) \\
+&= \left(\sum_{j=1}^{N}(e_{j,\mu}e_{j,\nu})\,1_{\mathbb C}\right)\left(2_{\mathbb C}I\right)
+   &&(\because \text{準備 1 を各 }j\text{ へ同時適用}) \\
+&= \left(\sum_{j=1}^{N}e_{j,\mu}e_{j,\nu}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&= \left(\sum_{j=1}^{N}\exp\!\left((-i)(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (-i)(j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}\right)\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で各 }j\text{ へ同時適用}\bigr) \\
+&= \left(\sum_{j=1}^{N}\exp\!\left(i\,(y_j)_{\mathbb C}\right)\right)\left(2_{\mathbb C}I\right)
+   &&(\because \text{準備 2 の複素数の鎖を各 }j\text{ へ同時適用}) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\kappa,\,0)}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{exp_sum}\text{ を }N\text{ と }\kappa\text{ で。準備 2 の読み}\bigr) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{def_check_index_set}\ (5)\ (\mu,\nu \in \check{\mathcal{M}})\bigr) \\
+&= \left(\left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)2_{\mathbb C}\right)I
+   &&\bigl(\because \blkref{scalar_multiple_is_associative}\bigr) \\
+&= \left(\left(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\right)\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)I
+   &&\bigl(\because \mathbb C\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "第 2 式は、",
-        ref("def_half_integer_checkZ"),
-        " と ",
-        ref("def_half_integer_checkY"),
-        " と ",
-        ref("anticommutator_of_Z_and_Y"),
-        " の ",
-        math(String.raw`[Z_j,Y_k]_+=0`),
-        " を使うと、一続きに",
+        "となり、最後の行は主張の右辺 ",
+        math(String.raw`2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
+        " である。",
       ]),
+      paragraph(["第 2 式。主張の左辺から"]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Z}_\mu,\check{Y}_\nu\right]_+
-&= \left[\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j,\ \sum_{k=1}^{M_{\mathrm{col}}}\exp(-ik\tilde\theta_\nu)Y_k\right]_+
+&= \left[\sum_{j=1}^{N} e_{j,\mu}Z_{j_{\mathbb Z}},\ \sum_{k=1}^{N} e_{k,\nu}Y_{k_{\mathbb Z}}\right]_+
    &&\bigl(\because \blkref{def_half_integer_checkZ},\ \blkref{def_half_integer_checkY}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)[Z_j,Y_k]_+
-   &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)\cdot 0
-   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
-&= 0
-   &&\bigl(\because \mathbb{C}\text{ の四則}\bigr)
+&= \sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\left[Z_{j_{\mathbb Z}},Y_{k_{\mathbb Z}}\right]_+
+   &&\bigl(\because \blkref{anticommutator_of_finite_sums_of_scalar_multiples}\ (n = 2^{N},\ r = s = N)\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\,O
+   &&\bigl(\because \blkref{anticommutator_of_Z_and_Y}\text{ を }N^2\text{ 個の項へ同時適用。右辺の }0\text{ は零行列 }O\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N}O
+   &&\bigl(\because \blkref{scalar_multiple_of_zero_matrix}\text{ を }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= \sum_{j=1}^{N}O
+   &&\bigl(\because \blkref{finite_sum_of_zero_matrices}\text{ を各 }j\text{ へ同時適用}\bigr) \\
+&= O
+   &&\bigl(\because \blkref{finite_sum_of_zero_matrices}\bigr)
 \end{aligned}`,
       ),
-      paragraph([
-        "第 3 式も、",
-        ref("def_half_integer_checkY"),
-        "、",
-        ref("anticommutator_of_Z_and_Y"),
-        " の ",
-        math(String.raw`[Y_j,Y_k]_+ = 2I\,\delta^{(M_{\mathrm{col}})}_{(j,k)}`),
-        " と、第 1 式で使った ",
-        ref("theorem_exp_product"),
-        "、",
-        ref("exp_sum"),
-        "、",
-        ref("def_delta_M"),
-        "、",
-        ref("def_check_index_set"),
-        " (5) を順に使うと、一続きに",
-      ]),
+      paragraph(["第 3 式。主張の左辺から"]),
       displayMath(
         String.raw`\begin{aligned}
 \left[\check{Y}_\mu,\check{Y}_\nu\right]_+
-&= \left[\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Y_j,\ \sum_{k=1}^{M_{\mathrm{col}}}\exp(-ik\tilde\theta_\nu)Y_k\right]_+
-   &&\bigl(\because \blkref{def_half_integer_checkY}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)[Y_j,Y_k]_+
-   &&\bigl(\because \text{反交換子の }\mathbb{C}\text{ 双線型性}\bigr) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\sum_{k=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\exp(-ik\tilde\theta_\nu)\cdot 2I\,\delta^{(M_{\mathrm{col}})}_{(j,k)}
-   &&\bigl(\because \text{anticommutator\_of\_Z\_and\_Y}\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\exp(-ij\tilde\theta_\nu)
-   &&\bigl(\because 1\le j,k\le M_{\mathrm{col}}\text{ では }\delta^{(M_{\mathrm{col}})}_{(j,k)}=1\iff j=k\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij(\tilde\theta_\mu+\tilde\theta_\nu))
-   &&\bigl(\because \text{theorem\_exp\_product}\ (n=1)\bigr) \\
-&= 2I\sum_{j=1}^{M_{\mathrm{col}}}\exp\!\left(\frac{2\pi i j\left(-(\mu+\nu-1)\right)}{M_{\mathrm{col}}}\right)
-   &&\bigl(\because \tilde\theta_\mu+\tilde\theta_\nu=\tfrac{2\pi(\mu+\nu-1)}{M_{\mathrm{col}}}\bigr) \\
-&= 2M_{\mathrm{col}} I\,\delta^{(M_{\mathrm{col}})}_{(-(\mu+\nu-1),\,0)}
-   &&\bigl(\because \text{exp\_sum}\bigr) \\
-&= 2M_{\mathrm{col}} I\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}
-   &&\bigl(\because \text{def\_delta\_M}\bigr) \\
-&= 2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I
-   &&\bigl(\because \text{def\_check\_index\_set (5)}\ (\mu,\nu\in\check{\mathcal M})\bigr)
+&= \left[\sum_{j=1}^{N} e_{j,\mu}Y_{j_{\mathbb Z}},\ \sum_{k=1}^{N} e_{k,\nu}Y_{k_{\mathbb Z}}\right]_+
+   &&\bigl(\because \blkref{def_half_integer_checkY}\text{ を 2 箇所へ同時適用}\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\left[Y_{j_{\mathbb Z}},Y_{k_{\mathbb Z}}\right]_+
+   &&\bigl(\because \blkref{anticommutator_of_finite_sums_of_scalar_multiples}\ (n = 2^{N},\ r = s = N)\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\left(\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\left(2_{\mathbb C}I\right)\right)
+   &&\bigl(\because \blkref{anticommutator_of_Z_and_Y}\text{ を }N^2\text{ 個の項へ同時適用。右辺の }2I\delta\text{ を、}2_{\mathbb C}I\text{ の }\delta\text{ 倍と書いた}\bigr) \\
+&= \sum_{j=1}^{N}\sum_{k=1}^{N} \left((e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{scalar_multiple_is_associative}\text{ を }N^2\text{ 個の項へ同時適用}\bigr) \\
+&= \sum_{j=1}^{N}\left(\left(\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)\right)
+   &&\bigl(\because \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を各 }j\text{ へ同時適用}\bigr) \\
+&= \left(\sum_{j=1}^{N}\sum_{k=1}^{N}(e_{j,\mu}e_{k,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},k_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\bigr) \\
+&= \left(\sum_{j=1}^{N}(e_{j,\mu}e_{j,\nu})\,\delta^{(M_{\mathrm{col}})}_{(j_{\mathbb Z},j_{\mathbb Z})}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{finite_sum_with_single_nonzero_term}\text{ を各 }j\text{ へ }n = j\text{ で同時適用。}k\neq j\text{ の項は準備 1 の鎖で }0_{\mathbb C}\bigr) \\
+&= \left(\sum_{j=1}^{N}(e_{j,\mu}e_{j,\nu})\,1_{\mathbb C}\right)\left(2_{\mathbb C}I\right)
+   &&(\because \text{準備 1 を各 }j\text{ へ同時適用}) \\
+&= \left(\sum_{j=1}^{N}e_{j,\mu}e_{j,\nu}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because 1_{\mathbb C}\text{ は積の単位元}\ (\blkref{complex_numbers_form_a_field})\bigr) \\
+&= \left(\sum_{j=1}^{N}\exp\!\left((-i)(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C} + (-i)(j_{\mathbb R}\tilde\theta_\nu)_{\mathbb C}\right)\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{scalar_exp_product}\text{ を }K=\mathbb C\text{ で各 }j\text{ へ同時適用}\bigr) \\
+&= \left(\sum_{j=1}^{N}\exp\!\left(i\,(y_j)_{\mathbb C}\right)\right)\left(2_{\mathbb C}I\right)
+   &&(\because \text{準備 2 の複素数の鎖を各 }j\text{ へ同時適用}) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\kappa,\,0)}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{exp_sum}\text{ を }N\text{ と }\kappa\text{ で。準備 2 の読み}\bigr) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta^{(M_{\mathrm{col}})}_{(\mu+\nu,\,1)}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \kappa - 0 = -\left((\mu+\nu)-1\right)\text{ なので }\kappa\equiv0 \iff \mu+\nu\equiv1 \pmod{M_{\mathrm{col}}}\text{。}\blkref{def_delta_M}\bigr) \\
+&= \left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)\left(2_{\mathbb C}I\right)
+   &&\bigl(\because \blkref{def_check_index_set}\ (5)\ (\mu,\nu \in \check{\mathcal{M}})\bigr) \\
+&= \left(\left((M_{\mathrm{col}})_{\mathbb C}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)2_{\mathbb C}\right)I
+   &&\bigl(\because \blkref{scalar_multiple_is_associative}\bigr) \\
+&= \left(\left(2_{\mathbb C}(M_{\mathrm{col}})_{\mathbb C}\right)\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\right)I
+   &&\bigl(\because \mathbb C\text{ の積の結合律と交換律。}\blkref{complex_numbers_form_a_field}\bigr)
 \end{aligned}`,
       ),
+      paragraph([
+        "となり、最後の行は主張の右辺 ",
+        math(String.raw`2M_{\mathrm{col}}\,\delta_{\nu,\,M_{\mathrm{col}}+1-\mu}\,I`),
+        " である。",
+      ]),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03（全証明の SageMath 検算）: 主張に像の記号と、2M_col δ I・0 が何の元かを書いた（中身は不変）。証明は、名前だけの根拠「反交換子の ℂ 双線型性」を新しい主張 anticommutator_of_finite_sums_of_scalar_multiples・finite_sum_of_scalar_multiples_of_one_matrix への参照に、行列の theorem_exp_product (n=1) を scalar_exp_product に付け替え、二重和から j = k の項を残す段を準備 1 と finite_sum_with_single_nonzero_term に、θ̃_μ + θ̃_ν の書き換えと exp_sum の指数への読み替えを準備 2 の鎖に分け、第 3 式を省略せずに書いた。",
       ],
     },
   },

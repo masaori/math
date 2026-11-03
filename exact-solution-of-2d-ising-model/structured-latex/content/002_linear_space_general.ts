@@ -1820,6 +1820,59 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_sum_of_scalar_multiples_of_one_matrix",
+    kind: "claim",
+    title: { text: "一つの行列のスカラー倍の有限和は係数の有限和によるスカラー倍に等しい" },
+    labels: ["finite_sum_of_scalar_multiples_of_one_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c_1,\dots,c_r \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、複素数の有限和は ",
+        ref("def_finite_sum_of_complex_numbers"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{r} (c_jA) = \Bigl(\sum_{j=1}^{r} c_j\Bigr)A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{r} (c_jA)\Bigr)_{ik}
+&= \sum_{j=1}^{r} (c_jA)_{ik}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)\\
+&= \sum_{j=1}^{r} c_j\,A_{ik}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\text{ を }r\text{ 個の項へ同時適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} c_j\Bigr)A_{ik}
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{r} c_j\Bigr)A\Bigr)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（全証明の SageMath 検算 anticommutator_of_check_Z_Y）: 原文（Typst）に対応ブロックは無い。anticommutator_of_check_Z_Y の証明が二重和の係数をまとめる段を「反交換子の ℂ 双線型性」と名前だけで根拠にしていたので、その段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_scalar_multiple_is_associative",
     kind: "claim",
     origin: { path: "structured-latex/content/002_linear_space_general.ts", ordinal: 1 },
@@ -2000,6 +2053,110 @@ X - (-Y)
       status: "added",
       notes: [
         "2026-11-02: 原文（Typst）に対応ブロックは無い。check_number_operator_idempotent の (1)(2) が「反交換子の定義」を定義のブロックを置かずに根拠にしていたので足した。Lean は Ising2D.matAnticomm（DefinitionMatrixAnticommutator.lean）。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_anticommutator_of_finite_sums_of_scalar_multiples",
+    kind: "claim",
+    title: { text: "スカラー倍の有限和どうしの反交換子は反交換子の二重和に等しい" },
+    labels: ["anticommutator_of_finite_sums_of_scalar_multiples"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r, s \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_r,\ b_1,\dots,b_s \in \mathbb{C}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r,\ W_1,\dots,W_s \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。反交換子は ",
+        ref("def_matrix_anticommutator"),
+        "、行列の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。二重和は内側から定める：",
+        math(String.raw`\sum_{j=1}^{r}\sum_{k=1}^{s} B_{jk} := \sum_{j=1}^{r}\Bigl(\sum_{k=1}^{s} B_{jk}\Bigr)`),
+        "。このとき",
+      ]),
+      displayMath(String.raw`\Bigl[\sum_{j=1}^{r} a_jX_j,\ \sum_{k=1}^{s} b_kW_k\Bigr]_+
+= \sum_{j=1}^{r}\sum_{k=1}^{s} (a_jb_k)\,[X_j, W_k]_+`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`p, q \in \{1,\dots,n\}`),
+        " を取る。",
+        math(String.raw`S := \sum_{j=1}^{r} a_jX_j`),
+        "、",
+        math(String.raw`T := \sum_{k=1}^{s} b_kW_k`),
+        " と置く。複素数の二重和も内側から定める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl([S, T]_+\bigr)_{pq}
+&= (ST + TS)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= (ST)_{pq} + (TS)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= \sum_{l=1}^{n} S_{pl}\,T_{lq} + \sum_{l=1}^{n} T_{pl}\,S_{lq}
+&&\bigl(\because\ \blkref{mat_mult}\text{ を 2 箇所へ同時適用}\bigr)\\
+&= \sum_{l=1}^{n} \Bigl(\sum_{j=1}^{r} (a_jX_j)_{pl}\Bigr)\Bigl(\sum_{k=1}^{s} (b_kW_k)_{lq}\Bigr)
+ + \sum_{l=1}^{n} \Bigl(\sum_{k=1}^{s} (b_kW_k)_{pl}\Bigr)\Bigl(\sum_{j=1}^{r} (a_jX_j)_{lq}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を 4 箇所へ同時適用}\bigr)\\
+&= \sum_{l=1}^{n} \Bigl(\sum_{j=1}^{r} a_j(X_j)_{pl}\Bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{lq}\Bigr)
+ + \sum_{l=1}^{n} \Bigl(\sum_{k=1}^{s} b_k(W_k)_{pl}\Bigr)\Bigl(\sum_{j=1}^{r} a_j(X_j)_{lq}\Bigr)
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\text{ を全ての項へ同時適用}\bigr)\\
+&= \sum_{l=1}^{n} \Bigl(\sum_{j=1}^{r} a_j(X_j)_{pl}\Bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{lq}\Bigr)
+ + \sum_{l=1}^{n} \Bigl(\sum_{j=1}^{r} a_j(X_j)_{lq}\Bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{pl}\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の交換律を第 2 項の各 }l\text{ へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{l=1}^{n}\sum_{j=1}^{r} \bigl(a_j(X_j)_{pl}\bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{lq}\Bigr)
+ + \sum_{l=1}^{n}\sum_{j=1}^{r} \bigl(a_j(X_j)_{lq}\bigr)\Bigl(\sum_{k=1}^{s} b_k(W_k)_{pl}\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }\bigl(\textstyle\sum_j x_j\bigr)y=\sum_j x_jy\text{ を全ての }l\text{ へ同時適用}\bigr)\\
+&= \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} \bigl(a_j(X_j)_{pl}\bigr)\bigl(b_k(W_k)_{lq}\bigr)
+ + \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} \bigl(a_j(X_j)_{lq}\bigr)\bigl(b_k(W_k)_{pl}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }x\textstyle\sum_k y_k=\sum_k xy_k\text{ を全ての }(l,j)\text{ へ同時適用}\bigr)\\
+&= \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
+ + \sum_{l=1}^{n}\sum_{j=1}^{r}\sum_{k=1}^{s} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の積の結合律と交換律を全ての項へ同時適用。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{l=1}^{n}\sum_{k=1}^{s} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
+ + \sum_{j=1}^{r}\sum_{l=1}^{n}\sum_{k=1}^{s} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の順序交換（}l\text{ と }j\text{）を 2 箇所へ同時適用}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}\sum_{l=1}^{n} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
+ + \sum_{j=1}^{r}\sum_{k=1}^{s}\sum_{l=1}^{n} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の順序交換（}l\text{ と }k\text{）を各 }j\text{ の 2 箇所へ同時適用}\bigr)\\
+&= \sum_{j=1}^{r}\Bigl(\sum_{k=1}^{s}\sum_{l=1}^{n} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
+ + \sum_{k=1}^{s}\sum_{l=1}^{n} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\text{ を右辺から左辺へ（外側の }j\text{）}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}\Bigl(\sum_{l=1}^{n} (a_jb_k)\bigl((X_j)_{pl}(W_k)_{lq}\bigr)
+ + \sum_{l=1}^{n} (a_jb_k)\bigl((W_k)_{pl}(X_j)_{lq}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\text{ を右辺から左辺へ、各 }j\text{ の内側の }k\text{ へ同時適用}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}\Bigl((a_jb_k)\sum_{l=1}^{n} (X_j)_{pl}(W_k)_{lq}
+ + (a_jb_k)\sum_{l=1}^{n} (W_k)_{pl}(X_j)_{lq}\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の有限和の分配則 }\textstyle\sum_l cx_l=c\sum_l x_l\text{ を全ての }(j,k)\text{ の 2 箇所へ同時適用}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\Bigl(\sum_{l=1}^{n} (X_j)_{pl}(W_k)_{lq}
+ + \sum_{l=1}^{n} (W_k)_{pl}(X_j)_{lq}\Bigr)
+&&\bigl(\because\ \mathbb{C}\text{ の分配法則 }ca+cb=c(a+b)\text{。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\bigl((X_jW_k)_{pq} + (W_kX_j)_{pq}\bigr)
+&&\bigl(\because\ \blkref{mat_mult}\text{ を全ての項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\,(X_jW_k + W_kX_j)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)\,\bigl([X_j, W_k]_+\bigr)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= \sum_{j=1}^{r}\sum_{k=1}^{s}\bigl((a_jb_k)[X_j, W_k]_+\bigr)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)\\
+&= \sum_{j=1}^{r}\Bigl(\sum_{k=1}^{s}(a_jb_k)[X_j, W_k]_+\Bigr)_{pq}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\text{ を各 }j\text{ へ同時適用}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r}\sum_{k=1}^{s}(a_jb_k)[X_j, W_k]_+\Bigr)_{pq}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（全証明の SageMath 検算 anticommutator_of_check_Z_Y）: 原文（Typst）に対応ブロックは無い。anticommutator_of_check_Z_Y の証明が「反交換子の ℂ 双線型性」と名前だけで根拠にしていた二重和への展開を、引けるよう足した。Lean は Ising2D.acomm_sum_smul（ClaimCommutatorViaAnticommutators.lean）。",
       ],
     },
   },

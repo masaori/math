@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 363 件のうち、SageMath の検算が無いもの 62 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 365 件のうち、SageMath の検算が無いもの 61 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -210,13 +210,19 @@
 
 - `def_half_integer_modes`（θ̃ の共役添字の恒等式 θ̃_{1-μ} = -θ̃_μ）と `conjugate_index_of_check_Z_Y`（M̌ の内側で共役添字を取る）: `sagemath/check/def_half_integer_modes/`・`sagemath/check/conjugate_index_of_check_Z_Y/`。角度の鎖は π・μ・M・j を不定元にした有理関数体で、符号の鎖は ℂ を実数の対にした多項式環で、(2) の cos・sin の値を代入した後の ℂ の計算は AA の実数の対で、(3) は円分体の行列で厳密に、指数法則・exp と cos・sin の行・cos(2πj) = 1・sin(2πj) = 0・主張は本文の exp のボールで確かめた。人手証明を直した: (2) の証明が、主張と違う式を述べる `euler_formula_cos_sin` と行列の `theorem_exp_product` (n=1) を引いていたので、`exp_of_negative_i_real_as_cos_minus_i_sin` と `scalar_exp_product` に付け替え、包含の和・積の保存と符号の鎖を置いた。(2) の主張を像の記号で書き、全実数上の cos・sin の値を前提とすることを主張に書いた。二つの角度の鎖を像の記号 μ_R・(M_col)_R・ι(1) で書き直し、(1) の根拠「ℂ の四則」を ℝ に直し、結合律・`1_R - 1/2 = 1/2`・符号の行を一行ずつに分けた（主張の中身は不変）。(2) を引く `check_Q_is_hermitian` の引用も新しい記号にした。計算の誤りは無かった。
 
+- `anticommutator_of_check_Z_Y`（Ž・Y̌ の反交換関係）と、そのために足した `anticommutator_of_finite_sums_of_scalar_multiples`（スカラー倍の有限和どうしの反交換子は反交換子の二重和）・`finite_sum_of_scalar_multiples_of_one_matrix`（一つの行列のスカラー倍の有限和は係数の和によるスカラー倍）（`002_linear_space_general.ts`）: `sagemath/check/<ラベル>/`。
+  準備 1（添字の対角とデルタ）は整数で、準備 2 の実数の鎖・複素数の鎖は π・μ・ν・M・j を不定元にした有理関数体と実数の対で、三つの式の鎖（16・6・16 等号）は Z_j・Y_j を成分の式で組み位相を円分体 `QQ(ζ_{4M})` に置いて `M_col = 2..5`・全 μ, ν で、新しい二つの主張は `QQ` 上の多項式環で、すべて厳密に確かめた。位相の表し方・`scalar_exp_product`・`exp_sum` の行は本文の exp のボールで `M_col = 2..8` に確かめた。
+  人手証明を直した: 名前だけの根拠「反交換子の ℂ 双線型性」を新しい二つの主張への参照に、行列の `theorem_exp_product` (n=1) を `scalar_exp_product` に付け替え、二重和から j = k の項を残す段を準備 1 と `finite_sum_with_single_nonzero_term` に、θ̃_μ + θ̃_ν の書き換えを一行一操作の実数の鎖と複素数の鎖に分け、第 3 式を省略せずに書き、主張に像の記号と 2M_col δ I・0 が何の元かを書いた（中身は不変）。計算の誤りは無かった。Lean の具体版 `ClaimAnticommutatorCheckZY.lean` の注記は旧い人手証明の行（双線型性・`theorem_exp_product`）のままで、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `anticommutator_of_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `recover_Z_Y_from_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`anticommutator_of_check_Z_Y` のレビューで見つかった（表記の省略と型の違い。今回の差分より前から）: `exp_sum` の主張は j・k・M_col の実数・複素数への像を書かず、M_col ∈ ℕ_{≥1} でこの章の M_col ∈ ℤ_{≥2} と型が違う。`anticommutator_of_Z_and_Y` の主張は M_col・μ・ν の所属を宣言せず、右辺の `2Iδ` が何のスカラー倍かを書いていない。この単位では使う側の証明で「準備 2 の読み」と「2_C I の δ 倍と書いた」の注記で補った。直すには両主張を像の記号とスカラー倍の括弧で書き直し、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`conjugate_index_of_check_Z_Y` のレビューで見つかった（1 ブロック 1 主張と命名。今回の差分より前から）: `conjugate_index_of_check_Z_Y` は (1)(2)(3) の三つの主張を一つのブロックに束ねている。`def_half_integer_modes` はラベルが `def_` なのに中身は主張で、旧複合主張の番号「(3)」が主張に残っている。分けるとラベル参照（本文と Lean の注記）を付け替えることになるので、検算の付いたブロックの見直しで扱う。(2) は全実数上の cos・sin の周期性（未整備）に依る。
 
