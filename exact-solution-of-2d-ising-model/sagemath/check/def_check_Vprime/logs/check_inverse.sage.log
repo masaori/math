@@ -1,0 +1,23 @@
+== def_check_Vprime (2): V̌' ∈ R^× と (V̌')^{-1} = exp(-X̌)
+PASS -X̌ ∈ R（def_matrix_negation） M=2 (2, 3)
+PASS 鎖 1 の第 2 行 -(-X̌) = X̌ M=2 (2, 3)
+PASS 鎖 2 の第 2 行 exp(-X̌)exp(X̌) の k ≤ 8 次 M=2 (2, 3)
+PASS 鎖 1 の第 3 行 exp(-(-X̌))exp(-X̌) の k ≤ 8 次 M=2 (2, 3)
+PASS -X̌ ∈ R（def_matrix_negation） M=2 (3, 2)
+PASS 鎖 1 の第 2 行 -(-X̌) = X̌ M=2 (3, 2)
+PASS 鎖 2 の第 2 行 exp(-X̌)exp(X̌) の k ≤ 8 次 M=2 (3, 2)
+PASS 鎖 1 の第 3 行 exp(-(-X̌))exp(-X̌) の k ≤ 8 次 M=2 (3, 2)
+PASS -X̌ ∈ R（def_matrix_negation） M=3 (2, 3)
+PASS 鎖 1 の第 2 行 -(-X̌) = X̌ M=3 (2, 3)
+PASS 鎖 2 の第 2 行 exp(-X̌)exp(X̌) の k ≤ 4 次 M=3 (2, 3)
+PASS 鎖 1 の第 3 行 exp(-(-X̌))exp(-X̌) の k ≤ 4 次 M=3 (2, 3)
+PASS -X̌ ∈ R（def_matrix_negation） M=3 (3, 2)
+PASS 鎖 1 の第 2 行 -(-X̌) = X̌ M=3 (3, 2)
+PASS 鎖 2 の第 2 行 exp(-X̌)exp(X̌) の k ≤ 4 次 M=3 (3, 2)
+PASS 鎖 1 の第 3 行 exp(-(-X̌))exp(-X̌) の k ≤ 4 次 M=3 (3, 2)
+M=2: 結合定数 4 組で済み
+M=3: 結合定数 4 組で済み
+M=4: 結合定数 4 組で済み
+M=5: 結合定数 4 組で済み
+-- def_check_Vprime (2): V̌' ∈ R^× と (V̌')^{-1} = exp(-X̌): 168/168 PASS
+RESULT: PASS

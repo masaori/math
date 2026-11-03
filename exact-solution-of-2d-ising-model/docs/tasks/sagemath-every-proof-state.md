@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 375 件のうち、SageMath の検算が無いもの 49 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 379 件のうち、SageMath の検算が無いもの 48 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -269,9 +269,14 @@
   P̌^{-1} を def_invertible_elements_of_R（M → 1）の逆元、P̌ĎP̌^{-1} を (P̌Ď)P̌^{-1}、Ď の成分を包含の像と読むこと（準備 4）を書き、本体の P̌^{-1}P̌ = I・単位行列・Ď の成分・零行列の行に根拠を付けた。主張の右辺を (exp(±γ(θ̃_μ)))_C と書いた（中身は不変）。計算の誤りは無かった。
   申し送り（Lean の連続実行の受け持ち）: `ClaimCommutationVPlusCheckPsi.lean` の注記を新しい準備 1〜3・本体の名前に合わせた（コメントのみ）。`rowApply_checkPsi_row` の calc は人手の 17 式のうち P̌^{-1}P̌ = I・単位行列・Ď の成分・零行列の行を `rw`・`simp` の 1 段にまとめており、1 対 1 の対応の見直しが要る。
 
+- `def_check_Vprime`（V̌' の定義。X̌ ∈ R と V̌' の可逆性）: `sagemath/check/def_check_Vprime/`。
+  (1) は添字の閉性を M_col = 2..40 で（対照 μ ↦ M_col−μ・−μ）、ψ̌ の分母の非零性を円分体で、各項と X̌ を r_λ・γ(θ̃_λ) を不定元にした多項式環の行列で（本文の成分の式と Sage の演算を比べて）厳密に確かめた。(2) は −X̌・−(−X̌) = X̌ と exp_of_negative_is_left_inverse の当てはめ（部分和の積の k 次の部分）を多項式環で厳密に（M_col = 2, 3）、exp(±X̌) の値は部分和に尾の上界を足したボールで結合定数 4 組 × M_col = 2..5 について確かめた（積が I を含む、Sage の逆行列と重なる、対照 V̌'V̌' は I を含まない）。
+  人手証明を直した: 旧 (1) は分母 2√M_col γ_2(−θ̃_μ) ≠ 0 の根拠に、γ_2(θ̃_μ) ≠ 0 しか述べない gamma_2_theta_tilde_nonzero を引いていた（γ_2(−θ̃_μ) ≠ 0 は relation_of_gamma_2_theta_tilde）。ψ̌ の定まることは def_check_fermi の主張なので、(1) をそれと def_check_index_set (2) を引いて各項が R の元であることを 1 行 1 根拠で示す鎖に、(2) を「正則」の定めの無い matrix_exp_conjugation (3) から exp_of_negative_is_left_inverse の二つの積と def_invertible_elements_of_R の鎖に替えた。主張の実数 γ・1/2 を (·)_C と書き、下流が使う γ(θ̃_μ)(… − ½I) の書き方を inclusion_rr_to_cc の略記として宣言し、ℝ への脱出（arccosh の実対数、exp の極限）を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変で `lake build`・`check-no-sorry.sh` は通る）: `DefinitionCheckVprime.lean` の (2) は `matExpUnits` に帰着しており、人手の新しい (2)（exp_of_negative_is_left_inverse の二つの積）との 1 対 1 の対応の見直しが要る。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `action_of_T_check_Vprime_on_check_psi`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

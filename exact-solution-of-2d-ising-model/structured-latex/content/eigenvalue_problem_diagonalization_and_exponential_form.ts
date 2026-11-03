@@ -6587,18 +6587,64 @@ T(\check\psi_\mu)
         "、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " とし、",
+        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）と書く。",
       ]),
       displayMath(
-        String.raw`\check{X} := \sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)
-\left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu} - \tfrac12 I\right)
+        String.raw`\check{X} := \sum_{\mu \in \check{\mathcal{M}}} \left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+\left(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu} - \left(\tfrac12\right)_{\mathbb{C}} I\right)
 \ \in\ \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C}),
 \qquad
 \check{V}' := \exp\!\left(\check{X}\right)`,
       ),
       paragraph([
-        "と定める（",
-        math(String.raw`I := I_{\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})}`),
-        "）。次が成り立つ。",
+        "と定める。",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{\geq 0}`),
+        " は ",
+        ref("def_gamma_theta"),
+        "（実対数による arccosh で定まるので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する）、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像、",
+        math(String.raw`\check\psi_\mu^\dagger, \check\psi_\mu`),
+        " は ",
+        ref("def_check_fermi"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        "、和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_exp"),
+        " である。",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R := \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用いる。",
+        ref("inclusion_rr_to_cc"),
+        " の略記に従い、以降の本文はこの ",
+        math(String.raw`\check{X}`),
+        " を ",
+        math(String.raw`\sum_{\mu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\mu)\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu} - \tfrac12 I\right)`),
+        " とも書く（実数 ",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        "・",
+        math(String.raw`\tfrac12`),
+        " によるスカラー倍は、像 ",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " によるスカラー倍を表す）。次が成り立つ。",
       ]),
       list([
         [
@@ -6614,16 +6660,26 @@ T(\check\psi_\mu)
           math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}`),
           " はともに定義されており、",
           math(String.raw`\mu \in \check{\mathcal{M}}`),
-          " のすべての項が意味をもつ。",
+          " のすべての項が ",
+          math(String.raw`R`),
+          " の元である。したがって ",
+          math(String.raw`\check{X} \in R`),
+          "。",
         ],
         [
           "(2) ",
-          math(String.raw`\check{V}'`),
-          " は可逆であり ",
+          math(String.raw`\check{V}' \in R^\times`),
+          " であり ",
           math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
-          "。したがって ",
+          "（",
+          math(String.raw`-\check{X}`),
+          " は ",
+          ref("def_matrix_negation"),
+          "）。したがって ",
           ref("def_T_g"),
-          " の ",
+          "（",
+          math(String.raw`M \to M_{\mathrm{col}}`),
+          "）の ",
           math(String.raw`T_{(\check{V}')}(W) := \check{V}'\,W\,\left(\check{V}'\right)^{-1}`),
           " が定義される。",
         ],
@@ -6632,48 +6688,85 @@ T(\check\psi_\mu)
     proof: [
       paragraph([
         "(1) ",
-        ref("gamma_2_theta_tilde_nonzero"),
-        " はすべての ",
         math(String.raw`\mu \in \check{\mathcal{M}}`),
-        " と ",
-        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
-        " について ",
-        math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0`),
-        " を与えるので、",
-        ref("def_check_fermi"),
-        " の分母 ",
-        math(String.raw`2\sqrt{M_{\mathrm{col}}}\,\gamma_2(-\tilde\theta_\mu)`),
-        " は ",
-        math(String.raw`0`),
-        " でない。",
-        ref("def_check_index_set"),
-        " (2) より ",
-        math(String.raw`\mu \in \check{\mathcal{M}}`),
-        " に対して ",
-        math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
-        " なので、",
-        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}`),
-        " も同じ理由で定義されている。",
-        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
-        " はスカラーなので各項は ",
-        math(String.raw`\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " の元であり、有限和 ",
-        math(String.raw`\check{X}`),
-        " も同様である。",
+        " を任意に取り、",
+        math(String.raw`\nu := M_{\mathrm{col}}+1-\mu \in \mathbb{Z}`),
+        " と置く。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\nu \in \check{\mathcal{M}}
+   &&\bigl(\because\ \blkref{def_check_index_set}\ (2)\bigr) \\
+&\check\psi_\mu^\dagger \in R
+   &&\bigl(\because\ \blkref{def_check_fermi}\ (\mu \in \check{\mathcal{M}})\bigr) \\
+&\check\psi_\nu \in R
+   &&\bigl(\because\ \blkref{def_check_fermi}\ (\mu \to \nu.\ \nu \in \check{\mathcal{M}}\ \text{は 1 行目})\bigr) \\
+&\check\psi_\mu^\dagger\,\check\psi_\nu \in R
+   &&\bigl(\because\ \blkref{mat_mult}\ (2^{M_{\mathrm{col}}} \times 2^{M_{\mathrm{col}}}\ \text{と}\ 2^{M_{\mathrm{col}}} \times 2^{M_{\mathrm{col}}}\ \text{の積})\bigr) \\
+&I \in R
+   &&\bigl(\because\ \blkref{def_identity_matrix}\bigr) \\
+&\left(\tfrac12\right)_{\mathbb{C}} \in \mathbb{C}
+   &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ (\tfrac12 \in \mathbb{R}\ \text{は}\ \mathbb{R}\ \text{における}\ 2\ \text{の逆元})\bigr) \\
+&\left(\tfrac12\right)_{\mathbb{C}} I \in R
+   &&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr) \\
+&\check\psi_\mu^\dagger\,\check\psi_\nu - \left(\tfrac12\right)_{\mathbb{C}} I \in R
+   &&\bigl(\because\ \blkref{def_matrix_difference}\bigr) \\
+&\gamma(\tilde\theta_\mu) \in \mathbb{R}_{\geq 0}
+   &&\bigl(\because\ \blkref{def_gamma_theta}\ (\theta \to \tilde\theta_\mu).\ \text{実対数の}\ \mathrm{arccosh}\ \text{で}\ \mathbb{R}\ \text{へ脱出}\bigr) \\
+&\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}} \in \mathbb{C}
+   &&\bigl(\because\ \blkref{inclusion_rr_to_cc}\bigr) \\
+&\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+\left(\check\psi_\mu^\dagger\,\check\psi_\nu - \left(\tfrac12\right)_{\mathbb{C}} I\right) \in R
+   &&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " は任意だったので、",
+      ]),
+      displayMath(
+        String.raw`\check{X} \in R
+\qquad\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X_j \to \text{上の最終行の}\ \mu = j\ \text{の項})\bigr)`,
+      ),
       paragraph([
         "(2) ",
-        ref("matrix_exp_conjugation"),
-        " (3) より、任意の ",
-        math(String.raw`X \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " について ",
-        math(String.raw`\exp(X)`),
-        " は可逆で ",
-        math(String.raw`\exp(X)^{-1} = \exp(-X)`),
-        " である。",
-        math(String.raw`X = \check{X}`),
-        " とすればよい。",
+        math(String.raw`-\check{X} \in R`),
+        "（",
+        ref("def_matrix_negation"),
+        "）と ",
+        math(String.raw`\exp(\pm\check{X}) \in R`),
+        "（",
+        ref("def_exp"),
+        "）を用いる。",
+        math(String.raw`\exp`),
+        " は級数の極限なので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出する（",
+        ref("exp_of_negative_is_left_inverse"),
+        "）。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+\check{V}'\exp(-\check{X})
+&=\exp(\check{X})\exp(-\check{X})
+&&(\because\ \check{V}'\ \text{の定義})\\
+&=\exp(-(-\check{X}))\exp(-\check{X})
+&&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to \check{X})\bigr)\\
+&=I
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -\check{X})\bigr),\\[2mm]
+\exp(-\check{X})\,\check{V}'
+&=\exp(-\check{X})\exp(\check{X})
+&&(\because\ \check{V}'\ \text{の定義})\\
+&=I
+&&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to \check{X})\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+&\check{V}' \in R^\times
+   &&\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ (M\to M_{\mathrm{col}},\ g\to \check{V}',\ h\to \exp(-\check{X}))\bigr) \\
+&\left(\check{V}'\right)^{-1} = \exp(-\check{X})
+   &&\bigl(\because\ \text{上の二つの積},\ \blkref{def_invertible_elements_of_R}\ (h\ \text{はただ 1 つに定まり}\ g^{-1}\ \text{と書く})\bigr) \\
+&T_{(\check{V}')}:R\to R,\ W\mapsto \check{V}'\,W\,\left(\check{V}'\right)^{-1}\ \text{が定義される}
+   &&\bigl(\because\ \blkref{def_T_g}\ (M\to M_{\mathrm{col}},\ g\to \check{V}')\bigr)
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
@@ -6684,6 +6777,7 @@ T(\check\psi_\mu)
           "数値では、この形の V̌' が T_{(V^{(+)})} と一致する（T_V_plus_eq_T_check_Vprime）ことで確認している" +
           "（sagemath/check/049_claim_even_sector_fermions/check_04, check_05）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。(1) の旧証明は分母 2√M_col γ_2(−θ̃_μ) ≠ 0 の根拠に gamma_2_theta_tilde_nonzero を引いていたが、そのブロックは γ_2(θ̃_μ) ≠ 0 だけを述べ、γ_2(−θ̃_μ) の非零性は relation_of_gamma_2_theta_tilde に回している。ψ̌ が 𝓜̌ の全添字で定まることは def_check_fermi の主張なので、(1) はそれと def_check_index_set (2) を引いて各項が R の元であることを 1 行 1 根拠で示す形にした。(2) は「正則」の定めの無い matrix_exp_conjugation (3) の当てはめを、V1_plus_half_invertible と同じく exp_of_negative_is_left_inverse の二つの積と def_invertible_elements_of_R の鎖に替えた。主張の実数 γ(θ̃_μ)・1/2 を包含の像 (·)_C と書き、下流（V_plus_exponential_form 等）が使う γ(θ̃_μ)(… − ½I) の書き方を inclusion_rr_to_cc の略記として宣言し、R と R^× の出所と ℝ への脱出（arccosh の実対数、exp の極限）を書いた（中身は不変）。検算は sagemath/check/def_check_Vprime/。",
       ],
     },
   },
