@@ -2209,6 +2209,9 @@ targets=(
   Ising2DLambda.KacWard.smoothing_crossing_number_update
   Ising2DLambda.KacWard.smoothing_crossing_number_update_from_necSuf
   Ising2DLambda.NecSuf.KacWard.two_point_preserved_sum_necSuf
+  Ising2DLambda.NecSuf.KacWard.smoothedCyclicTotalTurning
+  Ising2DLambda.KacWard.smoothedCyclicTotalTurning
+  Ising2DLambda.KacWard.smoothedCyclicTotalTurning_from_necSuf
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance
   Ising2DLambda.KacWard.smoothing_cyclic_turning_invariance_from_necSuf
   Ising2DLambda.NecSuf.KacWard.smoothing_split_closed_connections_necSuf

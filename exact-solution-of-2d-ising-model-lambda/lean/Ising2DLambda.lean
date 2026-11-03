@@ -977,6 +977,8 @@ import Ising2DLambda.NecSuf.KacWard.SmoothedVertexwiseCrossingNumber
 import Ising2DLambda.KacWard.SmoothedVertexwiseCrossingNumber
 import Ising2DLambda.NecSuf.KacWard.SmoothedCrossingNumber
 import Ising2DLambda.KacWard.SmoothedCrossingNumber
+import Ising2DLambda.NecSuf.KacWard.SmoothedCyclicTotalTurning
+import Ising2DLambda.KacWard.SmoothedCyclicTotalTurning
 import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate

@@ -60443,6 +60443,11 @@ c(\gamma)+1
                       kind: "definition",
                       title: { text: "平滑化後の循環総回転数" },
                       labels: ["def_smoothed_cyclic_total_turning"],
+                      lean: [
+                        "Ising2DLambda.KacWard.smoothedCyclicTotalTurning",
+                        "Ising2DLambda.NecSuf.KacWard.smoothedCyclicTotalTurning",
+                        "Ising2DLambda.KacWard.smoothedCyclicTotalTurning_from_necSuf",
+                      ],
                       habitat: "Z",
                       statement: [
                         paragraph([
@@ -67943,10 +67948,13 @@ C_{N_c}\bigl(z^{(c)}\bigr)
                         "整数 ", math(String.raw`A_c:=I_{cm}(U)`), "、",
                         math(String.raw`B_c:=I_{cn}(R)`), "、",
                         math(String.raw`K:=I_b(v)+I_d(x)+J`),
-                        " を置く。直前の表示は加法の結合則と交換則により ",
-                        math(String.raw`C_{N_c}(z^{(c)})=A_c+B_c+K`),
-                        " となる。同じ表示を ", math(String.raw`c+1`), " にも用いて、",
+                        " を置く。直前の表示を加法の結合則と交換則で並べ替える。",
                       ]),
+                      displayMath(String.raw`\begin{aligned}
+C_{N_c}\bigl(z^{(c)}\bigr)&=A_c+B_c+K
+&&\bigl(\because\ \mathbb Z\text{ の加法の結合則・交換則と }A_c,B_c,K\text{ の定義}\bigr).
+\end{aligned}`),
+                      paragraph(["同じ表示を ", math(String.raw`c+1`), " にも用いて、"]),
                       displayMath(String.raw`\begin{aligned}
 C_{N_{c+1}}\bigl(z^{(c+1)}\bigr)-C_{N_c}\bigl(z^{(c)}\bigr)
 &=(A_{c+1}+B_{c+1}+K)-C_{N_c}\bigl(z^{(c)}\bigr)
