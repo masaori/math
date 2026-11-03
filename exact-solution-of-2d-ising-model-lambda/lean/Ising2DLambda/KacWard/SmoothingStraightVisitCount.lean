@@ -7,11 +7,46 @@
 ここでは仮定として受け取る）。
 -/
 import Ising2DLambda.KacWard.CrossingNumberDouble
+import Ising2DLambda.KacWard.IndexPairCrossing
+import Ising2DLambda.KacWard.StepTurning
+import Ising2DLambda.KacWard.DirectionGateCrossingTurning
 import Ising2DLambda.NecSuf.KacWard.SmoothingStraightVisitCount
 
 namespace Ising2DLambda.KacWard
 
 open Ising2DLambda.NecSuf.KacWard
+open Ising2DLambda.PartitionPolynomial
+
+/-- The outgoing edge of an actual walk after exchanging two successors. -/
+def smoothedExitEdge {L m : ℕ} (γ : Fin (m + 1) → OrientedEdge L)
+    (k l r : Fin (m + 1)) : OrientedEdge L :=
+  if r = k then γ (closedWalkSuccessor l)
+  else if r = l then γ (closedWalkSuccessor k)
+  else γ (closedWalkSuccessor r)
+
+/-- `def_smoothing_straight_visit_count` for an actual closed nonbacktracking walk. -/
+noncomputable def smoothedStraightVisitCount {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (_hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1))
+    (w : Vertex L) (a : ZMod 2) : ℕ := by
+  classical
+  exact (Finset.univ.filter fun r : Fin (m + 1) =>
+    orientedTarget (γ r) = w ∧
+      stepTurning (γ r) (smoothedExitEdge γ k l r) = 0 ∧
+      directionAxis (directionNumber (γ r)) = a).card
+
+theorem smoothedStraightVisitCount_from_necSuf {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ) (k l : Fin (m + 1))
+    (w : Vertex L) (a : ZMod 2) :
+    smoothedStraightVisitCount γ hγ k l w a =
+      Ising2DLambda.NecSuf.KacWard.smoothedStraightVisitCount γ orientedTarget
+        (fun e f => stepTurning e f = 0)
+        (fun e => directionAxis (directionNumber e)) k l w a := by
+  simp only [smoothedStraightVisitCount,
+    Ising2DLambda.NecSuf.KacWard.smoothedStraightVisitCount,
+    smoothedExitEdge, Ising2DLambda.NecSuf.KacWard.smoothedSuccessorEdge,
+    closedWalkSuccessor_from_necSuf]
 
 /-- 選んだ横断 `a, b` の平滑化は、横断の頂点では各軸の直進通過数を一つ減らし、
 他の頂点では変えない（具体版）。 -/

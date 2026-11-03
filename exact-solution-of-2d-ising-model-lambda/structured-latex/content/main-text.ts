@@ -59961,6 +59961,11 @@ c_v(\gamma)&=|H_v\times V_v|
                           kind: "definition",
                           title: { text: "平滑化後の直進通過数" },
                           labels: ["def_smoothing_straight_visit_count"],
+                          lean: [
+                            "Ising2DLambda.KacWard.smoothedStraightVisitCount",
+                            "Ising2DLambda.NecSuf.KacWard.smoothedStraightVisitCount",
+                            "Ising2DLambda.KacWard.smoothedStraightVisitCount_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([
@@ -60080,7 +60085,10 @@ n_{w,a}(\gamma) & (w\ne v)
                           " により ", math(String.raw`S^{\mathrm{sm}}_{w,a}`), " に属さず、",
                           math(String.raw`l`), " も同様である。よって",
                         ]),
-                        displayMath(String.raw`S^{\mathrm{sm}}_{w,a}=S_{w,a}\setminus\{k,l\}`),
+                        displayMath(String.raw`\begin{aligned}
+S^{\mathrm{sm}}_{w,a}&=S_{w,a}\setminus\{k,l\}
+&&\bigl(\because\ r\ne k,l\text{ では出辺が不変で、}k,l\text{ は平滑化後に直進でない}\bigr)
+\end{aligned}`),
                         paragraph([
                           "である。また ", math(String.raw`\operatorname{tgt}(\vec e_k)=v`), "、",
                           math(String.raw`\tau(\vec e_k,\vec e_{\sigma(k)})=0`), " により、",

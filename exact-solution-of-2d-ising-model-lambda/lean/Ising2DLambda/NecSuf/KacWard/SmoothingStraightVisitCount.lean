@@ -8,8 +8,27 @@
 ℝ / ℂ は現れない。
 -/
 import Mathlib.Data.Finset.Card
+import Mathlib.Data.Fintype.Basic
+import Ising2DLambda.NecSuf.KacWard.ClosedWalkPasses
 
 namespace Ising2DLambda.NecSuf.KacWard
+
+/-- The outgoing edge after exchanging the successors at two indices. -/
+def smoothedSuccessorEdge {E : Type*} {m : ℕ}
+    (γ : Fin (m + 1) → E) (k l r : Fin (m + 1)) : E :=
+  if r = k then γ (cyclicSuccessor l)
+  else if r = l then γ (cyclicSuccessor k)
+  else γ (cyclicSuccessor r)
+
+/-- The number of smoothed passes through a vertex that go straight along an axis. -/
+noncomputable def smoothedStraightVisitCount {E V A : Type*} {m : ℕ}
+    (γ : Fin (m + 1) → E) (target : E → V)
+    (straight : E → E → Prop) (axis : E → A)
+    (k l : Fin (m + 1)) (w : V) (a : A) : ℕ := by
+  classical
+  exact (Finset.univ.filter fun r : Fin (m + 1) =>
+    target (γ r) = w ∧ straight (γ r) (smoothedSuccessorEdge γ k l r) ∧
+      axis (γ r) = a).card
 
 /-- 述語がただ一つの元 `x` で真から偽へ変わり、他の元では変わらないとき、
 数え上げは一つ減る。`DecidableEq ι` は `erase` による一元除去に、
