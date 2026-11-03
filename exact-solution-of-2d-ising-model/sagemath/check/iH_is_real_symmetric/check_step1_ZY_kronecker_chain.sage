@@ -26,7 +26,7 @@ def check_chain(name, rows):
     for k in range(1, len(rows)):
         assert rows[k] == rows[k-1], (name, k)
         count += 1
-# Step 0 の σ^zσ^y = (-i)σ^x（check_37 で一行ずつ確かめた鎖の両端）
+# Step 0 の σ^zσ^y = (-i)σ^x（check_step0_pauli_product_chains.sage で一行ずつ確かめた鎖の両端）
 assert SZ * SY == mi * SX
 for Mc in range(1, 6):
     for m in range(1, Mc + 1):

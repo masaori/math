@@ -71,10 +71,12 @@ for Mc in range(2, 8):
     # 否定コントロール（鎖の行を壊す）: G^T = G の行の -K_1G を +K_1G に替えると前の行と一致しない
     assert K1 * lsum(zz) - K1 * T(G) != K1 * lsum(zz) + K1 * G, Mc
     broken += 1
-# 否定コントロール: H_1^{(+)} そのもの（係数 i を掛けない）は転置で対称でない（M_col = 3）
+# 否定コントロール: 「(σ_m^zσ_{m+1}^z)^T を各項へ」の行は項が転置で不変であることを使う。
+# 転置で不変でない項 σ_1^yσ_2^z（σ^y が 1 個だけ）を和に混ぜると、その行の前後が一致しない（M_col = 3）
 Mc = 3
-Y1Z2 = site(Mc, 1, SY) * site(Mc, 2, SZ)
-assert T(Y1Z2) != Y1Z2
+bad = site(Mc, 1, SY) * site(Mc, 2, SZ)
+zz3 = [site(Mc, m, SZ) * site(Mc, m + 1, SZ) for m in range(1, Mc)] + [bad]
+assert K1 * lsum([T(X) for X in zz3]) != K1 * lsum(zz3)
 print(f"  {count} 段（M_col = 2..7 の S_2 の 5 行と S_1^(+) の 7 行の鎖。係数は不定元、QQ[i] の厳密計算）")
-print(f"  否定コントロール {broken + 1} 件: G^T = G の行の符号を壊すと一致しない（M_col ごと）、Y_1Z_2 は転置で対称でない")
+print(f"  否定コントロール {broken + 1} 件: G^T = G の行の符号を壊すと一致しない（M_col ごと）、転置で不変でない項 σ_1^yσ_2^z を和に混ぜると「各項へ」の行が外れる")
 print("RESULT: PASS")

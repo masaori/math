@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-03: 全証明の SageMath 検算として、`iH_is_real_symmetric`（S_1^{(+)}・S_2 は実対称でエルミート）に検算 `sagemath/check/iH_is_real_symmetric/` を付けた（未検算 43 件）。050 に番号付きで在った各行の検算 11 本（check_22・check_37〜46）を内容の名前でこのディレクトリへ移し、レビューの必須の指摘（転置の鎖の否定コントロールが Y_1Z_2 と称して σ_1^yσ_2^z を見ていた）を直した。人手証明は Step 0 の使われていない可換性の文を外しただけ（主張は不変、計算の誤りは無し）。二回のレビューで必須の指摘が無くなった。次は `sign_flip_conjugation`（050 の check_09・check_11〜21 を同じく移す）。
+
 2026-11-03: Lean の通しの証明のゴールラインの確認の百九個目として、人手 `check_joint_eigenspace_decomposition` を棚卸しし、証明の冒頭で根拠なしに置いていた `Q̌_ε = ∏R_μ^{(ε_μ)}` を、定義の因子 `ε_μň_μ + (1−ε_μ)(I−ň_μ)` が `R_μ^{(ε_μ)}` に等しいことの二場合の 10 行の鎖と、各因子へ同時に適用する 2 行の鎖にした（主張は不変）。Lean に人手と 1 対 1 の `defFactor_one`・`defFactor_zero`・`defFactor_eq_rFactor`・`Qproj_eq_finProdLeft_rFactor` を置き、SageMath は 050 の check_48。次は同じファイルの `eigenvalues_of_check_Vprime` から棚卸しを続ける（状態台帳 `docs/tasks/lean-end-to-end-state.md` の「次の一歩」）。
 
 2026-11-03: Lean の通しの証明のゴールラインの確認の百八個目として、人手 `trace_of_check_number_operator_product`（ň とその補の積のトレース）の名前だけの根拠（「分配則とトレースの線型性」、因子ごとの可換性から積との可換性を言う散文、巡回性の行の結合律）を 1 行 1 主張の鎖にし、帰納法を有限積の定義どおり最後の因子を分ける形にした（主張は不変）。Lean に人手と 1 対 1 の具体版 `CheckFermiSetup.trace_projFactor_finProdLeft` と同じ手順の必要十分版 `NecSuf/TraceOfNumberOperatorProductByLastFactor.lean`・導出を置き、`tr(Q̌_ε) = 1` の鎖 `trace_Qproj_step4` をそれ経由にした。SageMath は 050 の check_47。二回のレビューの指摘を直した。次は同じファイルの `check_joint_eigenspace_decomposition` から棚卸しを続ける。

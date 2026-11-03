@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 394 件のうち、SageMath の検算が無いもの 44 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 395 件のうち、SageMath の検算が無いもの 43 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -294,9 +294,13 @@
   人手証明を直した（計算の誤りは無かった。主張の中身は不変）: 証明の散文を、(1) は σ(σ(μ)) = μ の 5 行の鎖と単射の 3 行の鎖・全射の段落に、(2) は def_check_Vprime の X̌ から始まる鎖に替えた。主張 (2) の実数係数を (·)_C で書き、主張 (1) の「対合である。したがって M̌ の外の添字は要らない」を、写像であること（def_check_index_set (2)）・対合・個数・添字の帰属に分けて根拠を付けた。二回のレビューで指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は変えていない）: `DefinitionCheckNumberOperator.lean` の `conjIdx_involutive` は `simp` 一つで、人手の σ(σ(μ)) の 5 行の鎖・単射・全射の鎖と 1 対 1 でない（単射は `Function.Involutive.injective`、全射は無い）。
 
+- `iH_is_real_symmetric`（`S_1^{(+)} = i(K_1)_ℂH_1^{(+)}` と `S_2 = i(K_2^*)_ℂH_2` は実対称でエルミート）: `sagemath/check/iH_is_real_symmetric/`。
+  証明の各行の検算 11 本は、Lean の通しの証明の連続実行が証明を書き直すたびに `050_claim_even_sector_eigenvalues/` の `check_22`・`check_37`〜`check_46` として足していたが、そのディレクトリの対象ラベルは `eigenvalues_of_V_plus` だけなので、この主張は未検算に数えられていた。11 本を内容の名前でこのディレクトリへ移し（中身は不変。旧い名前との対応は overview.md の「由来」）、050 の overview から行を外して移し先を書いた。全て `QQ(i)` とその上の多項式環の厳密等号である。
+  レビューの必須の指摘で、`(S_1^{(+)})^⊤` の鎖の否定コントロールが「`Y_1Z_2` は対称でない」と称して別の行列 `σ_1^yσ_2^z` を見ていた（本当の `Y_1Z_2 = (-i)σ_1^zσ_2^z` は対称）のを、「各項へ」の行が転置で不変でない項で外れることを確かめる形に直した。構成上一致する比較の記述を overview に足した。人手証明は、Step 0 の最後の段落の使われていない可換性の文（`distinct_site_pauli_matrices_commute`）を外した（主張は不変）。計算の誤りは無かった。二回のレビューで必須の指摘が無くなった。
+
 ## 次の一歩
 
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `iH_is_real_symmetric`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `sign_flip_conjugation`（`--list` の先頭）から、文書順に検算を足す。この章のブロックの多くは `050_claim_even_sector_eigenvalues/` に番号付きの検算を持つが対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`iH_is_real_symmetric` と同じく、該当する検算を内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめてから足りない行を足す（`sign_flip_conjugation` は 050 の check_09・check_11〜check_21）。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
