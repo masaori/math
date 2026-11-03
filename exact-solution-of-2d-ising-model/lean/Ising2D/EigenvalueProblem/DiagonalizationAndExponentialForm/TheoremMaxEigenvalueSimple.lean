@@ -97,7 +97,7 @@ theorem sum_checkIdx {β : Type*} [AddCommMonoid β] (f : ℤ → β) (M : ℕ) 
   exact Finset.sum_image fun x _ y _ hxy => checkIdxFinset_injOn hxy
 
 /-- 代表点の一致: `t^{(M)}_μ` を `δ = 1/2` で取ったものが `θ~_μ` である
-（人手証明 `max_eigenvalue_of_V_plus_simple` (1) の `Θ^{(1/2)}_M = {θ~_μ}`）。 -/
+（人手の `θ~_μ = θ^{(1/2)}_{M,μ}`。`def_Theta_delta_M` と `antiperiodic_exp_sum` の `θ~_μ` の定義。Lean では `ℕ` と `ℤ` の添字の実数への包含を付け替える）。 -/
 theorem tagPoint_half_eq_thetaTilde (M : ℕ) (k : ℕ) :
     tagPoint (1 / 2) M (k + 1) = thetaTilde M ((k : ℤ) + 1) := by
   unfold tagPoint thetaTilde
@@ -112,24 +112,6 @@ section MaxSimple
 
 variable {M : ℕ}
 
-/-- **原文 `max_eigenvalue_of_V_plus_simple` (1)**: `Λ̌_max = Λ^{(1/2)}_M`。 -/
-theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
-    (g : CheckIdx M → ℝ) (hg : ∀ i : CheckIdx M, g i = gammaFn P (thetaTilde M i.1)) :
-    checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ = LambdaM P (1 / 2) M := by
-  have hgval : F.gval g Finset.univ
-      = 1 / 2 * ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint (1 / 2) M μ) := by
-    rw [Ising2D.sum_Icc_one_eq_sum_range]
-    have h1 : ∑ k ∈ Finset.range M, gammaFn P (tagPoint (1 / 2) M (k + 1))
-        = ∑ k ∈ Finset.range M, gammaFn P (thetaTilde M ((k : ℤ) + 1)) :=
-      Finset.sum_congr rfl fun k _ => by rw [tagPoint_half_eq_thetaTilde]
-    rw [h1, ← sum_checkIdx (fun μ => gammaFn P (thetaTilde M μ)) M]
-    rw [CheckFermiSetup.gval, Finset.mul_sum]
-    refine Finset.sum_congr rfl fun i _ => ?_
-    rw [hg i]
-    simp
-    ring
-  rw [checkBigLambda, LambdaM, hgval]
-
 open CheckFermiSetup in
 /-- 人手の `ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ - 1/2)` を、`Fin M` の上の和で書く（`ℝ` の値）。
 人手の添字 `μ = j + 1`（`checkIdxOfFin`）へ付け替える段で、人手の鎖の行ではない（`gval_eq_sum_fin` の `ℝ` の版）。 -/
@@ -139,6 +121,50 @@ theorem gval_eq_sum_fin_real (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (T
   rw [CheckFermiSetup.gval]
   exact (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
     (fun _ => rfl)).symm
+
+/-- `def_Lambda_delta_M` の添字 `μ = 1, …, M_col` の和を、人手の有限和の Lean での書き方（`Fin M` の上の和、`μ = j + 1`。
+`ClaimFiniteSumsOfRealNumbers.lean` の冒頭）へ付け替える。`LambdaM` は `Finset.Icc 1 M` の上の和で書いてあるので、
+その読み替えの段で、人手の鎖の行ではない。 -/
+theorem sum_Icc_one_gammaFn_tagPoint_eq_sum_fin (P : IsingParam) (δ : ℝ) (M : ℕ) :
+    ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint δ M μ)
+      = ∑ j : Fin M, gammaFn P (tagPoint δ M ((j : ℕ) + 1)) := by
+  rw [Ising2D.sum_Icc_one_eq_sum_range, Finset.sum_range (fun k => gammaFn P (tagPoint δ M (k + 1)))]
+
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (1)**: `Λ̌_max = Λ^{(1/2)}_M`。人手の 4 行の鎖と 1 対 1 の calc。
+
+人手の `Λ̌_max` は Lean の `checkBigLambda … Finset.univ`（`ε = (1,…,1)`）である。1 行目の `eigenvalues_of_V_plus` (2) の表式は、
+Lean では `checkBigLambda` の定義と `ǧ(1,…,1) = (1/2)Σ_{μ=1}^{M_col} γ(θ~_μ)` の展開で出す（`eigenvalues_of_V_plus` (2) の Lean の主張は無い）。
+人手の `Σ_{μ=1}^{M_col}` は `Fin M` の上の和（`μ = j + 1`）、`γ(θ~_μ)` は仮定 `hg` の `g`（`gammaFn P (thetaTilde M μ)`）である。
+最後の行は `LambdaM` の定義と、その和の添字の付け替え `sum_Icc_one_gammaFn_tagPoint_eq_sum_fin`（人手の鎖の行ではない）。 -/
+theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
+    (g : CheckIdx M → ℝ) (hg : ∀ i : CheckIdx M, g i = gammaFn P (thetaTilde M i.1)) :
+    checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ = LambdaM P (1 / 2) M :=
+  calc checkBigLambda F g (Real.sinh (2 * P.K2)) Finset.univ
+      = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
+          * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (thetaTilde M ((j : ℤ) + 1))) := by
+        rw [checkBigLambda, gval_eq_sum_fin_real, Finset.mul_sum]
+        congr 2
+        refine Finset.sum_congr rfl fun j _ => ?_
+        rw [hg (CheckFermiSetup.checkIdxOfFin j), if_pos (Finset.mem_univ _)]
+        simp only [CheckFermiSetup.checkIdxOfFin]
+        ring
+                                                        -- `eigenvalues_of_V_plus` (2)
+    _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
+          * Real.exp (1 / 2 * ∑ j : Fin M,
+              gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / M)) := rfl
+                                                        -- `antiperiodic_exp_sum` の `θ~_μ` の定義を各項へ同時適用
+    _ = (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2)
+          * Real.exp (1 / 2 * ∑ j : Fin M, gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1))) := by
+        have h : ∀ j : Fin M, gammaFn P (2 * Real.pi * ((((j : ℤ) + 1 : ℤ) : ℝ) - 1 / 2) / M)
+            = gammaFn P (tagPoint (1 / 2) M ((j : ℕ) + 1)) := fun j => by
+          rw [tagPoint_half_eq_thetaTilde M j]
+          rfl
+        simp only [h]
+                                                        -- `def_Theta_delta_M`（`δ → 1/2`）を右辺から左辺へ、各項へ同時適用
+                                                        -- （人手の `μ ∈ ℤ` の包含 `μ_ℝ` と、`tagPoint` の `ℕ` の添字の包含の付け替えは `tagPoint_half_eq_thetaTilde`）
+    _ = LambdaM P (1 / 2) M := by
+        rw [LambdaM, sum_Icc_one_gammaFn_tagPoint_eq_sum_fin]
+                                                        -- `def_Lambda_delta_M`（`δ → 1/2`）を右辺から左辺へ
 
 open CheckFermiSetup in
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (2) の `ǧ(1,…,1) − ǧ(ε)` の鎖**: `γ(θ~_μ) > 0` かつ `ε ≠ (1,…,1)` なら

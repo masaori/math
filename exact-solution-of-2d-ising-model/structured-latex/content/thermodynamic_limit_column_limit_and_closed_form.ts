@@ -934,10 +934,6 @@ u
         " を固定し、",
         math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2}`),
         " について ",
-        ref("def_Theta_delta_M"),
-        " の ",
-        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)}`),
-        " と ",
         ref("def_Lambda_delta_M"),
         " の ",
         math(String.raw`\Lambda^{(\delta)}_{M_{\mathrm{col}}}`),
@@ -985,56 +981,30 @@ u
         String.raw`\begin{aligned}
 \log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
 &=\log\left(\left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}
-\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
+\exp\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)\right)\right)
 &&\left(\because\ \Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の定義。}\blkref{def_Lambda_delta_M}\right)\\
 &=\log\left(\left(2\sinh 2K_2\right)^{M_{\mathrm{col}}/2}\right)
-+\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)\right)\right)
 &&\left(\because\ \text{積の対数 }\log(ab)=\log a+\log b\right)\\
 &=\frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
-+\log\left(\exp\left(\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)\right)\right)
++\log\left(\exp\left(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)\right)\right)
 &&\left(\because\ \text{冪の対数 }\log(x^{r})=r\log x\right)\\
 &=\frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
-+ \frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
++ \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)
 &&\left(\because\ \log(\exp(y))=y\right)
 \end{aligned}`,
       ),
       paragraph(["を得る。"]),
       paragraph([
-        "ここで集合 ",
-        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)}`),
-        " 上の和を添字 ",
-        math(String.raw`\mu`),
-        " についての和に書き換える。写像 ",
-        math(String.raw`\mu \mapsto \dfrac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}`),
-        " は ",
-        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
-        " 上単射である。実際、",
-        math(String.raw`\mu,\nu\in\{1,\dots,M_{\mathrm{col}}\}`),
-        " と ",
-        math(String.raw`\mu \neq \nu`),
-        " を仮定すると、一続きに",
+        "ここで ",
+        math(String.raw`\theta^{(\delta)}_{M_{\mathrm{col}},\mu}`),
+        " を展開する。一続きに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}-\frac{2\pi(\nu-\delta)}{M_{\mathrm{col}}}
-&=\frac{2\pi(\mu-\nu)}{M_{\mathrm{col}}}
-&&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
-&\ne0
-&&\left(\because\ \frac{2\pi}{M_{\mathrm{col}}}>0\text{ かつ }\mu-\nu\ne0\right)
-\end{aligned}`,
-      ),
-      paragraph([
-        "を得る。よって ",
-        math(String.raw`\Theta_{M_{\mathrm{col}}}^{(\delta)}`),
-        " はちょうど ",
-        math(String.raw`M_{\mathrm{col}}`),
-        " 個の元をもち、一続きに",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
-&=\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
-&&\left(\because\ \mu\mapsto\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\text{ は }\{1,\dots,M_{\mathrm{col}}\}\text{ から }\Theta_{M_{\mathrm{col}}}^{(\delta)}\text{ への全単射。}\blkref{def_Theta_delta_M}\right)
+\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)
+&=\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
+&&\left(\because\ \blkref{def_Theta_delta_M}\text{ を各項へ同時適用}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -1047,17 +1017,17 @@ u
 \frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
 &=\frac{1}{M_{\mathrm{col}}}\left(
   \frac{M_{\mathrm{col}}}{2}\log\left(2\sinh 2K_2\right)
-  +\frac{1}{2}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
+  +\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)
 \right)
 &&\left(\because\ \text{上で得た }\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の表示を代入}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2M_{\mathrm{col}}}\sum_{\theta\in\Theta_{M_{\mathrm{col}}}^{(\delta)}}\gamma(\theta)
++\frac{1}{2M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\bigl(\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\bigr)
 &&\left(\because\ \mathbb{R}\text{ の四則}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
-&&\left(\because\ \text{上で得た添字の取り替え}\right)\\
++\frac{1}{2M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
+&&\left(\because\ \text{上で得た }\theta^{(\delta)}_{M_{\mathrm{col}},\mu}\text{ の展開}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
++\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
 &&\left(\because\ \mathbb{R}\text{ の四則}\right)
 \end{aligned}`,
       ),
@@ -1075,11 +1045,17 @@ u
         " なので、",
         ref("riemann_sum_to_integral"),
         " を ",
-        math(String.raw`g = \gamma`),
-        " として適用でき",
+        math(String.raw`g \to \gamma,\ M \to M_{\mathrm{col}}`),
+        " として適用でき（",
+        ref("riemann_sum_to_integral"),
+        " の ",
+        math(String.raw`t^{(M_{\mathrm{col}})}_\mu`),
+        " が ",
+        math(String.raw`\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}`),
+        " に当たる）",
       ]),
       displayMath(
-        String.raw`\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
+        String.raw`\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
 \ \xrightarrow[M_{\mathrm{col}}\to\infty]{}\ \frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta`,
       ),
       paragraph([
@@ -1090,14 +1066,14 @@ u
 \lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}
 &=\lim_{M_{\mathrm{col}}\to\infty}\left(
   \frac{1}{2}\log\left(2\sinh 2K_2\right)
-  +\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
+  +\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
 \right)
 &&\left(\because\ \text{上で得た }\frac{1}{M_{\mathrm{col}}}\log\Lambda^{(\delta)}_{M_{\mathrm{col}}}\text{ の表示を代入}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\lim_{M_{\mathrm{col}}\to\infty}\left(\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)\right)
++\lim_{M_{\mathrm{col}}\to\infty}\left(\frac{1}{2}\cdot\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)\right)
 &&\left(\because\ \text{収束する実数列に定数を加えた列は収束し、極限に定数が加わる}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
-+\frac{1}{2}\cdot\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu-\delta)}{M_{\mathrm{col}}}\right)
++\frac{1}{2}\cdot\lim_{M_{\mathrm{col}}\to\infty}\frac{1}{M_{\mathrm{col}}}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma\!\left(\frac{2\pi(\mu_{\mathbb R}-\delta)}{(M_{\mathrm{col}})_{\mathbb R}}\right)
 &&\left(\because\ \text{収束する実数列の定数倍は収束し、極限が定数倍になる}\right)\\
 &=\frac{1}{2}\log\left(2\sinh 2K_2\right)
 +\frac{1}{2}\cdot\frac{1}{2\pi}\int_0^{2\pi}\gamma(\theta)\,d\theta
@@ -1123,6 +1099,7 @@ u
       status: "added",
       notes: [
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03: def_Theta_delta_M を集合 Θ^{(δ)}_{M_col} から添字 μ の族 θ^{(δ)}_{M_col,μ} へ、def_Lambda_delta_M の和を添字の和へ改めたのに合わせ、集合の上の和を添字の和に替え、写像 μ ↦ 2π(μ−δ)/M_col の単射性と集合の上の和の付け替えの段落を、θ^{(δ)}_{M_col,μ} の展開の 1 行に替えた。主張から集合 Θ への言及を外した（主張は不変）。",
       ],
     },
   },

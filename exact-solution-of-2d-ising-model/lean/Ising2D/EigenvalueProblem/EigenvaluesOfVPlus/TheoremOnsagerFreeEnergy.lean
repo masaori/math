@@ -3,7 +3,7 @@
 
 人手証明（`def_Theta_delta_M`・`def_Lambda_delta_M` の正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`、
 `onsager_free_energy_expression` の正本は `structured-latex/content/thermodynamic_limit_column_limit_and_closed_form.ts`）:
-- `freeenergy_definition_Theta_delta_M`（ラベル `def_Theta_delta_M`）: `Θ^{(δ)}_M` の定義（集合としては定義せず `tagPoint` の値で代える）
+- `freeenergy_definition_Theta_delta_M`（ラベル `def_Theta_delta_M`）: 代表点の族 `θ^{(δ)}_{M,μ} = 2π(μ-δ)/M` の定義（`tagPoint δ M μ`）
 - `freeenergy_definition_Lambda_delta_M`（ラベル `def_Lambda_delta_M`）: `Λ^{(δ)}_M` の定義（`LambdaM`）
 - `freeenergy_005_theorem_onsager_expression`（ラベル `onsager_free_energy_expression`）
 
@@ -12,7 +12,7 @@
 `Ising2D.NecSuf.tendsto_affine`）と `Ising2D/NecSuf/RiemannSum.lean`
 （`Ising2D.NecSuf.tendsto_riemann_sum`）。
 
-  `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{θ ∈ Θ^{(δ)}_M} γ(θ))`
+  `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{μ=1}^{M} γ(θ^{(δ)}_{M,μ}))`
   `(1/M) log Λ^{(δ)}_M → (1/2) log(2 sinh 2K_2) + (1/4π) ∫_0^{2π} γ(θ) dθ`
 
 ## 他章への依存
@@ -30,8 +30,9 @@ namespace Ising2D
 open Filter MeasureTheory
 open scoped Topology
 
-/-- 人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{θ ∈ Θ^{(δ)}_M} γ(θ))`。
-`Θ^{(δ)}_M = { 2π(μ-δ)/M | μ = 1,…,M }`（人手証明 `def_Theta_delta_M`。`tagPoint`）。 -/
+/-- 人手証明 `def_Lambda_delta_M` の `Λ^{(δ)}_M := (2 sinh 2K_2)^{M/2} exp((1/2) Σ_{μ=1}^{M} γ(θ^{(δ)}_{M,μ}))`。
+`θ^{(δ)}_{M,μ} = 2π(μ-δ)/M`（人手証明 `def_Theta_delta_M`。`tagPoint δ M μ`）。人手の `Σ_{μ=1}^{M}` を `Finset.Icc 1 M` の上の和で書く
+（`Fin M` の上の和への付け替えは `sum_Icc_one_gammaFn_tagPoint_eq_sum_fin`）。 -/
 noncomputable def LambdaM (P : IsingParam) (δ : ℝ) (M : ℕ) : ℝ :=
   (2 * Real.sinh (2 * P.K2)) ^ ((M : ℝ) / 2) *
     Real.exp (1 / 2 * ∑ μ ∈ Finset.Icc 1 M, gammaFn P (tagPoint δ M μ))

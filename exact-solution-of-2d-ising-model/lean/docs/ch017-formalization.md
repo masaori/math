@@ -133,9 +133,10 @@
 | `checkBigLambda_max_mul_min` | `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2` | 同 |
 | `cos_thetaTilde_lt_one` / `one_lt_gamma1R_thetaTilde_checkIndex` | `cos θ~_μ < 1`, `γ_1(θ~_μ) > 1` | 章 015 `gamma1_gt_1_theta_tilde` |
 | `gammaFn_thetaTilde_pos` | **`γ(θ~_μ) > 0`** | 章 015 `gamma_theta_tilde_mu_positive` |
-| `checkIdxFinset_injOn` / `sum_checkIdx` | `𝓜̌` 上の和を `{0,…,M-1}` 上の和へ付け替える（`μ = k+1`） | `max_eigenvalue_of_V_plus_simple` (1) の `Θ^{(1/2)}_M` の元数え |
-| `tagPoint_half_eq_thetaTilde` | `t^{(M)}_μ|_{δ=1/2} = θ~_μ` | 同 (1) |
-| `checkBigLambda_univ_eq_LambdaM` | **`Λ̌_max = Λ^{(1/2)}_M`** | `max_eigenvalue_of_V_plus_simple` (1) |
+| `checkIdxFinset_injOn` / `sum_checkIdx` | `𝓜̌` 上の和を `{0,…,M-1}` 上の和へ付け替える（`μ = k+1`） | （人手の鎖の行ではない添字の付け替え） |
+| `tagPoint_half_eq_thetaTilde` | `t^{(M)}_μ|_{δ=1/2} = θ~_μ` | `def_Theta_delta_M`（`θ~_μ = θ^{(1/2)}_{M,μ}`） |
+| `sum_Icc_one_gammaFn_tagPoint_eq_sum_fin` | `Λ^{(δ)}_M` の `Finset.Icc 1 M` の和を `Fin M` の和へ付け替える | （人手の鎖の行ではない添字の付け替え） |
+| `checkBigLambda_univ_eq_LambdaM` | **`Λ̌_max = Λ^{(1/2)}_M`**（人手の 4 行の鎖と 1 対 1 の calc） | `max_eigenvalue_of_V_plus_simple` (1) |
 | `gval_lt_gval_univ` / `checkBigLambda_lt_checkBigLambda_univ` / `checkBigLambda_lt_max_of_gammaFn` | **`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_max`（狭義）**。前の 2 つは人手の (2) の `ǧ(1,…,1) − ǧ(ε)` の鎖・`Λ̌_ε` の鎖と 1 対 1 の calc（添字の付け替えは `gval_eq_sum_fin_real`）。`checkBigLambda_lt_max` は必要十分版 `NecSuf.sum_weight_lt_of_ne_univ`（同じ並びの calc。添字は任意の有限型）の特殊化 | 同 (2) |
 | `checkBigLambda_smul_Qproj_mulVec_of_eigen` | `V^{(+)}x = Λ̌_max x` なら `Λ̌_{ε'}(Q̌_{ε'}x) = Λ̌_max(Q̌_{ε'}x)`（人手の 5 行の鎖と 1 対 1） | 同 (3) の左から `Q̌_{ε'}` を掛ける鎖 |
 | `Qproj_mulVec_eq_zero_of_eigen` | `ε' ≠ (1,…,1)` なら `Q̌_{ε'}x = 0`（人手の `d(Q̌_{ε'}x) = O` の 4 行と `Q̌_{ε'}x = O` の 5 行と 1 対 1 の calc） | 同 (3) の割り算の鎖 |

@@ -7,7 +7,7 @@
 #       3 行目: (2 sinh 2K_2)^{M/2} exp( sum gamma(t~_mu)(psi^dagger_mu psi_{M+1-mu} - I/2) )（def_check_Vprime の X^）
 #       4 行目: (2 sinh 2K_2)^{M/2} exp( sum gamma(t~_mu)(n^_mu - I/2) )               （def_check_number_operator）
 #   (2) V^{(+)} Q^_eps = Lambda^_eps Q^_eps（全 eps）                                  （eigenvalues_of_V_plus (1)）
-#   (3) Lambda^{(1/2)}_M（def_Theta_delta_M・def_Lambda_delta_M の定義どおり、集合 Theta と gamma(theta) から作る）
+#   (3) Lambda^{(1/2)}_M（def_Theta_delta_M・def_Lambda_delta_M の定義どおり、族 theta^{(1/2)}_{M,mu} の添字の和で作る）
 #       = Lambda^_{(1,...,1)} = (2 sinh 2K_2)^{M/2} exp(sum gamma(t~_mu)(1 - 1/2))
 #       = (2 sinh 2K_2)^{M/2} exp(sum gamma(t~_mu) * 1/2) = (2 sinh 2K_2)^{M/2} exp((1/2) sum gamma(t~_mu))
 #   (4) eps != (1,...,1) なら Lambda^_eps < Lambda^_{(1,...,1)}、max_eps Lambda^_eps = Lambda^_{(1,...,1)}。
@@ -49,10 +49,14 @@ def gamma_of_theta(t, P):
 
 
 def Lambda_delta_from_definition(M, delta, P):
-    """def_Theta_delta_M と def_Lambda_delta_M を定義どおりに: Theta を集合として作り、その元で和を取る"""
-    Theta = set(RDF(2 * pi * (mu - delta) / M) for mu in range(1, M + 1))
+    """def_Theta_delta_M と def_Lambda_delta_M を定義どおりに: 族 θ^{(δ)}_{M,μ} = 2π(μ−δ)/M（μ = 1,…,M）を作り、
+    μ = 1 から左へ順に γ(θ^{(δ)}_{M,μ}) を足す。返す 2 つ目の値は族の項の数"""
+    theta = [RDF(2 * pi * (mu - delta) / M) for mu in range(1, M + 1)]
     pref = RDF((2 * P['s2']) ** (RDF(M) / 2))
-    return RDF(pref * exp(RDF(1) / 2 * sum(gamma_of_theta(t, P) for t in Theta))), len(Theta)
+    total = RDF(0)
+    for t in theta:
+        total = total + gamma_of_theta(t, P)
+    return RDF(pref * exp(RDF(1) / 2 * total)), len(theta)
 
 
 ok_all = True
