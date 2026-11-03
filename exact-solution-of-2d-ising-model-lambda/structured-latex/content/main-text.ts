@@ -60163,6 +60163,11 @@ n^{\mathrm{sm}}_{w,a}(\gamma;k,l)&=|S^{\mathrm{sm}}_{w,a}|
                           kind: "definition",
                           title: { text: "平滑化後の頂点ごとの横断数" },
                           labels: ["def_smoothed_vertexwise_crossing_number"],
+                          lean: [
+                            "Ising2DLambda.KacWard.smoothedVertexwiseCrossingNumber",
+                            "Ising2DLambda.NecSuf.KacWard.smoothedVertexwiseCrossingNumber",
+                            "Ising2DLambda.KacWard.smoothedVertexwiseCrossingNumber_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([
@@ -60219,7 +60224,7 @@ r<s,\ \operatorname{tgt}(\vec e_r)=\operatorname{tgt}(\vec e_s)=w,\
                         displayMath(String.raw`\begin{aligned}
 c_v^{\mathrm{sm}}(\gamma;k,l)
 &=n_{v,0}^{\mathrm{sm}}(\gamma;k,l)\,n_{v,1}^{\mathrm{sm}}(\gamma;k,l)
-&&\bigl(\because\ \text{二軸の直進通過の直積と }\blkref{def_smoothed_vertexwise_crossing_number}\bigr)\\
+&&\bigl(\because\ \blkref{claim_vertex_crossing_number_factorization}\text{ の全単射と }\blkref{def_smoothed_vertexwise_crossing_number}\bigr)\\
 &=\bigl(n_{v,0}(\gamma)-1\bigr)n_{v,1}^{\mathrm{sm}}(\gamma;k,l)
 &&\bigl(\because\ \blkref{claim_smoothing_straight_visit_count_update}\text{ を軸 }0\text{ に適用}\bigr)\\
 &=\bigl(n_{v,0}(\gamma)-1\bigr)\bigl(n_{v,1}(\gamma)-1\bigr)

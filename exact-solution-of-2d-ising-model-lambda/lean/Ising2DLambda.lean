@@ -973,6 +973,8 @@ import Ising2DLambda.NecSuf.KacWard.VertexCrossingFactorization
 import Ising2DLambda.KacWard.VertexCrossingFactorization
 import Ising2DLambda.NecSuf.KacWard.SmoothingStraightVisitCount
 import Ising2DLambda.KacWard.SmoothingStraightVisitCount
+import Ising2DLambda.NecSuf.KacWard.SmoothedVertexwiseCrossingNumber
+import Ising2DLambda.KacWard.SmoothedVertexwiseCrossingNumber
 import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
