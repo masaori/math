@@ -34656,7 +34656,12 @@ S_{n,m}
                           "準備を 1 つ置く。", math(String.raw`n\ge1`),
                           " なので、自然数の除法により、",
                         ]),
-                        displayMath(String.raw`m=nq+r,\qquad 0\le r<n`),
+                        displayMath(String.raw`\begin{aligned}
+m&=nq+r
+&&(\because\ n\ge1\text{ に対する自然数の除法})\\
+0&\le r<n
+&&(\because\ n\text{ で割った余りの範囲})
+\end{aligned}`),
                         paragraph([
                           "を満たす ", math(String.raw`q,r\in\mathbb{N}`),
                           " を取る。ここで ", math(String.raw`r\ne0`), " である。もし ",
@@ -59855,6 +59860,11 @@ c(\gamma)&=|C|
                           kind: "definition",
                           title: { text: "頂点と軸を固定した直進通過数" },
                           labels: ["def_vertex_axis_straight_visit_count"],
+                          lean: [
+                            "Ising2DLambda.KacWard.vertexAxisStraightVisitCount",
+                            "Ising2DLambda.NecSuf.KacWard.vertexAxisStraightVisitCount",
+                            "Ising2DLambda.KacWard.vertexAxisStraightVisitCount_from_necSuf",
+                          ],
                           habitat: "N",
                           statement: [
                             paragraph([
