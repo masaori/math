@@ -33,7 +33,7 @@
   作用を `B_1 B_2 B_1` と計算しているのはこの合成則そのものである。
 * 行ベクトルと `2×2` 行列の積 `(z, y) G` を `rowMul`、行ベクトルへの作用 `(T z, T y)` を `rowApply` とする
   （`calc_of_TxT_check_Z_Y` の定め方。`ActsBy T z y B` は `rowApply T (z, y) = rowMul (z, y) B` と同値で、
-  それが `actsBy_iff_rowApply_eq_rowMul`）。`commutation_V_plus_check_psi` の結合律と Step 1 がこの 2 つの上で述べられる。
+  それが `actsBy_iff_rowApply_eq_rowMul`）。`commutation_V_plus_check_psi` の準備 2（結合律）と準備 3 がこの 2 つの上で述べられる。
 
 ## `T_{(V)}` の `hat(Z)^{(-)}, hat(Y)` への作用の置き場
 

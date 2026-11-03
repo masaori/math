@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 374 件のうち、SageMath の検算が無いもの 50 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 375 件のうち、SageMath の検算が無いもの 49 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -261,13 +261,23 @@
   人手証明を直した: 「和についての加法性も分配法則から従う」の散文を `anticommutator_of_finite_sums_of_scalar_multiples` による係数を残した展開（準備 2）に、名前だけの「反交換子の対称性」を `def_matrix_anticommutator`・`matrix_sum_is_commutative` の鎖に、δ = 0 の場合の散文を準備 3 の鎖に。`abs_basic_properties` を |−z| = |z|・|z̄| = |z| の根拠に引いていた（この性質を述べていない）のを、`def_complex_conjugate`・`definition_of_cc` の積・`abs_basic_properties` (1) の成分の鎖に。ℂ の符号と逆元の規則（(−1)(−1) = 1、z(−w) = −(zw)、(zw)^{-1} = z^{-1}w^{-1}、(−z)^{-1} = −(z^{-1})、逆元をもてば 0 でない）を準備 4 の鎖に。係数を u^∓_λ := (∓ρ_λ)d_λ^{-1}、h := 1_C t^{-1} と置き、`def_check_fermi` の √M_col・r・2 を包含の像で読み、ℝ への脱出（ℝ_{≥0} の平方根 s・r）を明示した。主張の I・O を Mat(2^{(M_col)_ℕ},ℂ) の元と書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。
   申し送り（Lean の連続実行の受け持ち。Lean は不変）: `ClaimAnticommutatorCheckPsi.lean` の注記は旧い Step 1〜4 の段の名前のままで、新しい準備 1〜5 と三つの式の鎖との 1 対 1 の対応の見直しが要る。
 
+- `commutation_V_plus_check_psi`（V^{(+)} と ψ̌ の交換関係）: `sagemath/check/commutation_V_plus_check_psi/`。
+  準備 1・準備 2 は X_1, X_2 と G, H の成分を QQ 上の不定元に、準備 3 は G の成分を数体上の不定元に（M_col = 2, 3）、本体の 17 式・成分の二本の鎖・主張は M_col = 2..4 の全 μ で、
+  K_1 = 2 log y・K_2 = log x と選んで Ž・Y̌・S・V_2・A(θ̃)・P̌・Ď を一つの数体（必要なら r_μ = |γ_2| の二次拡大）に置いて厳密に確かめた。exp(±γ) は def_arccosh により γ_1 ± √(γ_1²−1) と AA で比べ、ボールは照合だけに使った。
+  検算を書く途中で、準備の c_1, s_1 を cosh K_1 と誤って入れ、T_V_plus_check_Z_Y の行が落ちた（def_indexed_hyperbolic_abbreviations の c_1 := cosh 2K_1 に直して通った。本文の誤りではない）。
+  人手証明を直した: 冒頭の結合律の散文を、組と 2×2 行列の積の成分（準備 1）と和・スカラー倍の 4 本の主張と mat_mult を引く鎖（準備 2）に、定義の無い「行ベクトルへの作用の定め方」を使っていた Step 1 を、射影 pr_l で成分ごとに T_V_plus_is_conjugation・linearity_of_T を引く鎖（準備 3）に、
+  P̌^{-1} を def_invertible_elements_of_R（M → 1）の逆元、P̌ĎP̌^{-1} を (P̌Ď)P̌^{-1}、Ď の成分を包含の像と読むこと（準備 4）を書き、本体の P̌^{-1}P̌ = I・単位行列・Ď の成分・零行列の行に根拠を付けた。主張の右辺を (exp(±γ(θ̃_μ)))_C と書いた（中身は不変）。計算の誤りは無かった。
+  申し送り（Lean の連続実行の受け持ち）: `ClaimCommutationVPlusCheckPsi.lean` の注記を新しい準備 1〜3・本体の名前に合わせた（コメントのみ）。`rowApply_checkPsi_row` の calc は人手の 17 式のうち P̌^{-1}P̌ = I・単位行列・Ď の成分・零行列の行を `rw`・`simp` の 1 段にまとめており、1 対 1 の対応の見直しが要る。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `commutation_V_plus_check_psi`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`commutation_V_plus_check_psi` の書き直しで見つかった（根拠の欠けと表記。今回の差分より前から）: `diagonalization_check_P_D` は「det P̌ ≠ 0 より P̌^{-1} が存在する」とだけ書き、2×2 行列の逆行列を与えるブロック（det ≠ 0 なら def_invertible_elements_of_R の M = 1 の可逆元であること）が本文に無い。また同じ主張の Ď_μ は実数 λ_{±,μ} と 0 を包含の像を書かずに Mat(2,ℂ) の成分にしている。この単位では使う側の準備 4 で読み方を書いた。下流の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` は、この主張を旧い exp(±γ)ψ̌ の形で引いているので、その検算を足すときに (exp(±γ))_C にそろえる。
 
 - 2026-11-03、`anticommutator_of_check_psi` のレビューで見つかった（表記の省略。今回の差分より前から）: `def_check_fermi` と `diagonalization_check_P_D` は係数を `∓r/(2√M_col b)`・`1/(2√M_col)` と書き、実数 r・√M_col・2 を包含の像を書かずに ℂ の係数にしており、ℂ の商も定めずに使っている（ℂ の商が本文に無い件は既出）。この単位では使う側の証明で包含の像と z w^{-1} で読み替えた。定義の側を像の記号で書き直すのは、検算の付いたブロックの見直しで扱う。
 

@@ -6247,9 +6247,9 @@ u^{+}_\mu u^{+}_\nu + h\,h
         "）について",
       ]),
       displayMath(
-        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger,
+        String.raw`T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right) = \left(\exp(+\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu^\dagger,
 \qquad
-T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu`,
+T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \left(\exp(-\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu`,
       ),
       paragraph([
         "が成り立つ（",
@@ -6260,140 +6260,307 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\c
         math(String.raw`\gamma(\tilde\theta_\mu)`),
         " は ",
         ref("def_gamma_theta"),
-        "）。",
+        "、exp は実数の exp で、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像。右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍）。",
       ]),
     ],
     proof: [
       paragraph([
-        "以下、行ベクトルと ",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R := \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と ",
+        math(String.raw`R^\times`),
+        " を用い、",
+        math(String.raw`T := T_{(V^{(+)})} : R \to R`),
+        " と書く。組 ",
+        math(String.raw`(Y_1, Y_2) \in R \times R`),
+        " と ",
+        math(String.raw`l \in \{1, 2\}`),
+        " について ",
+        math(String.raw`\mathrm{pr}_l(Y_1, Y_2) := Y_l`),
+        " と書く。",
+        math(String.raw`G, H \in \mathrm{Mat}(2,\mathbb{C})`),
+        " の成分を ",
+        math(String.raw`g_{kl} := G_{kl}`),
+        "、",
+        math(String.raw`h_{kl} := H_{kl}`),
+        "（",
+        math(String.raw`k, l \in \{1,2\}`),
+        "）と書く。組と ",
         math(String.raw`2\times 2`),
         " 行列の積は ",
         ref("def_pair_of_matrices_times_two_by_two_matrix"),
-        " のものとする。まず、",
-        math(String.raw`A_0, B_0 \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
-        " と ",
-        math(String.raw`G, H \in \mathrm{Mat}(2,\mathbb{C})`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)H
-&= \begin{pmatrix}A_0, & B_0\end{pmatrix}\left(GH\right)
-   \quad (\because \text{行列の積の結合法則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "が成り立つ（結合律）。実際 ",
-        math(String.raw`G = \begin{pmatrix}g_{11} & g_{12} \\ g_{21} & g_{22}\end{pmatrix}`),
+        "、組と数の列の積は ",
+        ref("def_pair_of_matrices_times_column_of_numbers"),
         "、",
-        math(String.raw`H = \begin{pmatrix}h_{11} & h_{12} \\ h_{21} & h_{22}\end{pmatrix}`),
-        " とすると、左辺の第 ",
-        math(String.raw`l`),
-        " 列は ",
-        math(String.raw`\sum_{k=1}^{2} h_{kl}\left(g_{1k}A_0 + g_{2k}B_0\right)`),
-        "、右辺の第 ",
-        math(String.raw`l`),
-        " 列は ",
-        math(String.raw`\left(\sum_{k}g_{1k}h_{kl}\right)A_0 + \left(\sum_{k}g_{2k}h_{kl}\right)B_0`),
-        " であり、",
-        math(String.raw`\mathbb{C}`),
-        " 上のスカラー倍の分配律により両者は一致する。",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の積は ",
+        ref("mat_mult"),
+        "、有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        " と ",
+        ref("def_finite_sum_of_complex_numbers"),
+        " による。",
       ]),
       paragraph([
-        "Step 1（",
-        math(String.raw`T_{(V^{(+)})}`),
-        " の線型性を行ベクトルへ持ち上げる）。",
-        ref("V_plus_factors_invertible"),
-        " と ",
-        ref("T_V_plus_is_conjugation"),
-        " より ",
-        math(String.raw`V^{(+)} \in R^\times`),
-        " かつ ",
-        math(String.raw`T_{(V^{(+)})} = T_{V^{(+)}}`),
-        " なので、",
-        ref("linearity_of_T"),
-        " の一般形（",
-        math(String.raw`g \in R^\times`),
-        " について ",
-        math(String.raw`T_g(aX+bW) = aT_g(X) + bT_g(W)`),
-        "）が使える。よって ",
+        "準備 1（組と ",
+        math(String.raw`2\times 2`),
+        " 行列の積の成分）。",
+        math(String.raw`X_1, X_2 \in R`),
+        "、",
         math(String.raw`G \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`l \in \{1,2\}`),
         " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}\!\left(\begin{pmatrix}A_0, & B_0\end{pmatrix}G\right)
-&:= \left(T_{(V^{(+)})}\!\left(g_{11}A_0 + g_{21}B_0\right),\
-T_{(V^{(+)})}\!\left(g_{12}A_0 + g_{22}B_0\right)\right)
-   \quad (\because \text{行ベクトルへの作用の定め方}) \\
-&= \left(g_{11}T_{(V^{(+)})}(A_0)+g_{21}T_{(V^{(+)})}(B_0),\
-g_{12}T_{(V^{(+)})}(A_0)+g_{22}T_{(V^{(+)})}(B_0)\right)
-   \quad (\because T_{(V^{(+)})}\text{ の線型性を 2 列へ同時適用}) \\
-&= \begin{pmatrix}T_{(V^{(+)})}(A_0), & T_{(V^{(+)})}(B_0)\end{pmatrix}G
-   \quad (\because \text{行ベクトルと }2\times2\text{ 行列の積の定義})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{pr}_l\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)
+&= \mathrm{pr}_l\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}\begin{pmatrix}g_{11} \\ g_{21}\end{pmatrix},\
+   \begin{pmatrix}X_1, & X_2\end{pmatrix}\begin{pmatrix}g_{12} \\ g_{22}\end{pmatrix}\right)
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_two_by_two_matrix}\ (d \to 2^{M_{\mathrm{col}}},\ A \to X_1,\ B \to X_2,\ p, q, r, s \to g_{11}, g_{12}, g_{21}, g_{22})\bigr)\\
+&= \begin{pmatrix}X_1, & X_2\end{pmatrix}\begin{pmatrix}g_{1l} \\ g_{2l}\end{pmatrix}
+&&\bigl(\because\ \mathrm{pr}_l\text{ の定め方}\bigr)\\
+&= g_{1l}X_1 + g_{2l}X_2
+&&\bigl(\because\ \blkref{def_pair_of_matrices_times_column_of_numbers}\bigr)\\
+&= \Bigl(\sum_{i=1}^{1} g_{il}X_i\Bigr) + g_{2l}X_2
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{ の }r = 1\text{ の式}\bigr)\\
+&= \sum_{i=1}^{2} g_{il}X_i
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\text{ の }r+1\text{ の式}\ (r \to 1)\bigr)
+\end{aligned}`),
       paragraph([
-        "が成り立つ（",
-        math(String.raw`G`),
-        " の成分は ",
-        math(String.raw`A_0, B_0`),
-        " に依らない複素数なので、線型性の係数として使える）。",
-      ]),
-      paragraph([
-        "Step 2（計算）。",
-        ref("def_check_fermi"),
-        "、Step 1、",
-        ref("T_V_plus_check_Z_Y"),
+        "準備 2（結合律）。",
+        math(String.raw`X_1, X_2 \in R`),
         "、",
-        ref("diagonalization_check_P_D"),
-        " を順に使う。",
+        math(String.raw`G, H \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`l \in \{1,2\}`),
+        " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\begin{pmatrix}T_{(V^{(+)})}(\check\psi_\mu^\dagger), & T_{(V^{(+)})}(\check\psi_\mu)\end{pmatrix}
-&= T_{(V^{(+)})}\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)
-   \quad (\because \check\psi_\mu,\check\psi_\mu^\dagger\text{ の定義}) \\
-&= \begin{pmatrix}T_{(V^{(+)})}(\check{Z}_\mu), & T_{(V^{(+)})}(\check{Y}_\mu)\end{pmatrix}\check{P}_\mu
-   \quad (\because \text{Step 1}) \\
-&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}A(\tilde\theta_\mu)\right)\check{P}_\mu
-   \quad (\because T_{(V^{(+)})}\text{ の }\check Z,\check Y\text{ への作用}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(A(\tilde\theta_\mu)\check{P}_\mu\right)
-   \quad (\because \text{行ベクトルと行列の積の結合法則}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
-   \left(\check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}\check{P}_\mu\right)
-   \quad (\because A(\tilde\theta_\mu) = \check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}) \\
-&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{D}_\mu\right)
-   \quad (\because \check{P}_\mu^{-1}\check{P}_\mu = I_{\mathrm{Mat}(2,\mathbb{C})}) \\
-&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{D}_\mu
-   \quad (\because \text{行ベクトルと行列の積の結合法則}) \\
-&= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu
-   \quad (\because \check\psi_\mu,\check\psi_\mu^\dagger\text{ の定義}) \\
-&= \begin{pmatrix}\lambda_{+,\mu}\,\check\psi_\mu^\dagger, & \lambda_{-,\mu}\,\check\psi_\mu\end{pmatrix}
-   \quad (\because \check D_\mu\text{ は対角成分 }\lambda_{+,\mu},\lambda_{-,\mu}\text{ の対角行列})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{pr}_l\!\left(\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)H\right)
+&= \sum_{k=1}^{2} h_{kl}\,\mathrm{pr}_k\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)
+&&\bigl(\because\ \text{準備 1}\ \bigl(X_k \to \mathrm{pr}_k((X_1, X_2)G),\ G \to H\bigr)\bigr)\\
+&= \sum_{k=1}^{2} h_{kl}\Bigl(\sum_{i=1}^{2} g_{ik}X_i\Bigr)
+&&\bigl(\because\ \text{準備 1 を }k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \sum_{k=1}^{2} \sum_{i=1}^{2} h_{kl}\left(g_{ik}X_i\right)
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples}\text{ を右辺から左辺へ、}k = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \sum_{k=1}^{2} \sum_{i=1}^{2} \left(h_{kl}g_{ik}\right)X_i
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\text{ を 4 か所へ同時適用}\bigr)\\
+&= \sum_{i=1}^{2} \sum_{k=1}^{2} \left(h_{kl}g_{ik}\right)X_i
+&&\bigl(\because\ \blkref{finite_double_sum_of_matrices_interchange}\bigr)\\
+&= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} h_{kl}g_{ik}\Bigr)X_i
+&&\bigl(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \sum_{i=1}^{2} \Bigl(\sum_{k=1}^{2} g_{ik}h_{kl}\Bigr)X_i
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\text{ の乗法の可換則を 4 か所へ同時適用}\bigr)\\
+&= \sum_{i=1}^{2} (GH)_{il}\,X_i
+&&\bigl(\because\ \blkref{mat_mult}\text{ を }i = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \mathrm{pr}_l\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}\left(GH\right)\right)
+&&\bigl(\because\ \text{準備 1 を右辺から左辺へ}\ (G \to GH)\bigr)
+\end{aligned}`),
+      paragraph(["であり、組は二つの成分で定まるので"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)H
+&= \left(\mathrm{pr}_1\!\left(\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)H\right),\
+   \mathrm{pr}_2\!\left(\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)H\right)\right)
+&&\bigl(\because\ \mathrm{pr}_1, \mathrm{pr}_2\text{ の定め方}\bigr)\\
+&= \left(\mathrm{pr}_1\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}\left(GH\right)\right),\
+   \mathrm{pr}_2\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}\left(GH\right)\right)\right)
+&&\bigl(\because\ \text{上の鎖を }l = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \begin{pmatrix}X_1, & X_2\end{pmatrix}\left(GH\right)
+&&\bigl(\because\ \mathrm{pr}_1, \mathrm{pr}_2\text{ の定め方}\bigr)
+\end{aligned}`),
       paragraph([
-        "直前の等式鎖の定義と代入は ", ref("def_check_fermi"), "、",
-        ref("T_V_plus_check_Z_Y"), "、", ref("diagonalization_check_P_D"),
-        " による。両辺の第 1 列・第 2 列を比べ、",
-        ref("lambda_eq_exp_gamma_theta_tilde"),
-        " を各列へ代入すると",
+        "準備 3（",
+        math(String.raw`T`),
+        " を組へ当てる）。",
+        ref("V_plus_factors_invertible"),
+        " により ",
+        math(String.raw`V^{(+)} \in R^\times`),
+        "、",
+        ref("T_V_plus_is_conjugation"),
+        " により写像として ",
+        math(String.raw`T = T_{V^{(+)}}`),
+        " である。",
+        math(String.raw`X_1, X_2 \in R`),
+        "、",
+        math(String.raw`G \in \mathrm{Mat}(2,\mathbb{C})`),
+        "、",
+        math(String.raw`l \in \{1,2\}`),
+        " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(V^{(+)})}\!\left(\check\psi_\mu^\dagger\right)
-&= \lambda_{+,\mu}\check\psi_\mu^\dagger
-   \quad (\because \text{上の行ベクトルの等式の第 1 列}) \\
-&= \exp(+\gamma(\tilde\theta_\mu))\check\psi_\mu^\dagger
-   \quad (\because \lambda_{+,\mu}=\exp(+\gamma(\tilde\theta_\mu))),\\[4pt]
-T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
-&= \lambda_{-,\mu}\check\psi_\mu
-   \quad (\because \text{上の行ベクトルの等式の第 2 列}) \\
-&= \exp(-\gamma(\tilde\theta_\mu))\check\psi_\mu
-   \quad (\because \lambda_{-,\mu}=\exp(-\gamma(\tilde\theta_\mu)))
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+T\!\left(\mathrm{pr}_l\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)\right)
+&= T\!\left(g_{1l}X_1 + g_{2l}X_2\right)
+&&\bigl(\because\ \text{準備 1 の第 1 式から第 4 式まで}\bigr)\\
+&= T_{V^{(+)}}\!\left(g_{1l}X_1 + g_{2l}X_2\right)
+&&\bigl(\because\ \blkref{T_V_plus_is_conjugation}\bigr)\\
+&= g_{1l}\,T_{V^{(+)}}(X_1) + g_{2l}\,T_{V^{(+)}}(X_2)
+&&\bigl(\because\ \blkref{linearity_of_T}\ (M \to M_{\mathrm{col}},\ g \to V^{(+)},\ a \to g_{1l},\ b \to g_{2l},\ X \to X_1,\ W \to X_2)\bigr)\\
+&= g_{1l}\,T(X_1) + g_{2l}\,T(X_2)
+&&\bigl(\because\ \blkref{T_V_plus_is_conjugation}\text{ を 2 か所へ同時適用}\bigr)\\
+&= \mathrm{pr}_l\!\left(\begin{pmatrix}T(X_1), & T(X_2)\end{pmatrix}G\right)
+&&\bigl(\because\ \text{準備 1 の第 1 式から第 4 式までを右辺から左辺へ}\ (X_i \to T(X_i))\bigr)
+\end{aligned}`),
+      paragraph(["であり、組は二つの成分で定まるので"]),
+      displayMath(String.raw`\begin{aligned}
+\left(T\!\left(\mathrm{pr}_1\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)\right),\
+T\!\left(\mathrm{pr}_2\!\left(\begin{pmatrix}X_1, & X_2\end{pmatrix}G\right)\right)\right)
+&= \left(\mathrm{pr}_1\!\left(\begin{pmatrix}T(X_1), & T(X_2)\end{pmatrix}G\right),\
+   \mathrm{pr}_2\!\left(\begin{pmatrix}T(X_1), & T(X_2)\end{pmatrix}G\right)\right)
+&&\bigl(\because\ \text{上の鎖を }l = 1, 2\text{ の 2 か所へ同時適用}\bigr)\\
+&= \begin{pmatrix}T(X_1), & T(X_2)\end{pmatrix}G
+&&\bigl(\because\ \mathrm{pr}_1, \mathrm{pr}_2\text{ の定め方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備 4（",
+        ref("diagonalization_check_P_D"),
+        " の記号の読み方）。",
+        math(String.raw`\check{P}_\mu^{-1}`),
+        " は ",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`1`),
+        " に取ったときの逆元（",
+        math(String.raw`\mathrm{Mat}(2^1,\mathbb{C}) = \mathrm{Mat}(2,\mathbb{C})`),
+        "）で、",
+        math(String.raw`\check{P}_\mu^{-1}\check{P}_\mu = I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " を満たす。三つの積 ",
+        math(String.raw`\check{P}_\mu\check{D}_\mu\check{P}_\mu^{-1}`),
+        " は ",
+        math(String.raw`(\check{P}_\mu\check{D}_\mu)\check{P}_\mu^{-1}`),
+        " と読む（",
+        ref("diagonalization_check_P_D"),
+        " の証明の Step 4 の鎖の第 4 式）。",
+        math(String.raw`\check{D}_\mu`),
+        " の実数の成分 ",
+        math(String.raw`\lambda_{\pm,\mu} \in \mathbb{R}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`(\lambda_{\pm,\mu})_{\mathbb{C}}`),
+        " と読む。すなわち ",
+        math(String.raw`(\check{D}_\mu)_{11} = (\lambda_{+,\mu})_{\mathbb{C}}`),
+        "、",
+        math(String.raw`(\check{D}_\mu)_{21} = (\check{D}_\mu)_{12} = 0_{\mathbb{C}}`),
+        "、",
+        math(String.raw`(\check{D}_\mu)_{22} = (\lambda_{-,\mu})_{\mathbb{C}}`),
+        " である（",
+        ref("diagonalization_check_P_D"),
+        " が非対角に書いた 0 は ",
+        math(String.raw`0_{\mathbb{C}}`),
+        " と読む）。以下の ",
+        math(String.raw`O`),
+        " は ",
+        ref("def_zero_matrix"),
+        " の零行列 ",
+        math(String.raw`O \in R`),
+        " である。",
+      ]),
+      paragraph([
+        "本体。",
+        ref("def_check_fermi"),
+        " の ",
+        math(String.raw`\left(\check\psi_\mu^\dagger, \check\psi_\mu\right) := \left(\check{Z}_\mu, \check{Y}_\mu\right)\check{P}_\mu`),
+        " から ",
+        math(String.raw`\check\psi_\mu^\dagger = \mathrm{pr}_1\!\left((\check{Z}_\mu, \check{Y}_\mu)\check{P}_\mu\right)`),
+        "、",
+        math(String.raw`\check\psi_\mu = \mathrm{pr}_2\!\left((\check{Z}_\mu, \check{Y}_\mu)\check{P}_\mu\right)`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\begin{pmatrix}T(\check\psi_\mu^\dagger), & T(\check\psi_\mu)\end{pmatrix}
+&= \left(T\!\left(\mathrm{pr}_1\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\right),\
+   T\!\left(\mathrm{pr}_2\!\left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\right)\right)
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr)\\
+&= \begin{pmatrix}T(\check{Z}_\mu), & T(\check{Y}_\mu)\end{pmatrix}\check{P}_\mu
+&&\bigl(\because\ \text{準備 3}\ (X_1 \to \check{Z}_\mu,\ X_2 \to \check{Y}_\mu,\ G \to \check{P}_\mu)\bigr)\\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}A(\tilde\theta_\mu)\right)\check{P}_\mu
+&&\bigl(\because\ \blkref{T_V_plus_check_Z_Y}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(A(\tilde\theta_\mu)\check{P}_\mu\right)
+&&\bigl(\because\ \text{準備 2}\ (G \to A(\tilde\theta_\mu),\ H \to \check{P}_\mu)\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \left(\left(\left(\check{P}_\mu\check{D}_\mu\right)\check{P}_\mu^{-1}\right)\check{P}_\mu\right)
+&&\bigl(\because\ \blkref{diagonalization_check_P_D}\text{ と準備 4}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \left(\left(\check{P}_\mu\check{D}_\mu\right)\left(\check{P}_\mu^{-1}\check{P}_\mu\right)\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ (m, n, p, q \to 2)\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}
+   \left(\left(\check{P}_\mu\check{D}_\mu\right)I_{\mathrm{Mat}(2,\mathbb{C})}\right)
+&&\bigl(\because\ \blkref{def_invertible_elements_of_R}\ (M \to 1)\text{ と準備 4}\bigr)\\
+&= \begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\left(\check{P}_\mu\check{D}_\mu\right)
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2)\bigr)\\
+&= \left(\begin{pmatrix}\check{Z}_\mu, & \check{Y}_\mu\end{pmatrix}\check{P}_\mu\right)\check{D}_\mu
+&&\bigl(\because\ \text{準備 2}\ (G \to \check{P}_\mu,\ H \to \check{D}_\mu)\text{ を右辺から左辺へ}\bigr)\\
+&= \begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr)\\
+&= \left(\mathrm{pr}_1\!\left(\begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu\right),\
+   \mathrm{pr}_2\!\left(\begin{pmatrix}\check\psi_\mu^\dagger, & \check\psi_\mu\end{pmatrix}\check{D}_\mu\right)\right)
+&&\bigl(\because\ \mathrm{pr}_1, \mathrm{pr}_2\text{ の定め方}\bigr)\\
+&= \left((\check{D}_\mu)_{11}\check\psi_\mu^\dagger + (\check{D}_\mu)_{21}\check\psi_\mu,\
+   (\check{D}_\mu)_{12}\check\psi_\mu^\dagger + (\check{D}_\mu)_{22}\check\psi_\mu\right)
+&&\bigl(\because\ \text{準備 1 の第 1 式から第 4 式までを }l = 1, 2\text{ の 2 か所へ同時適用}\ (X_1 \to \check\psi_\mu^\dagger,\ X_2 \to \check\psi_\mu,\ G \to \check{D}_\mu)\bigr)\\
+&= \left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger + 0_{\mathbb{C}}\check\psi_\mu,\
+   0_{\mathbb{C}}\check\psi_\mu^\dagger + (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{diagonalization_check_P_D}\text{ の }\check{D}_\mu\text{ と準備 4}\bigr)\\
+&= \left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger + O,\
+   O + (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m, n \to 2^{M_{\mathrm{col}}})\text{ を 2 か所へ同時適用}\bigr)\\
+&= \left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger,\
+   O + (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (m, n \to 2^{M_{\mathrm{col}}})\bigr)\\
+&= \left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger,\
+   (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\ (m, n \to 2^{M_{\mathrm{col}}})\bigr)
+\end{aligned}`),
+      paragraph(["両辺の第 1 成分と第 2 成分を取り出して"]),
+      displayMath(String.raw`\begin{aligned}
+T(\check\psi_\mu^\dagger)
+&= \mathrm{pr}_1\!\left(T(\check\psi_\mu^\dagger), T(\check\psi_\mu)\right)
+&&\bigl(\because\ \mathrm{pr}_1\text{ の定め方}\bigr)\\
+&= \mathrm{pr}_1\!\left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger,\ (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \text{本体の鎖}\bigr)\\
+&= (\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger
+&&\bigl(\because\ \mathrm{pr}_1\text{ の定め方}\bigr)\\
+&= \left(\exp(+\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu^\dagger
+&&\bigl(\because\ \blkref{lambda_eq_exp_gamma_theta_tilde}\bigr),\\[4pt]
+T(\check\psi_\mu)
+&= \mathrm{pr}_2\!\left(T(\check\psi_\mu^\dagger), T(\check\psi_\mu)\right)
+&&\bigl(\because\ \mathrm{pr}_2\text{ の定め方}\bigr)\\
+&= \mathrm{pr}_2\!\left((\lambda_{+,\mu})_{\mathbb{C}}\check\psi_\mu^\dagger,\ (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu\right)
+&&\bigl(\because\ \text{本体の鎖}\bigr)\\
+&= (\lambda_{-,\mu})_{\mathbb{C}}\check\psi_\mu
+&&\bigl(\because\ \mathrm{pr}_2\text{ の定め方}\bigr)\\
+&= \left(\exp(-\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu
+&&\bigl(\because\ \blkref{lambda_eq_exp_gamma_theta_tilde}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`\mathbb{R}`),
+        " を使うのは ",
+        math(String.raw`\lambda_{\pm,\mu}`),
+        " と ",
+        math(String.raw`\exp(\pm\gamma(\tilde\theta_\mu))`),
+        " が実数であるところだけで（",
+        math(String.raw`\gamma`),
+        " は ",
+        ref("def_gamma_theta"),
+        " の arccosh、exp は実数の指数評価）、どちらも ",
+        ref("inclusion_rr_to_cc"),
+        " の像として ",
+        math(String.raw`\mathbb{C}`),
+        " のスカラー倍に入る。",
+      ]),
     ],
     conversion: {
       status: "added",
@@ -6404,6 +6571,7 @@ T_{(V^{(+)})}\!\left(\check\psi_\mu\right)
         "2026-08-19 の式変形統一で、行ベクトルへの線型作用の一行二等号を定義と線型性の三段へ分け、" +
           "転送行列作用の鎖の機械識別子を人間可読な根拠へ直し、末尾の二等号と固有値の指数表示への代入を各列の一続きの鎖へ開いた。内容と参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。冒頭の結合律の散文を、組と 2×2 行列の積の成分（準備 1）から finite_sum_of_scalar_multiples・scalar_multiple_is_associative・finite_double_sum_of_matrices_interchange・finite_sum_of_scalar_multiples_of_one_matrix・mat_mult を引く鎖（準備 2）に、定義の無い「行ベクトルへの作用の定め方」を使っていた Step 1 を、射影 pr_l で成分ごとに T_V_plus_is_conjugation・linearity_of_T を引く鎖（準備 3）に直した。P̌^{-1} を def_invertible_elements_of_R（M → 1）の逆元と、P̌ĎP̌^{-1} を (P̌Ď)P̌^{-1} と、Ď の実数の成分を包含の像と読むことを準備 4 に書き、本体の鎖の P̌^{-1}P̌ = I・単位行列・Ď の成分・零行列の行に根拠のラベルを付けた。主張の右辺の実数 exp(±γ(θ̃_μ)) を包含の像 (·)_C と書いた（中身は不変）。検算は sagemath/check/commutation_V_plus_check_psi/。",
       ],
     },
   },

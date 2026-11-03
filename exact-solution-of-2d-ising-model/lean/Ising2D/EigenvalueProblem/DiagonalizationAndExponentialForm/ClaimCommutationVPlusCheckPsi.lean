@@ -13,10 +13,11 @@
 
 | 人手の箇所 | Lean |
 | --- | --- |
-| proof 冒頭の結合律 `((A_0, B_0)G)H = (A_0, B_0)(GH)` | `rowMul_rowMul` |
-| Step 1（`T_{(V^{(+)})}` の線型性を行ベクトルへ持ち上げる） | `rowApply_rowMul` |
+| 準備 1（組と `2×2` 行列の積の成分 `pr_l((X_1, X_2)G) = g_{1l}X_1 + g_{2l}X_2`） | `rowMul` の定義（`rfl`） |
+| 準備 2（結合律 `((X_1, X_2)G)H = (X_1, X_2)(GH)`） | `rowMul_rowMul` |
+| 準備 3（`T` を組へ当てる `(T(pr_1((X_1, X_2)G)), T(pr_2(…))) = (T(X_1), T(X_2))G`） | `rowApply_rowMul` |
 | `def_check_fermi` の `(ψ̌_μ^†, ψ̌_μ) = (Ž_μ, Y̌_μ) P̌_μ` | `checkPsiDag_eq_checkPmat_col`・`checkPsi_eq_checkPmat_col`・`checkPsi_row_eq_rowMul_checkPmat` |
-| Step 2 の 9 行の鎖 | `rowApply_checkPsi_row` の `calc` |
+| 本体の鎖 | `rowApply_checkPsi_row` の `calc` |
 | 第 1 列・第 2 列を比べる | `TVPlus_checkPsiDag_of_action`・`TVPlus_checkPsi_of_action` |
 | `λ_{±,μ} = e^{±γ(θ̃_μ)}` を各列へ代入する | `TVPlus_checkPsiDag_psi_of_action` |
 | 主張（仮定なし） | `TVPlus_checkPsiDag_checkPsi`（`ClaimCheckFermiResultsUnconditional.lean`） |
@@ -45,13 +46,13 @@ open Matrix
 
 variable {M : ℕ}
 
-/-! ## 行ベクトルと `2×2` 行列の積（人手 proof の冒頭と Step 1） -/
+/-! ## 行ベクトルと `2×2` 行列の積（人手 proof の準備 1〜3） -/
 
 section RowVector
 
 variable {A : Type*} [AddCommMonoid A] [Module ℂ A]
 
-/-- **人手 proof 冒頭の結合律**: `((A_0, B_0) G) H = (A_0, B_0)(G H)`。
+/-- **人手 proof の準備 2（結合律）**: `((A_0, B_0) G) H = (A_0, B_0)(G H)`。
 
 第 `l` 列は左辺が `Σ_k h_{kl}(g_{1k}A_0 + g_{2k}B_0)`、右辺が `(Σ_k g_{1k}h_{kl})A_0 + (Σ_k g_{2k}h_{kl})B_0` で、
 `ℂ` 上のスカラー倍の分配律で一致する。 -/
@@ -65,7 +66,7 @@ theorem rowMul_rowMul (p : A × A) (G H : Matrix (Fin 2) (Fin 2) ℂ) :
 theorem rowMul_one (p : A × A) : rowMul p (1 : Matrix (Fin 2) (Fin 2) ℂ) = p := by
   simp [rowMul]
 
-/-- **人手 Step 1**: `T((A_0, B_0) G) = (T(A_0), T(B_0)) G`（`T` の線型性を 2 列へ同時適用）。 -/
+/-- **人手 proof の準備 3**: `T((A_0, B_0) G) = (T(A_0), T(B_0)) G`（`T` の線型性を 2 列へ同時適用）。 -/
 theorem rowApply_rowMul (T : A →ₗ[ℂ] A) (p : A × A) (G : Matrix (Fin 2) (Fin 2) ℂ) :
     rowApply T (rowMul p G) = rowMul (rowApply T p) G := by
   calc rowApply T (rowMul p G)
@@ -101,9 +102,10 @@ theorem checkPsi_row_eq_rowMul_checkPmat (K : IsingConst) (M : ℕ) (μ : ℤ) :
   rw [checkPsiDag_eq_checkPmat_col, checkPsi_eq_checkPmat_col]
   rfl
 
-/-! ## 人手 Step 2 の鎖 -/
+/-! ## 人手 proof の本体の鎖 -/
 
-/-- **人手 Step 2**: `(T(ψ̌_μ^†), T(ψ̌_μ)) = (λ_{+,μ} ψ̌_μ^†, λ_{-,μ} ψ̌_μ)`。 -/
+/-- **人手 proof の本体の鎖**: `(T(ψ̌_μ^†), T(ψ̌_μ)) = (λ_{+,μ} ψ̌_μ^†, λ_{-,μ} ψ̌_μ)`。
+人手の本体は 17 式で、`P̌^{-1}P̌ = I`・単位行列・`Ď` の成分・零行列の行を分けているが、ここでは `rw`・`simp` の 1 段にまとめている。 -/
 theorem rowApply_checkPsi_row (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (μ : ℤ)
     {T : TensorPow M →ₗ[ℂ] TensorPow M}
     (hT : ActsBy T (checkZ M μ) (checkY M μ) (AMat P.const (thetaTilde M μ))) :
@@ -117,13 +119,13 @@ theorem rowApply_checkPsi_row (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (μ : �
       = rowApply T (rowMul (checkZ M μ, checkY M μ) (checkPmat P.const M μ)) := by
         rw [hrow]                                                       -- `ψ̌_μ, ψ̌_μ^†` の定義
     _ = rowMul (rowApply T (checkZ M μ, checkY M μ)) (checkPmat P.const M μ) :=
-        rowApply_rowMul _ _ _                                           -- Step 1
+        rowApply_rowMul _ _ _                                           -- 準備 3
     _ = rowMul (rowMul (checkZ M μ, checkY M μ) (AMat P.const (thetaTilde M μ)))
           (checkPmat P.const M μ) := by
         rw [(actsBy_iff_rowApply_eq_rowMul).1 hT]                       -- `T` の `Ž, Y̌` への作用
     _ = rowMul (checkZ M μ, checkY M μ)
           (AMat P.const (thetaTilde M μ) * checkPmat P.const M μ) :=
-        rowMul_rowMul _ _ _                                             -- 結合法則
+        rowMul_rowMul _ _ _                                             -- 準備 2（結合律）
     _ = rowMul (checkZ M μ, checkY M μ)
           (checkPmat P.const M μ * checkDmat P.const M μ * (checkPmat P.const M μ)⁻¹
             * checkPmat P.const M μ) := by
@@ -132,7 +134,7 @@ theorem rowApply_checkPsi_row (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (μ : �
         rw [Matrix.mul_assoc (checkPmat P.const M μ * checkDmat P.const M μ),
           Matrix.nonsing_inv_mul _ hdet, Matrix.mul_one]                -- `P̌^{-1} P̌ = I`
     _ = rowMul (rowMul (checkZ M μ, checkY M μ) (checkPmat P.const M μ)) (checkDmat P.const M μ) :=
-        (rowMul_rowMul _ _ _).symm                                      -- 結合法則
+        (rowMul_rowMul _ _ _).symm                                      -- 準備 2（結合律）
     _ = rowMul (checkPsiDag P.const M μ, checkPsi P.const M μ) (checkDmat P.const M μ) := by
         rw [hrow]                                                       -- `ψ̌_μ, ψ̌_μ^†` の定義
     _ = (((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ) • checkPsiDag P.const M μ,
@@ -150,7 +152,7 @@ theorem TVPlus_checkPsiDag_of_action (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (
   calc T (checkPsiDag P.const M μ)
       = (rowApply T (checkPsiDag P.const M μ, checkPsi P.const M μ)).1 := rfl
     _ = ((lambdaPlusR P.const (thetaTilde M μ) : ℝ) : ℂ) • checkPsiDag P.const M μ := by
-        rw [rowApply_checkPsi_row P M hM μ hT]                          -- Step 2 の等式の第 1 列
+        rw [rowApply_checkPsi_row P M hM μ hT]                          -- 本体の鎖の第 1 成分
 
 /-- **人手 `commutation_V_plus_check_psi` の第 2 列**: `T(ψ̌_μ) = λ_{-,μ} ψ̌_μ`。 -/
 theorem TVPlus_checkPsi_of_action (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (μ : ℤ)
@@ -161,7 +163,7 @@ theorem TVPlus_checkPsi_of_action (P : IsingParam) (M : ℕ) (hM : M ≠ 0) (μ 
   calc T (checkPsi P.const M μ)
       = (rowApply T (checkPsiDag P.const M μ, checkPsi P.const M μ)).2 := rfl
     _ = ((lambdaMinusR P.const (thetaTilde M μ) : ℝ) : ℂ) • checkPsi P.const M μ := by
-        rw [rowApply_checkPsi_row P M hM μ hT]                          -- Step 2 の等式の第 2 列
+        rw [rowApply_checkPsi_row P M hM μ hT]                          -- 本体の鎖の第 2 成分
 
 /-- **人手 `commutation_V_plus_check_psi`**（`T` の `Ž, Y̌` への作用と `λ_{±,μ}` の指数表示を仮定に取る形）。
 
