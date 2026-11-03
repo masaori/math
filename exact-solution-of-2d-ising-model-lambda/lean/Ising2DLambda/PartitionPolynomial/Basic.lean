@@ -2,9 +2,10 @@
 章「分配多項式」の具体版（人手証明と 1 対 1 に対応させる）。
 
 人手証明の正本は `structured-latex/content/main-text.ts`。
-このファイルは人手証明の定義 4 件をそのまま Lean の定義へ写したものである。
+このファイルは人手証明の有限系の定義を Lean の定義へ写したものである。
 
   人手証明のラベル              このファイル
+  def_residue_maps              residueProjection / residueRepresentative
   def_lattice                   Vertex / EdgeIndex / boundary0 / boundary1
   def_configuration             Config
   def_broken_bond_count         brokenBondCount
@@ -45,6 +46,25 @@ lemma card_spinValue : Fintype.card SpinValue = 2 := by
   rw [Fintype.card_congr spinValueEquivBool, Fintype.card_bool]
 
 variable (L : ℕ)
+
+/-- 自然な射影 `π : ℤ → ℤ/Lℤ`。 -/
+def residueProjection (n : ℤ) : ZMod L := (n : ZMod L)
+
+/-- `0, …, L-1` に入る代表を整数として取る写像 `s`。 -/
+def residueRepresentative (y : ZMod L) : ℤ := (y.val : ℤ)
+
+lemma residueRepresentative_nonneg (y : ZMod L) :
+    0 ≤ residueRepresentative L y := by
+  exact Int.natCast_nonneg _
+
+lemma residueRepresentative_lt [NeZero L] (y : ZMod L) :
+    residueRepresentative L y < L := by
+  unfold residueRepresentative
+  exact_mod_cast y.val_lt
+
+lemma residueProjection_representative [NeZero L] (y : ZMod L) :
+    residueProjection L (residueRepresentative L y) = y := by
+  simp [residueProjection, residueRepresentative]
 
 /-- 頂点集合 `V_L = (ℤ/Lℤ) × (ℤ/Lℤ)`。第 1 成分が行番号、第 2 成分が列番号。 -/
 def Vertex : Type := ZMod L × ZMod L

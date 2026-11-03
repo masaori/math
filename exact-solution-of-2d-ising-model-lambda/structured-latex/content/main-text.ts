@@ -6648,11 +6648,11 @@ N_{k,l}
                 displayMath(String.raw`\begin{aligned}
 \det_x(B)
 &=\sum_{\sigma\in\operatorname{Perm}_b(\mathcal J)}T(\sigma)
-&&(\because\ \blkref{claim_block_diagonal_zero_terms})\\
+&&\bigl(\because\ \blkref{claim_block_diagonal_zero_terms}\bigr)\\
 &=\sum_{\boldsymbol\tau\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)}T(\operatorname{Glue}(\boldsymbol\tau))
-&&(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ の全単射による再添字付け})\\
+&&\bigl(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ の全単射による再添字付け}\bigr)\\
 &=\sum_{\boldsymbol\tau\in\prod_{k\in\mathcal K}\operatorname{Perm}(\mathcal J_k)}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\operatorname{Glue}(\boldsymbol\tau)))}\prod_{i\in\mathcal J}B_{i,\operatorname{Glue}(\boldsymbol\tau)(i)}
-&&(\because\ T\text{ の定義})
+&&\bigl(\because\ T\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph(["と得る。空集合を含め、全ての和と積は有限である。"]),
               ],
@@ -12354,6 +12354,13 @@ const chapter_partition_polynomial = defineSection({
                       title: { text: "整数と剰余類を行き来する 2 つの写像" },
                       labels: ["def_residue_maps"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.PartitionPolynomial.residueProjection",
+                        "Ising2DLambda.PartitionPolynomial.residueRepresentative",
+                        "Ising2DLambda.PartitionPolynomial.residueRepresentative_nonneg",
+                        "Ising2DLambda.PartitionPolynomial.residueRepresentative_lt",
+                        "Ising2DLambda.PartitionPolynomial.residueProjection_representative",
+                      ],
                       statement: [
                         paragraph([
                           "整数 ",
