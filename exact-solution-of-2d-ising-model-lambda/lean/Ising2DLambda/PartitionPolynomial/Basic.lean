@@ -69,6 +69,15 @@ lemma residueProjection_representative [NeZero L] (y : ZMod L) :
 /-- 頂点集合 `V_L = (ℤ/Lℤ) × (ℤ/Lℤ)`。第 1 成分が行番号、第 2 成分が列番号。 -/
 def Vertex : Type := ZMod L × ZMod L
 
+/-- 横向きの辺へ、本文の一始まりの整数番号を与える写像。 -/
+def horizontalEdgeNumber (v : Vertex L) : ℤ :=
+  (L : ℤ) * residueRepresentative L v.1 + residueRepresentative L v.2 + 1
+
+/-- 縦向きの辺へ、本文の一始まりの整数番号を与える写像。 -/
+def verticalEdgeNumber (v : Vertex L) : ℤ :=
+  (L : ℤ) ^ 2 + (L : ℤ) * residueRepresentative L v.1 +
+    residueRepresentative L v.2 + 1
+
 instance [NeZero L] : Fintype (Vertex L) := by
   unfold Vertex; infer_instance
 

@@ -12541,6 +12541,10 @@ E_{L,\mathrm{v}}:=\{L^2+1,\,L^2+2,\dots,2L^2\}`,
                       title: { text: "頂点から辺の番号を与える写像" },
                       labels: ["def_edge_numbering"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.PartitionPolynomial.horizontalEdgeNumber",
+                        "Ising2DLambda.PartitionPolynomial.verticalEdgeNumber",
+                      ],
                       statement: [
                         paragraph([
                           "頂点 ",
@@ -13905,7 +13909,6 @@ b(\sigma)&=|B(\sigma)|
 &=b_{\mathrm{v}}\bigl(\rho_i(\sigma),\,\rho_{i+_{\mathbb{Z}/L\mathbb{Z}}\bar1}(\sigma)\bigr)
 &&\bigl(\because\ \blkref{def_inter_row_broken_count}\bigr)
 \end{aligned}`),
-                    paragraph(["準備したものを使うと"]),
                     displayMath(String.raw`\begin{aligned}
 b(\sigma)
 &=|B(\sigma)|
