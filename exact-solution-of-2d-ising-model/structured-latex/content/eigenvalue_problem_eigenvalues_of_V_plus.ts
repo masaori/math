@@ -2869,7 +2869,15 @@ y_{\epsilon'}
 = \exp(\check{g}(\epsilon))\,\check{Q}_\epsilon`,
       ),
       paragraph([
-        "が成り立つ。すなわち ",
+        "が成り立つ。右辺は、実数 ",
+        math(String.raw`\exp(\check{g}(\epsilon))`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " で ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`(\exp(\check{g}(\epsilon)))_{\mathbb{C}}`),
+        " にして掛けた行列である。すなわち ",
         math(String.raw`\mathrm{im}\,\check{Q}_\epsilon`),
         " の各元は ",
         math(String.raw`\check{V}'`),
@@ -3109,24 +3117,34 @@ E_K \check{Q}_\epsilon
       ),
       paragraph([
         math(String.raw`K \to \infty`),
-        " の極限を取る。行列積の連続性（",
-        ref("matrix_multiplication_continuity"),
-        "）と実指数級数の収束（",
-        ref("real_exp_series_converges"),
-        "）により",
+        " の極限を取る。極限は ",
+        ref("def_matrix_norm"),
+        " の意味であり、行列の列の ",
+        math(String.raw`\lim`),
+        " は ",
+        ref("matrix_norm_triangle_inequality"),
+        " (4) により一意に定まる極限を表す。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check{V}'\,\check{Q}_\epsilon
 &= \left(\lim_{K\to\infty} E_K\right)\check{Q}_\epsilon
-   \quad (\because \check{V}' = \exp(\check{X}) \text{ は部分和 } E_K \text{ の極限。上の級数表示}) \\
+   \quad (\because \check{V}' = \exp(\check{X}) \text{ は部分和 } E_K \text{ の極限。}\blkref{def_exp}\text{ と }\blkref{matrix_exp_series_converges}\ (1)\ (N \to K,\ A \to \check{X})) \\
 &= \lim_{K\to\infty}\left(E_K\,\check{Q}_\epsilon\right)
-   \quad (\because \text{行列積の連続性}) \\
+   \quad \left(\because\ \blkref{matrix_multiplication_continuity}\ (\text{係数の集合 } K \to \mathbb{C},\ n \to 2^{M_{\mathrm{col}}},\ (A_N)_N \to (E_N)_N,\ A \to \check{V}',\ B \to \check{Q}_\epsilon)\right) \\
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{1}{k!}\check{g}(\epsilon)^k\right)
    \check{Q}_\epsilon\right)
-   \quad (\because \text{上の部分和の鎖}) \\
-&= \exp(\check{g}(\epsilon))\,\check{Q}_\epsilon
-   \quad (\because \text{実指数級数の収束と極限の一意性})
+   \quad (\because \text{上の部分和の鎖を各 } K \text{ へ}) \\
+&= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{1}{k!}\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k\right)
+   \check{Q}_\epsilon\right)
+   \quad \left(\because\ \text{鎖の係数 } \check{g}(\epsilon) \in \mathbb{R} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の } \check{g}(\epsilon)_{\mathbb{C}} \text{ として掛けている}\right) \\
+&= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k}{k!}\right)
+   \check{Q}_\epsilon\right)
+   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換則と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
+&= \exp\!\left(\check{g}(\epsilon)_{\mathbb{C}}\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_exp_is_limit_of_partial_sums}\ (\text{係数の集合 } K \to \mathbb{C},\ x \to \check{g}(\epsilon)_{\mathbb{C}})\ \text{の極限 } c_N \to c \text{ を仮定に置いた}\ \blkref{scalar_sequence_times_matrix_converges}\ (n \to 2^{M_{\mathrm{col}}},\ c_N \to \textstyle\sum_{k=0}^{N}\frac{(\check{g}(\epsilon)_{\mathbb{C}})^k}{k!},\ c \to \exp(\check{g}(\epsilon)_{\mathbb{C}}),\ A \to \check{Q}_\epsilon)\ \text{と、}\blkref{matrix_norm_triangle_inequality}\ (4)\right) \\
+&= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{complex_exp_of_real_argument}\ (x \to \check{g}(\epsilon))\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -3197,9 +3215,7 @@ E_K \check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`K\to\infty`), " の極限を取る。行列積の連続性（",
-        ref("matrix_multiplication_continuity"), "）と実指数級数の収束（",
-        ref("real_exp_series_converges"), "）により",
+        math(String.raw`K\to\infty`), " の極限を取る（", math(String.raw`\lim`), " の扱いは Step 3 の極限の鎖と同じ）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -3207,13 +3223,20 @@ E_K \check{Q}_\epsilon
 &= \check{Q}_\epsilon\left(\lim_{K\to\infty}E_K\right)
    \quad (\because \check{V}'=\exp(\check{X}) \text{ は部分和 }E_K\text{ の極限。Step 3 の級数表示}) \\
 &= \lim_{K\to\infty}\left(\check{Q}_\epsilon E_K\right)
-   \quad (\because \text{行列積の連続性}) \\
+   \quad \left(\because\ \blkref{matrix_multiplication_continuity_in_right_factor}\ (n \to 2^{M_{\mathrm{col}}},\ (A_N)_N \to (E_N)_N,\ A \to \check{V}',\ B \to \check{Q}_\epsilon)\right) \\
 &= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{1}{k!}\check{g}(\epsilon)^k\right)\check{Q}_\epsilon\right)
-   \quad (\because \text{上の部分和の鎖}) \\
-&= \exp(\check{g}(\epsilon))\check{Q}_\epsilon
-   \quad (\because \text{実指数級数の収束と極限の一意性}) \\
+   \quad (\because \text{上の部分和の鎖を各 } K \text{ へ}) \\
+&= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{1}{k!}\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k\right)
+   \check{Q}_\epsilon\right)
+   \quad \left(\because\ \text{鎖の係数 } \check{g}(\epsilon) \in \mathbb{R} \text{ は }\blkref{inclusion_rr_to_cc}\text{ の } \check{g}(\epsilon)_{\mathbb{C}} \text{ として掛けている}\right) \\
+&= \lim_{K\to\infty}\left(\left(\sum_{k=0}^{K}\frac{\left(\check{g}(\epsilon)_{\mathbb{C}}\right)^k}{k!}\right)\check{Q}_\epsilon\right)
+   \quad \left(\because\ \tfrac{1}{k!}\,z = z \cdot \tfrac{1}{k!} =: \tfrac{z}{k!}\ (z \in \mathbb{C}\text{。乗法の可換則と、}\blkref{scalar_exp_is_limit_of_partial_sums}\text{ の部分和の項の書き方})\ \text{を各項へ}\right) \\
+&= \exp\!\left(\check{g}(\epsilon)_{\mathbb{C}}\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_exp_is_limit_of_partial_sums}\ (\text{係数の集合 } K \to \mathbb{C},\ x \to \check{g}(\epsilon)_{\mathbb{C}})\ \text{の極限 } c_N \to c \text{ を仮定に置いた}\ \blkref{scalar_sequence_times_matrix_converges}\ (n \to 2^{M_{\mathrm{col}}},\ c_N \to \textstyle\sum_{k=0}^{N}\frac{(\check{g}(\epsilon)_{\mathbb{C}})^k}{k!},\ c \to \exp(\check{g}(\epsilon)_{\mathbb{C}}),\ A \to \check{Q}_\epsilon)\ \text{と、}\blkref{matrix_norm_triangle_inequality}\ (4)\right) \\
+&= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{complex_exp_of_real_argument}\ (x \to \check{g}(\epsilon))\right) \\
 &= \check{V}'\check{Q}_\epsilon
-   \quad (\because \text{Step 3})
+   \quad (\because \text{Step 3 の極限の鎖})
 \end{aligned}`,
       ),
       paragraph([
@@ -3311,6 +3334,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 1 の左から掛ける形の鎖の名前だけの根拠「行列の積の分配法則」「同時固有空間分解 (3)」「有限和のくくり出し」を、1 行 1 主張の 14 行の鎖にした。新しく足した主張 finite_sum_of_matrices_distributes_in_left_factor（(ΣX_j)C = Σ(X_jC)）・difference_of_scalar_multiples_of_one_matrix（aA − bA = (a − b)A）と、既存の scalar_multiple_factors_out_of_left_factor・matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_left_factor・negation_factors_out_of_left_factor・identity_matrix_is_left_unit_of_mat_mult・check_joint_eigenspace_decomposition (3)・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix を引く。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1 は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step1_left_chain.sage。",
         "2026-11-03: Step 1 の右から掛ける形 Q̌_εX̌ = ǧ(ε)Q̌_ε を「同じ計算を (3) の右から掛ける形に対して行えば」と名前だけで済ませていた段落を、Q̌_εX̌ から始める 1 行 1 主張の 14 行の鎖にした。新しく足した主張 finite_sum_of_matrices_distributes_in_right_factor（C(ΣX_j) = Σ(CX_j)）と、既存の scalar_multiple_factors_out_of_right_factor・matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_right_factor・negation_factors_out_of_right_factor・identity_matrix_is_right_unit_of_mat_mult・check_joint_eigenspace_decomposition (3) の Q̌_εň_ν = ε_νQ̌_ε・difference_of_scalar_multiples_of_one_matrix・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix を引く。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Qproj_mul_Xop_step1 は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step1_right_chain.sage。",
         "2026-11-03: Step 3・Step 3' の部分和の鎖の名前だけの根拠「有限和と行列積の分配法則」「有限和からの共通因子のくくり出し」を、新しく足した定義 def_finite_sum_of_matrices_from_index_zero・def_finite_sum_of_complex_numbers_from_index_zero（添字 0 からの和を添字 1 からの和へずらす）と、finite_sum_of_matrices_distributes_in_left_factor（右からの形は _right_factor）・scalar_multiple_factors_out_of_left_factor（_right_factor）・Step 2（Step 3' の帰納法）・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix の 1 行 1 主張の 8 行の鎖にした。部分和の係数の和は Σ(1/k!)ǧ^k の形に揃え、極限の鎖の 3 行目も同じ形にした（主張は不変）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step3_partial_sum_chains.sage。",
+        "2026-11-03: Step 3・Step 3' の極限の鎖の最後の行「実指数級数の収束と極限の一意性」が引いていた real_exp_series_converges は a ∈ ℝ_{≥0} についての主張で、ǧ(ε) < 0（例えば ε = 0）を覆わず、数の列の極限を行列のスカラー倍の列の極限へ移す段も無かった。scalar_exp_is_limit_of_partial_sums（K = ℂ、すべての x を覆う）・新しく足した scalar_sequence_times_matrix_converges・complex_exp_of_real_argument の 3 行に分けた。Step 3' の「行列積の連続性」は右の因子が動く形なので、新しく足した matrix_multiplication_continuity_in_right_factor を引いた。行列の列の lim の一意性は鎖の前の段落で matrix_norm_triangle_inequality (4) を引いて宣言した。鎖の中の係数 ǧ(ε) は inclusion_rr_to_cc の ǧ(ε)_ℂ と書く行を足した（Step 1・Step 2・部分和の鎖が ǧ(ε) を ℂ の係数として使っている件は論文全体の帰属の件に残る）。主張の右辺が (exp(ǧ(ε)))_ℂ を掛けた行列であることを主張文に書いた（主張の強さは変えていない）。",
       ],
     },
   },

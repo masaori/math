@@ -1284,6 +1284,14 @@ targets=(
   Ising2D.finite_sum_smul_one_matrix
   Ising2D.finite_sum_smul_one_matrix_of_necSuf
   Ising2D.finite_sum_smul_one_tensorPow
+  Ising2D.matrix_mul_left_tendsto
+  Ising2D.smul_matrix_tendsto
+  Ising2D.matrix_mul_left_tendsto_of_necSuf
+  Ising2D.smul_matrix_tendsto_of_necSuf
+  Ising2D.mul_left_tendsto_tensorPow
+  Ising2D.smul_tendsto_tensorPow
+  "Ising2D.NecSuf.mul_left_tendsto'"
+  "Ising2D.NecSuf.smul_tendsto'"
   Ising2D.H2_eq_neg_I_smul_sum_sigmaX
   Ising2D.S2_eq_K2star_smul_sum_sigmaX
   Ising2D.Y_castSucc_mul_Z_succ

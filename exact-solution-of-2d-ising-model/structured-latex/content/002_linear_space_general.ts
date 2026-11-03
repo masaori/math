@@ -6640,4 +6640,98 @@ z_N-z_M&=(x_N-x_M,\ y_N-y_M)
       ],
     },
   },
+  {
+    id: "linear_space_general_claim_matrix_multiplication_continuity_in_right_factor",
+    kind: "claim",
+    title: { text: "行列乗算の右の因子についての連続性" },
+    labels: ["matrix_multiplication_continuity_in_right_factor"],
+    statement: [
+      paragraph(["ノルムと収束は ", ref("def_matrix_norm"), "、行列積は ", ref("mat_mult"), "、積のノルムの評価は ", ref("matrix_norm_submultiplicativity"), " による。", math(String.raw`(A_N)_{N\in\mathbb Z_{\ge0}}`), " は以下の行列空間の列とする。"]),
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A_N, A, B \in \mathrm{Mat}(n, \mathbb{C})`),
+        "、",
+        math(String.raw`\|A_N - A\| \to 0`),
+        " のとき、",
+      ]),
+      displayMath(String.raw`\|B A_N - BA\| \to 0`),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\|B A_N - BA\|
+&= \|B(A_N - A)\|
+&&(\because\ \text{行列の積の左分配則})\\
+&\leq \|B\| \cdot \|A_N - A\|
+&&(\because\ \blkref{matrix_norm_submultiplicativity}\ (K \to \mathbb{C},\ A \to B,\ B \to A_N - A))\\
+&\to 0
+&&(\because\ \|A_N - A\| \to 0\ \text{と、収束する実数列に定数を掛けた列の極限。左辺は非負なので、上の評価から挟み撃ちで})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 3' が Q̌_ε(lim E_K) = lim(Q̌_εE_K) を「行列積の連続性」で済ませていたが、matrix_multiplication_continuity は左の因子が動く形 A_NB → AB しか述べていないので、右の因子が動く形を足した。証明は matrix_multiplication_continuity と同じ 3 行で、根拠の名前の付け方も揃えた（分配則の根拠は同じく名前だけ）。係数は使う箇所に合わせて ℂ に固定した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_scalar_sequence_times_matrix_converges",
+    kind: "claim",
+    title: { text: "収束する複素数の列による行列のスカラー倍は収束する" },
+    labels: ["scalar_sequence_times_matrix_converges"],
+    statement: [
+      paragraph([
+        "ノルムと収束は ",
+        ref("def_matrix_norm"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、行列の差は ",
+        ref("def_matrix_difference"),
+        "、複素数の差は ",
+        ref("def_complex_difference"),
+        " による。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`(c_N)_{N\in\mathbb Z_{\ge0}}`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の列、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n, \mathbb{C})`),
+        " とし、",
+        ref("def_matrix_norm"),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の列の収束の意味で ",
+        math(String.raw`c_N \to c`),
+        "（すなわち ",
+        math(String.raw`|c_N - c| \to 0`),
+        "）とする。このとき",
+      ]),
+      displayMath(String.raw`\|c_N A - cA\| \to 0`),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\|c_N A - cA\|
+&= \|(c_N - c)A\|
+&&(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m \to n,\ a \to c_N,\ b \to c))\\
+&= |c_N - c| \cdot \|A\|
+&&(\because\ \blkref{matrix_norm_triangle_inequality}\ (2)\ (K \to \mathbb{C},\ c \to c_N - c))\\
+&\to 0
+&&(\because\ |c_N - c| \to 0\ \text{と、収束する実数列に定数を掛けた列の極限})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 3・Step 3' の極限の鎖の最後の行が「実指数級数の収束と極限の一意性」で lim((Σ(1/k!)ǧ(ε)^k)Q̌_ε) = exp(ǧ(ε))Q̌_ε を出していた。引いていた real_exp_series_converges は a ∈ ℝ_{≥0} についての主張で、ǧ(ε) < 0 を覆わず、数の列の収束から行列のスカラー倍の列の収束へ移る段も無かった。数の列の極限（scalar_exp_is_limit_of_partial_sums）を行列のスカラー倍の列の極限へ移すために足した。係数は使う箇所に合わせて ℂ に固定した（difference_of_scalar_multiples_of_one_matrix が ℂ だけを述べるため）。",
+      ],
+    },
+  },
 ]);
