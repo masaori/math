@@ -6,6 +6,7 @@
 
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
 Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性の `σ^x_m`・`σ^z_mσ^z_{m+1}`・`G` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`・`boundaryYXY_eq_neg_one_smul_real`・`boundaryYXY_hasRealEntries`）もこのファイルが持つ。
+Step 3 の `S_2`・`S_1^{(+)}` の転置の鎖（`S2_transpose_by_pauli_form`・`S1plus_transpose_by_pauli_form`）もこのファイルが持つ。
 Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
@@ -31,6 +32,8 @@ Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対�
 | Step 3 の `G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y)` の 7 行（Step 2 の準備の `G` の表示 → `pauli_y_is_i_times_real_factor` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → ℂ で `i·i = -1` → `inclusion_rr_to_cc` の略記） | `boundaryYXY_eq_neg_one_smul_real` の `calc` の 7 段 |
 | Step 3 の `G` の成分の実性（`real_factor_of_pauli_y_has_real_entries`・`pauli_x_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries` → `real_scalar_multiple_of_real_entry_matrix_has_real_entries` と上の鎖） | `boundaryYXY_hasRealEntries` |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
+| Step 3 の `(S_2)^⊤ = S_2` の 5 行（Step 1 の `S_2` の表示 → `transpose_of_matrix_scalar_multiple` → `transpose_of_finite_sum_of_matrices` → `(σ^x_m)^⊤ = σ^x_m` を各項へ → Step 1 の表示） | `S2_transpose_by_pauli_form` の `calc` の 5 段 |
+| Step 3 の `(S_1^{(+)})^⊤ = S_1^{(+)}` の 7 行（Step 2 の `S_1^{(+)}` の表示 → `transpose_of_matrix_difference` → `transpose_of_matrix_scalar_multiple` を 2 箇所 → `transpose_of_finite_sum_of_matrices` → `(σ^z_mσ^z_{m+1})^⊤` を各項へ → `G^⊤ = G` → Step 2 の表示） | `S1plus_transpose_by_pauli_form` の `calc` の 7 段 |
 
 - 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
   鎖は係数の実性を使わないので、仮定 `star K1 = K1` は置かない。
@@ -50,6 +53,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOne
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimTransposeOfMatrixSumsAndScalarMultiplesFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerOfRealEntryMatricesHasRealEntries
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealScalarMultipleOfRealEntryMatrixHasRealEntries
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
@@ -582,5 +586,53 @@ theorem boundaryYXY_hasRealEntries (r : ℕ) :
       exact pauliYReal_hasRealEntries                   -- `real_factor_of_pauli_y_has_real_entries`（第 `M_col` 因子）
     · rw [if_neg hl]
       exact pauliX_hasRealEntries                       -- `pauli_x_has_real_entries`（第 `2` から第 `M_col-1` 因子）
+
+/-! ## Step 3 の `S_2`・`S_1^{(+)}` の転置の鎖
+
+人手の Step 3 の `(S_2)^⊤ = S_2` の 5 行と `(S_1^{(+)})^⊤ = S_1^{(+)}` の 7 行の鎖と 1 対 1 に対応する。
+`transpose_of_matrix_scalar_multiple`・`transpose_of_matrix_difference`・`transpose_of_finite_sum_of_matrices` は、`TensorPow M` の系
+`transpose_smul_tensorPow`・`transpose_sub_tensorPow`・`finite_sum_transpose_tensorPow`
+（`MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/ClaimTransposeOfMatrixSumsAndScalarMultiplesFromNecSuf.lean`）で引く。これらは必要十分版を添字 `Conf M` へ特殊化したもので、具体版（添字 `Fin m`）と手順は同じである（`finite_sum_smul_tensorPow` と同じ構成）。 -/
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `(S_2)^⊤ = S_2` の 5 行の鎖**（`M = r + 1`）。 -/
+theorem S2_transpose_by_pauli_form (K2star : ℂ) (r : ℕ) :
+    ((Complex.I * K2star) • H2 (r + 1))ᵀ = (Complex.I * K2star) • H2 (r + 1) :=
+  calc ((Complex.I * K2star) • H2 (r + 1))ᵀ
+      = (K2star • ∑ m : Fin (r + 1), sigmaX m)ᵀ := by
+        rw [S2_eq_K2star_smul_sum_sigmaX]                                    -- Step 1 の `S_2` の表示
+    _ = K2star • (∑ m : Fin (r + 1), sigmaX m)ᵀ :=
+        transpose_smul_tensorPow _ _                                         -- `transpose_of_matrix_scalar_multiple`（必要十分版の `Conf M` への特殊化。`m, n → 2^{M_col}`, `c → K_2^*`, `A → Σσ^x_ℓ`）
+    _ = K2star • ∑ m : Fin (r + 1), (sigmaX m)ᵀ := by
+        rw [finite_sum_transpose_tensorPow r]                                -- `transpose_of_finite_sum_of_matrices`（必要十分版の `Conf M` への特殊化。`r → M_col`, `(X_1, …, X_r) → (σ^x_1, …, σ^x_{M_col})`）
+    _ = K2star • ∑ m : Fin (r + 1), sigmaX m := by
+        rw [Finset.sum_congr rfl fun m _ => sigmaX_transpose m]              -- 上で得た `(σ^x_m)^⊤ = σ^x_m` を各項へ
+    _ = (Complex.I * K2star) • H2 (r + 1) :=
+        (S2_eq_K2star_smul_sum_sigmaX K2star r).symm                         -- Step 1 の `S_2` の表示
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `(S_1^{(+)})^⊤ = S_1^{(+)}` の 7 行の鎖**（`M = r + 2`）。 -/
+theorem S1plus_transpose_by_pauli_form (K1 : ℂ) (r : ℕ) :
+    ((Complex.I * K1) • H1plus (r + 2))ᵀ = (Complex.I * K1) • H1plus (r + 2) :=
+  calc ((Complex.I * K1) • H1plus (r + 2))ᵀ
+      = (K1 • (∑ m : Fin (r + 1), sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))
+          - K1 • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ := by
+        rw [S1plus_eq_K1_smul_sub]                                           -- Step 2 の `S_1^{(+)}` の表示
+    _ = (K1 • (∑ m : Fin (r + 1), sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)))ᵀ
+          - (K1 • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ :=
+        transpose_sub_tensorPow _ _                                          -- `transpose_of_matrix_difference`（必要十分版の `Conf M` への特殊化。`m, p → 2^{M_col}`, `A → K_1Σσ^zσ^z`, `B → K_1G`）
+    _ = K1 • (∑ m : Fin (r + 1), sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ
+          - K1 • (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ := by
+        rw [transpose_smul_tensorPow, transpose_smul_tensorPow]              -- `transpose_of_matrix_scalar_multiple`（必要十分版の `Conf M` への特殊化。`c → K_1`, `A → Σσ^zσ^z` と `A → G`）を 2 箇所へ同時に適用
+    _ = K1 • (∑ m : Fin (r + 1), (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))ᵀ)
+          - K1 • (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ := by
+        rw [finite_sum_transpose_tensorPow r]                                -- `transpose_of_finite_sum_of_matrices`（必要十分版の `Conf M` への特殊化。`r → M_col-1`, `(X_1, …, X_r) → (σ^z_1σ^z_2, …, σ^z_{M_col-1}σ^z_{M_col})`）
+    _ = K1 • (∑ m : Fin (r + 1), sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))
+          - K1 • (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)))ᵀ := by
+        rw [Finset.sum_congr rfl fun m _ => sigmaZ_castSucc_mul_sigmaZ_succ_transpose m]
+                                                                             -- 上で得た `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` を各項へ
+    _ = K1 • (∑ m : Fin (r + 1), sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m))
+          - K1 • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
+        rw [boundaryYXY_transpose]                                           -- 上で得た `G^⊤ = G`
+    _ = (Complex.I * K1) • H1plus (r + 2) :=
+        (S1plus_eq_K1_smul_sub K1 r).symm                                    -- Step 2 の `S_1^{(+)}` の表示
 
 end Ising2D

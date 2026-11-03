@@ -244,3 +244,9 @@ RESULT: PASS
   42 段（M_col = 2..7 の 7 行の鎖）と、G・R^y⊠σ^x⊠⋯⊠σ^x⊠R^y の全成分の虚部 0（QQ[i] の厳密計算）
   否定コントロール 6 件: σ^y を 1 個だけ含む並びは虚部 0 でない成分を持つ
 RESULT: PASS
+
+##### 2026-11-03 に check_44_iH_real_symmetric_step3_S_transpose_chains を足した（iH_is_real_symmetric Step 3 の S_2・S_1^{(+)} の転置の 2 本の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_44_iH_real_symmetric_step3_S_transpose_chains.sage
+  72 段（M_col = 2..7 の S_2 の 5 行と S_1^(+) の 7 行の鎖。係数は不定元、QQ[i] の厳密計算）
+  否定コントロール 7 件: G^T = G の行の符号を壊すと一致しない（M_col ごと）、Y_1Z_2 は転置で対称でない
+RESULT: PASS

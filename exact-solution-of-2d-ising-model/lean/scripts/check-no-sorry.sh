@@ -1341,6 +1341,29 @@ targets=(
   Ising2D.real_smul_hasRealEntries
   Ising2D.real_smul_hasRealEntries_of_necSuf
   Ising2D.NecSuf.smul_entries_mem
+  Ising2D.S2_transpose_by_pauli_form
+  Ising2D.S1plus_transpose_by_pauli_form
+  Ising2D.matrix_transpose_add_apply
+  Ising2D.matrix_transpose_add
+  Ising2D.matrix_transpose_smul_apply
+  Ising2D.matrix_transpose_smul
+  Ising2D.matrix_transpose_sub_apply
+  Ising2D.matrix_transpose_sub
+  Ising2D.finite_sum_transpose_of_matrices
+  Ising2D.matrix_transpose_add_of_necSuf
+  Ising2D.matrix_transpose_smul_of_necSuf
+  Ising2D.matrix_transpose_sub_of_necSuf
+  Ising2D.finite_sum_transpose_of_matrices_of_necSuf
+  Ising2D.transpose_smul_tensorPow
+  Ising2D.transpose_sub_tensorPow
+  Ising2D.finite_sum_transpose_tensorPow
+  "Ising2D.NecSuf.transpose_add_matrix_apply'"
+  "Ising2D.NecSuf.transpose_add_matrix'"
+  "Ising2D.NecSuf.transpose_smul_matrix_apply'"
+  "Ising2D.NecSuf.transpose_smul_matrix'"
+  "Ising2D.NecSuf.transpose_sub_matrix_apply'"
+  "Ising2D.NecSuf.transpose_sub_matrix'"
+  "Ising2D.NecSuf.finite_sum_transpose_matrix'"
   Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I

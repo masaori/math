@@ -712,6 +712,47 @@ G^\top
 \end{aligned}`,
       ),
       paragraph([
+        "である。これらを用いて ",
+        math(String.raw`S_2`),
+        " と ",
+        math(String.raw`S_1^{(+)}`),
+        " の転置を計算する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(S_2\right)^\top
+&= \Bigl(K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
+   \quad (\because \text{Step 1 の } S_2 \text{ の表示}) \\
+&= K_2^*\Bigl(\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x\Bigr)^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to K_2^*,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}}\sigma_\ell^x)\right) \\
+&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\left(\sigma_m^x\right)^\top
+   \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (X_1,\dots,X_r) \to (\sigma_1^x,\dots,\sigma_{M_{\mathrm{col}}}^x))\right) \\
+&= K_2^*\sum_{m=1}^{M_{\mathrm{col}}}\sigma_m^x
+   \quad (\because \text{上で得た } \left(\sigma_m^x\right)^\top = \sigma_m^x \text{ を各項へ}) \\
+&= S_2
+   \quad (\because \text{Step 1 の } S_2 \text{ の表示})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(S_1^{(+)}\right)^\top
+&= \Bigl(K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G\Bigr)^\top
+   \quad (\because \text{Step 2 の } S_1^{(+)} \text{ の表示}) \\
+&= \Bigl(K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - \left(K_1G\right)^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_difference}\ (m, p \to 2^{M_{\mathrm{col}}},\ A \to K_1\textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z,\ B \to K_1G)\right) \\
+&= K_1\Bigl(\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z\Bigr)^\top - K_1G^\top
+   \quad \left(\because\ \blkref{transpose_of_matrix_scalar_multiple}\ (m, n \to 2^{M_{\mathrm{col}}},\ c \to K_1,\ A \to \textstyle\sum_{\ell=1}^{M_{\mathrm{col}}-1}\sigma_\ell^z\sigma_{\ell+1}^z \text{ と } A \to G)\ \text{を 2 箇所へ同時に適用}\right) \\
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\left(\sigma_m^z\sigma_{m+1}^z\right)^\top - K_1G^\top
+   \quad \left(\because\ \blkref{transpose_of_finite_sum_of_matrices}\ (m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}-1,\ (X_1,\dots,X_r) \to (\sigma_1^z\sigma_2^z,\dots,\sigma_{M_{\mathrm{col}}-1}^z\sigma_{M_{\mathrm{col}}}^z))\right) \\
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G^\top
+   \quad (\because \text{上で得た } \left(\sigma_m^z\sigma_{m+1}^z\right)^\top = \sigma_m^z\sigma_{m+1}^z \text{ を各項へ}) \\
+&= K_1\sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z - K_1G
+   \quad (\because \text{上で得た } G^\top = G) \\
+&= S_1^{(+)}
+   \quad (\because \text{Step 2 の } S_1^{(+)} \text{ の表示})
+\end{aligned}`,
+      ),
+      paragraph([
         "である。次に成分が実数であること（",
         ref("def_matrix_with_real_entries"),
         "）を見る。",
@@ -822,7 +863,15 @@ G
         math(String.raw`S_1^{(+)}`),
         "、",
         math(String.raw`S_2`),
-        " は成分がすべて実数で転置について対称、すなわち実対称である。",
+        " は成分がすべて実数である。上で示した ",
+        math(String.raw`\left(S_2\right)^\top = S_2`),
+        "・",
+        math(String.raw`\left(S_1^{(+)}\right)^\top = S_1^{(+)}`),
+        " と合わせて、",
+        math(String.raw`S_1^{(+)}`),
+        "、",
+        math(String.raw`S_2`),
+        " は実対称である。",
         ref("def_hermitian_positive_definite"),
         " の最後の注意より、実対称行列はエルミートである。",
       ]),
@@ -844,6 +893,7 @@ G
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 が σ_m^x・σ_m^zσ_{m+1}^z・G の転置を「転置で不変」「転置は (-1)^2 = 1 倍なので G^⊤ = G」と名前だけで述べ、kronecker_transpose を言い直した式を (∵ クロネッカー積の転置) で置いていたのを、3 つの鎖に替えた。σ_m^x は def_site_pauli_matrices・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_x・def_site_pauli_matrices の 5 行、σ_m^zσ_{m+1}^z は Step 2 の準備の表示・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_z・準備の表示の 5 行、G は Step 2 の準備の表示・kronecker_transpose・transpose_of_pauli_x・transpose_of_pauli_y・negation_is_scalar_multiple_by_minus_one・kronecker_multilinear 2 回・scalar_multiple_is_associative・(-1)(-1) = 1・scalar_multiple_by_one・準備の表示の 11 行。成分の実性の段（箇条書き）は転置の記述を外しただけで変えていない（主張は不変）。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の成分の実性の箇条書きのうち σ_m^x・σ_m^zσ_{m+1}^z の 2 項目（「σ^x が 1 個、他は I。成分は実」「σ^z が 2 個、他は I。成分は実」）を、def_site_pauli_matrices・Step 2 の準備の表示で因子を並べ、新しい主張 identity_matrix_of_order_two_has_real_entries・pauli_x_has_real_entries・pauli_z_has_real_entries（006_Z_Y_anticommutation.ts）と kronecker_of_real_entry_matrices_has_real_entries を引く 2 段落に替えた。G の段は σ^y の成分の記述をそこへ移して段落にしただけで、論証は変えていない（G の成分の実性の鎖は別に扱う）。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の G の成分の実性の段落が「純虚数成分の因子 σ^y がちょうど 2 個なので、成分の積に現れる虚数単位は i^2 = -1 の形でまとまり、成分はすべて実数」と名前だけで述べていたのを、新しい定義 def_real_factor_of_pauli_y と主張 pauli_y_is_i_times_real_factor・real_factor_of_pauli_y_has_real_entries（006_Z_Y_anticommutation.ts）、real_scalar_multiple_of_real_entry_matrix_has_real_entries（002_linear_space_general.ts）を引く形にした。鎖は Step 2 の準備の G の表示・pauli_y_is_i_times_real_factor・kronecker_multilinear 2 回・scalar_multiple_is_associative・i·i = -1・inclusion_rr_to_cc の略記の 7 行で G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y) とし、続く段落で kronecker_of_real_entry_matrices_has_real_entries と real_scalar_multiple_of_real_entry_matrix_has_real_entries を引く。主張は変えていない。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の結論が S_1^{(+)}・S_2 の転置での対称性を「実係数の有限和」と名前だけで述べていたのを、新しい主張 transpose_of_matrix_sum・transpose_of_matrix_scalar_multiple・transpose_of_matrix_difference・transpose_of_finite_sum_of_matrices（002_linear_space_general.ts）を引く 2 本の鎖にした。S_2 は Step 1 の表示・transpose_of_matrix_scalar_multiple・transpose_of_finite_sum_of_matrices・(σ_m^x)^⊤ = σ_m^x を各項へ・Step 1 の表示の 5 行、S_1^{(+)} は Step 2 の表示・transpose_of_matrix_difference・transpose_of_matrix_scalar_multiple を 2 箇所・transpose_of_finite_sum_of_matrices・(σ_m^zσ_{m+1}^z)^⊤ を各項へ・G^⊤ = G・Step 2 の表示の 7 行。成分の実性（実係数の和）の段と実対称 ⇒ エルミートの段は散文のままである。主張は変えていない。",
       ],
     },
   },

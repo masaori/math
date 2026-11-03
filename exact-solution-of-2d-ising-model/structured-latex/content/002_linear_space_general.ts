@@ -4763,6 +4763,229 @@ G(X - W)
     },
   },
   {
+    id: "linear_space_general_claim_transpose_of_matrix_sum",
+    kind: "claim",
+    title: { text: "行列の和の転置は転置の和" },
+    labels: ["transpose_of_matrix_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。和は ",
+        ref("def_matrix_sum"),
+        "、転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(A + B)^\top = A^\top + B^\top`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(n,m,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`p \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`q \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A + B)^\top\bigr)_{pq}
+&= (A + B)_{qp}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (B \to A + B)\bigr)\\
+&= A_{qp} + B_{qp}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ (i \to q,\ j \to p)\bigr)\\
+&= \left(A^\top\right)_{pq} + \left(B^\top\right)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (B \to A \text{ と } B \to B)\ \text{を 2 箇所へ適用}\bigr)\\
+&= \left(A^\top + B^\top\right)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_sum}\ (m \to n,\ n \to m,\ A \to A^\top,\ B \to B^\top,\ i \to p,\ j \to q)\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の結論が、S_1^{(+)}・S_2 の転置での対称性を「実係数の有限和」と名前だけで述べていたので、S_1^{(+)}・S_2 の転置の鎖が引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_transpose_of_matrix_scalar_multiple",
+    kind: "claim",
+    title: { text: "行列のスカラー倍の転置は転置のスカラー倍" },
+    labels: ["transpose_of_matrix_scalar_multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(cA)^\top = c\,A^\top`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(n,m,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`p \in \{1,\dots,n\}`),
+        "、",
+        math(String.raw`q \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((cA)^\top\bigr)_{pq}
+&= (cA)_{qp}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (B \to cA)\bigr)\\
+&= c\,A_{qp}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ (a \to c,\ i \to q,\ j \to p)\bigr)\\
+&= c\,\left(A^\top\right)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (B \to A)\bigr)\\
+&= \left(c\,A^\top\right)_{pq}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\ (m \to n,\ n \to m,\ a \to c,\ A \to A^\top,\ i \to p,\ j \to q)\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の S_1^{(+)}・S_2 の転置の鎖が、係数 K_1・K_2^* を転置の外へ出す段を引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_transpose_of_matrix_difference",
+    kind: "claim",
+    title: { text: "行列の差の転置は転置の差" },
+    labels: ["transpose_of_matrix_difference"],
+    statement: [
+      paragraph([
+        math(String.raw`m, p \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A, B \in \mathrm{Mat}(m,p,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。差は ",
+        ref("def_matrix_difference"),
+        "、転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`(A - B)^\top = A^\top - B^\top`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(p,m,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`k \in \{1,\dots,p\}`),
+        "、",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\bigl((A - B)^\top\bigr)_{ki}
+&= (A - B)_{ik}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (n \to p,\ B \to A - B,\ p \to k,\ q \to i\ \text{を同時に置き換える})\bigr)\\
+&= A_{ik} - B_{ik}
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)\\
+&= \left(A^\top\right)_{ki} - \left(B^\top\right)_{ki}
+&&\bigl(\because\ \blkref{def_matrix_transpose}\ (n \to p,\ B \to A \text{ と } B \to B,\ p \to k,\ q \to i\ \text{を同時に置き換える})\ \text{を 2 箇所へ適用}\bigr)\\
+&= \left(A^\top - B^\top\right)_{ki}
+&&\bigl(\because\ \blkref{def_matrix_difference}\ (m \to p,\ p \to m,\ A \to A^\top,\ B \to B^\top,\ i \to k,\ k \to i)\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} − K_1G の転置の鎖が、差の転置を引けるよう足した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_transpose_of_finite_sum_of_matrices",
+    kind: "claim",
+    title: { text: "行列の有限和の転置は転置の有限和" },
+    labels: ["transpose_of_finite_sum_of_matrices"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("mat_mult"),
+        " の記号）とする。左辺の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "（",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の中）、右辺の有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "（",
+        math(String.raw`\mathrm{Mat}(n,m,\mathbb{C})`),
+        " の中）、転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{j=1}^{r} X_j\Bigr)^\top = \sum_{j=1}^{r} X_j^\top`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{1} X_j\Bigr)^\top
+&= X_1^\top
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \sum_{j=1}^{1} X_j^\top
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (m \to n,\ n \to m,\ X_j \to X_j^\top)\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)^\top
+&= \Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)^\top
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)^\top + X_{r+1}^\top
+&&\bigl(\because\ \blkref{transpose_of_matrix_sum}\ (A \to \textstyle\sum_{j=1}^{r} X_j,\ B \to X_{r+1})\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} X_j^\top\Bigr) + X_{r+1}^\top
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{j=1}^{r+1} X_j^\top
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ (m \to n,\ n \to m,\ X_j \to X_j^\top)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の S_1^{(+)}・S_2 の転置の鎖が、Σσ^x_m・Σσ^z_mσ^z_{m+1} の転置を各項の転置の和にする段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_definition_matrix_with_real_entries",
     kind: "definition",
     title: { text: "成分がすべて実数の行列" },
