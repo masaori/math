@@ -103,44 +103,106 @@ y \ge 1 \ \land\ \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \ge 0
     ],
     proof: [
       paragraph([
-        "証明の中だけの記号として ",
-        math(String.raw`r := \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}`),
+        "準備。証明の中だけの記号として ",
+        math(String.raw`r := \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})} \in \mathbb{R}`),
         "、",
-        math(String.raw`u := \mathrm{arccosh}(y) = \log(y + r)`),
-        " とおく。",
-        ref("definition_of_sqrt_r_positive"),
-        " より ",
-        math(String.raw`r \ge 0`),
-        " かつ ",
-        math(String.raw`r^2 = y^2 - 1`),
-        "、",
+        math(String.raw`u := \mathrm{arccosh}(y) \in \mathbb{R}`),
+        " とおく（",
+        math(String.raw`y^2 - 1 \ge 0`),
+        " は ",
         ref("def_arccosh"),
-        " より ",
-        math(String.raw`y + r \ge 1`),
-        " である。また ",
+        " で示した）。（実対数と平方根による ",
+        math(String.raw`\mathbb R`),
+        " 脱出）",
+        math(String.raw`r`),
+        " は ",
+        ref("sqrt_nonnegative_existence_uniqueness"),
+        " の存在（",
+        math(String.raw`\mathbb{R}`),
+        " の完備性）で定まる実数、",
+        math(String.raw`u`),
+        " と以下の ",
+        math(String.raw`\exp`),
+        "・",
+        math(String.raw`\log`),
+        "・",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値は実数の指数関数と実対数（",
         ref("def_real_logarithm_positive"),
-        " の証明で示した ",
-        math(String.raw`\log 1 = 0`),
-        " を使う。",
+        "）の値であり、",
+        math(String.raw`\mathbb{Q}`),
+        " には一般に収まらない（",
+        math(String.raw`y`),
+        " によっては収まる）。",
       ]),
-      paragraph(["(1) の証明。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+&r \ge 0 \ \land\ r^2 = y^2 - 1
+   &&(\because\ \blkref{definition_of_sqrt_r_positive}) \\
+&u = \log(y + r)
+   &&(\because\ \blkref{def_arccosh}) \\
+&y + r \ge 1
+   &&(\because\ \blkref{def_arccosh})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\log 1
+&= \log(\exp(0))
+   &&(\because\ \blkref{scalar_exp_zero}) \\
+&= 0
+   &&(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x) = x)
+\end{aligned}`,
+      ),
+      paragraph([
+        "(1) の証明。",
+        math(String.raw`y + r \ge 1`),
+        " なので ",
+        math(String.raw`y + r > 1`),
+        " か ",
+        math(String.raw`y + r = 1`),
+        " である。",
+        math(String.raw`y + r > 1`),
+        " の場合。",
+      ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{arccosh}(y)
 &= \log(y + r)
    &&(\because\ \blkref{def_arccosh}) \\
-&\ge \log 1
-   &&(\because\ y + r \ge 1\text{。}y + r > 1 \text{ なら }\blkref{real_log_strictly_increasing}\text{、}y + r = 1 \text{ なら等号}) \\
+&> \log 1
+   &&(\because\ y + r > 1 \text{ と } \blkref{real_log_strictly_increasing}) \\
 &= 0
-   &&(\because\ \log 1 = 0)
+   &&(\because\ \text{準備の }\log 1 = 0)
 \end{aligned}`,
       ),
+      paragraph([math(String.raw`y + r = 1`), " の場合。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{arccosh}(y)
+&= \log(y + r)
+   &&(\because\ \blkref{def_arccosh}) \\
+&= \log 1
+   &&(\because\ y + r = 1) \\
+&= 0
+   &&(\because\ \text{準備の }\log 1 = 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\mathrm{arccosh}(y) \ge 0`),
+        " である。",
+      ]),
       paragraph(["(2) の証明。"]),
       displayMath(
         String.raw`\begin{aligned}
 \exp(u)
+&= \exp(\log(y + r))
+   &&(\because\ u = \log(y + r)) \\
 &= y + r
-   &&(\because\ u = \log(y+r) \text{ と } \exp(\log z) = z\ \blkref{def_real_logarithm_positive})
+   &&(\because\ \blkref{def_real_logarithm_positive}\text{ の }\exp(\log z) = z)
 \end{aligned}`,
       ),
       displayMath(
@@ -157,67 +219,106 @@ y^2 - r^2
 \exp(-u)
 &= \exp(-u)\,(y^2 - r^2)
    &&(\because\ y^2 - r^2 = 1) \\
-&= \exp(-u)\,(y + r)(y - r)
+&= \exp(-u)\,\bigl((y + r)(y - r)\bigr)
    &&(\because\ \text{和と差の積}) \\
-&= \exp(-u)\exp(u)\,(y - r)
+&= \exp(-u)\,\bigl(\exp(u)\,(y - r)\bigr)
    &&(\because\ \exp(u) = y + r) \\
-&= \exp(0)\,(y - r)
+&= \bigl(\exp(-u)\exp(u)\bigr)\,(y - r)
+   &&(\because\ \mathbb{R} \text{ の積の結合律}) \\
+&= \exp(-u + u)\,(y - r)
    &&(\because\ \blkref{scalar_exp_product}) \\
+&= \exp(0)\,(y - r)
+   &&(\because\ -u + u = 0) \\
+&= 1 \cdot (y - r)
+   &&(\because\ \blkref{scalar_exp_zero}) \\
 &= y - r
-   &&(\because\ \blkref{scalar_exp_zero})
+   &&(\because\ 1 \text{ は } \mathbb{R} \text{ の積の単位元})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
-\cosh(u)
+\cosh\!\left(\mathrm{arccosh}(y)\right)
+&= \cosh(u)
+   &&(\because\ u \text{ の定め方}) \\
 &= \frac{\exp(u) + \exp(-u)}{2}
    &&(\because\ \blkref{def_cosh_sinh}) \\
+&= \frac{(y + r) + \exp(-u)}{2}
+   &&(\because\ \exp(u) = y + r) \\
 &= \frac{(y + r) + (y - r)}{2}
-   &&(\because\ \text{上の 2 式}) \\
+   &&(\because\ \exp(-u) = y - r) \\
+&= \frac{2y}{2}
+   &&(\because\ \mathbb{R} \text{ の加法}) \\
 &= y
-   &&(\because\ \mathbb{R} \text{ の四則})
+   &&(\because\ \text{約分})
 \end{aligned}`,
       ),
       paragraph([
         "(3) の証明。",
+        math(String.raw`t \in \mathbb{R}`),
+        "、",
         math(String.raw`t \ge 0`),
-        " なら ",
+        "、",
+        math(String.raw`\cosh t = y`),
+        " とする。まず ",
         math(String.raw`\sinh t \ge 0`),
-        " である（",
+        " を示す。",
         math(String.raw`t > 0`),
-        " なら ",
-        ref("cosh_sinh_basic_properties"),
-        " (3)、",
-        math(String.raw`t = 0`),
-        " なら ",
-        math(String.raw`\sinh 0 = (\exp(0) - \exp(0))/2 = 0`),
-        "）。さらに",
+        " の場合。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\sinh t > 0
+   &&(\because\ t > 0 \text{ と } \blkref{cosh_sinh_basic_properties}\text{ (3)})
+\end{aligned}`,
+      ),
+      paragraph([math(String.raw`t = 0`), " の場合。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh 0
+&= \frac{\exp(0) - \exp(-0)}{2}
+   &&(\because\ \blkref{def_cosh_sinh}) \\
+&= \frac{\exp(0) - \exp(0)}{2}
+   &&(\because\ -0 = 0) \\
+&= \frac{1 - 1}{2}
+   &&(\because\ \blkref{scalar_exp_zero}) \\
+&= 0
+   &&(\because\ \mathbb{R} \text{ の四則})
+\end{aligned}`,
+      ),
+      paragraph([
+        "いずれの場合も ",
+        math(String.raw`\sinh t \ge 0`),
+        " である。次に",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 (\sinh t)^2
 &= (\cosh t)^2 - 1
-   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2)}) \\
+   &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (2) と移項}) \\
 &= y^2 - 1
    &&(\because\ \cosh t = y)
 \end{aligned}`,
       ),
-      paragraph([
-        "なので、",
-        ref("sqrt_nonnegative_existence_uniqueness"),
-        " の一意性より ",
-        math(String.raw`\sinh t = r`),
-        "。よって",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sinh t
+&= \sqrt{y^2-1}^{(\mathbb{R}_{\ge 0})}
+   &&(\because\ \sinh t \ge 0\text{、}(\sinh t)^2 = y^2 - 1 \text{ と } \blkref{definition_of_sqrt_r_positive}\text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）}) \\
+&= r
+   &&(\because\ r \text{ の定め方})
+\end{aligned}`,
+      ),
       displayMath(
         String.raw`\begin{aligned}
 t
 &= \log(\exp(t))
-   &&(\because\ \blkref{def_real_logarithm_positive}) \\
+   &&(\because\ \blkref{def_real_logarithm_positive}\text{ の }\log(\exp x) = x) \\
 &= \log(\cosh t + \sinh t)
    &&(\because\ \blkref{cosh_sinh_basic_properties}\text{ (1)}) \\
+&= \log(y + \sinh t)
+   &&(\because\ \cosh t = y) \\
 &= \log(y + r)
-   &&(\because\ \cosh t = y,\ \sinh t = r) \\
+   &&(\because\ \sinh t = r) \\
 &= \mathrm{arccosh}(y)
    &&(\because\ \blkref{def_arccosh})
 \end{aligned}`,
@@ -228,16 +329,24 @@ t
 \mathrm{arccosh}(1)
 &= \log\!\left(1 + \sqrt{1^2-1}^{(\mathbb{R}_{\ge 0})}\right)
    &&(\because\ \blkref{def_arccosh}) \\
+&= \log\!\left(1 + \sqrt{0}^{(\mathbb{R}_{\ge 0})}\right)
+   &&(\because\ 1^2 - 1 = 0) \\
 &= \log(1 + 0)
-   &&(\because\ 1^2 - 1 = 0 \text{ と } \sqrt{0}^{(\mathbb{R}_{\ge 0})} = 0) \\
+   &&(\because\ 0 \ge 0\text{、}0^2 = 0 \text{ と } \blkref{definition_of_sqrt_r_positive}\text{（}\blkref{sqrt_nonnegative_existence_uniqueness}\text{ の一意性）}) \\
 &= \log 1
    &&(\because\ 1 + 0 = 1) \\
 &= 0
-   &&(\because\ \log 1 = 0)
+   &&(\because\ \text{準備の }\log 1 = 0)
 \end{aligned}`,
       ),
     ],
-    conversion: { status: "added", notes: ["arccosh を式で定義したことに伴い、本文が使っている性質（非負・cosh との合成・非負側での一意性・arccosh(1)=0）を主張として置いた。"] },
+    conversion: {
+      status: "added",
+      notes: [
+        "arccosh を式で定義したことに伴い、本文が使っている性質（非負・cosh との合成・非負側での一意性・arccosh(1)=0）を主張として置いた。",
+        "2026-11-02: SageMath の検算（sagemath/check/arccosh_properties/）を付けるにあたり、証明を直した。log 1 = 0 を「def_real_logarithm_positive の証明で示した」と引いていたが、その定義に証明は無いので、scalar_exp_zero と log(exp x) = x からの鎖を準備に置いた。exp(-u)exp(u) = exp(0) の行を積の結合律・指数法則・-u+u=0 の三行に、cosh の鎖の「上の 2 式」を二行に、(3) の二つの代入と (4) の 1^2-1=0・√0=0 を一行ずつに分けた。(1) と (3) の sinh t ≥ 0 を場合分けの鎖に、√ の一意性を散文から (∵) 付きの式に移し、実対数と平方根による ℝ 脱出を準備に書いた。主張は変えていない。",
+      ],
+    },
   },
   {
     id: "transfer_matrix_015_claim_Z_Y_generate_algebra",

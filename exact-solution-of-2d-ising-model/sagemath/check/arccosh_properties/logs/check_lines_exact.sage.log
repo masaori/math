@@ -1,0 +1,34 @@
+(2) y^2 - r^2 の鎖
+  PASS y^2 - r^2 = y^2 - (y^2 - 1)（r^2 = y^2 - 1）
+  PASS y^2 - (y^2 - 1) = 1（R の四則）
+(2) exp(-u) の鎖
+  PASS exp(-u) = exp(-u)(y^2 - r^2)（y^2 - r^2 = 1）
+  PASS = exp(-u)((y+r)(y-r))（和と差の積）
+  PASS = exp(-u)(exp(u)(y-r))（exp(u) = y + r）
+  PASS = (exp(-u)exp(u))(y-r)（積の結合律）
+  PASS = exp(-u+u)(y-r)（scalar_exp_product。不定元の関係として）
+  PASS = exp(0)(y-r)（-u+u = 0。不定元の関係として）
+  PASS = 1·(y-r)（scalar_exp_zero。不定元の関係として）
+  PASS = y - r（積の単位元）
+(2) cosh の鎖（分母 2 を払って QQ 係数の多項式で比べる）
+  PASS cosh(u) = (exp(u)+exp(-u))/2（def_cosh_sinh の書き写し）
+  PASS = ((y+r) + exp(-u))/2（exp(u) = y + r）
+  PASS = ((y+r)+(y-r))/2（exp(-u) = y - r）
+  PASS = 2y/2（R の加法）
+  PASS = y（約分）
+(3) (sinh t)^2 の鎖
+  PASS (sinh t)^2 = (cosh t)^2 - 1（cosh_sinh_basic_properties (2) と移項）
+  PASS = y^2 - 1（cosh t = y）
+(3) t の鎖の行
+  PASS exp(t) = cosh t + sinh t（cosh_sinh_basic_properties (1)。定義の展開で、exp の値によらない）
+  PASS cosh t + sinh t = y + sinh t（cosh t = y）
+  PASS y + sinh t = y + r（sinh t = r）
+exp の性質を使う行（形式冪級数、全次数 14 以下）
+  PASS exp(-u)exp(u) = exp(-u+u)（exp(a)exp(b) = exp(a+b) を QQ[a,b] で確かめ a = -u, b = u を代入。対照: exp(a-b) とは一致しない）
+  PASS -u + u = 0（QQ[u] で）
+  PASS exp(0) = 1（部分和 S_N([0]) = [1]、N = 0..24）
+  PASS sinh 0 = (exp(0) - exp(-0))/2 = (exp(0)-exp(0))/2 = (1-1)/2 = 0
+準備の r と (4)（AA で厳密）
+  PASS 7 点の y で r ≥ 0、r^2 = y^2 - 1、非負の根の一意性、y + r ≥ 1（y > 1 なら > 1）
+  PASS (4) 1^2 - 1 = 0、√0 = 0（0 ≥ 0 かつ 0^2 = 0）、1 + 0 = 1
+RESULT: PASS

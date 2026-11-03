@@ -1,0 +1,5 @@
+PASS 準備 log 1 = log(exp(0)) = 0（exp(0) のボールは半径 0 で 1、log 1 の囲みは 0 を含む）
+PASS (1)・(2) 7 点の y ∈ AA で arccosh(y) ≥ 0（y > 1 で > 0）、exp(u) = y + r、exp(-u) = y - r、cosh(arccosh y) = y
+PASS (3) 7 点の t ≥ 0 で sinh t ≥ 0、sinh t = r、t = log(exp t) = arccosh(cosh t)（対照: t < 0 の 2 点では arccosh(cosh t) = -t ≠ t）
+PASS (4) arccosh(1) の囲みは 0 を含む（対照: y = 1 + 10^-6 では含まない）
+RESULT: PASS
