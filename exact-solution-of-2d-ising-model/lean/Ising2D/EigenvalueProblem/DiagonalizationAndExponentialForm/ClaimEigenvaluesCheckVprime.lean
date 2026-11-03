@@ -29,6 +29,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInRightFactorFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultiplesOfOneMatrixFromNecSuf
 import Ising2D.MathematicalTools.VectorAndMatrixNormsAndConvergence.ClaimContinuityOfProductsAndScalarMultiplesFromNecSuf
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpPositiveFromNecSuf
 
 namespace Ising2D
 
@@ -534,9 +535,11 @@ theorem Vprime_mulVec_of_mem_range {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : 
     _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • y := by rw [hQy]
                                                         -- 上の等式 `Q̌_εy = y`
 
-/-- **原文 `eigenvalues_of_check_Vprime` 最後**: 固有値はすべて正の実数。 -/
+/-- **原文 `eigenvalues_of_check_Vprime` 最後**: 固有値はすべて正の実数。
+人手の最後の段落「`ǧ(ε) ∈ ℝ` なので `real_exp_positive`（`x → ǧ(ε)`）より `exp(ǧ(ε)) > 0`」と同じく、
+`real_exp_positive` の具体版を `x := ǧ(ε)`（`F.gval g T : ℝ`）で引く。 -/
 theorem exp_gval_pos (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
-    0 < Real.exp (F.gval g T) := Real.exp_pos _
+    0 < Real.exp (F.gval g T) := real_exp_positive (F.gval g T)
 
 end CheckFermiSetup
 

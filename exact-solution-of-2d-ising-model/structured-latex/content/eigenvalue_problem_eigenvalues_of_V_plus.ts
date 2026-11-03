@@ -3616,7 +3616,15 @@ y_{\epsilon'}
         String.raw`\check{g}(\epsilon) := \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac{1}{2}\right) \in \mathbb{R}`,
       ),
-      paragraph(["とおく（", ref("def_gamma_theta"), "）。このとき"]),
+      paragraph([
+        "とおく（",
+        ref("def_gamma_theta"),
+        "。和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の ",
+        math(String.raw`\mathbb{R}`),
+        " の有限和である）。このとき",
+      ]),
       displayMath(
         String.raw`\check{V}'\,\check{Q}_\epsilon = \check{Q}_\epsilon\,\check{V}'
 = \exp(\check{g}(\epsilon))\,\check{Q}_\epsilon`,
@@ -4071,14 +4079,15 @@ E_K \check{Q}_\epsilon
       ]),
       paragraph([
         math(String.raw`\check{g}(\epsilon) \in \mathbb{R}`),
-        "（",
-        ref("gamma_theta_tilde_mu_positive"),
-        " より ",
-        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{>0}`),
-        "）なので ",
-        math(String.raw`\exp(\check{g}(\epsilon)) > 0`),
-        " である。",
+        "（主張の ",
+        math(String.raw`\check{g}`),
+        " の定義）なので、",
       ]),
+      displayMath(
+        String.raw`\exp(\check{g}(\epsilon)) > 0
+   \quad \left(\because\ \blkref{real_exp_positive}\ (x \to \check{g}(\epsilon))\right)`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
@@ -4093,6 +4102,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 3・Step 3' の部分和の鎖の名前だけの根拠「有限和と行列積の分配法則」「有限和からの共通因子のくくり出し」を、新しく足した定義 def_finite_sum_of_matrices_from_index_zero・def_finite_sum_of_complex_numbers_from_index_zero（添字 0 からの和を添字 1 からの和へずらす）と、finite_sum_of_matrices_distributes_in_left_factor（右からの形は _right_factor）・scalar_multiple_factors_out_of_left_factor（_right_factor）・Step 2（Step 3' の帰納法）・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix の 1 行 1 主張の 8 行の鎖にした。部分和の係数の和は Σ(1/k!)ǧ^k の形に揃え、極限の鎖の 3 行目も同じ形にした（主張は不変）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step3_partial_sum_chains.sage。",
         "2026-11-03: Step 3・Step 3' の極限の鎖の最後の行「実指数級数の収束と極限の一意性」が引いていた real_exp_series_converges は a ∈ ℝ_{≥0} についての主張で、ǧ(ε) < 0（例えば ε = 0）を覆わず、数の列の極限を行列のスカラー倍の列の極限へ移す段も無かった。scalar_exp_is_limit_of_partial_sums（K = ℂ、すべての x を覆う）・新しく足した scalar_sequence_times_matrix_converges・complex_exp_of_real_argument の 3 行に分けた。Step 3' の「行列積の連続性」は右の因子が動く形なので、新しく足した matrix_multiplication_continuity_in_right_factor を引いた。行列の列の lim の一意性は鎖の前の段落で matrix_norm_triangle_inequality (4) を引いて宣言した。鎖の中の係数 ǧ(ε) は inclusion_rr_to_cc の ǧ(ε)_ℂ と書く行を足した（Step 1・Step 2・部分和の鎖が ǧ(ε) を ℂ の係数として使っている件は論文全体の帰属の件に残る）。主張の右辺が (exp(ǧ(ε)))_ℂ を掛けた行列であることを主張文に書いた（主張の強さは変えていない）。",
         "2026-11-03: Step 4 の後半の鎖 V̌'y = V̌'(Q̌_εy) = exp(ǧ)Q̌_εy = exp(ǧ)y が、2 行目で (V̌'Q̌_ε)y = V̌'(Q̌_εy) とスカラー倍の作用を名前を出さずに使っていたのを、mat_mult_associative（q → 1）・Step 3 の極限の鎖・scalar_multiple_factors_out_of_left_factor（p → 1）の 1 行 1 主張の 5 行にした。係数は Step 3 の主張文どおり (exp(ǧ(ε)))_ℂ と書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step4_eigenvector_chain.sage。",
+        "2026-11-03: 証明の最後の段落「ǧ(ε) ∈ ℝ（gamma_theta_tilde_mu_positive より γ(θ̃_μ) ∈ ℝ_{>0}）なので exp(ǧ(ε)) > 0」は、実数の exp が正であることを名前を出さずに使い、要らない γ の正値性を根拠に挙げていた。real_exp_positive（x → ǧ(ε)）を引く 1 行にし、ǧ(ε) ∈ ℝ の根拠は主張の ǧ の定義とした。主張の ǧ の定義に、和が def_finite_sum_of_real_numbers の ℝ の有限和であることを書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.exp_gval_pos は real_exp_positive の具体版 Ising2D.real_exp_positive（MathematicalTools/MatrixExponentialAndCommutators/ClaimRealExpPositive.lean）を引く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_positivity.sage。",
       ],
     },
   },

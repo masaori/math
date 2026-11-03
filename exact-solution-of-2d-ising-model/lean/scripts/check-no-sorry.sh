@@ -353,12 +353,21 @@ targets=(
   Ising2D.sigmaZ_eq_diagonal
   Ising2D.sigmaZ_mulVec_basisVec
   Ising2D.sigmaZ_mulVec_basisVec_spin
-  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean）---
+  # --- 数学的道具立て「行列指数関数と交換子計算」（MathematicalTools/MatrixExponentialAndCommutators/。必要十分版は NecSuf/ExpDiagonal.lean・NecSuf/PositivityOfAdditiveToMultiplicativeMap.lean）---
   Ising2D.NecSuf.map_exp_of_continuous
   Ising2D.exp_pi_apply
   Ising2D.matrixExp_diagonal
   Ising2D.matrixExp_diagonal_apply
   Ising2D.matExp_diagonal
+  Ising2D.real_exp_mul_exp_neg
+  Ising2D.real_exp_ne_zero
+  Ising2D.real_exp_nonneg
+  Ising2D.real_exp_positive
+  Ising2D.NecSuf.mul_map_neg_eq_one
+  Ising2D.NecSuf.map_ne_zero
+  Ising2D.NecSuf.map_nonneg
+  Ising2D.NecSuf.map_pos
+  Ising2D.real_exp_positive_of_necSuf
   # --- 数学的道具立て「可逆行列・線型写像との対応・共役変換」（MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/。必要十分版は NecSuf/Conjugation.lean）---
   Ising2D.Conjugation.conj_mul_matrix
   Ising2D.Conjugation.conj_one_matrix

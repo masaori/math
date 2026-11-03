@@ -268,3 +268,10 @@ RESULT: PASS
   236 段（M_col = 2..4 の全ての μ の二場合の 10 行の鎖、全ての語 ε の Q̌_ε = ∏R、不定元の成分の 2×2 行列での二場合の鎖、スカラーの差の鎖 8 段（QQ[i]）。QQ の厳密計算）
   否定コントロール 2 件: 場合の仮定を取り違えると場合の仮定の行が外れる
 RESULT: PASS
+
+##### 2026-11-03 に check_eigenvalues_of_check_Vprime_positivity を足した（eigenvalues_of_check_Vprime の証明の最後の段落: exp(ǧ(ε)) > 0 を real_exp_positive で引く行と、real_exp_positive の 2 本の鎖を x := ǧ(ε) で）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_eigenvalues_of_check_Vprime_positivity.sage
+checked steps: 4048
+negative controls (broken lines detected): 880
+negative controls (Z counterexample): 1
+RESULT: PASS
