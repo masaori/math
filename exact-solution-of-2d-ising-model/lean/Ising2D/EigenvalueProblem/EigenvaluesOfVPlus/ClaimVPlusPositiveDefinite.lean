@@ -20,6 +20,7 @@
 人手の `V_2` の値では `VPlusOfTransfer_eq_VPlus`）である。
 -/
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
+import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimIHPauliForm
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf

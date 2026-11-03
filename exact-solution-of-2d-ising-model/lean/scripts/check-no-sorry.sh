@@ -437,6 +437,7 @@ targets=(
   Ising2D.S1plus_transpose
   Ising2D.S2_isHermitian
   Ising2D.S2_transpose
+  Ising2D.S2_isHermitian_by_anticommutation
   Ising2D.entries_real_of_isHermitian_of_transpose
   Ising2D.posDef_smul_of_pos
   Ising2D.posDef_exp_of_isHermitian
@@ -1385,6 +1386,7 @@ targets=(
   Ising2D.NecSuf.hermitian_of_star_fixed_symmetric_entries
   Ising2D.S2_isHermitian_of_real_symmetric
   Ising2D.S1plus_isHermitian_of_real_symmetric
+  Ising2D.real_coefficient_of_star_eq
   Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I

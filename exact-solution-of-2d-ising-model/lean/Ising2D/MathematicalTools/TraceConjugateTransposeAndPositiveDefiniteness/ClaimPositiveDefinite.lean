@@ -5,7 +5,8 @@
 - `def_hermitian_positive_definite`（`eigenvalues_of_V_011_definition_...`）
 - `star_preserves_norm_and_limits`（`eigenvalues_of_V_012_claim_...`）
 - `exp_hermitian_is_positive_definite`（`eigenvalues_of_V_013_claim_...`）
-- `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）
+- `iH_is_real_symmetric`（`eigenvalues_of_V_014_claim_...`。正本は `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`）の、反可換性による別の論法の補助だけ
+  （人手の主張の具体版は `EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）
 - `V_is_positive_definite`（`eigenvalues_of_V_015_claim_...`）
 
 原文の「共役転置 `A^*`」「エルミート」「正定値」は mathlib の
@@ -21,20 +22,20 @@ mathlib は同じ事実を `Matrix.exp_conjTranspose`（`exp(A^*) = exp(A)^*`）
 
 人手 `iH_is_real_symmetric` は `S_1^{(+)} = iK_1H_1^{(+)}` を `K_1 ∑ σ^z_m σ^z_{m+1} - K_1 G` へ、
 `S_2` を `K_2^* ∑ σ^x_m` へ書き換えてから成分の実性と転置対称性を数えている。
-形式化してみると、**その書き換えは不要**で、
+このファイルの補助は、その書き換えを経ずに
 
 - `Z_m^⊤ = Z_m`, `Y_m^⊤ = -Y_m`（Pauli 行列の転置の性質だけ）
 - `Z_m^* = Z_m`, `Y_m^* = Y_m`（Pauli 行列がエルミートであること）
 - `[Z_μ, Y_ν]_+ = 0`（既に形式化済みの `anticomm_Z_Y`）
 
 の 3 つから直ちに従う（`G` も `M` の偶奇も出てこない）。
-なお「実対称」は「エルミートかつ転置不変」と同値なので、両方を示す。
-
-人手の本文は `(+)` セクターの `S_1^{(+)}` だけを述べる（`(−)` セクターは参照用ノート
-`structured-latex/notes/minus_sector_not_adopted.ts` へ退避済み）。Lean では境界項の係数を引数 `η` に
-持たせた一般形 `S1_isHermitian` / `S1_transpose` を補助として残し（整数運動量の経路の形式化の記録
-（`Vmat` ほか）が使う）、人手の主張に対応する `(+)` の定理 `S1plus_isHermitian` / `S1plus_transpose` は
-その `η = -1` の場合として立てる。
+この論法は人手の論法とは別なので、人手 `iH_is_real_symmetric` の主張の具体版 `S1plus_isHermitian`・`S1plus_transpose`・
+`S2_isHermitian`・`S2_transpose` はここには置かず、人手の Step 3 の鎖（因子ごとの転置と成分の実性）から
+`EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean` で示す。このファイルに残すのは、境界項の係数を引数 `η` に
+持たせた一般形 `S1_isHermitian` / `S1_transpose`（整数運動量の経路の形式化の記録（`Vmat` ほか）と、人手の主張の範囲外の
+`M_col ≤ 1` の場合を埋めるために `S1plus_isHermitian` / `S1plus_transpose` が使う）と、補助
+`S2_isHermitian_by_anticommutation`・`H2_transpose`（`Vmat_posDef` と、人手の主張の範囲外の `M_col = 0` の場合を埋めるために
+`S2_isHermitian` / `S2_transpose` が使う）である。
 -/
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionH1H2V1V2
 import Ising2D.EigenvalueProblem.ReductionToATheta.ClaimAnticommutatorZY
@@ -196,27 +197,17 @@ theorem S1_isHermitian {K1 η : ℂ} (hK1 : star K1 = K1) (hη : star η = η) :
 theorem S1_transpose {K1 η : ℂ} : (((Complex.I * K1) • H1 M η))ᵀ = (Complex.I * K1) • H1 M η := by
   rw [Matrix.transpose_smul, H1_transpose]
 
-/-- **人手本文 `iH_is_real_symmetric`**: `S_1^{(+)} = i K_1 H_1^{(+)}` はエルミート（`K_1` 実）。 -/
-theorem S1plus_isHermitian {K1 : ℂ} (hK1 : star K1 = K1) :
-    (((Complex.I * K1) • H1plus M)).IsHermitian :=
-  S1_isHermitian hK1 (by simp)
-
-/-- **人手本文 `iH_is_real_symmetric`**: `S_1^{(+)} = i K_1 H_1^{(+)}` は転置不変。 -/
-theorem S1plus_transpose {K1 : ℂ} :
-    (((Complex.I * K1) • H1plus M))ᵀ = (Complex.I * K1) • H1plus M :=
-  S1_transpose
-
-/-- **原文 `iH_is_real_symmetric`**: `S_2 = i K_2^* H_2` は実対称。 -/
-theorem S2_isHermitian {K2star : ℂ} (hK2 : star K2star = K2star) :
+/-- 補助: `S_2 = iK_2^*H_2`（`K_2^*` 実）は、`[Z, Y]_+ = 0` からエルミート（全ての `M`）。
+人手 `iH_is_real_symmetric` の論法（Step 3 の転置の鎖と成分の実性）ではない。人手の主張の具体版は
+`S2_isHermitian`（`EigenvalueProblem/EigenvaluesOfVPlus/ClaimIHPauliForm.lean`）で、このファイルの中で `S_2` のエルミート性を要る
+整数運動量の経路の形式化の記録 `Vmat_posDef`（このファイルは `ClaimIHPauliForm.lean` より前にある）と、`S2_isHermitian` の
+人手の主張の範囲外の `M_col = 0` の場合がこちらを使う。 -/
+theorem S2_isHermitian_by_anticommutation {K2star : ℂ} (hK2 : star K2star = K2star) :
     (((Complex.I * K2star) • H2 M)).IsHermitian := by
   have h : (((Complex.I * K2star) • H2 M))ᴴ = (Complex.I * K2star) • H2 M := by
     rw [Matrix.conjTranspose_smul, H2_conjTranspose, star_I_mul hK2,
       smul_neg, neg_smul, neg_neg]
   exact h
-
-theorem S2_transpose {K2star : ℂ} :
-    (((Complex.I * K2star) • H2 M))ᵀ = (Complex.I * K2star) • H2 M := by
-  rw [Matrix.transpose_smul, H2_transpose]
 
 /-- 原文の「成分がすべて実数で転置について対称」＝「エルミートかつ転置不変」。 -/
 theorem entries_real_of_isHermitian_of_transpose {A : TensorPow M}
@@ -298,7 +289,7 @@ theorem Vmat_posDef {K1 η K2star : ℂ} {s2 : ℝ}
     rw [hEq]
     exact hS1.exp
   have hA : (NormedSpace.exp ((Complex.I * K2star) • H2 M)).PosDef :=
-    posDef_exp_of_isHermitian (S2_isHermitian hK2)
+    posDef_exp_of_isHermitian (S2_isHermitian_by_anticommutation hK2)
   have hinj : Function.Injective (V1pmHalf M K1 η).mulVec := by
     have hEq : V1pmHalf M K1 η = NormedSpace.exp (((1 / 2 : ℂ) * Complex.I * K1) • H1 M η) := rfl
     rw [hEq]
