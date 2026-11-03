@@ -1682,6 +1682,100 @@ z^{m+1} := z^m\, z`),
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_real_inclusions_is_real",
+    kind: "claim",
+    title: { text: "実数の包含の有限積は実数の包含" },
+    labels: ["finite_product_of_real_inclusions_is_real"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`z_1,\dots,z_m \in \mathbb{C}`),
+        " とし、各 ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について ",
+        math(String.raw`z_j = (r_j)_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r_j \in \mathbb{R}`),
+        " が存在するとする。有限積は ",
+        ref("def_finite_product_of_complex_numbers"),
+        "、",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} z_j = r_{\mathbb{C}}`),
+      paragraph([
+        "を満たす ",
+        math(String.raw`r \in \mathbb{R}`),
+        " が存在する。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき、仮定の ",
+        math(String.raw`r_1 \in \mathbb{R}`),
+        " を取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} z_j
+&= z_1
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= (r_1)_{\mathbb{C}}
+&&(\because\ \text{仮定を}\ j = 1\ \text{で})
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`r := r_1`),
+        " が求めるものである。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`z_1,\dots,z_{m+1} \in \mathbb{C}`),
+        " の各 ",
+        math(String.raw`z_j`),
+        " が ",
+        math(String.raw`z_j = (r_j)_{\mathbb{C}}`),
+        "（",
+        math(String.raw`r_j \in \mathbb{R}`),
+        "）を満たすとする。帰納法の仮定を ",
+        math(String.raw`z_1,\dots,z_m`),
+        " に適用して、",
+        math(String.raw`\prod_{j=1}^{m} z_j = s_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`s \in \mathbb{R}`),
+        " を取ると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} z_j
+&= \Bigl(\prod_{j=1}^{m} z_j\Bigr)\, z_{m+1}
+&&(\because\ \blkref{def_finite_product_of_complex_numbers})\\
+&= s_{\mathbb{C}}\, z_{m+1}
+&&(\because\ s\ \text{の取り方})\\
+&= s_{\mathbb{C}}\, (r_{m+1})_{\mathbb{C}}
+&&(\because\ \text{仮定を}\ j = m+1\ \text{で})\\
+&= (s\, r_{m+1})_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to s,\ b \to r_{m+1}))
+\end{aligned}`),
+      paragraph([
+        "であり、",
+        math(String.raw`r := s\, r_{m+1} \in \mathbb{R}`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の積）が求めるものである。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「クロネッカー積の成分は各因子の成分の積なので実」を名前だけで述べていたので、クロネッカー積の成分の実性（kronecker_of_real_entry_matrices_has_real_entries）を示すのに引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_claim_finite_sum_with_single_nonzero_term",
     kind: "claim",
     title: { text: "一つの項のほかが 0 の有限和はその項に等しい" },

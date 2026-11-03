@@ -1,0 +1,2 @@
+checked m = 1..8 with indeterminates r_1..r_8
+RESULT: PASS

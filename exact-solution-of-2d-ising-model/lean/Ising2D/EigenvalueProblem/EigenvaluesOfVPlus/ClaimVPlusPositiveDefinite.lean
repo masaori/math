@@ -23,6 +23,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckVprime
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 
 namespace Ising2D
 
@@ -197,8 +198,8 @@ theorem VPlus_mul_VPlusInv {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
         -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
         rw [smul_smul]
     _ = ((a * a⁻¹ : ℝ) : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
-        -- `real_inclusion_preserves_product`（`a → a`、`b → a^{-1}`。Lean の具体版は無く、mathlib の `Complex.ofReal_mul`）
-        rw [Complex.ofReal_mul]
+        -- `real_inclusion_preserves_product`（`a → a`、`b → a^{-1}`。具体版 `real_inclusion_mul`）
+        rw [real_inclusion_mul]
     _ = ((1 : ℝ) : ℂ) • ((Ep * Ap * Ep) * (Em * Am * Em)) := by
         -- `ℝ` で `aa^{-1} = 1`
         rw [mul_inv_cancel₀ hane]
@@ -256,8 +257,8 @@ theorem VPlusInv_mul_VPlus {K1 K2star : ℂ} {s2 : ℝ} (hs2 : 0 < s2) :
         -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
         rw [smul_smul]
     _ = ((a⁻¹ * a : ℝ) : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
-        -- `real_inclusion_preserves_product`（`a → a^{-1}`、`b → a`。Lean の具体版は無く、mathlib の `Complex.ofReal_mul`）
-        rw [Complex.ofReal_mul]
+        -- `real_inclusion_preserves_product`（`a → a^{-1}`、`b → a`。具体版 `real_inclusion_mul`）
+        rw [real_inclusion_mul]
     _ = ((1 : ℝ) : ℂ) • ((Em * Am * Em) * (Ep * Ap * Ep)) := by
         -- `ℝ` で `a^{-1}a = 1`
         rw [inv_mul_cancel₀ hane]
