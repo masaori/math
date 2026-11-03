@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 367 件のうち、SageMath の検算が無いもの 60 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 369 件のうち、SageMath の検算が無いもの 58 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -219,13 +219,19 @@
   人手証明を直した: 主張を、定義どおりスカラーを左に置き、像の記号（j_Z・j_R・μ_Z）と `(M_col)_C^{-1}` の存在を書いて、主張の左辺から鎖を始める形にした（中身は不変）。生成の主張を `Z_Y_generate_algebra` の (i)〜(iv) で述べ直した。行列の `theorem_exp_product` (n=1) を `scalar_exp_product` に、名前だけの「有限和への分配」「有限和の順序交換」「k = j の項だけが残る」を `finite_sum_of_scalar_multiples` と新しい二つの主張に付け替え、指数を i((j_Z − k_Z)_R θ̃)_C へ書き換える準備 2 の鎖と、k ≠ j の項が O になる準備 1 の鎖を置いた。計算の誤りは無かった。
   申し送り: Lean の具体版 `ClaimRecoverZYFromCheckZY.lean` は旧い証明の骨格（Step 0〜3）と旧い主張の形のままで、新しい 13 等号の鎖・生成の述べ方との 1 対 1 は Lean の連続実行の受け持ち。この主張を引く `T_V_plus_eq_T_check_Vprime` の証明の Step 2 は、復元公式を旧い形 (1/M)Σ Ž_μ exp(imθ̃_μ) で書き写しており、そのブロックの検算の単位で新しい形にそろえる。
 
+- `def_gamma1_gamma2_of_theta`（γ_1・γ_2 の定義と A(θ) をそれで書く主張）と `gamma1_lower_bound_all_theta`（γ_1(θ) ≥ cosh(2K_1 − 2K_2^*) ≥ 1）: `sagemath/check/<ラベル>/`。
+  前者は γ_2(−θ) の鎖の各行がその行の (∵) の関係式 1 本だけのイデアルで成り立つことを `QQ(i)` の多項式環で、主張と全行を代数的数の具体値で厳密に確かめた（具体値の偶奇性は Sage の記号式が当てはめるので独立な確認ではない）。後者は等号の行を多項式と有理関数体 `QQ(Y,X)` で、不等号の行を差の積の形と `AA` の具体値で厳密に確かめた。
+  人手証明（後者）を直した: 根拠を各行から引く形にし（双対結合定数の正値性・`indexed_hyperbolic_abbreviations_positive`・`def_indexed_hyperbolic_abbreviations`・`cosh_addition_formula`・`cosh_at_least_one`）、末尾の参照の一覧を外し、cos θ ≤ 1 による評価を準備の一操作ずつの含意に分け、全実数上の cos θ ≤ 1 を前提とすることを主張に書いた（不等式の中身は不変）。計算の誤りは無かった。Lean は不変（`lake build`・`check-no-sorry.sh` 成功）。`ClaimGamma1LowerBound.lean` の注記と新しい準備の含意との 1 対 1 は Lean の連続実行の受け持ち。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `def_gamma1_gamma2_of_theta`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `gamma_2_theta_tilde_nonzero`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`def_gamma1_gamma2_of_theta` のレビューで見つかった（今回の差分より前から）: このブロックは γ_1・γ_2 の定義と「A(θ) はこう書ける」の主張を束ねている。証明の第一段落（(1,1)・(2,2)・(1,2) 成分は定義そのもの）が散文で、`cos(−θ) = cos θ`・`sin(−θ) = −sin θ` を引くブロックが本文に無い（全実数上の cos・sin が未整備の件）。定義式は実数と i の積を包含の像の記号なしで書いている。分けるとラベル参照を付け替えることになるので、検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`anticommutator_of_check_Z_Y` のレビューで見つかった（表記の省略と型の違い。今回の差分より前から）: `exp_sum` の主張は j・k・M_col の実数・複素数への像を書かず、M_col ∈ ℕ_{≥1} でこの章の M_col ∈ ℤ_{≥2} と型が違う。`anticommutator_of_Z_and_Y` の主張は M_col・μ・ν の所属を宣言せず、右辺の `2Iδ` が何のスカラー倍かを書いていない。この単位では使う側の証明で「準備 2 の読み」と「2_C I の δ 倍と書いた」の注記で補った。直すには両主張を像の記号とスカラー倍の括弧で書き直し、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 

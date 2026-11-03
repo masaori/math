@@ -1931,21 +1931,72 @@ A(\theta)_{2,1}
         String.raw`\gamma_1(\theta) \geq \cosh\left(2K_1 - 2K_2^*\right) \geq 1
 \qquad (\forall \theta \in \mathbb{R})`,
       ),
-      paragraph(["が成り立つ。"]),
+      paragraph([
+        "が成り立つ。証明は全実数上の ",
+        math(String.raw`\cos`),
+        " の性質 ",
+        math(String.raw`\cos\theta \leq 1\ (\theta \in \mathbb{R})`),
+        " を前提とする（本文の ",
+        ref("cosine_at_most_one"),
+        " は ",
+        math(String.raw`\theta \in [-\pi/2, \pi/2]`),
+        " に限る）。",
+      ]),
     ],
     proof: [
       paragraph([
-        "準備として、",
-        ref("def_transfer_matrix_symbols"),
+        "準備。",
+        ref("def_gamma1_gamma2_of_theta"),
         " より ",
-        math(String.raw`K_1, K_2^* > 0`),
-        " なので ",
-        math(String.raw`s_1 = \sinh 2K_1 > 0`),
+        math(String.raw`K_1, K_2 \in \mathbb{R}_{>0}`),
+        " である。",
+        ref("def_first_dual_coupling_constant"),
+        "・",
+        ref("def_second_dual_coupling_constant"),
+        " より ",
+        math(String.raw`K_1^*, K_2^* \in \mathbb{R}_{>0}`),
+        " である。したがって ",
+        ref("indexed_hyperbolic_abbreviations_positive"),
+        " より ",
+        math(String.raw`c_1, s_1, c_2^*, s_2^* \in \mathbb{R}`),
         "、",
-        math(String.raw`s_2^* = \sinh 2K_2^* > 0`),
-        "、したがって ",
-        math(String.raw`s_1s_2^* > 0`),
-        " である。このとき",
+        math(String.raw`s_1 > 0`),
+        "、",
+        math(String.raw`s_2^* > 0`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+s_1s_2^* &> 0\cdot s_2^*
+&&(\because\ s_1>0\ \text{の両辺に}\ s_2^*>0\ \text{を掛ける})\\
+&= 0
+&&(\because\ \mathbb{R}\ \text{では}\ 0\ \text{との積は}\ 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。さらに",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\cos\theta \leq 1
+&\Longrightarrow s_1s_2^*\cos\theta \leq s_1s_2^*\cdot 1
+&&(\because\ \text{両辺に}\ s_1s_2^*>0\ \text{を掛ける})\\
+&\Longrightarrow -s_1s_2^*\cdot 1 \leq -s_1s_2^*\cos\theta
+&&(\because\ \text{両辺に}\ -1<0\ \text{を掛ける。向きが変わる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、左端の ",
+        math(String.raw`\cos\theta \leq 1`),
+        " は主張の前提である。以下で ",
+        math(String.raw`\mathbb{R}`),
+        " を使うのは、",
+        math(String.raw`\cosh`),
+        "・",
+        math(String.raw`\sinh`),
+        " の値が実数の exp の値、すなわち部分和の極限だからであり、",
+        math(String.raw`\cos\theta`),
+        " が全実数上の実数値関数の値だからである。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -1953,24 +2004,17 @@ A(\theta)_{2,1}
 &= c_1c_2^* - s_1s_2^*\cos\theta
 &&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
 &\geq c_1c_2^* - s_1s_2^*\cdot 1
-&&(\because\ \cos\theta\leq 1\ \text{と}\ s_1s_2^*>0\text{。負号つきの項なので向きが変わる})\\
+&&(\because\ \text{準備の}\ -s_1s_2^*\cdot 1 \leq -s_1s_2^*\cos\theta\ \text{の両辺に}\ c_1c_2^*\ \text{を加える})\\
 &= c_1c_2^* - s_1s_2^*
 &&(\because\ \mathbb{R}\ \text{では}\ 1\ \text{は積の単位元})\\
+&= \cosh 2K_1\cosh 2K_2^* - \sinh 2K_1\sinh 2K_2^*
+&&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})\\
 &= \cosh\left(2K_1-2K_2^*\right)
-&&(\because\ \text{加法定理}\ \cosh(x-y)=\cosh x\cosh y-\sinh x\sinh y\ \text{を}\ x=2K_1,\ y=2K_2^*\ \text{に適用})\\
+&&(\because\ \blkref{cosh_addition_formula}\ \text{の複号}\ -\ \text{を}\ x=2K_1,\ y=2K_2^*\ \text{に適用})\\
 &\geq 1
-&&(\because\ \cosh\ \text{は実数で}\ 1\ \text{以上})
+&&(\because\ \blkref{cosh_at_least_one}\ \text{を}\ x=2K_1-2K_2^*\ \text{に適用})
 \end{aligned}`,
       ),
-      paragraph([
-        "である（引いたブロックは ",
-        ref("def_gamma1_gamma2_of_theta"),
-        "、",
-        ref("def_transfer_matrix_symbols"),
-        "、",
-        ref("cosh_sinh_basic_properties"),
-        "）。",
-      ]),
     ],
     conversion: {
       status: "added",
@@ -1983,6 +2027,11 @@ A(\theta)_{2,1}
         "2026-10-31: statement の中で定めていた γ(θ) := arccosh(γ_1(θ))（θ∈ℝ）と、証明の末尾のその well-defined 性の文を、" +
           "独立した定義 def_gamma_theta へ移した（1 ブロック 1 主張）。不等式の主張と証明は変えていない。" +
           "γ_1 の出典を、γ_1 を定めていない def_A_theta から def_gamma1_gamma2_of_theta に直し、そのためにこのブロックを def_gamma1_gamma2_of_theta の直後へ移した。",
+        "2026-11-03: SageMath の検算（sagemath/check/gamma1_lower_bound_all_theta/）に合わせて根拠を各行から引く形にした。" +
+          "s_1, s_2^* > 0 の出典を双対結合定数の正値性と indexed_hyperbolic_abbreviations_positive に、s_1s_2^* > 0 を鎖に、" +
+          "略記を双曲線関数へ戻す行を def_indexed_hyperbolic_abbreviations で足し、名前だけの「加法定理」「cosh は 1 以上」を " +
+          "cosh_addition_formula・cosh_at_least_one への参照にし、末尾の参照の一覧を外した。cos θ ≤ 1 による評価を準備の一操作ずつの含意に分け、" +
+          "全実数上の cos の性質 cos θ ≤ 1 を前提とすることを主張に書いた（不等式の中身は変えていない）。",
       ],
     },
   },

@@ -1,0 +1,16 @@
+== gamma1_lower_bound_all_theta: 鎖の各行（一般の不定元）
+PASS 準備 第 2 行: 0·s_2^* = 0（多項式として）
+PASS 準備の含意 1 段目: 両辺に s_1s_2^* を掛けた（差が s_1s_2^* 倍）
+PASS 準備の含意 2 段目: 両辺に −1 を掛けて左右を入れ替えた（差が等しい）
+PASS 準備の含意 2 段目の両辺は 1 段目の両辺の −1 倍
+PASS 第 1 行 ≥ 第 2 行 = 準備の終点の両辺に c_1c_2^* を加えたもの
+PASS 第 1 行 − 第 2 行 = s_1 s_2^* (1 − cos θ)（多項式として）
+PASS 第 1 行と第 2 行は多項式として異なる（評価の行である）
+PASS 第 2 行 → 第 3 行（1 は積の単位元。多項式として等しい）
+PASS 第 3 行は cos θ を含まない
+PASS 第 3 行 → 第 4 行（略記を cosh 2K・sinh 2K に戻す。QQ(Y,X) で等しい）
+PASS 第 4 行 → 第 5 行（cosh(x−y) = cosh x cosh y − sinh x sinh y。QQ(Y,X) で等しい）
+PASS 対照: 第 4 行は cosh(2K_1 + 2K_2^*) とは異なる（複号を取り違えていない）
+PASS 第 5 行 − 第 6 行 = (Y − X)^2/(2XY)（QQ(Y,X) で等しい）
+-- gamma1_lower_bound_all_theta: 鎖の各行（一般の不定元）: 13/13 PASS
+RESULT: PASS
