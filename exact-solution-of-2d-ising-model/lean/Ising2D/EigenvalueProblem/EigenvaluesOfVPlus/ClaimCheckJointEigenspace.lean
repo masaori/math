@@ -744,6 +744,18 @@ theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
       _ = F.Qproj T * F.nOp (checkIdxOfFin j) := (Qproj_mul_nOp_step3 F j T).symm
                                                         -- 右から掛けた側の鎖を右辺から左辺へ
 
+/-- **原文 (3)** の `Q̌_ε ň_ν = ε_ν Q̌_ε`。
+人手の範囲 `M_col ≥ 2`（`M = r + 2`）では Step 3 の右から掛けた側の鎖 `Qproj_mul_nOp_step3` で示す。
+`M = 0, 1` は人手の範囲外で、必要十分版の特殊化 `commute_nOp_Qproj_of_necSuf`・`nOp_mul_Qproj_of_necSuf` で閉じる。 -/
+theorem Qproj_mul_nOp (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
+    F.Qproj T * F.nOp ν = (if ν ∈ T then (1 : ℂ) else 0) • F.Qproj T := by
+  match M, F, ν, T with
+  | 0, F, ν, T => rw [← (F.commute_nOp_Qproj_of_necSuf ν T).eq, F.nOp_mul_Qproj_of_necSuf ν T]
+  | 1, F, ν, T => rw [← (F.commute_nOp_Qproj_of_necSuf ν T).eq, F.nOp_mul_Qproj_of_necSuf ν T]
+  | r + 2, F, ν, T =>
+    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective ν       -- 人手の `ν = j + 1`
+    exact Qproj_mul_nOp_step3 F j T
+
 /-! ## トレースと次元（原文 (4)） -/
 
 /-- **原文 Step 4** の鎖（3 行）: `tr(Q̌_ε) = 2^{M_col−M_col} = 2^0 = 1`。

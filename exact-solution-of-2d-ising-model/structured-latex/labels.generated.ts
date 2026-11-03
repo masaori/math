@@ -291,6 +291,7 @@ export const ALL_LABELS = [
   "finite_sum_of_complex_sums",
   "finite_sum_of_complex_zeros",
   "finite_sum_of_matrices_distributes_in_left_factor",
+  "finite_sum_of_matrices_distributes_in_right_factor",
   "finite_sum_of_matrices_entrywise",
   "finite_sum_of_matrices_with_single_nonzero_term",
   "finite_sum_of_negated_matrices",

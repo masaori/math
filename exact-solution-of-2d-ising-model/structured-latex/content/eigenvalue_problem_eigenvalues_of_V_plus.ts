@@ -2962,13 +2962,49 @@ y_{\epsilon'}
 \end{aligned}`,
       ),
       paragraph([
-        "同じ計算を ",
-        ref("check_joint_eigenspace_decomposition"),
-        " (3) の右から掛ける形 ",
-        math(String.raw`\check{Q}_\epsilon\check{n}_\mu = \epsilon_\mu\check{Q}_\epsilon`),
-        " に対して行えば ",
+        "右から掛ける形 ",
         math(String.raw`\check{Q}_\epsilon\check{X} = \check{g}(\epsilon)\check{Q}_\epsilon`),
-        " も得られる。とくに ",
+        " も、",
+        ref("check_joint_eigenspace_decomposition"),
+        " (3) の ",
+        math(String.raw`\check{Q}_\epsilon\check{n}_\nu = \epsilon_\nu\check{Q}_\epsilon`),
+        " を使って同じ形の鎖で示す。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon\check{X}
+&= \check{Q}_\epsilon\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{n}_\mu - \tfrac12 I\right)\right)
+   \quad \left(\because\ \blkref{def_check_number_operator}\ (2)\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\check{Q}_\epsilon\left(\gamma(\tilde\theta_\mu)\left(\check{n}_\mu - \tfrac12 I\right)\right)\right)
+   \quad \left(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ C \to \check{Q}_\epsilon,\ (X_1,\dots,X_r) \to (\gamma(\tilde\theta_1)(\check{n}_1 - \tfrac12 I),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\check{n}_{M_{\mathrm{col}}} - \tfrac12 I)))\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\left(\check{n}_\mu - \tfrac12 I\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ A \to \check{Q}_\epsilon,\ B \to \check{n}_\mu - \tfrac12 I)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\left(\check{n}_\mu + \left(-\left(\tfrac12 I\right)\right)\right)\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{n}_\mu,\ B \to \tfrac12 I)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu + \check{Q}_\epsilon\left(-\left(\tfrac12 I\right)\right)\right)
+   \quad \left(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \check{n}_\mu,\ C \to -\left(\tfrac12 I\right))\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu + \left(-\left(\check{Q}_\epsilon\left(\tfrac12 I\right)\right)\right)\right)
+   \quad \left(\because\ \blkref{negation_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon,\ B \to \tfrac12 I)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \check{Q}_\epsilon\left(\tfrac12 I\right)\right)
+   \quad \left(\because\ \blkref{matrix_difference_is_sum_with_negation}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon\check{n}_\mu,\ B \to \check{Q}_\epsilon\left(\tfrac12 I\right))\ \text{を右辺から左辺へ、各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \tfrac12\left(\check{Q}_\epsilon I\right)\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ a \to \tfrac12,\ A \to \check{Q}_\epsilon,\ B \to I)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\check{Q}_\epsilon\check{n}_\mu - \tfrac12\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m,n \to 2^{M_{\mathrm{col}}},\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu\check{Q}_\epsilon - \tfrac12\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{check_joint_eigenspace_decomposition}\ (3)\ \text{の}\ \check{Q}_\epsilon\check{n}_\nu = \epsilon_\nu\check{Q}_\epsilon\ (\nu \to \mu)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\left(\epsilon_\mu - \tfrac12\right)\check{Q}_\epsilon\right)
+   \quad \left(\because\ \blkref{difference_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \epsilon_\mu,\ b \to \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m,n \to 2^{M_{\mathrm{col}}},\ a \to \gamma(\tilde\theta_\mu),\ b \to \epsilon_\mu - \tfrac12,\ A \to \check{Q}_\epsilon)\ \text{を各項へ}\right) \\
+&= \left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\check{Q}_\epsilon
+   \quad \left(\because\ \blkref{finite_sum_of_scalar_multiples_of_one_matrix}\ (m,n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ (c_1,\dots,c_r) \to (\gamma(\tilde\theta_1)(\epsilon_1 - \tfrac12),\dots,\gamma(\tilde\theta_{M_{\mathrm{col}}})(\epsilon_{M_{\mathrm{col}}} - \tfrac12)),\ A \to \check{Q}_\epsilon)\right) \\
+&= \check{g}(\epsilon)\,\check{Q}_\epsilon
+   \quad (\because \check{g} \text{ の定義})
+\end{aligned}`,
+      ),
+      paragraph([
+        "とくに ",
         math(String.raw`\check{X}\check{Q}_\epsilon = \check{Q}_\epsilon\check{X}`),
         "（両者が同じ ",
         math(String.raw`\check{g}(\epsilon)\check{Q}_\epsilon`),
@@ -3253,6 +3289,7 @@ E_K \check{Q}_\epsilon
         "数値検証: 同 check_03（X̌Q̌_ε = ǧ(ε)Q̌_ε、V̌'Q̌_ε = e^{ǧ(ε)}Q̌_ε、Sage の固有値集合との一致。残差 ≤ 8.0e-12）。",
         "2026-11-02: Step 2・Step 3' の帰納法と Step 4 の名前だけの根拠「行列の冪の定義と積の結合法則」「スカラー倍と行列の積の交換」「スカラー倍の結合法則」「行列積の結合法則」7 か所を、def_exp (1) の冪・mat_mult_associative・scalar_multiple_factors_out_of_*_factor・scalar_multiple_is_associative・ℂ の積の交換律の 1 行 1 主張の鎖にした。def_exp (1) の冪は A^{m+1} := A^m A なので、Step 2 は X̌^{k+1} = X̌^k X̌ から始めて Step 1 を先に使い、帰納法の仮定を後に使う順に組み直した。k = 0 の「自明」「単位行列の右単位元」も def_exp (1)・単位行列の主張・scalar_multiple_by_one の鎖にし、数の冪 ǧ(ε)^k を証明の中で定めた。Step 4 の Q̌_ε^2 は def_exp (1) の冪から Q̌_εQ̌_ε へ運び、冪等性の行を check_joint_eigenspace_decomposition (1) のラベル参照にした。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj・Qproj_mul_Xop_pow・Qproj_mulVec_Qproj_mulVec は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_25。",
         "2026-11-03: Step 1 の左から掛ける形の鎖の名前だけの根拠「行列の積の分配法則」「同時固有空間分解 (3)」「有限和のくくり出し」を、1 行 1 主張の 14 行の鎖にした。新しく足した主張 finite_sum_of_matrices_distributes_in_left_factor（(ΣX_j)C = Σ(X_jC)）・difference_of_scalar_multiples_of_one_matrix（aA − bA = (a − b)A）と、既存の scalar_multiple_factors_out_of_left_factor・matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_left_factor・negation_factors_out_of_left_factor・identity_matrix_is_left_unit_of_mat_mult・check_joint_eigenspace_decomposition (3)・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix を引く。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1 は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step1_left_chain.sage。",
+        "2026-11-03: Step 1 の右から掛ける形 Q̌_εX̌ = ǧ(ε)Q̌_ε を「同じ計算を (3) の右から掛ける形に対して行えば」と名前だけで済ませていた段落を、Q̌_εX̌ から始める 1 行 1 主張の 14 行の鎖にした。新しく足した主張 finite_sum_of_matrices_distributes_in_right_factor（C(ΣX_j) = Σ(CX_j)）と、既存の scalar_multiple_factors_out_of_right_factor・matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_right_factor・negation_factors_out_of_right_factor・identity_matrix_is_right_unit_of_mat_mult・check_joint_eigenspace_decomposition (3) の Q̌_εň_ν = ε_νQ̌_ε・difference_of_scalar_multiples_of_one_matrix・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix を引く。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Qproj_mul_Xop_step1 は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step1_right_chain.sage。",
       ],
     },
   },

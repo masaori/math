@@ -1273,6 +1273,9 @@ targets=(
   Ising2D.finite_sum_mul_of_matrices
   Ising2D.finite_sum_mul_of_matrices_of_necSuf
   Ising2D.finite_sum_mul_tensorPow
+  Ising2D.mul_finite_sum_of_matrices
+  Ising2D.mul_finite_sum_of_matrices_of_necSuf
+  Ising2D.mul_finite_sum_tensorPow
   Ising2D.smul_sub_smul_matrix_apply
   Ising2D.smul_sub_smul_matrix
   Ising2D.smul_sub_smul_matrix_of_necSuf
@@ -1344,6 +1347,7 @@ targets=(
   "Ising2D.NecSuf.smul_add_matrix'"
   "Ising2D.NecSuf.finite_sum_smul_matrix'"
   "Ising2D.NecSuf.finite_sum_mul_matrix'"
+  "Ising2D.NecSuf.mul_finite_sum_matrix'"
   "Ising2D.NecSuf.smul_sub_smul_matrix_apply'"
   "Ising2D.NecSuf.smul_sub_smul_matrix'"
   "Ising2D.NecSuf.finite_sum_smul_one_matrix_apply'"
@@ -1786,6 +1790,9 @@ targets=(
   Ising2D.CheckFermiSetup.gval_eq_sum_fin
   Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1
   Ising2D.CheckFermiSetup.Xop_mul_Qproj_of_finset_sum
+  Ising2D.CheckFermiSetup.Qproj_mul_Xop_step1
+  Ising2D.CheckFermiSetup.Qproj_mul_Xop_of_commute
+  Ising2D.CheckFermiSetup.Qproj_mul_nOp
   Ising2D.CheckFermiSetup.Xop_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Xop
   Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj

@@ -1930,6 +1930,63 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_sum_of_matrices_distributes_in_right_factor",
+    kind: "claim",
+    title: { text: "行列の有限和を右の因子とする積は各項の積の有限和に等しい" },
+    labels: ["finite_sum_of_matrices_distributes_in_right_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`C\Bigl(\sum_{j=1}^{r} X_j\Bigr) = \sum_{j=1}^{r} (CX_j)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+C\Bigl(\sum_{j=1}^{1} X_j\Bigr)
+&= CX_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \sum_{j=1}^{1} (CX_j)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } CX_j\text{）を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+C\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)
+&= C\Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= C\Bigl(\sum_{j=1}^{r} X_j\Bigr) + CX_{r+1}
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ \bigl(A \to C,\ B \to \textstyle\sum_{j=1}^{r} X_j,\ C \to X_{r+1}\ \text{を同時に置き換える}\bigr)\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} (CX_j)\Bigr) + CX_{r+1}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{j=1}^{r+1} (CX_j)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } CX_j\text{）を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 1 の右から掛ける形（Q̌_εX̌）を「同じ計算を (3) の右から掛ける形に対して行えば」と名前だけで済ませていた段のうち、有限和を右の因子とする積を各項へ配る段を引けるよう足した。finite_sum_of_matrices_distributes_in_left_factor と同じ帰納法の形で示した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_difference_of_scalar_multiples_of_one_matrix",
     kind: "claim",
     title: { text: "一つの行列のスカラー倍の差は係数の差によるスカラー倍に等しい" },

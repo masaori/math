@@ -181,3 +181,8 @@ RESULT: PASS
 # 実行コマンド: sage check_eigenvalues_of_check_Vprime_step1_left_chain.sage
 checked 405 steps (model M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
 RESULT: PASS
+
+##### 2026-11-03 に check_eigenvalues_of_check_Vprime_step1_right_chain を足した（eigenvalues_of_check_Vprime Step 1 の右から掛ける形の鎖）
+# 実行コマンド: sage check_eigenvalues_of_check_Vprime_step1_right_chain.sage
+checked 405 steps (model M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+RESULT: PASS
