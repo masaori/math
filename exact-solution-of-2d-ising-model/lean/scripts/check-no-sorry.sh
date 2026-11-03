@@ -1129,6 +1129,13 @@ targets=(
   Ising2D.add_mul_matrix_apply
   Ising2D.add_mul_matrix
   Ising2D.finite_sum_of_complex_sums_of_necSuf
+  Ising2D.finite_sum_of_real_differences_step
+  Ising2D.finite_sum_of_real_differences_succ
+  Ising2D.finite_sum_of_real_differences
+  Ising2D.finite_sum_of_nonnegative_reals_ge_term_succ
+  Ising2D.finite_sum_of_nonnegative_reals_ge_term
+  Ising2D.finite_sum_of_real_differences_of_necSuf
+  Ising2D.finite_sum_of_nonnegative_reals_ge_term_of_necSuf
   Ising2D.mul_add_matrix_of_necSuf
   Ising2D.add_mul_matrix_of_necSuf
   Ising2D.mul_add_matrix_tensorPow
@@ -1346,6 +1353,11 @@ targets=(
   "Ising2D.NecSuf.finite_sum_add_succ'"
   "Ising2D.NecSuf.finite_sum_add_fin'"
   "Ising2D.NecSuf.finite_sum_add'"
+  "Ising2D.NecSuf.finite_sum_sub_step'"
+  "Ising2D.NecSuf.finite_sum_sub_succ'"
+  "Ising2D.NecSuf.finite_sum_sub_fin'"
+  "Ising2D.NecSuf.finite_sum_ge_term_succ'"
+  "Ising2D.NecSuf.finite_sum_ge_term_fin'"
   "Ising2D.NecSuf.mul_add_matrix_apply'"
   "Ising2D.NecSuf.mul_add_matrix'"
   "Ising2D.NecSuf.add_mul_matrix_apply'"
@@ -1854,6 +1866,9 @@ targets=(
   Ising2D.sum_checkIdx
   Ising2D.tagPoint_half_eq_thetaTilde
   Ising2D.checkBigLambda_univ_eq_LambdaM
+  Ising2D.gval_eq_sum_fin_real
+  Ising2D.gval_lt_gval_univ
+  Ising2D.checkBigLambda_lt_checkBigLambda_univ
   Ising2D.checkBigLambda_lt_max_of_gammaFn
   Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen
   Ising2D.eq_Qproj_univ_mulVec_of_eigen

@@ -6,7 +6,8 @@
 あわせて章「A(θ~_μ) の対角化と V^{(+)} の指数表示」の `gamma_theta_tilde_mu_positive`（`γ(θ~_μ) > 0`）をここで証明する。
 
 **必要十分版**は `Ising2D/NecSuf/SimpleEigenvalue.lean`:
-- (2) の狭義最大性 → `NecSuf.sum_weight_lt_of_ne_univ`
+- (2) の狭義最大性 → `NecSuf.sum_weight_lt_of_ne_univ`（人手の (2) の鎖と 1 対 1 の具体版は `gval_lt_gval_univ`・
+  `checkBigLambda_lt_checkBigLambda_univ`。必要十分版の特殊化は `checkBigLambda_lt_max`）
 - (3) の固有空間の同定 → `NecSuf.eq_proj_of_eigen`
 
 ## `γ(θ~_μ) > 0`（半整数運動量に固有の点）
@@ -30,6 +31,7 @@
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremEigenvaluesVPlus
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.TheoremOnsagerFreeEnergy
 import Ising2D.NecSuf.ArcoshExp
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
 
 namespace Ising2D
 
@@ -127,6 +129,98 @@ theorem checkBigLambda_univ_eq_LambdaM (F : CheckFermiSetup M) (P : IsingParam)
     ring
   rw [checkBigLambda, LambdaM, hgval]
 
+open CheckFermiSetup in
+/-- 人手の `ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ - 1/2)` を、`Fin M` の上の和で書く（`ℝ` の値）。
+人手の添字 `μ = j + 1`（`checkIdxOfFin`）へ付け替える段で、人手の鎖の行ではない（`gval_eq_sum_fin` の `ℝ` の版）。 -/
+theorem gval_eq_sum_fin_real (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
+    F.gval g T
+      = ∑ j : Fin M, g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2) := by
+  rw [CheckFermiSetup.gval]
+  exact (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
+    (fun _ => rfl)).symm
+
+open CheckFermiSetup in
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (2) の `ǧ(1,…,1) − ǧ(ε)` の鎖**: `γ(θ~_μ) > 0` かつ `ε ≠ (1,…,1)` なら
+`ǧ(ε) < ǧ(1,…,1)`。人手の行と 1 対 1 の calc（人手の `ε_μ` は Lean の `if μ ∈ T then 1 else 0`、`ε = (1,…,1)` は `T = univ`）。
+人手の `a_μ` は `let a` で置き、「`a_μ` の置き方」の 2 行は `rfl` の段にした。最後の「移項」は `sub_pos`。
+必要十分版 `NecSuf.sum_weight_lt_of_ne_univ` は同じ並びの calc である。 -/
+theorem gval_lt_gval_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (hgpos : ∀ i, 0 < g i)
+    {T : Finset (CheckIdx M)} (hT : T ≠ Finset.univ) :
+    F.gval g T < F.gval g Finset.univ := by
+  obtain ⟨i₀, hi₀⟩ : ∃ i₀ : CheckIdx M, i₀ ∉ T := by
+    by_contra hc
+    exact hT (Finset.eq_univ_of_forall fun i => not_not.1 fun hi => hc ⟨i, hi⟩)
+                                                        -- 人手の「ある `μ_0` で `ε_{μ_0} = 0`」
+  obtain ⟨j₀, rfl⟩ := checkIdxOfFin_surjective i₀
+  let a : Fin M → ℝ := fun j => g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0))
+                                                        -- 人手の `a_μ := γ(θ~_μ)(1 - ε_μ)`
+  have ha : ∀ j : Fin M, 0 ≤ a j := by
+    intro j
+    refine mul_nonneg (le_of_lt (hgpos _)) ?_
+    split <;> norm_num
+                                                        -- 人手の `a_μ ≥ 0`（正の実数と `0` 以上の実数の積）
+  have hchain : F.gval g Finset.univ - F.gval g T > 0 :=
+    calc F.gval g Finset.univ - F.gval g T
+        = (∑ j : Fin M, g (checkIdxOfFin j) * (1 - 1 / 2))
+            - ∑ j : Fin M, g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2) := by
+          rw [gval_eq_sum_fin_real F g Finset.univ, gval_eq_sum_fin_real F g T]
+          simp only [Finset.mem_univ, if_true]
+                                                        -- `eigenvalues_of_check_Vprime` の `ǧ` の定義を 2 か所へ同時適用
+      _ = ∑ j : Fin M, (g (checkIdxOfFin j) * (1 - 1 / 2)
+            - g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
+          (finite_sum_of_real_differences M _ _).symm
+                                                        -- `finite_sum_of_real_differences`（`m → M_col`）を右辺から左辺へ
+      _ = ∑ j : Fin M, g (checkIdxOfFin j)
+            * ((1 - 1 / 2) - ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2)) :=
+          Finset.sum_congr rfl fun j _ => (mul_sub _ _ _).symm
+                                                        -- ℝ の分配法則を各項へ同時適用
+      _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 - (if checkIdxOfFin j ∈ T then (1 : ℝ) else 0)) :=
+          Finset.sum_congr rfl fun j _ => by ring
+                                                        -- ℝ で `(1 - 1/2) - (ε_μ - 1/2) = 1 - ε_μ` を各項へ同時適用
+      _ = ∑ j : Fin M, a j := rfl
+                                                        -- `a_μ` の置き方
+      _ ≥ a j₀ := finite_sum_of_nonnegative_reals_ge_term M a ha j₀
+                                                        -- `finite_sum_of_nonnegative_reals_is_at_least_each_term`（`m → M_col`、`k → μ_0`）
+      _ = g (checkIdxOfFin j₀) * (1 - (if checkIdxOfFin j₀ ∈ T then (1 : ℝ) else 0)) := rfl
+                                                        -- `a_μ` の置き方
+      _ = g (checkIdxOfFin j₀) * 1 := by rw [if_neg hi₀, sub_zero]
+                                                        -- `ε_{μ_0} = 0` なので `1 - ε_{μ_0} = 1`
+      _ = g (checkIdxOfFin j₀) := mul_one _
+                                                        -- `1` は ℝ の積の単位元
+      _ > 0 := hgpos _
+                                                        -- `gamma_theta_tilde_mu_positive`
+  exact sub_pos.1 hchain
+
+/-- **原文 `max_eigenvalue_of_V_plus_simple` (2) の `Λ̌_ε` の鎖**: `γ(θ~_μ) > 0` かつ `ε ≠ (1,…,1)` なら `Λ̌_ε < Λ̌_max`。
+人手の行と対応する calc。鎖の前の `exp(ǧ(ε)) < exp(ǧ(1,…,1))`（人手 `real_exp_strictly_increasing`）は mathlib の
+`Real.exp_lt_exp`（`real_exp_strictly_increasing` の Lean の具体版は無い）、`(2s_2)^{M_col/2} > 0` は `Real.rpow_pos_of_pos`
+（本文に実数冪を定めるブロックが無い）で出す。段にしない人手の行（`s_2` の略記の 2 行と最後の `Λ̌_{(1,…,1)} = Λ̌_max`）は calc の注記に書いた。 -/
+theorem checkBigLambda_lt_checkBigLambda_univ (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
+    (hgpos : ∀ i, 0 < g i) {s2 : ℝ} (hs2 : 0 < s2) {T : Finset (CheckIdx M)}
+    (hT : T ≠ Finset.univ) :
+    checkBigLambda F g s2 T < checkBigLambda F g s2 Finset.univ := by
+  have hexp : Real.exp (F.gval g T) < Real.exp (F.gval g Finset.univ) :=
+    Real.exp_lt_exp.2 (gval_lt_gval_univ F g hgpos hT)
+                                                        -- `real_exp_strictly_increasing`（`x → ǧ(ε)`、`y → ǧ(1,…,1)`）
+  have hpow : 0 < (2 * s2) ^ ((M : ℝ) / 2) := Real.rpow_pos_of_pos (by linarith) _
+                                                        -- `2s_2 > 0` の実数冪
+  calc checkBigLambda F g s2 T
+      = (2 * s2) ^ ((M : ℝ) / 2)
+          * Real.exp (∑ i : CheckIdx M, g i * ((if i ∈ T then (1 : ℝ) else 0) - 1 / 2)) := rfl
+                                                        -- `eigenvalues_of_V_plus` の `Λ̌_ε` の定義
+                                                        -- （人手の次の行「`s_2 = sinh 2K_2`」は、Lean では `s2` を引数に取るので段にしない）
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g T) := rfl
+                                                        -- `ǧ` の定義
+    _ < (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g Finset.univ) :=
+        mul_lt_mul_of_pos_left hexp hpow
+                                                        -- 両辺に正の実数 `(2s_2)^{M_col/2}` を掛ける
+    _ = (2 * s2) ^ ((M : ℝ) / 2)
+          * Real.exp (∑ i : CheckIdx M, g i * ((if i ∈ (Finset.univ : Finset (CheckIdx M)) then (1 : ℝ) else 0) - 1 / 2)) := rfl
+                                                        -- `ǧ` の定義（`ε → (1,…,1)`）。`s_2` の行は上と同じく段にしない
+    _ = checkBigLambda F g s2 Finset.univ := rfl
+                                                        -- `Λ̌_ε` の定義（`ε → (1,…,1)`）。人手の最後の行 `Λ̌_{(1,…,1)} = Λ̌_max`（`eigenvalues_of_V_plus` (2)）は、
+                                                        -- Lean の `Λ̌_max` が `checkBigLambda F g s2 Finset.univ` そのものなので段にしない
+
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (2)**: `ε ≠ (1,…,1)` なら `Λ̌_ε < Λ̌_max`。 -/
 theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam)
     (g : CheckIdx M → ℝ) (hg : ∀ i : CheckIdx M, g i = gammaFn P (thetaTilde M i.1))
@@ -140,7 +234,7 @@ theorem checkBigLambda_lt_max_of_gammaFn (F : CheckFermiSetup M) (P : IsingParam
   have hs2 : 0 < Real.sinh (2 * P.K2) := by
     have : 0 < 2 * P.K2 := by linarith [P.K2_pos]
     exact Real.sinh_pos_iff.2 this
-  exact checkBigLambda_lt_max F g hgpos hs2 hT
+  exact checkBigLambda_lt_checkBigLambda_univ F g hgpos hs2 hT
 
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (3) の固有方程式に左から `Q̌_{ε'}` を掛ける鎖**:
 `V^{(+)}x = Λ̌_max x` なら `Λ̌_{ε'}(Q̌_{ε'}x) = Λ̌_max(Q̌_{ε'}x)`。人手の 5 行と 1 対 1 の calc。
@@ -197,7 +291,7 @@ theorem eq_Qproj_univ_mulVec_of_eigen (F : CheckFermiSetup M) (g : CheckIdx M �
     have hne : ((checkBigLambda F g s2 T : ℝ) : ℂ)
         - ((checkBigLambda F g s2 Finset.univ : ℝ) : ℂ) ≠ 0 :=
       sub_ne_zero.2 fun hc =>
-        ne_of_lt (checkBigLambda_lt_max F g hgpos hs2 hT) (Complex.ofReal_injective hc)
+        ne_of_lt (checkBigLambda_lt_checkBigLambda_univ F g hgpos hs2 hT) (Complex.ofReal_injective hc)
     exact (smul_eq_zero.1 hdiff).resolve_left hne
   calc x = ∑ T : Finset (CheckIdx M), (F.Qproj T).mulVec x := (F.sum_Qproj_mulVec x).symm
                                                         -- `check_joint_eigenspace_decomposition` (2) の `x = Σ_ε Q̌_ε x`

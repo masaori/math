@@ -4459,6 +4459,22 @@ V^{(+)}\check{Q}_\epsilon
         math(String.raw`\mu_0 \in \check{\mathcal{M}}`),
         " で ",
         math(String.raw`\epsilon_{\mu_0} = 0`),
+        " である。各 ",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " について ",
+        math(String.raw`a_\mu := \gamma(\tilde\theta_\mu)\bigl(1 - \epsilon_\mu\bigr) \in \mathbb{R}`),
+        " とおく。",
+        ref("gamma_theta_tilde_mu_positive"),
+        " より ",
+        math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
+        "、",
+        math(String.raw`\epsilon_\mu \in \{0,1\}`),
+        " より ",
+        math(String.raw`1 - \epsilon_\mu \in \{0,1\}`),
+        " なので、正の実数と ",
+        math(String.raw`0`),
+        " 以上の実数の積として ",
+        math(String.raw`a_\mu \geq 0`),
         " である。",
         ref("eigenvalues_of_check_Vprime"),
         " の ",
@@ -4468,43 +4484,75 @@ V^{(+)}\check{Q}_\epsilon
       displayMath(
         String.raw`\begin{aligned}
 \check{g}(1,\dots,1) - \check{g}(\epsilon)
-&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
-\Bigl(1 - \epsilon_\mu\Bigr)
-   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義と分配法則}) \\
-&\geq \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
-   \quad (\because \text{各項は }\gamma(\tilde\theta_\mu) > 0\text{ と }
-1 - \epsilon_\mu \in \{0,1\}\text{ より} \geq 0\text{。}\mu = \mu_0\text{ の項だけを残す}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
+ - \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義を 2 か所へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\Bigl(\gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
+ - \gamma(\tilde\theta_\mu)\Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
+   \quad \left(\because \blkref{finite_sum_of_real_differences}\ \bigl(m \to M_{\mathrm{col}},\ a_j \to \gamma(\tilde\theta_j)\bigl(1 - \tfrac12\bigr),\ b_j \to \gamma(\tilde\theta_j)\bigl(\epsilon_j - \tfrac12\bigr)\bigr)\ \text{を右辺から左辺へ}\right) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(\Bigl(1 - \tfrac12\Bigr) - \Bigl(\epsilon_\mu - \tfrac12\Bigr)\Bigr)
+   \quad (\because \mathbb{R}\text{ の分配法則を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\Bigl(1 - \epsilon_\mu\Bigr)
+   \quad (\because \mathbb{R}\text{ で }\bigl(1 - \tfrac12\bigr) - \bigl(\epsilon_\mu - \tfrac12\bigr) = 1 - \epsilon_\mu\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}}a_\mu
+   \quad (\because a_\mu\text{ の置き方}) \\
+&\geq a_{\mu_0}
+   \quad \left(\because \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ (m \to M_{\mathrm{col}},\ k \to \mu_0)\text{。}a_\mu \geq 0\text{ は上で示した}\right) \\
+&= \gamma(\tilde\theta_{\mu_0})\Bigl(1 - \epsilon_{\mu_0}\Bigr)
+   \quad (\because a_\mu\text{ の置き方}) \\
+&= \gamma(\tilde\theta_{\mu_0}) \cdot 1
+   \quad (\because \epsilon_{\mu_0} = 0\text{ なので }1 - \epsilon_{\mu_0} = 1) \\
 &= \gamma(\tilde\theta_{\mu_0})
-   \quad (\because \epsilon_{\mu_0} = 0) \\
+   \quad (\because 1\text{ は }\mathbb{R}\text{ の積の単位元}) \\
 &> 0
    \quad (\because \blkref{gamma_theta_tilde_mu_positive})
 \end{aligned}`,
       ),
       paragraph([
-        "である。よって ",
+        "である。左辺の ",
+        math(String.raw`\check{g}(\epsilon)`),
+        " を右辺へ移項して ",
         math(String.raw`\check{g}(\epsilon) < \check{g}(1,\dots,1)`),
         " であり、",
+        ref("real_exp_strictly_increasing"),
+        "（",
+        math(String.raw`x \to \check{g}(\epsilon),\ y \to \check{g}(1,\dots,1)`),
+        "）より ",
+        math(String.raw`\exp(\check{g}(\epsilon)) < \exp(\check{g}(1,\dots,1))`),
+        " である。また ",
+        ref("indexed_hyperbolic_abbreviations_positive"),
+        "（",
+        math(String.raw`i = 2`),
+        "）の ",
+        math(String.raw`s_2 > 0`),
+        " より ",
+        math(String.raw`2s_2 > 0`),
+        " であり、その実数冪として ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
+        " である。よって",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(\epsilon_\mu - \tfrac12\bigr)\Bigr)
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義}) \\
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(\epsilon_\mu - \tfrac12\bigr)\Bigr)
+   \quad (\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_2 = \sinh 2K_2) \\
 &= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
-   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義と }
-\blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}) \\
 &< (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
-   \quad (\because \check{g}(\epsilon) < \check{g}(1,\dots,1)\text{、}
-t \mapsto \exp(t)\text{ は狭義単調増加、}(2s_2)^{M_{\mathrm{col}}/2} > 0) \\
+   \quad (\because \exp(\check{g}(\epsilon)) < \exp(\check{g}(1,\dots,1))\text{ の両辺に正の実数 }(2s_2)^{M_{\mathrm{col}}/2}\text{ を掛ける}) \\
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(1 - \tfrac12\bigr)\Bigr)
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義（}\epsilon \to (1,\dots,1)\text{）}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\bigl(1 - \tfrac12\bigr)\Bigr)
+   \quad (\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_2 = \sinh 2K_2) \\
+&= \check\Lambda_{(1,\dots,1)}
+   \quad (\because \blkref{eigenvalues_of_V_plus}\text{ の }\check\Lambda_\epsilon\text{ の定義（}\epsilon \to (1,\dots,1)\text{）}) \\
 &= \check\Lambda_{\max}
    \quad (\because \blkref{eigenvalues_of_V_plus}\text{ (2)})
 \end{aligned}`,
       ),
-      paragraph([
-        "（",
-        math(String.raw`\check\Lambda_{\max} = \check\Lambda_{(1,\dots,1)}`),
-        " は ",
-        ref("eigenvalues_of_V_plus"),
-        " (2)。）",
-      ]),
+      paragraph(["である。"]),
       paragraph([
         "(3) ",
         math(String.raw`x \in \mathbb{C}^{2^{M_{\mathrm{col}}}}`),
@@ -4592,6 +4640,7 @@ x &= \sum_{\epsilon}\check{Q}_\epsilon x
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（Λ̌_max = Λ^{(1/2)}_M の相対差 0.0、γ(θ~_μ) の全体最小 5.4e-1 > 0、最大固有値と 2 番目の固有値の相対差の最小 4.17e-1。対照として整数運動量の Λ^{(0)}_M とは一致しない）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-02: (3) の固有方程式に左から Q̌_{ε'} を掛ける鎖の名前だけの根拠「行列の積の結合法則」を mat_mult_associative（q → 1）の参照にし、(1) の行に隠れていた (Λ̌_{ε'}Q̌_{ε'})x = Λ̌_{ε'}(Q̌_{ε'}x) と固有方程式の行に隠れていた Q̌_{ε'}(Λ̌_max x) = Λ̌_max(Q̌_{ε'}x) を scalar_multiple_factors_out_of_left_factor・scalar_multiple_factors_out_of_right_factor（p → 1）の行に分けた（5 行）。主張は変えていない。Lean の Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigen は同じ 5 行の calc で、Ising2D.eq_Qproj_univ_mulVec_of_eigen はそれを使って人手の順に示す（必要十分版の特殊化は eq_Qproj_univ_mulVec_of_eigen_of_necSuf）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_26。",
+        "2026-11-03: (2) の ǧ(1,…,1) − ǧ(ε) の鎖の名前だけの根拠「ǧ の定義と分配法則」「各項は 0 以上。μ = μ_0 の項だけを残す」を、ǧ の定義の 2 か所同時適用・finite_sum_of_real_differences・ℝ の分配法則・ℝ の計算・a_μ := γ(θ̃_μ)(1 − ε_μ) の置き方・finite_sum_of_nonnegative_reals_is_at_least_each_term の行に分け（a_μ ≥ 0 は鎖の前に置いた）、Λ̌_ε の鎖の「t ↦ exp(t) は狭義単調増加」を real_exp_strictly_increasing の参照として鎖の前へ出し（(2s_2)^{M_col/2} > 0 の s_2 > 0 は indexed_hyperbolic_abbreviations_positive）、両端の行を Λ̌_ε の定義・s_2 の略記・ǧ の定義の 1 行ずつに分け、最後に eigenvalues_of_V_plus (2) の行を置いた。主張は変えていない。Lean の Ising2D.gval_lt_gval_univ と Ising2D.checkBigLambda_lt_checkBigLambda_univ は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step2_strict_inequality_chains.sage。",
       ],
     },
   },

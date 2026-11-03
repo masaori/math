@@ -1162,6 +1162,41 @@ T_B(X - W)
   },
 
   {
+    id: "calc_formulae_definition_finite_sum_of_real_numbers",
+    kind: "definition",
+    title: { text: "実数の有限和" },
+    labels: ["def_finite_sum_of_real_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " について、有限和 ",
+        math(String.raw`\sum_{j=1}^{m} r_j \in \mathbb{R}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{1} r_j := r_1,
+\qquad
+\sum_{j=1}^{m+1} r_j := \Bigl(\sum_{j=1}^{m} r_j\Bigr) + r_{m+1}`),
+      paragraph([
+        "と定める（左から順に足す。",
+        ref("def_finite_sum_of_complex_numbers"),
+        " と同じ帰納法である）。和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。real_inclusion_preserves_finite_sum と max_eigenvalue_of_V_plus_simple (2) の ǧ の差の鎖が ℝ の有限和を名前だけで使っていたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_real_inclusion_preserves_finite_sum",
     kind: "claim",
     title: { text: "実数の有限和の包含は包含の有限和に等しい" },
@@ -1182,8 +1217,8 @@ T_B(X - W)
         " の略記、左辺の和は ",
         ref("def_finite_sum_of_complex_numbers"),
         " の有限和、右辺の和は ",
-        math(String.raw`\mathbb{R}`),
-        " の有限和（同じ帰納法で左から足す）である。",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和である。",
       ]),
     ],
     proof: [
@@ -1198,7 +1233,7 @@ T_B(X - W)
 &= (r_1)_{\mathbb{C}}
 &&(\because\ \blkref{def_finite_sum_of_complex_numbers})\\
 &= \Bigl(\sum_{j=1}^{1} r_j\Bigr)_{\mathbb{C}}
-&&(\because\ \mathbb{R}\ \text{の有限和の定義})
+&&(\because\ \blkref{def_finite_sum_of_real_numbers})
 \end{aligned}`),
       paragraph([
         math(String.raw`m`),
@@ -1217,7 +1252,7 @@ T_B(X - W)
 &= \Bigl(\sum_{j=1}^{m} r_j + r_{m+1},\ 0 + 0\Bigr)
 &&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
 &= \Bigl(\sum_{j=1}^{m+1} r_j,\ 0 + 0\Bigr)
-&&(\because\ \mathbb{R}\ \text{の有限和の定義})\\
+&&(\because\ \blkref{def_finite_sum_of_real_numbers})\\
 &= \Bigl(\sum_{j=1}^{m+1} r_j,\ 0\Bigr)
 &&(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0)\\
 &= \Bigl(\sum_{j=1}^{m+1} r_j\Bigr)_{\mathbb{C}}
@@ -1228,6 +1263,186 @@ T_B(X - W)
       status: "added",
       notes: [
         "2026-11-01: 原文（Typst）に対応ブロックは無い。正定値性の主張（identity_matrix_is_positive_definite、trace_of_positive_definite_is_positive）が、ℂ の元が正の実数の包含であることを示すのに使うので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_real_differences",
+    kind: "claim",
+    title: { text: "実数の差の有限和は有限和の差" },
+    labels: ["finite_sum_of_real_differences"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m, b_1,\dots,b_m \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} (a_j - b_j) = \Bigl(\sum_{j=1}^{m} a_j\Bigr) - \Bigl(\sum_{j=1}^{m} b_j\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (a_j - b_j)
+&= a_1 - b_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= \Bigl(\sum_{j=1}^{1} a_j\Bigr) - \Bigl(\sum_{j=1}^{1} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\text{ を 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1}, b_1,\dots,b_{m+1} \in \mathbb{R}`),
+        " を取る。",
+        math(String.raw`\alpha := \sum_{j=1}^{m} a_j`),
+        "、",
+        math(String.raw`\beta := \sum_{j=1}^{m} b_j`),
+        " とおく（",
+        math(String.raw`\alpha, \beta \in \mathbb{R}`),
+        "）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} (a_j - b_j)
+&= \Bigl(\sum_{j=1}^{m} (a_j - b_j)\Bigr) + (a_{m+1} - b_{m+1})
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= (\alpha - \beta) + (a_{m+1} - b_{m+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= (\alpha + a_{m+1}) - (\beta + b_{m+1})
+&&\bigl(\because\ \mathbb{R}\ \text{の和と差の計算}\bigr)\\
+&= \Bigl(\Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}\Bigr) - \Bigl(\Bigl(\sum_{j=1}^{m} b_j\Bigr) + b_{m+1}\Bigr)
+&&\bigl(\because\ \alpha, \beta\ \text{の置き方}\bigr)\\
+&= \Bigl(\sum_{j=1}^{m+1} a_j\Bigr) - \Bigl(\sum_{j=1}^{m+1} b_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\text{ を 2 か所へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。max_eigenvalue_of_V_plus_simple (2) の ǧ(1,…,1) − ǧ(ε) の鎖が「ǧ の定義と分配法則」の名前だけで二つの有限和の差を項ごとの差の有限和にしていたので、引けるよう足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term",
+    kind: "claim",
+    title: { text: "非負の実数の有限和は各項以上" },
+    labels: ["finite_sum_of_nonnegative_reals_is_at_least_each_term"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a_1,\dots,a_m \in \mathbb{R}`),
+        " がすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " で ",
+        math(String.raw`a_j \geq 0`),
+        " を満たすとする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき、すべての ",
+        math(String.raw`k \in \{1,\dots,m\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} a_j \geq a_k`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す（各 ",
+        math(String.raw`m`),
+        " で、すべての ",
+        math(String.raw`k \in \{1,\dots,m\}`),
+        " についての主張を示す）。",
+        math(String.raw`m = 1`),
+        " のとき ",
+        math(String.raw`k = 1`),
+        " であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} a_j
+&= a_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&= a_k
+&&\bigl(\because\ k = 1\bigr)
+\end{aligned}`),
+      paragraph([
+        "だから ",
+        math(String.raw`\sum_{j=1}^{1} a_j \geq a_k`),
+        " である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`a_1,\dots,a_{m+1} \in \mathbb{R}`),
+        " がすべて ",
+        math(String.raw`0`),
+        " 以上であるとして、",
+        math(String.raw`k \in \{1,\dots,m+1\}`),
+        " を取る。",
+        math(String.raw`k \leq m`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} a_j
+&= \Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&\geq \Bigl(\sum_{j=1}^{m} a_j\Bigr) + 0
+&&\bigl(\because\ a_{m+1} \geq 0\ \text{の両辺に同じ実数を足す}\bigr)\\
+&= \sum_{j=1}^{m} a_j
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&\geq a_k
+&&\bigl(\because\ \text{帰納法の仮定（}k \leq m\text{）}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`k = m+1`),
+        " のとき、",
+        math(String.raw`a_1,\dots,a_m`),
+        " はすべて ",
+        math(String.raw`0`),
+        " 以上であり、",
+        math(String.raw`m \geq 1`),
+        " なので ",
+        math(String.raw`1 \in \{1,\dots,m\}`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m} a_j
+&\geq a_1
+&&\bigl(\because\ \text{帰納法の仮定（}a_1,\dots,a_m\text{ について、}k \to 1\text{）}\bigr)\\
+&\geq 0
+&&\bigl(\because\ \text{仮定 }a_1 \geq 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} a_j
+&= \Bigl(\sum_{j=1}^{m} a_j\Bigr) + a_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\bigr)\\
+&\geq 0 + a_{m+1}
+&&\bigl(\because\ \textstyle\sum_{j=1}^{m} a_j \geq 0\ \text{の両辺に同じ実数を足す}\bigr)\\
+&= a_{m+1}
+&&\bigl(\because\ 0\ \text{は}\ \mathbb{R}\ \text{の和の単位元}\bigr)\\
+&= a_k
+&&\bigl(\because\ k = m+1\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。max_eigenvalue_of_V_plus_simple (2) の ǧ(1,…,1) − ǧ(ε) の鎖が「各項は 0 以上。μ = μ_0 の項だけを残す」の名前だけで有限和を一つの項で下から抑えていたので、引けるよう足した。",
       ],
     },
   },

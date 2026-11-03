@@ -36,7 +36,7 @@ for m in range(1, MAX_M + 1):
         cc_add(iota(fsum_rr(rs[:m]), P), iota(rs[m], P)),                   # (Σ^m r_j)_C + (r_{m+1})_C     (帰納法の仮定)
         cc_add((fsum_rr(rs[:m]), P(0)), (rs[m], P(0))),                     # (Σ^m r_j, 0) + (r_{m+1}, 0)   (inclusion_rr_to_cc)
         (fsum_rr(rs[:m]) + rs[m], P(0) + P(0)),                             # (Σ^m r_j + r_{m+1}, 0+0)      (definition_of_cc の和)
-        (fsum_rr(rs), P(0) + P(0)),                                         # (Σ^{m+1} r_j, 0+0)          (ℝ の有限和の定義)
+        (fsum_rr(rs), P(0) + P(0)),                                         # (Σ^{m+1} r_j, 0+0)          (def_finite_sum_of_real_numbers)
         (fsum_rr(rs), P(0)),                                                # (Σ^{m+1} r_j, 0)            (0 + 0 = 0)
         iota(fsum_rr(rs), P),                                               # (Σ^{m+1} r_j)_C
     ]
