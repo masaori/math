@@ -10,9 +10,9 @@
 
 | 人手証明 | 本ファイル |
 | --- | --- |
-| `σ^x` の成分は実数で、クロネッカー積の成分は各因子の成分の積 | `epsilon_apply`（`ε_{l,k} = ∏_m (σ^x)_{l_m k_m}` を計算した値）/ `epsilon_eq_ofReal_epsilonR` |
-| `ε^⊤ = (σ^x⊠⋯⊠σ^x)^⊤ = (σ^x)^⊤⊠⋯⊠(σ^x)^⊤ = σ^x⊠⋯⊠σ^x = ε` | `epsilon_transpose`（`epsilon_eq_siteProd` → `siteProd_transpose`（`kronecker_transpose`）→ `pauliX_transpose`） |
-| 主張 | `epsilon_is_real_symmetric` |
+| 成分の実性: `ε = σ^x⊠⋯⊠σ^x`（`epsilon_square_and_eigenvalues` の証明の表示）、`pauli_x_has_real_entries`、`kronecker_of_real_entry_matrices_has_real_entries`（`A_k → σ^x`） | `epsilon_hasRealEntries`（`epsilon_eq_siteProd` → `siteProd_hasRealEntries` → `pauliX_hasRealEntries`） |
+| `ε^⊤ = (σ^x⊠⋯⊠σ^x)^⊤ = (σ^x)^⊤⊠⋯⊠(σ^x)^⊤ = σ^x⊠⋯⊠σ^x = ε` | `epsilon_transpose`（`epsilon_eq_siteProd` → `siteProd_transpose`（`kronecker_transpose`）→ `pauliX_transpose`（`transpose_of_pauli_x` を各因子へ）） |
+| 主張 | `epsilon_is_real_symmetric`（人手の `M_col` は Lean の `n + 1`） |
 
 ## 実行列としての `ε`（`epsilonR`）を置く理由
 
@@ -33,6 +33,8 @@ import Ising2D.NecSuf.PermMatrix
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimPositiveDefinite
 import Ising2D.PartitionFunction.TransferMatrixRepresentation.DefinitionConfigBasisIso
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerOfRealEntryMatricesHasRealEntries
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
 
 set_option linter.unusedSectionVars false
 
@@ -153,11 +155,17 @@ theorem epsilon_transpose : (epsilon M)ᵀ = epsilon M := by
   rw [epsilon_eq_siteProd, siteProd_transpose]
   simp only [pauliX_transpose]
 
-/-- **人手本文 `epsilon_is_real_symmetric`**: `ε` の成分はすべて実数（`ε` は実行列 `epsilonR M` の
-成分の埋め込み）であり、`ε^⊤ = ε`。 -/
-theorem epsilon_is_real_symmetric :
-    epsilon M = (epsilonR M).map (fun r : ℝ => (r : ℂ)) ∧ (epsilon M)ᵀ = epsilon M :=
-  ⟨Matrix.ext fun l k => by rw [Matrix.map_apply, epsilon_eq_ofReal_epsilonR],
-    epsilon_transpose⟩
+/-- **人手証明の成分の実性**: `ε = σ^x⊠⋯⊠σ^x`（`M_col = n + 1` 個の因子）の因子 `σ^x` の成分はすべて実数なので、
+`kronecker_of_real_entry_matrices_has_real_entries`（`A_k → σ^x`）より `ε` の成分はすべて実数。 -/
+theorem epsilon_hasRealEntries (n : ℕ) : MatrixHasRealEntries (epsilon (n + 1)) := by
+  rw [epsilon_eq_siteProd]                              -- `epsilon_square_and_eigenvalues` の証明で得た表示
+  exact siteProd_hasRealEntries _ fun _ => pauliX_hasRealEntries
+                                                        -- `kronecker_of_real_entry_matrices_has_real_entries`（`M → M_col`, `A_k → σ^x`）と `pauli_x_has_real_entries`
+
+/-- **人手本文 `epsilon_is_real_symmetric`**: `ε` の成分はすべて実数（`def_matrix_with_real_entries`）であり、`ε^⊤ = ε`
+（人手の `M_col` は `n + 1`）。実行列 `epsilonR` との関係は `epsilon_eq_ofReal_epsilonR` が与える。 -/
+theorem epsilon_is_real_symmetric (n : ℕ) :
+    MatrixHasRealEntries (epsilon (n + 1)) ∧ (epsilon (n + 1))ᵀ = epsilon (n + 1) :=
+  ⟨epsilon_hasRealEntries n, epsilon_transpose⟩
 
 end Ising2D

@@ -1325,6 +1325,15 @@ targets=(
   Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_transpose
   Ising2D.boundaryYXYFamily_eq_ite
   Ising2D.boundaryYXY_transpose
+  Ising2D.sigmaX_hasRealEntries
+  Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries
+  Ising2D.identity_matrix_two_eq_ofReal
+  Ising2D.identity_matrix_two_hasRealEntries
+  Ising2D.pauliX_eq_ofReal
+  Ising2D.pauliX_hasRealEntries
+  Ising2D.pauliZ_eq_ofReal
+  Ising2D.pauliZ_hasRealEntries
+  Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I
   Ising2D.twoByTwo_one_eq_kroneckerDelta

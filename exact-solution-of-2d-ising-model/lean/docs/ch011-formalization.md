@@ -93,8 +93,9 @@
 | `Ising2D.evenSectorSet_subset` / `evenSectorSet_bddAbove` / `le_evenSectorRayleighSup` | `𝓡_+ ⊆ 𝓡` と上に有界、単位ベクトルで `xᵀWx ≤ c_+` | 同上 |
 | `Ising2D.evenUnit` / `epsilonR_mulVec_evenUnit` / `vecNormSq_evenUnit` / `evenSectorSet_epsilonR_nonempty` | 単位ベクトル `x^{(+)}`（各成分 `2^{-M/2}`）で `𝓡_+ ≠ ∅` | 同上 |
 | **`Ising2D.c_plus_le_c`** | `c_+(M) ≤ c(M)`（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimCPlusLeC.lean`） | **`c_plus_le_c`** |
-| `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` の成分は実数（実行列 `epsilonR` の埋め込み）、`ε^⊤ = ε` とその実行列版（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
-| **`Ising2D.epsilon_is_real_symmetric`** | `ε = (epsilonR).map ofReal ∧ ε^⊤ = ε` | **`epsilon_is_real_symmetric`** |
+| `Ising2D.epsilonR` / `epsilon_apply` / `epsilon_eq_ofReal_epsilonR` / `epsilon_transpose` / `epsilonR_isSymm` / `epsilonR_mul_self` | `ε` は実行列 `epsilonR` の成分の埋め込み、`ε^⊤ = ε` とその実行列版（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonIsRealSymmetric.lean`） | `epsilon_is_real_symmetric`（`ε² = I` は `epsilon_square_and_eigenvalues`） |
+| `Ising2D.epsilon_hasRealEntries` | `ε` の成分はすべて実数（`MatrixHasRealEntries`。`epsilon_eq_siteProd` と `siteProd_hasRealEntries`・`pauliX_hasRealEntries`） | `epsilon_is_real_symmetric` の証明の成分の実性 |
+| **`Ising2D.epsilon_is_real_symmetric`** | `MatrixHasRealEntries ε ∧ ε^⊤ = ε`（`M_col = n + 1`） | **`epsilon_is_real_symmetric`** |
 | `Ising2D.flipConf` / `flipConf_involutive` / `epsilonR_mulVec_apply` | `ε` は符号反転 `π` の置換行列（`(εx)_k = x_{π(k)}`） | `trace_of_epsilon_V_plus` の証明 Step 3 の (b)（`c_between_Lambda_half_and_twice_Lambda_half` Step 2 が引く） |
 | `Ising2D.epsilon_commute_physicalSymTransferC` / **`epsilon_commutes_with_W`** / `epsilonR_mulVec_physicalSymTransferR_of_mem` | 物理的な `W` について `εW = Wε`（複素行列の等式から実行列へ）と `W` が `𝓕^{(+)}` を保つこと（`ThermodynamicLimit/ColumnLimitAndClosedForm/ClaimEpsilonCommutesWithW.lean`） | **`epsilon_commutes_with_W`** |
 | `Ising2D.sectorSet` / `sectorRayleighSup` / `sectorSet_one_eq` / `sectorRayleighSup_one_eq` | 符号つきの `𝓡_±`, `c_±(M)`（`s = 1` で本文の `𝓡_+`, `c_+`） | ノート（`sector_decomposition_of_rayleigh_sup`） |

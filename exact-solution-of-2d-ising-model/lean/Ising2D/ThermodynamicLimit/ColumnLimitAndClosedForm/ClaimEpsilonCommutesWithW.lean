@@ -16,7 +16,7 @@
 人手の `W` と `ε` は複素行列として議論されるが、章 011 の Rayleigh 商は実行列 `W`
 （`physicalSymTransferR`）と実行列 `ε`（`epsilonR`）で述べる。そこで複素行列としての等式
 `εW = Wε` を示してから、両辺が実行列の成分の埋め込みであること
-（`epsilon_is_real_symmetric`、`physicalSymTransferC_eq_map`）と埋め込みの単射性で実行列の等式に移す
+（`epsilon_eq_ofReal_epsilonR`、`physicalSymTransferC_eq_map`）と埋め込みの単射性で実行列の等式に移す
 （`epsilon_commutes_with_W`）。この最後の段は人手に無い（人手は `ℝ ⊂ ℂ` の包含を明示せずに使う）。
 
 必要十分版は置かない。可換性の鎖は結合律だけで、置き換えた構造は章 010 の
@@ -43,7 +43,8 @@ theorem epsilon_commute_physicalSymTransferC (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2
 theorem epsilon_commutes_with_W (K1 : ℝ) {K2 : ℝ} (hK2 : 0 < K2) :
     epsilonR M * physicalSymTransferR M K1 K2 = physicalSymTransferR M K1 K2 * epsilonR M := by
   apply Matrix.map_injective (f := Complex.ofRealHom) Complex.ofReal_injective
-  have hε : (epsilonR M).map Complex.ofRealHom = epsilon M := epsilon_is_real_symmetric.1.symm
+  have hε : (epsilonR M).map Complex.ofRealHom = epsilon M :=
+    Matrix.ext fun l k => by rw [Matrix.map_apply, epsilon_eq_ofReal_epsilonR]; rfl
   have hW : (physicalSymTransferR M K1 K2).map Complex.ofRealHom
       = physicalSymTransferC M K1 K2 := (physicalSymTransferC_eq_map K1 K2).symm
   show (epsilonR M * physicalSymTransferR M K1 K2).map Complex.ofRealHom

@@ -28,7 +28,7 @@
 演算の土台は、章 018 の主鎖では**複素行列 `TensorPow M = Matrix (Conf M) (Conf M) ℂ`**、
 章 011 と接続する部分では**実行列 `Matrix (Conf M) (Conf M) ℝ`** である。
 両者の橋渡しは `Ising2D.cvec`（実ベクトルの複素化）と `Ising2D.EvenSectorBridge.reVec`
-（複素ベクトルの実部）で行い、章 011 の `epsilon_eq_ofReal_epsilonR`（`epsilon_is_real_symmetric`）と
+（複素ベクトルの実部）で行い、章 011 の `epsilon_eq_ofReal_epsilonR`（`ε` は実行列 `epsilonR` の成分の埋め込み）と
 同じ性質のものである。
 
 **実数解析（極限・積分・連続性）へ移行するのは、章 012 の

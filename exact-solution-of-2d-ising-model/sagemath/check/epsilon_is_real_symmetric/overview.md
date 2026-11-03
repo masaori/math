@@ -13,9 +13,9 @@
 | ファイル | 検査内容 | ステータス | 結果 |
 |---|---|---|---|
 | `check_kronecker_representation_of_epsilon.sage` | 第一行・最終行が引く表示 `ε = σ^x ⊠ ⋯ ⊠ σ^x`（`epsilon_square_and_eigenvalues` の証明で得た表示）が、定義 `σ^x_1⋯σ^x_M` から作った `ε` と一致すること | **PASS** | `M_col=1,…,6` で厳密等号 |
-| `check_entries_are_real.sage` | `σ^x` の成分は 0 か 1、クロネッカー積の成分は各因子の成分の積（`def_kronecker` (1)）なので `ε` の成分はすべて実数（0 か 1） | **PASS** | `M_col=1,…,6` の全成分で厳密一致 |
+| `check_entries_are_real.sage` | 成分の実性の段落: 因子 `σ^x` の成分は `QQ ⊂ ℝ` の 0 か 1（`pauli_x_has_real_entries`）で、`ε` の各成分は `kronecker_of_real_entry_matrices_has_real_entries` の証明の `r := ∏_k r_k`（因子の成分の積）に等しく、すべて実数（0 か 1） | **PASS** | `M_col=1,…,6` の全成分で厳密一致 |
 | `check_transpose_of_kronecker_product.sage` | 第二行 `(σ^x ⊠ ⋯)^⊤ = (σ^x)^⊤ ⊠ ⋯`（`kronecker_transpose`） | **PASS** | `M_col=1,…,6` で厳密等号 |
-| `check_sigma_x_is_symmetric.sage` | 第三行 `(σ^x)^⊤ ⊠ ⋯ = σ^x ⊠ ⋯`（`(σ^x)^⊤ = σ^x` を各因子へ） | **PASS** | `M_col=1,…,6` で厳密等号 |
+| `check_sigma_x_is_symmetric.sage` | 第三行 `(σ^x)^⊤ ⊠ ⋯ = σ^x ⊠ ⋯`（`transpose_of_pauli_x` を各因子へ） | **PASS** | `M_col=1,…,6` で厳密等号 |
 | `check_epsilon_transpose_equals_epsilon.sage` | 主張全体 `ε^⊤ = ε` と、定義から作った `ε` の転置から出発して四行の鎖の隣り合う値が等しいこと | **PASS** | `M_col=1,…,6` で厳密等号 |
 
 全成分を `QQ` に置き、`QQ ⊂ ℝ ⊂ ℂ` の包含の前に等号を厳密に判定した。浮動小数点と ℝ/ℂ への脱出はない。

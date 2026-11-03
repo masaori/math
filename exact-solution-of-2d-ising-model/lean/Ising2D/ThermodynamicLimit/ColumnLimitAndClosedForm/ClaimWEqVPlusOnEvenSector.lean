@@ -27,7 +27,7 @@ Step 1 でそれを実ベクトルへ `ℝ ⊂ ℂ` の包含を明示せずに�
 
 | 段 | Lean |
 | --- | --- |
-| 実行列 `ε` と複素行列 `ε`（章 011 `epsilon_is_real_symmetric`） | `epsilon_eq_ofReal_epsilonR` から `epsilon_eq_map_epsilonR` |
+| 実行列 `ε` と複素行列 `ε`（章 011 `epsilon_eq_ofReal_epsilonR`） | `epsilon_eq_ofReal_epsilonR` から `epsilon_eq_map_epsilonR` |
 | `map Complex.ofRealHom` と `ℝ → ℂ` の埋め込みによる `map` の一致 | `map_ofRealHom_eq_map_coe`（`Complex.ofRealHom_eq_coe`） |
 | `map Complex.ofRealHom` と `cvec` の両立 | `cvec_mulVec_ofRealHom`（`map_ofRealHom_eq_map_coe` と `TheoremCPlusEqualsLambda.lean` の `cvec_mulVec` から） |
 | `V^{(+)} = VPlusOfTransfer` を `VPlus` の `s_2 = sinh 2K_2`, `K_2^*` での値へ（`def_V_plus`） | `VPlusOfTransfer_eq_VPlus`（`P.K2star := Kstar P.K2` は定義） |

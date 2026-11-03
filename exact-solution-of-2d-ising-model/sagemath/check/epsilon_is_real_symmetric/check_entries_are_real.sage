@@ -1,6 +1,8 @@
 # 対象ラベル: epsilon_is_real_symmetric
-# 本文: sigma^x の成分は 0 または 1 で、クロネッカー積の成分は各因子の成分の積（def_kronecker (1)）なので
-#       epsilon の成分もすべて実数（実際には 0 または 1）。
+# 本文: epsilon = sigma^x ⊠ … ⊠ sigma^x（epsilon_square_and_eigenvalues の証明の表示。check_kronecker_representation_of_epsilon）、
+#       因子 sigma^x の成分はすべて実数（pauli_x_has_real_entries。成分 0, 1 は QQ ⊂ R の元）なので、
+#       kronecker_of_real_entry_matrices_has_real_entries（A_k → sigma^x）より epsilon の成分はすべて実数。
+#       その証明の r := ∏_k r_k（因子の成分の積）に epsilon の成分が等しいことを確かめる。
 # 帰属: Mat(2^M, QQ)。成分ごとに因子の成分の積と一致することも確かめる。
 load("_prelude.sage")
 

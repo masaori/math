@@ -5,7 +5,7 @@
 （`eigenvalues_of_V_014_claim_iH_is_real_symmetric`、ラベル **`iH_is_real_symmetric`**）
 
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
-Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）もこのファイルが持つ。
+Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性のうち `σ^x_m`・`σ^z_mσ^z_{m+1}` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`）もこのファイルが持つ。
 Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
@@ -26,6 +26,8 @@ Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対�
 | Step 3 の `(σ^x_m)^⊤ = σ^x_m` の 5 行（`def_site_pauli_matrices` → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_x` → `def_site_pauli_matrices`） | `sigmaX_transpose` の `calc` の 5 段（`kronecker_transpose` は `siteProd_transpose`、`MathematicalTools/KroneckerProductAndMultiFactorBasis/ClaimKroneckerTranspose.lean`） |
 | Step 3 の `(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}` の 5 行（Step 2 の準備の表示 → `kronecker_transpose` → `transpose_of_identity_matrix_of_order_two` → `transpose_of_pauli_z` → 準備の表示） | `sigmaZ_castSucc_mul_sigmaZ_succ_transpose` の `calc` の 5 段 |
 | Step 3 の `G^⊤ = G` の 11 行（Step 2 の準備の `G` の表示 → `kronecker_transpose` → `transpose_of_pauli_x` → `transpose_of_pauli_y` → `negation_is_scalar_multiple_by_minus_one` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → `(-1)(-1) = 1` → `scalar_multiple_by_one` → 準備の表示） | `boundaryYXY_transpose` の `calc` の 11 段（準備の `G` の表示の `ite` の形は `boundaryYXYFamily_eq_ite`） |
+| Step 3 の `σ^x_m` の成分の実性（`def_site_pauli_matrices` の表示 → `identity_matrix_of_order_two_has_real_entries`・`pauli_x_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries`） | `sigmaX_hasRealEntries`（`M = n + 1`） |
+| Step 3 の `σ^z_mσ^z_{m+1}` の成分の実性（Step 2 の準備の表示 → `identity_matrix_of_order_two_has_real_entries`・`pauli_z_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries`） | `sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries` |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 
 - 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
@@ -46,6 +48,8 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleDistributesOverMatrixDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOne
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerOfRealEntryMatricesHasRealEntries
+import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 
 namespace Ising2D
@@ -396,6 +400,38 @@ theorem sigmaZ_castSucc_mul_sigmaZ_succ_transpose {r : ℕ} (m : Fin (r + 1)) :
       rw [pauliZ_transpose]                             -- `transpose_of_pauli_z`（第 `m` 因子と第 `m+1` 因子へ同時に適用）
     _ = sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m) := by
       rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker, hform]   -- Step 2 の準備の `σ^z_mσ^z_{m+1}` の表示
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `σ^x_m` の成分の実性**（`1 ≤ m ≤ M_col`、`M = n + 1`）:
+`σ^x_m = I⊠⋯⊠σ^x⊠⋯⊠I`（`def_site_pauli_matrices`）の因子 `I`・`σ^x` の成分はすべて実数なので、
+`kronecker_of_real_entry_matrices_has_real_entries` より `σ^x_m` の成分はすべて実数。 -/
+theorem sigmaX_hasRealEntries {n : ℕ} (m : Fin (n + 1)) : MatrixHasRealEntries (sigmaX m) := by
+  have hform : sigmaX m
+      = siteProd (n + 1) (Function.update (1 : Fin (n + 1) → Matrix (Fin 2) (Fin 2) ℂ) m pauliX) := rfl
+                                                        -- `def_site_pauli_matrices`（`k → m`, `a → x`）
+  rw [hform]
+  refine siteProd_hasRealEntries _ fun k => ?_          -- `kronecker_of_real_entry_matrices_has_real_entries`（`M → M_col`, `A_m → σ^x`, `A_k → I`（`k ≠ m`））
+  by_cases h : k = m
+  · rw [h, Function.update_self]
+    exact pauliX_hasRealEntries                         -- `pauli_x_has_real_entries`
+  · rw [Function.update_of_ne h]
+    exact identity_matrix_two_hasRealEntries            -- `identity_matrix_of_order_two_has_real_entries`
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `σ^z_mσ^z_{m+1}` の成分の実性**（`1 ≤ m ≤ M_col - 1`、`M = r + 2`）:
+Step 2 の準備の表示 `I⊠⋯⊠I⊠σ^z⊠σ^z⊠I⊠⋯⊠I` の因子 `I`・`σ^z` の成分はすべて実数なので、
+`kronecker_of_real_entry_matrices_has_real_entries` より `σ^z_mσ^z_{m+1}` の成分はすべて実数。 -/
+theorem sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries {r : ℕ} (m : Fin (r + 1)) :
+    MatrixHasRealEntries (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
+  rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker]        -- Step 2 の準備の `σ^z_mσ^z_{m+1}` の表示
+  refine siteProd_hasRealEntries _ fun k => ?_          -- `kronecker_of_real_entry_matrices_has_real_entries`（`M → M_col`, `A_m, A_{m+1} → σ^z`, `A_k → I`（`k ≠ m, m+1`））
+  by_cases ha : k = Fin.castSucc m
+  · rw [ha, Function.update_self]
+    exact pauliZ_hasRealEntries                         -- `pauli_z_has_real_entries`（第 `m` 因子）
+  · rw [Function.update_of_ne ha]
+    by_cases hb : k = Fin.succ m
+    · rw [hb, Function.update_self]
+      exact pauliZ_hasRealEntries                       -- `pauli_z_has_real_entries`（第 `m+1` 因子）
+    · rw [Function.update_of_ne hb]
+      exact identity_matrix_two_hasRealEntries          -- `identity_matrix_of_order_two_has_real_entries`
 
 /-- 人手 `iH_is_real_symmetric` Step 2 の準備の `G` の表示 `σ^y⊠σ^x⊠⋯⊠σ^x⊠σ^y` の因子の並びを、`ite` で書いたもの
 （`boundaryYXYFamily` の `∨` と `ite` の書き方の違いだけ）。 -/

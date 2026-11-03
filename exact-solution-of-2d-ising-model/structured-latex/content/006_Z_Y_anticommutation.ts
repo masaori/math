@@ -401,6 +401,182 @@ I^\top
     },
   },
   {
+    id: "Z_Y_anticommutation_claim_identity_matrix_of_order_two_has_real_entries",
+    kind: "claim",
+    title: { text: "2 次の単位行列の成分はすべて実数" },
+    labels: ["identity_matrix_of_order_two_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        " で ",
+        math(String.raw`m = n = 2`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+I
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_identity_matrix} \text{ で } n=2) \\
+&= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&1_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\\\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(1)\end{pmatrix}
+&&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1),\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0) \text{ を各成分へ同時に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって各成分 ",
+        math(String.raw`I_{pq}`),
+        "（",
+        math(String.raw`p, q \in \{1, 2\}`),
+        "）について ",
+        math(String.raw`r := 1`),
+        "（",
+        math(String.raw`p = q`),
+        "）または ",
+        math(String.raw`r := 0`),
+        "（",
+        math(String.raw`p \neq q`),
+        "）と取れば ",
+        math(String.raw`I_{pq} = r_{\mathbb{C}}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " であり、",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の成分の実性が、因子の I の成分が実であることを名前を出さずに使っていたので、引ける主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_pauli_x_has_real_entries",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^x \text{ の成分はすべて実数}` },
+    labels: ["pauli_x_has_real_entries"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        " で ",
+        math(String.raw`m = n = 2`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x
+&= \begin{pmatrix}0_{\mathbb{C}}&1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x) \\
+&= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(1)\\\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\end{pmatrix}
+&&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0),\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1) \text{ を各成分へ同時に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって各成分 ",
+        math(String.raw`(\sigma^x)_{pq}`),
+        "（",
+        math(String.raw`p, q \in \{1, 2\}`),
+        "）について ",
+        math(String.raw`r := 0`),
+        "（",
+        math(String.raw`p = q`),
+        "）または ",
+        math(String.raw`r := 1`),
+        "（",
+        math(String.raw`p \neq q`),
+        "）と取れば ",
+        math(String.raw`(\sigma^x)_{pq} = r_{\mathbb{C}}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " であり、",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 と epsilon_is_real_symmetric の証明が「σ^x の成分は実」を pauli_matrix_products の行列表示だけで述べていたので、def_matrix_with_real_entries の条件として示す主張を足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_pauli_z_has_real_entries",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^z \text{ の成分はすべて実数}` },
+    labels: ["pauli_z_has_real_entries"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        " で ",
+        math(String.raw`m = n = 2`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^z
+&= \begin{pmatrix}1_{\mathbb{C}}&0_{\mathbb{C}}\\0_{\mathbb{C}}&-1_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z) \\
+&= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\\\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(-1)\end{pmatrix}
+&&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1),\ 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0),\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) \text{ を各成分へ同時に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって各成分 ",
+        math(String.raw`(\sigma^z)_{pq}`),
+        "（",
+        math(String.raw`p, q \in \{1, 2\}`),
+        "）について ",
+        math(String.raw`r := 1`),
+        "（",
+        math(String.raw`p = q = 1`),
+        "）、",
+        math(String.raw`r := -1`),
+        "（",
+        math(String.raw`p = q = 2`),
+        "）、",
+        math(String.raw`r := 0`),
+        "（",
+        math(String.raw`p \neq q`),
+        "）と取れば ",
+        math(String.raw`(\sigma^z)_{pq} = r_{\mathbb{C}}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " であり、",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「σ^z の成分は実」を pauli_matrix_products の行列表示だけで述べていたので、def_matrix_with_real_entries の条件として示す主張を足した。",
+      ],
+    },
+  },
+  {
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },

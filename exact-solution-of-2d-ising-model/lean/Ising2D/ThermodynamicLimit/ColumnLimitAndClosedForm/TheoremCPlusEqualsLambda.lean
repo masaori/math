@@ -11,7 +11,7 @@
 必要十分版は置かない。理由は章 011 の `ThermodynamicLimit/RowLimitAndMaxEigenvalue/DefinitionRayleighSup.lean` と同じで、
 `sSup` は ℝ の完備性そのものであり、ほどく余地がないこと。本ファイルで新しく現れる
 道具は「実行列・実ベクトルと複素行列・複素ベクトルの橋渡し」だけで、これは
-章 011 の `epsilon_eq_ofReal_epsilonR`（`epsilon_is_real_symmetric`）と同じ性質のものである。
+章 011 の `epsilon_eq_ofReal_epsilonR`（`ε` の成分が実行列 `epsilonR` の成分の埋め込みであること）と同じ性質のものである。
 
 ## 章 011・017 から受け取る入力（`Ising2D.EvenSectorBridge`）
 

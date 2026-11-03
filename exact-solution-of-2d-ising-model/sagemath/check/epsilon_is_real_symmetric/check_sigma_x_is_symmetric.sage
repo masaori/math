@@ -1,5 +1,5 @@
 # 対象ラベル: epsilon_is_real_symmetric
-# 本文の第三行: (sigma^x)^T ⊠ … ⊠ (sigma^x)^T = sigma^x ⊠ … ⊠ sigma^x   ((sigma^x)^T = sigma^x を各因子へ)
+# 本文の第三行: (sigma^x)^T ⊠ … ⊠ (sigma^x)^T = sigma^x ⊠ … ⊠ sigma^x   (transpose_of_pauli_x を各因子へ)
 # 帰属: Mat(2^M, QQ)。
 load("_prelude.sage")
 

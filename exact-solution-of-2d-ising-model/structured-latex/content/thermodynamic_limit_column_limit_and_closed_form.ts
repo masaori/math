@@ -629,18 +629,24 @@ c_+(M_{\mathrm{col}})
     ],
     proof: [
       paragraph([
-        ref("pauli_matrix_products"),
-        " の ",
-        math(String.raw`\sigma^x = \begin{pmatrix}0&1\\1&0\end{pmatrix}`),
-        " の成分はすべて実数（",
-        math(String.raw`0`),
-        " または ",
-        math(String.raw`1`),
-        "）であり、",
-        ref("def_kronecker"),
-        " (1) よりクロネッカー積の成分は各因子の成分の積だから、",
+        ref("epsilon_square_and_eigenvalues"),
+        " の証明で得た表示より ",
         math(String.raw`\varepsilon = \sigma^x\boxtimes\cdots\boxtimes\sigma^x`),
-        " の成分もすべて実数である。転置については",
+        "（",
+        math(String.raw`M_{\mathrm{col}}`),
+        " 個の因子）である。因子 ",
+        math(String.raw`\sigma^x`),
+        " の成分はすべて実数（",
+        ref("pauli_x_has_real_entries"),
+        "）なので、",
+        ref("kronecker_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`M \to M_{\mathrm{col}},\ A_k \to \sigma^x\ (k \in \{1,\dots,M_{\mathrm{col}}\})`),
+        "）より ",
+        math(String.raw`\varepsilon`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）である。転置については",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -650,7 +656,7 @@ c_+(M_{\mathrm{col}})
 &=(\sigma^x)^\top\boxtimes\cdots\boxtimes(\sigma^x)^\top
   \quad (\because \blkref{kronecker_transpose})\\
 &=\sigma^x\boxtimes\cdots\boxtimes\sigma^x
-  \quad (\because \blkref{pauli_matrix_products}\ \text{の }\sigma^x\text{ の成分表示から }(\sigma^x)^\top=\sigma^x)\\
+  \quad (\because \blkref{transpose_of_pauli_x}\ \text{を各因子へ同時に適用})\\
 &=\varepsilon
   \quad (\because \blkref{epsilon_square_and_eigenvalues}\ \text{の証明で得た表示}).
 \end{aligned}`,
@@ -660,6 +666,7 @@ c_+(M_{\mathrm{col}})
       status: "added",
       notes: [
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。旧 <sector_decomposition_of_rayleigh_sup> の証明の中にあった ε^⊤ = ε の導出を、最終定理が引く独立した主張として取り出した。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 成分の実性を「σ^x の成分は 0 または 1」「クロネッカー積の成分は各因子の成分の積」と名前だけで述べていたのを、epsilon_square_and_eigenvalues の証明の表示と pauli_x_has_real_entries・kronecker_of_real_entry_matrices_has_real_entries を引く形にした。転置の鎖の (σ^x)^⊤ = σ^x の段の根拠を pauli_matrix_products の成分表示から transpose_of_pauli_x に替えた。主張は変えていない。",
       ],
     },
   },
