@@ -2165,45 +2165,157 @@ s_1s_2^* &> 0\cdot s_2^*
       ),
       paragraph([
         "Step 1（零点の必要条件）。",
+        math(String.raw`\theta \in \mathbb{R}`),
+        " について、",
         ref("def_gamma1_gamma2_of_theta"),
-        " より ",
-        math(String.raw`\gamma_2(\theta) = \left(i\,\exp(i\theta)s_2^*\right)w(\theta)`),
-        "、",
-        math(String.raw`w(\theta) := c_1\cos\theta - i\sin\theta - s_1c_2`),
-        " である。",
-        math(String.raw`\left|i\,\exp(i\theta)s_2^*\right| = s_2^* > 0`),
-        "（",
-        ref("abs_basic_properties"),
-        " と ",
-        ref("euler_formula_cos_sin"),
-        "）なので第 1 因子は ",
-        math(String.raw`0_{\mathbb{C}}`),
-        " でなく、",
-        math(String.raw`\mathbb{C}`),
-        " は体（",
-        ref("complex_numbers_form_a_field"),
-        "）ゆえ零因子を持たないから",
+        " の定義式の実数 ",
+        math(String.raw`c_1, s_1, c_2, s_2^*, \cos\theta, \sin\theta`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " の像として読み、次の三つの複素数を置く。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\gamma_2(\theta) = 0_{\mathbb{C}}
-&\iff \left(i\,\exp(i\theta)s_2^*\right)w(\theta) = 0_{\mathbb{C}}
-   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
-&\iff w(\theta) = 0_{\mathbb{C}}
-   \quad (\because i\,\exp(i\theta)s_2^* \neq 0 \text{ と } \blkref{complex_numbers_form_a_field}) \\
-&\iff \begin{cases} \sin\theta = 0 \\ c_1\cos\theta = s_1c_2 \end{cases}
-   \quad (\because \blkref{definition_of_cc}\text{ の成分表示})
+a(\theta) &:= i\,\exp(i\theta)\,(s_2^*)_{\mathbb{C}} \in \mathbb{C}, \\
+b(\theta) &:= (-i)\,\exp(-i\theta)\,\bigl((s_2^*)^{-1}\bigr)_{\mathbb{C}} \in \mathbb{C}, \\
+w(\theta) &:= (c_1)_{\mathbb{C}}(\cos\theta)_{\mathbb{C}} - i\,(\sin\theta)_{\mathbb{C}} - (s_1)_{\mathbb{C}}(c_2)_{\mathbb{C}} \in \mathbb{C}
 \end{aligned}`,
       ),
       paragraph([
         "（",
-        ref("definition_of_cc"),
-        " の成分表示で ",
-        math(String.raw`w(\theta) = (c_1\cos\theta - s_1c_2,\ -\sin\theta) \in \mathbb{R}^2 = \mathbb{C}`),
-        " であり、零元は ",
-        math(String.raw`(0,0)`),
-        " である。）",
+        math(String.raw`(s_2^*)^{-1} \in \mathbb{R}`),
+        " は Step 0 の ",
+        math(String.raw`s_2^* > 0`),
+        " から定まる。）まず ",
+        math(String.raw`w(\theta)`),
+        " の成分を求めておく。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+w(\theta)
+&= (c_1,0)(\cos\theta,0) + (-1,0)\bigl((0,1)(\sin\theta,0)\bigr) + (-1,0)\bigl((s_1,0)(c_2,0)\bigr)
+   \quad (\because w(\theta)\text{ の定義、}\blkref{inclusion_rr_to_cc}\text{、}i = (0,1)\text{、}\blkref{def_complex_difference}\text{、}\blkref{multiply_by_minus_one}) \\
+&= (c_1\cos\theta, 0) + (-1,0)(0, \sin\theta) + (-1,0)(s_1c_2, 0)
+   \quad (\because \blkref{definition_of_cc}\text{ の積を三か所に}) \\
+&= (c_1\cos\theta, 0) + (0, -\sin\theta) + (-s_1c_2, 0)
+   \quad (\because \blkref{definition_of_cc}\text{ の積を二か所に}) \\
+&= (c_1\cos\theta - s_1c_2,\ -\sin\theta)
+   \quad (\because \blkref{definition_of_cc}\text{ の和})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`b(\theta)`),
+        " は ",
+        math(String.raw`a(\theta)`),
+        " の逆元である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+a(\theta)\,b(\theta)
+&= \bigl(i\,\exp(i\theta)\,(s_2^*)_{\mathbb{C}}\bigr)\bigl((-i)\,\exp(-i\theta)\,((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because a(\theta), b(\theta) \text{ の定義}) \\
+&= \bigl(i(-i)\bigr)\bigl(\exp(i\theta)\exp(-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \mathbb{C} \text{ の積の結合律と可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \bigl(i\,((-1_{\mathbb{C}})\,i)\bigr)\bigl(\exp(i\theta)\exp(-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \blkref{multiply_by_minus_one}\text{ の } -i := (-1_{\mathbb{C}})\,i) \\
+&= \bigl((-1_{\mathbb{C}})(i\,i)\bigr)\bigl(\exp(i\theta)\exp(-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \mathbb{C} \text{ の積の結合律と可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(\exp(i\theta)\exp(-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \blkref{definition_of_cc}\text{ の積で } (0,1)(0,1) = (-1,0)) \\
+&= 1_{\mathbb{C}}\bigl(\exp(i\theta)\exp(-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \blkref{definition_of_cc}\text{ の積で } (-1,0)(-1,0) = (1,0)) \\
+&= 1_{\mathbb{C}}\exp\bigl(i\theta + (-i\theta)\bigr)\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \blkref{scalar_exp_product}\text{ を }K = \mathbb{C}\text{ で}) \\
+&= 1_{\mathbb{C}}\exp(0_{\mathbb{C}})\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because i\theta + (-i\theta) = 0_{\mathbb{C}}) \\
+&= 1_{\mathbb{C}}1_{\mathbb{C}}\bigl((s_2^*)_{\mathbb{C}}((s_2^*)^{-1})_{\mathbb{C}}\bigr)
+   \quad (\because \blkref{scalar_exp_zero}\text{ を }K = \mathbb{C}\text{ で}) \\
+&= 1_{\mathbb{C}}1_{\mathbb{C}}\bigl(s_2^*(s_2^*)^{-1}\bigr)_{\mathbb{C}}
+   \quad (\because \blkref{real_inclusion_preserves_product}) \\
+&= 1_{\mathbb{C}}1_{\mathbb{C}}(1)_{\mathbb{C}}
+   \quad (\because s_2^*(s_2^*)^{-1} = 1) \\
+&= 1_{\mathbb{C}}1_{\mathbb{C}}1_{\mathbb{C}}
+   \quad (\because \blkref{inclusion_rr_to_cc}\text{ の略記 } 1_{\mathbb{C}} = (1)_{\mathbb{C}}) \\
+&= 1_{\mathbb{C}}
+   \quad (\because 1_{\mathbb{C}} \text{ は積の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって ",
+        math(String.raw`a(\theta) \neq 0_{\mathbb{C}}`),
+        " である。実際 ",
+        math(String.raw`a(\theta) = 0_{\mathbb{C}}`),
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+1_{\mathbb{C}}
+&= a(\theta)\,b(\theta)
+   \quad (\because \text{直前の鎖}) \\
+&= 0_{\mathbb{C}}\,b(\theta)
+   \quad (\because \text{仮定 } a(\theta) = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because \blkref{complex_zero_times_is_zero})
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり、",
+        math(String.raw`1_{\mathbb{C}} \neq 0_{\mathbb{C}}`),
+        "（",
+        ref("complex_numbers_form_a_field"),
+        "）に反する。",
+        math(String.raw`a(\theta)\,w(\theta) = 0_{\mathbb{C}}`),
+        " と ",
+        math(String.raw`w(\theta) = 0_{\mathbb{C}}`),
+        " は同値である。前者を仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+w(\theta)
+&= 1_{\mathbb{C}}\,w(\theta)
+   \quad (\because 1_{\mathbb{C}} \text{ は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \bigl(b(\theta)\,a(\theta)\bigr)\,w(\theta)
+   \quad (\because \text{逆元の鎖と積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= b(\theta)\,\bigl(a(\theta)\,w(\theta)\bigr)
+   \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= b(\theta)\,0_{\mathbb{C}}
+   \quad (\because \text{仮定 } a(\theta)\,w(\theta) = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}\,b(\theta)
+   \quad (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because \blkref{complex_zero_times_is_zero})
+\end{aligned}`,
+      ),
+      paragraph(["であり、後者を仮定すると"]),
+      displayMath(
+        String.raw`\begin{aligned}
+a(\theta)\,w(\theta)
+&= a(\theta)\,0_{\mathbb{C}}
+   \quad (\because \text{仮定 } w(\theta) = 0_{\mathbb{C}}) \\
+&= 0_{\mathbb{C}}\,a(\theta)
+   \quad (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= 0_{\mathbb{C}}
+   \quad (\because \blkref{complex_zero_times_is_zero})
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\gamma_2(\theta) = 0_{\mathbb{C}}
+&\iff a(\theta)\,w(\theta) = 0_{\mathbb{C}}
+   \quad (\because \blkref{def_gamma1_gamma2_of_theta}\text{ の定義式を積の結合律で括り直す}) \\
+&\iff w(\theta) = 0_{\mathbb{C}}
+   \quad (\because \text{直前の二つの鎖}) \\
+&\iff \bigl(c_1\cos\theta - s_1c_2,\ -\sin\theta\bigr) = (0, 0)
+   \quad (\because \text{準備の } w(\theta) \text{ の成分の鎖と、}\blkref{inclusion_rr_to_cc}\text{ の } 0_{\mathbb{C}} = (0,0)) \\
+&\iff \begin{cases} c_1\cos\theta - s_1c_2 = 0 \\ -\sin\theta = 0 \end{cases}
+   \quad (\because \mathbf{R}^2 \text{ の元の相等は成分ごと}) \\
+&\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ -\sin\theta = 0 \end{cases}
+   \quad (\because \text{第 1 式の両辺に } s_1c_2 \text{ を加える}) \\
+&\iff \begin{cases} c_1\cos\theta = s_1c_2 \\ \sin\theta = 0 \end{cases}
+   \quad (\because \text{第 2 式の両辺を } -1 \text{ 倍する})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 2（",
         math(String.raw`\sin\tilde\theta_\mu = 0`),
@@ -2235,18 +2347,21 @@ s_1s_2^* &> 0\cdot s_2^*
 \end{aligned}`,
       ),
       paragraph([
-        "**左辺 ",
-        math(String.raw`2\mu-1`),
-        " は奇数**なので、",
-        math(String.raw`kM_{\mathrm{col}}`),
-        " も奇数でなければならず、したがって ",
+        "このとき ",
         math(String.raw`k`),
-        " は奇数である（",
-        math(String.raw`k`),
-        " が偶数なら ",
-        math(String.raw`kM_{\mathrm{col}}`),
-        " は偶数）。",
+        " は奇数である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+&2\mu - 1 = kM_{\mathrm{col}} \\
+&\Longrightarrow kM_{\mathrm{col}} = 2(\mu-1) + 1
+   \quad (\because 2\mu - 1 = 2(\mu-1) + 1,\ \mu - 1 \in \mathbb{Z}) \\
+&\Longrightarrow kM_{\mathrm{col}} \text{ は奇数}
+   \quad (\because \text{奇数の定義}) \\
+&\Longrightarrow k \text{ は奇数}
+   \quad (\because \text{整数は偶数か奇数のどちらか一方で、} k = 2l\ (l \in \mathbb{Z}) \text{ なら } kM_{\mathrm{col}} = 2(lM_{\mathrm{col}}) \text{ は偶数})
+\end{aligned}`,
+      ),
       paragraph([
         "Step 3（そのとき ",
         math(String.raw`\cos\tilde\theta_\mu = -1`),
@@ -2268,13 +2383,13 @@ s_1s_2^* &> 0\cdot s_2^*
 \end{aligned}`,
       ),
       paragraph([
-        "Step 4（矛盾）。Step 1 の第 2 式に Step 3 を代入すると",
+        "Step 4（矛盾）。Step 1 の連立条件の第 1 式に Step 3 を代入すると",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 s_1c_2
 &= c_1\cos\tilde\theta_\mu
-   \quad (\because \text{Step 1 の連立条件の第 2 式}) \\
+   \quad (\because \text{Step 1 の連立条件の第 1 式}) \\
 &= c_1\cdot(-1)
    \quad (\because \text{Step 3 の } \cos\tilde\theta_\mu = -1) \\
 &= -c_1
@@ -2282,11 +2397,25 @@ s_1c_2
 \end{aligned}`,
       ),
       paragraph([
-        "が要求される。しかし Step 0 より ",
-        math(String.raw`s_1c_2 > 0`),
-        " かつ ",
-        math(String.raw`-c_1 < 0`),
-        " であり、これは矛盾である。よって Step 1 の連立条件は成り立たず、",
+        "が要求される。これは Step 0 に反する。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+0
+&< s_1c_2
+   \quad (\because \text{Step 0 の } s_1 > 0,\ c_2 > 0 \text{ と正数の積}) \\
+&= -c_1
+   \quad (\because \text{直前の鎖}) \\
+&< 0
+   \quad (\because \text{Step 0 の } c_1 > 0)
+\end{aligned}`,
+      ),
+      paragraph([
+        "は ",
+        math(String.raw`0 < 0`),
+        " を導き、矛盾である。よって Step 1 の連立条件は ",
+        math(String.raw`\theta = \tilde\theta_\mu`),
+        " で成り立たず、",
         math(String.raw`\gamma_2(\tilde\theta_\mu) \neq 0_{\mathbb{C}}`),
         "。",
       ]),

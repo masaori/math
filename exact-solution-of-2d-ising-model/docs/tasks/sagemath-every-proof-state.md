@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 369 件のうち、SageMath の検算が無いもの 58 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 370 件のうち、SageMath の検算が無いもの 57 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -223,13 +223,21 @@
   前者は γ_2(−θ) の鎖の各行がその行の (∵) の関係式 1 本だけのイデアルで成り立つことを `QQ(i)` の多項式環で、主張と全行を代数的数の具体値で厳密に確かめた（具体値の偶奇性は Sage の記号式が当てはめるので独立な確認ではない）。後者は等号の行を多項式と有理関数体 `QQ(Y,X)` で、不等号の行を差の積の形と `AA` の具体値で厳密に確かめた。
   人手証明（後者）を直した: 根拠を各行から引く形にし（双対結合定数の正値性・`indexed_hyperbolic_abbreviations_positive`・`def_indexed_hyperbolic_abbreviations`・`cosh_addition_formula`・`cosh_at_least_one`）、末尾の参照の一覧を外し、cos θ ≤ 1 による評価を準備の一操作ずつの含意に分け、全実数上の cos θ ≤ 1 を前提とすることを主張に書いた（不等式の中身は不変）。計算の誤りは無かった。Lean は不変（`lake build`・`check-no-sorry.sh` 成功）。`ClaimGamma1LowerBound.lean` の注記と新しい準備の含意との 1 対 1 は Lean の連続実行の受け持ち。
 
+- `gamma_2_theta_tilde_nonzero`（全ての μ と K_1, K_2 > 0 で γ_2(θ̃_μ) ≠ 0）: `sagemath/check/gamma_2_theta_tilde_nonzero/`。
+  結合定数を `exp(2K_i)` が有理数になる 8 組（臨界点を 2 組含む）に取ると略記はすべて `QQ` に入り、角度は円分体 `Q(ζ_{4M})` に置けるので、全行を厳密に確かめた（浮動小数点なし）。
+  逆元の鎖は exp の値を使わず `scalar_exp_product`・`scalar_exp_zero` の関係を法とする多項式環で、Step 2 の同値の鎖は M_col = 2..40 の全 μ で各行の真偽の一致を、主張は M_col = 2..16 で、`γ_2 = a w` は `_shared/defs.sage` の記号式と比べた。
+  人手証明を直した: 第 1 因子 `a(θ) = i exp(iθ) s_2^*` が 0 でない理由を、本文に無い Euler の公式と `|exp(iθ)| = 1` から、逆元 `b(θ)` を作る 13 行の鎖と背理の鎖へ。「ℂ は零因子を持たない」（主張のブロックが無い）を `b(θ)` を使う二つの鎖へ。
+  `w(θ)` の成分を準備の 4 行の鎖に、同値の鎖を成分ごとの 6 行に、Step 2 の奇偶と Step 4 の矛盾の散文を鎖に。主張の中身は不変。計算の誤りは無かった。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `gamma_2_theta_tilde_nonzero`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `relation_of_gamma_2_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`gamma_2_theta_tilde_nonzero` のレビューで見つかった（根拠の無い一般論。今回の差分より前から）: 「ℂ は体ゆえ零因子を持たない」を主張するブロックが本文に無いのに、`eigenvalue_problem_diagonalization_and_exponential_form.ts` の 2837・2944・3125 行付近、`eigenvalue_problem_eigenvalues_of_V_plus.ts` の 4046 行付近、`000_calculation_formulae_45_46.ts` の 726 行付近が `complex_numbers_form_a_field` だけを引いて使っている（行番号は 2026-11-03 の差分前）。この単位の証明では逆元を明示して使わない形にした。直すには、零因子を持たないことの主張を計算公式の章に置いて引くか、各所で逆元を明示する。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`def_gamma1_gamma2_of_theta` のレビューで見つかった（今回の差分より前から）: このブロックは γ_1・γ_2 の定義と「A(θ) はこう書ける」の主張を束ねている。証明の第一段落（(1,1)・(2,2)・(1,2) 成分は定義そのもの）が散文で、`cos(−θ) = cos θ`・`sin(−θ) = −sin θ` を引くブロックが本文に無い（全実数上の cos・sin が未整備の件）。定義式は実数と i の積を包含の像の記号なしで書いている。分けるとラベル参照を付け替えることになるので、検算の付いたブロックの見直しで扱う。
 
