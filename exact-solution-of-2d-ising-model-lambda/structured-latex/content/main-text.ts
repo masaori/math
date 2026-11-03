@@ -35455,6 +35455,7 @@ Z_L
                   title: { text: "偶部分グラフ" },
                   labels: ["def_even_edge_subset"],
                   habitat: "N",
+                  lean: ["Ising2DLambda.FisherZero.IsEvenEdgeSubset"],
                   verification: ["sagemath/check/even-subgraph-spin-sum"],
                   statement: [
                     paragraph([
@@ -35873,7 +35874,7 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
 \quad(\because\ \blkref{def_torus_winding_parities})`),
                         paragraph([ref("def_torus_homology_sector"), " より、この組について"]),
                         displayMath(String.raw`A\in\mathcal{E}^{a,b}_L
-\quad(\because\ A\ \text{は偶部分グラフであり、二つの等式は }(a,b)\text{ の定め方そのもの})`),
+\quad(\because\ \blkref{def_torus_homology_sector},\ A\ \text{は偶部分グラフであり、二つの等式は }(a,b)\text{ の定め方そのもの})`),
                         paragraph([
                           "である。一意性について、", math(String.raw`A\in\mathcal{E}^{a',b'}_L`),
                           " を満たす別の組 ", math(String.raw`(a',b')\in\{0,1\}\times\{0,1\}`), " を取る。",
