@@ -5,7 +5,7 @@
 `check_joint_eigenspace_decomposition`（`evenEigen_005_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。
-(1)(2)(3)(4) は、(1) の `Qproj_mul_Qproj_of_ne`・`Qproj_mul_self`、(2) の `sum_Qproj`、(3) の `nOp_mul_Qproj`・`commute_nOp_Qproj`（人手の範囲 `M_col ≥ 2` では Step 1〜Step 3 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`・`Qproj_mul_self_of_necSuf`・`sum_Qproj_of_necSuf`・`nOp_mul_Qproj_of_necSuf`・`commute_nOp_Qproj_of_necSuf`）を除き、**必要十分版の特殊化として導出する**。
+(1)(2)(3)(4) は、(1) の `Qproj_mul_Qproj_of_ne`・`Qproj_mul_self`、(2) の `sum_Qproj`、(3) の `nOp_mul_Qproj`・`commute_nOp_Qproj`（人手の範囲 `M_col ≥ 2` では Step 1〜Step 3 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`・`Qproj_mul_self_of_necSuf`・`sum_Qproj_of_necSuf`・`nOp_mul_Qproj_of_necSuf`・`commute_nOp_Qproj_of_necSuf`）と、(4) 前半の `trace_Qproj`（Step 4 の鎖 `trace_Qproj_step4`）を除き、**必要十分版の特殊化として導出する**。
 ただし証明の Step 0 の冒頭の `ň_μň_μ = ň_μ` と 4 本の鎖（`R_μ^{(1)}R_μ^{(0)} = 0`・`R_μ^{(0)}R_μ^{(1)} = 0`・
 `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`・`R_μ^{(1)} + R_μ^{(0)} = I`）は、人手の行と 1 対 1 の `calc` を
 `nOp_mul_nOp_of_sq`・`nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self`・`nOp_add_one_sub_nOp` に置く
@@ -34,8 +34,9 @@ Step 3 の最初の三つの場合（`ň_ν R_μ^{(ε_μ)} = R_μ^{(ε_μ)} ň_�
 `nOp_mul_projFactor_step3`、`ň_νQ̌_ε` の 9 行の鎖は `nOp_mul_Qproj_step3`、`Q̌_εň_ν` の 4 行の鎖は `Qproj_mul_nOp_step3` に置き、
 (3) の `nOp_mul_Qproj`・`commute_nOp_Qproj` は人手の範囲 `M_col ≥ 2` でこの鎖を使う（`M = 0, 1` は必要十分版の特殊化
 `nOp_mul_Qproj_of_necSuf`・`commute_nOp_Qproj_of_necSuf`）。
-Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
-下の `trace_Qproj` では必要十分版から `2^M · tr(Q̌_ε) = 2^M` を出して `2^M` で約分しており、人手の 3 行と 1 対 1 の版はまだ無い。Step 5 の人手の根拠
+Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1` の 3 行（`trace_of_check_number_operator_product`・`M_col − M_col = 0`・`def_power_of_complex_number` の `z^0 := 1_ℂ`）は
+`trace_Qproj_step4` に人手と 1 対 1 の calc で置き、(4) 前半の `trace_Qproj` はこの鎖から示す。1 行目が引く主張は、因子の混在を許す
+人手の主張そのものの具体版 `trace_projFactorProd`（`ClaimTraceCheckNumberOperatorProduct.lean`）である。Step 5 の人手の根拠
 `identity_matrix_is_left_unit_of_mat_mult`（`n → 1`）・`sum_over_binary_words_distributes_in_left_factor`・
 `sum_over_binary_words_distributes_in_right_factor`（`p → 1`）・`zero_matrix_is_right_zero_of_mat_mult`（`p → 1`）は、
 下の `sum_Qproj_mulVec`・`eq_zero_of_sum_eq_zero` ではまだ mathlib の `Matrix.one_mulVec`・`Matrix.sum_mulVec`・`Matrix.mulVec_sum`・
@@ -743,22 +744,26 @@ theorem commute_nOp_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :
 
 /-! ## トレースと次元（原文 (4)） -/
 
-/-- **原文 (4)**: `tr(Q̌_ε) = 1`。
+/-- **原文 Step 4** の鎖（3 行）: `tr(Q̌_ε) = 2^{M_col−M_col} = 2^0 = 1`。
+1 行目は `trace_of_check_number_operator_product` の具体版 `trace_projFactorProd` を、`k → M_col`、
+`(μ_1, …, μ_{M_col}) → (1, …, M_col)`（Lean の `S → 𝓜̌` 全体。`|𝓜̌| = M_col` は `CheckIdx.card`）、
+`(e_1, …, e_{M_col}) → (ε_1, …, ε_{M_col})`（Lean の `T`）として適用する行である（`Q̌_ε` は `Qproj` の定義で `NecSuf.projOn F.nOp _ 𝓜̌ T`）。
+3 行目の `z^0 := 1_ℂ`（`def_power_of_complex_number`、`z → 2`）は、mathlib の `ℂ` の冪（`Monoid.npow`）の 0 乗の公理 `Monoid.npow_zero` から出る `pow_zero` で受ける。
+人手の範囲 `M_col ≥ 2` に限らず、すべての `M` で同じ鎖が通る。 -/
+theorem trace_Qproj_step4 (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 :=
+  calc (F.Qproj T).trace
+      = (2 : ℂ) ^ (M - M) := by
+        have h := F.trace_projFactorProd Finset.univ T
+        rw [Finset.card_univ, CheckIdx.card] at h
+        exact h                                         -- `trace_of_check_number_operator_product`（上の適用）
+    _ = (2 : ℂ) ^ 0 := by rw [Nat.sub_self]             -- `M_col − M_col = 0`
+    _ = 1 := pow_zero (2 : ℂ)                           -- `def_power_of_complex_number` の `z^0 := 1_ℂ`（`z → 2`）
+
+/-- **原文 (4)**: `tr(Q̌_ε) = 1`。Step 4 の鎖 `trace_Qproj_step4` で示す。
 
 章 009 の同じ計算が `2^{M-m}` を与えるところで、`m = M` により `2^0 = 1` になる。 -/
-theorem trace_Qproj (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 := by
-  have h : ((2 ^ M : ℕ) : ℂ) * (F.Qproj T).trace = ((2 ^ M : ℕ) : ℂ) := by
-    have h0 := NecSuf.two_pow_smul_tau_projOn F.cre F.ann F.commute_nOp_nOp
-      (Matrix.trace : TensorPow M → ℂ) (fun x y => Matrix.trace_add x y)
-      (fun x y => Matrix.trace_mul_comm x y) F.acomm_cre_ann_self
-      (fun i j hij => F.commute_cre_nOp hij) (fun i j hij => F.commute_ann_nOp hij)
-      Finset.univ T
-    rw [trace_one_tensorPow, nsmul_eq_mul, Finset.card_univ, CheckIdx.card] at h0
-    exact h0
-  have hne : ((2 ^ M : ℕ) : ℂ) ≠ 0 := by simp
-  refine mul_left_cancel₀ hne ?_
-  rw [mul_one]
-  exact h
+theorem trace_Qproj (T : Finset (CheckIdx M)) : (F.Qproj T).trace = 1 :=
+  F.trace_Qproj_step4 T
 
 /-- **原文 (4) 後半**: `dim_ℂ (im Q̌_ε) = 1`。 -/
 theorem finrank_range_Qproj (T : Finset (CheckIdx M)) :
