@@ -176,3 +176,8 @@ RESULT: PASS
 # 実行コマンド: sage check_joint_eigenspace_step5_direct_sum_first_line.sage
 PASS check_joint_eigenspace_decomposition Step 5 の直和の鎖の 1 行目と前提の鎖: 1400 段、否定コントロール 3 行
 RESULT: PASS
+
+##### 2026-11-03 に check_eigenvalues_of_check_Vprime_step1_left_chain を足した（eigenvalues_of_check_Vprime Step 1 の左から掛ける形の鎖）
+# 実行コマンド: sage check_eigenvalues_of_check_Vprime_step1_left_chain.sage
+checked 405 steps (model M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+RESULT: PASS

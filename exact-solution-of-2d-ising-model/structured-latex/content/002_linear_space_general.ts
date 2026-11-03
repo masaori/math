@@ -1873,6 +1873,126 @@ X - O
     },
   },
   {
+    id: "linear_space_general_claim_finite_sum_of_matrices_distributes_in_left_factor",
+    kind: "claim",
+    title: { text: "行列の有限和を左の因子とする積は各項の積の有限和に等しい" },
+    labels: ["finite_sum_of_matrices_distributes_in_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n, p, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`X_1,\dots,X_r \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "、",
+        math(String.raw`C \in \mathrm{Mat}(n,p,\mathbb{C})`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_matrices"),
+        "、積は ",
+        ref("mat_mult"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{j=1}^{r} X_j\Bigr)C = \sum_{j=1}^{r} (X_jC)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([math(String.raw`r`), " についての帰納法で示す。", math(String.raw`r = 1`), " のとき"]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{1} X_j\Bigr)C
+&= X_1C
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \sum_{j=1}^{1} (X_jC)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } X_jC\text{）を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`r`),
+        " で成り立つと仮定すると、",
+        math(String.raw`X_1,\dots,X_{r+1} \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{j=1}^{r+1} X_j\Bigr)C
+&= \Bigl(\Bigl(\sum_{j=1}^{r} X_j\Bigr) + X_{r+1}\Bigr)C
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} X_j\Bigr)C + X_{r+1}C
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\ \bigl(A \to \textstyle\sum_{j=1}^{r} X_j,\ B \to X_{r+1}\bigr)\bigr)\\
+&= \Bigl(\sum_{j=1}^{r} (X_jC)\Bigr) + X_{r+1}C
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \sum_{j=1}^{r+1} (X_jC)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices}\ \text{（項 } X_jC\text{）を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 1 が X̌Q̌_ε の展開を「行列の積の分配法則」と名前だけで根拠にしていた段のうち、有限和を左の因子とする積を各項へ配る段を引けるよう足した。finite_sum_of_scalar_multiples と同じ帰納法の形で示した。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_difference_of_scalar_multiples_of_one_matrix",
+    kind: "claim",
+    title: { text: "一つの行列のスカラー倍の差は係数の差によるスカラー倍に等しい" },
+    labels: ["difference_of_scalar_multiples_of_one_matrix"],
+    statement: [
+      paragraph([
+        math(String.raw`m, n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`a, b \in \mathbb{C}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " とする。スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、行列の差は ",
+        ref("def_matrix_difference"),
+        "、複素数の差は ",
+        ref("def_complex_difference"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`aA - bA = (a - b)A`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "両辺はともに ",
+        math(String.raw`\mathrm{Mat}(m,n,\mathbb{C})`),
+        " の元なので、各成分が一致することを示せばよい。",
+        math(String.raw`i \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`k \in \{1,\dots,n\}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(aA - bA)_{ik}
+&= (aA)_{ik} - (bA)_{ik}
+&&\bigl(\because\ \text{差の定義 }\blkref{def_matrix_difference}\bigr)\\
+&= a\,A_{ik} - b\,A_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\ \text{を 2 箇所へ適用}\bigr)\\
+&= a\,A_{ik} + \bigl(-(b\,A_{ik})\bigr)
+&&\bigl(\because\ \blkref{def_complex_difference}\bigr)\\
+&= a\,A_{ik} + (-1_{\mathbb{C}})\,(b\,A_{ik})
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= a\,A_{ik} + \bigl((-1_{\mathbb{C}})\,b\bigr)\,A_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の積の結合律 }\blkref{complex_numbers_form_a_field}\bigr)\\
+&= a\,A_{ik} + (-b)\,A_{ik}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl(a + (-b)\bigr)\,A_{ik}
+&&\bigl(\because\ \mathbb{C}\ \text{の分配律 }\blkref{complex_numbers_form_a_field}\ \text{を右辺から左辺へ}\bigr)\\
+&= (a - b)\,A_{ik}
+&&\bigl(\because\ \blkref{def_complex_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&= \bigl((a - b)A\bigr)_{ik}
+&&\bigl(\because\ \text{スカラー倍の定義 }\blkref{def_matrix_scalar_multiple}\bigr)
+\end{aligned}`),
+      paragraph(["よって全ての成分が一致し、主張を得る。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。eigenvalues_of_check_Vprime の Step 1 が γ(θ̃_μ)(ε_μQ̌_ε − ½Q̌_ε) を (γ(θ̃_μ)(ε_μ − ½))Q̌_ε へまとめる段を「有限和のくくり出し」と名前だけで根拠にしていたので、係数の差をくくり出す段を引けるよう足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_finite_double_sum_of_matrices_interchange",
     kind: "claim",
     title: { text: "行列の二重の有限和は和の順序を入れ替えても等しい" },

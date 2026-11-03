@@ -1,0 +1,2 @@
+checked the base case and the induction steps r -> r+1 (r = 1,...,4) for (m, n, p) in {1,2,3}^3 (108 steps)
+RESULT: PASS

@@ -1270,6 +1270,17 @@ targets=(
   Ising2D.finite_sum_smul_of_matrices_of_necSuf
   Ising2D.smul_add_tensorPow
   Ising2D.finite_sum_smul_tensorPow
+  Ising2D.finite_sum_mul_of_matrices
+  Ising2D.finite_sum_mul_of_matrices_of_necSuf
+  Ising2D.finite_sum_mul_tensorPow
+  Ising2D.smul_sub_smul_matrix_apply
+  Ising2D.smul_sub_smul_matrix
+  Ising2D.smul_sub_smul_matrix_of_necSuf
+  Ising2D.smul_sub_smul_tensorPow
+  Ising2D.finite_sum_smul_one_matrix_apply
+  Ising2D.finite_sum_smul_one_matrix
+  Ising2D.finite_sum_smul_one_matrix_of_necSuf
+  Ising2D.finite_sum_smul_one_tensorPow
   Ising2D.H2_eq_neg_I_smul_sum_sigmaX
   Ising2D.S2_eq_K2star_smul_sum_sigmaX
   Ising2D.Y_castSucc_mul_Z_succ
@@ -1332,6 +1343,11 @@ targets=(
   "Ising2D.NecSuf.smul_add_matrix_apply'"
   "Ising2D.NecSuf.smul_add_matrix'"
   "Ising2D.NecSuf.finite_sum_smul_matrix'"
+  "Ising2D.NecSuf.finite_sum_mul_matrix'"
+  "Ising2D.NecSuf.smul_sub_smul_matrix_apply'"
+  "Ising2D.NecSuf.smul_sub_smul_matrix'"
+  "Ising2D.NecSuf.finite_sum_smul_one_matrix_apply'"
+  "Ising2D.NecSuf.finite_sum_smul_one_matrix'"
   "Ising2D.NecSuf.sub_eq_add_neg_matrix'"
   "Ising2D.NecSuf.neg_sub_neg_matrix'"
   "Ising2D.NecSuf.conj_neg_matrix'"
@@ -1766,6 +1782,10 @@ targets=(
   Ising2D.CheckFermiSetup.eq_zero_of_binWordSum_eq_zero_step5
   Ising2D.CheckFermiSetup.replicateCol_finset_sum
   Ising2D.CheckFermiSetup.eq_zero_of_sum_eq_zero
+  Ising2D.CheckFermiSetup.Xop_eq_sum_fin
+  Ising2D.CheckFermiSetup.gval_eq_sum_fin
+  Ising2D.CheckFermiSetup.Xop_mul_Qproj_step1
+  Ising2D.CheckFermiSetup.Xop_mul_Qproj_of_finset_sum
   Ising2D.CheckFermiSetup.Xop_mul_Qproj
   Ising2D.CheckFermiSetup.Qproj_mul_Xop
   Ising2D.CheckFermiSetup.Xop_pow_mul_Qproj
