@@ -64370,9 +64370,12 @@ I_{a,b}\ne\{C_1,C_3\}`),
                         math(String.raw`P_j(\gamma)=(a,b)`), " である場合。仮定の持ち上げ点の相異性と零巻き付きから ",
                         ref("claim_vertex_surrounding_cells_form_parity_arcs"),
                         " が適用でき、ある ", math(String.raw`s\in\{0,1,2,3\}`), " と ",
-                        math(String.raw`q\in\{1,2,3\}`), " が存在して ",
-                        math(String.raw`I_{a,b}=\{C_s,C_{s+1},\ldots,C_{s+q-1}\}`),
-                        "（添字は ", math(String.raw`4`), " を法として読む）である。",
+                        math(String.raw`q\in\{1,2,3\}`), " が存在する。添字を ",
+                        math(String.raw`4`), " を法として読むと、",
+                      ]),
+                      displayMath(String.raw`I_{a,b}=\{C_s,C_{s+1},\ldots,C_{s+q-1}\}
+\qquad\bigl(\because\ \blkref{claim_vertex_surrounding_cells_form_parity_arcs}\bigr)`),
+                      paragraph([
                         math(String.raw`\{C_0,C_2\}`), " と ", math(String.raw`\{C_1,C_3\}`),
                         " は二元集合なので、これらが ", math(String.raw`I_{a,b}`),
                         " に一致しうるのは ", math(String.raw`q=2`), " の場合だけである。",
@@ -65228,6 +65231,11 @@ D^{\gamma,Q,t}_{s+1}-D^{\gamma,Q,t}_s
                       title: { text: "周期延長した持ち上げの整数横断平行移動" },
                       labels: ["def_transverse_translate_of_periodic_plane_lift"],
                       habitat: "Z",
+                      lean: [
+                        "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLiftFromWalk",
+                        "Ising2DLambda.NecSuf.KacWard.translatedFamily",
+                        "Ising2DLambda.KacWard.transverseTranslatedPeriodicPlaneLiftFromWalk_from_necSuf",
+                      ],
                       statement: [
                         paragraph([
                           "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),

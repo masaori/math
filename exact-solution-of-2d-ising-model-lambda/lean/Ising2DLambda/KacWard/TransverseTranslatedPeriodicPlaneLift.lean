@@ -7,6 +7,7 @@
 横断座標の上下界と幅の不等式をつないで二つの像を分離する。住処は ℤ だけである。
 -/
 import Ising2DLambda.KacWard.PeriodicPlaneLiftTransverseBounded
+import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.NecSuf.KacWard.TransverseTranslatedFamily
 import Mathlib.Tactic
 
@@ -18,6 +19,26 @@ open Ising2DLambda.NecSuf.KacWard
 def transverseTranslatedPeriodicPlaneLift
     (m L : ℕ) (base : ℤ → ℤ × ℤ) (wv wh u k : ℤ) : ℤ × ℤ :=
   periodicPlaneLift m base L wv wh k + u • (wh, -wv)
+
+/-- 実際の閉じた辺列から定める周期持ち上げの整数横断平行移動。 -/
+def transverseTranslatedPeriodicPlaneLiftFromWalk {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (u k : ℤ) : ℤ × ℤ :=
+  periodicPlaneLiftFromWalk γ k +
+    u • (horizontalDirectedWindingNumber γ, -verticalDirectedWindingNumber γ)
+
+theorem transverseTranslatedPeriodicPlaneLiftFromWalk_eq {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (u k : ℤ) :
+    transverseTranslatedPeriodicPlaneLiftFromWalk γ u k =
+      transverseTranslatedPeriodicPlaneLift (m + 1) L
+        (planeLiftIntegerBase γ) (verticalDirectedWindingNumber γ)
+        (horizontalDirectedWindingNumber γ) u k := rfl
+
+theorem transverseTranslatedPeriodicPlaneLiftFromWalk_from_necSuf {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L) (u k : ℤ) :
+    transverseTranslatedPeriodicPlaneLiftFromWalk γ u k =
+      Ising2DLambda.NecSuf.KacWard.translatedFamily
+        (periodicPlaneLiftFromWalk γ)
+        (horizontalDirectedWindingNumber γ, -verticalDirectedWindingNumber γ) u k := rfl
 
 /-- 横断平行移動は横断座標を `u(wh²+wv²)` だけ変える。 -/
 theorem transverseTranslatedPeriodicPlaneLift_coordinate
