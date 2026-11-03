@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-03: 零ベクトルのスカラー倍が零ベクトルであること（ラベル claim_scalar_multiple_of_zero_vector_is_zero_vector、等式 λ·_V0_V=0_V）を示した。次は直和の第二成分への埋め込み写像が線型写像であること（claim_embedding_into_first_component_is_linear_map と同じ形。V_1 の中の λ·0_{V_1}=0_{V_1} は導き直さず本主張を V=V_1 で引く）。
 - 2026-11-03: 研究管理。台帳に、零ベクトルのスカラー倍（λ·0_V=0_V。以後は導き直さずに引く）の行と、直和の元が二つの埋め込み写像の像の和であること（(x,y)=in_1(x)+in_2(y)）の行を足した。次は λ·0_V=0_V。
 - 2026-11-03: 直和の第二成分への埋め込み写像の定義（ラベル def_embedding_into_second_component_of_direct_sum、記号 in_2、in_2(y)=(0_{V_1},y)）を置いた。次は in_2 が線型写像であること（claim_embedding_into_first_component_is_linear_map と同じ形で、準備として V_1 の中の λ·0_{V_1}=0_{V_1} を示し、加法は第一成分を 0_{V_1}+0_{V_1} に書き直して閉じる）。
 - 2026-11-03: 直和の第一成分への埋め込み写像が線型写像であること（ラベル claim_embedding_into_first_component_is_linear_map）を示した。次は直和の第二成分への埋め込み写像の定義（in_2(y):=(0_{V_1},y)。第一成分の定義 def_embedding_into_first_component_of_direct_sum と同じ形で書く）。

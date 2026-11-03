@@ -1173,6 +1173,44 @@ z_V(\lambda\cdot_V x)
     ],
   },
   {
+    id: "mathematical_toolkit_claim_scalar_multiple_of_zero_vector_is_zero_vector",
+    kind: "claim",
+    title: { text: "零ベクトルのスカラー倍は零ベクトルである" },
+    labels: ["claim_scalar_multiple_of_zero_vector_is_zero_vector"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）とする。このとき、",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " について次が成り立つ。",
+      ]),
+      displayMath(String.raw`\lambda\cdot_V 0_V=0_V`),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\cdot_V 0_V
+&=\lambda\cdot_V(0_{\mathbb{C}}\cdot_V 0_V)
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}0_{\mathbb{C}})\cdot_V 0_V
+&&\left(\because\ \text{スカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_V 0_V
+&&\left(\because\ \lambda\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=0_V
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}x=0_V\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+    ],
+  },
+  {
     id: "mathematical_toolkit_claim_sum_of_linear_combinations_of_same_family",
     kind: "claim",
     title: { text: "同じ族の二つの線型結合の和は、係数ごとの和による線型結合である" },
