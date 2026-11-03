@@ -3283,10 +3283,14 @@ E_K \check{Q}_\epsilon
         String.raw`\begin{aligned}
 \check{V}' y
 &= \check{V}'\left(\check{Q}_\epsilon y\right)
-   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y) \\
-&= \exp(\check{g}(\epsilon))\check{Q}_\epsilon y
-   \quad (\because \text{Step 3}) \\
-&= \exp(\check{g}(\epsilon)) y
+   \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y\ \text{を右辺から左辺へ}) \\
+&= \left(\check{V}'\check{Q}_\epsilon\right)y
+   \quad \left(\because\ \blkref{mat_mult_associative}\ (m,n,p \to 2^{M_{\mathrm{col}}},\ q \to 1,\ A \to \check{V}',\ B \to \check{Q}_\epsilon,\ C \to y)\ \text{を右辺から左辺へ}\right) \\
+&= \left(\left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\check{Q}_\epsilon\right)y
+   \quad (\because \text{Step 3 の極限の鎖}) \\
+&= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}\left(\check{Q}_\epsilon y\right)
+   \quad \left(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (m,n \to 2^{M_{\mathrm{col}}},\ p \to 1,\ a \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon,\ B \to y)\right) \\
+&= \left(\exp(\check{g}(\epsilon))\right)_{\mathbb{C}}y
    \quad (\because \text{上の等式 }\check{Q}_\epsilon y = y)
 \end{aligned}`,
       ),
@@ -3335,6 +3339,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 1 の右から掛ける形 Q̌_εX̌ = ǧ(ε)Q̌_ε を「同じ計算を (3) の右から掛ける形に対して行えば」と名前だけで済ませていた段落を、Q̌_εX̌ から始める 1 行 1 主張の 14 行の鎖にした。新しく足した主張 finite_sum_of_matrices_distributes_in_right_factor（C(ΣX_j) = Σ(CX_j)）と、既存の scalar_multiple_factors_out_of_right_factor・matrix_difference_is_sum_with_negation・mat_mult_distributes_over_sum_in_right_factor・negation_factors_out_of_right_factor・identity_matrix_is_right_unit_of_mat_mult・check_joint_eigenspace_decomposition (3) の Q̌_εň_ν = ε_νQ̌_ε・difference_of_scalar_multiples_of_one_matrix・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix を引く。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Qproj_mul_Xop_step1 は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step1_right_chain.sage。",
         "2026-11-03: Step 3・Step 3' の部分和の鎖の名前だけの根拠「有限和と行列積の分配法則」「有限和からの共通因子のくくり出し」を、新しく足した定義 def_finite_sum_of_matrices_from_index_zero・def_finite_sum_of_complex_numbers_from_index_zero（添字 0 からの和を添字 1 からの和へずらす）と、finite_sum_of_matrices_distributes_in_left_factor（右からの形は _right_factor）・scalar_multiple_factors_out_of_left_factor（_right_factor）・Step 2（Step 3' の帰納法）・scalar_multiple_is_associative・finite_sum_of_scalar_multiples_of_one_matrix の 1 行 1 主張の 8 行の鎖にした。部分和の係数の和は Σ(1/k!)ǧ^k の形に揃え、極限の鎖の 3 行目も同じ形にした（主張は不変）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step3_partial_sum_chains.sage。",
         "2026-11-03: Step 3・Step 3' の極限の鎖の最後の行「実指数級数の収束と極限の一意性」が引いていた real_exp_series_converges は a ∈ ℝ_{≥0} についての主張で、ǧ(ε) < 0（例えば ε = 0）を覆わず、数の列の極限を行列のスカラー倍の列の極限へ移す段も無かった。scalar_exp_is_limit_of_partial_sums（K = ℂ、すべての x を覆う）・新しく足した scalar_sequence_times_matrix_converges・complex_exp_of_real_argument の 3 行に分けた。Step 3' の「行列積の連続性」は右の因子が動く形なので、新しく足した matrix_multiplication_continuity_in_right_factor を引いた。行列の列の lim の一意性は鎖の前の段落で matrix_norm_triangle_inequality (4) を引いて宣言した。鎖の中の係数 ǧ(ε) は inclusion_rr_to_cc の ǧ(ε)_ℂ と書く行を足した（Step 1・Step 2・部分和の鎖が ǧ(ε) を ℂ の係数として使っている件は論文全体の帰属の件に残る）。主張の右辺が (exp(ǧ(ε)))_ℂ を掛けた行列であることを主張文に書いた（主張の強さは変えていない）。",
+        "2026-11-03: Step 4 の後半の鎖 V̌'y = V̌'(Q̌_εy) = exp(ǧ)Q̌_εy = exp(ǧ)y が、2 行目で (V̌'Q̌_ε)y = V̌'(Q̌_εy) とスカラー倍の作用を名前を出さずに使っていたのを、mat_mult_associative（q → 1）・Step 3 の極限の鎖・scalar_multiple_factors_out_of_left_factor（p → 1）の 1 行 1 主張の 5 行にした。係数は Step 3 の主張文どおり (exp(ǧ(ε)))_ℂ と書いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range は同じ行の calc。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_eigenvalues_of_check_Vprime_step4_eigenvector_chain.sage。",
       ],
     },
   },

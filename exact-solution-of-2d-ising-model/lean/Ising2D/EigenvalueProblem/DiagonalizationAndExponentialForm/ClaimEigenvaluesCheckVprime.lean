@@ -376,8 +376,11 @@ theorem Qproj_mul_partialExpSum (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M
                                                         -- `def_finite_sum_of_complex_numbers_from_index_zero`（項 `(1/k!)ǧ(ε)^k`）を右辺から左辺へ
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 4 の最初の鎖**: `y = Q̌_ε x` なら `Q̌_ε y = y`。
-人手の 8 行（両端の `y = Q̌_ε x` の書き換えは Lean では `y` を置かずに書くので現れない）と 1 対 1 の calc。 -/
-theorem Qproj_mulVec_Qproj_mulVec (T : Finset (CheckIdx M)) (x : Conf M → ℂ) :
+人手の 8 行（両端の `y = Q̌_ε x` の書き換えは Lean では `y` を置かずに書くので現れない）と 1 対 1 の calc。
+人手の `M_col` が Lean の `r + 1`（人手の `M_col ≥ 2` を含む）で、最後の行は `check_joint_eigenspace_decomposition` (1) の
+`Q̌_ε^2 = Q̌_ε` の具体版 `Qproj_sq_step1`（同じ `r + 1` の範囲）を引く。 -/
+theorem Qproj_mulVec_Qproj_mulVec {r : ℕ} (F : CheckFermiSetup (r + 1)) (T : Finset (CheckIdx (r + 1)))
+    (x : Conf (r + 1) → ℂ) :
     (F.Qproj T).mulVec ((F.Qproj T).mulVec x) = (F.Qproj T).mulVec x :=
   calc (F.Qproj T).mulVec ((F.Qproj T).mulVec x)
       = (F.Qproj T * F.Qproj T).mulVec x := Matrix.mulVec_mulVec _ _ _
@@ -391,9 +394,8 @@ theorem Qproj_mulVec_Qproj_mulVec (T : Finset (CheckIdx M)) (x : Conf M → ℂ)
                                                         -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 0`）
     _ = (F.Qproj T ^ 2).mulVec x := by rw [← pow_succ]
                                                         -- `def_exp` (1) の `A^{m+1} := A^m A`（`m = 1`）
-    _ = (F.Qproj T).mulVec x := by rw [sq, F.Qproj_mul_self T]
+    _ = (F.Qproj T).mulVec x := by rw [Qproj_sq_step1 F T]
                                                         -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
-                                                        -- （Lean の `Qproj_mul_self` は `Q̌_ε Q̌_ε = Q̌_ε` の形なので mathlib の `sq` で読み替える）
 
 /-- **原文 `eigenvalues_of_check_Vprime` Step 3 の極限の鎖の 1 行目の根拠**: 部分和 `E_K` は `K → ∞` で `V̌' = exp(X̌)` に収束する
 （`def_exp` と `matrix_exp_series_converges` (1)（`N → K`、`A → X̌`））。`matrix_exp_series_converges` の Lean の具体版は無く、Lean の `def_exp` は `matExp_hasSum`（項 `(k!)^{-1} X̌^k` の
@@ -508,13 +510,29 @@ theorem Qproj_mul_Vprime (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • Q := by rw [Complex.ofReal_exp]
                                                         -- `complex_exp_of_real_argument`（`x → ǧ(ε)`）
 
-/-- **原文 `eigenvalues_of_check_Vprime` Step 4**:
-`im Q̌_ε` の元は固有値 `e^{ǧ(ε)}` の固有ベクトル。 -/
-theorem Vprime_mulVec_of_mem_range (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M))
-    (x : Conf M → ℂ) :
+/-- **原文 `eigenvalues_of_check_Vprime` Step 4 の後半の鎖**: `im Q̌_ε` の元は固有値 `e^{ǧ(ε)}` の固有ベクトル。
+`y = Q̌_ε x` について、人手の 5 行 `V̌'y = V̌'(Q̌_εy) = (V̌'Q̌_ε)y = ((exp ǧ(ε))_ℂ Q̌_ε)y = (exp ǧ(ε))_ℂ(Q̌_εy) = (exp ǧ(ε))_ℂ y`
+と 1 対 1 の calc。`Q̌_εy = y` は Step 4 の最初の鎖 `Qproj_mulVec_Qproj_mulVec` で、範囲もそれに合わせて `M_col = r + 1` とする。 -/
+theorem Vprime_mulVec_of_mem_range {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
+    (T : Finset (CheckIdx (r + 1))) (x : Conf (r + 1) → ℂ) :
     (F.Vprime g).mulVec ((F.Qproj T).mulVec x)
       = ((Real.exp (F.gval g T) : ℝ) : ℂ) • ((F.Qproj T).mulVec x) := by
-  rw [Matrix.mulVec_mulVec, F.Vprime_mul_Qproj g T, Matrix.smul_mulVec]
+  set y := (F.Qproj T).mulVec x
+  have hQy : (F.Qproj T).mulVec y = y := Qproj_mulVec_Qproj_mulVec F T x
+  calc (F.Vprime g).mulVec y
+      = (F.Vprime g).mulVec ((F.Qproj T).mulVec y) := by rw [hQy]
+                                                        -- 上の等式 `Q̌_εy = y` を右辺から左辺へ
+    _ = (F.Vprime g * F.Qproj T).mulVec y := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`（`m,n,p → 2^{M_col}`、`q → 1`、`A → V̌'`、`B → Q̌_ε`、`C → y`）
+                                                        -- を右辺から左辺へ。Lean の数ベクトルは 1 列の行列ではなく `Conf M → ℂ` なので、
+                                                        -- mathlib の `Matrix.mulVec_mulVec`（`Qproj_mulVec_Qproj_mulVec` の 1 行目と同じ）
+    _ = (((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T).mulVec y := by rw [F.Vprime_mul_Qproj g T]
+                                                        -- Step 3 の極限の鎖
+    _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • (F.Qproj T).mulVec y := smul_mulVec_tensorPow _ _ _
+                                                        -- `scalar_multiple_factors_out_of_left_factor`（`m,n → 2^{M_col}`、`p → 1`、
+                                                        -- `a → (exp ǧ(ε))_ℂ`、`A → Q̌_ε`、`B → y`）
+    _ = ((Real.exp (F.gval g T) : ℝ) : ℂ) • y := by rw [hQy]
+                                                        -- 上の等式 `Q̌_εy = y`
 
 /-- **原文 `eigenvalues_of_check_Vprime` 最後**: 固有値はすべて正の実数。 -/
 theorem exp_gval_pos (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
