@@ -1037,6 +1037,8 @@ import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
 import Ising2DLambda.NecSuf.Tools.IntegerSequenceLevelCrossing
 import Ising2DLambda.Tools.IntegerSequenceLevelCrossing
 import Ising2DLambda.Tools.IntegerSequenceLevelCrossingFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.RightRayVerticalCrossingCount
+import Ising2DLambda.KacWard.RightRayVerticalCrossingCount
 import Ising2DLambda.NecSuf.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCellsBounded
 import Ising2DLambda.KacWard.OddRayInteriorCellsBoundedFromNecSuf

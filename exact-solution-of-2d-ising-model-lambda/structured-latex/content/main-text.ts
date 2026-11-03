@@ -62853,6 +62853,11 @@ P_m(\gamma)_{\mathrm{col}}
                         title: { text: "単位正方形から右へ延びる半直線との交差数" },
                         labels: ["def_right_ray_vertical_crossing_count"],
                         habitat: "N",
+                        lean: [
+                          "Ising2DLambda.KacWard.rightRayVerticalCrossingCount",
+                          "Ising2DLambda.NecSuf.KacWard.rightRayVerticalCrossingCount",
+                          "Ising2DLambda.KacWard.rightRayVerticalCrossingCount_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -62956,8 +62961,10 @@ U_r(a)
 &=D_r(a)
 &&\bigl(\because\ \mathbb Z\text{ の四則}\bigr),\\
 U_r(a)+D_r(a)
+&=U_r(a)+U_r(a)
+&&\bigl(\because\ U_r(a)=D_r(a)\bigr)\\
 &=2U_r(a)
-&&\bigl(\because\ U_r(a)=D_r(a)\text{ と }\mathbb Z\text{ の四則}\bigr)
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
 \end{aligned}`),
                       paragraph([
                         "となる。", math(String.raw`U_r(a)+D_r(a)`), " は、行座標 ", math(String.raw`r`), " と ",
