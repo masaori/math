@@ -60323,6 +60323,11 @@ c_w^{\mathrm{sm}}(\gamma;k,l)
                       kind: "definition",
                       title: { text: "平滑化後の横断数" },
                       labels: ["def_smoothed_crossing_number"],
+                      lean: [
+                        "Ising2DLambda.KacWard.smoothedCrossingNumber",
+                        "Ising2DLambda.NecSuf.KacWard.smoothedCrossingNumber",
+                        "Ising2DLambda.KacWard.smoothedCrossingNumber_from_necSuf",
+                      ],
                       habitat: "N",
                       statement: [
                         paragraph([
@@ -60556,9 +60561,16 @@ c(\gamma)+1
 \qquad\bigl(\because\ \blkref{claim_reconnection_turning_difference}\bigr)`),
                       paragraph([
                         "であり、第一の準備により最初の括弧は ", math(String.raw`0`),
-                        " なので ", math(String.raw`-S\in\{-4,0,4\}`), "、よって ",
-                        math(String.raw`S\in\{-4,0,4\}`),
-                        "（整数の符号反転はこの三元集合を保つ）。一方、一歩の回転数の値は ",
+                        " である。整数の符号反転は三元集合を保つので、",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+-S&\in\{-4,0,4\}
+&&\bigl(\because\ \blkref{claim_reconnection_turning_difference}\text{ と第一の準備}\bigr)\\
+S&\in\{-4,0,4\}
+&&\bigl(\because\ \{-4,0,4\}\text{ は符号反転で不変}\bigr)
+\end{aligned}`),
+                      paragraph([
+                        "一方、一歩の回転数の値は ",
                         math(String.raw`\{0,1,-1\}\subset\mathbb Z`), " の元なので（",
                         ref("def_step_turning"), "）、二項の和として ",
                         math(String.raw`-2\le S\le2`), " である。両者を満たす整数は ",
