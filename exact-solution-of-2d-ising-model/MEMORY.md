@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-03: 全証明の SageMath 検算として、`det_A_theta_tilde`（det A(θ̃_μ) = 1 とその帰結）に検算 `sagemath/check/det_A_theta_tilde/` を付けた（未検算 55 件）。証明の行を `_chains.sage` に写し、一般の点ではその行が引く関係だけのイデアルで、具体値では結合定数 4 組 × M_col = 2..8 の全 μ で全行と主張を厳密に確かめた。人手証明は、散文のつなぎを準備と一操作ずつの鎖に組み直し、根拠の無かった u^2 + v^2 = 1 と γ_2(−θ) の表示を `euler_formula_cos_sin`・`exp_of_negative_i_real_as_cos_minus_i_sin`・`def_A_theta` の (2,1) 成分からの鎖に、行列の `theorem_exp_product` を `scalar_exp_product` に直した（主張は不変）。計算の誤りは無かった。Lean は不変（注記の段の名前の見直しは Lean の連続実行へ申し送り）。次は `gamma1_gt_1_theta_tilde`。
+
 2026-11-03: 全証明の SageMath 検算として、`relation_of_gamma_2_theta_tilde`（γ_2(−θ̃_μ) = −conj(γ_2(θ̃_μ)) とその帰結）に検算 `sagemath/check/relation_of_gamma_2_theta_tilde/` を付けた（未検算 56 件）。一般の点の鎖と、結合定数 4 組 × M_col = 2..8 の全 μ の具体値（円分体・AA・角度 a + bπ）で全行を厳密に確かめた。人手証明は、γ_2(−θ) の表示を Euler の式からの鎖に、共役・z conj(z) = |z|^2・i = (0,1) の根拠を正しいブロックに、(3)(4)(5) を極座標表現と平方根の定義からの鎖に直した（主張は不変）。計算の誤りは無かった。次は `det_A_theta_tilde`。
 
 2026-11-03: Lean の通しの証明のゴールラインの確認の九十個目として、`eigenvalues_of_check_Vprime` の (m5) Step 4 の後半の鎖を行った。人手の鎖を `mat_mult_associative`（`q → 1`）・Step 3 の極限の鎖・`scalar_multiple_factors_out_of_left_factor`（`p → 1`）の 1 行 1 主張の 5 行にし、Lean の `Vprime_mulVec_of_mem_range` を同じ 5 段の calc に、`Qproj_mulVec_Qproj_mulVec` の最後の行を `Qproj_sq_step1` の 1 操作にした（2 定理は `M_col = r + 1` で述べる）。系 `smul_mulVec_tensorPow` を足した。SageMath は `050` の `check_eigenvalues_of_check_Vprime_step4_eigenvector_chain.sage`。次は `max_eigenvalue_of_V_plus_simple` の名前だけの根拠（状態台帳の「次の一歩」）。

@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 372 件のうち、SageMath の検算が無いもの 56 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 372 件のうち、SageMath の検算が無いもの 55 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -234,13 +234,22 @@
   人手証明を直した: γ_2(−θ) の表示を def_gamma1_gamma2_of_theta の証明から借りず euler_formula_cos_sin から作る鎖に。共役の行の根拠を complex_conjugate_of_product・_of_difference・_of_sum・_of_real_inclusion に、z conj(z) = |z|^2 の根拠を abs_basic_properties（この性質を述べていない）から complex_conjugate_times_self に、i = (0,1) の根拠を definition_of_cc（i を定めていない）から antiperiodic_exp_sum の前置きに。
   (2) の狭義の負・γ_2(−θ) ≠ 0 を鎖に、(3)(4)(5) の偏角・平方根を def_phi_polar・def_abs_arg・sqrt_expansion_via_polar・def_phi_cartesian からの一行ずつの鎖に。主張の中身は不変。計算の誤りは無かった。
 
+
+- `det_A_theta_tilde`（det A(θ̃_μ) = 1、γ_1^2 + γ_2γ_2(−θ̃) = 1、λ_+λ_− = 1、γ_1^2 = 1 + |γ_2|^2）: `sagemath/check/det_A_theta_tilde/`。
+  証明の各行を `_chains.sage` に本文の式どおりに写し、一般の点では QQ 上の有理関数として、隣り合う行の差がその行の (∵) の引く関係だけで生成したイデアルに入ること（関係を引く行は関係なしでは一致しない対照つき）を、具体値では結合定数 4 組（臨界点 2 組を含む）× M_col = 2..8 の全 μ で円分体と、|γ_2| を添えた商環・AA で全行と主張を厳密に確かめた（浮動小数点なし）。
+  人手証明を直した: Step 0〜Step 6 の散文のつなぎを、準備（像の読み方、商 z/w := zw^{-1}、2_C・i・2_C i が 0 でないこと）と −(−z) = z・ii = −1_C・e_+e_− = 1_C・(x − iy)(x + iy)・(x − y)^2・u + iv = e_+・u^2 + v^2 = 1_C・γ_2(±θ) の表示・γ_2(θ)γ_2(−θ)・双曲線の三つの関係の鎖と、主張の左辺から始まる四本の鎖に組み直し、差を和と −1 倍に開く行まで一操作ずつに分けた。
+  e_+e_− = 1 の根拠を行列の `theorem_exp_product`（n=1）・`theorem_exp_zero` から `scalar_exp_product`・`scalar_exp_zero` に、根拠の無かった u^2 + v^2 = 1 を `euler_formula_cos_sin` による u + iv = e_+ と `exp_of_negative_i_real_as_cos_minus_i_sin` の鎖に、根拠の無かった γ_2(−θ) の表示を `def_gamma1_gamma2_of_theta` と `def_A_theta` の (2,1) 成分の比較に直した。第 3・第 4 の等式は ℂ の中で示して `inclusion_rr_to_cc` の対の第 1 成分で ℝ に戻し、主張にどの等式が ℂ・ℝ のものかを書いた（中身は不変）。
+  四回のレビューで指摘が無くなるまで直した。計算の誤りは無かった。Lean（`ClaimDetATilde.lean`）は不変で `lake build`・`check-no-sorry.sh` は通るが、注記の「Step 1〜Step 6」は旧い証明の段の名前のままで、新しい鎖との 1 対 1 の対応の見直しは Lean の連続実行の受け持ち。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `det_A_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `gamma1_gt_1_theta_tilde`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-03、`det_A_theta_tilde` のレビューで見つかった（定義の欠け。今回の差分より前から）: ℂ の商 z/w と逆元 w^{-1} の記法を定めるブロックが本文に無く、`euler_formula_cos_sin` の sin の式などが `complex_numbers_form_a_field` の体構造だけを頼りに分数を書いている。この単位では証明の準備で z/w := zw^{-1} と置き、2_C・i・2_C i が 0 でないことを成分で示した。直すには計算公式の章に ℂ の逆元と商の定義を置き、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-03、`relation_of_gamma_2_theta_tilde` のレビューで見つかった（定義の欠け。今回の差分より前から）: 虚数単位 i = (0,1) を定めるブロックが本文に無く、`antiperiodic_exp_sum` の主張の前置きが置いているだけである。`definition_of_cc` を i の根拠に引いている箇所がほかにもありうる。直すには `definition_of_cc` の直後に i の定義を置き、引く側をそろえる。検算の付いたブロックの見直しで扱う。
 

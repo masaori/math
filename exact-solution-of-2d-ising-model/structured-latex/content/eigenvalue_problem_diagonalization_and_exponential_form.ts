@@ -3568,251 +3568,665 @@ A(\tilde\theta_\mu)
 \lambda_{+,\mu}\,\lambda_{-,\mu} = 1`,
       ),
       paragraph([
-        "が成り立つ。とくに ",
+        "が成り立つ（第 1・第 2 の等式は ",
+        math(String.raw`\mathbb{C}`),
+        " の等式で、実数 ",
+        math(String.raw`\gamma_1(\tilde\theta_\mu)`),
+        " と ",
+        math(String.raw`1`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像として読む。",
+        math(String.raw`\lambda_{\pm,\mu} \in \mathbb{R}`),
+        "（",
+        ref("eigenvector_of_A_theta_tilde"),
+        "）なので第 3 の等式は ",
+        math(String.raw`\mathbb{R}`),
+        " の等式である）。とくに ",
         ref("relation_of_gamma_2_theta_tilde"),
         " (2) と合わせて",
       ]),
       displayMath(
         String.raw`\gamma_1(\tilde\theta_\mu)^2 = 1 + \left|\gamma_2(\tilde\theta_\mu)\right|^2`,
       ),
+      paragraph(["が成り立つ（", math(String.raw`\mathbb{R}`), " の等式）。"]),
     ],
     proof: [
       paragraph([
-        "以下 ",
+        "準備。",
         math(String.raw`\theta := \tilde\theta_\mu`),
-        "、",
-        math(String.raw`u := \cos\theta \in \mathbb{R}`),
-        "、",
-        math(String.raw`v := \sin\theta \in \mathbb{R}`),
-        "（",
-        math(String.raw`u^2 + v^2 = 1`),
-        "）と略記する。",
-      ]),
-      paragraph(["Step 0: 使う 3 つの関係式。"]),
-      displayMath(
-        String.raw`\text{(i)}\ c_1^2 - s_1^2 = 1, \qquad
-\text{(ii)}\ (c_2^*)^2 - (s_2^*)^2 = 1, \qquad
-\text{(iii)}\ c_2\,s_2^* = c_2^*`,
-      ),
-      paragraph([
-        "(i) は ",
-        math(String.raw`\cosh^2 x - \sinh^2 x = 1`),
-        "（",
-        ref("cosh_sinh_basic_properties"),
-        "）を ",
-        math(String.raw`x = 2K_1`),
-        " に、(ii) は ",
-        math(String.raw`x = 2K_2^*`),
-        " に適用したもの、(iii) は ",
-        ref("duality_c2_star_eq_s2_star_c2"),
+        " と略記する。",
+        ref("antiperiodic_exp_sum"),
+        " より ",
+        math(String.raw`\theta \in \mathbb{R}`),
         " である。",
+        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^* \in \mathbb{R}`),
+        " は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        " の略記、",
+        math(String.raw`u := \cos\theta \in \mathbb{R}`),
+        "・",
+        math(String.raw`v := \sin\theta \in \mathbb{R}`),
+        " は ",
+        ref("euler_formula_cos_sin"),
+        " の前置きのとおり全実数上の ",
+        math(String.raw`\cos, \sin`),
+        " の値（全実数上への拡張は未整備）、",
+        math(String.raw`a_0 := c_1u - s_1c_2 \in \mathbb{R}`),
+        "、",
+        math(String.raw`r := \left|\gamma_2(\theta)\right| \in \mathbb{R}`),
+        "（",
+        ref("def_abs_arg"),
+        "）とおく。",
+        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}})`),
+        " は ",
+        ref("antiperiodic_exp_sum"),
+        " の前置きの虚数単位、",
+        math(String.raw`e_+ := \exp(i\theta) \in \mathbb{C}`),
+        "・",
+        math(String.raw`e_- := \exp(-i\theta) \in \mathbb{C}`),
+        " とする。実数が ",
+        math(String.raw`\mathbb{C}`),
+        " の式に現れるときは、",
+        ref("def_gamma1_gamma2_of_theta"),
+        " の書き方に従い ",
+        ref("inclusion_rr_to_cc"),
+        " の像 ",
+        math(String.raw`x_{\mathbb{C}}`),
+        " として読み、像の記号を省く。",
+        math(String.raw`x, y \in \mathbb{R}`),
+        " について ",
+        math(String.raw`x_{\mathbb{C}}y_{\mathbb{C}} = (xy)_{\mathbb{C}}`),
+        "（",
+        ref("real_inclusion_preserves_product"),
+        "）、",
+        math(String.raw`x_{\mathbb{C}} + y_{\mathbb{C}} = (x+y)_{\mathbb{C}}`),
+        "（",
+        ref("real_inclusion_preserves_finite_sum"),
+        " を ",
+        math(String.raw`m = 2`),
+        " で）であり、差は ",
+        ref("def_complex_difference"),
+        " により ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " 倍（",
+        ref("multiply_by_minus_one"),
+        "。",
+        math(String.raw`-1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`(-1)_{\mathbb{C}}`),
+        "）の和なので、実数の和・差・積の像は像の和・差・積である。",
+        math(String.raw`\mathbb{C}`),
+        " の和と積の結合律・可換律・分配律・単位元・零元・加法逆元・乗法の逆元は ",
+        ref("complex_numbers_form_a_field"),
+        " による。",
+        math(String.raw`w \neq 0_{\mathbb{C}}`),
+        " について ",
+        math(String.raw`w^{-1}`),
+        " はその乗法の逆元、商は ",
+        math(String.raw`z/w := z\,w^{-1}`),
+        " とする。",
+        math(String.raw`2_{\mathbb{C}} = (2,0)`),
+        "、",
+        math(String.raw`i = (0,1)`),
+        "、",
+        math(String.raw`2_{\mathbb{C}}\,i = (2\cdot 0 - 0\cdot 1,\ 2\cdot 1 + 0\cdot 0) = (0,2)`),
+        "（",
+        ref("definition_of_cc"),
+        " の積）は、いずれも成分の一つが ",
+        math(String.raw`0`),
+        " でないので ",
+        math(String.raw`0_{\mathbb{C}} = (0,0)`),
+        " と異なり、逆元を持つ。",
       ]),
       paragraph([
-        "Step 1: 行列式。",
-        ref("def_gamma1_gamma2_of_theta"),
-        " より",
+        "第一に、",
+        math(String.raw`-(-z) = z`),
+        "（",
+        math(String.raw`z \in \mathbb{C}`),
+        "）、",
+        math(String.raw`ii = -1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`e_+e_- = 1_{\mathbb{C}}`),
+        "、",
+        math(String.raw`x, y \in \mathbb{C}`),
+        " についての ",
+        math(String.raw`(x - iy)(x + iy) = x^2 + y^2`),
+        " と ",
+        math(String.raw`(x - y)^2 = x^2 - 2_{\mathbb{C}}xy + y^2`),
+        "、",
+        math(String.raw`u + iv = e_+`),
+        "、",
+        math(String.raw`u^2 + v^2 = 1_{\mathbb{C}}`),
+        " を示す。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
+      displayMath(String.raw`\begin{aligned}
+-(-z)
+&= (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})z\bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)z
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= \bigl((-1)(-1)\bigr)_{\mathbb{C}}\,z
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= 1_{\mathbb{C}}\,z
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= z
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+ii
+&= (0,1)(0,1)
+&&(\because\ \blkref{antiperiodic_exp_sum}\ \text{の前置きの}\ i := (0,1))\\
+&= (0\cdot 0 - 1\cdot 1,\ 0\cdot 1 + 1\cdot 0)
+&&(\because\ \blkref{definition_of_cc}\ \text{の積})\\
+&= (-1, 0)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= -1_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+e_+e_-
+&= \exp(i\theta)\exp(-i\theta)
+&&(\because\ e_\pm\ \text{の定義})\\
+&= \exp\bigl(i\theta + (-i\theta)\bigr)
+&&(\because\ \blkref{scalar_exp_product}\ \text{を}\ K = \mathbb{C}\ \text{で})\\
+&= \exp(0_{\mathbb{C}})
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \blkref{scalar_exp_zero}\ \text{を}\ K = \mathbb{C}\ \text{で})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(x - iy)(x + iy)
+&= \bigl(x + (-(iy))\bigr)(x + iy)
+&&(\because\ \blkref{def_complex_difference})\\
+&= \bigl(x + (-1_{\mathbb{C}})(iy)\bigr)(x + iy)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= xx + x(iy) + \bigl((-1_{\mathbb{C}})(iy)\bigr)x + \bigl((-1_{\mathbb{C}})(iy)\bigr)(iy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= xx + (iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= xx + \Bigl((iy)x + (-1_{\mathbb{C}})\bigl((iy)x\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= xx + \Bigl((iy)x + \bigl(-((iy)x)\bigr)\Bigr) + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= xx + 0_{\mathbb{C}} + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= xx + (-1_{\mathbb{C}})\bigl((iy)(iy)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&= xx + (-1_{\mathbb{C}})\bigl((ii)(yy)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= xx + (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})(yy)\bigr)
+&&(\because\ \text{上の}\ ii = -1_{\mathbb{C}})\\
+&= xx + \bigl(-(-(yy))\bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= xx + yy
+&&(\because\ \text{上の}\ -(-z) = z)\\
+&= x^2 + y^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = (1_{\mathbb{C}}z)z = zz\ \text{を 2 箇所へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(x - y)^2
+&= (x - y)(x - y)
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&= \bigl(x + (-y)\bigr)\bigl(x + (-y)\bigr)
+&&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
+&= \bigl(x + (-1_{\mathbb{C}})y\bigr)\bigl(x + (-1_{\mathbb{C}})y\bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= xx + x\bigl((-1_{\mathbb{C}})y\bigr) + \bigl((-1_{\mathbb{C}})y\bigr)x + \bigl((-1_{\mathbb{C}})y\bigr)\bigl((-1_{\mathbb{C}})y\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= xx + (-1_{\mathbb{C}})(xy) + (-1_{\mathbb{C}})(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= xx + \bigl((-1_{\mathbb{C}}) + (-1_{\mathbb{C}})\bigr)(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= xx + \bigl((-1) + (-1)\bigr)_{\mathbb{C}}(xy) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)(yy)
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
+&= xx + \bigl((-1) + (-1)\bigr)_{\mathbb{C}}(xy) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}(yy)
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= xx + \bigl((-1)\cdot 2\bigr)_{\mathbb{C}}(xy) + 1_{\mathbb{C}}(yy)
+&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&= xx + \bigl((-1_{\mathbb{C}})\,2_{\mathbb{C}}\bigr)(xy) + 1_{\mathbb{C}}(yy)
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= xx + (-1_{\mathbb{C}})\bigl(2_{\mathbb{C}}(xy)\bigr) + 1_{\mathbb{C}}(yy)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= xx + (-1_{\mathbb{C}})\bigl(2_{\mathbb{C}}(xy)\bigr) + yy
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= xx + \bigl(-(2_{\mathbb{C}}xy)\bigr) + yy
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&= xx - 2_{\mathbb{C}}xy + yy
+&&(\because\ \blkref{def_complex_difference})\\
+&= x^2 - 2_{\mathbb{C}}xy + y^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 2 箇所へ})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+u + iv
+&= \frac{e_+ + e_-}{2} + i\,\frac{e_+ - e_-}{2i}
+&&(\because\ \blkref{euler_formula_cos_sin}\ \text{を 2 箇所へ})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + i\bigl((e_+ - e_-)(2_{\mathbb{C}}i)^{-1}\bigr)
+&&(\because\ \text{準備の商}\ z/w := zw^{-1}\ \text{を 2 箇所へ})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(i\,(2_{\mathbb{C}}i)^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(i\,(2_{\mathbb{C}}^{-1}i^{-1})\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元の一意性より}\ (2_{\mathbb{C}}i)^{-1} = 2_{\mathbb{C}}^{-1}i^{-1})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(2_{\mathbb{C}}^{-1}(i\,i^{-1})\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\bigl(2_{\mathbb{C}}^{-1}1_{\mathbb{C}}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})\\
+&= (e_+ + e_-)\,2_{\mathbb{C}}^{-1} + (e_+ - e_-)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \bigl((e_+ + e_-) + (e_+ - e_-)\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= \Bigl((e_+ + e_-) + \bigl(e_+ + (-e_-)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{def_complex_difference})\\
+&= \Bigl(e_+ + e_+ + \bigl(e_- + (-e_-)\bigr)\Bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
+&= \bigl(e_+ + e_+ + 0_{\mathbb{C}}\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&= \bigl(e_+ + e_+\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&= \bigl(1_{\mathbb{C}}e_+ + 1_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= \bigl((1_{\mathbb{C}} + 1_{\mathbb{C}})e_+\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= \bigl((1 + 1)_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
+&= \bigl(2_{\mathbb{C}}e_+\bigr)\,2_{\mathbb{C}}^{-1}
+&&(\because\ \mathbb{R}\ \text{の四則}\ 1 + 1 = 2)\\
+&= e_+\bigl(2_{\mathbb{C}}\,2_{\mathbb{C}}^{-1}\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= e_+\,1_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の逆元})\\
+&= e_+
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+u^2 + v^2
+&= (u - iv)(u + iv)
+&&(\because\ \text{上の}\ (x - iy)(x + iy) = x^2 + y^2\ \text{を}\ x = u,\ y = v\ \text{で})\\
+&= e_-\,(u + iv)
+&&(\because\ \blkref{exp_of_negative_i_real_as_cos_minus_i_sin})\\
+&= e_-\,e_+
+&&(\because\ \text{上の}\ u + iv = e_+)\\
+&= e_+e_-
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \text{上の}\ e_+e_- = 1_{\mathbb{C}})
+\end{aligned}`),
+      paragraph([
+        "第二に、",
+        math(String.raw`\gamma_2(\theta)`),
+        "・",
+        math(String.raw`\gamma_2(-\theta)`),
+        " とその積を ",
+        math(String.raw`a_0, v`),
+        " で書く。",
+        math(String.raw`\gamma_2(-\theta)`),
+        " は ",
+        ref("def_gamma1_gamma2_of_theta"),
+        " が述べる ",
+        math(String.raw`A(\theta)`),
+        " の ",
+        math(String.raw`(2,1)`),
+        " 成分 ",
+        math(String.raw`-\gamma_2(-\theta)`),
+        " と ",
+        ref("def_A_theta"),
+        " の ",
+        math(String.raw`(2,1)`),
+        " 成分を比べて得る（",
+        ref("def_A_theta"),
+        " の先頭の ",
+        math(String.raw`-`),
+        " は ",
+        ref("multiply_by_minus_one"),
+        " の ",
+        math(String.raw`-1`),
+        " 倍と読む）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta)
+&= i\,e_+\,s_2^*\bigl(c_1u - iv - s_1c_2\bigr)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
+&= i\,e_+\,s_2^*\bigl((c_1u - s_1c_2) - iv\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
+&= i\,e_+\,s_2^*\bigl(a_0 - iv\bigr)
+&&(\because\ a_0\ \text{の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(-\theta)
+&= -\bigl(-\gamma_2(-\theta)\bigr)
+&&(\because\ \text{上の}\ -(-z) = z)\\
+&= -A(\theta)_{2,1}
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta}\ \text{の}\ (2,1)\ \text{成分})\\
+&= -\Bigl(-\bigl(i\,e_-\,s_2^*(c_1u + iv - s_1c_2)\bigr)\Bigr)
+&&(\because\ \blkref{def_A_theta}\ \text{の}\ (2,1)\ \text{成分})\\
+&= i\,e_-\,s_2^*\bigl(c_1u + iv - s_1c_2\bigr)
+&&(\because\ \text{上の}\ -(-z) = z)\\
+&= i\,e_-\,s_2^*\bigl((c_1u - s_1c_2) + iv\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
+&= i\,e_-\,s_2^*\bigl(a_0 + iv\bigr)
+&&(\because\ a_0\ \text{の定義})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+\gamma_2(\theta)\gamma_2(-\theta)
+&= \bigl(i\,e_+\,s_2^*(a_0 - iv)\bigr)\bigl(i\,e_-\,s_2^*(a_0 + iv)\bigr)
+&&(\because\ \text{上の}\ \gamma_2(\theta)\ \text{と}\ \gamma_2(-\theta)\ \text{の表示})\\
+&= (ii)(e_+e_-)(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= (-1_{\mathbb{C}})(e_+e_-)(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
+&&(\because\ \text{上の}\ ii = -1_{\mathbb{C}})\\
+&= (-1_{\mathbb{C}})\,1_{\mathbb{C}}\,(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
+&&(\because\ \text{上の}\ e_+e_- = 1_{\mathbb{C}})\\
+&= (-1_{\mathbb{C}})(s_2^*s_2^*)\bigl((a_0 - iv)(a_0 + iv)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&= (-1_{\mathbb{C}})(s_2^*s_2^*)\bigl(a_0^2 + v^2\bigr)
+&&(\because\ \text{上の}\ (x - iy)(x + iy) = x^2 + y^2\ \text{を}\ x = a_0,\ y = v\ \text{で})\\
+&= (-1_{\mathbb{C}})\Bigl((s_2^*s_2^*)\bigl(a_0^2 + v^2\bigr)\Bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&= (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&= -\Bigl((s_2^*)^2\bigl(a_0^2 + v^2\bigr)\Bigr)
+&&(\because\ \blkref{multiply_by_minus_one})
+\end{aligned}`),
+      paragraph([
+        "第三に、",
+        ref("cosh_sinh_basic_properties"),
+        " (2) と ",
+        ref("duality_c2_star_eq_s2_star_c2"),
+        " から ",
+        math(String.raw`c_1, s_1, c_2, c_2^*, s_2^*`),
+        " の間の ",
+        math(String.raw`\mathbb{R}`),
+        " の関係を三つ作る（",
+        math(String.raw`2K_1, 2K_2^* \in \mathbb{R}`),
+        " は ",
+        ref("def_transfer_matrix_symbols"),
+        " の結合定数と第二の双対結合定数の 2 倍である）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+c_1^2 - s_1^2
+&= (\cosh 2K_1)^2 - (\sinh 2K_1)^2
+&&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})\\
+&= 1
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (2)\ \text{を}\ x = 2K_1\ \text{で})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+(c_2^*)^2 - (s_2^*)^2
+&= (\cosh 2K_2^*)^2 - (\sinh 2K_2^*)^2
+&&(\because\ \blkref{def_indexed_hyperbolic_abbreviations})\\
+&= 1
+&&(\because\ \blkref{cosh_sinh_basic_properties}\ (2)\ \text{を}\ x = 2K_2^*\ \text{で})
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+c_2s_2^*
+&= s_2^*c_2
+&&(\because\ \mathbb{R}\ \text{の積の可換律})\\
+&= c_2^*
+&&(\because\ \blkref{duality_c2_star_eq_s2_star_c2})
+\end{aligned}`),
+      paragraph([
+        "第 2 の等式は、主張の左辺から次のとおりである（",
+        math(String.raw`\mathbb{C}`),
+        " の等式）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+&\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta) \\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 + \gamma_2(\theta)\gamma_2(-\theta)
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 + \Bigl(-\bigl((s_2^*)^2(a_0^2 + v^2)\bigr)\Bigr)
+&&(\because\ \text{上の}\ \gamma_2(\theta)\gamma_2(-\theta)\ \text{の鎖})\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + v^2\bigr)
+&&(\because\ \blkref{def_complex_difference})\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl(a_0^2 + 1 - u^2\bigr)
+&&(\because\ \text{上の}\ u^2 + v^2 = 1_{\mathbb{C}}\ \text{を移項した}\ v^2 = 1 - u^2)\\
+&\quad= \bigl(c_1c_2^* - s_1s_2^*u\bigr)^2 - (s_2^*)^2\bigl((c_1u - s_1c_2)^2 + 1 - u^2\bigr)
+&&(\because\ a_0\ \text{の定義})\\
+&\quad= (c_1c_2^*)^2 - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)^2 \\
+&\qquad\quad - (s_2^*)^2\bigl((c_1u)^2 - 2(c_1u)(s_1c_2) + (s_1c_2)^2 + 1 - u^2\bigr)
+&&(\because\ \text{上の}\ (x - y)^2 = x^2 - 2xy + y^2\ \text{を 2 箇所へ})\\
+&\quad= (c_1c_2^*)(c_1c_2^*) - 2(c_1c_2^*)(s_1s_2^*u) + (s_1s_2^*u)(s_1s_2^*u) \\
+&\qquad\quad - (s_2^*s_2^*)\bigl((c_1u)(c_1u) - 2(c_1u)(s_1c_2) + (s_1c_2)(s_1c_2) + 1 - uu\bigr)
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&\quad= (c_1c_1)(c_2^*c_2^*) - 2c_1c_2^*s_1s_2^*u + (s_1s_1)(s_2^*s_2^*)(uu) \\
+&\qquad\quad - (s_2^*s_2^*)\bigl((c_1c_1)(uu) - 2c_1s_1c_2u + (s_1s_1)(c_2c_2) + 1 - uu\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - (s_2^*)^2\bigl(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\bigr)
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + \Bigl(-\bigl((s_2^*)^2(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2)\bigr)\Bigr)
+&&(\because\ \blkref{def_complex_difference})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + \Bigl(-\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-(2c_1s_1c_2u)) + s_1^2c_2^2 + 1 + (-u^2)\bigr)\Bigr)\Bigr)
+&&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad + (-1_{\mathbb{C}})\Bigl((s_2^*)^2\bigl(c_1^2u^2 + (-1_{\mathbb{C}})(2c_1s_1c_2u) + s_1^2c_2^2 + 1 + (-1_{\mathbb{C}})u^2\bigr)\Bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 3 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl((s_2^*)^2c_1^2u^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2(-1_{\mathbb{C}})(2c_1s_1c_2u)\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl((s_2^*)^2s_1^2c_2^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2(-1_{\mathbb{C}})u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})\bigl((s_2^*)^2\cdot 1\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{real_inclusion_preserves_product}\ \text{を 2 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 1_{\mathbb{C}}\bigl(2c_1s_1c_2(s_2^*)^2u\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + 1_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則を 2 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2c_1s_1c_2(s_2^*)^2u \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2c_2^2(s_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2c_1s_1c_2(s_2^*)^2u + \bigl(-(s_1^2c_2^2(s_2^*)^2)\bigr) + \bigl(-(s_2^*)^2\bigr) + (s_2^*)^2u^2
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 3 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 - c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2(s_2^*)^2u - s_1^2c_2^2(s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{def_complex_difference}\ \text{を 3 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1s_1(c_2s_2^*)s_2^*u - s_1^2(c_2s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2^*s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \text{上の}\ c_2s_2^* = c_2^*\ \text{を 2 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2 \\
+&\qquad\quad - c_1^2(s_2^*)^2u^2 + 2c_1c_2^*s_1s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&\quad= c_1^2(c_2^*)^2 + \bigl(-(2c_1c_2^*s_1s_2^*u)\bigr) + s_1^2(s_2^*)^2u^2 + \bigl(-(c_1^2(s_2^*)^2u^2)\bigr) + 2c_1c_2^*s_1s_2^*u \\
+&\qquad\quad + \bigl(-(s_1^2(c_2^*)^2)\bigr) + \bigl(-(s_2^*)^2\bigr) + (s_2^*)^2u^2
+&&(\because\ \blkref{def_complex_difference}\ \text{を 4 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 + (-1_{\mathbb{C}})(2c_1c_2^*s_1s_2^*u) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 2c_1c_2^*s_1s_2^*u \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 4 箇所へ})\\
+&\quad= c_1^2(c_2^*)^2 + \bigl((-1_{\mathbb{C}})(2c_1c_2^*s_1s_2^*u) + 2c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 + \bigl(-(2c_1c_2^*s_1s_2^*u) + 2c_1c_2^*s_1s_2^*u\bigr) + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) \\
+&\qquad\quad + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&\quad= c_1^2(c_2^*)^2 + 0_{\mathbb{C}} + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr)
+ + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
+&\quad= c_1^2(c_2^*)^2 + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr)
+ + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2 + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&\quad= c_1^2(c_2^*)^2 + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2
+ + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + (s_2^*)^2u^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律・可換律})\\
+&\quad= c_1^2(c_2^*)^2 + (-1_{\mathbb{C}})\bigl(s_1^2(c_2^*)^2\bigr) + (-1_{\mathbb{C}})(s_2^*)^2
+ + s_1^2(s_2^*)^2u^2 + (-1_{\mathbb{C}})\bigl(c_1^2(s_2^*)^2u^2\bigr) + 1_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&\quad= c_1^2(c_2^*)^2 + \bigl((-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + s_1^2\bigl((s_2^*)^2u^2\bigr) + \bigl((-1_{\mathbb{C}})c_1^2\bigr)\bigl((s_2^*)^2u^2\bigr) + 1_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \bigl(s_1^2 + (-1_{\mathbb{C}})c_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律を 2 箇所へ})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \bigl((-1_{\mathbb{C}})c_1^2 + s_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の可換律})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \bigl((-1_{\mathbb{C}})c_1^2 + 1_{\mathbb{C}}s_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \bigl((-1_{\mathbb{C}})c_1^2 + \bigl((-1)(-1)\bigr)_{\mathbb{C}}s_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則}\ 1 = (-1)(-1))\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \bigl((-1_{\mathbb{C}})c_1^2 + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)s_1^2 + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \Bigl((-1_{\mathbb{C}})c_1^2 + (-1_{\mathbb{C}})\bigl((-1_{\mathbb{C}})s_1^2\bigr) + 1_{\mathbb{C}}\Bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律})\\
+&\quad= \bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \Bigl((-1_{\mathbb{C}})\bigl(c_1^2 + (-1_{\mathbb{C}})s_1^2\bigr) + 1_{\mathbb{C}}\Bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&\quad= \bigl(c_1^2 + (-s_1^2)\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \Bigl((-1_{\mathbb{C}})\bigl(c_1^2 + (-s_1^2)\bigr) + 1_{\mathbb{C}}\Bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&\quad= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+ + \Bigl((-1_{\mathbb{C}})\bigl(c_1^2 - s_1^2\bigr) + 1_{\mathbb{C}}\Bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{def_complex_difference}\ \text{を 2 箇所へ})\\
+&\quad= 1_{\mathbb{C}}(c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1_{\mathbb{C}})1_{\mathbb{C}} + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \text{上の}\ c_1^2 - s_1^2 = 1\ \text{を 2 箇所へ})\\
+&\quad= (c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1_{\mathbb{C}}) + 1_{\mathbb{C}}\bigr)\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元を 2 箇所へ})\\
+&\quad= (c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2 + \bigl((-1) + 1\bigr)_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
+&\quad= (c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2 + 0_{\mathbb{C}}\bigl((s_2^*)^2u^2\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則}\ (-1) + 1 = 0)\\
+&\quad= (c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2 + 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_zero_times_is_zero})\\
+&\quad= (c_2^*)^2 + (-1_{\mathbb{C}})(s_2^*)^2
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元})\\
+&\quad= (c_2^*)^2 + \bigl(-(s_2^*)^2\bigr)
+&&(\because\ \blkref{multiply_by_minus_one})\\
+&\quad= (c_2^*)^2 - (s_2^*)^2
+&&(\because\ \blkref{def_complex_difference})\\
+&\quad= 1
+&&(\because\ \text{上の}\ (c_2^*)^2 - (s_2^*)^2 = 1)
+\end{aligned}`),
+      paragraph(["第 1 の等式は、主張の左辺から次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
 \det A(\theta)
 &= \det\begin{pmatrix}
    \gamma_1(\theta) & \gamma_2(\theta) \\
    -\gamma_2(-\theta) & \gamma_1(\theta)
    \end{pmatrix}
-   \quad (\because \blkref{def_gamma1_gamma2_of_theta}) \\
+&&(\because\ \blkref{def_gamma1_gamma2_of_theta})\\
 &= \gamma_1(\theta)\gamma_1(\theta) - \gamma_2(\theta)\bigl(-\gamma_2(-\theta)\bigr)
-   \quad (\because \blkref{def_det_two_by_two}) \\
+&&(\because\ \blkref{def_det_two_by_two})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \Bigl(-\bigl(\gamma_2(\theta)(-\gamma_2(-\theta))\bigr)\Bigr)
+&&(\because\ \blkref{def_complex_difference})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + (-1_{\mathbb{C}})\Bigl(\gamma_2(\theta)\bigl((-1_{\mathbb{C}})\gamma_2(-\theta)\bigr)\Bigr)
+&&(\because\ \blkref{multiply_by_minus_one}\ \text{を 2 箇所へ})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl((-1_{\mathbb{C}})(-1_{\mathbb{C}})\bigr)\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の結合律・可換律})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \bigl((-1)(-1)\bigr)_{\mathbb{C}}\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + 1_{\mathbb{C}}\bigl(\gamma_2(\theta)\gamma_2(-\theta)\bigr)
+&&(\because\ \mathbb{R}\ \text{の四則})\\
+&= \gamma_1(\theta)\gamma_1(\theta) + \gamma_2(\theta)\gamma_2(-\theta)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の単位元})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-   \quad (\because \mathbb{C} \text{ の積と加法逆元})
-\end{aligned}`,
-      ),
-      paragraph([
-        "これで第 1 の量と第 2 の量が等しいことが言えた。残りはこの値が ",
-        math(String.raw`1`),
-        " であることである。",
-      ]),
-      paragraph([
-        "Step 2: ",
-        math(String.raw`\gamma_2(\theta)\gamma_2(-\theta)`),
-        " の実部表示。",
-        ref("def_gamma1_gamma2_of_theta"),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_2(\theta) &= i\,\exp(i\theta)s_2^*\bigl((c_1u - s_1c_2) - iv\bigr), &
-\gamma_2(-\theta) &= i\,\exp(-i\theta)s_2^*\bigl((c_1u - s_1c_2) + iv\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`i\cdot i = -1`),
-        " である。また、",
-        ref("theorem_exp_product"),
-        "（",
-        math(String.raw`n=1`),
-        " に適用する）と ",
-        ref("theorem_exp_zero"),
-        " により",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\exp(i\theta)\exp(-i\theta)
-&= \exp(i\theta + (-i\theta))
-   \quad (\because \blkref{theorem_exp_product}\text{ を }n=1\text{ に適用}) \\
-&= \exp(0)
-   \quad (\because \mathbb{C} \text{ の加法 } i\theta + (-i\theta) = 0) \\
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
 &= 1
-   \quad (\because \blkref{theorem_exp_zero})
-\end{aligned}`,
-      ),
+&&(\because\ \text{上の第 2 の等式の鎖})
+\end{aligned}`),
       paragraph([
-        "である。さらに ",
-        math(String.raw`(a_0 - iv)(a_0 + iv) = a_0^2 + v^2`),
-        "（",
-        math(String.raw`a_0 := c_1u - s_1c_2 \in \mathbb{R}`),
-        "）より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_2(\theta)\gamma_2(-\theta)
-&= \left(i\cdot i\right)\left(\exp(i\theta)\exp(-i\theta)\right)(s_2^*)^2
-   \bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
-   \quad (\because \text{直前の 2 式と } \mathbb{C} \text{ の積の可換性}) \\
-&= (-1)\cdot 1\cdot (s_2^*)^2\bigl(a_0 - iv\bigr)\bigl(a_0 + iv\bigr)
-   \quad (\because i\cdot i = -1 \text{ と直前の式変形 } \exp(i\theta)\exp(-i\theta) = 1) \\
-&= -(s_2^*)^2\Bigl(a_0^2 + v^2\Bigr)
-   \quad (\because (a_0-iv)(a_0+iv) = a_0^2 + v^2) \\
-&= -(s_2^*)^2\Bigl((c_1u - s_1c_2)^2 + v^2\Bigr)
-   \quad (\because a_0 := c_1u - s_1c_2) \\
-&= -(s_2^*)^2\Bigl((c_1u - s_1c_2)^2 + 1 - u^2\Bigr)
-   \quad (\because u^2 + v^2 = 1)
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 3: 展開。",
-        math(String.raw`\gamma_1(\theta) = c_1c_2^* - s_1s_2^*u`),
-        " より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_1(\theta)^2
-&= \left(c_1c_2^* - s_1s_2^*u\right)^2
-   \quad (\because \text{直前の表示の代入}) \\
-&= c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2
-   \quad (\because \mathbb{R} \text{ の分配則による展開})
-\end{aligned}`,
-      ),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_2(\theta)\gamma_2(-\theta)
-&= -(s_2^*)^2\Bigl(c_1^2u^2 - 2c_1s_1c_2u + s_1^2c_2^2 + 1 - u^2\Bigr)
-   \quad (\because \text{Step 2 の最終式で } (c_1u - s_1c_2)^2 \text{ を分配則で展開}) \\
-&= -c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2(s_2^*)^2u - s_1^2c_2^2(s_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2
-   \quad (\because \mathbb{R} \text{ の分配則})
-\end{aligned}`,
-      ),
-      paragraph(["Step 4: (iii) による ", math(String.raw`c_2`), " の消去。"]),
-      displayMath(
-        String.raw`\begin{aligned}
-2c_1s_1c_2(s_2^*)^2u
-&= 2c_1s_1\left(c_2s_2^*\right)s_2^*u
-   \quad (\because \mathbb{R} \text{ の積の結合律と可換律}) \\
-&= 2c_1s_1c_2^*s_2^*u
-   \quad (\because \text{(iii)}\ (c_2s_2^* = c_2^*)) \\
-s_1^2c_2^2(s_2^*)^2
-&= s_1^2\left(c_2s_2^*\right)^2
-   \quad (\because \mathbb{R} \text{ の積の結合律と可換律}) \\
-&= s_1^2(c_2^*)^2
-   \quad (\because \text{(iii)}\ (c_2s_2^* = c_2^*))
-\end{aligned}`,
-      ),
-      paragraph(["これを代入して Step 3 の 2 式を足すと"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-&= \bigl(c_1^2(c_2^*)^2 - 2c_1c_2^*s_1s_2^*u + s_1^2(s_2^*)^2u^2\bigr) \\
-&\quad + \bigl(-c_1^2(s_2^*)^2u^2 + 2c_1s_1c_2^*s_2^*u - s_1^2(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2\bigr)
-   \quad (\because \text{Step 3 の 2 式と Step 4 の代入}) \\
-&= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2\bigl(s_1^2 - c_1^2 + 1\bigr)
-   \quad (\because u \text{ の 1 次の項の相殺と同類項の整理})
-\end{aligned}`,
-      ),
-      paragraph([
-        "（",
-        math(String.raw`u`),
-        " の 1 次の項が相殺した。これが (iii) を使った箇所である。）",
-      ]),
-      paragraph([
-        "Step 5: (i)(ii) による結論。(i) より ",
-        math(String.raw`s_1^2 - c_1^2 + 1 = 0`),
-        " なので ",
-        math(String.raw`u^2`),
-        " の項は消え、同じく (i) より第 1 項は ",
-        math(String.raw`(c_2^*)^2`),
-        "。よって (ii) より",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-&= \bigl(c_1^2 - s_1^2\bigr)(c_2^*)^2 - (s_2^*)^2 + (s_2^*)^2u^2\cdot 0
-   \quad (\because \text{(i)}\ (s_1^2 - c_1^2 + 1 = 0)) \\
-&= 1\cdot(c_2^*)^2 - (s_2^*)^2
-   \quad (\because \text{(i)}\ (c_1^2 - s_1^2 = 1)) \\
-&= 1
-   \quad (\because \text{(ii)}\ ((c_2^*)^2 - (s_2^*)^2 = 1))
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 1 と合わせて ",
-        math(String.raw`\det A(\tilde\theta_\mu) = 1`),
-        "。",
-      ]),
-      paragraph([
-        "Step 6: 固有値の積。",
+        "第 3 の等式。",
         ref("eigenvector_of_A_theta_tilde"),
-        " の ",
-        math(String.raw`\lambda_{\pm,\mu} = \gamma_1(\theta) \pm r`),
-        "（",
-        math(String.raw`r = |\gamma_2(\theta)|`),
-        "）と ",
+        " より ",
+        math(String.raw`\lambda_{\pm,\mu} = \gamma_1(\theta) \pm r \in \mathbb{R}`),
+        "、",
         ref("relation_of_gamma_2_theta_tilde"),
-        " (2) の ",
+        " (2) より ",
         math(String.raw`\gamma_2(\theta)\gamma_2(-\theta) = -r^2`),
-        " より",
+        " である。まず ",
+        math(String.raw`\mathbb{C}`),
+        " の中で",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\lambda_{+,\mu}\lambda_{-,\mu}
-&= \left(\gamma_1(\theta) + r\right)\left(\gamma_1(\theta) - r\right)
-   \quad (\because \blkref{eigenvector_of_A_theta_tilde}) \\
+      displayMath(String.raw`\begin{aligned}
+(\lambda_{+,\mu}\lambda_{-,\mu})_{\mathbb{C}}
+&= (\lambda_{+,\mu})_{\mathbb{C}}\,(\lambda_{-,\mu})_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(\gamma_1(\theta) + r\bigr)_{\mathbb{C}}\,\bigl(\gamma_1(\theta) - r\bigr)_{\mathbb{C}}
+&&(\because\ \blkref{eigenvector_of_A_theta_tilde})\\
+&= \bigl(\gamma_1(\theta) + r\bigr)\bigl(\gamma_1(\theta) - r\bigr)
+&&(\because\ \text{準備の像の読み方（和・差の像は像の和・差。以下この鎖では像の記号を省く）})\\
+&= \gamma_1(\theta)\gamma_1(\theta) - \gamma_1(\theta)r + r\gamma_1(\theta) - rr
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の分配律})\\
+&= \gamma_1(\theta)\gamma_1(\theta) - r\gamma_1(\theta) + r\gamma_1(\theta) - rr
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の積の可換律})\\
+&= \gamma_1(\theta)\gamma_1(\theta) - rr
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元と零元})\\
 &= \gamma_1(\theta)^2 - r^2
-   \quad (\because \mathbb{R} \text{ の分配則による平方差}) \\
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz\ \text{を 2 箇所へ})\\
+&= \gamma_1(\theta)^2 + \bigl(-r^2\bigr)
+&&(\because\ \blkref{def_complex_difference})\\
 &= \gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\text{ の積の式}) \\
-&= 1
-   \quad (\because \text{Step 5})
-\end{aligned}`,
-      ),
+&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2))\\
+&= 1_{\mathbb{C}}
+&&(\because\ \text{上の第 2 の等式の鎖})
+\end{aligned}`),
+      paragraph(["であり、これを実数の対として読むと"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda_{+,\mu}\lambda_{-,\mu},\ 0)
+&= (\lambda_{+,\mu}\lambda_{-,\mu})_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})\\
+&= 1_{\mathbb{C}}
+&&(\because\ \text{直前の鎖})\\
+&= (1,\ 0)
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
       paragraph([
-        "最後に、",
-        math(String.raw`\gamma_1(\theta)^2 = 1 + r^2`),
-        " を示す。主張の左辺より",
+        "となる。",
+        ref("definition_of_cc"),
+        " の台集合 ",
+        math(String.raw`\mathbb{R}^2`),
+        " の元は成分がすべて等しいときに限り等しいので、第 1 成分を比べて ",
+        math(String.raw`\lambda_{+,\mu}\lambda_{-,\mu} = 1`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の等式）を得る。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\gamma_1(\theta)^2
+      paragraph(["最後の等式。まず ", math(String.raw`\mathbb{C}`), " の中で"]),
+      displayMath(String.raw`\begin{aligned}
+\bigl(\gamma_1(\theta)^2\bigr)_{\mathbb{C}}
+&= \bigl(\gamma_1(\theta)\gamma_1(\theta)\bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の冪}\ x^2 = xx)\\
+&= \gamma_1(\theta)_{\mathbb{C}}\,\gamma_1(\theta)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= \bigl(\gamma_1(\theta)_{\mathbb{C}}\bigr)^2
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ zz = z^2)\\
+&= \gamma_1(\theta)^2 + 0_{\mathbb{C}}
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の零元。以下この鎖では像の記号を省き、最後の 4 行で書き戻す})\\
+&= \gamma_1(\theta)^2 + \bigl(-r^2 + r^2\bigr)
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の加法逆元})\\
 &= \gamma_1(\theta)^2 + \bigl(\gamma_2(\theta)\gamma_2(-\theta) + r^2\bigr)
-   \quad (\because \blkref{relation_of_gamma_2_theta_tilde}\text{ の積の式より }\gamma_2(\theta)\gamma_2(-\theta)+r^2=0_{\mathbb C}) \\
+&&(\because\ \blkref{relation_of_gamma_2_theta_tilde}\ (2))\\
 &= \bigl(\gamma_1(\theta)^2 + \gamma_2(\theta)\gamma_2(-\theta)\bigr) + r^2
-   \quad (\because \mathbb{C} \text{ の加法の結合律}) \\
-&= 1 + r^2
-   \quad (\because \text{Step 5})
-\end{aligned}`,
-      ),
+&&(\because\ \blkref{complex_numbers_form_a_field}\ \text{の和の結合律})\\
+&= 1_{\mathbb{C}} + \bigl(r_{\mathbb{C}}\bigr)^2
+&&(\because\ \text{上の第 2 の等式の鎖})\\
+&= 1_{\mathbb{C}} + r_{\mathbb{C}}\,r_{\mathbb{C}}
+&&(\because\ \blkref{def_power_of_complex_number}\ \text{より}\ z^2 = zz)\\
+&= 1_{\mathbb{C}} + (rr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_product})\\
+&= (1 + rr)_{\mathbb{C}}
+&&(\because\ \blkref{real_inclusion_preserves_finite_sum}\ \text{を}\ m = 2\ \text{で})\\
+&= \bigl(1 + r^2\bigr)_{\mathbb{C}}
+&&(\because\ \mathbb{R}\ \text{の冪}\ xx = x^2)
+\end{aligned}`),
       paragraph([
-        "を得る。",
-        math(String.raw`r = \left|\gamma_2(\theta)\right|`),
-        "（Step 6）なので、これが主張の最後の等式である。",
+        "であり、第 3 の等式と同じく ",
+        ref("inclusion_rr_to_cc"),
+        " の対の第 1 成分を比べて ",
+        math(String.raw`\gamma_1(\theta)^2 = 1 + r^2 = 1 + \left|\gamma_2(\theta)\right|^2`),
+        "（",
+        math(String.raw`\mathbb{R}`),
+        " の等式）を得る。",
       ]),
     ],
     conversion: {
@@ -3820,10 +4234,13 @@ s_1^2c_2^2(s_2^*)^2
       notes: [
         "det_A_theta（008 章）の Step 0〜Step 6 と同じ計算である。θ_μ 固有の性質は使われておらず、" +
           "θ ∈ R の恒等式として成立することを本文で明示した。",
-        "数値検証: sagemath/check/048_claim_A_theta_tilde/check_04（残差 ≤ 1.4e-12）。",
+        "数値検証: sagemath/check/048_claim_A_theta_tilde/check_04（残差 ≤ 1.4e-12）。式変形の各行の厳密な検算は sagemath/check/det_A_theta_tilde/。",
         "2026-08-19 の式変形統一で、Step 3 の展開 2 式と Step 4 の鎖の先頭行に行末根拠を補い、" +
           "散文で畳まれていた γ_1(θ)^2 = 1 + r^2 の導出を主張の左辺から始まる三段の鎖へ開いた。内容・参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03: SageMath の検算（sagemath/check/det_A_theta_tilde/）を付けるときに証明を直した。Step 0〜Step 6 の散文のつなぎを、準備（像の読み方）と、−(−z) = z・ii = −1_C・e_+e_− = 1_C・u^2 + v^2 = 1_C・γ_2(θ)・γ_2(−θ)・(a_0 − iv)(a_0 + iv)・γ_2(θ)γ_2(−θ)・三つの双曲線の関係の鎖と、主張の左辺から始まる四本の鎖に組み直した。" +
+          "e_+e_− = 1 の根拠を行列の theorem_exp_product（n=1）・theorem_exp_zero から scalar_exp_product・scalar_exp_zero に、u^2 + v^2 = 1 を根拠の無い前提から euler_formula_cos_sin による u + iv = e_+ と exp_of_negative_i_real_as_cos_minus_i_sin の鎖に（商は乗法の逆元との積として準備に置いた）、γ_2(−θ) の表示を根拠の無い代入から def_gamma1_gamma2_of_theta と def_A_theta の (2,1) 成分の比較に直し、一行に束ねていた並べ替え・相殺・くくり出しを一操作ずつに分けた。" +
+          "第 3・第 4 の等式は ℂ の中で示してから inclusion_rr_to_cc の対の第 1 成分で ℝ の等式に戻した。主張に、どの等式が ℂ と ℝ のどちらのものかを書いた（中身は不変）。",
       ],
     },
   },
