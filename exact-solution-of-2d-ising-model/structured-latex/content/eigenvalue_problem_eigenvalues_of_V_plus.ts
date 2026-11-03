@@ -762,23 +762,59 @@ G^\top
       ]),
       paragraph([
         math(String.raw`G`),
-        " について。",
-        math(String.raw`\sigma^y = \begin{pmatrix}0&-i\\i&0\end{pmatrix}`),
-        " は純虚数の成分を持つ（",
-        ref("pauli_matrix_products"),
-        "）。クロネッカー積（",
-        ref("def_kronecker"),
-        "）の成分は各因子の成分の積である。",
-        math(String.raw`G`),
-        " では ",
-        math(String.raw`\sigma^y`),
-        " が **2 個**（第 1 因子と第 ",
-        math(String.raw`M_{\mathrm{col}}`),
-        " 因子）、残りは ",
+        " について（",
+        math(String.raw`M_{\mathrm{col}} = 2`),
+        " のとき第 ",
+        math(String.raw`2`),
+        " から第 ",
+        math(String.raw`M_{\mathrm{col}}-1`),
+        " までの因子は無い）、",
+        ref("def_real_factor_of_pauli_y"),
+        " の ",
+        math(String.raw`R^y`),
+        " を用いて",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+G
+&= \sigma^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\sigma^{y}
+   \quad (\because \text{Step 2 の準備の } G \text{ の表示}) \\
+&= \left(iR^{y}\right)\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\left(iR^{y}\right)
+   \quad (\because \blkref{pauli_y_is_i_times_real_factor}\ \text{を第}\ 1\ \text{因子と第}\ M_{\mathrm{col}}\ \text{因子へ同時に適用}) \\
+&= i\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes\left(iR^{y}\right)\Bigr)
+   \quad (\because \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (M \to M_{\mathrm{col}},\ j \to 1,\ c \to i,\ A_1 \to R^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to iR^y)) \\
+&= i\Bigl(i\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)\Bigr)
+   \quad (\because \blkref{kronecker_multilinear}\ \text{の}\ r = 1\ \text{の場合}\ (M \to M_{\mathrm{col}},\ j \to M_{\mathrm{col}},\ c \to i,\ A_1 \to R^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to R^y)) \\
+&= (i\cdot i)\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
+   \quad \left(\because\ \blkref{scalar_multiple_is_associative}\ (m \to 2^{M_{\mathrm{col}}},\ n \to 2^{M_{\mathrm{col}}},\ a \to i,\ b \to i,\ A \to R^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes R^{y})\right) \\
+&= (-1_{\mathbb{C}})\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
+   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= (-1)_{\mathbb{C}}\Bigl(R^{y}\boxtimes \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M_{\mathrm{col}}-2}\boxtimes R^{y}\Bigr)
+   \quad (\because \blkref{inclusion_rr_to_cc} \text{ の略記 } -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1))
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。因子 ",
+        math(String.raw`R^y`),
+        " の成分はすべて実数（",
+        ref("real_factor_of_pauli_y_has_real_entries"),
+        "）、因子 ",
         math(String.raw`\sigma^x`),
-        " である。純虚数成分の因子がちょうど 2 個なので、成分の積に現れる虚数単位は ",
-        math(String.raw`i^2 = -1`),
-        " の形でまとまり、成分はすべて実数。",
+        " の成分もすべて実数（",
+        ref("pauli_x_has_real_entries"),
+        "）なので、",
+        ref("kronecker_of_real_entry_matrices_has_real_entries"),
+        "（",
+        math(String.raw`M \to M_{\mathrm{col}},\ A_1 \to R^y,\ A_k \to \sigma^x\ (2 \leq k \leq M_{\mathrm{col}}-1),\ A_{M_{\mathrm{col}}} \to R^y`),
+        "）より ",
+        math(String.raw`R^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes R^{y}`),
+        " の成分はすべて実数である。",
+        ref("real_scalar_multiple_of_real_entry_matrix_has_real_entries"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ c \to -1,\ B \to R^{y}\boxtimes\sigma^x\boxtimes\cdots\boxtimes\sigma^x\boxtimes R^{y}`),
+        "）と上の鎖より、",
+        math(String.raw`G`),
+        " の成分はすべて実数である。",
       ]),
       paragraph([
         math(String.raw`K_1, K_2^* \in \mathbb{R}`),
@@ -807,6 +843,7 @@ G^\top
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の冒頭が σ^x・σ^z の対称性と σ^y の交代性（(σ^y)^⊤ = -σ^y）を根拠なしに述べ、因子の I が転置で変わらないことも使っていたので、新しい主張 transpose_of_pauli_x・transpose_of_pauli_z・transpose_of_pauli_y・transpose_of_identity_matrix_of_order_two（006_Z_Y_anticommutation.ts）を引く形にした。成分が実・純虚数であることの根拠を pauli_matrix_products にした。Step 3 の残り（因子ごとの転置からの σ_m^x・σ_m^zσ_{m+1}^z・G の転置、成分の実性、実係数の和）は散文のままである。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 が σ_m^x・σ_m^zσ_{m+1}^z・G の転置を「転置で不変」「転置は (-1)^2 = 1 倍なので G^⊤ = G」と名前だけで述べ、kronecker_transpose を言い直した式を (∵ クロネッカー積の転置) で置いていたのを、3 つの鎖に替えた。σ_m^x は def_site_pauli_matrices・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_x・def_site_pauli_matrices の 5 行、σ_m^zσ_{m+1}^z は Step 2 の準備の表示・kronecker_transpose・transpose_of_identity_matrix_of_order_two・transpose_of_pauli_z・準備の表示の 5 行、G は Step 2 の準備の表示・kronecker_transpose・transpose_of_pauli_x・transpose_of_pauli_y・negation_is_scalar_multiple_by_minus_one・kronecker_multilinear 2 回・scalar_multiple_is_associative・(-1)(-1) = 1・scalar_multiple_by_one・準備の表示の 11 行。成分の実性の段（箇条書き）は転置の記述を外しただけで変えていない（主張は不変）。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の成分の実性の箇条書きのうち σ_m^x・σ_m^zσ_{m+1}^z の 2 項目（「σ^x が 1 個、他は I。成分は実」「σ^z が 2 個、他は I。成分は実」）を、def_site_pauli_matrices・Step 2 の準備の表示で因子を並べ、新しい主張 identity_matrix_of_order_two_has_real_entries・pauli_x_has_real_entries・pauli_z_has_real_entries（006_Z_Y_anticommutation.ts）と kronecker_of_real_entry_matrices_has_real_entries を引く 2 段落に替えた。G の段は σ^y の成分の記述をそこへ移して段落にしただけで、論証は変えていない（G の成分の実性の鎖は別に扱う）。主張は変えていない。",
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 3 の G の成分の実性の段落が「純虚数成分の因子 σ^y がちょうど 2 個なので、成分の積に現れる虚数単位は i^2 = -1 の形でまとまり、成分はすべて実数」と名前だけで述べていたのを、新しい定義 def_real_factor_of_pauli_y と主張 pauli_y_is_i_times_real_factor・real_factor_of_pauli_y_has_real_entries（006_Z_Y_anticommutation.ts）、real_scalar_multiple_of_real_entry_matrix_has_real_entries（002_linear_space_general.ts）を引く形にした。鎖は Step 2 の準備の G の表示・pauli_y_is_i_times_real_factor・kronecker_multilinear 2 回・scalar_multiple_is_associative・i·i = -1・inclusion_rr_to_cc の略記の 7 行で G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y) とし、続く段落で kronecker_of_real_entry_matrices_has_real_entries と real_scalar_multiple_of_real_entry_matrix_has_real_entries を引く。主張は変えていない。",
       ],
     },
   },

@@ -239,3 +239,8 @@ ALL PASS
   48 個の行列（σ_m^x と σ_m^zσ_{m+1}^z、M_col = 2..7）の全成分が ι(r) の形（QQ[i] の厳密計算）
   否定コントロール 6 件: σ_1^y は虚部 0 でない成分を持つ
 RESULT: PASS
+##### 2026-11-03 に check_43_iH_real_symmetric_step3_G_real_entries を足した（iH_is_real_symmetric Step 3 の G の成分の実性の 7 行の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_43_iH_real_symmetric_step3_G_real_entries.sage
+  42 段（M_col = 2..7 の 7 行の鎖）と、G・R^y⊠σ^x⊠⋯⊠σ^x⊠R^y の全成分の虚部 0（QQ[i] の厳密計算）
+  否定コントロール 6 件: σ^y を 1 個だけ含む並びは虚部 0 でない成分を持つ
+RESULT: PASS

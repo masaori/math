@@ -5,7 +5,7 @@
 （`eigenvalues_of_V_014_claim_iH_is_real_symmetric`、ラベル **`iH_is_real_symmetric`**）
 
 人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
-Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性のうち `σ^x_m`・`σ^z_mσ^z_{m+1}` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`）もこのファイルが持つ。
+Step 3 の転置の 3 本の鎖（`(σ^x_m)^⊤ = σ^x_m`・`(σ^z_mσ^z_{m+1})^⊤ = σ^z_mσ^z_{m+1}`・`G^⊤ = G`）と、Step 3 の成分の実性の `σ^x_m`・`σ^z_mσ^z_{m+1}`・`G` の段落（`sigmaX_hasRealEntries`・`sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries`・`boundaryYXY_eq_neg_one_smul_real`・`boundaryYXY_hasRealEntries`）もこのファイルが持つ。
 Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対称）は、いまはこれらの鎖を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
@@ -28,6 +28,8 @@ Step 3 の結論（`S_1^{(+)}`・`S_2` の成分が実で転置について対�
 | Step 3 の `G^⊤ = G` の 11 行（Step 2 の準備の `G` の表示 → `kronecker_transpose` → `transpose_of_pauli_x` → `transpose_of_pauli_y` → `negation_is_scalar_multiple_by_minus_one` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → `(-1)(-1) = 1` → `scalar_multiple_by_one` → 準備の表示） | `boundaryYXY_transpose` の `calc` の 11 段（準備の `G` の表示の `ite` の形は `boundaryYXYFamily_eq_ite`） |
 | Step 3 の `σ^x_m` の成分の実性（`def_site_pauli_matrices` の表示 → `identity_matrix_of_order_two_has_real_entries`・`pauli_x_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries`） | `sigmaX_hasRealEntries`（`M = n + 1`） |
 | Step 3 の `σ^z_mσ^z_{m+1}` の成分の実性（Step 2 の準備の表示 → `identity_matrix_of_order_two_has_real_entries`・`pauli_z_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries`） | `sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries` |
+| Step 3 の `G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y)` の 7 行（Step 2 の準備の `G` の表示 → `pauli_y_is_i_times_real_factor` → `kronecker_multilinear` 2 回 → `scalar_multiple_is_associative` → ℂ で `i·i = -1` → `inclusion_rr_to_cc` の略記） | `boundaryYXY_eq_neg_one_smul_real` の `calc` の 7 段 |
+| Step 3 の `G` の成分の実性（`real_factor_of_pauli_y_has_real_entries`・`pauli_x_has_real_entries` → `kronecker_of_real_entry_matrices_has_real_entries` → `real_scalar_multiple_of_real_entry_matrix_has_real_entries` と上の鎖） | `boundaryYXY_hasRealEntries` |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 
 - 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
@@ -49,6 +51,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimNegationIsScalarMultipleByMinusOne
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerTranspose
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimKroneckerOfRealEntryMatricesHasRealEntries
+import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealScalarMultipleOfRealEntryMatrixHasRealEntries
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimPauliMatricesHaveRealEntries
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 
@@ -514,5 +517,70 @@ theorem boundaryYXY_transpose (r : ℕ) :
       one_smul_tensorPow _                              -- `scalar_multiple_by_one`（`TensorPow` の系 `one_smul_tensorPow`）
     _ = siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by
       rw [boundaryYXYFamily_eq_ite]                     -- Step 2 の準備の `G` の表示
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `G` の成分の実性の 7 行の鎖**（`M_col = r + 2 ≥ 2`）:
+`G = σ^y⊠σ^x⊠⋯⊠σ^x⊠σ^y = (iR^y)⊠σ^x⊠⋯⊠σ^x⊠(iR^y) = ⋯ = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y)`。
+人手の第 `1` 因子は Lean の `i = 0`、第 `M_col` 因子は `i = Fin.last (r + 1)`、第 `2` から第 `M_col-1` 因子はそれ以外である。 -/
+theorem boundaryYXY_eq_neg_one_smul_real (r : ℕ) :
+    siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega))
+      = ((-1 : ℝ) : ℂ) • siteProd (r + 2) (fun i : Fin (r + 2) =>
+          if i = 0 then pauliYReal else if i = Fin.last (r + 1) then pauliYReal else pauliX) := by
+  have h0l : (0 : Fin (r + 2)) ≠ Fin.last (r + 1) := Fin.ne_of_val_ne (by simp)
+  -- 因子の並び `A⊠σ^x⊠⋯⊠σ^x⊠B`（第 `1` 因子 `A`、第 `M_col` 因子 `B`）。`boundaryYXY_transpose` と同じ書き方
+  let F : Matrix (Fin 2) (Fin 2) ℂ → Matrix (Fin 2) (Fin 2) ℂ → Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ :=
+    fun A B i => if i = 0 then A else if i = Fin.last (r + 1) then B else pauliX
+  have hupd0 : ∀ A A' B, F A B = Function.update (F A' B) 0 A := by
+    intro A A' B
+    funext i
+    by_cases h0 : i = 0
+    · rw [h0, Function.update_self]; simp only [F, if_pos rfl]
+    · rw [Function.update_of_ne h0]; simp only [F, if_neg h0]
+  have hupdl : ∀ A B B', F A B = Function.update (F A B') (Fin.last (r + 1)) B := by
+    intro A B B'
+    funext i
+    by_cases hl : i = Fin.last (r + 1)
+    · rw [hl, Function.update_self]; simp only [F, if_neg h0l.symm, ↓reduceIte]
+    · rw [Function.update_of_ne hl]; simp only [F, if_neg hl]
+  calc
+    siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega))
+        = siteProd (r + 2) (F pauliY pauliY) := by
+      rw [boundaryYXYFamily_eq_ite]                     -- Step 2 の準備の `G` の表示
+    _ = siteProd (r + 2) (F (Complex.I • pauliYReal) (Complex.I • pauliYReal)) := by
+      rw [pauliY_eq_I_smul_pauliYReal]                  -- `pauli_y_is_i_times_real_factor`（第 `1` 因子と第 `M_col` 因子へ同時に適用）
+    _ = Complex.I • siteProd (r + 2) (F pauliYReal (Complex.I • pauliYReal)) := by
+      rw [hupd0 (Complex.I • pauliYReal) pauliYReal (Complex.I • pauliYReal)]
+      conv_rhs => rw [hupd0 pauliYReal pauliYReal (Complex.I • pauliYReal)]
+      exact (siteProd (r + 2)).map_update_smul _ 0 Complex.I pauliYReal
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → 1`, `c → i`, `A_1 → R^y`, `A_k → σ^x`, `A_{M_col} → iR^y`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回（`boundaryYXY_transpose` と同じ）
+    _ = Complex.I • (Complex.I • siteProd (r + 2) (F pauliYReal pauliYReal)) := by
+      rw [hupdl pauliYReal (Complex.I • pauliYReal) pauliYReal]
+      conv_rhs => rw [hupdl pauliYReal pauliYReal pauliYReal]
+      congr 1
+      exact (siteProd (r + 2)).map_update_smul _ (Fin.last (r + 1)) Complex.I pauliYReal
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → M_col`, `c → i`, `A_1 → R^y`, `A_k → σ^x`, `A_{M_col} → R^y`）。同上
+    _ = (Complex.I * Complex.I) • siteProd (r + 2) (F pauliYReal pauliYReal) :=
+      smul_smul _ _ _                                   -- `scalar_multiple_is_associative`（`a, b → i`。Lean の具体版は無く、mathlib の `smul_smul`）
+    _ = (-1 : ℂ) • siteProd (r + 2) (F pauliYReal pauliYReal) := by
+      rw [Complex.I_mul_I]                              -- ℂ で `i·i = -1`（`definition_of_cc` の積）
+    _ = ((-1 : ℝ) : ℂ) • siteProd (r + 2) (F pauliYReal pauliYReal) := by
+      rw [Complex.ofReal_neg, Complex.ofReal_one]       -- `inclusion_rr_to_cc` の略記 `-1_ℂ = ι(-1)`
+
+/-- **人手 `iH_is_real_symmetric` Step 3 の `G` の成分の実性**（`M_col = r + 2 ≥ 2`）:
+因子 `R^y`・`σ^x` の成分はすべて実数なので `kronecker_of_real_entry_matrices_has_real_entries` より `R^y⊠σ^x⊠⋯⊠σ^x⊠R^y` の成分はすべて実数、
+`real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`c → -1`）と `boundaryYXY_eq_neg_one_smul_real` より `G` の成分はすべて実数。 -/
+theorem boundaryYXY_hasRealEntries (r : ℕ) :
+    MatrixHasRealEntries (siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega))) := by
+  rw [boundaryYXY_eq_neg_one_smul_real]                 -- 上の鎖
+  refine real_smul_hasRealEntries (-1) _ ?_             -- `real_scalar_multiple_of_real_entry_matrix_has_real_entries`（`m, n → 2^{M_col}`, `c → -1`）
+  refine siteProd_hasRealEntries _ fun k => ?_          -- `kronecker_of_real_entry_matrices_has_real_entries`（`M → M_col`, `A_1, A_{M_col} → R^y`, `A_k → σ^x`（`2 ≤ k ≤ M_col-1`））
+  by_cases h0 : k = 0
+  · rw [if_pos h0]
+    exact pauliYReal_hasRealEntries                     -- `real_factor_of_pauli_y_has_real_entries`（第 `1` 因子）
+  · rw [if_neg h0]
+    by_cases hl : k = Fin.last (r + 1)
+    · rw [if_pos hl]
+      exact pauliYReal_hasRealEntries                   -- `real_factor_of_pauli_y_has_real_entries`（第 `M_col` 因子）
+    · rw [if_neg hl]
+      exact pauliX_hasRealEntries                       -- `pauli_x_has_real_entries`（第 `2` から第 `M_col-1` 因子）
 
 end Ising2D

@@ -4879,6 +4879,73 @@ G(X - W)
     },
   },
   {
+    id: "linear_space_general_claim_real_scalar_multiple_of_real_entry_matrix_has_real_entries",
+    kind: "claim",
+    title: { text: "成分がすべて実数の行列の実数倍は成分がすべて実数" },
+    labels: ["real_scalar_multiple_of_real_entry_matrix_has_real_entries"],
+    statement: [
+      paragraph([
+        math(String.raw`m,n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{R}`),
+        " とし、",
+        math(String.raw`B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        " の成分がすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        "）とする。このとき ",
+        math(String.raw`c_{\mathbb{C}}B \in \mathrm{Mat}(m,n,\mathbb{C})`),
+        "（",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍。",
+        math(String.raw`c_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記）の成分もすべて実数である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`p \in \{1,\dots,m\}`),
+        "、",
+        math(String.raw`q \in \{1,\dots,n\}`),
+        " を任意に取る。仮定（",
+        ref("def_matrix_with_real_entries"),
+        "）から ",
+        math(String.raw`B_{pq} = s_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`s \in \mathbb{R}`),
+        " がある。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(c_{\mathbb{C}}B)_{pq}
+&= c_{\mathbb{C}}\,B_{pq}
+&&(\because \blkref{def_matrix_scalar_multiple}\ (a \to c_{\mathbb{C}},\ A \to B,\ i \to p,\ j \to q)) \\
+&= c_{\mathbb{C}}\,s_{\mathbb{C}}
+&&(\because s \text{ の取り方}) \\
+&= (cs)_{\mathbb{C}}
+&&(\because \blkref{real_inclusion_preserves_product}\ (a \to c,\ b \to s))
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`r := cs \in \mathbb{R}`),
+        " と取れば ",
+        math(String.raw`(c_{\mathbb{C}}B)_{pq} = r_{\mathbb{C}}`),
+        " であり、",
+        math(String.raw`p, q`),
+        " は任意なので ",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の G の成分の実性の鎖が、G = (-1)_ℂ(R^y⊠σ^x⊠⋯⊠σ^x⊠R^y) から G の成分が実であることを引くために足した。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_001_theorem_tensor_product_basis",
     kind: "theorem",
     origin: { path: "_old/typst/parts/002_線型空間の一般論/000_theorem_テンソル積の基底は基底のテンソル積.typ", ordinal: 1 },

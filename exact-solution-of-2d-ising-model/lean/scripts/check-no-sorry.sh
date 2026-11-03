@@ -1327,12 +1327,20 @@ targets=(
   Ising2D.boundaryYXY_transpose
   Ising2D.sigmaX_hasRealEntries
   Ising2D.sigmaZ_castSucc_mul_sigmaZ_succ_hasRealEntries
+  Ising2D.boundaryYXY_eq_neg_one_smul_real
+  Ising2D.boundaryYXY_hasRealEntries
   Ising2D.identity_matrix_two_eq_ofReal
   Ising2D.identity_matrix_two_hasRealEntries
   Ising2D.pauliX_eq_ofReal
   Ising2D.pauliX_hasRealEntries
   Ising2D.pauliZ_eq_ofReal
   Ising2D.pauliZ_hasRealEntries
+  Ising2D.pauliY_eq_I_smul_pauliYReal
+  Ising2D.pauliYReal_eq_ofReal
+  Ising2D.pauliYReal_hasRealEntries
+  Ising2D.real_smul_hasRealEntries
+  Ising2D.real_smul_hasRealEntries_of_necSuf
+  Ising2D.NecSuf.smul_entries_mem
   Ising2D.epsilon_hasRealEntries
   Ising2D.neg_I_mul_I
   Ising2D.I_mul_neg_I

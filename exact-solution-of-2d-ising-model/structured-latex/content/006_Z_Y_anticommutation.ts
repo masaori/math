@@ -577,6 +577,141 @@ I
     },
   },
   {
+    id: "Z_Y_anticommutation_definition_real_factor_of_pauli_y",
+    kind: "definition",
+    title: { tex: String.raw`\sigma^y \text{ の実の因子 } R^y` },
+    labels: ["def_real_factor_of_pauli_y"],
+    statement: [
+      paragraph([
+        math(String.raw`R^y \in \mathrm{Mat}(2,\mathbb{C})`),
+        " を",
+      ]),
+      displayMath(String.raw`R^y := \begin{pmatrix}0_{\mathbb{C}}&-1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}`),
+      paragraph(["で定める。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「G の成分は、純虚数成分の因子 σ^y が 2 個なので i^2 = -1 の形でまとまり実数」を名前だけで述べていたので、σ^y を i と成分が実数の行列の積に書くために置いた。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_pauli_y_is_i_times_real_factor",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^y = i R^y` },
+    labels: ["pauli_y_is_i_times_real_factor"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
+        " と ",
+        ref("def_real_factor_of_pauli_y"),
+        " の ",
+        math(String.raw`R^y`),
+        " について、",
+        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
+        "（",
+        ref("definition_of_cc"),
+        " の台集合の元、虚数単位）とすると",
+      ]),
+      displayMath(String.raw`\sigma^y = i R^y`),
+      paragraph([
+        "が成り立つ。右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y
+&= \begin{pmatrix}0_{\mathbb{C}}&-i\\i&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&(-1_{\mathbb{C}})\cdot i\\i&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{multiply_by_minus_one}\ (z \to i)) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&i\cdot(-1_{\mathbb{C}})\\i&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \text{積の可換律}\ ((-1_{\mathbb{C}})\cdot i = i\cdot(-1_{\mathbb{C}}))\text{。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}0_{\mathbb{C}}&i\cdot(-1_{\mathbb{C}})\\i\cdot 1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because 1_{\mathbb{C}}\ \text{は積の単位元}\ (i = i\cdot 1_{\mathbb{C}})\text{。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}i\cdot 0_{\mathbb{C}}&i\cdot(-1_{\mathbb{C}})\\i\cdot 1_{\mathbb{C}}&i\cdot 0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}\ (z \to i)\ \text{を}\ (1,1)\ \text{成分と}\ (2,2)\ \text{成分へ同時に適用}) \\
+&= i\begin{pmatrix}0_{\mathbb{C}}&-1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{def_matrix_scalar_multiple}\ (m, n \to 2,\ a \to i)) \\
+&= i R^y
+&&(\because \blkref{def_real_factor_of_pauli_y})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の G の成分の実性の鎖で、第 1 因子と第 M_col 因子の σ^y から i を前へ出すために足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_real_factor_of_pauli_y_has_real_entries",
+    kind: "claim",
+    title: { tex: String.raw`R^y \text{ の成分はすべて実数}` },
+    labels: ["real_factor_of_pauli_y_has_real_entries"],
+    statement: [
+      paragraph([
+        ref("def_real_factor_of_pauli_y"),
+        " の ",
+        math(String.raw`R^y \in \mathrm{Mat}(2,\mathbb{C})`),
+        " の成分はすべて実数（",
+        ref("def_matrix_with_real_entries"),
+        " で ",
+        math(String.raw`m = n = 2`),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+R^y
+&= \begin{pmatrix}0_{\mathbb{C}}&-1_{\mathbb{C}}\\1_{\mathbb{C}}&0_{\mathbb{C}}\end{pmatrix}
+&&(\because \blkref{def_real_factor_of_pauli_y}) \\
+&= \begin{pmatrix}\iota_{\mathbb{R}\to\mathbb{C}}(0)&\iota_{\mathbb{R}\to\mathbb{C}}(-1)\\\iota_{\mathbb{R}\to\mathbb{C}}(1)&\iota_{\mathbb{R}\to\mathbb{C}}(0)\end{pmatrix}
+&&(\because \blkref{inclusion_rr_to_cc} \text{ の略記 } 0_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(0),\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1),\ 1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(1) \text{ を各成分へ同時に適用})
+\end{aligned}`,
+      ),
+      paragraph([
+        "したがって各成分 ",
+        math(String.raw`(R^y)_{pq}`),
+        "（",
+        math(String.raw`p, q \in \{1, 2\}`),
+        "）について ",
+        math(String.raw`r := 0`),
+        "（",
+        math(String.raw`p = q`),
+        "）、",
+        math(String.raw`r := -1`),
+        "（",
+        math(String.raw`(p, q) = (1, 2)`),
+        "）、",
+        math(String.raw`r := 1`),
+        "（",
+        math(String.raw`(p, q) = (2, 1)`),
+        "）と取れば ",
+        math(String.raw`(R^y)_{pq} = r_{\mathbb{C}}`),
+        "、",
+        math(String.raw`r \in \mathbb{R}`),
+        " であり、",
+        ref("def_matrix_with_real_entries"),
+        " の条件が成り立つ。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 の G の成分の実性の鎖で、i を前へ出した後の因子 R^y の成分が実であることを引くために足した（pauli_z_has_real_entries と同じ形）。",
+      ],
+    },
+  },
+  {
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },
