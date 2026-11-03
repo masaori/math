@@ -18,6 +18,11 @@ def ConnectedBy {α : Type*} (adj : α → α → Prop) (S : Set α) : Prop :=
   ∀ ⦃x⦄, x ∈ S → ∀ ⦃y⦄, y ∈ S →
     Relation.ReflTransGen (fun a b => a ∈ S ∧ b ∈ S ∧ adj a b) x y
 
+/-- 有限個の訪問点に接する、指定された側のセルの集合。 -/
+def walkSideBand {ι α : Type*} (visits : Finset ι)
+    (interior : Set α) (touches : ι → α → Prop) : Set α :=
+  {x | x ∈ interior ∧ ∃ i ∈ visits, touches i x}
+
 /-- 有限鎖をなす非空な連結集合の合併は非空で連結である。 -/
 theorem finite_chain_union_connected_necSuf
     {α : Type*} (adj : α → α → Prop)

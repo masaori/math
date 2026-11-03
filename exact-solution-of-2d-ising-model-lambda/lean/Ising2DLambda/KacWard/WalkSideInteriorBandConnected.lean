@@ -7,6 +7,8 @@
 隣り合う二頂点が共有する内側セルで順につなぐ。
 -/
 import Ising2DLambda.KacWard.OddRayInteriorCellsBounded
+import Ising2DLambda.KacWard.OddRayInteriorCells
+import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.KacWard.VertexSurroundingCellsParityArcs
 import Ising2DLambda.NecSuf.KacWard.WalkSideInteriorBandConnected
 import Mathlib.Tactic
@@ -56,6 +58,35 @@ def surroundingInteriorCells
 def walkSideInteriorBand
     (n : ℕ) (row col : ℕ → ℤ) : Set (ℤ × ℤ) :=
   {p | ∃ k < n, p ∈ surroundingInteriorCells n row col k}
+
+/-- 実際の閉歩道の平面持ち上げから定める歩道沿いの内側帯。 -/
+def walkSideInteriorBandFromWalk {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) : Set (ℤ × ℤ) :=
+  {p | p ∈ oddRayInteriorCellsOfWalk γ hγ hh hv ∧
+    ∃ k : Fin (m + 1),
+      let P := planeLift γ k.castSucc
+      p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
+      p = P ∨ p = (P.1, P.2 - 1)}
+
+theorem walkSideInteriorBandFromWalk_from_necSuf {L m : ℕ}
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (hγ : closedNonbacktrackingWalk γ)
+    (hh : horizontalDirectedWindingNumber γ = 0)
+    (hv : verticalDirectedWindingNumber γ = 0) :
+    walkSideInteriorBandFromWalk γ hγ hh hv =
+      Ising2DLambda.NecSuf.KacWard.walkSideBand Finset.univ
+        (oddRayInteriorCellsOfWalk γ hγ hh hv)
+        (fun (k : Fin (m + 1)) (p : ℤ × ℤ) =>
+          let P := planeLift γ k.castSucc
+          p = (P.1 - 1, P.2 - 1) ∨ p = (P.1 - 1, P.2) ∨
+          p = P ∨ p = (P.1, P.2 - 1)) := by
+  ext p
+  simp only [walkSideInteriorBandFromWalk,
+    Ising2DLambda.NecSuf.KacWard.walkSideBand, Finset.mem_univ,
+    true_and, Set.mem_setOf_eq]
 
 theorem cellEdgeAdjacent_symmetric :
     ∀ ⦃p q⦄, CellEdgeAdjacent p q → CellEdgeAdjacent q p := by
