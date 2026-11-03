@@ -436,6 +436,13 @@ targets=(
   Ising2D.trace_of_idempotent
   Ising2D.isCompl_range_ker_of_idempotent
   Ising2D.trace_one_tensorPow
+  Ising2D.trace_add_matrix
+  Ising2D.trace_binaryWordMatrixSum
+  Ising2D.trace_binaryWordMatrixSum_of_necSuf
+  Ising2D.trace_of_scalar_multiple
+  Ising2D.trace_add_tensorPow
+  Ising2D.trace_smul_tensorPow
+  Ising2D.trace_binWordSum_tensorPow
   Ising2D.Z_transpose
   Ising2D.Z_conjTranspose
   Ising2D.Y_conjTranspose
@@ -1231,6 +1238,7 @@ targets=(
   "Ising2D.NecSuf.finProdLeft_eq_omitting_mul"
   Ising2D.binaryWordMatrixSum_mul
   Ising2D.binaryWordMatrixSum_eq_binWordSum
+  Ising2D.binaryWordComplexSum_eq_binWordSum
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
   Ising2D.binWordSum_mul_tensorPow
   Ising2D.binWordSum_mul_colVec
@@ -1935,6 +1943,8 @@ targets=(
   Ising2D.CheckFermiSetup.Vprime_mul_Qproj_of_necSuf
   Ising2D.CheckFermiSetup.Qproj_mul_Vprime_of_necSuf
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
+  Ising2D.CheckFermiSetup.trace_Vprime_step1
+  Ising2D.CheckFermiSetup.trace_Vprime_eq_finset_sum_of_mathlib
   Ising2D.CheckFermiSetup.trace_Vprime
   Ising2D.CheckFermiSetup.trace_Vprime_inv
   Ising2D.CheckFermiSetup.trace_Vprime_pos

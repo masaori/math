@@ -1,7 +1,7 @@
 /-
 # `{0,1}^r` の上の行列の和と、右または左から行列を掛けることとの分配（**具体版**）
 
-対応する人手証明のラベル: `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`・
+対応する人手証明のラベル: `def_sum_over_binary_words`・`def_sum_over_binary_words_of_complex_numbers`・`sum_over_binary_words_distributes_in_left_factor`・
 `sum_over_binary_words_distributes_in_right_factor`・`sum_over_binary_words_with_one_nonzero_term`
 （`structured-latex/content/002_linear_space_general.ts` の `linear_space_general_definition_sum_over_binary_words`・
 `linear_space_general_claim_sum_over_binary_words_distributes_in_left_factor`・
@@ -15,6 +15,8 @@
 * 人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。人手の `{0,1}^r` は Lean の `Fin (r + 1) → Fin 2` で、人手の `ε_j` が Lean の `ε (j - 1)` である。
   人手の `(ε', e)` は `Fin.snoc ε' e` である。
 * 定義の 2 つの式は `binaryWordMatrixSum` の 2 つの節で、`binaryWordMatrixSum_zero`・`binaryWordMatrixSum_succ` として引く。
+  複素数の和 `def_sum_over_binary_words_of_complex_numbers` も同じ 2 つの節の `binaryWordComplexSum` で、
+  `binaryWordComplexSum_zero`・`binaryWordComplexSum_succ` として引く。
 * `sum_over_binary_words_distributes_in_left_factor` の帰納法の 2 つの鎖（`r = 1` の 3 行、`r → r + 1` の 4 行）は、
   `binaryWordMatrixSum_mul` の 2 つの節の `calc` と 1 対 1 である。`mat_mult_distributes_over_sum_in_left_factor` は具体版 `add_mul_matrix` である。
 * `sum_over_binary_words_distributes_in_right_factor` の帰納法の 2 つの鎖（`r = 1` の 3 行、`r → r + 1` の 4 行）は、
@@ -46,6 +48,23 @@ theorem binaryWordMatrixSum_succ {m n : ℕ} (r : ℕ) (B : (Fin (r + 2) → Fin
     binaryWordMatrixSum (r + 1) B
       = binaryWordMatrixSum r
           (fun ε' => B (Fin.snoc (α := fun _ => Fin 2) ε' 1) + B (Fin.snoc (α := fun _ => Fin 2) ε' 0)) := rfl
+
+/-- **`def_sum_over_binary_words_of_complex_numbers`**: `{0,1}^{r+1}` で添字付けられた複素数の和
+（足す順序は `binaryWordMatrixSum` と同じ。人手の `r` は Lean の `r + 1`）。 -/
+def binaryWordComplexSum : (r : ℕ) → ((Fin (r + 1) → Fin 2) → ℂ) → ℂ
+  | 0, z => z (fun _ => 1) + z (fun _ => 0)
+  | r + 1, z => binaryWordComplexSum r (fun ε' => z (Fin.snoc (α := fun _ => Fin 2) ε' 1) + z (Fin.snoc (α := fun _ => Fin 2) ε' 0))
+
+/-- `def_sum_over_binary_words_of_complex_numbers` の 1 つ目の式: `Σ_{ε∈{0,1}^1} z_ε := z_{(1)} + z_{(0)}`。 -/
+theorem binaryWordComplexSum_zero (z : (Fin 1 → Fin 2) → ℂ) :
+    binaryWordComplexSum 0 z = z (fun _ => 1) + z (fun _ => 0) := rfl
+
+/-- `def_sum_over_binary_words_of_complex_numbers` の 2 つ目の式:
+`Σ_{ε∈{0,1}^{r+2}} z_ε := Σ_{ε'∈{0,1}^{r+1}} (z_{(ε',1)} + z_{(ε',0)})`（人手の `r` は Lean の `r + 1`）。 -/
+theorem binaryWordComplexSum_succ (r : ℕ) (z : (Fin (r + 2) → Fin 2) → ℂ) :
+    binaryWordComplexSum (r + 1) z
+      = binaryWordComplexSum r
+          (fun ε' => z (Fin.snoc (α := fun _ => Fin 2) ε' 1) + z (Fin.snoc (α := fun _ => Fin 2) ε' 0)) := rfl
 
 /-- **`sum_over_binary_words_distributes_in_left_factor`**: `(Σ_{ε∈{0,1}^r} X_ε) C = Σ_{ε∈{0,1}^r} X_ε C`（人手の `r` は Lean の `r + 1`）。 -/
 theorem binaryWordMatrixSum_mul {m n p : ℕ} :

@@ -275,3 +275,9 @@ checked steps: 4048
 negative controls (broken lines detected): 880
 negative controls (Z counterexample): 1
 RESULT: PASS
+
+##### 2026-11-03 に check_trace_of_check_Vprime_step1_chain を足した（trace_of_check_Vprime の Step 1: tr(V̌') から Σ_ε (exp ǧ(ε))_C までの 8 行の鎖）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_trace_of_check_Vprime_step1_chain.sage
+checked 24 lines
+negative controls: 3
+RESULT: PASS

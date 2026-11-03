@@ -4137,24 +4137,40 @@ E_K \check{Q}_\epsilon
     proof: [
       paragraph([
         "Step 1（トレースの計算）。",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2)(4) と ",
-        ref("eigenvalues_of_check_Vprime"),
-        "、および ",
-        ref("trace_basic_properties"),
-        " (1) より",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の上の行列の和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}`),
+        "）、複素数の和は ",
+        ref("def_sum_over_binary_words_of_complex_numbers"),
+        "（",
+        math(String.raw`r \to M_{\mathrm{col}}`),
+        "）による（",
+        ref("def_check_index_set"),
+        " により ",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
+        "）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\check{V}'\right)
-&= \mathrm{tr}\!\left(\check{V}'\sum_{\epsilon}\check{Q}_\epsilon\right)
-   \quad (\because \textstyle\sum_\epsilon \check{Q}_\epsilon = I) \\
-&= \sum_{\epsilon} \mathrm{tr}\!\left(\check{V}'\check{Q}_\epsilon\right)
-   \quad (\because \text{トレースの線型性}) \\
-&= \sum_{\epsilon} \exp(\check{g}(\epsilon))\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-   \quad (\because \check{V}'\check{Q}_\epsilon = \exp(\check{g}(\epsilon))\check{Q}_\epsilon) \\
-&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
-   \quad (\because \mathrm{tr}(\check{Q}_\epsilon) = 1)
+&= \mathrm{tr}\!\left(\check{V}'\,I\right)
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \check{V}')\ \text{を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\check{V}'\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(2) を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{V}'\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\ (m, n, p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ C \to \check{V}',\ X_\epsilon \to \check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\check{V}'\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_sum_over_binary_words}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ B_\epsilon \to \check{V}'\check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_scalar_multiple}\ (n \to 2^{M_{\mathrm{col}}},\ \alpha \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon)\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4249,6 +4265,7 @@ E_K \check{Q}_\epsilon
         "009 章の trace_of_Vprime の半整数運動量版。可逆性は def_check_Vprime (2) で既に示してあるので、009 章の Step 1（可逆性）は繰り返さない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_04（tr(V̌') = Π 2cosh(γ/2) の相対差 ≤ 3.8e-15、tr((V̌')^{-1}) = tr(V̌') の相対差 ≤ 2.5e-15）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step1_chain.sage。",
       ],
     },
   },

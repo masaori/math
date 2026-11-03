@@ -158,6 +158,137 @@ export default defineBlocks([
   },
 
   {
+    id: "eigenvalues_of_V_claim_trace_of_sum_over_binary_words",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和のトレース}` },
+    labels: ["trace_of_sum_over_binary_words"],
+    statement: [
+      paragraph([
+        math(String.raw`n, r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`B_\epsilon \in \mathrm{Mat}(n,\mathbb{C})`),
+        " とする。トレースは ",
+        ref("def_trace"),
+        "、左辺の行列の和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m, n \to n`),
+        "）、右辺の複素数の和は ",
+        ref("def_sum_over_binary_words_of_complex_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{tr}\Bigl(\sum_{\epsilon \in \{0,1\}^{r}} B_\epsilon\Bigr) = \sum_{\epsilon \in \{0,1\}^{r}} \mathrm{tr}\bigl(B_\epsilon\bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        "準備として、",
+        math(String.raw`A, B \in \mathrm{Mat}(n,\mathbb{C})`),
+        " について次の鎖を得る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(A + B)
+&= \mathrm{tr}\bigl(1_{\mathbb{C}}A + 1_{\mathbb{C}}B\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\ (m, n \to n)\ \text{を二つの項へ同時に右辺から左辺へ}\bigr)\\
+&= 1_{\mathbb{C}}\,\mathrm{tr}(A) + 1_{\mathbb{C}}\,\mathrm{tr}(B)
+&&\bigl(\because\ \blkref{trace_basic_properties}\ \text{(1)}\ (\alpha, \beta \to 1_{\mathbb{C}})\bigr)\\
+&= \mathrm{tr}(A) + \mathrm{tr}(B)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を二つの項へ同時に}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`\mathrm{Mat}(n,\mathbb{C})`),
+        " の元の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}\Bigl(\sum_{\epsilon \in \{0,1\}^{1}} B_\epsilon\Bigr)
+&= \mathrm{tr}\bigl(B_{(1)} + B_{(0)}\bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (m, n \to n)\bigr)\\
+&= \mathrm{tr}\bigl(B_{(1)}\bigr) + \mathrm{tr}\bigl(B_{(0)}\bigr)
+&&\bigl(\because\ \text{準備の鎖}\ (A \to B_{(1)},\ B \to B_{(0)})\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} \mathrm{tr}\bigl(B_\epsilon\bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\ (z_\epsilon \to \mathrm{tr}(B_\epsilon))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`B_\epsilon`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}\Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} B_\epsilon\Bigr)
+&= \mathrm{tr}\Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(B_{(\epsilon',1)} + B_{(\epsilon',0)}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ (m, n \to n)\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \mathrm{tr}\bigl(B_{(\epsilon',1)} + B_{(\epsilon',0)}\bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\ (B_{\epsilon'} \to B_{(\epsilon',1)} + B_{(\epsilon',0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\mathrm{tr}\bigl(B_{(\epsilon',1)}\bigr) + \mathrm{tr}\bigl(B_{(\epsilon',0)}\bigr)\Bigr)
+&&\bigl(\because\ \text{準備の鎖}\ (A \to B_{(\epsilon',1)},\ B \to B_{(\epsilon',0)})\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} \mathrm{tr}\bigl(B_\epsilon\bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\ (z_\epsilon \to \mathrm{tr}(B_\epsilon))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 1 が tr(Σ_ε V̌'Q̌_ε) = Σ_ε tr(V̌'Q̌_ε) を「トレースの線型性」と名前だけで根拠にしていたので足した。trace_basic_properties (1) は二項の和についての主張なので、{0,1}^r の上の和へ帰納法で広げる。Lean は具体版 Ising2D.trace_binWordSum（ClaimTraceOfSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+
+  {
+    id: "eigenvalues_of_V_claim_trace_of_scalar_multiple",
+    kind: "claim",
+    title: { text: "行列のスカラー倍のトレース" },
+    labels: ["trace_of_scalar_multiple"],
+    statement: [
+      paragraph([
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`A \in \mathrm{Mat}(n,\mathbb{C})`),
+        "、",
+        math(String.raw`\alpha \in \mathbb{C}`),
+        " とする。トレースは ",
+        ref("def_trace"),
+        "、行列のスカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\mathrm{tr}(\alpha A) = \alpha\,\mathrm{tr}(A)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+\mathrm{tr}(\alpha A)
+&= \mathrm{tr}(\alpha A + O)
+&&\bigl(\because\ \blkref{matrix_plus_zero_matrix}\ (m, n \to n,\ X \to \alpha A)\ \text{を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}(\alpha A + 0_{\mathbb{C}}A)
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\ (m, n \to n)\ \text{を右辺から左辺へ}\bigr)\\
+&= \alpha\,\mathrm{tr}(A) + 0_{\mathbb{C}}\,\mathrm{tr}(A)
+&&\bigl(\because\ \blkref{trace_basic_properties}\ \text{(1)}\ (\beta \to 0_{\mathbb{C}},\ B \to A)\bigr)\\
+&= \alpha\,\mathrm{tr}(A) + 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_zero_times_is_zero}\ (z \to \mathrm{tr}(A))\bigr)\\
+&= \alpha\,\mathrm{tr}(A)
+&&\bigl(\because\ 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 1 が tr(exp(ǧ(ε))Q̌_ε) = exp(ǧ(ε))tr(Q̌_ε) を根拠なしに使っていたので足した。trace_basic_properties (1) の β = 0_ℂ の場合として示す。Lean は具体版 Ising2D.trace_of_scalar_multiple（ClaimTraceOfSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+
+  {
     id: "eigenvalues_of_V_003_claim_trace_of_idempotent",
     kind: "claim",
     origin: { path: SRC, ordinal: 5 },
