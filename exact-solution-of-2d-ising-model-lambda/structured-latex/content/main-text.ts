@@ -60709,6 +60709,18 @@ B:=I_m\setminus A=\{r\in I_m:\ r\le k\}\cup\{r\in I_m:\ l<r\}`),
                       kind: "definition",
                       title: { text: "平滑化で分かれる二本の辺列" },
                       labels: ["def_smoothed_split_edge_sequences"],
+                      lean: [
+                        "Ising2DLambda.KacWard.smoothedSplitEdgeSequenceA",
+                        "Ising2DLambda.KacWard.smoothedSplitEdgeSequenceB",
+                        "Ising2DLambda.NecSuf.KacWard.smoothedSplitEdgeSequenceA",
+                        "Ising2DLambda.NecSuf.KacWard.smoothedSplitEdgeSequenceB",
+                        "Ising2DLambda.KacWard.smoothedSplitEdgeSequenceA_from_necSuf",
+                        "Ising2DLambda.KacWard.smoothedSplitEdgeSequenceB_from_necSuf",
+                        "Ising2DLambda.NecSuf.KacWard.smoothingIndexSequenceA_mem",
+                        "Ising2DLambda.NecSuf.KacWard.smoothingIndexSequenceB_mem",
+                        "Ising2DLambda.NecSuf.KacWard.smoothingIndexSequences_nonempty",
+                        "Ising2DLambda.KacWard.smoothedSplitEdgeSequences_nonempty",
+                      ],
                       habitat: "N",
                       statement: [
                         paragraph([
@@ -61427,8 +61439,15 @@ v(\gamma_{\mathrm c})
                   math(String.raw`\vec e_{\sigma(l)}=\vec e_k`),
                   " である。背理法の仮定と合わせると ",
                   math(String.raw`\vec e_k=\iota(\vec e_k)`), "、第 2 成分を読んで ",
-                  math(String.raw`d_k=1-d_k`), "、すなわち ",
-                  math(String.raw`2d_k=1`), " となるが、これは ",
+                ]),
+                displayMath(String.raw`\begin{aligned}
+d_k&=1-d_k
+&&\bigl(\because\ \vec e_k=\iota(\vec e_k)\text{ の第 2 成分と }\blkref{def_edge_reversal}\bigr)\\
+2d_k&=1
+&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                paragraph([
+                  "となるが、これは ",
                   math(String.raw`d_k\in\{0,1\}\subset\mathbb Z`),
                   " のどちらの値でも成り立たない（", math(String.raw`\mathbb Z`),
                   " の乗法で ", math(String.raw`2\cdot0=0\ne1`), "、",

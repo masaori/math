@@ -983,6 +983,8 @@ import Ising2DLambda.NecSuf.KacWard.SmoothedSuccessorMap
 import Ising2DLambda.KacWard.SmoothedSuccessorMap
 import Ising2DLambda.NecSuf.KacWard.SmoothingIndexBlocks
 import Ising2DLambda.KacWard.SmoothingIndexBlocks
+import Ising2DLambda.NecSuf.KacWard.SmoothedSplitEdgeSequences
+import Ising2DLambda.KacWard.SmoothedSplitEdgeSequences
 import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate
