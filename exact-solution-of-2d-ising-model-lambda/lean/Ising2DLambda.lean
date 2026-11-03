@@ -987,6 +987,8 @@ import Ising2DLambda.NecSuf.KacWard.SmoothedSplitEdgeSequences
 import Ising2DLambda.KacWard.SmoothedSplitEdgeSequences
 import Ising2DLambda.NecSuf.KacWard.SplitMutualCrossingNumber
 import Ising2DLambda.KacWard.SplitMutualCrossingNumber
+import Ising2DLambda.NecSuf.KacWard.ContactPairCount
+import Ising2DLambda.KacWard.ContactPairCount
 import Ising2DLambda.KacWard.SmoothingVertexCrossingNumber
 import Ising2DLambda.KacWard.SmoothingOtherVertexInvariance
 import Ising2DLambda.NecSuf.KacWard.SmoothingCrossingNumberUpdate

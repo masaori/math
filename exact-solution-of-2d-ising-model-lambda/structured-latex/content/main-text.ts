@@ -61632,6 +61632,11 @@ t_{\circ}(\gamma_A)+t_{\circ}(\gamma_B)-t_{\circ}(\gamma)
                   title: { text: "閉歩道の接触対の個数" },
                   labels: ["def_contact_pair_count"],
                   habitat: "N",
+                  lean: [
+                    "Ising2DLambda.KacWard.contactPairCount",
+                    "Ising2DLambda.NecSuf.KacWard.contactPairCount",
+                    "Ising2DLambda.KacWard.contactPairCount_from_necSuf",
+                  ],
                   statement: [
                     paragraph([
                       "閉じた非後退辺列 ",
@@ -61716,12 +61721,15 @@ S_{\times}:=S\setminus(S_A\cup S_B)`),
                   " は向き付き辺だけの関数である）。さらに接触の条件は二つの添字について対称なので、",
                   "接触対は添字の順序なし二元集合として数えられる。したがって ",
                   math(String.raw`\gamma_A`), " の接触対は ", math(String.raw`S_A`),
-                  " の元と 1 対 1 に対応し、",
-                  math(String.raw`n_{\mathrm{ct}}(\gamma_A)=|S_A|`), " である。",
+                  " の元と 1 対 1 に対応する。",
                   math(String.raw`\gamma_B`), " の項の並びも ", math(String.raw`B`),
                   " の添字の項を並べたものなので、同じ理由で ",
-                  math(String.raw`n_{\mathrm{ct}}(\gamma_B)=|S_B|`), " である。",
+                  "接触対は ", math(String.raw`S_B`), " の元と 1 対 1 に対応する。",
                 ]),
+                displayMath(String.raw`n_{\mathrm{ct}}(\gamma_A)=|S_A|
+\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{claim_edge_simple_contact_split}\text{ による添字対の全単射}\bigr)`),
+                displayMath(String.raw`n_{\mathrm{ct}}(\gamma_B)=|S_B|
+\qquad\bigl(\because\ \blkref{def_contact_pair_count}\text{ と }\blkref{claim_edge_simple_contact_split}\text{ による添字対の全単射}\bigr)`),
                 paragraph([
                   "選んだ接触点の添字対 ", math(String.raw`(k,l)`), " は、",
                   math(String.raw`k<k`), " が成り立たないので ", math(String.raw`k\notin A`),
