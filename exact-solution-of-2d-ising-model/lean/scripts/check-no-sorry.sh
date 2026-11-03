@@ -1743,7 +1743,14 @@ targets=(
   Ising2D.NecSuf.binWordSum_eq_sum
   Ising2D.CheckFermiSetup.sum_Qproj_eq_binWordSum
   Ising2D.CheckFermiSetup.sum_Qproj_of_necSuf
+  Ising2D.CheckFermiSetup.nOp_mul_projFactor_comm_step3
+  Ising2D.CheckFermiSetup.nOp_mul_projFactor_step3
+  Ising2D.CheckFermiSetup.nOp_mul_Qproj_step3
+  Ising2D.CheckFermiSetup.Qproj_mul_nOp_step3
+  Ising2D.CheckFermiSetup.nOp_mul_Qproj_of_necSuf
   Ising2D.CheckFermiSetup.nOp_mul_Qproj
+  Ising2D.CheckFermiSetup.commute_nOp_Qproj_of_necSuf
+  Ising2D.CheckFermiSetup.commute_nOp_Qproj
   Ising2D.CheckFermiSetup.trace_Qproj
   Ising2D.CheckFermiSetup.finrank_range_Qproj
   Ising2D.CheckFermiSetup.sum_Qproj_mulVec
