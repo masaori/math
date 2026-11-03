@@ -8,7 +8,7 @@
 $(h(\gamma)\bmod2,\ v(\gamma)\bmod2)$ を突き合わせた。
 
 - 実行: `sage sagemath/check/vertex-simple-cycle-turning/check.sage`
-- 状態: PASS（2026-09-01）
+- 状態: PASS（2026-11-03 再実行）
 - 結果: 全 $373{,}716$ 本（基点・向きを区別）で、次の離散 Whitney の言明が
   例外なく成り立った。
   - 切断線偶奇が $(0,0)$ の頂点単純閉路（$73{,}616$ 本）は

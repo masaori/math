@@ -59213,6 +59213,13 @@ v(\gamma):=\left(\sum_{k=1}^{m}c_{\mathrm v}(\vec e_k)\right)\bmod2`),
                         title: { text: "閉歩道の回転数" },
                         labels: ["def_closed_walk_rotation_number"],
                         habitat: "Z",
+                        lean: [
+                          "Ising2DLambda.KacWard.closedWalkRotationNumber",
+                          "Ising2DLambda.KacWard.four_mul_closedWalkRotationNumber",
+                          "Ising2DLambda.NecSuf.KacWard.rotationNumber",
+                          "Ising2DLambda.NecSuf.KacWard.four_mul_rotationNumber",
+                          "Ising2DLambda.KacWard.closedWalkRotationNumber_from_necSuf",
+                        ],
                         statement: [
                           paragraph([
                             "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -68777,7 +68784,10 @@ t_{\circ}(\gamma)=0,&\bigl(h(\gamma),v(\gamma)\bigr)\ne(0,0)
                   "零でない原始的な場合を仮定する。二つの巻き付き数は偶数なので、整数 ",
                   math(String.raw`r,s\in\mathbb Z`), " を",
                 ]),
-                displayMath(String.raw`w_{\mathrm h}(\gamma)=2r,\qquad w_{\mathrm v}(\gamma)=2s`),
+                displayMath(String.raw`\begin{aligned}
+w_{\mathrm h}(\gamma)&=2r&&\bigl(\because\ \blkref{claim_directed_winding_parity}\text{ による偶数性}\bigr)\\
+w_{\mathrm v}(\gamma)&=2s&&\bigl(\because\ \blkref{claim_directed_winding_parity}\text{ による偶数性}\bigr)
+\end{aligned}`),
                 paragraph([
                   "で取る。原始性の Bézout 条件（", ref("def_primitive_integer_pair"), "）により、ある ",
                   math(String.raw`a,b\in\mathbb Z`), " について",
