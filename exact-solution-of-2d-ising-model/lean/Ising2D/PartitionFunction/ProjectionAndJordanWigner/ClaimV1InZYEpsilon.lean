@@ -47,7 +47,8 @@ private theorem siteProd_smul_family_for_jordanWigner (c : Fin M → ℂ)
 
 /-! ## 単一サイトの Pauli 行列の積 -/
 
-/-- 人手証明 Step 0 の `σʸσˣ = -iσᶻ`。人手の鎖の各段と 1 対 1 に対応する。 -/
+/-- 人手証明 Step 0 の `σʸσˣ = -iσᶻ`。人手 `iH_is_real_symmetric` の Step 0 の第 2 の鎖（`eigenvalue_problem_eigenvalues_of_V_plus.ts`）も同じ鎖で、
+どちらの鎖の各段とも 1 対 1 に対応する。 -/
 theorem pauliY_mul_pauliX_eq : pauliY * pauliX = (-Complex.I) • pauliZ := by
   calc
     -- `pauli_matrix_products`（Pauli 行列）

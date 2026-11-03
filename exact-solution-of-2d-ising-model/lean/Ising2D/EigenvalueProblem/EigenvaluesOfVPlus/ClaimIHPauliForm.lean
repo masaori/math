@@ -4,7 +4,7 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 （`eigenvalues_of_V_014_claim_iH_is_real_symmetric`、ラベル **`iH_is_real_symmetric`**）
 
-人手 `iH_is_real_symmetric` の Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
+人手 `iH_is_real_symmetric` の Step 0 の 2×2 の積と、Step 1 と Step 2 の鎖（`S_2 = K_2^*Σσ^x_m`・`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`）と 1 対 1 に対応する。
 Step 3（成分が実で転置について対称）は、この表示を経ない別の論法で `S1plus_isHermitian`・`S1plus_transpose`・`S2_isHermitian`・`S2_transpose`
 （`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimPositiveDefinite.lean`）が持っている。
 
@@ -12,11 +12,15 @@ Step 3（成分が実で転置について対称）は、この表示を経な�
 
 | 人手 | Lean |
 | --- | --- |
-| Step 1 の `Z_mY_m = -iσ^x_m` | `Z_mul_Y_same`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
+| Step 0 の準備 `(-i)·i = 1`・`(-i)·(-i) = -1` | `negI_mul_I_eq_one`・`negI_mul_negI_eq_neg_one`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
+| Step 0 の `σ^zσ^y = (-i)σ^x`（11 行。`V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と同じ鎖） | `pauliZ_mul_pauliY`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
+| Step 0 の `σ^yσ^x = (-i)σ^z`（12 行。`V1_in_Z_Y_epsilon` の Step 0 の第 1 の鎖と同じ鎖） | `pauliY_mul_pauliX_eq`（`PartitionFunction/ProjectionAndJordanWigner/ClaimV1InZYEpsilon.lean`） |
+| Step 0 の `σ^xσ^z = (-i)σ^y`（11 行） | `pauliX_mul_pauliZ_eq`（`EigenvectorOfMaxEigenvalue/ClaimH1PlusInSigmaZForm.lean`） |
+| Step 1 の `Z_mY_m = (-i)σ^x_m` | `Z_mul_Y_same`（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`） |
 | Step 1 の `H_2` の鎖の 3 行（`def_H2` → 上で得た `Z_mY_m` → `finite_sum_of_scalar_multiples`） | `H2_eq_neg_I_smul_sum_sigmaX` の `calc` の 3 段 |
 | Step 1 の `S_2` の鎖の 8 行（`S_2` の定義 → `H_2` の表示 → `scalar_multiple_is_associative` → ℂ の積の結合律 → 交換律 → 結合律 → `i(-i) = 1` → 乗法の単位元） | `S2_eq_K2star_smul_sum_sigmaX` の `calc` の 7 段（先頭の「`S_2` の定義」の行は Lean では主張の左辺そのもの） |
-| Step 2 の `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_castSucc_mul_Z_succ`（`Y_mul_Z_next_of_not_last` を人手の差の形の添字へ） |
-| Step 2 の境界項 `Y_{M_col}Z_1 = -iG`（`G = σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`） | `Y_last_mul_Z_zero`（`Y_last_mul_Z_first` を人手の差の形の添字へ） |
+| Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_castSucc_mul_Z_succ`（`Y_mul_Z_next_of_not_last` を人手の差の形の添字へ） |
+| Step 2 の境界項 `Y_{M_col}Z_1 = (-i)G`（`G = σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`） | `Y_last_mul_Z_zero`（`Y_last_mul_Z_first` を人手の差の形の添字へ） |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 
 - 人手の `K_1, K_2^* ∈ ℝ` は、Lean では `ℂ` の元 `K1`・`K2star` として受け取る（`ClaimPositiveDefinite.lean` の `S1plus_isHermitian` ほかと同じ）。
@@ -69,7 +73,7 @@ theorem S2_eq_K2star_smul_sum_sigmaX (K2star : ℂ) (r : ℕ) :
     _ = K2star • ∑ m : Fin (r + 1), sigmaX m := by
         rw [one_mul]                                                         -- ℂ の乗法の単位元
 
-/-- 人手 Step 2 の `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col - 1`）を、`H1plus_eq_sub` の添字（`Fin.castSucc m`・`Fin.succ m`）で。 -/
+/-- 人手 Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col - 1`）を、`H1plus_eq_sub` の添字（`Fin.castSucc m`・`Fin.succ m`）で。 -/
 theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
     Y (Fin.castSucc m) * Z (Fin.succ m)
       = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
@@ -80,7 +84,7 @@ theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
   rw [← hnext]
   exact Y_mul_Z_next_of_not_last _ (Nat.ne_of_lt hlt)
 
-/-- 人手 Step 2 の境界項 `Y_{M_col}Z_1 = -iG` を、`H1plus_eq_sub` の添字（`Fin.last (r + 1)`・`0`）で。 -/
+/-- 人手 Step 2 の境界項 `Y_{M_col}Z_1 = (-i)G` を、`H1plus_eq_sub` の添字（`Fin.last (r + 1)`・`0`）で。 -/
 theorem Y_last_mul_Z_zero (r : ℕ) :
     Y (Fin.last (r + 1)) * Z (0 : Fin (r + 2))
       = (-Complex.I) • siteProd (r + 2) (boundaryYXYFamily (r + 2) (by omega)) := by

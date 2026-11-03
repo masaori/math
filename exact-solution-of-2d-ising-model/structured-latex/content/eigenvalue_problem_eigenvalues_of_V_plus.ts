@@ -164,6 +164,10 @@ V^{(+)} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\,\check{V}'`,
       paragraph([
         ref("def_transfer_matrix_symbols"),
         " の記号のもとで、",
+        math(String.raw`i := (0_{\mathbb{R}}, 1_{\mathbb{R}}) \in \mathbb{C}`),
+        "（",
+        ref("definition_of_cc"),
+        " の台集合の元、虚数単位）とし、",
       ]),
       displayMath(
         String.raw`S_1^{(+)} := i K_1 H_1^{(+)}, \qquad S_2 := i K_2^* H_2`,
@@ -195,39 +199,131 @@ S_2 &= K_2^*\left(\sigma_1^x + \sigma_2^x + \cdots + \sigma_{M_{\mathrm{col}}}^x
       paragraph([
         "Step 0（用いる ",
         math(String.raw`2\times 2`),
-        " の積）。Pauli 行列の行列表示から直接成分計算して",
+        " の積）。準備として、主張の ",
+        math(String.raw`i`),
+        " について ",
+        math(String.raw`\mathbb{C}`),
+        " の中で次の 2 つを計算しておく。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(-i)\cdot i
+&= \bigl((-1)\cdot i\bigr)\cdot i
+   \quad (\because \blkref{multiply_by_minus_one}) \\
+&= (-1)\cdot(i\cdot i)
+   \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1)\cdot(-1)
+   \quad (\because \mathbb{C}\ \text{で}\ i\cdot i=-1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= 1
+   \quad (\because \mathbb{C}\ \text{で}\ (-1)\cdot(-1)=1\text{。}\blkref{definition_of_cc}\ \text{の積})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+(-i)\cdot(-i)
+&= (-i)\cdot\bigl((-1)\cdot i\bigr)
+   \quad (\because \blkref{multiply_by_minus_one}) \\
+&= \bigl((-i)\cdot(-1)\bigr)\cdot i
+   \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \bigl((-1)\cdot(-i)\bigr)\cdot i
+   \quad (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1)\cdot\bigl((-i)\cdot i\bigr)
+   \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= (-1)\cdot 1
+   \quad (\because \text{直前の鎖}) \\
+&= -1
+   \quad (\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field})
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x, \sigma^y, \sigma^z`),
+        " の積を ",
+        ref("mat_mult"),
+        " で成分ごとに計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^z\sigma^y
 &= \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-i\\i&0\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
-&= \begin{pmatrix}0&-i\\-i&0\end{pmatrix}
-   \quad (\because \text{行列積の成分計算}) \\
-&= -i\,\sigma^x
-   \quad (\because \sigma^x \text{ の行列表示})
+   \quad (\because \blkref{pauli_matrix_products}) \\
+&= \begin{pmatrix}1\cdot0+0\cdot i & 1\cdot(-i)+0\cdot0 \\ 0\cdot0+(-1)\cdot i & 0\cdot(-i)+(-1)\cdot0\end{pmatrix}
+   \quad (\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}1\cdot0+0 & 1\cdot(-i)+0 \\ 0+(-1)\cdot i & 0+(-1)\cdot0\end{pmatrix}
+   \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-1)\cdot0\end{pmatrix}
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}0 & 1\cdot(-i) \\ (-1)\cdot i & 0\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & 1\cdot(-i) \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-1)\cdot i & (-i)\cdot0\end{pmatrix}
+   \quad (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ -i & (-i)\cdot0\end{pmatrix}
+   \quad (\because \blkref{multiply_by_minus_one}) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot1 \\ (-i)\cdot1 & (-i)\cdot0\end{pmatrix}
+   \quad (\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= (-i)\begin{pmatrix}0&1\\1&0\end{pmatrix}
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
+&= (-i)\sigma^x
+   \quad (\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^y\sigma^x
 &= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
-&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
-   \quad (\because \text{行列積の成分計算}) \\
-&= -i\,\sigma^z
-   \quad (\because \sigma^z \text{ の行列表示})
+   \quad (\because \blkref{pauli_matrix_products}) \\
+&= \begin{pmatrix}0\cdot0+(-i)\cdot1 & 0\cdot1+(-i)\cdot0 \\ i\cdot0+0\cdot1 & i\cdot1+0\cdot0\end{pmatrix}
+   \quad (\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}0+(-i)\cdot1 & 0+(-i)\cdot0 \\ i\cdot0+0 & i\cdot1+0\end{pmatrix}
+   \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ i\cdot0 & i\cdot1\end{pmatrix}
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ 0 & i\cdot1\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot1\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & i\cdot\bigl((-1)\cdot(-1)\bigr)\end{pmatrix}
+   \quad (\because \mathbb{C}\ \text{で}\ (-1)\cdot(-1)=1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & \bigl(i\cdot(-1)\bigr)\cdot(-1)\end{pmatrix}
+   \quad (\because \text{積の結合律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & \bigl((-1)\cdot i\bigr)\cdot(-1)\end{pmatrix}
+   \quad (\because \text{積の可換律。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot1 & (-i)\cdot0 \\ (-i)\cdot0 & (-i)\cdot(-1)\end{pmatrix}
+   \quad (\because \blkref{multiply_by_minus_one}) \\
+&= (-i)\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
+&= (-i)\sigma^z
+   \quad (\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       displayMath(
         String.raw`\begin{aligned}
 \sigma^x\sigma^z
 &= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-   \quad (\because \text{Pauli 行列の行列表示},\ \blkref{pauli_matrix_products}) \\
-&= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-   \quad (\because \text{行列積の成分計算}) \\
-&= -i\,\sigma^y
-   \quad (\because \sigma^y \text{ の行列表示})
+   \quad (\because \blkref{pauli_matrix_products}) \\
+&= \begin{pmatrix}0\cdot1+1\cdot0 & 0\cdot0+1\cdot(-1) \\ 1\cdot1+0\cdot0 & 1\cdot0+0\cdot(-1)\end{pmatrix}
+   \quad (\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}0+1\cdot0 & 0+1\cdot(-1) \\ 1\cdot1+0 & 1\cdot0+0\end{pmatrix}
+   \quad (\because \blkref{complex_zero_times_is_zero}) \\
+&= \begin{pmatrix}1\cdot0 & 1\cdot(-1) \\ 1\cdot1 & 1\cdot0\end{pmatrix}
+   \quad (\because 0_{\mathbb{C}}\ \text{は加法の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}0 & 1\cdot(-1) \\ 1\cdot1 & 0\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}0 & -1 \\ 1 & 0\end{pmatrix}
+   \quad (\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}) \\
+&= \begin{pmatrix}(-i)\cdot0 & -1 \\ 1 & (-i)\cdot0\end{pmatrix}
+   \quad (\because \blkref{complex_times_zero_is_zero}) \\
+&= \begin{pmatrix}(-i)\cdot0 & -1 \\ (-i)\cdot i & (-i)\cdot0\end{pmatrix}
+   \quad (\because \text{準備の}\ (-i)\cdot i = 1) \\
+&= \begin{pmatrix}(-i)\cdot0 & (-i)\cdot(-i) \\ (-i)\cdot i & (-i)\cdot0\end{pmatrix}
+   \quad (\because \text{準備の}\ (-i)\cdot(-i) = -1) \\
+&= (-i)\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+   \quad (\because \blkref{def_matrix_scalar_multiple}) \\
+&= (-i)\sigma^y
+   \quad (\because \blkref{pauli_matrix_products})
 \end{aligned}`,
       ),
       paragraph([
@@ -271,7 +367,7 @@ Z_m Y_m
    \quad (\because \sigma_m^z \text{ は } \sigma_j^x\ (j<m) \text{ と可換}) \\
 &= \sigma_m^z\sigma_m^y
    \quad (\because \sigma_j^x\sigma_j^x = I) \\
-&= -i\,\sigma_m^x
+&= (-i)\sigma_m^x
    \quad (\because \text{Step 0})
 \end{aligned}`,
       ),
@@ -327,7 +423,7 @@ Y_m Z_{m+1}
    \quad (\because \text{相異なる因子どうしは可換}) \\
 &= \sigma_m^y\sigma_m^x\,\sigma_{m+1}^z
    \quad (\because \sigma_j^x\sigma_j^x = I) \\
-&= -i\,\sigma_m^z\sigma_{m+1}^z
+&= (-i)\sigma_m^z\sigma_{m+1}^z
    \quad (\because \text{Step 0})
 \end{aligned}`,
       ),
@@ -339,9 +435,9 @@ Y_{M_{\mathrm{col}}} Z_1
    \quad (\because Y_{M_{\mathrm{col}}},\ Z_1 \text{ の定義}) \\
 &= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \sigma_1^z \text{ は他の因子と可換}) \\
-&= -i\,\sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
+&= (-i)\sigma_1^y\,\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
    \quad (\because \text{Step 0}) \\
-&= -i\,G
+&= (-i)G
    \quad (\because G \text{ の定義})
 \end{aligned}`,
       ),
@@ -460,6 +556,7 @@ S_1^{(+)}
         "2026-09-05 の式変形統一で、Step 0 の三つの Pauli 行列積について、段落に置かれていた参照を実際に行列表示を使う各等号の行末へ移した。内容と計算順序は変えていない。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
         "2026-11-02: Step 1・Step 2 の「スカラー倍の和の分配」「スカラー倍の交換」「スカラー倍の和の分配と交換」「i·(−i) = 1 と分配則」を、finite_sum_of_scalar_multiples・scalar_multiple_distributes_over_matrix_difference・scalar_multiple_is_associative と ℂ の積の結合律・交換律・単位元の 1 行 1 主張に分けた。S_1^{(+)}・S_2 の係数を (iK_1)・(iK_2^*) と括弧で書き、H_1^{(+)} の定義を def_H1_plus で引く。S_1^{(+)} の鎖の「上で得た表示」の行を、和の各項への代入と境界項への代入の 2 行に分けた。",
+        "2026-11-03: Step 0 の三つの Pauli 行列積で名前だけの根拠だった「行列積の成分計算」「σ の行列表示」を、mat_mult・pauli_matrix_products・def_matrix_scalar_multiple へのラベル参照と、ℂ の事実（0·z = 0、加法の単位元、z·0 = 0、積の単位元・可換律・結合律、multiply_by_minus_one、(-1)·(-1) = 1）を 1 段に 1 つずつ使う段に割った。σ^zσ^y・σ^yσ^x の鎖は V1_in_Z_Y_epsilon の Step 0 と同じ鎖である。σ^xσ^z の鎖が使う (-i)·i = 1 と (-i)·(-i) = -1 を Step 0 の準備に置き、準備の i·i = -1 を definition_of_cc の積で受けるために i := (0_ℝ,1_ℝ) ∈ ℂ を主張の前置きに書いた（主張の S_1^{(+)}・S_2 の i の帰属も決まる）。Step 0〜Step 2 の鎖の終わりの -i\\,σ を、S_2・S_1^{(+)} の鎖が引く形 (-i)σ に揃えた。主張は変えていない。",
       ],
     },
   },

@@ -260,7 +260,8 @@ theorem pauliX_eq : pauliX = (-Complex.I) • (pauliY * pauliZ) := by
   rw [pauliY_mul_pauliZ, smul_smul, neg_mul, Complex.I_mul_I, neg_neg, one_smul]
 
 /-- `σ^z σ^y = -i σ^x`。人手 `V1_in_Z_Y_epsilon` の Step 0 の第 3 の鎖と `V2_in_Z_Y` の Step 0 の鎖
-（`partition_function_projection_and_jordan_wigner.ts`。2 本は同じ鎖）の各段と 1 対 1 に対応する。 -/
+（`partition_function_projection_and_jordan_wigner.ts`）と `iH_is_real_symmetric` の Step 0 の第 1 の鎖
+（`eigenvalue_problem_eigenvalues_of_V_plus.ts`。3 本は同じ鎖）の各段と 1 対 1 に対応する。 -/
 theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
   calc
     -- `pauli_matrix_products`（Pauli 行列）

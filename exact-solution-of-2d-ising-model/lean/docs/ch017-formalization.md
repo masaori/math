@@ -115,6 +115,7 @@
 | `CheckFermiSetup.sum_exp_gval` | `∑_ε e^{ǧ(ε)} = ∏_μ 2cosh(γ(θ~_μ)/2)` | `trace_of_check_Vprime` Step 2 |
 | `CheckFermiSetup.trace_Vprime` | **`tr(V̌') = ∏_μ 2cosh(γ/2)`（前因子なし）** | 同 Step 1〜2 |
 | `CheckFermiSetup.trace_Vprime_inv` / `trace_Vprime_pos` | `tr((V̌')^{-1}) = tr(V̌') > 0` | 同 Step 3〜4 |
+| `negI_mul_I_eq_one` / `negI_mul_negI_eq_neg_one` / `pauliX_mul_pauliZ_eq`（`ClaimH1PlusInSigmaZForm.lean`）、`pauliZ_mul_pauliY`（`DefinitionTransferMatrixSymbols.lean`）/ `pauliY_mul_pauliX_eq`（`ClaimV1InZYEpsilon.lean`） | `(-i)·i = 1`、`(-i)·(-i) = -1`、`σ^xσ^z = (-i)σ^y`、`σ^zσ^y = (-i)σ^x`、`σ^yσ^x = (-i)σ^z`（人手の鎖と 1 対 1） | `iH_is_real_symmetric` Step 0 |
 | `H2_eq_neg_I_smul_sum_sigmaX` / `S2_eq_K2star_smul_sum_sigmaX` / `Y_castSucc_mul_Z_succ` / `Y_last_mul_Z_zero` / `S1plus_eq_K1_smul_sub`（`ClaimIHPauliForm.lean`） | `H_2 = -iΣσ^x_m`、`S_2 = K_2^*Σσ^x_m`、`S_1^{(+)} = K_1Σσ^z_mσ^z_{m+1} - K_1G`（人手の鎖と 1 対 1。Step 3 の実対称性は `ClaimPositiveDefinite.lean` の別の論法） | `iH_is_real_symmetric` Step 1〜2 |
 | `VPlus`（章 014 の定義を再利用）/ `VPlus_eq_smul` | `V^{(+)}` は章 014 `EigenvalueProblem/ReductionToATheta/DefinitionVPlus.lean` のものを使う。`V^{(+)} = (2s_2)^{M/2}exp(S_1^{(+)}/2)exp(S_2)exp(S_1^{(+)}/2)` | `def_V_plus`、`V_plus_is_positive_definite` Step 1 |
 | `VPlus_posDef` | `V^{(+)}` は正定値 | `V_plus_is_positive_definite` Step 2〜3 |

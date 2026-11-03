@@ -9,7 +9,7 @@
 | 人手 | Lean |
 | --- | --- |
 | 1 サイトの積 `σ^yσ^x = -iσ^z`, `σ^xσ^x = I`（`V1_in_Z_Y_epsilon` の Step 0） | `pauliY_mul_pauliX_eq`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`）、`pauliX_mul_pauliX`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.DefinitionTransferMatrixSymbols`） |
-| 1 サイトの積 `σ^xσ^z = -iσ^y`（2 次の成分計算） | `pauliX_mul_pauliZ_eq` |
+| 1 サイトの積 `σ^xσ^z = -iσ^y`（2 次の成分計算） | `pauliX_mul_pauliZ_eq`（人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖と 1 対 1） |
 | 内部辺 `Y_mZ_{m+1} = -iσ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_mul_Z_next_of_not_last`（`Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimV1InZYEpsilon`。人手と同じ計算） |
 | 両辺に `i` を掛けて `iY_mZ_{m+1} = σ^z_mσ^z_{m+1}` | `I_smul_Y_mul_Z_next_of_not_last` |
 | 境界項の左辺 `Y_{M_col}Z_1 = -iσ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}` | `Y_last_mul_Z_first` |
@@ -36,11 +36,59 @@ variable {M : ℕ}
 
 /-! ## 1 サイトの積 -/
 
-/-- 人手の `σ^xσ^z = -iσ^y`（2 次の成分計算）。 -/
+/-- 人手 `iH_is_real_symmetric` の Step 0 の準備の 1 本目 `(-i)·i = 1`（`eigenvalue_problem_eigenvalues_of_V_plus.ts`）。
+人手の鎖の各段と 1 対 1 に対応する。 -/
+theorem negI_mul_I_eq_one : (-Complex.I) * Complex.I = 1 :=
+  calc (-Complex.I) * Complex.I
+      = ((-1) * Complex.I) * Complex.I := by rw [neg_one_mul]               -- `multiply_by_minus_one`
+    _ = (-1) * (Complex.I * Complex.I) := mul_assoc _ _ _                    -- 積の結合律（`complex_numbers_form_a_field`）
+    _ = (-1) * (-1) := by rw [Complex.I_mul_I]                              -- ℂ で `i·i = -1`（`definition_of_cc` の積）
+    _ = 1 := by rw [neg_one_mul, neg_neg]                                    -- ℂ で `(-1)·(-1) = 1`（`definition_of_cc` の積。Lean では `(-1)·z = -z` と `-(-1) = 1` の 2 補題で閉じる）
+
+/-- 人手 `iH_is_real_symmetric` の Step 0 の準備の 2 本目 `(-i)·(-i) = -1`。人手の鎖の各段と 1 対 1 に対応する。 -/
+theorem negI_mul_negI_eq_neg_one : (-Complex.I) * (-Complex.I) = -1 :=
+  calc (-Complex.I) * (-Complex.I)
+      = (-Complex.I) * ((-1) * Complex.I) := by rw [neg_one_mul Complex.I]  -- `multiply_by_minus_one`
+    _ = ((-Complex.I) * (-1)) * Complex.I := (mul_assoc _ _ _).symm         -- 積の結合律（`complex_numbers_form_a_field`）
+    _ = ((-1) * (-Complex.I)) * Complex.I := by rw [mul_comm (-Complex.I) (-1)]  -- 積の可換律（`complex_numbers_form_a_field`）
+    _ = (-1) * ((-Complex.I) * Complex.I) := mul_assoc _ _ _                 -- 積の結合律（`complex_numbers_form_a_field`）
+    _ = (-1) * 1 := by rw [negI_mul_I_eq_one]                               -- 直前の鎖
+    _ = -1 := mul_one _                                                      -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`）
+
+/-- 人手 `iH_is_real_symmetric` の Step 0 の第 3 の鎖 `σ^xσ^z = (-i)σ^y`。人手の鎖の 11 行と `calc` の 11 段が 1 対 1 に対応する。
+`H1_plus_in_sigma_z_form` が「2 次の成分計算」として使う同じ等式でもある。 -/
 theorem pauliX_mul_pauliZ_eq : pauliX * pauliZ = (-Complex.I) • pauliY := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pauliX, pauliY, pauliZ, Matrix.mul_apply, Fin.sum_univ_two]
+  calc
+    -- `pauli_matrix_products`（Pauli 行列）
+    pauliX * pauliZ = !![0, 1; 1, 0] * !![1, 0; 0, -1] := rfl
+    -- `mat_mult`
+    _ = !![0 * 1 + 1 * 0, 0 * 0 + 1 * (-1);
+          1 * 1 + 0 * 0, 1 * 0 + 0 * (-1)] := by
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp only [Matrix.mul_apply, Fin.sum_univ_two] <;> rfl
+    -- `complex_zero_times_is_zero`（4 か所へ同時に適用）
+    _ = !![0 + 1 * 0, 0 + 1 * (-1); 1 * 1 + 0, 1 * 0 + 0] := by simp only [zero_mul]
+    -- `0_ℂ` は加法の単位元（`complex_numbers_form_a_field`。4 か所へ同時に適用）
+    _ = !![1 * 0, 1 * (-1); 1 * 1, 1 * 0] := by simp only [zero_add, add_zero]
+    -- `complex_times_zero_is_zero`（2 か所へ同時に適用）
+    _ = !![0, 1 * (-1); 1 * 1, 0] := by rw [mul_zero (1 : ℂ)]
+    -- `1_ℂ` は積の単位元（`complex_numbers_form_a_field`。2 か所へ同時に適用）
+    _ = !![0, -1; 1, 0] := by rw [one_mul (-1 : ℂ), one_mul (1 : ℂ)]
+    -- `complex_times_zero_is_zero`（右辺の `(-i)·0` へ。2 か所へ同時に適用）
+    _ = !![(-Complex.I) * 0, -1; 1, (-Complex.I) * 0] := by rw [mul_zero (-Complex.I)]
+    -- 準備の `(-i)·i = 1`
+    _ = !![(-Complex.I) * 0, -1; (-Complex.I) * Complex.I, (-Complex.I) * 0] := by
+      rw [negI_mul_I_eq_one]
+    -- 準備の `(-i)·(-i) = -1`
+    _ = !![(-Complex.I) * 0, (-Complex.I) * (-Complex.I); (-Complex.I) * Complex.I, (-Complex.I) * 0] := by
+      rw [negI_mul_negI_eq_neg_one]
+    -- `def_matrix_scalar_multiple`
+    _ = (-Complex.I) • !![0, -Complex.I; Complex.I, 0] := by
+      ext i j
+      rw [matrix_smul_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products`（Pauli 行列）
+    _ = (-Complex.I) • pauliY := rfl
 
 /-! ## 内部辺 -/
 
