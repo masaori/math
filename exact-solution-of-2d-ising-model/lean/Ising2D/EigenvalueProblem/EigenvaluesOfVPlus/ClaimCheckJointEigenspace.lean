@@ -5,10 +5,11 @@
 `check_joint_eigenspace_decomposition`（`evenEigen_005_claim_...`）。
 
 **必要十分版**は `Ising2D/NecSuf/JointEigenspace.lean`（章 009 と共通）。
-(1)(2)(3)(4) は、(1) の `Qproj_mul_Qproj_of_ne`・`Qproj_mul_self`（人手の範囲 `M_col ≥ 2` では Step 1 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`・`Qproj_mul_self_of_necSuf`）を除き、**必要十分版の特殊化として導出する**。
+(1)(2)(3)(4) は、(1) の `Qproj_mul_Qproj_of_ne`・`Qproj_mul_self` と (2) の `sum_Qproj`（人手の範囲 `M_col ≥ 2` では Step 1・Step 2 の鎖を使い、特殊化は `Qproj_mul_Qproj_of_ne_of_necSuf`・`Qproj_mul_self_of_necSuf`・`sum_Qproj_of_necSuf`）を除き、**必要十分版の特殊化として導出する**。
 ただし証明の Step 0 の冒頭の `ň_μň_μ = ň_μ` と 4 本の鎖（`R_μ^{(1)}R_μ^{(0)} = 0`・`R_μ^{(0)}R_μ^{(1)} = 0`・
 `R_μ^{(0)}R_μ^{(0)} = R_μ^{(0)}`・`R_μ^{(1)} + R_μ^{(0)} = I`）は、人手の行と 1 対 1 の `calc` を
 `nOp_mul_nOp_of_sq`・`nOp_mul_one_sub_nOp`・`one_sub_nOp_mul_nOp`・`one_sub_nOp_mul_self`・`nOp_add_one_sub_nOp` に置く
+（`R_μ^{(1)} + R_μ^{(0)} = I` の定義の行まで含めた 2 行は、Step 2 の節の `rFactor_one_add_rFactor_zero`）
 （Step 3 の `ε_ν = 0` の場合の `ň_ν R_ν^{(0)} = 0` も `nOp_mul_one_sub_nOp` と同じ行である。`R_μ^{(1)}R_μ^{(1)} = R_μ^{(1)}` と
 Step 3 の `ε_ν = 1` の場合の `ň_ν R_ν^{(1)} = R_ν^{(1)}` は、定義の行を除くと `nOp_mul_nOp_of_sq` の 1 行である）。
 Step 3 の二つの場合の鎖（`ň_ν R_ν^{(ε_ν)} = ε_ν R_ν^{(ε_ν)}`）は、場合の仮定の行まで含めて `nOp_mul_projFactor_of_mem`（`ε_ν = 1`）・
@@ -26,7 +27,10 @@ Step 1 の `ε ≠ ε'` の鎖（`R_ν^{(ε_ν)}` と `Q̌_{ε'}` の因子の�
 Step 1 の `ε = ε'` の鎖（8 行）は、`Q̌_ε^2 = Q̌_εQ̌_ε` の 4 行 `Qproj_sq_eq_mul_self_step1` と `Q̌_εQ̌_ε = Q̌_ε` の 4 行 `Qproj_mul_self_step1`
 （各因子の冪等性は `projFactor_mul_self_step0`）に分けて置き、`Qproj_sq_step1` でつなぐ。(1) 後半の `Qproj_mul_self` は `M ≥ 1`（人手の範囲 `M_col ≥ 2` を含む）で
 `Qproj_mul_self_step1` を使う。
-Step 2、Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と
+Step 2 の 4 行の鎖（`Σ_ε Q̌_ε = Σ_ε ∏R_μ^{(ε_μ)} = ∏(R_μ^{(1)} + R_μ^{(0)}) = ∏I = I`）は `sum_Qproj_step2` に置き、
+(2) の `sum_Qproj` は `M ≥ 1`（人手の範囲 `M_col ≥ 2` を含む）で、和を人手の `Σ_{ε∈{0,1}^𝓜̌}`（`NecSuf.binWordSum`）へ付け替える
+`sum_Qproj_eq_binWordSum` とこの鎖から示す（`M = 0` は必要十分版の特殊化 `sum_Qproj_of_necSuf`）。
+Step 3 の `ň_νQ̌_ε` の鎖（`moving_one_factor_of_finite_product_to_the_end` で `R_ν^{(ε_ν)}` を末尾へ寄せる 9 行）と
 `Q̌_εň_ν` の鎖と 1 対 1 の具体版はまだ無い。
 Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number_operator_product` と `def_power_of_complex_number` の `z^0 := 1_ℂ`）は、
 下の `trace_Qproj` では必要十分版から `2^M · tr(Q̌_ε) = 2^M` を出して `2^M` で約分しており、人手の 3 行と 1 対 1 の版はまだ無い。Step 5 の人手の根拠
@@ -48,6 +52,9 @@ Step 4 の `tr(Q̌_ε) = 2^{M−M} = 2^0 = 1`（人手は `trace_of_check_number
 -/
 import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimTraceCheckNumberOperatorProduct
 import Ising2D.NecSuf.FiniteProductLeftAsNoncommProd
+import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimExpansionOfFiniteProductOfTwoTermSumsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.DefinitionFiniteProductOfMatricesFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimAddAndSubtractZeroMatrixFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimCommutingWithDifferenceFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
@@ -468,10 +475,104 @@ theorem Qproj_mul_Qproj_of_ne {T T' : Finset (CheckIdx M)} (h : T ≠ T') :
     obtain ⟨ν, rfl⟩ := checkIdxOfFin_surjective μ      -- 人手の `ν = j + 1`
     exact Qproj_mul_Qproj_of_ne_step1 F ν hμ
 
-/-- **原文 (2)**: `∑_ε Q̌_ε = I`。 -/
-theorem sum_Qproj : ∑ T : Finset (CheckIdx M), F.Qproj T = 1 := by
+/-! ## 原文 Step 2（(2) の証明）
+
+人手の和 `Σ_{ε∈{0,1}^𝓜̌}` は `def_sum_over_binary_words`（Lean の `NecSuf.binWordSum`）で、語 `ε` の成分 `ε_{j+1}` が Lean の `ε j : Fin 2` である。
+Lean の `Qproj` は `𝓜̌` の部分集合 `T`（`ε_μ = 1` となる `μ` の集合）で添字付けるので、語 `ε` を部分集合 `finsetOfBinWord ε` へ送る。
+人手の `R_μ^{(e)}`（`R_μ^{(1)} := ň_μ`、`R_μ^{(0)} := I - ň_μ`）は `rFactor μ e` である。各行の右のコメントは、人手の鎖の同じ行の根拠である。 -/
+
+/-- 人手の `R_μ^{(e)}`（証明の冒頭）: `R_μ^{(1)} := ň_μ`、`R_μ^{(0)} := I - ň_μ`。 -/
+noncomputable def rFactor (μ : CheckIdx M) (e : Fin 2) : TensorPow M :=
+  if e = 1 then F.nOp μ else 1 - F.nOp μ
+
+/-- 人手の語 `ε ∈ {0,1}^𝓜̌`（`ε_{j+1} = ε j`）に、`ε_μ = 1` となる `μ` の集合を対応させる（Lean の `Qproj` の添字）。 -/
+def finsetOfBinWord (ε : Fin M → Fin 2) : Finset (CheckIdx M) :=
+  (Finset.univ.filter fun j => ε j = 1).image checkIdxOfFin
+
+theorem checkIdxOfFin_mem_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
+    checkIdxOfFin j ∈ finsetOfBinWord ε ↔ ε j = 1 := by
+  simp [finsetOfBinWord, checkIdxOfFin_injective.eq_iff]
+
+theorem finsetOfBinWord_bijective : Function.Bijective (finsetOfBinWord (M := M)) := by
+  constructor
+  · intro ε ε' h
+    funext j
+    have hj : ε j = 1 ↔ ε' j = 1 := by
+      rw [← checkIdxOfFin_mem_finsetOfBinWord, ← checkIdxOfFin_mem_finsetOfBinWord, h]
+    generalize ε j = a at hj
+    generalize ε' j = b at hj
+    fin_cases a <;> fin_cases b <;> simp_all
+  · intro T
+    refine ⟨fun j => if checkIdxOfFin j ∈ T then 1 else 0, ?_⟩
+    ext μ
+    obtain ⟨j, rfl⟩ := checkIdxOfFin_surjective μ
+    rw [checkIdxOfFin_mem_finsetOfBinWord]
+    by_cases hj : checkIdxOfFin j ∈ T <;> simp [hj]
+
+/-- `Q̌_ε` の因子 `R_{j+1}^{(ε_{j+1})}`: Lean の `NecSuf.projFactor F.nOp (finsetOfBinWord ε) (checkIdxOfFin j)` は `rFactor (checkIdxOfFin j) (ε j)` である。 -/
+theorem projFactor_finsetOfBinWord (ε : Fin M → Fin 2) (j : Fin M) :
+    NecSuf.projFactor F.nOp (finsetOfBinWord ε) (checkIdxOfFin j) = F.rFactor (checkIdxOfFin j) (ε j) := by
+  by_cases h : ε j = 1
+  · rw [NecSuf.projFactor_of_mem ((checkIdxOfFin_mem_finsetOfBinWord ε j).2 h), rFactor, if_pos h]
+  · rw [NecSuf.projFactor_of_notMem (fun hm => h ((checkIdxOfFin_mem_finsetOfBinWord ε j).1 hm)), rFactor, if_neg h]
+
+/-- **原文 Step 0** の和が単位行列であること（`R_μ^{(1)} + R_μ^{(0)} = I`）の 2 行の鎖を、定義の行まで含めて `rFactor` で書いたもの
+（`nOp_add_one_sub_nOp` は定義の行を除いた 1 段）。 -/
+theorem rFactor_one_add_rFactor_zero (μ : CheckIdx M) : F.rFactor μ 1 + F.rFactor μ 0 = 1 :=
+  calc F.rFactor μ 1 + F.rFactor μ 0
+      = F.nOp μ + (1 - F.nOp μ) := rfl                  -- `R_μ^{(1)}`・`R_μ^{(0)}` の定義（冒頭）
+    _ = 1 := F.nOp_add_one_sub_nOp μ                    -- `matrix_plus_difference_cancels`（`A → ň_μ`、`B → I`）
+
+/-- **原文 Step 2** の鎖（4 行）: `Σ_ε Q̌_ε = Σ_ε ∏R_μ^{(ε_μ)} = ∏(R_μ^{(1)} + R_μ^{(0)}) = ∏I = I`。
+人手の `M_col` が Lean の `r + 1`（人手の `M_col ≥ 2` を含む。`expansion_of_finite_product_of_two_term_sums` は因子が 1 つ以上の積について述べる）、
+人手の和 `Σ_{ε∈{0,1}^𝓜̌}` が `NecSuf.binWordSum r`（`def_sum_over_binary_words`。`TensorPow M` の和は `NecSuf.binWordSum`）である。 -/
+theorem sum_Qproj_step2 {r : ℕ} (F : CheckFermiSetup (r + 1)) :
+    NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε)) = 1 :=
+  calc NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε))
+      = NecSuf.binWordSum r (fun ε => NecSuf.finProdLeft r (fun j => F.rFactor (checkIdxOfFin j) (ε j))) := by
+        congr 1; funext ε
+        rw [Qproj_eq_finProdLeft F]
+        exact congrArg (NecSuf.finProdLeft r) (funext fun j => F.projFactor_finsetOfBinWord ε j)
+                                                        -- `Q̌_ε` の定義（冒頭）
+    _ = NecSuf.finProdLeft r (fun j => F.rFactor (checkIdxOfFin j) 1 + F.rFactor (checkIdxOfFin j) 0) :=
+        (expansion_of_finite_product_of_two_term_sums_tensorPow r (fun j e => F.rFactor (checkIdxOfFin j) e)).symm
+                                                        -- `expansion_of_finite_product_of_two_term_sums`
+                                                        -- （`n → 2^{M_col}`、`r → M_col`、`A_j^{(e)} → R_j^{(e)}`）を右辺から左辺へ
+                                                        -- （人手の `R_{j+1}^{(e)}` が `rFactor (checkIdxOfFin j) e`）
+    _ = NecSuf.finProdLeft r (fun _ => (1 : TensorPow (r + 1))) :=
+        congrArg (NecSuf.finProdLeft r) (funext fun j => F.rFactor_one_add_rFactor_zero (checkIdxOfFin j))
+                                                        -- Step 0 の和が単位行列であることを各因子へ同時に適用
+    _ = 1 := finite_product_of_identity_matrices_tensorPow r
+                                                        -- `finite_product_of_identity_matrices`（`r → M_col`）
+
+/-- Lean の `sum_Qproj` の和（`𝓜̌` の部分集合の上の `Finset.sum`）は、人手の和 `Σ_{ε∈{0,1}^𝓜̌}`（`NecSuf.binWordSum`）に等しい。
+人手の証明の行ではなく、Lean の二つの和をつなぐ等式である。語から部分集合への全単射 `finsetOfBinWord` で添字を付け替え、
+必要十分版 `NecSuf.binWordSum_eq_sum`（`Ising2D/NecSuf/BinaryWordSumAsFinsetSum.lean`）の特殊化で二つの和をつなぐ。 -/
+theorem sum_Qproj_eq_binWordSum {r : ℕ} (F : CheckFermiSetup (r + 1)) :
+    ∑ T : Finset (CheckIdx (r + 1)), F.Qproj T = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε)) :=
+  calc ∑ T : Finset (CheckIdx (r + 1)), F.Qproj T
+      = ∑ ε : Fin (r + 1) → Fin 2, F.Qproj (finsetOfBinWord ε) :=
+        (Fintype.sum_bijective finsetOfBinWord finsetOfBinWord_bijective _ _ (fun _ => rfl)).symm
+                                                        -- 語から部分集合への全単射で添字を付け替える
+    _ = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε)) := (NecSuf.binWordSum_eq_sum r _).symm
+                                                        -- 必要十分版（加法についての可換モノイド）
+
+/-- **原文 (2)** の必要十分版の特殊化（人手の範囲外の `M_col = 0` でも成り立つ）。 -/
+theorem sum_Qproj_of_necSuf : ∑ T : Finset (CheckIdx M), F.Qproj T = 1 := by
   have := NecSuf.sum_projOn (n := F.nOp) (hn := F.commute_nOp_nOp) Finset.univ
   rwa [Finset.powerset_univ] at this
+
+/-- **原文 (2)**: `∑_ε Q̌_ε = I`。
+人手の範囲 `M_col ≥ 2`（`M = r + 1` に含まれる）では、和を人手の `Σ_{ε∈{0,1}^𝓜̌}` へ付け替えて Step 2 の鎖 `sum_Qproj_step2` で示す。
+`M = 0` は人手の範囲外で、必要十分版の特殊化 `sum_Qproj_of_necSuf` で閉じる。 -/
+theorem sum_Qproj : ∑ T : Finset (CheckIdx M), F.Qproj T = 1 := by
+  match M, F with
+  | 0, F => exact F.sum_Qproj_of_necSuf
+  | r + 1, F =>
+    calc ∑ T : Finset (CheckIdx (r + 1)), F.Qproj T
+        = NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε)) := sum_Qproj_eq_binWordSum F
+                                                        -- Lean の和を人手の和へ付け替える
+      _ = 1 := sum_Qproj_step2 F                        -- Step 2 の鎖
 
 /-- **原文 (3)**: `ň_ν Q̌_ε = ε_ν Q̌_ε`。 -/
 theorem nOp_mul_Qproj (ν : CheckIdx M) (T : Finset (CheckIdx M)) :

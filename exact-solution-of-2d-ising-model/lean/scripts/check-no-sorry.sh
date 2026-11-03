@@ -1736,6 +1736,13 @@ targets=(
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne_step1
   Ising2D.CheckFermiSetup.Qproj_mul_Qproj_of_ne_of_necSuf
   Ising2D.CheckFermiSetup.sum_Qproj
+  Ising2D.CheckFermiSetup.projFactor_finsetOfBinWord
+  Ising2D.CheckFermiSetup.rFactor_one_add_rFactor_zero
+  Ising2D.CheckFermiSetup.finsetOfBinWord_bijective
+  Ising2D.CheckFermiSetup.sum_Qproj_step2
+  Ising2D.NecSuf.binWordSum_eq_sum
+  Ising2D.CheckFermiSetup.sum_Qproj_eq_binWordSum
+  Ising2D.CheckFermiSetup.sum_Qproj_of_necSuf
   Ising2D.CheckFermiSetup.nOp_mul_Qproj
   Ising2D.CheckFermiSetup.trace_Qproj
   Ising2D.CheckFermiSetup.finrank_range_Qproj

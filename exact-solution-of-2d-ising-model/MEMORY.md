@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-03: Lean の通しの証明のゴールラインの確認の八十一個目として、`check_joint_eigenspace_decomposition` の (l5e) を行った。`ClaimCheckJointEigenspace.lean` に Step 2 の 4 行の鎖 `Σ_ε Q̌_ε = Σ_ε ∏R_μ^{(ε_μ)} = ∏(R_μ^{(1)} + R_μ^{(0)}) = ∏I = I` と 1 対 1 の `sum_Qproj_step2`（`rFactor`・`finsetOfBinWord`・`rFactor_one_add_rFactor_zero`）を置き、Lean の `Finset.sum` と人手の和 `def_sum_over_binary_words` をつなぐ `sum_Qproj_eq_binWordSum`（必要十分版 `NecSuf/BinaryWordSumAsFinsetSum.lean` の `binWordSum_eq_sum`）を足した。(2) の `sum_Qproj` は型を変えずに `M ≥ 1` でこの鎖から示す（`M = 0` は必要十分版の特殊化）。人手証明と SageMath は不変。次は (l5f) Step 3 の `ň_νQ̌_ε`・`Q̌_εň_ν` の鎖。
+
 2026-11-03: 全証明の SageMath 検算として、`arccosh_properties`（逆双曲線余弦は非負側の双曲線余弦の逆）に検算 `sagemath/check/arccosh_properties/` を付けた（未検算 64 件）。等号の行を不定元のイデアルと形式冪級数で厳密に、log・exp の値を含む行と主張を本文の exp のボールと log の囲みで確かめた。人手証明は、定義に無い「証明で示した log 1 = 0」の参照を `scalar_exp_zero` と `log(exp x) = x` の鎖に替え、一行二操作の行を分け、(1) と `sinh t ≥ 0` を場合分けの鎖に、ℝ 脱出を明示した（主張は不変）。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`def_half_integer_modes`）。
 
 2026-11-02: 全証明の SageMath 検算として、`factorization_of_A_theta_general`（A(θ) = B_1(θ)B_2B_1(θ)）に検算 `sagemath/check/factorization_of_A_theta_general/` を付けた（未検算 65 件）。各行の等号がその行の (∵) が引く関係式だけで成り立つことを多項式のイデアルで、全行と主張を具体値の代数的数で厳密に確かめた。人手証明は a, b, C, S, e_± を ℂ の元として置き直し、本文に無かった倍角公式の参照を `cosh_addition_formula`・`sinh_double_angle_formula` と包含の積・和の保存に、`theorem_exp_product`（n=1）を `scalar_exp_product`・`scalar_exp_zero` に付け替えた（主張の中身は不変）。計算の誤りは無かった。次の一歩は状態台帳の「次の一歩」（`arccosh_properties`）。

@@ -281,6 +281,7 @@ import Ising2D.NecSuf.BinaryWordSum
 import Ising2D.NecSuf.FiniteProductCommute
 import Ising2D.NecSuf.FiniteProductOmittingOneIndex
 import Ising2D.NecSuf.FiniteProductLeftAsNoncommProd
+import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.NecSuf.MatrixEqNegOfAddEqZero
 import Ising2D.NecSuf.CommuteWithMatrixDifference
 import Ising2D.NecSuf.ZeroSmulAndAddCommMatrix
