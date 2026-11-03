@@ -12331,6 +12331,7 @@ const chapter_partition_polynomial = defineSection({
                       title: { text: "有限集合の元の個数の記法" },
                       labels: ["def_cardinality_notation"],
                       habitat: "N",
+                      lean: ["Finset.card", "Fintype.card"],
                       statement: [
                         paragraph([
                           "有限集合 ",
@@ -13089,11 +13090,11 @@ Z_L
                     displayMath(String.raw`\begin{aligned}
 \sum_{m=0}^{2L^2}\Omega_L(m)
 &=\sum_{m=0}^{2L^2}|A_{L,m}|
-&&(\because\ \blkref{def_multiplicity})\\
+&&\bigl(\because\ \blkref{def_multiplicity}\bigr)\\
 &=|\Sigma_L|
-&&(\because\ \blkref{claim_configuration_partition})\\
+&&\bigl(\because\ \blkref{claim_configuration_partition}\bigr)\\
 &=2^{L^2}
-&&(\because\ \blkref{def_configuration})
+&&\bigl(\because\ \blkref{def_configuration}\bigr)
 \end{aligned}`),
                     paragraph([
                       "以上は有限集合の元の個数の計算だけからなり、実数体も複素数体も現れない。",

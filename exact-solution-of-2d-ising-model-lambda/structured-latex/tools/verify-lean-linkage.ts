@@ -31,7 +31,7 @@ const leanRoot = join(projectRoot, "lean", "Ising2DLambda");
  * 自前で定義を置いていない対象に限る（例: 不定元 t は `Polynomial.X` そのものであり、
  * 別名を作ると人手証明の定義と Lean の定義が 2 つになる）。
  */
-const MATHLIB_ALLOWLIST = new Set(["Polynomial.X"]);
+const MATHLIB_ALLOWLIST = new Set(["Polynomial.X", "Finset.card", "Fintype.card"]);
 
 const DECL_RE =
   /^\s*(?:@\[[^\]]*\]\s*)?(?:noncomputable\s+|private\s+|protected\s+|scoped\s+)*(?:theorem|lemma|def|abbrev|structure|instance|inductive)\s+([A-Za-z0-9_.'₀-₉]+)/gm;
