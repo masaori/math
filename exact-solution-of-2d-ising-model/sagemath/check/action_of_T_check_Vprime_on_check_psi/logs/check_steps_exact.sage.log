@@ -1,0 +1,11 @@
+== action_of_T_check_Vprime_on_check_psi: 準備 5、Step 1〜5 の厳密な行
+M=2 (2, 3) g独立: 済み
+M=2 (2, 3) g対称: 済み
+M=2 (4, 3) g独立: 済み
+M=2 (4, 3) g対称: 済み
+M=3 (2, 3) g独立: 済み
+M=3 (2, 3) g対称: 済み
+M=3 (4, 3) g独立: 済み
+M=3 (4, 3) g対称: 済み
+-- action_of_T_check_Vprime_on_check_psi: 準備 5、Step 1〜5 の厳密な行: 3942/3942 PASS
+RESULT: PASS

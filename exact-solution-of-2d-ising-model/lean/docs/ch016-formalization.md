@@ -45,9 +45,9 @@
 | `Ising2D.checkX` / `Ising2D.checkVprime` | `X̌`, `V̌' = exp(X̌)` | **`def_check_Vprime`** |
 | `Ising2D.checkVprimeUnits` / `isUnit_checkVprime` | `V̌'` の可逆性と `(V̌')^{-1} = exp(-X̌)` | 同 (2) |
 | `Ising2D.checkX_eq_carHam` | `X̌` は必要十分版 `NecSuf.carHam` そのもの | 橋渡し |
-| `Ising2D.matExp_conj_eigen` | `[X,a] = c a ⟹ exp(X) a exp(-X) = e^c a` | `action_of_T_check_Vprime_on_check_psi` Step 3〜5 |
-| `Ising2D.lie_checkX_checkPsiDag` | `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†` | 同 Step 2 |
-| `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 Step 2' |
+| `Ising2D.matExp_conj_eigen` | `[X,a] = c a ⟹ exp(X) a exp(-X) = e^c a` | `action_of_T_check_Vprime_on_check_psi` Step 3〜6 |
+| `Ising2D.lie_checkX_checkPsiDag` | `[X̌, ψ̌_μ^†] = γ(θ̃_μ) ψ̌_μ^†` | 同 準備 5 と Step 2 |
+| `Ising2D.lie_checkX_checkPsi` | `[X̌, ψ̌_μ] = -γ(θ̃_μ) ψ̌_μ` | 同 準備 5 と Step 2' |
 | `Ising2D.TCheckVprime_checkPsiDag` / `TCheckVprime_checkPsi`（`ClaimActionTCheckVprime.lean`） | `T_{(V̌')}(ψ̌_μ^†) = e^{+γ}ψ̌_μ^†`, `T_{(V̌')}(ψ̌_μ) = e^{-γ}ψ̌_μ` | **`action_of_T_check_Vprime_on_check_psi`** |
 | `Ising2D.rowMul_one` | `(A_0, B_0) I = (A_0, B_0)` | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1 の 1 行目 |
 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` | `(Ž_μ, Y̌_μ) = (ψ̌_μ^†, ψ̌_μ) P̌_μ^{-1}`（`P̌_μP̌_μ^{-1} = I`・結合法則・`ψ̌` の定義の 3 行の鎖） | 同 Step 1 |
@@ -63,9 +63,9 @@
 | `Ising2D.exists_smul_of_TConj_eq` | 共役が一致する 2 つの可逆元は `0` でないスカラー倍を除いて等しい | **`V_plus_eq_c_check_Vprime`** |
 | `Ising2D.VPlus_eq_smul_checkVprime` | `∃ c ≠ 0, V^{(+)} = c V̌'`（**本章の結論**） | 同 |
 | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` | `[d a, c] = δ d`, `[d a, b] = -(δ a)`（**必要十分版**） | `action_of_T_check_Vprime_on_check_psi` Step 1, 1' |
-| `Ising2D.NecSuf.carHam` / `lie_carHam_cre` / `lie_carHam_ann` | `[Σ g_ν (d_ν e_{σν} - κ), d_μ] = g_μ d_μ` ほか（**必要十分版**） | 同 Step 2, 2' |
+| `Ising2D.NecSuf.carHam` / `lie_carHam_cre` / `lie_carHam_ann` | `[Σ g_ν (d_ν e_{σν} - κ), d_μ] = g_μ d_μ` ほか（**必要十分版**） | 同 準備 5 と Step 2, 2' |
 | `Ising2D.NecSuf.cosh_add_sinh_eq_exp` | `cosh c + sinh c = e^c` | 補助 |
-| `Ising2D.NecSuf.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**必要十分版**） | 同 Step 3〜5 |
+| `Ising2D.NecSuf.exp_conj_of_ad_eigen` / `exp_conj_of_lie_eigen` | `ad x` の固有ベクトルは `exp` 共役の固有ベクトル（**必要十分版**） | 同 Step 3〜6 |
 
 ### 1-2. 015 章の成果で仮定を落とした版（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimCheckFermiResultsUnconditional.lean`）
 
@@ -106,8 +106,8 @@
 | 人手証明のラベル | 具体版 | 必要十分版 |
 | --- | --- | --- |
 | `anticommutator_of_check_psi` | `Ising2D.checkPsi_car` ほか 3 本（`EigenvalueProblem/DiagonalizationAndExponentialForm/ClaimAnticommutatorCheckPsi.lean`） | **008 章の `Ising2D.NecSuf.car_of_coeffs` がそのまま使える**（`NecSuf/Fermion.lean`。新規作成不要だった） |
-| `action_of_T_check_Vprime_on_check_psi` Step 1〜2' | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
-| `action_of_T_check_Vprime_on_check_psi` Step 3〜5 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
+| `action_of_T_check_Vprime_on_check_psi` Step 1〜2'（準備 5 を含む） | `Ising2D.lie_checkX_checkPsiDag` / `lie_checkX_checkPsi` | `Ising2D.NecSuf.lie_creAnn_cre` / `lie_creAnn_ann` / `lie_carHam_cre` / `lie_carHam_ann`（`NecSuf/FermionLadder.lean`、新規） |
+| `action_of_T_check_Vprime_on_check_psi` Step 3〜6 | `Ising2D.matExp_conj_eigen` | `Ising2D.NecSuf.exp_conj_of_ad_eigen`（`NecSuf/ExpEigenvector.lean`、新規） |
 | `commutation_V_plus_check_psi` | `Ising2D.rowApply_checkPsi_row` ほか（`ClaimCommutationVPlusCheckPsi.lean`） | 置かない。結合律 `rowMul_rowMul` と Step 1 の `rowApply_rowMul` は具体版の時点で任意の `ℂ` 加群について述べてあり、Step 2 の残りは具体的な `P̌_μ`・`Ď_μ` による対角化の代入だけで、抽象度を上げて取り除ける構造が無い |
 | `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` Step 1・Step 3 | `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv` / `eq_on_checkZY_of_eq_on_checkPsi`（`ClaimTVPlusEqTCheckVprimeOnCheckZY.lean`。必要十分版からの導出は `Ising2D.checkZY_row_eq_rowMul_checkPmat_inv_of_necSuf` / `eq_on_checkZY_of_eq_on_checkPsi_of_necSuf`、`ClaimTVPlusEqTCheckVprimeOnCheckZYFromNecSuf.lean`） | `Ising2D.NecSuf.eq_rowMul2_of_rowMul2_eq` / `NecSuf.linear_eq_on_of_rowMul2_eq`（係数は可換半環、台はその上の任意の加群。`NecSuf/RowVectorRightInverse.lean`、新規） |
 
@@ -138,7 +138,7 @@
   半整数運動量では `μ ↦ M+1-μ` が `𝓜̌` 上の対合（Lean では `Fin.rev`）になる。
   これが場合分けの消滅の唯一の理由である。
 
-- **原文 Step 3（帰納法）・Step 4（部分和の極限）・Step 5（`exp` の積公式）の 3 段は、
+- **人手証明の Step 3（移項）・Step 4（帰納法）・Step 5（部分和の極限）・Step 6（`exp` の積公式）は、
   008 章ですでに形式化した「`ad X` が 2 次元部分空間を保つ場合の閉じた形」
   （`NecSuf.exp_conj_two_dim_z`）の 1 次元への退化にすぎない**（`z = y = a` と置くだけ。
   `cosh c + c·sinhc c = cosh c + sinh c = e^c`）。新しい解析は 1 つも要らなかった。

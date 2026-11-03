@@ -6799,447 +6799,805 @@ T(\check\psi_\mu)
         "）について",
       ]),
       displayMath(
-        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger,
+        String.raw`T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right) = \left(\exp(+\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu^\dagger,
 \qquad
-T_{(\check{V}')}\!\left(\check\psi_\mu\right) = \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu`,
+T_{(\check{V}')}\!\left(\check\psi_\mu\right) = \left(\exp(-\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu`,
       ),
+      paragraph([
+        "が成り立つ（",
+        math(String.raw`T_{(\check{V}')}`),
+        " は ",
+        ref("def_check_Vprime"),
+        " (2)、",
+        math(String.raw`\check\psi_\mu^\dagger, \check\psi_\mu`),
+        " は ",
+        ref("def_check_fermi"),
+        "、",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{\geq 0}`),
+        " は ",
+        ref("def_gamma_theta"),
+        "、exp は実数の exp（",
+        ref("def_scalar_exp"),
+        "）で、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の像。右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍）。",
+        math(String.raw`\gamma(\tilde\theta_\mu)`),
+        " は実対数による arccosh で、exp の値と ",
+        math(String.raw`\exp(\pm\check{X})`),
+        " は級数の極限で定まるので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している。",
+      ]),
     ],
     proof: [
       paragraph([
-        ref("def_check_Vprime"),
+        ref("def_invertible_elements_of_R"),
         " の ",
-        math(String.raw`\check{X}`),
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R := \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " を用い、",
+        math(String.raw`I := I_{R}`),
+        "（",
+        ref("def_identity_matrix"),
+        "）、",
+        math(String.raw`O \in R`),
+        "（",
+        ref("def_zero_matrix"),
+        "）、",
+        math(String.raw`T := T_{(\check{V}')}`),
+        " と書く。行列の積は ",
+        ref("mat_mult"),
+        "、和は ",
+        ref("def_matrix_sum"),
+        "、差は ",
+        ref("def_matrix_difference"),
+        "、符号反転は ",
+        ref("def_matrix_negation"),
+        "、スカラー倍は ",
+        ref("def_matrix_scalar_multiple"),
+        "、",
+        math(String.raw`\check{\mathcal{M}} = \{1,\dots,M_{\mathrm{col}}\}`),
+        " 上の和は ",
+        ref("def_finite_sum_of_matrices"),
+        " の ",
+        math(String.raw`r = M_{\mathrm{col}}`),
+        " の有限和、交換子は ",
+        ref("def_ad_X_matrix"),
+        " の ",
+        math(String.raw`[A, B] := AB - BA`),
+        "、反交換子は ",
+        ref("def_matrix_anticommutator"),
+        "、",
+        math(String.raw`\delta \in \mathbb{C}`),
+        " は ",
+        ref("def_kronecker_delta"),
+        "、",
+        math(String.raw`\mathbb{C}`),
+        " の差は ",
+        ref("def_complex_difference"),
+        " による。",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " について ",
+        ref("def_check_index_set"),
+        " (2) より ",
+        math(String.raw`M_{\mathrm{col}}+1-\nu \in \check{\mathcal{M}}`),
+        " であり、",
+        math(String.raw`M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\nu) = \nu`),
+        " である。",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " について",
+      ]),
+      displayMath(String.raw`g_\nu := \left(\gamma(\tilde\theta_\nu)\right)_{\mathbb{C}} \in \mathbb{C},
+\qquad
+P_\nu := \check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu} \in R,
+\qquad
+U := \left(\tfrac12\right)_{\mathbb{C}} I \in R`),
+      paragraph([
+        "と置く。",
+        ref("def_check_Vprime"),
+        " より ",
+        math(String.raw`\check{X} = \sum_{\nu \in \check{\mathcal{M}}} g_\nu\left(P_\nu - U\right)`),
         "、",
         math(String.raw`\check{V}' = \exp(\check{X})`),
-        "、",
+        "、同 (2) より ",
         math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
-        " を用いる。すなわち ",
-        math(String.raw`T_{(\check{V}')}(W) = \exp(\check{X})\,W\,\exp(-\check{X})`),
+        "、",
+        math(String.raw`T(W) = \left(\check{V}'W\right)\left(\check{V}'\right)^{-1}`),
+        "（",
+        math(String.raw`W \in R`),
+        "）である。冪は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`A^0 := I`),
+        "、",
+        math(String.raw`A^{m+1} := A^m A`),
+        " により、",
+        math(String.raw`A \in R`),
+        "、",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について部分和を ",
+        math(String.raw`S_N(A) := \sum_{m=0}^{N}\left(\tfrac{1}{m!}\right)_{\mathbb{C}}A^m`),
+        "（",
+        ref("def_finite_sum_of_matrices_from_index_zero"),
+        "）と置く。",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`\exp(A)`),
+        " は ",
+        math(String.raw`S_N(A)`),
+        " の ",
+        math(String.raw`N \to \infty`),
+        " での極限である。",
+      ]),
+      paragraph([
+        "準備 1（スカラー行列は任意の元と可換）。",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`W \in R`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(cI)W - W(cI)
+&= [cI, W]
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{scalar_identity_commutes}\ (n \to 2^{M_{\mathrm{col}}},\ A \to W)\bigr)
+\end{aligned}`),
+      paragraph([
+        "であるから、",
+        ref("matrix_difference_zero_iff_equal"),
+        " より ",
+        math(String.raw`(cI)W = W(cI)`),
         " である。",
       ]),
+      paragraph([
+        "準備 2（差と積）。",
+        math(String.raw`A, B, C \in R`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(A - B)C
+&= \left(A + (-B)\right)C
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)\\
+&= AC + (-B)C
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\bigr)\\
+&= AC + \left(-(BC)\right)
+&&\bigl(\because\ \blkref{negation_factors_out_of_left_factor}\bigr)\\
+&= AC - BC
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)
+\end{aligned}`),
+      displayMath(String.raw`\begin{aligned}
+C(A - B)
+&= C\left(A + (-B)\right)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)\\
+&= CA + C(-B)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\bigr)\\
+&= CA + \left(-(CB)\right)
+&&\bigl(\because\ \blkref{negation_factors_out_of_right_factor}\bigr)\\
+&= CA - CB
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備 3（差の打ち消し）。",
+        math(String.raw`A, B, C \in R`),
+        "、",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left((A - B) - (C - B)\right)_{kl}
+&= (A - B)_{kl} - (C - B)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)\\
+&= \left(A_{kl} - B_{kl}\right) - \left(C_{kl} - B_{kl}\right)
+&&\bigl(\because\ \blkref{def_matrix_difference}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= A_{kl} - C_{kl}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{と}\ \blkref{def_complex_difference}\bigr)\\
+&= (A - C)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_difference}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、成分がすべて等しいので ",
+        math(String.raw`(A - B) - (C - B) = A - C`),
+        " である。",
+      ]),
+      paragraph([
+        "準備 4（和の差）。",
+        math(String.raw`A_\nu, B_\nu \in R`),
+        "（",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        "）、",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について、まず",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\nu \in \check{\mathcal{M}}}\left(A_\nu + B_\nu\right)\Bigr)_{kl}
+&= \sum_{\nu \in \check{\mathcal{M}}}\left(A_\nu + B_\nu\right)_{kl}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}\left((A_\nu)_{kl} + (B_\nu)_{kl}\right)
+&&\bigl(\because\ \blkref{def_matrix_sum}\ \text{を各項へ同時適用}\bigr)\\
+&= \Bigl(\sum_{\nu \in \check{\mathcal{M}}}(A_\nu)_{kl}\Bigr) + \Bigl(\sum_{\nu \in \check{\mathcal{M}}}(B_\nu)_{kl}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_complex_sums}\bigr)\\
+&= \Bigl(\sum_{\nu \in \check{\mathcal{M}}}A_\nu\Bigr)_{kl} + \Bigl(\sum_{\nu \in \check{\mathcal{M}}}B_\nu\Bigr)_{kl}
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_entrywise}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \Bigl(\sum_{\nu \in \check{\mathcal{M}}}A_\nu + \sum_{\nu \in \check{\mathcal{M}}}B_\nu\Bigr)_{kl}
+&&\bigl(\because\ \blkref{def_matrix_sum}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、成分がすべて等しいので ",
+        math(String.raw`\sum_{\nu}\left(A_\nu + B_\nu\right) = \sum_{\nu}A_\nu + \sum_{\nu}B_\nu`),
+        " である。よって",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\nu \in \check{\mathcal{M}}}\left(A_\nu - B_\nu\right)
+&= \sum_{\nu \in \check{\mathcal{M}}}\left(A_\nu + (-B_\nu)\right)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}A_\nu + \sum_{\nu \in \check{\mathcal{M}}}(-B_\nu)
+&&\bigl(\because\ \text{直前の和の等式}\ (B_\nu \to -B_\nu)\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}A_\nu + \Bigl(-\sum_{\nu \in \check{\mathcal{M}}}B_\nu\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_negated_matrices}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}A_\nu - \sum_{\nu \in \check{\mathcal{M}}}B_\nu
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備 5（",
+        math(String.raw`\check{X}`),
+        " との交換子の展開）。",
+        math(String.raw`W \in R`),
+        "、",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " について ",
+        math(String.raw`C_\nu := g_\nu\left(P_\nu - U\right) \in R`),
+        " と置くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+[C_\nu, W]
+&= \left(g_\nu\left(P_\nu - U\right)\right)W - W\left(g_\nu\left(P_\nu - U\right)\right)
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\bigr)\\
+&= g_\nu\left(\left(P_\nu - U\right)W\right) - W\left(g_\nu\left(P_\nu - U\right)\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&= g_\nu\left(\left(P_\nu - U\right)W\right) - g_\nu\left(W\left(P_\nu - U\right)\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&= g_\nu\left(P_\nu W - UW\right) - g_\nu\left(W\left(P_\nu - U\right)\right)
+&&\bigl(\because\ \text{準備 2 の第 1 式}\bigr)\\
+&= g_\nu\left(P_\nu W - UW\right) - g_\nu\left(WP_\nu - WU\right)
+&&\bigl(\because\ \text{準備 2 の第 2 式}\bigr)\\
+&= g_\nu\left(P_\nu W - UW\right) - g_\nu\left(WP_\nu - UW\right)
+&&\bigl(\because\ \text{準備 1}\ \bigl(c \to \left(\tfrac12\right)_{\mathbb{C}}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
+&= g_\nu\left(\left(P_\nu W - UW\right) - \left(WP_\nu - UW\right)\right)
+&&\bigl(\because\ \blkref{scalar_multiple_distributes_over_matrix_difference}\ \text{を右辺から左辺へ}\bigr)\\
+&= g_\nu\left(P_\nu W - WP_\nu\right)
+&&\bigl(\because\ \text{準備 3}\bigr)\\
+&= g_\nu[P_\nu, W]
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+[\check{X}, W]
+&= \check{X}W - W\check{X}
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\bigr)\\
+&= \Bigl(\sum_{\nu \in \check{\mathcal{M}}} C_\nu\Bigr)W - W\Bigl(\sum_{\nu \in \check{\mathcal{M}}} C_\nu\Bigr)
+&&\bigl(\because\ \blkref{def_check_Vprime}\ \text{の}\ \check{X}\ \text{を 2 か所へ同時適用}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}\left(C_\nu W\right) - W\Bigl(\sum_{\nu \in \check{\mathcal{M}}} C_\nu\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}\left(C_\nu W\right) - \sum_{\nu \in \check{\mathcal{M}}}\left(WC_\nu\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}\left(C_\nu W - WC_\nu\right)
+&&\bigl(\because\ \text{準備 4 を右辺から左辺へ}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}}[C_\nu, W]
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}} g_\nu[P_\nu, W]
+&&\bigl(\because\ \text{直前の}\ [C_\nu, W]\ \text{の式を各項へ同時適用}\bigr)
+\end{aligned}`),
+      paragraph([
+        "準備 6（",
+        math(String.raw`cI`),
+        " の成分）。",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+(cI)_{kl}
+&= c\,I_{kl}
+&&\bigl(\because\ \blkref{def_matrix_scalar_multiple}\bigr)\\
+&= c\,\delta_{kl}
+&&\bigl(\because\ \blkref{def_identity_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["であり、",]),
+      displayMath(String.raw`\begin{aligned}
+c\,\delta_{kk}
+&= c\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= c
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の単位元}\bigr)
+\end{aligned}
+\qquad
+\begin{aligned}
+c\,\delta_{kl}
+&= c\,0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (k \neq l)\bigr)\\
+&= 0_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。よって ",
+        math(String.raw`cI`),
+        " は ",
+        ref("def_diagonal_matrix"),
+        " の対角行列で、対角成分は ",
+        math(String.raw`c`),
+        " である。",
+      ]),
+      paragraph([
+        "準備 7（",
+        math(String.raw`\exp(cI) = \exp(c)\,I`),
+        "）。",
+        math(String.raw`c \in \mathbb{C}`),
+        "、",
+        math(String.raw`k, l \in \{1,\dots,2^{M_{\mathrm{col}}}\}`),
+        " について（",
+        math(String.raw`\exp(c)`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の複素数の exp）",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\exp(cI)_{kl}
+&= \begin{cases} \exp\!\left((cI)_{kk}\right) & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
+&&\bigl(\because\ \blkref{exp_of_diagonal_matrix}\ (n \to 2^{M_{\mathrm{col}}},\ D \to cI)\bigr)\\
+&= \begin{cases} \exp(c) & (k = l) \\ 0_{\mathbb{C}} & (k \neq l) \end{cases}
+&&\bigl(\because\ \text{準備 6 の対角成分}\bigr)\\
+&= \begin{cases} \exp(c)\,1_{\mathbb{C}} & (k = l) \\ \exp(c)\,0_{\mathbb{C}} & (k \neq l) \end{cases}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\bigr)\\
+&= \exp(c)\,\delta_{kl}
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= \left(\exp(c)\,I\right)_{kl}
+&&\bigl(\because\ \text{準備 6 の第 1 の鎖}\ (c \to \exp(c))\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "であり、成分がすべて等しいので ",
+        math(String.raw`\exp(cI) = \exp(c)\,I`),
+        " である（",
+        math(String.raw`\exp(cI)`),
+        " と ",
+        math(String.raw`\exp(c)`),
+        " は級数の極限で定まるので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している）。",
+      ]),
+      paragraph([
+        "準備 8（",
+        math(String.raw`\check{X} + cI`),
+        " と ",
+        math(String.raw`-\check{X}`),
+        " の可換性と和）。",
+        math(String.raw`c \in \mathbb{C}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\left(\check{X} + cI\right)\left(-\check{X}\right)
+&= \check{X}\left(-\check{X}\right) + (cI)\left(-\check{X}\right)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\bigr)\\
+&= -\left(\check{X}\check{X}\right) + (cI)\left(-\check{X}\right)
+&&\bigl(\because\ \blkref{negation_factors_out_of_right_factor}\bigr)\\
+&= -\left(\check{X}\check{X}\right) + \left(-\check{X}\right)(cI)
+&&\bigl(\because\ \text{準備 1}\ (W \to -\check{X})\bigr)\\
+&= \left(-\check{X}\right)\check{X} + \left(-\check{X}\right)(cI)
+&&\bigl(\because\ \blkref{negation_factors_out_of_left_factor}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-\check{X}\right)\left(\check{X} + cI\right)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+\left(\check{X} + cI\right) + \left(-\check{X}\right)
+&= \left(-\check{X}\right) + \left(\check{X} + cI\right)
+&&\bigl(\because\ \blkref{matrix_sum_is_commutative}\bigr)\\
+&= \left(-\check{X}\right) + \left(cI + \check{X}\right)
+&&\bigl(\because\ \blkref{matrix_sum_is_commutative}\bigr)\\
+&= \left(-\check{X}\right) + \left(cI + \left(-\left(-\check{X}\right)\right)\right)
+&&\bigl(\because\ \blkref{matrix_double_negation}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-\check{X}\right) + \left(cI - \left(-\check{X}\right)\right)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\ \text{を右辺から左辺へ}\bigr)\\
+&= cI
+&&\bigl(\because\ \blkref{matrix_plus_difference_cancels}\ (A \to -\check{X},\ B \to cI)\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
       paragraph([
         "Step 1（1 項ぶんの交換子、",
         math(String.raw`\check\psi_\mu^\dagger`),
         " 側）。",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
-        "（",
-        ref("def_check_index_set"),
-        "）について",
-      ]),
-      displayMath(
-        String.raw`\left[\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu^\dagger\right]
-= \delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger`,
-      ),
-      paragraph([
-        "を示す。",
-        ref("anticommutator_of_check_psi"),
-        " を ",
-        math(String.raw`(\mu, M_{\mathrm{col}}+1-\nu)`),
-        " の対に適用すると",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu^\dagger\right]_+
-&= \left[\check\psi_\mu^\dagger,\ \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+
-   \quad (\because \text{反交換子の対称性}) \\
-&= \delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I
-   \quad (\because \check\psi\text{ の反交換関係}) \\
-&= \delta_{\mu,\,\nu}\,I
-   \quad (\because M_{\mathrm{col}}+1-\nu = M_{\mathrm{col}}+1-\mu \iff \mu = \nu)
-\end{aligned}`,
-      ),
-      paragraph([
-        "である（",
-        ref("def_check_index_set"),
-        " (2) より ",
-        math(String.raw`M_{\mathrm{col}}+1-\nu \in \check{\mathcal{M}}`),
-        " なので ",
-        ref("anticommutator_of_check_psi"),
-        " が適用できる）。また ",
-        ref("anticommutator_of_check_psi"),
-        " より ",
-        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+ = 0`),
-        " であるから、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu^\dagger
-&= \check\psi_\nu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu^\dagger\right)
-   \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\nu^\dagger\left(\delta_{\mu,\nu}I - \check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
-   \quad (\because \text{直前の反交換子の等式}\ ([\check\psi_{M_{\mathrm{col}}+1-\nu}, \check\psi_\mu^\dagger]_+ = \delta_{\mu,\nu}I)) \\
-&= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger - \check\psi_\nu^\dagger\,\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{行列の積の分配法則と結合法則}) \\
-&= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_\nu^\dagger, \check\psi_\mu^\dagger]_+ = 0))
-\end{aligned}`,
-      ),
-      paragraph(["となる。よって"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu^\dagger\right]
-&= \check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu^\dagger
-   - \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{交換子の定義}) \\
-&= \left(\delta_{\mu,\nu}\,\check\psi_\nu^\dagger + \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
-   - \check\psi_\mu^\dagger\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{直前の式変形}) \\
-&= \delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger
-   \quad (\because \text{同類項の統合})
-\end{aligned}`,
-      ),
-      paragraph([
-        "となり、上の式を得る。**",
-        math(String.raw`\check{\mathcal{M}}`),
-        " へ絞ったことで、合同式 ",
-        math(String.raw`(1-\nu)+\mu \equiv 1 \pmod M_{\mathrm{col}}`),
-        " を ",
-        math(String.raw`\mu \equiv \nu`),
-        " に書き換える段が要らなくなっている。**",
-      ]),
-      paragraph([
-        "Step 2（",
-        math(String.raw`[\check{X}, \check\psi_\mu^\dagger] = \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger`),
+        " について、",
+        math(String.raw`\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu} = \delta_{\mu,\nu}`),
+        " である（",
+        ref("def_kronecker_delta"),
+        " と、",
+        math(String.raw`\mathbb{Z}`),
+        " で ",
+        math(String.raw`M_{\mathrm{col}}+1-\nu = M_{\mathrm{col}}+1-\mu \iff \mu = \nu`),
         "）。",
-        ref("def_check_Vprime"),
-        " の ",
-        math(String.raw`\check{X}`),
-        " の定義を代入する。",
-        math(String.raw`\tfrac12 I`),
-        " は任意の元と可換（",
-        ref("scalar_identity_commutes"),
-        "）なので交換子に寄与せず、交換子は第 1 引数について ",
-        math(String.raw`\mathbb{C}`),
-        " 線型だから、Step 1 より",
+        ref("commutator_via_anticommutators"),
+        " の交換子・反交換子は ",
+        ref("def_ad_X_matrix"),
+        "・",
+        ref("def_matrix_anticommutator"),
+        " のものと同じ式である。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{X},\ \check\psi_\mu^\dagger\right]
-&= \left[\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
-   \left(\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu} - \tfrac12 I\right),\ \check\psi_\mu^\dagger\right]
-   \quad (\because \check{X}\text{ の定義}) \\
-&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)
-   \left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu} - \tfrac12 I,\ \check\psi_\mu^\dagger\right]
-   \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu^\dagger\right]
-   \quad (\because \text{スカラー行列は任意の元と可換なので } \left[\tfrac12 I,\ \check\psi_\mu^\dagger\right] = 0) \\
-&= \sum_{\nu \in \check{\mathcal{M}}} \gamma(\tilde\theta_\nu)\,\delta_{\mu,\,\nu}\,\check\psi_\nu^\dagger
-   \quad (\because \text{Step 1}) \\
-&= \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
-   \quad (\because \mu \in \check{\mathcal{M}} \text{ なので } \nu = \mu \text{ の項だけが残る})
-\end{aligned}`,
-      ),
-      paragraph(["である。移項すると"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{X}\,\check\psi_\mu^\dagger
-&= \check\psi_\mu^\dagger\,\check{X} + \left[\check{X},\ \check\psi_\mu^\dagger\right]
-   \quad (\because \text{交換子の定義}) \\
-&= \check\psi_\mu^\dagger\,\check{X} + \gamma(\tilde\theta_\mu)\,\check\psi_\mu^\dagger
-   \quad (\because \text{直前の式変形}) \\
-&= \check\psi_\mu^\dagger\,\check{X} + \check\psi_\mu^\dagger\left(\gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換}) \\
-&= \check\psi_\mu^\dagger\left(\check{X} + \gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{行列の積の分配法則})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+[P_\nu, \check\psi_\mu^\dagger]
+&= \left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu^\dagger\right]
+&&\bigl(\because\ P_\nu\ \text{の定め方}\bigr)\\
+&= \check\psi_\nu^\dagger\left[\check\psi_{M_{\mathrm{col}}+1-\nu}, \check\psi_\mu^\dagger\right]_+
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{commutator_via_anticommutators}\ (a \to \check\psi_\nu^\dagger,\ b \to \check\psi_{M_{\mathrm{col}}+1-\nu},\ c \to \check\psi_\mu^\dagger)\bigr)\\
+&= \check\psi_\nu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\nu}\check\psi_\mu^\dagger + \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= \check\psi_\nu^\dagger\left(\check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu} + \check\psi_{M_{\mathrm{col}}+1-\nu}\check\psi_\mu^\dagger\right)
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{matrix_sum_is_commutative}\bigr)\\
+&= \check\psi_\nu^\dagger\left[\check\psi_\mu^\dagger, \check\psi_{M_{\mathrm{col}}+1-\nu}\right]_+
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{def_matrix_anticommutator}\bigr)\\
+&= \check\psi_\nu^\dagger\left(\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I\right)
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu^\dagger\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 2 式}\ (\nu \to M_{\mathrm{col}}+1-\nu)\bigr)\\
+&= \check\psi_\nu^\dagger\left(\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I\right) - O\,\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 1 式}\ ((\mu, \nu) \to (\nu, \mu))\bigr)\\
+&= \check\psi_\nu^\dagger\left(\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I\right) - O
+&&\bigl(\because\ \blkref{zero_matrix_is_left_zero_of_mat_mult}\bigr)\\
+&= \check\psi_\nu^\dagger\left(\delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu}\,I\right)
+&&\bigl(\because\ \blkref{matrix_minus_zero_matrix}\bigr)\\
+&= \check\psi_\nu^\dagger\left(\delta_{\mu,\nu}\,I\right)
+&&\bigl(\because\ \delta_{M_{\mathrm{col}}+1-\nu,\,M_{\mathrm{col}}+1-\mu} = \delta_{\mu,\nu}\bigr)\\
+&= \delta_{\mu,\nu}\left(\check\psi_\nu^\dagger I\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&= \delta_{\mu,\nu}\,\check\psi_\nu^\dagger
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)
+\end{aligned}`),
       paragraph([
-        "Step 3（帰納法）。",
-        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
-        " について ",
-        math(String.raw`\check{X}^n\,\check\psi_\mu^\dagger = \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n`),
-        " が成り立つ。",
-        math(String.raw`n=0`),
-        " では両辺 ",
-        math(String.raw`\check\psi_\mu^\dagger`),
-        " で一致し、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{X}^{n+1}\check\psi_\mu^\dagger
-&= \check{X}\left(\check{X}^{n}\check\psi_\mu^\dagger\right)
-   \quad (\because \text{冪の定義と行列の積の結合法則}) \\
-&= \check{X}\,\check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
-   \quad (\because \text{帰納法の仮定}) \\
-&= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n}
-   \quad (\because \text{Step 2}) \\
-&= \check\psi_\mu^\dagger\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^{n+1}
-   \quad (\because \text{冪の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 4（指数関数へ）。Step 3 より各 ",
-        math(String.raw`N`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu^\dagger
-&= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu^\dagger}{n!}
-   \quad (\because \text{行列の積の分配法則}) \\
-&= \sum_{n=0}^{N}\frac{\check\psi_\mu^\dagger
-   \left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}
-   \quad (\because \text{Step 3 を各項へ同時適用}) \\
-&= \check\psi_\mu^\dagger\sum_{n=0}^{N}
-   \frac{\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)^n}{n!}
-   \quad (\because \text{行列の積の分配法則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "であり、",
-        ref("exp_converges"),
-        " より両辺の部分和は ",
-        math(String.raw`N \to \infty`),
-        " で収束する。行列の積は連続（",
-        ref("matrix_multiplication_continuity"),
-        "）だから極限をとって",
-      ]),
-      displayMath(
-        String.raw`\exp(\check{X})\,\check\psi_\mu^\dagger
-= \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)`,
-      ),
-      paragraph([
-        "Step 5（結論）。準備として、",
-        math(String.raw`c \in \mathbb{R}`),
-        " について",
-      ]),
-      displayMath(
-        String.raw`\exp(cI) = \exp(c)I
-\quad (\because \left(cI\right)^n = c^n I\ (n\in\mathbb{Z}_{\geq 0})\text{ と }\exp\text{ の級数定義})`,
-      ),
-      paragraph([
-        "である。",
-        math(String.raw`\check{X}+\gamma(\tilde\theta_\mu)I`),
-        " と ",
-        math(String.raw`-\check{X}`),
-        " は可換（",
-        ref("scalar_identity_commutes"),
-        " と ",
-        math(String.raw`\check{X}(-\check{X}) = (-\check{X})\check{X}`),
-        "）だから ",
-        ref("theorem_exp_product"),
-        " が使えて",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(\check{V}')}\!\left(\check\psi_\mu^\dagger\right)
-&= \exp(\check{X})\,\check\psi_\mu^\dagger\,\exp(-\check{X})
-   \quad (\because \text{証明冒頭の } T_{(\check{V}')} \text{ の表示}) \\
-&= \check\psi_\mu^\dagger\,\exp\!\left(\check{X}+\gamma(\tilde\theta_\mu)I\right)\exp(-\check{X})
-   \quad (\because \text{Step 4}) \\
-&= \check\psi_\mu^\dagger\,\exp\!\left(\gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{可換な指数の積の法則}) \\
-&= \check\psi_\mu^\dagger\left(\exp(\gamma(\tilde\theta_\mu))I\right)
-   \quad (\because \text{準備の等式 } \exp(cI)=\exp(c)I) \\
-&= \exp(+\gamma(\tilde\theta_\mu))\,\check\psi_\mu^\dagger
-   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 1'（",
+        "Step 1'（1 項ぶんの交換子、",
         math(String.raw`\check\psi_\mu`),
         " 側）。",
-        ref("anticommutator_of_check_psi"),
-        " の ",
-        math(String.raw`\left[\check\psi_{M_{\mathrm{col}}+1-\nu}, \check\psi_\mu\right]_+ = 0`),
-        " と ",
-        math(String.raw`\left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+ = \delta_{\mu,\,M_{\mathrm{col}}+1-\nu}I`),
-        " より（",
         math(String.raw`\nu \in \check{\mathcal{M}}`),
-        "、",
-        ref("def_check_index_set"),
-        " (2) より ",
-        math(String.raw`M_{\mathrm{col}}+1-\nu \in \check{\mathcal{M}}`),
-        "）",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu
-&= \check\psi_\nu^\dagger\left(\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu\right)
-   \quad (\because \text{行列の積の結合法則}) \\
-&= \check\psi_\nu^\dagger\left(-\check\psi_\mu\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
-   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_{M_{\mathrm{col}}+1-\nu}, \check\psi_\mu]_+ = 0)) \\
-&= -\left(\check\psi_\nu^\dagger\,\check\psi_\mu\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{行列の積の結合法則とスカラー倍}) \\
-&= -\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}I - \check\psi_\mu\,\check\psi_\nu^\dagger\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \check\psi\text{ の反交換関係}\ ([\check\psi_\nu^\dagger, \check\psi_\mu]_+ = \delta_{\mu,\,M_{\mathrm{col}}+1-\nu}I)) \\
-&= -\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{行列の積の分配法則と結合法則})
-\end{aligned}`,
-      ),
-      paragraph(["となる。よって"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu\right]
-&= \check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\,\check\psi_\mu
-   - \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{交換子の定義}) \\
-&= \left(-\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu} + \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
-   - \check\psi_\mu\,\check\psi_\nu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{直前の式変形}) \\
-&= -\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{同類項の統合})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 2'（",
-        math(String.raw`[\check{X}, \check\psi_\mu] = -\gamma(\tilde\theta_\mu)\check\psi_\mu`),
-        "）。Step 2 と同様に、",
-        ref("def_check_Vprime"),
-        " の ",
-        math(String.raw`\check{X}`),
-        " を代入し、交換子の第 1 引数についての線型性と ",
-        ref("scalar_identity_commutes"),
-        "（",
-        math(String.raw`\tfrac12 I`),
-        " は交換子に寄与しない）を使うと",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{X},\ \check\psi_\mu\right]
-&= \left[\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
-   \left(\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu} - \tfrac12 I\right),\ \check\psi_\mu\right]
-   \quad (\because \check{X}\text{ の定義}) \\
-&= \sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
-   \left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu} - \tfrac12 I,\ \check\psi_\mu\right]
-   \quad (\because \text{交換子の第 1 引数についての } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)
-   \left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu\right]
-   \quad (\because \text{スカラー行列は任意の元と可換なので } \left[\tfrac12 I,\ \check\psi_\mu\right] = 0) \\
-&= -\sum_{\nu \in \check{\mathcal{M}}}\gamma(\tilde\theta_\nu)\,\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}
-   \quad (\because \text{Step 1'})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`\nu \in \check{\mathcal{M}}`),
-        " のうち ",
-        math(String.raw`\delta_{\mu,\,M_{\mathrm{col}}+1-\nu} = 1`),
-        " すなわち ",
-        math(String.raw`M_{\mathrm{col}}+1-\nu = \mu`),
-        " を満たすものは ",
-        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu`),
-        " ただ 1 つであり、",
-        ref("def_check_index_set"),
-        " (2) よりこれは ",
-        math(String.raw`\check{\mathcal{M}}`),
-        " に属する（**合同式を解く段が消えている**）。この ",
-        math(String.raw`\nu`),
-        " に対して ",
-        math(String.raw`M_{\mathrm{col}}+1-\nu = \mu`),
-        " なので ",
-        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\nu} = \check\psi_\mu`),
-        " である（",
-        math(String.raw`\gamma`),
-        " の共役添字での不変性は ",
-        ref("periodicity_of_check_fermi"),
-        " (3)）。よって",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left[\check{X},\ \check\psi_\mu\right]
-&= -\gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu})\,\check\psi_\mu
-   \quad (\because \nu = M_{\mathrm{col}}+1-\mu \text{ の項だけが残り、}\check\psi_{M_{\mathrm{col}}+1-\nu} = \check\psi_\mu) \\
-&= -\gamma(\tilde\theta_\mu)\,\check\psi_\mu
-   \quad (\because \gamma\text{ の共役添字での不変性 (3)})
-\end{aligned}`,
-      ),
-      paragraph(["である。移項すると"]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{X}\,\check\psi_\mu
-&= \check\psi_\mu\,\check{X} + \left[\check{X},\ \check\psi_\mu\right]
-   \quad (\because \text{交換子の定義}) \\
-&= \check\psi_\mu\,\check{X} - \gamma(\tilde\theta_\mu)\,\check\psi_\mu
-   \quad (\because \text{直前の式変形}) \\
-&= \check\psi_\mu\,\check{X} - \check\psi_\mu\left(\gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換}) \\
-&= \check\psi_\mu\left(\check{X} - \gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{行列の積の分配法則})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 3'（帰納法）。",
-        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
-        " について ",
-        math(String.raw`\check{X}^n\,\check\psi_\mu = \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n`),
-        " が成り立つ。",
-        math(String.raw`n=0`),
-        " では両辺 ",
-        math(String.raw`\check\psi_\mu`),
-        " で一致し、",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\check{X}^{n+1}\check\psi_\mu
-&= \check{X}\left(\check{X}^{n}\check\psi_\mu\right)
-   \quad (\because \text{冪の定義と行列の積の結合法則}) \\
-&= \check{X}\,\check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n}
-   \quad (\because \text{帰納法の仮定}) \\
-&= \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n}
-   \quad (\because \text{Step 2'}) \\
-&= \check\psi_\mu\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^{n+1}
-   \quad (\because \text{冪の定義})
-\end{aligned}`,
-      ),
-      paragraph([
-        "Step 4'（指数関数へ）。Step 3' より各 ",
-        math(String.raw`N`),
         " について",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\left(\sum_{n=0}^{N}\frac{\check{X}^n}{n!}\right)\check\psi_\mu
-&= \sum_{n=0}^{N}\frac{\check{X}^n\check\psi_\mu}{n!}
-   \quad (\because \text{行列の積の分配法則}) \\
-&= \sum_{n=0}^{N}\frac{\check\psi_\mu
-   \left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n}{n!}
-   \quad (\because \text{Step 3' を各項へ同時適用}) \\
-&= \check\psi_\mu\sum_{n=0}^{N}
-   \frac{\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)^n}{n!}
-   \quad (\because \text{行列の積の分配法則})
-\end{aligned}`,
-      ),
+      displayMath(String.raw`\begin{aligned}
+[P_\nu, \check\psi_\mu]
+&= \left[\check\psi_\nu^\dagger\check\psi_{M_{\mathrm{col}}+1-\nu},\ \check\psi_\mu\right]
+&&\bigl(\because\ P_\nu\ \text{の定め方}\bigr)\\
+&= \check\psi_\nu^\dagger\left[\check\psi_{M_{\mathrm{col}}+1-\nu}, \check\psi_\mu\right]_+
+   - \left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{commutator_via_anticommutators}\ (a \to \check\psi_\nu^\dagger,\ b \to \check\psi_{M_{\mathrm{col}}+1-\nu},\ c \to \check\psi_\mu)\bigr)\\
+&= \check\psi_\nu^\dagger\,O - \left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 3 式}\ ((\mu, \nu) \to (M_{\mathrm{col}}+1-\nu, \mu))\bigr)\\
+&= O - \left[\check\psi_\nu^\dagger, \check\psi_\mu\right]_+\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{zero_matrix_is_right_zero_of_mat_mult}\bigr)\\
+&= O - \left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,I\right)\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{anticommutator_of_check_psi}\ \text{の第 2 式}\ ((\mu, \nu) \to (\nu, \mu))\bigr)\\
+&= O - \delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\left(I\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\bigr)\\
+&= O - \delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&= O + \left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)\right)
+&&\bigl(\because\ \blkref{matrix_difference_is_sum_with_negation}\bigr)\\
+&= -\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)
+&&\bigl(\because\ \blkref{zero_matrix_plus_matrix}\bigr)
+\end{aligned}`),
       paragraph([
-        "であり、",
-        ref("exp_converges"),
-        " より両辺の部分和は ",
-        math(String.raw`N \to \infty`),
-        " で収束する。行列の積は連続（",
+        "Step 2（",
+        math(String.raw`[\check{X}, \check\psi_\mu^\dagger] = g_\mu\check\psi_\mu^\dagger`),
+        "）。",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        "、",
+        math(String.raw`\nu \neq \mu`),
+        " の項は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_\nu\left(\delta_{\mu,\nu}\,\check\psi_\nu^\dagger\right)
+&= g_\nu\left(0_{\mathbb{C}}\,\check\psi_\nu^\dagger\right)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (\nu \neq \mu)\bigr)\\
+&= g_\nu\,O
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["なので、"]),
+      displayMath(String.raw`\begin{aligned}
+[\check{X}, \check\psi_\mu^\dagger]
+&= \sum_{\nu \in \check{\mathcal{M}}} g_\nu[P_\nu, \check\psi_\mu^\dagger]
+&&\bigl(\because\ \text{準備 5}\ (W \to \check\psi_\mu^\dagger)\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}} g_\nu\left(\delta_{\mu,\nu}\,\check\psi_\nu^\dagger\right)
+&&\bigl(\because\ \text{Step 1 を各項へ同時適用}\bigr)\\
+&= g_\mu\left(\delta_{\mu,\mu}\,\check\psi_\mu^\dagger\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (r \to M_{\mathrm{col}},\ q \to \mu)\bigr)\\
+&= g_\mu\left(1_{\mathbb{C}}\,\check\psi_\mu^\dagger\right)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= g_\mu\,\check\psi_\mu^\dagger
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)
+\end{aligned}`),
+      paragraph([
+        "Step 2'（",
+        math(String.raw`[\check{X}, \check\psi_\mu] = (-g_\mu)\check\psi_\mu`),
+        "）。",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " で ",
+        math(String.raw`\delta_{\mu,\,M_{\mathrm{col}}+1-\nu} \neq 0_{\mathbb{C}}`),
+        " となるのは ",
+        math(String.raw`M_{\mathrm{col}}+1-\nu = \mu`),
+        "、すなわち ",
+        math(String.raw`\nu = M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
+        " だけである。それ以外の ",
+        math(String.raw`\nu`),
+        " の項は",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+g_\nu\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)\right)
+&= g_\nu\left(-\left(0_{\mathbb{C}}\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)\right)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\ (M_{\mathrm{col}}+1-\nu \neq \mu)\bigr)\\
+&= g_\nu\left(-O\right)
+&&\bigl(\because\ \blkref{zero_scalar_multiple_is_zero_matrix}\bigr)\\
+&= g_\nu\left((-1_{\mathbb{C}})\,O\right)
+&&\bigl(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\bigr)\\
+&= g_\nu\,O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)\\
+&= O
+&&\bigl(\because\ \blkref{scalar_multiple_of_zero_matrix}\bigr)
+\end{aligned}`),
+      paragraph(["なので、"]),
+      displayMath(String.raw`\begin{aligned}
+[\check{X}, \check\psi_\mu]
+&= \sum_{\nu \in \check{\mathcal{M}}} g_\nu[P_\nu, \check\psi_\mu]
+&&\bigl(\because\ \text{準備 5}\ (W \to \check\psi_\mu)\bigr)\\
+&= \sum_{\nu \in \check{\mathcal{M}}} g_\nu\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-\nu}\,\check\psi_{M_{\mathrm{col}}+1-\nu}\right)\right)
+&&\bigl(\because\ \text{Step 1' を各項へ同時適用}\bigr)\\
+&= g_{M_{\mathrm{col}}+1-\mu}\left(-\left(\delta_{\mu,\,M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu)}\,\check\psi_{M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu)}\right)\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_with_single_nonzero_term}\ (r \to M_{\mathrm{col}},\ q \to M_{\mathrm{col}}+1-\mu)\bigr)\\
+&= g_{M_{\mathrm{col}}+1-\mu}\left(-\left(\delta_{\mu,\mu}\,\check\psi_\mu\right)\right)
+&&\bigl(\because\ \mathbb{Z}\ \text{で}\ M_{\mathrm{col}}+1-(M_{\mathrm{col}}+1-\mu) = \mu\bigr)\\
+&= g_{M_{\mathrm{col}}+1-\mu}\left(-\left(1_{\mathbb{C}}\,\check\psi_\mu\right)\right)
+&&\bigl(\because\ \blkref{def_kronecker_delta}\bigr)\\
+&= g_{M_{\mathrm{col}}+1-\mu}\left(-\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{scalar_multiple_by_one}\bigr)\\
+&= -\left(g_{M_{\mathrm{col}}+1-\mu}\,\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{scalar_multiple_of_negated_matrix}\bigr)\\
+&= -\left(g_\mu\,\check\psi_\mu\right)
+&&\bigl(\because\ g_\nu\ \text{の定め方と}\ \blkref{periodicity_of_check_fermi}\ (3)\ \text{の}\ \gamma(\tilde\theta_{M_{\mathrm{col}}+1-\mu}) = \gamma(\tilde\theta_\mu)\ \text{から}\ g_{M_{\mathrm{col}}+1-\mu} = g_\mu\bigr)\\
+&= (-1_{\mathbb{C}})\left(g_\mu\,\check\psi_\mu\right)
+&&\bigl(\because\ \blkref{negation_is_scalar_multiple_by_minus_one}\bigr)\\
+&= \left((-1_{\mathbb{C}})\,g_\mu\right)\check\psi_\mu
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\bigr)\\
+&= (-g_\mu)\,\check\psi_\mu
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)
+\end{aligned}`),
+      paragraph([
+        "Step 3（移項）。以下 Step 6 まで、",
+        math(String.raw`W \in R`),
+        " と ",
+        math(String.raw`c \in \mathbb{C}`),
+        " が ",
+        math(String.raw`[\check{X}, W] = cW`),
+        " を満たすとする。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\check{X}W
+&= W\check{X} + \left(\check{X}W - W\check{X}\right)
+&&\bigl(\because\ \blkref{matrix_plus_difference_cancels}\ (A \to W\check{X},\ B \to \check{X}W)\ \text{を右辺から左辺へ}\bigr)\\
+&= W\check{X} + [\check{X}, W]
+&&\bigl(\because\ \blkref{def_ad_X_matrix}\bigr)\\
+&= W\check{X} + cW
+&&\bigl(\because\ \text{仮定}\ [\check{X}, W] = cW\bigr)\\
+&= W\check{X} + c\left(WI\right)
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を右辺から左辺へ}\bigr)\\
+&= W\check{X} + W(cI)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \text{を右辺から左辺へ}\bigr)\\
+&= W\left(\check{X} + cI\right)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "Step 4（帰納法）。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\check{X}^n W = W\left(\check{X} + cI\right)^n`),
+        " を ",
+        math(String.raw`n`),
+        " についての帰納法で示す。",
+        math(String.raw`n = 0`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\check{X}^0 W
+&= IW
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)\\
+&= W
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+&= WI
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を右辺から左辺へ}\bigr)\\
+&= W\left(\check{X} + cI\right)^0
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^0 := I\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`n`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\check{X}^{n+1} W
+&= \left(\check{X}^{n}\check{X}\right)W
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\bigr)\\
+&= \check{X}^{n}\left(\check{X}W\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \check{X}^{n}\left(W\left(\check{X} + cI\right)\right)
+&&\bigl(\because\ \text{Step 3}\bigr)\\
+&= \left(\check{X}^{n}W\right)\left(\check{X} + cI\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= \left(W\left(\check{X} + cI\right)^{n}\right)\left(\check{X} + cI\right)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= W\left(\left(\check{X} + cI\right)^{n}\left(\check{X} + cI\right)\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= W\left(\check{X} + cI\right)^{n+1}
+&&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ A^{m+1} := A^m A\bigr)
+\end{aligned}`),
+      paragraph([
+        "Step 5（部分和と極限）。",
+        math(String.raw`N \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`a_m := \left(\tfrac{1}{m!}\right)_{\mathbb{C}}`),
+        " と書くと",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+S_N(\check{X})\,W
+&= \Bigl(\sum_{m=0}^{N} a_m\check{X}^m\Bigr)W
+&&\bigl(\because\ S_N\ \text{の定め方}\bigr)\\
+&= \Bigl(\sum_{j=1}^{N+1} a_{j-1}\check{X}^{j-1}\Bigr)W
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices_from_index_zero}\bigr)\\
+&= \sum_{j=1}^{N+1} \left(\left(a_{j-1}\check{X}^{j-1}\right)W\right)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\bigr)\\
+&= \sum_{j=1}^{N+1} a_{j-1}\left(\check{X}^{j-1} W\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{N+1} a_{j-1}\left(W\left(\check{X} + cI\right)^{j-1}\right)
+&&\bigl(\because\ \text{Step 4 を各項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{N+1} \left(W\left(a_{j-1}\left(\check{X} + cI\right)^{j-1}\right)\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \text{を右辺から左辺へ、各項へ同時適用}\bigr)\\
+&= W\Bigl(\sum_{j=1}^{N+1} a_{j-1}\left(\check{X} + cI\right)^{j-1}\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ \text{を右辺から左辺へ}\bigr)\\
+&= W\Bigl(\sum_{m=0}^{N} a_m\left(\check{X} + cI\right)^m\Bigr)
+&&\bigl(\because\ \blkref{def_finite_sum_of_matrices_from_index_zero}\ \text{を右辺から左辺へ}\bigr)\\
+&= W\,S_N\!\left(\check{X} + cI\right)
+&&\bigl(\because\ S_N\ \text{の定め方}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        ref("def_exp"),
+        " (1) より ",
+        math(String.raw`S_N(\check{X}) \to \exp(\check{X})`),
+        "、",
+        math(String.raw`S_N(\check{X} + cI) \to \exp(\check{X} + cI)`),
+        " であるから、",
         ref("matrix_multiplication_continuity"),
-        "）だから極限をとって",
+        "（",
+        math(String.raw`A_N`),
+        " を ",
+        math(String.raw`S_N(\check{X})`),
+        " に、",
+        math(String.raw`A`),
+        " を ",
+        math(String.raw`\exp(\check{X})`),
+        " に、",
+        math(String.raw`B`),
+        " を ",
+        math(String.raw`W`),
+        " に取る）より ",
+        math(String.raw`S_N(\check{X})\,W \to \exp(\check{X})\,W`),
+        "、",
+        ref("matrix_multiplication_continuity_in_right_factor"),
+        "（",
+        math(String.raw`A_N`),
+        " を ",
+        math(String.raw`S_N(\check{X} + cI)`),
+        " に、",
+        math(String.raw`A`),
+        " を ",
+        math(String.raw`\exp(\check{X} + cI)`),
+        " に、",
+        math(String.raw`B`),
+        " を ",
+        math(String.raw`W`),
+        " に取る）より ",
+        math(String.raw`W\,S_N(\check{X} + cI) \to W\exp(\check{X} + cI)`),
+        " である。直前の等式より二つの列は同じ列なので、",
+        ref("matrix_norm_triangle_inequality"),
+        " (4)（極限の一意性）より",
       ]),
-      displayMath(
-        String.raw`\exp(\check{X})\,\check\psi_\mu
-= \check\psi_\mu\,\exp\!\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)`,
-      ),
+      displayMath(String.raw`\exp(\check{X})\,W = W\exp\!\left(\check{X} + cI\right)`),
       paragraph([
-        "Step 5'（結論）。",
-        math(String.raw`\check{X}-\gamma(\tilde\theta_\mu)I`),
-        " と ",
-        math(String.raw`-\check{X}`),
-        " は可換（",
-        ref("scalar_identity_commutes"),
-        " と ",
-        math(String.raw`\check{X}(-\check{X}) = (-\check{X})\check{X}`),
-        "）だから ",
-        ref("theorem_exp_product"),
-        " が使えて",
+        "である（極限をとるので、ここで ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している）。",
       ]),
-      displayMath(
-        String.raw`\begin{aligned}
-T_{(\check{V}')}\!\left(\check\psi_\mu\right)
-&= \exp(\check{X})\,\check\psi_\mu\,\exp(-\check{X})
-   \quad (\because \text{証明冒頭の } T_{(\check{V}')} \text{ の表示}) \\
-&= \check\psi_\mu\,\exp\!\left(\check{X}-\gamma(\tilde\theta_\mu)I\right)\exp(-\check{X})
-   \quad (\because \text{Step 4'}) \\
-&= \check\psi_\mu\,\exp\!\left(-\gamma(\tilde\theta_\mu)I\right)
-   \quad (\because \text{可換な指数の積の法則}) \\
-&= \check\psi_\mu\left(\exp(-\gamma(\tilde\theta_\mu))I\right)
-   \quad (\because \text{準備の等式 } \exp(cI)=\exp(c)I) \\
-&= \exp(-\gamma(\tilde\theta_\mu))\,\check\psi_\mu
-   \quad (\because \text{単位行列は乗法の単位元、スカラー倍は行列の積と可換})
-\end{aligned}`,
-      ),
+      paragraph([
+        "Step 6（結論の一般形）。",
+        ref("theorem_exp_product"),
+        " の両辺の exp は級数の極限で定まる量であり、ここでも ",
+        math(String.raw`\mathbb{R}`),
+        " へ脱出している。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T(W)
+&= \left(\check{V}'W\right)\left(\check{V}'\right)^{-1}
+&&\bigl(\because\ \blkref{def_check_Vprime}\ (2)\ \text{の}\ T_{(\check{V}')}\ (\text{三つの積は左から読む。}\blkref{mat_mult_associative}\ \text{より読み方に依らない})\bigr)\\
+&= \left(\exp(\check{X})\,W\right)\left(\check{V}'\right)^{-1}
+&&\bigl(\because\ \blkref{def_check_Vprime}\ \text{の}\ \check{V}' := \exp(\check{X})\bigr)\\
+&= \left(\exp(\check{X})\,W\right)\exp(-\check{X})
+&&\bigl(\because\ \blkref{def_check_Vprime}\ (2)\ \text{の}\ \left(\check{V}'\right)^{-1} = \exp(-\check{X})\bigr)\\
+&= \left(W\exp\!\left(\check{X} + cI\right)\right)\exp(-\check{X})
+&&\bigl(\because\ \text{Step 5}\bigr)\\
+&= W\left(\exp\!\left(\check{X} + cI\right)\exp(-\check{X})\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+&= W\exp\!\left(\left(\check{X} + cI\right) + \left(-\check{X}\right)\right)
+&&\bigl(\because\ \blkref{theorem_exp_product}\ (A \to \check{X} + cI,\ B \to -\check{X}),\ \text{準備 8 の可換性}\bigr)\\
+&= W\exp(cI)
+&&\bigl(\because\ \text{準備 8 の和}\bigr)\\
+&= W\left(\exp(c)\,I\right)
+&&\bigl(\because\ \text{準備 7}\bigr)\\
+&= \exp(c)\left(WI\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\bigr)\\
+&= \exp(c)\,W
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)
+\end{aligned}`),
+      paragraph([
+        "結論。Step 2 より ",
+        math(String.raw`W \to \check\psi_\mu^\dagger`),
+        "、",
+        math(String.raw`c \to g_\mu`),
+        " で Step 3〜6 の仮定が成り立つので",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+T\!\left(\check\psi_\mu^\dagger\right)
+&= \exp(g_\mu)\,\check\psi_\mu^\dagger
+&&\bigl(\because\ \text{Step 6}\ (W \to \check\psi_\mu^\dagger,\ c \to g_\mu)\bigr)\\
+&= \exp\!\left(\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}\right)\check\psi_\mu^\dagger
+&&\bigl(\because\ g_\mu\ \text{の定め方}\bigr)\\
+&= \left(\exp(+\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu^\dagger
+&&\bigl(\because\ \blkref{complex_exp_of_real_argument}\ (x \to \gamma(\tilde\theta_\mu))\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。また Step 2' より ",
+        math(String.raw`W \to \check\psi_\mu`),
+        "、",
+        math(String.raw`c \to -g_\mu`),
+        " で Step 3〜6 の仮定が成り立ち、",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+-g_\mu
+&= -\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+&&\bigl(\because\ g_\mu\ \text{の定め方}\bigr)\\
+&= (-1_{\mathbb{C}})\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{multiply_by_minus_one}\bigr)\\
+&= (-1)_{\mathbb{C}}\left(\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の}\ -1_{\mathbb{C}} = \iota_{\mathbb{R}\to\mathbb{C}}(-1) = (-1)_{\mathbb{C}}\bigr)\\
+&= \left((-1)\,\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\bigr)\\
+&= \left(-\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{の}\ (-1)x = -x\bigr)
+\end{aligned}`),
+      paragraph(["であるから"]),
+      displayMath(String.raw`\begin{aligned}
+T\!\left(\check\psi_\mu\right)
+&= \exp(-g_\mu)\,\check\psi_\mu
+&&\bigl(\because\ \text{Step 6}\ (W \to \check\psi_\mu,\ c \to -g_\mu)\bigr)\\
+&= \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)_{\mathbb{C}}\right)\check\psi_\mu
+&&\bigl(\because\ \text{直前の等式}\bigr)\\
+&= \left(\exp(-\gamma(\tilde\theta_\mu))\right)_{\mathbb{C}}\check\psi_\mu
+&&\bigl(\because\ \blkref{complex_exp_of_real_argument}\ (x \to -\gamma(\tilde\theta_\mu))\bigr)
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
@@ -7247,12 +7605,13 @@ T_{(\check{V}')}\!\left(\check\psi_\mu\right)
         "008 章の action_of_T_Vprime_on_psi の半整数運動量版。008 章にあった μ の符号による 3 通りの場合分け" +
           "（a) μ ∈ {1..M}、b) μ = -k、c) μ = -M）は、添字を μ ∈ Z で扱い periodicity_of_check_fermi を先に" +
           "用意したことで不要になった。",
-        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_04（V̌' を行列指数関数から直接構成して共役を計算）。",
+        "数値検証: sagemath/check/049_claim_even_sector_fermions/check_04（V̌' を行列指数関数から直接構成して共役を計算）。式変形の行ごとの検算は sagemath/check/action_of_T_check_Vprime_on_check_psi/。",
         "2026-08-19 の式変形統一で、Step 1・1' の移項と交換子への回収の散文を鎖へ開き、Step 2 末尾に同居していた移項を独立の鎖へ分け、" +
           "Step 2' の一行三操作を Step 2 と同形の一操作ずつへ分け、Step 3 の一行二等号と根拠の無い行を直し、" +
           "Step 5 の exp(γI)=e^γ I の後置きの注記を準備の等式へ移し、Steps 3'〜5' の「置き換えるだけで同じ計算」を Step 3〜5 と同形の鎖へ開いた。" +
           "機械識別子の行末根拠は人間可読な名前へ直した。内容と参照は変えていない。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
+        "2026-11-03（全証明の SageMath 検算）: 証明を書き直した。旧証明は「交換子の第 1 引数についての C 線型性」「反交換子の対称性」「exp(cI) = exp(c)I（級数定義から）」「部分和が収束するので極限をとる」を引くブロックなしで使い、交換子の定義も引いていなかった。交換子の展開を準備 1〜5（スカラー行列の可換性、差と積、差の打ち消し、和の差、[X̌, W] = Σ g_ν[P_ν, W]）として本文のブロックで示し、Step 1・1' を commutator_via_anticommutators（Lean の lie_creAnn_cre・lie_creAnn_ann と同じ手順）から反交換子の値へ 1 行 1 根拠で運ぶ鎖に、Step 2・2' の和を finite_sum_of_matrices_with_single_nonzero_term で一項に絞る鎖にした。旧 Step 3〜5 と 3'〜5' は同じ計算の繰り返しだったので、[X̌, W] = cW を満たす一般の W・c について Step 3〜6 で一度だけ示し（Lean の matExp_conj_eigen と同じ形）、ψ̌^† と ψ̌ に当てはめた。極限の一意性は matrix_norm_triangle_inequality (4) で、cI の成分（準備 6）、exp(cI) = exp(c)I（準備 7、exp_of_diagonal_matrix）、X̌ + cI と −X̌ の可換性と和（準備 8）は冒頭の準備に鎖で示した。主張の右辺を commutation_V_plus_check_psi と同じ (exp(±γ(θ̃_μ)))_C に書き、ℝ への脱出を書いた（中身は不変）。検算は sagemath/check/action_of_T_check_Vprime_on_check_psi/。",
       ],
     },
   },

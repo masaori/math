@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-03: 証明を持つブロック 379 件のうち、SageMath の検算が無いもの 48 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-03: 証明を持つブロック 387 件のうち、SageMath の検算が無いもの 47 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -274,9 +274,14 @@
   人手証明を直した: 旧 (1) は分母 2√M_col γ_2(−θ̃_μ) ≠ 0 の根拠に、γ_2(θ̃_μ) ≠ 0 しか述べない gamma_2_theta_tilde_nonzero を引いていた（γ_2(−θ̃_μ) ≠ 0 は relation_of_gamma_2_theta_tilde）。ψ̌ の定まることは def_check_fermi の主張なので、(1) をそれと def_check_index_set (2) を引いて各項が R の元であることを 1 行 1 根拠で示す鎖に、(2) を「正則」の定めの無い matrix_exp_conjugation (3) から exp_of_negative_is_left_inverse の二つの積と def_invertible_elements_of_R の鎖に替えた。主張の実数 γ・1/2 を (·)_C と書き、下流が使う γ(θ̃_μ)(… − ½I) の書き方を inclusion_rr_to_cc の略記として宣言し、ℝ への脱出（arccosh の実対数、exp の極限）を書いた（中身は不変）。二回のレビューで指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は不変で `lake build`・`check-no-sorry.sh` は通る）: `DefinitionCheckVprime.lean` の (2) は `matExpUnits` に帰着しており、人手の新しい (2)（exp_of_negative_is_left_inverse の二つの積）との 1 対 1 の対応の見直しが要る。
 
+- `action_of_T_check_Vprime_on_check_psi`（T_{(V̌')} の ψ̌ への作用）: `sagemath/check/action_of_T_check_Vprime_on_check_psi/`。
+  準備 1〜4・6〜8 と Step 6 の値に依らない行は成分を不定元にした行列で、準備 5・Step 1〜4・Step 5 の部分和は本物の ψ̌・X̌ を r_λ・γ(θ̃_λ) を不定元にした円分体上の多項式環で（ρ^2 = |γ_2|^2 の関係を使う行を限って）M_col = 2, 3 で厳密に確かめた。Step 5 の極限・Step 6 の T(W) の鎖・結論と主張は、部分和に尾の上界を足したボールで結合定数 4 組 × M_col = 2..5 について確かめた。
+  人手証明を書き直した（計算の誤りは無かった）: 旧証明は「交換子の第 1 引数の線型性」「反交換子の対称性」「exp(cI) = exp(c)I」「部分和が収束するので極限をとる」を根拠のブロックなしに使っていた。交換子の展開を準備 1〜5 に、cI の成分・exp(cI)・X̌ + cI と −X̌ の可換性と和を準備 6〜8 に 1 行 1 根拠で置き、Step 1・1' を commutator_via_anticommutators から始める鎖に、旧 Step 3〜5 と 3'〜5' を [X̌, W] = cW を満たす一般の W, c の Step 3〜6 にまとめた。主張の右辺を (exp(±γ(θ̃_μ)))_C と書いた。四回のレビューの指摘を直した。
+  申し送り（Lean の連続実行の受け持ち。Lean はコメントのみ変え、`lake build`・`check-no-sorry.sh` は通る）: `ClaimActionTCheckVprime.lean` の `matExp_conj_eigen` は `exp_conj_two_dim_z` を z = y = a で使う別の論法で、人手の Step 3〜6（移項・帰納法・部分和の極限・theorem_exp_product）と 1 対 1 でない。下流の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y` はこの主張を旧い exp(±γ)ψ̌ の形で引いているので、その検算を足すときに (exp(±γ))_C にそろえる。
+
 ## 次の一歩
 
-`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `action_of_T_check_Vprime_on_check_psi`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_diagonalization_and_exponential_form.ts` の `T_V_plus_eq_T_check_Vprime_on_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
