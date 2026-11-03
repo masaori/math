@@ -3474,4 +3474,108 @@ h(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_embedding_into_first_component_is_linear_map",
+    kind: "claim",
+    title: { text: "直和の第一成分への埋め込み写像は線型写像である" },
+    labels: ["claim_embedding_into_first_component_is_linear_map"],
+    statement: [
+      paragraph([
+        math(String.raw`(V_1,+_{V_1},\cdot_{V_1},0_{V_1})`),
+        " と ",
+        math(String.raw`(V_2,+_{V_2},\cdot_{V_2},0_{V_2})`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`(V_1\oplus V_2,+_{V_1\oplus V_2},\cdot_{V_1\oplus V_2},0_{V_1\oplus V_2})`),
+        " をその直和（",
+        ref("def_direct_sum_of_two_vector_spaces"),
+        "）、",
+        math(String.raw`\mathrm{in}_1:V_1\to V_1\oplus V_2`),
+        " を直和の第一成分への埋め込み写像（",
+        ref("def_embedding_into_first_component_of_direct_sum"),
+        "）とする。直和は ℂ-線型空間である（",
+        ref("claim_direct_sum_of_two_vector_spaces_is_complex_vector_space"),
+        "）。このとき ",
+        math(String.raw`\mathrm{in}_1`),
+        " は ",
+        math(String.raw`V_1`),
+        " から ",
+        math(String.raw`V_1\oplus V_2`),
+        " への線型写像（",
+        ref("def_linear_map"),
+        "）である。すなわち、",
+        math(String.raw`V_1`),
+        " の任意の元 ",
+        math(String.raw`x,y`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元 ",
+        math(String.raw`\lambda`),
+        " について次の二つが成り立つ。",
+      ]),
+      list([
+        [math(String.raw`\mathrm{in}_1(x+_{V_1}y)=\mathrm{in}_1(x)+_{V_1\oplus V_2}\mathrm{in}_1(y)`), "（加法を保つ）"],
+        [math(String.raw`\mathrm{in}_1(\lambda\cdot_{V_1}x)=\lambda\cdot_{V_1\oplus V_2}\mathrm{in}_1(x)`), "（スカラー倍を保つ）"],
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y`),
+        " を ",
+        math(String.raw`V_1`),
+        " の任意の元、",
+        math(String.raw`\lambda`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元とする。準備として、",
+        math(String.raw`V_2`),
+        " の中の等式 ",
+        math(String.raw`\lambda\cdot_{V_2}0_{V_2}=0_{V_2}`),
+        " を示す。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\cdot_{V_2}0_{V_2}
+&=\lambda\cdot_{V_2}(0_{\mathbb{C}}\cdot_{V_2}0_{V_2})
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}V=V_2,\ x=0_{V_2}\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}0_{\mathbb{C}})\cdot_{V_2}0_{V_2}
+&&\left(\because\ V_2\ \text{のスカラー倍の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}\cdot_{V_2}0_{V_2}
+&&\left(\because\ \lambda\cdot_{\mathbb{C}}0_{\mathbb{C}}=0_{\mathbb{C}}\right)\\
+&=0_{V_2}
+&&\left(\because\ \text{零のスカラー倍は零ベクトル（}V=V_2,\ x=0_{V_2}\text{）。}\blkref{claim_zero_scalar_multiple_is_zero_vector}\right).
+\end{aligned}`),
+      paragraph(["加法を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{in}_1(x+_{V_1}y)
+&=(x+_{V_1}y,\ 0_{V_2})
+&&\left(\because\ \mathrm{in}_1\ \text{の定義。}\blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&=(x+_{V_1}y,\ 0_{V_2}+_{V_2}0_{V_2})
+&&\left(\because\ V_2\ \text{の加法の単位元（}x=0_{V_2}\text{）。}\blkref{def_complex_vector_space}\right)\\
+&=(x,\ 0_{V_2})+_{V_1\oplus V_2}(y,\ 0_{V_2})
+&&\left(\because\ +_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\mathrm{in}_1(x)+_{V_1\oplus V_2}\mathrm{in}_1(y)
+&&\left(\because\ \mathrm{in}_1\ \text{の定義を二か所に適用。}\blkref{def_embedding_into_first_component_of_direct_sum}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍を保つことは次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\mathrm{in}_1(\lambda\cdot_{V_1}x)
+&=(\lambda\cdot_{V_1}x,\ 0_{V_2})
+&&\left(\because\ \mathrm{in}_1\ \text{の定義。}\blkref{def_embedding_into_first_component_of_direct_sum}\right)\\
+&=(\lambda\cdot_{V_1}x,\ \lambda\cdot_{V_2}0_{V_2})
+&&\left(\because\ \text{準備の等式}\ \lambda\cdot_{V_2}0_{V_2}=0_{V_2}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}(x,\ 0_{V_2})
+&&\left(\because\ \cdot_{V_1\oplus V_2}\ \text{の定義。}\blkref{def_direct_sum_of_two_vector_spaces}\right)\\
+&=\lambda\cdot_{V_1\oplus V_2}\mathrm{in}_1(x)
+&&\left(\because\ \mathrm{in}_1\ \text{の定義。}\blkref{def_embedding_into_first_component_of_direct_sum}\right).
+\end{aligned}`),
+      paragraph([
+        "二つの条件が満たされたので、",
+        math(String.raw`\mathrm{in}_1`),
+        " は線型写像である（",
+        ref("def_linear_map"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
