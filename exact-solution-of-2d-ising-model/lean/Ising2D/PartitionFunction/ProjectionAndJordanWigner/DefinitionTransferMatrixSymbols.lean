@@ -12,6 +12,11 @@ Pauli 行列の積の 6 式（`pauliX_mul_pauliX`・`pauliY_mul_pauliY`・`pauli
 `neg_I_mul_I`・`I_mul_neg_I`・`pauliX_mul_pauliZ_entries`・`pauliX_mul_pauliY_entries`・`pauliZ_mul_pauliY_entries`、
 `σ^xσ^x = I`・`σ^yσ^y = I`・`σ^zσ^z = I` の 3 つの鎖に共通の最後の 2 段は `twoByTwo_one_eq_kroneckerDelta`・`twoByTwo_kroneckerDelta_eq_identity` である。
 
+2 次の行列の転置の 4 つの主張（人手 `transpose_of_identity_matrix_of_order_two`・`transpose_of_pauli_x`・`transpose_of_pauli_z`・
+`transpose_of_pauli_y`、同じファイル）は `identity_matrix_two_transpose`・`pauliX_transpose`・`pauliZ_transpose`・`pauliY_transpose` で、
+人手の鎖と 1 段ずつ対応する（転置の成分の式は `matrix_transpose_apply`（`def_matrix_transpose`））。具体的な 2 次の行列の成分の計算なので、
+必要十分版は置かない。
+
 本ファイルでは、原文の記号のうち
 
 * `σ^x_k, σ^y_k, σ^z_k`（第 `k` 因子だけが Pauli 行列で残りが単位行列のテンソル積）
@@ -302,6 +307,89 @@ theorem pauliZ_mul_pauliY : pauliZ * pauliY = (-Complex.I) • pauliX := by
     _ = (-Complex.I) • pauliX := rfl
 
 end PauliRelations
+
+section PauliTransposes
+
+open Matrix
+
+/-! 以下は人手 `transpose_of_identity_matrix_of_order_two`・`transpose_of_pauli_x`・`transpose_of_pauli_z`・`transpose_of_pauli_y`
+（`structured-latex/content/006_Z_Y_anticommutation.ts`）の鎖を 1 段ずつ辿る。`calc` の各段の根拠は人手の行末の根拠と同じである。 -/
+
+/-- 人手 `transpose_of_identity_matrix_of_order_two`: `I^⊤ = I`（`I = I_{Mat(2,ℂ)}`）。 -/
+theorem identity_matrix_two_transpose : (1 : Matrix (Fin 2) (Fin 2) ℂ)ᵀ = 1 := by
+  calc
+    -- `def_matrix_transpose`（`m = n = 2`）
+    (1 : Matrix (Fin 2) (Fin 2) ℂ)ᵀ =
+        !![(1 : Matrix (Fin 2) (Fin 2) ℂ) 0 0, (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 0;
+          (1 : Matrix (Fin 2) (Fin 2) ℂ) 0 1, (1 : Matrix (Fin 2) (Fin 2) ℂ) 1 1] := by
+      ext p q
+      rw [matrix_transpose_apply]
+      fin_cases p <;> fin_cases q <;> rfl
+    -- `def_identity_matrix`（`n = 2`）
+    _ = !![kroneckerDelta (0 : Fin 2) 0, kroneckerDelta (1 : Fin 2) 0;
+          kroneckerDelta (0 : Fin 2) 1, kroneckerDelta (1 : Fin 2) 1] := by
+      simp only [identity_matrix_apply]
+    -- `def_kronecker_delta`
+    _ = !![(1 : ℂ), 0; 0, 1] := by
+      rw [kroneckerDelta_self, kroneckerDelta_self, kroneckerDelta_of_ne (by decide),
+        kroneckerDelta_of_ne (by decide)]
+    -- `def_kronecker_delta`
+    _ = _ := twoByTwo_one_eq_kroneckerDelta
+    -- `def_identity_matrix`（`n = 2`）
+    _ = 1 := twoByTwo_kroneckerDelta_eq_identity
+
+/-- 人手 `transpose_of_pauli_x`: `(σ^x)^⊤ = σ^x`。 -/
+@[simp]
+theorem pauliX_transpose : pauliXᵀ = pauliX := by
+  calc
+    -- `def_matrix_transpose`（`m = n = 2`）
+    pauliXᵀ = !![pauliX 0 0, pauliX 1 0; pauliX 0 1, pauliX 1 1] := by
+      ext p q
+      rw [matrix_transpose_apply]
+      fin_cases p <;> fin_cases q <;> rfl
+    -- `pauli_matrix_products` の σ^x の成分
+    _ = !![0, 1; 1, 0] := rfl
+    -- `pauli_matrix_products` の σ^x
+    _ = pauliX := rfl
+
+/-- 人手 `transpose_of_pauli_z`: `(σ^z)^⊤ = σ^z`。 -/
+@[simp]
+theorem pauliZ_transpose : pauliZᵀ = pauliZ := by
+  calc
+    -- `def_matrix_transpose`（`m = n = 2`）
+    pauliZᵀ = !![pauliZ 0 0, pauliZ 1 0; pauliZ 0 1, pauliZ 1 1] := by
+      ext p q
+      rw [matrix_transpose_apply]
+      fin_cases p <;> fin_cases q <;> rfl
+    -- `pauli_matrix_products` の σ^z の成分
+    _ = !![1, 0; 0, -1] := rfl
+    -- `pauli_matrix_products` の σ^z
+    _ = pauliZ := rfl
+
+/-- 人手 `transpose_of_pauli_y`: `(σ^y)^⊤ = -σ^y`。 -/
+@[simp]
+theorem pauliY_transpose : pauliYᵀ = -pauliY := by
+  calc
+    -- `def_matrix_transpose`（`m = n = 2`）
+    pauliYᵀ = !![pauliY 0 0, pauliY 1 0; pauliY 0 1, pauliY 1 1] := by
+      ext p q
+      rw [matrix_transpose_apply]
+      fin_cases p <;> fin_cases q <;> rfl
+    -- `pauli_matrix_products` の σ^y の成分
+    _ = !![0, Complex.I; -Complex.I, 0] := rfl
+    -- ℂ で `0 = -0`（`-z` は `multiply_by_minus_one` の記号）
+    _ = !![-0, Complex.I; -Complex.I, -0] := by rw [neg_zero]
+    -- ℂ で `i = -(-i)`（`-z` は `multiply_by_minus_one` の記号）
+    _ = !![-0, -(-Complex.I); -Complex.I, -0] := by rw [neg_neg]
+    -- `def_matrix_negation`
+    _ = -!![0, -Complex.I; Complex.I, 0] := by
+      ext i j
+      rw [matrix_neg_apply]
+      fin_cases i <;> fin_cases j <;> rfl
+    -- `pauli_matrix_products` の σ^y
+    _ = -pauliY := rfl
+
+end PauliTransposes
 
 /-! ## サイト局所作用素 `σ^a_k`
 

@@ -239,6 +239,168 @@ i\cdot(-i)
     },
   },
   {
+    id: "Z_Y_anticommutation_claim_transpose_of_identity_matrix_of_order_two",
+    kind: "claim",
+    title: { text: "2 次の単位行列の転置" },
+    labels: ["transpose_of_identity_matrix_of_order_two"],
+    statement: [
+      paragraph([
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        "（",
+        ref("def_identity_matrix"),
+        " で ",
+        math(String.raw`n = 2`),
+        "）とする。転置は ",
+        ref("def_matrix_transpose"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`I^\top = I`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+I^\top
+&= \begin{pmatrix}I_{11}&I_{21}\\I_{12}&I_{22}\end{pmatrix}
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{21}\\\delta_{12}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_identity_matrix} \text{ で } n=2) \\
+&= \begin{pmatrix}1&0\\0&1\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= \begin{pmatrix}\delta_{11}&\delta_{12}\\\delta_{21}&\delta_{22}\end{pmatrix}
+&&(\because \blkref{def_kronecker_delta}) \\
+&= I
+&&(\because \blkref{def_identity_matrix} \text{ で } n=2)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が、σ_m^x・σ_m^zσ_{m+1}^z・G の転置を因子ごとの転置に分けたあと、因子の I が転置で変わらないことを名前を出さずに使っていたので、引ける主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_transpose_of_pauli_x",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^x \text{ の転置}` },
+    labels: ["transpose_of_pauli_x"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_matrix_transpose"),
+        " の転置に関して",
+      ]),
+      displayMath(String.raw`(\sigma^x)^\top = \sigma^x`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^x)^\top
+&= \begin{pmatrix}(\sigma^x)_{11}&(\sigma^x)_{21}\\(\sigma^x)_{12}&(\sigma^x)_{22}\end{pmatrix}
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x \text{ の成分}) \\
+&= \sigma^x
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^x)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「σ^x は転置について対称」を根拠なしに述べていたので、def_matrix_transpose の成分の式から示す主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_transpose_of_pauli_z",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^z \text{ の転置}` },
+    labels: ["transpose_of_pauli_z"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_matrix_transpose"),
+        " の転置に関して",
+      ]),
+      displayMath(String.raw`(\sigma^z)^\top = \sigma^z`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^z)^\top
+&= \begin{pmatrix}(\sigma^z)_{11}&(\sigma^z)_{21}\\(\sigma^z)_{12}&(\sigma^z)_{22}\end{pmatrix}
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
+&= \begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z \text{ の成分}) \\
+&= \sigma^z
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^z)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「σ^z は転置について対称」を根拠なしに述べていたので、def_matrix_transpose の成分の式から示す主張として足した。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_transpose_of_pauli_y",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^y \text{ の転置}` },
+    labels: ["transpose_of_pauli_y"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^y \in \mathrm{Mat}(2,\mathbb{C})`),
+        " について、",
+        ref("def_matrix_transpose"),
+        " の転置と ",
+        ref("def_matrix_negation"),
+        " の符号反転に関して",
+      ]),
+      displayMath(String.raw`(\sigma^y)^\top = -\,\sigma^y`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+(\sigma^y)^\top
+&= \begin{pmatrix}(\sigma^y)_{11}&(\sigma^y)_{21}\\(\sigma^y)_{12}&(\sigma^y)_{22}\end{pmatrix}
+&&(\because \blkref{def_matrix_transpose} \text{ で } m=n=2) \\
+&= \begin{pmatrix}0&i\\-i&0\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y \text{ の成分}) \\
+&= \begin{pmatrix}-0&i\\-i&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } 0=-0\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= \begin{pmatrix}-0&-(-i)\\-i&-0\end{pmatrix}
+&&(\because \mathbb{C} \text{ で } i=-(-i)\text{。}-z\text{ は }\blkref{multiply_by_minus_one}\text{ の記号}) \\
+&= -\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \blkref{def_matrix_negation}) \\
+&= -\,\sigma^y
+&&(\because \blkref{pauli_matrix_products} \text{ の } \sigma^y)
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03（Lean の通しの証明のゴールラインの確認）: 原文（Typst）に対応ブロックは無い。iH_is_real_symmetric の Step 3 が「σ^y は交代（(σ^y)^⊤ = -σ^y）」を根拠なしに述べていたので、def_matrix_transpose の成分の式から示す主張として足した。符号の 2 段は pauli_matrix_products の反可換性の鎖と同じ書き方である。",
+      ],
+    },
+  },
+  {
     id: "Z_Y_anticommutation_000b_claim_tensor_anticommutation_single_site",
     kind: "claim",
     origin: { path: "structured-latex/content/006_Z_Y_anticommutation.ts", ordinal: 2 },

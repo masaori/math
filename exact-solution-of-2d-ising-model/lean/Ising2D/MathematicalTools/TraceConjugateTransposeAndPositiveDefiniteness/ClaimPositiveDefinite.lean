@@ -51,16 +51,10 @@ section Herm
 
 variable {M : ℕ}
 
-/-! ## Pauli 行列の転置・共役転置 -/
+/-! ## Pauli 行列の共役転置
 
-@[simp] theorem pauliX_transpose : pauliXᵀ = pauliX := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliX]
-
-@[simp] theorem pauliZ_transpose : pauliZᵀ = pauliZ := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliZ]
-
-@[simp] theorem pauliY_transpose : pauliYᵀ = -pauliY := by
-  ext a b; fin_cases a <;> fin_cases b <;> simp [pauliY]
+Pauli 行列の転置 `pauliX_transpose`・`pauliZ_transpose`・`pauliY_transpose` は、人手 `transpose_of_pauli_x` ほかと 1 対 1 の
+鎖として `PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean` に置いた。 -/
 
 @[simp] theorem pauliX_conjTranspose : pauliXᴴ = pauliX := by
   ext a b; fin_cases a <;> fin_cases b <;> simp [pauliX]

@@ -11,7 +11,7 @@
 （`structured-latex/content/002_linear_space_general.ts` の `linear_space_general_definition_kronecker_delta`,
 `linear_space_general_definition_identity_matrix`, `linear_space_general_definition_matrix_scalar_multiple`,
 `linear_space_general_claim_identity_matrix_is_left_unit_of_mat_mult`,
-`linear_space_general_claim_scalar_multiple_factors_out_of_left_factor`）。
+`linear_space_general_claim_scalar_multiple_factors_out_of_left_factor`）と、`def_matrix_transpose`（同じファイルの `linear_space_general_definition_matrix_transpose`）。
 後の 2 つの主張は、`eigenvector_of_A_theta_tilde` Step 1 が使う数ベクトル（右の因子が 1 列の行列）の場合だけを形式化する。
 
 **必要十分版**: `Ising2D/NecSuf/MatrixVectorIdentityScalarDifference.lean`。具体版をその系として導くのは
@@ -19,10 +19,10 @@
 
 ## 人手証明との対応
 
-* 定義の 6 つ: クロネッカーのデルタは `kroneckerDelta`（`def_kronecker_delta`）。 行列は mathlib の `Matrix`、単位行列・スカラー倍・差・零行列・符号反転は mathlib の `1`・`•`・`-`・`0`・`-` を使う。
+* 定義の 7 つ: クロネッカーのデルタは `kroneckerDelta`（`def_kronecker_delta`）。 行列は mathlib の `Matrix`、単位行列・スカラー倍・差・零行列・符号反転・転置は mathlib の `1`・`•`・`-`・`0`・`-`・`ᵀ` を使う。
   後段の章の Lean がこれらで書かれているからである。人手の成分の式との接点は
   `identity_matrix_apply`（`def_identity_matrix`。`I_{ij} = δ_{ij}`）・`matrix_smul_apply`（`def_matrix_scalar_multiple`）・
-  `matrix_sub_apply`（`def_matrix_difference`）・`matrix_zero_apply`（`def_zero_matrix`）・`matrix_neg_apply`（`def_matrix_negation`。`pauli_matrix_products` が使う）の 5 つと `kroneckerDelta` の値 `kroneckerDelta_self`・`kroneckerDelta_of_ne` だけで、
+  `matrix_sub_apply`（`def_matrix_difference`）・`matrix_zero_apply`（`def_zero_matrix`）・`matrix_neg_apply`（`def_matrix_negation`。`pauli_matrix_products` が使う）の 5 つと、転置の成分の式 `matrix_transpose_apply`（`def_matrix_transpose`。`transpose_of_pauli_x` ほか 2 次の行列の転置の主張が使う。ここで示す主張の証明には現れない）と `kroneckerDelta` の値 `kroneckerDelta_self`・`kroneckerDelta_of_ne` だけで、
   ここで示す主張の証明はこれらと行列とベクトルの積の成分 `mulVec_apply_sum`（`mat_mult`）だけから成分ごとに進む。
 * 人手の数ベクトル `v ∈ ℂ^n` は `mat_mult` のとおり `n` 行 1 列の行列である。Lean では後段に合わせて `Fin n → ℂ` で書き、
   スカラー倍・差・零ベクトルの成分は `vec_smul_apply`・`vec_sub_apply`・`vec_zero_apply` とする。
@@ -71,6 +71,12 @@ theorem matrix_sub_apply {m p : ℕ} (A B : Matrix (Fin m) (Fin p) ℂ) (i : Fin
 /-- **`def_matrix_negation`**: `(-A)_{ik} = -A_{ik}`。 -/
 theorem matrix_neg_apply {m p : ℕ} (A : Matrix (Fin m) (Fin p) ℂ) (i : Fin m) (k : Fin p) :
     (-A) i k = -A i k :=
+  rfl
+
+/-- **`def_matrix_transpose`**（`structured-latex/content/002_linear_space_general.ts` の
+`linear_space_general_definition_matrix_transpose`）: `(B^⊤)_{pq} = B_{qp}`。 -/
+theorem matrix_transpose_apply {m n : ℕ} (B : Matrix (Fin m) (Fin n) ℂ) (p : Fin n) (q : Fin m) :
+    Bᵀ p q = B q p :=
   rfl
 
 /-- **`def_zero_matrix`**: 零行列 `O` の成分はすべて `0`。 -/

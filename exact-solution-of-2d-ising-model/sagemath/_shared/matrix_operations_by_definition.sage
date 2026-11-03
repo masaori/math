@@ -57,3 +57,9 @@ def body_finite_sum(terms):
     for T in terms[1:]:
         total = body_sum(total, T)
     return total
+
+
+def body_transpose(B):
+    """def_matrix_transpose の (B^⊤)_{pq} := B_{qp} で転置を組む。"""
+    R = B.base_ring()
+    return matrix(R, B.ncols(), B.nrows(), lambda p, q: B[q, p])
