@@ -19,7 +19,8 @@ Step 3（成分が実で転置について対称）は、この表示を経な�
 | Step 1 の準備（`Z_m`・`Y_m` のクロネッカー積表示）と `Z_mY_m = (-i)σ^x_m` の 8 行（準備の `Z_m`・`Y_m` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult` → Step 0 の `σ^zσ^y = (-i)σ^x` → `kronecker_multilinear` → `def_site_pauli_matrices`） | `Z_mul_Y_same` の `calc` の 8 段（`PartitionFunction/ProjectionAndJordanWigner/DefinitionTransferMatrixSymbols.lean`。準備の表示は Lean では `Z`・`Y` の定義そのもので `rfl`） |
 | Step 1 の `H_2` の鎖の 3 行（`def_H2` → 上で得た `Z_mY_m` → `finite_sum_of_scalar_multiples`） | `H2_eq_neg_I_smul_sum_sigmaX` の `calc` の 3 段 |
 | Step 1 の `S_2` の鎖の 8 行（`S_2` の定義 → `H_2` の表示 → `scalar_multiple_is_associative` → ℂ の積の結合律 → 交換律 → 結合律 → `i(-i) = 1` → 乗法の単位元） | `S2_eq_K2star_smul_sum_sigmaX` の `calc` の 7 段（先頭の「`S_2` の定義」の行は Lean では主張の左辺そのもの） |
-| Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col-1`） | `Y_castSucc_mul_Z_succ`（`Y_mul_Z_next_of_not_last` を人手の差の形の添字へ） |
+| Step 2 の準備（`Y_m`・`Z_{m+1}` のクロネッカー積表示と、`σ^z_mσ^z_{m+1}` の 6 行（`def_site_pauli_matrices` 2 回 → `kronecker_product_rule` (1) → `identity_matrix_is_right_unit_of_mat_mult` → `identity_matrix_is_left_unit_of_mat_mult` 2 回）） | `Y`・`Z` の定義（`rfl`）と `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker` の `calc` の 6 段 |
+| Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` の 9 行（`1 ≤ m ≤ M_col-1`。準備の `Y_m`・`Z_{m+1}` の表示 → `kronecker_product_rule` (1) → `σ^xσ^x = I` → `identity_matrix_is_left_unit_of_mat_mult`（`A → σ^z`・`A → I`） → Step 0 の `σ^yσ^x = (-i)σ^z` → `kronecker_multilinear` → 準備の `σ^z_mσ^z_{m+1}` の表示） | `Y_castSucc_mul_Z_succ` の `calc` の 9 段（人手の差の形の添字 `Fin.castSucc m`・`Fin.succ m` で） |
 | Step 2 の境界項 `Y_{M_col}Z_1 = (-i)G`（`G = σ^y_1σ^x_2⋯σ^x_{M_col-1}σ^y_{M_col}`） | `Y_last_mul_Z_zero`（`Y_last_mul_Z_first` を人手の差の形の添字へ） |
 | Step 2 の `S_1^{(+)}` の鎖の 13 行 | `S1plus_eq_K1_smul_sub` の `calc` の 12 段（先頭の「`S_1^{(+)}` の定義」の行は Lean では主張の左辺そのもの） |
 
@@ -73,16 +74,128 @@ theorem S2_eq_K2star_smul_sum_sigmaX (K2star : ℂ) (r : ℕ) :
     _ = K2star • ∑ m : Fin (r + 1), sigmaX m := by
         rw [one_mul]                                                         -- ℂ の乗法の単位元
 
-/-- 人手 Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}`（`1 ≤ m ≤ M_col - 1`）を、`H1plus_eq_sub` の添字（`Fin.castSucc m`・`Fin.succ m`）で。 -/
+/-- **人手 `iH_is_real_symmetric` Step 2 の準備の `σ^z_mσ^z_{m+1}` のクロネッカー積表示**（6 行。`1 ≤ m ≤ M_col - 1`、`M = r + 2`）。
+人手の `m` は Lean の `Fin.castSucc m`、`m + 1` は `Fin.succ m`。人手の「第 `m` 因子と第 `m+1` 因子以外の因子」は Lean の
+`i ≠ Fin.castSucc m` かつ `i ≠ Fin.succ m` で、`calc` の終わりの因子の並び `I⊠⋯⊠I⊠σ^z⊠σ^z⊠I⊠⋯⊠I` は `Function.update` を 2 回重ねて書く。 -/
+theorem sigmaZ_castSucc_mul_sigmaZ_succ_kronecker {r : ℕ} (m : Fin (r + 1)) :
+    sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)
+      = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+          (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) := by
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
+  calc
+    sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)
+        = siteProd (r + 2) (Function.update 1 (Fin.castSucc m) pauliZ) * sigmaZ (Fin.succ m) := rfl
+                                                        -- `def_site_pauli_matrices`（`k → m`, `a → z`）
+    _ = siteProd (r + 2) (Function.update 1 (Fin.castSucc m) pauliZ)
+          * siteProd (r + 2) (Function.update 1 (Fin.succ m) pauliZ) := rfl
+                                                        -- `def_site_pauli_matrices`（`k → m+1`, `a → z`）
+    _ = siteProd (r + 2) (fun i =>
+          if i = Fin.castSucc m then pauliZ * 1
+          else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      by_cases ha : i = Fin.castSucc m
+      · rw [ha, Function.update_self, Function.update_of_ne hab, if_pos rfl]; rfl
+      · by_cases hb : i = Fin.succ m
+        · rw [hb, Function.update_self, Function.update_of_ne hab.symm, if_neg hab.symm, if_pos rfl]; rfl
+        · rw [Function.update_of_ne ha, Function.update_of_ne hb, if_neg ha, if_neg hb]; rfl
+    _ = siteProd (r + 2) (fun i =>
+          if i = Fin.castSucc m then pauliZ
+          else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
+      rw [mul_identity_matrix pauliZ]                   -- `identity_matrix_is_right_unit_of_mat_mult`（`m, n → 2`, `A → σ^z`。第 `m` 因子へ）
+    _ = siteProd (r + 2) (fun i =>
+          if i = Fin.castSucc m then pauliZ
+          else if i = Fin.succ m then pauliZ else 1 * 1) := by
+      rw [identity_matrix_mul pauliZ]                   -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → σ^z`。第 `m+1` 因子へ）
+    _ = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+          (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) := by
+      rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → I`。第 `m`・第 `m+1` 因子以外へ同時に適用）
+      congr 1                                           -- 両辺は同じ因子の並び（`Function.update` は `ite` の書き方の違いだけ）
+      funext i
+      by_cases ha : i = Fin.castSucc m
+      · rw [ha, Function.update_self, if_pos rfl]
+      · rw [Function.update_of_ne ha, if_neg ha]
+        by_cases hb : i = Fin.succ m
+        · rw [hb, Function.update_self, if_pos rfl]
+        · rw [Function.update_of_ne hb, if_neg hb]; rfl
+
+/-- **人手 `iH_is_real_symmetric` Step 2 の `Y_mZ_{m+1} = (-i)σ^z_mσ^z_{m+1}` の 9 行の鎖**（`1 ≤ m ≤ M_col - 1`、`M = r + 2`）を、
+`H1plus_eq_sub` の添字（`Fin.castSucc m`・`Fin.succ m`）で。
+
+人手との対応: 人手の準備の `Y_m`・`Z_{m+1}` のクロネッカー積表示（`def_jordan_wigner_Y_matrices`・`def_jordan_wigner_Z_matrices` と
+`site_pauli_prefix_product_kronecker_form`）は、Lean では `Y`・`Z` の定義そのもの（`siteProd` に `jwFamily` を入れたもの）なので、
+`calc` の 1・2 段は `rfl` である（`Z_mul_Y_same` と同じ）。準備の `σ^z_mσ^z_{m+1}` の表示は `sigmaZ_castSucc_mul_sigmaZ_succ_kronecker`。
+人手の「第 `1` から第 `m-1` 因子」「第 `m+2` 以降の因子」は Lean の `i < Fin.castSucc m`・それ以外（`i ≠ Fin.castSucc m`, `i ≠ Fin.succ m`）である。
+`V1_in_Z_Y_epsilon` の Step 2 の鎖は別の 5 行の鎖で、Lean の `Y_mul_Z_next_of_not_last` が持つ。 -/
 theorem Y_castSucc_mul_Z_succ {r : ℕ} (m : Fin (r + 1)) :
     Y (Fin.castSucc m) * Z (Fin.succ m)
       = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
-  have hlt : ((Fin.castSucc m : Fin (r + 2)) : ℕ) + 1 < r + 2 := by
-    simp only [Fin.val_castSucc]; omega
-  have hnext : nextSite (Fin.castSucc m) = Fin.succ m :=
-    Fin.ext (by rw [nextSite_val_of_lt hlt]; simp)
-  rw [← hnext]
-  exact Y_mul_Z_next_of_not_last _ (Nat.ne_of_lt hlt)
+  have hab : (Fin.castSucc m : Fin (r + 2)) ≠ Fin.succ m := Fin.ne_of_val_ne (by simp)
+  have hsucc : ((Fin.succ m : Fin (r + 2)) : ℕ) = ((Fin.castSucc m : Fin (r + 2)) : ℕ) + 1 := by simp
+  calc
+    Y (Fin.castSucc m) * Z (Fin.succ m)
+        = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY) * Z (Fin.succ m) := rfl
+                                                        -- 準備の `Y_m` の表示
+    _ = siteProd (r + 2) (jwFamily (Fin.castSucc m) pauliY)
+          * siteProd (r + 2) (jwFamily (Fin.succ m) pauliZ) := rfl
+                                                        -- 準備の `Z_{m+1}` の表示
+    _ = siteProd (r + 2) (fun i =>
+          if (i : ℕ) < (Fin.castSucc m : ℕ) then pauliX * pauliX
+          else if i = Fin.castSucc m then pauliY * pauliX
+          else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
+      rw [← siteProd_mul]                               -- `kronecker_product_rule` (1)（`M → M_col`）
+      congr 1
+      funext i
+      simp only [Pi.mul_apply]
+      rcases lt_trichotomy (i : ℕ) (Fin.castSucc m : ℕ) with h | h | h
+      · rw [jwFamily_of_lt h, jwFamily_of_lt (by omega), if_pos h]
+      · have he : i = Fin.castSucc m := Fin.val_injective h
+        rw [he, jwFamily_self, jwFamily_of_lt (by omega), if_neg (lt_irrefl _), if_pos rfl]
+      · have hne : i ≠ Fin.castSucc m := fun he => absurd (congrArg Fin.val he) (by omega)
+        rw [jwFamily_of_gt h, if_neg (by omega), if_neg hne]
+        rcases lt_trichotomy (i : ℕ) (Fin.succ m : ℕ) with h' | h' | h'
+        · omega
+        · have he : i = Fin.succ m := Fin.val_injective h'
+          rw [he, jwFamily_self, if_pos rfl]
+        · have hne' : i ≠ Fin.succ m := fun he => absurd (congrArg Fin.val he) (by omega)
+          rw [jwFamily_of_gt h', if_neg hne']
+    _ = siteProd (r + 2) (fun i =>
+          if (i : ℕ) < (Fin.castSucc m : ℕ) then 1
+          else if i = Fin.castSucc m then pauliY * pauliX
+          else if i = Fin.succ m then 1 * pauliZ else 1 * 1) := by
+      rw [pauliX_mul_pauliX]                            -- `pauli_matrix_products` の `σ^xσ^x = I`（第 1 から第 `m-1` 因子へ同時に適用）
+    _ = siteProd (r + 2) (fun i =>
+          if (i : ℕ) < (Fin.castSucc m : ℕ) then 1
+          else if i = Fin.castSucc m then pauliY * pauliX
+          else if i = Fin.succ m then pauliZ else 1 * 1) := by
+      rw [identity_matrix_mul pauliZ]                   -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → σ^z`。第 `m+1` 因子へ）
+    _ = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+          (Fin.succ m) pauliZ) (Fin.castSucc m) (pauliY * pauliX)) := by
+      rw [identity_matrix_mul (1 : Matrix (Fin 2) (Fin 2) ℂ)]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（`m, n → 2`, `A → I`。第 `m+2` 以降の因子へ同時に適用）
+      congr 1                                           -- 両辺は同じ因子の並び `I⊠⋯⊠I⊠(σ^yσ^x)⊠σ^z⊠I⊠⋯⊠I`（`Function.update` は `ite` の書き方の違いだけ）
+      funext i
+      by_cases ha : i = Fin.castSucc m
+      · rw [ha, Function.update_self, if_neg (lt_irrefl _), if_pos rfl]
+      · rw [Function.update_of_ne ha, if_neg ha]
+        by_cases hb : i = Fin.succ m
+        · rw [hb, Function.update_self, if_neg (by omega), if_pos rfl]
+        · rw [Function.update_of_ne hb, if_neg hb]
+          by_cases hlt : (i : ℕ) < (Fin.castSucc m : ℕ)
+          · rw [if_pos hlt]; rfl
+          · rw [if_neg hlt]; rfl
+    _ = siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+          (Fin.succ m) pauliZ) (Fin.castSucc m) ((-Complex.I) • pauliZ)) := by
+      rw [pauliY_mul_pauliX_eq]                         -- Step 0 の `σ^yσ^x = (-i)σ^z`
+    _ = (-Complex.I) • siteProd (r + 2) (Function.update (Function.update (1 : Fin (r + 2) → Matrix (Fin 2) (Fin 2) ℂ)
+          (Fin.succ m) pauliZ) (Fin.castSucc m) pauliZ) :=
+      (siteProd (r + 2)).map_update_smul _ (Fin.castSucc m) (-Complex.I) pauliZ
+                                                        -- `kronecker_multilinear` の `r = 1` の場合（`j → m`, `c → -i`, `A_m → σ^z`, `A_{m+1} → σ^z`, `A_k → I`）。Lean の具体版は無く、`siteProd` の多重線型性 `MultilinearMap.map_update_smul` を 1 回
+    _ = (-Complex.I) • (sigmaZ (Fin.castSucc m) * sigmaZ (Fin.succ m)) := by
+      rw [sigmaZ_castSucc_mul_sigmaZ_succ_kronecker]    -- 準備の `σ^z_mσ^z_{m+1}` の表示
 
 /-- 人手 Step 2 の境界項 `Y_{M_col}Z_1 = (-i)G` を、`H1plus_eq_sub` の添字（`Fin.last (r + 1)`・`0`）で。 -/
 theorem Y_last_mul_Z_zero (r : ℕ) :
