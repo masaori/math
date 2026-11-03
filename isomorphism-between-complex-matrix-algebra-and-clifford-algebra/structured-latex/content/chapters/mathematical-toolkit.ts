@@ -3931,4 +3931,156 @@ h(x)
       ]),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_complex_numbers_as_vector_space_is_complex_vector_space",
+    kind: "claim",
+    title: { text: "ℂ に ℂ-線型空間の構造を与える組は ℂ-線型空間である" },
+    labels: ["claim_complex_numbers_as_vector_space_is_complex_vector_space"],
+    statement: [
+      paragraph([
+        "組 ",
+        math(String.raw`(\mathbb{C},+_{\mathbb{C}^{\mathrm{vec}}},\cdot_{\mathbb{C}^{\mathrm{vec}}},0_{\mathbb{C}^{\mathrm{vec}}})`),
+        "（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "）は ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x,y,z`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元でベクトルの側に置くもの、",
+        math(String.raw`\lambda,\mu`),
+        " を ",
+        math(String.raw`\mathbb{C}`),
+        " の任意の元でスカラーの側に置くものとする。",
+        math(String.raw`\mathbb{C}^{\mathrm{vec}}`),
+        " の元の等しさは ",
+        math(String.raw`\mathbb{C}`),
+        " の元としての等しさなので（",
+        ref("def_complex_numbers_as_complex_vector_space"),
+        "）、以下の各式変形は ",
+        math(String.raw`\mathbb{C}`),
+        " の中の等式の連なりである。ℂ-線型空間の定義（",
+        ref("def_complex_vector_space"),
+        "）の八つの条件を順に示す。",
+      ]),
+      paragraph(["加法の結合法則 ", math(String.raw`(x+_{\mathbb{C}^{\mathrm{vec}}}y)+_{\mathbb{C}^{\mathrm{vec}}}z=x+_{\mathbb{C}^{\mathrm{vec}}}(y+_{\mathbb{C}^{\mathrm{vec}}}z)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(x+_{\mathbb{C}^{\mathrm{vec}}}y)+_{\mathbb{C}^{\mathrm{vec}}}z
+&=(x+_{\mathbb{C}^{\mathrm{vec}}}y)+_{\mathbb{C}}z
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(x+_{\mathbb{C}}y)+_{\mathbb{C}}z
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=x+_{\mathbb{C}}(y+_{\mathbb{C}}z)
+&&\left(\because\ \mathbb{C}\ \text{の加法の結合法則}\right)\\
+&=x+_{\mathbb{C}}(y+_{\mathbb{C}^{\mathrm{vec}}}z)
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=x+_{\mathbb{C}^{\mathrm{vec}}}(y+_{\mathbb{C}^{\mathrm{vec}}}z)
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["加法の交換法則 ", math(String.raw`x+_{\mathbb{C}^{\mathrm{vec}}}y=y+_{\mathbb{C}^{\mathrm{vec}}}x`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+x+_{\mathbb{C}^{\mathrm{vec}}}y
+&=x+_{\mathbb{C}}y
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=y+_{\mathbb{C}}x
+&&\left(\because\ \mathbb{C}\ \text{の加法の交換法則}\right)\\
+&=y+_{\mathbb{C}^{\mathrm{vec}}}x
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["加法の単位元 ", math(String.raw`x+_{\mathbb{C}^{\mathrm{vec}}}0_{\mathbb{C}^{\mathrm{vec}}}=x`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+x+_{\mathbb{C}^{\mathrm{vec}}}0_{\mathbb{C}^{\mathrm{vec}}}
+&=x+_{\mathbb{C}}0_{\mathbb{C}^{\mathrm{vec}}}
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=x+_{\mathbb{C}}0_{\mathbb{C}}
+&&\left(\because\ 0_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=x
+&&\left(\because\ 0_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の加法の単位元}\right).
+\end{aligned}`),
+      paragraph([
+        "加法の逆元は、",
+        math(String.raw`x`),
+        " に対して、",
+        math(String.raw`x+_{\mathbb{C}}x'=0_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`x'`),
+        "（",
+        math(String.raw`x`),
+        " の ",
+        math(String.raw`\mathbb{C}`),
+        " の加法の逆元）を一つ選べば、",
+        math(String.raw`x+_{\mathbb{C}^{\mathrm{vec}}}x'=0_{\mathbb{C}^{\mathrm{vec}}}`),
+        " を満たす。これは次のとおりである。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+x+_{\mathbb{C}^{\mathrm{vec}}}x'
+&=x+_{\mathbb{C}}x'
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=0_{\mathbb{C}}
+&&\left(\because\ x'\ \text{の選び方}\right)\\
+&=0_{\mathbb{C}^{\mathrm{vec}}}
+&&\left(\because\ 0_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の結合法則 ", math(String.raw`(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^{\mathrm{vec}}}x=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}(\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x)`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^{\mathrm{vec}}}x
+&=(\lambda\cdot_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}x
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}x)
+&&\left(\because\ \mathbb{C}\ \text{の乗法の結合法則}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}(\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["スカラー倍の単位元 ", math(String.raw`1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}x=x`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+1_{\mathbb{C}}\cdot_{\mathbb{C}^{\mathrm{vec}}}x
+&=1_{\mathbb{C}}\cdot_{\mathbb{C}}x
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=x
+&&\left(\because\ 1_{\mathbb{C}}\ \text{は}\ \mathbb{C}\ \text{の乗法の単位元}\right).
+\end{aligned}`),
+      paragraph(["ベクトルの加法についての分配法則 ", math(String.raw`\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}(x+_{\mathbb{C}^{\mathrm{vec}}}y)=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x+_{\mathbb{C}^{\mathrm{vec}}}\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}y`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}(x+_{\mathbb{C}^{\mathrm{vec}}}y)
+&=\lambda\cdot_{\mathbb{C}}(x+_{\mathbb{C}^{\mathrm{vec}}}y)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}}(x+_{\mathbb{C}}y)
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}x)+_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}}y)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x)+_{\mathbb{C}}(\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}y)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義を二か所に適用。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x+_{\mathbb{C}^{\mathrm{vec}}}\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}y
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph(["スカラーの加法についての分配法則 ", math(String.raw`(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^{\mathrm{vec}}}x=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x+_{\mathbb{C}^{\mathrm{vec}}}\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x`), " は次のとおりである。"]),
+      displayMath(String.raw`\begin{aligned}
+(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}^{\mathrm{vec}}}x
+&=(\lambda+_{\mathbb{C}}\mu)\cdot_{\mathbb{C}}x
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=(\lambda\cdot_{\mathbb{C}}x)+_{\mathbb{C}}(\mu\cdot_{\mathbb{C}}x)
+&&\left(\because\ \mathbb{C}\ \text{の分配法則}\right)\\
+&=(\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x)+_{\mathbb{C}}(\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x)
+&&\left(\because\ \cdot_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義を二か所に適用。}\blkref{def_complex_numbers_as_complex_vector_space}\right)\\
+&=\lambda\cdot_{\mathbb{C}^{\mathrm{vec}}}x+_{\mathbb{C}^{\mathrm{vec}}}\mu\cdot_{\mathbb{C}^{\mathrm{vec}}}x
+&&\left(\because\ +_{\mathbb{C}^{\mathrm{vec}}}\ \text{の定義。}\blkref{def_complex_numbers_as_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "八つの条件が満たされたので、組 ",
+        math(String.raw`(\mathbb{C},+_{\mathbb{C}^{\mathrm{vec}}},\cdot_{\mathbb{C}^{\mathrm{vec}}},0_{\mathbb{C}^{\mathrm{vec}}})`),
+        " は ℂ-線型空間である（",
+        ref("def_complex_vector_space"),
+        "）。",
+      ]),
+    ],
+  },
 ]);
