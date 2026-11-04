@@ -22,6 +22,13 @@ Step 2 の指数法則の 2 行と展開の 2 行（`sum_exp_gval_step2_expansio
 `expansion_of_finite_product_of_two_term_sums_of_real`）で積へ移し、続く 6 行（`prod_step2_cosh`。ℝ の計算規則を 1 行に 1 つと、
 `def_cosh_sinh` の `cosh` を右辺から左辺へ）で各因子を `2cosh(γ/2)` に書き換え、積の添字を `𝓜̌` へ戻す（運ぶ段）。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
 
+## 原文 Step 3 との対応
+
+Step 3 のトレースの 9 行の鎖は `trace_Vprime_inv_step3` の `calc` と 1 対 1 である（5 行目だけが `eigenvalues_of_inverse_of_check_Vprime`
+（`Vprime_inv_mul_Qproj`）を引き、ほかは Step 1 の鎖と Step 2 の 1 行目と同じ根拠）。人手の `(V̌')^{-1}` は `↑(F.VprimeUnits g)⁻¹` で、
+`trace_Vprime_inv` の左辺の `F.Vprime (fun i => -(g i))` へは `VprimeUnits_inv` で付け替える。その先の「Step 2 を γ → −γ として適用」
+「cosh は偶関数」「Step 1--2 の V̌' のトレース表示」の 3 行は人手がまだ名前だけの根拠なので、`trace_Vprime_inv` の `M = r + 1` の残りは人手の行と 1 対 1 ではない。
+
 ## 章 009 との違い
 
 章 009 の `trace_of_Vprime` は `tr(V') = 2^{M-m} ∏_μ 2cosh(γ_μ/2)` だった。
@@ -345,13 +352,74 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
             (Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
               fun _ => rfl)                             -- 積の添字を `μ = j + 1` の全単射で `𝓜̌` へ戻す（運ぶ段。人手の行は無い）
 
-/-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`（`cosh` が偶関数）。 -/
+/-- **原文 `trace_of_check_Vprime` Step 3 のトレースの 9 行の鎖**:
+`tr((V̌')^{-1}) = tr((V̌')^{-1}I) = tr((V̌')^{-1}Σ_εQ̌_ε) = tr(Σ_ε(V̌')^{-1}Q̌_ε) = Σ_εtr((V̌')^{-1}Q̌_ε)
+= Σ_εtr((exp(−ǧ(ε)))_ℂQ̌_ε) = Σ_ε(exp(−ǧ(ε)))_ℂtr(Q̌_ε) = Σ_ε(exp(−ǧ(ε)))_ℂ1_ℂ = Σ_ε(exp(−ǧ(ε)))_ℂ
+= (Σ_εexp(−ǧ(ε)))_ℂ`（人手の `M_col` が Lean の `r + 1`、人手の `(V̌')^{-1}` が `↑(F.VprimeUnits g)⁻¹`）。
+1〜8 行は Step 1 の鎖 `trace_Vprime_step1` と同じ根拠で、5 行目だけが `eigenvalues_of_check_Vprime` の代わりに
+`eigenvalues_of_inverse_of_check_Vprime`（`Vprime_inv_mul_Qproj`）を引く。9 行目は Step 2 の 1 行目と同じ
+`real_inclusion_preserves_sum_over_binary_words`（`binWordSum_ofReal`）である。 -/
+theorem trace_Vprime_inv_step3 {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ) :
+    ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace
+      = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+  calc ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace
+      = ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * 1).trace := by
+        rw [mul_identity_matrix_tensorPow]              -- `identity_matrix_is_right_unit_of_mat_mult`（`A → (V̌')^{-1}`）を右辺から左辺へ
+    _ = ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))
+          * NecSuf.binWordSum r (fun ε => F.Qproj (finsetOfBinWord ε))).trace := by
+        rw [sum_Qproj_step2 F]                          -- `check_joint_eigenspace_decomposition` (2) を右辺から左辺へ
+    _ = (NecSuf.binWordSum r (fun ε =>
+          (((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * F.Qproj (finsetOfBinWord ε))).trace := by
+        rw [mul_binWordSum_tensorPow]                   -- `sum_over_binary_words_distributes_in_right_factor`
+                                                        -- （`C → (V̌')^{-1}`、`X_ε → Q̌_ε`）
+    _ = NecSuf.binWordSum r (fun ε =>
+          ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1)) * F.Qproj (finsetOfBinWord ε)).trace) :=
+        trace_binWordSum_tensorPow r _                  -- `trace_of_sum_over_binary_words`（`B_ε → (V̌')^{-1}Q̌_ε`）
+    _ = NecSuf.binWordSum r (fun ε =>
+          ((((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) • F.Qproj (finsetOfBinWord ε)).trace) := by
+        congr 1; funext ε; rw [F.Vprime_inv_mul_Qproj]  -- `eigenvalues_of_inverse_of_check_Vprime` を各項へ同時に
+    _ = NecSuf.binWordSum r (fun ε =>
+          (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * (F.Qproj (finsetOfBinWord ε)).trace) := by
+        congr 1; funext ε; exact trace_smul_tensorPow _ _
+                                                        -- `trace_of_scalar_multiple`（`α → (exp(−ǧ(ε)))_ℂ`、`A → Q̌_ε`）を各項へ同時に
+    _ = NecSuf.binWordSum r (fun ε => (((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) * 1) := by
+        congr 1; funext ε; rw [F.trace_Qproj]           -- `check_joint_eigenspace_decomposition` (4) の `tr(Q̌_ε) = 1` を各項へ同時に
+    _ = NecSuf.binWordSum r (fun ε => ((Real.exp (-(F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ)) := by
+        congr 1; funext ε; exact mul_one _              -- `1_ℂ` は乗法の単位元（`complex_numbers_form_a_field`）を各項へ同時に
+    _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+        binWordSum_ofReal r _                           -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(−ǧ(ε))`）
+
+/-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`。
+左辺の `F.Vprime (fun i => -(g i))` は人手の `(V̌')^{-1}` の Lean の表し方で、`VprimeUnits_inv` で `↑(F.VprimeUnits g)⁻¹` と付け替える。
+人手の範囲 `M = r + 1` では、付け替えたあとトレースの鎖 `trace_Vprime_inv_step3` を通る。その先の
+`Σ_εexp(−ǧ(ε)) = Π_μ2cosh(γ/2)` は、人手の Step 3 がまだ「Step 2 を γ → −γ として適用」「cosh は偶関数」「Step 1--2 の V̌' のトレース表示」と名前だけで根拠にしている 3 行で、
+Lean は `gval_neg` で `ǧ` を `−γ` の `ǧ` に替え、Step 2 の `sum_exp_gval_step2_expansion`・`prod_step2_cosh` を `−γ` で使い、
+`Real.cosh_neg` で閉じる（人手の行と 1 対 1 ではない）。人手の範囲外の `M = 0` は `trace_Vprime` と `Real.cosh_neg` で閉じる。 -/
 theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
     (F.Vprime (fun i => -(g i))).trace = (F.Vprime g).trace := by
-  rw [F.trace_Vprime, F.trace_Vprime]
-  norm_cast
-  refine Finset.prod_congr rfl fun i _ => ?_
-  rw [show -(g i) / 2 = -(g i / 2) by ring, Real.cosh_neg]
+  match M, F, g with
+  | 0, F, g =>
+    rw [F.trace_Vprime, F.trace_Vprime]
+    exact congrArg (fun x : ℝ => (x : ℂ)) (Finset.prod_congr rfl fun i _ => by
+      rw [show -(g i) / 2 = -(g i / 2) by ring, Real.cosh_neg])
+  | r + 1, F, g =>
+    calc (F.Vprime (fun i => -(g i))).trace
+        = ((((F.VprimeUnits g)⁻¹ : (TensorPow (r + 1))ˣ) : TensorPow (r + 1))).trace := by
+          rw [F.VprimeUnits_inv g]                      -- 人手の `(V̌')^{-1}` の Lean の二つの表し方を付け替える（運ぶ段。人手の行は無い）
+      _ = ((NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε)))) : ℝ) : ℂ) :=
+          trace_Vprime_inv_step3 F g                    -- Step 3 のトレースの鎖
+      _ = (F.Vprime g).trace := by
+          -- 人手の Step 3 の残り（「Step 2 を γ → −γ として適用」「cosh は偶関数」「Step 1--2」）。人手の行と 1 対 1 ではない
+          have hsum : NecSuf.binWordSum r (fun ε => Real.exp (-(F.gval g (finsetOfBinWord ε))))
+              = NecSuf.binWordSum r (fun ε => Real.exp (F.gval (fun i => -(g i)) (finsetOfBinWord ε))) := by
+            congr 1; funext ε; rw [F.gval_neg]
+          have hcosh := prod_step2_cosh (fun i => -(g i))
+          rw [hsum, sum_exp_gval_step2_expansion F, hcosh, F.trace_Vprime]
+          congr 1
+          rw [← Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩
+            (fun j => 2 * Real.cosh (g (checkIdxOfFin j) / 2)) (fun i => 2 * Real.cosh (g i / 2)) (fun _ => rfl)]
+          refine Finset.prod_congr rfl fun j _ => ?_
+          rw [show -(g (checkIdxOfFin j)) / 2 = -(g (checkIdxOfFin j) / 2) by ring, Real.cosh_neg]
 
 /-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') > 0`（`cosh ≥ 1`）。 -/
 theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :

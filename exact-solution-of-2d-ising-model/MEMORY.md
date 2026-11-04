@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百十七個目として、人手 `trace_of_check_Vprime` の Step 3 の (3b) を行った。`tr((V̌')^{-1})` を、Step 1 と同じ根拠で 5 行目だけ `eigenvalues_of_inverse_of_check_Vprime` を引く 8 行と `real_inclusion_preserves_sum_over_binary_words` の 1 行の 9 行の鎖で `(Σ_ε exp(−ǧ(ε)))_ℂ` にした（主張は不変）。Lean は人手と 1 対 1 の `CheckFermiSetup.trace_Vprime_inv_step3`、SageMath は `sagemath/check/trace_of_check_Vprime/` の `check_step3_chain.sage`（1〜8 行、SageMath の連続実行が先に足した）と `check_step3_real_inclusion.sage`（9 行目）。残りの「Step 2 を γ → −γ として適用」「Step 1--2 の V̌' のトレース表示」は (3c)・(3d)。
+
 2026-11-04: 全証明の SageMath 検算として、`trace_of_check_Vprime`（tr(V̌') = tr((V̌')^{-1}) = Π 2cosh(γ/2) > 0）に検算 `sagemath/check/trace_of_check_Vprime/` を付けた（未検算 36 件）。050 の Step 1・Step 2 の 5 本を内容の名前で移し（件数は元と一致）、Step 3 の行列の部（(V̌')^{-1} での Step 1 の鎖の繰り返し、−X̌）、Step 3・4 の値、主張そのもの、本文の ψ̌ での実行を足した。人手証明の計算の誤りは無し。Step 4 の cosh x ≥ 1 の根拠を性質を持たない `cosh_sinh_basic_properties` から `cosh_at_least_one` に直し、Step 3 の「cosh は偶関数」を `cosh_is_even` を引く行に分けた（Lean は不変）。三回のレビューで必須の指摘が無くなるまで直した。次は `V_plus_is_positive_definite`。
 
 2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_inverse_of_check_Vprime`（(V̌')^{-1}Q̌_ε = (exp(−ǧ(ε)))_ℂQ̌_ε）に検算 `sagemath/check/eigenvalues_of_inverse_of_check_Vprime/` を付けた（未検算 37 件）。050 の旧い検算を移して行列の部と実数の値の部に分け（模型の段数は元と一致）、主張そのものの検算と本文の ψ̌（M_col = 2, 3）で走らせる検算を足した。人手証明の計算の誤りは無し。次は `trace_of_check_Vprime`（状態台帳の「次の一歩」）。

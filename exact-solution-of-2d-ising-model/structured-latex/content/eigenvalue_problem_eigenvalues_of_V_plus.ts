@@ -4349,25 +4349,46 @@ E_K \check{Q}_\epsilon
       paragraph([
         "Step 3（",
         math(String.raw`\left(\check{V}'\right)^{-1}`),
-        " についても同じ値）。",
-        math(String.raw`\left(\check{V}'\right)^{-1} = \exp(-\check{X})`),
-        " であり、",
-        math(String.raw`-\check{X} = \sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)
-\left(\check{n}_\mu - \tfrac12 I\right)`),
-        " だから、Step 1〜2 をそのまま ",
-        math(String.raw`\gamma(\tilde\theta_\mu) \to -\gamma(\tilde\theta_\mu)`),
-        " として適用でき（",
-        ref("eigenvalues_of_check_Vprime"),
-        " の Step 1〜4 も符号を替えるだけで通る）",
+        " についても同じ値）。和の定義は Step 1・Step 2 と同じである。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
-&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad (\because \text{Step 1--2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
-&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}I\right)
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to (\check{V}')^{-1})\ \text{を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(2) を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\left(\check{V}'\right)^{-1}\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\ (m, n, p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ C \to (\check{V}')^{-1},\ X_\epsilon \to \check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_sum_over_binary_words}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ B_\epsilon \to (\check{V}')^{-1}\check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{eigenvalues_of_inverse_of_check_Vprime}\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_scalar_multiple}\ (n \to 2^{M_{\mathrm{col}}},\ \alpha \to (\exp(-\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon)\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}\,1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(-\check{g}(\epsilon)))\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "右辺の実数の和について、",
+        math(String.raw`-\check{g}(\epsilon) = \sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)`),
+        " だから、Step 2 をそのまま ",
+        math(String.raw`\gamma(\tilde\theta_\mu) \to -\gamma(\tilde\theta_\mu)`),
+        " として適用でき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
+   \quad (\because \text{Step 2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
    \quad \bigl(\because\ \mathbb{R}\ \text{で}\ \tfrac{-a}{2} = -\tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子へ同時に}\bigr) \\
-&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
    \quad \bigl(\because\ \blkref{cosh_is_even}\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に}\bigr) \\
 &= \mathrm{tr}\!\left(\check{V}'\right)
    \quad (\because \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
@@ -4414,6 +4435,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) は「直前の積表示と、有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張は行列の主張 expansion_of_finite_product_of_two_term_sums しか無かったので、実数の主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers（と帰納法の段が引く real_sum_over_binary_words_distributes_in_left_factor）を 002 章に足し、直前の鎖を各項へ入れる行と、展開を右辺から左辺へ引く行（a_μ^{(e)} → exp(γ(θ̃_μ)(e − 1/2))）に分けた。1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の順序を入れ替える行は、根拠を書いた別の行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_expansion.sage。",
         "2026-11-04: Step 2 の最後の 2 行は「1 − 1/2 = 1/2、0 − 1/2 = −1/2 と ℝ の和の交換則」「cosh x = (exp x + exp(−x))/2」と根拠を書いていたが、一つの行で複数の計算規則（γ·(1/2) = γ/2、γ·(−1/2) = −(γ/2) を含む）を使い、cosh の定義もラベルで引いていなかった。ℝ の 1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2) と、def_cosh_sinh の cosh（x → γ(θ̃_μ)/2）を右辺から左辺へ引く 6 行にした。exp(γ/2) + exp(−γ/2) の順のまま cosh の定義に合うので、和の交換の行は要らなくなった。主張は変えていない。Lean は Ising2D.CheckFermiSetup.prod_step2_cosh（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_cosh.sage。",
         "2026-11-04: Step 4 の cosh x ≥ 1 の根拠に cosh_sinh_basic_properties を引いていたが、その主張（(1)〜(4)）に cosh x ≥ 1 は無い。cosh_at_least_one（x → γ(θ̃_μ)/2）を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。Step 3 の 2 行目の根拠「cosh は偶関数」はラベル参照が無かったので、ℝ で (−a)/2 = −(a/2) の行と cosh_is_even（x → γ(θ̃_μ)/2）を引く行に分けた。主張は変えていない。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_and_step4_real_lines.sage。",
+        "2026-11-04: Step 3 の tr((V̌')^{-1}) = Π_μ 2cosh(−γ/2) は「Step 1--2 を γ → −γ として適用」と名前だけで根拠にしていた。本文の V̌'・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無い。トレースの部分を、Step 1 の 8 行の鎖と同じ根拠で 5 行目だけを新しく足した eigenvalues_of_inverse_of_check_Vprime に替えた鎖と、Step 2 の 1 行目と同じ real_inclusion_preserves_sum_over_binary_words の行の 9 行にした。値が Step 1・Step 2 と同じく ℝ の和の包含であることを、続く行の左辺と右辺にも (·)_ℂ で書いた。続く「Step 2 を γ → −γ として適用」と最後の「Step 1--2 の V̌' のトレース表示」の 2 行はまだ名前だけの根拠である（(−a)/2 = −(a/2) と cosh_is_even の行は同じ日の SageMath の検算の連続実行が分けたものを残した）。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_inv_step3（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_chain.sage（1〜8 行）と check_step3_real_inclusion.sage（9 行目）。",
       ],
     },
   },

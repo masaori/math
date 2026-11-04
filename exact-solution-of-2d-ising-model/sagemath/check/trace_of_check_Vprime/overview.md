@@ -7,8 +7,7 @@
 - ファイル: `structured-latex/content/eigenvalue_problem_eigenvalues_of_V_plus.ts`
 - ブロック: `evenEigen_007_claim_trace_of_check_Vprime`（V̌' は可逆で (V̌')^{-1} = exp(−X̌)（`def_check_Vprime` (2)）であり、
   tr(V̌') = tr((V̌')^{-1}) = Π_{μ=1}^{M_col} 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}）
-- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 2 行、展開と続く 7 行）、Step 3（いまの本文の 4 行と、
-  その 1 行目の名前だけの根拠の中身）、Step 4（正値性の不等号）の全ての行と、主張そのもの。
+- 範囲: 証明の Step 1（8 行の鎖）、Step 2（包含の 1 行、指数法則の 2 行、展開と続く 7 行）、Step 3（トレースの 9 行の鎖と、続く 4 行）、Step 4（正値性の不等号）の全ての行と、主張そのもの。
 - 記号: X̌ := Σ_μ γ(θ̃_μ)(ň_μ − (1/2)I)、V̌' := exp(X̌)、Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ）、
   ǧ(ε) := Σ_μ γ(θ̃_μ)(ε_μ − 1/2)。
 
@@ -34,11 +33,13 @@ Step 2 と Step 3・4 の実数の値の検算は ň_μ を使わず、γ(θ̃_�
 | Step 2 の指数法則の 2 行（ǧ の定義、`real_exp_of_finite_sum`） | `check_step2_exp_product.sage` | 球 |
 | Step 2 の展開の 2 行（直前の鎖を各項へ、`expansion_of_finite_product_of_two_term_sums_of_real_numbers` を右辺から左辺へ） | `check_step2_expansion.sage` | 展開の行は厳密（a_μ^{2e−1} の置き方）と球、両端の比較は球 |
 | Step 2 の展開に続く 6 行（1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2)、`def_cosh_sinh` の cosh） | `check_step2_cosh.sage` | 書き換えの 5 行は厳密（QQ[γ]・QQ(b)）、cosh の行は球 |
-| Step 3 の前置き −X̌ = Σ_μ(−γ(θ̃_μ))(ň_μ − (1/2)I) | `check_step3_chain.sage` | 厳密（γ_μ は模型では有理数、本物の ψ̌ では F 上の不定元） |
-| Step 3 の 1 行目 tr((V̌')^{-1}) = Π_μ 2cosh(−γ/2)（根拠「Step 1〜2 を γ ↦ −γ として適用」） | `check_step3_chain.sage`（行列の部）と `check_step3_and_step4_real_lines.sage`（値） | 根拠が名前だけなので、その中身として Step 1 の 8 行の鎖を (V̌')^{-1} で組み、5 行目の根拠を `eigenvalues_of_inverse_of_check_Vprime` に替えて厳密に確かめる。続く Σ_ε exp(−ǧ(ε)) = Π_μ 2cosh(−γ/2) は値を球で |
-| Step 3 の 2 行目 ℝ で (−a)/2 = −(a/2) | `check_step3_and_step4_real_lines.sage` | 厳密（QQ[γ]）と球 |
-| Step 3 の 3 行目 `cosh_is_even`（x → γ/2） | `check_step3_and_step4_real_lines.sage` | 球（各因子の cosh(−x) = cosh(x) と積） |
-| Step 3 の 4 行目 = tr(V̌')（Step 1〜2 のトレース表示） | `check_step3_chain.sage`（a の形で厳密）と `check_step3_and_step4_real_lines.sage`（Σ_ε exp ǧ(ε) との値の比較） | 厳密と球 |
+| 主張の (V̌')^{-1} = exp(−X̌) が使う −X̌ = Σ_μ(−γ(θ̃_μ))(ň_μ − (1/2)I)（Step 3 の旧い前置き。いまの Step 3 の段落は −ǧ(ε) = Σ_μ(−γ(θ̃_μ))(ε_μ − 1/2) を書く） | `check_step3_chain.sage` | 厳密（γ_μ は模型では有理数、本物の ψ̌ では F 上の不定元） |
+| Step 3 のトレースの鎖の 1〜8 行（Step 1 の 8 行と同じ根拠で、5 行目だけ `eigenvalues_of_inverse_of_check_Vprime`） | `check_step3_chain.sage`（行列の部） | 厳密（成分の環の中の等号）。和は二つの定義の帰納法どおりに組む |
+| Step 3 のトレースの鎖の 9 行目 Σ_ε(exp(−ǧ))_ℂ = (Σ_ε exp(−ǧ))_ℂ（`real_inclusion_preserves_sum_over_binary_words`） | `check_step3_real_inclusion.sage` | 厳密（ℂ を実数の対で持ち、二つの和を定義どおりに組む） |
+| 続く 1 行目 (Σ_ε exp(−ǧ))_ℂ = (Π_μ 2cosh(−γ/2))_ℂ（根拠「Step 2 を γ ↦ −γ として適用」） | `check_step3_chain.sage`（a の形）と `check_step3_and_step4_real_lines.sage`（値） | 根拠が名前だけなので、a の形の厳密な比較と球の値の比較で確かめる |
+| 続く 2 行目 ℝ で (−a)/2 = −(a/2) | `check_step3_and_step4_real_lines.sage` | 厳密（QQ[γ]）と球 |
+| 続く 3 行目 `cosh_is_even`（x → γ/2） | `check_step3_and_step4_real_lines.sage` | 球（各因子の cosh(−x) = cosh(x) と積） |
+| 続く 4 行目 = tr(V̌')（Step 1〜2 のトレース表示） | `check_step3_chain.sage`（a の形で厳密）と `check_step3_and_step4_real_lines.sage`（Σ_ε exp ǧ(ε) との値の比較） | 厳密と球 |
 | Step 4 の γ(θ̃_μ) > 0（`gamma_theta_tilde_mu_positive`）、2cosh(γ/2) ≥ 2·1（`cosh_at_least_one`、x → γ/2 の両辺に 2 を掛ける）、2·1 = 2、2 > 0、正数の有限積は正 | `check_step3_and_step4_real_lines.sage` | 球の全体が不等式を満たすこと。有限積は左から畳み込み、各段の積が正であることを見る |
 | 主張そのもの（V̌' = exp(X̌) の実際の値で） | `check_claim_statement.sage` | 球（下の「主張の検算」） |
 
@@ -55,6 +56,7 @@ Step 3 の 2 行目 (−a)/2 = −(a/2) は a の形では同じ元で、3 行�
 - `check_step3_chain.sage`: 各 ε で (V̌')^{-1}Q̌_ε は (exp(+ǧ(ε)))_ℂQ̌_ε と外れる（固有値の符号の誤り。行列の段で捉える。
   固有値を exp(+ǧ(ε)) にした和は ε ↦ 1 − ε の並べ替えで同じ値になるので、トレースでは見分けられない）。(V̌')^{-1} の固有値を exp(−2ǧ(ε)) にした和は
   tr((V̌')^{-1}) と外れる。−X̌ ≠ X̌（X̌ ≠ O と同じで、写し間違いはほとんど捉えない弱い対照）。
+- `check_step3_real_inclusion.sage`: 左辺で ε = (1, …, 1) の項を落とすと右辺と外れる。
 - `check_step3_and_step4_real_lines.sage`: Σ_ε exp(−2ǧ(ε)) は Π_μ 2cosh(−γ/2) と重ならない。2sinh(−γ/2) は 2 以上でなく、M_col が奇数なら
   Π_μ 2sinh(−γ/2) は負。下界を 3 に上げた 2cosh(γ/2) ≥ 3 は成り立たない μ がある（球の全体が 3 より小さい。球の不等号が下界の違いを見分ける）。(−γ)/2 ≠ γ/2（何も捉えない弱い対照）。
 - Step 2 の 4 本はそれぞれの冒頭に書いた否定コントロールを持つ（移す前と同じ）。
@@ -77,6 +79,7 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
 | `check_step2_exp_product.sage` | Step 2 の指数法則の 2 行（M_col = 2..6、(K_1, K_2) の 4 組、全ての ε） | **PASS** | 等号 992 個、否定コントロール 496 件（移す前と一致） |
 | `check_step2_expansion.sage` | Step 2 の展開の行（球: M_col = 2..6、4 組。厳密: M_col = 1..6） | **PASS** | 球の行 80 個、厳密 6 通り、否定コントロール 20 件（移す前と一致） |
 | `check_step2_cosh.sage` | 展開に続く 6 行（厳密 6 段、球: M_col = 2..6、4 組） | **PASS** | 厳密 6 段、球の行 120 個、否定コントロール 3 + 60 件（移す前と一致） |
+| `check_step3_real_inclusion.sage` | Step 3 のトレースの鎖の 9 行目（M_col = 1..5） | **PASS** | 5 通り、否定コントロール 5 件 |
 | `check_step3_chain.sage` | 模型の ň_μ で Step 3 の行列の部（(V̌')^{-1} の 8 行の鎖、a の形の 3 行、−X̌ の行） | **PASS** | 鎖 24 段、Step 3 の行 12 個、否定コントロール 34 件 |
 | `check_step3_and_step4_real_lines.sage` | Step 3 の値の 4 行と各因子の cosh(−x) = cosh(x)、(−a)/2 = −(a/2) の厳密な 1 行、Step 4 の不等号（M_col = 2..6、4 組） | **PASS** | Step 3 の行 161 個、Step 4 の不等号 400 個（μ ごとに γ > 0・cosh ≥ 1・2cosh ≥ 2·1・2cosh > 0・部分積 > 0 の 5 個。2·1 = 2 と 2 > 0 は μ に依らない）、否定コントロール 126 件 |
 | `check_claim_statement.sage` | 模型の ň_μ と有理数 γ_μ（M_col = 2, 3, 4）で主張 | **PASS** | 主張 15 件、否定コントロール 6 件 |
@@ -90,16 +93,14 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
   球は丸めの誤差を半径に含めて真の値を囲む。等号は球の重なりで確かめ、半径が 10^{-40}（`RealBallField(200)` の検算）、10^{-80}（`check_claim_statement.sage`）
   未満であることも確かめる。不等号は球の全体が満たすことで確かめる。
 - **作り方で自明な比較**: Step 2 の指数法則の 1 行目（ǧ の定義）は検算でも同じ和から組むので同語反復。Step 3 の 2・3 行目の a の形の段は同じ元か ℂ の和の交換。Step 1 の最後の行 Σ_ε(exp ǧ)_ℂ1_ℂ = Σ_ε(exp ǧ)_ℂ は、成分の環の中で同じ元になる。
-- **a の形で代えた行**: Step 3 の 1 行目の中身のうち、Step 2 の包含の行の −ǧ 版 Σ_ε(exp(−ǧ))_ℂ = (Σ_ε exp(−ǧ))_ℂ は、
-  `check_step3_chain.sage` の a の形（ℂ と ℝ を区別しない成分の環）と `check_step3_and_step4_real_lines.sage` の値の比較で代えた（Step 2 の包含の行そのものは
-  `check_step2_real_inclusion.sage` が a_μ を独立な不定元として確かめており、a_μ ↦ a_μ^{-1} は同じ形の置き換えである）。
+- Step 3 のトレースの鎖の 9 行目（包含の行の −ǧ 版）は、`check_step3_real_inclusion.sage` が ℂ を実数の対で持って厳密に確かめる。
 - 範囲外: 本物の ψ̌ の M_col ≥ 4（`check_joint_eigenspace_decomposition` の overview と同じ理由）。M_col = 4 は模型が受け持つ。
 
 ## 本文について
 
-- Step 3 の 1 行目の根拠「Step 1〜2 を γ(θ̃_μ) ↦ −γ(θ̃_μ) として適用」は名前だけで、本文の V̌'・ǧ は γ(θ̃_μ) に固定した記号なので引ける主張が無い。
-  その中身に要る (V̌')^{-1} の固有関係は `eigenvalues_of_inverse_of_check_Vprime` として本文にある。`check_step3_chain.sage` の (V̌')^{-1} の 8 行の鎖は、
-  Step 1 の鎖を (V̌')^{-1} で組み、5 行目の根拠をその主張に替えたものを確かめる。
+- 2026-11-04、Lean の通しの証明の連続実行が、Step 3 の 1 行目の名前だけの根拠「Step 1〜2 を γ(θ̃_μ) ↦ −γ(θ̃_μ) として適用」のうちトレースの部分を、
+  Step 1 の 8 行の鎖を (V̌')^{-1} で組み 5 行目を `eigenvalues_of_inverse_of_check_Vprime` に替えたものと包含の行の 9 行の鎖として本文に書いた
+  （`check_step3_chain.sage` の 8 行の鎖と `check_step3_real_inclusion.sage`）。残る「Step 2 を γ ↦ −γ として適用」は名前だけの根拠である。
 - Step 4 の「cosh x ≥ 1」の根拠に `cosh_sinh_basic_properties` を引いていたが、その主張（(1)〜(4)）に cosh x ≥ 1 は無かった（レビューで見つかった）。
   `cosh_at_least_one`（x → γ(θ̃_μ)/2）を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。計算の誤りではない。
 - Step 3 の旧い 2 行目の根拠「cosh は偶関数」はラベル参照が無かった（二回目のレビューで見つかった）。ℝ で (−a)/2 = −(a/2) の行と
@@ -120,7 +121,7 @@ I と重なることを確かめる。そのうえで (i) tr(V̌')・tr((V̌')^{
 | `check_step2_exp_product.sage` | `check_trace_of_check_Vprime_step2_exp_product.sage`（中身は不変） |
 | `check_step2_expansion.sage` | `check_trace_of_check_Vprime_step2_expansion.sage`（中身は不変） |
 | `check_step2_cosh.sage` | `check_trace_of_check_Vprime_step2_cosh.sage`（中身は不変） |
-| `check_step3_chain.sage`、`check_step3_and_step4_real_lines.sage`、`check_claim_statement.sage`、`check_with_check_psi.sage` | 新しく足した |
+| `check_step3_chain.sage`、`check_step3_and_step4_real_lines.sage`、`check_claim_statement.sage`、`check_with_check_psi.sage`、`check_step3_real_inclusion.sage` | 新しく足した |
 
 ## 実行
 
