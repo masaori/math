@@ -57,21 +57,39 @@ open Finset
 
 section Lincomb
 
-variable {𝕜 : Type*} [CommSemiring 𝕜] {A : Type*} [Ring A] [Algebra 𝕜 A] {ι : Type*}
+variable {𝕜 : Type*} [Monoid 𝕜] {A : Type*} [NonUnitalNonAssocRing A] [DistribMulAction 𝕜 A]
+  [SMulCommClass 𝕜 A A] [IsScalarTower 𝕜 A A] {ι : Type*}
 
 /-- `e` が各 `x_i` と反交換なら、`x_i` の任意の有限 `𝕜` 線型結合とも反交換。
 
-効いているのは**積が各因子について `𝕜` 線型であること**だけである。 -/
+**人手証明 (2) の必要十分版**。calc の 7 段は、具体版 `Ising2D.epsilon_anticomm_phase_sum`
+（人手の `(W̌_μ, W)` の鎖の 2〜8 行目）の 7 段と同じ順に並ぶ:
+有限和への左からの分配・スカラー倍を右因子から外へ・仮定 `hx`（人手の (1)）・
+`c(−A) = −(cA)`・スカラー倍を左因子へ・有限和と符号反転の交換・有限和への右からの分配の逆。
+
+効いているのは**積が各因子について `𝕜` 倍と交換すること**（`SMulCommClass`・`IsScalarTower`）、
+`𝕜` の作用が符号反転と交換すること（`DistribMulAction`）、`A` の加法が可換群で積が和に分配すること
+（`NonUnitalNonAssocRing`）だけである。`A` の積の結合律と単位元、`𝕜` の加法と可換性、`A` が `𝕜`-代数
+であること（`algebraMap`）、行列であること、添字集合が `{1,…,M_col}` であることは効いていない。
+各段は環と作用の基本性質（mathlib の補題）の 1 回の適用で、主張そのものを既製の定理へ委ねてはいない。 -/
 theorem anticomm_sum_smul {e : A} {x : ι → A} (hx : ∀ i, e * x i = -(x i * e))
     (s : Finset ι) (f : ι → 𝕜) :
     e * (∑ i ∈ s, f i • x i) = -((∑ i ∈ s, f i • x i) * e) := by
-  classical
-  induction s using Finset.induction_on with
-  | empty => simp
-  | insert j s hj ih =>
-      rw [Finset.sum_insert hj, mul_add, add_mul, neg_add, ih]
-      congr 1
-      rw [mul_smul_comm, smul_mul_assoc, hx j, smul_neg]
+  calc e * (∑ i ∈ s, f i • x i)
+      = ∑ i ∈ s, e * (f i • x i) := Finset.mul_sum _ _ _
+                                  -- `finite_sum_of_matrices_distributes_in_right_factor` にあたる
+    _ = ∑ i ∈ s, f i • (e * x i) := Finset.sum_congr rfl fun i _ => mul_smul_comm _ _ _
+                                  -- `scalar_multiple_factors_out_of_right_factor` にあたる
+    _ = ∑ i ∈ s, f i • (-(x i * e)) := Finset.sum_congr rfl fun i _ => by rw [hx i]
+                                  -- 人手の (1)
+    _ = ∑ i ∈ s, -(f i • (x i * e)) := Finset.sum_congr rfl fun i _ => smul_neg _ _
+                                  -- `scalar_multiple_of_negated_matrix` にあたる
+    _ = ∑ i ∈ s, -((f i • x i) * e) := Finset.sum_congr rfl fun i _ => by rw [smul_mul_assoc]
+                                  -- `scalar_multiple_factors_out_of_left_factor` にあたる
+    _ = -∑ i ∈ s, (f i • x i) * e := Finset.sum_neg_distrib _
+                                  -- `finite_sum_of_negated_matrices` にあたる
+    _ = -((∑ i ∈ s, f i • x i) * e) := by rw [Finset.sum_mul]
+                                  -- `finite_sum_of_matrices_distributes_in_left_factor` にあたる
 
 end Lincomb
 

@@ -60,7 +60,10 @@
 | Lean の名前 | 内容 | 人手証明 |
 | --- | --- | --- |
 | `Ising2D.epsilon_anticomm_Z` / `epsilon_anticomm_Y` | `ε Z_j = −Z_j ε`, `ε Y_j = −Y_j ε` | (1)（章 010 で証明済み。再掲） |
-| **`Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY`** | **`ε Ž_μ = −Ž_μ ε`, `ε Y̌_μ = −Y̌_μ ε`** | **(2)** |
+| `Ising2D.epsilon_anticomm_phase_sum` | `ε Σ_j c_j W_j = −(Σ_j c_j W_j) ε`（`M_col = r + 1`、人手の鎖の 2〜8 行目と同じ行の calc） | (2) の鎖 |
+| `Ising2D.epsilon_anticomm_checkZ_succ` / `epsilon_anticomm_checkY_succ` | `M_col = r + 1` での `ε Ž_μ = −Ž_μ ε`, `ε Y̌_μ = −Y̌_μ ε` | (2) |
+| **`Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY`** | **`ε Ž_μ = −Ž_μ ε`, `ε Y̌_μ = −Y̌_μ ε`**（`M = 0` は人手の主張の外で、空の和） | **(2)** |
+| `Ising2D.epsilon_anticomm_checkZ_of_necSuf` / `epsilon_anticomm_checkY_of_necSuf` | 同じ主張を必要十分版 `NecSuf.anticomm_sum_smul` の特殊化として | (2) |
 | `Ising2D.IsCheckMode` | 「`ψ̌_μ^†` は `Ž_μ, Y̌_μ` の ℂ 係数 1 次結合」（章 016 の入力を述語化） | `def_check_fermi` |
 | **`Ising2D.epsilon_anticomm_of_isCheckMode`** | **`ε ψ̌_μ^† = −ψ̌_μ^† ε`** | **(3)** |
 
@@ -225,7 +228,7 @@
 
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
 | --- | --- | --- | --- |
-| `NecSuf.anticomm_sum_smul` | `e` が各 `x_i` と反交換 ⇒ `x_i` の任意の有限 `𝕜` 線型結合とも反交換 | `Ring A` + `Algebra 𝕜 A` | `epsilon_anticommutes_with_check_Z_Y` (2)(3) |
+| `NecSuf.anticomm_sum_smul` | `e` が各 `x_i` と反交換 ⇒ `x_i` の任意の有限 `𝕜` 線型結合とも反交換 | `NonUnitalNonAssocRing A` + `DistribMulAction 𝕜 A` + `SMulCommClass 𝕜 A A` + `IsScalarTower 𝕜 A A`（`𝕜` はモノイド。積の結合律・単位元・`𝕜` の加法・代数構造は不要） | `epsilon_anticommutes_with_check_Z_Y` (2)(3) |
 | **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換** | **`Ring A` だけ** | 同 (4) 前半 |
 | **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換** | **`Ring A` だけ** | 同 (4) 後半 |
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
@@ -243,7 +246,8 @@
 
 | 人手証明のラベル | 具体版 | 必要十分版 | 具体版は必要十分版の系か |
 | --- | --- | --- | --- |
-| `epsilon_anticommutes_with_check_Z_Y` (2)(3) | `Ising2D.epsilon_anticomm_checkZ` / `checkY` / `epsilon_anticomm_of_isCheckMode` | `NecSuf.anticomm_sum_smul` | **すべて系** |
+| `epsilon_anticommutes_with_check_Z_Y` (2) | `Ising2D.epsilon_anticomm_checkZ` / `checkY`（人手の鎖と同じ行の `epsilon_anticomm_phase_sum` で証明） | `NecSuf.anticomm_sum_smul`（具体版と同じ 7 段の calc。効くのは積が各因子について `𝕜` 倍と交換すること、分配律、`𝕜` の作用が符号反転と交換することだけ） | **系としても得られる**（`epsilon_anticomm_checkZ_of_necSuf` / `checkY_of_necSuf`） |
+| 同 (3) | `Ising2D.epsilon_anticomm_of_isCheckMode` | `NecSuf.anticomm_sum_smul` | **系** |
 | 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj` | `NecSuf.commute_parity_num` / `commute_parity_projOn` | **すべて系** |
 | `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `NecSuf.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
 | 同 (2) | `CheckFermi.eta_insert` | `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |

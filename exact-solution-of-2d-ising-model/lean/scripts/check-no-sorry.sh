@@ -1797,6 +1797,11 @@ targets=(
   Ising2D.CheckFermi.Qproj_conjTranspose
   Ising2D.epsilon_anticomm_checkZ
   Ising2D.epsilon_anticomm_checkY
+  Ising2D.epsilon_anticomm_phase_sum
+  Ising2D.epsilon_anticomm_checkZ_succ
+  Ising2D.epsilon_anticomm_checkY_succ
+  Ising2D.epsilon_anticomm_checkZ_of_necSuf
+  Ising2D.epsilon_anticomm_checkY_of_necSuf
   Ising2D.IsCheckMode
   Ising2D.epsilon_anticomm_of_isCheckMode
   Ising2D.matrix_eq_of_mulVec_eq
