@@ -175,7 +175,7 @@
 | `exists_eigenBasis_VPlus_of_joint_eigenspaces`（人手の対角化可能性の段落と 1 対 1 の具体版。基底の添字は `ε` の集合で、個数は `card_eps_index`） | **`V^{(+)}` は対角化可能（各 `ε` の `im Q̌_ε` の 0 でない元をどう 1 本ずつ取っても、`(Λ̌_ε)_ℂ` に属する固有ベクトルの基底）** | `eigenvalues_of_V_plus` (1) |
 | `checkBigLambda_smul_Qproj_mulVec_of_eigenvalue` / `Qproj_mulVec_eq_zero_of_ne_eigenvalue` / `exists_checkBigLambda_eq_of_eigenvalue`（人手の固有値の段落の 5 行・4 行と 5 行・背理法と 1 対 1。`x = Q̌_{(1,…,1)}x` の 4 行は `colVec_eq_Qproj_mul_of_zero` を使う） | **`V^{(+)}` の固有値はどれもある `(Λ̌_ε)_ℂ` に等しい** | `eigenvalues_of_V_plus` (1) |
 | `exists_eigenBasis_VPlus` / `exists_conj_diagonal_VPlus`（必要十分版 `NecSuf.exists_eigenBasis_of_matrix_proj` の特殊化） | **`V^{(+)}` は対角化可能（固有値は `Λ̌_ε`）** | `eigenvalues_of_V_plus` |
-| `Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum`（`ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`） | 章末の主張: `V^{(+)} = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ň_μ - ½I))`、`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、`Λ^{(1/2)}_M = Λ̌_{(1,…,1)} = (2 sinh 2K_2)^{M/2} exp(½Σ_μ γ(θ~_μ))`、`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_{(1,…,1)}`（既存の主張を並べたもの。(3) の値の行は `checkBigLambda_max_eq`） | `V_plus_eigenvalues_with_c_value_and_strict_maximum` |
+| `Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum`（`ClaimVPlusEigenvaluesWithCValueAndStrictMaximum.lean`） | 章末の主張: `V^{(+)} = (2 sinh 2K_2)^{M/2} exp(Σ_μ γ(θ~_μ)(ň_μ - ½I))`、`V^{(+)}Q̌_ε = Λ̌_εQ̌_ε`、`Λ^{(1/2)}_M = Λ̌_{(1,…,1)} = (2 sinh 2K_2)^{M/2} exp(½Σ_μ γ(θ~_μ))`、`ε ≠ (1,…,1) ⇒ Λ̌_ε < Λ̌_{(1,…,1)}`、`Λ̌_{(1,…,1)}` が族 `(Λ̌_ε)_ε` の最大値（`IsMaxValueOfRealFamily`）で `max_ε Λ̌_ε = Λ̌_{(1,…,1)}`（`maxOfRealFamily`）（(1)〜(3) と (4) の前半は既存の主張を並べたもの。(4) の後半は `ε = (1,…,1)` かどうかの場合分けを新しく書いた。(3) の値の行は `checkBigLambda_max_eq`） | `V_plus_eigenvalues_with_c_value_and_strict_maximum` |
 
 ---
 

@@ -13,7 +13,11 @@
 #         = Lambda^_{(1,...,1)}（eigenvalues_of_V_plus (2) の Lambda^_max := Lambda^_{(1,...,1)}。Lambda^_eps の定義から作る）
 #       後の鎖: Lambda^_{(1,...,1)} = Lambda^_max（同じ置き方を右辺から左辺へ）
 #         = (2 sinh 2K_2)^{M/2} exp((1/2) sum gamma(t~_mu))（eigenvalues_of_V_plus (2) の Lambda^_max の値）
-#   (4) eps != (1,...,1) なら Lambda^_eps < Lambda^_{(1,...,1)}、max_eps Lambda^_eps = Lambda^_{(1,...,1)}。
+#   (4) eps != (1,...,1) なら Lambda^_eps < Lambda^_{(1,...,1)}。後半は def_maximum_value_of_real_family の (1)(2) を
+#       人手の行どおりに見る: (1) eps = (1,...,1) で値が Lambda^_{(1,...,1)}、(2) 全 eps で Lambda^_eps <= Lambda^_{(1,...,1)}
+#       を eps = (1,...,1)（等号）と eps != (1,...,1)（前半の狭義の不等号から）の場合分けで。さらに、族の値の中で
+#       (1)(2) を満たす値（最大値の候補）が Lambda^_{(1,...,1)} だけであること（maximum_value_of_real_family_is_unique）と、
+#       max_eps Lambda^_eps（def_max_of_real_family）を Python の max で作った値と一致することを見る。
 #       あわせて、V^{(+)} を数値対角化した最大固有値が Lambda^_{(1,...,1)} と一致することを独立に見る。
 #   否定コントロール: (1) の前因子を (2 sinh 2K_2)^{M} にしたもの、(3) の delta を 0 にした Lambda^{(0)}_M は一致しない。
 # 対象ラベル: V_plus_eigenvalues_with_c_value_and_strict_maximum
@@ -110,13 +114,24 @@ for M in EIG_M:
         # (4)
         strict = all(Lams[e] < Lams[ones] for e in E if e != ones)
         gap = min((Lams[ones] - Lams[e]) / Lams[ones] for e in E if e != ones)
-        is_max = max(Lams.values()) == Lams[ones]
+        # (4) 後半: def_maximum_value_of_real_family の (1)(2)
+        def is_max_value(m):
+            cond1 = any(Lams[e] == m for e in E)                 # (1) ある eps で Lambda^_eps = m
+            cond2 = all(Lams[e] <= m for e in E)                 # (2) すべての eps で Lambda^_eps <= m
+            return cond1 and cond2
+        cond1_ones = (Lams[ones] == Lams[ones])                  # (1) を eps = (1,...,1) で
+        cond2_cases = all((Lams[e] == Lams[ones]) if e == ones else (Lams[e] < Lams[ones]) for e in E)
+                                                                 # (2) の場合分け（等号／前半の狭義の不等号）
+        cands = [Lams[e] for e in E if is_max_value(Lams[e])]
+        unique = len(set(cands)) == 1 and cands[0] == Lams[ones]  # 最大値は一つしかない
+        is_max = (cond1_ones and cond2_cases and is_max_value(Lams[ones]) and unique
+                  and max(Lams.values()) == Lams[ones])           # max_eps Lambda^_eps = Lambda^_{(1,...,1)}
         top = max(RDF(z.real()) for z in line0.eigenvalues())
         r4 = rrel(Lams[ones], top)
         ok = (r1 <= TOL and r2 <= TOL and r3 <= TOL and r4 <= TOL and strict and is_max
               and nTheta == M and neg1 > NEG_MIN and neg3 > NEG_MIN)
         print(f"  M={M}, {param_label(p)}: (1) {r1:.2e}, (2) {r2:.2e}, (3) {r3:.2e}, "
-              f"(4) 狭義 {strict}・最大相対差の最小 {gap:.2e}・数値対角化との差 {r4:.2e}、"
+              f"(4) 狭義 {strict}・最大値の定義と一意性と max {is_max}・最大相対差の最小 {gap:.2e}・数値対角化との差 {r4:.2e}、"
               f"否定コントロール {neg1:.2e}, {neg3:.2e} -> {'PASS' if ok else 'FAIL'}")
         ok_all = ok and ok_all
 

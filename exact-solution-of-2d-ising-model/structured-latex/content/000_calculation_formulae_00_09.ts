@@ -1612,6 +1612,145 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_definition_maximum_value_of_real_family",
+    kind: "definition",
+    title: { text: "実数の族の最大値" },
+    labels: ["def_maximum_value_of_real_family"],
+    statement: [
+      paragraph([
+        "集合 ",
+        math(String.raw`S`),
+        " と、",
+        math(String.raw`S`),
+        " の元 ",
+        math(String.raw`i`),
+        " ごとに一つの実数 ",
+        math(String.raw`x_i \in \mathbb{R}`),
+        " を与える族 ",
+        math(String.raw`(x_i)_{i \in S}`),
+        " について、実数 ",
+        math(String.raw`m \in \mathbb{R}`),
+        " が族 ",
+        math(String.raw`(x_i)_{i \in S}`),
+        " の最大値であるとは、次の二つが成り立つことをいう。",
+      ]),
+      displayMath(String.raw`\text{(1)}\quad \text{ある}\ i_0 \in S\ \text{について}\ x_{i_0} = m,
+\qquad
+\text{(2)}\quad \text{すべての}\ i \in S\ \text{について}\ x_i \leq m`),
+      paragraph([
+        "順序 ",
+        math(String.raw`\leq`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の順序である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。V_plus_eigenvalues_with_c_value_and_strict_maximum (4) の「集合 {Λ̌_ε} は有限集合で Λ̌_{(1,…,1)} を含み、他の元は小さいので最大元が存在して max = Λ̌_{(1,…,1)}」が最大値と max を定義せずに使っていたので、引けるよう足した。S の有限性と空でないことは、最大値の存在を言うためには要らない（最大値になる元を直接示す）ので仮定しない。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_claim_maximum_value_of_real_family_is_unique",
+    kind: "claim",
+    title: { text: "実数の族の最大値は一つしかない" },
+    labels: ["maximum_value_of_real_family_is_unique"],
+    statement: [
+      paragraph([
+        "集合 ",
+        math(String.raw`S`),
+        " 上の実数の族 ",
+        math(String.raw`(x_i)_{i \in S}`),
+        " について、",
+        math(String.raw`m, m' \in \mathbb{R}`),
+        " がどちらも ",
+        ref("def_maximum_value_of_real_family"),
+        " の意味で族 ",
+        math(String.raw`(x_i)_{i \in S}`),
+        " の最大値ならば、",
+        math(String.raw`m = m'`),
+        " である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`x_{i_0} = m`),
+        " となる ",
+        math(String.raw`i_0 \in S`),
+        " と、",
+        math(String.raw`x_{i_0'} = m'`),
+        " となる ",
+        math(String.raw`i_0' \in S`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`i_0,\ i_0' \in S\ \text{が取れる}
+\qquad \bigl(\because\ m, m'\ \text{それぞれについて}\ \blkref{def_maximum_value_of_real_family}\ \text{の (1)}\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+m
+&= x_{i_0}
+&&\bigl(\because\ i_0\ \text{の取り方}\bigr)\\
+&\leq m'
+&&\bigl(\because\ m'\ \text{について}\ \blkref{def_maximum_value_of_real_family}\ \text{(2) を}\ i = i_0\ \text{で使う}\bigr)
+\end{aligned}`),
+      paragraph(["であり、"]),
+      displayMath(String.raw`\begin{aligned}
+m'
+&= x_{i_0'}
+&&\bigl(\because\ i_0'\ \text{の取り方}\bigr)\\
+&\leq m
+&&\bigl(\because\ m\ \text{について}\ \blkref{def_maximum_value_of_real_family}\ \text{(2) を}\ i = i_0'\ \text{で使う}\bigr)
+\end{aligned}`),
+      paragraph(["である。よって"]),
+      displayMath(String.raw`m = m'
+\qquad \bigl(\because\ \text{上の二本の鎖の}\ m \leq m'\ \text{と}\ m' \leq m\ \text{に}\ \mathbb{R}\ \text{の順序の反対称律を使う}\bigr)`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。記号 max（def_max_of_real_family）が一つの実数を指すために要るので足した。",
+      ],
+    },
+  },
+
+  {
+    id: "calc_formulae_definition_max_of_real_family",
+    kind: "definition",
+    title: { text: "実数の族の最大値の記号 max" },
+    labels: ["def_max_of_real_family"],
+    statement: [
+      paragraph([
+        "集合 ",
+        math(String.raw`S`),
+        " 上の実数の族 ",
+        math(String.raw`(x_i)_{i \in S}`),
+        " が ",
+        ref("def_maximum_value_of_real_family"),
+        " の意味の最大値をもつとき、その最大値を",
+      ]),
+      displayMath(String.raw`\max_{i \in S} x_i \in \mathbb{R}`),
+      paragraph([
+        "と書く。最大値は ",
+        ref("maximum_value_of_real_family_is_unique"),
+        " により一つしかないので、この記号は一つの実数を指す。",
+        math(String.raw`S`),
+        " が文脈から分かるときは ",
+        math(String.raw`\max_{i} x_i`),
+        " とも書く。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。V_plus_eigenvalues_with_c_value_and_strict_maximum (4) と章のゴール（chapter_organization_goal_eigenvalues_of_V_plus）の max_ε Λ̌_ε を定義するために足した。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_real_inclusion_preserves_product",
     kind: "claim",
     title: { text: "実数の積の包含は包含の積に等しい" },

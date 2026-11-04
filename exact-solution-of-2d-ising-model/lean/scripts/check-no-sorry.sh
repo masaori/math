@@ -1089,6 +1089,10 @@ targets=(
   Ising2D.V_plus_eq_c_exp_sum_gamma_check_number_operator
   Ising2D.A_theta_tilde_diagonalization_lambda_exp_gamma_and_V_plus_exponential_form
   Ising2D.V_plus_eigenvalues_with_c_value_and_strict_maximum
+  Ising2D.maximum_value_of_real_family_is_unique
+  Ising2D.maxOfRealFamily_eq
+  "Ising2D.NecSuf.maximum_value_of_family_is_unique'"
+  Ising2D.maximum_value_of_real_family_is_unique_of_necSuf
   Ising2D.TVPlus_checkZ_checkY_components
   Ising2D.NecSuf.cos_eq_neg_one_of_sin_eq_zero_of_odd
   Ising2D.NecSuf.mul_of_eq_neg_conj
