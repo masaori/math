@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: 全証明の SageMath 検算として、`trace_of_check_Vprime`（tr(V̌') = tr((V̌')^{-1}) = Π 2cosh(γ/2) > 0）に検算 `sagemath/check/trace_of_check_Vprime/` を付けた（未検算 36 件）。050 の Step 1・Step 2 の 5 本を内容の名前で移し（件数は元と一致）、Step 3 の行列の部（(V̌')^{-1} での Step 1 の鎖の繰り返し、−X̌）、Step 3・4 の値、主張そのもの、本文の ψ̌ での実行を足した。人手証明の計算の誤りは無し。Step 4 の cosh x ≥ 1 の根拠を性質を持たない `cosh_sinh_basic_properties` から `cosh_at_least_one` に直し、Step 3 の「cosh は偶関数」を `cosh_is_even` を引く行に分けた（Lean は不変）。三回のレビューで必須の指摘が無くなるまで直した。次は `V_plus_is_positive_definite`。
+
 2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_inverse_of_check_Vprime`（(V̌')^{-1}Q̌_ε = (exp(−ǧ(ε)))_ℂQ̌_ε）に検算 `sagemath/check/eigenvalues_of_inverse_of_check_Vprime/` を付けた（未検算 37 件）。050 の旧い検算を移して行列の部と実数の値の部に分け（模型の段数は元と一致）、主張そのものの検算と本文の ψ̌（M_col = 2, 3）で走らせる検算を足した。人手証明の計算の誤りは無し。次は `trace_of_check_Vprime`（状態台帳の「次の一歩」）。
 
 2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_check_Vprime`（V̌' の固有値）に検算 `sagemath/check/eigenvalues_of_check_Vprime/` を付けた（未検算 38 件）。050 の 7 本を内容の名前で移し（模型の段数は元と一致）、ň_μ・γ_μ の供給元 `_vprime_settings.sage` で本文の ψ̌（M_col = 2, 3）でも同じ鎖を確かめ、主張そのもの（対角化と固有値の重複度、正値、縮退の組の実在）の検算を足した。人手証明は主張文を「im Q̌_ε の 0 でない各元は固有ベクトル」に直し、直和の段落に (4) の参照を足した（計算の誤りは無し）。次は `eigenvalues_of_inverse_of_check_Vprime`（Lean の連続実行が足した新しい主張）。

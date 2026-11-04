@@ -1,0 +1,5 @@
+checked 6 rewriting steps exactly (QQ[γ] and QQ(b))
+exact negative controls detected: 3
+checked 120 lines with balls (M_col = 2..6, 4 coupling pairs)
+negative controls (broken lines detected): 60
+RESULT: PASS

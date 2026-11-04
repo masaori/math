@@ -10,22 +10,17 @@
 # 行列の和は def_sum_over_binary_words、複素数の和は def_sum_over_binary_words_of_complex_numbers の帰納法どおりに
 # （最後の成分で 1 を 0 より先に）組む。積は mat_mult の成分の式（_shared の body_product）、スカラー倍は body_scalar、
 # トレースは def_trace の対角成分の和で組む。
-# ň_μ は Jordan–Wigner のフェルミ演算子 c_μ から ň_μ := c_μ^T c_μ で作る（check_joint_eigenspace_decomposition/check_factor_as_R_chains.sage と同じ。可換な冪等元で、Q̌_ε のトレースが 1）。
-# Q̌_ε は R_μ^{(1)} := ň_μ、R_μ^{(0)} := I − ň_μ の左から掛ける積（check_joint_eigenspace_decomposition/check_factor_as_R_chains.sage で確かめた Q̌_ε = ∏R の形）。
-# exp(γ(θ~_μ)/2) を有理関数体 QQ(a_1, …, a_M) の不定元 a_μ に置き、V̌' := ∏_μ (a_μ ň_μ + a_μ^{-1}(I − ň_μ))（左から掛ける積）とする。
-# このとき exp(ǧ(ε)) = ∏_μ a_μ^{2ε_μ − 1} である。V̌' = exp(X̌) となること自体はここでは確かめていない
-# （check_03・check_04 が数値で、eigenvalues_of_check_Vprime の検算が鎖で確かめている）。5 行目の V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε は、
-# この V̌' について、積として組んだ V̌'Q̌_ε と比べて確かめる。
-# 帰属: QQ 上の有理関数体（厳密計算）。浮動小数点はない。
+# ň_μ は ../eigenvalues_of_check_Vprime/_vprime_settings.sage が読み込む number_operator_settings() から取る（既定は Jordan–Wigner の
+# 模型 n_μ := c_μ^T c_μ、QQ、M_col = 2, 3, 4。check_with_check_psi.sage からは本文の ψ̌ の ň_μ、数体 F := E_1、結合定数 3 組 × M_col = 2, 3）。
+# Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň_μ、R^{(0)} := I − ň_μ、左から掛ける）。
+# exp(γ(θ̃_μ)/2) をローラン多項式環 F[a_1^{±1}, …, a_M^{±1}] の不定元 a_μ に置き、V̌' := Π_μ (a_μ ň_μ + a_μ^{-1}(I − ň_μ))（左から掛ける積）とする。
+# このとき exp(ǧ(ε)) = Π_μ a_μ^{2ε_μ − 1} である。V̌' = exp(X̌) となること自体はここでは確かめていない
+# （eigenvalues_of_check_Vprime の検算と、このディレクトリの check_claim_statement.sage が確かめる）。5 行目の
+# V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε と、2 行目・7 行目が引く (2)・(4) は、前提として各 ε で確かめる（本文の ψ̌ ではこれが本物の ň_μ の性質として試される）。
+# 帰属: 成分は F[a_1^{±1}, …, a_M^{±1}]（F は QQ か本文の ψ̌ の数体）の元（厳密計算）。浮動小数点はない。
 load("../../_shared/matrix_operations_by_definition.sage")
+load("../eigenvalues_of_check_Vprime/_vprime_settings.sage")
 import itertools
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
 
 
 def tr(A):
@@ -60,25 +55,20 @@ def binary_word_complex_sum(r, z):
 
 count = 0
 negatives = 0
-for M in range(2, 5):
-    K = FractionField(PolynomialRing(QQ, ["a%d" % mu for mu in range(1, M + 1)]))
+for (tag, M, F, ns) in number_operator_settings():
+    K = LaurentPolynomialRing(F, ["a%d" % mu for mu in range(1, M + 1)])
     a = K.gens()
-    sz = matrix(K, [[1, 0], [0, -1]])
-    lower = matrix(K, [[0, 1], [0, 0]])
-    id2 = identity_matrix(K, 2)
+    n = [A.change_ring(K) for A in ns]
     Id = body_identity(K, 2 ** M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    n = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Rf = lambda mu, e: n[mu] if e == 1 else Id - n[mu]
-    Q = {eps: left_product([Rf(mu, eps[mu]) for mu in range(M)]) for eps in itertools.product([1, 0], repeat=M)}
+    Q = {eps: left_product([n[mu] if eps[mu] == 1 else Id - n[mu] for mu in range(M)]) for eps in itertools.product([1, 0], repeat=M)}
     V = left_product([body_sum(body_scalar(a[mu], n[mu]), body_scalar(a[mu] ** -1, Id - n[mu])) for mu in range(M)])
     expg = lambda eps: prod(a[mu] ** (2 * eps[mu] - 1) for mu in range(M))
     one = K(1)
     # 引いた主張の前提: (2) Σ_ε Q̌_ε = I、(4) tr(Q̌_ε) = 1、eigenvalues_of_check_Vprime の V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε
-    assert binary_word_matrix_sum(M, lambda eps: Q[eps]) == Id
+    assert binary_word_matrix_sum(M, lambda eps: Q[eps]) == Id, tag
     for eps in Q:
-        assert tr(Q[eps]) == one
-        assert body_product(V, Q[eps]) == body_scalar(expg(eps), Q[eps])
+        assert tr(Q[eps]) == one, (tag, eps)
+        assert body_product(V, Q[eps]) == body_scalar(expg(eps), Q[eps]), (tag, eps)
     lines = [
         tr(V),
         tr(body_product(V, Id)),
@@ -91,15 +81,16 @@ for M in range(2, 5):
         binary_word_complex_sum(M, lambda eps: expg(eps)),
     ]
     for x, y in zip(lines, lines[1:]):
-        assert x == y, M
+        assert x == y, tag
         count += 1
     # 独立な経路: Sage の trace と、Π_μ (a_μ + a_μ^{-1})（Step 2 の閉形式 Π 2cosh(γ/2) の a による形）
-    assert lines[0] == V.trace()
-    assert lines[-1] == prod(a[mu] + a[mu] ** -1 for mu in range(M))
+    assert lines[0] == V.trace(), tag
+    assert lines[-1] == prod(a[mu] + a[mu] ** -1 for mu in range(M)), tag
     # 否定コントロール: (4) の tr(Q̌_ε) = 1 の代わりに ň_μ の積のトレース（2^{M−k}）を使うと最後の行が外れる
     bad = binary_word_complex_sum(M, lambda eps: expg(eps) * tr(left_product([n[mu] for mu in range(M) if eps[mu] == 1] or [Id])))
-    assert bad != lines[-1]
+    assert bad != lines[-1], tag
     negatives += 1
+    print(f"  {tag}: 鎖 {count} 段まで", flush=True)
 print(f"checked {count} lines")
 print(f"negative controls: {negatives}")
 print("RESULT: PASS")

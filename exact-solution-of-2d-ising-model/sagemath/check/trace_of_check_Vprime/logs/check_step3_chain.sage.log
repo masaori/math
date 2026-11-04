@@ -1,0 +1,6 @@
+  Jordan–Wigner の模型 M=2: 鎖 8 段、Step 3 の行 4 個まで
+  Jordan–Wigner の模型 M=3: 鎖 16 段、Step 3 の行 8 個まで
+  Jordan–Wigner の模型 M=4: 鎖 24 段、Step 3 の行 12 個まで
+checked 24 chain lines and 12 Step 3 lines
+negative controls: 34
+RESULT: PASS

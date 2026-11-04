@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 37 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 36 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -325,8 +325,14 @@
   主張そのもの（V̌' = exp(X̌) の球と Sage の逆行列で (V̌')^{-1}Q̌_ε と (exp(−ǧ))Q̌_ε が重なること、逆行列を作らずに V̌'((exp(−ǧ))Q̌_ε) が Q̌_ε と重なること）の `check_claim_statement.sage` と、二つを本文の ψ̌（数体 F := E_1、結合定数 3 組 × M_col = 2, 3）で走らせる `check_with_check_psi.sage` を足した（鎖 396 段、主張 84 件、約 5 分）。本文の ψ̌ の数体の上の有理関数体では gcd が重く M_col = 3 で 10 分を超えたので、ローラン多項式環にした。
   人手証明の計算の誤りは無く、本文は conversion の注記の検算の場所だけを新しいディレクトリへ直した。二回のレビューで必須の指摘が無くなるまで直した。
 
+- `trace_of_check_Vprime`（tr(V̌') = tr((V̌')^{-1}) = Π_μ 2cosh(γ(θ̃_μ)/2) ∈ ℝ_{>0}）: `sagemath/check/trace_of_check_Vprime/`。
+  Step 1・Step 2 の各行の検算は 050 の check_trace_of_check_Vprime_step1_chain・step2_real_inclusion・step2_exp_product・step2_expansion・step2_cosh にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。内容の名前で移し（Step 1 の鎖は ň_μ を `eigenvalues_of_check_Vprime/_vprime_settings.sage` から取り、成分をローラン多項式環に。鎖の各行の式と件数は不変）、
+  Step 3 の行列の部（名前だけの根拠「Step 1〜2 を γ ↦ −γ として適用」の中身として、Step 1 の 8 行の鎖を (V̌')^{-1} で組み 5 行目を `eigenvalues_of_inverse_of_check_Vprime` に替えたもの、−X̌ の行）の `check_step3_chain.sage`、Step 3 の値と Step 4 の不等号の `check_step3_and_step4_real_lines.sage`、主張そのものの `check_claim_statement.sage`、三つを本文の ψ̌（結合定数 3 組 × M_col = 2, 3）で走らせる `check_with_check_psi.sage`（約 4 分）を足した。
+  人手証明を直した（計算の誤りは無かった）: Step 4 の cosh x ≥ 1 の根拠 `cosh_sinh_basic_properties` にその性質が無かったので `cosh_at_least_one` を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。Step 3 の「cosh は偶関数」を ℝ の (−a)/2 = −(a/2) の行と `cosh_is_even` を引く行に分けた。三回のレビューで必須の指摘が無くなるまで直した。
+  残したこと: Step 3 の 1 行目の根拠は名前だけのまま（Lean の連続実行が (3a)〜(3d) に書き換える受け持ち。(3a) は `eigenvalues_of_inverse_of_check_Vprime`）。Step 4 の「正数の有限積は正」は引けるブロックが本文に無い。Step 3・4 と主張文は ℂ の値（トレース）と ℝ の値を包含 (·)_ℂ を書かずに等号で結んでいる。検算の付いたブロックの見直しで扱う。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_of_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる check_trace_of_check_Vprime_step1_chain・step2_real_inclusion・step2_exp_product・step2_expansion・step2_cosh にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`eigenvalues_of_check_Vprime` と同じく内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ（Lean の連続実行が Step 3 を (3a)〜(3d) に書き換え中なので、rebase 後の本文の行と突き合わせる。(3a) は `eigenvalues_of_inverse_of_check_Vprime` として検算済み）、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（供給元は `eigenvalues_of_check_Vprime/_vprime_settings.sage`。本文の ψ̌ の数体の上で不定元を使うときは、有理関数体ではなくローラン多項式環か多項式環にする）。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `V_plus_is_positive_definite`（`--list` の先頭）から、文書順に検算を足す。050 の overview の「併せて検証」の行に、この主張の各行の検算がほかに無いかを先に確かめる。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

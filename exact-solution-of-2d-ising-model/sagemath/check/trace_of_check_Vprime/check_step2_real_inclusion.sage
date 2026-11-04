@@ -3,7 +3,7 @@
 # 左辺の和は def_sum_over_binary_words_of_complex_numbers、右辺の和は def_sum_over_binary_words_of_real_numbers の
 # 帰納法どおりに（最後の成分で 1 を 0 より先に）組む。ℂ は実数の対（_shared/complex_as_real_pairs.sage）。
 # exp(γ(θ~_μ)/2) を有理関数体 QQ(a_1, …, a_M) の不定元 a_μ に置き、exp(ǧ(ε)) = ∏_μ a_μ^{2ε_μ − 1} とする
-# （check_trace_of_check_Vprime_step1_chain と同じ置き方。Step 1 の右辺の項はこの値の包含である）。
+# （check_step1_chain と同じ置き方。Step 1 の右辺の項はこの値の包含である）。
 # 帰属: QQ 上の有理関数体（厳密計算）。浮動小数点はない。
 load("../../_shared/complex_as_real_pairs.sage")
 import itertools

@@ -1,0 +1,6 @@
+  Jordan–Wigner の模型 M=2: 鎖 8 段まで
+  Jordan–Wigner の模型 M=3: 鎖 16 段まで
+  Jordan–Wigner の模型 M=4: 鎖 24 段まで
+checked 24 lines
+negative controls: 3
+RESULT: PASS

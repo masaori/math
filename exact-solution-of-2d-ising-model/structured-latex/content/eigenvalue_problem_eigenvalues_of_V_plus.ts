@@ -4365,8 +4365,10 @@ E_K \check{Q}_\epsilon
 \mathrm{tr}\!\left(\left(\check{V}'\right)^{-1}\right)
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
    \quad (\because \text{Step 1--2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+   \quad \bigl(\because\ \mathbb{R}\ \text{で}\ \tfrac{-a}{2} = -\tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子へ同時に}\bigr) \\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad (\because \cosh\text{ は偶関数}) \\
+   \quad \bigl(\because\ \blkref{cosh_is_even}\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に}\bigr) \\
 &= \mathrm{tr}\!\left(\check{V}'\right)
    \quad (\because \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
 \end{aligned}`,
@@ -4376,15 +4378,15 @@ E_K \check{Q}_\epsilon
         ref("gamma_theta_tilde_mu_positive"),
         " より ",
         math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}_{>0}`),
-        " であり、",
-        ref("cosh_sinh_basic_properties"),
-        " より各 ", math(String.raw`\mu`), " について次の鎖を得る。",
+        " であり、各 ", math(String.raw`\mu`), " について次の鎖を得る。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-&\ge 2
-   \quad (\because \cosh x\ge1) \\
+&\ge 2\cdot 1
+   \quad \bigl(\because\ \blkref{cosh_at_least_one}\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{の両辺に}\ 2 > 0\ \text{を掛ける}\bigr) \\
+&= 2
+   \quad (\because\ 2\cdot 1 = 2) \\
 &>0
    \quad (\because 2>0)
 \end{aligned}`,
@@ -4406,11 +4408,12 @@ E_K \check{Q}_\epsilon
         "009 章の trace_of_Vprime の半整数運動量版。可逆性は def_check_Vprime (2) で既に示してあるので、009 章の Step 1（可逆性）は繰り返さない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_04（tr(V̌') = Π 2cosh(γ/2) の相対差 ≤ 3.8e-15、tr((V̌')^{-1}) = tr(V̌') の相対差 ≤ 2.5e-15）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
-        "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step1_chain.sage。",
-        "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_real_inclusion.sage。",
-        "2026-11-04: Step 2 の exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) は「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、M_col 個の和には届かない。ǧ の定義を開く行と、新しく足した real_exp_of_finite_sum（m → M_col）を引く行の 2 行の鎖にした。右辺の積は新しく足した def_finite_product_of_real_numbers の ℝ の有限積である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_exp_product.sage。",
-        "2026-11-04: Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) は「直前の積表示と、有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張は行列の主張 expansion_of_finite_product_of_two_term_sums しか無かったので、実数の主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers（と帰納法の段が引く real_sum_over_binary_words_distributes_in_left_factor）を 002 章に足し、直前の鎖を各項へ入れる行と、展開を右辺から左辺へ引く行（a_μ^{(e)} → exp(γ(θ̃_μ)(e − 1/2))）に分けた。1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の順序を入れ替える行は、根拠を書いた別の行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_expansion.sage。",
-        "2026-11-04: Step 2 の最後の 2 行は「1 − 1/2 = 1/2、0 − 1/2 = −1/2 と ℝ の和の交換則」「cosh x = (exp x + exp(−x))/2」と根拠を書いていたが、一つの行で複数の計算規則（γ·(1/2) = γ/2、γ·(−1/2) = −(γ/2) を含む）を使い、cosh の定義もラベルで引いていなかった。ℝ の 1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2) と、def_cosh_sinh の cosh（x → γ(θ̃_μ)/2）を右辺から左辺へ引く 6 行にした。exp(γ/2) + exp(−γ/2) の順のまま cosh の定義に合うので、和の交換の行は要らなくなった。主張は変えていない。Lean は Ising2D.CheckFermiSetup.prod_step2_cosh（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_cosh.sage。",
+        "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step1_chain.sage。",
+        "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_real_inclusion.sage。",
+        "2026-11-04: Step 2 の exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) は「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、M_col 個の和には届かない。ǧ の定義を開く行と、新しく足した real_exp_of_finite_sum（m → M_col）を引く行の 2 行の鎖にした。右辺の積は新しく足した def_finite_product_of_real_numbers の ℝ の有限積である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_exp_product.sage。",
+        "2026-11-04: Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) は「直前の積表示と、有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張は行列の主張 expansion_of_finite_product_of_two_term_sums しか無かったので、実数の主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers（と帰納法の段が引く real_sum_over_binary_words_distributes_in_left_factor）を 002 章に足し、直前の鎖を各項へ入れる行と、展開を右辺から左辺へ引く行（a_μ^{(e)} → exp(γ(θ̃_μ)(e − 1/2))）に分けた。1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の順序を入れ替える行は、根拠を書いた別の行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_expansion.sage。",
+        "2026-11-04: Step 2 の最後の 2 行は「1 − 1/2 = 1/2、0 − 1/2 = −1/2 と ℝ の和の交換則」「cosh x = (exp x + exp(−x))/2」と根拠を書いていたが、一つの行で複数の計算規則（γ·(1/2) = γ/2、γ·(−1/2) = −(γ/2) を含む）を使い、cosh の定義もラベルで引いていなかった。ℝ の 1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2) と、def_cosh_sinh の cosh（x → γ(θ̃_μ)/2）を右辺から左辺へ引く 6 行にした。exp(γ/2) + exp(−γ/2) の順のまま cosh の定義に合うので、和の交換の行は要らなくなった。主張は変えていない。Lean は Ising2D.CheckFermiSetup.prod_step2_cosh（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_cosh.sage。",
+        "2026-11-04: Step 4 の cosh x ≥ 1 の根拠に cosh_sinh_basic_properties を引いていたが、その主張（(1)〜(4)）に cosh x ≥ 1 は無い。cosh_at_least_one（x → γ(θ̃_μ)/2）を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。Step 3 の 2 行目の根拠「cosh は偶関数」はラベル参照が無かったので、ℝ で (−a)/2 = −(a/2) の行と cosh_is_even（x → γ(θ̃_μ)/2）を引く行に分けた。主張は変えていない。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_and_step4_real_lines.sage。",
       ],
     },
   },

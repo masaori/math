@@ -1,0 +1,4 @@
+checked 80 lines (M_col = 2..6, 4 coupling pairs)
+checked the expansion line exactly in 6 cases (M_col = 1..6)
+negative controls (broken lines detected): 20
+RESULT: PASS
