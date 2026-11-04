@@ -891,14 +891,14 @@ q
 &=v_r(p)-v_r(1)
 &&\bigl(\because\ \blkref{def_rational_log}\text{ を表示 }p=p/1\text{ へ適用}\bigr)\\
 &=v_r(p)
-&&\bigl(\because\ v_r(1)=0\text{。}\blkref{def_prime_exponent}\bigr)\\
+&&\bigl(\because\ v_r(1)=0\ \blkref{def_prime_exponent}\bigr)\\
 &=\begin{cases}1,&r=p,\\0,&r\ne p,\end{cases}
-&&\bigl(\because\ p=p^1\text{ は素数 }p\text{ の有限積表示。}\blkref{def_prime_exponent}\bigr)\\
+&&\bigl(\because\ p=p^1\text{ は素数 }p\text{ の有限積表示}\ \blkref{def_prime_exponent}\bigr)\\
 &=\ell_p(r)
 &&\bigl(\because\ \blkref{def_log_order_group}\text{ の生成元 }\ell_p\text{ の定義}\bigr)
 \end{aligned}`),
                         displayMath(String.raw`\log p=\ell_p
-\qquad\bigl(\because\ \text{全ての素数 }r\text{ で値が等しい。}\Lambda\text{ の写像としての相等}\bigr)`),
+\qquad\bigl(\because\ \text{全ての素数 }r\text{ で値が等しいため}\ \Lambda\text{ の写像としての相等}\bigr)`),
                         paragraph([
                           "次に任意の ",
                           math(String.raw`z\in\mathbb Z`),
@@ -62513,6 +62513,52 @@ c(0)=p_0,\ c(k)=q,\ \forall t\in\mathbb N\ (t<k\Rightarrow c(t)\mathrel{D_\gamma
                         math(String.raw`q\in S_\gamma(p_0)`), " である（", ref("def_dual_cell_component"), "）。",
                         "対偶として、集合の外への双対一歩は存在しない。",
                         "有限セルと有限路の操作だけを用い、実数体と複素数体は現れない。",
+                      ]),
+                    ],
+                  },
+                },
+              }, {
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_dual_cell_side_confinement",
+                  beforeFocus: [],
+                  focus: {
+                    id: "kac_ward_claim_dual_cell_side_confinement",
+                    kind: "claim",
+                    title: { text: "双対一歩で閉じた真のセル集合は非連結性を与える" },
+                    labels: ["claim_dual_cell_side_confinement"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/dual-cell-side-confinement"],
+                    lean: [
+                      "Ising2DLambda.KacWard.dualCellComponent_subset_of_side",
+                      "Ising2DLambda.KacWard.dualCellComponent_ne_univ_of_side",
+                      "Ising2DLambda.NecSuf.KacWard.reachableComponent_subset_of_closed_side",
+                      "Ising2DLambda.NecSuf.KacWard.reachableComponent_ne_univ_of_closed_side",
+                      "Ising2DLambda.KacWard.dualCellComponent_ne_univ_of_side_from_necSuf",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), "、閉じた非後退辺列 ",
+                        math(String.raw`\gamma`), "、セル集合 ", math(String.raw`S\subseteq\mathcal Q_L`),
+                        " とセル ", math(String.raw`p_0\in S`), " を取る。任意の ",
+                        math(String.raw`p\in S`), " と ", math(String.raw`q\in\mathcal Q_L`),
+                        " について ", math(String.raw`p\mathrel{D_\gamma}q\Rightarrow q\in S`),
+                        " と仮定する。さらに ", math(String.raw`q_0\in\mathcal Q_L\setminus S`),
+                        " を取る。このとき ", math(String.raw`S_\gamma(p_0)\ne\mathcal Q_L`), " である。",
+                      ]),
+                    ],
+                    proof: [
+                      paragraph([
+                        ref("def_dual_cell_component"), " の到達路の長さ ",
+                        math(String.raw`k\in\mathbb N`), " について帰納する。零歩では到達セルは ",
+                        math(String.raw`p_0\in S`), " である。", math(String.raw`k`),
+                        " 歩後のセルが ", math(String.raw`S`), " に属するなら、仮定した一歩の閉性により ",
+                        math(String.raw`k+1`), " 歩後のセルも ", math(String.raw`S`),
+                        " に属する。従って ", math(String.raw`S_\gamma(p_0)\subseteq S`),
+                        " となる。", math(String.raw`q_0\notin S`), " なら ",
+                        math(String.raw`q_0\notin S_\gamma(p_0)`),
+                        " なので、到達集合は全セル集合と等しくない。有限路と集合の包含だけを使う。",
                       ]),
                     ],
                   },

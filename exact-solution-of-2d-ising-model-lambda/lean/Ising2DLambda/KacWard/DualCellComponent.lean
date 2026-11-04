@@ -61,4 +61,28 @@ theorem dualCellComponent_boundary_blocks_step (L m : ℕ) [NeZero L]
   intro hstep
   exact hq (dualCellComponent_closed L m γ root p q hp hstep)
 
+/-- A nonempty proper side closed under every allowed dual step contains the whole reachable component. -/
+theorem dualCellComponent_subset_of_side (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (root : ZMod L × ZMod L) (side : Finset (ZMod L × ZMod L))
+    (hroot : root ∈ side)
+    (hclosed : ∀ p q, p ∈ side → dualCellStep L m γ p q → q ∈ side) :
+    dualCellComponent L m γ root ⊆ side := by
+  classical
+  intro q hq
+  simp only [dualCellComponent, Finset.mem_filter, Finset.mem_univ, true_and] at hq
+  induction hq with
+  | refl => exact hroot
+  | @tail b c _ hstep ih => exact hclosed b c ih hstep
+
+theorem dualCellComponent_ne_univ_of_side (L m : ℕ) [NeZero L]
+    (γ : Fin (m + 1) → OrientedEdge L)
+    (root outside : ZMod L × ZMod L) (side : Finset (ZMod L × ZMod L))
+    (hroot : root ∈ side) (houtside : outside ∉ side)
+    (hclosed : ∀ p q, p ∈ side → dualCellStep L m γ p q → q ∈ side) :
+    dualCellComponent L m γ root ≠ Finset.univ := by
+  intro hfull
+  have hsubset := dualCellComponent_subset_of_side L m γ root side hroot hclosed
+  exact houtside (hsubset (by rw [hfull]; simp))
+
 end Ising2DLambda.KacWard
