@@ -29,6 +29,7 @@ import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealIn
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatrixDoubleNegationFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimExpOfNegativeIsLeftInverseFromNecSuf
+import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf
 
 namespace Ising2D
 
@@ -347,11 +348,16 @@ theorem VPlusInv_posDef {K1 K2star : ℂ} {s2 : ℝ}
   have : (0 : ℝ) < 2 * s2 := by linarith
   exact inv_pos.mpr (Real.rpow_pos_of_pos this _)
 
-/-- **原文 `trace_V_plus_is_positive`**: `tr(V^{(+)}) > 0`。 -/
+/-- **原文 `trace_V_plus_is_positive`**: `tr(V^{(+)}) ∈ ℝ_{>0}`（`tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある）。
+
+人手の 2 行と 1 対 1: `V^{(+)}` は正定値（`V_plus_is_positive_definite`）、
+`trace_of_positive_definite_is_positive` を `A = V^{(+)}` へ（添字が `Conf M` なので `TensorPow M` の系
+`trace_of_positive_definite_is_positive_tensorPow` を引く。人手の `n = 2^{M_col} ≥ 1` は、Lean では `Conf M` が空でないことで受け取り、`Conf 0` も空でないので `M_col ≥ 1` は使わない）。 -/
 theorem trace_VPlus_pos {K1 K2star : ℂ} {s2 : ℝ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2) :
-    0 < (VPlus M s2 K1 K2star).trace :=
-  (VPlus_posDef hK1 hK2 hs2).trace_pos
+    ∃ r : ℝ, 0 < r ∧ (VPlus M s2 K1 K2star).trace = (r : ℂ) :=
+  have hpos : (VPlus M s2 K1 K2star).PosDef := VPlus_posDef hK1 hK2 hs2   -- `V_plus_is_positive_definite`
+  trace_of_positive_definite_is_positive_tensorPow _ hpos                  -- `trace_of_positive_definite_is_positive`（`A = V^{(+)}`）
 
 /-- **原文 `V_plus_inverse_positive_and_trace_positivity`**:
 `tr((V^{(+)})^{-1}) > 0`。 -/

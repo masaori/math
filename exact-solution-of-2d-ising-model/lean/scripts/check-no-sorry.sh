@@ -446,7 +446,7 @@ targets=(
   Ising2D.B2mat
   Ising2D.B1_mul_B2_mul_B1_eq_explicit
   Ising2D.B1_mul_B2_mul_B1_eq_AMat
-  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean）---
+  # --- 数学的道具立て「トレース・共役転置・正定値性」（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/。必要十分版は NecSuf/PsdCauchySchwarz.lean・NecSuf/TraceOfPositiveDefinite.lean）---
   Ising2D.trace_eq_sum_diag
   Ising2D.trace_linear
   Ising2D.trace_cyclic
@@ -462,6 +462,23 @@ targets=(
   Ising2D.trace_add_tensorPow
   Ising2D.trace_smul_tensorPow
   Ising2D.trace_binWordSum_tensorPow
+  Ising2D.conjugateBilinearValue
+  Ising2D.dotProduct_mulVec_eq_conjugateBilinearValue
+  Ising2D.posDef_conjugateBilinearValue_pos
+  Ising2D.standardBasisVec_ne_zero
+  Ising2D.star_kroneckerDelta
+  Ising2D.kroneckerDelta_comm
+  Ising2D.conjugate_bilinear_value_basis_eq_diag
+  Ising2D.trace_of_positive_definite_is_positive
+  "Ising2D.NecSuf.star_delta'"
+  "Ising2D.NecSuf.delta_comm'"
+  "Ising2D.NecSuf.conjBilin_basis_eq_diag'"
+  "Ising2D.NecSuf.basis_ne_zero'"
+  "Ising2D.NecSuf.trace_eq_incl_of_diag'"
+  "Ising2D.NecSuf.trace_pos_of_conjBilin_pos'"
+  "Ising2D.posDef_conjBilin'_pos"
+  Ising2D.trace_of_positive_definite_is_positive_of_necSuf
+  Ising2D.trace_of_positive_definite_is_positive_tensorPow
   Ising2D.Z_transpose
   Ising2D.Z_conjTranspose
   Ising2D.Y_conjTranspose

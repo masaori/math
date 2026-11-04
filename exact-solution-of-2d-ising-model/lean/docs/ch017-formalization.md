@@ -140,7 +140,7 @@
 | `VPlusInv` / `VPlus_mul_VPlusInv` / `VPlusInv_mul_VPlus` | `R^{(+)}`（係数は `(2s_2)^{-M/2} := ((2s_2)^{M/2})^{-1}`）、`R^{(+)}` が `V^{(+)}` の右逆かつ左逆である | `V_plus_is_invertible` Step 2〜3 |
 | `real_rpow_two_s2_ne_zero` / `VPlus_isUnit_and_inv_eq` | `a := (2s_2)^{M/2} ≠ 0`、`V^{(+)} ∈ R^×` かつ `(V^{(+)})^{-1} = R^{(+)}` | `V_plus_is_invertible` Step 2 の `a ∈ ℝ_{>0}`、最後の 2 行 |
 | `VPlusInv_posDef` | `(V^{(+)})^{-1}` の正定値性 | `V_plus_inverse_is_positive_definite` |
-| `trace_VPlus_pos` | `tr(V^{(+)})` の正値性 | `trace_V_plus_is_positive` |
+| `trace_VPlus_pos` | `tr(V^{(+)}) = r_ℂ` を満たす `r ∈ ℝ_{>0}` がある（`VPlus_posDef` と `trace_of_positive_definite_is_positive_tensorPow`、`MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimTraceOfPositiveDefiniteIsPositiveFromNecSuf.lean`） | `trace_V_plus_is_positive` |
 | `trace_VPlusInv_pos` | `tr((V^{(+)})^{-1})` の正値性 | `V_plus_inverse_positive_and_trace_positivity` |
 | `tauPlus` / `matExp_half_mul_matExp_half` / `trace_VPlus`（`ClaimConstantCEvenSector.lean`） | `τ := tr(exp(S_1^{(+)})exp(S_2))`、`exp(X/2)^2 = exp(X)`、`tr(V^{(+)}) = (2s_2)^{M/2}τ` | `constant_c_value_even_sector` Step 1 |
 | `trace_expNegS1plus_expNegS2_eq_tauPlus` / `trace_VPlusInv` | `tr(exp(-S_1^{(+)})exp(-S_2)) = τ`、`tr((V^{(+)})^{-1}) = (2s_2)^{-M/2}τ` | `constant_c_value_even_sector` Step 1〜2 |

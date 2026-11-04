@@ -157,7 +157,10 @@ theorem constant_c_value_even_sector (F : CheckFermiSetup M) (g : CheckIdx M →
   set a : ℝ := ((2 * s2) ^ ((M : ℝ) / 2) : ℝ) with ha
   have hapos : 0 < a := Real.rpow_pos_of_pos (by linarith) _
   obtain ⟨p, hppos, hP⟩ := F.trace_Vprime_pos g
-  have hVpos : 0 < (VPlus M s2 K1 K2star).trace := trace_VPlus_pos hK1 hK2 hs2
+  have hVpos : 0 < (VPlus M s2 K1 K2star).trace := by
+    obtain ⟨r, hr, htr⟩ := trace_VPlus_pos hK1 hK2 hs2
+    rw [htr]
+    exact Complex.zero_lt_real.mpr hr
   have hcne : c ≠ 0 := by
     intro h0
     rw [h0, zero_smul] at hVeq

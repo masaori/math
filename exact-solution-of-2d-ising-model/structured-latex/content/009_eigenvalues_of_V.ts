@@ -1517,7 +1517,7 @@ b^{(k)*}Ab^{(k)}
       displayMath(String.raw`\begin{aligned}
 \sum_{k=1}^{n} r_k
 &\ge r_1
-&&(\because\ k \ne 1\ \text{の項は}\ r_k > 0)\\
+&&\bigl(\because\ \blkref{finite_sum_of_nonnegative_reals_is_at_least_each_term}\ \text{を}\ m = n,\ a_j = r_j,\ k = 1\ \text{へ。各}\ r_j \in \mathbb{R}_{>0}\ \text{なので}\ r_j \ge 0\bigr)\\
 &> 0
 &&(\because\ r_1 \in \mathbb{R}_{>0})
 \end{aligned}`),
@@ -1527,6 +1527,7 @@ b^{(k)*}Ab^{(k)}
       status: "added",
       notes: [
         "2026-11-01: exp_hermitian_is_positive_definite の (4) を、1 ブロック 1 主張に合わせて独立の主張にした。「標準基底ベクトルによる対角成分の表示」と書いていた行を、δ の性質と単位行列の左右の単位元への参照による成分の鎖にし、トレースが正の実数の包含であることを real_inclusion_preserves_finite_sum から示した。",
+        "2026-11-04（Lean の通しの証明のゴールラインの確認）: 最後の鎖の「Σ r_k ≥ r_1」の根拠「k ≠ 1 の項は r_k > 0」は名前だけの根拠だったので、finite_sum_of_nonnegative_reals_is_at_least_each_term（m = n、a_j = r_j、k = 1）を引く形にした（主張と値は不変）。Lean の具体版は Ising2D.trace_of_positive_definite_is_positive（MathematicalTools/TraceConjugateTransposeAndPositiveDefiniteness/ClaimTraceOfPositiveDefiniteIsPositive.lean）。",
       ],
     },
   },
