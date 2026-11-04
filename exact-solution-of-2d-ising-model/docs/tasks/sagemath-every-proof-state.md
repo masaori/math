@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 407 件のうち、SageMath の検算が無いもの 29 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 408 件のうち、SageMath の検算が無いもの 28 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -360,13 +360,16 @@
   人手証明の計算の誤りは無かったが、根拠の誤りを直した: (1) の鎖が引いていた「epsilon_commutes_with_transfer_matrices の Step 1」は本文に無いブロックの段だったので、epsilon_anticommutes_with_jordan_wigner_Z・_Y の引用にした。(2) の鎖が引いていた def_half_integer_modes は θ̃_{1−μ} = −θ̃_μ の主張で Ž の定義ではなかったので def_half_integer_checkZ・_checkY に直した。「積の ℂ 線型性」を有限和の分配・スカラーの出し入れ・符号の出し入れの補題の一行ずつにし、散文の「Y̌ も同じ」「ψ̌ も同じ」を (W̌_μ, W)・(Ψ, p, q) の一本の鎖にし、(4) の ň_μ を product_of_anticommuting_matrices_commutes の引用に、Q̌_ϵ の散文を差・スカラー倍との可換の 3 式と分配則の鎖と有限積との可換の鎖にした（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は不変）: `ClaimEpsilonAnticommutesWithCheckZY.lean` の (2) は必要十分版 `NecSuf.anticomm_sum_smul` の特殊化で、人手の新しい一行ずつの鎖と 1 対 1 でない。冒頭の対応表は「章 010」などの旧い呼び方のままである。
 - `epsilon_eigenvalue_on_check_Q`（εQ̌_ϵ = η_ϵQ̌_ϵ と符号の反転則・η_ϵ = η_{(1,…,1)}(−1)^{M_col−|ϵ|}・ε = η_{(1,…,1)}(−1)^{M_col}Π(I − 2ň_μ)）: `sagemath/check/epsilon_eigenvalue_on_check_Q/`。本文の ψ̌ を結合定数 3 組 × M_col = 2, 3 で数体 E_1 に作り、(1)〜(4) の全ての鎖と主張を全ての ϵ・μ で厳密に確かめた（等号・主張 12042 件、否定コントロール 216 件。η_{(1,…,1)} は 6 つの場合すべてで +1）。人手証明の計算の誤りは無し。三回のレビューで必須の指摘が無くなるまで人手証明を直した（主張は不変）: 名前だけの根拠を blkref に、散文の推論（η ∈ {±1}、行列の等式、∃! の一意性、Step 1 の背理法、Step 3 の結び、(3) の取り替え、(4) の Σ_ϵ Q̌_ϵ = I を掛ける段）を (∵) 付きの鎖に、他のブロックの証明の途中（check_joint_eigenspace_decomposition の証明の記号 R と Q̌_ϵ = ΠR）を引いていたのを Q̌_δ の定義の因子を直接使う形に、定義の無い負の冪を非負の冪の鎖に。Lean（ClaimEpsilonEigenvalueOnCheckQ.lean）は変えていない（新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
+- `trace_of_epsilon_V_plus_via_check_eigenvalues`（tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、ϰ := (2sinh 2K_2)^{M_col/2}Π_μ 2sinh(γ(θ̃_μ)/2) > 0、η_{(1,…,1)} = +1 ⟺ tr(εV^{(+)}) > 0）: `sagemath/check/trace_of_epsilon_V_plus_via_check_eigenvalues/`。Step 1 の行列の鎖を本文の ψ̌・ε と不定元 C・a_μ（V^{(+)} ↔ C·Π(a ň + a^{-1}(I − ň))）で厳密に、Step 2 の符号の冪の帰納法を QQ(i) で厳密に、Step 3・Step 5 を厳密な部と球の部（包含を r ↦ r + 0i として値で）で、Step 4 の実数の鎖を球（結合定数 7 組 × M_col = 2..6）と不定元の厳密な部で、Step 6・7 を球と QQ(i) で確かめた。主張は V^{(+)} = C·exp(X̌) の球の値で、転送行列の側の閉形式 (2e^{−K_2}cosh K_1)^M + (2e^{K_2}sinh K_1)^M とも重なることを見た（η_{(1,…,1)} は全て +1）。人手証明の計算の誤りは無し。名前だけの根拠（「トレースの線型性」「theorem_exp_product（n=1）」「有限個の因子の積の展開」）と散文の推論を (∵) 付きの鎖に書き直し、主張を (1) ℂ の等式（実数の因子 ϰ の包含）、(2) ϰ > 0、(3) 同値に分け、ℂ の元の z > 0 を「正の実数の包含に等しい」と主張文で定めた（値は不変）。新しい主張 `finite_product_of_real_products`（Π(x_jy_j) = (Πx_j)(Πy_j)）を足し、`sagemath/check/finite_product_of_real_products/` を付けた。二回のレビューで必須の指摘が無くなるまで直した。
 
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `trace_of_epsilon_V_plus_via_check_eigenvalues`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `H1_plus_in_sigma_z_form`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`trace_of_epsilon_V_plus_via_check_eigenvalues` のレビューで見つかった（下流の「> 0」の橋。今回の差分より前から）: この主張は ℂ の元の z > 0 を「z = r_ℂ なる r ∈ ℝ_{>0} がある」と主張文で定めたが、下流の `max_eigenvector_in_even_sector` (1) と `max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus` (2) が「tr(εV^{(+)}) > 0」を得る `trace_of_epsilon_V_plus` は「tr(εV^{(+)}) = … ∈ ℝ_{>0}」と包含を書かずに述べている。読めば同じ意味だが、二つの「> 0」をつなぐ行が無い。直すには z > 0 の定義を独立の定義のブロックへ出し、`trace_of_epsilon_V_plus` を包含の形で述べる。主張文に K_1, K_2 ∈ ℝ_{>0}・M_col ∈ ℤ_{≥2} の前提を書いていないのも姉妹の主張と同じ既存の書き方である。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`eigenvalues_of_check_Vprime` の検算を移したときに見つかった（旧い検算の名前を指す注記。今回の差分より前から）: ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_25」「check_eigenvalues_of_check_Vprime_*.sage」は、移した後の `sagemath/check/eigenvalues_of_check_Vprime/` を指していない（今回足した注記は新しい場所を指す）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 

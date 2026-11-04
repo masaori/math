@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: 全証明の SageMath 検算として、`trace_of_epsilon_V_plus_via_check_eigenvalues`（tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、ϰ > 0、η = +1 ⟺ tr > 0）に検算 `sagemath/check/trace_of_epsilon_V_plus_via_check_eigenvalues/` を付けた（未検算 28 件）。名前だけの根拠と散文を (∵) 付きの Step 1〜7 の鎖に書き直し、主張を (1)(2)(3) に分けた（値は不変）。新しい主張 `finite_product_of_real_products` と検算を足した。Lean は不変で、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。次は `H1_plus_in_sigma_z_form`。
+
 2026-11-04: Lean の通しの証明のゴールラインの確認の百二十五個目として、人手 `trace_V_plus_is_positive` の Lean を 1 対 1 にした。人手 `trace_of_positive_definite_is_positive` の具体版 `ClaimTraceOfPositiveDefiniteIsPositive.lean`・必要十分版 `NecSuf/TraceOfPositiveDefinite.lean`（係数は `Star` 付きの半環で積の可換律は効かない、正値の側は前順序と `AddLeftMono` だけ）・`TensorPow M` の系を足し、`trace_VPlus_pos` を `∃ r > 0, tr = r_ℂ` の形にしてそれに通した。人手の `Σ r_k ≥ r_1` の名前だけの根拠を `finite_sum_of_nonnegative_reals_is_at_least_each_term` の参照にした（値は不変）。三回のレビューで必須の指摘が無くなるまで直した。lake build・check-no-sorry・check-end-to-end・check-docs-references・npm run check・verify-check-linkage 通過。次は `constant_c_value_even_sector`。
 
 2026-11-04: 全証明の SageMath 検算として、`epsilon_eigenvalue_on_check_Q`（εQ̌_ϵ = η_ϵQ̌_ϵ と符号の反転則、ε = η_{(1,…,1)}(−1)^{M_col}Π(I − 2ň_μ)）に検算 `sagemath/check/epsilon_eigenvalue_on_check_Q/` を付けた（未検算 29 件）。本文の ψ̌ で M_col = 2, 3 の全ての鎖と主張を数体で厳密に確かめた。計算の誤りは無し。人手証明は主張を変えずに、名前だけの根拠と散文の推論を (∵) 付きの鎖に直し、他のブロックの証明の途中を引いていた Step 2 を Q̌_δ の定義の因子を直接使う形にした。Lean は不変。次は `trace_of_epsilon_V_plus_via_check_eigenvalues`。

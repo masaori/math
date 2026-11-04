@@ -1675,6 +1675,62 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_real_products",
+    kind: "claim",
+    title: { text: "実数の積の有限積は有限積の積" },
+    labels: ["finite_product_of_real_products"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x_1,\dots,x_m,\ y_1,\dots,y_m \in \mathbb{R}`),
+        " とする。有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} \left(x_j y_j\right) = \Bigl(\prod_{j=1}^{m} x_j\Bigr)\Bigl(\prod_{j=1}^{m} y_j\Bigr)`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} \left(x_j y_j\right)
+&= x_1 y_1
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to x_j y_j)\bigr)\\
+&= \Bigl(\prod_{j=1}^{1} x_j\Bigr)\Bigl(\prod_{j=1}^{1} y_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to x_j,\ r_j \to y_j)\ \text{を 2 箇所へ同時に、右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} \left(x_j y_j\right)
+&= \Bigl(\prod_{j=1}^{m} \left(x_j y_j\right)\Bigr)\left(x_{m+1} y_{m+1}\right)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to x_j y_j)\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{m} x_j\Bigr)\Bigl(\prod_{j=1}^{m} y_j\Bigr)\Bigr)\left(x_{m+1} y_{m+1}\right)
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \Bigl(\Bigl(\prod_{j=1}^{m} x_j\Bigr)x_{m+1}\Bigr)\Bigl(\Bigl(\prod_{j=1}^{m} y_j\Bigr)y_{m+1}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)(cd) = (ac)(bd)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&= \Bigl(\prod_{j=1}^{m+1} x_j\Bigr)\Bigl(\prod_{j=1}^{m+1} y_j\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (r_j \to x_j,\ r_j \to y_j)\ \text{を 2 箇所へ同時に、右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_epsilon_V_plus_via_check_eigenvalues の Step 4 が、符号の有限積と exp の有限積の積を一つの有限積へまとめる行に引けるよう足した。数値検証: sagemath/check/finite_product_of_real_products/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_power_of_complex_number",
     kind: "definition",
     title: { text: "複素数の冪" },

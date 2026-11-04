@@ -106,11 +106,12 @@ export default defineBlocks([
         [
           "(iii) したがって ",
           math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
-2\sinh\!\left(\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)`),
-          " であり、右辺の ",
-          math(String.raw`\eta`),
-          " 以外は**正**である（",
+= \eta_{(1,\dots,1)}\,\varkappa_{\mathbb{C}}`),
+          "（",
+          math(String.raw`\varkappa := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)`),
+          "）であり、",
+          math(String.raw`\varkappa`),
+          " は**正の実数**である（",
           ref("trace_of_epsilon_V_plus_via_check_eigenvalues"),
           "）。",
         ],
@@ -1394,165 +1395,540 @@ P_{k+1}\check{Q}_\epsilon
     statement: [
       paragraph([
         ref("epsilon_eigenvalue_on_check_Q"),
-        " の ",
-        math(String.raw`\eta_{(1,\dots,1)}`),
+        " (1) の ",
+        math(String.raw`\eta_{(1,\dots,1)} \in \{+1,-1\}`),
+        "（",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`1_{\mathbb{C}}`),
         " と ",
+        math(String.raw`-1_{\mathbb{C}}`),
+        "）、",
+        ref("def_second_transfer_matrix_prefactor"),
+        " の ",
+        math(String.raw`(2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
+        "、",
         ref("def_gamma_theta"),
         " の ",
-        math(String.raw`\gamma(\tilde\theta_\mu)`),
-        " について",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        "（",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        "）について",
       ]),
       displayMath(
-        String.raw`\mathrm{tr}\!\left(\varepsilon\,V^{(+)}\right)
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)`,
+        String.raw`\varkappa := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) \in \mathbb{R}`,
       ),
       paragraph([
-        "が成り立つ。",
-        ref("gamma_theta_tilde_mu_positive"),
-        " の ",
-        math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-        " と ",
-        math(String.raw`K_2 > 0`),
-        " より右辺の ",
-        math(String.raw`\eta_{(1,\dots,1)}`),
-        " 以外の因子はすべて**正の実数**なので、",
+        "とおく。積は ",
+        ref("def_finite_product_of_real_numbers"),
+        "（",
+        math(String.raw`m \to M_{\mathrm{col}}`),
+        "）の実数の有限積、",
+        math(String.raw`(\cdot)_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の包含である。",
+        math(String.raw`z \in \mathbb{C}`),
+        " について ",
+        math(String.raw`z > 0`),
+        " は「",
+        math(String.raw`z = r_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " が存在する」ことを表す。このとき次が成り立つ。",
       ]),
-      displayMath(
-        String.raw`\eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`,
-      ),
-      paragraph(["である。"]),
+      list([
+        [
+          math(String.raw`\text{(1)}\quad \mathrm{tr}\!\left(\varepsilon\,V^{(+)}\right)
+= \eta_{(1,\dots,1)}\,\varkappa_{\mathbb{C}}`),
+        ],
+        [math(String.raw`\text{(2)}\quad \varkappa > 0`)],
+        [
+          math(String.raw`\text{(3)}\quad \eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`),
+        ],
+      ]),
     ],
     proof: [
       paragraph([
-        "Step 1（トレースの分解）。",
-        ref("check_joint_eigenspace_decomposition"),
-        " (2) の ",
-        math(String.raw`\sum_\epsilon\check{Q}_\epsilon = I`),
-        "、",
+        "準備。",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の上の行列の和は ",
+        ref("def_sum_over_binary_words"),
+        "（",
+        math(String.raw`m, n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}}`),
+        "）、複素数の和は ",
+        ref("def_sum_over_binary_words_of_complex_numbers"),
+        "、実数の和は ",
+        ref("def_sum_over_binary_words_of_real_numbers"),
+        "（どちらも ",
+        math(String.raw`r \to M_{\mathrm{col}}`),
+        "）による（",
+        ref("def_check_index_set"),
+        " により ",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
+        "）。",
         ref("eigenvalues_of_V_plus"),
-        " (1) の ",
-        math(String.raw`V^{(+)}\check{Q}_\epsilon = \check\Lambda_\epsilon\check{Q}_\epsilon`),
+        " の ",
+        math(String.raw`\check\Lambda_\epsilon \in \mathbb{R}_{>0}`),
+        " による行列のスカラー倍 ",
+        math(String.raw`\check\Lambda_\epsilon\check{Q}_\epsilon`),
+        " は、",
+        ref("inclusion_rr_to_cc"),
+        " の像による ",
+        math(String.raw`\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\check{Q}_\epsilon`),
+        "（",
+        ref("def_matrix_scalar_multiple"),
+        "）と読む。",
+        math(String.raw`\pm 1_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記 ",
+        math(String.raw`r_{\mathbb{C}}`),
+        " の ",
+        math(String.raw`r \to \pm 1`),
+        " である。",
+        math(String.raw`\eta_{(1,\dots,1)} \in \{1_{\mathbb{C}}, -1_{\mathbb{C}}\}`),
+        " なので、",
+        math(String.raw`\check{h} \in \{1,-1\} \subset \mathbb{R}`),
+        " を ",
+        math(String.raw`\check{h}_{\mathbb{C}} = \eta_{(1,\dots,1)}`),
+        " となるように取る。",
+        math(String.raw`e \in \{0,1\}`),
+        " について ",
+        math(String.raw`\check{u}^{(1)} := 1,\ \check{u}^{(0)} := -1 \in \mathbb{R}`),
         "、",
-        ref("epsilon_eigenvalue_on_check_Q"),
-        " (1) の ",
-        math(String.raw`\varepsilon\check{Q}_\epsilon = \eta_\epsilon\check{Q}_\epsilon`),
-        "、および ",
-        ref("check_joint_eigenspace_decomposition"),
-        " (4) の ",
-        math(String.raw`\mathrm{tr}(\check{Q}_\epsilon) = 1`),
-        " を使う。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " と ",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`|\epsilon|_k := \#\{\mu \in \{1,\dots,k\} \mid \epsilon_\mu = 1\}`),
+        " とおく。",
+        math(String.raw`|\epsilon|_{M_{\mathrm{col}}} = |\epsilon|`),
+        "、",
+        math(String.raw`|\epsilon|_1 = \epsilon_1`),
+        "、",
+        math(String.raw`|\epsilon|_{k+1} = |\epsilon|_k + \epsilon_{k+1}`),
+        "、",
+        math(String.raw`0 \le |\epsilon|_k \le k`),
+        " である（数え上げの定義）。",
+      ]),
+      paragraph([
+        "Step 1（トレースの分解）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
-&= \mathrm{tr}\!\left(\varepsilon V^{(+)}
-   \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon\right)
-   \quad (\because \text{check\_joint\_eigenspace\_decomposition (2)}) \\
-&= \sum_{\epsilon}\mathrm{tr}\!\left(\varepsilon V^{(+)}\check{Q}_\epsilon\right)
-   \quad (\because \text{trace\_basic\_properties (1) の線型性}) \\
-&= \sum_{\epsilon}\check\Lambda_\epsilon\,
-   \mathrm{tr}\!\left(\varepsilon\check{Q}_\epsilon\right)
-   \quad (\because \text{eigenvalues\_of\_V\_plus (1)}) \\
-&= \sum_{\epsilon}\check\Lambda_\epsilon\,\eta_\epsilon\,
-   \mathrm{tr}\!\left(\check{Q}_\epsilon\right)
-   \quad (\because \text{epsilon\_eigenvalue\_on\_check\_Q (1)}) \\
-&= \sum_{\epsilon\in\{0,1\}^{\check{\mathcal{M}}}}\eta_\epsilon\,\check\Lambda_\epsilon
-   \quad (\because \text{check\_joint\_eigenspace\_decomposition (4)})
+&= \mathrm{tr}\!\left(\left(\varepsilon V^{(+)}\right)I\right)
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\ (m, n \to 2^{M_{\mathrm{col}}},\ A \to \varepsilon V^{(+)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\left(\varepsilon V^{(+)}\right)\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(2) を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\left(\varepsilon V^{(+)}\right)\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{sum_over_binary_words_distributes_in_right_factor}\ (m, n, p \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ C \to \varepsilon V^{(+)},\ X_\epsilon \to \check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\left(\varepsilon V^{(+)}\right)\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_sum_over_binary_words}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ B_\epsilon \to (\varepsilon V^{(+)})\check{Q}_\epsilon)\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\varepsilon\left(V^{(+)}\check{Q}_\epsilon\right)\right)
+&&\bigl(\because\ \blkref{mat_mult_associative}\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\varepsilon\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\check{Q}_\epsilon\right)\right)
+&&\bigl(\because\ \blkref{eigenvalues_of_V_plus}\ \text{(1) の}\ V^{(+)}\check{Q}_\epsilon = \check\Lambda_\epsilon\check{Q}_\epsilon\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\varepsilon\check{Q}_\epsilon\right)\right)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (a \to (\check\Lambda_\epsilon)_{\mathbb{C}},\ A \to \varepsilon,\ B \to \check{Q}_\epsilon)\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\left(\eta_\epsilon\check{Q}_\epsilon\right)\right)
+&&\bigl(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1) の}\ \varepsilon\check{Q}_\epsilon = \eta_\epsilon\check{Q}_\epsilon\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \mathrm{tr}\!\left(\left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon\right)\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{scalar_multiple_is_associative}\ (a \to (\check\Lambda_\epsilon)_{\mathbb{C}},\ b \to \eta_\epsilon,\ A \to \check{Q}_\epsilon)\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon\right)\mathrm{tr}\!\left(\check{Q}_\epsilon\right)
+&&\bigl(\because\ \blkref{trace_of_scalar_multiple}\ (n \to 2^{M_{\mathrm{col}}},\ \alpha \to (\check\Lambda_\epsilon)_{\mathbb{C}}\eta_\epsilon,\ A \to \check{Q}_\epsilon)\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon\right)1_{\mathbb{C}}
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\ \text{(4) の}\ \mathrm{tr}(\check{Q}_\epsilon) = 1\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\check\Lambda_\epsilon\right)_{\mathbb{C}}\eta_\epsilon
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{complex_numbers_form_a_field}\ \text{の乗法の交換則を各項へ同時に}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "Step 2（積への分解）。",
-        ref("epsilon_eigenvalue_on_check_Q"),
-        " (3) より ",
-        math(String.raw`\eta_\epsilon = \eta_{(1,\dots,1)}(-1)^{M_{\mathrm{col}}-|\epsilon|}`),
-        " であり、",
-        ref("eigenvalues_of_V_plus"),
-        " の ",
-        math(String.raw`\check\Lambda_\epsilon = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)`),
-        " である。",
-        math(String.raw`(-1)^{M_{\mathrm{col}}-|\epsilon|} = \prod_{\mu=1}^{M_{\mathrm{col}}}(-1)^{1-\epsilon_\mu}`),
-        "（",
-        math(String.raw`\sum_\mu(1-\epsilon_\mu) = M_{\mathrm{col}} - |\epsilon|`),
-        "）と ",
-        ref("theorem_exp_product"),
-        "（",
-        math(String.raw`n=1`),
-        "、すなわち実数の指数法則）を使うと",
-      ]),
-      displayMath(
-        String.raw`\eta_\epsilon\,\check\Lambda_\epsilon
-= \eta_{(1,\dots,1)}\,(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
-\prod_{\mu=1}^{M_{\mathrm{col}}}\left((-1)^{1-\epsilon_\mu}
-\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu-\tfrac12\right)\right)\right)`,
-      ),
-      paragraph([
-        math(String.raw`\epsilon`),
-        " は各成分を独立に ",
-        math(String.raw`0`),
-        " か ",
-        math(String.raw`1`),
-        " から選ぶので、",
-        ref("trace_of_check_Vprime"),
-        " の Step 2 と同じ 1 対 1 対応（有限個の因子の積の展開）により",
+        "Step 2（符号の冪を実数の積の包含で表す）。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " を固定し、",
+        math(String.raw`k \in \{1,\dots,M_{\mathrm{col}}\}`),
+        " について ",
+        math(String.raw`\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}} = \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}`),
+        "（冪は ",
+        ref("def_power_of_complex_number"),
+        "）を ",
+        math(String.raw`k`),
+        " についての帰納法で示す。",
+        math(String.raw`k = 1`),
+        " で ",
+        math(String.raw`\epsilon_1 = 1`),
+        " なら ",
+        math(String.raw`|\epsilon|_1 = 1`),
+        " であり",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\sum_{\epsilon}\eta_\epsilon\check\Lambda_\epsilon
-&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
-   \left(-\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
-   + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
-   \quad (\because \text{有限個の因子の積の展開}) \\
-&= \eta_{(1,\dots,1)}(2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}
-   2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad \left(\because \sinh x = \frac{\exp(x)-\exp(-x)}{2}\right)
+\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
+&= \left(\check{u}^{(\epsilon_1)}\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&= \left(\check{u}^{(1)}\right)_{\mathbb{C}}
+&&\bigl(\because\ \epsilon_1 = 1\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{0}
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{1-|\epsilon|_1}
+&&\bigl(\because\ |\epsilon|_1 = 1\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        "（",
-        math(String.raw`\epsilon_\mu = 0`),
-        " の項が ",
-        math(String.raw`(-1)^{1}\exp(-\gamma/2)`),
-        "、",
-        math(String.raw`\epsilon_\mu = 1`),
-        " の項が ",
-        math(String.raw`(-1)^{0}\exp(+\gamma/2)`),
-        " である。）Step 1 と合わせて主張の等式を得る。",
+        math(String.raw`\epsilon_1 = 0`),
+        " なら ",
+        math(String.raw`|\epsilon|_1 = 0`),
+        " であり",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\prod_{\mu=1}^{1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
+&= \left(\check{u}^{(\epsilon_1)}\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&= \left(\check{u}^{(0)}\right)_{\mathbb{C}}
+&&\bigl(\because\ \epsilon_1 = 0\bigr)\\
+&= -1_{\mathbb{C}}
+&&\bigl(\because\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&= 1_{\mathbb{C}}\left(-1_{\mathbb{C}}\right)
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{0}\left(-1_{\mathbb{C}}\right)
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^0 := 1_{\mathbb{C}}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{1}
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m z\ (m \to 0)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{1-|\epsilon|_1}
+&&\bigl(\because\ |\epsilon|_1 = 0\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k < M_{\mathrm{col}}`),
+        " で成り立つとする。",
+        math(String.raw`\epsilon_{k+1} = 1`),
+        " なら ",
+        math(String.raw`(k+1) - |\epsilon|_{k+1} = k - |\epsilon|_k`),
+        " であり",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
+&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)\check{u}^{(\epsilon_{k+1})}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}1_{\mathbb{C}}
+&&\bigl(\because\ \epsilon_{k+1} = 1,\ \check{u}^{(1)} := 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{(k+1)-|\epsilon|_{k+1}}
+&&\bigl(\because\ (k+1) - |\epsilon|_{k+1} = k - |\epsilon|_k\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`\epsilon_{k+1} = 0`),
+        " なら ",
+        math(String.raw`(k+1) - |\epsilon|_{k+1} = (k - |\epsilon|_k) + 1`),
+        " であり",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\Bigl(\prod_{\mu=1}^{k+1}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}
+&= \Bigl(\Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)\check{u}^{(\epsilon_{k+1})}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{k}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(\check{u}^{(\epsilon_{k+1})}\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{k-|\epsilon|_k}\left(-1_{\mathbb{C}}\right)
+&&\bigl(\because\ \epsilon_{k+1} = 0,\ \check{u}^{(0)} := -1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{(k-|\epsilon|_k)+1}
+&&\bigl(\because\ \blkref{def_power_of_complex_number}\ \text{の}\ z^{m+1} := z^m z\ (m \to k - |\epsilon|_k)\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(-1_{\mathbb{C}}\right)^{(k+1)-|\epsilon|_{k+1}}
+&&\bigl(\because\ (k+1) - |\epsilon|_{k+1} = (k - |\epsilon|_k) + 1\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "で、",
+        math(String.raw`k+1`),
+        " でも成り立つ。",
+        math(String.raw`k = M_{\mathrm{col}}`),
+        " と ",
+        math(String.raw`|\epsilon|_{M_{\mathrm{col}}} = |\epsilon|`),
+        " より ",
+        math(String.raw`\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}} = \left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|}`),
+        " である。",
       ]),
       paragraph([
-        "Step 3（符号）。",
-        math(String.raw`K_2 \in \mathbb{R}_{>0}`),
-        " より ",
-        math(String.raw`2\sinh 2K_2 > 0`),
-        " なので ",
-        math(String.raw`(2\sinh 2K_2)^{M_{\mathrm{col}}/2} > 0`),
-        "。",
+        "Step 3（各項を実数の包含で表す）。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について ",
+        math(String.raw`\check{t}_\epsilon := \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon \in \mathbb{R}`),
+        " とおく。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&= \left(\eta_{(1,\dots,1)}\left(-1_{\mathbb{C}}\right)^{M_{\mathrm{col}}-|\epsilon|}\right)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(3)}\bigr)\\
+&= \Bigl(\eta_{(1,\dots,1)}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 2 の}\ k = M_{\mathrm{col}}\ \text{の式を右辺から左辺へ}\bigr)\\
+&= \Bigl(\check{h}_{\mathbb{C}}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\Bigr)\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \check{h}\ \text{の取り方}\ \check{h}_{\mathbb{C}} = \eta_{(1,\dots,1)}\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\check{h}\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)_{\mathbb{C}}\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h},\ b \to \textstyle\prod_{\mu}\check{u}^{(\epsilon_\mu)}\bigr)\bigr)\\
+&= \Bigl(\Bigl(\check{h}\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ \bigl(a \to \check{h}\textstyle\prod_{\mu}\check{u}^{(\epsilon_\mu)},\ b \to \check\Lambda_\epsilon\bigr)\bigr)\\
+&= \Bigl(\Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon\Bigr)\check{h}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (ab)c = (bc)a\ \text{（乗法の交換則と結合則）}\bigr)\\
+&= \left(\check{t}_\epsilon\check{h}\right)_{\mathbb{C}}
+&&\bigl(\because\ \check{t}_\epsilon\ \text{の置き方}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 4（実数の和を積へ分解する）。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " と ",
+        math(String.raw`e \in \{0,1\}`),
+        " について ",
+        math(String.raw`\check{w}_\mu^{(e)} := \check{u}^{(e)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(e - \tfrac12\right)\right) \in \mathbb{R}`),
+        " とおく。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の実数の exp で、",
+        math(String.raw`\mathbb{R}`),
+        " を使うのはその値が部分和の極限だからである（指数評価による脱出）。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{t}_\epsilon
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\check\Lambda_\epsilon
+&&\bigl(\because\ \check{t}_\epsilon\ \text{の置き方}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{eigenvalues_of_V_plus}\ \text{の}\ \check\Lambda_\epsilon\ \text{の定義}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)
+   \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\bigr)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   \Bigl(\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\check{u}^{(\epsilon_\mu)}\Bigr)\prod_{\mu=1}^{M_{\mathrm{col}}}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(bc) = b(ac)\ \text{（乗法の交換則と結合則）}\bigr)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   \prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(\epsilon_\mu)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)
+&&\bigl(\because\ \blkref{finite_product_of_real_products}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \check{u}^{(\epsilon_\mu)},\ y_j \to \exp(\gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}
+&&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to \epsilon_\mu)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "これを和の各項へ入れる。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\check{t}_\epsilon
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \text{直前の鎖を各項へ同時に}\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}}\prod_{\mu=1}^{M_{\mathrm{col}}} \check{w}_\mu^{(\epsilon_\mu)}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ \bigl(r \to M_{\mathrm{col}},\ x_\epsilon \to \textstyle\prod_{\mu} \check{w}_\mu^{(\epsilon_\mu)},\ c \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{w}_\mu^{(1)} + \check{w}_\mu^{(0)}\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \check{w}_\mu^{(e)})\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\check{u}^{(1)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + \check{u}^{(0)}\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \check{w}_\mu^{(e)}\ \text{の置き方}\ (e \to 1,\ e \to 0)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(1\cdot\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \check{u}^{(1)} := 1,\ \check{u}^{(0)} := -1\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) + (-1)\exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1\cdot b = b\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a + (-1)b = a - b\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right) - \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(-b) = -(ab)\ (a \to \gamma(\tilde\theta_\mu),\ b \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}\left(\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a\cdot\tfrac12 = \tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\cdot\frac{\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) - \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)}{2}\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)(2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+&&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \sinh\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)\\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
+&= \varkappa
+&&\bigl(\because\ \varkappa\ \text{の置き方}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 5（(1) の等式）。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \eta_\epsilon\left(\check\Lambda_\epsilon\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 1 の鎖}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \left(\check{t}_\epsilon\check{h}\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 3 の鎖を各項へ同時に}\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{t}_\epsilon\check{h}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \check{t}_\epsilon\check{h})\bigr)\\
+&= \Bigl(\Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \check{t}_\epsilon\Bigr)\check{h}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \check{t}_\epsilon,\ c \to \check{h})\ \text{を右辺から左辺へ}\bigr)\\
+&= \left(\varkappa\check{h}\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 4 の鎖}\bigr)\\
+&= \left(\check{h}\varkappa\right)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{の乗法の交換則}\bigr)\\
+&= \check{h}_{\mathbb{C}}\varkappa_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_product}\ (a \to \check{h},\ b \to \varkappa)\ \text{を右辺から左辺へ}\bigr)\\
+&= \eta_{(1,\dots,1)}\varkappa_{\mathbb{C}}
+&&\bigl(\because\ \check{h}\ \text{の取り方}\ \check{h}_{\mathbb{C}} = \eta_{(1,\dots,1)}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 6（(2) の不等号）。",
+        math(String.raw`\mu \in \check{\mathcal{M}}`),
+        " について ",
         ref("gamma_theta_tilde_mu_positive"),
         " より ",
         math(String.raw`\gamma(\tilde\theta_\mu) > 0`),
-        " であり ",
-        math(String.raw`\sinh`),
-        " は ",
-        math(String.raw`\mathbb{R}_{>0}`),
-        " 上で正の値を取る（",
-        ref("cosh_sinh_basic_properties"),
-        "）ので各因子 ",
-        math(String.raw`2\sinh(\gamma(\tilde\theta_\mu)/2) > 0`),
-        "。よって ",
-        math(String.raw`\mathrm{tr}(\varepsilon V^{(+)})`),
-        " の符号は ",
-        math(String.raw`\eta_{(1,\dots,1)}`),
-        " の符号に一致し、",
-        math(String.raw`\eta_{(1,\dots,1)} \in \{+1,-1\}`),
-        " なので主張の同値が従う。",
+        " であり、次の 2 つの鎖を得る。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\frac{\gamma(\tilde\theta_\mu)}{2}
+&= \gamma(\tilde\theta_\mu)\cdot\tfrac12
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ \tfrac{a}{2} = a\cdot\tfrac12\bigr)\\
+&> 0\cdot\tfrac12
+&&\bigl(\because\ \gamma(\tilde\theta_\mu) > 0\ \text{の両辺に}\ \tfrac12 > 0\ \text{を掛ける}\bigr)\\
+&= 0
+&&(\because\ 0\cdot\tfrac12 = 0)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&> 2\cdot 0
+&&\bigl(\because\ \blkref{cosh_sinh_basic_properties}\ \text{(3) の}\ \sinh x > 0\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{に上の鎖を当て、両辺に}\ 2 > 0\ \text{を掛ける}\bigr)\\
+&= 0
+&&(\because\ 2\cdot 0 = 0)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&> 0
+&&\bigl(\because\ \blkref{finite_product_of_positive_reals_is_positive}\ \bigl(m \to M_{\mathrm{col}},\ j \to \mu,\ r_\mu \to 2\sinh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{に、上の各}\ \mu\ \text{の鎖}\ r_\mu > 0\ \text{を当てる}\bigr)
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\varkappa
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\prod_{\mu=1}^{M_{\mathrm{col}}}2\sinh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+&&\bigl(\because\ \varkappa\ \text{の置き方}\bigr)\\
+&> 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0,\ b > 0\ \text{なら}\ ab > 0\ \bigl(a \to (2\sinh 2K_2)^{M_{\mathrm{col}}/2},\ b \to \textstyle\prod_{\mu}2\sinh(\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{に、}\blkref{def_second_transfer_matrix_prefactor}\ \text{の}\ (2\sinh 2K_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}\ \text{と直前の不等号を当てる}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "Step 7（(3) の同値）。",
+        math(String.raw`\eta_{(1,\dots,1)} = +1`),
+        " なら",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
+&= 1_{\mathbb{C}}\varkappa_{\mathbb{C}}
+&&\bigl(\because\ \text{(1) と}\ \eta_{(1,\dots,1)} = 1_{\mathbb{C}}\bigr)\\
+&= \varkappa_{\mathbb{C}}
+&&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、(2) の ",
+        math(String.raw`\varkappa \in \mathbb{R}_{>0}`),
+        " を ",
+        math(String.raw`r`),
+        " に取れば ",
+        math(String.raw`\mathrm{tr}(\varepsilon V^{(+)}) > 0`),
+        " である。逆に ",
+        math(String.raw`\mathrm{tr}(\varepsilon V^{(+)}) > 0`),
+        " とし、",
+        math(String.raw`\mathrm{tr}(\varepsilon V^{(+)}) = r_{\mathbb{C}}`),
+        " を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " を取る。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+(r, 0)
+&= r_{\mathbb{C}}
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の定義を右辺から左辺へ}\bigr)\\
+&= \mathrm{tr}\!\left(\varepsilon V^{(+)}\right)
+&&\bigl(\because\ r\ \text{の取り方}\bigr)\\
+&= \left(\check{h}\varkappa\right)_{\mathbb{C}}
+&&\bigl(\because\ \text{Step 5 の鎖の 1 行目から 6 行目}\bigr)\\
+&= \left(\check{h}\varkappa, 0\right)
+&&\bigl(\because\ \blkref{inclusion_rr_to_cc}\ \text{の定義}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        ref("definition_of_cc"),
+        " の ",
+        math(String.raw`\mathbb{C} = \mathbb{R}\times\mathbb{R}`),
+        " の元の等号は成分ごとなので ",
+        math(String.raw`r = \check{h}\varkappa`),
+        " である。",
+        math(String.raw`\check{h} = -1`),
+        " と仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+r
+&= \check{h}\varkappa
+&&\bigl(\because\ \text{直前の成分の比較}\bigr)\\
+&= (-1)\varkappa
+&&\bigl(\because\ \text{仮定}\ \check{h} = -1\bigr)\\
+&= -\varkappa
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-1)a = -a\ (a \to \varkappa)\bigr)\\
+&< 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0\ \text{なら}\ -a < 0\ (a \to \varkappa)\ \text{に (2) の}\ \varkappa > 0\ \text{を当てる}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`r > 0`),
+        " に反する。",
+        math(String.raw`\check{h} \in \{1,-1\}`),
+        " なので ",
+        math(String.raw`\check{h} = 1`),
+        " であり、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\eta_{(1,\dots,1)}
+&= \check{h}_{\mathbb{C}}
+&&\bigl(\because\ \check{h}\ \text{の取り方}\bigr)\\
+&= 1_{\mathbb{C}}
+&&\bigl(\because\ \check{h} = 1\ \text{と}\ \blkref{inclusion_rr_to_cc}\ \text{の略記}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["である。"]),
     ],
     conversion: {
       status: "added",
       notes: [
         "trace_of_check_Vprime が Σ_ε Λ̌_ε = Π 2cosh(γ/2) を与えるのと対をなす計算で、符号 η_ε が入ることで cosh が sinh に変わる。γ(θ~_μ) > 0（半整数運動量に固有）なので sinh の積が 0 にならないのが要点である。整数運動量では臨界点で γ(θ_M) = 0 になりうるため、この論法はそのままでは使えない。",
-        "数値検証: sagemath/check/053_claim_even_sector_closing/check_03。",
+        "数値検証: sagemath/check/trace_of_epsilon_V_plus_via_check_eigenvalues/（旧い記録は sagemath/check/053_claim_even_sector_closing/check_03）。",
+        "2026-11-04: SageMath の検算を付けるときに、名前だけの根拠と散文の推論を (∵) 付きの鎖にした。Step 1 は「トレースの線型性」と名前だけで和・スカラー倍・ε の積の段を省いていたので、trace_of_check_Vprime の Step 1 と同じ根拠の 13 行にした（ε を V^{(+)}Q̌_ε の前から作用させる mat_mult_associative・scalar_multiple_factors_out_of_right_factor・scalar_multiple_is_associative の行を足した）。Step 2 の「(−1)^{M−|ϵ|} = Π_μ(−1)^{1−ϵ_μ}」「theorem_exp_product（n=1）」「有限個の因子の積の展開」は、実数の符号 ǔ^{(e)} の有限積の包含が (−1_ℂ)^{M−|ϵ|} に等しいことの帰納法（Step 2）、各項を実数の包含 (ť_ϵȟ)_ℂ で表す鎖（Step 3）、real_exp_of_finite_sum・新しく足した finite_product_of_real_products・real_sum_over_binary_words_distributes_in_left_factor・expansion_of_finite_product_of_two_term_sums_of_real_numbers・def_cosh_sinh の sinh を引く鎖（Step 4）にした。theorem_exp_product は二つの行列の主張で M_col 個の和には届かない。Step 3 の sinh の正値性に引いていた cosh_sinh_basic_properties は (3) を明示し、正数の有限積は finite_product_of_positive_reals_is_positive を引いた。主張文は ℂ の値 tr(εV^{(+)}) と実数の因子を包含を書かずに等号で結び、ℂ の値に > 0 を書いていたので、実数の因子を ϰ ∈ ℝ と置いて (1) tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、(2) ϰ > 0、(3) 同値に分け、ℂ の元の > 0 を「正の実数の包含に等しい」と定めた（下流の max_eigenvector_in_even_sector・max_eigenvector_in_even_sector_via_trace_of_epsilon_V_plus が引く同値の形は変わらない）。値は変えていない。Lean（ClaimTraceEpsilonVPlusViaCheckEigenvalues.lean）は旧い Step の分け方のままで、新しい鎖との 1 対 1 と finite_product_of_real_products の Lean は Lean の連続実行が受け持つ。",
       ],
     },
   },
@@ -2768,7 +3144,7 @@ D_0G
         math(String.raw`\mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`),
         " である。",
         ref("trace_of_epsilon_V_plus_via_check_eigenvalues"),
-        " の最後の同値",
+        " (3) の同値",
       ]),
       displayMath(
         String.raw`\eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0`,
@@ -2926,7 +3302,7 @@ D_0G
 & \mathrm{tr}\!\left(\varepsilon V^{(+)}\right) > 0
 &&(\because\ \text{(1)}) \\
 \Longrightarrow\ & \eta_{(1,\dots,1)} = +1
-&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\ \text{の同値}\ \eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}(\varepsilon V^{(+)}) > 0) \\
+&&(\because\ \blkref{trace_of_epsilon_V_plus_via_check_eigenvalues}\ \text{(3) の同値}\ \eta_{(1,\dots,1)} = +1 \iff \mathrm{tr}(\varepsilon V^{(+)}) > 0) \\
 \Longrightarrow\ & \varepsilon\check{Q}_{(1,\dots,1)} = \check{Q}_{(1,\dots,1)}
 &&(\because\ \blkref{epsilon_eigenvalue_on_check_Q}\ \text{(1) の}\ \varepsilon\check{Q}_{(1,\dots,1)} = \eta_{(1,\dots,1)}\check{Q}_{(1,\dots,1)})
 \end{aligned}`,
