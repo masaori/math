@@ -8,6 +8,7 @@ import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
 import Ising2DLambda.KacWard.CyclicShiftAdjacentSum
 import Ising2DLambda.NecSuf.KacWard.PeriodicPlaneLiftPeriodTurning
 import Ising2DLambda.NecSuf.KacWard.PlaneDisplacement
+import Ising2DLambda.KacWard.DirectionUnitVector
 
 namespace Ising2DLambda.KacWard
 
@@ -24,6 +25,13 @@ theorem orientedEdgeLatticeStep_from_necSuf {L : ℕ} (e : OrientedEdge L) :
         (fun edge => decide (edge.val < L ^ 2)) e := by
   simp only [orientedEdgeLatticeStep,
     Ising2DLambda.NecSuf.KacWard.planeDisplacement, decide_eq_true_eq]
+
+theorem orientedEdgeLatticeStep_eq_directionUnitVector {L : ℕ}
+    (e : OrientedEdge L) :
+    orientedEdgeLatticeStep e = directionUnitVector (directionNumber e) := by
+  rcases e with ⟨edge, reverse⟩
+  by_cases hh : edge.val < L ^ 2 <;> cases reverse <;>
+    simp [orientedEdgeLatticeStep, directionUnitVector, directionNumber, hh] <;> decide
 
 theorem orientedEdgeLatticeStep_unit {L : ℕ} (e : OrientedEdge L) :
     orientedEdgeLatticeStep e = (0, 1) ∨ orientedEdgeLatticeStep e = (1, 0) ∨

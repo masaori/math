@@ -6839,7 +6839,7 @@ N_{k,l}
 &=\sum_{f\in\mathfrak F(\emptyset)}1
 &&\bigl(\because\ \text{空写像の一意性}\bigr)\\
 &=\sum_{f\in\mathfrak F(\emptyset)}W_{\emptyset}(f)
-&&\bigl(\because\ W_{\emptyset}(f)\text{ は空積}\bigr).
+&&\bigl(\because\ W_{\emptyset}(f)\text{ は空積}\bigr)
 \end{aligned}`),
                 paragraph([
                   "次に ", math(String.raw`S\subseteq\mathcal A`), " と ",
@@ -6870,7 +6870,7 @@ N_{k,l}
 &=(b,\operatorname{ins}(b,f)|_S)
 &&\bigl(\because\ \operatorname{ins}\text{ の }i_0\text{ での値}\bigr)\\
 &=(b,f)
-&&\bigl(\because\ \operatorname{ins}\text{ の }S\text{ 上の値}\bigr).
+&&\bigl(\because\ \operatorname{ins}\text{ の }S\text{ 上の値}\bigr)
 \end{aligned}`),
                 paragraph(["逆向きは、追加した点で"]),
                 displayMath(String.raw`\begin{aligned}
@@ -6888,7 +6888,7 @@ N_{k,l}
 &=(h|_S)(i)
 &&\bigl(\because\ \operatorname{ins}\text{ の }S\text{ 上の値}\bigr)\\
 &=h(i)
-&&\bigl(\because\ \text{制限写像の定義}\bigr).
+&&\bigl(\because\ \text{制限写像の定義}\bigr)
 \end{aligned}`),
                 paragraph([
                   "全点で値が等しいので逆写像になり、", math(String.raw`\operatorname{ins}`),
@@ -6903,7 +6903,7 @@ W_{S^+}(\operatorname{ins}(b,f))
 &=g(i_0,b)\prod_{i\in S}g(i,f(i))
 &&\bigl(\because\ \operatorname{ins}\text{ の定義}\bigr)\\
 &=g(i_0,b)W_S(f)
-&&\bigl(\because\ W_S\text{ の定義}\bigr).
+&&\bigl(\because\ W_S\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph([
                   "と分かれる。帰納法の仮定を ", math(String.raw`S`),
@@ -6924,7 +6924,7 @@ W_{S^+}(\operatorname{ins}(b,f))
 &=\sum_{(b,f)\in\mathcal B\times\mathfrak F(S)}W_{S^+}(\operatorname{ins}(b,f))
 &&\bigl(\because\ \text{直前の重みの等式}\bigr)\\
 &=\sum_{h\in\mathfrak F(S^+)}W_{S^+}(h)
-&&\bigl(\because\ \text{全単射 }\operatorname{ins}\text{ による再添字付け}\bigr).
+&&\bigl(\because\ \text{全単射 }\operatorname{ins}\text{ による再添字付け}\bigr)
 \end{aligned}`),
                 paragraph([
                   "これで帰納段が閉じる。任意の非空の有限部分集合から一点を取り除けば小さい部分集合になるので、",
@@ -6937,7 +6937,7 @@ W_{S^+}(\operatorname{ins}(b,f))
 &=\sum_{f\in\mathfrak F(\mathcal A)}\prod_{i\in\mathcal A}g(i,f(i))
 &&\bigl(\because\ W_{\mathcal A}\text{ の定義}\bigr)\\
 &=\sum_{f:\mathcal A\to\mathcal B}\prod_{i\in\mathcal A}g(i,f(i))
-&&\bigl(\because\ \mathfrak F(\mathcal A)\text{ の定義}\bigr).
+&&\bigl(\because\ \mathfrak F(\mathcal A)\text{ の定義}\bigr)
 \end{aligned}`),
                 paragraph([
                   "使ったのは有限集合の写像と ", ref("def_qbar_polynomial_ring"),
@@ -62970,6 +62970,10 @@ u(\pi_4(3)):=(-1,0)`),
                     labels: ["claim_displacement_is_direction_unit"],
                     habitat: "Z",
                     verification: ["sagemath/check/direction-unit-displacement"],
+                    lean: [
+                      "Ising2DLambda.KacWard.orientedEdgeLatticeStep_eq_directionUnitVector",
+                      "Ising2DLambda.NecSuf.KacWard.planeDisplacement_eq_directionUnitVector",
+                    ],
                     statement: [
                       paragraph([
                         "任意の向き付き辺 ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
