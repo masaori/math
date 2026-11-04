@@ -11,7 +11,7 @@ noncomputable def contactPairCount {L m : ℕ}
     (_hγ : closedNonbacktrackingWalk γ) : ℕ := by
   classical
   exact ((Finset.univ ×ˢ Finset.univ).filter fun p : Fin (m + 1) × Fin (m + 1) =>
-    0 < p.1 ∧ p.1 < p.2 ∧ orientedTarget (γ p.1) = orientedTarget (γ p.2)).card
+    p.1 < p.2 ∧ orientedTarget (γ p.1) = orientedTarget (γ p.2)).card
 
 theorem contactPairCount_from_necSuf {L m : ℕ}
     (γ : Fin (m + 1) → OrientedEdge L)
