@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: 全証明の SageMath 検算として、`W_is_real_symmetric_positive_definite`（W は実対称正定値で可逆）に検算 `sagemath/check/W_is_real_symmetric_positive_definite/` を付けた（未検算 16 件）。肩の行は実の不定元の多項式環、exp を含む行は √t・√(2s_2) を含む実の数体で厳密計算。人手証明の可逆性の段が複素の x に x^⊤Wx を使っていた誤りを、BB' = I・V2_invertible・可逆元の積による W ∈ R^× の証明に直した（主張の内容は不変、Lean は不変で 1 対 1 は Lean の連続実行の受け持ち）。次は `rayleigh_bounds_operator_norm`。
+
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十八個目として、`epsilon_eigenvalue_on_check_Q` を (1)〜(4) に割り (1) を行った。具体版を人手の鎖（`Q̌q = q`・`Q̌(εq) = εq`・`q = (ηη)q`・`(ηη−1)q = O`・成分による `η ∈ {±1}`・`(εQ̌)x = (ηQ̌)x`・列ごとの行列の等式・一意性の 6 行）と同じ行の calc にし、`eta` を `exists_eta_with_generator` の選択にした（型は不変）。本文の `mat_columnwise` に Lean の具体版・必要十分版・`TensorPow M` の系を置いた。本文と SageMath は不変。二回のレビューで必須の指摘が無くなるまで直した。次は同じ主張の (2)。
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百三十七個目として、`epsilon_anticommutes_with_check_Z_Y` の (4) を行った。具体版 `CheckFermi.commute_epsilon_nOp`（3 行）・`commute_epsilon_defFactor`（`εI = Iε`・3 式・`A_ν` の 5 行）・`commute_epsilon_Qproj_succ`（`Q̌_ε` の 3 行）を人手の鎖と同じ calc にし、本文の `product_of_anticommuting_matrices_commutes`・`commuting_with_scalar_multiple` の具体版・必要十分版・`TensorPow M` の系を足した。必要十分版 `NecSuf.commute_parity_num` を同じ 3 行に直し、`Q̌_ε` の側の `NecSuf.commute_parity_finProdLeft_defFactor` ほかを置いた（係数の関係 `d = 1 − c` と `ň` の冪等性は効かない）。本文と SageMath は不変。次は `epsilon_eigenvalue_on_check_Q`。

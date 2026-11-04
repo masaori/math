@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 17 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 412 件のうち、SageMath の検算が無いもの 16 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -376,13 +376,17 @@
 - `max_eigenvector_in_even_sector`（η_{(1,…,1)} = +1、η_ϵ = (−1)^{M_col+|ϵ|}、ε = (−1)^{M_col}Π(I − 2ň_μ)、im Q̌_{(1,…,1)} ⊆ F^{(+)}）: `sagemath/check/max_eigenvector_in_even_sector/`。本文の ψ̌ の ε・ň_μ・Q̌_ϵ・η_ϵ（数体 E_1）と実際の V^{(+)}（QQ）で、K_1 = 2 log y・K_2 = log x の 3 組 × M_col = 2, 3 で全ての鎖の行と主張を厳密に確かめた（等号・主張 42・528・420 件、否定コントロール 18・105・18 件。浮動小数点なし）。言い換えは、Λ̌_{(1,…,1)} が V^{(+)} の固有多項式の最大の根で重複度 1、V^{(+)} − Λ̌_max I の核が im Q̌_{(1,…,1)} に一致することと、ψ̌ を使わない最大固有ベクトルの εv = v で見た。人手証明の計算の誤りは無し。散文の推論を (∵) 付きの鎖にした: (1) は trace_of_epsilon_V_plus の読み方と z > 0 の定め方をつなぐ 3 行の含意、(2) は定義の無い負の冪をやめ準備 (P1)(P2) と非負の冪の 8 行、(3) は 3 行、(4) は Lean の `epsilon_mul_Qproj_univ` と同じ εQ̌ = ηQ̌ = 1_ℂQ̌ = Q̌ と y = Q̌x からの 4 行・4 行、言い換えは max_eigenvalue_of_V_plus_simple (3) の 2 行（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（(2) の (−1)^{M+|ϵ|} の鎖と y = Q̌x からの鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
 - `Z_equals_trace_of_W`（tr((V_1V_2)^n) = tr(W^n)、Z = tr(W^{N_row})）: `sagemath/check/Z_equals_trace_of_W/`。準備の二つの帰納法と本体の鎖の各行を、成分を不定元に置いた 1・2 次の行列と QQ(i) の乱数の 3・4 次の行列で厳密に（等号 140・216・144 件）、主張を本文の V_1・V_2・B（exp(K_1/2)・exp(K_2) を QQ(q,r) の不定元に置き、B は D のスペクトル射影、V_1・V_2 は成分の式）で確かめ、Z は分配関数の定義の全配位の和と 8 組の (N_row, M_col) で比べた。人手証明の計算の誤りは無し。散文の「結合法則で括り直す」「冪の定義」「n−1 個の積」を、def_exp (1) の冪による二つの帰納法（(X(YX)^k)Y = (XY)^{k+1}、W^{k+1} = ((B(V_2V_1)^k)V_2)B）と結合律・単位律の行に分けた（本体の順と主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変（`DefinitionSymmetrizedTransferMatrix.lean` の `symTransfer_pow_succ`・`mul_pow_mul_eq`・`trace_symTransfer_pow` は同じ二つの補題と本体の形で、行ごとの 1 対 1 の対応づけは Lean の連続実行の受け持ち）。
+- `W_is_real_symmetric_positive_definite`（W = V_1^{1/2}V_2V_1^{1/2} は実対称正定値で可逆）: `sagemath/check/W_is_real_symmetric_positive_definite/`。Step 1・Step 2 の肩の行（σ_m^zσ_{m+1}^z・K_1D・S_2 の実対称性、S_2 = iK_2^*H_2 = K_2^*Σσ^x、エルミート性、冪と def_exp の部分和の実対称性）を K_1・K_2^* を実の不定元にした QQ(i) 上の多項式環で M_col = 2..5 で、exp を含む行（B・A の実対称正定値性、B'B = I、BB = V_1、V_2 = cA、W の鎖 4 行・転置の鎖 4 行・合同による正定値性、可逆性の鎖）と主張を K_1 = 2 log y・K_2 = log x（x, y ∈ {2, 3}）の √t・√(2s_2) を含む実の数体で M_col = 2..4 で厳密に確かめた（等号 126・216 件、否定コントロール 12・62 件。浮動小数点なし）。**人手証明の誤りを直した**: 旧い可逆性の段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性は x ∈ ℂ^n の x^*Wx の条件で、複素の x では従わない（検算で x^⊤Wx = 0 となる x ≠ 0 を作った）。核が {0} から可逆を導く主張も本文に無かった。BB' = I の 3 行の鎖と V2_invertible・def_invertible_elements_of_R (ii) で W ∈ R^× を示す形にした（主張の内容は不変）。一回のレビューで必須の指摘は無く、任意の指摘（構成上一致する比較の明記、近い取り違えの対照、根拠の補足）を反映した。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変）: Lean の具体版は実行列で可逆性を IsUnit から作っており、人手の新しい可逆性の段（BB' の鎖、V2_invertible、可逆元の積）と 1 対 1 でない。Step 1・Step 2 の散文（「同じ議論」「極限も実対称」、転置の積の法則）は名前だけの根拠のまま残る（転置の積の法則と実成分の行列の積の主張は本文に無い）。
 
 ## 次の一歩
-`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `W_is_real_symmetric_positive_definite`（`--list` の先頭）から、文書順に検算を足す。
+`thermodynamic_limit_row_limit_and_max_eigenvalue.ts` の `rayleigh_bounds_operator_norm`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`W_is_real_symmetric_positive_definite` の検算で見つかった（直した）: 可逆性の段が複素ベクトル x に x^⊤Wx を使って正定値性を当てはめていた（W = I、x = (1, i) で x^⊤Wx = 0）。核が {0} から可逆を導く主張も本文に無かった。既存の主張だけで W ∈ R^× を示す形にした。下流の `trace_power_upper_bound` 付近は「W が可逆なので W^ax ≠ 0」と可逆性から核の自明性を使っており、その一行の根拠は下流のブロックの検算で扱う。
 
 - 2026-11-04、`Z_equals_trace_of_W` のレビューで見つかった（上流の 1 ブロック 1 主張。今回の差分より前から）: `def_transfer_matrix_square_root` は定義のブロックの中で `V_1^{1/2}V_1^{1/2} = V_1` を `theorem_exp_product` から導いて述べている。`Z_equals_trace_of_W` の準備 1 の BB = V_1 はこの定義を引いている。直すには主張を独立のブロックへ分け、引く側を付け替える。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 

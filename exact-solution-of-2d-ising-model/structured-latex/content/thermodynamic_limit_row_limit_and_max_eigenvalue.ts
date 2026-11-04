@@ -313,9 +313,13 @@ Z(K_1,K_2)
         math(String.raw`W`),
         " は成分がすべて実数で転置について対称であり、",
         ref("def_hermitian_positive_definite"),
-        " の意味で正定値である。とくに ",
+        " の意味で正定値である。また ",
         math(String.raw`W`),
-        " は可逆である。",
+        " は ",
+        ref("def_invertible_elements_of_R"),
+        "（",
+        math(String.raw`M \to M_{\mathrm{col}}`),
+        "）の意味で可逆である。",
       ]),
     ],
     proof: [
@@ -445,35 +449,56 @@ W^\top
   &&\bigl(\because\ W=B V_2 B\ \text{の定義 }\blkref{def_symmetrized_transfer_matrix}\bigr)
 \end{aligned}`),
       paragraph([
-        "可逆性：",
-        math(String.raw`Wx = 0`),
-        " と仮定すると、次の鎖を得る。",
+        "可逆性。",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`M`),
+        " を ",
+        math(String.raw`M_{\mathrm{col}}`),
+        " に取った ",
+        math(String.raw`R=\mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " と、その単位行列 ",
+        math(String.raw`I`),
+        "・可逆元の集合 ",
+        math(String.raw`R^\times`),
+        " を用いる（",
+        math(String.raw`-\tfrac12 K_1D := -\bigl(\tfrac12 K_1D\bigr)`),
+        " は ",
+        ref("def_matrix_negation"),
+        " の符号反転）。Step 2 の ",
+        math(String.raw`B'B = I`),
+        " と次の鎖から ",
+        math(String.raw`B \in R^\times`),
+        " である（",
+        ref("def_invertible_elements_of_R"),
+        " の ",
+        math(String.raw`g \to B,\ h \to B'`),
+        "）。",
       ]),
       displayMath(String.raw`\begin{aligned}
-x^\top W x
-&=x^\top(Wx)
-  &&\bigl(\because\ \text{行列積の結合則}\bigr)\\
-&=x^\top 0
-  &&\bigl(\because\ Wx=0\bigr)\\
-&=0
-  &&\bigl(\because\ \text{零ベクトルとの積}\bigr)
+BB'
+&=\exp\!\left(\tfrac12 K_1D\right)\exp\!\left(-\tfrac12 K_1D\right)
+  &&\bigl(\because\ B,\ B'\ \text{の置き方}\bigr)\\
+&=\exp\!\left(-\left(-\tfrac12 K_1D\right)\right)\exp\!\left(-\tfrac12 K_1D\right)
+  &&\bigl(\because\ \blkref{matrix_double_negation}\ (m\to 2^{M_{\mathrm{col}}},\ n\to 2^{M_{\mathrm{col}}},\ A\to \tfrac12 K_1D)\bigr)\\
+&=I
+  &&\bigl(\because\ \blkref{exp_of_negative_is_left_inverse}\ (n\to 2^{M_{\mathrm{col}}},\ A\to -\tfrac12 K_1D)\bigr)
 \end{aligned}`),
-      paragraph([
-        "正定値性より ",
-        math(String.raw`x = 0`),
-        "。よって ",
-        math(String.raw`W`),
-        " の核は ",
-        math(String.raw`\{0\}`),
-        " であり ",
-        math(String.raw`W`),
-        " は可逆。",
-      ]),
+      displayMath(String.raw`BV_2\in R^\times
+\qquad\bigl(\because\ B \in R^\times,\ \blkref{V2_invertible},\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to B,\ g_2\to V_2)\bigr)`),
+      displayMath(String.raw`\begin{aligned}
+W
+&=\left(BV_2\right)B
+  &&\bigl(\because\ \blkref{def_symmetrized_transfer_matrix},\ B = V_1^{1/2}\ \blkref{def_transfer_matrix_square_root}\bigr)\\
+&\in R^\times
+  &&\bigl(\because\ \text{前の式の}\ BV_2\in R^\times,\ B \in R^\times,\ \blkref{def_invertible_elements_of_R}\text{ (ii)}\ (g_1\to BV_2,\ g_2\to B)\bigr)
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 が「def_hermitian_positive_definite の最後の注意より実対称行列はエルミート」と定義の中の主張を引いていたのを、それを切り出した主張 real_symmetric_matrix_is_hermitian と定義 def_real_symmetric_complex_matrix を引く形にし、当てはめ（n → 2^{M_col}、A → K_1D と A → S_2）を書いた。exp_hermitian_is_positive_definite を当てはめる ½K_1D がエルミートであることの根拠が無かったので、real_multiple_of_hermitian_is_hermitian（α → ½、A → K_1D）を足した。Step 1 の K_1D・S_2 の実対称性の論証（名前だけの根拠が残る）は変えていない。主張は変えていない。",
+        "2026-11-04: SageMath の検算（sagemath/check/W_is_real_symmetric_positive_definite/）を付けるにあたり、可逆性の段を直した。旧い段は Wx = 0 から x^⊤Wx = 0 を作って正定値性で x = 0 としていたが、正定値性（def_hermitian_positive_definite）は x ∈ ℂ^n の x^*Wx についての条件で、複素の x では x^⊤Wx = 0 から x = 0 は従わない（検算で、実対称正定値な W と x = u + iv（u^⊤Wu = v^⊤Wv、u^⊤Wv = 0）で x^⊤Wx = 0 となる例を作った）。また核が {0} であることから可逆を導く主張は本文に無かった。可逆性を、BB' = I の 3 行の鎖（matrix_double_negation・exp_of_negative_is_left_inverse）と Step 2 の B'B = I による B ∈ R^×、V2_invertible、def_invertible_elements_of_R (ii) の 2 回の適用で示す形にした。主張の「とくに W は可逆」を、def_invertible_elements_of_R の意味で可逆と書いた（内容は不変）。",
       ],
     },
   },
