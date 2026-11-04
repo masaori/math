@@ -63388,6 +63388,10 @@ s(i_j)-s(i_k)
                     labels: ["claim_plane_lift_endpoint_winding"],
                     habitat: "Z",
                     verification: ["sagemath/check/plane-lift-endpoint-winding"],
+                    lean: [
+                      "Ising2DLambda.KacWard.planeLift_endpoint_winding",
+                      "Ising2DLambda.NecSuf.KacWard.finite_lift_endpoint",
+                    ],
                     statement: [
                       paragraph([
                         "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
@@ -63414,7 +63418,7 @@ P_m(\gamma)_{\mathrm{row}}
 &=P_0(\gamma)_{\mathrm{row}}+\sum_{k=1}^{m}\delta_{\mathrm{row}}(\vec e_k)
 &&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式を加える}\bigr)\\
 &=P_0(\gamma)_{\mathrm{row}}+L\,w_{\mathrm v}(\gamma)
-&&\bigl(\because\ \blkref{claim_closed_walk_plane_displacement}\bigr),\\
+&&\bigl(\because\ \blkref{claim_closed_walk_plane_displacement}\bigr)\\
 P_m(\gamma)_{\mathrm{col}}
 &=P_0(\gamma)_{\mathrm{col}}+\sum_{k=1}^{m}\delta_{\mathrm{col}}(\vec e_k)
 &&\bigl(\because\ \blkref{def_plane_lift}\text{ の有限漸化式を加える}\bigr)\\

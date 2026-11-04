@@ -1248,6 +1248,8 @@ import Ising2DLambda.KacWard.VertexSimplePlaneLiftDistinct
 import Ising2DLambda.KacWard.VertexSimplePlaneLiftDistinctFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.ClosedWalkPlaneDisplacement
 import Ising2DLambda.KacWard.ClosedWalkPlaneDisplacement
+import Ising2DLambda.NecSuf.KacWard.PlaneLiftEndpointWinding
+import Ising2DLambda.KacWard.PlaneLiftEndpointWinding
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.TerminalMatrixFromNecSuf
 import Ising2DLambda.KacWard.TerminalMatrixDeterminant
