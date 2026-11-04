@@ -1470,7 +1470,7 @@ P_{k+1}\check{Q}_\epsilon
         "）。",
         ref("eigenvalues_of_V_plus"),
         " の ",
-        math(String.raw`\check\Lambda_\epsilon \in \mathbb{R}_{>0}`),
+        math(String.raw`\check\Lambda_\epsilon \in \mathbb{R}`),
         " による行列のスカラー倍 ",
         math(String.raw`\check\Lambda_\epsilon\check{Q}_\epsilon`),
         " は、",

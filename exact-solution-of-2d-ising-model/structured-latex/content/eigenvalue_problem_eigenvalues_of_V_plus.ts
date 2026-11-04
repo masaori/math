@@ -5853,7 +5853,7 @@ V^{(+)}
       displayMath(
         String.raw`\check\Lambda_\epsilon := (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
 \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
-\left(\epsilon_\mu - \tfrac{1}{2}\right)\right) \in \mathbb{R}_{>0}`,
+\left(\epsilon_\mu - \tfrac{1}{2}\right)\right) \in \mathbb{R}`,
       ),
       paragraph(["とおく。このとき"]),
       list([
@@ -5899,7 +5899,23 @@ V^{(+)}
         ],
         [
           math(String.raw`\text{(2)}`),
-          " 固有値はすべて正の実数であり、最大のものは全ての ",
+          " 各 ",
+          math(String.raw`\epsilon`),
+          " について ",
+          math(String.raw`\check\Lambda_\epsilon > 0`),
+          " である。したがって ",
+          math(String.raw`V^{(+)}`),
+          " の固有値はどれも、正の実数 ",
+          math(String.raw`\check\Lambda_\epsilon`),
+          " を ",
+          ref("inclusion_rr_to_cc"),
+          " で ",
+          math(String.raw`\mathbb{C}`),
+          " へ移した ",
+          math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+          " である。",
+          math(String.raw`\check\Lambda_\epsilon`),
+          " のうち最大のものは全ての ",
           math(String.raw`\epsilon_\mu = 1`),
           " を取ったとき、最小のものは全ての ",
           math(String.raw`\epsilon_\mu = 0`),
@@ -6216,13 +6232,63 @@ x &= Ix
         " がある。",
       ]),
       paragraph([
-        "(2) ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
-        " と ",
+        "(2) 正値性。",
+        math(String.raw`\epsilon`),
+        " を任意に取る。(1) の ",
+        math(String.raw`a`),
+        " の置き方より ",
+        math(String.raw`a > 0`),
+        "（所属は ",
+        ref("def_second_transfer_matrix_prefactor"),
+        "）である。",
+        math(String.raw`\check{g}(\epsilon) \in \mathbb{R}`),
+        "（",
+        ref("eigenvalues_of_check_Vprime"),
+        " の ",
+        math(String.raw`\check{g}`),
+        " の定義）なので、",
+        ref("real_exp_positive"),
+        "（",
+        math(String.raw`x \to \check{g}(\epsilon)`),
+        "）より ",
         math(String.raw`\exp(\check{g}(\epsilon)) > 0`),
-        " より ",
+        " である。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\Lambda_\epsilon
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+   &&(\because\ \check\Lambda_\epsilon\ \text{の定義}) \\
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2\ \text{を右辺から左辺へ}) \\
+&= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義を右辺から左辺へ}) \\
+&= a\exp(\check{g}(\epsilon))
+   &&(\because\ a\ \text{の置き方を右辺から左辺へ}) \\
+&> 0
+   &&(\because\ \mathbb{R}\ \text{で}\ u > 0,\ v > 0\ \text{なら}\ uv > 0\ \bigl(u \to a,\ v \to \exp(\check{g}(\epsilon))\bigr)\ \text{に前置きの 2 つの不等号を当てる})
+\end{aligned}`,
+      ),
+      paragraph([
+        "である。",
+        math(String.raw`\epsilon`),
+        " は任意だったので、全ての ",
+        math(String.raw`\epsilon`),
+        " について ",
         math(String.raw`\check\Lambda_\epsilon > 0`),
-        "。",
+        " である。(1) より ",
+        math(String.raw`V^{(+)}`),
+        " の固有値はどれもある ",
+        math(String.raw`\epsilon`),
+        " の ",
+        math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+        " に等しいので、正の実数 ",
+        math(String.raw`\check\Lambda_\epsilon`),
+        " を ",
+        ref("inclusion_rr_to_cc"),
+        " で ",
+        math(String.raw`\mathbb{C}`),
+        " へ移した元である。",
       ]),
       paragraph([
         "大小の比較。",
@@ -6286,6 +6352,7 @@ x &= Ix
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（M=2,3,4,5・6 組の (K_1,K_2) で、V^{(+)} の 2^M 個の固有値全体が {Λ̌_ε} と相対誤差 9.0e-12 以下で一致。V^{(+)} は行列指数関数から直接構成しており、証明の経路とは独立）。",
         "2026-11-04: (1) の固有関係の名前だけの根拠（「定数 c の決定」「V̌' の固有値」「Λ̌_ε の定義」と、Q̌_εV^{(+)} を「同じ式変形を Step 3' に対して行い」で済ませた段落）を、a := (2s_2)^{M_col/2} の置き方と、constant_c_value_even_sector・scalar_multiple_factors_out_of_left_factor（右から掛ける形は right_factor）・eigenvalues_of_check_Vprime・scalar_multiple_is_associative・real_inclusion_preserves_product・a の置き方・ǧ の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・Λ̌_ε の定義の 9 行の鎖二本にした。同じ回に constant_c_value_even_sector の主張文と最後の鎖が s_2 = sinh 2K_2 の根拠に def_transfer_matrix_symbols（式を持たない）を引いていたのを def_indexed_hyperbolic_abbreviations に直した。主張文に、右辺の Λ̌_ε は inclusion_rr_to_cc で ℂ へ移して掛けることを書いた（値は不変）。Lean の Ising2D.VPlus_mul_Qproj・Ising2D.Qproj_mul_VPlus は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_eigen_relation_chains.sage。",
         "2026-11-04: (1) の対角化可能性・重複度・総個数の段落が「eigenvalues_of_check_Vprime の Step 4 と同じ議論」「スカラー倍は固有ベクトルを変えない」と名前だけで済ませていたので、V^{(+)} について書き下した。y ∈ im Q̌_ε から Q̌_εy = y の 8 行の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・def_exp (1)・check_joint_eigenspace_decomposition (1)）、V^{(+)}y = (Λ̌_ε)_ℂy の 5 行の鎖（上の等式・mat_mult_associative・(1) の第一の鎖・scalar_multiple_factors_out_of_left_factor）、check_joint_eigenspace_decomposition (4)・(5) から、各 im Q̌_ε の 0 でない元 q_ε を任意に取ると {q_ε} が固有ベクトルの基底になることを示す段落（見出しは「対角化可能性と本数」）と、固有値がどれもある (Λ̌_ε)_ℂ に等しいことの鎖（左から Q̌_ε を掛ける 5 行、全ての ε で (Λ̌_ε)_ℂ ≠ λ と仮定したときの d_ε(Q̌_εx) = O の 4 行と Q̌_εx = O の 5 行、x = O の 5 行。max_eigenvalue_of_V_plus_simple (3) と同じ行）である。主張文の「重複度を込めて {Λ̌_ε}_ε で尽くされる」は重複度が本文で定まっていないので、「各 ε の im Q̌_ε の 0 でない元を 1 本ずつ取ると固有ベクトルの基底」「固有値はどれもある (Λ̌_ε)_ℂ に等しい」と書き直した（内容は不変）。Lean の Ising2D.VPlus_mulVec_of_mem_range は後の鎖と同じ行の calc（前の鎖は Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec）、基底は Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces、固有値の鎖は Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigenvalue・Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue・Ising2D.exists_checkBigLambda_eq_of_eigenvalue。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_diagonalizability_chains.sage。",
+        "2026-11-04: (2) の「(2s_2)^{M_col/2} > 0 と exp(ǧ(ε)) > 0 より Λ̌_ε > 0」は二つの不等号の根拠と積の正値性を名前だけで済ませていたので、a > 0（所属は def_second_transfer_matrix_prefactor）、exp(ǧ(ε)) > 0（real_exp_positive（x → ǧ(ε))）の前置きと、Λ̌_ε の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・ǧ(ε) の定義・a の置き方・ℝ で u > 0, v > 0 なら uv > 0 の 5 行の鎖にし、(1) と合わせて固有値が正の実数を ℂ へ移した元であることを書いた。主張の Λ̌_ε の定義に書いていた所属 ℝ_{>0} は (2) で示す内容なので ℝ にし、(2) の主張文の「固有値はすべて正の実数」を「各 ε で Λ̌_ε > 0。固有値はどれも正の実数 Λ̌_ε を ℂ へ移した (Λ̌_ε)_ℂ」と書き直した（内容は不変。(1) より固有値の集合は {(Λ̌_ε)_ℂ} なので、「固有値の最大のもの」を、順序のある ℝ の元 Λ̌_ε の最大のものと読み替えた）。同じ回に、Λ̌_ε ∈ ℝ_{>0} を定義の所属として引いていた c_value_eigenvalues_and_strict_maximum の前置きと eigenvector_of_max_eigenvalue の章の 1 か所を Λ̌_ε ∈ ℝ に直した（どちらも ℝ の所属しか使わない）。Lean の Ising2D.checkBigLambda_pos は同じ行の calc、固有値の主張は Ising2D.eigenvalue_VPlus_eq_positive_real。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_positivity_chain.sage。",
       ],
     },
   },
@@ -6756,7 +6823,7 @@ V^{(+)}y
         " と ",
         ref("eigenvalues_of_V_plus"),
         " の ",
-        math(String.raw`\check\Lambda_\epsilon \in \mathbb{R}_{>0}`),
+        math(String.raw`\check\Lambda_\epsilon \in \mathbb{R}`),
         "、",
         ref("def_Lambda_delta_M"),
         " の ",

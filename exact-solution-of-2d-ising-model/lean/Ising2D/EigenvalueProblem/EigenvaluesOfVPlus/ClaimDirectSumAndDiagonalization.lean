@@ -18,6 +18,7 @@
 人手 `eigenvalues_of_V_plus` (1) の対角化可能性の段落と 1 対 1 の具体版は `exists_eigenBasis_VPlus_of_joint_eigenspaces`、
 固有値がどれもある `(Λ̌_ε)_ℂ` に等しいことの鎖の具体版は `checkBigLambda_smul_Qproj_mulVec_of_eigenvalue`・
 `Qproj_mulVec_eq_zero_of_ne_eigenvalue`・`exists_checkBigLambda_eq_of_eigenvalue` である。
+(2) の「固有値はどれも正の実数 `Λ̌_ε` を `ℂ` へ移した元」は、それと `checkBigLambda_pos`（`TheoremEigenvaluesVPlus.lean`）を合わせた `eigenvalue_VPlus_eq_positive_real` である。
 基底の構成の必要十分版は既存の `NecSuf.exists_eigenBasis_of_matrix_proj`（同じ `collectedBasis` の手順で、各成分が 1 次元であることは使わない。
 その特殊化が `exists_eigenBasis_VPlus`）。固有値の鎖の必要十分版は置いていない。鎖は `NecSuf.eq_proj_of_eigen` の中の `hchain` と同じ行で、
 `λ` を一般にした形と背理法の段を `NecSuf` に足すかは状態台帳に残した。
@@ -221,6 +222,21 @@ theorem exists_checkBigLambda_eq_of_eigenvalue {r : ℕ} (F : CheckFermiSetup (r
         rw [hε₀, Matrix.replicateCol_mulVec]           -- 数ベクトルへ戻す（運ぶ段）
     _ = Matrix.replicateCol (Fin 1) (0 : Conf (r + 1) → ℂ) := by rw [hz Finset.univ]
                                                         -- 上で示した `Q̌_εx = O`（`ε → (1,…,1)`）
+
+/-- **原文 `eigenvalues_of_V_plus` (2) の最初の段落の結び**: `V^{(+)}` の固有値はどれも、正の実数 `Λ̌_ε` を
+`inclusion_rr_to_cc` で `ℂ` へ移した `(Λ̌_ε)_ℂ` である。人手と同じく、(1) の「固有値はどれもある `(Λ̌_ε)_ℂ` に等しい」
+（`exists_checkBigLambda_eq_of_eigenvalue`）と上の `checkBigLambda_pos` を合わせる。 -/
+theorem eigenvalue_VPlus_eq_positive_real {r : ℕ} (F : CheckFermiSetup (r + 1))
+    (g : CheckIdx (r + 1) → ℝ) {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
+    (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
+    (hVeq : VPlus (r + 1) s2 K1 K2star = c • F.Vprime g)
+    {lam : ℂ} {x : Conf (r + 1) → ℂ} (hx0 : x ≠ 0)
+    (hx : (VPlus (r + 1) s2 K1 K2star).mulVec x = lam • x) :
+    ∃ T : Finset (CheckIdx (r + 1)),
+      0 < checkBigLambda F g s2 T ∧ ((checkBigLambda F g s2 T : ℝ) : ℂ) = lam := by
+  obtain ⟨T, hT⟩ := exists_checkBigLambda_eq_of_eigenvalue F g hK1 hK2 hs2 hVeq hx0 hx
+                                                        -- (1): 固有値はどれもある `(Λ̌_ε)_ℂ` に等しい
+  exact ⟨T, checkBigLambda_pos F g hs2 T, hT⟩          -- 上の正値性（`ε → T`）
 
 /-- 人手 (1) の「総個数 `2^{M_col}`」: 基底の添字（`ε` の集合）の個数。 -/
 theorem card_eps_index (r : ℕ) : Fintype.card (Finset (CheckIdx (r + 1))) = 2 ^ (r + 1) := by
