@@ -97,36 +97,200 @@ export default defineBlocks([
     ],
     proof: [
       paragraph([
-        math(String.raw`B := V_1^{1/2}`),
-        " と略記する。",
-        ref("def_transfer_matrix_square_root"),
-        " より ",
-        math(String.raw`BB = V_1`),
+        math(String.raw`n_0 := 2^{M_{\mathrm{col}}} \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`B := V_1^{1/2} \in \mathrm{Mat}(n_0,\mathbb{C})`),
+        " と書く。",
+        math(String.raw`V_1, V_2 \in \mathrm{Mat}(n_0,\mathbb{C})`),
+        " は ",
+        ref("def_transfer_matrix"),
+        " のものである。行列の積は ",
+        ref("mat_mult"),
+        "、行列の冪は ",
+        ref("def_exp"),
+        " (1) の ",
+        math(String.raw`X^0 := I`),
+        "、",
+        math(String.raw`X^{m+1} := X^m X`),
+        "（",
+        math(String.raw`X \in \mathrm{Mat}(n_0,\mathbb{C})`),
+        "、",
+        math(String.raw`m \in \mathbb{Z}_{\geq 0}`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(n_0,\mathbb{C})}`),
+        "）による。三つ以上の行列の積は括弧を省かずに書く。",
+      ]),
+      paragraph(["準備 1（", math(String.raw`B`), " と ", math(String.raw`W`), " の関係）。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+BB &= V_1
+  &&\bigl(\because\ \blkref{def_transfer_matrix_square_root}\bigr)\\
+W &= \left(BV_2\right)B
+  &&\bigl(\because\ \blkref{def_symmetrized_transfer_matrix}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "準備 2（開いた積の冪）。",
+        math(String.raw`X, Y \in \mathrm{Mat}(n_0,\mathbb{C})`),
+        "、",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`\left(X(YX)^{k}\right)Y = (XY)^{k+1}`),
+        " を ",
+        math(String.raw`k`),
+        " の帰納法で示す。",
+        math(String.raw`k = 0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(X(YX)^{0}\right)Y
+  &= (XI)Y
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (YX)^0 := I\bigr)\\
+  &= XY
+  &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
+  &= I(XY)
+  &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+  &= (XY)^{0}(XY)
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^0 := I\bigr)\\
+  &= (XY)^{1}
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^{0+1} := (XY)^0(XY)\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k`),
+        " で成り立つとすると、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\left(X(YX)^{k+1}\right)Y
+  &= \left(X\left((YX)^{k}(YX)\right)\right)Y
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (YX)^{k+1} := (YX)^k(YX)\bigr)\\
+  &= \left(\left(X(YX)^{k}\right)(YX)\right)Y
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(\left(X(YX)^{k}\right)Y\right)X\right)Y
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left((XY)^{k+1}X\right)Y
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+  &= (XY)^{k+1}(XY)
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= (XY)^{k+2}
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (XY)^{(k+1)+1} := (XY)^{k+1}(XY)\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`k + 1`),
+        " でも成り立つ。ゆえにすべての ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " で成り立つ。",
+      ]),
+      paragraph([
+        "準備 3（",
+        math(String.raw`W`),
+        " の冪）。",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " について ",
+        math(String.raw`W^{k+1} = \left(\left(B(V_2V_1)^{k}\right)V_2\right)B`),
+        " を ",
+        math(String.raw`k`),
+        " の帰納法で示す。",
+        math(String.raw`k = 0`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W^{1}
+  &= W^{0}W
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^{0+1} := W^0W\bigr)\\
+  &= IW
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^0 := I\bigr)\\
+  &= W
+  &&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)\\
+  &= \left(BV_2\right)B
+  &&\bigl(\because\ \text{準備 1}\bigr)\\
+  &= \left(\left(BI\right)V_2\right)B
+  &&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
+  &= \left(\left(B(V_2V_1)^{0}\right)V_2\right)B
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (V_2V_1)^0 := I\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`k`),
+        " で成り立つとし、",
+        math(String.raw`C := B(V_2V_1)^{k} \in \mathrm{Mat}(n_0,\mathbb{C})`),
+        " と書くと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+W^{k+2}
+  &= W^{k+1}W
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ W^{(k+1)+1} := W^{k+1}W\bigr)\\
+  &= \left(\left(\left(B(V_2V_1)^{k}\right)V_2\right)B\right)W
+  &&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+  &= \left(\left(CV_2\right)B\right)W
+  &&\bigl(\because\ C\ \text{の置き方}\bigr)\\
+  &= \left(\left(CV_2\right)B\right)\left(\left(BV_2\right)B\right)
+  &&\bigl(\because\ \text{準備 1}\bigr)\\
+  &= \left(\left(\left(CV_2\right)B\right)\left(BV_2\right)\right)B
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(\left(\left(CV_2\right)B\right)B\right)V_2\right)B
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(\left(CV_2\right)\left(BB\right)\right)V_2\right)B
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(\left(CV_2\right)V_1\right)V_2\right)B
+  &&\bigl(\because\ \text{準備 1}\bigr)\\
+  &= \left(\left(C\left(V_2V_1\right)\right)V_2\right)B
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(\left(B(V_2V_1)^{k}\right)\left(V_2V_1\right)\right)V_2\right)B
+  &&\bigl(\because\ C\ \text{の置き方}\bigr)\\
+  &= \left(\left(B\left((V_2V_1)^{k}\left(V_2V_1\right)\right)\right)V_2\right)B
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \left(\left(B(V_2V_1)^{k+1}\right)V_2\right)B
+  &&\bigl(\because\ \blkref{def_exp}\ (1)\ \text{の}\ (V_2V_1)^{k+1} := (V_2V_1)^k(V_2V_1)\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "となり ",
+        math(String.raw`k + 1`),
+        " でも成り立つ。ゆえにすべての ",
+        math(String.raw`k \in \mathbb{Z}_{\geq 0}`),
+        " で成り立つ。",
+      ]),
+      paragraph([
+        "本体。",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " について ",
+        math(String.raw`k := n - 1 \in \mathbb{Z}_{\geq 0}`),
+        " と置くと ",
+        math(String.raw`k + 1 = n`),
         " であり、",
-        ref("def_symmetrized_transfer_matrix"),
-        " より ",
-        math(String.raw`W = BV_2B`),
-        " である。トレースの巡回性は ",
-        ref("trace_basic_properties"),
-        " (2) のものである。次の等式鎖を得る。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \mathrm{tr}\!\left((V_1V_2)^{n}\right)
-&= \mathrm{tr}\!\left(V_1\,\underbrace{(V_2\,V_1)(V_2\,V_1)\cdots(V_2\,V_1)}_{n-1\ \text{個}}\,V_2\right)
-   \quad (\because \text{行列の積の結合法則で括り直す}) \\
-&= \mathrm{tr}\!\left(V_1\left(V_2V_1\right)^{n-1}V_2\right)
-   \quad (\because \text{冪の定義}) \\
-&= \mathrm{tr}\!\left(B\,B\left(V_2V_1\right)^{n-1}V_2\right)
-   \quad (\because V_1 = BB) \\
-&= \mathrm{tr}\!\left(B\left(V_2V_1\right)^{n-1}V_2\,B\right)
-   \quad (\because \text{巡回性 } \mathrm{tr}(AB)=\mathrm{tr}(BA)\ \text{を}\ A=B,\ B=B(V_2V_1)^{n-1}V_2\ \text{に適用}) \\
-&= \mathrm{tr}\!\left(B\,\underbrace{(V_2\,BB)(V_2\,BB)\cdots(V_2\,BB)}_{n-1\ \text{個}}\,V_2\,B\right)
-   \quad (\because V_1 = BB\ \text{と冪の定義}) \\
-&= \mathrm{tr}\!\left((B V_2 B)^{n}\right)
-   \quad (\because \text{行列の積の結合法則で括り直す}) \\
-&= \mathrm{tr}\!\left(W^{n}\right)
-   \quad (\because W = BV_2B)
+  &= \mathrm{tr}\!\left(\left(V_1(V_2V_1)^{k}\right)V_2\right)
+  &&\bigl(\because\ \text{準備 2 を}\ X := V_1,\ Y := V_2\ \text{に適用}\bigr)\\
+  &= \mathrm{tr}\!\left(\left(\left(BB\right)(V_2V_1)^{k}\right)V_2\right)
+  &&\bigl(\because\ \text{準備 1}\bigr)\\
+  &= \mathrm{tr}\!\left(\left(B\left(B(V_2V_1)^{k}\right)\right)V_2\right)
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \mathrm{tr}\!\left(B\left(\left(B(V_2V_1)^{k}\right)V_2\right)\right)
+  &&\bigl(\because\ \blkref{mat_mult_associative}\bigr)\\
+  &= \mathrm{tr}\!\left(\left(\left(B(V_2V_1)^{k}\right)V_2\right)B\right)
+  &&\bigl(\because\ \blkref{trace_basic_properties}\ (2)\ \text{の巡回性の左の因子に}\ B\ \text{を、右の因子に}\ \left(B(V_2V_1)^{k}\right)V_2\ \text{を当てる}\bigr)\\
+  &= \mathrm{tr}\!\left(W^{n}\right)
+  &&\bigl(\because\ \text{準備 3}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["とくに ", math(String.raw`N_{\mathrm{row}} \in \mathbb{Z}_{\geq 1}`), " について"]),
+      displayMath(
+        String.raw`\begin{aligned}
+Z(K_1,K_2)
+  &= \mathrm{tr}\!\left((V_1V_2)^{N_{\mathrm{row}}}\right)
+  &&\bigl(\because\ \blkref{partition_function_via_transfer_matrix}\bigr)\\
+  &= \mathrm{tr}\!\left(W^{N_{\mathrm{row}}}\right)
+  &&\bigl(\because\ \text{本体を}\ n := N_{\mathrm{row}}\ \text{に適用}\bigr)
 \end{aligned}`,
       ),
     ],
@@ -134,6 +298,7 @@ export default defineBlocks([
       status: "added",
       notes: [
         "2026-09-26: V_1, V_2 の定義を分配関数の章の成分定義 1 つにし、パウリ行列表示を転送行列の章の主張にした（記号を M_col, N_row, K_1, K_2 に統一）。参照を新しいラベル（<partition_function_via_transfer_matrix>・<def_transfer_matrix>・<config_numbering_equals_kronecker_numbering>・<def_row_configurations>）へ付け替え、Z(J,J') を Z(K_1,K_2) にし、読み替えの断り書きを除いた。",
+        "2026-11-04: SageMath の検算（sagemath/check/Z_equals_trace_of_W/）を付けるにあたり、証明を (∵) 付きの鎖にした。散文の「結合法則で括り直す」「冪の定義」「n−1 個の積」を、冪の定義 <def_exp> (1) による二つの帰納法（準備 2: (X(YX)^k)Y = (XY)^{k+1}、準備 3: W^{k+1} = ((B(V_2V_1)^k)V_2)B）と <mat_mult_associative>・単位行列の左右の単位律の行に分けた。本体の鎖は元の証明と同じ順（V_1(V_2V_1)^{n−1}V_2 → BB を代入 → 巡回性 → W^n）で、内容は不変。",
       ],
     },
   },

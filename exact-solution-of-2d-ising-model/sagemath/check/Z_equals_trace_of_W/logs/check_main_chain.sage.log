@@ -1,0 +1,8 @@
+不定元 s=1: ok=True
+不定元 s=2: ok=True
+QQ(i) 乱数 s=3: ok=True
+QQ(i) 乱数 s=4: ok=True
+対照 巡回性の行の両側の行列は異なる: True
+対照 V_1 ≠ BB で崩れる等号の位置: [1, 5]
+checked 144 equalities
+RESULT: PASS

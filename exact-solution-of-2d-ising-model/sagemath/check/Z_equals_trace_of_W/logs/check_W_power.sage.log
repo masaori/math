@@ -1,0 +1,7 @@
+不定元 s=1: ok=True
+不定元 s=2: ok=True
+QQ(i) 乱数 s=3: ok=True
+QQ(i) 乱数 s=4: ok=True
+対照 V_1 ≠ BB で崩れる等号の位置: [1, 7]
+checked 216 equalities
+RESULT: PASS

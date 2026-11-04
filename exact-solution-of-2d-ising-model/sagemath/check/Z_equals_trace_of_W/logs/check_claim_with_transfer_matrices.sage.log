@@ -1,0 +1,12 @@
+M_col=1: BB=V1 と tr 等式 ok=True、対照=True
+M_col=2: BB=V1 と tr 等式 ok=True、対照=True
+M_col=3: BB=V1 と tr 等式 ok=True、対照=True
+(N_row, M_col)=(1,1): Z = tr(W^N_row) は True
+(N_row, M_col)=(1,2): Z = tr(W^N_row) は True
+(N_row, M_col)=(2,1): Z = tr(W^N_row) は True
+(N_row, M_col)=(2,2): Z = tr(W^N_row) は True
+(N_row, M_col)=(2,3): Z = tr(W^N_row) は True
+(N_row, M_col)=(3,2): Z = tr(W^N_row) は True
+(N_row, M_col)=(3,3): Z = tr(W^N_row) は True
+(N_row, M_col)=(4,2): Z = tr(W^N_row) は True
+RESULT: PASS
