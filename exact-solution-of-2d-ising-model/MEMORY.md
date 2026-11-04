@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_check_Vprime`（V̌' の固有値）に検算 `sagemath/check/eigenvalues_of_check_Vprime/` を付けた（未検算 37 件）。050 の 7 本を内容の名前で移し（模型の段数は元と一致）、ň_μ・γ_μ の供給元 `_vprime_settings.sage` で本文の ψ̌（M_col = 2, 3）でも同じ鎖を確かめ、主張そのもの（対角化と固有値の重複度、正値、縮退の組の実在）の検算を足した。人手証明は主張文を「im Q̌_ε の 0 でない各元は固有ベクトル」に直し、直和の段落に (4) の参照を足した（計算の誤りは無し）。次は `trace_of_check_Vprime`。
+
 2026-11-04: 全証明の SageMath 検算として、`check_joint_eigenspace_decomposition`（ň_μ の同時固有空間分解）に検算 `sagemath/check/check_joint_eigenspace_decomposition/` を付けた（未検算 38 件）。050 の番号付きの 10 本を内容の名前で移し（模型で 12486 段、元と一致）、ň_μ の供給元を `_number_operators.sage` で模型と本文の ψ̌ に切り替えられるようにして、本文の ψ̌（M_col = 2, 3）でも同じ鎖と主張を厳密に確かめた（鎖 8998 段・主張 654 件）。主張 (1)〜(5) そのものの厳密な検算も足した。人手証明の計算の誤りは無し。次は `eigenvalues_of_check_Vprime`。
 
 2026-11-04: Lean の通しの証明のゴールラインの確認の百十六個目として、人手 `trace_of_check_Vprime` の Step 3 の名前だけの根拠「Step 1〜2 を γ → −γ として適用」を扱い始めた。本文の `V̌'`・`ǧ` は `γ(θ̃_μ)` に固定した記号で代入できる主張が無いので、Step 3 を (3a)〜(3d) に割り、(3a) として新しい主張 `eigenvalues_of_inverse_of_check_Vprime`（`(V̌')^{-1}Q̌_ε = (exp(−ǧ(ε)))_ℂQ̌_ε`。`eigenvalues_of_check_Vprime` と `(V̌')^{-1}V̌' = I` からの 11 行の鎖）を `trace_of_check_Vprime` の直前に足した（Step 3 本体はまだ変えていない）。Lean は人手と 1 対 1 の `CheckFermiSetup.Vprime_inv_mul_Qproj`（`ClaimTraceCheckVprime.lean`）。必要十分版は置かない。SageMath は 050 の check_eigenvalues_of_inverse_of_check_Vprime（厳密に 308 行、球で 1488 行、否定コントロール 84 件）。一回のレビューで必須の指摘は無く、任意の指摘 5 件を直した。次は (3b)（Step 3 のトレースの鎖）。

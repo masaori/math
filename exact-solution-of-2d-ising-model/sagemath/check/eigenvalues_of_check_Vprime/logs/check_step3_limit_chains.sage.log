@@ -1,0 +1,2 @@
+checked 1044 relations (model M = 2, 3 with all eps, K = 0..20); a model eps with gcheck(eps) < 0 exists
+RESULT: PASS

@@ -3,21 +3,16 @@
 # k + 1 の 7 行）、Step 4 の Q̌_ε y = y の鎖（y = Q̌_ε x とおいた 8 行）を、括弧どおりに一行ずつ厳密に確かめる。
 #   行列の冪は def_exp (1) の A^0 := I、A^{m+1} := A^m A。数の冪は g^0 := 1、g^{k+1} := g^k g。
 # 鎖が使う仮定は Step 1 の X̌Q̌ = gQ̌・Q̌X̌ = gQ̌、帰納法の仮定、check_joint_eigenspace_decomposition (1) の
-# Q̌^2 = Q̌ だけなので、それを満たす模型として Jordan–Wigner のフェルミ演算子 c_μ から n_μ := c_μ^T c_μ を作り、
-# Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := n、R^{(0)} := I − n）、X̌ := Σ_μ γ_μ (n_μ − (1/2)I)（γ_μ は有理数）、
+# Q̌^2 = Q̌ だけである。ň_μ と γ_μ は _vprime_settings.sage の chain_settings から取る（既定は Jordan–Wigner の模型
+# n_μ := c_μ^T c_μ と有理数 γ_μ、check_with_check_psi.sage からは本文の ψ̌ の ň_μ と有理数 γ_μ）。
+# Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）、X̌ := Σ_μ γ_μ (ň_μ − (1/2)I)、
 # g := Σ_μ γ_μ(ε_μ − 1/2) を取る（M = 2, 3、ε を全列挙、k = 0, …, 4）。
 # 否定コントロール: 不定元の成分の行列 X、Q と不定元 g、x では、Step 1・帰納法の仮定・冪等性を使う行だけが
 # 等号を外れ、冪の定義・結合律・単位行列・スカラー倍を引く行は等号のまま残ることを確かめる。
 # ℂ の積の交換律の行（(g g^k) Q = (g^k g) Q）は、可換な QQ と多項式環の上では構成上いつも一致するので、
-# 写し間違いの検出には効かない（check_22 と同じ扱い）。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
-
+# 写し間違いの検出には効かない。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F か、QQ 上の多項式環（否定コントロール）（厳密計算）。
+load("_vprime_settings.sage")
 
 def mpow(A, k):
     # def_exp (1): A^0 := I、A^{m+1} := A^m A
@@ -109,29 +104,21 @@ def check_chain(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-gammas = [QQ(3) / 2, QQ(5) / 7, QQ(2), QQ(11) / 3]
-for M in range(2, 4):
-    Id = kron([id2] * M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    n = [c[mu].transpose() * c[mu] for mu in range(M)]
-    X = sum(gammas[mu] * (n[mu] - QQ(1) / 2 * Id) for mu in range(M))
-    x = vector(QQ, [QQ(j * j - 3 * j + 1) / (j + 2) for j in range(2 ** M)]).column()
+for (tag, M, R, n, gammas) in chain_settings([2, 3]):
+    Id = identity_matrix(R, 2 ** M)
+    X = sum(gammas[mu] * (n[mu] - R(1) / 2 * Id) for mu in range(M))
+    x = vector(R, [QQ(j * j - 3 * j + 1) / (j + 2) for j in range(2 ** M)]).column()
     for eps in cartesian_product([[0, 1]] * M):
-        Q = Id
-        for mu in range(M):
-            Q = Q * (n[mu] if eps[mu] == 1 else Id - n[mu])
-        g = sum(gammas[mu] * (eps[mu] - QQ(1) / 2) for mu in range(M))
-        assert X * Q == g * Q and Q * X == g * Q and Q * Q == Q   # 鎖の仮定（Step 1・冪等性）が模型で成り立つ
-        check_chain(step2_base(X, Q, g, Id), ("step2 base", M, eps), True)
-        check_chain(step3p_base(X, Q, g, Id), ("step3' base", M, eps), True)
+        Q = joint_projector(n, eps, Id)
+        g = sum(gammas[mu] * (eps[mu] - R(1) / 2) for mu in range(M))
+        assert X * Q == g * Q and Q * X == g * Q and Q * Q == Q   # 鎖の仮定（Step 1・冪等性）が ň_μ の供給元で成り立つ
+        check_chain(step2_base(X, Q, g, Id), ("step2 base", tag, eps), True)
+        check_chain(step3p_base(X, Q, g, Id), ("step3' base", tag, eps), True)
         for k in range(5):
             assert mpow(X, k) * Q == npow(g, k) * Q and Q * mpow(X, k) == npow(g, k) * Q  # 帰納法の仮定
-            check_chain(step2_succ(X, Q, g, k), ("step2", M, eps, k), True)
-            check_chain(step3p_succ(X, Q, g, k), ("step3'", M, eps, k), True)
-        check_chain(step4(Q, x, Id), ("step4", M, eps), True)
+            check_chain(step2_succ(X, Q, g, k), ("step2", tag, eps, k), True)
+            check_chain(step3p_succ(X, Q, g, k), ("step3'", tag, eps, k), True)
+        check_chain(step4(Q, x, Id), ("step4", tag, eps), True)
 
 # 否定コントロール: 不定元の成分の 2×2 行列 X、Q と不定元 g、x
 R = PolynomialRing(QQ, ["x%d" % j for j in range(4)] + ["q%d" % j for j in range(4)] + ["g", "v0", "v1"])
@@ -153,3 +140,4 @@ for lines in generic:
             neg_control += 1
 
 print("PASS eigenvalues_of_check_Vprime Step 2・Step 3' の帰納法と Step 4 の鎖: %d 段、否定コントロール %d 行" % (count, neg_control))
+print("RESULT: PASS")

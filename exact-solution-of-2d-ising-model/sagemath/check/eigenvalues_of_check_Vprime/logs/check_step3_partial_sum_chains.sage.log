@@ -1,0 +1,2 @@
+checked 974 steps (settings M = 2, 3 with all eps and K = 0..4, and 7 + 7 steps of the generic control); the only failing step in each control chain is the one citing Step 2 (Step 3' induction)
+RESULT: PASS

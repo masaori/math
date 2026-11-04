@@ -1,0 +1,35 @@
+  本物の ψ̌ の ň_μ: 6 組（本物の ψ̌ (x,y)=(2,2) M=2, 本物の ψ̌ (x,y)=(2,2) M=3, 本物の ψ̌ (x,y)=(3,3/2) M=2, 本物の ψ̌ (x,y)=(3,3/2) M=3, 本物の ψ̌ (x,y)=(5/4,3) M=2, 本物の ψ̌ (x,y)=(5/4,3) M=3）
+== check_step1_left_chain.sage（本物の ψ̌）
+checked 517 steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+RESULT: PASS
+== check_step1_right_chain.sage（本物の ψ̌）
+checked 517 steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+RESULT: PASS
+== check_step2_step3prime_induction_and_step4_idempotent_chains.sage（本物の ψ̌）
+PASS eigenvalues_of_check_Vprime Step 2・Step 3' の帰納法と Step 4 の鎖: 3313 段、否定コントロール 9 行
+RESULT: PASS
+== check_step3_partial_sum_chains.sage（本物の ψ̌）
+checked 2894 steps (settings M = 2, 3 with all eps and K = 0..4, and 7 + 7 steps of the generic control); the only failing step in each control chain is the one citing Step 2 (Step 3' induction)
+RESULT: PASS
+== check_step3_limit_chains.sage（本物の ψ̌）
+  本物の ψ̌ (x,y)=(2,2) M=2: K_0 = 5, K_max = 18
+  本物の ψ̌ (x,y)=(2,2) M=3: K_0 = 8, K_max = 23
+  本物の ψ̌ (x,y)=(3,3/2) M=2: K_0 = 5, K_max = 14
+  本物の ψ̌ (x,y)=(3,3/2) M=3: K_0 = 5, K_max = 17
+  本物の ψ̌ (x,y)=(5/4,3) M=2: K_0 = 8, K_max = 26
+  本物の ψ̌ (x,y)=(5/4,3) M=3: K_0 = 13, K_max = 33
+checked 4368 relations (check psi, M = 2, 3 with all eps); an eps with gcheck(eps) < 0 exists
+RESULT: PASS
+== check_step4_eigenvector_chain.sage（本物の ψ̌）
+PASS: eigenvalues_of_check_Vprime Step 4 後半の鎖。厳密等号 362 段、否定コントロール 3 行
+RESULT: PASS
+== check_claim_statements.sage（本物の ψ̌）
+  本物の ψ̌ (x,y)=(2,2) M=2: 主張 34 件まで、否定コントロール 3 件まで
+  本物の ψ̌ (x,y)=(2,2) M=3: 主張 97 件まで、否定コントロール 12 件まで
+  本物の ψ̌ (x,y)=(3,3/2) M=2: 主張 131 件まで、否定コントロール 15 件まで
+  本物の ψ̌ (x,y)=(3,3/2) M=3: 主張 194 件まで、否定コントロール 24 件まで
+  本物の ψ̌ (x,y)=(5/4,3) M=2: 主張 228 件まで、否定コントロール 27 件まで
+  本物の ψ̌ (x,y)=(5/4,3) M=3: 主張 291 件まで、否定コントロール 36 件まで
+checked 291 claims and 36 negative controls
+RESULT: PASS
+RESULT: PASS

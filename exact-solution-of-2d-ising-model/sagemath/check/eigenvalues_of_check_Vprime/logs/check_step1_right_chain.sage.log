@@ -1,0 +1,2 @@
+checked 405 steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)
+RESULT: PASS

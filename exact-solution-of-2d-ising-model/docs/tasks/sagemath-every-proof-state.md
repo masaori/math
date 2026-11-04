@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 402 件のうち、SageMath の検算が無いもの 38 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 402 件のうち、SageMath の検算が無いもの 37 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -314,13 +314,21 @@
   証明の各行の検算は 050 の番号付きの 10 本（check_24・check_30〜36・check_48・check_joint_eigenspace_step5_direct_sum_first_line）にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。内容の名前で移し、ň_μ の作り方を `_number_operators.sage` へ出した（鎖の各行の式は不変、模型での段数 12486 は元と一致。旧い名前との対応は overview.md の「由来」）。
   主張 (1)〜(5) そのものを体の上の rank まで厳密に比べる `check_claim_statements.sage` と、同じ 11 本を本文の ψ̌（数体 F := E_1 の行列、結合定数 3 組 × M_col = 2, 3）で走らせる `check_with_check_psi.sage` を足した（鎖 8998 段・主張 654 件、約 15 分）。浮動小数点の `050/check_02` は残した。人手証明の計算の誤りは無かった。二回のレビューで必須の指摘 3 件と任意の指摘 6 件を直した。
 
+- `eigenvalues_of_check_Vprime`（V̌' の固有値。V̌'Q̌_ε = Q̌_εV̌' = (exp ǧ(ε))_ℂQ̌_ε、対角化可能で固有値は exp ǧ(ε)、すべて正）: `sagemath/check/eigenvalues_of_check_Vprime/`。
+  証明の各行の検算は 050 の 7 本（check_25 と check_eigenvalues_of_check_Vprime_step1_left_chain・step1_right_chain・step3_partial_sum_chains・step3_limit_chains・step4_eigenvector_chain・positivity）にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。内容の名前で移し、ň_μ・γ_μ を `_vprime_settings.sage`（ň_μ は `check_joint_eigenspace_decomposition/_number_operators.sage` を読み込む）から取るようにした（鎖の各行の式は不変、模型での段数 405・405・1129・974・1044・122・4048 は元と一致）。
+  主張そのもの（V̌'Q̌ = Q̌V̌' = eQ̌、Q̌_ε の 0 でない列を並べた P の rank と P^{-1}V̌'P = diag、tr(V̌'^k) = Σe^k、正値、本文の ψ̌ での縮退の組の実在を厳密に）を確かめる `check_claim_statements.sage` と、7 本を本文の ψ̌（数体 F := E_1、結合定数 3 組 × M_col = 2, 3）で走らせる `check_with_check_psi.sage` を足した（鎖 7603 段・極限の関係 4368 件・主張 291 件、約 15 分）。本文の ψ̌ では冪を作る鎖の γ_μ を有理数に置いた（数体上の不定元では終わらなかった。Step 1 の一次の鎖だけ不定元）。浮動小数点の `050/check_03` は残した。
+  人手証明を直した（計算の誤りは無かった）: 主張文の「im Q̌_ε の各元は固有ベクトル」が 0 で破れるので「0 でない各元」に、直和の段落の「1 次元なので 1 本」に `check_joint_eigenspace_decomposition` (4) の参照と固有ベクトルである理由を足した。二回のレビューで必須の指摘が無くなるまで直した。Lean は不変で `lake build`・`check-no-sorry.sh` は通る。
+  残した任意の指摘: 直和の段落は本文に定義の無い「対角化可能」「重複度」を使い、「固有値がこれで尽くされる」推論が地の文のままである。検算の付いたブロックの見直しで扱う。
+
 ## 次の一歩
 
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `eigenvalues_of_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる検算（check_eigenvalues_of_check_Vprime_step1_left_chain など）にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`check_joint_eigenspace_decomposition` と同じく、内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（ň_μ の供給元を切り替える作りは `check_joint_eigenspace_decomposition/_number_operators.sage`）。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_of_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる check_trace_of_check_Vprime_step1_chain・step2_real_inclusion・step2_exp_product・step2_expansion・step2_cosh にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`eigenvalues_of_check_Vprime` と同じく内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ（Lean の連続実行が Step 3 を書き換え中なので、rebase 後の本文の行と突き合わせる）、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（供給元は `eigenvalues_of_check_Vprime/_vprime_settings.sage`）。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`eigenvalues_of_check_Vprime` の検算を移したときに見つかった（旧い検算の名前を指す注記。今回の差分より前から）: ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_25」「check_eigenvalues_of_check_Vprime_*.sage」は、移した後の `sagemath/check/eigenvalues_of_check_Vprime/` を指していない（今回足した注記は新しい場所を指す）。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`check_joint_eigenspace_decomposition` の検算を移したときに見つかった（旧い検算の名前を指す注記。今回の差分より前から）: ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24（check_30・check_32・check_33・check_35・check_36・check_48・check_joint_eigenspace_step5_direct_sum_first_line）」は、移した後の `sagemath/check/check_joint_eigenspace_decomposition/` を指していない。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 

@@ -4,21 +4,16 @@
 # def_finite_sum_of_matrices_from_index_zero・def_finite_sum_of_complex_numbers・def_finite_sum_of_complex_numbers_from_index_zero・
 # def_exp (1) の冪 A^0 := I、A^{m+1} := A^m A）で成分から組み、隣り合う項が等しいことを一行ずつ確かめる。
 # 添字 0 からの和は、定義どおり項 X_{j-1}（j = 1..K+1）を左から足す和として組む。
-# 模型: Jordan–Wigner のフェルミ演算子 c_μ から n_μ := c_μ^T c_μ、Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := n、R^{(0)} := I − n）、
-# X̌ := Σ_μ γ_μ(n_μ − ½I)、有理数 γ_μ（M = 2, 3、ε を全列挙、K = 0..4）。
+# ň_μ と γ_μ は _vprime_settings.sage の chain_settings から取る（既定は Jordan–Wigner の模型 n_μ := c_μ^T c_μ と有理数 γ_μ、
+# check_with_check_psi.sage からは本文の ψ̌ の ň_μ と有理数 γ_μ）。Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）、
+# X̌ := Σ_μ γ_μ(ň_μ − ½I)（M = 2, 3、ε を全列挙、K = 0..4）。
 # 鎖が使う仮定は Step 2 の X̌^kQ̌_ε = ǧ(ε)^kQ̌_ε（右からの形は Step 3' の帰納法の Q̌_εX̌^k = ǧ(ε)^kQ̌_ε）だけである。
 # 否定コントロール: 不定元の成分の 2×2 行列 X、Q と不定元 g（K = 2）では、その仮定を引く行だけが等号を外れ、
 # ほかの 7 行は等号のまま残ることを確かめる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F か、QQ 上の多項式環（否定コントロール）（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_vprime_settings.sage")
 
 
 def mpow(A, k, Id):
@@ -95,27 +90,19 @@ def check(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-gammas = [QQ(3) / 2, QQ(5) / 7, QQ(2)]
-for M in range(2, 4):
-    Id = body_identity(QQ, 2 ** M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    n = [c[mu].transpose() * c[mu] for mu in range(M)]
+for (tag, M, R, n, gammas) in chain_settings([2, 3]):
+    Id = body_identity(R, 2 ** M)
     X = sum(gammas[mu] * (n[mu] - Id / 2) for mu in range(M))
     for eps in cartesian_product([[0, 1]] * M):
-        eps = [QQ(e) for e in eps]
-        Q = Id
-        for mu in range(M):
-            Q = Q * (n[mu] if eps[mu] == 1 else Id - n[mu])
-        g = sum(gammas[mu] * (eps[mu] - QQ(1) / 2) for mu in range(M))
-        for k in range(6):   # 鎖の仮定（Step 2 と Step 3' の帰納法）が模型で成り立つ
+        eps = [R(e) for e in eps]
+        Q = joint_projector(n, eps, Id)
+        g = sum(gammas[mu] * (eps[mu] - R(1) / 2) for mu in range(M))
+        for k in range(6):   # 鎖の仮定（Step 2 と Step 3' の帰納法）が ň_μ の供給元で成り立つ
             assert X ** k * Q == g ** k * Q and Q * X ** k == g ** k * Q
         for K in range(5):
             left, right = chains(X, Q, g, K, Id)
-            check(left, ("left", M, eps, K), True)
-            check(right, ("right", M, eps, K), True)
+            check(left, ("left", tag, eps, K), True)
+            check(right, ("right", tag, eps, K), True)
             # 両端を Sage の演算（独立な経路）で組んだ値と比べる
             Es = sum(X ** k / factorial(k) for k in range(K + 1))
             cs = sum(g ** k / factorial(k) for k in range(K + 1))
@@ -131,5 +118,5 @@ left, right = chains(Xg, Qg, G[8], 2, body_identity(P, 2))
 for side in (left, right):
     failed = check(side, "generic", False)
     assert len(failed) == 1 and failed[0][2], failed   # Step 2（右は Step 3' の帰納法）を引く行だけが外れる
-print(f"checked {count} steps (model M = 2, 3 with all eps and K = 0..4, and 7 + 7 steps of the generic control); the only failing step in each control chain is the one citing Step 2 (Step 3' induction)")
+print(f"checked {count} steps (settings M = 2, 3 with all eps and K = 0..4, and 7 + 7 steps of the generic control); the only failing step in each control chain is the one citing Step 2 (Step 3' induction)")
 print("RESULT: PASS")

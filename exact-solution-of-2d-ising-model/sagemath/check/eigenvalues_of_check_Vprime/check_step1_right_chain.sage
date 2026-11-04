@@ -2,20 +2,15 @@
 # eigenvalues_of_check_Vprime の Step 1 の右から掛ける形の鎖（Q̌_εX̌ から ǧ(ε)Q̌_ε までの 14 行）を、各行に書かれた式どおりに
 # 本文の定義（mat_mult・def_matrix_scalar_multiple・def_matrix_sum・def_finite_sum_of_matrices・def_matrix_negation・
 # def_matrix_difference・def_identity_matrix）で成分から組み、隣り合う項が等しいことを一行ずつ確かめる。
-# 模型: Jordan–Wigner のフェルミ演算子 c_μ から n_μ := c_μ^T c_μ、Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := n、R^{(0)} := I − n）、
-# 有理数 γ_μ（M = 2, 3, 4、ε を全列挙）。鎖が使う仮定は check_joint_eigenspace_decomposition (3) の Q̌_εň_μ = ε_μQ̌_ε だけである。
+# ň_μ と γ_μ は _vprime_settings.sage の chain_settings から取る（既定は Jordan–Wigner の模型 n_μ := c_μ^T c_μ と有理数 γ_μ、
+# M = 2, 3, 4。check_with_check_psi.sage からは本文の ψ̌ の ň_μ と不定元 γ_μ）。Q̌_ε := Π_μ R_μ^{(ε_μ)}（R^{(1)} := ň、R^{(0)} := I − ň）、
+# ε を全列挙。鎖が使う仮定は check_joint_eigenspace_decomposition (3) の Q̌_εň_μ = ε_μQ̌_ε だけである。
 # 否定コントロール: 不定元の成分の行列 N_μ、Q と不定元 γ_μ、ε_μ では、(3) を引く行だけが等号を外れ、
 # ほかの 13 行は等号のまま残ることを確かめる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F 上の多項式環か、QQ 上の多項式環（否定コントロール）（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_vprime_settings.sage")
 
 
 def chain(n, Q, gam, eps, Id):
@@ -63,25 +58,17 @@ def check(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-gammas = [QQ(3) / 2, QQ(5) / 7, QQ(2), QQ(11) / 3]
-for M in range(2, 5):
-    Id = body_identity(QQ, 2 ** M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    n = [c[mu].transpose() * c[mu] for mu in range(M)]
+for (tag, M, R, n, gammas) in chain_settings([2, 3, 4], symbolic_gamma=True):
+    Id = body_identity(R, 2 ** M)
     for eps in cartesian_product([[0, 1]] * M):
-        eps = [QQ(e) for e in eps]
-        Q = Id
-        for mu in range(M):
-            Q = Q * (n[mu] if eps[mu] == 1 else Id - n[mu])
-        assert all(Q * n[mu] == eps[mu] * Q for mu in range(M))   # 鎖の仮定 (3) が模型で成り立つ
-        lines = chain(n, Q, gammas[:M], eps, Id)
-        check(lines, ("model", M, eps), True)
+        eps = [R(e) for e in eps]
+        Q = joint_projector(n, eps, Id)
+        assert all(Q * n[mu] == eps[mu] * Q for mu in range(M))   # 鎖の仮定 (3) が ň_μ の供給元で成り立つ
+        lines = chain(n, Q, gammas, eps, Id)
+        check(lines, (tag, eps), True)
         # 主張の左辺を Sage の演算（独立な経路）で組んだ Q̌X̌ と、右辺 ǧQ̌ と比べる
         Xs = sum(gammas[mu] * (n[mu] - Id / 2) for mu in range(M))
-        gs = sum(gammas[mu] * (eps[mu] - QQ(1) / 2) for mu in range(M))
+        gs = sum(gammas[mu] * (eps[mu] - R(1) / 2) for mu in range(M))
         assert Q * Xs == lines[0][1] == lines[-1][1] == gs * Q
 
 # 否定コントロール: 不定元の成分の 2×2 行列 N_μ、Q と不定元 γ_μ、ε_μ（M = 2）
@@ -92,5 +79,5 @@ Ng = [matrix(P, 2, 2, G[0:4]), matrix(P, 2, 2, G[4:8])]
 Qg = matrix(P, 2, 2, G[8:12])
 failed = check(chain(Ng, Qg, [G[12], G[13]], [G[14], G[15]], body_identity(P, 2)), "generic", False)
 assert len(failed) == 1 and failed[0][2], failed   # (3) を引く行だけが外れる
-print(f"checked {count} steps (model M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)")
+print(f"checked {count} steps (settings M = 2, 3, 4 with all eps, and 13 steps of the generic control); the only failing step in the control is the one citing (3)")
 print("RESULT: PASS")
