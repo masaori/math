@@ -37,8 +37,8 @@ Step 1 の鎖 `trace_Vprime_step1` を右辺から左辺へ）は、`trace_Vprim
 ## 原文 Step 4 との対応
 
 各 `μ` の 3 行の鎖 `2cosh(γ(θ̃_μ)/2) ≥ 2·1 = 2 > 0` は `two_cosh_half_step4` の `calc` と 1 対 1 である（`cosh_at_least_one` は
-具体版 `Ising2D.cosh_at_least_one`）。最後の鎖（`tr(V̌') = Π 2cosh` と「正数の有限積は正」）は、`trace_Vprime_pos` ではまだ
-`trace_Vprime` と mathlib の `Finset.prod_pos` である。
+具体版 `Ising2D.cosh_at_least_one`）。最後の鎖の 2 行目（`finite_product_of_positive_reals_is_positive`）は、`trace_Vprime_pos` の `M = r + 1` の最後の段と
+1 対 1 である（具体版 `Ising2D.finite_product_of_positive_reals_is_positive`）。1 行目（`tr(V̌') = Π 2cosh`）はまだ `trace_Vprime` である。
 
 ## 章 009 との違い
 
@@ -58,6 +58,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteProductOfPositiveRealsIsPositive
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshAtLeastOne
 
@@ -511,12 +512,26 @@ theorem two_cosh_half_step4 (x : ℝ) : 2 * Real.cosh (x / 2) > 0 :=
     _ > 0 := two_pos                                    -- `2 > 0`
 
 /-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') = (r)_ℂ`、`r ∈ ℝ_{>0}`。
-各因子の正値性は人手の各 `μ` の鎖と 1 対 1 の `two_cosh_half_step4`。「正数の有限積は正」はまだ mathlib の `Finset.prod_pos` で、
-`tr(V̌') = Π 2cosh` は `trace_Vprime` である（どちらも人手の最後の鎖を書き直すときに 1 対 1 にする）。 -/
+`M = r + 1` の正値性は、人手の最後の鎖の 2 行目と 1 対 1 で、`finite_product_of_positive_reals_is_positive`
+（`m → M_col`、`r_μ → 2cosh(γ(θ̃_μ)/2)`。具体版 `Ising2D.finite_product_of_positive_reals_is_positive`）の仮定に、
+各 `μ` の鎖と 1 対 1 の `two_cosh_half_step4` を当てる。その前の段は、積の添字を `𝓜̌` から `μ = j + 1` の全単射で
+人手の `{1, …, M_col}` へ付け替える段（運ぶ段。人手の行は無い）である。
+`tr(V̌') = Π 2cosh` はまだ `trace_Vprime` で、人手の最後の鎖の 1 行目（∵ Step 1--2）を書き直すときに 1 対 1 にする。
+人手の範囲外の `M = 0`（空の積）は mathlib の `Finset.prod_pos` で閉じる。 -/
 theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :
     ∃ r : ℝ, 0 < r ∧ (F.Vprime g).trace = (r : ℂ) := by
   refine ⟨∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)), ?_, F.trace_Vprime g⟩
-  exact Finset.prod_pos fun i _ => two_cosh_half_step4 (g i)
+  match M, g with
+  | 0, g => exact Finset.prod_pos fun i _ => two_cosh_half_step4 (g i)
+  | r + 1, g =>
+    calc ∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2))
+        = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) :=
+          (Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
+            fun _ => rfl).symm                          -- 積の添字を `μ = j + 1` の全単射で `{1, …, M_col}` へ付け替える（運ぶ段。人手の行は無い）
+      _ > 0 :=
+          finite_product_of_positive_reals_is_positive r _ fun j => two_cosh_half_step4 (g (checkIdxOfFin j))
+                                                        -- `finite_product_of_positive_reals_is_positive`（`m → M_col`、`j → μ`、
+                                                        -- `r_μ → 2cosh(γ(θ̃_μ)/2)`）に、各 `μ` の鎖 `r_μ > 0` を当てる
 
 end CheckFermiSetup
 

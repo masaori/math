@@ -1972,6 +1972,9 @@ targets=(
   Ising2D.cosh_at_least_one
   "Ising2D.NecSuf.one_add_two_mul_sq_ge_one'"
   Ising2D.cosh_at_least_one_of_necSuf
+  Ising2D.finite_product_of_positive_reals_is_positive
+  "Ising2D.NecSuf.finProdLeft_pos'"
+  Ising2D.finite_product_of_positive_reals_is_positive_of_necSuf
   Ising2D.CheckFermiSetup.two_cosh_half_step4
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul

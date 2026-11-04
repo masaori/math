@@ -1552,6 +1552,74 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_claim_finite_product_of_positive_reals_is_positive",
+    kind: "claim",
+    title: { text: "正の実数の有限積は正" },
+    labels: ["finite_product_of_positive_reals_is_positive"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " がすべての ",
+        math(String.raw`j \in \{1,\dots,m\}`),
+        " について ",
+        math(String.raw`r_j > 0`),
+        " を満たすとする。有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{m} r_j > 0`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} r_j
+&= r_1
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&> 0
+&&\bigl(\because\ \text{仮定}\ r_1 > 0\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、すべての ",
+        math(String.raw`j \in \{1,\dots,m+1\}`),
+        " について ",
+        math(String.raw`r_j > 0`),
+        " を満たす ",
+        math(String.raw`r_1,\dots,r_{m+1} \in \mathbb{R}`),
+        " を取る。帰納法の仮定（",
+        math(String.raw`r_1,\dots,r_m`),
+        " に当てる）より ",
+        math(String.raw`\prod_{j=1}^{m} r_j > 0`),
+        "、仮定より ",
+        math(String.raw`r_{m+1} > 0`),
+        " である。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{m+1} r_j
+&= \Bigl(\prod_{j=1}^{m} r_j\Bigr)\, r_{m+1}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\bigr)\\
+&> 0
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a > 0,\ b > 0\ \text{なら}\ ab > 0\ \bigl(a \to \textstyle\prod_{j=1}^{m} r_j,\ b \to r_{m+1}\bigr)\ \text{に前置きの 2 つの不等号を当てる}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 4 が Π_μ 2cosh(γ(θ̃_μ)/2) > 0 を「正数の有限積は正」と名前だけで根拠にしていたので、引けるよう足した。Lean は Ising2D.finite_product_of_positive_reals_is_positive（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteProductOfPositiveRealsIsPositive.lean）。数値検証: sagemath/check/finite_product_of_positive_reals_is_positive/。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_power_of_complex_number",
     kind: "definition",
     title: { text: "複素数の冪" },

@@ -300,6 +300,7 @@ export const ALL_LABELS = [
   "finite_double_sum_of_matrices_interchange",
   "finite_product_of_complex_ones",
   "finite_product_of_identity_matrices",
+  "finite_product_of_positive_reals_is_positive",
   "finite_product_of_real_inclusions_is_real",
   "finite_product_with_zero_factor_is_zero",
   "finite_sum_of_complex_sums",
