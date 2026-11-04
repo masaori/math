@@ -1332,6 +1332,12 @@ targets=(
   "Ising2D.NecSuf.commute_mul_of_anticomm'"
   Ising2D.matrix_mul_comm_of_anticomm_pair
   Ising2D.matrix_mul_comm_of_anticomm_pair_of_necSuf
+  Ising2D.matrix_mul_columns
+  Ising2D.matrix_mul_columns_of_necSuf
+  Ising2D.mul_columns_tensorPow
+  Ising2D.NecSuf.mul_cols_eq_cols_mulVec
+  Ising2D.vec_sub_eq_zero_iff_tensorPow
+  Ising2D.identity_matrix_mulVec_tensorPow
   Ising2D.mul_comm_of_anticomm_pair_tensorPow
   "Ising2D.NecSuf.commute_smul_of_commute'"
   Ising2D.matrix_mul_smul_comm_of_commute
@@ -1824,13 +1830,24 @@ targets=(
   Ising2D.epsilon_anticomm_checkY_of_necSuf
   Ising2D.IsCheckMode
   Ising2D.epsilon_anticomm_of_isCheckMode
-  Ising2D.matrix_eq_of_mulVec_eq
   Ising2D.smul_cancel_of_matrix_ne_zero
   Ising2D.CheckFermi.Qproj_eq
   Ising2D.CheckFermi.Qproj_mulVec_of_mem_range
   Ising2D.CheckFermi.finrank_range_Qproj
+  Ising2D.CheckFermi.exists_Qproj_spanning_vector
+  Ising2D.CheckFermi.Qproj_mulVec_generator
   Ising2D.CheckFermi.exists_Qproj_generator
+  Ising2D.CheckFermi.Qproj_mulVec_epsilon_mulVec_generator
+  Ising2D.CheckFermi.generator_eq_eta_mul_eta_smul
+  Ising2D.CheckFermi.eta_mul_eta_sub_one_smul_generator
+  Ising2D.CheckFermi.eta_mem_of_mul_self_sub_one
+  Ising2D.CheckFermi.smul_generator_cancel
+  Ising2D.CheckFermi.epsilon_mul_Qproj_mulVec
+  Ising2D.CheckFermi.epsilon_mul_Qproj_eq_smul_of_mulVec
+  Ising2D.CheckFermi.exists_eta_with_generator
   Ising2D.CheckFermi.exists_eta
+  Ising2D.CheckFermi.exists_generator_of_eta
+  Ising2D.CheckFermi.smul_generator_eq_eta_smul
   Ising2D.CheckFermi.eta
   Ising2D.CheckFermi.eta_mem
   Ising2D.CheckFermi.epsilon_mul_Qproj

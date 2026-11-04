@@ -51,4 +51,14 @@ theorem smul_mulVec_tensorPow {M : ℕ} (lam : ℂ) (B : TensorPow M) (v : Conf 
     (lam • B) *ᵥ v = lam • (B *ᵥ v) :=
   NecSuf.smul_mulVec_eq' lam B v
 
+/-- `matrix_difference_zero_iff_equal`（`p = 1`。数ベクトル）の `TensorPow M` での系
+（`NecSuf.sub_eq_zero_iff_vec` の係数 `ℂ`、添字 `Conf M` の特殊化）: `u − w = O ⟺ u = w`。 -/
+theorem vec_sub_eq_zero_iff_tensorPow {M : ℕ} (u w : Conf M → ℂ) : u - w = 0 ↔ u = w :=
+  NecSuf.sub_eq_zero_iff_vec u w
+
+/-- `identity_matrix_is_left_unit_of_mat_mult`（右の因子が数ベクトル）の `TensorPow M` での系
+（`NecSuf.one_mulVec_eq` の係数 `ℂ`、添字 `Conf M` の特殊化）: `Iv = v`。 -/
+theorem identity_matrix_mulVec_tensorPow {M : ℕ} (v : Conf M → ℂ) : (1 : TensorPow M) *ᵥ v = v :=
+  NecSuf.one_mulVec_eq v
+
 end Ising2D

@@ -13,6 +13,7 @@
 | 人手証明 | 本ファイル |
 | --- | --- |
 | (1) `∃! η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε` | `Ising2D.CheckFermi.eta` / `eta_mem` / `epsilon_mul_Qproj` / `eta_unique` |
+| (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（4 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
 | (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert` |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
@@ -24,6 +25,8 @@
 （環の計算だけ）で閉じており、1 次元性を使わない。
 -/
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatColumnwiseFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
 
 namespace Ising2D
 
@@ -32,14 +35,6 @@ open Matrix
 variable {M : ℕ}
 
 /-! ## 補助: 行列の等号判定とスカラーの一意性 -/
-
-/-- `mulVec` が一致すれば行列も一致する。 -/
-theorem matrix_eq_of_mulVec_eq {n : Type*} [Fintype n] [DecidableEq n]
-    {A B : Matrix n n ℂ} (h : ∀ x : n → ℂ, A *ᵥ x = B *ᵥ x) : A = B := by
-  apply Matrix.toLin'.injective
-  refine LinearMap.ext fun x => ?_
-  simp only [Matrix.toLin'_apply]
-  exact h x
 
 /-- `Q ≠ 0` なら `η Q = η' Q ⇒ η = η'`（人手証明 (1) の「一意に定まる」）。 -/
 theorem smul_cancel_of_matrix_ne_zero {n : Type*} [Fintype n] {Q : Matrix n n ℂ} (hQ : Q ≠ 0)
@@ -59,7 +54,8 @@ variable (F : CheckFermi M)
 theorem Qproj_eq (T : Finset (Fin M)) :
     F.Qproj T = NecSuf.projOn (NecSuf.num F.cre F.ann) F.commute_nOp_nOp Finset.univ T := rfl
 
-/-- `w ∈ im Q̌_ε` なら `Q̌_ε w = w`（冪等性）。 -/
+/-- `w ∈ im Q̌_ε` なら `Q̌_ε w = w`（冪等性）。下流（`TheoremCPlusEqualsLambda.lean` ほか）が使う `exists_Qproj_generator` の形のための補題で、
+人手の (1) の鎖は下の `Qproj_mulVec_generator` である。 -/
 theorem Qproj_mulVec_of_mem_range {T : Finset (Fin M)} {w : Conf M → ℂ}
     (h : ∃ y, F.Qproj T *ᵥ y = w) : F.Qproj T *ᵥ w = w := by
   obtain ⟨y, rfl⟩ := h
@@ -75,74 +71,220 @@ theorem finrank_range_Qproj (T : Finset (Fin M)) :
   rw [F.trace_Qproj T] at h
   exact_mod_cast h.symm
 
-/-- **原文 (1) の `q`**: `im Q̌_ε` の生成元。 -/
+/-- **原文 (1) の冒頭**: `dim_ℂ im Q̌_ε = 1` なので `im Q̌_ε = ℂq` なる `q ≠ 0` が取れ、`q ∈ im Q̌_ε` なので `q = Q̌_ε x` なる
+`x` が取れる。三つ目の成分が「`im Q̌_ε = ℂq`」の `⊆`（`Q̌_ε y = zq` なる `z ∈ ℂ` が取れること）である。
+`dim = 1` から生成元を取る段は、mathlib の定理 `finrank_eq_one_iff'`（次元が 1 の空間は 1 つの非零元で張られる）を使う。 -/
+theorem exists_Qproj_spanning_vector (T : Finset (Fin M)) :
+    ∃ q : Conf M → ℂ, q ≠ 0 ∧ (∃ x : Conf M → ℂ, F.Qproj T *ᵥ x = q) ∧
+      ∀ y : Conf M → ℂ, ∃ z : ℂ, F.Qproj T *ᵥ y = z • q := by
+  obtain ⟨v, hv, hgen⟩ := finrank_eq_one_iff'.1 (F.finrank_range_Qproj T)
+  have hmem : ∀ y : Conf M → ℂ, F.Qproj T *ᵥ y ∈ LinearMap.range (Matrix.toLin' (F.Qproj T)) :=
+    fun y => ⟨y, by simp only [Matrix.toLin'_apply]⟩
+  obtain ⟨x, hx⟩ := v.2
+  refine ⟨(v : Conf M → ℂ), ?_, ⟨x, by simpa only [Matrix.toLin'_apply] using hx⟩, ?_⟩
+  · intro h
+    exact hv (Subtype.ext h)
+  · intro y
+    obtain ⟨c, hc⟩ := hgen ⟨F.Qproj T *ᵥ y, hmem y⟩
+    exact ⟨c, by simpa using congrArg Subtype.val hc.symm⟩
+
+/-- **原文 (1)** の `Q̌_ε q = q` の 4 行の鎖。 -/
+theorem Qproj_mulVec_generator {T : Finset (Fin M)} {q x : Conf M → ℂ} (hx : F.Qproj T *ᵥ x = q) :
+    F.Qproj T *ᵥ q = q :=
+  calc F.Qproj T *ᵥ q
+      = F.Qproj T *ᵥ (F.Qproj T *ᵥ x) := by rw [hx]    -- `q = Q̌_ε x` の置き方
+    _ = (F.Qproj T * F.Qproj T) *ᵥ x := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`。Lean の数ベクトルは 1 列の行列ではなく
+                                                        -- `Conf M → ℂ` なので、mathlib の `Matrix.mulVec_mulVec`
+    _ = F.Qproj T *ᵥ x := by rw [F.Qproj_mul_self T]   -- `check_joint_eigenspace_decomposition` (1) の `Q̌_ε^2 = Q̌_ε`
+    _ = q := hx                                         -- `q = Q̌_ε x` の置き方
+
+/-- 下流（`TheoremCPlusEqualsLambda.lean`）が使う形: `q ≠ 0`、`Q̌_ε q = q`、`im Q̌_ε ⊆ ℂq`。 -/
 theorem exists_Qproj_generator (T : Finset (Fin M)) :
     ∃ q : Conf M → ℂ, q ≠ 0 ∧ F.Qproj T *ᵥ q = q ∧
       ∀ x : Conf M → ℂ, ∃ z : ℂ, F.Qproj T *ᵥ x = z • q := by
-  obtain ⟨v, hv, hgen⟩ := finrank_eq_one_iff'.1 (F.finrank_range_Qproj T)
-  have hmem : ∀ x : Conf M → ℂ, F.Qproj T *ᵥ x ∈ LinearMap.range (Matrix.toLin' (F.Qproj T)) :=
-    fun x => ⟨x, by simp only [Matrix.toLin'_apply]⟩
-  obtain ⟨y, hy⟩ := v.2
-  refine ⟨(v : Conf M → ℂ), ?_, ?_, ?_⟩
-  · intro h
-    exact hv (Subtype.ext h)
-  · refine F.Qproj_mulVec_of_mem_range ⟨y, ?_⟩
-    simpa only [Matrix.toLin'_apply] using hy
-  · intro x
-    obtain ⟨c, hc⟩ := hgen ⟨F.Qproj T *ᵥ x, hmem x⟩
-    exact ⟨c, by simpa using congrArg Subtype.val hc.symm⟩
+  obtain ⟨q, hq0, ⟨x, hx⟩, hspan⟩ := F.exists_Qproj_spanning_vector T
+  exact ⟨q, hq0, F.Qproj_mulVec_generator hx, hspan⟩
 
 /-! ## 原文 (1): `η_ε` の存在と一意性 -/
+
+/-- **原文 (1)** の `Q̌_ε(εq) = εq` の 4 行の鎖（`ε q ∈ im Q̌_ε` を言うための式）。 -/
+theorem Qproj_mulVec_epsilon_mulVec_generator {T : Finset (Fin M)} {q : Conf M → ℂ}
+    (hqfix : F.Qproj T *ᵥ q = q) : F.Qproj T *ᵥ (epsilon M *ᵥ q) = epsilon M *ᵥ q :=
+  calc F.Qproj T *ᵥ (epsilon M *ᵥ q)
+      = (F.Qproj T * epsilon M) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = (epsilon M * F.Qproj T) *ᵥ q := by rw [(F.commute_epsilon_Qproj T).eq]
+                                                        -- `epsilon_anticommutes_with_check_Z_Y` (4)
+    _ = epsilon M *ᵥ (F.Qproj T *ᵥ q) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = epsilon M *ᵥ q := by rw [hqfix]                 -- 上で示した `Q̌_ε q = q`
+
+/-- **原文 (1)** の `η^2 = 1` を示す 7 行の鎖（`q = (ηη)q`）。 -/
+theorem generator_eq_eta_mul_eta_smul {q : Conf M → ℂ} {η : ℂ} (hεq : epsilon M *ᵥ q = η • q) :
+    q = (η * η) • q :=
+  calc q
+      = (1 : TensorPow M) *ᵥ q := (identity_matrix_mulVec_tensorPow q).symm
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`（右の因子が数ベクトル）
+    _ = (epsilon M * epsilon M) *ᵥ q := by rw [epsilon_mul_self]
+                                                        -- `epsilon_square_and_eigenvalues` の `ε^2 = I`
+    _ = epsilon M *ᵥ (epsilon M *ᵥ q) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = epsilon M *ᵥ (η • q) := by rw [hεq]             -- `εq = ηq` の置き方
+    _ = η • (epsilon M *ᵥ q) := Matrix.mulVec_smul _ _ _
+                                                        -- `scalar_multiple_factors_out_of_right_factor`
+    _ = η • (η • q) := by rw [hεq]                      -- `εq = ηq` の置き方
+    _ = (η * η) • q := smul_smul _ _ _                  -- `scalar_multiple_is_associative`
+
+/-- **原文 (1)** の `(ηη − 1)q = O` の 4 行の鎖。 -/
+theorem eta_mul_eta_sub_one_smul_generator {q : Conf M → ℂ} {η : ℂ} (hq2 : q = (η * η) • q) :
+    (η * η - 1) • q = 0 :=
+  calc (η * η - 1) • q
+      = (η * η) • q - (1 : ℂ) • q := sub_smul _ _ _    -- `difference_of_scalar_multiples_of_one_matrix`
+    _ = q - (1 : ℂ) • q := by rw [← hq2]                -- 上の式変形の `q = (ηη)q`
+    _ = q - q := by rw [one_smul]                       -- `scalar_multiple_by_one`
+    _ = 0 := (vec_sub_eq_zero_iff_tensorPow q q).mpr rfl
+                                                        -- `matrix_difference_zero_iff_equal`（`⟸`。数ベクトル）
+
+/-- **原文 (1)**: `ηη − 1 = 0` から `η ∈ {+1, −1}`。人手の `(η − 1)(η + 1)` の 4 行の鎖と、体 `ℂ` で積が `0` なら
+因子のどちらかが `0`（`complex_numbers_form_a_field`）である。 -/
+theorem eta_mem_of_mul_self_sub_one {η : ℂ} (hηη : η * η - 1 = 0) : η = 1 ∨ η = -1 := by
+  have hfac : (η - 1) * (η + 1) = 0 :=
+    calc (η - 1) * (η + 1)
+        = (η - 1) * η + (η - 1) * 1 := mul_add _ _ _    -- `complex_numbers_form_a_field` の分配則
+      _ = (η * η - η) + (η - 1) := by rw [sub_mul, one_mul, mul_one]
+                                                        -- `complex_numbers_form_a_field` の分配則と乗法の単位元
+      _ = η * η - 1 := sub_add_sub_cancel _ _ _         -- `complex_numbers_form_a_field` の加法の結合則と逆元
+      _ = 0 := hηη                                      -- 上で示した `ηη − 1 = 0`
+  rcases mul_eq_zero.1 hfac with h | h                  -- 体 `ℂ` では `η − 1 = 0` または `η + 1 = 0`
+  · exact Or.inl (sub_eq_zero.1 h)
+  · exact Or.inr (eq_neg_of_add_eq_zero_left h)
+
+/-- `q ≠ 0` なら `aq = bq ⇒ a = b`（人手の「`εq = ηq` なる `η ∈ ℂ` が一意に定まる（`q ≠ 0`）」）。
+`q_k ≠ 0` となる成分を取り、その成分で `ℂ` の積を約す（`def_matrix_scalar_multiple`・`complex_numbers_form_a_field`）。 -/
+theorem smul_generator_cancel {q : Conf M → ℂ} (hq0 : q ≠ 0) {a b : ℂ} (h : a • q = b • q) : a = b := by
+  obtain ⟨k, hk⟩ : ∃ k, q k ≠ 0 := by
+    by_contra hc
+    push_neg at hc
+    exact hq0 (funext hc)
+  have hk' : a * q k = b * q k := by
+    have := congrFun h k
+    rwa [Pi.smul_apply, Pi.smul_apply, smul_eq_mul, smul_eq_mul] at this
+                                                        -- `def_matrix_scalar_multiple` の第 `k` 成分
+  exact mul_right_cancel₀ hk hk'
+
+/-- **原文 (1)** の「`x ∈ ℂ^{2^{M_col}}` について `(εQ̌_ε)x = (ηQ̌_ε)x`」の 9 行の鎖（`Q̌_ε x = cq` の `c` は仮定 `hspan` から取る）。 -/
+theorem epsilon_mul_Qproj_mulVec {T : Finset (Fin M)} {q : Conf M → ℂ} {η : ℂ}
+    (hspan : ∀ y : Conf M → ℂ, ∃ z : ℂ, F.Qproj T *ᵥ y = z • q) (hεq : epsilon M *ᵥ q = η • q)
+    (x : Conf M → ℂ) : (epsilon M * F.Qproj T) *ᵥ x = (η • F.Qproj T) *ᵥ x := by
+  obtain ⟨c, hc⟩ := hspan x                             -- `Q̌_ε x ∈ im Q̌_ε = ℂq` なので `Q̌_ε x = cq`
+  calc (epsilon M * F.Qproj T) *ᵥ x
+      = epsilon M *ᵥ (F.Qproj T *ᵥ x) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = epsilon M *ᵥ (c • q) := by rw [hc]              -- `Q̌_ε x = cq` の置き方
+    _ = c • (epsilon M *ᵥ q) := Matrix.mulVec_smul _ _ _
+                                                        -- `scalar_multiple_factors_out_of_right_factor`
+    _ = c • (η • q) := by rw [hεq]                      -- `εq = ηq` の置き方
+    _ = (c * η) • q := smul_smul _ _ _                  -- `scalar_multiple_is_associative`
+    _ = (η * c) • q := by rw [mul_comm c η]             -- `complex_numbers_form_a_field` の乗法の交換則
+    _ = η • (c • q) := (smul_smul _ _ _).symm           -- `scalar_multiple_is_associative`
+    _ = η • (F.Qproj T *ᵥ x) := by rw [hc]              -- `Q̌_ε x = cq` の置き方
+    _ = (η • F.Qproj T) *ᵥ x := (smul_mulVec_tensorPow _ _ _).symm
+                                                        -- `scalar_multiple_factors_out_of_left_factor`（右の因子が数ベクトル）
+
+/-- **原文 (1)** の行列の等式 `εQ̌_ε = ηQ̌_ε` の 7 行の鎖（`N := 2^{M_col}`、`e_k` は `I` の第 `k` 列）。
+人手の `I = [e_1 ⋯ e_N]` は、Lean では `e_k := (I の第 k 列)` と置くので `Matrix.of` の展開（`rfl`）である。 -/
+theorem epsilon_mul_Qproj_eq_smul_of_mulVec {T : Finset (Fin M)} {η : ℂ}
+    (hx : ∀ x : Conf M → ℂ, (epsilon M * F.Qproj T) *ᵥ x = (η • F.Qproj T) *ᵥ x) :
+    epsilon M * F.Qproj T = η • F.Qproj T := by
+  let e : Conf M → Conf M → ℂ := fun k j => (1 : TensorPow M) j k
+                                                        -- `e_k` は `I` の第 `k` 列（`def_identity_matrix`）
+  calc epsilon M * F.Qproj T
+      = (epsilon M * F.Qproj T) * 1 := (mul_identity_matrix_tensorPow _).symm
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+    _ = (epsilon M * F.Qproj T) * Matrix.of (fun j k => e k j) := rfl
+                                                        -- `I = [e_1 ⋯ e_N]`
+    _ = Matrix.of (fun i k => ((epsilon M * F.Qproj T) *ᵥ e k) i) := mul_columns_tensorPow _ _
+                                                        -- `mat_columnwise`
+    _ = Matrix.of (fun i k => ((η • F.Qproj T) *ᵥ e k) i) := by
+        exact congrArg Matrix.of (funext fun i => funext fun k => by rw [hx (e k)])
+                                                        -- 上の等式を `N` 箇所へ同時適用
+    _ = (η • F.Qproj T) * Matrix.of (fun j k => e k j) := (mul_columns_tensorPow _ _).symm
+                                                        -- `mat_columnwise`
+    _ = (η • F.Qproj T) * 1 := rfl                      -- `I = [e_1 ⋯ e_N]`
+    _ = η • F.Qproj T := mul_identity_matrix_tensorPow _
+                                                        -- `identity_matrix_is_right_unit_of_mat_mult`
+
+/-- **原文 (1)** の存在の部分: `ε Q̌_ε = η Q̌_ε` なる `η ∈ {±1}` と、それを定めた `q`（`q ≠ 0`、`Q̌_ε q = q`、`εq = ηq`）。
+人手の (1) の存在の部分の段を上の補題で順に辿る。`q` を組で返すのは、一意性の鎖の最後の行 `εq = ηq` がこの `q` と `η` を使うためである。 -/
+theorem exists_eta_with_generator (T : Finset (Fin M)) :
+    ∃ η : ℂ, (η = 1 ∨ η = -1) ∧ epsilon M * F.Qproj T = η • F.Qproj T ∧
+      ∃ q : Conf M → ℂ, q ≠ 0 ∧ F.Qproj T *ᵥ q = q ∧ epsilon M *ᵥ q = η • q := by
+  obtain ⟨q, hq0, ⟨x, hx⟩, hspan⟩ := F.exists_Qproj_spanning_vector T
+  have hqfix : F.Qproj T *ᵥ q = q := F.Qproj_mulVec_generator hx
+                                                        -- `Q̌_ε q = q`
+  have hmem := F.Qproj_mulVec_epsilon_mulVec_generator hqfix
+                                                        -- `Q̌_ε(εq) = εq`
+  obtain ⟨η, hη⟩ := hspan (epsilon M *ᵥ q)              -- `εq ∈ im Q̌_ε = ℂq`
+  have hεq : epsilon M *ᵥ q = η • q := hmem.symm.trans hη
+                                                        -- `εq = ηq` なる `η ∈ ℂ`
+  have hO := eta_mul_eta_sub_one_smul_generator (generator_eq_eta_mul_eta_smul hεq)
+                                                        -- `(ηη − 1)q = O`
+  obtain ⟨k, hk⟩ : ∃ k, q k ≠ 0 := by                   -- `q ≠ 0` なので `q_k ≠ 0` となる `k` が取れる
+    by_contra hc
+    push_neg at hc
+    exact hq0 (funext hc)
+  have hk0 : (η * η - 1) * q k = 0 := by
+    have := congrFun hO k
+    rwa [Pi.smul_apply, smul_eq_mul, Pi.zero_apply] at this
+                                                        -- 上の式の第 `k` 成分（`def_matrix_scalar_multiple`）
+  have hηη : η * η - 1 = 0 := (mul_eq_zero.1 hk0).resolve_right hk
+                                                        -- `complex_numbers_form_a_field` より `ℂ` は体
+  exact ⟨η, eta_mem_of_mul_self_sub_one hηη,
+    F.epsilon_mul_Qproj_eq_smul_of_mulVec (F.epsilon_mul_Qproj_mulVec hspan hεq), q, hq0, hqfix, hεq⟩
 
 /-- **原文 (1)**: `ε Q̌_ε = η Q̌_ε` なる `η ∈ {±1}` が存在する。 -/
 theorem exists_eta (T : Finset (Fin M)) :
     ∃ η : ℂ, (η = 1 ∨ η = -1) ∧ epsilon M * F.Qproj T = η • F.Qproj T := by
-  obtain ⟨q, hq0, hqfix, hspan⟩ := F.exists_Qproj_generator T
-  -- `ε q ∈ im Q̌_ε` （`ε` と `Q̌_ε` が可換だから）
-  have hmem : F.Qproj T *ᵥ (epsilon M *ᵥ q) = epsilon M *ᵥ q := by
-    rw [Matrix.mulVec_mulVec, ← (F.commute_epsilon_Qproj T).eq, ← Matrix.mulVec_mulVec, hqfix]
-  obtain ⟨z, hz⟩ := hspan (epsilon M *ᵥ q)
-  have hεq : epsilon M *ᵥ q = z • q := by rw [← hz, hmem]
-  -- `ε² = 1` より `z² = 1`
-  have hz2 : z * z = 1 := by
-    have h1 : epsilon M *ᵥ (epsilon M *ᵥ q) = q := by
-      rw [Matrix.mulVec_mulVec, epsilon_mul_self, Matrix.one_mulVec]
-    rw [hεq, Matrix.mulVec_smul, hεq, smul_smul] at h1
-    have := congrFun h1
-    obtain ⟨k, hk⟩ : ∃ k, q k ≠ 0 := by
-      by_contra hc
-      push_neg at hc
-      exact hq0 (funext hc)
-    have h2 := this k
-    simp only [Pi.smul_apply, smul_eq_mul] at h2
-    field_simp at h2
-    rw [← sq]
-    exact h2
-  refine ⟨z, ?_, ?_⟩
-  · rcases mul_self_eq_one_iff.1 hz2 with h | h
-    · exact Or.inl h
-    · exact Or.inr h
-  · refine matrix_eq_of_mulVec_eq fun x => ?_
-    obtain ⟨c, hc⟩ := hspan x
-    rw [← Matrix.mulVec_mulVec, hc, Matrix.mulVec_smul, hεq, smul_smul, Matrix.smul_mulVec,
-      hc, smul_smul]
-    ring_nf
+  obtain ⟨η, hpm, hmat, _⟩ := F.exists_eta_with_generator T
+  exact ⟨η, hpm, hmat⟩
 
-/-- **原文 (1) の `η_ε`**（選択関数として与える）。 -/
-noncomputable def eta (T : Finset (Fin M)) : ℂ := (F.exists_eta T).choose
+/-- **原文 (1) の `η_ε`**（選択関数として与える。人手の「この `η` を `η_ε` と書く」）。 -/
+noncomputable def eta (T : Finset (Fin M)) : ℂ := (F.exists_eta_with_generator T).choose
 
 theorem eta_mem (T : Finset (Fin M)) : F.eta T = 1 ∨ F.eta T = -1 :=
-  (F.exists_eta T).choose_spec.1
+  (F.exists_eta_with_generator T).choose_spec.1
 
 /-- **原文 (1)**: `ε Q̌_ε = η_ε Q̌_ε`。 -/
 theorem epsilon_mul_Qproj (T : Finset (Fin M)) :
     epsilon M * F.Qproj T = F.eta T • F.Qproj T :=
-  (F.exists_eta T).choose_spec.2
+  (F.exists_eta_with_generator T).choose_spec.2.1
 
-/-- **原文 (1) の一意性**。 -/
+/-- `η_ε` を定めた `q`（`q ≠ 0`、`Q̌_ε q = q`、`εq = η_ε q`）。 -/
+theorem exists_generator_of_eta (T : Finset (Fin M)) :
+    ∃ q : Conf M → ℂ, q ≠ 0 ∧ F.Qproj T *ᵥ q = q ∧ epsilon M *ᵥ q = F.eta T • q :=
+  (F.exists_eta_with_generator T).choose_spec.2.2
+
+/-- **原文 (1) の一意性**の 6 行の鎖: `εQ̌_ε = η'Q̌_ε` なら `η'q = ηq`（`q`・`η` は存在の部分で定めたもの）。 -/
+theorem smul_generator_eq_eta_smul {T : Finset (Fin M)} {q : Conf M → ℂ} {η η' : ℂ}
+    (hqfix : F.Qproj T *ᵥ q = q) (hεq : epsilon M *ᵥ q = η • q)
+    (h : epsilon M * F.Qproj T = η' • F.Qproj T) : η' • q = η • q :=
+  calc η' • q
+      = η' • (F.Qproj T *ᵥ q) := by rw [hqfix]          -- 上で示した `Q̌_ε q = q`
+    _ = (η' • F.Qproj T) *ᵥ q := (smul_mulVec_tensorPow _ _ _).symm
+                                                        -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (epsilon M * F.Qproj T) *ᵥ q := by rw [h]       -- `η'` の仮定
+    _ = epsilon M *ᵥ (F.Qproj T *ᵥ q) := (Matrix.mulVec_mulVec _ _ _).symm
+                                                        -- `mat_mult_associative`
+    _ = epsilon M *ᵥ q := by rw [hqfix]                 -- 上で示した `Q̌_ε q = q`
+    _ = η • q := hεq                                    -- `εq = ηq` の置き方
+
+/-- **原文 (1) の一意性**: `εQ̌_ε = η'Q̌_ε` なら `η' = η_ε`。上の 6 行の鎖と、`q ≠ 0` だから `εq = ηq` なる `η` が
+一意に定まること（`smul_generator_cancel`）による。 -/
 theorem eta_unique {T : Finset (Fin M)} {η : ℂ} (h : epsilon M * F.Qproj T = η • F.Qproj T) :
-    η = F.eta T :=
-  smul_cancel_of_matrix_ne_zero (F.Qproj_ne_zero T) (h.symm.trans (F.epsilon_mul_Qproj T))
+    η = F.eta T := by
+  obtain ⟨q, hq0, hqfix, hεq⟩ := F.exists_generator_of_eta T
+  exact smul_generator_cancel hq0 (F.smul_generator_eq_eta_smul hqfix hεq h)
 
 /-! ## 原文 (2): 符号の反転則 -/
 
