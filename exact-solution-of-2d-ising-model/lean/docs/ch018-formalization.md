@@ -93,7 +93,9 @@
 | `CheckFermi.epsilon_mul_Qproj_mulVec` / `epsilon_mul_Qproj_eq_smul_of_mulVec` | `(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）、列ごとに `εQ̌_ε = ηQ̌_ε`（7 行。`mat_columnwise` の `mul_columns_tensorPow`） | (1) |
 | **`CheckFermi.exists_eta_with_generator` / `exists_eta` / `eta` / `eta_mem` / `epsilon_mul_Qproj` / `exists_generator_of_eta`** | **`∃ η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε`**（`η_ε` を定めた `q` と `εq = η_ε q` を組で持つ） | **(1)** |
 | `CheckFermi.smul_generator_eq_eta_smul` / **`eta_unique`** | 一意性の 6 行の鎖 `η'q = … = εq = ηq` と、`q ≠ 0` による `η' = η_ε` | **(1) の一意性** |
-| **`CheckFermi.eta_insert`** | **反転則 `η_{ε[μ→1]} = −η_ε`** | **(2)** |
+| `CheckFermi.nOp_mulVec_generator_eq_zero` / `ann_mulVec_cre_mulVec_generator` / `cre_mulVec_generator_ne_zero` | `ň_μ q = 0`（6 行）、`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行。Lean の `ann μ` が人手の `ψ̌_{M+1−μ}`）、背理法の 3 行で `ψ̌_μ^† q ≠ 0` | (2) Step 1 |
+| `CheckFermi.epsilon_mulVec_cre_mulVec_generator` | `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | (2) Step 3 の前半 |
+| **`CheckFermi.eta_insert`** | **反転則 `η_{ε[μ→1]} = −η_ε`**（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じている。上の数ベクトルの鎖へ組み替えるのは Step 2 を置いた後） | **(2)** |
 | `CheckFermi.eta_univ_eq_aux` | `|ε|` に関する帰納法の補助 | (3) |
 | **`CheckFermi.eta_eq_eta_univ_mul`** | **`η_ε = η_{(1,…,1)}·(−1)^{M−|ε|}`** | **(3)** |
 | `CheckFermi.parityFactor` / `parityProd` / `commute_parityFactor` | `∏_μ (I − 2ň_μ)` とその可換性 | (4) |
@@ -255,6 +257,10 @@
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
 | **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
 | **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
+| `NecSuf.num_mulVec_eq_zero_of_fixed`（`NecSuf/SignReversalOnGeneratorVector.lean`） | `Qq = q`, `nQ = sQ`, `s = 0` ⇒ `nq = 0`（具体版と同じ 6 行） | 係数は `NonUnitalSemiring`（行列 `Matrix ι ι R` と数ベクトル `ι → R`）。スカラー `s` は別の集合 `S` の元で、`0 • x = 0` だけを使う | 同 (2) Step 1 |
+| `NecSuf.ann_mulVec_cre_mulVec_eq_of_num_mulVec_eq_zero`（同） | `ac = I − n`, `nq = 0` ⇒ `a(cq) = q`（具体版と同じ 6 行） | 係数は `Ring`（可換則は不要。`n = ca` も `n` の冪等性も不要） | 同 (2) Step 1 |
+| `NecSuf.cre_mulVec_ne_zero_of_ann_mulVec_cre_mulVec_eq`（同） | `a(cq) = q`, `q ≠ 0` ⇒ `cq ≠ 0`（具体版と同じ 3 行） | 係数は `NonUnitalNonAssocSemiring` | 同 (2) Step 1 |
+| `NecSuf.mulVec_cre_mulVec_eq_neg_smul_of_anticomm`（同） | `ec = −(ce)`, `eq = ηq` ⇒ `e(cq) = (−η)(cq)`（具体版と同じ 9 行） | 係数は `NonUnitalRing`（可換則・単位元は不要）。スカラー `η` は別の環 `S` の元で、`S` の可換則も不要。効くのは `SMulCommClass S R R`（`A(ηv) = η(Av)`） | 同 (2) Step 3 の前半 |
 | `NecSuf.noncommProd_mul_of_mul_eq_smul` | 各因子が `Q` にスカラー倍として働くなら積も働く | `Ring A` + `Algebra 𝕜 A` | 同 (4) |
 | `NecSuf.star_projOn` | `n_i` が可換な自己共役族なら `Q_ε^* = Q_ε` | `StarRing A` | `check_number_operator_is_hermitian` (4) |
 | `NecSuf.smul_left_cancel_of_ne_zero` | `x ≠ 0` ⇒ `ηx = η'x ⇒ η = η'` | `Module 𝕜 A`（`𝕜` は体） | `epsilon_eigenvalue_on_check_Q` (1) |
@@ -271,6 +277,7 @@
 | 同 (3) | `Ising2D.epsilon_anticomm_checkPsiDag` / `checkPsi`（人手の鎖と同じ行の `epsilon_anticomm_two_term` で証明） | `NecSuf.anticomm_add_smul`（具体版と同じ 7 段の calc） | **系としても得られる**（`epsilon_anticomm_checkPsiDag_of_necSuf` / `checkPsi_of_necSuf`） |
 | 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（人手の鎖と同じ行の calc。`Q̌_ε` は `commute_epsilon_Qproj_succ`） | `NecSuf.commute_parity_num`（具体版と同じ 3 行）/ `commute_parity_finProdLeft_defFactor`（具体版と同じ並び）/ `commute_parity_projOn` | **系としても得られる**（`commute_epsilon_nOp_of_necSuf` / `commute_epsilon_Qproj_succ_of_necSuf` / `commute_epsilon_Qproj_of_necSuf`） |
 | `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `NecSuf.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
+| 同 (2) Step 1・Step 3 の前半 | `CheckFermi.cre_mulVec_generator_ne_zero` / `epsilon_mulVec_cre_mulVec_generator`（人手の鎖と同じ行の calc） | `NecSuf/SignReversalOnGeneratorVector.lean` の 4 つ（具体版と同じ行の calc） | **系としても得られる**（`*_of_necSuf`） |
 | 同 (2) | `CheckFermi.eta_insert` | `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |
 | 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `NecSuf.noncommProd_mul_of_mul_eq_smul` | **系** |
 | `trace_of_epsilon_V_plus_via_check_eigenvalues` Step 2 | `VPlusData.trace_epsilon_mul_V` | `NecSuf.sum_powerset_signed_exp` | **系** |

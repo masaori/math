@@ -4,7 +4,8 @@
 正本: `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`
 （`closing_002_claim_epsilon_eigenvalue_on_check_Q`、ラベル **`epsilon_eigenvalue_on_check_Q`**）
 
-必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
+必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル。(2) の Step 1 と Step 3 の前半の数ベクトルの鎖は
+`Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`）の
 `Ising2D.NecSuf.projOn_insert_mul_cre` / `NecSuf.cre_mul_projOn_ne_zero`。
 **符号の反転則 (2) はその 2 つの系である。**
 
@@ -14,7 +15,10 @@
 | --- | --- |
 | (1) `∃! η_ε ∈ {±1}, ε Q̌_ε = η_ε Q̌_ε` | `Ising2D.CheckFermi.eta` / `eta_mem` / `epsilon_mul_Qproj` / `eta_unique` |
 | (1) の鎖: `Q̌_ε q = q`（4 行）・`Q̌_ε(εq) = εq`（4 行）・`q = (ηη)q`（7 行）・`(ηη − 1)q = O`（4 行）・`(η − 1)(η + 1) = 0`（4 行）・`(εQ̌_ε)x = (ηQ̌_ε)x`（9 行）・列ごとの `εQ̌_ε = ηQ̌_ε`（7 行）・一意性（6 行） | `exists_eta_with_generator`・`Qproj_mulVec_generator`・`Qproj_mulVec_epsilon_mulVec_generator`・`generator_eq_eta_mul_eta_smul`・`eta_mul_eta_sub_one_smul_generator`・`eta_mem_of_mul_self_sub_one`・`epsilon_mul_Qproj_mulVec`・`epsilon_mul_Qproj_eq_smul_of_mulVec`・`smul_generator_eq_eta_smul`（各 calc が人手の鎖と同じ行。`mat_mult_associative` の行は、Lean の数ベクトルが 1 列の行列でないので mathlib の `Matrix.mulVec_mulVec`） |
-| (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert` |
+| (2) の冒頭: `im Q̌_ε` の `0` でない元 `q` を取り、冪等性で `Q̌_ε q = q`、5 行の鎖で `εq = η_ε q` | **まだ人手どおりの鎖が無い**（Step 1・Step 3 の補題は `Q̌_ε q = q`・`εq = ηq` を仮定で受ける。`exists_generator_of_eta` の `q` は (1) が選んだ生成元で、人手の「任意の `0` でない元」と違う。`eta_insert` を組み替えるときに置く） |
+| (2) Step 1: `ň_μ q = 0`（6 行）・`ψ̌_{M+1−μ}(ψ̌_μ^† q) = q`（6 行）・背理法（3 行）で `ψ̌_μ^† q ≠ 0` | `nOp_mulVec_generator_eq_zero`・`ann_mulVec_cre_mulVec_generator`・`cre_mulVec_generator_ne_zero` |
+| (2) Step 3 の前半: `ε(ψ̌_μ^† q) = (−η_ε)(ψ̌_μ^† q)`（9 行） | `epsilon_mulVec_cre_mulVec_generator` |
+| (2) 反転則 `η_{ε[μ→1]} = -η_ε` | `Ising2D.CheckFermi.eta_insert`（いまは行列 `ψ̌_μ^† Q̌_ε` の上で必要十分版の系として閉じる。人手の数ベクトルの鎖へは Step 2 を置いてから組み替える） |
 | (3) `η_ε = η_{(1,…,1)}(-1)^{M-\|ε\|}` | `Ising2D.CheckFermi.eta_eq_eta_univ_mul` |
 | (4) `ε = η_{(1,…,1)}(-1)^M ∏(I - 2ň_μ)` | `Ising2D.CheckFermi.epsilon_eq_parityProd` |
 
@@ -27,6 +31,8 @@
 import Ising2D.EigenvalueProblem.EigenvectorOfMaxEigenvalue.CheckFermiInput
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatColumnwiseFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityScalarMultipleAndDifferenceOnVectorsFromNecSuf
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimZeroScalarMultipleAndMatrixSumCommutativeFromNecSuf
+import Ising2D.NecSuf.SignReversalOnGeneratorVector
 
 namespace Ising2D
 
@@ -287,6 +293,95 @@ theorem eta_unique {T : Finset (Fin M)} {η : ℂ} (h : epsilon M * F.Qproj T = 
   exact smul_generator_cancel hq0 (F.smul_generator_eq_eta_smul hqfix hεq h)
 
 /-! ## 原文 (2): 符号の反転則 -/
+
+/-! 人手の (2) は `im Q̌_ε` の `0` でない元 `q`（`Q̌_ε q = q`、`εq = η_ε q`。`exists_generator_of_eta`）の上で計算する。
+以下の 4 つは人手の Step 1 の 3 本の鎖と Step 3 の前半の鎖で、calc の各行が人手の各行に当たる。
+数ベクトルの上の行のうち、`Matrix.mulVec_mulVec`（`mat_mult_associative`）・`Matrix.mulVec_smul`
+（`scalar_multiple_factors_out_of_right_factor`）は (1) と同じく mathlib の定理で受け、`Oq = 0`・`A0 = 0`・`(−A)q = −(Aq)`・
+`v − 0 = v`・`−v = (−1)v` も数ベクトルの版が本文の具体版に無いので mathlib の `Matrix.zero_mulVec`・`Matrix.mulVec_zero`・
+`Matrix.neg_mulVec`・`sub_zero`・`neg_one_smul` で受ける。必要十分版は `Ising2D/NecSuf/SignReversalOnGeneratorVector.lean` で、
+同じ行の calc である。 -/
+
+/-- **原文 (2) Step 1** の `ň_μ q = 0` の 6 行の鎖（`ε_μ = 0`、すなわち `μ ∉ T`）。 -/
+theorem nOp_mulVec_generator_eq_zero {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) {q : Conf M → ℂ}
+    (hqfix : F.Qproj T *ᵥ q = q) : F.nOp μ *ᵥ q = 0 :=
+  calc F.nOp μ *ᵥ q
+      = F.nOp μ *ᵥ (F.Qproj T *ᵥ q) := by rw [hqfix]    -- `Q̌_ε q = q`
+    _ = (F.nOp μ * F.Qproj T) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = ((if μ ∈ T then (1 : ℂ) else 0) • F.Qproj T) *ᵥ q := by rw [F.nOp_mul_Qproj μ T]
+                                                        -- `check_joint_eigenspace_decomposition` (3)（`ε_μ` は `if μ ∈ T then 1 else 0`）
+    _ = ((0 : ℂ) • F.Qproj T) *ᵥ q := by rw [if_neg hμ]  -- `ε_μ = 0`
+    _ = (0 : TensorPow M) *ᵥ q := by rw [zero_smul_tensorPow]
+                                                        -- `zero_scalar_multiple_is_zero_matrix`
+    _ = 0 := Matrix.zero_mulVec q                       -- `zero_matrix_is_left_zero_of_mat_mult`（右の因子が数ベクトル）
+
+/-- **原文 (2) Step 1** の `ψ̌_{M_col+1−μ}(ψ̌_μ^† q) = q` の 6 行の鎖（Lean の `ann μ` が人手の `ψ̌_{M_col+1−μ}`）。 -/
+theorem ann_mulVec_cre_mulVec_generator {μ : Fin M} {q : Conf M → ℂ} (hn : F.nOp μ *ᵥ q = 0) :
+    F.ann μ *ᵥ (F.cre μ *ᵥ q) = q :=
+  calc F.ann μ *ᵥ (F.cre μ *ᵥ q)
+      = (F.ann μ * F.cre μ) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = (1 - F.nOp μ) *ᵥ q := by rw [F.ann_mul_cre μ]   -- `check_number_operator_idempotent` (2)
+    _ = (1 : TensorPow M) *ᵥ q - F.nOp μ *ᵥ q := (sub_mulVec_tensorPow _ _ _).symm
+                                                        -- `matrix_difference_mul_vector`
+    _ = q - F.nOp μ *ᵥ q := by rw [identity_matrix_mulVec_tensorPow]
+                                                        -- `identity_matrix_is_left_unit_of_mat_mult`
+    _ = q - 0 := by rw [hn]                             -- 上の `ň_μ q = 0`
+    _ = q := sub_zero q                                 -- `matrix_minus_zero_matrix`
+
+/-- **原文 (2) Step 1**: `ψ̌_μ^† q ≠ 0`。上の 2 本の鎖と、仮に `ψ̌_μ^† q = 0` とした背理法の 3 行の鎖。 -/
+theorem cre_mulVec_generator_ne_zero {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T) {q : Conf M → ℂ}
+    (hq0 : q ≠ 0) (hqfix : F.Qproj T *ᵥ q = q) : F.cre μ *ᵥ q ≠ 0 := by
+  have h := F.ann_mulVec_cre_mulVec_generator (F.nOp_mulVec_generator_eq_zero hμ hqfix)
+  intro h0                                              -- 仮に `ψ̌_μ^† q = 0` とする
+  apply hq0
+  calc q
+      = F.ann μ *ᵥ (F.cre μ *ᵥ q) := h.symm              -- 上の式変形
+    _ = F.ann μ *ᵥ 0 := by rw [h0]                      -- 仮定 `ψ̌_μ^† q = 0`
+    _ = 0 := Matrix.mulVec_zero _                       -- `zero_matrix_is_right_zero_of_mat_mult`（右の因子が数ベクトル）
+
+/-- **原文 (2) Step 3** の前半: `ε(ψ̌_μ^† q) = (−η)(ψ̌_μ^† q)` の 9 行の鎖（`η` は `εq = ηq` の `η`）。 -/
+theorem epsilon_mulVec_cre_mulVec_generator {μ : Fin M} {q : Conf M → ℂ} {η : ℂ}
+    (hεq : epsilon M *ᵥ q = η • q) :
+    epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
+  calc epsilon M *ᵥ (F.cre μ *ᵥ q)
+      = (epsilon M * F.cre μ) *ᵥ q := Matrix.mulVec_mulVec _ _ _
+                                                        -- `mat_mult_associative`
+    _ = (-(F.cre μ * epsilon M)) *ᵥ q := by rw [F.epsilon_anticomm_cre μ]
+                                                        -- `epsilon_anticommutes_with_check_Z_Y` (3)
+    _ = -((F.cre μ * epsilon M) *ᵥ q) := Matrix.neg_mulVec _ _
+                                                        -- `negation_factors_out_of_left_factor`
+    _ = -(F.cre μ *ᵥ (epsilon M *ᵥ q)) := by rw [Matrix.mulVec_mulVec]
+                                                        -- `mat_mult_associative`
+    _ = -(F.cre μ *ᵥ (η • q)) := by rw [hεq]            -- (2) の冒頭の `εq = η_ε q`
+    _ = -(η • (F.cre μ *ᵥ q)) := by rw [Matrix.mulVec_smul]
+                                                        -- `scalar_multiple_factors_out_of_right_factor`
+    _ = (-1 : ℂ) • (η • (F.cre μ *ᵥ q)) := (neg_one_smul ℂ _).symm
+                                                        -- `negation_is_scalar_multiple_by_minus_one`
+    _ = ((-1 : ℂ) * η) • (F.cre μ *ᵥ q) := smul_smul _ _ _
+                                                        -- `scalar_multiple_is_associative`
+    _ = (-η) • (F.cre μ *ᵥ q) := by rw [neg_one_mul]    -- `multiply_by_minus_one`
+
+/-! 上の 4 つを必要十分版 `Ising2D/NecSuf/SignReversalOnGeneratorVector.lean`（係数 `ℂ`、添字 `Conf M`）の特殊化として得る。 -/
+
+theorem nOp_mulVec_generator_eq_zero_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
+    {q : Conf M → ℂ} (hqfix : F.Qproj T *ᵥ q = q) : F.nOp μ *ᵥ q = 0 :=
+  NecSuf.num_mulVec_eq_zero_of_fixed (fun x : ℂ => zero_mul x) hqfix (F.nOp_mul_Qproj μ T) (if_neg hμ)
+
+theorem ann_mulVec_cre_mulVec_generator_of_necSuf {μ : Fin M} {q : Conf M → ℂ}
+    (hn : F.nOp μ *ᵥ q = 0) : F.ann μ *ᵥ (F.cre μ *ᵥ q) = q :=
+  NecSuf.ann_mulVec_cre_mulVec_eq_of_num_mulVec_eq_zero (F.ann_mul_cre μ) hn
+
+theorem cre_mulVec_generator_ne_zero_of_necSuf {T : Finset (Fin M)} {μ : Fin M} (hμ : μ ∉ T)
+    {q : Conf M → ℂ} (hq0 : q ≠ 0) (hqfix : F.Qproj T *ᵥ q = q) : F.cre μ *ᵥ q ≠ 0 :=
+  NecSuf.cre_mulVec_ne_zero_of_ann_mulVec_cre_mulVec_eq
+    (F.ann_mulVec_cre_mulVec_generator_of_necSuf (F.nOp_mulVec_generator_eq_zero_of_necSuf hμ hqfix)) hq0
+
+theorem epsilon_mulVec_cre_mulVec_generator_of_necSuf {μ : Fin M} {q : Conf M → ℂ} {η : ℂ}
+    (hεq : epsilon M *ᵥ q = η • q) :
+    epsilon M *ᵥ (F.cre μ *ᵥ q) = (-η) • (F.cre μ *ᵥ q) :=
+  NecSuf.mulVec_cre_mulVec_eq_neg_smul_of_anticomm (F.epsilon_anticomm_cre μ) hεq
 
 /-- **原文 (2)**: `μ ∉ T` なら `η_{T∪{μ}} = -η_T`。
 

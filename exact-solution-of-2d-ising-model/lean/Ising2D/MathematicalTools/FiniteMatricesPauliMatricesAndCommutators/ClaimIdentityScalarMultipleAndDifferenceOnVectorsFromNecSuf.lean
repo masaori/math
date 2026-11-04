@@ -6,7 +6,7 @@
 人手のラベルは `matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・
 `scalar_multiple_factors_out_of_left_factor`・`matrix_difference_mul_vector`（前の 2 つの主張は右の因子が数ベクトルの場合）。
 
-`matrix_difference_zero_iff_equal` と、`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の
+`matrix_difference_zero_iff_equal`・`identity_matrix_is_left_unit_of_mat_mult`・`matrix_difference_mul_vector` と、`scalar_multiple_factors_out_of_left_factor` の右の因子が数ベクトルの場合の
 `TensorPow M`（添字 `Conf M`）での系も同じ必要十分版の特殊化として置く。
 具体版は添字が `Fin m` の行列について述べてあり、`Conf M` の行列には当てはまらないためである。
 -/
@@ -60,5 +60,11 @@ theorem vec_sub_eq_zero_iff_tensorPow {M : ℕ} (u w : Conf M → ℂ) : u - w =
 （`NecSuf.one_mulVec_eq` の係数 `ℂ`、添字 `Conf M` の特殊化）: `Iv = v`。 -/
 theorem identity_matrix_mulVec_tensorPow {M : ℕ} (v : Conf M → ℂ) : (1 : TensorPow M) *ᵥ v = v :=
   NecSuf.one_mulVec_eq v
+
+/-- `matrix_difference_mul_vector` の `TensorPow M` での系
+（`NecSuf.sub_mulVec_eq'` の係数 `ℂ`、添字 `Conf M` の特殊化）: `Av − Bv = (A − B)v`。 -/
+theorem sub_mulVec_tensorPow {M : ℕ} (A B : TensorPow M) (v : Conf M → ℂ) :
+    A *ᵥ v - B *ᵥ v = (A - B) *ᵥ v :=
+  NecSuf.sub_mulVec_eq' A B v
 
 end Ising2D
