@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 406 件のうち、SageMath の検算が無いもの 32 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 407 件のうち、SageMath の検算が無いもの 30 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -355,9 +355,13 @@
   050 の check_26・check_max_eigenvalue_simple_step1〜3 の 4 本を内容の名前で移し（中身は不変。step2 の乱数に種を置いた）、実際の V^{(+)}（K_1 = 2 log y・K_2 = log x で成分は QQ）と本文の ψ̌ から作った Q̌_ε で、主張 (1)(2)(3) と (2)(3) の鎖を数体 E_1・QQbar・AA で厳密に確かめる `check_claim_with_actual_V_plus.sage` を足した（等号 759、不等号 120、否定コントロール 30。V^{(+)} の固有多項式の根の全体が {Λ̌_ε} に一致し、最大が Λ̌_max で重複度 1、固有空間が im Q̌_{(1,…,1)} で 1 次元）。
   人手証明の計算の誤りは無かった。(2) の散文（移項・real_exp_strictly_increasing・(2s_2)^{M_col/2} > 0）を (∵) 付きの含意の鎖と、`def_indexed_hyperbolic_abbreviations`・`def_second_transfer_matrix_prefactor` を引く 2 行の鎖にした（主張は不変）。
   Lean の `checkBigLambda_lt_checkBigLambda_univ` は (2s_2)^{M_col/2} > 0 を `hs2 : 0 < s2` からの `Real.rpow_pos_of_pos` で出し、docstring に「本文に実数冪を定めるブロックが無い」と書いたままで、人手の新しい参照（`def_second_transfer_matrix_prefactor`）と 1 対 1 でない（Lean の連続実行の受け持ち）。レビューの必須の指摘（効かない否定コントロールを数えていた、構成上一致する比較の記載漏れ）を直した。
+- `epsilon_anticommutes_with_check_Z_Y`（ε は Z_j・Y_j・Ž_μ・Y̌_μ・ψ̌_μ^†・ψ̌_μ と反可換、ň_μ・Q̌_ϵ と可換）: `sagemath/check/epsilon_anticommutes_with_check_Z_Y/`。
+  浮動小数点の旧い検算（053 の check_01。対象ラベルは onsager_exact_solution だけ）とは別に、厳密計算の検算 4 本を足した: (1) を QQ(i) で（M_col = 2..5）、(2) の鎖を円分体 QQ(ζ_{4M}) で（M_col = 2..5、308 件）、(3) の鎖を係数 p, q を不定元にして（全ての K_1, K_2 を一度に。M_col = 2..4、99 件）、(3)(4) の全ての鎖と主張を本文の ψ̌ で数体 E_μ・E_1 に（3 組の結合定数 × M_col = 2, 3、1365 件）。否定コントロールは ε を I・σ_1^z に替えて、仮定を引く行だけが外れることを見た。
+  人手証明の計算の誤りは無かったが、根拠の誤りを直した: (1) の鎖が引いていた「epsilon_commutes_with_transfer_matrices の Step 1」は本文に無いブロックの段だったので、epsilon_anticommutes_with_jordan_wigner_Z・_Y の引用にした。(2) の鎖が引いていた def_half_integer_modes は θ̃_{1−μ} = −θ̃_μ の主張で Ž の定義ではなかったので def_half_integer_checkZ・_checkY に直した。「積の ℂ 線型性」を有限和の分配・スカラーの出し入れ・符号の出し入れの補題の一行ずつにし、散文の「Y̌ も同じ」「ψ̌ も同じ」を (W̌_μ, W)・(Ψ, p, q) の一本の鎖にし、(4) の ň_μ を product_of_anticommuting_matrices_commutes の引用に、Q̌_ϵ の散文を差・スカラー倍との可換の 3 式と分配則の鎖と有限積との可換の鎖にした（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。
+  申し送り（Lean の連続実行の受け持ち。Lean は不変）: `ClaimEpsilonAnticommutesWithCheckZY.lean` の (2) は必要十分版 `NecSuf.anticomm_sum_smul` の特殊化で、人手の新しい一行ずつの鎖と 1 対 1 でない。冒頭の対応表は「章 010」などの旧い呼び方のままである。
 
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_anticommutes_with_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_eigenvalue_on_check_Q`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

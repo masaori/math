@@ -1,0 +1,7 @@
+=== epsilon_anticommutes_with_check_Z_Y (2): εW̌_μ = -(W̌_με) の鎖 ===
+  M_col=2: 済（累計 44 件）
+  M_col=3: 済（累計 110 件）
+  M_col=4: 済（累計 198 件）
+  M_col=5: 済（累計 308 件）
+等号・主張 308 件、否定コントロール 56 件、失敗 0 件
+RESULT: PASS

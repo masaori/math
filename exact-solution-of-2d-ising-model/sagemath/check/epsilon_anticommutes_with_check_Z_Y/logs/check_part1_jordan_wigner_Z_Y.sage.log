@@ -1,0 +1,7 @@
+=== epsilon_anticommutes_with_check_Z_Y (1): εZ_j = -(Z_jε)、εY_j = -(Y_jε) ===
+  M_col=2: 済（累計 4 件）
+  M_col=3: 済（累計 10 件）
+  M_col=4: 済（累計 18 件）
+  M_col=5: 済（累計 28 件）
+等号・主張 28 件、否定コントロール 28 件、失敗 0 件
+RESULT: PASS

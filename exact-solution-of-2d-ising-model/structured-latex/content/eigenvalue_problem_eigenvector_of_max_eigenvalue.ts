@@ -198,110 +198,109 @@ export default defineBlocks([
     proof: [
       paragraph([
         "(1) ",
-        ref("epsilon_commutes_with_site_sigma_x"),
-        "・",
-        ref("epsilon_anticommutes_with_site_sigma_z"),
-        "・",
-        ref("epsilon_anticommutes_with_site_sigma_y"),
-        " で",
-      ]),
-      displayMath(
-        String.raw`\varepsilon\,\sigma_k^x = \sigma_k^x\,\varepsilon, \qquad
-\varepsilon\,\sigma_k^z = -\,\sigma_k^z\,\varepsilon, \qquad
-\varepsilon\,\sigma_k^y = -\,\sigma_k^y\,\varepsilon
-\qquad (k \in \{1,\dots,M_{\mathrm{col}}\})`,
-      ),
-      paragraph([
-        "が示されている。",
-        ref("def_transfer_matrix_symbols"),
-        " の ",
-        math(String.raw`Z_j = \sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^z`),
-        " に、これを左から順に通す。",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\varepsilon\,Z_j
-&= \varepsilon\,\sigma_1^x\cdots\sigma_{j-1}^x\,\sigma_j^z
-   \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
-&= \sigma_1^x\cdots\sigma_{j-1}^x\,\varepsilon\,\sigma_j^z
-   \quad (\because \text{epsilon\_commutes\_with\_transfer\_matrices の Step 1 の }
-   \varepsilon\sigma_k^x = \sigma_k^x\varepsilon \text{ を } j-1 \text{ 箇所へ同時適用}) \\
-&= \sigma_1^x\cdots\sigma_{j-1}^x\left(-\sigma_j^z\,\varepsilon\right)
-   \quad (\because \text{同 Step 1 の } \varepsilon\sigma_k^z = -\sigma_k^z\varepsilon) \\
-&= -\left(\sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^z\right)\varepsilon
-   \quad (\because \text{結合法則とスカラー倍}) \\
-&= -Z_j\,\varepsilon
-   \quad (\because \text{def\_transfer\_matrix\_symbols})
-\end{aligned}`,
-      ),
-      paragraph([
-        math(String.raw`Y_j = \sigma_1^x\cdots\sigma_{j-1}^x\sigma_j^y`),
-        " についても、最後から 2 番目の段で ",
-        math(String.raw`\varepsilon\sigma_j^y = -\sigma_j^y\varepsilon`),
-        " を使うだけで同じ計算が通る。",
+        ref("epsilon_anticommutes_with_jordan_wigner_Z"),
+        " と ",
+        ref("epsilon_anticommutes_with_jordan_wigner_Y"),
+        " を ",
+        math(String.raw`m \to j`),
+        " で引いたものである（",
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 2} \subset \mathbb{Z}_{\geq 1}`),
+        "。主張 (1)(2)(3) の右辺の ",
+        math(String.raw`-Z_j\,\varepsilon`),
+        " などは ",
+        math(String.raw`-\bigl(Z_j\,\varepsilon\bigr)`),
+        " の意味である）。",
       ]),
       paragraph([
         "(2) ",
+        math(String.raw`(\check{W}_\mu, W)`),
+        " を ",
+        math(String.raw`(\check{Z}_\mu, Z)`),
+        " と ",
+        math(String.raw`(\check{Y}_\mu, Y)`),
+        " のどちらかとし、",
+        math(String.raw`\check{Z}_\mu`),
+        " の場合は ",
         ref("def_half_integer_checkZ"),
-        " の ",
-        math(String.raw`\check{Z}_\mu = \sum_{j=1}^{M_{\mathrm{col}}}Z_j\exp(-ij\tilde\theta_\mu)`),
+        "、",
+        math(String.raw`\check{Y}_\mu`),
+        " の場合は ",
+        ref("def_half_integer_checkY"),
+        " を「",
+        math(String.raw`\check{W}_\mu`),
+        " の定義」と呼ぶ。",
+        math(String.raw`j \in \{1,\dots,(M_{\mathrm{col}})_{\mathbb N}\}`),
+        " について ",
+        math(String.raw`c_j := \exp(-i(j_{\mathbb R}\tilde\theta_\mu)_{\mathbb C}) \in \mathbb{C}`),
+        " と書く（",
+        math(String.raw`(M_{\mathrm{col}})_{\mathbb N}`),
+        "、",
+        math(String.raw`j_{\mathbb Z}`),
+        "、",
+        math(String.raw`j_{\mathbb R}`),
         " は ",
-        math(String.raw`Z_j`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        " 係数の有限和である。行列の積は各因子について ",
-        math(String.raw`\mathbb{C}`),
-        " 線型なので",
+        math(String.raw`\check{W}_\mu`),
+        " の定義の記号）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,\check{Z}_\mu
-&= \varepsilon\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j
-   \quad (\because \text{def\_half\_integer\_modes}) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\left(\varepsilon\,Z_j\right)
-   \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
-&= \sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)\left(-Z_j\,\varepsilon\right)
-   \quad (\because \text{(1) を } M_{\mathrm{col}} \text{ 個の項へ同時適用}) \\
-&= -\left(\sum_{j=1}^{M_{\mathrm{col}}}\exp(-ij\tilde\theta_\mu)Z_j\right)\varepsilon
-   \quad (\because \text{積の } \mathbb{C} \text{ 線型性}) \\
-&= -\check{Z}_\mu\,\varepsilon
-   \quad (\because \text{def\_half\_integer\_modes})
+\varepsilon\,\check{W}_\mu
+&= \varepsilon\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\bigl(c_j W_{j_{\mathbb Z}}\bigr)
+&&\bigl(\because\ \check{W}_\mu\text{ の定義}\bigr)\\
+&= \sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(\varepsilon\bigl(c_j W_{j_{\mathbb Z}}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_right_factor}\ (C \to \varepsilon)\bigr)\\
+&= \sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(c_j\bigl(\varepsilon\,W_{j_{\mathbb Z}}\bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(c_j\Bigl(-\bigl(W_{j_{\mathbb Z}}\,\varepsilon\bigr)\Bigr)\Bigr)
+&&\bigl(\because\ \text{(1) を }j \to j_{\mathbb Z}\text{ で各項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(-\Bigl(c_j\bigl(W_{j_{\mathbb Z}}\,\varepsilon\bigr)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_of_negated_matrix}\ \text{を各項へ同時適用}\bigr)\\
+&= \sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(-\Bigl(\bigl(c_j W_{j_{\mathbb Z}}\bigr)\varepsilon\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ \text{を各項へ同時適用}\bigr)\\
+&= -\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\Bigl(\bigl(c_j W_{j_{\mathbb Z}}\bigr)\varepsilon\Bigr)
+&&\bigl(\because\ \blkref{finite_sum_of_negated_matrices}\bigr)\\
+&= -\Biggl(\biggl(\sum_{j=1}^{(M_{\mathrm{col}})_{\mathbb N}}\bigl(c_j W_{j_{\mathbb Z}}\bigr)\biggr)\varepsilon\Biggr)
+&&\bigl(\because\ \blkref{finite_sum_of_matrices_distributes_in_left_factor}\ (C \to \varepsilon)\bigr)\\
+&= -\bigl(\check{W}_\mu\,\varepsilon\bigr)
+&&\bigl(\because\ \check{W}_\mu\text{ の定義}\bigr)
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\check{Y}_\mu`),
-        " も同じ計算（(1) の ",
-        math(String.raw`Y_j`),
-        " の側を使う）である。",
-      ]),
-      paragraph([
         "(3) ",
+        math(String.raw`(\Psi, p, q)`),
+        " を ",
         ref("def_check_fermi"),
-        " より ",
-        math(String.raw`\check\psi_\mu^\dagger`),
+        " の第二の式の二つの組 ",
+        math(String.raw`\bigl(\check\psi_\mu^\dagger,\ \tfrac{-r}{2\sqrt{M_{\mathrm{col}}}\,b},\ \tfrac{1}{2\sqrt{M_{\mathrm{col}}}}\bigr)`),
         " と ",
-        math(String.raw`\check\psi_\mu`),
-        " はいずれも ",
-        math(String.raw`\check{Z}_\mu`),
-        " と ",
-        math(String.raw`\check{Y}_\mu`),
-        " の ",
-        math(String.raw`\mathbb{C}`),
-        " 係数の 1 次結合である。(2) を両方の項へ同時に適用すればよい：",
-        math(String.raw`\check\psi_\mu^\dagger = p\check{Z}_\mu + q\check{Y}_\mu`),
-        "（",
+        math(String.raw`\bigl(\check\psi_\mu,\ \tfrac{+r}{2\sqrt{M_{\mathrm{col}}}\,b},\ \tfrac{1}{2\sqrt{M_{\mathrm{col}}}}\bigr)`),
+        " のどちらかとする（",
         math(String.raw`p, q \in \mathbb{C}`),
-        "）と書くと",
+        " はその式の係数で、",
+        math(String.raw`\Psi = p\check{Z}_\mu + q\check{Y}_\mu`),
+        "）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,\check\psi_\mu^\dagger
-&= p\left(\varepsilon\check{Z}_\mu\right) + q\left(\varepsilon\check{Y}_\mu\right)
-   \quad (\because \text{def\_check\_fermi と積の }\mathbb C\text{ 線型性}) \\
-&= -p\check{Z}_\mu\varepsilon - q\check{Y}_\mu\varepsilon
-   \quad (\because \text{(2) を 2 箇所へ同時適用}) \\
-&= -\check\psi_\mu^\dagger\,\varepsilon
-   \quad (\because \text{def\_check\_fermi と積の }\mathbb C\text{ 線型性})
+\varepsilon\,\Psi
+&= \varepsilon\bigl(p\check{Z}_\mu + q\check{Y}_\mu\bigr)
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr)\\
+&= \varepsilon\bigl(p\check{Z}_\mu\bigr) + \varepsilon\bigl(q\check{Y}_\mu\bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\bigr)\\
+&= p\bigl(\varepsilon\,\check{Z}_\mu\bigr) + q\bigl(\varepsilon\,\check{Y}_\mu\bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ \text{を 2 項へ同時適用}\bigr)\\
+&= p\Bigl(-\bigl(\check{Z}_\mu\,\varepsilon\bigr)\Bigr) + q\Bigl(-\bigl(\check{Y}_\mu\,\varepsilon\bigr)\Bigr)
+&&\bigl(\because\ \text{(2) を 2 項へ同時適用}\bigr)\\
+&= \Bigl(-\Bigl(p\bigl(\check{Z}_\mu\,\varepsilon\bigr)\Bigr)\Bigr) + \Bigl(-\Bigl(q\bigl(\check{Y}_\mu\,\varepsilon\bigr)\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_of_negated_matrix}\ \text{を 2 項へ同時適用}\bigr)\\
+&= \Bigl(-\Bigl(\bigl(p\check{Z}_\mu\bigr)\varepsilon\Bigr)\Bigr) + \Bigl(-\Bigl(\bigl(q\check{Y}_\mu\bigr)\varepsilon\Bigr)\Bigr)
+&&\bigl(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ \text{を 2 項へ同時適用}\bigr)\\
+&= -\Bigl(\bigl(p\check{Z}_\mu\bigr)\varepsilon + \bigl(q\check{Y}_\mu\bigr)\varepsilon\Bigr)
+&&\bigl(\because\ \blkref{negation_distributes_over_matrix_sum}\ \text{を右辺から左辺へ}\bigr)\\
+&= -\Bigl(\bigl(p\check{Z}_\mu + q\check{Y}_\mu\bigr)\varepsilon\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\bigr)\\
+&= -\bigl(\Psi\,\varepsilon\bigr)
+&&\bigl(\because\ \blkref{def_check_fermi}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -309,60 +308,108 @@ export default defineBlocks([
         ref("def_check_index_set"),
         " (2) より ",
         math(String.raw`M_{\mathrm{col}}+1-\mu \in \check{\mathcal{M}}`),
-        " なので (3) を ",
-        math(String.raw`\check\psi_{M_{\mathrm{col}}+1-\mu}`),
-        " にも適用できる。",
-        ref("def_check_number_operator"),
-        " の ",
-        math(String.raw`\check{n}_\mu = \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}`),
-        " について",
+        " なので、(3) は ",
+        math(String.raw`\varepsilon\,\check\psi_\mu^\dagger = -\bigl(\check\psi_\mu^\dagger\,\varepsilon\bigr)`),
+        " と ",
+        math(String.raw`\varepsilon\,\check\psi_{M_{\mathrm{col}}+1-\mu} = -\bigl(\check\psi_{M_{\mathrm{col}}+1-\mu}\,\varepsilon\bigr)`),
+        " を与える。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \varepsilon\,\check{n}_\mu
-&= \varepsilon\,\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{def\_check\_number\_operator}) \\
-&= \left(-\check\psi_\mu^\dagger\,\varepsilon\right)\check\psi_{M_{\mathrm{col}}+1-\mu}
-   \quad (\because \text{(3)}) \\
-&= -\check\psi_\mu^\dagger\left(\varepsilon\,\check\psi_{M_{\mathrm{col}}+1-\mu}\right)
-   \quad (\because \text{結合法則}) \\
-&= -\check\psi_\mu^\dagger\left(-\check\psi_{M_{\mathrm{col}}+1-\mu}\,\varepsilon\right)
-   \quad (\because \text{(3) を添字 } M_{\mathrm{col}}+1-\mu \text{ へ適用}) \\
-&= \check\psi_\mu^\dagger\check\psi_{M_{\mathrm{col}}+1-\mu}\,\varepsilon
-   \quad (\because (-1)^2 = 1) \\
+&= \varepsilon\bigl(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\bigr)
+&&\bigl(\because\ \blkref{def_check_number_operator}\bigr)\\
+&= \bigl(\check\psi_\mu^\dagger\,\check\psi_{M_{\mathrm{col}}+1-\mu}\bigr)\varepsilon
+&&\bigl(\because\ \blkref{product_of_anticommuting_matrices_commutes}\ (G \to \varepsilon,\ X \to \check\psi_\mu^\dagger,\ Y \to \check\psi_{M_{\mathrm{col}}+1-\mu})\text{。仮定は上の (3) の 2 式}\bigr)\\
 &= \check{n}_\mu\,\varepsilon
-   \quad (\because \text{def\_check\_number\_operator})
+&&\bigl(\because\ \blkref{def_check_number_operator}\bigr)
 \end{aligned}`,
       ),
       paragraph([
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " とし、",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " について ",
         ref("check_joint_eigenspace_decomposition"),
         " の ",
-        math(String.raw`\check{Q}_\epsilon = \prod_{\mu=1}^{M_{\mathrm{col}}}
-\left(\epsilon_\mu\check{n}_\mu + (1-\epsilon_\mu)\left(I - \check{n}_\mu\right)\right)`),
-        " は ",
-        math(String.raw`\check{n}_\mu`),
-        " たちと ",
-        math(String.raw`I`),
-        " から積と ",
-        math(String.raw`\mathbb{C}`),
-        " 係数の和だけで作られている。",
+        math(String.raw`\check{Q}_\epsilon`),
+        " の定義の因子を ",
+        math(String.raw`A_\nu := \epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)`),
+        " と書く（",
+        math(String.raw`\epsilon_\nu`),
+        "・",
+        math(String.raw`1-\epsilon_\nu`),
+        " はその定義のスカラー）。まず ",
         math(String.raw`\varepsilon`),
-        " は各 ",
-        math(String.raw`\check{n}_\mu`),
-        " と可換、",
+        " は ",
         math(String.raw`I`),
-        " とも可換（",
-        ref("scalar_identity_commutes"),
-        "）なので、積・和をとっても可換性は保たれ ",
-        math(String.raw`\varepsilon\check{Q}_\epsilon = \check{Q}_\epsilon\varepsilon`),
-        "。",
+        " と可換である。",
       ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,I
+&= \varepsilon
+&&\bigl(\because\ \blkref{identity_matrix_is_right_unit_of_mat_mult}\bigr)\\
+&= I\,\varepsilon
+&&\bigl(\because\ \blkref{identity_matrix_is_left_unit_of_mat_mult}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "これと上の ",
+        math(String.raw`\varepsilon\,\check{n}_\nu = \check{n}_\nu\,\varepsilon`),
+        "（",
+        math(String.raw`\mu \to \nu`),
+        "）から、次の 3 式が成り立つ。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\left(I - \check{n}_\nu\right) &= \left(I - \check{n}_\nu\right)\varepsilon
+&&\bigl(\because\ \blkref{commuting_with_difference}\ (G \to \varepsilon,\ X \to I,\ W \to \check{n}_\nu)\text{。仮定は }\varepsilon I = I\varepsilon\text{ と }\varepsilon\check{n}_\nu = \check{n}_\nu\varepsilon\bigr)\\
+\varepsilon\bigl(\epsilon_\nu\,\check{n}_\nu\bigr) &= \bigl(\epsilon_\nu\,\check{n}_\nu\bigr)\varepsilon
+&&\bigl(\because\ \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ c \to \epsilon_\nu,\ X \to \check{n}_\nu)\text{。仮定は }\varepsilon\check{n}_\nu = \check{n}_\nu\varepsilon\bigr)\\
+\varepsilon\Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr) &= \Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
+&&\bigl(\because\ \blkref{commuting_with_scalar_multiple}\ (G \to \varepsilon,\ c \to 1-\epsilon_\nu,\ X \to I - \check{n}_\nu)\text{。仮定は 1 行目}\bigr)
+\end{aligned}`,
+      ),
+      paragraph(["したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,A_\nu
+&= \varepsilon\Bigl(\epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)
+&&\bigl(\because\ A_\nu\text{ の置き方}\bigr)\\
+&= \varepsilon\bigl(\epsilon_\nu\,\check{n}_\nu\bigr) + \varepsilon\Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_right_factor}\bigr)\\
+&= \bigl(\epsilon_\nu\,\check{n}_\nu\bigr)\varepsilon + \Bigl((1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
+&&\bigl(\because\ \text{上の 3 式の 2 行目と 3 行目を 2 項へ同時適用}\bigr)\\
+&= \Bigl(\epsilon_\nu\,\check{n}_\nu + (1-\epsilon_\nu)\left(I - \check{n}_\nu\right)\Bigr)\varepsilon
+&&\bigl(\because\ \blkref{mat_mult_distributes_over_sum_in_left_factor}\bigr)\\
+&= A_\nu\,\varepsilon
+&&\bigl(\because\ A_\nu\text{ の置き方}\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "がすべての ",
+        math(String.raw`\nu \in \check{\mathcal{M}}`),
+        " で成り立ち、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\varepsilon\,\check{Q}_\epsilon
+&= \varepsilon\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\text{ の }\check{Q}_\epsilon\text{ の定義と }A_\nu\text{ の置き方}\bigr)\\
+&= \Bigl(\prod_{\nu=1}^{M_{\mathrm{col}}}A_\nu\Bigr)\varepsilon
+&&\bigl(\because\ \blkref{matrix_commuting_with_each_factor_commutes_with_finite_product}\ (n \to 2^{M_{\mathrm{col}}},\ r \to M_{\mathrm{col}},\ X \to \varepsilon,\ A_j \to A_\nu)\bigr)\\
+&= \check{Q}_\epsilon\,\varepsilon
+&&\bigl(\because\ \blkref{check_joint_eigenspace_decomposition}\text{ の }\check{Q}_\epsilon\text{ の定義と }A_\nu\text{ の置き方}\bigr)
+\end{aligned}`,
+      ),
     ],
     conversion: {
       status: "added",
       notes: [
-        "ε が Z_j, Y_j と反可換であることは 010 章の epsilon_commutes_with_transfer_matrices の Step 1（σ_k^x とは可換、σ_k^y, σ_k^z とは反可換）から直ちに従う。ε が V_1, V_2 と可換であることと、Z_j, Y_j と反可換であることは矛盾しない（V_1, V_2 の指数の中身は Z, Y の 2 次式である）。",
-        "数値検証: sagemath/check/053_claim_even_sector_closing/check_01（M=2,3,4,5・6 組の (K_1,K_2) で残差 ≤ 2e-14）。",
+        "ε が Z_j, Y_j と反可換であることは epsilon_anticommutes_with_jordan_wigner_Z・epsilon_anticommutes_with_jordan_wigner_Y（σ_k^x とは可換、σ_k^y, σ_k^z とは反可換から従う）である。ε が V_1, V_2 と可換であることと、Z_j, Y_j と反可換であることは矛盾しない（V_1, V_2 の指数の中身は Z, Y の 2 次式である）。",
+        "2026-11-04（全証明の SageMath 検算）: (1) の鎖が引いていた「epsilon_commutes_with_transfer_matrices の Step 1」は本文に無いブロックの段だった（その内容は 2026-11-02 に epsilon_anticommutes_with_jordan_wigner_Z・_Y へ切り出されている）。(1) をその二つの主張の引用にした。(2) の鎖が引いていた def_half_integer_modes は θ̃_{1−μ} = −θ̃_μ の主張で Ž の定義ではなかったので、def_half_integer_checkZ・def_half_integer_checkY に直し、項の順序を定義どおり exp(…)Z_{j_Z} にした。(2)(3) の「積の ℂ 線型性」の行を finite_sum_of_matrices_distributes_in_left/right_factor・scalar_multiple_factors_out_of_left/right_factor・scalar_multiple_of_negated_matrix・finite_sum_of_negated_matrices・negation_distributes_over_matrix_sum の一行ずつに分け、散文の「Y̌_μ も同じ計算」を (W̌_μ, W) ∈ {(Ž_μ, Z), (Y̌_μ, Y)} の一本の鎖に、(3) の ψ̌_μ を (Ψ, p, q) の一本の鎖に含めた。(4) の ň_μ の鎖を product_of_anticommuting_matrices_commutes の引用に、Q̌_ε の散文を εI = Iε の鎖、commuting_with_difference・commuting_with_scalar_multiple を引く 3 式、分配則の鎖と matrix_commuting_with_each_factor_commutes_with_finite_product の鎖にした。主張は変えていない。",
+        "数値検証: sagemath/check/epsilon_anticommutes_with_check_Z_Y/（厳密計算）。旧い浮動小数点の検算 sagemath/check/053_claim_even_sector_closing/check_01 も残っている。",
       ],
     },
   },

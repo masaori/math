@@ -1,0 +1,6 @@
+=== epsilon_anticommutes_with_check_Z_Y (3): εΨ = -(Ψε) の鎖（p, q は不定元） ===
+  M_col=2: 済（累計 22 件）
+  M_col=3: 済（累計 55 件）
+  M_col=4: 済（累計 99 件）
+等号・主張 99 件、否定コントロール 9 件、失敗 0 件
+RESULT: PASS
