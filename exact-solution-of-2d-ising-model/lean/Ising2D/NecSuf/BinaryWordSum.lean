@@ -4,9 +4,11 @@
 具体版: `Ising2D/MathematicalTools/FiniteMatricesPauliMatricesAndCommutators/DefinitionSumOverBinaryWords.lean`
 （人手 `def_sum_over_binary_words`・`sum_over_binary_words_distributes_in_left_factor`・`sum_over_binary_words_distributes_in_right_factor`・
 `sum_over_binary_words_with_one_nonzero_term`）と
-`ClaimExpansionOfFiniteProductOfTwoTermSums.lean`（人手 `expansion_of_finite_product_of_two_term_sums`）。
+`ClaimExpansionOfFiniteProductOfTwoTermSums.lean`（人手 `expansion_of_finite_product_of_two_term_sums`）と
+`ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers.lean`（人手 `real_sum_over_binary_words_distributes_in_left_factor`・
+`expansion_of_finite_product_of_two_term_sums_of_real_numbers`）。
 具体版をこのファイルの系として導くのは、同じフォルダの `DefinitionSumOverBinaryWordsFromNecSuf.lean`・
-`ClaimExpansionOfFiniteProductOfTwoTermSumsFromNecSuf.lean`。
+`ClaimExpansionOfFiniteProductOfTwoTermSumsFromNecSuf.lean`・`ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbersFromNecSuf.lean`。
 
 人手の `r ∈ ℤ_{≥1}` が Lean の `r + 1` に当たる。人手の `{0,1}^r` は Lean の `Fin (r + 1) → Fin 2`、人手の `(ε', e)` は
 `Fin.snoc ε' e`（`(ε', e)_j = ε'_j`（`j ≤ r`）は `Fin.snoc_castSucc`、`(ε', e)_{r+1} = e` は `Fin.snoc_last`）である。
@@ -18,7 +20,9 @@
 | `sum_over_binary_words_distributes_in_right_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (C * ·)`） |
 | `trace_of_sum_over_binary_words` の `r = 1`・`r → r + 1` | `binWordSum_map` の 2 つの節（`f := trace`。導出は `ClaimTraceOfSumOverBinaryWordsFromNecSuf.lean`） |
 | `real_inclusion_preserves_sum_over_binary_words` の `r = 1`・`r → r + 1`（人手の鎖を右辺から左辺へ読んだ形。段の対応は逆順で 1 対 1） | `binWordSum_map` の 2 つの節（`f := (↑· : ℝ → ℂ)`。導出は `ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf.lean`） |
+| `real_sum_over_binary_words_distributes_in_left_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (· * c)`。導出は `ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbersFromNecSuf.lean`） |
 | `expansion_of_finite_product_of_two_term_sums` の `r = 1`・`r → r + 1`（同じ並び） | `finProdLeft_add_eq_binWordSum` の 2 つの節 |
+| `expansion_of_finite_product_of_two_term_sums_of_real_numbers` の `r = 1`・`r → r + 1`（同じ並び） | `finProdLeft_add_eq_binWordSum` の 2 つの節（`R := ℝ`。導出は `ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbersFromNecSuf.lean`） |
 | `sum_over_binary_words_with_one_nonzero_term` の `r = 1` の二つの場合・`r → r + 1` の `δ' ≠ δ`・本体・二つの場合（同じ並び） | `binWordSum_eq_of_eq_zero` の 2 つの節 |
 
 ## 何が効いているか / 効いていないか

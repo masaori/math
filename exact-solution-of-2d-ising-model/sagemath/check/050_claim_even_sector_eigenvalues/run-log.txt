@@ -293,3 +293,10 @@ RESULT: PASS
 checked 992 lines
 negative controls (broken lines detected): 496
 RESULT: PASS
+
+##### 2026-11-04 に check_trace_of_check_Vprime_step2_expansion を足した（trace_of_check_Vprime の Step 2 の展開の行: 直前の鎖を各項へ入れる行と expansion_of_finite_product_of_two_term_sums_of_real_numbers の行、続く 2 行）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_trace_of_check_Vprime_step2_expansion.sage
+checked 80 lines (M_col = 2..6, 4 coupling pairs)
+checked the expansion line exactly in 6 cases (M_col = 1..6)
+negative controls (broken lines detected): 20
+RESULT: PASS

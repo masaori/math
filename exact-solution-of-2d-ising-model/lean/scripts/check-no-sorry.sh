@@ -1267,6 +1267,10 @@ targets=(
   Ising2D.expansion_of_finite_product_of_two_term_sums
   Ising2D.expansion_of_finite_product_of_two_term_sums_of_necSuf
   Ising2D.expansion_of_finite_product_of_two_term_sums_tensorPow
+  Ising2D.binaryWordRealSum_mul
+  Ising2D.expansion_of_finite_product_of_two_term_sums_of_real
+  Ising2D.binaryWordRealSum_mul_of_necSuf
+  Ising2D.expansion_of_finite_product_of_two_term_sums_of_real_of_necSuf
   Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product
   Ising2D.matrix_commuting_with_each_factor_commutes_with_finite_product_of_necSuf
   Ising2D.commute_finProdLeft_tensorPow
@@ -1955,6 +1959,7 @@ targets=(
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
   Ising2D.CheckFermiSetup.exp_gval_step2_product
   Ising2D.CheckFermiSetup.exp_gval_eq_prod
+  Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion
   Ising2D.CheckFermiSetup.trace_Vprime_step1
   Ising2D.CheckFermiSetup.trace_Vprime_eq_finset_sum_of_mathlib
   Ising2D.CheckFermiSetup.trace_Vprime

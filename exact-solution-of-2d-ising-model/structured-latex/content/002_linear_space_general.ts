@@ -2939,6 +2939,156 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_claim_real_sum_over_binary_words_distributes_in_left_factor",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和に右から実数を掛けると、各項に掛けた和になる}` },
+    labels: ["real_sum_over_binary_words_distributes_in_left_factor"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`x_\epsilon \in \mathbb{R}`),
+        "、",
+        math(String.raw`c \in \mathbb{R}`),
+        " とする。和は ",
+        ref("def_sum_over_binary_words_of_real_numbers"),
+        "、積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。このとき",
+      ]),
+      displayMath(String.raw`\Bigl(\sum_{\epsilon \in \{0,1\}^{r}} x_\epsilon\Bigr) c = \sum_{\epsilon \in \{0,1\}^{r}} x_\epsilon c`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた実数の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{1}} x_\epsilon\Bigr) c
+&= \bigl(x_{(1)} + x_{(0)}\bigr) c
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\bigr)\\
+&= x_{(1)} c + x_{(0)} c
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a \to x_{(1)},\ b \to x_{(0)})\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} x_\epsilon c
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to x_\epsilon c)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`\{0,1\}^{r+1}`),
+        " で添字付けられた族 ",
+        math(String.raw`x_\epsilon`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} x_\epsilon\Bigr) c
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\bigr)\Bigr) c
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\bigr) c
+&&\bigl(\because\ \text{帰納法の仮定}\ (x_{\epsilon'} \to x_{(\epsilon',1)} + x_{(\epsilon',0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} c + x_{(\epsilon',0)} c\bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ (a + b)c = ac + bc\ (a \to x_{(\epsilon',1)},\ b \to x_{(\epsilon',0)})\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} x_\epsilon c
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to x_\epsilon c)\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。expansion_of_finite_product_of_two_term_sums_of_real_numbers の帰納法の段が使うので足した。sum_over_binary_words_distributes_in_left_factor（行列）と同じ帰納法で、項と掛ける数を実数にしたもの。Lean は具体版 Ising2D.binaryWordRealSum_mul（ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers.lean）。数値検証: sagemath/check/real_sum_over_binary_words_distributes_in_left_factor/。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_expansion_of_finite_product_of_two_term_sums_of_real_numbers",
+    kind: "claim",
+    title: { text: "実数の二項の和の有限積の展開" },
+    labels: ["expansion_of_finite_product_of_two_term_sums_of_real_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`j \in \{1,\dots,r\}`),
+        " と ",
+        math(String.raw`e \in \{0,1\}`),
+        " で添字付けられた ",
+        math(String.raw`a_j^{(e)} \in \mathbb{R}`),
+        " とする。有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        "、",
+        math(String.raw`\{0,1\}^{r}`),
+        " の上の和は ",
+        ref("def_sum_over_binary_words_of_real_numbers"),
+        "、和 ",
+        math(String.raw`a_j^{(1)} + a_j^{(0)}`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の和による。このとき",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{r} \Bigl(a_j^{(1)} + a_j^{(0)}\Bigr) = \sum_{\epsilon \in \{0,1\}^{r}} \prod_{j=1}^{r} a_j^{(\epsilon_j)}`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、実数の全ての族 ",
+        math(String.raw`(a_j^{(e)})`),
+        " について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{1} \Bigl(a_j^{(1)} + a_j^{(0)}\Bigr)
+&= a_1^{(1)} + a_1^{(0)}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (m \to 1,\ r_j \to a_j^{(1)} + a_j^{(0)})\bigr)\\
+&= a_1^{((1)_1)} + a_1^{((0)_1)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (1)_1 = 1,\ (0)_1 = 0\bigr)\\
+&= \prod_{j=1}^{1} a_j^{((1)_j)} + \prod_{j=1}^{1} a_j^{((0)_j)}
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (m \to 1,\ r_j \to a_j^{((1)_j)},\ r_j \to a_j^{((0)_j)})\ \text{を右辺から左辺へ 2 か所}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{1}} \prod_{j=1}^{1} a_j^{(\epsilon_j)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to \textstyle\prod_{j=1}^{1} a_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で全ての族について成り立つと仮定する。",
+        math(String.raw`j \in \{1,\dots,r+1\}`),
+        " で添字付けられた族 ",
+        math(String.raw`(a_j^{(e)})`),
+        " に対して",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\prod_{j=1}^{r+1} \Bigl(a_j^{(1)} + a_j^{(0)}\Bigr)
+&= \Bigl(\prod_{j=1}^{r} \Bigl(a_j^{(1)} + a_j^{(0)}\Bigr)\Bigr)\Bigl(a_{r+1}^{(1)} + a_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (m \to r,\ r_j \to a_j^{(1)} + a_j^{(0)})\bigr)\\
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr)\Bigl(a_{r+1}^{(1)} + a_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \text{帰納法の仮定}\ (a_j^{(e)} \to a_j^{(e)}\ (j \in \{1,\dots,r\}))\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr)\Bigl(a_{r+1}^{(1)} + a_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \blkref{real_sum_over_binary_words_distributes_in_left_factor}\ (x_{\epsilon'} \to \textstyle\prod_{j=1}^{r} a_j^{(\epsilon'_j)},\ c \to a_{r+1}^{(1)} + a_{r+1}^{(0)})\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr) a_{r+1}^{(1)} + \Bigl(\prod_{j=1}^{r} a_j^{(\epsilon'_j)}\Bigr) a_{r+1}^{(0)}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配則}\ a(b + c) = ab + ac\ (a \to \textstyle\prod_{j=1}^{r} a_j^{(\epsilon'_j)},\ b \to a_{r+1}^{(1)},\ c \to a_{r+1}^{(0)})\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\Bigl(\prod_{j=1}^{r} a_j^{((\epsilon',1)_j)}\Bigr) a_{r+1}^{((\epsilon',1)_{r+1})} + \Bigl(\prod_{j=1}^{r} a_j^{((\epsilon',0)_j)}\Bigr) a_{r+1}^{((\epsilon',0)_{r+1})}\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words}\ \text{の}\ (\epsilon', e)_j = \epsilon'_j\ (j \leq r),\ (\epsilon', e)_{r+1} = e\ \text{を各項へ同時に}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(\prod_{j=1}^{r+1} a_j^{((\epsilon',1)_j)} + \prod_{j=1}^{r+1} a_j^{((\epsilon',0)_j)}\Bigr)
+&&\bigl(\because\ \blkref{def_finite_product_of_real_numbers}\ (m \to r,\ r_j \to a_j^{((\epsilon',e)_j)})\ \text{を右辺から左辺へ、各項の 2 か所へ同時に}\bigr)\\
+&= \sum_{\epsilon \in \{0,1\}^{r+1}} \prod_{j=1}^{r+1} a_j^{(\epsilon_j)}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ (x_\epsilon \to \textstyle\prod_{j=1}^{r+1} a_j^{(\epsilon_j)})\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 2 が Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) を「有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張 expansion_of_finite_product_of_two_term_sums は行列の主張なので、因子を実数にした同じ帰納法を足した。Lean は具体版 Ising2D.expansion_of_finite_product_of_two_term_sums_of_real（ClaimExpansionOfFiniteProductOfTwoTermSumsOfRealNumbers.lean）、必要十分版は行列の場合と同じ Ising2D.NecSuf.finProdLeft_add_eq_binWordSum（R := ℝ）。数値検証: sagemath/check/expansion_of_finite_product_of_two_term_sums_of_real_numbers/。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_sum_over_binary_words_distributes_in_left_factor",
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に右から行列を掛けると、各項に掛けた和になる}` },

@@ -4212,24 +4212,24 @@ E_K \check{Q}_\epsilon
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\epsilon`),
-        " は各成分を独立に ",
-        math(String.raw`0`),
-        " か ",
-        math(String.raw`1`),
-        " から選ぶので、有限個の因子の積の展開（Step 1 の ",
-        math(String.raw`\sum_\epsilon`),
-        " と同じ 1 対 1 対応）により",
+        "この積表示を和の各項へ入れ、実数の二項の和の有限積の展開を右辺から左辺へ使う。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))
+&= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+&&\bigl(\because\ \text{直前の鎖を各項へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\left(1 - \tfrac12\right)\right)
+   + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
+&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp(\gamma(\tilde\theta_\mu)(e - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
    \left(\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
    + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
-   \quad (\because \text{直前の積表示と、有限個の因子の積の展開}) \\
+&&\bigl(\because\ 1 - \tfrac12 = \tfrac12,\ 0 - \tfrac12 = -\tfrac12\ \text{と}\ \mathbb{R}\ \text{の和の交換則}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-   \quad \left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\right)
+&&\left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\right)
 \end{aligned}`,
       ),
       paragraph([
@@ -4295,6 +4295,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step1_chain.sage。",
         "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_real_inclusion.sage。",
         "2026-11-04: Step 2 の exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) は「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、M_col 個の和には届かない。ǧ の定義を開く行と、新しく足した real_exp_of_finite_sum（m → M_col）を引く行の 2 行の鎖にした。右辺の積は新しく足した def_finite_product_of_real_numbers の ℝ の有限積である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_exp_product.sage。",
+        "2026-11-04: Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) は「直前の積表示と、有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張は行列の主張 expansion_of_finite_product_of_two_term_sums しか無かったので、実数の主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers（と帰納法の段が引く real_sum_over_binary_words_distributes_in_left_factor）を 002 章に足し、直前の鎖を各項へ入れる行と、展開を右辺から左辺へ引く行（a_μ^{(e)} → exp(γ(θ̃_μ)(e − 1/2))）に分けた。1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の順序を入れ替える行は、根拠を書いた別の行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_expansion.sage。",
       ],
     },
   },
