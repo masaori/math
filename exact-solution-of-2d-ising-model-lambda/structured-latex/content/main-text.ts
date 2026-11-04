@@ -35872,10 +35872,10 @@ C_{L,\mathrm{v}}:=\{n_{\mathrm{v}}(\pi(-1),j)\mid j\in\mathbb{Z}/L\mathbb{Z}\}`)
                         paragraph(["存在について、"]),
                         displayMath(String.raw`(a,b):=\bigl(\varepsilon_{L,\mathrm{h}}(A),\varepsilon_{L,\mathrm{v}}(A)\bigr)
 \in\{0,1\}\times\{0,1\}
-\quad(\because\ \blkref{def_torus_winding_parities})`),
+\quad\bigl(\because\ \blkref{def_torus_winding_parities}\bigr)`),
                         paragraph([ref("def_torus_homology_sector"), " より、この組について"]),
                         displayMath(String.raw`A\in\mathcal{E}^{a,b}_L
-\quad(\because\ \blkref{def_torus_homology_sector},\ A\ \text{は偶部分グラフであり、二つの等式は }(a,b)\text{ の定め方そのもの})`),
+\quad\bigl(\because\ \blkref{def_torus_homology_sector},\ A\ \text{は偶部分グラフであり、二つの等式は }(a,b)\text{ の定め方そのもの}\bigr)`),
                         paragraph([
                           "である。一意性について、", math(String.raw`A\in\mathcal{E}^{a',b'}_L`),
                           " を満たす別の組 ", math(String.raw`(a',b')\in\{0,1\}\times\{0,1\}`), " を取る。",
@@ -35890,7 +35890,7 @@ b'&=\varepsilon_{L,\mathrm{v}}(A)
 &=b
 &&\bigl(\because\ \blkref{def_torus_homology_sector},\ A\in\mathcal{E}^{a,b}_L\bigr).
 \end{aligned}`),
-                        displayMath(String.raw`(a',b')=(a,b)\quad(\because\ \text{順序対の二成分がそれぞれ等しい})`),
+                        displayMath(String.raw`(a',b')=(a,b)\quad\bigl(\because\ \text{順序対の二成分がそれぞれ等しい}\bigr)`),
                         paragraph(["したがって四つのセクターは偶部分グラフ全体を重なりなく覆う。全過程は有限集合と自然数の偶奇だけで閉じる。"]),
                       ],
                     },
