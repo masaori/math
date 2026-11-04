@@ -62059,6 +62059,10 @@ y+_{\mathbb{Z}/L\mathbb{Z}}\bar1
                         labels: ["claim_edge_representative_displacement"],
                         habitat: "Z",
                         verification: ["sagemath/check/closed-walk-plane-displacement"],
+                        lean: [
+                          "Ising2DLambda.KacWard.edge_representative_displacement",
+                          "Ising2DLambda.NecSuf.KacWard.representative_step_displacement",
+                        ],
                         statement: [
                           paragraph([
                             "任意の ", math(String.raw`\vec e=(e,d)\in\vec E_L`),
