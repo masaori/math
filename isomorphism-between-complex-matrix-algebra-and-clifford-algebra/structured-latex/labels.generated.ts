@@ -21,6 +21,7 @@ export const ALL_LABELS = [
   "claim_ordered_sum_with_kronecker_delta_picks_term",
   "claim_pointwise_scalar_multiple_of_linear_form_is_linear_form",
   "claim_pointwise_sum_of_linear_forms_is_linear_form",
+  "claim_reindexing_linear_combination_by_bijection",
   "claim_scalar_multiple_of_linear_combination",
   "claim_scalar_multiple_of_zero_vector_is_zero_vector",
   "claim_sum_of_linear_combinations_of_same_family",
