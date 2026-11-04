@@ -2,6 +2,8 @@
 
 2026-11-04: 全証明の SageMath 検算として、`H1_plus_in_sigma_z_form`（iH_1^{(+)} = D_0 + εG）に検算 `sagemath/check/H1_plus_in_sigma_z_form/` を付けた（未検算 27 件）。人手証明の計算の誤りは無し。他のブロックの証明の途中（V1_in_Z_Y_epsilon の Step 0）とラベルの無い「相異なるサイトの因子は可換」を根拠にしていたので、新しい主張 `pauli_y_times_pauli_x`・`pauli_x_times_pauli_z`（検算付き）を足し、証明をクロネッカー積表示の (∵) 付きの鎖に書き直した（主張は不変）。Lean の `ClaimH1PlusInSigmaZForm.lean` は不変で、新しい鎖と新しい二つの主張との 1 対 1 は Lean の連続実行の受け持ち。次は `D0_G_diagonal_action`。
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百二十七個目として、人手 `eigenvalues_of_V_plus` を (a) (1) の固有関係・(b) 対角化可能性・重複度・総個数・(c) 正値性・(d) 大小の比較・(e) `Λ̌_maxΛ̌_min` に割り、(a) を行った。(1) を名前だけの根拠から 9 行の鎖二本にし、Lean の `VPlus_mul_Qproj`・`Qproj_mul_VPlus` を同じ行の calc にした。SageMath は `sagemath/check/eigenvalues_of_V_plus/`。`constant_c_value_even_sector` の `s_2 = sinh 2K_2` の根拠を `def_indexed_hyperbolic_abbreviations` に直した。次は (b)（状態台帳）。
+
 2026-11-04: Lean の通しの証明のゴールラインの確認の百二十六個目として、人手 `constant_c_value_even_sector`（同日に SageMath の連続実行が準備・Step 1〜5 に書き直した）の Lean を 1 対 1 に書き直した。必要十分版を `NecSuf.const_eq_of_trace_chains`（Step 4・5。ℂ は零を持つ群、包含は積を保つ単射、ℝ は順序体）に替え、`positive_real_square_injective` の具体版・必要十分版と `trace_basic_properties` (4) の人手の形 `trace_similarity_invariant` を足した。主張は仮定 `c ≠ 0`（人手の `c ∈ ℂ^×`）を受け取る。二回のレビューで必須の指摘が無くなるまで直した。lake build・check-no-sorry・check-end-to-end・check-docs-references・npm run check・verify-check-linkage 通過。次は `eigenvalues_of_V_plus`。
 
 2026-11-04: 全証明の SageMath 検算として、`trace_of_epsilon_V_plus_via_check_eigenvalues`（tr(εV^{(+)}) = η_{(1,…,1)}ϰ_ℂ、ϰ > 0、η = +1 ⟺ tr > 0）に検算 `sagemath/check/trace_of_epsilon_V_plus_via_check_eigenvalues/` を付けた（未検算 28 件）。名前だけの根拠と散文を (∵) 付きの Step 1〜7 の鎖に書き直し、主張を (1)(2)(3) に分けた（値は不変）。新しい主張 `finite_product_of_real_products` と検算を足した。Lean は不変で、新しい鎖との 1 対 1 は Lean の連続実行の受け持ち。次は `H1_plus_in_sigma_z_form`。

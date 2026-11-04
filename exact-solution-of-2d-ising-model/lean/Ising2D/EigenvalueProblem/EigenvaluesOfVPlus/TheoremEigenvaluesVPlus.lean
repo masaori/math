@@ -34,7 +34,13 @@ noncomputable def checkBigLambda (F : CheckFermiSetup M) (g : CheckIdx M → ℝ
     (T : Finset (CheckIdx M)) : ℝ :=
   ((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * Real.exp (F.gval g T)
 
-/-- **原文 `eigenvalues_of_V_plus` (1)**: `V^{(+)} Q̌_ε = Λ̌_ε Q̌_ε`。 -/
+/-- **原文 `eigenvalues_of_V_plus` (1)**: `V^{(+)} Q̌_ε = (Λ̌_ε)_ℂ Q̌_ε`。
+
+人手の (1) の第一の鎖（9 行）と 1 対 1 である（calc は 6 段。1〜5 行目が 1 段ずつ、6・7・9 行目が最後の 1 段、8 行目は無い）。人手の 6・7・9 行目（`a` の置き方、`ǧ(ε)` の定義、`Λ̌_ε` の定義）は、
+Lean では `checkBigLambda` の定義（`ǧ(ε)` を `F.gval g T` で書く）の展開 `rfl` の 1 段が受け持つ。人手の 8 行目（`s_2 = sinh 2K_2`）に当たる段は無い。
+Lean の `VPlus`・`checkBigLambda` は `s2` を `K_2` から独立な引数に取り、主張は全ての `s2 > 0` について述べるからである。
+`hVeq` の `c` が 0 でないことは、人手では `V_plus_eq_c_check_Vprime` の `c ∈ ℂ^×` が与える。ここでは仮定に持たないので
+`c_ne_zero_of_VPlus_eq_smul`（`V^{(+)}` の可逆性から）で作って `constant_c_value_even_sector` に渡す。 -/
 theorem VPlus_mul_Qproj (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
@@ -42,10 +48,23 @@ theorem VPlus_mul_Qproj (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     VPlus M s2 K1 K2star * F.Qproj T
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
   have hc := constant_c_value_even_sector F g hK1 hK2 hs2 (c_ne_zero_of_VPlus_eq_smul F g hs2 hVeq) hVeq
-  rw [hVeq, hc, smul_mul_assoc, F.Vprime_mul_Qproj g T, smul_smul, checkBigLambda]
-  norm_cast
+  calc VPlus M s2 K1 K2star * F.Qproj T
+      = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • F.Vprime g) * F.Qproj T := by
+        rw [hVeq, hc]                                                 -- `constant_c_value_even_sector`
+    _ = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • (F.Vprime g * F.Qproj T) :=
+        smul_mul_matrix_tensorPow _ _ _                               -- `scalar_multiple_factors_out_of_left_factor`
+    _ = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • (((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T) := by
+        rw [F.Vprime_mul_Qproj g T]                                   -- `eigenvalues_of_check_Vprime` の `V̌'Q̌_ε = (exp ǧ(ε))_ℂ Q̌_ε`
+    _ = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) * ((Real.exp (F.gval g T) : ℝ) : ℂ)) • F.Qproj T :=
+        smul_smul _ _ _                                               -- `scalar_multiple_is_associative`（Lean の具体版は無く、mathlib の `smul_smul`）
+    _ = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T := by
+        rw [real_inclusion_mul]                                       -- `real_inclusion_preserves_product`
+    _ = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := rfl         -- 人手の 6・7・9 行目（`checkBigLambda` の定義。8 行目は `s2` が引数なので無い）
 
-/-- 左右を入れ替えた形 `Q̌_ε V^{(+)} = Λ̌_ε Q̌_ε`（単純性の証明で使う）。 -/
+/-- **原文 `eigenvalues_of_V_plus` (1)** の右から掛ける形 `Q̌_ε V^{(+)} = (Λ̌_ε)_ℂ Q̌_ε`（単純性の証明で使う）。
+
+人手の (1) の第二の鎖（9 行）と 1 対 1 である（calc の段の割り当ては第一の鎖と同じ）。2 行目は `scalar_multiple_factors_out_of_right_factor`、3 行目は
+`eigenvalues_of_check_Vprime` の `Q̌_εV̌' = (exp ǧ(ε))_ℂ Q̌_ε` で、4 行目からは第一の鎖と同じ行である（8 行目の段が無いことも同じ）。 -/
 theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     {K1 K2star : ℂ} {s2 : ℝ} {c : ℂ}
     (hK1 : star K1 = K1) (hK2 : star K2star = K2star) (hs2 : 0 < s2)
@@ -53,8 +72,18 @@ theorem Qproj_mul_VPlus (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
     F.Qproj T * VPlus M s2 K1 K2star
       = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := by
   have hc := constant_c_value_even_sector F g hK1 hK2 hs2 (c_ne_zero_of_VPlus_eq_smul F g hs2 hVeq) hVeq
-  rw [hVeq, hc, mul_smul_comm, F.Qproj_mul_Vprime g T, smul_smul, checkBigLambda]
-  norm_cast
+  calc F.Qproj T * VPlus M s2 K1 K2star
+      = F.Qproj T * ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • F.Vprime g) := by
+        rw [hVeq, hc]                                                 -- `constant_c_value_even_sector`
+    _ = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • (F.Qproj T * F.Vprime g) :=
+        mul_smul_matrix_tensorPow _ _ _                               -- `scalar_multiple_factors_out_of_right_factor`
+    _ = (((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) • (((Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T) := by
+        rw [F.Qproj_mul_Vprime g T]                                   -- `eigenvalues_of_check_Vprime` の `Q̌_εV̌' = (exp ǧ(ε))_ℂ Q̌_ε`
+    _ = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) : ℂ) * ((Real.exp (F.gval g T) : ℝ) : ℂ)) • F.Qproj T :=
+        smul_smul _ _ _                                               -- `scalar_multiple_is_associative`（mathlib の `smul_smul`）
+    _ = ((((2 * s2) ^ ((M : ℝ) / 2) : ℝ) * Real.exp (F.gval g T) : ℝ) : ℂ) • F.Qproj T := by
+        rw [real_inclusion_mul]                                       -- `real_inclusion_preserves_product`
+    _ = ((checkBigLambda F g s2 T : ℝ) : ℂ) • F.Qproj T := rfl         -- 人手の 6・7・9 行目（`checkBigLambda` の定義。8 行目は `s2` が引数なので無い）
 
 /-- **原文 `eigenvalues_of_V_plus` (1)**: `im Q̌_ε` の元は固有値 `Λ̌_ε` の固有ベクトル。 -/
 theorem VPlus_mulVec_of_mem_range (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)

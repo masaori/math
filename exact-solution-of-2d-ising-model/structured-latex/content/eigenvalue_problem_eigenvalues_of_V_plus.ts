@@ -5319,7 +5319,10 @@ T_B\bigl(\exp(X)\bigr)
         "、",
         math(String.raw`s_2 = \sinh 2K_2`),
         " は ",
-        ref("def_transfer_matrix_symbols"),
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "（添字 ",
+        math(String.raw`i \to 2`),
+        "）",
         "、",
         math(String.raw`r_{\mathbb{C}}`),
         " は ",
@@ -5810,7 +5813,7 @@ c
 &= \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}
    &&(\because\ a\ \text{の定義}) \\
 &= \bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}
-   &&(\because\ \blkref{def_transfer_matrix_symbols}\ \text{の}\ s_2 = \sinh 2K_2)
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2)
 \end{aligned}`,
       ),
       displayMath(
@@ -5858,7 +5861,15 @@ V^{(+)}
           math(String.raw`\text{(1)}\quad V^{(+)}\check{Q}_\epsilon
 = \check{Q}_\epsilon V^{(+)}
 = \check\Lambda_\epsilon \check{Q}_\epsilon`),
-          "（左右どちらから掛けても同じ）。とくに ",
+          "（左右どちらから掛けても同じ。右辺は、実数 ",
+          math(String.raw`\check\Lambda_\epsilon`),
+          " を ",
+          ref("inclusion_rr_to_cc"),
+          " で ",
+          math(String.raw`\mathbb{C}`),
+          " の元 ",
+          math(String.raw`(\check\Lambda_\epsilon)_{\mathbb{C}}`),
+          " にして掛けた行列である）。とくに ",
           math(String.raw`V^{(+)}`),
           " は対角化可能で、その固有値は重複度を込めて ",
           math(String.raw`\left\{\check\Lambda_\epsilon\right\}_{\epsilon}`),
@@ -5893,39 +5904,69 @@ V^{(+)}
     proof: [
       paragraph([
         "(1) ",
+        math(String.raw`a := (2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
+        "（等号は ",
+        ref("def_indexed_hyperbolic_abbreviations"),
+        "（添字 ",
+        math(String.raw`i \to 2`),
+        "）の ",
+        math(String.raw`s_2 = \sinh 2K_2`),
+        " による ",
+        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} = (2\sinh 2K_2)^{M_{\mathrm{col}}/2}`),
+        "、所属は ",
+        ref("def_second_transfer_matrix_prefactor"),
+        "）と書く。",
         ref("constant_c_value_even_sector"),
         " より ",
-        math(String.raw`V^{(+)} = (2s_2)^{M_{\mathrm{col}}/2}\check{V}'`),
-        " であり、",
-        ref("eigenvalues_of_check_Vprime"),
-        " より ",
-        math(String.raw`\check{V}'\check{Q}_\epsilon = \exp(\check{g}(\epsilon))\check{Q}_\epsilon`),
-        " だから",
+        math(String.raw`V^{(+)} = a_{\mathbb{C}}\check{V}'`),
+        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
 V^{(+)}\check{Q}_\epsilon
-&= (2s_2)^{M_{\mathrm{col}}/2}\check{V}'\check{Q}_\epsilon
-   \quad (\because \text{定数 }c\text{ の決定}) \\
-&= (2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\check{Q}_\epsilon
-   \quad (\because \check{V}'\text{ の固有値}) \\
-&= \check\Lambda_\epsilon\check{Q}_\epsilon
-   \quad (\because \check\Lambda_\epsilon\text{ の定義})
+&= (a_{\mathbb{C}}\check{V}')\check{Q}_\epsilon
+   &&(\because\ \blkref{constant_c_value_even_sector}) \\
+&= a_{\mathbb{C}}(\check{V}'\check{Q}_\epsilon)
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_left_factor}\ (a \to a_{\mathbb{C}},\ A \to \check{V}',\ B \to \check{Q}_\epsilon)) \\
+&= a_{\mathbb{C}}\bigl((\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon\bigr)
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{V}'\check{Q}_\epsilon = (\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon) \\
+&= \bigl(a_{\mathbb{C}}(\exp(\check{g}(\epsilon)))_{\mathbb{C}}\bigr)\check{Q}_\epsilon
+   &&(\because\ \blkref{scalar_multiple_is_associative}\ (a \to a_{\mathbb{C}},\ b \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon)) \\
+&= \bigl(a\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to \exp(\check{g}(\epsilon)))) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ a\ \text{の置き方}) \\
+&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義}) \\
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
+&= (\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \check\Lambda_\epsilon\ \text{の定義})
 \end{aligned}`,
       ),
-      paragraph([
-        "同じ式変形を ",
-        ref("eigenvalues_of_check_Vprime"),
-        " の Step 3' の ",
-        math(String.raw`\check{Q}_\epsilon\check{V}' = \exp(\check{g}(\epsilon))\check{Q}_\epsilon`),
-        " に対して行い（スカラー ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2}`),
-        " は ",
-        ref("scalar_identity_commutes"),
-        " により左右どちらへも出せる）、",
-        math(String.raw`\check{Q}_\epsilon V^{(+)} = \check\Lambda_\epsilon\check{Q}_\epsilon`),
-        " も得る。",
-      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{Q}_\epsilon V^{(+)}
+&= \check{Q}_\epsilon(a_{\mathbb{C}}\check{V}')
+   &&(\because\ \blkref{constant_c_value_even_sector}) \\
+&= a_{\mathbb{C}}(\check{Q}_\epsilon\check{V}')
+   &&(\because\ \blkref{scalar_multiple_factors_out_of_right_factor}\ (a \to a_{\mathbb{C}},\ A \to \check{Q}_\epsilon,\ B \to \check{V}')) \\
+&= a_{\mathbb{C}}\bigl((\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon\bigr)
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{Q}_\epsilon\check{V}' = (\exp(\check{g}(\epsilon)))_{\mathbb{C}}\check{Q}_\epsilon) \\
+&= \bigl(a_{\mathbb{C}}(\exp(\check{g}(\epsilon)))_{\mathbb{C}}\bigr)\check{Q}_\epsilon
+   &&(\because\ \blkref{scalar_multiple_is_associative}\ (a \to a_{\mathbb{C}},\ b \to (\exp(\check{g}(\epsilon)))_{\mathbb{C}},\ A \to \check{Q}_\epsilon)) \\
+&= \bigl(a\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{real_inclusion_preserves_product}\ (a \to a,\ b \to \exp(\check{g}(\epsilon)))) \\
+&= \bigl((2s_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ a\ \text{の置き方}) \\
+&= \Bigl((2s_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}(\epsilon)\ \text{の定義}) \\
+&= \Bigl((2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac{1}{2}\right)\Bigr)\Bigr)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \blkref{def_indexed_hyperbolic_abbreviations}\ (i \to 2)\ \text{の}\ s_2 = \sinh 2K_2) \\
+&= (\check\Lambda_\epsilon)_{\mathbb{C}}\check{Q}_\epsilon
+   &&(\because\ \check\Lambda_\epsilon\ \text{の定義})
+\end{aligned}`,
+      ),
       paragraph([
         "対角化可能性・重複度・総個数は ",
         ref("eigenvalues_of_check_Vprime"),
@@ -6002,6 +6043,7 @@ V^{(+)}\check{Q}_\epsilon
         "009 章の eigenvalues_of_V の (+) セクター版。重複度が 2^{M-m} から 1 に、和の範囲が I から {1,…,M} に変わる。γ(θ~_μ) > 0 が狭義なので、大小比較も狭義になる（009 章では ≥ しか言えなかった）。",
         "式変形の書き方の統一（2026-09-04）。式変形の直後に置いていた「第 2 行で用いた」の参照を、定数 c の決定を使う行末の (∵ …) の blkref へ移した。内容・式変形・根拠・参照は変えていない。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_06（M=2,3,4,5・6 組の (K_1,K_2) で、V^{(+)} の 2^M 個の固有値全体が {Λ̌_ε} と相対誤差 9.0e-12 以下で一致。V^{(+)} は行列指数関数から直接構成しており、証明の経路とは独立）。",
+        "2026-11-04: (1) の固有関係の名前だけの根拠（「定数 c の決定」「V̌' の固有値」「Λ̌_ε の定義」と、Q̌_εV^{(+)} を「同じ式変形を Step 3' に対して行い」で済ませた段落）を、a := (2s_2)^{M_col/2} の置き方と、constant_c_value_even_sector・scalar_multiple_factors_out_of_left_factor（右から掛ける形は right_factor）・eigenvalues_of_check_Vprime・scalar_multiple_is_associative・real_inclusion_preserves_product・a の置き方・ǧ の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・Λ̌_ε の定義の 9 行の鎖二本にした。同じ回に constant_c_value_even_sector の主張文と最後の鎖が s_2 = sinh 2K_2 の根拠に def_transfer_matrix_symbols（式を持たない）を引いていたのを def_indexed_hyperbolic_abbreviations に直した。主張文に、右辺の Λ̌_ε は inclusion_rr_to_cc で ℂ へ移して掛けることを書いた（値は不変）。Lean の Ising2D.VPlus_mul_Qproj・Ising2D.Qproj_mul_VPlus は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_eigen_relation_chains.sage。",
       ],
     },
   },
