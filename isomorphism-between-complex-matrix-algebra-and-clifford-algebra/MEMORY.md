@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-04: 代数の中の番号順の積の定義（ラベル def_ordered_product_in_algebra、Π_0:=1_A・Π_m:=Π_{m-1}·_A x_m、記号 ∏_{A,k=1}^{n} x_k。逆順の積は y_k:=x_{n+1-k} の番号順の積として書く）を置いた。次は有限集合で添字づけた行列の代数（複素行列環の章。章のファイル complex-matrix-algebra.ts を新しく作り main-text.ts に足す）。
 - 2026-11-04: 代数から環と線型空間を取り出す対応と記号の規則（ラベル def_underlying_ring_and_vector_space_of_algebra、U_ring(A)・U_vec(A)）を置いた。環・線型空間の主張を代数に当てるときはこのラベルを引き、スカラー倍は ∗_A と書く。次は代数の中の番号順の積の定義（空の積は 1_A。ℂ の中の番号順の和 def_ordered_sum_in_complex_numbers と同じ帰納的な形）。
 - 2026-11-04: ℂ-代数の準同型の定義（ラベル def_complex_algebra_homomorphism、環の組の環の準同型かつ線型空間の組の線型写像で、条件は加法・乗法・1_A・スカラー倍 ∗_A を保つこと）を置いた。次は代数から環・線型空間を取り出す写像と記号の規則（U_ring(A)・U_vec(A) に名前を付け、以後はこの写像を通してだけ行き来する）。
 - 2026-11-04: 「ℂ-代数と代数の準同型の定義」を二行に割り、ℂ-代数の定義（ラベル def_complex_algebra、組 (A,+_A,·_A,∗_A,0_A,1_A)、乗法 ·_A とスカラー倍 ∗_A）を置いた。次は代数の準同型の定義（環の組の準同型 def_ring_homomorphism かつ線型空間の組の線型写像 def_linear_map であるもの）。

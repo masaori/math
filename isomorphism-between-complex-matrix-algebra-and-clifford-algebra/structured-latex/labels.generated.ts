@@ -51,6 +51,7 @@ export const ALL_LABELS = [
   "def_linear_independence",
   "def_linear_map",
   "def_numbering_of_finite_set",
+  "def_ordered_product_in_algebra",
   "def_ordered_sum_in_complex_numbers",
   "def_ring_homomorphism",
   "def_spanning_family",
