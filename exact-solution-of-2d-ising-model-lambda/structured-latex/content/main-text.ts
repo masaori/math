@@ -7178,7 +7178,7 @@ w_\varphi+w_{\Theta(\varphi)}&=w_\varphi+(-w_\varphi)&&\bigl(\because\ \text{直
                   math(String.raw`|\mathcal P|`), " についての強い帰納法で示す。空集合の場合は",
                 ]),
                 displayMath(String.raw`\sum_{\varphi\in\varnothing}w_\varphi=0
-\qquad\bigl(\because\ \text{空和の定義}\bigr).`),
+\qquad\bigl(\because\ \text{空和の定義}\bigr)`),
                 paragraph([
                   "空でなければ ", math(String.raw`\varphi\in\mathcal P`), " を一つ選ぶ。安定性から ",
                   math(String.raw`\Theta(\varphi)\in\mathcal P`), " であり、この二点は異なる。残りを",
@@ -62331,6 +62331,82 @@ s(j')-s(j)
 &=0+\mathbf1_{s(i)=L-1}-0-\mathbf1_{s(i)=L-1}
 &&\bigl(\because\ \blkref{def_seam_parities}\text{ と四辺の向き}\bigr)\\
 &=0&&\bigl(\because\ \mathbb Z\text{ の加法}\bigr)
+\end{aligned}`),
+                    ],
+                  },
+                },
+              }],
+            },
+          },
+          {
+            role: "subsection",
+            element: {
+              kind: "section",
+              id: "kac_ward_heading_finite_cell_set_boundary_winding",
+              labels: [],
+              title: { text: "有限セル集合の境界と切断線横断" },
+              children: [{
+                role: "primary",
+                element: {
+                  kind: "elementGroup",
+                  id: "group_of_kac_ward_claim_finite_cell_set_boundary_winding_zero",
+                  beforeFocus: [],
+                  focus: {
+                    id: "kac_ward_claim_finite_cell_set_boundary_winding_zero",
+                    kind: "claim",
+                    title: { text: "有限セル集合の境界の向き付き切断線横断数は零である" },
+                    labels: ["claim_finite_cell_set_boundary_winding_zero"],
+                    habitat: "Z",
+                    verification: ["sagemath/check/finite-cell-set-boundary-winding-zero"],
+                    lean: [
+                      "Ising2DLambda.KacWard.cellSetBoundaryEvaluation",
+                      "Ising2DLambda.KacWard.horizontalSeamContribution_reverse",
+                      "Ising2DLambda.KacWard.verticalSeamContribution_reverse",
+                      "Ising2DLambda.KacWard.cellSetBoundary_horizontalSeam_sum_zero",
+                      "Ising2DLambda.KacWard.cellSetBoundary_verticalSeam_sum_zero",
+                      "Ising2DLambda.NecSuf.KacWard.finiteBoundaryEvaluation_zero",
+                    ],
+                    statement: [
+                      paragraph([
+                        "任意の ", math(String.raw`L\ge1`), " と有限セル集合 ",
+                        math(String.raw`S\subset(\mathbb Z/L\mathbb Z)\times(\mathbb Z/L\mathbb Z)`),
+                        " に対し、境界鎖 ", math(String.raw`\partial_\square S`),
+                        " を、各 ", math(String.raw`(i,j)\in S`), " の四項列 ",
+                        math(String.raw`B_L(i,j)`), " を重複を保って足した向き付き辺の形式和と定める。",
+                        "辺の反転は同じ辺の負として扱う（",
+                        ref("claim_cell_boundary_winding_zero"), "）。",
+                        "内部辺には互いに逆向きの二項が現れ、係数が零となる。",
+                        math(String.raw`L=1`), " で二項が同じセルから現れても、両方を残して相殺する。",
+                      ]),
+                      displayMath(String.raw`\sum_{\vec e\in\partial_\square S}c_{\mathrm h}(\vec e)(1-2d(\vec e))=0,\qquad
+\sum_{\vec e\in\partial_\square S}c_{\mathrm v}(\vec e)(1-2d(\vec e))=0\quad\text{in }\mathbb Z`),
+                    ],
+                    proof: [
+                      paragraph([
+                        "辺の反転は ", math(String.raw`c_{\mathrm h},c_{\mathrm v}`),
+                        " を変えず、", math(String.raw`1-2d`), " の符号を反転する（",
+                        ref("def_seam_parities"), "）。横辺 ", math(String.raw`n_{\mathrm h}(i,j)`),
+                        " の係数は ", math(String.raw`\mathbf1_{(i,j)\in S}-\mathbf1_{(i-1,j)\in S}`),
+                        "、縦辺 ", math(String.raw`n_{\mathrm v}(i,j)`), " の係数は ",
+                        math(String.raw`\mathbf1_{(i,j-1)\in S}-\mathbf1_{(i,j)\in S}`),
+                        " である（", ref("claim_cell_boundary_winding_zero"),
+                        " の四辺の列を数える）。両側のセルが属する内部辺の係数は零である。",
+                      ]),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\partial_\square S}c_{\mathrm h}(\vec e)(1-2d(\vec e))
+&=\sum_{(i,j)\in S}\sum_{t=1}^{4}c_{\mathrm h}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))
+&&\bigl(\because\ \partial_\square S\text{ の定義と有限和の結合則}\bigr)\\
+&=\sum_{(i,j)\in S}0
+&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の有限和}\bigr)
+\end{aligned}`),
+                      displayMath(String.raw`\begin{aligned}
+\sum_{\vec e\in\partial_\square S}c_{\mathrm v}(\vec e)(1-2d(\vec e))
+&=\sum_{(i,j)\in S}\sum_{t=1}^{4}c_{\mathrm v}(B_L(i,j)_t)(1-2d(B_L(i,j)_t))
+&&\bigl(\because\ \partial_\square S\text{ の定義と有限和の結合則}\bigr)\\
+&=\sum_{(i,j)\in S}0
+&&\bigl(\because\ \blkref{claim_cell_boundary_winding_zero}\bigr)\\
+&=0&&\bigl(\because\ \mathbb Z\text{ の有限和}\bigr)
 \end{aligned}`),
                     ],
                   },

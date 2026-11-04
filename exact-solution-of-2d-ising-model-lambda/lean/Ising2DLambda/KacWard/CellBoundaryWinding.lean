@@ -31,6 +31,16 @@ def horizontalSeamContribution {L : ℕ} (e : OrientedEdge L) : ℤ :=
 def verticalSeamContribution {L : ℕ} (e : OrientedEdge L) : ℤ :=
   (verticalSeamParity e : ℤ) * (1 - 2 * (e.2.toNat : ℤ))
 
+theorem horizontalSeamContribution_reverse {L : ℕ} (e : OrientedEdge L) :
+    horizontalSeamContribution (e.1, !e.2) = -horizontalSeamContribution e := by
+  rcases e with ⟨edge, reverse⟩
+  cases reverse <;> simp [horizontalSeamContribution, horizontalSeamParity]
+
+theorem verticalSeamContribution_reverse {L : ℕ} (e : OrientedEdge L) :
+    verticalSeamContribution (e.1, !e.2) = -verticalSeamContribution e := by
+  rcases e with ⟨edge, reverse⟩
+  cases reverse <;> simp [verticalSeamContribution, verticalSeamParity]
+
 theorem cellBoundary_horizontalSeam_sum_zero (L : ℕ) [NeZero L]
     (i j : ZMod L) :
     ((cellBoundaryEdges L i j).map horizontalSeamContribution).sum = 0 := by
@@ -66,5 +76,22 @@ theorem cellBoundary_verticalSeam_sum_zero (L : ℕ) [NeZero L]
   have hh' (r c : ZMod L) :
       verticalSeamParity (edgeOfRow L false r c, true) = 0 := hh r c
   simp [cellBoundaryEdges, verticalSeamContribution, hh, hh', hv, hv']
+
+/-- Evaluation of the oriented boundary chain of a finite cell set. -/
+def cellSetBoundaryEvaluation (L : ℕ) [NeZero L]
+    (S : Finset (ZMod L × ZMod L)) (weight : OrientedEdge L → ℤ) : ℤ :=
+  ∑ p ∈ S, ((cellBoundaryEdges L p.1 p.2).map weight).sum
+
+theorem cellSetBoundary_horizontalSeam_sum_zero (L : ℕ) [NeZero L]
+    (S : Finset (ZMod L × ZMod L)) :
+    cellSetBoundaryEvaluation L S horizontalSeamContribution = 0 := by
+  classical
+  simp [cellSetBoundaryEvaluation, cellBoundary_horizontalSeam_sum_zero]
+
+theorem cellSetBoundary_verticalSeam_sum_zero (L : ℕ) [NeZero L]
+    (S : Finset (ZMod L × ZMod L)) :
+    cellSetBoundaryEvaluation L S verticalSeamContribution = 0 := by
+  classical
+  simp [cellSetBoundaryEvaluation, cellBoundary_verticalSeam_sum_zero]
 
 end Ising2DLambda.KacWard
