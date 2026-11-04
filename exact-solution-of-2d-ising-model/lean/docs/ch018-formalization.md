@@ -52,7 +52,14 @@
 | `CheckFermi.nOp_mul_Qproj` | `ň_μ Q̌_ε = ε_μ Q̌_ε` | 同上 |
 | `CheckFermi.trace_Qproj` / `Qproj_ne_zero` | `tr Q̌_ε = 1`（`im Q̌_ε` は 1 次元） | 同上 |
 | `CheckFermi.epsilon_anticomm_cre` / `epsilon_anticomm_ann` | `ε ψ̌^† = −ψ̌^† ε`, `ε ψ̌ = −ψ̌ ε` | `epsilon_anticommutes_with_check_Z_Y` (3) |
-| **`CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`** | **`ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε`** | **同 (4)** |
+| **`CheckFermi.commute_epsilon_nOp`** | **`ε ň_μ = ň_μ ε`**（人手の 3 行の鎖と同じ calc。2 行目は `product_of_anticommuting_matrices_commutes` の `TensorPow M` での系 `mul_comm_of_anticomm_pair_tensorPow`） | **同 (4) 前半** |
+| `CheckFermi.defFactor` | 人手の `Q̌_ε` の因子 `A_ν = ε_ν ň_ν + (1 − ε_ν)(I − ň_ν)`（`ε_ν` は `ν ∈ T` なら `1`） | 同 (4) の置き方 |
+| `CheckFermi.epsilon_mul_identity_eq_identity_mul_epsilon` | `εI = Iε`（2 行） | 同 (4) |
+| `CheckFermi.commute_epsilon_defFactor` | `εA_ν = A_νε`（3 式と 5 行の鎖） | 同 (4) |
+| `CheckFermi.projFactor_eq_defFactor` / `Qproj_eq_finProdLeft_defFactor` | Lean の `Qproj` は人手の `Q̌_ε = ∏_{ν=1}^{M_col} A_ν`（左から掛ける積）に等しい（人手の行ではなく、定義どうしをつなぐ等式） | `check_joint_eigenspace_decomposition` の `Q̌_ε` の定義 |
+| `CheckFermi.commute_epsilon_Qproj_succ` | `M_col = r + 1` での `ε Q̌_ε = Q̌_ε ε`（人手の 3 行の鎖と同じ calc） | 同 (4) 後半 |
+| **`CheckFermi.commute_epsilon_Qproj`** | **`ε Q̌_ε = Q̌_ε ε`**（`M = r + 1` は `commute_epsilon_Qproj_succ`。`M = 0` は人手の主張の外で、必要十分版の特殊化） | **同 (4) 後半** |
+| `CheckFermi.commute_epsilon_nOp_of_necSuf` / `commute_epsilon_Qproj_of_necSuf` / `commute_epsilon_Qproj_succ_of_necSuf` | 同じ主張を必要十分版 `NecSuf.commute_parity_num` / `commute_parity_projOn` / `commute_parity_finProdLeft_defFactor` の特殊化として | 同 (4) |
 | `CheckFermi.ann_conjTranspose` / `nOp_conjTranspose` / `Qproj_conjTranspose` | `ψ̌^* = ψ̌^†`, `ň^* = ň`, `Q̌^* = Q̌` | `check_number_operator_is_hermitian` (3)(4) |
 
 #### `EigenvalueProblem/EigenvectorOfMaxEigenvalue/ClaimEpsilonAnticommutesWithCheckZY.lean`（ラベル `epsilon_anticommutes_with_check_Z_Y`）
@@ -232,8 +239,13 @@
 | Lean の名前 | 内容 | 台に要求する構造 | 人手証明のラベル |
 | --- | --- | --- | --- |
 | `NecSuf.anticomm_sum_smul` | `e` が各 `x_i` と反交換 ⇒ `x_i` の任意の有限 `𝕜` 線型結合とも反交換 | `NonUnitalNonAssocRing A` + `DistribSMul 𝕜 A` + `SMulCommClass 𝕜 A A` + `IsScalarTower 𝕜 A A`（`𝕜` に構造は不要。`A` の積の結合律・単位元・代数構造も不要） | `epsilon_anticommutes_with_check_Z_Y` (2)(3) |
-| **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換** | **`Ring A` だけ** | 同 (4) 前半 |
-| **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換** | **`Ring A` だけ** | 同 (4) 後半 |
+| **`NecSuf.commute_parity_num`** | **`e` が `c_i`, `a_i` の両方と反交換 ⇒ `e` は `n_i = c_i a_i` と可換**（具体版と同じ 3 行。2 行目は `NecSuf.commute_mul_of_anticomm'`） | **`Semigroup A` + `HasDistribNeg A` だけ** | 同 (4) 前半 |
+| `NecSuf.commute_mul_of_anticomm'`（`NecSuf/CommuteWithAnticommutingProductAndScalarMultiple.lean`） | `GX = −(XG)`, `GY = −(YG)` ⇒ `G(XY) = (XY)G`（8 段） | `Semigroup A` + `HasDistribNeg A` | `product_of_anticommuting_matrices_commutes` |
+| `NecSuf.commute_smul_of_commute'`（同） | `GX = XG` ⇒ `G(cX) = (cX)G`（3 段） | `Mul A` + `SMulCommClass 𝕜 A A` + `IsScalarTower 𝕜 A A`（`𝕜` に構造なし） | `commuting_with_scalar_multiple` |
+| `NecSuf.commute_sub_of_commute'` | `GX = XG`, `GW = WG` ⇒ `G(X − W) = (X − W)G`（8 段） | `Mul A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)`（積の結合則・単位元、加法の零・結合則・可換性・逆元則は不要） | `commuting_with_difference` |
+| `NecSuf.commute_defFactor_of_commute'` | `en = ne` ⇒ `e(cn + d(1 − n)) = (cn + d(1 − n))e`（`c`・`d` は無関係な二つのスカラー） | `MulOneClass A` + `Add A` + 左右の分配則 + `HasDistribNeg A` + `x − y = x + (−y)` + `SMul 𝕜 A` + `SMulCommClass` + `IsScalarTower`（`𝕜` に構造なし。`d = 1 − c`・`c ∈ {0,1}`・`n` の冪等性は不要） | `epsilon_anticommutes_with_check_Z_Y` (4) の `A_ν` の鎖 |
+| **`NecSuf.commute_parity_finProdLeft_defFactor`** | **`e` が `c_ν`, `a_ν` と反交換 ⇒ `e` は `∏_ν (c'_ν n_ν + d'_ν(1 − n_ν))` と可換**（具体版と同じ並び） | 同上で `MulOneClass A` を `Monoid A` に（有限積に積の結合則が効く） | 同 (4) 後半 |
+| **`NecSuf.commute_parity_projOn`** | **`e` は `Q_ε` とも可換**（添字を `Finset` で取る `projOn` の形。`M = 0` の埋め合わせに使う） | **`Ring A` だけ**（`projOn` の定義が要する） | 同 (4) 後半 |
 | `NecSuf.num_mul_cre` | `n_i c_i = c_i` | `Ring A` | `epsilon_eigenvalue_on_check_Q` Step 2 冒頭 |
 | **`NecSuf.projOn_insert_mul_cre`** | **`μ ∈ s`, `μ ∉ T` ⇒ `Q_{T∪{μ}}(c_μ Q_T) = c_μ Q_T`** | **`Ring A` だけ** | 同 (2) Step 2 |
 | **`NecSuf.cre_mul_projOn_ne_zero`** | **`Q_T ≠ 0` ⇒ `c_μ Q_T ≠ 0`** | **`Ring A` だけ（1 次元性不要）** | 同 (2) Step 1 |
@@ -251,7 +263,7 @@
 | --- | --- | --- | --- |
 | `epsilon_anticommutes_with_check_Z_Y` (2) | `Ising2D.epsilon_anticomm_checkZ` / `checkY`（人手の鎖と同じ行の `epsilon_anticomm_phase_sum` で証明） | `NecSuf.anticomm_sum_smul`（具体版と同じ 7 段の calc。効くのは積が各因子について `𝕜` 倍と交換すること、分配律、`𝕜` の作用が符号反転と交換することだけ） | **系としても得られる**（`epsilon_anticomm_checkZ_of_necSuf` / `checkY_of_necSuf`） |
 | 同 (3) | `Ising2D.epsilon_anticomm_checkPsiDag` / `checkPsi`（人手の鎖と同じ行の `epsilon_anticomm_two_term` で証明） | `NecSuf.anticomm_add_smul`（具体版と同じ 7 段の calc） | **系としても得られる**（`epsilon_anticomm_checkPsiDag_of_necSuf` / `checkPsi_of_necSuf`） |
-| 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj` | `NecSuf.commute_parity_num` / `commute_parity_projOn` | **すべて系** |
+| 同 (4) | `CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（人手の鎖と同じ行の calc。`Q̌_ε` は `commute_epsilon_Qproj_succ`） | `NecSuf.commute_parity_num`（具体版と同じ 3 行）/ `commute_parity_finProdLeft_defFactor`（具体版と同じ並び）/ `commute_parity_projOn` | **系としても得られる**（`commute_epsilon_nOp_of_necSuf` / `commute_epsilon_Qproj_succ_of_necSuf` / `commute_epsilon_Qproj_of_necSuf`） |
 | `epsilon_eigenvalue_on_check_Q` (1) | `CheckFermi.exists_eta` / `eta` / `eta_unique` | `NecSuf.smul_left_cancel_of_ne_zero`（一意性のみ） | **存在の部分は系にならない**（1 次元性が要る。下記参照） |
 | 同 (2) | `CheckFermi.eta_insert` | `NecSuf.projOn_insert_mul_cre` / `cre_mul_projOn_ne_zero` | **系** |
 | 同 (4) | `CheckFermi.epsilon_eq_parityProd` | `NecSuf.noncommProd_mul_of_mul_eq_smul` | **系** |
@@ -270,10 +282,14 @@
 ### 必要十分版で判明した本質（本文には持ち込まない）
 
 - **`ε` が `ň_μ`・`Q̌_ε` と可換であること（人手証明 (4)）に効いているのは、
-  `ε` が生成・消滅演算子の両方と反交換することと `(−1)² = 1` だけである。**
+  `ε` が生成・消滅演算子の両方と反交換することと、積の結合則・符号反転が積の因子から外へ出ること・二重の符号反転だけである**
+  （`NecSuf.commute_parity_num` は `Semigroup` と `HasDistribNeg` だけを仮定する）。`Q̌_ε` の側ではさらに、単位元・分配則・
+  `x − y = x + (−y)`・`𝕜` 倍との交換が効く。
+  `Q̌_ε` の因子 `ε_ν ň_ν + (1 − ε_ν)(I − ň_ν)` の係数が `ε_ν`・`1 − ε_ν` であることも、`ň_ν` が冪等であることも効かない
+  （`NecSuf.commute_defFactor_of_commute'` は二つの係数を無関係なスカラーに置いて通る）。
   `ε = σ^x_1⋯σ^x_M` であることも、`ψ̌` が `Ž, Y̌` の 1 次結合であることも、
   行列であることも、複素数であることも、テンソル冪であることも効いていない。
-  台は**任意の環**でよい（`NecSuf.commute_parity_num` / `commute_parity_projOn`）。
+  加法の零・結合則・可換性・逆元則は効かない（`NecSuf.commute_parity_num` / `commute_parity_finProdLeft_defFactor`）。
 
 - **符号の反転則（人手証明 (2)）に `im Q̌_ε` の 1 次元性は要らない。**
   人手証明は (1)(2) の両方で 1 次元性を引くが、必要な材料は次の 3 つだけである。

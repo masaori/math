@@ -1329,6 +1329,14 @@ targets=(
   Ising2D.matrix_mul_sub_eq_sub_mul_of_commute
   Ising2D.matrix_mul_sub_eq_sub_mul_of_commute_of_necSuf
   Ising2D.mul_sub_eq_sub_mul_of_commute_tensorPow
+  "Ising2D.NecSuf.commute_mul_of_anticomm'"
+  Ising2D.matrix_mul_comm_of_anticomm_pair
+  Ising2D.matrix_mul_comm_of_anticomm_pair_of_necSuf
+  Ising2D.mul_comm_of_anticomm_pair_tensorPow
+  "Ising2D.NecSuf.commute_smul_of_commute'"
+  Ising2D.matrix_mul_smul_comm_of_commute
+  Ising2D.matrix_mul_smul_comm_of_commute_of_necSuf
+  Ising2D.mul_smul_comm_of_commute_tensorPow
   "Ising2D.NecSuf.zero_smul_matrix'"
   "Ising2D.NecSuf.add_comm_matrix'"
   Ising2D.matrix_zero_smul
@@ -1763,6 +1771,9 @@ targets=(
   Ising2D.NecSuf.anticomm_sum_smul
   Ising2D.NecSuf.commute_parity_num
   Ising2D.NecSuf.commute_parity_projOn
+  "Ising2D.NecSuf.commute_sub_of_commute'"
+  "Ising2D.NecSuf.commute_defFactor_of_commute'"
+  Ising2D.NecSuf.commute_parity_finProdLeft_defFactor
   Ising2D.NecSuf.num_mul_cre
   Ising2D.NecSuf.projOn_insert_mul_cre
   Ising2D.NecSuf.cre_mul_projOn_ne_zero
@@ -1792,6 +1803,15 @@ targets=(
   Ising2D.CheckFermi.epsilon_anticomm_ann
   Ising2D.CheckFermi.commute_epsilon_nOp
   Ising2D.CheckFermi.commute_epsilon_Qproj
+  Ising2D.CheckFermi.commute_epsilon_nOp_of_necSuf
+  Ising2D.CheckFermi.defFactor
+  Ising2D.CheckFermi.epsilon_mul_identity_eq_identity_mul_epsilon
+  Ising2D.CheckFermi.commute_epsilon_defFactor
+  Ising2D.CheckFermi.projFactor_eq_defFactor
+  Ising2D.CheckFermi.Qproj_eq_finProdLeft_defFactor
+  Ising2D.CheckFermi.commute_epsilon_Qproj_succ
+  Ising2D.CheckFermi.commute_epsilon_Qproj_of_necSuf
+  Ising2D.CheckFermi.commute_epsilon_Qproj_succ_of_necSuf
   Ising2D.CheckFermi.ann_conjTranspose
   Ising2D.CheckFermi.nOp_conjTranspose
   Ising2D.CheckFermi.Qproj_conjTranspose

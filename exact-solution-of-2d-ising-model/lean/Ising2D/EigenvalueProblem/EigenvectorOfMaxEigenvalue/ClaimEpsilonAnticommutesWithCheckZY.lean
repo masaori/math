@@ -6,7 +6,8 @@
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
 `Ising2D.NecSuf.anticomm_sum_smul` / `NecSuf.anticomm_add_smul` / `NecSuf.commute_parity_num` /
-`NecSuf.commute_parity_projOn`。(2) は人手の鎖と同じ行の calc（`epsilon_anticomm_phase_sum`）で示し、
+`NecSuf.commute_parity_projOn`・`NecSuf.commute_parity_finProdLeft_defFactor`。(4) の具体版と必要十分版の特殊化は
+`CheckFermiInput.lean` に置く（`CheckFermi` がこのファイルを import するため）。(2) は人手の鎖と同じ行の calc（`epsilon_anticomm_phase_sum`）で示し、
 必要十分版の特殊化として得られることは `epsilon_anticomm_checkZ_of_necSuf` / `epsilon_anticomm_checkY_of_necSuf`
 に別に書く。(3) も人手の鎖と同じ行の calc（`epsilon_anticomm_two_term`）で示し、必要十分版
 `NecSuf.anticomm_add_smul` の特殊化は `epsilon_anticomm_checkPsiDag_of_necSuf` / `epsilon_anticomm_checkPsi_of_necSuf` に別に書く。
@@ -20,7 +21,7 @@
 | (2) `ε Ž_μ = -Ž_μ ε`, `ε Y̌_μ = -Y̌_μ ε` | `Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY` |
 | (3) の 9 行の鎖（`(Ψ, p, q)` を `def_check_fermi` の二つの組のどちらかとする） | `Ising2D.epsilon_anticomm_two_term` |
 | (3) `ε ψ̌_μ^† = -ψ̌_μ^† ε`, `ε ψ̌_μ = -ψ̌_μ ε` | `Ising2D.epsilon_anticomm_checkPsiDag` / `epsilon_anticomm_checkPsi`（`IsCheckMode` の元へは `epsilon_anticomm_of_isCheckMode`） |
-| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（`CheckFermiInput.lean`） |
+| (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp`（3 行）/ `commute_epsilon_defFactor`（`εI = Iε`・3 式・`A_ν` の 5 行）/ `commute_epsilon_Qproj_succ`（`Q̌_ε` の 3 行）/ `commute_epsilon_Qproj`（`CheckFermiInput.lean`。人手の鎖と同じ行の calc） |
 
 **(1)(2)(3) は無条件である**（章 004・010・013 の形式化済みの定理と、`ψ̌_μ^†`・`ψ̌_μ` の定義
 `checkPsiDag`・`checkPsi`（`DefinitionCheckFermi.lean`）だけを使う）。

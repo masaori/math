@@ -39,14 +39,20 @@ namespace Ising2D.NecSuf
 
 /-! ## CAR から出る個数演算子の性質 -/
 
-section CAR
+section Num
 
-variable {A : Type*} [Ring A] {ι : Type*}
+variable {A : Type*} [Mul A] {ι : Type*}
 
-/-- 個数演算子 `n_i := c_i a_i`（人手証明の `n_μ = ψ_μ^† ψ_{-μ}`）。 -/
+/-- 個数演算子 `n_i := c_i a_i`（人手証明の `n_μ = ψ_μ^† ψ_{-μ}`）。定義には積だけが要る。 -/
 def num (c a : ι → A) (i : ι) : A := c i * a i
 
 theorem num_def (c a : ι → A) (i : ι) : num c a i = c i * a i := rfl
+
+end Num
+
+section CAR
+
+variable {A : Type*} [Ring A] {ι : Type*}
 
 /-- 2-捩れが無ければ、自分自身と反可換な元の平方は `0`。
 （人手証明 `number_operator_idempotent` (1) の
