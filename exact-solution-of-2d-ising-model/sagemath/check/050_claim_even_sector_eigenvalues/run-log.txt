@@ -287,3 +287,9 @@ RESULT: PASS
 checked 1 line in 5 cases (M_col = 1..5)
 negative controls: 5
 RESULT: PASS
+
+##### 2026-11-04 に check_trace_of_check_Vprime_step2_exp_product を足した（trace_of_check_Vprime の Step 2 の指数法則の 2 行: ǧ の定義を開く行と real_exp_of_finite_sum の行）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_trace_of_check_Vprime_step2_exp_product.sage
+checked 992 lines
+negative controls (broken lines detected): 496
+RESULT: PASS

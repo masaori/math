@@ -2325,6 +2325,74 @@ S_N([0]_K)
     },
   },
   {
+    id: "exp_linear_map_claim_real_exp_of_finite_sum",
+    kind: "claim",
+    title: { text: "実数の有限和の exp は exp の有限積" },
+    labels: ["real_exp_of_finite_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x_1,\dots,x_m \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\exp\!\Bigl(\sum_{j=1}^{m} x_j\Bigr) = \prod_{j=1}^{m} \exp(x_j)`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`\exp`),
+        " は ",
+        ref("def_scalar_exp"),
+        " の ",
+        math(String.raw`\exp : \mathbb{R} \to \mathbb{R}`),
+        "、左辺の和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " の有限和、右辺の積は ",
+        ref("def_finite_product_of_real_numbers"),
+        " の有限積である。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp\!\Bigl(\sum_{j=1}^{1} x_j\Bigr)
+&= \exp(x_1)
+   \quad (\because \blkref{def_finite_sum_of_real_numbers}) \\
+&= \prod_{j=1}^{1} \exp(x_j)
+   \quad (\because \blkref{def_finite_product_of_real_numbers}\ (r_j \to \exp(x_j))\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+      paragraph([
+        math(String.raw`m`),
+        " で成り立つと仮定すると",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp\!\Bigl(\sum_{j=1}^{m+1} x_j\Bigr)
+&= \exp\!\Bigl(\Bigl(\sum_{j=1}^{m} x_j\Bigr) + x_{m+1}\Bigr)
+   \quad (\because \blkref{def_finite_sum_of_real_numbers}) \\
+&= \exp\!\Bigl(\sum_{j=1}^{m} x_j\Bigr)\exp(x_{m+1})
+   \quad (\because \blkref{scalar_exp_product}\ (K \to \mathbb{R},\ x \to \textstyle\sum_{j=1}^{m} x_j,\ y \to x_{m+1})\ \text{を右辺から左辺へ}) \\
+&= \Bigl(\prod_{j=1}^{m} \exp(x_j)\Bigr)\exp(x_{m+1})
+   \quad (\because \text{帰納法の仮定}) \\
+&= \prod_{j=1}^{m+1} \exp(x_j)
+   \quad (\because \blkref{def_finite_product_of_real_numbers}\ (r_j \to \exp(x_j))\ \text{を右辺から左辺へ})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 2 が exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) を「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、有限個の和には帰納法が要るので足した。Lean は具体版 Ising2D.real_exp_of_finite_sum（MathematicalTools/MatrixExponentialAndCommutators/ClaimRealExpOfFiniteSum.lean）、必要十分版 Ising2D.NecSuf.map_finSumLeft（和を積へ送る写像。NecSuf/AdditiveToMultiplicativeMapOfFiniteSum.lean）。数値検証: sagemath/check/real_exp_of_finite_sum/。",
+      ],
+    },
+  },
+  {
     id: "exp_linear_map_010_claim_real_exp_positive",
     kind: "claim",
     origin: { path: "structured-latex/content/003_exp_linear_map.ts", ordinal: 10 },

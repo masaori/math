@@ -1518,6 +1518,40 @@ z\,0_{\mathbb{C}}
     },
   },
   {
+    id: "calculation_formulae_definition_finite_product_of_real_numbers",
+    kind: "definition",
+    title: { text: "実数の有限積" },
+    labels: ["def_finite_product_of_real_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`r_1,\dots,r_m \in \mathbb{R}`),
+        " について、有限積 ",
+        math(String.raw`\prod_{j=1}^{m} r_j \in \mathbb{R}`),
+        " を ",
+        math(String.raw`m`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\prod_{j=1}^{1} r_j := r_1,
+\qquad
+\prod_{j=1}^{m+1} r_j := \Bigl(\prod_{j=1}^{m} r_j\Bigr)\, r_{m+1}`),
+      paragraph([
+        "と定める（左から順に掛ける。",
+        ref("def_finite_product_of_complex_numbers"),
+        " と同じ帰納法である）。積は ",
+        math(String.raw`\mathbb{R}`),
+        " の積である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 2 が exp(ǧ(ε)) を実数の有限積 Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) に書いていたが、本文は複素数の有限積（def_finite_product_of_complex_numbers）しか定めていなかったので足した。Lean は ℝ の Finset.prod（2 つの式は Fin.prod_univ_one・Fin.prod_univ_castSucc）で、必要十分版は Ising2D.NecSuf.finProdLeft（R := ℝ）である。",
+      ],
+    },
+  },
+  {
     id: "calculation_formulae_definition_power_of_complex_number",
     kind: "definition",
     title: { text: "複素数の冪" },

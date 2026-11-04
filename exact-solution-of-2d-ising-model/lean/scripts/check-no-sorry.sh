@@ -368,6 +368,11 @@ targets=(
   Ising2D.NecSuf.map_nonneg
   Ising2D.NecSuf.map_pos
   Ising2D.real_exp_positive_of_necSuf
+  Ising2D.real_exp_of_finite_sum
+  Ising2D.NecSuf.map_finSumLeft
+  Ising2D.real_finset_sum_eq_finSumLeft
+  Ising2D.real_finset_prod_eq_finProdLeft
+  Ising2D.real_exp_of_finite_sum_of_necSuf
   # --- 数学的道具立て「可逆行列・線型写像との対応・共役変換」（MathematicalTools/InvertibleMatricesLinearMapCorrespondenceAndConjugation/。必要十分版は NecSuf/Conjugation.lean）---
   Ising2D.Conjugation.conj_mul_matrix
   Ising2D.Conjugation.conj_one_matrix
@@ -1948,6 +1953,8 @@ targets=(
   Ising2D.CheckFermiSetup.Vprime_mul_Qproj_of_necSuf
   Ising2D.CheckFermiSetup.Qproj_mul_Vprime_of_necSuf
   Ising2D.CheckFermiSetup.Vprime_mulVec_of_mem_range
+  Ising2D.CheckFermiSetup.exp_gval_step2_product
+  Ising2D.CheckFermiSetup.exp_gval_eq_prod
   Ising2D.CheckFermiSetup.trace_Vprime_step1
   Ising2D.CheckFermiSetup.trace_Vprime_eq_finset_sum_of_mathlib
   Ising2D.CheckFermiSetup.trace_Vprime

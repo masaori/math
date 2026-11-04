@@ -33,6 +33,7 @@ import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf
+import Ising2D.MathematicalTools.MatrixExponentialAndCommutators.ClaimRealExpOfFiniteSum
 
 namespace Ising2D
 
@@ -65,13 +66,52 @@ theorem Vprime_neg_mul_Vprime (g : CheckIdx M → ℝ) :
   rw [← F.VprimeUnits_val g, ← F.VprimeUnits_inv g]
   exact_mod_cast (F.VprimeUnits g).inv_mul
 
-/-- 各因子の展開: `exp(ǧ(ε)) = ∏_μ (μ ∈ T ? e^{γ_μ/2} : e^{-γ_μ/2})`。 -/
+/-- **原文 `trace_of_check_Vprime` Step 2 の指数法則の 2 行の鎖**:
+`exp(ǧ(ε)) = exp(Σ_{μ=1}^{M_col} γ(θ̃_μ)(ε_μ − 1/2)) = Π_{μ=1}^{M_col} exp(γ(θ̃_μ)(ε_μ − 1/2))`
+（人手の `M_col` が Lean の `r + 1`、人手の `μ` が Lean の `checkIdxOfFin j`（`μ = j + 1`）、人手の `ε_μ ∈ {0,1}` を ℝ の元として使う箇所が
+Lean の `((ε j : ℕ) : ℝ)`）。 -/
+theorem exp_gval_step2_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : CheckIdx (r + 1) → ℝ)
+    (ε : Fin (r + 1) → Fin 2) :
+    Real.exp (F.gval g (finsetOfBinWord ε))
+      = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) := by
+  have hterm : ∀ j : Fin (r + 1),
+      g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)
+        = g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2) := by
+    intro j
+    simp only [checkIdxOfFin_mem_finsetOfBinWord]
+    generalize ε j = e
+    fin_cases e <;> simp
+  calc Real.exp (F.gval g (finsetOfBinWord ε))
+      = Real.exp (∑ i : CheckIdx (r + 1),
+          g i * ((if i ∈ finsetOfBinWord ε then (1 : ℝ) else 0) - 1 / 2)) := by
+        rw [gval]                                       -- `eigenvalues_of_check_Vprime` の `ǧ` の定義
+    _ = Real.exp (∑ j : Fin (r + 1), g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
+        congrArg Real.exp
+          (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ hterm).symm
+                                                        -- Lean の `gval` は `𝓜̌` の上の和なので、人手の `Σ_{μ=1}^{M_col}` へ
+                                                        -- `μ = j + 1` の全単射で添字を付け替える（運ぶ段。人手の行は無い）
+    _ = ∏ j : Fin (r + 1), Real.exp (g (checkIdxOfFin j) * (((ε j : ℕ) : ℝ) - 1 / 2)) :=
+        real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)(ε_μ − 1/2)`）
+
+/-- 各因子の展開: `exp(ǧ(ε)) = ∏_μ (μ ∈ T ? e^{γ_μ/2} : e^{-γ_μ/2})`。
+人手の範囲 `M = r + 1` では、指数法則の段を `exp_gval_step2_product` で受け、積の添字を `𝓜̌` へ戻して（運ぶ段）各因子を書き換える
+（各因子の書き換えは Step 2 の `cosh` の行とあわせて人手の行と 1 対 1 にする）。人手の範囲外の `M = 0` は mathlib の `Real.exp_sum` で閉じる。 -/
 theorem exp_gval_eq_prod (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     Real.exp (F.gval g T)
       = ∏ i : CheckIdx M, (if i ∈ T then Real.exp (g i / 2) else Real.exp (-(g i / 2))) := by
-  rw [gval, Real.exp_sum]
-  refine Finset.prod_congr rfl fun i _ => ?_
-  by_cases hT : i ∈ T <;> simp [hT] <;> ring_nf
+  match M, F, g, T with
+  | 0, F, g, T =>
+    rw [gval, Real.exp_sum]
+    refine Finset.prod_congr rfl fun i _ => ?_
+    by_cases hT : i ∈ T <;> simp [hT] <;> ring_nf
+  | r + 1, F, g, T =>
+    obtain ⟨ε, rfl⟩ := finsetOfBinWord_bijective.2 T
+    rw [F.exp_gval_step2_product g ε]
+    refine Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ ?_
+    intro j
+    simp only [checkIdxOfFin_mem_finsetOfBinWord]
+    generalize ε j = e
+    fin_cases e <;> simp <;> ring_nf
 
 /-- **原文 `trace_of_check_Vprime` Step 2**:
 `∑_ε e^{ǧ(ε)} = ∏_μ 2 cosh(γ(θ~_μ)/2)`。 -/

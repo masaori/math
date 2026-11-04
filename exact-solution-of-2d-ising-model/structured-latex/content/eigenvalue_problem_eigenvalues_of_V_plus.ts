@@ -4192,14 +4192,24 @@ E_K \check{Q}_\epsilon
 \qquad \bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(\check{g}(\epsilon)))\bigr)`,
       ),
       paragraph([
-        math(String.raw`\check{g}(\epsilon) = \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
-\left(\epsilon_\mu - \tfrac12\right)`),
-        " なので、実数の指数法則より",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について、",
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
+        " の上の実数の有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        "（",
+        math(String.raw`m \to M_{\mathrm{col}}`),
+        "）による。",
       ]),
       displayMath(
-        String.raw`\exp(\check{g}(\epsilon)) = \prod_{\mu=1}^{M_{\mathrm{col}}}
+        String.raw`\begin{aligned}
+\exp(\check{g}(\epsilon))
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+&&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
 \exp\!\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
-\quad (\because \text{theorem\_exp\_product}\ (n=1))`,
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\bigr)
+\end{aligned}`,
       ),
       paragraph([
         math(String.raw`\epsilon`),
@@ -4284,6 +4294,7 @@ E_K \check{Q}_\epsilon
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step1_chain.sage。",
         "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_real_inclusion.sage。",
+        "2026-11-04: Step 2 の exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) は「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、M_col 個の和には届かない。ǧ の定義を開く行と、新しく足した real_exp_of_finite_sum（m → M_col）を引く行の 2 行の鎖にした。右辺の積は新しく足した def_finite_product_of_real_numbers の ℝ の有限積である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_exp_product.sage。",
       ],
     },
   },
