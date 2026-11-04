@@ -5627,6 +5627,10 @@ z\,z^{k+1}&=z\bigl(z^{k}z\bigr)
                     title: { text: "整数列の水準横断数" },
                     labels: ["def_integer_sequence_level_crossing_counts"],
                     habitat: "Z",
+                    lean: [
+                      "Ising2DLambda.Tools.upCrossingCount",
+                      "Ising2DLambda.Tools.downCrossingCount",
+                    ],
                     statement: [
                       paragraph([
                         math(String.raw`n\in\mathbb N`), "、",
@@ -5686,8 +5690,8 @@ D_c(a)&:=\bigl(a_k=c+1\ \text{かつ}\ a_{k+1}=c\ \text{を満たす}\ k\in\{1,\
 \end{cases}`),
                   paragraph([
                     "が成り立つ（", ref("def_integer_sequence_level_crossing_counts"),
-                    "。", math(String.raw`\le,<`), " は ", math(String.raw`\mathbb Z`),
-                    " の順序）。第一と第二の場合は同時に成り立たない（",
+                    "）。", math(String.raw`\le,<`), " は ", math(String.raw`\mathbb Z`),
+                    " の順序である。第一と第二の場合は同時に成り立たない（",
                     math(String.raw`c<a_n`), " と ", math(String.raw`a_n\le c`),
                     " が矛盾するため）。後続の章では、この恒等式を、隣接差が一歩ごとに ",
                     math(String.raw`-1,0,1`),
@@ -5822,7 +5826,7 @@ g_c(a_{k+1})-g_c(a_k)
                   displayMath(String.raw`\begin{aligned}
 U_c(a)-D_c(a)
 &=\sum_{k=1}^{n-1}\chi^{+}_c(k)-\sum_{k=1}^{n-1}\chi^{-}_c(k)
-&&\bigl(\because\ \text{指示値の総和は条件を満たす元の個数。}\blkref{def_integer_sequence_level_crossing_counts}\bigr)\\
+&&\bigl(\because\ \text{指示値の総和は条件を満たす元の個数}\blkref{def_integer_sequence_level_crossing_counts}\bigr)\\
 &=\sum_{k=1}^{n-1}\bigl(\chi^{+}_c(k)-\chi^{-}_c(k)\bigr)
 &&\bigl(\because\ \mathbb Z\text{ の有限和の差の分配}\bigr)\\
 &=\sum_{k=1}^{n-1}\bigl(g_c(a_{k+1})-g_c(a_k)\bigr)
