@@ -1998,143 +1998,201 @@ r
     ],
     proof: [
       paragraph([
-        "以下、",
-        ref("pauli_matrix_products"),
-        " と ",
-        ref("V1_in_Z_Y_epsilon"),
-        " の Step 0 で確かめられている 1 サイトの積",
-      ]),
-      displayMath(
-        String.raw`\sigma^y\sigma^x = -i\,\sigma^z, \qquad
-\sigma^x\sigma^z = -i\,\sigma^y, \qquad
-\sigma^x\sigma^x = I_{\mathrm{Mat}(2,\mathbb{C})}`,
-      ),
-      paragraph([
-        "を使う（",
-        math(String.raw`\sigma^x\sigma^z = -i\sigma^y`),
+        "以下 ",
+        math(String.raw`M := M_{\mathrm{col}}`),
+        "、",
+        math(String.raw`I := I_{\mathrm{Mat}(2,\mathbb{C})}`),
+        " と書き、",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z`),
         " は ",
-        math(String.raw`\sigma^z\sigma^y = -i\sigma^x`),
-        " と同じく 2 次の成分計算（",
-        ref("mat_mult"),
-        "）で確かめられる：",
-        math(String.raw`\begin{pmatrix}0&1\\1&0\end{pmatrix}
-\begin{pmatrix}1&0\\0&-1\end{pmatrix}
-= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
-= -i\begin{pmatrix}0&-i\\i&0\end{pmatrix}`),
-        "）。また ",
-        ref("kronecker_product_rule"),
-        " (1) より**相異なるサイトに置かれた因子どうしは可換**である。",
+        ref("pauli_matrix_products"),
+        " の Pauli 行列、",
+        math(String.raw`\boxtimes`),
+        " は ",
+        ref("def_kronecker"),
+        " のクロネッカー積とする。",
+        math(String.raw`\overbrace{A\boxtimes\cdots\boxtimes A}^{k}`),
+        " は ",
+        math(String.raw`A`),
+        " を ",
+        math(String.raw`k`),
+        " 個並べたもので、",
+        math(String.raw`k = 0`),
+        " のときは何も並べない。積 ",
+        math(String.raw`\sigma_1^{a_1}\cdots\sigma_r^{a_r}`),
+        " は左から順に掛けたものとする（",
+        ref("site_pauli_prefix_product_kronecker_form"),
+        " の約束）。",
       ]),
       paragraph([
-        "まず ",
-        math(String.raw`1 \leq m \leq M_{\mathrm{col}}-1`),
+        "準備 1（内部の辺の因子のクロネッカー積表示）。",
+        math(String.raw`m \in \{1,\dots,M-1\}`),
         " とする。",
-        ref("def_transfer_matrix_symbols"),
-        " より ",
-        math(String.raw`Y_m = \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y`),
-        "、",
-        math(String.raw`Z_{m+1} = \sigma_1^x\cdots\sigma_m^x\sigma_{m+1}^z`),
-        " である。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Y_mZ_{m+1}
-&= \left(\sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y\right)
-   \left(\sigma_1^x\cdots\sigma_{m}^x\sigma_{m+1}^z\right)
-   \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
-&= \left(\sigma_1^x\sigma_1^x\right)\cdots
-   \left(\sigma_{m-1}^x\sigma_{m-1}^x\right)
-   \left(\sigma_m^y\sigma_m^x\right)\sigma_{m+1}^z
-   \quad (\because \text{相異なるサイトの因子は可換, kronecker\_product\_rule (1)}) \\
-&= \left(\sigma_m^y\sigma_m^x\right)\sigma_{m+1}^z
-   \quad (\because \sigma^x\sigma^x = I \text{ を } m-1 \text{ 箇所へ同時適用}) \\
-&= \left(-i\,\sigma_m^z\right)\sigma_{m+1}^z
-   \quad (\because \sigma^y\sigma^x = -i\sigma^z) \\
-&= -i\,\sigma_m^z\sigma_{m+1}^z
-   \quad (\because \text{スカラー倍と行列積の結合律})
+Y_m
+&= \sigma_1^x\cdots\sigma_{m-1}^x\sigma_m^y
+&&(\because \blkref{def_jordan_wigner_Y_matrices}) \\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}
+&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m,\ a_1=\cdots=a_{m-1}=x,\ a_m=y))
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+Z_{m+1}
+&= \sigma_1^x\cdots\sigma_{m}^x\sigma_{m+1}^z
+&&(\because \blkref{def_jordan_wigner_Z_matrices}) \\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
+&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to m+1,\ a_1=\cdots=a_{m}=x,\ a_{m+1}=z))
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_m^z\sigma_{m+1}^z
+&= \left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+   \left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)
+&&(\because \blkref{def_site_pauli_matrices}\ \text{を 2 箇所へ同時適用}) \\
+&= \overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{m-1}\boxtimes(\sigma^zI)\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m-1}
+&&(\because \blkref{kronecker_product_rule}\ (1)) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes(I\sigma^z)\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を}\ AI\ \text{の形の因子へ同時適用}) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
       paragraph([
-        "両辺に ",
-        math(String.raw`i`),
-        " を掛けて ",
-        math(String.raw`i\,Y_mZ_{m+1} = \sigma_m^z\sigma_{m+1}^z`),
-        "（",
-        math(String.raw`i\cdot(-i) = 1`),
-        "）。",
-      ]),
-      paragraph([
-        "次に境界項を計算する。",
-        math(String.raw`Y_{M_{\mathrm{col}}} = \sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y`),
-        "、",
-        math(String.raw`Z_1 = \sigma_1^z`),
-        " である。まず左辺を計算する。",
+        "準備 2（境界の因子のクロネッカー積表示）。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
-Y_{M_{\mathrm{col}}}Z_1
-&= \left(\sigma_1^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y\right)\sigma_1^z
-   \quad (\because \text{def\_transfer\_matrix\_symbols}) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because \text{相異なるサイトの因子は可換}) \\
-&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\,\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because \sigma^x\sigma^z = -i\sigma^y) \\
-&= -i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because \text{スカラー倍と行列積の結合律})
+Y_{M}
+&= \sigma_1^x\cdots\sigma_{M-1}^x\sigma_{M}^y
+&&(\because \blkref{def_jordan_wigner_Y_matrices}) \\
+&= \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y
+&&(\because \blkref{site_pauli_prefix_product_kronecker_form}\ (r \to M,\ a_1=\cdots=a_{M-1}=x,\ a_M=y))
 \end{aligned}`,
       ),
-      paragraph(["次に右辺を計算する。"]),
       displayMath(
         String.raw`\begin{aligned}
-\varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
-&= \left(\sigma_1^x\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}}^x\right)\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
-   \quad (\because \text{def\_transfer\_matrix\_symbols の } \varepsilon) \\
-&= \left(\sigma_1^x\sigma_1^z\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x
-   \left(\sigma_{M_{\mathrm{col}}}^x\sigma_{M_{\mathrm{col}}}^z\right)
-   \quad (\because \text{相異なるサイトの因子は可換}) \\
-&= \left(-i\,\sigma_1^y\right)\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x
-   \left(-i\,\sigma_{M_{\mathrm{col}}}^y\right)
-   \quad (\because \sigma^x\sigma^z = -i\sigma^y \text{ を 2 箇所へ同時適用}) \\
-&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
-   \quad (\because (-i)^2 = -1)
+Z_1
+&= \sigma_1^z
+&&(\because \blkref{def_jordan_wigner_Z_matrices}\ (m = 1)) \\
+&= \sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}
+&&(\because \blkref{def_site_pauli_matrices})
+\end{aligned}`,
+      ),
+      displayMath(
+        String.raw`\varepsilon = \overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}
+\qquad (\because \blkref{global_spin_flip_kronecker_form})`,
+      ),
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma_{M}^z\sigma_1^z
+&= \left(\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\boxtimes\sigma^z\right)
+   \left(\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\right)
+&&(\because \blkref{def_site_pauli_matrices}\ \text{を 2 箇所へ同時適用}) \\
+&= (I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-2}\boxtimes(\sigma^zI)
+&&(\because \blkref{kronecker_product_rule}\ (1)\text{。}M \geq 2\ \text{より第}\ 1\ \text{因子と第}\ M\ \text{因子は異なる}) \\
+&= (I\sigma^z)\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\sigma^z
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を}\ AI\ \text{の形の因子へ同時適用}) \\
+&= \sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\sigma^z
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult})
 \end{aligned}`,
       ),
       paragraph([
-        "上の 2 つの計算結果を突き合わせる。",
+        "準備 3（内部の辺）。",
+        math(String.raw`m \in \{1,\dots,M-1\}`),
+        " とする。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
--i\,Y_{M_{\mathrm{col}}}Z_1
-&= -i\left(-i\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y\right)
-   \quad (\because \text{直前の } Y_{M_{\mathrm{col}}}Z_1 \text{ の計算}) \\
-&= -\,\sigma_1^y\sigma_2^x\cdots\sigma_{M_{\mathrm{col}}-1}^x\sigma_{M_{\mathrm{col}}}^y
-   \quad \left(\because (-i)^2 = -1\right) \\
-&= \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
-   \quad (\because \text{直前の } \varepsilon\sigma_{M_{\mathrm{col}}}^z\sigma_1^z \text{ の計算})
+i\,(Y_mZ_{m+1})
+&= i\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)Z_{m+1}\right)
+&&(\because \text{準備 1 の } Y_m \text{ の鎖}) \\
+&= i\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m-1}\boxtimes\sigma^y\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m}\right)
+   \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{m}\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)\right)
+&&(\because \text{準備 1 の } Z_{m+1} \text{ の鎖}) \\
+&= i\left(\overbrace{(\sigma^x\sigma^x)\boxtimes\cdots\boxtimes(\sigma^x\sigma^x)}^{m-1}\boxtimes(\sigma^y\sigma^x)\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m-1}\right)
+&&(\because \blkref{kronecker_product_rule}\ (1)) \\
+&= i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes(\sigma^y\sigma^x)\boxtimes(I\sigma^z)\boxtimes\overbrace{(II)\boxtimes\cdots\boxtimes(II)}^{M-m-1}\right)
+&&(\because \blkref{pauli_matrix_products}\ \text{の}\ \sigma^x\sigma^x = I\ \text{を}\ m-1\ \text{箇所へ同時適用}) \\
+&= i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes(\sigma^y\sigma^x)\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)
+&&(\because \blkref{identity_matrix_is_left_unit_of_mat_mult}\ \text{を}\ IA\ \text{の形の因子へ同時適用}) \\
+&= i\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\bigl((-i)\,\sigma^z\bigr)\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)
+&&(\because \blkref{pauli_y_times_pauli_x}) \\
+&= i\left((-i)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)\right)
+&&(\because \blkref{kronecker_multilinear}\ \text{の}\ r=1\ \text{の式}\ (j \to m)) \\
+&= \bigl(i\cdot(-i)\bigr)\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= 1_{\mathbb{C}}\left(\overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}\right)
+&&(\because \mathbb{C}\ \text{で}\ i\cdot(-i)=1_{\mathbb{C}}\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= \overbrace{I\boxtimes\cdots\boxtimes I}^{m-1}\boxtimes\sigma^z\boxtimes\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-m-1}
+&&(\because \blkref{scalar_multiple_by_one}) \\
+&= \sigma_m^z\sigma_{m+1}^z
+&&(\because \text{準備 1 の}\ \sigma_m^z\sigma_{m+1}^z\ \text{の鎖を右辺から左辺へ})
 \end{aligned}`,
       ),
-      paragraph([
-        "最後に ",
-        ref("def_H1_plus"),
-        " の ",
-        math(String.raw`H_1^{(+)}`),
-        " に直前の二つの計算を一つずつ適用する。",
-      ]),
+      paragraph(["準備 4（境界の辺）。"]),
+      displayMath(
+        String.raw`\begin{aligned}
+-\bigl(i\,(Y_{M}Z_1)\bigr)
+&= (-1_{\mathbb{C}})\bigl(i\,(Y_{M}Z_1)\bigr)
+&&(\because \blkref{negation_is_scalar_multiple_by_minus_one}) \\
+&= \bigl((-1_{\mathbb{C}})\cdot i\bigr)(Y_{M}Z_1)
+&&(\because \blkref{scalar_multiple_is_associative}) \\
+&= (-i)\,(Y_{M}Z_1)
+&&(\because \blkref{multiply_by_minus_one}) \\
+&= (-i)\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y\right)Z_1\right)
+&&(\because \text{準備 2 の } Y_M \text{ の鎖}) \\
+&= (-i)\left(\left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-1}\boxtimes\sigma^y\right)
+   \left(\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-1}\right)\right)
+&&(\because \text{準備 2 の } Z_1 \text{ の鎖}) \\
+&= (-i)\left((\sigma^x\sigma^z)\boxtimes\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{M-2}\boxtimes(\sigma^yI)\right)
+&&(\because \blkref{kronecker_product_rule}\ (1)) \\
+&= (-i)\left((\sigma^x\sigma^z)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes\sigma^y\right)
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を}\ AI\ \text{の形の因子へ同時適用}) \\
+&= (-i)\left(\bigl((-i)\,\sigma^y\bigr)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes\sigma^y\right)
+&&(\because \blkref{pauli_x_times_pauli_z}) \\
+&= (-i)\left((-i)\left(\sigma^y\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes\sigma^y\right)\right)
+&&(\because \blkref{kronecker_multilinear}\ \text{の}\ r=1\ \text{の式}\ (j \to 1)) \\
+&= (-i)\left(\sigma^y\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes\bigl((-i)\,\sigma^y\bigr)\right)
+&&(\because \blkref{kronecker_multilinear}\ \text{の}\ r=1\ \text{の式}\ (j \to M)\ \text{を右辺から左辺へ}) \\
+&= \bigl((-i)\,\sigma^y\bigr)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes\bigl((-i)\,\sigma^y\bigr)
+&&(\because \blkref{kronecker_multilinear}\ \text{の}\ r=1\ \text{の式}\ (j \to 1)\ \text{を右辺から左辺へ}) \\
+&= (\sigma^x\sigma^z)\boxtimes\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M-2}\boxtimes(\sigma^x\sigma^z)
+&&(\because \blkref{pauli_x_times_pauli_z}\ \text{を 2 箇所へ右辺から左辺へ同時適用}) \\
+&= (\sigma^x\sigma^z)\boxtimes\overbrace{(\sigma^xI)\boxtimes\cdots\boxtimes(\sigma^xI)}^{M-2}\boxtimes(\sigma^x\sigma^z)
+&&(\because \blkref{identity_matrix_is_right_unit_of_mat_mult}\ \text{を右辺から左辺へ同時適用}) \\
+&= \left(\overbrace{\sigma^x\boxtimes\cdots\boxtimes\sigma^x}^{M}\right)
+   \left(\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\sigma^z\right)
+&&(\because \blkref{kronecker_product_rule}\ (1)\ \text{を右辺から左辺へ}) \\
+&= \varepsilon\left(\sigma^z\boxtimes\overbrace{I\boxtimes\cdots\boxtimes I}^{M-2}\boxtimes\sigma^z\right)
+&&(\because \text{準備 2 の}\ \varepsilon\ \text{の式を右辺から左辺へ}) \\
+&= \varepsilon\left(\sigma_{M}^z\sigma_1^z\right)
+&&(\because \text{準備 2 の}\ \sigma_M^z\sigma_1^z\ \text{の鎖を右辺から左辺へ}) \\
+&= \varepsilon\,G
+&&(\because \blkref{def_G_boundary_operator})
+\end{aligned}`,
+      ),
+      paragraph(["主張の左辺から計算する。"]),
       displayMath(
         String.raw`\begin{aligned}
 i\,H_1^{(+)}
-&= i\left(\sum_{m=1}^{M_{\mathrm{col}}-1}Y_mZ_{m+1} - Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because \text{def\_H1\_plus}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\left(i\,Y_mZ_{m+1}\right) + \left(-i\,Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because \text{スカラー倍の分配法則}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z + \left(-i\,Y_{M_{\mathrm{col}}}Z_1\right)
-   \quad (\because \text{直前に示した内部辺の等式を有限和へ適用}) \\
-&= \sum_{m=1}^{M_{\mathrm{col}}-1}\sigma_m^z\sigma_{m+1}^z + \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
-   \quad (\because \text{直前に示した境界項の等式}) \\
-&= D_0 + \varepsilon\,\sigma_{M_{\mathrm{col}}}^z\sigma_1^z
-   \quad (\because \text{def\_D0\_open\_chain\_operator}) \\
+&= i\left(\sum_{m=1}^{M-1}Y_mZ_{m+1} - Y_{M}Z_1\right)
+&&(\because \blkref{def_H1_plus}) \\
+&= i\left(\sum_{m=1}^{M-1}Y_mZ_{m+1}\right) - \bigl(i\,(Y_{M}Z_1)\bigr)
+&&(\because \blkref{scalar_multiple_distributes_over_matrix_difference}) \\
+&= \sum_{m=1}^{M-1}\bigl(i\,(Y_mZ_{m+1})\bigr) - \bigl(i\,(Y_{M}Z_1)\bigr)
+&&(\because \blkref{finite_sum_of_scalar_multiples}\ \text{を右辺から左辺へ}) \\
+&= \sum_{m=1}^{M-1}\sigma_m^z\sigma_{m+1}^z - \bigl(i\,(Y_{M}Z_1)\bigr)
+&&(\because \text{準備 3 を各項へ同時適用}) \\
+&= D_0 - \bigl(i\,(Y_{M}Z_1)\bigr)
+&&(\because \blkref{def_D0_open_chain_operator}) \\
+&= D_0 + \Bigl(-\bigl(i\,(Y_{M}Z_1)\bigr)\Bigr)
+&&(\because \blkref{matrix_difference_is_sum_with_negation}) \\
 &= D_0 + \varepsilon G
-   \quad (\because \text{def\_G\_boundary\_operator})
+&&(\because \text{準備 4})
 \end{aligned}`,
       ),
     ],
@@ -2143,6 +2201,7 @@ i\,H_1^{(+)}
       notes: [
         "V1_in_Z_Y_epsilon は V_1 = exp(iK_1(Y_1Z_2+⋯+Y_{M-1}Z_M − εY_MZ_1)) を主張しており、この表示はその指数の中身を σ^z の言葉へ戻したものにあたる。右辺は F^{(+)} 上（ε = +1）で K_1 D の 1/K_1 倍に一致し、F^{(-)} 上では最後の項の符号が反転する。これが V^{(+)} が「周期境界」、V^{(-)} が「反周期境界」に対応する具体的な形である。",
         "数値検証: sagemath/check/053_claim_even_sector_closing/check_03（M=2,3,4,5 で残差 0.0）。",
+        "2026-11-04（全証明の SageMath 検算）: 証明をクロネッカー積表示の鎖に書き直した。以前の証明は「V1_in_Z_Y_epsilon の Step 0」という他のブロックの証明の途中と、相異なるサイトの因子の並べ替え・同じサイトの因子の積を一度に行う段（ラベルの無い「相異なるサイトの因子は可換」）を根拠にしていた。1 サイトの積 σ^yσ^x = (−i)σ^z・σ^xσ^z = (−i)σ^y を新しい主張 pauli_y_times_pauli_x・pauli_x_times_pauli_z にし、Y_m・Z_{m+1}・Y_M・Z_1・ε・σ_m^zσ_{m+1}^z・σ_M^zσ_1^z の表示を準備 1・2 に、内部の辺と境界の辺の等式を準備 3・4 の (∵) 付きの鎖に、最後の鎖を主張の左辺から始まる一続きにした（主張は不変）。数値検証: sagemath/check/H1_plus_in_sigma_z_form/。",
       ],
     },
   },

@@ -239,6 +239,110 @@ i\cdot(-i)
     },
   },
   {
+    id: "Z_Y_anticommutation_claim_pauli_y_times_pauli_x",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^y\sigma^x = (-i)\,\sigma^z` },
+    labels: ["pauli_y_times_pauli_x"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " と虚数単位 ",
+        math(String.raw`i \in \mathbb{C}`),
+        " について、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の中で",
+      ]),
+      displayMath(String.raw`\sigma^y\sigma^x = (-i)\,\sigma^z`),
+      paragraph([
+        "が成り立つ。右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^y\sigma^x
+&= \begin{pmatrix}0&-i\\i&0\end{pmatrix}\begin{pmatrix}0&1\\1&0\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products}) \\
+&= \begin{pmatrix}-i&0\\0&i\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}(-i)\cdot 1&0\\0&i\end{pmatrix}
+&&(\because 1_{\mathbb{C}}\ \text{は積の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を右辺から左辺へ}) \\
+&= \begin{pmatrix}(-i)\cdot 1&(-i)\cdot 0\\(-i)\cdot 0&i\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}\ \text{を 2 箇所へ右辺から左辺へ同時適用}) \\
+&= \begin{pmatrix}(-i)\cdot 1&(-i)\cdot 0\\(-i)\cdot 0&(-i)\cdot(-1)\end{pmatrix}
+&&(\because \mathbb{C}\ \text{で}\ (-i)\cdot(-1)=i\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= (-i)\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= (-i)\,\sigma^z
+&&(\because \blkref{pauli_matrix_products})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04（全証明の SageMath 検算 H1_plus_in_sigma_z_form）: 原文（Typst）に対応ブロックは無い。H1_plus_in_sigma_z_form の証明が「V1_in_Z_Y_epsilon の Step 0」という他のブロックの証明の途中を根拠にしていたので、引ける主張として足した。",
+        "数値検証: sagemath/check/pauli_y_times_pauli_x/。",
+      ],
+    },
+  },
+  {
+    id: "Z_Y_anticommutation_claim_pauli_x_times_pauli_z",
+    kind: "claim",
+    title: { tex: String.raw`\sigma^x\sigma^z = (-i)\,\sigma^y` },
+    labels: ["pauli_x_times_pauli_z"],
+    statement: [
+      paragraph([
+        ref("pauli_matrix_products"),
+        " の ",
+        math(String.raw`\sigma^x,\sigma^y,\sigma^z \in \mathrm{Mat}(2,\mathbb{C})`),
+        " と虚数単位 ",
+        math(String.raw`i \in \mathbb{C}`),
+        " について、",
+        math(String.raw`\mathrm{Mat}(2,\mathbb{C})`),
+        " の中で",
+      ]),
+      displayMath(String.raw`\sigma^x\sigma^z = (-i)\,\sigma^y`),
+      paragraph([
+        "が成り立つ。右辺は ",
+        ref("def_matrix_scalar_multiple"),
+        " のスカラー倍である。",
+      ]),
+    ],
+    proof: [
+      displayMath(
+        String.raw`\begin{aligned}
+\sigma^x\sigma^z
+&= \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+&&(\because \blkref{pauli_matrix_products}) \\
+&= \begin{pmatrix}0&-1\\1&0\end{pmatrix}
+&&(\because \blkref{mat_mult}) \\
+&= \begin{pmatrix}(-i)\cdot 0&-1\\1&(-i)\cdot 0\end{pmatrix}
+&&(\because \blkref{complex_times_zero_is_zero}\ \text{を 2 箇所へ右辺から左辺へ同時適用}) \\
+&= \begin{pmatrix}(-i)\cdot 0&(-i)\cdot(-i)\\1&(-i)\cdot 0\end{pmatrix}
+&&(\because \mathbb{C}\ \text{で}\ (-i)\cdot(-i)=-1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= \begin{pmatrix}(-i)\cdot 0&(-i)\cdot(-i)\\(-i)\cdot i&(-i)\cdot 0\end{pmatrix}
+&&(\because \mathbb{C}\ \text{で}\ (-i)\cdot i=1\text{。}\blkref{definition_of_cc}\ \text{の積}) \\
+&= (-i)\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+&&(\because \blkref{def_matrix_scalar_multiple}) \\
+&= (-i)\,\sigma^y
+&&(\because \blkref{pauli_matrix_products})
+\end{aligned}`,
+      ),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04（全証明の SageMath 検算 H1_plus_in_sigma_z_form）: 原文（Typst）に対応ブロックは無い。H1_plus_in_sigma_z_form の証明が証明の中で確かめていた 1 サイトの積を、引ける主張として足した。",
+        "数値検証: sagemath/check/pauli_x_times_pauli_z/。",
+      ],
+    },
+  },
+  {
     id: "Z_Y_anticommutation_claim_transpose_of_identity_matrix_of_order_two",
     kind: "claim",
     title: { text: "2 次の単位行列の転置" },
