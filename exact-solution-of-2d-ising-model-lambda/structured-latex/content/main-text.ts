@@ -62300,6 +62300,46 @@ s(j')-s(j)
                         ]),
                       ],
                     },
+                  }, {
+                    role: "supportingClaim",
+                    element: {
+                      id: "kac_ward_claim_zero_contact_iff_distinct_pass_vertices",
+                      kind: "claim",
+                      title: { text: "接触対が零であることと通過頂点が相異なることは同値である" },
+                      labels: ["claim_zero_contact_iff_distinct_pass_vertices"],
+                      habitat: "N",
+                      verification: ["sagemath/check/zero-contact-distinct-pass-vertices"],
+                      lean: [
+                        "Ising2DLambda.KacWard.contactPairCount_eq_zero_iff_pass_vertices_injective",
+                        "Ising2DLambda.NecSuf.KacWard.contactPairCount_eq_zero_iff_injective",
+                      ],
+                      statement: [
+                        paragraph([
+                          "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
+                          " について、", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                          " と、任意の相異なる ", math(String.raw`a,b\in I_m`),
+                          " に対して ", math(String.raw`\operatorname{tgt}(\vec e_a)\ne\operatorname{tgt}(\vec e_b)`),
+                          " が成り立つことは同値である。接触対数は ", ref("def_contact_pair_count"), " による。",
+                        ]),
+                      ],
+                      proof: [
+                        paragraph([
+                          math(String.raw`n_{\mathrm{ct}}(\gamma)=0`), " とする。相異なる ",
+                          math(String.raw`a,b\in I_m`), " の通過頂点が等しいと仮定する。自然数の線型順序により ",
+                          math(String.raw`a<b`), " または ", math(String.raw`b<a`),
+                          " である。前者なら ", math(String.raw`(a,b)`),
+                          "、後者なら ", math(String.raw`(b,a)`),
+                          " が接触対の集合に属する（", ref("def_contact_pair_count"),
+                          "）。よってその集合の元の個数は零でなく、仮定に反する。",
+                        ]),
+                        paragraph([
+                          "逆に、相異なる添字の通過頂点がすべて異なるとする。",
+                          ref("def_contact_pair_count"), " の接触対の集合には元がない。",
+                          "空集合の元の個数は零なので ", math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
+                          " である。どちらの方向も有限集合と自然数の順序だけで閉じる。",
+                        ]),
+                      ],
+                    },
                   }],
                   focus: {
                     id: "kac_ward_claim_vertex_simple_winding_zero_or_primitive",
@@ -62323,7 +62363,7 @@ s(j')-s(j)
                       paragraph([
                         "正方トーラスを、", math(String.raw`L^2`), " 個の正方形を辺で貼り合わせた有限セル複体と見る。",
                         math(String.raw`n_{\mathrm{ct}}(\gamma)=0`),
-                        " なら異なる二項の通過の頂点は一致しない。正方格子の二辺は共通頂点以外では交わらないので、辺列を各辺に沿って結んだ閉曲線 ",
+                        " なら異なる二項の通過の頂点は一致しない（", ref("claim_zero_contact_iff_distinct_pass_vertices"), "）。正方格子の二辺は共通頂点以外では交わらないので、辺列を各辺に沿って結んだ閉曲線 ",
                         math(String.raw`C_\gamma`), " は自己交差を持たない。",
                       ]),
                       paragraph([
@@ -62333,7 +62373,7 @@ s(j')-s(j)
                         " だけが残る。基本領域の左右の切断線から出る境界辺も貼り合わせで対になり、上下についても同じである。従って境界の向き付き切断線横断数は両方向とも零であり、",
                       ]),
                       displayMath(String.raw`\bigl(w_{\mathrm h}(\gamma),w_{\mathrm v}(\gamma)\bigr)=(0,0)
-\qquad\bigl(\because\ \blkref{def_directed_winding_numbers}\text{ と有限セルの境界辺の相殺}\bigr).`),
+\qquad\bigl(\because\ \blkref{def_directed_winding_numbers}\text{ と有限セルの境界辺の相殺}\bigr)`),
                       paragraph([
                         "次に ", math(String.raw`C_\gamma`),
                         " がトーラスを二つに分けない場合を考える。正方形を頂点とし、辺を共有する二正方形を結ぶ双対辺を置いた有限双対グラフを取る。",
@@ -62359,7 +62399,7 @@ s(j')-s(j)
                       displayMath(String.raw`w_{\mathrm h}(\gamma)s-w_{\mathrm v}(\gamma)r
 =\begin{cases}1,&\text{横断の向きが正の場合},\\-1,&\text{横断の向きが負の場合}
 \end{cases}
-\qquad\bigl(\because\ \text{有限トーラス上の符号付き交点の対消去}\bigr).`),
+\qquad\bigl(\because\ \text{有限トーラス上の符号付き交点の対消去}\bigr)`),
                       paragraph([
                         ref("def_primitive_integer_pair"), " の Bézout 条件により、零でない巻き付きベクトルは原始的である。場合分けを合わせて主張を得る。使った操作は有限セルの切断、有限路、整数の符号付き和だけであり、実数体も複素数体も現れない。",
                       ]),
