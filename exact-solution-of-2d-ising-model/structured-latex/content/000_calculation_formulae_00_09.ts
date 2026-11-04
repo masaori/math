@@ -1268,6 +1268,50 @@ T_B(X - W)
   },
 
   {
+    id: "calc_formulae_claim_real_inclusion_preserves_sum",
+    kind: "claim",
+    title: { text: "実数の和の包含は包含の和に等しい" },
+    labels: ["real_inclusion_preserves_sum"],
+    statement: [
+      paragraph([
+        math(String.raw`a, b \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`a_{\mathbb{C}} + b_{\mathbb{C}} = (a + b)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。",
+        math(String.raw`r_{\mathbb{C}}`),
+        " は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記、左辺の和は ",
+        ref("definition_of_cc"),
+        " の和、右辺の和は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。",
+      ]),
+    ],
+    proof: [
+      displayMath(String.raw`\begin{aligned}
+a_{\mathbb{C}} + b_{\mathbb{C}}
+&= (a,\ 0) + (b,\ 0)
+&&(\because\ \blkref{inclusion_rr_to_cc}\ \text{を 2 か所へ同時適用})\\
+&= (a + b,\ 0 + 0)
+&&(\because\ \blkref{definition_of_cc}\ \text{の和})\\
+&= (a + b,\ 0)
+&&(\because\ \mathbb{R}\ \text{で}\ 0 + 0 = 0)\\
+&= (a + b)_{\mathbb{C}}
+&&(\because\ \blkref{inclusion_rr_to_cc})
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。real_inclusion_preserves_sum_over_binary_words の帰納法の各段が二つの実数の和の包含を使うので足した。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_real_differences",
     kind: "claim",
     title: { text: "実数の差の有限和は有限和の差" },

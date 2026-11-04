@@ -29,6 +29,13 @@ theorem binaryWordComplexSum_eq_binWordSum :
   | r + 1, z => by
     rw [binaryWordComplexSum_succ, NecSuf.binWordSum_succ, binaryWordComplexSum_eq_binWordSum r]
 
+/-- 具体版の実数の和 `binaryWordRealSum` は、必要十分版 `NecSuf.binWordSum` の `α := ℝ` の場合である（2 つの節が一致する）。 -/
+theorem binaryWordRealSum_eq_binWordSum :
+    ∀ (r : ℕ) (x : (Fin (r + 1) → Fin 2) → ℝ), binaryWordRealSum r x = NecSuf.binWordSum r x
+  | 0, _ => rfl
+  | r + 1, x => by
+    rw [binaryWordRealSum_succ, NecSuf.binWordSum_succ, binaryWordRealSum_eq_binWordSum r]
+
 /-- `sum_over_binary_words_distributes_in_left_factor` を `NecSuf.binWordSum_map`（`f := (· C)`）の特殊化として得る。 -/
 theorem binaryWordMatrixSum_mul_of_necSuf {m n p : ℕ} (r : ℕ)
     (X : (Fin (r + 1) → Fin 2) → Matrix (Fin m) (Fin n) ℂ) (C : Matrix (Fin n) (Fin p) ℂ) :

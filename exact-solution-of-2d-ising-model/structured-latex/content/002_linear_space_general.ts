@@ -2813,6 +2813,132 @@ X - (-Y)
     },
   },
   {
+    id: "linear_space_general_definition_sum_over_binary_words_of_real_numbers",
+    kind: "definition",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和}` },
+    labels: ["def_sum_over_binary_words_of_real_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
+        " について、",
+        math(String.raw`\{0,1\}^{r}`),
+        " と ",
+        math(String.raw`(\epsilon', e) \in \{0,1\}^{r+1}`),
+        "（",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        "、",
+        math(String.raw`e \in \{0,1\}`),
+        "）は ",
+        ref("def_sum_over_binary_words"),
+        " のものとする。",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`x_\epsilon \in \mathbb{R}`),
+        " について、和 ",
+        math(String.raw`\sum_{\epsilon \in \{0,1\}^{r}} x_\epsilon \in \mathbb{R}`),
+        " を ",
+        math(String.raw`r`),
+        " についての帰納法で",
+      ]),
+      displayMath(String.raw`\sum_{\epsilon \in \{0,1\}^{1}} x_\epsilon := x_{(1)} + x_{(0)},
+\qquad
+\sum_{\epsilon \in \{0,1\}^{r+1}} x_\epsilon := \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\Bigr)`),
+      paragraph([
+        "と定める（右辺の和は ",
+        math(String.raw`\epsilon' \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`x_{(\epsilon',1)} + x_{(\epsilon',0)}`),
+        " の和である）。和 ",
+        math(String.raw`+`),
+        " は ",
+        math(String.raw`\mathbb{R}`),
+        " の和である。",
+      ]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 2 が {0,1}^𝓜̌ で添字付けられた実数 exp(ǧ(ε)) を足していたが、本文は ℂ の和（def_sum_over_binary_words_of_complex_numbers）しか定めていなかったので足した。足す順序は def_sum_over_binary_words と同じ（最後の成分で 1 を 0 より先に足す）。Lean の具体版は Ising2D.binaryWordRealSum（DefinitionSumOverBinaryWords.lean）で、必要十分版 Ising2D.NecSuf.binWordSum（α := ℝ）との一致は binaryWordRealSum_eq_binWordSum。",
+      ],
+    },
+  },
+  {
+    id: "linear_space_general_claim_real_inclusion_preserves_sum_over_binary_words",
+    kind: "claim",
+    title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の実数の和の包含は、包含の和に等しい}` },
+    labels: ["real_inclusion_preserves_sum_over_binary_words"],
+    statement: [
+      paragraph([
+        math(String.raw`r \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`\epsilon \in \{0,1\}^{r}`),
+        " で添字付けられた ",
+        math(String.raw`x_\epsilon \in \mathbb{R}`),
+        " とする。",
+        math(String.raw`s_{\mathbb{C}}`),
+        "（",
+        math(String.raw`s \in \mathbb{R}`),
+        "）は ",
+        ref("inclusion_rr_to_cc"),
+        " の略記である。このとき",
+      ]),
+      displayMath(String.raw`\sum_{\epsilon \in \{0,1\}^{r}} (x_\epsilon)_{\mathbb{C}} = \Bigl(\sum_{\epsilon \in \{0,1\}^{r}} x_\epsilon\Bigr)_{\mathbb{C}}`),
+      paragraph([
+        "が成り立つ。左辺の和は ",
+        ref("def_sum_over_binary_words_of_complex_numbers"),
+        "、右辺の和は ",
+        ref("def_sum_over_binary_words_of_real_numbers"),
+        " による。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`r`),
+        " についての帰納法で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた実数の全ての族について示す。",
+        math(String.raw`r = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{1}} (x_\epsilon)_{\mathbb{C}}
+&= (x_{(1)})_{\mathbb{C}} + (x_{(0)})_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\bigr)\\
+&= \bigl(x_{(1)} + x_{(0)}\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to x_{(1)},\ b \to x_{(0)})\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{1}} x_\epsilon\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        math(String.raw`r`),
+        " で、",
+        math(String.raw`\{0,1\}^{r}`),
+        " で添字付けられた実数の全ての族について成り立つと仮定する。",
+        math(String.raw`\epsilon \in \{0,1\}^{r+1}`),
+        " で添字付けられた ",
+        math(String.raw`x_\epsilon \in \mathbb{R}`),
+        " について",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{\epsilon \in \{0,1\}^{r+1}} (x_\epsilon)_{\mathbb{C}}
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \Bigl((x_{(\epsilon',1)})_{\mathbb{C}} + (x_{(\epsilon',0)})_{\mathbb{C}}\Bigr)
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_complex_numbers}\bigr)\\
+&= \sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum}\ (a \to x_{(\epsilon',1)},\ b \to x_{(\epsilon',0)})\ \text{を各項へ同時に}\bigr)\\
+&= \Bigl(\sum_{\epsilon' \in \{0,1\}^{r}} \bigl(x_{(\epsilon',1)} + x_{(\epsilon',0)}\bigr)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{帰納法の仮定}\ (x_{\epsilon'} \to x_{(\epsilon',1)} + x_{(\epsilon',0)})\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{r+1}} x_\epsilon\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{def_sum_over_binary_words_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-03: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かったので足した。real_inclusion_preserves_finite_sum の {0,1}^r 版である。Lean の具体版は Ising2D.binaryWordComplexSum_ofReal（ClaimRealInclusionPreservesSumOverBinaryWords.lean）。",
+      ],
+    },
+  },
+  {
     id: "linear_space_general_claim_sum_over_binary_words_distributes_in_left_factor",
     kind: "claim",
     title: { tex: String.raw`\{0,1\}^{r}\ \text{の上の和に右から行列を掛けると、各項に掛けた和になる}` },

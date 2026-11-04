@@ -1239,6 +1239,11 @@ targets=(
   Ising2D.binaryWordMatrixSum_mul
   Ising2D.binaryWordMatrixSum_eq_binWordSum
   Ising2D.binaryWordComplexSum_eq_binWordSum
+  Ising2D.binaryWordRealSum_eq_binWordSum
+  Ising2D.real_inclusion_add
+  Ising2D.binaryWordComplexSum_ofReal
+  Ising2D.binaryWordComplexSum_ofReal_of_necSuf
+  Ising2D.binWordSum_ofReal
   Ising2D.binaryWordMatrixSum_mul_of_necSuf
   Ising2D.binWordSum_mul_tensorPow
   Ising2D.binWordSum_mul_colVec

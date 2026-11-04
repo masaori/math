@@ -281,3 +281,9 @@ RESULT: PASS
 checked 24 lines
 negative controls: 3
 RESULT: PASS
+
+##### 2026-11-03 に check_trace_of_check_Vprime_step2_real_inclusion を足した（trace_of_check_Vprime の Step 2 の 1 行目: ℂ の和 Σ_ε (exp ǧ(ε))_C を ℝ の和の包含へ移す行）
+# 実行コマンド: ~/micromamba/envs/sage/bin/sage check_trace_of_check_Vprime_step2_real_inclusion.sage
+checked 1 line in 5 cases (M_col = 1..5)
+negative controls: 5
+RESULT: PASS

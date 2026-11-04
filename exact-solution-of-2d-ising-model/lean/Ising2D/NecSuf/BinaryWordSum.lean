@@ -16,6 +16,8 @@
 | --- | --- |
 | `sum_over_binary_words_distributes_in_left_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (· C)`） |
 | `sum_over_binary_words_distributes_in_right_factor` の `r = 1`・`r → r + 1`（同じ並び） | `binWordSum_map` の 2 つの節（`f := (C * ·)`） |
+| `trace_of_sum_over_binary_words` の `r = 1`・`r → r + 1` | `binWordSum_map` の 2 つの節（`f := trace`。導出は `ClaimTraceOfSumOverBinaryWordsFromNecSuf.lean`） |
+| `real_inclusion_preserves_sum_over_binary_words` の `r = 1`・`r → r + 1`（人手の鎖を右辺から左辺へ読んだ形。段の対応は逆順で 1 対 1） | `binWordSum_map` の 2 つの節（`f := (↑· : ℝ → ℂ)`。導出は `ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf.lean`） |
 | `expansion_of_finite_product_of_two_term_sums` の `r = 1`・`r → r + 1`（同じ並び） | `finProdLeft_add_eq_binWordSum` の 2 つの節 |
 | `sum_over_binary_words_with_one_nonzero_term` の `r = 1` の二つの場合・`r → r + 1` の `δ' ≠ δ`・本体・二つの場合（同じ並び） | `binWordSum_eq_of_eq_zero` の 2 つの節 |
 

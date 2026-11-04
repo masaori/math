@@ -4175,6 +4175,23 @@ E_K \check{Q}_\epsilon
       ),
       paragraph([
         "Step 2（積への分解）。",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}}`),
+        " の上の実数の和は ",
+        ref("def_sum_over_binary_words_of_real_numbers"),
+        "（",
+        math(String.raw`r \to M_{\mathrm{col}}`),
+        "）による（",
+        ref("def_check_index_set"),
+        " により ",
+        math(String.raw`\{0,1\}^{\check{\mathcal{M}}} = \{0,1\}^{M_{\mathrm{col}}}`),
+        "）。Step 1 の右辺の複素数の和を、実数の和の包含へ移す。",
+      ]),
+      displayMath(
+        String.raw`\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(\check{g}(\epsilon))\bigr)_{\mathbb{C}}
+= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
+\qquad \bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(\check{g}(\epsilon)))\bigr)`,
+      ),
+      paragraph([
         math(String.raw`\check{g}(\epsilon) = \sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)
 \left(\epsilon_\mu - \tfrac12\right)`),
         " なので、実数の指数法則より",
@@ -4266,6 +4283,7 @@ E_K \check{Q}_\epsilon
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_04（tr(V̌') = Π 2cosh(γ/2) の相対差 ≤ 3.8e-15、tr((V̌')^{-1}) = tr(V̌') の相対差 ≤ 2.5e-15）。",
         "2026-09-26: 整数運動量の経路を本文から外したため、それとの比較・依存を除いた。",
         "2026-11-03: Step 1 の冒頭の名前の列挙と、鎖の根拠「Σ_ε Q̌_ε = I」「トレースの線型性」「V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε」「tr(Q̌_ε) = 1」を、1 行 1 主張のラベル参照の 8 行の鎖にした。V̌' を和へ分配する行（sum_over_binary_words_distributes_in_right_factor）と、スカラー倍をトレースの外へ出す行（trace_of_scalar_multiple）は根拠なしに省かれていたので足した。複素数の {0,1}^𝓜̌ の上の和の定義 def_sum_over_binary_words_of_complex_numbers と、主張 trace_of_sum_over_binary_words・trace_of_scalar_multiple を 009 章に足した。鎖の最後の和は ℂ の和で、項は inclusion_rr_to_cc で ℂ へ移した (exp(ǧ(ε)))_ℂ である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_step1（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step1_chain.sage。",
+        "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_real_inclusion.sage。",
       ],
     },
   },

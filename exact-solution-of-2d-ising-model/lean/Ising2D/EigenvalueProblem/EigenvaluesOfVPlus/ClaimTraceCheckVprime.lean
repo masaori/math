@@ -16,8 +16,9 @@
 人手の `Q̌_ε` が `F.Qproj (finsetOfBinWord ε)` である。Step 1 の 8 行の鎖は `trace_Vprime_step1` の `calc` と 1 対 1 である。
 4 行目の `trace_of_sum_over_binary_words` は、`TensorPow M` の系 `trace_binWordSum_tensorPow`（必要十分版 `NecSuf.binWordSum_map` の
 特殊化。3 行目の `mul_binWordSum_tensorPow` と同じ作り）で受ける。人手の帰納法と 1 対 1 の `calc` は添字 `Fin n` の `trace_binaryWordMatrixSum` にある。
-`trace_Vprime` は、`M = r + 1` では `trace_Vprime_step1` の和を Lean の `𝓜̌` の部分集合の上の `Finset.sum` へ付け替え（運ぶ段）、
-Step 2 の `sum_exp_gval` へつなぐ。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる。
+`trace_Vprime` は、`M = r + 1` では `trace_Vprime_step1` の ℂ の和を、Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`。
+`NecSuf.binWordSum` の系 `binWordSum_ofReal`）で ℝ の和（`def_sum_over_binary_words_of_real_numbers`）の包含へ移し、
+その ℝ の和を Lean の `𝓜̌` の部分集合の上の `Finset.sum` へ付け替え（運ぶ段）、Step 2 の `sum_exp_gval` へつなぐ。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` で閉じる。
 
 ## 章 009 との違い
 
@@ -31,6 +32,7 @@ import Ising2D.EigenvalueProblem.EigenvaluesOfVPlus.ClaimCheckJointEigenspace
 import Ising2D.MathematicalTools.TraceConjugateTransposeAndPositiveDefiniteness.ClaimTraceOfSumOverBinaryWordsFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
 import Ising2D.NecSuf.BinaryWordSumAsFinsetSum
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimRealInclusionPreservesSumOverBinaryWordsFromNecSuf
 
 namespace Ising2D
 
@@ -158,13 +160,15 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
       calc (F.Vprime g).trace
           = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
             trace_Vprime_step1 F g                      -- Step 1 の鎖
-        _ = ∑ ε : Fin (r + 1) → Fin 2, ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ) :=
-            NecSuf.binWordSum_eq_sum r _                -- 人手の和を Lean の和へ付け替える（運ぶ段）
-        _ = ∑ T : Finset (CheckIdx (r + 1)), ((Real.exp (F.gval g T) : ℝ) : ℂ) :=
-            Fintype.sum_bijective finsetOfBinWord finsetOfBinWord_bijective _ _ (fun _ => rfl)
+        _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) :=
+            binWordSum_ofReal r _                       -- Step 2 の 1 行目: `real_inclusion_preserves_sum_over_binary_words`
+                                                        -- （`x_ε → exp(ǧ(ε))`）
+        _ = ((∑ ε : Fin (r + 1) → Fin 2, Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ) := by
+            rw [NecSuf.binWordSum_eq_sum r]             -- 人手の和を Lean の和へ付け替える（運ぶ段）
+        _ = ((∑ T : Finset (CheckIdx (r + 1)), Real.exp (F.gval g T) : ℝ) : ℂ) :=
+            congrArg (fun t : ℝ => (t : ℂ))
+              (Fintype.sum_bijective finsetOfBinWord finsetOfBinWord_bijective _ _ (fun _ => rfl))
                                                         -- 語から部分集合への全単射で添字を付け替える（運ぶ段）
-        _ = ((∑ T : Finset (CheckIdx (r + 1)), Real.exp (F.gval g T) : ℝ) : ℂ) := by push_cast; rfl
-                                                        -- `ℝ` の和を `ℂ` へ移す（運ぶ段。Step 2 の範囲）
   rw [hsum, F.sum_exp_gval g]
 
 /-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`（`cosh` が偶関数）。 -/
