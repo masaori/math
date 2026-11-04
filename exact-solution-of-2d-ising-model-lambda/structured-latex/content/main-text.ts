@@ -35485,6 +35485,7 @@ Z_L
                       title: { text: "辺の部分集合に対応するスピン単項式の和" },
                       labels: ["def_edge_subset_spin_sum"],
                       habitat: "Z",
+                      lean: ["Ising2DLambda.FisherZero.edgeSubsetSpinSum"],
                       verification: ["sagemath/check/even-subgraph-spin-sum"],
                       statement: [
                         paragraph([
