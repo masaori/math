@@ -112,16 +112,6 @@ section MaxSimple
 
 variable {M : ℕ}
 
-open CheckFermiSetup in
-/-- 人手の `ǧ(ε) = Σ_{μ=1}^{M_col} γ(θ~_μ)(ε_μ - 1/2)` を、`Fin M` の上の和で書く（`ℝ` の値）。
-人手の添字 `μ = j + 1`（`checkIdxOfFin`）へ付け替える段で、人手の鎖の行ではない（`gval_eq_sum_fin` の `ℝ` の版）。 -/
-theorem gval_eq_sum_fin_real (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
-    F.gval g T
-      = ∑ j : Fin M, g (checkIdxOfFin j) * ((if checkIdxOfFin j ∈ T then (1 : ℝ) else 0) - 1 / 2) := by
-  rw [CheckFermiSetup.gval]
-  exact (Fintype.sum_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
-    (fun _ => rfl)).symm
-
 /-- `def_Lambda_delta_M` の添字 `μ = 1, …, M_col` の和を、人手の有限和の Lean での書き方（`Fin M` の上の和、`μ = j + 1`。
 `ClaimFiniteSumsOfRealNumbers.lean` の冒頭）へ付け替える。`LambdaM` は `Finset.Icc 1 M` の上の和で書いてあるので、
 その読み替えの段で、人手の鎖の行ではない。 -/

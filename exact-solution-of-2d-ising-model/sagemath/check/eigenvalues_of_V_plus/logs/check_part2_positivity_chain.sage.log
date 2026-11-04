@@ -1,2 +1,1 @@
-PASS: eigenvalues_of_V_plus (2) の正値性: 等号 180 段、不等号 1440 件、否定コントロール 32 組
-RESULT: PASS
+eigenvalues_of_V_plus (2) の正値性: 等号 180 段、不等号 1440 件、否定コントロール 32 組 PASS
