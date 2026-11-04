@@ -4964,23 +4964,58 @@ R^{(+)}V^{(+)}
     },
     labels: ["trace_V_plus_is_positive"],
     statement: [
-      displayMath(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}.`),
+      paragraph([
+        ref("def_V_plus"),
+        " の ",
+        math(String.raw`V^{(+)} \in \mathrm{Mat}(2^{M_{\mathrm{col}}},\mathbb{C})`),
+        " について",
+      ]),
+      displayMath(String.raw`\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}`),
+      paragraph([
+        "である。トレースは ",
+        ref("def_trace"),
+        "、",
+        math(String.raw`z \in \mathbb{C}`),
+        " について「",
+        math(String.raw`z \in \mathbb{R}_{>0}`),
+        "」は ",
+        ref("def_hermitian_positive_definite"),
+        " の略記（",
+        math(String.raw`z = r_{\mathbb{C}}`),
+        "（",
+        ref("inclusion_rr_to_cc"),
+        "）を満たす ",
+        math(String.raw`r \in \mathbb{R}_{>0}`),
+        " がある）による。",
+      ]),
     ],
     proof: [
       paragraph([
-        ref("V_plus_is_positive_definite"),
-        " と ",
-        ref("trace_of_positive_definite_is_positive"),
-        " より ",
-        math(String.raw`\mathrm{tr}(V^{(+)})>0`),
-        " である。",
+        math(String.raw`n := 2^{M_{\mathrm{col}}}`),
+        " と置く。",
+        math(String.raw`M_{\mathrm{col}} \in \mathbb{Z}_{\geq 1}`),
+        "（",
+        ref("def_jordan_wigner_Z_matrices"),
+        "）なので ",
+        math(String.raw`n \in \mathbb{Z}_{\geq 1}`),
+        " であり、",
+        math(String.raw`V^{(+)} \in \mathrm{Mat}(n,\mathbb{C})`),
+        "（",
+        ref("def_V_plus"),
+        "）である。",
       ]),
+      displayMath(String.raw`\begin{aligned}
+&V^{(+)}\ \text{は正定値}
+&&(\because\ \blkref{V_plus_is_positive_definite})\\
+\Longrightarrow\ &\mathrm{tr}\!\left(V^{(+)}\right) \in \mathbb{R}_{>0}
+&&\bigl(\because\ \blkref{trace_of_positive_definite_is_positive}\ \text{を}\ n = 2^{M_{\mathrm{col}}},\ A = V^{(+)}\ \text{へ}\bigr)
+\end{aligned}`),
     ],
     conversion: {
       status: "added",
       notes: [
         "旧 V_plus_inverse_positive_and_trace_positivity の Step 2 から、V^{(+)} 自身のトレース正値性だけを一主張として分離した。Lean の対応定理は Ising2D.trace_VPlus_pos。",
-        "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05_positive_definite_and_c.sage のトレース最小値による正値性検査。",
+        "2026-11-04（全証明の SageMath 検算）: 散文の「〜と〜より」を、二つの主張を順に当てる (∵) 付きの二行にした。主張に V^{(+)} の住処と、ℝ_{>0} が def_hermitian_positive_definite の略記であることを書いた（主張の値は不変）。数値検証: sagemath/check/trace_V_plus_is_positive/（AA の厳密計算と def_exp の部分和のボール）。",
       ],
     },
   },

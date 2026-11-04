@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 34 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 405 件のうち、SageMath の検算が無いもの 33 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -340,8 +340,13 @@
   人手証明の計算の誤りは無かったが、レビューの指摘で根拠を直した: Step 1 の散文の前提「各指数の行列とその反数は可換」と肩の行 X − X = O を、`V1_plus_half_invertible` と同じ `matrix_double_negation`・`exp_of_negative_is_left_inverse` を引く鎖に。本文で定義されていなかった (2s_2)^{-M_col/2} を主張の中で (2s_2)^{M_col/2} の ℝ の逆数と定め、Step 2 の「正の実数の冪の指数法則」を `def_second_transfer_matrix_prefactor` とその置き方に。最後の段落を `def_invertible_elements_of_R` の可逆の定義と逆元の一意性を引く二行にし、主張にその R・R^×・g^{-1} を置いた。
   Lean は Step 1 の calc を `neg_neg_tensorPow`（`matrix_double_negation`）と `matExp_neg_mul_matExp_eq_one`（`exp_of_negative_is_left_inverse`）の 2 行にし、最後の行に当たる `VPlus_isUnit_and_inv_eq` を足した（lake build・check-no-sorry 通過）。
 
+- `trace_V_plus_is_positive`（tr(V^{(+)}) ∈ ℝ_{>0}）: `sagemath/check/trace_V_plus_is_positive/`。
+  実際の V^{(+)} を `V_plus_is_positive_definite` の検算と同じ置き方（K_1 := 2 log y、K_2 := log x）で AA に作り、準備・二行（正定値性、`trace_of_positive_definite_is_positive` の中身の b^{(k)*}Ab^{(k)} = A_kk = (r_k)_ℂ と和）・主張を AA・QQbar で厳密に確かめる `check_exact.sage`（等号 172、不等号 172、否定コントロール 48）と、有理数の結合定数で def_exp の部分和のボールで確かめる `check_balls.sage`（396 行、否定 12）を足した。
+  人手証明の計算の誤りは無かった。散文の「〜と〜より」を二つの主張を順に当てる (∵) 付きの二行にし、主張に V^{(+)} の住処と ℝ_{>0} の略記の出典（`def_hermitian_positive_definite`・`inclusion_rr_to_cc`）を、準備に M_col ∈ ℤ_{≥1} の出典（`def_jordan_wigner_Z_matrices`）を書いた（主張の値は不変）。
+  Lean の `trace_VPlus_pos` は mathlib の `PosDef.trace_pos` へ委ねており、人手の 2 行目が当てる `trace_of_positive_definite_is_positive` に当たる Ising2D の定理が無い（1 対 1 でない。Lean の連続実行の受け持ち）。二回のレビューで必須の指摘が無くなるまで直した。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_V_plus_is_positive`（`--list` の先頭）から、文書順に検算を足す。050 の overview の「併せて検証」の行に、この主張の各行の検算がほかに無いかを先に確かめる。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `constant_c_value_even_sector`（`--list` の先頭。c = (2 sinh 2K_2)^{M_col/2}。Step 1〜4 と符号反転共役を含む大きな証明なので一件だけ扱う）から、文書順に検算を足す。050 の check_05 が浮動小数点で見ている行がある。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
