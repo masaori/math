@@ -1960,6 +1960,7 @@ targets=(
   Ising2D.CheckFermiSetup.exp_gval_step2_product
   Ising2D.CheckFermiSetup.exp_gval_eq_prod
   Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion
+  Ising2D.CheckFermiSetup.prod_step2_cosh
   Ising2D.CheckFermiSetup.trace_Vprime_step1
   Ising2D.CheckFermiSetup.trace_Vprime_eq_finset_sum_of_mathlib
   Ising2D.CheckFermiSetup.trace_Vprime

@@ -1,5 +1,7 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
+2026-11-04: Lean の通しの証明のゴールラインの確認の百十五個目として、人手 `trace_of_check_Vprime` の Step 2 の最後の 2 行（「`1 − 1/2 = 1/2`、`0 − 1/2 = −1/2` と ℝ の和の交換則」「`cosh x = (exp x + exp(−x))/2`」）を、ℝ の `1 − 1/2 = 1/2`・`0 − a = −a`・`a(−b) = −(ab)`・`a·(1/2) = a/2`・`b = 2·(b/2)` と `def_cosh_sinh` を右辺から左辺へ引く 6 行にした（主張は不変。和の交換の行は要らなくなった）。Lean は人手の 6 行と 1 対 1 の `CheckFermiSetup.prod_step2_cosh` を置き、`trace_Vprime` の `M = r + 1` を Step 1・Step 2 の全行と 1 対 1 の段だけで通した。SageMath は 050 の check_trace_of_check_Vprime_step2_cosh。三回のレビューで、残った必須の指摘は無い（二回目の必須の指摘は同名の別の定理の読み違いで、文言だけ限った）。次は Step 3（「Step 1〜2 を γ → −γ として適用」「cosh は偶関数」）。
+
 2026-11-04: 全証明の SageMath 検算として、`trace_of_check_number_operator_product`（ň_μ と I − ň_μ の積のトレースは 2^{M_col−k}）に検算 `sagemath/check/trace_of_check_number_operator_product/` を付けた（未検算 39 件）。050 の check_47 を移して鎖の組み立てを `_chains.sage` へ出し（33321 段で元と一致）、本文の ψ̌ を一つの数体 K := E_1 に置いて同じ鎖と主張を厳密に確かめる `check_with_check_psi.sage` を足した（M_col = 2, 3、12354 件）。人手証明の計算の誤りは無し。二回のレビューで必須の指摘 2 件と任意の指摘 4 件を直した。次は `check_joint_eigenspace_decomposition`。
 
 2026-11-04: 全証明の SageMath 検算として、`check_number_operator_idempotent`（ň_μ^2 = ň_μ）と `check_number_operators_commute`（ň_μň_ν = ň_νň_μ）に検算 `sagemath/check/check_number_operator_idempotent/`・`sagemath/check/check_number_operators_commute/` を付けた（未検算 40 件）。050 の check_28・check_29・check_23（二つに分けた）を移し、本文の ψ̌ を数体の行列として作って同じ鎖を厳密に確かめる検算を足した（M_col = 2, 3）。人手証明の計算の誤りは無かった。次は `trace_of_check_number_operator_product`（050 の check_47 を移す）。詳細は docs/tasks/sagemath-every-proof-state.md。

@@ -4225,11 +4225,26 @@ E_K \check{Q}_\epsilon
    + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
 &&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp(\gamma(\tilde\theta_\mu)(e - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}}
-   \left(\exp\!\left(-\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)
-   + \exp\!\left(+\tfrac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
-&&\bigl(\because\ 1 - \tfrac12 = \tfrac12,\ 0 - \tfrac12 = -\tfrac12\ \text{と}\ \mathbb{R}\ \text{の和の交換則}\bigr)\\
+   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
+   + \exp\!\left(\gamma(\tilde\theta_\mu)\left(0 - \tfrac12\right)\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
+   + \exp\!\left(\gamma(\tilde\theta_\mu)\left(-\tfrac12\right)\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)
+   + \exp\!\left(-\left(\gamma(\tilde\theta_\mu)\cdot\tfrac12\right)\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(-b) = -(ab)\ (a \to \gamma(\tilde\theta_\mu),\ b \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
+   + \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a\cdot\tfrac12 = \tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+   2\cdot\frac{\exp\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right) + \exp\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)}{2}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \bigl(b \to \exp(\tfrac{\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を各因子へ同時に}\bigr)\\
 &= \prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)
-&&\left(\because \cosh x = \frac{\exp(x) + \exp(-x)}{2}\right)
+&&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \cosh\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)
 \end{aligned}`,
       ),
       paragraph([
@@ -4296,6 +4311,7 @@ E_K \check{Q}_\epsilon
         "2026-11-03: Step 1 は ℂ の和 Σ_ε (exp(ǧ(ε)))_ℂ で終わり、Step 2 は本文で未定義の ℝ の和 Σ_ε exp(ǧ(ε)) から始まっていて、二つをつなぐ行が無かった。定義 def_sum_over_binary_words_of_real_numbers と主張 real_inclusion_preserves_sum_over_binary_words（二つの実数の和の包含 real_inclusion_preserves_sum を引く帰納法）を足し、Step 2 の冒頭にそれを引く 1 行を置いた。主張は変えていない。Lean の Ising2D.CheckFermiSetup.trace_Vprime は Step 1 の鎖のあとに binaryWordComplexSum_ofReal の段を置く。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_real_inclusion.sage。",
         "2026-11-04: Step 2 の exp(ǧ(ε)) = Π_μ exp(γ(θ̃_μ)(ε_μ − 1/2)) は「実数の指数法則（theorem_exp_product (n=1)）」と名前だけで根拠にしていた。theorem_exp_product は二つの行列の主張で、M_col 個の和には届かない。ǧ の定義を開く行と、新しく足した real_exp_of_finite_sum（m → M_col）を引く行の 2 行の鎖にした。右辺の積は新しく足した def_finite_product_of_real_numbers の ℝ の有限積である。主張は変えていない。Lean は Ising2D.CheckFermiSetup.exp_gval_step2_product（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_exp_product.sage。",
         "2026-11-04: Step 2 の Σ_ε exp(ǧ(ε)) = Π_μ(exp(−γ/2) + exp(γ/2)) は「直前の積表示と、有限個の因子の積の展開」と名前だけで根拠にしていた。本文の展開の主張は行列の主張 expansion_of_finite_product_of_two_term_sums しか無かったので、実数の主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers（と帰納法の段が引く real_sum_over_binary_words_distributes_in_left_factor）を 002 章に足し、直前の鎖を各項へ入れる行と、展開を右辺から左辺へ引く行（a_μ^{(e)} → exp(γ(θ̃_μ)(e − 1/2))）に分けた。1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の順序を入れ替える行は、根拠を書いた別の行にした。主張は変えていない。Lean は Ising2D.CheckFermiSetup.sum_exp_gval_step2_expansion（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_expansion.sage。",
+        "2026-11-04: Step 2 の最後の 2 行は「1 − 1/2 = 1/2、0 − 1/2 = −1/2 と ℝ の和の交換則」「cosh x = (exp x + exp(−x))/2」と根拠を書いていたが、一つの行で複数の計算規則（γ·(1/2) = γ/2、γ·(−1/2) = −(γ/2) を含む）を使い、cosh の定義もラベルで引いていなかった。ℝ の 1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2) と、def_cosh_sinh の cosh（x → γ(θ̃_μ)/2）を右辺から左辺へ引く 6 行にした。exp(γ/2) + exp(−γ/2) の順のまま cosh の定義に合うので、和の交換の行は要らなくなった。主張は変えていない。Lean は Ising2D.CheckFermiSetup.prod_step2_cosh（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_trace_of_check_Vprime_step2_cosh.sage。",
       ],
     },
   },

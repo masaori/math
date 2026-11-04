@@ -1,9 +1,10 @@
-# 対象ラベル: trace_of_check_Vprime（Step 2 の展開の行と、それに続く 2 行）
+# 対象ラベル: trace_of_check_Vprime（Step 2 の展開の行）
 #   Σ_ε exp(ǧ(ε)) = Σ_ε Π_μ exp(γ(θ~_μ)(ε_μ − 1/2))                       (直前の鎖を各項へ同時に)
 #                 = Π_μ (exp(γ(θ~_μ)(1 − 1/2)) + exp(γ(θ~_μ)(0 − 1/2)))   (expansion_of_finite_product_of_two_term_sums_of_real_numbers
 #                                                                           を右辺から左辺へ、a_μ^(e) → exp(γ(θ~_μ)(e − 1/2)))
-#                 = Π_μ (exp(−γ(θ~_μ)/2) + exp(+γ(θ~_μ)/2))                (1 − 1/2 = 1/2、0 − 1/2 = −1/2 と和の交換則)
-#                 = Π_μ 2cosh(γ(θ~_μ)/2)                                    (cosh x = (exp x + exp(−x))/2)
+# 下の lines の後ろの 2 つは、旧い本文の中間の式（いまの本文には無い）と Step 2 の最後の行 Π_μ 2cosh(γ(θ~_μ)/2) である。
+# いまの本文はこの間を 6 行に割っており、その一行ずつの検算は check_trace_of_check_Vprime_step2_cosh.sage が担う。
+# ここでは展開の行の右辺が Step 2 の最後の行に一致することを、両端の比較として見るだけである。
 # 帰属: γ(θ~_μ)・ǧ(ε)・exp・cosh は ℝ の元で、値は ℝ への脱出（arccosh・exp・cos・cosh の値）なので、
 # 区間演算 RealBallField(200) の球で扱う。等号の行は球が共通部分を持つこと（overlaps）と、半径が 1e-40 未満であることで確かめる。
 # K_1, K_2 は有理数で与える。M_col = 2..6、K の 4 組。

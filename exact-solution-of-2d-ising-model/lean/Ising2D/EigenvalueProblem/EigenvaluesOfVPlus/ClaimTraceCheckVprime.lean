@@ -6,7 +6,7 @@
 
 **必要十分版は置かない。** 使っている一般論はトレースの線型性（既に
 `Ising2D/NecSuf/NumberOperator.lean` の「加法的かつ巡回的な汎関数 `τ`」として
-抽象化してある）と、実数の指数法則・`cosh` の偶関数性だけで、
+抽象化してある）と、実数の指数法則・体の計算規則・`cosh` の偶関数性だけで、
 取り払える構造が残っていない。
 
 ## 原文 Step 1 との対応
@@ -19,8 +19,8 @@
 `trace_Vprime` は、`M = r + 1` では `trace_Vprime_step1` の ℂ の和を、Step 2 の 1 行目（`real_inclusion_preserves_sum_over_binary_words`。
 `NecSuf.binWordSum` の系 `binWordSum_ofReal`）で ℝ の和（`def_sum_over_binary_words_of_real_numbers`）の包含へ移し、
 Step 2 の指数法則の 2 行と展開の 2 行（`sum_exp_gval_step2_expansion`。各項に `exp_gval_step2_product`、展開は
-`expansion_of_finite_product_of_two_term_sums_of_real`）で積へ移し、積の添字を `𝓜̌` へ戻して各因子を `2cosh(γ/2)` に書き換える
-（この書き換えはまだ人手の行と 1 対 1 でない）。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
+`expansion_of_finite_product_of_two_term_sums_of_real`）で積へ移し、続く 6 行（`prod_step2_cosh`。ℝ の計算規則を 1 行に 1 つと、
+`def_cosh_sinh` の `cosh` を右辺から左辺へ）で各因子を `2cosh(γ/2)` に書き換え、積の添字を `𝓜̌` へ戻す（運ぶ段）。人手の範囲外の `M = 0` は mathlib の `Matrix.trace_sum`・`Matrix.trace_smul` と `sum_exp_gval` で閉じる。
 
 ## 章 009 との違い
 
@@ -97,8 +97,8 @@ theorem exp_gval_step2_product {r : ℕ} (F : CheckFermiSetup (r + 1)) (g : Chec
         real_exp_of_finite_sum r _                      -- `real_exp_of_finite_sum`（`m → M_col`、`j → μ`、`x_j → γ(θ̃_μ)(ε_μ − 1/2)`）
 
 /-- 各因子の展開: `exp(ǧ(ε)) = ∏_μ (μ ∈ T ? e^{γ_μ/2} : e^{-γ_μ/2})`。
-人手の範囲 `M = r + 1` では、指数法則の段を `exp_gval_step2_product` で受け、積の添字を `𝓜̌` へ戻して（運ぶ段）各因子を書き換える
-（各因子の書き換えは Step 2 の `cosh` の行とあわせて人手の行と 1 対 1 にする）。人手の範囲外の `M = 0` は mathlib の `Real.exp_sum` で閉じる。 -/
+`M = r + 1` の証明は、`exp_gval_step2_product` で積へ移し、積の添字を `𝓜̌` へ戻して各因子を書き換えて閉じる。`M = 0` は mathlib の `Real.exp_sum` で閉じる。
+この定理は人手の行を持たない（`sum_exp_gval` だけが使い、人手の Step 2 は `trace_Vprime` が `sum_exp_gval_step2_expansion`・`prod_step2_cosh` で 1 対 1 に通る）。 -/
 theorem exp_gval_eq_prod (g : CheckIdx M → ℝ) (T : Finset (CheckIdx M)) :
     Real.exp (F.gval g T)
       = ∏ i : CheckIdx M, (if i ∈ T then Real.exp (g i / 2) else Real.exp (-(g i / 2))) := by
@@ -142,8 +142,56 @@ theorem sum_exp_gval_step2_expansion {r : ℕ} (F : CheckFermiSetup (r + 1)) (g 
                                                         -- `expansion_of_finite_product_of_two_term_sums_of_real_numbers`
                                                         -- （`r → M_col`、`j → μ`、`a_j^{(e)} → exp(γ(θ̃_μ)(e − 1/2))`）を右辺から左辺へ
 
-/-- **原文 `trace_of_check_Vprime` Step 2**:
-`∑_ε e^{ǧ(ε)} = ∏_μ 2 cosh(γ(θ~_μ)/2)`。 -/
+/-- **原文 `trace_of_check_Vprime` Step 2 の展開の行に続く 6 行**:
+`Π_μ(exp(γ(1 − 1/2)) + exp(γ(0 − 1/2))) = Π_μ(exp(γ·1/2) + exp(γ(0 − 1/2))) = Π_μ(exp(γ·1/2) + exp(γ(−1/2)))
+= Π_μ(exp(γ·1/2) + exp(−(γ·1/2))) = Π_μ(exp(γ/2) + exp(−(γ/2))) = Π_μ 2·((exp(γ/2) + exp(−(γ/2)))/2) = Π_μ 2cosh(γ/2)`
+（人手の `M_col` が Lean の `r + 1`、人手の `γ(θ̃_μ)` が Lean の `g (checkIdxOfFin j)`。各行は人手どおり各因子へ同時に書き換える）。
+左辺の `(((1 : Fin 2) : ℕ) : ℝ)`・`(((0 : Fin 2) : ℕ) : ℝ)` は `sum_exp_gval_step2_expansion` の右辺の `e ∈ {0,1}` を ℝ の元として
+使う書き方で、1 段目でこれを ℝ の `1`・`0` へ付け替える（運ぶ段。人手の行は無い）。 -/
+theorem prod_step2_cosh {r : ℕ} (g : CheckIdx (r + 1) → ℝ) :
+    ∏ j : Fin (r + 1),
+        (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
+          + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2)))
+      = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) :=
+  calc ∏ j : Fin (r + 1),
+        (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
+          + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2)))
+      = ∏ j : Fin (r + 1),
+          (Real.exp (g (checkIdxOfFin j) * ((1 : ℝ) - 1 / 2))
+            + Real.exp (g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2))) := by
+        rw [Fin.val_one, Fin.val_zero, Nat.cast_one, Nat.cast_zero]
+                                                        -- `e ∈ {0,1}` を ℝ の `1`・`0` へ付け替える（運ぶ段。人手の行は無い）
+    _ = ∏ j : Fin (r + 1),
+          (Real.exp (g (checkIdxOfFin j) * (1 / 2))
+            + Real.exp (g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2))) := by
+        rw [sub_half (1 : ℝ)]                           -- ℝ で `1 − 1/2 = 1/2` を各因子へ同時に
+    _ = ∏ j : Fin (r + 1),
+          (Real.exp (g (checkIdxOfFin j) * (1 / 2))
+            + Real.exp (g (checkIdxOfFin j) * (-(1 / 2)))) := by
+        rw [zero_sub (1 / 2 : ℝ)]                       -- ℝ で `0 − a = −a`（`a → 1/2`）を各因子へ同時に
+    _ = ∏ j : Fin (r + 1),
+          (Real.exp (g (checkIdxOfFin j) * (1 / 2))
+            + Real.exp (-(g (checkIdxOfFin j) * (1 / 2)))) := by
+        refine Finset.prod_congr rfl fun j _ => ?_
+        rw [mul_neg (g (checkIdxOfFin j)) (1 / 2)]      -- ℝ で `a(−b) = −(ab)`（`a → γ(θ̃_μ)`、`b → 1/2`）を各因子へ同時に
+    _ = ∏ j : Fin (r + 1),
+          (Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) := by
+        refine Finset.prod_congr rfl fun j _ => ?_
+        rw [mul_one_div (g (checkIdxOfFin j)) 2]        -- ℝ で `a·(1/2) = a/2`（`a → γ(θ̃_μ)`）を各因子の 2 箇所へ同時に
+    _ = ∏ j : Fin (r + 1),
+          2 * ((Real.exp (g (checkIdxOfFin j) / 2) + Real.exp (-(g (checkIdxOfFin j) / 2))) / 2) := by
+        refine Finset.prod_congr rfl fun j _ => ?_
+        rw [mul_div_cancel₀ _ (two_ne_zero : (2 : ℝ) ≠ 0)]
+                                                        -- ℝ で `2 ≠ 0` なので `b = 2·(b/2)` を各因子へ同時に
+    _ = ∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) := by
+        refine Finset.prod_congr rfl fun j _ => ?_
+        rw [← Real.cosh_eq]                             -- `def_cosh_sinh` の `cosh`（`x → γ(θ̃_μ)/2`）を各因子へ同時に、右辺から左辺へ
+                                                        -- （`def_cosh_sinh` は Lean で定義し直していない。mathlib の `Real.cosh` の
+                                                        -- 等式 `Real.cosh_eq` が、人手の定義の式そのものとしてその役を担う）
+
+/-- `∑_ε e^{ǧ(ε)} = ∏_μ 2 cosh(γ(θ~_μ)/2)`（mathlib の `Finset.prod_add`・`Real.cosh_eq` で閉じる）。
+人手の行とは 1 対 1 でなく、このファイルでは人手の範囲外の `M = 0` の `trace_Vprime` だけが使う
+（人手の範囲 `M = r + 1` の Step 2 は `sum_exp_gval_step2_expansion`・`prod_step2_cosh`）。 -/
 theorem sum_exp_gval (g : CheckIdx M → ℝ) :
     ∑ T : Finset (CheckIdx M), Real.exp (F.gval g T)
       = ∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)) := by
@@ -220,9 +268,7 @@ theorem trace_Vprime_eq_finset_sum_of_mathlib (g : CheckIdx M → ℝ) :
 /-- **原文 `trace_of_check_Vprime` Step 1〜2**:
 `tr(V̌') = ∏_μ 2 cosh(γ(θ~_μ)/2)`（**前因子 `2^{M-m}` は無い**）。
 人手の範囲 `M = r + 1` では、Step 1 の鎖 `trace_Vprime_step1`、Step 2 の 1 行目 `binWordSum_ofReal`、展開の 2 行
-`sum_exp_gval_step2_expansion` を順に通し、最後の段で積の添字を `𝓜̌` へ戻して（運ぶ段）各因子を `2cosh(γ/2)` に書き換える
-（各因子の書き換え `exp(γ(1 − 1/2)) + exp(γ(0 − 1/2)) = exp(−γ/2) + exp(γ/2) = 2cosh(γ/2)` は、まだ人手の行と 1 対 1 でない。
-状態台帳の Step 2 の (2d)）。人手の範囲外の `M = 0` は `trace_Vprime_eq_finset_sum_of_mathlib` と `sum_exp_gval` で閉じる。 -/
+`sum_exp_gval_step2_expansion`、続く 6 行 `prod_step2_cosh` を順に通し、最後の段で積の添字を `𝓜̌` へ戻す（運ぶ段）。人手の範囲外の `M = 0` は `trace_Vprime_eq_finset_sum_of_mathlib` と `sum_exp_gval` で閉じる。 -/
 theorem trace_Vprime (g : CheckIdx M → ℝ) :
     (F.Vprime g).trace = ((∏ i : CheckIdx M, (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) := by
   match M, F, g with
@@ -238,15 +284,12 @@ theorem trace_Vprime (g : CheckIdx M → ℝ) :
               (Real.exp (g (checkIdxOfFin j) * ((((1 : Fin 2) : ℕ) : ℝ) - 1 / 2))
                 + Real.exp (g (checkIdxOfFin j) * ((((0 : Fin 2) : ℕ) : ℝ) - 1 / 2))) : ℝ) : ℂ) := by
           rw [sum_exp_gval_step2_expansion F g]         -- Step 2 の指数法則の 2 行と展開の 2 行
-      _ = ((∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) := by
-          congr 1
-          refine Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _ ?_
-          intro j
-          rw [Fin.val_one, Fin.val_zero, Nat.cast_one, Nat.cast_zero,
-            show g (checkIdxOfFin j) * ((1 : ℝ) - 1 / 2) = g (checkIdxOfFin j) / 2 by ring,
-            show g (checkIdxOfFin j) * ((0 : ℝ) - 1 / 2) = -(g (checkIdxOfFin j) / 2) by ring, Real.cosh_eq]
-          ring                                          -- 積の添字を `μ = j + 1` の全単射で `𝓜̌` へ戻し（運ぶ段）、
-                                                        -- Step 2 の最後の 2 行（(2d)。まだ人手と 1 対 1 でない）
+      _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) := by
+          rw [prod_step2_cosh g]                        -- Step 2 の展開の行に続く 6 行
+      _ = ((∏ i : CheckIdx (r + 1), (2 * Real.cosh (g i / 2)) : ℝ) : ℂ) :=
+          congrArg (fun x : ℝ => (x : ℂ))
+            (Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩ _ _
+              fun _ => rfl)                             -- 積の添字を `μ = j + 1` の全単射で `𝓜̌` へ戻す（運ぶ段。人手の行は無い）
 
 /-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`（`cosh` が偶関数）。 -/
 theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
