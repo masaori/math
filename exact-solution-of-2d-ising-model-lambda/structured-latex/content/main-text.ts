@@ -35758,7 +35758,6 @@ S_L(A)
 &=2^{L^2}H_L
 &&(\because\ \text{同じ有限和の二つの計算})
 \end{aligned}`),
-                    paragraph(["整域の共通因子を消去すると、"]),
                     displayMath(String.raw`2^{L^2}Z_L=H_L
 \quad(\because\ \mathbb{Z}[x]\ \text{は整域であり }2^{L^2}\ne0\text{ なので共通因子を消去})`),
                     paragraph(["全過程は有限集合、自然数、整数係数多項式だけで閉じる。"]),
