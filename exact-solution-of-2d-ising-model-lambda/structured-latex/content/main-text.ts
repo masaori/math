@@ -62174,6 +62174,10 @@ s(j')-s(j)
                     labels: ["claim_closed_walk_plane_displacement"],
                     habitat: "Z",
                     verification: ["sagemath/check/closed-walk-plane-displacement"],
+                    lean: [
+                      "Ising2DLambda.KacWard.closedWalk_planeDisplacement",
+                      "Ising2DLambda.NecSuf.KacWard.closed_sequence_displacement_sum",
+                    ],
                     statement: [
                       paragraph([
                         "任意の閉じた非後退辺列 ",
@@ -80072,7 +80076,7 @@ e_{L,c,k}^{L}
 &=\frac{1}{2L^2}\log_{\mathbb R}\left(\prod_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))\right)
 &&\bigl(\because\ \blkref{claim_cut_realization_preserves_multiplication}\text{ を有限積に適用}\bigr)\\
 &=\frac{1}{2L^2}\sum_{(\varpi,\varsigma)\in\mathcal U_a\times\mathcal W_b}\log_{\mathbb R}\rho_{R\to\mathbb R}(\Delta(q;\varpi,\varsigma))
-&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr).
+&&\bigl(\because\ \blkref{def_real_logarithm}\text{ の乗法法則を有限積に適用}\bigr)
 \end{aligned}`),
                 ],
               },
