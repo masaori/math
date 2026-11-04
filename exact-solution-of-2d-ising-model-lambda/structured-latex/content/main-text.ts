@@ -748,7 +748,7 @@ v_p(ab')
 &=\bigl(w_p(q)+v_p(b)\bigr)+v_p(b')
 &&\bigl(\because\ \blkref{def_rational_log}\text{ の }w_p(q)=v_p(a)-v_p(b)\text{ を移項}\bigr)\\
 &=\bigl(w_p(q')+v_p(b)\bigr)+v_p(b')
-&&\bigl(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\text{。}\blkref{def_rational_log}\bigr)\\
+&&\bigl(\because\ \log q=\log q'\text{ を素数 }p\text{ で読むと }w_p(q)=w_p(q')\quad\blkref{def_rational_log}\bigr)\\
 &=\bigl(v_p(a')-v_p(b')+v_p(b)\bigr)+v_p(b')
 &&\bigl(\because\ \blkref{def_rational_log}\text{ の }w_p(q')=v_p(a')-v_p(b')\bigr)\\
 &=v_p(a')+v_p(b)
