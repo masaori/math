@@ -5,10 +5,11 @@
 （`closing_001_claim_epsilon_anticommutes`、ラベル **`epsilon_anticommutes_with_check_Z_Y`**）
 
 必要十分版は `Ising2D/NecSuf/ParityFermion.lean`（同じラベル）の
-`Ising2D.NecSuf.anticomm_sum_smul` / `NecSuf.commute_parity_num` /
+`Ising2D.NecSuf.anticomm_sum_smul` / `NecSuf.anticomm_add_smul` / `NecSuf.commute_parity_num` /
 `NecSuf.commute_parity_projOn`。(2) は人手の鎖と同じ行の calc（`epsilon_anticomm_phase_sum`）で示し、
 必要十分版の特殊化として得られることは `epsilon_anticomm_checkZ_of_necSuf` / `epsilon_anticomm_checkY_of_necSuf`
-に別に書く。(3) はまだ必要十分版の系の形である。
+に別に書く。(3) も人手の鎖と同じ行の calc（`epsilon_anticomm_two_term`）で示し、必要十分版
+`NecSuf.anticomm_add_smul` の特殊化は `epsilon_anticomm_checkPsiDag_of_necSuf` / `epsilon_anticomm_checkPsi_of_necSuf` に別に書く。
 
 ## 人手証明との対応
 
@@ -17,16 +18,20 @@
 | (1) `ε Z_j = -Z_j ε`, `ε Y_j = -Y_j ε` | `Ising2D.epsilon_anticomm_Z` / `epsilon_anticomm_Y`（章 010 で証明済み。再掲） |
 | (2) の 9 行の鎖（`(W̌_μ, W)` を `(Ž_μ, Z)`・`(Y̌_μ, Y)` のどちらかとする） | `Ising2D.epsilon_anticomm_phase_sum`（`M_col = r + 1`） |
 | (2) `ε Ž_μ = -Ž_μ ε`, `ε Y̌_μ = -Y̌_μ ε` | `Ising2D.epsilon_anticomm_checkZ` / `epsilon_anticomm_checkY` |
-| (3) `ε ψ̌_μ^† = -ψ̌_μ^† ε` | `Ising2D.epsilon_anticomm_of_isCheckMode` |
+| (3) の 9 行の鎖（`(Ψ, p, q)` を `def_check_fermi` の二つの組のどちらかとする） | `Ising2D.epsilon_anticomm_two_term` |
+| (3) `ε ψ̌_μ^† = -ψ̌_μ^† ε`, `ε ψ̌_μ = -ψ̌_μ ε` | `Ising2D.epsilon_anticomm_checkPsiDag` / `epsilon_anticomm_checkPsi`（`IsCheckMode` の元へは `epsilon_anticomm_of_isCheckMode`） |
 | (4) `ε ň_μ = ň_μ ε`, `ε Q̌_ε = Q̌_ε ε` | `Ising2D.CheckFermi.commute_epsilon_nOp` / `commute_epsilon_Qproj`（`CheckFermiInput.lean`） |
 
-**(1)(2)(3) は無条件である**（章 004・010・013 の形式化済みの定理だけを使う）。
-(3) だけは「`ψ̌` が `Ž, Y̌` の 1 次結合であること」（原文 `def_check_fermi`、章 016）を
-述語 `Ising2D.IsCheckMode` として受け取る形にしてある。
+**(1)(2)(3) は無条件である**（章 004・010・013 の形式化済みの定理と、`ψ̌_μ^†`・`ψ̌_μ` の定義
+`checkPsiDag`・`checkPsi`（`DefinitionCheckFermi.lean`）だけを使う）。
+`CheckFermi` が受け取る生成・消滅演算子へは、「`Ž, Y̌` の 1 次結合であること」を述語 `Ising2D.IsCheckMode`
+として受け取る `epsilon_anticomm_of_isCheckMode` で渡す。
 -/
 import Ising2D.NecSuf.ParityFermion
 import Ising2D.PartitionFunction.ProjectionAndJordanWigner.ClaimEpsilonCommutes
 import Ising2D.EigenvalueProblem.ReductionToATheta.DefinitionHalfIntegerModes
+import Ising2D.EigenvalueProblem.DiagonalizationAndExponentialForm.DefinitionCheckFermi
+import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimMatMultDistributesOverSumFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInRightFactorFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimFiniteSumOfMatricesDistributesInLeftFactorFromNecSuf
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimIdentityAndScalarMultipleInMatrixProductFromNecSuf
@@ -125,15 +130,83 @@ theorem epsilon_anticomm_checkY_of_necSuf (M : ℕ) (μ : ℤ) :
   rw [checkY]
   exact NecSuf.anticomm_sum_smul (𝕜 := ℂ) (fun j => epsilon_anticomm_Y j) Finset.univ _
 
-/-- 原文 `def_check_fermi` の「`ψ̌_μ^†` は `Ž_μ, Y̌_μ` の ℂ 係数 1 次結合」。 -/
+/-- **人手証明 (3) の鎖**。`(Ψ, p, q)` を `def_check_fermi` の二つの組
+`(ψ̌_μ^†, −r/(2√M_col b), 1/(2√M_col))`・`(ψ̌_μ, +r/(2√M_col b), 1/(2√M_col))` のどちらかとし、
+`Ψ = p Ž_μ + q Y̌_μ` とする。本補題の `X`・`Y` は人手の `Ž_μ`・`Y̌_μ`、仮定 `hX`・`hY` は人手の (2) である。
+calc の 7 段は人手の 9 行の鎖の 2〜8 行目と同じ順に並ぶ（1 行目と 9 行目は `Ψ` の定義で、
+`epsilon_anticomm_checkPsiDag`・`epsilon_anticomm_checkPsi` が受け持つ）。
+必要十分版 `NecSuf.anticomm_add_smul` も同じ 7 段である。 -/
+theorem epsilon_anticomm_two_term (p q : ℂ) (X Y : TensorPow M)
+    (hX : epsilon M * X = -(X * epsilon M)) (hY : epsilon M * Y = -(Y * epsilon M)) :
+    epsilon M * (p • X + q • Y) = -((p • X + q • Y) * epsilon M) := by
+  calc epsilon M * (p • X + q • Y)
+      = epsilon M * (p • X) + epsilon M * (q • Y) := mul_add_matrix_tensorPow _ _ _
+                                                        -- `mat_mult_distributes_over_sum_in_right_factor`
+    _ = p • (epsilon M * X) + q • (epsilon M * Y) := by
+        rw [mul_smul_matrix_tensorPow, mul_smul_matrix_tensorPow]
+                                                        -- `scalar_multiple_factors_out_of_right_factor` を 2 項へ同時適用
+    _ = p • (-(X * epsilon M)) + q • (-(Y * epsilon M)) := by rw [hX, hY]
+                                                        -- (2) を 2 項へ同時適用
+    _ = (-(p • (X * epsilon M))) + (-(q • (Y * epsilon M))) := by
+        rw [smul_neg_matrix_tensorPow, smul_neg_matrix_tensorPow]
+                                                        -- `scalar_multiple_of_negated_matrix` を 2 項へ同時適用
+    _ = (-((p • X) * epsilon M)) + (-((q • Y) * epsilon M)) := by
+        rw [smul_mul_matrix_tensorPow, smul_mul_matrix_tensorPow]
+                                                        -- `scalar_multiple_factors_out_of_left_factor` を 2 項へ同時適用
+    _ = -((p • X) * epsilon M + (q • Y) * epsilon M) := (neg_add_tensorPow _ _).symm
+                                                        -- `negation_distributes_over_matrix_sum` を右辺から左辺へ
+    _ = -((p • X + q • Y) * epsilon M) := by rw [add_mul_matrix_tensorPow]
+                                                        -- `mat_mult_distributes_over_sum_in_left_factor`
+
+/-- **人手証明 (3)**: `ε ψ̌_μ^† = −ψ̌_μ^† ε`。
+calc の 1 段目と 3 段目は人手の鎖の 1 行目と 9 行目（`ψ̌_μ^†` の定義 `def_check_fermi`。
+Lean では `checkPsiDag`、係数は `p = checkP`、`q = checkQ`）、2 段目は人手の 2〜8 行目
+（`epsilon_anticomm_two_term`、仮定は (2) の `epsilon_anticomm_checkZ`・`epsilon_anticomm_checkY`）である。 -/
+theorem epsilon_anticomm_checkPsiDag (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    epsilon M * checkPsiDag K M μ = -(checkPsiDag K M μ * epsilon M) := by
+  calc epsilon M * checkPsiDag K M μ
+      = epsilon M * (checkP K M μ • checkZ M μ + checkQ M • checkY M μ) := rfl
+                                                        -- `def_check_fermi`
+    _ = -((checkP K M μ • checkZ M μ + checkQ M • checkY M μ) * epsilon M) :=
+        epsilon_anticomm_two_term _ _ _ _ (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ)
+                                                        -- 人手の鎖の 2〜8 行目
+    _ = -(checkPsiDag K M μ * epsilon M) := rfl
+                                                        -- `def_check_fermi`
+
+/-- **人手証明 (3)**: `ε ψ̌_μ = −ψ̌_μ ε`（係数は `p = −checkP`、`q = checkQ`。段の対応は
+`epsilon_anticomm_checkPsiDag` と同じ）。 -/
+theorem epsilon_anticomm_checkPsi (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    epsilon M * checkPsi K M μ = -(checkPsi K M μ * epsilon M) := by
+  calc epsilon M * checkPsi K M μ
+      = epsilon M * ((-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ) := rfl
+                                                        -- `def_check_fermi`
+    _ = -(((-checkP K M μ) • checkZ M μ + checkQ M • checkY M μ) * epsilon M) :=
+        epsilon_anticomm_two_term _ _ _ _ (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ)
+                                                        -- 人手の鎖の 2〜8 行目
+    _ = -(checkPsi K M μ * epsilon M) := rfl
+                                                        -- `def_check_fermi`
+
+/-- 人手 (3) の `ψ̌_μ^†` の側が必要十分版 `Ising2D.NecSuf.anticomm_add_smul` の特殊化として得られること。 -/
+theorem epsilon_anticomm_checkPsiDag_of_necSuf (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    epsilon M * checkPsiDag K M μ = -(checkPsiDag K M μ * epsilon M) :=
+  NecSuf.anticomm_add_smul (𝕜 := ℂ) (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ) _ _
+
+/-- 人手 (3) の `ψ̌_μ` の側が必要十分版の特殊化として得られること。 -/
+theorem epsilon_anticomm_checkPsi_of_necSuf (K : IsingConst) (M : ℕ) (μ : ℤ) :
+    epsilon M * checkPsi K M μ = -(checkPsi K M μ * epsilon M) :=
+  NecSuf.anticomm_add_smul (𝕜 := ℂ) (epsilon_anticomm_checkZ M μ) (epsilon_anticomm_checkY M μ) _ _
+
+/-- 原文 `def_check_fermi` の「`ψ̌_μ^†`・`ψ̌_μ` は `Ž_μ, Y̌_μ` の ℂ 係数 1 次結合」。
+`CheckFermi`（`CheckFermiInput.lean`）が生成・消滅演算子を受け取る形で、具体的な `checkPsiDag`・`checkPsi` は
+これを満たす（`ClaimCheckFermiFromDiagonalizationAndExponentialForm.lean`）。 -/
 def IsCheckMode (x : TensorPow M) : Prop :=
   ∃ (ν : ℤ) (p q : ℂ), x = p • checkZ M ν + q • checkY M ν
 
-/-- **人手証明 (3)**: `Ž, Y̌` の 1 次結合はすべて `ε` と反交換する。 -/
+/-- **人手証明 (3)** を `IsCheckMode` の元へ: `Ž, Y̌` の 1 次結合はすべて `ε` と反交換する
+（人手の鎖の 2〜8 行目 `epsilon_anticomm_two_term` をそのまま使う）。 -/
 theorem epsilon_anticomm_of_isCheckMode {x : TensorPow M} (h : IsCheckMode x) :
     epsilon M * x = -(x * epsilon M) := by
   obtain ⟨ν, p, q, rfl⟩ := h
-  rw [mul_add, add_mul, neg_add, mul_smul_comm, smul_mul_assoc, epsilon_anticomm_checkZ,
-    mul_smul_comm, smul_mul_assoc, epsilon_anticomm_checkY, smul_neg, smul_neg]
+  exact epsilon_anticomm_two_term p q _ _ (epsilon_anticomm_checkZ M ν) (epsilon_anticomm_checkY M ν)
 
 end Ising2D

@@ -4,6 +4,7 @@
 対応する人手証明のラベル（正本は `structured-latex/content/eigenvalue_problem_eigenvector_of_max_eigenvalue.ts`。
 具体版は `Ising2D/EigenvalueProblem/EigenvectorOfMaxEigenvalue/` と `Ising2D/ThermodynamicLimit/ColumnLimitAndClosedForm/`）:
 
+- `epsilon_anticommutes_with_check_Z_Y` (2) → `Ising2D.NecSuf.anticomm_sum_smul`、(3) → `NecSuf.anticomm_add_smul`
 - `epsilon_anticommutes_with_check_Z_Y` (4) → `Ising2D.NecSuf.commute_parity_num` /
   `NecSuf.commute_parity_projOn`
 - `epsilon_eigenvalue_on_check_Q` (2) → `Ising2D.NecSuf.projOn_insert_mul_cre` /
@@ -53,11 +54,11 @@ namespace Ising2D.NecSuf
 open Finset
 
 /-! ## 0. 反交換は 1 次結合へ引き継がれる（人手証明
-`epsilon_anticommutes_with_check_Z_Y` (2)(3) の「積の `𝕜` 線型性より」） -/
+`epsilon_anticommutes_with_check_Z_Y` (2)(3) の鎖） -/
 
 section Lincomb
 
-variable {𝕜 : Type*} [Monoid 𝕜] {A : Type*} [NonUnitalNonAssocRing A] [DistribMulAction 𝕜 A]
+variable {𝕜 : Type*} {A : Type*} [NonUnitalNonAssocRing A] [DistribSMul 𝕜 A]
   [SMulCommClass 𝕜 A A] [IsScalarTower 𝕜 A A] {ι : Type*}
 
 /-- `e` が各 `x_i` と反交換なら、`x_i` の任意の有限 `𝕜` 線型結合とも反交換。
@@ -68,9 +69,10 @@ variable {𝕜 : Type*} [Monoid 𝕜] {A : Type*} [NonUnitalNonAssocRing A] [Dis
 `c(−A) = −(cA)`・スカラー倍を左因子へ・有限和と符号反転の交換・有限和への右からの分配の逆。
 
 効いているのは**積が各因子について `𝕜` 倍と交換すること**（`SMulCommClass`・`IsScalarTower`）、
-`𝕜` の作用が符号反転と交換すること（`DistribMulAction`）、`A` の加法が可換群で積が和に分配すること
-（`NonUnitalNonAssocRing`）だけである。`A` の積の結合律と単位元、`𝕜` の加法と可換性、`A` が `𝕜`-代数
-であること（`algebraMap`）、行列であること、添字集合が `{1,…,M_col}` であることは効いていない。
+`𝕜` の作用が `A` の加法を保ち符号反転と交換すること（`DistribSMul`）、`A` の加法が可換群で積が和に分配すること
+（`NonUnitalNonAssocRing`）だけである。`𝕜` には構造を何も仮定しない: `𝕜` の積と単位元（作用則 `mul_smul`・
+`one_smul`）、加法と可換性はどの段にも出ない。`A` の積の結合律と単位元、`A` が `𝕜`-代数であること
+（`algebraMap`）、行列であること、添字集合が `{1,…,M_col}` であることも効いていない。
 各段は環と作用の基本性質（mathlib の補題）の 1 回の適用で、主張そのものを既製の定理へ委ねてはいない。 -/
 theorem anticomm_sum_smul {e : A} {x : ι → A} (hx : ∀ i, e * x i = -(x i * e))
     (s : Finset ι) (f : ι → 𝕜) :
@@ -90,6 +92,34 @@ theorem anticomm_sum_smul {e : A} {x : ι → A} (hx : ∀ i, e * x i = -(x i * 
                                   -- `finite_sum_of_negated_matrices` にあたる
     _ = -((∑ i ∈ s, f i • x i) * e) := by rw [Finset.sum_mul]
                                   -- `finite_sum_of_matrices_distributes_in_left_factor` にあたる
+
+/-- `e` が `x`・`y` と反交換なら、`p x + q y` とも反交換。
+
+**人手証明 (3) の必要十分版**。calc の 7 段は、具体版 `Ising2D.epsilon_anticomm_two_term`
+（人手の `(Ψ, p, q)` の鎖の 2〜8 行目）の 7 段と同じ順に並ぶ:
+和への左からの分配・スカラー倍を右因子から外へ・仮定 `hx`・`hy`（人手の (2)）・`c(−A) = −(cA)`・
+スカラー倍を左因子へ・符号反転の和への分配を右辺から左辺へ・和への右からの分配の逆。
+
+効いている構造は `anticomm_sum_smul` と同じである。`𝕜` の構造、`A` の積の結合律と単位元、
+`x`・`y` が `Ž_μ`・`Y̌_μ` であることは効いていない。符号反転の和への分配 `−(a + b) = −a + −b` には
+`A` の加法の可換性が効く（`NonUnitalNonAssocRing` の加法は可換群）。 -/
+theorem anticomm_add_smul {e x y : A} (hx : e * x = -(x * e)) (hy : e * y = -(y * e)) (p q : 𝕜) :
+    e * (p • x + q • y) = -((p • x + q • y) * e) := by
+  calc e * (p • x + q • y)
+      = e * (p • x) + e * (q • y) := mul_add _ _ _
+                                  -- `mat_mult_distributes_over_sum_in_right_factor` にあたる
+    _ = p • (e * x) + q • (e * y) := by rw [mul_smul_comm, mul_smul_comm]
+                                  -- `scalar_multiple_factors_out_of_right_factor` にあたる
+    _ = p • (-(x * e)) + q • (-(y * e)) := by rw [hx, hy]
+                                  -- 人手の (2)
+    _ = (-(p • (x * e))) + (-(q • (y * e))) := by rw [smul_neg, smul_neg]
+                                  -- `scalar_multiple_of_negated_matrix` にあたる
+    _ = (-((p • x) * e)) + (-((q • y) * e)) := by rw [smul_mul_assoc, smul_mul_assoc]
+                                  -- `scalar_multiple_factors_out_of_left_factor` にあたる
+    _ = -((p • x) * e + (q • y) * e) := (neg_add _ _).symm
+                                  -- `negation_distributes_over_matrix_sum` を右辺から左辺へ にあたる
+    _ = -((p • x + q • y) * e) := by rw [add_mul]
+                                  -- `mat_mult_distributes_over_sum_in_left_factor` にあたる
 
 end Lincomb
 
