@@ -351,8 +351,13 @@
   人手証明の計算の誤りは無かったが、書き方を直した: Step 2 の散文の U exp(S)U^{-1} = exp(USU^{-1}) を新しい主張へ切り出し、各段を (∵) とラベル参照付きの鎖に、本文に定義の無い ℂ の商を逆元の積に、(V^{(+)})^{-1} = c^{-1}(V̌')^{-1} を左右の積と逆元の一意性で示す形に、零因子を持たないことに頼っていた符号の確定を c = ρ_ℂ（ρ ∈ ℝ_{>0}）と `positive_real_square_injective` に、主張とタイトルの c を像の記号に（値は不変）。
   Lean の `ClaimConstantCEvenSector.lean`・`NecSuf/ConstantC.lean` は旧い道筋（(c−a)(c+a) = 0 を割る）と旧い Step 番号のままで、一般の B の新しい主張には U に固定した `Uflip_conj_matExp` しか無い（1 対 1 でない。Lean の連続実行の受け持ち）。一回のレビューの必須の指摘（ログ、overview の構成上一致する比較の書き方、Lean の未対応の記録）を直した。
 
+- `max_eigenvalue_of_V_plus_simple`（Λ̌_max = Λ^{(1/2)}_{M_col} であり V^{(+)} の単純固有値）: `sagemath/check/max_eigenvalue_of_V_plus_simple/`。
+  050 の check_26・check_max_eigenvalue_simple_step1〜3 の 4 本を内容の名前で移し（中身は不変。step2 の乱数に種を置いた）、実際の V^{(+)}（K_1 = 2 log y・K_2 = log x で成分は QQ）と本文の ψ̌ から作った Q̌_ε で、主張 (1)(2)(3) と (2)(3) の鎖を数体 E_1・QQbar・AA で厳密に確かめる `check_claim_with_actual_V_plus.sage` を足した（等号 759、不等号 120、否定コントロール 30。V^{(+)} の固有多項式の根の全体が {Λ̌_ε} に一致し、最大が Λ̌_max で重複度 1、固有空間が im Q̌_{(1,…,1)} で 1 次元）。
+  人手証明の計算の誤りは無かった。(2) の散文（移項・real_exp_strictly_increasing・(2s_2)^{M_col/2} > 0）を (∵) 付きの含意の鎖と、`def_indexed_hyperbolic_abbreviations`・`def_second_transfer_matrix_prefactor` を引く 2 行の鎖にした（主張は不変）。
+  Lean の `checkBigLambda_lt_checkBigLambda_univ` は (2s_2)^{M_col/2} > 0 を `hs2 : 0 < s2` からの `Real.rpow_pos_of_pos` で出し、docstring に「本文に実数冪を定めるブロックが無い」と書いたままで、人手の新しい参照（`def_second_transfer_matrix_prefactor`）と 1 対 1 でない（Lean の連続実行の受け持ち）。レビューの必須の指摘（効かない否定コントロールを数えていた、構成上一致する比較の記載漏れ）を直した。
+
 ## 次の一歩
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `max_eigenvalue_of_V_plus_simple`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_anticommutes_with_check_Z_Y`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 

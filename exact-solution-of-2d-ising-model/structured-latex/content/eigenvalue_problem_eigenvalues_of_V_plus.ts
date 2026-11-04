@@ -6127,29 +6127,28 @@ V^{(+)}\check{Q}_\epsilon
    \quad (\because \blkref{gamma_theta_tilde_mu_positive})
 \end{aligned}`,
       ),
-      paragraph([
-        "である。左辺の ",
-        math(String.raw`\check{g}(\epsilon)`),
-        " を右辺へ移項して ",
-        math(String.raw`\check{g}(\epsilon) < \check{g}(1,\dots,1)`),
-        " であり、",
-        ref("real_exp_strictly_increasing"),
-        "（",
-        math(String.raw`x \to \check{g}(\epsilon),\ y \to \check{g}(1,\dots,1)`),
-        "）より ",
-        math(String.raw`\exp(\check{g}(\epsilon)) < \exp(\check{g}(1,\dots,1))`),
-        " である。また ",
-        ref("indexed_hyperbolic_abbreviations_positive"),
-        "（",
-        math(String.raw`i = 2`),
-        "）の ",
-        math(String.raw`s_2 > 0`),
-        " より ",
-        math(String.raw`2s_2 > 0`),
-        " であり、その実数冪として ",
-        math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} > 0`),
-        " である。よって",
-      ]),
+      paragraph(["である。だから"]),
+      displayMath(
+        String.raw`\begin{aligned}
+&\check{g}(1,\dots,1) - \check{g}(\epsilon) > 0
+   \quad (\because \text{上の鎖}) \\
+&\Longrightarrow\ \check{g}(\epsilon) < \check{g}(1,\dots,1)
+   \quad (\because \text{左辺の }\check{g}(\epsilon)\text{ を右辺へ移項}) \\
+&\Longrightarrow\ \exp(\check{g}(\epsilon)) < \exp(\check{g}(1,\dots,1))
+   \quad \left(\because \blkref{real_exp_strictly_increasing}\ \bigl(x \to \check{g}(\epsilon),\ y \to \check{g}(1,\dots,1)\bigr)\right)
+\end{aligned}`,
+      ),
+      paragraph(["である。また"]),
+      displayMath(
+        String.raw`\begin{aligned}
+(2s_2)^{M_{\mathrm{col}}/2}
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}
+   \quad (\because \blkref{def_indexed_hyperbolic_abbreviations}\text{ の }s_2 = \sinh 2K_2) \\
+&\in \mathbb{R}_{>0}
+   \quad (\because \blkref{def_second_transfer_matrix_prefactor})
+\end{aligned}`,
+      ),
+      paragraph(["である。よって"]),
       displayMath(
         String.raw`\begin{aligned}
 \check\Lambda_\epsilon
@@ -6389,6 +6388,7 @@ V^{(+)}y
         "2026-11-03: (2) の ǧ(1,…,1) − ǧ(ε) の鎖の名前だけの根拠「ǧ の定義と分配法則」「各項は 0 以上。μ = μ_0 の項だけを残す」を、ǧ の定義の 2 か所同時適用・finite_sum_of_real_differences・ℝ の分配法則・ℝ の計算・a_μ := γ(θ̃_μ)(1 − ε_μ) の置き方・finite_sum_of_nonnegative_reals_is_at_least_each_term の行に分け（a_μ ≥ 0 は鎖の前に置いた）、Λ̌_ε の鎖の「t ↦ exp(t) は狭義単調増加」を real_exp_strictly_increasing の参照として鎖の前へ出し（(2s_2)^{M_col/2} > 0 の s_2 > 0 は indexed_hyperbolic_abbreviations_positive）、両端の行を Λ̌_ε の定義・s_2 の略記・ǧ の定義の 1 行ずつに分け、最後に eigenvalues_of_V_plus (2) の行を置いた。主張は変えていない。Lean の Ising2D.gval_lt_gval_univ と Ising2D.checkBigLambda_lt_checkBigLambda_univ は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step2_strict_inequality_chains.sage。",
         "2026-11-03: (3) の後半の名前だけの根拠を鎖にした。「0 でない複素数なので割ることができて」を、d := (Λ̌_{ε'})_ℂ − (Λ̌_max)_ℂ の置き方（d ≠ 0 と d^{-1} は (2)・inclusion_rr_to_cc・complex_numbers_form_a_field から鎖の前に置いた）、difference_of_scalar_multiples_of_one_matrix・matrix_difference_zero_iff_equal の 4 行と、scalar_multiple_by_one・d^{-1}d = 1_ℂ・scalar_multiple_is_associative・scalar_multiple_of_zero_matrix の 5 行にした。x = Σ_ε Q̌_ε x から ε ≠ (1,…,1) の項を消す行を、identity_matrix_is_left_unit_of_mat_mult・check_joint_eigenspace_decomposition (2)・sum_over_binary_words_distributes_in_left_factor・sum_over_binary_words_with_one_nonzero_term の 4 行にした。逆向きの「eigenvalues_of_V_plus (1) と eigenvalues_of_check_Vprime の Step 4 と同じ計算で従う」を、Q̌_{(1,…,1)}y = y の 8 行（eigenvalues_of_check_Vprime の Step 4 と同じ行）と V^{(+)}y = Λ̌_max y の 6 行にした。主張は変えていない。Lean の Ising2D.Qproj_mulVec_eq_zero_of_eigen（差と割り算の鎖）・Ising2D.colVec_eq_Qproj_mul_of_zero（項を消す鎖。Ising2D.eq_Qproj_univ_mulVec_of_eigen が数ベクトルへ運ぶ）・Ising2D.VPlus_mulVec_of_mem_range_Qproj_univ（逆向きの鎖）は同じ行の calc である。数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_max_eigenvalue_simple_step3_eigenspace_chains.sage。",
         "2026-11-03: (1) の散文（Θ^{(1/2)}_{M_col} = {θ~_μ}、M_col 個の値が相異なるので集合の上の和を Σ_{μ=1}^{M_col} へ付け替える、eigenvalues_of_V_plus の表式と比べる）を、eigenvalues_of_V_plus (2)・θ~_μ の定義・def_Theta_delta_M（δ → 1/2）・def_Lambda_delta_M（δ → 1/2）の 4 行の鎖にした。def_Theta_delta_M を集合から添字 μ の族 θ^{(δ)}_{M_col,μ} へ、def_Lambda_delta_M の和を添字の和へ改めたので、元が相異なることの証明と和の付け替えは要らなくなった（主張は不変）。",
+        "2026-11-04: 全証明の SageMath 検算として、(2) の散文「左辺を移項して」「real_exp_strictly_increasing より」「s_2 > 0 より 2s_2 > 0 であり、その実数冪として (2s_2)^{M_col/2} > 0」を、移項と real_exp_strictly_increasing を引く 2 行の含意の鎖と、def_indexed_hyperbolic_abbreviations の s_2 = sinh 2K_2・def_second_transfer_matrix_prefactor の (2 sinh 2K_2)^{M_col/2} ∈ ℝ_{>0} を引く 2 行の鎖にした（主張は不変）。数値検証: sagemath/check/max_eigenvalue_of_V_plus_simple/（050 の check_26・check_max_eigenvalue_simple_step1〜3 を移したもの、実際の V^{(+)} と本文の ψ̌ で主張 (1)(2)(3) と鎖を厳密に確かめる check_claim_with_actual_V_plus.sage）。",
       ],
     },
   },
