@@ -14,6 +14,23 @@ def finitePathEdgeProjection {P E : Type*} (n : ℕ)
     (step : P → P → E) (W : Fin (n + 1) → P) (j : Fin n) : E :=
   step (W ⟨j.val, by omega⟩) (W ⟨j.val + 1, by omega⟩)
 
+/-- Endpoint compatibility of a step map is inherited by its finite path projection. -/
+theorem finitePathEdgeProjection_endpoints {P V E : Type*} (n : ℕ)
+    (step : P → P → E) (W : Fin (n + 1) → P)
+    (projectVertex : P → V) (source target : E → V)
+    (hsource : ∀ j : Fin n,
+      source (step (W ⟨j.val, by omega⟩) (W ⟨j.val + 1, by omega⟩)) =
+        projectVertex (W ⟨j.val, by omega⟩))
+    (htarget : ∀ j : Fin n,
+      target (step (W ⟨j.val, by omega⟩) (W ⟨j.val + 1, by omega⟩)) =
+        projectVertex (W ⟨j.val + 1, by omega⟩))
+    (j : Fin n) :
+    source (finitePathEdgeProjection n step W j) =
+        projectVertex (W ⟨j.val, by omega⟩) ∧
+      target (finitePathEdgeProjection n step W j) =
+        projectVertex (W ⟨j.val + 1, by omega⟩) := by
+  exact ⟨hsource j, htarget j⟩
+
 /-- 端点整合性と一歩の反転の復元性から、単純な巡回頂点列の射影は閉じた非後退辺列になる。 -/
 theorem simple_cycle_projection_closed_nonbacktracking_necSuf
     {I P V E : Type*}

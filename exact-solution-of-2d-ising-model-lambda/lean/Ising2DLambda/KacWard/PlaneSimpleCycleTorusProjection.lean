@@ -1,22 +1,47 @@
 /-
-章「Onsager 閉形式への接続」の「頂点単純な閉単位格子路のトーラス射影は
-閉じた非後退辺列である」（`claim_plane_simple_cycle_projection_closed_nonbacktracking`）の具体版。
-
-人手証明の構成どおり、平面格子点列、実際のトーラス頂点・向き付き辺・反転写像について、
-四方向の場合分けが与える端点等式、反転から二歩戻ること、頂点単純性を合成する。
-住処は ℤ と有限剰余類だけであり、ℝ / ℂ は現れない。
+平面の単位格子歩をトーラス辺へ射影したときの端点等式と、
+端点・反転条件を受け取る単純閉路の条件付き補題。
+住処は ℤ と有限剰余類だけである。
 -/
 import Ising2DLambda.KacWard.ReversalFreeMovedSupportEven
+import Ising2DLambda.KacWard.PlaneProjectionCyclicTurning
 import Ising2DLambda.NecSuf.KacWard.PlaneSimpleCycleTorusProjection
 
 namespace Ising2DLambda.KacWard
 
-open Ising2DLambda.PartitionPolynomial
+open Ising2DLambda.PartitionPolynomial Ising2DLambda.TransferMatrix
 open Ising2DLambda.NecSuf.KacWard
 
 /-- 平面格子点を成分ごとの自然な射影でトーラス頂点へ送る。 -/
 def planeVertexProjection (L : ℕ) (w : ℤ × ℤ) : Vertex L :=
   ((w.1 : ZMod L), (w.2 : ZMod L))
+
+/-- A unit step projects to an oriented edge with the projected endpoints. -/
+theorem projectedUnitStep_endpoints (L : ℕ) [NeZero L] (p u : ℤ × ℤ)
+    (hu : u = (0, 1) ∨ u = (1, 0) ∨ u = (0, -1) ∨ u = (-1, 0)) :
+    orientedSource (projectedUnitStep L p u) = planeVertexProjection L p ∧
+      orientedTarget (projectedUnitStep L p u) = planeVertexProjection L (p + u) := by
+  rcases hu with rfl | rfl | rfl | rfl <;>
+    simp [projectedUnitStep, orientedSource, orientedTarget,
+      planeVertexProjection, edgeOfRow_boundary0,
+      edgeOfRow_boundary1_horizontal, edgeOfRow_boundary1_vertical,
+      Prod.ext_iff, Prod.fst_add, Prod.snd_add]
+
+/-- The projected edges of an actual finite unit path inherit its endpoints. -/
+theorem planeUnitPathTorusProjection_endpoints (L n : ℕ) [NeZero L]
+    (W : Fin (n + 1) → ℤ × ℤ) (j : Fin n)
+    (hunit : W ⟨j.val + 1, by omega⟩ - W ⟨j.val, by omega⟩ = (0, 1) ∨
+      W ⟨j.val + 1, by omega⟩ - W ⟨j.val, by omega⟩ = (1, 0) ∨
+      W ⟨j.val + 1, by omega⟩ - W ⟨j.val, by omega⟩ = (0, -1) ∨
+      W ⟨j.val + 1, by omega⟩ - W ⟨j.val, by omega⟩ = (-1, 0)) :
+    orientedSource (planeUnitPathTorusProjection L n W j) =
+        planeVertexProjection L (W ⟨j.val, by omega⟩) ∧
+      orientedTarget (planeUnitPathTorusProjection L n W j) =
+        planeVertexProjection L (W ⟨j.val + 1, by omega⟩) := by
+  let p : ℤ × ℤ := W ⟨j.val, by omega⟩
+  let q : ℤ × ℤ := W ⟨j.val + 1, by omega⟩
+  have h := projectedUnitStep_endpoints L p (q - p) hunit
+  simpa [planeUnitPathTorusProjection, p, q, add_sub_cancel_left] using h
 
 /-- `claim_plane_simple_cycle_projection_closed_nonbacktracking` の具体版。 -/
 theorem planeSimpleCycleProjection_closedNonbacktracking
