@@ -1,6 +1,6 @@
 # MEMORY — exact-solution-of-2d-ising-model
 
-2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_check_Vprime`（V̌' の固有値）に検算 `sagemath/check/eigenvalues_of_check_Vprime/` を付けた（未検算 37 件）。050 の 7 本を内容の名前で移し（模型の段数は元と一致）、ň_μ・γ_μ の供給元 `_vprime_settings.sage` で本文の ψ̌（M_col = 2, 3）でも同じ鎖を確かめ、主張そのもの（対角化と固有値の重複度、正値、縮退の組の実在）の検算を足した。人手証明は主張文を「im Q̌_ε の 0 でない各元は固有ベクトル」に直し、直和の段落に (4) の参照を足した（計算の誤りは無し）。次は `trace_of_check_Vprime`。
+2026-11-04: 全証明の SageMath 検算として、`eigenvalues_of_check_Vprime`（V̌' の固有値）に検算 `sagemath/check/eigenvalues_of_check_Vprime/` を付けた（未検算 38 件）。050 の 7 本を内容の名前で移し（模型の段数は元と一致）、ň_μ・γ_μ の供給元 `_vprime_settings.sage` で本文の ψ̌（M_col = 2, 3）でも同じ鎖を確かめ、主張そのもの（対角化と固有値の重複度、正値、縮退の組の実在）の検算を足した。人手証明は主張文を「im Q̌_ε の 0 でない各元は固有ベクトル」に直し、直和の段落に (4) の参照を足した（計算の誤りは無し）。次は `eigenvalues_of_inverse_of_check_Vprime`（Lean の連続実行が足した新しい主張）。
 
 2026-11-04: 全証明の SageMath 検算として、`check_joint_eigenspace_decomposition`（ň_μ の同時固有空間分解）に検算 `sagemath/check/check_joint_eigenspace_decomposition/` を付けた（未検算 38 件）。050 の番号付きの 10 本を内容の名前で移し（模型で 12486 段、元と一致）、ň_μ の供給元を `_number_operators.sage` で模型と本文の ψ̌ に切り替えられるようにして、本文の ψ̌（M_col = 2, 3）でも同じ鎖と主張を厳密に確かめた（鎖 8998 段・主張 654 件）。主張 (1)〜(5) そのものの厳密な検算も足した。人手証明の計算の誤りは無し。次は `eigenvalues_of_check_Vprime`。
 

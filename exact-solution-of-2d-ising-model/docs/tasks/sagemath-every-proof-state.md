@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 402 件のうち、SageMath の検算が無いもの 37 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 403 件のうち、SageMath の検算が無いもの 38 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -322,7 +322,7 @@
 
 ## 次の一歩
 
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `trace_of_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる check_trace_of_check_Vprime_step1_chain・step2_real_inclusion・step2_exp_product・step2_expansion・step2_cosh にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`eigenvalues_of_check_Vprime` と同じく内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ（Lean の連続実行が Step 3 を書き換え中なので、rebase 後の本文の行と突き合わせる）、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（供給元は `eigenvalues_of_check_Vprime/_vprime_settings.sage`）。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `eigenvalues_of_inverse_of_check_Vprime`（`--list` の先頭。Lean の連続実行が足した新しい主張 (V̌')^{-1}Q̌_ε = (exp(−ǧ(ε)))_ℂQ̌_ε。証明の 11 行の鎖の検算は 050 の check_eigenvalues_of_inverse_of_check_Vprime にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている）から、文書順に検算を足す。その次の `trace_of_check_Vprime` について:この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる check_trace_of_check_Vprime_step1_chain・step2_real_inclusion・step2_exp_product・step2_expansion・step2_cosh にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`eigenvalues_of_check_Vprime` と同じく内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ（Lean の連続実行が Step 3 を書き換え中なので、rebase 後の本文の行と突き合わせる）、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（供給元は `eigenvalues_of_check_Vprime/_vprime_settings.sage`）。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
