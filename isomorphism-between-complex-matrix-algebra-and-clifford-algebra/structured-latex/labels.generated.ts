@@ -25,6 +25,7 @@ export const ALL_LABELS = [
   "claim_scalar_multiple_of_linear_combination",
   "claim_scalar_multiple_of_zero_vector_is_zero_vector",
   "claim_sum_of_linear_combinations_of_same_family",
+  "claim_sum_of_sums_over_finite_set_with_same_family",
   "claim_uniqueness_of_coefficients_of_linear_combination",
   "claim_value_of_linear_combination_in_dual_space",
   "claim_zero_map_is_linear_form",
