@@ -86,6 +86,11 @@ $`\Phi(\varepsilon)`$ は対角行列 $`\mathrm{diag}((-1)^{\#T})_{T\in\mathcal{
 
 **系（複素行列版イジングの記号）。** $`(\mathbb{C}^{2M},\sum_a v_a^2)`$ の場合に、等長写像と添字の番号付け
 $`\mathcal{P}_M\to\{1,\dots,2^M\}`$ を合成すると、$`e_m,e_{M+m}`$ の像が Jordan–Wigner 行列 $`Z_m,Y_m`$ になる。
+具体的には、等長写像 $`\theta(e_m)=w_m+f_m`$、$`\theta(e_{M+m})=-i(w_m-f_m)`$ と、$`U:=K^{\otimes M}`$
+（$`K=\begin{pmatrix}1&1\\1&-1\end{pmatrix}`$、$`U^{-1}=2^{-M}U`$）による共役を合成すると
+$`Z_m=U(c_m+c_m^{\mathsf T})U^{-1}`$、$`Y_m=U\,(-i)(c_m-c_m^{\mathsf T})\,U^{-1}`$ となる
+（2026-11-04 に $`M=1,2,3`$ の行列の計算で確かめた。$`\{0,1\}^M`$ の添字は第 $`t`$ 成分が 1 のとき $`t\in T`$ と読む）。
+Jordan–Wigner の弦 $`\sigma^x_1\cdots\sigma^x_{m-1}`$ は、$`c_m`$ の符号 $`(-1)^{\#\{t\in T:t<m\}}`$ を $`U`$ で移したものである。
 
 ## 証明の経路：逆写像を明示する
 
