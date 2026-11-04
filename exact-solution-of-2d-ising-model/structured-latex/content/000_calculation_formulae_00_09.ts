@@ -1438,6 +1438,67 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_real_scalar_multiples",
+    kind: "claim",
+    title: { text: "実数の共通の因子は有限和の外へ出せる" },
+    labels: ["finite_sum_of_real_scalar_multiples"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`c \in \mathbb{R}`),
+        "、",
+        math(String.raw`x_1,\dots,x_m \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} c\,x_j = c\sum_{j=1}^{m} x_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} c\,x_j
+&= c\,x_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to c\,x_j)\bigr)\\
+&= c\sum_{j=1}^{1} x_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`x_1,\dots,x_{m+1} \in \mathbb{R}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} c\,x_j
+&= \Bigl(\sum_{j=1}^{m} c\,x_j\Bigr) + c\,x_{m+1}
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to c\,x_j)\bigr)\\
+&= c\Bigl(\sum_{j=1}^{m} x_j\Bigr) + c\,x_{m+1}
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= c\Bigl(\Bigl(\sum_{j=1}^{m} x_j\Bigr) + x_{m+1}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{の分配法則}\ ca + cb = c(a + b)\ \bigl(a \to \textstyle\sum_{j=1}^{m} x_j,\ b \to x_{m+1}\bigr)\bigr)\\
+&= c\sum_{j=1}^{m+1} x_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。eigenvalues_of_V_plus (2) の ǧ(1,…,1) = ½Σγ(θ~_μ)・ǧ(0,…,0) = −½Σγ(θ~_μ) の鎖が、共通の因子 ½・−½ を有限和の外へ出すのに引くので足した。Lean は Ising2D.finite_sum_of_real_scalar_multiples（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean）、必要十分版は Ising2D.NecSuf.finite_sum_mul_left_fin'。数値検証: sagemath/check/finite_sum_of_real_scalar_multiples/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term",
     kind: "claim",
     title: { text: "非負の実数の有限和は各項以上" },

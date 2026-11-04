@@ -6473,17 +6473,85 @@ x &= Ix
         math(String.raw`\epsilon_\mu = 0`),
         " を取った ",
         math(String.raw`\check\Lambda_{(0,\dots,0)}`),
-        " である。それぞれ",
+        " である。これを ",
+        math(String.raw`\check\Lambda_{\max} := \check\Lambda_{(1,\dots,1)} \in \mathbb{R}`),
+        "、",
+        math(String.raw`\check\Lambda_{\min} := \check\Lambda_{(0,\dots,0)} \in \mathbb{R}`),
+        " と書く。値を求める。",
+        math(String.raw`\tfrac12, -\tfrac12 \in \mathbb{R}`),
+        "、",
+        math(String.raw`\gamma(\tilde\theta_\mu) \in \mathbb{R}`),
+        " である（以下 ",
+        math(String.raw`-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)`),
+        " は ",
+        math(String.raw`-\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)`),
+        " と読む）。",
+        ref("eigenvalues_of_check_Vprime"),
+        " の ",
+        math(String.raw`\check{g}`),
+        " について",
       ]),
       displayMath(
-        String.raw`\check{g}(1,\dots,1) = \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu),
-\qquad
-\check{g}(0,\dots,0) = -\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)`,
+        String.raw`\begin{aligned}
+\check{g}(1,\dots,1)
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigl(1 - \tfrac12\Bigr)
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}\ (\epsilon \to (1,\dots,1))) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\tfrac12
+   \quad (\because \mathbb{R}\text{ で }1 - \tfrac12 = \tfrac12\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \tfrac12\,\gamma(\tilde\theta_\mu)
+   \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
+&= \frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
+   \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to \tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right)
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check{g}(0,\dots,0)
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigl(0 - \tfrac12\Bigr)
+   \quad (\because \blkref{eigenvalues_of_check_Vprime}\text{ の }\check{g}\text{ の定義}\ (\epsilon \to (0,\dots,0))) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\cdot\Bigl(-\tfrac12\Bigr)
+   \quad (\because \mathbb{R}\text{ で }0 - \tfrac12 = -\tfrac12\text{ を各項へ同時適用}) \\
+&= \sum_{\mu=1}^{M_{\mathrm{col}}} \Bigl(-\tfrac12\Bigr)\gamma(\tilde\theta_\mu)
+   \quad (\because \mathbb{R}\text{ の積の交換法則を各項へ同時適用}) \\
+&= \Bigl(-\frac{1}{2}\Bigr)\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
+   \quad \left(\because \blkref{finite_sum_of_real_scalar_multiples}\ \bigl(m \to M_{\mathrm{col}},\ c \to -\tfrac12,\ j \to \mu,\ x_\mu \to \gamma(\tilde\theta_\mu)\bigr)\right) \\
+&= -\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)
+   \quad \left(\because \mathbb{R}\text{ で }(-a)b = -(ab)\ \bigl(a \to \tfrac12,\ b \to \textstyle \sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\bigr)\right)
+\end{aligned}`,
+      ),
+      paragraph(["である。したがって"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\Lambda_{\max}
+&= \check\Lambda_{(1,\dots,1)}
+   &&(\because\ \check\Lambda_{\max}\ \text{の置き方}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(1 - \tfrac{1}{2}\right)\Bigr)
+   &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (1,\dots,1))) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(1,\dots,1))
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (1,\dots,1))\ \text{を右辺から左辺へ}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)
+   &&(\because\ \text{上の}\ \check{g}(1,\dots,1)\ \text{の鎖})
+\end{aligned}`,
+      ),
+      paragraph(["であり、"]),
+      displayMath(
+        String.raw`\begin{aligned}
+\check\Lambda_{\min}
+&= \check\Lambda_{(0,\dots,0)}
+   &&(\because\ \check\Lambda_{\min}\ \text{の置き方}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\left(0 - \tfrac{1}{2}\right)\Bigr)
+   &&(\because\ \check\Lambda_\epsilon\ \text{の定義}\ (\epsilon \to (0,\dots,0))) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp(\check{g}(0,\dots,0))
+   &&(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\ (\epsilon \to (0,\dots,0))\ \text{を右辺から左辺へ}) \\
+&= (2\sinh 2K_2)^{M_{\mathrm{col}}/2}\exp\!\Bigl(-\frac{1}{2}\sum_{\mu=1}^{M_{\mathrm{col}}} \gamma(\tilde\theta_\mu)\Bigr)
+   &&(\because\ \text{上の}\ \check{g}(0,\dots,0)\ \text{の鎖})
+\end{aligned}`,
       ),
       paragraph([
-        "を代入して statement の ",
+        "であり、statement の ",
         math(String.raw`\check\Lambda_{\max}, \check\Lambda_{\min}`),
-        " を得る。さらに",
+        " の式を得る。さらに",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -6505,6 +6573,7 @@ x &= Ix
         "2026-11-04: (1) の対角化可能性・重複度・総個数の段落が「eigenvalues_of_check_Vprime の Step 4 と同じ議論」「スカラー倍は固有ベクトルを変えない」と名前だけで済ませていたので、V^{(+)} について書き下した。y ∈ im Q̌_ε から Q̌_εy = y の 8 行の鎖（mat_mult_associative・identity_matrix_is_left_unit_of_mat_mult・def_exp (1)・check_joint_eigenspace_decomposition (1)）、V^{(+)}y = (Λ̌_ε)_ℂy の 5 行の鎖（上の等式・mat_mult_associative・(1) の第一の鎖・scalar_multiple_factors_out_of_left_factor）、check_joint_eigenspace_decomposition (4)・(5) から、各 im Q̌_ε の 0 でない元 q_ε を任意に取ると {q_ε} が固有ベクトルの基底になることを示す段落（見出しは「対角化可能性と本数」）と、固有値がどれもある (Λ̌_ε)_ℂ に等しいことの鎖（左から Q̌_ε を掛ける 5 行、全ての ε で (Λ̌_ε)_ℂ ≠ λ と仮定したときの d_ε(Q̌_εx) = O の 4 行と Q̌_εx = O の 5 行、x = O の 5 行。max_eigenvalue_of_V_plus_simple (3) と同じ行）である。主張文の「重複度を込めて {Λ̌_ε}_ε で尽くされる」は重複度が本文で定まっていないので、「各 ε の im Q̌_ε の 0 でない元を 1 本ずつ取ると固有ベクトルの基底」「固有値はどれもある (Λ̌_ε)_ℂ に等しい」と書き直した（内容は不変）。Lean の Ising2D.VPlus_mulVec_of_mem_range は後の鎖と同じ行の calc（前の鎖は Ising2D.CheckFermiSetup.Qproj_mulVec_Qproj_mulVec）、基底は Ising2D.exists_eigenBasis_VPlus_of_joint_eigenspaces、固有値の鎖は Ising2D.checkBigLambda_smul_Qproj_mulVec_of_eigenvalue・Ising2D.Qproj_mulVec_eq_zero_of_ne_eigenvalue・Ising2D.exists_checkBigLambda_eq_of_eigenvalue。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part1_diagonalizability_chains.sage。",
         "2026-11-04: (2) の「(2s_2)^{M_col/2} > 0 と exp(ǧ(ε)) > 0 より Λ̌_ε > 0」は二つの不等号の根拠と積の正値性を名前だけで済ませていたので、a > 0（所属は def_second_transfer_matrix_prefactor）、exp(ǧ(ε)) > 0（real_exp_positive（x → ǧ(ε))）の前置きと、Λ̌_ε の定義・def_indexed_hyperbolic_abbreviations（i → 2）の s_2・ǧ(ε) の定義・a の置き方・ℝ で u > 0, v > 0 なら uv > 0 の 5 行の鎖にし、(1) と合わせて固有値が正の実数を ℂ へ移した元であることを書いた。主張の Λ̌_ε の定義に書いていた所属 ℝ_{>0} は (2) で示す内容なので ℝ にし、(2) の主張文の「固有値はすべて正の実数」を「各 ε で Λ̌_ε > 0。固有値はどれも正の実数 Λ̌_ε を ℂ へ移した (Λ̌_ε)_ℂ」と書き直した（内容は不変。(1) より固有値の集合は {(Λ̌_ε)_ℂ} なので、「固有値の最大のもの」を、順序のある ℝ の元 Λ̌_ε の最大のものと読み替えた）。同じ回に、Λ̌_ε ∈ ℝ_{>0} を定義の所属として引いていた c_value_eigenvalues_and_strict_maximum の前置きと eigenvector_of_max_eigenvalue の章の 1 か所を Λ̌_ε ∈ ℝ に直した（どちらも ℝ の所属しか使わない）。Lean の Ising2D.checkBigLambda_pos は同じ行の calc、固有値の主張は Ising2D.eigenvalue_VPlus_eq_positive_real。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_positivity_chain.sage。",
         "2026-11-04: (2) の大小の比較の散文（「(2s_2)^{M_col/2} は ε に依らない正の定数、exp は狭義単調増加なので大小は ǧ(ε) の大小と一致」「各項は独立に選べるので和が最大になるのは全ての ε_μ = 1」）を、r_μ := γ(θ~_μ)(1−ε_μ)・w_μ := γ(θ~_μ)ε_μ ≥ 0 の前置き（gamma_theta_tilde_mu_positive）と、ǧ(1,…,1) − ǧ(ε) ≥ 0・ǧ(ε) − ǧ(0,…,0) ≥ 0 の 7 行の鎖二本（ǧ の定義・finite_sum_of_real_differences・分配法則・r_μ / w_μ の置き方・finite_sum_of_nonnegative_reals_is_at_least_each_term（k → 1））、x ≤ y なら exp(x) ≤ exp(y)（real_exp_strictly_increasing と等号の場合分け）、Λ̌_ε ≤ Λ̌_{(1,…,1)}・Λ̌_{(0,…,0)} ≤ Λ̌_ε の 9 行の鎖二本（正値性の鎖の 1〜4 行目と、両辺に正の実数 a を掛ける行）にした（内容は不変）。ǧ(1,…,1)・ǧ(0,…,0) の値と Λ̌_maxΛ̌_min の鎖は扱っていない。Lean の Ising2D.gval_le_gval_univ・Ising2D.gval_empty_le_gval・Ising2D.real_exp_le_exp_of_le・Ising2D.checkBigLambda_le_checkBigLambda_univ・Ising2D.checkBigLambda_empty_le_checkBigLambda は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_comparison_chains.sage。",
+        "2026-11-04: (2) の「ǧ(1,…,1) = ½Σγ(θ~_μ)、ǧ(0,…,0) = −½Σγ(θ~_μ) を代入して statement の Λ̌_max, Λ̌_min を得る」は二つの値を根拠なしに書いていたので、Λ̌_max := Λ̌_{(1,…,1)}・Λ̌_min := Λ̌_{(0,…,0)} の置き方と、ǧ(1,…,1) の 4 行・ǧ(0,…,0) の 5 行の鎖（ǧ の定義・ℝ の数の計算・積の交換法則・新しく足した finite_sum_of_real_scalar_multiples・(−a)b = −(ab)）、Λ̌_max・Λ̌_min の 4 行の鎖二本（置き方・Λ̌_ε の定義・ǧ の定義を右辺から左辺へ・上の鎖）にした（内容は不変）。Λ̌_maxΛ̌_min の鎖は扱っていない。Lean の Ising2D.gval_univ_eq_half_sum・Ising2D.gval_empty_eq_neg_half_sum・Ising2D.checkBigLambda_max_eq・Ising2D.checkBigLambda_min_eq は同じ行の calc。数値検証: sagemath/check/eigenvalues_of_V_plus/check_part2_extreme_values_chains.sage。",
       ],
     },
   },

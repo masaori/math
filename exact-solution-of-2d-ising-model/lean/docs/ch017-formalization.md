@@ -154,6 +154,7 @@
 | `VPlus_mulVec_of_mem_range`（人手の対角化可能性の段落の後の 5 行と 1 対 1 の calc。前の 8 行は `CheckFermiSetup.Qproj_mulVec_Qproj_mulVec`） | `im Q̌_ε` の元は `V^{(+)}` の固有ベクトル | 同 (1) |
 | `checkBigLambda_pos` | 正値性（人手の (2) の前置きと 5 行の鎖と 1 対 1 の calc） | 同 (2) |
 | `gval_le_gval_univ` / `gval_empty_le_gval` / `real_exp_le_exp_of_le` / `checkBigLambda_le_checkBigLambda_univ` / `checkBigLambda_empty_le_checkBigLambda` | 最大・最小（人手の (2) の大小の比較の `ǧ` の 7 行の鎖二本、`x ≤ y` なら `exp(x) ≤ exp(y)`、`Λ̌` の 9 行の鎖二本と 1 対 1。必要十分版の特殊化は `checkBigLambda_le_max` / `checkBigLambda_min_le`） | 同 (2) |
+| `gval_univ_eq_half_sum` / `gval_empty_eq_neg_half_sum` / `checkBigLambda_max_eq` / `checkBigLambda_min_eq` | `Λ̌_max`・`Λ̌_min` の値（人手の (2) の `ǧ(1,…,1)` の 4 行・`ǧ(0,…,0)` の 5 行の鎖と、`Λ̌_max`・`Λ̌_min` の 4 行の鎖二本と 1 対 1 の calc） | 同 (2) |
 | `checkBigLambda_max_mul_min` | `Λ̌_max Λ̌_min = (2 sinh 2K_2)^M = c^2` | 同 |
 | `cos_thetaTilde_lt_one` / `one_lt_gamma1R_thetaTilde_checkIndex` | `cos θ~_μ < 1`, `γ_1(θ~_μ) > 1` | 章 015 `gamma1_gt_1_theta_tilde` |
 | `gammaFn_thetaTilde_pos` | **`γ(θ~_μ) > 0`** | 章 015 `gamma_theta_tilde_mu_positive` |

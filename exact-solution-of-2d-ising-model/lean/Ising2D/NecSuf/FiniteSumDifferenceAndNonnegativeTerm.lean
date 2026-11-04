@@ -3,7 +3,8 @@
 
 対応する人手証明のラベル（具体版は
 `Ising2D/MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean`）:
-`finite_sum_of_real_differences`, `finite_sum_of_negated_real_numbers`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`。
+`finite_sum_of_real_differences`, `finite_sum_of_negated_real_numbers`, `finite_sum_of_real_scalar_multiples`,
+`finite_sum_of_nonnegative_reals_is_at_least_each_term`。
 
 ## 何が効いているか / 効いていないか
 
@@ -14,6 +15,8 @@
 | `finite_sum_of_real_differences` | `finite_sum_sub_fin'` | 同上 |
 | `finite_sum_of_negated_real_numbers_succ` | `finite_sum_neg_succ'`（同じ並び） | 加法についての可換モノイドと符号反転 `Neg` に、明示の仮定 `-(a + b) = -a + -b` を足したものだけ |
 | `finite_sum_of_negated_real_numbers` | `finite_sum_neg_fin'` | 同上と、空の和のための明示の仮定 `-0 = 0` |
+| `finite_sum_of_real_scalar_multiples_succ` | `finite_sum_mul_left_succ'`（同じ並び） | 加法についての可換モノイドと乗法 `Mul` に、左からの分配法則 `c(a + b) = ca + cb`（`LeftDistribClass`）を足したものだけ |
+| `finite_sum_of_real_scalar_multiples` | `finite_sum_mul_left_fin'` | 同上と、空の和のための明示の仮定 `c0 = 0` |
 | `finite_sum_of_nonnegative_reals_ge_term_succ` | `finite_sum_ge_term_succ'`（同じ場合分けと並び） | 加法についての可換モノイドと、両辺に同じ元を左右どちらから足しても保たれる前順序（`Preorder`・`AddLeftMono`・`AddRightMono`） |
 | `finite_sum_of_nonnegative_reals_ge_term` | `finite_sum_ge_term_fin'` | 同上 |
 
@@ -25,6 +28,9 @@
   （空の和の `fin'` 版はさらに `-0 = 0` を `h0` として置く）。符号反転が対合であること、差、加法の逆元の法則 `a + (-a) = 0`、
   乗法、順序、実数であることは効いていない。加法の交換則は、`Finset` の上の和 `∑` が `AddCommMonoid` を要求するので外せない
   （人手の左から足す和の定義を `Fin` の上の `∑` で受けるための仮定で、帰納法の段そのものは交換則を使わない）。
+* 共通の因子の主張に効いているのは、帰納法の段の `ca + cb = c(a + b)`（左からの分配法則）だけである
+  （空の和の `fin'` 版はさらに `c0 = 0` を `h0` として置く）。乗法の結合則・交換則・単位元、右からの分配法則、差、順序、
+  実数であることは効いていない。加法の交換則は、符号反転の主張と同じく `Finset` の上の和 `∑` のためだけに要る。
 * 非負の項の主張に効いているのは、`≤` の反射律・推移律（前順序）と、両辺に同じ元を足しても `≤` が保たれること（`add_le_add`。左右の両方を使う）、
   `0` が加法の単位元であることだけである。反対称律（半順序）も、差（符号反転）も乗法も、順序が全順序であることも効いていない。
 -/
@@ -100,6 +106,33 @@ theorem finite_sum_neg_fin' [AddCommMonoid R] [Neg R] (hneg : ∀ a b : R, -(a +
   cases m with
   | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, h0]                     -- 空の和（人手には無い。仮定 `h0`）
   | succ m => exact finite_sum_neg_succ' hneg m x
+
+/-- **`Σ_{j=1}^{m+1} c x_j = c Σ x_j`**（具体版 `finite_sum_of_real_scalar_multiples_succ`）。`m` についての帰納法。
+効いているのは左からの分配法則だけである。 -/
+theorem finite_sum_mul_left_succ' [AddCommMonoid R] [Mul R] [LeftDistribClass R] (m : ℕ) (c : R)
+    (x : Fin (m + 1) → R) : ∑ j, c * x j = c * ∑ j, x j := by
+  induction m with
+  | zero =>
+    calc ∑ j : Fin 1, c * x j
+        = c * x 0 := Fin.sum_univ_one _                                      -- 和の定義（1 項）
+      _ = c * ∑ j : Fin 1, x j := by rw [Fin.sum_univ_one x]                 -- 和の定義（1 項）を右辺から左辺へ
+  | succ m ih =>
+    calc ∑ j : Fin (m + 2), c * x j
+        = (∑ j : Fin (m + 1), c * x j.castSucc) + c * x (Fin.last _) :=
+          Fin.sum_univ_castSucc _                                             -- 和の定義（項を 1 つ足す）
+      _ = c * (∑ j : Fin (m + 1), x j.castSucc) + c * x (Fin.last _) := by
+          rw [ih (fun j => x j.castSucc)]                                     -- 帰納法の仮定
+      _ = c * ((∑ j : Fin (m + 1), x j.castSucc) + x (Fin.last _)) :=
+          (left_distrib _ _ _).symm                                           -- 左からの分配法則
+      _ = c * ∑ j, x j := by rw [Fin.sum_univ_castSucc x]                     -- 和の定義を右辺から左辺へ
+
+/-- **`Σ_j c x_j = c Σ_j x_j`**（`Fin m`。具体版 `finite_sum_of_real_scalar_multiples`）。空の和には明示の仮定 `c0 = 0` が要る
+（左からの分配法則からは `c0 = c0 + c0` までしか出ず、`c0` を消す加法の簡約律が無いので `c0 = 0` は出ない）。 -/
+theorem finite_sum_mul_left_fin' [AddCommMonoid R] [Mul R] [LeftDistribClass R] (c : R) (h0 : c * 0 = 0)
+    (m : ℕ) (x : Fin m → R) : ∑ j, c * x j = c * ∑ j, x j := by
+  cases m with
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, h0]
+  | succ m => exact finite_sum_mul_left_succ' m c x
 
 /-- **非負の項の有限和は各項以上**（具体版 `finite_sum_of_nonnegative_reals_ge_term_succ`）。`m` についての帰納法。 -/
 theorem finite_sum_ge_term_succ' [AddCommMonoid R] [Preorder R] [AddLeftMono R] [AddRightMono R]

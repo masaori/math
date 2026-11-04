@@ -294,6 +294,76 @@ theorem checkBigLambda_min_le (F : CheckFermiSetup M) (g : CheckIdx M → ℝ)
   have hapos : 0 < (2 * s2) ^ ((M : ℝ) / 2) := Real.rpow_pos_of_pos (by linarith) _
   exact mul_le_mul_of_nonneg_left (real_exp_le_exp_of_le (NecSuf.sum_weight_empty_le g hg T)) (le_of_lt hapos)
 
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の `ǧ(1,…,1)` の鎖**: `ǧ(1,…,1) = ½ Σ_{μ=1}^{M_col} γ(θ~_μ)`。人手の 4 行と 1 対 1 の calc
+（人手の `Σ_{μ=1}^{M_col}` は Lean の `Fin M` の上の和で、添字 `μ = j + 1` の付け替えは `gval_eq_sum_fin_real` が受け持つ）。 -/
+theorem gval_univ_eq_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) :
+    F.gval g Finset.univ = (1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j) :=
+  calc F.gval g Finset.univ
+      = ∑ j : Fin M, g (checkIdxOfFin j) * (1 - 1 / 2) := by
+        rw [gval_eq_sum_fin_real F g Finset.univ]
+        simp only [Finset.mem_univ, if_true]
+                                                        -- `eigenvalues_of_check_Vprime` の `ǧ` の定義（`ε → (1,…,1)`）
+    _ = ∑ j : Fin M, g (checkIdxOfFin j) * (1 / 2) :=
+        Finset.sum_congr rfl fun j _ => by rw [show (1 : ℝ) - 1 / 2 = 1 / 2 by norm_num]
+                                                        -- ℝ で `1 − 1/2 = 1/2` を各項へ同時適用
+    _ = ∑ j : Fin M, (1 / 2) * g (checkIdxOfFin j) :=
+        Finset.sum_congr rfl fun j _ => mul_comm _ _
+                                                        -- ℝ の積の交換法則を各項へ同時適用
+    _ = (1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j) :=
+        finite_sum_of_real_scalar_multiples M _ _
+                                                        -- `finite_sum_of_real_scalar_multiples`（`m → M_col`、`c → 1/2`、`x_j → γ(θ~_j)`）
+
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の `ǧ(0,…,0)` の鎖**: `ǧ(0,…,0) = −(½ Σ_{μ=1}^{M_col} γ(θ~_μ))`。人手の 5 行と 1 対 1 の calc。 -/
+theorem gval_empty_eq_neg_half_sum (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) :
+    F.gval g ∅ = -((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)) :=
+  calc F.gval g ∅
+      = ∑ j : Fin M, g (checkIdxOfFin j) * (0 - 1 / 2) := by
+        rw [gval_eq_sum_fin_real F g ∅]
+        simp only [Finset.notMem_empty, if_false]
+                                                        -- `eigenvalues_of_check_Vprime` の `ǧ` の定義（`ε → (0,…,0)`）
+    _ = ∑ j : Fin M, g (checkIdxOfFin j) * (-(1 / 2)) :=
+        Finset.sum_congr rfl fun j _ => by rw [zero_sub]
+                                                        -- ℝ で `0 − 1/2 = −1/2` を各項へ同時適用
+    _ = ∑ j : Fin M, (-(1 / 2)) * g (checkIdxOfFin j) :=
+        Finset.sum_congr rfl fun j _ => mul_comm _ _
+                                                        -- ℝ の積の交換法則を各項へ同時適用
+    _ = (-(1 / 2)) * ∑ j : Fin M, g (checkIdxOfFin j) :=
+        finite_sum_of_real_scalar_multiples M _ _
+                                                        -- `finite_sum_of_real_scalar_multiples`（`m → M_col`、`c → −1/2`、`x_j → γ(θ~_j)`）
+    _ = -((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)) :=
+        neg_mul _ _
+                                                        -- ℝ で `(−a)b = −(ab)`（`a → 1/2`、`b → Σγ(θ~_μ)`）
+
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の `Λ̌_max` の鎖**: `Λ̌_max := Λ̌_{(1,…,1)} = (2s_2)^{M_col/2} exp(½ Σ γ(θ~_μ))`。人手の 4 行と 1 対 1 の calc。
+Lean には `Λ̌_max` の名前を置かず、`checkBigLambda F g s2 Finset.univ`（`ε = (1,…,1)` は `T = univ`）と書く。人手の 1〜3 行目
+（`Λ̌_max` の置き方、`Λ̌_ε` の定義、`ǧ` の定義を右辺から左辺へ）は `checkBigLambda` の定義の展開 `rfl` の 1 段が受け持つ。
+人手の `(2 sinh 2K_2)^{M_col/2}` は、Lean では `s2` を引数に取る `(2 s2)^{M/2}` である（`VPlus_mul_Qproj` の 8 行目と同じ）。 -/
+theorem checkBigLambda_max_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (s2 : ℝ) :
+    checkBigLambda F g s2 Finset.univ
+      = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)) :=
+  calc checkBigLambda F g s2 Finset.univ
+      = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g Finset.univ) := rfl
+                                                        -- 1〜3 行目（`Λ̌_max` の置き方、`Λ̌_ε` と `ǧ` の定義（`ε → (1,…,1)`））
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp ((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j)) := by
+        rw [gval_univ_eq_half_sum F g]
+                                                        -- 上の `ǧ(1,…,1)` の鎖
+
+open CheckFermiSetup in
+/-- **原文 `eigenvalues_of_V_plus` (2) の `Λ̌_min` の鎖**: `Λ̌_min := Λ̌_{(0,…,0)} = (2s_2)^{M_col/2} exp(−½ Σ γ(θ~_μ))`。人手の 4 行と 1 対 1 の calc
+（段の割り当ては `checkBigLambda_max_eq` と同じ。`ε = (0,…,0)` は `T = ∅`）。 -/
+theorem checkBigLambda_min_eq (F : CheckFermiSetup M) (g : CheckIdx M → ℝ) (s2 : ℝ) :
+    checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
+      = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))) :=
+  calc checkBigLambda F g s2 (∅ : Finset (CheckIdx M))
+      = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (F.gval g ∅) := rfl
+                                                        -- 1〜3 行目（`Λ̌_min` の置き方、`Λ̌_ε` と `ǧ` の定義（`ε → (0,…,0)`））
+    _ = (2 * s2) ^ ((M : ℝ) / 2) * Real.exp (-((1 / 2) * ∑ j : Fin M, g (checkIdxOfFin j))) := by
+        rw [gval_empty_eq_neg_half_sum F g]
+                                                        -- 上の `ǧ(0,…,0)` の鎖
+
 /-- **原文 `max_eigenvalue_of_V_plus_simple` (2)**: `γ(θ~_μ) > 0` なら大小比較は狭義。
 
 章 009 では `γ(θ_μ) ≥ 0` しか無いのでこの形は言えない
