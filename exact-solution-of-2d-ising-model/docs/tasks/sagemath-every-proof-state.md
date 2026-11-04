@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 407 件のうち、SageMath の検算が無いもの 30 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 407 件のうち、SageMath の検算が無いもの 29 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -359,9 +359,10 @@
   浮動小数点の旧い検算（053 の check_01。対象ラベルは onsager_exact_solution だけ）とは別に、厳密計算の検算 4 本を足した: (1) を QQ(i) で（M_col = 2..5）、(2) の鎖を円分体 QQ(ζ_{4M}) で（M_col = 2..5、308 件）、(3) の鎖を係数 p, q を不定元にして（全ての K_1, K_2 を一度に。M_col = 2..4、99 件）、(3)(4) の全ての鎖と主張を本文の ψ̌ で数体 E_μ・E_1 に（3 組の結合定数 × M_col = 2, 3、1365 件）。否定コントロールは ε を I・σ_1^z に替えて、仮定を引く行だけが外れることを見た。
   人手証明の計算の誤りは無かったが、根拠の誤りを直した: (1) の鎖が引いていた「epsilon_commutes_with_transfer_matrices の Step 1」は本文に無いブロックの段だったので、epsilon_anticommutes_with_jordan_wigner_Z・_Y の引用にした。(2) の鎖が引いていた def_half_integer_modes は θ̃_{1−μ} = −θ̃_μ の主張で Ž の定義ではなかったので def_half_integer_checkZ・_checkY に直した。「積の ℂ 線型性」を有限和の分配・スカラーの出し入れ・符号の出し入れの補題の一行ずつにし、散文の「Y̌ も同じ」「ψ̌ も同じ」を (W̌_μ, W)・(Ψ, p, q) の一本の鎖にし、(4) の ň_μ を product_of_anticommuting_matrices_commutes の引用に、Q̌_ϵ の散文を差・スカラー倍との可換の 3 式と分配則の鎖と有限積との可換の鎖にした（主張は不変）。二回のレビューで必須の指摘が無くなるまで直した。
   申し送り（Lean の連続実行の受け持ち。Lean は不変）: `ClaimEpsilonAnticommutesWithCheckZY.lean` の (2) は必要十分版 `NecSuf.anticomm_sum_smul` の特殊化で、人手の新しい一行ずつの鎖と 1 対 1 でない。冒頭の対応表は「章 010」などの旧い呼び方のままである。
+- `epsilon_eigenvalue_on_check_Q`（εQ̌_ϵ = η_ϵQ̌_ϵ と符号の反転則・η_ϵ = η_{(1,…,1)}(−1)^{M_col−|ϵ|}・ε = η_{(1,…,1)}(−1)^{M_col}Π(I − 2ň_μ)）: `sagemath/check/epsilon_eigenvalue_on_check_Q/`。本文の ψ̌ を結合定数 3 組 × M_col = 2, 3 で数体 E_1 に作り、(1)〜(4) の全ての鎖と主張を全ての ϵ・μ で厳密に確かめた（等号・主張 12042 件、否定コントロール 216 件。η_{(1,…,1)} は 6 つの場合すべてで +1）。人手証明の計算の誤りは無し。三回のレビューで必須の指摘が無くなるまで人手証明を直した（主張は不変）: 名前だけの根拠を blkref に、散文の推論（η ∈ {±1}、行列の等式、∃! の一意性、Step 1 の背理法、Step 3 の結び、(3) の取り替え、(4) の Σ_ϵ Q̌_ϵ = I を掛ける段）を (∵) 付きの鎖に、他のブロックの証明の途中（check_joint_eigenspace_decomposition の証明の記号 R と Q̌_ϵ = ΠR）を引いていたのを Q̌_δ の定義の因子を直接使う形に、定義の無い負の冪を非負の冪の鎖に。Lean（ClaimEpsilonEigenvalueOnCheckQ.lean）は変えていない（新しい鎖との 1 対 1 は Lean の連続実行の受け持ち）。
 
 ## 次の一歩
-`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `epsilon_eigenvalue_on_check_Q`（`--list` の先頭）から、文書順に検算を足す。
+`eigenvalue_problem_eigenvector_of_max_eigenvalue.ts` の `trace_of_epsilon_V_plus_via_check_eigenvalues`（`--list` の先頭）から、文書順に検算を足す。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
