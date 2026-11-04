@@ -1,10 +1,10 @@
 /-
-# 実数の差の有限和と、非負の実数の有限和の下からの評価（**具体版**）
+# 実数の差・符号反転の有限和と、非負の実数の有限和の下からの評価（**具体版**）
 
 対応する人手証明のラベル: `def_finite_sum_of_real_numbers`, `finite_sum_of_real_differences`,
-`finite_sum_of_nonnegative_reals_is_at_least_each_term`
+`finite_sum_of_negated_real_numbers`, `finite_sum_of_nonnegative_reals_is_at_least_each_term`
 （`structured-latex/content/000_calculation_formulae_00_09.ts` の `calc_formulae_definition_finite_sum_of_real_numbers`,
-`calc_formulae_claim_finite_sum_of_real_differences`,
+`calc_formulae_claim_finite_sum_of_real_differences`, `calc_formulae_claim_finite_sum_of_negated_real_numbers`,
 `calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term`）。
 
 **必要十分版**: `Ising2D/NecSuf/FiniteSumDifferenceAndNonnegativeTerm.lean`。具体版をその系として導くのは
@@ -19,6 +19,8 @@
 * `finite_sum_of_real_differences_succ` の帰納法の段の calc は人手の 5 行と対応する。人手の 1 行「ℝ の和と差の計算」は
   `finite_sum_of_real_differences_step`（差を符号反転の和に直す・結合則と交換則・和の符号反転の 4 段）。
   人手の「`α, β` の置き方」の行は、Lean では `α, β` を置かずに `Σ_{j=1}^{m}` のまま書くので、その前の段の右辺と同じ式になり段にしない。`m = 0`（空の和）は人手には無い（`finite_sum_of_real_differences`）。
+* `finite_sum_of_negated_real_numbers_succ` の `m = 1` の 2 行と帰納法の段の 4 行は、人手の行と 1 対 1 の `calc` である。
+  人手の 1 行「ℝ で `(−a) + (−b) = −(a + b)`」は mathlib の `neg_add` を右辺から左辺へ使う 1 段である。`m = 0`（空の和）は人手には無い（`finite_sum_of_negated_real_numbers`）。
 * `finite_sum_of_nonnegative_reals_ge_term_succ` は人手と同じく、`k ≤ m`（Lean の `Fin.castSucc k'`）と `k = m + 1`（`Fin.last`）に分け、
   それぞれ人手の 4 行と 1 対 1 の `calc` にした。`k = m + 1` の前置き `Σ_{j=1}^{m} a_j ≥ a_1 ≥ 0` は帰納法の仮定を `k → 1`（Lean の `0`）で使う。
   「両辺に同じ実数を足す」は `add_le_add` の片方を `le_rfl` にしたもの、「0 は ℝ の和の単位元」は `add_zero`・`zero_add` である。
@@ -65,6 +67,31 @@ theorem finite_sum_of_real_differences (m : ℕ) (a b : Fin m → ℝ) :
   cases m with
   | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, Fin.sum_univ_zero, sub_zero]
   | succ m => exact finite_sum_of_real_differences_succ m a b
+
+/-- **`finite_sum_of_negated_real_numbers`**（`m + 1` 項）: `Σ_{j=1}^{m+1}(−x_j) = −Σ_{j=1}^{m+1} x_j`。`m` についての帰納法。 -/
+theorem finite_sum_of_negated_real_numbers_succ (m : ℕ) (x : Fin (m + 1) → ℝ) :
+    ∑ j, -(x j) = -(∑ j, x j) := by
+  induction m with
+  | zero =>
+    calc ∑ j : Fin 1, -(x j)
+        = -(x 0) := Fin.sum_univ_one _                                       -- `def_finite_sum_of_real_numbers`
+      _ = -(∑ j : Fin 1, x j) := by rw [Fin.sum_univ_one x]                  -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
+  | succ m ih =>
+    calc ∑ j : Fin (m + 2), -(x j)
+        = (∑ j : Fin (m + 1), -(x j.castSucc)) + -(x (Fin.last _)) :=
+          Fin.sum_univ_castSucc _                                             -- `def_finite_sum_of_real_numbers`
+      _ = -(∑ j : Fin (m + 1), x j.castSucc) + -(x (Fin.last _)) := by
+          rw [ih (fun j => x j.castSucc)]                                     -- 帰納法の仮定
+      _ = -((∑ j : Fin (m + 1), x j.castSucc) + x (Fin.last _)) :=
+          (neg_add _ _).symm                                                  -- ℝ で `(−a) + (−b) = −(a + b)`
+      _ = -(∑ j, x j) := by rw [Fin.sum_univ_castSucc x]                      -- `def_finite_sum_of_real_numbers` を右辺から左辺へ
+
+/-- **`finite_sum_of_negated_real_numbers`**（`m = 0` の空の和を含む。`m = 0` は人手には無い）。 -/
+theorem finite_sum_of_negated_real_numbers (m : ℕ) (x : Fin m → ℝ) :
+    ∑ j, -(x j) = -(∑ j, x j) := by
+  cases m with
+  | zero => rw [Fin.sum_univ_zero, Fin.sum_univ_zero, neg_zero]
+  | succ m => exact finite_sum_of_negated_real_numbers_succ m x
 
 /-- **`finite_sum_of_nonnegative_reals_is_at_least_each_term`**（`m + 1` 項）:
 すべての `a_j ≥ 0` なら、すべての `k` について `Σ_{j=1}^{m+1} a_j ≥ a_k`。`m` についての帰納法。 -/

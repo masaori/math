@@ -1,0 +1,4 @@
+checked 1984 lines with balls (M_col = 2..6, 4 coupling pairs, all ε)
+checked 252 argument lines exactly (M_col = 1..6, all ε)
+negative controls (broken lines detected): 496
+RESULT: PASS

@@ -309,6 +309,7 @@ export const ALL_LABELS = [
   "finite_sum_of_matrices_entrywise",
   "finite_sum_of_matrices_with_single_nonzero_term",
   "finite_sum_of_negated_matrices",
+  "finite_sum_of_negated_real_numbers",
   "finite_sum_of_nonnegative_reals_is_at_least_each_term",
   "finite_sum_of_real_differences",
   "finite_sum_of_real_entry_matrices_has_real_entries",

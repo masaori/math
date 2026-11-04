@@ -4350,6 +4350,35 @@ E_K \check{Q}_\epsilon
         "Step 3（",
         math(String.raw`\left(\check{V}'\right)^{-1}`),
         " についても同じ値）。和の定義は Step 1・Step 2 と同じである。",
+        math(String.raw`\epsilon \in \{0,1\}^{\check{\mathcal{M}}}`),
+        " について、",
+        math(String.raw`\{1,\dots,M_{\mathrm{col}}\}`),
+        " の上の実数の有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        "、有限積は ",
+        ref("def_finite_product_of_real_numbers"),
+        "（どちらも ",
+        math(String.raw`m \to M_{\mathrm{col}}`),
+        "）による。",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+\exp(-\check{g}(\epsilon))
+&= \exp\!\left(-\sum_{\mu=1}^{M_{\mathrm{col}}}\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)
+&&\bigl(\because\ \blkref{eigenvalues_of_check_Vprime}\ \text{の}\ \check{g}\ \text{の定義}\bigr)\\
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\left(\gamma(\tilde\theta_\mu)\left(\epsilon_\mu - \tfrac12\right)\right)\right)\right)
+&&\bigl(\because\ \blkref{finite_sum_of_negated_real_numbers}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to \gamma(\tilde\theta_\mu)(\epsilon_\mu - \tfrac12))\ \text{を右辺から左辺へ}\bigr)\\
+&= \exp\!\left(\sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ -(ab) = (-a)b\ (a \to \gamma(\tilde\theta_\mu),\ b \to \epsilon_\mu - \tfrac12)\ \text{を各項へ同時に}\bigr)\\
+&= \prod_{\mu=1}^{M_{\mathrm{col}}}
+\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)
+&&\bigl(\because\ \blkref{real_exp_of_finite_sum}\ (m \to M_{\mathrm{col}},\ j \to \mu,\ x_j \to (-\gamma(\tilde\theta_\mu))(\epsilon_\mu - \tfrac12))\bigr)
+\end{aligned}`,
+      ),
+      paragraph([
+        "これを使って、",
+        math(String.raw`\left(\check{V}'\right)^{-1}`),
+        " のトレースを計算する。",
       ]),
       displayMath(
         String.raw`\begin{aligned}
@@ -4371,27 +4400,41 @@ E_K \check{Q}_\epsilon
 &= \sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \bigl(\exp(-\check{g}(\epsilon))\bigr)_{\mathbb{C}}
 &&\bigl(\because\ 1_{\mathbb{C}}\ \text{は乗法の単位元。}\blkref{complex_numbers_form_a_field}\ \text{を各項へ同時に}\bigr)\\
 &= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
-&&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(-\check{g}(\epsilon)))\bigr)
-\end{aligned}`,
-      ),
-      paragraph([
-        "右辺の実数の和について、",
-        math(String.raw`-\check{g}(\epsilon) = \sum_{\mu=1}^{M_{\mathrm{col}}}\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)`),
-        " だから、Step 2 をそのまま ",
-        math(String.raw`\gamma(\tilde\theta_\mu) \to -\gamma(\tilde\theta_\mu)`),
-        " として適用でき",
-      ]),
-      displayMath(
-        String.raw`\begin{aligned}
-\Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \exp(-\check{g}(\epsilon))\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{real_inclusion_preserves_sum_over_binary_words}\ (r \to M_{\mathrm{col}},\ x_\epsilon \to \exp(-\check{g}(\epsilon)))\bigr)\\
+&= \Bigl(\sum_{\epsilon \in \{0,1\}^{\check{\mathcal{M}}}} \prod_{\mu=1}^{M_{\mathrm{col}}}
+   \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(\epsilon_\mu - \tfrac12\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \text{冒頭の}\ \exp(-\check{g}(\epsilon))\ \text{の鎖を各項へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(1 - \tfrac12\right)\right)
+   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(0 - \tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \blkref{expansion_of_finite_product_of_two_term_sums_of_real_numbers}\ (r \to M_{\mathrm{col}},\ j \to \mu,\ a_j^{(e)} \to \exp((-\gamma(\tilde\theta_\mu))(e - \tfrac12)))\ \text{を右辺から左辺へ}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
+   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(0 - \tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 1 - \tfrac12 = \tfrac12\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
+   + \exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\left(-\tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 0 - a = -a\ (a \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)
+   + \exp\!\left(-\left(\left(-\gamma(\tilde\theta_\mu)\right)\cdot\tfrac12\right)\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a(-b) = -(ab)\ (a \to -\gamma(\tilde\theta_\mu),\ b \to \tfrac12)\ \text{を各因子へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   \left(\exp\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)
+   + \exp\!\left(-\frac{-\gamma(\tilde\theta_\mu)}{2}\right)\right)\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ a\cdot\tfrac12 = \tfrac{a}{2}\ (a \to -\gamma(\tilde\theta_\mu))\ \text{を各因子の 2 箇所へ同時に}\bigr)\\
+&= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}}
+   2\cdot\frac{\exp\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right) + \exp\!\left(-\frac{-\gamma(\tilde\theta_\mu)}{2}\right)}{2}\Bigr)_{\mathbb{C}}
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ 2 \ne 0\ \text{なので}\ b = 2\cdot\tfrac{b}{2}\ \bigl(b \to \exp(\tfrac{-\gamma(\tilde\theta_\mu)}{2}) + \exp(-\tfrac{-\gamma(\tilde\theta_\mu)}{2})\bigr)\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{-\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
-   \quad (\because \text{Step 2 を }\gamma(\tilde\theta_\mu)\mapsto-\gamma(\tilde\theta_\mu)\text{ として適用}) \\
+&&\bigl(\because\ \blkref{def_cosh_sinh}\ \text{の}\ \cosh\ (x \to \tfrac{-\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に、右辺から左辺へ}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(-\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
-   \quad \bigl(\because\ \mathbb{R}\ \text{で}\ \tfrac{-a}{2} = -\tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子へ同時に}\bigr) \\
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ \tfrac{-a}{2} = -\tfrac{a}{2}\ (a \to \gamma(\tilde\theta_\mu))\ \text{を各因子へ同時に}\bigr)\\
 &= \Bigl(\prod_{\mu=1}^{M_{\mathrm{col}}} 2\cosh\!\left(\frac{\gamma(\tilde\theta_\mu)}{2}\right)\Bigr)_{\mathbb{C}}
-   \quad \bigl(\because\ \blkref{cosh_is_even}\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に}\bigr) \\
+&&\bigl(\because\ \blkref{cosh_is_even}\ (x \to \tfrac{\gamma(\tilde\theta_\mu)}{2})\ \text{を各因子へ同時に}\bigr)\\
 &= \mathrm{tr}\!\left(\check{V}'\right)
-   \quad (\because \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
+&&(\because\ \text{Step 1--2 の }\check{V}'\text{ のトレース表示})
 \end{aligned}`,
       ),
       paragraph([
@@ -4436,6 +4479,7 @@ E_K \check{Q}_\epsilon
         "2026-11-04: Step 2 の最後の 2 行は「1 − 1/2 = 1/2、0 − 1/2 = −1/2 と ℝ の和の交換則」「cosh x = (exp x + exp(−x))/2」と根拠を書いていたが、一つの行で複数の計算規則（γ·(1/2) = γ/2、γ·(−1/2) = −(γ/2) を含む）を使い、cosh の定義もラベルで引いていなかった。ℝ の 1 − 1/2 = 1/2、0 − a = −a、a(−b) = −(ab)、a·(1/2) = a/2、b = 2·(b/2) と、def_cosh_sinh の cosh（x → γ(θ̃_μ)/2）を右辺から左辺へ引く 6 行にした。exp(γ/2) + exp(−γ/2) の順のまま cosh の定義に合うので、和の交換の行は要らなくなった。主張は変えていない。Lean は Ising2D.CheckFermiSetup.prod_step2_cosh（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step2_cosh.sage。",
         "2026-11-04: Step 4 の cosh x ≥ 1 の根拠に cosh_sinh_basic_properties を引いていたが、その主張（(1)〜(4)）に cosh x ≥ 1 は無い。cosh_at_least_one（x → γ(θ̃_μ)/2）を行末で引き、両辺に 2 を掛ける行と 2·1 = 2 の行に分けた。Step 3 の 2 行目の根拠「cosh は偶関数」はラベル参照が無かったので、ℝ で (−a)/2 = −(a/2) の行と cosh_is_even（x → γ(θ̃_μ)/2）を引く行に分けた。主張は変えていない。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_and_step4_real_lines.sage。",
         "2026-11-04: Step 3 の tr((V̌')^{-1}) = Π_μ 2cosh(−γ/2) は「Step 1--2 を γ → −γ として適用」と名前だけで根拠にしていた。本文の V̌'・ǧ は γ(θ̃_μ) に固定した記号で、γ を引数に取る主張が無い。トレースの部分を、Step 1 の 8 行の鎖と同じ根拠で 5 行目だけを新しく足した eigenvalues_of_inverse_of_check_Vprime に替えた鎖と、Step 2 の 1 行目と同じ real_inclusion_preserves_sum_over_binary_words の行の 9 行にした。値が Step 1・Step 2 と同じく ℝ の和の包含であることを、続く行の左辺と右辺にも (·)_ℂ で書いた。続く「Step 2 を γ → −γ として適用」と最後の「Step 1--2 の V̌' のトレース表示」の 2 行はまだ名前だけの根拠である（(−a)/2 = −(a/2) と cosh_is_even の行は同じ日の SageMath の検算の連続実行が分けたものを残した）。主張は変えていない。Lean は Ising2D.CheckFermiSetup.trace_Vprime_inv_step3（ClaimTraceCheckVprime.lean）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_chain.sage（1〜8 行）と check_step3_real_inclusion.sage（9 行目）。",
+        "2026-11-04: Step 3 の (Σ_ε exp(−ǧ(ε)))_ℂ = (Π_μ 2cosh((−γ(θ̃_μ))/2))_ℂ は「Step 2 を γ → −γ として適用」と名前だけで根拠にしていた。Step 3 の冒頭に exp(−ǧ(ε)) = Π_μ exp((−γ(θ̃_μ))(ε_μ − 1/2)) の 4 行の鎖（ǧ の定義、新しく足した finite_sum_of_negated_real_numbers を右辺から左辺へ、ℝ の −(ab) = (−a)b、real_exp_of_finite_sum）を置き、トレースの鎖の続きに、それを各項へ入れる行と、Step 2 の展開の行と続く 6 行を γ(θ̃_μ) → −γ(θ̃_μ) で書き下した 7 行を足した（引く主張 expansion_of_finite_product_of_two_term_sums_of_real_numbers・def_cosh_sinh と ℝ の計算規則は任意の実数について述べるので、代入した形をそのまま引ける）。トレースの鎖と続く式の間にあった日本語の段落は無くなり、Step 3 は 1 つの鎖になった。主張は変えていない。最後の行「Step 1--2 の V̌' のトレース表示」はまだ名前だけの根拠である。Lean は Ising2D.CheckFermiSetup.exp_neg_gval_step3_product・sum_exp_neg_gval_step3_expansion と、prod_step2_cosh を −γ で使う段（ClaimTraceCheckVprime.lean の trace_Vprime_inv）。数値検証: sagemath/check/trace_of_check_Vprime/check_step3_exp_product.sage と check_step3_expansion_and_cosh.sage。",
       ],
     },
   },

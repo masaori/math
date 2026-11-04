@@ -1379,6 +1379,65 @@ a_{\mathbb{C}} + b_{\mathbb{C}}
   },
 
   {
+    id: "calc_formulae_claim_finite_sum_of_negated_real_numbers",
+    kind: "claim",
+    title: { text: "実数の符号反転の有限和は有限和の符号反転" },
+    labels: ["finite_sum_of_negated_real_numbers"],
+    statement: [
+      paragraph([
+        math(String.raw`m \in \mathbb{Z}_{\geq 1}`),
+        "、",
+        math(String.raw`x_1,\dots,x_m \in \mathbb{R}`),
+        " とする。有限和は ",
+        ref("def_finite_sum_of_real_numbers"),
+        " による。このとき",
+      ]),
+      displayMath(String.raw`\sum_{j=1}^{m} (-x_j) = -\sum_{j=1}^{m} x_j`),
+      paragraph(["が成り立つ。"]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m = 1`),
+        " のとき",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{1} (-x_j)
+&= -x_1
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to -x_j)\bigr)\\
+&= -\sum_{j=1}^{1} x_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph([
+        "である。",
+        math(String.raw`m`),
+        " で成り立つと仮定し、",
+        math(String.raw`x_1,\dots,x_{m+1} \in \mathbb{R}`),
+        " を取る。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{j=1}^{m+1} (-x_j)
+&= \Bigl(\sum_{j=1}^{m} (-x_j)\Bigr) + (-x_{m+1})
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ (r_j \to -x_j)\bigr)\\
+&= \Bigl(-\sum_{j=1}^{m} x_j\Bigr) + (-x_{m+1})
+&&\bigl(\because\ \text{帰納法の仮定}\bigr)\\
+&= -\Bigl(\Bigl(\sum_{j=1}^{m} x_j\Bigr) + x_{m+1}\Bigr)
+&&\bigl(\because\ \mathbb{R}\ \text{で}\ (-a) + (-b) = -(a + b)\ \bigl(a \to \textstyle\sum_{j=1}^{m} x_j,\ b \to x_{m+1}\bigr)\bigr)\\
+&= -\sum_{j=1}^{m+1} x_j
+&&\bigl(\because\ \blkref{def_finite_sum_of_real_numbers}\ \text{を右辺から左辺へ}\bigr)
+\end{aligned}`),
+      paragraph(["である。"]),
+    ],
+    conversion: {
+      status: "added",
+      notes: [
+        "2026-11-04: 原文（Typst）に対応ブロックは無い。trace_of_check_Vprime の Step 3 が −ǧ(ε) = −Σ_μ γ(θ̃_μ)(ε_μ − 1/2) の符号反転を有限和の各項へ入れるのに引くので足した（それまでは「Step 2 を γ → −γ として適用」と名前だけで根拠にしていた）。Lean は Ising2D.finite_sum_of_negated_real_numbers（MathematicalTools/TrigonometricEstimatesFiniteSumsAndIntegrals/ClaimFiniteSumsOfRealNumbers.lean）。数値検証: sagemath/check/finite_sum_of_negated_real_numbers/。",
+      ],
+    },
+  },
+
+  {
     id: "calc_formulae_claim_finite_sum_of_nonnegative_reals_is_at_least_each_term",
     kind: "claim",
     title: { text: "非負の実数の有限和は各項以上" },
