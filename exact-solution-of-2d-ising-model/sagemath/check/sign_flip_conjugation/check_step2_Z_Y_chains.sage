@@ -62,7 +62,7 @@ for M in range(2, 6):
 
     sig = {(a, k): kron([pauli[a] if m == k else id2 for m in range(1, M + 1)])
            for a in "xyz" for k in range(1, M + 1)}
-    # Step 1 の結論（check_18 が鎖を確かめた値）
+    # Step 1 の結論（check_step1_composition_chains.sage が鎖を確かめた値）
     for k in range(1, M + 1):
         odd = (k % 2 == 1)
         assert T(sig[("x", k)]) == neg(sig[("x", k)])

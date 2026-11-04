@@ -73,7 +73,7 @@ for M in range(2, 6):
             prod = prod * sig[("x", k)]
         Z[m] = prod * sig[("z", m)]                   # def_jordan_wigner_Z_matrices
         Y[m] = prod * sig[("y", m)]                   # def_jordan_wigner_Y_matrices
-    # Step 2 の結論（check_19 が鎖を確かめた値）
+    # Step 2 の結論（check_step2_Z_Y_chains.sage が鎖を確かめた値）
     for m in range(1, M + 1):
         assert T(Z[m]) == neg(Z[m]) and T(Y[m]) == Y[m]
     # 項の鎖 U(Z_jY_j)U^{-1} = -(Z_jY_j)

@@ -98,7 +98,7 @@ for M in range(2, 5):
                 E * Sa * Einv,
                 (Sx * Sa) * Sx,                                          # k が奇数なら第 k 因子だけが効く
                 Sx * (Sa * Sx),                                          # mat_mult_associative
-                Sx * neg(Sx * Sa),                                       # 上の鎖を (p, q) = (a, x) で（(y, x) はこのファイルの (A)、(z, x) は check_13）
+                Sx * neg(Sx * Sa),                                       # 上の鎖を (p, q) = (a, x) で（(y, x) はこのファイルの (A)、(z, x) は check_step1_F_conjugation_x_z_chains.sage）
                 neg(Sx * (Sx * Sa)),                                     # negation_factors_out_of_right_factor
                 neg((Sx * Sx) * Sa),                                     # mat_mult_associative
                 neg(Id * Sa),                                            # Step 0（σ_k^xσ_k^x = I）
