@@ -4514,10 +4514,30 @@ V_2
 \end{aligned}`,
       ),
       paragraph([
-        math(String.raw`\bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
-        " はスカラーなので ",
-        ref("scalar_identity_commutes"),
-        " により前へ出せて statement の表示を得る。",
+        math(String.raw`B := \exp\!\left(\tfrac12 S_1^{(+)}\right)`),
+        "、",
+        math(String.raw`A := \exp(S_2)`),
+        "、",
+        math(String.raw`c := \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}`),
+        " と置くと、",
+      ]),
+      displayMath(
+        String.raw`\begin{aligned}
+V^{(+)}
+&= \left(\left(V_1^{(+)}\right)^{1/2} V_2\right)\left(V_1^{(+)}\right)^{1/2}
+   \quad (\because \blkref{def_V_plus}) \\
+&= \bigl(B(cA)\bigr)B
+   \quad (\because \text{上の二つの鎖}) \\
+&= \bigl(c(BA)\bigr)B
+   \quad (\because \blkref{scalar_multiple_factors_out_of_right_factor}) \\
+&= c\bigl((BA)B\bigr)
+   \quad (\because \blkref{scalar_multiple_factors_out_of_left_factor})
+\end{aligned}`,
+      ),
+      paragraph([
+        "であり、",
+        ref("mat_mult_associative"),
+        " より括弧を省くと statement の表示を得る。",
       ]),
       paragraph([
         "Step 2（各因子の性質）。",
@@ -4530,13 +4550,21 @@ V_2
         ref("real_symmetric_matrix_is_hermitian"),
         "（",
         math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to S_1^{(+)}`),
+        "）よりエルミートである。同じく ",
+        ref("iH_is_real_symmetric"),
+        " より ",
+        math(String.raw`S_2`),
+        " は実対称なので、",
+        ref("real_symmetric_matrix_is_hermitian"),
+        "（",
+        math(String.raw`n \to 2^{M_{\mathrm{col}}},\ A \to S_2`),
         "）よりエルミートである。",
         math(String.raw`\tfrac12 S_1^{(+)}`),
-        " と ",
-        math(String.raw`S_2`),
         " もエルミート（実係数倍、",
         ref("real_multiple_of_hermitian_is_hermitian"),
-        "）であり、",
+        "（",
+        math(String.raw`\alpha \to \tfrac12,\ A \to S_1^{(+)}`),
+        "））であり、",
         ref("exp_hermitian_is_positive_definite"),
         " と ",
         ref("exp_of_negative_is_left_inverse"),
@@ -4544,14 +4572,14 @@ V_2
       ]),
       list([
         [
-          math(String.raw`B := \exp\!\left(\tfrac12 S_1^{(+)}\right)`),
+          math(String.raw`B`),
           " は正定値（とくにエルミート）で、",
           math(String.raw`B' := \exp\!\left(-\tfrac12 S_1^{(+)}\right)`),
           " は ",
           math(String.raw`B'B = I`),
           " を満たす",
         ],
-        [math(String.raw`A := \exp(S_2)`), " は正定値"],
+        [math(String.raw`A`), " は正定値"],
       ]),
       paragraph([
         "Step 3（正定値性）。",
@@ -4564,7 +4592,7 @@ V_2
         String.raw`\begin{aligned}
 \exp\!\left(\tfrac12 S_1^{(+)}\right)\exp(S_2)\exp\!\left(\tfrac12 S_1^{(+)}\right)
 &= BAB
-   \quad (\because B,\ A \text{ の定義（Step 2）}) \\
+   \quad (\because B,\ A \text{ の定義（Step 1）}) \\
 &= B^*AB
    \quad (\because B^* = B)
 \end{aligned}`,
@@ -4581,11 +4609,13 @@ V_2
         math(String.raw`s_2 = \sinh 2K_2 > 0`),
         " なので ",
         math(String.raw`(2s_2)^{M_{\mathrm{col}}/2} \in \mathbb{R}_{>0}`),
-        " であり、",
+        "（",
+        ref("def_second_transfer_matrix_prefactor"),
+        "）であり、",
         ref("positive_real_multiple_preserves_positive_definite"),
         " より ",
-        math(String.raw`V^{(+)} = \bigl((2s_2)^{M_{\mathrm{col}}/2}\bigr)_{\mathbb{C}}B^*AB`),
-        " も正定値である。",
+        math(String.raw`V^{(+)} = cB^*AB`),
+        "（Step 1 と上の鎖）も正定値である。",
       ]),
     ],
     conversion: {
@@ -4595,6 +4625,7 @@ V_2
         "009 章の V_is_positive_definite の (+) セクター版。009 章の主張は V_eq_Vprime の V（why_008_applies_only_to_minus_sector で確定したとおり実質 (−) 専用）に結びついているので、V^{(+)} について改めて述べた。証明で使う iH_is_real_symmetric と exp_hermitian_is_positive_definite はどちらも複号によらない形で述べられているので、内容は旧複合ブロックの Step 1〜3 と同一である。Lean の対応定理は Ising2D.VPlus_posDef。",
         "数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_05（S_1^{(+)}, S_2 の実対称性の残差 0.0、V^{(+)} のエルミート性の残差 ≤ 2.0e-12、固有値の全体最小 3.2e-4 > 0、M=2,3,4,5・6 組の (K_1,K_2)）。",
         "2026-09-26: (−) セクターを本文から外し、(+) セクターだけで述べる形にした。",
+        "2026-11-04（全証明の SageMath 検算）: 数値検証の場所は sagemath/check/V_plus_is_positive_definite/（K_1 = 2 log y・K_2 = log x と選んで AA で厳密に、と def_exp の部分和のボールで）。Step 1 の最後の段落を、引いていた scalar_identity_commutes（[cI, A] = O）では出ない B(cA) = c(BA)・(cX)B = c(XB) を scalar_multiple_factors_out_of_right_factor・scalar_multiple_factors_out_of_left_factor で引く鎖にした。Step 2 の S_2 のエルミート性の根拠を、実係数倍ではなく iH_is_real_symmetric と real_symmetric_matrix_is_hermitian（A → S_2）にした。Step 3 の (2s_2)^{M_col/2} > 0 に def_second_transfer_matrix_prefactor を引いた。主張は変えていない。",
         "2026-11-03（Lean の通しの証明のゴールラインの確認）: Step 2 が「def_hermitian_positive_definite の最後の注意よりエルミート」と定義の中の主張を引いていたのを、それを切り出した定義 def_real_symmetric_complex_matrix と主張 real_symmetric_matrix_is_hermitian（n → 2^{M_col}、A → S_1^{(+)}）を引く形にした。主張は変えていない。",
       ],
     },

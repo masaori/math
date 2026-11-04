@@ -64,7 +64,7 @@ theorem VPlus_eq_smul (s2 : ℝ) (K1 K2star : ℂ) :
           • (matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))
               * matExp ((Complex.I * K2star) • H2 M)
               * matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))) := by
-        -- `scalar_identity_commutes`（スカラーを前へ出す）
+        -- `scalar_multiple_factors_out_of_right_factor`・`scalar_multiple_factors_out_of_left_factor`（スカラーを前へ出す）
         rw [Matrix.mul_smul, Matrix.smul_mul]
 
 /-- **原文 `V_plus_is_positive_definite` Step 2〜3**: `V^{(+)}` は正定値。 -/
@@ -73,7 +73,7 @@ theorem VPlus_posDef {K1 K2star : ℂ} {s2 : ℝ}
     (VPlus M s2 K1 K2star).PosDef := by
   set B := matExp ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)) with hB
   set A := matExp ((Complex.I * K2star) • H2 M) with hA
-  -- Step 2: `\tfrac12 S_1^{(+)}` はエルミート（`iH_is_real_symmetric` と実係数倍）
+  -- Step 2: `\tfrac12 S_1^{(+)}` はエルミート（`iH_is_real_symmetric` と実係数倍）。`S_2` は `iH_is_real_symmetric` と `real_symmetric_matrix_is_hermitian`（`S2_isHermitian`）
   have hS1 : ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M)).IsHermitian := by
     have h : ((1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M))ᴴ
         = (1 / 2 : ℂ) • ((Complex.I * K1) • H1plus M) := by
