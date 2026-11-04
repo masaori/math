@@ -1243,6 +1243,9 @@ import Ising2DLambda.KacWard.PlaneLift
 import Ising2DLambda.KacWard.PlaneLiftCoordinates
 import Ising2DLambda.NecSuf.KacWard.PlaneLiftCoordinates
 import Ising2DLambda.KacWard.PlaneLiftCoordinatesFromNecSuf
+import Ising2DLambda.NecSuf.KacWard.VertexSimplePlaneLiftDistinct
+import Ising2DLambda.KacWard.VertexSimplePlaneLiftDistinct
+import Ising2DLambda.KacWard.VertexSimplePlaneLiftDistinctFromNecSuf
 import Ising2DLambda.NecSuf.KacWard.TerminalMatrix
 import Ising2DLambda.KacWard.TerminalMatrixFromNecSuf
 import Ising2DLambda.KacWard.TerminalMatrixDeterminant

@@ -7037,7 +7037,7 @@ c_\varphi\prod_{i\in\mathcal J}B_{f(i),\varphi(i)}\right)`),
 &=\sum_f\sum_\varphi\left(\prod_i A_{i,f(i)}\right)\left(c_\varphi\prod_i B_{f(i),\varphi(i)}\right)
 &&\bigl(\because\ \text{結合則、}\blkref{def_qbar_polynomial_ring}\bigr)\\
 &=\sum_f\left(\prod_i A_{i,f(i)}\right)\left(\sum_\varphi c_\varphi\prod_i B_{f(i),\varphi(i)}\right)
-&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr).
+&&\bigl(\because\ \text{分配則、}\blkref{def_qbar_polynomial_ring}\bigr)
 \end{aligned}`),
                 paragraph([
                   "と変形すればよい。有限積の分離では、乗法の結合則と交換則で各 ",
@@ -63300,6 +63300,11 @@ P_{k+1}(\gamma)_{\mathrm{row}}
                     labels: ["claim_vertex_simple_plane_lift_points_distinct"],
                     habitat: "Z",
                     verification: ["sagemath/check/vertex-simple-plane-lift-distinct"],
+                    lean: [
+                      "Ising2DLambda.KacWard.vertexSimplePlaneLift_points_distinct",
+                      "Ising2DLambda.NecSuf.KacWard.lift_points_injective_of_projected_vertices_injective",
+                      "Ising2DLambda.KacWard.vertexSimplePlaneLift_points_distinct_from_necSuf",
+                    ],
                     statement: [
                       paragraph([
                         "任意の閉じた非後退辺列 ", math(String.raw`\gamma=(\vec e_1,\ldots,\vec e_m)`),
