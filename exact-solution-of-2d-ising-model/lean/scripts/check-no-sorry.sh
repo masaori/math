@@ -1966,6 +1966,9 @@ targets=(
   Ising2D.CheckFermiSetup.trace_Vprime_eq_finset_sum_of_mathlib
   Ising2D.CheckFermiSetup.trace_Vprime
   Ising2D.CheckFermiSetup.trace_Vprime_inv
+  Ising2D.cosh_is_even
+  "Ising2D.NecSuf.symmetrized_sum_is_even'"
+  Ising2D.cosh_is_even_of_necSuf
   Ising2D.CheckFermiSetup.trace_Vprime_pos
   Ising2D.VPlus_eq_smul
   Ising2D.VPlus_posDef

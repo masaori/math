@@ -6,7 +6,7 @@
 
 **必要十分版は置かない。** 使っている一般論はトレースの線型性（既に
 `Ising2D/NecSuf/NumberOperator.lean` の「加法的かつ巡回的な汎関数 `τ`」として
-抽象化してある）と、実数の指数法則・体の計算規則・`cosh` の偶関数性だけで、
+抽象化してある）と、実数の指数法則・体の計算規則・`cosh` の偶関数性（必要十分版は `cosh_is_even` の側に置いた）だけで、
 取り払える構造が残っていない。
 
 ## 原文 Step 1 との対応
@@ -30,8 +30,9 @@ Step 3 のトレースの 9 行の鎖は `trace_Vprime_inv_step3` の `calc` と
 Step 3 の冒頭の `exp(−ǧ(ε))` の 4 行の鎖は `exp_neg_gval_step3_product` の `calc` と 1 対 1 である（ℝ の `−(ab) = (−a)b` は `neg_mul` を右辺から左辺へ。
 `finite_sum_of_negated_real_numbers` は具体版 `finite_sum_of_negated_real_numbers_succ`）。トレースの鎖の 10・11 行目は `sum_exp_neg_gval_step3_expansion`
 （Step 2 の `sum_exp_gval_step2_expansion` と同じ並び）、続く 6 行は Step 2 の `prod_step2_cosh` を `γ → −γ`（`g → fun i => -(g i)`）で使う段で、
-人手もこの 6 行を Step 2 の 6 行に `γ(θ̃_μ) → −γ(θ̃_μ)` を代入した形で書いている。その先の「`(−a)/2 = −(a/2)`」「`cosh_is_even`」
-「Step 1--2 の V̌' のトレース表示」の 3 行は、`trace_Vprime_inv` の `M = r + 1` の最後の段がまとめて閉じており、人手の行と 1 対 1 ではない。
+人手もこの 6 行を Step 2 の 6 行に `γ(θ̃_μ) → −γ(θ̃_μ)` を代入した形で書いている。その先の 5 行（ℝ の `(−a)/2 = −(a/2)`、`cosh_is_even`
+（具体版 `Ising2D.cosh_is_even`）、Step 2 の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words`（`binWordSum_ofReal`）を右辺から左辺へ、
+Step 1 の鎖 `trace_Vprime_step1` を右辺から左辺へ）は、`trace_Vprime_inv` の `M = r + 1` の最後の 5 段と 1 対 1 である。
 
 ## 章 009 との違い
 
@@ -51,6 +52,7 @@ import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.Claim
 import Ising2D.MathematicalTools.FiniteMatricesPauliMatricesAndCommutators.ClaimScalarMultipleByOneFromNecSuf
 import Ising2D.MathematicalTools.KroneckerProductAndMultiFactorBasis.ClaimRealInclusionPreservesProduct
 import Ising2D.MathematicalTools.TrigonometricEstimatesFiniteSumsAndIntegrals.ClaimFiniteSumsOfRealNumbers
+import Ising2D.MathematicalTools.RealSquareRootExponentialAndHyperbolicFunctions.ClaimCoshIsEven
 
 namespace Ising2D
 
@@ -453,9 +455,9 @@ theorem sum_exp_neg_gval_step3_expansion {r : ℕ} (F : CheckFermiSetup (r + 1))
 /-- **原文 `trace_of_check_Vprime` Step 3**: `tr((V̌')^{-1}) = tr(V̌')`。
 左辺の `F.Vprime (fun i => -(g i))` は人手の `(V̌')^{-1}` の Lean の表し方で、`VprimeUnits_inv` で `↑(F.VprimeUnits g)⁻¹` と付け替える。
 人手の範囲 `M = r + 1` では、付け替えたあとトレースの鎖の 1〜9 行目 `trace_Vprime_inv_step3`、10・11 行目
-`sum_exp_neg_gval_step3_expansion`、続く 6 行 `prod_step2_cosh`（`g → fun i => -(g i)`）を順に通る。最後の段は人手の残りの 3 行
-（「`(−a)/2 = −(a/2)`」「`cosh_is_even`」「Step 1--2 の V̌' のトレース表示」）をまとめて `trace_Vprime`・`Real.cosh_neg` で閉じ、
-人手の行と 1 対 1 ではない。人手の範囲外の `M = 0` は `trace_Vprime` と `Real.cosh_neg` で閉じる。 -/
+`sum_exp_neg_gval_step3_expansion`、続く 6 行 `prod_step2_cosh`（`g → fun i => -(g i)`）を順に通り、残りの 5 行（ℝ の `(−a)/2 = −(a/2)`、
+`cosh_is_even`、Step 2 の鎖を右辺から左辺へ、`real_inclusion_preserves_sum_over_binary_words` を右辺から左辺へ、Step 1 の鎖を右辺から左辺へ）と
+1 対 1 の 5 段で `tr(V̌')` に戻る。人手の範囲外の `M = 0` は `trace_Vprime` と `Real.cosh_neg` で閉じる。 -/
 theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
     (F.Vprime (fun i => -(g i))).trace = (F.Vprime g).trace := by
   match M, F, g with
@@ -476,14 +478,20 @@ theorem trace_Vprime_inv (g : CheckIdx M → ℝ) :
       _ = ((∏ j : Fin (r + 1), 2 * Real.cosh ((-(g (checkIdxOfFin j))) / 2) : ℝ) : ℂ) :=
           congrArg (fun x : ℝ => (x : ℂ)) (prod_step2_cosh (fun i => -(g i)))
                                                         -- 続く 6 行（Step 2 の 6 行を `γ(θ̃_μ) → −γ(θ̃_μ)` で）
-      _ = (F.Vprime g).trace := by
-          -- 人手の Step 3 の残り（「(−a)/2 = −(a/2)」「cosh_is_even」「Step 1--2」）。人手の行と 1 対 1 ではない
-          rw [F.trace_Vprime]
-          congr 1
-          rw [← Fintype.prod_bijective checkIdxOfFin ⟨checkIdxOfFin_injective, checkIdxOfFin_surjective⟩
-            (fun j => 2 * Real.cosh (g (checkIdxOfFin j) / 2)) (fun i => 2 * Real.cosh (g i / 2)) (fun _ => rfl)]
-          refine Finset.prod_congr rfl fun j _ => ?_
-          rw [show -(g (checkIdxOfFin j)) / 2 = -(g (checkIdxOfFin j) / 2) by ring, Real.cosh_neg]
+      _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (-(g (checkIdxOfFin j) / 2)) : ℝ) : ℂ) :=
+          congrArg (fun x : ℝ => (x : ℂ)) (Finset.prod_congr rfl fun j _ => by
+            rw [neg_div (2 : ℝ) (g (checkIdxOfFin j))])  -- ℝ で `(−a)/2 = −(a/2)`（`a → γ(θ̃_μ)`）を各因子へ同時に
+      _ = ((∏ j : Fin (r + 1), 2 * Real.cosh (g (checkIdxOfFin j) / 2) : ℝ) : ℂ) :=
+          congrArg (fun x : ℝ => (x : ℂ)) (Finset.prod_congr rfl fun j _ => by
+            rw [cosh_is_even (g (checkIdxOfFin j) / 2)]) -- `cosh_is_even`（`x → γ(θ̃_μ)/2`）を各因子へ同時に
+      _ = ((NecSuf.binWordSum r (fun ε => Real.exp (F.gval g (finsetOfBinWord ε))) : ℝ) : ℂ) := by
+          rw [sum_exp_gval_step2_expansion F g, prod_step2_cosh g]
+                                                        -- Step 2 の `Σ_ε exp(ǧ(ε)) = Π_μ 2cosh(γ(θ̃_μ)/2)` の鎖
+                                                        -- （展開までの `sum_exp_gval_step2_expansion` と続く 6 行の `prod_step2_cosh`）を右辺から左辺へ
+      _ = NecSuf.binWordSum r (fun ε => ((Real.exp (F.gval g (finsetOfBinWord ε)) : ℝ) : ℂ)) :=
+          (binWordSum_ofReal r _).symm                  -- `real_inclusion_preserves_sum_over_binary_words`（`x_ε → exp(ǧ(ε))`）を右辺から左辺へ
+      _ = (F.Vprime g).trace :=
+          (trace_Vprime_step1 F g).symm                 -- Step 1 の `tr(V̌') = Σ_ε (exp(ǧ(ε)))_ℂ` の鎖を右辺から左辺へ
 
 /-- **原文 `trace_of_check_Vprime` Step 4**: `tr(V̌') > 0`（`cosh ≥ 1`）。 -/
 theorem trace_Vprime_pos (g : CheckIdx M → ℝ) :

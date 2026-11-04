@@ -1,6 +1,7 @@
 # 対象ラベル: trace_of_check_Vprime（Step 3 と Step 4 の実数の値の行）
-# 注（2026-11-04）: 本文の Step 3 は、いまは冒頭の exp(−ǧ(ε)) の 4 行の鎖とトレースの 20 行の鎖である（1〜9 行目がこの検算の鎖と包含、
-#   10〜17 行目が Step 2 を γ → −γ で書き下した行で check_step3_exp_product.sage・check_step3_expansion_and_cosh.sage、18〜20 行目が下の (−a)/2・cosh_is_even・tr(V̌')）。
+# 注（2026-11-04）: 本文の Step 3 は、いまは冒頭の exp(−ǧ(ε)) の 4 行の鎖とトレースの 22 行の鎖である（1〜9 行目がこの検算の鎖と包含、
+#   10〜17 行目が Step 2 を γ → −γ で書き下した行で check_step3_exp_product.sage・check_step3_expansion_and_cosh.sage、18・19 行目が下の (−a)/2・cosh_is_even、
+#   20〜22 行目（= tr(V̌') までの 3 行）が下の最後の比較と check_step3_final_lines.sage）。
 #   下の説明は、Step 3 が「Step 1〜2 を γ ↦ −γ として適用」の 4 行だった時点のもので、確かめる式は変わらない。
 # Step 3（γ_μ := γ(θ̃_μ)）:
 #   Σ_ε exp(−ǧ(ε)) = Π_μ 2cosh(−γ_μ/2)      (Step 2 を γ ↦ −γ として。check_step3_chain.sage の鎖の右辺 Σ_ε (exp(−ǧ(ε)))_C の実数の値)
