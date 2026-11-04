@@ -6711,7 +6711,7 @@ N_{k,l}
 &&(\because\ \blkref{def_qbar_constant_embedding}\text{ は積を保つ})\\
 &=\left(\prod_{k\in\mathcal K}\widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}\right)
   \left(\prod_{k\in\mathcal K}\prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}\right)
-&&(\because\ \nu:\coprod_{k\in\mathcal K}\mathcal J_k\xrightarrow{\sim}\mathcal J)\\
+&&(\because\ \blkref{claim_block_preserving_permutation_bijection}\text{ の全単射 }\nu)\\
 &=\prod_{k\in\mathcal K}\left(
   \widehat{\iota_{\mathbb Z}(\operatorname{sgn}(\tau_k))}
   \prod_{i\in\mathcal J_k}B_{\nu_k(i),\nu_k(\tau_k(i))}
@@ -78983,6 +78983,11 @@ t-a&=(s-a)+c/3&&(\because\ t=s+c/3)\\
                     labels: ["def_complex_algebraic_realization"],
                     habitat: "C",
                     realEscape: "実閉部分体の実現値を複素数の実部と虚部へ送り、代数的数全体を複素数として実現する。",
+                    lean: [
+                      "Ising2DLambda.RealEscape.complexAlgebraicRealization",
+                      "Ising2DLambda.RealEscape.complexAlgebraicRealization_eq",
+                      "Ising2DLambda.NecSuf.RealEscape.complexRealization",
+                    ],
                     statement: [
                       paragraph([
                         ref("def_real_closed_subfield"), " の ", math(String.raw`R\subset\overline{\mathbb Q}`),
