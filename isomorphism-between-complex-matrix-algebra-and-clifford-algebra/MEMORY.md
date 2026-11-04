@@ -10,6 +10,7 @@
 
 ## 完了済み
 
+- 2026-11-04: 二つの有限集合の上の二重和の順序交換（ラベル claim_interchange_of_double_sum_over_finite_sets、等式 Σ_{x∈X} 1_ℂ·_V(Σ_{y∈Y} λ_{x,y}·v_{x,y})=Σ_{y∈Y} 1_ℂ·_V(Σ_{x∈X} λ_{x,y}·v_{x,y})）を示した。外側の係数は 1_ℂ に固定したので、行列の積の結合法則などで外側に係数が付く形は、有限集合の上の和のスカラー倍とスカラー倍の単位元で書き直してから引く。次は ℂ-代数と代数の準同型の定義。
 - 2026-11-04: 有限集合の上の和でクロネッカーのデルタが一項を取り出すこと（ラベル claim_sum_over_finite_set_with_kronecker_delta_picks_term、等式 Σ_{y∈X} δ_{x,y}·_V v_y=v_x）を示した。番号付けで開いて claim_family_member_is_kronecker_delta_linear_combination に帰着した。次は二重和の順序交換（Σ_{x∈X}Σ_{y∈Y}=Σ_{y∈Y}Σ_{x∈X}。内側の和を外側の和の族として持つ形で、番号付けで開き、係数ごとの和・族ごとの和の主張と帰納法で示す見込み）。
 - 2026-11-04: 線型写像が有限集合の上の和を値の有限集合の上の和へ移すこと（ラベル claim_linear_map_maps_sum_over_finite_set_to_sum_of_values、等式 f(Σ_x λ_x·_V v_x)=Σ_x λ_x·_U f(v_x)）を示した。次は有限集合の上の和でクロネッカーのデルタが一項を取り出すこと（Σ_y δ_{x,y}·v_y=v_x。番号付けで開き、線型結合の段の主張が本文に無いので証明の中で L_m の帰納法を行う見込み。claim_ordered_sum_with_kronecker_delta_picks_term の V 版）。
 - 2026-11-04（研究管理）: 台帳に、P_M が有限集合であることの行と符号の個数 N_i(T) の定義の行を c_i の前に足し、Mat(2^M,ℂ) への同型の行を Jordan–Wigner の系の直前へ移した。runbook に、元の個数 # と部分集合の元を並べる写像を定義しないことを書いた。

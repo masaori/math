@@ -5869,4 +5869,393 @@ f\left(\sum_{x\in X}\lambda_x\cdot_V v_x\right)
 \end{aligned}`),
     ],
   },
+  {
+    id: "mathematical_toolkit_claim_interchange_of_double_sum_over_finite_sets",
+    kind: "claim",
+    title: { text: "二つの有限集合の上の二重和は、和の順序を入れ替えても変わらない" },
+    labels: ["claim_interchange_of_double_sum_over_finite_sets"],
+    statement: [
+      paragraph([
+        math(String.raw`(V,+_V,\cdot_V,0_V)`),
+        " を ℂ-線型空間（",
+        ref("def_complex_vector_space"),
+        "）、",
+        math(String.raw`X`),
+        " と ",
+        math(String.raw`Y`),
+        " を有限集合（",
+        ref("def_numbering_of_finite_set"),
+        "）とし、",
+        math(String.raw`X`),
+        " の元 ",
+        math(String.raw`x`),
+        " と ",
+        math(String.raw`Y`),
+        " の元 ",
+        math(String.raw`y`),
+        " の組ごとに、",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`v_{x,y}`),
+        " と ",
+        math(String.raw`\mathbb{C}`),
+        " の元 ",
+        math(String.raw`\lambda_{x,y}`),
+        " が一つずつ与えられているとする。有限集合の上の和（",
+        ref("def_sum_over_finite_set"),
+        "）で、",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`s_x:=\sum_{y\in Y}\lambda_{x,y}\cdot_V v_{x,y}`),
+        " を、",
+        math(String.raw`Y`),
+        " の各元 ",
+        math(String.raw`y`),
+        " に ",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`t_y:=\sum_{x\in X}\lambda_{x,y}\cdot_V v_{x,y}`),
+        " を与える。このとき次が成り立つ。",
+      ]),
+      displayMath(String.raw`\sum_{x\in X}1_{\mathbb{C}}\cdot_V s_x=\sum_{y\in Y}1_{\mathbb{C}}\cdot_V t_y`),
+      paragraph([
+        "左辺は ",
+        math(String.raw`X`),
+        " の各元 ",
+        math(String.raw`x`),
+        " に ",
+        math(String.raw`s_x`),
+        " を与えた族の、右辺は ",
+        math(String.raw`Y`),
+        " の各元 ",
+        math(String.raw`y`),
+        " に ",
+        math(String.raw`t_y`),
+        " を与えた族の、係数をすべて ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " にした有限集合の上の和である（",
+        ref("def_sum_over_finite_set"),
+        " の、係数を持たない和の書き方）。",
+      ]),
+    ],
+    proof: [
+      paragraph([
+        math(String.raw`X`),
+        " と ",
+        math(String.raw`Y`),
+        " は有限集合なので、",
+        math(String.raw`X`),
+        " の番号付け ",
+        math(String.raw`(n,e)`),
+        "（",
+        math(String.raw`n\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`e:\{1,\dots,n\}\to X`),
+        "）と ",
+        math(String.raw`Y`),
+        " の番号付け ",
+        math(String.raw`(n',e')`),
+        "（",
+        math(String.raw`n'\in\mathbb{Z}_{\ge 0}`),
+        "、",
+        math(String.raw`e':\{1,\dots,n'\}\to Y`),
+        "）が少なくとも一つずつある（",
+        ref("def_numbering_of_finite_set"),
+        "）。それを一つずつ選び、",
+        math(String.raw`X`),
+        " の上の和はすべて ",
+        math(String.raw`(n,e)`),
+        " で、",
+        math(String.raw`Y`),
+        " の上の和はすべて ",
+        math(String.raw`(n',e')`),
+        " で定義を開く（",
+        ref("def_sum_over_finite_set"),
+        "。番号付けの取り方によらない）。",
+      ]),
+      paragraph([
+        "準備として、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " と ",
+        math(String.raw`l\in\{1,\dots,n'\}`),
+        " について、",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`a_{k,l}:=\lambda_{e(k),e'(l)}\cdot_V v_{e(k),e'(l)}`),
+        " を置き、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）と同じ漸化式で、",
+        math(String.raw`V`),
+        " の元の三つの部分和を次のとおり定める。",
+      ]),
+      list([
+        [
+          "（行の部分和）",
+          math(String.raw`k\in\{1,\dots,n\}`),
+          " について、",
+          math(String.raw`B^{k}_0:=0_V`),
+          "、",
+          math(String.raw`B^{k}_{m'}:=B^{k}_{m'-1}+_V a_{k,m'}`),
+          "（",
+          math(String.raw`1\le m'\le n'`),
+          "）。",
+        ],
+        [
+          "（列の部分和）",
+          math(String.raw`l\in\{1,\dots,n'\}`),
+          " について、",
+          math(String.raw`C^{l}_0:=0_V`),
+          "、",
+          math(String.raw`C^{l}_{m}:=C^{l}_{m-1}+_V a_{m,l}`),
+          "（",
+          math(String.raw`1\le m\le n`),
+          "）。",
+        ],
+        [
+          "（列の部分和の部分和）",
+          math(String.raw`m\in\{0,1,\dots,n\}`),
+          " について、",
+          math(String.raw`D_{m,0}:=0_V`),
+          "、",
+          math(String.raw`D_{m,m'}:=D_{m,m'-1}+_V\bigl(1_{\mathbb{C}}\cdot_V C^{m'}_{m}\bigr)`),
+          "（",
+          math(String.raw`1\le m'\le n'`),
+          "）。",
+        ],
+      ]),
+      paragraph([
+        math(String.raw`B^{k}_{m'}`),
+        " は、",
+        math(String.raw`l\in\{1,\dots,n'\}`),
+        " に ",
+        math(String.raw`v_{e(k),e'(l)}`),
+        " と係数 ",
+        math(String.raw`\lambda_{e(k),e'(l)}`),
+        " を与える族について線型結合の定義が定める ",
+        math(String.raw`L_{m'}`),
+        " であり、",
+        math(String.raw`C^{l}_{m}`),
+        " は、",
+        math(String.raw`k\in\{1,\dots,n\}`),
+        " に ",
+        math(String.raw`v_{e(k),e'(l)}`),
+        " と係数 ",
+        math(String.raw`\lambda_{e(k),e'(l)}`),
+        " を与える族について線型結合の定義が定める ",
+        math(String.raw`L_{m}`),
+        " であり、",
+        math(String.raw`D_{m,m'}`),
+        " は、",
+        math(String.raw`l\in\{1,\dots,n'\}`),
+        " に ",
+        math(String.raw`C^{l}_{m}`),
+        " と係数 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " を与える族について線型結合の定義が定める ",
+        math(String.raw`L_{m'}`),
+        " である（",
+        ref("def_linear_combination"),
+        "）。したがって、",
+        math(String.raw`s_x`),
+        "・",
+        math(String.raw`t_y`),
+        " の定義と有限集合の上の和の定義（",
+        ref("def_sum_over_finite_set"),
+        "）から、次が成り立つ。",
+      ]),
+      list([
+        [
+          math(String.raw`k\in\{1,\dots,n\}`),
+          " について ",
+          math(String.raw`s_{e(k)}=\sum_{l=1}^{n'}\lambda_{e(k),e'(l)}\cdot_V v_{e(k),e'(l)}=B^{k}_{n'}`),
+          "。",
+        ],
+        [
+          math(String.raw`l\in\{1,\dots,n'\}`),
+          " について ",
+          math(String.raw`t_{e'(l)}=\sum_{k=1}^{n}\lambda_{e(k),e'(l)}\cdot_V v_{e(k),e'(l)}=C^{l}_{n}`),
+          "。",
+        ],
+      ]),
+      paragraph([
+        "（",
+        math(String.raw`D_{0,m'}=0_V`),
+        "）すべての ",
+        math(String.raw`m'\in\{0,1,\dots,n'\}`),
+        " について ",
+        math(String.raw`D_{0,m'}=0_V`),
+        " であることを、",
+        math(String.raw`m'`),
+        " についての帰納法で示す。",
+        math(String.raw`m'=0`),
+        " のときは ",
+        math(String.raw`D_{0,0}`),
+        " の定義そのものである。",
+        math(String.raw`1\le m'\le n'`),
+        " とし、",
+        math(String.raw`D_{0,m'-1}=0_V`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+D_{0,m'}
+&=D_{0,m'-1}+_V\bigl(1_{\mathbb{C}}\cdot_V C^{m'}_{0}\bigr)
+&&\left(\because\ D_{0,m'}\ \text{の定義}\right)\\
+&=0_V+_V\bigl(1_{\mathbb{C}}\cdot_V C^{m'}_{0}\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=0_V+_V\bigl(1_{\mathbb{C}}\cdot_V 0_V\bigr)
+&&\left(\because\ C^{m'}_{0}\ \text{の定義}\right)\\
+&=0_V+_V 0_V
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=0_V
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right).
+\end{aligned}`),
+      paragraph([
+        "（",
+        math(String.raw`D_{m-1,m'}+_V B^{m}_{m'}=D_{m,m'}`),
+        "）",
+        math(String.raw`m\in\{1,\dots,n\}`),
+        " を一つ固定し、すべての ",
+        math(String.raw`m'\in\{0,1,\dots,n'\}`),
+        " について ",
+        math(String.raw`D_{m-1,m'}+_V B^{m}_{m'}=D_{m,m'}`),
+        " であることを、",
+        math(String.raw`m'`),
+        " についての帰納法で示す。",
+        math(String.raw`m'=0`),
+        " のとき：",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+D_{m-1,0}+_V B^{m}_{0}
+&=0_V+_V 0_V
+&&\left(\because\ D_{m-1,0},\ B^{m}_{0}\ \text{の定義}\right)\\
+&=0_V
+&&\left(\because\ 0_V\ \text{は加法の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m,0}
+&&\left(\because\ D_{m,0}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        math(String.raw`1\le m'\le n'`),
+        " とし、",
+        math(String.raw`D_{m-1,m'-1}+_V B^{m}_{m'-1}=D_{m,m'-1}`),
+        " が成り立つと仮定する（帰納法の仮定）。式を短くするため、",
+        math(String.raw`V`),
+        " の元 ",
+        math(String.raw`p:=1_{\mathbb{C}}\cdot_V C^{m'}_{m-1}`),
+        " を置く。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+D_{m-1,m'}+_V B^{m}_{m'}
+&=\bigl(D_{m-1,m'-1}+_V p\bigr)+_V\bigl(B^{m}_{m'-1}+_V a_{m,m'}\bigr)
+&&\left(\because\ D_{m-1,m'},\ B^{m}_{m'}\ \text{の定義と}\ p\ \text{の置き方}\right)\\
+&=D_{m-1,m'-1}+_V\Bigl(p+_V\bigl(B^{m}_{m'-1}+_V a_{m,m'}\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m-1,m'-1}+_V\Bigl(\bigl(p+_V B^{m}_{m'-1}\bigr)+_V a_{m,m'}\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m-1,m'-1}+_V\Bigl(\bigl(B^{m}_{m'-1}+_V p\bigr)+_V a_{m,m'}\Bigr)
+&&\left(\because\ \text{加法の交換法則。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m-1,m'-1}+_V\Bigl(B^{m}_{m'-1}+_V\bigl(p+_V a_{m,m'}\bigr)\Bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=\bigl(D_{m-1,m'-1}+_V B^{m}_{m'-1}\bigr)+_V\bigl(p+_V a_{m,m'}\bigr)
+&&\left(\because\ \text{加法の結合法則。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m,m'-1}+_V\bigl(p+_V a_{m,m'}\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=D_{m,m'-1}+_V\bigl((1_{\mathbb{C}}\cdot_V C^{m'}_{m-1})+_V a_{m,m'}\bigr)
+&&\left(\because\ p\ \text{の置き方}\right)\\
+&=D_{m,m'-1}+_V\bigl(C^{m'}_{m-1}+_V a_{m,m'}\bigr)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m,m'-1}+_V C^{m'}_{m}
+&&\left(\because\ C^{m'}_{m}\ \text{の定義}\right)\\
+&=D_{m,m'-1}+_V\bigl(1_{\mathbb{C}}\cdot_V C^{m'}_{m}\bigr)
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m,m'}
+&&\left(\because\ D_{m,m'}\ \text{の定義}\right).
+\end{aligned}`),
+      paragraph([
+        "（外側の部分和）",
+        math(String.raw`X`),
+        " の上の和の族 ",
+        math(String.raw`k\mapsto s_{e(k)}`),
+        " と係数 ",
+        math(String.raw`1_{\mathbb{C}}`),
+        " について、線型結合の定義（",
+        ref("def_linear_combination"),
+        "）が定める ",
+        math(String.raw`V`),
+        " の元を ",
+        math(String.raw`R_0:=0_V`),
+        "、",
+        math(String.raw`R_m:=R_{m-1}+_V\bigl(1_{\mathbb{C}}\cdot_V s_{e(m)}\bigr)`),
+        "（",
+        math(String.raw`1\le m\le n`),
+        "）と書く。すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`R_m=D_{m,n'}`),
+        " であることを、",
+        math(String.raw`m`),
+        " についての帰納法で示す。",
+        math(String.raw`m=0`),
+        " のときは、",
+        math(String.raw`R_0=0_V=D_{0,n'}`),
+        " である（",
+        math(String.raw`R_0`),
+        " の定義と、上で示した ",
+        math(String.raw`D_{0,m'}=0_V`),
+        " の ",
+        math(String.raw`m'=n'`),
+        "）。",
+        math(String.raw`1\le m\le n`),
+        " とし、",
+        math(String.raw`R_{m-1}=D_{m-1,n'}`),
+        " が成り立つと仮定する（帰納法の仮定）。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+R_m
+&=R_{m-1}+_V\bigl(1_{\mathbb{C}}\cdot_V s_{e(m)}\bigr)
+&&\left(\because\ R_m\ \text{の定義}\right)\\
+&=D_{m-1,n'}+_V\bigl(1_{\mathbb{C}}\cdot_V s_{e(m)}\bigr)
+&&\left(\because\ \text{帰納法の仮定}\right)\\
+&=D_{m-1,n'}+_V s_{e(m)}
+&&\left(\because\ \text{スカラー倍の単位元。}\blkref{def_complex_vector_space}\right)\\
+&=D_{m-1,n'}+_V B^{m}_{n'}
+&&\left(\because\ s_{e(m)}=B^{m}_{n'}\right)\\
+&=D_{m,n'}
+&&\left(\because\ \text{上で示した}\ D_{m-1,m'}+_V B^{m}_{m'}=D_{m,m'}\ \text{の}\ m'=n'\right).
+\end{aligned}`),
+      paragraph([
+        "以上で、すべての ",
+        math(String.raw`m\in\{0,1,\dots,n\}`),
+        " について ",
+        math(String.raw`R_m=D_{m,n'}`),
+        " が示された（",
+        math(String.raw`n=0`),
+        " のときは ",
+        math(String.raw`m=0`),
+        " の場合だけで足り、",
+        math(String.raw`n'=0`),
+        " のときも同じ帰納法がそのまま通る）。これを ",
+        math(String.raw`m=n`),
+        " で使い、主張の左辺から始める。",
+      ]),
+      displayMath(String.raw`\begin{aligned}
+\sum_{x\in X}1_{\mathbb{C}}\cdot_V s_x
+&=\sum_{k=1}^{n}1_{\mathbb{C}}\cdot_V s_{e(k)}
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n,e)\ \text{で}\right)\\
+&=R_n
+&&\left(\because\ R_n\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=D_{n,n'}
+&&\left(\because\ \text{上の帰納法の}\ m=n\right)\\
+&=\sum_{l=1}^{n'}1_{\mathbb{C}}\cdot_V C^{l}_{n}
+&&\left(\because\ D_{n,n'}\ \text{の定義。}\blkref{def_linear_combination}\right)\\
+&=\sum_{l=1}^{n'}1_{\mathbb{C}}\cdot_V t_{e'(l)}
+&&\left(\because\ C^{l}_{n}=t_{e'(l)}\right)\\
+&=\sum_{y\in Y}1_{\mathbb{C}}\cdot_V t_y
+&&\left(\because\ \blkref{def_sum_over_finite_set}\ \text{を}\ (n',e')\ \text{で}\right).
+\end{aligned}`),
+    ],
+  },
 ]);
