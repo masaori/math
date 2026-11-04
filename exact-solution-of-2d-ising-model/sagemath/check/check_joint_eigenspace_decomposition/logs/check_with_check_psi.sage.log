@@ -1,0 +1,37 @@
+  本物の ψ̌ の ň_μ: 6 組（本物の ψ̌ (x,y)=(2,2) M=2, 本物の ψ̌ (x,y)=(2,2) M=3, 本物の ψ̌ (x,y)=(3,3/2) M=2, 本物の ψ̌ (x,y)=(3,3/2) M=3, 本物の ψ̌ (x,y)=(5/4,3) M=2, 本物の ψ̌ (x,y)=(5/4,3) M=3）
+== check_factor_as_R_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition 冒頭の定義の因子 = R_μ^{(ε_μ)} の二場合の鎖と Q̌_ε = ∏R の鎖: 364 段（語 36 個）、否定コントロール 2 件
+== check_step0_square_zero_difference_and_sum_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 0 の冒頭の積の形・差が零行列の行・和の鎖: 127 段、否定コントロール 1 行
+== check_step0_step3_distributivity_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 0・Step 3 の分配と単位行列の鎖: 349 段、否定コントロール 3 行
+== check_step0_commutation_step1_square_step3_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 0 の可換性・Step 1 の Q̌^2・Step 3 の左右の鎖: 1812 段、否定コントロール 1 行
+RESULT: PASS
+== check_step1_orthogonality_step3_moving_one_factor_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 1 の ε ≠ ε' の鎖・Step 3 の ň_νQ̌_ε の鎖: 4896 段、否定コントロール 1 行
+RESULT: PASS
+== check_step2_identity_product_chain.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 2 の鎖: 18 段、否定コントロール 1 行
+RESULT: PASS
+== check_step2_expansion_over_binary_words.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 2 の鎖（和は def_sum_over_binary_words）: 24 段、否定コントロール 6 行
+RESULT: PASS
+== check_step3_scalar_case_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 3 の二つの場合の末尾: 142 段、否定コントロール 2 行
+== check_step4_step5_power_and_vector_chains.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 4 の冪・Step 5 の数ベクトルの鎖: 234 段、否定コントロール 6 行
+RESULT: PASS
+== check_step5_direct_sum_first_line.sage（本物の ψ̌）
+PASS check_joint_eigenspace_decomposition Step 5 の直和の鎖の 1 行目と前提の鎖: 1032 段、否定コントロール 6 行
+RESULT: PASS
+== check_claim_statements.sage（本物の ψ̌）
+  本物の ψ̌ (x,y)=(2,2) M=2: 済（累計 55 件）
+  本物の ψ̌ (x,y)=(2,2) M=3: 済（累計 218 件）
+  本物の ψ̌ (x,y)=(3,3/2) M=2: 済（累計 273 件）
+  本物の ψ̌ (x,y)=(3,3/2) M=3: 済（累計 436 件）
+  本物の ψ̌ (x,y)=(5/4,3) M=2: 済（累計 491 件）
+  本物の ψ̌ (x,y)=(5/4,3) M=3: 済（累計 654 件）
+PASS check_joint_eigenspace_decomposition 主張 (1)〜(5) そのもの: 654 件、否定コントロール 6 件
+RESULT: PASS
+RESULT: PASS

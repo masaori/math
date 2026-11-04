@@ -4,7 +4,7 @@
 
 ## 現在地
 
-2026-11-04: 証明を持つブロック 400 件のうち、SageMath の検算が無いもの 39 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
+2026-11-04: 証明を持つブロック 400 件のうち、SageMath の検算が無いもの 38 件（`node sagemath/tools/verify-every-proof-has-check.ts`）。
 
 済んだもの（文書順）:
 
@@ -310,13 +310,19 @@
   証明の全ての鎖の検算は `050_claim_even_sector_eigenvalues/check_47` にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。内容の名前で移し、鎖の組み立てを `_chains.sage` の関数へ出した（鎖の各行の式は不変、段数 33321 は元と一致。旧い名前との対応は overview.md の「由来」）。
   移した検算は ψ̌ を Jordan–Wigner の模型で代えていたので、本文の ψ̌ で同じ鎖・鎖が引く主張・主張そのものを確かめる `check_with_check_psi.sage` を足した（結合定数 3 組 × M_col = 2, 3、12354 件）。M_col ≤ 3 では σ の対が一組なので、全ての ψ̌ を一つの数体 K := E_1 に移せる（E_μ = F は F ⊂ K、μ = σ(1) は transport）。M_col = 4 は平方根が二つ要るうえ重いので外し、模型の検算が受け持つ。全て厳密計算で、人手証明の計算の誤りは無かった。二回のレビューで必須の指摘 2 件（作り方で自明な比較の書き漏れ、結果とログ）と任意の指摘 4 件（σ(1) を必ず transport に通す、½ の書き方、文言、ラベルの添字）を直した。
 
+- `check_joint_eigenspace_decomposition`（ň_μ の同時固有空間分解。Q̌_ε の直交性・冪等性・和が I・ň_νQ̌_ε = ε_νQ̌_ε・tr = 1 と次元 1・直和）: `sagemath/check/check_joint_eigenspace_decomposition/`。
+  証明の各行の検算は 050 の番号付きの 10 本（check_24・check_30〜36・check_48・check_joint_eigenspace_step5_direct_sum_first_line）にあったが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられていた。内容の名前で移し、ň_μ の作り方を `_number_operators.sage` へ出した（鎖の各行の式は不変、模型での段数 12486 は元と一致。旧い名前との対応は overview.md の「由来」）。
+  主張 (1)〜(5) そのものを体の上の rank まで厳密に比べる `check_claim_statements.sage` と、同じ 11 本を本文の ψ̌（数体 F := E_1 の行列、結合定数 3 組 × M_col = 2, 3）で走らせる `check_with_check_psi.sage` を足した（鎖 8998 段・主張 654 件、約 15 分）。浮動小数点の `050/check_02` は残した。人手証明の計算の誤りは無かった。二回のレビューで必須の指摘 3 件と任意の指摘 6 件を直した。
+
 ## 次の一歩
 
-`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `check_joint_eigenspace_decomposition`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる番号付きの検算（check_24・check_30〜36・check_48・check_joint_eigenspace_step5_direct_sum_first_line）にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`trace_of_check_number_operator_product` と同じく、内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ、ψ̌ を模型で代えている行を本文の ψ̌ でも確かめる（全ての ψ̌ を一つの体に置く方法は `trace_of_check_number_operator_product/check_with_check_psi.sage` の `to_common_field`。M_col ≤ 3 に限る）。続く `eigenvalues_of_check_Vprime` なども、050 の overview の行が挙げる検算を移す形で進める。
+`eigenvalue_problem_eigenvalues_of_V_plus.ts` の `eigenvalues_of_check_Vprime`（`--list` の先頭）から、文書順に検算を足す。この主張の証明の各行の検算は、050 の overview の「併せて検証」の行が挙げる検算（check_eigenvalues_of_check_Vprime_step1_left_chain など）にあるが、対象ラベルが `eigenvalues_of_V_plus` だけなので未検算に数えられている。`check_joint_eigenspace_decomposition` と同じく、内容の名前の専用ディレクトリへ移し、証明の行との対応を確かめ、ň_μ を模型で代えている行を本文の ψ̌ でも確かめる（ň_μ の供給元を切り替える作りは `check_joint_eigenspace_decomposition/_number_operators.sage`）。
 
 番号付きの古い検算のディレクトリ（`043_…`・`044_…` など 90 余り）は、`_prelude.sage` を `__file__` から作ったパスで読み込んでおり、この VM の SageMath 10.9 で `run-all-checks.sh` から走らせると `__file__` が Sage 本体のファイルを指して読み込みに失敗する（2026-11-02 に `043_claim_transfer_matrix_bridge`・`044_claim_max_eigenvalue` で確かめた）。新しい検算は相対パスの `load("_prelude.sage")` を使っているので影響を受けない。直すには、各ディレクトリの読み込みを相対パスにする。これはゴールラインの判定（足した検算が通ること）の外なので、この連続実行では扱わない。
 
 ## 検算で見つかった本文の誤り
+
+- 2026-11-04、`check_joint_eigenspace_decomposition` の検算を移したときに見つかった（旧い検算の名前を指す注記。今回の差分より前から）: ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_24（check_30・check_32・check_33・check_35・check_36・check_48・check_joint_eigenspace_step5_direct_sum_first_line）」は、移した後の `sagemath/check/check_joint_eigenspace_decomposition/` を指していない。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 
 - 2026-11-04、`trace_of_check_number_operator_product` のレビューで見つかった（旧い検算の名前を指す注記。今回の差分より前から）: ブロックの conversion の注記の「数値検証: sagemath/check/050_claim_even_sector_eigenvalues/check_47」と、Lean の `lean/Ising2D/NecSuf/TraceOfNumberOperatorProductByLastFactor.lean` のコメントの「SageMath の check_47」は、移した後の `sagemath/check/trace_of_check_number_operator_product/` を指していない。主張の正しさには影響しない。検算の付いたブロックの見直しで扱う。
 

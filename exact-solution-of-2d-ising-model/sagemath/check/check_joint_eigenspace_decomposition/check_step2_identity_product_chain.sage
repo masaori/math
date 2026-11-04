@@ -1,20 +1,14 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 2 の鎖を一行ずつ厳密に確かめる（M = 2, 3, 4）。Step 1 の ε ≠ ε' の鎖は check_35 が確かめる。
+# Step 2 の鎖を一行ずつ厳密に確かめる。Step 1 の ε ≠ ε' の鎖は check_step1_orthogonality_step3_moving_one_factor_chains が確かめる。
 #   Step 2: Σ_ε ∏_μ R_μ^{(ε_μ)} = ∏_μ (R_μ^{(1)} + R_μ^{(0)})（分配による展開）= ∏_μ I（Step 0 の和）
 #                    = I（finite_product_of_identity_matrices）
 # 有限積は def_finite_product_of_matrices どおり μ = 1, …, M の順に A_1 から左へ掛ける（空の積は使わない）。
-# ň_μ は check_24・check_30・check_31 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: finite_product_of_identity_matrices の行は因子に単位行列でないものがあれば外れる。
-# 帰属: 成分は QQ（厳密計算）。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def finite_product(mats):
@@ -25,15 +19,11 @@ def finite_product(mats):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
 id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
+for (tag, M, F, ns) in number_operator_settings():
     N = 2 ^ M
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    ns = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Id = body_identity(QQ, N)
-    O = matrix(QQ, N, N, 0)
+    Id = body_identity(F, N)
+    O = matrix(F, N, N, 0)
     R1 = ns
     R0 = [body_difference(Id, n) for n in ns]
     epss = list(cartesian_product([[0, 1]] * M))
@@ -47,7 +37,7 @@ for M in range(2, 5):
         Id,                                                         # finite_product_of_identity_matrices
     ]
     for A, B in zip(lines, lines[1:]):
-        assert A == B, ("step2", M)
+        assert A == B, ("step2", tag)
         count += 1
 
 # 否定コントロール

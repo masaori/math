@@ -1,5 +1,5 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 4 の tr(Q̌_ε) の鎖と、Step 5 の二つの鎖を、M = 2, 3, 4 の全ての ε・ε' で一行ずつ厳密に確かめる。
+# Step 4 の tr(Q̌_ε) の鎖と、Step 5 の二つの鎖を、全ての ε・ε' で一行ずつ厳密に確かめる。
 #   Step 4: tr(Q̌_ε) = 2^{M−M}            （trace_of_check_number_operator_product を k = M で）
 #                   = 2^0                 （M − M = 0）
 #                   = 1                   （def_power_of_complex_number の z^0 := 1_ℂ）
@@ -14,19 +14,13 @@
 # 冪は def_power_of_complex_number（z^0 := 1、z^{m+1} := z^m z）どおりに組む。
 # 直和の鎖の 2 行目の等号は Σ_ε y_ε = O を使わないので、一般の y_ε（不定元の成分）で確かめる。3・4 行目は仮定 Σ_ε y_ε = O の下の行なので、
 # 零ベクトルを代入して確かめる（Q̌_ε が直和を与えるので、像の元で Σ_ε y_ε = O となるのは全て零の族だけである）。
-# ň_μ は check_24・check_30〜check_35 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: Q̌_ε を ň_μ だけの積（R^{(0)} を使わない）に替えると、Step 5 の (Σ Q̌)x の行が外れる。
-# 帰属: 成分は QQ と QQ 上の多項式環（厳密計算）。
+# 帰属: 成分は QQ か本文の ψ̌ の数体 F と、その上の多項式環（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
 import itertools
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def finite_product(mats):
@@ -53,28 +47,23 @@ def power(z, m):
 
 count = 0
 neg = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
+for (tag, M, F, ns) in number_operator_settings():
     N = 2 ^ M
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    ns = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Id = body_identity(QQ, N)
+    Id = body_identity(F, N)
     R1 = ns
     R0 = [body_difference(Id, n) for n in ns]
     Q = lambda eps: finite_product([R1[mu] if eps[mu] == 1 else R0[mu] for mu in range(M)])
     W = [tuple(w) for w in itertools.product([1, 0], repeat=M)]
     Qs = {w: Q(w) for w in W}
-    two = QQ(2)
+    two = F(2)
     # Step 4
     for w in W:
-        lines = [Qs[w].trace(), power(two, M - M), power(two, 0), QQ(1)]
+        lines = [Qs[w].trace(), power(two, M - M), power(two, 0), F(1)]
         for a, b in zip(lines, lines[1:]):
             assert a == b, ("step4", M, w)
             count += 1
     # Step 5（全体を張る）: x の成分は不定元
-    P, _, (x,) = generic_ring([("x", N, 1)])
+    P, (x,) = generic_ring_over(F, [("x", N, 1)])
     QsP = {w: Qs[w].change_ring(P) for w in W}
     IdP = body_identity(P, N)
     lines = [
@@ -87,7 +76,7 @@ for M in range(2, 5):
         assert a == b, ("step5-span", M)
         count += 1
     # Step 5（直和）: 2 行目は一般の y_ε で、1 行目は y_ε = Q̌_ε x_ε で、3・4 行目は零ベクトルで
-    P2, _, ys = generic_ring([("y%d" % k, N, 1) for k in range(len(W))])
+    P2, ys = generic_ring_over(F, [("y%d" % k, N, 1) for k in range(len(W))])
     Y = {w: ys[k] for k, w in enumerate(W)}
     QsP2 = {w: Qs[w].change_ring(P2) for w in W}
     for wp in W:
@@ -98,7 +87,7 @@ for M in range(2, 5):
         YQ = {w: body_product(QsP2[w], Y[w]) for w in W}                     # y_ε := Q̌_ε x_ε（x_ε の成分は不定元）
         assert YQ[wp] == binary_word_sum(M, lambda w: body_product(QsP2[wp], YQ[w])), ("step5-direct-line1", M, wp)
         count += 1
-        O = matrix(QQ, N, 1, 0)
+        O = matrix(F, N, 1, 0)
         assert body_product(Qs[wp], O) == O, ("step5-direct-line4", M, wp)  # 3 行目は仮定の代入で、構成上一致する
         count += 1
     # 否定コントロール: R^{(0)} の代わりに R^{(1)} を使うと (Σ Q̌)x = x が外れる

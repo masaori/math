@@ -1,22 +1,16 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 3 の二つの場合の鎖の末尾を一行ずつ厳密に確かめる（M = 2, 3, 4 の全ての ň_μ）。
+# Step 3 の二つの場合の鎖の末尾を一行ずつ厳密に確かめる（全ての ň_μ）。
 #   ε_ν = 1: ň_ν R_ν^{(1)} = ň_νň_ν = ň_ν = R_ν^{(1)} = 1_ℂ R_ν^{(1)}（scalar_multiple_by_one を右辺から左辺へ）= ε_ν R_ν^{(ε_ν)}
-#   ε_ν = 0: ň_ν R_ν^{(0)} = ň_ν(I − ň_ν) = O（途中の 7 行は check_24・check_30）= 0_ℂ R_ν^{(0)}
+#   ε_ν = 0: ň_ν R_ν^{(0)} = ň_ν(I − ň_ν) = O（途中の 7 行は check_step0_step3_distributivity_chains・check_step0_square_zero_difference_and_sum_chains）= 0_ℂ R_ν^{(0)}
 #            （zero_scalar_multiple_is_zero_matrix を右辺から左辺へ）= ε_ν R_ν^{(ε_ν)}
-# ň_νQ̌_ε の鎖は check_35 が確かめる。
+# ň_νQ̌_ε の鎖は check_step1_orthogonality_step3_moving_one_factor_chains が確かめる。
 # 行列の積・和・差・スカラー倍・単位行列は本文の成分の式で組む。
-# ň_μ は check_24・check_30 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: 冪等でない不定元の 2×2 行列では、冪等性（check_number_operator_idempotent (3)）を使う行だけが等号を外れる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
+# 帰属: 成分は QQ か本文の ψ̌ の数体 F と、その上の多項式環（否定コントロールは QQ 上）（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def body_prod(mats, R, n):
@@ -45,7 +39,7 @@ def case_zero_chain(n):
     return [
         (body_product(n, R0), False),
         (body_product(n, body_difference(Id, n)), False),              # R^{(0)} の定義
-        (O, True),                                                     # 途中の 7 行（check_24・check_30）。冪等性を使う
+        (O, True),                                                     # 途中の 7 行（上の二つの検算）。冪等性を使う
         (body_scalar(QQ(0), R0), False),                               # zero_scalar_multiple_is_zero_matrix を右辺から左辺へ
         (body_scalar(QQ(0), R0), False),                               # 場合の仮定 ε_ν = 0
     ]
@@ -60,18 +54,13 @@ def check_chain(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
+for (tag, M, F, ns) in number_operator_settings():
     N = 2 ^ M
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    ns = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Id = body_identity(QQ, N)
+    Id = body_identity(F, N)
     for n in ns:
         assert n ^ 2 == n                                              # (3) の仮定
-        check_chain(case_one_chain(n), ("eps=1", M), True)
-        check_chain(case_zero_chain(n), ("eps=0", M), True)
+        check_chain(case_one_chain(n), ("eps=1", tag), True)
+        check_chain(case_zero_chain(n), ("eps=0", tag), True)
 
 # 否定コントロール: 不定元の成分の 2×2 行列（冪等でない）
 Rg = PolynomialRing(QQ, ["x%d" % k for k in range(4)])

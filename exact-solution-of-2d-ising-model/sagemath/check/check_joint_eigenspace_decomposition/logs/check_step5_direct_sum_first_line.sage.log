@@ -1,0 +1,2 @@
+PASS check_joint_eigenspace_decomposition Step 5 の直和の鎖の 1 行目と前提の鎖: 1400 段、否定コントロール 3 行
+RESULT: PASS

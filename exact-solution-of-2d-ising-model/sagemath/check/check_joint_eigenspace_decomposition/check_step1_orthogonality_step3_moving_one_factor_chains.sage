@@ -1,5 +1,5 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 1 の ε ≠ ε' の鎖と Step 3 の ň_νQ̌_ε の鎖を一行ずつ厳密に確かめる（M = 2, 3, 4）。
+# Step 1 の ε ≠ ε' の鎖と Step 3 の ň_νQ̌_ε の鎖を一行ずつ厳密に確かめる。
 #   Step 1: μ = ν の可換性 R_ν^{(ε_ν)}R_ν^{(ε'_ν)} = O = R_ν^{(ε'_ν)}R_ν^{(ε_ν)}（ε_ν ≠ ε'_ν）、
 #           Q̌_εQ̌_ε' = (∏R^ε)Q̌_ε' = ((∏_{μ≠ν}R^ε)R_ν^ε)Q̌_ε' = (∏_{μ≠ν}R^ε)(R_ν^εQ̌_ε') = (∏_{μ≠ν}R^ε)(R_ν^ε∏R^{ε'})
 #             = (∏_{μ≠ν}R^ε)((∏R^{ε'})R_ν^ε) = (∏_{μ≠ν}R^ε)(((∏_{μ≠ν}R^{ε'})R_ν^{ε'})R_ν^ε)
@@ -10,18 +10,12 @@
 #             = (∏_{μ≠ν}R)(ε_νR_ν) = ε_ν((∏_{μ≠ν}R)R_ν) = ε_ν∏R = ε_νQ̌_ε
 # 有限積は def_finite_product_of_matrices どおり μ = 1 の因子から左へ掛け、∏_{μ≠ν} は
 # def_finite_product_of_matrices_omitting_one_index どおり s_{M,ν} で添字を並べて組む。積・差・スカラー倍は本文の成分の式で組む。
-# ň_μ は check_24・check_30〜check_34 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: ν の因子を末尾へ寄せる行は、ν < j の因子と可換でない族（巡回置換の行列 J と対角行列）では外れる。
-# 帰属: 成分は QQ（厳密計算）。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def finite_product(mats):
@@ -43,15 +37,10 @@ def omitting(R, nu):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
+for (tag, M, F, ns) in number_operator_settings():
     N = 2 ^ M
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    ns = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Id = body_identity(QQ, N)
-    O = matrix(QQ, N, N, 0)
+    Id = body_identity(F, N)
+    O = matrix(F, N, N, 0)
     R1 = ns
     R0 = [body_difference(Id, n) for n in ns]
     epss = [tuple(e) for e in cartesian_product([[0, 1]] * M)]
@@ -97,7 +86,7 @@ for M in range(2, 5):
     for eps in epss:
         R = Rof(eps)
         for nu in range(1, M + 1):
-            n, Rn, e = ns[nu - 1], R[nu - 1], QQ(eps[nu - 1])
+            n, Rn, e = ns[nu - 1], R[nu - 1], F(eps[nu - 1])
             for mu in range(1, M + 1):                                  # 最初の三つの場合（前提）
                 assert body_product(n, R[mu - 1]) == body_product(R[mu - 1], n)
             assert body_product(n, Rn) == body_scalar(e, Rn)            # 直前の二つの場合

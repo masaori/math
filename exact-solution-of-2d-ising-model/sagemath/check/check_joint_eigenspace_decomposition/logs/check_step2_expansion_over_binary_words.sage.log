@@ -1,0 +1,2 @@
+PASS check_joint_eigenspace_decomposition Step 2 の鎖（和は def_sum_over_binary_words）: 12 段、否定コントロール 3 行
+RESULT: PASS

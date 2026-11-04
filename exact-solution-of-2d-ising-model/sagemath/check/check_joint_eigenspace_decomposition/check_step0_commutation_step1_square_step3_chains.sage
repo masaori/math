@@ -1,5 +1,5 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# Step 0 の異なる添字の因子の可換性の鎖、Step 1 の ε = ε' の Q̌_ε^2 の鎖、Step 3 の左右の鎖を一行ずつ厳密に確かめる（M = 2, 3, 4）。
+# Step 0 の異なる添字の因子の可換性の鎖、Step 1 の ε = ε' の Q̌_ε^2 の鎖、Step 3 の左右の鎖を一行ずつ厳密に確かめる。
 #   Step 0: YI = Y = IY（Y ∈ {ň_ν, I − ň_ν}）、R_ν^{(e')}R_μ^{(e)} = R_μ^{(e)}R_ν^{(e')}（μ ≠ ν、4 通りの (e', e) の鎖。
 #           commuting_with_difference の行と check_number_operators_commute (2) の行）
 #   Step 1: Q̌^2 = Q̌^1Q̌ = (Q̌^0Q̌)Q̌ = (IQ̌)Q̌ = Q̌Q̌ = (∏R)(∏R) = ∏(RR) = ∏R = Q̌
@@ -8,18 +8,12 @@
 #   Step 3: ň_νR_μ^{(ε_μ)} = R_μ^{(ε_μ)}ň_ν（μ ≠ ν の 3 行、μ = ν の ε_ν = 1 の 2 行と ε_ν = 0 の 4 行）、
 #           Q̌ň_ν = (∏R)ň_ν = ň_ν∏R = ň_νQ̌ = ε_νQ̌
 # 有限積は def_finite_product_of_matrices どおり μ = 1 の因子から左へ掛ける。積・差・和は本文の成分の式で組む。
-# ň_μ は check_24・check_30〜check_33 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: 可換でない 2 因子の族（巡回置換の行列 J と対角行列 diag(1,2,3,4)）では (∏R)(∏R) = ∏(RR) の行が外れる。
-# 帰属: 成分は QQ（厳密計算）。
+# 帰属: 成分は QQ か、本文の ψ̌ の数体 F（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def finite_product(mats):
@@ -37,15 +31,10 @@ def power(A, m, Id):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
+for (tag, M, F, ns) in number_operator_settings():
     N = 2 ^ M
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    ns = [c[mu].transpose() * c[mu] for mu in range(M)]
-    Id = body_identity(QQ, N)
-    O = matrix(QQ, N, N, 0)
+    Id = body_identity(F, N)
+    O = matrix(F, N, N, 0)
     R1 = ns
     R0 = [body_difference(Id, n) for n in ns]
     Rf = lambda mu, e: R1[mu] if e == 1 else R0[mu]

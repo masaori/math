@@ -1,21 +1,15 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
 # Step 0 の冒頭の ň_μň_μ = ň_μ（5 行: 単位行列を左から足す → A^0 := I → A^{m+1} := A^m A（m → 0）→ 同（m → 1）→ (3)）、
 # Step 0・Step 3 の ň − ň = O の行（matrix_difference_zero_iff_equal の ⟸。3 か所とも同じ行）、
-# Step 0 の和 R^{(1)} + R^{(0)} = ň + (I − ň) = I（matrix_plus_difference_cancels）を、一行ずつ厳密に確かめる（M = 2, 3, 4）。
+# Step 0 の和 R^{(1)} + R^{(0)} = ň + (I − ň) = I（matrix_plus_difference_cancels）を、一行ずつ厳密に確かめる。
 # 冪は def_exp (1) の A^0 := I、A^{m+1} := A^m A どおりに組む。行列の積・和・差・単位行列は本文の成分の式で組む。
-# ň_μ は check_24 と同じく Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ（(3) の ň^2 = ň を満たす）。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: 冪等でない不定元の成分の 2×2 行列では、冒頭の鎖のうち (3) を使う最後の行だけが等号を外れ、
 # ň − ň = O と和の行は等号のまま残ることを確かめる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
+# 帰属: 成分は QQ か本文の ψ̌ の数体 F と、その上の多項式環（否定コントロールは QQ 上）（厳密計算）。
 load("../../_shared/matrix_operations_by_definition.sage")
 load("../../_shared/matrix_negation_and_difference_by_definition.sage")
-
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
+load("_number_operators.sage")
 
 
 def body_pow(A, m):
@@ -62,16 +56,12 @@ def check_chain(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
+for (tag, M, F, ns) in number_operator_settings():
     for mu in range(M):
-        n = c[mu].transpose() * c[mu]
-        assert n ^ 2 == n and n != 0 and n != identity_matrix(QQ, 2 ^ M)   # (3) の仮定（Sage 組み込みの冪と比べる）
+        n = ns[mu]
+        assert n ^ 2 == n and n != 0 and n != identity_matrix(F, 2 ^ M)    # (3) の仮定（Sage 組み込みの冪と比べる）
         for chain in (square_chain, zero_line, sum_chain):
-            check_chain(chain(n), (chain.__name__, M, mu), True)
+            check_chain(chain(n), (chain.__name__, tag, mu), True)
 
 # 否定コントロール: 不定元の成分の 2×2 行列（冪等でない）
 R = PolynomialRing(QQ, ["x%d" % k for k in range(4)])

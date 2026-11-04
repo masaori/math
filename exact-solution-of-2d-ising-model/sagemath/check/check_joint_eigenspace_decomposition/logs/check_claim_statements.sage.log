@@ -1,0 +1,5 @@
+  Jordan–Wigner の模型 M=2: 済（累計 55 件）
+  Jordan–Wigner の模型 M=3: 済（累計 218 件）
+  Jordan–Wigner の模型 M=4: 済（累計 717 件）
+PASS check_joint_eigenspace_decomposition 主張 (1)〜(5) そのもの: 717 件、否定コントロール 3 件
+RESULT: PASS

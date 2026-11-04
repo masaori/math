@@ -10,8 +10,8 @@
 # 行列の和は def_sum_over_binary_words、複素数の和は def_sum_over_binary_words_of_complex_numbers の帰納法どおりに
 # （最後の成分で 1 を 0 より先に）組む。積は mat_mult の成分の式（_shared の body_product）、スカラー倍は body_scalar、
 # トレースは def_trace の対角成分の和で組む。
-# ň_μ は Jordan–Wigner のフェルミ演算子 c_μ から ň_μ := c_μ^T c_μ で作る（check_48 と同じ。可換な冪等元で、Q̌_ε のトレースが 1）。
-# Q̌_ε は R_μ^{(1)} := ň_μ、R_μ^{(0)} := I − ň_μ の左から掛ける積（check_48 で確かめた Q̌_ε = ∏R の形）。
+# ň_μ は Jordan–Wigner のフェルミ演算子 c_μ から ň_μ := c_μ^T c_μ で作る（check_joint_eigenspace_decomposition/check_factor_as_R_chains.sage と同じ。可換な冪等元で、Q̌_ε のトレースが 1）。
+# Q̌_ε は R_μ^{(1)} := ň_μ、R_μ^{(0)} := I − ň_μ の左から掛ける積（check_joint_eigenspace_decomposition/check_factor_as_R_chains.sage で確かめた Q̌_ε = ∏R の形）。
 # exp(γ(θ~_μ)/2) を有理関数体 QQ(a_1, …, a_M) の不定元 a_μ に置き、V̌' := ∏_μ (a_μ ň_μ + a_μ^{-1}(I − ň_μ))（左から掛ける積）とする。
 # このとき exp(ǧ(ε)) = ∏_μ a_μ^{2ε_μ − 1} である。V̌' = exp(X̌) となること自体はここでは確かめていない
 # （check_03・check_04 が数値で、eigenvalues_of_check_Vprime の検算が鎖で確かめている）。5 行目の V̌'Q̌_ε = exp(ǧ(ε))Q̌_ε は、

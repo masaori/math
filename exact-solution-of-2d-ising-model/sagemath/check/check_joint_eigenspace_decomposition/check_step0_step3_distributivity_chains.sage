@@ -1,20 +1,14 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
-# check_joint_eigenspace_decomposition の Step 0 の R^{(1)}R^{(0)} = 0（7 行）・R^{(0)}R^{(1)} = 0（7 行）・
-# R^{(0)}R^{(0)} = R^{(0)}（8 行）と、Step 3 の ε_ν = 0 の場合の ň_ν R_ν^{(0)} = 0（R^{(1)}R^{(0)} と同じ 7 行）を、
-# 括弧どおりに一行ずつ厳密に確かめる（M = 2, 3, 4）。
+# check_joint_eigenspace_decomposition の Step 0 の R^{(1)}R^{(0)} = 0・R^{(0)}R^{(1)} = 0（本文の 8 行のうち先頭の R の定義の行を除く 7 行）・
+# R^{(0)}R^{(0)} = R^{(0)}（本文の 9 行のうち先頭の定義の行を除く 8 行）と、Step 3 の ε_ν = 0 の場合の ň_ν R_ν^{(0)} = 0（R^{(1)}R^{(0)} と同じ 7 行）を、
+# 括弧どおりに一行ずつ厳密に確かめる。
 #   R^{(1)} := n、R^{(0)} := I - n、n := ň_μ。
-# 鎖が使う仮定は check_number_operator_idempotent (3) の nn = n だけなので、それを満たす具体的な行列として
-# Jordan–Wigner のフェルミ演算子 c_μ から作る n_μ := c_μ^T c_μ を取る。
+# 鎖が使う仮定は check_number_operator_idempotent (3) の nn = n だけである。
+# ň_μ は _number_operators.sage の number_operator_settings() から取る（既定は Jordan–Wigner の模型 M = 2, 3, 4、check_with_check_psi.sage からは本文の ψ̌）。
 # 否定コントロール: 冪等でない不定元の成分の行列では、冪等性（と、それから出る R^{(1)}R^{(0)} = 0）を使う行だけが
 # 等号を外れ、差の書き換え・分配・単位行列・符号の外出し・零行列を引く行は等号のまま残ることを確かめる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
-
+# 帰属: 成分は QQ か本文の ψ̌ の数体 F と、その上の多項式環（否定コントロールは QQ 上）（厳密計算）。
+load("_number_operators.sage")
 
 def neg(A):
     # def_matrix_negation
@@ -37,7 +31,7 @@ def r1r0_chain(n, Id):
         ("n+(-(nn))", n + neg(n * n), False),             # negation_factors_out_of_right_factor
         ("n-nn", sub(n, n * n), False),                   # matrix_difference_is_sum_with_negation を右辺から左辺へ
         ("n-n", sub(n, n), True),                         # 冪等性 (3)
-        ("0", O, False),                                  # 行列の加法逆元
+        ("0", O, False),                                  # matrix_difference_zero_iff_equal の ⟸
     ]
 
 
@@ -51,7 +45,7 @@ def r0r1_chain(n, Id):
         ("n+(-(nn))", n + neg(n * n), False),             # negation_factors_out_of_left_factor
         ("n-nn", sub(n, n * n), False),                   # matrix_difference_is_sum_with_negation を右辺から左辺へ
         ("n-n", sub(n, n), True),                         # 冪等性 (3)
-        ("0", O, False),                                  # 行列の加法逆元
+        ("0", O, False),                                  # matrix_difference_zero_iff_equal の ⟸
     ]
 
 
@@ -80,17 +74,13 @@ def check_chain(lines, label, expect_all):
 
 
 count = 0
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
-for M in range(2, 5):
-    Id = kron([id2] * M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
+for (tag, M, F, ns) in number_operator_settings():
+    Id = identity_matrix(F, 2 ^ M)
     for mu in range(M):
-        n = c[mu].transpose() * c[mu]
+        n = ns[mu]
         assert n * n == n and n != 0 * Id and n != Id
         for chain in (r1r0_chain, r0r1_chain, r0r0_chain):
-            check_chain(chain(n, Id), (chain.__name__, M, mu), True)
+            check_chain(chain(n, Id), (chain.__name__, tag, mu), True)
 
 # 否定コントロール: 不定元の成分の 2×2 行列（冪等でない）
 R = PolynomialRing(QQ, ["x%d" % k for k in range(4)])

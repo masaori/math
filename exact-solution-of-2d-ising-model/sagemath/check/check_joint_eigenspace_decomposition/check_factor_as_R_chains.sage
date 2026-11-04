@@ -1,20 +1,14 @@
 # 対象ラベル: check_joint_eigenspace_decomposition
 # check_joint_eigenspace_decomposition の証明の冒頭で、定義の因子 ε_μň_μ + (1−ε_μ)(I−ň_μ) が R_μ^{(ε_μ)} に等しいことの
 # 二場合の 10 行の鎖と、それを各因子へ同時に適用する Q̌_ε = ∏(定義の因子) = ∏R_μ^{(ε_μ)} の 2 行の鎖を、括弧どおりに一行ずつ
-# 厳密に確かめる（M_col = 2, 3, 4、全ての μ と全ての ε ∈ {0,1}^{M_col}）。
-#   R^{(1)} := ň、R^{(0)} := I − ň。ň_μ は Jordan–Wigner のフェルミ演算子 c_μ から ň_μ := c_μ^T c_μ で作る（check_24 と同じ）。
+# 厳密に確かめる（全ての μ と全ての ε ∈ {0,1}^{M_col}）。
+#   R^{(1)} := ň、R^{(0)} := I − ň。ň_μ は _number_operators.sage から取る（既定は Jordan–Wigner の模型、check_with_check_psi.sage からは本文の ψ̌）。
 #   有限積は def_finite_product_of_matrices の左から掛ける積。
 # 二場合の鎖は ň の性質を使わないので、不定元の成分の 2×2 行列でも全ての行が等号で成り立つことも確かめる。
 # 否定コントロール: 場合の仮定を取り違える（ε_μ = 1 の鎖の先頭に ε_μ = 0 の因子を置く等）と、場合の仮定の行が等号を外れる。
-# 帰属: 成分は QQ と、QQ 上の多項式環（厳密計算）。スカラーの差・−1 倍・単位元の行は QQ[i] の元で行ごとに確かめる（scalar_chains）。
+# 帰属: 成分は QQ か本文の ψ̌ の数体 F と、その上の多項式環（否定コントロールは QQ 上）（厳密計算）。スカラーの差・−1 倍・単位元の行は QQ[i] の元で行ごとに確かめる（scalar_chains）。
 # 行列の行のうち、スカラーの行と「R の定義」「場合の仮定」の行は、行列としては同じ式を二度作って比べているだけで、行列の検算としては確かめていない。
-
-def kron(factors):
-    out = matrix(factors[0].base_ring(), 1, 1, [1])
-    for A in factors:
-        out = out.tensor_product(A)
-    return out
-
+load("_number_operators.sage")
 
 def sub(A, B):
     # def_matrix_difference
@@ -103,24 +97,19 @@ def scalar_chains():
 CC_one, CC_zero = to_QQ(K(1)), to_QQ(K(0))
 
 count = scalar_chains()
-sz = matrix(QQ, [[1, 0], [0, -1]])
-lower = matrix(QQ, [[0, 1], [0, 0]])
-id2 = identity_matrix(QQ, 2)
 words = 0
-for M in range(2, 5):
-    Id = kron([id2] * M)
-    c = [kron([sz] * (k - 1) + [lower] + [id2] * (M - k)) for k in range(1, M + 1)]
-    n = [c[mu].transpose() * c[mu] for mu in range(M)]
+for (tag, M, F, n) in number_operator_settings():
+    Id = identity_matrix(F, 2 ^ M)
     for mu in range(M):
         assert n[mu] * n[mu] == n[mu] and n[mu] != 0 * Id and n[mu] != Id
         for e in (0, 1):
-            run_case_chain(e, n[mu], Id, (M, mu))
+            run_case_chain(e, n[mu], Id, (tag, mu))
     for eps in cartesian_product([[0, 1]] * M):
         eps = list(eps)
         R = [n[mu] if eps[mu] == 1 else sub(Id, n[mu]) for mu in range(M)]
         Q_def = left_product([def_factor(eps[mu], n[mu], Id) for mu in range(M)], Id)   # Q̌_ε の定義（主張）
         Q_R = left_product(R, Id)                                                         # 各因子へ同時に適用
-        assert Q_def == Q_R, (M, eps)
+        assert Q_def == Q_R, (tag, eps)
         assert Q_R.trace() == 1                                                           # 参考: (4) の tr(Q̌_ε) = 1 と矛盾しない
         count += 1
         words += 1
